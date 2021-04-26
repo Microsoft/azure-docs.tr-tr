@@ -7,12 +7,12 @@ ms.service: web-application-firewall
 ms.topic: article
 ms.date: 12/22/2020
 ms.author: tyao
-ms.openlocfilehash: 65e378c0380804c13e4b42d855aede7781b93592
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 32bf7a5ecc93fa23c8c704dc346048c26c086121
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102211677"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107860860"
 ---
 # <a name="configure-an-ip-restriction-rule-with-a-web-application-firewall-for-azure-front-door"></a>Azure ön kapısı için Web uygulaması güvenlik duvarıyla bir IP kısıtlama kuralı yapılandırma
 
@@ -95,7 +95,7 @@ Bir IP kısıtlama ilkesini yapılandırmaya başlamadan önce, CLı ortamınız
 
 ### <a name="create-a-waf-policy"></a>WAF ilkesi oluşturma
 
-[Az Network Front-kapısı WAF-Policy Create](/cli/azure/ext/front-door/network/front-door/waf-policy#ext-front-door-az-network-front-door-waf-policy-create) komutunu kullanarak bir WAF ilkesi oluşturun. Aşağıdaki örnekte, *ıpallowpolicyexampleclı* ilke adı ' nı benzersiz bir ilke adıyla değiştirin.
+[Az Network Front-kapısı WAF-Policy Create](/cli/azure/network/front-door/waf-policy#az_network_front_door_waf_policy_create) komutunu kullanarak bir WAF ilkesi oluşturun. Aşağıdaki örnekte, *ıpallowpolicyexampleclı* ilke adı ' nı benzersiz bir ilke adıyla değiştirin.
 
 ```azurecli-interactive 
 az network front-door waf-policy create \
@@ -105,7 +105,7 @@ az network front-door waf-policy create \
   ```
 ### <a name="add-a-custom-ip-access-control-rule"></a>Özel bir IP erişim denetimi kuralı ekleme
 
-Az [Network ön kapı WAF-Policy Custom-Rule Create](/cli/azure/ext/front-door/network/front-door/waf-policy/rule#ext-front-door-az-network-front-door-waf-policy-rule-create) komutunu kullanarak az önce oluşturduğunuz WAF ilkesi için özel bir IP erişim denetimi kuralı ekleyin.
+Az [Network ön kapı WAF-Policy Custom-Rule Create](/cli/azure/network/front-door/waf-policy/rule#az_network_front_door_waf_policy_rule_create) komutunu kullanarak az önce oluşturduğunuz WAF ilkesi için özel bir IP erişim denetimi kuralı ekleyin.
 
 Aşağıdaki örneklerde:
 -  *Ipallowpolicyexampleclı* öğesini daha önce oluşturduğunuz benzersiz ilkenize değiştirin.
@@ -138,7 +138,7 @@ az network front-door waf-policy rule match-condition add \
   ```
                                                    
 ### <a name="find-the-id-of-a-waf-policy"></a>Bir WAF ilkesinin KIMLIĞINI bulma 
-[Az Network ön kapıwaf-Policy Show](/cli/azure/ext/front-door/network/front-door/waf-policy#ext-front-door-az-network-front-door-waf-policy-show) komutunu kullanarak bir WAF ilkesinin kimliğini bulun. Aşağıdaki örnekteki *ıpallowpolicyexampleclı* değerini, daha önce oluşturduğunuz benzersiz ilkenize göre değiştirin.
+[Az Network ön kapıwaf-Policy Show](/cli/azure/network/front-door/waf-policy#az_network_front_door_waf_policy_show) komutunu kullanarak bir WAF ilkesinin kimliğini bulun. Aşağıdaki örnekteki *ıpallowpolicyexampleclı* değerini, daha önce oluşturduğunuz benzersiz ilkenize göre değiştirin.
 
    ```azurecli
    az network front-door  waf-policy show \
@@ -148,7 +148,7 @@ az network front-door waf-policy rule match-condition add \
 
 ### <a name="link-a-waf-policy-to-an-azure-front-door-front-end-host"></a>Bir WAF ilkesini bir Azure ön kapısının ön uç konağına bağlama
 
-[Az Network ön kapı Update](/cli/azure/ext/front-door/network/front-door#ext-front-door-az-network-front-door-update) komutunu kullanarak Azure ön kapısı *Webapplicationfirewallpolicylink* kimliğini ilke kimliğine ayarlayın. *Ipallowpolicyexampleclı* öğesini daha önce oluşturduğunuz benzersiz ilkenize değiştirin.
+[Az Network ön kapı Update](/cli/azure/network/front-door#az_network_front_door_update) komutunu kullanarak Azure ön kapısı *Webapplicationfirewallpolicylink* kimliğini ilke kimliğine ayarlayın. *Ipallowpolicyexampleclı* öğesini daha önce oluşturduğunuz benzersiz ilkenize değiştirin.
 
    ```azurecli
    az network front-door update \

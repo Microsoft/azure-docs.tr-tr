@@ -7,17 +7,17 @@ ms.service: mysql
 ms.topic: conceptual
 ms.date: 08/08/2018
 ms.openlocfilehash: f325280cb4b18def603410464a06fddaed09c78a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "87285416"
 ---
 # <a name="azure-database-for-mysql-migration-partners"></a>MySQL için Azure veritabanı geçiş iş ortakları
 MySQL için Azure veritabanınızı çözümünüzü büyük ölçüde desteklemek için sektör lideri çok çeşitli iş ortakları ve araçları arasından seçim yapabilirsiniz. Bu makalede, MySQL için Azure veritabanı 'nı destekleyen geçiş çözümleriyle Microsoft iş ortakları vurgulanmaktadır.
 
 ## <a name="migration-partners"></a>Geçiş iş ortakları
-| İş Ortağı | Description | Bağlantılar | Videolar |
+| İş Ortağı | Açıklama | Bağlantılar | Videolar |
 | --- | --- | --- | --- |
 | ![SNP teknolojileri][1] |**SNP teknolojileri**<br>SNP Technologies, daha sonra işletmeler için güvenli ve güvenilir çözümler oluşturarak yalnızca bulut hizmet sağlayıcıdır. Şirket, işletmeniz için gerçek bir değer üretmeyi düşündüğü. Çalıştırmayı düşünmeden, SNP Technologies, istemcileri ile ortak bir amacı paylaşır ve bu da yatırımlarını avantajlarına dönüştürür.|[Web Sitesi][snp_website]<br>[Twitter][snp_twitter]<br>[İletişim][snp_contact] | |
 | ![En Iyi VERITABANı teknolojileri, LLC][2] |**En Iyi VERITABANı teknolojileri, LLC**<br>En Iyi VERITABANı, müşterilerin yönetilen bir Azure veritabanı hizmetinden En Iyi şekilde yararlanmanıza yardımcı olur. Şirket, [gelecekteki durum mimari tasarımı](https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.dbbest.com%2Fservices%2Ffuture-state-architectural-design%2F&data=02%7C01%7Cjtoland%40microsoft.com%7C7311aa2024894a80eff208d5cfd45696%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C636643433261194557&sdata=SCr3kseFvcU7mI1%2FZt7K2elXAqLY%2FyL6AO944QiWoLg%3D&reserved=0), [Microsoft veri platformu için Veri Yönetimi Iyileştirme](https://www.dbbest.com/services/data-management-optimization-for-microsoft-data-platform/), [Microsoft Azure dağıtım planlama hizmetleri](https://www.dbbest.com/services/microsoft-azure-deployment-planning-services)ve [Azure veri platformu hazırlık eğitimi](https://www.dbbest.com/services/azure-data-platform-readiness-training)dahil olmak üzere, başlamanıza olanak sağlayan çeşitli yollar sunar.|[Web Sitesi][dbbest_website]<br>[Twitter][dbbest_twitter]<br>[YouTube][dbbest_youtube]<br>[İletişim][dbbest_contact] | |

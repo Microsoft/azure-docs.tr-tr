@@ -6,14 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: article
-ms.date: 10/14/2020
+ms.date: 04/09/2021
 ms.author: alkohli
-ms.openlocfilehash: bd90a16c09dce65115cea2f097d18f2e0ced931a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f4f7e5f69e6b496395b74dbdcd58b3ada0a7f349
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102632042"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107285220"
 ---
 # <a name="security-and-data-protection-for-azure-stack-edge-pro-r-and-azure-stack-edge-mini-r"></a>Azure Stack Edge Pro R ve Azure Stack Edge Mini R için güvenlik ve veri koruması
 
@@ -100,17 +100,23 @@ Disklerinizdeki veriler iki şifreleme katmanı ile korunur:
 > [!NOTE]
 > İşletim sistemi diskinde tek katmanlı BitLocker XTS-AES-256 yazılım şifrelemesi vardır.
 
-Cihaz etkinleştirildiğinde, cihaz önyüklenemediğinde Cihazdaki verileri kurtarmaya yardımcı olan kurtarma anahtarlarını içeren bir anahtar dosyası kaydetmeniz istenir. Dosyada iki anahtar vardır:
+Cihazı etkinleştirmeden önce cihazınızda, bekleyen şifreleme 'yi yapılandırmanız gerekir. Bu gerekli bir ayardır ve bu, başarılı bir şekilde yapılandırılana kadar cihazı etkinleştiremezsiniz. 
 
-- Bir anahtar, işletim sistemi birimlerindeki cihaz yapılandırmasını kurtarır.
-<!-- - Second key is to unlock the BitLocker on the data disks. -->
-- İkinci anahtar, veri disklerindeki Donanım şifrelemesini kaldırır.
+Fabrika sırasında, cihazlar yansıma alındıktan sonra birim düzeyi BitLocker şifrelemesi etkinleştirilir. Cihazı aldıktan sonra, Rest şifrelemesini yapılandırmanız gerekir. Depolama havuzu ve birimleri yeniden oluşturulur ve REST 'ten şifrelemeyi etkinleştirmek için BitLocker anahtarları sağlayabilir ve bu sayede bekleyen verileriniz için başka bir şifreleme katmanı oluşturabilirsiniz. 
+
+Rest 'ten şifreleme anahtarı, sağladığınız 32 karakterlik uzun Base-64 kodlu bir anahtardır ve gerçek şifreleme anahtarını korumak için bu anahtar kullanılır. Microsoft, verilerinizi koruyan bu bekleyen bu şifrelemeye erişemez. Anahtar, cihaz etkinleştirildikten sonra **bulut ayrıntıları** sayfasındaki bir anahtar dosyasına kaydedilir.
+
+Cihaz etkinleştirildiğinde, cihaz önyüklenemediğinde Cihazdaki verileri kurtarmaya yardımcı olan kurtarma anahtarlarını içeren anahtar dosyasını kaydetmeniz istenir. Belirli kurtarma senaryoları, kaydettiğiniz anahtar dosyasını ister. Anahtar dosyası aşağıdaki Kurtarma anahtarlarına sahiptir:
+
+- İlk şifreleme katmanının kilidini eden bir anahtar.
+- Veri disklerindeki donanım şifrelemenin kilidini eden bir anahtar.
+- İşletim sistemi birimlerindeki cihaz yapılandırmasını kurtarmaya yardımcı olan bir anahtar.
+- Azure hizmeti üzerinden akan verileri koruyan bir anahtar.
 
 > [!IMPORTANT]
 > Anahtar dosyasını cihazın dışında güvenli bir konuma kaydedin. Cihazın önyüklemesi yapılmazsa ve anahtarınız yoksa, veri kaybına neden olabilir.
 
-- Belirli kurtarma senaryoları, kaydettiğiniz anahtar dosyasını ister. 
-<!--- If a node isn't booting up, you will need to perform a node replacement. You will have the option to swap the data disks from the failed node to the new node. For a 4-node device, you won't need a key file. For a 1-node device, you will be prompted to provide a key file.-->
+
 
 #### <a name="restricted-access-to-data"></a>Verilere kısıtlı erişim
 
@@ -132,7 +138,6 @@ Cihaz sabit bir sıfırlamaya geçtiğinde, cihazda güvenli silme gerçekleşti
 ### <a name="protect-data-in-storage-accounts"></a>Depolama hesaplarında verileri koruma
 
 [!INCLUDE [azure-stack-edge-gateway-data-rest](../../includes/azure-stack-edge-gateway-protect-data-storage-accounts.md)]
-
 - Depolama hesabınızı yetkisiz kullanıcılara karşı korumaya yardımcı olmak için [depolama hesabı anahtarlarınızı](azure-stack-edge-gpu-manage-storage-accounts.md) düzenli olarak döndürün ve eşitleyin.
 
 ## <a name="manage-personal-information"></a>Kişisel bilgileri yönetme

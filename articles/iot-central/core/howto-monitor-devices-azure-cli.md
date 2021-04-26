@@ -9,12 +9,12 @@ ms.service: iot-central
 ms.custom: devx-track-azurecli, device-developer
 services: iot-central
 manager: corywink
-ms.openlocfilehash: 62981686c7aadc713c4abc78075be8613fe0af45
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 30a823b7e78145224929b427e9e37522a7e29f09
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102199315"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107871300"
 ---
 # <a name="monitor-device-connectivity-using-azure-cli"></a>Azure CLI'yı kullanarak cihaz bağlantısını izleme
 
@@ -22,7 +22,7 @@ ms.locfileid: "102199315"
 
 Cihazlarınızın IoT Central gönderdiği iletileri görmek ve cihaz ikizi değişiklikleri gözlemlemek için Azure CLı IoT uzantısını kullanın. Bu aracı, cihaz bağlantısını hata ayıklama ve gözlemlemek ve ikizi değişikliklerine yanıt vermeyen buluta veya cihazlara ulaşmayan cihaz iletilerinin sorunlarını tanılamak için kullanabilirsiniz.
 
-[Daha fazla bilgi için Azure CLı uzantıları başvurusunu ziyaret edin](/cli/azure/ext/azure-iot/iot/central)
+[Daha fazla bilgi için Azure CLı uzantıları başvurusunu ziyaret edin](/cli/azure/iot/central)
 
 ## <a name="prerequisites"></a>Önkoşullar
 

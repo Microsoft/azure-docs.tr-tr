@@ -6,14 +6,14 @@ author: ms-puneet-nagpal
 ms.service: healthcare-apis
 ms.subservice: iomt
 ms.topic: quickstart
-ms.date: 11/13/2020
+ms.date: 04/05/2021
 ms.author: punagpal
-ms.openlocfilehash: 3e293782e6f00852a51e0617a07eebd5d8c56261
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 0a382ad948e7fd2efc6ab59eb94da3d6cbb210d7
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105644855"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443789"
 ---
 # <a name="quickstart-deploy-azure-iot-connector-for-fhir-preview-using-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak FHIR için Azure IoT bağlayıcısını dağıtma (Önizleme)
 
@@ -171,6 +171,11 @@ Azure, IoT cihazlarınızı bağlamak ve yönetmek için kapsamlı bir IoT ürü
 ## <a name="connect-your-iot-data-with-the-azure-iot-connector-for-fhir-preview"></a>IoT verilerinizi FHıR için Azure IoT Bağlayıcısı (Önizleme) ile bağlama
 
 IoT Central Uygulamanızı dağıttıktan sonra, iki kullanıma hazır sanal aygıtınız telemetri oluşturmaya başlar. Bu öğreticide, FHıR için Azure IoT Bağlayıcısı aracılığıyla *akıllı Vintals düzeltme* simülatörü simülatisini fhır 'ye aktaracağız. IoT verilerinizi FHıR için Azure IoT bağlayıcısına aktarmak için [IoT Central içinde sürekli veri dışarı aktarma](../../iot-central/core/howto-export-data.md)kurmak istiyoruz. İlk olarak hedefle bir bağlantı oluşturmanız ve ardından sürekli olarak çalıştırılmak üzere bir veri dışa aktarma işi oluşturacağız: 
+
+> [!NOTE]
+> Bu bölüm için IoT Central uygulama ayarları içinde **veri dışa** aktarma ve **veri dışarı aktarma (eski)** seçeneğini belirlemek isteyeceksiniz.
+
+[![IoT Central veri dışarı aktarma ayarları](media/quickstart-iot-fhir-portal/iot-central-data-export-dashboard.png)](media/quickstart-iot-fhir-portal/iot-central-data-export-dashboard.png#lightbox)
 
 Yeni bir hedef oluşturun:
 - **Hedefler** sekmesine gidin ve yeni bir hedef oluşturun.

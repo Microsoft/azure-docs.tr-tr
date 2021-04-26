@@ -1,19 +1,19 @@
 ---
 title: 'Hızlı başlangıç: Azure Blob depolama kitaplığı V12-bir tarayıcıda JavaScript'
 description: Bu hızlı başlangıçta, bir tarayıcıda JavaScript için Azure Blob depolama istemci kitaplığı sürüm 12 ' yi nasıl kullanacağınızı öğreneceksiniz. Blob depolamada bir kapsayıcı ve bir nesne oluşturursunuz. Sonra, bir kapsayıcıdaki tüm Blobları listeleyeceğinizi öğrenirsiniz. Son olarak, Blobları silmeyi ve bir kapsayıcıyı silmeyi öğrenirsiniz.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 07/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
 ms.custom: devx-track-js
-ms.openlocfilehash: 998d49e91d38a1f2fdc2503165ee99635e153027
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: bc02f9c526ec9b0826bbe640efc4b474794f30ae
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96001907"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106278499"
 ---
 <!-- Customer intent: As a web application developer I want to interface with Azure Blob storage entirely on the client so that I can build a SPA application that is able to upload and delete files on blob storage. -->
 

@@ -6,14 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: how-to
-ms.date: 03/08/2021
+ms.date: 04/15/2021
 ms.author: alkohli
-ms.openlocfilehash: 53058d27e94c9fdf18d726369f6a1b75a9f34db9
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: d56e03cd650032a775c30b02d939cf934f384fae
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105567551"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107568616"
 ---
 # <a name="deploy-azure-data-services-on-your-azure-stack-edge-pro-gpu-device"></a>Azure Stack Edge Pro GPU cihazınızda Azure veri Hizmetleri 'ni dağıtma
 
@@ -21,7 +21,7 @@ ms.locfileid: "105567551"
 
 Bu makalede, Azure Arc veri denetleyicisi oluşturma ve ardından Azure veri Hizmetleri 'ni Azure Stack Edge Pro GPU cihazınızda dağıtma işlemi açıklanmaktadır. 
 
-Azure Arc veri denetleyicisi, müşteri tarafından yönetilen ortamlarda Azure veri Hizmetleri 'ni sağlayan yerel denetim düzledir. Azure Stack Edge Pro cihazınızda çalışan Kubernetes kümesinde Azure Arc veri denetleyicisi oluşturduktan sonra, bu veri denetleyicisinde SQL yönetilen örneği (Önizleme) gibi Azure veri hizmetlerini dağıtabilirsiniz.
+Azure Arc veri denetleyicisi, müşteri tarafından yönetilen ortamlarda Azure veri Hizmetleri 'ni sağlayan yerel denetim düzledir. Azure Stack Edge Pro GPU cihazınızda çalışan Kubernetes kümesinde Azure Arc veri denetleyicisi oluşturduktan sonra, bu veri denetleyicisinde SQL yönetilen örneği (Önizleme) gibi Azure veri hizmetlerini dağıtabilirsiniz.
 
 Veri denetleyicisi oluşturma ve ardından bir SQL yönetilen örneği dağıtma yordamı, `kubectl` cihazdaki Kubernetes kümesine komut satırı erişimi sağlayan PowerShell ve yerel bir araç kullanımını içerir.
 
@@ -30,9 +30,9 @@ Veri denetleyicisi oluşturma ve ardından bir SQL yönetilen örneği dağıtma
 
 Başlamadan önce aşağıdakilerden emin olun:
 
-1. Azure Stack Edge Pro cihazına eriştiniz ve cihazınızı [etkinleştirme Azure Stack Edge Pro](azure-stack-edge-gpu-deploy-activate.md)' da anlatıldığı şekilde etkinleştirdiniz.
+1. Azure Stack Edge Pro GPU cihazına eriştiniz ve cihazınızı [etkinleştirme Azure Stack Edge Pro](azure-stack-edge-gpu-deploy-activate.md)' da anlatıldığı şekilde etkinleştirdiniz.
 
-1. Cihazda işlem rolünü etkinleştirdiniz. Cihazda, [Azure Stack Edge Pro cihazınızda Işlem yapılandırma](azure-stack-edge-gpu-deploy-configure-compute.md)bölümündeki yönergelere göre işlem yapılandırdığınızda bir Kubernetes kümesi de oluşturulmuştur.
+1. Cihazda işlem rolünü etkinleştirdiniz. Cihazda, [Azure Stack Edge Pro GPU cihazınızda Işlem yapılandırma](azure-stack-edge-gpu-deploy-configure-compute.md)konusundaki yönergelere göre bir Kubernetes kümesi de oluşturulmuştur.
 
 1. Yerel Web Kullanıcı arabiriminizdeki **cihaz** sayfasında Kubernetes API uç noktası vardır. Daha fazla bilgi için bkz. [Kubernetes API uç noktası](azure-stack-edge-gpu-deploy-configure-compute.md#get-kubernetes-endpoints)ile ilgili yönergeler.
 
@@ -171,7 +171,7 @@ Veri denetleyicisi, bir API, denetleyici hizmeti, önyükleyici ve izleme verita
     Dağıtımın tamamlanması yaklaşık 5 dakika sürebilir.
 
     > [!NOTE]
-    > Azure Stack Edge Pro cihazınızdaki Kubernetes kümesinde oluşturulan veri denetleyicisi yalnızca geçerli yayındaki bağlantısı kesik modda kullanılabilir.
+    > Azure Stack Edge Pro GPU cihazınızdaki Kubernetes kümesinde oluşturulan veri denetleyicisi yalnızca geçerli yayındaki bağlantısı kesik modda kullanılabilir. Bağlantısı kesik modu, cihazınız için değil, veri denetleyicisi içindir.
 
 ### <a name="monitor-data-creation-status"></a>İzleme verileri oluşturma durumu
 

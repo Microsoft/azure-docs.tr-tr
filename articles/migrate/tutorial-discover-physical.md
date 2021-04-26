@@ -7,12 +7,12 @@ ms.manager: abhemraj
 ms.topic: tutorial
 ms.date: 03/11/2021
 ms.custom: mvc
-ms.openlocfilehash: 4f6dc61b0e05fcb16a03a1183518069b98aa575f
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 17740763777372a5eaed6941974c120860839279
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104771422"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106382718"
 ---
 # <a name="tutorial-discover-physical-servers-with-azure-migrate-discovery-and-assessment"></a>Öğretici: Azure geçişi ile fiziksel sunucuları bulma: bulma ve değerlendirme
 
@@ -80,6 +80,9 @@ Bir proje oluşturmak ve Azure geçişi gerecini kaydettirmek için, şu bir hes
 Gerecin fiziksel sunuculara erişmek için kullanabileceği bir hesap ayarlayın.
 
 - **Windows sunucularında**, etki alanına katılmış sunucular için bir etki alanı hesabı ve etki alanına katılmamış sunucu için yerel bir hesap kullanın. Kullanıcı hesabı şu gruplara eklenmelidir: Uzaktan Yönetim Kullanıcıları, Performans İzleyicisi Kullanıcıları ve Performans Günlüğü Kullanıcıları.
+    > [!Note]
+    > Windows Server 2008 ve 2008 R2 için, WMF 3,0 ' nin sunucularda yüklü olduğundan ve sunuculara erişmek için kullanılan etki alanı/yerel hesap şu gruplara eklendiğinden emin olun: performans Izleyicisi kullanıcıları, performans günlüğü kullanıcıları ve WinRMRemoteWMIUsers.
+
 - **Linux sunucuları** için, aramak istediğiniz Linux sunucularında bir kök hesaba ihtiyacınız vardır. Alternatif olarak, aşağıdaki komutları kullanarak kök olmayan bir hesabı gerekli yetenekler olarak ayarlayabilirsiniz:
 
 **Komut** | **Amaç**

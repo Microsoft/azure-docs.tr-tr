@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/09/2021
 ms.author: bagol
-ms.openlocfilehash: 25f83088bdc55dbafe7ccf0ff06b0c6595c9ea71
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a1aaf89624f8d0ab48692629d859f3c1bdb4ba67
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101724362"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107738909"
 ---
 # <a name="resources-for-creating-azure-sentinel-custom-connectors"></a>Azure Sentinel özel bağlayıcıları oluşturma kaynakları
 
@@ -126,8 +126,6 @@ Logic Apps kullanarak Azure Sentinel için nasıl özel bağlayıcı oluşturabi
 - [Web kancası kullanarak Palo Alto Prma Logic App Connector](https://github.com/Azure/Azure-Sentinel/tree/master/Playbooks/Ingest-Prisma) (Azure Sentinel GitHub topluluğu)
 - [Zamanlanan etkinleştirme (blog) Ile Microsoft ekiplerinizin çağrılarınızın güvenliğini sağlama](https://techcommunity.microsoft.com/t5/azure-sentinel/secure-your-calls-monitoring-microsoft-teams-callrecords/ba-p/1574600)
 - [Alienkasadan OTX tehdit göstergelerini Azure Sentinel 'e yerleştirme](https://techcommunity.microsoft.com/t5/azure-sentinel/ingesting-alien-vault-otx-threat-indicators-into-azure-sentinel/ba-p/1086566) (blog)
-- [Azure Sentinel 'e (blog) yazım IÇIN dokunma noktası gönderme](https://techcommunity.microsoft.com/t5/azure-sentinel/sending-proofpoint-tap-logs-to-azure-sentinel/ba-p/767727)
-
 
 ## <a name="connect-with-powershell"></a>PowerShell ile bağlanma
 

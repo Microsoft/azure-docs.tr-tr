@@ -15,12 +15,12 @@ ms.date: 03/17/2021
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fb23d79caa6964c3f61fbb84c8b8f229f475b8ab
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: ca99a997d621bfd2455e909b36b6802775b20ac2
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104722166"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106074632"
 ---
 # <a name="adsync-service-account"></a>AD Eşitleme hizmeti hesabı
 Azure AD Connect, Active Directory ve Azure Active Directory arasındaki eşitlemeyi düzenleyen bir şirket içi hizmeti yüklüyor.  Microsoft Azure AD eşitleme eşitleme hizmeti (ADSync), şirket içi ortamınızdaki bir sunucuda çalışır.  Hizmetin kimlik bilgileri hızlı yüklemelerde varsayılan olarak ayarlanır ancak kuruluş güvenlik gereksinimlerinizi karşılayacak şekilde özelleştirilebilir.  Bu kimlik bilgileri, şirket içi ormanlarınız veya Azure Active Directory bağlanmak için kullanılmaz.
@@ -56,7 +56,7 @@ Açıklama:
 - sMSA- [tek başına yönetilen hizmet hesabı](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd548356(v=ws.10))
 - gMSA- [Grup yönetilen hizmet hesabı](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831782(v=ws.11)) 
 
- ||**LocalDB </br> Express**|**LocalDB/LocalSQL </br> özel**|**Uzak SQL </br> özel**|
+|Makine türü |**LocalDB </br> Express**|**LocalDB/LocalSQL </br> özel**|**Uzak SQL </br> özel**|
 |-----|-----|-----|-----|
 |**etki alanına katılmış makine**|**'NıN**|**'NıN**</br> *SMSA 'yı*</br> *gMSA*</br> Yerel hesap</br> Etki alanı hesabı| *gMSA* </br>Etki alanı hesabı|
 |Etki Alanı Denetleyicisi| **SMSA 'yı**|**SMSA 'yı** </br>*gMSA*</br> Etki alanı hesabı|*gMSA*</br>Etki alanı hesabı| 

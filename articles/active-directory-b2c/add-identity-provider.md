@@ -10,12 +10,12 @@ ms.custom: mvc
 ms.topic: how-to
 ms.service: active-directory
 ms.subservice: B2C
-ms.openlocfilehash: dbb2aeefc22fae4a3c83956dd7681b49fc435500
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5495e84d23b6723cfc7d4fbdb99e7509e378087f
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102034005"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257186"
 ---
 # <a name="add-an-identity-provider-to-your-azure-active-directory-b2c-tenant"></a>Azure Active Directory B2C kiracınıza bir kimlik sağlayıcısı ekleyin
 
@@ -27,7 +27,7 @@ Kaydolma veya oturum açma sayfasında, kullanıcının oturum açma için seçe
 
 ![Sosyal hesap (Facebook) ile mobil oturum açma örneği](media/add-identity-provider/external-idp.png)
 
-Azure portal kullanarak [Kullanıcı akışlarınıza](user-flow-overview.md) Azure Active Directory B2C (Azure AD B2C) tarafından desteklenen kimlik sağlayıcıları ekleyebilirsiniz. Ayrıca, [özel ilkelerinize](custom-policy-get-started.md)kimlik sağlayıcıları da ekleyebilirsiniz.
+Azure portal kullanarak [Kullanıcı akışlarınıza](user-flow-overview.md) Azure Active Directory B2C (Azure AD B2C) tarafından desteklenen kimlik sağlayıcıları ekleyebilirsiniz. Ayrıca, [özel ilkelerinize](user-flow-overview.md)kimlik sağlayıcıları da ekleyebilirsiniz.
 
 ## <a name="select-an-identity-provider"></a>Bir kimlik sağlayıcısı seçin
 
@@ -44,7 +44,7 @@ Genellikle uygulamalarınızda yalnızca bir kimlik sağlayıcısı kullanırsı
 * [GitHub](identity-provider-github.md)
 * [ID.me](identity-provider-id-me.md)
 * [Google](identity-provider-google.md)
-* [LinkedIn](identity-provider-linkedin.md)
+* [Olacak](identity-provider-linkedin.md)
 * [Microsoft Hesabı](identity-provider-microsoft-account.md)
 * [QQ](identity-provider-qq.md)
 * [Salesforce](identity-provider-salesforce.md)

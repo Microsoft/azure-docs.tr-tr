@@ -9,12 +9,12 @@ ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: fipopovi
 ms.reviewer: jrasnick
-ms.openlocfilehash: e1a0f4f22411e506cab3b54e955a4cdc16986fe2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f0abef835e406b442239cecd81fed5751f1c9a92
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101667509"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378168"
 ---
 # <a name="serverless-sql-pool-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te sunucusuz SQL havuzu 
 
@@ -54,7 +54,7 @@ Sunucusuz SQL havuzu uç noktası her Azure SYNAPSE çalışma alanı içinde sa
 
 ## <a name="client-tools"></a>İstemci araçları
 
-Sunucusuz SQL havuzu, mevcut SQL geçici sorgulama ve iş zekası araçlarının Veri Gölü içine dokunmasına olanak sağlar. Tanıdık T-SQL söz dizimini sağladığından, TDS bağlantısı SQL teklifleri oluşturmaya yönelik herhangi bir araç, isteğe bağlı [SYNAPSE SQL 'e bağlanabilir ve sorgu](connect-overview.md) oluşturabilir. Azure Data Studio ile bağlanabilir, geçici sorgular çalıştırabilir veya birkaç dakika içinde Öngörüler elde etmek için Power BI ile bağlanabilirsiniz.
+Sunucusuz SQL havuzu, mevcut SQL geçici sorgulama ve iş zekası araçlarının Veri Gölü içine dokunmasına olanak sağlar. Tanıdık T-SQL söz dizimini sağladığından, SQL teklifleriyle TDS bağlantısı kurabilen herhangi bir araç, [SYNAPSE SQL 'e bağlanabilir ve sorgu](connect-overview.md)oluşturabilir. Azure Data Studio ile bağlanabilir, geçici sorgular çalıştırabilir veya birkaç dakika içinde Öngörüler elde etmek için Power BI ile bağlanabilirsiniz.
 
 ## <a name="t-sql-support"></a>T-SQL desteği
 
@@ -119,7 +119,7 @@ Sunucusuz SQL havuzu, veritabanı kullanıcısı ve diğer Microsoft hizmetlerin
 
 Sunucusuz SQL havuzu kimlik doğrulaması, kullanıcıların uç noktaya bağlanırken kimliklerini nasıl kanıtlayacağına başvurur. İki tür kimlik doğrulaması desteklenir:
 
-- **SQL Kimlik Doğrulaması**
+- **SQL kimlik doğrulaması**
 
   Bu kimlik doğrulama yöntemi bir Kullanıcı adı ve parola kullanır.
 

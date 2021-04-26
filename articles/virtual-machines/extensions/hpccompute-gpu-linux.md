@@ -16,10 +16,10 @@ ms.workload: infrastructure-services
 ms.date: 01/21/2021
 ms.author: amverma
 ms.openlocfilehash: fa2b82f3246fd87830010f572ba23aa2df075053
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102566235"
 ---
 # <a name="nvidia-gpu-driver-extension-for-linux"></a>Linux için NVıDıA GPU sürücü uzantısı

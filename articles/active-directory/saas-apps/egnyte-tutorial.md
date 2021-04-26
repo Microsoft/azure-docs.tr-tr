@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 08/27/2020
+ms.date: 04/05/2021
 ms.author: jeedes
-ms.openlocfilehash: 3d102b492326971ef186ba50a557ad8d1df5b6ec
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2662b686102a1a4f6aa6db0f7a4052de329def60
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92454210"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519844"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-egnyte"></a>Öğretici: Egnyut ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -25,8 +25,6 @@ Bu öğreticide, Azure Active Directory (Azure AD) ile nasıl tümleştirileceğ
 * Azure AD 'de, Egnde erişimi olan denetim.
 * Kullanıcılarınızın Azure AD hesaplarıyla otomatik olarak oturum açmalarına olanak sağlar.
 * Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
-
-Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -39,31 +37,27 @@ Başlamak için aşağıdaki öğeler gereklidir:
 
 Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Egnse, **SP** tarafından başlatılan SSO 'yu destekler
-* Egnorut 'ları yapılandırdıktan sonra, kuruluşunuzun hassas verilerinin gerçek zamanlı olarak ayıklanmasını ve zaman korumasını koruyan oturum denetimini zorunlu kılabilirsiniz. Oturum denetimi koşullu erişimden genişletiliyor. [Microsoft Cloud App Security ile oturum denetimini nasıl zorlayacağınızı öğrenin](/cloud-app-security/proxy-deployment-aad)
+* Egnse, **SP** tarafından başlatılan SSO 'yu destekler.
 
 > [!NOTE]
 > Bu uygulamanın tanımlayıcısı, tek bir kiracıda yalnızca bir örneğin yapılandırılabilmesini sağlamak için sabit bir dize değeridir.
 
-## <a name="adding-egnyte-from-the-gallery"></a>Galeriden Egnklerden ekleme
+## <a name="add-egnyte-from-the-gallery"></a>Galeriden Egni ekleme
 
 Egnyleyler 'in Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden yönetilen SaaS uygulamaları listenize Egnler eklemeniz gerekir.
 
-1. [Azure Portal](https://portal.azure.com) iş veya okul hesabı ya da kişisel Microsoft hesabı kullanarak oturum açın.
+1. Azure portal iş veya okul hesabı ya da kişisel Microsoft hesabı kullanarak oturum açın.
 1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
 1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
 1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
 1. **Galeriden Ekle** bölümünde, arama kutusuna **egnlele,** yazın.
 1. Sonuçlar panelinden **Egnut** ' ı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-## <a name="configure-and-test-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma ve test etme
+## <a name="configure-and-test-azure-ad-sso-for-egnyte"></a>Azure AD SSO 'yu Egni için yapılandırın ve test edin
 
-Bu bölümde, Azure AD çoklu oturum açma 'yı, **Britta Simon** adlı bir test kullanıcısına bağlı olarak, egnylele yapılandırıp test edersiniz.
-Çoklu oturum açma 'nın çalışması için, bir Azure AD kullanıcısı ile ilgili Kullanıcı arasındaki bağlantı ilişkisinin kurulması gerekir.
+**B. Simon** adlı bir test kullanıcısı kullanarak Azure AD SSO 'yu form.com ile yapılandırın ve test edin. SSO 'nun çalışması için, Form.com içinde bir Azure AD kullanıcısı ve ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-Azure AD çoklu oturum açma 'yı Egnler ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
-
-Azure AD SSO 'yu yapılandırmak ve test etmek için şu yapı taşlarını doldurun:
+Azure AD SSO 'yu Form.com ile yapılandırmak ve test etmek için aşağıdaki adımları gerçekleştirin:
 
 1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
     1. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
@@ -72,19 +66,17 @@ Azure AD SSO 'yu yapılandırmak ve test etmek için şu yapı taşlarını dold
     1. **[Egnlarca test kullanıcısı oluşturun](#create-egnyte-test-user)** -bu, kullanıcının Azure AD gösterimine bağlı olan, Egnlarca 'da B. Simon 'ın bir karşılığı olacak şekilde.
 1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-### <a name="configure-azure-ad-sso"></a>Azure AD SSO’yu yapılandırma
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO’yu yapılandırma
 
 Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-1. [Azure Portal](https://portal.azure.com/), **EGN,** uygulama tümleştirme sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. Azure portal, **EGN,** uygulama tümleştirme sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
 1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
-1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
 4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
-
-    ![EGN, etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/sp-signonurl.png)
 
     a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<companyname>.egnyte.com`
 
@@ -101,13 +93,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
     ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL’si
-
-    b. Azure AD tanımlayıcısı
-
-    c. Oturum kapatma URL 'SI
-
-### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user&quot;></a>Azure AD test kullanıcısı oluşturma 
 
 Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
@@ -119,43 +105,37 @@ Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaks�
    1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
    1. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
+### <a name=&quot;assign-the-azure-ad-test-user&quot;></a>Azure AD test kullanıcısını atama
 
 Bu bölümde, Cgnlarca erişimi vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
 1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
 1. Uygulamalar listesinde, **Egnde**' yi seçin.
 1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
-
-   !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
-
 1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
-
-    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
-
 1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
-1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, &quot;varsayılan erişim&quot; rolü seçili olduğunu görürsünüz.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-## <a name="configure-egnyte-sso"></a>EGN, SSO 'yu yapılandırma
+## <a name=&quot;configure-egnyte-sso&quot;></a>EGN, SSO 'yu yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, Egnyut şirket sitenizde yönetici olarak oturum açın.
 
 2. **Ayarlar**'a tıklayın.
    
-    ![Ayarlar 1](./media/egnyte-tutorial/ic787819.png "Ayarlar")
+    ![Ayarlar 1](./media/egnyte-tutorial/settings-tab.png &quot;Ayarlar")
 
 3. Menüsünde, **Ayarlar**' a tıklayın.
 
-    ![Ayarlar](./media/egnyte-tutorial/ic787820.png "Ayarlar")
+    ![Menü 1](./media/egnyte-tutorial/menu-tab.png "Menü")
 
 4. **Yapılandırma** sekmesine tıklayın ve ardından **güvenlik**' e tıklayın.
 
-    ![Güvenlik](./media/egnyte-tutorial/ic787821.png "Güvenlik")
+    ![Güvenlik](./media/egnyte-tutorial/configuration.png "Güvenlik")
 
 5. **Tek Sign-On kimlik doğrulaması** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Çoklu oturum açma kimlik doğrulaması](./media/egnyte-tutorial/ic787822.png "Çoklu oturum açma kimlik doğrulaması")   
+    ![Çoklu oturum açma kimlik doğrulaması](./media/egnyte-tutorial/authentication.png "Çoklu oturum açma kimlik doğrulaması")   
     
     a. **Çoklu oturum açma kimlik doğrulaması** olarak **SAML 2,0**' i seçin.
    
@@ -185,11 +165,11 @@ Azure AD kullanıcılarının, Egnler 'de oturum açmasını sağlamak için, bu
 
 3. **Yeni Kullanıcı Ekle**' ye tıklayın ve sonra eklemek istediğiniz kullanıcı türünü seçin.
    
-    ![Kullanıcılar](./media/egnyte-tutorial/ic787824.png "Kullanıcılar")
+    ![Kullanıcılar](./media/egnyte-tutorial/add-user.png "Kullanıcılar")
 
 4. **Yeni Power User** bölümünde aşağıdaki adımları uygulayın:
     
-    ![Yeni standart Kullanıcı](./media/egnyte-tutorial/ic787825.png "Yeni standart Kullanıcı")   
+    ![Yeni standart Kullanıcı](./media/egnyte-tutorial/new-user.png "Yeni standart Kullanıcı")   
 
     a. **E-posta** metin kutusuna, **Brittasıon \@ contoso.com** gibi kullanıcının e-postasını girin.
 
@@ -207,18 +187,16 @@ Azure AD kullanıcılarının, Egnler 'de oturum açmasını sağlamak için, bu
 >Azure AD Kullanıcı hesaplarını sağlamak için, EGNX 'Ler tarafından sunulan diğer tüm Kullanıcı hesabı oluşturma araçlarını veya API 'Leri kullanabilirsiniz.
 >
 
-### <a name="test-sso"></a>Test SSO 'SU
+## <a name="test-sso"></a>Test SSO 'SU
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
+Bu bölümde, Azure AD çoklu oturum açma yapılandırmanızı aşağıdaki seçeneklerle test edersiniz. 
 
-Erişim paneli ' nde Egnayttan Kutucuğa tıkladığınızda, SSO 'yu ayarladığınız erişimde otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](../user-help/my-apps-portal-end-user-access.md).
+* Azure portal içinde **Bu uygulamayı test et** ' e tıklayın. Bu, oturum açma akışını başlatabileceğiniz EGN, oturum açma URL 'sine yönlendirecektir. 
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+* Doğrudan oturum açma URL 'sine gidin ve oturum açma akışını buradan başlatın.
 
-- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](./tutorial-list.md)
+* Microsoft My Apps ' i kullanabilirsiniz. Uygulamalarımın içindeki Egni kutucuğunu tıklattığınızda, bu, EGN, oturum açma URL 'sine yeniden yönlendirilir. Uygulamalarım hakkında daha fazla bilgi için bkz. [uygulamalarıma giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
+## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Active Directory Koşullu erişim nedir?](../conditional-access/overview.md)
-
-- [Microsoft Cloud App Security oturum denetimi nedir?](/cloud-app-security/proxy-intro-aad)
+Egnorut 'ları yapılandırdıktan sonra, kuruluşunuzun hassas verilerinin gerçek zamanlı olarak ayıklanmasını ve zaman korumasını koruyan oturum denetimini zorunlu kılabilirsiniz. Oturum denetimi koşullu erişimden genişletiliyor. [Microsoft Cloud App Security ile oturum denetimini nasıl zorlayacağınızı öğrenin](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).

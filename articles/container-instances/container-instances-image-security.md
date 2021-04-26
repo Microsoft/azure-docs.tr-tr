@@ -4,12 +4,12 @@ description: Azure Container Instances için güvenli görüntü ve gizli dizile
 ms.topic: article
 ms.date: 01/10/2020
 ms.custom: ''
-ms.openlocfilehash: cbceeea24501bc9815cb07e1b0a054914ba8e964
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 40284c6e42cf1060906c6248495d08e133bda5bb
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100579271"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812669"
 ---
 # <a name="security-considerations-for-azure-container-instances"></a>Azure Container Instances için güvenlik konuları
 
@@ -40,7 +40,7 @@ Genel olarak kullanılabilir bir kapsayıcı görüntüsü güvenliği garanti e
 
 ### <a name="protect-credentials"></a>Kimlik bilgilerini koruma
 
-Kapsayıcılar, çeşitli kümeler ve Azure bölgelerine yayılabilir. Bu nedenle, oturum açma işlemleri veya parola veya belirteçler gibi API erişimi için gereken kimlik bilgilerini güvence altına almalısınız. Yalnızca ayrıcalıklı kullanıcıların, aktarımda ve geri kalanında bu kapsayıcılara erişebildiğinden emin olun. Tüm kimlik bilgisi gizli dizileri envanterini çıkarın ve geliştiricilerin kapsayıcı platformları için tasarlanan, gelişen gizli dizi yönetim araçlarını kullanmasını gerektirir.  Çözümünüz şifreli veritabanları, aktarım sırasında gizli veriler için TLS şifreleme ve en düşük ayrıcalıklı [Azure rol tabanlı erişim denetimi (Azure RBAC)](../role-based-access-control/overview.md)içerdiğinden emin olun. [Azure Key Vault](../key-vault/general/secure-your-key-vault.md) , Kapsayıcılı uygulamalar için şifreleme anahtarlarını ve gizli dizileri (sertifikalar, bağlantı dizeleri ve parolalar gibi) korumalarını sağlayan bir bulut hizmetidir. Bu veriler hassas ve iş açısından kritik olduğundan, yalnızca yetkili uygulamaların ve kullanıcıların erişebilmesi için anahtar kasalarınıza güvenli bir şekilde erişin.
+Kapsayıcılar, çeşitli kümeler ve Azure bölgelerine yayılabilir. Bu nedenle, oturum açma işlemleri veya parola veya belirteçler gibi API erişimi için gereken kimlik bilgilerini güvence altına almalısınız. Yalnızca ayrıcalıklı kullanıcıların, aktarımda ve geri kalanında bu kapsayıcılara erişebildiğinden emin olun. Tüm kimlik bilgisi gizli dizileri envanterini çıkarın ve geliştiricilerin kapsayıcı platformları için tasarlanan, gelişen gizli dizi yönetim araçlarını kullanmasını gerektirir.  Çözümünüz şifreli veritabanları, aktarım sırasında gizli veriler için TLS şifreleme ve en düşük ayrıcalıklı [Azure rol tabanlı erişim denetimi (Azure RBAC)](../role-based-access-control/overview.md)içerdiğinden emin olun. [Azure Key Vault](../key-vault/general/security-features.md) , Kapsayıcılı uygulamalar için şifreleme anahtarlarını ve gizli dizileri (sertifikalar, bağlantı dizeleri ve parolalar gibi) korumalarını sağlayan bir bulut hizmetidir. Bu veriler hassas ve iş açısından kritik olduğundan, yalnızca yetkili uygulamaların ve kullanıcıların erişebilmesi için anahtar kasalarınıza güvenli bir şekilde erişin.
 
 ## <a name="considerations-for-the-container-ecosystem"></a>Kapsayıcı ekosistemi ile ilgili konular
 

@@ -6,19 +6,19 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: how-to
 author: mingshen-ms
 ms.author: mingshen
-ms.date: 03/10/2021
-ms.openlocfilehash: ffc09daa15e742ca2b5b8a2fa9323e33fe317c60
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/08/2021
+ms.openlocfilehash: f0c1d9d528ed4fbf61786042fb6fb34f05fec5d5
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200398"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812602"
 ---
 # <a name="how-to-create-a-virtual-machine-offer-on-azure-marketplace"></a>Azure Marketi 'nde sanal makine teklifi oluşturma
 
 Bu makalede, [Azure Market](https://azuremarketplace.microsoft.com/)Için bir Azure sanal makine teklifinin nasıl oluşturulacağı açıklanır. Bir işletim sistemi, bir sanal sabit disk (VHD) ve en çok 16 veri diski içeren Windows tabanlı ve Linux tabanlı sanal makinelere yöneliktir.
 
-Başlamadan önce [Iş Ortağı Merkezi 'nde bir ticari Market hesabı oluşturun](partner-center-portal/create-account.md). Hesabınızın ticari Market programına kayıtlı olduğundan emin olun.
+Başlamadan önce [Iş Ortağı Merkezi 'nde bir ticari Market hesabı oluşturun](create-account.md). Hesabınızın ticari Market programına kayıtlı olduğundan emin olun.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
@@ -58,20 +58,7 @@ Bir sınama sürücüsünü etkinleştirmek için, **sınama sürücüsünü etk
 
 ## <a name="configure-customer-leads-management"></a>Müşteri müşteri adayları yönetimini yapılandırma
 
-Iş Ortağı Merkezi ile ticari Market 'e bir teklif yayımladığınızda, bunu Müşteri Ilişkileri yönetimi (CRM) sisteminize bağlayın. Bu, bir kişi, ürününüzü ilgilendiren veya ürünü kullandığı anda müşteri iletişim bilgilerini almanızı sağlar. Bir test sürücüsünü etkinleştirmek istiyorsanız, bir CRM 'ye bağlanmak gerekir (yukarıdaki bölüme bakın). Aksi takdirde, bir CRM 'ye bağlanmak isteğe bağlıdır.
-
-1. **Müşteri liderleri** altında **Bağlan** bağlantısını seçin.
-1. **Bağlantı ayrıntıları** iletişim kutusunda bir müşteri adayı hedefi seçin.
-1. Görüntülenen alanları doldurun. Ayrıntılı adımlar için aşağıdaki makalelere bakın:
-
-   - [Teklifinizi Azure tablosuna müşteri adayları gönderecek şekilde yapılandırma](./partner-center-portal/commercial-marketplace-lead-management-instructions-azure-table.md#configure-your-offer-to-send-leads-to-the-azure-table)
-   - [Teklifinizi dynamics 365 müşteri katılımını](./partner-center-portal/commercial-marketplace-lead-management-instructions-dynamics.md#configure-your-offer-to-send-leads-to-dynamics-365-customer-engagement) (eski ADıYLA Dynamics CRM Online) göndermek Için uygulamanızı yapılandırın
-   - [Teklifinizi, HTTPS uç noktasına müşteri adayları gönderecek şekilde yapılandırma](./partner-center-portal/commercial-marketplace-lead-management-instructions-https.md#configure-your-offer-to-send-leads-to-the-https-endpoint)
-   - [Teklifinizi müşteri adaylarını Marketo 'ya gönderecek şekilde yapılandırma](./partner-center-portal/commercial-marketplace-lead-management-instructions-marketo.md#configure-your-offer-to-send-leads-to-marketo)
-   - [Teklifinizi Salesforce 'a göndermek için teklifinizi yapılandırma](./partner-center-portal/commercial-marketplace-lead-management-instructions-salesforce.md#configure-your-offer-to-send-leads-to-salesforce)
-
-1. Verdiğiniz yapılandırmayı doğrulamak için **Doğrula** bağlantısını seçin.
-1. **Bağlan**’ı seçin.
+[!INCLUDE [Customer leads](includes/customer-leads.md)] 
 
 Sol gezinti menüsündeki **Özellikler**' in sonraki sekmesine geçmeden önce **Taslağı kaydet** ' i seçin.
 

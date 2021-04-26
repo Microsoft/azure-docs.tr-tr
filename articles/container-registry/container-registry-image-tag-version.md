@@ -5,16 +5,16 @@ author: stevelasker
 ms.topic: article
 ms.date: 07/10/2019
 ms.author: stevelas
-ms.openlocfilehash: b483317960409fe1fbea181706f12375606fe659
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9dfd29f2265e599f3cc7c412b81c3b7b93af40db
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "75445746"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109722"
 ---
 # <a name="recommendations-for-tagging-and-versioning-container-images"></a>Kapsayıcı görüntülerini etiketleme ve sürüm oluşturma önerileri
 
-Kapsayıcı görüntüleri bir kapsayıcı kayıt defterine dağıtmaya ve sonra dağıttıktan sonra, görüntü etiketleme ve sürüm oluşturma stratejisine ihtiyacınız vardır. Bu makalede, her birinin kapsayıcı yaşam döngüsü sırasında uygun olduğu iki yaklaşım ele alınmaktadır:
+Kapsayıcı görüntülerini bir kapsayıcı kayıt defterine gönderirken ve sonra dağıttıktan sonra, görüntü etiketleme ve sürüm oluşturma stratejisine ihtiyacınız vardır. Bu makalede, her birinin kapsayıcı yaşam döngüsü sırasında uygun olduğu iki yaklaşım ele alınmaktadır:
 
 * **Kararlı Etiketler** -Örneğin, *mycontainerımage: 1.0* gibi büyük veya küçük bir sürümü göstermek için yeniden kullandığınız Etiketler.
 * **Benzersiz Etiketler** -bir kayıt defterine gönderdiğiniz her görüntü için, *mycontainerımage: abc123* gibi farklı bir etiket.

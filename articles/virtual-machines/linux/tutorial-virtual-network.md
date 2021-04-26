@@ -2,26 +2,20 @@
 title: Öğretici-Linux VM 'Ler için Azure sanal ağları oluşturma ve yönetme
 description: Bu öğreticide, Azure CLI kullanarak Linux sanal makineleri için Azure sanal ağları oluşturup yönetmeyi öğrenirsiniz
 services: virtual-machines
-documentationcenter: virtual-machines
 author: cynthn
-manager: gwallace
 ms.collection: linux
-tags: azure-resource-manager
 ms.subservice: networking
-ms.assetid: ''
 ms.service: virtual-machines
 ms.topic: tutorial
-ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
 ms.date: 05/10/2017
 ms.author: cynthn
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 6356d9b587847ff2b49574b970109ada0d785660
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: cfc76ffd05b6348c9a585a64e3f2868f28f5e5cd
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102564637"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107811715"
 ---
 # <a name="tutorial-create-and-manage-azure-virtual-networks-for-linux-virtual-machines-with-the-azure-cli"></a>Öğretici: Azure CLI ile Linux sanal makineleri için Azure sanal ağlarını yönetme
 

@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/27/2018
 ms.author: sideeksh
-ms.openlocfilehash: 569af28f5773d843f49dd9c8143b45e308ae142e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 675190bee674c745494c2378712afa89bd43cbe4
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87420422"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727884"
 ---
 # <a name="run-a-dr-drill-for-hyper-v-vms-to-a-secondary-site"></a>İkincil siteye Hyper-V VM 'Leri için bir DR ayrıntısı çalıştırın
 
@@ -43,10 +43,10 @@ Birincil siteden ikincil siteye yük devretme testi çalıştırırsınız. Yaln
 
 Yük devretme testi çalıştırdığınızda, tabloda özetlenen test çoğaltma makineleri için ağ ayarları ' nı seçmeniz istenir.
 
-| **Seçenek** | **Ayrıntılar** | |
-| --- | --- | --- |
-| **Hiçbiri** | Test VM 'si, çoğaltma sanal makinesinin bulunduğu konakta oluşturulur. Buluta eklenmez ve herhangi bir ağa bağlı değildir.<br/><br/> Oluşturulduktan sonra makinenin bir VM ağına bağlanmasını sağlayabilirsiniz.| |
-| **Var olanı kullan** | Test VM 'si, çoğaltma sanal makinesinin bulunduğu konakta oluşturulur. Buluta eklenmez.<br/><br/>Üretim ağınızdan yalıtılmış bir VM ağı oluşturun.<br/><br/>VLAN tabanlı bir ağ kullanıyorsanız, bu amaçla VMM 'de ayrı bir mantıksal ağ (üretimde kullanılmamış) oluşturmanızı öneririz. Bu mantıksal ağ yük devretme testi için VM ağları oluşturmak için kullanılır.<br/><br/>Mantıksal ağ, sanal makineleri barındıran tüm Hyper-V sunucularının en az bir ağ bağdaştırıcısı ile ilişkilendirilmelidir.<br/><br/>VLAN mantıksal ağları için, mantıksal ağa eklediğiniz ağ siteleri yalıtılmalıdır.<br/><br/>Windows ağ sanallaştırma tabanlı bir mantıksal ağ kullanıyorsanız, Azure Site Recovery otomatik olarak yalıtılmış VM ağları oluşturur. | |
+| **Seçenek** | **Ayrıntılar** |
+| --- | --- |
+| **Hiçbiri** | Test VM 'si, çoğaltma sanal makinesinin bulunduğu konakta oluşturulur. Buluta eklenmez ve herhangi bir ağa bağlı değildir.<br/><br/> Oluşturulduktan sonra makinenin bir VM ağına bağlanmasını sağlayabilirsiniz.|
+| **Var olanı kullan** | Test VM 'si, çoğaltma sanal makinesinin bulunduğu konakta oluşturulur. Buluta eklenmez.<br/><br/>Üretim ağınızdan yalıtılmış bir VM ağı oluşturun.<br/><br/>VLAN tabanlı bir ağ kullanıyorsanız, bu amaçla VMM 'de ayrı bir mantıksal ağ (üretimde kullanılmamış) oluşturmanızı öneririz. Bu mantıksal ağ yük devretme testi için VM ağları oluşturmak için kullanılır.<br/><br/>Mantıksal ağ, sanal makineleri barındıran tüm Hyper-V sunucularının en az bir ağ bağdaştırıcısı ile ilişkilendirilmelidir.<br/><br/>VLAN mantıksal ağları için, mantıksal ağa eklediğiniz ağ siteleri yalıtılmalıdır.<br/><br/>Windows ağ sanallaştırma tabanlı bir mantıksal ağ kullanıyorsanız, Azure Site Recovery otomatik olarak yalıtılmış VM ağları oluşturur. |
 | **Ağ oluşturma** | Geçici bir test ağı, **mantıksal ağda** ve ilgili ağ sitelerinde belirttiğiniz ayara göre otomatik olarak oluşturulur.<br/><br/> Yük devretme, VM 'Lerin oluşturulduğunu denetler.<br/><br/> Bir kurtarma planı birden fazla VM ağı kullanıyorsa bu seçeneği kullanmanız gerekir.<br/><br/> Windows ağ sanallaştırma ağlarını kullanıyorsanız, bu seçenek çoğaltma sanal makinesi ağındaki aynı ayarlarla (alt ağlar ve IP adresi havuzları) VM ağları otomatik olarak oluşturabilir. Bu VM ağları, sınama yük devretmesi tamamlandıktan sonra otomatik olarak temizlenir.<br/><br/> Test VM 'si, çoğaltma sanal makinesinin bulunduğu konakta oluşturulur. Buluta eklenmez.|
 
 ### <a name="best-practices"></a>En iyi uygulamalar

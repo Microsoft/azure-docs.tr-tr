@@ -1,1226 +1,1235 @@
-- name: Azure Synapse Analytics
-  href: index.yml
-- name: Adanmış SQL havuzuna geç (eski adıyla SQL DW) >
-  href: ./sql-data-warehouse/sql-data-warehouse-overview-what-is.md
-- name: Genel Bakış
-  items:
-    - name: Azure Synapse nedir?
-      href: overview-what-is.md
-      displayName: overview
-    - name: Terminoloji
-      href: overview-terminology.md
-    - name: SSS
-      href: overview-faq.md
-- name: Hızlı Başlangıçlar
-  expanded: true
-  items:
-    - name: Kullanmaya başlayın
-      href: get-started.md
-      displayName: 'get, started, quickstart'
-    - name: 1 Synapse çalışma alanı oluşturma
-      href: get-started-create-workspace.md
-      displayName: 'get, started'
-    - name: 2 sunucusuz SQL havuzu kullanarak çözümle
-      href: get-started-analyze-sql-on-demand.md
-      displayName: 'get, started'
-    - name: 3 servılsız Spark havuzunu kullanarak çözümle
-      href: get-started-analyze-spark.md
-      displayName: 'get, started'
-    - name: 4 adanmış bir SQL havuzu kullanarak çözümleme
-      href: get-started-analyze-sql-pool.md
-      displayName: 'get, started'
-    - name: 5 Depolama hesabındaki verileri analiz etme
-      href: get-started-analyze-storage.md
-      displayName: 'get, started'
-    - name: 6 İşlem hatlarıyla tümleştirme
-      href: get-started-pipelines.md
-      displayName: 'get, started'
-    - name: 7 Power BI ile görselleştirme
-      href: get-started-visualize-power-bi.md
-      displayName: 'get, started'
-    - name: 8 İzleme
-      href: get-started-monitor.md
-      displayName: 'get, started'
-    - name: 9 Bilgi Merkezi’ni keşfetme
-      href: get-started-knowledge-center.md
-      displayName: 'get, started'
-- name: Çalışma alanı
-  items:
-    - name: Hızlı Başlangıçlar
-      items:
-        - name: Çalışma alanı oluşturma
-          items:
-            - name: Azure portal
-              href: quickstart-create-workspace.md
-              displayName: quickstart
-            - name: Azure CLI’si
-              href: quickstart-create-workspace-cli.md
-              displayName: quickstart
-            - name: Azure PowerShell
-              href: quickstart-create-workspace-powershell.md
-              displayName: quickstart
-            - name: ARM şablonu
-              href: quickstart-deployment-template-workspaces.md
-          displayName: quickstart
-        - name: Power BI çalışma alanına bağlanma
-          href: quickstart-power-bi.md
-          displayName: quickstart
-        - name: Azure Veri Gezgini'ne bağlanma
-          href: quickstart-connect-azure-data-explorer.md
-          displayName: quickstart
-      '-name': null
-    - name: Kavramlar
-      items:
-        - name: Paylaşılan meta veri yönetimi
-          items:
-            - name: Genel Bakış
-              href: metadata/overview.md
-            - name: Meta veri nesneleri
-              items:
-                - name: Paylaşılan veritabanları
-                  href: metadata/database.md
-                - name: Paylaşılan tablolar
-                  href: metadata/table.md
-            - name: Kod yapıtları
-              items:
-                - name: Apache Spark Notebooks
-                  href: ./spark/apache-spark-development-using-notebooks.md
-                - name: SQL betiği
-                  href: ./sql/author-sql-script.md
-                  displayname: author
-                - name: Veri Akışı
-                  href: concepts-data-flow-overview.md
-        - name: Bakım zamanlaması
-          href: ./sql-data-warehouse/maintenance-scheduling.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Kaynak denetimi
-          href: ./cicd/source-control.md
-        - name: Sürekli tümleştirme ve teslim
-          href: ./cicd/continuous-integration-deployment.md
-        - name: Güvenlik
-          items:
-            - name: Azure Ilkesine göre güvenlik denetimleri
-              href: ./security-controls-policy.md
-            - name: Şifreleme
-              href: ./security/workspaces-encryption.md
-            - name: Ağ Güvenliği
-              items:
-                - name: Synapse çalışma alanı IP güvenlik duvarı kuralları
-                  href: ./security/synapse-workspace-ip-firewall.md
-                - name: Bağlantı ayarları
-                  href: ./security/connectivity-settings.md
-                - name: Synapse çalışma alanı Yönetilen sanal ağ
-                  href: ./security/synapse-workspace-managed-vnet.md
-                  displayname: vnet
-                - name: Synapse çalışma alanı Yönetilen özel uç noktalar
-                  href: ./security/synapse-workspace-managed-private-endpoints.md
-                - name: Synapse çalışma alanı - veri sızdırma koruması
-                  href: ./security/workspace-data-exfiltration-protection.md
-                - name: Synapse çalışma alanı ile özel bağlantı merkezleri
-                  href: ./security/synapse-private-link-hubs.md
-                - name: Güvenli depolama hesabına Bağlan
-                  href: ./security/connect-to-a-secure-storage-account.md
-            - name: Kimlik doğrulaması ve geçiş
-              items:
-                - name: Azure Active Directory
-                  href: ./sql/active-directory-authentication.md
-                  displayname: authentication
-                - name: Multi-factor authentication
-                  href: ./sql/mfa-authentication.md
-                - name: SQL yetkilendirmesi
-                  href: ./sql/sql-authentication.md
-            - name: Erişim denetimi
-              items:
-                - name: Genel Bakış
-                  href: ./security/synapse-workspace-access-control-overview.md
-                - name: Synapse RBAC
-                  href: ./security/synapse-workspace-synapse-rbac.md
-                - name: Synapse RBAC rolleri
-                  href: ./security/synapse-workspace-synapse-rbac-roles.md
-                - name: Synapse RBAC rollerini anlama
-                  href: ./security/synapse-workspace-understand-what-role-you-need.md
-                - name: Synapse çalışma alanı yönetilen kimlik
-                  href: ./security/synapse-workspace-managed-identity.md
-    - name: Nasıl yapılır kılavuzları
-      items:
-        - name: Yönetme ve İzleme
-          items:
-            - name: 'Azure İzleyici ölçümleri, uyarıları ve günlükleri'
-              href: monitoring/how-to-monitor-using-azure-monitor.md
-        - name: Güvenlik
-          items:
-            - name: Erişim denetimini yönetme
-              items:
-                - name: Erişim denetimini ayarlama
-                  href: ./security/how-to-set-up-access-control.md
-                - name: Synapse rol atamalarını inceleme
-                  href: ./security/how-to-review-synapse-rbac-role-assignments.md
-                - name: Synapse rol atamalarını yönetme
-                  href: ./security/how-to-manage-synapse-rbac-role-assignments.md
-                - name: Azure Synapse çalışma alanı yönetilen kimliği için izinleri ayarlama
-                  href: security/how-to-grant-workspace-managed-identity-permissions.md
-                  displayname: grant
-            - name: Veri sızdırma koruması
-              items:
-                - name: Veri sızdırma koruması içeren bir çalışma alanını oluşturma ve yönetme
-                  href: security/how-to-create-a-workspace-with-data-exfiltration-protection.md
-            - name: Özel uç noktaları yönetme
-              items:
-                - name: Veri kaynaklarına Yönetilen özel uç noktaları ayarlama
-                  href: security/how-to-create-managed-private-endpoints.md
-                - name: Azure Synapse çalışma alanına özel uç noktalarla bağlanma
-                  href: security/how-to-connect-to-workspace-with-private-links.md
-                  displayname: links
-                - name: Yönetilen Sanal Ağ ile bağlı hizmeti sağlama ve güvenlik altına alma
-                  href: ./data-integration/linked-service.md
-                - name: Kısıtlanmış ağdan Synapse çalışma alanına bağlanma
-                  href: security/how-to-connect-to-workspace-from-restricted-network.md
-        - name: Sorun giderme
-          items:
-            - name: Synapse Studio sorunlarını giderme
-              href: troubleshoot/troubleshoot-synapse-studio.md
-            - name: Synapse Studio bağlantı sorunlarını giderme
-              href: troubleshoot/troubleshoot-synapse-studio-powershell.md
-              displayname: powershell
-            - name: Synapse Studio ve depolama alanı arasındaki bağlantı sorunlarını giderme
-              href: troubleshoot/troubleshoot-synapse-studio-and-storage-connectivity.md
-            - name: SDK tarafından oluşturulan çalışma alanları ile ilgili sorunları giderme
-              href: troubleshoot/workspaces-created-by-sdk.md
-            - name: UTF-8 metin okuma sorunlarını giderme
-              href: troubleshoot/reading-utf8-text.md
-- name: Geçiş kılavuzları
-  items:
-    - name: Adanmış bir SQL havuzuna geçiş
-      href: migration-guides/migrate-to-synapse-analytics-guide.md
-- name: Synapse SQL
-  items:
-    - name: Genel Bakış
-      items:
-        - name: Synapse SQL mimarisi
-          href: sql/overview-architecture.md
-          displayName: overview
-        - name: Sunucusuz SQL havuzu
-          href: sql/on-demand-workspace-overview.md
-          displayname: overview
-        - name: Ayrılmış SQL havuzu
-          href: ./sql-data-warehouse/sql-data-warehouse-overview-what-is.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-          displayname: overview
-        - name: Mimari
-          href: ./sql-data-warehouse/massively-parallel-processing-mpp-architecture.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Özelliklere genel bakış
-          href: sql/overview-features.md
-        - name: Kaynak tüketimi modelleri
-          href: sql/resource-consumption-models.md
-        - name: Kapasite sınırları
-          href: ./sql-data-warehouse/sql-data-warehouse-service-capacity-limits.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Sunucusuz SQL havuzu için maliyet yönetimi
-          href: sql/data-processed.md
-        - name: Sunucusuz SQL havuzu için en iyi yöntemler
-          href: sql/best-practices-serverless-sql-pool.md
-        - name: Ayrılmış SQL havuzu için en iyi yöntemler
-          href: sql/best-practices-dedicated-sql-pool.md
-    - name: Hızlı Başlangıçlar
-      items:
-        - name: Sunucusuz SQL havuzu kullanma
-          href: quickstart-sql-on-demand.md
-        - name: Synapse Studio kullanarak ayrılmış SQL havuzu oluşturma
-          href: quickstart-create-sql-pool-studio.md
-        - name: Azure portal kullanarak ayrılmış SQL havuzu oluşturma
-          href: quickstart-create-sql-pool-portal.md
-        - name: Azure portalı kullanarak duraklatma ve sürdürme
-          href: ./sql-data-warehouse/pause-and-resume-compute-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Ayrılmış SQL havuzlarıyla verileri yükleme
-          items:
-            - name: COPY ifadesi
-              href: ./sql-data-warehouse/quickstart-bulk-load-copy-tsql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-              displayname: 'bulk, load'
-            - name: COPY deyimi örnekleri
-              href: ./sql-data-warehouse/quickstart-bulk-load-copy-tsql-examples.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-              displayname: 'bulk, load'
-            - name: Synapse Studio
-              href: quickstart-load-studio-sql-pool.md
-              displayname: sql pool
-        - name: İş yükü yönetimi
-          items:
-            - name: İş yükü sınıflandırıcısı oluşturma
-              items:
-                - name: Portal
-                  href: ./sql-data-warehouse/quickstart-create-a-workload-classifier-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: T-SQL
-                  href: ./sql-data-warehouse/quickstart-create-a-workload-classifier-tsql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İş yükü yalıtımı oluşturma
-              items:
-                - name: Portal
-                  href: ./sql-data-warehouse/quickstart-configure-workload-isolation-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: T-SQL
-                  href: ./sql-data-warehouse/quickstart-configure-workload-isolation-tsql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-    - name: Öğreticiler
-      items:
-        - name: Sunucusuz SQL havuzu kullanarak verileri analiz etme
-          href: ./sql/tutorial-data-analyst.md
-        - name: Power BI Desktop
-          href: ./sql/tutorial-connect-power-bi-desktop.md
-    - name: Kavramlar
-      items:
-        - name: Yedekleme ve geri yükleme
-          href: ./sql-data-warehouse/backup-and-restore.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Veri alımı ve hazırlığı
-          items:
-            - name: Genel Bakış
-              href: ./sql-data-warehouse/design-elt-data-loading.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: En iyi uygulamalar
-              href: sql/data-loading-best-practices.md
-            - name: Columnstore sıkıştırması
-              href: sql/data-load-columnstore-compression.md
-            - name: Veri yüklemeye genel bakış
-              href: sql/load-data-overview.md
-        - name: Geliştirme
-          items:
-            - name: Genel Bakış
-              href: sql/develop-overview.md
-            - name: En iyi uygulamalar
-              href: sql/develop-best-practices.md
-            - name: Gerçekleştirilmiş görünüm
-              items:
-                - name: Performans ayarlama kılavuzu
-                  displayname: 'materialized, view,'
-                  href: sql/develop-materialized-view-performance-tuning.md
-                - name: Oluştur
-                  href: /sql/t-sql/statements/create-materialized-view-as-select-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                  displayname: 'materialized, view'
-                - name: Değiştir
-                  href: /sql/t-sql/statements/alter-materialized-view-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                  displayname: 'materialized, view'
-            - name: Sıralı kümelenmiş columnstore dizini
-              items:
-                - name: Performans ayarlama kılavuzu
-                  displayname: 'CCI, clustered, column, store'
-                  href: ./sql-data-warehouse/performance-tuning-ordered-CCI.md
-            - name: Sonuç kümesini önbelleğe alma
-              items:
-                - name: Performans ayarlama kılavuzu
-                  href: ./sql-data-warehouse/performance-tuning-result-set-caching.md
-                - name: Veritabanı için ayarlama
-                  href: /sql/t-sql/statements/alter-database-transact-sql-set-options?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest
-                - name: Oturum için ayarlama
-                  href: /sql/t-sql/statements/set-result-set-caching-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest
-                - name: Önbellek boyutunu denetleme
-                  href: /sql/t-sql/database-console-commands/dbcc-showresultcachespaceused-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest
-                - name: Önbelleği temizleme
-                  href: /sql/t-sql/database-console-commands/dbcc-dropresultsetcache-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest
-            - name: Makine öğrenmesi tahminleri
-              href: ./sql-data-warehouse/sql-data-warehouse-predict.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Tablolar
-              items:
-                - name: Genel Bakış
-                  href: sql/develop-tables-overview.md
-                - name: CETAS
-                  href: sql/develop-tables-cetas.md
-                - name: CTAS
-                  href: ./sql-data-warehouse/sql-data-warehouse-develop-ctas.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Veri türleri
-                  href: sql/develop-tables-data-types.md
-                - name: Dağıtılmış tablolar
-                  href: ./sql-data-warehouse/sql-data-warehouse-tables-distribute.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Tablo düzeyinde kısıtlamalar
-                  href: ./sql-data-warehouse/sql-data-warehouse-table-constraints.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Dış tablolar
-                  href: sql/develop-tables-external-tables.md
-                - name: Dizinler
-                  href: ./sql-data-warehouse/sql-data-warehouse-tables-index.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Kimlik
-                  href: ./sql-data-warehouse/sql-data-warehouse-tables-identity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: OPENROWSET
-                  href: sql/develop-openrowset.md
-                - name: Bölümler
-                  href: ./sql-data-warehouse/sql-data-warehouse-tables-partition.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Çoğaltılmış tablolar
-                  href: ./sql-data-warehouse/design-guidance-for-replicated-tables.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: İstatistikler
-                  href: sql/develop-tables-statistics.md
-                - name: Geçici
-                  href: sql/develop-tables-temporary.md
-            - name: T-SQL dil öğeleri
-              items:
-                - name: Döngüler
-                  href: sql/develop-loops.md
-                - name: Saklı yordamlar
-                  href: sql/develop-stored-procedures.md
-                - name: İşlemler
-                  items:
-                    - name: Adanmış SQL havuzu işlemleri
-                      href: sql/develop-transactions.md
-                    - name: Adanmış SQL havuzu en iyi yöntemler işlemleri
-                      displayname: 'Transaction, best, practices'
-                      href: sql/develop-transaction-best-practices.md
-                - name: Kullanıcı tanımlı şemalar
-                  href: sql/develop-user-defined-schemas.md
-                - name: Değişken ataması
-                  href: sql/develop-variable-assignment.md
-                - name: Görünümler
-                  href: sql/develop-views.md
-            - name: Sorgulama
-              items:
-                - name: Dinamik SQL
-                  href: sql/develop-dynamic-sql.md
-                - name: Seçeneklere göre gruplandırma
-                  href: sql/develop-group-by-options.md
-                - name: Etiketler
-                  href: sql/develop-label.md
-                - name: Depolama dosyaları
-                  items:
-                    - name: Genel Bakış
-                      href: sql/develop-storage-files-overview.md
-                    - name: Depolama Erişim Denetimi
-                      href: sql/develop-storage-files-storage-access-control.md
-                    - name: Azure Synapse dış tabloları için Apache Spark
-                      href: sql/develop-storage-files-spark-tables.md
-        - name: İzleme
-          items:
-            - name: Genel Bakış
-              href: ./sql-data-warehouse/sql-data-warehouse-overview-manageability-monitoring.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Kaynak kullanımı ve sorgu etkinliği
-              href: ./sql-data-warehouse/sql-data-warehouse-concept-resource-utilization-query-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Öneriler
-              href: ./sql-data-warehouse/sql-data-warehouse-concept-recommendations.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Güvenlik
-          items:
-            - name: Veritabanı erişim denetimi
-              href: ../azure-sql/database/logins-create-manage.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
-            - name: Veri güvenliği
-              items:
-                - name: Sütun düzeyi güvenlik
-                  href: ./sql-data-warehouse/column-level-security.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Satır düzeyi güvenlik
-                  href: /sql/relational-databases/security/row-level-security?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Veri Şifrelemesi
-              items:
-                - name: Saydam Veri Şifrelemesi’ne genel bakış
-                  href: ../azure-sql/database/transparent-data-encryption-tde-overview.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
-                - name: Kendi anahtarını getir ile TDE
-                  href: ../azure-sql/database/transparent-data-encryption-byok-overview.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
-                  displayname: 'transparent, data, encryption'
-        - name: İş yükü yönetimi
-          items:
-            - name: Genel Bakış
-              href: ./sql-data-warehouse/sql-data-warehouse-workload-management.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-              displayname: 'workload, management'
-            - name: İş yükü sınıflandırma
-              href: ./sql-data-warehouse/sql-data-warehouse-workload-classification.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İş yükü önem düzeyi
-              href: ./sql-data-warehouse/sql-data-warehouse-workload-importance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İş yükü yalıtımı
-              href: ./sql-data-warehouse/sql-data-warehouse-workload-isolation.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İş yükü yönetimi izleme
-              href: ./sql-data-warehouse/sql-data-warehouse-workload-management-portal-monitor.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Bellek ve eşzamanlılık sınırları
-              href: ./sql-data-warehouse/memory-concurrency-limits.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-              displayname: 'workload, management'
-            - name: Kaynak sınıfları
-              href: ./sql-data-warehouse/resource-classes-for-workload-management.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-              displayname: 'workload, management'
-    - name: Nasıl yapılır kılavuzları
-      items:
-        - name: Yedekleme ve geri yükleme
-          items:
-            - name: Geri yükleme noktası oluşturma
-              href: ./backuprestore/sqlpool-create-restore-point.md
-            - name: Adanmış bir SQL havuzunu geri yükleme
-              href: ./backuprestore/restore-sql-pool.md
-        - name: Yönetme ve izleme
-          items:
-            - name: SQL istekleri - Synapse Studio
-              href: monitoring/how-to-monitor-sql-requests.md
-            - name: SQL havuzları - Synapse Studio
-              href: monitoring/how-to-monitor-sql-pools.md
-            - name: Gen2 önbelleğini izleme
-              href: ./sql-data-warehouse/sql-data-warehouse-how-to-monitor-cache.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İş yükünüzü izleme - DMV’ler
-              href: ./sql-data-warehouse/sql-data-warehouse-manage-monitor.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İş yükünüzü izleme - portal
-              href: ./sql-data-warehouse/sql-data-warehouse-monitor-workload-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İş yüklerini yönetme
-              items:
-                - name: İş yükünüzü çözümleme
-                  href: ./sql-data-warehouse/analyze-your-workload.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: İş yükü önem düzeyini yapılandırma
-                  href: ./sql-data-warehouse/sql-data-warehouse-how-to-configure-workload-importance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: İş yükü önem derecesini yönetme ve izleme
-                  href: ./sql-data-warehouse/sql-data-warehouse-how-to-manage-and-monitor-workload-importance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Kaynak sınıflarını iş yükü gruplarına dönüştürme
-                  href: ./sql-data-warehouse/sql-data-warehouse-how-to-convert-resource-classes-workload-groups.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Verileri alma ve hazırlama
-          items:
-            - name: Veri ambarına
-              items:
-                - name: Azure Data Lake Storage
-                  href: ./sql-data-warehouse/sql-data-warehouse-load-from-azure-data-lake-store.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Data Factory
-                  href: ../data-factory/load-azure-sql-data-warehouse.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
-                - name: Azure Databricks
-                  href: /azure/databricks/scenarios/databricks-extract-load-sql-data-warehouse?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
-                - name: SSIS
-                  href: /sql/integration-services/load-data-to-sql-data-warehouse
-                  displayname: 'integration, services'
-                - name: New York taxi cab verileri
-                  href: ./sql-data-warehouse/load-data-from-azure-blob-storage-using-copy.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                  displayname: 'load, blob'
-                - name: Contoso genel verileri
-                  href: ./sql-data-warehouse/sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                  displayname: 'load, blob'
-                - name: WideWorldImporters yükleme
-                  href: ./sql-data-warehouse/load-data-wideworldimportersdw.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Kopyalama etkinliğiyle
-                  href: data-integration/data-integration-sql-pool.md
-            - name: Data Lake’e
-              items:
-                - name: Kopyalama etkinliğiyle
-                  href: data-integration/data-integration-data-lake.md
-        - name: Değişiklik yönetimi ve dağıtımı
-          items:
-            - name: Visual Studio SSDT yükleme
-              href: ./sql-data-warehouse/sql-data-warehouse-install-visual-studio.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Sürekli tümleştirme ve dağıtım
-              href: ./sql-data-warehouse/sql-data-warehouse-continuous-integration-and-deployment.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Dış verileri sorgulama
-          items:
-            - name: Genel Bakış
-              href: sql/query-data-storage.md
-              displayname: query
-            - name: CSV dosyalarını sorgulama
-              href: sql/query-single-csv-file.md
-            - name: Parquet dosyalarını sorgulama
-              href: sql/query-parquet-files.md
-            - name: JSON dosyalarını sorgulama
-              href: sql/query-json-files.md
-            - name: İç içe geçmiş türleri sorgulama
-              href: sql/query-parquet-nested-types.md
-            - name: Klasörleri ve birden çok dosyayı sorgulama
-              href: sql/query-folders-multiple-csv-files.md
-              displayname: csv
-            - name: Dosya meta verilerini kullanarak bölümlenmiş dosyaları sorgulama
-              href: sql/query-specific-files.md
-            - name: Görünümleri oluşturma ve kullanma
-              href: sql/create-use-views.md
-            - name: Dış tabloları oluşturma ve kullanma
-              href: sql/create-use-external-tables.md
-            - name: Sorgu sonuçlarını depolama alanında saklama
-              href: sql/create-external-table-as-select.md
-        - name: Tümleştirme
-          items:
-            - name: Veri işlem hatları oluşturma
-              items:
-                - name: Azure Stream Analytics işi ekleme
-                  href: ./sql-data-warehouse/sql-data-warehouse-integrate-azure-stream-analytics.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Araç ve uygulamalarla bağlanma
-          items:
-            - name: Genel Bakış
-              href: sql/connect-overview.md
-            - name: Azure Data Studio ile sorgulama
-              href: sql/get-started-azure-data-studio.md
-            - name: Bağlantı dizeleri
-              href: sql/connection-strings.md
-            - name: SSMS ile Sorgulama
-              href: sql/get-started-ssms.md
-            - name: Power BI Desktop’a bağlanma
-              href: sql/get-started-power-bi-professional.md
-            - name: Visual Studio SSDT ile sorgulama
-              href: sql/get-started-visual-studio.md
-            - name: .NET Core kullanarak sorgulama
-              href: ../azure-sql/database/connect-query-dotnet-core.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Visual Studio .NET kullanarak sorgulama
-              href: ../azure-sql/database/connect-query-dotnet-visual-studio.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Python kullanarak sorgulama
-              href: ../azure-sql/database/connect-query-python.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: sqlcmd ile sorgulama
-              href: sql/get-started-connect-sqlcmd.md
-- name: Apache Spark
-  items:
-    - name: Genel Bakış
-      items:
-        - name: Apache Spark'a genel bakış
-          href: ./spark/apache-spark-overview.md
-    - name: Hızlı Başlangıçlar
-      items:
-        - name: Not defteri oluşturma
-          href: quickstart-apache-spark-notebook.md
-        - name: Azure portal ile Spark havuzu oluşturma
-          href: quickstart-create-apache-spark-pool-portal.md
-        - name: Synapse Studio kullanarak Spark havuzu oluşturma
-          href: quickstart-create-apache-spark-pool-studio.md
-    - name: Öğreticiler
-      items:
-        - name: Synapse Studio not defterleriyle veri görselleştirme
-          href: ./spark/apache-spark-data-visualization-tutorial.md
-        - name: Apache Spark ve Power BI ile verileri analiz etme
-          href: ./spark/apache-spark-to-power-bi.md
-        - name: Makine öğrenmesi modelleri oluşturma
-          href: ./spark/apache-spark-machine-learning-mllib-notebook.md
-        - name: Spark iş tanımlarını görnderme
-          href: ./spark/apache-spark-job-definitions.md
-        - name: Azure SYNAPSE Spark uygulama düzeyi ölçümlerini bağlama ve izleme
-          href: ./spark/connect-monitor-azure-synapse-spark-application-level-metrics.md
-        - name: Prometheus ve Grafana ile uygulama düzeyi ölçümlerini izleyin Apache Spark
-          href: ./spark/use-prometheus-grafana-to-monitor-apache-spark-application-level-metrics.md
-    - name: Kavramlar
-      items:
-        - name: Apache Spark
-          href: ./spark/apache-spark-concepts.md
-        - name: Apache Spark havuzu yapılandırması
-          href: ./spark/apache-spark-pool-configurations.md
-        - name: Delta Lake
-          href: ./spark/apache-spark-what-is-delta-lake.md
-        - name: Apache Spark otomatik ölçeklendirme davranışı
-          href: ./spark/apache-spark-autoscale.md
-        - name: Synapse çalışma zamanları
-          href: ./spark/apache-spark-version-support.md
-        - name: Makine öğrenimi
-          href: ./spark/apache-spark-machine-learning-concept.md
-        - name: Notebooks
-          href: ./spark/apache-spark-notebook-concept.md
-        - name: Paket yönetimi
-          href: ./spark/apache-spark-azure-portal-add-libraries.md
-        - name: İzleme araçları
-          href: monitoring/how-to-monitor-spark-applications.md
-    - name: Nasıl yapılır kılavuzları
-      items:
-        - name: Delta Lake ile çalışma
-          href: ./spark/apache-spark-delta-lake-overview.md
-        - name: Paketleri yönetme
-          items:
-            - name: Python paketlerini Yönet
-              href: ./spark/apache-spark-manage-python-packages.md
-            - name: Scala paketlerini Yönet
-              href: ./spark/apache-spark-manage-scala-packages.md
-            - name: Python paketi yükleme hatalarını giderme
-              href: ./spark/apache-spark-troubleshoot-library-errors.md
-            - name: Conda özel kanalı oluşturma
-              href: ./spark/apache-spark-custom-conda-channel.md
-        - name: Not defterlerini ve IDE araçlarını kullanma
-          items:
-            - name: Not defterlerini yönetme
-              href: ./spark/apache-spark-development-using-notebooks.md
-            - name: Verileri görselleştirme
-              href: ./spark/apache-spark-data-visualization.md
-            - name: IntelliJ eklentisiyle Spark’a bağlanma
-              href: ./spark/intellij-tool-synapse.md
-            - name: VSCode ile Spark havuzlarına bağlanma
-              href: ./spark/vscode-tool-synapse.md
-        - name: Dilleri keşfetme
-          items:
-            - name: Apache Spark için .NET
-              href: ./spark/spark-dotnet.md
-        - name: Güvenlik
-          items:
-            - name: TokenLibrary kullanarak kimlik bilgilerinin güvenliğini sağlama
-              href: ./spark/apache-spark-secure-credentials-with-tokenlibrary.md
-        - name: Performansı iyileştirme
-          items:
-            - name: Apache Spark performansı
-              href: ./spark/apache-spark-performance.md
-            - name: Hyperspace dizinlerini kullanarak Apache Spark için performans iyileştirmesi
-              href: ./spark/apache-spark-performance-hyperspace.md
-        - name: Yönetme ve izleme
-          items:
-            - name: Spark havuz geçmişi sunucusu
-              href: ./spark/apache-spark-history-server.md
-            - name: Spark uygulamalarını izleme
-              href: monitoring/apache-spark-applications.md
-            - name: Apache Spark havuzları
-              href: monitoring/how-to-monitor-spark-pools.md
-            - name: Apache Spark ile JSON analizi yapma
-              href: how-to-analyze-complex-schema.md
-        - name: Verileri alma ve hazırlama
-          items:
-            - name: SQL Veri Ambarı
-              href: ./spark/synapse-spark-sql-pool-import-export.md
-            - name: JSON dosyasını analiz etme
-              href: how-to-analyze-complex-schema.md
-- name: Synapse Link
-  items:
-    - name: Genel Bakış
-      items:
-        - name: Azure Cosmos DB için Synapse Link
-          href: ../cosmos-db/synapse-link.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-    - name: Hızlı Başlangıçlar
-      items:
-        - name: Cosmos DB için Synapse Link’e bağlanma
-          href: quickstart-connect-synapse-link-cosmos-db.md
-    - name: Kavramlar
-      items:
-        - name: Analiz Mağazasına Genel Bakış
-          href: ../cosmos-db/analytical-store-introduction.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Desteklenen Synapse Link özellikleri
-          href: ./synapse-link/concept-synapse-link-cosmos-db-support.md
-        - name: Synapse Link hakkında SSS
-          href: ../cosmos-db/synapse-link-frequently-asked-questions.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Synapse Link kullanım örnekleri
-          href: ../cosmos-db/synapse-link-use-cases.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-    - name: Nasıl yapılır kılavuzları
-      items:
-        - name: Synapse Link’i yapılandırma
-          href: ../cosmos-db/configure-synapse-link.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Cosmos DB için Azure Synapse Link’e bağlanma
-          href: ./synapse-link/how-to-connect-synapse-link-cosmos-db.md
-        - name: Azure Cosmos DB’yi analiz etmek için Power BI’ı ve sunucusuz SQL havuzu kullanma
-          href: ../cosmos-db/synapse-link-power-bi.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Apache Spark ile Azure Cosmos DB analiz deposunu sorgulama
-          href: ./synapse-link/how-to-query-analytical-store-spark.md
-        - name: Apache Spark kullanarak Synapse Link’ten ayrılmış bir SQL havuzuna veri kopyalama
-          href: ./synapse-link/how-to-copy-to-sql-pool.md
-        - name: Sunucusuz SQL havuzu ile Azure Cosmos DB analiz deposunu sorgulama
-          href: sql/query-cosmos-db-analytical-store.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-- name: İşlem hattı ve veri akışı
-  items:
-    - name: Hızlı Başlangıçlar
-      items:
-        - name: Kopyalama etkinliği kullanarak SQL havuzlarına veri yükleme
-          href: quickstart-copy-activity-load-sql-pool.md
-        - name: Eşleme veri akışlarını kullanarak verileri dönüştürme
-          href: quickstart-data-flow.md
-    - name: Kavramlar
-      items:
-        - name: İşlem hattı ve etkinlik
-          href: ../data-factory/concepts-pipelines-activities.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Bağlı hizmetler
-          href: ../data-factory/concepts-linked-services.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Veri kümeleri
-          href: ../data-factory/concepts-datasets-linked-services.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Yürütme ve tetikleme
-          href: ../data-factory/concepts-pipeline-execution-triggers.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Tümleştirme çalışma zamanı
-          href: ../data-factory/concepts-integration-runtime.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Azure Data Factory ile arasındaki farklar
-          href: ./data-integration/concepts-data-factory-differences.md
-        - name: Veri akışları
-          items:
-            - name: Veri akışına genel bakış
-              href: concepts-data-flow-overview.md
-            - name: Hata ayıklama modu
-              href: ../data-factory/concepts-data-flow-debug-mode.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Schema Drift
-              href: ../data-factory/concepts-data-flow-schema-drift.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Sütun desenleri
-              href: ../data-factory/concepts-data-flow-column-pattern.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Veri akışını izleme
-              href: ../data-factory/concepts-data-flow-monitoring.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Veri akışı performansı
-              href: ../data-factory/concepts-data-flow-performance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Yönetim grafı
-              href: ../data-factory/concepts-data-flow-manage-graph.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İfade oluşturucusu
-              href: ../data-factory/concepts-data-flow-expression-builder.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İfade dili
-              href: ../data-factory/data-flow-expression-functions.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-    - name: Nasıl yapılır kılavuzları
-      items:
-        - name: Yazma
-          items:
-            - name: Veri fabrikalarını görsel olarak yazma
-              href: ../data-factory/author-visually.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Yinelemeli geliştirme ve hata ayıklama
-              href: ../data-factory/iterative-development-debugging.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Bağlayıcılar
-          items:
-            - name: Bağlayıcıya genel bakış
-              href: ../data-factory/connector-overview.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Amazon Marketplace Web Service
-              href: ../data-factory/connector-amazon-marketplace-web-service.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Amazon Redshift
-              href: ../data-factory/connector-amazon-redshift.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Amazon S3
-              href: ../data-factory/connector-amazon-simple-storage-service.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Avro biçimi
-              href: ../data-factory/format-avro.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Blob Depolama
-              href: ../data-factory/connector-azure-blob-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Bilişsel Arama
-              href: ../data-factory/connector-azure-search.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Cosmos DB SQL API
-              href: ../data-factory/connector-azure-cosmos-db.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: MongoDB için Azure Cosmos DB API'si
-              href: ../data-factory/connector-azure-cosmos-db-mongodb-api.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Veri Gezgini
-              href: ../data-factory/connector-azure-data-explorer.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Data Lake Storage Gen1
-              href: ../data-factory/connector-azure-data-lake-store.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Data Lake Storage Gen2
-              href: ../data-factory/connector-azure-data-lake-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: MariaDB için Azure Veritabanı
-              href: ../data-factory/connector-azure-database-for-mariadb.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: MySQL için Azure Veritabanı
-              href: ../data-factory/connector-azure-database-for-mysql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: PostgreSQL için Azure Veritabanı
-              href: ../data-factory/connector-azure-database-for-postgresql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Databricks Delta Lake
-              href: ../data-factory/connector-azure-databricks-delta-lake.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Dosya Depolama
-              href: ../data-factory/connector-azure-file-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure SQL Veritabanı
-              href: ../data-factory/connector-azure-sql-database.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure SQL Yönetilen Örnek
-              href: ../data-factory/connector-azure-sql-managed-instance.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
-            - name: Azure Synapse Analytics
-              href: ../data-factory/connector-azure-sql-data-warehouse.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Azure Table Storage
-              href: ../data-factory/connector-azure-table-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İkili biçim
-              href: ../data-factory/format-binary.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Cassandra
-              href: ../data-factory/connector-cassandra.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Common Data Model biçimi
-              href: ../data-factory/format-common-data-model.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Uygulamalar için Common Data Service
-              href: ../data-factory/connector-dynamics-crm-office-365.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Concur
-              href: ../data-factory/connector-concur.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Couchbase
-              href: ../data-factory/connector-couchbase.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: DB2
-              href: ../data-factory/connector-db2.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Sınırlandırılmış metin biçimi
-              href: ../data-factory/format-delimited-text.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Drill
-              href: ../data-factory/connector-drill.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Dynamics 365
-              href: ../data-factory/connector-dynamics-crm-office-365.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Dynamics AX
-              href: ../data-factory/connector-dynamics-ax.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Dynamics CRM
-              href: ../data-factory/connector-dynamics-crm-office-365.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Excel biçimi
-              href: ../data-factory/format-excel.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Dosya Sistemi
-              href: ../data-factory/connector-file-system.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: FTP
-              href: ../data-factory/connector-ftp.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: GitHub
-              href: ../data-factory/connector-github.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Google AdWords
-              href: ../data-factory/connector-google-adwords.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Google BigQuery
-              href: ../data-factory/connector-google-bigquery.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Google Cloud Storage
-              href: ../data-factory/connector-google-cloud-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Greenplum
-              href: ../data-factory/connector-greenplum.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HBase
-              href: ../data-factory/connector-hbase.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HDFS
-              href: ../data-factory/connector-hdfs.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Hive
-              href: ../data-factory/connector-hive.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HTTP
-              href: ../data-factory/connector-http.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HubSpot
-              href: ../data-factory/connector-hubspot.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Impala
-              href: ../data-factory/connector-impala.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Informix
-              href: ../data-factory/connector-informix.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Jira
-              href: ../data-factory/connector-jira.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: JSON biçimi
-              href: ../data-factory/format-json.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Magento
-              href: ../data-factory/connector-magento.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: MariaDB
-              href: ../data-factory/connector-mariadb.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Marketo
-              href: ../data-factory/connector-marketo.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Microsoft Access
-              href: ../data-factory/connector-microsoft-access.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: MongoDB
-              href: ../data-factory/connector-mongodb.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-              items:
-                - name: MongoDB (eski)
-                  href: ../data-factory/connector-mongodb-legacy.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: MongoDB Atlas
-              href: ../data-factory/connector-mongodb-atlas.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: MySQL
-              href: ../data-factory/connector-mysql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Netezza
-              href: ../data-factory/connector-netezza.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: OData
-              href: ../data-factory/connector-odata.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: ODBC
-              href: ../data-factory/connector-odbc.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Office 365
-              href: ../data-factory/connector-office-365.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Oracle
-              href: ../data-factory/connector-oracle.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Oracle Eloqua
-              href: ../data-factory/connector-oracle-eloqua.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Oracle Responsys
-              href: ../data-factory/connector-oracle-responsys.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Oracle Service Cloud
-              href: ../data-factory/connector-oracle-service-cloud.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: ORC biçimi
-              href: ../data-factory/format-orc.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Parquet biçimi
-              href: ../data-factory/format-parquet.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: PayPal
-              href: ../data-factory/connector-paypal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Phoenix
-              href: ../data-factory/connector-phoenix.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: PostgreSQL
-              href: ../data-factory/connector-postgresql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Presto
-              href: ../data-factory/connector-presto.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: QuickBooks Online
-              href: ../data-factory/connector-quickbooks.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: REST
-              href: ../data-factory/connector-rest.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Salesforce
-              href: ../data-factory/connector-salesforce.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Salesforce Service Cloud
-              href: ../data-factory/connector-salesforce-service-cloud.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Salesforce Marketing Cloud
-              href: ../data-factory/connector-salesforce-marketing-cloud.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: SAP Business Warehouse Açık Hub'ı
-              href: ../data-factory/connector-sap-business-warehouse-open-hub.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-              items:
-                - name: SAP BW verilerini yükleme
-                  href: ../data-factory/load-sap-bw-data.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: SAP Business Warehouse MDX
-              href: ../data-factory/connector-sap-business-warehouse.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Müşteri için SAP Cloud
-              href: ../data-factory/connector-sap-cloud-for-customer.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: SAP ECC
-              href: ../data-factory/connector-sap-ecc.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: SAP HANA
-              href: ../data-factory/connector-sap-hana.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: SAP Tablosu
-              href: ../data-factory/connector-sap-table.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: ServiceNow
-              href: ../data-factory/connector-servicenow.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: SFTP
-              href: ../data-factory/connector-sftp.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: SharePoint Online Listesi
-              href: ../data-factory/connector-sharepoint-online-list.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Shopify
-              href: ../data-factory/connector-shopify.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Snowflake
-              href: ../data-factory/connector-snowflake.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Spark
-              href: ../data-factory/connector-spark.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: SQL Server
-              href: ../data-factory/connector-sql-server.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Square
-              href: ../data-factory/connector-square.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Sybase
-              href: ../data-factory/connector-sybase.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Teradata
-              href: ../data-factory/connector-teradata.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Vertica
-              href: ../data-factory/connector-vertica.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Web Tablosu
-              href: ../data-factory/connector-web-table.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Xero
-              href: ../data-factory/connector-xero.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: XML biçimi
-              href: ../data-factory/format-xml.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Zoho
-              href: ../data-factory/connector-zoho.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Veri taşıma
-          items:
-            - name: Kopyalama Etkinliği’ni kullanarak veri kopyalama
-              href: ../data-factory/copy-activity-overview.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Kopyalama etkinliğini izleme
-              href: ../data-factory/copy-activity-monitoring.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Silme Etkinliği'ni kullanarak dosyaları silme
-              href: ../data-factory/delete-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Veri Kopyalama aracı
-              href: ../data-factory/copy-data-tool.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Biçimlendirme ve sıkıştırma desteği
-              href: ../data-factory/supported-file-formats-and-compression-codecs.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Kopyalama etkinliği performansı
-              items:
-                - name: Performans ve ölçeklenebilirlik kılavuzu
-                  href: ../data-factory/copy-activity-performance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Performans sorunlarını giderme
-                  href: ../data-factory/copy-activity-performance-troubleshooting.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-                - name: Performans özellikleri
-                  href: ../data-factory/copy-activity-performance-features.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Meta verileri ve ACL'leri koruma
-              href: ../data-factory/copy-activity-preserve-metadata.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Şema ve tür eşlemesi
-              href: ../data-factory/copy-activity-schema-and-type-mapping.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Hataya dayanıklılık
-              href: ../data-factory/copy-activity-fault-tolerance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Veri tutarlılığı doğrulama
-              href: ../data-factory/copy-activity-data-consistency.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Biçimlendirme ve sıkıştırma desteği (eski)
-              href: ../data-factory/supported-file-formats-and-compression-codecs-legacy.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Verileri dönüştürme
-          href: ../data-factory/transform-data.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-          items:
-            - name: Azure İşlev Etkinliği
-              href: ../data-factory/control-flow-azure-function-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Özel Etkinlik
-              href: ../data-factory/transform-data-using-dotnet-custom-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Databricks Jar Etkinliği
-              href: ../data-factory/transform-data-databricks-jar.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Databricks Not Defteri Etkinliği
-              href: ../data-factory/transform-data-databricks-notebook.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Databricks Python Etkinliği
-              href: ../data-factory/transform-data-databricks-python.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Data Lake U-SQL Etkinliği
-              href: ../data-factory/transform-data-using-data-lake-analytics.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HDInsight Hive Etkinliği
-              href: ../data-factory/transform-data-using-hadoop-hive.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HDInsight MapReduce Etkinliği
-              href: ../data-factory/transform-data-using-hadoop-map-reduce.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HDInsight Pig Etkinliği
-              href: ../data-factory/transform-data-using-hadoop-pig.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HDInsight Spark Etkinliği
-              href: ../data-factory/transform-data-using-spark.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: HDInsight Akış Etkinliği
-              href: ../data-factory/transform-data-using-hadoop-streaming.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Machine Learning İşlem Hattı Yürütme Etkinliği
-              href: ../data-factory/transform-data-machine-learning-service.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Machine Learning Studio (klasik) Batch Yürütme Etkinliği
-              href: ../data-factory/transform-data-using-machine-learning.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Machine Learning Studio (klasik) Kaynak Güncelleştirme Etkinliği
-              href: ../data-factory/update-machine-learning-models.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Saklı Yordam Etkinliği
-              href: ../data-factory/transform-data-using-stored-procedure.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İşlem bağlantılı hizmetler
-              href: ../data-factory/compute-linked-services.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Denetim akışı
-          items:
-            - name: Değişken Etkinlik Ekleme
-              href: ../data-factory/control-flow-append-variable-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Veri Akışı Etkinliğini Yürütme
-              href: ../data-factory/control-flow-execute-data-flow-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İşlem Hattı Çalıştırma Etkinliği
-              href: ../data-factory/control-flow-execute-pipeline-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Filtre Etkinliği
-              href: ../data-factory/control-flow-filter-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Her Bir Etkinlik için
-              href: ../data-factory/control-flow-for-each-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Meta Veri Alma Etkinliği
-              href: ../data-factory/control-flow-get-metadata-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: If Condition Etkinliği
-              href: ../data-factory/control-flow-if-condition-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Arama Etkinliği
-              href: ../data-factory/control-flow-lookup-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Değişken Etkinlik Ayarlama
-              href: ../data-factory/control-flow-set-variable-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Until Etkinliği
-              href: ../data-factory/control-flow-until-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Doğrulama Etkinliği
-              href: ../data-factory/control-flow-validation-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Wait Etkinliği
-              href: ../data-factory/control-flow-wait-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Web Etkinliği
-              href: ../data-factory/control-flow-web-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Web Kancası Etkinliği
-              href: ../data-factory/control-flow-webhook-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Veri akışı dönüşümleri
-          items:
-            - name: Dönüştürmeye genel bakış
-              href: ../data-factory/data-flow-transformation-overview.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Toplama
-              href: ../data-factory/data-flow-aggregate.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Satırı değiştirme
-              href: ../data-factory/data-flow-alter-row.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Koşullu bölme
-              href: ../data-factory/data-flow-conditional-split.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Türetilmiş sütun
-              href: ../data-factory/data-flow-derived-column.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Var
-              href: ../data-factory/data-flow-exists.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Filtre
-              href: ../data-factory/data-flow-filter.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Düzleştirme
-              href: ../data-factory/data-flow-flatten.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Birleştir
-              href: ../data-factory/data-flow-join.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Arama
-              href: ../data-factory/data-flow-lookup.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Yeni dal
-              href: ../data-factory/data-flow-new-branch.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Pivot
-              href: ../data-factory/data-flow-pivot.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Derece
-              href: ../data-factory/data-flow-rank.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: 'Şunu seçin:'
-              href: ../data-factory/data-flow-select.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Havuz
-              href: ../data-factory/data-flow-sink.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Sırala
-              href: ../data-factory/data-flow-sort.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Kaynak
-              href: ../data-factory/data-flow-source.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Vekil anahtar
-              href: ../data-factory/data-flow-surrogate-key.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Birleşim
-              href: ../data-factory/data-flow-union.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Özetlemeyi açma
-              href: ../data-factory/data-flow-unpivot.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Pencere
-              href: ../data-factory/data-flow-window.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Parametreleştirme
-          items:
-            - name: Bağlı hizmetleri parametreleştirme
-              href: ../data-factory/parameterize-linked-services.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: İfade Dili
-              href: ../data-factory/control-flow-expression-language-functions.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Sistem değişkenleri
-              href: ../data-factory/control-flow-system-variables.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Veri akışı parametreleri
-              href: ../data-factory/parameters-data-flow.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Yönetme ve izleme
-          items:
-            - name: İşlem hattı çalıştırmaları
-              href: monitoring/how-to-monitor-pipeline-runs.md
-        - name: Tümleştirme çalışma zamanı oluşturma
-          items:
-            - name: Azure tümleştirme çalışma zamanı
-              href: ../data-factory/create-azure-integration-runtime.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Kendinden konak tümleştirme çalışma zamanı
-              href: ../data-factory/create-self-hosted-integration-runtime.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Tetikleyici oluşturma
-          items:
-            - name: Olay tabanlı tetikleyici oluşturma
-              href: ../data-factory/how-to-create-event-trigger.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Zamanlama tetikleyicisi oluşturma
-              href: ../data-factory/how-to-create-schedule-trigger.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Atlayan pencere tetikleyicisi oluşturma
-              href: ../data-factory/how-to-create-tumbling-window-trigger.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Atlayan pencere tetikleyici bağımlılığı oluşturma
-              href: ../data-factory/tumbling-window-trigger-dependency.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Sorun giderme kılavuzu
-          items:
-            - name: Etkinlik sorun giderme
-              href: ../data-factory/data-factory-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Bağlayıcı sorunlarını giderme
-              href: ../data-factory/connector-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Sürekli Tümleştirme ve Dağıtım
-              href: ../data-factory/ci-cd-github-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Güvenlik ve erişim denetimi
-              href: ../data-factory/security-and-access-control-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-            - name: Şirket içinde barındırılan tümleştirme çalışma zamanlarında sorun giderme
-              href: ../data-factory/self-hosted-integration-runtime-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-- name: Machine Learning
-  items:
-    - name: Genel Bakış
-      items:
-        - name: Azure Synapse’te makine öğrenmesi nedir?
-          href: machine-learning/what-is-machine-learning.md
-    - name: Hızlı başlangıçlar
-      items:
-        - name: Azure Machine Learning bağlantılı yeni bir hizmet oluşturma
-          href: machine-learning/quickstart-integrate-azure-machine-learning.md
-    - name: Kavramlar
-      items:
-        - name: Modelleri eğitme
-          href: ./spark/apache-spark-machine-learning-training.md
-    - name: Öğreticiler
-      items:
-        - name: Apache Spark ile verileri görselleştirme
-          displayname: machine learning
-          href: ./spark/apache-spark-data-visualization-tutorial.md
-        - name: Ayrılmış SQL havuzları için puanlama sihirbazını kullanma
-          displayname: machine learning
-          href: machine-learning/tutorial-sql-pool-model-scoring-wizard.md
-        - name: Otomatik makine öğrenmesi ile kod olmadan model eğitme
-          displayname: machine learning
-          href: ./machine-learning/tutorial-automl.md
-        - name: Otomatik makine öğrenmesi ile Python’da model eğitme
-          displayname: machine learning
-          href: ./spark/apache-spark-azure-machine-learning-tutorial.md
-        - name: Apache Spark MLlib ile model oluşturma
-          displayname: machine learning
-          href: ./spark/apache-spark-machine-learning-mllib-notebook.md
-        - name: Azure Synapse için Bilişsel Hizmetler’i yapılandırma
-          href: ./machine-learning/tutorial-configure-cognitive-services-synapse.md
-        - name: Bilişsel Hizmetler ile yaklaşım analizi
-          href: ./machine-learning/tutorial-cognitive-services-sentiment.md
-        - name: Bilişsel Hizmetler ile anomali algılama
-          href: ./machine-learning/tutorial-cognitive-services-anomaly.md
-        - name: Apache Spark için Microsoft Machine Learning kullanarak makine öğrenimi uygulamaları oluşturma (Önizleme)
-          href: ./machine-learning/tutorial-build-applications-use-mmlspark.md
-- name: Veri Kataloğu ve İdare
-  items:
-    - name: Hızlı Başlangıçlar
-      items:
-        - name: Azure Purview Hesabı bağlama
-          href: ./catalog-and-governance/quickstart-connect-azure-purview.md
-    - name: Nasıl yapılır kılavuzları
-      items:
-        - name: 'Azure Purview’ı kullanarak Synapse’te verileri keşfedin, bağlayın ve inceleyin'
-          href: ./catalog-and-governance/how-to-discover-connect-analyze-azure-purview.md
-- name: Nasıl yapılır
-  items:
-    - name: Maliyetleri planlama ve yönetme
-      href: plan-manage-costs.md
-- name: Başvuru
-  items:
-    - name: Azure CLI
-      href: /cli/azure/ext/synapse/
-    - name: Veritabanı harmanlama türleri
-      href: sql/reference-collation-types.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-    - name: Başlayın
-      href: 'https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/services/preview/synapse@v43.3.0+incompatible'
-    - name: .NET
-      href: /dotnet/api/microsoft.azure.management.synapse?view=azure-dotnet-preview
-    - name: Azure PowerShell
-      href: /powershell/module/az.synapse?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-    - name: REST API'leri
-      href: /rest/api/synapse/
-    - name: Microsoft Spark Yardımcı Programları
-      href: ./spark/microsoft-spark-utilities.md
-    - name: Örnekler
-      href: 'https://github.com/Azure-Samples/Synapse'
-    - name: Sistem görünümleri
-      href: sql/reference-tsql-system-views.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-    - name: Azure İlkesi yerleşik ilkeler
-      displayName: 'samples, policies, definitions'
-      href: ./policy-reference.md
-    - name: T-SQL
-      items:
-        - name: Tam başvuru
-          href: /sql/t-sql/language-reference/
-        - name: Synapse SQL T-SQL dil öğeleri
-          href: ./sql-data-warehouse/sql-data-warehouse-reference-tsql-language-elements.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Synapse SQL T-SQL deyimleri
-          href: ./sql-data-warehouse/sql-data-warehouse-reference-tsql-statements.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-- name: Kaynaklar
-  items:
-    - name: Azure Yol Haritası
-      href: 'https://azure.microsoft.com/roadmap/?category=databases'
-    - name: Microsoft Soru-Cevap soru sayfası
-      href: /answers/topics/azure-synapse-analytics.html
-    - name: Özellik istekleri
-      href: 'https://feedback.azure.com/forums/307516-sql-data-warehouse/'
-    - name: Fiyatlandırma
-      href: 'https://azure.microsoft.com/pricing/details/synapse-analytics/'
-    - name: Fiyatlandırma hesaplayıcı
-      href: 'https://azure.microsoft.com/pricing/calculator/'
-    - name: Sorular ve Yanıtlar
-      href: /answers/questions/topics/single/25423.html
-    - name: Hizmet güncelleştirmeleri
-      href: 'https://azure.microsoft.com/updates/?product=sql-data-warehouse'
-    - name: Stack Overflow
-      href: 'https://stackoverflow.com/questions/tagged/azure-synapse/'
-    - name: Destek
-      href: ./sql-data-warehouse/sql-data-warehouse-get-started-create-support-ticket.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-    - name: Müşteri kendi kendine yardımı
-      items:
-        - name: sunucusuz SQL havuzu
-          href: sql/resources-self-help-sql-on-demand.md
-    - name: İş Ortakları
-      items:
-        - name: İş zekası
-          href: ./sql-data-warehouse/sql-data-warehouse-partner-business-intelligence.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Veri tümleştirmesi
-          href: ./sql-data-warehouse/sql-data-warehouse-partner-data-integration.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Veri yönetimi
-          href: ./sql-data-warehouse/sql-data-warehouse-partner-data-management.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Makine öğrenimi ve AI
-          href: ./sql-data-warehouse/sql-data-warehouse-partner-machine-learning-ai.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Sistem tümleştirme
-          href: ./sql-data-warehouse/sql-data-warehouse-partner-system-integration.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
-        - name: Üçüncü taraf uygulamalarla uyumluluk sorunları
-          href: ./sql-data-warehouse/sql-data-warehouse-partner-compatibility-issues.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+items:
+  - name: Azure Synapse Analytics
+    href: index.yml
+  - name: Adanmış SQL havuzuna geç (eski adıyla SQL DW) >
+    href: ./sql-data-warehouse/sql-data-warehouse-overview-what-is.md
+  - name: Genel Bakış
+    items:
+      - name: Azure Synapse nedir?
+        href: overview-what-is.md
+        displayName: overview
+      - name: Terminoloji
+        href: overview-terminology.md
+      - name: SSS
+        href: overview-faq.md
+  - name: Hızlı Başlangıçlar
+    expanded: true
+    items:
+      - name: Kullanmaya başlayın
+        href: get-started.md
+        displayName: 'get, started, quickstart'
+      - name: 1 Synapse çalışma alanı oluşturma
+        href: get-started-create-workspace.md
+        displayName: 'get, started'
+      - name: 2 sunucusuz SQL havuzu kullanarak çözümle
+        href: get-started-analyze-sql-on-demand.md
+        displayName: 'get, started'
+      - name: 3 sunucusuz Spark havuzunu kullanarak çözümle
+        href: get-started-analyze-spark.md
+        displayName: 'get, started'
+      - name: 4 adanmış bir SQL havuzu kullanarak çözümleme
+        href: get-started-analyze-sql-pool.md
+        displayName: 'get, started'
+      - name: 5 Depolama hesabındaki verileri analiz etme
+        href: get-started-analyze-storage.md
+        displayName: 'get, started'
+      - name: 6 İşlem hatlarıyla tümleştirme
+        href: get-started-pipelines.md
+        displayName: 'get, started'
+      - name: 7 Power BI ile görselleştirme
+        href: get-started-visualize-power-bi.md
+        displayName: 'get, started'
+      - name: 8 İzleme
+        href: get-started-monitor.md
+        displayName: 'get, started'
+      - name: 9 Bilgi Merkezi’ni keşfetme
+        href: get-started-knowledge-center.md
+        displayName: 'get, started'
+      - name: 10 yönetici ekleme
+        href: get-started-add-admin.md
+        displayName: 'get, started'
+  - name: Çalışma alanı
+    items:
+      - name: Hızlı Başlangıçlar
+        items:
+          - name: Çalışma alanı oluşturma
+            items:
+              - name: Azure portal
+                href: quickstart-create-workspace.md
+                displayName: quickstart
+              - name: Azure CLI
+                href: quickstart-create-workspace-cli.md
+                displayName: quickstart
+              - name: Azure PowerShell
+                href: quickstart-create-workspace-powershell.md
+                displayName: quickstart
+              - name: ARM şablonu
+                href: quickstart-deployment-template-workspaces.md
+            displayName: quickstart
+          - name: Power BI çalışma alanına bağlanma
+            href: quickstart-power-bi.md
+            displayName: quickstart
+          - name: ADLS 2. Pandas dataframe içine oku
+            href: quickstart-read-from-gen2-to-pandas-dataframe.md
+            displayName: quickstart
+          - name: Azure Veri Gezgini'ne bağlanma
+            href: quickstart-connect-azure-data-explorer.md
+            displayName: quickstart
+        '-name': null
+      - name: Kavramlar
+        items:
+          - name: Paylaşılan meta veri yönetimi
+            items:
+              - name: Genel Bakış
+                href: metadata/overview.md
+              - name: Meta veri nesneleri
+                items:
+                  - name: Paylaşılan veritabanları
+                    href: metadata/database.md
+                  - name: Paylaşılan tablolar
+                    href: metadata/table.md
+              - name: Kod yapıtları
+                items:
+                  - name: Apache Spark Notebooks
+                    href: ./spark/apache-spark-development-using-notebooks.md
+                  - name: SQL betiği
+                    href: ./sql/author-sql-script.md
+                    displayname: author
+                  - name: Veri Akışı
+                    href: concepts-data-flow-overview.md
+          - name: Bakım zamanlaması
+            href: ./sql-data-warehouse/maintenance-scheduling.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Kaynak denetimi
+            href: ./cicd/source-control.md
+          - name: Sürekli tümleştirme ve teslim
+            href: ./cicd/continuous-integration-deployment.md
+          - name: Güvenlik
+            items:
+              - name: Azure Ilkesine göre güvenlik denetimleri
+                href: ./security-controls-policy.md
+              - name: Şifreleme
+                href: ./security/workspaces-encryption.md
+              - name: Ağ Güvenliği
+                items:
+                  - name: Synapse çalışma alanı IP güvenlik duvarı kuralları
+                    href: ./security/synapse-workspace-ip-firewall.md
+                  - name: Bağlantı ayarları
+                    href: ./security/connectivity-settings.md
+                  - name: Synapse çalışma alanı Yönetilen sanal ağ
+                    href: ./security/synapse-workspace-managed-vnet.md
+                    displayname: vnet
+                  - name: Synapse çalışma alanı Yönetilen özel uç noktalar
+                    href: ./security/synapse-workspace-managed-private-endpoints.md
+                  - name: Synapse çalışma alanı - veri sızdırma koruması
+                    href: ./security/workspace-data-exfiltration-protection.md
+                  - name: Synapse çalışma alanı ile özel bağlantı merkezleri
+                    href: ./security/synapse-private-link-hubs.md
+                  - name: Güvenli depolama hesabına Bağlan
+                    href: ./security/connect-to-a-secure-storage-account.md
+              - name: Kimlik doğrulaması ve geçiş
+                items:
+                  - name: Azure Active Directory
+                    href: ./sql/active-directory-authentication.md
+                    displayname: authentication
+                  - name: Multi-factor authentication
+                    href: ./sql/mfa-authentication.md
+                  - name: SQL yetkilendirmesi
+                    href: ./sql/sql-authentication.md
+              - name: Erişim denetimi
+                items:
+                  - name: Genel Bakış
+                    href: ./security/synapse-workspace-access-control-overview.md
+                  - name: Synapse RBAC
+                    href: ./security/synapse-workspace-synapse-rbac.md
+                  - name: Synapse RBAC rolleri
+                    href: ./security/synapse-workspace-synapse-rbac-roles.md
+                  - name: Synapse RBAC rollerini anlama
+                    href: ./security/synapse-workspace-understand-what-role-you-need.md
+                  - name: Synapse çalışma alanı yönetilen kimlik
+                    href: ./security/synapse-workspace-managed-identity.md
+      - name: Nasıl yapılır kılavuzları
+        items:
+          - name: Yönetme ve İzleme
+            items:
+              - name: 'Azure İzleyici ölçümleri, uyarıları ve günlükleri'
+                href: monitoring/how-to-monitor-using-azure-monitor.md
+          - name: Güvenlik
+            items:
+              - name: Erişim denetimini yönetme
+                items:
+                  - name: Erişim denetimini ayarlama
+                    href: ./security/how-to-set-up-access-control.md
+                  - name: Synapse rol atamalarını inceleme
+                    href: ./security/how-to-review-synapse-rbac-role-assignments.md
+                  - name: Synapse rol atamalarını yönetme
+                    href: ./security/how-to-manage-synapse-rbac-role-assignments.md
+                  - name: Azure Synapse çalışma alanı yönetilen kimliği için izinleri ayarlama
+                    href: security/how-to-grant-workspace-managed-identity-permissions.md
+                    displayname: grant
+              - name: Veri sızdırma koruması
+                items:
+                  - name: Veri sızdırma koruması içeren bir çalışma alanını oluşturma ve yönetme
+                    href: security/how-to-create-a-workspace-with-data-exfiltration-protection.md
+              - name: Özel uç noktaları yönetme
+                items:
+                  - name: Veri kaynaklarına Yönetilen özel uç noktaları ayarlama
+                    href: security/how-to-create-managed-private-endpoints.md
+                  - name: Azure Synapse çalışma alanına özel uç noktalarla bağlanma
+                    href: security/how-to-connect-to-workspace-with-private-links.md
+                    displayname: links
+                  - name: Yönetilen VNet ile bağlantılı hizmet sağlama ve güvenliğini sağlama
+                    href: ./data-integration/linked-service.md
+                  - name: Kısıtlanmış ağdan Synapse çalışma alanına bağlanma
+                    href: security/how-to-connect-to-workspace-from-restricted-network.md
+          - name: Sorun giderme
+            items:
+              - name: Synapse Studio sorunlarını giderme
+                href: troubleshoot/troubleshoot-synapse-studio.md
+              - name: Synapse Studio bağlantı sorunlarını giderme
+                href: troubleshoot/troubleshoot-synapse-studio-powershell.md
+                displayname: powershell
+              - name: Synapse Studio ve depolama alanı arasındaki bağlantı sorunlarını giderme
+                href: troubleshoot/troubleshoot-synapse-studio-and-storage-connectivity.md
+              - name: SDK tarafından oluşturulan çalışma alanları ile ilgili sorunları giderme
+                href: troubleshoot/workspaces-created-by-sdk.md
+              - name: UTF-8 metin okuma sorunlarını giderme
+                href: troubleshoot/reading-utf8-text.md
+  - name: Geçiş kılavuzları
+    items:
+      - name: Adanmış bir SQL havuzuna geçiş
+        href: migration-guides/migrate-to-synapse-analytics-guide.md
+  - name: Synapse SQL
+    items:
+      - name: Genel Bakış
+        items:
+          - name: Synapse SQL mimarisi
+            href: sql/overview-architecture.md
+            displayName: overview
+          - name: Sunucusuz SQL havuzu
+            href: sql/on-demand-workspace-overview.md
+            displayname: overview
+          - name: Ayrılmış SQL havuzu
+            href: ./sql-data-warehouse/sql-data-warehouse-overview-what-is.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+            displayname: overview
+          - name: Mimari
+            href: ./sql-data-warehouse/massively-parallel-processing-mpp-architecture.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Özelliklere genel bakış
+            href: sql/overview-features.md
+          - name: Kaynak tüketimi modelleri
+            href: sql/resource-consumption-models.md
+          - name: Kapasite sınırları
+            href: ./sql-data-warehouse/sql-data-warehouse-service-capacity-limits.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Sunucusuz SQL havuzu için maliyet yönetimi
+            href: sql/data-processed.md
+          - name: Sunucusuz SQL havuzu için en iyi yöntemler
+            href: sql/best-practices-serverless-sql-pool.md
+          - name: Ayrılmış SQL havuzu için en iyi yöntemler
+            href: sql/best-practices-dedicated-sql-pool.md
+      - name: Hızlı Başlangıçlar
+        items:
+          - name: Sunucusuz SQL havuzu kullanma
+            href: quickstart-sql-on-demand.md
+          - name: Synapse Studio kullanarak ayrılmış SQL havuzu oluşturma
+            href: quickstart-create-sql-pool-studio.md
+          - name: Azure portal kullanarak ayrılmış SQL havuzu oluşturma
+            href: quickstart-create-sql-pool-portal.md
+          - name: Azure portalı kullanarak duraklatma ve sürdürme
+            href: ./sql-data-warehouse/pause-and-resume-compute-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Ayrılmış SQL havuzlarıyla verileri yükleme
+            items:
+              - name: COPY ifadesi
+                href: ./sql-data-warehouse/quickstart-bulk-load-copy-tsql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                displayname: 'bulk, load'
+              - name: COPY deyimi örnekleri
+                href: ./sql-data-warehouse/quickstart-bulk-load-copy-tsql-examples.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                displayname: 'bulk, load'
+              - name: Synapse Studio
+                href: quickstart-load-studio-sql-pool.md
+                displayname: sql pool
+          - name: İş yükü yönetimi
+            items:
+              - name: İş yükü sınıflandırıcısı oluşturma
+                items:
+                  - name: Portal
+                    href: ./sql-data-warehouse/quickstart-create-a-workload-classifier-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: T-SQL
+                    href: ./sql-data-warehouse/quickstart-create-a-workload-classifier-tsql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İş yükü yalıtımı oluşturma
+                items:
+                  - name: Portal
+                    href: ./sql-data-warehouse/quickstart-configure-workload-isolation-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: T-SQL
+                    href: ./sql-data-warehouse/quickstart-configure-workload-isolation-tsql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+      - name: Öğreticiler
+        items:
+          - name: Sunucusuz SQL havuzu kullanarak verileri analiz etme
+            href: ./sql/tutorial-data-analyst.md
+          - name: Power BI Desktop
+            href: ./sql/tutorial-connect-power-bi-desktop.md
+      - name: Kavramlar
+        items:
+          - name: Yedekleme ve geri yükleme
+            href: ./sql-data-warehouse/backup-and-restore.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Veri alımı ve hazırlığı
+            items:
+              - name: Genel Bakış
+                href: ./sql-data-warehouse/design-elt-data-loading.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: En iyi uygulamalar
+                href: sql/data-loading-best-practices.md
+              - name: Columnstore sıkıştırması
+                href: sql/data-load-columnstore-compression.md
+              - name: Veri yüklemeye genel bakış
+                href: sql/load-data-overview.md
+          - name: Geliştirme
+            items:
+              - name: Genel Bakış
+                href: sql/develop-overview.md
+              - name: En iyi uygulamalar
+                href: sql/develop-best-practices.md
+              - name: Gerçekleştirilmiş görünüm
+                items:
+                  - name: Performans ayarlama kılavuzu
+                    displayname: 'materialized, view,'
+                    href: sql/develop-materialized-view-performance-tuning.md
+                  - name: Oluştur
+                    href: /sql/t-sql/statements/create-materialized-view-as-select-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                    displayname: 'materialized, view'
+                  - name: Değiştir
+                    href: /sql/t-sql/statements/alter-materialized-view-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                    displayname: 'materialized, view'
+              - name: Sıralı kümelenmiş columnstore dizini
+                items:
+                  - name: Performans ayarlama kılavuzu
+                    displayname: 'CCI, clustered, column, store'
+                    href: ./sql-data-warehouse/performance-tuning-ordered-CCI.md
+              - name: Sonuç kümesini önbelleğe alma
+                items:
+                  - name: Performans ayarlama kılavuzu
+                    href: ./sql-data-warehouse/performance-tuning-result-set-caching.md
+                  - name: Veritabanı için ayarlama
+                    href: /sql/t-sql/statements/alter-database-transact-sql-set-options?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest
+                  - name: Oturum için ayarlama
+                    href: /sql/t-sql/statements/set-result-set-caching-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest
+                  - name: Önbellek boyutunu denetleme
+                    href: /sql/t-sql/database-console-commands/dbcc-showresultcachespaceused-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest
+                  - name: Önbelleği temizleme
+                    href: /sql/t-sql/database-console-commands/dbcc-dropresultsetcache-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest
+              - name: Makine öğrenmesi tahminleri
+                href: ./sql-data-warehouse/sql-data-warehouse-predict.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Tablolar
+                items:
+                  - name: Genel Bakış
+                    href: sql/develop-tables-overview.md
+                  - name: CETAS
+                    href: sql/develop-tables-cetas.md
+                  - name: CTAS
+                    href: ./sql-data-warehouse/sql-data-warehouse-develop-ctas.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Veri türleri
+                    href: sql/develop-tables-data-types.md
+                  - name: Dağıtılmış tablolar
+                    href: ./sql-data-warehouse/sql-data-warehouse-tables-distribute.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Tablo düzeyinde kısıtlamalar
+                    href: ./sql-data-warehouse/sql-data-warehouse-table-constraints.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Dış tablolar
+                    href: sql/develop-tables-external-tables.md
+                  - name: Dizinler
+                    href: ./sql-data-warehouse/sql-data-warehouse-tables-index.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Kimlik
+                    href: ./sql-data-warehouse/sql-data-warehouse-tables-identity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: OPENROWSET
+                    href: sql/develop-openrowset.md
+                  - name: Bölümler
+                    href: ./sql-data-warehouse/sql-data-warehouse-tables-partition.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Çoğaltılmış tablolar
+                    href: ./sql-data-warehouse/design-guidance-for-replicated-tables.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: İstatistikler
+                    href: sql/develop-tables-statistics.md
+                  - name: Geçici
+                    href: sql/develop-tables-temporary.md
+              - name: T-SQL dil öğeleri
+                items:
+                  - name: Döngüler
+                    href: sql/develop-loops.md
+                  - name: Saklı yordamlar
+                    href: sql/develop-stored-procedures.md
+                  - name: İşlemler
+                    items:
+                      - name: Adanmış SQL havuzu işlemleri
+                        href: sql/develop-transactions.md
+                      - name: Adanmış SQL havuzu en iyi yöntemler işlemleri
+                        displayname: 'Transaction, best, practices'
+                        href: sql/develop-transaction-best-practices.md
+                  - name: Kullanıcı tanımlı şemalar
+                    href: sql/develop-user-defined-schemas.md
+                  - name: Değişken ataması
+                    href: sql/develop-variable-assignment.md
+                  - name: Görünümler
+                    href: sql/develop-views.md
+              - name: Sorgulama
+                items:
+                  - name: Dinamik SQL
+                    href: sql/develop-dynamic-sql.md
+                  - name: Seçeneklere göre gruplandırma
+                    href: sql/develop-group-by-options.md
+                  - name: Etiketler
+                    href: sql/develop-label.md
+                  - name: Depolama dosyaları
+                    items:
+                      - name: Genel Bakış
+                        href: sql/develop-storage-files-overview.md
+                      - name: Depolama Erişim Denetimi
+                        href: sql/develop-storage-files-storage-access-control.md
+                      - name: Azure Synapse dış tabloları için Apache Spark
+                        href: sql/develop-storage-files-spark-tables.md
+          - name: İzleme
+            items:
+              - name: Genel Bakış
+                href: ./sql-data-warehouse/sql-data-warehouse-overview-manageability-monitoring.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Kaynak kullanımı ve sorgu etkinliği
+                href: ./sql-data-warehouse/sql-data-warehouse-concept-resource-utilization-query-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Öneriler
+                href: ./sql-data-warehouse/sql-data-warehouse-concept-recommendations.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Güvenlik
+            items:
+              - name: Veritabanı erişim denetimi
+                href: ../azure-sql/database/logins-create-manage.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
+              - name: Veri güvenliği
+                items:
+                  - name: Sütun düzeyi güvenlik
+                    href: ./sql-data-warehouse/column-level-security.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Satır düzeyi güvenlik
+                    href: /sql/relational-databases/security/row-level-security?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Veri Şifrelemesi
+                items:
+                  - name: Saydam Veri Şifrelemesi’ne genel bakış
+                    href: ../azure-sql/database/transparent-data-encryption-tde-overview.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
+                  - name: Kendi anahtarını getir ile TDE
+                    href: ../azure-sql/database/transparent-data-encryption-byok-overview.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
+                    displayname: 'transparent, data, encryption'
+          - name: İş yükü yönetimi
+            items:
+              - name: Genel Bakış
+                href: ./sql-data-warehouse/sql-data-warehouse-workload-management.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                displayname: 'workload, management'
+              - name: İş yükü sınıflandırma
+                href: ./sql-data-warehouse/sql-data-warehouse-workload-classification.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İş yükü önem düzeyi
+                href: ./sql-data-warehouse/sql-data-warehouse-workload-importance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İş yükü yalıtımı
+                href: ./sql-data-warehouse/sql-data-warehouse-workload-isolation.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İş yükü yönetimi izleme
+                href: ./sql-data-warehouse/sql-data-warehouse-workload-management-portal-monitor.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Bellek ve eşzamanlılık sınırları
+                href: ./sql-data-warehouse/memory-concurrency-limits.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                displayname: 'workload, management'
+              - name: Kaynak sınıfları
+                href: ./sql-data-warehouse/resource-classes-for-workload-management.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                displayname: 'workload, management'
+      - name: Nasıl yapılır kılavuzları
+        items:
+          - name: Yedekleme ve geri yükleme
+            items:
+              - name: Geri yükleme noktası oluşturma
+                href: ./backuprestore/sqlpool-create-restore-point.md
+              - name: Adanmış bir SQL havuzunu geri yükleme
+                href: ./backuprestore/restore-sql-pool.md
+          - name: Yönetme ve izleme
+            items:
+              - name: SQL istekleri - Synapse Studio
+                href: monitoring/how-to-monitor-sql-requests.md
+              - name: SQL havuzları - Synapse Studio
+                href: monitoring/how-to-monitor-sql-pools.md
+              - name: Gen2 önbelleğini izleme
+                href: ./sql-data-warehouse/sql-data-warehouse-how-to-monitor-cache.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İş yükünüzü izleme - DMV’ler
+                href: ./sql-data-warehouse/sql-data-warehouse-manage-monitor.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İş yükünüzü izleme - portal
+                href: ./sql-data-warehouse/sql-data-warehouse-monitor-workload-portal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İş yüklerini yönetme
+                items:
+                  - name: İş yükünüzü çözümleme
+                    href: ./sql-data-warehouse/analyze-your-workload.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: İş yükü önem düzeyini yapılandırma
+                    href: ./sql-data-warehouse/sql-data-warehouse-how-to-configure-workload-importance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: İş yükü önem derecesini yönetme ve izleme
+                    href: ./sql-data-warehouse/sql-data-warehouse-how-to-manage-and-monitor-workload-importance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Kaynak sınıflarını iş yükü gruplarına dönüştürme
+                    href: ./sql-data-warehouse/sql-data-warehouse-how-to-convert-resource-classes-workload-groups.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Verileri alma ve hazırlama
+            items:
+              - name: Veri ambarına
+                items:
+                  - name: Azure Data Lake Storage
+                    href: ./sql-data-warehouse/sql-data-warehouse-load-from-azure-data-lake-store.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Data Factory
+                    href: ../data-factory/load-azure-sql-data-warehouse.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
+                  - name: Azure Databricks
+                    href: /azure/databricks/scenarios/databricks-extract-load-sql-data-warehouse?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
+                  - name: SSIS
+                    href: /sql/integration-services/load-data-to-sql-data-warehouse
+                    displayname: 'integration, services'
+                  - name: New York taxi cab verileri
+                    href: ./sql-data-warehouse/load-data-from-azure-blob-storage-using-copy.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                    displayname: 'load, blob'
+                  - name: Contoso genel verileri
+                    href: ./sql-data-warehouse/sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                    displayname: 'load, blob'
+                  - name: WideWorldImporters yükleme
+                    href: ./sql-data-warehouse/load-data-wideworldimportersdw.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Kopyalama etkinliğiyle
+                    href: data-integration/data-integration-sql-pool.md
+              - name: Data Lake’e
+                items:
+                  - name: Kopyalama etkinliğiyle
+                    href: data-integration/data-integration-data-lake.md
+          - name: Değişiklik yönetimi ve dağıtımı
+            items:
+              - name: Visual Studio SSDT yükleme
+                href: ./sql-data-warehouse/sql-data-warehouse-install-visual-studio.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Sürekli tümleştirme ve dağıtım
+                href: ./sql-data-warehouse/sql-data-warehouse-continuous-integration-and-deployment.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Dış verileri sorgulama
+            items:
+              - name: Genel Bakış
+                href: sql/query-data-storage.md
+                displayname: query
+              - name: CSV dosyalarını sorgulama
+                href: sql/query-single-csv-file.md
+              - name: Parquet dosyalarını sorgulama
+                href: sql/query-parquet-files.md
+              - name: JSON dosyalarını sorgulama
+                href: sql/query-json-files.md
+              - name: İç içe geçmiş türleri sorgulama
+                href: sql/query-parquet-nested-types.md
+              - name: Klasörleri ve birden çok dosyayı sorgulama
+                href: sql/query-folders-multiple-csv-files.md
+                displayname: csv
+              - name: Dosya meta verilerini kullanarak bölümlenmiş dosyaları sorgulama
+                href: sql/query-specific-files.md
+              - name: Görünümleri oluşturma ve kullanma
+                href: sql/create-use-views.md
+              - name: Dış tabloları oluşturma ve kullanma
+                href: sql/create-use-external-tables.md
+              - name: Sorgu sonuçlarını depolama alanında saklama
+                href: sql/create-external-table-as-select.md
+          - name: Tümleştirme
+            items:
+              - name: Veri işlem hatları oluşturma
+                items:
+                  - name: Azure Stream Analytics işi ekleme
+                    href: ./sql-data-warehouse/sql-data-warehouse-integrate-azure-stream-analytics.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Araç ve uygulamalarla bağlanma
+            items:
+              - name: Genel Bakış
+                href: sql/connect-overview.md
+              - name: Azure Data Studio ile sorgulama
+                href: sql/get-started-azure-data-studio.md
+              - name: Bağlantı dizeleri
+                href: sql/connection-strings.md
+              - name: SSMS ile Sorgulama
+                href: sql/get-started-ssms.md
+              - name: Power BI Desktop’a bağlanma
+                href: sql/get-started-power-bi-professional.md
+              - name: Visual Studio SSDT ile sorgulama
+                href: sql/get-started-visual-studio.md
+              - name: .NET Core kullanarak sorgulama
+                href: ../azure-sql/database/connect-query-dotnet-core.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Visual Studio .NET kullanarak sorgulama
+                href: ../azure-sql/database/connect-query-dotnet-visual-studio.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Python kullanarak sorgulama
+                href: ../azure-sql/database/connect-query-python.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: sqlcmd ile sorgulama
+                href: sql/get-started-connect-sqlcmd.md
+  - name: Apache Spark
+    items:
+      - name: Genel Bakış
+        items:
+          - name: Apache Spark'a genel bakış
+            href: ./spark/apache-spark-overview.md
+      - name: Hızlı Başlangıçlar
+        items:
+          - name: Not defteri oluşturma
+            href: quickstart-apache-spark-notebook.md
+          - name: Azure portal ile Spark havuzu oluşturma
+            href: quickstart-create-apache-spark-pool-portal.md
+          - name: Synapse Studio kullanarak Spark havuzu oluşturma
+            href: quickstart-create-apache-spark-pool-studio.md
+      - name: Öğreticiler
+        items:
+          - name: Synapse Studio not defterleriyle veri görselleştirme
+            href: ./spark/apache-spark-data-visualization-tutorial.md
+          - name: Apache Spark ve Power BI ile verileri analiz etme
+            href: ./spark/apache-spark-to-power-bi.md
+          - name: Makine öğrenmesi modelleri oluşturma
+            href: ./spark/apache-spark-machine-learning-mllib-notebook.md
+          - name: Spark iş tanımlarını görnderme
+            href: ./spark/apache-spark-job-definitions.md
+          - name: Azure SYNAPSE Spark uygulama düzeyi ölçümlerini bağlama ve izleme
+            href: ./spark/connect-monitor-azure-synapse-spark-application-level-metrics.md
+          - name: Prometheus ve Grafana ile uygulama düzeyi ölçümlerini izleyin Apache Spark
+            href: ./spark/use-prometheus-grafana-to-monitor-apache-spark-application-level-metrics.md
+          - name: Ölçümleri ve günlükleri toplamak ve görselleştirmek için Azure Log Analytics kullanma (Önizleme)
+            href: ./spark/apache-spark-azure-log-analytics.md
+      - name: Kavramlar
+        items:
+          - name: Apache Spark
+            href: ./spark/apache-spark-concepts.md
+          - name: Apache Spark havuzu yapılandırması
+            href: ./spark/apache-spark-pool-configurations.md
+          - name: Delta Lake
+            href: ./spark/apache-spark-what-is-delta-lake.md
+          - name: Apache Spark otomatik ölçeklendirme davranışı
+            href: ./spark/apache-spark-autoscale.md
+          - name: Synapse çalışma zamanları
+            href: ./spark/apache-spark-version-support.md
+          - name: Makine öğrenimi
+            href: ./spark/apache-spark-machine-learning-concept.md
+          - name: Notebooks
+            href: ./spark/apache-spark-notebook-concept.md
+          - name: Paket yönetimi
+            href: ./spark/apache-spark-azure-portal-add-libraries.md
+          - name: İzleme araçları
+            href: monitoring/how-to-monitor-spark-applications.md
+      - name: Nasıl yapılır kılavuzları
+        items:
+          - name: Delta Lake ile çalışma
+            href: ./spark/apache-spark-delta-lake-overview.md
+          - name: Paketleri yönetme
+            items:
+              - name: Python paketlerini Yönet
+                href: ./spark/apache-spark-manage-python-packages.md
+              - name: Scala paketlerini Yönet
+                href: ./spark/apache-spark-manage-scala-packages.md
+              - name: Python paketi yükleme hatalarını giderme
+                href: ./spark/apache-spark-troubleshoot-library-errors.md
+              - name: Conda özel kanalı oluşturma
+                href: ./spark/apache-spark-custom-conda-channel.md
+          - name: Not defterlerini ve IDE araçlarını kullanma
+            items:
+              - name: Not defterlerini yönetme
+                href: ./spark/apache-spark-development-using-notebooks.md
+              - name: Verileri görselleştirme
+                href: ./spark/apache-spark-data-visualization.md
+              - name: IntelliJ eklentisiyle Spark’a bağlanma
+                href: ./spark/intellij-tool-synapse.md
+              - name: VSCode ile Spark havuzlarına bağlanma
+                href: ./spark/vscode-tool-synapse.md
+          - name: Dilleri keşfetme
+            items:
+              - name: Apache Spark için .NET
+                href: ./spark/spark-dotnet.md
+          - name: Güvenlik
+            items:
+              - name: TokenLibrary kullanarak kimlik bilgilerinin güvenliğini sağlama
+                href: ./spark/apache-spark-secure-credentials-with-tokenlibrary.md
+          - name: Performansı iyileştirme
+            items:
+              - name: Apache Spark performansı
+                href: ./spark/apache-spark-performance.md
+              - name: Hyperspace dizinlerini kullanarak Apache Spark için performans iyileştirmesi
+                href: ./spark/apache-spark-performance-hyperspace.md
+          - name: Yönetme ve izleme
+            items:
+              - name: Spark havuz geçmişi sunucusu
+                href: ./spark/apache-spark-history-server.md
+              - name: Spark uygulamalarını izleme
+                href: monitoring/apache-spark-applications.md
+              - name: Apache Spark havuzları
+                href: monitoring/how-to-monitor-spark-pools.md
+              - name: Apache Spark ile JSON analizi yapma
+                href: how-to-analyze-complex-schema.md
+          - name: Verileri alma ve hazırlama
+            items:
+              - name: SQL Veri Ambarı
+                href: ./spark/synapse-spark-sql-pool-import-export.md
+              - name: JSON dosyasını analiz etme
+                href: how-to-analyze-complex-schema.md
+  - name: Synapse Link
+    items:
+      - name: Genel Bakış
+        items:
+          - name: Azure Cosmos DB için Synapse Link
+            href: ../cosmos-db/synapse-link.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+      - name: Hızlı Başlangıçlar
+        items:
+          - name: Cosmos DB için Synapse Link’e bağlanma
+            href: quickstart-connect-synapse-link-cosmos-db.md
+      - name: Kavramlar
+        items:
+          - name: Analiz Mağazasına Genel Bakış
+            href: ../cosmos-db/analytical-store-introduction.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Desteklenen Synapse Link özellikleri
+            href: ./synapse-link/concept-synapse-link-cosmos-db-support.md
+          - name: Synapse Link hakkında SSS
+            href: ../cosmos-db/synapse-link-frequently-asked-questions.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Synapse Link kullanım örnekleri
+            href: ../cosmos-db/synapse-link-use-cases.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+      - name: Nasıl yapılır kılavuzları
+        items:
+          - name: Synapse Link’i yapılandırma
+            href: ../cosmos-db/configure-synapse-link.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Cosmos DB için Azure Synapse Link’e bağlanma
+            href: ./synapse-link/how-to-connect-synapse-link-cosmos-db.md
+          - name: Azure Cosmos DB’yi analiz etmek için Power BI’ı ve sunucusuz SQL havuzu kullanma
+            href: ../cosmos-db/synapse-link-power-bi.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Apache Spark ile Azure Cosmos DB analiz deposunu sorgulama
+            href: ./synapse-link/how-to-query-analytical-store-spark.md
+          - name: Apache Spark kullanarak Synapse Link’ten ayrılmış bir SQL havuzuna veri kopyalama
+            href: ./synapse-link/how-to-copy-to-sql-pool.md
+          - name: Sunucusuz SQL havuzu ile Azure Cosmos DB analiz deposunu sorgulama
+            href: sql/query-cosmos-db-analytical-store.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+  - name: İşlem hattı ve veri akışı
+    items:
+      - name: Hızlı Başlangıçlar
+        items:
+          - name: Kopyalama etkinliği kullanarak SQL havuzlarına veri yükleme
+            href: quickstart-copy-activity-load-sql-pool.md
+          - name: Eşleme veri akışlarını kullanarak verileri dönüştürme
+            href: quickstart-data-flow.md
+      - name: Kavramlar
+        items:
+          - name: İşlem hattı ve etkinlik
+            href: ../data-factory/concepts-pipelines-activities.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Bağlı hizmetler
+            href: ../data-factory/concepts-linked-services.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Veri kümeleri
+            href: ../data-factory/concepts-datasets-linked-services.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Yürütme ve tetikleme
+            href: ../data-factory/concepts-pipeline-execution-triggers.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Tümleştirme çalışma zamanı
+            href: ../data-factory/concepts-integration-runtime.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Azure Data Factory ile arasındaki farklar
+            href: ./data-integration/concepts-data-factory-differences.md
+          - name: Veri akışları
+            items:
+              - name: Veri akışına genel bakış
+                href: concepts-data-flow-overview.md
+              - name: Hata ayıklama modu
+                href: ../data-factory/concepts-data-flow-debug-mode.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Schema Drift
+                href: ../data-factory/concepts-data-flow-schema-drift.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Sütun desenleri
+                href: ../data-factory/concepts-data-flow-column-pattern.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Veri akışını izleme
+                href: ../data-factory/concepts-data-flow-monitoring.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Veri akışı performansı
+                href: ../data-factory/concepts-data-flow-performance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Yönetim grafı
+                href: ../data-factory/concepts-data-flow-manage-graph.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İfade oluşturucusu
+                href: ../data-factory/concepts-data-flow-expression-builder.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İfade dili
+                href: ../data-factory/data-flow-expression-functions.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+      - name: Nasıl yapılır kılavuzları
+        items:
+          - name: Yazma
+            items:
+              - name: Veri fabrikalarını görsel olarak yazma
+                href: ../data-factory/author-visually.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Yinelemeli geliştirme ve hata ayıklama
+                href: ../data-factory/iterative-development-debugging.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Bağlayıcılar
+            items:
+              - name: Bağlayıcıya genel bakış
+                href: ../data-factory/connector-overview.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Amazon Marketplace Web Service
+                href: ../data-factory/connector-amazon-marketplace-web-service.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Amazon Redshift
+                href: ../data-factory/connector-amazon-redshift.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Amazon S3
+                href: ../data-factory/connector-amazon-simple-storage-service.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Avro biçimi
+                href: ../data-factory/format-avro.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Blob Depolama
+                href: ../data-factory/connector-azure-blob-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Bilişsel Arama
+                href: ../data-factory/connector-azure-search.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Cosmos DB SQL API
+                href: ../data-factory/connector-azure-cosmos-db.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: MongoDB için Azure Cosmos DB API'si
+                href: ../data-factory/connector-azure-cosmos-db-mongodb-api.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Veri Gezgini
+                href: ../data-factory/connector-azure-data-explorer.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Data Lake Storage Gen1
+                href: ../data-factory/connector-azure-data-lake-store.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Data Lake Storage Gen2
+                href: ../data-factory/connector-azure-data-lake-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: MariaDB için Azure Veritabanı
+                href: ../data-factory/connector-azure-database-for-mariadb.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: MySQL için Azure Veritabanı
+                href: ../data-factory/connector-azure-database-for-mysql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: PostgreSQL için Azure Veritabanı
+                href: ../data-factory/connector-azure-database-for-postgresql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Databricks Delta Lake
+                href: ../data-factory/connector-azure-databricks-delta-lake.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Dosya Depolama
+                href: ../data-factory/connector-azure-file-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure SQL Veritabanı
+                href: ../data-factory/connector-azure-sql-database.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure SQL Yönetilen Örnek
+                href: ../data-factory/connector-azure-sql-managed-instance.md?bc=%2fazure%2fsynapse-analytics%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsynapse-analytics%2ftoc.json
+              - name: Azure Synapse Analytics
+                href: ../data-factory/connector-azure-sql-data-warehouse.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Azure Table Storage
+                href: ../data-factory/connector-azure-table-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İkili biçim
+                href: ../data-factory/format-binary.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Cassandra
+                href: ../data-factory/connector-cassandra.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Common Data Model biçimi
+                href: ../data-factory/format-common-data-model.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Uygulamalar için Common Data Service
+                href: ../data-factory/connector-dynamics-crm-office-365.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Concur
+                href: ../data-factory/connector-concur.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Couchbase
+                href: ../data-factory/connector-couchbase.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: DB2
+                href: ../data-factory/connector-db2.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Sınırlandırılmış metin biçimi
+                href: ../data-factory/format-delimited-text.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Drill
+                href: ../data-factory/connector-drill.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Dynamics 365
+                href: ../data-factory/connector-dynamics-crm-office-365.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Dynamics AX
+                href: ../data-factory/connector-dynamics-ax.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Dynamics CRM
+                href: ../data-factory/connector-dynamics-crm-office-365.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Excel biçimi
+                href: ../data-factory/format-excel.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Dosya Sistemi
+                href: ../data-factory/connector-file-system.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: FTP
+                href: ../data-factory/connector-ftp.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: GitHub
+                href: ../data-factory/connector-github.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Google AdWords
+                href: ../data-factory/connector-google-adwords.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Google BigQuery
+                href: ../data-factory/connector-google-bigquery.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Google Cloud Storage
+                href: ../data-factory/connector-google-cloud-storage.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Greenplum
+                href: ../data-factory/connector-greenplum.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HBase
+                href: ../data-factory/connector-hbase.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HDFS
+                href: ../data-factory/connector-hdfs.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Hive
+                href: ../data-factory/connector-hive.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HTTP
+                href: ../data-factory/connector-http.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HubSpot
+                href: ../data-factory/connector-hubspot.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Impala
+                href: ../data-factory/connector-impala.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Informix
+                href: ../data-factory/connector-informix.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Jira
+                href: ../data-factory/connector-jira.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: JSON biçimi
+                href: ../data-factory/format-json.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Magento
+                href: ../data-factory/connector-magento.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: MariaDB
+                href: ../data-factory/connector-mariadb.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Marketo
+                href: ../data-factory/connector-marketo.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Microsoft Access
+                href: ../data-factory/connector-microsoft-access.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: MongoDB
+                href: ../data-factory/connector-mongodb.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                items:
+                  - name: MongoDB (eski)
+                    href: ../data-factory/connector-mongodb-legacy.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: MongoDB Atlas
+                href: ../data-factory/connector-mongodb-atlas.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: MySQL
+                href: ../data-factory/connector-mysql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Netezza
+                href: ../data-factory/connector-netezza.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: OData
+                href: ../data-factory/connector-odata.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: ODBC
+                href: ../data-factory/connector-odbc.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Office 365
+                href: ../data-factory/connector-office-365.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Oracle
+                href: ../data-factory/connector-oracle.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Oracle Eloqua
+                href: ../data-factory/connector-oracle-eloqua.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Oracle Responsys
+                href: ../data-factory/connector-oracle-responsys.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Oracle Service Cloud
+                href: ../data-factory/connector-oracle-service-cloud.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: ORC biçimi
+                href: ../data-factory/format-orc.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Parquet biçimi
+                href: ../data-factory/format-parquet.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: PayPal
+                href: ../data-factory/connector-paypal.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Phoenix
+                href: ../data-factory/connector-phoenix.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: PostgreSQL
+                href: ../data-factory/connector-postgresql.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Presto
+                href: ../data-factory/connector-presto.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: QuickBooks Online
+                href: ../data-factory/connector-quickbooks.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: REST
+                href: ../data-factory/connector-rest.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Salesforce
+                href: ../data-factory/connector-salesforce.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Salesforce Service Cloud
+                href: ../data-factory/connector-salesforce-service-cloud.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Salesforce Marketing Cloud
+                href: ../data-factory/connector-salesforce-marketing-cloud.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: SAP Business Warehouse Açık Hub'ı
+                href: ../data-factory/connector-sap-business-warehouse-open-hub.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                items:
+                  - name: SAP BW verilerini yükleme
+                    href: ../data-factory/load-sap-bw-data.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: SAP Business Warehouse MDX
+                href: ../data-factory/connector-sap-business-warehouse.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Müşteri için SAP Cloud
+                href: ../data-factory/connector-sap-cloud-for-customer.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: SAP ECC
+                href: ../data-factory/connector-sap-ecc.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: SAP HANA
+                href: ../data-factory/connector-sap-hana.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: SAP Tablosu
+                href: ../data-factory/connector-sap-table.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: ServiceNow
+                href: ../data-factory/connector-servicenow.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: SFTP
+                href: ../data-factory/connector-sftp.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: SharePoint Online Listesi
+                href: ../data-factory/connector-sharepoint-online-list.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Shopify
+                href: ../data-factory/connector-shopify.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Snowflake
+                href: ../data-factory/connector-snowflake.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Spark
+                href: ../data-factory/connector-spark.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: SQL Server
+                href: ../data-factory/connector-sql-server.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Square
+                href: ../data-factory/connector-square.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Sybase
+                href: ../data-factory/connector-sybase.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Teradata
+                href: ../data-factory/connector-teradata.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Vertica
+                href: ../data-factory/connector-vertica.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Web Tablosu
+                href: ../data-factory/connector-web-table.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Xero
+                href: ../data-factory/connector-xero.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: XML biçimi
+                href: ../data-factory/format-xml.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Zoho
+                href: ../data-factory/connector-zoho.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Veri taşıma
+            items:
+              - name: Kopyalama Etkinliği’ni kullanarak veri kopyalama
+                href: ../data-factory/copy-activity-overview.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Kopyalama etkinliğini izleme
+                href: ../data-factory/copy-activity-monitoring.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Silme Etkinliği'ni kullanarak dosyaları silme
+                href: ../data-factory/delete-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Veri Kopyalama aracı
+                href: ../data-factory/copy-data-tool.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Biçimlendirme ve sıkıştırma desteği
+                href: ../data-factory/supported-file-formats-and-compression-codecs.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Kopyalama etkinliği performansı
+                items:
+                  - name: Performans ve ölçeklenebilirlik kılavuzu
+                    href: ../data-factory/copy-activity-performance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Performans sorunlarını giderme
+                    href: ../data-factory/copy-activity-performance-troubleshooting.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+                  - name: Performans özellikleri
+                    href: ../data-factory/copy-activity-performance-features.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Meta verileri ve ACL'leri koruma
+                href: ../data-factory/copy-activity-preserve-metadata.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Şema ve tür eşlemesi
+                href: ../data-factory/copy-activity-schema-and-type-mapping.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Hataya dayanıklılık
+                href: ../data-factory/copy-activity-fault-tolerance.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Veri tutarlılığı doğrulama
+                href: ../data-factory/copy-activity-data-consistency.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Biçimlendirme ve sıkıştırma desteği (eski)
+                href: ../data-factory/supported-file-formats-and-compression-codecs-legacy.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Verileri dönüştürme
+            href: ../data-factory/transform-data.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+            items:
+              - name: Azure İşlev Etkinliği
+                href: ../data-factory/control-flow-azure-function-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Özel Etkinlik
+                href: ../data-factory/transform-data-using-dotnet-custom-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Databricks Jar Etkinliği
+                href: ../data-factory/transform-data-databricks-jar.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Databricks Not Defteri Etkinliği
+                href: ../data-factory/transform-data-databricks-notebook.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Databricks Python Etkinliği
+                href: ../data-factory/transform-data-databricks-python.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Data Lake U-SQL Etkinliği
+                href: ../data-factory/transform-data-using-data-lake-analytics.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HDInsight Hive Etkinliği
+                href: ../data-factory/transform-data-using-hadoop-hive.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HDInsight MapReduce Etkinliği
+                href: ../data-factory/transform-data-using-hadoop-map-reduce.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HDInsight Pig Etkinliği
+                href: ../data-factory/transform-data-using-hadoop-pig.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HDInsight Spark Etkinliği
+                href: ../data-factory/transform-data-using-spark.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: HDInsight Akış Etkinliği
+                href: ../data-factory/transform-data-using-hadoop-streaming.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Machine Learning İşlem Hattı Yürütme Etkinliği
+                href: ../data-factory/transform-data-machine-learning-service.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Machine Learning Studio (klasik) Batch Yürütme Etkinliği
+                href: ../data-factory/transform-data-using-machine-learning.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Machine Learning Studio (klasik) Kaynak Güncelleştirme Etkinliği
+                href: ../data-factory/update-machine-learning-models.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Saklı Yordam Etkinliği
+                href: ../data-factory/transform-data-using-stored-procedure.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İşlem bağlantılı hizmetler
+                href: ../data-factory/compute-linked-services.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Denetim akışı
+            items:
+              - name: Değişken Etkinlik Ekleme
+                href: ../data-factory/control-flow-append-variable-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Veri Akışı Etkinliğini Yürütme
+                href: ../data-factory/control-flow-execute-data-flow-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İşlem Hattı Çalıştırma Etkinliği
+                href: ../data-factory/control-flow-execute-pipeline-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Filtre Etkinliği
+                href: ../data-factory/control-flow-filter-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Her Bir Etkinlik için
+                href: ../data-factory/control-flow-for-each-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Meta Veri Alma Etkinliği
+                href: ../data-factory/control-flow-get-metadata-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: If Condition Etkinliği
+                href: ../data-factory/control-flow-if-condition-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Arama Etkinliği
+                href: ../data-factory/control-flow-lookup-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Değişken Etkinlik Ayarlama
+                href: ../data-factory/control-flow-set-variable-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Until Etkinliği
+                href: ../data-factory/control-flow-until-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Doğrulama Etkinliği
+                href: ../data-factory/control-flow-validation-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Wait Etkinliği
+                href: ../data-factory/control-flow-wait-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Web Etkinliği
+                href: ../data-factory/control-flow-web-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Web Kancası Etkinliği
+                href: ../data-factory/control-flow-webhook-activity.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Veri akışı dönüşümleri
+            items:
+              - name: Dönüştürmeye genel bakış
+                href: ../data-factory/data-flow-transformation-overview.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Toplama
+                href: ../data-factory/data-flow-aggregate.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Satırı değiştirme
+                href: ../data-factory/data-flow-alter-row.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Koşullu bölme
+                href: ../data-factory/data-flow-conditional-split.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Türetilmiş sütun
+                href: ../data-factory/data-flow-derived-column.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Var
+                href: ../data-factory/data-flow-exists.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Filtre
+                href: ../data-factory/data-flow-filter.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Düzleştirme
+                href: ../data-factory/data-flow-flatten.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Birleştir
+                href: ../data-factory/data-flow-join.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Arama
+                href: ../data-factory/data-flow-lookup.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Yeni dal
+                href: ../data-factory/data-flow-new-branch.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Pivot
+                href: ../data-factory/data-flow-pivot.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Derece
+                href: ../data-factory/data-flow-rank.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: 'Şunu seçin:'
+                href: ../data-factory/data-flow-select.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Havuz
+                href: ../data-factory/data-flow-sink.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Sırala
+                href: ../data-factory/data-flow-sort.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Kaynak
+                href: ../data-factory/data-flow-source.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Vekil anahtar
+                href: ../data-factory/data-flow-surrogate-key.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Birleşim
+                href: ../data-factory/data-flow-union.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Özetlemeyi açma
+                href: ../data-factory/data-flow-unpivot.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Pencere
+                href: ../data-factory/data-flow-window.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Parametreleştirme
+            items:
+              - name: Bağlı hizmetleri parametreleştirme
+                href: ../data-factory/parameterize-linked-services.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: İfade Dili
+                href: ../data-factory/control-flow-expression-language-functions.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Sistem değişkenleri
+                href: ../data-factory/control-flow-system-variables.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Veri akışı parametreleri
+                href: ../data-factory/parameters-data-flow.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Yönetme ve izleme
+            items:
+              - name: İşlem hattı çalıştırmaları
+                href: monitoring/how-to-monitor-pipeline-runs.md
+          - name: Tümleştirme çalışma zamanı oluşturma
+            items:
+              - name: Azure tümleştirme çalışma zamanı
+                href: ../data-factory/create-azure-integration-runtime.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Kendinden konak tümleştirme çalışma zamanı
+                href: ../data-factory/create-self-hosted-integration-runtime.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Tetikleyici oluşturma
+            items:
+              - name: Olay tabanlı tetikleyici oluşturma
+                href: ../data-factory/how-to-create-event-trigger.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Zamanlama tetikleyicisi oluşturma
+                href: ../data-factory/how-to-create-schedule-trigger.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Atlayan pencere tetikleyicisi oluşturma
+                href: ../data-factory/how-to-create-tumbling-window-trigger.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Atlayan pencere tetikleyici bağımlılığı oluşturma
+                href: ../data-factory/tumbling-window-trigger-dependency.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Sorun giderme kılavuzu
+            items:
+              - name: Etkinlik sorun giderme
+                href: ../data-factory/data-factory-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Bağlayıcı sorunlarını giderme
+                href: ../data-factory/connector-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Sürekli Tümleştirme ve Dağıtım
+                href: ../data-factory/ci-cd-github-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Güvenlik ve erişim denetimi
+                href: ../data-factory/security-and-access-control-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+              - name: Şirket içinde barındırılan tümleştirme çalışma zamanlarında sorun giderme
+                href: ../data-factory/self-hosted-integration-runtime-troubleshoot-guide.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+  - name: Machine Learning
+    items:
+      - name: Genel Bakış
+        items:
+          - name: Azure Synapse’te makine öğrenmesi nedir?
+            href: machine-learning/what-is-machine-learning.md
+      - name: Hızlı başlangıçlar
+        items:
+          - name: Azure Machine Learning bağlantılı yeni bir hizmet oluşturma
+            href: machine-learning/quickstart-integrate-azure-machine-learning.md
+      - name: Kavramlar
+        items:
+          - name: Modelleri eğitme
+            href: ./spark/apache-spark-machine-learning-training.md
+      - name: Öğreticiler
+        items:
+          - name: Apache Spark ile verileri görselleştirme
+            displayname: machine learning
+            href: ./spark/apache-spark-data-visualization-tutorial.md
+          - name: Ayrılmış SQL havuzları için puanlama sihirbazını kullanma
+            displayname: machine learning
+            href: machine-learning/tutorial-sql-pool-model-scoring-wizard.md
+          - name: Otomatik makine öğrenmesi ile kod olmadan model eğitme
+            displayname: machine learning
+            href: ./machine-learning/tutorial-automl.md
+          - name: Otomatik makine öğrenmesi ile Python’da model eğitme
+            displayname: machine learning
+            href: ./spark/apache-spark-azure-machine-learning-tutorial.md
+          - name: Apache Spark MLlib ile model oluşturma
+            displayname: machine learning
+            href: ./spark/apache-spark-machine-learning-mllib-notebook.md
+          - name: Azure Synapse için Bilişsel Hizmetler’i yapılandırma
+            href: ./machine-learning/tutorial-configure-cognitive-services-synapse.md
+          - name: Bilişsel Hizmetler ile yaklaşım analizi
+            href: ./machine-learning/tutorial-cognitive-services-sentiment.md
+          - name: Bilişsel Hizmetler ile anomali algılama
+            href: ./machine-learning/tutorial-cognitive-services-anomaly.md
+          - name: Apache Spark için Microsoft Machine Learning kullanarak makine öğrenimi uygulamaları oluşturma (Önizleme)
+            href: ./machine-learning/tutorial-build-applications-use-mmlspark.md
+  - name: Veri Kataloğu ve İdare
+    items:
+      - name: Hızlı Başlangıçlar
+        items:
+          - name: Azure Purview Hesabı bağlama
+            href: ./catalog-and-governance/quickstart-connect-azure-purview.md
+      - name: Nasıl yapılır kılavuzları
+        items:
+          - name: 'Azure Purview’ı kullanarak Synapse’te verileri keşfedin, bağlayın ve inceleyin'
+            href: ./catalog-and-governance/how-to-discover-connect-analyze-azure-purview.md
+  - name: Nasıl yapılır
+    items:
+      - name: Maliyetleri planlama ve yönetme
+        href: plan-manage-costs.md
+  - name: Başvuru
+    items:
+      - name: Azure CLI
+        href: /cli/azure/
+      - name: Veritabanı harmanlama türleri
+        href: sql/reference-collation-types.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+      - name: Başlayın
+        href: 'https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/services/preview/synapse@v43.3.0+incompatible'
+      - name: .NET
+        href: /dotnet/api/microsoft.azure.management.synapse?preserve-view=true&view=azure-dotnet-preview
+      - name: Azure PowerShell
+        href: /powershell/module/az.synapse?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+      - name: REST API'leri
+        href: /rest/api/synapse/
+      - name: Microsoft Spark Yardımcı Programları
+        href: ./spark/microsoft-spark-utilities.md
+      - name: Örnekler
+        href: 'https://github.com/Azure-Samples/Synapse'
+      - name: Sistem görünümleri
+        href: sql/reference-tsql-system-views.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+      - name: Azure İlkesi yerleşik ilkeler
+        displayName: 'samples, policies, definitions'
+        href: ./policy-reference.md
+      - name: T-SQL
+        items:
+          - name: Tam başvuru
+            href: /sql/t-sql/language-reference/
+          - name: Synapse SQL T-SQL dil öğeleri
+            href: ./sql-data-warehouse/sql-data-warehouse-reference-tsql-language-elements.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Synapse SQL T-SQL deyimleri
+            href: ./sql-data-warehouse/sql-data-warehouse-reference-tsql-statements.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+  - name: Kaynaklar
+    items:
+      - name: Azure Yol Haritası
+        href: 'https://azure.microsoft.com/roadmap/?category=databases'
+      - name: Microsoft Soru-Cevap soru sayfası
+        href: /answers/topics/azure-synapse-analytics.html
+      - name: Özellik istekleri
+        href: 'https://feedback.azure.com/forums/307516-sql-data-warehouse/'
+      - name: Fiyatlandırma
+        href: 'https://azure.microsoft.com/pricing/details/synapse-analytics/'
+      - name: Fiyatlandırma hesaplayıcı
+        href: 'https://azure.microsoft.com/pricing/calculator/'
+      - name: Sorular ve Yanıtlar
+        href: /answers/questions/topics/single/25423.html
+      - name: Hizmet güncelleştirmeleri
+        href: 'https://azure.microsoft.com/updates/?product=sql-data-warehouse'
+      - name: Stack Overflow
+        href: 'https://stackoverflow.com/questions/tagged/azure-synapse/'
+      - name: Destek
+        href: ./sql-data-warehouse/sql-data-warehouse-get-started-create-support-ticket.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+      - name: Müşteri kendi kendine yardımı
+        items:
+          - name: sunucusuz SQL havuzu
+            href: sql/resources-self-help-sql-on-demand.md
+      - name: İş Ortakları
+        items:
+          - name: İş zekası
+            href: ./sql-data-warehouse/sql-data-warehouse-partner-business-intelligence.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Veri tümleştirmesi
+            href: ./sql-data-warehouse/sql-data-warehouse-partner-data-integration.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Veri yönetimi
+            href: ./sql-data-warehouse/sql-data-warehouse-partner-data-management.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Makine öğrenimi ve AI
+            href: ./sql-data-warehouse/sql-data-warehouse-partner-machine-learning-ai.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Sistem tümleştirme
+            href: ./sql-data-warehouse/sql-data-warehouse-partner-system-integration.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json
+          - name: Üçüncü taraf uygulamalarla uyumluluk sorunları
+            href: ./sql-data-warehouse/sql-data-warehouse-partner-compatibility-issues.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json

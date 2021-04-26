@@ -1,14 +1,14 @@
 ---
 title: Kaynak hiyerarşinizi koruma-Azure Idare
 description: Kaynak hiyerarşinizi, varsayılan yönetim grubunu ayarlamayı içeren hiyerarşi ayarlarıyla nasıl koruyacağınızı öğrenin.
-ms.date: 02/05/2021
+ms.date: 04/09/2021
 ms.topic: conceptual
-ms.openlocfilehash: 0f0afb5401fc646d26598a211604790af191f156
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 11c20ccf5aff74d810533cd56e0a7b116f2dc64b
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99594595"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107303653"
 ---
 # <a name="how-to-protect-your-resource-hierarchy"></a>Kaynak hiyerarşinizi koruma
 
@@ -50,7 +50,7 @@ Bu ayarı Azure portal yapılandırmak için aşağıdaki adımları izleyin:
 
 ### <a name="set-default-management-group-with-rest-api"></a>Varsayılan yönetim grubunu REST API ayarla
 
-Bu ayarı REST API yapılandırmak için [Hiyerarşi ayarları](/rest/api/resources/hierarchysettings) uç noktası çağrılır. Bunu yapmak için aşağıdaki REST API URI ve gövde biçimini kullanın. `{rootMgID}`Kök yönetim GRUBUNUZUN kimliğiyle ve `{defaultGroupID}` varsayılan Yönetim grubu olacak YÖNETIM grubu kimliğiyle değiştirin:
+Bu ayarı REST API yapılandırmak için [Hiyerarşi ayarları](/rest/api/managementgroups/hierarchysettings) uç noktası çağrılır. Bunu yapmak için aşağıdaki REST API URI ve gövde biçimini kullanın. `{rootMgID}`Kök yönetim GRUBUNUZUN kimliğiyle ve `{defaultGroupID}` varsayılan Yönetim grubu olacak YÖNETIM grubu kimliğiyle değiştirin:
 
 - REST API URI'si
 
@@ -91,7 +91,7 @@ Bu ayarı Azure portal yapılandırmak için aşağıdaki adımları izleyin:
 
 ### <a name="set-require-authorization-with-rest-api"></a>REST API yetkilendirme gerektir ayarla
 
-Bu ayarı REST API yapılandırmak için [Hiyerarşi ayarları](/rest/api/resources/hierarchysettings) uç noktası çağrılır. Bunu yapmak için aşağıdaki REST API URI ve gövde biçimini kullanın. Bu değer bir _Boole_ değeridir, bu nedenle değer için **true** veya **false** değerini sağlayın. **Doğru** değeri, bu yönetim grubu hiyerarşinizi koruma yöntemini sunar:
+Bu ayarı REST API yapılandırmak için [Hiyerarşi ayarları](/rest/api/managementgroups/hierarchysettings) uç noktası çağrılır. Bunu yapmak için aşağıdaki REST API URI ve gövde biçimini kullanın. Bu değer bir _Boole_ değeridir, bu nedenle değer için **true** veya **false** değerini sağlayın. **Doğru** değeri, bu yönetim grubu hiyerarşinizi koruma yöntemini sunar:
 
 - REST API URI'si
 
@@ -110,6 +110,28 @@ Bu ayarı REST API yapılandırmak için [Hiyerarşi ayarları](/rest/api/resour
   ```
 
 Ayarı yeniden kapatmak için aynı uç noktayı kullanın ve **Requireauthorizationforgroupoluşturmayı** **false** değerine ayarlayın.
+
+## <a name="powershell-sample"></a>PowerShell örneği
+
+PowerShell 'in varsayılan yönetim grubunu ayarlamak için ' az ' komutu yoktur veya yetkilendirme gerektir seçeneğini belirleyin, ancak geçici bir çözüm olarak aşağıdaki PowerShell örneğiyle REST API yararlanabilirsiniz:
+
+```powershell
+$root_management_group_id = "Enter the ID of root management group"
+$default_management_group_id = "Enter the ID of default management group (or use the same ID of the root management group)"
+
+$body = '{
+     "properties": {
+          "defaultManagementGroup": "/providers/Microsoft.Management/managementGroups/' + $default_management_group_id + '",
+          "requireAuthorizationForGroupCreation": true
+     }
+}'
+
+$token = (Get-AzAccessToken).Token
+$headers = @{"Authorization"= "Bearer $token"; "Content-Type"= "application/json"}
+$uri = "https://management.azure.com/providers/Microsoft.Management/managementGroups/$root_management_group_id/settings/default?api-version=2020-02-01"
+
+Invoke-RestMethod -Method PUT -Uri $uri -Headers $headers -Body $body
+```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

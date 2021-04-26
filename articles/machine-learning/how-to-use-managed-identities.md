@@ -11,10 +11,10 @@ ms.reviewer: larryfr
 ms.topic: conceptual
 ms.date: 10/22/2020
 ms.openlocfilehash: 3246f6668a653c05599001a2f8d8fc8d376936ce
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105642415"
 ---
 # <a name="use-managed-identities-with-azure-machine-learning-preview"></a>Azure Machine Learning ile yönetilen kimlikler kullanma (Önizleme)

@@ -1,14 +1,14 @@
 ---
 title: Azure portal 'ten VM uzantısını etkinleştir
 description: Bu makalede, karma bulut ortamlarında çalışan Azure Arc etkin sunucularına sanal makine uzantılarının Azure portal nasıl dağıtılacağı açıklanır.
-ms.date: 01/22/2020
+ms.date: 04/13/2021
 ms.topic: conceptual
-ms.openlocfilehash: b0e114b314179d42ccd47b7d7bd534d3a824a411
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b5b4ff79d68ec9ff0cc61b9dbb7d3c5d7fe93598
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100587654"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107388287"
 ---
 # <a name="enable-azure-vm-extensions-from-the-azure-portal"></a>Azure portal Azure VM uzantılarını etkinleştirin
 
@@ -16,6 +16,9 @@ Bu makalede, Azure Arc etkin sunucuları tarafından desteklenen Azure VM uzant�
 
 > [!NOTE]
 > Key Vault VM Uzantısı (Önizleme), Azure portal dağıtımını desteklemez, yalnızca Azure CLı, Azure PowerShell veya Azure Resource Manager şablonu kullanılarak desteklenmez.
+
+> [!NOTE]
+> Azure yay özellikli sunucular, VM uzantılarının Azure sanal makinelerine dağıtılmasını ve yönetilmesini desteklemez. Azure VM 'Leri için aşağıdaki [VM uzantısına genel bakış](../../virtual-machines/extensions/overview.md) makalesine bakın.
 
 ## <a name="enable-extensions-from-the-portal"></a>Portaldan uzantıları etkinleştirme
 

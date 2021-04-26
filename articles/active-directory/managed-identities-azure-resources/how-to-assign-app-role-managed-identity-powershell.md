@@ -15,12 +15,13 @@ ms.workload: identity
 ms.date: 12/10/2020
 ms.author: jodowns
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f2d844054e3744aafa01f43ded354a5b5d9f8b4b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 5150c26d67b77008c11764cc6e51ca7085ffcb31
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98732109"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784920"
 ---
 # <a name="assign-a-managed-identity-access-to-an-application-role-using-powershell"></a>PowerShell kullanarak bir uygulama rolüne yönetilen kimlik erişimi atama
 

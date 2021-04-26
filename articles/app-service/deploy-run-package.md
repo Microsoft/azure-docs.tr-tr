@@ -3,12 +3,12 @@ title: Uygulamanızı bir ZIP paketinden çalıştırma
 description: Uygulamanın ZIP paketini Atomicity ile dağıtın. ZIP dağıtım sürecinde uygulamanızın davranışının öngörülebilirlik ve güvenilirliğini artırabilirsiniz.
 ms.topic: article
 ms.date: 01/14/2020
-ms.openlocfilehash: 036dd8c86251af2ed5553939e74a0d85fc303ecb
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: d3315370342f54091598aa3f77f70f03bda4ad33
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104577555"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772748"
 ---
 # <a name="run-your-app-in-azure-app-service-directly-from-a-zip-package"></a>Uygulamanızı doğrudan bir ZIP paketinden Azure App Service çalıştırma
 
@@ -41,7 +41,7 @@ az webapp config appsettings set --resource-group <group-name> --name <app-name>
 
 ## <a name="run-the-package"></a>Paketi çalıştırın
 
-App Service bir paketi çalıştırmanın en kolay yolu Azure CLı [az WebApp Deployment Source config-ZIP](/cli/azure/webapp/deployment/source#az-webapp-deployment-source-config-zip) komutıdır. Örnek:
+App Service bir paketi çalıştırmanın en kolay yolu Azure CLı [az WebApp Deployment Source config-ZIP](/cli/azure/webapp/deployment/source#az_webapp_deployment_source_config_zip) komutıdır. Örnek:
 
 ```azurecli-interactive
 az webapp deployment source config-zip --resource-group <group-name> --name <app-name> --src <filename>.zip

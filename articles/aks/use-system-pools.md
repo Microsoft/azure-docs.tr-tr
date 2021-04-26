@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 06/18/2020
 ms.author: mlearned
 ms.custom: fasttrack-edit, devx-track-azurecli
-ms.openlocfilehash: 9c53cb53517c4696a1bb47c2cb72335979d58d3a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8b41b43c70f72ab327de2f1d59415cc1f49e5a5b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102178839"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767412"
 ---
 # <a name="manage-system-node-pools-in-azure-kubernetes-service-aks"></a>Azure Kubernetes hizmetindeki (AKS) sistem düğüm havuzlarını yönetme
 
@@ -43,7 +43,8 @@ Sistem düğüm havuzları aşağıdaki kısıtlamalara sahiptir:
 * Sistem havuzları osType, Linux olmalıdır.
 * Kullanıcı düğümü havuzları osType, Linux veya Windows olabilir.
 * Sistem havuzlarının en az bir düğüm içermesi ve Kullanıcı düğüm havuzlarının sıfır veya daha fazla düğüm içermesi gerekir.
-* Sistem düğüm havuzları, en az 2 vCPU ve 4 GB bellek için bir VM SKU 'SU gerektirir.
+* Sistem düğüm havuzları, en az 2 vCPU ve 4 GB bellek için bir VM SKU 'SU gerektirir. Ancak Burstable-VM (B serisi) önerilmez.
+* Özellikle büyük kümeler (örneğin, birden çok CoreDNS Pod çoğaltmaları, 3-4 + Eklentiler, vb.) için en az iki düğüm 4 vCPU önerilir (ör. Standard_DS4_v2).
 * Sistem düğüm havuzlarının [En düşük ve en yüksek değer formülünde Pod][maximum-pods]tarafından açıklandığı gibi en az 30 tane olması gerekir.
 * Spot düğüm havuzları, Kullanıcı düğümü havuzları gerektirir.
 * Ek bir sistem düğüm havuzu ekleme veya hangi düğüm havuzunun bir sistem düğüm havuzu olarak değiştirilmesi, sistem yığınlarını otomatik olarak *taşımayacak* . System Pod, bir Kullanıcı düğümü havuzuna değiştirseniz bile aynı düğüm havuzunda çalışmaya devam edebilir. Daha önce bir sistem düğüm havuzudur sistem Pod çalıştıran bir düğüm havuzunu siler veya ölçeklendirirseniz, bu sistem havuzları yeni sistem düğümü havuzuna tercih edilen zamanlamaya göre yeniden dağıtılır.
@@ -195,19 +196,19 @@ Bu makalede, bir AKS kümesinde sistem düğüm havuzlarını oluşturmayı ve y
 <!-- INTERNAL LINKS -->
 [aks-taints]: use-multiple-node-pools.md#setting-nodepool-taints
 [aks-windows]: windows-container-cli.md
-[az-aks-get-credentials]: /cli/azure/aks#az-aks-get-credentials
-[az-aks-create]: /cli/azure/aks#az-aks-create
-[az-aks-nodepool-add]: /cli/azure/aks/nodepool#az-aks-nodepool-add
-[az-aks-nodepool-list]: /cli/azure/aks/nodepool#az-aks-nodepool-list
-[az-aks-nodepool-update]: /cli/azure/aks/nodepool#az-aks-nodepool-update
-[az-aks-nodepool-upgrade]: /cli/azure/aks/nodepool#az-aks-nodepool-upgrade
-[az-aks-nodepool-scale]: /cli/azure/aks/nodepool#az-aks-nodepool-scale
-[az-aks-nodepool-delete]: /cli/azure/aks/nodepool#az-aks-nodepool-delete
-[az-extension-add]: /cli/azure/extension#az-extension-add
-[az-extension-update]: /cli/azure/extension#az-extension-update
-[az-group-create]: /cli/azure/group#az-group-create
-[az-group-delete]: /cli/azure/group#az-group-delete
-[az-group-deployment-create]: /cli/azure/group/deployment#az-group-deployment-create
+[az-aks-get-credentials]: /cli/azure/aks#az_aks_get_credentials
+[az-aks-create]: /cli/azure/aks#az_aks_create
+[az-aks-nodepool-add]: /cli/azure/aks/nodepool#az_aks_nodepool_add
+[az-aks-nodepool-list]: /cli/azure/aks/nodepool#az_aks_nodepool_list
+[az-aks-nodepool-update]: /cli/azure/aks/nodepool#az_aks_nodepool_update
+[az-aks-nodepool-upgrade]: /cli/azure/aks/nodepool#az_aks_nodepool_upgrade
+[az-aks-nodepool-scale]: /cli/azure/aks/nodepool#az_aks_nodepool_scale
+[az-aks-nodepool-delete]: /cli/azure/aks/nodepool#az_aks_nodepool_delete
+[az-extension-add]: /cli/azure/extension#az_extension_add
+[az-extension-update]: /cli/azure/extension#az_extension_update
+[az-group-create]: /cli/azure/group#az_group_create
+[az-group-delete]: /cli/azure/group#az_group_delete
+[az-group-deployment-create]: /cli/azure/group/deployment#az_group_deployment_create
 [gpu-cluster]: gpu-cluster.md
 [install-azure-cli]: /cli/azure/install-azure-cli
 [operator-best-practices-advanced-scheduler]: operator-best-practices-advanced-scheduler.md

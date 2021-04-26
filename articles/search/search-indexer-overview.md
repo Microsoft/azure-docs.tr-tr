@@ -8,12 +8,12 @@ ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 01/29/2021
-ms.openlocfilehash: a274e96defa8b6b74c046923d87f198029399dd4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6cce37a7c719c6a0c183e166fa28967ea926a221
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100098104"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581649"
 ---
 # <a name="indexers-in-azure-cognitive-search"></a>Azure Bilişsel Arama'daki Dizin Oluşturucular
 
@@ -31,7 +31,7 @@ Bir dizin oluşturucuyu, veri alımı için tek yol olarak veya içerik yükleme
 |----------|---------|
 | Tek veri kaynağı | Bu model en basit: bir veri kaynağı, bir arama dizini için tek içerik sağlayıcıdır. Kaynaktan, arama dizininde belge anahtarı olarak kullanılacak benzersiz değerler içeren bir alan tanımlayacaksınız. Benzersiz değer bir tanımlayıcı olarak kullanılacaktır. Diğer tüm kaynak alanları, bir dizindeki ilgili alanlarla örtük olarak veya açıkça eşleştirilir. </br></br>Önemli bir kalkış, bir belge anahtarı değerinin kaynak verilerden kaynaklanabilme örneğidir. Arama hizmeti anahtar değerleri oluşturmaz. Sonraki çalışmalarda, yeni anahtarlara sahip gelen belgeler eklenir, ancak mevcut anahtarlara sahip gelen belgeler, Dizin alanlarının null ya da doldurulmuş olmasına bağlı olarak birleştirilir veya üzerine yazılır. |
 | Birden çok veri kaynağı | Bir dizin, her çalıştırmanın farklı bir kaynaktan yeni içerik aldığı birden çok kaynaktan içerik kabul edebilir. </br></br>Tek bir sonuç, her bir Dizin Oluşturucu çalıştıktan sonra belge elde eden bir dizin olabilir ve tüm belgeler her kaynaktan tam olarak oluşturulur. Örneğin, belgeler 1-100, BLOB depolama 'dan, 101-200 belgelerinin Azure SQL 'den ve bu şekilde devam eder. Bu senaryonun çekişmesi, tüm gelen veriler için uygun bir dizin şeması ve arama dizininde tek biçimli bir belge anahtar yapısı tasarlamada yer alır. Yerel olarak, bir belgeyi benzersiz bir şekilde tanımlayan değerler bir blob kapsayıcısında ve bir SQL tablosundaki birincil anahtar metadata_storage_path. Bir veya iki kaynağın, içerik kaynağından bağımsız olarak ortak bir biçimde anahtar değerleri sağlaması için düzeltmeniz gerektiğini düşünün. Bu senaryoda, verileri tek bir dizine çekilecek şekilde eklemek için bir miktar ön işleme düzeyi gerçekleştirmeyi beklemeniz gerekir. </br></br>Alternatif bir sonuç, ilk çalıştırmada kısmen doldurulmuş ve ardından sonraki çalışmalarla daha sonra diğer kaynaklardan değer getirmek için daha sonra doldurulmuş belgelerde arama yapmak olabilir. Örneğin, 1-10 alanları BLOB depolama, Azure SQL 'den 11-20 ve benzeri. Bu düzenin çekişmesi, her bir dizinleme çalıştırmasının aynı belgeyi hedeflediğinden emin olmanızı sağlamak. Alanların mevcut bir belgede birleştirilmesi için belge anahtarında bir eşleşme olması gerekir. Bu senaryonun bir gösterimi için bkz. [öğretici: birden çok veri kaynağından Dizin](tutorial-multiple-data-sources.md). |
-| Çoklu Dizin oluşturucular | Birden çok veri kaynağı kullanıyorsanız, çalıştırma zamanı parametrelerini, zamanlamayı veya alan eşlemelerini değiştirmeniz gerekiyorsa birden çok Dizin Oluşturucu da gerekebilir. Birden çok Indexer-Data-Source kümesi aynı dizini hedefleyebilir, ancak dizindeki mevcut değerlerin üzerine yazabilecek Dizin Oluşturucu çalıştırmalarının dikkatli olun. İkinci bir dizin oluşturucu-veri kaynağı aynı belge ve alanları hedefliyorsa, ilk çalıştırdaki tüm değerlerin üzerine yazılır. Alan değerleri tam olarak değişir; bir Dizin Oluşturucu birden çok çalıştırdaki değerleri aynı alana birleştiremez.</br></br>Başka bir çoklu Dizin Oluşturucu kullanım örneği [bilişsel arama çapraz bölge ölçeklendirmektir](search-performance-optimization.md#use-indexers-for-updating-content-on-multiple-services). Farklı bölgelerde aynı arama dizininin kopyalarına sahip olabilirsiniz. Arama dizini içeriğini eşzamanlı hale getirmek için, her bir dizin oluşturucunun farklı bir arama dizinini hedeflediği aynı veri kaynağından birden çok dizinleyici çekmesini sağlayabilirsiniz.</br></br>Çok büyük veri kümelerinin [paralel dizinlemesi](search-howto-large-index.md#parallel-indexing) de bir çoklu Dizin Oluşturucu stratejisi gerektirir. Her Dizin Oluşturucu verilerin bir alt kümesini hedefler. |
+| Çoklu Dizin oluşturucular | Birden çok veri kaynağı kullanıyorsanız, çalıştırma zamanı parametrelerini, zamanlamayı veya alan eşlemelerini değiştirmeniz gerekiyorsa birden çok Dizin Oluşturucu da gerekebilir. Birden çok Indexer-Data-Source kümesi aynı dizini hedefleyebilir, ancak dizindeki mevcut değerlerin üzerine yazabilecek Dizin Oluşturucu çalıştırmalarının dikkatli olun. İkinci bir dizin oluşturucu-veri kaynağı aynı belge ve alanları hedefliyorsa, ilk çalıştırdaki tüm değerlerin üzerine yazılır. Alan değerleri tam olarak değişir; bir Dizin Oluşturucu birden çok çalıştırdaki değerleri aynı alana birleştiremez.</br></br>Başka bir çoklu Dizin Oluşturucu kullanım örneği [bilişsel arama çapraz bölge ölçeklendirmektir](search-performance-optimization.md#data-sync). Farklı bölgelerde aynı arama dizininin kopyalarına sahip olabilirsiniz. Arama dizini içeriğini eşzamanlı hale getirmek için, her bir dizin oluşturucunun farklı bir arama dizinini hedeflediği aynı veri kaynağından birden çok dizinleyici çekmesini sağlayabilirsiniz.</br></br>Çok büyük veri kümelerinin [paralel dizinlemesi](search-howto-large-index.md#parallel-indexing) de bir çoklu Dizin Oluşturucu stratejisi gerektirir. Her Dizin Oluşturucu verilerin bir alt kümesini hedefler. |
 | İçerik dönüştürme | Bilişsel Arama, yeni aranabilir içerik ve yapı oluşturmak için görüntü analizi ve doğal dil işleme ekleyen isteğe bağlı [AI zenginleştirme](cognitive-search-concept-intro.md) davranışlarını destekler. AI zenginleştirme, eklenen bir [beceri](cognitive-search-working-with-skillsets.md)aracılığıyla Dizin Oluşturucu temelli bir. AI zenginleştirme işlemini gerçekleştirmek için, dizin oluşturucunun yine bir dizin ve Azure veri kaynağı olması gerekir, ancak bu senaryoda Dizin Oluşturucu yürütmeye beceri işlem ekler. |
 
 <a name="supported-data-sources"></a>
@@ -42,7 +42,7 @@ Dizin oluşturucular Azure 'da veri depolarında gezinme.
 
 + [Azure Blob Depolama](search-howto-indexing-azure-blob-storage.md)
 + [Azure Data Lake Storage 2.](search-howto-index-azure-data-lake-storage.md) (önizlemede)
-+ [Azure Tablo depolama](search-howto-indexing-azure-tables.md)
++ [Azure Tablo Depolama](search-howto-indexing-azure-tables.md)
 + [Azure Cosmos DB](search-howto-index-cosmosdb.md)
 + [Azure SQL Veritabanı](search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md)
 + [SQL Yönetilen Örnek](search-howto-connecting-azure-sql-mi-to-azure-search-using-indexers.md)

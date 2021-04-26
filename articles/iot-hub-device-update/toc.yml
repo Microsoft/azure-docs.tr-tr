@@ -68,10 +68,26 @@
       items:
         - name: Cihaz güncelleştirmelerinin sorunlarını giderme
           href: troubleshoot-device-update.md
+        - name: Cihaz güncelleştirme istemcisi hata kodları
+          href: device-update-error-codes.md
 - name: Başvuru
   items:
-    - name: Cihaz güncelleştirme istemcisi hata kodları
-      href: device-update-error-codes.md
+    - name: REST API
+      href: 'https://docs.microsoft.com/rest/api/deviceupdate/'
+    - name: Denetim düzlemi SDK 'Sı
+      items:
+        - name: .NET
+          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/iot/management?view=azure-dotnet'
+        - name: Python
+          href: 'https://docs.microsoft.com/python/api/azure-mgmt-deviceupdate/?view=azure-python'
+    - name: Veri düzlemi SDK 'Sı
+      items:
+        - name: JavaScript
+          href: 'https://docs.microsoft.com/javascript/api/@azure/iot-device-update/?view=azure-node-preview'
+        - name: Java
+          href: 'https://docs.microsoft.com/java/api/com.azure.iot.deviceupdate?view=azure-java-preview'
+        - name: Python
+          href: 'https://docs.microsoft.com/python/api/azure-mgmt-deviceupdate/azure.mgmt.deviceupdate?view=azure-python-preview'
 - name: Kaynaklar
   items:
     - name: Destek ve yardım seçenekleri

@@ -6,12 +6,12 @@ ms.date: 04/16/2020
 author: MS-jgol
 ms.custom: devx-track-java
 ms.author: jgol
-ms.openlocfilehash: bd6ed2e5c848b39ad946209d5ea92fcf6ce3b438
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9e824af23fd83725b426d5860186d3c4b1496e18
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98625373"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448908"
 ---
 # <a name="adding-the-jvm-arg---azure-monitor-application-insights-for-java"></a>Java için JVM arg-Azure Izleyici Application Insights ekleme
 
@@ -23,24 +23,24 @@ ms.locfileid: "98625373"
 
 ## <a name="spring-boot"></a>Spring Boot
 
-Daha önce bir yere JVM bağımsız değişkeni ekleyin `-javaagent:path/to/applicationinsights-agent-3.0.2.jar` `-jar` , örneğin:
+Daha önce bir yere JVM bağımsız değişkeni ekleyin `-javaagent:path/to/applicationinsights-agent-3.0.3.jar` `-jar` , örneğin:
 
 ```
-java -javaagent:path/to/applicationinsights-agent-3.0.2.jar -jar <myapp.jar>
+java -javaagent:path/to/applicationinsights-agent-3.0.3.jar -jar <myapp.jar>
 ```
 
 ## <a name="spring-boot-via-docker-entry-point"></a>Docker giriş noktası aracılığıyla Spring Boot
 
-*Exec* formunu kullanıyorsanız, parametresini parametre `"-javaagent:path/to/applicationinsights-agent-3.0.2.jar"` listesine parametresinden önce bir yerde ekleyin `"-jar"` , örneğin:
+*Exec* formunu kullanıyorsanız, parametresini parametre `"-javaagent:path/to/applicationinsights-agent-3.0.3.jar"` listesine parametresinden önce bir yerde ekleyin `"-jar"` , örneğin:
 
 ```
-ENTRYPOINT ["java", "-javaagent:path/to/applicationinsights-agent-3.0.2.jar", "-jar", "<myapp.jar>"]
+ENTRYPOINT ["java", "-javaagent:path/to/applicationinsights-agent-3.0.3.jar", "-jar", "<myapp.jar>"]
 ```
 
-*Kabuk* formunu kullanıyorsanız, daha önce bir yere JVM bağımsız değişkeni ekleyin `-javaagent:path/to/applicationinsights-agent-3.0.2.jar` `-jar` , örneğin:
+*Kabuk* formunu kullanıyorsanız, daha önce bir yere JVM bağımsız değişkeni ekleyin `-javaagent:path/to/applicationinsights-agent-3.0.3.jar` `-jar` , örneğin:
 
 ```
-ENTRYPOINT java -javaagent:path/to/applicationinsights-agent-3.0.2.jar -jar <myapp.jar>
+ENTRYPOINT java -javaagent:path/to/applicationinsights-agent-3.0.3.jar -jar <myapp.jar>
 ```
 
 ## <a name="tomcat-8-linux"></a>Tomcat 8 (Linux)
@@ -50,7 +50,7 @@ ENTRYPOINT java -javaagent:path/to/applicationinsights-agent-3.0.2.jar -jar <mya
 Veya aracılığıyla Tomcat yüklediyseniz `apt-get` `yum` , bir dosyanız olmalıdır `/etc/tomcat8/tomcat8.conf` .  Bu satırı Bu dosyanın sonuna ekleyin:
 
 ```
-JAVA_OPTS="$JAVA_OPTS -javaagent:path/to/applicationinsights-agent-3.0.2.jar"
+JAVA_OPTS="$JAVA_OPTS -javaagent:path/to/applicationinsights-agent-3.0.3.jar"
 ```
 
 ### <a name="tomcat-installed-via-download-and-unzip"></a>Tomcat, indirme ve unzip ile yüklendi
@@ -58,10 +58,10 @@ JAVA_OPTS="$JAVA_OPTS -javaagent:path/to/applicationinsights-agent-3.0.2.jar"
 İndirme ve unzip aracılığıyla Tomcat 'i yüklediyseniz [https://tomcat.apache.org](https://tomcat.apache.org) , bir dosyanız olmalıdır `<tomcat>/bin/catalina.sh` .  Aşağıdaki içerikle adlı aynı dizinde yeni bir dosya oluşturun `<tomcat>/bin/setenv.sh` :
 
 ```
-CATALINA_OPTS="$CATALINA_OPTS -javaagent:path/to/applicationinsights-agent-3.0.2.jar"
+CATALINA_OPTS="$CATALINA_OPTS -javaagent:path/to/applicationinsights-agent-3.0.3.jar"
 ```
 
-Dosya `<tomcat>/bin/setenv.sh` zaten varsa, bu dosyayı değiştirip `-javaagent:path/to/applicationinsights-agent-3.0.2.jar` öğesine ekleyin `CATALINA_OPTS` .
+Dosya `<tomcat>/bin/setenv.sh` zaten varsa, bu dosyayı değiştirip `-javaagent:path/to/applicationinsights-agent-3.0.3.jar` öğesine ekleyin `CATALINA_OPTS` .
 
 
 ## <a name="tomcat-8-windows"></a>Tomcat 8 (Windows)
@@ -71,36 +71,36 @@ Dosya `<tomcat>/bin/setenv.sh` zaten varsa, bu dosyayı değiştirip `-javaagent
 Dosyayı bulun `<tomcat>/bin/catalina.bat` .  Aşağıdaki içerikle adlı aynı dizinde yeni bir dosya oluşturun `<tomcat>/bin/setenv.bat` :
 
 ```
-set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:path/to/applicationinsights-agent-3.0.2.jar
+set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:path/to/applicationinsights-agent-3.0.3.jar
 ```
 
 Tırnak işaretleri gerekli değildir, ancak bunları dahil etmek istiyorsanız, doğru yerleştirme şu şekilde olur:
 
 ```
-set "CATALINA_OPTS=%CATALINA_OPTS% -javaagent:path/to/applicationinsights-agent-3.0.2.jar"
+set "CATALINA_OPTS=%CATALINA_OPTS% -javaagent:path/to/applicationinsights-agent-3.0.3.jar"
 ```
 
-Dosya `<tomcat>/bin/setenv.bat` zaten varsa, bu dosyayı değiştirip `-javaagent:path/to/applicationinsights-agent-3.0.2.jar` öğesine ekleyin `CATALINA_OPTS` .
+Dosya `<tomcat>/bin/setenv.bat` zaten varsa, bu dosyayı değiştirip `-javaagent:path/to/applicationinsights-agent-3.0.3.jar` öğesine ekleyin `CATALINA_OPTS` .
 
 ### <a name="running-tomcat-as-a-windows-service"></a>Windows hizmeti olarak Tomcat çalıştırma
 
-Dosyayı bulun `<tomcat>/bin/tomcat8w.exe` .  Bu çalıştırılabiliri çalıştırın ve `-javaagent:path/to/applicationinsights-agent-3.0.2.jar` `Java Options` sekmesinde altına ekleyin `Java` .
+Dosyayı bulun `<tomcat>/bin/tomcat8w.exe` .  Bu çalıştırılabiliri çalıştırın ve `-javaagent:path/to/applicationinsights-agent-3.0.3.jar` `Java Options` sekmesinde altına ekleyin `Java` .
 
 
 ## <a name="jboss-eap-7"></a>Jpatron EAP 7
 
 ### <a name="standalone-server"></a>Tek başına sunucu
 
-`-javaagent:path/to/applicationinsights-agent-3.0.2.jar` `JAVA_OPTS` Dosyadaki `JBOSS_HOME/bin/standalone.conf` (Linux) veya (Windows) var olan ortam değişkenine ekleyin `JBOSS_HOME/bin/standalone.conf.bat` :
+`-javaagent:path/to/applicationinsights-agent-3.0.3.jar` `JAVA_OPTS` Dosyadaki `JBOSS_HOME/bin/standalone.conf` (Linux) veya (Windows) var olan ortam değişkenine ekleyin `JBOSS_HOME/bin/standalone.conf.bat` :
 
 ```java    ...
-    JAVA_OPTS="<b>-javaagent:path/to/applicationinsights-agent-3.0.2.jar</b> -Xms1303m -Xmx1303m ..."
+    JAVA_OPTS="<b>-javaagent:path/to/applicationinsights-agent-3.0.3.jar</b> -Xms1303m -Xmx1303m ..."
     ...
 ```
 
 ### <a name="domain-server"></a>Etki alanı sunucusu
 
-`-javaagent:path/to/applicationinsights-agent-3.0.2.jar`' De var olan öğesine ekleyin `jvm-options` `JBOSS_HOME/domain/configuration/host.xml` :
+`-javaagent:path/to/applicationinsights-agent-3.0.3.jar`' De var olan öğesine ekleyin `jvm-options` `JBOSS_HOME/domain/configuration/host.xml` :
 
 ```xml
 ...
@@ -110,7 +110,7 @@ Dosyayı bulun `<tomcat>/bin/tomcat8w.exe` .  Bu çalıştırılabiliri çalış
         <jvm-options>
             <option value="-server"/>
             <!--Add Java agent jar file here-->
-            <option value="-javaagent:path/to/applicationinsights-agent-3.0.2.jar"/>
+            <option value="-javaagent:path/to/applicationinsights-agent-3.0.3.jar"/>
             <option value="-XX:MetaspaceSize=96m"/>
             <option value="-XX:MaxMetaspaceSize=256m"/>
         </jvm-options>
@@ -150,20 +150,20 @@ Bu satırları Ekle `start.ini`
 
 ```
 --exec
--javaagent:path/to/applicationinsights-agent-3.0.2.jar
+-javaagent:path/to/applicationinsights-agent-3.0.3.jar
 ```
 
 
 ## <a name="payara-5"></a>Payara 5
 
-`-javaagent:path/to/applicationinsights-agent-3.0.2.jar`' De var olan öğesine ekleyin `jvm-options` `glassfish/domains/domain1/config/domain.xml` :
+`-javaagent:path/to/applicationinsights-agent-3.0.3.jar`' De var olan öğesine ekleyin `jvm-options` `glassfish/domains/domain1/config/domain.xml` :
 
 ```xml
 ...
 <java-config ...>
     <!--Edit the JVM options here-->
     <jvm-options>
-        -javaagent:path/to/applicationinsights-agent-3.0.2.jar>
+        -javaagent:path/to/applicationinsights-agent-3.0.3.jar>
     </jvm-options>
         ...
 </java-config>
@@ -179,7 +179,7 @@ Java and Process Management > Process definition >  Java Virtual Machine
 ```
 "Genel JVM bağımsız değişkenleri" içinde aşağıdakileri ekleyin:
 ```
--javaagent:path/to/applicationinsights-agent-3.0.2.jar
+-javaagent:path/to/applicationinsights-agent-3.0.3.jar
 ```
 Bundan sonra uygulama sunucusunu kaydedin ve yeniden başlatın.
 
@@ -188,5 +188,5 @@ Bundan sonra uygulama sunucusunu kaydedin ve yeniden başlatın.
 
 Sunucu dizininde yeni bir dosya oluşturun `jvm.options` (örneğin `<openliberty>/usr/servers/defaultServer` ) ve şu satırı ekleyin:
 ```
--javaagent:path/to/applicationinsights-agent-3.0.2.jar
+-javaagent:path/to/applicationinsights-agent-3.0.3.jar
 ```

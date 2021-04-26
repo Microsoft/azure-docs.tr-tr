@@ -11,12 +11,12 @@ author: mashamsft
 ms.author: mathoma
 ms.reviewer: carlrab
 ms.date: 03/27/2019
-ms.openlocfilehash: 363278e0b9969dad652dd00debe4ffc0138e9a97
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f4054d19ccf4d136e30896bc066e51c92a4a4ad9
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87503795"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783476"
 ---
 # <a name="use-cli-to-restore-a-single-database-in-azure-sql-database-to-an-earlier-point-in-time"></a>Azure SQL veritabanı 'ndaki tek bir veritabanını önceki bir zaman noktasına geri yüklemek için CLı kullanma
 
@@ -54,7 +54,7 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Açıklama |
 |---|---|
-| [az SQL DB restore](/cli/azure/sql/db#az-sql-db-restore) | Restore Database komutu. |
+| [az SQL DB restore](/cli/azure/sql/db#az_sql_db_restore) | Restore Database komutu. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

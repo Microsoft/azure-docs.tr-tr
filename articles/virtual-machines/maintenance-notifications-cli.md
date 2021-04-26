@@ -8,18 +8,18 @@ ms.workload: infrastructure-services
 ms.topic: how-to
 ms.date: 11/19/2019
 ms.author: shants
-ms.openlocfilehash: cd042ce09533cbefe37cb2e4d311a3857e3dfdec
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: d8a9b7ec6425a3cd32b597c3f14f8227fde67064
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102552414"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777878"
 ---
 # <a name="handling-planned-maintenance-notifications-using-the-azure-cli"></a>Azure CLı kullanarak planlı bakım bildirimlerini işleme
 
 **Bu makale hem Linux hem de Windows çalıştıran sanal makineler için geçerlidir.**
 
-Sanal makinelerin [bakım](maintenance-notifications.md)için ne zaman zamanlandığını görmek için CLI 'yi kullanabilirsiniz. Planlı bakım bilgilerine [az VM Get-instance-View](/cli/azure/vm#az-vm-get-instance-view)üzerinden ulaşabilirsiniz.
+Sanal makinelerin [bakım](maintenance-notifications.md)için ne zaman zamanlandığını görmek için CLI 'yi kullanabilirsiniz. Planlı bakım bilgilerine [az VM Get-instance-View](/cli/azure/vm#az_vm_get_instance_view)üzerinden ulaşabilirsiniz.
  
 Bakım bilgileri yalnızca bakım planlandı durumunda döndürülür. 
 

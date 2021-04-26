@@ -7,12 +7,12 @@ ms.topic: sample
 ms.date: 10/25/2017
 ms.author: tomfitz
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 7feb00b581732cdc1956c4ac23af571180ff09e0
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2430b14ce3a3ba578787cefa85d95475c3e9b920
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87497843"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775466"
 ---
 # <a name="create-a-managed-application-definition-with-azure-cli"></a>Azure CLI ile yönetilen uygulama tanımı oluşturma
 
@@ -34,7 +34,7 @@ Bu betik, yönetilen uygulama tanımını oluşturmak için aşağıdaki komutu 
 
 | Komut | Notlar |
 |---|---|
-| [az managedapp definition create](/cli/azure/managedapp/definition#az-managedapp-definition-create) | Yönetilen uygulama tanımı oluşturur. Gerekli dosyaları içeren paketi sağlar. |
+| [az managedapp definition create](/cli/azure/managedapp/definition#az_managedapp_definition_create) | Yönetilen uygulama tanımı oluşturur. Gerekli dosyaları içeren paketi sağlar. |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

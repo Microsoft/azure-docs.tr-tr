@@ -4,12 +4,12 @@ description: Azure Event Grid olaylar için CloudEvents şemasının nasıl kull
 ms.topic: conceptual
 ms.date: 11/10/2020
 ms.custom: devx-track-js, devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: 484f118791d57c082a9f4383b1af4a22c04849c4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0ee816663a385601d4a31edbf87f8c787ea5aa91
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101737911"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389511"
 ---
 # <a name="use-cloudevents-v10-schema-with-event-grid"></a>Event Grid ile CloudEvents v 1.0 şeması kullanma
 Azure Event Grid, [varsayılan olay şemasına](event-schema.md)ek olarak, [cloudevents v 1.0](https://github.com/cloudevents/spec/blob/v1.0/json-format.md) ve [http protokol bağlamasının](https://github.com/cloudevents/spec/blob/v1.0/http-protocol-binding.md)JSON uygulamasındaki olayları yerel olarak destekler. [Cloudevents](https://cloudevents.io/) , olay verilerini tanımlamaya yönelik [açık bir belirtimdir](https://github.com/cloudevents/spec/blob/v1.0/spec.md) .
@@ -60,10 +60,10 @@ CloudEvents şemasında olay girişi ve çıktısı için Event Grid kullanabili
 
  Event Grid kaynağı | Giriş şeması       | Teslim şeması
 |---------------------|-------------------|---------------------
-| Sistem konuları       | Olay Kılavuz şeması | Event Grid şeması veya CloudEvents şeması
-| Kullanıcı konuları/etki alanları | Olay Kılavuz şeması | Event Grid şeması veya CloudEvents şeması
-| Kullanıcı konuları/etki alanları | CloudEvents şeması | CloudEvents şeması
-| Kullanıcı konuları/etki alanları | Özel şema     | Özel şema, Event Grid şeması veya CloudEvents şeması
+| Sistem konu başlıkları       | Olay Kılavuz şeması | Event Grid şeması veya CloudEvents şeması
+| Özel konular/etki alanları | Olay Kılavuz şeması | Event Grid şeması veya CloudEvents şeması
+| Özel konular/etki alanları | CloudEvents şeması | CloudEvents şeması
+| Özel konular/etki alanları | Özel şema     | Özel şema, Event Grid şeması veya CloudEvents şeması
 | İş ortağı konuları       | CloudEvents şeması | CloudEvents şeması
 
 Tüm olay şemaları için, Event Grid bir konuya yayımlarken ve bir olay aboneliği oluştururken Event Grid doğrulama gerektirir.

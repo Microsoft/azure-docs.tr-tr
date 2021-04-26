@@ -5,12 +5,12 @@ author: noakup
 ms.author: noakuper
 ms.topic: conceptual
 ms.date: 10/05/2020
-ms.openlocfilehash: 76c6d7caf3c63779e12443304688192f7311720a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b3bbd8510c47831c9568bb10c62e2a5ca751902a
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104594572"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107863038"
 ---
 # <a name="use-azure-private-link-to-securely-connect-networks-to-azure-monitor"></a>Ağları Azure İzleyici'ye güvenle bağlamak için Azure Özel Bağlantı'yı kullanma
 
@@ -179,7 +179,7 @@ Oluşturduğunuz özel uç noktasının artık dört DNS bölgesi yapılandırı
 
 #### <a name="privatelink-monitor-azure-com"></a>Privatelink-izleme-Azure-com
 Bu bölge, Azure Izleyici tarafından kullanılan küresel uç noktaları kapsadığından, bu uç noktaların belirli bir kaynağı değil tüm kaynakları dikkate alır. Bu bölgede, için eşlenmiş uç noktalar olmalıdır:
-* `in.ai` -(Application Insights alma uç noktası, genel ve bölgesel bir giriş görürsünüz
+* `in.ai` -Application Insights alma uç noktası (hem genel hem de bölgesel giriş)
 * `api` -Application Insights ve Log Analytics API uç noktası
 * `live` -Application Insights canlı ölçüm uç noktası
 * `profiler` -Application Insights Profiler uç noktası
@@ -197,8 +197,15 @@ Bu bölge, ODS uç noktalarına çalışma alanına özgü eşlemeyi içerir. Lo
 Bu bölge, aracı hizmeti Otomasyon uç noktalarına çalışma alanına özgü eşlemeyi içerir. Bu özel uç noktayla bağlantılı olan AMPLS 'e bağlı her çalışma alanı için bir giriş görmeniz gerekir.
 [![Özel DNS bölge Aracısı svc-Azure-Automation-net ekran görüntüsü.](./media/private-link-security/dns-zone-privatelink-agentsvc-azure-automation-net.png)](./media/private-link-security/dns-zone-privatelink-agentsvc-azure-automation-net-expanded.png#lightbox)
 
+#### <a name="privatelink-blob-core-windows-net"></a>Privatelink-blob-çekirdek-Windows-NET
+Bu bölge, genel aracıların çözüm paketleri depolama hesabıyla bağlantıyı yapılandırır. Aracıda, aracılar yeni veya güncelleştirilmiş çözüm paketlerini (yönetim paketleri olarak da bilinir) indirebilir. Kaç çalışma alanı kullanıldığına bakılmaksızın Log Analytics aracılarını işlemek için yalnızca bir giriş gereklidir.
+[![Özel DNS Zone blob 'un ekran görüntüsü-çekirdek-Windows-net.](./media/private-link-security/dns-zone-privatelink-blob-core-windows-net.png)](./media/private-link-security/dns-zone-privatelink-blob-core-windows-net-expanded.png#lightbox)
+> [!NOTE]
+> Bu giriş yalnızca 19 Nisan 2021 ' de veya sonrasında oluşturulan özel bağlantı kurulumlarına eklenir.
+
+
 ### <a name="validating-you-are-communicating-over-a-private-link"></a>Özel bir bağlantı üzerinden iletişim kurduğunuz doğrulanıyor
-* İsteklerinizin özel uç nokta ve özel IP eşlenmiş uç noktalara gönderilmesini sağlamak için, bunları bir ağ izleme ile, hatta tarayıcınızda inceleyebilirsiniz. Örneğin, çalışma alanınızı veya uygulamanızı sorgulamaya çalışırken, isteğin API uç noktasına eşlenmiş özel IP 'ye gönderildiğinden emin olun, bu örnekte *172.17.0.9*.
+* İsteklerinizin özel uç nokta ve özel IP eşlenmiş uç noktalar aracılığıyla gönderilmesini sağlamak için, bunları bir ağ izleme aracı veya hatta tarayıcınız ile inceleyebilirsiniz. Örneğin, çalışma alanınızı veya uygulamanızı sorgulamaya çalışırken, isteğin API uç noktasına eşlenmiş özel IP 'ye gönderildiğinden emin olun, bu örnekte *172.17.0.9*.
 
     Note: bazı tarayıcılarda diğer DNS ayarları (bkz. [tarayıcı DNS ayarları](#browser-dns-settings)) kullanılabilir. DNS ayarlarınızın uygulanmasını sağlayın.
 
@@ -217,7 +224,7 @@ Azure portala gidin. Log Analytics çalışma alanı kaynak menüsünde, sol tar
 Çalışma alanına bağlı tüm kapsamlar Bu ekranda görünür. Kapsamlara bağlanma (AMPLSs), her bir AMPLS 'e bağlanan sanal ağdan gelen ağ trafiğinin bu çalışma alanına ulaşmasını sağlar. Buradan bir bağlantı oluşturmak, [Azure izleyici kaynaklarını bağlarken](#connect-azure-monitor-resources)olduğu gibi kapsamda ayarlama ile aynı etkiye sahiptir. Yeni bir bağlantı eklemek için **Ekle** ' yi seçin ve Azure Izleyici özel bağlantı kapsamını seçin. Bu uygulamayı bağlamak için **Uygula** ' yı seçin. Çalışma alanının, [sınırlamalar ve sınırlamalar](#restrictions-and-limitations)bölümünde belirtildiği gıbı 5 ampls nesnesine bağlanabildiğini unutmayın. 
 
 ### <a name="manage-access-from-outside-of-private-links-scopes"></a>Özel bağlantı kapsamları dışından erişimi yönetme
-Bu sayfanın alt kısmındaki ayarlar, genel ağlardan erişimi denetler, yani yukarıda listelenen kapsamlar aracılığıyla bağlı olmayan ağlar. Giriş **için genel ağ erişimine Izin ver** ayarı, bağlı kapsamlar dışındaki makinelerden gelen günlüklerin biriktirme listesini **içermez** . **Sorgular için ortak ağ erişimine Izin ver** ayarı, kapsamların dışındaki makinelerden gelen **hiçbir** blok sorgusu vermez. Bu, çalışma kitapları, panolar, API tabanlı istemci deneyimleri, Azure portal içgörüler ve daha fazlası aracılığıyla çalıştırılan sorgular içerir. Azure portal dışında çalışan deneyimler ve sorgu Log Analytics verileri özel bağlantılı VNET içinde de çalışıyor olması gerekir.
+Bu sayfanın alt kısmındaki ayarlar ortak ağlardan erişimi denetler, yani listelenen kapsamlar (AMPLSs) ile bağlı değildir. Giriş **için genel ağ erişimine Izin ver** ayarı, bağlı kapsamlar dışındaki makinelerden gelen günlüklerin biriktirme listesini **içermez** . **Sorgular için ortak ağ erişimine Izin ver** ayarı, kapsamların dışındaki makinelerden gelen **hiçbir** blok sorgusu vermez. Bu, çalışma kitapları, panolar, API tabanlı istemci deneyimleri, Azure portal içgörüler ve daha fazlası aracılığıyla çalıştırılan sorgular içerir. Azure portal dışında çalışan deneyimler ve sorgu Log Analytics verileri özel bağlantılı VNET içinde de çalışıyor olması gerekir.
 
 ### <a name="exceptions"></a>Özel durumlar
 Yukarıda açıklandığı gibi erişimin sınırlandırılması Azure Resource Manager uygulanmaz ve bu nedenle aşağıdaki sınırlamalara sahiptir:
@@ -228,15 +235,18 @@ Yukarıda açıklandığı gibi erişimin sınırlandırılması Azure Resource 
 > [Tanılama ayarları](../essentials/diagnostic-settings.md) aracılığıyla bir çalışma alanına yüklenen Günlükler ve ölçümler güvenli bir özel Microsoft kanalının üzerine gider ve bu ayarlar tarafından denetlenmez.
 
 ### <a name="log-analytics-solution-packs-download"></a>Log Analytics çözüm paketlerini indirme
+Log Analytics aracıların çözüm paketlerini indirmek için küresel bir depolama hesabına erişmesi gerekir. 19 Nisan 2021 ' de veya sonrasında oluşturulan özel bağlantı kurulumları, aracıların çözüm paketleri depolamasına özel bağlantı üzerinden erişebilir. Bu, [BLOB.Core.Windows.net](#privatelink-blob-core-windows-net)için oluşturulan yeni DNS bölgesi aracılığıyla yapılabilir.
 
-Log Analytics aracısının çözüm paketlerini indirmesini sağlamak için, uygun tam etki alanı adlarını güvenlik duvarı izin verilenler listenize ekleyin. 
+Özel bağlantı kurulumunuzu 19 Nisan 2021 ' den önce oluşturulduysa, özel bir bağlantı üzerinden çözüm paketleri depolamasına erişmez. Bunu işlemek için aşağıdakilerden birini yapabilirsiniz:
+* AMPLS 'lerinizi ve ona bağlı özel uç noktayı yeniden oluşturun
+* Güvenlik duvarınızın allowlist 'nize aşağıdaki kuralları ekleyerek, aracılarınızın genel uç noktası aracılığıyla depolama hesabına ulaşmasını sağlar:
 
+    | Bulut ortamı | Aracı Kaynağı | Bağlantı noktaları | Yön |
+    |:--|:--|:--|:--|
+    |Azure Genel     | scadvisorcontent.blob.core.windows.net         | 443 | Giden
+    |Azure Kamu | usbn1oicore.blob.core.usgovcloudapi.net | 443 |  Giden
+    |Azure China 21Vianet      | mceast2oicore.blob.core.chinacloudapi.cn| 443 | Giden
 
-| Bulut ortamı | Aracı Kaynağı | Bağlantı noktaları | Yön |
-|:--|:--|:--|:--|
-|Azure Genel     | scadvisorcontent.blob.core.windows.net         | 443 | Giden
-|Azure Kamu | usbn1oicore.blob.core.usgovcloudapi.net | 443 |  Giden
-|Azure China 21Vianet      | mceast2oicore.blob.core.chinacloudapi.cn| 443 | Giden
 
 ## <a name="configure-application-insights"></a>Application Insights'ı Yapılandırma
 
@@ -246,7 +256,7 @@ Azure portala gidin. Azure Izleyici Application Insights bileşen kaynağında, 
 
 İlk olarak, bu Application Insights kaynağını, erişiminiz olan Azure Izleyici özel bağlantı kapsamlarına bağlayabilirsiniz. **Ekle** ' yi seçin ve **Azure Izleyici özel bağlantı kapsamını** seçin. Bu uygulamayı bağlamak için Uygula ' yı seçin. Tüm bağlı kapsamlar Bu ekranda görünür. Bu bağlantının yapılması, bağlı sanal ağlardaki ağ trafiğinin bu bileşene ulaşmasını sağlar ve [Azure izleyici kaynaklarını bağladığımızda](#connect-azure-monitor-resources)kapsama bağlama ile aynı etkiye sahiptir. 
 
-İkincisi, daha önce listelenen özel bağlantı kapsamları (AMPLS) dışından bu kaynağa nasıl ulaşılgidebileceğini kontrol edebilirsiniz. Alma **için genel ağ erişimine Izin ver** ' i **Hayır** olarak ayarlarsanız, bağlı kapsamların dışındaki makineler veya SDK 'lar bu bileşene veri yükleyebilir. **Sorgular için ortak ağ erişimine Izin ver** ' i **Hayır** olarak ayarlarsanız, kapsamların dışındaki makineler bu Application Insights kaynaktaki verilere erişemez. Bu veriler APM günlüklerine, ölçümlere ve canlı ölçüm akışına erişimi, ayrıca çalışma kitapları, panolar, sorgu API tabanlı istemci deneyimleri, Azure portal içgörüler ve daha fazlası gibi en üstte oluşturulan deneyimlerden de oluşur. 
+Daha sonra, bu kaynağa daha önce listelenen özel bağlantı kapsamları (AMPLS) dışından nasıl ulaşılgidebileceğini kontrol edebilirsiniz. Alma **için genel ağ erişimine Izin ver** ' i **Hayır** olarak ayarlarsanız, bağlı kapsamların dışındaki makineler veya SDK 'lar bu bileşene veri yükleyebilir. **Sorgular için ortak ağ erişimine Izin ver** ' i **Hayır** olarak ayarlarsanız, kapsamların dışındaki makineler bu Application Insights kaynaktaki verilere erişemez. Bu veriler APM günlüklerine, ölçümlere ve canlı ölçüm akışına erişimi, ayrıca çalışma kitapları, panolar, sorgu API tabanlı istemci deneyimleri, Azure portal içgörüler ve daha fazlası gibi en üstte oluşturulan deneyimlerden de oluşur. 
 
 > [!NOTE]
 > Portal dışı tüketim deneyimleri, izlenen iş yüklerini içeren özel bağlantılı VNET üzerinde de çalışmalıdır.
@@ -282,9 +292,9 @@ Erişimin bu şekilde kısıtlanması yalnızca Application Insights kaynaktaki 
 
 Azure Resource Manager şablonları, REST ve komut satırı arabirimlerini kullanarak daha önce açıklanan işlemi otomatikleştirebilirsiniz.
 
-Özel bağlantı kapsamları oluşturup yönetmek için [REST API](/rest/api/monitor/private%20link%20scopes%20(preview)) veya [Azure CLI (az Monitor Private-link-scope)](/cli/azure/monitor/private-link-scope)kullanın.
+Özel bağlantı kapsamları oluşturup yönetmek için [REST API](/rest/api/monitor/privatelinkscopes(preview)/private%20link%20scoped%20resources%20(preview)) veya [Azure CLI (az Monitor Private-link-scope)](/cli/azure/monitor/private-link-scope)kullanın.
 
-Ağ erişimini yönetmek için, bayraklarını `[--ingestion-access {Disabled, Enabled}]` ve `[--query-access {Disabled, Enabled}]` [Log Analytics çalışma alanlarını](/cli/azure/monitor/log-analytics/workspace) veya [Application Insights bileşenlerini](/cli/azure/ext/application-insights/monitor/app-insights/component)kullanın.
+Ağ erişimini yönetmek için, bayraklarını `[--ingestion-access {Disabled, Enabled}]` ve `[--query-access {Disabled, Enabled}]` [Log Analytics çalışma alanlarını](/cli/azure/monitor/log-analytics/workspace) veya [Application Insights bileşenlerini](/cli/azure/monitor/app-insights/component)kullanın.
 
 ## <a name="collect-custom-logs-and-iis-log-over-private-link"></a>Özel Günlükler ve IIS oturumunu özel bağlantı üzerinden topla
 

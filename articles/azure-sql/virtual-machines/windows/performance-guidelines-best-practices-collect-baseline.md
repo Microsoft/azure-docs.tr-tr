@@ -16,10 +16,10 @@ ms.date: 03/25/2021
 ms.author: mathoma
 ms.reviewer: jroth
 ms.openlocfilehash: b1909d5fd5e3c02f104c73acb515740cb6ff65f6
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105572566"
 ---
 # <a name="collect-baseline-performance-best-practices-for-sql-server-on-azure-vm"></a>Temeli topla: Azure VM 'de SQL Server için en iyi performans uygulamaları

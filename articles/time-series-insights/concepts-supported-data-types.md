@@ -1,20 +1,20 @@
 ---
 title: Desteklenen veri türleri-Azure Time Series Insights Gen2 | Microsoft Docs
 description: Azure Time Series Insights Gen2 'de desteklenen veri türleri hakkında bilgi edinin.
-author: lyrana
-ms.author: lyhughes
-manager: deepakpalled
+author: deepakpalled
+ms.author: dpalled
+manager: diviso
 ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
 ms.date: 01/19/2021
-ms.openlocfilehash: b0536a152797d17cba0930b3a142a7fb92eaf5ea
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8e8e6f007e19d2514a5f75dbdda7da13e1f8be3c
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98685166"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505187"
 ---
 # <a name="supported-data-types"></a>Desteklenen veri türleri
 

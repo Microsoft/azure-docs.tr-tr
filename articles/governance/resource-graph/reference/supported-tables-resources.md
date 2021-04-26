@@ -1,15 +1,15 @@
 ---
 title: Desteklenen Azure Resource Manager kaynak türleri
 description: Azure Kaynak Grafiği ve değişiklik geçmişi tarafından desteklenen Azure Resource Manager kaynak türlerinin bir listesini sağlayın.
-ms.date: 03/24/2021
+ms.date: 04/06/2021
 ms.topic: reference
 ms.custom: generated
-ms.openlocfilehash: 482c261586d5d077a61781eff28698fa9994f332
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.openlocfilehash: 6161c2f53690140e2cd1140deaa8a22b3388dd2b
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105544154"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505272"
 ---
 # <a name="azure-resource-graph-table-and-resource-type-reference"></a>Azure Kaynak Grafiği tablosu ve kaynak türü başvurusu
 
@@ -84,7 +84,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Citrix. Services/XenDesktopEssentials (Citrix sanal masaüstleri temel bileşenleri)
 - Conexlink. Mycloudıt/hesapları (Mycloudıt-Azure masaüstü barındırma)
 - Crypteron. DataSecurity/Apps (Crypteron)
-- GitHub. Enterprise/accounts
+- GitHub. Enterprise/Accounts (GitHub AE)
 - gridpro. evops/hesaplar
 - gridpro. evops/accounts/eventrules
 - gridpro. evops/accounts/requesttemplates
@@ -97,7 +97,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. aadihar/azureadölçümlerini
 - Microsoft. aadihar/privateLinkForAzureAD (Azure AD için özel bağlantı)
 - Microsoft. aadihar/kiracılar
-- Microsoft. agkdplatform/farmtempts
+- Microsoft. Agresdplatform/Farmpts (Azure Farmpts PaaS)
 - Microsoft. aisupercomputer/accounts
 - Microsoft. aisupercomputer/accounts/jobgroups
 - Microsoft. aisupercomputer/accounts/jobgroups/Jobs
@@ -188,7 +188,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. Bilticisi/syntheticsAccounts (Synthetika hesapları)
 - Microsoft. Biliveservices/hesapları (bilişsel hizmetler)
 - Microsoft. COMPUTE/kullanılabilirliği Bilitysets (kullanılabilirlik kümeleri)
-- Microsoft. COMPUTE/capacityrezervationgroups
+- Microsoft. COMPUTE/Capacityrezervationgroups (kapasite ayırma grupları)
 - Microsoft. COMPUTE/capacityrezervationgroups/capacityayırmaları
 - Microsoft. COMPUTE/capacityayırmaları
 - Microsoft. COMPUTE/cloudServices (bulut Hizmetleri (genişletilmiş destek))
@@ -220,7 +220,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. ConnectedCache/cacheNodes (bağlı önbellek kaynakları)
 - Microsoft. connectedaraç/platformaccounts
 - Microsoft. connectedvmwarevsphere/ResourcePools
-- Microsoft. connectedvmwarevsphere/vcenters
+- Microsoft. connectedVMwareVSphere/vCenters (VMware vCenters)
 - Microsoft. ConnectedVMwarevSphere/VirtualMachines (VMware + AVS sanal makineleri)
 - Microsoft. connectedvmwarevsphere/virtualmachines/Extensions
 - Microsoft. connectedvmwarevsphere/virtualmachinetemplates
@@ -233,7 +233,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. containerregistry/kayıt defterleri/taskçalıştırmaları
 - Microsoft. containerregistry/kayıt defterleri/görevler
 - Microsoft. ContainerRegistry/kayıt defterleri/Web kancaları (kapsayıcı kayıt defteri Web kancaları)
-- Microsoft. ContainerService/containerServices (kapsayıcı Hizmetleri (kullanım dışı))
+- Microsoft. Containerservice/containerservices
 - Microsoft. ContainerService/Managedkümeler (Kubernetes Hizmetleri)
 - Microsoft. Containerservice/openshiftmanagedclusters
 - Microsoft. contoso/kümeler
@@ -259,6 +259,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. datamigration/Yuvaları
 - Microsoft. datamigration/sqlmigrationservices
 - Microsoft. DataProtection/Backupkasaları (yedekleme kasaları)
+- Microsoft. DataProtection/resourcekorumalara
 - Microsoft. DataProtection/resourceoperationgateacısı
 - Microsoft. DataShare/hesapları (veri paylaşımları)
 - Microsoft. Dbformarıdb/Servers (MariaDB sunucuları için Azure veritabanı)
@@ -302,7 +303,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. DomainRegistration/Domains (App Service etki alanları)
 - Microsoft. edgeorder/adresleri
 - Microsoft. edgeorder/ordercollections
-- Microsoft. edgeorder/siparişleri
+- Microsoft. EdgeOrder/siparişleri (Azure Edge)
 - Microsoft. elastik/izleyiciler (Elana Search)
 - Microsoft. enterpriseknowledgegraph/hizmetler
 - Microsoft. EventGrid/Domains (Event Grid etki alanları)
@@ -323,6 +324,8 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. HanaOnAzure/Hanaınstances (Azure 'da SAP HANA)
 - Microsoft. HanaOnAzure/Sapizleyicileri (SAP Çözümleri için Azure Izleyicileri)
 - Microsoft. hardwaresecuritymodules/ayrılmış atedhsms
+- Microsoft. HDInsight/kümehavuzları
+- Microsoft. HDInsight/clusterpools/kümeler
 - Microsoft. HDInsight/kümeler (HDInsight kümeleri)
 - Microsoft. HealthBot/Healthbotu (Azure sistem durumu bot)
 - Microsoft. Healthgelişme API 'leri/Hizmetleri (FHıR için Azure API)
@@ -395,8 +398,8 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. machinelearningservices/Workspaces/batchendpoints/dağıtımlar
 - Microsoft. machinelearningservices/Workspaces/ınenceendpoints
 - Microsoft. machinelearningservices/Workspaces/ınenceendpoints/dağıtımlar
-- Microsoft. MachineLearningServices/Workspaces/onlineEndpoints (ML uygulamaları)
-- Microsoft. MachineLearningServices/Workspaces/onlineEndpoints/dağıtımlar (ML uygulama dağıtımları)
+- Microsoft. MachineLearningServices/Workspaces/onlineEndpoints (makine öğrenimi çevrimiçi uç noktaları)
+- Microsoft. MachineLearningServices/Workspaces/onlineEndpoints/dağıtımlar (Machine Learning çevrimiçi dağıtımları)
 - Microsoft. Maintenance/maintenanceConfigurations (bakım yapılandırması)
 - Microsoft. Maintenance/maintenancepolicies
 - Microsoft. managedıdentity/gruplar
@@ -414,7 +417,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. Media/mediaservices/liveevents (canlı olaylar)
 - Microsoft. Media/mediaservices/streamingEndpoints (akış uç noktaları)
 - Microsoft. Media/mediaservices/dönüşümler
-- Microsoft. Media/videoçözümleyiciler
+- Microsoft. Media/videoçözümleyiciler (video Çözümleyicileri)
 - Microsoft. microservices4spring/appkümeler
 - Microsoft. Migrate/assessmentprojects
 - Microsoft. Migrate/migrateprojects
@@ -513,8 +516,8 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. Operationalınsights/çalışma alanları (Log Analytics çalışma alanları)
 - Microsoft. OperationsManagement/Solutions (çözümler)
 - Microsoft. operationsmanagement/views
-- Microsoft. orbte/contactprofiles
-- Microsoft. orbbir/spacecrafts
+- Microsoft. Orbbir/contactProfiles (ContactProfiles)
+- Microsoft. Orbbir/spacecrafts (spacecrafts)
 - Microsoft. eşlemesindeki/peerler (eşleme)
 - Microsoft. eşleme/peeringServices (eşleme Hizmetleri)
 - Microsoft. Portal/panolar (paylaşılan panolar)
@@ -525,7 +528,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. powerbiadanmış/oto scalevçekirdekleri
 - Microsoft. Powerbiadanmış/kapasiteler (Power BI Embedded)
 - Microsoft. powerplatform/enterprisepolicies
-- Microsoft. ProjectBabylon/Accounts (Babylon hesapları)
+- Microsoft. projectbabylon/hesaplar
 - Microsoft. purview/Accounts (purview hesapları)
 - Microsoft. hisse/çalışma alanları (hisse çalışma alanları)
 - Microsoft. RecoveryServices/kaults (Kurtarma Hizmetleri kasaları)
@@ -596,6 +599,7 @@ Azure Kaynak Grafiği [Azure Resource Manager](../../../azure-resource-manager/m
 - Microsoft. SYNAPSE/Privatelinkhub 'Ları (Azure SYNAPSE Analytics (özel bağlantı hub 'ları))
 - Microsoft. SYNAPSE/Workspaces (Azure SYNAPSE Analytics)
 - Microsoft. SYNAPSE/Workspaces/bigDataPools (Apache Spark havuzları)
+- Microsoft. SYNAPSE/Workspaces/kustopools
 - Microsoft. SYNAPSE/Workspaces/sqldatabases
 - Microsoft. SYNAPSE/Workspaces/Sqlhavuzlar (adanmış SQL havuzları)
 - Microsoft. teroyformoss/providerkayıtları

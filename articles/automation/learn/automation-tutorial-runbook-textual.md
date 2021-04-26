@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 04/19/2020
 ms.topic: tutorial
-ms.openlocfilehash: e822e17f154b72854c5150e071301d7bbd53072e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 45c7bb19e3f48fedf93fbb147a3014e09914a475
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98890823"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831285"
 ---
 # <a name="tutorial-create-a-powershell-workflow-runbook"></a>Öğretici: PowerShell Iş akışı runbook 'u oluşturma
 
@@ -146,7 +147,7 @@ Runbook uygulamanızı test ettiniz ve yayımladınız, ancak şu ana kadar fayd
 
    ```powershell-interactive
    # Ensures you do not inherit an AzContext in your runbook
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
 
    $Conn = Get-AutomationConnection -Name AzureRunAsConnection
    Connect-AzAccount -ServicePrincipal -Tenant $Conn.TenantID `
@@ -171,7 +172,7 @@ Runbook 'larınızın Azure aboneliğine kimlik doğrulaması yapdığına göre
    workflow MyFirstRunbook-Workflow
    {
    # Ensures that you do not inherit an AzContext in your runbook
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
 
    $Conn = Get-AutomationConnection -Name AzureRunAsConnection
    Connect-AzAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
@@ -200,7 +201,7 @@ Runbook 'larınız Şu anda runbook 'ta sabit kodlanmış sanal makineyi başlat
      [string]$ResourceGroupName
     )
    # Ensures you do not inherit an AzContext in your runbook
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
 
    $Conn = Get-AutomationConnection -Name AzureRunAsConnection
    Connect-AzAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint

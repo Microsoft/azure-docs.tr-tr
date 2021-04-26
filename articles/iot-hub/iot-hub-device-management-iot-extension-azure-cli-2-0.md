@@ -10,24 +10,18 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 01/16/2018
 ms.author: menchi
-ms.openlocfilehash: 499c0c065cb38313c98ed9412ab1f08d70dbc654
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a5bc7e195efd62f430fdf2aa0cb606dbcff79528
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102199535"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567205"
 ---
 # <a name="use-the-iot-extension-for-azure-cli-for-azure-iot-hub-device-management"></a>Azure için Azure CLı IoT Hub cihaz yönetimi için IoT uzantısını kullanma
 
 ![Uçtan uca diyagram](media/iot-hub-get-started-e2e-diagram/2.png)
 
-[!INCLUDE [iot-hub-get-started-note](../../includes/iot-hub-get-started-note.md)]
-
-[Azure CLI Için IoT uzantısı](https://github.com/Azure/azure-iot-cli-extension) , [Azure CLI](/cli/azure/overview)'nin özelliklerine ekleyen açık kaynaklı bir IoT uzantısıdır. Azure CLı, Azure Resource Manager ve yönetim uç noktalarıyla etkileşime yönelik komutlar içerir. Örneğin, Azure CLı kullanarak bir Azure VM veya IoT Hub 'ı oluşturabilirsiniz. CLı uzantısı, Azure hizmeti 'nin Azure CLı 'yi genişletmesine olanak tanıyarak, hizmete özgü ek yeteneklere erişmenizi sağlar. IoT uzantısı, IoT geliştiricilerine tüm IoT Hub, IoT Edge ve IoT Hub cihaz sağlama hizmeti özelliklerine yönelik komut satırı erişimi sağlar.
-
-[!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
-
-[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
+Bu makalede, Azure CLı için IoT uzantısı 'nı geliştirme makinenizde çeşitli yönetim seçenekleriyle nasıl kullanacağınızı öğreneceksiniz. [Azure CLI Için IoT uzantısı](https://github.com/Azure/azure-iot-cli-extension) , [Azure CLI](/cli/azure/overview)'nin özelliklerine ekleyen açık kaynaklı bir IoT uzantısıdır. Azure CLı, Azure Resource Manager ve yönetim uç noktalarıyla etkileşime yönelik komutlar içerir. Örneğin, Azure CLı kullanarak bir Azure VM veya IoT Hub 'ı oluşturabilirsiniz. CLı uzantısı, Azure hizmeti 'nin Azure CLı 'yi genişletmesine olanak tanıyarak, hizmete özgü ek yeteneklere erişmenizi sağlar. IoT uzantısı, IoT geliştiricilerine tüm IoT Hub, IoT Edge ve IoT Hub cihaz sağlama hizmeti özelliklerine yönelik komut satırı erişimi sağlar.
 
 | Yönetim seçeneği          | Görev  |
 |----------------------------|-----------|
@@ -41,21 +35,19 @@ Bu seçenekleri kullanmayla ilgili farklılıklar ve yönergeler hakkında daha 
 
 Cihaz çiftleri, cihaz durumu bilgilerini (meta veriler, yapılandırmalar ve koşullar) depolayan JSON belgelerdir. IoT Hub, kendisine bağlanan her cihaz için bir cihaz ikizi devam ettirir. Cihaz TWINS hakkında daha fazla bilgi için bkz. [cihaz ikgörülerle çalışmaya başlama](iot-hub-node-node-twin-getstarted.md).
 
-## <a name="what-you-learn"></a>Öğrenecekleriniz
+[!INCLUDE [iot-hub-get-started-note](../../includes/iot-hub-get-started-note.md)]
 
-Geliştirme makinenizde çeşitli yönetim seçenekleriyle Azure CLı için IoT uzantısını kullanmayı öğrenirsiniz.
+[!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 
-## <a name="what-you-do"></a>Yapabilecekleriniz
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
-Azure CLI ve IoT uzantısını çeşitli yönetim seçenekleriyle çalıştırın.
+## <a name="prerequisites"></a>Önkoşullar
 
-## <a name="what-you-need"></a>Gerekenler
+* [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun. Örneğin, [node.jsIle Raspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md) 'ye gidebilir veya [Telemetriyi gönder](quickstart-send-telemetry-dotnet.md) hızlı başlangıçlarından birine gidebilirsiniz. Bu makaleler aşağıdaki gereksinimleri kapsar:
 
-* [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun; Örneğin, [node.jsRaspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md). Bu öğeler aşağıdaki gereksinimleri kapsar:
-
-  - Etkin bir Azure aboneliği.
-  - Aboneliğiniz kapsamındaki bir Azure IoT Hub 'ı.
-  - Azure IoT Hub 'ınıza ileti gönderen bir istemci uygulaması.
+  * Etkin bir Azure aboneliği.
+  * Aboneliğiniz kapsamındaki bir Azure IoT Hub 'ı.
+  * Azure IoT Hub 'ınıza ileti gönderen bir istemci uygulaması.
 
 * Bu öğretici sırasında cihazınızın istemci uygulamasıyla çalıştığından emin olun.
 

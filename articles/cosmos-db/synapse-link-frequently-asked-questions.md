@@ -7,12 +7,12 @@ ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 11/30/2020
 ms.custom: synapse-cosmos-db
-ms.openlocfilehash: d871a33b6d8adbae179e592122878eee5db1c0b5
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 906651f8c48824e391879e0a579c6587231e7dfd
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104869013"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107483869"
 ---
 # <a name="frequently-asked-questions-about-azure-synapse-link-for-azure-cosmos-db"></a>Azure Cosmos DB için Azure Synapse Link hakkında sık sorulan sorular
 [!INCLUDE[appliesto-sql-mongodb-api](includes/appliesto-sql-mongodb-api.md)]
@@ -73,15 +73,15 @@ Evet, analitik depo otomatik ölçeklendirme sağlanan aktarım hızı ile kapsa
 
 Azure Cosmos DB, işlem ve analitik iş yükleri arasında performans yalıtımını garanti eder. Bir kapsayıcıda analitik deponun etkinleştirilmesi, Azure Cosmos DB işlem deposunda sağlanan RU/s 'yi etkilemez. Analitik mağazaya yönelik işlemler (okuma & yazma) ve depolama maliyetleri de ayrı olarak ücretlendirilir. Daha fazla bilgi için bkz. [analitik mağaza Azure Cosmos DB fiyatlandırması](analytical-store-introduction.md#analytical-store-pricing) .
 
-### <a name="can-i-restrict-access-to-azure-cosmos-db-analytical-store"></a>Azure Cosmos DB analitik depoya erişimi kısıtlayabilir miyim?
+### <a name="can-i-restrict-network-access-to-azure-cosmos-db-analytical-store"></a>Analitik mağaza Azure Cosmos DB ağ erişimini kısıtlayabilir miyim?
 
-Evet seçeneği, yönetilen bir [Özel uç nokta](analytical-store-private-endpoints.md) yapılandırabilir ve analitik depolama alanının ağ erişimini Azure SYNAPSE yönetilen sanal ağına kısıtlayabilir. Yönetilen özel uç noktalar, analitik deponuza özel bir bağlantı kurar. Bu özel uç nokta Ayrıca diğer Azure veri Hizmetleri arasında işlem deposuna yazma erişimini kısıtlar.
+Evet seçeneği, yönetilen bir [Özel uç nokta](analytical-store-private-endpoints.md) yapılandırabilir ve analitik depolama alanının ağ erişimini Azure SYNAPSE yönetilen sanal ağına kısıtlayabilir. Yönetilen özel uç noktalar, analitik deponuza özel bir bağlantı kurar. 
 
-Azure SYNAPSE Analytics çalışma alanındaki aynı Azure Cosmos DB hesabına hem işlem deposu hem de analitik mağaza özel uç noktaları ekleyebilirsiniz. Yalnızca analitik sorgular çalıştırmak istiyorsanız, yalnızca analitik özel uç noktasını eşlemek isteyebilirsiniz.
+Azure SYNAPSE Analytics çalışma alanındaki aynı Azure Cosmos DB hesabına hem işlem deposu hem de analitik mağaza özel uç noktaları ekleyebilirsiniz. Yalnızca analitik sorgular çalıştırmak istiyorsanız, SYNAPSE Analytics çalışma alanında yalnızca analitik özel uç noktasını etkinleştirmek isteyebilirsiniz.
 
 ### <a name="can-i-use-customer-managed-keys-with-the-azure-cosmos-db-analytical-store"></a>Azure Cosmos DB analitik mağaza ile müşteri tarafından yönetilen anahtarları kullanabilir miyim?
 
-Aynı müşteri tarafından yönetilen anahtarları otomatik ve saydam bir şekilde kullanarak işlem ve analitik mağazalardaki verileri sorunsuzca şifreleyebilirsiniz. Azure Cosmos DB analitik depo ile müşteri tarafından yönetilen anahtarların kullanılması şu anda hesabınızda ek yapılandırma gerektirir. Ayrıntılar için lütfen [Azure Cosmos DB ekibine](mailto:azurecosmosdbcmk@service.microsoft.com)  başvurun.
+Aynı müşteri tarafından yönetilen anahtarları otomatik ve saydam bir şekilde kullanarak işlem ve analitik mağazalardaki verileri sorunsuzca şifreleyebilirsiniz. Müşteri tarafından yönetilen anahtarları analitik depolarla birlikte kullanmak için, Azure Key Vault erişim ilkenizde Azure Cosmos DB hesabınızın sistem tarafından atanan yönetilen kimliğini kullanmanız gerekir. Bu, [burada](how-to-setup-cmk.md#using-managed-identity)açıklanmıştır. Daha sonra, hesabınızda analitik depoyu etkinleştirebilmelisiniz.
 
 ### <a name="are-delete-and-update-operations-on-the-transactional-store-reflected-in-the-analytical-store"></a>, Analitik depoya yansıtılan işlem deposunda silme ve güncelleştirme işlemleri mi var?
 
@@ -152,6 +152,8 @@ Yok. Yalnızca bir analitik mağaza etkin kapsayıcısını oluşturduğunuzda v
 ### <a name="what-are-the-ways-to-authenticate-with-the-analytical-store"></a>Analitik depoda kimlik doğrulaması yapma yolları nelerdir?
 
 Analitik depo ile kimlik doğrulaması, bir işlem deposuyla aynıdır. Belirli bir veritabanı için birincil veya salt okunurdur anahtarıyla kimlik doğrulaması yapabilirsiniz. Spark Not defterlerindeki Azure Cosmos DB anahtarlarının yapıştırmayı engellemek için Azure SYNAPSE Studio 'daki bağlı hizmetten yararlanabilirsiniz. Bu bağlı hizmete erişim, çalışma alanına erişimi olan herkes için kullanılabilir.
+
+SYNAPSE sunucusuz SQL havuzları kullanırken, hesap anahtarlarını depolayarak SQL kimlik bilgilerini önceden oluşturarak ve bunları OPENROWSET işlevine başvurarak Azure Cosmos DB analitik depoyu sorgulayabilirsiniz. Daha fazla bilgi edinmek için bkz. [Azure 'da sunucusuz SQL havuzu Ile sorgulama SYNAPSE bağlantısı](../synapse-analytics/sql/query-cosmos-db-analytical-store.md) makalesi.
 
 ## <a name="synapse-run-times"></a>SYNAPSE çalışma zamanları
 

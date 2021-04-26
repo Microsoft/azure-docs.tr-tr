@@ -12,12 +12,12 @@ ms.date: 01/19/2021
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: b2baff33d9e91e1b5259d79eca0a22535c00f419
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d9eb28ad19d53df542769a89b839668bbb205e30
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100555242"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256115"
 ---
 # <a name="set-up-the-local-account-identity-provider"></a>Yerel hesap kimlik sağlayıcısını ayarlama
 
@@ -143,7 +143,7 @@ Başlangıç paketini indirdikten sonra.
 
 1. Her dosyada, dizeyi `yourtenant` Azure AD B2C kiracınızın adıyla değiştirin. Örneğin, B2C kiracınızın adı *contosob2c* ise, tüm örnekleri `yourtenant.onmicrosoft.com` olur `contosob2c.onmicrosoft.com` .
 
-1. [Azure Active Directory B2C özel ilkeleri kullanmaya başlama](custom-policy-get-started.md)konusunun [özel Ilkeye uygulama kimlikleri ekleme](custom-policy-get-started.md#add-application-ids-to-the-custom-policy) bölümündeki adımları uygulayın. Örneğin, `/phone-number-passwordless/` **`Phone_Email_Base.xml`** *IdentityExperienceFramework* ve *ProxyIdentityExperienceFramework* önkoşullarını tamamlarken kaydettiğiniz Iki uygulamanın **uygulama (istemci) kimlikleriyle** güncelleştirin.
+1. [Azure Active Directory B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)konusunun [özel Ilkeye uygulama kimlikleri ekleme](tutorial-create-user-flows.md?pivots=b2c-custom-policy#add-application-ids-to-the-custom-policy) bölümündeki adımları uygulayın. Örneğin, `/phone-number-passwordless/` **`Phone_Email_Base.xml`** *IdentityExperienceFramework* ve *ProxyIdentityExperienceFramework* önkoşullarını tamamlarken kaydettiğiniz Iki uygulamanın **uygulama (istemci) kimlikleriyle** güncelleştirin.
 1. İlke dosyalarını karşıya yükle
 
 ::: zone-end

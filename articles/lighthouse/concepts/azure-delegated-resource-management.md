@@ -3,16 +3,16 @@ title: Azure tarafından atanan temsilcinin kaynak yönetimi
 description: Azure Temsilcili kaynak yönetimi, Azure Athouse 'ın önemli bir parçasıdır. Bu, hizmet sağlayıcılarının uygun olmayan kaynakları çeviklerle ve duyarlığa göre yönetmesine olanak tanır.
 ms.date: 10/19/2020
 ms.topic: conceptual
-ms.openlocfilehash: d484e61fc4ab3714eb362b26d64d449890065888
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 93a3de257fe88de4915eff3582ff38fc03ef380e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92203866"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767772"
 ---
 # <a name="azure-delegated-resource-management"></a>Azure tarafından atanan temsilcinin kaynak yönetimi
 
-Azure Temsilcili kaynak yönetimi, [Azure Use](../overview.md)'ın temel bileşenlerinden biridir. Azure Temsilcili kaynak yönetimi sayesinde, hizmet sağlayıcıları müşteri katılımı ve ekleme deneyimlerini basitleştirecek şekilde, yetki verilen kaynakları çeviklik ve duyarlıkla yönetdirebilir. Müşteriler, kiracılarına erişebilecek hizmet sağlayıcılarının denetimini korur, müşteriler kiracılarına kimlerin erişebileceklerini, erişebilecek kaynakları ve hangi eylemlerin alınacağını denetler.
+Azure Temsilcili kaynak yönetimi, [Azure Use](../overview.md)'ın temel bileşenlerinden biridir. Azure Temsilcili kaynak yönetimi sayesinde, hizmet sağlayıcıları müşteri katılımı ve ekleme deneyimlerini basitleştirecek şekilde, yetki verilen kaynakları çeviklik ve duyarlıkla yönetdirebilir. Müşteriler, kiracılarına kimlerin erişebileceklerini, erişebilecek kaynakları ve hangi eylemlerin alınacağını denetler.
 
 ## <a name="what-is-azure-delegated-resource-management"></a>Azure Temsilcili kaynak yönetimi nedir?
 

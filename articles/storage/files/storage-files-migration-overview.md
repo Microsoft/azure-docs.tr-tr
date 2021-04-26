@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 3/18/2020
 ms.author: fauhse
 ms.subservice: files
-ms.openlocfilehash: 27056f39885949d52c9fcc0d1472033cfc8f9aa0
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: a6335d90625f860984ccbfd224955a97a32b731f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102554879"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785226"
 ---
 # <a name="migrate-to-azure-file-shares"></a>Azure dosya paylaşımlarına geçirme
 
@@ -24,7 +24,7 @@ Bu makale, geçiş temelleri ve geçiş kılavuzlarından oluşan bir tablo içe
 
 Azure 'da birden fazla kullanılabilir bulut depolama türü vardır. Azure 'a dosya geçişlerinin temel bir yönü, verilerinize yönelik olarak hangi Azure Storage seçeneğinin doğru olduğunu belirliyor.
 
-[Azure dosya paylaşımları](storage-files-introduction.md) , genel amaçlı dosya verileri için uygundur. Bu veriler, için bir şirket içi SMB veya NFS paylaşımının kullanıldığı her şeyi içerir. [Azure dosya eşitleme](storage-sync-files-planning.md)ile, şirket Içi Windows Server çalıştıran sunuculardaki çeşitli Azure dosya paylaşımlarının içeriğini önbelleğe alabilirsiniz.
+[Azure dosya paylaşımları](storage-files-introduction.md) , genel amaçlı dosya verileri için uygundur. Bu veriler, için bir şirket içi SMB veya NFS paylaşımının kullanıldığı her şeyi içerir. [Azure dosya eşitleme](../file-sync/file-sync-planning.md)ile, şirket Içi Windows Server çalıştıran sunuculardaki çeşitli Azure dosya paylaşımlarının içeriğini önbelleğe alabilirsiniz.
 
 Şu anda bir şirket içi sunucuda çalışan bir uygulama için, dosyaları bir Azure dosya paylaşımında depolamak iyi bir seçenek olabilir. Uygulamayı Azure 'a taşıyabilir ve Azure dosya paylaşımlarını paylaşılan depolama alanı olarak kullanabilirsiniz. Ayrıca, bu senaryo için [Azure disklerini](../../virtual-machines/managed-disks-overview.md) de göz önünde bulundurun.
 
@@ -81,9 +81,9 @@ Bağlantı olmadan bir senaryoda, henüz yayımlanmış bir geçiş kılavuzu yo
 | Kaynak | Hedef: </br>Karma dağıtım | Hedef: </br>Yalnızca bulutta dağıtım |
 |:---|:--|:--|
 | | Araç birleşimi:| Araç birleşimi: |
-| Windows Server 2012 R2 ve üzeri | <ul><li>[Azure Dosya Eşitleme](storage-sync-files-deployment-guide.md)</li><li>[Azure Dosya Eşitleme ve Azure veri kutusu](storage-sync-offline-data-transfer.md)</li></ul> | <ul><li>RoboCopy aracılığıyla bağlı bir Azure dosya paylaşımında</li><li>Azure Dosya Eşitleme aracılığıyla</li></ul> |
+| Windows Server 2012 R2 ve üzeri | <ul><li>[Azure Dosya Eşitleme](../file-sync/file-sync-deployment-guide.md)</li><li>[Azure Dosya Eşitleme ve Azure veri kutusu](../file-sync/file-sync-offline-data-transfer.md)</li></ul> | <ul><li>RoboCopy aracılığıyla bağlı bir Azure dosya paylaşımında</li><li>Azure Dosya Eşitleme aracılığıyla</li></ul> |
 | Windows Server 2012 ve öncesi | <ul><li>Veri kutusu aracılığıyla ve son sunucu işletim sistemine Azure Dosya Eşitleme</li><li>Depolama geçiş hizmeti 'ni Azure Dosya Eşitleme ile son sunucuya kullanarak karşıya yükleyin</li></ul> | <ul><li>Azure Dosya Eşitleme ile son sunucuya depolama geçiş hizmeti üzerinden</li><li>RoboCopy aracılığıyla bağlı bir Azure dosya paylaşımında</li></ul> |
-| Ağa bağlı depolama (NAS) | <ul><li>[Azure Dosya Eşitleme karşıya yükleme yoluyla](storage-files-migration-nas-hybrid.md)</li><li>[Veri kutusu + Azure Dosya Eşitleme aracılığıyla](storage-files-migration-nas-hybrid-databox.md)</li></ul> | <ul><li>RoboCopy aracılığıyla bağlı bir Azure dosya paylaşımında</li></ul> |
+| Ağa bağlı depolama (NAS) | <ul><li>[Azure Dosya Eşitleme karşıya yükleme yoluyla](storage-files-migration-nas-hybrid.md)</li><li>[Veri kutusu + Azure Dosya Eşitleme aracılığıyla](storage-files-migration-nas-hybrid-databox.md)</li></ul> | <ul><li>[Veri kutusu aracılığıyla](storage-files-migration-nas-cloud-databox.md)</li><li>RoboCopy aracılığıyla bağlı bir Azure dosya paylaşımında</li></ul> |
 | Linux/Samba | <ul><li>[Azure Dosya Eşitleme ve RoboCopy](storage-files-migration-linux-hybrid.md)</li></ul> | <ul><li>RoboCopy aracılığıyla bağlı bir Azure dosya paylaşımında</li></ul> |
 | Microsoft Azure StorSimple Cloud gereç 8100 veya StorSimple Cloud Appliance 8600 | <ul><li>[Adanmış veri geçişi bulut hizmeti aracılığıyla](storage-files-migration-storsimple-8000.md)</li></ul> | |
 | StorSimple Cloud Appliance 1200 | <ul><li>[Azure Dosya Eşitleme aracılığıyla](storage-files-migration-storsimple-1200.md)</li></ul> | |
@@ -139,7 +139,7 @@ RoboCopy, dosya geçişleri için en uygun araçlardan biridir. Windows 'un bir 
 
 Azure Dosya Eşitleme, birincil olarak öğe sayısıyla (dosyalar ve klasörler), toplam depolama miktarı ile değil, ölçeklendirir. TreeSize Aracı, Windows Server birimlerinizde bulunan öğelerin sayısını belirlemenizi sağlar.
 
-[Azure dosya eşitleme dağıtımından](storage-sync-files-deployment-guide.md)önce perspektif oluşturmak için aracını kullanabilirsiniz. Ayrıca, bulut katmanlaması dağıtımdan sonra kullanıldığında de kullanabilirsiniz. Bu senaryoda, öğe sayısını ve hangi dizinlerin sunucu önbelleğinizi en iyi şekilde kullanmasını görürsünüz.
+[Azure dosya eşitleme dağıtımından](../file-sync/file-sync-deployment-guide.md)önce perspektif oluşturmak için aracını kullanabilirsiniz. Ayrıca, bulut katmanlaması dağıtımdan sonra kullanıldığında de kullanabilirsiniz. Bu senaryoda, öğe sayısını ve hangi dizinlerin sunucu önbelleğinizi en iyi şekilde kullanmasını görürsünüz.
 
 Aracın sınanan sürümü 4.4.1 sürümüdür. Bulut katmanlı dosyalarla uyumludur. Araç, normal işlemleri sırasında katmanlı dosyaların geri çekmesine neden olmaz.
 
@@ -151,5 +151,5 @@ Aracın sınanan sürümü 4.4.1 sürümüdür. Bulut katmanlı dosyalarla uyuml
 Bu makalede bahsedilen Azure dosyaları teknolojileri hakkında daha fazla bilgi:
 
 * [Azure dosya paylaşımında genel bakış](storage-files-introduction.md)
-* [Azure Dosya Eşitleme dağıtımı planlama](storage-sync-files-planning.md)
-* [Azure Dosya Eşitleme: bulut katmanlaması](storage-sync-cloud-tiering-overview.md)
+* [Azure Dosya Eşitleme dağıtımı planlama](../file-sync/file-sync-planning.md)
+* [Azure Dosya Eşitleme: bulut katmanlaması](../file-sync/file-sync-cloud-tiering-overview.md)

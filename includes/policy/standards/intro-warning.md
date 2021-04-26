@@ -6,10 +6,10 @@ ms.date: 09/04/2020
 ms.author: dacoulte
 ms.custom: generated
 ms.openlocfilehash: 640a70c2bb419e65620c19f6dc986b0c602bf1e7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "89481724"
 ---
 Her yerleşik ilke tanımının başlığı Azure portal ilke tanımına bağlanır. Kaynağı [Azure Policy GitHub](https://github.com/Azure/azure-policy)deposunda görüntülemek Için **ilke sürümü** sütunundaki bağlantıyı kullanın.

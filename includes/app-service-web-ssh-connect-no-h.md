@@ -9,10 +9,10 @@ ms.date: 03/29/2019
 ms.author: cephalin
 ms.custom: include file
 ms.openlocfilehash: 458cd36a35ea37b2a317fe98fdeb5acc69a36ce8
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "91822812"
 ---
 Kapsayıcınızda doğrudan SSH oturumu başlatabilmek için uygulamanızın çalışıyor olması gerekir.

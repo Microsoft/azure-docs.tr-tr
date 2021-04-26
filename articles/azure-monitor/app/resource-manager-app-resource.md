@@ -1,17 +1,16 @@
 ---
 title: Application Insights kaynakları için şablon örnekleri Kaynak Yöneticisi
 description: Azure Izleyici 'de Application Insights kaynaklarını dağıtmaya yönelik örnek Azure Resource Manager şablonları.
-ms.subservice: application-insights
 ms.topic: sample
 author: lgayhardt
 ms.author: lagayhar
 ms.date: 07/08/2020
-ms.openlocfilehash: 6c23e59a8845ee4bc77d0fe05df8b97e656a102a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6a64ed1d0d7a133930bf48e7d764c8d170d9824a
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100628368"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106383364"
 ---
 # <a name="resource-manager-template-samples-for-creating-application-insights-resources"></a>Application Insights kaynakları oluşturmak için şablon örnekleri Kaynak Yöneticisi
 

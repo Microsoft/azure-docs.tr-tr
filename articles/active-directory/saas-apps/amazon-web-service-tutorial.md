@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 03/05/2021
 ms.author: jeedes
-ms.openlocfilehash: 842ab27fe02501efbbc6c06c3d36d2218c3c17b9
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: eb469c757e2898a9925dd7d3358cfe95734cb2e9
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104799250"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537727"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-aws-single-account-access"></a>Öğretici: AWS Single-Account erişimiyle çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -401,11 +401,11 @@ Uygulamayı dilediğiniz modda test etmek için Microsoft My Apps ' i de kullana
  
 * **Sağlama** bölümünde, **eşlemeler** alt bölümünde "yükleniyor..." görüntülenir ileti eşleştirmez ve hiçbir şekilde öznitelik eşlemelerini görüntülemez. Bugün desteklenen tek sağlama iş akışı, bir kullanıcı veya grup ataması sırasında AWS 'den Azure AD 'ye roller için içeri aktarmaktır. Bunun için öznitelik eşlemeleri önceden belirlenir ve yapılandırılamaz.
 
-* **Sağlama** bölümü yalnızca bir AWS kiracısı için tek seferde bir kimlik bilgileri kümesi girmeyi destekler. İçeri aktarılan tüm roller `appRoles` AWS kiracısı Için Azure AD [ `servicePrincipal` nesnesinin](/graph/api/resources/serviceprincipal?view=graph-rest-beta) özelliğine yazılır.
+* **Sağlama** bölümü yalnızca bir AWS kiracısı için tek seferde bir kimlik bilgileri kümesi girmeyi destekler. İçeri aktarılan tüm roller `appRoles` AWS kiracısı Için Azure AD [ `servicePrincipal` nesnesinin](/graph/api/resources/serviceprincipal) özelliğine yazılır.
 
   Azure AD 'ye, sağlama için Galeriden birden çok AWS kiracısı (tarafından temsil edilir `servicePrincipals` ) eklenebilir. Bununla birlikte, tüm içeri aktarılan rollerin, `servicePrincipals` SSO için kullanılmak üzere tek başına sağlanması için kullanılan birden fazla AWS 'den otomatik olarak yazamayacak bilinen bir sorun vardır `servicePrincipal` .
 
-  Geçici bir çözüm olarak, sağlama yapılandırılmış her bir AWS ' de içeri aktarılan her bir ı ayıklamak için [MICROSOFT Graph API](/graph/api/resources/serviceprincipal?view=graph-rest-beta) 'sini kullanabilirsiniz `appRoles` `servicePrincipal` . Daha sonra, bu rol dizelerini SSO 'nun yapılandırıldığı AWS 'ye ekleyebilirsiniz `servicePrincipal` .
+  Geçici bir çözüm olarak, sağlama yapılandırılmış her bir AWS ' de içeri aktarılan her bir ı ayıklamak için [MICROSOFT Graph API](/graph/api/resources/serviceprincipal) 'sini kullanabilirsiniz `appRoles` `servicePrincipal` . Daha sonra, bu rol dizelerini SSO 'nun yapılandırıldığı AWS 'ye ekleyebilirsiniz `servicePrincipal` .
 
 * Rollerin AWS 'den Azure AD 'ye aktarılmak için aşağıdaki gereksinimleri karşılaması gerekir:
 

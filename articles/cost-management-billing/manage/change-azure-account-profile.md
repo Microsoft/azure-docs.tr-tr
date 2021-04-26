@@ -1,21 +1,21 @@
 ---
 title: Azure faturalama hesabının kişi bilgilerini değiştirme
 description: Azure faturalama hesabınızın kişi bilgilerini değiştirme işlemi açıklanır
-author: genlin
-ms.reviewer: dcscontentpm
+author: bandersmsft
+ms.reviewer: judupont
 tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 10/26/2020
+ms.date: 04/08/2021
 ms.author: banders
 ms.custom: contperf-fy21q2
-ms.openlocfilehash: 776c207387ee55b998615131baf77e6c13655b49
-ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
-ms.translationtype: HT
+ms.openlocfilehash: f394b6b44b2030253f7b78ec68459819c82c3c27
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/10/2020
-ms.locfileid: "97033947"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107480911"
 ---
 # <a name="change-contact-information-for-an-azure-billing-account"></a>Azure faturalama hesabının kişi bilgilerini değiştirme
 
@@ -64,6 +64,21 @@ Azure Active Directory kullanıcı profili bilgilerinizi güncelleştirmek istiy
     ![Adresin nerede güncelleştirileceğini gösteren ekran görüntüsü](./media/change-azure-account-profile/update-bill-to-list-properties-mca.png)
 1. Yeni adresi girin ve **Kaydet**’i seçin.  
     ![Adresi güncelleştirmeyi gösteren ekran görüntüsü](./media/change-azure-account-profile/update-bill-to-save-mca.png)
+
+## <a name="update-a-po-number"></a>PO numarasını güncelleştirme
+
+Varsayılan olarak, fatura profili için bir faturanın ilişkili bir PO numarası yoktur. Faturalandırma profili için bir PO numarası ekledikten sonra, fatura profili için faturalarda görüntülenir.
+
+Bir faturalandırma profili için PO numarası eklemek veya değiştirmek için aşağıdaki adımları kullanın.
+
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+1. **Maliyet yönetimi + faturalandırma** ' i arayın ve ardından **faturalandırma kapsamları**' nı seçin.
+1. Faturalandırma kapsamınızı seçin.
+1. **Faturalama** altındaki sol menüde **faturalandırma profilleri**' ni seçin.
+1. Uygun faturalandırma profilini seçin.
+1. **Ayarlar** altındaki sol menüde **Özellikler**' i seçin.
+1. **Po numarasını güncelleştir**' i seçin.
+1. Bir PO numarası girip **Güncelleştir**' i seçin.
 
 ## <a name="service-and-marketing-emails"></a>Hizmet ve pazarlama e-postaları
 

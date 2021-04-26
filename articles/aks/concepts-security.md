@@ -4,18 +4,22 @@ description: Ana ve düğüm iletişimi, ağ ilkeleri ve Kubernetes gizli dizile
 services: container-service
 author: mlearned
 ms.topic: conceptual
-ms.date: 07/01/2020
+ms.date: 03/11/2021
 ms.author: mlearned
-ms.openlocfilehash: 6c69e46ea3510476089cd932b1cd1bdf14254021
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 3fafbe3f4b1c53f929682f4ca160fb19a5e91918
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102122383"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105315"
 ---
 # <a name="security-concepts-for-applications-and-clusters-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service’teki (AKS) uygulamalar ve kümeler için güvenlik kavramları
 
-Azure Kubernetes Service (AKS) içinde uygulama iş yüklerini çalıştırırken müşteri verilerinizi korumak için, kümenizin güvenliği önemli bir konudur. Kubernetes, *ağ ilkeleri* ve *gizli* dizileri gibi güvenlik bileşenleri içerir. Daha sonra Azure, ağ güvenlik grupları ve düzenlenmiş küme yükseltmeleri gibi bileşenlere eklenir. Bu güvenlik bileşenleri, AKS kümenizi en son işletim sistemi güvenlik güncelleştirmelerini ve Kubernetes yayınlarını çalıştıran, güvenli Pod trafiği ve hassas kimlik bilgilerine erişim sağlamak için birleştirilir.
+Küme güvenliği, Azure Kubernetes Service (AKS) içinde uygulama iş yüklerini çalıştırırken müşteri verilerinizi korur. 
+
+Kubernetes, *ağ ilkeleri* ve *gizli* dizileri gibi güvenlik bileşenleri içerir. Bu arada, Azure ağ güvenlik grupları gibi bileşenler içerir ve küme yükseltmelerini organize eder. AKS bu güvenlik bileşenlerini şu şekilde birleştirir:
+* AKS kümenizi en son işletim sistemi güvenlik güncelleştirmeleri ve Kubernetes yayınlarını çalıştırmaya devam edin.
+* Güvenli Pod trafiği sağlayın ve hassas kimlik bilgilerine erişin.
 
 Bu makalede, AKS 'deki uygulamalarınızın güvenliğini sağlayan temel kavramlar tanıtılmaktadır:
 
@@ -32,7 +36,7 @@ Bu makalede, AKS 'deki uygulamalarınızın güvenliğini sağlayan temel kavram
 
 ## <a name="master-security"></a>Ana güvenlik
 
-AKS 'de Kubernetes ana bileşenleri, Microsoft tarafından sunulan yönetilen hizmetin bir parçasıdır. Her bir AKS kümesi, API sunucusu, Zamanlayıcı vb. sağlamak için kendi tek kiracılı, adanmış Kubernetes ana öğesine sahiptir. Bu ana, Microsoft tarafından yönetilir ve korunur.
+AKS 'de Kubernetes ana bileşenleri, Microsoft tarafından sağlanan, yönetilen ve korunan yönetilen hizmetin bir parçasıdır. Her bir AKS kümesi, API sunucusu, Zamanlayıcı vb. sağlamak için kendi tek kiracılı, adanmış Kubernetes ana öğesine sahiptir.
 
 Varsayılan olarak, Kubernetes API sunucusu genel bir IP adresi ve tam etki alanı adı (FQDN) kullanır. [Yetkılı IP aralıklarını][authorized-ip-ranges]kullanarak API sunucusu uç noktasına erişimi sınırlayabilirsiniz. Ayrıca, API sunucusu erişimini sanal ağınıza sınırlamak için tam bir [özel küme][private-clusters] da oluşturabilirsiniz.
 
@@ -40,62 +44,95 @@ Kubernetes rol tabanlı erişim denetimi (Kubernetes RBAC) ve Azure RBAC kullana
 
 ## <a name="node-security"></a>Düğüm güvenliği
 
-AKS düğümleri, yönettiğiniz ve tuttuğunuz Azure sanal makinelerdir. Linux düğümleri `containerd` veya Moby kapsayıcı çalışma zamanını kullanarak iyileştirilmiş bir Ubuntu dağıtımı çalıştırır. Windows Server düğümleri, iyileştirilmiş bir Windows Server 2019 sürümü çalıştırır ve ayrıca `containerd` ya da Moby kapsayıcı çalışma zamanını kullanır. Bir AKS kümesi oluşturulduğunda veya ölçeklendirildiğinde, düğümler en son işletim sistemi güvenlik güncelleştirmeleri ve yapılandırmalarına göre otomatik olarak dağıtılır.
+AKS düğümleri, yönettiğiniz ve tuttuğunuz Azure sanal makinelerdir (VM). 
+* Linux düğümleri `containerd` veya Moby kapsayıcı çalışma zamanını kullanarak iyileştirilmiş bir Ubuntu dağıtımı çalıştırır. 
+* Windows Server düğümleri `containerd` veya Moby kapsayıcı çalışma zamanını kullanarak iyileştirilmiş bir Windows Server 2019 sürümü çalıştırır. 
+
+Bir AKS kümesi oluşturulduğunda veya ölçeklendirildiğinde, düğümler en son işletim sistemi güvenlik güncelleştirmeleri ve yapılandırmalarına göre otomatik olarak dağıtılır.
 
 > [!NOTE]
-> Kubernetes sürüm 1,19 düğüm havuzlarını ve daha büyük kullanımını `containerd` kapsayıcı çalışma zamanı olarak kullanan AKS kümeleri. For node havuzları için v 1.19 öncesinde Kubernetes kullanan AKS kümeleri, kapsayıcı çalışma zamanı olarak [Moby](https://mobyproject.org/) (yukarı akış Docker) kullanır.
+> Kullanarak AKS kümeleri:
+> * Kubernetes sürüm 1,19 düğüm havuzları ve `containerd` kap çalışma zamanı olarak daha büyük kullanım. 
+> * V 1.19 node havuzlarından önceki Kubernetes, kapsayıcı çalışma zamanı olarak [Moby](https://mobyproject.org/) (yukarı akış Docker) kullanır.
 
-Azure platformu, gece temelinde Linux düğümlerine işletim sistemi güvenlik düzeltme eklerini otomatik olarak uygular. Bir Linux işletim sistemi güvenlik güncelleştirmesi konağın yeniden başlatılmasını gerektiriyorsa, bu yeniden başlatma otomatik olarak gerçekleştirilmez. Linux düğümlerini el ile yeniden başlatabilirsiniz veya bir yaygın yaklaşım, Kubernetes için açık kaynaklı bir yeniden başlatma cini olan [Kured][kured]'yi kullanmaktır. Kured bir [DaemonSet][aks-daemonsets] olarak çalışır ve her düğümü, bir yeniden başlatmanın gerekli olduğunu belirten bir dosyanın varlığına izler. Yeniden başlatmalar, küme yükseltmesi olarak aynı [Cordon ve boşalt işlemini](#cordon-and-drain) kullanarak küme genelinde yönetilir.
+### <a name="node-security-patches"></a>Düğüm güvenliği düzeltme ekleri
 
-Windows Server düğümleri için Windows Update otomatik olarak çalıştırılmaz ve en son güncelleştirmeleri uygulamaz. Windows Update yayın döngüsünün ve kendi doğrulama işleminizin etrafında düzenli bir zamanlamaya göre, AKS kümenizdeki Windows Server düğüm havuzunda bir yükseltme gerçekleştirmeniz gerekir. Bu yükseltme işlemi, en son Windows Server görüntüsünü ve düzeltme eklerini çalıştıran düğümleri oluşturur, daha sonra eski düğümleri kaldırır. Bu işlemle ilgili daha fazla bilgi için bkz. [AKS 'de düğüm havuzunu yükseltme][nodepool-upgrade].
+#### <a name="linux-nodes"></a>Linux düğümleri
+Azure platformu, gece temelinde Linux düğümlerine işletim sistemi güvenlik düzeltme eklerini otomatik olarak uygular. Bir Linux işletim sistemi güvenlik güncelleştirmesi konağın yeniden başlatılmasını gerektiriyorsa, otomatik olarak yeniden başlatılır. Şunlardan birini yapabilirsiniz:
+* Linux düğümlerini el ile yeniden başlatın.
+* Kubernetes için açık kaynaklı bir yeniden başlatma cini olan [Kured][kured]'yi kullanın. Kured, bir [DaemonSet][aks-daemonsets] olarak çalışır ve her düğümü, bir yeniden başlatmanın gerekli olduğunu belirten bir dosya için izler. 
 
-Düğümler, genel IP adresleri atanmadan özel bir sanal ağ alt ağına dağıtılır. Sorun giderme ve yönetim amaçlarıyla, SSH varsayılan olarak etkindir. Bu SSH erişimi yalnızca iç IP adresi kullanılarak kullanılabilir.
+Yeniden başlatmalar, küme yükseltmesi olarak aynı [Cordon ve boşalt işlemini](#cordon-and-drain) kullanarak küme genelinde yönetilir.
 
-Depolama sağlamak için düğümler Azure yönetilen diskleri kullanır. Çoğu VM düğüm boyutu için bunlar, yüksek performanslı SSD 'Ler tarafından desteklenen Premium disklerdir. Yönetilen disklerde depolanan veriler, Azure platformunda Rest 'de otomatik olarak şifrelenir. Bu diskler, artıklığı artırmak için Azure veri merkezi 'nde de güvenli bir şekilde çoğaltılır.
+#### <a name="windows-server-nodes"></a>Windows Server düğümleri
 
-Kubernetes ortamları, AKS veya başka bir yerde, şu anda çok kiracılı olmayan kullanım için tamamen güvenli değildir. Temel bileşenler için *Pod güvenlik ilkeleri* veya daha hassas rol tabanlı erişim denetimi (KUBERNETES RBAC) gibi ek güvenlik özellikleri, daha çok daha zor hale getirir. Ancak, çok kiracılı çoklu kiracı iş yüklerini çalıştırırken doğru güvenlik için bir hiper yönetici, güvenmeniz gereken tek güvenlik düzeyidir. Kubernetes güvenlik etki alanı, tek bir düğüm değil, tüm küme haline gelir. Bu tür çok kiracılı iş yükleri için, fiziksel olarak yalıtılmış kümeler kullanmanız gerekir. İş yüklerini yalıtma yolları hakkında daha fazla bilgi için bkz. [AKS 'de küme yalıtımı Için en iyi uygulamalar][cluster-isolation].
+Windows Server düğümleri için Windows Update otomatik olarak çalıştırılmaz ve en son güncelleştirmeleri uygulamaz. AKS kümenizde, düzenli Windows Update yayın döngüsünün ve kendi doğrulama sürecinizin etrafındaki Windows Server düğüm havuzu yükseltmelerini zamanlayın. Bu yükseltme işlemi, en son Windows Server görüntüsünü ve düzeltme eklerini çalıştıran düğümleri oluşturur, daha sonra eski düğümleri kaldırır. Bu işlemle ilgili daha fazla bilgi için bkz. [AKS 'de düğüm havuzunu yükseltme][nodepool-upgrade].
+
+### <a name="node-deployment"></a>Düğüm dağıtımı
+Düğümler, genel IP adresleri atanmadan özel bir sanal ağ alt ağına dağıtılır. Sorun giderme ve yönetim amaçlarıyla, SSH varsayılan olarak etkindir ve yalnızca iç IP adresi kullanılarak erişilebilir.
+
+### <a name="node-storage"></a>Düğüm depolaması
+Depolama sağlamak için düğümler Azure yönetilen diskleri kullanır. Azure yönetilen diskler çoğu VM düğüm boyutu için yüksek performanslı SSD 'Ler tarafından desteklenen Premium disklerdir. Yönetilen disklerde depolanan veriler, Azure platformunda Rest 'de otomatik olarak şifrelenir. Artıklığı artırmak için Azure yönetilen diskler Azure veri merkezinde güvenli bir şekilde çoğaltılır.
+
+### <a name="hostile-multi-tenant-workloads"></a>Kötü amaçlı çok kiracılı iş yükleri
+
+Şu anda, Kubernetes ortamları, çok kiracılı Kullanıcı kullanımı için güvenli değildir. Düğümler için *Pod güvenlik ilkeleri* veya Kubernetes RBAC gibi ek güvenlik özellikleri, etkin bir şekilde blok yararlanma. Saldırgan çok kiracılı iş yüklerini çalıştırırken doğru güvenlik için yalnızca bir hiper yöneticiye güvenin. Kubernetes güvenlik etki alanı, tek bir düğüm değil, tüm küme haline gelir. 
+
+Bu tür çok kiracılı iş yükleri için, fiziksel olarak yalıtılmış kümeler kullanmanız gerekir. İş yüklerini yalıtma yolları hakkında daha fazla bilgi için bkz. [AKS 'de küme yalıtımı Için en iyi uygulamalar][cluster-isolation].
 
 ### <a name="compute-isolation"></a>İşlem yalıtımı
 
- Belirli iş yükleri, uyumluluk ve mevzuat gereksinimleri nedeniyle diğer müşteri iş yüklerinden yüksek ölçüde yalıtım gerektirebilir. Azure, bu iş yükleri için bir AKS kümesinde aracı düğümleri olarak kullanılabilecek [yalıtılmış sanal makineler](../virtual-machines/isolation.md)sağlar. Bu yalıtılmış sanal makineler belirli bir donanım türüne ayrılmıştır ve tek bir müşteriye atanır. 
+Uyumluluk veya yasal gereksinimler nedeniyle, bazı iş yükleri diğer müşteri iş yüklerinden yüksek ölçüde yalıtım gerektirebilir. Azure, bu iş yükleri için bir AKS kümesinde aracı düğümleri olarak kullanılacak [yalıtılmış VM 'ler](../virtual-machines/isolation.md) sağlar. Bu VM 'Ler belirli bir donanım türüne ayrılmıştır ve tek bir müşteriye atanır. 
 
- Bu yalıtılmış sanal makineleri bir AKS kümesiyle birlikte kullanmak için, bir AKS kümesi oluştururken **veya düğüm havuzu** eklerken [burada](../virtual-machines/isolation.md) listelenen yalıtılmış sanal makine boyutlarından birini seçin.
-
+Bir AKS kümesi oluştururken veya bir düğüm havuzu eklerken, **düğüm boyutu** olarak [yalıtılmış VM boyutlarından birini](../virtual-machines/isolation.md) seçin.
 
 ## <a name="cluster-upgrades"></a>Küme yükseltmeleri
 
-Güvenlik ve uyumluluk için veya en son özellikleri kullanabilmeniz için Azure, bir AKS kümesini ve bileşenlerini yükseltmek için araçlar sağlar. Bu yükseltme düzenlemesi hem Kubernetes Master hem de Agent bileşenlerini içerir. AKS kümeniz için [kullanılabilir Kubernetes sürümlerinin bir listesini](supported-kubernetes-versions.md) görüntüleyebilirsiniz. Yükseltme işlemini başlatmak için, kullanılabilir sürümlerden birini belirtirsiniz. Daha sonra Azure, her bir AKS düğümünü güvenle ve yükseltme işlemini gerçekleştirir.
+Azure, bir AKS kümesini ve bileşenlerini yükseltmek, güvenlik ve uyumluluğu korumak ve en son özelliklere erişmek için yükseltme düzenleme araçları sağlar. Bu yükseltme düzenlemesi hem Kubernetes Master hem de Agent bileşenlerini içerir. 
+
+Yükseltme işlemini başlatmak için, [listelenen mevcut Kubernetes sürümlerinden](supported-kubernetes-versions.md)birini belirtin. Azure daha sonra her bir AKS düğümünü ve yükseltmelerini güvenli bir şekilde korleştirir ve boşaltır.
 
 ### <a name="cordon-and-drain"></a>Cordon ve boşalt
 
-Yükseltme işlemi sırasında, AKS düğümleri, yeni yığınların zamanlanmaması için kümeden tek tek bir şekilde ele alınır. Düğümler daha sonra aşağıdaki şekilde dağıtılır ve yükseltilir:
+Yükseltme işlemi sırasında, yeni yığınların üzerinde zamanlanmasını engellemek için AKS düğümleri kümeden tek tek bir şekilde ele alınır. Düğümler daha sonra aşağıdaki şekilde dağıtılır ve yükseltilir:
 
-- Düğüm havuzuna yeni bir düğüm dağıtılır. Bu düğüm, en son işletim sistemi görüntüsünü ve düzeltme eklerini çalıştırır.
-- Mevcut düğümlerden biri yükseltme için tanımlandı. Bu düğümdeki düğüm, normal şekilde sonlandırılır ve düğüm havuzundaki diğer düğümlerde zamanlanır.
-- Bu var olan düğüm AKS kümesinden silinir.
-- Kümedeki sonraki düğüm, tüm düğümler yükseltme işleminin bir parçası olarak başarıyla değiştirilene kadar aynı işlemle aynı işlem kullanılarak işlenir.
+1.  Düğüm havuzuna yeni bir düğüm dağıtılır. 
+    * Bu düğüm, en son işletim sistemi görüntüsünü ve düzeltme eklerini çalıştırır.
+1. Mevcut düğümlerden biri yükseltme için tanımlandı. 
+1. Tanımlanan düğümdeki düğüm, normal şekilde sonlandırılır ve düğüm havuzundaki diğer düğümlerde zamanlanır.
+1. Boşaltılan düğüm AKS kümesinden silinir.
+1. Adımlar 1-4, tüm düğümler yükseltme işleminin bir parçası olarak başarıyla değiştirilene kadar yinelenir.
 
 Daha fazla bilgi için bkz. [AKS kümesini yükseltme][aks-upgrade-cluster].
 
 ## <a name="network-security"></a>Ağ güvenliği
 
-Şirket içi ağlarla bağlantı ve güvenlik için, AKS kümenizi mevcut Azure sanal ağ alt ağlarına dağıtabilirsiniz. Bu sanal ağlarda, şirket içi ağınıza bir Azure siteden siteye VPN veya Express Route bağlantısı olabilir. Kubernetes giriş denetleyicileri özel, iç IP adresleriyle tanımlanabilir, bu nedenle hizmetlere yalnızca bu iç ağ bağlantısından erişilebilir.
+Şirket içi ağlarla bağlantı ve güvenlik için, AKS kümenizi mevcut Azure sanal ağ alt ağlarına dağıtabilirsiniz. Bu sanal ağlar, Azure siteden siteye VPN veya Express Route kullanarak şirket içi ağınıza geri bağlanır. Hizmetlerin iç ağ bağlantısına erişimini sınırlandırmak için özel, iç IP adresleriyle Kubernetes giriş denetleyicilerini tanımlayın.
 
 ### <a name="azure-network-security-groups"></a>Azure ağ güvenlik grupları
 
-Azure, sanal ağlardaki trafik akışını filtrelemek için ağ güvenlik grubu kurallarını kullanır. Bu kurallar, kaynaklara erişim izni verilen veya reddedilen kaynak ve hedef IP aralıklarını, bağlantı noktalarını ve protokolleri tanımlar. Kubernetes API sunucusuna TLS trafiğine izin vermek için varsayılan kurallar oluşturulur. Yük dengeleyiciler, bağlantı noktası eşleştirmeleri veya giriş rotaları ile hizmetler oluştururken, AKS, trafiği uygun şekilde akışa almak için ağ güvenlik grubunu otomatik olarak değiştirir.
+Azure, sanal ağ trafiği akışını filtrelemek için ağ güvenlik grubu kurallarını kullanır. Bu kurallar, kaynaklara erişim izni verilen veya reddedilen kaynak ve hedef IP aralıklarını, bağlantı noktalarını ve protokolleri tanımlar. Kubernetes API sunucusuna TLS trafiğine izin vermek için varsayılan kurallar oluşturulur. Yük dengeleyiciler, bağlantı noktası eşleştirmeleri veya giriş rotaları ile hizmetler oluşturursunuz. AKS, trafik akışı için ağ güvenlik grubunu otomatik olarak değiştirir.
 
-AKS kümeniz için kendi alt ağınızı sağladığınız ve trafik akışını değiştirmek istediğiniz durumlarda, AKS tarafından yönetilen alt ağ düzeyinde ağ güvenlik grubunu değiştirmeyin. Yük dengeleyici erişimi, denetim düzleğiyle iletişim ve [Çıkış][aks-limit-egress-traffic]gibi, küme yönetimi için gereken trafikle müdahale olmadıkları sürece trafik akışını değiştirmek için ek alt ağ düzeyi ağ güvenlik grupları oluşturabilirsiniz.
+AKS kümeniz için kendi alt ağınızı sağlarsanız, AKS tarafından yönetilen alt ağ düzeyinde ağ güvenlik **grubunu değiştirmeyin.** Bunun yerine, trafik akışını değiştirmek için daha fazla alt ağ düzeyi ağ güvenlik grubu oluşturun. Yük dengeleyici erişimi, denetim düzleğiyle iletişim ve [Çıkış][aks-limit-egress-traffic]gibi, kümeyi yöneten gerekli trafikle müdahale olmadığından emin olun.
 
 ### <a name="kubernetes-network-policy"></a>Kubernetes ağ ilkesi
 
-Kümenizdeki düğüm arasındaki ağ trafiğini sınırlandırmak için AKS 'ler, [Kubernetes ağ ilkeleri][network-policy]için destek sunar. Ağ ilkeleriyle, ad alanları ve etiket seçicileri temelinde küme içindeki belirli ağ yollarına izin vermeyi veya reddetme seçeneğini belirleyebilirsiniz.
+Kümenizdeki düğüm arasındaki ağ trafiğini sınırlandırmak için AKS 'ler, [Kubernetes ağ ilkeleri][network-policy]için destek sunar. Ağ ilkeleriyle, ad alanları ve etiket seçicileri temelinde küme içindeki belirli ağ yollarına izin verebilir veya bu yollara izin verebilirsiniz.
 
 ## <a name="kubernetes-secrets"></a>Kubernetes Gizli Dizileri
 
-Bir Kubernetes *gizli anahtarı* , erişim kimlik bilgileri veya anahtarlar gibi önemli verileri pods 'ye eklemek için kullanılır. İlk olarak Kubernetes API 'sini kullanarak bir gizli dizi oluşturursunuz. Pod veya dağıtımınızı tanımladığınızda, belirli bir gizli dizi istenebilir. Gizli diziler yalnızca, bir zamanlanmış Pod içeren düğümlere sağlanır ve gizli dizi diske yazılmadı ve *tmpfs*'de depolanır. Gizli anahtar gerektiren bir düğümdeki son Pod silindiğinde, parola, düğümün tmpfs 'den silinir. Gizli diziler belirli bir ad alanı içinde depolanır ve yalnızca aynı ad alanında yer alan Pod tarafından erişilebilir.
+Kubernetes *gizli* dizisi ile hassas verileri, erişim kimlik bilgileri veya anahtarlar gibi bölümlere ayırır. 
+1. Kubernetes API 'sini kullanarak bir gizli dizi oluşturun. 
+1. Pod veya dağıtımınızı tanımlayın ve belirli bir gizli anahtar isteyin. 
+    * Gizli diziler yalnızca, zamanlanmış Pod olan düğümlere sağlanır.
+    * Gizli anahtar, diske yazılmadı ve *tmpfs*'de depolanır. 
+1. Gizli dizi gerektiren bir düğümdeki son Pod 'yi sildiğinizde, gizli dizi, düğümün tmpfs 'den silinir. 
+   * Gizli diziler belirli bir ad alanı içinde depolanır ve yalnızca aynı ad alanında yer alan Pod tarafından erişilebilir.
 
-Gizli dizi kullanımı, Pod veya hizmet YAML bildiriminde tanımlanan hassas bilgileri azaltır. Bunun yerine, Kubernetes API sunucusunda depolanan gizli anahtarı YAML bildiriminizde bir parçası olarak istemeniz gerekir. Bu yaklaşım yalnızca gizli dizi için özel Pod erişimi sağlar. Lütfen unutmayın: ham gizli bilgi bildirimi dosyaları gizli verileri Base64 biçiminde içerir (daha fazla ayrıntı için [resmi belgelere][secret-risks] bakın). Bu nedenle, bu dosya hassas bilgiler olarak kabul edilmelidir ve kaynak denetimine hiçbir şekilde uygulanmamalıdır.
+Gizli dizi kullanımı, Pod veya hizmet YAML bildiriminde tanımlanan hassas bilgileri azaltır. Bunun yerine, Kubernetes API sunucusunda depolanan gizli anahtarı YAML bildiriminizde bir parçası olarak istemeniz gerekir. Bu yaklaşım yalnızca gizli dizi için özel Pod erişimi sağlar. 
+
+> [!NOTE]
+> Ham gizli dizi bildirim dosyaları, Base64 biçimindeki gizli verileri içerir (daha fazla ayrıntı için [resmi belgelere][secret-risks] bakın). Bu dosyaları hassas bilgiler olarak değerlendirin ve bunları hiçbir şekilde kaynak denetimine kaydedin.
 
 Kubernetes gizli dizileri, dağıtılmış anahtar-değer deposu olarak etcd 'de depolanır. Etcd deposu AKS tarafından tam olarak yönetilir ve [veriler Azure platformunda geri kalanında şifrelenir][encryption-atrest]. 
 
@@ -105,7 +142,7 @@ AKS kümelerinizi korumaya başlamak için bkz. [aks kümesini yükseltme][aks-u
 
 İlişkili en iyi uygulamalar için bkz. [AKS 'de küme güvenliği ve yükseltmeleri Için en iyi uygulamalar][operator-best-practices-cluster-security] ve [aks 'de Pod güvenliği için en iyi uygulamalar][developer-best-practices-pod-security].
 
-Temel Kubernetes ve AKS kavramları hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
+Temel Kubernetes ve AKS kavramları hakkında daha fazla bilgi için bkz.:
 
 - [Kubernetes/AKS kümeleri ve iş yükleri][aks-concepts-clusters-workloads]
 - [Kubernetes/AKS kimliği][aks-concepts-identity]

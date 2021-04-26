@@ -2,19 +2,19 @@
 title: 'Hızlı başlangıç: Azure CLı ile SYNAPSE SQL havuzu oluşturma'
 description: Azure CLı kullanarak sunucu düzeyinde güvenlik duvarı kuralıyla hızlıca bir Synapse SQL havuzu oluşturun.
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 ms.service: synapse-analytics
 ms.topic: quickstart
 ms.subservice: sql-dw
 ms.date: 11/20/2020
-ms.author: gaursa
-ms.custom: azure-synapse
-ms.openlocfilehash: c17bfc06e76bad7730707530001ebeccea539c37
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.author: jrasnick
+ms.custom: azure-synapse, devx-track-azurecli
+ms.openlocfilehash: 712405ec7ba61e05bb587efc3e6393192d820e97
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104602273"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865504"
 ---
 # <a name="quickstart-create-a-synapse-sql-pool-with-azure-cli"></a>Hızlı başlangıç: Azure CLı ile SYNAPSE SQL havuzu oluşturma
 
@@ -22,7 +22,7 @@ Azure CLı kullanarak Azure SYNAPSE Analytics 'te bir Synapse SQL Havuzu (veri a
 
 [!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-## <a name="getting-started"></a>Başlarken
+## <a name="getting-started"></a>Kullanmaya başlama
 
 Azure 'da oturum açmak ve bir kaynak grubu ayarlamak için bu komutları kullanın.
 
@@ -77,43 +77,43 @@ SQL havuzunu oluşturun. Bu örnek, SQL havuzunuz için daha düşük maliyetli 
 > [!NOTE]
 > Daha önce oluşturulmuş bir çalışma alanına ihtiyacınız vardır. Daha fazla bilgi için bkz. [hızlı başlangıç: Azure CLI Ile Azure SYNAPSE çalışma alanı oluşturma](../quickstart-create-workspace-cli.md).
 
-SQL havuzu oluşturmak için [az SYNAPSE SQL Pool Create](/cli/azure/ext/synapse/synapse/sql/pool#ext_synapse_az_synapse_sql_pool_create) komutunu kullanın:
+SQL havuzu oluşturmak için [az SYNAPSE SQL Pool Create](/cli/azure/synapse/sql/pool#az_synapse_sql_pool_create) komutunu kullanın:
 
 ```azurecli
 az synapse sql pool create --resource-group myResourceGroup --name mySampleDataWarehouse \
    --performance-level "DW1000c" --workspace-name testsynapseworkspace
 ```
 
-Parametre seçenekleri hakkında daha fazla bilgi için bkz. [az SYNAPSE SQL Pool](/cli/azure/ext/synapse/synapse/sql/pool).
+Parametre seçenekleri hakkında daha fazla bilgi için bkz. [az SYNAPSE SQL Pool](/cli/azure/synapse/sql/pool).
 
-SQL havuzlarınızı [az SYNAPSE SQL Pool List](/cli/azure/ext/synapse/synapse/sql/pool#ext_synapse_az_synapse_sql_pool_list) komutunu kullanarak görebilirsiniz:
+SQL havuzlarınızı [az SYNAPSE SQL Pool List](/cli/azure/synapse/sql/pool#az_synapse_sql_pool_list) komutunu kullanarak görebilirsiniz:
 
 ```azurecli
 az synapse sql pool list --resource-group myResourceGroup --workspace-name testsynapseworkspace
 ```
 
-Var olan bir havuzu güncelleştirmek için [az SYNAPSE SQL Pool Update](/cli/azure/ext/synapse/synapse/sql/pool#ext_synapse_az_synapse_sql_pool_update) komutunu kullanın:
+Var olan bir havuzu güncelleştirmek için [az SYNAPSE SQL Pool Update](/cli/azure/synapse/sql/pool#az_synapse_sql_pool_update) komutunu kullanın:
 
 ```azurecli
 az synapse sql pool update --resource-group myResourceGroup --name mySampleDataWarehouse \
    --workspace-name testsynapseworkspace
 ```
 
-Havuzunuzu duraklatmak için [az SYNAPSE SQL Pool Pause](/cli/azure/ext/synapse/synapse/sql/pool#ext_synapse_az_synapse_sql_pool_pause) komutunu kullanın:
+Havuzunuzu duraklatmak için [az SYNAPSE SQL Pool Pause](/cli/azure/synapse/sql/pool#az_synapse_sql_pool_pause) komutunu kullanın:
 
 ```azurecli
 az synapse sql pool pause --resource-group myResourceGroup --name mySampleDataWarehouse \
    --workspace-name testsynapseworkspace
 ```
 
-Duraklatılmış bir havuz başlatmak için [az SYNAPSE SQL Pool özgeçmişi](/cli/azure/ext/synapse/synapse/sql/pool#ext_synapse_az_synapse_sql_pool_resume) komutunu kullanın:
+Duraklatılmış bir havuz başlatmak için [az SYNAPSE SQL Pool özgeçmişi](/cli/azure/synapse/sql/pool#az_synapse_sql_pool_resume) komutunu kullanın:
 
 ```azurecli
 az synapse sql pool resume --resource-group myResourceGroup --name mySampleDataWarehouse \
    --workspace-name testsynapseworkspace
 ```
 
-Mevcut bir SQL havuzunu kaldırmak için [az SYNAPSE SQL Pool Delete](/cli/azure/ext/synapse/synapse/sql/pool#ext_synapse_az_synapse_sql_pool_delete) komutunu kullanın:
+Mevcut bir SQL havuzunu kaldırmak için [az SYNAPSE SQL Pool Delete](/cli/azure/synapse/sql/pool#az_synapse_sql_pool_delete) komutunu kullanın:
 
 ```azurecli
 az synapse sql pool delete --resource-group myResourceGroup --name mySampleDataWarehouse \

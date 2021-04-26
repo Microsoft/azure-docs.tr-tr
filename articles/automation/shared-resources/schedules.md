@@ -3,14 +3,15 @@ title: Azure Otomasyonu 'nda zamanlamaları yönetme
 description: Bu makalede, Azure Otomasyonu 'nda bir zamanlamaya göre nasıl oluşturulacağı ve bunlarla çalışacakları açıklanır.
 services: automation
 ms.subservice: shared-capabilities
-ms.date: 03/19/2021
+ms.date: 03/29/2021
 ms.topic: conceptual
-ms.openlocfilehash: a829cd946f36fb5996405ba00945e9f9cb65d162
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: f119c15cbbfd9586bdb06fdffad0b12c9a441eea
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105544239"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832653"
 ---
 # <a name="manage-schedules-in-azure-automation"></a>Azure Otomasyonu 'nda zamanlamaları yönetme
 
@@ -183,8 +184,8 @@ $automationAccountName = "MyAutomationAccount"
 $runbookName = "Test-Runbook"
 $scheduleName = "Sample-DailySchedule"
 $params = @{"FirstName"="Joe";"LastName"="Smith";"RepeatCount"=2;"Show"=$true}
-Register-AzAutomationScheduledRunbook –AutomationAccountName $automationAccountName `
-–Name $runbookName –ScheduleName $scheduleName –Parameters $params `
+Register-AzAutomationScheduledRunbook -AutomationAccountName $automationAccountName `
+-Name $runbookName -ScheduleName $scheduleName -Parameters $params `
 -ResourceGroupName "ResourceGroup01"
 ```
 
@@ -218,8 +219,8 @@ Aşağıdaki örnek, bir Azure Resource Manager cmdlet 'i kullanarak bir runbook
 ```azurepowershell-interactive
 $automationAccountName = "MyAutomationAccount"
 $scheduleName = "Sample-MonthlyDaysOfMonthSchedule"
-Set-AzAutomationSchedule –AutomationAccountName $automationAccountName `
-–Name $scheduleName –IsEnabled $false -ResourceGroupName "ResourceGroup01"
+Set-AzAutomationSchedule -AutomationAccountName $automationAccountName `
+-Name $scheduleName -IsEnabled $false -ResourceGroupName "ResourceGroup01"
 ```
 
 ## <a name="remove-a-schedule"></a>Zamanlamayı kaldırma

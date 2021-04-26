@@ -7,12 +7,12 @@ ms.date: 11/06/2020
 ms.topic: how-to
 ms.service: iot-central
 services: iot-central
-ms.openlocfilehash: 36329987e510372ff286a10584a115ea259afc60
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 39bab52a564439d34b8702de11edabe7f0d6dfbc
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98119093"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106492265"
 ---
 # <a name="use-properties-in-an-azure-iot-central-solution"></a>Azure IoT Central çözümünde özellikleri kullanma
 
@@ -45,7 +45,7 @@ Aşağıdaki tabloda bir özellik yeteneği için yapılandırma ayarları göst
 | Birim            | **Mph**, **%** veya **&deg; C** gibi özellik değeri için bir birim.                                                                                                                                                              |
 | Görüntüleme birimi    | Panolar ve formlarda kullanılacak bir görüntüleme birimi.                                                                                                                                                                                    |
 | Yorum         | Özellik yeteneği hakkında herhangi bir açıklama.                                                                                                                                                                                        |
-| Description     | Özellik yeteneğinin açıklaması.                                                                                                                                                                                          |
+| Açıklama     | Özellik yeteneğinin açıklaması.                                                                                                                                                                                          |
 
 Özellikler, burada gösterildiği gibi bir cihaz şablonundaki bir arabirim içinde de tanımlanabilir:
 
@@ -210,7 +210,7 @@ Yanıt iletisi `ac` ve `av` alanlarını içermelidir. `ad` alanı isteğe bağl
 * `av` cihaza gönderilen sürüm numarasıdır.
 * `ad` , bir seçenek dize açıklamasıdır.
 
-| Değer | Etiketle | Description |
+| Değer | Etiketle | Açıklama |
 | ----- | ----- | ----------- |
 | `'ac': 200` | Tamamlandı | Özellik değiştirme işlemi başarıyla tamamlandı. |
 | `'ac': 202` veya `'ac': 201` | Beklemede | Özellik değiştirme işlemi bekliyor veya devam ediyor. |

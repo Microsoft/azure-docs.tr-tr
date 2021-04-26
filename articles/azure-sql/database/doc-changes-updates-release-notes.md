@@ -9,14 +9,14 @@ ms.subservice: service
 ms.custom: sqldbrb=2
 ms.devlang: ''
 ms.topic: conceptual
-ms.date: 03/10/2021
+ms.date: 04/17/2021
 ms.author: sstein
-ms.openlocfilehash: 9827a40b2ebc91c17ad7b5457259b8d82565edee
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: d0522fe2c8b6d6b623903a720e6c8e760bd6aa92
+ms.sourcegitcommit: 089c2bd1ac4861f43c4b89396d3d056a6eef4913
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640087"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107602082"
 ---
 # <a name="whats-new-in-azure-sql-database--sql-managed-instance"></a>SQL yönetilen örneği & Azure SQL veritabanı 'ndaki yenilikler nelerdir?
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -64,7 +64,7 @@ Bu tablo, terminoloji değişikliği için hızlı bir karşılaştırma sağlar
 | [Dağıtılmış işlemler](/azure/azure-sql/database/elastic-transactions-overview) | Yönetilen örnekler arasında dağıtılmış işlemler. |
 | [Örnek havuzları](/azure/sql-database/sql-database-instance-pools) | Daha küçük SQL örneklerini buluta geçirmek için kullanışlı ve uygun maliyetli bir yol. |
 | [Örnek düzeyi Azure AD sunucu sorumluları (oturum açmalar)](/sql/t-sql/statements/create-login-transact-sql) | [Dış sağlayıcıdan BIR oturum açma oluştur](/sql/t-sql/statements/create-login-transact-sql?view=azuresqldb-mi-current&preserve-view=true) ifadesiyle örnek düzeyinde oturumlar oluşturun. |
-| [İşlemsel çoğaltma](../managed-instance/replication-transactional-overview.md) | Tablolardaki değişiklikleri SQL yönetilen örneği, SQL veritabanı veya SQL Server diğer veritabanlarına çoğaltın. Ya da diğer SQL yönetilen örneği veya SQL Server diğer örneklerinde bazı satırlar değiştirildiğinde tablolarınızı güncelleştirin. Daha fazla bilgi için bkz. [Azure SQL yönetilen örneği 'nde çoğaltmayı yapılandırma](../managed-instance/replication-between-two-instances-configure-tutorial.md). |
+| [İşlem Çoğaltması](../managed-instance/replication-transactional-overview.md) | Tablolardaki değişiklikleri SQL yönetilen örneği, SQL veritabanı veya SQL Server diğer veritabanlarına çoğaltın. Ya da diğer SQL yönetilen örneği veya SQL Server diğer örneklerinde bazı satırlar değiştirildiğinde tablolarınızı güncelleştirin. Daha fazla bilgi için bkz. [Azure SQL yönetilen örneği 'nde çoğaltmayı yapılandırma](../managed-instance/replication-between-two-instances-configure-tutorial.md). |
 | Tehdit algılama |Bilgi için bkz. [Azure SQL yönetilen örneği 'nde tehdit algılamayı yapılandırma](../managed-instance/threat-detection-configure.md).|
 | Uzun süreli yedek saklama | Daha fazla bilgi için, şu anda sınırlı genel önizleme aşamasında olan [Azure SQL yönetilen örneği 'nde uzun süreli yedek saklama süresini yapılandırma](../managed-instance/long-term-backup-retention-configure.md)konusuna bakın. |
 
@@ -95,6 +95,7 @@ Aşağıdaki özellikler, H1 2019 ' de SQL yönetilen örnek dağıtım modelind
 
 |Sorun  |Keşfedilen Tarih  |Durum  |Çözümlenme tarihi  |
 |---------|---------|---------|---------|
+|[Bağlantı türünü değiştirmek, yük devretme grubu uç noktası üzerinden bağlantıları etkilemez](#changing-the-connection-type-does-not-affect-connections-through-the-failover-group-endpoint)|Ocak 2021|Geçici çözüm vardır||
 |[Parametre kullanıldığında yordam sp_send_dbmail geçişli olarak başarısız olabilir @query](#procedure-sp_send_dbmail-may-transiently-fail-when--parameter-is-used)|Ocak 2021|Geçici çözüm vardır||
 |[Dağıtılmış işlemler, sunucu güven grubundan yönetilen örnek kaldırıldıktan sonra yürütülebilir](#distributed-transactions-can-be-executed-after-removing-managed-instance-from-server-trust-group)|Eki 2020|Geçici çözüm vardır||
 |[Dağıtılmış işlemler, yönetilen örnek ölçeklendirme işleminden sonra yürütülemez](#distributed-transactions-cannot-be-executed-after-managed-instance-scaling-operation)|Eki 2020|Geçici çözüm vardır||
@@ -126,6 +127,12 @@ Aşağıdaki özellikler, H1 2019 ' de SQL yönetilen örnek dağıtım modelind
 |Kaynak veritabanında bellek içi OLTP nesneleri varsa, İş Açısından Kritik katmanından Genel Amaçlı katmana geri yükleme işlemi başarılı olmaz.||Çözümlendi|Eki 2019|
 |Güvenli bağlantı kullanan harici (Azure dışı) posta sunucularıyla veritabanı posta özelliği||Çözümlendi|Eki 2019|
 |Kapsanan veritabanları SQL yönetilen örneği 'nde desteklenmiyor||Çözümlendi|Ağu 2019|
+
+### <a name="changing-the-connection-type-does-not-affect-connections-through-the-failover-group-endpoint"></a>Bağlantı türünü değiştirmek, yük devretme grubu uç noktası üzerinden bağlantıları etkilemez
+
+Bir örnek [otomatik yük devretme grubuna](https://docs.microsoft.com/azure/azure-sql/database/auto-failover-group-overview)katılıyorsa, örneğin [bağlantı türünü](https://docs.microsoft.com/azure/azure-sql/managed-instance/connection-types-overview) değiştirmek, yük devretme grubu dinleyicisi uç noktası aracılığıyla kurulan bağlantılar için geçerli olmaz.
+
+**Geçici çözüm**: bağlantı türünü değiştirerek otomatik yük devretme grubunu bırakın ve yeniden oluşturun.
 
 ### <a name="procedure-sp_send_dbmail-may-transiently-fail-when-query-parameter-is-used"></a>Parametre kullanıldığında yordam sp_send_dbmail geçişli olarak başarısız olabilir @query
 

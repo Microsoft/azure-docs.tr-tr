@@ -10,12 +10,12 @@ ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
 ms.custom: responsible-ml
-ms.openlocfilehash: 39f4b1a7b9eb1ad7a87097240dd772e4f2dadf17
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: de85c8184e05c9d662a2854e6138f3a61bfba8de
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98683555"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106062463"
 ---
 # <a name="what-is-differential-privacy-in-machine-learning-preview"></a>Makine öğreniminde değişiklik gizliliği nedir (Önizleme)
 

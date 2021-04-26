@@ -3,23 +3,24 @@ title: Öğretici-Azure ön Kapıyapılandırmanıza özel etki alanı ekleme
 description: Bu öğreticide Azure Front Door'a özel etki alanı eklemeyi öğreneceksiniz.
 services: frontdoor
 documentationcenter: ''
-author: duongau
+author: jessie-jyy
 editor: ''
 ms.service: frontdoor
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 09/24/2020
-ms.author: duau
-ms.openlocfilehash: e153edd807dcb119c34f60dc34e33fed510916bb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/12/2021
+ms.author: yuajia
+ms.openlocfilehash: 7e2f05a7d911ce2b311a423994d2b459de0fa269
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96011532"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308872"
 ---
 # <a name="tutorial-add-a-custom-domain-to-your-front-door"></a>Öğretici: Front Door örneğinize özel etki alanı ekleme
+
 Bu öğreticide Front Door'a özel etki alanı ekleme adımları gösterilmektedir. Uygulama teslimi için Azure ön kapısı kullandığınızda, kendi etki alanı adınızın Son Kullanıcı isteğiniz içinde görünmesini istiyorsanız özel bir etki alanı gereklidir. Görünür bir etki alanınızın olması, müşterileriniz için kolaylık sağlar ve markalama için faydalıdır.
 
 Ön kapı oluşturduktan sonra, varsayılan ön uç Konağı `azurefd.net` Varsayılan olarak arka ucunuzdaki ön kapı içeriğini teslim etmek için URL 'ye eklenir (örneğin, https: \/ /contoso-frontend.azurefd.net/activeusers.htm). Size kolaylık olması için Azure Front Door, varsayılan ana bilgisayar adı özel etki alanı ile ilişkilendirme seçeneği sunar. Bu seçeneği kullanarak URL’nizde Front Door'a ait olan etki alanı adı yerine özel etki alanı ile içerik sunabilirsiniz (örneğin, https:\//www.contoso.com/photo.png). 
@@ -39,9 +40,9 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 * Bu öğreticideki adımları tamamlayabilmeniz için öncelikle bir Front Door oluşturmanız gerekir. Daha fazla bilgi için bkz. [Hızlı başlangıç: Front Door oluşturma](quickstart-create-front-door.md).
 
-* Henüz özel bir etki alanınız yoksa ilk olarak bir etki alanı sağlayıcısından satın almanız gerekir. Örneğin bkz. [Özel etki alanı adı satın alma](../app-service/manage-custom-dns-buy-domain.md).
+* Zaten özel bir etki alanınız yoksa, önce bir etki alanı sağlayıcısıyla bir tane satın almanız gerekir. Örneğin bkz. [Özel etki alanı adı satın alma](../app-service/manage-custom-dns-buy-domain.md).
 
-* [DNS etki alanlarınızı](../dns/dns-overview.md) barındırmak için Azure kullanıyorsanız, etki alanı sağlayıcısının etki alanı adı sistemini (DNS) bir Azure DNS’e devretmeniz gerekir. Daha fazla bilgi için bkz. [Bir etki alanını Azure DNS'ye devretme](../dns/dns-delegate-domain-azure-dns.md). Aksi takdirde, DNS etki alanınızı işlemek için bir etki alanı sağlayıcısı kullanıyorsanız [CNAME DNS kaydı oluşturma](#create-a-cname-dns-record) bölümüne geçin.
+* [DNS etki alanlarınızı](../dns/dns-overview.md)barındırmak için Azure kullanıyorsanız, etki alanı sağlayıcının etki alanı adı sistemi 'NI (DNS) bir Azure DNS temsilci olarak oluşturmanız gerekir. Daha fazla bilgi için bkz. [Bir etki alanını Azure DNS'ye devretme](../dns/dns-delegate-domain-azure-dns.md). Aksi takdirde, DNS etki alanınızı işlemek için bir etki alanı sağlayıcısı kullanıyorsanız, [CNAME DNS kaydı oluşturmaya](#create-a-cname-dns-record)devam edin.
 
 
 ## <a name="create-a-cname-dns-record"></a>CNAME DNS kaydı oluşturma
@@ -53,9 +54,9 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 ## <a name="map-the-temporary-afdverify-subdomain"></a>Geçici afdverify alt etki alanını eşleme
 
-Üretim aşamasındaki var olan bir etki alanını eşlerken göz önünde bulundurmanız gereken özel durumlar vardır. Özel etki alanınızı Azure portalına kaydederken etki alanı için kısa bir kapalı kalma süresi yaşanabilir. Web trafiğinin kesintiye uğramasını önlemek için ilk olarak, geçici bir CNAME eşlemesi oluşturmak üzere Azure afdverify alt etki alanı ile özel etki alanınızı ön kapı varsayılan ön uç konağından eşleyin. Bu yöntemle kullanıcılar, DNS eşlemesi gerçekleşirken kesinti olmadan etki alanınıza erişebilir.
+Üretim aşamasındaki var olan bir etki alanını eşlerken göz önünde bulundurmanız gereken özel durumlar vardır. Özel etki alanınızı Azure portal kaydederken etki alanı için kısa bir kapalı kalma süresi oluşabilir. Web trafiğinin kesintiye uğramasını önlemek için ilk olarak, geçici bir CNAME eşlemesi oluşturmak üzere Azure afdverify alt etki alanı ile özel etki alanınızı ön kapı varsayılan ön uç konağından eşleyin. Bu yöntemle kullanıcılar, DNS eşlemesi gerçekleşirken kesinti olmadan etki alanınıza erişebilir.
 
-Aksi takdirde, özel etki alanınızı ilk kez kullanıyorsanız ve üzerinde devam eden bir üretim trafiği yoksa, özel etki alanınızı doğrudan Front Door'unuza eşleyebilirsiniz. [Kalıcı özel etki alanını eşleme](#map-the-permanent-custom-domain) bölümüne geçin.
+Aksi takdirde, özel etki alanınızı ilk kez kullanıyorsanız ve üzerinde üretim trafiği çalışmıyorsa, özel etki alanınızı ön kapıya doğrudan eşleyebilirsiniz. [kalıcı özel etki alanını eşlemeye](#map-the-permanent-custom-domain)devam edin.
 
 afdverify alt etki alanı ile bir CNAME kaydı oluşturmak için:
 
@@ -69,7 +70,7 @@ afdverify alt etki alanı ile bir CNAME kaydı oluşturmak için:
     |---------------------------|-------|---------------------------------|
     | afdverify.www.contoso.com | CNAME | afdverify.contoso-frontend.azurefd.net |
 
-    - Kaynak: afdverify alt etki alanı da dahil olmak üzere özel etki alanı adınızı aşağıdaki biçimde girin: afdverify. _&lt; özel etki alanı &gt; adı_. Örneğin, afdverify.www.contoso.com.
+    - Kaynak: afdverify alt etki alanı da dahil olmak üzere özel etki alanı adınızı aşağıdaki biçimde girin: afdverify. _&lt; özel etki alanı &gt; adı_. Örneğin, afdverify.www.contoso.com. . Contoso.com gibi bir joker etki alanını eşleştirıyorsanız \* , kaynak değer joker karakter: afdverify.contoso.com olmadan olacak şekilde aynıdır.
 
     - Tür: *CNAME* yazın.
 
@@ -108,13 +109,13 @@ afdverify alt etki alanı ile bir CNAME kaydı oluşturmak için:
 
 1. [Azure portalda](https://portal.azure.com/) oturum açın ve bir özel etki alanına eşlemek istediğiniz ön uç ana bilgisayar adını içeren Front Door'a göz atın.
     
-2. **Front Door tasarımcısı** sayfasında özel etki alanı eklemek için '+' işaretine tıklayın.
+2. **Ön kapı Tasarımcısı** sayfasında, özel bir etki alanı eklemek için ' + ' seçeneğini belirleyin.
     
 3. **Özel etki alanı**'nı seçin. 
 
 4. **Ön uç ana bilgisayar adı** alanında CNAME kaydınızın hedef etki alanı olarak kullanılacak ön uç ana bilgisayar adı önceden doldurulmuş ve Front Door'unuzdan alınmıştır: *&lt;varsayılan ana bilgisayar adı&gt;*.azurefd.net. Bu değer değiştirilemez.
 
-5. **Özel ana bilgisayar adı** için, CNAME kaydınızın kaynak etki alanı olarak kullanılacak alt etki alanı dahil özel etki alanınızı girin. Örneğin, www \. contoso.com veya CDN.contoso.com. afdverify alt etki alanı adını kullanmayın.
+5. **Özel ana bilgisayar adı** için, CNAME kaydınızın kaynak etki alanı olarak kullanılacak alt etki alanı dahil özel etki alanınızı girin. Örneğin, www \. contoso.com veya CDN.contoso.com. Afdverify alt etki alanı adını kullanmayın.
 
 6. **Add (Ekle)** seçeneğini belirleyin.
 
@@ -125,14 +126,14 @@ afdverify alt etki alanı ile bir CNAME kaydı oluşturmak için:
 
 ## <a name="verify-the-custom-domain"></a>Özel etki alanını doğrulama
 
-Özel etki alanınızın kaydını tamamladıktan sonra özel etki alanının varsayılan Front Door ön uç ana bilgisayar adınıza başvurduğunu doğrulayın.
+Özel etki alanınızı kaydınızı tamamladıktan sonra, özel etki alanının varsayılan ön kapılı ön uç ana bilgisayarınıza başvurduğundan emin olun.
  
 Tarayıcınızda, özel etki alanını kullanarak dosyanın adresine gidin. Örneğin, özel etki alanınız robotics.contoso.com ise önbelleğe alınan dosyanın URL’si şu URL’ye benzer olmalıdır: http:\//robotics.contoso.com/my-public-container/my-file.jpg. En önde gelen kapıya doğrudan *&lt; ön kapı ana bilgisayarında &gt;*, sonucun aynı olduğunu doğrulayın. azurefd.net.
 
 
 ## <a name="map-the-permanent-custom-domain"></a>Kalıcı özel etki alanını eşleme
 
-afdverify alt etki alanının Front Door'unuza başarıyla eşlendiğini doğruladıysanız (veya üretim aşamasında olmayan yeni bir özel etki alanı kullanıyorsanız), özel etki alanını doğrudan varsayılan Front Door ön uç ana bilgisayar adına eşleyebilirsiniz.
+Afdverify alt etki alanının ön kapıya başarıyla eşlendiğini doğruladıysanız (veya üretimde olmayan yeni bir özel etki alanı kullanıyorsanız), özel etki alanını doğrudan varsayılan ön kapı ön uç konağınız ile eşleyebilirsiniz.
 
 Özel etki alanınıza yönelik bir CNAME kaydı oluşturmak için:
 
@@ -156,7 +157,7 @@ afdverify alt etki alanının Front Door'unuza başarıyla eşlendiğini doğrul
 
 5. Daha önce geçici bir afdverify alt etki alanı CNAME kaydı oluşturduysanız silin. 
 
-6. Bu özel etki alanını üretimde ilk kez kullanıyorsanız, [Özel etki alanını Front Door'unuzla ilişkilendirme](#associate-the-custom-domain-with-your-front-door) ve [Özel etki alanını doğrulama](#verify-the-custom-domain) adımlarını izleyin.
+6. Bu özel etki alanını üretimde ilk kez kullanıyorsanız, [özel etki alanını ön Kapıınızla ilişkilendirme](#associate-the-custom-domain-with-your-front-door) ve [özel etki alanını doğrulama](#verify-the-custom-domain)adımlarını izleyin.
 
 Örneğin, GoDaddy etki alanı kayıt şirketi için yordam şu şekildedir:
 
@@ -186,17 +187,18 @@ afdverify alt etki alanının Front Door'unuza başarıyla eşlendiğini doğrul
 
 8. CNAME kaydını silmek için **Sil**’i seçin.
 
-
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Yukarıdaki adımlarda bir özel etki alanını bir Front Door'a eklediniz. Front Door'unuzu artık özel bir etki alanı ile ilişkilendirmek istemiyorsanız, aşağıdaki adımları uygulayarak özel etki alanını kaldırabilirsiniz:
+Yukarıdaki adımlarda bir özel etki alanını bir Front Door'a eklediniz. Ön kapıyı artık özel bir etki alanıyla ilişkilendirmek istemiyorsanız, aşağıdaki adımları uygulayarak özel etki alanını kaldırabilirsiniz:
  
-1. Front Door tasarımcısında kaldırmak istediğiniz özel etki alanını seçin.
+1. DNS sağlayıcınıza gidin, özel etki alanı için CNAME kaydını silin veya özel etki alanı için CNAME kaydını ön kapısız bir uç noktaya güncelleştirin.
 
-2. Özel etki alanı bağlam menüsünde Sil'e tıklayın.  
+    > [!Important]
+    > Azure ön kapısının, DNS girdilerinin ve oluşturdukları güvenlik 2021 risklerini engellemek için, kaynakların silinebilmesi için önce CNAME kayıtlarının ön kapıda kaldırılması gerekir. Kaynaklar, ön kapı özel etki alanları, ön kapı uç noktaları veya ön kapı özel etki alanlarına sahip Azure kaynak gruplarını içerir.
 
-   Özel etki alanının uç noktanızla ilişkisi silinir.
+2. Front Door tasarımcısında kaldırmak istediğiniz özel etki alanını seçin.
 
+3. Özel etki alanı için bağlam menüsünden **Sil** ' i seçin. Özel etki alanı artık uç noktanızla ilişkisini keser.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

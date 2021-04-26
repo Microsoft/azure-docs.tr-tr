@@ -5,23 +5,39 @@
   items:
     - name: Kişiselleştirme nedir?
       href: what-is-personalizer.md
+    - name: Fiyatlandırma
+      href: 'https://go.microsoft.com/fwlink/?linkid=2092154'
       displayName: 'loop, context, feature, action, rank, reward, developer, use case'
     - name: Yenilikler
       href: whats-new.md
       displayName: 'release notes, service updates, videos'
-- name: Hızlı Başlangıçlar
+- name: Hızlı Başlangıç
+  href: ./quickstart-personalizer-sdk.md
+- name: Örnekler
+  href: 'https://github.com/Azure-Samples/cognitive-services-personalizer-samples'
+- name: Yapay zekanın sorumluluk sahibi bir biçimde kullanılması
   items:
-    - name: SDK’yı kullanma
-      href: ./quickstart-personalizer-sdk.md
-- name: Öğreticiler
+    - name: Etik & sorumlu kullanım
+      href: ethics-responsible-use.md
+- name: Nasıl yapılır kılavuzları
   items:
-    - name: Web uygulamasını kullanma
-      href: tutorial-use-personalizer-web-app.md
-    - name: Sohbet botunu kullanma
-      href: tutorial-use-personalizer-chat-bot.md
-    - name: Azure not defterini kullanma
-      href: tutorial-use-azure-notebook-generate-loop-data.md
-      displayName: 'jupyter, notebook, python, cell, graph, chart, aggregate, model update frequency'
+    - name: Kişiselleştirme Kaynağı Oluşturma
+      href: how-to-create-resource.md
+    - name: Kişiselleştirme’yi yapılandırma
+      href: how-to-settings.md
+      displayName: 'azure, portal, settings, evaluation, offline, policy, export, model, configure'
+    - name: Acemi modunu kullanma
+      href: how-to-learning-behavior.md
+    - name: Model ve öğrenme ayarlarını yönetme
+      href: how-to-manage-model.md
+    - name: Çevrimdışı değerlendirme ile analiz etme
+      href: how-to-offline-evaluation.md
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/personalizer/context/context
+        - name: Müşteri tarafından yönetilen anahtarları kullan
+          href: encrypt-data-at-rest.md
 - name: Kavramlar
   items:
     - name: Kişiselleştirme nasıl çalışır?
@@ -32,10 +48,8 @@
       displayName: 'checklist, considerations, effectiveness, recommendation engine'
     - name: Terminoloji
       href: terminology.md
-    - name: Etik & sorumlu kullanım
-      href: ethics-responsible-use.md
       displayName: 'best practice, design'
-    - name: Temel kavramlar
+    - name: Kişiselleştirici temelleri
       items:
         - name: Özellikler Eylem ve Bağlam
           href: concepts-features.md
@@ -55,71 +69,61 @@
           displayName: 'RL, contextual bandits, Vowpal Wabbit'
         - name: Araştırma
           href: concepts-exploration.md
-    - name: Analiz
-      items:
-        - name: Çevrimdışı değerlendirme
-          href: concepts-offline-evaluation.md
-          displayName: 'learning policy, Counterfactual, features'
-        - name: Özellik değerlendirmesi
-          href: concept-feature-evaluation.md
+    - name: Çevrimdışı değerlendirme
+      href: concepts-offline-evaluation.md
+      displayName: 'learning policy, Counterfactual, features'
+    - name: Özellik değerlendirmesi
+      href: concept-feature-evaluation.md
     - name: Ölçeklenebilirlik ve performans
       href: concepts-scalability-performance.md
-- name: Nasıl yapılır kılavuzları
+- name: Öğreticiler
   items:
-    - name: Kişiselleştirme Kaynağı Oluşturma
-      href: how-to-create-resource.md
-    - name: Kişiselleştirme’yi yapılandırma
-      href: how-to-settings.md
-      displayName: 'azure, portal, settings, evaluation, offline, policy, export, model, configure'
-    - name: Acemi modunu kullanma
-      href: how-to-learning-behavior.md
-    - name: Model ve öğrenme ayarlarını yönetme
-      href: how-to-manage-model.md
-    - name: Çevrimdışı değerlendirme ile analiz etme
-      href: how-to-offline-evaluation.md
+    - name: Web uygulamasını kullanma
+      href: tutorial-use-personalizer-web-app.md
+    - name: Sohbet botunu kullanma
+      href: tutorial-use-personalizer-chat-bot.md
+    - name: Azure not defterini kullanma
+      href: tutorial-use-azure-notebook-generate-loop-data.md
+      displayName: 'jupyter, notebook, python, cell, graph, chart, aggregate, model update frequency'
 - name: Başvuru
   items:
-    - name: Örnekler
-      href: 'https://go.microsoft.com/fwlink/?linkid=2092083'
-    - name: REST API Başvurusu
+    - name: Kişiselleştirici REST API
       href: 'https://go.microsoft.com/fwlink/?linkid=2092082'
-    - name: SDK’lar
+    - name: .NET
       items:
-        - name: .NET
-          items:
-            - name: Başvuru
-              href: /dotnet/api/overview/azure/cognitiveservices/client/personalizer
-            - name: NuGet paketi
-              href: 'https://go.microsoft.com/fwlink/?linkid=2092272'
-        - name: Başlayın
-          items:
-            - name: SDK
-              href: 'https://github.com/Azure/azure-sdk-for-go/tree/master/services/preview'
-        - name: Node.js
-          items:
-            - name: Başvuru
-              href: /javascript/api/@azure/cognitiveservices-personalizer/
-            - name: NPM
-              href: 'https://www.npmjs.com/package/@azure/cognitiveservices-personalizer/v/1.0.0'
-        - name: Python
-          items:
-            - name: Başvuru
-              href: /python/api/overview/azure/cognitiveservices/personalizer
-            - name: Pypi paketi
-              href: 'https://pypi.org/project/azure-cognitiveservices-personalizer/'
+        - name: Başvuru
+          href: /dotnet/api/overview/azure/cognitiveservices/client/personalizer
+        - name: NuGet paketi
+          href: 'https://go.microsoft.com/fwlink/?linkid=2092272'
+    - name: Başlayın
+      items:
+        - name: Başvuru
+          href: 'https://github.com/Azure/azure-sdk-for-go/tree/master/services/preview'
+    - name: Node.js
+      items:
+        - name: Başvuru
+          href: /javascript/api/@azure/cognitiveservices-personalizer/
+        - name: NPM paketi
+          href: 'https://www.npmjs.com/package/@azure/cognitiveservices-personalizer/v/1.0.0'
+    - name: Python
+      items:
+        - name: Başvuru
+          href: /python/api/overview/azure/cognitiveservices/personalizer
+        - name: Pypi paketi
+          href: 'https://pypi.org/project/azure-cognitiveservices-personalizer/'
 - name: Kaynaklar
   items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
+    - name: Microsoft Learn modülleri
+      href: 'https://docs.microsoft.com/learn/browse/?terms=personalizer'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/personalizer/context/context
     - name: Sorun giderme
       href: troubleshooting.md
-    - name: Bölgesel kullanılabilirlik
-      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
-    - name: Şifreleme
-      href: encrypt-data-at-rest.md
-    - name: Azure Yol Haritası
+    - name: Azure güncelleştirmeleri
       href: 'https://go.microsoft.com/fwlink/?linkid=2092153'
-    - name: Fiyatlandırma
-      href: 'https://go.microsoft.com/fwlink/?linkid=2092154'

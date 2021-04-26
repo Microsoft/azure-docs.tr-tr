@@ -7,18 +7,18 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/20/2019
 ms.author: xshi
-ms.openlocfilehash: 6fe5a45dda6632c56b3c6714827950e25e7d26af
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 96f93325e0f17daaaf2bad91123fea81531ca152
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "73953193"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566971"
 ---
 # <a name="use-cloud-explorer-for-visual-studio-for-azure-iot-hub-device-management"></a>Azure için Visual Studio IoT Hub cihaz yönetimi için Cloud Explorer 'ı kullanma
 
 ![Uçtan uca diyagram](media/iot-hub-device-management-visual-studio/iot-e2e-simple.png)
 
-[Bulut Gezgini](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.CloudExplorerForVS) , Azure kaynaklarınızı görüntülemenize, özelliklerini Incelemenize ve Visual Studio içinden önemli geliştirici eylemleri gerçekleştirmenize olanak tanıyan yararlı bir Visual Studio uzantısıdır. Bu, çeşitli görevleri gerçekleştirmek için kullanabileceğiniz yönetim seçenekleriyle birlikte gelir.
+Bu makalede, geliştirme bilgisayarınızda çeşitli yönetim seçenekleriyle Visual Studio için bulut Gezgini 'ni nasıl kullanacağınızı öğreneceksiniz. [Bulut Gezgini](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.CloudExplorerForVS) , Azure kaynaklarınızı görüntülemenize, özelliklerini Incelemenize ve Visual Studio içinden önemli geliştirici eylemleri gerçekleştirmenize olanak tanıyan yararlı bir Visual Studio uzantısıdır. Bu, çeşitli görevleri gerçekleştirmek için kullanabileceğiniz yönetim seçenekleriyle birlikte gelir.
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
@@ -33,17 +33,7 @@ Bu seçenekleri kullanmayla ilgili farklılıklar ve yönergeler hakkında daha 
 
 Cihaz ikizleri; meta veriler, yapılandırmalar ve koşullar gibi cihaz durumu bilgilerini depolayan JSON belgelerdir. IoT Hub, kendisine bağlanan her cihaz için bir cihaz ikizi devam ettirir. Cihaz TWINS hakkında daha fazla bilgi için bkz. [cihaz ikgörülerle çalışmaya başlama](iot-hub-node-node-twin-getstarted.md).
 
-## <a name="what-you-learn"></a>Öğrenecekleriniz
-
-Bu makalede, geliştirme bilgisayarınızda çeşitli yönetim seçenekleriyle Visual Studio için bulut Gezgini 'ni nasıl kullanacağınızı öğreneceksiniz.
-
-## <a name="what-you-do"></a>Yapabilecekleriniz
-
-Bu makalede, çeşitli yönetim seçenekleriyle Visual Studio için Cloud Explorer 'ı çalıştırın.
-
-## <a name="what-you-need"></a>Gerekenler
-
-Aşağıdaki önkoşulların olması gerekir:
+## <a name="prerequisites"></a>Önkoşullar
 
 - Etkin bir Azure aboneliği.
 

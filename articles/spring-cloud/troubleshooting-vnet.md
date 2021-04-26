@@ -7,12 +7,12 @@ ms.topic: how-to
 ms.date: 09/19/2020
 ms.author: brendm
 ms.custom: devx-track-java
-ms.openlocfilehash: b2369a6380c7b74302d32366d0604fca616fc3ed
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: a84ed5a6f80b038ced2077fe3c038bd9801ca033
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878790"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105732950"
 ---
 # <a name="troubleshooting-azure-spring-cloud-in-virtual-networks"></a>Sanal ağlarda Azure Spring Cloud sorunlarını giderme
 
@@ -38,7 +38,6 @@ Azure Spring Cloud Service örneğini Kaynak Yöneticisi şablonunu kullanarak a
 | Hata İletisi | Nasıl düzeltilir |
 |------|------|
 | Azure Spring Cloud tarafından oluşturulan kaynaklara ilke tarafından izin verilmedi. | Ağ kaynakları, Azure Spring Cloud 'ı kendi sanal ağınıza dağıtırken oluşturulacaktır. Lütfen bu oluşturmayı engellemek için [Azure ilkesinin](../governance/policy/overview.md) tanımlanıp tanımlanmadığını denetleyin. Oluşturulacak kaynaklar hata iletisinde bulunabilir. |
-| Belirtilen alt ağlar rota tablolarıyla ilişkili, lütfen bunların ilişkisini kaldırın. | Şu anda, mevcut yol tablolarıyla ilişkili olan alt ağda Azure Spring Cloud dağıtmak için desteklenmiyor, lütfen bunların ilişkilendirmesini kaldırın ve yeniden deneyin. |
 | Gerekli trafik allowlistelenmedi. | Gerekli trafiğin allowlistelendiğinden emin olmak için lütfen [VNET 'Te Azure Spring Cloud 'ı çalıştırmaya yönelik müşteri sorumluluklarına](spring-cloud-vnet-customer-responsibilities.md) bakın. |
 
 ## <a name="my-application-cant-be-registered"></a>Uygulamam kaydedilemiyor

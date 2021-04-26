@@ -7,12 +7,12 @@ author: vikancha-MSFT
 ms.topic: conceptual
 ms.date: 01/12/2021
 ms.author: vikancha
-ms.openlocfilehash: d73bd81f15263c79e16b574eb961d4ae0ac61175
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2e10177de1a40bf7ece7acde43a91686bd4c98e5
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103417816"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306458"
 ---
 # <a name="ncast4_v3-series"></a>NCasT4_v3 serisi 
 
@@ -23,12 +23,13 @@ NCasT4_v3 serisi sanal makineler, [NVIDIA Tesla T4](https://www.nvidia.com/en-us
 [Acu](acu.md): 230-260<br>
 [Premium Depolama](premium-storage-performance.md): desteklenir<br>
 [Premium depolama önbelleği](premium-storage-performance.md): desteklenir<br>
+[Ultra diskler](disks-types.md#ultra-disk): desteklenir (kullanılabilirlik, kullanım ve performans hakkında[daha fazla bilgi edinin](https://techcommunity.microsoft.com/t5/azure-compute/ultra-disk-storage-for-hpc-and-gpu-vms/ba-p/2189312) ) <br>
 [Dinamik geçiş](maintenance-and-updates.md): desteklenmiyor<br>
 [Güncelleştirmeleri koruyan bellek](maintenance-and-updates.md): desteklenmiyor<br>
 [VM oluşturma desteği](generation-2.md): 1. ve 2. nesil<br>
 [Hızlandırılmış ağ](../virtual-network/create-vm-accelerated-networking-cli.md): desteklenir<br>
 [Kısa ömürlü işletim sistemi diskleri](ephemeral-os-disks.md): desteklenmez <br>
-NVIDIA NVLink Interconnect: destekleniyor<br>
+NVIDIA NVLink Interconnect: desteklenmiyor<br>
 <br>
 
 | Boyut | Sanal işlemci | Bellek: GiB | Geçici depolama (SSD) GiB | GPU | GPU belleği: GiB | Maksimum veri diskleri | En fazla NIC/beklenen ağ bant genişliği (Mbps) |

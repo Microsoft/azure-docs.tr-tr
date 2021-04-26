@@ -5,12 +5,12 @@ description: Bu makalede, Azure HDInsight kümelerinde bekleyen veriler için ku
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 08/10/2020
-ms.openlocfilehash: 3d4f9e3be02a64efa058ea1f84a3e261cb6166fc
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 226516b1178f14789570b45b68cfdbf56f63bbd7
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104867126"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775160"
 ---
 # <a name="azure-hdinsight-double-encryption-for-data-at-rest"></a>Bekleyen veriler için Azure HDInsight çift şifrelemesi
 
@@ -133,7 +133,7 @@ Ayrıca, yönetilen kimliği kümeye atamanız gerekir.
 
 #### <a name="using-azure-cli"></a>Azure CLI’yı kullanma
 
-Aşağıdaki örnek, disk şifrelemesi etkinken yeni bir Apache Spark kümesi oluşturmak için Azure CLı 'nın nasıl kullanılacağını göstermektedir. Daha fazla bilgi için bkz. [Azure CLI az HDInsight Create](/cli/azure/hdinsight#az-hdinsight-create). Parametresi `encryption-key-version` isteğe bağlıdır.
+Aşağıdaki örnek, disk şifrelemesi etkinken yeni bir Apache Spark kümesi oluşturmak için Azure CLı 'nın nasıl kullanılacağını göstermektedir. Daha fazla bilgi için bkz. [Azure CLI az HDInsight Create](/cli/azure/hdinsight#az_hdinsight_create). Parametresi `encryption-key-version` isteğe bağlıdır.
 
 ```azurecli
 az hdinsight create -t spark -g MyResourceGroup -n MyCluster \
@@ -371,7 +371,7 @@ Anahtarı döndürmek için temel Anahtar Kasası URI 'sine ihtiyacınız vardı
 
 #### <a name="using-azure-cli"></a>Azure CLI’yı kullanma
 
-Aşağıdaki örnekte, mevcut bir HDInsight kümesi için disk şifreleme anahtarının nasıl döndürülebileceğiniz gösterilmektedir. Daha fazla bilgi için bkz. [Azure CLI az HDInsight döndürme-disk-Encryption-Key](/cli/azure/hdinsight#az-hdinsight-rotate-disk-encryption-key).
+Aşağıdaki örnekte, mevcut bir HDInsight kümesi için disk şifreleme anahtarının nasıl döndürülebileceğiniz gösterilmektedir. Daha fazla bilgi için bkz. [Azure CLI az HDInsight döndürme-disk-Encryption-Key](/cli/azure/hdinsight#az_hdinsight_rotate_disk_encryption_key).
 
 ```azurecli
 az hdinsight rotate-disk-encryption-key \
@@ -404,7 +404,7 @@ Küme anahtara erişimi kaybederse, uyarılar Apache ambarı portalında göster
 
 **Anahtarlar siliniyorsa kümeyi nasıl kurtarabilirim?**
 
-Yalnızca "geçici silme" özelliği desteklendiğinden, anahtarlar anahtar kasasında kurtarılıyorsa, küme anahtarlara yeniden erişim elde etmelidir. Azure Key Vault anahtarını kurtarmak için, bkz. [Undo-Azkeyvaultkeykaldırması](/powershell/module/az.keyvault/Undo-AzKeyVaultKeyRemoval) veya [az-keykasa-Key-Recover](/cli/azure/keyvault/key#az-keyvault-key-recover).
+Yalnızca "geçici silme" özelliği desteklendiğinden, anahtarlar anahtar kasasında kurtarılıyorsa, küme anahtarlara yeniden erişim elde etmelidir. Azure Key Vault anahtarını kurtarmak için, bkz. [Undo-Azkeyvaultkeykaldırması](/powershell/module/az.keyvault/Undo-AzKeyVaultKeyRemoval) veya [az-keykasa-Key-Recover](/cli/azure/keyvault/key#az_keyvault_key_recover).
 
 
 **Bir küme yukarı ölçekleniyorsa, yeni düğümler müşteri tarafından yönetilen anahtarları sorunsuz şekilde destekliyor mu?**

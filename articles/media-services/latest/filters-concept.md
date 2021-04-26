@@ -13,18 +13,18 @@ ms.devlang: ne
 ms.topic: conceptual
 ms.date: 08/31/2020
 ms.author: inhenkel
-ms.openlocfilehash: bb5561ced93c3f5a899c6e48fdab0f14e52914bb
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 6ba9a4d5ac427533c2ce005a74fe43b0ce80de79
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89291560"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109450"
 ---
 # <a name="filters"></a>Filtreler
 
 [!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
-İçeriğinizi müşterilere sunarken (canlı akış olayları veya Isteğe bağlı video), istemciniz varsayılan varlığın bildirim dosyasında açıklananlardan daha fazla esneklik gerektirebilir. Azure Media Services, önceden tanımlanmış filtreleri temel alarak [dinamik bildirimler](filters-dynamic-manifest-overview.md) sunmaktadır. 
+İçeriğinizi müşterilere sunarken (canlı akış olayları veya Isteğe bağlı video), istemciniz varsayılan varlığın bildirim dosyasında açıklananlardan daha fazla esneklik gerektirebilir. Azure Media Services, önceden tanımlanmış filtreleri temel alarak [dinamik bildirimler](filters-dynamic-manifest-concept.md) sunmaktadır. 
 
 Filtreler, müşterilerinizin şu gibi işlemler yapmasına izin veren sunucu tarafı kurallarıdır: 
 
@@ -141,12 +141,12 @@ Aşağıdaki örnek bir canlı akış filtresi tanımlar:
 
 ## <a name="associating-filters-with-streaming-locator"></a>Akış bulucu ile filtreleri ilişkilendirme
 
-[Akış bulucusinizdeki](/rest/api/media/streaminglocators/create#request-body) [varlık veya hesap filtrelerinin](filters-concept.md) listesini belirtebilirsiniz. [Dinamik Paketleyici](dynamic-packaging-overview.md) , bu filtre listesini ISTEMCINIZDEKI URL 'de belirttiği değişikliklerle birlikte uygular. Bu bileşim, akış bulucunun üzerinde belirlediğiniz URL + filtrelerdeki filtreleri temel alan [dinamik bir bildirim](filters-dynamic-manifest-overview.md)oluşturur. 
+[Akış bulucusinizdeki](/rest/api/media/streaminglocators/create#request-body) [varlık veya hesap filtrelerinin](filters-concept.md) listesini belirtebilirsiniz. [Dinamik Paketleyici](encode-dynamic-packaging-concept.md) , bu filtre listesini ISTEMCINIZDEKI URL 'de belirttiği değişikliklerle birlikte uygular. Bu bileşim, akış bulucunun üzerinde belirlediğiniz URL + filtrelerdeki filtreleri temel alan [dinamik bir bildirim](filters-dynamic-manifest-concept.md)oluşturur. 
 
 Aşağıdaki örneklere bakın:
 
-* [Filtreleri akış bulucu ile ilişkilendir-.NET](filters-dynamic-manifest-dotnet-howto.md#associate-filters-with-streaming-locator)
-* [Filtreleri akış bulucu ile ilişkilendir-CLı](filters-dynamic-manifest-cli-howto.md#associate-filters-with-streaming-locator)
+* [Filtreleri akış bulucu ile ilişkilendir-.NET](filters-dynamic-manifest-dotnet-how-to.md#associate-filters-with-streaming-locator)
+* [Filtreleri akış bulucu ile ilişkilendir-CLı](filters-dynamic-manifest-cli-how-to.md#associate-filters-with-streaming-locator)
 
 ## <a name="updating-filters"></a>Filtreler güncelleştiriliyor
  
@@ -161,5 +161,5 @@ Filtre tanımının değiştirilmesi gerekiyorsa, yeni bir filtre oluşturmayı 
 Aşağıdaki makalelerde, programlı olarak filtrelerin nasıl oluşturulacağı gösterilmektedir.  
 
 - [REST API 'Leri ile filtre oluşturma](filters-dynamic-manifest-rest-howto.md)
-- [.NET ile filtre oluşturma](filters-dynamic-manifest-dotnet-howto.md)
-- [CLı ile filtre oluşturma](filters-dynamic-manifest-cli-howto.md)
+- [.NET ile filtre oluşturma](filters-dynamic-manifest-dotnet-how-to.md)
+- [CLı ile filtre oluşturma](filters-dynamic-manifest-cli-how-to.md)

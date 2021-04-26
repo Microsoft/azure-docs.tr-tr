@@ -13,12 +13,12 @@ ms.date: 10/05/2020
 ms.author: jmprieur
 ms.reviewer: marsma
 ms.custom: devx-track-csharp, aaddev, identityplatformtop40, scenarios:getting-started, languages:aspnet-core
-ms.openlocfilehash: 1b539c168deab7c1893f071a2453be28310fc132
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: a31bf345f523eea940be5d56495890e8ab5c6dbd
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105022934"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861652"
 ---
 # <a name="quickstart-get-a-token-and-call-the-microsoft-graph-api-by-using-a-console-apps-identity"></a>Hızlı başlangıç: bir belirteç alın ve konsol uygulamasının kimliğini kullanarak Microsoft Graph API 'sini çağırın
 
@@ -32,7 +32,7 @@ Bu hızlı başlangıçta, bir .NET Core konsol uygulamasının Microsoft Graph 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu hızlı başlangıçta [.net core 3,1](https://www.microsoft.com/net/download/dotnet-core) gerekir, ancak .net Core 5,0 ile de çalışır.
+Bu hızlı başlangıç, .net [Core 3,1 SDK 'sı](https://dotnet.microsoft.com/download) gerektirir, ancak .NET 5,0 SDK ile de çalışır.
 
 > [!div renderon="docs"]
 > ## <a name="register-and-download-the-app"></a>Uygulamayı kaydedin ve indirin

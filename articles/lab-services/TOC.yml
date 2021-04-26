@@ -137,6 +137,8 @@
           href: how-to-setup-lab-gpu.md
         - name: Windows şablon VM’si hazırlama
           href: how-to-prepare-windows-template.md
+        - name: Dış dosya depolamayı kullanma
+          href: how-to-attach-external-storage.md
         - name: Windows’un kapatılma davranışını denetleme
           href: how-to-windows-shutdown.md
         - name: Destek bilgilerini görüntüleme (eğitimci)
@@ -177,6 +179,8 @@
       href: /rest/api/labservices/
     - name: Az.LabServices PowerShell modülü (önizleme)
       href: reference-powershell-module.md
+    - name: Azure CLI
+      href: /cli/azure/hack
 - name: Kaynaklar
   items:
     - name: Azure Lab Services Blogu

@@ -2,18 +2,18 @@
 title: Hızlı başlangıç-Java için Azure Key Vault anahtar istemci kitaplığı
 description: Java için Azure Key Vault Keys istemci kitaplığı için hızlı başlangıç sağlar.
 author: msmbaldwin
-ms.custom: devx-track-java, devx-track-azurecli
+ms.custom: devx-track-java
 ms.author: mbaldwin
 ms.date: 01/05/2021
 ms.service: key-vault
 ms.subservice: keys
 ms.topic: quickstart
-ms.openlocfilehash: cb5abf59c446ef0835375bac45d1e852144a6f28
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ecebeb6d14a00a92ef845001cf04a59f10345e23
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97935283"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815585"
 ---
 # <a name="quickstart-azure-key-vault-key-client-library-for-java"></a>Hızlı başlangıç: Java için Azure Key Vault anahtar istemci kitaplığı
 Java için Azure Key Vault anahtar istemci kitaplığı ile çalışmaya başlayın. Paketi yüklemek ve temel görevler için örnek kodu denemek üzere aşağıdaki adımları izleyin.
@@ -176,7 +176,7 @@ Uygulamanızın kimliği doğrulandığına göre, yöntemi kullanarak anahtar k
 keyClient.createKey(keyName, KeyType.RSA);
 ```
 
-Anahtarın, [az keykasakey Show](/cli/azure/keyvault/key?#az-keyvault-key-show) komutuyla ayarlandığını doğrulayabilirsiniz:
+Anahtarın, [az keykasakey Show](/cli/azure/keyvault/key?#az_keyvault_key_show) komutuyla ayarlandığını doğrulayabilirsiniz:
 
 ```azurecli
 az keyvault key show --vault-name <your-unique-key-vault-name> --name myKey
@@ -201,7 +201,7 @@ SyncPoller<DeletedKey, Void> deletionPoller = keyClient.beginDeleteKey(keyName);
 deletionPoller.waitForCompletion();
 ```
 
-Anahtarın, [az keykasakey Show](/cli/azure/keyvault/key?#az-keyvault-key-show) komutuyla silindiğini doğrulayabilirsiniz:
+Anahtarın, [az keykasakey Show](/cli/azure/keyvault/key?#az_keyvault_key_show) komutuyla silindiğini doğrulayabilirsiniz:
 
 ```azurecli
 az keyvault key show --vault-name <your-unique-key-vault-name> --name myKey
@@ -269,6 +269,6 @@ public class App {
 Bu hızlı başlangıçta bir Anahtar Kasası oluşturdunuz, bir anahtar oluşturdunuz, aldı ve sonra silmiş olursunuz. Key Vault ve uygulamalarınızla tümleştirme hakkında daha fazla bilgi edinmek için aşağıdaki makalelere ilerleyin.
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu okuyun
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu okuyun
 - [Azure Key Vault geliştirici kılavuzuna](../general/developers-guide.md) bakın
-- [Anahtar kasasına erişimi güvenli hale getirme](../general/secure-your-key-vault.md)
+- [Anahtar kasasına erişimi güvenli hale getirme](../general/security-features.md)

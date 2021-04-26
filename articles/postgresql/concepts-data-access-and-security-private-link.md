@@ -7,10 +7,10 @@ ms.service: postgresql
 ms.topic: conceptual
 ms.date: 03/10/2020
 ms.openlocfilehash: e4b6a6090bf0e5e332a960cba8ec565df9dd55c2
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104872277"
 ---
 # <a name="private-link-for-azure-database-for-postgresql-single-server"></a>PostgreSQL-Single sunucusu için Azure veritabanı için özel bağlantı

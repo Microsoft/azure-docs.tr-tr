@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.date: 06/15/2020
 ms.custom: mvc, cli-validate, seodec18, devx-track-azurecli
 zone_pivot_groups: app-service-platform-windows-linux
-ms.openlocfilehash: aaef3f28ea9b7e41bce35661e9515f6efcc9ade5
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0810f023f4e2e192f2cb0d83f2a028cdded9e275
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102184449"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107779479"
 ---
 # <a name="tutorial-build-a-php-and-mysql-app-in-azure-app-service"></a>Öğretici: Azure App Service bir PHP ve MySQL uygulaması derleme
 
@@ -160,7 +160,7 @@ Bu adımda, [MySQL için Azure Veritabanı](../mysql/index.yml) içinde bir MySQ
 
 ### <a name="create-a-mysql-server"></a>MySQL sunucusu oluşturma
 
-Cloud Shell, komutunu kullanarak MySQL için Azure veritabanı 'nda bir sunucu oluşturun [`az mysql server create`](/cli/azure/mysql/server#az-mysql-server-create) .
+Cloud Shell, komutunu kullanarak MySQL için Azure veritabanı 'nda bir sunucu oluşturun [`az mysql server create`](/cli/azure/mysql/server#az_mysql_server_create) .
 
 Aşağıdaki komutta, yer tutucu için benzersiz bir sunucu adı *\<mysql-server-name>* , için bir Kullanıcı adı *\<admin-user>* ve yer tutucu için bir parola koyun *\<admin-password>*  . Sunucu adı, MySQL uç noktasının (`https://<mysql-server-name>.mysql.database.azure.com`) bir parçası olarak kullanıldığından, adın Azure’daki tüm sunucularda benzersiz olması gerekir. MySQL DB SKU 'SU seçme hakkında daha fazla bilgi için bkz. [MySQL Için Azure veritabanı sunucusu oluşturma](../mysql/quickstart-create-mysql-server-database-using-azure-cli.md#create-an-azure-database-for-mysql-server).
 
@@ -186,7 +186,7 @@ MySQL sunucusu oluşturulduğunda Azure CLI, aşağıdaki örneğe benzer bilgil
 
 ### <a name="configure-server-firewall"></a>Sunucu güvenlik duvarını yapılandırma
 
-Cloud Shell, komutunu kullanarak MySQL sunucunuzun istemci bağlantılarına izin vermek için bir güvenlik duvarı kuralı oluşturun [`az mysql server firewall-rule create`](/cli/azure/mysql/server/firewall-rule#az-mysql-server-firewall-rule-create) . Hem başlangıç hem bitiş IP’si 0.0.0.0 olarak ayarlandığında, güvenlik duvarı yalnızca diğer Azure kaynakları için açılır. 
+Cloud Shell, komutunu kullanarak MySQL sunucunuzun istemci bağlantılarına izin vermek için bir güvenlik duvarı kuralı oluşturun [`az mysql server firewall-rule create`](/cli/azure/mysql/server/firewall-rule#az_mysql_server_firewall_rule_create) . Hem başlangıç hem bitiş IP’si 0.0.0.0 olarak ayarlandığında, güvenlik duvarı yalnızca diğer Azure kaynakları için açılır. 
 
 ```azurecli-interactive
 az mysql server firewall-rule create --name allAzureIPs --server <mysql-server-name> --resource-group myResourceGroup --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
@@ -376,7 +376,7 @@ Bu adımda, MySQL’e bağlı PHP uygulamasını Azure App Service'e dağıtırs
 
 ### <a name="configure-database-settings"></a>Veritabanı ayarlarını yapılandırma
 
-App Service'te, [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) komutunu kullanıp ortam değişkenlerini _uygulama ayarları_ olarak belirlersiniz.
+App Service'te, [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) komutunu kullanıp ortam değişkenlerini _uygulama ayarları_ olarak belirlersiniz.
 
 Aşağıdaki komut `DB_HOST`, `DB_DATABASE`, `DB_USERNAME` ve `DB_PASSWORD` uygulama ayarlarını yapılandırır. _&lt; App-name>_ ve _&lt; mysql-Server-Name>_ yer tutucularını değiştirin.
 
@@ -407,7 +407,7 @@ Yerel terminal penceresinde, uygulama anahtarını _.env_ dosyasına kaydetmeden
 php artisan key:generate --show
 ```
 
-Cloud Shell, komutunu kullanarak App Service uygulamasındaki uygulama anahtarını ayarlayın [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) . _&lt; App-name>_ ve _&lt; outputofphpartisankey: Generate>_ yer tutucuları değiştirin.
+Cloud Shell, komutunu kullanarak App Service uygulamasındaki uygulama anahtarını ayarlayın [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) . _&lt; App-name>_ ve _&lt; outputofphpartisankey: Generate>_ yer tutucuları değiştirin.
 
 ```azurecli-interactive
 az webapp config appsettings set --name <app-name> --resource-group myResourceGroup --settings APP_KEY="<output_of_php_artisan_key:generate>" APP_DEBUG="true"
@@ -421,7 +421,7 @@ az webapp config appsettings set --name <app-name> --resource-group myResourceGr
 
 Uygulamanın sanal uygulama yolunu ayarlayın. [Laravel uygulaması yaşam döngüsü](https://laravel.com/docs/5.4/lifecycle), uygulamanın kök dizini yerine _public_ dizininde başladığı için bu adım gereklidir. Yaşam döngüsü kök dizinde başlayan diğer PHP çerçeveleri, sanal uygulama yolu el ile yapılandırılmadan çalışabilir.
 
-Cloud Shell, komutunu kullanarak sanal uygulama yolunu ayarlayın [`az resource update`](/cli/azure/resource#az-resource-update) . _&lt; App-name>_ yer tutucusunu değiştirin.
+Cloud Shell, komutunu kullanarak sanal uygulama yolunu ayarlayın [`az resource update`](/cli/azure/resource#az_resource_update) . _&lt; App-name>_ yer tutucusunu değiştirin.
 
 ```azurecli-interactive
 az resource update --name web --resource-group myResourceGroup --namespace Microsoft.Web --resource-type config --parent sites/<app_name> --set properties.virtualApplications[0].physicalPath="site\wwwroot\public" --api-version 2015-06-01
@@ -649,7 +649,7 @@ Herhangi bir görevi eklediyseniz veritabanında tutulur. Veri şemasında yapı
 
 PHP uygulaması Azure App Service'te çalışırken, terminalinize yönlendirilen konsol günlüklerini alabilirsiniz. Böylece, uygulama hatalarını ayıklamanıza yardımcı olan tanılama iletilerinin aynısını alabilirsiniz.
 
-Günlük akışını başlatmak için [`az webapp log tail`](/cli/azure/webapp/log#az-webapp-log-tail) Cloud Shell komutunu kullanın.
+Günlük akışını başlatmak için [`az webapp log tail`](/cli/azure/webapp/log#az_webapp_log_tail) Cloud Shell komutunu kullanın.
 
 ```azurecli-interactive
 az webapp log tail --name <app_name> --resource-group myResourceGroup

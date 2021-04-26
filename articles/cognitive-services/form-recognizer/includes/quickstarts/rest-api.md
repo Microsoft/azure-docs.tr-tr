@@ -7,21 +7,23 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: forms-recognizer
 ms.topic: include
-ms.date: 03/15/2021
+ms.date: 04/14/2021
 ms.author: lajanuar
-ms.openlocfilehash: e0769f77bffaab0e04b492b19a5ea131cec64f06
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: cd9cf0e4a2abec1ad29d5b34f3d6f473ca5bf71d
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105105892"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107564569"
 ---
 <!-- markdownlint-disable MD001 -->
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD033 -->
 <!-- markdownlint-disable MD034 -->
 > [!NOTE]
-> Bu kılavuz REST API çağrılarını yürütmek için kıvrımlı kullanır. GitHub 'da REST API 'Lerinin nasıl çağrılacağını gösteren [örnek kod](https://github.com/Azure-Samples/cognitive-services-quickstart-code/tree/master/python/FormRecognizer/rest) de vardır.
+> Bu kılavuz REST API çağrılarını yürütmek için kıvrımlı kullanır.
+
+|[Form tanıyıcı REST API](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/AnalyzeWithCustomForm) | [Azure REST API başvurusu](/rest/api/azure/)|
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -92,8 +94,8 @@ curl -v -X GET "https://{Endpoint}/formrecognizer/v2.0/layout/analyzeResults/{re
 `200 (success)`JSON içeriğiyle bir yanıt alacaksınız.
 
 Aşağıdaki fatura görüntüsüne ve buna karşılık gelen JSON çıktısına bakın.
-* `"readResults"`Düğüm, sayfada ilgili sınırlayıcı kutusu yerleşimine sahip her metin satırını içerir. 
-* `"selectionMarks"`Düğüm (v 2.1 önizlemesi) her seçim işaretini (onay kutusu, radyo işareti) ve durumunun "seçili" veya "seçilmemiş" olup olmadığını gösterir. 
+* `"readResults"`Düğüm, sayfada ilgili sınırlayıcı kutusu yerleşimine sahip her metin satırını içerir.
+* `"selectionMarks"`Düğüm (v 2.1 önizlemesi) her seçim işaretini (onay kutusu, radyo işareti) ve durumunun "seçili" veya "seçilmemiş" olup olmadığını gösterir.
 * `"pageResults"`Bölümü ayıklanan tabloları içerir. Her tablo için metin, satır ve sütun dizini, satır ve sütun kapsayıcı, sınırlama kutusu ve daha fazlası ayıklanır.
 
 :::image type="content" source="../../media/contoso-invoice.png" alt-text="Bir tablo içeren contoso proje beyanı belgesi.":::
@@ -327,701 +329,6 @@ Bu çıktı kolaylık sağlaması için kısaltıldı. [GitHub 'da tam örnek ç
 ```
 
 ---
-
-## <a name="analyze-invoices"></a>Faturaları analiz etme
-
-### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
-
-Bir faturayı çözümlemeye başlamak için aşağıdaki kıvrımlı komutunu kullanın. Fatura analizi hakkında daha fazla bilgi için bkz. [Fatura kavramsal Kılavuzu](../../concept-invoices.md). Komutu çalıştırmadan önce Şu değişiklikleri yapın:
-
-1. `{Endpoint}`Form tanıyıcı aboneliğiniz ile edindiğiniz uç noktayla değiştirin.
-1. `{your invoice URL}`Fatura BELGESININ URL adresiyle değiştirin.
-1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
-
-```bash
-curl -v -i POST "https://{Endpoint}/formrecognizer/v2.1-preview.3/prebuilt/invoice/analyze" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key:  {subscription key}" --data-ascii "{'source': '{your invoice URL}'}"
-```
-
-`202 (Success)`Har **Işlem-konum** üst bilgisi içeren bir yanıt alacaksınız. Bu üstbilginin değeri, zaman uyumsuz işlemin durumunu sorgulamak ve sonuçları almak için kullanabileceğiniz bir işlem KIMLIĞI içerir.
-
-```console
-https://cognitiveservice/formrecognizer/v2.1-preview.3/prebuilt/invoice/analyzeResults/54f0b076-4e38-43e5-81bd-b85b8835fdfb
-```
-
-### <a name="get-invoice-results"></a>Fatura sonuçlarını al
-
-**[Faturayı çözümle](https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/5ed8c9843c2794cbb1a96291)** API 'sini çağırdıktan sonra, işlemin durumunu ve ayıklanan verileri almak Için **[Fatura sonucunu al](https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/5ed8c9acb78c40a2533aee83)** API 'sini çağırın. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
-
-1. `{Endpoint}`Form tanıyıcı abonelik anahtarınızla edindiğiniz uç noktayla değiştirin. Bunu, form tanıyıcı kaynağına **genel bakış** sekmesinde bulabilirsiniz.
-1. `{resultId}`Önceki adımdaki Işlem kimliğiyle değiştirin.
-1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
-
-```bash
-curl -v -X GET "https://{Endpoint}/formrecognizer/v2.1-preview.3/prebuilt/invoice/analyzeResults/{resultId}" -H "Ocp-Apim-Subscription-Key: {subscription key}"
-```
-
-### <a name="examine-the-response"></a>Yanıtı inceleme
-
-`200 (Success)`JSON çıkışıyla bir yanıt alacaksınız. 
-* `"readResults"`Alan, faturadan çıkarılan her metin satırını içerir.
-* , `"pageResults"` Faturadan çıkarılan tabloları ve seçimler işaretlerini içerir.
-* `"documentResults"`Alan, faturanın en ilgili bölümlerinin anahtar/değer bilgilerini içerir.
-
-Aşağıdaki fatura belgesine ve buna karşılık gelen JSON çıktısına bakın. 
-
-* [Örnek fatura](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/tree/master/curl/form-recognizer/sample-invoice.pdf)
-
-Bu JSON içeriği okunabilirlik için kısaltıldı. [GitHub 'da tam örnek çıkışa](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/sample-invoice-output.json)bakın.
-
-```json
-{
-    "status": "succeeded",
-    "createdDateTime": "2020-11-06T23:32:11Z",
-    "lastUpdatedDateTime": "2020-11-06T23:32:20Z",
-    "analyzeResult": {
-        "version": "2.1.0",
-        "readResults": [{
-            "page": 1,
-            "angle": 0,
-            "width": 8.5,
-            "height": 11,
-            "unit": "inch"
-        }],
-        "pageResults": [{
-            "page": 1,
-            "tables": [{
-                "rows": 3,
-                "columns": 4,
-                "cells": [{
-                    "rowIndex": 0,
-                    "columnIndex": 0,
-                    "text": "QUANTITY",
-                    "boundingBox": [0.4953,
-                    5.7306,
-                    1.8097,
-                    5.7306,
-                    1.7942,
-                    6.0122,
-                    0.4953,
-                    6.0122]
-                },
-                {
-                    "rowIndex": 0,
-                    "columnIndex": 1,
-                    "text": "DESCRIPTION",
-                    "boundingBox": [1.8097,
-                    5.7306,
-                    5.7529,
-                    5.7306,
-                    5.7452,
-                    6.0122,
-                    1.7942,
-                    6.0122]
-                },
-                ...
-                ],
-                "boundingBox": [0.4794,
-                5.7132,
-                8.0158,
-                5.714,
-                8.0118,
-                6.5627,
-                0.4757,
-                6.5619]
-            },
-            {
-                "rows": 2,
-                "columns": 6,
-                "cells": [{
-                    "rowIndex": 0,
-                    "columnIndex": 0,
-                    "text": "SALESPERSON",
-                    "boundingBox": [0.4979,
-                    4.963,
-                    1.8051,
-                    4.963,
-                    1.7975,
-                    5.2398,
-                    0.5056,
-                    5.2398]
-                },
-                {
-                    "rowIndex": 0,
-                    "columnIndex": 1,
-                    "text": "P.O. NUMBER",
-                    "boundingBox": [1.8051,
-                    4.963,
-                    3.3047,
-                    4.963,
-                    3.3124,
-                    5.2398,
-                    1.7975,
-                    5.2398]
-                },
-                ...
-                ],
-                "boundingBox": [0.4976,
-                4.961,
-                7.9959,
-                4.9606,
-                7.9959,
-                5.5204,
-                0.4972,
-                5.5209]
-            }]
-        }],
-        "documentResults": [{
-            "docType": "prebuilt:invoice",
-            "pageRange": [1,
-            1],
-            "fields": {
-                "AmountDue": {
-                    "type": "number",
-                    "valueNumber": 610,
-                    "text": "$610.00",
-                    "boundingBox": [7.3809,
-                    7.8153,
-                    7.9167,
-                    7.8153,
-                    7.9167,
-                    7.9591,
-                    7.3809,
-                    7.9591],
-                    "page": 1,
-                    "confidence": 0.875
-                },
-                "BillingAddress": {
-                    "type": "string",
-                    "valueString": "123 Bill St, Redmond WA, 98052",
-                    "text": "123 Bill St, Redmond WA, 98052",
-                    "boundingBox": [0.594,
-                    4.3724,
-                    2.0125,
-                    4.3724,
-                    2.0125,
-                    4.7125,
-                    0.594,
-                    4.7125],
-                    "page": 1,
-                    "confidence": 0.997
-                },
-                "BillingAddressRecipient": {
-                    "type": "string",
-                    "valueString": "Microsoft Finance",
-                    "text": "Microsoft Finance",
-                    "boundingBox": [0.594,
-                    4.1684,
-                    1.7907,
-                    4.1684,
-                    1.7907,
-                    4.2837,
-                    0.594,
-                    4.2837],
-                    "page": 1,
-                    "confidence": 0.998
-                },
-                ...                
-            }
-        }]
-    }
-}
-```
-
-### <a name="v20"></a>[v2.0](#tab/v2-0)
-
-> [!IMPORTANT]
-> Bu özellik seçili API sürümünde kullanılamaz.
-
----
-
-## <a name="train-a-custom-model"></a>Özel bir modeli eğitme
-
-Özel bir modeli eğitebilmeniz için bir Azure depolama blobunda eğitim verileri kümesine ihtiyacınız vardır. Aynı türde/yapıda en az beş adet doldurulmuş form (PDF belgesi ve/veya resim) gereklidir. Eğitim verilerinizi birlikte yerleştirmeye yönelik ipuçları ve seçenekler için bkz. [özel bir model için eğitim verileri kümesi oluşturma](../../build-training-data-set.md) .
-
-Etiketli veriler olmadan eğitim varsayılan işlemdir ve daha basittir. Alternatif olarak, daha önce eğitim verilerinizin bazılarını veya tümünü el ile etiketleyebilirsiniz. Bu daha karmaşık bir işlemdir, ancak daha iyi eğitilen bir model ile sonuçlanır.
-
-> [!NOTE]
-> Modelleri, [form tanıyıcı örnek etiketleme aracı](../../quickstarts/label-tool.md)gibi bir grafik kullanıcı arabirimi ile de eğitebilirsiniz.
-
-
-### <a name="train-a-model-without-labels"></a>Etiketler olmadan bir modeli eğitme
-
-Azure Blob kabınızda bulunan belgelerle bir form tanıyıcı modeli eğitmek için aşağıdaki kıvrımlı komutunu çalıştırarak **[özel model eğitimi](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/TrainCustomModelAsync)** API 'sini çağırın. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
-
-1. `{Endpoint}`Form tanıyıcı aboneliğiniz ile edindiğiniz uç noktayla değiştirin.
-1. `{subscription key}`Önceki adımdan kopyaladığınız abonelik anahtarıyla değiştirin.
-1. `{SAS URL}`Azure Blob depolama kapsayıcısının paylaşılan erişim imzası (SAS) URL 'si ile değiştirin. [!INCLUDE [get SAS URL](../sas-instructions.md)]
-
-   :::image type="content" source="../../media/quickstarts/get-sas-url.png" alt-text="SAS URL 'SI alımı":::
-
-### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
-
-```bash
-curl -i -X POST "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{SAS URL}'}"
-```
-
-### <a name="v20"></a>[v2.0](#tab/v2-0)
-
-```bash
-curl -i -X POST "https://{Endpoint}/formrecognizer/v2.0/custom/models" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{SAS URL}'}"
-```
-
----
-
-`201 (Success)`Bir **konum** üst bilgisine sahip bir yanıt alacaksınız. Bu üstbilginin değeri, eğitilen yeni modelin KIMLIĞIDIR.
-
-### <a name="train-a-model-with-labels"></a>Etiketler içeren bir modeli eğitme
-
-Etiketlerle eğitebilmeniz için, `\<filename\>.pdf.labels.json` eğitim belgelerinin yanı sıra BLOB depolama kapsayıcıda özel etiket bilgi dosyalarına () sahip olmanız gerekir. [Form tanıyıcı örnek etiketleme aracı](../../quickstarts/label-tool.md) , bu etiket dosyalarını oluşturmanıza yardımcı olmak için bir kullanıcı arabirimi sağlar. Bunu yaptıktan sonra, JSON gövdesinde olarak ayarlanmış parametresi ile **[özel model API 'Sini eğitebilirsiniz](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/TrainCustomModelAsync)** `"useLabelFile"` `true` .
-
-Komutu çalıştırmadan önce Şu değişiklikleri yapın:
-
-1. `{Endpoint}`Form tanıyıcı aboneliğiniz ile edindiğiniz uç noktayla değiştirin.
-1. `{subscription key}`Önceki adımdan kopyaladığınız abonelik anahtarıyla değiştirin.
-1. `{SAS URL}`Azure Blob depolama kapsayıcısının paylaşılan erişim imzası (SAS) URL 'si ile değiştirin. [!INCLUDE [get SAS URL](../sas-instructions.md)]
-
-   :::image type="content" source="../../media/quickstarts/get-sas-url.png" alt-text="SAS URL 'SI alımı":::
-
-### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
-
-```bash
-curl -i -X POST "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{SAS URL}', 'useLabelFile':true}"
-```
-
-### <a name="v20"></a>[v2.0](#tab/v2-0)
-
-```bash
-curl -i -X POST "https://{Endpoint}/formrecognizer/v2.0/custom/models" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{SAS URL}', 'useLabelFile':true }"
-```
-
----
-
-`201 (Success)`Bir **konum** üst bilgisine sahip bir yanıt alacaksınız. Bu üstbilginin değeri, eğitilen yeni modelin KIMLIĞIDIR.
-
-### <a name="get-training-results"></a>Eğitim sonuçlarını al
-
-Eğitme işlemini başlattıktan sonra, eğitim durumunu denetlemek için yeni bir işlem kullanın, **[özel model alın](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/GetCustomModel)** . Eğitim durumunu denetlemek için model KIMLIĞINI bu API çağrısına geçirin:
-
-1. `{Endpoint}`Form tanıyıcı abonelik anahtarınızla edindiğiniz uç noktayla değiştirin.
-1. `{subscription key}`Abonelik anahtarınızla değiştirin
-1. `{model ID}`Önceki adımda aldığınız model kimliğiyle değiştirin
-
-### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
-
-```bash
-curl -X GET "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models/{model ID}" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}"
-```
-
-### <a name="v20"></a>[v2.0](#tab/v2-0)
-
-```bash
-curl -X GET "https://{Endpoint}/formrecognizer/v2.0/custom/models/{model ID}" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}"
-```
-
----
-
-`200 (Success)`Aşağıdaki biçimde BIR JSON gövdesi ile yanıt alacaksınız. Alanına dikkat edin `"status"` . `"ready"`Eğitim tamamlandıktan sonra bu değer olacaktır. Modelde eğitim bitmiyor ise, komutu yeniden çalıştırarak hizmeti tekrar sorgulamanızı gerekir. Çağrılar arasında bir saniye veya daha fazla Aralık önerilir.
-
-`"modelId"`Alan, eğitiminde olduğunuz MODELIN kimliğini içerir. Bu, bir sonraki adımda gerekli olacaktır.
-
-```json
-{
-  "modelInfo":{
-    "status":"ready",
-    "createdDateTime":"2019-10-08T10:20:31.957784",
-    "lastUpdatedDateTime":"2019-10-08T14:20:41+00:00",
-    "modelId":"1cfb372bab404ba3aa59481ab2c63da5"
-  },
-  "trainResult":{
-    "trainingDocuments":[
-      {
-        "documentName":"invoices\\Invoice_1.pdf",
-        "pages":1,
-        "errors":[
-
-        ],
-        "status":"succeeded"
-      },
-      {
-        "documentName":"invoices\\Invoice_2.pdf",
-        "pages":1,
-        "errors":[
-
-        ],
-        "status":"succeeded"
-      },
-      {
-        "documentName":"invoices\\Invoice_3.pdf",
-        "pages":1,
-        "errors":[
-
-        ],
-        "status":"succeeded"
-      },
-      {
-        "documentName":"invoices\\Invoice_4.pdf",
-        "pages":1,
-        "errors":[
-
-        ],
-        "status":"succeeded"
-      },
-      {
-        "documentName":"invoices\\Invoice_5.pdf",
-        "pages":1,
-        "errors":[
-
-        ],
-        "status":"succeeded"
-      }
-    ],
-    "errors":[
-
-    ]
-  },
-  "keys":{
-    "0":[
-      "Address:",
-      "Invoice For:",
-      "Microsoft",
-      "Page"
-    ]
-  }
-}
-```
-
-## <a name="analyze-forms-with-a-custom-model"></a>Formları özel bir model ile analiz etme
-
-Daha sonra, yeni eğitilen modelinizi kullanarak bir belgeyi analiz edebilir, anahtar-değer çiftlerini ve tabloları kümeden ayıklayın. Aşağıdaki kıvrımlı komutunu çalıştırarak **[formu çözümle](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/AnalyzeWithCustomForm)** API 'sini çağırın. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
-
-1. `{Endpoint}`Form tanıyıcı abonelik anahtarınızdan edindiğiniz uç noktayla değiştirin. Bunu, form tanıyıcı kaynağına **genel bakış** sekmesinde bulabilirsiniz.
-1. `{model ID}`Önceki bölümde aldığınız model kimliğiyle değiştirin.
-1. `{SAS URL}`Azure Storage 'daki dosyanız için BIR SAS URL 'si ile değiştirin. Eğitim bölümündeki adımları izleyin, ancak tüm blob kapsayıcısı için bir SAS URL 'SI almak yerine, çözümlemek istediğiniz belirli dosya için bir tane alın.
-1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
-
-### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
-
-```bash
-curl -v "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models/{model ID}/analyze?includeTextDetails=true" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" -d "{ 'source': '{SAS URL}' } "
-```
-
-### <a name="v20"></a>[v2.0](#tab/v2-0)
-
-```bash
-curl -v "https://{Endpoint}/formrecognizer/v2.0/custom/models/{model ID}/analyze?includeTextDetails=true" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" -d "{ 'source': '{SAS URL}' } "
-```
-
----
-
-`202 (Success)` **İşlem konumu** üst bilgisi olan bir yanıt alacaksınız. Bu üstbilginin değeri, Çözümle işleminin sonuçlarını izlemek için kullandığınız bir sonuç KIMLIĞI içerir. Sonraki adım için bu sonuç KIMLIĞINI kaydedin.
-
-### <a name="get-the-analyze-results"></a>Analiz sonuçlarını al
-
-Çözümle işleminin sonuçlarını sorgulamak için **[analiz formu sonucunu](https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/GetAnalyzeFormResult)** al API 'sini çağırın.
-
-1. `{Endpoint}`Form tanıyıcı abonelik anahtarınızdan edindiğiniz uç noktayla değiştirin. Bunu, form tanıyıcı kaynağına **genel bakış** sekmesinde bulabilirsiniz.
-1. `{result ID}`Önceki bölümde ALDıĞıNıZ kimlik ile değiştirin.
-1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
-
-### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
-
-```bash
-curl -X GET "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models/{model ID}/analyzeResults/{result ID}" -H "Ocp-Apim-Subscription-Key: {subscription key}"
-```
-
-### <a name="v20"></a>[v2.0](#tab/v2-0)
-
-```bash
-curl -X GET "https://{Endpoint}/formrecognizer/v2.0/custom/models/{model ID}/analyzeResults/{result ID}" -H "Ocp-Apim-Subscription-Key: {subscription key}"
-```
-
----
-
-`200 (Success)`Aşağıdaki biçimde BIR JSON gövdesi ile yanıt alacaksınız. Çıktı basitlik için kısaltıldı. `"status"`En alttaki alana dikkat edin. `"succeeded"`Analiz işlemi tamamlandığında bu değer olacaktır. Çözümle işlemi tamamlanmadıysa, komutu yeniden çalıştırarak hizmeti tekrar sorgulamanızı gerekir. Çağrılar arasında bir saniye veya daha fazla Aralık önerilir.
-
-Etiketler olmadan eğitilen özel modellerde, anahtar/değer çifti ilişkilendirmeleri ve tabloları `"pageResults"` JSON çıktısının düğümüdür. Etiketlerle eğitilen özel modellerde, anahtar/değer çifti ilişkilendirmeleri `"documentResults"` düğümüdür. Ayrıca, *ıncludetekxtdetails* URL parametresi aracılığıyla düz metin ayıklama belirttiyseniz, `"readResults"` düğüm belgedeki tüm metinlerin içeriğini ve konumlarını gösterir.
-
-Bu örnek JSON çıktısı kolaylık sağlaması için kısaltıldı. [GitHub 'da tam örnek çıkışa](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/analyze-result-invoice-6.pdf.json)bakın.
-
-### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
-
-```JSON
-{
-  "status": "succeeded",
-  "createdDateTime": "2020-08-21T01:13:28Z",
-  "lastUpdatedDateTime": "2020-08-21T01:13:42Z",
-  "analyzeResult": {
-    "version": "2.1.0",
-    "readResults": [
-      {
-        "page": 1,
-        "angle": 0,
-        "width": 8.5,
-        "height": 11,
-        "unit": "inch",
-        "lines": [
-          {
-            "text": "Project Statement",
-            "boundingBox": [
-              5.0444,
-              0.3613,
-              8.0917,
-              0.3613,
-              8.0917,
-              0.6718,
-              5.0444,
-              0.6718
-            ],
-            "words": [
-              {
-                "text": "Project",
-                "boundingBox": [
-                  5.0444,
-                  0.3587,
-                  6.2264,
-                  0.3587,
-                  6.2264,
-                  0.708,
-                  5.0444,
-                  0.708
-                ]
-              },
-              {
-                "text": "Statement",
-                "boundingBox": [
-                  6.3361,
-                  0.3635,
-                  8.0917,
-                  0.3635,
-                  8.0917,
-                  0.6396,
-                  6.3361,
-                  0.6396
-                ]
-              }
-            ]
-          }, 
-          ...
-        ] 
-      }
-    ],
-    "pageResults": [
-      {
-        "page": 1,
-        "keyValuePairs": [
-          {
-            "key": {
-              "text": "Date:",
-              "boundingBox": [
-                6.9833,
-                1.0615,
-                7.3333,
-                1.0615,
-                7.3333,
-                1.1649,
-                6.9833,
-                1.1649
-              ],
-              "elements": [
-                "#/readResults/0/lines/2/words/0"
-              ]
-            },
-            "value": {
-              "text": "9/10/2020",
-              "boundingBox": [
-                7.3833,
-                1.0802,
-                7.925,
-                1.0802,
-                7.925,
-                1.174,
-                7.3833,
-                1.174
-              ],
-              "elements": [
-                "#/readResults/0/lines/3/words/0"
-              ]
-            },
-            "confidence": 1
-          },
-          ...
-        ], 
-        "tables": [
-          {
-            "rows": 5,
-            "columns": 5,
-            "cells": [
-              {
-                "text": "Training Date",
-                "rowIndex": 0,
-                "columnIndex": 0,
-                "boundingBox": [
-                  0.6944,
-                  4.2779,
-                  1.5625,
-                  4.2779,
-                  1.5625,
-                  4.4005,
-                  0.6944,
-                  4.4005
-                ],
-                "confidence": 1,
-                "rowSpan": 1,
-                "columnSpan": 1,
-                "elements": [
-                  "#/readResults/0/lines/15/words/0",
-                  "#/readResults/0/lines/15/words/1"
-                ],
-                "isHeader": true,
-                "isFooter": false
-              },
-              ...
-            ]
-          }
-        ], 
-        "clusterId": 0
-      }
-    ], 
-    "documentResults": [],
-    "errors": []
-  }
-}
-```
-
-### <a name="v20"></a>[v2.0](#tab/v2-0)
-
-```JSON
-{
-  "status": "succeeded",
-  "createdDateTime": "2020-08-21T00:46:25Z",
-  "lastUpdatedDateTime": "2020-08-21T00:46:32Z",
-  "analyzeResult": {
-    "version": "2.0.0",
-    "readResults": [
-      {
-        "page": 1,
-        "angle": 0,
-        "width": 8.5,
-        "height": 11,
-        "unit": "inch",
-        "lines": [
-          {
-            "text": "Project Statement",
-            "boundingBox": [
-              5.0153,
-              0.275,
-              8.0944,
-              0.275,
-              8.0944,
-              0.7125,
-              5.0153,
-              0.7125
-            ],
-            "words": [
-              {
-                "text": "Project",
-                "boundingBox": [
-                  5.0153,
-                  0.275,
-                  6.2278,
-                  0.275,
-                  6.2278,
-                  0.7125,
-                  5.0153,
-                  0.7125
-                ]
-              },
-              {
-                "text": "Statement",
-                "boundingBox": [
-                  6.3292,
-                  0.275,
-                  8.0944,
-                  0.275,
-                  8.0944,
-                  0.7125,
-                  6.3292,
-                  0.7125
-                ]
-              }
-            ]
-          }, 
-        ...
-        ]
-      }
-    ],
-    "pageResults": [
-      {
-        "page": 1,
-        "keyValuePairs": [
-          {
-            "key": {
-              "text": "Date:",
-              "boundingBox": [
-                6.9722,
-                1.0264,
-                7.3417,
-                1.0264,
-                7.3417,
-                1.1931,
-                6.9722,
-                1.1931
-              ],
-              "elements": [
-                "#/readResults/0/lines/2/words/0"
-              ]
-            },
-            "confidence": 1
-          },
-         ...
-        ],
-        "tables": [
-          {
-            "rows": 4,
-            "columns": 5,
-            "cells": [
-              {
-                "text": "Training Date",
-                "rowIndex": 0,
-                "columnIndex": 0,
-                "boundingBox": [
-                  0.6931,
-                  4.2444,
-                  1.5681,
-                  4.2444,
-                  1.5681,
-                  4.4125,
-                  0.6931,
-                  4.4125
-                ],
-                "confidence": 1,
-                "rowSpan": 1,
-                "columnSpan": 1,
-                "elements": [
-                  "#/readResults/0/lines/15/words/0",
-                  "#/readResults/0/lines/15/words/1"
-                ],
-                "isHeader": true,
-                "isFooter": false
-              },
-              ...
-            ]
-          }
-        ], 
-        "clusterId": 0
-      }
-    ],
-    "documentResults": [],
-    "errors": []
-  }
-}
-```  
-
----
-
-### <a name="improve-results"></a>Sonuçları geliştirme
-
-[!INCLUDE [improve results](../improve-results-unlabeled.md)]
 
 ## <a name="analyze-receipts"></a>Alındıları analiz etme
 
@@ -1412,7 +719,7 @@ Bu çıktı okunabilirlik için kısaltıldı. [GitHub 'da tam örnek çıkışa
 
 ## <a name="analyze-business-cards"></a>İş kartlarını çözümle
 
-### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)  
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
 
 Bu bölümde, önceden eğitilen bir model kullanarak Ingilizce iş kartlarından ortak alanların nasıl analiz edileceği ve ayıklanacağı gösterilmektedir. İş kartı analizi hakkında daha fazla bilgi için bkz. [iş kartları kavramsal Kılavuzu](../../concept-business-cards.md). Bir iş kartını çözümlemeye başlamak için aşağıdaki kıvrımlı komutunu kullanarak **[Iş kartını çözümle](https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/AnalyzeBusinessCardAsync)** API 'sini çağırabilirsiniz. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
 
@@ -1445,7 +752,7 @@ curl -v -X GET "https://westcentralus.api.cognitive.microsoft.com/formrecognizer
 
 ### <a name="examine-the-response"></a>Yanıtı inceleme
 
-`200 (Success)`JSON çıkışıyla bir yanıt alacaksınız. 
+`200 (Success)`JSON çıkışıyla bir yanıt alacaksınız.
 
 `"readResults"`Düğüm, tüm tanınan metni içerir. Metin sayfaya, sonra satıra, sonra da tek sözcüklere göre düzenlenir. `"documentResults"`Düğüm, modelin bulduğu iş kartına özgü değerleri içerir. Burada şirket adı, ilk adı, soyadı, telefon numarası vb. gibi yararlı iletişim bilgileri bulabilirsiniz.
 
@@ -1567,12 +874,930 @@ Bu örnek JSON çıktısı okunabilirlik için kısaltıldı. [GitHub 'da tam ö
 
 Betiği, **Iş kartını çözümle** işlemi tamamlanana kadar konsola gönderilecek yanıtları yazdırır.
 
-### <a name="v20"></a>[v2.0](#tab/v2-0)  
+### <a name="v20"></a>[v2.0](#tab/v2-0)
 
 > [!IMPORTANT]
 > Bu özellik seçili API sürümünde kullanılamaz.
 
 ---
+
+## <a name="analyze-invoices"></a>Faturaları analiz etme
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+Bir faturayı çözümlemeye başlamak için aşağıdaki kıvrımlı komutunu kullanın. Fatura analizi hakkında daha fazla bilgi için bkz. [Fatura kavramsal Kılavuzu](../../concept-invoices.md). Komutu çalıştırmadan önce Şu değişiklikleri yapın:
+
+1. `{Endpoint}`Form tanıyıcı aboneliğiniz ile edindiğiniz uç noktayla değiştirin.
+1. `{your invoice URL}`Fatura BELGESININ URL adresiyle değiştirin.
+1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
+
+```bash
+curl -v -i POST "https://{Endpoint}/formrecognizer/v2.1-preview.3/prebuilt/invoice/analyze" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key:  {subscription key}" --data-ascii "{'source': '{your invoice URL}'}"
+```
+
+`202 (Success)`Har **Işlem-konum** üst bilgisi içeren bir yanıt alacaksınız. Bu üstbilginin değeri, zaman uyumsuz işlemin durumunu sorgulamak ve sonuçları almak için kullanabileceğiniz bir işlem KIMLIĞI içerir.
+
+```console
+https://cognitiveservice/formrecognizer/v2.1-preview.3/prebuilt/invoice/analyzeResults/54f0b076-4e38-43e5-81bd-b85b8835fdfb
+```
+
+### <a name="get-invoice-results"></a>Fatura sonuçlarını al
+
+**[Faturayı çözümle](https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/5ed8c9843c2794cbb1a96291)** API 'sini çağırdıktan sonra, işlemin durumunu ve ayıklanan verileri almak Için **[Fatura sonucunu al](https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/5ed8c9acb78c40a2533aee83)** API 'sini çağırın. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
+
+1. `{Endpoint}`Form tanıyıcı abonelik anahtarınızla edindiğiniz uç noktayla değiştirin. Bunu, form tanıyıcı kaynağına **genel bakış** sekmesinde bulabilirsiniz.
+1. `{resultId}`Önceki adımdaki Işlem kimliğiyle değiştirin.
+1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
+
+```bash
+curl -v -X GET "https://{Endpoint}/formrecognizer/v2.1-preview.3/prebuilt/invoice/analyzeResults/{resultId}" -H "Ocp-Apim-Subscription-Key: {subscription key}"
+```
+
+### <a name="examine-the-response"></a>Yanıtı inceleme
+
+`200 (Success)`JSON çıkışıyla bir yanıt alacaksınız.
+
+* `"readResults"`Alan, faturadan çıkarılan her metin satırını içerir.
+* , `"pageResults"` Faturadan çıkarılan tabloları ve seçimler işaretlerini içerir.
+* `"documentResults"`Alan, faturanın en ilgili bölümlerinin anahtar/değer bilgilerini içerir.
+
+Aşağıdaki fatura belgesine ve buna karşılık gelen JSON çıktısına bakın.
+
+* [Örnek fatura](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/tree/master/curl/form-recognizer/sample-invoice.pdf)
+
+Bu JSON içeriği okunabilirlik için kısaltıldı. [GitHub 'da tam örnek çıkışa](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/sample-invoice-output.json)bakın.
+
+```json
+{
+    "status": "succeeded",
+    "createdDateTime": "2020-11-06T23:32:11Z",
+    "lastUpdatedDateTime": "2020-11-06T23:32:20Z",
+    "analyzeResult": {
+        "version": "2.1.0",
+        "readResults": [{
+            "page": 1,
+            "angle": 0,
+            "width": 8.5,
+            "height": 11,
+            "unit": "inch"
+        }],
+        "pageResults": [{
+            "page": 1,
+            "tables": [{
+                "rows": 3,
+                "columns": 4,
+                "cells": [{
+                    "rowIndex": 0,
+                    "columnIndex": 0,
+                    "text": "QUANTITY",
+                    "boundingBox": [0.4953,
+                    5.7306,
+                    1.8097,
+                    5.7306,
+                    1.7942,
+                    6.0122,
+                    0.4953,
+                    6.0122]
+                },
+                {
+                    "rowIndex": 0,
+                    "columnIndex": 1,
+                    "text": "DESCRIPTION",
+                    "boundingBox": [1.8097,
+                    5.7306,
+                    5.7529,
+                    5.7306,
+                    5.7452,
+                    6.0122,
+                    1.7942,
+                    6.0122]
+                },
+                ...
+                ],
+                "boundingBox": [0.4794,
+                5.7132,
+                8.0158,
+                5.714,
+                8.0118,
+                6.5627,
+                0.4757,
+                6.5619]
+            },
+            {
+                "rows": 2,
+                "columns": 6,
+                "cells": [{
+                    "rowIndex": 0,
+                    "columnIndex": 0,
+                    "text": "SALESPERSON",
+                    "boundingBox": [0.4979,
+                    4.963,
+                    1.8051,
+                    4.963,
+                    1.7975,
+                    5.2398,
+                    0.5056,
+                    5.2398]
+                },
+                {
+                    "rowIndex": 0,
+                    "columnIndex": 1,
+                    "text": "P.O. NUMBER",
+                    "boundingBox": [1.8051,
+                    4.963,
+                    3.3047,
+                    4.963,
+                    3.3124,
+                    5.2398,
+                    1.7975,
+                    5.2398]
+                },
+                ...
+                ],
+                "boundingBox": [0.4976,
+                4.961,
+                7.9959,
+                4.9606,
+                7.9959,
+                5.5204,
+                0.4972,
+                5.5209]
+            }]
+        }],
+        "documentResults": [{
+            "docType": "prebuilt:invoice",
+            "pageRange": [1,
+            1],
+            "fields": {
+                "AmountDue": {
+                    "type": "number",
+                    "valueNumber": 610,
+                    "text": "$610.00",
+                    "boundingBox": [7.3809,
+                    7.8153,
+                    7.9167,
+                    7.8153,
+                    7.9167,
+                    7.9591,
+                    7.3809,
+                    7.9591],
+                    "page": 1,
+                    "confidence": 0.875
+                },
+                "BillingAddress": {
+                    "type": "string",
+                    "valueString": "123 Bill St, Redmond WA, 98052",
+                    "text": "123 Bill St, Redmond WA, 98052",
+                    "boundingBox": [0.594,
+                    4.3724,
+                    2.0125,
+                    4.3724,
+                    2.0125,
+                    4.7125,
+                    0.594,
+                    4.7125],
+                    "page": 1,
+                    "confidence": 0.997
+                },
+                "BillingAddressRecipient": {
+                    "type": "string",
+                    "valueString": "Microsoft Finance",
+                    "text": "Microsoft Finance",
+                    "boundingBox": [0.594,
+                    4.1684,
+                    1.7907,
+                    4.1684,
+                    1.7907,
+                    4.2837,
+                    0.594,
+                    4.2837],
+                    "page": 1,
+                    "confidence": 0.998
+                },
+                ...
+            }
+        }]
+    }
+}
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+> [!IMPORTANT]
+> Bu özellik seçili API sürümünde kullanılamaz.
+
+---
+
+## <a name="analyze-id-document"></a>KIMLIK belgesini çözümle
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+Bir tanımlama belgesini çözümlemeye başlamak için aşağıdaki kıvrımlı komutunu kullanın. Kimlik belgesi analizi hakkında daha fazla bilgi için bkz. [kimlik belgeleri kavramsal Kılavuzu](../../concept-identification-cards.md). Bir kimlik belgesini çözümlemeye başlamak için aşağıdaki kıvrımlı komutunu kullanarak **[kimlik belgesini çözümle] https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/5f74a7738978e467c5fb8707)** API 'sini çağırın. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
+
+1. `{endpoint}`Form tanıyıcı aboneliğiniz ile edindiğiniz uç noktayla değiştirin.
+1. `{your ID document URL}`Bir makbuz RESMININ URL adresiyle değiştirin.
+1. `{subscription key}`Önceki adımdan kopyaladığınız abonelik anahtarıyla değiştirin.
+
+### <a name="v21-previewtabv2-1"></a>[v 2.1 Önizleme] (#tab/v2-1
+
+```bash
+curl -i -X POST "https://{endpoint}/formrecognizer/v2.1-preview.3/prebuilt/idDocument/analyze" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{your  ID document URL}'}"
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+> [!IMPORTANT]
+> Bu özellik seçili API sürümünde kullanılamaz.
+
+---
+
+`202 (Success)` **İşlem konumu** üst bilgisi içeren bir yanıt alacaksınız. Bu üstbilginin değeri, zaman uyumsuz işlemin durumunu sorgulamak ve sonuçları almak için kullanabileceğiniz bir sonuç KIMLIĞI içerir. Aşağıdaki örnekte, sonraki dize `analyzeResults/` sonuç kimliğidir.
+
+```console
+https://westus.api.cognitive.microsoft.com/formrecognizer/v2.1-preview.3/prebuilt/idDocument/analyzeResults/0c6cb19e-538f-4b8d-98b7-e105c9995ba6
+```
+
+### <a name="get-the-analyze-id-document-result"></a>KIMLIĞI çözümle belge sonucunu al
+
+**Kimlik belgesini çözümle** API 'sini çağırdıktan sonra, işlemin durumunu ve ayıklanan verileri almak Için **[kodu çözümle kimlik belgesi sonucu](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/5f74a7daad1f2612c46f5822)** API 'sini çağırın.  Komutu çalıştırmadan önce Şu değişiklikleri yapın:
+
+1. `{endpoint}`Form tanıyıcı abonelik anahtarınızla edindiğiniz uç noktayla değiştirin. Bunu, form tanıyıcı kaynağına **genel bakış** sekmesinde bulabilirsiniz.
+1. `{resultId}`Önceki adımdaki Işlem kimliğiyle değiştirin.
+1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+```bash
+curl -X GET "https://{endpoint}/formrecognizer/v2.1-preview.3/prebuilt/idDocument/analyzeResults/{resultId}" -H "Ocp-Apim-Subscription-Key: {subscription key}"
+```
+
+### <a name="examine-the-response"></a>Yanıtı inceleme
+
+`200 (Success)`JSON çıkışıyla bir yanıt alacaksınız. İlk alan, `"status"` , işlemin durumunu gösterir. İşlem tamamlanmadıysa, değeri ya da olur `"status"` `"running"` ve siz `"notStarted"` değeri alıncaya kadar el ile veya bir komut dosyası aracılığıyla API 'yi yeniden çağırmanız gerekir `succeeded` . Çağrılar arasında bir saniye veya daha fazla Aralık önerilir.
+
+* `"readResults"`Alan, kimlik belgesinden ayıklanan her metin satırını içerir.
+* `"documentResults"`Alan, her biri giriş belgesinde algılanan BIR kimlik belgesini temsil eden bir nesne dizisi içerir.
+
+Aşağıda örnek bir kimlik belgesi ve buna karşılık gelen JSON çıktısı verilmiştir
+
+* :::image type="content" source="https://raw.githubusercontent.com/Azure-Samples/cognitive-services-REST-api-samples/master/curl/form-recognizer/id-license.jpg" alt-text="örnek sürücü lisansı":::
+
+```json
+{
+    "status": "succeeded",
+    "createdDateTime": "2021-04-13T17:24:52Z",
+    "lastUpdatedDateTime": "2021-04-13T17:24:55Z",
+    "analyzeResult": {
+      "version": "2.1.0",
+      "readResults": [
+        {
+          "page": 1,
+          "angle": -0.2823,
+          "width": 450,
+          "height": 294,
+          "unit": "pixel"
+        }
+      ],
+      "documentResults": [
+        {
+          "docType": "prebuilt:idDocument:driverLicense",
+          "docTypeConfidence": 0.995,
+          "pageRange": [
+            1,
+            1
+          ],
+          "fields": {
+            "Address": {
+              "type": "string",
+              "valueString": "123 STREET ADDRESS YOUR CITY WA 99999-1234",
+              "text": "123 STREET ADDRESS YOUR CITY WA 99999-1234",
+              "boundingBox": [
+                158,
+                151,
+                326,
+                151,
+                326,
+                177,
+                158,
+                177
+              ],
+              "page": 1,
+              "confidence": 0.965
+            },
+            "Country": {
+              "type": "country",
+              "valueCountry": "USA",
+              "confidence": 0.99
+            },
+            "DateOfBirth": {
+              "type": "date",
+              "valueDate": "1958-01-06",
+              "text": "01/06/1958",
+              "boundingBox": [
+                187,
+                133,
+                272,
+                132,
+                272,
+                148,
+                187,
+                149
+              ],
+              "page": 1,
+              "confidence": 0.99
+            },
+            "DateOfExpiration": {
+              "type": "date",
+              "valueDate": "2020-08-12",
+              "text": "08/12/2020",
+              "boundingBox": [
+                332,
+                230,
+                414,
+                228,
+                414,
+                244,
+                332,
+                245
+              ],
+              "page": 1,
+              "confidence": 0.99
+            },
+            "DocumentNumber": {
+              "type": "string",
+              "valueString": "LICWDLACD5DG",
+              "text": "LIC#WDLABCD456DG",
+              "boundingBox": [
+                162,
+                70,
+                307,
+                68,
+                307,
+                84,
+                163,
+                85
+              ],
+              "page": 1,
+              "confidence": 0.99
+            },
+            "FirstName": {
+              "type": "string",
+              "valueString": "LIAM R.",
+              "text": "LIAM R.",
+              "boundingBox": [
+                158,
+                102,
+                216,
+                102,
+                216,
+                116,
+                158,
+                116
+              ],
+              "page": 1,
+              "confidence": 0.985
+            },
+            "LastName": {
+              "type": "string",
+              "valueString": "TALBOT",
+              "text": "TALBOT",
+              "boundingBox": [
+                160,
+                86,
+                213,
+                85,
+                213,
+                99,
+                160,
+                100
+              ],
+              "page": 1,
+              "confidence": 0.987
+            },
+            "Region": {
+              "type": "string",
+              "valueString": "Washington",
+              "confidence": 0.99
+            },
+            "Sex": {
+              "type": "gender",
+              "valueGender": "M",
+              "text": "M",
+              "boundingBox": [
+                226,
+                190,
+                232,
+                190,
+                233,
+                201,
+                226,
+                201
+              ],
+              "page": 1,
+              "confidence": 0.99
+            }
+          }
+        }
+      ]
+    }
+  }
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+> [!IMPORTANT]
+> Bu özellik seçili API sürümünde kullanılamaz.
+
+---
+
+## <a name="train-a-custom-model"></a>Özel bir modeli eğitme
+
+Özel bir modeli eğitebilmeniz için bir Azure depolama blobunda eğitim verileri kümesine ihtiyacınız vardır. Aynı türde/yapıda en az beş adet doldurulmuş form (PDF belgesi ve/veya resim) gereklidir. Eğitim verilerinizi birlikte yerleştirmeye yönelik ipuçları ve seçenekler için bkz. [özel bir model için eğitim verileri kümesi oluşturma](../../build-training-data-set.md) .
+
+Etiketli veriler olmadan eğitim varsayılan işlemdir ve daha basittir. Alternatif olarak, daha önce eğitim verilerinizin bazılarını veya tümünü el ile etiketleyebilirsiniz. Bu daha karmaşık bir işlemdir, ancak daha iyi eğitilen bir model ile sonuçlanır.
+
+> [!NOTE]
+> Modelleri, [form tanıyıcı örnek etiketleme aracı](../../quickstarts/label-tool.md)gibi bir grafik kullanıcı arabirimi ile de eğitebilirsiniz.
+
+
+### <a name="train-a-model-without-labels"></a>Etiketler olmadan bir modeli eğitme
+
+Azure Blob kabınızda bulunan belgelerle bir form tanıyıcı modeli eğitmek için aşağıdaki kıvrımlı komutunu çalıştırarak **[özel model eğitimi](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/TrainCustomModelAsync)** API 'sini çağırın. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
+
+1. `{Endpoint}`Form tanıyıcı aboneliğiniz ile edindiğiniz uç noktayla değiştirin.
+1. `{subscription key}`Önceki adımdan kopyaladığınız abonelik anahtarıyla değiştirin.
+1. `{SAS URL}`Azure Blob depolama kapsayıcısının paylaşılan erişim imzası (SAS) URL 'si ile değiştirin. [!INCLUDE [get SAS URL](../sas-instructions.md)]
+
+   :::image type="content" source="../../media/quickstarts/get-sas-url.png" alt-text="SAS URL 'SI alımı":::
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+```bash
+curl -i -X POST "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{SAS URL}'}"
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+```bash
+curl -i -X POST "https://{Endpoint}/formrecognizer/v2.0/custom/models" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{SAS URL}'}"
+```
+
+---
+
+`201 (Success)`Bir **konum** üst bilgisine sahip bir yanıt alacaksınız. Bu üstbilginin değeri, eğitilen yeni modelin KIMLIĞIDIR.
+
+### <a name="train-a-model-with-labels"></a>Etiketler içeren bir modeli eğitme
+
+Etiketlerle eğitebilmeniz için, `\<filename\>.pdf.labels.json` eğitim belgelerinin yanı sıra BLOB depolama kapsayıcıda özel etiket bilgi dosyalarına () sahip olmanız gerekir. [Form tanıyıcı örnek etiketleme aracı](../../quickstarts/label-tool.md) , bu etiket dosyalarını oluşturmanıza yardımcı olmak için bir kullanıcı arabirimi sağlar. Bunu yaptıktan sonra, JSON gövdesinde olarak ayarlanmış parametresi ile **[özel model API 'Sini eğitebilirsiniz](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/TrainCustomModelAsync)** `"useLabelFile"` `true` .
+
+Komutu çalıştırmadan önce Şu değişiklikleri yapın:
+
+1. `{Endpoint}`Form tanıyıcı aboneliğiniz ile edindiğiniz uç noktayla değiştirin.
+1. `{subscription key}`Önceki adımdan kopyaladığınız abonelik anahtarıyla değiştirin.
+1. `{SAS URL}`Azure Blob depolama kapsayıcısının paylaşılan erişim imzası (SAS) URL 'si ile değiştirin. [!INCLUDE [get SAS URL](../sas-instructions.md)]
+
+   :::image type="content" source="../../media/quickstarts/get-sas-url.png" alt-text="SAS URL 'SI alımı":::
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+```bash
+curl -i -X POST "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{SAS URL}', 'useLabelFile':true}"
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+```bash
+curl -i -X POST "https://{Endpoint}/formrecognizer/v2.0/custom/models" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" --data-ascii "{ 'source': '{SAS URL}', 'useLabelFile':true }"
+```
+
+---
+
+`201 (Success)`Bir **konum** üst bilgisine sahip bir yanıt alacaksınız. Bu üstbilginin değeri, eğitilen yeni modelin KIMLIĞIDIR.
+
+### <a name="get-training-results"></a>Eğitim sonuçlarını al
+
+Eğitme işlemini başlattıktan sonra, eğitim durumunu denetlemek için yeni bir işlem kullanın, **[özel model alın](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/GetCustomModel)** . Eğitim durumunu denetlemek için model KIMLIĞINI bu API çağrısına geçirin:
+
+1. `{Endpoint}`Form tanıyıcı abonelik anahtarınızla edindiğiniz uç noktayla değiştirin.
+1. `{subscription key}`Abonelik anahtarınızla değiştirin
+1. `{model ID}`Önceki adımda aldığınız model kimliğiyle değiştirin
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+```bash
+curl -X GET "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models/{model ID}" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}"
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+```bash
+curl -X GET "https://{Endpoint}/formrecognizer/v2.0/custom/models/{model ID}" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}"
+```
+
+---
+
+`200 (Success)`Aşağıdaki biçimde BIR JSON gövdesi ile yanıt alacaksınız. Alanına dikkat edin `"status"` . `"ready"`Eğitim tamamlandıktan sonra bu değer olacaktır. Modelde eğitim bitmiyor ise, komutu yeniden çalıştırarak hizmeti tekrar sorgulamanızı gerekir. Çağrılar arasında bir saniye veya daha fazla Aralık önerilir.
+
+`"modelId"`Alan, eğitiminde olduğunuz MODELIN kimliğini içerir. Bu, bir sonraki adımda gerekli olacaktır.
+
+```json
+{
+  "modelInfo":{
+    "status":"ready",
+    "createdDateTime":"2019-10-08T10:20:31.957784",
+    "lastUpdatedDateTime":"2019-10-08T14:20:41+00:00",
+    "modelId":"1cfb372bab404ba3aa59481ab2c63da5"
+  },
+  "trainResult":{
+    "trainingDocuments":[
+      {
+        "documentName":"invoices\\Invoice_1.pdf",
+        "pages":1,
+        "errors":[
+
+        ],
+        "status":"succeeded"
+      },
+      {
+        "documentName":"invoices\\Invoice_2.pdf",
+        "pages":1,
+        "errors":[
+
+        ],
+        "status":"succeeded"
+      },
+      {
+        "documentName":"invoices\\Invoice_3.pdf",
+        "pages":1,
+        "errors":[
+
+        ],
+        "status":"succeeded"
+      },
+      {
+        "documentName":"invoices\\Invoice_4.pdf",
+        "pages":1,
+        "errors":[
+
+        ],
+        "status":"succeeded"
+      },
+      {
+        "documentName":"invoices\\Invoice_5.pdf",
+        "pages":1,
+        "errors":[
+
+        ],
+        "status":"succeeded"
+      }
+    ],
+    "errors":[
+
+    ]
+  },
+  "keys":{
+    "0":[
+      "Address:",
+      "Invoice For:",
+      "Microsoft",
+      "Page"
+    ]
+  }
+}
+```
+
+## <a name="analyze-forms-with-a-custom-model"></a>Formları özel bir model ile analiz etme
+
+Daha sonra, yeni eğitilen modelinizi kullanarak bir belgeyi analiz edebilir, anahtar-değer çiftlerini ve tabloları kümeden ayıklayın. Aşağıdaki kıvrımlı komutunu çalıştırarak **[formu çözümle](https://westus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/AnalyzeWithCustomForm)** API 'sini çağırın. Komutu çalıştırmadan önce Şu değişiklikleri yapın:
+
+1. `{Endpoint}`Form tanıyıcı abonelik anahtarınızdan edindiğiniz uç noktayla değiştirin. Bunu, form tanıyıcı kaynağına **genel bakış** sekmesinde bulabilirsiniz.
+1. `{model ID}`Önceki bölümde aldığınız model kimliğiyle değiştirin.
+1. `{SAS URL}`Azure Storage 'daki dosyanız için BIR SAS URL 'si ile değiştirin. Eğitim bölümündeki adımları izleyin, ancak tüm blob kapsayıcısı için bir SAS URL 'SI almak yerine, çözümlemek istediğiniz belirli dosya için bir tane alın.
+1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+```bash
+curl -v "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models/{model ID}/analyze?includeTextDetails=true" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" -d "{ 'source': '{SAS URL}' } "
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+```bash
+curl -v "https://{Endpoint}/formrecognizer/v2.0/custom/models/{model ID}/analyze?includeTextDetails=true" -H "Content-Type: application/json" -H "Ocp-Apim-Subscription-Key: {subscription key}" -d "{ 'source': '{SAS URL}' } "
+```
+
+---
+
+`202 (Success)` **İşlem konumu** üst bilgisi olan bir yanıt alacaksınız. Bu üstbilginin değeri, Çözümle işleminin sonuçlarını izlemek için kullandığınız bir sonuç KIMLIĞI içerir. Sonraki adım için bu sonuç KIMLIĞINI kaydedin.
+
+### <a name="get-the-analyze-results"></a>Analiz sonuçlarını al
+
+Çözümle işleminin sonuçlarını sorgulamak için **[analiz formu sonucunu](https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/GetAnalyzeFormResult)** al API 'sini çağırın.
+
+1. `{Endpoint}`Form tanıyıcı abonelik anahtarınızdan edindiğiniz uç noktayla değiştirin. Bunu, form tanıyıcı kaynağına **genel bakış** sekmesinde bulabilirsiniz.
+1. `{result ID}`Önceki bölümde ALDıĞıNıZ kimlik ile değiştirin.
+1. `{subscription key}` değerini abonelik anahtarınızla değiştirin.
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+```bash
+curl -X GET "https://{Endpoint}/formrecognizer/v2.1-preview.3/custom/models/{model ID}/analyzeResults/{result ID}" -H "Ocp-Apim-Subscription-Key: {subscription key}"
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+```bash
+curl -X GET "https://{Endpoint}/formrecognizer/v2.0/custom/models/{model ID}/analyzeResults/{result ID}" -H "Ocp-Apim-Subscription-Key: {subscription key}"
+```
+
+---
+
+`200 (Success)`Aşağıdaki biçimde BIR JSON gövdesi ile yanıt alacaksınız. Çıktı basitlik için kısaltıldı. `"status"`En alttaki alana dikkat edin. `"succeeded"`Analiz işlemi tamamlandığında bu değer olacaktır. Çözümle işlemi tamamlanmadıysa, komutu yeniden çalıştırarak hizmeti tekrar sorgulamanızı gerekir. Çağrılar arasında bir saniye veya daha fazla Aralık önerilir.
+
+Etiketler olmadan eğitilen özel modellerde, anahtar/değer çifti ilişkilendirmeleri ve tabloları `"pageResults"` JSON çıktısının düğümüdür. Etiketlerle eğitilen özel modellerde, anahtar/değer çifti ilişkilendirmeleri `"documentResults"` düğümüdür. Ayrıca, *ıncludetekxtdetails* URL parametresi aracılığıyla düz metin ayıklama belirttiyseniz, `"readResults"` düğüm belgedeki tüm metinlerin içeriğini ve konumlarını gösterir.
+
+Bu örnek JSON çıktısı kolaylık sağlaması için kısaltıldı. [GitHub 'da tam örnek çıkışa](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/analyze-result-invoice-6.pdf.json)bakın.
+
+### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/v2-1)
+
+```JSON
+{
+  "status": "succeeded",
+  "createdDateTime": "2020-08-21T01:13:28Z",
+  "lastUpdatedDateTime": "2020-08-21T01:13:42Z",
+  "analyzeResult": {
+    "version": "2.1.0",
+    "readResults": [
+      {
+        "page": 1,
+        "angle": 0,
+        "width": 8.5,
+        "height": 11,
+        "unit": "inch",
+        "lines": [
+          {
+            "text": "Project Statement",
+            "boundingBox": [
+              5.0444,
+              0.3613,
+              8.0917,
+              0.3613,
+              8.0917,
+              0.6718,
+              5.0444,
+              0.6718
+            ],
+            "words": [
+              {
+                "text": "Project",
+                "boundingBox": [
+                  5.0444,
+                  0.3587,
+                  6.2264,
+                  0.3587,
+                  6.2264,
+                  0.708,
+                  5.0444,
+                  0.708
+                ]
+              },
+              {
+                "text": "Statement",
+                "boundingBox": [
+                  6.3361,
+                  0.3635,
+                  8.0917,
+                  0.3635,
+                  8.0917,
+                  0.6396,
+                  6.3361,
+                  0.6396
+                ]
+              }
+            ]
+          },
+          ...
+        ]
+      }
+    ],
+    "pageResults": [
+      {
+        "page": 1,
+        "keyValuePairs": [
+          {
+            "key": {
+              "text": "Date:",
+              "boundingBox": [
+                6.9833,
+                1.0615,
+                7.3333,
+                1.0615,
+                7.3333,
+                1.1649,
+                6.9833,
+                1.1649
+              ],
+              "elements": [
+                "#/readResults/0/lines/2/words/0"
+              ]
+            },
+            "value": {
+              "text": "9/10/2020",
+              "boundingBox": [
+                7.3833,
+                1.0802,
+                7.925,
+                1.0802,
+                7.925,
+                1.174,
+                7.3833,
+                1.174
+              ],
+              "elements": [
+                "#/readResults/0/lines/3/words/0"
+              ]
+            },
+            "confidence": 1
+          },
+          ...
+        ],
+        "tables": [
+          {
+            "rows": 5,
+            "columns": 5,
+            "cells": [
+              {
+                "text": "Training Date",
+                "rowIndex": 0,
+                "columnIndex": 0,
+                "boundingBox": [
+                  0.6944,
+                  4.2779,
+                  1.5625,
+                  4.2779,
+                  1.5625,
+                  4.4005,
+                  0.6944,
+                  4.4005
+                ],
+                "confidence": 1,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "elements": [
+                  "#/readResults/0/lines/15/words/0",
+                  "#/readResults/0/lines/15/words/1"
+                ],
+                "isHeader": true,
+                "isFooter": false
+              },
+              ...
+            ]
+          }
+        ],
+        "clusterId": 0
+      }
+    ],
+    "documentResults": [],
+    "errors": []
+  }
+}
+```
+
+### <a name="v20"></a>[v2.0](#tab/v2-0)
+
+```JSON
+{
+  "status": "succeeded",
+  "createdDateTime": "2020-08-21T00:46:25Z",
+  "lastUpdatedDateTime": "2020-08-21T00:46:32Z",
+  "analyzeResult": {
+    "version": "2.0.0",
+    "readResults": [
+      {
+        "page": 1,
+        "angle": 0,
+        "width": 8.5,
+        "height": 11,
+        "unit": "inch",
+        "lines": [
+          {
+            "text": "Project Statement",
+            "boundingBox": [
+              5.0153,
+              0.275,
+              8.0944,
+              0.275,
+              8.0944,
+              0.7125,
+              5.0153,
+              0.7125
+            ],
+            "words": [
+              {
+                "text": "Project",
+                "boundingBox": [
+                  5.0153,
+                  0.275,
+                  6.2278,
+                  0.275,
+                  6.2278,
+                  0.7125,
+                  5.0153,
+                  0.7125
+                ]
+              },
+              {
+                "text": "Statement",
+                "boundingBox": [
+                  6.3292,
+                  0.275,
+                  8.0944,
+                  0.275,
+                  8.0944,
+                  0.7125,
+                  6.3292,
+                  0.7125
+                ]
+              }
+            ]
+          },
+        ...
+        ]
+      }
+    ],
+    "pageResults": [
+      {
+        "page": 1,
+        "keyValuePairs": [
+          {
+            "key": {
+              "text": "Date:",
+              "boundingBox": [
+                6.9722,
+                1.0264,
+                7.3417,
+                1.0264,
+                7.3417,
+                1.1931,
+                6.9722,
+                1.1931
+              ],
+              "elements": [
+                "#/readResults/0/lines/2/words/0"
+              ]
+            },
+            "confidence": 1
+          },
+         ...
+        ],
+        "tables": [
+          {
+            "rows": 4,
+            "columns": 5,
+            "cells": [
+              {
+                "text": "Training Date",
+                "rowIndex": 0,
+                "columnIndex": 0,
+                "boundingBox": [
+                  0.6931,
+                  4.2444,
+                  1.5681,
+                  4.2444,
+                  1.5681,
+                  4.4125,
+                  0.6931,
+                  4.4125
+                ],
+                "confidence": 1,
+                "rowSpan": 1,
+                "columnSpan": 1,
+                "elements": [
+                  "#/readResults/0/lines/15/words/0",
+                  "#/readResults/0/lines/15/words/1"
+                ],
+                "isHeader": true,
+                "isFooter": false
+              },
+              ...
+            ]
+          }
+        ],
+        "clusterId": 0
+      }
+    ],
+    "documentResults": [],
+    "errors": []
+  }
+}
+```
+
+---
+
+### <a name="improve-results"></a>Sonuçları geliştirme
+
+[!INCLUDE [improve results](../improve-results-unlabeled.md)]
 
 ## <a name="manage-custom-models"></a>Özel modelleri yönetme
 
@@ -1685,7 +1910,7 @@ curl -v -X GET "https://{Endpoint}/formrecognizer/v2.0/custom/models/{modelId}" 
 ### <a name="delete-a-model-from-the-resource-account"></a>Kaynak hesabındaki bir modeli silme
 
 Ayrıca, KIMLIĞINE başvurarak hesabınızdan bir modeli silebilirsiniz. Bu komut, önceki bölümde kullanılan modeli silmek için **[özel model silme](https://westcentralus.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-1-preview-3/operations/DeleteCustomModel)** API 'sini çağırır.
-
+kod
 1. `{Endpoint}`Form tanıyıcı aboneliğiniz ile edindiğiniz uç noktayla değiştirin.
 1. `{subscription key}`Önceki adımdan kopyaladığınız abonelik anahtarıyla değiştirin.
 1. `{modelId}`Aramak istediğiniz özel MODELIN kimliğiyle değiştirin.

@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/03/2021
 ms.author: duau
-ms.openlocfilehash: 0d4f1ed6bab5775c44b2a745e1edc5fc07e0c06d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 708d63695cbba53578b13d1674b9aa99018bcae4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102215468"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791130"
 ---
 # <a name="traffic-manager-frequently-asked-questions-faq"></a>Traffic Manager sık sorulan sorular (SSS)
 
@@ -306,7 +306,7 @@ Trafik Görünümü fiyatlandırması, çıktıyı oluşturmak için kullanılan
 
 Azure Web Apps ile birden çok abonelikteki uç noktaların kullanılması mümkün değildir. Azure Web Apps, Web Apps birlikte kullanılan herhangi bir özel etki alanı adının yalnızca tek bir abonelik içinde kullanılmasını gerektirir. Aynı etki alanı adına sahip birden çok abonelikten Web Apps kullanmak mümkün değildir.
 
-Diğer uç nokta türleri için birden fazla abonelikteki uç noktalarla Traffic Manager kullanmak mümkündür. Kaynak Yöneticisi, Traffic Manager profilini yapılandıran kişinin uç noktaya okuma erişimi olduğu sürece herhangi bir abonelikteki uç noktalar Traffic Manager eklenebilir. Bu izinler, [Azure rol tabanlı erişim denetimi (Azure RBAC)](../role-based-access-control/role-assignments-portal.md)kullanılarak verilebilir. Diğer aboneliklerden gelen uç noktalar, [Azure PowerShell](/powershell/module/az.trafficmanager/new-aztrafficmanagerendpoint) veya [Azure CLI](/cli/azure/network/traffic-manager/endpoint#az-network-traffic-manager-endpoint-create)kullanılarak eklenebilir.
+Diğer uç nokta türleri için birden fazla abonelikteki uç noktalarla Traffic Manager kullanmak mümkündür. Kaynak Yöneticisi, Traffic Manager profilini yapılandıran kişinin uç noktaya okuma erişimi olduğu sürece herhangi bir abonelikteki uç noktalar Traffic Manager eklenebilir. Bu izinler, [Azure rol tabanlı erişim denetimi (Azure RBAC)](../role-based-access-control/role-assignments-portal.md)kullanılarak verilebilir. Diğer aboneliklerden gelen uç noktalar, [Azure PowerShell](/powershell/module/az.trafficmanager/new-aztrafficmanagerendpoint) veya [Azure CLI](/cli/azure/network/traffic-manager/endpoint#az_network_traffic_manager_endpoint_create)kullanılarak eklenebilir.
 
 ### <a name="can-i-use-traffic-manager-with-cloud-service-staging-slots"></a>Bulut hizmeti ' hazırlama ' yuvaları ile Traffic Manager kullanabilir miyim?
 

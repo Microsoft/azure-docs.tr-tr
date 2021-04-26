@@ -13,10 +13,10 @@ ms.author: rolyon
 ms.reviewer: psignoret
 ms.custom: it-pro
 ms.openlocfilehash: f9c2c15bbfcf9a9271e629ef26c11ecc4cbaaa6f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98740117"
 ---
 # <a name="app-consent-permissions-for-custom-roles-in-azure-active-directory"></a>Azure Active Directory özel roller için uygulama izni izinleri

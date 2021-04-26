@@ -3,12 +3,12 @@ title: Azure Işlevlerini bir sanal ağla bütünleştirmek için özel uç nokt
 description: Bu öğreticide bir Azure sanal ağına nasıl bir işlev bağlanacağı ve özel uç noktalar kullanarak nasıl kilitleneceği gösterilmektedir.
 ms.topic: article
 ms.date: 2/22/2021
-ms.openlocfilehash: e8ca853908b366b99e150f04ced404f42acc7d21
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: e1ed944250f05f52860c47f6cb61130f50b08e7c
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105027423"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078783"
 ---
 # <a name="tutorial-integrate-azure-functions-with-an-azure-virtual-network-by-using-private-endpoints"></a>Öğretici: özel uç noktaları kullanarak Azure Işlevlerini bir Azure sanal ağı ile tümleştirme
 
@@ -39,7 +39,7 @@ Bu öğretici C# kullandığından Premium planda bir .NET işlevi uygulaması o
     | Ayar      | Önerilen değer  | Açıklama |
     | ------------ | ---------------- | ----------- |
     | **Abonelik** | Aboneliğiniz | Bu yeni işlev uygulamasının oluşturulduğu abonelik. |
-    | **[Kaynak grubu](../azure-resource-manager/management/overview.md)** |  myResourceGroup | İşlev uygulamanızı oluşturacağınız yeni kaynak grubunun adı. |
+    | **[Kaynak Grubu](../azure-resource-manager/management/overview.md)** |  myResourceGroup | İşlev uygulamanızı oluşturacağınız yeni kaynak grubunun adı. |
     | **İşlev Uygulamasının adı** | Genel olarak benzersiz bir ad | Yeni işlev uygulamanızı tanımlayan ad. Geçerli karakterler şunlardır: `a-z` (büyük/küçük harf duyarsız), `0-9` ve `-`.  |
     |**Yayımla**| Kod | Kod dosyalarını veya bir Docker kapsayıcısını yayımlamayı seçin. |
     | **Çalışma zamanı yığını** | .NET | Bu öğretici .NET kullanır. |
@@ -87,7 +87,7 @@ Sanal ağlarınızda, işlev uygulamanız ile oluşturduğunuz bir depolama hesa
     | **Abonelik** | Aboneliğiniz | Kaynaklarınızın oluşturulduğu abonelik. | 
     | **[Kaynak grubu](../azure-resource-manager/management/overview.md)**  | myResourceGroup | İşlev uygulamanız ile oluşturduğunuz kaynak grubu. |
     | **Ad** | mysecurestorage| Özel uç noktanın uygulanacağı depolama hesabının adı. |
-    | **[Geli](https://azure.microsoft.com/regions/)** | myFunctionRegion | İşlev uygulamanızı oluşturduğunuz bölge. |
+    | **[Region](https://azure.microsoft.com/regions/)** | myFunctionRegion | İşlev uygulamanızı oluşturduğunuz bölge. |
 
 1. **Gözden geçir ve oluştur**’u seçin. Doğrulama bittikten sonra **Oluştur**' u seçin.
 
@@ -104,7 +104,7 @@ Sanal ağlarınızda, işlev uygulamanız ile oluşturduğunuz bir depolama hesa
     | **Abonelik** | Aboneliğiniz | Kaynaklarınızın oluşturulduğu abonelik. |
     | **[Kaynak grubu](../azure-resource-manager/management/overview.md)**  | myResourceGroup | İşlev uygulamanız ile oluşturduğunuz kaynak grubu. |
     | **Ad** | myServiceBus| Özel uç noktanın uygulanacağı hizmet veri yolu adı. |
-    | **[Geli](https://azure.microsoft.com/regions/)** | myFunctionRegion | İşlev uygulamanızı oluşturduğunuz bölge. |
+    | **[Region](https://azure.microsoft.com/regions/)** | myFunctionRegion | İşlev uygulamanızı oluşturduğunuz bölge. |
     | **Fiyatlandırma katmanı** | Premium | Azure Service Bus ile özel uç noktaları kullanmak için bu katmanı seçin. |
 
 1. **Gözden geçir ve oluştur**’u seçin. Doğrulama bittikten sonra **Oluştur**' u seçin.
@@ -130,7 +130,7 @@ Bu öğreticideki Azure kaynakları sanal bir ağa tümleştirilir veya bir sana
     | **Abonelik** | Aboneliğiniz | Kaynaklarınızın oluşturulduğu abonelik. | 
     | **[Kaynak grubu](../azure-resource-manager/management/overview.md)**  | myResourceGroup | İşlev uygulamanız ile oluşturduğunuz kaynak grubu. |
     | **Ad** | myVirtualNet| İşlev uygulamanızın bağlanacağı sanal ağın adı. |
-    | **[Geli](https://azure.microsoft.com/regions/)** | myFunctionRegion | İşlev uygulamanızı oluşturduğunuz bölge. |
+    | **[Region](https://azure.microsoft.com/regions/)** | myFunctionRegion | İşlev uygulamanızı oluşturduğunuz bölge. |
 
 1. **IP adresleri** sekmesinde **alt ağ ekle**' yi seçin. Alt ağ ayarlarını yapılandırmak için aşağıdaki tabloyu kullanın.
 
@@ -160,9 +160,9 @@ Depolama hesabınızı kullanarak Azure dosyaları depolaması ve Azure Blob dep
     | Ayar      | Önerilen değer  | Açıklama      |
     | ------------ | ---------------- | ---------------- |
     | **Abonelik** | Aboneliğiniz | Kaynaklarınızın oluşturulduğu abonelik. | 
-    | **[Kaynak grubu](../azure-resource-manager/management/overview.md)**  | myResourceGroup | İşlev uygulamanız ile oluşturduğunuz kaynak grubunu seçin. | |
+    | **[Kaynak grubu](../azure-resource-manager/management/overview.md)**  | myResourceGroup | İşlev uygulamanız ile oluşturduğunuz kaynak grubunu seçin. |
     | **Ad** | dosya-uç noktası | Depolama hesabınızdaki dosyaların özel uç noktasının adı. |
-    | **[Geli](https://azure.microsoft.com/regions/)** | myFunctionRegion | Depolama hesabınızı oluşturduğunuz bölgeyi seçin. |
+    | **[Region](https://azure.microsoft.com/regions/)** | myFunctionRegion | Depolama hesabınızı oluşturduğunuz bölgeyi seçin. |
 
 1. **Kaynak** sekmesinde, aşağıdaki tabloda gösterilen özel uç nokta ayarlarını kullanın.
 
@@ -203,7 +203,7 @@ Service Bus 'ı kilitlemek için özel uç nokta oluşturun:
     | **Abonelik** | Aboneliğiniz | Kaynaklarınızın oluşturulduğu abonelik. | 
     | **[Kaynak grubu](../azure-resource-manager/management/overview.md)**  | myResourceGroup | İşlev uygulamanız ile oluşturduğunuz kaynak grubu. |
     | **Ad** | SB-uç nokta | Depolama hesabınızdaki dosyaların özel uç noktasının adı. |
-    | **[Geli](https://azure.microsoft.com/regions/)** | myFunctionRegion | Depolama hesabınızı oluşturduğunuz bölge. |
+    | **[Region](https://azure.microsoft.com/regions/)** | myFunctionRegion | Depolama hesabınızı oluşturduğunuz bölge. |
 
 1. **Kaynak** sekmesinde, aşağıdaki tabloda gösterilen özel uç nokta ayarlarını kullanın.
 

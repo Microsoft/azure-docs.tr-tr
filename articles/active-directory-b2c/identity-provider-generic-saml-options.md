@@ -14,10 +14,10 @@ ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
 ms.openlocfilehash: 32f9df410dabf1902e9a7d9aadbf47288bfa90f5
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104798247"
 ---
 # <a name="configure-saml-identity-provider-options-with-azure-active-directory-b2c"></a>SAML kimlik sağlayıcısı seçeneklerini Azure Active Directory B2C ile yapılandırma

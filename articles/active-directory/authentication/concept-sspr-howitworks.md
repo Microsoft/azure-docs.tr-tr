@@ -11,12 +11,12 @@ author: justinha
 manager: daveba
 ms.reviewer: rhicock
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 496a8dba9b9ea7fb82ad9016479154d6a61cb767
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 94077a1c6329aa1fecf9593f2df41fa77afc8a44
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98703284"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765926"
 ---
 # <a name="how-it-works-azure-ad-self-service-password-reset"></a>Nasıl çalışır? Azure AD self servis parola sıfırlama
 
@@ -72,7 +72,7 @@ SSPR 'yi kullanmaya başlamak için aşağıdaki öğreticiyi izleyin:
 
 ## <a name="require-users-to-register-when-they-sign-in"></a>Kullanıcıların oturum açtıklarında kaydolmaları iste
 
-Azure AD kullanarak herhangi bir uygulamada oturum açtıklarında, kullanıcının SSPR kaydını tamamlamasını gerektirme seçeneğini etkinleştirebilirsiniz. Bu iş akışı aşağıdaki uygulamaları içerir:
+Azure AD 'yi kullanarak herhangi bir uygulamada oturum açmak için modern kimlik doğrulama veya Web tarayıcısı kullanıyorsa, kullanıcının SSPR kaydını tamamlamasını isteme seçeneğini etkinleştirebilirsiniz. Bu iş akışı aşağıdaki uygulamaları içerir:
 
 * Microsoft 365
 * Azure portalı
@@ -93,7 +93,7 @@ Kayıt gerekmiyorsa, kullanıcılar oturum açma sırasında istenmez, ancak bun
 
 Kimlik doğrulama yöntemlerinin parolasını sıfırlama veya değiştirme gereksinimlerinde doğru olduğundan emin olmak için, belirli bir süre sonra kullanıcıların bilgileri kayıtlı bilgilerini onaylamasını zorunlu kılabilirsiniz. Bu seçenek yalnızca **kullanıcıların oturum açarken kaydolmasını gerektir** seçeneğini etkinleştirdiğinizde kullanılabilir.
 
-Kullanıcının kayıtlı yöntemlerinin onaylamasını istemek için geçerli değerler *0* ile *730* gün arasında. Bu değerin *0* olarak ayarlanması, kullanıcıların kimlik doğrulama bilgilerini hiçbir şekilde onaylamasını istemeyeceği anlamına gelir.
+Kullanıcının kayıtlı yöntemlerinin onaylamasını istemek için geçerli değerler *0* ile *730* gün arasında. Bu değerin *0* olarak ayarlanması, kullanıcıların kimlik doğrulama bilgilerini hiçbir şekilde onaylamasını istemeyeceği anlamına gelir. Birleşik kayıt deneyimini kullanırken, kullanıcıların bilgilerini yeniden onaylamadan önce kimliklerini onaylamalarını sağlamak gerekecektir.
 
 ## <a name="authentication-methods"></a>Kimlik doğrulama yöntemleri
 

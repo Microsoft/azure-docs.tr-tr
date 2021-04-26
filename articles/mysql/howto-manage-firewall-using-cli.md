@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 3/18/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: eaddd8b2979b30251301ad041ea4b872c23d680b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 41c5c856953c4c45b38a69ba4695df489aaf5270
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94541343"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774710"
 ---
 # <a name="create-and-manage-azure-database-for-mysql-firewall-rules-by-using-the-azure-cli"></a>Azure CLı kullanarak MySQL için Azure Güvenlik duvarı kuralları oluşturma ve yönetme
 Sunucu düzeyinde güvenlik duvarı kuralları, belirli bir IP adresinden veya bir IP adresi aralığından MySQL için Azure veritabanı sunucusuna erişimi yönetmek için kullanılabilir. Uygun Azure CLı komutlarını kullanarak sunucunuzu yönetmek için güvenlik duvarı kuralları oluşturabilir, güncelleştirebilir, silebilir, listeleyebilir ve gösterebilirsiniz. MySQL güvenlik duvarları için Azure veritabanı 'na genel bakış için bkz. [MySQL Için Azure veritabanı sunucu güvenlik duvarı kuralları](./concepts-firewall-rules.md).
@@ -47,25 +47,25 @@ Komut
 
 3. Sorulduğunda, Azure kimlik bilgilerinizi kullanarak oturum açın.
 
-4. Oturum açma yetkilendirildikten sonra, konsolda aboneliklerin listesi yazdırılır. Geçerli aboneliği kullanmak üzere ayarlamak için istenen aboneliğin KIMLIĞINI kopyalayın. [Az Account set](/cli/azure/account#az-account-set) komutunu kullanın.
+4. Oturum açma yetkilendirildikten sonra, konsolda aboneliklerin listesi yazdırılır. Geçerli aboneliği kullanmak üzere ayarlamak için istenen aboneliğin KIMLIĞINI kopyalayın. [Az Account set](/cli/azure/account#az_account_set) komutunu kullanın.
     ```azurecli-interactive
     az account set --subscription <your subscription id>
     ```
 
-5. Adlarından emin değilseniz, aboneliğiniz ve kaynak grubunuz için MySQL sunucularının Azure veritabanlarını listeleyin. [Az MySQL Server List](/cli/azure/mysql/server#az-mysql-server-list) komutunu kullanın.
+5. Adlarından emin değilseniz, aboneliğiniz ve kaynak grubunuz için MySQL sunucularının Azure veritabanlarını listeleyin. [Az MySQL Server List](/cli/azure/mysql/server#az_mysql_server_list) komutunu kullanın.
 
     ```azurecli-interactive
     az mysql server list --resource-group myresourcegroup
     ```
 
-   Üzerinde çalışmak üzere MySQL sunucusunu belirtmeniz gereken, listede ad özniteliğini aklınızda bulabilirsiniz. Gerekirse, bu sunucunun ayrıntılarını onaylayın ve ad özniteliğini kullanarak doğru olduğundan emin olun. [Az MySQL Server Show](/cli/azure/mysql/server#az-mysql-server-show) komutunu kullanın.
+   Üzerinde çalışmak üzere MySQL sunucusunu belirtmeniz gereken, listede ad özniteliğini aklınızda bulabilirsiniz. Gerekirse, bu sunucunun ayrıntılarını onaylayın ve ad özniteliğini kullanarak doğru olduğundan emin olun. [Az MySQL Server Show](/cli/azure/mysql/server#az_mysql_server_show) komutunu kullanın.
 
     ```azurecli-interactive
     az mysql server show --resource-group myresourcegroup --name mydemoserver
     ```
 
 ## <a name="list-firewall-rules-on-azure-database-for-mysql-server"></a>MySQL sunucusu için Azure veritabanı 'nda güvenlik duvarı kurallarını listeleme 
-Sunucu adını ve kaynak grubu adını kullanarak, sunucuda var olan sunucu güvenlik duvarı kurallarını listeleyin. [Az MySQL Server Firewall List](/cli/azure/mysql/server/firewall-rule#az-mysql-server-firewall-rule-list) komutunu kullanın.  Sunucu adı özniteliğinin-- **Name** anahtarında değil, **--Server** anahtarında belirtildiğine dikkat edin. 
+Sunucu adını ve kaynak grubu adını kullanarak, sunucuda var olan sunucu güvenlik duvarı kurallarını listeleyin. [Az MySQL Server Firewall List](/cli/azure/mysql/server/firewall-rule#az_mysql_server_firewall_rule_list) komutunu kullanın.  Sunucu adı özniteliğinin-- **Name** anahtarında değil, **--Server** anahtarında belirtildiğine dikkat edin. 
 ```azurecli-interactive
 az mysql server firewall-rule list --resource-group myresourcegroup --server-name mydemoserver
 ```
@@ -74,7 +74,7 @@ az mysql server firewall-rule list --resource-group myresourcegroup --server-nam
 az mysql server firewall-rule list --resource-group myresourcegroup --server-name mydemoserver --output table
 ```
 ## <a name="create-a-firewall-rule-on-azure-database-for-mysql-server"></a>MySQL için Azure veritabanı sunucusu 'nda bir güvenlik duvarı kuralı oluşturma
-Azure MySQL sunucu adını ve kaynak grubu adını kullanarak sunucuda yeni bir güvenlik duvarı kuralı oluşturun. [Az MySQL Server Firewall Create](/cli/azure/mysql/server/firewall-rule#az-mysql-server-firewall-rule-create) komutunu kullanın. Kural için bir ad, başlangıç IP 'si ve bitiş IP 'si (bir IP adresi aralığına erişim sağlamak için) belirtin.
+Azure MySQL sunucu adını ve kaynak grubu adını kullanarak sunucuda yeni bir güvenlik duvarı kuralı oluşturun. [Az MySQL Server Firewall Create](/cli/azure/mysql/server/firewall-rule#az_mysql_server_firewall_rule_create) komutunu kullanın. Kural için bir ad, başlangıç IP 'si ve bitiş IP 'si (bir IP adresi aralığına erişim sağlamak için) belirtin.
 ```azurecli-interactive
 az mysql server firewall-rule create --resource-group myresourcegroup --server-name mydemoserver --name FirewallRule1 --start-ip-address 13.83.152.0 --end-ip-address 13.83.152.15
 ```
@@ -96,7 +96,7 @@ az mysql server firewall-rule create --resource-group myresourcegroup --server m
 Başarılı olduğunda, her bir komut çıkışı oluşturma, oluşturduğunuz güvenlik duvarı kuralının (varsayılan olarak) JSON biçiminde ayrıntılarını listeler. Bir hata oluşursa, çıkış bunun yerine hata iletisi metnini gösterir.
 
 ## <a name="update-a-firewall-rule-on-azure-database-for-mysql-server"></a>MySQL sunucusu için Azure veritabanı 'nda bir güvenlik duvarı kuralı güncelleştirme 
-Azure MySQL sunucu adını ve kaynak grubu adını kullanarak, sunucuda var olan bir güvenlik duvarı kuralını güncelleştirin. [Az MySQL Server Firewall Update](/cli/azure/mysql/server/firewall-rule#az-mysql-server-firewall-rule-update) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını girdi olarak ve güncelleştirilecek başlangıç IP ve bitiş IP özniteliklerini belirtin.
+Azure MySQL sunucu adını ve kaynak grubu adını kullanarak, sunucuda var olan bir güvenlik duvarı kuralını güncelleştirin. [Az MySQL Server Firewall Update](/cli/azure/mysql/server/firewall-rule#az_mysql_server_firewall_rule_update) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını girdi olarak ve güncelleştirilecek başlangıç IP ve bitiş IP özniteliklerini belirtin.
 ```azurecli-interactive
 az mysql server firewall-rule update --resource-group myresourcegroup --server-name mydemoserver --name FirewallRule1 --start-ip-address 13.83.152.0 --end-ip-address 13.83.152.1
 ```
@@ -106,14 +106,14 @@ Başarılı olduğunda, komut çıktısı güncelleştirdiğiniz güvenlik duvar
 > Güvenlik duvarı kuralı yoksa, kural Update komutu tarafından oluşturulur.
 
 ## <a name="show-firewall-rule-details-on-azure-database-for-mysql-server"></a>MySQL sunucusu için Azure veritabanı 'nda güvenlik duvarı kuralı ayrıntılarını göster
-Azure MySQL sunucu adını ve kaynak grubu adını kullanarak, sunucudan mevcut güvenlik duvarı kuralı ayrıntılarını gösterin. [Az MySQL Server Firewall Show](/cli/azure/mysql/server/firewall-rule#az-mysql-server-firewall-rule-show) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını girdi olarak belirtin.
+Azure MySQL sunucu adını ve kaynak grubu adını kullanarak, sunucudan mevcut güvenlik duvarı kuralı ayrıntılarını gösterin. [Az MySQL Server Firewall Show](/cli/azure/mysql/server/firewall-rule#az_mysql_server_firewall_rule_show) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını girdi olarak belirtin.
 ```azurecli-interactive
 az mysql server firewall-rule show --resource-group myresourcegroup --server-name mydemoserver --name FirewallRule1
 ```
 Başarılı olduğunda komut çıktısı, belirttiğiniz güvenlik duvarı kuralının, JSON biçiminde (varsayılan olarak) ayrıntılarını listeler. Bir hata oluşursa, çıkış bunun yerine hata iletisi metnini gösterir.
 
 ## <a name="delete-a-firewall-rule-on-azure-database-for-mysql-server"></a>MySQL sunucusu için Azure veritabanı 'nda bir güvenlik duvarı kuralı silme
-Azure MySQL sunucu adını ve kaynak grubu adını kullanarak, var olan bir güvenlik duvarı kuralını sunucudan kaldırın. [Az MySQL Server Firewall Delete](/cli/azure/mysql/server/firewall-rule#az-mysql-server-firewall-rule-delete) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını belirtin.
+Azure MySQL sunucu adını ve kaynak grubu adını kullanarak, var olan bir güvenlik duvarı kuralını sunucudan kaldırın. [Az MySQL Server Firewall Delete](/cli/azure/mysql/server/firewall-rule#az_mysql_server_firewall_rule_delete) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını belirtin.
 ```azurecli-interactive
 az mysql server firewall-rule delete --resource-group myresourcegroup --server-name mydemoserver --name FirewallRule1
 ```

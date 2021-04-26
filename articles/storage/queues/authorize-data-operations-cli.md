@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.service: storage
 ms.subservice: common
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 2f7092d8ce184d7021774814e96935e46d1ffb56
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 6b3ac012da97194134f58d061dd9d84e945db554
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100363177"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774476"
 ---
 # <a name="choose-how-to-authorize-access-to-queue-data-with-azure-cli"></a>Azure CLı ile kuyruk verilerine erişim yetkisi verme seçeneğini belirleyin
 
@@ -63,7 +63,7 @@ Aşağıdaki örnek Azure AD kimlik bilgilerinizi kullanarak Azure CLı 'dan bir
     > [!IMPORTANT]
     > Azure rolü atamalarının yayılması birkaç dakika sürebilir.
 
-1. [`az storage queue create`](/cli/azure/storage/queue#az-storage-queue-create) `--auth-mode` `login` Azure AD kimlik bilgilerinizi kullanarak kuyruğu oluşturmak için, parametresiyle birlikte komutunu çağırın. Açılı ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
+1. [`az storage queue create`](/cli/azure/storage/queue#az_storage_queue_create) `--auth-mode` `login` Azure AD kimlik bilgilerinizi kullanarak kuyruğu oluşturmak için, parametresiyle birlikte komutunu çağırın. Açılı ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 
     ```azurecli
     az storage queue create \

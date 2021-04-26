@@ -10,22 +10,20 @@ ms.date: 03/10/2021
 ms.topic: include
 ms.custom: include file
 ms.author: mikben
-ms.openlocfilehash: 07aa1cb361f5f1853dbf93e5f4e064b1ed14f1de
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 0504467e387c0875a8e00bd1cf638ec437232092
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105152781"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106554352"
 ---
-[!INCLUDE [Public Preview Notice](../../includes/public-preview-include.md)]
-
 **Hero örneğini çağıran** Azure Iletişim Hizmetleri grubu, bir grup çağırma deneyimi oluşturmak için Web SDK 'Sını çağıran iletişim hizmetleri 'nin nasıl kullanılabileceğini gösterir.
 
 Bu örnek hızlı başlangıçta, örneği yerel makinenizde çalıştırmadan önce örneğin nasıl çalıştığını öğreneceksiniz. Daha sonra Azure Iletişim Hizmetleri kaynaklarınızı kullanarak örneği Azure 'a dağıtırsınız.
 
 ## <a name="download-code"></a>Kodu indirin
 
-Bu hızlı başlangıç için [GitHub](https://github.com/Azure-Samples/communication-services-web-calling-hero)'da son kodu bulun.
+[GitHub](https://github.com/Azure-Samples/communication-services-web-calling-hero)'da bu örneğe yönelik projeyi bulun. [Ekiplerin birlikte çalışması](../../concepts/teams-interop.md) ile örnek bir sürümü ayrı bir [dalda](https://github.com/Azure-Samples/communication-services-web-calling-hero/tree/teams-interop)bulunabilir.
 
 ## <a name="overview"></a>Genel Bakış
 
@@ -48,6 +46,9 @@ Ana arama ekranının bileşenleri:
 - **Medya Galerisi**: katılımcıların gösterildiği ana aşama. Bir katılımcının Kamerası etkinse, video akışları burada gösterilir. Her katılımcının, görünen adını ve video akışını (bir tane olduğunda) gösteren bir tek kutucuğu vardır
 - **Üst bilgi**: Bu, birincil çağrı denetimlerinin ayarları ve katılımcı tarafı çubuğunu açıp, video ve karışımı açma/kapatma, ekran paylaşma ve çağrıyı bırakma olarak bulunduğu yerdir.
 - **Yan çubuk**: Bu, üst bilgi üzerindeki denetimler kullanılarak, katılımcılar ve ayar bilgilerinin gösterildiği yerdir. Bileşen sağ üst köşedeki ' X ' kullanılarak kapatılabilir. Katılımcılar yan çubuğu, katılımcıların bir listesini ve sohbet 'e daha fazla kullanıcı davet etmek için bir bağlantı gösterir. Ayarlar yan çubuğu, mikrofon ve kamera ayarlarını yapılandırmanıza olanak tanır.
+
+> [!NOTE]
+> Web 'i çağıran SDK kısıtlamalarına bağlı olarak yalnızca bir adet uzak video akışı işlenir. Daha fazla bilgi için bkz. [SDK akış desteğini çağırma](https://docs.microsoft.com/azure/communication-services/concepts/voice-video-calling/calling-sdk-features#calling-sdk-streaming-support).
 
 Aşağıda, önkoşulları ve örneği ayarlama adımlarını hakkında daha fazla bilgi bulacaksınız.
 

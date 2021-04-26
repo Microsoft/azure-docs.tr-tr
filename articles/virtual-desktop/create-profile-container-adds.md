@@ -3,15 +3,15 @@ title: FSLogix profili kapsayıcısı Azure dosyaları oluşturma Active Directo
 description: Bu makalede, Azure dosyaları ve Azure Active Directory Domain Services ile FSLogix profil kapsayıcısının nasıl oluşturulacağı açıklanır.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 04/10/2020
+ms.date: 04/09/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 70a56b7efc34ba2fd3c06521c6e4cac6ea28778f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: 59e2fc1f528040515398e51d359840f6ef1bbefc
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96302478"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107255809"
 ---
 # <a name="create-a-profile-container-with-azure-files-and-azure-ad-ds"></a>Azure dosyaları ve Azure AD DS bir profil kapsayıcısı oluşturma
 
@@ -110,7 +110,7 @@ Depolama hesabı erişim anahtarını almak için:
     Örnek:
 
      ```cmd
-     net use y: \\fsprofile.file.core.windows.net\share HDZQRoFP2BBmoYQ=(truncated)= /user:Azure\fsprofile)
+     net use y: \\fsprofile.file.core.windows.net\share HDZQRoFP2BBmoYQ=(truncated)= /user:Azure\fsprofile
      ```
 
 8. Windows sanal masaüstü kullanıcılarınızın diğer kullanıcılardan profil kapsayıcılarına erişimi engellediği sırada kendi profil kapsayıcısını oluşturmalarına izin vermek için aşağıdaki komutları çalıştırın.

@@ -10,12 +10,12 @@ ms.subservice: translator-text
 ms.topic: reference
 ms.date: 8/11/2020
 ms.author: lajanuar
-ms.openlocfilehash: 567e28ee7f698565d6ad0020db7abdca0557f053
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 2b391c5a435c2dd2f19a3f170bf7c84edd7143f2
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100650771"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106063041"
 ---
 # <a name="translator-v30"></a>Translator v 3.0
 
@@ -35,7 +35,7 @@ Microsoft Translator, birden çok veri merkezi konumundan kullanıma sunulur. Ş
 
 * **Kuzey:** Doğu ABD, Orta Güney ABD, Orta Batı ABD ve Batı ABD 2 
 * **Asya Pasifik:** Kore Güney, Japonya Doğu, Güneydoğu Asya ve Avustralya Doğu
-* **Avrupa:** Kuzey Avrupa, Batı Avrupa, İsviçre Kuzey <sup>1, 2</sup>ve İsviçre Batı <sup>1, 2</sup>
+* **Avrupa:** Kuzey Avrupa, Batı Avrupa
 
 Microsoft Translator 'a yönelik istekler, isteğin kaynaklandığı yere en yakın veri merkezi tarafından işlenen çoğu durumda bulunur. Bir veri merkezi arızası durumunda, istek Azure Coğrafya dışında yönlendirilebilir.
 
@@ -57,7 +57,7 @@ curl -X POST " my-ch-n.cognitiveservices.azure.com/translator/text/v3.0/translat
 -H "Content-Type: application/json" \
 -d "[{'Text':'Hello'}]" -v
 ```
-<sup>2</sup> Özel çevirici Şu anda Isviçre 'de kullanılamıyor.
+<sup>2</sup> özel çevirmen, İsviçre 'de Şu anda kullanılamıyor.
 
 ## <a name="authentication"></a>Kimlik Doğrulaması
 

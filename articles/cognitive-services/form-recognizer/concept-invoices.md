@@ -10,16 +10,16 @@ ms.subservice: forms-recognizer
 ms.topic: conceptual
 ms.date: 03/15/2021
 ms.author: lajanuar
-ms.openlocfilehash: 46cf34bd40832488985008a645f1da25eb87b9d9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a47c4c5bdc90e148916900b1e72bc2a392d2e473
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103467400"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106285351"
 ---
 # <a name="form-recognizer-prebuilt-invoice-model"></a>Form tanıyıcı önceden oluşturulmuş fatura modeli
 
-Azure form tanıyıcı, önceden oluşturulmuş fatura modellerini kullanarak satış faturalarından bilgileri çözümleyebilir ve ayıklayabilir. Fatura API 'SI, müşterilerin çeşitli biçimlerde faturalar almasını sağlar ve fatura işlemini otomatikleştirmek için yapılandırılmış verileri döndürür. Güçlü [optik karakter tanıma (OCR)](../computer-vision/concept-recognizing-text.md) olanaklarımızı, fatura ile ilgili ayrıntılı öğrenme modellerini anlamak için, gelişmiş bir deyişle, önemli bilgileri İngilizce olarak birleştirir. Metin, tablo ve müşteri, satıcı, fatura KIMLIĞI, fatura son tarihi, toplam, fatura tutarı, ödenecek vergi tutarı, sevk edilecek, fatura, satır öğeleri ve daha fazlası gibi bilgileri ayıklar. Önceden oluşturulmuş fatura API 'SI, tanıyıcı v 2.1 Preview biçiminde herkese açık bir şekilde sunulmaktadır.
+Azure form tanıyıcı, önceden oluşturulmuş fatura modellerini kullanarak satış faturalarından bilgileri çözümleyebilir ve ayıklayabilir. Fatura API 'SI, müşterilerin çeşitli biçimlerde faturalar almasını sağlar ve fatura işlemini otomatikleştirmek için yapılandırılmış verileri döndürür. Güçlü [optik karakter tanıma (OCR)](../computer-vision/overview-ocr.md) olanaklarımızı, fatura ile ilgili ayrıntılı öğrenme modellerini anlamak için, gelişmiş bir deyişle, önemli bilgileri İngilizce olarak birleştirir. Metin, tablo ve müşteri, satıcı, fatura KIMLIĞI, fatura son tarihi, toplam, fatura tutarı, ödenecek vergi tutarı, sevk edilecek, fatura, satır öğeleri ve daha fazlası gibi bilgileri ayıklar. Önceden oluşturulmuş fatura API 'SI, tanıyıcı v 2.1 Preview biçiminde herkese açık bir şekilde sunulmaktadır.
 
 ## <a name="what-does-the-invoice-service-do"></a>Fatura hizmeti ne yapar?
 

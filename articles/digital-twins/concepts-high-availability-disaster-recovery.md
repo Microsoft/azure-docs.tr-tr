@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 10/14/2020
 ms.topic: conceptual
 ms.service: digital-twins
-ms.openlocfilehash: 3336a086fbe8f4291f752836a610cd80b773ec2d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 41edef58910fe2b772831ef083e5aca8bb52a321
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98790825"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107482277"
 ---
 # <a name="azure-digital-twins-high-availability-and-disaster-recovery"></a>Azure dijital TWINS yüksek kullanılabilirlik ve olağanüstü durum kurtarma
 
@@ -73,4 +73,4 @@ HA/DR üzerinde en iyi yöntemler için, bu konuda aşağıdaki Azure yönergele
 Azure dijital TWINS çözümlerini kullanmaya başlama hakkında daha fazla bilgi edinin:
  
 * [*Azure Digital Twins nedir?*](overview.md)
-* [*Hızlı başlangıç: örnek bir senaryoyu araştırma*](quickstart-adt-explorer.md)
+* [*Hızlı başlangıç: örnek bir senaryoyu araştırma*](quickstart-azure-digital-twins-explorer.md)

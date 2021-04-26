@@ -4,13 +4,13 @@ description: Bu makale Language Understanding (LUO) hakkında sık sorulan sorul
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: troubleshooting
-ms.date: 05/06/2020
-ms.openlocfilehash: b5e25e9ed25ced96d38994928bcb6275ce79420f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/13/2021
+ms.openlocfilehash: 97b7c02a418a87a0700414e19bc939bda899d073
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102612805"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107503839"
 ---
 # <a name="language-understanding-frequently-asked-questions-faq"></a>Language Understanding ile ilgili Sık Sorulan Sorular (SSS)
 
@@ -158,10 +158,6 @@ Bkz. [uç noktayı güvenli hale getirme](luis-how-to-azure-subscription.md#secu
 ### <a name="i-want-to-build-a-luis-app-with-more-than-the-maximum-number-of-intents-what-should-i-do"></a>En fazla amaç sayısından daha fazla olan bir LUO uygulaması oluşturmak istiyorum. Ne yapmalıyım?
 
 [Amaçlar Için en iyi uygulamalar](luis-concept-intent.md#if-you-need-more-than-the-maximum-number-of-intents)bölümüne bakın.
-
-### <a name="i-want-to-build-an-app-in-luis-with-more-than-the-maximum-number-of-entities-what-should-i-do"></a>LU, en fazla varlık sayısından daha fazlasını içeren bir uygulama oluşturmak istiyorum. Ne yapmalıyım?
-
-Bkz. [varlıklar Için en iyi uygulamalar](luis-concept-entity-types.md#if-you-need-more-than-the-maximum-number-of-entities)
 
 ### <a name="what-are-the-limits-on-the-number-and-size-of-phrase-lists"></a>Tümcecik listelerinin sayısı ve boyutu sınırları nelerdir?
 [Tümcecik listesinin](./luis-concept-feature.md)uzunluk üst sınırı için bkz. [sınır](luis-limits.md) başvurusu.

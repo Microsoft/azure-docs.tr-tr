@@ -3,16 +3,16 @@ title: Google kimlik doğrulamasını yapılandırma
 description: Google kimlik doğrulamasını App Service veya Azure Işlevleri uygulamanız için bir kimlik sağlayıcısı olarak yapılandırmayı öğrenin.
 ms.assetid: 2b2f9abf-9120-4aac-ac5b-4a268d9b6e2b
 ms.topic: article
-ms.date: 09/02/2019
+ms.date: 03/29/2021
 ms.custom:
 - seodec18
 - fasttrack-edit
-ms.openlocfilehash: e8a9fbe6072f3628d755ad3ad5aa5a623fc3ab23
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f6bec32fa928e840569ed95c35a056db91ea9737
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "80519938"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078001"
 ---
 # <a name="configure-your-app-service-or-azure-functions-app-to-use-google-login"></a>App Service veya Azure Işlevleri uygulamanızı Google oturum açma bilgilerini kullanacak şekilde yapılandırma
 
@@ -34,21 +34,20 @@ Bu konudaki yordamı tamamlayabilmeniz için, doğrulanmış bir e-posta adresin
 
 ## <a name="add-google-information-to-your-application"></a><a name="secrets"> </a>Uygulamanıza Google bilgilerini ekleyin
 
-1. [Azure portal]App Service uygulamanıza gidin.
-1. **Ayarlar**  >  **kimlik doğrulaması/yetkilendirme**' yi seçin ve **App Service kimlik doğrulamasının** **Açık** olduğundan emin olun.
-1. **Google**' ı seçin ve daha önce EDINDIĞINIZ uygulama kimliği ve uygulama gizli değerlerini yapıştırın. Uygulamanız için gereken tüm kapsamları etkinleştirin.
-1. **Tamam**’ı seçin.
+1. [Azure Portal] oturum açın ve uygulamanıza gidin.
+1. Soldaki menüden **kimlik doğrulaması** ' nı seçin. **Kimlik sağlayıcısı ekle**' ye tıklayın.
+1. Kimlik sağlayıcısı açılan listesinde **Google** ' ı seçin. Daha önce edindiğiniz uygulama KIMLIĞI ve uygulama gizli anahtarı değerlerini yapıştırın.
 
-   App Service kimlik doğrulaması sağlar, ancak site içeriğinize ve API 'lerinize yetkili erişimi kısıtlamaz. Daha fazla bilgi için bkz. [Yetkilendirmeyi veya reddetme kullanıcıları](app-service-authentication-how-to.md#authorize-or-deny-users).
+    Gizli anahtar, adlı bir yuva yapışkan [uygulama ayarı](./configure-common.md#configure-app-settings) olarak depolanır `GOOGLE_PROVIDER_AUTHENTICATION_SECRET` . Azure Key Vault gizli anahtarı yönetmek istiyorsanız bu ayarı daha sonra [Key Vault başvurularını](./app-service-key-vault-references.md) kullanacak şekilde güncelleştirebilirsiniz.
 
-1. Seçim Site erişimini yalnızca Google tarafından kimliği doğrulanan kullanıcılarla kısıtlamak için, isteğin **Google**'da **kimlik doğrulaması olmadığında gerçekleştirilecek eylemi** ayarlayın. Bu işlevi ayarladığınızda, uygulamanız tüm isteklerin doğrulanmasını gerektirir. Ayrıca kimlik doğrulaması için tüm kimliği doğrulanmamış istekleri Google 'a yönlendirir.
+1. Uygulama için yapılandırılan ilk kimlik sağlayıcısıysanız, **App Service kimlik doğrulama ayarları** bölümü de istenir. Aksi halde, bir sonraki adıma geçebilirsiniz.
+    
+    Bu seçenekler, uygulamanızın kimliği doğrulanmamış isteklere nasıl yanıt vereceğini ve varsayılan seçimlerin bu yeni sağlayıcı ile oturum açmak için tüm istekleri yeniden yönlenceğini belirtir. Bu davranışı şimdi özelleştirmeyi, **kimlik doğrulama ayarları**' nın yanındaki **Düzenle** ' ye tıklayarak bu ayarları daha sonra ana **kimlik doğrulama** ekranından ayarlayabilirsiniz. Bu seçenekler hakkında daha fazla bilgi edinmek için bkz. [kimlik doğrulama akışı](overview-authentication-authorization.md#authentication-flow).
 
-    > [!CAUTION]
-    > Erişimin bu şekilde kısıtlanması, uygulamanıza yönelik tüm çağrılar için geçerlidir. Bu, birçok tek sayfalı uygulamalarda olduğu gibi, genel kullanıma açık bir giriş sayfasına sahip olan uygulamalar için istenmeyebilir. Bu tür uygulamalar için **anonim Isteklere Izin ver (eylem yok)** , uygulamanın kimlik doğrulamanın kendisini el ile başlattığı şekilde tercih edilebilir. Daha fazla bilgi için bkz. [kimlik doğrulama akışı](overview-authentication-authorization.md#authentication-flow).
+1. Seçim **İleri: kapsamlar** ' a tıklayın ve uygulama için gereken kapsamları ekleyin. Bu işlem, tarayıcı tabanlı akışlar için oturum açma zamanında istenir.
+1. **Ekle**'ye tıklayın.
 
-1. **Kaydet**’i seçin.
-
-Artık uygulamanızda kimlik doğrulaması için Google 'ı kullanmaya hazırsınız.
+Artık uygulamanızda kimlik doğrulaması için Google 'ı kullanmaya hazırsınız. Sağlayıcı, **kimlik doğrulama** ekranında listelenecektir. Buradan, bu sağlayıcı yapılandırmasını düzenleyebilir veya silebilirsiniz.
 
 ## <a name="next-steps"></a><a name="related-content"> </a>Sonraki adımlar
 

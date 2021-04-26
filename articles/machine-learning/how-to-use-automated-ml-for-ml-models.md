@@ -6,17 +6,17 @@ services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.author: nibaccam
-author: aniththa
+author: cartacioS
 ms.reviewer: nibaccam
 ms.date: 12/20/2020
 ms.topic: conceptual
 ms.custom: how-to, automl
-ms.openlocfilehash: 2e06375441d6540d6630cfe9d4d8c3beec558879
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 5718e0e3732f57b46500f9d2cdb1165e883ca44f
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103562731"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575590"
 ---
 # <a name="create-review-and-deploy-automated-machine-learning-models-with-azure-machine-learning"></a>Azure Machine Learning ile otomatik makine öğrenimi modelleri oluşturun, gözden geçirin ve dağıtın
 
@@ -180,15 +180,15 @@ Denemenizi çalıştırmak için **son** ' u seçin. Denemeyi hazırlama işlemi
 
 [![Yineleme ayrıntıları](media/how-to-use-automated-ml-for-ml-models/iteration-details.png)](media/how-to-use-automated-ml-for-ml-models/iteration-details-expanded.png)
 
-## <a name="model-explanations"></a>Model açıklamaları
+## <a name="model-explanations-preview"></a>Model açıklamaları (Önizleme)
 
-Modelinizi daha iyi anlamak için, hangi veri özelliklerinin (ham veya uygulanan) model açıklamaları panosundan modelin tahmine göre etkilendiğinin nasıl etkilenebileceğini görün. 
+Modelinizi daha iyi anlamak için, hangi veri özelliklerinin (ham veya uygulanan) model açıklamaları panosu ile modelin tahmine göre etkilendiğinin nasıl etkilenebileceğini görebilirsiniz. 
 
-Model açıklamaları panosu, eğitilen modelin, tahminleri ve açıklamalarıyla birlikte genel bir analizini sağlar. Ayrıca, bireysel bir veri noktasına ve tek tek özelliklerine göz katmanıza imkan tanır. [Açıklama panosu görselleştirmeleri ve belirli çizimler hakkında daha fazla bilgi edinin](how-to-machine-learning-interpretability-aml.md#visualizations).
+Model açıklamaları panosu, eğitilen modelin, tahminleri ve açıklamalarıyla birlikte genel bir analizini sağlar. Ayrıca, bireysel bir veri noktasına ve tek tek özelliklerine göz katmanıza imkan tanır. [Açıklama panosu görselleştirmeleri hakkında daha fazla bilgi edinin](how-to-machine-learning-interpretability-aml.md#visualizations).
 
 Belirli bir modelin açıklamalarını almak için 
 
-1. **Modeller** sekmesinde, kullanmak istediğiniz modeli seçin. 
+1. **Modeller** sekmesinde, anlaşılması istediğiniz modeli seçin. 
 1. **Model açıkla** düğmesini seçin ve açıklamaları oluşturmak için kullanılabilecek bir işlem belirtin.
 1. Durum için **alt çalıştırmalar** sekmesini kontrol edin. 
 1. Tamamlandıktan sonra, açıklamalar panosunu içeren **açıklamalar (Önizleme)** sekmesine gidin. 

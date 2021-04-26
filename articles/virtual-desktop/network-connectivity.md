@@ -6,12 +6,12 @@ author: gundarev
 ms.topic: conceptual
 ms.date: 11/16/2020
 ms.author: denisgun
-ms.openlocfilehash: e4149864e16196b695d38a8c46ab5af835453412
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 378d341ee867b69fac22f5eb15952d104a7bf19d
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99221219"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167337"
 ---
 # <a name="understanding-windows-virtual-desktop-network-connectivity"></a>Windows Sanal Masaüstü Ağ bağlantısını anlama
 
@@ -50,7 +50,7 @@ Windows sanal masaüstü oturumu ana bilgisayarı başlatıldığında, uzak mas
 
 ## <a name="connection-security"></a>Bağlantı güvenliği
 
-TLS 1,2, istemcilerden ve oturum konaklarından başlatılan tüm bağlantılar için Windows sanal masaüstü altyapısı bileşenlerine kullanılır. Windows sanal masaüstü, [Azure ön kapısının](../frontdoor/front-door-faq.md#what-are-the-current-cipher-suites-supported-by-azure-front-door)kullandığı TLS 1,2 şifrelemeleri kullanır. Hem istemci bilgisayarlarının hem de oturum ana bilgisayarlarının bu şifrelemeleri kullanabilmesini sağlamak önemlidir.
+TLS 1,2, istemcilerden ve oturum konaklarından başlatılan tüm bağlantılar için Windows sanal masaüstü altyapısı bileşenlerine kullanılır. Windows sanal masaüstü, [Azure ön kapısının](../frontdoor/front-door-faq.yml#what-are-the-current-cipher-suites-supported-by-azure-front-door-)kullandığı TLS 1,2 şifrelemeleri kullanır. Hem istemci bilgisayarlarının hem de oturum ana bilgisayarlarının bu şifrelemeleri kullanabilmesini sağlamak önemlidir.
 Ters bağlantı taşıması için hem istemci hem de oturum ana bilgisayarı Windows sanal masaüstü ağ geçidine bağlanır. TCP bağlantısı kurulduktan sonra, istemci veya oturum ana bilgisayarı Windows Sanal Masaüstü Ağ geçidinin sertifikasını doğrular.
 Temel taşıma kurulduktan sonra, RDP, oturum ana bilgisayarı sertifikalarını kullanarak istemci ile oturum ana bilgisayarı arasında iç içe geçmiş bir TLS bağlantısı kurar. Varsayılan olarak, RDP şifrelemesi için kullanılan sertifika, dağıtım sırasında işletim sistemi tarafından kendi kendine oluşturulmuştur. İsterseniz, müşteriler kuruluş sertifika yetkilisi tarafından verilen merkezi olarak yönetilen sertifikalar dağıtabilir. Sertifikaları yapılandırma hakkında daha fazla bilgi için bkz. [Windows Server belgeleri](/troubleshoot/windows-server/remote/remote-desktop-listener-certificate-configurations).
 

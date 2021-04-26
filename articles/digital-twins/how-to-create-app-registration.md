@@ -7,16 +7,16 @@ ms.author: baanders
 ms.date: 10/13/2020
 ms.topic: how-to
 ms.service: digital-twins
-ms.openlocfilehash: acb5457f10c54a741a738dd8a1008e703b0f23b0
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: bd45bb264f8e29a2aad870a7daff45fdd44e0d3c
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102051030"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107478820"
 ---
 # <a name="create-an-app-registration-to-use-with-azure-digital-twins"></a>Azure dijital TWINS ile kullanmak üzere bir uygulama kaydı oluşturma
 
-Bir Azure dijital TWINS örneğiyle çalışırken, özel bir istemci uygulaması veya [Azure Digital TWINS Explorer](quickstart-adt-explorer.md)gibi bir örnek gibi istemci uygulamaları aracılığıyla o örnekle etkileşimde bulunmak yaygındır. Bu uygulamaların etkileşimde bulunmak için Azure dijital TWINS ile kimlik doğrulaması yapması gerekir ve uygulamaların kullanabileceği bazı [kimlik doğrulama mekanizmaları](how-to-authenticate-client.md) [Azure ACTIVE DIRECTORY (Azure AD)](../active-directory/fundamentals/active-directory-whatis.md) **uygulama kaydı** içerir.
+Bir Azure dijital TWINS örneğiyle çalışırken, özel bir istemci uygulaması veya [Azure Digital TWINS Explorer](quickstart-azure-digital-twins-explorer.md)gibi bir örnek gibi istemci uygulamaları aracılığıyla o örnekle etkileşimde bulunmak yaygındır. Bu uygulamaların etkileşimde bulunmak için Azure dijital TWINS ile kimlik doğrulaması yapması gerekir ve uygulamaların kullanabileceği bazı [kimlik doğrulama mekanizmaları](how-to-authenticate-client.md) [Azure ACTIVE DIRECTORY (Azure AD)](../active-directory/fundamentals/active-directory-whatis.md) **uygulama kaydı** içerir.
 
 Bu, tüm kimlik doğrulama senaryolarında gerekli değildir. Ancak, bir kimlik doğrulama stratejisi veya bir **ISTEMCI kimliği** ve **Kiracı kimliği** de dahil olmak üzere bir uygulama kaydı gerektiren kod örneği kullanıyorsanız, bu makalede nasıl bir ayarlama yapılacağı gösterilir.
 

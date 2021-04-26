@@ -8,10 +8,10 @@ ms.subservice: purview-data-catalog
 ms.topic: how-to
 ms.date: 03/02/2021
 ms.openlocfilehash: 09fa10e7f7751321601c5c4871b2cf36ccf6f01f
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104720922"
 ---
 # <a name="use-private-endpoints-for-your-purview-account"></a>Purview hesabınız için özel uç noktaları kullanın

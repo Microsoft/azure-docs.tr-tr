@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: spunukol
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d12679e64d690614aaf788837a02af007448f83d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6774e172c4e8607bfadd95f947d650afa62a984f
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93393685"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550431"
 ---
 # <a name="how-to-manage-stale-devices-in-azure-ad"></a>Nasıl yapılır: Azure AD 'de eski cihazları yönetme
 
@@ -101,7 +101,7 @@ Azure AD'yi temizlemek için:
 - **Windows 7/8** -ŞIRKET içi ad 'nizin Windows 7/8 cihazlarını devre dışı bırakın veya silin. Windows 7/8 cihazlarını Azure AD'de devre dışı bırakmak veya silmek için Azure AD Connect kullanamazsınız. Bunun yerine, şirket içi kuruluşunuzda değişiklik yaptığınızda, Azure AD 'de devre dışı bırakmanız/silmeniz gerekir.
 
 > [!NOTE]
->* Şirket içi AD 'de veya Azure AD 'de cihazları silmek, istemcide kaydı kaldırmaz. Yalnızca bir kimlik olarak cihaz kullanan kaynaklara erişimi engeller (örn. koşullu erişim). [İstemcide kayıt kaldırma](faq.md#hybrid-azure-ad-join-faq)hakkında daha fazla bilgi edinin.
+>* Şirket içi AD 'de veya Azure AD 'de cihazları silmek, istemcide kaydı kaldırmaz. Yalnızca bir kimlik olarak cihaz kullanan kaynaklara erişimi engeller (örn. koşullu erişim). [İstemcide kayıt kaldırma](faq.yml)hakkında daha fazla bilgi edinin.
 >* Bir Windows 10 cihazını yalnızca Azure AD 'de silmek, Azure AD Connect 'i kullanarak cihazı şirket içi cihazınızdan yeniden eşitler, ancak "bekliyor" durumunda yeni bir nesne olarak yeniden eşitlenir. Cihazda yeniden kayıt gereklidir.
 >* Windows 10/Server 2016 cihazları için eşitleme kapsamından cihaz kaldırma, Azure AD cihazını silecektir. Bunu eşitleme kapsamına geri eklemek, "bekleyen" durumuna yeni bir nesne yerleştirir. Cihazın yeniden kaydı gereklidir.
 >* Windows 10 cihazlarının eşitlenmesi için Azure AD Connect kullanmıyorsanız (örn. yalnızca kayıt için AD FS kullanıyorsanız), Windows 7/8 cihazlarına benzer yaşam döngüsünü yönetmeniz gerekir.
@@ -113,7 +113,7 @@ Azure AD'ye katılmış cihazları Azure AD'de devre dışı bırakın veya sili
 
 > [!NOTE]
 >* Bir Azure AD cihazının silinmesi, istemcide kaydı kaldırmaz. Yalnızca bir kimlik olarak cihaz kullanan kaynaklara erişimi engeller (örn. koşullu erişim). 
->* [Azure AD 'ye nasıl katılalacağı](faq.md#azure-ad-join-faq) hakkında daha fazla bilgi edinin 
+>* [Azure AD 'ye nasıl katılalacağı](faq.yml) hakkında daha fazla bilgi edinin 
 
 ### <a name="azure-ad-registered-devices"></a>Azure AD kayıtlı cihazlar
 
@@ -121,7 +121,7 @@ Azure AD'ye kayıtlı cihazları Azure AD'de devre dışı bırakın veya silin.
 
 > [!NOTE]
 >* Azure AD 'de kayıtlı bir cihazın Azure AD 'de silinmesi, istemcide kaydı kaldırmaz. Yalnızca bir kimlik olarak cihaz kullanan kaynaklara erişimi engeller (örn. koşullu erişim).
->* [İstemcide kayıt kaldırma](faq.md#azure-ad-register-faq) hakkında daha fazla bilgi edinin
+>* [İstemcide kayıt kaldırma](faq.yml) hakkında daha fazla bilgi edinin
 
 ## <a name="clean-up-stale-devices-in-the-azure-portal"></a>Eski cihazları Azure portalda temizleme  
 

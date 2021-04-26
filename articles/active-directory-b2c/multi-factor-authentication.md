@@ -12,12 +12,12 @@ ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: b7b7f1c5fb0a7991707a26b4a7f54fb3ffaf7bab
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: eff33a8670ee8eb9ee32655956ee0e913ddaa4c1
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102033529"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258155"
 ---
 # <a name="enable-multi-factor-authentication-in-azure-active-directory-b2c"></a>Azure Active Directory B2C'de çok faktörlü kimlik doğrulamasını etkinleştirme
 
@@ -56,6 +56,6 @@ Multi-Factor Authentication adımı gerçekleşmeden önce kiracınızda bir mü
 
 ::: zone pivot="b2c-custom-policy"
 
-Özel ilke başlangıç paketlerini GitHub 'dan almak Multi-Factor Authentication etkinleştirmek için, **SocialAndLocalAccountsWithMFA** Starter paketindeki XML dosyalarını Azure AD B2C kiracı adınızla güncelleştirin. **SocialAndLocalAccountsWithMFA** , sosyal, yerel ve Multi-Factor Authentication seçeneklerini sunar. Daha fazla bilgi için, bkz. [Active Directory B2C özel ilkelerle çalışmaya başlama](custom-policy-get-started.md). 
+Özel ilke başlangıç paketlerini GitHub 'dan almak Multi-Factor Authentication etkinleştirmek için, **SocialAndLocalAccountsWithMFA** Starter paketindeki XML dosyalarını Azure AD B2C kiracı adınızla güncelleştirin. **SocialAndLocalAccountsWithMFA** , sosyal, yerel ve Multi-Factor Authentication seçeneklerini sunar. Daha fazla bilgi için, bkz. [Active Directory B2C özel ilkelerle çalışmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy). 
 
 ::: zone-end

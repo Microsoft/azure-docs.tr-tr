@@ -1,18 +1,18 @@
 ---
 title: Azure Key Vault kimlik doğrulaması temelleri
 description: Anahtar kasasının kimlik doğrulama modelinin nasıl çalıştığı hakkında bilgi edinin
-author: ShaneBala-keyvault
-ms.author: sudbalas
-ms.date: 09/25/2020
+author: msmbaldwin
+ms.author: mbaldwin
+ms.date: 04/15/2021
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
-ms.openlocfilehash: 25f00024fb7371fd08bf6c4ceec3177cfaca029b
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: f0cd2fb341dd790a7628cc3cf6a5bdd87d7c3687
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103572817"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107753425"
 ---
 # <a name="key-vault-authentication-fundamentals"></a>Key Vault Kimlik Doğrulamasının temelleri
 
@@ -104,7 +104,7 @@ Ancak, klasik erişim ilkeleri nesne düzeyindeki izinler için izin vermez ve a
 > [!IMPORTANT]
 > Klasik Anahtar Kasası erişim ilkeleri ve Azure Active Directory rol atamaları birbirinden bağımsızdır. Güvenlik sorumlusu atama bir abonelik düzeyindeki ' katılımcı ' rolü otomatik olarak güvenlik sorumlusuna, abonelik kapsamındaki her anahtar kasasında veri düzlemi işlemleri gerçekleştirme imkanı vermez. Güvenlik sorumlusunun yine de verilmesi gerekir veya veri düzlemi işlemlerini gerçekleştirmek için kendilerine erişim ilkesi izinleri vermelidir.
 
-### <a name="data-plane-access-option-2--azure-rbac-for-key-vault-preview"></a>Veri düzlemi erişim seçeneği 2: Key Vault için Azure RBAC (Önizleme)
+### <a name="data-plane-access-option-2--azure-rbac-for-key-vault"></a>Veri düzlemi erişim seçeneği 2: Key Vault için Azure RBAC
 
 Anahtar Kasası veri düzlemine erişim vermek için yeni bir yol, Anahtar Kasası için Azure rol tabanlı erişim denetimi (Azure RBAC) kullanmaktır.
 
@@ -119,7 +119,7 @@ Key Vault rol atamaları, anahtarlara, sırları ve sertifikalara erişmek için
 
 Key Vault için Azure RBAC hakkında daha fazla bilgi için aşağıdaki belgelere bakın:
 
-* Key Vault için Azure RBAC [bağlantısı](./secure-your-key-vault.md#management-plane-and-azure-rbac)
+* Key Vault için Azure RBAC [bağlantısı](rbac-guide.md)
 * Key Vault rolleri için Azure RBAC [bağlantısı](../../role-based-access-control/built-in-roles.md#key-vault-administrator)
 
 ## <a name="configure-key-vault-firewall"></a>Key Vault güvenlik duvarını yapılandırma

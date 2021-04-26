@@ -5,10 +5,10 @@ ms.topic: article
 ms.date: 11/19/2020
 ms.reviewer: mikarmar
 ms.openlocfilehash: b77e0613f502d003b5e4651e34be4cadbd4209a9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96603365"
 ---
 # <a name="configure-your-app-service-or-azure-functions-app-to-sign-in-using-a-sign-in-with-apple-provider-preview"></a>App Service veya Azure Işlevleri uygulamanızı, Apple sağlayıcısıyla oturum açma kullanarak oturum açmak için yapılandırma (Önizleme)

@@ -4,10 +4,10 @@ description: Bu makalede, IoT Edge üzerindeki canlı video analizlerinde izleme
 ms.topic: reference
 ms.date: 04/27/2020
 ms.openlocfilehash: 08b2f5cce80581d71ce73e97ab30900aa8957c77
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105564492"
 ---
 # <a name="monitoring-and-logging"></a>İzleme ve günlüğe kaydetme

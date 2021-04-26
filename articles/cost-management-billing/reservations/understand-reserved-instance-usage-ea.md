@@ -7,14 +7,14 @@ tags: billing
 ms.service: cost-management-billing
 ms.subservice: reservations
 ms.topic: conceptual
-ms.date: 01/19/2020
+ms.date: 04/20/2021
 ms.author: banders
-ms.openlocfilehash: 0c69e9533130d6ca70c57422c7cdd5fc75adff72
-ms.sourcegitcommit: b39cf769ce8e2eb7ea74cfdac6759a17a048b331
+ms.openlocfilehash: edc1a80687f768723a3a218ecaa1f6459cd484ed
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98683726"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107763568"
 ---
 # <a name="get-enterprise-agreement-and-microsoft-customer-agreement-reservation-costs-and-usage"></a>Kurumsal Anlaşma ve Microsoft müşteri anlaşması rezervasyon maliyetlerini ve kullanımını alın
 
@@ -95,7 +95,6 @@ Azure portalında [Maliyet yönetimi + faturalama](https://portal.azure.com/#bla
 ![Azure portalında CSV kullanım verileri dosyasının nereden indirileceğini gösteren örnek](./media/understand-reserved-instance-usage-ea/portal-download-csv.png)
 4. **Kullanımı + Ücretleri İndir**'deki **Kullanım Ayrıntıları Sürüm 2**'nin altında **Tüm Ücretler (kullanım ve satın almalar)** öğesini seçin ve indir düğmesine tıklayın. **Amorti edilmiş ücretler (kullanım ve satın almalar)** için işlemi yineleyin.
 
-İndirdiğiniz CSV dosyaları gerçek maliyetleri ve amorti edilmiş maliyetleri içerir.
 
 ## <a name="common-cost-and-usage-tasks"></a>Ortak maliyet ve kullanım görevleri
 
@@ -158,8 +157,7 @@ Azure Ayrılmış Sanal Makine Örnekleri hakkında daha fazla bilgi edinmek iç
 
 - [Azure Ayrılmış Sanal Makine Örnekleri nedir?](save-compute-costs-reservations.md)
 - [Azure Ayrılmış VM Örnekleri ile Sanal Makinelere ön ödeme yapma](../../virtual-machines/prepay-reserved-vm-instances.md)
-- [Azure SQL Veritabanı ayrılmış kapasitesi ile SQL Veritabanı işlem kaynakları için ön ödeme yapma](../../azure-sql/database/reserved-capacity-overview.md)
-- [Azure Ayırmalarını yönetme](manage-reserved-vm-instance.md)
 - [Rezervasyon indiriminin nasıl uygulandığını anlama](../manage/understand-vm-reservation-charges.md)
-- [Kullandıkça Öde aboneliğiniz için rezervasyon kullanımını anlama](understand-reserved-instance-usage.md)
 - [Rezervasyonlara dahil olmayan Windows yazılımı maliyetleri](reserved-instance-windows-software-costs.md)
+- [Maliyet verileri almak için hizmet sorumlusu kullanın](../manage/assign-roles-azure-service-principals.md)
+- [Maliyet yönetimi dışarı aktarmaları kullanma](../costs/tutorial-export-acm-data.md)

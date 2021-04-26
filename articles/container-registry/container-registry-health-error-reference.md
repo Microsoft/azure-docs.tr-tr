@@ -3,12 +3,12 @@ title: Kayıt defteri sistem durumu denetimleri için hata başvurusu
 description: Azure Container Registry ' de az ACR Check-Health Diagnostic komutu çalıştırılarak bulunan sorunlara yönelik olası çözümler ve hata kodları
 ms.topic: article
 ms.date: 01/25/2021
-ms.openlocfilehash: 05ae5a7ac19bb7748d5313ccb4974b639ab52d9c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f9716c29093ae58518bc86ec06af40522d49047c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99061877"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773450"
 ---
 # <a name="health-check-error-reference"></a>Sistem durumu denetimi hata başvurusu
 
@@ -121,4 +121,4 @@ Sık sorulan sorular ve Azure Container Registry ilgili diğer bilinen sorunlar 
 
 
 <!-- LINKS - internal -->
-[az-acr-check-health]: /cli/azure/acr#az-acr-check-health
+[az-acr-check-health]: /cli/azure/acr#az_acr_check_health

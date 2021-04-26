@@ -3,12 +3,12 @@ title: Güvenilen Azure hizmetini kullanarak ağa kısıtlanmış kayıt defteri
 description: Bir güvenilir Azure hizmeti örneğini, görüntü çekmek veya göndermek için ağ kısıtlamalı bir kapsayıcı kayıt defterine güvenli bir şekilde erişmek üzere etkinleştirin
 ms.topic: article
 ms.date: 01/29/2021
-ms.openlocfilehash: 2e6b6ee3736f98f53ebb0aa43d707d42ba4cc058
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4b0d7feb223bcfcec4e8b2c786b211f4e3c3c3eb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101716491"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785879"
 ---
 # <a name="allow-trusted-services-to-securely-access-a-network-restricted-container-registry-preview"></a>Güvenilen hizmetlerin ağ kısıtlamalı bir kapsayıcı kayıt defterine güvenli bir şekilde erişmesine izin ver (Önizleme)
 
@@ -49,7 +49,7 @@ Kayıt defterinin **Güvenilen hizmetlere izin ver** ayarı etkinse, aşağıdak
 
 ## <a name="allow-trusted-services---cli"></a>Güvenilen hizmetlere izin ver-CLı
 
-Varsayılan olarak, güvenilen hizmetlere izin ver ayarı yeni bir Azure Container Registry 'de etkin olur. [Az ACR Update](/cli/azure/acr#az-acr-update) komutunu çalıştırarak ayarı devre dışı bırakın veya etkinleştirin.
+Varsayılan olarak, güvenilen hizmetlere izin ver ayarı yeni bir Azure Container Registry 'de etkin olur. [Az ACR Update](/cli/azure/acr#az_acr_update) komutunu çalıştırarak ayarı devre dışı bırakın veya etkinleştirin.
 
 Devre dışı bırakmak için:
 

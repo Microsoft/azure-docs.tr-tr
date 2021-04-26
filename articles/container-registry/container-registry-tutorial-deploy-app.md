@@ -5,10 +5,10 @@ ms.topic: tutorial
 ms.date: 08/20/2018
 ms.custom: seodec18, mvc
 ms.openlocfilehash: 7a203bfc9b1317bc258e4a93ae4ac03ecbdc7a15
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92148426"
 ---
 # <a name="tutorial-deploy-a-web-app-from-a-geo-replicated-azure-container-registry"></a>Öğretici: coğrafi olarak çoğaltılan bir Azure Container Registry 'den Web uygulaması dağıtma
@@ -66,7 +66,7 @@ Dağıtım tamamlandığında, çalıştırılan uygulamanın URL’sine tarayı
 
 Portalda **Uygulama Hizmetleri** seçeneğini belirleyin ve önceki adımda sağladığınız web uygulamasını seçin. Bu örnekte, web uygulaması *uniqueregistryname-westus* olarak adlandırılmıştır.
 
-Tarayıcınızda çalışan uygulamayı görüntülemek için **App Service** genel bakış ' ın sağ üst kısmında Web uygulamasının köprülü URL 'sini seçin.
+Çalıştırılan uygulamayı tarayıcınızda görüntülemek için, **App Service** genel bakışının sağ üst kısmında web uygulamasının köprülü URL’sini seçin.
 
 ![Ekran görüntüsünde Web uygulaması URL 'sinin vurgulandığı App Service genel bakış gösterilmektedir.][deploy-app-portal-04]
 
@@ -96,7 +96,7 @@ Daha önce olduğu gibi, çalıştırılan uygulamanın URL’sine tarayıcını
 
 Portalda **Uygulama Hizmetleri** seçeneğini belirleyin ve önceki adımda sağladığınız web uygulamasını seçin. Bu örnekte, web uygulaması *uniqueregistryname-eastus* olarak adlandırılmıştır.
 
-Tarayıcınızda çalışan uygulamayı görüntülemek için **App Service genel bakış** ' ın sağ üst kısmında Web uygulamasının köprülü URL 'sini seçin.
+Çalıştırılan uygulamayı tarayıcınızda görüntülemek için, **App Service** genel bakışının sağ üst kısmında web uygulamasının köprülü URL’sini seçin.
 
 ![Azure portalında Linux yapılandırmasındaki web uygulaması][deploy-app-portal-07]
 

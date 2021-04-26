@@ -8,6 +8,8 @@
       href: core/overview-iot-central-tour.md
     - name: Son güncelleştirmeler
       items:
+        - name: Mart 2021 yeni ve güncelleştirilmiş özellikler
+          href: 'https://azure.microsoft.com/updates/azure-iot-central-new-and-updated-features-march-2021/'
         - name: Şubat 2021 yeni ve güncelleştirilmiş özellikleri
           href: 'https://azure.microsoft.com/updates/azure-iot-central-new-and-updated-features-february-2021/'
         - name: Ocak 2021 yeni ve güncelleştirilmiş özellikler
@@ -215,8 +217,6 @@
           href: core/howto-connect-ruuvi.md
         - name: Rigado Cascade 500'ü hazırlama ve bağlama
           href: core/howto-connect-rigado-cascade-500.md
-        - name: Diğer IoT bulutlarına bağlanma
-          href: core/howto-build-iotc-device-bridge.md
     - name: Tümleşik çözümler oluşturun
       items:
         - name: Panonuza kutucuklar ekleme
@@ -233,6 +233,8 @@
           href: core/howto-export-data.md
         - name: Verileri bulut hedeflerine dışarı aktarma (eski)
           href: core/howto-export-data-legacy.md
+        - name: Verileri dönüştürme
+          href: core/howto-transform-data.md
         - name: Diğer hizmetlerle tümleştirmek için iş akışlarını kullanma
           href: core/howto-configure-rules-advanced.md
         - name: Özel kurallar oluşturma
@@ -241,6 +243,8 @@
           href: core/howto-create-custom-analytics.md
         - name: Power BI’da verilerinizi görselleştirme
           href: core/howto-connect-powerbi.md
+        - name: Diğer IoT bulutlarına bağlanma
+          href: core/howto-build-iotc-device-bridge.md
         - name: Dynamics 365 alan Hizmetleri ile uygulamanızı bağlama
           href: government/how-to-configure-connected-field-services.md
     - name: Cihazlarınızı yönetme
@@ -299,7 +303,7 @@
       href: core/howto-faq.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
+    - name: Azure CLI
       href: /cli/azure/azure-cli-reference-for-IoT
     - name: IoT Central API başvurusu
       href: /rest/api/iotcentral/

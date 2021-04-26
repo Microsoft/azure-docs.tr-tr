@@ -11,14 +11,14 @@ ms.devlang: NA
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/26/2021
+ms.date: 04/14/2021
 ms.author: aldomel
-ms.openlocfilehash: c8d188c7bb7034cda450049c3d4912cc1517dae5
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 232b83fef2da312828f4f9f332ab2505e3a68100
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645272"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107503652"
 ---
 # <a name="virtual-network-traffic-routing"></a>Sanal ağ trafiğini yönlendirme
 
@@ -111,10 +111,10 @@ Açık bir IP öneki ve bir hizmet etiketi olan bir rota arasında tam bir ön e
    3. Azurecyüksek bölgesel etiketleri (örn. Azurecyüksek. canadamerkezi, Azurecyüksek. eastasıya)
    4. Azurecyüksek etiketi </br></br>
 
-Bu özelliği kullanmak için rota tablosu komutlarında adres öneki parametresi için bir hizmet etiketi adı belirtin. Örneğin, PowerShell 'de, kullanarak bir Azure depolama IP ön ekine gönderilen trafiği bir sanal gerece yönlendirmek için yeni bir yol oluşturabilirsiniz: </br>
+Bu özelliği kullanmak için rota tablosu komutlarında adres öneki parametresi için bir hizmet etiketi adı belirtin. Örneğin, PowerShell 'de, kullanarak bir Azure depolama IP ön ekine gönderilen trafiği bir sanal gerece yönlendirmek için yeni bir yol oluşturabilirsiniz: </br></br>
 
 ```azurepowershell-interactive
-New-AzRouteConfig -Name "StorageRoute" -AddressPrefix “Storage” -NextHopType "VirtualAppliance" -NextHopIpAddress "10.0.100.4"
+New-AzRouteConfig -Name "StorageRoute" -AddressPrefix "Storage" -NextHopType "VirtualAppliance" -NextHopIpAddress "10.0.100.4"
 ```
 
 CLı için aynı komut şu şekilde olacaktır: </br>
@@ -123,6 +123,10 @@ CLı için aynı komut şu şekilde olacaktır: </br>
 az network route-table route create -g MyResourceGroup --route-table-name MyRouteTable -n StorageRoute --address-prefix Storage --next-hop-type VirtualAppliance --next-hop-ip-address 10.0.100.4
 ```
 </br>
+
+#### <a name="known-issues-april-2021"></a>Bilinen sorunlar (2021 Nisan)
+
+BGP yolları mevcut olduğunda veya alt ağınızda bir hizmet uç noktası yapılandırıldığında, rotalar doğru önceliğe göre değerlendirilemeyebilir. Şu anda bu senaryolara yönelik bir çözüm devam ediyor </br>
 
 
 > [!NOTE] 

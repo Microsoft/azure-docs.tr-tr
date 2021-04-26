@@ -15,12 +15,12 @@ ms.topic: article
 ms.date: 3/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 357fe1844fabf6ec241d509651b4f0cbcffa3df3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fa7bc6b979869a06ba7441ae33a47f82aea0704c
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103009139"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106063976"
 ---
 # <a name="using-azure-media-packager-to-accomplish-static-packaging-tasks"></a>Statik paketleme görevlerini gerçekleştirmek için Azure Medya Paketleyiciyi kullanma  
 
@@ -715,7 +715,7 @@ Ayrıca MediaPackager_MP4ToSmooth.xml ve MediaEncryptor_PlayReadyProtection.xml 
 ```
 
 ## <a name="using-static-encryption-to-protect-hlsv3-with-aes-128"></a>HLSv3 'i AES ile korumak için statik şifrelemeyi kullanma-128
-HLS 'yi AES-128 ile şifrelemek istiyorsanız dinamik şifrelemeyi (önerilen seçenek) veya statik şifrelemeyi (Bu bölümde gösterildiği gibi) kullanma seçeneğiniz vardır. Dinamik şifrelemeyi kullanmaya karar verirseniz bkz. [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-protect-with-aes128.md).
+HLS 'yi AES-128 ile şifrelemek istiyorsanız dinamik şifrelemeyi (önerilen seçenek) veya statik şifrelemeyi (Bu bölümde gösterildiği gibi) kullanma seçeneğiniz vardır. Dinamik şifrelemeyi kullanmaya karar verirseniz bkz. [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-playready-license-template-overview.md).
 
 > [!NOTE]
 > İçeriğinizi HLS 'ye dönüştürmek için öncelikle içeriğinizi dönüştürmeniz/kodlamanız gerekir Kesintisiz Akış.

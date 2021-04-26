@@ -3,25 +3,25 @@ title: Azure 'a bir bulut hizmeti (klasik) dağıtımı sırasında Overconstrai
 description: Bu makalede, Azure 'a bir bulut hizmeti (klasik) dağıtımında bir OverconstrainedAllocationRequest özel durumunun nasıl çözümleneceği gösterilmektedir.
 services: cloud-services
 documentationcenter: ''
-author: mibufo
-ms.author: v-mibufo
+author: mamccrea
+ms.author: mamccrea
 ms.service: cloud-services
 ms.topic: troubleshooting
 ms.date: 02/22/2021
-ms.openlocfilehash: 1b50ded166b3f62b38830b4c2d18da7c4c4f0d35
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1a5880107aaa414da42fe5e36e0cb3315071d8a0
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101746644"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877435"
 ---
 # <a name="troubleshoot-overconstrainedallocationrequest-when-deploying-cloud-services-classic-to-azure"></a>Azure 'da Cloud Services (klasik) dağıtımı sırasında OverconstrainedAllocationRequest sorunlarını giderme
 
 Bu makalede, Azure Cloud Services (klasik) dağıtımını önleyen kısıtlı ayırma hatalarıyla ilgili olarak sorun giderirsiniz.
 
-Bir bulut hizmetine örnekler dağıtırken veya yeni Web ya da çalışan rolü örnekleri eklediğinizde Microsoft Azure işlem kaynaklarını ayırır.
+Bulut Hizmetine örnekleri dağıtırken veya yeni web veya çalışan rolü örnekleri eklerken Microsoft Azure işlem kaynaklarını ayırır.
 
-Azure abonelik sınırına ulaşmadan bile bu işlemler sırasında zaman zaman bir hata alabilirsiniz.
+Azure abonelik sınırına ulaşmadan önce bile bu işlemler sırasında bazen hatalar alabilirsiniz.
 
 > [!TIP]
 > Ayrıca, hizmetlerinizin dağıtımını planlarken bilgiler de yararlı olabilir.

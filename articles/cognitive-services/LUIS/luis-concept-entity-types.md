@@ -4,163 +4,165 @@ description: Bir varlık, tahmin çalışma zamanında bir Kullanıcı noktasın
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 08/06/2020
-ms.openlocfilehash: 398d18642052726af4d4920443bad515ec0b5bef
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/13/2021
+ms.openlocfilehash: 44cffecd653ec2ec748e73d01dc86a87cfcd7de9
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "91316571"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107500337"
 ---
-# <a name="extract-data-with-entities"></a>Varlıkları olan verileri ayıklama
+# <a name="entities-in-luis"></a>LUSıS içindeki varlıklar
 
-Bir varlık, tahmin çalışma zamanında bir Kullanıcı noktasından verileri ayıklar. _İsteğe bağlı_, ikincil amaç, varlığı bir özellik olarak kullanarak amaç veya diğer varlıkların tahminini de artırır.
-
-Birçok varlık türü vardır:
-
-* [makine öğrenimi varlığı](reference-entity-machine-learned-entity.md) -bu birincil varlıktır. Diğer varlıkları kullanmadan önce şemanızı bu varlık türüyle tasarlamanız gerekir.
-* Makine öğrenimi olmayan, gerekli bir [özellik](luis-concept-feature.md) olarak kullanılan-tam metin eşleşmeleri, model eşleşmeleri veya önceden oluşturulmuş varlıklar tarafından algılama için
-* Bir [düzendeki](reference-entity-pattern-any.md) kitap başlıkları gibi serbest biçimli metinleri ayıklamak için [.](#patternany-entity)
-
-makine öğrenimi varlıkları, en geniş veri ayıklama seçeneklerini sağlar. Makine öğrenimi olmayan varlıklar, metin eşleştirme ile çalışır ve makine öğrenimi varlığı veya amacı için [gerekli bir özellik](#design-entities-for-decomposition) olarak kullanılır.
-
-## <a name="entities-represent-data"></a>Varlıklar verileri temsil eder
-
-Varlıklar, adlar, tarihler, ürün adları veya herhangi bir önemli sözcük grubu gibi, utterklerden çekmek istediğiniz verilerden oluşur. Bir söylenişi birçok varlık içerebilir veya hiç yok. İstemci uygulaması, görevini gerçekleştirmek için verilere gereksinim duyuyor _olabilir_ .
-
-Varlıkların, bir modeldeki her amaç için tüm eğitimlere sürekli olarak etiketlenmesi gerekir.
-
- [DatetimeV2](luis-reference-prebuilt-datetimev2.md), [Ordinal](luis-reference-prebuilt-ordinal.md), [e-posta](luis-reference-prebuilt-email.md)ve [telefon numarası](luis-reference-prebuilt-phonenumber.md)gibi yaygın kavramlara zaman kazanmak için kendi varlıklarınızı tanımlayabilir veya önceden oluşturulmuş varlıkları kullanabilirsiniz.
-
-|İfade|Varlık|Veriler|
-|--|--|--|
-|New York 'a 3 bilet satın alın|Önceden oluşturulmuş sayı<br>Hedef|3<br>New Yok|
-
-
-### <a name="entities-are-optional-but-recommended"></a>Varlıklar isteğe bağlıdır ancak önerilir
-
-[Amaçlar](luis-concept-intent.md) gerekir, varlıklar isteğe bağlıdır. Uygulamanızdaki her kavram için varlık oluşturmanız gerekmez, ancak yalnızca istemci uygulamanın verileri ihtiyacı olan veya varlığın başka bir varlığa veya amaca bir ipucu veya sinyal görevi gördüğü durumlar için.
-
-Uygulamanız geliştirdiğinden ve veriler için yeni bir gereksinim belirlendiğinde, daha sonra LUO modelinize uygun varlıkları ekleyebilirsiniz.
-
-<a name="entity-compared-to-intent"></a>
-
-## <a name="entity-represents-data-extraction"></a>Varlık, veri ayıklamayı temsil eder
-
-Varlık _, söylenişi içindeki_ bir veri kavramını temsil eder. Amaç, _Tüm söyliği_ sınıflandırır.
-
-Aşağıdaki dört kuralı göz önünde bulundurun:
+Bir varlık, kullanıcının amacına uygun bir öğedir. Varlıklar, söyleyden ayıklanabilen verileri tanımlar ve kullanıcının gerekli eylemini tamamlaması için gereklidir. Örnek:
 
 |İfade|Amaç tahmin edildi|Ayıklanan varlıklar|Açıklama|
 |--|--|--|--|
-|Help|Yardım|-|Ayıklanacak bir şey yok.|
-|Bir şey gönder|Sendbir şey|-|Ayıklanacak bir şey yok. Modelin bu bağlamda Ayıklanacak gerekli bir özelliği yok `something` ve belirtilen alıcı yok.|
-|Emre 'yi mevcut gönder|Sendbir şey|`Bob`, `present`|Model, `Bob` önceden oluşturulmuş varlığın gerekli bir özelliğini ekleyerek ayıklar `personName` . Ayıklamak için bir makine öğrenimi varlığı kullanılmıştır `present` .|
-|Emre 'nin bir çikolata kutusunu Gönder|Sendbir şey|`Bob`, `box of chocolates`|İki önemli veri parçası `Bob` ve, `box of chocolates` makine öğrenimi varlıkları tarafından ayıklanır.|
+|Merhaba nasılsın?|Karşılama|-|Ayıklanacak bir şey yok.|
+|Küçük bir pizza sıralamak istiyorum|orderPizza| küçük | "Size" varlığı "küçük" olarak ayıklanır.|
+|Yatak odası ışığını kapat|Kapatma| "yatak odası" | "Oda" varlığı "yatak odası" olarak ayıklanır.|
+|4406 ile biten tasarruf hesabındaki dengeyi denetle|Çek bakiyesi| "tasarruf", "4406" | "accountType" varlığı "tasarruf" olarak ayıklanır ve "accountNumber" varlığı "4406" olarak ayıklanır.|
+|New York 'a 3 bilet satın alın|buyTickets| "3", "New York" | "Bilet Scount" varlığı "3" olarak ayıklanır ve "hedef" varlığı "New York" olarak ayıklanır.|
 
-## <a name="label-entities-in-all-intents"></a>Tüm amaçlar için varlıkları etiketleme
+Varlıklar isteğe bağlıdır, ancak önerilir. Uygulamanızdaki her kavram için varlık oluşturmanız gerekmez, yalnızca şu durumlar için:
 
-Varlıklar, tahmin edilen amacına bakılmaksızın verileri ayıklar. Tüm amaçlar için _Tüm_ örnek dıklarınızı etiketlediğinizden emin olun. `None`Diğer amaçlar için çok daha fazla eğitim elde olsa bile, amaç eksik olan Varlık etiketleme karışıklığına neden olur.
+* İstemci uygulaması için veri gerekiyor veya 
+* Varlık, başka bir varlık veya amaç için bir ipucu veya sinyal görevi görür. Özellikler olarak varlıklar hakkında daha fazla bilgi edinmek için [varlıklara özellikler olarak](#entities-as-features)gidin.
 
-## <a name="design-entities-for-decomposition"></a>Ayrıştırma için varlıkları tasarlama
+## <a name="entity-types"></a>Varlık türleri
 
-makine öğrenimi varlıkları, büyük bir kavramı alt varlıklara bölmek için ayrıştırma için uygulama şemanızı tasarlamanızı sağlar.
+Bir varlık oluşturmak için, buna bir ad ve bir tür vermeniz gerekir. LUSıS 'de birçok varlık türü vardır. 
 
-Ayrıştırma için tasarlamak, LUSıS 'nin istemci uygulamanıza derin bir varlık çözümlemesi döndürmesini sağlar. Bu, istemci uygulamanızın iş kurallarına odaklanılmasını ve veri çözünürlüğünü LUO 'ya bırakmasını sağlar.
+### <a name="list-entity"></a>Varlık listeleme
 
-Makine öğrenimi bir varlık, örnek Aralık aracılığıyla öğrenilen içeriğe göre tetikler.
+Liste varlığı, sabit ve kapalı bir ilgili sözcük kümesini eş anlamlılarıyla birlikte temsil eder. Birden çok eş anlamlı veya çeşitlemeyi tanımak ve bunlara yönelik normalleştirilmiş bir çıktıyı ayıklamak için liste varlıklarını kullanabilirsiniz. Geçerli listeye göre yeni kelimelerin önerilerini görmek için *öner* seçeneğini kullanın. 
 
-[**makine öğrenimi varlıkları**](tutorial-machine-learned-entity.md) en üst düzey ayıklayıcıları. Alt varlıklar, makine öğrenimi varlıklarının alt varlıklarıdır.
+Bir liste varlığı makine öğrenilmez, yani LUSıS 'in liste varlıkları için ek değerler bulamayacağını belirtir. LUO, yanıtta bir varlık olarak herhangi bir listedeki öğeyle eşleşen herhangi bir eşleşmeyi işaretler.
 
-## <a name="effective-machine-learned-entities"></a>Etkin makine öğrenilen varlıkları
+Liste varlıklarındaki eşleştirme, büyük/küçük harfe duyarlıdır ve ayıklanmak üzere tam eşleşme olması gerekmez. Liste varlığı eşleştirilirken normalleştirilmiş değerler de kullanılır. Örnek:
 
-Makine tarafından öğrenilen varlıkları etkin bir şekilde derlemek için:
-
-* Etiketlemenin amaç genelinde tutarlı olması gerekir. Bu, bu varlığı içeren **hiçbir** amaç içinde sağladığınız diğer nedenler dahil değildir. Aksi takdirde model sıraları etkin bir şekilde belirleyemeyecektir.
-* Alt varlıklar içeren bir makine öğrenmiş varlığınız varsa, varlığın ve alt varlıkların farklı siparişlerinin ve varyantlarındaki etiketlenmiş söyleyde sunulduğundan emin olun. Etiketlenmiş örnek, tüm geçerli formları içermeli ve görüntülenen ve olmayan varlıkları ve ayrıca utterance içinde de yeniden sipariş etmelidir.
-* Varlıkların çok sabit bir küme üzerine kaçmasını önleyin. Model iyi genelleştirilmeyen ve makine öğrenimi modellerinde yaygın bir sorun olduğunda **aşırı yerleştirme** oluşur. Bu, uygulamanın yeni verilerde yeterince çalışmayacak olması anlamına gelir. Bu durumda, uygulamanın sağladığınız sınırlı örneklerden daha fazla genelleştirebilmesi için etiketlenmiş örnek çeşitlerini de beklemelisiniz. Farklı alt varlıkların yalnızca gösterilen örnekler yerine daha fazla kavram düşünmesine yetecek şekilde değişiklik göstermesi gerekir.
-
-## <a name="effective-prebuilt-entities"></a>Geçerli önceden oluşturulmuş varlıklar
-
-[Önceden oluşturulmuş varlıklar](luis-reference-prebuilt-entities.md)tarafından sağlananlar gibi ortak verileri çıkaran etkili varlıklar oluşturmak için aşağıdaki işlemi öneririz.
-
-Kendi verilerinizi bir özellik olarak bir varlığa taşıyarak verilerin ayıklanmasını geliştirme. Bu şekilde, tüm ek Etiketler uygulamanızdaki kişi adlarının içeriğini öğrenmeyecektir.
-
-<a name="composite-entity"></a>
-<a name="list-entity"></a>
-<a name="patternany-entity"></a>
-<a name="prebuilt-entity"></a>
-<a name="regular-expression-entity"></a>
-<a name="simple-entity"></a>
-
-## <a name="types-of-entities"></a>Varlık türleri
-
-Üst öğe için bir alt varlık, makine öğrenimi varlığı olmalıdır. Alt varlık, bir [özellik](luis-concept-feature.md)olarak makine öğrenimi olmayan bir varlık kullanabilir.
-
-Verilerin ayıklanabilmesi ve ayıklandıktan sonra nasıl temsil edilebilmesi gerektiğine bağlı olarak varlığı seçin.
-
-|Varlık türü|Amaç|
+|Normalleştirilmiş değer|Eş Anlamlı Sözcükler|
 |--|--|
-|[**Makine tarafından öğrenilen**](tutorial-machine-learned-entity.md)|Etiketlenmiş örneklerden öğrenilen iç içe geçmiş karmaşık verileri ayıklayın. |
-|[**Liste**](reference-entity-list.md)|Öğelerin listesi ve **tam metin eşleşmesi** ile ayıklanan eş anlamlılar.|
-|[**Model. any**](#patternany-entity)|Varlık sonunu bulmanın zor olduğu varlık, varlığın serbest biçimli olduğundan belirlenir. Yalnızca [desenlerle](luis-concept-patterns.md)kullanılabilir.|
-|[**Önceden oluşturulmuş**](luis-reference-prebuilt-entities.md)|URL veya e-posta gibi belirli tür verileri ayıklamak zaten eğitildi. Bu önceden oluşturulmuş varlıkların bazıları açık kaynaklı [Tanıyıcılar-metin](https://github.com/Microsoft/Recognizers-Text) projesinde tanımlanmıştır. Belirli bir kültür veya varlığınız Şu anda desteklenmiyorsa, projeye katkıda bulunun.|
-|[**Normal ifade**](reference-entity-regular-expression.md)|**Tam metin eşleşmesi** için normal ifade kullanır.|
+|Küçük|SM, SML, küçük, en küçük|
+|Orta|MD, MDM, normal, ortalama, orta|
+|Büyük|LG, LRG, Big|
+
+Daha fazla bilgi için bkz. [varlık başvurusunu listeleme makalesi](reference-entity-list.md) .
+
+### <a name="regex-entity"></a>Regex varlığı
+
+Normal ifade varlığı, sağladığınız normal ifade düzenine göre bir varlığı ayıklar. Büyük/küçük harf durumunu yoksayar ve kültürel türevini yoksayar. Normal ifade, yapılandırılmış metin veya belirli bir biçimde beklenen, önceden tanımlanmış alfasayısal değerler dizisi için idealdir. Örnek:
+
+|Varlık|Normal ifade|Örnek|
+|--|--|--|
+|Uçuş numarası|Uçuş [A-Z] {2} [0-9]{4}| 1234 olarak uçuş|
+|Kredi Kartı Numarası|[0-9]{16}|5478789865437632|
+
+Daha fazla bilgi için [Regex Entities başvuru makalesine](reference-entity-regular-expression.md) bakın.
+
+### <a name="prebuilt-entity"></a>Önceden Oluşturulmuş Varlık
+
+LUO, ad, tarih, sayı ve para birimi gibi ortak veri türlerini tanınması için önceden oluşturulmuş varlıklar kümesi sunar.  Önceden oluşturulmuş varlıkların davranışı sabittir. Önceden oluşturulmuş varlık desteği, LUO uygulamasının kültürüne göre farklılık gösterir. Örnek:
+
+|Önceden oluşturulmuş varlık|Örnek değer|
+|--|--|
+|Kişi adı|James, Bill, Tom|
+|DatetimeV2|2019-05-02, 2 Mayıs, 10:00 2 Mayıs 'ta Mayıs 2019|
+
+Daha fazla bilgi için [önceden oluşturulmuş varlıklar başvuru makalesine](./luis-reference-prebuilt-entities.md) bakın.
+
+### <a name="patternany-entity"></a>Model. any varlığı
+
+Bir model. Herhangi bir varlık, varlığın nerede başladığını ve bittiğini işaretlemek için yalnızca bir desen şablonunda kullanılan değişken uzunluklu bir yer tutucudur. Bu, belirli bir kuralı veya kalıbı izler ve sabit bir sözlü yapıda cümleler için en iyi şekilde kullanılır. Örnek:
+
+|Örnek konuşma|Desen|Varlık|
+|--|--|--|
+|Zaten bir burger olabilir mi?|{Yemek} [Lütfen] [?] olabilir| Burger
+|Bir pizza sahip olabilir miyim?|{Yemek} [Lütfen] [?] olabilir| Pizza
+|Harika Gatsby 'yi nereden bulabilirim?|{BookName} nerede bulabilirim?| Harika Gatsby|
+
+Daha fazla bilgi için bkz [. herhangi bir varlık başvuru makalesi](./reference-entity-pattern-any.md) .
+
+### <a name="machine-learned-ml-entity"></a>Makine öğrenilmiş (ML) varlık
+
+Makine tarafından öğrenilen varlık, etiketlenmiş örneklere göre varlıkları ayıklamak için bağlamını kullanır. LUSıS uygulamaları oluşturmak için tercih edilen varlıktır. Makine öğrenimi algoritmalarını kullanır ve etiketlemeye, uygulamanıza başarıyla uyarlanmasını gerektirir. Her zaman iyi biçimlendirilmemiş ancak aynı anlamı olan verileri tanımlamak için bir ML varlığı kullanın. 
+
+|Örnek konuşma|Ayıklanan *ürün* varlığı|
+|--|--|
+|Bir kitap satın almak istiyorum.|Kitabın|
+|Bu şokaları şu şekilde alabilir miyim?|ayakkabılar|
+|Bu kısaltmayı sepetme ekleyin.|şortu|
+
+Makine tarafından öğrenilen varlıklar hakkında [buradan](./reference-entity-machine-learned-entity.md)daha fazla bilgi edinebilirsiniz.
+
+Daha fazla bilgi için [makine öğrenilen varlık başvurusu makalesine](./reference-entity-pattern-any.md) bakın.
+
+#### <a name="ml-entity-with-structure"></a>Yapıya sahip ML varlığı
+
+Bir ML varlığı, her birinin kendi özelliklerine sahip olabilen daha küçük bir alt varlıklardan oluşabilir. Örneğin, *Adres* aşağıdaki yapıya sahip olabilir:
+
+* Adres: 4567 Ana cadde, NY, 98052, USA
+    * Bina numarası: 4567
+    * Cadde adı: Ana cadde
+    * Durum: NY
+    * Posta kodu: 98052
+    * Ülke: ABD
 
 
-## <a name="extraction-versus-resolution"></a>Ayıklama ve çözünürlükten karşılaştırması
+### <a name="building-effective-ml-entities"></a>Etkili ML varlıkları oluşturma
 
-Veriler, utterde göründüğü sürece verileri ayıklar. Varlıklar verileri değiştirmez veya çözümleyemez. Metin varlık için geçerli bir değer ise varlık herhangi bir çözüm sağlamaz.
+Makine tarafından öğrenilen varlıkları etkin bir şekilde derlemek için aşağıdaki en iyi yöntemleri izleyin:
 
-Bloba çözülmesi gereken yollar vardır ancak bunun, uygulamanın çeşitliliğe ve hatalara karşı bir şekilde çıkarsanma yeteneğini sınırlayan farkında olmanız gerekir.
+* Alt varlıklar içeren bir makine öğrenmiş bir varlığınız varsa, varlığın ve alt varlıkların farklı siparişlerinin ve varyantlarını etiketlendirdikleri şekilde göründüğünden emin olun. Etiketlenmiş örnek, tüm geçerli formları içermeli ve görüntülenen ve olmayan varlıkları ve ayrıca utterance içinde de yeniden sipariş etmelidir.
 
-Liste varlıkları ve normal ifade (metin eşleştirme) varlıkları, bir alt varlığa [gereken özellikler](luis-concept-feature.md#required-features) olarak kullanılabilir ve ayıklanması için bir filtre işlevi görür. Uygulamanın tahmin yeteneğini tahmin etmek için bu dikkatle kullanmanız gerekir.
+* Varlıkları çok sabit bir küme ile fazla sığdırmayı önleyin. Model iyi genelleştirilmeyen ve makine öğrenimi modellerinde yaygın bir sorun olduğunda aşırı yerleştirme oluşur. Bu, uygulamanın yeni örnek türlerinde yeterli şekilde çalışmamayacağı anlamına gelir. Bu durumda, uygulamanın sağladığınız sınırlı örneklerden daha fazla Genelleştirme yapabilmesi için etiketlenmiş örnek çeşitlerini de beklemelisiniz.
 
-## <a name="extracting-contextually-related-data"></a>Bağlamsal olarak ile ilgili veriler ayıklanıyor
+* Etiketlemenin amaç genelinde tutarlı olması gerekir. Bu, bu varlığı içeren *hiçbir* amaç içinde sağladığınız diğer şartları da içerir. Aksi takdirde model sıraları etkin bir şekilde belirleyemeyecektir.
 
-Söylenişi, verilerin anlamı, söylenişi içindeki bağlamı temel alan bir varlığın iki veya daha fazla örneğini içerebilir. İki coğrafi konumu, kaynağı ve hedefi olan bir uçuş sağlayan bir örnek, bir örnektir.
+## <a name="entities-as-features"></a>Özellik olarak varlıklar
 
-`Book a flight from Seattle to Cairo`
+Varlıkların başka bir önemli işlevi, bunları başka amaçlar veya varlıklar için özellikler olarak veya ayırt etmek için kullanılır.
 
-İki konumun, Bilet satın almanın tamamlanabilmesi için her konumun türünü bilmesi için, istemci uygulamanın her bir konumun türünü bilmesi için ayıklanmaları gerekir.
+### <a name="entities-as-features-for-intents"></a>Amaçlar için özellik olarak varlıklar
 
-Kaynak ve hedefi ayıklamak için, Bilet siparişi makine öğrenimi varlığının bir parçası olarak iki alt varlık oluşturun. Alt varlıkların her biri için, geographyV2 kullanan gerekli bir özellik oluşturun.
+Varlıkları bir amaç için sinyal olarak kullanabilirsiniz. Örneğin, söylenişi 'teki belirli bir varlığın varlığı, hangi amacın altına düştüğünü ayırt edebilir.
 
-<a name="using-component-constraints-to-help-define-entity"></a>
-<a name="using-subentity-constraints-to-help-define-entity"></a>
+|Örnek konuşma|Varlık|Amaç|
+|--|--|--|
+|*New York 'a bir fimi* kitabı koyun.|Şehir|Kitap kolu|
+|*Ana konferans odasını* bana kitap.|Yı|Odayı ayır|
 
-### <a name="using-required-features-to-constrain-entities"></a>Varlıkları kısıtlamak için gerekli özellikleri kullanma
+### <a name="entities-as-feature-for-entities"></a>Varlıklar için özellik olarak varlıklar
 
-[Gerekli özellikler](luis-concept-feature.md) hakkında daha fazla bilgi edinin
+Varlıkları diğer varlıkların varlığına ait bir gösterge olarak da kullanabilirsiniz. Bunun yaygın bir örneği, başka bir ML varlığının özelliği olarak önceden oluşturulmuş bir varlık kullanmaktır.
+Bir uçuş yeri sistemi oluşturuyorsanız ve söyleyiniz "Cairo 'dan Istanbul 'a bir uçuş olarak kitap" gibi görünüyorsa, ML varlıkları olarak *kaynak şehri* ve *hedef şehriniz* olur. İyi bir uygulama, önceden oluşturulmuş `GeographyV2` varlığı her iki varlık için bir özellik olarak kullanmaktır.
 
-## <a name="patternany-entity"></a>Pattern.any varlığı
+Daha fazla bilgi için [GeographyV2 Entities başvuru makalesine](./luis-reference-prebuilt-geographyv2.md) bakın.
 
-Bir model. any yalnızca bir [düzende](luis-concept-patterns.md)mevcuttur.
+Varlıkları, diğer varlıklar için gereken özellikler olarak da kullanabilirsiniz. Bu, ayıklanan varlıkların çözümüne yardımcı olur. Örneğin, bir pizza sıralama uygulaması oluşturuyorsanız ve bir `Size` ml varlığınız varsa, `SizeList` liste varlığı oluşturabilir ve bunu varlık için gerekli bir özellik olarak kullanabilirsiniz `Size` . Uygulamanız, utterance 'ten ayıklanan varlık olarak normalleştirilmiş değeri döndürür. 
 
-<a name="if-you-need-more-than-the-maximum-number-of-entities"></a>
-## <a name="exceeding-app-limits-for-entities"></a>Varlıklar için uygulama sınırlarını aşma
+Daha fazla bilgi için bkz. [Özellikler](luis-concept-feature.md) ve önceden [oluşturulmuş varlıklar](./luis-reference-prebuilt-entities.md) , külünüzle sunulan önceden oluşturulmuş varlık çözümlemesi hakkında daha fazla bilgi edinin. 
 
-[Sınırdan](luis-limits.md#model-limits)daha fazlasına ihtiyacınız varsa desteğe başvurun. Bunu yapmak için sisteminizle ilgili ayrıntılı bilgiler toplayın, [Luo](luis-reference-regions.md#luis-website) Web sitesine gidin ve ardından **destek**' i seçin. Azure aboneliğiniz destek hizmetleri içeriyorsa, [Azure teknik desteği](https://azure.microsoft.com/support/options/)'ne başvurun.
 
 ## <a name="entity-prediction-status-and-errors"></a>Varlık tahmin durumu ve hataları
 
-Lua portalı, varlığın örnek bir değer için seçtiğiniz varlıktan farklı bir varlık tahmini ne zaman olduğunu gösterir. Bu farklı puan, geçerli eğitilen modele dayalıdır. 
+CSIS portalı, varlık için etiketlediğiniz varlıktan farklı bir varlık tahmine sahip olduğunda aşağıdaki gibi görünür. Bu farklı puan, geçerli eğitilen modele dayalıdır. 
 
-:::image type="content" source="./media/luis-concept-entities/portal-entity-prediction-error.png" alt-text="Lua portalı, varlığın örnek bir değer için seçtiğiniz varlıktan farklı bir varlık tahmini ne zaman olduğunu gösterir.":::
+:::image type="content" source="./media/luis-concept-entities/portal-entity-prediction-error.png" alt-text="Lua portalı, varlığın örnek bir değer için seçtiğiniz varlıktan farklı bir varlık tahmini ne zaman olduğunu gösterir":::
 
-Hata oluşan metin, örnek söylenişi içinde vurgulanır ve örnek söylenişi çizgisi, kırmızı bir üçgen olarak gösterilen bir hata göstergesi içerir. 
+Hataya neden olan metin, örnek söylenişi içinde vurgulanır ve örnek söylenişi çizgisi, kırmızı bir üçgen olarak gösterildiği gibi, sağa doğru bir hata göstergesi içerir. 
 
-Aşağıdakilerden birini veya birkaçını kullanarak varlık hatalarını çözümlemek için bu bilgileri kullanın:
-* Vurgulanan metin yanlış etiketlendi. Düzeltme, gözden geçirme, düzeltme ve yeniden eğitme. 
-* Varlığın kavramını belirlemesine yardımcı olmak için varlık için bir [özellik](luis-concept-feature.md) oluşturun
-* Varlıkla daha fazla [örnek](luis-concept-utterance.md) ekleme ve etiket ekleyin
+Varlık hatalarını çözümlemek için aşağıdakilerden birini veya daha fazlasını deneyin:
+
+* Vurgulanan metin yanlış etiketlendi. Düzeltmek için etiketi gözden geçirin, düzeltin ve uygulamayı yeniden eğitme. 
+* Varlığın kavramını belirlemesine yardımcı olmak için varlık için bir [özellik](luis-concept-feature.md) oluşturun.
+* Varlıkla daha fazla [örnek](luis-concept-utterance.md) ekleme ve etiket ekleyin.
 * Tahmin uç noktasında alınan her türlü, varlığın kavramını belirlemenize yardımcı olabilecek, [etkin öğrenme önerilerini gözden geçirin](luis-concept-review-endpoint-utterances.md) .
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Tebrikler ilgili](luis-concept-utterance.md)kavramları öğrenin.
-
-LUSıS uygulamanıza varlık ekleme hakkında daha fazla bilgi edinmek için bkz. [varlık ekleme](luis-how-to-add-entities.md) .
-
-Bkz. Öğretici: makine öğrenimi varlığı kullanarak bir noktadan yapılandırılmış verilerin nasıl ayıklanacağını öğrenmek için [Language Understanding (lusıs) içinde makine öğrenimi varlıkları ile Kullanıcı aralarından yapılandırılmış verileri ayıklama](tutorial-machine-learned-entity.md) .
-
+* İyi örnek [araslar](luis-concept-utterance.md)hakkında bilgi edinin.
+* LUSıS uygulamanıza varlık ekleme hakkında daha fazla bilgi edinmek için bkz. [varlık ekleme](luis-how-to-add-entities.md) .
+* LUSıS [uygulama sınırları](./luis-limits.md)hakkında daha fazla bilgi edinin. 
+* Makine öğrenimi varlığı kullanarak bir noktadan yapılandırılmış verilerin nasıl ayıklanacağını öğrenmek için bir [öğretici](tutorial-machine-learned-entity.md) kullanın.

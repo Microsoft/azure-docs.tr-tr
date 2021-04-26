@@ -9,12 +9,12 @@ ms.service: iot-dps
 services: iot-dps
 ms.devlang: csharp
 ms.custom: mvc, devx-track-csharp
-ms.openlocfilehash: 14f17c6716fe98a11d03e8d1021bcdb1058fe671
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 73a9b27c7b9119ee49fc451ca0a1c03d8db3db0e
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94968120"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868636"
 ---
 # <a name="quickstart-enroll-tpm-device-to-iot-hub-device-provisioning-service-using-c-service-sdk"></a>Hızlı başlangıç: C# hizmeti SDK 'sını kullanarak cihaz sağlama hizmeti IoT Hub TPM cihazı kaydetme
 
@@ -26,7 +26,7 @@ Bu makalede, [C# hizmeti SDK 'sını](https://github.com/Azure/azure-iot-sdk-csh
 
 1. Bilgisayarınızda [Visual Studio 2019](https://www.visualstudio.com/vs/) yüklü olduğunu doğrulayın.
 
-1. Bilgisayarınızda yüklü [.NET Core SDK](https://www.microsoft.com/net/download/windows) olduğunu doğrulayın.
+1. Bilgisayarınızda yüklü [.NET Core SDK](https://dotnet.microsoft.com/download) olduğunu doğrulayın.
 
 1. Devam etmeden önce [Azure portal IoT Hub cihaz sağlama hizmetini ayarlama](./quick-setup-auto-provision.md) bölümündeki adımları uygulayın.
 

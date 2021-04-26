@@ -5,13 +5,13 @@ keywords: app service, azure app service, ölçek, ölçeklenebilir, app service
 ms.assetid: ff00902b-9858-4bee-ab95-d3406018c688
 ms.topic: article
 ms.date: 10/01/2020
-ms.custom: seodec18, devx-track-azurecli
-ms.openlocfilehash: c187a1521762c0b69d42c81f464694729d3c02f7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: seodec18, devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 8fbd841626e2a074bc0a35cd1b4ac094e267b34a
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "100594216"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833355"
 ---
 # <a name="configure-premiumv3-tier-for-azure-app-service"></a>Azure App Service için PremiumV3 katmanını yapılandırma
 
@@ -96,7 +96,7 @@ Preview Premium kapsayıcı SKU 'SU kullanan bir uygulamanız varsa ve yeni Prem
 
 [Azure CLI](/cli/azure/install-azure-cli) veya [Azure PowerShell](/powershell/azure/)kullanarak **PremiumV3** katmanında uygulama oluşturmayı otomatik hale getirebilirsiniz.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 Aşağıdaki komut _P1V3_ içinde bir App Service planı oluşturur. Bunu Cloud Shell çalıştırabilirsiniz. Seçenekleri `--sku` P1V3, _P2V3_ ve _P3V3_' dir.
 

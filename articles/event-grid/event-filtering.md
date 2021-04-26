@@ -3,12 +3,12 @@ title: Azure Event Grid için olay filtreleme
 description: Azure Event Grid aboneliği oluştururken olayların nasıl filtreleneceğini açıklar.
 ms.topic: conceptual
 ms.date: 03/04/2021
-ms.openlocfilehash: fa63296f97bfa888cb0f425d0c03a5e4a7e46525
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b5439b77b86d42d062cf9da66ce678f04f46f813
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103419856"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256098"
 ---
 # <a name="understand-event-filtering-for-event-grid-subscriptions"></a>Event Grid abonelikleri için olay filtrelemeyi anlayın
 
@@ -454,7 +454,7 @@ FOR_EACH filter IN (a, b, c)
 ```
 
 ## <a name="stringin"></a>Stringın
-**Stringın** işleci, **anahtar** değerinin belirtilen **filtre** değerlerinden biriyle **tam olarak eşleşip eşleşmediğini** denetler. Aşağıdaki örnekte, `key1` bölümündeki özniteliğinin değerinin `data` `exact` veya `string` ya da olup olmadığını denetler `matches` . 
+**Stringın** işleci, **anahtar** değerinin belirtilen **filtre** değerlerinden biriyle **tam olarak eşleşip eşleşmediğini** denetler. Aşağıdaki örnekte, `key1` bölümündeki özniteliğinin değerinin `data` `contoso` veya `fabrikam` ya da olup olmadığını denetler `factory` . 
 
 ```json
 "advancedFilters": [{

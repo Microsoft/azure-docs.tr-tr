@@ -13,12 +13,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 3/10/2021
 ms.author: inhenkel
-ms.openlocfilehash: cb7500489cc4516b8cf44dd029c0831103dc53a8
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: add2a4aba1f7664b919e88992b2a1d71e8291b53
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103007945"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226778"
 ---
 # <a name="microsoft-azure-media-services-common-scenarios"></a>Microsoft Azure Media Services yaygın senaryolar
 
@@ -49,7 +49,7 @@ Resmi tam boyutlu görüntülemek için tıklayın.
 
 [![Azure Media Services nesne veri modeline göre geliştirilirken en yaygın kullanılan nesnelerden bazılarını gösteren diyagram.](./media/media-services-overview/media-services-overview-object-model-small.png)](./media/media-services-overview/media-services-overview-object-model.png#lightbox)
 
-Modelin tamamını [buradan](https://media.windows.net/API/$metadata?api-version=2.15) görüntüleyebilirsiniz.  
+Modelin tamamını [buradan](https://m.eet.com/media/1170326/ms-part1.pdf) görüntüleyebilirsiniz.  
 
 ## <a name="protect-content-in-storage-and-deliver-streaming-media-in-the-clear-non-encrypted"></a>Depolama alanında içeriği koruma ve akan medyayı temiz olarak (şifrelenmemiş) teslim etme
 

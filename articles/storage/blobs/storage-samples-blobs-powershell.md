@@ -1,18 +1,18 @@
 ---
 title: Azure Blog depolama için Azure PowerShell örnekleri | Microsoft Docs
 description: Depolama hesabı oluşturma, blob 'ları hesaplar arasında geçirme ve daha fazlası gibi Azure Blob depolamayla çalışma için Azure PowerShell komut dosyası örneklerinin bağlantılarını inceleyin.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 11/07/2017
 ms.service: storage
 ms.subservice: blobs
 ms.topic: sample
-ms.openlocfilehash: 1d343c952f01185d2360d6cf238dd3a7512849fb
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 10e4149b7c66e507c34e486abd64c66993900fbc
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95912136"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277921"
 ---
 # <a name="azure-powershell-samples-for-azure-blob-storage"></a>Azure Blob depolama için Azure PowerShell örnekleri
 

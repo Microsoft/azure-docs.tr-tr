@@ -6,12 +6,12 @@ ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 01/29/2021
-ms.openlocfilehash: 6629beacb5c3edc6fe1d21509051b915c0894479
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 5b5e1491d7f76cd4cff76d0c9a1af4daa49fa483
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105109701"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813011"
 ---
 # <a name="high-availability-concepts-in-azure-database-for-mysql-flexible-server-preview"></a>MySQL için Azure veritabanı esnek sunucusu 'nda yüksek kullanılabilirlik kavramları (Önizleme)
 
@@ -69,6 +69,9 @@ Planlanmış kapalı kalma süresi olayları, Azure tarafından zamanlanan etkin
 
 ### <a name="failover-process---unplanned-events"></a>Yük devretme işlemi-planlanmamış olaylar
 Planlanmamış hizmet alt süreleri, işlem, ağ, depolama hataları veya güç kesintileri gibi altyapı hatalarının veritabanının kullanılabilirliğini etkilediği yazılım hatalarını içerir. Veritabanının kullanım dışı kalması durumunda, bekleyen çoğaltmaya çoğaltma yok olur ve bekleme çoğaltması birincil veritabanı olarak etkinleştirilir. DNS güncellenir ve istemciler daha sonra veritabanı sunucusuna yeniden bağlanır ve işlemlerini sürdürür. Genel yük devretme süresinin% 60-120 olması beklenir. Ancak, yük devretme sırasında büyük işlemler ve kurtarma süresi gibi birincil veritabanı sunucusundaki etkinliğe bağlı olarak, yük devretme daha uzun sürebilir.
+
+### <a name="forced-failover"></a>Zorlamalı yük devretme
+MySQL için Azure veritabanı zorla yük devretme işlemi, uygulama senaryolarınız ile işlevselliği test etmenize olanak tanıyan bir yük devretmeyi el ile zorlamanıza olanak sağlar ve herhangi bir kesinti oluşması durumunda size hazırlanmanıza yardımcı olur. Zorlamalı yük devretme, bekleme çoğaltmasını, DNS kaydını güncelleştirerek aynı veritabanı sunucusu adına sahip birincil sunucu olmak üzere bir yük devretme tetikleyerek birincil sunucu haline gelir. Özgün birincil sunucu yeniden başlatılır ve bekleme çoğaltmaya geçiş yapılır. İstemci bağlantılarının bağlantısı kesilir ve işlemleri sürdürülmek için yeniden bağlanması gerekir. Geçerli iş yüküne ve en son denetim noktasına bağlı olarak genel yük devretme süresi ölçülecektir. Genel olarak, 60-120s arasında olması beklenir.
 
 ## <a name="schedule-maintenance-window"></a>Bakım penceresini zamanla 
 

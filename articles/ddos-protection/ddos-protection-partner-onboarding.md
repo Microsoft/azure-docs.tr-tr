@@ -3,17 +3,17 @@ title: Azure DDoS koruma standardı ile ortaklık
 description: Azure DDoS koruma standardı tarafından etkinleştirilen ortaklık fırsatlarını anlayın.
 ms.service: ddos-protection
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 mms.devlang: na
 ms.topic: how-to
 ms.date: 08/28/2020
 ms.author: kumud
-ms.openlocfilehash: a7a21dcaea22ed0d1c077d0c42ddb5b4bd50d24f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 625f77a6d9dbeaf612df884434ab39b943587791
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99539341"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103207"
 ---
 # <a name="partnering-with-azure-ddos-protection-standard"></a>Azure DDoS koruma standardı ile ortaklık
 Bu makalede, Azure DDoS koruma standardı tarafından etkinleştirilen iş ortaklığı olanakları açıklanmaktadır. Bu makale, ürün yöneticilerinin ve iş geliştirme rollerinin yatırım yollarını anlamasına yardımcı olmak ve ortaklık değeri propositions hakkında Öngörüler sağlaması için tasarlanmıştır.

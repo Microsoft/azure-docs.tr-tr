@@ -3,17 +3,20 @@ title: 'Hızlı başlangıç: sunucu oluşturma-Azure PowerShell-MariaDB için A
 description: Bu hızlı başlangıçta PowerShell kullanarak bir Azure Kaynak grubunda MariaDB sunucusu için Azure veritabanı oluşturma işlemini açıklanmaktadır.
 author: savjani
 ms.author: pariks
+ms.date: 05/26/2020
+ms.topic: quickstart
 ms.service: mariadb
 ms.devlang: azurepowershell
-ms.topic: quickstart
-ms.date: 05/26/2020
-ms.custom: mvc, devx-track-azurepowershell
-ms.openlocfilehash: 05082ffa891b72b472ed5433282198c61080f073
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom:
+- mvc
+- devx-track-azurepowershell
+- mode-api
+ms.openlocfilehash: 7bfbd223cb337ff7d908032c769afbbf5cafa38f
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98664673"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531387"
 ---
 # <a name="quickstart-create-an-azure-database-for-mariadb-server-using-powershell"></a>Hızlı başlangıç: PowerShell kullanarak MariaDB sunucusu için Azure veritabanı oluşturma
 

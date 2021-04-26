@@ -3,18 +3,20 @@ title: Hızlı Başlangıç - CentOS üzerinde WildFly
 description: CentOS sanal makinesinde Yavaya Java uygulamaları dağıtın
 author: Theresa-Nguyen
 ms.author: bicnguy
+ms.date: 10/23/2020
+ms.assetid: 7aa21ef8-9cfb-43e0-bfda-3f10a2a2f3ef
 ms.topic: quickstart
 ms.service: virtual-machines
 ms.subservice: redhat
+ms.custom:
+- mode-api
 ms.collection: linux
-ms.assetid: 7aa21ef8-9cfb-43e0-bfda-3f10a2a2f3ef
-ms.date: 10/23/2020
-ms.openlocfilehash: 533d2881688598430ca05e964595352edf993dff
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: bad9331a6d9a0c0936b1458e3aa4a84559e4a107
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101675995"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533560"
 ---
 # <a name="quickstart-wildfly-on-centos-8"></a>Hızlı başlangıç: CentOS 8 ' de
 

@@ -9,10 +9,10 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: how-to
 ms.date: 12/23/2020
 ms.openlocfilehash: 9b5526af03bdbefeb54633c49bbd43743555f60b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100383237"
 ---
 # <a name="how-to-create-plans-for-your-managed-service-offer"></a>Yönetilen hizmet teklifiniz için planlar oluşturma
@@ -79,12 +79,12 @@ Bir ile 10.000 adede kadar abonelik kimliği eklemek için. CSV dosyası:
 
 ## <a name="technical-configuration"></a>Teknik yapılandırma
 
-Bu bölüm, müşteri kaynaklarını yönetmeye yönelik yetkilendirme bilgilerini içeren bir bildirim oluşturur. [Azure tarafından atanan kaynak yönetimini](../lighthouse/concepts/azure-delegated-resource-management.md)etkinleştirmek için bu bilgiler gereklidir.
+Bu bölüm, müşteri kaynaklarını yönetmeye yönelik yetkilendirme bilgilerini içeren bir bildirim oluşturur. [Azure temsilci kaynak yönetimini](../lighthouse/concepts/azure-delegated-resource-management.md) etkinleştirmek için bu bilgiler gereklidir.
 
 Hangi rollerin desteklendiğini ve yetkilendirmelerinizi tanımlamaya yönelik en iyi yöntemleri anlamak için [Azure Use senaryolarında kiracılar, roller ve kullanıcıları](../lighthouse/concepts/tenants-users-roles.md#best-practices-for-defining-users-and-roles) gözden geçirin.
 
 > [!NOTE]
-> Yetkilendirme girdinizdeki kullanıcılar ve roller, planı etkinleştiren her müşteri için de geçerlidir. Belirli bir müşteriye erişimi sınırlandırmak istiyorsanız, özel kullanım için özel bir plan yayımlamanız gerekir.
+> Yetkilendirme girdilerinizdeki kullanıcılar ve roller, planı etkinleştiren her müşteriye uygulanır. Erişimi belirli bir müşteriyle sınırlamak istiyorsanız, o müşterinin özel kullanımı için özel bir plan yayımlamanız gerekir.
 
 ### <a name="manifest"></a>Bildirim
 

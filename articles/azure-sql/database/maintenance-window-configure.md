@@ -9,12 +9,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 03/23/2021
-ms.openlocfilehash: 8688458d85084f3d3dab4678fa91ed827a337739
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 9771c68dda6f457586f27ea45fbc52aa118e8006
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105047360"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874792"
 ---
 # <a name="configure-maintenance-window-preview"></a>Bakım penceresini yapılandırma (Önizleme)
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -178,7 +178,7 @@ Bakım penceresini ayarlarken, her bölgenin, veritabanının veya havuzun bulun
 
 ### <a name="discover-sql-database-and-elastic-pool-maintenance-windows"></a>SQL veritabanı ve elastik havuz bakım pencerelerini bulma
 
-Aşağıdaki örnek, [az Maintenance public-Configuration List](/cli/azure/ext/maintenance/maintenance/public-configuration#ext_maintenance_az_maintenance_public_configuration_list) komutunu kullanarak *eastus2* bölgesi için kullanılabilir bakım pencerelerini döndürür. Veritabanları ve elastik havuzlar için `maintenanceScope` olarak ayarlayın `SQLDB` .
+Aşağıdaki örnek, [az Maintenance public-Configuration List](/cli/azure/maintenance/public-configuration#az_maintenance_public_configuration_list) komutunu kullanarak *eastus2* bölgesi için kullanılabilir bakım pencerelerini döndürür. Veritabanları ve elastik havuzlar için `maintenanceScope` olarak ayarlayın `SQLDB` .
 
    ```azurecli
    location="eastus2"
@@ -188,7 +188,7 @@ Aşağıdaki örnek, [az Maintenance public-Configuration List](/cli/azure/ext/m
 
 ### <a name="discover-sql-managed-instance-maintenance-windows"></a>SQL yönetilen örnek bakım pencerelerini bul
 
-Aşağıdaki örnek, [az Maintenance public-Configuration List](/cli/azure/ext/maintenance/maintenance/public-configuration#ext_maintenance_az_maintenance_public_configuration_list) komutunu kullanarak *eastus2* bölgesi için kullanılabilir bakım pencerelerini döndürür. Yönetilen örnekler için olarak ayarlayın `maintenanceScope` `SQLManagedInstance` .
+Aşağıdaki örnek, [az Maintenance public-Configuration List](/cli/azure/maintenance/public-configuration#az_maintenance_public_configuration_list) komutunu kullanarak *eastus2* bölgesi için kullanılabilir bakım pencerelerini döndürür. Yönetilen örnekler için olarak ayarlayın `maintenanceScope` `SQLManagedInstance` .
 
    ```azurecli
    az maintenance public-configuration list --query "[?location=='eastus2'&&contains(maintenanceScope,'SQLManagedInstance')]"

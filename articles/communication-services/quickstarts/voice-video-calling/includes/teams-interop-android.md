@@ -6,12 +6,12 @@ ms.author: mikben
 ms.date: 03/10/2021
 ms.topic: quickstart
 ms.service: azure-communication-services
-ms.openlocfilehash: e5361b92c2080c724b872be2ad27bc5bd4554e8d
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: af1794a2f9eeaa1b1de2c62d5131c722dfd152a5
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105108221"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107564685"
 ---
 Bu hızlı başlangıçta, Android için SDK 'Yı çağıran Azure Iletişim Hizmetleri 'ni kullanarak bir takımlar toplantısına nasıl katılacağınızı öğreneceksiniz.
 
@@ -253,8 +253,8 @@ public class MainActivity extends AppCompatActivity {
 
 ## <a name="get-the-teams-meeting-link"></a>Takımlar toplantı bağlantısını alın
 
-Takımlar toplantı bağlantısı, Graph API 'Leri kullanılarak alınabilir. Bu, [Graph belgelerinde](/graph/api/onlinemeeting-createorget?tabs=http&view=graph-rest-beta)ayrıntılıdır.
-SDK 'Yı çağıran Iletişim Hizmetleri, bir tam takımlar toplantısı bağlantısını kabul eder. Bu bağlantı, `onlineMeeting` [ `joinWebUrl` özelliğin](/graph/api/resources/onlinemeeting?view=graph-rest-beta)altında erişilebilen kaynağın bir parçası olarak döndürülür. Ayrıca, toplantı davetini davet eden ekipteki **toplantıya katılıma** URL 'sinden gerekli toplantı bilgilerini de alabilirsiniz.
+Takımlar toplantı bağlantısı, Graph API 'Leri kullanılarak alınabilir. Bu, [Graph belgelerinde](/graph/api/onlinemeeting-createorget?tabs=http&view=graph-rest-beta&preserve-view=true)ayrıntılıdır.
+SDK 'Yı çağıran Iletişim Hizmetleri, bir tam takımlar toplantısı bağlantısını kabul eder. Bu bağlantı, `onlineMeeting` [ `joinWebUrl` özelliğin](/graph/api/resources/onlinemeeting?view=graph-rest-beta&preserve-view=true)altında erişilebilen kaynağın bir parçası olarak döndürülür. Ayrıca, toplantı davetini davet eden ekipteki **toplantıya katılıma** URL 'sinden gerekli toplantı bilgilerini de alabilirsiniz.
 
 ## <a name="launch-the-app-and-join-teams-meeting"></a>Uygulamayı başlatın ve takımlar toplantısına katın
 

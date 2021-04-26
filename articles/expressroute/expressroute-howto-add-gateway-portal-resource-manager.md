@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 03/03/2021
 ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: e70b41dfba03b7439313350746724c6f8e90bc34
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: f81446111ab87b280d50caceb93beefc7aedef3b
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105564781"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106110334"
 ---
 # <a name="tutorial-configure-a-virtual-network-gateway-for-expressroute-using-the-azure-portal"></a>Öğretici: Azure portal kullanarak ExpressRoute için sanal ağ geçidi yapılandırma
 > [!div class="op_single_selector"]
@@ -63,7 +63,7 @@ Yapılandırmanıza başlamadan önce bu adımların bir [videosunu](https://azu
    
     :::image type="content" source="./media/expressroute-howto-add-gateway-portal-resource-manager/add-gateway-subnet.png" alt-text="Ağ geçidi alt ağı ekleme":::
 
-1. Alt ağınız için **Ad** alanı otomatik olarak ‘GatewaySubnet’ değeriyle doldurulur. Alt ağın Azure tarafından ağ geçidi alt ağı olarak tanınması için bu değer gereklidir. Yapılandırma gereksinimlerinize uyacak şekilde, oto doldurulmuş **adres aralığı** değerlerini ayarlayın. /27 veya daha büyük (/26,/25 vb.) bir ağ geçidi alt ağı oluşturmanızı öneririz.
+1. Alt ağınız için **Ad** alanı otomatik olarak ‘GatewaySubnet’ değeriyle doldurulur. Alt ağın Azure tarafından ağ geçidi alt ağı olarak tanınması için bu değer gereklidir. Yapılandırma gereksinimlerinize uyacak şekilde, oto doldurulmuş **adres aralığı** değerlerini ayarlayın. /27 veya daha büyük (/26,/25 vb.) bir ağ geçidi alt ağı oluşturmanızı öneririz. Ağ geçidinize 16 ExpressRoute devreleri bağlamayı planlıyorsanız,/26 veya daha büyük bir ağ geçidi alt ağı oluşturmanız **gerekir** .
 
     Çift yığın sanal ağı kullanıyorsanız ve ExpressRoute üzerinden IPv6 tabanlı özel eşleme kullanmayı planlıyorsanız, **IP6 adres alanı Ekle** ve **IPv6 adres aralığı** değerlerini gir ' e tıklayın.
 

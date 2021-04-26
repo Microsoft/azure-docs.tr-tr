@@ -7,12 +7,12 @@ ms.topic: overview
 ms.date: 08/27/2020
 ms.custom: cog-serv-seo-aug-2020
 keywords: kişiselleştirici, Azure kişiselleştirici, makine öğrenimi
-ms.openlocfilehash: 913b4d989865a50b23d58c5493368997248f8db8
-ms.sourcegitcommit: 2f9f306fa5224595fa5f8ec6af498a0df4de08a8
+ms.openlocfilehash: b2577502907b69e134651c93ab7a98fc51e9aaa6
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98928548"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106169258"
 ---
 # <a name="what-is-personalizer"></a>Kişiselleştirme nedir?
 
@@ -21,11 +21,14 @@ Azure kişiselleştirici, uygulamalarınızın kullanıcılarınızı göstermek
 > [!TIP]
 > İçerik, metin, görüntü, URL, e-posta veya arasından seçim yapmak istediğiniz herhangi bir şey veya kullanıcılarınıza göstermek istediğiniz herhangi bir bilgi birimidir.
 
-Başlamadan önce [Bu etkileşimli tanıtım Ile kişiselleştirici](https://personalizationdemo.azurewebsites.net/)kullanmayı deneyebilirsiniz.
+Bu belge aşağıdaki makale türlerini içerir:  
 
-<!--
-![What is personalizer animation](./media/what-is-personalizer.gif)
--->
+* [**Hızlı**](quickstart-personalizer-sdk.md) başlangıçlarda, hizmette istek yapma konusunda size kılavuzluk eden başlangıç yönergeleri bulunur.  
+* [**Nasıl yapılır kılavuzlarında**](how-to-settings.md) , hizmetin daha belirli veya özelleştirilmiş yollarla kullanılmasına ilişkin yönergeler bulunur.  
+* [**Kavramlar**](how-personalizer-works.md) , hizmet işlevselliği ve özelliklerinin ayrıntılı açıklamalarını sağlar.  
+* [**Öğreticiler**](tutorial-use-personalizer-web-app.md) daha fazla iş çözümlerinde hizmeti bir bileşen olarak nasıl kullanacağınızı gösteren kılavuzlardır.  
+
+Başlamadan önce [Bu etkileşimli tanıtım Ile kişiselleştirici](https://personalizationdemo.azurewebsites.net/)kullanmayı deneyin.
 
 ## <a name="how-does-personalizer-select-the-best-content-item"></a>Kişiselleştirici en iyi içerik öğesini nasıl seçer?
 
@@ -100,18 +103,6 @@ Kişiselleştirici, tek en iyi içerik öğesini döndürmek için neredeyse ger
         * İçeriğinizi gösterdikten hemen sonra
         * Veya sonraki bir süre sonra çevrimdışı bir sistem
     1. Bir kullanım süresinden sonra [çevriminizi](concepts-offline-evaluation.md) çevrimdışı değerlendirmede değerlendirin. Çevrimdışı bir değerlendirme, kodunuzu değiştirmeden veya Kullanıcı deneyimini etkilemeden, kişiselleştirici hizmetin verimliliğini test etmenize ve değerlendirmenize olanak tanır.
-
-## <a name="complete-a-quickstart"></a>Hızlı başlangıç tamamlamayı
-
-C#, JavaScript ve Python 'da hızlı başlangıç sunuyoruz. Her hızlı başlangıç size temel tasarım desenleri öğretmek ve kodu 10 dakikadan kısa bir süre içinde çalıştırmak için tasarlanmıştır. 
-
-* [Hızlı başlangıç: kişiselleştirici istemci kitaplığını kullanma](./quickstart-personalizer-sdk.md)
-
-Kişiselleştirici hizmeti ile çalışmaya başlama şansınız olduktan sonra öğreticilerimizi deneyin ve Web uygulamaları, sohbet botları veya bir Azure Not defteri 'nde Kişiselleştiriciye nasıl kullanacağınızı öğrenin.
-
-* [Öğretici: bir .NET Web uygulamasında kişiselleştirici kullanma](tutorial-use-personalizer-web-app.md)
-* [Öğretici: .NET Chat bot 'ta kişiselleştirici kullanma](tutorial-use-personalizer-chat-bot.md)
-* [Öğretici: Azure not defterinde kişiselleştirici kullanma](tutorial-use-azure-notebook-generate-loop-data.md)
 
 ## <a name="reference"></a>Başvuru 
 

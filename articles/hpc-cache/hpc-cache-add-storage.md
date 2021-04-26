@@ -6,12 +6,12 @@ ms.service: hpc-cache
 ms.topic: how-to
 ms.date: 03/15/2021
 ms.author: v-erkel
-ms.openlocfilehash: afb896100ea60c21aaf37890d7b520bf38c6ce18
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 708ad8bbfec9e3fd0176c53c111b5b5b25a5318f
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104772731"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862246"
 ---
 # <a name="add-storage-targets"></a>Depolama hedefleri ekleme
 
@@ -126,7 +126,7 @@ Ayrıca depolama hesabınızın güvenlik duvarı ayarlarını kontrol edin. Gü
 
 ### <a name="add-a-blob-storage-target-with-azure-cli"></a>Azure CLı ile BLOB depolama hedefi ekleme
 
-Bir Azure Blob depolama hedefi tanımlamak için [az HPC-Cache blob-Storage-Target Add](/cli/azure/ext/hpc-cache/hpc-cache/blob-storage-target#ext-hpc-cache-az-hpc-cache-blob-storage-target-add) arabirimini kullanın.
+Bir Azure Blob depolama hedefi tanımlamak için [az HPC-Cache blob-Storage-Target Add](/cli/azure/hpc-cache/blob-storage-target#az_hpc_cache_blob_storage_target_add) arabirimini kullanın.
 
 > [!NOTE]
 > Azure CLı komutları Şu anda bir depolama hedefi eklerken bir ad alanı yolu oluşturmanızı gerektirir. Bu, Azure portal arabirimiyle kullanılan işlemden farklıdır.
@@ -229,7 +229,7 @@ NFS ile desteklenen bir depolama hedefi için şu bilgileri sağlayın:
 
 [Azure HPC önbelleği Için Azure CLI 'Yi ayarlayın](./az-cli-prerequisites.md).
 
-Depolama hedefini oluşturmak için [az HPC-Cache NFS-Storage-Target Add](/cli/azure/ext/hpc-cache/hpc-cache/nfs-storage-target#ext-hpc-cache-az-hpc-cache-nfs-storage-target-add) Azure CLI komutunu kullanın.
+Depolama hedefini oluşturmak için [az HPC-Cache NFS-Storage-Target Add](/cli/azure/hpc-cache/nfs-storage-target#az_hpc_cache_nfs_storage_target_add) Azure CLI komutunu kullanın.
 
 > [!NOTE]
 > Azure CLı komutları Şu anda bir depolama hedefi eklerken bir ad alanı yolu oluşturmanızı gerektirir. Bu, Azure portal arabirimiyle kullanılan işlemden farklıdır.
@@ -240,7 +240,7 @@ Bu değerleri, önbellek adı ve önbellek kaynak grubuna ek olarak sağlayın:
 * ``--nfs3-target`` -NFS depolama sisteminizin IP adresi. (Önbelleğiniz adı çözebilecek bir DNS sunucusuna erişimi varsa, tam etki alanı adını burada kullanabilirsiniz.)
 * ``--nfs3-usage-model`` -Yukarıda [bir kullanım modeli seçin](#choose-a-usage-model)bölümünde açıklanan veri önbelleğe alma profillerinden biridir.
 
-  [Az HPC-Cache Usage-model List](/cli/azure/ext/hpc-cache/hpc-cache/usage-model#ext-hpc-cache-az-hpc-cache-usage-model-list)komutuyla kullanım modellerinin adlarını doğrulayın.
+  [Az HPC-Cache Usage-model List](/cli/azure/hpc-cache/usage-model#az_hpc_cache_usage_model_list)komutuyla kullanım modellerinin adlarını doğrulayın.
 
 * ``--junction`` -Kavşak parametresi, istemciye yönelik sanal dosya yolunu depolama sistemindeki bir dışarı aktarma yoluyla bağlar.
 
@@ -314,6 +314,8 @@ ADLS-NFS depolama hedefleri, BLOB depolama hedefleri ve bazı NFS depolama hedef
 
 Bir ADLS-NFS depolama hedefi oluşturabilmeniz için önce NFS özellikli bir depolama hesabı oluşturmanız gerekir. [Azure HPC Cache önkoşulları](hpc-cache-prerequisites.md#nfs-mounted-blob-adls-nfs-storage-requirements-preview) ve [NFS kullanarak blob Storage bağlama](../storage/blobs/network-file-system-protocol-support-how-to.md)bölümündeki yönergeleri izleyin. Depolama hesabınızı ayarladıktan sonra, depolama hedefini oluştururken yeni bir kapsayıcı oluşturabilirsiniz.
 
+Bu yapılandırma hakkında daha fazla bilgi edinmek için [Azure HPC Cache Ile NFS 'e bağlı BLOB depolama kullanın](nfs-blob-considerations.md) makalesini okuyun.
+
 Bir ADLS-NFS depolama hedefi oluşturmak için Azure portal **depolama hedefi Ekle** sayfasını açın. (Ek yöntemler geliştirmektedir.)
 
 ![ADLS-NFS hedefi tanımlı depolama hedefi ekleme sayfasının ekran görüntüsü](media/add-adls-target.png)
@@ -332,8 +334,6 @@ Bu bilgileri girin.
 
 İşiniz bittiğinde, depolama hedefini eklemek için **Tamam** ' ı tıklatın.
 
-<!-- **** -->
-
 ## <a name="view-storage-targets"></a>Depolama hedeflerini görüntüleme
 
 Önbelleğiniz için önceden tanımlanmış depolama hedeflerini göstermek için Azure portal veya Azure CLı kullanabilirsiniz.
@@ -350,13 +350,13 @@ Daha fazla bilgi edinmek için [depolama hedeflerini düzenleme](hpc-cache-edit-
 
 [Azure HPC önbelleği Için Azure CLI 'Yi ayarlayın](./az-cli-prerequisites.md).
 
-Bir önbelleğin mevcut depolama hedeflerini göstermek için [az HPC-Cache Storage-Target List](/cli/azure/ext/hpc-cache/hpc-cache/storage-target#ext-hpc-cache-az-hpc-cache-storage-target-list) seçeneğini kullanın. Önbellek adını ve kaynak grubunu sağlayın (Bu ayarı küresel olarak ayarlamadığınız müddetçe).
+Bir önbelleğin mevcut depolama hedeflerini göstermek için [az HPC-Cache Storage-Target List](/cli/azure/hpc-cache/storage-target#az_hpc_cache_storage-target-list) seçeneğini kullanın. Önbellek adını ve kaynak grubunu sağlayın (Bu ayarı küresel olarak ayarlamadığınız müddetçe).
 
 ```azurecli
 az hpc-cache storage-target list --resource-group "scgroup" --cache-name "sc1"
 ```
 
-Belirli bir depolama hedefi hakkındaki ayrıntıları görmek için [az HPC-Cache Storage-Target Show](/cli/azure/ext/hpc-cache/hpc-cache/storage-target#ext-hpc-cache-az-hpc-cache-storage-target-list) ' i kullanın. (Depolama hedefini ada göre belirtin.)
+Belirli bir depolama hedefi hakkındaki ayrıntıları görmek için [az HPC-Cache Storage-Target Show](/cli/azure/hpc-cache/storage-target#az_hpc_cache_storage-target-list) ' i kullanın. (Depolama hedefini ada göre belirtin.)
 
 Örnek:
 

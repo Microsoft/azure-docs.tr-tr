@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 12/21/2020
+ms.date: 04/06/2021
 ms.author: jeedes
-ms.openlocfilehash: 6fdc9c70d1c9fc67c38edfd794354f9e03321c73
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 56f2eea9dc485c69b6070fda6e9519887f7b30cb
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98731437"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519665"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-easysso-for-bitbucket"></a>Öğretici: BitBucket için EasySSO ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -50,7 +50,6 @@ BitBucket için easysto 'un Azure AD 'ye tümleştirilmesini yapılandırmak iç
 1. Yeni bir uygulama eklemek için **Yeni uygulama**' yı seçin.
 1. **Galeriden Ekle** bölümünde, arama kutusuna **Bitbucket Için easysso** yazın.
 1. Sonuçlardan **BitBucket Için Easysso** ' ı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
-
 
 ## <a name="configure-and-test-azure-ad-sso-for-easysso-for-bitbucket"></a>BitBucket için Easysiçin Azure AD SSO 'yu yapılandırın ve test edin
 
@@ -129,9 +128,7 @@ Bu bölümde, BitBucket için Easysa erişimi vererek Azure çoklu oturum açma 
 1. Azure Portal **Kurumsal uygulamalar**  >  **tüm uygulamalar**' ı seçin.
 1. Uygulamalar listesinde **BitBucket Için Easysso** öğesini seçin.
 1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
-
 1. **Kullanıcı ekle**'yi seçin. **Atama Ekle** Iletişim kutusunda **Kullanıcılar ve gruplar**' ı seçin.
-
 1. **Kullanıcılar ve gruplar** iletişim kutusunda, **Kullanıcılar** listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmında **Seç** ' i seçin.
 1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, "varsayılan erişim" rolü seçili olduğunu görürsünüz.
 1. **Atama Ekle** Iletişim kutusunda **ata**' yı seçin.

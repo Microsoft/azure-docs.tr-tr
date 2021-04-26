@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: jlu
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9a2c83fc0f4776e1ded2c8c12cb990ab227f048b
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 74009759bb9ca2a0516148fc1387b150b67452ab
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105109021"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107387913"
 ---
 # <a name="continuous-access-evaluation"></a>Sürekli erişim değerlendirmesi
 
@@ -53,7 +53,7 @@ Sürekli erişim değerlendirmesi, Exchange Online, SharePoint Online ve takıml
 Bu işlem, kullanıcıların kurumsal SharePoint Online dosyalarına, e-postaya, takvime veya görevlere ve bu kritik olaylardan biri dakika içinde Microsoft 365 istemci uygulamalarından gelen takımlara erişimi kaybettiği senaryoya olanak sağlar. 
 
 > [!NOTE] 
-> Takımlar henüz Kullanıcı risk olaylarını desteklemez.
+> Takımlar ve SharePoint Online, henüz Kullanıcı risk olaylarını desteklemez.
 
 ### <a name="conditional-access-policy-evaluation-preview"></a>Koşullu erişim ilkesi değerlendirmesi (Önizleme)
 
@@ -142,7 +142,7 @@ Bu sayfadan, önizlemeye tabi olacak kullanıcıları ve grupları isteğe bağl
 CAE için, yalnızca adlandırılmış IP tabanlı adlandırılmış konumlara ilişkin Öngörüler sunuyoruz. [MFA güvenilir IP 'leri](../authentication/howto-mfa-mfasettings.md#trusted-ips) veya ülke tabanlı konumlar gibi diğer konum ayarlarına yönelik Öngörüler bulunmamaktadır. Kullanıcı MFA güvenilir IP 'Leri veya ülke konumunu içeren güvenilir konumlardan veya Kullanıcı farklı bir konuma geçtikten sonra CAE uygulanmaz. Bu durumlarda, anlık IP zorlama denetimi olmadan 1 saatlik bir CAE belirteci yayımlayacağız.
 
 > [!IMPORTANT]
-> Sürekli erişim değerlendirmesi için konumları yapılandırırken yalnızca [IP tabanlı koşullu erişim konumu koşulunu](../conditional-access/location-condition.md#preview-features) kullanın ve **hem IPv4 hem de IPv6 dahil olmak üzere** kimlik sağlayıcınız ve kaynak SAĞLAYıCıNıZ tarafından görülebilen tüm IP adreslerini yapılandırın. Ülke konum koşullarını veya Azure AD Multi-Factor Authentication hizmet ayarları sayfasında bulunan güvenilir IP 'ler özelliğini kullanmayın.
+> Sürekli erişim değerlendirmesi için konumları yapılandırırken yalnızca [IP tabanlı koşullu erişim konumu koşulunu](../conditional-access/location-condition.md) kullanın ve **hem IPv4 hem de IPv6 dahil olmak üzere** kimlik sağlayıcınız ve kaynak SAĞLAYıCıNıZ tarafından görülebilen tüm IP adreslerini yapılandırın. Ülke konum koşullarını veya Azure AD Multi-Factor Authentication hizmet ayarları sayfasında bulunan güvenilir IP 'ler özelliğini kullanmayın.
 
 ### <a name="ip-address-configuration"></a>IP adresi yapılandırması
 
@@ -163,11 +163,11 @@ Bu senaryo, sınırlı döngüden kaçınmak için ortamınızda varsa, Azure AD
 
 Office Update kanallarının bir açıklaması için bkz. [Microsoft 365 uygulamaları için güncelleştirme kanallarına genel bakış](/deployoffice/overview-update-channels). Kuruluşların web hesabı Yöneticisi 'Ni (WAM) devre dışı bırakmadığından önerilir.
 
-### <a name="policy-change-timing"></a>İlke değiştirme zamanlaması
+### <a name="group-membership-and-policy-update-effective-time"></a>Grup üyeliği ve Ilke güncelleştirme geçerlilik süresi
 
-Yöneticiler tarafından yapılan ilke değişikliklerinin etkili olması bir gün sürebilir. Gecikme süresi iki saate kadar azaltılacağı için bazı iyileştirme yapıldı. Ancak, henüz tüm senaryoları kapsamaz. 
+Yöneticiler tarafından yapılan grup üyeliği ve ilke güncelleştirmesinin etkili olması bir gün sürebilir. İlke güncelleştirmeleri için en iyi duruma getirme işlemi, gecikme süresi iki saate kadar azalır. Ancak, henüz tüm senaryoları kapsamaz. 
 
-Bir acil durum varsa ve güncelleştirilmiş ilkelerinizin belirli kullanıcılara hemen uygulanması gerekiyorsa, kullanıcıların oturumunu iptal etmek için Kullanıcı profili sayfasında bu [PowerShell komutunu](/powershell/module/azuread/revoke-azureaduserallrefreshtoken?view=azureadps-2.0) veya "oturumu iptal et" i kullanmanız gerekir. Bu, güncelleştirilmiş ilkelerin hemen uygulandığından emin olmanızı sağlar.
+Bir acil durum varsa ve ilkeleriniz veya grup üyeliği değişikliğini belirli kullanıcılara hemen uygulanmasını istiyorsanız, kullanıcıların oturumunu iptal etmek için Kullanıcı profili sayfasında bu [PowerShell komutunu](/powershell/module/azuread/revoke-azureaduserallrefreshtoken) veya "oturumu iptal et" i kullanmanız gerekir. Bu, güncelleştirilmiş ilkelerin hemen uygulandığından emin olmanızı sağlar.
 
 ### <a name="coauthoring-in-office-apps"></a>Office uygulamalarında birlikte yazma
 

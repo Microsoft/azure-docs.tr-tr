@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 03/18/2021
 ms.author: Zhchia
-ms.openlocfilehash: f6ef2f91d178db01e618c19df55705bc9c1209e4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b8513f62b6f181a1490d136062c5de81db847ba7
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104583760"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533398"
 ---
 # <a name="tutorial-configure-g-suite-for-automatic-user-provisioning"></a>Öğretici: otomatik Kullanıcı sağlaması için G Suite 'i yapılandırma
 
@@ -273,7 +273,7 @@ Hazırlama ayarlarını yapılandırdıktan sonra dağıtımınızı izlemek iç
 * 10/17/2020-ek G Suite Kullanıcı ve grup öznitelikleri için destek eklendi.
 * 10/17/2020- [burada](https://developers.google.com/admin-sdk/directory)tanımlananla eşleşecek şekilde, G Suite hedef öznitelik adları güncelleştirildi.
 * 10/17/2020-varsayılan öznitelik eşlemeleri güncelleştirildi.
-* 03/18/2021-yönetici e-postası artık tüm yeni kullanıcılar için KIMLIK yerine eşitleniyor. KIMLIK olarak bir yönetici ile sağlanan mevcut tüm kullanıcılar için, e-postanın sağlandığından emin olmak için "Full" kapsamına sahip [Microsoft Graph](https://docs.microsoft.com/graph/api/synchronization-synchronizationjob-restart?view=graph-rest-beta&tabs=http) aracılığıyla yeniden başlatma yapabilirsiniz. Bu değişiklik yalnızca GSuite sağlama işini etkiler ve Goov2OutDelta ile başlayan eski koruma işini etkilemez. Yönetici e-postası, Kullanıcı ilk oluşturulduğunda veya yönetici değiştiğinde sağlanır. Yönetici e-posta adresini değiştirirse yönetici e-postası sağlanmaz. 
+* 03/18/2021-yönetici e-postası artık tüm yeni kullanıcılar için KIMLIK yerine eşitleniyor. KIMLIK olarak bir yönetici ile sağlanan mevcut tüm kullanıcılar için, e-postanın sağlandığından emin olmak için "Full" kapsamına sahip [Microsoft Graph](https://docs.microsoft.com/graph/api/synchronization-synchronizationjob-restart?view=graph-rest-beta&tabs=http&preserve-view=true) aracılığıyla yeniden başlatma yapabilirsiniz. Bu değişiklik, Goov2OutDelta ile başlayan eski sağlama işini değil, yalnızca GSuite sağlama işini etkiler. Yönetici e-postası, Kullanıcı ilk oluşturulduğunda veya yönetici değiştiğinde sağlanır. Yönetici e-posta adresini değiştirirse yönetici e-postası sağlanmaz. 
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

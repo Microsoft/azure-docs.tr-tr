@@ -28,14 +28,14 @@ Azure Media Services, canlı [Olaylar](/rest/api/media/liveevents) canlı akış
 Öğreticiyi tamamlamak için aşağıdakiler gereklidir:
 
 - Visual Studio Code veya Visual Studio 'Yu yükler.
-- [Media Services hesabı oluşturun](./create-account-howto.md).<br/>API erişim ayrıntılarını JSON biçiminde kopyalamaya veya bu örnekte kullanılan. env dosya biçimindeki Media Services hesabına bağlanmak için gereken değerleri depoladığınızdan emin olun.
+- [Media Services hesabı oluşturun](./account-create-how-to.md).<br/>API erişim ayrıntılarını JSON biçiminde kopyalamaya veya bu örnekte kullanılan. env dosya biçimindeki Media Services hesabına bağlanmak için gereken değerleri depoladığınızdan emin olun.
 - [Azure CLI Ile Access Azure Media Services API 'sindeki](./access-api-howto.md) adımları izleyin ve kimlik bilgilerini kaydedin. Bu örnekteki API 'ye erişmek için bunları kullanmanız veya. env dosya biçimine girmeniz gerekir. 
 - Bir olayı yayımlamak için kullanılan bir kamera veya bir cihaz (dizüstü bilgisayar gibi).
-- Kamera akışınızı kodlayan ve RTMP protokolünü kullanarak Media Services canlı akış hizmetine Gönderen şirket içi yazılım Kodlayıcısı, bkz. [Önerilen şirket içi canlı kodlayıcılar](recommended-on-premises-live-encoders.md). Akışın **RTMP** veya **Kesintisiz Akış** biçiminde olması gerekir.  
+- Kamera akışınızı kodlayan ve RTMP protokolünü kullanarak Media Services canlı akış hizmetine Gönderen şirket içi yazılım Kodlayıcısı, bkz. [Önerilen şirket içi canlı kodlayıcılar](encode-recommended-on-premises-live-encoders.md). Akışın **RTMP** veya **Kesintisiz Akış** biçiminde olması gerekir.  
 - Bu örnek için, ücretsiz [Açık yayın yazılımı OBS Studio](https://obsproject.com/download) gibi bir yazılım kodlayıcıyla başlamak önerilir, bu da başlamak için basit hale gelir. 
 
 > [!TIP]
-> Devam etmeden önce [Media Services v3 ile canlı akış](live-streaming-overview.md) konusunu gözden geçirmeyi unutmayın. 
+> Devam etmeden önce [Media Services v3 ile canlı akış](stream-live-streaming-concept.md) konusunu gözden geçirmeyi unutmayın. 
 
 ## <a name="download-and-configure-the-sample"></a>Örneği indirin ve yapılandırın
 
@@ -70,15 +70,15 @@ Bu bölüm, *Liveeventwithdvr* projesinin [program. cs](https://github.com/Azure
 
 ### <a name="create-a-live-event"></a>Canlı etkinlik oluşturma
 
-Bu bölümde, bir **geçişli** canlı etkinlik türünün nasıl oluşturulduğu gösterilir (LiveEventEncodingType None olarak ayarlanır). Mevcut canlı etkinlik türleri hakkında daha fazla bilgi için bkz. [canlı olay türleri](live-events-outputs-concept.md#live-event-types). Doğrudan geçiş 'nin yanı sıra, 720P veya 1080P Uyarlamalı bit hızı bulut kodlaması için canlı bir dönüştürme canlı olayı kullanabilirsiniz. 
+Bu bölümde, bir **geçişli** canlı etkinlik türünün nasıl oluşturulduğu gösterilir (LiveEventEncodingType None olarak ayarlanır). Mevcut canlı etkinlik türleri hakkında daha fazla bilgi için bkz. [canlı olay türleri](live-event-outputs-concept.md#live-event-types). Doğrudan geçiş 'nin yanı sıra, 720P veya 1080P Uyarlamalı bit hızı bulut kodlaması için canlı bir dönüştürme canlı olayı kullanabilirsiniz. 
  
 Canlı olay oluştururken belirtmek isteyebileceğiniz bazı şeyler şunlardır:
 
 * Canlı etkinlik için alma Protokolü (Şu anda, RTMP (S) ve Kesintisiz Akış protokolleri desteklenir).<br/>Canlı olay veya ilişkili canlı çıktıları çalışırken protokol seçeneğini değiştiremezsiniz. Farklı protokollere ihtiyacınız varsa, her akış protokolü için ayrı canlı etkinlik oluşturun.  
 * Alma ve önizleme için IP kısıtlamaları. Bu canlı olaya bir video almasına izin verilen IP adreslerini tanımlayabilirsiniz. İzin verilen IP adresleri tek bir IP adresi (örneğin '10.0.0.1'), bir IP adresi ve CIDR alt ağ maskesi kullanan bir IP aralığı (örneğin '10.0.0.1/22') veya bir IP adresi ve bir noktalı ondalık alt ağ maskesi kullanan bir IP aralığı (örneğin '10.0.0.1(255.255.252.0)') olabilir.<br/>Hiçbir IP adresi belirtilmemişse ve kural tanımı yoksa, hiçbir IP adresine izin verilmez. Tüm IP adreslerine izin vermek için, bir kural oluşturun ve 0.0.0.0/0 olarak ayarlayın.<br/>IP adresleri aşağıdaki biçimlerden birinde olmalıdır: dört sayı veya CıDR adres aralığı olan IPv4 adresi.
-* Olayı oluştururken, başlatmayı belirtebilirsiniz. <br/>Autostart değeri true olarak ayarlandığında, canlı olay oluşturulduktan sonra başlatılır. Bu, canlı olay çalışmaya başladığı anda faturalandırma başladığı anlamına gelir. Daha fazla faturalandırmayı durdurmak için canlı olay kaynağında durdurmayı açıkça çağırmanız gerekir. Daha fazla bilgi için bkz. [canlı olay durumları ve faturalandırma](live-event-states-billing.md).
+* Olayı oluştururken, başlatmayı belirtebilirsiniz. <br/>Autostart değeri true olarak ayarlandığında, canlı olay oluşturulduktan sonra başlatılır. Bu, canlı olay çalışmaya başladığı anda faturalandırma başladığı anlamına gelir. Daha fazla faturalandırmayı durdurmak için canlı olay kaynağında durdurmayı açıkça çağırmanız gerekir. Daha fazla bilgi için bkz. [canlı olay durumları ve faturalandırma](live-event-states-billing-concept.md).
 Canlı olayı, daha düşük maliyetli bir ' çalışma ' durumuna taşımayı daha hızlı hale getiren daha düşük maliyetli ' bir ' durumda başlatmak için kullanılabilir bekleme modları de vardır. Bu, kanalları hızla havuza alma ihtiyacı olan hotpool gibi durumlarda faydalıdır.
-* Bir alma URL 'sinin tahmine dayalı olması ve donanım tabanlı bir canlı kodlayıcıda daha kolay korunması için, "useStaticHostname" özelliğini doğru olarak ayarlayın. Ayrıntılı bilgi için bkz. [canlı olay alma URL 'leri](live-events-outputs-concept.md#live-event-ingest-urls).
+* Bir alma URL 'sinin tahmine dayalı olması ve donanım tabanlı bir canlı kodlayıcıda daha kolay korunması için, "useStaticHostname" özelliğini doğru olarak ayarlayın. Ayrıntılı bilgi için bkz. [canlı olay alma URL 'leri](live-event-outputs-concept.md#live-event-ingest-urls).
 
 [!code-csharp[Main](../../../media-services-v3-dotnet/Live/LiveEventWithDVR/Program.cs#CreateLiveEvent)]
 
@@ -128,7 +128,7 @@ Canlı çıktılar oluşturma sırasında başlar ve silindiğinde durdurulur. B
 #### <a name="create-a-streaming-locator"></a>Akış Bulucu oluşturma
 
 > [!NOTE]
-> Media Services hesabınız oluşturulduğunda hesabınıza **durdurulmuş** durumda bir **varsayılan** akış uç noktası eklenir. İçeriğinizi akışa almak ve [dinamik paketleme](dynamic-packaging-overview.md) ile dinamik şifrelemeden yararlanmak için içerik akışı yapmak istediğiniz akış uç noktasının **çalışıyor** durumda olması gerekir.
+> Media Services hesabınız oluşturulduğunda hesabınıza **durdurulmuş** durumda bir **varsayılan** akış uç noktası eklenir. İçeriğinizi akışa almak ve [dinamik paketleme](encode-dynamic-packaging-concept.md) ile dinamik şifrelemeden yararlanmak için içerik akışı yapmak istediğiniz akış uç noktasının **çalışıyor** durumda olması gerekir.
 
 Bir akış Bulucuyu kullanarak varlığı yayımladığınızda, canlı olay (DVR pencere uzunluğuna kadar), akış bulucunun süre sonu veya silme işlemi ne kadar önce gelirse görüntülenmeye devam eder. Canlı ve isteğe bağlı olarak görüntülemek için sanal "bant" kaydını görüntüleme izleyicileriniz için kullanılabilir hale getirebilirsiniz. Kayıt tamamlandığında (canlı çıktı silindiğinde) canlı etkinlik, DVR penceresi veya isteğe bağlı varlık izlemek için aynı URL de kullanılabilir.
 

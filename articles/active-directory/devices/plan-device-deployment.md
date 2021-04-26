@@ -11,12 +11,12 @@ author: BarbaraSelden
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fc631e4329c1df2cdcbfe57c2b43ccccf14afa85
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: faa18b619c785ad23e1da037621597684b1c5c63
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97936456"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106551790"
 ---
 # <a name="plan-your-azure-active-directory-device-deployment"></a>Azure Active Directory cihaz dağıtımınızı planlayın
 
@@ -54,7 +54,7 @@ Cihazlarınıza bir Azure AD kimliği verme hakkında önemli avantajlar:
 
 Video:  [cihaz denetimleriyle koşullu erişim](https://youtu.be/NcONUf-jeS4)
 
-SSS: [Azure AD cihaz YÖNETIMI SSS](faq.md)  ve [Ayarlar ve VERI dolaşımı hakkında SSS](enterprise-state-roaming-faqs.md) 
+SSS: [Azure AD cihaz YÖNETIMI SSS](faq.yml)  ve [Ayarlar ve VERI dolaşımı hakkında SSS](enterprise-state-roaming-faqs.md) 
 
 ## <a name="plan-the-deployment-project"></a>Dağıtım projesini planlayın
 
@@ -239,9 +239,9 @@ Tümleşik Aygıtlar için desteklenen ve desteklenmeyen platformları gözden g
 
 | Cihaz yönetimi araçları| Azure AD kayıtlı| Azure AD'ye katılım| Hibrit Azure AD'ye katılım|
 | - | - | - | - |
-| [Mobil cihaz yönetimi (MDM) ](/windows/client-management/mdm/azure-active-directory-integration-with-mdm) <br>Örnek: Microsoft Intune| ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)|  |
-| [Microsoft Intune ve Microsoft uç noktası ile ortak yönetim Configuration Manager](/mem/configmgr/comanage/overview) <br>(Windows 10 ve üzeri)| | ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)|  |
-| [Grup İlkesi](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831791(v=ws.11))<br>(Yalnızca Windows)| | | ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)|  |
+| [Mobil cihaz yönetimi (MDM) ](/windows/client-management/mdm/azure-active-directory-integration-with-mdm) <br>Örnek: Microsoft Intune| ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| 
+| [Microsoft Intune ve Microsoft uç noktası ile ortak yönetim Configuration Manager](/mem/configmgr/comanage/overview) <br>(Windows 10 ve üzeri)| | ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| 
+| [Grup İlkesi](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831791(v=ws.11))<br>(Yalnızca Windows)| | | ![Bu değerler için onay işareti.](./media/plan-device-deployment/check.png)| 
 
 
 

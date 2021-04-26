@@ -8,12 +8,12 @@ ms.author: gachandw
 ms.reviewer: mimckitt
 ms.date: 10/13/2020
 ms.custom: ''
-ms.openlocfilehash: f9029a36dc3b778e139b4553524e8e2ca6b4bbad
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 6db43acda679c6c1c1edd6336f693cc4757b6d45
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98757178"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220926"
 ---
 # <a name="extensions-for-cloud-services-extended-support"></a>Cloud Services uzantıları (genişletilmiş destek)
 
@@ -36,6 +36,14 @@ Temel izleme ile, rol örneklerinden alınan performans sayacı verileri, 3 daki
 Gelişmiş izleme sayesinde ek ölçümler, 5 dakika, 1 saat ve 12 saat aralıklarıyla örneklenir ve toplanır. Toplanan veriler bir depolama hesabında, tablolarda depolanır ve 10 gün sonra temizlenir. Kullanılan depolama hesabı role göre yapılandırılır; farklı roller için farklı depolama hesapları kullanabilirsiniz. 
 
 Daha fazla bilgi için bkz [. Cloud Services Windows Azure tanılama uzantısı 'Nı uygulama (genişletilmiş destek)](enable-wad.md)
+
+## <a name="anti-malware-extension"></a>Kötü amaçlı yazılımdan koruma uzantısı
+Azure uygulaması veya hizmeti, PowerShell cmdlet 'lerini kullanarak Azure için Microsoft Antimalware Cloud Services etkinleştirebilir ve yapılandırabilir. Microsoft kötü amaçlı yazılımdan koruma 'nın, Windows Server 2012 R2 çalıştıran Cloud Services platformunda devre dışı bırakılmış bir duruma yüklendiğini ve bu işlemin etkinleştirilmesi için bir Azure uygulaması tarafından bir işlem gerektirdiğini unutmayın. Windows Server 2016 ve üzeri için, Windows Defender varsayılan olarak etkindir, bu nedenle kötü amaçlı yazılımdan koruma yapılandırmak için bu cmdlet 'ler kullanılabilir.
+
+Daha fazla bilgi için bkz. [genişletilmiş destek (CS-es) kullanarak Azure bulut hizmeti 'Ne Microsoft Antimalware ekleme](https://docs.microsoft.com/azure/security/fundamentals/antimalware-code-samples#add-microsoft-antimalware-to-azure-cloud-service-using-extended-support)
+
+Azure kötü amaçlı yazılımdan koruma hakkında daha fazla bilgi edinmek için lütfen [buraya](https://docs.microsoft.com/azure/security/fundamentals/antimalware) gidin
+
 
 
 ## <a name="next-steps"></a>Sonraki adımlar 

@@ -1,19 +1,19 @@
 ---
-title: Geri yükleme-Azure portal-MySQL için Azure veritabanı-esnek sunucu
-description: Bu makalede, Azure portal aracılığıyla MySQL için Azure veritabanı 'nda geri yükleme işlemlerinin nasıl gerçekleştirileceği açıklanır.
+title: MySQL için Azure veritabanı esnek sunucusunu Azure portal geri yükleyin.
+description: Bu makalede, Azure portal aracılığıyla MySQL için Azure veritabanı esnek sunucusu 'nda geri yükleme işlemlerinin nasıl gerçekleştirileceği açıklanır.
 author: mksuni
 ms.author: sumuth
 ms.service: mysql
 ms.topic: how-to
-ms.date: 09/21/2020
-ms.openlocfilehash: 062d53fcb122ebacd004d7dca5e11f5a883354cd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/01/2021
+ms.openlocfilehash: 962a2cbdbcc238517616c9ade235eed9b8cae6f7
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93241965"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107502054"
 ---
-# <a name="point-in-time-restore-of-a-azure-database-for-mysql---flexible-server-preview"></a>MySQL için Azure veritabanı-esnek sunucu (Önizleme) için bir noktadan noktaya geri yükleme
+# <a name="point-in-time-restore-of-a-azure-database-for-mysql---flexible-server-preview-using-azure-portal"></a>Azure portal kullanarak MySQL için Azure veritabanı-esnek sunucu (Önizleme) için bir noktadan noktaya geri yükleme
 
 
 > [!IMPORTANT]
@@ -37,12 +37,9 @@ En eski mevcut yedeği kullanarak esnek sunucunuzu geri yüklemek için bu adım
 
 3.  Genel Bakış sayfasında **geri yükle**' ye tıklayın.
 
-    Tutucu
-
 4.  Geri yükleme sayfası, **en son geri yükleme noktası** ve özel geri yükleme noktası arasından seçim yapabileceğiniz bir seçenekle gösterilir.
 
 5.  **En son geri yükleme noktası** seçin.
-
 
 6.  **Yeni sunucuya geri yükle** alanına yeni bir sunucu adı sağlayın.
 
@@ -60,8 +57,6 @@ En eski mevcut yedeği kullanarak esnek sunucunuzu geri yüklemek için bu adım
 
 2.  Genel Bakış sayfasında **geri yükle**' ye tıklayın.
 
-    Tutucu
-
 3.  Geri yükleme sayfası, en erken geri yükleme noktası ve özel geri yükleme noktası arasından seçim yapabileceğiniz bir seçenekle gösterilir.
 
 4.  **Özel geri yükleme noktası** seçin.
@@ -70,14 +65,23 @@ En eski mevcut yedeği kullanarak esnek sunucunuzu geri yüklemek için bu adım
 
 6.  **Yeni sunucuya geri yükle** alanına yeni bir sunucu adı sağlayın.
 
-6.  **Yeni sunucuya geri yükle** alanına yeni bir sunucu adı sağlayın. 
-   
+6.  **Yeni sunucuya geri yükle** alanına yeni bir sunucu adı sağlayın.
+
     :::image type="content" source="./media/concept-backup-restore/restore-blade-custom.png" alt-text="genel bakışı görüntüle":::
- 
+
 7.  **Tamam**'a tıklayın.
 
 8.  Geri yükleme işleminin başlatıldığı bir bildirim gösterilir.
 
-## <a name="next-steps"></a>Sonraki adımlar
 
-Yer tutucu
+## <a name="perform-post-restore-tasks"></a>Geri yükleme sonrası görevleri gerçekleştirme
+Geri yükleme tamamlandıktan sonra kullanıcılarınızın ve uygulamalarınızın yedeklemesini ve çalışmasını sağlamak için aşağıdaki görevleri gerçekleştirmeniz gerekir:
+
+- Yeni sunucu özgün sunucunun yerini alacak şekilde, istemcileri ve istemci uygulamalarını yeni sunucuya yeniden yönlendirin.
+- Kullanıcıların bağlanabilmesi için uygun VNet kurallarının yerinde olduğundan emin olun. Bu kurallar, özgün sunucudan üzerine kopyalanmaz.
+- Uygun oturum açma ve veritabanı düzeyi izinlerinin yerinde olduğundan emin olun.
+- Uyarıları yeni geri yükleme sunucusuna uygun şekilde yapılandırın.
+
+
+## <a name="next-steps"></a>Sonraki adımlar
+[İş sürekliliği](concepts-business-continuity.md) hakkında daha fazla bilgi edinin

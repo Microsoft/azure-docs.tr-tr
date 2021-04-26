@@ -10,10 +10,10 @@ ms.date: 10/15/2020
 ms.author: euang
 ms.reviewer: euang
 ms.openlocfilehash: 4471fed7b423fe05147db30afe57f6c845fe640e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101670690"
 ---
 # <a name="use-extended-apache-spark-history-server-to-debug-and-diagnose-apache-spark-applications"></a>Apache Spark uygulamalarda hata ayıklamak ve tanılamak için genişletilmiş Apache Spark geçmiş sunucusunu kullanma
@@ -42,11 +42,11 @@ Apache Spark geçmiş sunucusu, tamamlanan ve Spark uygulamalarının çalışt�
 
     ![Spark geçmiş sunucusunu açın.](./media/apache-spark-history-server/open-spark-history-server.png)
 
-### <a name="open-the-spark-history-server-web-ui-from-data-node"></a>Veri düğümünden Spark geçmiş sunucusu Web Kullanıcı arabirimini açın
+### <a name="open-the-spark-history-server-web-ui-from-data-node&quot;></a>Veri düğümünden Spark geçmiş sunucusu Web Kullanıcı arabirimini açın
 
 1. Azure SYNAPSE Studio Not defterinizden, iş yürütme çıkış hücresinden veya Not defteri belgesinin altındaki durum panelinden **Spark geçmiş sunucusu** ' nu seçin. **Oturum ayrıntıları**’nı seçin.
 
-   ![Spark geçmiş sunucusu 1 ' i Başlat](./media/apache-spark-history-server/launch-history-server2.png "Spark geçmiş sunucusunu Başlat")
+   ![Spark geçmiş sunucusu 1 ' i Başlat](./media/apache-spark-history-server/launch-history-server2.png &quot;Spark geçmiş sunucusunu Başlat")
 
 2. Slayt çıkış panelinden **Spark geçmiş sunucusu** ' nu seçin.
 

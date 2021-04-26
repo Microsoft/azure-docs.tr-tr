@@ -3,12 +3,12 @@ title: Azure Relay nedir? | Microsoft Belgeleri
 description: Bu makale, bir güvenlik duvarı bağlantısı açmak ya da kurumsal ağ altyapısına müdahale eden değişiklikler yapmak zorunda kalmadan kurumsal ağınızda çalışan şirket içi hizmetleri kullanan bulut uygulamaları geliştirmenizi sağlayan Azure Relay hizmetine genel bakış sağlamaktadır.
 ms.topic: conceptual
 ms.date: 06/23/2020
-ms.openlocfilehash: fbf1b2134a4c2dce7a3e6a62668d0852dc08c18a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3b222942394b8a83e6f5d4447aa9ccfb33cdec21
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97955391"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107314210"
 ---
 # <a name="what-is-azure-relay"></a>Azure Relay nedir?
 Azure Relay hizmeti, kurumsal ağınızda çalışan hizmetleri güvenli bir şekilde genel buluta açmanızı sağlar. Bu şekilde, güvenlik duvarınızda bir bağlantı noktasını açmadan veya kurumsal ağ altyapınızda izinsiz değişiklikler yapmaya gerek kalmadan yapabilirsiniz. 
@@ -80,5 +80,5 @@ Aşağıdaki diyagramda gelen geçiş isteklerinin Azure Relay tarafından nası
 * [.NET HTTP İstekleri kullanmaya başlayın](relay-hybrid-connections-http-requests-dotnet-get-started.md)
 * [Node WebSockets kullanmaya başlama](relay-hybrid-connections-node-get-started.md)
 * [Node HTTP İstekleri kullanmaya başlayın](relay-hybrid-connections-http-requests-node-get-started.md)
-* [Geçiş hakkında SSS](relay-faq.md)
+* [Geçiş hakkında SSS](relay-faq.yml)
 

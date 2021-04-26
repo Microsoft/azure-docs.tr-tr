@@ -6,12 +6,13 @@ ms.author: yegu
 ms.service: cache
 ms.topic: conceptual
 ms.date: 02/08/2021
-ms.openlocfilehash: d91b62afacad31d78feb7d4743cd4050fcc1bd4e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 43db8d4c094ec1b08a24c29fdaccf97f63ef29b9
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104581652"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833985"
 ---
 # <a name="scale-an-azure-cache-for-redis-instance"></a>Redsıs örneği için Azure önbelleğini ölçeklendirme
 Redin için Azure önbelleğinde, önbellek boyutu ve özellikleri seçiminde esneklik sağlayan farklı önbellek teklifleri vardır. Temel, standart veya Premium bir önbellek için, oluşturulduktan sonra, uygulama gereksinimlerinize devam etmek için boyutunu ve katmanını değiştirebilirsiniz. Bu makalede, Azure portal ve Azure PowerShell ve Azure CLı gibi araçları kullanarak önbelleğinizi nasıl ölçekleyebilirsiniz.

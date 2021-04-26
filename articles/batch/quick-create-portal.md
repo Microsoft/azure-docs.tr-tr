@@ -1,15 +1,17 @@
 ---
 title: Azure hızlı başlangıç-Azure portal ilk Batch işinizi çalıştırın
 description: Bu hızlı başlangıçta, bir Batch hesabı, bir işlem düğümleri havuzu ve havuzda temel görevleri çalıştıran bir iş oluşturmak için Azure portal nasıl kullanılacağı gösterilmektedir.
-ms.topic: quickstart
 ms.date: 08/17/2020
-ms.custom: mvc
-ms.openlocfilehash: 1234a932a732cdb6fda1c412a423ae0b1ea089e9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.topic: quickstart
+ms.custom:
+- mvc
+- mode-portal
+ms.openlocfilehash: 3333097b4bd55173725aa33bc4bfbae318510cf1
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102184024"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538538"
 ---
 # <a name="quickstart-run-your-first-batch-job-in-the-azure-portal"></a>Hızlı başlangıç: Azure portalında ilk Batch işinizi çalıştırma
 

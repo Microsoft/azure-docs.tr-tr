@@ -2,16 +2,19 @@
 title: Hızlı başlangıç-bir kapsayıcı örneği oluşturma-Azure Resource Manager şablonu
 description: Bu hızlı başlangıçta, yalıtılmış bir Azure Container örneğinde çalışan kapsayıcılı bir Web uygulamasını hızlıca dağıtmak için bir Azure Resource Manager şablonu kullanırsınız.
 services: azure-resource-manager
-ms.service: azure-resource-manager
-ms.topic: quickstart
-ms.custom: subject-armqs, devx-track-js
 ms.date: 04/30/2020
-ms.openlocfilehash: 621e3e1cef39e34656c094a39d218d5d5866fa26
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.topic: quickstart
+ms.service: azure-resource-manager
+ms.custom:
+- subject-armqs
+- devx-track-js
+- mode-arm
+ms.openlocfilehash: 2f57e86421f7522467a3f4adf4a4e9a21456ba4c
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91309090"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107878749"
 ---
 # <a name="quickstart-deploy-a-container-instance-in-azure-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonu kullanarak Azure 'da kapsayıcı örneği dağıtma
 
@@ -31,7 +34,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
 
 Bu hızlı başlangıçta kullanılan şablon [Azure Hızlı Başlangıç Şablonlarından](https://azure.microsoft.com/resources/templates/101-aci-linuxcontainer-public-ip/) alınmıştır.
 
-:::code language="json" source="~/quickstart-templates/101-aci-linuxcontainer-public-ip/azuredeploy.json":::
+:::code language="json" source="~/quickstart-templates/quickstarts/microsoft.containerinstance/aci-linuxcontainer-public-ip/azuredeploy.json":::
 
 Aşağıdaki kaynak şablonda tanımlanmıştır:
 

@@ -6,15 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: how-to
-ms.date: 02/22/2021
+ms.date: 03/30/2021
 ms.author: alkohli
-Customer intent: As an IT admin, I need to understand how to configure compute on Azure Stack Edge Pro device so I can use it to transform the data before sending it to Azure.
-ms.openlocfilehash: c11a89d91693075ca54c0689223dcf2af06df521
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 139b543160b679ba063a0633f9091e7bc0ef1fc1
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105568520"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106074948"
 ---
 # <a name="deploy-vms-on-your-azure-stack-edge-pro-gpu-device-via-the-azure-portal"></a>Azure Stack Edge Pro GPU cihazınızda VM 'Leri Azure portal aracılığıyla dağıtın
 
@@ -127,9 +126,10 @@ VM görüntüsü oluşturduktan sonra bir VM oluşturmak için bu adımları izl
     |Parametre |Açıklama  |
     |---------|---------|
     |Sanal makine adı     |         |
+    |Edge kaynak grubu     | VM ile ilişkili tüm kaynaklar için yeni bir kaynak grubu oluşturun.        |
     |Görüntü     | Cihazda bulunan VM görüntülerinin arasından seçim yapın.        |
     |Boyut     | [Desteklenen VM boyutları](azure-stack-edge-gpu-virtual-machine-sizes.md)arasından seçim yapın.        |
-    |Kullanıcı adı     | Varsayılan Kullanıcı adı *azureuser* kullanın.        |
+    |Kullanıcı adı     | Yöneticinin VM 'de oturum açması için varsayılan Kullanıcı adı *azureuser* kullanın.        |
     |Kimlik doğrulaması türü    | SSH ortak anahtarından veya Kullanıcı tanımlı paroladan birini seçin.       |
     |Parola     | Sanal makinede oturum açmak için bir parola girin. Parola en az 12 karakter uzunluğunda olmalı ve tanımlanmış [karmaşıklık gereksinimlerini](../virtual-machines/windows/faq.md#what-are-the-password-requirements-when-creating-a-vm)karşılamalıdır.        |
     |Parolayı onayla    | Parolayı yeniden girin.        |
@@ -149,11 +149,7 @@ VM görüntüsü oluşturduktan sonra bir VM oluşturmak için bu adımları izl
 
         ![VM Ekle 4](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-disks-2.png)
 
-    1.  Daha fazla disk eklemek için yukarıdaki işlemi tekrarlayın. Diskler oluşturulduktan sonra, **diskler** sekmesinde görünür.
-
-        ![VM Ekle 5](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-disks-3.png)
-
-        **Sonraki: Ağ**’ı seçin.
+    1.  Daha fazla disk eklemek için yukarıdaki işlemi tekrarlayın. Diskler oluşturulduktan sonra, **diskler** sekmesinde görünür. **İleri ' yi seçin: ağ**.
 
 1. **Ağ sekmesinde,** sanal makinenizin ağ bağlantısını yapılandıracaksınız.
 
@@ -168,26 +164,32 @@ VM görüntüsü oluşturduktan sonra bir VM oluşturmak için bu adımları izl
 
     **İleri ' yi seçin: gözden geçir + oluştur**.
 
+1. **Gelişmiş** SEKMESINDE, VM 'nizi özelleştirmek için özel verileri veya Cloud-init ' i belirtebilirsiniz. 
+
+    Bir sanal makineyi ilk önyüklemede özelleştirmek için Cloud-init ' i kullanabilirsiniz. Paketleri yüklemek ve dosyaları yazmak ya da kullanıcıları ve güvenliği yapılandırmak için Cloud-init ' i kullanın. İlk önyükleme işlemi sırasında Cloud-init çalıştırılıyorsa, yapılandırmanızı uygulamak için başka bir adım gerekmez. Cloud-init hakkında ayrıntılı bilgi için bkz. [Cloud-init Overview](../virtual-machines/linux/tutorial-automate-vm-deployment.md#cloud-init-overview).
+
+    ![VM ekle 7](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-advanced-1.png)    
+
 1. **Gözden geçir + oluştur** sekmesinde VM 'nin belirtimlerini gözden geçirin ve **Oluştur**' u seçin.
 
-    ![VM ekle 7](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-review-create-1.png)
+    ![VM 8 Ekle](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-review-create-1.png)
 
 1. VM oluşturma başlar ve 20 dakikaya kadar sürebilir. VM oluşturmayı izlemek için **dağıtımlar** ' a gidebilirsiniz.
 
-    ![VM 8 Ekle](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-deployments-page-1.png)
+    ![VM Ekle 9](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-deployments-page-1.png)
 
     
 1. VM başarıyla oluşturulduktan sonra, **genel bakış** sayfası yeni VM 'yi görüntüleyecek şekilde güncelleştirilir.
 
-    ![VM Ekle 9](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-overview-page-1.png)
+    ![VM ekleme 10](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-overview-page-1.png)
 
 1. **Sanal makinelere** gitmek için yenı oluşturulan VM 'yi seçin.
 
-    ![VM ekleme 10](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-page-1.png)
+    ![VM Ekle 11](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-page-1.png)
 
     Ayrıntıları görmek için VM 'yi seçin. 
 
-    ![VM Ekle 11](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-details-1.png)
+    ![VM Ekle 12](media/azure-stack-edge-gpu-deploy-virtual-machine-portal/add-virtual-machine-details-1.png)
 
 ## <a name="connect-to-a-vm"></a>Sanal makineye bağlanma
 

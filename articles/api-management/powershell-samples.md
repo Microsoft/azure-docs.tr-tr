@@ -15,17 +15,17 @@ ms.date: 10/09/2017
 ms.author: apimpm
 ms.custom: mvc
 ms.openlocfilehash: 531c42b763f234baaf6a93924979b8c7dca57423
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "87905814"
 ---
 # <a name="azure-powershell-samples-for-api-management"></a>API Management için Azure PowerShell örnekleri
 
 Aşağıdaki tabloda PowerShell'den API Management hizmetiyle çalışmak için kullanılabilecek örnek betikler yer almaktadır.
 
-| Sağlama ve yönetme | Description |
+| Sağlama ve yönetme | Açıklama |
 | -------------------- | ----------- |
 |[Kullanıcı ekle](./scripts/powershell-add-user-and-get-subscription-key.md?toc=%2fpowershell%2fmodule%2ftoc.json)| API Management'te bir kullanıcı oluşturur ve bir abonelik anahtarı alır.|
 |[APIM hizmeti oluşturma](./scripts/powershell-create-apim-service.md?toc=%2fpowershell%2fmodule%2ftoc.json)|Bir Geliştirici SKU API Management Hizmeti oluşturur.|

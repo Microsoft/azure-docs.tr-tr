@@ -3,12 +3,12 @@ title: Azure Backup aracısında sorun giderme
 description: Bu makalede Azure Backup aracısının yüklenmesi ve kaydettirilmesinde nasıl sorun giderileceği hakkında bilgi edinebilirsiniz.
 ms.topic: troubleshooting
 ms.date: 07/15/2019
-ms.openlocfilehash: 3203d5604f1bd5db9cf579af01b2ae6f34032d89
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c662bf8c8d9490691f45254bef01618f17bd6e2a
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103467621"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107518193"
 ---
 # <a name="troubleshoot-the-microsoft-azure-recovery-services-mars-agent"></a>Microsoft Azure Kurtarma Hizmetleri (MARS) Aracısı sorunlarını giderme
 
@@ -21,7 +21,7 @@ Microsoft Azure kurtarma hizmetleri (MARS) Aracısı ile ilgili sorun gidermeye 
 - [Mars aracısının güncel olduğundan emin olun](https://go.microsoft.com/fwlink/?linkid=229525&clcid=0x409).
 - [Mars Aracısı ve Azure arasında ağ bağlantısına sahip olduğunuzdan emin olun](#the-microsoft-azure-recovery-service-agent-was-unable-to-connect-to-microsoft-azure-backup).
 - MARS 'ın çalıştığından emin olun (hizmet konsolunda). Gerekirse, yeniden başlatın ve işlemi yeniden deneyin.
-- [Karalama klasörü konumunda %5 ila %10 boş birim alanı kullanılabilir olduğundan emin olun](./backup-azure-file-folder-backup-faq.md#whats-the-minimum-size-requirement-for-the-cache-folder).
+- [Karalama klasörü konumunda %5 ila %10 boş birim alanı kullanılabilir olduğundan emin olun](./backup-azure-file-folder-backup-faq.yml#what-s-the-minimum-size-requirement-for-the-cache-folder-).
 - [Azure Backup ile çakışan başka bir işlem veya virüsten koruma yazılımı olup olmadığını kontrol edin](./backup-azure-troubleshoot-slow-backup-performance-issue.md#cause-another-process-or-antivirus-software-interfering-with-azure-backup).
 - Yedekleme işi uyarılarla tamamlanırsa, bkz. [yedekleme Işleri uyarı Ile tamamlandı](#backup-jobs-completed-with-warning)
 - Zamanlanan yedekleme başarısız olursa, ancak el ile yedekleme çalışırsa, bkz. [yedeklemeler zamanlamaya göre Çalıştırılmadı](#backups-dont-run-according-to-schedule).
@@ -41,7 +41,7 @@ Microsoft Azure kurtarma hizmetleri (MARS) Aracısı ile ilgili sorun gidermeye 
 
 | Nedeni | Önerilen Eylemler |
 | ---     | ---    |
-| **Kasa kimlik bilgileri geçerli değil** <br/> <br/> Kasa kimlik bilgileri dosyaları bozulmuş olabilir, zaman aşımına uğradı veya *. vaultcredentials*'dan farklı bir dosya uzantısına sahip olabilir. (Örneğin, kayıt zamanından 10 günden daha uzun bir süre önce indirilmiş olabilir.)| Azure portal kurtarma hizmetleri kasasından [yeni kimlik bilgilerini indirin](backup-azure-file-folder-backup-faq.md#where-can-i-download-the-vault-credentials-file) . Ardından aşağıdaki adımları uygulayın: <ul><li> MARS 'ı zaten yüklediyseniz ve daha önce kaydolduysanız, Microsoft Azure Backup Agent MMC konsolunu açın. Ardından, yeni kimlik bilgileriyle kaydı gerçekleştirmek için **Eylemler** bölmesinde **sunucuyu kaydet** ' i seçin. <br/> <li> Yeni yükleme başarısız olursa yeni kimlik bilgileriyle yeniden yüklemeyi deneyin.</ul> **Note**: birden fazla kasa kimlik bilgileri dosyası indirildiyse, sonraki 10 gün için yalnızca en son dosya geçerlidir. Yeni bir kasa kimlik bilgileri dosyası indirmenizi öneririz.
+| **Kasa kimlik bilgileri geçerli değil** <br/> <br/> Kasa kimlik bilgileri dosyaları bozulmuş olabilir, zaman aşımına uğradı veya *. vaultcredentials*'dan farklı bir dosya uzantısına sahip olabilir. (Örneğin, kayıt zamanından 10 günden daha uzun bir süre önce indirilmiş olabilir.)| Azure portal kurtarma hizmetleri kasasından [yeni kimlik bilgilerini indirin](backup-azure-file-folder-backup-faq.yml#where-can-i-download-the-vault-credentials-file-) . Ardından aşağıdaki adımları uygulayın: <ul><li> MARS 'ı zaten yüklediyseniz ve daha önce kaydolduysanız, Microsoft Azure Backup Agent MMC konsolunu açın. Ardından, yeni kimlik bilgileriyle kaydı gerçekleştirmek için **Eylemler** bölmesinde **sunucuyu kaydet** ' i seçin. <br/> <li> Yeni yükleme başarısız olursa yeni kimlik bilgileriyle yeniden yüklemeyi deneyin.</ul> **Note**: birden fazla kasa kimlik bilgileri dosyası indirildiyse, sonraki 10 gün için yalnızca en son dosya geçerlidir. Yeni bir kasa kimlik bilgileri dosyası indirmenizi öneririz.
 | **Proxy sunucusu/güvenlik duvarı kaydı engelliyor** <br/>veya <br/>**İnternet bağlantısı yok** <br/><br/> Makinenizin veya proxy sunucunuzun sınırlı internet bağlantısı varsa ve gerekli URL 'Ler için erişim sağlanmıyorsanız, kayıt başarısız olur.| Şu adımları uygulayın:<br/> <ul><li> Sistemin internet bağlantısı olduğundan emin olmak için BT ekibinizle birlikte çalışın.<li> Proxy sunucunuz yoksa, aracıyı kaydettiğinizde ara sunucu seçeneğinin seçili olmadığından emin olun. [Proxy ayarlarınızı denetleyin](#verifying-proxy-settings-for-windows).<li> Bir güvenlik duvarı/proxy sunucunuz varsa, bu URL 'Lerin ve IP adreslerinin erişime sahip olduğundan emin olmak için ağ ekibinizle birlikte çalışın:<br/> <br> **URL’ler**<br> `www.msftncsi.com` <br> .Microsoft.com <br> .WindowsAzure.com <br> .microsoftonline.com <br> .windows.net <br>`www.msftconnecttest.com`<br><br>**IP adresleri**<br>  20.190.128.0/18 <br>  40.126.0.0/18<br> <br/></ul></ul>Yukarıdaki sorun giderme adımlarını tamamladıktan sonra kaydetmeyi yeniden deneyin.<br></br> Bağlantınız Azure ExpressRoute ile çalışıyorsa, ayarların [Azure ExpressRoute desteği](backup-support-matrix-mars-agent.md#azure-expressroute-support)' nde açıklandığı şekilde yapılandırıldığından emin olun.
 | **Virüsten koruma yazılımı kaydı engelliyor** | Sunucusunda virüsten koruma yazılımı yüklüyse, bu dosya ve klasörler için virüsten koruma taramasına gereken dışlama kurallarını ekleyin: <br/><ul> <li> CBengine.exe <li> CSC.exe<li> Karalama klasörü. Varsayılan konum C:\Program Files\Microsoft Azure Kurtarma Hizmetleri ' dir. <li> C:\Program Files\Microsoft Azure kurtarma hizmetleri \ bin klasöründe bin klasörü.
 
@@ -99,7 +99,7 @@ Microsoft Azure kurtarma hizmetleri (MARS) Aracısı ile ilgili sorun gidermeye 
   | Hata kodu             | Olası                                             | Öneriler                                              |
   | ---------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
   | 0x80070570             | Dosya veya dizin bozuk ve okunamaz durumda. | Kaynak birimde **Chkdsk komutunu** çalıştırın.                             |
-  | 0x80070002, 0x80070003 | Sistem belirtilen dosyayı bulamıyor.         | [Karalama klasörünün dolu olmadığından emin olun](./backup-azure-file-folder-backup-faq.md#manage-the-backup-cache-folder)  <br><br>  Boş alanın yapılandırıldığı birimin var olup olmadığını denetle (silinmedi)  <br><br>   [MARS aracısının makinede yüklü olan antivirüs dışında dışlandığından emin olun](./backup-azure-troubleshoot-slow-backup-performance-issue.md#cause-another-process-or-antivirus-software-interfering-with-azure-backup)  |
+  | 0x80070002, 0x80070003 | Sistem belirtilen dosyayı bulamıyor.         | [Karalama klasörünün dolu olmadığından emin olun](/backup-azure-file-folder-backup-faq.yml#manage-the-backup-cache-folder)  <br><br>  Boş alanın yapılandırıldığı birimin var olup olmadığını denetle (silinmedi)  <br><br>   [MARS aracısının makinede yüklü olan antivirüs dışında dışlandığından emin olun](./backup-azure-troubleshoot-slow-backup-performance-issue.md#cause-another-process-or-antivirus-software-interfering-with-azure-backup)  |
   | 0x80070005             | Erişim reddedildi                                    | [Virüsten koruma veya başka bir üçüncü taraf yazılımının erişimi engelleyip engellemediğini denetleyin](./backup-azure-troubleshoot-slow-backup-performance-issue.md#cause-another-process-or-antivirus-software-interfering-with-azure-backup)     |
   | 0x8007018b             | Bulut dosyasına erişim reddedildi.                | OneDrive dosyaları, git dosyaları veya makinede çevrimdışı durumda olabilecek diğer dosyalar |
 
@@ -117,13 +117,13 @@ Microsoft Azure kurtarma hizmetleri (MARS) Aracısı ile ilgili sorun gidermeye 
 
 | Hata  | Olası nedenler | Önerilen Eylemler |
 |---------|---------|---------|
-|<br />Etkinleştirme başarıyla tamamlanmadı. Geçerli işlem, [0x1FC07] iç hizmet hatası nedeniyle başarısız oldu. Bir süre sonra işlemi yeniden deneyin. Sorun devam ederse, lütfen Microsoft Desteği'ne başvurun.     | <li> Karalama klasörü, yeterli alana sahip olmayan bir birimde bulunur. <li> Karalama klasörü yanlış bir şekilde taşındı. <li> OnlineBackup. KEK dosyası eksik.         | <li>MARS aracısının [en son sürümüne](https://aka.ms/azurebackup_agent) yükseltin.<li>Karalama klasörünü veya önbellek konumunu, yedekleme verilerinin toplam boyutunun %5 ' i ile %10 ' a kadar boş alana sahip bir birime taşıyın. Önbellek konumunu doğru bir şekilde taşımak için, [dosya ve klasörleri yedekleme hakkında sık sorulan soruların](./backup-azure-file-folder-backup-faq.md#manage-the-backup-cache-folder)adımlarına bakın.<li> OnlineBackup. KEK dosyasının mevcut olduğundan emin olun. <br>*Karalama klasörü veya önbellek yolu için varsayılan konum C:\Program Files\Microsoft Azure Kurtarma Hizmetleri hizmeti \ çalışma klasörüdür*.        |
+|<br />Etkinleştirme başarıyla tamamlanmadı. Geçerli işlem, [0x1FC07] iç hizmet hatası nedeniyle başarısız oldu. Bir süre sonra işlemi yeniden deneyin. Sorun devam ederse, lütfen Microsoft Desteği'ne başvurun.     | <li> Karalama klasörü, yeterli alana sahip olmayan bir birimde bulunur. <li> Karalama klasörü yanlış bir şekilde taşındı. <li> OnlineBackup. KEK dosyası eksik.         | <li>MARS aracısının [en son sürümüne](https://aka.ms/azurebackup_agent) yükseltin.<li>Karalama klasörünü veya önbellek konumunu, yedekleme verilerinin toplam boyutunun %5 ' i ile %10 ' a kadar boş alana sahip bir birime taşıyın. Önbellek konumunu doğru bir şekilde taşımak için, [dosya ve klasörleri yedekleme hakkında sık sorulan soruların](/backup-azure-file-folder-backup-faq.yml#manage-the-backup-cache-folder)adımlarına bakın.<li> OnlineBackup. KEK dosyasının mevcut olduğundan emin olun. <br>*Karalama klasörü veya önbellek yolu için varsayılan konum C:\Program Files\Microsoft Azure Kurtarma Hizmetleri hizmeti \ çalışma klasörüdür*.        |
 
 ## <a name="encryption-passphrase-not-correctly-configured"></a>Şifreleme parolası düzgün yapılandırılmadı
 
 | Hata  | Olası nedenler | Önerilen Eylemler |
 |---------|---------|---------|
-| <br />Hata 34506. Bu bilgisayarda depolanan şifreleme parolası düzgün yapılandırılmamış.    | <li> Karalama klasörü, yeterli alana sahip olmayan bir birimde bulunur. <li> Karalama klasörü yanlış bir şekilde taşındı. <li> OnlineBackup. KEK dosyası eksik.        | <li>MARS aracısının [en son sürümüne](https://aka.ms/azurebackup_agent) yükseltin.<li>Karalama klasörünü veya önbellek konumunu, yedekleme verilerinin toplam boyutunun %5 ' i ile %10 ' a kadar boş alana sahip bir birime taşıyın. Önbellek konumunu doğru bir şekilde taşımak için, [dosya ve klasörleri yedekleme hakkında sık sorulan soruların](./backup-azure-file-folder-backup-faq.md#manage-the-backup-cache-folder)adımlarına bakın.<li> OnlineBackup. KEK dosyasının mevcut olduğundan emin olun. <br>*Karalama klasörü veya önbellek yolu için varsayılan konum C:\Program Files\Microsoft Azure Kurtarma Hizmetleri hizmeti \ çalışma klasörüdür*.         |
+| <br />Hata 34506. Bu bilgisayarda depolanan şifreleme parolası düzgün yapılandırılmamış.    | <li> Karalama klasörü, yeterli alana sahip olmayan bir birimde bulunur. <li> Karalama klasörü yanlış bir şekilde taşındı. <li> OnlineBackup. KEK dosyası eksik.        | <li>MARS aracısının [en son sürümüne](https://aka.ms/azurebackup_agent) yükseltin.<li>Karalama klasörünü veya önbellek konumunu, yedekleme verilerinin toplam boyutunun %5 ' i ile %10 ' a kadar boş alana sahip bir birime taşıyın. Önbellek konumunu doğru bir şekilde taşımak için, [dosya ve klasörleri yedekleme hakkında sık sorulan soruların](/backup-azure-file-folder-backup-faq.yml#manage-the-backup-cache-folder)adımlarına bakın.<li> OnlineBackup. KEK dosyasının mevcut olduğundan emin olun. <br>*Karalama klasörü veya önbellek yolu için varsayılan konum C:\Program Files\Microsoft Azure Kurtarma Hizmetleri hizmeti \ çalışma klasörüdür*.         |
 
 ## <a name="backups-dont-run-according-to-schedule"></a>Yedeklemeler zamanlamaya göre Çalıştırılmadı
 
@@ -226,9 +226,9 @@ Kurtarma hala başarısız olursa, sunucunuzu veya istemcinizi yeniden başlatı
 
 MARS Aracısı işlemlerinin başarılı olabilmesi için önbellek klasörünün aşağıdaki gereksinimlere uyması gerekir:
 
-- [Karalama klasörü konumunda %5 ila %10 boş birim alanı kullanılabildiğinden emin olun](backup-azure-file-folder-backup-faq.md#whats-the-minimum-size-requirement-for-the-cache-folder)
-- [Karalama klasörü konumunun geçerli ve erişilebilir olduğundan emin olun](backup-azure-file-folder-backup-faq.md#how-to-check-if-scratch-folder-is-valid-and-accessible)
-- [Önbellek klasöründeki dosya özniteliklerinin desteklendiğinden emin olun](backup-azure-file-folder-backup-faq.md#are-there-any-attributes-of-the-cache-folder-that-arent-supported)
+- [Karalama klasörü konumunda %5 ila %10 boş birim alanı kullanılabildiğinden emin olun](backup-azure-file-folder-backup-faq.yml#what-s-the-minimum-size-requirement-for-the-cache-folder-)
+- [Karalama klasörü konumunun geçerli ve erişilebilir olduğundan emin olun](backup-azure-file-folder-backup-faq.yml#how-to-check-if-scratch-folder-is-valid-and-accessible-)
+- [Önbellek klasöründeki dosya özniteliklerinin desteklendiğinden emin olun](backup-azure-file-folder-backup-faq.yml#are-there-any-attributes-of-the-cache-folder-that-aren-t-supported-)
 - [Ayrılan gölge kopya depolama alanının yedekleme işlemi için yeterli olduğundan emin olun](#increase-shadow-copy-storage)
 - [Önbellek klasörüne erişimi kısıtlayan başka işlem olmadığından emin olun (örn. virüsten koruma yazılımı)](#another-process-or-antivirus-software-blocking-access-to-cache-folder)
 
@@ -258,13 +258,13 @@ Bu bölümde, MARS Aracısı kullanılırken karşılaştığınız yaygın hata
 
 Hata iletisi | Önerilen eylem
 --|--
-Microsoft Azure Kurtarma Hizmetleri Aracısı, karalama konumunda depolanmış yedekleme sağlama toplamına erişemedi | Bu sorunu çözmek için, aşağıdaki adımları uygulayın ve sunucuyu yeniden başlatın <br/> - [Karalama konumu dosyalarını kilitleyen bir virüsten koruma veya başka bir işlem olup olmadığını denetleyin](#another-process-or-antivirus-software-blocking-access-to-cache-folder)<br/> - [Karalama konumunun geçerli ve MARS Aracısı tarafından erişilebilir olup olmadığını denetleyin.](backup-azure-file-folder-backup-faq.md#how-to-check-if-scratch-folder-is-valid-and-accessible)
+Microsoft Azure Kurtarma Hizmetleri Aracısı, karalama konumunda depolanmış yedekleme sağlama toplamına erişemedi | Bu sorunu çözmek için, aşağıdaki adımları uygulayın ve sunucuyu yeniden başlatın <br/> - [Karalama konumu dosyalarını kilitleyen bir virüsten koruma veya başka bir işlem olup olmadığını denetleyin](#another-process-or-antivirus-software-blocking-access-to-cache-folder)<br/> - [Karalama konumunun geçerli ve MARS Aracısı tarafından erişilebilir olup olmadığını denetleyin.](backup-azure-file-folder-backup-faq.yml#how-to-check-if-scratch-folder-is-valid-and-accessible-)
 
 ### <a name="salvhdinitializationerror"></a>SalVhdInitializationError
 
 Hata iletisi | Önerilen eylem
 --|--
-Microsoft Azure Kurtarma Hizmetleri Aracısı, VHD’yi başlatmak için karalama konumuna erişemedi | Bu sorunu çözmek için, aşağıdaki adımları uygulayın ve sunucuyu yeniden başlatın <br/> - [Virüsten koruma veya diğer işlemlerin karalama konumu dosyalarını kilitlemesinin olup olmadığını denetleyin](#another-process-or-antivirus-software-blocking-access-to-cache-folder)<br/> - [Karalama konumunun geçerli ve MARS Aracısı tarafından erişilebilir olup olmadığını denetleyin.](backup-azure-file-folder-backup-faq.md#how-to-check-if-scratch-folder-is-valid-and-accessible)
+Microsoft Azure Kurtarma Hizmetleri Aracısı, VHD’yi başlatmak için karalama konumuna erişemedi | Bu sorunu çözmek için, aşağıdaki adımları uygulayın ve sunucuyu yeniden başlatın <br/> - [Virüsten koruma veya diğer işlemlerin karalama konumu dosyalarını kilitlemesinin olup olmadığını denetleyin](#another-process-or-antivirus-software-blocking-access-to-cache-folder)<br/> - [Karalama konumunun geçerli ve MARS Aracısı tarafından erişilebilir olup olmadığını denetleyin.](backup-azure-file-folder-backup-faq.yml#how-to-check-if-scratch-folder-is-valid-and-accessible-)
 
 ### <a name="sallowdiskspace"></a>SalLowDiskSpace
 

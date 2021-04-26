@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/10/2021
 ms.author: inhenkel
-ms.openlocfilehash: c2dc193d65ff1c85837477c0a8fd345f11d59bcd
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a0e4b7e759e27dafb1d847dc5d7ce464b440e98c
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103009765"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105960682"
 ---
 # <a name="upload-files-to-a-media-services-account-in-the-azure-portal"></a>Azure portalını kullanarak Media Services hesabına dosya yükleme
 
@@ -32,7 +32,7 @@ ms.locfileid: "103009765"
 > 
 
 > [!NOTE]
-> Media Services v2’ye herhangi bir yeni özellik veya işlevsellik eklenmemektedir. Portalla güncel karşıya yükleme dosyaları için bkz. [içeriği karşıya yüklemek, kodlamak ve akışa almak için portalı kullanma](../latest/manage-assets-quickstart.md).<br/>Ayrıca, kullanıma alma: [Media Services v3](../latest/index.yml). Ayrıca bkz. [v2 'den v3 'e geçiş kılavuzu](../latest/migrate-v-2-v-3-migration-introduction.md)
+> Media Services v2’ye herhangi bir yeni özellik veya işlevsellik eklenmemektedir. Portalla güncel karşıya yükleme dosyaları için bkz. [içeriği karşıya yüklemek, kodlamak ve akışa almak için portalı kullanma](../latest/asset-create-asset-upload-portal-quickstart.md).<br/>Ayrıca, kullanıma alma: [Media Services v3](../latest/index.yml). Ayrıca bkz. [v2 'den v3 'e geçiş kılavuzu](../latest/migrate-v-2-v-3-migration-introduction.md)
 
 Azure Media Services’de dijital dosyalar bir varlığa yüklenir. Varlık; video, ses, görüntüler, küçük resim koleksiyonları, metin parçaları ve kapalı açıklamalı alt yazı dosyaları (ve bu dosyalar için meta veriler) içerebilir. Dosyalar yüklendiğinde, içeriğiniz sonraki işleme ve akışla aktarma faaliyetleri için güvenli bir şekilde bulutta depolanmış olur.
 

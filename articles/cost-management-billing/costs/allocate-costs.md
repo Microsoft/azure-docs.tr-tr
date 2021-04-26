@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: cost-management-billing
 ms.subservice: cost-management
 ms.reviewer: benshy
-ms.openlocfilehash: 414ce626d76c9b7a7d073d6cbfa5a5f4446c3073
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: e7afef7e0a10bb4be3c30112fc207467167e4a17
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105025535"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107726529"
 ---
 # <a name="create-and-manage-azure-cost-allocation-rules-preview"></a>Azure maliyet ayırma kurallarını oluşturma ve yönetme (Önizleme)
 
@@ -105,12 +105,7 @@ Maliyet ayırma kuralının nasıl oluşturulacağını gösteren bir video aşa
 
 Kaynağı veya hedefi değiştirmek ya da işlem, depolama veya ağ seçeneklerinden birinin önceden doldurulmuş yüzdesini güncelleştirmek için bir maliyet ayırma kuralını düzenleyebilirsiniz. Kuralları, oluşturduğunuz şekilde düzenleyin. Mevcut kurallardaki değişikliğin yeniden işlenmesi iki saate kadar sürebilir.
 
-## <a name="frequently-asked-questions-faq"></a>Sık sorulan sorular (SSS)
-
-Aşağıdaki bölümlerde insanların maliyet ayırması hakkında sıkça sordukları sorular yer alır.
-
-### <a name="what-are-the-current-limitations-with-cost-allocation-in-public-preview"></a>Genel önizlemede maliyet ayırmanın geçerli sınırlamaları nelerdir?
-<a name="limitations"></a>
+## <a name="current-limitations"></a>Geçerli sınırlamalar
 
 Şu anda maliyet ayırma, Maliyet Yönetimi’ndeki Maliyet analizi, bütçeler ve tahmin görünümlerinde desteklenmektedir. Ayrılan maliyetler hem abonelikler listesinde hem de Aboneliklere genel bakış sayfasında gösterilir.
 
@@ -122,32 +117,9 @@ Aşağıdakiler şu anda maliyet ayırma genel önizlemesi tarafından desteklen
 - [Maliyet Yönetimi Power BI Uygulaması](https://appsource.microsoft.com/product/power-bi/costmanagement.azurecostmanagementapp)
 - [Power BI Desktop bağlayıcısı](/power-bi/connect-data/desktop-connect-azure-cost-management)
 
-### <a name="are-costs-factored-into-budgets-and-forecast-views"></a>Maliyetler, bütçelerde ve tahmin görünümlerinde hesaba katılır mı?
-<a name="budgets-forecast"></a>
-
-Evet. Ayrılan maliyetler hem bütçelerde hem de tahmin görünümlerinde hesaba katılır ve bunlar tarafından desteklenir. Bütçe ve tahmin görünümleri, maliyet ayırma kuralları tarafından yapılandırıldığı şekilde kendilerine ayrılan maliyetleri gösterir.
-
-### <a name="if-a-cost-allocation-rule-is-deleted-what-happens"></a>Bir maliyet ayırma kuralı silindiğinde ne olur?
-<a name="delete-rule"></a>
-
-Bir maliyet ayırma kuralı silindiğinde, hedeflere ayrılan tüm açık ve geçerli fatura ayı maliyetleri kaldırılır. Maliyet ayırma kuralı birkaç ay boyunca yer aldıysa önceki ayların ayırma verileri, ayırma kuralı tarafından ayarlandığı şekliyle kalır.
-
-### <a name="why-is-an-enrollment-admin-or-a-billing-account-admin-needed-to-create-cost-allocation-rules"></a>Maliyet ayırma kuralları oluşturmak için neden bir kayıt yöneticisi veya ödeme hesabı yöneticisi gerekli?
-<a name="why-admin"></a>
-
-Maliyet ayırma kuralları ya kayıt kapsamında (Kurumsal Anlaşma) ya da Faturalandırma hesabı kapsamında (Microsoft Müşteri Sözleşmesi) oluşturulur. Bu kapsamlarda değişiklik yapma izinleri için faturalandırma yöneticisi ayrıcalıkları gerekir.
-
-### <a name="why-are-sources-and-targets-limited-to-25-per-rule"></a>Neden kaynak ve hedefler kural başına 25 ile sınırlıdır?
-<a name="source-target-rule-limit"></a>
-
-Bu sınır, iyi bir maliyet ayırma performansı ve ölçeklenebilirlik elde etmek amacıyla koyulan önizleme sınırlamasıdır. Maliyet ayırma genel kullanılabilirlik (GA) aşamasına geçtiğinde sınırlar muhtemelen artacak veya tamamen kaldırılacaktır.
-
-### <a name="what-can-happen-if-cost-allocation-rules-sourcestargets-overlap"></a>Maliyet ayırma kuralları (kaynak/hedef) çakışırsa ne olabilir?
-<a name="rule-overlap"></a>
-
-Çakışan kaynaklara veya hedeflere sahip kurallar önerilmez. Maliyet Ayırma kuralları oluşturulma tarihlerine göre uygulanır. Dolayısıyla, ayırma kuralıyla çakışan maliyet ayırma kurallarında en erken oluşturulma tarihine sahip olan öncelik kazanır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
+- Maliyet tahsisi hakkında sorular ve yanıtlar için [maliyet yönetimi + FATURALANDıRMA SSS](../cost-management-billing-faq.yml) makalesini okuyun.
 - [Maliyet ayırma REST API](/rest/api/cost-management/costallocationrules)’sini kullanarak ayırma kuralları oluşturma veya bunları güncelleştirme
 - [Azure Maliyet Yönetimi ile bulut yatırımınızı iyileştirme](cost-mgt-best-practices.md) hakkında daha fazla bilgi edinin

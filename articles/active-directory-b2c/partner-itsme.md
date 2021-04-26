@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 07/30/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: ba7875caa6a1db7638bfeafcfea1efa7b2462152
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2560c294b63d0554708eda1f804bf279d16d7d74
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87489524"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257968"
 ---
 # <a name="configure-itsme-openid-connect-oidc-with-azure-active-directory-b2c"></a>Itsme OpenID Connect 'i (OıDC) Azure Active Directory B2C ile yapılandırma
 
@@ -157,4 +157,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 * [Azure AD B2C'deki özel ilkeler](custom-policy-overview.md)
 
-* [Azure AD B2C özel ilkeleri kullanmaya başlama](custom-policy-get-started.md?tabs=applications)
+* [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

@@ -12,12 +12,12 @@ ms.custom:
 - mqtt
 - 'Role: Cloud Development'
 - 'Role: IoT Device'
-ms.openlocfilehash: 3286b464051b8fea88d2797d4f82b20fe432b4b8
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d106021d90304a06ea7c08494d626511bb903df0
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "90019538"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553048"
 ---
 # <a name="upload-files-with-iot-hub"></a>IoT Hub ile dosyaları karşıya yükleme
 
@@ -44,7 +44,13 @@ Karşıya dosya yükleme işlevini kullanmak için, önce bir Azure Depolama hes
 IoT Hub nasıl yapılır [kılavuzlarıyla cihazınızdan buluta dosya yükleme](iot-hub-csharp-csharp-file-upload.md) , dosya yükleme işlemine tam bir anlatım sağlar. Bu nasıl yapılır kılavuzlarında, bir depolama hesabını IoT Hub ile ilişkilendirmek için Azure portal nasıl kullanılacağı gösterilmektedir.
 
 > [!NOTE]
-> [Azure IoT SDK](iot-hub-devguide-sdks.md) 'ları, SAS URI 'sini alma, dosyayı karşıya yükleme ve tamamlanan karşıya yükleme IoT Hub bildirme konusunda otomatik olarak işler.
+> [Azure IoT SDK 'ları](iot-hub-devguide-sdks.md) , paylaşılan ERIŞIM imzası URI 'sini alma, dosyayı karşıya yükleme ve tamamlanan karşıya yükleme IoT Hub bildirme için otomatik olarak işler. Bir güvenlik duvarı BLOB depolama uç noktasına erişimi engelliyorsa, ancak IoT Hub uç noktasına erişime izin verirse, dosya yükleme işlemi başarısız olur ve IoT C# cihaz SDK 'Sı için aşağıdaki hatayı gösterir:
+>
+> `---> System.Net.Http.HttpRequestException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond`
+>
+> Karşıya dosya yükleme özelliğinin çalışması için, hem IoT Hub uç noktası hem de BLOB depolama uç noktası erişimine cihaz için kullanılabilir olmalıdır.
+> 
+
 
 ## <a name="initialize-a-file-upload"></a>Karşıya dosya yüklemeyi Başlat
 IoT Hub, özellikle cihazların bir dosyayı karşıya yüklemek için bir SAS URI 'SI istemesine yönelik bir uç nokta içerir. Dosya karşıya yükleme işlemini başlatmak için, cihaz `{iot hub}.azure-devices.net/devices/{deviceId}/files` AŞAĞıDAKI JSON gövdesiyle öğesine BIR post isteği gönderir:

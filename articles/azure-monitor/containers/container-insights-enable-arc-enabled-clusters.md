@@ -1,89 +1,68 @@
 ---
-title: Azure Arc etkin Kubernetes kümesini kapsayıcı öngörüleri ile yapılandırma | Microsoft Docs
-description: Bu makalede, Azure Arc etkin Kubernetes kümelerinde kapsayıcı öngörüleri ile izlemenin nasıl yapılandırılacağı açıklanır.
-ms.topic: conceptual
-ms.date: 09/23/2020
-ms.openlocfilehash: 307f9d9928042410dc9b4443aba5c019c592980c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+title: Azure Arc etkin Kubernetes kümelerini izleme
+ms.date: 04/05/2021
+ms.topic: article
+author: shashankbarsin
+ms.author: shasb
+description: Azure Izleyicisi 'ni kullanarak Azure Arc etkin Kubernetes kümelerinin ölçümlerini ve günlüklerini toplayın
+ms.openlocfilehash: 0a983f6d7032310d02d35e713482de942bfbfd70
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101711306"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443859"
 ---
-# <a name="enable-monitoring-of-azure-arc-enabled-kubernetes-cluster"></a>Azure Arc özellikli Kubernetes kümesinin izlenmesini etkinleştirme
+# <a name="azure-monitor-container-insights-for-azure-arc-enabled-kubernetes-clusters"></a>Azure yay etkin Kubernetes kümeleri için Azure Izleyici kapsayıcı öngörüleri
 
-Kapsayıcı öngörüleri, Azure Kubernetes hizmeti (AKS) ve AKS motoru kümeleri için zengin izleme deneyimi sağlar. Bu makalede, Azure 'un dışında barındırılan Kubernetes kümelerinin, benzer bir izleme deneyimi elde etmek için Azure Arc ile etkinleştirilen izlemenin nasıl etkinleştirileceği açıklanır.
+[Azure Izleyici kapsayıcı öngörüleri](container-insights-overview.md) , Azure Arc etkin Kubernetes kümeleri için zengin izleme deneyimi sağlar.
 
-Bir PowerShell veya bash betiği kullanan bir veya daha fazla Kubernetes dağıtımı için kapsayıcı öngörüleri etkinleştirilebilir.
+[!INCLUDE [preview features note](../../azure-arc/kubernetes/includes/preview/preview-callout.md)]
 
 ## <a name="supported-configurations"></a>Desteklenen yapılandırmalar
 
-Kapsayıcı öngörüleri, aşağıdaki özellikler hariç olmak üzere [genel bakış](container-insights-overview.md) makalesinde açıklandığı gibi, Azure Arc etkinleştirilmiş Kubernetes 'in (Önizleme) izlenmesini destekler:
-
-- Canlı veriler (Önizleme)
-
-Kapsayıcı öngörüleri ile resmi olarak desteklenen aşağıdakiler aşağıda verilmiştir:
-
-- Kubernetes ve destek ilkesi sürümleri [desteklenen aks](../../aks/supported-kubernetes-versions.md)sürümleriyle aynıdır.
-
-- Şu kapsayıcı çalışma zamanları desteklenir: Docker, Moby, ve CRı ile uyumlu çalışma zamanları, örneğin CRı-O ve ContainerD.
-
-- Desteklenen ana ve çalışan düğümleri için Linux işletim sistemi sürümü: Ubuntu (18,04 LTS ve 16,04 LTS).
+- Azure Izleyici kapsayıcı öngörüleri, canlı veriler (Önizleme) özelliği dışında [genel bakış](container-insights-overview.md) makalesinde açıklandığı gibi, Azure Arc etkinleştirilmiş Kubernetes 'in (Önizleme) izlenmesini destekler. Ayrıca, kullanıcıların [ölçümleri etkinleştirmek](container-insights-update-metrics.md) için [sahip](../../role-based-access-control/built-in-roles.md#owner) izinlerinin olması gerekmez
+- `Docker`, `Moby` , ve CRı uyumlu kapsayıcı çalışma zamanları `CRI-O` ve `containerd` .
+- Temel kimlik doğrulaması ile kimlik doğrulaması ve giden ara sunucu olmadan giden proxy desteklenir. Güvenilen sertifikaları bekleyen giden ara sunucu şu anda desteklenmiyor.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Başlamadan önce, aşağıdakilere sahip olduğunuzdan emin olun:
+- [Genel küme uzantıları belgeleri](../../azure-arc/kubernetes/extensions.md#prerequisites)altında listelenen önkoşulları karşıladık.
+- Log Analytics çalışma alanı: Azure Izleyici kapsayıcı öngörüleri, [bölgeye göre Azure ürünleri sayfasında](https://azure.microsoft.com/global-infrastructure/services/?regions=all&products=monitor)listelenen bölgelerde bir Log Analytics çalışma alanını destekler. [Azure Resource Manager](../logs/resource-manager-workspace.md), [PowerShell](../logs/powershell-sample-create-workspace.md)veya [Azure Portal](../logs/quick-create-workspace.md)aracılığıyla kendi çalışma alanınızı oluşturabilirsiniz.
+- Azure Arc etkin Kubernetes kaynağını içeren Azure aboneliğinde [katılımcı](../../role-based-access-control/built-in-roles.md#contributor) rolü atamanız gerekir. Log Analytics çalışma alanı farklı bir abonelikte yer alıyorsa, Log Analytics çalışma alanında [katkıda bulunan](../logs/manage-access.md#manage-access-using-azure-permissions) rol ataması Log Analytics gerekir.
+- İzleme verilerini görüntülemek için, Log Analytics çalışma alanında [Log Analytics okuyucu](../logs/manage-access.md#manage-access-using-azure-permissions) rolü atamanız gerekir.
+- Aşağıdaki uç noktaların, [bir Kubernetes kümesini Azure yaya bağlama](../../azure-arc/kubernetes/quickstart-connect-cluster.md#meet-network-requirements)altında belirtilenlerden bahsedilenlere ek olarak, giden erişim için etkinleştirilmesi gerekir.
 
-- Log Analytics çalışma alanı.
+    | Uç Nokta | Bağlantı noktası |
+    |----------|------|
+    | `*.ods.opinsights.azure.com` | 443 |
+    | `*.oms.opinsights.azure.com` | 443 |
+    | `dc.services.visualstudio.com` | 443 |
+    | `*.monitoring.azure.com` | 443 |
+    | `login.microsoftonline.com` | 443 |
 
-    Kapsayıcı öngörüleri [bölgeye göre Azure ürünlerinde](https://azure.microsoft.com/global-infrastructure/services/?regions=all&products=monitor)listelenen bölgelerde bir Log Analytics çalışma alanını destekler. Kendi çalışma alanınızı oluşturmak için [Azure Resource Manager](../logs/resource-manager-workspace.md), [PowerShell](../logs/powershell-sample-create-workspace.md?toc=%2fpowershell%2fmodule%2ftoc.json)aracılığıyla veya [Azure Portal](../logs/quick-create-workspace.md)aracılığıyla oluşturulabilir.
+    Arc, Kubernetes kaynağını etkin bir şekilde Azure ABD kamu ortamındaysanız, giden erişim için aşağıdaki uç noktaların etkinleştirilmesi gerekir:
 
-- Kapsayıcı öngörülerine yönelik özellikleri etkinleştirmek ve bu özelliklere erişmek için, en azından Azure aboneliğinde Azure *katkıda* bulunan rolünün bir üyesi olmanız ve kapsayıcı öngörüleri ile yapılandırılmış Log Analytics çalışma alanının [*Log Analytics katkıda*](../logs/manage-access.md#manage-access-using-azure-permissions) bulunan rolünün bir üyesi olmanız gerekir.
+    | Uç Nokta | Bağlantı noktası |
+    |----------|------|
+    | `*.ods.opinsights.azure.us` | 443 |
+    | `*.oms.opinsights.azure.us` | 443 |
+    | `dc.services.visualstudio.com` | 443 |
+    
 
-- Azure Arc küme kaynağında [katkıda](../../role-based-access-control/built-in-roles.md#contributor) bulunan rolünün bir üyesidir.
+- Bu kümede daha önce Azure Izleyici kapsayıcı öngörülerini küme uzantıları olmadan betiği kullanarak dağıttıysanız, bu Helm grafiğini silmek için [burada](container-insights-optout-hybrid.md) listelenen yönergeleri izleyin. Daha sonra Azure Izleyici kapsayıcı öngörüleri için bir küme uzantısı örneği oluşturmaya devam edebilirsiniz.
 
-- İzleme verilerini görüntülemek için, kapsayıcı öngörüleri ile yapılandırılmış Log Analytics çalışma alanına sahip [*Log Analytics okuyucu*](../logs/manage-access.md#manage-access-using-azure-permissions) rolü izninin bir üyesidir.
+    >[!NOTE]
+    > Azure Izleyici kapsayıcı öngörülerini (Önizleme) dağıtmaya yönelik betik tabanlı sürüm, dağıtımın [küme uzantısı](../../azure-arc/kubernetes/extensions.md) biçimi ile değiştiriliyor. Önceden betik aracılığıyla dağıtılan Azure Izleyici yalnızca 2021 Haziran 'ya kadar desteklenir ve bu nedenle en erken dağıtım kümesi uzantısı biçimine geçirilmesi önerilir.
 
-- Belirtilen Kubernetes kümesi için kapsayıcı öngörüleri grafiğini eklemek için [helk istemcisi](https://helm.sh/docs/using_helm/) .
+### <a name="identify-workspace-resource-id"></a>Çalışma alanı kaynak KIMLIĞINI tanımla
 
-- Linux için Log Analytics aracısının Kapsayıcılı sürümünün Azure Izleyici ile iletişim kurması için aşağıdaki proxy ve güvenlik duvarı yapılandırma bilgileri gereklidir:
-
-    |Aracı Kaynağı|Bağlantı noktaları |
-    |------|---------|
-    |`*.ods.opinsights.azure.com` |Bağlantı noktası 443 |
-    |`*.oms.opinsights.azure.com` |Bağlantı noktası 443 |
-    |`*.dc.services.visualstudio.com` |Bağlantı noktası 443 |
-
-- Kapsayıcılı Aracı, `cAdvisor secure port: 10250` `unsecure port :10255` performans ölçümlerini toplamak için, kümedeki tüm düğümlerde Kubelet 'in ve açık olmasını gerektirir. `secure port: 10250`Zaten yapılandırılmamışsa Kubelet 'In Cadvizörü üzerinde yapılandırmanızı öneririz.
-
-- Kapsayıcılı Aracı, envanter verilerini toplamak için kümedeki Kubernetes API hizmetiyle iletişim kurmak üzere kapsayıcıda aşağıdaki çevresel değişkenlerin belirtilmesini gerektirir- `KUBERNETES_SERVICE_HOST` ve `KUBERNETES_PORT_443_TCP_PORT` .
-
-    >[!IMPORTANT]
-    >Yay etkin Kubernetes kümelerini izlemek için desteklenen en düşük aracı sürümü ciprod04162020 veya üzeri bir sürüm.
-
-- PowerShell komut dosyalı metodunu kullanarak izlemeyi etkinleştirirseniz [PowerShell Core](/powershell/scripting/install/installing-powershell?view=powershell-6&preserve-view=true) gereklidir.
-
-- Bash komut dosyası yöntemini kullanarak izlemeyi etkinleştirirseniz [Bash sürüm 4](https://www.gnu.org/software/bash/) gerekir.
-
-## <a name="identify-workspace-resource-id"></a>Çalışma alanı kaynak KIMLIĞINI tanımla
-
-Daha önce indirdiğiniz PowerShell veya bash betiğini kullanarak kümenizin izlenmesini etkinleştirmek ve mevcut bir Log Analytics çalışma alanıyla bütünleştirmek için, Log Analytics çalışma alanınızın tam kaynak KIMLIĞINI belirlemek üzere aşağıdaki adımları gerçekleştirin. `workspaceResourceId`Belirtilen çalışma alanına karşı izleme eklentisini etkinleştirmek için komutunu çalıştırdığınızda parametresi için bu gereklidir. Belirtmek için bir çalışma alanınız yoksa, parametresini de atlayabilirsiniz `workspaceResourceId` ve betiğin sizin için yeni bir çalışma alanı oluşturmasına izin verebilirsiniz.
+Log Analytics çalışma alanının tam Azure Resource Manager tanımlayıcısını bulmak için aşağıdaki komutları çalıştırın. 
 
 1. Aşağıdaki komutu kullanarak erişiminiz olan tüm abonelikleri listeleyin:
 
     ```azurecli
     az account list --all -o table
     ```
-
-    Çıktı aşağıdakine benzeyecektir:
-
-    ```azurecli
-    Name                                  CloudName    SubscriptionId                        State    IsDefault
-    ------------------------------------  -----------  ------------------------------------  -------  -----------
-    Microsoft Azure                       AzureCloud   0fb60ef2-03cc-4290-b595-e71108e8f4ce  Enabled  True
-    ```
-
-    **SubscriptionID** değerini kopyalayın.
 
 2. Aşağıdaki komutu kullanarak Log Analytics çalışma alanını barındıran aboneliğe geçin:
 
@@ -97,190 +76,109 @@ Daha önce indirdiğiniz PowerShell veya bash betiğini kullanarak kümenizin iz
     az resource list --resource-type Microsoft.OperationalInsights/workspaces -o json
     ```
 
-    Çıktıda, çalışma alanı adını bulun ve alan **kimliği** altında bu Log Analytics çalışma alanının tam kaynak kimliğini kopyalayın.
+    Çıktıda, ilgilendiğiniz çalışma alanı adını bulun. `id`Öğesinin alanı, bu Log Analytics çalışma alanının Azure Resource Manager tanımlayıcısını temsil eder.
 
-## <a name="enable-monitoring-using-powershell"></a>PowerShell 'i kullanarak izlemeyi etkinleştir
+    >[!TIP]
+    > Bu `id` Ayrıca, Log Analytics çalışma alanının *genel bakış* dikey penceresinde Azure Portal aracılığıyla da bulunabilir.
 
-1. Aşağıdaki komutları kullanarak betiği, izleme eklentisi ile kümenizi yapılandıran yerel bir klasöre yükleyin ve kaydedin:
+## <a name="create-extension-instance-using-azure-cli"></a>Azure CLı kullanarak uzantı örneği oluşturma
 
-    ```powershell
-    Invoke-WebRequest https://aka.ms/enable-monitoring-powershell-script -OutFile enable-monitoring.ps1
-    ```
+### <a name="option-1---with-default-values"></a>Seçenek 1-varsayılan değerlerle
 
-2. `$azureArcClusterResourceId`İçin karşılık gelen değerleri ayarlayarak `subscriptionId` `resourceGroupName` ve `clusterName` Azure Arc özellikli Kubernetes küme kaynağınızın kaynak kimliğini temsil ederek değişkeni yapılandırın.
+Bu seçenek aşağıdaki Varsayılanları kullanır:
 
-    ```powershell
-    $azureArcClusterResourceId = "/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Kubernetes/connectedClusters/<clusterName>"
-    ```
+- Kümenin bölgesine karşılık gelen mevcut varsayılan Log Analytics çalışma alanını oluşturur veya kullanır
+- Azure Izleyici kümesi uzantısı için otomatik yükseltme etkinleştirilir
 
-3. `$kubeContext`Komutunu çalıştırarak değişkeni, kümenizin **kuin bağlamı** ile yapılandırın `kubectl config get-contexts` . Geçerli bağlamı kullanmak istiyorsanız, değerini olarak ayarlayın `""` .
-
-    ```powershell
-    $kubeContext = "<kubeContext name of your k8s cluster>"
-    ```
-
-4. Mevcut Azure Izleyici Log Analytics çalışma alanını kullanmak istiyorsanız, değişkeni, `$logAnalyticsWorkspaceResourceId` çalışma alanının kaynak kimliğini temsil eden karşılık gelen değerle yapılandırın. Aksi takdirde, değişkenini olarak ayarlayın `""` ve komut dosyası bölgede yoksa, küme aboneliğinin varsayılan kaynak grubunda varsayılan bir çalışma alanı oluşturur. Oluşturulan varsayılan çalışma alanı, *defaultworkspace- \<SubscriptionID> - \<Region>* biçimine benzer.
-
-    ```powershell
-    $logAnalyticsWorkspaceResourceId = "/subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/microsoft.operationalinsights/workspaces/<workspaceName>"
-    ```
-
-5. Arc etkin Kubernetes kümeniz bir ara sunucu üzerinden iletişim kuruyorsa, değişkeni `$proxyEndpoint` ara sunucunun URL 'siyle yapılandırın. Küme bir ara sunucu üzerinden iletişim kurmadığından, değerini olarak ayarlayabilirsiniz `""` .  Daha fazla bilgi için bu makalenin ilerleyen kısımlarında [proxy uç noktasını yapılandırma](#configure-proxy-endpoint) konusuna bakın.
-
-6. İzlemeyi etkinleştirmek için aşağıdaki komutu çalıştırın.
-
-    ```powershell
-    .\enable-monitoring.ps1 -clusterResourceId $azureArcClusterResourceId -kubeContext $kubeContext -workspaceResourceId $logAnalyticsWorkspaceResourceId -proxyEndpoint $proxyEndpoint
-    ```
-
-İzlemeyi etkinleştirdikten sonra, küme için sistem durumu ölçümlerini görüntüleyebilmeniz yaklaşık 15 dakika sürebilir.
-
-### <a name="using-service-principal"></a>Hizmet sorumlusu kullanma
-Betik *enable-monitoring.ps1* etkileşimli cihaz oturum açma bilgilerini kullanır. Etkileşimli olmayan oturum açma tercih ediyorsanız, mevcut bir hizmet sorumlusunu kullanabilir veya [Önkoşullar](#prerequisites)bölümünde açıklandığı gibi gerekli izinlere sahip yeni bir tane oluşturabilirsiniz. Hizmet sorumlusu kullanmak için $servicePrincipalClientId, $servicePrincipalClientSecret ve $tenantId parametrelerini, komut dosyası *enable-monitoring.ps1* için kullanmayı amaçladığınız hizmet sorumlusu değerleriyle geçirmeniz gerekir.
-
-```powershell
-$subscriptionId = "<subscription Id of the Azure Arc connected cluster resource>"
-$servicePrincipal = New-AzADServicePrincipal -Role Contributor -Scope "/subscriptions/$subscriptionId"
+```console
+az k8s-extension create --name azuremonitor-containers --cluster-name <cluster-name> --resource-group <resource-group> --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers
 ```
 
-Aşağıdaki rol ataması yalnızca, Arc K8s bağlı küme kaynağına göre farklı bir Azure aboneliğinde mevcut Log Analytics çalışma alanını kullanıyorsanız geçerlidir.
+### <a name="option-2---with-existing-azure-log-analytics-workspace"></a>Seçenek 2-mevcut Azure Log Analytics çalışma alanı Ile
 
-```powershell
-$logAnalyticsWorkspaceResourceId = "<Azure Resource Id of the Log Analytics Workspace>" # format of the Azure Log Analytics workspace should be /subscriptions/<subId>/resourcegroups/<rgName>/providers/microsoft.operationalinsights/workspaces/<workspaceName>
-New-AzRoleAssignment -RoleDefinitionName 'Log Analytics Contributor'  -ObjectId $servicePrincipal.Id -Scope  $logAnalyticsWorkspaceResourceId
+*Katkıda* buluninizdeki veya daha fazla izin veren bir rol atamasında mevcut bir Azure Log Analytics çalışma alanını kullanabilirsiniz.
 
-$servicePrincipalClientId =  $servicePrincipal.ApplicationId.ToString()
-$servicePrincipalClientSecret = [System.Net.NetworkCredential]::new("", $servicePrincipal.Secret).Password
-$tenantId = (Get-AzSubscription -SubscriptionId $subscriptionId).TenantId
+```console
+az k8s-extension create --name azuremonitor-containers --cluster-name <cluster-name> --resource-group <resource-group> --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --configuration-settings logAnalyticsWorkspaceResourceID=<armResourceIdOfExistingWorkspace>
 ```
 
-Örnek:
+### <a name="option-3---with-advanced-configuration"></a>Seçenek 3-Gelişmiş yapılandırma Ile
 
-```powershell
-.\enable-monitoring.ps1 -clusterResourceId $azureArcClusterResourceId -servicePrincipalClientId $servicePrincipalClientId -servicePrincipalClientSecret $servicePrincipalClientSecret -tenantId $tenantId -kubeContext $kubeContext -workspaceResourceId $logAnalyticsWorkspaceResourceId -proxyEndpoint $proxyEndpoint
+Varsayılan kaynak isteklerini ve sınırlarını ince ayar istiyorsanız Gelişmiş yapılandırma ayarlarını kullanabilirsiniz:
+
+```console
+az k8s-extension create --name azuremonitor-containers --cluster-name <cluster-name> --resource-group <resource-group> --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --configuration-settings  omsagent.resources.daemonset.limits.cpu=150m omsagent.resources.daemonset.limits.memory=600Mi omsagent.resources.deployment.limits.cpu=1 omsagent.resources.deployment.limits.memory=750Mi
 ```
 
+Kullanılabilir yapılandırma ayarları için [Held grafiğinin kaynak istekleri ve sınırları bölümünü](https://github.com/helm/charts/blob/master/incubator/azuremonitor-containers/values.yaml) kullanıma alın.
 
+### <a name="option-4---on-azure-stack-edge"></a>Seçenek 4-Azure Stack Edge
 
-## <a name="enable-using-bash-script"></a>Bash betiğini kullanmayı etkinleştir
+Azure Arc etkin Kubernetes kümesi Azure Stack Edge üzerinde ise, özel bir bağlama yolunun `/home/data/docker` kullanılması gerekir.
 
-Belirtilen Bash betiğini kullanarak izlemeyi etkinleştirmek için aşağıdaki adımları gerçekleştirin.
+```console
+az k8s-extension create --name azuremonitor-containers --cluster-name <cluster-name> --resource-group <resource-group> --cluster-type connectedClusters --extension-type Microsoft.AzureMonitor.Containers --configuration-settings omsagent.logsettings.custommountpath=/home/data/docker
+```
 
-1. Aşağıdaki komutları kullanarak betiği, izleme eklentisi ile kümenizi yapılandıran yerel bir klasöre yükleyin ve kaydedin:
+>[!NOTE]
+> Oluşturma komutunda yüklenecek uzantının sürümünü açıkça belirtiyorsanız, belirtilen sürümün >= 2.8.2 olduğundan emin olun.
 
-    ```bash
-    curl -o enable-monitoring.sh -L https://aka.ms/enable-monitoring-bash-script
+## <a name="create-extension-instance-using-azure-portal"></a>Azure portal kullanarak uzantı örneği oluşturma
+
+>[!IMPORTANT]
+>  Azure Izleyicisini Azure Stack Edge üzerinde çalışan bir Kubernetes kümesine dağıtıyorsanız, bu kümeler için özel bir bağlama yolu ayarlanması gerektiğinden, Azure portal seçeneği yerine Azure CLı seçeneğinin izlenmesi gerekir.    
+
+### <a name="onboarding-from-the-azure-arc-enabled-kubernetes-resource-blade"></a>Azure Arc etkin Kubernetes kaynak dikey penceresinden ekleme
+
+1. Azure portal, izlemek istediğiniz Kubernetes kümesini seçin.
+
+2. Kaynak dikey penceresinin ' Izleme ' bölümündeki ' Öngörüler (Önizleme) ' öğesini seçin.
+
+3. Ekleme sayfasında, ' Azure Izleyicisini Yapılandır ' düğmesini seçin
+
+4. Artık ölçülerinizi göndermek için [Log Analytics çalışma alanını](../logs/quick-create-workspace.md) seçebilir ve verileri ' ye kaydedebilirsiniz.
+
+5. Azure Izleyici kapsayıcı öngörüleri kümesi uzantısını dağıtmak için ' Yapılandır ' düğmesini seçin.
+
+### <a name="onboarding-from-azure-monitor-blade"></a>Azure Izleyici dikey penceresinden ekleme
+
+1. Azure portal ' Izleyici ' dikey penceresine gidin ve ' Öngörüler ' menüsü altında ' kapsayıcılar ' seçeneğini belirleyin.
+
+2. İzlemeyi etkinleştirebilmeniz gereken Azure Arc etkin Kubernetes kümelerini görüntülemek için ' Izlenmeyen kümeler ' sekmesini seçin.
+
+3. İzlemeyi etkinleştirmek istediğiniz kümenin yanındaki ' etkinleştir ' bağlantısına tıklayın.
+
+4. Log Analytics çalışma alanını seçin ve devam etmek için ' Yapılandır ' düğmesini seçin.
+
+## <a name="create-extension-instance-using-azure-resource-manager"></a>Azure Resource Manager kullanarak uzantı örneği oluşturma
+
+1. Azure Resource Manager şablonu ve parametreyi indir:
+
+    ```console
+    curl -L https://aka.ms/arc-k8s-azmon-extension-arm-template -o arc-k8s-azmon-extension-arm-template.json
+    curl -L https://aka.ms/arc-k8s-azmon-extension-arm-template-params -o  arc-k8s-azmon-extension-arm-template-params.json
     ```
 
-2. `azureArcClusterResourceId`İçin karşılık gelen değerleri ayarlayarak `subscriptionId` `resourceGroupName` ve `clusterName` Azure Arc özellikli Kubernetes küme kaynağınızın kaynak kimliğini temsil ederek değişkeni yapılandırın.
+2. Dosyadaki arc-k8s-azmon-extension-arm-template-params.jsparametre değerlerini güncelleştirin. Azure genel bulutu için, çalışma `opinsights.azure.com` alanı alanının değeri olarak kullanılması gerekir.
 
-    ```bash
-    export azureArcClusterResourceId="/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Kubernetes/connectedClusters/<clusterName>"
+3. Azure Izleyici kapsayıcı öngörüleri uzantısı oluşturmak için şablonu dağıtma 
+
+    ```console
+    az login
+    az account set --subscription "Subscription Name"
+    az deployment group create --resource-group <resource-group> --template-file ./arc-k8s-azmon-extension-arm-template.json --parameters @./arc-k8s-azmon-extension-arm-template-params.json
     ```
 
-3. `kubeContext`Komutunu çalıştırarak değişkeni, kümenizin **kuin bağlamı** ile yapılandırın `kubectl config get-contexts` . Geçerli bağlamı kullanmak istiyorsanız, değerini olarak ayarlayın `""` .
+## <a name="delete-extension-instance"></a>Uzantı örneğini Sil
 
-    ```bash
-    export kubeContext="<kubeContext name of your k8s cluster>"
-    ```
-
-4. Mevcut Azure Izleyici Log Analytics çalışma alanını kullanmak istiyorsanız, değişkeni, `logAnalyticsWorkspaceResourceId` çalışma alanının kaynak kimliğini temsil eden karşılık gelen değerle yapılandırın. Aksi takdirde, değişkenini olarak ayarlayın `""` ve komut dosyası bölgede yoksa, küme aboneliğinin varsayılan kaynak grubunda varsayılan bir çalışma alanı oluşturur. Oluşturulan varsayılan çalışma alanı, *defaultworkspace- \<SubscriptionID> - \<Region>* biçimine benzer.
-
-    ```bash
-    export logAnalyticsWorkspaceResourceId="/subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/microsoft.operationalinsights/workspaces/<workspaceName>"
-    ```
-
-5. Arc etkin Kubernetes kümeniz bir ara sunucu üzerinden iletişim kuruyorsa, değişkeni `proxyEndpoint` ara sunucunun URL 'siyle yapılandırın. Küme bir ara sunucu üzerinden iletişim kurmadığından, değerini olarak ayarlayabilirsiniz `""` . Daha fazla bilgi için bu makalenin ilerleyen kısımlarında [proxy uç noktasını yapılandırma](#configure-proxy-endpoint) konusuna bakın.
-
-6. Kümenizde izlemeyi etkinleştirmek için, dağıtım senaryonuz temelinde sunulan farklı komutlar vardır.
-
-    Geçerli kuas-Context kullanma, varsayılan bir Log Analytics çalışma alanı oluşturma ve bir ara sunucu belirtmeden, varsayılan seçeneklerle izlemeyi etkinleştirmek için aşağıdaki komutu çalıştırın:
-
-    ```bash
-    bash enable-monitoring.sh --resource-id $azureArcClusterResourceId
-    ```
-
-    Varsayılan bir Log Analytics çalışma alanı oluşturmak ve proxy sunucusu belirtmeden aşağıdaki komutu çalıştırın:
-
-    ```bash
-   bash enable-monitoring.sh --resource-id $azureArcClusterResourceId --kube-context $kubeContext
-    ```
-
-    Mevcut bir Log Analytics çalışma alanını ve bir ara sunucu belirtmeden kullanmak için aşağıdaki komutu çalıştırın:
-
-    ```bash
-    bash enable-monitoring.sh --resource-id $azureArcClusterResourceId --kube-context $kubeContext  --workspace-id $logAnalyticsWorkspaceResourceId
-    ```
-
-    Mevcut bir Log Analytics çalışma alanını kullanmak ve bir proxy sunucusu belirtmek için aşağıdaki komutu çalıştırın:
-
-    ```bash
-    bash enable-monitoring.sh --resource-id $azureArcClusterResourceId --kube-context $kubeContext  --workspace-id $logAnalyticsWorkspaceResourceId --proxy $proxyEndpoint
-    ```
-
-İzlemeyi etkinleştirdikten sonra, küme için sistem durumu ölçümlerini görüntüleyebilmeniz yaklaşık 15 dakika sürebilir.
-
-### <a name="using-service-principal"></a>Hizmet sorumlusu kullanma
-Bash betiği *Enable-Monitoring.sh* etkileşimli cihaz oturum açma bilgilerini kullanır. Etkileşimli olmayan oturum açma tercih ediyorsanız, mevcut bir hizmet sorumlusunu kullanabilir veya [Önkoşullar](#prerequisites)bölümünde açıklandığı gibi gerekli izinlere sahip yeni bir tane oluşturabilirsiniz. Hizmet sorumlusu 'nı kullanmak için, *Enable-Monitoring.sh* Bash betiğine kullanmayı amaçladığı hizmet sorumlusu için--istemci kimliği,--istemci-gizli ve--Kiracı kimliği değerlerini geçirmeniz gerekir.
+Aşağıdaki komut yalnızca uzantı örneğini siler, ancak Log Analytics çalışma alanını silmez. Log Analytics kaynaktaki veriler bozulmadan bırakılır.
 
 ```bash
-subscriptionId="<subscription Id of the Azure Arc connected cluster resource>"
-servicePrincipal=$(az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${subscriptionId}")
-servicePrincipalClientId=$(echo $servicePrincipal | jq -r '.appId')
+az k8s-extension delete --name azuremonitor-containers --cluster-type connectedClusters --cluster-name <cluster-name> --resource-group <resource-group>
 ```
 
-Aşağıdaki rol ataması yalnızca, Arc K8s bağlı küme kaynağına göre farklı bir Azure aboneliğinde mevcut Log Analytics çalışma alanını kullanıyorsanız geçerlidir.
-
-```bash
-logAnalyticsWorkspaceResourceId="<Azure Resource Id of the Log Analytics Workspace>" # format of the Azure Log Analytics workspace should be /subscriptions/<subId>/resourcegroups/<rgName>/providers/microsoft.operationalinsights/workspaces/<workspaceName>
-az role assignment create --role 'Log Analytics Contributor' --assignee $servicePrincipalClientId --scope $logAnalyticsWorkspaceResourceId
-
-servicePrincipalClientSecret=$(echo $servicePrincipal | jq -r '.password')
-tenantId=$(echo $servicePrincipal | jq -r '.tenant')
-```
-
-Örnek:
-
-```bash
-bash enable-monitoring.sh --resource-id $azureArcClusterResourceId --client-id $servicePrincipalClientId --client-secret $servicePrincipalClientSecret  --tenant-id $tenantId --kube-context $kubeContext  --workspace-id $logAnalyticsWorkspaceResourceId --proxy $proxyEndpoint
-```
-
-## <a name="configure-proxy-endpoint"></a>Proxy uç noktasını yapılandırma
-
-Kapsayıcı içgörüleri için Kapsayıcılı aracı sayesinde, proxy sunucusu üzerinden iletişim kurmasına izin vermek için bir proxy uç noktası yapılandırabilirsiniz. Kapsayıcılı aracı ve Azure Izleyici arasındaki iletişim bir HTTP veya HTTPS proxy sunucusu olabilir ve hem anonim hem de temel kimlik doğrulaması (Kullanıcı adı/parola) desteklenir.
-
-Ara sunucu yapılandırma değeri aşağıdaki sözdizimine sahiptir: `[protocol://][user:password@]proxyhost[:port]`
-
-> [!NOTE]
->Proxy sunucunuz kimlik doğrulaması gerektirmiyorsa, yine de bir psuedo Kullanıcı adı/parolası belirtmeniz gerekir. Bu, herhangi bir Kullanıcı adı veya parola olabilir.
-
-|Özellik| Açıklama |
-|--------|-------------|
-|Protokol | http veya https |
-|kullanıcı | Proxy kimlik doğrulaması için isteğe bağlı Kullanıcı adı |
-|password | Proxy kimlik doğrulaması için isteğe bağlı parola |
-|proxyhost | Proxy sunucusunun adresi veya FQDN 'si |
-|port | Proxy sunucusu için isteğe bağlı bağlantı noktası numarası |
-
-Örnek: `http://user01:password@proxy01.contoso.com:3128`
-
-Protokolü **http** olarak BELIRTIRSENIZ, http istekleri SSL/TLS güvenli bağlantı kullanılarak oluşturulur. Ara sunucunuzun SSL/TLS protokollerini desteklemesi gerekir.
-
-### <a name="configure-using-powershell"></a>PowerShell’i kullanarak yapılandırma
-
-Proxy sunucusu için Kullanıcı adı ve parola, IP adresi veya FQDN ve bağlantı noktası numarasını belirtin. Örnek:
-
-```powershell
-$proxyEndpoint = https://<user>:<password>@<proxyhost>:<port>
-```
-
-### <a name="configure-using-bash"></a>Bash kullanarak yapılandırma
-
-Proxy sunucusu için Kullanıcı adı ve parola, IP adresi veya FQDN ve bağlantı noktası numarasını belirtin. Örnek:
-
-```bash
-export proxyEndpoint=https://<user>:<password>@<proxyhost>:<port>
-```
+## <a name="disconnected-cluster"></a>Bağlantısı kesilen küme
+Kümenizin > 48 saat boyunca Azure bağlantısı kesilirse Azure Kaynak grafiğinde kümeniz hakkında bilgi olmaz. Sonuç olarak, Öngörüler dikey penceresi küme durumlarınız hakkında yanlış bilgiler gösterebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -289,5 +187,3 @@ export proxyEndpoint=https://<user>:<password>@<proxyhost>:<port>
 - Varsayılan olarak, Kapsayıcılı Aracı, Kuto-System hariç tüm ad alanlarında çalışan tüm kapsayıcıların stdout/stderr kapsayıcı günlüklerini toplar. Belirli bir ad alanı veya ad alanına özgü kapsayıcı günlüğü koleksiyonunu yapılandırmak için, istenen veri koleksiyonu ayarlarını ConfigMap yapılandırmaları dosyanıza yapılandırmak üzere [kapsayıcı öngörüleri aracı yapılandırmasını](container-insights-agent-config.md) gözden geçirin.
 
 - Kümelediğiniz Prometheus ölçümlerini hurdaya almak ve analiz etmek için bkz. [Prometheus ölçümleri koruması](container-insights-prometheus-integration.md) 'nı inceleyin
-
-- Arc etkin Kubernetes kümenizi kapsayıcı öngörüleri ile izlemeyi durdurmayı öğrenmek için bkz. [karma kümenizi izlemeyi durdurma](container-insights-optout-hybrid.md#how-to-stop-monitoring-on-arc-enabled-kubernetes).

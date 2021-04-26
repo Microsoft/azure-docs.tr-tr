@@ -2,13 +2,13 @@
 title: Yinelenen ileti algılamayı Azure Service Bus | Microsoft Docs
 description: Bu makalede Azure Service Bus iletilerinde yinelenenleri nasıl Algılayabileceğiniz açıklanır. Yinelenen ileti yoksayılabilir ve bırakılabilir.
 ms.topic: article
-ms.date: 01/13/2021
-ms.openlocfilehash: 527c2dea34b02733907372b6e75a40a5ef5fc289
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/19/2021
+ms.openlocfilehash: baeda3509cb5646c658f79fb11610ecfdd1ffd3d
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101711935"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751283"
 ---
 # <a name="duplicate-detection"></a>Yineleme algılama
 
@@ -37,36 +37,29 @@ Bazı uygulama bağlamını işleme sürecinde birden fazla iletinin gönderildi
 >- [Premier katmanı](service-bus-premium-messaging.md) bölümlemeyi desteklemez, bu nedenle uygulamalarınızda benzersiz ileti kimlikleri kullanmanızı ve yinelenen algılama için bölüm anahtarlarına güvenmenizi öneririz. 
 
 
-## <a name="enable-duplicate-detection"></a>Yinelenen algılamayı etkinleştir
+## <a name="duplicate-detection-window-size"></a>Yinelenen algılama penceresi boyutu
 
-Portalda, özellik varsayılan olarak kapalı olan **yinelenen saptamayı etkinleştir** onay kutusu ile varlık oluşturma sırasında açıktır. Yeni konu başlıkları oluşturma ayarı eşdeğerdir.
-
-![Yinelenen saptamayı etkinleştir seçeneği belirlenmiş ve kırmızı renkle anahatlı bir sıra oluştur iletişim kutusunun ekran görüntüsü.][1]
-
-> [!IMPORTANT]
-> Sıra oluşturulduktan sonra yinelenen saptamayı etkinleştiremez/devre dışı bırakabilirsiniz. Bunu yalnızca kuyruğu oluşturma sırasında yapabilirsiniz. 
-
-Programlama yoluyla, bayrağı Full Framework .NET API 'sindeki [Queuedescription. requiresDuplicateDetection](/dotnet/api/microsoft.servicebus.messaging.queuedescription.requiresduplicatedetection#Microsoft_ServiceBus_Messaging_QueueDescription_RequiresDuplicateDetection) özelliği ile ayarlarsınız. Azure Resource Manager API 'SI ile, değeri [Queueproperties. requiresDuplicateDetection](/azure/templates/microsoft.servicebus/namespaces/queues#property-values) özelliği ile ayarlanır.
-
-Yinelenen algılama süresi geçmişi, kuyruklar ve konular için varsayılan değer olan en fazla 7 günlük değere sahip en az 20 saniyelik bir değere sahip, kuyruklar ve konular için 10 dakika olarak Bu ayarı, Azure portal sıra ve konu özellikleri penceresinde değiştirebilirsiniz.
-
-![Özellikler ayarı vurgulanmış Service Bus özelliğinin ekran görüntüsü ve kırmızı renkle yinelenen algılama geçmişi seçeneği.][2]
-
-Programlama yoluyla, tam .NET Framework API 'SI ile [Queuedescription. DuplicateDetectionHistoryTimeWindow](/dotnet/api/microsoft.servicebus.messaging.queuedescription.duplicatedetectionhistorytimewindow#Microsoft_ServiceBus_Messaging_QueueDescription_DuplicateDetectionHistoryTimeWindow) özelliğini kullanarak ileti kimliklerinin saklanacağı yinelenen saptama penceresinin boyutunu yapılandırabilirsiniz. Azure Resource Manager API 'SI ile, değeri [Queueproperties. duplicateDetectionHistoryTimeWindow](/azure/templates/microsoft.servicebus/namespaces/queues#property-values) özelliği ile ayarlanır.
+Yalnızca yinelenen saptamayı etkinleştirmenin yanı sıra, ileti kimliklerinin saklanacağı yinelenen algılama geçmişi zaman penceresinin boyutunu da yapılandırabilirsiniz.
+Bu değer, en az 7 günlük değer olacak şekilde, kuyruklar ve konular için varsayılan olarak 10 dakikadır.
 
 Tüm kayıtlı ileti kimliklerinin yeni gönderilen ileti tanımlayıcısına karşı eşleşmesi gerektiğinden, yinelenen saptamayı etkinleştirmek ve pencerenin boyutu doğrudan sırayı (ve konu) verimini etkiler.
 
 Pencerenin küçük tutulması, daha az ileti kimliği tutulması ve eşleştirilmesi gerektiği ve verimlilik daha az etkilenildiği anlamına gelir. Yinelenen saptamayı gerektiren yüksek aktarım hızı varlıkları için, pencereyi mümkün olduğunca küçük tutmanız gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-
-Service Bus mesajlaşma hakkında daha fazla bilgi edinmek için aşağıdaki konulara bakın:
-
-* [Service Bus kuyrukları, konu başlıkları ve abonelikleri](service-bus-queues-topics-subscriptions.md)
-* [Service Bus kuyrukları ile çalışmaya başlama](service-bus-dotnet-get-started-with-queues.md)
-* [Service Bus konu başlıklarını ve aboneliklerini kullanma](service-bus-dotnet-how-to-use-topics-subscriptions.md)
+Azure portal, PowerShell, CLı, Kaynak Yöneticisi şablonu, .NET, Java, Python ve JavaScript kullanarak yinelenen ileti algılamayı etkinleştirebilirsiniz. Daha fazla bilgi için bkz. [yinelenen ileti algılamayı etkinleştirme](enable-duplicate-detection.md). 
 
 İstemci kodunun daha önceki bir *MessageID* ile bir iletiyi yeniden gönderemediği senaryolarda, güvenli bir şekilde işlenebilecekleri iletiler tasarlamak önemlidir. [Eşkuvvetlilik hakkında bu blog gönderisi](https://particular.net/blog/what-does-idempotent-mean) , bunun nasıl yapılacağı hakkında çeşitli teknikler açıklamaktadır.
 
-[1]: ./media/duplicate-detection/create-queue.png
-[2]: ./media/duplicate-detection/queue-prop.png
+Azure Service Bus özellikleri araştırmak için istediğiniz dildeki örnekleri deneyin. 
+
+- [Java için Azure Service Bus istemci kitaplığı örnekleri](/samples/azure/azure-sdk-for-java/servicebus-samples/)
+- [Python için Azure Service Bus istemci kitaplığı örnekleri](/samples/azure/azure-sdk-for-python/servicebus-samples/)
+- [JavaScript için Azure Service Bus istemci kitaplığı örnekleri](/samples/azure/azure-sdk-for-js/service-bus-javascript/)
+- [TypeScript için Azure Service Bus istemci kitaplığı örnekleri](/samples/azure/azure-sdk-for-js/service-bus-typescript/)
+- [.NET için Azure. Messaging. ServiceBus örnekleri](/samples/azure/azure-sdk-for-net/azuremessagingservicebus-samples/)
+
+Aşağıdaki eski .NET ve Java istemci kitaplıkları için örnekler bulun:
+- [.NET için Microsoft. Azure. ServiceBus örnekleri](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.Azure.ServiceBus/)
+- [Java için Azure-ServiceBus örnekleri](https://github.com/Azure/azure-service-bus/tree/master/samples/Java/azure-servicebus/MessageBrowse)
+

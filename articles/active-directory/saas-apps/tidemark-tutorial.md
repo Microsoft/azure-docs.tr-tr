@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 03/27/2019
 ms.author: jeedes
-ms.openlocfilehash: c9e1de7b5dee8e351cd8744287c07b0bbb174512
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8cbccc3fb4cc513d7c86253ae07fbced4626a15e
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92516469"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599664"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-tidemark"></a>Öğretici: Tidemark ile tümleştirme Azure Active Directory
 
@@ -113,7 +113,7 @@ Azure AD çoklu oturum açmayı Tidemark ile yapılandırmak için aşağıdaki 
     - `https://<subdomain>.tidemark.net/saml`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için [istemci desteği ekibine](http://www.tidemark.com/contact-us) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için Istemci desteği ekibine başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
 5. **SAML Ile tek Sign-On ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
@@ -131,7 +131,7 @@ Azure AD çoklu oturum açmayı Tidemark ile yapılandırmak için aşağıdaki 
 
 ### <a name="configure-tidemark-single-sign-on"></a>Tidemark Single Sign-On yapılandırma
 
-**Tidemark** tarafında çoklu oturum açma 'yı yapılandırmak için, indirilen **sertifikayı (base64)** ve uygun kopyalanmış URL 'Leri Azure Portal ' den [Tidemark destek ekibine](http://www.tidemark.com/contact-us)göndermeniz gerekir. Bu ayar, SAML SSO bağlantısının her iki tarafında da düzgün bir şekilde ayarlanmasını sağlamak üzere ayarlanmıştır.
+**Tidemark** tarafında çoklu oturum açma 'yı yapılandırmak için, indirilen **sertifikayı (base64)** ve uygun kopyalanmış URL 'Leri Azure Portal ' den Tidemark destek ekibine göndermeniz gerekir. Bu ayar, SAML SSO bağlantısının her iki tarafında da düzgün bir şekilde ayarlanmasını sağlamak üzere ayarlanmıştır.
 
 ### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
@@ -185,7 +185,7 @@ Bu bölümde, Tidemark 'a erişim vererek Azure çoklu oturum açma özelliğini
 
 ### <a name="create-tidemark-test-user"></a>Tıdemark test kullanıcısı oluştur
 
-Bu bölümde, Tidemark 'da Britta Simon adlı bir Kullanıcı oluşturacaksınız. Tidemark platformunda kullanıcıları eklemek için [Tidemark destek ekibi](http://www.tidemark.com/contact-us) ile çalışın. Çoklu oturum açma kullanılmadan önce kullanıcıların oluşturulması ve etkinleştirilmesi gerekir.
+Bu bölümde, Tidemark 'da Britta Simon adlı bir Kullanıcı oluşturacaksınız. Tidemark platformunda kullanıcıları eklemek için Tidemark destek ekibi ile çalışın. Çoklu oturum açma kullanılmadan önce kullanıcıların oluşturulması ve etkinleştirilmesi gerekir.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 

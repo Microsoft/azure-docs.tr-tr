@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/15/2021
 ms.author: tomfitz
 ms.custom: include file
-ms.openlocfilehash: 97d80e999ac61a2c2f8f561dc19213419014beb8
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: f02b7f0f80cfb875cc6207b542db90607b379b67
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103471005"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107800317"
 ---
 | Kaynak | Sınır |
 | --- | --- |
@@ -27,4 +27,4 @@ ms.locfileid: "103471005"
 
 <sup>1</sup> Doğrudan bir aboneliğe en fazla 50 etiket uygulayabilirsiniz. Ancak, abonelik, abonelik içindeki kaynak gruplarına ve kaynaklara uygulanan sınırsız sayıda etiket içerebilir. Kaynak veya kaynak grubu başına etiket sayısı 50 ile sınırlıdır. Kaynak Yöneticisi, yalnızca etiket sayısı 80.000 veya daha az olduğunda, abonelikteki [benzersiz etiket adı ve değerlerinin listesini](/rest/api/resources/tags) döndürür. Sayı 80.000 ' i aştığında yine de etikete göre bir kaynak bulabilirsiniz.
 
-<sup>2</sup> 800 dağıtım sınırına ulaşırsanız, artık geçmişten gerekmeyen dağıtımları silin. Abonelik düzeyi dağıtımlarını silmek için [Remove-AzDeployment](/powershell/module/az.resources/Remove-AzDeployment) veya [az Deployment Sub Delete](/cli/azure/deployment/sub#az-deployment-sub-delete)komutunu kullanın.
+<sup>2</sup> 800 dağıtım sınırına ulaşırsanız, artık geçmişten gerekmeyen dağıtımları silin. Abonelik düzeyi dağıtımlarını silmek için [Remove-AzDeployment](/powershell/module/az.resources/Remove-AzDeployment) veya [az Deployment Sub Delete](/cli/azure/deployment/sub#az_deployment_sub_delete)komutunu kullanın.

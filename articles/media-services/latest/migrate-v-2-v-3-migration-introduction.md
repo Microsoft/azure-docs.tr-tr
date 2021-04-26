@@ -10,10 +10,10 @@ ms.workload: media
 ms.date: 03/25/2021
 ms.author: inhenkel
 ms.openlocfilehash: 32e502ff175a9222faa0eb79fb53f2cc3f76bfb7
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105559749"
 ---
 # <a name="migrate-from-media-services-v2-to-v3-introduction"></a>Media Services V2 'den v3 tanıtımı 'na geçirme

@@ -4,10 +4,10 @@ description: Adanmış bir App Service barındırma planında Azure Işlevleri �
 ms.topic: conceptual
 ms.date: 10/29/2020
 ms.openlocfilehash: a9f976eda4a551c302ba7df92fbdbbf7a4fce1d7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101704574"
 ---
 # <a name="dedicated-hosting-plans-for-azure-functions"></a>Azure Işlevleri için adanmış barındırma planları

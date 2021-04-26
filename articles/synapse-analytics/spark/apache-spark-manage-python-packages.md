@@ -9,12 +9,12 @@ ms.date: 02/26/2020
 ms.author: midesa
 ms.reviewer: jrasnick
 ms.subservice: spark
-ms.openlocfilehash: 2d6ac02402414f096a46fec0340c3074d8e1784a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1d64233fc477ec25f91bb73c744b10210571df41
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104586650"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588352"
 ---
 # <a name="manage-python-libraries-for-apache-spark-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te Apache Spark için Python kitaplıklarını yönetme
 
@@ -76,7 +76,8 @@ dependencies:
   - matplotlib
   - koalas==1.7.0
 ```
-Bu ortamdan ortam oluşturma hakkında ayrıntılı bilgi için, bkz. [Environment. yıml dosyasından ortam oluşturma](https://docs.conda.io/projects/conda/latest/user-guide/tasks/manage-environments.html#creating-an-environment-file-manually).
+Bu ortamdan ortam oluşturma hakkında ayrıntılı bilgi için, bkz. [Environment. yıml dosyasından ortam oluşturma](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment
+).
 
 #### <a name="update-python-packages"></a>Python paketlerini güncelleştirme
 Bir ortam belirtimi dosyasını veya Spark havuzunda yüklemek istediğiniz kitaplıkların kümesini tanımladıktan sonra, Azure SYNAPSE Studio veya Azure portal giderek Spark havuz kitaplıklarını güncelleştirebilirsiniz. Burada, ortam belirtimini sağlayabilir ve yüklenecek çalışma alanı kitaplıklarını seçebilirsiniz. 

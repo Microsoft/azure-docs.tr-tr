@@ -12,12 +12,12 @@ author: emlisa
 ms.author: emlisa
 ms.reviewer: sstein, emlisa
 ms.date: 10/28/2020
-ms.openlocfilehash: a14f8e0ba3ae5cca75cf6518320023703a6d1700
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 21ac73b461ebcb171f48621aa27a16dfc0e8c936
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105626393"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781748"
 ---
 # <a name="high-availability-for-azure-sql-database-and-sql-managed-instance"></a>Azure SQL veritabanı ve SQL yönetilen örneği için yüksek kullanılabilirlik
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -119,15 +119,15 @@ Hiper ölçekte yüksek kullanılabilirlik hakkında daha fazla bilgi için bkz.
 
 ## <a name="testing-application-fault-resiliency"></a>Uygulama hatası dayanıklılığı sınanıyor
 
-Yüksek kullanılabilirlik, veritabanı uygulamanız için saydam bir şekilde çalışan SQL Veritabanı ve SQL Yönetilen Örneği platformunun temel bir parçasıdır. Bununla birlikte uygulamayı üretime dağıtmadan önce, planlanmış veya planlanmamış olaylar sırasında başlatılan otomatik yük devretme işlemlerinin uygulamayı nasıl etkileyebileceğini test etmek isteyeceğinizin farkındayız. Bir veritabanını, elastik havuzu veya yönetilen örneği yeniden başlatmak için özel bir API çağırarak, yük devretmeyi el ile tetikleyebilirsiniz. Bölgesel olarak yedekli bir veritabanı veya elastik havuz söz konusu olduğunda, API çağrısı, eski birincil bölge kullanılabilirlik bölgesinden farklı bir kullanılabilirlik bölgesindeki yeni birincil bağlantı ile istemci bağlantılarını yeniden yönlendirmeye neden olur. Bu nedenle, yük devretmenin var olan veritabanı oturumlarını nasıl etkilediğini test etmeye ek olarak, ağ gecikmede yapılan değişiklikler nedeniyle uçtan uca performansı değiştirdiğinizi de doğrulayabilirsiniz. Yeniden başlatma işlemi zorlandığından ve çok sayıda, platformu vurgulamada, her veritabanı, elastik havuz veya yönetilen örnek için yalnızca bir yük devretme çağrısına her 15 dakikada bir izin verilir.
+Yüksek kullanılabilirlik, veritabanı uygulamanız için saydam bir şekilde çalışan SQL Veritabanı ve SQL Yönetilen Örneği platformunun temel bir parçasıdır. Bununla birlikte uygulamayı üretime dağıtmadan önce, planlanmış veya planlanmamış olaylar sırasında başlatılan otomatik yük devretme işlemlerinin uygulamayı nasıl etkileyebileceğini test etmek isteyeceğinizin farkındayız. Bir veritabanını, elastik havuzu veya yönetilen örneği yeniden başlatmak için özel bir API çağırarak, yük devretmeyi el ile tetikleyebilirsiniz. Bir bölge yedekli sunucusuz veya sağlanmış Genel Amaçlı veritabanı ya da elastik havuz durumunda, API çağrısı, eski birincil bölge kullanılabilirlik bölgesinden farklı bir kullanılabilirlik bölgesindeki yeni birincil bağlantı ile istemci bağlantılarını yeniden yönlendirmeye neden olur. Bu nedenle, yük devretmenin var olan veritabanı oturumlarını nasıl etkilediğini test etmeye ek olarak, ağ gecikmede yapılan değişiklikler nedeniyle uçtan uca performansı değiştirdiğinizi de doğrulayabilirsiniz. Yeniden başlatma işlemi zorlandığından ve çok sayıda, platformu vurgulamada, her veritabanı, elastik havuz veya yönetilen örnek için yalnızca bir yük devretme çağrısına her 15 dakikada bir izin verilir.
 
 PowerShell, REST API veya Azure CLı kullanılarak yük devretme başlatılabilir:
 
 |Dağıtım türü|PowerShell|REST API| Azure CLI|
 |:---|:---|:---|:---|
-|Veritabanı|[Invoke-AzSqlDatabaseFailover](/powershell/module/az.sql/invoke-azsqldatabasefailover)|[Veritabanı yük devretmesi](/rest/api/sql/databases/failover)|[az Rest](/cli/azure/reference-index#az-rest) , Azure CLI 'dan bir REST API çağrısı çağırmak için kullanılabilir|
-|Elastik havuz|[Invoke-Azsqtalayapışpoolfailover](/powershell/module/az.sql/invoke-azsqlelasticpoolfailover)|[Elastik havuz yük devretme](/rest/api/sql/elasticpools/failover)|[az Rest](/cli/azure/reference-index#az-rest) , Azure CLI 'dan bir REST API çağrısı çağırmak için kullanılabilir|
-|Yönetilen Örnek|[Invoke-Azsqlınstancefailover](/powershell/module/az.sql/Invoke-AzSqlInstanceFailover/)|[Yönetilen örnekler-yük devretme](/rest/api/sql/managed%20instances%20-%20failover/failover)|[az SQL mı yük devretme](/cli/azure/sql/mi/#az-sql-mi-failover)|
+|Veritabanı|[Invoke-AzSqlDatabaseFailover](/powershell/module/az.sql/invoke-azsqldatabasefailover)|[Veritabanı yük devretmesi](/rest/api/sql/databases/failover)|[az Rest](/cli/azure/reference-index#az_rest) , Azure CLI 'dan bir REST API çağrısı çağırmak için kullanılabilir|
+|Elastik havuz|[Invoke-Azsqtalayapışpoolfailover](/powershell/module/az.sql/invoke-azsqlelasticpoolfailover)|[Elastik havuz yük devretme](/javascript/api/@azure/arm-sql/elasticpools#failover_string__string__string__msRest_RequestOptionsBase)|[az Rest](/cli/azure/reference-index#az_rest) , Azure CLI 'dan bir REST API çağrısı çağırmak için kullanılabilir|
+|Yönetilen Örnek|[Invoke-Azsqlınstancefailover](/powershell/module/az.sql/Invoke-AzSqlInstanceFailover/)|[Yönetilen örnekler-yük devretme](/rest/api/sql/managed%20instances%20-%20failover/failover)|[az SQL mı yük devretme](/cli/azure/sql/mi/#az_sql_mi_failover)|
 
 > [!IMPORTANT]
 > Hiper ölçek veritabanlarının okunabilir ikincil çoğaltmaları için yük devretme komutu kullanılamaz.

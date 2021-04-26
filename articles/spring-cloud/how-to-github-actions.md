@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.date: 09/08/2020
 ms.custom: devx-track-java, devx-track-azurecli
 zone_pivot_groups: programming-languages-spring-cloud
-ms.openlocfilehash: 8400fcacbfa4c76aceb079b788255e3d3b83ce33
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: c52279108a8fd8d5a7ac8bbd7c8eb215097b21b0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878744"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791364"
 ---
 # <a name="azure-spring-cloud-cicd-with-github-actions"></a>GitHub eylemleri ile Azure yay bulut CI/CD
 
@@ -340,5 +340,5 @@ Eylemleriniz hatada çalışıyorsa, örneğin, Azure kimlik bilgisini ayarlamad
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Spring Cloud GitHub eylemleri için Key Vault](./spring-cloud-github-actions-key-vault.md)
-* [Hizmet sorumlularını Azure Active Directory](/cli/azure/ad/sp#az-ad-sp-create-for-rbac)
+* [Hizmet sorumlularını Azure Active Directory](/cli/azure/ad/sp#az_ad_sp_create_for_rbac)
 * [Azure için GitHub Actions](https://github.com/Azure/actions/)

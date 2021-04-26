@@ -11,10 +11,10 @@ ms.workload: data-services
 ms.topic: how-to
 ms.date: 01/12/2017
 ms.openlocfilehash: 49814d01209b58666c011a6bbd7fe6c328d460f8
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "100518343"
 ---
 # <a name="use-azure-machine-learning-studio-classic-web-service-parameters"></a>Azure Machine Learning Studio (klasik) Web hizmeti parametrelerini kullanma
@@ -58,11 +58,11 @@ Web hizmetine yönelik API belgeleri Web hizmetine erişirken Web hizmeti parame
    
    ![Web hizmeti parametre simgesi](./media/web-service-parameters/icon.png)
    
-   "Web hizmeti parametresi olarak ayarla" yı seçin.
+   "Web hizmeti parametresi olarak ayarla&quot; yı seçin.
    
-   Özellikler bölmesinin alt kısmındaki **Web hizmeti parametreleri** altına, "kapsayıcı ile başlayan blob yolu" adıyla bir giriş eklenir. Bu, şu anda bu [veri verme][writer] modülü parametresiyle Ilişkili olan Web hizmeti parametresidir.
-4. Web hizmeti parametresini yeniden adlandırmak için ada tıklayın, "blob yolu" yazın ve **ENTER** tuşuna basın. 
-5. Web hizmeti parametresi için varsayılan bir değer sağlamak üzere, adın sağ tarafındaki simgeye tıklayın, "varsayılan değer sağla" seçeneğini belirleyin, bir değer girin (örneğin, "kapsayıcı1/output1.csv") ve **ENTER** tuşuna basın.
+   Özellikler bölmesinin alt kısmındaki **Web hizmeti parametreleri** altına, &quot;kapsayıcı ile başlayan blob yolu&quot; adıyla bir giriş eklenir. Bu, şu anda bu [veri verme][writer] modülü parametresiyle Ilişkili olan Web hizmeti parametresidir.
+4. Web hizmeti parametresini yeniden adlandırmak için ada tıklayın, &quot;blob yolu&quot; yazın ve **ENTER** tuşuna basın. 
+5. Web hizmeti parametresi için varsayılan bir değer sağlamak üzere, adın sağ tarafındaki simgeye tıklayın, &quot;varsayılan değer sağla&quot; seçeneğini belirleyin, bir değer girin (örneğin, &quot;kapsayıcı1/output1.csv") ve **ENTER** tuşuna basın.
    
    ![Web hizmeti parametresi](./media/web-service-parameters/parameter.png)
 6. **Çalıştır**'a tıklayın. 

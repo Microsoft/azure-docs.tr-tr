@@ -6,12 +6,12 @@ ms.service: hpc-cache
 ms.topic: how-to
 ms.date: 03/15/2021
 ms.author: v-erkel
-ms.openlocfilehash: fd5dce0760953bf19c72e1a1062a9c03ffe861e7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 9db7576cb2278cc2ef0d8b93ef04bb633962cd0e
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103563393"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107255758"
 ---
 # <a name="configure-directory-services"></a>Dizin hizmetlerini yapılandırma
 

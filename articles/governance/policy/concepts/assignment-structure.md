@@ -1,14 +1,14 @@
 ---
 title: İlke atama yapısının ayrıntıları
 description: Değerlendirme için kaynaklarla ilke tanımlarını ve parametreleri ilişkilendirmek üzere Azure Ilkesi tarafından kullanılan ilke atama tanımını açıklar.
-ms.date: 03/17/2021
+ms.date: 04/14/2021
 ms.topic: conceptual
-ms.openlocfilehash: 909c1c361e092c512a73854a40e22a67efe5f2f8
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9de210b17264330e79ab5978a449e7a494054be2
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104604874"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535874"
 ---
 # <a name="azure-policy-assignment-structure"></a>Azure İlkesi atama yapısı
 
@@ -61,13 +61,37 @@ Tüm Azure Ilke örnekleri [Azure ilke örneklerimizle](../samples/index.md).
 
 **DisplayName** ve **Description** kullanarak ilke atamasını tanımlayabilir ve belirli bir kaynak kümesiyle kullanımı için bağlam sağlayabilirsiniz. **DisplayName** , en fazla _128_ karakter uzunluğunda ve en fazla _512_ karakter uzunluğunda bir **Açıklama** içeriyor.
 
+## <a name="metadata"></a>Meta veri
+
+İsteğe bağlı `metadata` özelliği, ilke atamasıyla ilgili bilgileri depolar. Müşteriler, ' de kuruluşları için yararlı olan özellikleri ve değerleri tanımlayabilir `metadata` . Ancak, Azure Ilkesi tarafından kullanılan bazı _ortak_ özellikler vardır. Her `metadata` özelliğin 1024 karakterlik bir sınırı vardır.
+
+### <a name="common-metadata-properties"></a>Ortak meta veri özellikleri
+
+- `assignedBy` (dize): atamayı oluşturan güvenlik sorumlusunun kolay adı.
+- `createdBy` (dize): atamayı oluşturan güvenlik sorumlusunun GUID 'SI.
+- `createdOn` (dize): atama oluşturma saatinin Universal ISO 8601 tarih saat biçimi.
+- `parameterScopes` (nesne): anahtarın [strongtype](./definition-structure.md#strongtype) yapılandırılmış bir parametre adıyla eşleştiği anahtar-değer çiftleri koleksiyonu ve değer, _strongtype_ ile eşleşen kullanılabilir kaynakların listesini sağlamak için portalda kullanılan kaynak kapsamını tanımlar. Kapsam atama kapsamından farklıysa, Portal bu değeri ayarlar. Ayarlanırsa, portalda ilke atamasının bir düzenlemesi, parametrenin kapsamını bu değere otomatik olarak ayarlar. Ancak, kapsam değere kilitli değildir ve başka bir kapsama değiştirilebilir.
+
+  Aşağıdaki örnek, `parameterScopes` , atama portalda düzenlenirken kaynak seçimi için bir kapsam ayarlayan **Backuppolicyıd** adlı bir _strongtype_ parametresine yöneliktir.
+
+  ```json
+  "metadata": {
+      "parameterScopes": {
+          "backupPolicyId": "/subscriptions/{SubscriptionID}/resourcegroups/{ResourceGroupName}"
+      }
+  }
+  ```
+
+- `updatedBy` (dize): varsa, atamayı güncelleştiren güvenlik sorumlusunun kolay adı.
+- `updatedOn` (dize): varsa, atama güncelleştirme zamanının Universal ISO 8601 tarih saat biçimi.
+
 ## <a name="enforcement-mode"></a>Zorlama modu
 
 **Enforcementmode** özelliği, müşterilere ilke efektini başlatmadan veya [Azure etkinlik günlüğündeki](../../../azure-monitor/essentials/platform-logs-overview.md)girişleri tetiklemeden mevcut kaynaklarda bir ilkenin sonucunu test etme yeteneği sağlar. Bu senaryo genellikle "What If" olarak adlandırılır ve güvenli dağıtım uygulamalarına hizalanır. **Enforcementmode** [devre dışı](./effects.md#disabled) etkilerden farklıdır, çünkü bu efekt kaynak değerlendirmesinin hiç oluşmasını önler.
 
 Bu özellik aşağıdaki değerlere sahiptir:
 
-|Mod |JSON değeri |Tür |El ile düzelt |Etkinlik günlüğü girişi |Description |
+|Mod |JSON değeri |Tür |El ile düzelt |Etkinlik günlüğü girişi |Açıklama |
 |-|-|-|-|-|-|
 |Etkin |Varsayılan |string |Yes |Yes |İlke etkisi, kaynak oluşturma veya güncelleştirme sırasında zorlanır. |
 |Devre dışı |Donotenzorlamalı |string |Yes |Hayır | İlke etkisi, kaynak oluşturma veya güncelleştirme sırasında zorlanmaz. |

@@ -1,9 +1,9 @@
 ### YamlMime:Landing
 title: Azure Dev Spaces belgeleri
-summary: Azure Dev Spaces kullanımdan kaldırılıyor ve 31 Ekim 2023'ten itibaren çalışmayacak.
+summary: Azure Dev Spaces kullanımdan kaldırılıyor ve 31 Ekim 2023'ten itibaren çalışmayacak. Yeni bir denetleyici sağlanmayabilir.
 metadata:
   title: Azure Dev Spaces belgeleri
-  description: Azure Dev Spaces kullanımdan kaldırılıyor ve 31 Ekim 2023'ten itibaren çalışmayacak.
+  description: Azure Dev Spaces kullanımdan kaldırılıyor ve 31 Ekim 2023'ten itibaren çalışmayacak. Yeni bir denetleyici sağlanmayabilir.
   services: azure-dev-spaces
   ms.service: azure-dev-spaces
   ms.topic: landing-page
@@ -11,12 +11,12 @@ metadata:
   ms.author: zarhoads
   manager: gwallace
   ms.date: 10/29/2020
-  ms.openlocfilehash: a3b3ca8c87871b9ae8e1d6a3db32d9e2051215b6
-  ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
-  ms.translationtype: HT
+  ms.openlocfilehash: a2283d189a6423b65364e64f0894e9e666c55463
+  ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
+  ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 10/30/2020
-  ms.locfileid: "93072040"
+  ms.lasthandoff: 04/14/2021
+  ms.locfileid: "107505947"
 landingContent:
 - title: Kubernetes Köprüsü
   linkLists:

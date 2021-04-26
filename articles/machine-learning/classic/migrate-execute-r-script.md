@@ -3,17 +3,17 @@ title: 'ML Studio (klasik): Azure Machine Learning taşıma-R betiğini yürütm
 description: Studio 'Yu yeniden derleyin (klasik) Azure Machine Learning 'de çalıştırmak için R betik modüllerini yürütün.
 services: machine-learning
 ms.service: machine-learning
-ms.subservice: studio
+ms.subservice: studio-classic
 ms.topic: how-to
 author: xiaoharper
 ms.author: zhanxia
 ms.date: 03/08/2021
-ms.openlocfilehash: ac9ad296029451d624345d8b3bb365d881ba9a84
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 18d9013b1a5afcf57b54cffc01a15948382210bb
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103565287"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311048"
 ---
 # <a name="migrate-execute-r-script-modules-in-studio-classic"></a>Studio 'da R betik modüllerini yürütme (klasik)
 

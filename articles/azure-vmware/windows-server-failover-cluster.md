@@ -1,18 +1,21 @@
 ---
-title: Yerel paylaşılan disklerle Azure VMware Çözüm vSAN üzerinde Windows Server yük devretme kümesi
-description: Azure VMware çözümünde Windows Server yük devretme kümesi (WSFC) ayarlayın ve WSFC özelliği gerektiren çözümlerin avantajlarından yararlanın.
+title: Azure VMware çözümünde vSAN 'da Windows Server yük devretme kümesini yapılandırma
+description: Yerel paylaşılan disklerle Azure VMware çözümü vSAN üzerinde Windows Server yük devretme kümesi (WSFC) ayarlayın.
 ms.topic: how-to
-ms.date: 03/09/2021
-ms.openlocfilehash: 8162e15675d8bbde9267126c785f152d1cb860bd
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.date: 04/09/2021
+ms.openlocfilehash: f1bc8199eb0d3317e4b6e07a6a297b4ebfe95cc8
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105562248"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308698"
 ---
-# <a name="windows-server-failover-cluster-on-azure-vmware-solution-vsan-with-native-shared-disks"></a>Yerel paylaşılan disklerle Azure VMware Çözüm vSAN üzerinde Windows Server yük devretme kümesi
+# <a name="configure-windows-server-failover-cluster-on-azure-vmware-solution-vsan"></a>Azure VMware çözümünde vSAN 'da Windows Server yük devretme kümesini yapılandırma
 
-Bu makalede, Azure VMware çözümünde Windows Server yük devretme kümesi ayarlamayı adım adım inceleyeceğiz. Bu makaledeki uygulama kavram kanıtı ve pilot amaçlar için tasarlanmıştır. Yerleştirme ilkeleri kullanılabilir olana kadar bir küme içi (CıB) yapılandırma kullanmanızı öneririz.
+Bu makalede, yerel paylaşılan disklerle Azure VMware çözümü vSAN üzerinde Windows Server yük devretme kümesi ayarlamayı öğreneceksiniz. 
+
+>[!IMPORTANT]
+>Bu makaledeki uygulama kavram kanıtı ve pilot amaçlar için tasarlanmıştır. Yerleştirme ilkeleri kullanılabilir olana kadar bir küme içi (CıB) yapılandırma kullanmanızı öneririz.
 
 Daha önce Microsoft hizmet kümesi hizmeti (MSCS) olarak bilinen Windows Server yük devretme kümesi (WSFC), Windows Server Işletim sisteminin (OS) bir özelliğidir. WSFC, iş açısından kritik bir özelliktir ve birçok uygulama için gereklidir. Örneğin, aşağıdaki yapılandırmalarda WSFC gereklidir:
 
@@ -43,7 +46,7 @@ Azure VMware çözümü, sanallaştırılmış WSFC için yerel destek sağlar. 
 
 Aşağıdaki diyagramda, bir Azure VMware çözümü özel bulutundaki WSFC sanal düğümlerinin mimarisi gösterilmektedir. Azure VMware çözümünün, daha geniş Azure platformuna bağlı olarak, WSFC sanal sunucuları (kırmızı kutu) dahil olmak üzere bulunduğu konumu gösterir. Bu diyagramda tipik bir hub-ışınsal mimarisi gösterilmektedir, ancak Azure sanal WAN kullanımı ile benzer bir kurulum mümkündür. Her ikisi de diğer Azure hizmetlerinin tüm değerlerini sunmaktadır.
 
-[![Azure VMware Çözüm özel bulutu 'ndaki WSFC sanal düğümlerinin mimarisini gösteren diyagram.](media/windows-server-failover-cluster/windows-server-failover-architecture.png)](media/windows-server-failover-cluster/windows-server-failover-architecture.png#lightbox)
+:::image type="content" source="media/windows-server-failover-cluster/windows-server-failover-architecture.svg" alt-text="Azure VMware Çözüm özel bulutu 'ndaki Windows Server yük devretme kümesi sanal düğümlerinin mimari diyagramı." border="false" lightbox="media/windows-server-failover-cluster/windows-server-failover-architecture.svg":::
 
 ## <a name="supported-configurations"></a>Desteklenen yapılandırmalar
 

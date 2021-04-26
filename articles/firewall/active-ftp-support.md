@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: conceptual
-ms.date: 03/05/2021
+ms.date: 04/12/2021
 ms.author: victorh
-ms.openlocfilehash: adbc2a9eb6cd3b054df84911604143ddb711ad20
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 18b3680e47fe808413998144259e033a4cbcaa27
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102499144"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864478"
 ---
 # <a name="azure-firewall-active-ftp-support"></a>Azure Güvenlik Duvarı etkin FTP desteği
 
@@ -20,14 +20,20 @@ Etkin FTP ile FTP sunucusu, belirlenen FTP istemci veri bağlantı noktasına ve
 
 Varsayılan olarak, FTP komutu kullanılarak FTP sıçrama saldırılarına karşı korumak için etkin FTP desteği Azure Güvenlik duvarında devre dışıdır `PORT` . Ancak, Azure PowerShell, Azure CLı veya Azure ARM şablonunu kullanarak dağıtırken etkin FTP 'yi etkinleştirebilirsiniz.
 
+Etkin mod FTP 'yi desteklemek için aşağıdaki TCP bağlantı noktalarının açılması gerekir:
+
+- FTP sunucusunun bağlantı noktası 21 her yerde (istemci bağlantı başlatır)
+- FTP sunucusunun bağlantı noktası 21-bağlantı noktaları > 1023 (sunucu istemcinin denetim bağlantı noktasına yanıt verir)
+- FTP sunucusunun bağlantı noktası 20 ila istemciler üzerinde 1023 > (sunucu, istemcinin veri bağlantı noktasına veri bağlantısı başlatır)
+- Sunucuda 1023 numaralı bağlantı > noktalarından FTP sunucusunun bağlantı noktası 20 ' si (istemci, sunucunun veri bağlantı noktasında ACK 'ler gönderir)
 
 ## <a name="azure-powershell"></a>Azure PowerShell
 
 Azure PowerShell kullanarak dağıtmak için `AllowActiveFTP` parametresini kullanın. Daha fazla bilgi için bkz. [ETKIN FTP 'ye Izin ver Ile güvenlik duvarı oluşturma](/powershell/module/az.network/new-azfirewall#16---create-a-firewall-with-allow-active-ftp-).
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
-Azure CLı kullanarak dağıtmak için `--allow-active-ftp` parametresini kullanın. Daha fazla bilgi için bkz. [az Network Firewall Create](/cli/azure/ext/azure-firewall/network/firewall#ext_azure_firewall_az_network_firewall_create-optional-parameters). 
+Azure CLı kullanarak dağıtmak için `--allow-active-ftp` parametresini kullanın. Daha fazla bilgi için bkz. [az Network Firewall Create](/cli/azure/network/firewall#az_network_firewall_create-optional-parameters). 
 
 ## <a name="azure-resource-manager-arm-template"></a>Azure Resource Manager (ARM) şablonu
 

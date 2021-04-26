@@ -1,19 +1,19 @@
 ---
 title: Yerel Azure depolama geliştirmesi için Azurite öykünücüsünü kullanma
 description: Azurite açık kaynaklı öykünücü, Azure depolama uygulamalarınızı test etmek için ücretsiz bir yerel ortam sağlar.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 07/15/2020
 ms.service: storage
 ms.subservice: common
 ms.topic: how-to
 ms.custom: devx-track-csharp
-ms.openlocfilehash: b5051a5e29f9e34c43963a9a264ee47e2ad7b04a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a921de0d976b9c92ca7978feb7caf69484ba9379
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92490790"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277134"
 ---
 # <a name="use-the-azurite-emulator-for-local-azure-storage-development"></a>Yerel Azure depolama geliştirmesi için Azurite öykünücüsünü kullanma
 

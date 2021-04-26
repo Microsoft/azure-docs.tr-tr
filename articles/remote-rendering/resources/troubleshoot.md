@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/25/2020
 ms.topic: troubleshooting
-ms.openlocfilehash: 4990f0d0a10709f2c1c5a17806020cd685f999fc
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8f0fb9ab5c53c3fd1bfb32ac7b112a116301cba7
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99593342"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575352"
 ---
 # <a name="troubleshoot"></a>Sorun giderme
 
@@ -249,6 +249,39 @@ Coplanar yüzeylerinin çeşitli nedenleri olabilir:
 
 Bazı durumlarda, yerel içerik (sol ve sağ gözle ayrı geçişlerde işleme) için çok taramalı bir stereo işleme modu kullanan özel yerel C++ [**uygulamaları, bir**](../concepts/graphics-bindings.md#render-remote-image) sürücü hatasını tetikleyebilir. Hata belirleyici olmayan rasterleştirme görünmelere neden olur, tek tek üçgenler veya yerel içeriğin üçgeninin bölümlerinin rastgele kaybolması. Performans nedenleriyle, örneğin **SV_RenderTargetArrayIndex** kullanarak, daha modern bir tek geçişli stereo işleme tekniğinden yerel içerik işlemek de önerilir.
 
+## <a name="conversion-file-download-errors"></a>Dönüştürme dosyası Indirme hataları
+
+Dönüştürme hizmeti, Windows ve hizmet tarafından uygulanan yol uzunluğu sınırları nedeniyle blob depolamadan dosya indirme hatalarıyla karşılaşıyor olabilir. Blob depolamadaki dosya yolları ve dosya adları 178 karakteri aşmamalıdır. Örneğin `blobPrefix` `models/Assets` , 13 karakter olan bir.
+
+`models/Assets/<any file or folder path greater than 164 characters will fail the conversion>`
+
+Dönüştürme hizmeti, `blobPrefix` yalnızca dönüştürmede kullanılan dosyalar değil, altında belirtilen tüm dosyaları indirir. Soruna neden olan dosyalar/klasör bu durumlarda daha az belirgin olabilir. bu sayede, altındaki depolama hesabında bulunan her şeyi denetlemek önemlidir `blobPrefix` . İndirilen özellikler için aşağıdaki örnek girişlere bakın.
+``` json
+{
+  "settings": {
+    "inputLocation": {
+      "storageContainerUri": "https://contosostorage01.blob.core.windows.net/arrInput",
+      "blobPrefix": "models/Assets",
+      "relativeInputAssetPath": "myAsset.fbx"
+    ...
+  }
+}
+```
+
+```
+models
+├───Assets
+│   │   myAsset.fbx                 <- Asset
+│   │
+│   └───Textures
+│   |       myTexture.png           <- Used in conversion
+│   |
+|   └───MyFiles
+|          myOtherFile.txt          <- File also downloaded under blobPrefix      
+|           
+└───OtherFiles
+        myReallyLongFileName.txt    <- Ignores files not under blobPrefix             
+```
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Sistem gereksinimleri](../overview/system-requirements.md)

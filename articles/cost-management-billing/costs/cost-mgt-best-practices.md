@@ -3,18 +3,18 @@ title: Azure Maliyet Yönetimi ile bulut yatırımınızı iyileştirme
 description: Bu makale bulut yatırımlarınızdan en iyi şekilde yararlanmanıza, maliyetlerinizi azaltmanıza ve paranızın nereye harcandığını değerlendirmenize yardımcı olur.
 author: bandersmsft
 ms.author: banders
-ms.date: 05/27/2020
+ms.date: 04/02/2021
 ms.topic: conceptual
 ms.service: cost-management-billing
 ms.subservice: cost-management
 ms.reviewer: adwise
 ms.custom: seodec18
-ms.openlocfilehash: fc9b6c4edc5d08c30b1eadb5084155b10d0e55a3
-ms.sourcegitcommit: fc401c220eaa40f6b3c8344db84b801aa9ff7185
-ms.translationtype: HT
+ms.openlocfilehash: e333b4aadce33e5303820951051ce83c7e65eaf9
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/20/2021
-ms.locfileid: "98601508"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106222393"
 ---
 # <a name="how-to-optimize-your-cloud-investment-with-azure-cost-management"></a>Azure Maliyet Yönetimi ile bulut yatırımınızı iyileştirme
 
@@ -91,7 +91,7 @@ Farklı seçenekler hakkında daha fazla bilgi edinmek için bkz. [Azure'ı sat�
 #### <a name="free"></a>[Ücretsiz](https://azure.microsoft.com/free/)
 
 - Popüler ücretsiz hizmetleri 12 ay boyunca kullanma
-- 30 gün boyunca hizmetleri keşfetmek için 200 ABD doları kredi
+- Hizmetleri 30 gün boyunca araştırmak için faturalandırma para biriminizde kredi 200 ABD Doları
 - 25'ten fazla hizmet her zaman ücretsizdir
 
 #### <a name="pay-as-you-go"></a>[Kullandıkça öde](https://azure.microsoft.com/offers/ms-azr-0003p)

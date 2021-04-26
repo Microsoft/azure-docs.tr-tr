@@ -6,10 +6,10 @@ ms.date: 12/14/2020
 ms.topic: quickstart
 ms.author: tomfitz
 ms.openlocfilehash: 28987486726f5a88d20efe9fe8a766e536062c2c
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104889969"
 ---
 # <a name="quickstart-create-and-deploy-template-spec-preview"></a>Hızlı başlangıç: şablon belirtimini oluşturma ve dağıtma (Önizleme)
@@ -106,7 +106,7 @@ Yerel şablondan bir şablon belirtimi oluşturursunuz. Aşağıdaki şablonu ko
 1. **Gözden geçir + Oluştur**’u seçin.
 1. **Oluştur**’u seçin.
 
-# <a name="arm-template"></a>[ARM Şablonu](#tab/azure-resource-manager)
+# <a name="arm-template"></a>[ARM şablonu](#tab/azure-resource-manager)
 
 > [!NOTE]
 > Bir ARM şablonu kullanmak yerine, şablon belirtimini oluşturmak için PowerShell veya CLı kullanmanızı öneririz. Bu araçlar, bağlantılı şablonları ana şablonlarınıza bağlı yapıtlar otomatik olarak dönüştürür. Şablon belirtimini oluşturmak için ARM şablonu kullandığınızda, bu bağlantılı şablonları karmaşık olabilecek yapıtlar olarak el ile eklemeniz gerekir.
@@ -321,7 +321,7 @@ Bir şablon belirtimini dağıtmak için, bir şablon dağıtmak için kullandı
 1. **Gözden geçir ve oluştur**’u seçin.
 1. **Oluştur**’u seçin.
 
-# <a name="arm-template"></a>[ARM Şablonu](#tab/azure-resource-manager)
+# <a name="arm-template"></a>[ARM şablonu](#tab/azure-resource-manager)
 
 1. Aşağıdaki şablonu kopyalayın ve **storage.js** adlı bir dosyaya yerel olarak kaydedin.
 
@@ -476,7 +476,7 @@ Düzeltilen şablon için yeni bir şablon belirtimi oluşturmak yerine, var ola
 1. **Gözden geçir ve oluştur**’u seçin.
 1. **Oluştur**’u seçin.
 
-# <a name="arm-template"></a>[ARM Şablonu](#tab/azure-resource-manager)
+# <a name="arm-template"></a>[ARM şablonu](#tab/azure-resource-manager)
 
 1. Ayrıca, şablon özelliklerine sahip olmak için yerel şablonunuzda bazı değişiklikler yapmanız gerekir. Aşağıdaki şablonu kopyalayın ve azuredeploy.jsolarak yerel olarak kaydedin.
 

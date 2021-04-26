@@ -6,13 +6,13 @@ ms.author: brendm
 ms.service: spring-cloud
 ms.topic: conceptual
 ms.date: 12/02/2020
-ms.custom: devx-track-java, devx-track-azurecli
-ms.openlocfilehash: 32b41c1c4446ba34e3bfad52f1d3cbd7ed72096d
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.custom: devx-track-java
+ms.openlocfilehash: a6b444092ec4e3588564a3f902b49c4ed3dc5fe5
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105108818"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376792"
 ---
 # <a name="customer-responsibilities-for-running-azure-spring-cloud-in-vnet"></a>VNET 'te Azure Spring Cloud çalıştırmaya yönelik müşteri sorumlulukları
 Bu belge, bir sanal ağda Azure Spring Cloud 'ın kullanımına yönelik belirtimleri içerir.
@@ -33,7 +33,7 @@ Aşağıda, Azure yay bulut hizmetleri için kaynak gereksinimlerinin bir listes
 ## <a name="azure-spring-cloud-network-requirements"></a>Azure yay bulut ağı gereksinimleri
 
   | Hedef uç nokta | Bağlantı noktası | Kullanın | Not |
-  |------|------|------|
+  |------|------|------|------|
   | *: 1194 *veya* [servicetag](../virtual-network/service-tags-overview.md#available-service-tags) -azurecyüksek: 1194 | UDP: 1194 | Temel Kubernetes küme yönetimi. | |
   | *: 443 *veya* [servicetag](../virtual-network/service-tags-overview.md#available-service-tags) -azurecyüksek: 443 | TCP: 443 | Azure yay bulut hizmeti yönetimi. | "RequiredTraffics" hizmet örneğinin bilgileri, kaynak yükünde "networkProfile" bölümünde bilinirdi. |
   | *: 9000 *veya* [servicetag](../virtual-network/service-tags-overview.md#available-service-tags) -azurecyüksek: 9000 | TCP: 9000 | Temel Kubernetes küme yönetimi. |
@@ -43,9 +43,9 @@ Aşağıda, Azure yay bulut hizmetleri için kaynak gereksinimlerinin bir listes
   | *. servicebus.windows.net:443 *veya* [servicetag](../virtual-network/service-tags-overview.md#available-service-tags) -EventHub: 443 | TCP: 443 | Azure Olay Hub 'ı. | , Sanal ağda *Azure Event Hubs* [hizmet uç noktası](../virtual-network/virtual-network-service-endpoints-overview.md)etkinleştirilerek değiştirilebilir. |
   
 
-## <a name="azure-spring-cloud-fqdn-requirements--application-rules"></a>Azure yay bulutu FQDN gereksinimleri/uygulama kuralları
+## <a name="azure-spring-cloud-fqdn-requirementsapplication-rules"></a>Azure yay bulutu FQDN gereksinimleri/uygulama kuralları
 
-Azure Güvenlik Duvarı, aşağıdaki yapılandırmaların basitleşmesi için **AzureKubernetesService** tam etki alanı adı (FQDN) etiketi sağlar.
+Azure Güvenlik Duvarı, aşağıdaki yapılandırmaların basitleşmesi için **AZUREKUBERNETESSERVICE** FQDN etiketini sağlar:
 
   | Hedef FQDN | Bağlantı noktası | Kullanın |
   |------|------|------|
@@ -61,6 +61,15 @@ Azure Güvenlik Duvarı, aşağıdaki yapılandırmaların basitleşmesi için *
   | *mscrl.microsoft.com* | HTTPS: 80 | Gerekli Microsoft sertifika zinciri yolları. |
   | *crl.microsoft.com* | HTTPS: 80 | Gerekli Microsoft sertifika zinciri yolları. |
   | *crl3.digicert.com* | HTTPS: 80 | 3. taraf SSL sertifika zinciri yolları. |
+  
+## <a name="azure-spring-cloud-optional-fqdn-for-third-party-application-performance-management"></a>Azure Spring Cloud, üçüncü taraf uygulama performansı yönetimi için isteğe bağlı FQDN
+
+Azure Güvenlik Duvarı, aşağıdaki yapılandırmaların basitleşmesi için **AZUREKUBERNETESSERVICE** FQDN etiketini sağlar:
+
+  | Hedef FQDN | Bağlantı noktası | Kullanın                                                          |
+  | ---------------- | ---- | ------------------------------------------------------------ |
+  | Toplayıcı *. newrelik. com | TCP: 443/80 | Yeni relik APM aracılarının ABD bölgesinden gerekli ağları, Ayrıca bkz. [APM aracıları ağları](https://docs.newrelic.com/docs/using-new-relic/cross-product-functions/install-configure/networks/#agents). |
+  | Collector *. eu01. NR-data.net | TCP: 443/80 | Yeni relik APM aracılarının, AB bölgesindeki gerekli ağları da bkz. [APM aracıları ağları](https://docs.newrelic.com/docs/using-new-relic/cross-product-functions/install-configure/networks/#agents). |
 
 ## <a name="see-also"></a>Ayrıca bkz.
 * [Uygulamanıza özel bir ağda erişin](access-app-virtual-network.md)

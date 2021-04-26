@@ -7,12 +7,12 @@ ms.date: 01/27/2021
 ms.topic: how-to
 ms.service: iot-central
 services: iot-central
-ms.openlocfilehash: d0e59f73dd9b62b528c3d86d315b613312df7773
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: df89d53e6b5043c1ef3caa1c92f2abaae542d6ec
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100577056"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599018"
 ---
 # <a name="monitor-the-overall-health-of-an-iot-central-application"></a>Bir IoT Central uygulamasının genel sistem durumunu izleme
 
@@ -54,7 +54,7 @@ IoT Central için şu anda kullanılabilen ölçümlerin listesi için bkz. [Azu
 
 - IoT Central [Standart fiyatlandırma planları](https://azure.microsoft.com/pricing/details/iot-central/) , ücretsiz olarak iki cihaz ve farklı ileti kotaları içerir. Ücretsiz öğeler faturalandırma dışında tutulurken, bunlar ölçümlerde hala sayılır.
 
-- IoT Central, uygulamadaki her cihaz şablonu için bir test cihaz KIMLIĞI oluşturur. Bu cihaz KIMLIĞI, cihaz şablonu için **Test cihazını Yönet** sayfasında görünür. Çözüm oluşturucular, bu test cihaz kimliklerini kullanan kod oluşturarak [cihaz şablonlarını](./overview-iot-central.md#create-device-templates) yayımlamadan önce doğrulamayı seçebilirler. Bu cihazlar faturalandırma dışında tutulurken, ölçümlerde hala sayılır.
+- IoT Central, uygulamadaki her cihaz şablonu için bir test cihaz KIMLIĞI oluşturur. Bu cihaz KIMLIĞI, cihaz şablonu için **Test cihazını Yönet** sayfasında görünür. Çözüm oluşturucular, bu test cihaz kimliklerini kullanan kod oluşturarak cihaz şablonlarını yayımlamadan önce doğrulamayı seçebilirler. Bu cihazlar faturalandırma dışında tutulurken, ölçümlerde hala sayılır.
 
 - Ölçümler cihazdan buluta iletişimin bir alt kümesini gösterebilirken, cihaz ile bulut arasındaki tüm iletişimler [faturalandırma için bir ileti olarak sayılır](https://azure.microsoft.com/pricing/details/iot-central/).
 

@@ -2,14 +2,14 @@
 title: Kurtarma Hizmetleri kasaları oluşturma ve yapılandırma
 description: Bu makalede, yedeklemeleri ve kurtarma noktalarını depolayan kurtarma hizmetleri kasalarını oluşturma ve yapılandırma hakkında bilgi edinin. İkincil bir bölgede geri yüklemek için çapraz bölge geri yükleme 'yi nasıl kullanacağınızı öğrenin.
 ms.topic: conceptual
-ms.date: 05/30/2019
+ms.date: 04/14/2021
 ms.custom: references_regions
-ms.openlocfilehash: 1a20cd2b1245febea5fd18a9f6fe6e7a7bb6f04b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5e2983e473fac72d02f0fdbc8c307e96326ac0a6
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101716763"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107518584"
 ---
 # <a name="create-and-configure-a-recovery-services-vault"></a>Kurtarma Hizmetleri Kasası oluşturma ve yapılandırma
 
@@ -69,7 +69,7 @@ Bu işlem depolama düzeyinde olduğundan, [fiyatlandırma etkileri](https://azu
 >- SQL ve SAP HANA veritabanları için çapraz bölge geri yükleme, tüm Azure genel bölgelerinde önizleme aşamasındadır.
 >- CRR, herhangi bir GRS Kasası için kasa düzeyi katılım özelliğidir (varsayılan olarak kapalıdır).
 >- Bu işlem yapıldıktan sonra, yedekleme öğelerinin ikincil bölgelerde kullanılabilmesi 48 saat kadar sürebilir.
->- Azure VM 'Leri için şu anda CRR yalnızca Azure Resource Manager Azure VM 'Leri için desteklenir. Klasik Azure VM 'Leri desteklenmez.  Ek yönetim türleri CRR 'yi desteklediklerinde, bunlar **otomatik olarak** kaydedilir.
+>- Azure VM 'leri için CRR Şu anda Azure VM 'leri ve şifrelenmiş Azure VM 'ler için Azure Resource Manager desteklenir. Klasik Azure VM 'Leri desteklenmez. Ek yönetim türleri CRR 'yi desteklediklerinde, bunlar **otomatik olarak** kaydedilir.
 >- Koruma ilk kez başlatıldığında çapraz bölge geri yüklemesi şu anda GRS veya LRS 'ye **geri döndürülemez** .
 >- Şu anda, [Okuma Erişimli Coğrafi olarak yedekli depolama (RA-GRS)](../storage/common/storage-redundancy.md#redundancy-in-a-secondary-region) çoğaltması 15 dakika olsa da, Ikincil bölge [RPO 'su](azure-backup-glossary.md#rpo-recovery-point-objective) birincil bölgeden 12 saate kadar sürer.
 

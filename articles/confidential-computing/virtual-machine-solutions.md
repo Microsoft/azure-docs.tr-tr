@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.topic: conceptual
 ms.date: 04/06/2020
 ms.author: JenCook
-ms.openlocfilehash: 8621dc8cfc10ab44ecb358a40fdae1a1b2081734
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 580c53f311bc8ee70e974df2bc4111e6361d06f6
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102566592"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818971"
 ---
 # <a name="solutions-on-azure-virtual-machines"></a>Azure sanal makinelerinde çözümler
 
@@ -66,7 +66,7 @@ DCsv2-Series bir sanal makineyi 10 dakikadan kısa bir süre içinde dağıtmak 
   
 - **Yeniden boyutlandırma** – özel donanımlar nedeniyle, yalnızca aynı büyüklükte aile içindeki gizli bilgi işlem örneklerini yeniden boyutlandırabilirsiniz. Örneğin, bir DCsv2 serisi VM 'yi yalnızca bir DCsv2 serisi boyutundan diğerine yeniden boyutlandırabilirsiniz. Gizli olmayan bir bilgi işlem boyutunun gizli bilgi işlem boyutuna göre yeniden boyutlandırılması desteklenmez.  
 
-- **Görüntü** : gizli bilgi işlem örnekleri üzerinde Intel Software Guard uzantısı (Intel SGX) desteği sağlamak için, tüm dağıtımların 2. nesil görüntülerde çalıştırılması gerekir. Azure gizli bilgi işlem, Ubuntu 18,04 Gen 2, Ubuntu 16,04 Gen 2, Windows Server 2019 Gen2 ve Windows Server 2016 Gen 2 ' de çalışan iş yüklerini destekler. Desteklenen ve desteklenmeyen senaryolar hakkında daha fazla bilgi edinmek için [Azure 'da 2. nesil VM 'ler için destek](../virtual-machines/generation-2.md) konusunu okuyun. 
+- **Görüntü** : gizli bilgi işlem örnekleri üzerinde Intel Software Guard uzantısı (Intel SGX) desteği sağlamak için, tüm dağıtımların 2. nesil görüntülerde çalıştırılması gerekir. Azure gizli bilgi işlem, Ubuntu 18,04 Gen 2, Ubuntu 20,04 Gen 2, Windows Server 2019 Gen2 ve Windows Server 2016 Gen 2 ' de çalışan iş yüklerini destekler. Desteklenen ve desteklenmeyen senaryolar hakkında daha fazla bilgi edinmek için [Azure 'da 2. nesil VM 'ler için destek](../virtual-machines/generation-2.md) konusunu okuyun. 
 
 - **Depolama** – Azure gizli bilgi işlem sanal makine veri diskleri ve kısa ömürlü işletim sistemi disklerimiz NVMe disklerinde. Örnekler, Ultra SSD veya Standart HDD değil yalnızca Premium SSD ve Standart SSD disklerini destekler. Sanal makine boyutu **DC8_v2** Premium depolamayı desteklemez. 
 
@@ -122,10 +122,10 @@ Sanal makine kaynağında ARM şablonunuzda aşağıdaki boyutlardan birini beli
         "sku": "18_04-lts-gen2",
         "version": "latest"
       },
-      "16_04-lts-gen2": {
+      "20_04-lts-gen2": {
         "offer": "UbuntuServer",
         "publisher": "Canonical",
-        "sku": "16_04-lts-gen2",
+        "sku": "20_04-lts-gen2",
         "version": "latest"
       }
 ```

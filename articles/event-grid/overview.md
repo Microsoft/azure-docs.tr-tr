@@ -3,12 +3,12 @@ title: Azure Event Grid nedir?
 description: Azure Event Grid olan bir kaynaktan işleyicilere olay verileri gönderin. Olay tabanlı uygulamalar oluşturun ve Azure hizmetleriyle tümleştirin.
 ms.topic: overview
 ms.date: 01/28/2021
-ms.openlocfilehash: e53665c88c3860d37b3512c6498ab626b02a6400
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a410f56da9e28403fb98d92332e6d67c064bac4d
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99055149"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105934877"
 ---
 # <a name="what-is-azure-event-grid"></a>Azure Event Grid nedir?
 
@@ -22,7 +22,8 @@ Bu makalede Azure Event Grid’e genel bir bakış sağlanmıştır. Event Grid 
 
 :::image type="content" source="./media/overview/functional-model.png" alt-text="Kaynak ve işleyicilerle Event Grid modeli" lightbox="./media/overview/functional-model-big.png":::
 
-Bu görüntü, Event Grid kaynakları ve işleyicileri nasıl bağladığını gösterir ve desteklenen tümleştirmelerin kapsamlı bir listesi değildir.
+> [!NOTE]
+> Bu görüntü, Event Grid kaynakları ve işleyicileri nasıl bağladığını gösterir ve desteklenen tümleştirmelerin kapsamlı bir listesi değildir. Desteklenen tüm olay kaynaklarının listesi için aşağıdaki bölüme bakın. 
 
 ## <a name="event-sources"></a>Olay kaynakları
 
@@ -38,6 +39,7 @@ Bu görüntü, Event Grid kaynakları ve işleyicileri nasıl bağladığını g
 - [Azure Machine Learning](event-schema-machine-learning.md)
 - [Azure Haritalar](event-schema-azure-maps.md)
 - [Azure Media Services](event-schema-media-services.md)
+- [Azure İlkesi](./event-schema-policy.md)
 - [Azure kaynak grupları](event-schema-resource-groups.md)
 - [Azure Service Bus](event-schema-service-bus.md)
 - [Azure SignalR](event-schema-azure-signalr.md)

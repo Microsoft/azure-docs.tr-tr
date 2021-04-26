@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 09/11/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: fd292fa6b4f613e0a5f5a80e0cd87675f529baf5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: 350b7306b6d39b42fbfebcc6566762df305b11b4
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92516180"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445989"
 ---
 # <a name="migrate-manually-from-windows-virtual-desktop-classic"></a>Windows sanal masaüstünden el ile geçiş (klasik)
 

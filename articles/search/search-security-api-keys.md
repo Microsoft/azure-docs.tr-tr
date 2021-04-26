@@ -7,17 +7,17 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 02/03/2021
-ms.openlocfilehash: 8b2e85744923fb2e7e474e049df1536aebc56f3c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/08/2021
+ms.openlocfilehash: 6954ce289cb3cf219f8c4024a112411fd60d70e0
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99536942"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310674"
 ---
-# <a name="create-and-manage-api-keys-for-an-azure-cognitive-search-service"></a>Azure Bilişsel Arama hizmeti için API anahtarları oluşturma ve yönetme
+# <a name="create-and-manage-api-keys-for-authentication-to-azure-cognitive-search"></a>Azure Bilişsel Arama kimlik doğrulaması için API anahtarları oluşturma ve yönetme
 
-Bir arama hizmetine yapılan tüm isteklerin, hizmetinize özel olarak oluşturulmuş salt okunurdur bir API anahtarı olması gerekir. API anahtarı, arama hizmeti uç noktanıza gelen isteklerin kimliğini doğrulamaya yönelik tek mekanizmadır ve her istekte gereklidir. 
+Bir arama hizmetine bağlanırken, tüm isteklerin hizmetinize özel olarak oluşturulan salt okunurdur bir API anahtarı içermesi gerekir. API anahtarı, arama hizmeti uç noktanıza gelen isteklerin kimliğini doğrulamaya yönelik tek mekanizmadır ve her istekte gereklidir. 
 
 + [Rest çözümlerinde](search-get-started-rest.md), `api-key` genellikle bir istek üst bilgisinde belirtilir
 

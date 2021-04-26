@@ -5,12 +5,12 @@ ms.service: hdinsight
 ms.topic: tutorial
 ms.custom: hdinsightactive, devx-track-azurecli
 ms.date: 04/15/2020
-ms.openlocfilehash: 32c331b10fcc73b5449588595370f8f69ef9893c
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 140709a0ddb548c126ceca208fdeef2db77616bf
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104872056"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107761808"
 ---
 # <a name="tutorial-create-an-end-to-end-data-pipeline-to-derive-sales-insights-in-azure-hdinsight"></a>Öğretici: Azure HDInsight 'ta Sales Insights 'ı türetmek için uçtan uca veri işlem hattı oluşturma
 
@@ -90,7 +90,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
     ./scripts/resources.sh $resourceGroup LOCATION
     ```
 
-    Hangi bölgeyi belirtlediğinizden emin değilseniz, [az Account List-Locations](/cli/azure/account#az-account-list-locations) komutuyla aboneliğiniz için desteklenen bölgelerin bir listesini alabilirsiniz.
+    Hangi bölgeyi belirtlediğinizden emin değilseniz, [az Account List-Locations](/cli/azure/account#az_account_list_locations) komutuyla aboneliğiniz için desteklenen bölgelerin bir listesini alabilirsiniz.
 
     Komut aşağıdaki kaynakları dağıtır:
 

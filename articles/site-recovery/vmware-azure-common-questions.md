@@ -4,10 +4,10 @@ description: Azure Site Recovery kullanarak şirket içi VMware VM 'lerinin ola�
 ms.date: 11/14/2019
 ms.topic: conceptual
 ms.openlocfilehash: a272486eea111ab8c8e489556986f12f382e3f65
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "97587801"
 ---
 # <a name="common-questions-about-vmware-to-azure-replication"></a>VMware’den Azure’a çoğaltmayla ilgili sık sorulan sorular

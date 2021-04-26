@@ -9,10 +9,10 @@ ms.custom: devx-track-csharp, mvc
 ms.topic: quickstart
 ms.date: 06/18/2020
 ms.openlocfilehash: 198580ad41b62cf044ade7b525728c38aabd0f9e
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104720992"
 ---
 # <a name="quickstart-use-azure-cache-for-redis-in-net-core"></a>Hızlı başlangıç: .NET Core 'da Redsıs için Azure önbelleğini kullanma

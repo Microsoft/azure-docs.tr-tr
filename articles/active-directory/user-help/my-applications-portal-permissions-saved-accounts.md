@@ -13,10 +13,10 @@ ms.date: 02/03/2020
 ms.author: curtand
 ms.custom: user-help
 ms.openlocfilehash: cb162231c8cf2bf733c992de0c4aa56bf1fd1be2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92791095"
 ---
 # <a name="edit-or-revoke-application-permissions-in-the-my-apps-portal"></a>Uygulamalarım portalındaki uygulama izinlerini düzenleme veya iptal etme

@@ -10,12 +10,12 @@ ms.custom: how-to
 ms.author: larryfr
 author: BlackMist
 ms.date: 03/05/2020
-ms.openlocfilehash: c800901ae139b16e75613b0cc8de3a9485186896
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 4c680be897c4c1bf2ccf20df1d34ab6f59f559f2
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102521382"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816161"
 ---
 # <a name="what-happened-to-azure-machine-learning-workbench"></a>Azure Machine Learning Workbench’te neler oldu?
 
@@ -35,13 +35,13 @@ Bu makalede, nelerin değiştiğini ve Azure Machine Learning Workbench ve API '
 
 Azure Machine Learning en son sürümü aşağıdaki özellikleri içerir:
 + [Basitleştirilmiş bir Azure kaynakları modeli](concept-azure-machine-learning-architecture.md).
-+ Denemeleri ve işlem hedeflerinizi yönetmek için [Yeni bir Portal Kullanıcı arabirimi](how-to-track-experiments.md) .
++ Denemeleri ve işlem hedeflerinizi yönetmek için [Yeni bir Portal Kullanıcı arabirimi](how-to-log-view-metrics.md) .
 + Yeni, daha kapsamlı bir Python <a href="/python/api/overview/azure/ml/intro" target="_blank">SDK</a>.
 + Machine Learning için yeni genişletilmiş [Azure CLI uzantısı](reference-azure-machine-learning-cli.md) .
 
 [Mimari](concept-azure-machine-learning-architecture.md) kullanım kolaylığı için yeniden tasarlanmıştır. Birden çok Azure kaynağı ve hesabı yerine, size gereken yalnızca bir [Azure Machine Learning Çalışma Alanı](concept-workspace.md)'dır. [Azure portalda](how-to-manage-workspace.md) hemen çalışma alanları oluşturabilirsiniz. Bir çalışma alanı kullanarak, birden çok Kullanıcı eğitim ve dağıtım işlem hedeflerini, model denemeleri, Docker görüntülerini, dağıtılan modelleri ve benzerlerini depolayabilirler.
 
-Geçerli sürümde geliştirilmiş yeni CLı ve SDK istemcileri olsa da masaüstü çalışma ekranı uygulamasının kendisi kullanımdan kaldırılmıştır. Denemeleri, [Azure Machine Learning Studio 'daki çalışma alanı panosunda](how-to-monitor-view-training-logs.md#view-the-experiment-in-the-web-portal)yönetilebilir. Deneme geçmişinizi almak, çalışma alanınıza bağlı işlem hedeflerini yönetmek, modellerinizi ve Docker görüntülerinizi yönetmek, hatta web hizmetlerini dağıtmak için panoyu kullanın.
+Geçerli sürümde geliştirilmiş yeni CLı ve SDK istemcileri olsa da masaüstü çalışma ekranı uygulamasının kendisi kullanımdan kaldırılmıştır. Denemeleri, [Azure Machine Learning Studio 'daki çalışma alanı panosunda](how-to-log-view-metrics.md#view-the-experiment-in-the-web-portal)yönetilebilir. Deneme geçmişinizi almak, çalışma alanınıza bağlı işlem hedeflerini yönetmek, modellerinizi ve Docker görüntülerinizi yönetmek, hatta web hizmetlerini dağıtmak için panoyu kullanın.
 
 <a name="timeline"></a>
 

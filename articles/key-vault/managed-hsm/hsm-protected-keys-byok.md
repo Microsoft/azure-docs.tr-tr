@@ -8,12 +8,12 @@ ms.service: key-vault
 ms.topic: conceptual
 ms.date: 02/04/2021
 ms.author: ambapat
-ms.openlocfilehash: dd5b38a858ceba12f5d48f1782da5b85228c4b06
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: cc9037db3289d7fb3287a8994a8ff6a68fc0583a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102212119"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790590"
 ---
 # <a name="import-hsm-protected-keys-to-managed-hsm-byok"></a>HSM korumalı anahtarları yönetilen HSM 'ye içeri aktar (BYOK)
 
@@ -105,7 +105,7 @@ KEK şu olmalıdır:
 > [!NOTE]
 > KEK, yalnızca izin verilen anahtar işlemi olarak ' import ' içermelidir. ' Import ' diğer tüm anahtar işlemleriyle birbirini dışlıyor.
 
-Anahtar işlemleri olarak ayarlanmış bir KEK oluşturmak için [az keykasa Key Create](/cli/azure/keyvault/key#az-keyvault-key-create) komutunu kullanın `import` . `kid`Aşağıdaki komuttan döndürülen anahtar tanımlayıcısını () kaydedin. ( `kid` [Adım 3](#step-3-generate-and-prepare-your-key-for-transfer)' te bu değeri kullanacaksınız.)
+Anahtar işlemleri olarak ayarlanmış bir KEK oluşturmak için [az keykasa Key Create](/cli/azure/keyvault/key#az_keyvault_key_create) komutunu kullanın `import` . `kid`Aşağıdaki komuttan döndürülen anahtar tanımlayıcısını () kaydedin. ( `kid` [Adım 3](#step-3-generate-and-prepare-your-key-for-transfer)' te bu değeri kullanacaksınız.)
 
 ```azurecli-interactive
 az keyvault key create --kty RSA-HSM --size 4096 --name KEKforBYOK --ops import --hsm-name ContosoKeyVaultHSM
@@ -115,7 +115,7 @@ az keyvault key create --kty RSA-HSM --size 4096 --name KEKforBYOK --ops import 
 
 ### <a name="step-2-download-the-kek-public-key"></a>2. Adım: KEK ortak anahtarını Indirme
 
-KEK ortak anahtarını bir. ped dosyasına indirmek için [az keykasakey Download](/cli/azure/keyvault/key#az-keyvault-key-download) komutunu kullanın. İçeri aktardığınız hedef anahtar, KEK ortak anahtarı kullanılarak şifrelenir.
+KEK ortak anahtarını bir. ped dosyasına indirmek için [az keykasakey Download](/cli/azure/keyvault/key#az_keyvault_key_download) komutunu kullanın. İçeri aktardığınız hedef anahtar, KEK ortak anahtarı kullanılarak şifrelenir.
 
 ```azurecli-interactive
 az keyvault key download --name KEKforBYOK --hsm-name ContosoKeyVaultHSM --file KEKforBYOK.publickey.pem
@@ -137,7 +137,7 @@ BYOK dosyasını bağlı bilgisayarınıza aktarın.
 
 ### <a name="step-4-transfer-your-key-to-managed-hsm"></a>4. Adım: anahtarınızı yönetilen HSM 'ye aktarma
 
-Anahtar içeri aktarmayı gerçekleştirmek için, anahtar aktarım paketini (bir BYOK dosyası) bağlantısı kesilen bilgisayarınızdan İnternet 'e bağlı bilgisayara aktarın. BYOK dosyasını yönetilen HSM 'ye yüklemek için [az keykasa Key import](/cli/azure/keyvault/key#az-keyvault-key-import) komutunu kullanın.
+Anahtar içeri aktarmayı gerçekleştirmek için, anahtar aktarım paketini (bir BYOK dosyası) bağlantısı kesilen bilgisayarınızdan İnternet 'e bağlı bilgisayara aktarın. BYOK dosyasını yönetilen HSM 'ye yüklemek için [az keykasa Key import](/cli/azure/keyvault/key#az_keyvault_key_import) komutunu kullanın.
 
 ```azurecli-interactive
 az keyvault key import --hsm-name ContosoKeyVaultHSM --name ContosoFirstHSMkey --byok-file KeyTransferPackage-ContosoFirstHSMkey.byok
@@ -148,6 +148,3 @@ Karşıya yükleme başarılı olursa, Azure CLı içeri aktarılan anahtarın �
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Artık, yönetilen HSM 'inizdeki bu HSM korumalı anahtarı kullanabilirsiniz. Daha fazla bilgi için [Bu fiyat ve Özellik Karşılaştırması](https://azure.microsoft.com/pricing/details/key-vault/)bölümüne bakın.
-
-
-

@@ -4,7 +4,7 @@ titleSuffix: Azure Network Watcher
 description: Bu makalede, Azure portal kullanarak bağlantı Izleyicisinde bir izleyicinin nasıl oluşturulacağı açıklanır.
 services: network-watcher
 documentationcenter: na
-author: vinigam
+author: vinynigam
 ms.service: network-watcher
 ms.devlang: na
 ms.topic: how-to
@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/23/2020
 ms.author: vinigam
-ms.openlocfilehash: edf671c8005fa67f6161f383c503ca278dba3105
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9942b608601b495dd041a8b59aaecb3f5dd81fa7
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101702173"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505238"
 ---
 # <a name="create-a-monitor-in-connection-monitor-by-using-the-azure-portal"></a>Azure portal kullanarak bağlantı Izleyicisinde izleyici oluşturma
 
@@ -121,7 +121,7 @@ Azure portal, bir bağlantı izleyicisinde bir test grubu oluşturmak için aşa
 
    * Şirket içi aracıları seçmek için, **Azure dışı uç noktaları** sekmesini seçin. Varsayılan olarak, aracılar bölgelere göre çalışma alanları halinde gruplandırılır. Tüm bu çalışma alanlarının yapılandırılmış Ağ Performansı İzleyicisi vardır. 
    
-       Çalışma alanınıza Ağ Performansı İzleyicisi eklemeniz gerekiyorsa [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps/solarwinds.solarwinds-orion-network-performance-monitor?tab=Overview)'nden alın. Ağ Performansı İzleyicisi ekleme hakkında daha fazla bilgi için bkz. [Azure izleyici 'de çözümleri izleme](../azure-monitor/insights/solutions.md). 
+       Çalışma alanınıza Ağ Performansı İzleyicisi eklemeniz gerekiyorsa [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps/solarwinds.solarwinds-orion-network-performance-monitor?tab=Overview)'nden alın. Ağ Performansı İzleyicisi ekleme hakkında daha fazla bilgi için bkz. [Azure izleyici 'de çözümleri izleme](../azure-monitor/insights/solutions.md). Şirket içi makineler için aracıların nasıl yapılandırılacağı hakkında bilgi için bkz. Şirket [içi makineler Için aracılar](connection-monitor-overview.md#agents-for-on-premises-machines).
    
        **Bağlantı Izleyicisi oluştur** altında, **temel bilgiler** sekmesinde varsayılan bölge seçilidir. Bölgeyi değiştirirseniz, yeni bölgedeki çalışma alanlarından aracılar seçebilirsiniz. Bir veya daha fazla aracıyı veya alt ağı seçebilirsiniz. **Alt ağ** görünümünde, izleme Için belirli IP 'leri seçebilirsiniz. Birden çok alt ağ eklerseniz, **OnPremises_Network_1** adlı özel bir şirket içi ağ oluşturulur. **Gruba** göre grupla ' yı Group By seçicisine göre de değiştirebilirsiniz.
 
@@ -144,7 +144,7 @@ Azure portal, bir bağlantı izleyicisinde bir test grubu oluşturmak için aşa
     
     * Azure olmayan aracıları hedef olarak seçmek için **Azure dışı uç noktaları** sekmesini seçin. Varsayılan olarak, aracılar bölgelere göre çalışma alanları halinde gruplandırılır. Tüm bu çalışma alanlarının yapılandırılmış Ağ Performansı İzleyicisi var. 
     
-      Çalışma alanınıza Ağ Performansı İzleyicisi eklemeniz gerekiyorsa Azure Marketi 'nden alın. Ağ Performansı İzleyicisi ekleme hakkında daha fazla bilgi için bkz. [Azure izleyici 'de çözümleri izleme](../azure-monitor/insights/solutions.md). 
+      Çalışma alanınıza Ağ Performansı İzleyicisi eklemeniz gerekiyorsa Azure Marketi 'nden alın. Ağ Performansı İzleyicisi ekleme hakkında daha fazla bilgi için bkz. [Azure izleyici 'de çözümleri izleme](../azure-monitor/insights/solutions.md). Şirket içi makineler için aracıların nasıl yapılandırılacağı hakkında bilgi için bkz. Şirket [içi makineler Için aracılar](connection-monitor-overview.md#agents-for-on-premises-machines).
 
        **Bağlantı Izleyicisi oluştur** altında, **temel bilgiler**   sekmesinde varsayılan bölge seçilidir. Bölgeyi değiştirirseniz, yeni bölgedeki çalışma alanlarından aracılar seçebilirsiniz. Bir veya daha fazla aracıyı veya alt ağı seçebilirsiniz. **Alt ağ** görünümünde, izleme Için belirli IP 'leri seçebilirsiniz. Birden çok alt ağ eklerseniz, **OnPremises_Network_1** adlı özel bir şirket içi ağ oluşturulur.  
 

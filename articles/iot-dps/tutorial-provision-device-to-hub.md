@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.service: iot-dps
 services: iot-dps
 ms.custom: mvc
-ms.openlocfilehash: 876fd8260b64fba4d3d34a766b4259323c660b76
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 94568eb5d64f07133ebb9992cdae59400830dd5e
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94968086"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226897"
 ---
 # <a name="tutorial-provision-the-device-to-an-iot-hub-using-the-azure-iot-hub-device-provisioning-service"></a>Öğretici: Azure IoT Hub cihaz sağlama hizmeti 'ni kullanarak bir IoT Hub 'ına cihaz sağlama
 
@@ -98,7 +98,7 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 > * Cihazı başlatın
 > * Cihaz kayıtlı olduğunu doğrulayın
 
-Yük dengeli hublar arasında birden çok cihaz sağlamayı öğrenmek için sonraki öğreticiye ilerleyin. 
+Yük dengeli hub 'larda birden çok cihaz sağlamayı öğrenmek için sonraki öğreticiye ilerleyin
 
 > [!div class="nextstepaction"]
 > [Yük dengeli IoT Hub'larında cihazları sağlama](./tutorial-provision-multiple-hubs.md)

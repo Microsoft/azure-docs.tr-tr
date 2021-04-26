@@ -15,12 +15,12 @@ ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 2d942099d0abbdfc4ddfa0276184500166250728
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: d4ed0f075aad09b77a0c50682bad92522f4e5472
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103014970"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280284"
 ---
 # <a name="inserting-ads-on-the-client-side"></a>İstemci tarafına reklam ekleme
 
@@ -590,7 +590,7 @@ Bu örnek, VMAP dosyası kullanarak reklamları zamanlamak için VmapSchedulerPl
 ```
 
 ## <a name="implementing-an-ios-video-player-with-ad-support"></a>Ad desteğiyle iOS video oynatıcı uygulama
-Microsoft medya platformu: iOS için oynatıcı çatısı, Framework kullanarak bir video oynatıcı uygulamasının nasıl uygulanacağını gösteren örnek uygulamalar koleksiyonunu içerir. Player çerçevesini ve [Azure Media Player Framework](https://github.com/CloudMetal/azure-media-player-framework)'ten örnekleri indirebilirsiniz. GitHub sayfasında, oynatıcı çerçevesiyle ilgili ek bilgiler içeren bir wiki bağlantısı ve Player örneğine giriş: [Azure Media Player wiki](https://github.com/CloudMetal/azure-media-player-framework/wiki/How-to-use-Azure-media-player-framework).
+Microsoft medya platformu: iOS için oynatıcı çatısı, Framework kullanarak bir video oynatıcı uygulamasının nasıl uygulanacağını gösteren örnek uygulamalar koleksiyonunu içerir. Player çerçevesini ve [Azure Media Player Framework](https://github.com/CloudMetal/azure-media-player-framework)'ten örnekleri indirebilirsiniz. GitHub sayfasında, oynatıcı çerçevesiyle ilgili ek bilgiler içeren bir wiki bağlantısı ve Player örneğine giriş: [Azure Media Player wiki](https://github.com/CloudMetal/azure-media-player-framework/wiki/How-to-player-use-azure-media-player-how-to-framework).
 
 ### <a name="scheduling-ads-with-vmap"></a>VMAP ile reklamları zamanlama
 Aşağıdaki örnek, bir VMAP dosyası kullanılarak reklamları zamanlamayı gösterir.

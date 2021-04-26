@@ -7,12 +7,12 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.topic: sample
 ms.date: 07/29/2020
-ms.openlocfilehash: 2ea833b72b9522cdfca836a7b13f7b411402103e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: ee298b33736ae25b365cc54ee1bb5ec9f38bfb62
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94562704"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107763622"
 ---
 # <a name="create-a-resource-lock-for-azure-cosmos-dbs-api-for-mongodb-using-azure-cli"></a>Azure CLı kullanarak MongoDB için Azure Cosmos DB API 'SI için bir kaynak kilidi oluşturma
 [!INCLUDE[appliesto-mongodb-api](../../../includes/appliesto-mongodb-api.md)]
@@ -34,10 +34,10 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [az kilitle oluştur](/cli/azure/lock#az-lock-create) | Bir kilit oluşturur. |
-| [az Lock List](/cli/azure/lock#az-lock-list) | Kilit bilgilerini listeleyin. |
-| [az Lock Show](/cli/azure/lock#az-lock-show) | Kilidin özelliklerini göster. |
-| [az Lock Delete](/cli/azure/lock#az-lock-delete) | Bir kilidi siler. |
+| [az kilitle oluştur](/cli/azure/lock#az_lock_create) | Bir kilit oluşturur. |
+| [az Lock List](/cli/azure/lock#az_lock_list) | Kilit bilgilerini listeleyin. |
+| [az Lock Show](/cli/azure/lock#az_lock_show) | Kilidin özelliklerini göster. |
+| [az Lock Delete](/cli/azure/lock#az_lock_delete) | Bir kilidi siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -3,15 +3,15 @@ title: Azure IoT Hub için cihaz güncelleştirmesine yönelik güvenlik | Micro
 description: Cihaz güncelleştirme IoT Hub cihazların güvenli bir şekilde güncelleştirilmesini sağlar.
 author: lichris
 ms.author: lichris
-ms.date: 2/11/2021
+ms.date: 4/15/2021
 ms.topic: conceptual
 ms.service: iot-hub
-ms.openlocfilehash: 86b2dbe6a28d1440f93788eb40e133d9b62d3f0c
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: b10049e03e26cfe8da2bd57cc9f69dd933af706b
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102489438"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567307"
 ---
 # <a name="device-update-security-model"></a>Cihaz güncelleştirme güvenlik modeli
 
@@ -23,9 +23,11 @@ Cihaz güncelleştirme iş akışındaki her adım, işlem hattındaki her adım
 
 Çözüm Işletmenleri güncelleştirmeleri cihaz güncelleştirme örneğiyle içeri aktarırken, hizmet, güncelleştirme ikili dosyalarını karşıya yükleyerek, kötü niyetli bir kullanıcı tarafından değiştirilmemesini veya yerleştirmemesini sağlar. Bir kez doğrulandıktan sonra, cihaz güncelleştirme hizmeti içeri aktarma bildiriminden ve diğer meta verilerden dosya karmalarına sahip bir iç [güncelleştirme bildirimi](./update-manifest.md) oluşturur. Bu güncelleştirme bildirimi daha sonra cihaz güncelleştirme hizmeti tarafından imzalanır.
 
+Hizmete giriş yapıldıktan ve Azure 'da depolandıktan sonra, güncelleştirme ikili dosyaları ve ilişkili müşteri meta verileri Azure depolama hizmeti tarafından geri kalanında otomatik olarak şifrelenir. Cihaz Güncelleştirme hizmeti otomatik olarak ek şifreleme sağlamaz, ancak içerik cihaz güncelleştirme hizmetine ulaşmadan önce geliştiricilerin içeriği şifrelemesine izin verir.
+
 Çözüm Işletmeni bir cihazı güncelleştirmek istediğinde, korunan IoT Hub kanal üzerinden cihaza imzalı bir ileti gönderilir. İsteğin imzası, cihazın Cihaz Güncelleştirme Aracısı tarafından gerçek olarak onaylanır. 
 
-Ortaya çıkan herhangi bir ikili indirmenin, güncelleştirme bildirimi imzasının doğrulaması aracılığıyla güvenliği sağlanır. Güncelleştirme bildirimi ikili dosya karmalarını içerir, bu nedenle bildirim güvenilir olduktan sonra cihaz Güncelleştirme Aracısı karmalar ile güvenir ve ikililerin ikililer ile eşleşir. Güncelleştirme ikilisi indirildikten ve doğrulandıktan sonra, cihazdaki yükleyiciye devredilmiştir.
+Ortaya çıkan herhangi bir ikili indirmenin, güncelleştirme bildirimi imzasının doğrulaması aracılığıyla güvenliği sağlanır. Güncelleştirme bildirimi ikili dosya karmalarını içerir, bu nedenle bildirim güvenilir olduktan sonra cihaz Güncelleştirme Aracısı karmalar ile güvenir ve ikililerin ikililer ile eşleşir. Güncelleştirme ikilisi indirilip doğrulandıktan sonra cihazdaki yükleyiciye güvenle gönderilir.
 
 ## <a name="for-device-builders"></a>Cihaz oluşturucular için
 

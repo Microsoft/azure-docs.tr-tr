@@ -7,10 +7,10 @@ ms.date: 2/11/2021
 ms.topic: conceptual
 ms.service: iot-hub-device-update
 ms.openlocfilehash: ca55b1df347b47a6eb82557658d59a3de666b703
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105558406"
 ---
 # <a name="azure-role-based-access-control-rbac-and-device-update"></a>Azure rol tabanlı erişim denetimi (RBAC) ve cihaz güncelleştirmesi

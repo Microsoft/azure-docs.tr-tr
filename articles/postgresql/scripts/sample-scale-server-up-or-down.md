@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.custom: mvc, devx-track-azurecli
 ms.topic: sample
 ms.date: 08/07/2019
-ms.openlocfilehash: b0a17b12c51c08cd39d0c4fb7860021b8c68e606
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 56fd88ab658e59cccb14a35559d1793bc3ad1aa0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105606411"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778455"
 ---
 # <a name="monitor-and-scale-a-single-postgresql-server-using-azure-cli"></a>Azure CLI kullanarak tek bir PostgreSQL sunucusunu izleme ve ölçeklendirme
 Bu örnek CLı betiği, ölçümleri sorguladıktan sonra, tek bir PostgreSQL için Azure veritabanı sunucusu için işlem ve depolamayı ölçeklendirir. İşlem ölçeği yukarı veya aşağı olabilir. Depolama alanı yalnızca ölçeği değiştirebilir. 
@@ -36,11 +36,11 @@ Betik çalıştırıldıktan sonra aşağıdaki komutu kullanarak kaynak grubunu
 ## <a name="script-explanation"></a>Betik açıklaması
 Bu betik, aşağıdaki tabloda ana hatları verilen komutları kullanır:
 
-| **Komut** | **Notlar** |
+| **Komutundaki** | **Notlar** |
 |---|---|
 | [az group create](/cli/azure/group) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az postgres server create](/cli/azure/postgres/server#az-postgres-server-create) | Veritabanlarını barındıran bir PostgreSQL sunucusu oluşturur. |
-| [az Postgres Server Update](/cli/azure/postgres/server#az-postgres-server-update) | PostgreSQL sunucusunun özelliklerini güncelleştirir. |
+| [az postgres server create](/cli/azure/postgres/server#az_postgres_server_create) | Veritabanlarını barındıran bir PostgreSQL sunucusu oluşturur. |
+| [az Postgres Server Update](/cli/azure/postgres/server#az_postgres_server_update) | PostgreSQL sunucusunun özelliklerini güncelleştirir. |
 | [az monitor metrics list](/cli/azure/monitor/metrics) | Kaynaklar için ölçüm değerini listeleyin. |
 | [az group delete](/cli/azure/group) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 

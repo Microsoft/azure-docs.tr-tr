@@ -3,12 +3,12 @@ title: 'Hızlı başlangıç: Azure CLI ile bir şema oluşturma'
 description: Bu hızlı başlangıçta, Azure CLı kullanarak yapıtlar oluşturmak, tanımlamak ve dağıtmak için Azure şemaları kullanırsınız.
 ms.date: 01/27/2021
 ms.topic: quickstart
-ms.openlocfilehash: fbe5c12f1c94d4b59dbdc2a97b6a4cb9af5a2328
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 506877eddd78ce54681bd4870e1d9040b4738c27
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563676"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877417"
 ---
 # <a name="quickstart-define-and-assign-an-azure-blueprint-with-azure-cli"></a>Hızlı başlangıç: Azure CLı ile Azure Blueprint tanımlama ve atama
 
@@ -117,7 +117,7 @@ Uyumluluk için standart desen tanımlamanın ilk adımı kullanılabilir durumd
 
      > [!NOTE]
      > Şema tanımlarınızı içeri aktarırken _blueprint.js_ dosya adını kullanın.
-     > Bu dosya adı [az şema Import](/cli/azure/ext/blueprint/blueprint#ext_blueprint_az_blueprint_import)çağrılırken kullanılır.
+     > Bu dosya adı [az şema Import](/cli/azure/blueprint#az_blueprint_import)çağrılırken kullanılır.
 
      Şema nesnesi varsayılan olarak varsayılan abonelikte oluşturulur. Yönetim grubunu belirtmek için, **ManagementGroup** parametresini kullanın. Aboneliği belirtmek için, parametre **aboneliğini** kullanın.
 

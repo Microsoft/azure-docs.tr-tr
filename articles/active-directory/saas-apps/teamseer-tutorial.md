@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 03/07/2019
 ms.author: jeedes
 ms.openlocfilehash: 6085ba5091b2b9973354280175aeb01f93ad7e28
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92521178"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-teamseer"></a>Öğretici: TeamSeer ile tümleştirme Azure Active Directory
@@ -120,13 +120,13 @@ TeamSeer ile Azure AD çoklu oturum açmayı yapılandırmak için aşağıdaki 
 
     c. Oturum kapatma URL 'SI
 
-### <a name="configure-teamseer-single-sign-on"></a>TeamSeer tek Sign-On yapılandırma
+### <a name="configure-teamseer-single-sign-on&quot;></a>TeamSeer tek Sign-On yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, yönetici olarak TeamSeer şirket sitenizde oturum açın.
 
 1. **HR Yöneticisi**' ne gidin.
 
-    ![Ekran görüntüsü, TeamSeer penceresinden seçilen H R yöneticisini gösterir.](./media/teamseer-tutorial/ic789634.png "IK yönetici")
+    ![Ekran görüntüsü, TeamSeer penceresinden seçilen H R yöneticisini gösterir.](./media/teamseer-tutorial/ic789634.png &quot;IK yönetici")
 
 1. **Kurulum**'a tıklayın.
 
@@ -205,7 +205,7 @@ Bu bölümde, ekip uygulamasına erişim izni vererek Azure çoklu oturum açma 
 
 7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-teamseer-test-user"></a>TeamSeer test kullanıcısı oluştur
+### <a name="create-teamseer-test-user&quot;></a>TeamSeer test kullanıcısı oluştur
 
 Azure AD kullanıcılarının TeamSeer 'da oturum açmasını sağlamak için, ShiftPlanning ' de sağlanması gerekir. TeamSeer söz konusu olduğunda, sağlama el ile gerçekleştirilen bir görevdir.
 
@@ -215,7 +215,7 @@ Azure AD kullanıcılarının TeamSeer 'da oturum açmasını sağlamak için, S
 
 1. **HR yönetici \> kullanıcıları** ' na gidin ve ardından **Yeni Kullanıcı Sihirbazı 'nı Çalıştır**' a tıklayın.
 
-    ![Ekran görüntüsü, çalıştırılacak Sihirbazı seçebileceğiniz H R Yönetici sekmesini gösterir.](./media/teamseer-tutorial/ic789640.png "IK yönetici")
+    ![Ekran görüntüsü, çalıştırılacak Sihirbazı seçebileceğiniz H R Yönetici sekmesini gösterir.](./media/teamseer-tutorial/ic789640.png &quot;IK yönetici")
 
 1. **Kullanıcı ayrıntıları** bölümünde aşağıdaki adımları uygulayın:
 

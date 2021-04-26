@@ -2,13 +2,13 @@
 title: İş yüklerini yedeklemek için Azure Backup Sunucusu kullanma
 description: Bu makalede, Microsoft Azure Backup sunucusu (MABS) kullanarak iş yüklerini korumak ve yedeklemek için ortamınızı nasıl hazırlayacağınızı öğrenin.
 ms.topic: conceptual
-ms.date: 11/13/2018
-ms.openlocfilehash: d476c228a619f03f798c1a2cd6854a8d603c3637
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/14/2021
+ms.openlocfilehash: 144a5e26f5ad10d120a49f6a0385c3a310448dbc
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98987031"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107713687"
 ---
 # <a name="install-and-upgrade-azure-backup-server"></a>Azure Backup Sunucusu yükleyip yükseltin
 
@@ -28,7 +28,7 @@ Bu makalede, Microsoft Azure Backup sunucusu (MABS) kullanarak iş yüklerini ye
 >
 >
 
-Azure VM 'de dağıtılan MABS, Azure 'daki VM 'Leri yedekleyebilir, ancak yedekleme işlemini etkinleştirmek için aynı etki alanında olmaları gerekir. Azure VM 'yi geri yükleme işlemi, şirket içi VM 'Leri yedeklemeye benzer kalır, ancak Azure 'da MABS dağıtımı bazı sınırlamalara sahiptir. Sınırlamalar hakkında daha fazla bilgi için bkz. [Azure sanal makinesi olarak DPM](/system-center/dpm/install-dpm#setup-prerequisites)
+Azure VM 'de dağıtılan MABS, Azure 'daki VM 'Leri yedekleyebilir, ancak yedekleme işlemini etkinleştirmek için aynı etki alanında olmaları gerekir. Azure VM 'yi geri yükleme işlemi, şirket içi VM 'Leri yedeklemeye benzer kalır, ancak Azure 'da MABS dağıtımı bazı sınırlamalara sahiptir. Sınırlamalar hakkında daha fazla bilgi için bkz. [Azure sanal makinesi olarak DPM](/system-center/dpm/install-dpm#setup-prerequisites).
 
 > [!NOTE]
 > Azure 'da kaynak oluşturmak ve bunlarla çalışmak için iki dağıtım modeli vardır: [Kaynak Yöneticisi ve klasik](../azure-resource-manager/management/deployment-models.md). Bu makalede, Kaynak Yöneticisi modeli kullanılarak dağıtılan VM 'Leri geri yüklemeyle ilgili bilgi ve yordamlar sağlanmaktadır.
@@ -41,8 +41,8 @@ Azure Backup Sunucusu, Data Protection Manager (DPM) iş yükü yedekleme işlev
 
 Azure Backup Sunucusu çalışmaya ve çalıştırmaya yönelik ilk adım, bir Windows Server ayarlanalmaktır. Sunucunuz Azure 'da veya şirket içinde olabilir.
 
-* Şirket içi iş yüklerini korumak için, MABS sunucusu şirket içinde bulunmalıdır.
-* Azure VM 'lerde çalışan iş yüklerini korumak için, MABS sunucusu Azure 'da olmalıdır ve Azure VM olarak çalışır.
+* Şirket içi iş yüklerini korumak için, MABS sunucusu şirket içinde yer almalıdır ve bir etki alanına bağlanmalıdır.
+* Azure VM 'lerde çalışan iş yüklerini korumak için, MABS sunucusunun Azure 'da bulunması ve bir Azure VM olarak çalıştırılması ve bir etki alanına bağlanması gerekir.
 
 ### <a name="using-a-server-in-azure"></a>Azure 'da sunucu kullanma
 
@@ -72,7 +72,7 @@ Windows Server yinelenenleri kaldırma 'yı kullanarak DPM depolama alanını yi
 >
 > Azure Backup Sunucusu yüklemek Windows Server Core veya Microsoft Hyper-V Server 'da desteklenmez.
 
-Azure Backup Sunucusu her zaman bir etki alanına ekleyin. Sunucuyu farklı bir etki alanına taşımayı planlıyorsanız, önce Azure Backup Sunucusu yükleyip sunucuyu yeni etki alanına katın. Mevcut bir Azure Backup Sunucusu makinenin dağıtımdan sonra yeni bir etki alanına taşınması *desteklenmez*.
+Azure Backup Sunucusu her zaman bir etki alanına ekleyin. Mevcut bir Azure Backup Sunucusu makinenin dağıtımdan sonra yeni bir etki alanına taşınması *desteklenmez*.
 
 Yedekleme verilerini Azure 'a göndermenizi veya yerel olarak saklamayı, Azure Backup Sunucusu bir kurtarma hizmetleri kasasıyla kaydolmasının gerekip gerekmediğini belirtir.
 
@@ -276,11 +276,11 @@ Depolama alanını korurken MABS 'i yeni bir sunucuya taşımanız gerekiyorsa b
 7. Adım 1 ' de alınan DPMDB 'yi geri yükleyin.
 8. Özgün yedekleme sunucusundan yeni sunucuya depolama alanını ekleyin.
 9. SQL 'den DPMDB 'yi geri yükleyin.
-10. Yeni sunucuda CMD 'yi (yönetici olarak) çalıştırın. Microsoft Azure Backup install location ve bin klasörüne gidin
+10. Yeni sunucuda CMD 'yi (yönetici olarak) çalıştırın. Microsoft Azure Backup install location ve bin klasörüne gidin.
 
     Yol örneği: `C:\windows\system32>cd "c:\Program Files\Microsoft Azure Backup\DPM\DPM\bin\"`
 
-11. Azure Backup bağlanmak için, şunu çalıştırın `DPMSYNC -SYNC`
+11. Azure Backup bağlanmak için, öğesini çalıştırın `DPMSYNC -SYNC` .
 
     DPM depolama havuzuna eski olanları taşımak yerine **Yeni** diskler eklediyseniz, öğesini çalıştırın `DPMSYNC -Reallocatereplica` .
 
@@ -366,7 +366,8 @@ MABS 'yi yükseltmek için aşağıdaki adımları kullanın:
 ## <a name="troubleshooting"></a>Sorun giderme
 
 Microsoft Azure Backup sunucu kurulum aşaması (veya yedekleme ya da geri yükleme) sırasında hata vererek başarısız olursa daha fazla bilgi için bu [hata kodları belgesine](https://support.microsoft.com/kb/3041338)  bakın.
-Ayrıca, [Ilgili sss Azure Backup](backup-azure-backup-faq.md) de başvurabilirsiniz
+
+Ayrıca, [Ilgili sss Azure Backup](backup-azure-backup-faq.yml)de başvurabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

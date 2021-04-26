@@ -6,19 +6,19 @@ ms.author: makromer
 ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
-ms.date: 05/01/2020
-ms.openlocfilehash: 564c7cf6e9627db08d543b964ce476e71bfb473d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/19/2021
+ms.openlocfilehash: 22c4fc0680d8666d8c2dfafb8829436e27cf1ebd
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93040752"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725719"
 ---
 # <a name="parameterizing-mapping-data-flows"></a>Eşleme veri akışlarını parametreleştirme
 
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)] 
 
-Azure Data Factory veri akışlarını eşleme, parametrelerin kullanımını destekler. Veri akışı tanımınızın içindeki parametreleri tanımlayın ve bunları deyimlerinizin tamamında kullanın. Parametre değerleri, veri akışını Yürüt etkinliği aracılığıyla çağıran işlem hattı tarafından ayarlanır. Veri akışı etkinlik ifadelerindeki değerleri ayarlamak için üç seçeneğiniz vardır:
+Azure Data Factory ve Azure SYNAPSE Analytics 'te veri akışlarını eşleme, parametrelerin kullanımını destekler. Veri akışı tanımınızın içindeki parametreleri tanımlayın ve bunları deyimlerinizin tamamında kullanın. Parametre değerleri, veri akışını Yürüt etkinliği aracılığıyla çağıran işlem hattı tarafından ayarlanır. Veri akışı etkinlik ifadelerindeki değerleri ayarlamak için üç seçeneğiniz vardır:
 
 * Ardışık düzen denetim akışı ifade dilini kullanarak dinamik bir değer ayarlayın
 * Dinamik bir değer ayarlamak için veri akışı ifade dilini kullanın

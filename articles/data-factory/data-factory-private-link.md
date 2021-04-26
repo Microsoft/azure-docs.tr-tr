@@ -7,12 +7,12 @@ ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 09/01/2020
-ms.openlocfilehash: 9e4d686f582a202dbc543620c7bf73dc4e7adb22
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d572509b3b2b3a0fc69f207d005984ee07ce34a4
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100389187"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076828"
 ---
 # <a name="azure-private-link-for-azure-data-factory"></a>Azure Data Factory için Azure Özel Bağlantı
 
@@ -54,7 +54,7 @@ Azure Data Factory hizmetine yönelik iletişimler özel bağlantı üzerinden g
    - Şirket içinde barındırılan tümleştirme çalışma zamanı ve Azure Data Factory hizmeti arasındaki komut iletişimleri, özel bir ağ ortamında güvenli bir şekilde gerçekleştirilebilir. Şirket içinde barındırılan tümleştirme çalışma zamanı ve Azure Data Factory hizmeti arasındaki trafik özel bağlantı aracılığıyla gider. 
 - **Şu anda desteklenmiyor**:
    - Sağ barındırılan bir tümleştirme çalışma zamanı kullanan etkileşimli yazma, test bağlantısı, klasör listesi ve tablo listesi, şema al ve veri önizleme gibi özel bağlantı üzerinden ilerler.
-   - Otomatik güncelleştirme 'yi etkinleştirirseniz, şirket içinde barındırılan tümleştirme çalışma zamanının yeni sürümü Microsoft Indirme merkezi 'nden otomatik olarak indirilebilir.
+   - Otomatik güncelleştirme 'yi etkinleştirirseniz otomatik olarak barındırılan tümleştirme çalışma zamanının yeni sürümü, Microsoft Indirme merkezi 'nden otomatik olarak indirilebilir, bu sırada desteklenmez.
 
    > [!NOTE]
    > Şu anda desteklenmeyen işlevler için, sanal ağda veya şirket güvenlik duvarında daha önce bahsedilen etki alanını ve bağlantı noktasını yapılandırmanız gerekir. 

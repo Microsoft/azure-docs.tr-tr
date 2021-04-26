@@ -3,14 +3,14 @@ title: Kullanılabilirlik Alanları arasında küme dağıtma
 description: Kullanılabilirlik Alanları arasında Azure Service Fabric kümesi oluşturmayı öğrenin.
 author: peterpogorski
 ms.topic: conceptual
-ms.date: 04/25/2019
+ms.date: 04/16/2021
 ms.author: pepogors
-ms.openlocfilehash: a49fd6f97a9130fa0369d2a36cdc38e59613afc1
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.openlocfilehash: 9cc2a9d189e7a781dc6ba64a65af022150392485
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105544392"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727771"
 ---
 # <a name="deploy-an-azure-service-fabric-cluster-across-availability-zones"></a>Kullanılabilirlik Alanları arasında bir Azure Service Fabric kümesi dağıtma
 Azure 'daki Kullanılabilirlik Alanları, uygulamalarınızı ve verilerinizi veri merkezi hatalarından koruyan yüksek kullanılabilirliğe sahip bir tekliftir. Bir kullanılabilirlik alanı, bir Azure bölgesi içinde bağımsız güç, soğutma ve ağ ile donatılmış benzersiz bir fiziksel konumdur.
@@ -33,7 +33,7 @@ Birincil düğüm türü için önerilen topoloji, aşağıda özetlenen kaynakl
 * Sanal makine ölçek kümelerinizi dağıttığınız alt ağ tarafından başvurulan bir NSG.
 
 >[!NOTE]
-> Service Fabric alanları kapsayan tek bir sanal makine ölçek kümesini desteklemediğinden, sanal makine ölçek kümesi tek yerleşim grubu özelliği true olarak ayarlanmalıdır.
+> Sanal makine ölçek kümesi tek yerleşim grubu özelliği true olarak ayarlanmalıdır.
 
 ![Azure Service Fabric kullanılabilirlik alanı mimarisini gösteren azure Service Fabric kullanılabilirliği bölge mimarisi diyagramını gösteren diyagram.][sf-architecture]
 

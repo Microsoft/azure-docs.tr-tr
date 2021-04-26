@@ -6,13 +6,13 @@ author: kromerm
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 02/19/2021
-ms.openlocfilehash: 0aa472aca40acbaf3f8c8a09469d08fe6b37187a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/16/2021
+ms.openlocfilehash: 681a3643c04472cc42c1f672f4c9433da30e3955
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101699768"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565511"
 ---
 # <a name="mapping-data-flow-debug-mode"></a>Eşleme veri akışı hata ayıklama modu
 
@@ -20,9 +20,11 @@ ms.locfileid: "101699768"
 
 ## <a name="overview"></a>Genel Bakış
 
-Azure Data Factory eşleme veri akışının hata ayıklama modu, veri akışlarınızı oluştururken ve hata ayıkladığınızda veri şekli dönüşümünü etkileşimli bir şekilde izlemenize olanak sağlar. Hata ayıklama oturumu hem veri akışı tasarım oturumlarında hem de veri akışlarının işlem hattı hata ayıklamada yürütülmesi sırasında kullanılabilir. Hata ayıklama modunu açmak için tasarım yüzeyinin en üstündeki "veri akışı hata ayıklaması" düğmesini kullanın.
+Azure Data Factory eşleme veri akışının hata ayıklama modu, veri akışlarınızı oluştururken ve hata ayıkladığınızda veri şekli dönüşümünü etkileşimli bir şekilde izlemenize olanak sağlar. Hata ayıklama oturumu hem veri akışı tasarım oturumlarında hem de veri akışlarının işlem hattı hata ayıklamada yürütülmesi sırasında kullanılabilir. Hata ayıklama modunu açmak için, veri akışı aktivitenleriniz olduğunda veri akışı tuvalinin veya işlem hattı tuvalinin üst çubuğundaki **veri akışı hata ayıklama** düğmesini kullanın.
 
-![Hata ayıklama kaydırıcısı](media/data-flow/debugbutton.png "Hata ayıklama kaydırıcısı")
+![Hata ayıklama kaydırıcısının nerede olduğunu gösteren ekran görüntüsü 1](media/data-flow/debug-button.png)
+
+![Hata ayıklama kaydırıcısının nerede olduğunu gösteren ekran görüntüsü 2](media/data-flow/debug-button-4.png)
 
 Kaydırıcıyı açtıktan sonra hangi tümleştirme çalışma zamanı yapılandırmasını kullanmak istediğinizi seçmeniz istenir. Oto Resolveıntegrationruntime seçilirse, varsayılan 60 dakikalık bir zamana kadar genel işlem içeren sekiz çekirdekli bir küme, ön uca olur. Oturumunuz zaman aşımına uğramadan önce daha fazla boşta takımına izin vermek isterseniz, daha yüksek bir TTL ayarı seçebilirsiniz. Veri akışı tümleştirme çalışma zamanları hakkında daha fazla bilgi için bkz. [veri akışı performansı](concepts-data-flow-performance.md#ir).
 
@@ -37,17 +39,17 @@ Hata ayıklama modu açık olduğunda, etkin bir Spark kümesi ile veri akışı
 > [!NOTE]
 > Kullanıcının ADF tarayıcı kullanıcı arabiriminden başlattığı her hata ayıklama oturumu, kendi Spark kümesi ile yeni bir oturumdur. Fabrika başına hata ayıklama oturumlarını görüntülemek ve yönetmek için yukarıdaki hata ayıklama oturumları için izleme görünümünü kullanabilirsiniz. Her bir hata ayıklama oturumunun, TTL saati dahil yürütüldüğü her saat için ücretlendirilirsiniz.
 
-## <a name="cluster-status"></a>Küme durumu
+## <a name="cluster-status&quot;></a>Küme durumu
 
 Küme hata ayıklamaya hazırlanışında tasarım yüzeyinin en üstündeki küme durumu göstergesi yeşil olur. Kümeniz zaten ısınma olursa yeşil gösterge neredeyse anında görünür. Hata ayıklama moduna girdiğinizde kümeniz zaten çalışmıyorsa, Spark kümesi soğuk bir önyükleme yapar. Bu gösterge, ortam etkileşimli hata ayıklama için hazırlanana kadar dönmesini sağlar.
 
 Hata ayıklamanız ile işiniz bittiğinde, Spark kümenizin sonlanabilir olması için hata ayıklama anahtarını kapatın ve artık hata ayıklama etkinliği için faturalandırılırsınız.
 
-## <a name="debug-settings"></a>Hata ayıklama ayarları
+## <a name=&quot;debug-settings&quot;></a>Hata ayıklama ayarları
 
-Hata ayıklama modunu etkinleştirdikten sonra, veri akışı verilerinin nasıl önizlebildiğini düzenleyebilirsiniz. Hata ayıklama ayarları, veri akışı tuvali araç çubuğunda "hata ayıklama ayarları" seçeneğine tıklanarak düzenlenebilirler. Burada kaynak dönüşümlerinizin her biri için kullanılacak satır sınırını veya dosya kaynağını seçebilirsiniz. Bu ayarda bulunan satır limitleri yalnızca geçerli hata ayıklama oturumu içindir. Azure SYNAPSE Analytics kaynağı için kullanılacak hazırlama bağlantılı hizmetini de seçebilirsiniz. 
+Hata ayıklama modunu etkinleştirdikten sonra, veri akışı verilerinin nasıl önizlebildiğini düzenleyebilirsiniz. Hata ayıklama ayarları, veri akışı tuvali araç çubuğunda &quot;hata ayıklama ayarları&quot; seçeneğine tıklanarak düzenlenebilirler. Burada kaynak dönüşümlerinizin her biri için kullanılacak satır sınırını veya dosya kaynağını seçebilirsiniz. Bu ayarda bulunan satır limitleri yalnızca geçerli hata ayıklama oturumu içindir. Azure SYNAPSE Analytics kaynağı için kullanılacak hazırlama bağlantılı hizmetini de seçebilirsiniz. 
 
-![Hata ayıklama ayarları](media/data-flow/debug-settings.png "Hata ayıklama ayarları")
+![Hata ayıklama ayarları](media/data-flow/debug-settings.png &quot;Hata ayıklama ayarları")
 
 Veri akışınızda veya başvurulan veri kümelerinde parametrelere sahipseniz, **Parametreler** sekmesini seçerek hata ayıklama sırasında kullanılacak değerleri belirtebilirsiniz.
 

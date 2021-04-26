@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/13/2019
 ms.author: allensu
-ms.openlocfilehash: 2e32faad698fbf316d51123cc8b7845a3b262c7f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 173fa3a8288ccceb07048e83fcec35d67b2fd35f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98938665"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783440"
 ---
 # <a name="create-change-or-delete-a-public-ip-address-prefix"></a>Genel IP adresi ön eki oluşturma, değiştirme veya silme
 
@@ -58,7 +58,7 @@ Genel IP adresi ön eklerinin ücreti vardır. Ayrıntılar için bkz. [fiyatlan
 
 |Araç|Komut|
 |---|---|
-|CLI|[az Network public-ip Create](/cli/azure/network/public-ip/prefix#az-network-public-ip-prefix-create)|
+|CLI|[az Network public-ip Create](/cli/azure/network/public-ip/prefix#az_network_public_ip_prefix_create)|
 |PowerShell|[New-AzPublicIpPrefix](/powershell/module/az.network/new-azpublicipprefix)|
 
 >[!NOTE]
@@ -82,7 +82,7 @@ Alternatif olarak, genel bir IP adresi kaynağı oluşturmak için aşağıdaki 
 
 |Araç|Komut|
 |---|---|
-|CLI|[az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create)|
+|CLI|[az network public-ip create](/cli/azure/network/public-ip#az_network_public_ip_create)|
 |PowerShell|[New-Azpublicıpaddress](/powershell/module/az.network/new-azpublicipaddress)|
 
 ## <a name="view-or-delete-a-prefix"></a>Ön eki görüntüleme veya silme
@@ -97,7 +97,7 @@ Alternatif olarak, genel bir IP adresi kaynağı oluşturmak için aşağıdaki 
 
 |Araç|Komut|
 |---|---|
-|CLI|Genel IP adreslerini listelemek için [az Network public-ip önek listesi](/cli/azure/network/public-ip/prefix#az-network-public-ip-prefix-list) , [az Network public-ip prefix](/cli/azure/network/public-ip/prefix#az-network-public-ip-prefix-show) ayarları göstermek için gösterir; güncelleştirmek için [az Network public-ip prefix Update](/cli/azure/network/public-ip/prefix#az-network-public-ip-prefix-update) ; [az Network public-IP öneki](/cli/azure/network/public-ip/prefix#az-network-public-ip-prefix-delete) silinecek Sil|
+|CLI|Genel IP adreslerini listelemek için [az Network public-ip önek listesi](/cli/azure/network/public-ip/prefix#az_network_public_ip_prefix_list) , [az Network public-ip prefix](/cli/azure/network/public-ip/prefix#az_network_public_ip_prefix_show) ayarları göstermek için gösterir; güncelleştirmek için [az Network public-ip prefix Update](/cli/azure/network/public-ip/prefix#az_network_public_ip_prefix_update) ; [az Network public-IP öneki](/cli/azure/network/public-ip/prefix#az_network_public_ip_prefix_delete) silinecek Sil|
 |PowerShell|Bir genel IP adresi nesnesi almak ve ayarlarını görüntülemek için [Get-azpublicıpprefix](/powershell/module/az.network/get-azpublicipprefix) , Update Settings olarak [set-azpublicipprefix](/powershell/module/az.network/set-azpublicipprefix) ; Silmek için [Remove-AzPublicIpPrefix](/powershell/module/az.network/remove-azpublicipprefix)|
 
 ## <a name="permissions"></a>İzinler

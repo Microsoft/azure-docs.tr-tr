@@ -5,14 +5,14 @@ services: static-web-apps
 author: craigshoemaker
 ms.service: static-web-apps
 ms.topic: tutorial
-ms.date: 09/10/2020
+ms.date: 04/09/2021
 ms.author: cshoe
-ms.openlocfilehash: 0086f7f68fd05d6925d19c7ab457fbc125e36be4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5b8a94409f082177192847f2c65d44a513ecdbe4
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96350237"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107305047"
 ---
 # <a name="tutorial-building-a-static-web-app-with-blazor-in-azure-static-web-apps"></a>Öğretici: Azure static Web Apps 'de Blazor ile statik bir Web uygulaması oluşturma
 
@@ -43,7 +43,7 @@ Bu projeler birlikte, bir API arka ucu tarafından desteklenen tarayıcıda çal
 
 ## <a name="fallback-route"></a>Geri dönüş yolu
 
-Uygulama, uygulamanın belirli rotalarıyla eşlenen _/Counter_ ve _/fetchdata_ gibi URL 'leri kullanıma sunar. Bu uygulama tek sayfalı bir uygulama olarak uygulandığından, her yol _index.html_ dosyası olarak sunulur. Herhangi bir yol için isteğin bir [geri dönüş yolunun](./routes.md#fallback-routes) _index.htm_ döndürülmemesini sağlamak için, istemci projesinin _Wwwroot_ klasöründe bulunan _routes.jsdosya üzerinde_ bulunur.
+Uygulama, uygulamanın belirli rotalarıyla eşlenen _/Counter_ ve _/fetchdata_ gibi URL 'leri kullanıma sunar. Bu uygulama tek sayfalı bir uygulama olarak uygulandığından, her yol _index.html_ dosyası olarak sunulur. Herhangi bir yol için isteğin bir [geri dönüş yolunun](./routes.md#fallback-routes) _index.htm_ döndürülmemesini sağlamak için, istemci projesinin _Wwwroot_ klasöründe bulunan _staticwebapp.config.jsdosya üzerinde_ bulunur.
 
 ```json
 {
@@ -64,14 +64,14 @@ Yukarıdaki yapılandırma, uygulamadaki herhangi bir yola yönelik isteklerin _
 Bu makalede, başlamanızı kolaylaştırmak için bir GitHub şablon deposu kullanılmaktadır. Şablon, Azure statik Web Apps dağıtılan bir başlangıç uygulamasını sunar.
 
 1. GitHub 'da oturum açtığınızdan emin olun ve yeni bir depo oluşturmak için aşağıdaki konuma gidin:
-    - [https://github.com/staticwebdev/blazor-starter/generate](https://github.com/login?return_to=/staticwebdev/blazor-starter/generate)
+   - [https://github.com/staticwebdev/blazor-starter/generate](https://github.com/login?return_to=/staticwebdev/blazor-starter/generate)
 1. Deponuzu **-First-static-blazor-App** olarak adlandırın
 
 ## <a name="create-a-static-web-app"></a>Statik web uygulaması oluşturma
 
 Artık depo oluşturulduğuna göre Azure portal bir statik Web uygulaması oluşturun.
 
-1. [Azure Portal](https://portal.azure.com) gidin
+1. [Azure portalına](https://portal.azure.com) gidin
 1. **Kaynak oluştur** ' u seçin
 1. **Statik Web Uygulamaları** için arama yapın
 1. **Statik Web Apps seçin (Önizleme)**
@@ -84,7 +84,7 @@ _Temel bilgiler_ bölümünde yeni uygulamanızı yapılandırıp bir GitHub dep
 1. _Azure aboneliğinizi_ seçin
 1. Yeni bir _kaynak grubu_ seçin veya oluşturun
 1. Uygulamayı **My-First-static-blazor-App** olarak adlandırın
-    - Geçerli karakterler şunlardır: `a-z` (büyük/küçük harf duyarsız), `0-9` ve `-`.
+   - Geçerli karakterler şunlardır: `a-z` (büyük/küçük harf duyarsız), `0-9` ve `-`.
 1. Size en yakın _bölgeyi_ seçin
 1. **Ücretsiz** _SKU 'yu_ seçin
 1. GitHub ile **oturum açma** seçeneğini belirleyin ve GitHub ile kimlik doğrulaması yapın
@@ -97,23 +97,23 @@ GitHub ile oturum açtıktan sonra depo bilgilerini girin.
 1. _Depo_ açılır listesinden **My-First-static-blazor-App** ' i seçin
 1. _Dal_ açılan listesinden **Main** ' i seçin
 
-    Herhangi bir depo görmüyorsanız, GitHub 'da Azure statik Web Apps yetkilendirmeniz gerekebilir. GitHub deponuza gidin ve **yetkili OAuth uygulamaları > ayarlar > uygulamalar**' a gidip **Azure statik Web Apps**' yı seçin ve ardından **ver**' i seçin. Kuruluş depolarında, izinleri vermek için kuruluşun sahibi olmanız gerekir.
+   Herhangi bir depo görmüyorsanız, GitHub 'da Azure statik Web Apps yetkilendirmeniz gerekebilir. GitHub deponuza gidin ve **yetkili OAuth uygulamaları > ayarlar > uygulamalar**' a gidip **Azure statik Web Apps**' yı seçin ve ardından **ver**' i seçin. Kuruluş depolarında, izinleri vermek için kuruluşun sahibi olmanız gerekir.
 
 1. _Derleme ayrıntıları_ bölümünde, Blazor özgü yapılandırma ayrıntılarını ekleyin.
 
-    - _Derleme ön ayarları_ açılır listesinden **Blazor** ' ı seçin ve tüm varsayılan değerleri saklayın.
+   - _Derleme ön ayarları_ açılır listesinden **Blazor** ' ı seçin ve tüm varsayılan değerleri saklayın.
 
 1. **Gözden geçir ve oluştur**’u seçin.
 
-    :::image type="content" source="media/deploy-blazor/review-create.png" alt-text="İnceleme oluştur düğmesi":::
+   :::image type="content" source="media/deploy-blazor/review-create.png" alt-text="İnceleme oluştur düğmesi":::
 
 1. **Oluştur**’u seçin.
 
-    :::image type="content" source="media/deploy-blazor/create-button.png" alt-text="Oluştur düğmesi":::
+   :::image type="content" source="media/deploy-blazor/create-button.png" alt-text="Oluştur düğmesi":::
 
 1. **Kaynağa git**’i seçin.
 
-    :::image type="content" source="media/deploy-blazor/resource-button.png" alt-text="Kaynağa git düğmesi":::
+   :::image type="content" source="media/deploy-blazor/resource-button.png" alt-text="Kaynağa git düğmesi":::
 
 ## <a name="view-the-website"></a>Web sitesini görüntüleme
 

@@ -10,10 +10,10 @@ ms.subservice: data-lake-storage-gen2
 ms.reviewer: prishet
 ms.custom: devx-track-python
 ms.openlocfilehash: ba864aa1aa2462f21e05ab5e779c8e715d6bb973
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100654474"
 ---
 # <a name="use-python-to-manage-acls-in-azure-data-lake-storage-gen2"></a>Azure Data Lake Storage 2. ACL 'Leri yönetmek için Python kullanma
@@ -211,6 +211,6 @@ Bir toplu iş boyutu belirterek ACL 'Leri yinelemeli olarak toplu halde işleyen
 - [Örnekler](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/storage/azure-storage-file-datalake/samples)
 - [Gen1 to Gen2 Mapping](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/storage/azure-storage-file-datalake/GEN1_GEN2_MAPPING.md)
 - [Bilinen sorunlar](data-lake-storage-known-issues.md#api-scope-data-lake-client-library)
-- [Görüş Bildirin](https://github.com/Azure/azure-sdk-for-python/issues)
+- [Geri bildirimde bulunun](https://github.com/Azure/azure-sdk-for-python/issues)
 - [Azure Data Lake Storage 2. 'de erişim denetimi modeli](data-lake-storage-access-control.md)
 - [Azure Data Lake Storage 2. 'de erişim denetim listeleri (ACL 'Ler)](data-lake-storage-access-control.md)

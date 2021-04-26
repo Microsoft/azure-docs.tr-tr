@@ -7,12 +7,12 @@ ms.service: static-web-apps
 ms.topic: tutorial
 ms.date: 03/23/2021
 ms.author: apedward
-ms.openlocfilehash: 472cf7b69078b3247c393ff65139bc29e5683a32
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: f82ae60ab7f57b20a727deefa6e286d698ee5b6c
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105639375"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107365765"
 ---
 # <a name="tutorial-publish-azure-static-web-apps-with-azure-devops"></a>Öğretici: Azure DevOps ile Azure statik Web Apps yayımlama
 
@@ -93,6 +93,9 @@ Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
       vmImage: ubuntu-latest
     
     steps:
+      - checkout: self
+        submodules: true
+
       - task: AzureStaticWebApp@0
         inputs:
           app_location: "/" 

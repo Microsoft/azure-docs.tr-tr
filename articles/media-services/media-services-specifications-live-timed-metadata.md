@@ -208,7 +208,7 @@ Her 0,5 saniye (500ms) veya canlı akışla ilgili kararlılık sorunlarından d
 ```
 
 ### <a name="built-in-supported-scheme-id-uris"></a>Yerleşik desteklenen şema KIMLIĞI URI 'Leri
-| Şema KIMLIĞI URI 'SI                 | Açıklama                                                                                                                                                                                                                                          |
+| Şema KIMLIĞI URI 'SI                 | Description                                                                                                                                                                                                                                          |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | https: \/ /aomedia.org/EMSG/ID3 | [ID3v2] meta verilerinin CMAF ile uyumlu [MPEGCMAF] parçalanmış MP4 içinde zaman aşımına uğramış bir meta veriler olarak nasıl taşınabilir açıklar. Daha fazla bilgi için bkz [. ortak medya uygulaması biçimindeki (CMAF) zaman aşımına uğrayan meta veriler](https://github.com/AOMediaCodec/id3-emsg) |
 

@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 08/06/2019
 ms.author: tomfitz
-ms.openlocfilehash: f76d3b81c2d5425f7bb91c5c86a79faa097794e3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: eeef454e4c5706b39d07261ade1c2f0ffbc942ad
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96435010"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107478905"
 ---
 # <a name="test-your-portal-interface-for-azure-managed-applications"></a>Azure yönetilen uygulamalar için Portal arabiriminizi test etme
 
@@ -18,7 +18,7 @@ Yönetilen uygulamanız için [dosyada createUiDefinition.js](create-uidefinitio
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Dosyadaki bir **createUiDefinition.js** . Bu dosyaya sahip değilseniz [örnek dosyayı](https://github.com/Azure/azure-quickstart-templates/blob/master/100-marketplace-sample/createUiDefinition.json)kopyalayın.
+* Dosyadaki bir **createUiDefinition.js** . Bu dosyaya sahip değilseniz [örnek dosyayı](https://github.com/Azure/azure-quickstart-templates/blob/master/demos/100-marketplace-sample/createUiDefinition.json)kopyalayın.
 
 * Azure aboneliği. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
 
@@ -100,7 +100,7 @@ Portal Özet ekranında askıda kalırsa, çıkış bölümünde bir hata olabil
 
 ## <a name="test-your-solution-files"></a>Çözüm dosyalarınızı test etme
 
-Portal Arabiriminizin beklendiği gibi çalıştığını doğruladığınıza göre, Createuıdefinition dosyanızın dosyadaki mainTemplate.jsuygun şekilde tümleştirildiğini doğrulamanız zaman alır. Createuıdefinition dosyası dahil olmak üzere çözüm dosyalarınızın içeriğini test etmek için bir doğrulama betik testi çalıştırabilirsiniz. Betik JSON sözdizimini doğrular, metin alanlarındaki Regex ifadelerini denetler ve Portal arabiriminin çıkış değerlerinin şablonunuzun parametreleriyle eşleştiğinden emin olur. Bu betiği çalıştırma hakkında bilgi için bkz. [Şablonlar için statik doğrulama denetimlerini çalıştırma](https://github.com/Azure/azure-quickstart-templates/tree/master/test).
+Portal Arabiriminizin beklendiği gibi çalıştığını doğruladığınıza göre, Createuıdefinition dosyanızın dosyadaki mainTemplate.jsuygun şekilde tümleştirildiğini doğrulamanız zaman alır. Createuıdefinition dosyası dahil olmak üzere çözüm dosyalarınızın içeriğini test etmek için bir doğrulama betik testi çalıştırabilirsiniz. Betik JSON sözdizimini doğrular, metin alanlarındaki Regex ifadelerini denetler ve Portal arabiriminin çıkış değerlerinin şablonunuzun parametreleriyle eşleştiğinden emin olur. Bu betiği çalıştırma hakkında bilgi için bkz. [Şablonlar için statik doğrulama denetimlerini çalıştırma](https://aka.ms/arm-ttk).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

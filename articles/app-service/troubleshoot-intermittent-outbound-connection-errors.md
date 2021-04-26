@@ -8,10 +8,10 @@ ms.date: 11/19/2020
 ms.author: ramakoni
 ms.custom: security-recommendations,fasttrack-edit
 ms.openlocfilehash: 2b4719561ad94d54267410d0af28db6ee8d82b00
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104799114"
 ---
 # <a name="troubleshooting-intermittent-outbound-connection-errors-in-azure-app-service"></a>Azure App Service zaman aralıklı giden bağlantı hatalarıyla ilgili sorunları giderme
@@ -125,7 +125,7 @@ PHP bağlantı havuzunu desteklememesine rağmen, arka uç sunucunuza kalıcı v
 
 Sınırlar, çalışanlarınızın boyutuna göre ayarlandığından, giden TCP sınırlarının çözülmesini daha kolay hale getirir. Sınır, [VM 'Ler arası sayısal sınırlara göre sınırları görebilir-TCP bağlantıları](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#cross-vm-numerical-limits)
 
-|Sınır adı|Açıklama|Küçük (a1)|Orta (a2)|Büyük (a3)|Yalıtılmış katman (Ao)|
+|Sınır adı|Description|Küçük (a1)|Orta (a2)|Büyük (a3)|Yalıtılmış katman (Ao)|
 |---|---|---|---|---|---|
 |Bağlantılar|Tüm VM genelinde bağlantı sayısı|1920|3968|8064|16.000|
 
@@ -157,7 +157,7 @@ TCP bağlantıları ve SNAT bağlantı noktaları doğrudan ilgili değildir. TC
 * TCP bağlantı sınırı çalışan örneği düzeyinde gerçekleşir. Azure ağ giden Yük Dengeleme, SNAT bağlantı noktası sınırlaması için TCP bağlantıları ölçümünü kullanmaz.
 * TCP bağlantı sınırları, [korumalı alan çapraz VM 'de, TCP bağlantılarında](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#cross-vm-numerical-limits) açıklanmaktadır
 
-|Sınır adı|Açıklama|Küçük (a1)|Orta (a2)|Büyük (a3)|Yalıtılmış katman (Ao)|
+|Sınır adı|Description|Küçük (a1)|Orta (a2)|Büyük (a3)|Yalıtılmış katman (Ao)|
 |---|---|---|---|---|---|
 |Bağlantılar|Tüm VM genelinde bağlantı sayısı|1920|3968|8064|16.000|
 

@@ -12,12 +12,12 @@ author: anosov1960
 ms.author: sashan
 ms.reviewer: mathoma, sstein, danil
 ms.date: 11/13/2020
-ms.openlocfilehash: 0c3db3b3f22f9f2639012068924708537f9ada77
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 670176d7478ddab3d17e15526df512dfa7e99fd4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98795328"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762092"
 ---
 # <a name="recover-using-automated-database-backups---azure-sql-database--sql-managed-instance"></a>Otomatik veritabanı yedeklemeleri kullanarak kurtarma-SQL yönetilen örnek & Azure SQL veritabanı
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -47,11 +47,11 @@ Otomatik veritabanı yedeklemeleri kullanarak bir veritabanını geri yüklemeye
 - Geri yükleme farklı bir bölgeye ise ağ bant genişliği.
 - Hedef bölgede işlenen eşzamanlı geri yükleme isteklerinin sayısı.
 
-Büyük veya çok etkin bir veritabanı için geri yükleme birkaç saat sürebilir. Bir bölgede uzun süren bir kesinti varsa, olağanüstü durum kurtarma için yüksek sayıda coğrafi geri yükleme isteği başlatılabilir. Çok sayıda istek olduğunda, bireysel veritabanlarının kurtarma süresi artabilir. Çoğu veritabanı son geri yükleme işlemi 12 saatten az sürer.
+Büyük veya çok etkin bir veritabanı için geri yükleme birkaç saat sürebilir. Bölgede uzun süren bir kesinti olursa, olağanüstü durum kurtarma için çok sayıda coğrafi geri yükleme isteğinin başlatılması mümkündür. Çok sayıda istek olduğunda tek tek veritabanlarının kurtarma süresi uzayabilir. Çoğu veritabanı son geri yükleme işlemi 12 saatten az sürer.
 
-Tek bir abonelik için, eş zamanlı geri yükleme isteği sayısında sınırlamalar vardır. Bu sınırlamalar, uzun süreli saklama yedeklemesinden gelen zaman içindeki tüm geri yüklemeler, coğrafi geri yüklemeler ve geri yüklemeler için geçerlidir.
+Tek bir abonelik için eşzamanlı geri yükleme isteklerinin sayısında sınırlamalar söz konusudur. Bu sınırlamalar belirli bir noktaya geri yükleme, coğrafi geri yükleme ve uzun süreli saklama yedeklemelerinden geri yükleme işlemlerinin her türlü bileşimine uygulanır.
 
-| **Dağıtım seçeneği** | **İşlenmekte olan eşzamanlı istek sayısı üst sınırı** | **Gönderilen en fazla eşzamanlı istek sayısı** |
+| **Dağıtım seçeneği** | **İşlenmekte olan eşzamanlı istek sayısı üst sınırı** | **Gönderilmekte olan eşzamanlı istek sayısı üst sınırı** |
 | :--- | --: | --: |
 |**Tek veritabanı (abonelik başına)**|30|100|
 |**Elastik havuz (havuz başına)**|4|2000|
@@ -243,15 +243,15 @@ REST API kullanarak bir veritabanını geri yüklemek için:
 | [REST (createMode = kurtarma)](/rest/api/sql/databases) |Bir veritabanını geri yükler. |
 | [Veritabanı oluşturma veya güncelleştirme durumunu al](/rest/api/sql/operations) |Geri yükleme işlemi sırasında durumu döndürür. |
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 #### <a name="sql-database"></a>SQL Veritabanı
 
-Azure CLı kullanarak bir veritabanını geri yüklemek için, bkz. [az SQL DB restore](/cli/azure/sql/db#az-sql-db-restore).
+Azure CLı kullanarak bir veritabanını geri yüklemek için, bkz. [az SQL DB restore](/cli/azure/sql/db#az_sql_db_restore).
 
 #### <a name="sql-managed-instance"></a>SQL Yönetilen Örnek
 
-Azure CLı kullanarak yönetilen bir örnek veritabanını geri yüklemek için, bkz. [az SQL mıdb restore](/cli/azure/sql/midb#az-sql-midb-restore).
+Azure CLı kullanarak yönetilen bir örnek veritabanını geri yüklemek için, bkz. [az SQL mıdb restore](/cli/azure/sql/midb#az_sql_midb_restore).
 
 ## <a name="summary"></a>Özet
 

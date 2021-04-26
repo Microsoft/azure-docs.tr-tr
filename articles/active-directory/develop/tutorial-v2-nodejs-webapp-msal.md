@@ -1,5 +1,5 @@
 ---
-title: 'Öğretici: Node.js & Express web uygulamasında oturum açma kullanıcıları | Mavisi'
+title: 'Öğretici: Node.js & Express web uygulamasında kullanıcılar oturum açma | Mavisi'
 titleSuffix: Microsoft identity platform
 description: Bu öğreticide, bir Web uygulamasında oturum açma kullanıcıları için destek eklersiniz.
 services: active-directory
@@ -10,14 +10,14 @@ ms.subservice: develop
 ms.topic: tutorial
 ms.date: 02/17/2021
 ms.author: v-doeris
-ms.openlocfilehash: 3f1f26acbba0f5830421e760d6a68a11f618fa85
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 58132b6d038abe0db02d1e58f8c8a8f64962ff49
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101648999"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106279723"
 ---
-# <a name="tutorial-sign-in-users-in-a-nodejs--express-web-app"></a>Öğretici: Node.js & Express web uygulamasında oturum açma kullanıcıları
+# <a name="tutorial-sign-in-users-in-a-nodejs--express-web-app"></a>Öğretici: bir Node.js & Express web uygulamasında kullanıcılar oturum açma
 
 Bu öğreticide, kullanıcıları oturum açan bir Web uygulaması oluşturacaksınız. Oluşturduğunuz Web uygulaması, [düğümü Için Microsoft kimlik doğrulama kitaplığı 'nı (msal)](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-node)kullanır.
 

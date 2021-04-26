@@ -3,12 +3,12 @@ title: Karma Bağlantılar için tanılama günlükleri
 description: Bu makalede, Azure Relay için kullanılabilen tüm etkinlik ve tanılama günlüklerine genel bir bakış sunulmaktadır.
 ms.topic: how-to
 ms.date: 06/23/2020
-ms.openlocfilehash: 9b459750ad1445da89a8e89a10a35b878bfb64e1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7ca6dc95567a4867d3c58e0efad0fc74289e586c
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100590867"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106079106"
 ---
 # <a name="enable-diagnostics-logs-for-azure-relay-hybrid-connections"></a>Azure Relay Karma Bağlantılar için tanılama günlüklerini etkinleştir
 Azure Relay Karma Bağlantılar kullanmaya başladığınızda, dinleyiclarınızın ve gönderenlerden nasıl ve ne zaman açılacağını ve Karma Bağlantılar nasıl oluşturulduğunu ve iletilerin gönderileceğini izlemek isteyebilirsiniz. Bu makalede, Azure Relay hizmeti tarafından sağlanan etkinlik ve tanılama günlüklerine bir genel bakış sunulmaktadır. 
@@ -80,29 +80,29 @@ JSON biçiminde örnek bir karma bağlantılar olayı aşağıda verilmiştir.
 
 ## <a name="events-and-operations-captured-in-diagnostic-logs"></a>Tanılama günlüklerinde yakalanan olaylar ve işlemler
 
-| İşlem | Description | 
-| --------- | ----------- | 
-| AuthorizationFailed | Yetkilendirme başarısız oldu.|
-| Invalidsastoken | SAS belirteci geçersiz. | 
-| ListenerAcceptingConnection | Dinleyici bağlantıyı kabul ediyor. |
-| ListenerAcceptingConnectionTimeout | Bağlantı kabul eden dinleyici zaman aşımına uğradı. |
-| ListenerAcceptingHttpRequestFailed | HTTP isteğini kabul eden dinleyici bir özel durum nedeniyle başarısız oldu. |
-| ListenerAcceptingRequestTimeout | İstek kabul eden dinleyici zaman aşımına uğradı. |  
-| ListenerClosingFromExpiredToken | Güvenlik belirtecinin süresi aşıldığı için dinleyici kapatılıyor. | 
-| ListenerRejectedConnection | Dinleyici bağlantıyı reddetti. |
-| ListenerReturningHttpResponse | Dinleyici bir HTTP yanıtı döndürüyor. |  
-| Listenerreturninghttpresponsebaşarısız oldu | Dinleyici, hata kodu ile bir HTTP yanıtı döndürüyor. | 
- ListenerSentHttpResponse | Geçiş hizmeti, dinleyicisinden bir HTTP yanıtı aldı. | 
-| Listenerkaydettirilmemiş | Dinleyicinin kaydı silindi. | 
-| Listenervermemeye yanıt vermiyor | Bir yanıt döndürürken dinleyici yanıt vermemeye başladı. | 
-| Iletiendingtolistener | İleti, dinleyiciye gönderiliyor. |
-| Iletienttolistener | İleti, dinleyiciye gönderilir. | 
-| NewListenerRegistered | Yeni dinleyici kaydedildi. |
-| Newsenderkayıt | Yeni gönderici kaydediliyor. | 
-| ProcessingRequestFailed | Karma bağlantı işleminin işlenmesi başarısız oldu. | 
-| SenderConnectionClosed | Gönderen bağlantısı kapalı. |
-| Senderlistenerconnectionkurdu | Gönderen ve dinleyici bağlantı başarıyla oluşturuldu. |
-| SenderSentHttpRequest | Gönderen bir HTTP isteği gönderdi. | 
+| İşlem                           | Description                                                     |
+|-------------------------------------|-----------------------------------------------------------------|
+| AuthorizationFailed                 | Yetkilendirme başarısız oldu.                                           |
+| Invalidsastoken                     | SAS belirteci geçersiz.                                              |
+| ListenerAcceptingConnection         | Dinleyici bağlantıyı kabul ediyor.                           |
+| ListenerAcceptingConnectionTimeout  | Bağlantı kabul eden dinleyici zaman aşımına uğradı.                |
+| ListenerAcceptingHttpRequestFailed  | HTTP isteğini kabul eden dinleyici bir özel durum nedeniyle başarısız oldu. |
+| ListenerAcceptingRequestTimeout     | İstek kabul eden dinleyici zaman aşımına uğradı.                   |
+| ListenerClosingFromExpiredToken     | Güvenlik belirtecinin süresi aşıldığı için dinleyici kapatılıyor. |
+| ListenerRejectedConnection          | Dinleyici bağlantıyı reddetti.                       |
+| ListenerReturningHttpResponse       | Dinleyici bir HTTP yanıtı döndürüyor.                     |
+| Listenerreturninghttpresponsebaşarısız oldu | Dinleyici, hata kodu ile bir HTTP yanıtı döndürüyor. |
+| ListenerSentHttpResponse            | Geçiş hizmeti, dinleyicisinden bir HTTP yanıtı aldı.  |
+| Listenerkaydettirilmemiş                | Dinleyicinin kaydı silindi.                                   |
+| Listenervermemeye yanıt vermiyor                | Bir yanıt döndürürken dinleyici yanıt vermemeye başladı.         |
+| Iletiendingtolistener            | İleti, dinleyiciye gönderiliyor.                              |
+| Iletienttolistener               | İleti, dinleyiciye gönderilir.                                    |
+| NewListenerRegistered               | Yeni dinleyici kaydedildi.                                        |
+| Newsenderkayıt                | Yeni gönderici kaydediliyor.                                      |
+| ProcessingRequestFailed             | Karma bağlantı işleminin işlenmesi başarısız oldu.     |
+| SenderConnectionClosed              | Gönderen bağlantısı kapalı.                                |
+| Senderlistenerconnectionkurdu | Gönderen ve dinleyici bağlantı başarıyla oluşturuldu.    |
+| SenderSentHttpRequest               | Gönderen bir HTTP isteği gönderdi.                                |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

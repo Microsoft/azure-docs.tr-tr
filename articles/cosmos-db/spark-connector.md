@@ -1,23 +1,23 @@
 ---
-title: Apache Spark Azure Cosmos DB bağlama
-description: Apache Spark Azure Cosmos DB bağlanmanızı sağlayan Azure Cosmos DB Spark Bağlayıcısı hakkında bilgi edinin.
-author: tknandu
+title: Apache Spark 2 ' ye Azure Cosmos DB bağlama
+description: Apache Spark Azure Cosmos DB bağlanmanızı sağlayan Azure Cosmos DB Spark 2 OLTP Bağlayıcısı hakkında bilgi edinin.
+author: anfeldma-ms
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.topic: how-to
-ms.date: 05/21/2019
-ms.author: ramkris
-ms.openlocfilehash: 06498a27b95a72148497efd2d1e600d802414359
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/06/2021
+ms.author: anfeldma
+ms.openlocfilehash: 9d4a1a7d359bac83159d0e5ca4bddfc5935394a5
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97359566"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107364286"
 ---
-# <a name="accelerate-big-data-analytics-by-using-the-apache-spark-to-azure-cosmos-db-connector"></a>Apache Spark Azure Cosmos DB bağlayıcısını kullanarak büyük veri analizlerini hızlandırma
+# <a name="accelerate-big-data-analytics-by-using-the-apache-spark-v2-to-azure-cosmos-db-oltp-connector"></a>OLTP bağlayıcısını Azure Cosmos DB için Apache Spark v2 'yi kullanarak büyük veri analizlerini hızlandırma
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-[Spark](https://spark.apache.org/) işlerini, Cosmos DB Spark bağlayıcısını kullanarak Azure Cosmos DB depolanan verilerle çalıştırabilirsiniz. Cosmos, toplu işlem ve akış işleme için ve düşük gecikmeli erişim için bir hizmet katmanı olarak kullanılabilir.
+[Spark v2](https://spark.apache.org/) işlerini, Cosmos DB Spark 2 OLTP bağlayıcısını kullanarak Azure Cosmos DB depolanan verilerle çalıştırabilirsiniz. Cosmos, toplu işlem ve akış işleme için ve düşük gecikmeli erişim için bir hizmet katmanı olarak kullanılabilir.
 
 Bağlayıcıyı Azure 'da yönetilen Spark kümeleri sağlayan [Azure Databricks](https://azure.microsoft.com/services/databricks) veya [Azure HDInsight](https://azure.microsoft.com/services/hdinsight/)ile kullanabilirsiniz. Aşağıdaki tabloda desteklenen Spark sürümleri gösterilmektedir.
 
@@ -33,7 +33,7 @@ Bağlayıcıyı Azure 'da yönetilen Spark kümeleri sağlayan [Azure Databricks
 > Cosmos DB Cassandra API için [Cassandra Spark bağlayıcısını](https://github.com/datastax/spark-cassandra-connector)kullanın.
 
 > [!IMPORTANT]
-> Azure Cosmos DB Spark Bağlayıcısı Şu anda [sunucusuz](serverless.md) hesaplarda desteklenmez. Sunucusuz teklif genel kullanıma açık hale geldiği için bu işlem karşılanır.
+> Azure Cosmos DB Spark OLTP Bağlayıcısı Şu anda [sunucusuz](serverless.md) hesaplarda desteklenmez. Sunucusuz teklif genel kullanıma açık hale geldiği için bu işlem karşılanır.
 
 ## <a name="quickstart"></a>Hızlı Başlangıç
 

@@ -1,23 +1,18 @@
 ---
-title: Azure Güvenlik Merkezi 'nde kapsayıcı güvenliği | Microsoft Docs
-description: Azure Güvenlik Merkezi 'nin kapsayıcı güvenlik özellikleri hakkında bilgi edinin.
-services: security-center
-documentationcenter: na
+title: Azure Güvenlik Merkezi ve Azure Defender ile kapsayıcı güvenliği
+description: Azure Güvenlik Merkezi 'nin kapsayıcı güvenlik özellikleri hakkında bilgi edinin
 author: memildin
 manager: rkarlin
 ms.service: security-center
-ms.devlang: na
 ms.topic: overview
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 02/07/2021
+ms.date: 04/06/2021
 ms.author: memildin
-ms.openlocfilehash: 3b5204f1d390388c2dc9a10ac2ca0234f6b0499b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9fddb27ee6a1139fa8b07c6c19dd4fdf1a20096e
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102101350"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107029153"
 ---
 # <a name="container-security-in-security-center"></a>Güvenlik Merkezi’nde kapsayıcı güvenliği
 
@@ -27,9 +22,9 @@ Güvenlik Merkezi aşağıdaki kapsayıcı kaynak türlerini koruyabilir:
 
 | Kaynak türü | Güvenlik Merkezi tarafından sunulan korumalar |
 |:--------------------:|-----------|
-| ![Kubernetes hizmeti](./media/security-center-virtual-machine-recommendations/icon-kubernetes-service-rec.png)<br>**Azure Kubernetes hizmeti (AKS) kümeleri** | -AKS kümelerinizin yapılandırmalarını, yanlış yapılandırma ve keşfedilen sorunları çözmenize yardımcı olacak yönergeler sağlamak için sürekli değerlendirme.<br>[Güvenlik önerileri aracılığıyla ortam sağlamlaştırma hakkında daha fazla bilgi edinin](#environment-hardening).<br><br>-AKS kümeleri ve Linux düğümleri için tehdit koruması. Şüpheli etkinliklerin uyarıları,  [Kubernetes için isteğe bağlı Azure Defender](defender-for-kubernetes-introduction.md)tarafından sağlanır.<br>[AKS düğümleri ve kümeleri için çalışma zamanı koruması hakkında daha fazla bilgi edinin](#run-time-protection-for-aks-nodes-and-clusters).|
-| ![Kapsayıcı Konağı](./media/security-center-virtual-machine-recommendations/icon-container-host-rec.png)<br>**Kapsayıcı Konakları**<br>(Docker çalıştıran VM 'Ler) | -Docker yapılandırmalarının sürekli değerlendirmesi, yanlış yapılandırma ve  [sunucular için isteğe bağlı Azure Defender](defender-for-servers-introduction.md)ile keşfedilen sorunları çözmenize yardımcı olacak yönergeler sağlar.<br>[Güvenlik önerileri aracılığıyla ortam sağlamlaştırma hakkında daha fazla bilgi edinin](#environment-hardening).|
-| ![Kapsayıcı kayıt defteri](./media/security-center-virtual-machine-recommendations/icon-container-registry-rec.png)<br>**Azure Container Registry (ACR) kayıt defterleri** | -Azure Resource Manager tabanlı ACR kayıt defterlerine ait görüntüler için, [kapsayıcı kayıt defterlerine yönelik isteğe bağlı Azure Defender](defender-for-container-registries-introduction.md)ile ilgili güvenlik açığı değerlendirmesi ve yönetim araçları.<br>[Güvenlik açıkları için kapsayıcı görüntülerinizi tarama hakkında daha fazla bilgi edinin](#vulnerability-management---scanning-container-images). |
+| ![Kubernetes hizmeti](./media/security-center-virtual-machine-recommendations/icon-kubernetes-service-rec.png)<br>**Kubernetes kümeleri** | Belirlenen tehditleri azaltmanıza yardımcı olacak yanlış yapılandırma ve kılavuz kuralları hakkında görünürlük sağlamak için kümelerinizin sürekli değerlendirmesi. [Güvenlik önerileri aracılığıyla ortam sağlamlaştırma](#environment-hardening)hakkında daha fazla bilgi edinin.<br><br>Kümeler ve Linux düğümleri için tehdit koruması. Şüpheli etkinlik uyarıları, [Kubernetes Için Azure Defender](defender-for-kubernetes-introduction.md)tarafından sağlanır. Bu Azure Defender planı, Kubernetes kümelerinizi Azure Kubernetes hizmeti (AKS), şirket içi veya diğer bulut sağlayıcılarında barındırılıp barındırılmadığını savunmaktadır. leriniz. <br>[Kubernetes düğümleri ve kümeleri için çalışma zamanı koruması](#run-time-protection-for-kubernetes-nodes-and-clusters)hakkında daha fazla bilgi edinin.|
+| ![Kapsayıcı Konağı](./media/security-center-virtual-machine-recommendations/icon-container-host-rec.png)<br>**Kapsayıcı Konakları**<br>(Docker çalıştıran VM 'Ler) | [Sunucular için isteğe bağlı Azure Defender](defender-for-servers-introduction.md)tarafından tanımlanan tehditleri azaltmanıza yardımcı olmak üzere, yanlış yapılandırma ve talimatlara görünürlük sağlamak Için Docker ortamlarınızın sürekli değerlendirmesi.<br>[Güvenlik önerileri aracılığıyla ortam sağlamlaştırma](#environment-hardening)hakkında daha fazla bilgi edinin.|
+| ![Kapsayıcı kayıt defteri](./media/security-center-virtual-machine-recommendations/icon-container-registry-rec.png)<br>**Azure Container Registry (ACR) kayıt defterleri** | [Kapsayıcı kayıt defterleri için isteğe bağlı Azure Defender](defender-for-container-registries-introduction.md)ile Azure Resource Manager tabanlı ACR kayıt defterlerinden görüntüler için güvenlik açığı değerlendirmesi ve yönetim araçları.<br>[Güvenlik açıkları için kapsayıcı görüntülerinizi tarama](#vulnerability-management---scanning-container-images)hakkında daha fazla bilgi edinin. |
 |||
 
 Bu makalede, kapsayıcılarınızın ve uygulamalarının güvenliğini artırmak, izlemek ve korumak için kapsayıcı kayıt defterleri, SEI 'ler ve Kubernetes için isteğe bağlı Azure Defender planlarıyla birlikte Güvenlik Merkezi 'ni nasıl kullanabileceğiniz açıklanır.
@@ -38,7 +33,7 @@ Güvenlik Merkezi 'nin kapsayıcı güvenliğinin bu temel yönlerini nasıl yar
 
 - [Güvenlik açığı yönetimi-kapsayıcı görüntülerini tarama](#vulnerability-management---scanning-container-images)
 - [Ortam sağlamlaştırma](#environment-hardening)
-- [AKS düğümleri ve kümeleri için çalışma zamanı koruması](#run-time-protection-for-aks-nodes-and-clusters)
+- [Kubernetes düğümleri ve kümeleri için çalışma zamanı koruması](#run-time-protection-for-kubernetes-nodes-and-clusters)
 
 Aşağıdaki ekran görüntüsünde, varlık Envanteri sayfası ve Güvenlik Merkezi tarafından korunan çeşitli kapsayıcı kaynak türleri gösterilmektedir.
 
@@ -103,7 +98,7 @@ AKS kümenizdeki eklenti sayesinde, Kubernetes API sunucusuna gönderilen her is
 [Kubernetes iş yüklerinizi koruma](kubernetes-workload-protections.md)hakkında daha fazla bilgi edinin.
 
 
-## <a name="run-time-protection-for-aks-nodes-and-clusters"></a>AKS düğümleri ve kümeleri için çalışma zamanı koruması
+## <a name="run-time-protection-for-kubernetes-nodes-and-clusters"></a>Kubernetes düğümleri ve kümeleri için çalışma zamanı koruması
 
 [!INCLUDE [AKS in ASC threat protection](../../includes/security-center-azure-kubernetes-threat-protection.md)]
 

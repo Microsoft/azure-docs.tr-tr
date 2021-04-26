@@ -10,12 +10,12 @@ keywords: bilişsel hizmetler, bilişsel zeka, bilişsel çözümler, AI Hizmetl
 ms.topic: quickstart
 ms.date: 3/22/2021
 ms.author: aahi
-ms.openlocfilehash: 08ff2f416a00002cde5767111ba5a6824a721324
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 26e3b264b7268f7a9ffdb592beef7d76844646f5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104868180"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107789150"
 ---
 # <a name="quickstart-create-a-cognitive-services-resource-using-the-azure-command-line-interfacecli"></a>Hızlı başlangıç: Azure Command-Line arabirimini (CLı) kullanarak bilişsel hizmetler kaynağı oluşturma
 
@@ -36,7 +36,7 @@ Bu hızlı başlangıçta, Azure [komut satırı arabirimi 'ni (CLI)](/cli/azure
 
 ## <a name="install-the-azure-cli-and-sign-in"></a>Azure CLı 'yı yükleyip oturum açın
 
-[Azure CLI](/cli/azure/install-azure-cli)'yı yükler. CLı 'nın yerel yüklemesinde oturum açmak için [az Login](/cli/azure/reference-index#az-login) komutunu çalıştırın:
+[Azure CLI](/cli/azure/install-azure-cli)'yı yükler. CLı 'nın yerel yüklemesinde oturum açmak için [az Login](/cli/azure/reference-index#az_login) komutunu çalıştırın:
 
 ```azurecli-interactive
 az login
@@ -50,7 +50,7 @@ Bilişsel hizmetler kaynağı oluşturmadan önce, kaynağı içermesi için bir
 
 ### <a name="choose-your-resource-group-location"></a>Kaynak grubu konumunuzu seçin
 
-Bir kaynak oluşturmak için, aboneliğiniz için kullanılabilen Azure konumlarından birine ihtiyacınız olacaktır. [Az Account List-Locations](/cli/azure/account#az-account-list-locations) komutuyla kullanılabilir konumların bir listesini alabilirsiniz. Birçok farklı konumdan en bilişsel hizmetlere erişilebilir. Size en yakın olanı seçin ya da hizmet için hangi konumların kullanılabildiğini görün.
+Bir kaynak oluşturmak için, aboneliğiniz için kullanılabilen Azure konumlarından birine ihtiyacınız olacaktır. [Az Account List-Locations](/cli/azure/account#az_account_list_locations) komutuyla kullanılabilir konumların bir listesini alabilirsiniz. Birçok farklı konumdan en bilişsel hizmetlere erişilebilir. Size en yakın olanı seçin ya da hizmet için hangi konumların kullanılabildiğini görün.
 
 > [!IMPORTANT]
 > * Azure bilişsel hizmetler 'i çağırırken ihtiyacınız olacak şekilde Azure konumunuzu unutmayın.
@@ -62,7 +62,7 @@ az account list-locations \
     --out table
 ```
 
-Azure konumunuz olduktan sonra, [az Group Create](/cli/azure/group#az-group-create) komutunu kullanarak Azure CLI 'de yeni bir kaynak grubu oluşturun.
+Azure konumunuz olduktan sonra, [az Group Create](/cli/azure/group#az_group_create) komutunu kullanarak Azure CLI 'de yeni bir kaynak grubu oluşturun.
 
 Aşağıdaki örnekte, Azure konumunu, `westus2` aboneliğiniz için kullanılabilen Azure konumlarından biriyle değiştirin.
 
@@ -124,7 +124,7 @@ Yeni bir kaynak oluştururken, kullanmak istediğiniz hizmetin "tür" i ve isted
 | Content Moderator | `ContentModerator` |
 | Kişiselleştirme      | `Personalizer`     |
 
-Mevcut bilişsel hizmet hizmeti "türlerinin" bir listesini [az biliveservices hesap listesi-tür](/cli/azure/cognitiveservices/account#az-cognitiveservices-account-list-kinds) komutuyla bulabilirsiniz:
+Mevcut bilişsel hizmet hizmeti "türlerinin" bir listesini [az biliveservices hesap listesi-tür](/cli/azure/cognitiveservices/account#az_cognitiveservices_account_list_kinds) komutuyla bulabilirsiniz:
 
 ```azurecli-interactive
 az cognitiveservices account list-kinds
@@ -132,7 +132,7 @@ az cognitiveservices account list-kinds
 
 ### <a name="add-a-new-resource-to-your-resource-group"></a>Kaynak grubunuza yeni bir kaynak ekleyin
 
-Yeni bir bilişsel hizmetler kaynağı oluşturup abone olmak için [az biliveservices hesabı oluştur](/cli/azure/cognitiveservices/account#az-cognitiveservices-account-create) komutunu kullanın. Bu komut, daha önce oluşturulan kaynak grubuna yeni bir faturalanabilir kaynak ekler. Yeni kaynağınızı oluştururken, kullanmak istediğiniz hizmetin "tür" değerini, fiyatlandırma katmanını (veya SKU 'su) ve bir Azure konumunu bilmeniz gerekir:
+Yeni bir bilişsel hizmetler kaynağı oluşturup abone olmak için [az biliveservices hesabı oluştur](/cli/azure/cognitiveservices/account#az_cognitiveservices_account_create) komutunu kullanın. Bu komut, daha önce oluşturulan kaynak grubuna yeni bir faturalanabilir kaynak ekler. Yeni kaynağınızı oluştururken, kullanmak istediğiniz hizmetin "tür" değerini, fiyatlandırma katmanını (veya SKU 'su) ve bir Azure konumunu bilmeniz gerekir:
 
 Anomali algılayıcısı için aşağıdaki komutla adlandırılmış bir F0 (ücretsiz) kaynağı oluşturabilirsiniz `anomaly-detector-resource` .
 
@@ -150,13 +150,13 @@ az cognitiveservices account create \
 
 ## <a name="get-the-keys-for-your-resource"></a>Kaynağınızın anahtarlarını alın
 
-Command-Line arabirimi (CLı) yerel yüklemenizde oturum açmak için [az Login](/cli/azure/reference-index#az-login) komutunu kullanın.
+Command-Line arabirimi (CLı) yerel yüklemenizde oturum açmak için [az Login](/cli/azure/reference-index#az_login) komutunu kullanın.
 
 ```azurecli-interactive
 az login
 ```
 
-Bilişsel hizmet kaynağınızın anahtarlarını almak için [az biliveservices hesap anahtarları listesi](/cli/azure/cognitiveservices/account/keys#az-cognitiveservices-account-keys-list) komutunu kullanın.
+Bilişsel hizmet kaynağınızın anahtarlarını almak için [az biliveservices hesap anahtarları listesi](/cli/azure/cognitiveservices/account/keys#az_cognitiveservices_account_keys_list) komutunu kullanın.
 
 ```azurecli-interactive
     az cognitiveservices account keys list \
@@ -175,7 +175,7 @@ Fiyatlandırma katmanları (ve faturalandırılan miktar), kimlik doğrulama bil
 
 ## <a name="get-current-quota-usage-for-your-resource"></a>Kaynağınız için geçerli kota kullanımını alın
 
-Bilişsel hizmet kaynağınızın kullanımını almak için [az biliveservices hesap listesi-kullanım](/cli/azure/cognitiveservices/account#az-cognitiveservices-account-list-usage) komutunu kullanın.
+Bilişsel hizmet kaynağınızın kullanımını almak için [az biliveservices hesap listesi-kullanım](/cli/azure/cognitiveservices/account#az_cognitiveservices_account_list_usage) komutunu kullanın.
 
 ```azurecli-interactive
 az cognitiveservices account list-usage \

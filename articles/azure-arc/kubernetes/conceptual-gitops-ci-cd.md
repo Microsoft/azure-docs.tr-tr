@@ -9,10 +9,10 @@ ms.author: tcare
 description: Bu makalede, Gilar kullanarak bir CI/CD iş akışına kavramsal bir genel bakış sunulmaktadır
 keywords: Gilar, Kubernetes, K8s, Azure, Held, Arc, AKS, Azure Kubernetes hizmeti, kapsayıcılar, CI, CD, Azure DevOps
 ms.openlocfilehash: 47633ed5bec1a07c878983d0e93e03149d8967ba
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105025875"
 ---
 # <a name="cicd-workflow-using-gitops---azure-arc-enabled-kubernetes"></a>Gilar kullanarak CI/CD iş akışı-Azure Arc etkin Kubernetes

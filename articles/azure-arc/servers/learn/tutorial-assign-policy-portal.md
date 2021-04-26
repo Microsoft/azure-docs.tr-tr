@@ -2,13 +2,13 @@
 title: Öğretici-Azure portal yeni ilke ataması
 description: Bu öğreticide, uyumlu olmayan kaynakları belirlemek üzere bir Azure Ilkesi ataması oluşturmak için Azure portal kullanırsınız.
 ms.topic: tutorial
-ms.date: 10/07/2020
-ms.openlocfilehash: 9a07e490525ce532f8f843b30b3b83715e65ce3c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/21/2021
+ms.openlocfilehash: 20cb8125a157a3ce97c88278c99f90936b449b65
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91826587"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831663"
 ---
 # <a name="tutorial-create-a-policy-assignment-to-identify-non-compliant-resources"></a>Öğretici: uyumlu olmayan kaynakları belirlemek için bir ilke ataması oluşturma
 
@@ -95,9 +95,9 @@ Oluşturulan atamayı kaldırmak için şu adımları izleyin:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, bir kapsama ilke tanımı atadınız ve uyumluluk raporunu değerlendirdiniz. İlke tanımı, kapsamdaki tüm kaynakların uyumlu olduğunu doğrular ve hangilerinin olduğunu tanımlar. Artık, Azure Arc etkin sunucuları makinenizde VM'ler için Azure İzleyici izlemeye hazırsınız.
+Bu öğreticide, bir kapsama ilke tanımı atadınız ve uyumluluk raporunu değerlendirdiniz. İlke tanımı, kapsamdaki tüm kaynakların uyumlu olduğunu doğrular ve hangilerinin olduğunu tanımlar. Artık, Azure Arc etkin sunucu makinenizi, [VM öngörülerini](../../../azure-monitor/vm/vminsights-overview.md)etkinleştirerek izlemeye hazırsınız.
 
 Performans, çalışan işlem ve bunların bağımlılıklarındaki bağımlılıklarını izleme ve görüntüleme hakkında bilgi edinmek için öğreticiye geçin:
 
 > [!div class="nextstepaction"]
-> [VM'ler için Azure İzleyici etkinleştir](tutorial-enable-vm-insights.md)
+> [VM öngörülerini etkinleştir](tutorial-enable-vm-insights.md)

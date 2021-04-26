@@ -5,14 +5,14 @@ ms.subservice: ''
 ms.topic: overview
 author: mgoedtel
 ms.author: magoedte
-ms.date: 02/23/2021
+ms.date: 04/09/2021
 ms.custom: references_regions
-ms.openlocfilehash: 899249c98c3ce0fdf061b1e689182f71c120aa13
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f8b4d6965a8a1f046fd2459ce9fe5cce8ea45443
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101729411"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531079"
 ---
 # <a name="whats-new-in-azure-automation"></a>Azure Otomasyonu 'ndaki yenilikler nelerdir?
 
@@ -23,6 +23,70 @@ Azure Otomasyonu, iyileştirmeleri sürekli olarak alır. En son gelişmelerden 
 - Hata düzeltmeleri
 
 Bu sayfa aylık olarak güncelleştirildiğinden düzenli olarak yeniden ziyaret edin.
+
+## <a name="march-2021"></a>Mart 2021
+
+### <a name="new-azure-automation-built-in-policies"></a>Yeni Azure Otomasyonu yerleşik ilkeleri
+
+**Şunu yazın:** Yeni Özellik
+
+Azure Otomasyonu, 5 yeni yerleşik ilke ekledi:
+
+- Otomasyon hesapları, genel ağ erişimini devre dışı bırakmalıdır,
+- Azure Otomasyonu hesapları, bekleyen verileri şifrelemek için müşteri tarafından yönetilen anahtarları kullanmalıdır
+- Genel ağ erişimini devre dışı bırakmak için Azure Otomasyonu hesaplarını yapılandırma
+- Azure Otomasyonu hesaplarında özel uç nokta bağlantılarını yapılandırma
+- Otomasyon hesaplarında özel uç nokta bağlantıları etkinleştirilmelidir.
+
+Daha fazla bilgi için bkz. [ilke başvurusu](./policy-reference.md) makalesi.
+
+### <a name="support-for-automation-and-state-configuration-declared-ga-in-south-india"></a>Güney Hindistan 'de GA tarafından tanımlanan Otomasyon ve durum yapılandırması desteği
+
+**Şunu yazın:** Yeni Özellik
+
+Güney Hindistan 'de Işlem otomasyonu ve durum yapılandırma yeteneklerini kullanın. Daha fazla bilgi için [duyuruyu](https://azure.microsoft.com/updates/azure-automation-in-south-india-region/) okuyun.
+
+### <a name="support-for-automation-and-state-configuration-declared-ga-in-uk-west"></a>UK Batı 'de GA tarafından tanımlanan Otomasyon ve durum yapılandırması desteği
+
+**Şunu yazın:** Yeni Özellik
+
+UK Batı 'de Işlem otomasyonu ve durum yapılandırma yeteneklerini kullanın. Daha fazla bilgi için [duyuruyu](https://azure.microsoft.com/updates/azure-automation-in-uk-west-region/)okuyun.
+
+### <a name="support-for-automation-and-state-configuration-declared-ga-in-uae-central"></a>BAE Orta 'de GA tarafından tanımlanan Otomasyon ve durum yapılandırması desteği
+
+**Şunu yazın:** Yeni Özellik
+
+BAE Orta 'de Işlem otomasyonu ve durum yapılandırma yeteneklerini kullanın. Daha fazla bilgi için [duyuruyu](https://azure.microsoft.com/updates/azure-automation-in-uae-central-region/) okuyun.
+
+### <a name="support-for-automation-and-state-configuration-available-in-australia-central-2--norway-west-and-france-south"></a>Avustralya Orta 2, Norveç Batı ve Fransa Güney 'da sunulan Otomasyon ve durum yapılandırması için destek
+
+**Şunu yazın:** Yeni Özellik
+
+Her bölge için coğrafya seçerek [veri yerleşimi sayfası](https://azure.microsoft.com/global-infrastructure/data-residency/) hakkında daha fazla bilgi görüntüleyin.
+
+### <a name="new-scripts-added-for-installing-hybrid-worker-on-windows-and-linux"></a>Windows ve Linux 'ta karma çalışanı yüklemek için eklenen yeni betikler
+
+**Şunu yazın:** Yeni Özellik
+
+Azure Otomasyonu [GitHub deposuna](https://github.com/azureautomation) , bir Windows veya Linux makinesinde karma runbook çalışanı ayarlamaya yönelik anahtar senaryolarından birini adresleyen iki yeni komut dosyası eklenmiştir. Betik yeni bir VM oluşturur veya var olan bir VM 'yi kullanır, gerekirse bir Log Analytics çalışma alanı oluşturur, Linux için Windows veya Log Analytics Aracısı için Log Analytics Aracısı 'nı yüklerse ve makineyi Log Analytics çalışma alanına kaydeder. Windows betiği, **Create Automation Windows HybridWorker** olarak adlandırılır ve Linux betiği **Automation Linux hybridworker oluşturur**.
+
+### <a name="invoke-runbook-through-an-azure-resource-manager-template-webhook"></a>Azure Resource Manager şablon Web Kancası aracılığıyla runbook 'u çağırma
+
+**Şunu yazın:** Yeni Özellik
+
+Daha fazla ayrıntı için bkz. [ARM şablonundan Web kancası kullanma](./automation-webhooks.md#use-a-webhook-from-an-arm-template) .
+
+### <a name="azure-update-management-now-supports-centos-8x-red-hat-enterprise-linux-server-8x-and-suse-linux-enterprise-server-15"></a>Azure Güncelleştirme Yönetimi artık CentOS 8. x, Red Hat Enterprise Linux Server 8. x ve SUSE Linux Enterprise Server 15 ' i desteklemektedir
+
+**Şunu yazın:** Yeni Özellik
+
+Daha fazla ayrıntı için desteklenen Linux işletim sistemlerinin [tam listesine](./update-management/overview.md#supported-operating-systems) bakın.
+
+### <a name="in-region-data-residency-support-for-brazil-south-and-south-east-asia"></a>Brezilya Güney ve Güney Doğu Asya için bölge içi veri yerleşimi desteği 
+
+**Şunu yazın:** Yeni Özellik
+
+Brezilya Güney ve Güneydoğu Asya dışındaki tüm bölgelerde Azure Otomasyonu verileri, Iş sürekliliği ve olağanüstü durum kurtarma (BCDR) sağlamak için farklı bir bölgede (Azure eşleştirilmiş bölge) depolanır. Yalnızca Brezilya ve Güneydoğu Asya bölgeleri için Azure Otomasyonu verilerini, bu bölgelere yönelik veri fazlalığını karşılamak üzere aynı bölgede depolarız. Daha fazla ayrıntı için bkz. [Azure Otomasyonu 'Nda coğrafi çoğaltma](./automation-managing-data.md#geo-replication-in-azure-automation) .
 
 ## <a name="february-2021"></a>Şubat 2021
 
@@ -62,17 +126,17 @@ Betik, [GitHub deponuzdan](https://github.com/azureautomation/runbooks/blob/mast
 
 **Türüyle.** Yeni Özellik
 
-Karma Runbook Worker özelliği, karma runbook çalışanları üzerinde yalnızca işlem otomasyonu için CentOS 8. x, REHL 8. x ve SLES 15 dağıtımlarını destekler.  Bu değişiklikleri yansıtmak için belgelerdeki güncelleştirmeler için [desteklenen işletim sistemleri](automation-linux-hrw-install.md#supported-linux-operating-systems) bölümüne bakın.
+Karma Runbook Worker özelliği, karma runbook çalışanları üzerinde yalnızca işlem otomasyonu için CentOS 8. x, REHL 8. x ve SLES 15 dağıtımlarını destekler. Bu değişiklikleri yansıtmak için belgelerdeki güncelleştirmeler için [desteklenen işletim sistemleri](automation-linux-hrw-install.md#supported-linux-operating-systems) bölümüne bakın.
 
-### <a name="update-management--change-tracking-availability-in-australia-east-east-asia-west-us--central-us-regions"></a>Avustralya Doğu, Doğu Asya, Batı ABD & Orta ABD bölgelerinde Güncelleştirme Yönetimi & Değişiklik İzleme kullanılabilirliği
+### <a name="update-management-and-change-tracking-availability-in-australia-east-east-asia-west-us-and-central-us-regions"></a>Avustralya Doğu, Doğu Asya, Batı ABD ve Orta ABD bölgelerinde Güncelleştirme Yönetimi ve Değişiklik İzleme kullanılabilirliği
 
 **Şunu yazın:** Yeni Özellik
 
-Otomasyon hesabı, Değişiklik İzleme ve stok ve Güncelleştirme Yönetimi Avustralya Doğu, Doğu Asya, Batı ABD & bölgelerinde kullanılabilir. 
+Otomasyon hesabı, Değişiklik İzleme ve stok ve Güncelleştirme Yönetimi Avustralya Doğu, Doğu Asya, Batı ABD ve Orta ABD bölgelerinde kullanılabilir. 
 
 ### <a name="introduced-public-preview-of-python-3-runbooks-in-us-government-cloud"></a>ABD kamu bulutunda Python 3 runbook 'larının genel önizlemesi kullanıma sunuldu
 
-**Şunu yazın:** Yeni özellik Azure Otomasyonu, ABD kamu bulut bölgelerinde Python 3 bulutu ve hibrit runbook yürütmesi için genel önizleme desteği sunuyor.  Daha fazla bilgi için [duyurusuna](https://azure.microsoft.com/updates/azure-automation-python-3-public-preview/)bakın.
+**Şunu yazın:** Yeni özellik Azure Otomasyonu, ABD kamu bulut bölgelerinde Python 3 bulutu ve hibrit runbook yürütmesi için genel önizleme desteği sunuyor. Daha fazla bilgi için [duyurusuna](https://azure.microsoft.com/updates/azure-automation-python-3-public-preview/)bakın.
 
 ### <a name="azure-automation-runbooks-moved-from-technet-script-center-to-github"></a>Azure Otomasyonu runbook 'ları TechNet Betik merkezinden GitHub 'a taşındı
 
@@ -116,7 +180,7 @@ Oracle Linux 6 ve 7 makineyi Automation durum yapılandırması ile yönetin. Bu
 
 **Şunu yazın:** Yeni Özellik
 
-Azure Otomasyonu artık Azure genel bulutundaki tüm bölgelerde genel önizlemede, karma runbook yürütmesi & Python 3 bulutunu desteklemektedir. Bkz. [Duyuru] ( https://azure.microsoft.com/updates/azure-automation-python-3-public-preview/) daha fazla ayrıntı için).
+Azure Otomasyonu artık Azure genel bulutundaki tüm bölgelerde genel önizlemede Python 3 bulutunu ve karma runbook yürütmesini desteklemektedir. Bkz. [Duyuru] ( https://azure.microsoft.com/updates/azure-automation-python-3-public-preview/) daha fazla ayrıntı için).
 
 ## <a name="november-2020"></a>Kasım 2020
 
@@ -222,11 +286,11 @@ Azure Otomasyonu bölge eşlemesi, Çin Doğu 2 bölgesindeki Güncelleştirme Y
 
 Azure Otomasyonu DNS kayıtları, özel bağlantıları destekleyecek şekilde güncelleştirilmiştir. Daha fazla bilgi için [duyuruyu](https://azure.microsoft.com/updates/azure-automation-updateddns-records/)okuyun.
 
-### <a name="added-capability-to-keep-automation-runbooks--dsc-scripts-encrypted-by-default"></a>Automation runbook 'larını varsayılan olarak şifrelenen & DSC betiklerini tutma özelliği eklendi
+### <a name="added-capability-to-keep-automation-runbooks-and-dsc-scripts-encrypted-by-default"></a>Automation runbook 'ların ve DSC betikleri varsayılan olarak şifrelenmiş olarak kalsın özelliği eklendi
 
 **Şunu yazın:** Yeni Özellik
 
-Varlıkların güvenliğini artırmanın yanı sıra, Azure Otomasyonu güvenliğini artırmak için Runbook 'ların & DSC betikleri de şifrelenir.
+Varlıkların güvenliğini artırmanın yanı sıra, runbook 'lar ve DSC betikleri de Azure Otomasyonu güvenliğini geliştirmek için şifrelenir.
 
 ## <a name="april-2020"></a>Nisan 2020
 
@@ -250,7 +314,7 @@ Azure Otomasyonu karma Runbook Worker, Azure Kamu 'da, etki düzeyi 5 iş yükle
 
 **Şunu yazın:** Yeni Özellik
 
-Hizmet etiketlerinin Otomasyon desteği, bir senaryo alt kümesi için Otomasyon Hizmeti trafiğine izin verir veya bu trafiğe izin vermez. Daha fazla bilgi edinmek için [belgelerine](automation-hybrid-runbook-worker.md#service-tags)bakın.
+Hizmet etiketlerinin Otomasyon desteği, bir senaryo alt kümesi için Otomasyon Hizmeti trafiğine izin verir veya reddeder. Daha fazla bilgi edinmek için [belgelerine](automation-hybrid-runbook-worker.md#service-tags)bakın.
 
 ### <a name="enable-tls-12-support-for-azure-automation-service"></a>Azure Otomasyonu hizmeti için TLS 1,2 desteğini etkinleştir
 

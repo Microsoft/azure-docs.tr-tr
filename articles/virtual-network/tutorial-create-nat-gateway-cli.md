@@ -8,13 +8,13 @@ ms.service: virtual-network
 ms.subservice: nat
 ms.topic: tutorial
 ms.date: 03/10/2021
-ms.custom: template-tutorial
-ms.openlocfilehash: 5dd431a5a7377c409be0794511c5f402d1c5a3a9
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.custom: template-tutorial, devx-track-azurecli
+ms.openlocfilehash: 60436b8d4a0f338f4ece59ad4cd11c14c9e4c352
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102663393"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762650"
 ---
 # <a name="tutorial-create-a-nat-gateway-using-the-azure-cli"></a>Öğretici: Azure CLı kullanarak bir NAT ağ geçidi oluşturma
 
@@ -92,7 +92,7 @@ Myresourcegroup kaynak grubunda **mysubnet** [az Network VNET Create](/cli/azure
 
 Sanal makineye erişmek için **Mybastionhost** adlı bir Azure savunma ana bilgisayarı oluşturun. 
 
-Bir Azure savunma alt ağı oluşturmak için [az Network VNET subnet Create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create) kullanın.
+Bir Azure savunma alt ağı oluşturmak için [az Network VNET subnet Create](/cli/azure/network/vnet/subnet#az_network_vnet_subnet_create) kullanın.
 
 ```azurecli-interactive
 az network vnet subnet create \
@@ -111,7 +111,7 @@ az network public-ip create \
     --sku Standard
 ```
 
-Savunma konağını oluşturmak için [az Network tasyon oluştur](/cli/azure/network/bastion#az-network-bastion-create) seçeneğini kullanın. 
+Savunma konağını oluşturmak için [az Network tasyon oluştur](/cli/azure/network/bastion#az_network_bastion_create) seçeneğini kullanın. 
 
 ```azurecli-interactive
 az network bastion create \
@@ -141,7 +141,7 @@ Internet hedeflerine giden tüm trafik artık NAT ağ geçidini kullanıyor.  UD
 
 Bu bölümde, giden bağlantının genel IP adresini doğrulamak üzere NAT ağ geçidini test etmek için bir sanal makine oluşturacaksınız.
 
-[Az VM Create](/cli/azure/vm#az-vm-create)ile sanal makineyi oluşturun.
+[Az VM Create](/cli/azure/vm#az_vm_create)ile sanal makineyi oluşturun.
 
 ```azurecli-interactive
 az vm create \

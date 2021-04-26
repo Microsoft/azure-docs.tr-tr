@@ -6,10 +6,10 @@ ms.topic: conceptual
 ms.date: 05/20/2020
 ms.custom: contperf-fy21q1
 ms.openlocfilehash: 4e23c5977b2492d2ea8a7a8cc050c77c512c3e16
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104868384"
 ---
 # <a name="memory-usage-optimization-for-apache-spark"></a>Apache Spark için bellek kullanımı iyileştirmesi

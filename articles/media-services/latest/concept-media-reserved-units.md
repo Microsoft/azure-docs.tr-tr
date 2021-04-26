@@ -13,12 +13,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 09/30/2020
 ms.author: inhenkel
-ms.openlocfilehash: e0cfc47b546c31e6b93d224e64de20b79baacfd9
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 4b3a06d2d441c918c4c109d9dc624ebfa1cd4c97
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98891306"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106120835"
 ---
 # <a name="media-reserved-units"></a>Medya ayrılmış birimleri
 
@@ -52,8 +52,8 @@ Aşağıdaki tablo, farklı kodlama hızları arasından seçim yaparken bir kar
 
 ## <a name="next-step"></a>Sonraki adım
 CLı ile medya [ayrılmış birimlerini ölçeklendirme](media-reserved-units-cli-how-to.md) 
- [Videoları analiz etme](analyze-videos-tutorial-with-api.md)
+ [Videoları analiz etme](analyze-videos-tutorial.md)
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-* [Kotalar ve sınırlar](limits-quotas-constraints.md)
+* [Kotalar ve sınırlar](limits-quotas-constraints-reference.md)

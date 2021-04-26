@@ -4,10 +4,10 @@ description: ReliableConcurrentQueue, paralel sıraya ve sıralara izin veren y�
 ms.topic: conceptual
 ms.date: 5/1/2017
 ms.openlocfilehash: d6852982621d3efd3f4a8597a2959fceb13abd12
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98784300"
 ---
 # <a name="introduction-to-reliableconcurrentqueue-in-azure-service-fabric"></a>Azure Service Fabric ReliableConcurrentQueue 'a giriş

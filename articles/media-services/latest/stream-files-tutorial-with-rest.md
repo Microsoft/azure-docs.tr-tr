@@ -12,18 +12,18 @@ ms.topic: tutorial
 ms.custom: mvc
 ms.date: 03/17/2021
 ms.author: inhenkel
-ms.openlocfilehash: c8f76c74c951de77d5d5c213be3698ec2b175ead
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 92f89bafe1b96b575d12e8a09289a05c2379d837
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104596787"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280029"
 ---
 # <a name="tutorial-encode-a-remote-file-based-on-url-and-stream-the-video---rest"></a>Öğretici: Uzak dosya tabanlı URL kodlama ve video akışı yapma - REST
 
 [!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
-Azure Media Services, medya dosyalarınızı çok çeşitli tarayıcılarda ve cihazlarda yürütülebilecek biçimlere kodlamanızı sağlar. Örneğin, içeriğinizi Apple'ın HLS veya MPEG DASH biçimlerinde akışla göndermek isteyebilirsiniz. Akışla göndermeden önce yüksek kaliteli dijital medya dosyanızı kodlamanız gerekir. Kodlama yönergeleri için bkz. [Kodlama kavramı](encoding-concept.md).
+Azure Media Services, medya dosyalarınızı çok çeşitli tarayıcılarda ve cihazlarda yürütülebilecek biçimlere kodlamanızı sağlar. Örneğin, içeriğinizi Apple'ın HLS veya MPEG DASH biçimlerinde akışla göndermek isteyebilirsiniz. Akışla göndermeden önce yüksek kaliteli dijital medya dosyanızı kodlamanız gerekir. Kodlama yönergeleri için bkz. [Kodlama kavramı](encode-concept.md).
 
 Bu öğreticide, bir URL 'ye göre bir dosyayı kodlama ve REST kullanarak Azure Media Services videoyu akışa alma gösterilmektedir. 
 
@@ -44,7 +44,7 @@ Bu öğretici şunların nasıl yapıldığını gösterir:
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- [Media Services hesabı oluşturun](./create-account-howto.md).
+- [Media Services hesabı oluşturun](./account-create-how-to.md).
 
     Kaynak grubu adı ve Media Services hesap adı için kullandığınız değerleri anımsadığınızdan emin olun
 
@@ -101,7 +101,7 @@ Bu bölümde, dosyanızı akışla aktarabilmeniz için kodlama ve URL oluşturm
 1. Akış uç noktası Başlatma
 2. Çıktı varlığı oluşturma
 3. Dönüşüm oluşturma
-4. Iş oluşturma
+4. İş Oluşturma
 5. Akış Bulucu oluşturma
 6. Akış Konumlandırıcı 'nın yollarını Listele
 
@@ -127,7 +127,7 @@ Bu bölümde, dosyanızı akışla aktarabilmeniz için kodlama ve URL oluşturm
 
 ### <a name="start-a-streaming-endpoint"></a>Akış uç noktası Başlatma
 
-Akışı etkinleştirmek için öncelikle videoyu akışını istediğiniz [akış uç noktasını](./streaming-endpoint-concept.md) başlatmanız gerekir.
+Akışı etkinleştirmek için öncelikle videoyu akışını istediğiniz [akış uç noktasını](./stream-streaming-endpoint-concept.md) başlatmanız gerekir.
 
 > [!NOTE]
 > Yalnızca akış uç noktanız çalışır durumdaysa faturalandırılırsınız.
@@ -184,9 +184,9 @@ Akışı etkinleştirmek için öncelikle videoyu akışını istediğiniz [akı
 
 ### <a name="create-a-transform"></a>Dönüşüm oluşturma
 
-Media Services’te içerik kodlarken veya işlerken, kodlama ayarlarını bir tarif olarak ayarlamak yaygın bir modeldir. Daha sonra bu tarifi bir videoya uygulamak üzere bir **İş** gönderirsiniz. Her yeni video için yeni işler göndererek, bu tarifi kitaplığınızdaki tüm videolarınıza uygulayacaksanız. Media Services içinde tarif, **Dönüşüm** olarak adlandırılır. Daha fazla bilgi için [Dönüşümler ve İşler](./transforms-jobs-concept.md) konusuna bakın. Bu öğreticide açıklanan örnek, videoyu çeşitli iOS ve Android cihazlarına akışla aktarmak için kodlayan bir tarifi tanımlar. 
+Media Services’te içerik kodlarken veya işlerken, kodlama ayarlarını bir tarif olarak ayarlamak yaygın bir modeldir. Daha sonra bu tarifi bir videoya uygulamak üzere bir **İş** gönderirsiniz. Her yeni video için yeni işler göndererek, bu tarifi kitaplığınızdaki tüm videolarınıza uygulayacaksanız. Media Services içinde tarif, **Dönüşüm** olarak adlandırılır. Daha fazla bilgi için [Dönüşümler ve İşler](./transform-jobs-concept.md) konusuna bakın. Bu öğreticide açıklanan örnek, videoyu çeşitli iOS ve Android cihazlarına akışla aktarmak için kodlayan bir tarifi tanımlar. 
 
-Yeni bir [Dönüşüm](/rest/api/media/transforms) örneği oluştururken çıktı olarak neyi üretmesi istediğinizi belirtmeniz gerekir. Gerekli parametre bir **TransformOutput** nesnesidir. Her **TransformOutput** bir **Ön ayar** içerir. **Ön ayar**, video ve/veya ses işleme işlemlerinin istenen **TransformOutput** nesnesini oluşturmak üzere kullanılacak adım adım yönergelerini açıklar. Bu makalede açıklanan örnek, **AdaptiveStreaming** adlı yerleşik bir Ön Ayar kullanır. Ön Ayar, giriş çözünürlüğü ve bit hızını temel alarak, giriş videosunu otomatik olarak oluşturulan bir bit hızı basamağına (bit hızı-çözünürlük çiftleri) kodlar ve her bir bit hızı-çözünürlük çiftine karşılık gelen H.264 video ve AAC sesi ile ISO MP4 dosyaları üretir. Bu Ön Ayar hakkında bilgi için bkz. [otomatik oluşturulan bit hızı basamağı](autogen-bitrate-ladder.md).
+Yeni bir [Dönüşüm](/rest/api/media/transforms) örneği oluştururken çıktı olarak neyi üretmesi istediğinizi belirtmeniz gerekir. Gerekli parametre bir **TransformOutput** nesnesidir. Her **TransformOutput** bir **Ön ayar** içerir. **Ön ayar**, video ve/veya ses işleme işlemlerinin istenen **TransformOutput** nesnesini oluşturmak üzere kullanılacak adım adım yönergelerini açıklar. Bu makalede açıklanan örnek, **AdaptiveStreaming** adlı yerleşik bir Ön Ayar kullanır. Ön Ayar, giriş çözünürlüğü ve bit hızını temel alarak, giriş videosunu otomatik olarak oluşturulan bir bit hızı basamağına (bit hızı-çözünürlük çiftleri) kodlar ve her bir bit hızı-çözünürlük çiftine karşılık gelen H.264 video ve AAC sesi ile ISO MP4 dosyaları üretir. Bu Ön Ayar hakkında bilgi için bkz. [otomatik oluşturulan bit hızı basamağı](encode-autogen-bitrate-ladder.md).
 
 Yerleşik bir EncoderNamedPreset ön ayarını veya özel ön ayarları kullanabilirsiniz. 
 
@@ -413,4 +413,4 @@ Soru sormak, geri bildirimde bulunmak ve Media Services hakkında güncelleştir
 Videonuzu karşıya yükleme, kodlama ve akışla aktarma hakkında bilgi edindiğinize göre aşağıdaki makaleye bakabilirsiniz: 
 
 > [!div class="nextstepaction"]
-> [Videoları analiz etme](analyze-videos-tutorial-with-api.md)
+> [Videoları analiz etme](analyze-videos-tutorial.md)

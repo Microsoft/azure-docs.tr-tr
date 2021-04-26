@@ -12,12 +12,12 @@ ms.date: 09/01/2020
 ms.author: trbye
 ms.custom: cog-serv-seo-aug-2020
 keywords: konuşmayı metne dönüştürme, konuşmayı metne dönüştürme
-ms.openlocfilehash: 5e593202a8cd68dfc4a92f991d573b4b06051b36
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3450d39729096bfc3077f51e2069f8f102e571a5
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102434326"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449401"
 ---
 # <a name="what-is-speech-to-text"></a>Konuşmayı metne dönüştürme nedir?
 
@@ -26,7 +26,12 @@ Konuşma tanıma olarak da bilinen konuşmayı metne dönüştürme, ses akışl
 
 Konuşmadan metne hizmet varsayılan olarak evrensel dil modelini kullanmaktır. Bu model, Microsoft 'a ait veriler kullanılarak eğitildi ve buluta dağıtıldı. Konuşma ve dikte senaryoları için idealdir. Benzersiz bir ortamda tanıma ve döküm için konuşmayı metne dönüştürme özelliğini kullanırken özel akustik, dil ve telaffuz modeller oluşturup eğitebilirsiniz. Özelleştirme, çevresel gürültü veya sektöre özgü sözlük adreslemeye yardımcı olur.
 
-Giriş olarak ek başvuru metniyle birlikte, konuşmadan metne hizmet, konuşma söylenişini değerlendirmek ve konuşmaların doğruluğu ve akıcı olması ile konuşmacıya geri bildirimde bulunmak için [de sunar.](rest-speech-to-text.md#pronunciation-assessment-parameters) Telaffuz değerlendirmesi sayesinde, konuşma, anında geri bildirim alabilir ve telaffuz hale gelecek ve güvenle sunabilmeleri için söylenişlerini geliştirebilirler. Eğitimciler, birden çok konuşmacıdaki söylenişi gerçek zamanlı olarak değerlendirmek için özelliğini kullanabilir. Özelliği şu anda ABD Ingilizcesi 'ni destekliyor ve uzmanlar tarafından gerçekleştirilen konuşma değerlendirmelerinden yüksek oranda.
+Bu belge aşağıdaki makale türlerini içerir:
+
+* **Hızlı** başlangıçlarda, hizmette istek yapma konusunda size kılavuzluk eden başlangıç yönergeleri bulunur.
+* **Nasıl yapılır kılavuzlarında** , hizmetin daha belirli veya özelleştirilmiş yollarla kullanılmasına ilişkin yönergeler bulunur.
+* **Kavramlar** , hizmet işlevselliği ve özelliklerinin ayrıntılı açıklamalarını sağlar.
+* **Öğreticiler** daha fazla iş çözümlerinde hizmeti bir bileşen olarak nasıl kullanacağınızı gösteren kılavuzlardır.
 
 > [!NOTE]
 > Bing Konuşma, 15 Ekim 2019 ' de kullanımdan çıkarıldı. Uygulamalarınız, araçlarınız veya ürünleriniz Bing Konuşma API 'Leri kullanıyorsa, konuşma hizmetine geçiş yapmanıza yardımcı olacak kılavuzlar oluşturduk.

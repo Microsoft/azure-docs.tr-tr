@@ -8,15 +8,15 @@ ms.subservice: core
 ms.topic: troubleshooting
 ms.custom: troubleshooting
 ms.reviewer: larryfr, vaidyas, laobri, tracych
-ms.author: trmccorm
-author: tmccrmck
+ms.author: pansav
+author: psavdekar
 ms.date: 09/23/2020
-ms.openlocfilehash: b5511c8ecc33238e0409b5ee4c1c7a11adddeac5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 619123cc2723fcf8e4bd80410c6b098b113d61c6
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102522164"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106286326"
 ---
 # <a name="troubleshooting-the-parallelrunstep"></a>ParallelRunStep sorunlarını giderme
 
@@ -96,6 +96,9 @@ file_path = os.path.join(script_dir, "<file_name>")
 - `mini_batch_size`: Tek bir çağrıya geçirilen mini toplu iş boyutu `run()` . (isteğe bağlı; varsayılan değer `10` `FileDataset` ve `1MB` için dosyalarıdır `TabularDataset` .)
     - İçin `FileDataset` , en az değeri olan dosya sayısıdır `1` . Birden çok dosyayı tek bir mini toplu işte birleştirebilirsiniz.
     - İçin `TabularDataset` , verilerin boyutudur. Örnek değerler şunlardır,, `1024` `1024KB` `10MB` ve `1GB` . Önerilen değer `1MB` . Mini toplu iş, `TabularDataset` hiçbir zamanı çapraz dosya sınırlarına sahip olmayacaktır. Örneğin, çeşitli boyutlarda. csv dosyalarınız varsa en küçük dosya 100 KB 'tır ve en büyük değer 10 MB 'tır. Ayarlarsanız `mini_batch_size = 1MB` , boyutu 1 MB 'tan küçük olan dosyalar bir mini toplu işlem olarak kabul edilir. Boyutu 1 MB 'tan büyük olan dosyalar birden çok mini toplu iş içine bölünür.
+        > [!NOTE]
+        > SQL tarafından desteklenen Tabulardataset 'ler bölümlenemez. 
+
 - `error_threshold`: `TabularDataset` `FileDataset` İşlem sırasında yok sayılacak olması gereken için kayıt hatalarının ve dosya hatalarının sayısı. Tüm girdinin hata sayısı bu değerin üzerine gittiğinde, iş iptal edilir. Hata eşiği, yönteme gönderilen tek bir mini toplu iş için değil, tüm giriş içindir `run()` . Aralık `[-1, int.max]` . `-1`Bölüm, işlem sırasında tüm hataların yoksayıyor olduğunu gösterir.
 - `output_action`: Aşağıdaki değerlerden biri çıktının nasıl düzenleneceğini gösterir:
     - `summary_only`: Kullanıcı betiği çıktıyı depolayacaktır. `ParallelRunStep` yalnızca hata eşiği hesaplaması için çıktıyı kullanır.
@@ -110,7 +113,7 @@ file_path = os.path.join(script_dir, "<file_name>")
 - `run_invocation_timeout`: `run()` Saniye cinsinden Yöntem çağırma zaman aşımı. (isteğe bağlı; varsayılan değer `60` )
 - `run_max_try`: `run()` Bir mini toplu iş için deneme sayısı üst sınırı. Bir `run()` özel durum oluşursa bir hata oluşur veya ulaşıldığında hiçbir şey döndürülmez `run_invocation_timeout` (isteğe bağlı; varsayılan değer `3` ). 
 
-İşlem hattı çalıştırmasını yeniden gönderdiğinizde,,,,, `mini_batch_size` `node_count` ve olarak belirtebilirsiniz, `process_count_per_node` `logging_level` `run_invocation_timeout` `run_max_try` `PipelineParameter` Bu sayede parametre değerleri üzerinde ince ayar yapabilirsiniz. Bu örnekte, `PipelineParameter` ve için kullanırsınız `mini_batch_size` `Process_count_per_node` ve daha sonra bir çalıştırmayı yeniden gönderdiğinizde bu değerleri değiştirirsiniz. 
+İşlem hattı çalıştırmasını yeniden gönderdiğinizde,,,,, `mini_batch_size` `node_count` ve olarak belirtebilirsiniz, `process_count_per_node` `logging_level` `run_invocation_timeout` `run_max_try` `PipelineParameter` Bu sayede parametre değerleri üzerinde ince ayar yapabilirsiniz. Bu örnekte, `PipelineParameter` ve için kullanırsınız `mini_batch_size` `Process_count_per_node` ve başka bir çalışmayı yeniden gönderdiğinizde bu değerleri değiştirirsiniz. 
 
 ### <a name="parameters-for-creating-the-parallelrunstep"></a>ParallelRunStep oluşturma parametreleri
 
@@ -151,7 +154,7 @@ Giriş betiğinin EntryScript yardımcısını ve Print deyimlerini kullanarak o
 
 - `~/logs/user/entry_script_log/<ip_address>/<process_name>.log.txt`: Bu dosyalar, EntryScript Yardımcısı kullanılarak entry_script yazılan günlüklerdir.
 
-- `~/logs/user/stdout/<ip_address>/<process_name>.stdout.txt`: Bu dosyalar, entry_script stdout (ör. Print deyimidir) günlüklerinden alınan günlüklerdir.
+- `~/logs/user/stdout/<ip_address>/<process_name>.stdout.txt`: Bu dosyalar, entry_script stdout 'daki günlüklerdir (örneğin, PRINT deyimidir).
 
 - `~/logs/user/stderr/<ip_address>/<process_name>.stderr.txt`: Bu dosyalar, entry_script stderr 'ten alınan günlüklerdir.
 
@@ -212,10 +215,11 @@ def run(mini_batch):
 
 Kullanıcı, ParalleRunStep side_inputs parametresi kullanarak başvuru verilerini betiğe geçirebilir. Side_inputs olarak belirtilen tüm veri kümeleri her çalışan düğümüne bağlanır. Kullanıcı, bağımsız değişkeni geçirerek bağlama konumunu alabilir.
 
-Başvuru verilerini içeren bir [veri kümesi](/python/api/azureml-core/azureml.core.dataset.dataset) oluşturun ve çalışma alanınıza kaydedin. Bu `side_inputs` parametreye geçirin `ParallelRunStep` . Ayrıca, `arguments` bağlı yoluna kolayca erişmek için bölümüne yolunu ekleyebilirsiniz:
+Başvuru verilerini içeren bir [veri kümesi](/python/api/azureml-core/azureml.core.dataset.dataset) oluşturun, bir yerel bağlama yolu belirtin ve çalışma alanınıza kaydedin. Bu `side_inputs` parametreye geçirin `ParallelRunStep` . Ayrıca, `arguments` bağlı yoluna kolayca erişmek için bölümüne yolunu ekleyebilirsiniz:
 
 ```python
-label_config = label_ds.as_named_input("labels_input")
+local_path = "/tmp/{}".format(str(uuid.uuid4()))
+label_config = label_ds.as_named_input("labels_input").as_mount(local_path)
 batch_score_step = ParallelRunStep(
     name=parallel_step_name,
     inputs=[input_images.as_named_input("input_images")],

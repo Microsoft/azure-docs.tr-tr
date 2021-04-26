@@ -9,12 +9,12 @@ ms.service: iot-dps
 services: iot-dps
 ms.devlang: csharp
 ms.custom: mvc, devx-track-csharp
-ms.openlocfilehash: f9a14ee6ee3e10b36d64ec11fc23807efe2bfaf2
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 84fe935c1122d3d5c65423341b8760643257f992
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94966573"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868580"
 ---
 # <a name="tutorial-enroll-the-device-to-an-iot-hub-using-the-azure-iot-hub-provisioning-service-client-net"></a>Öğretici: Azure IoT Hub sağlama hizmeti Istemcisini (.NET) kullanarak bir IoT Hub 'ına cihaz kaydetme
 
@@ -32,7 +32,7 @@ Devam etmeden önce, [Azure IoT Hub Cihazı Sağlama Hizmeti’ni kullanarak bir
 * Visual Studio
 
 > [!NOTE]
-> Visual Studio gerekli değildir. [.NET](https://www.microsoft.com/net) yüklemesi yeterlidir ve geliştiriciler Windows veya Linux üzerinde tercih ettikleri düzenleyiciyi kullanabilir.  
+> Visual Studio gerekli değildir. [.NET](https://dotnet.microsoft.com) yüklemesi yeterlidir ve geliştiriciler Windows veya Linux üzerinde tercih ettikleri düzenleyiciyi kullanabilir.  
 
 Bu öğretici, cihaz bilgilerinin sağlama hizmetine eklendiği donanım üretim işlemi sırasındaki veya hemen sonrasındaki dönemin benzetimini yapar. Bu kod genellikle .NET kod çalıştırabilen bir PC veya fabrika cihazı üzerinde çalışır ve cihazlara eklenmemelidir.
 

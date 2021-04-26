@@ -12,12 +12,12 @@ ms.date: 04/24/2020
 ms.author: ryanwi
 ms.custom: aaddev
 ms.reviewer: jmprieur, saeeda, jesakowi, nacanuma
-ms.openlocfilehash: 77a4e7389952b81df13dae929dc1aec664fcc0b7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 930341b60f785c2c618be4ee235225519a08aaa6
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98755640"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530060"
 ---
 # <a name="microsoft-identity-platform-developer-glossary"></a>Microsoft Identity Platform geliştirici sözlüğü
 
@@ -235,7 +235,7 @@ Yeni tanımlara yönelik istekler de dahil olmak üzere bu içeriği iyileştirm
 [AAD-Dev-Guide]:azure-ad-developers-guide.md
 [Graph-Perm-Scopes]: /graph/permissions-reference
 [Graph-App-Resource]: /graph/api/resources/application
-[Graph-Sp-Resource]: /graph/api/resources/serviceprincipal?view=graph-rest-beta&preserve-view=true
+[Graph-Sp-Resource]: /graph/api/resources/serviceprincipal
 [Graph-User-Resource]: /graph/api/resources/user
 [AAD-How-Subscriptions-Assoc]:../fundamentals/active-directory-how-subscriptions-associated-directory.md
 [AAD-How-To-Integrate]: ./active-directory-how-to-integrate.md
@@ -246,7 +246,7 @@ Yeni tanımlara yönelik istekler de dahil olmak üzere bu içeriği iyileştirm
 [AAD-Tokens-Claims]:access-tokens.md
 [AZURE-portal]: https://portal.azure.com
 [AAD-RBAC]: ../../role-based-access-control/role-assignments-portal.md
-[JWT]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32
+[JWT]: https://tools.ietf.org/html/rfc7519
 [Microsoft-Graph]: https://developer.microsoft.com/graph
 [O365-Perm-Ref]: /graph/permissions-reference
 [OAuth2-Access-Token-Scopes]: https://tools.ietf.org/html/rfc6749#section-3.3

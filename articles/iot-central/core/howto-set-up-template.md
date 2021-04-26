@@ -10,12 +10,12 @@ services: iot-central
 ms.custom:
 - contperf-fy21q1
 - device-developer
-ms.openlocfilehash: 22e948a0100f23dbddef8fc138576bb4b9372c77
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9ef4be54f5c6025a09314a04504cff40fc39478d
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100363211"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168170"
 ---
 # <a name="define-a-new-iot-device-type-in-your-azure-iot-central-application"></a>Azure IoT Central uygulamanızda yeni bir cihaz türü tanımlama
 
@@ -59,7 +59,7 @@ Bazı [uygulama şablonları](concepts-app-templates.md) , uygulama şablonunun 
 
 ## <a name="create-a-device-template-from-the-device-catalog"></a>Cihaz kataloğundan cihaz şablonu oluşturma
 
-Bir Oluşturucu olarak, sertifikalı bir cihaz kullanarak çözümünüzü oluşturmaya hızlı bir başlangıç yapabilirsiniz. [Azure IoT cihaz kataloğunda](https://catalog.azureiotsolutions.com/alldevices)listeyi inceleyin. IoT Central, cihaz kataloğunu tümleştirerek sertifikalı cihazlardan herhangi birinden bir cihaz modeli aktarabilirsiniz. IoT Central içinde bu cihazlardan birini bir cihaz şablonu oluşturmak için:
+Bir Oluşturucu olarak, sertifikalı bir cihaz kullanarak çözümünüzü oluşturmaya hızlı bir başlangıç yapabilirsiniz. [Azure IoT cihaz kataloğunda](https://devicecatalog.azure.com)listeyi inceleyin. IoT Central, cihaz kataloğunu tümleştirerek sertifikalı cihazlardan herhangi birinden bir cihaz modeli aktarabilirsiniz. IoT Central içinde bu cihazlardan birini bir cihaz şablonu oluşturmak için:
 
 1. IoT Central uygulamanızda **cihaz şablonları** sayfasına gidin.
 1. **+ Yeni**' yi seçin ve ardından katalogda sertifikalı cihazlardan birini seçin. IoT Central, bu cihaz modelini temel alan bir cihaz şablonu oluşturur.

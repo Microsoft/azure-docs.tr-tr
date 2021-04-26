@@ -6,10 +6,10 @@ ms.author: flborn
 ms.date: 12/11/2019
 ms.topic: conceptual
 ms.openlocfilehash: 1d4ce68bdda5fbc3dfdb7396141289a58dab5bd1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "92204104"
 ---
 # <a name="create-client-side-performance-traces"></a>İstemci tarafı performans izlemeleri oluşturma
@@ -18,7 +18,7 @@ Azure uzaktan Işleme performansının istendiği kadar iyi olmasının pek çok
 
 Bu bölümde, ile ilgili olası istemci tarafı performans sorunlarını belirleme konusu ele alınmaktadır *:::no-loc text="performance traces":::* .
 
-## <a name="getting-started"></a>Başlarken
+## <a name="getting-started"></a>Kullanmaya başlama
 
 Windows :::no-loc text="performance tracing"::: işlevselliğine yeni başladıysanız, bu bölüm en temel hüküm ve uygulamalardan yararlanacaktır.
 

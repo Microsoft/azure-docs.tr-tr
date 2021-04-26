@@ -12,24 +12,24 @@ ms.topic: how-to
 ms.date: 08/31/2020
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: d2ecfb5a58641938062166bcd7c61a7d91764a3f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8a192c3c3accf115b1a1db8e32a56d6d936078be
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101093473"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277668"
 ---
 # <a name="create-a-streaming-locator-and-build-urls"></a>Akış bulucusu ve derleme URL’leri oluşturma
 
 [!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
-Azure Media Services, akış URL 'SI oluşturmak için önce bir [akış Bulucu](streaming-locators-concept.md)oluşturmanız gerekir. Daha sonra [akış uç noktası](/rest/api/media/streamingendpoints) ana bilgisayar adını ve **akış Bulucu** yolunu birleştirebilirsiniz. Bu örnekte, *varsayılan* **akış uç noktası** kullanılır. İlk olarak bir Media Service hesabı oluşturduğunuzda, bu *varsayılan* **akış uç noktası** durdurulmuş durumda olur, bu nedenle akışı başlatmak için **Start** 'ı çağırmanız gerekir.
+Azure Media Services, akış URL 'SI oluşturmak için önce bir [akış Bulucu](stream-streaming-locators-concept.md)oluşturmanız gerekir. Daha sonra [akış uç noktası](/rest/api/media/streamingendpoints) ana bilgisayar adını ve **akış Bulucu** yolunu birleştirebilirsiniz. Bu örnekte, *varsayılan* **akış uç noktası** kullanılır. İlk olarak bir Media Service hesabı oluşturduğunuzda, bu *varsayılan* **akış uç noktası** durdurulmuş durumda olur, bu nedenle akışı başlatmak için **Start** 'ı çağırmanız gerekir.
 
 Bu makalede, bir akış Bulucu oluşturma ve Java ve .NET SDK 'Ları kullanarak akış URL 'SI oluşturma işlemlerinin nasıl yapılacağı gösterilir.
 
 ## <a name="prerequisite"></a>Önkoşul
 
-[Dinamik paketleme](dynamic-packaging-overview.md) önizlemesi
+[Dinamik paketleme](encode-dynamic-packaging-concept.md) önizlemesi
 
 ## <a name="java"></a>Java
 
@@ -165,10 +165,10 @@ Tam kod örneğine bakın: [EncodingWithMESPredefinedPreset](https://github.com/
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-* [.NET ile filtre oluşturma](filters-dynamic-manifest-dotnet-howto.md)
+* [.NET ile filtre oluşturma](filters-dynamic-manifest-dotnet-how-to.md)
 * [REST ile filtre oluşturma](filters-dynamic-manifest-rest-howto.md)
-* [CLı ile filtre oluşturma](filters-dynamic-manifest-cli-howto.md)
+* [CLı ile filtre oluşturma](filters-dynamic-manifest-cli-how-to.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[DRM ile Içeriğinizi koruyun](protect-with-drm.md).
+[DRM ile Içeriğinizi koruyun](drm-protect-with-drm-tutorial.md).

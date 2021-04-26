@@ -2,28 +2,29 @@
 title: include dosyası
 description: include dosyası
 services: azure-communication-services
-author: mikben
-manager: mikben
+author: ddematheu2
+manager: chpalm
 ms.service: azure-communication-services
 ms.subservice: azure-communication-services
 ms.date: 9/1/2020
 ms.topic: include
 ms.custom: include file
-ms.author: mikben
-ms.openlocfilehash: f71f394f190c5de1c3d64d02fd6113817ecda1ea
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.author: dademath
+ms.openlocfilehash: c6e8be5462e0caffec7a1c88dae54f3f818ec323
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105152714"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106498767"
 ---
-[!INCLUDE [Public Preview Notice](../../includes/public-preview-include.md)]
+[!INCLUDE [Public Preview Notice](../../includes/public-preview-include-android-ios.md)]
+
 
 **Android Için Hero örneğini çağıran** Azure Iletişim Hizmetleri grubu, Android SDK çağıran iletişim hizmetlerinin, ses ve video içeren bir grup çağırma deneyimi oluşturmak için nasıl kullanılabileceğini gösterir. Bu örnek hızlı başlangıçta, örneği ayarlamayı ve çalıştırmayı öğreneceksiniz. Bağlam için örneğe genel bir bakış sağlanır.
 
 ## <a name="download-code"></a>Kodu indirin
 
-Bu hızlı başlangıç için [GitHub](https://github.com/Azure-Samples/communication-services-android-calling-hero)'da son kodu bulun.
+[GitHub](https://github.com/Azure-Samples/communication-services-android-calling-hero)'da bu örneğe yönelik projeyi bulun. [Ekiplerin birlikte çalışması](../../concepts/teams-interop.md) ile örnek bir sürümü ayrı bir [dalda](https://github.com/Azure-Samples/communication-services-android-calling-hero/tree/feature/teams_interop)bulunabilir.
 
 ## <a name="overview"></a>Genel Bakış
 

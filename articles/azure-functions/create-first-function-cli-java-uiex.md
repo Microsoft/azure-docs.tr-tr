@@ -5,14 +5,14 @@ ms.date: 11/03/2020
 ms.topic: quickstart
 ms.custom:
 - devx-track-java
-- devx-track-azurecli
+- devx-track-azurepowershell
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 32d91f01fcebec3e1ae0d19b1bff29a71f41c0d1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 910e19137873ed5c34584b3293ebd4248c5fe2f8
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102050435"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831915"
 ---
 # <a name="quickstart-create-a-java-function-in-azure-from-the-command-line"></a>Hızlı başlangıç: komut satırından Azure 'da Java işlevi oluşturma
 
@@ -196,7 +196,7 @@ Windows yerine Linux üzerinde çalışan bir işlev uygulaması oluşturmak iç
     az login
     ```
 
-    [Az Login](/cli/azure/reference-index#az-login) komutu sizi Azure hesabınızda oturum açar.
+    [Az Login](/cli/azure/reference-index#az_login) komutu sizi Azure hesabınızda oturum açar.
 
     # <a name="azure-powershell"></a>[Azure PowerShell](#tab/azure-powershell) 
     ```azurepowershell

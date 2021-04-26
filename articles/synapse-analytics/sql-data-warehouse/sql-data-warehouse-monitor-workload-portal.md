@@ -2,20 +2,20 @@
 title: İş yükünü izleme-Azure portal
 description: Azure portal kullanarak SYNAPSE SQL 'i izleme
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql-dw
 ms.date: 02/04/2020
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: jrasnick
-ms.openlocfilehash: 3fb81ffc24ed6073e5398b14b7f490a0f63df84f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4f4c50588a67e2e69d0975c9f4414242ecf23617
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104585596"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107568276"
 ---
 # <a name="monitor-workload---azure-portal"></a>İş yükünü izleme-Azure portal
 

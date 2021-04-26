@@ -3,19 +3,18 @@ title: Güvenlik duvarının arkasındaki Key Vault erişim-Azure Key Vault | Mi
 description: Anahtar kasasına erişmek için bir güvenlik duvarının arkasındaki Anahtar Kasası istemci uygulamasını etkinleştirmek üzere açılacak bağlantı noktaları, konaklar veya IP adresleri hakkında bilgi edinin.
 services: key-vault
 author: amitbapat
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: how-to
-ms.date: 08/12/2019
+ms.date: 04/15/2021
 ms.author: ambapat
-ms.openlocfilehash: ca5842fb268c20f8ae58eb5f683229c4ae3919f4
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 57a89128ab5223264db43e5d59428dc7e6d23ec9
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93289169"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751643"
 ---
 # <a name="access-azure-key-vault-behind-a-firewall"></a>Güvenlik duvarının ardındayken Azure Anahtar Kasası’na erişme
 

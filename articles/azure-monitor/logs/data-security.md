@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 11/11/2020
-ms.openlocfilehash: 8f193cface177e6be6343f28ef4dc27c2d6c6a7b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f8fa0344a6959025856f002e1de4eb8700c32da5
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102030911"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311320"
 ---
 # <a name="log-analytics-data-security"></a>Log Analytics veri güvenliği
 Bu belge, [Azure Güven Merkezi](https://www.microsoft.com/en-us/trust-center?rtc=1)bilgileri tamamlayacak bir Azure izleyici özelliği olan Log Analytics özgü bilgiler sağlamaya yöneliktir.  
@@ -103,7 +103,7 @@ Log Analytics, tüm Microsoft hizmetlerinin bağlı olduğu bir olay yönetimi i
   * Microsoft Azure hizmetinde çalışan operatörler, müşteri verilerini barındıran hassas sistemlere erişimi çevreleyen ek eğitim yükümlülüklerine sahiptir.
   * Microsoft Güvenlik Yanıt personeli, rolleri için özelleştirilmiş eğitim alıyor
 
-Müşteri verilerinin kaybolması meydana gelirse, her müşteriyi bir gün içinde bilgilendiririz. Ancak, hizmette müşteri veri kaybı hiçbir şekilde gerçekleşmez. 
+Çok nadir olsa da, Microsoft müşteri verilerinin önemli bir zararı durumunda her müşteriyi bir gün içinde bilgilendirir. 
 
 Microsoft 'un güvenlik olaylarına nasıl yanıt verdiği hakkında daha fazla bilgi için bkz. [bulutta Microsoft Azure Güvenlik yanıtı](https://gallery.technet.microsoft.com/Azure-Security-Response-in-dd18c678/file/150826/4/Microsoft%20Azure%20Security%20Response%20in%20the%20cloud.pdf).
 

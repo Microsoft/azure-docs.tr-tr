@@ -9,12 +9,12 @@ ms.subservice: overview
 ms.date: 11/18/2020
 ms.author: saveenr
 ms.reviewer: jrasnick
-ms.openlocfilehash: 828f37030ae567cacbaad25849b7ba24c561c20c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3b4b4e227a0bdfc449c73541dec5d13c1c6697bc
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98132775"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313071"
 ---
 # <a name="azure-synapse-analytics-terminology"></a>Azure SYNAPSE Analytics terminolojisi
 
@@ -34,7 +34,7 @@ Bir çalışma alanı, herhangi bir sayıda **bağlı hizmeti** içerebilir ve b
 
 **SYNAPSE SQL** , SYNAPSE çalışma alanında T-SQL tabanlı analizler yapabilme olanağıdır. SYNAPSE SQL 'in iki tüketim modeli vardır: adanmış ve sunucusuz.  Adanmış model için **ADANMıŞ SQL havuzları** kullanın. Bir çalışma alanı bu havuzlardan herhangi bir sayıda olabilir. Sunucusuz modeli kullanmak için **SUNUCUSUZ SQL havuzlarını** kullanın. Her çalışma alanı bu havuzlardan birine sahiptir.
 
-SYNAPSE Studio içinde **SQL komut dosyaları** OLUŞTURUP çalıştırarak SQL havuzlarıyla çalışabilirsiniz.
+SYNAPSE Studio içinde **SQL betikleri** çalıştırarak SQL havuzlarıyla çalışabilirsiniz.
 
 ## <a name="apache-spark-for-synapse"></a>SYNAPSE için Apache Spark
 

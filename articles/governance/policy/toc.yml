@@ -32,6 +32,8 @@
     - name: İlke atama - ARM şablonu
       displayName: 'assign, compliance, resource manager'
       href: ./assign-policy-template.md
+    - name: İlke atama-Bıcep
+      href: ./assign-policy-bicep.md
     - name: İlke atama - Terraform
       displayName: 'assign, compliance, hcl, provider'
       href: ./assign-policy-terraform.md
@@ -233,7 +235,7 @@
       href: 'https://github.com/azure/azure-policy#known-issues'
 - name: Başvuru
   items:
-    - name: Azure CLI
+    - name: Azure CLI’si
       href: /cli/azure/policy
     - name: Azure PowerShell
       items:

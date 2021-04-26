@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/08/2021
 ms.author: alkohli
 ms.custom: include file
-ms.openlocfilehash: 81d80e7d3ae00c8afe8630634e647e850fe9cc61
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2ab4192d0147f5d51a3314a74c4971dbc50ff646
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102473699"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107800178"
 ---
 > [!IMPORTANT]
-> StorSimple Sanal dizisi (1200 serisi), adım 2022 ' de [yaşam sonuna](https://support.microsoft.com/lifecycle/search?alpha=Azure%20StorSimple%201200%20Series) ulaşacaktır. StorSimple Sanal dizisinin yeni dağıtımlarını düşünüyorsanız, iş yükleriniz için [Azure dosya eşitleme](../articles/storage/files/storage-sync-files-deployment-guide.md) veya [çevrimiçi cihaz Azure Data Box](../articles/databox-online/index.yml) gibi diğer alternatifleri araştırmanızı öneririz.
+> StorSimple Sanal dizisi (1200 serisi), adım 2020 ' de [yaşam sonuna](https://support.microsoft.com/lifecycle/search?alpha=Azure%20StorSimple%201200%20Series) ulaşacaktır. StorSimple Sanal dizisinin yeni dağıtımlarını düşünüyorsanız, iş yükleriniz için [Azure dosya eşitleme](../articles/storage/file-sync/file-sync-deployment-guide.md) veya [çevrimiçi cihaz Azure Data Box](../articles/databox-online/index.yml) gibi diğer alternatifleri araştırmanızı öneririz.

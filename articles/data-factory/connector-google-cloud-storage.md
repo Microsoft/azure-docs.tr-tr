@@ -7,10 +7,10 @@ ms.topic: conceptual
 ms.date: 03/17/2021
 ms.author: jingwang
 ms.openlocfilehash: b8e518ba23c877ee80197ad94a6bc01b23b044a3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104589004"
 ---
 # <a name="copy-data-from-google-cloud-storage-by-using-azure-data-factory"></a>Azure Data Factory kullanarak Google bulut depolamadan veri kopyalama
@@ -49,7 +49,7 @@ Yazmak için Data Factory Kullanıcı arabirimini kullanıyorsanız, ` storage.b
 
 Google Cloud Storage rollerinin ve ilişkili izinlerin tam listesi için bkz. Google Cloud sitesindeki [bulut depolaması Için IAM rolleri](https://cloud.google.com/storage/docs/access-control/iam-roles) .
 
-## <a name="getting-started"></a>Başlarken
+## <a name="getting-started"></a>Kullanmaya başlama
 
 [!INCLUDE [data-factory-v2-connector-get-started](../../includes/data-factory-v2-connector-get-started.md)] 
 

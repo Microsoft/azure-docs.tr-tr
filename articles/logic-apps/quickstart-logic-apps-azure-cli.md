@@ -7,16 +7,16 @@ ms.reviewer: estfan, logicappspm
 ms.topic: quickstart
 ms.custom: mvc, devx-track-azurecli, contperf-fy21q2
 ms.date: 11/23/2020
-ms.openlocfilehash: bc172fd1702addf8f4e34094452a779b09320a4d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: afc39673a30f5c99455696c7a075cb1a6a33ecd1
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97033383"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107875512"
 ---
 # <a name="quickstart-create-and-manage-logic-apps-using-the-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak Logic Apps oluşturma ve yönetme
 
-Bu hızlı başlangıçta, [Azure clı Logic Apps uzantısı](/cli/azure/ext/logic/logic) () kullanılarak mantıksal uygulamalar oluşturma ve yönetme işlemlerinin nasıl yapılacağı gösterilir `az logic` . Komut satırından, bir mantıksal uygulama iş akışı tanımı için JSON dosyasını kullanarak bir mantıksal uygulama oluşturabilirsiniz. Daha sonra `list` , `show` (), ve gibi işlemleri `get` `update` `delete` komut satırından çalıştırarak mantıksal uygulamanızı yönetebilirsiniz.
+Bu hızlı başlangıçta, [Azure clı Logic Apps uzantısı](/cli/azure/logic) () kullanılarak mantıksal uygulamalar oluşturma ve yönetme işlemlerinin nasıl yapılacağı gösterilir `az logic` . Komut satırından, bir mantıksal uygulama iş akışı tanımı için JSON dosyasını kullanarak bir mantıksal uygulama oluşturabilirsiniz. Daha sonra `list` , `show` (), ve gibi işlemleri `get` `update` `delete` komut satırından çalıştırarak mantıksal uygulamanızı yönetebilirsiniz.
 
 > [!WARNING]
 > Azure CLı Logic Apps uzantısı Şu anda *deneysel* ve *müşteri desteği kapsamında değil*. Özellikle uzantıyı üretim ortamlarında kullanmayı seçerseniz, bu CLı uzantısını dikkatle kullanın.
@@ -69,7 +69,7 @@ Mantıksal uygulamanızı oluşturmak veya güncelleştirmek için komutları ç
 
 ## <a name="create-logic-apps-from-cli"></a>CLı 'dan Logic Apps oluşturma
 
-[`az logic workflow create`](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-create)Tanımı için BIR JSON dosyası ile komutunu kullanarak Azure CLI 'dan bir mantıksal uygulama iş akışı oluşturabilirsiniz.
+[`az logic workflow create`](/cli/azure/logic/workflow#az_logic_workflow_create)Tanımı için BIR JSON dosyası ile komutunu kullanarak Azure CLI 'dan bir mantıksal uygulama iş akışı oluşturabilirsiniz.
 
 ```azurecli
 
@@ -86,7 +86,7 @@ az logic workflow create --definition
 
 ```
 
-Komutunuz aşağıdaki [gerekli parametreleri](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-create-required-parameters)içermelidir:
+Komutunuz aşağıdaki [gerekli parametreleri](/cli/azure/logic/workflow#az_logic_workflow_create-required-parameters)içermelidir:
 
 | Parametre | Değer | Açıklama |
 | --------- | ----- | ----------- |
@@ -95,7 +95,7 @@ Komutunuz aşağıdaki [gerekli parametreleri](/cli/azure/ext/logic/logic/workfl
 | Name | `--name -n` | Mantıksal uygulamanızın adı. Ad yalnızca harf, sayı, kısa çizgi ( `-` ), alt çizgi () `_` , parantez ( `()` ) ve nokta () içerebilir `.` . Ad aynı zamanda bölgeler genelinde benzersiz olmalıdır. |
 | Kaynak grubu adı | `--resource-group -g` | Mantıksal uygulamanızı oluşturmak istediğiniz [Azure Kaynak grubu](../azure-resource-manager/management/overview.md) . Mantıksal uygulamanız için henüz bir tane yoksa, başlamadan önce [bir kaynak grubu oluşturun](#example---create-resource-group) . |
 
-Mantıksal uygulamanızın erişim denetimleri, uç noktaları, tümleştirme hesabı, tümleştirme hizmeti ortamı, durum ve kaynak etiketlerinizi yapılandırmak için ek [isteğe bağlı parametreleri](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-create-optional-parameters) de ekleyebilirsiniz.
+Mantıksal uygulamanızın erişim denetimleri, uç noktaları, tümleştirme hesabı, tümleştirme hizmeti ortamı, durum ve kaynak etiketlerinizi yapılandırmak için ek [isteğe bağlı parametreleri](/cli/azure/logic/workflow#az_logic_workflow_create-optional-parameters) de ekleyebilirsiniz.
 
 ### <a name="example---create-logic-app"></a>Örnek-mantıksal uygulama oluşturma
 
@@ -111,9 +111,9 @@ az logic workflow create --resource-group "testResourceGroup" --location "westus
 
 ## <a name="update-logic-apps-from-cli"></a>CLı 'dan mantıksal uygulamaları güncelleştirme
 
-Ayrıca, komutunu kullanarak bir mantıksal uygulamanın iş akışını Azure CLı 'dan da güncelleştirebilirsiniz [`az logic workflow create`](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-create) .
+Ayrıca, komutunu kullanarak bir mantıksal uygulamanın iş akışını Azure CLı 'dan da güncelleştirebilirsiniz [`az logic workflow create`](/cli/azure/logic/workflow#az_logic_workflow_create) .
 
-Komutunuz, [mantıksal uygulama oluştururken](#create-logic-apps-from-cli) [gereken parametreleri](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-create-required-parameters) de içermelidir. Ayrıca, mantıksal uygulama oluştururken aynı [isteğe bağlı parametreleri](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-create-optional-parameters) de ekleyebilirsiniz.
+Komutunuz, [mantıksal uygulama oluştururken](#create-logic-apps-from-cli) [gereken parametreleri](/cli/azure/logic/workflow#az_logic_workflow_create-required-parameters) de içermelidir. Ayrıca, mantıksal uygulama oluştururken aynı [isteğe bağlı parametreleri](/cli/azure/logic/workflow#az_logic_workflow_create-optional-parameters) de ekleyebilirsiniz.
 
 ```azurecli
 
@@ -144,16 +144,16 @@ az logic workflow create --resource-group "testResourceGroup" --location "westus
 
 ## <a name="delete-logic-apps-from-cli"></a>CLı 'dan mantıksal uygulamaları silme
 
-Komutunu kullanarak bir mantıksal uygulamanın iş akışını Azure CLı 'dan silebilirsiniz [`az logic workflow delete`](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-delete) .
+Komutunu kullanarak bir mantıksal uygulamanın iş akışını Azure CLı 'dan silebilirsiniz [`az logic workflow delete`](/cli/azure/logic/workflow#az_logic_workflow_delete) .
 
-Komutunuz aşağıdaki [gerekli parametreleri](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-delete-required-parameters)içermelidir:
+Komutunuz aşağıdaki [gerekli parametreleri](/cli/azure/logic/workflow#az_logic_workflow_delete-required-parameters)içermelidir:
 
 | Parametre | Değer | Açıklama |
 | --------- | ----- | ----------- |
 | Ad | `--name -n` | Mantıksal uygulamanızın adı. |
 | Kaynak grubu adı | `-resource-group -g` | Mantıksal uygulamanızın bulunduğu kaynak grubu. |
 
-Ayrıca onay istemlerini atlamak için [isteğe bağlı bir parametre](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-delete-optional-parameters) ekleyebilirsiniz `--yes -y` .
+Ayrıca onay istemlerini atlamak için [isteğe bağlı bir parametre](/cli/azure/logic/workflow#az_logic_workflow_delete-optional-parameters) ekleyebilirsiniz `--yes -y` .
 
 ```azurecli
 
@@ -187,7 +187,7 @@ Onaylama istemine ile yanıt verdikten sonra `y` mantıksal uygulama silinir.
 
 ## <a name="show-logic-apps-in-cli"></a>CLı 'de Logic Apps 'i göster
 
-Komutunu kullanarak belirli bir mantıksal uygulama iş akışı alabilirsiniz [`az logic workflow show`](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-show) .
+Komutunu kullanarak belirli bir mantıksal uygulama iş akışı alabilirsiniz [`az logic workflow show`](/cli/azure/logic/workflow#az_logic_workflow_show) .
 
 ```azurecli
 
@@ -196,7 +196,7 @@ az logic workflow show --name
 
 ```
 
-Komutunuz aşağıdaki [gerekli parametreleri](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-show-required-parameters) içermelidir
+Komutunuz aşağıdaki [gerekli parametreleri](/cli/azure/logic/workflow#az_logic_workflow_show-required-parameters) içermelidir
 
 | Parametre | Değer | Açıklama |
 | --------- | ----- | ----------- |
@@ -215,9 +215,9 @@ az logic workflow show --resource-group "testResourceGroup" --name "testLogicApp
 
 ## <a name="list-logic-apps-in-cli"></a>CLı 'da mantıksal uygulamaları listeleyin
 
-Komutunu kullanarak mantıksal uygulamalarınızı aboneliğe göre listeleyebilirsiniz [`az logic workflow list`](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-list) . Bu komut, mantıksal uygulamalarınızın İş akışlarınızın JSON kodunu döndürür.
+Komutunu kullanarak mantıksal uygulamalarınızı aboneliğe göre listeleyebilirsiniz [`az logic workflow list`](/cli/azure/logic/workflow#az_logic_workflow_list) . Bu komut, mantıksal uygulamalarınızın İş akışlarınızın JSON kodunu döndürür.
 
-Sonuçlarınızı aşağıdaki [isteğe bağlı parametrelere](/cli/azure/ext/logic/logic/workflow#ext-logic-az-logic-workflow-list-optional-parameters)göre filtreleyebilirsiniz:
+Sonuçlarınızı aşağıdaki [isteğe bağlı parametrelere](/cli/azure/logic/workflow#az_logic_workflow_list-optional-parameters)göre filtreleyebilirsiniz:
 
 | Parametre | Değer | Açıklama |
 | --------- | ----- | ----------- |

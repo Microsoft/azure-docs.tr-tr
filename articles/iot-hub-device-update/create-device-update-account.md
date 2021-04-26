@@ -6,12 +6,12 @@ ms.author: vimeht
 ms.date: 2/11/2021
 ms.topic: how-to
 ms.service: iot-hub-device-update
-ms.openlocfilehash: 5956b7b74d27a4f9a2b79ee3950c8ac765610c70
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: d3f7f4e1cdd56675d6084448abc810c9a41992f9
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105558491"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107520148"
 ---
 # <a name="device-update-for-iot-hub-resource-management"></a>IoT Hub Kaynak Yönetimi için Cihaz Güncelleştirmesi
 
@@ -95,6 +95,9 @@ IoT Hub yapılandırmak için
    :::image type="content" source="media/create-device-update-account/instance-configure-selected.png" alt-text="Bir örnek için IoT Hub yapılandırmak üzere kabul etmiş ekran görüntüsü." lightbox="media/create-device-update-account/instance-configure-selected.png":::
 
 3. "Güncelleştir" e tıklayın
+
+   > [!NOTE] 
+   > Ücretsiz bir Azure IoT Hub katmanı kullanıyorsanız, izin verilen ileti yolları sayısı 5 ile sınırlıdır. IoT Hub için cihaz güncelleştirmesinin, beklenen şekilde çalışması için 4 ileti yollarının yapılandırılması gerekir. 
 
 [Yapılandırılan ileti yolları hakkında bilgi edinin.](device-update-resources.md) 
 

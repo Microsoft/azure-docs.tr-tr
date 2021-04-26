@@ -8,12 +8,12 @@ ms.date: 7/23/2020
 ms.topic: how-to
 ms.service: digital-twins
 ms.custom: contperf-fy21q2
-ms.openlocfilehash: 8263e0805f48976222e66922be8c04e0902101d6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 7247aa45ae164cd4f2eb5f210e0ec6ec91a0a25f
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102201847"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107104074"
 ---
 # <a name="set-up-an-azure-digital-twins-instance-and-authentication-portal"></a>Azure dijital TWINS örneği ve kimlik doğrulaması (portal) ayarlama
 
@@ -111,7 +111,7 @@ Artık bir Azure dijital TWINS örneğiniz var ve bunu yönetmek için izinler a
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Azure Digital TWINS CLı komutlarını kullanarak örneğiniz için tek REST API çağrılarını test edin: 
-* [az DT Reference](/cli/azure/ext/azure-iot/dt)
+* [az DT Reference](/cli/azure/dt)
 * [*Nasıl yapılır: Azure dijital TWINS CLı 'sını kullanma*](how-to-use-cli.md)
 
 Ya da bkz. kimlik doğrulama kodu ile bir istemci uygulamasını örneğinize bağlama:

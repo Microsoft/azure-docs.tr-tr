@@ -6,17 +6,17 @@ ms.date: 03/22/2021
 author: trask
 ms.custom: devx-track-java
 ms.author: trstalna
-ms.openlocfilehash: 17979bd548ca0d7b704ebdeb4d060bf35973b319
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 7602392b78f53e5b896e92058836fca60de39d64
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105024158"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448891"
 ---
 # <a name="sampling-overrides-preview---azure-monitor-application-insights-for-java"></a>Örnekleme geçersiz kılmaları (Önizleme)-Java için Azure Izleyici Application Insights
 
 > [!NOTE]
-> Örnekleme geçersiz kılmaları özelliği 3.0.3-BETA sürümünden başlayarak önizlemededir. 2.
+> Örnekleme geçersiz kılma özelliği, 3.0.3 'den başlayarak önizlemededir.
 
 Örnekleme geçersiz kılmaları [Varsayılan örnekleme yüzdesini](./java-standalone-config.md#sampling)geçersiz kılmanızı sağlar, örneğin:
  * Gürültülü durum denetimleri için örnekleme yüzdesini 0 (veya küçük bir değer) olarak ayarlayın.
@@ -81,7 +81,7 @@ Yalnızca eşleşen ilk örnekleme geçersiz kılma kullanılır.
 * Bu, izlem içindeki ilk yayılma ise, [Varsayılan örnekleme yüzdesi](./java-standalone-config.md#sampling) kullanılır.
 * Bu, izlemede ilk Aralık değilse, ana örnekleme kararı kullanılır.
 
-> [!IMPORTANT]
+> [!WARNING]
 > Bir kapsamı toplamayan bir karar verme işlemi yapıldığında, aşağı akış yayılımını karşılayan örnekleme geçersiz kılma işlemleri olsa bile tüm aşağı akış yayılmaları da toplanmaz.
 > Bu davranış, aksi halde kopuk izlemeler nedeniyle, aşağı akış yayılmaları, ancak toplanmayan yayılmalar için ana öğe olarak sonuçlanacağından gereklidir.
 

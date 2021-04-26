@@ -15,10 +15,10 @@ ms.topic: conceptual
 ms.date: 03/22/2021
 ms.author: phjensen
 ms.openlocfilehash: 01fb93dcd0a1d5c1db615c47d7811a0baa863c9b
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105111480"
 ---
 # <a name="release-notes-for-azure-application-consistent-snapshot-tool-preview"></a>Azure uygulaması tutarlı anlık görüntü aracı için sürüm notları (Önizleme)

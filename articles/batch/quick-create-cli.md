@@ -4,12 +4,12 @@ description: Bu hızlı başlangıçta, Batch hesabı oluşturma ve Azure CLı i
 ms.topic: quickstart
 ms.date: 08/13/2020
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 297af47b6280381646e654eaededfe8b71a5d874
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 8d3005233320a7ba0d00f186944a0a8c0c456647
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97106691"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765314"
 ---
 # <a name="quickstart-run-your-first-batch-job-with-the-azure-cli"></a>Hızlı başlangıç: Azure CLI ile ilk Batch işinizi çalıştırma
 
@@ -25,7 +25,7 @@ Azure CLI, komut satırından veya betik içindeki Azure kaynaklarını oluştur
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-[az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır.
+[az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır.
 
 Aşağıdaki örnek, *eastus2* konumunda *quickstartbatch-RG* adlı bir kaynak grubu oluşturur.
 
@@ -37,7 +37,7 @@ az group create \
 
 ## <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
 
-Azure Depolama hesabını Batch hesabınıza bağlayabilirsiniz. Bu hızlı başlangıç için gerekli olmamasına karşın, depolama hesabı uygulamaları dağıtmak ve çoğu gerçek yaşam iş yükleri için giriş ve çıkış verilerini depolamak üzere yararlıdır. Kaynak grubunuzda [az storage account create](/cli/azure/storage/account#az-storage-account-create) komutuyla bir depolama hesabı oluşturun.
+Azure Depolama hesabını Batch hesabınıza bağlayabilirsiniz. Bu hızlı başlangıç için gerekli olmamasına karşın, depolama hesabı uygulamaları dağıtmak ve çoğu gerçek yaşam iş yükleri için giriş ve çıkış verilerini depolamak üzere yararlıdır. Kaynak grubunuzda [az storage account create](/cli/azure/storage/account#az_storage_account_create) komutuyla bir depolama hesabı oluşturun.
 
 ```azurecli-interactive
 az storage account create \
@@ -49,7 +49,7 @@ az storage account create \
 
 ## <a name="create-a-batch-account"></a>Batch hesabı oluşturma
 
-[az batch account create](/cli/azure/batch/account#az-batch-account-create) komutuyla bir Batch hesabı oluşturun. İşlem kaynakları (işlem düğümleri havuzları) ve Batch işleri oluşturmak için bir hesaba sahip olmanız gerekir.
+[az batch account create](/cli/azure/batch/account#az_batch_account_create) komutuyla bir Batch hesabı oluşturun. İşlem kaynakları (işlem düğümleri havuzları) ve Batch işleri oluşturmak için bir hesaba sahip olmanız gerekir.
 
 Aşağıdaki örnek, *Quickstartbatch-RG* içinde *mybatchaccount* adlı bir Batch hesabı oluşturur ve oluşturduğunuz depolama hesabını bağlar.  
 
@@ -61,7 +61,7 @@ az batch account create \
     --location eastus2
 ```
 
-İşlem havuzlarını ve işlerini oluşturmak ve yönetmek için, Batch ile kimlik doğrulaması yapmalısınız. [az batch account login](/cli/azure/batch/account#az-batch-account-login) komutuyla hesapta oturum açın. Oturumunuz açıldıktan sonra, `az batch` komutlarınız bu hesabın bağlamını kullanır.
+İşlem havuzlarını ve işlerini oluşturmak ve yönetmek için, Batch ile kimlik doğrulaması yapmalısınız. [az batch account login](/cli/azure/batch/account#az_batch_account_login) komutuyla hesapta oturum açın. Oturumunuz açıldıktan sonra, `az batch` komutlarınız bu hesabın bağlamını kullanır.
 
 ```azurecli-interactive
 az batch account login \
@@ -72,7 +72,7 @@ az batch account login \
 
 ## <a name="create-a-pool-of-compute-nodes"></a>İşlem düğümleri havuzu oluşturma
 
-Batch hesabınız olduğuna göre, [az batch pool create](/cli/azure/batch/pool#az-batch-pool-create) komutunu kullanarak örnek Linux işlem düğümleri havuzu oluşturun. Aşağıdaki örnekte, Ubuntu 16.04 LTS çalıştıran iki boyutlu *Standard_A1_v2* düğümlere sahip *mypool* adlı bir havuz oluşturur. Önerilen düğüm boyutu, bu hızlı örnek için performans ile maliyetin iyi bir dengesini sunar.
+Batch hesabınız olduğuna göre, [az batch pool create](/cli/azure/batch/pool#az_batch_pool_create) komutunu kullanarak örnek Linux işlem düğümleri havuzu oluşturun. Aşağıdaki örnekte, Ubuntu 16.04 LTS çalıştıran iki boyutlu *Standard_A1_v2* düğümlere sahip *mypool* adlı bir havuz oluşturur. Önerilen düğüm boyutu, bu hızlı örnek için performans ile maliyetin iyi bir dengesini sunar.
  
 ```azurecli-interactive
 az batch pool create \
@@ -82,7 +82,7 @@ az batch pool create \
     --node-agent-sku-id "batch.node.ubuntu 16.04"
 ```
 
-Batch, havuzu hemen oluşturur ancak işlem düğümlerinin ayrılması ve başlatılması birkaç dakika sürer. Bu süre boyunca, havuz `resizing` durumunda olur. Havuzun durumunu görmek için [az batch pool show](/cli/azure/batch/pool#az-batch-pool-show) komutunu çalıştırın. Bu komut, havuzun tüm özelliklerini gösterir. Dilerseniz belirli özellikler için sorgu gönderebilirsiniz. Aşağıdaki komut havuzun ayırma durumunu alır:
+Batch, havuzu hemen oluşturur ancak işlem düğümlerinin ayrılması ve başlatılması birkaç dakika sürer. Bu süre boyunca, havuz `resizing` durumunda olur. Havuzun durumunu görmek için [az batch pool show](/cli/azure/batch/pool#az_batch_pool_show) komutunu çalıştırın. Bu komut, havuzun tüm özelliklerini gösterir. Dilerseniz belirli özellikler için sorgu gönderebilirsiniz. Aşağıdaki komut havuzun ayırma durumunu alır:
 
 ```azurecli-interactive
 az batch pool show --pool-id mypool \
@@ -93,7 +93,7 @@ Havuzun durumu değişirken iş ve görevleri oluşturmak için aşağıdaki ad�
 
 ## <a name="create-a-job"></a>Bir iş oluşturma
 
-Bir havuza sahip olduktan sonra üzerinde çalıştıracak bir iş oluşturun. Batch işi bir veya daha fazla görevin mantıksal grubudur. Bir iş, öncelik gibi görevler arasında ortak olan ayarları ve görevlerin çalıştırılacağı havuzu içerir. [az toplu işlem işi oluşturma](/cli/azure/batch/job#az-batch-job-create) komutunu kullanarak Batch işi oluşturma. Aşağıdaki örnek, *mypool* havuzunda *myjob* adlı işi oluşturur. Başlangıçta iş hiçbir görev içermez.
+Bir havuza sahip olduktan sonra üzerinde çalıştıracak bir iş oluşturun. Batch işi bir veya daha fazla görevin mantıksal grubudur. Bir iş, öncelik gibi görevler arasında ortak olan ayarları ve görevlerin çalıştırılacağı havuzu içerir. [az toplu işlem işi oluşturma](/cli/azure/batch/job#az_batch_job_create) komutunu kullanarak Batch işi oluşturma. Aşağıdaki örnek, *mypool* havuzunda *myjob* adlı işi oluşturur. Başlangıçta iş hiçbir görev içermez.
 
 ```azurecli-interactive
 az batch job create \
@@ -103,7 +103,7 @@ az batch job create \
 
 ## <a name="create-tasks"></a>Görev oluşturma
 
-Şimdi ise [az batch task create](/cli/azure/batch/task#az-batch-task-create) komutunu kullanarak işin içinde çalıştırılacak bazı görevler oluşturun. Bu örnekte, dört türdeş görev oluşturursunuz. Her görev, bir işlem düğümündeki Batch ortam değişkenlerini görüntülemek için bir `command-line` çalıştırır ve 90 saniye bekler. Batch kullandığınızda bu komut satırı, uygulamanızı veya betiğinizi belirttiğiniz yerdir. Batch, işlem düğümlerine uygulama ve betik dağıtmanın birkaç yolunu sağlar.
+Şimdi ise [az batch task create](/cli/azure/batch/task#az_batch_task_create) komutunu kullanarak işin içinde çalıştırılacak bazı görevler oluşturun. Bu örnekte, dört türdeş görev oluşturursunuz. Her görev, bir işlem düğümündeki Batch ortam değişkenlerini görüntülemek için bir `command-line` çalıştırır ve 90 saniye bekler. Batch kullandığınızda bu komut satırı, uygulamanızı veya betiğinizi belirttiğiniz yerdir. Batch, işlem düğümlerine uygulama ve betik dağıtmanın birkaç yolunu sağlar.
 
 Aşağıdaki Bash betiği, 4 paralel görev (*mytask1* ile *mytask4* arasında) oluşturur.
 
@@ -123,7 +123,7 @@ Komut çıktısı her bir görev için ayarları gösterir. Batch, işlem düğ�
 
 Bir görev oluşturduktan sonra Batch, görevi havuzda çalışmak üzere kuyruğa alır. Görevi çalıştıracak bir düğüm kullanılabilir olduğunda, görev çalışır.
 
-Batch görevlerinin durumunu görüntülemek için [az batch task show](/cli/azure/batch/task#az-batch-task-show) komutunu kullanın. Aşağıdaki örnek, havuz düğümlerinden biri üzerinde çalışan *mytask1* hakkındaki ayrıntıları gösterir.
+Batch görevlerinin durumunu görüntülemek için [az batch task show](/cli/azure/batch/task#az_batch_task_show) komutunu kullanın. Aşağıdaki örnek, havuz düğümlerinden biri üzerinde çalışan *mytask1* hakkındaki ayrıntıları gösterir.
 
 ```azurecli-interactive
 az batch task show \
@@ -190,13 +190,13 @@ AZ_BATCH_TASK_USER_IDENTITY=PoolNonAdmin
 
 Batch öğreticileri ve örnekleri ile devam etmek istiyorsanız, bu hızlı başlangıçta kullanılan Batch hesabını ve bağlı depolama hesabını kullanın. Batch hesabının kendisi için herhangi bir ücret alınmaz.
 
-Zamanlanmış bir iş olmasa bile, düğümler çalışırken havuzlar için sizden ücret alınır. Artık havuz gerekmiyorsa, [az Batch Pool Delete](/cli/azure/batch/pool#az-batch-pool-delete) komutuyla silin. Havuzu sildiğinizde düğümler üzerindeki tüm görev çıkışları silinir.
+Zamanlanmış bir iş olmasa bile, düğümler çalışırken havuzlar için sizden ücret alınır. Artık havuz gerekmiyorsa, [az Batch Pool Delete](/cli/azure/batch/pool#az_batch_pool_delete) komutuyla silin. Havuzu sildiğinizde düğümler üzerindeki tüm görev çıkışları silinir.
 
 ```azurecli-interactive
 az batch pool delete --pool-id mypool
 ```
 
-Artık gerekli değilse, [az group delete](/cli/azure/group#az-group-delete) komutunu kullanarak kaynak grubunu, Batch hesabını, havuzları ve tüm ilgili kaynakları kaldırabilirsiniz. Kaynakları aşağıda gösterildiği gibi silin:
+Artık gerekli değilse, [az group delete](/cli/azure/group#az_group_delete) komutunu kullanarak kaynak grubunu, Batch hesabını, havuzları ve tüm ilgili kaynakları kaldırabilirsiniz. Kaynakları aşağıda gösterildiği gibi silin:
 
 ```azurecli-interactive
 az group delete --name QuickstartBatch-rg

@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/31/2019
 ms.author: anupand
-ms.openlocfilehash: 555c903dc3375080a8b0d006d2aac7216854c939
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e39859e3cc4d28ac4b1456fcdaec65ecfb9c7f31
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99539307"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728221"
 ---
 # <a name="subnet-extension"></a>Alt ağ uzantısı
 Ortak buluta iş yükü geçişi dikkatli bir planlama ve koordinasyon gerektirir. Önemli önemli noktalar, IP adreslerinizi saklama özelliği olabilir. Özellikle uygulamalarınızın IP adresi bağımlılığı varsa veya belirli IP adreslerini kullanmak için uyumluluk gereksinimleriniz varsa, bu önemli olabilir. Azure sanal ağ, tercih ettiğiniz bir IP adresi aralığını kullanarak VNet ve alt ağlar oluşturmanıza izin vererek bu sorunu sizin için çözer.
@@ -53,4 +53,4 @@ Yukarıdaki örnekte, Azure NVA ve şirket içi NVA, her birinin arkasındaki IP
 Sonraki bölümde, Azure 'da test ettiğimiz alt ağ uzantısı çözümlerinde Ayrıntılar bulacaksınız.
 
 ## <a name="next-steps"></a>Sonraki adımlar 
-[Satıcı çözümlerini kullanarak alt ağlarınızı Azure 'a genişletin.](https://github.com/microsoft/Azure-LISP)
+[Azure genişletilmiş ağını kullanarak şirket içi alt ağlarınızı Azure 'A genişletin](https://docs.microsoft.com/windows-server/manage/windows-admin-center/azure/azure-extended-network).

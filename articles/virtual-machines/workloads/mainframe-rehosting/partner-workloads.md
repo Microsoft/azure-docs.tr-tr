@@ -11,12 +11,12 @@ editor: edprice
 ms.author: larryme
 ms.date: 05/09/2020
 ms.topic: article
-ms.openlocfilehash: 467cae97f9b4efe4782ac802cccd84271d475ea7
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 0b3dd754e226436cb26cbb808bf37e4262efa344
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104955440"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599562"
 ---
 # <a name="mainframe-workloads-supported-on-azure"></a>Azure 'da desteklenen anabilgisayar iş yükleri
 
@@ -52,7 +52,7 @@ Ana bilgisayar öykünmesi ve hizmetleriyle ilgili daha fazla yardım için [Azu
 
 ## <a name="code-conversion"></a>Kod dönüştürme
 
-- Kaynak kodu, veri, toplu iş, zamanlama, TP izleyicileri, arabirimler, güvenlik, yönetim ve daha fazlasını kapsayan [Asysco](https://www.asysco.com/azure-cloud/) sistem dönüştürme teknolojisi.
+- Kaynak kodu, veri, toplu iş, zamanlama, TP izleyicileri, arabirimler, güvenlik, yönetim ve daha fazlasını kapsayan [Asysco](https://asysco.com/) sistem dönüştürme teknolojisi.
 - [Asysco AMT Hizmetleri](https://www.asysco.com/migration-services/) , geçiş projeleri için, envanter ve analiz, tasarım eğitimi, süsleme, gerçek zamanlı ve geçiş sonrası destek dahil olmak üzere uçtan uca hizmetler.
 - Eski iş uygulamalarını ve veritabanlarını dijital hale getirme için [Blu yaş](https://www.bluage.com/) araçları.
 - Ana bilgisayar COBOL, CICS ve VSAM 'ı Java 'ya dönüştürmek için [Heirloom bilgi işlem](https://www.heirloomcomputing.com/tag/convert-cobol-to-java/) Hizmetleri.

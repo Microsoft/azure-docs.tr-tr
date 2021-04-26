@@ -6,13 +6,13 @@ ms.topic: troubleshooting
 ms.custom: references_regions
 ms.date: 02/17/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: c31a32b32a685087c53198ec52af1188d0071cab
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: 4d515e75aba9b3912507da07267c3dcb31f1ee34
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100652454"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445508"
 ---
 # <a name="host-pool-creation"></a>Konak havuzu oluşturma
 

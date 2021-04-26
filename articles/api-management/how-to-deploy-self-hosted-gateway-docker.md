@@ -8,14 +8,14 @@ manager: gwallace
 editor: ''
 ms.service: api-management
 ms.topic: article
-ms.date: 04/26/2020
+ms.date: 04/19/2021
 ms.author: apimpm
-ms.openlocfilehash: b9e990988770e8aca015ae8b1159bb4f5e50df57
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 531421726bc1e081d85eca9d535267520d3fea5f
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "82205098"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725628"
 ---
 # <a name="deploy-an-azure-api-management-self-hosted-gateway-to-docker"></a>Azure API Management şirket içinde barındırılan bir ağ geçidini Docker 'a dağıtma
 
@@ -39,23 +39,23 @@ Bu makalede, Azure API Management şirket içinde barındırılan ağ geçidi bi
 2. Dağıtmayı düşündüğünüz ağ geçidi kaynağını seçin.
 3. **Dağıtım**' ı seçin.
 4. **Belirteç** metin kutusundaki bir erişim belirtecinin, varsayılan **süre sonu** ve **gizli anahtar** değerleri kullanılarak sizin için otomatik olarak oluşturulduğunu unutmayın. Gerekirse, yeni bir belirteç oluşturmak için, ya da her iki denetimin içindeki istenen değerleri seçin.
-4. **Dağıtım betikleri** altında **Docker** ' ın seçildiğinden emin olun.
-5. Dosyayı indirmek için **ortamın** yanındaki **env. conf** dosya bağlantısını seçin.
-6. Docker komutunu panoya kopyalamak için **Çalıştır** metin kutusunun sağ ucunda bulunan **Kopyala** simgesini seçin.
-7. Komutu Terminal (veya komut) penceresine yapıştırın. Bağlantı noktası eşlemelerini ve kapsayıcı adını gereken şekilde ayarlayın. Komutun, indirilen ortam dosyasının geçerli dizinde bulunduğunu varsaydığını unutmayın.
-```
-    docker run -d -p 80:8080 -p 443:8081 --name <gateway-name> --env-file env.conf mcr.microsoft.com/azure-api-management/gateway:<tag>
-```
-8. Komutu yürütün. Bu komut, Docker ortamınızdan Microsoft Container Registry indirilen [kapsayıcı görüntüsünü](https://aka.ms/apim/sputnik/dhub) kullanarak kapsayıcıyı çalıştırmasını ve kapsayıcının HTTP (8080) ve HTTPS (8081) bağlantı noktalarını konakta 80 ve 443 bağlantı noktalarına eşlemenizi ister.
-9. Ağ Geçidi kapsayıcısının çalışıp çalışmadığını denetlemek için aşağıdaki komutu çalıştırın:
-```console
-docker ps
-CONTAINER ID        IMAGE                                                 COMMAND                  CREATED             STATUS              PORTS                                         NAMES
-895ef0ecf13b        mcr.microsoft.com/azure-api-management/gateway:latest   "/bin/sh -c 'dotnet …"   5 seconds ago       Up 3 seconds        0.0.0.0:80->8080/tcp, 0.0.0.0:443->8081/tcp   my-gateway
-```
+5. **Dağıtım betikleri** altında **Docker** ' ın seçildiğinden emin olun.
+6. Dosyayı indirmek için **ortamın** yanındaki **env. conf** dosya bağlantısını seçin.
+7. Docker komutunu panoya kopyalamak için **Çalıştır** metin kutusunun sağ ucunda bulunan **Kopyala** simgesini seçin.
+8. Komutu Terminal (veya komut) penceresine yapıştırın. Bağlantı noktası eşlemelerini ve kapsayıcı adını gereken şekilde ayarlayın. Komutun, indirilen ortam dosyasının geçerli dizinde bulunduğunu varsaydığını unutmayın.
+   ```
+       docker run -d -p 80:8080 -p 443:8081 --name <gateway-name> --env-file env.conf mcr.microsoft.com/azure-api-management/gateway:<tag>
+   ```
+9. Komutu yürütün. Bu komut, Docker ortamınızdan Microsoft Container Registry indirilen [kapsayıcı görüntüsünü](https://aka.ms/apim/sputnik/dhub) kullanarak kapsayıcıyı çalıştırmasını ve kapsayıcının HTTP (8080) ve HTTPS (8081) bağlantı noktalarını konakta 80 ve 443 bağlantı noktalarına eşlemenizi ister.
+10. Ağ Geçidi kapsayıcısının çalışıp çalışmadığını denetlemek için aşağıdaki komutu çalıştırın:
+    ```console
+    docker ps
+    CONTAINER ID        IMAGE                                                 COMMAND                  CREATED             STATUS              PORTS                                         NAMES
+    895ef0ecf13b        mcr.microsoft.com/azure-api-management/gateway:latest   "/bin/sh -c 'dotnet …"   5 seconds ago       Up 3 seconds        0.0.0.0:80->8080/tcp, 0.0.0.0:443->8081/tcp   my-gateway
+    ```
 10. Azure portal geri dönüp **genel bakış** ' a tıklayın ve yeni dağıttığınız şirket içinde barındırılan ağ geçidi kapsayıcısının sağlıklı bir durum raporladığı konusunda emin olun.
 
-![Ağ Geçidi durumu](media/how-to-deploy-self-hosted-gateway-docker/status.png)
+    ![Ağ Geçidi durumu](media/how-to-deploy-self-hosted-gateway-docker/status.png)
 
 > [!TIP]
 > <code>console docker container logs <gateway-name></code>Şirket içinde barındırılan ağ geçidi günlüğünün anlık görüntüsünü görüntülemek için komutunu kullanın.

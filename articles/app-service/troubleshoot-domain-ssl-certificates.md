@@ -7,13 +7,13 @@ tags: top-support-issue
 ms.topic: article
 ms.date: 03/01/2019
 ms.author: genli
-ms.custom: seodec18
-ms.openlocfilehash: 691cbd79e82432c8e919dcbb51642a76000296dc
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: seodec18, devx-track-azurepowershell
+ms.openlocfilehash: c2c09e1a30c9cef4d65b2d5443481c84ab779af8
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97607618"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833841"
 ---
 # <a name="troubleshoot-domain-and-tlsssl-certificate-problems-in-azure-app-service"></a>Azure App Service etki alanı ve TLS/SSL sertifikası sorunlarını giderme
 

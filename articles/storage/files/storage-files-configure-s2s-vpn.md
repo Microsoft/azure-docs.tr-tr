@@ -7,12 +7,12 @@ ms.topic: how-to
 ms.date: 10/19/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 0fa3fb8040fd79d68f9260ab520d3b6823ab363d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 1a08ca4142876a5a92adbe8b1c3fce9ec7953019
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94629300"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778022"
 ---
 # <a name="configure-a-site-to-site-vpn-for-use-with-azure-files"></a>Azure dosyaları ile kullanmak için siteden siteye VPN yapılandırma
 Azure dosya paylaşımlarınızı şirket içi ağınızdan SMB üzerinden bağlamak için, 445 numaralı bağlantı noktasını açmadan, siteden siteye (S2S) VPN bağlantısı kullanabilirsiniz. Azure [VPN Gateway](../../vpn-gateway/vpn-gateway-about-vpngateways.md)kullanarak sıteden siteye VPN kurabilirsiniz. Bu bir Azure kaynağı, VPN hizmetleri sunar ve depolama hesapları veya diğer Azure kaynaklarıyla birlikte bir kaynak grubunda dağıtılır.
@@ -21,7 +21,7 @@ Azure dosya paylaşımlarınızı şirket içi ağınızdan SMB üzerinden bağl
 
 Azure dosyaları için kullanılabilir ağ seçenekleri hakkında ayrıntılı bir tartışmaya devam etmeden önce [Azure dosyaları ağ genel bakış ' ı](storage-files-networking-overview.md) okumanızı kesinlikle öneririz.
 
-Makalesinde, Azure dosya paylaşımlarını doğrudan şirket içinde bağlamak için siteden siteye VPN yapılandırma adımları ayrıntılı olarak açıklanır. Bir siteden siteye VPN üzerinden Azure Dosya Eşitleme eşitleme trafiğini yönlendirmek istiyorsanız, lütfen [Azure dosya eşitleme proxy ve güvenlik duvarı ayarlarını yapılandırma](storage-sync-files-firewall-and-proxy.md)konusuna bakın.
+Makalesinde, Azure dosya paylaşımlarını doğrudan şirket içinde bağlamak için siteden siteye VPN yapılandırma adımları ayrıntılı olarak açıklanır. Bir siteden siteye VPN üzerinden Azure Dosya Eşitleme eşitleme trafiğini yönlendirmek istiyorsanız, lütfen [Azure dosya eşitleme proxy ve güvenlik duvarı ayarlarını yapılandırma](../file-sync/file-sync-firewall-and-proxy.md)konusuna bakın.
 
 ## <a name="prerequisites"></a>Önkoşullar
 - Şirket içinde bağlamak istediğiniz bir Azure dosya paylaşımıdır. Azure dosya paylaşımları, birden çok dosya paylaşımı dağıtabileceğiniz ve BLOB kapsayıcıları ya da kuyrukları gibi diğer depolama kaynaklarına ek olarak, bir paylaşılan depolama havuzunu temsil eden yönetim yapıları içindeki depolama hesaplarında dağıtılır. Azure dosya paylaşımları ve depolama hesaplarını [Azure dosya paylaşımı oluşturma](storage-how-to-create-file-share.md)bölümünde dağıtma hakkında daha fazla bilgi edinebilirsiniz.

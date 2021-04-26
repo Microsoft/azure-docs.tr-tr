@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 06/22/2019
-ms.openlocfilehash: c8cbfb619c9eed325161503f705bf5c4c0746265
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: dc084da6ef7f26b9e434acf8985c7077f5eaffe2
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95992936"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078375"
 ---
 # <a name="create-and-manage-trading-partner-agreements-in-azure-logic-apps"></a>Azure Logic Apps'te ticari ortak sözleşmesi oluşturma ve yönetme
 
@@ -60,14 +60,13 @@ Ana Azure menüsünde **tüm hizmetler**' i seçin. Arama kutusuna filtreniz ola
    | Özellik | Gerekli | Değer | Açıklama |
    |----------|----------|-------|-------------|
    | **Ad** | Yes | <*anlaşma-adı*> | Sözleşmenizin adı |
-   | **Anlaşma türü** | Yes | **AS2**, **x12** veya **ediolgu** | Anlaşmanızın protokol türü. Anlaşma dosyanızı oluşturduğunuzda, bu dosyadaki içeriğin anlaşma türüyle eşleşmesi gerekir. | |  
+   | **Anlaşma türü** | Yes | **AS2**, **x12** veya **ediolgu** | Anlaşmanızın protokol türü. Anlaşma dosyanızı oluşturduğunuzda, bu dosyadaki içeriğin anlaşma türüyle eşleşmesi gerekir. |
    | **Ana bilgisayar ortağı** | Yes | <*Konak-iş ortağı-adı*> | Ana bilgisayar ortağı, sözleşmeyi belirten kuruluşu temsil eder |
    | **Ana bilgisayar kimliği** | Yes | <*Konak-iş ortağı tanımlayıcısı*> | Ana bilgisayar ortağının tanımlayıcısı |
    | **Konuk Iş ortağı** | Yes | <*Konuk iş ortağı adı*> | Konuk iş ortağı, ana bilgisayar ortağıyla iş yapan kuruluşu temsil eder |
    | **Konuk kimliği** | Yes | <*Konuk iş ortağı tanımlayıcısı*> | Konuk iş ortağının tanımlayıcısı |
    | **Ayarları al** | Değişir | Değişir | Bu özellikler, ana bilgisayar ortağının anlaşmada Konuk iş ortağından gelen tüm iletileri nasıl alacağını belirtir. Daha fazla bilgi için bkz. ilgili anlaşma türü: <p>- [AS2 ileti ayarları](../logic-apps/logic-apps-enterprise-integration-as2-message-settings.md) <br>- [EDIOLGU ileti ayarları](logic-apps-enterprise-integration-edifact.md) <br>- [X12 ileti ayarları](logic-apps-enterprise-integration-x12.md) |
    | **Ayarları gönder** | Değişir | Değişir | Bu özellikler, ana bilgisayar ortağının tüm giden iletileri anlaşmada Konuk iş ortağına nasıl göndereceğini belirtir. Daha fazla bilgi için bkz. ilgili anlaşma türü: <p>- [AS2 ileti ayarları](../logic-apps/logic-apps-enterprise-integration-as2-message-settings.md) <br>- [EDIOLGU ileti ayarları](logic-apps-enterprise-integration-edifact.md) <br>- [X12 ileti ayarları](logic-apps-enterprise-integration-x12.md) |
-   |||||
 
    > [!IMPORTANT]
    > Bir sözleşmenin çözümü, iş ortağı ve gelen iletide tanımlanan bu öğelerin eşleştirmesine bağlıdır:

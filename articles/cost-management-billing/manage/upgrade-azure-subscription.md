@@ -11,18 +11,18 @@ ms.topic: conceptual
 ms.date: 03/11/2021
 ms.author: banders
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 432330ae06b2e1c19401456dc05f87d0dd908f2d
-ms.sourcegitcommit: 87a6587e1a0e242c2cfbbc51103e19ec47b49910
+ms.openlocfilehash: 6066b5efc9bb004aab6b651f15d24b19672c3497
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/16/2021
-ms.locfileid: "103574159"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220615"
 ---
 # <a name="upgrade-your-azure-free-account-or-azure-for-students-starter-account"></a>Ücretsiz Azure hesabını veya Öğrenciler için Microsoft Azure Başlangıç Paketi hesabını yükseltme
 
 [Azure ücretsiz hesabınızı](https://azure.microsoft.com/free/) Azure Portal [Kullandıkça Öde tarifesine](https://azure.microsoft.com/offers/ms-azr-0003p/) yükseltebilirsiniz.
 
-[Öğrenciler Için Azure başlangıç hesabınız](https://azure.microsoft.com/offers/ms-azr-0144p/) varsa ve [ücretsiz bir Azure hesabı](https://azure.microsoft.com/free/)Için uygun ise, [Azure Ücretsiz hesabına](https://azure.microsoft.com/free/)yükseltebilirsiniz. Yükseltme ile birlikte 200 USD Azure kredisi ve 12 ay ücretsiz hizmetler alacaksınız. Ücretsiz bir hesaba hak duymuyorsanız, bir [destek isteği](https://go.microsoft.com/fwlink/?linkid=2083458)ile [Kullandıkça Öde tarifesine](https://azure.microsoft.com/offers/ms-azr-0003p/) yükseltebilirsiniz.
+[Öğrenciler Için Azure başlangıç hesabınız](https://azure.microsoft.com/offers/ms-azr-0144p/) varsa ve [ücretsiz bir Azure hesabı](https://azure.microsoft.com/free/)Için uygun ise, [Azure Ücretsiz hesabına](https://azure.microsoft.com/free/)yükseltebilirsiniz. Faturalandırma para birimindedir ve yükseltme sırasında 12 aylık ücretsiz hizmet 200 ABD Doları Azure kredisi alacaksınız. Ücretsiz bir hesaba hak duymuyorsanız, bir [destek isteği](https://go.microsoft.com/fwlink/?linkid=2083458)ile [Kullandıkça Öde tarifesine](https://azure.microsoft.com/offers/ms-azr-0003p/) yükseltebilirsiniz.
 
 [Öğrenciler Için Azure](https://azure.microsoft.com/offers/ms-azr-0170p/) hesabınız varsa, [destek isteği](https://go.microsoft.com/fwlink/?linkid=2083458) ile [Kullandıkça Öde tarifesine](https://azure.microsoft.com/offers/ms-azr-0003p/) yükseltebilirsiniz
 

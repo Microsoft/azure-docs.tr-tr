@@ -7,14 +7,14 @@ manager: carmonm
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/26/2019
+ms.date: 02/20/2021
 ms.author: bwren
-ms.openlocfilehash: 68e947a6e13ba5195815fe966ec69ec6a2f4b8e1
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 3c99002a4f8613ff40a116eeceded4b3bada1c15
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105562979"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105936164"
 ---
 # <a name="azure-monitor-metrics-overview"></a>Azure Izleyici ölçümlerine genel bakış
 Azure Izleyici ölçümleri, [izlenen kaynaklardaki](../monitor-reference.md) sayısal verileri bir zaman serisi veritabanına toplayan Azure izleyici 'nin bir özelliğidir. Ölçümler, düzenli aralıklarla toplanan ve belirli bir zamanda sistemin bazı yönlerini tanımlayan sayısal değerlerdir. Azure Izleyici 'de ölçümler hafif ve neredeyse gerçek zamanlı senaryoları desteklemeye yönelik olarak, sorunların uyarı ve hızlı bir şekilde algılanması için oldukça yararlı hale sahiptir. Ölçümleri, Ölçüm Gezgini ile etkileşimli olarak analiz edebilir, bir değer eşiğe ulaşıldığında bir uyarıyla önceden bildirimde bulunabilir veya onları bir çalışma kitabında veya panoda görselleştirebilirsiniz.
@@ -33,7 +33,7 @@ Aşağıdaki tabloda, Azure Izleyici 'de ölçümleri kullanmanın farklı yolla
 | **Uyarı** | Ölçüm değeri bir eşiği aştığında bir bildirim gönderen veya [otomatik eylem](../alerts/action-groups.md) alan bir [ölçüm uyarısı kuralı](../alerts/alerts-metric.md) yapılandırın. |
 | **Görselleştirme** | Ölçüm Gezgini 'nden bir [Azure panosuna](../app/tutorial-app-dashboards.md)grafik sabitleme.<br>Etkileşimli bir raporda birden fazla veri kümesiyle birleştirilecek bir [çalışma kitabı](../visualize/workbooks-overview.md) oluşturun. Bir sorgunun sonuçlarını [Grafana](../visualize/grafana-plugin.md) olarak dışa aktarın ve diğer veri kaynaklarıyla birleştirin. |
 | **Otomatikleştirme** |  Bir eşiği aşan ölçüm değerine göre kaynakları artırmak veya azaltmak için [Otomatik ölçeklendirmeyi](../autoscale/autoscale-overview.md) kullanın. |
-| **Almanın** | [PowerShell cmdlet 'lerini](/powershell/module/az.applicationinsights) kullanarak bir komut satırından ölçüm değerlerine erişin<br>[REST API](./rest-api-walkthrough.md)kullanarak özel uygulamadan ölçüm değerlerine erişin.<br>[CLI](/cli/azure/monitor/metrics)kullanarak bir komut satırından ölçüm değerlerine erişin. |
+| **Almanın** | [PowerShell cmdlet 'lerini](/powershell/module/az.monitor) kullanarak bir komut satırından ölçüm değerlerine erişin<br>[REST API](./rest-api-walkthrough.md)kullanarak özel uygulamadan ölçüm değerlerine erişin.<br>[CLI](/cli/azure/monitor/metrics)kullanarak bir komut satırından ölçüm değerlerine erişin. |
 | **Dışarı Aktarma** | Azure izleyici günlüklerindeki verilerle birlikte verileri analiz etmek ve 93 günden daha uzun süre için ölçüm değerlerini depolamak üzere [ölçümleri günlüklere yönlendirin](./resource-logs.md#send-to-azure-storage) .<br>Bir [Olay Hub 'ına](./stream-monitoring-data-event-hubs.md) , bunları dış sistemlere yönlendirmek için ölçüm akışı. |
 | **Arşiv** | Uyumluluk, denetim veya çevrimdışı raporlama amacıyla kaynağınızın performans veya sistem durumu geçmişini [arşivleyin](./platform-logs-overview.md) . |
 
@@ -104,7 +104,7 @@ Bu ölçüm, "her IP adresi için ağ aktarım hızı nedir?" ve "ne kadar veri 
 Azure 'daki çoğu kaynak için ölçümler 93 gün süreyle depolanır. Bazı özel durumlar vardır:
 
 **Konuk işletim sistemi ölçümleri**
--   **Klasik Konuk işletim sistemi ölçümleri**. Bunlar, [Windows Tanılama uzantısı (WAD)](../agents/diagnostics-extension-overview.md) veya [Linux Tanılama uzantısı (LAD)](../../virtual-machines/extensions/diagnostics-linux.md) tarafından toplanan performans sayaçlarıdır ve bir Azure depolama hesabına yönlendirilir. Bu ölçümler için bekletme 14 gündür.
+-   **Klasik Konuk işletim sistemi ölçümleri**. Bunlar, [Windows Tanılama uzantısı (WAD)](../agents/diagnostics-extension-overview.md) veya [Linux Tanılama uzantısı (LAD)](../../virtual-machines/extensions/diagnostics-linux.md) tarafından toplanan performans sayaçlarıdır ve bir Azure depolama hesabına yönlendirilir. Depolama hesabına gerçek bir sona erme tarihi yazılmasa da bu ölçümler için bekletme en az 14 gün olacak şekilde garanti edilir. Performans nedenleriyle, Portal, birime göre ne kadar veri görüntülediğini sınırlandırır. Bu nedenle, yazılan veri hacmi çok büyük değilse, portal tarafından alınan gerçek gün sayısı 14 günden daha uzun olabilir.  
 -   **Azure Izleyici ölçümlerine gönderilen Konuk işletim sistemi ölçümleri**. Bunlar, [Windows Tanılama uzantısı (WAD)](../agents/diagnostics-extension-overview.md) tarafından toplanan ve [Azure izleyici veri havuzuna](../agents/diagnostics-extension-overview.md#data-destinations)gönderilen ve Linux makinelerinde [etkileyen bir telegraf Aracısı](https://www.influxdata.com/time-series-platform/telegraf/) aracılığıyla performans sayaçlarıdır. Bu ölçümler için bekletme 93 gündür.
 -   **Log Analytics Aracısı tarafından toplanan Konuk işletim sistemi ölçümleri**. Bunlar, Log Analytics Aracısı tarafından toplanan ve bir Log Analytics çalışma alanına gönderilen performans sayaçlarıdır. Bu ölçümler için bekletme 31 gündür ve 2 yıla kadar genişletilebilir.
 

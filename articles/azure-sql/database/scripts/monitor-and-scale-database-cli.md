@@ -11,12 +11,12 @@ author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: sstein
 ms.date: 06/25/2019
-ms.openlocfilehash: 0a72bea08052e5cd17502a21a98b41cb5582a3b9
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: bd982ab6dc66674e705f080511282bcfeb909872
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96493648"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787188"
 ---
 # <a name="use-the-azure-cli-to-monitor-and-scale-a-single-database-in-azure-sql-database"></a>Azure SQL veritabanı 'nda tek bir veritabanını izlemek ve ölçeklendirmek için Azure CLı 'yi kullanma
 
@@ -43,7 +43,7 @@ az account set -s $subscription # ...or use 'az login'
 [!code-azurecli-interactive[main](../../../../cli_scripts/sql-database/monitor-and-scale-database/monitor-and-scale-database.sh "Monitor and scale a database in Azure SQL Database")]
 
 > [!TIP]
-> Veritabanında gerçekleştirilen işlemlerin bir listesini almak için [az SQL DB op listesini](/cli/azure/sql/db/op?#az-sql-db-op-list) kullanın ve veritabanında bir güncelleştirme işlemini iptal etmek için [az SQL DB op Cancel](/cli/azure/sql/db/op#az-sql-db-op-cancel) kullanın.
+> Veritabanında gerçekleştirilen işlemlerin bir listesini almak için [az SQL DB op listesini](/cli/azure/sql/db/op?#az_sql_db_op_list) kullanın ve veritabanında bir güncelleştirme işlemini iptal etmek için [az SQL DB op Cancel](/cli/azure/sql/db/op#az_sql_db_op_cancel) kullanın.
 
 ### <a name="clean-up-deployment"></a>Dağıtımı temizleme
 
@@ -60,7 +60,7 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut Dosyası | Description |
 |---|---|
 | [az sql server](/cli/azure/sql/server) | Sunucu komutları. |
-| [az sql db show-usage](/cli/azure/sql#az-sql-show-usage) | Bir veritabanının boyut kullanım bilgilerini gösterir. |
+| [az sql db show-usage](/cli/azure/sql#az_sql_show_usage) | Bir veritabanının boyut kullanım bilgilerini gösterir. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

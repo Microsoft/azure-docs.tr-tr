@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 07/11/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: d245b780acee59afbc6cb8bde6c916bfd1046e3c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: 65ef7af1247fdb38a7c85c1a8134257942f5ef5b
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102508563"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106447038"
 ---
 # <a name="deploy-a-windows-7-virtual-machine-on-windows-virtual-desktop"></a>Windows Sanal Masaüstü’nde Windows 7 sanal makinesi dağıtma
 

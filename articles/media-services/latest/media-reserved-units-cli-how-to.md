@@ -8,12 +8,12 @@ ms.service: media-services
 ms.topic: how-to
 ms.date: 03/22/2021
 ms.author: inhenkel
-ms.openlocfilehash: 06c0c6333b84697415ef598d4c5e853d5c006f08
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: c5fa3aa8397ea6e13500717f035c414af8de8e3d
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104870169"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106121685"
 ---
 # <a name="how-to-scale-media-reserved-units"></a>Medya ayrılmış birimlerini ölçeklendirme
 
@@ -26,7 +26,7 @@ Bu makalede, daha hızlı kodlama için medya ayrılmış birimlerinin (MRSs) na
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-[Media Services hesabı oluşturun](./create-account-howto.md).
+[Media Services hesabı oluşturun](./account-create-how-to.md).
 
 [Medyaya ayrılan birimleri](concept-media-reserved-units.md)anlayın.
 
@@ -46,8 +46,8 @@ Medya ayrılmış birimlerinin hesabınızda sağlanacağı dakika sayısına g�
 
 ## <a name="next-step"></a>Sonraki adım
 
-[Videoları analiz etme](analyze-videos-tutorial-with-api.md)
+[Videoları analiz etme](analyze-videos-tutorial.md)
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-* [Kotalar ve sınırlar](limits-quotas-constraints.md)
+* [Kotalar ve sınırlar](limits-quotas-constraints-reference.md)

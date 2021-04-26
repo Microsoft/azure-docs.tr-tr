@@ -5,22 +5,22 @@ ms.service: sql-database
 ms.subservice: migration-guide
 ms.custom: ''
 ms.devlang: ''
-ms.topic: conceptual
+ms.topic: how-to
 author: MashaMSFT
 ms.author: mathoma
 ms.date: 03/19/2021
-ms.openlocfilehash: 138a23b610ab96194424bb0f88cf94f516c2d223
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 0538071ffb9d244fb8b3493d6b63b27c6b56a726
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105626461"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107388542"
 ---
 # <a name="migration-guide-sap-ase-to-azure-sql-database"></a>Geçiş Kılavuzu: SAP aşırı Azure SQL veritabanı 'na
 
 [!INCLUDE[appliesto-sqldb-sqlmi](../../includes/appliesto-sqldb.md)]
 
-Bu kılavuzda, sap bağdaştırıcısı sunucu Enterprise (ASE) veritabanlarınızı SQL Server Geçiş Yardımcısı bir Azure SQL veritabanına nasıl geçireceğinizi öğrenirsiniz.
+Bu kılavuzda, SAP Adapter Server Enterprise (ASE) veritabanlarınızı bir Azure SQL veritabanına [nasıl geçireceğinizi](https://azure.microsoft.com/migration/migration-journey) , sap bağdaştırıcısı sunucu enterprise Için [SQL Server geçiş](https://azure.microsoft.com/en-us/migration/sql-server/) Yardımcısı ' nı kullanarak öğreneceksiniz.
 
 Diğer geçiş kılavuzlarında [Azure veritabanı geçiş kılavuzu](https://docs.microsoft.com/data-migration)' na bakın. 
 
@@ -34,7 +34,7 @@ SAP SE veritabanınızı SQL veritabanınıza geçirmeye başlamadan önce aşa�
 
 ## <a name="pre-migration"></a>Geçiş öncesi
 
-Önkoşulları karşıladıktan sonra ortamınızın topolojisini bulmaya ve geçişinizin uygunluğunu değerlendirmeye hazırsınız demektir.
+Önkoşulları karşıladıktan sonra ortamınızın topolojisini bulmaya ve [Azure bulut geçişinizin](https://azure.microsoft.com/migration)uygunluğunu değerlendirmeye hazırsınız demektir.
 
 ### <a name="assess"></a>Değerlendirme
 
@@ -123,6 +123,7 @@ Bu sorunlar ve bunları azaltmaya yönelik adımlar hakkında daha fazla bilgi i
 - Bulut geçişleri için çerçeve ve benimseme çevrimi hakkında daha fazla bilgi edinmek için bkz.:
    -  [Azure için Bulut Benimseme Çerçevesi](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
    -  [Azure 'a geçiş için iş yüklerini maliyetlendirme ve boyutlandırma için en iyi yöntemler](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs) 
+   -  [Buluta Geçiş kaynakları](https://azure.microsoft.com/migration/resources)
 
 - Uygulama erişim katmanını değerlendirmek için bkz. [veri erişimi geçiş araç seti (Önizleme)](https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit).
 - Veri erişim katmanını bir/B testi gerçekleştirme hakkında daha fazla bilgi için bkz. [veritabanı yükseltme deneyimi Yardımcısı](/sql/dea/database-experimentation-assistant-overview).

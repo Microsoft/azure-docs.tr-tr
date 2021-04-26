@@ -5,6 +5,10 @@
   items:
     - name: Form Tanıma nedir?
       href: overview.md
+    - name: Dil desteği
+      href: language-support.md
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/form-recognizer/'
     - name: Yenilikler
       href: whats-new.md
 - name: Hızlı Başlangıçlar
@@ -21,6 +25,8 @@
       href: /samples/azure/azure-sdk-for-java/formrecognizer-java-samples
     - name: 'Python: form tanıyıcı istemci kitaplığı SDK ''Sı'
       href: /samples/azure/azure-sdk-for-python/formrecognizer-samples
+    - name: JavaScript form tanıyıcı istemci kitaplığı SDK 'Sı
+      href: /samples/azure/azure-sdk-for-js/ai-form-recognizer-javascript/
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Eğitim verileri kümesi oluşturma
@@ -44,6 +50,14 @@
           href: ../containers/index.yml
     - name: Modelleri yedekleme ve kurtarma
       href: disaster-recovery.md
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/form-recognizer/context/context
+        - name: Müşteri tarafından yönetilen anahtarları kullan
+          href: encrypt-data-at-rest.md
+        - name: Azure AD kimlik doğrulamasını kullanma
+          href: ../authentication.md?context=/azure/cognitive-services/form-recognizer/context/context
 - name: Kavramlar
   items:
     - name: Düzen API 'SI
@@ -59,7 +73,7 @@
       href: concept-business-cards.md
     - name: Faturalar
       href: concept-invoices.md
-    - name: Kimlik kartları
+    - name: Kimlik belgeleri
       href: concept-identification-cards.md
 - name: Öğreticiler
   items:
@@ -89,17 +103,15 @@
           href: /javascript/api/overview/azure/ai-form-recognizer-readme
 - name: Kaynaklar
   items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://go.microsoft.com/fwlink/?linkid=2087185'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/form-recognizer/context/context
-    - name: Fiyatlandırma ve limitler
-      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/form-recognizer/'
     - name: Azure yol haritası
       href: 'https://azure.microsoft.com/updates/?product=cognitive-services'
-    - name: Bölgesel kullanılabilirlik
-      href: 'https://go.microsoft.com/fwlink/?linkid=2087185'
-    - name: Dil desteği
-      href: language-support.md
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
-    - name: Şifreleme
-      href: encrypt-data-at-rest.md
+    - name: Gizlilik ve tanımlama bilgileri
+      href: 'https://privacy.microsoft.com/en-US/privacystatement'

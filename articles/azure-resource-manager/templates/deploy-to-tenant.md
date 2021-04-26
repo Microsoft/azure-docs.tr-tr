@@ -3,12 +3,12 @@ title: Kaynakları kiracıya dağıtma
 description: Azure Resource Manager şablonundaki kiracı kapsamındaki kaynakların nasıl dağıtılacağını açıklar.
 ms.topic: conceptual
 ms.date: 01/13/2021
-ms.openlocfilehash: fd5a9ae60c578a3be7f70d82baae0a15e406b9db
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0b17b8741d1701720de86d8039be3b6cd28ace5c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99491495"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781910"
 ---
 # <a name="tenant-deployments-with-arm-templates"></a>ARM şablonlarıyla kiracı dağıtımları
 
@@ -98,7 +98,7 @@ Kiracı dağıtımları komutları, kaynak grubu dağıtımları için komutlard
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı için [az Deployment Tenant Create](/cli/azure/deployment/tenant#az-deployment-tenant-create)kullanın:
+Azure CLı için [az Deployment Tenant Create](/cli/azure/deployment/tenant#az_deployment_tenant_create)kullanın:
 
 ```azurecli-interactive
 az deployment tenant create \

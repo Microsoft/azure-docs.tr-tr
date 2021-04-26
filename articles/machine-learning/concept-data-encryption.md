@@ -10,12 +10,12 @@ ms.author: jhirono
 author: jhirono
 ms.reviewer: larryfr
 ms.date: 11/09/2020
-ms.openlocfilehash: 13d5c02fbb4ae06c7a5279ab7c5d3af90c263f71
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 31b2a993267e6e8abbf7184d745889b74e587c50
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102521076"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311779"
 ---
 # <a name="data-encryption-with-azure-machine-learning"></a>Azure Machine Learning ile veri şifreleme
 
@@ -37,7 +37,7 @@ Azure Machine Learning, modellerdeki ve çıkarım gerçekleştirirken çeşitli
 * Çalıştırmalar arasında yerel karalama diskinizi temizler
 * Anahtar kasanızı kullanarak depolama hesabınız, kapsayıcı kayıt defteriniz ve SSH hesabınız için kimlik bilgilerini yürütme katmanından işlem kümelerinize güvenli bir şekilde geçirir
 * Temel alınan toplu iş havuzlarının AzureMachineLearningService dışında herhangi bir dış hizmet tarafından çağrılıp çağrılmaması için IP filtrelemeyi sağlar
-* İşlem örneklerinin HBı çalışma alanında desteklenmediğini lütfen unutmayın
+* İşlem örnekleri HBı çalışma alanında destekleniyor
 
 ### <a name="azure-blob-storage"></a>Azure Blob depolama
 

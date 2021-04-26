@@ -6,13 +6,13 @@ ms.suite: integration
 ms.reviewer: logicappspm
 ms.topic: quickstart
 ms.custom: mvc
-ms.date: 10/30/2020
-ms.openlocfilehash: d90b9e38158d951990fffc21a43317c688da12c9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 03/24/2021
+ms.openlocfilehash: d05566c0734f95e14335c6165de0b2104fa19bc6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99052051"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764864"
 ---
 # <a name="quickstart-create-your-first-logic-apps-workflow---azure-portal"></a>Hızlı başlangıç: ilk Logic Apps iş akışınızı oluşturma-Azure portal
 
@@ -37,7 +37,7 @@ Bu hızlı başlangıçta, [Azure Portal](https://portal.azure.com)üzerinden [A
     > [!IMPORTANT]
     > [Gmail bağlayıcısını](/connectors/gmail/)kullanıyorsanız, yalnızca G Suite hesaplarının Logic Apps kısıtlaması olmadan bu bağlayıcıyı kullanabileceğini unutmayın. Bir tüketici Gmail hesabınız varsa, [Gmail Bağlayıcınız ile kimlik doğrulaması için kullanmak üzere bir Google istemci uygulaması oluşturmadığınız](/connectors/gmail/#authentication-and-bring-your-own-application)müddetçe bu bağlayıcıyı yalnızca belirli Google onaylı hizmetlerle kullanabilirsiniz. Daha fazla bilgi için, bkz. [Azure Logic Apps Google bağlayıcıları Için veri güvenliği ve gizlilik ilkeleri](../connectors/connectors-google-data-security-privacy-policy.md).
 
-* Mantıksal uygulamanızın trafiği belirli IP adresleriyle sınırlayan bir güvenlik duvarı üzerinden iletişim kurması gerekiyorsa, söz konusu güvenlik duvarının, mantıksal uygulamanızın bulunduğu Azure bölgesindeki Logic Apps hizmeti veya çalışma zamanı tarafından kullanılan [gelen](logic-apps-limits-and-config.md#inbound) ve [giden](logic-apps-limits-and-config.md#outbound) IP *adresleri için erişime* izin verilmesi gerekir. Mantıksal uygulamanız ayrıca Office 365 Outlook Bağlayıcısı veya SQL Bağlayıcısı gibi [yönetilen bağlayıcılar](../connectors/apis-list.md#managed-api-connectors)kullanıyorsa veya [özel bağlayıcılar](/connectors/custom-connectors/)kullanıyorsa, güvenlik duvarının ayrıca mantıksal uygulamanızın Azure bölgesindeki *Tüm* [yönetilen bağlayıcı giden IP adresleri](logic-apps-limits-and-config.md#outbound) için erişime izin verilmesi gerekir.
+* Mantıksal uygulamanızın trafiği belirli IP adresleriyle sınırlayan bir güvenlik duvarı üzerinden iletişim kurması gerekiyorsa, söz konusu güvenlik duvarının, mantıksal uygulamanızın bulunduğu Azure bölgesindeki Logic Apps hizmeti veya çalışma zamanı tarafından kullanılan [gelen](logic-apps-limits-and-config.md#inbound) ve [giden](logic-apps-limits-and-config.md#outbound) IP *adresleri için erişime* izin verilmesi gerekir. Mantıksal uygulamanız ayrıca Office 365 Outlook Bağlayıcısı veya SQL Bağlayıcısı gibi [yönetilen bağlayıcılar](../connectors/managed.md)kullanıyorsa veya [özel bağlayıcılar](/connectors/custom-connectors/)kullanıyorsa, güvenlik duvarının ayrıca mantıksal uygulamanızın Azure bölgesindeki *Tüm* [yönetilen bağlayıcı giden IP adresleri](logic-apps-limits-and-config.md#outbound) için erişime izin verilmesi gerekir.
 
 <a name="create-logic-app"></a>
 

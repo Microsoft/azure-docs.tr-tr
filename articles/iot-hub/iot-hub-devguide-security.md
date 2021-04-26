@@ -7,7 +7,7 @@ ms.author: wesmc
 ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
-ms.date: 07/18/2018
+ms.date: 04/15/2021
 ms.custom:
 - amqp
 - mqtt
@@ -16,12 +16,12 @@ ms.custom:
 - 'Role: Operations'
 - devx-track-js
 - devx-track-csharp
-ms.openlocfilehash: 3ddc8c78bac47ed85266037341328585e3c7cb1c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 7f919069005e8fcb813baf2521c8cb20cffafc88
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97825123"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870364"
 ---
 # <a name="control-access-to-iot-hub"></a>IoT Hub’a erişimi denetleme
 
@@ -99,7 +99,7 @@ HTTPS, **Yetkilendirme** isteği üstbilgisine geçerli bir belirteç ekleyerek 
 
 Kullanıcı adı (DeviceID, büyük/küçük harfe duyarlıdır): `iothubname.azure-devices.net/DeviceId`
 
-Parola (CLı uzantısı komutu ile bir SAS belirteci oluşturabilirsiniz [az IoT Hub Generate-SAS-Token](/cli/azure/ext/azure-iot/iot/hub#ext-azure-iot-az-iot-hub-generate-sas-token)veya [Visual Studio Code Için Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools)):
+Parola (CLı uzantısı komutu ile bir SAS belirteci oluşturabilirsiniz [az IoT Hub Generate-SAS-Token](/cli/azure/iot/hub#az_iot_hub_generate_sas_token)veya [Visual Studio Code Için Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools)):
 
 `SharedAccessSignature sr=iothubname.azure-devices.net%2fdevices%2fDeviceId&sig=kPszxZZZZZZZZZZZZZZZZZAhLT%2bV7o%3d&se=1487709501`
 
@@ -303,7 +303,7 @@ Device1 için tüm işlevlere erişim izni veren sonuç şöyle olacaktır:
 `SharedAccessSignature sr=myhub.azure-devices.net%2fdevices%2fdevice1&sig=13y8ejUk2z7PLmvtwR5RqlGBOVwiq7rQR3WZ5xZX3N4%3D&se=1456971697`
 
 > [!NOTE]
-> CLı uzantısı komutu ile bir SAS belirteci oluşturmak için [az IoT Hub Generate-SAS-Token](/cli/azure/ext/azure-iot/iot/hub#ext-azure-iot-az-iot-hub-generate-sas-token)veya [Visual Studio Code Için Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools).
+> CLı uzantısı komutu ile bir SAS belirteci oluşturmak için [az IoT Hub Generate-SAS-Token](/cli/azure/iot/hub#az_iot_hub_generate_sas_token)veya [Visual Studio Code Için Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools).
 
 ### <a name="use-a-shared-access-policy"></a>Paylaşılan erişim ilkesi kullanma
 
@@ -385,7 +385,7 @@ Desteklenen sertifikalar şunlardır:
 
 Bir cihaz, kimlik doğrulaması için bir X. 509.440 sertifikası veya güvenlik belirteci kullanabilir, ancak ikisini birden kullanamazsınız. X. 509.952 sertifikası kimlik doğrulaması ile, mevcut bir sertifikanın süresi dolmuşsa sertifika rollover 'ı işlemek için bir stratejiniz olduğundan emin olun.
 
-X. 509.440 CA kimlik doğrulamasını kullanan cihazlarda aşağıdaki işlev desteklenmez:
+X. 509.440 sertifika yetkilisi (CA) kimlik doğrulaması kullanan cihazlar için aşağıdaki işlevsellik henüz genel kullanıma açık değildir ve [Önizleme modunun etkinleştirilmesi gerekir](iot-hub-preview-mode.md):
 
 * HTTPS, WebSockets üzerinden MQTT ve WebSockets protokolleri üzerinden AMQP.
 * Dosya karşıya yükleme (tüm protokoller).
@@ -396,7 +396,7 @@ Sertifika yetkilisini kullanarak kimlik doğrulaması hakkında daha fazla bilgi
 
 [C# için Azure IoT hizmeti SDK 'Sı](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/iothub/service) (sürüm 1.0.8 +), kimlik doğrulaması Için bir X. 509.440 sertifikası kullanan bir cihazın kaydedilmesini destekler. Cihazların içeri/dışarı aktarılması gibi diğer API 'Ler de X. 509.440 sertifikalarını destekler.
 
-Cihazlarda X. 509.440 sertifikalarını yapılandırmak için [az IoT Hub Device-ıDENTITY](/cli/azure/ext/azure-iot/iot/hub/device-identity) CLI uzantı komutunu da kullanabilirsiniz.
+Cihazlarda X. 509.440 sertifikalarını yapılandırmak için [az IoT Hub Device-ıDENTITY](/cli/azure/iot/hub/device-identity) CLI uzantı komutunu da kullanabilirsiniz.
 
 ### <a name="c-support"></a>C \# desteği
 

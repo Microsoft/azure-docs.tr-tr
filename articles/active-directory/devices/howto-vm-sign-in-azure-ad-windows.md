@@ -12,12 +12,12 @@ manager: daveba
 ms.reviewer: sandeo
 ms.custom: references_regions, devx-track-azurecli
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ee392666a6c6807497eeac2a2291dac915c4e136
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 418741c10dfe5f0678d7771d046781697512bafe
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101644315"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776510"
 ---
 # <a name="sign-in-to-windows-virtual-machine-in-azure-using-azure-active-directory-authentication-preview"></a>Azure 'da Azure Active Directory kimlik doğrulaması (Önizleme) kullanarak Windows sanal makinesinde oturum açma
 
@@ -104,8 +104,8 @@ Azure Cloud Shell, bu makaledeki adımları çalıştırmak için kullanabilece�
 
 CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu makale, Azure CLı sürüm 2.0.31 veya üstünü çalıştırıyor olmanızı gerektirir. Sürümü bulmak için az --version komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI 'Yı yüklemeye](/cli/azure/install-azure-cli)yönelik makale.
 
-1. [az group create](/cli/azure/group#az-group-create) ile bir kaynak grubu oluşturun. 
-1. Desteklenen bir bölgede desteklenen bir dağıtım kullanarak [az VM Create](/cli/azure/vm#az-vm-create) Ile bir VM oluşturun. 
+1. [az group create](/cli/azure/group#az_group_create) ile bir kaynak grubu oluşturun. 
+1. Desteklenen bir bölgede desteklenen bir dağıtım kullanarak [az VM Create](/cli/azure/vm#az_vm_create) Ile bir VM oluşturun. 
 1. Azure AD oturum açma VM uzantısını yükler. 
 
 Aşağıdaki örnek, Win2019Datacenter kullanan myVM adlı bir VM 'yi, Güneydoğu bölgesinde myResourceGroup adlı bir kaynak grubuna dağıtır. Aşağıdaki örneklerde, gerektiğinde kendi kaynak grubunuzu ve sanal makine adlarınızı sağlayabilirsiniz.
@@ -127,7 +127,7 @@ az vm create \
 
 VM’yi ve destekleyici kaynakları oluşturmak birkaç dakika sürer.
 
-Son olarak, Azure AD oturum açma VM uzantısını yükleyerek Windows VM için Azure AD oturum açma özelliğini etkinleştirin. VM uzantıları, Azure sanal makinelerinde dağıtım sonrası yapılandırma ve otomasyon görevleri sağlayan küçük uygulamalardır. Kaynak grubunda adlı VM 'ye AADLoginForWindows uzantısını yüklemek için [az VM Extension](/cli/azure/vm/extension#az-vm-extension-set) set komutunu kullanın `myVM` `myResourceGroup` :
+Son olarak, Azure AD oturum açma VM uzantısını yükleyerek Windows VM için Azure AD oturum açma özelliğini etkinleştirin. VM uzantıları, Azure sanal makinelerinde dağıtım sonrası yapılandırma ve otomasyon görevleri sağlayan küçük uygulamalardır. Kaynak grubunda adlı VM 'ye AADLoginForWindows uzantısını yüklemek için [az VM Extension](/cli/azure/vm/extension#az_vm_extension_set) set komutunu kullanın `myVM` `myResourceGroup` :
 
 > [!NOTE]
 > Azure AD kimlik doğrulaması için etkinleştirmek üzere, mevcut bir Windows Server 2019 veya Windows 10 1809 ve sonraki bir sanal makineye AADLoginForWindows uzantısını yükleyebilirsiniz. AZ CLı örneği aşağıda gösterilmiştir.
@@ -177,7 +177,7 @@ Birkaç dakika sonra, güvenlik sorumlusu seçili kapsamda role atanır.
 
 ### <a name="using-the-azure-cloud-shell-experience"></a>Azure Cloud Shell deneyimini kullanma
 
-Aşağıdaki örnek, geçerli Azure kullanıcılarınız için sanal makine Yöneticisi oturum açma rolünü VM 'ye atamak için [az role atama Create](/cli/azure/role/assignment#az-role-assignment-create) ' i kullanır. Etkin Azure hesabınızın Kullanıcı adı [az Account Show](/cli/azure/account#az-account-show)komutuyla alınır ve kapsam, [az VM Show](/cli/azure/vm#az-vm-show)ile ÖNCEKI bir adımda oluşturulan VM 'ye ayarlanır. Kapsam Ayrıca bir kaynak grubuna veya abonelik düzeyine atanabilir ve normal Azure RBAC devralma izinleri geçerlidir. Daha fazla bilgi için bkz. [Azure 'da Azure Active Directory kimlik doğrulaması kullanarak bir Linux sanal makinesinde oturum açma](../../virtual-machines/linux/login-using-aad.md).
+Aşağıdaki örnek, geçerli Azure kullanıcılarınız için sanal makine Yöneticisi oturum açma rolünü VM 'ye atamak için [az role atama Create](/cli/azure/role/assignment#az_role_assignment_create) ' i kullanır. Etkin Azure hesabınızın Kullanıcı adı [az Account Show](/cli/azure/account#az_account_show)komutuyla alınır ve kapsam, [az VM Show](/cli/azure/vm#az_vm_show)ile ÖNCEKI bir adımda oluşturulan VM 'ye ayarlanır. Kapsam Ayrıca bir kaynak grubuna veya abonelik düzeyine atanabilir ve normal Azure RBAC devralma izinleri geçerlidir. Daha fazla bilgi için bkz. [Azure 'da Azure Active Directory kimlik doğrulaması kullanarak bir Linux sanal makinesinde oturum açma](../../virtual-machines/linux/login-using-aad.md).
 
 ```   AzureCLI
 $username=$(az account show --query user.name --output tsv)
@@ -190,7 +190,7 @@ az role assignment create \
 ```
 
 > [!NOTE]
-> AAD etki alanı ve oturum açma Kullanıcı adı etki alanınız eşleşmezse, Kullanıcı hesabınızın nesne KIMLIĞINI yalnızca Kullanıcı adı değil ile belirtmeniz gerekir `--assignee-object-id` `--assignee` . Kullanıcı hesabınızın nesne KIMLIĞINI [az ad kullanıcı listesi](/cli/azure/ad/user#az-ad-user-list)ile elde edebilirsiniz.
+> AAD etki alanı ve oturum açma Kullanıcı adı etki alanınız eşleşmezse, Kullanıcı hesabınızın nesne KIMLIĞINI yalnızca Kullanıcı adı değil ile belirtmeniz gerekir `--assignee-object-id` `--assignee` . Kullanıcı hesabınızın nesne KIMLIĞINI [az ad kullanıcı listesi](/cli/azure/ad/user#az_ad_user_list)ile elde edebilirsiniz.
 
 Azure RBAC 'nin Azure abonelik kaynaklarınıza erişimini yönetmek için nasıl kullanılacağı hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
 

@@ -5,14 +5,14 @@ author: timsander1
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 02/02/2021
+ms.date: 04/09/2021
 ms.author: tisande
-ms.openlocfilehash: d5d5bc0a108cd08283ea29ce3bdc2de49310c5aa
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: ad43d83782a2c7e9eb5cc20128be89a45f0213d1
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102499569"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312187"
 ---
 # <a name="getting-started-with-sql-queries"></a>SQL sorgularını kullanmaya başlama
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -43,7 +43,7 @@ Bu belge geri kalanında Azure Cosmos DB SQL sorguları yazmaya nasıl başlaca�
 
 ## <a name="upload-sample-data"></a>Örnek verileri karşıya yükle
 
-SQL API Cosmos DB hesabınızda, adlı bir kapsayıcı oluşturmak için [Veri Gezgini](./data-explorer.md) açın `Families` . Oluşturulduktan sonra, bulmak ve açmak için veri yapıları tarayıcısını kullanın. `Families`Kapsayıcıda `Items` kapsayıcının adının hemen altında seçeneğini görürsünüz. Bu seçeneği açtığınızda, ' yeni öğe ' oluşturmak için ekranın ortasında menü çubuğunda bir düğme görürsünüz. Bu özelliği, aşağıdaki JSON öğelerini oluşturmak için kullanacaksınız.
+SQL API Cosmos DB hesabınızda, adlı bir kapsayıcı oluşturmak için [Veri Gezgini](./data-explorer.md) açın `Families` . Kapsayıcı oluşturulduktan sonra, bulmak ve açmak için veri yapıları tarayıcısını kullanın. `Families`Kapsayıcıda `Items` kapsayıcının adının hemen altında seçeneğini görürsünüz. Bu seçeneği açtığınızda, ' yeni öğe ' oluşturmak için ekranın ortasında menü çubuğunda bir düğme görürsünüz. Bu özelliği, aşağıdaki JSON öğelerini oluşturmak için kullanacaksınız.
 
 ### <a name="create-json-items"></a>JSON öğeleri oluşturma
 

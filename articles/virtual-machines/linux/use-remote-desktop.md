@@ -9,12 +9,12 @@ ms.workload: infrastructure-services
 ms.topic: how-to
 ms.date: 03/03/2021
 ms.author: cynthn
-ms.openlocfilehash: 84960e6247edc708bedb899c96ebf7522397269a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 309b106d2141c8257c5163efe7ff45a7bae5d5c3
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104580377"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107759660"
 ---
 # <a name="install-and-configure-xrdp-to-use-remote-desktop-with-ubuntu"></a>Ubuntu ile uzak masaüstü kullanmak için xrdp 'yi yükleyip yapılandırın
 
@@ -86,7 +86,7 @@ sudo passwd azureuser
 ## <a name="create-a-network-security-group-rule-for-remote-desktop-traffic"></a>Uzak Masaüstü trafiği için bir ağ güvenlik grubu kuralı oluşturma
 Uzak Masaüstü trafiğinin Linux VM 'nize erişmesine izin vermek için, 3389 numaralı bağlantı noktasında sanal makinenize ulaşmasını sağlayan bir ağ güvenlik grubu kuralı oluşturulması gerekir. Ağ güvenlik grubu kuralları hakkında daha fazla bilgi için bkz. [ağ güvenlik grubu nedir?](../../virtual-network/network-security-groups-overview.md) Ayrıca [, bir ağ güvenlik grubu kuralı oluşturmak için Azure Portal de kullanabilirsiniz](../windows/nsg-quickstart-portal.md).
 
-Aşağıdaki örnek, *3389* numaralı bağlantı noktasında [az VM Open-Port](/cli/azure/vm#az-vm-open-port) ile bir ağ güvenlik grubu kuralı oluşturur. Sanal makinenize SSH oturumundan değil, Azure CLı 'dan aşağıdaki ağ güvenlik grubu kuralını açın:
+Aşağıdaki örnek, *3389* numaralı bağlantı noktasında [az VM Open-Port](/cli/azure/vm#az_vm_open_port) ile bir ağ güvenlik grubu kuralı oluşturur. Sanal makinenize SSH oturumundan değil, Azure CLı 'dan aşağıdaki ağ güvenlik grubu kuralını açın:
 
 ```azurecli
 az vm open-port --resource-group myResourceGroup --name myVM --port 3389

@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 11/21/2019
 ms.author: alkohli
 ms.openlocfilehash: 0c6845f081ccbe42e70964eaa939d58597e3b69b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96185552"
 ---
 1. Cihazınızın yerel Web Kullanıcı arabirimine gidin ve cihazınızda oturum açın. Cihazın kilidinin açık olduğundan emin olun.

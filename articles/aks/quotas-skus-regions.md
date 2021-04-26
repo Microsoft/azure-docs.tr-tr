@@ -4,17 +4,17 @@ titleSuffix: Azure Kubernetes Service
 description: Azure Kubernetes hizmeti 'nin (AKS) varsayılan kotaları, sınırlı düğüm sanal makine SKU boyutları ve bölge kullanılabilirliği hakkında bilgi edinin.
 services: container-service
 ms.topic: conceptual
-ms.date: 04/09/2019
-ms.openlocfilehash: 9592b03f5bd9e9436db5665e040b4afd3b68b764
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/25/2021
+ms.openlocfilehash: 3e1e74834153584525d2093d2a1bb8ba8e991e5a
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87562744"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107011473"
 ---
 # <a name="quotas-virtual-machine-size-restrictions-and-region-availability-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içinde kotalar, sanal makine boyutu kısıtlamaları ve bölge kullanılabilirliği
 
-Tüm Azure Hizmetleri, kaynaklar ve özellikler için varsayılan limitleri ve kotaları ayarlar. Belirli sanal makine (VM) SKU 'Ları de kullanılmak üzere kısıtlanmıştır.
+Tüm Azure Hizmetleri, belirli sanal makine (VM) SKU 'Larının kullanım kısıtlamaları da dahil olmak üzere kaynak ve özellikler için varsayılan sınırları ve kotaları ayarlar.
 
 Bu makalede, Azure Kubernetes hizmeti (AKS) kaynakları için varsayılan kaynak sınırları ve Azure bölgelerindeki AKS kullanılabilirliği ayrıntılı olarak açıklanır.
 
@@ -27,11 +27,13 @@ Bu makalede, Azure Kubernetes hizmeti (AKS) kaynakları için varsayılan kaynak
 Tüm diğer ağ, işlem ve depolama sınırları, sağlanan altyapıya uygulanır. İlgili sınırlar için bkz. [Azure aboneliği ve hizmet sınırları](../azure-resource-manager/management/azure-subscription-service-limits.md).
 
 > [!IMPORTANT]
-> Bir AKS kümesini yükselttiğinizde, ek kaynaklar geçici olarak kullanılır. Bu kaynaklar, bir sanal ağ alt ağı veya sanal makine vCPU kotası içindeki kullanılabilir IP adreslerini içerir. Windows Server kapsayıcıları kullanırsanız, en son güncelleştirmeleri düğümlere uygulamak için yapılan tek onaylama yaklaşımı, bir yükseltme işlemi gerçekleştirmekle kalmaz. Başarısız bir küme yükseltme işlemi, bu geçici kaynakları işlemek için kullanılabilir IP adresi alanına veya vCPU kotasına sahip olmadığınız anlamına gelebilir. Windows Server düğüm yükseltme işlemi hakkında daha fazla bilgi için bkz. [AKS 'de düğüm havuzunu yükseltme][nodepool-upgrade].
+> Bir AKS kümesini yükselttiğinizde, ek kaynaklar geçici olarak tüketilecektir. Bu kaynaklar, bir sanal ağ alt ağı veya sanal makine vCPU kotası içindeki kullanılabilir IP adreslerini içerir. 
+>
+> Windows Server kapsayıcıları için, en son düğüm güncelleştirmelerini uygulamak üzere bir yükseltme işlemi gerçekleştirebilirsiniz. Bu geçici kaynakları işlemek için kullanılabilir IP adresi alanı veya vCPU kotası yoksa, küme yükseltme işlemi başarısız olur. Windows Server düğüm yükseltme işlemi hakkında daha fazla bilgi için bkz. [AKS 'de düğüm havuzunu yükseltme][nodepool-upgrade].
 
 ## <a name="restricted-vm-sizes"></a>Kısıtlanmış VM boyutları
 
-Bir AKS kümesindeki her düğüm, vCPU ve bellek gibi sabit bir işlem kaynakları içerir. Aks düğümü yetersiz işlem kaynakları içeriyorsa, Pod düzgün çalışmayabilir. Gerekli *kuyaların* ve uygulamalarınızın güvenilir bir şekilde zamanlanmasını sağlamak için **aks 'de aşağıdaki VM SKU 'larını kullanmayın**:
+Bir AKS kümesindeki her düğüm, vCPU ve bellek gibi sabit bir işlem kaynakları içerir. Aks düğümü yetersiz işlem kaynakları içeriyorsa, Pod düzgün çalışmayabilir. Gerekli *Kuto-sistem* yığınlarını ve uygulamalarınızın güvenilir bir şekilde zamanlanabilmesi IÇIN **aks 'de aşağıdaki VM SKU 'larını kullanmayın**:
 
 - Standard_A0
 - Standard_A1
@@ -49,7 +51,7 @@ Kümeleri dağıtmak ve çalıştırmak için kullanabileceğiniz en son liste i
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bazı varsayılan limitler ve kotalar artırılabilir. Kaynağınız bir artışı destekliyorsa, bir [Azure destek isteği][azure-support] üzerinden artış Isteyin ( **sorun türü** için **Kota**' i seçin).
+Bazı varsayılan limitlerin ve kotaların artmasını sağlayabilirsiniz. Kaynağınız bir artışı destekliyorsa, bir [Azure destek isteği][azure-support] üzerinden artış Isteyin ( **sorun türü** için **Kota**' i seçin).
 
 <!-- LINKS - External -->
 [azure-support]: https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest

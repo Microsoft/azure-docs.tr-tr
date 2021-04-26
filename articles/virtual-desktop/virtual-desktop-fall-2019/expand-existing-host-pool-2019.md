@@ -3,15 +3,15 @@ title: Mevcut Windows sanal masaüstü (klasik) konak havuzunu yeni oturum Konak
 description: Mevcut bir konak havuzunu Windows sanal masaüstündeki (klasik) yeni oturum Konakları ile genişletme.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 03/30/2020
+ms.date: 03/31/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 61cf28b0f1ebee6a0312ec3f23f22b01c6c4919e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: f82b831d887f0ebdd659167935f2134583b3bb87
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "88009180"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106551960"
 ---
 # <a name="expand-an-existing-host-pool-with-new-session-hosts-in-windows-virtual-desktop-classic"></a>Windows sanal masaüstündeki yeni oturum Konakları ile mevcut bir konak havuzunu genişletme (klasik)
 
@@ -39,7 +39,7 @@ Konak havuzunu ve oturum ana bilgisayar VM 'lerini ilk oluşturduğunuzda aşağ
 Sonraki üç bölüm, ana bilgisayar havuzunu genişletmek için kullanabileceğiniz üç yöntemden oluşur. Rahatımız bir dağıtım aracı ile yapabilirsiniz.
 
 >[!NOTE]
->Dağıtım aşamasında, önceki oturum ana bilgisayar VM kaynakları için şu anda kapatıldıklarında hata iletileri görürsünüz. Bu hatalar, Azure 'ın, oturum ana bilgisayar VM 'lerinin mevcut konak havuzunuza doğru şekilde kaydedildiğini doğrulamak için PowerShell DSC uzantısını çalıştıramadığı için oluşur. Bu hataları güvenle yoksayabilirsiniz veya dağıtım işlemini başlatmadan önce mevcut konak havuzundaki tüm oturum ana bilgisayar VM 'lerini başlatarak hatalardan kaçınabilirsiniz.
+>Dağıtım aşamasında, önceki oturum ana bilgisayar VM kaynakları için şu anda kapatıldıklarında hata iletileri görürsünüz. Bu hatalar, Azure 'ın, oturum ana bilgisayar VM 'lerinin mevcut konak havuzunuza doğru şekilde kaydedildiğini doğrulamak için PowerShell DSC uzantısını çalıştıramadığı için oluşur. Adı "-0" ile biten oturum ana bilgisayarı çalışıyor olmalıdır ancak diğer oturum konakları için bu hataları güvenle yoksayabilirsiniz veya dağıtım işlemini başlatmadan önce mevcut konak havuzundaki tüm oturum ana bilgisayarları ' nı başlatarak hatalardan kaçınabilirsiniz.
 
 ## <a name="redeploy-from-azure"></a>Azure 'dan yeniden dağıtın
 
@@ -96,7 +96,7 @@ Toplam VM sayısı dışında, bu bölümdeki tüm parametre değerleri, ana bil
 1. Mevcut oturum ana bilgisayarı VM 'leriyle eşleşen VM boyutunu seçin.
 
     >[!NOTE]
-    >Aradığınız belirli VM boyutu VM boyut Seçicisi 'nde görünmezse, bu, henüz Azure Market aracına eklendi. VM boyutu istemek için [Windows sanal masaüstü UserVoice forumundaki](https://windowsvirtualdesktop.uservoice.com/forums/921118-general)bir istek oluşturun veya var olan bir isteği oylayın.
+    >Aradığınız belirli VM boyutu VM boyut Seçicisi 'nde görünmezse, bu, henüz Azure Market aracına eklendi.
 
 2. Konak havuzunuzdaki olmasını istediğiniz oturum ana bilgisayarlarının toplam sayısını seçmek için *kullanım profilini*, *Toplam kullanıcıları* ve *sanal makine sayısı* parametrelerini özelleştirin. Örneğin, ana bilgisayar havuzunuzu beş oturum ana bilgisayardan sekiz ' a genişleyorsanız, 8 sanal makineye ulaşmak için bu seçenekleri yapılandırın.
 3. Sanal makinelerin adları için bir ön ek girin. Örneğin, "önek" adını girerseniz, sanal makineler "ön ek-0", "ön ek-1" olarak adlandırılır ve bu şekilde devam eder.

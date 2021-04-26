@@ -10,12 +10,12 @@ author: jpe316
 ms.date: 09/28/2020
 ms.topic: conceptual
 ms.custom: how-to, devx-track-python
-ms.openlocfilehash: 807174fdbede2e4631b3ca1df7220904038da4c8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ef64d94ed3e860895bcc81a1429008205a1a8acb
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102518305"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817116"
 ---
 # <a name="train-scikit-learn-models-at-scale-with-azure-machine-learning"></a>Scikit 'i eğitme-Azure Machine Learning modelleri uygun ölçekte öğrenme
 
@@ -203,5 +203,5 @@ Daha ayrıntılı Azure Machine Learning dağıtımı [nasıl](how-to-deploy-and
 
 Bu makalede, bir scikit-öğren modeli eğitildiniz ve kaydettiniz ve dağıtım seçenekleri hakkında bilgi edindiniz. Azure Machine Learning hakkında daha fazla bilgi edinmek için bu makaleye bakın.
 
-* [Eğitim sırasında çalıştırma ölçümlerini izleyin](how-to-track-experiments.md)
+* [Eğitim sırasında çalıştırma ölçümlerini izleyin](how-to-log-view-metrics.md)
 * [Hiperparametreleri ayarlama](how-to-tune-hyperparameters.md)

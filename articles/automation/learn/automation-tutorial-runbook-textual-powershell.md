@@ -6,12 +6,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 04/19/2020
 ms.topic: tutorial
-ms.openlocfilehash: 896b4db433164471f41aa09791ede5d677028bfb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 958cbf8b7b03e2dd9e4b0e03ba178ffe180bfb48
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98896621"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831267"
 ---
 # <a name="tutorial-create-a-powershell-runbook"></a>Öğretici: PowerShell runbook 'u oluşturma
 
@@ -138,7 +139,7 @@ Aşağıdaki örnekte gösterildiği gibi, farklı çalıştır bağlantısı [C
 
    ```powershell
    # Ensures you do not inherit an AzContext in your runbook
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
 
    $connection = Get-AutomationConnection -Name AzureRunAsConnection
 
@@ -170,7 +171,7 @@ Aşağıdaki örnekte gösterildiği gibi, farklı çalıştır bağlantısı [C
 
    ```powershell
    # Ensures you do not inherit an AzContext in your runbook
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
 
    $connection = Get-AutomationConnection -Name AzureRunAsConnection
 
@@ -202,7 +203,7 @@ Runbook 'larınızın Azure aboneliğinizde kimlik doğrulaması yapdığına g�
 
    ```powershell
    # Ensures you do not inherit an AzContext in your runbook
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
 
    $connection = Get-AutomationConnection -Name AzureRunAsConnection
    while(!($connectionResult) -and ($logonAttempt -le 10))
@@ -237,7 +238,7 @@ Runbook 'larınız Şu anda runbook 'ta sabit kodlanmış sanal makineyi başlat
     [string]$ResourceGroupName
    )
    # Ensures you do not inherit an AzContext in your runbook
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
 
    $connection = Get-AutomationConnection -Name AzureRunAsConnection
    while(!($connectionResult) -and ($logonAttempt -le 10))

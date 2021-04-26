@@ -3,7 +3,7 @@ title: Azure DDoS koruma özellikleri
 description: Azure DDoS koruması özelliklerini öğrenin
 services: ddos-protection
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 ms.service: ddos-protection
 ms.devlang: na
 ms.topic: conceptual
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/08/2020
 ms.author: yitoh
-ms.openlocfilehash: 602bb98f2cdc8a96874eba8dadfa33f3267d19ac
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 490a65c7d20194956350166d23e2d3450b94b12e
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97746567"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103105"
 ---
 # <a name="azure-ddos-protection-standard-features"></a>Azure DDoS Koruması Standart'ın özellikleri
 

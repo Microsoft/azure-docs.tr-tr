@@ -1,6 +1,6 @@
 ---
-title: Microsoft Azure Maps Hava durumu Hizmetleri (Önizleme) kapsamı
-description: Microsoft Azure Maps Hava durumu Hizmetleri (Önizleme) kapsamı hakkında bilgi edinin
+title: Microsoft Azure Maps Hava durumu Hizmetleri kapsamı
+description: Microsoft Azure Maps Hava durumu Hizmetleri kapsamı hakkında bilgi edinin
 author: anastasia-ms
 ms.author: v-stharr
 ms.date: 12/07/2020
@@ -9,19 +9,14 @@ ms.service: azure-maps
 services: azure-maps
 ms.custom: references_regions
 manager: philmea
-ms.openlocfilehash: 6c4e9eb765a72b7a0b495f81a954b484ef6aa2b7
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5ac209dc898c2d30f8d50a8989b188ef5a9f5046
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96905494"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257679"
 ---
-# <a name="azure-maps-weather-services-preview-coverage"></a>Azure haritalar Hava durumu Hizmetleri (Önizleme) kapsamı
-
-> [!IMPORTANT]
-> Azure haritalar Hava durumu Hizmetleri şu anda genel önizlemededir.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
+# <a name="azure-maps-weather-services-coverage"></a>Azure haritalar Hava durumu Hizmetleri kapsamı
 
 Bu makalede Azure haritalar [Hava durumu Hizmetleri](/rest/api/maps/weather)için kapsam bilgileri sağlanmaktadır. Azure haritalar Hava durumu veri Hizmetleri, radar kutucukları, geçerli hava durumu koşulları, hava durumu tahminleri ve bir rota üzerinde hava durumu gibi ayrıntıları getirir.
 

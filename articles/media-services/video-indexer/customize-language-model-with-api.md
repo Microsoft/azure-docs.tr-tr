@@ -10,12 +10,12 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 02/04/2020
 ms.author: kumud
-ms.openlocfilehash: f373afae03357ffb65eb459f806fe441e29b21b9
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 890e02812fb06cf0b0ebe990b0175311d5c85ab5
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87047084"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312935"
 ---
 # <a name="customize-a-language-model-with-the-video-indexer-api"></a>Video Indexer API ile dil modelini özelleştirme
 
@@ -27,7 +27,7 @@ Bu konuda açıklandığı gibi, hesabınızda özel dil modelleri oluşturmak v
 
 ## <a name="create-a-language-model"></a>Dil modeli oluşturma
 
-[Dil modeli oluşturma](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Create-Language-Model?) API 'si, belirtilen hesapta yeni bir özel dil modeli oluşturur. Bu çağrıda dil modeli için dosyaları karşıya yükleyebilirsiniz. Alternatif olarak, dili modelini buradan oluşturup dil modelini güncelleştirerek model için dosyaları karşıya yükleyebilirsiniz.
+[Dil modeli oluşturma](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Create-Language-Model) API 'si, belirtilen hesapta yeni bir özel dil modeli oluşturur. Bu çağrıda dil modeli için dosyaları karşıya yükleyebilirsiniz. Alternatif olarak, dili modelini buradan oluşturup dil modelini güncelleştirerek model için dosyaları karşıya yükleyebilirsiniz.
 
 > [!NOTE]
 > Dosyaların içeriğini öğrenmek için modeli etkin dosyaları ile eğitmeye devam etmeniz gerekir. Bir dilin eğitiminde yönergeler sonraki bölümde yer alır.
@@ -70,7 +70,7 @@ Yanıt, yeni oluşturulan dil modelinde meta veriler sağlar ve bu örnek JSON �
 
 ## <a name="train-a-language-model"></a>Dil modeli eğitme
 
-[Dil modeli eğitme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Train-Language-Model?&pattern=train) API 'si, belirtilen hesapta, dil modelinde yüklenmiş ve etkin olan dosyalardaki içeriğe sahip olan özel bir dil modeli sağlar.
+[Dil modeli eğitme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Train-Language-Model) API 'si, belirtilen hesapta, dil modelinde yüklenmiş ve etkin olan dosyalardaki içeriğe sahip olan özel bir dil modeli sağlar.
 
 > [!NOTE]
 > Önce dil modelini oluşturmanız ve dosyalarını karşıya yüklemeniz gerekir. Dil modelini oluştururken veya dil modelini güncelleştirerek dosyaları karşıya yükleyebilirsiniz.
@@ -105,11 +105,11 @@ Yanıt, yeni eğitilen dil modelinde meta veriler sağlar ve bu örnek JSON çı
 }
 ```
 
-Döndürülen, `id` dil modellerini ayırt etmek için kullanılan benzersiz BIR kimliktir, ancak `languageModelId` video API 'leri dizine eklemek ve [yeniden dizinlemek](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-index-video?) için [bir video yüklemek](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) için kullanılır (Ayrıca, `linguisticModelId` video Indexer karşıya yükleme/yeniden oluşturma API 'lerinde olarak da bilinir).
+Döndürülen, `id` dil modellerini ayırt etmek için kullanılan benzersiz BIR kimliktir, ancak `languageModelId` video API 'leri dizine eklemek ve [yeniden dizinlemek](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Re-Index-Video) için [bir video yüklemek](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Upload-Video) için kullanılır (Ayrıca, `linguisticModelId` video Indexer karşıya yükleme/yeniden oluşturma API 'lerinde olarak da bilinir).
 
 ## <a name="delete-a-language-model"></a>Dil modelini silme
 
-[Dil modeli silme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Delete-Language-Model?&pattern=delete) API 'si, belirtilen hesaptan özel bir dil modelini siler. Silinen dil modelini kullanan tüm videolar, videoyu yeniden dizinle aynı dizini tutar. Videoyu yeniden dizinle, videoya yeni bir dil modeli atayabilirsiniz. Aksi takdirde, Video Indexer videoyu yeniden eklemek için varsayılan modelini kullanır.
+[Dil modeli silme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Delete-Language-Model) API 'si, belirtilen hesaptan özel bir dil modelini siler. Silinen dil modelini kullanan tüm videolar, videoyu yeniden dizinle aynı dizini tutar. Videoyu yeniden dizinle, videoya yeni bir dil modeli atayabilirsiniz. Aksi takdirde, Video Indexer videoyu yeniden eklemek için varsayılan modelini kullanır.
 
 ### <a name="response"></a>Yanıt
 
@@ -117,7 +117,7 @@ Dil modeli başarıyla silindiğinde döndürülen içerik yok.
 
 ## <a name="update-a-language-model"></a>Dil modelini güncelleştirme
 
-[Dil modeli güncelleştirme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Language-Model?&pattern=update) API 'si, belirtilen hesapta özel bir dil kişi modelini güncelleştirir.
+[Dil modeli güncelleştirme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Language-Model) API 'si, belirtilen hesapta özel bir dil kişi modelini güncelleştirir.
 
 > [!NOTE]
 > Dil modelini zaten oluşturmuş olmanız gerekir. Bu çağrıyı, modelin altındaki tüm dosyaları etkinleştirmek veya devre dışı bırakmak, dil modelinin adını güncelleştirmek ve dil modeline eklenecek dosyaları yüklemek için kullanabilirsiniz.
@@ -161,7 +161,7 @@ Yanıt, yeni eğitilen dil modelinde meta veriler sağlar ve bu örnek JSON çı
 
 ## <a name="update-a-file-from-a-language-model"></a>Dil modelinden dosya güncelleştirme
 
-[Bir dosyayı güncelleştirme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Language-Model-file?&pattern=update) , `enable` belirtilen hesaptaki özel dil modelinde bir dosyanın adını ve durumunu güncelleştirmenize olanak tanır.
+[Bir dosyayı güncelleştirme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Language-Model-file) , `enable` belirtilen hesaptaki özel dil modelinde bir dosyanın adını ve durumunu güncelleştirmenize olanak tanır.
 
 ### <a name="response"></a>Yanıt
 
@@ -181,7 +181,7 @@ Yanıt, aşağıdaki örnek JSON çıktısı biçimini izleyerek güncelleştird
 
 ## <a name="get-a-specific-language-model"></a>Belirli bir dil modelini al
 
-[Get](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Language-Model?&pattern=get) API 'si, belirtilen hesapta belirtilen dil modeli ve dil modelindeki dosyalar gibi bilgileri döndürür.
+[Get](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Language-Model) API 'si, belirtilen hesapta belirtilen dil modeli ve dil modelindeki dosyalar gibi bilgileri döndürür.
 
 ### <a name="response"></a>Yanıt
 
@@ -217,7 +217,7 @@ Yanıt, belirtilen dil modelinde meta veriler sağlar ve bu örnek JSON çıkı�
 
 ## <a name="get-all-the-language-models"></a>Tüm dil modellerini al
 
-Tüm API 'leri [Al](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Language-Models?&pattern=get) , belirtilen hesaptaki tüm özel dil modellerini bir listede döndürür.
+Tüm API 'leri [Al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Language-Models) , belirtilen hesaptaki tüm özel dil modellerini bir listede döndürür.
 
 ### <a name="response"></a>Yanıt
 
@@ -261,7 +261,7 @@ Yanıt, hesabınızdaki tüm dil modellerinin ve bu örnek JSON çıkışının 
 
 ## <a name="delete-a-file-from-a-language-model"></a>Dil modelinden dosya silme
 
-[Delete](https://api-portal.videoindexer.ai/docs/services/operations/operations/Delete-Language-Model-File?&pattern=delete) API 'si belirtilen hesapta belirtilen dil modelinden belirtilen dosyayı siler.
+[Delete](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Delete-Language-Model-File) API 'si belirtilen hesapta belirtilen dil modelinden belirtilen dosyayı siler.
 
 ### <a name="response"></a>Yanıt
 
@@ -269,7 +269,7 @@ Dosya dil modelinden başarıyla silindiğinde döndürülen içerik yok.
 
 ## <a name="get-metadata-on-a-file-from-a-language-model"></a>Dil modelinden dosya üzerinde meta verileri al
 
-[Bir dosya API 'sinin Al meta verileri](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Language-Model-File-Data?&pattern=get%20language%20model) , hesabınızdaki seçili dil modelinden belirtilen dosyadaki içeriğini ve meta verileri döndürür.
+[Bir dosya API 'sinin Al meta verileri](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Language-Model-File-Data) , hesabınızdaki seçili dil modelinden belirtilen dosyadaki içeriğini ve meta verileri döndürür.
 
 ### <a name="response"></a>Yanıt
 
@@ -291,7 +291,7 @@ Yanıt, dosyanın içeriğini ve meta verilerini JSON biçiminde, bu örneğe be
 
 ## <a name="download-a-file-from-a-language-model"></a>Dil modelinden dosya indirme
 
-[Bir dosya indir](https://api-portal.videoindexer.ai/docs/services/operations/operations/Download-Language-Model-File-Content?) API 'si, belirtilen dosyanın içeriğini içeren bir metin dosyasını belirtilen hesapta belirtilen dil modelinden indirir. Bu metin dosyası, özgün olarak karşıya yüklenen metin dosyasının içeriğiyle eşleşmelidir.
+[Bir dosya indir](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Download-Language-Model-File-Content) API 'si, belirtilen dosyanın içeriğini içeren bir metin dosyasını belirtilen hesapta belirtilen dil modelinden indirir. Bu metin dosyası, özgün olarak karşıya yüklenen metin dosyasının içeriğiyle eşleşmelidir.
 
 ### <a name="response"></a>Yanıt
 

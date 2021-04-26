@@ -12,12 +12,12 @@ ms.author: sethm
 ms.reviewer: thsomasu
 ms.lastreviewed: 02/14/2019
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 5dd1044895ba55d1fbc6be7f4f4a2d7f615daa16
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 31d915cd44bcf60f3515eb1a84309980f45d40b0
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94887272"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868312"
 ---
 # <a name="quickstart-set-up-push-notifications-in-a-notification-hub"></a>Hızlı başlangıç: Bildirim Hub 'ında anında iletme bildirimleri ayarlama
 
@@ -75,13 +75,13 @@ Google Firebase Cloud Messaging (FCM) projeniz için **API anahtarına** ihtiyac
 
 ### <a name="set-up-push-notifications-for-google-fcm"></a>Google FCM için anında iletme bildirimleri ayarlama
 
-1. Google API anahtarınızı Notification Hub 'ınıza eklemek için [az Notification-Hub Credential GCM Update](/cli/azure/ext/notification-hub/notification-hub/credential/gcm#ext-notification-hub-az-notification-hub-credential-gcm-update) komutunu kullanın.
+1. Google API anahtarınızı Notification Hub 'ınıza eklemek için [az Notification-Hub Credential GCM Update](/cli/azure/notification-hub/credential/gcm#az_notification_hub_credential_gcm_update) komutunu kullanın.
 
    ```azurecli
    az notification-hub credential gcm update --resource-group spnhubrg --namespace-name spnhubns    --notification-hub-name spfcmtutorial1nhub --google-api-key myKey
    ```
 
-2. Android uygulamasının Bildirim Hub 'ına bağlanmak için bir bağlantı dizesi olması gerekir.  Kullanılabilir erişim ilkelerini listelemek için [az Notification-Hub Authorization-Rule List](/cli/azure/ext/notification-hub/notification-hub/authorization-rule#ext-notification-hub-az-notification-hub-authorization-rule-list) komutunu kullanın.  Erişim ilkesi bağlantı dizelerini almak için [az Notification-Hub Authorization-Rule List-Keys](/cli/azure/ext/notification-hub/notification-hub/authorization-rule#ext-notification-hub-az-notification-hub-authorization-rule-list-keys) komutunu kullanın.  Birincil bağlantı dizesini doğrudan almak için parametresinde **primaryconnectionstring** veya **secondaryconnectionstring** öğesini belirtin `--query` .
+2. Android uygulamasının Bildirim Hub 'ına bağlanmak için bir bağlantı dizesi olması gerekir.  Kullanılabilir erişim ilkelerini listelemek için [az Notification-Hub Authorization-Rule List](/cli/azure/notification-hub/authorization-rule#az_notification_hub_authorization_rule_list) komutunu kullanın.  Erişim ilkesi bağlantı dizelerini almak için [az Notification-Hub Authorization-Rule List-Keys](/cli/azure/notification-hub/authorization-rule#az_notification_hub_authorization_rule_list_keys) komutunu kullanın.  Birincil bağlantı dizesini doğrudan almak için parametresinde **primaryconnectionstring** veya **secondaryconnectionstring** öğesini belirtin `--query` .
 
    ```azurecli
    #list access policies for a notification hub
@@ -94,7 +94,7 @@ Google Firebase Cloud Messaging (FCM) projeniz için **API anahtarına** ihtiyac
    az notification-hub authorization-rule list-keys --resource-group spnhubrg --namespace-name spnhubns --notification-hub-name spfcmtutorial1nhub --name myAccessPolicyName --query primaryConnectionString
    ```
 
-3. Android uygulamasına ileti göndermeyi sınamak için [az Notification-Hub test-Send](/cli/azure/ext/notification-hub/notification-hub#ext-notification-hub-az-notification-hub-test-send) komutunu kullanın.
+3. Android uygulamasına ileti göndermeyi sınamak için [az Notification-Hub test-Send](/cli/azure/notification-hub#az_notification_hub_test_send) komutunu kullanın.
 
    ```azurecli
    #test with message body
@@ -104,7 +104,7 @@ Google Firebase Cloud Messaging (FCM) projeniz için **API anahtarına** ihtiyac
    az notification-hub test-send --resource-group spnhubrg --namespace-name spnhubns --notification-hub-name spfcmtutorial1nhub --notification-format gcm --payload "{\"data\":{\"message\":\"my JSON string\"}}"
    ```
 
-[Az Notification-Hub Credential](/cli/azure/ext/notification-hub/notification-hub/credential) komutuyla diğer platformlar IÇIN Azure CLI başvuruları alın.
+[Az Notification-Hub Credential](/cli/azure/notification-hub/credential) komutuyla diğer platformlar IÇIN Azure CLI başvuruları alın.
 
 Android uygulamasına bildirim gönderme hakkında daha fazla bilgi için bkz. [Firebase kullanarak Android cihazlarına anında iletme bildirimleri gönderme](notification-hubs-android-push-notification-google-fcm-get-started.md).
 

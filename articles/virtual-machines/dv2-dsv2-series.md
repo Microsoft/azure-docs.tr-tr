@@ -7,12 +7,12 @@ ms.subservice: vm-sizes-general
 ms.topic: conceptual
 ms.date: 02/03/2020
 ms.author: jushiman
-ms.openlocfilehash: a3dee22a1ee793641e48be6edb1b33a00219217e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 71a4cebcc11657566f65f53508df18efe822c409
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102560319"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107514793"
 ---
 # <a name="dv2-and-dsv2-series"></a>Dv2 ve DSv2 serisi
 
@@ -28,7 +28,7 @@ Dv2 serisi Boyutlar, Intel Turbo Boost Technology 2,0 ile Intel® Xeon® Platinu
 [Dinamik geçiş](maintenance-and-updates.md): destekleniyor<br>
 [Güncelleştirmeleri koruyan bellek](maintenance-and-updates.md): desteklenir<br>
 [VM oluşturma desteği](generation-2.md): 1. nesil<br>
-[Hızlandırılmış ağ](../virtual-network/create-vm-accelerated-networking-cli.md): desteklenir (*en az 4 vCPU gerektirir*)<br>
+[Hızlandırılmış ağ](../virtual-network/create-vm-accelerated-networking-cli.md): desteklenir (*en az 2 vCPU gerektirir*)<br>
 [Kısa ömürlü işletim sistemi diskleri](ephemeral-os-disks.md): desteklenmez <br>
 <br>
 
@@ -50,7 +50,7 @@ DSv2 serisi boyutlar Intel® Xeon® Platinum 8272CL (Cascade Lake), Intel® Xeon
 [Dinamik geçiş](maintenance-and-updates.md): destekleniyor<br>
 [Güncelleştirmeleri koruyan bellek](maintenance-and-updates.md): desteklenir<br>
 [VM oluşturma desteği](generation-2.md): 1. ve 2. nesil<br>
-[Hızlandırılmış ağ](../virtual-network/create-vm-accelerated-networking-cli.md): desteklenir (*en az 4 vCPU gerektirir*)<br>
+[Hızlandırılmış ağ](../virtual-network/create-vm-accelerated-networking-cli.md): desteklenir (*en az 2 vCPU gerektirir*)<br>
 [Kısa ömürlü işletim sistemi diskleri](ephemeral-os-disks.md): desteklenir <br>
 <br>
 

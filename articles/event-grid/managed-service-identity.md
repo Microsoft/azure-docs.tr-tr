@@ -4,10 +4,10 @@ description: Bu makalede bir Azure olay Kılavuzu konusu için yönetilen hizmet
 ms.topic: how-to
 ms.date: 03/25/2021
 ms.openlocfilehash: 76f10b4627dc9578b1e616a868eab03431b59b69
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105625288"
 ---
 # <a name="event-delivery-with-a-managed-identity"></a>Yönetilen bir kimlikle olay teslimi

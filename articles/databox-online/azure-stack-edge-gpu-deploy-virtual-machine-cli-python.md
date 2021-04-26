@@ -8,12 +8,12 @@ ms.subservice: edge
 ms.topic: how-to
 ms.date: 03/04/2021
 ms.author: alkohli
-ms.openlocfilehash: 38ba5679731b5e52eb06751a625aea9df69c76ca
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 14d9c762702648d25efcbcc7ac85824659e20f05
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105643210"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304078"
 ---
 # <a name="deploy-vms-on-your-azure-stack-edge-pro-gpu-device-using-azure-cli-and-python"></a>Azure CLı ve Python kullanarak Azure Stack Edge Pro GPU cihazınızda sanal makineler dağıtma
 
@@ -355,7 +355,7 @@ Azure CLı ve Python kullanarak Azure Stack Edge Pro cihazınızda bir VM oluşt
 
    Azure Resource Manager Istemci KIMLIĞINIZ sabit kodlanmış. Azure Resource Manager kiracı KIMLIĞINIZ ve Azure Resource Manager abonelik KIMLIĞINIZ, `az login` daha önce çalıştırdığınız komutun çıktısında bulunur. Azure Resource Manager Istemci parolası, ayarladığınız Azure Resource Manager paroladır.
 
-   Daha fazla bilgi için bkz. [Azure Resource Manager Password](/azure/azure-stack-edge-gpu-set-azure-resource-manager-password).
+   Daha fazla bilgi için bkz. [Azure Resource Manager Password](/azure/databox-online/azure-stack-edge-gpu-set-azure-resource-manager-password).
 
 5. Profili 2019-03-01-karma sürüm olarak değiştirin. Profil sürümünü değiştirmek için aşağıdaki komutu çalıştırın:
 

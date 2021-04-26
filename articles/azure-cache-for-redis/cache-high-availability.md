@@ -6,12 +6,12 @@ ms.service: cache
 ms.topic: conceptual
 ms.date: 02/08/2021
 ms.author: yegu
-ms.openlocfilehash: ad6696fc4fe2af7047c25a3a9c260d3b12588ee2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6c44c87221442797f063877385ac5eb7f8585850
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102203309"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107719106"
 ---
 # <a name="high-availability-for-azure-cache-for-redis"></a>Redsıs için Azure önbelleği için yüksek kullanılabilirlik
 
@@ -21,9 +21,9 @@ Redin için Azure Cache, bir önbellek için *düğüm* olarak adlandırılan bi
 
 | Seçenek | Açıklama | Kullanılabilirlik | Standart | Premium | Kurumsal |
 | ------------------- | ------- | ------- | :------: | :---: | :---: |
-| [Standart çoğaltma](#standard-replication)| Otomatik yük devretme ile tek bir veri merkezinde çift düğümlü çoğaltılan yapılandırma | %99,9 |✔|✔|-|
-| [Bölge yedekliliği](#zone-redundancy) | Otomatik yük devretme ile AZs genelinde çok düğümlü çoğaltılan yapılandırma | % 99,95 (Premium katman),% 99,99 (kurumsal Katmanlar) |-|Önizleme|Önizleme|
-| [Coğrafi çoğaltma](#geo-replication) | Kullanıcı denetimli yük devretmeyle, iki bölgedeki bağlantılı önbellek örnekleri | % 99,999 (kurumsal katman) |-|✔|Önizleme|
+| [Standart çoğaltma](#standard-replication)| Otomatik yük devretme ile tek bir veri merkezinde çift düğümlü çoğaltılan yapılandırma | % 99,9 ( [ayrıntılara](https://azure.microsoft.com/support/legal/sla/cache/v1_0/)bakın) |✔|✔|-|
+| [Bölge yedekliliği](#zone-redundancy) | Otomatik yük devretme ile AZs genelinde çok düğümlü çoğaltılan yapılandırma | % 99,99 ' e kadar ( [ayrıntılara](https://azure.microsoft.com/support/legal/sla/cache/v1_0/)bakın) |-|Önizleme|✔|
+| [Coğrafi çoğaltma](#geo-replication) | Kullanıcı denetimli yük devretmeyle, iki bölgedeki bağlantılı önbellek örnekleri | % 99,999 ' e kadar ( [ayrıntılara](https://azure.microsoft.com/support/legal/sla/cache/v1_0/)bakın) |-|✔|Önizleme|
 
 ## <a name="standard-replication"></a>Standart çoğaltma
 

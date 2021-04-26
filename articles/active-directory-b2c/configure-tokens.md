@@ -7,17 +7,17 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: how-to
-ms.date: 12/14/2020
+ms.date: 04/05/2021
 ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: f22a55a65b7dc4fd4f714d880804e6fd65dbbe46
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0f5586b43143763ebf36adb15d96fdb2a91b5f5c
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101654383"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443483"
 ---
 # <a name="configure-tokens-in-azure-active-directory-b2c"></a>Azure Active Directory B2C'de belirteçleri yapılandırma
 
@@ -228,6 +228,10 @@ OutputClaim öğesi aşağıdaki öznitelikleri içerir:
 - **Alwaysusedefaultvalue** -varsayılan değerin kullanımını zorunlu kılın.
 
 ::: zone-end
+
+## <a name="authorization-code-lifetime"></a>Yetkilendirme kodu ömrü
+
+Uygulama, [OAuth 2,0 yetkilendirme kodu akışını](authorization-code-flow.md)kullanırken, bir hedef kaynak için erişim belirteci istemek üzere yetkilendirme kodunu kullanabilir. Yetkilendirme kodları yaklaşık 10 dakika sonra süresi dolacak olan kısa süreli. Yetkilendirme kodu ömrü yapılandırılamıyor. Uygulamanızın yetkilendirme kodlarını 10 dakika içinde olduğundan emin olun. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

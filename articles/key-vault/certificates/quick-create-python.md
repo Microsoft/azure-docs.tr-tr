@@ -7,13 +7,13 @@ ms.date: 09/03/2020
 ms.service: key-vault
 ms.subservice: certificates
 ms.topic: quickstart
-ms.custom: devx-track-python, devx-track-azurecli
-ms.openlocfilehash: 2026b1721dbe05af1ecc52324d1dd0ebf2ec3d08
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.custom: devx-track-python
+ms.openlocfilehash: b980a74ebd4fd072c5e04089a737cb387d968f74
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104802667"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814433"
 ---
 # <a name="quickstart-azure-key-vault-certificate-client-library-for-python"></a>Hızlı başlangıç: Python için sertifika istemci kitaplığı Azure Key Vault
 
@@ -183,7 +183,7 @@ Key Vault bir sertifikayı okumak için [get_certificate](/python/api/azure-keyv
 retrieved_certificate = client.get_certificate(certificateName)
  ```
 
-Sertifikanın, [az keykasa sertifikası Show](/cli/azure/keyvault/certificate?#az-keyvault-certificate-show)Azure CLI komutuyla ayarlandığını da doğrulayabilirsiniz.
+Sertifikanın, [az keykasa sertifikası Show](/cli/azure/keyvault/certificate?#az_keyvault_certificate_show)Azure CLI komutuyla ayarlandığını da doğrulayabilirsiniz.
 
 ### <a name="delete-a-certificate"></a>Sertifikayı silme
 
@@ -196,7 +196,7 @@ deleted_certificate = poller.result()
 
 `begin_delete_certificate`Yöntemi zaman uyumsuzdur ve bir Poller nesnesi döndürür. Poller 'ın metodunu çağırma işleminin `result` tamamlanmasını bekler.
 
-Sertifikanın, [az keykasa sertifikası Show](/cli/azure/keyvault/certificate?#az-keyvault-certificate-show)Azure CLI komutuyla silindiğini doğrulayabilirsiniz.
+Sertifikanın, [az keykasa sertifikası Show](/cli/azure/keyvault/certificate?#az_keyvault_certificate_show)Azure CLI komutuyla silindiğini doğrulayabilirsiniz.
 
 Silinen bir sertifika, bir süredir silinmiş ancak kurtarılabilir durumda kalır. Kodu yeniden çalıştırırsanız, farklı bir sertifika adı kullanın.
 
@@ -213,7 +213,7 @@ az group delete --resource-group KeyVault-PythonQS-rg
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Azure Anahtar Kasası'na Genel Bakış](../general/overview.md)
-- [Anahtar kasasına erişimin güvenliğini sağlama](../general/secure-your-key-vault.md)
+- [Anahtar kasasına erişimin güvenliğini sağlama](../general/security-features.md)
 - [Geliştirici Kılavuzu Azure Key Vault](../general/developers-guide.md)
-- [Key Vault güvenliğe genel bakış](../general/security-overview.md)
+- [Key Vault güvenliğe genel bakış](../general/security-features.md)
 - [Key Vault ile kimlik doğrulama](../general/authentication.md)

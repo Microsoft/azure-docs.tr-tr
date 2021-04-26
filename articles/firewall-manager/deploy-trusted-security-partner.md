@@ -5,14 +5,14 @@ services: firewall-manager
 author: vhorne
 ms.service: firewall-manager
 ms.topic: how-to
-ms.date: 12/01/2020
+ms.date: 03/31/2021
 ms.author: victorh
-ms.openlocfilehash: 906687e08c9f31890a9ecec9154079e704512832
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b8e10eef89df12807cabd96d64d9c7d659f91d6c
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96485731"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109518"
 ---
 # <a name="deploy-a-security-partner-provider"></a>Güvenlik iş ortağı sağlayıcısı dağıtma
 
@@ -90,28 +90,25 @@ Sanal hub 'ın VPN Gateway tünellerini ayarlamak için, üçüncü taraf sağla
    
 2. Azure 'da Azure sanal WAN portalındaki tünel oluşturma durumuna bakabilirsiniz. Tüneller hem Azure 'da hem de iş ortağı portalında **bağlı** olduktan sonra, hangi dalların ve sanal ağların Iş ortağına Internet trafiği gönderebilmelidir.
 
-## <a name="configure-route-settings"></a>Yol ayarlarını yapılandırma
+## <a name="configure-security-with-firewall-manager"></a>Güvenlik Duvarı Yöneticisi ile güvenliği yapılandırma
 
 1. Azure Güvenlik Duvarı Yöneticisi-> güvenli hub 'Lara gidin. 
 2. Bir hub seçin. Hub durumu artık **güvenlik bağlantısı bekleyen** yerine **sağlanmış** olarak gösterilmelidir.
 
    Üçüncü taraf sağlayıcının hub 'a bağlanabildiğinden emin olun. VPN ağ geçidinde bulunan tünellerin **bağlı** durumda olması gerekir. Bu durum, önceki durum ile karşılaştırıldığında merkez ve üçüncü taraf iş ortağı arasındaki bağlantı durumunun daha yansıtısıdır.
-3. Hub ' ı seçin ve **yol ayarları**' na gidin.
+3. Hub ' ı seçin ve **Güvenlik Yapılandırması**' na gidin.
 
    Hub 'a bir üçüncü taraf sağlayıcı dağıttığınızda, hub 'ı *güvenli bir sanal hub*'a dönüştürür. Bu, üçüncü taraf sağlayıcının hub 'a bir 0.0.0.0/0 (varsayılan) yolu tanıtmasını sağlar. Ancak, bu varsayılan yolu almak zorunda kalmadığınız müddetçe hub 'a bağlı VNet bağlantıları ve siteleri bu yolu almaz.
-4. **İnternet trafiği** altında, rotalar üçüncü taraf ile **Internet 'e** veya **daldan Internet** ' i veya her ikisini birden seçin.
+4. **Internet trafiğini** , güvenilir bir güvenlik iş ortağı aracılığıyla Azure Güvenlik Duvarı ve **özel trafik** aracılığıyla ayarlayarak sanal WAN güvenliğini yapılandırın. Bu, sanal WAN 'daki tek tek bağlantıları otomatik olarak korur.
 
-   Bu yalnızca, hub 'a hangi trafik türünün yönlendirildiğini gösterir, ancak henüz VNET veya dallardaki yolları etkilemez. Bu yollar, varsayılan olarak hub 'a bağlı tüm sanal ağlara/dallara yayılmaz.
-5. **Güvenli bağlantılar** ' ı seçmeniz ve bu yolların ayarlanması gereken bağlantıları seçmeniz gerekir. Bu, üçüncü taraf sağlayıcıya Internet trafiği göndermeye başlayabileceği sanal ağlar/dallar olduğunu gösterir.
-6. **Yönlendirme ayarları**' ndan Internet trafiği altında **güvenli bağlantılar** ' ı seçin, ardından güvenli hale getirilmekte olan VNET veya dalları (sanal WAN 'da *siteler* ) seçin. **Güvenli Internet trafiği**' ni seçin.
-   ![Güvenli Internet trafiği](media/deploy-trusted-security-partner/secure-internet-traffic.png)
-7. Hub 'ları sayfasına geri gidin. Hub 'ın **güvenlik iş ortağı sağlayıcısının** durumu artık  **güvenli** olmalıdır.
+   :::image type="content" source="media/deploy-trusted-security-partner/security-configuration.png" alt-text="Güvenlik yapılandırması":::
+5. Ayrıca, kuruluşunuz sanal ağlarda ve şubelerde ortak IP aralıkları kullanıyorsa, **özel trafik öneklerini** kullanarak bu IP öneklerini açıkça belirtmeniz gerekir. Genel IP adresi önekleri ayrı ayrı veya toplamalar olarak belirtilebilir.
 
 ## <a name="branch-or-vnet-internet-traffic-via-third-party-service"></a>Üçüncü taraf hizmet aracılığıyla şube veya VNet Internet trafiği
 
 Daha sonra, VNet sanal makinelerinin veya şube sitesinin Internete erişip erişemayacağını denetleyebilir ve trafiğin üçüncü taraf hizmetine akan olduğunu doğrulayabilirsiniz.
 
-Yol ayarı adımlarını tamamladıktan sonra, sanal ağ ve şube siteleri de bir 0/0 üçüncü taraf hizmet yoluna gönderilir. RDP veya SSH 'yi bu sanal makinelere kaydedemezsiniz. Oturum açmak için, [Azure](../bastion/bastion-overview.md) savunma hizmetini eşlenmiş bir sanal ağa dağıtabilirsiniz.
+Yol ayarı adımlarını tamamladıktan sonra, sanal ağ sanal makineleri ve şube siteleri, üçüncü taraf hizmet rotasında 0/0 olarak gönderilir. RDP veya SSH 'yi bu sanal makinelere kaydedemezsiniz. Oturum açmak için, [Azure](../bastion/bastion-overview.md) savunma hizmetini eşlenmiş bir sanal ağa dağıtabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

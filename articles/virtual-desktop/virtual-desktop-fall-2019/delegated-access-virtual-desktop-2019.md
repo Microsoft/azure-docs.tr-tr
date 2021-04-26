@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: conceptual
 ms.date: 03/30/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 0152dc5102fd3f77418448234cab1234d25b97c6
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: d683548c32baa37f9657541d90d7a58561a1d723
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88008160"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445032"
 ---
 # <a name="delegated-access-in-windows-virtual-desktop-classic"></a>Windows sanal masaüstü 'nde temsilci erişimi (klasik)
 

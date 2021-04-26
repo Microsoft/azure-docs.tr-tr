@@ -8,13 +8,13 @@ ms.topic: how-to
 ms.date: 03/20/2020
 ms.author: justipat
 ms.reviewer: sngun
-ms.custom: devx-track-csharp
-ms.openlocfilehash: 4d9845fad8c9013bd20499c45a8d1714e30e9dbf
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-csharp, devx-track-azurecli
+ms.openlocfilehash: b85e1fc74688f2883531bd3a6e724a2ce326a9db
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98927404"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600259"
 ---
 # <a name="use-system-assigned-managed-identities-to-access-azure-cosmos-db-data"></a>Azure Cosmos DB verilerine erişmek için sistem tarafından atanan Yönetilen kimlikler kullanın
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -93,10 +93,10 @@ az role assignment create --assignee $principalId --role "DocumentDB Account Con
 
 Artık Azure Cosmos DB izinlerinde **DocumentDB hesabı katılımcısı** rolüyle sistem tarafından atanmış bir yönetilen kimliğe sahip bir işlev uygulamasına sahipsiniz. Aşağıdaki işlev uygulama kodu Azure Cosmos DB anahtarları alır, bir CosmosClient nesnesi oluşturur, Aquarium 'un sıcaklığını alır ve bunu Azure Cosmos DB kaydeder.
 
-Bu örnek Azure Cosmos DB hesap Anahtarlarınıza erişmek için [liste anahtarları API](/rest/api/cosmos-db-resource-provider/2020-04-01/databaseaccounts/listkeys) 'sini kullanır.
+Bu örnek Azure Cosmos DB hesap Anahtarlarınıza erişmek için [liste anahtarları API](/rest/api/cosmos-db-resource-provider/2021-03-15/databaseaccounts/listkeys) 'sini kullanır.
 
 > [!IMPORTANT] 
-> [Cosmos DB hesap okuyucusu rolünü atamak](#grant-access-to-your-azure-cosmos-account) Istiyorsanız, [salt okuma anahtarları API 'sini](/rest/api/cosmos-db-resource-provider/2020-04-01/databaseaccounts/listreadonlykeys)kullanmanız gerekir. Bu, yalnızca salt okunurdur tuşları doldurur.
+> [Cosmos DB hesap okuyucusu rolünü atamak](#grant-access-to-your-azure-cosmos-account) Istiyorsanız, [salt okuma anahtarları API 'sini](/rest/api/cosmos-db-resource-provider/2021-03-15/databaseaccounts/listreadonlykeys)kullanmanız gerekir. Bu, yalnızca salt okunurdur tuşları doldurur.
 
 Liste anahtarları API 'SI nesneyi döndürür `DatabaseAccountListKeysResult` . Bu tür C# kitaplıklarında tanımlı değildir. Aşağıdaki kod bu sınıfın uygulamasını gösterir:  
 

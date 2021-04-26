@@ -4,10 +4,10 @@ description: Azure Service Fabric uygulamalarını, kümelerini ve altyapısın�
 ms.topic: article
 ms.date: 10/16/2018
 ms.openlocfilehash: 92ac0627f02ccefdd4c93aa51cac7c9dd7790460
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105627736"
 ---
 # <a name="azure-service-fabric-monitoring-partners"></a>Azure Service Fabric Izleme Iş ortakları

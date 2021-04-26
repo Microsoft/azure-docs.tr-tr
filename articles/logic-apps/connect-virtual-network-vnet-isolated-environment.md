@@ -5,15 +5,15 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: jonfan, logicappspm
 ms.topic: conceptual
-ms.date: 12/18/2020
-ms.openlocfilehash: 315de18539bf083515658b40fa70f3c214d7c909
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/21/2021
+ms.openlocfilehash: bfef9f2b5420ac9377cc369d7bf9a9bdac76743b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97739748"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874234"
 ---
-# <a name="connect-to-azure-virtual-networks-from-azure-logic-apps-by-using-an-integration-service-environment-ise"></a>Tümleştirme hizmeti ortamı (ıSE) kullanarak Azure Logic Apps Azure sanal ağlarına bağlanma
+# <a name="connect-to-azure-virtual-networks-from-azure-logic-apps-by-using-an-integration-service-environment-ise"></a>Tümleştirme hizmeti ortamını (ISE) kullanarak Azure Logic Apps'ten Azure sanal ağlarına bağlanma
 
 Mantıksal uygulamalarınızın ve tümleştirme hesaplarınızın bir [Azure sanal ağına](../virtual-network/virtual-networks-overview.md)erişmesi gereken senaryolarda, bir [ *tümleştirme hizmeti ortamı* (ISE)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md)oluşturun. ISE, "küresel" çok kiracılı Logic Apps hizmetinden ayrı tutulan, ayrılmış depolama alanının ve diğer kaynakların kullanıldığı ayrılmış bir ortamdır. Bu ayrım Ayrıca diğer Azure kiracılarının uygulamalarınızın performansı üzerinde sahip olabileceği etkileri azaltır. ISE, size kendi statik IP adreslerinizi de sağlar. Bu IP adresleri, genel, çok kiracılı hizmette Logic Apps tarafından paylaşılan statik IP adreslerinden ayrıdır.
 
@@ -80,10 +80,10 @@ Bir Azure sanal ağı ile bir ıSE kullandığınızda, yaygın bir kurulum soru
 
 ISE 'nizin erişilebilir olduğundan ve bu ıSE 'deki mantıksal uygulamaların sanal ağınızdaki her alt ağ üzerinde iletişim kurabildiğinden emin olmak için, [her alt ağ için bu tabloda açıklanan bağlantı noktalarını açın](#network-ports-for-ise). Gerekli bağlantı noktaları kullanılamıyorsa, ıSE 'niz doğru çalışmaz.
 
-* IP kısıtlamalarına sahip diğer uç noktalara erişmesi gereken birden çok ıSE örneğiniz varsa, sanal ağınıza bir [Azure Güvenlik Duvarı](../firewall/overview.md) veya [ağ sanal](../virtual-network/virtual-networks-overview.md#filter-network-traffic) gereci dağıtın ve giden trafiği bu güvenlik duvarı veya ağ sanal gereci üzerinden yönlendirin. Daha sonra, sanal ağınızdaki tüm ıSE örneklerinin hedef sistemlerle iletişim kurmak için kullanabileceği [tek, giden, genel, statik ve öngörülebilir BIR IP adresi ayarlayabilirsiniz](connect-virtual-network-vnet-set-up-single-ip-address.md) . Bu şekilde, her bir ıSE için bu hedef sistemlerde ek güvenlik duvarı açılışlarını ayarlamanız gerekmez.
+* IP kısıtlamalarına sahip diğer uç noktalara erişmesi gereken birden çok ıSE örneğiniz varsa, sanal ağınıza bir [Azure Güvenlik Duvarı](../firewall/overview.md) veya [ağ sanal](../virtual-network/virtual-networks-overview.md#filter-network-traffic) gereci dağıtın ve giden trafiği bu güvenlik duvarı veya ağ sanal gereci üzerinden yönlendirin. Daha sonra, sanal ağınızdaki tüm ıSE örneklerinin hedef sistemlerle iletişim kurmak için kullanabileceği [tek, giden, genel, statik ve öngörülebilir BIR IP adresi ayarlayabilirsiniz](connect-virtual-network-vnet-set-up-single-ip-address.md) . Bu şekilde, her bir ıSE için bu hedef sistemlerde ek güvenlik duvarı boş olanları ayarlamanız gerekmez.
 
    > [!NOTE]
-   > Bu yaklaşımı, senaryolarınız erişmesi gereken IP adresi sayısını sınırlandırmaya gerektirdiğinde tek bir ıSE için kullanabilirsiniz. Güvenlik duvarının veya sanal ağ gerecinin ek maliyetlerinin senaryonuz için anlamlı olup olmadığını göz önünde bulundurun. [Azure Güvenlik Duvarı fiyatlandırması](https://azure.microsoft.com/pricing/details/azure-firewall/)hakkında daha fazla bilgi edinin.
+   > Bu yaklaşımı, senaryolarınız erişmesi gereken IP adresi sayısını sınırlandırmaya gerektirdiğinde tek bir ıSE için kullanabilirsiniz. Güvenlik duvarı veya sanal ağ gereci için ek maliyetlerin senaryonuz için anlamlı olup olmadığını göz önünde bulundurun. [Azure Güvenlik Duvarı fiyatlandırması](https://azure.microsoft.com/pricing/details/azure-firewall/)hakkında daha fazla bilgi edinin.
 
 * Herhangi bir kısıtlama olmadan yeni bir Azure sanal ağı ve alt ağı oluşturduysanız, alt ağlardaki trafiği denetlemek için sanal ağınızda [ağ güvenlik grupları (NSG 'ler)](../virtual-network/network-security-groups-overview.md#network-security-groups) ayarlamanıza gerek yoktur.
 
@@ -91,7 +91,7 @@ ISE 'nizin erişilebilir olduğundan ve bu ıSE 'deki mantıksal uygulamaların 
 
   [NSG güvenlik kurallarını](../virtual-network/network-security-groups-overview.md#security-rules)ayarlarken, hem **TCP** hem *de* **UDP** protokollerini kullanmanız gerekir, aksi **durumda her protokol** için ayrı kurallar oluşturmanız gerekmez. NSG güvenlik kuralları, bu bağlantı noktalarına erişmesi gereken IP adresleri için açmanız gereken bağlantı noktalarını anlatmaktadır. Bu uç noktalar arasındaki tüm güvenlik duvarlarının, yönlendiricilerin veya diğer öğelerin bu IP adresleriyle erişilebilir olan bağlantı noktalarını da tutduğundan emin olun.
 
-* Internet 'e yönelik trafiği yeniden yönlendirmek için güvenlik duvarınız aracılığıyla Zorlamalı tünel ayarlarsanız, [ek Zorlamalı tünel gereksinimlerini](#forced-tunneling)gözden geçirin.
+* Internet 'e ait trafiği yeniden yönlendirmek için güvenlik duvarınız aracılığıyla Zorlamalı tünel ayarlarsanız, [Zorlamalı tünel gereksinimlerini](#forced-tunneling)gözden geçirin.
 
 <a name="network-ports-for-ise"></a>
 
@@ -108,9 +108,9 @@ Bu tabloda, ıSE 'nizin erişilebilir olması ve bu bağlantı noktalarının am
 |---------|------------------------------------|--------------|-----------------------------------------|-------------------|-------|
 | Sanal ağ içinde ıntersubnet iletişimi | ISE alt ağları ile sanal ağın adres alanı | * | ISE alt ağları ile sanal ağın adres alanı | * | Sanal ağınızdaki alt ağlar *arasında* akış için gereken trafik. <p><p>**Önemli**: her bir alt ağdaki *Bileşenler* arasında akış yapılacak trafik için, her alt ağ içinde tüm bağlantı noktalarını açtığınızdan emin olun. |
 | İs <p>Mantıksal uygulamanıza yönelik iletişim <p><p>Mantıksal uygulama için geçmişi çalıştırır| İç ıSE: <br>**VirtualNetwork** <p><p>Dış ıSE: **Internet** veya **notlara** bakın | * | **VirtualNetwork** | 443 | **Internet** Service etiketini kullanmak yerine, bu ÖĞELERIN kaynak IP adresini belirtebilirsiniz: <p><p>-Mantıksal uygulamanızda herhangi bir istek tetikleyicisi veya Web kancası çağıran bilgisayar veya hizmet <p>-Mantıksal uygulama çalıştırma geçmişine erişmek istediğiniz bilgisayar veya hizmet <p><p>**Önemli**: Bu bağlantı noktasını kapatmak veya engellemek, istek Tetikleyicileri veya Web kancaları olan Logic Apps çağrılarını engeller. Ayrıca, çalışma geçmişinde her adımın giriş ve çıkışlara erişmenizi de engellemiş olursunuz. Ancak, mantıksal uygulama çalıştırmaları geçmişine erişim engellenmiyor.|
-| Logic Apps Designer-Dynamic özellikleri | **LogicAppsManagement** | * | **VirtualNetwork** | 454 | İstekler, bu bölge için Logic Apps erişim uç noktasının [gelen IP adreslerinden](../logic-apps/logic-apps-limits-and-config.md#inbound) gelir. |
-| Bağlayıcı dağıtımı | **AzureConnectors** | * | **VirtualNetwork** | 454 | Bağlayıcıları dağıtmak ve güncelleştirmek için gereklidir. Bu bağlantı noktasını kapatmak veya engellemek, ıSE dağıtımlarının başarısız olmasına neden olur ve bağlayıcı güncelleştirmelerini ve düzeltmelerini engeller. |
-| Ağ durumu denetimi | **LogicApps** | * | **VirtualNetwork** | 454 | İstekler, bu bölge için Logic Apps erişim uç noktasının [gelen IP adreslerinden](../logic-apps/logic-apps-limits-and-config.md#inbound) ve [giden IP adreslerinden](../logic-apps/logic-apps-limits-and-config.md#outbound) gelir. |
+| Logic Apps Designer-Dynamic özellikleri | **LogicAppsManagement** | * | **VirtualNetwork** | 454 | İstekler, bu bölge için Logic Apps erişim uç noktasının [gelen IP adreslerinden](../logic-apps/logic-apps-limits-and-config.md#inbound) gelir. <p><p>**Önemli**: Azure Kamu bulutu ile çalışıyorsanız, **Logicappsmanagement** hizmet etiketi çalışmaz. Bunun yerine, Azure Kamu için Logic Apps [gelen IP adreslerini](../logic-apps/logic-apps-limits-and-config.md#azure-government-inbound) sağlamanız gerekir. |
+| Ağ durumu denetimi | **LogicApps** | * | **VirtualNetwork** | 454 | İstekler, bu bölge için Logic Apps erişim uç noktasının [gelen IP adreslerinden](../logic-apps/logic-apps-limits-and-config.md#inbound) ve [giden IP adreslerinden](../logic-apps/logic-apps-limits-and-config.md#outbound) gelir. <p><p>**Önemli**: Azure Kamu bulutu ile çalışıyorsanız, **logicapps** hizmet etiketi çalışmaz. Bunun yerine, Azure Kamu için hem Logic Apps [gelen IP adreslerini](../logic-apps/logic-apps-limits-and-config.md#azure-government-inbound) hem de [giden IP adreslerini](../logic-apps/logic-apps-limits-and-config.md#azure-government-outbound) sağlamanız gerekir. |
+| Bağlayıcı dağıtımı | **AzureConnectors** | * | **VirtualNetwork** | 454 | Bağlayıcıları dağıtmak ve güncelleştirmek için gereklidir. Bu bağlantı noktasını kapatmak veya engellemek, ıSE dağıtımlarının başarısız olmasına neden olur ve bağlayıcı güncelleştirmelerini ve düzeltmelerini engeller. <p><p>**Önemli**: Azure Kamu bulutu ile çalışıyorsanız, **AzureConnectors** Service etiketi çalışmaz. Bunun yerine, Azure Kamu için [yönetilen bağlayıcı gıden IP adreslerini](../logic-apps/logic-apps-limits-and-config.md#azure-government-outbound) sağlamanız gerekir. |
 | App Service yönetimi bağımlılığı | **AppServiceManagement** | * | **VirtualNetwork** | 454, 455 ||
 | Azure Traffic Manager iletişimi | **AzureTrafficManager** | * | **VirtualNetwork** | İç ıSE: 454 <p><p>Dış ıSE: 443 ||
 | İs <p>Bağlayıcı İlkesi dağıtımı <p>API Management yönetim uç noktası | **APIManagement** | * | **VirtualNetwork** | 3443 | Bağlayıcı İlkesi dağıtımı için, bağlayıcıları dağıtmak ve güncelleştirmek için bağlantı noktası erişimi gereklidir. Bu bağlantı noktasını kapatmak veya engellemek, ıSE dağıtımlarının başarısız olmasına neden olur ve bağlayıcı güncelleştirmelerini ve düzeltmelerini engeller. |
@@ -122,7 +122,7 @@ Bu tabloda, ıSE 'nizin erişilebilir olması ve bu bağlantı noktalarının am
 | Amaç | Kaynak hizmet etiketi veya IP adresleri | Kaynak bağlantı noktaları | Hedef hizmet etiketi veya IP adresleri | Hedef bağlantı noktaları | Notlar |
 |---------|------------------------------------|--------------|-----------------------------------------|-------------------|-------|
 | Sanal ağ içinde ıntersubnet iletişimi | ISE alt ağları ile sanal ağın adres alanı | * | ISE alt ağları ile sanal ağın adres alanı | * | Sanal ağınızdaki alt ağlar *arasında* akış için gereken trafik. <p><p>**Önemli**: her bir alt ağdaki *Bileşenler* arasında akış yapılacak trafik için, her alt ağ içinde tüm bağlantı noktalarını açtığınızdan emin olun. |
-| Mantıksal uygulamanızdan iletişim | **VirtualNetwork** | * | Hedefe göre farklılık gösterir | 80, 443 | Hedef, mantıksal uygulamanızın iletişim kurması gereken dış hizmetin uç noktalarına göre farklılık gösterir. |
+| Mantıksal uygulamanızdan iletişim | **VirtualNetwork** | * | Hedefe göre farklılık gösterir | Hedefe göre farklılık gösterir | Hedef bağlantı noktaları, mantıksal uygulamanızın iletişim kurması gereken dış hizmetlerin uç noktalarına bağlı olarak farklılık gösterir. <p><p>Örneğin, hedef bağlantı noktası bir Web hizmeti için 443, bir SMTP hizmeti için bağlantı noktası 25, bir SFTP hizmeti için bağlantı noktası 22 ve bu şekilde devam eder. |
 | Azure Active Directory | **VirtualNetwork** | * | **AzureActiveDirectory** | 80, 443 ||
 | Azure depolama bağımlılığı | **VirtualNetwork** | * | **Depolama** | 80, 443, 445 ||
 | Bağlantı yönetimi | **VirtualNetwork** | * | **AppService** | 443 ||
@@ -221,7 +221,7 @@ Bu bağımlılıklar için erişime izin vermezseniz, ıSE dağıtımınız baş
      > * 168.63.129.16/32
      > * 169.254.169.254/32
 
-   * `/27`Her alt ağ 32 adresi gerektirdiğinden adres alanındaki bir kullanır. Örneğin, `10.0.0.0/27` 2<sup>(32-27)</sup> 2<sup>5</sup> veya 32 olduğundan 32 adresi vardır. Diğer adresler daha fazla avantaj sağlamaz. Adresleri hesaplama hakkında daha fazla bilgi edinmek için bkz. [ıPV4 CIDR blokları](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#IPv4_CIDR_blocks).
+   * `/27`Her alt ağ 32 adresi gerektirdiğinden adres alanındaki bir kullanır. Örneğin, `10.0.0.0/27` 2<sup>(32-27)</sup> 2<sup>5</sup> veya 32 olduğundan 32 adresi vardır. Daha fazla adres daha fazla avantaj sağlamaz. Adresleri hesaplama hakkında daha fazla bilgi edinmek için bkz. [ıPV4 CIDR blokları](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#IPv4_CIDR_blocks).
 
    * [ExpressRoute](../expressroute/expressroute-introduction.md)kullanırsanız, aşağıdaki rotayı içeren [bir yol tablosu oluşturmanız](../virtual-network/manage-route-table.md) ve bu tabloyu, Ise tarafından kullanılan her alt ağ ile bağlamanız gerekir:
 

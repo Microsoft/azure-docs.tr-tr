@@ -8,10 +8,10 @@ ms.service: data-factory
 ms.topic: conceptual
 ms.date: 01/10/2018
 ms.openlocfilehash: 3a9eb73aab381f90ae51300bff1250348916c2ab
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104779605"
 ---
 # <a name="monitor-and-manage-azure-data-factory-pipelines-by-using-the-monitoring-and-management-app"></a>Izleme ve yönetim uygulamasını kullanarak Azure Data Factory işlem hatlarını izleme ve yönetme
@@ -154,7 +154,7 @@ Etkinlik pencereleri aşağıdaki durumlardan birinde olabilir:
 
 <table>
 <tr>
-    <th align="left">Durum</th><th align="left">Dosya</th><th align="left">Açıklama</th>
+    <th align="left">Durum</th><th align="left">Dosya</th><th align="left">Description</th>
 </tr>
 <tr>
     <td rowspan="8">Bekleme</td><td>ScheduleTime</td><td>Etkinlik penceresinin çalışması için geçen süre.</td>

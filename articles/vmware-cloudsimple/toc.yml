@@ -152,6 +152,8 @@
               href: configure-server-vrealize-automation-endpoint.md
             - name: İş yükü sanal makinelerini Özel Buluta geçirme
               href: migrate-workloads.md
+            - name: Azure Data Box kullanarak geçiş
+              href: migration-using-azure-data-box.md
             - name: Azure'da VMware içinde Uygulama yüksek kullanılabilirliğini sağlama
               href: ensuring-high-availability.md
             - name: Bir yük dengeleme çözümü seçin
@@ -178,6 +180,10 @@
               href: on-premises-connection.md
             - name: ExpressRoute ile Azure Sanal ağ bağlantısı
               href: azure-expressroute-connection.md
+    - name: Başvuru
+      items:
+        - name: Azure CLI
+          href: /cli/azure/csvmware
     - name: Sürüm notları
       items:
         - name: CloudSimple Eylül 2020 Güncelleştirmesi

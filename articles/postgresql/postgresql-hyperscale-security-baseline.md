@@ -1,40 +1,43 @@
 ---
-title: PostgreSQL için Azure veritabanı-hiper ölçek (Citus) için Azure Güvenlik temeli
-description: PostgreSQL için Azure veritabanı-Hyperscale (Citus) güvenlik temeli, Azure Güvenlik kıyaslaması 'nda belirtilen güvenlik önerilerini uygulamaya yönelik yordamsal kılavuz ve kaynaklar sağlar.
+title: PostgreSQL için Azure veritabanı için Azure Güvenlik temeli-hiper ölçek
+description: PostgreSQL için Azure veritabanı-Hyperscale güvenlik temeli, Azure Güvenlik kıyaslaması 'nda belirtilen güvenlik önerilerini uygulamaya yönelik yordamsal kılavuz ve kaynaklar sağlar.
 author: msmbaldwin
 ms.service: postgresql
 ms.topic: conceptual
-ms.date: 08/04/2020
+ms.date: 04/08/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: c373bb172be01594bb5642a626cad24838b66ea2
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 256b061e11ac77af9d229e3bd8f96b033e925f6d
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102607994"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107284519"
 ---
-# <a name="azure-security-baseline-for-azure-database-for-postgresql---hyperscale-citus"></a>PostgreSQL için Azure veritabanı-hiper ölçek (Citus) için Azure Güvenlik temeli
+# <a name="azure-security-baseline-for-azure-database-for-postgresql---hyperscale"></a>PostgreSQL için Azure veritabanı için Azure Güvenlik temeli-hiper ölçek
 
-PostgreSQL için Azure veritabanı-Hyperscale (Citus) için Azure Güvenlik temeli, dağıtımınızın güvenlik duruşunu artırmanıza yardımcı olacak öneriler içerir.
+Bu güvenlik temeli, [Azure Güvenlik kıyaslama sürümü 1.0](../security/benchmarks/overview-v1.md) 'Dan PostgreSQL Için Azure veritabanı-hyperscale aracılığıyla rehberlik uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve PostgreSQL Için Azure veritabanı-hiper ölçek için geçerli olan ilgili kılavuza göre gruplandırılır. 
 
-Bu hizmetin taban çizgisi, Azure [güvenlik kıyaslama sürümü 1,0](../security/benchmarks/overview.md)' dan çizilir ve bu, en iyi yöntemler kılavuzumuzdan Azure 'da bulut çözümlerinizi nasıl güvence altına almak için öneriler sağlar.
+> [!NOTE]
+> PostgreSQL için Azure veritabanı-hiper ölçek için **geçerli değil veya** sorumluluğun Microsoft 'un dışında tutulması. PostgreSQL için Azure veritabanı 'nın hiper ölçek 'in Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için bkz. **[PostgreSQL Için Azure veritabanı-hiper ölçek güvenlik temeli eşleme dosyası](https://github.com/MicrosoftDocs/SecurityBenchmarks/raw/master/Azure%20Offer%20Security%20Baselines/1.1/azure-database-for-postgresql-hyperscale-security-baseline-v1.1.xlsx)**.
 
-Daha fazla bilgi için bkz. [Azure güvenlik temelleri 'ne genel bakış](../security/benchmarks/security-baselines-overview.md).
+## <a name="network-security"></a>Ağ Güvenliği
 
-## <a name="network-security"></a>Ağ güvenliği
-
-*Daha fazla bilgi için bkz. [güvenlik denetimi: ağ güvenliği](../security/benchmarks/security-control-network-security.md).*
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Ağ Güvenliği](../security/benchmarks/security-control-network-security.md).*
 
 ### <a name="11-protect-azure-resources-within-virtual-networks"></a>1,1: sanal ağlar içindeki Azure kaynaklarını koruma
 
 **Rehberlik**: PostgreSQL Için Azure veritabanı sunucu güvenlik duvarı, hangi bilgisayarların izne sahip olduğunu belirtene kadar hyperscale (Citus) düzenleyici düğümüne tüm erişimi engeller. Güvenlik Duvarı, her isteğin kaynak IP adresini temel alarak sunucuya erişim izni verir. Güvenlik duvarınızı yapılandırmak için kabul edilebilir IP adreslerinin aralıklarını belirten güvenlik duvarı kuralları oluşturun. Sunucu düzeyinde güvenlik duvarı kuralları oluşturabilirsiniz.
 
-- [PostgreSQL için Azure veritabanı 'nda güvenlik duvarı kuralları yapılandırma-hiper ölçek (Citus)](./concepts-hyperscale-firewall-rules.md)
-
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
+- [PostgreSQL için Azure veritabanı 'nda güvenlik duvarı kuralları yapılandırma-hiper ölçek (Citus)](concepts-hyperscale-firewall-rules.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. DBforPostgreSQL**:
+
+[!INCLUDE [Resource Policy for Microsoft.DBforPostgreSQL 1.1](../../includes/policy/standards/asb/rp-controls/microsoft.dbforpostgresql-1-1.md)]
 
 ### <a name="19-maintain-standard-security-configurations-for-network-devices"></a>1,9: ağ cihazları için standart güvenlik yapılandırmalarının bakımını yapma
 
@@ -42,17 +45,17 @@ Daha fazla bilgi için bkz. [Azure güvenlik temelleri 'ne genel bakış](../sec
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Ağ için Azure Ilke örnekleri](../governance/policy/samples/built-in-policies.md#network)
+- [Ağ için Azure Ilke örnekleri](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#network)
 
 - [Azure Blueprint oluşturma](../governance/blueprints/create-blueprint-portal.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="logging-and-monitoring"></a>Günlüğe kaydetme ve izleme
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: günlüğe kaydetme ve izleme](../security/benchmarks/security-control-logging-monitoring.md).*
+## <a name="logging-and-monitoring"></a>Günlüğe Kaydetme ve İzleme
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: günlüğe kaydetme ve izleme](../security/benchmarks/security-control-logging-monitoring.md).*
 
 ### <a name="22-configure-central-security-log-management"></a>2,2: Merkezi güvenlik günlüğü yönetimini yapılandırma
 
@@ -62,13 +65,13 @@ Ayrıca, Hiperscale tarafından oluşturulan güvenlik verilerini toplamak için
 
 - [Azure etkinlik günlüğü için tanılama ayarlarını etkinleştirme](../azure-monitor/essentials/activity-log.md)
 
-- [Hiper ölçekte ölçümler (Citus)](./concepts-hyperscale-monitoring.md)
+- [Hiper ölçekte ölçümler (Citus)](concepts-hyperscale-monitoring.md)
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="23-enable-audit-logging-for-azure-resources"></a>2,3: Azure kaynakları için denetim günlüğünü etkinleştirme
 
@@ -78,27 +81,27 @@ Denetim düzlemi denetim günlüğü için, Azure etkinlik günlüğü tanılama
 
 Ayrıca, Hiperscale tarafından oluşturulan güvenlik verilerini toplamak için Azure Izleyici aracılığıyla günlük alma (Citus). Azure Izleyici 'de, Log Analytics çalışma alanı (ler) kullanarak Analizi sorgulayın ve gerçekleştirin ve uzun süreli/arşiv depolama için depolama hesapları kullanın. Alternatif olarak, Azure Sentinel veya bir üçüncü taraf güvenlik olayı ve olay yönetimi (SıEM) üzerinde verileri etkinleştirebilir ve bu verilere izin verebilir. 
 
-- [Hiper ölçekte ölçümler (Citus)](./concepts-hyperscale-monitoring.md)
+- [Hiper ölçekte ölçümler (Citus)](concepts-hyperscale-monitoring.md)
 
 - [Azure etkinlik günlüğü için tanılama ayarlarını etkinleştirme](../azure-monitor/essentials/activity-log.md)
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="25-configure-security-log-storage-retention"></a>2,5: güvenlik günlüğü depolama bekletmesini yapılandırma
 
 **Kılavuz**: Azure izleyici 'de, hiper ölçek (Citus) günlüklerinizi tutmak için kullanılan Log Analytics çalışma alanı için, saklama süresini kuruluşunuzun uyumluluk düzenlemelerine göre ayarlayın. Uzun süreli/arşiv depolama için Azure depolama hesaplarını kullanın.
 
-- [Log Analytics çalışma alanları için günlük saklama parametrelerini ayarlama](../azure-monitor/logs/manage-cost-storage.md#change-the-data-retention-period)
+- [Log Analytics çalışma alanları için günlük saklama parametrelerini ayarlama](https://docs.microsoft.com/azure/azure-monitor/logs/manage-cost-storage#change-the-data-retention-period)
 
-- [Kaynak günlüklerini bir Azure depolama hesabında depolama](../azure-monitor/essentials/resource-logs.md#send-to-azure-storage)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Kaynak günlüklerini bir Azure depolama hesabında depolama](https://docs.microsoft.com/azure/azure-monitor/essentials/resource-logs#send-to-azure-storage)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="26-monitor-and-review-logs"></a>2,6: günlükleri izleme ve gözden geçirme
 
@@ -110,9 +113,9 @@ Ayrıca, Hiperscale tarafından oluşturulan güvenlik verilerini toplamak için
 
 - [Azure Izleyici 'de özel sorgular gerçekleştirme](../azure-monitor/logs/get-started-queries.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="27-enable-alerts-for-anomalous-activities"></a>2,7: anormal etkinlikler için uyarıları etkinleştir
 
@@ -120,19 +123,19 @@ Ayrıca, Hiperscale tarafından oluşturulan güvenlik verilerini toplamak için
 
 Log Analytics çalışma alanınızı Azure Sentinel 'e ekleyin. Bu, bir güvenlik Orchestration otomatik yanıtı (SOAR) çözümü sağlar. Bu, güvenlik sorunlarını gidermek için PlayBook 'ları (otomatikleştirilmiş çözümlerin) oluşturulmasına ve kullanılmasına olanak tanır.
 
-- [Hiper ölçekte ölçümler (Citus)](./howto-hyperscale-alert-on-metric.md)
+- [Hiper ölçekte ölçümler (Citus)](howto-hyperscale-alert-on-metric.md)
 
 - [Azure etkinlik günlüğü için tanılama ayarlarını yapılandırma](../azure-monitor/essentials/activity-log.md)
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
 
-## <a name="identity-and-access-control"></a>Kimlik ve erişim denetimi
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: kimlik ve erişim denetimi](../security/benchmarks/security-control-identity-access-control.md).*
+## <a name="identity-and-access-control"></a>Kimlik ve Erişim Denetimi
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: kimlik ve Access Control](../security/benchmarks/security-control-identity-access-control.md).*
 
 ### <a name="31-maintain-an-inventory-of-administrative-accounts"></a>3,1: yönetim hesaplarının envanterini tutma
 
@@ -144,68 +147,65 @@ Ayrıca, PostgreSQL altyapısı, veritabanı nesnelerine erişimi denetlemek iç
 
 - [Azure aboneliği için özel rolleri anlama](../role-based-access-control/custom-roles.md) 
 
-- [PostgreSQL için Azure veritabanı kaynak sağlayıcısı işlemlerini anlama](../role-based-access-control/resource-provider-operations.md#microsoftdbforpostgresql) 
+- [PostgreSQL için Azure veritabanı kaynak sağlayıcısı işlemlerini anlama](https://docs.microsoft.com/azure/role-based-access-control/resource-provider-operations#microsoftdbforpostgresql) 
 
-- [PostgreSQL için Azure veritabanı erişim yönetimini anlama](./concepts-security.md#access-management)
+- [PostgreSQL için Azure veritabanı erişim yönetimini anlama](https://docs.microsoft.com/azure/postgresql/concepts-security#access-management)
 
-- [PostgreSQL için Azure veritabanı 'nda Kullanıcı oluşturma-hiper ölçek (Citus)](./howto-hyperscale-create-users.md)
+- [PostgreSQL için Azure veritabanı 'nda Kullanıcı oluşturma-hiper ölçek (Citus)](howto-hyperscale-create-users.md)
 
-- [Psql kullanarak PostgreSQL-Hyperscale 'e (Citus) bağlanma](./quickstart-create-hyperscale-portal.md#connect-to-the-database-using-psql)
-
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Psql kullanarak PostgreSQL-Hyperscale 'e (Citus) bağlanma](https://docs.microsoft.com/azure/postgresql/quickstart-create-hyperscale-portal#connect-to-the-database-using-psql)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="32-change-default-passwords-where-applicable"></a>3,2: uygun yerlerde varsayılan parolaları değiştirme
 
-**Kılavuz**: Azure AD varsayılan parola kavramına sahip değildir. Parola gerektiren diğer Azure kaynakları, karmaşıklık gereksinimleriyle ve hizmete bağlı olarak, en düşük parola uzunluğuna sahip bir parola oluşturulmasını zorlar. Varsayılan parolaları kullanbilen üçüncü taraf uygulamalardan ve Market hizmetlerinden siz sorumlusunuz.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+**Rehberlik**: Azure Active Directory (Azure AD) varsayılan parola kavramına sahip değil. Parola gerektiren diğer Azure kaynakları, karmaşıklık gereksinimleriyle ve hizmete bağlı olarak, en düşük parola uzunluğuna sahip bir parola oluşturulmasını zorlar. Varsayılan parolaları kullanbilen üçüncü taraf uygulamalardan ve Market hizmetlerinden siz sorumlusunuz.
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="33-use-dedicated-administrative-accounts"></a>3,3: adanmış yönetim hesapları kullanın
 
-**Rehberlik**: hyperscale (Citus) örneklerine erişmek için kullanılan adanmış yönetim hesaplarının kullanımı etrafında standart işletim yordamları oluşturun. Azure kaynağını yönetmeye yönelik yönetici hesapları Azure Active Directory bağlıdır, Ayrıca, veritabanı erişim izinlerinin yönetilmesi için Hiperscale (Citus) sunucu grubunda bulunan yerel sunucu yöneticisi hesapları da vardır. Azure Active Directory içindeki yönetim hesaplarının sayısını izlemek için Azure Güvenlik Merkezi kimlik ve erişim yönetimi 'ni kullanın.
+**Rehberlik**: hyperscale (Citus) örneklerine erişmek için kullanılan adanmış yönetim hesaplarının kullanımı etrafında standart işletim yordamları oluşturun. Azure kaynağını yönetmeye yönelik yönetici hesapları Azure Active Directory (Azure AD) ile bağlantılıdır, Ayrıca, veritabanı erişim izinlerinin yönetilmesi için Hiperscale (Citus) sunucu grubunda bulunan yerel sunucu yöneticisi hesapları da vardır. Azure AD 'de Yönetim hesaplarının sayısını izlemek için Azure Güvenlik Merkezi kimlik ve erişim yönetimi 'ni kullanın.
 
-- [Azure Güvenlik Merkezi kimlik ve erişimini anlama](../security-center/security-center-identity-access.md) 
+- [Azure Güvenlik Merkezi kimlik ve erişimini anlama](../security-center/security-center-identity-access.md)
 
-- [PostgreSQL için Azure veritabanı 'nda Kullanıcı oluşturma-hiper ölçek (Citus)](./howto-hyperscale-create-users.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [PostgreSQL için Azure veritabanı 'nda Kullanıcı oluşturma-hiper ölçek (Citus)](howto-hyperscale-create-users.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="35-use-multi-factor-authentication-for-all-azure-active-directory-based-access"></a>3,5: tüm Azure Active Directory tabanlı erişim için Multi-Factor Authentication kullanın
 
-**Rehberlik**: Azure Portal erişim için Azure Active Directory MULTI-Factor AUTHENTICATION (MFA) ve Azure Güvenlik Merkezi kimlik ve erişim yönetimi önerilerini izleyin.
+**Rehberlik**: Azure Portal Azure Active Directory (Azure AD) çok faktörlü kimlik doğrulamasını etkinleştirin ve Azure Güvenlik Merkezi kimlik ve erişim yönetimi önerilerini izleyin.
 
-- [Azure'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
+- [Azure 'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
 
 - [Azure Güvenlik Merkezi 'nde kimliği ve erişimi izleme](../security-center/security-center-identity-access.md)
 
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
 
-### <a name="36-use-dedicated-machines-privileged-access-workstations-for-all-administrative-tasks"></a>3,6: tüm yönetim görevleri için adanmış makineler (ayrıcalıklı erişim Iş Istasyonları) kullanın
+**Azure Güvenlik Merkezi izleme**: yok
 
-**Kılavuz**: Azure kaynaklarını açmak ve yapılandırmak için yapılandırılmış MULTI-Factor AUTHENTICATION (MFA) Ile ayrıcalıklı erişim iş Istasyonları (Paw) kullanın.
+### <a name="36-use-dedicated-machines-privileged-access-workstations-for-all-administrative-tasks"></a>3,6: tüm yönetim görevleri için adanmış makineler (ayrıcalıklı erişim Iş Istasyonları) kullanın 
+
+**Kılavuz**: Azure kaynaklarını açmak ve yapılandırmak için yapılandırılmış çok faktörlü kimlik doğrulaması Ile ayrıcalıklı erişim iş Istasyonları (Paw) kullanın.
 
 - [Ayrıcalıklı erişim Iş Istasyonları hakkında bilgi edinin](https://4sysops.com/archives/understand-the-microsoft-privileged-access-workstation-paw-security-model/)
 
-- [Azure'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
-
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure 'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
 
 **Sorumluluk**: Müşteri
 
+**Azure Güvenlik Merkezi izleme**: yok
+
 ### <a name="37-alert-on-account-login-behavior-deviation"></a>3,7: hesap oturum açma davranışı sapmasından uyar
 
-**Rehberlik**: ortamda şüpheli veya güvenli olmayan bir etkinlik oluştuğunda günlükler ve uyarılar oluşturmak için Azure ACTIVE DIRECTORY (AD) PRIVILEGED IDENTITY Management (PIM) kullanın.
+**Rehberlik**: ortamda şüpheli veya güvenli olmayan bir etkinlik oluştuğunda günlükler ve uyarılar oluşturmak için Azure Active Directory (Azure AD) PRIVILEGED IDENTITY Management (PIM) kullanın.
 
 Riskli Kullanıcı davranışında uyarıları ve raporları görüntülemek için Azure AD risk algılamalarını kullanın.
 
@@ -213,10 +213,9 @@ Riskli Kullanıcı davranışında uyarıları ve raporları görüntülemek iç
 
 - [Azure AD risk algılamalarını anlama](../active-directory/identity-protection/overview-identity-protection.md)
 
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="38-manage-azure-resources-from-only-approved-locations"></a>3,8: Azure kaynaklarını yalnızca onaylanan konumlardan yönetme
 
@@ -224,58 +223,55 @@ Riskli Kullanıcı davranışında uyarıları ve raporları görüntülemek iç
 
 - [Azure 'da adlandırılmış konumları yapılandırma](../active-directory/reports-monitoring/quickstart-configure-named-locations.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="39-use-azure-active-directory"></a>3,9: Azure Active Directory kullanın
 
-**Rehberlik**: PostgreSQL kaynaklarını yönetmek için merkezi kimlik doğrulama ve yetkilendirme sistemi olarak Azure ACTIVE DIRECTORY (ad) kullanın. Azure AD, bekleyen ve aktarım sırasında veriler için güçlü şifrelemeyi kullanarak verileri korur. Azure AD Ayrıca, karma ve Kullanıcı kimlik bilgilerini güvenli bir şekilde depolar.
+**Rehberlik**: PostgreSQL kaynaklarını yönetmek için merkezi kimlik doğrulama ve yetkilendirme sistemi olarak Azure Active Directory (Azure AD) kullanın. Azure AD, bekleyen ve aktarım sırasında veriler için güçlü şifrelemeyi kullanarak verileri korur. Azure AD Ayrıca, karma ve Kullanıcı kimlik bilgilerini güvenli bir şekilde depolar.
 
-Bir Hyperscale (Citus) sunucu grubu içindeki kullanıcılar, Azure Active Directory hesaplarına doğrudan bağlanamaz. Veritabanı nesnesi erişimi için kullanıcı ayrıcalıklarını değiştirmek üzere, PgAdmin veya psql gibi araçlarla standart PostgreSQL komutları kullanın.
+Bir Hyperscale (Citus) sunucu grubu içindeki kullanıcılar doğrudan Azure AD hesaplarına bağlanamaz. Veritabanı nesnesi erişimi için kullanıcı ayrıcalıklarını değiştirmek üzere, PgAdmin veya psql gibi araçlarla standart PostgreSQL komutları kullanın.
 
-- [Ayrıcalıkları Kullanıcı rolleri için değiştirme](./howto-hyperscale-create-users.md#how-to-modify-privileges-for-user-role)
+- [Ayrıcalıkları Kullanıcı rolleri için değiştirme](https://docs.microsoft.com/azure/postgresql/howto-hyperscale-create-users#how-to-modify-privileges-for-user-role)
 
-- [AAD örneği oluşturma ve yapılandırma](../active-directory/fundamentals/active-directory-access-create-new-tenant.md)
-
-
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure AD örneği oluşturma ve yapılandırma](../active-directory/fundamentals/active-directory-access-create-new-tenant.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="310-regularly-review-and-reconcile-user-access"></a>3,10: Kullanıcı erişimini düzenli olarak gözden geçirin ve karşılaştırın
 
-**Rehberlik**: hem yerel veritabanına erişimi olan kullanıcılar hem de PostgreSQL kaynaklarını yönetmek için Azure Active Directory aracılığıyla erişimi gözden geçirin ve karşılaştırın.
+**Rehberlik**: hem yerel veritabanına erişimi olan kullanıcılar hem de PostgreSQL kaynaklarını yönetmek için Azure Active Directory (Azure AD) aracılığıyla erişimi gözden geçirin ve karşılaştırın.
 
-Veritabanı Azure kaynaklarını yönetmek için erişim izni olan kullanıcılar için, eski hesapların keşfedilmesine yardımcı olmak üzere Azure Active Directory (AD) günlüklerini gözden geçirin. Ayrıca, grup üyeliklerini etkin bir şekilde yönetmek için Azure kimlik erişimi Incelemelerini kullanın, hiper ölçekte (Citus) ve rol atamalarına erişmek için kullanılabilecek kurumsal uygulamalara erişin. Yalnızca doğru kullanıcıların erişmeye devam ettiğinden emin olmak için, Kullanıcı erişiminin her 90 gün gibi düzenli aralıklarla gözden geçirilmesi gerekir.
+Veritabanı Azure kaynaklarını yönetmek için erişim izni olan kullanıcılar için, eski hesapların keşfedilmesine yardımcı olmak üzere Azure AD günlüklerini gözden geçirin. Ayrıca, grup üyeliklerini etkin bir şekilde yönetmek için Azure kimlik erişimi Incelemelerini kullanın, hiper ölçekte (Citus) ve rol atamalarına erişmek için kullanılabilecek kurumsal uygulamalara erişin. Yalnızca doğru kullanıcıların erişmeye devam ettiğinden emin olmak için, Kullanıcı erişiminin her 90 gün gibi düzenli aralıklarla gözden geçirilmesi gerekir.
 
 - [PostgreSQL kullanıcılarını ve atanan rolleri gözden geçirin](https://www.postgresql.org/docs/current/database-roles.html)
 
-- [Azure AD raporlamayı anlama](../active-directory/reports-monitoring/index.yml)
+- [Azure AD raporlamayı anlama](/azure/active-directory/reports-monitoring/)
 
 - [Azure kimlik erişimi Incelemelerini kullanma](../active-directory/governance/access-reviews-overview.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="311-monitor-attempts-to-access-deactivated-credentials"></a>3,11: devre dışı bırakılmış kimlik bilgilerine erişme girişimlerini izleme
 
-**Rehberlik**: Azure ACTIVE DIRECTORY (ad) IÇINDE Azure AD oturum açma etkinliğine, denetim ve risk olay günlüğü kaynaklarına erişerek herhangi bir SIEM/izleme aracıyla tümleştirmenize imkan tanır. 
+**Rehberlik**: Azure Active Directory (Azure AD) IÇINDE Azure AD oturum açma etkinliğine, denetim ve risk olay günlüğü kaynaklarına erişerek herhangi bir SIEM/izleme aracıyla tümleştirmenize imkan tanır.
 
-Azure Active Directory Kullanıcı hesapları için Tanılama ayarları oluşturarak ve denetim günlüklerini ve oturum açma günlüklerini bir Log Analytics çalışma alanına göndererek bu işlemi kolaylaştırabilirsiniz. İstenen uyarıları Log Analytics çalışma alanı içinde yapılandırabilirsiniz. 
+Bu işlemi, Azure AD Kullanıcı hesapları için Tanılama ayarları oluşturarak ve Log Analytics çalışma alanına denetim günlüklerini ve oturum açma günlüklerini göndererek kolaylaştırabilirsiniz. İstenen uyarıları Log Analytics çalışma alanı içinde yapılandırabilirsiniz.
 
-- [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](../active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics.md)
-
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](/azure/active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics)
 
 **Sorumluluk**: Müşteri
 
+**Azure Güvenlik Merkezi izleme**: yok
+
 ### <a name="312-alert-on-account-sign-in-behavior-deviation"></a>3,12: hesap oturum açma davranışı sapması üzerinde uyarı
 
-**Rehberlik**: Azure ACTIVE DIRECTORY (ad) düzeyinde otomatik yanıtları algılanan şüpheli eylemlere yapılandırmak Için Azure Active Directory kimlik koruması ve risk algılama özelliklerini kullanın. Kuruluşunuzun güvenlik yanıtlarını uygulamak için Azure Sentinel aracılığıyla otomatikleştirilmiş yanıtları etkinleştirebilirsiniz.
+**Kılavuz**: Azure AD düzeyinde, algılanan şüpheli eylemlere yönelik otomatik yanıtları yapılandırmak için Azure Active Directory (Azure AD) kimlik koruması ve risk algılama özelliklerini kullanın. Kuruluşunuzun güvenlik yanıtlarını uygulamak için Azure Sentinel aracılığıyla otomatikleştirilmiş yanıtları etkinleştirebilirsiniz.
 
 Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilirsiniz.
 
@@ -285,23 +281,23 @@ Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilir
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="313-provide-microsoft-with-access-to-relevant-customer-data-during-support-scenarios"></a>3,13: destek senaryoları sırasında Microsoft 'un ilgili müşteri verilerine erişimini sağlama
 
 **Rehberlik**: Şu anda kullanılamıyor; Müşteri Kasası henüz hiper ölçek için desteklenmiyor (Citus).
 
-- [Desteklenen Müşteri Kasası hizmetleri listesi](../security/fundamentals/customer-lockbox-overview.md#supported-services-and-scenarios-in-general-availability)
+- [Desteklenen Müşteri Kasası hizmetleri listesi](https://docs.microsoft.com/azure/security/fundamentals/customer-lockbox-overview#supported-services-and-scenarios-in-general-availability)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
+**Sorumluluk**: Müşteri
 
-**Sorumluluk**: Şu anda kullanılamıyor
+**Azure Güvenlik Merkezi izleme**: yok
 
-## <a name="data-protection"></a>Veri koruma
+## <a name="data-protection"></a>Veri Koruma
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: veri koruma](../security/benchmarks/security-control-data-protection.md).*
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Veri Koruma](../security/benchmarks/security-control-data-protection.md).*
 
 ### <a name="41-maintain-an-inventory-of-sensitive-information"></a>4,1: hassas bilgilerin envanterini tutma
 
@@ -309,9 +305,9 @@ Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilir
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="42-isolate-systems-storing-or-processing-sensitive-information"></a>4,2: hassas bilgileri depolayan veya işleyen sistemleri yalıtma
 
@@ -319,15 +315,15 @@ Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilir
 
 - [Ek Azure abonelikleri oluşturma](../cost-management-billing/manage/create-subscription.md)
 
-- [Yönetim Grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
+- [Yönetim grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
 
-- [PostgreSQL için Azure veritabanı 'nda güvenlik duvarı kurallarını anlama-hiper ölçek (Citus)](./concepts-hyperscale-firewall-rules.md)
+- [PostgreSQL için Azure veritabanı 'nda güvenlik duvarı kurallarını anlama-hiper ölçek (Citus)](concepts-hyperscale-firewall-rules.md)
 
-- [Hiper ölçekte rolleri anlama (Citus)](./howto-hyperscale-create-users.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Hiper ölçekte rolleri anlama (Citus)](howto-hyperscale-create-users.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="44-encrypt-all-sensitive-information-in-transit"></a>4,4: yoldaki tüm hassas bilgileri şifreleyin
 
@@ -337,17 +333,19 @@ Azure portal aracılığıyla sağlanan PostgreSQL için Azure veritabanı sunuc
 
 Bazı durumlarda, üçüncü taraf uygulamalar güvenli bir şekilde bağlanmak için güvenilir bir sertifika yetkilisi (CA) sertifika dosyasından (. cer) oluşturulan yerel bir sertifika dosyası gerektirir.
 
-- [PostgreSQL için Azure veritabanı 'nda TLS 'yi yapılandırma-hiper ölçek (Citus)](./concepts-hyperscale-ssl-connection-security.md)
+- [PostgreSQL için Azure veritabanı 'nda TLS 'yi yapılandırma-hiper ölçek (Citus)](concepts-hyperscale-ssl-connection-security.md)
 
-- [TLS bağlantısı için sertifika doğrulaması gerektiren uygulamalar](./concepts-hyperscale-ssl-connection-security.md)
-
-
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [TLS bağlantısı için sertifika doğrulaması gerektiren uygulamalar](concepts-hyperscale-ssl-connection-security.md)
 
 **Sorumluluk**: Paylaşılan
 
-### <a name="46-use-azure-rbac-to-control-access-to-resources"></a>4,6: kaynaklara erişimi denetlemek için Azure RBAC kullanma
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. DBforPostgreSQL**:
+
+[!INCLUDE [Resource Policy for Microsoft.DBforPostgreSQL 4.4](../../includes/policy/standards/asb/rp-controls/microsoft.dbforpostgresql-4-4.md)]
+
+### <a name="46-use-azure-rbac-to-control-access-to-resources"></a>4,6: kaynaklara erişimi denetlemek için Azure RBAC kullanma 
 
 **Rehberlik**: Hyperscale (Citus) denetim düzlemine erişimi denetlemek için Azure rol tabanlı erişim denetimi (Azure RBAC) kullanın (ör. Azure Portal). Azure RBAC, veritabanı içindeki kullanıcı izinlerini etkilemez.
 
@@ -355,25 +353,21 @@ Veritabanı düzeyinde kullanıcı ayrıcalıklarını değiştirmek için, PgAd
 
 - [Azure RBAC 'yi yapılandırma](../role-based-access-control/role-assignments-portal.md)
 
-- [PostgreSQL için Azure veritabanı için SQL ile Kullanıcı erişimini yapılandırma](./howto-hyperscale-create-users.md)
-
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [PostgreSQL için Azure veritabanı için SQL ile Kullanıcı erişimini yapılandırma](howto-hyperscale-create-users.md)
 
 **Sorumluluk**: Müşteri
 
+**Azure Güvenlik Merkezi izleme**: yok
+
 ### <a name="48-encrypt-sensitive-information-at-rest"></a>4,8: hassas bilgileri Rest 'te şifreleyin
 
-**Rehberlik**:  
-Günde en az bir kez, PostgreSQL için Azure veritabanı hiper ölçek (Citus), veri dosyalarının anlık görüntü yedeklemelerini ve veritabanı işlem günlüğünü alır. Yedeklemeler, bir sunucuyu Bekletme dönemi içinde herhangi bir zaman noktasına geri yüklemenize olanak tanır. (Bekletme dönemi Şu anda tüm kümeler için 35 gündür.) Tüm yedeklemeler AES 256 bit şifreleme kullanılarak şifrelenir. PostgreSQL hiper ölçek (Citus) teklifi, şifreleme için Microsoft tarafından yönetilen anahtarları kullanır.
+**Rehberlik**: günde en az bir kez, PostgreSQL Için Azure veritabanı hiper ölçek (Citus), veri dosyalarının anlık görüntü yedeklemelerini ve veritabanı işlem günlüğünü alır. Yedeklemeler, bir sunucuyu Bekletme dönemi içinde herhangi bir zaman noktasına geri yüklemenize olanak tanır. (Bekletme dönemi Şu anda tüm kümeler için 35 gündür.) Tüm yedeklemeler AES 256 bit şifreleme kullanılarak şifrelenir. PostgreSQL hiper ölçek (Citus) teklifi, şifreleme için Microsoft tarafından yönetilen anahtarları kullanır.
 
-- [Azure PostgreSQL-Hyperscale (Citus) yedeklemeleri için şifrelemeyi anlama](./concepts-hyperscale-backup.md)
-
-
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure PostgreSQL-Hyperscale (Citus) yedeklemeleri için şifrelemeyi anlama](concepts-hyperscale-backup.md)
 
 **Sorumluluk**: Paylaşılan
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="49-log-and-alert-on-changes-to-critical-azure-resources"></a>4,9: kritik Azure kaynaklarında yapılan değişikliklerle ilgili günlük ve uyarı
 
@@ -381,13 +375,13 @@ Günde en az bir kez, PostgreSQL için Azure veritabanı hiper ölçek (Citus), 
 
 - [Azure etkinlik günlüğü olayları için uyarı oluşturma](../azure-monitor/alerts/alerts-activity-log.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
 
-## <a name="vulnerability-management"></a>Güvenlik açığı yönetimi
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: güvenlik açığı yönetimi](../security/benchmarks/security-control-vulnerability-management.md).*
+## <a name="vulnerability-management"></a>Güvenlik Açığı Yönetimi
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: güvenlik açığı yönetimi](../security/benchmarks/security-control-vulnerability-management.md).*
 
 ### <a name="51-run-automated-vulnerability-scanning-tools"></a>5,1: otomatikleştirilmiş güvenlik açığı tarama araçlarını çalıştırma
 
@@ -395,13 +389,13 @@ Günde en az bir kez, PostgreSQL için Azure veritabanı hiper ölçek (Citus), 
 
 - [Azure Güvenlik Merkezi 'nde Azure PaaS hizmetleri için özellik kapsamı](../security-center/features-paas.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
+**Sorumluluk**: Paylaşılan
 
-**Sorumluluk**: Şu anda kullanılamıyor
+**Azure Güvenlik Merkezi izleme**: yok
 
-## <a name="inventory-and-asset-management"></a>Envanter ve varlık yönetimi
+## <a name="inventory-and-asset-management"></a>Envanter ve Varlık Yönetimi
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: envanter ve varlık yönetimi](../security/benchmarks/security-control-inventory-asset-management.md).*
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: envanter ve varlık yönetimi](../security/benchmarks/security-control-inventory-asset-management.md).*
 
 ### <a name="61-use-automated-asset-discovery-solution"></a>6,1: otomatik varlık bulma çözümünü kullanma
 
@@ -413,9 +407,9 @@ Günde en az bir kez, PostgreSQL için Azure veritabanı hiper ölçek (Citus), 
 
 - [Azure RBAC 'yi anlama](../role-based-access-control/overview.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="62-maintain-asset-metadata"></a>6,2: varlık meta verilerini koruma
 
@@ -423,9 +417,9 @@ Günde en az bir kez, PostgreSQL için Azure veritabanı hiper ölçek (Citus), 
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="63-delete-unauthorized-azure-resources"></a>6,3: yetkisiz Azure kaynaklarını silme
 
@@ -433,13 +427,13 @@ Günde en az bir kez, PostgreSQL için Azure veritabanı hiper ölçek (Citus), 
 
 - [Ek Azure abonelikleri oluşturma](../cost-management-billing/manage/create-subscription.md)
 
-- [Yönetim Grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
+- [Yönetim grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="64-define-and-maintain-inventory-of-approved-azure-resources"></a>6,4: onaylanan Azure kaynaklarının envanterini tanımlayın ve saklayın
 
@@ -455,10 +449,9 @@ Ayrıca, Azure Kaynak grafiğini kullanarak abonelikler içindeki kaynakları so
 
 - [Azure Graph ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
 
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="65-monitor-for-unapproved-azure-resources"></a>6,5: onaylanmamış Azure kaynakları için izleyici
 
@@ -473,24 +466,23 @@ Ayrıca, Azure Kaynak grafiğini kullanarak abonelikler içindeki kaynakları so
 
 - [Azure Graph ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="69-use-only-approved-azure-services"></a>6,9: yalnızca onaylanan Azure hizmetlerini kullanın
 
 **Rehberlik**: aşağıdaki yerleşik ilke tanımlarını kullanarak müşteri aboneliklerine oluşturulabilecek kaynak türlerine kısıtlamalar koymak için Azure ilkesini kullanın:
-
 - İzin verilmeyen kaynak türleri
 - İzin verilen kaynak türleri
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](../governance/policy/samples/index.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#general)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="611-limit-users-ability-to-interact-with-azure-resource-manager"></a>6,11: kullanıcıların Azure Resource Manager etkileşime geçme yeteneğini sınırlayın
 
@@ -498,31 +490,29 @@ Ayrıca, Azure Kaynak grafiğini kullanarak abonelikler içindeki kaynakları so
 
 - [Azure Resource Manager erişimi engellemek için koşullu erişimi yapılandırma](../role-based-access-control/conditional-access-azure-management.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="secure-configuration"></a>Güvenli yapılandırma
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: güvenli yapılandırma](../security/benchmarks/security-control-secure-configuration.md).*
+## <a name="secure-configuration"></a>Güvenli Yapılandırma
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: güvenli yapılandırma](../security/benchmarks/security-control-secure-configuration.md).*
 
 ### <a name="71-establish-secure-configurations-for-all-azure-resources"></a>7,1: tüm Azure kaynakları için güvenli yapılandırma oluşturma
 
 **Kılavuz**: Azure Ilkesiyle hiperscale (Citus) örnekleri için standart güvenlik yapılandırması tanımlayın ve uygulayın. PostgreSQL için Azure veritabanı örneklerine yönelik ağ yapılandırmasını denetlemek veya zorlamak üzere özel ilkeler oluşturmak için Azure Ilkesi 'ni kullanın.
 
-Ayrıca, Azure Resource Manager, yapılandırmanın kuruluşunuzun güvenlik gereksinimlerini karşıladığından/aştığından emin olmak için gözden geçirilmesi gereken JavaScript Nesne Gösterimi (JSON) içinde şablonu dışarı aktarma özelliğine sahiptir. 
+Ayrıca, Azure Resource Manager, yapılandırmanın kuruluşunuzun güvenlik gereksinimlerini karşıladığından/aştığından emin olmak için gözden geçirilmesi gereken JavaScript Nesne Gösterimi (JSON) içinde şablonu dışarı aktarma özelliğine sahiptir.
 
 - [Kullanılabilir Azure Ilkesi diğer adlarını görüntüleme](/powershell/module/az.resources/get-azpolicyalias)
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure portal bir şablona tek ve çoklu kaynak verme](../azure-resource-manager/templates/export-template-portal.md) 
-
-
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure portal bir şablona tek ve çoklu kaynak verme](../azure-resource-manager/templates/export-template-portal.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="73-maintain-secure-azure-resource-configurations"></a>7,3: güvenli Azure Kaynak yapılandırmalarının bakımını yapma
 
@@ -534,11 +524,9 @@ Ayrıca, Azure Resource Manager, yapılandırmanın kuruluşunuzun güvenlik ger
 
 - [Azure Resource Manager şablonlarına genel bakış](../azure-resource-manager/templates/overview.md)
 
-
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="75-securely-store-configuration-of-azure-resources"></a>7,5: Azure kaynaklarının yapılandırmasını güvenli bir şekilde depolayın
 
@@ -546,11 +534,11 @@ Ayrıca, Azure Resource Manager, yapılandırmanın kuruluşunuzun güvenlik ger
 
 - [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow)
 
-- [Azure Repos belgeleri](/azure/devops/repos/index)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure Repos belgeleri](/azure/devops/repos/)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="77-deploy-configuration-management-tools-for-azure-resources"></a>7,7: Azure kaynakları için yapılandırma yönetimi araçları dağıtma
 
@@ -562,11 +550,9 @@ Ayrıca, Azure Resource Manager, yapılandırmanın kuruluşunuzun güvenlik ger
 
 - [Azure Resource Manager şablonlarına genel bakış](../azure-resource-manager/templates/overview.md)
 
-
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="79-implement-automated-configuration-monitoring-for-azure-resources"></a>7,9: Azure kaynakları için otomatik yapılandırma izlemeyi uygulama
 
@@ -574,22 +560,21 @@ Ayrıca, Azure Resource Manager, yapılandırmanın kuruluşunuzun güvenlik ger
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="712-manage-identities-securely-and-automatically"></a>7,12: kimlikleri güvenli ve otomatik olarak yönetme
 
 **Rehberlik**: PostgreSQL Için Azure veritabanı-hyperscale (Citus) Şu anda yönetilen kimlikleri doğrudan desteklemez. PostgreSQL için Azure veritabanı sunucusu oluştururken, yönetici kullanıcı için kimlik bilgilerini sağlamanız gerekir. Azure portal arabiriminde ek kullanıcı rolleri oluşturabilirsiniz.
 
-- [PostgreSQL için Azure veritabanı oluşturma-hiper ölçek (Citus)](./quickstart-create-hyperscale-portal.md#create-a-hyperscale-citus-server-group)
+- [PostgreSQL için Azure veritabanı oluşturma-hiper ölçek (Citus)](https://docs.microsoft.com/azure/postgresql/quickstart-create-hyperscale-portal#create-a-hyperscale-citus-server-group)
 
-- [Ek Kullanıcı rolleri oluşturma](./howto-hyperscale-create-users.md#how-to-create-additional-user-roles)
+- [Ek Kullanıcı rolleri oluşturma](https://docs.microsoft.com/azure/postgresql/howto-hyperscale-create-users#how-to-create-additional-user-roles)
 
+**Sorumluluk**: Müşteri
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
-**Sorumluluk**: Şu anda kullanılamıyor
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="713-eliminate-unintended-credential-exposure"></a>7,13: istenmeyen kimlik bilgisi pozlamasını ortadan kaldırın
 
@@ -597,13 +582,13 @@ Ayrıca, Azure Resource Manager, yapılandırmanın kuruluşunuzun güvenlik ger
 
 - [Kimlik bilgisi tarayıcısı kurulumu](https://secdevtools.azurewebsites.net/helpcredscan.html)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="malware-defense"></a>Kötü amaçlı yazılımdan koruma
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: kötü amaçlı yazılımdan koruma](../security/benchmarks/security-control-malware-defense.md).*
+## <a name="malware-defense"></a>Kötü Amaçlı Yazılımdan Koruma
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: kötü amaçlı yazılımdan koruma](../security/benchmarks/security-control-malware-defense.md).*
 
 ### <a name="82-pre-scan-files-to-be-uploaded-to-non-compute-azure-resources"></a>8,2: işlem dışı Azure kaynaklarına yüklenecek dosyaları önceden Tara
 
@@ -611,23 +596,27 @@ Ayrıca, Azure Resource Manager, yapılandırmanın kuruluşunuzun güvenlik ger
 
 App Service, Data Lake Storage, BLOB depolama, PostgreSQL için Azure veritabanı vb. gibi işlem dışı Azure kaynaklarına karşıya yüklenen tüm içerikleri önceden tarayın. Microsoft bu örneklerdeki verilerinize erişemez.
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="data-recovery"></a>Veri kurtarma
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: veri kurtarma](../security/benchmarks/security-control-data-recovery.md).*
+## <a name="data-recovery"></a>Veri Kurtarma
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: veri kurtarma](../security/benchmarks/security-control-data-recovery.md).*
 
 ### <a name="91-ensure-regular-automated-back-ups"></a>9,1: düzenli Otomatik yedeklemeli UPS sağlayın
 
 **Rehberlik**: PostgreSQL Için Azure veritabanı – hyperscale (Citus), her bir düğümün yedeklemesini otomatik olarak oluşturur ve yerel olarak yedekli depolamada depolar. Yedeklemeler, hiper ölçek (Citus) kümenizi belirtilen bir zamana geri yüklemek için kullanılabilir.
 
-- [PostgreSQL için Azure veritabanı 'nda yedekleme ve geri yükleme-hiper ölçek (Citus)](./concepts-hyperscale-backup.md)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [PostgreSQL için Azure veritabanı 'nda yedekleme ve geri yükleme-hiper ölçek (Citus)](concepts-hyperscale-backup.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. DBforPostgreSQL**:
+
+[!INCLUDE [Resource Policy for Microsoft.DBforPostgreSQL 9.1](../../includes/policy/standards/asb/rp-controls/microsoft.dbforpostgresql-9-1.md)]
 
 ### <a name="92-perform-complete-system-backups-and-backup-any-customer-managed-keys"></a>9,2: tam sistem yedeklemeleri gerçekleştirin ve müşterinin yönettiği tüm anahtarları yedekleyin
 
@@ -635,12 +624,15 @@ App Service, Data Lake Storage, BLOB depolama, PostgreSQL için Azure veritaban�
 
 Kullanılabilirlik alanlarını destekleyen Azure bölgelerinde, yedekleme anlık görüntüleri üç kullanılabilirlik alanında depolanır. En az bir kullanılabilirlik bölgesi çevrimiçi olduğu sürece, hiper ölçek (Citus) kümesi yeniden geri yüklenebilen.
 
-- [PostgreSQL için Azure veritabanı 'nda yedekleme ve geri yükleme-hiper ölçek (Citus)](./concepts-hyperscale-backup.md)
-
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [PostgreSQL için Azure veritabanı 'nda yedekleme ve geri yükleme-hiper ölçek (Citus)](concepts-hyperscale-backup.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. DBforPostgreSQL**:
+
+[!INCLUDE [Resource Policy for Microsoft.DBforPostgreSQL 9.2](../../includes/policy/standards/asb/rp-controls/microsoft.dbforpostgresql-9-2.md)]
 
 ### <a name="93-validate-all-backups-including-customer-managed-keys"></a>9,3: müşteri tarafından yönetilen anahtarlar dahil tüm yedeklemeleri doğrulama
 
@@ -648,25 +640,25 @@ Kullanılabilirlik alanlarını destekleyen Azure bölgelerinde, yedekleme anlı
 
 Güvenlik Duvarı ayarları ve PostgreSQL sunucu parametreleri özgün sunucu grubundan korunmaz; varsayılan değerlere sıfırlanır. Güvenlik Duvarı tüm bağlantıları engeller. Geri yükleme sonrasında bu ayarları el ile ayarlamanız gerekir.
 
-- [PostgreSQL için Azure veritabanı 'nda yedekleme ve geri yükleme-hiper ölçek (Citus)](./concepts-hyperscale-backup.md)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [PostgreSQL için Azure veritabanı 'nda yedekleme ve geri yükleme-hiper ölçek (Citus)](concepts-hyperscale-backup.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="94-ensure-protection-of-backups-and-customer-managed-keys"></a>9,4: yedeklemelerin ve müşteri tarafından yönetilen anahtarların korunmasını sağlayın
 
 **Kılavuz**: silinen hyperscale (Citus) kümeleri geri yüklenemez. Kümeyi silerseniz, kümeye ait olan tüm düğümler silinir ve kurtarılamaz. Küme kaynaklarını yanlışlıkla silinmeye veya beklenmeyen değişikliklerden korumak için Yöneticiler yönetim kilitlerinin faydalanabilir.
 
-- [PostgreSQL için Azure veritabanı 'nda yedekleme ve geri yükleme-hiper ölçek (Citus)](./concepts-hyperscale-backup.md)
-
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
+- [PostgreSQL için Azure veritabanı 'nda yedekleme ve geri yükleme-hiper ölçek (Citus)](concepts-hyperscale-backup.md)
 
 **Sorumluluk**: Müşteri
 
-## <a name="incident-response"></a>Olay yanıtı
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: olay yanıtı](../security/benchmarks/security-control-incident-response.md).*
+## <a name="incident-response"></a>Olay Yanıtı
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Olay Yanıtı](../security/benchmarks/security-control-incident-response.md).*
 
 ### <a name="101-create-an-incident-response-guide"></a>10,1: olay yanıtı kılavuzu oluşturma
 
@@ -680,19 +672,19 @@ Güvenlik Duvarı ayarları ve PostgreSQL sunucu parametreleri özgün sunucu gr
 
 - [Müşteri, kendi olay yanıt planının oluşturulmasına yardımcı olması için NıST 'nin bilgisayar güvenliği olay Işleme kılavuzunu da kullanabilir](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="102-create-an-incident-scoring-and-prioritization-procedure"></a>10,2: olay Puanlama ve öncelik belirlemesi prosedürü oluşturma
 
-**Rehberlik**: Güvenlik Merkezi, ilk olarak hangi uyarıların araştırılması gerektiğini önceliklendirmenize yardımcı olmak için her bir uyarıya önem derecesi atar. Önem derecesi, uyarı veren etkinliğin arkasında kötü amaçlı bir amaç olduğunu ve uyarıyı vermek için kullanılan analitik düzeyini, ne kadar güvenli bir güvenlik merkezinin olduğunu temel alır. 
+**Rehberlik**: Güvenlik Merkezi, ilk olarak hangi uyarıların araştırılması gerektiğini önceliklendirmenize yardımcı olmak için her bir uyarıya önem derecesi atar. Önem derecesi, güvenlik merkezi 'nin, uyarıyı vermek için kullanılan bulma veya ölçümde ne kadar uygun olduğunu ve uyarıya yönelik etkinliğin arkasında kötü amaçlı bir amaç olduğunu bilmenin güven düzeyini temel alır. 
 
 Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve Azure kaynaklarını net bir şekilde tanımlamak ve kategorilere ayırmak için bir adlandırma sistemi oluşturun.
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="103-test-security-response-procedures"></a>10,3: test Güvenliği Yanıt yordamları
 
@@ -700,9 +692,9 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [NıST 'nin yayını: BT planları ve özellikleri için test, eğitim ve alıştırma programlarını inceleyin](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-84.pdf)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="104-provide-security-incident-contact-details-and-configure-alert-notifications-for-security-incidents"></a>10,4: güvenlik olaylarına ilişkin iletişim ayrıntılarını sağlayın ve güvenlik olayları için uyarı bildirimleri yapılandırın
 
@@ -710,9 +702,9 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [Azure Güvenlik Merkezi güvenlik Ilgili kişisini ayarlama](../security-center/security-center-provide-security-contact-details.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="105-incorporate-security-alerts-into-your-incident-response-system"></a>10,5: güvenlik uyarılarını olay yanıt sisteminizle birleştirme
 
@@ -722,9 +714,9 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [Uyarıların Azure Sentinel’e akışını yapma](../sentinel/connect-azure-security-center.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="106-automate-the-response-to-security-alerts"></a>10,6: güvenlik uyarılarına yanıtı otomatikleştirme
 
@@ -732,13 +724,13 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [Iş akışı otomasyonu ve Logic Apps yapılandırma](../security-center/workflow-automation.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="penetration-tests-and-red-team-exercises"></a>Sızma testleri ve red team alıştırmaları
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [güvenlik denetimi: Penetme testleri ve Red ekibi alıştırmaları](../security/benchmarks/security-control-penetration-tests-red-team-exercises.md).*
+## <a name="penetration-tests-and-red-team-exercises"></a>Sızma Testleri ve Red Team Alıştırmaları
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: Penetme testleri ve Red ekibi alıştırmaları](../security/benchmarks/security-control-penetration-tests-red-team-exercises.md).*
 
 ### <a name="111-conduct-regular-penetration-testing-of-your-azure-resources-and-ensure-remediation-of-all-critical-security-findings"></a>11,1: Azure kaynaklarınızın düzenli olarak sızma testini gerçekleştirin ve tüm kritik güvenlik bulgularını düzeltmeye dikkat edin
 
@@ -746,11 +738,11 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [Microsoft 'un, Microsoft tarafından yönetilen bulut altyapısına, hizmetlerine ve uygulamalarına göre kırmızı ekip oluşturma ve canlı site sızma testini yürütme hakkında daha fazla bilgi edinebilirsiniz.](https://gallery.technet.microsoft.com/Cloud-Red-Teaming-b837392e)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Paylaşılan
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz. [Azure Güvenlik kıyaslaması](../security/benchmarks/overview.md)
-- [Azure güvenlik temelleri](../security/benchmarks/security-baselines-overview.md) hakkında daha fazla bilgi edinin
+- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](/azure/security/benchmarks/overview)
+- [Azure güvenlik temelleri](/azure/security/benchmarks/security-baselines-overview) hakkında daha fazla bilgi edinin

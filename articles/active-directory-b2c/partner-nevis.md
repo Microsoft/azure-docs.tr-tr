@@ -11,16 +11,16 @@ ms.topic: how-to
 ms.date: 11/23/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 282ec6a25dc381dc51f28534d272bae57d2e792e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 42e244249ecb0539637918ae2439bdb4f5da4b38
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98675002"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588488"
 ---
 # <a name="tutorial-to-configure-nevis-with-azure-active-directory-b2c-for-passwordless-authentication"></a>Passwordless kimlik doğrulaması için Azure Active Directory B2C ile Nevis yapılandırma öğreticisi
 
-Bu örnek öğreticide, passwordless kimlik doğrulamasını etkinleştirmek için Azure AD B2C  [Nevis](https://www.nevis.net/solution/authentication-cloud) ile genişletmeyi öğrenin. Nevis, daha güçlü müşteri kimlik doğrulaması sağlamak ve ödeme hizmetleri yönerge 2 (PSD2) işlem gereksinimleriyle uyumlu olmak için Nevis Access uygulamasıyla mobil ve tamamen markalı Son Kullanıcı deneyimi sağlar.
+Bu örnek öğreticide, passwordless kimlik doğrulamasını etkinleştirmek için Azure AD B2C  [Nevis](https://www.nevis.net/en/solution/authentication-cloud) ile genişletmeyi öğrenin. Nevis, daha güçlü müşteri kimlik doğrulaması sağlamak ve ödeme hizmetleri yönerge 2 (PSD2) işlem gereksinimleriyle uyumlu olmak için Nevis Access uygulamasıyla mobil ve tamamen markalı Son Kullanıcı deneyimi sağlar.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -32,7 +32,7 @@ Başlamak için şunlar gerekir:
 
 - Azure aboneliğinize bağlı bir [Azure AD B2C kiracısı](./tutorial-create-tenant.md) .
 
-- Kayıt ilke akışınızla Nevis 'i birleştirmek istiyorsanız, [özel ilkeleri](./custom-policy-get-started.md)kullanmak için Azure AD B2C ortamı yapılandırıldı.
+- Kayıt ilke akışınızla Nevis 'i birleştirmek istiyorsanız, [özel ilkeleri](./tutorial-create-user-flows.md?pivots=b2c-custom-policy)kullanmak için Azure AD B2C ortamı yapılandırıldı.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
@@ -270,4 +270,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

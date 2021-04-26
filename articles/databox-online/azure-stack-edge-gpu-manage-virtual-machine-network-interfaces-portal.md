@@ -6,15 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: how-to
-ms.date: 03/23/2021
+ms.date: 03/30/2021
 ms.author: alkohli
-Customer intent: As an IT admin, I need to understand how to manage network interfaces on an Azure Stack Edge Pro device so that I can use it to run applications using Edge compute before sending it to Azure.
-ms.openlocfilehash: 84077f174fabd02afcd5171e8d365e8cbd3a52c2
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 3e709b04b4eac60e6cc0ba3e53eb77583162dfef
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105027741"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078902"
 ---
 # <a name="use-the-azure-portal-to-manage-network-interfaces-on-the-vms-on-your-azure-stack-edge-pro-gpu"></a>Azure Stack Edge Pro GPU 'unuzdaki VM 'lerde ağ arabirimlerini yönetmek için Azure portal kullanın
 
@@ -40,7 +39,7 @@ Cihazınız yalnızca bir sanal anahtarı ancak birden çok sanal ağ arabirimin
 
 Azure portal aracılığıyla cihazınızdaki VM 'Leri yönetmeye başlamadan önce şunları yaptığınızdan emin olun:
 
-1. Cihazınızda işlem için bir ağ arabirimi etkinleştirdiniz. Bu eylem, VM 'niz üzerinde bu ağ arabiriminde bir sanal anahtar oluşturur. 
+1. Etkinleştirilmiş bir Azure Stack Edge Pro GPU cihazına erişirsiniz. Cihazınızda işlem için bir ağ arabirimi etkinleştirdiniz. Bu eylem, VM 'niz üzerinde bu ağ arabiriminde bir sanal anahtar oluşturur. 
     1. Cihazınızın yerel kullanıcı arabiriminde, **işlem**' a gidin. Sanal anahtar oluşturmak için kullanacağınız ağ arabirimini seçin.
 
         > [!IMPORTANT] 

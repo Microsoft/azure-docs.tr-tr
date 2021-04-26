@@ -15,12 +15,12 @@ ms.topic: how-to
 ms.date: 07/18/2017
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 37e41a00c1489d5b7b4822fec8bb4da35e917826
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 836c7bf9aefd4b2cb7d52c66bbd37e7ba38a467c
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101686470"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377319"
 ---
 # <a name="azure-active-directory-connect-health-operations"></a>Azure Active Directory Connect Health işlemler
 Bu konuda Azure Active Directory (Azure AD) Connect Health kullanarak gerçekleştirebileceğiniz çeşitli işlemler açıklanmaktadır.
@@ -35,12 +35,13 @@ Uyarılar kimlik altyapınızın sağlıklı olmadığını gösteriyorsa, Azure
 >
 
 ### <a name="to-enable-azure-ad-connect-health-email-notifications"></a>Azure AD Connect Health e-posta bildirimlerini etkinleştirmek için
-1. E-posta bildirimi almak istediğiniz hizmetin **Uyarılar** dikey penceresini açın.
-2. Eylem çubuğundan **bildirim ayarları**' na tıklayın.
-3. E-posta bildirim anahtarında **Açık**' ı seçin.
-4. Tüm genel yöneticilerin e-posta bildirimleri almasını istiyorsanız onay kutusunu işaretleyin.
-5. Diğer herhangi bir e-posta adresinden e-posta bildirimleri almak istiyorsanız, bunları **ek e-posta alıcıları** kutusunda belirtin. Bu listeden bir e-posta adresini kaldırmak için girişe sağ tıklayıp **Sil**' i seçin.
-6. Değişiklikleri sonlandırmak için **Kaydet**' e tıklayın. Değişiklikler yalnızca kaydettikten sonra geçerli olur.
+1. Azure portalında Azure AD Connect Health arayın
+2. **Eşitleme hatalarını** seçin
+3. **Bildirim ayarlarını** seçin.
+5. E-posta bildirim anahtarında **Açık**' ı seçin.
+6. Tüm genel yöneticilerin e-posta bildirimleri almasını istiyorsanız onay kutusunu işaretleyin.
+7. Diğer herhangi bir e-posta adresinden e-posta bildirimleri almak istiyorsanız, bunları **ek e-posta alıcıları** kutusunda belirtin. Bu listeden bir e-posta adresini kaldırmak için girişe sağ tıklayıp **Sil**' i seçin.
+8. Değişiklikleri sonlandırmak için **Kaydet**' e tıklayın. Değişiklikler yalnızca kaydettikten sonra geçerli olur.
 
 >[!NOTE] 
 > Arka uç hizmetimizde eşitleme isteklerini işlerken sorunlar olduğunda, bu hizmet, kiracınızın yönetim iletişim e-posta adresine (es) hata ayrıntılarını içeren bir bildirim e-postası gönderir. Müşterilerin belirli durumlarda bu iletilerin hacminin canlı büyüklükte olduğunu öğrendiğimiz ve bu iletileri gönderme şeklini değiştirdiğimiz için geri bildirimde bulunduk. 

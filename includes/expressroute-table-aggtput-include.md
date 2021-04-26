@@ -2,23 +2,22 @@
 title: include dosyası
 description: include dosyası
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
 ms.topic: include
-ms.date: 12/05/2019
-ms.author: cherylmc
+ms.date: 04/12/2021
+ms.author: duau
 ms.custom: include file
-ms.openlocfilehash: 5a01bbdcae66e7cd0acf9a1bd120916955fd8560
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: eb10af1a66c747a1e318d16ceb542aaa4588bb2b
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "74894381"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107386649"
 ---
-|  | **Megabit/saniye** | **Paket/saniye** | **Saniyedeki bağlantı sayısı** | **VPN Gateway ve ExpressRoute bir arada** | **FastPath** |
+|  | **Megabit/saniye** | **Paket/saniye** | **Saniyedeki bağlantı sayısı** | **FastPath** | **En fazla devre bağlantı sayısı** |
 | --- | --- | --- | --- | --- | --- |
-| **Temel SKU (kullanım dışı)** |500 | Bilinmiyor | Bilinmiyor |Hayır | Hayır |
-| **Standart SKU/ErGw1AZ** |1.000 | 100.000 | 7.000 | Yes | Hayır |
-| **Yüksek performanslı SKU/ErGw2AZ** |2.000 | 250.000 | 14.000 | Yes | Hayır |
-| **Ultra performans SKU 'SU/ErGw3AZ** |10,000 | 1.000.000 | 28.000 | Yes | Yes |
+| **Standart SKU/ErGw1AZ** |1.000 | 100.000 | 7.000 | Hayır | 4 |
+| **Yüksek performanslı SKU/ErGw2AZ** |2.000 | 250.000 | 14.000 | Hayır | 8 |
+| **Ultra performans SKU 'SU/ErGw3AZ** |10,000 | 1.000.000 | 28.000 | Yes | 16 |
 

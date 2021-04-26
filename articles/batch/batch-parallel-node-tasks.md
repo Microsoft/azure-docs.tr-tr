@@ -2,14 +2,14 @@
 title: Toplu işlem düğümlerinin kullanımını en üst düzeye çıkarmak için görevleri eşzamanlı olarak çalıştırın
 description: Azure Batch havuzundaki her düğümde daha az işlem düğümü kullanarak ve görevleri paralel olarak çalıştırarak verimliliği ve daha düşük maliyetleri artırın
 ms.topic: how-to
-ms.date: 03/25/2021
+ms.date: 04/13/2021
 ms.custom: H1Hack27Feb2017, devx-track-csharp
-ms.openlocfilehash: 2a8f2d6a040bee0e32359f4860d7b346ac08c48e
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 81648f30a7a02f702dcb189aa7df27e5a82e2b07
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105607992"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389307"
 ---
 # <a name="run-tasks-concurrently-to-maximize-usage-of-batch-compute-nodes"></a>Toplu işlem düğümlerinin kullanımını en üst düzeye çıkarmak için görevleri eşzamanlı olarak çalıştırın
 
@@ -77,7 +77,13 @@ CloudPool pool =
         poolId: "mypool",
         targetDedicatedComputeNodes: 4
         virtualMachineSize: "standard_d1_v2",
-        cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "5"));
+        VirtualMachineConfiguration: new VirtualMachineConfiguration(
+            imageReference: new ImageReference(
+                                publisher: "MicrosoftWindowsServer",
+                                offer: "WindowsServer",
+                                sku: "2019-datacenter-core",
+                                version: "latest"),
+            nodeAgentSkuId: "batch.node.windows amd64");
 
 pool.TaskSlotsPerNode = 4;
 pool.TaskSchedulingPolicy = new TaskSchedulingPolicy(ComputeNodeFillType.Pack);
@@ -138,9 +144,13 @@ REST API kullanarak havuzlar ekleme hakkında daha fazla bilgi için bkz. bir [h
   "odata.metadata":"https://myaccount.myregion.batch.azure.com/$metadata#pools/@Element",
   "id":"mypool",
   "vmSize":"large",
-  "cloudServiceConfiguration": {
-    "osFamily":"4",
-    "targetOSVersion":"*",
+  "virtualMachineConfiguration": {
+    "imageReference": {
+      "publisher": "canonical",
+      "offer": "ubuntuserver",
+      "sku": "18.04-lts"
+    },
+    "nodeAgentSKUId": "batch.node.ubuntu 16.04"
   },
   "targetDedicatedComputeNodes":2,
   "taskSlotsPerNode":4,

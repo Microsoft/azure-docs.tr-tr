@@ -12,21 +12,35 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: overview
-ms.date: 03/19/2021
+ms.date: 04/21/2021
 ms.author: b-juche
-ms.openlocfilehash: f2167159b03cd0387acfccf4bbd0a2e840f739df
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: fa028d8fffd2a4097b5bf7d7326d355ae56aebd7
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104955267"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862822"
 ---
 # <a name="whats-new-in-azure-netapp-files"></a>Azure NetApp Files yenilikleri
 
 Azure NetApp Files düzenli olarak güncelleştirilir. Bu makale, en son yeni özellikler ve geliştirmeler hakkında bir Özet sağlar. 
 
-## <a name="march-2021"></a>Mart 2021
+## <a name="april-2021"></a>2021 Nisan
 
+* [FSLogix Kullanıcı profili kapsayıcıları Için SMB sürekli kullanılabilirlik (CA) paylaşımları desteği](azure-netapp-files-create-volumes-smb.md#add-an-smb-volume) (Önizleme)  
+
+    [Fslogix](/fslogix/overview) , kalıcı olmayan Windows bilgi işlem ortamlarını geliştiren, etkinleştiren ve basitleştiren bir çözüm kümesidir. FSLogix çözümleri, hem genel hem de özel bulutlardaki sanal ortamlar için uygundur. FSLogix çözümleri, fiziksel cihazları kullandığınızda daha fazla taşınabilir bilgi işlem oturumu oluşturmak için de kullanılabilir. FSLogix, Azure NetApp Files de dahil olmak üzere, SMB paylaşılan ağa bağlı depolamada depolanan kalıcı Kullanıcı profili kapsayıcılarına dinamik erişim sağlamak için kullanılabilir. Azure NetApp Files, depolama hizmeti bakım olaylarına FSLogix dayanıklılığı artırmak için, Kullanıcı profili kapsayıcıları için [Azure NetApp Files SMB sürekli kullanılabilirlik (CA) paylaşımları](azure-netapp-files-create-volumes-smb.md#add-an-smb-volume) aracılığıyla SMB saydam yük devretme desteği sağlar. Daha fazla bilgi için bkz. Azure NetApp Files [Windows sanal masaüstü çözümleri](azure-netapp-files-solution-architectures.md#windows-virtual-desktop) .  
+
+* [SMB3 Protokolü şifreleme](azure-netapp-files-create-volumes-smb.md#add-an-smb-volume) (Önizleme) 
+
+    Artık Azure NetApp Files SMB ve çift protokol birimlerinde SMB3 Protokolü şifrelemeyi etkinleştirebilirsiniz. Bu özellik, [smb 3,0 ' de AES-CCM algoritması ve SMB 3.1.1 BAĞLANTıLARıNDA AES-GCM algoritması](/windows-server/storage/file-server/file-server-smb-overview#features-added-in-smb-311-with-windows-server-2016-and-windows-10-version-1607) KULLANıLARAK uçuş SMB3 verileri için şifrelemeyi mümkün bir şekilde sunar. SMB3 şifrelemesi kullanmayan SMB istemcileri bu birime erişemeyecektir. Bekleyen veriler, bu ayardan bağımsız olarak şifrelenir. SMB şifrelemesi güvenliği geliştirir. Ancak, istemciyi etkileyebilir (iletileri şifrelemek ve şifrelerini çözmek için CPU ek yükü). Ayrıca, depolama kaynak kullanımını etkileyebilir (işleme göre indirimleri). İş yüklerini üretime dağıtmaya başlamadan önce, uygulamalarınıza karşı şifreleme performansı etkisini test etmelisiniz.
+
+* [Active Directory Domain Services (ekler) NFS genişletilmiş GRUPLARıYLA LDAP kullanıcı eşlemesi](configure-ldap-extended-groups.md) (Önizleme)   
+
+    Varsayılan olarak, Azure NetApp Files, [RFC 5531](https://tools.ietf.org/html/rfc5531)' de tanımlanan şekilde NFS Kullanıcı kimlik bilgilerini işlerken en fazla 16 grup kimliği destekler. Bu yeni özellik sayesinde, varsayılan grup sayısından daha fazla üye olan kullanıcılarınız varsa, artık en fazla 1.024 kadar artırabilirsiniz. Bu özelliği desteklemek için, NFS birimleri artık LDAP eklemek için de eklenebilir, bu da genişletilmiş gruplar girişleri olan (1024 grup ile) LDAP kullanıcılarının birime erişmesine Active Directory olanak sağlar. 
+
+## <a name="march-2021"></a>Mart 2021
+ 
 * [SMB sürekli kullanılabilirlik (CA) paylaşımları](azure-netapp-files-create-volumes-smb.md#add-an-smb-volume) (Önizleme)  
 
     SMB saydam yük devretme, SMB birimlerinde verileri depolayan ve bunlara erişen sunucu uygulamalarına bağlantıyı kesintiye uğramadan Azure NetApp Files hizmetinde bakım işlemlerine olanak sağlar. SMB saydam yük devretmeyi desteklemek için Azure NetApp Files artık Azure VM 'lerinde çalışan SMB üzerinde SQL Server uygulamalarla birlikte kullanılacak SMB sürekli kullanılabilirlik paylaşımları seçeneğini desteklemektedir. Bu özellik şu anda Windows SQL Server 'de desteklenmektedir. Linux SQL Server şu anda desteklenmiyor. Bu özelliği etkinleştirmek [, tek örnek, Always-On yük devretme kümesi örneği ve Always-On kullanılabilirlik grubu dağıtımları](azure-netapp-files-solution-architectures.md#sql-server)için önemli SQL Server performans iyileştirmeleri ve ölçek ve maliyet avantajları sağlar. [SQL Server dağıtımı için Azure NetApp Files kullanma avantajlarına](solutions-benefits-azure-netapp-files-sql-server.md)bakın.

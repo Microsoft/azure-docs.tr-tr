@@ -9,12 +9,12 @@ ms.subservice: autoscale
 ms.date: 05/18/2018
 ms.reviewer: avverma
 ms.custom: avverma, devx-track-azurecli
-ms.openlocfilehash: 68f311a949d6c7663c5602c444d1b7b9af09dcad
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b7fdf6d4893a6f6a970223671b28fdae6db3ef3d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96016735"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107763001"
 ---
 # <a name="tutorial-automatically-scale-a-virtual-machine-scale-set-with-the-azure-cli"></a>Öğretici: Azure CLI ile sanal makine ölçek kümesini otomatik olarak ölçeklendirme
 
@@ -55,7 +55,7 @@ az vmss create \
 
 ## <a name="define-an-autoscale-profile"></a>Otomatik ölçeklendirme profilini tanımlama
 
-Bir ölçek kümesinde otomatik ölçeklendirmeyi etkinleştirmek için ilk olarak bir otomatik ölçeklendirme profili tanımlamanız gerekir. Bu profil varsayılan, en düşük ve en yüksek ölçek kümesi kapasitesini tanımlar. Bu sınırlar, sanal makine örneklerini sürekli olarak oluşturmadığından maliyeti denetlemenizi sağlar ve ölçek genişletme olayında kalan minimum örnek sayısı ile kabul edilebilir performansı dengelemenize olanak tanır. [az monitor autoscale create](/cli/azure/monitor/autoscale#az-monitor-autoscale-create) komutu ile bir otomatik ölçeklendirme profili oluşturun. Aşağıdaki örnek, varsayılan ve en düşük, *2* VM örneğinin kapasitesini ve en fazla *10*' u ayarlar:
+Bir ölçek kümesinde otomatik ölçeklendirmeyi etkinleştirmek için ilk olarak bir otomatik ölçeklendirme profili tanımlamanız gerekir. Bu profil varsayılan, en düşük ve en yüksek ölçek kümesi kapasitesini tanımlar. Bu sınırlar, sanal makine örneklerini sürekli olarak oluşturmadığından maliyeti denetlemenizi sağlar ve ölçek genişletme olayında kalan minimum örnek sayısı ile kabul edilebilir performansı dengelemenize olanak tanır. [az monitor autoscale create](/cli/azure/monitor/autoscale#az_monitor_autoscale_create) komutu ile bir otomatik ölçeklendirme profili oluşturun. Aşağıdaki örnek, varsayılan ve en düşük, *2* VM örneğinin kapasitesini ve en fazla *10*' u ayarlar:
 
 ```azurecli-interactive
 az monitor autoscale create \
@@ -72,7 +72,7 @@ az monitor autoscale create \
 
 Uygulamanızın talebi artarsa, ölçek kümenizdeki sanal makine örneklerinde üzerindeki yük de artar. Bu kısa süreli bir talep olmayıp tutarlı şekilde yük artıyorsa, ölçek kümesindeki sanal makine örneği sayısını artırmak için otomatik ölçeklendirme kuralları yapılandırabilirsiniz. Bu sanal makine örnekleri oluşturulduğunda ve uygulamalarınız dağıtıldığında ölçek kümesi, yük dengeleyici aracılığıyla bunlara trafiği dağıtmaya başlar. CPU veya disk gibi hangi ölçümlerin izleneceğini, uygulama yükünün belirli bir eşiği ne kadar süre karşılaması gerektiği ve ölçek kümesine kaç tane sanal makine örneği ekleneceğini denetlersiniz.
 
-Şimdi [az monitor autoscale rule create](/cli/azure/monitor/autoscale/rule#az-monitor-autoscale-rule-create) komutu ile, ortalama CPU yükü 5 dakika boyunca %70’in üzerine çıktığında bir ölçek kümesindeki sanal makine örneği sayısını artıran bir kural oluşturalım. Kural tetiklendiğinde, sanal makine örneği sayısı üç artırılır.
+Şimdi [az monitor autoscale rule create](/cli/azure/monitor/autoscale/rule#az_monitor_autoscale_rule_create) komutu ile, ortalama CPU yükü 5 dakika boyunca %70’in üzerine çıktığında bir ölçek kümesindeki sanal makine örneği sayısını artıran bir kural oluşturalım. Kural tetiklendiğinde, sanal makine örneği sayısı üç artırılır.
 
 ```azurecli-interactive
 az monitor autoscale rule create \
@@ -86,7 +86,7 @@ az monitor autoscale rule create \
 
 Bir akşam veya hafta sonu uygulama talebiniz azalabilir. Yük belirli bir süreye yayılarak tutarlı şekilde azalıyorsa, ölçek kümesindeki sanal makine örneği sayısını azaltmak için otomatik ölçeklendirme kuralları yapılandırabilirsiniz. Mevcut talebi karşılamak için gerekli örnek sayısını yalnızca siz çalıştırdığınızdan, bu ölçeği daraltma eylemi ölçek kümenizi çalıştırma maliyetini azaltır.
 
-[az monitor autoscale rule create](/cli/azure/monitor/autoscale/rule#az-monitor-autoscale-rule-create) komutu ile, ortalama CPU yükü 5 dakika boyunca %30’un altına indiğinde bir ölçek kümesindeki sanal makine örneği sayısını azaltan başka bir kural oluşturun. Aşağıdaki örnek, sanal makine örneği sayısını bir artırmak için kuralı tanımlar:
+[az monitor autoscale rule create](/cli/azure/monitor/autoscale/rule#az_monitor_autoscale_rule_create) komutu ile, ortalama CPU yükü 5 dakika boyunca %30’un altına indiğinde bir ölçek kümesindeki sanal makine örneği sayısını azaltan başka bir kural oluşturun. Aşağıdaki örnek, sanal makine örneği sayısını bir artırmak için kuralı tanımlar:
 
 ```azurecli-interactive
 az monitor autoscale rule create \

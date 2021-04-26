@@ -3,12 +3,12 @@ title: Bir kümeyi sertifika ortak adını kullanacak şekilde güncelleştirme
 description: Azure Service Fabric küme sertifikasını parmak izi tabanlı bildirimlerden ortak adlara nasıl dönüştüreceğiniz hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 09/06/2019
-ms.openlocfilehash: f719b1eb39da776827c6babec61e9e6701bb4602
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: daf8d55e156f30b1f9e9ec5c50d60714e6f17884
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97900813"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308022"
 ---
 # <a name="convert-cluster-certificates-from-thumbprint-based-declarations-to-common-names"></a>Küme sertifikalarını parmak izi tabanlı bildirimlerden ortak adlara Dönüştür
 
@@ -45,7 +45,7 @@ Sınama amacıyla, otomatik olarak imzalanan *bir SERTIFIKA CN* tarafından, anc
 
 ## <a name="upload-the-certificate-and-install-it-in-the-scale-set"></a>Sertifikayı karşıya yükleyin ve ölçek kümesine yükleyin
 
-Azure 'da, sertifika alma ve sağlama için önerilen mekanizma Azure Key Vault ve araç araçlarını içerir. Küme sertifikası bildirimiyle eşleşen bir sertifika, kümelerinizi oluşturan sanal makine ölçek kümelerinin her düğümüne sağlanmalıdır. Daha fazla bilgi için bkz. [sanal makine ölçek kümelerinde gizli](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.md#how-do-i-securely-ship-a-certificate-to-the-vm)diziler.
+Azure 'da, sertifika alma ve sağlama için önerilen mekanizma Azure Key Vault ve araç araçlarını içerir. Küme sertifikası bildirimiyle eşleşen bir sertifika, kümelerinizi oluşturan sanal makine ölçek kümelerinin her düğümüne sağlanmalıdır. Daha fazla bilgi için bkz. [sanal makine ölçek kümelerinde gizli](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.yml#how-do-i-securely-ship-a-certificate-to-the-vm-)diziler.
 
 Kümenin sertifika bildirimlerinde değişiklik yapmadan önce, kümenin her düğüm türünün sanal makinelerine hem geçerli hem de hedef küme sertifikalarının yüklenmesi önemlidir. Sertifika verme işleminden Service Fabric bir düğümü sağlamak için yapılan yolculuğun bir [sertifikanın yolculuğunda](cluster-security-certificate-management.md#the-journey-of-a-certificate)derinlemesine bir şekilde ele alındığı açıklanır.
 

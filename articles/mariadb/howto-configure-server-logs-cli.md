@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 4/13/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: cea1571a48afe00350dde247c3c10e222a446247
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 42382076b6c14989eb153725e991c8ef047ad15b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98662398"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774800"
 ---
 # <a name="configure-and-access-azure-database-for-maria-db-slow-query-logs-by-using-azure-cli"></a>Azure CLı kullanarak Maria DB yavaş sorgu günlükleri için Azure veritabanı 'nı yapılandırma ve erişme
 
@@ -42,14 +42,14 @@ az mariadb server configuration list --resource-group myresourcegroup --server m
 ```
 
 ## <a name="list-logs-for-azure-database-for-mariadb-server"></a>MariaDB sunucusu için Azure veritabanı günlüklerini listeleme
-**Log_output** "dosya" olarak yapılandırılırsa, günlüklere doğrudan sunucunun yerel depolama alanından erişebilirsiniz. Sunucunuzun kullanılabilir yavaş sorgu günlük dosyalarını listelemek için [az MariaDB Server-Logs List](/cli/azure/mariadb/server-logs#az-mariadb-server-logs-list) komutunu çalıştırın.
+**Log_output** "dosya" olarak yapılandırılırsa, günlüklere doğrudan sunucunun yerel depolama alanından erişebilirsiniz. Sunucunuzun kullanılabilir yavaş sorgu günlük dosyalarını listelemek için [az MariaDB Server-Logs List](/cli/azure/mariadb/server-logs#az_mariadb_server_logs_list) komutunu çalıştırın.
 
 Sunucu **mydemoserver.MariaDB.Database.Azure.com** için günlük dosyalarını **myresourcegroup** kaynak grubu altında listeleyebilirsiniz. Ardından günlük dosyaları listesini **günlük \_ dosyaları \_list.txt** adlı bir metin dosyasına yönlendirin.
 ```azurecli-interactive
 az mariadb server-logs list --resource-group myresourcegroup --server mydemoserver > log_files_list.txt
 ```
 ## <a name="download-logs-from-the-server"></a>Günlükleri sunucudan indir
-**Log_output** "dosya" olarak yapılandırıldıysa, [az MariaDB Server-Logs Download](/cli/azure/mariadb/server-logs#az-mariadb-server-logs-download) komutuyla sunucunuzdaki tek tek günlük dosyalarını indirebilirsiniz.
+**Log_output** "dosya" olarak yapılandırıldıysa, [az MariaDB Server-Logs Download](/cli/azure/mariadb/server-logs#az_mariadb_server_logs_download) komutuyla sunucunuzdaki tek tek günlük dosyalarını indirebilirsiniz.
 
 Yerel ortamınıza **myresourcegroup** kaynak grubu altında sunucu **mydemoserver.MariaDB.Database.Azure.com** için belirli günlük dosyasını indirmek üzere aşağıdaki örneği kullanın.
 ```azurecli-interactive

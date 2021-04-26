@@ -78,14 +78,14 @@ Bu konuda, bir mantıksal uygulamada, veritabanı işlemlerini işlemek için ba
 
 1. Bu bağlantı bilgilerini girip **Oluştur**' u seçin.
 
-   | Özellik | JSON özelliği | Gerekli | Örnek değer | Açıklama |
+   | Özellik | JSON özelliği | Gerekli | Örnek değer | Description |
    |----------|---------------|----------|---------------|-------------|
    | Bağlantı adı | `name` | Yes | `informix-demo-connection` | Informix veritabanınıza bağlantı için kullanılacak ad |
    | Sunucu | `server` | Yes | Una `informixdemo.cloudapp.net:9089` <br>-Şirket içi: `informixdemo:9089` | IPv4 veya IPv6 biçiminde olan TCP/IP adresi veya diğer ad, ardından iki nokta üst üste ve TCP/IP bağlantı noktası numarası |
    | Veritabanı | `database` | Yes | `nwind` | DRDA Ilişkisel veritabanı adı (RDBNAM) veya Informix veritabanı adı (dbname). Informix bir 128 baytlık dizeyi kabul eder. |
    | Kimlik Doğrulaması | `authentication` | Yalnızca şirket içi | **Temel** veya **Windows** (Kerberos) | Informix veritabanınız için gereken kimlik doğrulama türü. Bu özellik yalnızca şirket **içi veri ağ geçidi üzerinden Bağlan '** ı seçtiğinizde görünür. |
-   | Kullanıcı adı | `username` | Hayır | <*Veritabanı-Kullanıcı adı*> | Veritabanı için Kullanıcı adı |
-   | Parola | `password` | Hayır | <*Veritabanı-parola*> | Veritabanı için bir parola |
+   | Kullanıcı adı | `username` | No | <*Veritabanı-Kullanıcı adı*> | Veritabanı için Kullanıcı adı |
+   | Parola | `password` | No | <*Veritabanı-parola*> | Veritabanı için bir parola |
    | Ağ geçidi | `gateway` | Yalnızca şirket içi | -<*Azure-aboneliği*> <br>-<*Azure-şirket içi-veri ağ geçidi-kaynak*> | Azure portal oluşturduğunuz şirket içi veri ağ geçidi için Azure aboneliği ve Azure Kaynak adı. **Ağ geçidi** özelliği ve alt özellikler yalnızca şirket **içi veri ağ geçidi üzerinden Bağlan '** ı seçtiğinizde görünür. |
    ||||||
 

@@ -7,12 +7,12 @@ ms.service: expressroute
 ms.topic: overview
 ms.date: 10/05/2020
 ms.author: duau
-ms.openlocfilehash: 82562eae748753cd785851c5d91f5f152b4c9960
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e1cef56d15838d80079decc6e1da7ad830bd1cd9
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92206960"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107029769"
 ---
 # <a name="what-is-azure-expressroute"></a>Azure ExpressRoute nedir?
 ExpressRoute, bir bağlantı sağlayıcının yardımıyla özel bağlantı üzerinden şirket içi ağlarınızı Microsoft bulutuna genişletmenizi sağlar. ExpressRoute'u kullanarak Microsoft Azure ve Microsoft 365 gibi Microsoft bulut hizmetleriyle bağlantı kurabilirsiniz.
@@ -20,6 +20,10 @@ ExpressRoute, bir bağlantı sağlayıcının yardımıyla özel bağlantı üze
 Bağlantının kaynağı herhangi iki ağ (IP VPN), noktadan noktaya Ethernet ağı veya ortak barındırma tesisindeki bağlantı sağlayıcısı aracılığıyla sanal çapraz bağlantı olabilir. ExpressRoute bağlantıları, genel İnternet üzerinden geçmez. Bu da ExpressRoute bağlantılarının İnternet üzerinden yapılan tipik bağlantılara kıyasla daha güvenilir, daha hızlı, tutarlı gecikme sürelerine sahip ve daha yüksek güvenlikli olmasını sağlar. ExpressRoute kullanarak ağınızı Microsoft 'a bağlama hakkında bilgi için bkz. [ExpressRoute bağlantı modelleri](expressroute-connectivity-models.md).
 
 ![ExpressRoute bağlantısına genel bakış](./media/expressroute-introduction/expressroute-connection-overview.png)
+
+> [!NOTE]
+> ExpressRoute bağlamında Microsoft Edge, ExpressRoute bağlantı hattının Microsoft tarafındaki Edge yönlendiricilerini açıklar. Bu, ExpressRoute bağlantı hattının Microsoft 'un ağına giriş noktasıdır.
+> 
 
 ## <a name="key-benefits"></a>Önemli avantajlar
 

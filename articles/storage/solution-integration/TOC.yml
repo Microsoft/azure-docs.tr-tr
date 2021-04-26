@@ -23,6 +23,8 @@
   items:
     - name: Doğrulanan iş ortaklarına genel bakış
       href: .\validated-partners\data-management\partner-overview.md
+    - name: Geçiş araçları karşılaştırması
+      href: ./validated-partners/data-management/migration-tools-comparison.md
   expanded: false
 - name: Birincil ve ikincil depolama iş ortakları
   items:

@@ -9,17 +9,14 @@ ms.author: mikben
 ms.date: 03/25/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: 6ec616047a99465bace0b401f659765e4399634b
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 8a25f69019e194650bb6aa2f5b8ae19dd37fbc48
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105604575"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105729176"
 ---
 # <a name="voice-and-video-concepts"></a>Ses ve görüntü kavramları
-
-[!INCLUDE [Public Preview Notice](../../includes/public-preview-include.md)]
-
 
 Azure Iletişim Hizmetleri 'ni kullanarak bir veya daha fazla ses ve video çağrısı yapabilirsiniz. Çağrılarınız, Internet 'e bağlı diğer cihazlara ve eski telefonlar için yapılabilir. Kullanıcılarınızın özel konuşmalardaki veya grup tartışmalarında bir diğerine konuşmasını sağlayan uygulamalar oluşturmak için Iletişim Hizmetleri JavaScript, Android veya iOS SDK 'larını kullanabilirsiniz. Azure Iletişim Hizmetleri, hizmetlere veya botlara yapılan çağrıları destekler.
 

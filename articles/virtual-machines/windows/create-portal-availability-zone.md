@@ -10,10 +10,10 @@ ms.author: mimckitt
 ms.reviewer: cynthn
 ms.custom: ''
 ms.openlocfilehash: 7c7f135d4033a31f855342c172d73f51478931ab
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "102501694"
 ---
 # <a name="create-a-virtual-machine-in-an-availability-zone-using-the-azure-portal"></a>Azure portal kullanarak bir kullanılabilirlik bölgesinde sanal makine oluşturma

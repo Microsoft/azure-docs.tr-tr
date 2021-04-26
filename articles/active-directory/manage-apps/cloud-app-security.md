@@ -2,21 +2,21 @@
 title: Microsoft Cloud App Security ile uygulama görünürlüğü ve denetimi
 description: Uygulama risk düzeylerini belirlemeyi, ihlal ve sızıntıları gerçek zamanlı olarak durdurmayı ve uygulama bağlayıcılarını kullanarak görünürlük ve idare için sağlayıcı API 'Lerinden yararlanmanızı sağlayan yollar edinin.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: conceptual
 ms.workload: identity
 ms.date: 02/03/2020
-ms.author: kenwith
+ms.author: iangithinji
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 682549b5b99169060437c8c91d465121002edc6e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d9a9f56d70e049200cee0c3655a9998feccfa301
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99259613"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377845"
 ---
 # <a name="cloud-app-visibility-and-control"></a>Bulut uygulama görünürlüğü ve denetimi
 

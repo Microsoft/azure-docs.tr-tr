@@ -2,13 +2,13 @@
 title: Azure Izleyici kaynak günlüğü desteklenen Hizmetleri ve kategorileri
 description: Azure Izleyici başvurusu, Azure Kaynak günlükleri için desteklenen Hizmetleri ve olay şemasını anlayın.
 ms.topic: reference
-ms.date: 01/29/2021
-ms.openlocfilehash: 9a04d0f470522dd4689d604756ffd25e70c5d456
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 03/30/2021
+ms.openlocfilehash: a4ab4a2e425b752198223da5efd1b07466ab83d1
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102033155"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166947"
 ---
 # <a name="supported-categories-for-azure-resource-logs"></a>Azure Kaynak günlükleri için desteklenen Kategoriler
 
@@ -33,7 +33,8 @@ Aşağıda her bir kaynak türü için kullanılabilen günlük türlerinin bir 
 Bazı kategoriler yalnızca belirli kaynak türleri için desteklenir. Bir kaynağınız eksik olduğunu düşünüyorsanız kaynağa özgü belgelere bakın. Örneğin, Microsoft. SQL/Servers/veritabanları kategorileri tüm veritabanı türleri için kullanılamaz. Daha fazla bilgi için bkz. [SQL veritabanı tanılama günlüğü bilgileri](../../azure-sql/database/metrics-diagnostic-telemetry-logging-streaming-export-configure.md). 
 
 Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir GitHub açıklaması açabilirsiniz.
-## <a name="microsoftaaddomainservices"></a>Microsoft. AAD/domainServices
+
+## <a name="microsoftaaddomainservices"></a>Microsoft. AAD/DomainServices
 
 |Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
 |---|---|---|
@@ -46,6 +47,13 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |PolicyChange|PolicyChange|No|
 |Ayrıcalıklı Geuse|Ayrıcalıklı Geuse|No|
 |SystemSecurity|SystemSecurity|No|
+
+
+## <a name="microsoftaadiamtenants"></a>Microsoft. aadihar/kiracılar
+
+|Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
+|---|---|---|
+|Giriş|Giriş|Yes|
 
 
 ## <a name="microsoftanalysisservicesservers"></a>Microsoft. AnalysisServices/sunucuları
@@ -97,6 +105,14 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |JobStreams|İş akışları|No|
 
 
+## <a name="microsoftautonomousdevelopmentplatformaccounts"></a>Microsoft. AutonomousDevelopmentPlatform/accounts
+
+|Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
+|---|---|---|
+|Denetim|Denetim|Yes|
+|Operasyonel|Operasyonel|Yes|
+
+
 ## <a name="microsoftbatchbatchaccounts"></a>Microsoft.Batch/batchAccounts
 
 |Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
@@ -135,7 +151,6 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
 |---|---|---|
 |BotRequest|Kanallardan bot 'a istek|No|
-|DependencyRequest|Bağımlılıklara yönelik istekler|No|
 
 
 ## <a name="microsoftcdncdnwebapplicationfirewallpolicies"></a>Microsoft. CDN/cdnwebapplicationfirewallpolicies
@@ -182,6 +197,7 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 
 |Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
 |---|---|---|
+|Authopersel|İşletimsel kimlik doğrulama günlükleri|Yes|
 |ChatOperational|İşletimsel sohbet günlükleri|No|
 |SMSOperational|İşletimsel SMS günlükleri|No|
 |Kullanım|Kullanım kayıtları|No|
@@ -256,6 +272,8 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |---|---|---|
 |Etkinlik çalıştırmaları|İşlem hattı etkinlik günlüğü çalıştırmaları|No|
 |Ardışık düzen eylemsizlik|İşlem hattı çalıştırmaları günlüğü|No|
+|Sandboxactivityçalıştırmaları|Korumalı alan etkinliği günlüğü çalıştırır|Yes|
+|Sandboxardışık düzen eylemsizlik|Sandbox işlem hattı çalıştırmaları günlüğü|Yes|
 |Ssisıntegrationruntimelogs 'lar|SSIS tümleştirme çalışma zamanı günlükleri|No|
 |SSISPackageEventMessageContext|SSIS paketi olay iletisi bağlamı|No|
 |SSISPackageEventMessages|SSIS paketi olay iletileri|No|
@@ -320,6 +338,13 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
 |---|---|---|
 |Postgressqllogs|PostgreSQL sunucu günlükleri|No|
+
+
+## <a name="microsoftdbforpostgresqlservergroupsv2"></a>Microsoft. DBForPostgreSQL/serverGroupsv2
+
+|Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
+|---|---|---|
+|Postgressqllogs|PostgreSQL sunucu günlükleri|Yes|
 
 
 ## <a name="microsoftdbforpostgresqlservers"></a>Microsoft. DBforPostgreSQL/sunucuları
@@ -531,18 +556,6 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |Appizlemeler|İzlemeler|No|
 
 
-## <a name="microsoftiotspacesgraph"></a>Microsoft. ıotspaces/Graph
-
-|Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
-|---|---|---|
-|Denetim|Denetim|No|
-|Çıkış|Çıkış|No|
-|Giriş|Giriş|No|
-|Operasyonel|Operasyonel|No|
-|İzleme|İzleme|No|
-|UserDefinedFunction|UserDefinedFunction|No|
-
-
 ## <a name="microsoftkeyvaultmanagedhsms"></a>Microsoft. keykasası/managedhsms
 
 |Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
@@ -747,13 +760,6 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |Altyapı|Altyapı|No|
 
 
-## <a name="microsoftprojectbabylonaccounts"></a>Microsoft. ProjectBabylon/hesaplar
-
-|Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
-|---|---|---|
-|ScanStatusLogEvent|ScanStatus|No|
-
-
 ## <a name="microsoftpurviewaccounts"></a>Microsoft. purview/hesapları
 
 |Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
@@ -810,6 +816,13 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |AllLogs|Azure SignalR hizmeti günlükleri.|No|
 
 
+## <a name="microsoftsignalrservicewebpubsub"></a>Microsoft. SignalRService/WebPubSub
+
+|Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
+|---|---|---|
+|AllLogs|Azure Web PubSub hizmeti günlükleri.|Yes|
+
+
 ## <a name="microsoftsqlmanagedinstances"></a>Microsoft. SQL/ManagedInstances
 
 |Kategori|Kategori görünen adı|Dışarı aktarılacak maliyetler|
@@ -826,7 +839,7 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |Hatalar|Hatalar|No|
 |QueryStoreRuntimeStatistics|Sorgu deposu çalışma zamanı Istatistikleri|No|
 |QueryStoreWaitStatistics|Sorgu deposu bekleme Istatistikleri|No|
-|Sqlinsıghts|SQL öngörüleri|No|
+|Sqlinsıghts|SQL İçgörüleri|No|
 
 
 ## <a name="microsoftsqlserversdatabases"></a>Microsoft. SQL/Servers/veritabanları
@@ -844,7 +857,7 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |QueryStoreRuntimeStatistics|Sorgu deposu çalışma zamanı Istatistikleri|No|
 |QueryStoreWaitStatistics|Sorgu deposu bekleme Istatistikleri|No|
 |RequestSteps|İstek adımları|No|
-|Sqlinsıghts|SQL öngörüleri|No|
+|Sqlinsıghts|SQL İçgörüleri|No|
 |SqlRequests|SQL Istekleri|No|
 |SQLSecurityAuditEvents|SQL güvenlik denetim olayı|No|
 |Zaman aşımları|Zaman aşımları|No|
@@ -901,6 +914,9 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |---|---|---|
 |BuiltinSqlReqsEnded|Yerleşik SQL havuzu Istekleri sona erdi|No|
 |GatewayApiRequests|SYNAPSE ağ geçidi API 'Si Istekleri|No|
+|Integrationactivityçalıştırmaları|Tümleştirme etkinliği çalıştırmaları|Yes|
+|Integrationardışık düzen eylemsizlik|Tümleştirme işlem hattı çalıştırmaları|Yes|
+|Integrationtriggerçalıştırmaları|Tümleştirme tetikleyicisi çalıştırmaları|Yes|
 |SQLSecurityAuditEvents|SQL güvenlik denetim olayı|No|
 |SynapseRbacOperations|SYNAPSE RBAC Işlemleri|No|
 
@@ -975,7 +991,6 @@ Eksik bir sorun olduğunu düşünüyorsanız, bu makalenin alt kısmında bir G
 |AppServiceIPSecAuditLogs|IPSecurity denetim günlükleri|No|
 |AppServicePlatformLogs|App Service platform günlükleri|No|
 |FunctionAppLogs|İşlev uygulama günlükleri|No|
-
 
 
 ## <a name="next-steps"></a>Sonraki Adımlar

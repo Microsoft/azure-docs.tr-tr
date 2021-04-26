@@ -5,10 +5,10 @@ ms.topic: conceptual
 ms.date: 12/15/2020
 ms.custom: seodec18
 ms.openlocfilehash: c1fd707bf9f13ed88bf9acb5d2ad70d56c453a90
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105024634"
 ---
 # <a name="throttling-resource-manager-requests"></a>Resource Manager isteklerini azaltma
@@ -87,7 +87,7 @@ Bazı kaynak sağlayıcıları geçici bir sorunu raporlamak için 429 döndür�
 
 Yanıt üstbilgilerini inceleyerek kalan isteklerin sayısını belirleyebilirsiniz. Okuma istekleri, kalan okuma isteklerinin sayısı için üst bilgide bir değer döndürür. Yazma istekleri, kalan yazma isteklerinin sayısı için bir değer içerir. Aşağıdaki tabloda, bu değerler için inceleyebileceğiniz yanıt üstbilgileri açıklanmaktadır:
 
-| Yanıt üst bilgisi | Açıklama |
+| Yanıt üst bilgisi | Description |
 | --- | --- |
 | x-MS-ratelimit-kalan-abonelik-okumalar |Abonelik kapsamlı okuma kaldı. Bu değer, okuma işlemlerinde döndürülür. |
 | x-MS-ratelimit-kalan-abonelik-yazmaları |Abonelik kapsamlı yazmaları kaldı. Bu değer, yazma işlemlerinde döndürülür. |

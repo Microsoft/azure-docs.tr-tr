@@ -4,12 +4,12 @@ description: Application Insights bağımlılıkları otomatik olarak toplayıp 
 ms.topic: reference
 ms.custom: devx-track-dotnet
 ms.date: 05/06/2020
-ms.openlocfilehash: 8a4d79e52465e93fb4db2625217cb37a06917218
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: aa4d39ca8964e95ca787d236223e2b475a9597c1
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91930875"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873838"
 ---
 # <a name="dependency-auto-collection"></a>Bağımlılık otomatik toplama
 
@@ -24,7 +24,7 @@ Aşağıda, uygulamanızın kodunda ek değişiklik yapılmasına gerek kalmadan
 | ASP.NET WebAPI | 4.5 + |
 | ASP.NET Core | 1.1 + |
 | <b> İletişim kitaplıkları</b> |
-| [HttpClient](https://www.microsoft.com/net/) | 4.5 +, .NET Core 1.1 + |
+| [HttpClient](https://dotnet.microsoft.com) | 4.5 +, .NET Core 1.1 + |
 | [SqlClient](https://www.nuget.org/packages/System.Data.SqlClient) | .NET Core 1.0 +, NuGet 4.3.0 |
 | [Microsoft. Data. SqlClient](https://www.nuget.org/packages/Microsoft.Data.SqlClient/1.1.2)| 1.1.0-en son kararlı sürüm. (Aşağıdaki nota bakın.)
 | [EventHubs Istemci SDK 'Sı](https://www.nuget.org/packages/Microsoft.Azure.EventHubs) | 1.1.0 |

@@ -6,12 +6,12 @@ ms.author: vibansa
 ms.manager: abhemraj
 ms.topic: how-to
 ms.date: 03/13/2021
-ms.openlocfilehash: c4ca8d8ac24ac174158957e44b5eabe4a89a5340
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: b0bc2b69a4a1ec31cfa560d51920378fe1ab52b8
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104775213"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714803"
 ---
 # <a name="set-up-an-appliance-in-azure-government"></a>Azure Kamu 'da gereç ayarlama 
 
@@ -26,7 +26,7 @@ Bir Azure Kamu bulutundaki VMware ortamındaki sunucular, Hyper-V ve fiziksel su
 
 Betik, Azure geçişi gerecini mevcut bir fiziksel sunucuda veya sanallaştırılmış bir sunucuda ayarlar.
 
-- Gereç işlevi görecek sunucu Windows Server 2016 ' i, 32 GB bellek, 5. disk depolaması ve bir dış sanal anahtar ile birlikte sekiz V80 CPU ile çalıştırıyor olmalıdır. Statik veya dinamik bir IP adresi ve internet erişimi gerektirir.
+- Gereç işlevi görecek sunucu Windows Server 2016 ' i, 32 GB bellek, 5. disk depolaması ve bir dış sanal anahtar ile birlikte sekiz V80 CPU ile çalıştırıyor olmalıdır. Statik veya dinamik bir IP adresi gerektirir. 
 - Gereci dağıtmadan önce, VMware, [Hyper-V](migrate-appliance.md#appliance---hyper-v)ve [fiziksel sunuculardaki](migrate-appliance.md#appliance---physical) [sunucular](migrate-appliance.md#appliance---vmware)için ayrıntılı gereç gereksinimlerini gözden geçirin.
 - Betiği mevcut bir Azure geçiş gereci üzerinde çalıştırmayın.
 

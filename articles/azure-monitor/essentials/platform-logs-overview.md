@@ -6,12 +6,12 @@ services: azure-monitor
 ms.topic: conceptual
 ms.date: 12/19/2019
 ms.author: bwren
-ms.openlocfilehash: 3300b0587cbb6c2193b56c9152af0cb11ea51936
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f2b22746b7a78349580220f4aa7579876fd21c33
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102033308"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106074599"
 ---
 # <a name="overview-of-azure-platform-logs"></a>Azure platform günlüklerine genel bakış
 Platform günlükleri, Azure kaynakları ve bağımlı oldukları Azure platformu için ayrıntılı tanılama ve denetim bilgileri sağlar. Bunlar otomatik olarak oluşturulur, ancak korunacak bir veya daha fazla hedefe iletilmek üzere belirli platform günlüklerinin yapılandırılması gerekir. Bu makalede, sağladığı bilgiler ve bunları toplama ve analiz için nasıl yapılandırabileceğiniz dahil olmak üzere platform günlüklerine bir genel bakış sunulmaktadır.
@@ -45,8 +45,8 @@ Farklı Azure platformu günlüklerini görüntülemek ve analiz etmek için far
 
 | Hedef | Description |
 |:---|:---|
-| Log Analytics çalışma alanı | Tüm Azure kaynaklarınızın günlüklerini birlikte çözümleyin ve [günlük sorguları](../logs/log-query-overview.md) ve [günlük uyarıları](../alerts/alerts-log.md)da dahil olmak üzere [Azure izleyici günlüklerine](../logs/data-platform-logs.md) sunulan tüm özelliklerden yararlanın. Günlük sorgusunun sonuçlarını bir Azure panosuna sabitleyin veya etkileşimli bir raporun parçası olarak çalışma kitabına dahil edin. |  |
-| Olay hub'ı | Platform günlüğü verilerini Azure dışında, örneğin bir üçüncü taraf SıEM veya özel telemetri platformuna gönderin.
+| Log Analytics çalışma alanı | Tüm Azure kaynaklarınızın günlüklerini birlikte çözümleyin ve [günlük sorguları](../logs/log-query-overview.md) ve [günlük uyarıları](../alerts/alerts-log.md)da dahil olmak üzere [Azure izleyici günlüklerine](../logs/data-platform-logs.md) sunulan tüm özelliklerden yararlanın. Günlük sorgusunun sonuçlarını bir Azure panosuna sabitleyin veya etkileşimli bir raporun parçası olarak çalışma kitabına dahil edin. | 
+| Olay hub'ı | Platform günlüğü verilerini Azure dışında, örneğin bir üçüncü taraf SıEM veya özel telemetri platformuna gönderin. |
 | Azure depolama | Denetim veya yedekleme için günlükleri arşivle. |
 
 - Etkinlik günlüğü veya kaynak günlükleri için bir tanılama ayarı oluşturma hakkında ayrıntılı bilgi için bkz. [Platform günlüklerini ve ölçümlerini farklı hedeflere göndermek için Tanılama ayarları oluşturma](../essentials/diagnostic-settings.md). 

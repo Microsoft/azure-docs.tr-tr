@@ -10,18 +10,18 @@ ms.date: 03/10/2021
 ms.topic: include
 ms.custom: include file
 ms.author: mikben
-ms.openlocfilehash: 6fe1e092e1db4ad283f9d0096ea431a1e983f87c
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 322f54e4fa2e8096f68d5bbc216032a5b4e53c22
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645346"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105726710"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 Başlamadan önce şunları yaptığınızdan emin olun:
 
 - Etkin abonelikle bir Azure hesabı oluşturun. Ayrıntılar için bkz. [ücretsiz hesap oluşturma](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-- [Node.js](https://nodejs.org/en/download/) etkin LTS ve bakım LTS sürümlerini (8.11.1 ve 10.14.1 önerilir) yükler.
+- [Node.js](https://nodejs.org/en/download/) etkin LTS ve bakım LTS sürümlerini yükler.
 - Bir Azure Iletişim Hizmetleri kaynağı oluşturun. Ayrıntılar için bkz. [Azure Iletişim kaynağı oluşturma](../../create-communication-resource.md). Bu hızlı başlangıç için **Kaynak uç noktanızı kaydetmeniz** gerekir.
 - *Üç* ACS kullanıcısı oluşturun ve bu kullanıcılara bir Kullanıcı erişim belirteci [Kullanıcı erişim belirteci](../../access-tokens.md)verin. Kapsamı **sohbet** olarak ayarladığınızdan emin olun ve **belirteç dizesinin yanı sıra Kullanıcı kimliği dizesini de unutmayın**. Tam demo, iki ilk katılımcı içeren bir iş parçacığı oluşturur ve sonra iş parçacığına üçüncü bir katılımcı ekler.
 
@@ -165,35 +165,37 @@ Aşağıdaki sınıflar ve arabirimler, JavaScript için Azure Communication Ser
 
 ```JavaScript
 async function createChatThread() {
-    let createThreadRequest = {
-        topic: 'Preparation for London conference',
-        participants: [{
-                    id: { communicationUserId: '<USER_ID_FOR_JACK>' },
-                    displayName: 'Jack'
-                }, {
-                    id: { communicationUserId: '<USER_ID_FOR_GEETA>' },
-                    displayName: 'Geeta'
-                }]
-    };
-    let createChatThreadResult = await chatClient.createChatThread(createThreadRequest);
-    let threadId = createChatThreadResult.chatThread.id;
-    return threadId;
-    }
+  const createChatThreadRequest = {
+    topic: "Hello, World!"
+  };
+  const createChatThreadOptions = {
+    participants: [
+      {
+        id: '<USER_ID>',
+        displayName: '<USER_DISPLAY_NAME>'
+      }
+    ]
+  };
+  const createChatTtreadResult = await chatClient.createChatThread(
+    createChatThreadRequest,
+    createChatThreadOptions
+  );
+  const threadId = createChatThreadResult.chatThread.id;
+  return threadId;
+}
 
 createChatThread().then(async threadId => {
-    console.log(`Thread created:${threadId}`);
-    // PLACEHOLDERS
-    // <CREATE CHAT THREAD CLIENT>
-    // <RECEIVE A CHAT MESSAGE FROM A CHAT THREAD>
-    // <SEND MESSAGE TO A CHAT THREAD>
-    // <LIST MESSAGES IN A CHAT THREAD>
-    // <ADD NEW PARTICIPANT TO THREAD>
-    // <LIST PARTICIPANTS IN A THREAD>
-    // <REMOVE PARTICIPANT FROM THREAD>
-    });
+  console.log(`Thread created:${threadId}`);
+  // PLACEHOLDERS
+  // <CREATE CHAT THREAD CLIENT>
+  // <RECEIVE A CHAT MESSAGE FROM A CHAT THREAD>
+  // <SEND MESSAGE TO A CHAT THREAD>
+  // <LIST MESSAGES IN A CHAT THREAD>
+  // <ADD NEW PARTICIPANT TO THREAD>
+  // <LIST PARTICIPANTS IN A THREAD>
+  // <REMOVE PARTICIPANT FROM THREAD>
+  });
 ```
-
-**USER_ID_FOR_JACK** ve **USER_ID_FOR_GEETA** , Kullanıcı ve belirteçler oluşturma ([Kullanıcı erişimi belirteçleri](../../access-tokens.md)) ile elde edilen Kullanıcı kimlikleriyle değiştirin
 
 Tarayıcı sekmelerinizi yenilediğinizde konsolunda aşağıdakileri görmeniz gerekir:
 ```console
@@ -214,6 +216,18 @@ Bu kodu `<CREATE CHAT THREAD CLIENT>` **client.js** açıklamanın yerine ekleyi
 Chat Thread client for threadId: <threadId>
 ```
 
+## <a name="list-all-chat-threads"></a>Tüm sohbet iş parçacıklarını Listele
+
+`listChatThreads`Yöntemi bir türünde döndürür `PagedAsyncIterableIterator` `ChatThreadItem` . Tüm sohbet iş parçacıklarını listelemek için kullanılabilir.
+Bir yineleyici, `[ChatThreadItem]` listeleme iş parçacıklarından döndürülen yanıttır
+
+```JavaScript
+const threads = chatClient.listChatThreads();
+for await (const thread of threads) {
+   // your code here
+}
+```
+
 ## <a name="send-a-message-to-a-chat-thread"></a>Sohbet iş parçacığına ileti gönderin
 
 `sendMessage`ThreadID tarafından tanımlanan bir iş parçacığına ileti göndermesi için yöntemini kullanın.
@@ -230,17 +244,17 @@ Chat Thread client for threadId: <threadId>
 `SendChatMessageResult` yanıt ileti göndermekten döndürülen yanıt, iletinin benzersiz KIMLIĞI olan bir ID içeriyor.
 
 ```JavaScript
-let sendMessageRequest =
+const sendMessageRequest =
 {
-    content: 'Hello Geeta! Can you share the deck for the conference?'
+  content: 'Hello Geeta! Can you share the deck for the conference?'
 };
 let sendMessageOptions =
 {
-    senderDisplayName : 'Jack',
-    type: 'text'
+  senderDisplayName : 'Jack',
+  type: 'text'
 };
-let sendChatMessageResult = await chatThreadClient.sendMessage(sendMessageRequest, sendMessageOptions);
-let messageId = sendChatMessageResult.id;
+const sendChatMessageResult = await chatThreadClient.sendMessage(sendMessageRequest, sendMessageOptions);
+const messageId = sendChatMessageResult.id;
 ```
 
 Bu kodu `<SEND MESSAGE TO A CHAT THREAD>` **client.js** açıklamanın yerine ekleyin, tarayıcı sekmesini yenileyin ve konsolu denetleyin.
@@ -257,8 +271,8 @@ Gerçek zamanlı sinyalle, yeni gelen iletileri dinlemek ve bellekteki geçerli 
 await chatClient.startRealtimeNotifications();
 // subscribe to new notification
 chatClient.on("chatMessageReceived", (e) => {
-    console.log("Notification chatMessageReceived!");
-    // your code here
+  console.log("Notification chatMessageReceived!");
+  // your code here
 });
 
 ```
@@ -269,23 +283,18 @@ Alternatif olarak, belirtilen aralıklarda yöntemi yoklayarak sohbet iletileri 
 
 ```JavaScript
 
-let pagedAsyncIterableIterator = await chatThreadClient.listMessages();
-let nextMessage = await pagedAsyncIterableIterator.next();
-    while (!nextMessage.done) {
-        let chatMessage = nextMessage.value;
-        console.log(`Message :${chatMessage.content}`);
-        // your code here
-        nextMessage = await pagedAsyncIterableIterator.next();
-    }
+const messages = chatThreadClient.listMessages();
+for await (const message of messages) {
+   // your code here
+}
 
 ```
 Bu kodu `<LIST MESSAGES IN A CHAT THREAD>` **client.js** açıklamanın yerine ekleyin.
 Sekmeden yenileyin, konsolunda bu sohbet iş parçacığında gönderilen iletilerin listesini bulmanız gerekir.
 
+`listMessages` tarafından tanımlanabilecek farklı ileti türlerini döndürür `chatMessage.type` . 
 
-`listMessages` ve kullanarak iletide gerçekleşen tüm düzenleme veya silme işlemleri dahil olmak üzere iletinin en son sürümünü döndürür `updateMessage` `deleteMessage` .
-Silinen iletiler için `chatMessage.deletedOn` , iletinin silindiğini gösteren bir tarih saat değeri döndürür. Düzenlenen iletiler için, `chatMessage.editedOn` iletinin ne zaman düzenlendiğini gösteren bir tarih saat döndürür. İleti oluşturmaya yönelik özgün saate, `chatMessage.createdOn` iletileri sıralamak için kullanılabilecek kullanılarak erişilebilir.
-
+Daha ayrıntılı bilgi için bkz. [Ileti türleri](../../../concepts/chat/concepts.md#message-types).
 
 ## <a name="add-a-user-as-a-participant-to-the-chat-thread"></a>Sohbet iş parçacığına katılımcı olarak Kullanıcı ekleme
 
@@ -300,14 +309,14 @@ Yöntemi çağırmadan önce `addParticipants` , bu kullanıcı için yeni bir e
 
 ```JavaScript
 
-let addParticipantsRequest =
+const addParticipantsRequest =
 {
-    participants: [
-        {
-            id: { communicationUserId: '<NEW_PARTICIPANT_USER_ID>' },
-            displayName: 'Jane'
-        }
-    ]
+  participants: [
+    {
+      id: { communicationUserId: '<NEW_PARTICIPANT_USER_ID>' },
+      displayName: 'Jane'
+    }
+  ]
 };
 
 await chatThreadClient.addParticipants(addParticipantsRequest);
@@ -317,16 +326,10 @@ await chatThreadClient.addParticipants(addParticipantsRequest);
 
 ## <a name="list-users-in-a-chat-thread"></a>Sohbet iş parçacığında kullanıcıları listeleme
 ```JavaScript
-async function listParticipants() {
-   let pagedAsyncIterableIterator = await chatThreadClient.listParticipants();
-   let next = await pagedAsyncIterableIterator.next();
-   while (!next.done) {
-      let user = next.value;
-      console.log(`User :${user.displayName}`);
-      next = await pagedAsyncIterableIterator.next();
-   }
+const participants = chatThreadClient.listParticipants();
+for await (const participant of participants) {
+   // your code here
 }
-await listParticipants();
 ```
 client.jsaçıklama yerine bu kodu ekleyin `<LIST PARTICIPANTS IN A THREAD>` , tarayıcı sekmesini **** yenileyin ve konsolu kontrol edin, bir iş parçacığında kullanıcılar hakkında bilgi görmeniz gerekir.
 

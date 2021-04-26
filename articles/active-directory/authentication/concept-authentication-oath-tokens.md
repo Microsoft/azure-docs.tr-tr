@@ -5,17 +5,17 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 03/26/2021
+ms.date: 03/31/2021
 ms.author: justinha
 author: justinha
 manager: daveba
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 45b3d5155befe005a6af68355426883b63a8c410
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: 99d0dd081e3e1a681ba55e3457b79a548d6b2bb7
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105611795"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530384"
 ---
 # <a name="authentication-methods-in-azure-active-directory---oath-tokens"></a>Azure Active Directory-OATH belirteçlerindeki kimlik doğrulama yöntemleri 
 
@@ -57,8 +57,8 @@ CSV dosyasının boyutuna bağlı olarak, işlem birkaç dakika sürebilir. Geç
 
 Herhangi bir hata çözüldükten sonra, yönetici belirteç için **Etkinleştir** ' i seçip BELIRTEÇTE görünen OTP 'yi girerek her anahtarı etkinleştirebilir. 5 dakikada bir en fazla 200 OATH belirteci etkinleştirebilirsiniz. 
 
-Kullanıcılar, her zaman kullanılmak üzere yapılandırılmış Microsoft Authenticator uygulaması gibi beş OATH donanım belirtecinin veya Authenticator uygulamasının bir birleşimine sahip olabilir.
+Kullanıcılar, her zaman kullanılmak üzere yapılandırılmış Microsoft Authenticator uygulaması gibi beş OATH donanım belirtecinin veya Authenticator uygulamasının bir birleşimine sahip olabilir. Donanım OATH belirteçleri, kaynak kiracısında Konuk kullanıcılara atanamaz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Microsoft Graph REST API Beta](/graph/api/resources/authenticationmethods-overview?view=graph-rest-beta)kullanarak kimlik doğrulama yöntemlerini yapılandırma hakkında daha fazla bilgi edinin.
+[Microsoft Graph REST API](/graph/api/resources/authenticationmethods-overview)kullanarak kimlik doğrulama yöntemlerini yapılandırma hakkında daha fazla bilgi edinin.

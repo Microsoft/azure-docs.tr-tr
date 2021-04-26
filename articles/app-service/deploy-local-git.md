@@ -5,13 +5,13 @@ ms.assetid: ac50a623-c4b8-4dfd-96b2-a09420770063
 ms.topic: article
 ms.date: 02/16/2021
 ms.reviewer: dariac
-ms.custom: seodec18, devx-track-azurecli
-ms.openlocfilehash: 5dd6183bf88c167adb2f084c319cd90b94351dfb
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: seodec18, devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 3196233728bb7f6493bbc06234c62d261ac99254
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100560460"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832419"
 ---
 # <a name="local-git-deployment-to-azure-app-service"></a>Azure App Service için yerel git dağıtımı
 
@@ -73,7 +73,7 @@ Henüz bir uygulama oluşturmadıysanız bunun yerine [Git etkin bir uygulama ol
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/cli)
 
-Öğesini çalıştırın [`az webapp deployment source config-local-git`](/cli/azure/webapp/deployment/source#az-webapp-deployment-source-config-local-git) . Örnek:
+Öğesini çalıştırın [`az webapp deployment source config-local-git`](/cli/azure/webapp/deployment/source#az_webapp_deployment_source_config_local_git) . Örnek:
 
 ```azurecli-interactive
 az webapp deployment source config-local-git --name <app-name> --resource-group <group-name>
@@ -140,6 +140,7 @@ Azure 'da bir App Service uygulamasına yayımlamak için git kullandığınızd
 |`Unable to access '[siteURL]': Failed to connect to [scmAddress]`|Uygulama çalışır durumda değil.|Uygulamayı Azure portal başlatın. Web uygulaması durdurulduğunda git dağıtımı kullanılamaz.|
 |`Couldn't resolve host 'hostname'`|' Azure ' uzak için adres bilgileri yanlış.|`git remote -v`ILIŞKILI URL ile birlikte tüm uzaktan kumandalar listelemek için komutunu kullanın. ' Azure ' uzak için URL 'nin doğru olduğundan emin olun. Gerekirse, doğru URL 'YI kullanarak bu uzak kopyayı kaldırın ve yeniden oluşturun.|
 |`No refs in common and none specified; doing nothing. Perhaps you should specify a branch such as 'main'.`|Sırasında bir dal belirtmediniz veya ' `git push` `push.default` de değer ayarlamadıysanız `.gitconfig` .|`git push`Ana dalı belirterek yeniden çalıştırın: `git push azure main` .|
+|`Error - Changes committed to remote repository but deployment to website failed.`|' Azure ' üzerinde uygulama dağıtım dalında eşleşmeyen bir yerel dal gönderdiniz.|Geçerli dalın olduğunu doğrulayın `master` . Varsayılan dalı değiştirmek için uygulama ayarı ' nı kullanın `DEPLOYMENT_BRANCH` .|
 |`src refspec [branchname] does not match any.`|' Azure ' uzak üzerinde ana dışında bir dala gönderim çalıştınız.|`git push`Ana dalı belirterek yeniden çalıştırın: `git push azure main` .|
 |`RPC failed; result=22, HTTP code = 5xx.`|HTTPS üzerinden büyük bir git deposu göndermeye çalışırsanız bu hata oluşabilir.|Daha büyük olması için yerel makinedeki git yapılandırmasını değiştirin `postBuffer` . Örneğin: `git config --global http.postBuffer 524288000`.|
 |`Error - Changes committed to remote repository but your web app not updated.`|Bir Node.js uygulamasını, ek gerekli modülleri belirten _package.js_ bir dosya ile dağıttınız.|Hatada `npm ERR!` daha fazla bağlam için bu hatadan önce hata iletilerini gözden geçirin. Aşağıda bu hatanın bilinen nedenleri ve ilgili `npm ERR!` iletiler verilmiştir:<br /><br />**Dosyada hatalı biçimlendirilmiş package.js**: `npm ERR! Couldn't read dependencies.`<br /><br />**Yerel modülün Windows için ikili bir dağıtımı yok**:<br />`npm ERR! \cmd "/c" "node-gyp rebuild"\ failed with 1` <br />veya <br />`npm ERR! [modulename@version] preinstall: \make || gmake\ `|

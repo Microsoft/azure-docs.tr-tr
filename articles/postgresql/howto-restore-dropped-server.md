@@ -6,12 +6,12 @@ ms.author: bahusse
 ms.service: postgresql
 ms.topic: how-to
 ms.date: 11/03/2020
-ms.openlocfilehash: 591f01004cfba247112f702625ab05ddc0aaede3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 5b5bb9fd6e3d34fc4a6b0ae90a2cd76fc84e9ce1
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97652934"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107366530"
 ---
 # <a name="restore-a-dropped-azure-database-for-postgresql-server"></a>Bırakılmış bir PostgreSQL sunucusu için Azure veritabanını geri yükleme
 
@@ -43,7 +43,7 @@ Bırakılan bir PostgreSQL sunucusu için Azure veritabanı 'nı geri yüklemek 
 
     ![REST API kullanarak sunucu oluşturma](./media/howto-restore-dropped-server/create-server-from-rest-api-azure.png)
   
- 6. Istek gövdesi bölümünde aşağıya kaydırın ve "bırakılan sunucu konumu", "submissionTimestamp" ve "RESOURCEID" değerlerini değiştirerek aşağıdakileri yapıştırın. "Restorepoinıntime" için, komutun hata içermediğinden emin olmak için "submissionTimestamp" değerini **15 dakika** olarak belirtin.
+ 6. Istek gövdesi bölümünde aşağıda ilerleyin ve "bırakılan sunucu konumu" (ör. merkezileştirme, EastUS vb.), "submissionTimestamp" ve "RESOURCEID" değerlerini değiştirerek aşağıdakini yapıştırın. "Restorepoinıntime" için, komutun hata içermediğinden emin olmak için "submissionTimestamp" değerini **15 dakika** olarak belirtin.
     
     ```json
     {

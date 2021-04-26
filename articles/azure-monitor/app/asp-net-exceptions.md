@@ -4,12 +4,12 @@ description: ASP.NET uygulamalarından gelen özel durumları, istek telemetriyl
 ms.topic: conceptual
 ms.custom: devx-track-csharp
 ms.date: 07/11/2019
-ms.openlocfilehash: 36e916eabfca8e997fc3d46ff10f6201203457cd
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 926516075c7d43e6e800403a69ff3ab8f1233fcd
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "88936512"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727000"
 ---
 # <a name="diagnose-exceptions-in-your-web-apps-with-application-insights"></a>Application Insights ile web uygulamalarınızda özel durumları tanılama
 Canlı Web uygulamanızdaki özel durumlar [Application Insights](./app-insights-overview.md)tarafından raporlanır. Nedenleri hızlı bir şekilde tanılamanıza olanak tanımak için hem istemci hem de sunucudaki başarısız istekleri özel durumlarla ve diğer olaylarla ilişkilendirebileceğinizi unutmayın.
@@ -215,7 +215,7 @@ Denetleyicilerden kaynaklanan işlenmemiş özel durumlar genellikle 500 "Iç su
 ### <a name="prior-versions-support"></a>Önceki sürümler desteği
 Web SDK 2,5 (ve öncesi) Application Insights MVC 4 (ve öncesi) kullanıyorsanız, özel durumları izlemek için aşağıdaki örneklere bakın.
 
-[CustomErrors](/previous-versions/dotnet/netframework-4.0/h0hfz6fc(v=vs.100)) yapılandırması Ise `Off` , [http modülünün](/previous-versions/dotnet/netframework-3.0/ms178468(v=vs.85)) toplaması için özel durumlar kullanılabilir olacaktır. Ancak, `RemoteOnly` (varsayılan) veya ise, `On` özel durum temizlenir ve Application Insights otomatik olarak toplanacaktır. [System. Web. Mvc. HandleErrorAttribute sınıfını](/dotnet/api/system.web.mvc.handleerrorattribute?view=aspnet-mvc-5.2)geçersiz kılarak ve AŞAĞıDAKI farklı MVC sürümleri ([GitHub kaynağı](https://github.com/AppInsightsSamples/Mvc2UnhandledExceptions/blob/master/MVC2App/Controllers/AiHandleErrorAttribute.cs)) için gösterildiği gibi geçersiz kılınan sınıfı uygulayarak bu hatayı çözebilirsiniz:
+[CustomErrors](/previous-versions/dotnet/netframework-4.0/h0hfz6fc(v=vs.100)) yapılandırması Ise `Off` , [http modülünün](/previous-versions/dotnet/netframework-3.0/ms178468(v=vs.85)) toplaması için özel durumlar kullanılabilir olacaktır. Ancak, `RemoteOnly` (varsayılan) veya ise, `On` özel durum temizlenir ve Application Insights otomatik olarak toplanacaktır. [System. Web. Mvc. HandleErrorAttribute sınıfını](/dotnet/api/system.web.mvc.handleerrorattribute)geçersiz kılarak ve AŞAĞıDAKI farklı MVC sürümleri ([GitHub kaynağı](https://github.com/AppInsightsSamples/Mvc2UnhandledExceptions/blob/master/MVC2App/Controllers/AiHandleErrorAttribute.cs)) için gösterildiği gibi geçersiz kılınan sınıfı uygulayarak bu hatayı çözebilirsiniz:
 
 ```csharp
     using System;

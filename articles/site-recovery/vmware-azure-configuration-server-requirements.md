@@ -1,19 +1,15 @@
 ---
 title: VMware olağanüstü durum kurtarma-Azure Site Recovery yapılandırma sunucusu gereksinimleri
 description: Bu makalede, Azure Site Recovery ile Azure 'a VMware olağanüstü durum kurtarma için yapılandırma sunucusu dağıtma desteği ve gereksinimleri açıklanır
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
-services: site-recovery
 ms.topic: article
 ms.date: 09/09/2019
-ms.author: raynew
-ms.openlocfilehash: 0b0942b517c8dc83c048bd1203a58d9861515dfb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: aec08aa4f18c69195be91b7544b74fee100f6f6b
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95997826"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106580188"
 ---
 # <a name="configuration-server-requirements-for-vmware-disaster-recovery-to-azure"></a>Azure'a VMware olağanüstü durum kurtarması için yapılandırma sunucusu gereksinimleri
 

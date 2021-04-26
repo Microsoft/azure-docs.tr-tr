@@ -9,12 +9,12 @@ author: GithubMirek
 ms.author: mireks
 ms.reviewer: vanto
 ms.date: 02/11/2021
-ms.openlocfilehash: 68267cdedd2f0b64549791866e8750cf42928ab4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 17e846c7435e2f1cc77c5915f7e0b308c3706f96
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103201236"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775430"
 ---
 # <a name="azure-active-directory-service-principal-with-azure-sql"></a>Azure SQL ile hizmet sorumlusu Azure Active Directory
 
@@ -72,7 +72,7 @@ Bir Azure AD uygulaması adına SQL veritabanı ve Azure SYNAPSE 'de Azure AD ne
     - Sunucu kimliğinin sunucuya atanıp atanmadığını denetlemek için Get-AzSqlServer komutunu yürütün.
 
     > [!NOTE]
-    > Sunucu kimliği, CLı komutları kullanılarak da atanabilir. Daha fazla bilgi için bkz. [az SQL Server Create](/cli/azure/sql/server#az-sql-server-create) ve [az SQL Server Update](/cli/azure/sql/server#az-sql-server-update).
+    > Sunucu kimliği, CLı komutları kullanılarak da atanabilir. Daha fazla bilgi için bkz. [az SQL Server Create](/cli/azure/sql/server#az_sql_server_create) ve [az SQL Server Update](/cli/azure/sql/server#az_sql_server_update).
 
 2. Oluşturulan veya sunucuya atanan sunucu kimliği için Azure AD [**Dizin okuyucularına**](../../active-directory/roles/permissions-reference.md#directory-readers) izin verin.
     - Bu izni vermek için, aşağıdaki makalede kullanılabilen SQL yönetilen örneği için kullanılan açıklamayı izleyin: [Azure AD yöneticisi sağlama (SQL yönetilen örneği)](authentication-aad-configure.md?tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance)
@@ -94,7 +94,7 @@ Bir Azure AD uygulaması adına SQL veritabanı ve Azure SYNAPSE 'de Azure AD ne
       - Yukarıdaki hata için, [Azure SQL mantıksal sunucusuna bir kimlik atamak](authentication-aad-service-principal-tutorial.md#assign-an-identity-to-the-azure-sql-logical-server) ve [SQL mantıksal sunucu kimliğine Dizin okuyucuları atamak](authentication-aad-service-principal-tutorial.md#assign-directory-readers-permission-to-the-sql-logical-server-identity)için adımları izleyin.
     > [!NOTE]
     > Yukarıda belirtilen hata iletileri, Azure AD uygulama desteği için eksik kurulum gereksinimini açıkça tanımlamak için, özellik GA 'den önce değiştirilir.
-- Azure AD uygulamasının SQL yönetilen örneği için Azure AD yöneticisi olarak ayarlanması yalnızca CLı komutu ve PowerShell komutu kullanılarak desteklenir; Örneğin, [az. SQL 2.9.0](https://www.powershellgallery.com/packages/Az.Sql/2.9.0) veya üzeri. Daha fazla bilgi için, bkz. [az SQL mı ad-admin Create](/cli/azure/sql/mi/ad-admin#az-sql-mi-ad-admin-create) and [set-Azsqlınstanceactivedirectoryadministrator](/powershell/module/az.sql/set-azsqlinstanceactivedirectoryadministrator) komutları. 
+- Azure AD uygulamasının SQL yönetilen örneği için Azure AD yöneticisi olarak ayarlanması yalnızca CLı komutu ve PowerShell komutu kullanılarak desteklenir; Örneğin, [az. SQL 2.9.0](https://www.powershellgallery.com/packages/Az.Sql/2.9.0) veya üzeri. Daha fazla bilgi için, bkz. [az SQL mı ad-admin Create](/cli/azure/sql/mi/ad-admin#az_sql_mi_ad_admin_create) and [set-Azsqlınstanceactivedirectoryadministrator](/powershell/module/az.sql/set-azsqlinstanceactivedirectoryadministrator) komutları. 
     - Azure AD yöneticisini ayarlamak için SQL yönetilen örneği için Azure portal kullanmak istiyorsanız, olası bir geçici çözüm bir Azure AD grubu oluşturmaktır. Sonra bu gruba hizmet sorumlusu 'nı (Azure AD uygulaması) ekleyin ve bu grubu SQL yönetilen örneği için bir Azure AD yöneticisi olarak ayarlayın.
     - Hizmet sorumlusunu (Azure AD uygulaması) SQL veritabanı için Azure AD yöneticisi olarak ayarlama ve Azure SYNAPSE Azure portal, [PowerShell](authentication-aad-configure.md?tabs=azure-powershell#powershell-for-sql-database-and-azure-synapse)ve [CLI](authentication-aad-configure.md?tabs=azure-cli#powershell-for-sql-database-and-azure-synapse) komutları kullanılarak desteklenir.
 - Farklı bir kiracıda oluşturulan SQL veritabanı veya SQL yönetilen örneği 'ne erişirken, başka bir Azure AD kiracısından hizmet sorumlusu olan bir Azure AD uygulamasının kullanılması başarısız olur. Bu uygulamaya atanan bir hizmet sorumlusu, SQL mantıksal sunucusu veya yönetilen örnekle aynı kiracıdan olmalıdır.

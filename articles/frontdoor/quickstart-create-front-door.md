@@ -4,27 +4,30 @@ description: Bu hızlı başlangıçta, Azure portal kullanarak yüksek oranda k
 services: front-door
 documentationcenter: na
 author: duongau
-manager: KumudD
-Customer intent: As an IT admin, I want to direct user traffic to ensure high availability of web applications.
-ms.service: frontdoor
-ms.devlang: na
-ms.topic: quickstart
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 09/16/2020
 ms.author: duau
-ms.openlocfilehash: 4846438f8479fe622570aa515a4d8b40cccc57b8
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: KumudD
+ms.date: 04/19/2021
+ms.topic: quickstart
+ms.service: frontdoor
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.custom:
+- mode-portal
+ms.openlocfilehash: 74b7c16904c86751076d40056027999fe44cb868
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91252315"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727876"
 ---
 # <a name="quickstart-create-a-front-door-for-a-highly-available-global-web-application"></a>Hızlı başlangıç: Yüksek oranda kullanılabilir global web uygulaması için Front Door oluşturma
 
 Bir Web uygulaması için yüksek kullanılabilirlik ayarlamak üzere Azure portal kullanarak Azure ön kapısını kullanmaya başlayın.
 
 Bu hızlı başlangıçta Azure ön kapısı, farklı Azure bölgelerinde çalışan bir Web uygulamasının iki örneğini havuzlar. Eşit ağırlıklı ve aynı öncelikli arka uçlara dayalı bir ön kapı yapılandırması oluşturursunuz. Bu yapılandırma, trafiği uygulamayı çalıştıran en yakın siteye yönlendirir. Azure ön kapısı, Web uygulamasını sürekli izler. Hizmet, en yakın site kullanılamadığında, kullanılabilir bir sonraki siteye otomatik yük devretme sağlar.
+
+:::image type="content" source="media/quickstart-create-front-door/environment-diagram.png" alt-text="Azure portal kullanarak ön kapı dağıtım ortamının diyagramı." border="false":::
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -66,8 +69,8 @@ Dağıtımınız tamamlandıktan sonra ikinci bir Web uygulaması oluşturun. Ay
 | ---              | ---  |
 | **Kaynak grubu**   | **Yeni oluştur** ' u seçin ve *FrontDoorQS_rg2* girin |
 | **Ad**             | Web uygulamanız için benzersiz bir ad girin, bu örnekte *Webappcontoso-2*  |
-| **Bölge**           | Farklı bir bölge, bu örnekte *Orta Güney ABD* |
-| **App Service planı**  >  **Windows planı**         | **Yeni** ' yi seçin ve *Myappserviceplangüneydoğu US*' i girip **Tamam** ' ı seçin. |
+| **Bölge**           | Farklı bir bölge, bu örnekte *Doğu ABD* |
+| **App Service planı**  >  **Windows planı**         | **Yeni** ' yi seçin ve *myAppServicePlanEastUS* girin ve ardından **Tamam** ' ı seçin. |
 
 ## <a name="create-a-front-door-for-your-application"></a>Uygulamanız için Front Door oluşturma
 

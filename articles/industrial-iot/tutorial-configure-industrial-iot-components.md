@@ -7,10 +7,10 @@ ms.service: industrial-iot
 ms.topic: tutorial
 ms.date: 3/22/2021
 ms.openlocfilehash: 348276a71b2227063374da6455445118fcb00fcf
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104787752"
 ---
 # <a name="tutorial-configure-the-industrial-iot-components"></a>Öğretici: Endüstriyel IoT bileşenlerini yapılandırma
@@ -49,7 +49,7 @@ Bileşenler için daha ilgili özelleştirme ayarlarından bazıları aşağıda
 
 ## <a name="configuration-options"></a>Yapılandırma seçenekleri
 
-|Yapılandırma seçeneği (toplu/tam ad)    |    Açıklama   |
+|Yapılandırma seçeneği (toplu/tam ad)    |    Description   |
 |----------------------------------------------|------------------|
 PF/publishfile |Yayımlanacak düğümleri yapılandırmak için dosya adı. Bu seçenek belirtilmişse OPC yayımcısını tek başına moda koyar.
 LF/logfile |Kullanılacak günlük dosyasının dosya adı.

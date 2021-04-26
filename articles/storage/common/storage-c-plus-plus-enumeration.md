@@ -1,19 +1,19 @@
 ---
 title: C++ istemci kitaplığı ile Azure depolama kaynaklarını listeleme
 description: Kapsayıcıları, Blobları, kuyrukları, tabloları ve varlıkları numaralandırmak için C++ için Microsoft Azure Depolama Istemci kitaplığı ' nda listeleme API 'Lerini nasıl kullanacağınızı öğrenin.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 01/23/2017
 ms.service: storage
 ms.subservice: common
 ms.topic: how-to
 ms.reviewer: dineshm
-ms.openlocfilehash: 8c8e2d2ddf6899e62bc95bc1e52c84eccdc3a91e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 72b08a79ead90207c48c4fa682b708a0627b5df3
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92784108"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106279638"
 ---
 # <a name="list-azure-storage-resources-in-c"></a>Azure Depolama Kaynaklarını C++ dilinde listeleme
 

@@ -4,12 +4,12 @@ description: Azure VMware çözümünün bir Azure VMware çözümü özel bulut
 ms.topic: conceptual
 ms.custom: contperf-fy21q2
 ms.date: 02/16/2021
-ms.openlocfilehash: 59319b5598be9770e82b9676a28444648230a019
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9fa94d6093e03432f20672ecf5c0160ce479e175
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100633147"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107871678"
 ---
 # <a name="monitor-and-repair-azure-vmware-solution-private-clouds"></a>Azure VMware Çözüm özel bulutlarını izleme ve onarma
 
@@ -45,5 +45,5 @@ Ana bilgisayar düzeltmesi, kümeye yeni bir sağlıklı düğüm eklenerek baş
 
 Azure VMware çözümünün özel bulutları nasıl izlediğini ve onardığına göre, şunları öğrenmek isteyebilirsiniz:
 
-- [Azure VMware çözümü özel bulut yükseltmeleri](concepts-upgrades.md).
-- [Azure VMware Çözüm kaynağını etkinleştirme](enable-azure-vmware-solution.md).
+- [Azure VMware çözümü özel bulut yükseltmeleri](concepts-upgrades.md)
+- [Azure VMware Çözüm kaynağını etkinleştirme](enable-azure-vmware-solution.md)

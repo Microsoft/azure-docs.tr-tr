@@ -1,18 +1,18 @@
 ---
 title: Azure Machine Learning için Azure Ilke mevzuat uyumluluk denetimleri
 description: Azure Machine Learning için kullanılabilen Azure Ilke mevzuat uyumluluk denetimlerini listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızın uyumluluğunu yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: sample
 author: BlackMist
 ms.author: larryfr
 ms.service: machine-learning
 ms.custom: subject-policy-compliancecontrols
-ms.openlocfilehash: fadbd6384a06184e1d2636c76a575e2c3c62a9f4
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 0c6b81169c7e6ba8c721171f899668c0a0779718
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105034376"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877776"
 ---
 # <a name="azure-policy-regulatory-compliance-controls-for-azure-machine-learning"></a>Azure Machine Learning için Azure Ilke mevzuat uyumluluk denetimleri
 

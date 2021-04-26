@@ -12,12 +12,12 @@ ms.topic: overview
 ms.date: 10/22/2020
 ms.author: nitinme
 ms.custom: cog-serv-seo-aug-2020
-ms.openlocfilehash: 71f8635d1cd96a6436cfc902622bf18bc608a143
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: c89131cc34d45ea94f3bb290ac11ec86f4b83be3
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104867194"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107587621"
 ---
 # <a name="what-are-azure-cognitive-services"></a>Azure bilişsel hizmetler nedir?
 
@@ -43,7 +43,7 @@ Bu makalede yer alan aşağıdaki bölümlerde, bu beş sütun sayısının par�
 |[Özel Görüntü İşleme Hizmeti](./custom-vision-service/index.yml "Özel Görüntü İşleme Hizmeti")|Özel Görüntü İşleme Hizmeti kendi görüntü sınıflandırıcılarınızı oluşturmanıza, dağıtmanıza ve iyileştirmenize olanak tanır. Görüntü Sınıflandırıcısı, görsel özelliklerine göre resimlere etiket uygulayan bir AI hizmetidir. |
 |[Yüz Tanıma](./face/index.yml "Yüz")| Yüz tanıma hizmeti, yüz öznitelik algılamayı ve tanımayı etkinleştirerek gelişmiş yüz algoritmalarına erişim sağlar. Hizmeti kullanmaya başlamak için bkz. [yüz hızlı başlangıç](./face/quickstarts/client-libraries.md) .|
 |[Form Tanıma](./form-recognizer/index.yml "Form Tanıma")|Form tanıyıcı, form belgelerinden anahtar-değer çiftlerini ve tablo verilerini tanımlar ve ayıklar; ardından, özgün dosyadaki ilişkiler dahil olmak üzere yapılandırılmış verilerin çıktısını verir. Başlamak için [form tanıyıcı hızlı başlangıç](./form-recognizer/quickstarts/client-library.md) bölümüne bakın.|
-|[Video Indexer](../media-services/video-indexer/video-indexer-overview.md "Video Indexer")|Video Indexer, videonuzun öngörülerini ayıklamanızı sağlar. Başlamak için [video Indexer hızlı başlangıç](/media-services/video-indexer/video-indexer-get-started.md) bölümüne bakın.|
+|[Video Indexer](../media-services/video-indexer/video-indexer-overview.md "Video Indexer")|Video Indexer, videonuzun öngörülerini ayıklamanızı sağlar. Başlamak için [video Indexer hızlı başlangıç](/azure/media-services/video-indexer/video-indexer-get-started) bölümüne bakın.|
 
 ## <a name="speech-apis"></a>Konuşma API 'Leri
 

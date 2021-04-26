@@ -3,12 +3,12 @@ title: Azure Event Hubs-gerçek zamanlı olaylarda veri bozuklukilerini görsell
 description: 'Öğretici: Microsoft Azure gönderilen gerçek zamanlı olaylarda veri bozuklukilerini görselleştirin Event Hubs'
 ms.topic: tutorial
 ms.date: 06/23/2020
-ms.openlocfilehash: bd08d611761e125fdd03173ce6027c60e82baed6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: bb7d8da2498005b8b2e1183a836d9385f3d31e5c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98623467"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783764"
 ---
 # <a name="tutorial-visualize-data-anomalies-in-real-time-events-sent-to-azure-event-hubs"></a>Öğretici: Azure Event Hubs'a gönderilen gerçek zamanlı olaylardaki veri anomalilerini görselleştirme
 
@@ -349,7 +349,7 @@ Power BI hesabınızda oturum açın. **Çalışma Alanım**'a gidin. Pano adın
 
 ### <a name="clean-up-resources-using-azure-cli"></a>Azure CLI kullanarak kaynakları temizleme
 
-Kaynak grubunu kaldırmak için [az group delete](/cli/azure/group#az-group-delete) komutunu kullanın.
+Kaynak grubunu kaldırmak için [az group delete](/cli/azure/group#az_group_delete) komutunu kullanın.
 
 ```azurecli-interactive
 az group delete --name $resourceGroup

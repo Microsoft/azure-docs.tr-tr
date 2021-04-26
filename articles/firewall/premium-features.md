@@ -5,15 +5,15 @@ author: vhorne
 ms.service: firewall
 services: firewall
 ms.topic: conceptual
-ms.date: 03/12/2021
+ms.date: 04/07/2021
 ms.author: victorh
 ms.custom: references_regions
-ms.openlocfilehash: 4a8efff7ef53753e15a47e87a2bb82d0124ae997
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fdf0113d73b0b2e82ec889caf2a82c77bb7a040c
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104590458"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226710"
 ---
 # <a name="azure-firewall-premium-preview-features"></a>Azure Güvenlik Duvarı Premium Önizleme özellikleri
 
@@ -105,39 +105,37 @@ veya
 
 Azure Güvenlik Duvarı Premium önizlemesi aşağıdaki bölgelerde desteklenir:
 
-- Batı Avrupa (kamu/Avrupa)
-- Doğu ABD (genel/Birleşik Devletler)
-- Avustralya Doğu (kamu/Avustralya)
-- Güneydoğu Asya (genel/Asya Pasifik)
-- UK Güney (kamu/Birleşik Krallık)
-- Kuzey Avrupa (kamu/Avrupa)
-- Doğu ABD 2 (genel/Birleşik Devletler)
-- Orta Güney ABD (genel/Birleşik Devletler)
-- Batı ABD 2 (genel/Birleşik Devletler)
-- Batı ABD (genel/Birleşik Devletler)
-- Orta ABD (genel/Birleşik Devletler)
-- Orta Kuzey ABD (genel/Birleşik Devletler)
-- Japonya Doğu (kamu/Japonya)
-- Doğu Asya (genel/Asya Pasifik)
-- Kanada Orta (kamu/Kanada)
-- Fransa Orta (kamu/Fransa)
-- Güney Afrika Kuzey (kamu/Güney Afrika)
-- BAE Kuzey (genel/UAE)
-- İsviçre Kuzey (genel/Isviçre)
-- Brezilya Güney (Kamu/Brezilya)
-- Norveç Doğu (genel/Norveç)
 - Avustralya Orta (kamu/Avustralya)
 - Avustralya Orta 2 (kamu/Avustralya)
+- Avustralya Doğu (kamu/Avustralya)
 - Avustralya Güneydoğu (kamu/Avustralya)
+- Brezilya Güney (Kamu/Brezilya)
+- Kanada Orta (kamu/Kanada)
 - Kanada Doğu (kamu/Kanada)
+- Orta ABD (genel/Birleşik Devletler)
 - Orta ABD EUAP (kamu/Canary (US))
+- Doğu Asya (genel/Asya Pasifik)
+- Doğu ABD (genel/Birleşik Devletler)
+- Doğu ABD 2 (genel/Birleşik Devletler)
+- Fransa Orta (kamu/Fransa)
 - Fransa Güney (kamu/Fransa)
+- Japonya Doğu (kamu/Japonya)
 - Japonya Batı (kamu/Japonya)
+- Kore Orta (Genel/Kore)
 - Kore Güney (Genel/Kore)
+- Orta Kuzey ABD (genel/Birleşik Devletler)
+- Kuzey Avrupa (kamu/Avrupa)
+- Güney Afrika Kuzey (kamu/Güney Afrika)
+- Orta Güney ABD (genel/Birleşik Devletler)
+- Güneydoğu Asya (genel/Asya Pasifik)
 - BAE Orta (genel/UAE)
+- UK Güney (kamu/Birleşik Krallık)
 - UK Batı (kamu/Birleşik Krallık)
 - Orta Batı ABD (genel/Birleşik Devletler)
+- Batı Avrupa (kamu/Avrupa)
 - Batı Hindistan (genel/Hindistan)
+- Batı ABD (genel/Birleşik Devletler)
+- Batı ABD 2 (genel/Birleşik Devletler)
 
 
 ## <a name="known-issues"></a>Bilinen sorunlar
@@ -150,7 +148,6 @@ Azure Güvenlik Duvarı Premium önizleme aşağıdaki bilinen sorunlara sahipti
 |HTTPS 'de FQDN çözümlemesi için ESNı desteği|Şifrelenmiş SNı, HTTPS el sıkışması içinde desteklenmez.|Yalnızca bugün Firefox, özel yapılandırma ile ESNı destekler. Önerilen geçici çözüm bu özelliği devre dışı bırakdır.|
 |İstemci sertifikaları (TLS)|İstemci sertifikaları, istemci ve sunucu arasında karşılıklı kimlik güveni oluşturmak için kullanılır. İstemci sertifikaları, bir TLS anlaşması sırasında kullanılır. Azure Güvenlik Duvarı, sunucuyla bir bağlantıyı yeniden sağlar ve istemci sertifikalarının özel anahtarına erişemez.|Yok|
 |QUIC/HTTP3|QUIC, HTTP 'nin yeni ana sürümüdür. Bu, 80 (PLAN) ve 443 (SSL) üzerinden UDP tabanlı bir protokoldür. FQDN/URL/TLS incelemesi desteklenmez.|UDP 80/443 ' i ağ kuralları olarak geçirmeyi yapılandırın.|
-|Premium 'da güvenli merkez ve Zorlamalı tünel desteklenmez|Şu anda güvenlik duvarı Premium SKU 'SU güvenli hub dağıtımları ve Zorlamalı tünel yapılandırmalarında desteklenmez.|GA için zamanlanan düzelme.|
 Güvenilmeyen müşteri tarafından imzalanan sertifikalar|Bir intranet tabanlı Web sunucusundan alındıktan sonra, müşteri tarafından imzalanan sertifikalara güvenlik duvarı tarafından güvenilmiyor.|GA için zamanlanan düzelme.
 |IDPS 'de TLS incelemesi ile ilgili uyarılarda yanlış kaynak ve hedef IP adresleri.|TLS incelemesini ve ıDPS 'yi etkinleştirdiğinizde yeni bir uyarı olduğunda, görünen kaynak/hedef IP adresi yanlış olur (özgün IP adresi yerine iç IP adresi görüntülenir).|GA için zamanlanan düzelme.|
 |HTTP için ıDPS ile ilgili uyarılarda yanlış kaynak IP adresi (TLS denetimi olmadan).|Düz metin HTTP trafiği kullanımda olduğunda ve ıDPS yeni bir uyarı yayınlar ve hedef bir IP adresi ise, görünen kaynak IP adresi yanlış olur (özgün IP adresi yerine iç IP adresi görüntülenir).|GA için zamanlanan düzelme.|

@@ -9,12 +9,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 03/02/2021
   ms.author: shasb
-  ms.openlocfilehash: e9acbb8206985fbc9edebba8d4183ca1a97736f7
-  ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+  ms.openlocfilehash: fbad5cafb22960a56a4ba76e2dc331c399193ddc
+  ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/23/2021
-  ms.locfileid: "102121669"
+  ms.lasthandoff: 04/06/2021
+  ms.locfileid: "106443213"
 landingContent:
 - title: Azure Arc özellikli Kubernetes hakkında
   linkLists:
@@ -56,6 +56,8 @@ landingContent:
       url: use-gitops-with-helm.md
     - text: Azure İlkesi’ni kullanarak GitOps uygulama
       url: use-azure-policy.md
+    - text: Kümelere uzantı dağıtma
+      url: extensions.md
     - text: Azure IoT Edge iş yüklerini dağıtma
       url: deploy-azure-iot-edge-workloads.md
 - title: Kavram kanıtı

@@ -2,21 +2,21 @@
 title: Service Fabric kümelerinde endüce Chaos
 description: Kümedeki Chaos 'yi yönetmek için hata ekleme ve küme analizi hizmeti API 'Lerini kullanma.
 ms.topic: conceptual
-ms.date: 02/05/2018
+ms.date: 03/26/2021
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 72b8f7e9e4934b516f843ae8bc9bb7adc1c349ec
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 759e2d1c8d2a326583625fbbbcadb4f4fa950510
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101720520"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105732440"
 ---
 # <a name="induce-controlled-chaos-in-service-fabric-clusters"></a>Service Fabric kümelerinde ı, kontrollü Chaos
 Bulut altyapıları gibi büyük ölçekli dağıtılmış sistemler, doğal olarak güvenilir değildir. Azure Service Fabric, geliştiricilerin güvenilir olmayan bir altyapının üzerine güvenilir dağıtılmış hizmetler yazmasını sağlar. Güvenilir olmayan bir altyapının üzerine sağlam dağıtılmış hizmetler yazmak için, geliştiricilerin hizmetin kararlılığını test edebilmeleri gerekir, çünkü temeldeki güvenilir olmayan altyapı hatalar nedeniyle karmaşık durum geçişleri ile devam edebilir.
 
 [Hata ekleme ve küme analizi hizmeti](./service-fabric-testability-overview.md) (hata analizi hizmeti olarak da bilinir), geliştiricilere hizmetlerini test etmek için hata alma olanağı sağlar. [Bir bölümü yeniden başlatma](/powershell/module/servicefabric/start-servicefabricpartitionrestart)gibi hedeflenmiş bu sanal hatalar, en yaygın durum geçişlerini çalıştırmaya yardımcı olabilir. Ancak hedeflenen benzetimli hatalar tanımına göre gezinilmiştir ve bu nedenle yalnızca donanımdan tahmin edilen, uzun ve karmaşık durum geçişleri sırasını gösteren hataları kaçırmayabilir. Taraflı olmayan bir test için Chaos kullanabilirsiniz.
 
-Chaos, küme boyunca uzun süre boyunca düzenli ve araya eklemeli hataların (hem düzgün kapanma hem de düzgün şekilde değil) benzetimini yapar. Hatalı bir hata, bir Service Fabric API çağrısı kümesinden oluşur; Örneğin, yeniden başlatma çoğaltma hatası, bu bir yakın ve bir çoğaltma üzerinde açık olan bir kapatma olduğundan, kapanma hatası. Çoğaltmayı kaldırın, birincil çoğaltmayı taşıyın ve ikincil çoğaltmayı taşıyın, Chaos tarafından uygulanan diğer düzgün çalışan hatalardır. Yeniden başlatma düğümü ve kod paketini yeniden Başlat gibi düzgün olmayan hatalar işlemden çıkılıyor. 
+Chaos, küme boyunca uzun süre boyunca düzenli ve araya eklemeli hataların (hem düzgün kapanma hem de düzgün şekilde değil) benzetimini yapar. Hatalı bir hata, bir Service Fabric API çağrısı kümesinden oluşur; Örneğin, yeniden başlatma çoğaltma hatası, bu bir yakın ve bir çoğaltma üzerinde açık olan bir kapatma olduğundan, kapanma hatası. Çoğaltmayı kaldırın, birincil çoğaltmayı taşıyın, ikincil çoğaltmayı taşıyın ve taşıma örneği, Chaos tarafından uygulanan diğer düzgün çalışan hatalardır. Yeniden başlatma düğümü ve kod paketini yeniden Başlat gibi düzgün olmayan hatalar işlemden çıkılıyor.
 
 Chaos 'ı hız ve hata türüyle yapılandırdıktan sonra, kümede ve hizmetinizdeki hataları oluşturmaya başlamak için C#, Powershell veya REST API aracılığıyla Chaos 'i başlatabilirsiniz. Chaos 'i belirli bir süre için (örneğin, bir saat) çalışacak şekilde yapılandırabilir, sonra da her bir Chaos otomatik olarak durur veya StopChaos API 'yi (C#, Powershell veya REST) dilediğiniz zaman durdurabilirsiniz.
 
@@ -37,6 +37,7 @@ Aşağıdaki kategorilerden oluşan Chaos hatası:
 * Çoğaltmayı yeniden başlatma
 * Birincil çoğaltmayı taşıma (yapılandırılabilir)
 * İkincil çoğaltmayı taşıma (yapılandırılabilir)
+* Örnek taşıma
 
 Chaos birden çok yinelemede çalışır. Her yineleme, belirtilen dönem için hata ve küme doğrulamasından oluşur. Kümenin sabitlenemez ve doğrulamanın başarılı olması için harcanan süreyi yapılandırabilirsiniz. Küme doğrulamasında bir hata bulunursa, Chaos UTC zaman damgasına ve hata ayrıntılarına sahip bir ValidationFailedEvent üretir ve devam ettirir. Örneğin, en fazla üç eş zamanlı hata içeren bir saat için çalışacak şekilde ayarlanmış bir Chaos örneğini düşünün. Chaos üç hata ile aynıdır ve sonra küme durumunu doğrular. Bu, StopChaosAsync API 'SI veya bir saatlik geçişlerinde açıkça durduruluncaya kadar önceki adımda yinelenir. Küme herhangi bir yinelemede sağlıksız hale gelirse (yani, sabitlemez veya geçilen Maxclusterilemintimeout süresi içinde sağlıklı olmaz), Chaos bir ValidationFailedEvent üretir. Bu olay bir şeyin yanlış geçmiş olduğunu ve daha fazla araştırma gerektirebileceğini gösterir.
 
@@ -56,14 +57,14 @@ Hangi hataların kurulu olduğunu almak için GetChaosReport API 'yi (PowerShell
 > Bir değer *Maxconcurrenthatalarının* ne kadar yüksek olduğuna bakılmaksızın, Chaos garantisi-dış hataların yokluğunda, çekirdek kaybı veya veri kaybı yoktur.
 >
 
-* **Enablemovereperepfaults**: birincil veya ikincil çoğaltmaların taşınmasına neden olan hataları sağlar veya devre dışı bırakır. Bu hatalar varsayılan olarak etkindir.
+* **Enablemovereperepfaults**: birincil, ikincil çoğaltmaların veya örneklerin taşınmasına neden olan hataları sağlar veya devre dışı bırakır. Bu hatalar varsayılan olarak etkindir.
 * **Waittimebetweenyinelemelerde**: yinelemeler arasında beklenecek süre. Diğer bir deyişle, bir hata yuvarlama gerçekleştirdikten ve kümenin sistem durumunun ilgili doğrulanmasını tamamladıktan sonra Chaos 'in duraklayabileceği zaman miktarı. Değer arttıkça, daha düşük ortalama hata ekleme hızıdır.
 * **Waittimebetweenfaults**: tek bir yinelemede art arda iki hata arasında beklenecek süre. Değer arttıkça, (veya arasındaki örtüşme) arızalarını azaltır.
 * **Clusterhealthpolicy**: küme durumu Ilkesi, Chaos yinelemeleri arasındaki kümenin sistem durumunu doğrulamak için kullanılır. Küme sistem durumu hata durumunda veya hata yürütmesi sırasında beklenmeyen bir özel durum oluşursa, Chaos bir sonraki sistem durumu denetiminin kümeye bir süre sonra sağlanması için önce 30 dakika bekler.
 * **Bağlam**: (dize, dize) türünde anahtar-değer çiftleri koleksiyonu. Eşleme, Chaos çalıştırması hakkında bilgi kaydetmek için kullanılabilir. Bu tür çiftler üzerinde 100 daha fazla olamaz ve her dize (anahtar veya değer) en fazla 4095 karakter uzunluğunda olabilir. Bu harita, yönetim paketi tarafından, isteğe bağlı olarak belirli bir çalıştırma hakkındaki bağlamı depolamak için bir başlangıç tarafından ayarlanır.
 * **Chaostargetfilter**: Bu filtre, yalnızca belirli düğüm türlerine veya yalnızca belirli uygulama örneklerine olan Chaos hatalarını hedeflemek için kullanılabilir. ChaosTargetFilter kullanılmazsa, Chaos tüm küme varlıklarını hatalara neden olur. ChaosTargetFilter kullanılırsa, Chaos yalnızca ChaosTargetFilter belirtimini karşılayan varlıkları hatalara neden olur. Nodetypeınary ıonlist ve Applicationınary ıonlist yalnızca birleşim semantiğine izin veriyor. Diğer bir deyişle, NodeType, ıonlist ve Applicationınary ıonlist 'in bir kesişimini belirtmek mümkün değildir. Örneğin, "Bu uygulama yalnızca bu düğüm türünde olduğunda hata." belirtmek mümkün değildir. Bir varlık Nodetypeary ıonlist veya Applicationary ıonlist öğesine eklendikten sonra, bu varlık ChaosTargetFilter kullanılarak dışlanamaz. ApplicationX, Applicationlarionlist içinde görünmese de, bazı Chaos yineleme applicationX içinde, Nodetypelarionlist içinde yer alan nodeTypeY düğümünde yer aldığı için hata oluşabilir. Hem Nodetypeary ıonlist hem de Applicationary ıonlist null ya da boşsa, bir ArgumentException atılır.
-    * **Nodetypeınary ıonlist**: Chaos hatalarına dahil edilecek düğüm türlerinin bir listesi. Tüm hata türleri (düğümü yeniden Başlat, CodePackage 'i yeniden Başlat, çoğaltmayı kaldır, çoğaltmayı yeniden Başlat, birincil taşı ve ikincil taşı) bu düğüm türlerinin düğümleri için etkinleştirilir. Bir NodeType (bir NodeTypeX) Nodetypeary ıonlist içinde görünmezse, ardından, düğüm düzeyi hataları (NodeRestart gibi) NodeTypeX düğümleri için hiçbir şekilde etkinleştirilmez, ancak Applicationlarionlist içindeki bir uygulama NodeTypeX düğümünde yer alıyorsa, kod paketi ve çoğaltma hataları NodeTypeX için de etkinleştirilebilir. En çok 100 düğüm türü adı bu listeye dahil edilebilir, bu sayıyı artırmak için Maxnumberofnodetypesınchaostargetfilter yapılandırması için bir yapılandırma yükseltmesi gerekir.
-    * **Applicationınary ıonlist**: Chaos hatalarına dahil edilecek uygulama URI 'lerinin listesi. Bu uygulamaların hizmetlerine ait olan tüm çoğaltmalar, Chaos tarafından çoğaltma hatalarını (çoğaltmayı yeniden Başlat, çoğaltmayı kaldırma, birincil taşıma ve ikincil taşıma) düzeltiyor. Chaos yalnızca kod paketi yalnızca bu uygulamaların çoğaltmalarını barındırıyorsa bir kod paketini yeniden başlatabilir. Bir uygulama bu listede görünmezse, uygulama Nodetypeary ıonlist içine dahil edilen düğüm türünün bir düğümünde sonlanıyorsa, bazı Chaos yinelemeyle yine de hatalı olabilir. Ancak, applicationX, yerleştirme kısıtlamaları aracılığıyla nodeTypeY 'e bağlıysa ve applicationX 'in Applicationary ıonlist öğesinden ve nodeTypeY 'in Nodetypeary ıonlist öğesinden Ikisi de yoksa, applicationX hiçbir şekilde hata olmayacaktır. En fazla 1000 uygulama adı bu listeye eklenebilir, bu sayıyı artırmak için MaxNumberOfApplicationsInChaosTargetFilter yapılandırması için bir yapılandırma yükseltmesi gerekir.
+    * **Nodetypeınary ıonlist**: Chaos hatalarına dahil edilecek düğüm türlerinin bir listesi. Tüm hata türleri (düğümü yeniden Başlat, CodePackage 'i yeniden Başlat, çoğaltmayı kaldır, çoğaltmayı yeniden Başlat, birincil taşıma, ikincil taşıma ve taşıma örneği) bu düğüm türlerinin düğümleri için etkinleştirilir. Bir NodeType (bir NodeTypeX) Nodetypeary ıonlist içinde görünmezse, ardından, düğüm düzeyi hataları (NodeRestart gibi) NodeTypeX düğümleri için hiçbir şekilde etkinleştirilmez, ancak Applicationlarionlist içindeki bir uygulama NodeTypeX düğümünde yer alıyorsa, kod paketi ve çoğaltma hataları NodeTypeX için de etkinleştirilebilir. En çok 100 düğüm türü adı bu listeye dahil edilebilir, bu sayıyı artırmak için Maxnumberofnodetypesınchaostargetfilter yapılandırması için bir yapılandırma yükseltmesi gerekir.
+    * **Applicationınary ıonlist**: Chaos hatalarına dahil edilecek uygulama URI 'lerinin listesi. Bu uygulamaların hizmetlerine ait tüm çoğaltmalar çoğaltma hatalarını (çoğaltmayı yeniden Başlat, çoğaltmayı kaldırma, birincil taşıma, ikincil taşıma ve örnek taşıma) Chaos tarafından düzeltilir. Chaos yalnızca kod paketi yalnızca bu uygulamaların çoğaltmalarını barındırıyorsa bir kod paketini yeniden başlatabilir. Bir uygulama bu listede görünmezse, uygulama Nodetypeary ıonlist içine dahil edilen düğüm türünün bir düğümünde sonlanıyorsa, bazı Chaos yinelemeyle yine de hatalı olabilir. Ancak, applicationX, yerleştirme kısıtlamaları aracılığıyla nodeTypeY 'e bağlıysa ve applicationX 'in Applicationary ıonlist öğesinden ve nodeTypeY 'in Nodetypeary ıonlist öğesinden Ikisi de yoksa, applicationX hiçbir şekilde hata olmayacaktır. En fazla 1000 uygulama adı bu listeye eklenebilir, bu sayıyı artırmak için MaxNumberOfApplicationsInChaosTargetFilter yapılandırması için bir yapılandırma yükseltmesi gerekir.
 
 ## <a name="how-to-run-chaos"></a>Chaos nasıl çalıştırılır?
 
@@ -137,14 +138,15 @@ class Program
                 MaxPercentUnhealthyNodes = 100
             };
 
-            // All types of faults, restart node, restart code package, restart replica, move primary replica,
-            // and move secondary replica will happen for nodes of type 'FrontEndType'
+            // All types of faults, restart node, restart code package, restart replica, move primary
+            // replica, move secondary replica, and move instance will happen for nodes of type 'FrontEndType'
             var nodetypeInclusionList = new List<string> { "FrontEndType"};
 
             // In addition to the faults included by nodetypeInclusionList,
-            // restart code package, restart replica, move primary replica, move secondary replica faults will
-            // happen for 'fabric:/TestApp2' even if a replica or code package from 'fabric:/TestApp2' is residing
-            // on a node which is not of type included in nodeypeInclusionList.
+            // restart code package, restart replica, move primary replica, move secondary replica,
+            //  and move instance faults will happen for 'fabric:/TestApp2' even if a replica or code
+            // package from 'fabric:/TestApp2' is residing on a node which is not of type included
+            // in nodeypeInclusionList.
             var applicationInclusionList = new List<string> { "fabric:/TestApp2" };
 
             // List of cluster entities to target for Chaos faults.

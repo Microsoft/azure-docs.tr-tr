@@ -5,12 +5,12 @@ services: automation
 ms.subservice: process-automation
 ms.date: 03/12/2021
 ms.topic: conceptual
-ms.openlocfilehash: dfabb3ef521b496a073d502efd4fd672cfcf3b8c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ef8b4ddcbf09fa3ec0e3b07ae797693aed095c88
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104597779"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107104975"
 ---
 # <a name="configure-startstop-vms-during-off-hours"></a>VM'leri çalışma saatleri dışında başlat/durdur Yapılandır
 
@@ -57,7 +57,7 @@ Eylemi bir abonelik ve kaynak grubuna karşı hedefleyerek veya VM 'lerin belirl
     > [!NOTE]
     > **Hedef ResourceGroup adları** için değeri hem hem de için değerler olarak depolanır `External_Start_ResourceGroupNames` `External_Stop_ResourceGroupNames` . Daha fazla ayrıntı düzeyi için, bu değişkenlerin her birini farklı kaynak gruplarını hedefleyecek şekilde değiştirebilirsiniz. Başlat eylemi için, kullanın `External_Start_ResourceGroupNames` ve `External_Stop_ResourceGroupNames` Durdur eylemini kullanın. VM 'Ler başlatma ve durdurma zamanlamalarına otomatik olarak eklenir.
 
-## <a name="scenario-2-startstop-vms-in-sequence-by-using-tags"></a><a name="tags"></a>Senaryo 2: etiketleri kullanarak sırayla VM 'leri başlatma/durdurma
+## <a name="scenario-2-startstop-vms-in-sequence-by-using-tags"></a><a name="tags"></a>Senaryo 2: etiketleri kullanarak sırayla VM 'Leri başlatma/durdurma
 
 Dağıtılmış bir iş yükünü destekleyen birden çok VM üzerinde iki veya daha fazla bileşen içeren bir ortamda, bileşenlerin başlatıldığı ve sırasıyla durdurulduğu sırayı destekleme. 
 

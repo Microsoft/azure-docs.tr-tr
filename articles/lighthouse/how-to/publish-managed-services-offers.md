@@ -1,14 +1,14 @@
 ---
 title: Azure Market 'Te yönetilen hizmet teklifi yayımlama
 description: Onpanolar müşterilerinin Azure 'da kullanımı için bir yönetilen hizmet teklifini nasıl yayımlayacağınızı öğrenin.
-ms.date: 02/17/2021
+ms.date: 03/31/2021
 ms.topic: how-to
-ms.openlocfilehash: b906ba9961ae4f77ca16890fd0a9036123343111
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f59d9708925b52bcf9432663fe6d3137a54b37ad
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101092149"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107457"
 ---
 # <a name="publish-a-managed-service-offer-to-azure-marketplace"></a>Azure Market 'Te yönetilen hizmet teklifi yayımlama
 
@@ -16,7 +16,7 @@ Bu makalede ortak veya özel yönetilen hizmet teklifini Iş Ortağı Merkezi 'n
 
 ## <a name="publishing-requirements"></a>Yayımlama gereksinimleri
 
-Teklif oluşturmak ve yayımlamak için [Iş Ortağı Merkezi 'nde](../../marketplace/partner-center-portal/create-account.md) geçerli bir hesabınız olması gerekir. Zaten bir hesabınız yoksa [kaydolma işlemi](https://aka.ms/joinmarketplace) , Iş Ortağı Merkezi 'nde hesap oluşturma ve ticari Market programına kaydolma adımlarında size yol açacaktır.
+Teklif oluşturmak ve yayımlamak için [Iş Ortağı Merkezi 'nde](../../marketplace/create-account.md) geçerli bir hesabınız olması gerekir. Zaten bir hesabınız yoksa [kaydolma işlemi](https://aka.ms/joinmarketplace) , Iş Ortağı Merkezi 'nde hesap oluşturma ve ticari Market programına kaydolma adımlarında size yol açacaktır.
 
 Yönetilen hizmet [teklifi sertifika gereksinimleri](/legal/marketplace/certification-policies#700-managed-services)uyarınca, yönetilen bir hizmet teklifi yayımlamak için [gümüş veya altın bir bulut platformu uzmanlığına](/partner-center/learn-about-competencies) sahip olmanız veya bir [Azure uzman msp](https://partner.microsoft.com/membership/azure-expert-msp) olmanız gerekir. Müşterinin teklifinizi dağıttığı her seferinde [CRM sisteminizde bir kayıt oluşturacak bir müşteri adayı hedefi de girmeniz](../../marketplace/plan-managed-service-offer.md#customer-leads) gerekir.
 
@@ -26,13 +26,14 @@ Aşağıdaki tablo, yönetilen bir hizmet teklifini yayımlayarak veya Azure Res
 
 |**Değerlendirme**  |**Yönetilen hizmet teklifi**  |**ARM şablonları**  |
 |---------|---------|---------|
-|[Iş Ortağı Merkezi hesabı](../../marketplace/partner-center-portal/create-account.md) gerektirir   |Yes         |Hayır        |
+|[Iş Ortağı Merkezi hesabı](../../marketplace/create-account.md) gerektirir   |Yes         |Hayır        |
 |[Gümüş veya altın bulut platformu uzmanlık düzeyi](/partner-center/learn-about-competencies) veya [Azure uzmanı msp](https://partner.microsoft.com/membership/azure-expert-msp) gerektirir      |Yes         |Hayır         |
 |Azure Marketi aracılığıyla yeni müşteriler tarafından kullanılabilir     |Yes     |Hayır       |
 |Teklifi belirli müşterilerle sınırlayabilir     |Evet (yalnızca özel tekliflerle birlikte, bulut çözümü sağlayıcısı (CSP) programının satıcısı ile belirlenen aboneliklerle birlikte kullanılamaz)         |Yes         |
 |Azure portal müşteri kabulünü gerektirir     |Yes     |Hayır   |
 |Birden çok abonelik, kaynak grubu veya müşteri eklemek için Otomasyonu kullanabilir |Hayır     |Yes    |
 |Yeni yerleşik rollere ve Azure ışıklı kullanım özelliklerine anında erişin     |Her zaman değil (genellikle bir gecikmeden sonra kullanılabilir)         |Yes         |
+|Müşteriler Azure portal güncelleştirilmiş teklifleri gözden geçirebilir ve kabul edebilir | Yes | Hayır |
 
 > [!NOTE]
 > Yönetilen hizmet teklifleri, Azure Kamu ve diğer ulusal bulutlarda kullanılamaz.
@@ -62,6 +63,8 @@ Bir müşteri teklifinizi ekledikten sonra, [bir veya daha fazla belirli aboneli
 > Temsilcinin, izin içeren bir rolü olan `Microsoft.Authorization/roleAssignments/write` (veya eklendi olan kaynak gruplarını içeren) bir rol içeren, müşterinin kiracısında Konuk olmayan [](../../role-based-access-control/built-in-roles.md#owner)bir hesap olması gerekir. Aboneliği temsil edebilen kullanıcıları bulmak için, müşterinin kiracısındaki bir Kullanıcı Azure portal aboneliği seçebilir, **erişim denetimini (IAM)** açabilir ve [sahip rolüne sahip tüm kullanıcıları görüntüleyebilir](../../role-based-access-control/role-assignments-list-portal.md#list-owners-of-a-subscription).
 
 Müşteri bir abonelik (veya bir abonelik içindeki bir veya daha fazla kaynak grubu) atadıktan sonra, bu abonelik için **Microsoft. ManagedServices** kaynak sağlayıcısı kaydedilir ve kiracınızdaki kullanıcılar, teklifinizdeki Yetkilendirmelere göre Temsilcili kaynaklara erişebilir.
+
+Teklifinizin güncelleştirilmiş bir sürümünü yayımlarsanız, müşteri [Azure Portal değişiklikleri gözden geçirebilir ve yeni sürümü kabul](view-manage-service-providers.md#update-service-provider-offers)edebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

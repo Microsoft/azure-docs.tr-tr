@@ -7,12 +7,12 @@ ms.author: pariks
 ms.custom: mvc
 ms.topic: overview
 ms.date: 8/21/2020
-ms.openlocfilehash: 46b056c22a6d1c70a729f5b9558f53c685a878f0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e3259cddc3790f92f56d7f59783cd66a2502b704
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101732862"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813335"
 ---
 # <a name="azure-database-for-mysql---flexible-server-preview"></a>MySQL için Azure veritabanı-esnek sunucu (Önizleme)
 
@@ -136,7 +136,7 @@ Azure 'da iş yükünüzü çalıştırmanın avantajlarından biri küresel eri
 | --- | --- | --- |
 | West Europe | :heavy_check_mark: | :heavy_check_mark: |
 | Kuzey Avrupa | :heavy_check_mark: | :heavy_check_mark: |
-| Güney Birleşik Krallık | :heavy_check_mark: | sayı | 
+| Güney Birleşik Krallık | :heavy_check_mark: | :heavy_check_mark: | 
 | Doğu ABD 2 | :heavy_check_mark: | :heavy_check_mark: |
 | Batı ABD 2 | :heavy_check_mark: | :heavy_check_mark: |
 | Central US | :heavy_check_mark: | sayı | 
@@ -144,7 +144,7 @@ Azure 'da iş yükünüzü çalıştırmanın avantajlarından biri küresel eri
 | Orta Kanada | :heavy_check_mark: | sayı | 
 | Güneydoğu Asya | :heavy_check_mark: | :heavy_check_mark: |
 | Güney Kore - Orta | :heavy_check_mark: | sayı | 
-| Doğu Japonya | :heavy_check_mark: | sayı | 
+| Doğu Japonya | :heavy_check_mark: | :heavy_check_mark: | 
 | Doğu Avustralya | :heavy_check_mark: | :heavy_check_mark: |
 
 Yakında yeni bölgeler eklemek için çalışıyoruz.

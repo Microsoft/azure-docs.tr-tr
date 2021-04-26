@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 02/23/2021
 ms.author: sbowles
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 3a15cce45c527a92c99e0488661e0b67bb8e2371
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 71e98b735b4aa4631d73f8730a48c56a8c7585ab
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101713074"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107497651"
 ---
 # <a name="get-face-detection-data"></a>Yüz algılama verilerini al
 
@@ -78,9 +78,9 @@ Ardından, döndürülen verilere yönelik başvuruları alın ve gereksinimleri
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu kılavuzda, çeşitli yüz algılama işlevlerini nasıl kullanacağınızı öğrendiniz. Daha sonra, derinlemesine bir öğreticiyi izleyerek bu özellikleri uygulamanız ile tümleştirin.
+Bu kılavuzda, çeşitli yüz algılama işlevlerini nasıl kullanacağınızı öğrendiniz. Sonra, kullanıcılardan yüz verileri eklemek için bu özellikleri bir uygulamayla tümleştirin.
 
-- [Öğretici: görüntüde yüz verileri göstermek için WPF uygulaması oluşturma](../Tutorials/FaceAPIinCSharpTutorial.md)
+- [Öğretici: bir yüz hizmetine Kullanıcı ekleme](../enrollment-overview.md)
 
 ## <a name="related-topics"></a>İlgili konular
 

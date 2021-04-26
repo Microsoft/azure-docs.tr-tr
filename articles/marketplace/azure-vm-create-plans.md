@@ -6,13 +6,13 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: how-to
 author: mingshen-ms
 ms.author: mingshen
-ms.date: 10/19/2020
-ms.openlocfilehash: c700cce5f50fda7f7a5773e07549e93da1c9f7a2
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.date: 04/01/2021
+ms.openlocfilehash: b1111caf2eaab1114371cbfed1e929afcff20898
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104956263"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219374"
 ---
 # <a name="how-to-create-plans-for-a-virtual-machine-offer"></a>Bir sanal makine teklifi için plan oluşturma
 
@@ -154,7 +154,9 @@ Her planı herkese görünür olacak şekilde veya yalnızca önceden seçilmiş
 
 Sanal makineniz, başka bir çözüm şablonu veya yönetilen uygulama aracılığıyla başvurulduğu zaman dolaylı olarak yalnızca dolaylı olarak kullanılacaksa, sanal makineyi yayımlamak için bu onay kutusunu işaretleyin, ancak doğrudan arama veya tarama yapmakta olabilecek müşterilerden gizleyin.
 
-Gizli planlar önizleme bağlantılarını desteklemez.
+Tüm Azure müşterileri, PowerShell veya CLı kullanarak teklifi dağıtabilir.  Bu teklifi sınırlı bir müşteri kümesi için kullanılabilir hale getirmek isterseniz planı **özel** olarak ayarlayın. 
+
+Gizli planlar önizleme bağlantıları oluşturmaz. Ancak, [Bu adımları izleyerek](azure-vm-create-faq.md#how-do-i-test-a-hidden-preview-image)size test edebilirsiniz. 
 
 Sol gezinti planı menüsündeki **Teknik yapılandırma**' da bir sonraki sekmeye geçmeden önce **Taslağı kaydet** ' i seçin.
 

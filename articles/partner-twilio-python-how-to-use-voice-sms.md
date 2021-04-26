@@ -13,12 +13,12 @@ ms.topic: article
 ms.date: 02/19/2015
 ms.author: gwallace
 ms.custom: devx-track-python
-ms.openlocfilehash: b4b9cd0db2a3a99aca80f42b6d69485a542bbadb
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a9d6ec6aa5f30af04bf64e238f4a25ec6aef4f5d
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104580971"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504762"
 ---
 # <a name="how-to-use-twilio-for-voice-and-sms-capabilities-in-python"></a>Python 'da ses ve SMS özellikleri için Twilio kullanma
 Bu kılavuzda, Azure 'da Twilio API hizmetiyle ortak programlama görevlerinin nasıl gerçekleştirileceği gösterilmektedir. Kapsanan senaryolar, telefon araması yapmayı ve kısa mesaj hizmeti (SMS) iletisi göndermeyi içerir. Twilio hakkında daha fazla bilgi edinmek ve uygulamalarınızda sesli ve SMS kullanma hakkında daha fazla bilgi için [sonraki adımlar](#NextSteps) bölümüne bakın.
@@ -81,15 +81,15 @@ Bir Twilio hesabı için kaydolduğunuzda, bir hesap SID 'SI ve bir kimlik doğr
 ## <a name="create-a-python-application"></a><a id="create_app"></a>Python uygulaması oluşturma
 Twilio hizmetini kullanan ve Azure 'da çalışan bir Python uygulaması, Twilio hizmetini kullanan diğer hiçbir Python uygulamasından farklı değildir. Twilio Hizmetleri REST tabanlı olduğundan ve Python 'dan birkaç şekilde çağrılabilecek olsa da, bu makale [GitHub 'Dan Python Için Twilio kitaplığı][twilio_python]ile Twilio hizmetlerinin nasıl kullanılacağına odaklanacaktır. Python için Twilio kitaplığını kullanma hakkında daha fazla bilgi için bkz [https://www.twilio.com/docs/libraries/python][twilio_lib_docs] ..
 
-İlk olarak, yeni Python web uygulamanız için bir konak görevi gören [yeni bir Azure Linux VM 'yi ayarlama] [azure_vm_setup]. Sanal makine çalışmaya başladıktan sonra, uygulamanızı aşağıda açıklandığı gibi genel bir bağlantı noktasında kullanıma sunacaksınız.
+İlk olarak, yeni Python web uygulamanız için bir konak görevi görecek [Yeni bir Azure Linux sanal makinesi ayarlayın][azure_vm_setup] . Sanal makine çalışmaya başladıktan sonra, uygulamanızı aşağıda açıklandığı gibi genel bir bağlantı noktasında kullanıma sunacaksınız.
 
 ### <a name="add-an-incoming-rule"></a>Gelen kuralı ekleme
-  1. [Ağ güvenlik grubu] [azure_nsg] sayfasına gidin.
+  1. [Ağ güvenlik grubu][azure_nsg] sayfasına gidin.
   2. Sanal makinenize karşılık gelen ağ güvenlik grubunu seçin.
   3. **80 numaralı bağlantı noktasına** **giden bir kural** ekleyin. Herhangi bir adresten gelen bir adrese izin vermeyi unutmayın.
 
 ### <a name="set-the-dns-name-label"></a>DNS adı etiketini ayarla
-  1. [Genel IP Adresleri] [azure_ips] sayfasına gidin.
+  1. [Genel IP adresleri][azure_ips] sayfasına gidin.
   2. Sanal makinenize karşılık gelen genel IP 'yi seçin.
   3. **Yapılandırma** bölümünde **DNS adı etiketini** ayarlayın. Bu örnekte, *-Domain-Label*. centralus.cloudapp.Azure.com gibi bir şey görünür
 
@@ -272,3 +272,6 @@ Twilio hizmetinin temellerini öğrendiğinize göre artık daha fazla bilgi edi
 [twilio_on_github]: https://github.com/twilio
 [twilio_support]: https://www.twilio.com/help/contact
 [twilio_quickstarts]: https://www.twilio.com/docs/quickstart
+[azure_ips]: https://docs.microsoft.com/azure/virtual-network/virtual-network-public-ip-address
+[azure_vm_setup]: https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-portal
+[azure_nsg]: https://docs.microsoft.com/azure/virtual-network/manage-network-security-group

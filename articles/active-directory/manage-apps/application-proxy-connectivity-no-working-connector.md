@@ -17,10 +17,10 @@ ms.author: kenwith
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
 ms.openlocfilehash: cec028dec2bf2e6295f59aae9c2e243da2209827
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "99257043"
 ---
 # <a name="no-working-connector-group-found-for-an-application-proxy-application"></a>Uygulama ara sunucusu uygulaması için çalışan bağlayıcı grubu bulunamadı

@@ -8,19 +8,19 @@ ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 06/17/2020
-ms.openlocfilehash: 8b6a7c3e05b26cbda80ebf1a3fc0d4fed8255e6b
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: aa9c8e1d5579538df11358edc08eb7e2043cea74
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91950814"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106285850"
 ---
 # <a name="ocr-cognitive-skill"></a>OCR Bilişsel Beceri
 
 **Optik karakter tanıma (OCR)** yeteneği, görüntü dosyalarında yazdırılmış ve el yazısı metinleri tanır. Bu beceri bilişsel hizmetler 'de [görüntü işleme](../cognitive-services/computer-vision/overview.md) API [v 3.0](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-ga/operations/5d986960601faab4bf452005) tarafından sunulan makine öğrenimi modellerini kullanır. **OCR** becerisi aşağıdaki işlevlere eşlenir:
 
-+ Ingilizce, Ispanyolca, Almanca, Fransızca, Italyanca, Portekizce ve Felemenkçe için yeni ["okuma"](../cognitive-services/computer-vision/concept-recognizing-text.md#read-api) API 'si kullanılır.
-+ Diğer tüm diller için ["OCR"](../cognitive-services/computer-vision/concept-recognizing-text.md#ocr-api) API 'si kullanılır.
++ Ingilizce, Ispanyolca, Almanca, Fransızca, Italyanca, Portekizce ve Felemenkçe için yeni ["okuma"](../cognitive-services/computer-vision/overview-ocr.md#read-api) API 'si kullanılır.
++ Diğer tüm diller için [eskı OCR](../cognitive-services/computer-vision/overview-ocr.md#ocr-api) API 'si kullanılır.
 
 **OCR** becerisi, resim dosyalarından metin ayıklar. Desteklenen dosya biçimleri şunlardır:
 
@@ -43,8 +43,8 @@ Parametreler büyük/küçük harfe duyarlıdır.
 
 | Parametre adı     | Açıklama |
 |--------------------|-------------|
-| `detectOrientation`   | Görüntü yönünün yeniden algılanmasına izin vermez. <br/> Geçerli değerler: true/false.|
-| `defaultLanguageCode` | <p>   Giriş metninin dil kodu. Desteklenen diller: <br/> zh-Hans (Çinesebasitleştirilmiş) <br/> zh-Hant (çon Setradi) <br/>CS (Çek) <br/>da (Danimarka) <br/>nl (Felemenkçe) <br/>En (Ingilizce) <br/>Fi (Fince)  <br/>fr (Fransızca) <br/>  de (Almanca) <br/>el (Yunanca) <br/> Hu (Macarca) <br/> BT (Italyanca) <br/>  Ja (Japonca) <br/> Ko (Korece) <br/> NB (Norveç) <br/>   pl (Lehçe) <br/> PT (Portekizce) <br/>  ru (Rusça) <br/>  es (Ispanyolca) <br/>  ZF (Isveççe) <br/>  tr (Türkçe) <br/> AR (Arapça) <br/> ro (Rumence) <br/> SR-Cyrl (SerbianCyrillic) <br/> sr-Latn (SerbianLatin) <br/>  SK (Slovakça) <br/>  UNK (bilinmiyor) <br/><br/> Dil kodu belirtilmemişse veya null ise, dil Ingilizce olarak ayarlanır. Dil açıkça "UNK" olarak ayarlandıysa dil otomatik olarak algılanır. </p> |
+| `detectOrientation`    | Görüntü yönünün yeniden algılanmasına izin vermez. <br/> Geçerli değerler: true/false.|
+| `defaultLanguageCode` | <p>    Giriş metninin dil kodu. Desteklenen diller: <br/> zh-Hans (Çinesebasitleştirilmiş) <br/> zh-Hant (çon Setradi) <br/>CS (Çek) <br/>da (Danimarka) <br/>nl (Felemenkçe) <br/>En (Ingilizce) <br/>Fi (Fince)  <br/>fr (Fransızca) <br/>  de (Almanca) <br/>el (Yunanca) <br/> Hu (Macarca) <br/> BT (Italyanca) <br/>  Ja (Japonca) <br/> Ko (Korece) <br/> NB (Norveç) <br/>   pl (Lehçe) <br/> PT (Portekizce) <br/>  ru (Rusça) <br/>  es (Ispanyolca) <br/>  ZF (Isveççe) <br/>  tr (Türkçe) <br/> AR (Arapça) <br/> ro (Rumence) <br/> SR-Cyrl (SerbianCyrillic) <br/> sr-Latn (SerbianLatin) <br/>  SK (Slovakça) <br/>  UNK (bilinmiyor) <br/><br/> Dil kodu belirtilmemişse veya null ise, dil Ingilizce olarak ayarlanır. Dil açıkça "UNK" olarak ayarlandıysa dil otomatik olarak algılanır. </p> |
 | `lineEnding` | Algılanan her satır arasında kullanılacak değer. Olası değerler: "boşluk", "CarriageReturn", "LineFeed".  Varsayılan değer "Space" dır. |
 
 Daha önce, yeteneğin "yazdırılmış" veya "el ile" metin ayıklanıp ayıklanmayacağını belirtmek için "textExtractionAlgorithm" adlı bir parametre vardı.  Bu parametre kullanım dışıdır ve en son okuma API 'SI algoritması aynı anda her iki türden metni ayıklamada artık gerekli değildir.  Yetenek tanımınızda zaten bu parametre varsa, onu kaldırmanız gerekmez, ancak artık kullanılmayacak ve her iki tür metin de ne şekilde ayarlandığına bakılmaksızın ileri doğru şekilde ayıklanacaktır.
@@ -57,9 +57,9 @@ Daha önce, yeteneğin "yazdırılmış" veya "el ile" metin ayıklanıp ayıkla
 
 
 ## <a name="skill-outputs"></a>Yetenek çıkışları
-| Çıkış adı     | Description                   |
+| Çıkış adı      | Description                   |
 |---------------|-------------------------------|
-| `text`            | Görüntüden ayıklanan düz metin.   |
+| `text`             | Görüntüden ayıklanan düz metin.   |
 | `layoutText`    | Ayıklanan metni ve metnin bulunduğu konumu açıklayan karmaşık tür.|
 
 

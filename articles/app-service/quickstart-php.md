@@ -5,12 +5,12 @@ ms.assetid: 6feac128-c728-4491-8b79-962da9a40788
 ms.topic: quickstart
 ms.date: 08/01/2020
 zone_pivot_groups: app-service-platform-windows-linux
-ms.openlocfilehash: f6876d0aef0d3d87e038b623c395f8368a14e90c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c04e1b33233abebde746fd7fb1ef8d761dba7e4e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97561860"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788215"
 ---
 # <a name="create-a-php-web-app-in-azure-app-service"></a>Azure App Service bir PHP Web uygulaması oluşturma
 
@@ -78,9 +78,9 @@ Terminal pencerenizde **Ctrl+C** tuşlarına basarak web sunucusundan çıkın.
 
 ## <a name="create-a-web-app"></a>Web uygulaması oluşturma
 
-Cloud Shell, komutuyla App Service planında bir Web uygulaması oluşturun `myAppServicePlan` [`az webapp create`](/cli/azure/webapp#az-webapp-create) . 
+Cloud Shell, komutuyla App Service planında bir Web uygulaması oluşturun `myAppServicePlan` [`az webapp create`](/cli/azure/webapp#az_webapp_create) . 
 
-Aşağıdaki örnekte `<app-name>` kısmını genel olarak benzersiz bir uygulama adıyla değiştirin (geçerli karakterler `a-z`, `0-9` ve `-` şeklindedir). Çalışma zamanı `PHP|7.4` olarak ayarlanmıştır. Desteklenen tüm çalışma zamanlarını görmek için öğesini çalıştırın [`az webapp list-runtimes`](/cli/azure/webapp#az-webapp-list-runtimes) . 
+Aşağıdaki örnekte `<app-name>` kısmını genel olarak benzersiz bir uygulama adıyla değiştirin (geçerli karakterler `a-z`, `0-9` ve `-` şeklindedir). Çalışma zamanı `PHP|7.4` olarak ayarlanmıştır. Desteklenen tüm çalışma zamanlarını görmek için öğesini çalıştırın [`az webapp list-runtimes`](/cli/azure/webapp#az_webapp_list_runtimes) . 
 
 ```azurecli-interactive
 # Bash

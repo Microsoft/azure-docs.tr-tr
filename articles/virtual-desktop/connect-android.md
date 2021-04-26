@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 03/25/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: ebf91f68e45148d9a609ff671ffa4683bd74c82c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: 07e0754cc9fb940218999e2012a9cb87341557cb
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "89226123"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448092"
 ---
 # <a name="connect-to-windows-virtual-desktop-with-the-android-client"></a>Android istemcisiyle Windows sanal masaüstüne bağlanma
 

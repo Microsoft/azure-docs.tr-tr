@@ -5,15 +5,15 @@ author: martinekuan
 manager: martinekuan
 ms.service: multiple
 ms.topic: conceptual
-ms.date: 03/03/2020
+ms.date: 03/30/2021
 ms.author: martinek
 ms.custom: references_regions
-ms.openlocfilehash: 3310d4a7d86db9dee7d5f71fc9410545817886f3
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9fda6f913fcb5325c811671cd6476dcbf2413766
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97511238"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106058026"
 ---
 # <a name="business-continuity-and-disaster-recovery-bcdr-azure-paired-regions"></a>İş sürekliliği ve olağanüstü durum kurtarma (BCDR): Eşleştirilmiş Azure Bölgeleri
 
@@ -29,7 +29,7 @@ Bölgesel bir çift aynı coğrafya içindeki iki bölgeden oluşur. Azure, her 
 
 Bazı Azure Hizmetleri, iş sürekliliği sağlamak ve veri kaybına karşı korumak için eşleştirilmiş bölgelerden daha fazla avantaj sağlar.  Azure, veri kullanılabilirliği sağlamak için eşleştirilmiş bölgelerin avantajlarından yararlanan birkaç [depolama çözümü](./storage/common/storage-redundancy.md#redundancy-in-a-secondary-region) sağlar. Örneğin, [Azure coğrafi olarak yedekli depolama](./storage/common/storage-redundancy.md#geo-redundant-storage) (GRS), verileri bir ikincil bölgeye otomatik olarak çoğaltır ve verilerin, birincil bölgenin kurtarılabilir olmaması durumunda bile dayanıklı olmasını sağlar. 
 
-Tüm Azure hizmetlerinin verileri otomatik olarak çoğaltmadığını ve tüm Azure hizmetlerinin otomatik olarak başarısız bir bölgeden çiftiyle geri dönemediğini unutmayın.  Bu gibi durumlarda, kurtarma ve çoğaltmanın müşteri tarafından yapılandırılması gerekir.
+Tüm Azure hizmetlerinin verileri otomatik olarak çoğaltmadığını ve tüm Azure hizmetlerinin otomatik olarak başarısız bir bölgeden çift geri dönüş yapamadığını unutmayın.  Bu gibi durumlarda, kurtarma ve çoğaltmanın müşteri tarafından yapılandırılması gerekir.
 
 ## <a name="can-i-select-my-regional-pairs"></a>Bölgesel çiftlerimi seçebilir miyim?
 
@@ -51,14 +51,15 @@ Hayır. Müşteriler, Azure 'un bölgesel çiftlerine bağlı kalmadan dayanıkl
 |:--- |:--- |:--- |
 | Asia-Pacific |Doğu Asya (Hong Kong) | Güneydoğu Asya (Singapur) |
 | Avustralya |Doğu Avustralya |Güneydoğu Avustralya |
-| Avustralya |Orta Avustralya |Orta Avustralya 2 |
+| Avustralya |Orta Avustralya |Avustralya Orta 2 * |
 | Brezilya |Güney Brezilya |Orta Güney ABD |
+| Brezilya |Brezilya Güneydoğu * |Güney Brezilya |
 | Kanada |Orta Kanada |Doğu Kanada |
 | Çin |Kuzey Çin |Doğu Çin|
 | Çin |Çin Kuzey 2 |Çin Doğu 2|
 | Avrupa |Kuzey Avrupa (İrlanda) |Batı Avrupa (Hollanda) |
-| Fransa |Orta Fransa|Güney Fransa|
-| Almanya |Orta Almanya |Kuzeydoğu Almanya |
+| Fransa |Orta Fransa|Fransa Güney *|
+| Almanya |Almanya Orta Batı |Almanya Kuzey * |
 | Hindistan |Orta Hindistan |Güney Hindistan |
 | Hindistan |Batı Hindistan |Güney Hindistan |
 | Japonya |Doğu Japonya |Batı Japonya |
@@ -67,15 +68,17 @@ Hayır. Müşteriler, Azure 'un bölgesel çiftlerine bağlı kalmadan dayanıkl
 | Kuzey Amerika |Doğu ABD 2 |Central US |
 | Kuzey Amerika |Orta Kuzey ABD |Orta Güney ABD |
 | Kuzey Amerika |Batı ABD 2 |Orta Batı ABD |
-| Norveç | Norveç Doğu | Norveç Batı |
-| Güney Afrika | Güney Afrika - Kuzey |Güney Afrika - Batı |
-| İsviçre | İsviçre Kuzey |İsviçre Batı |
+| Norveç | Norveç Doğu | Norveç Batı * |
+| Güney Afrika | Güney Afrika - Kuzey |Güney Afrika Batı * |
+| İsviçre | İsviçre Kuzey |İsviçre Batı * |
 | Birleşik Krallık |Batı Birleşik Krallık |Güney Birleşik Krallık |
-| Birleşik Arap Emirlikleri | BAE Kuzey | BAE Orta
-| ABD Savunma Bakanlığı |Doğu US DoD |Orta US DoD |
-| ABD Kamu |US Gov Arizona |US Gov Texas |
-| ABD Kamu |US Gov Iowa |US Gov Virginia |
-| ABD Kamu |US Gov Virginia |US Gov Texas |
+| Birleşik Arap Emirlikleri | BAE Kuzey | BAE Orta * |
+| ABD Savunma Bakanlığı |US DoD Doğu * |US DoD Orta * |
+| ABD Kamu |US Gov Arizona * |US Gov Teksas * |
+| ABD Kamu |US Gov Iowa * |US Gov Virginia * |
+| ABD Kamu |US Gov Virginia * |US Gov Teksas * |
+
+(*) Belirli bölgeler, belirli müşteri senaryolarını desteklemek için kısıtlanır (örneğin, ülke içi olağanüstü durum kurtarma). Bu bölgeler yalnızca [Azure Portal yeni bir destek isteği oluşturularak](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)istek üzerine kullanılabilir.
 
 > [!Important]
 > - Batı Hindistan yalnızca bir yönde eşleştirilmiş. Batı Hindistan ikincil bölgesi Güney Hindistan, ancak Güney Hindistan ikincil bölgesi Orta Hindistan.

@@ -3,18 +3,17 @@ title: Azure Key Vault müşteri verileri özellikleri-Azure Key Vault | Microso
 description: Kasaların, anahtarların, parolaların, sertifikaların ve yönetilen depolama hesaplarının oluşturulması veya güncelleştirilmesi sırasında Azure Key Vault aldığı müşteri verileri hakkında bilgi edinin.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.topic: reference
 ms.date: 01/07/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 8806ff41edabcd3c0875d3c02360dc9a275e3878
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4d45c019a6ba073d7553c09784736959faf89d27
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96460817"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107749789"
 ---
 # <a name="azure-key-vault-customer-data-features"></a>Azure Key Vault müşteri verileri özellikleri
 

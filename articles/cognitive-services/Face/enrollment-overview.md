@@ -1,5 +1,5 @@
 ---
-title: Yüz Tanıma API'si kaydına genel bakış
+title: Yüz hizmetine Kullanıcı eklemek için en iyi uygulamalar
 titleSuffix: Azure Cognitive Services
 description: Yüz tanıma hizmetinde kullanıcıları kaydetmek için yüz kaydı süreci hakkında bilgi edinin.
 author: PatrickFarley
@@ -7,18 +7,18 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: face-api
 ms.topic: overview
-ms.date: 11/17/2020
+ms.date: 04/19/2021
 ms.author: pafarley
-ms.openlocfilehash: ac5106aa661cb2baea31ee15d57e9c6fac8c7192
-ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
+ms.openlocfilehash: 183983779c09658d8d6f609319a127b1f406452d
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96350339"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728437"
 ---
-# <a name="face-api-enrollment"></a>Kayıt Yüz Tanıma API'si
+# <a name="best-practices-for-adding-users-to-a-face-service"></a>Yüz hizmetine Kullanıcı eklemek için en iyi uygulamalar
 
-Bilişsel hizmetler 'i yüz doğrulama veya tanımlama için Yüz Tanıma API'si kullanmak için yüzleri bir **Largepersongroup** içine kaydetmeniz gerekir. Bu derin, kullanıcılardan anlamlı onay toplamaya yönelik en iyi yöntemleri ve tanıma doğruluğunu en iyi hale getirecek yüksek kaliteli kayıtları oluşturmaya yönelik örnek mantığı gösterir.  
+Bilişsel hizmetler 'i yüz doğrulama veya tanımlama için Yüz Tanıma API'si kullanmak için yüzleri bir **Largepersongroup** veya benzer bir veri yapısına kaydetmeniz gerekir. Bu ayrıntılı inceleme, Kullanıcı ve örnek mantığa yönelik anlamlı onay toplamaya yönelik en iyi yöntemleri gösterir ve bu da tanıma doğruluğunu en iyi hale getirecek yüksek kaliteli kayıtlar oluşturabilir. 
 
 ## <a name="meaningful-consent"></a>Anlamlı onay 
 
@@ -43,8 +43,8 @@ Bir kayıt akışını tasarlayabilmeniz için, oluşturmakta olduğunuz uygulam
 |Kategori | Öneriler |
 |---|---|
 |Donanım | Kayıt cihazının kamera kalitesini göz önünde bulundurun. |
-|Önerilen kayıt özellikleri | Multi-Factor Authentication ile bir oturum açma adımı ekleyin.</br></br>Bir diğer ad veya kimlik numarası gibi Kullanıcı bilgilerini Yüz Tanıma API'si yüz şablonu KIMLIĞIYLE (kişi KIMLIĞI olarak bilinir) bağlayın. Bu eşleme, bir kullanıcının kaydını almak ve yönetmek için gereklidir. Note: kişi KIMLIĞI, uygulamada gizli dizi olarak değerlendirilmelidir.</br></br>Artık, eski çalışanlar gibi yüz tanıma teknolojisinin kullanıcısı olmayan kişilerin yüz şablonları ve kayıt fotoğrafları dahil olmak üzere tüm kayıt verilerini silmek için otomatik bir işlem ayarlayın.</br></br>Kullanıcıya onay almak için önerilen tanıma, anlama, seçim veya denetim gibi konularda otomatik kayıt yapmaktan kaçının. </br></br>Kullanıcılardan kayıt için kullanılan görüntüleri kaydetme izni isteyin. Bu, her 10 ayda bir yeni modelde yeniden kaydolmak için yeni kayıt fotoğraflarının gerekli olacağı için bir model güncelleştirmesi olduğunda yararlıdır. Özgün görüntüler kaydedilmemişse, kullanıcıların baştan itibaren kayıt işlemini yapması gerekir.</br></br>Kullanıcıların resimleri sistemde depolamayı geri yüklemelerine izin verin. Seçimi daha net hale getirmek için, kayıt fotoğraflarını kaydetmek üzere ikinci bir izin isteği ekranı ekleyebilirsiniz. </br></br>Fotoğraflar kaydedilmişse, bir model güncelleştirmesi olduğunda tüm kullanıcıları yeniden kaydetmek için otomatikleştirilmiş bir işlem oluşturun. Kayıt fotoğraflarını kaydetenler kendilerini yeniden kaydetmeleri gerekmez. </br></br>Bir kullanıcının kaydetme sorunu varsa, belirlenen yöneticilerin belirli kalite filtrelerini geçersiz kılmasını sağlayan bir uygulama özelliği oluşturun. |
-|Güvenlik | Bilişsel hizmetler, bekleyen ve aktarım sırasında kullanıcı verilerini şifrelemek için [en iyi yöntemleri](../cognitive-services-virtual-networks.md?tabs=portal) takip ediyor. Aşağıda, kayıt deneyimi sırasında kullanıcılara yaptığınız güvenlik ile ilgili güvenliğin sağlanmasına yardımcı olabilecek ek yöntemler verilmiştir. </br></br>Kayıt sırasında herhangi bir noktada kişi KIMLIĞINE hiç kimsenin erişememesini sağlamak için güvenlik önlemleri alın. Note: PersonID, kayıt sisteminde bir gizli dizi olarak değerlendirilmelidir. </br></br>Bilişsel hizmetler ile [rol tabanlı erişim denetimi](../../role-based-access-control/overview.md) kullanın. </br></br>Veritabanları gibi kaynaklara erişmek için anahtarlar ve gizlilikler üzerinde belirteç tabanlı kimlik doğrulaması ve/veya paylaşılan erişim imzaları (SAS) kullanın. İstek veya SAS belirteçlerini kullanarak, hesap anahtarlarınızın güvenliğini tehlikeye atmadan verilere sınırlı erişim verebilirsiniz ve belirteçte bir süre sonu zamanı belirtebilirsiniz. </br></br>Uygulamanızda gizli dizileri, anahtarları veya parolaları hiçbir şekilde depolamayın. |
+|Önerilen kayıt özellikleri | Multi-Factor Authentication ile bir oturum açma adımı ekleyin. </br></br>Bir diğer ad veya kimlik numarası gibi Kullanıcı bilgilerini Yüz Tanıma API'si yüz şablonu KIMLIĞIYLE (kişi KIMLIĞI olarak bilinir) bağlayın. Bu eşleme, bir kullanıcının kaydını almak ve yönetmek için gereklidir. Note: kişi KIMLIĞI, uygulamada gizli dizi olarak değerlendirilmelidir.</br></br>Artık, eski çalışanlar gibi yüz tanıma teknolojisinin kullanıcısı olmayan kişilerin yüz şablonları ve kayıt fotoğrafları dahil olmak üzere tüm kayıt verilerini silmek için otomatik bir işlem ayarlayın. </br></br>Kullanıcıya onay almak için önerilen tanıma, anlama, seçim veya denetim gibi konularda otomatik kayıt yapmaktan kaçının. </br></br>Kullanıcılardan kayıt için kullanılan görüntüleri kaydetme izni isteyin. Bu, her 10 ayda bir yeni modelde yeniden kaydolmak için yeni kayıt fotoğraflarının gerekli olacağı için bir model güncelleştirmesi olduğunda yararlıdır. Özgün görüntüler kaydedilmemişse, kullanıcıların baştan itibaren kayıt işlemini yapması gerekir.</br></br>Kullanıcıların resimleri sistemde depolamayı geri yüklemelerine izin verin. Seçimi daha net hale getirmek için, kayıt fotoğraflarını kaydetmek üzere ikinci bir izin isteği ekranı ekleyebilirsiniz. </br></br>Fotoğraflar kaydedilmişse, bir model güncelleştirmesi olduğunda tüm kullanıcıları yeniden kaydetmek için otomatikleştirilmiş bir işlem oluşturun. Kayıt fotoğraflarını kaydeden kullanıcılar kendilerini yeniden kaydetmeleri gerekmez. </br></br>Bir kullanıcının kaydetme sorunu varsa, belirlenen yöneticilerin belirli kalite filtrelerini geçersiz kılmasını sağlayan bir uygulama özelliği oluşturun. |
+|Güvenlik | Bilişsel hizmetler, bekleyen ve aktarım sırasında kullanıcı verilerini şifrelemek için [en iyi yöntemleri](../cognitive-services-virtual-networks.md?tabs=portal) takip ediyor. Aşağıda, kayıt deneyimi sırasında kullanıcılara yaptığınız güvenlik ile ilgili güvenliğin sağlanmasına yardımcı olabilecek diğer yöntemler verilmiştir. </br></br>Kayıt sırasında herhangi bir noktada kişi KIMLIĞINE hiç kimsenin erişememesini sağlamak için güvenlik önlemleri alın. Note: PersonID, kayıt sisteminde bir gizli dizi olarak değerlendirilmelidir. </br></br>Bilişsel hizmetler ile [rol tabanlı erişim denetimi](../../role-based-access-control/overview.md) kullanın. </br></br>Veritabanları gibi kaynaklara erişmek için anahtarlar ve gizlilikler üzerinde belirteç tabanlı kimlik doğrulaması ve/veya paylaşılan erişim imzaları (SAS) kullanın. İstek veya SAS belirteçlerini kullanarak, hesap anahtarlarınızın güvenliğini tehlikeye atmadan verilere sınırlı erişim verebilirsiniz ve belirteçte bir süre sonu zamanı belirtebilirsiniz. </br></br>Uygulamanızda gizli dizileri, anahtarları veya parolaları hiçbir şekilde depolamayın. |
 |Kullanıcı gizliliği |Farklı gizlilik sorunlarını gidermek için bir dizi kayıt seçeneği sağlar. İnsanların, yüz tanıma sistemine kaydolmak için kişisel cihazlarını kullanmalarını zorunlu değildir. </br></br>Kullanıcıların kayıt uygulamasından istediğiniz zaman ve herhangi bir nedenle yeniden kaydolmasına, izin iptal etmesine ve verileri silmesine izin verin. |
 |Erişilebilirlik |Uygulamanın taşınabilirlik veya görsel sorunları olan kişiler tarafından kullanılabilir olduğundan emin olmak için erişilebilirlik standartlarını (örneğin, [ada](https://www.ada.gov/regs2010/2010ADAStandards/2010ADAstandards.htm) veya [W3C](https://www.w3.org/TR/WCAG21/)) izleyin. |
 

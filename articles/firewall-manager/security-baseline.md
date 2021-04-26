@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 11/24/2020
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: bec5cafaf7d506d9ab25228c680d00af91dbf3d0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 7cb37de7c5f101ea5f72ff87ccdf94e5925a95d4
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102200147"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864424"
 ---
 # <a name="azure-security-baseline-for-azure-firewall-manager"></a>Azure Güvenlik Duvarı Yöneticisi için Azure Güvenlik temeli
 
@@ -338,7 +338,7 @@ Bunları bir taksonomiye mantıksal olarak düzenlemek için Azure kaynakların�
 
 **Rehberlik**: saldırı yüzeyini en aza indirmek için artık gerekli olmadığında Azure Güvenlik Duvarı Yöneticisi kaynaklarını kaldırın. Kullanıcılar Azure portal, CLı veya REST API 'Leri aracılığıyla Azure Güvenlik Duvarı Yöneticisi kaynaklarını yönetebilir.
 
-- [Azure Güvenlik Duvarı Ilkesi CLı](/cli/azure/ext/azure-firewall/network/firewall/policy)
+- [Azure Güvenlik Duvarı Ilkesi CLı](/cli/azure/network/firewall/policy)
 
 - [Azure ağ CLı](/powershell/module/az.network/?preserve-view=true&view=azps-5.1.0#networking)
 
@@ -557,7 +557,7 @@ Buna ek olarak Azure kaynaklarını, özellikle hassas verileri işleyen kaynakl
 
 - [Azure Güvenlik Duvarı Ilke şablonu başvurusu](/azure/templates/microsoft.network/firewallpolicies)
 
-- [Azure Güvenlik Duvarı Ilkesi CLı](/cli/azure/ext/azure-firewall/network/firewall/policy)
+- [Azure Güvenlik Duvarı Ilkesi CLı](/cli/azure/network/firewall/policy)
 
 - [Kurumsal ölçekte giriş bölgesindeki guardrayın uygulamasının çizimi](/azure/cloud-adoption-framework/ready/enterprise-scale/architecture#landing-zone-expanded-definition)
 

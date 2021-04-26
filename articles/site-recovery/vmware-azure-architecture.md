@@ -1,18 +1,15 @@
 ---
 title: Azure Site Recovery 'de VMware VM olağanüstü durum kurtarma mimarisi
 description: Bu makalede, Azure Site Recovery ile şirket içi VMware VM 'lerinin olağanüstü durum kurtarması ayarlanırken kullanılan bileşenlere ve mimariye ilişkin genel bir bakış sunulmaktadır
-author: rayne-wiselman
 ms.service: site-recovery
-services: site-recovery
 ms.topic: conceptual
 ms.date: 11/06/2019
-ms.author: raynew
-ms.openlocfilehash: 5cf4dc5123040fd2af8efe54153867a8709fe1ef
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 24333ccc5096e7f04f016444de2b0a7e13ae7bfa
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97652237"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579819"
 ---
 # <a name="vmware-to-azure-disaster-recovery-architecture"></a>VMware 'den Azure 'a olağanüstü durum kurtarma mimarisi
 
@@ -47,7 +44,7 @@ Giden bağlantıyı denetlemek için URL tabanlı bir güvenlik duvarı proxy 's
 | ------------------------- | -------------------------------------------- | ---------------------------------------------- | ----------- |
 | Depolama                   | `*.blob.core.windows.net`                  | `*.blob.core.usgovcloudapi.net` | Verilerin VM’den kaynak bölgedeki önbellek depolama hesabına yazılmasına izin verir. |
 | Azure Active Directory    | `login.microsoftonline.com`                | `login.microsoftonline.us`                   | Site Recovery hizmet URL’leri için yetkilendirme ve kimlik doğrulama özellikleri sağlar. |
-| Çoğaltma               | `*.hypervrecoverymanager.windowsazure.com` | `*.hypervrecoverymanager.windowsazure.com`   | VM’nin Site Recovery hizmetiyle iletişim kurmasına izin verir. |
+| Çoğaltma               | `*.hypervrecoverymanager.windowsazure.com` | `*.hypervrecoverymanager.windowsazure.us`   | VM’nin Site Recovery hizmetiyle iletişim kurmasına izin verir. |
 | Service Bus               | `*.servicebus.windows.net`                 | `*.servicebus.usgovcloudapi.net`             | VM’nin Site Recovery izleme ve tanılama verilerini yazmasına izin verir. |
 
 Şirket içi Azure Site Recovery altyapısı ve Azure hizmetleri arasındaki iletişim için filtrelenecek URL 'lerin ayrıntılı listesi için, [Önkoşullar makalesindeki ağ gereksinimleri bölümüne](vmware-azure-deploy-configuration-server.md#prerequisites)bakın.

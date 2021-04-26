@@ -3,14 +3,15 @@ title: Azure Otomasyonu Güncelleştirme Yönetimi sorunlarını giderme
 description: Bu makalede, Azure Otomasyonu Güncelleştirme Yönetimi sorunları nasıl giderebileceğiniz ve giderebileceğiniz açıklanır.
 services: automation
 ms.subservice: update-management
-ms.date: 01/13/2021
+ms.date: 04/16/2021
 ms.topic: troubleshooting
-ms.openlocfilehash: c16b032502401b633532ab0fcf9518aa85a1b8d6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 36bfd2185cb7a192ce0113ee0722395c8a4ee928
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100579735"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830313"
 ---
 # <a name="troubleshoot-update-management-issues"></a>Güncelleştirme Yönetimi sorunlarını giderme
 
@@ -188,11 +189,13 @@ Otomasyon kaynak sağlayıcısını kaydetmek için Azure portal aşağıdaki ad
 
 5. Listede yoksa, [kaynak sağlayıcısı kaydı hatalarını giderme](../../azure-resource-manager/templates/error-register-resource-provider.md)adımlarını izleyerek Microsoft. Automation sağlayıcısını kaydedin.
 
-## <a name="scenario-scheduled-update-with-a-dynamic-schedule-missed-some-machines"></a><a name="scheduled-update-missed-machines"></a>Senaryo: dinamik bir zamanlamaya sahip zamanlanmış güncelleştirme bazı makineler kaçırdı
+## <a name="scenario-scheduled-update-did-not-patch-some-machines"></a><a name="scheduled-update-missed-machines"></a>Senaryo: zamanlanan güncelleştirme bazı makinelere düzeltme eki sağlamadı
 
 ### <a name="issue"></a>Sorun
 
-Güncelleştirme önizlemesindeki makineler, zamanlanmış çalıştırma sırasında düzeltme eki eklenen makineler listesinde görünmez.
+Güncelleştirme önizlemesindeki makineler, zamanlanmış bir çalışma sırasında düzeltme eki eklenen makineler listesinde görünmez veya dinamik bir grubun seçili kapsamlarının VM 'Leri, portalda güncelleştirme önizlemesi listesinde gösterilmez.
+
+Güncelleştirme önizlemesi listesi, seçilen kapsamlar için bir [Azure Kaynak Grafiği](../../governance/resource-graph/overview.md) sorgusunun aldığı tüm makinelerden oluşur. Kapsamlar, bir sistem karma Runbook Worker 'ın yüklü olduğu ve erişim izinlerine sahip olduğu makineler için filtrelenir.
 
 ### <a name="cause"></a>Nedeni
 
@@ -201,6 +204,12 @@ Bu sorunun nedeni aşağıdakilerden biri olabilir:
 * Dinamik bir sorgudaki kapsamda tanımlanan abonelikler, kayıtlı Otomasyon kaynak sağlayıcısı için yapılandırılmamış.
 
 * Zamanlama yürütüldüğünde makineler kullanılabilir değil veya uygun etiketlere sahip değil.
+
+* Seçili kapsamlar üzerinde doğru erişiminiz yok.
+
+* Azure Kaynak Grafiği sorgusu beklenen makineleri almaz.
+
+* Sistem karma Runbook Worker makinelerde yüklü değil.
 
 ### <a name="resolution"></a>Çözüm
 
@@ -238,31 +247,15 @@ Aboneliğiniz Otomasyon kaynak sağlayıcısı için yapılandırılmışsa, anc
 
 7. Belirtilen dinamik gruplara sahip dağıtımın tüm makineleri içerdiğinden emin olmak için güncelleştirme zamanlamasını yeniden çalıştırın.
 
-## <a name="scenario-expected-machines-dont-appear-in-preview-for-dynamic-group"></a><a name="machines-not-in-preview"></a>Senaryo: beklenen makineler dinamik grup için önizlemede görünmüyor
-
-### <a name="issue"></a>Sorun
-
-Dinamik bir grubun seçili kapsamlarının VM 'Leri Azure portal önizleme listesinde gösterilmiyor. Bu liste, seçilen kapsamlar için bir ARG sorgusu tarafından alınan tüm makinelerden oluşur. Kapsamlar, karma runbook çalışanları yüklü olan ve erişim izinlerine sahip olan makineler için filtrelenir.
-
-### <a name="cause"></a>Nedeni
-
-Bu sorunun olası nedenleri şunlardır:
-
-* Seçili kapsamlar üzerinde doğru erişiminiz yok.
-* ARG sorgusu beklenen makineleri almaz.
-* Karma Runbook Worker makinelerde yüklü değil.
-
-### <a name="resolution"></a>Çözüm 
-
 #### <a name="incorrect-access-on-selected-scopes"></a>Seçili kapsamlar üzerinde yanlış erişim
 
 Azure portal yalnızca belirli bir kapsamda yazma erişiminizin bulunduğu makineleri görüntüler. Bir kapsam için doğru erişiminiz yoksa, bkz. [öğretici: Azure Portal kullanarak Kullanıcı erişimini Azure kaynaklarına verme](../../role-based-access-control/quickstart-assign-role-user-portal.md).
 
-#### <a name="arg-query-doesnt-return-expected-machines"></a>ARG sorgusu beklenen makineleri döndürmüyor
+#### <a name="resource-graph-query-doesnt-return-expected-machines"></a>Kaynak Grafiği sorgusu beklenen makineleri döndürmüyor
 
 Sorgularınızın doğru şekilde çalışıp çalışmadığını öğrenmek için aşağıdaki adımları izleyin.
 
-1. Azure portal içinde kaynak grafik Gezgini dikey penceresinde aşağıda gösterildiği gibi biçimlendirilen bir ARG sorgusu çalıştırın. Bu sorgu, Güncelleştirme Yönetimi içinde dinamik grubu oluştururken seçtiğiniz filtreleri taklit eder. Bkz. [güncelleştirme yönetimi dinamik grupları kullanma](../update-management/configure-groups.md).
+1. Azure portal ' deki kaynak grafik Gezgini dikey penceresinde aşağıda gösterildiği gibi biçimlendirilen bir Azure Kaynak Grafiği sorgusu çalıştırın. Azure Kaynak Graph ' i kullanmaya yeni çalışıyorsanız, kaynak grafik Gezgini ile nasıl çalışacağınızı öğrenmek için bu [hızlı](../../governance/resource-graph/first-query-portal.md) başlangıca bakın. Bu sorgu, Güncelleştirme Yönetimi içinde dinamik grubu oluştururken seçtiğiniz filtreleri taklit eder. Bkz. [güncelleştirme yönetimi dinamik grupları kullanma](../update-management/configure-groups.md).
 
     ```kusto
     where (subscriptionId in~ ("<subscriptionId1>", "<subscriptionId2>") and type =~ "microsoft.compute/virtualmachines" and properties.storageProfile.osDisk.osType == "<Windows/Linux>" and resourceGroup in~ ("<resourceGroupName1>","<resourceGroupName2>") and location in~ ("<location1>","<location2>") )
@@ -287,7 +280,7 @@ Sorgularınızın doğru şekilde çalışıp çalışmadığını öğrenmek i�
 
 #### <a name="hybrid-runbook-worker-not-installed-on-machines"></a>Karma Runbook Worker makinelerde yüklü değil
 
-Makineler, bağımsız değişken sorgu sonuçlarında görünür, ancak yine de dinamik grup önizlemede gösterilmez. Bu durumda, makineler karma çalışanlar olarak atanmayabilir, bu nedenle Azure Otomasyonu ve Güncelleştirme Yönetimi işleri çalıştırılamaz. Görmeyi beklediğiniz makinelerin karma runbook çalışanları olarak ayarlandığından emin olmak için:
+Makineler Azure Kaynak Grafiği sorgu sonuçlarında görünür, ancak yine de dinamik grup önizlemede gösterilmez. Bu durumda, makineler sistem karma runbook çalışanları olarak atanmayabilir ve bu nedenle Azure Otomasyonu 'Nu ve Güncelleştirme Yönetimi işleri çalıştıramayabilir. Görmeyi beklediğiniz makinelerin sistem karma runbook çalışanları olarak ayarlandığından emin olmak için:
 
 1. Azure portal, doğru şekilde görünmeyen bir makine için Otomasyon hesabına gidin.
 
@@ -297,11 +290,9 @@ Makineler, bağımsız değişken sorgu sonuçlarında görünür, ancak yine de
 
 4. Karma çalışanın bu makine için mevcut olduğunu doğrulayın.
 
-5. Makine karma çalışan olarak ayarlanmamışsa, [karma runbook çalışanı kullanarak veri merkezinizdeki veya buluttaki kaynakları otomatik hale](../automation-hybrid-runbook-worker.md)getirmeye yönelik yönergeleri kullanarak ayarlamalar yapın.
+5. Makine bir sistem karma Runbook Worker olarak ayarlanmamışsa, Güncelleştirme Yönetimi Genel Bakış makalesinin [güncelleştirme yönetimi etkinleştir](../update-management/overview.md#enable-update-management) bölümünde makineyi etkinleştirme yöntemlerini gözden geçirin. Etkinleştirilecek Yöntem, makinenin çalıştığı ortama bağlıdır.
 
-6. Makineyi karma Runbook Worker grubuna ekleyin.
-
-7. Önizlemede görüntülemediğiniz tüm makineler için yukarıdaki adımları tekrarlayın.
+6. Önizlemede görüntülemediğiniz tüm makineler için yukarıdaki adımları tekrarlayın.
 
 ## <a name="scenario-update-management-components-enabled-while-vm-continues-to-show-as-being-configured"></a><a name="components-enabled-not-working"></a>Senaryo: Güncelleştirme Yönetimi bileşenleri etkin, ancak VM yapılandırılmakta olmaya devam ediyor
 

@@ -2,22 +2,22 @@
 title: Azure Active Directory uygulamalar için OıDC tabanlı çoklu oturum açma (SSO) anlayın
 description: Azure Active Directory uygulamalar için OıDC tabanlı çoklu oturum açma (SSO) anlayın.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: conceptual
 ms.workload: identity
 ms.date: 10/19/2020
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: arajpathak7
 ms.custom: contperf-fy21q2
-ms.openlocfilehash: ffaa55d4aa482e8f0eda93b1b32db6310d17e2a3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 990e0c09f8a49b83bc68d7123f5f8146a3551575
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99255258"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374548"
 ---
 # <a name="understand-oidc-based-single-sign-on"></a>OıDC tabanlı çoklu oturum açmayı anlama
 Uygulama yönetiminde [hızlı başlangıç serisinde](view-applications-portal.md) , Azure AD 'yi bir uygulama Için kimlik sağlayıcısı (IDP) olarak kullanmayı öğrendiniz. Bu makale, OpenID Connect standardını kullanan uygulamalar hakkında çoklu oturum açma uygulamak için daha fazla ayrıntıya gider. 

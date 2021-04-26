@@ -11,18 +11,18 @@ author: nibaccam
 ms.reviewer: nibaccam
 ms.date: 03/08/2021
 ms.custom: how-to, devx-track-python, data4ml, synapse-azureml
-ms.openlocfilehash: dd62fb5e3c7450d50b9837ee5484ca480cab78aa
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 23184eee67013e39400446db5f744dd0ddb7bc50
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640830"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575759"
 ---
 # <a name="link-azure-synapse-analytics-and-azure-machine-learning-workspaces-preview"></a>Azure SYNAPSE Analytics ve Azure Machine Learning çalışma alanlarını bağlama (Önizleme)
 
-Bu makalede, [Azure SYNAPSE Analytics](/synapse-analytics/overview-what-is.md) çalışma alanınızı ve [Azure Machine Learning çalışma alanınızı](concept-workspace.md)bağlayan bağlı bir hizmetin nasıl oluşturulacağını öğreneceksiniz.
+Bu makalede, [Azure SYNAPSE Analytics](/azure/synapse-analytics/overview-what-is) çalışma alanınızı ve [Azure Machine Learning çalışma alanınızı](concept-workspace.md)bağlayan bağlı bir hizmetin nasıl oluşturulacağını öğreneceksiniz.
 
-Azure SYNAPSE çalışma alanınız ile bağlantılı Azure Machine Learning çalışma alanınız sayesinde, bir Apache Spark havuzu, ölçeklendirmekte olan veriler için ayrılmış bir işlem olarak ekleyebilir ve aynı not defterinden model eğitimi gerçekleştirebilirsiniz.
+Azure SYNAPSE çalışma alanınız ile bağlantılı Azure Machine Learning çalışma alanınız sayesinde, bir Apache Spark havuzu, ölçeklendirmekte olan veriler için ayrılmış bir işlem olarak ekleyebilir veya aynı Python not defteriyle model eğitimi gerçekleştirebilirsiniz.
 
 [Python SDK 'sı](#link-sdk) veya [Azure MACHINE LEARNING Studio](#link-studio)aracılığıyla ml çalışma alanınızı ve SYNAPSE çalışma alanınızı bağlayabilirsiniz.
 

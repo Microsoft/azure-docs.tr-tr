@@ -10,10 +10,10 @@ ms.topic: include
 ms.date: 12/06/2020
 ms.author: pafarley
 ms.openlocfilehash: 1a360a19da8006a8ab6d918560f1b1d566fdd66d
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105104024"
 ---
 Yüz tanıma REST API kullanarak yüz tanıma çalışmaya başlama. Yüz tanıma hizmeti, görüntülerdeki insan yüzlerini algılayıp tanımayı sağlayan gelişmiş algoritmalara erişmenizi sağlar.

@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 03/09/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: f60341ea51f1cf4e856b1b4598887da3dc37ebb2
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+manager: femila
+ms.openlocfilehash: 80bcf647ee63242bfe60b63ed400b8d3b3dc1d9e
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102613128"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445678"
 ---
 # <a name="scale-session-hosts-using-azure-automation"></a>Azure Otomasyonu 'Nu kullanarak oturum ana bilgisayarlarını ölçeklendirme
 

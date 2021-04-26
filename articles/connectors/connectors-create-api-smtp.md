@@ -55,8 +55,8 @@ Azure Logic Apps ve Basit Posta Aktarım Protokolü (SMTP) bağlayıcısıyla, S
    | **SMTP sunucu adresi** | Yes | SMTP sunucunuzun adresi | 
    | **Kullanıcı Adı** | Yes | SMTP hesabınız için Kullanıcı adınız | 
    | **Parola** | Yes | SMTP hesabınız için parolanız | 
-   | **SMTP sunucusu bağlantı noktası** | Hayır | SMTP sunucunuzda kullanmak istediğiniz belirli bir bağlantı noktası | 
-   | **SSL etkinleştirilsin mi?** | Hayır | TLS/SSL şifrelemesini açın veya kapatın. | 
+   | **SMTP sunucusu bağlantı noktası** | No | SMTP sunucunuzda kullanmak istediğiniz belirli bir bağlantı noktası | 
+   | **SSL etkinleştirilsin mi?** | No | TLS/SSL şifrelemesini açın veya kapatın. | 
    |||| 
 
 1. Seçtiğiniz eyleminiz için gerekli ayrıntıları sağlayın. 

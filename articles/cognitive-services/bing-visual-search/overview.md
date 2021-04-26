@@ -35,7 +35,7 @@ Bing Görsel Arama API'si bir görüntü için öngörüleri döndürür. Bir g�
 
 Bing Görsel Arama kullanarak aşağıdaki öngörüleri bulabilirsiniz:
 
-| İçgörü                              | Açıklama |
+| İçgörü                              | Description |
 |--------------------------------------|-------------|
 | Görsel olarak benzer görüntüler              | Giriş resmine görsel olarak benzeyen görüntülerin listesi. |
 | Görsel açıdan benzer ürünler            | Gösterilen ürüne görsel olarak benzeyen ürünler.            |

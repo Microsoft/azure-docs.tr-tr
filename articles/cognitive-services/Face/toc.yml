@@ -3,38 +3,28 @@
 - name: Genel Bakış
   expanded: true
   items:
-    - name: Yüz Tanıma hizmeti nedir?
+    - name: Yüz hizmeti nedir?
       href: Overview.md
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/face-api'
     - name: Yenilikler
       href: releasenotes.md
-- name: Hızlı Başlangıçlar
-  items:
-    - name: İstemci kitaplığını veya REST API'sini kullanma
-      href: Quickstarts/client-libraries.md
-- name: Öğreticiler
-  items:
-    - name: İstemci SDK’sini kullanma
-      items:
-        - name: C#
-          href: Tutorials/FaceAPIinCSharpTutorial.md
-- name: Kavramlar
-  items:
-    - name: Yüz algılama
-      href: concepts/face-detection.md
-    - name: Yüz tanıma
-      href: concepts/face-recognition.md
+- name: Hızlı Başlangıç
+  href: Quickstarts/client-libraries.md
+- name: Örnekler
+  href: /samples/browse/?products=azure&term=face
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Yüz algılama
+    - name: Yüzleri algılayın ve çözümleyin
       href: Face-API-How-to-Topics/HowtoDetectFacesinImage.md
+    - name: Bir yüz tanıma modeli sürümü belirtin
+      href: Face-API-How-to-Topics/specify-recognition-model.md
+    - name: Yüz algılama modeli sürümü belirtin
+      href: Face-API-How-to-Topics/specify-detection-model.md
     - name: Gruba yüz ekleme
       href: Face-API-How-to-Topics/how-to-add-faces.md
     - name: HeadPose özniteliğini kullanma
       href: Face-API-How-to-Topics/how-to-use-headpose.md
-    - name: Yüz tanıma modeli belirtme
-      href: Face-API-How-to-Topics/specify-recognition-model.md
-    - name: Yüz algılama modeli belirtme
-      href: Face-API-How-to-Topics/specify-detection-model.md
     - name: Yüz Tanıma hizmetini kullanırken gecikmeyi azaltma
       href: Face-API-How-to-Topics/how-to-mitigate-latency.md
     - name: Büyük ölçek özelliğini kullanma
@@ -43,58 +33,65 @@
       href: Face-API-How-to-Topics/HowtoAnalyzeVideo_Face.md
     - name: Yüz tanıma verilerini geçirme
       href: Face-API-How-to-Topics/how-to-migrate-face-data.md
-    - name: Kapsayıcıları kullanma
+    - name: Yüz kapsayıcısını kullanma
       items:
+        - name: Bilişsel Hizmetler kapsayıcıları belgeleri
+          href: /azure/cognitive-services/containers/index?context=/azure/cognitive-services/face/context/context
+        - name: Kapsayıcılara genel bakış
+          href: /azure/cognitive-services/cognitive-services-container-support?context=/azure/cognitive-services/face/context/context
         - name: Kapsayıcıları yükleme ve çalıştırma
           href: face-how-to-install-containers.md
         - name: Kapsayıcıları yapılandırma
           href: face-resource-container-config.md
         - name: Kapsayıcı örnekleri kullanma
-          maintainContext: true
-          href: ../containers/azure-container-instance-recipe.md
-        - name: Bilişsel Hizmetler kapsayıcıları belgeleri
-          href: ../containers/index.yml
-- name: Senaryoya derinlemesine bakışlar
-  items:
-    - name: Yüz Tanıma kaydı
+          href: /azure/cognitive-services/containers/azure-container-instance-recipe?context=/azure/cognitive-services/face/context/context
+    - name: Kurumsal kullanıma hazır olma
       items:
-        - name: Genel Bakış
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/face/context/context
+        - name: Müşteri tarafından yönetilen anahtarları kullan
+          href: encrypt-data-at-rest.md
+        - name: Azure AD kimlik doğrulamasını kullanma
+          href: ../authentication.md?context=/azure/cognitive-services/face/context/context
+- name: Kavramlar
+  items:
+    - name: Yüz algılama
+      href: concepts/face-detection.md
+    - name: Yüz tanıma
+      href: concepts/face-recognition.md
+- name: Öğreticiler
+  items:
+    - name: Yüz hizmetine Kullanıcı ekleme
+      items:
+        - name: Kullanıcıları eklemek için en iyi uygulamalar
           href: enrollment-overview.md
-        - name: Nasıl yapılır kılavuzları
-          items:
-            - name: React ile kayıt uygulaması oluşturma
-              href: build-enrollment-app.md
+        - name: Kullanıcı eklemek için tepki verme uygulaması oluşturma
+          href: build-enrollment-app.md
 - name: Başvuru
   items:
-    - name: Yüz Tanıma API'si
+    - name: Yüz REST API
       href: APIReference.md
-    - name: SDK’lar
-      items:
-        - name: .NET
-          href: /dotnet/api/overview/azure/cognitiveservices/client/faceapi
-        - name: Python
-          href: /python/api/azure-cognitiveservices-vision-face/
-        - name: Java
-          href: /java/api/overview/azure/cognitiveservices/client/faceapi
-        - name: Node.js
-          href: /javascript/api/@azure/cognitiveservices-face
-        - name: Go
-          href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/face'
+    - name: .NET
+      href: /dotnet/api/overview/azure/cognitiveservices/client/faceapi?view=azure-dotnet
+    - name: Java
+      href: /java/api/overview/azure/cognitiveservices/client/faceapi?view=azure-java-stable
+    - name: Node.js
+      href: /javascript/api/@azure/cognitiveservices-face
+    - name: Python
+      href: /python/api/azure-cognitiveservices-vision-face/?view=azure-python
+    - name: Başlayın
+      href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/face'
 - name: Kaynaklar
   items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
+    - name: Modülleri öğrenin
+      href: 'https://docs.microsoft.com/learn/modules/detect-analyze-faces/'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/face/context/context
-    - name: Örnekler
-      items:
-        - name: Yüz Tanıma örnekleri
-          href: /samples/browse/?products=azure&term=face
-    - name: Fiyatlandırma ve limitler
-      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/face-api'
-    - name: Azure yol haritası
+    - name: Azure güncelleştirmeleri
       href: 'https://azure.microsoft.com/updates/?product=cognitive-services'
-    - name: Bölgesel kullanılabilirlik
-      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
-    - name: Şifreleme
-      href: encrypt-data-at-rest.md

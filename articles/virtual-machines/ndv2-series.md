@@ -7,12 +7,12 @@ ms.subservice: vm-sizes-gpu
 ms.topic: conceptual
 ms.date: 02/03/2020
 ms.author: jushiman
-ms.openlocfilehash: 2f062aa43132543a2c149039eb50c0a0ab22d83d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e335f015d784b3f3849c3646d16da9ad8999030c
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102618568"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309841"
 ---
 # <a name="updated-ndv2-series"></a>NDv2-Series güncelleştirildi
 
@@ -35,6 +35,7 @@ Kritik öneme sahip olan NDv2, her iki hesaplama için de (VM başına 8 GPU) ve
 
 [Premium Depolama](premium-storage-performance.md): desteklenir<br>
 [Premium depolama önbelleği](premium-storage-performance.md): desteklenir<br>
+[Ultra diskler](disks-types.md#ultra-disk): desteklenir (kullanılabilirlik, kullanım ve performans hakkında[daha fazla bilgi edinin](https://techcommunity.microsoft.com/t5/azure-compute/ultra-disk-storage-for-hpc-and-gpu-vms/ba-p/2189312) ) <br>
 [Dinamik geçiş](maintenance-and-updates.md): desteklenmiyor<br>
 [Güncelleştirmeleri koruyan bellek](maintenance-and-updates.md): desteklenmiyor<br>
 [VM oluşturma desteği](generation-2.md): 2. nesil<br>

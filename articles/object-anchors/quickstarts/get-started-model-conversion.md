@@ -8,10 +8,10 @@ ms.date: 02/22/2021
 ms.topic: quickstart
 ms.service: azure-object-anchors
 ms.openlocfilehash: 69d23b9d02eb176a2e42985ef5c3673e83d9bb7e
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102607909"
 ---
 # <a name="quickstart-create-an-object-anchors-model-from-a-3d-model"></a>Hızlı başlangıç: 3B modelden nesne bağlantıları modeli oluşturma

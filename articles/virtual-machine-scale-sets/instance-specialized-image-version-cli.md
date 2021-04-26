@@ -10,12 +10,12 @@ ms.date: 05/01/2020
 ms.author: cynthn
 ms.reviewer: akjosh
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 2ecc2bfe6bdc06ede61e6c4d1e6eccfc9ef6323a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5fc88c00d548c0a034984976557d316fdac7620f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98878011"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792354"
 ---
 # <a name="create-a-scale-set-using-a-specialized-image-version-with-the-azure-cli"></a>Azure CLı ile özel görüntü sürümü kullanarak ölçek kümesi oluşturma
 
@@ -25,7 +25,7 @@ CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu öğreticide, Az
 
 Kaynak adlarını bu örnekte gereken şekilde değiştirin. 
 
-Tanımların adını ve KIMLIĞINI görmek için [az Sig Image-Definition List](/cli/azure/sig/image-definition#az-sig-image-definition-list) öğesini kullanarak bir galerideki görüntü tanımlarını listeleyin.
+Tanımların adını ve KIMLIĞINI görmek için [az Sig Image-Definition List](/cli/azure/sig/image-definition#az_sig_image_definition_list) öğesini kullanarak bir galerideki görüntü tanımlarını listeleyin.
 
 ```azurecli-interactive 
 resourceGroup=myGalleryRG
@@ -37,7 +37,7 @@ az sig image-definition list \
    --output tsv
 ```
 
-[`az vmss create`](/cli/azure/vmss#az-vmss-create) `--specialized` Görüntünün özelleşmiş bir görüntü olduğunu göstermek için parametresini kullanarak bir ölçek kümesi oluşturun.
+[`az vmss create`](/cli/azure/vmss#az_vmss_create) `--specialized` Görüntünün özelleşmiş bir görüntü olduğunu göstermek için parametresini kullanarak bir ölçek kümesi oluşturun.
 
 `--image`Kullanılabilir görüntünün en son sürümünden ölçek kümesi örnekleri oluşturmak için görüntü tanımı kimliği ' ni kullanın. Ayrıca, için görüntü sürümü KIMLIĞINI sağlayarak belirli bir sürümden ölçek kümesi örnekleri de oluşturabilirsiniz `--image` . Belirli bir görüntü sürümü kullanmanın, belirli görüntü sürümü bölgede silindiği ya da kaldırıldığı için kullanılabilir durumda olmaması durumunda Otomasyon başarısız olduğunu unutmayın. Belirli bir görüntü sürümü gerekli değilse, yeni VM 'nizi oluşturmak için görüntü tanımı KIMLIĞI kullanmanızı öneririz.
 

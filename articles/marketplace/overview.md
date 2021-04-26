@@ -6,12 +6,12 @@ ms.author: mingshen
 ms.service: marketplace
 ms.topic: overview
 ms.date: 10/15/2020
-ms.openlocfilehash: 099515eb1160b131f2d56fd02f300999d5ddfd16
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: de8e9060f8e7ccdcf38b9f0908dfb05063811817
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96780323"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103413"
 ---
 # <a name="what-is-the-microsoft-commercial-marketplace"></a>Microsoft ticari market nedir?
 
@@ -82,5 +82,5 @@ Bu avantajlar hakkında daha ayrıntılı bilgi edinmek için [ticari Market ava
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Microsoft Learn [Microsoft ticari Market 'e giriş](/learn/modules/intro-commercial-marketplace/) alın.
-- Ticari Market 'te yayımlama ile ilgilenen yeni Microsoft iş ortakları için bkz. [Iş Ortağı Merkezi 'nde ticari Market hesabı oluşturma](partner-center-portal/create-account.md).
+- Ticari Market 'te yayımlama ile ilgilenen yeni Microsoft iş ortakları için bkz. [Iş Ortağı Merkezi 'nde ticari Market hesabı oluşturma](create-account.md).
 - En son ve gelecekteki sürümler hakkında daha fazla bilgi edinmek için [Microsoft Iş ortağı topluluğu](https://www.microsoftpartnercommunity.com/)'nda konuşmaya katın.

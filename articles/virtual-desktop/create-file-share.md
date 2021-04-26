@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 06/05/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 8f8086aced26fc46fb1430df074082e8c3365baa
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: e859da6b3ac38ddb89c998d172c39f2549455aaa
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92746822"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106447939"
 ---
 # <a name="create-a-profile-container-with-azure-files-and-ad-ds"></a>Azure dosyaları ve AD DS bir profil kapsayıcısı oluşturun
 

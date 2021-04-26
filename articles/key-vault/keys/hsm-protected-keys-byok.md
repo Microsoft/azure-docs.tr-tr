@@ -10,12 +10,12 @@ ms.subservice: keys
 ms.topic: tutorial
 ms.date: 02/04/2021
 ms.author: ambapat
-ms.openlocfilehash: 4a3eaddd160acb8d4d2ae9f0da43ce6cb0236055
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.openlocfilehash: f1b5d6499594e9026e1615be5361c52c9ce2f4ef
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "102198158"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774818"
 ---
 # <a name="import-hsm-protected-keys-to-key-vault-byok"></a>HSM korumalı anahtarları Key Vault içeri aktar (BYOK)
 
@@ -72,7 +72,7 @@ Aşağıdaki tabloda Azure Key Vault BYOK kullanımına yönelik önkoşullar li
 
 ## <a name="supported-key-types"></a>Desteklenen anahtar türleri
 
-|Anahtar adı|Anahtar türü|Anahtar boyutu/eğrisi|Kaynak|Açıklama|
+|Anahtar adı|Anahtar türü|Anahtar boyutu/eğrisi|Kaynak|Description|
 |---|---|---|---|---|
 |Anahtar değişim anahtarı (KEK)|RSA| 2.048 bit<br />3.072 bit<br />4.096 bit|Azure Key Vault HSM|Azure Key Vault içinde oluşturulan HSM ile desteklenen bir RSA anahtar çifti|
 |Hedef anahtar|
@@ -101,7 +101,7 @@ KEK şu olmalıdır:
 > [!NOTE]
 > KEK, yalnızca izin verilen anahtar işlemi olarak ' import ' içermelidir. ' Import ' diğer tüm anahtar işlemleriyle birbirini dışlıyor.
 
-Anahtar işlemleri olarak ayarlanmış bir KEK oluşturmak için [az keykasa Key Create](/cli/azure/keyvault/key#az-keyvault-key-create) komutunu kullanın `import` . `kid`Aşağıdaki komuttan döndürülen anahtar tanımlayıcısını () kaydedin. ( `kid` [Adım 3](#step-3-generate-and-prepare-your-key-for-transfer)' te bu değeri kullanacaksınız.)
+Anahtar işlemleri olarak ayarlanmış bir KEK oluşturmak için [az keykasa Key Create](/cli/azure/keyvault/key#az_keyvault_key_create) komutunu kullanın `import` . `kid`Aşağıdaki komuttan döndürülen anahtar tanımlayıcısını () kaydedin. ( `kid` [Adım 3](#step-3-generate-and-prepare-your-key-for-transfer)' te bu değeri kullanacaksınız.)
 
 ```azurecli
 az keyvault key create --kty RSA-HSM --size 4096 --name KEKforBYOK --ops import --vault-name ContosoKeyVaultHSM
@@ -109,7 +109,7 @@ az keyvault key create --kty RSA-HSM --size 4096 --name KEKforBYOK --ops import 
 
 ### <a name="step-2-download-the-kek-public-key"></a>2. Adım: KEK ortak anahtarını Indirme
 
-KEK ortak anahtarını bir. ped dosyasına indirmek için [az keykasakey Download](/cli/azure/keyvault/key#az-keyvault-key-download) komutunu kullanın. İçeri aktardığınız hedef anahtar, KEK ortak anahtarı kullanılarak şifrelenir.
+KEK ortak anahtarını bir. ped dosyasına indirmek için [az keykasakey Download](/cli/azure/keyvault/key#az_keyvault_key_download) komutunu kullanın. İçeri aktardığınız hedef anahtar, KEK ortak anahtarı kullanılarak şifrelenir.
 
 ```azurecli
 az keyvault key download --name KEKforBYOK --vault-name ContosoKeyVaultHSM --file KEKforBYOK.publickey.pem
@@ -130,7 +130,7 @@ BYOK dosyasını bağlı bilgisayarınıza aktarın.
 
 ### <a name="step-4-transfer-your-key-to-azure-key-vault"></a>4. Adım: anahtarınızı Azure Key Vault aktarma
 
-Anahtar içeri aktarmayı gerçekleştirmek için, anahtar aktarım paketini (bir BYOK dosyası) bağlantısı kesilen bilgisayarınızdan İnternet 'e bağlı bilgisayara aktarın. BYOK dosyasını Key Vault HSM 'ye yüklemek için [az keykasa Key import](/cli/azure/keyvault/key#az-keyvault-key-import) komutunu kullanın.
+Anahtar içeri aktarmayı gerçekleştirmek için, anahtar aktarım paketini (bir BYOK dosyası) bağlantısı kesilen bilgisayarınızdan İnternet 'e bağlı bilgisayara aktarın. BYOK dosyasını Key Vault HSM 'ye yüklemek için [az keykasa Key import](/cli/azure/keyvault/key#az_keyvault_key_import) komutunu kullanın.
 
 Bir RSA anahtarını içeri aktarmak için aşağıdaki komutu kullanın. ----Parametresi isteğe bağlıdır ve varsayılan olarak ' RSA-HSM ' olarak ayarlanır.
 ```azurecli
@@ -148,6 +148,3 @@ Karşıya yükleme başarılı olursa, Azure CLı içeri aktarılan anahtarın �
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Artık Anahtar Kasanızda HSM korumalı bu anahtarı kullanabilirsiniz. Daha fazla bilgi için [Bu fiyat ve Özellik Karşılaştırması](https://azure.microsoft.com/pricing/details/key-vault/)bölümüne bakın.
-
-
-

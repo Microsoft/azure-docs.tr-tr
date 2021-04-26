@@ -15,12 +15,12 @@ ms.workload: identity
 ms.date: 01/29/2021
 ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: bb14a6a82535ac5a7d36213b082d08aedbb44da5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 585e31ab566cc990af2819fcf9cdde0506560208
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99090629"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780182"
 ---
 # <a name="configure-managed-identities-for-azure-resources-on-a-virtual-machine-scale-set-using-rest-api-calls"></a>REST API çağrılarını kullanarak bir sanal makine ölçek kümesindeki Azure kaynakları için Yönetilen kimlikler yapılandırma
 
@@ -60,13 +60,13 @@ Bu bölümde, Azure Resource Manager REST uç noktasına çağrı yapmak için K
 
 Sistem tarafından atanan yönetilen kimlik etkin bir sanal makine ölçek kümesi oluşturmak için, bir sanal makine ölçek kümesi oluşturmanız ve Kaynak Yöneticisi uç noktasını sistem tarafından atanan yönetilen kimlik türü değeriyle çağırmak için bir erişim belirteci almanız gerekir.
 
-1. [Az Group Create](/cli/azure/group/#az-group-create)kullanılarak sanal makine ölçek kümesinin ve ilgili kaynaklarının kapsama ve dağıtımı için bir [kaynak grubu](../../azure-resource-manager/management/overview.md#terminology) oluşturun. Bunun yerine kullanmak istediğiniz bir kaynak grubunuz varsa, bu adımı atlayabilirsiniz:
+1. [Az Group Create](/cli/azure/group/#az_group_create)kullanılarak sanal makine ölçek kümesinin ve ilgili kaynaklarının kapsama ve dağıtımı için bir [kaynak grubu](../../azure-resource-manager/management/overview.md#terminology) oluşturun. Bunun yerine kullanmak istediğiniz bir kaynak grubunuz varsa, bu adımı atlayabilirsiniz:
 
    ```azurecli-interactive 
    az group create --name myResourceGroup --location westus
    ```
 
-2. Sanal makine ölçek kümesi için bir [ağ arabirimi](/cli/azure/network/nic#az-network-nic-create) oluşturun:
+2. Sanal makine ölçek kümesi için bir [ağ arabirimi](/cli/azure/network/nic#az_network_nic_create) oluşturun:
 
    ```azurecli-interactive
     az network nic create -g myResourceGroup --vnet-name myVnet --subnet mySubnet -n myNic
@@ -325,7 +325,7 @@ Bu bölümde, Azure Resource Manager REST uç noktasına çağrı yapmak için K
    az account get-access-token
    ```
 
-2. Sanal makine ölçek kümesi için bir [ağ arabirimi](/cli/azure/network/nic#az-network-nic-create) oluşturun:
+2. Sanal makine ölçek kümesi için bir [ağ arabirimi](/cli/azure/network/nic#az_network_nic_create) oluşturun:
 
    ```azurecli-interactive
     az network nic create -g myResourceGroup --vnet-name myVnet --subnet mySubnet -n myNic

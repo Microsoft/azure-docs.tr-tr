@@ -102,7 +102,7 @@
           href: ../../azure-sql/database/reserved-capacity-overview.md?toc=%2fazure%2fcost-management-billing%2freservations%2ftoc.json
         - name: Sanal makineler
           href: ../../virtual-machines/prepay-reserved-vm-instances.md?toc=%2fazure%2fcost-management-billing%2freservations%2ftoc.json
-    - name: 'Satın aldıktan sonra Görüntüleme, Yönetme ve İyileştirme'
+    - name: 'İzinler, görüntüleme ve yönetme'
       items:
         - name: Görüntüleme ve yönetme izinleri
           href: view-reservations.md?toc=/azure/cost-management-billing/reservations/toc.json
@@ -112,14 +112,18 @@
           href: manage-reserved-vm-instance.md?toc=/azure/cost-management-billing/reservations/toc.json
         - name: İyileştirme ayarlarını değiştirme
           href: manage-reserved-vm-instance.md#change-optimize-setting-for-reserved-vm-instances
-        - name: Değişim ve para iadesi rezervasyonları
-          href: exchange-and-refund-azure-reservations.md?toc=/azure/cost-management-billing/reservations/toc.json
-    - name: Maliyetleri raporlama
+    - name: Kullanım ve maliyet raporları
       items:
+        - name: Ayırma kullanımını görüntüle
+          href: reservation-utilization.md?toc=/azure/cost-management-billing/reservations/toc.json
         - name: Rezervasyon işlemlerini görüntüleme
           href: view-purchase-refunds.md?toc=/azure/cost-management-billing/reservations/toc.json
         - name: Rezervasyon maliyetlerini geri ödeme
           href: charge-back-usage.md?toc=/azure/cost-management-billing/reservations/toc.json
+    - name: Exchange ve iadesi
+      items:
+        - name: Değişim ve para iadesi rezervasyonları
+          href: exchange-and-refund-azure-reservations.md?toc=/azure/cost-management-billing/reservations/toc.json
     - name: Rezervasyonları yenileme
       items:
         - name: Rezervasyonu yenileme

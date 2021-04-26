@@ -2,15 +2,15 @@
 author: DCtheGeek
 ms.service: azure-policy
 ms.topic: include
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.author: dacoulte
 ms.custom: generated
-ms.openlocfilehash: 6cac9a3b166b3eb0fdb3b43064b327440ee318ce
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: f8095fc7c9be6ea23a573de8a5e871965d6c2a66
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105032735"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107866115"
 ---
 |Ad |Açıklama |İlkeler |Sürüm |
 |---|---|---|---|

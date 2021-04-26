@@ -1,19 +1,21 @@
 ---
 title: 'Hızlı başlangıç: Azure kuyruk depolama istemci kitaplığı V12-Java'
 description: Bir kuyruk oluşturmak ve bu iletiye ileti eklemek için Azure kuyruk depolama istemci kitaplığı V12 ' nı nasıl kullanacağınızı öğrenin. Sonra sıradan iletileri okumayı ve silmeyi öğrenin. Ayrıca, bir kuyruğu silmeyi de öğreneceksiniz.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 12/01/2020
 ms.topic: quickstart
 ms.service: storage
 ms.subservice: queues
-ms.custom: devx-track-java
-ms.openlocfilehash: 814531adc9dafa524797d0c2674a1e600e407bed
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom:
+- devx-track-java
+- mode-api
+ms.openlocfilehash: f4e33cac6ba00be56b0f63cf5a10b2dce32e1be7
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97588225"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107534468"
 ---
 # <a name="quickstart-azure-queue-storage-client-library-v12-for-java"></a>Hızlı başlangıç: Java için Azure kuyruk depolama istemci kitaplığı V12
 

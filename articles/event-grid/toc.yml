@@ -136,6 +136,8 @@
               href: event-schema-azure-maps.md
             - name: Azure Media Services
               href: event-schema-media-services.md
+            - name: Azure İlkesi
+              href: ./event-schema-policy.md
             - name: Azure kaynak grupları
               href: event-schema-resource-groups.md
             - name: Azure Service Bus
@@ -188,7 +190,7 @@
           href: delivery-and-retry.md
         - name: Web kancası olay teslimi
           href: webhook-event-delivery.md
-        - name: Teslim özellikleri
+        - name: Özel teslim özellikleri
           href: delivery-properties.md
     - name: Olağanüstü durum kurtarma
       items:
@@ -278,9 +280,9 @@
               href: enable-identity-custom-topics-domains.md
             - name: Bir sistem konusu için yönetilen kimliği etkinleştirme
               href: enable-identity-system-topics.md
-            - name: Hedeflere Azure rollerine kimlik ekleme
+            - name: Event Grid hedefe erişimi yönetilen kimliğe verme
               href: add-identity-roles.md
-            - name: Kimlik kullanan olay abonelikleri oluşturma
+            - name: Yönetilen kimliği kullanan bir olay aboneliği oluşturma
               href: managed-service-identity.md
         - name: Özel bir bağlantı üzerinden olayları güvenli bir şekilde sunun
           href: consume-private-endpoints.md

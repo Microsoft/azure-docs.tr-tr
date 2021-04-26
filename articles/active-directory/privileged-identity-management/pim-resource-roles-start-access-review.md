@@ -11,20 +11,27 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: how-to
 ms.subservice: pim
-ms.date: 03/16/2021
+ms.date: 04/05/2021
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 110a94c78427087f4ca5555f59055ab8e3bebcee
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 87c0ce72348f67c22759915a3a15c69193ad2f60
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104592700"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552806"
 ---
 # <a name="create-an-access-review-of-azure-resource-roles-in-privileged-identity-management"></a>Privileged Identity Management Azure Kaynak rolleri için erişim gözden geçirmesi oluşturma
 
 Çalışanların zaman içinde değişiklik yaptığı ayrıcalıklı Azure Kaynak rollerine erişim gereksinimi. Eski rol atamalarıyla ilişkili riski azaltmak için, erişimi düzenli olarak gözden geçirmeniz gerekir. Azure Kaynak rollerine ayrıcalıklı erişim için erişim gözden geçirmeleri oluşturmak üzere Azure Active Directory (Azure AD) Privileged Identity Management (PıM) kullanabilirsiniz. Ayrıca, otomatik olarak gerçekleşen yinelenen erişim incelemelerini yapılandırabilirsiniz. Bu makalede bir veya daha fazla erişim incelemesi oluşturma açıklanır.
+
+## <a name="prerequisite-license"></a>Önkoşul lisansı
+
+[!INCLUDE [Azure AD Premium P2 license](../../../includes/active-directory-p2-license.md)]. PıM lisansları hakkında daha fazla bilgi için [Privileged Identity Management kullanmak üzere lisans gereksinimlerine](subscription-requirements.md)bakın.
+
+> [!Note]
+>  Şu anda, kiracınızda etkin bir Azure Active Directory Premium P2 sürümü ile Azure AD ve Azure Kaynak rolleri 'ne (Önizleme) erişimi olan hizmet sorumlularına yönelik bir erişim incelemesi tanımlayabilirsiniz. Hizmet sorumluları için lisanslama modeli, bu özelliğin genel kullanıma sunulmasıyla sonlandırılır ve ek lisanslar gerekebilir.
 
 ## <a name="prerequisite-role"></a>Önkoşul rolü
 
@@ -34,9 +41,9 @@ ms.locfileid: "104592700"
 
 1. Önkoşul rollerinden birine atanan bir kullanıcıyla [Azure Portal](https://portal.azure.com/) için oturum açın.
 
-1. **Azure AD Privileged Identity Management** açın.
-
-1. Sol taraftaki menüden **Azure kaynakları**' nı seçin.
+1. **Identity idare** seçin
+ 
+1. Sol taraftaki menüden **Azure AD Privileged Identity Management** altında **Azure kaynakları** ' nı seçin.
 
 1. Yönetmek istediğiniz kaynağı bir abonelik gibi seçin.
 
@@ -58,9 +65,12 @@ ms.locfileid: "104592700"
 
 1. Yinelenen erişim gözden geçirme serisinin nasıl sonlandıralınacağını belirtmek için **bitiş** ayarını kullanın. Seriler üç şekilde bitemez: sürekli olarak gözden geçirmeler başlatacak şekilde, belirli bir tarihe kadar veya tanımlanan sayıda oluşumdan sonra sürekli olarak çalışır. Siz, başka bir Kullanıcı Yöneticisi veya başka bir genel yönetici, **ayarları**, bu tarihte sona erecek şekilde değiştirerek, oluşturulduktan sonra seriyi durdurabilir.
 
-1. **Kullanıcılar** bölümünde, üyeliğini gözden geçirmek istediğiniz bir veya daha fazla rol seçin.
+1. **Kullanıcılar** bölümünde, gözden geçirme kapsamını seçin. Kullanıcıları gözden geçirmek için, Azure rolüne erişimi olan makine hesaplarını gözden geçirmek üzere **kullanıcıları seçin veya hizmet sorumlularını seçin (Önizleme)** .   
 
     ![Rol üyeliğini gözden geçirmek için kullanıcılara kapsam](./media/pim-resource-roles-start-access-review/users.png)
+
+
+1. **Rol üyeliğini gözden geçir** altında, gözden geçirmek Için ayrıcalıklı Azure rolleri ' ni seçin. 
 
     > [!NOTE]
     > - Burada seçilen roller hem [kalıcı hem de uygun rolleri](../privileged-identity-management/pim-how-to-add-role-to-user.md)içerir.
@@ -77,9 +87,9 @@ ms.locfileid: "104592700"
 
     ![Seçili kullanıcıların veya üyelerin gözden geçirenler listesi (self)](./media/pim-resource-roles-start-access-review/reviewers.png)
 
-    - **Seçili kullanıcılar** -kimlerin erişimi olduğunu bilmiyorsanız bu seçeneği kullanın. Bu seçenekle, tamamlanacak bir kaynak sahibine veya grup yöneticisine incelemeyi atayabilirsiniz.
-    - **Üyeler (self)** -bu seçeneği, kullanıcıların kendi rol atamalarını gözden geçirmesini sağlamak için kullanın. 
-    - **Yönetici** – Kullanıcı yöneticisinin rol atamasını gözden geçirmesini sağlamak için bu seçeneği kullanın. Yönetici ' yi seçtikten sonra, bir geri dönüş gözden geçireni belirtme seçeneğine de sahip olursunuz. Kullanıcı, dizinde hiçbir yönetici belirtilmediğinde, geri dönüş gözden geçiricilerin Kullanıcı tarafından incelenmesi istenir. 
+    - **Seçili kullanıcılar** -bu seçeneği, gözden geçirmeyi tamamlayacak belirli bir kullanıcıyı belirlemek için kullanın. Bu seçenek, gözden geçirme kapsamlarından bağımsız olarak kullanılabilir ve seçili gözden geçirenler kullanıcıları ve hizmet sorumlularını gözden geçirebilir. 
+    - **Üyeler (self)** -bu seçeneği, kullanıcıların kendi rol atamalarını gözden geçirmesini sağlamak için kullanın. Bu seçenek yalnızca gözden geçirme **kullanıcıların** kapsamına eklendiğinde kullanılabilir.
+    - **Yönetici** – Kullanıcı yöneticisinin rol atamasını gözden geçirmesini sağlamak için bu seçeneği kullanın. Bu seçenek yalnızca gözden geçirme **kullanıcıların** kapsamına eklendiğinde kullanılabilir. Yönetici ' yi seçtikten sonra, bir geri dönüş gözden geçireni belirtme seçeneğine de sahip olursunuz. Kullanıcı, dizinde hiçbir yönetici belirtilmediğinde, geri dönüş gözden geçiricilerin Kullanıcı tarafından incelenmesi istenir. 
 
 ### <a name="upon-completion-settings"></a>Tamamlama ayarlarından sonra
 

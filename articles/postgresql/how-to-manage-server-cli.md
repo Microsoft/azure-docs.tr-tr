@@ -6,12 +6,12 @@ ms.author: andrela
 ms.service: postgresql
 ms.topic: how-to
 ms.date: 9/22/2020
-ms.openlocfilehash: 2ea07e2bc12e6fc0d62abd462b8537c6a93689f9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 36151a9afda0bb23ee244ee778a30f30a41243ee
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97935810"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791472"
 ---
 # <a name="manage-an-azure-database-for-postgresql-single-server-using-the-azure-cli"></a>Azure CLı kullanarak PostgreSQL için Azure veritabanı tek sunucu yönetme
 
@@ -21,13 +21,13 @@ Bu makalede, Azure 'da dağıtılan tek sunucularınızın nasıl yönetileceği
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.com/free/) bir hesap oluşturun. Bu makalede, Azure CLı sürüm 2,0 veya üstünü yerel olarak çalıştırıyor olmanız gerekir. Yüklü sürümü görmek için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme](/cli/azure/install-azure-cli).
 
-[Az Login](/cli/azure/reference-index#az-login) komutunu kullanarak hesabınızda oturum açmanız gerekir. Azure hesabınızın **ABONELIK kimliğini** ifade eden **ID** özelliğine göz önüne alın.
+[Az Login](/cli/azure/reference-index#az_login) komutunu kullanarak hesabınızda oturum açmanız gerekir. Azure hesabınızın **ABONELIK kimliğini** ifade eden **ID** özelliğine göz önüne alın.
 
 ```azurecli-interactive
 az login
 ```
 
-[Az Account set](/cli/azure/account) komutunu kullanarak hesabınız altındaki belirli bir aboneliği seçin. Komutta **abonelik** bağımsız değişkeninin değeri olarak kullanılacak **az Login** çıktısından **ID** değerini bir yere unutmayın. Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. Aboneliğinizi tamamen almak için [az Account List](/cli/azure/account#az-account-list)kullanın.
+[Az Account set](/cli/azure/account) komutunu kullanarak hesabınız altındaki belirli bir aboneliği seçin. Komutta **abonelik** bağımsız değişkeninin değeri olarak kullanılacak **az Login** çıktısından **ID** değerini bir yere unutmayın. Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. Aboneliğinizi tamamen almak için [az Account List](/cli/azure/account#az_account_list)kullanın.
 
 ```azurecli
 az account set --subscription <subscription id>
@@ -64,10 +64,10 @@ Sunucunuzdaki bir veritabanının veritabanı özelliklerini oluşturmak, silmek
 
 | Cmdlet | Kullanım| Description |
 | --- | ---| --- |
-|[az Postgres DB Create](/cli/azure/sql/db#az-mysql-db-create)|```az postgres db create -g myresourcegroup -s mydemoserver -n mydatabasename``` |Bir veritabanı oluşturur|
-|[az Postgres DB Delete](/cli/azure/sql/db#az-mysql-db-delete)|```az postgres db delete -g myresourcegroup -s mydemoserver -n mydatabasename```|Veritabanınızı sunucudan silin. Bu komut, sunucunuzu silmez. |
-|[az Postgres DB listesi](/cli/azure/sql/db#az-mysql-db-list)|```az postgres db list -g myresourcegroup -s mydemoserver```|sunucudaki tüm veritabanlarını listeler|
-|[az Postgres DB Show](/cli/azure/sql/db#az-mysql-db-show)|```az postgres db show -g myresourcegroup -s mydemoserver -n mydatabasename```|Veritabanının daha fazla ayrıntılarını gösterir|
+|[az Postgres DB Create](/cli/azure/sql/db#az_mysql_db_create)|```az postgres db create -g myresourcegroup -s mydemoserver -n mydatabasename``` |Bir veritabanı oluşturur|
+|[az Postgres DB Delete](/cli/azure/sql/db#az_mysql_db_delete)|```az postgres db delete -g myresourcegroup -s mydemoserver -n mydatabasename```|Veritabanınızı sunucudan silin. Bu komut, sunucunuzu silmez. |
+|[az Postgres DB listesi](/cli/azure/sql/db#az_mysql_db_list)|```az postgres db list -g myresourcegroup -s mydemoserver```|sunucudaki tüm veritabanlarını listeler|
+|[az Postgres DB Show](/cli/azure/sql/db#az_mysql_db_show)|```az postgres db show -g myresourcegroup -s mydemoserver -n mydatabasename```|Veritabanının daha fazla ayrıntılarını gösterir|
 
 ## <a name="update-admin-password"></a>Yönetici parolasını Güncelleştir
 Bu komutla yönetici rolü parolasını değiştirebilirsiniz
@@ -80,7 +80,7 @@ az postgres server update --resource-group myresourcegroup --name mydemoserver -
 > Parola şu kategorilerden üçünden karakterler içermelidir: Ingilizce büyük harfler, Ingilizce küçük harfler, sayılar ve alfasayısal olmayan karakterler.
 
 ## <a name="delete-a-server"></a>Sunucu silme
-Yalnızca PostgreSQL tek sunucusunu silmek istiyorsanız [az Postgres Server DELETE](/cli/azure/mysql/server#az-mysql-server-delete) komutunu çalıştırabilirsiniz.
+Yalnızca PostgreSQL tek sunucusunu silmek istiyorsanız [az Postgres Server DELETE](/cli/azure/mysql/server#az_mysql_server_delete) komutunu çalıştırabilirsiniz.
 
 ```azurecli-interactive
 az postgres server delete --resource-group myresourcegroup --name mydemoserver

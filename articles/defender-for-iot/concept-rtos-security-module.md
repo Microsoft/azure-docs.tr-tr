@@ -3,12 +3,12 @@ title: Azure RTOS için Defender-IoT-Micro-Agent hakkında kavramsal açıklama
 description: Azure RTOS kavramları ve iş akışı için Defender-IoT-mikro-Agent hakkında temel bilgileri öğrenin.
 ms.topic: conceptual
 ms.date: 09/09/2020
-ms.openlocfilehash: 83557930aeeccbb557382583e4d6666a000ce52c
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 04b86d401bcb9fc919c36b28cf4f80ea3bfd7030
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104779282"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107750491"
 ---
 # <a name="defender-iot-micro-agent-for-azure-rtos-preview"></a>Defender-IoT-mikro-Azure RTOS için aracı (Önizleme)
 
@@ -16,7 +16,7 @@ ms.locfileid: "104779282"
 
 ## <a name="azure-rtos-iot-defender-iot-micro-agent"></a>Azure RTOS IoT Defender-IoT-Micro-Agent
 
-Defender-IoT-mikro-aracı Azure RTOS, NetX Duo sunumunun bir parçası olarak Azure RTOS cihazları için kapsamlı bir güvenlik çözümü sağlar. NetX Duo sunumunda Azure RTOS yerleşik Azure IoT Defender-IoT-Micro-Agent ile birlikte gelir ve etkinleştirildikten sonra gerçek zamanlı işletim sistemi cihazlarınızda ortak tehditler için kapsam sağlar. 
+Defender-IoT-mikro-aracı Azure RTOS, NetX Duo sunumunun bir parçası olarak Azure RTOS cihazları için kapsamlı bir güvenlik çözümü sağlar. NetX Duo sunumunda Azure RTOS yerleşik Azure IoT Defender-IoT-Micro-Agent ile birlikte gelir ve etkinleştirildikten sonra gerçek zamanlı işletim sistemi cihazlarınızda ortak tehditler için kapsam sağlar.
 
 Azure RTOS için Defender-IoT-Micro-Agent arka planda çalışır ve her bir müşterinin IoT Hub benzersiz bağlantılarını kullanarak güvenlik iletileri gönderirken sorunsuz bir kullanıcı deneyimi sağlar. Azure RTOS için Defender-IoT-Micro-Agent varsayılan olarak etkinleştirilmiştir.  
 

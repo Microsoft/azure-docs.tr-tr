@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 25320fb8cde0cc5a38f1edf4019a2f0e07cefe14
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a830c2cbbc16d5d5e93e6f2283af012e4412c0be
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103461105"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310657"
 ---
 # <a name="tutorial-send-data-via-transparent-gateway"></a>Öğretici: saydam ağ geçidi aracılığıyla veri gönderme
 
@@ -250,4 +250,4 @@ Bu makalede, IoT Edge cihazımız algılayıcısı ve işletimsel verileri gönd
 IoT Edge özellikleri hakkında öğrenmeye devam etmek için, sonraki öğreticiyi deneyin:
 
 > [!div class="nextstepaction"]
-> [IoT Edge cihaz hiyerarşisi oluşturma (Önizleme)](tutorial-nested-iot-edge.md?view=iotedge-2020-11&preserve-view=true)
+> [IoT Edge cihaz hiyerarşisi oluşturma](tutorial-nested-iot-edge.md?view=iotedge-2020-11&preserve-view=true)

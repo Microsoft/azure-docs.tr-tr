@@ -7,13 +7,13 @@ ms.date: 09/03/2020
 ms.service: key-vault
 ms.subservice: secrets
 ms.topic: quickstart
-ms.custom: devx-track-python, devx-track-azurecli
-ms.openlocfilehash: 14ea63e3b52d0673d6f64a5963a4de7a038f7021
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.custom: devx-track-python, devx-track-azurepowershell
+ms.openlocfilehash: d7b5144264b31e62eac43513d6a851d09a09c60f
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104800474"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814055"
 ---
 # <a name="quickstart-azure-key-vault-secret-client-library-for-python"></a>Hızlı başlangıç: Python için Azure Key Vault gizli istemci kitaplığı
 
@@ -80,17 +80,7 @@ az keyvault set-policy --name <YourKeyVaultName> --upn user@domain.com --secret-
 
 Bu uygulama, Anahtar Kasası adını adında bir ortam değişkeni olarak kullanıyor `KEY_VAULT_NAME` .
 
-Windows
-```cmd
-set KEY_VAULT_NAME=<your-key-vault-name>
-````
-Windows PowerShell
-```powershell
-$Env:KEY_VAULT_NAME="<your-key-vault-name>"
-```
-
-macOS veya Linux
-```cmd
+```bash
 export KEY_VAULT_NAME=<your-key-vault-name>
 ```
 
@@ -180,7 +170,7 @@ retrieved_secret = client.get_secret(secretName)
 
 Gizli anahtar değeri içinde bulunur `retrieved_secret.value` .
 
-Azure CLı komutu [az keykasa gizli göster](/cli/azure/keyvault/secret?#az-keyvault-secret-show)komutuyla da bir gizli dizi alabilirsiniz.
+Azure CLı komutu [az keykasa gizli göster](/cli/azure/keyvault/secret?#az_keyvault_secret_show)komutuyla da bir gizli dizi alabilirsiniz.
 
 ### <a name="delete-a-secret"></a>Gizli anahtarı silme
 
@@ -193,7 +183,7 @@ deleted_secret = poller.result()
 
 `begin_delete_secret`Yöntemi zaman uyumsuzdur ve bir Poller nesnesi döndürür. Poller 'ın metodunu çağırma işleminin `result` tamamlanmasını bekler.
 
-Azure CLı komutu [az keykasa gizli göster](/cli/azure/keyvault/secret?#az-keyvault-secret-show)komutuyla parolanın kaldırıldığını doğrulayabilirsiniz.
+Azure CLı komutu [az keykasa gizli göster](/cli/azure/keyvault/secret?#az_keyvault_secret_show)komutuyla parolanın kaldırıldığını doğrulayabilirsiniz.
 
 Silindikten sonra gizli anahtar, bir zaman için silinmiş ancak kurtarılabilir durumda kalır. Kodu yeniden çalıştırırsanız, farklı bir gizli dizi adı kullanın.
 
@@ -210,7 +200,7 @@ az group delete --resource-group KeyVault-PythonQS-rg
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Azure Anahtar Kasası'na Genel Bakış](../general/overview.md)
-- [Anahtar kasasına erişimin güvenliğini sağlama](../general/secure-your-key-vault.md)
+- [Anahtar kasasına erişimin güvenliğini sağlama](../general/security-features.md)
 - [Geliştirici Kılavuzu Azure Key Vault](../general/developers-guide.md)
-- [Key Vault güvenliğe genel bakış](../general/security-overview.md)
+- [Key Vault güvenliğe genel bakış](../general/security-features.md)
 - [Key Vault ile kimlik doğrulama](../general/authentication.md)

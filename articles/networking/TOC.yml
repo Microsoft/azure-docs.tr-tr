@@ -1,7 +1,7 @@
 - name: Genel Bakış
   items:
     - name: Azure ağı hakkında
-      href: networking-overview.md
+      href: fundamentals/networking-overview.md
     - name: Mimari
       items:
         - name: Ağ mühendisleri için Azure
@@ -130,7 +130,7 @@
           href: ../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md?toc=%2fazure%2fnetworking%2ftoc.json
 - name: Başvuru
   items:
-    - name: Azure CLI
+    - name: Azure CLI’si
       href: /cli/azure/network
     - name: Azure PowerShell
       href: /powershell/module/az.network/

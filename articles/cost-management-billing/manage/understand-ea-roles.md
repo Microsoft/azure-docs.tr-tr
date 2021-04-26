@@ -6,22 +6,23 @@ ms.reviewer: adwise
 ms.service: cost-management-billing
 ms.subservice: enterprise
 ms.topic: conceptual
-ms.date: 12/10/2020
+ms.date: 04/05/2021
 ms.author: banders
 ms.custom: contperf-fy21q1
-ms.openlocfilehash: 1ceed171b0516e293ffe58bca0225d3d3dfdb414
-ms.sourcegitcommit: 97c48e630ec22edc12a0f8e4e592d1676323d7b0
+ms.openlocfilehash: 7331f9a894d36ee15702a8fe53804efd53049762
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/18/2021
-ms.locfileid: "101094669"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107284128"
 ---
 # <a name="managing-azure-enterprise-agreement-roles"></a>Azure Kurumsal Anlaşma rollerini yönetme
 
-Kuruluşunuzun kullanım ve harcamasının yönetilmesine yardımcı olmak için Kurumsal Anlaşması olan Azure müşterileri beş farklı yönetici rolü atayabilir:
+Kuruluşunuzun kullanımı ve harcamalarının yönetilmesine yardımcı olmak için Kurumsal Anlaşma olan Azure müşterileri altı ayrı yönetim rolü atayabilir:
 
 - Kuruluş Yöneticisi
 - Kuruluş Yöneticisi (salt okunur)<sup>1</sup>
+- EA Satınalmacı
 - Bölüm Yöneticisi
 - Bölüm Yöneticisi (salt okunur)
 - Hesap sahibi<sup>2</sup>
@@ -61,6 +62,7 @@ Aşağıdaki diyagramda basit Azure EA hiyerarşileri gösterilmektedir.
 Aşağıdaki yönetici kullanıcı rolleri, kuruluş kaydınızın bir parçasıdır:
 
 - Kuruluş yöneticisi
+- EA Satınalmacı
 - Departman yöneticisi
 - Hesap sahibi
 - Hizmet yöneticisi
@@ -80,12 +82,24 @@ Bu role sahip olan kullanıcılar en yüksek erişim düzeyine sahiptir. Bu kull
 - Diğer kuruluş yöneticilerini yönetme.
 - Departman yöneticilerini yönetme.
 - Bildirim kişilerini yönetme.
+- Rezervasyonlar dahil olmak üzere Azure hizmetleri satın alın.
 - Tüm hesaplarda kullanımı görüntüleme.
 - Tüm hesaplarda faturalandırılmamış ücretleri görüntüleme.
 - Kurumsal Anlaşma için uygulanan tüm rezervasyon siparişlerini ve rezervasyonları görüntüleyin ve yönetin.
   - Kuruluş yöneticisi (salt okuma), rezervasyon siparişlerini ve rezervasyonlarını görüntüleyebilir. Bunları yönetemez.
 
 Bir kuruluş kaydında birden çok kuruluş yöneticiniz olabilir. Kurumsal yöneticilere salt okuma erişimi verebilirsiniz. Hepsi departman yöneticisi rolünü devralırlar.
+
+### <a name="ea-purchaser"></a>EA Satınalmacı
+
+Bu role sahip olan kullanıcılar Azure hizmetlerini satın alma izinlerine sahiptir, ancak hesapların yönetilmesine izin verilmez. Bu kullanıcılar şunları yapabilir:
+
+- Rezervasyonlar dahil olmak üzere Azure hizmetleri satın alın.
+- Tüm hesaplarda kullanımı görüntüleme.
+- Tüm hesaplarda faturalandırılmamış ücretleri görüntüleme.
+- Kurumsal Anlaşma için uygulanan tüm rezervasyon siparişlerini ve rezervasyonları görüntüleyin ve yönetin.
+
+EA Satınalmacı rolü şu anda yalnızca SPN tabanlı erişim için etkindir. Rolü bir hizmet sorumlusu adına atamayı öğrenmek için bkz. [Azure Kurumsal Anlaşma hizmet sorumlusu adlarına rol atama](assign-roles-azure-service-principals.md).
 
 ### <a name="department-administrator"></a>Departman yöneticisi
 
@@ -126,6 +140,7 @@ Aşağıdaki bölümlerde her bir rolün sınırlamaları ve özellikleri açık
 |---|---|
 |Kuruluş Yöneticisi|Sınırsız|
 |Kuruluş Yöneticisi (salt okunur)|Sınırsız|
+| Bir SPN 'ye atanan EA Satınalmacı | Sınırsız |
 |Bölüm Yöneticisi|Sınırsız|
 |Bölüm Yöneticisi (salt okunur)|Sınırsız|
 |Hesap Sahibi|Hesap başına 1<sup>3</sup>|
@@ -134,18 +149,19 @@ Aşağıdaki bölümlerde her bir rolün sınırlamaları ve özellikleri açık
 
 ## <a name="organization-structure-and-permissions-by-role"></a>Role göre kuruluş yapısı ve izinleri
 
-|Görevler| Kuruluş Yöneticisi|Kuruluş Yöneticisi (salt okunur)|Bölüm Yöneticisi|Bölüm Yöneticisi (salt okunur)|Hesap Sahibi| İş Ortağı|
-|---|---|---|---|---|---|---|
-|Kuruluş Yöneticilerini görüntüleme|✔|✔|✘|✘|✘|✔|
-|Kuruluş Yöneticileri ekleme veya kaldırma|✔|✘|✘|✘|✘|✘|
-|Bildirim İlgili Kişilerini görüntüleme<sup>4</sup> |✔|✔|✘|✘|✘|✔|
-|Bildirim İlgili Kişilerini ekleme veya kaldırma<sup>4</sup> |✔|✘|✘|✘|✘|✘|
-|Bölümler oluşturma ve yönetme |✔|✘|✘|✘|✘|✘|
-|Bölüm Yöneticilerini görüntüleme|✔|✔|✔|✔|✘|✔|
-|Bölüm Yöneticileri ekleme veya kaldırma|✔|✘|✔|✘|✘|✘|
-|Kayıttaki Hesapları görüntüleme |✔|✔|✔<sup>5</sup>|✔<sup>5</sup>|✘|✔|
-|Kayda Hesaplar ekleme ve Hesap Sahibini değiştirme|✔|✘|✔<sup>5</sup>|✘|✘|✘|
-|Abonelikler ve abonelik izinleri oluşturma ve yönetme|✘|✘|✘|✘|✔|✘|
+|Görevler| Kuruluş Yöneticisi|Kuruluş Yöneticisi (salt okunur)| EA Satınalmacı | Bölüm Yöneticisi|Bölüm Yöneticisi (salt okunur)|Hesap Sahibi| İş Ortağı|
+|---|---|---|---|---|---|---|---|
+|Kuruluş Yöneticilerini görüntüleme|✔|✔| ✔|✘|✘|✘|✔|
+|Kuruluş Yöneticileri ekleme veya kaldırma|✔|✘|✘|✘|✘|✘|✘|
+|Bildirim İlgili Kişilerini görüntüleme<sup>4</sup> |✔|✔|✔|✘|✘|✘|✔|
+|Bildirim İlgili Kişilerini ekleme veya kaldırma<sup>4</sup> |✔|✘|✘|✘|✘|✘|✘|
+|Bölümler oluşturma ve yönetme |✔|✘|✘|✘|✘|✘|✘|
+|Bölüm Yöneticilerini görüntüleme|✔|✔|✔|✔|✔|✘|✔|
+|Bölüm Yöneticileri ekleme veya kaldırma|✔|✘|✘|✔|✘|✘|✘|
+|Kayıttaki Hesapları görüntüleme |✔|✔|✔|✔<sup>5</sup>|✔<sup>5</sup>|✘|✔|
+|Kayda Hesaplar ekleme ve Hesap Sahibini değiştirme|✔|✘|✘|✔<sup>5</sup>|✘|✘|✘|
+|Rezervasyon satın alma|✔|✘|✔|✘|✘|✘|✘|
+|Abonelikler ve abonelik izinleri oluşturma ve yönetme|✘|✘|✘|✘|✘|✔|✘|
 
 - <sup>4</sup> Bildirim ilgili kişilerine Azure Kurumsal Anlaşma ile ilgili e-posta iletişimleri gönderilir.
 - <sup>5</sup> Görev, bölümünüzdeki hesaplarla sınırlıdır.
@@ -166,14 +182,14 @@ Departman yöneticisi ekleme hakkında daha fazla bilgi için bkz. [Azure EA dep
 
 ## <a name="usage-and-costs-access-by-role"></a>Role göre kullanım ve maliyet erişimi
 
-|Görevler| Kuruluş Yöneticisi|Kuruluş Yöneticisi (salt okunur)|Bölüm Yöneticisi|Bölüm Yöneticisi (salt okunur) |Hesap Sahibi| İş Ortağı|
-|---|---|---|---|---|---|---|
-|Azure Ön Ödemesini içeren kredi bakiyesini görüntüleme|✔|✔|✘|✘|✘|✔|
-|Bölüm harcaması kotalarını görüntüleme|✔|✔|✘|✘|✘|✔|
-|Bölüm harcaması kotalarını ayarlama|✔|✘|✘|✘|✘|✘|
-|Kuruluşun Kurumsal Anlaşma fiyat listesini görüntüleme|✔|✔|✘|✘|✘|✔|
-|Kullanım ve maliyet ayrıntılarını görüntüleme|✔|✔|✔<sup>6</sup>|✔<sup>6</sup>|✔<sup>7</sup>|✔|
-|Azure portalında kaynakları yönetme|✘|✘|✘|✘|✔|✘|
+|Görevler| Kuruluş Yöneticisi|Kuruluş Yöneticisi (salt okunur)|EA Satınalmacı|Bölüm Yöneticisi|Bölüm Yöneticisi (salt okunur) |Hesap Sahibi| İş Ortağı|
+|---|---|---|---|---|---|---|---|
+|Azure Ön Ödemesini içeren kredi bakiyesini görüntüleme|✔|✔|✔|✘|✘|✘|✔|
+|Bölüm harcaması kotalarını görüntüleme|✔|✔|✔|✘|✘|✘|✔|
+|Bölüm harcaması kotalarını ayarlama|✔|✘|✘|✘|✘|✘|✘|
+|Kuruluşun Kurumsal Anlaşma fiyat listesini görüntüleme|✔|✔|✔|✘|✘|✘|✔|
+|Kullanım ve maliyet ayrıntılarını görüntüleme|✔|✔|✔|✔<sup>6</sup>|✔<sup>6</sup>|✔<sup>7</sup>|✔|
+|Azure portalında kaynakları yönetme|✘|✘|✘|✘|✘|✔|✘|
 
 - <sup>6</sup> Enterprise Portal’da **DA ücretleri görüntüleme** ilkesinin Kuruluş Yöneticisi tarafından etkinleştirilmesini gerektirir. Bölüm Yöneticisi daha sonra bölüme ait maliyet ayrıntılarını görebilir.
 - <sup>7</sup> Enterprise Portal’da **AO ücretleri görüntüleme** ilkesinin Kuruluş Yöneticisi tarafından etkinleştirilmesini gerektirir. Hesap Sahibi daha sonra hesaba ait maliyet ayrıntılarını görebilir.
@@ -198,8 +214,6 @@ Aşağıdaki tabloda, Azure portalında gördüğünüz fiyatlandırma, Azure po
 |Hiçbiri|Uygulanamaz |Sahip|Perakende fiyatlandırması|
 
 Kuruluş yöneticisi rolünü ve ücretleri görüntüleme ilkelerini Enterprise portal’da ayarlarsınız. Azure rolü Azure portalında güncelleştirilebilir. Daha fazla bilgi için bkz. [Azure Portal kullanarak Azure rolleri atama](../../role-based-access-control/role-assignments-portal.md).
-
-
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -6,12 +6,12 @@ services: azure-monitor
 ms.topic: conceptual
 ms.date: 01/22/2019
 ms.author: vitalyg
-ms.openlocfilehash: a8a4f84db140ca442371cb71886bebf9214d3e43
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 444185dc41532bfa55c271e2f0027eb8b71de42f
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105026547"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105959932"
 ---
 # <a name="advanced-features-of-the-azure-metrics-explorer"></a>Azure Ölçüm Gezgini 'nin gelişmiş özellikleri
 
@@ -79,11 +79,28 @@ Farklı bir ölçüm kullanan başka bir grafik oluşturmak için **Grafik Ekle*
 
 Birden çok grafiği yeniden sıralamak veya silmek için üç nokta (**...**) düğmesini seçerek grafik menüsünü açın. Sonra **Yukarı taşı**, **aşağı taşı** veya **Sil**' i seçin.
 
-## <a name="aggregation"></a>Toplama
+## <a name="time-range-controls"></a>Zaman aralığı denetimleri
+
+Zaman aralığı [panelini](metrics-getting-started.md#select-a-time-range)kullanarak zaman aralığını değiştirmenin yanı sıra, grafik alanındaki denetimleri kullanarak da kaydırma ve yakınlaştırma yapabilirsiniz.
+### <a name="pan"></a>Kaydır
+
+Kaydırmak için grafiğin kenarından sol ve sağ oklara tıklayın.  Bu işlem, seçili zaman aralığını grafiğin zaman aralığında bir yarıya geri ve ileri taşır.  Örneğin, son 24 saati görüntülüyorsanız, sol ok simgesine tıklamak zaman aralığının bir güne ve 12 saate kadar bir süre önce geçmesine neden olur.
+
+Çoğu ölçüm 93 günlük saklama süresini destekler ancak yalnızca 30 gün boyunca görüntülemenize izin verir.  Kaydırma denetimlerini kullanarak, son 30 güne göz atın ve ardından bekletme döneminin geri kalanını görüntülemek için bir seferde 15 gün sonra kolayca geri dönebilirsiniz.
+
+![Sol ve sağ kaydırma denetimlerini gösteren animasyonlu GIF.](./media/metrics-charts/metrics-pan-controls.gif)
+
+### <a name="zoom"></a>Zoom
+
+Grafiğin bir bölümüne yakınlaştırmak için grafiğe tıklayıp sürükleyebilirsiniz.  Yakınlaştırma, grafiğin zaman aralığını seçiminize yayarak güncelleştirecek ve zaman çizgisi "otomatik" olarak ayarlandıysa daha kısa bir zaman aralığı seçer.  Yeni zaman aralığı, ölçümdeki tüm grafikler için geçerlidir.
+
+![Ölçüm yakınlaştırma özelliğinin gösterildiği animasyonlu GIF.](./media/metrics-charts/metrics-zoom-control.gif)
+
+## <a name="aggregation&quot;></a>Toplama
 
 Bir grafiğe ölçüm eklediğinizde, Ölçüm Gezgini otomatik olarak varsayılan bir toplama uygular. Varsayılan değer temel senaryolarda anlamlı hale gelir. Ancak, ölçüm hakkında daha fazla öngörü kazanmak için farklı bir toplama kullanabilirsiniz. 
 
-Bir grafikte farklı toplamalar kullanmadan önce, Ölçüm Gezgini 'nin bunları nasıl işlediğini anlamanız gerekir. Ölçümler, bir zaman dilimi boyunca yakalanan bir dizi ölçümdür (veya "ölçüm değerleri"). Bir grafiği çizerseniz, seçili ölçüm değerleri *zaman dilimi* içinde ayrı olarak toplanır. 
+Bir grafikte farklı toplamalar kullanmadan önce, Ölçüm Gezgini 'nin bunları nasıl işlediğini anlamanız gerekir. Ölçümler, bir zaman dilimi boyunca yakalanan bir dizi ölçümdür (veya &quot;ölçüm değerleri"). Bir grafiği çizerseniz, seçili ölçüm değerleri *zaman dilimi* içinde ayrı olarak toplanır. 
 
 Ölçüm Gezgini 'nin [zaman Seçicisi panelini](./metrics-getting-started.md#select-a-time-range)kullanarak zaman çizgisi boyutunu seçersiniz. Zaman aralığını açık bir şekilde seçmezseniz, şu anda seçili olan zaman aralığı varsayılan olarak kullanılır. Zaman dilimi saptandıktan sonra, her zaman grede yakalanan ölçüm değerleri grafikte toplanır ve zaman çizgisi başına bir veri noktasıdır.
 

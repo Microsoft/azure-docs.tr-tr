@@ -8,23 +8,21 @@ ms.topic: include
 ms.date: 07/08/2020
 ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: e5a811620de8336abd3e0df6d72db761ce18b2b6
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e9d7b39ce267202503b90e84e934d31501d45478
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "86230999"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107732285"
 ---
 Tüm VM boyutlarının en son nesli, konakta şifrelemeyi destekler:
 
 |Tür  |Desteklenmiyor  |Desteklenir  |
 |---------|---------|---------|
-|Genel amaçlı     | Dv3, Dav4, Dv2, AV2        | B, DSv2, Dsv3, DC, DCv2, Dasv4        |
+|Genel amaçlı     | Dv3, Dv2, AV2        | B, DSv2, Dsv3, DC, DCv2, Dav4, Dasv4, Ddv4, Ddsv4       |
 |İşlem için iyileştirilmiş     |         | Fsv2        |
-|Bellek için iyileştirilmiş     | Ev3, Eav4        | DSv2, Esv3, d, Mv2, Easv4        |
+|Bellek için iyileştirilmiş     | Ev3        | Esv3, d, Mv2, Eav4, Easv4, Edv4, Edsv4        |
 |Depolama için iyileştirilmiş     |         | Ls, Lsv2 (NVMe diskleri şifrelenmez)        |
 |GPU     | NC, NV        | NCv2, NCv3, ND, NVv3, NVv4, NDv2 (Önizleme)        |
 |Yüksek performanslı işlem     | H        | HB, HC, HBv2        |
 |Önceki nesiller     | F, A, D, L, G        | DS, GS, FS, NVv2        |
-
-VM boyutunu yükseltme, yeni VM boyutunun EncryptionAtHost özelliğini destekleyip desteklemediğini denetbir doğrulamaya neden olur.

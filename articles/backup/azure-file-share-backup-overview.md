@@ -3,12 +3,12 @@ title: Azure dosya paylaşma yedeklemesi hakkında
 description: Azure dosya paylaşımlarını kurtarma hizmetleri kasasında nasıl yedekleyeceğinizi öğrenin
 ms.topic: conceptual
 ms.date: 03/05/2020
-ms.openlocfilehash: e955df7662bd18ed1d1d4ec1f0aa6c9474c5386f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c4f9dd816ace2c9aec8f48207fbce88acf34e24a
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89378092"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107516824"
 ---
 # <a name="about-azure-file-share-backup"></a>Azure dosya paylaşma yedeklemesi hakkında
 
@@ -61,4 +61,4 @@ Azure dosya paylaşımlarını yedeklemeye yönelik ayrıntılı tahminler almak
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Azure dosya paylaşımlarını nasıl yedekleyeceğinizi](backup-afs.md) öğrenin
-* [Azure dosyalarını yedekleme hakkında soruların](backup-azure-files-faq.md) yanıtlarını bulun
+* [Azure dosyalarını yedekleme hakkında soruların](backup-azure-files-faq.yml) yanıtlarını bulun

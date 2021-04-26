@@ -3,7 +3,7 @@ title: Azure CLı kullanarak Azure DDoS koruma planı oluşturma ve yapılandır
 description: Azure CLı kullanarak DDoS koruma planı oluşturma hakkında bilgi edinin
 services: ddos-protection
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 ms.service: ddos-protection
 ms.devlang: na
 ms.topic: article
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/28/2020
 ms.author: yitoh
-ms.openlocfilehash: 59c5ca9ce9e95319b36e002da0b5d1438ef3fdd1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8a8da50dc703d59dc16b5cb6253d39aeb33fd76d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102203785"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777662"
 ---
 # <a name="quickstart-create-and-configure-azure-ddos-protection-standard-using-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak Azure DDoS koruma standardı oluşturma ve yapılandırma
 
@@ -39,7 +39,7 @@ CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu hızlı başlang
 
 Azure 'da, ilgili kaynakları bir kaynak grubuna ayırabilirsiniz. Var olan bir kaynak grubunu kullanabilir ya da yeni bir tane oluşturabilirsiniz.
 
-Bir kaynak grubu oluşturmak için [az Group Create](/cli/azure/group#az-group-create)kullanın. Bu örnekte kaynak grubumuzu _Myresourcegroup_ olarak adlandırın ve _Doğu ABD_ konumunu kullanın:
+Bir kaynak grubu oluşturmak için [az Group Create](/cli/azure/group#az_group_create)kullanın. Bu örnekte kaynak grubumuzu _Myresourcegroup_ olarak adlandırın ve _Doğu ABD_ konumunu kullanın:
 
 ```azurecli-interactive
 az group create \

@@ -5,12 +5,12 @@ ms.service: digital-twins
 ms.topic: include
 ms.date: 12/04/2020
 ms.author: baanders
-ms.openlocfilehash: d93f484e318c10489eb1db3e9c65c6e0c7479c90
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 811e59e8fd2fea1d8ee90014d4a5ea11229eec63
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98859958"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257319"
 ---
 | Filtre adı | Description | Filtre metni şeması | Desteklenen değerler | 
 | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ ms.locfileid: "98859958"
 | Veri şeması | DTDL model KIMLIĞI | `dataschema = '<model-dtmi-ID>'` | **Telemetri için**: veri şeması, ikizi veya Telemetriyi gösteren BILEŞENIN model kimliğidir. Örneğin, `dtmi:example:com:floor4;2` <br>**Bildirimler için (oluşturma/silme)**: veri şemasına, konumundaki bildirim gövdesinden erişilebilir `$body.$metadata.$model` . <br>**Bildirimler (güncelleştirme) için**: şu adreste bulunan bildirim gövdesinden veri şemasına erişilebilir: `$body.modelId`|
 | İçerik türü | Veri değerinin içerik türü | `datacontenttype = '<contentType>'` | İçerik türü `application/json` |
 | Spec sürümü | Kullandığınız olay şemasının sürümü | `specversion = '<version>'` | Sürüm olmalıdır `1.0` . Bu, CloudEvents şema sürüm 1,0 ' i gösterir |
-| Bildirim gövdesi | Bildirim alanındaki herhangi bir özelliğe başvur `data` | `$body.<property>` | Bildirim örnekleri için bkz. [*nasıl yapılır: olay verilerini anlama*](../articles/digital-twins/how-to-interpret-event-data.md) . Alanındaki herhangi bir özelliğe, `data` kullanılarak başvurulabilir `$body`
+| Bildirim gövdesi | Bildirim alanındaki herhangi bir özelliğe başvur `data` | `$body.<property>` | Bkz. kavramlar: bildirim örnekleri için [*olay bildirimleri*](../articles/digital-twins/concepts-event-notifications.md) . Alanındaki herhangi bir özelliğe, `data` kullanılarak başvurulabilir `$body`
 
 Aşağıdaki veri türleri, yukarıdaki verilere başvurular tarafından döndürülen değerler olarak desteklenir:
 

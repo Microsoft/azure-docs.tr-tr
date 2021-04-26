@@ -12,6 +12,12 @@ items:
         href: create-catalog-portal.md
       - name: Purview hesabı oluşturma - Azure PowerShell
         href: create-catalog-powershell.md
+      - name: Bir purview hesabı oluşturma-.NET SDK
+        href: create-purview-dotnet.md
+      - name: Bir purview hesabı oluşturma-Python
+        href: create-purview-python.md
+      - name: Kafka bildirimlerini yönetme-.NET
+        href: manage-kafka-dotnet.md
   - name: Öğreticiler
     items:
       - name: Başlangıç seti
@@ -71,6 +77,8 @@ items:
             href: manage-integration-runtimes.md
           - name: Bağlantı sorunlarını giderme
             href: troubleshoot-connections.md
+          - name: Kaynak kümesi model kuralları
+            href: how-to-resource-set-pattern-rules.md
           - name: Kaynaklar
             items:
               - name: Veri kaynaklarını yönetme
@@ -79,6 +87,8 @@ items:
                 href: purview-connector-overview.md
               - name: Azure çoklu kaynak
                 href: register-scan-azure-multiple-sources.md
+              - name: Azure SYNAPSE Analytics (çalışma alanı)
+                href: register-scan-synapse-workspace.md
               - name: Azure Blob Depolama
                 href: register-scan-azure-blob-storage-source.md
                 displayName: Register and scan azure blob storage
@@ -100,7 +110,7 @@ items:
               - name: Azure SQL Veritabanı Yönetilen Örneği
                 href: register-scan-azure-sql-database-managed-instance.md
                 displayName: Register and scan Azure SQL DB Managed Instance
-              - name: Azure Synapse Analytics
+              - name: Azure adanmış SQL Havuzu (eski adıyla SQL DW)
                 href: register-scan-azure-synapse-analytics.md
               - name: Şirket içinde SQL Server
                 href: register-scan-on-premises-sql-server.md
@@ -176,3 +186,11 @@ items:
         href: supported-classifications.md
       - name: ABAP Function dağıtım kılavuzu
         href: abap-functions-deployment-guide.md
+  - name: Kaynaklar
+    items:
+      - name: Özellik geri bildirimi (Kullanıcı sesi)
+        href: 'https://feedback.azure.com/forums/932437-azure-purview'
+      - name: Fiyatlandırma hesaplayıcı
+        href: 'https://azure.microsoft.com/pricing/details/azure-purview/'
+      - name: Microsoft Q&Forumu
+        href: 'https://docs.microsoft.com/answers/topics/azure-purview.html'

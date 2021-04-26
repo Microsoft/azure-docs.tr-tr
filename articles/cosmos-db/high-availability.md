@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 02/05/2021
 ms.author: mjbrown
 ms.reviewer: sngun
-ms.openlocfilehash: fd704d45aa7dc10835a205f12ce26fc01a7ea44f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ac1e77d99707cdaa34ef42eb9b327a62f4e864c0
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104584508"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107365391"
 ---
 # <a name="how-does-azure-cosmos-db-provide-high-availability"></a>Azure Cosmos DB yüksek kullanılabilirlik sağlama
 [!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
@@ -64,6 +64,9 @@ Bölgesel kesintiden nadir durumlar için Azure Cosmos DB veritabanınızın her
 * Birden fazla yazma bölgesiyle yapılandırılan çok bölgeli hesaplar, yazma ve okuma işlemleri için yüksek oranda kullanılabilir olacaktır. Bölgesel yük devretme işlemleri Azure Cosmos DB istemcisinde algılanır ve işlenir. Bunlar da anlık ve uygulamadan herhangi bir değişiklik gerektirmez.
 
 * Tek bölgeli hesaplar, bölgesel kesintiden sonraki kullanılabilirliği kaybedebilir. Her zaman yüksek kullanılabilirlik sağlamak için Azure Cosmos hesabınızla **en az iki bölge** (tercihen, en az iki yazma bölgesi) ayarlamanız önerilir.
+
+> [!IMPORTANT]
+> SQL API 'Lerini kullanırken, daha fazla kullanılabilirliği artırmak için Cosmos DB SDK 'sını belirtilen tüm okuma bölgelerini kullanacak şekilde yapılandırmak gerekir. Daha fazla bilgi için [Bu makaleye](troubleshoot-sdk-availability.md) bakın.
 
 ### <a name="multi-region-accounts-with-a-single-write-region-write-region-outage"></a>Tek bir yazma bölgesi olan çok bölgeli hesaplar (bölge kesintisi yazma)
 
@@ -145,7 +148,7 @@ Kullanılabilirlik Alanları şu şekilde etkinleştirilebilir:
 
 * Küresel olarak dağıtılmış bir veritabanı ortamında, bölge genelinde bir kesinti olması durumunda tutarlılık düzeyi ve veri dayanıklılığı arasında doğrudan bir ilişki vardır. İş sürekliliği planınızı geliştirirken, kesintiye uğratan bir olaydan sonra uygulamanın tam olarak kurtarmadan önce kabul edilebilir en uzun süreyi anlamanız gerekir. Uygulamanın tam olarak kurtarılması için gereken süre, kurtarma zamanı hedefi (RTO) olarak bilinir. Ayrıca, uygulamanın, kesintiye uğratan bir olaydan sonra kurtarılırken kabul edebildiği en son veri güncelleştirme süresini de anlamanız gerekir. Kaybetmeyi göze alabileceğiniz güncelleştirme süresi kurtarma noktası hedefini (RPO) olarak bilinir. RPO ve RTO Azure Cosmos DB için bkz. [tutarlılık düzeyleri ve veri dayanıklılığı](./consistency-levels.md#rto)
 
-## <a name="what-to-expect-during-a-region-outage"></a>Bir bölge kesintisi sırasında beklenmeniz gerekenler
+## <a name="what-to-expect-during-a-cosmos-db-region-outage"></a>Cosmos DB bölge kesintisi sırasında beklenmeniz gerekenler
 
 Tek bölgeli hesaplar için istemciler okuma ve yazma kullanılabilirliği kaybına neden olur.
 
@@ -153,9 +156,9 @@ Tek bölgeli hesaplar için istemciler okuma ve yazma kullanılabilirliği kayb�
 
 | Yazma bölgeleri | Otomatik yük devretme | Beklentiler | Ne yapılmalı |
 | -- | -- | -- | -- |
-| Tek bir yazma bölgesi | Etkin değil | Okuma bölgesinde kesinti olması durumunda tüm istemciler diğer bölgelere yeniden yönlendirilir. Okuma veya yazma kullanılabilirlik kaybı yok. Veri kaybı yok. <p/> Yazma bölgesinde bir kesinti olması durumunda, istemciler yazma kullanılabilirliği kaybıyla karşılaşacaktır. Veri kaybı, seçilen uyumluluk düzeyine göre değişir. <p/> Cosmos DB, kesinti sona erdiğinde otomatik olarak yazma kullanılabilirliği geri yüklenir. | Kesinti sırasında, okuma trafiğini desteklemek için kalan bölgelerde yeterli sayıda kapasite sağlandığından emin olun. <p/> Kesinti sırasında el ile yük devretmeyi tetiklemeyin, çünkü *başarılı olmayacaktır.* <p/> Kesinti tamamlandığında, sağlanan kapasiteyi uygun şekilde yeniden ayarlayın. |
-| Tek bir yazma bölgesi | Etkin | Okuma bölgesinde kesinti olması durumunda tüm istemciler diğer bölgelere yeniden yönlendirilir. Okuma veya yazma kullanılabilirlik kaybı yok. Veri kaybı yok. <p/> Yazma bölgesinde bir kesinti olması durumunda, istemciler yeni bir bölgeyi tercihlerinize göre yeni yazma bölgesi olarak otomatik olarak eleyenene kadar Cosmos DB, yazma kullanılabilirlik kaybına neden olur. Veri kaybı, seçilen uyumluluk düzeyine göre değişir. | Kesinti sırasında, okuma trafiğini desteklemek için kalan bölgelerde yeterli sayıda kapasite sağlandığından emin olun. <p/> Kesinti sırasında el ile yük devretmeyi tetiklemeyin, çünkü *başarılı olmayacaktır.* <p/> Kesinti yük devretildiğinde, [Çakışma akışınızdan](how-to-manage-conflicts.md#read-from-conflict-feed)başarısız olan bölgede çoğaltılan olmayan verileri kurtarabilir, yazma bölgesini özgün bölgeye geri taşıyabilir ve sağlanan kapasiteyi uygun şekilde yeniden ayarlayabilirsiniz. |
-| Birden çok yazma bölgesi | Uygulanamaz | Okuma veya yazma kullanılabilirlik kaybı yok. <p/> Tutarlılık düzeyine göre veri kaybı seçildi. | Kesinti sırasında, ek trafiği desteklemek için kalan bölgelerde yeterli sayıda kapasite sağlandığından emin olun. <p/> Kesinti yük devretildiğinde, [Çakışma akışınızdan](how-to-manage-conflicts.md#read-from-conflict-feed) başarısız olan bölgede çoğaltılan olmayan verileri kurtarabilir ve sağlanan kapasiteyi uygun şekilde yeniden ayarlayabilirsiniz. |
+| Tek bir yazma bölgesi | Etkin değil | Okuma bölgesinde kesinti olması durumunda tüm istemciler diğer bölgelere yeniden yönlendirilir. Okuma veya yazma kullanılabilirlik kaybı yok. Veri kaybı yok. <p/> Yazma bölgesinde bir kesinti olması durumunda, istemciler yazma kullanılabilirliği kaybıyla karşılaşacaktır. Güçlü tutarlılık düzeyi seçilmezse, bazı veriler kalan etkin bölgelere çoğaltılmayabilir. Bu, [Bu bölümde](consistency-levels.md#rto)açıklandığı gibi seçili olan tutarlılık düzeyine bağlıdır. Etkilenen bölge kalıcı veri kaybını içeriyorsa, çoğaltılan veriler kaybolabilir. <p/> Cosmos DB, kesinti sona erdiğinde otomatik olarak yazma kullanılabilirliği geri yüklenir. | Kesinti sırasında, kalan bölgelerde okuma trafiğini desteklemek için yeterli sayıda sağlanan RUs olduğundan emin olun. <p/> Kesinti sırasında el ile yük devretmeyi tetiklemeyin, çünkü *başarılı olmayacaktır.* <p/> Kesinti tamamlandığında, sağlanan RUs 'yi uygun şekilde yeniden ayarlayın. |
+| Tek bir yazma bölgesi | Etkin | Okuma bölgesinde kesinti olması durumunda tüm istemciler diğer bölgelere yeniden yönlendirilir. Okuma veya yazma kullanılabilirlik kaybı yok. Veri kaybı yok. <p/> Yazma bölgesinde bir kesinti olması durumunda, istemciler yeni bir bölgeyi tercihlerinize göre yeni yazma bölgesi olarak otomatik olarak eleyenene kadar Cosmos DB, yazma kullanılabilirlik kaybına neden olur. Güçlü tutarlılık düzeyi seçilmezse, bazı veriler kalan etkin bölgelere çoğaltılmayabilir. Bu, [Bu bölümde](consistency-levels.md#rto)açıklandığı gibi seçili olan tutarlılık düzeyine bağlıdır. Etkilenen bölge kalıcı veri kaybını içeriyorsa, çoğaltılan veriler kaybolabilir. | Kesinti sırasında, kalan bölgelerde okuma trafiğini desteklemek için yeterli sayıda sağlanan RUs olduğundan emin olun. <p/> Kesinti sırasında el ile yük devretmeyi tetiklemeyin, çünkü *başarılı olmayacaktır.* <p/> Kesinti üzerindeyken, yazma bölgesini özgün bölgeye geri taşıyabilir ve sağlanan RUs 'yi uygun şekilde yeniden ayarlayabilirsiniz. SQL API 'Leri kullanan hesaplar, [Çakışma akışınızdan](how-to-manage-conflicts.md#read-from-conflict-feed)başarısız olan bölgedeki çoğaltılmayan verileri de kurtarabilir. |
+| Birden çok yazma bölgesi | Uygulanamaz | Okuma veya yazma kullanılabilirlik kaybı yok. <p/> Hatalı bölgedeki son güncellenen veriler, kalan etkin bölgelerde korumasız olabilir. Nihai, tutarlı ön ek ve oturum tutarlılığı düzeyleri, <15dakikalık bir şekilde garanti garantisi. Sınırlanmış Eskime durumu, yapılandırmaya bağlı olarak, K güncelleştirme veya T saniyeden daha azını garanti eder. Etkilenen bölge kalıcı veri kaybını içeriyorsa, çoğaltılan veriler kaybolabilir. | Kesinti sırasında, ek trafiği desteklemek için kalan bölgelerde yeterli sayıda sağlanan RUs bulunduğundan emin olun. <p/> Kesinti tamamlandığında, sağlanan RUs 'yi uygun şekilde yeniden ayarlayabilirsiniz. Mümkünse Cosmos DB, SQL API hesapları için yapılandırılmış çakışma çözümü yöntemini kullanarak, başarısız olan bölgedeki çoğaltılmamış verileri otomatik olarak kurtarabilir ve diğer API 'Leri kullanarak hesaplar için WINS 'i son kez yazar. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -4,20 +4,17 @@ description: Azure Cosmos DB hesabınız için müşteri tarafından yönetilen 
 author: ThomasWeiss
 ms.service: cosmos-db
 ms.topic: how-to
-ms.date: 02/19/2021
+ms.date: 04/01/2021
 ms.author: thweiss
-ms.openlocfilehash: 3ee566a598ea7fdf060712c934305ef63467e548
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1b1fc0b51c1cd2a99ec97bec9f588699a893ceca
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101656525"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106222631"
 ---
 # <a name="configure-customer-managed-keys-for-your-azure-cosmos-account-with-azure-key-vault"></a>Azure Key Vault ile Azure Cosmos hesabınız için müşteri tarafından yönetilen anahtarları yapılandırma
 [!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
-
-> [!NOTE]
-> Azure Cosmos DB [analitik depo](analytical-store-introduction.md) ile müşteri tarafından yönetilen anahtarların kullanılması şu anda hesabınızda ek yapılandırma gerektirir. Ayrıntılar için lütfen iletişim kurun [azurecosmosdbcmk@service.microsoft.com](mailto:azurecosmosdbcmk@service.microsoft.com) .
 
 Azure Cosmos hesabınızda depolanan veriler, Microsoft tarafından yönetilen anahtarlarla otomatik olarak ve sorunsuz bir şekilde şifrelenir (**hizmet tarafından yönetilen anahtarlar**). İsteğe bağlı olarak, yönettiğiniz anahtarlarla ikinci bir şifreleme katmanı eklemeyi tercih edebilirsiniz (**müşteri tarafından yönetilen anahtarlar**).
 
@@ -51,7 +48,7 @@ Mevcut bir Azure Key Vault örneğini kullanıyorsanız, Azure portal **Özellik
 - [PowerShell ile geçici silmeyi kullanma](../key-vault/general/key-vault-recovery.md)
 - [Azure CLı ile geçici silme kullanma](../key-vault/general/key-vault-recovery.md)
 
-## <a name="add-an-access-policy-to-your-azure-key-vault-instance"></a>Azure Key Vault örneğine bir erişim ilkesi ekleme
+## <a name="add-an-access-policy-to-your-azure-key-vault-instance"></a><a id="add-access-policy"></a> Azure Key Vault örneğine bir erişim ilkesi ekleme
 
 1. Azure portal, şifreleme anahtarlarınızı barındırmak için kullanmayı planladığınız Azure Key Vault örneğine gidin. Sol menüden **erişim ilkeleri** ' ni seçin:
 
@@ -63,7 +60,14 @@ Mevcut bir Azure Key Vault örneğini kullanıyorsanız, Azure portal **Özellik
 
    :::image type="content" source="./media/how-to-setup-cmk/portal-akv-add-ap-perm2.png" alt-text="Doğru izinleri seçme":::
 
-1. **Asıl seçin** altında **hiçbiri seçili**' i seçin. Ardından, **Azure Cosmos DB** sorumlusu arayıp seçin (bulmayı kolaylaştırmak için, asıl kimliğin `a232010e-820c-4083-83bb-3ace5fc29d0b` bulunduğu Azure Kamu bölgeleri dışında herhangi bir Azure BÖLGESI için sorumlu kimliğe göre de arama yapabilirsiniz `57506a73-e302-42a9-b869-6f12d9ec29e9` ). Son olarak, en altta **Seç** ' i seçin. **Azure Cosmos DB** sorumlusu listede yoksa, bu makalenin [kaynak sağlayıcısını kaydetme](#register-resource-provider) bölümünde açıklandığı gibi **Microsoft.Documentdb** kaynak sağlayıcısını yeniden kaydetmeniz gerekebilir.
+1. **Asıl seçin** altında **hiçbiri seçili**' i seçin.
+
+1. **Azure Cosmos DB** sorumlusu arayıp seçin (bulmayı kolaylaştırmak için asıl kimliğe göre de arama yapın, `a232010e-820c-4083-83bb-3ace5fc29d0b` birincil kimliğin bulunduğu Azure Kamu bölgeleri dışında herhangi bir Azure bölgesi için `57506a73-e302-42a9-b869-6f12d9ec29e9` ). **Azure Cosmos DB** sorumlusu listede yoksa, bu makalenin [kaynak sağlayıcısını kaydetme](#register-resource-provider) bölümünde açıklandığı gibi **Microsoft.Documentdb** kaynak sağlayıcısını yeniden kaydetmeniz gerekebilir.
+
+   > [!NOTE]
+   > Bu, Azure Cosmos DB ilk taraf kimliği Azure Key Vault erişim ilkenize kaydeder. Bu birinci taraf kimliğini Azure Cosmos DB hesabı yönetilen Kimliğiniz ile değiştirmek için, bkz. [Azure Key Vault erişim ilkesinde yönetilen kimlik kullanma](#using-managed-identity).
+
+1. En altta **Seç ' i** seçin. 
 
    :::image type="content" source="./media/how-to-setup-cmk/portal-akv-add-ap.png" alt-text="Azure Cosmos DB sorumlusu seçin":::
 
@@ -226,6 +230,34 @@ az cosmosdb show \
     --query keyVaultKeyUri
 ```
 
+## <a name="using-a-managed-identity-in-the-azure-key-vault-access-policy"></a><a id="using-managed-identity"></a> Azure Key Vault erişim ilkesinde yönetilen bir kimlik kullanma
+
+Bu erişim ilkesi, şifreleme anahtarlarınızın Azure Cosmos DB hesabınız tarafından erişilebilir olmasını sağlar. Bu, belirli bir Azure Active Directory (AD) kimliğine erişim verilerek yapılır. İki tür kimlik desteklenir:
+
+- Azure Cosmos DB, Azure Cosmos DB hizmetine erişim vermek için ilk taraf kimliği kullanılabilir.
+- Azure Cosmos DB hesabınızın [yönetilen kimliği](how-to-setup-managed-identity.md) , hesabınıza özel olarak erişim sağlamak için kullanılabilir.
+
+Sistem tarafından atanan bir yönetilen kimlik yalnızca Hesabınız oluşturulduktan sonra alınabileceğinden, [yukarıda](#add-access-policy)açıklandığı gibi öncelikle ilk taraf kimliği kullanarak hesabınızı oluşturmanız gerekir. Ardından:
+
+1. Bu işlem, hesap oluşturma sırasında yapılmadıysa, hesabınızda [sistem tarafından atanan bir yönetilen kimliği etkinleştirin](how-to-setup-managed-identity.md) ve atanan ' yi kopyalayın `principalId` .
+
+1. [Yukarıda](#add-access-policy)açıklandığı gibi Azure Key Vault hesabınıza yeni bir erişim ilkesi ekleyin, ancak `principalId` Azure Cosmos DB birinci taraf kimliği yerine önceki adımda kopyaladığınız şekilde kullanın.
+
+1. Azure Key Vault içindeki şifreleme Anahtarlarınıza erişirken sistem tarafından atanan yönetilen kimliği kullanmak istediğinizi belirtmek için Azure Cosmos DB Hesabınızı güncelleştirin. Bunu, hesabınızın Azure Resource Manager şablonunda bu özelliği belirterek yapabilirsiniz:
+
+   ```json
+   {
+       "type": " Microsoft.DocumentDB/databaseAccounts",
+       "properties": {
+           "defaultIdentity": "SystemAssignedIdentity",
+           // ...
+       },
+       // ...
+   }
+   ```
+
+1. İsteğe bağlı olarak, Azure Key Vault erişim ilkenizde Azure Cosmos DB birinci taraf kimliğini kaldırabilirsiniz.
+
 ## <a name="key-rotation"></a>Anahtar döndürme
 
 Azure Cosmos hesabınız tarafından kullanılan müşteri tarafından yönetilen anahtarı döndürmek, iki şekilde yapılabilir.
@@ -297,7 +329,7 @@ Bu özellik şu anda yalnızca yeni hesaplar için kullanılabilir.
 
 ### <a name="is-it-possible-to-use-customer-managed-keys-in-conjunction-with-the-azure-cosmos-db-analytical-store"></a>Azure Cosmos DB [analitik deposuyla](analytical-store-introduction.md)birlikte müşteri tarafından yönetilen anahtarların kullanılması mümkün mü?
 
-Evet, ancak şu anda hesabınızda ek yapılandırma gerekiyor. Ayrıntılar için lütfen iletişim kurun [azurecosmosdbcmk@service.microsoft.com](mailto:azurecosmosdbcmk@service.microsoft.com) .
+Evet, ancak analitik depoyu etkinleştirmeden önce Azure Key Vault erişim ilkenizde [Azure Cosmos DB hesabının yönetilen kimliğini kullanmanız](#using-managed-identity) gerekir.
 
 ### <a name="is-there-a-plan-to-support-finer-granularity-than-account-level-keys"></a>Hesap düzeyi anahtarlardan daha ince ayrıntı düzeyi desteklemeye yönelik bir plan var mı?
 

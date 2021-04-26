@@ -11,12 +11,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 03/12/2019
-ms.openlocfilehash: cf100861705bf1654b7206445c884b5fe315b06d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 148b24aea42072f1901c76c7a09a126340ef9951
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92792642"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784380"
 ---
 # <a name="managed-api-reference-for-azure-sql-managed-instance"></a>Azure SQL Yönetilen Örneği için Yönetilen API başvurusu
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -60,18 +60,18 @@ Azure PowerShell ile yönetilen örnekler oluşturup yönetmek için aşağıdak
 
 | Cmdlet | Açıklama |
 | --- | --- |
-|[az SQL mı oluştur](/cli/azure/sql/mi#az-sql-mi-create) |Yönetilen bir örnek oluşturur.|
-|[az SQL mı listesi](/cli/azure/sql/mi#az-sql-mi-list)|Kullanılabilir yönetilen örnekleri listeler.|
-|[az SQL mı Show](/cli/azure/sql/mi#az-sql-mi-show)|Yönetilen bir örnek için ayrıntıları alır.|
-|[az SQL mı güncelleştirmesi](/cli/azure/sql/mi#az-sql-mi-update)|Yönetilen bir örneği güncelleştirir.|
-|[az SQL mi Delete](/cli/azure/sql/mi#az-sql-mi-delete)|Yönetilen bir örneği kaldırır.|
+|[az SQL mı oluştur](/cli/azure/sql/mi#az_sql_mi_create) |Yönetilen bir örnek oluşturur.|
+|[az SQL mı listesi](/cli/azure/sql/mi#az_sql_mi_list)|Kullanılabilir yönetilen örnekleri listeler.|
+|[az SQL mı Show](/cli/azure/sql/mi#az_sql_mi_show)|Yönetilen bir örnek için ayrıntıları alır.|
+|[az SQL mı güncelleştirmesi](/cli/azure/sql/mi#az_sql_mi_update)|Yönetilen bir örneği güncelleştirir.|
+|[az SQL mi Delete](/cli/azure/sql/mi#az_sql_mi_delete)|Yönetilen bir örneği kaldırır.|
 |[az SQL mı op List](/cli/azure/sql/mi/op#az_sql_mi_op_list)|Yönetilen örnek üzerinde gerçekleştirilen yönetim işlemlerinin bir listesini alır.|
 |[az SQL mı op Show](/cli/azure/sql/mi/op#az_sql_mi_op_show)|Yönetilen örnek üzerinde gerçekleştirilen belirli yönetim işlemini alır.|
 |[az SQL mı op Cancel](/cli/azure/sql/mi/op#az_sql_mi_op_cancel)|Yönetilen örnekte gerçekleştirilen belirli yönetim işlemini iptal eder.|
-|[az SQL mıdb Create](/cli/azure/sql/midb#az-sql-midb-create) |Yönetilen bir veritabanı oluşturur.|
-|[az SQL mıdb List](/cli/azure/sql/midb#az-sql-midb-list)|Kullanılabilir yönetilen veritabanlarını listeler.|
-|[az SQL mıdb restore](/cli/azure/sql/midb#az-sql-midb-restore)|Yönetilen bir veritabanını geri yükler.|
-|[az SQL mıdb Delete](/cli/azure/sql/midb#az-sql-midb-delete)|Yönetilen bir veritabanını kaldırır.|
+|[az SQL mıdb Create](/cli/azure/sql/midb#az_sql_midb_create) |Yönetilen bir veritabanı oluşturur.|
+|[az SQL mıdb List](/cli/azure/sql/midb#az_sql_midb_list)|Kullanılabilir yönetilen veritabanlarını listeler.|
+|[az SQL mıdb restore](/cli/azure/sql/midb#az_sql_midb_restore)|Yönetilen bir veritabanını geri yükler.|
+|[az SQL mıdb Delete](/cli/azure/sql/midb#az_sql_midb_delete)|Yönetilen bir veritabanını kaldırır.|
 
 ## <a name="transact-sql-create-and-configure-instance-databases"></a>Transact-SQL: örnek veritabanları oluşturma ve yapılandırma
 

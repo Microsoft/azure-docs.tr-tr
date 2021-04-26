@@ -3,16 +3,18 @@ title: 'Hızlı başlangıç: ExpressRoute ile devre oluşturma ve değiştirme 
 description: Bu hızlı başlangıçta, Azure portal kullanarak bir ExpressRoute bağlantı hattı oluşturma, sağlama, doğrulama, güncelleştirme, silme ve sağlamayı kaldırma hakkında bilgi edineceksiniz.
 services: expressroute
 author: duongau
-ms.service: expressroute
-ms.topic: quickstart
-ms.date: 10/21/2020
 ms.author: duau
-ms.openlocfilehash: b0fd844021e7398e061072d7939b782616580c1c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 10/21/2020
+ms.topic: quickstart
+ms.service: expressroute
+ms.custom:
+- mode-portal
+ms.openlocfilehash: f62b60a9c33cd1b813b8f3307ec82d4242be168b
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96185207"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107534804"
 ---
 # <a name="quickstart-create-and-modify-an-expressroute-circuit"></a>Hızlı başlangıç: ExpressRoute bağlantı hattı oluşturma ve değiştirme
 

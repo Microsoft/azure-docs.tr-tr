@@ -4,13 +4,13 @@ description: LUSıS uygulamanızın modelinden en iyi sonuçları elde etmek iç
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 05/17/2020
-ms.openlocfilehash: 2f6ed85416cc5d7c3c2baba2b2cfe489e301d7e5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/13/2021
+ms.openlocfilehash: d5fa2a1e865a4f54de268e7ad756d1d4363f3b78
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98788494"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107500218"
 ---
 # <a name="best-practices-for-building-a-language-understanding-luis-app"></a>Dil anlama (LUSıS) uygulaması oluşturmak için en iyi uygulamalar
 LUSıS uygulamanızı derlemek için uygulama yazma işlemini kullanın:
@@ -81,7 +81,7 @@ Makine tarafından öğrenilen varlıklar uygulamanıza uyarlanmış ve etiketle
 
 Makine tarafından öğrenilen varlıklar, diğer varlıkları özellikler olarak kullanabilir. Bu diğer varlıklar, normal ifade varlıkları veya liste varlıkları gibi özel varlıklar olabilir veya önceden oluşturulmuş varlıkları özellik olarak kullanabilirsiniz.
 
-[Etkin makine tarafından öğrenilen varlıklar](luis-concept-entity-types.md#effective-machine-learned-entities)hakkında bilgi edinin.
+[Etkin makine tarafından öğrenilen varlıklar](luis-concept-entity-types.md#machine-learned-ml-entity)hakkında bilgi edinin.
 
 <a name="#do-build-the-app-iteratively"></a>
 

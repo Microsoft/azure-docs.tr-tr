@@ -4,12 +4,12 @@ description: Bu makalede, Azure Event Grid konular veya etki alanı için özel 
 ms.topic: how-to
 ms.date: 11/18/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: f8a9ac46596b1c2611ce9df387ac995e8149e7b9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 85546e99a8c431dc75b1af3d5044e06a18cf226d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102425354"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107770516"
 ---
 # <a name="configure-private-endpoints-for-azure-event-grid-topics-or-domains"></a>Azure Event Grid konuları veya etki alanları için özel uç noktaları yapılandırma
 [Özel uç noktaları](../private-link/private-endpoint-overview.md) kullanarak doğrudan sanal ağınızdan, genel İnternet üzerinden geçmeden [özel bir bağlantı](../private-link/private-link-overview.md) üzerinden konulara ve etki alanlarına olay girişi sağlayabilirsiniz. Özel uç nokta, konu veya etki alanınız için VNet adres alanından bir IP adresi kullanır. Daha fazla kavramsal bilgi için bkz. [ağ güvenliği](network-security.md).
@@ -121,7 +121,7 @@ Bekleyen durumunda veya onaylanan durumunda olan özel bir uç noktayı reddedeb
 
 
 ## <a name="use-azure-cli"></a>Azure CLI kullanma
-Özel bir uç nokta oluşturmak için, aşağıdaki örnekte gösterildiği gibi [az Network Private-ENDPOINT Create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-create) metodunu kullanın:
+Özel bir uç nokta oluşturmak için, aşağıdaki örnekte gösterildiği gibi [az Network Private-ENDPOINT Create](/cli/azure/network/private-endpoint?#az_network_private_endpoint_create) metodunu kullanın:
 
 ```azurecli-interactive
 az network private-endpoint create \
@@ -135,12 +135,12 @@ az network private-endpoint create \
     --group-ids topic
 ```
 
-Örnekte kullanılan parametrelerin açıklamaları için, [az Network Private-Endpoint Create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-create)için belgeler bölümüne bakın. Bu örnekte birkaç noktaya göz önünde bulunmaktadır: 
+Örnekte kullanılan parametrelerin açıklamaları için, [az Network Private-Endpoint Create](/cli/azure/network/private-endpoint?#az_network_private_endpoint_create)için belgeler bölümüne bakın. Bu örnekte birkaç noktaya göz önünde bulunmaktadır: 
 
 - İçin `private-connection-resource-id` , **konunun** veya **etki alanının** kaynak kimliğini belirtin. Yukarıdaki örnek, türü: konusunu kullanır.
 - için `group-ids` , `topic` veya belirtin `domain` . Yukarıdaki örnekte `topic` kullanılır. 
 
-Özel bir uç noktayı silmek için, aşağıdaki örnekte gösterildiği gibi [az Network Private-Endpoint Delete](/cli/azure/network/private-endpoint?#az-network-private-endpoint-delete) metodunu kullanın:
+Özel bir uç noktayı silmek için, aşağıdaki örnekte gösterildiği gibi [az Network Private-Endpoint Delete](/cli/azure/network/private-endpoint?#az_network_private_endpoint_delete) metodunu kullanın:
 
 ```azurecli-interactive
 az network private-endpoint delete --resource-group <RESOURECE GROUP NAME> --name <PRIVATE ENDPOINT NAME>
@@ -165,7 +165,7 @@ az extension add -n eventgrid
 ```
 
 ### <a name="create-a-private-endpoint"></a>Özel uç nokta oluşturma
-Özel bir uç nokta oluşturmak için, aşağıdaki örnekte gösterildiği gibi [az Network Private-ENDPOINT Create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-create) metodunu kullanın:
+Özel bir uç nokta oluşturmak için, aşağıdaki örnekte gösterildiği gibi [az Network Private-ENDPOINT Create](/cli/azure/network/private-endpoint?#az_network_private_endpoint_create) metodunu kullanın:
 
 ```azurecli-interactive
 az network private-endpoint create \
@@ -179,12 +179,12 @@ az network private-endpoint create \
     --group-ids topic
 ```
 
-Örnekte kullanılan parametrelerin açıklamaları için, [az Network Private-Endpoint Create](/cli/azure/network/private-endpoint?#az-network-private-endpoint-create)için belgeler bölümüne bakın. Bu örnekte birkaç noktaya göz önünde bulunmaktadır: 
+Örnekte kullanılan parametrelerin açıklamaları için, [az Network Private-Endpoint Create](/cli/azure/network/private-endpoint?#az_network_private_endpoint_create)için belgeler bölümüne bakın. Bu örnekte birkaç noktaya göz önünde bulunmaktadır: 
 
 - İçin `private-connection-resource-id` , **konunun** veya **etki alanının** kaynak kimliğini belirtin. Yukarıdaki örnek, türü: konusunu kullanır.
 - için `group-ids` , `topic` veya belirtin `domain` . Yukarıdaki örnekte `topic` kullanılır. 
 
-Özel bir uç noktayı silmek için, aşağıdaki örnekte gösterildiği gibi [az Network Private-Endpoint Delete](/cli/azure/network/private-endpoint?#az-network-private-endpoint-delete) metodunu kullanın:
+Özel bir uç noktayı silmek için, aşağıdaki örnekte gösterildiği gibi [az Network Private-Endpoint Delete](/cli/azure/network/private-endpoint?#az_network_private_endpoint_delete) metodunu kullanın:
 
 ```azurecli-interactive
 az network private-endpoint delete --resource-group <RESOURECE GROUP NAME> --name <PRIVATE ENDPOINT NAME>

@@ -11,12 +11,12 @@ ms.topic: include
 ms.date: 10/16/2020
 ms.custom: devx-track-java, cog-serv-seo-aug-2020
 ms.author: pafarley
-ms.openlocfilehash: d1574d9728036bac393cbecb37e2097be6ef90e7
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 76d62806541e0a3186cd17712b7af3930d9ccf9f
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105105243"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107726169"
 ---
 Java için Azure Content Moderator istemci kitaplığı 'nı kullanmaya başlayın. Maven paketini yüklemek için bu adımları izleyin ve temel görevler için örnek kodu deneyin. 
 
@@ -58,7 +58,7 @@ Bir **DSL** seçmeniz Istendiğinde, **Kotlin**' ı seçin.
 
 ## <a name="install-the-client-library"></a>İstemci kitaplığını yükler
 
-*Build. Gradle. kts* ' i bulun ve tercıh ettiğiniz IDE veya metin düzenleyicinizle açın. Ardından aşağıdaki derleme yapılandırması içine kopyalayın. Bu yapılandırma, bir Java uygulaması olarak projeyi, giriş noktası **Contentmoderatorhızlı başlangıç** sınıfı olan bir Java uygulaması olarak tanımlar. Content Moderator istemci kitaplığının yanı sıra, JSON serileştirmesi için GSON SDK 'yı içeri aktarır.
+*Build. Gradle. kts* ' i bulun ve tercıh ettiğiniz IDE veya metin düzenleyicinizle açın. Ardından aşağıdaki derleme yapılandırması içine kopyalayın. Bu yapılandırma, bir Java uygulaması olarak projeyi, giriş noktası **Contentmoderatorhızlı başlangıç** sınıfı olan bir Java uygulaması olarak tanımlar. JSON serileştirme için Content Moderator istemci kitaplığı ve GSON SDK 'sini içeri aktarır.
 
 ```kotlin
 plugins {
@@ -105,7 +105,7 @@ Uygulamanın **Contentmoderatorquickstart** sınıfında, kaynağınızın anaht
 >
 > İşiniz bittiğinde kodu koddan kaldırmayı unutmayın ve hiçbir zaman herkese açık bir şekilde nakletmeyin. Üretim için, kimlik bilgilerinizi depolamak ve bunlara erişmek için güvenli bir yol kullanmayı düşünün. Daha fazla bilgi için bilişsel Hizmetler [güvenlik](../../../cognitive-services-security.md) makalesine bakın.
 
-Uygulamanın **Main** yönteminde, bu hızlı başlangıçta kullanılan yöntemlere çağrılar ekleyin. Bunları daha sonra tanımlayacaksınız.
+Uygulamanın **Main** yönteminde, bu hızlı başlangıçta kullanılan yöntemlere çağrılar ekleyin. Bu yöntemleri daha sonra tanımlayacaksınız.
 
 [!code-java[](~/cognitive-services-quickstart-code/java/ContentModerator/src/main/java/ContentModeratorQuickstart.java?name=snippet_maincalls)]
 

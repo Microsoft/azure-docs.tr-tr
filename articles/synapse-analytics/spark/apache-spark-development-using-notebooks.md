@@ -10,12 +10,12 @@ ms.date: 10/19/2020
 ms.author: ruxu
 ms.reviewer: ''
 ms.custom: devx-track-python
-ms.openlocfilehash: c5dfd442bb52a5b1d319bd0a40b656d549134e7e
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: c28bc47945882e6b7bbd39d1ba8524a1f7491ceb
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105612334"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107835226"
 ---
 # <a name="create-develop-and-maintain-synapse-studio-notebooks-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te SYNAPSE Studio Not defterleri oluşturma, geliştirme ve bakımını yapma
 
@@ -40,7 +40,6 @@ SYNAPSE ekibi, Microsoft müşterileri için tutarlı Not defteri deneyimi sağl
 |Yük yüzdesi| Desteklenmez |&#9745;|
 |%% HTML| Desteklenmez |&#9745;|
 |Hücreyi taşımak için sürükle ve bırak| Desteklenmez |&#9745;|
-|Kalıcı görüntü () çıkışı|&#9745;| Kullanılamaz |
 |Araç çubuğu düğmeleriyle metin hücresini Biçimlendir|&#9745;| Kullanılamaz |
 |Hücre işlemini geri al| &#9745;| Kullanılamaz |
 
@@ -112,7 +111,7 @@ Aşağıdaki görüntü, bir **Spark (Scala)** not defterinde%% **pyspark** Magi
 
    ![SYNAPSE Spark Magic komutları](./media/apache-spark-development-using-notebooks/synapse-spark-magics.png)
 
-### <a name="use-temp-tables-to-reference-data-across-languages"></a>Diller arasında verilere başvurmak için geçici tabloları kullanma
+### <a name="use-temp-tables-to-reference-data-across-languages&quot;></a>Diller arasında verilere başvurmak için geçici tabloları kullanma
 
 Bir Synapse Studio not defterindeki farklı dillerdeki verilere veya değişkenlere doğrudan başvurulamıyor. Spark 'ta, diller arasında geçici bir tabloya başvuru yapılabilir. Bir `Scala` `PySpark` `SparkSQL` geçici çözüm olarak Spark geçici tablosunu kullanarak ve ' de bir veri çerçevesinin nasıl okunmasına ilişkin bir örnek aşağıda verilmiştir.
 
@@ -120,7 +119,7 @@ Bir Synapse Studio not defterindeki farklı dillerdeki verilere veya değişkenl
 
    ```scala
    %%scala
-   val scalaDataFrame = spark.read.sqlanalytics("mySQLPoolDatabase.dbo.mySQLPoolTable")
+   val scalaDataFrame = spark.read.sqlanalytics(&quot;mySQLPoolDatabase.dbo.mySQLPoolTable")
    scalaDataFrame.createOrReplaceTempView( "mydataframetable" )
    ```
 
@@ -150,6 +149,18 @@ IntelliSense özellikleri farklı diller için farklı ölçü düzeyleridir. De
 |Spark (Scala)|Yes|Yes|Yes|Yes|-|-|-|Yes|
 |Mini SQL|Yes|Yes|-|-|-|-|-|-|
 |Spark için .NET (C#)|Yes|-|-|-|-|-|-|-|
+
+
+
+### <a name="code-snippets"></a>Kod Parçacıkları
+
+Azure SYNAPSE Studio Not defterleri, Spark oturumunuzu yapılandırma, verileri Spark veri çerçevesi olarak okuma veya Matplotlib gibi grafikleri çizme gibi yaygın olarak kullanılan kod düzenlerini girmeyi kolaylaştıran kod parçacıkları sağlar.
+
+Kod parçacıkları [IntelliSense](#ide-style-intellisense) 'de diğer önerilerden karışık olarak görünür. Kod parçacıkları içerikleri, kod hücresi diliyle hizalanır. Kod hücresi düzenleyicisindeki kod parçacığı başlığında bir kod **parçacığı** yazarak veya herhangi bir anahtar sözcük görünürse, kullanılabilir parçacıkları görebilirsiniz. Örneğin, **okuma** yazarak çeşitli veri kaynaklarından veri okumak için kod parçacıklarının listesini görebilirsiniz.
+
+![SYNAPSE kod parçacıkları](./media/apache-spark-development-using-notebooks/synapse-code-snippets.gif#lightbox)
+
+
 
 ### <a name="format-text-cell-with-toolbar-buttons"></a>Araç çubuğu düğmeleriyle metin hücresini Biçimlendir
 
@@ -182,7 +193,7 @@ Geri alma işlemi, henüz önizleme Not defteri deneyimi için kullanılamaz.
 
 # <a name="classical-notebook"></a>[Klasik Not defteri](#tab/classical)
 
-En sağdaki Ek hücre eylemleri menüsüne erişmek için üç nokta (...) simgesini seçin. Ardından, geçerli hücreyi taşımak için **hücreyi yukarı taşı** veya **hücreyi aşağı taşı** ' yı seçin. 
+En sağdaki diğer hücre eylemleri menüsüne erişmek için üç nokta (...) simgesini seçin. Ardından, geçerli hücreyi taşımak için **hücreyi yukarı taşı** veya **hücreyi aşağı taşı** ' yı seçin. 
 
 [Komut modu altında kısayol tuşlarını](#shortcut-keys-under-command-mode)da kullanabilirsiniz. Geçerli hücreyi taşımak için **Ctrl + Alt + ↑** tuşlarına basın. Geçerli hücreyi aşağı taşımak için **Ctrl + Alt + ↓** tuşlarına basın.
 
@@ -199,7 +210,7 @@ Hücrenin sol tarafına tıklayın ve istediğiniz konuma sürükleyin.
 
 # <a name="classical-notebook"></a>[Klasik Not defteri](#tab/classical)
 
-Bir hücreyi silmek için, en sağdaki Ek hücre eylemleri menüsüne erişmek üzere üç nokta (...) simgesini seçin ve ardından **hücreyi Sil**' i seçin. 
+Bir hücreyi silmek için, en sağdaki diğer hücre eylemleri menüsüne erişmek üzere üç nokta (...) simgesini seçin ve ardından **hücreyi Sil**' i seçin. 
 
 [Komut modu altında kısayol tuşlarını](#shortcut-keys-under-command-mode)da kullanabilirsiniz. Geçerli hücreyi silmek için **d, d** tuşuna basın.
   
@@ -274,7 +285,7 @@ Geçerli not defterindeki tüm hücreleri sırayla çalıştırmak için **Tüm�
 
 # <a name="classical-notebook"></a>[Klasik Not defteri](#tab/classical)
 
-En sağdaki Ek hücre eylemleri menüsüne erişmek için üç nokta (**...**) simgesini seçin. Ardından, geçerli sıradaki tüm hücreleri çalıştırmak için **yukarıdaki hücreleri Çalıştır** ' ı seçin. Sıradaki geçerli olan tüm hücreleri çalıştırmak için **aşağıdaki hücreleri Çalıştır** ' ı seçin.
+En sağdaki diğer hücre eylemleri menüsüne erişmek için üç nokta (**...**) simgesini seçin. Ardından, geçerli sıradaki tüm hücreleri çalıştırmak için **yukarıdaki hücreleri Çalıştır** ' ı seçin. Sıradaki geçerli olan tüm hücreleri çalıştırmak için **aşağıdaki hücreleri Çalıştır** ' ı seçin.
 
    ![çalışma--veya-aşağı hücreleri](./media/apache-spark-development-using-notebooks/synapse-run-cells-above-or-below.png)
 
@@ -320,6 +331,22 @@ Desteklenmez.
 
 ---
 
+### <a name="variable-explorer"></a>Değişken Gezgini
+
+# <a name="classical-notebook"></a>[Klasik Not defteri](#tab/classical)
+
+Desteklenmez.
+
+# <a name="preview-notebook"></a>[İnceleme Not defteri](#tab/preview)
+
+SYNAPSE Not defteri, PySpark (Python) hücreleri için geçerli Spark oturumunda değişken adı, tür, uzunluk ve değerin listesini görmeniz için yerleşik bir değişkenler Gezgini sağlar. Kod hücrelerinde tanımlandıklarında, daha fazla değişken otomatik olarak gösterilir. Her bir sütun başlığına tıkladığınızda tablodaki değişkenler sıralanır.
+
+Değişken Gezginini açmak veya gizlemek için Not defteri komut çubuğundaki **değişkenler** düğmesini seçebilirsiniz.
+
+![Azure-Not defteri-değişken-gezgin](./media/apache-spark-development-using-notebooks/synapse-azure-notebook-variable-explorer.png)
+
+
+---
 
 ### <a name="cell-status-indicator"></a>Hücre durumu göstergesi
 
@@ -416,7 +443,7 @@ Birincil depolama hesabındaki verilere doğrudan erişebilirsiniz. Gizli anahta
 
 ![verilerden hücrelere](./media/apache-spark-development-using-notebooks/synapse-data-to-cell.png)
 
-## <a name="save-notebooks"></a>Not defterlerini Kaydet
+## <a name="save-notebooks"></a>Not defterlerini kaydetme
 
 Çalışma alanınızdaki tek bir not defterini veya tüm not defterlerini kaydedebilirsiniz.
 
@@ -432,7 +459,7 @@ Not defteri özelliklerinde, kaydetme sırasında hücre çıkışının eklenip
 
    ![Not defteri-Özellikler](./media/apache-spark-development-using-notebooks/synapse-notebook-properties.png)
 
-## <a name="magic-commands"></a>MAGIC komutları
+## <a name="magic-commands"></a>Magic komutları
 Azure SYNAPSE Studio not defterlerinde tanıdık Jupyıter Magic komutlarını kullanabilirsiniz. Geçerli kullanılabilir sihirli komutları olarak aşağıdaki listeyi gözden geçirin. İhtiyaçlarınızı karşılamak için daha fazla sihirli komut oluşturmaya devam edebilmemiz için [kullanım durumlarınızı GitHub 'da](https://github.com/MicrosoftDocs/azure-docs/issues/new) bize söyleyin.
 
 > [!NOTE]
@@ -468,7 +495,7 @@ Mevcut bir işlem hattına bir not defteri eklemek veya yeni bir işlem hattı o
 
 # <a name="classical-notebook"></a>[Klasik Not defteri](#tab/classical)
 
-Not defterinizi parametreleştirin, en sağdaki Ek hücre eylemleri menüsüne erişmek için üç nokta (...) simgesini seçin. Ardından, parametreyi parametre hücresi olarak belirlemek için **parametre hücresini değiştirin** ' i seçin.
+Not defterinizi parametreleştirin, en sağdaki diğer hücre eylemleri menüsüne erişmek için üç nokta (...) simgesini seçin. Ardından, parametreyi parametre hücresi olarak belirlemek için **parametre hücresini değiştirin** ' i seçin.
 
 ![iki durumlu parametre](./media/apache-spark-development-using-notebooks/toggle-parameter-cell.png)
 

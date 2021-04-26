@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 06/07/2018
 ms.author: cynthn
-ms.openlocfilehash: c0eea74890665297a0d450c8afd0a5d60dd1ae00
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: b08e8ebbba3ba91c1c1aa0f135c4cba37ba038b1
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102551819"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769922"
 ---
 # <a name="how-to-create-a-linux-virtual-machine-in-azure-with-multiple-network-interface-cards"></a>Azure 'da birden çok ağ arabirim kartı ile Linux sanal makinesi oluşturma
 
@@ -183,7 +183,7 @@ Ayrıca `copyIndex()` , bir kaynak adına bir sayı eklemek için bir de kullana
 
 Önceki adımlarda bir sanal ağ ve alt ağ, bağlı NIC 'ler oluşturulup bir VM oluşturulur. SSH trafiğine izin veren bir genel IP adresi ve ağ güvenlik grubu kuralları oluşturulmadı. Konuk işletim sistemini birden çok NIC için yapılandırmak için, uzak bağlantılara izin vermeniz ve komutları VM 'de yerel olarak çalıştırmanız gerekir.
 
-SSH trafiğine izin vermek için [az Network NSG Rule Create](/cli/azure/network/nsg/rule#az-network-nsg-rule-create) komutuyla aşağıdaki gibi bir ağ güvenlik grubu kuralı oluşturun:
+SSH trafiğine izin vermek için [az Network NSG Rule Create](/cli/azure/network/nsg/rule#az_network_nsg_rule_create) komutuyla aşağıdaki gibi bir ağ güvenlik grubu kuralı oluşturun:
 
 ```azurecli
 az network nsg rule create \
@@ -194,7 +194,7 @@ az network nsg rule create \
     --destination-port-ranges 22
 ```
 
-Az Network [Public-IP Create](/cli/azure/network/public-ip#az-network-public-ip-create) komutunu kullanarak BIR genel IP adresi oluşturun ve [az Network NIC IP-CONFIG güncelleştirmesiyle](/cli/azure/network/nic/ip-config#az-network-nic-ip-config-update)ilk NIC 'ye atayın:
+Az Network [Public-IP Create](/cli/azure/network/public-ip#az_network_public_ip_create) komutunu kullanarak BIR genel IP adresi oluşturun ve [az Network NIC IP-CONFIG güncelleştirmesiyle](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_update)ilk NIC 'ye atayın:
 
 ```azurecli
 az network public-ip create --resource-group myResourceGroup --name myPublicIP
@@ -206,7 +206,7 @@ az network nic ip-config update \
     --public-ip myPublicIP
 ```
 
-VM 'nin genel IP adresini görüntülemek için [az VM Show](/cli/azure/vm#az-vm-show) aşağıdaki gibi kullanın:
+VM 'nin genel IP adresini görüntülemek için [az VM Show](/cli/azure/vm#az_vm_show) aşağıdaki gibi kullanın:
 
 ```azurecli
 az vm show --resource-group myResourceGroup --name myVM -d --query publicIps -o tsv

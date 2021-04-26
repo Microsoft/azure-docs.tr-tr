@@ -5,12 +5,12 @@ ms.date: 12/2/2020
 ms.topic: tutorial
 ms.custom: devx-track-csharp, mvc, devx-track-python, devx-track-azurepowershell, devx-track-azurecli
 zone_pivot_groups: programming-languages-set-functions-full
-ms.openlocfilehash: 1c7a9fd83131ea6282d2ef4860b744fa348153ed
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7950bfb4a57db812da87f4e5f76f3075d50a8293
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98070926"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782286"
 ---
 # <a name="create-a-function-on-linux-using-a-custom-container"></a>Linux üzerinde özel kapsayıcı kullanarak bir işlev oluşturma
 
@@ -360,13 +360,13 @@ Docker Hub, görüntüleri barındıran ve görüntü ve kapsayıcı hizmetleri 
 
 Bu öğeleri oluşturmak için Azure CLı komutlarını kullanırsınız. Her komut, tamamlandıktan sonra JSON çıktısı sağlar.
 
-1. [Az Login](/cli/azure/reference-index#az-login) komutuyla Azure 'da oturum açın:
+1. [Az Login](/cli/azure/reference-index#az_login) komutuyla Azure 'da oturum açın:
 
     ```azurecli
     az login
     ```
     
-1. [az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek, bölgesinde adlı bir kaynak grubu oluşturur `AzureFunctionsContainers-rg` `westeurope` . (Bir bölgede kullanılabilir bir bölge kullanarak, genellikle kaynak grubunuzu ve kaynaklarınızı size yakın bir bölgede oluşturursunuz `az account list-locations` .)
+1. [az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek, bölgesinde adlı bir kaynak grubu oluşturur `AzureFunctionsContainers-rg` `westeurope` . (Bir bölgede kullanılabilir bir bölge kullanarak, genellikle kaynak grubunuzu ve kaynaklarınızı size yakın bir bölgede oluşturursunuz `az account list-locations` .)
 
     ```azurecli
     az group create --name AzureFunctionsContainers-rg --location westeurope
@@ -375,7 +375,7 @@ Bu öğeleri oluşturmak için Azure CLı komutlarını kullanırsınız. Her ko
     > [!NOTE]
     > Linux ve Windows uygulamalarını aynı kaynak grubunda barındıralamazsınız. `AzureFunctionsContainers-rg`Bir Windows işlev uygulaması veya Web uygulaması ile adlandırılmış bir kaynak grubunuz varsa, farklı bir kaynak grubu kullanmanız gerekir.
     
-1. [Az Storage Account Create](/cli/azure/storage/account#az-storage-account-create) komutunu kullanarak kaynak grubunuzda ve bölgenizde genel amaçlı bir depolama hesabı oluşturun. Aşağıdaki örnekte, öğesini `<storage_name>` sizin için uygun olan bir genel benzersiz adla değiştirin. Adlar yalnızca üç ile 24 karakter arasında ve küçük harflerden oluşmalıdır. `Standard_LRS` tipik bir genel amaçlı hesabı belirtir.
+1. [Az Storage Account Create](/cli/azure/storage/account#az_storage_account_create) komutunu kullanarak kaynak grubunuzda ve bölgenizde genel amaçlı bir depolama hesabı oluşturun. Aşağıdaki örnekte, öğesini `<storage_name>` sizin için uygun olan bir genel benzersiz adla değiştirin. Adlar yalnızca üç ile 24 karakter arasında ve küçük harflerden oluşmalıdır. `Standard_LRS` tipik bir genel amaçlı hesabı belirtir.
 
     ```azurecli
     az storage account create --name <storage_name> --location westeurope --resource-group AzureFunctionsContainers-rg --sku Standard_LRS
@@ -397,7 +397,7 @@ Bu öğeleri oluşturmak için Azure CLı komutlarını kullanırsınız. Her ko
 
 Azure 'daki bir işlev uygulaması, barındırma planınızdaki işlevlerinizin yürütülmesini yönetir. Bu bölümde, Docker Hub 'daki görüntüden bir işlev uygulaması oluşturmak ve bunu Azure depolama 'ya bir bağlantı dizesiyle yapılandırmak için önceki bölümde yer alan Azure kaynaklarını kullanırsınız.
 
-1. [Az functionapp Create](/cli/azure/functionapp#az-functionapp-create) komutunu kullanarak işlevler uygulamasını oluşturun. Aşağıdaki örnekte, değerini `<storage_name>` depolama hesabı için önceki bölümde kullandığınız adla değiştirin. Ayrıca `<app_name>` , sizin için uygun bir genel benzersiz adla ve `<docker_id>` DOCKER Kimliğiniz ile değiştirin.
+1. [Az functionapp Create](/cli/azure/functionapp#az_functionapp_create) komutunu kullanarak işlevler uygulamasını oluşturun. Aşağıdaki örnekte, değerini `<storage_name>` depolama hesabı için önceki bölümde kullandığınız adla değiştirin. Ayrıca `<app_name>` , sizin için uygun bir genel benzersiz adla ve `<docker_id>` DOCKER Kimliğiniz ile değiştirin.
 
     ::: zone pivot="programming-language-csharp,programming-language-javascript,programming-language-typescript,programming-language-powershell,programming-language-python,programming-language-java"
     ```azurecli
@@ -410,7 +410,7 @@ Azure 'daki bir işlev uygulaması, barındırma planınızdaki işlevlerinizin 
     ```
     ::: zone-end
     
-    *Dağıtım-kapsayıcı-görüntü-adı* parametresi, işlev uygulaması için kullanılacak resmi belirtir. Dağıtım için kullanılan görüntü hakkındaki bilgileri görüntülemek için [az functionapp config Container Show](/cli/azure/functionapp/config/container#az-functionapp-config-container-show) komutunu kullanabilirsiniz. Farklı bir görüntüden dağıtmak için [az functionapp config Container set](/cli/azure/functionapp/config/container#az-functionapp-config-container-set) komutunu da kullanabilirsiniz.
+    *Dağıtım-kapsayıcı-görüntü-adı* parametresi, işlev uygulaması için kullanılacak resmi belirtir. Dağıtım için kullanılan görüntü hakkındaki bilgileri görüntülemek için [az functionapp config Container Show](/cli/azure/functionapp/config/container#az_functionapp_config_container_show) komutunu kullanabilirsiniz. Farklı bir görüntüden dağıtmak için [az functionapp config Container set](/cli/azure/functionapp/config/container#az_functionapp_config_container_set) komutunu da kullanabilirsiniz.
 
 1. [Az Storage Account Show-Connection-String](/cli/azure/storage/account) komutunu kullanarak oluşturduğunuz depolama hesabı için bağlantı dizesini görüntüleyin. `<storage-name>`Yukarıda oluşturduğunuz depolama hesabının adıyla değiştirin:
 
@@ -418,7 +418,7 @@ Azure 'daki bir işlev uygulaması, barındırma planınızdaki işlevlerinizin 
     az storage account show-connection-string --resource-group AzureFunctionsContainers-rg --name <storage_name> --query connectionString --output tsv
     ```
     
-1. Bu ayarı, [az functionapp config appSettings set](/cli/azure/functionapp/config/appsettings#az-functionapp-config-appsettings-set) komutunu kullanarak işlev uygulamasına ekleyin. Aşağıdaki komutta, öğesini `<app_name>` işlev uygulamanızın adıyla değiştirin ve `<connection_string>` önceki adımdaki bağlantı dizesiyle değiştirin ("DefaultEndpointProtocol =" ile başlayan uzun kodlanmış bir dize):
+1. Bu ayarı, [az functionapp config appSettings set](/cli/azure/functionapp/config/appsettings#az_functionapp_config_ppsettings_set) komutunu kullanarak işlev uygulamasına ekleyin. Aşağıdaki komutta, öğesini `<app_name>` işlev uygulamanızın adıyla değiştirin ve `<connection_string>` önceki adımdaki bağlantı dizesiyle değiştirin ("DefaultEndpointProtocol =" ile başlayan uzun kodlanmış bir dize):
  
     ```azurecli
     az functionapp config appsettings set --name <app_name> --resource-group AzureFunctionsContainers-rg --settings AzureWebJobsStorage=<connection_string>
@@ -513,13 +513,13 @@ Azure 'da işlev uygulamasına dağıtılan görüntü ile, artık işlevi HTTP 
 
 Kayıt defterinde görüntüyü güncelleştirdiğinizde bir görüntü dağıtımınızı otomatik olarak güncelleştirmek için Azure Işlevleri 'ni etkinleştirebilirsiniz.
 
-1. İşlev uygulamanızın adıyla değiştirerek [az functionapp Deployment Container config](/cli/azure/functionapp/deployment/container#az-functionapp-deployment-container-config) komutunu kullanarak sürekli dağıtımı etkinleştirin `<app_name>` :
+1. İşlev uygulamanızın adıyla değiştirerek [az functionapp Deployment Container config](/cli/azure/functionapp/deployment/container#az_functionapp_deployment_container_config) komutunu kullanarak sürekli dağıtımı etkinleştirin `<app_name>` :
 
     ```azurecli
     az functionapp deployment container config --enable-cd --query CI_CD_URL --output tsv --name <app_name> --resource-group AzureFunctionsContainers-rg
     ```
     
-    Bu komut sürekli dağıtımı etkinleştirilir ve dağıtım Web kancası URL 'sini döndürür. ( [Az functionapp Deployment Container show-CD-URL](/cli/azure/functionapp/deployment/container#az-functionapp-deployment-container-show-cd-url) komutunu kullanarak bu URL 'yi daha sonra da alabilirsiniz.)
+    Bu komut sürekli dağıtımı etkinleştirilir ve dağıtım Web kancası URL 'sini döndürür. ( [Az functionapp Deployment Container show-CD-URL](/cli/azure/functionapp/deployment/container#az_functionapp_deployment_container_show_cd_url) komutunu kullanarak bu URL 'yi daha sonra da alabilirsiniz.)
 
 1. Dağıtım Web kancası URL 'sini panoya kopyalayın.
 

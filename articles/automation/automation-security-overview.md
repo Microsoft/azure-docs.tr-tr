@@ -4,16 +4,17 @@ description: Bu makalede, Azure Otomasyonu hesabı kimlik doğrulamasına genel 
 keywords: otomasyon güvenliği, güvenli otomasyon; otomasyon kimlik doğrulaması
 services: automation
 ms.subservice: process-automation
-ms.date: 02/26/2021
+ms.date: 04/14/2021
 ms.topic: conceptual
-ms.openlocfilehash: c559a81b17b92f48b2d51b7c2d26325d6a1b1cca
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 546407ce7286cebc04d3c86422f6242051d1dbf3
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101708909"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830439"
 ---
-# <a name="automation-account-authentication-overview"></a>Otomasyon hesabı kimlik doğrulamasına genel bakış
+# <a name="azure-automation-account-authentication-overview"></a>Azure Otomasyonu hesabı kimlik doğrulamasına genel bakış
 
 Azure Automation, Azure’deki, şirket içindeki kaynaklara karşı ve Amazon Web Hizmetleri (AWS) gibi diğer bulut sağlayıcılarıyla görevleri otomatikleştirmenizi sağlar. Azure dışında yönetilecek iş veya işlemsel süreçleriniz varsa, görevlerinizi otomatikleştirmek için Runbook 'ları veya karma runbook çalışanı kullanabilirsiniz. Bu ortamların herhangi birinde çalışmak, gerekli en düşük haklara sahip kaynaklara güvenli bir şekilde erişmek için izinler gerektirir.
 
@@ -30,6 +31,31 @@ Azure Automation hesabı, Azure aboneliğinizde oluşturduğunuz Microsoft hesab
 Her Otomasyon hesabının Otomasyon kaynakları tek bir Azure bölgesiyle ilişkilendirilir, ancak hesap Azure aboneliğinizdeki tüm kaynakları yönetebilir. Farklı bölgelerde Otomasyon hesapları oluşturmanın temel nedeni, verilerin ve kaynakların belirli bir bölgeye yalıtılması gereken ilkelerinize sahiptir.
 
 Azure Automation 'daki Azure Resource Manager ve PowerShell cmdlet 'lerini kullanarak kaynaklarda oluşturduğunuz tüm görevlerin, Azure Active Directory (Azure AD) kuruluş kimliği kimlik bilgisi tabanlı kimlik doğrulaması kullanarak Azure 'da kimlik doğrulaması yapması gerekir.
+
+## <a name="managed-identities-preview"></a>Yönetilen kimlikler (Önizleme)
+
+Azure Active Directory yönetilen bir kimlik (Azure AD), runbook 'un diğer Azure AD korumalı kaynaklara kolayca erişmesini sağlar. Kimlik, Azure platformu tarafından yönetilir ve herhangi bir gizli dizi sağlamanızı veya döndürmenizi gerektirmez. Azure AD 'de Yönetilen kimlikler hakkında daha fazla bilgi için bkz. [Azure kaynakları Için Yönetilen kimlikler](/azure/active-directory/managed-identities-azure-resources/overview).
+
+Yönetilen kimlikler kullanmanın avantajlarından bazıları şunlardır:
+
+- Azure AD kimlik doğrulamasını destekleyen herhangi bir Azure hizmetinde kimlik doğrulaması yapmak için Yönetilen kimlikler 'i kullanabilirsiniz. Bunlar, karma işler ve bulut için de kullanılabilir. Karma işler, Azure veya Azure dışı VM 'de çalışan bir karma runbook çalışanı üzerinde çalıştırıldığında yönetilen kimlikleri kullanabilir.
+
+- Yönetilen kimlikler herhangi bir ek maliyet olmadan kullanılabilir.
+
+- Otomasyon farklı çalıştır hesabı tarafından kullanılan sertifikayı yenilemeniz gerekmez.
+
+- Runbook kodunuzda farklı çalıştır bağlantı nesnesini belirtmeniz gerekmez. Bir runbook 'tan Otomasyon hesabınızın yönetilen kimliğini kullanarak, sertifikalar, bağlantılar, farklı çalıştır hesapları vb. kaynaklara erişebilirsiniz.
+
+Otomasyon hesabına iki tür kimlik verilebilir:
+
+- Sistem tarafından atanan bir kimlik uygulamanıza bağlanır ve uygulamanız silinirse silinir. Uygulamanın yalnızca bir sistem tarafından atanmış kimliği olabilir.
+
+- Kullanıcı tarafından atanan bir kimlik, uygulamanıza atanabilecek tek başına bir Azure kaynağıdır. Bir uygulamada birden çok kullanıcı tarafından atanan kimlik olabilir.
+
+>[!NOTE]
+> Kullanıcı tarafından atanan kimlikler henüz desteklenmiyor.
+
+Yönetilen kimlikleri kullanma hakkında ayrıntılı bilgi için bkz. [Azure Otomasyonu için yönetilen kimliği etkinleştirme (Önizleme)](enable-managed-identity-for-automation.md).
 
 ## <a name="run-as-accounts"></a>Farklı Çalıştır hesapları
 
@@ -120,3 +146,4 @@ Azure VM 'lerinde karma runbook çalışanları kullanan runbook 'lar için, Azu
 * Azure portal bir Otomasyon hesabı oluşturmak için bkz. [tek başına Azure Otomasyonu hesabı oluşturma](automation-create-standalone-account.md).
 * Hesabınızı bir şablon kullanarak oluşturmayı tercih ediyorsanız, bkz. [Azure Resource Manager şablonu kullanarak Otomasyon hesabı oluşturma](quickstart-create-automation-account-template.md).
 * Amazon Web Services kullanarak kimlik doğrulaması için bkz. [Amazon Web Services runbook 'Ları kimlik](automation-config-aws-account.md)doğrulama.
+* Azure kaynakları için yönetilen kimlikler özelliğini destekleyen Azure hizmetlerinin listesi için bkz. [Azure kaynakları için yönetilen kimlikleri destekleyen hizmetler](/azure/active-directory/managed-identities-azure-resources/services-support-managed-identities).

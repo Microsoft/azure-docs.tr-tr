@@ -3,17 +3,16 @@ title: Eşleme veri akışlarını izleme
 description: Azure Data Factory eşleme verileri akışlarını görsel olarak izleme
 author: kromerm
 ms.author: makromer
-ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 11/22/2020
-ms.openlocfilehash: 9ca5ea5cdebe297af5081ae6e219935c56ba942e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/11/2021
+ms.openlocfilehash: 82aba428627cba1a3df26fc67c5da0cde52d368c
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96004898"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309076"
 ---
 # <a name="monitor-data-flows"></a>Veri akışlarını izleme
 
@@ -77,9 +76,15 @@ Ayrıca, ADF ardışık düzen izleme görünümündeki veri akışı etkinliği
 }
 ```
 
-### <a name="post-processing-time"></a>İşlem sonrası süre
+### <a name="sink-processing-time"></a>Havuz işleme süresi
 
 Haritaınızda bir havuz dönüştürme simgesi seçtiğinizde, sağdaki slayt paneli alt kısımdaki "işlem sonrası zamanı" adlı ek bir veri noktası gösterir. Bu, verileriniz yüklendikten, dönüştürüldükten ve yazıldıktan *sonra* Spark kümesinde işinizi yürütmek için harcanan süre miktarıdır. Bu süre, bağlantı havuzlarını kapatmayı, sürücü kapatmayı, dosyaları silmeyi, birleştirme dosyalarını, vb. içerebilir. Akışınızda "dosyaları taşı" ve "çıktıyı tek dosyaya kaydet" gibi eylemler gerçekleştirdiğinizde, işlem sonrası süre değerinde bir artış görürsünüz.
+
+* Yazma aşaması süresi: SYNAPSE SQL için hazırlama konumuna veri yazma zamanı
+* Tablo işlemi SQL süresi: verileri geçici tablolardan hedef tabloya taşımak için harcanan süre
+* SQL süresi & ön SQL süresi: SQL öncesi/sonrası komutlarını çalıştırmak için harcanan süre
+* Komut süresi & son komutlar süre: dosya tabanlı kaynak/havuz için herhangi bir ön/POST işlemi çalıştırmak için harcanan süre. Örneğin, işlemden sonra dosyaları taşıyın veya silin.
+* Birleştirme süresi: dosyayı birleştirme sırasında harcanan süre, birleştirme dosyaları tek bir dosyaya yazılırken veya "sütun verileri olarak dosya adı" kullanılırken dosya tabanlı havuzlar için kullanılır. Bu ölçümde önemli bir zaman harcanması durumunda, bu seçenekleri kullanmaktan kaçının.
   
 ## <a name="error-rows"></a>Hata satırları
 

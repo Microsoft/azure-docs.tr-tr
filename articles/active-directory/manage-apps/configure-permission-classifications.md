@@ -2,22 +2,22 @@
 title: Azure AD ile izin sınıflandırmalarını yapılandırma
 description: Temsil edilen izin sınıflandırmalarını yönetmeyi öğrenin.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: how-to
 ms.date: 06/01/2020
-ms.author: phsignor
+ms.author: iangithinji
 ms.reviewer: arvindh, luleon, phsignor
 ms.custom: contperf-fy21q2
-ms.openlocfilehash: 12a4ffb311e01ebb78b1ae392d1243c5d67eff6b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: be58f5cd18d32302d1e92f00afb7d7e0aae09410
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101644573"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374480"
 ---
 # <a name="configure-permission-classifications"></a>İzin sınıflandırmalarını yapılandırma
 

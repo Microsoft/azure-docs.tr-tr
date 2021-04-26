@@ -6,10 +6,10 @@ ms.topic: how-to
 ms.custom: hdinsightactive, devx-track-csharp
 ms.date: 01/13/2020
 ms.openlocfilehash: c993b3f70f609fb79c51ba9be08fa3d5dc7e8317
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104864117"
 ---
 # <a name="scp-programming-guide-for-apache-storm-in-azure-hdinsight"></a>Azure HDInsight 'ta Apache Storm için SCP Programlama Kılavuzu
@@ -431,7 +431,7 @@ SCP topolojisi belirtimi, SCP topolojilerini tanımlamak ve yapılandırmak içi
 
 SCP.NET, işlem topolojilerini tanımlamak için aşağıdaki işlevleri ekledi:
 
-| Yeni işlev | Parametreler | Açıklama |
+| Yeni işlev | Parametreler | Description |
 | --- | --- | --- |
 | **TX-topolopy** |*topoloji-adı*<br />*Spout eşleme*<br />*cıvata eşleme* |Topoloji adı, Spout tanım eşlemesi ve cıvatalar tanım eşlemesi ile bir işlem topolojisini tanımlar. |
 | **SCP-TX-Spout** |*exec-adı*<br />*args*<br />*alanını* |İşlem biriktirme listesini tanımlar. İşlevi, *Exec-Name* tarafından belirtilen uygulamayı çalıştırır ve *bağımsız değişkenleri* kullanır.<br /><br />*Fields* parametresi, Spout için çıkış alanlarını belirtir. |
@@ -443,7 +443,7 @@ SCP.NET, işlem topolojilerini tanımlamak için aşağıdaki işlevleri ekledi:
 
 SCP.NET aşağıdaki anahtar sözcükleri tanımlar:
 
-| Sözcükle | Açıklama |
+| Sözcükle | Description |
 | --- | --- |
 | **: ad** |Topoloji adı |
 | **: topoloji** |Önceki tabloda ve yerleşik işlevlerde bulunan işlevleri kullanan topoloji |

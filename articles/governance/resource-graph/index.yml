@@ -10,12 +10,12 @@ metadata:
   author: DCtheGeek
   ms.author: dacoulte
   ms.date: 06/29/2020
-  ms.openlocfilehash: 6f2522ec13c56ff7d451165a0aa923a492079ca1
-  ms.sourcegitcommit: c4c554db636f829d7abe70e2c433d27281b35183
-  ms.translationtype: HT
+  ms.openlocfilehash: 12711df7515e3b1aff07f6599d90b2754986eac3
+  ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
+  ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 01/08/2021
-  ms.locfileid: "98034321"
+  ms.lasthandoff: 04/22/2021
+  ms.locfileid: "107870526"
 landingContent:
 - title: Azure Kaynak Grafı hakkında
   linkLists:
@@ -45,6 +45,10 @@ landingContent:
       url: ./first-query-dotnet.md
     - text: İlk sorgu (Go)
       url: ./first-query-go.md
+    - text: İlk sorgu (Java)
+      url: ./first-query-java.md
+  - linkListType: quickstart
+    links:
     - text: İlk sorgu (JavaScript)
       url: ./first-query-javascript.md
     - text: İlk sorgu (Python)
@@ -100,7 +104,7 @@ landingContent:
   - linkListType: reference
     links:
     - text: Azure CLI
-      url: /cli/azure/ext/resource-graph/graph
+      url: /cli/azure/graph
     - text: Azure PowerShell
       url: /powershell/module/az.resourcegraph/#resourcegraph
     - text: .NET için Azure SDK

@@ -9,19 +9,19 @@ ms.date: 02/19/2021
 ms.author: normesta
 ms.reviewer: yzheng
 ms.custom: references_regions
-ms.openlocfilehash: b00956a6fb5a79b09602ca1752cc547595f32db6
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 57dec4187ea42476ff1c0a993b751a7389da5639
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103224603"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106490361"
 ---
 # <a name="network-file-system-nfs-30-protocol-support-in-azure-blob-storage-preview"></a>Azure Blob depolamada ağ dosya sistemi (NFS) 3,0 protokol desteği (Önizleme)
 
 Blob Storage artık ağ dosya sistemi (NFS) 3,0 protokolünü desteklemektedir. Bu destek, nesne depolama ölçeğinde ve fiyatlarında Linux dosya sistemi uyumluluğu sağlar ve Linux istemcilerinin bir Azure sanal makinesinden (VM) veya şirket içi bir bilgisayardan BLOB depolama alanına bir kapsayıcı takmalarını sağlar. 
 
 > [!NOTE]
-> Azure Blob depolamada NFS 3,0 protokol desteği genel önizlemeye sunuldu. Şu bölgelerde Standart katman performansına sahip GPV2 Storage hesaplarını destekler: Avustralya Doğu, Kore Orta ve Orta Güney ABD. Önizleme Ayrıca tüm genel bölgelerde Premium performans katmanıyla Blok Blobu destekler.
+> Azure Blob depolamada NFS 3,0 protokol desteği genel önizlemeye sunuldu. Şu bölgelerde Standart katman performansına sahip GPV2 Storage hesaplarını destekler: Avustralya Doğu, Kore Orta, Doğu ABD ve Orta Güney ABD. Önizleme Ayrıca tüm genel bölgelerde Premium performans katmanıyla Blok Blobu destekler.
 
 Bulutta yüksek performanslı bilgi Işlem (HPC) gibi büyük ölçekli eski iş yüklerini çalıştırmak her zaman bir zorluk olmuştur. Bunun nedeni, uygulamaların verilere erişmek için genellikle NFS veya sunucu Ileti bloğu (SMB) gibi geleneksel dosya protokollerini kullanlarıdır. Ayrıca, yerel bulut depolama hizmetleri, hiyerarşik bir ad alanı ve verimli meta veri işlemleri sağlayan dosya sistemleri yerine düz bir ad alanı ve kapsamlı meta veriler içeren nesne depolamasına odaklanır. 
 

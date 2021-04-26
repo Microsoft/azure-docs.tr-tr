@@ -11,12 +11,12 @@ ms.author: tamram
 ms.reviewer: ozgun
 ms.subservice: common
 ms.custom: devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: 552d2587f35ed391b470c6d5b1693b79fd57306b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 80df7b85ec1ad9e273081f9a6a96b9a9d7ec8cd9
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98879587"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791202"
 ---
 # <a name="authorize-access-to-blob-and-queue-data-with-managed-identities-for-azure-resources"></a>Azure kaynakları için yönetilen kimliklerle blob ve kuyruk verilerine erişim yetkisi verme
 
@@ -67,7 +67,7 @@ Geliştirme ortamınız bir Web tarayıcısı aracılığıyla çoklu oturum aç
 
 #### <a name="create-the-service-principal"></a>Hizmet sorumlusunu oluşturma
 
-Azure CLı ile bir hizmet sorumlusu oluşturmak ve bir Azure rolü atamak için, [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az-ad-sp-create-for-rbac) komutunu çağırın. Yeni hizmet sorumlusuna atamak için bir Azure depolama veri erişim rolü sağlayın. Ayrıca, rol atamasının kapsamını belirtin. Azure depolama için sunulan yerleşik roller hakkında daha fazla bilgi için bkz. [Azure yerleşik rolleri](../../role-based-access-control/built-in-roles.md).
+Azure CLı ile bir hizmet sorumlusu oluşturmak ve bir Azure rolü atamak için, [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az_ad_sp_create_for_rbac) komutunu çağırın. Yeni hizmet sorumlusuna atamak için bir Azure depolama veri erişim rolü sağlayın. Ayrıca, rol atamasının kapsamını belirtin. Azure depolama için sunulan yerleşik roller hakkında daha fazla bilgi için bkz. [Azure yerleşik rolleri](../../role-based-access-control/built-in-roles.md).
 
 Hizmet sorumlusuna rol atamak için yeterli izniniz yoksa, hesap sahibine veya yöneticiden rol atamasını gerçekleştirmesini isteyebilirsiniz.
 
@@ -171,4 +171,4 @@ async static Task CreateBlockBlobAsync(string accountName, string containerName,
 - [Azure RBAC ile depolama verilerine erişim haklarını yönetin](./storage-auth-aad-rbac-portal.md).
 - [Azure AD 'yi depolama uygulamalarıyla kullanın](storage-auth-aad-app.md).
 - [Blob verilerine erişmek için Azure AD kimlik bilgileriyle PowerShell komutlarını çalıştırma](../blobs/authorize-data-operations-powershell.md)
-- [Öğretici: yönetilen tanımlayıcıların kullanımı ile App Service erişimli depolamaya erişin](../../app-service/scenario-secure-app-access-storage.md)
+- [Öğretici: Yönetilen kimlikler kullanarak App Service depolama erişimi](../../app-service/scenario-secure-app-access-storage.md)

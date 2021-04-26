@@ -10,12 +10,12 @@ ms.topic: quickstart
 ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019, devx-track-azurecli
 ms.date: 01/27/2021
 ms.author: mbaldwin
-ms.openlocfilehash: 56e51d74358bcda96a6859a481e53710a6f78ec3
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: dc3abe43c2cdf4d0ee58ac9aed570a2c507b0d7f
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99072430"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815279"
 ---
 # <a name="quickstart-set-and-retrieve-a-certificate-from-azure-key-vault-using-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak Azure Key Vault bir sertifikayı ayarlama ve alma
 
@@ -66,4 +66,4 @@ Bu hızlı başlangıçta bir Key Vault oluşturup içinde bir sertifika depolad
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
 - Azure CLı için başvuruya bakın [az keykasa komutları](/cli/azure/keyvault)
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu gözden geçirin
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu gözden geçirin

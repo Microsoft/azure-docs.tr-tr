@@ -1,24 +1,24 @@
 ---
 title: Bir MySQL için Azure veritabanı sunucusunu geri yükleme
-description: Bu makalede, Azure portal kullanarak MySQL için Azure veritabanı 'nda bırakılan bir sunucunun nasıl geri yükleneceği açıklanmaktadır.
+description: Bu makalede, Azure portal kullanarak MySQL için Azure veritabanı 'nda silinen bir sunucunun nasıl geri yükleneceği açıklanmaktadır.
 author: savjani
 ms.author: pariks
 ms.service: mysql
 ms.topic: how-to
 ms.date: 10/09/2020
-ms.openlocfilehash: 34dddd8e5f3fb418fc7155630bf82a922e418402
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 5fc1ab1b3dfbc324668873749c143846c2015cd4
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97657099"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306288"
 ---
-# <a name="restore-a-dropped-azure-database-for-mysql-server"></a>Bir MySQL için Azure veritabanı sunucusunu geri yükleme
+# <a name="restore-a-deleted-azure-database-for-mysql-server"></a>Bir MySQL için Azure veritabanı sunucusunu geri yükleme
 
-Sunucu bırakıldığında, veritabanı sunucusu yedeklemesi hizmette beş güne kadar tutulabilirler. Veritabanı yedeklemesine yalnızca sunucunun ilk olarak bulunduğu Azure aboneliğinden erişilebilir ve geri yüklenebilir. Sunucunun silinmesini izleyen 5 gün içinde bırakılan bir MySQL sunucu kaynağını kurtarmak için aşağıdaki önerilen adımları izlenebilirsiniz. Önerilen adımlar yalnızca sunucu yedeklemesinin hala kullanılabildiği ve sistemden silinmediği durumlarda çalışır. 
+Bir sunucu silindiğinde, veritabanı sunucusu yedeklemesi hizmette beş güne kadar tutulabilirler. Veritabanı yedeklemesine yalnızca sunucunun ilk olarak bulunduğu Azure aboneliğinden erişilebilir ve geri yüklenebilir. Silinen bir MySQL sunucusu kaynağını sunucu silme zamanından 5 gün içinde kurtarmak için aşağıdaki önerilen adımları izlenebilir. Önerilen adımlar yalnızca sunucu yedeklemesinin hala kullanılabildiği ve sistemden silinmediği durumlarda çalışır. 
 
 ## <a name="pre-requisites"></a>Ön koşullar
-Bir MySQL için Azure veritabanı sunucusunu geri yüklemek için şunlar gerekir:
+Silinen bir MySQL için Azure veritabanı sunucusunu geri yüklemek için şunlar gerekir:
 - Özgün sunucuyu barındıran Azure abonelik adı
 - Sunucunun oluşturulduğu konum
 
@@ -42,7 +42,7 @@ Bir MySQL için Azure veritabanı sunucusunu geri yüklemek için şunlar gereki
  
      [![REST API kullanarak sunucu oluşturma](./media/howto-restore-dropped-server/create-server-from-rest-api.png)](./media/howto-restore-dropped-server/create-server-from-rest-api.png#lightbox)
   
- 6. Istek gövdesi bölümünde aşağıya kaydırın ve "bırakılan sunucu konumu", "submissionTimestamp" ve "RESOURCEID" değerlerini değiştirerek aşağıdakileri yapıştırın. "Restorepoinıntime" için, komutun hata içermediğinden emin olmak için "submissionTimestamp" değerini **15 dakika** olarak belirtin.
+ 6. Istek gövdesi bölümünde aşağıya kaydırın ve aşağıdakileri yapıştırın:
  
     ```json
     {
@@ -55,14 +55,18 @@ Bir MySQL için Azure veritabanı sunucusunu geri yüklemek için şunlar gereki
             }
     }
     ```
+7. Yukarıdaki istek gövdesinde aşağıdaki değerleri değiştirin:
+   * Silinen sunucunun ilk olarak oluşturulduğu Azure bölgesi ile "sunucu konumu bırakıldı"
+   * "submissionTimestamp" ve "RESOURCEID" değeri 3. adımda yakalandı. 
+   * "Restorepoinıntime" için, komutun hata içermediğinden emin olmak için "submissionTimestamp" değerini **15 dakika** olarak belirtin.
+   
+8. 201 veya 202 yanıt kodunu görürseniz geri yükleme isteği başarıyla gönderilir. 
 
-7. 201 veya 202 yanıt kodunu görürseniz geri yükleme isteği başarıyla gönderilir. 
-
-8. Sunucu oluşturma, özgün sunucuda sağlanan veritabanı boyutuna ve işlem kaynaklarına bağlı olarak zaman alabilir. Geri yükleme durumu, filtreleme yoluyla etkinlik günlüğünden izlenebilir 
+9. Sunucu oluşturma, özgün sunucuda sağlanan veritabanı boyutuna ve işlem kaynaklarına bağlı olarak zaman alabilir. Geri yükleme durumu, filtreleme yoluyla etkinlik günlüğünden izlenebilir 
    - **Abonelik** = aboneliğiniz
    - **Kaynak türü** = MySQL sunucuları Için Azure veritabanı (Microsoft. Dbformyısql/sunucular) 
    - **İşlem** = MySQL Server oluşturmayı Güncelleştir
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Bir sunucuyu beş gün içinde geri yüklemeye çalışıyorsanız ve daha önce açıklanan adımları doğru şekilde gerçekleştirdikten sonra yine de bir hata alıyorsanız, yardım için bir destek olayı açın. Bırakılan bir sunucuyu beş günden sonra geri yüklemeye çalışıyorsanız, yedekleme dosyası bulunamadığı için bir hata beklenecektir. Bu senaryoda bir destek bileti açmayın. Yedekleme sistemden silinirse destek ekibi herhangi bir yardım sağlayamaz. 
+- Bir sunucuyu beş gün içinde geri yüklemeye çalışıyorsanız ve daha önce açıklanan adımları doğru şekilde gerçekleştirdikten sonra yine de bir hata alıyorsanız, yardım için bir destek olayı açın. Silinen bir sunucuyu beş günden sonra geri yüklemeye çalışıyorsanız, yedekleme dosyası bulunamadığı için bir hata beklenmektedir. Bu senaryoda bir destek bileti açmayın. Yedekleme sistemden silinirse destek ekibi herhangi bir yardım sağlayamaz. 
 - Sunucuların yanlışlıkla silinmesini engellemek için, [kaynak kilitlerini](https://techcommunity.microsoft.com/t5/azure-database-for-mysql/preventing-the-disaster-of-accidental-deletion-for-your-mysql/ba-p/825222)kullanmanızı kesinlikle öneririz.

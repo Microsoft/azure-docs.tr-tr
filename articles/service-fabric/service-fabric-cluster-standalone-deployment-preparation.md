@@ -4,10 +4,10 @@ description: Ortamı hazırlamaya ve küme yapılandırması oluşturmaya ilişk
 ms.topic: conceptual
 ms.date: 9/11/2018
 ms.openlocfilehash: 18b8b0ce8c0e877bf9dd274596b19f85b1febe12
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98790961"
 ---
 # <a name="plan-and-prepare-your-service-fabric-standalone-cluster-deployment"></a>Service Fabric tek başına küme dağıtımınızı planlayın ve hazırlayın

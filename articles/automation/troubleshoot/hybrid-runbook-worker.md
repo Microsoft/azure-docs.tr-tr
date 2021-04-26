@@ -7,12 +7,13 @@ author: mgoedtel
 ms.author: magoedte
 ms.date: 02/11/2021
 ms.topic: troubleshooting
-ms.openlocfilehash: 15a18cbfc3a80bbfea0b92e5b616104dc0f593af
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 906e38b28015bd70cf1c97ba9323094d64a12c94
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100580993"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830853"
 ---
 # <a name="troubleshoot-hybrid-runbook-worker-issues"></a>Karma Runbook Çalışanı ile ilgili sorunları giderme
 
@@ -128,7 +129,7 @@ Olası nedenler şunlardır:
 #### <a name="resolution"></a>Çözüm
 
 ##### <a name="mistyped-workspace-id-or-key"></a>Yanlış yazılmış çalışma alanı KIMLIĞI veya anahtarı
-Aracının çalışma alanı KIMLIĞI veya çalışma alanı anahtarının yanlış yazılmış olup olmadığını doğrulamak için, bkz. [bir çalışma alanı ekleme veya kaldırma –](../../azure-monitor/agents/agent-manage.md#windows-agent) Windows Aracısı için Windows Aracısı veya [bir çalışma alanı ekleme veya kaldırma –](../../azure-monitor/agents/agent-manage.md#linux-agent) Linux Aracısı için Linux Aracısı. Azure portal tam dizeyi seçtiğinizden emin olun ve dikkatlice kopyalayıp yapıştırın.
+Aracının çalışma alanı KIMLIĞI veya çalışma alanı anahtarının yanlış yazılmış olup olmadığını doğrulamak için bkz. [bir çalışma alanı ekleme veya kaldırma-](../../azure-monitor/platform/agent-manage.md#windows-agent) Windows Aracısı için Windows Aracısı veya Linux Aracısı için [çalışma alanı-Linux Aracısı Ekleme veya kaldırma](../../azure-monitor/platform/agent-manage.md#linux-agent) . Azure portal tam dizeyi seçtiğinizden emin olun ve dikkatlice kopyalayıp yapıştırın.
 
 ##### <a name="configuration-not-downloaded"></a>Yapılandırma indirilmedi
 

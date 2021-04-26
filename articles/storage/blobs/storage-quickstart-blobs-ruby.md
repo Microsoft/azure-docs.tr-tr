@@ -1,18 +1,18 @@
 ---
 title: 'Hızlı başlangıç: Azure Blob depolama istemci kitaplığı-Ruby'
 description: Azure Blob depolamada bir depolama hesabı ve kapsayıcı oluşturun. Bir blob oluşturmak, blob indirmek ve bir kapsayıcıdaki Blobları listelemek için Ruby için depolama istemcisi kitaplığı 'nı kullanın.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 12/04/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: ec3fc490466f5fce36b67b2f3744e4ee5cc0ae79
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 96b47afb11a0105e8f6d6b58e8862994493389f4
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96781105"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277986"
 ---
 # <a name="quickstart-azure-blob-storage-client-library-for-ruby"></a>Hızlı başlangıç: Ruby için Azure Blob depolama istemci kitaplığı
 

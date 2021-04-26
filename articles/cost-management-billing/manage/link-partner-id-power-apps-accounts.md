@@ -8,12 +8,12 @@ ms.subservice: billing
 ms.topic: conceptual
 ms.date: 03/16/2021
 ms.author: banders
-ms.openlocfilehash: adaff7a6b8559fe9604412a44eced6c490231e3c
-ms.sourcegitcommit: 27cd3e515fee7821807c03e64ce8ac2dd2dd82d2
+ms.openlocfilehash: acb22cc4b2a461e476131a83972db3e782425a39
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/16/2021
-ms.locfileid: "103603840"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727717"
 ---
 # <a name="link-a-partner-id-to-your-power-apps-accounts"></a>Power Apps hesaplarınıza bir iş ortağı KIMLIĞI bağlama
 
@@ -115,43 +115,8 @@ Bağlı iş ortağı kimliğini silme
 az managementpartner delete --partner-id 12345
 ```
 
-## <a name="frequently-asked-questions-faq"></a>Sık sorulan sorular (SSS)
-
-Aşağıdaki bölümlerde, bir iş ortağı KIMLIĞINI Power Apps hesaplarına bağlamak hakkında sık sorulan sorular ele alınmaktadır.
-
-### <a name="who-should-link-the-partner-id"></a>İş ortağı KIMLIĞINI kimler bağlayamalıdır?
-
-İş ortağı kuruluştan bir müşterinin Power Apps kaynakları üzerinde çalışan herhangi bir kullanıcının iş ortağı KIMLIĞINI hesaba bağlayabilmesini sağlayabilirsiniz. İdeal olarak, PAL 'teki ilişki projenin başlangıcında yapılmalıdır. Ancak, müşterinin dizinine her eriştiğinizde bu yapılabilir.
-
-### <a name="can-a-partner-id-be-changed-after-its-linked"></a>Bir iş ortağı kimliği bağlandıktan sonra değiştirilebilir mi?
-
-Evet. Bağlı bir iş ortağı kimliği değiştirilebilir, eklenebilir veya kaldırılabilir. Bu durum için bir örnek, şirketinizdeki bir çalışan kuruluştan ayrıldığında olabilir. Müşteri ile bir proje veya sözleşme sona erdiğinde başka bir örnek de olabilir.
-
-### <a name="what-if-a-user-has-an-account-in-more-than-one-customer-tenant"></a>Bir kullanıcının birden fazla müşteri kiracısında hesabı varsa ne olur?
-
-Her müşteri kiracısı için iş ortağı kimliği ve hesap arasında bağlantı oluşturulur. Her müşteri kiracısında iş ortağı kimliğini bağlayın.
-
-### <a name="can-other-partners-or-customers-edit-or-remove-the-link-to-the-partner-id"></a>Diğer iş ortakları veya müşteriler, iş ortağı kimliğine bağlantıyı düzenleyebilir ya da kaldırabilir mi?
-
-Bağlantı, kullanıcı hesabı düzeyinde ilişkilendirilir. Yalnızca siz iş ortağı kimliğine bağlantıyı düzenleyebilir veya kaldırabilirsiniz. Müşteri ve diğer iş ortakları, iş ortağı kimliğine bağlantıyı değiştiremez.
-
-### <a name="which-mpn-id-should-i-use-if-my-company-has-multiple"></a>Şirketimin birden çok MPN kimliği varsa hangisini kullanmalıyım?
-
-İş ortağı profilinizde gösterilen **İlişkili MPN kimliğini** kullandığınızdan emin olun. Bu, genellikle kuruluşunuzla yerel hesap KIMLIĞI ilişkidir.
-
-### <a name="how-do-i-explain-pal-to-my-customer"></a>Müşterime PAL Nasıl yaparım? açıkla mı?
-
-PAL, Microsoft 'un müşterilerin iş hedeflerine ulaşmasını ve bulutta değer elde etmesini sağlayan iş ortaklarını belirlemesine ve tanımasını sağlar. Müşterilerin, önce Power Apps kaynaklarına bir iş ortağı erişimi sağlaması gerekir. Erişim verildiğinde, ortağın Microsoft İş Ortağı Ağı KIMLIĞI (MPN KIMLIĞI) ilişkilendirilir. Bu ilişkilendirme, Microsoft 'un hizmet sağlayıcılarını anlamasına ve müşterileri en iyi şekilde desteklemesi için gereken araçları ve programları iyileştirmesine yardımcı olur.
-
-### <a name="what-data-does-pal-collect"></a>PAL hangi verileri toplar?
-
-Mevcut kimlik bilgilerine PAL ilişkilendirmesi Microsoft'a yeni müşteri verileri sağlamaz. Bu, bir ortağın bir müşterinin güç uygulamaları ortamlarında etkin olarak bulunduğu Microsoft 'a bilgi sağlar. Microsoft, Müşteri ortamından, iş ortağına müşteri tarafından sunulan hesap izinleri (Power Apps rolü) ve kapsamı (kiracı, kaynak grubu, kaynak) temelinde iş ortağı kuruluşa kullanım ve etkinin üzerinde çalışma özelliği verebilir.
-
-### <a name="does-pal-association-affect-the-security-of-a-customers-power-apps-environment"></a>PAL ilişkilendirmesi bir müşterinin Power Apps ortamının güvenliğini etkiler mi?
-
-PAL ilişkilendirmesi yalnızca ortağın MPN KIMLIĞINI zaten sağlanmış olan kimlik bilgisine ekler. Herhangi bir izni değiştirmez (Power Apps rolü) veya iş ortağı veya Microsoft 'a ek Power Apps hizmet verileri sağlar.
-
 ### <a name="next-steps"></a>Sonraki adımlar
 
+- İş ortağı KIMLIĞINI Power Apps hesaplarına bağlama hakkında sorular ve yanıtlar için [maliyet yönetimi + FATURALANDıRMA SSS](../cost-management-billing-faq.yml) makalesini okuyun.
 - Güncelleştirmeleri almak veya geri bildirim göndermek için [Microsoft İş Ortağı Topluluğu](https://aka.ms/PALdiscussion)’ndaki tartışmaya katılın.
 - Düşük kod uygulama geliştirme gelişmiş özelleştirmesi için PAL tabanlı Power Apps ilişkilendirmesi için [düşük kod uygulama geliştirme gelişmiş ÖZELLEŞTIRME SSS](https://assetsprod.microsoft.com/mpn/faq-low-code-app-development-advanced-specialization.pdf) makalesini okuyun.

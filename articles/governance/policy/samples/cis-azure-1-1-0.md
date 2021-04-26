@@ -1,15 +1,15 @@
 ---
 title: CIS için yasal uyumluluk ayrıntıları Microsoft Azure temelleri kıyaslama 1.1.0
 description: CIS 'nin ayrıntıları, 1.1.0 mevzuatı uyumluluğu yerleşik girişiminin Microsoft Azure temelleri. Her denetim, değerlendirmede yardımcı olan bir veya daha fazla Azure Ilke tanımına eşlenir.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: sample
 ms.custom: generated
-ms.openlocfilehash: 7d26825e3e401984b52216c6827b8a3baf44ad62
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 3deca4da5dce789ff2a924672b499843f156f16f
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105032523"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865684"
 ---
 # <a name="details-of-the-cis-microsoft-azure-foundations-benchmark-110-regulatory-compliance-built-in-initiative"></a>CIS Microsoft Azure temelleri Kıyaslandırma ayrıntıları 1.1.0 mevzuat uyumluluğu yerleşik girişimi
 
@@ -17,7 +17,7 @@ Aşağıdaki makalede, Azure Ilke mevzuatı uyumluluğu yerleşik girişim tanı
 Bu uyumluluk standardı hakkında daha fazla bilgi için bkz. [cıs Microsoft Azure temelleri kıyaslaması 1.1.0](https://www.cisecurity.org/benchmark/azure/). _Sahipliği_ anlamak için bkz. [Azure ilke ilkesi tanımı](../concepts/definition-structure.md#type) ve [bulutta paylaşılan sorumluluk](../../../security/fundamentals/shared-responsibility.md).
 
 Aşağıdaki eşlemeler, **Microsoft Azure, temelleri kıyaslama 1.1.0** denetimlerini sağlar. Doğrudan belirli bir **Uyumluluk etki alanına** geçmek için sağ taraftaki gezintiyi kullanın. Denetimlerin birçoğu bir [Azure Policy](../overview.md) Initiative tanımıyla uygulanır. Tüm girişim tanımını gözden geçirmek için Azure portal **ilkeyi** açın ve **tanımlar** sayfasını seçin.
-Ardından, CIS Microsoft Azure temel bilgiler **kıyaslama 1.1.0** mevzuat uyumluluğu yerleşik girişim tanımını bulun ve seçin.
+Ardından, **Yönetim kıyaslandırma v 1.1.0** mevzuatı uyumluluğu yerleşik girişim tanımını Microsoft Azure, CIS 'leri bulun ve seçin.
 
 Bu yerleşik girişim, CIS 'nin bir parçası olarak dağıtılır [Microsoft Azure temel kıyaslama kıyaslaması 1.1.0 şema Sample](../../blueprints/samples/cis-azure-1-1-0.md).
 
@@ -70,7 +70,14 @@ Bu yerleşik girişim, CIS 'nin bir parçası olarak dağıtılır [Microsoft Az
 
 |Name<br /><sub>(Azure portal)</sub> |Description |Efekt (ler) |Sürüm<br /><sub>GitHub</sub> |
 |---|---|---|---|
-|[Güvenlik Merkezi Standart fiyatlandırma katmanı seçilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fa1181c5f-672a-477a-979a-7d58aa086233) |Standart fiyatlandırma katmanı, Azure Güvenlik Merkezi 'nde tehdit zekası, anomali algılama ve davranış analizi sağlayan ağlar ve sanal makineler için tehdit algılamayı sağlar |Denetim, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_Standard_pricing_tier.json) |
+|[App Service için Azure Defender etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F2913021d-f2fd-4f3d-b958-22354e2bdbcb) |App Service için Azure Defender, bulut ölçeğinden yararlanır ve Azure 'un ortak Web uygulaması saldırılarını izlemek için bir bulut sağlayıcısı olarak sahip olduğu görünürlüğe sahiptir. |Auditınotexists, devre dışı |[1.0.3](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_EnableAdvancedThreatProtectionOnAppServices_Audit.json) |
+|[Azure SQL veritabanı sunucuları için Azure Defender etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F7fe3b40f-802b-4cdd-8bd4-fd799c948cc2) |SQL için Azure Defender, ortaya çıkabilecek ve olası veritabanı güvenlik açıklarını azaltmaya yönelik işlevsellik sunar, SQL veritabanlarına tehditler oluşturabilecek anormal etkinlikleri algılayarak hassas verileri bulabilir ve sınıflandırın. |Auditınotexists, devre dışı |[1.0.2](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_EnableAdvancedDataSecurityOnSqlServers_Audit.json) |
+|[Kapsayıcı kayıt defterleri için Azure Defender etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fc25d9a16-bc35-4e15-a7e5-9db606bf9ed4) |Kapsayıcı kayıt defterleri için Azure Defender, son 30 gün içinde çekilen, Kayıt defterinize gönderilen veya içeri aktarılan tüm görüntüleri taramak ve görüntü başına ayrıntılı bulguları ortaya çıkaran bir güvenlik açığı taraması sağlar. |Auditınotexists, devre dışı |[1.0.3](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_EnableAdvancedThreatProtectionOnContainerRegistry_Audit.json) |
+|[Key Vault için Azure Defender etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F0e6763cc-5078-4e64-889d-ff4d9a839047) |Key Vault için Azure Defender, önemli kasa hesaplarına erişme veya açıktan yararlanma amacıyla olağandışı ve potansiyel olarak zararlı girişimleri algılayarak ek bir koruma ve güvenlik zekası katmanı sağlar. |Auditınotexists, devre dışı |[1.0.3](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_EnableAdvancedThreatProtectionOnKeyVaults_Audit.json) |
+|[Kubernetes için Azure Defender etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F523b5cd1-3e23-492f-a539-13118b6d1e3a) |Kubernetes için Azure Defender, Kapsayıcılı ortamlar için gerçek zamanlı tehdit koruması sağlar ve şüpheli etkinlikler için uyarı oluşturur. |Auditınotexists, devre dışı |[1.0.3](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_EnableAdvancedThreatProtectionOnKubernetesService_Audit.json) |
+|[Sunucular için Azure Defender etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F4da35fc9-c9e7-4960-aec9-797fe7d9051d) |Sunucular için Azure Defender, sunucu iş yükleri için gerçek zamanlı tehdit koruması sağlar ve şüpheli etkinliklerle ilgili uyarıların yanı sıra sağlamlaştırma önerilerini de oluşturur. |Auditınotexists, devre dışı |[1.0.3](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_EnableAdvancedThreatProtectionOnVM_Audit.json) |
+|[Makinelerdeki SQL Server 'lar için Azure Defender etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F6581d072-105e-4418-827f-bd446d56421b) |SQL için Azure Defender, ortaya çıkabilecek ve olası veritabanı güvenlik açıklarını azaltmaya yönelik işlevsellik sunar, SQL veritabanlarına tehditler oluşturabilecek anormal etkinlikleri algılayarak hassas verileri bulabilir ve sınıflandırın. |Auditınotexists, devre dışı |[1.0.2](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_EnableAdvancedDataSecurityOnSqlServerVirtualMachines_Audit.json) |
+|[Depolama için Azure Defender etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F308fbb08-4ab8-4e67-9b29-592e93fb94fa) |Depolama için Azure Defender, depolama hesaplarına erişmek veya açıktan yararlanmak için olağandışı ve potansiyel olarak zararlı denemelere yönelik algılamalar sağlar |Auditınotexists, devre dışı |[1.0.3](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_EnableAdvancedThreatProtectionOnStorageAccounts_Audit.json) |
 
 ### <a name="ensure-that-automatic-provisioning-of-monitoring-agent-is-set-to-on"></a>' İzleme aracısının otomatik sağlanması ' öğesinin ' on ' olarak ayarlandığından emin olun
 

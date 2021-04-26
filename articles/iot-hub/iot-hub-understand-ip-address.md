@@ -6,13 +6,13 @@ ms.author: philmea
 ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
-ms.date: 11/21/2019
-ms.openlocfilehash: 1bfae8c7afbfdc6e73dd8bb17b94e6543361e9ce
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/21/2021
+ms.openlocfilehash: 7d807a15d358bd621baedbff253f0c731e43ed26
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "83848237"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874180"
 ---
 # <a name="iot-hub-ip-addresses"></a>IoT Hub IP adresleri
 
@@ -45,7 +45,7 @@ Bu IP adresi öneklerini, çeşitli ağ yalıtımı hedefleri uygulamak üzere I
 
 ## <a name="limitations-and-workarounds"></a>Sınırlamalar ve geçici çözümler
 
-* IoT Hub IP Filtresi özelliği 10 kuralla sınırlıdır. Bu sınır, Azure müşteri desteği aracılığıyla istekler aracılığıyla oluşturulabilir. 
+* IoT Hub IP Filtresi özelliği 100 kurallara sınırlıdır. Bu sınır, Azure müşteri desteği aracılığıyla istekler aracılığıyla oluşturulabilir. 
 
 * Yapılandırılmış [IP filtreleme kurallarınız](iot-hub-ip-filtering.md) , IoT Hub 'ının yerleşik Olay Hub 'ı uç noktasında değil, yalnızca IoT Hub IP uç noktalarına uygulanır. Ayrıca, iletilerinizin depolandığı Olay Hub 'ında IP filtrelemesinin uygulanmasını istiyorsanız, istediğiniz IP filtreleme kurallarınızı doğrudan yapılandırabileceğiniz bir olay hub 'ı kaynağını izleyebilirsiniz. Bunu yapmak için kendi olay hub 'ınızın kaynağını sağlamanız ve [ileti yönlendirmeyi](./iot-hub-devguide-messages-d2c.md) , IoT Hub yerleşik Olay Hub 'ı yerine bu kaynağa göndermek için ayarlamanız gerekir. Son olarak, yukarıdaki tabloda açıklandığı gibi, ileti yönlendirme işlevini etkinleştirmek için, IoT Hub IP adresi öneklerinden sağlanan olay hub kaynağınız için bağlantıya izin vermeniz gerekir.
 

@@ -4,10 +4,10 @@ description: Azure hizmetlerine erişmek için Azure Service Fabric uygulama kod
 ms.topic: article
 ms.date: 10/09/2019
 ms.openlocfilehash: e26a29020f26583f7e4aa16434c7e8647ba9a5a3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98871070"
 ---
 # <a name="how-to-leverage-a-service-fabric-applications-managed-identity-to-access-azure-services"></a>Azure hizmetlerine erişmek için Service Fabric uygulamasının yönetilen kimliğinden yararlanma

@@ -9,10 +9,10 @@ ms.author: robreed
 ms.collection: windows
 ms.date: 03/26/2018
 ms.openlocfilehash: 72f66aeee64133a13ce0e49155c4b2a90240a3fb
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102559996"
 ---
 # <a name="powershell-dsc-extension"></a>PowerShell DSC Uzantısı

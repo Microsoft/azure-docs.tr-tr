@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 09/28/2020
 ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: aafeb7ebd939805ae18e29670f359660db12e2e1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c8f817ad06742e6f84c3cb87dda0c36866540267
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103555915"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106450332"
 ---
 Şimdilik, Ultra diskler ek sınırlamalara sahiptir ve bunlar şu şekildedir:
 
@@ -31,6 +31,7 @@ Aşağıdaki tabloda, Ultra disklerin ' de kullanılabildiği bölgeler ve bunla
 |Doğu Asya     |Yalnızca tek VM 'Ler (kullanılabilirlik kümeleri ve sanal makine ölçek kümeleri desteklenmez)|
 |Almanya Orta Batı     |Yalnızca tek VM 'Ler (kullanılabilirlik kümeleri ve sanal makine ölçek kümeleri desteklenmez)|
 |Güney Kore - Orta     |Yalnızca tek VM 'Ler (kullanılabilirlik kümeleri ve sanal makine ölçek kümeleri desteklenmez)|
+|Orta Kuzey ABD    |Yalnızca tek VM 'Ler (kullanılabilirlik kümeleri ve sanal makine ölçek kümeleri desteklenmez)|
 |Orta Güney ABD    |Yalnızca tek VM 'Ler (kullanılabilirlik kümeleri ve sanal makine ölçek kümeleri desteklenmez)|
 |US Gov Arizona     |Yalnızca tek VM 'Ler (kullanılabilirlik kümeleri ve sanal makine ölçek kümeleri desteklenmez)|
 |US Gov Virginia     |Yalnızca tek VM 'Ler (kullanılabilirlik kümeleri ve sanal makine ölçek kümeleri desteklenmez)|

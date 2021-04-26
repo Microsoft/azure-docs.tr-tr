@@ -1,25 +1,25 @@
 ---
-title: Konuşma Hizmet Kotaları ve Sınırları
+title: Konuşma hizmeti kotaları ve limitleri
 titleSuffix: Azure Cognitive Services
-description: Azure bilişsel konuşma Hizmetleri kotaları ve limitleri için hızlı başvuru, ayrıntılı açıklama ve en iyi uygulamalar
+description: Azure bilişsel konuşma hizmeti kotaları ve limitleri için hızlı başvuru, ayrıntılı açıklama ve en iyi uygulamalar
 services: cognitive-services
 author: alexeyo26
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 03/27/2021
+ms.date: 04/07/2021
 ms.author: alexeyo
-ms.openlocfilehash: 7fe2942250e165606175392d7749becda0cff23b
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: f851d7999b063a2b1334564902d81343e3789439
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645118"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107011182"
 ---
-# <a name="speech-services-quotas-and-limits"></a>Konuşma Hizmet Kotaları ve Sınırları
+# <a name="speech-service-quotas-and-limits"></a>Konuşma hizmeti kotaları ve limitleri
 
-Bu makalede, Azure bilişsel konuşma Hizmetleri kotaları ve tüm [fiyatlandırma katmanlarında](https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/)limitlerin **ayrıntılı açıklaması** ve bir hızlı başvuru yer almaktadır. Ayrıca, istek azaltmasını önlemek için bazı en iyi yöntemleri içerir. 
+Bu makalede, Azure bilişsel konuşma hizmeti kotaları ve tüm [fiyatlandırma katmanlarında](https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/)limitlerin **ayrıntılı açıklaması** ve bir hızlı başvuru yer almaktadır. Ayrıca, istek azaltmasını önlemek için bazı en iyi yöntemleri içerir. 
 
 ## <a name="quotas-and-limits-quick-reference"></a>Kotalar ve sınırlar hızlı başvuru
 [Metin okuma kotaları ve sınırlarına](#text-to-speech-quotas-and-limits-per-speech-resource) atlayın
@@ -63,19 +63,19 @@ Aşağıdaki tablolarda, "ayarlanamaz" satırı olmayan parametreler, tüm fiyat
 ### <a name="text-to-speech-quotas-and-limits-per-speech-resource"></a>Konuşma kaynağı başına metinden konuşmaya kotalar ve sınırlar
 "Ayarlanamaz" satırı olmayan parametrelerin altındaki tabloda tüm fiyat katmanları **için ayarlanamaz.**
 
-| Kota | Ücretsiz (F0)<sup>3</sup> | Standart (S0) |
-|--|--|--|
-| **Standart ve sinir sesler için saniye başına en fazla Işlem sayısı (TPS)** | 200<sup>4</sup> | 200<sup>4</sup> |  |
-| **Özel ses için eşzamanlı Istek sınırı** |  |  |
-| Varsayılan değer | 10 | 10 |
-| Ayarlanabilir | <sup>5</sup> yok | Evet<sup>5</sup> |
-| **HTTP 'e özgü kotalar** |  |
-| İstek başına en fazla üretilen ses uzunluğu | 10 dakika | 10 dakika |
-| `<voice>`SSML 'de ayrı etiket sayısı üst sınırı | 50 | 50 |
-| **WebSocket 'e özgü kotalar** |  |  |
-|Her açma için üretilen maksimum ses uzunluğu | 10 dakika | 10 dakika |
-|Her açma için en fazla SSML Ileti boyutu |64 KB |64 KB |
-| **REST API sınırı** | dakikada 20 istek | dakikada 300 istek |
+| Kota                                                                          | Ücretsiz (F0)<sup>3</sup>  | Standart (S0)   |
+|--------------------------------------------------------------------------------|------------------------|-----------------|
+| **Standart ve sinir sesler için saniye başına en fazla Işlem sayısı (TPS)** | 200<sup>4</sup>        | 200<sup>4</sup> |
+| **Özel ses için eşzamanlı Istek sınırı**                                  |                        |                 |
+| Varsayılan değer                                                                  | 10                     | 10              |
+| Ayarlanabilir                                                                     | <sup>5</sup> yok         | Evet<sup>5</sup> |
+| **HTTP 'e özgü kotalar**                                                       |                        |                 |
+| İstek başına en fazla üretilen ses uzunluğu                                          | 10 dakika                 | 10 dakika          |
+| `<voice>`SSML 'de ayrı etiket sayısı üst sınırı                                  | 50                     | 50              |
+| **WebSocket 'e özgü kotalar**                                                  |                        |                 |
+| Her açma için üretilen maksimum ses uzunluğu                                             | 10 dakika                 | 10 dakika          |
+| Her açma için en fazla SSML Ileti boyutu                                                 | 64 KB                  | 64 KB           |
+| **REST API sınırı**                                                             | dakikada 20 istek | dakikada 300 istek |
 
 
 <sup>3</sup> **ücretsiz (F0)** fiyatlandırma katmanı için bkz. [fiyatlandırma sayfasında](https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/)Ayrıca aylık allowsuyum.<br/>
@@ -98,9 +98,13 @@ Sonraki bölümlerde, kotaları ayarlama hakkında belirli durumlar açıklanır
 [Metin okuma 'ya atlayın. Özel ses için eşzamanlı Istek sınırını artırma](#text-to-speech-increasing-transcription-concurrent-request-limit-for-custom-voice)
 
 ### <a name="speech-to-text-increasing-online-transcription-concurrent-request-limit"></a>Konuşmayı metne dönüştürme: çevrimiçi döküm eşzamanlı istek sınırını artırma
-Varsayılan olarak, eş zamanlı istek sayısı her konuşma kaynağı (temel model) veya özel uç nokta (özel model) başına 20 ile sınırlıdır. Standart fiyatlandırma katmanı için bu miktar artırılabilir. İsteği göndermeden önce, [Bu bölümün](#detailed-description-quota-adjustment-and-best-practices) malzemesini öğrendiğinizden ve bu [en iyi uygulamalardan](#general-best-practices-to-mitigate-throttling-during-autoscaling)haberdar olduğunuzdan emin olun.
+Varsayılan olarak, eş zamanlı istek sayısı, konuşma kaynağı başına 100 (temel model) ve özel uç nokta başına 20 (özel model) ile sınırlıdır. Standart fiyatlandırma katmanı için bu miktar artırılabilir. İsteği göndermeden önce, [Bu bölümün](#detailed-description-quota-adjustment-and-best-practices) malzemesini öğrendiğinizden ve bu [en iyi uygulamalardan](#general-best-practices-to-mitigate-throttling-during-autoscaling)haberdar olduğunuzdan emin olun.
 
-Eşzamanlı Istek limitini **artırmak, maliyetlerinizi doğrudan etkilemez** . Konuşma Hizmetleri "yalnızca kullandığınız kadar ödeyin" modeli kullanır. Sınır, hizmetin isteklerinizi kısıtlama başlamadan önce ne kadar yüksek ölçeklenebileceğini tanımlar.
+>[!NOTE]
+> Özel modeller kullanıyorsanız, bir konuşma kaynağının birçok özel model dağıtımını barındıran çok sayıda özel uç nokta ile ilişkilendirilebilen lütfen unutmayın. Her özel uç nokta, oluşturma tarafından ayarlanan varsayılan eşzamanlı istek sınırı (20) sayısına sahiptir. Bu ayarı değiştirmeniz gerekiyorsa, her özel uç noktanın ayarlamasını **ayrı ayrı** yapmanız gerekir. Ayrıca, bir konuşma kaynağının temel modeli için eşzamanlı istek sınırı sayısının bu kaynakla ilişkili özel uç noktalar üzerinde **hiçbir** etkisi olmadığını unutmayın.
+
+
+Eşzamanlı Istek limitini **artırmak, maliyetlerinizi doğrudan etkilemez** . Konuşma hizmeti "yalnızca kullandığınız kadar ödeyin" modeli kullanır. Sınır, hizmetin isteklerinizi kısıtlama başlamadan önce ne kadar yüksek ölçeklenebileceğini tanımlar.
 
 **Taban** ve **özel** modellerin eşzamanlı istek sınırları **ayrı ayrı** ayarlanması gerekir.
 
@@ -112,9 +116,9 @@ Eşzamanlı Istek sınırı parametresinin mevcut değeri Azure portal, Command-
 #### <a name="have-the-required-information-ready"></a>Gerekli bilgileri hazırlayın:
 - **Taban model** için:
   - Konuşma kaynak KIMLIĞI
-  - Region
+  - Bölge
 - **Özel model** için: 
-  - Region
+  - Bölge
   - Özel uç nokta KIMLIĞI
 
 - **Bilgi alma (temel model)**:  
@@ -122,7 +126,7 @@ Eşzamanlı Istek sınırı parametresinin mevcut değeri Azure portal, Command-
   - Eşzamanlılık Istek sınırını artırmak istediğiniz konuşma kaynağını seçin
   - *Özellikleri* seçin (*kaynak yönetim* grubu) 
   - Aşağıdaki alanların değerlerini kopyalayın ve kaydedin:
-    - **Kaynak kimliği**
+    - **Kaynak KIMLIĞI**
     - **Konum** (uç nokta bölgeniz)
 
 - **Bilgi alma (özel model)**:
@@ -168,7 +172,7 @@ Genel olarak, üretime geçmeden önce iş yükünün ve iş yükü desenlerinin
 ### <a name="text-to-speech-increasing-transcription-concurrent-request-limit-for-custom-voice"></a>Metinden konuşmaya: özel ses için eşzamanlı istek sınırını artırma
 Varsayılan olarak, bir özel ses bitiş noktası için eşzamanlı istek sayısı 10 ile sınırlıdır. Standart fiyatlandırma katmanı için bu miktar artırılabilir. İsteği göndermeden önce, [Bu bölümün](#detailed-description-quota-adjustment-and-best-practices) malzemesini öğrendiğinizden ve bu [en iyi uygulamalardan](#general-best-practices-to-mitigate-throttling-during-autoscaling)haberdar olduğunuzdan emin olun.
 
-Eşzamanlı Istek limitini **artırmak, maliyetlerinizi doğrudan etkilemez** . Konuşma Hizmetleri "yalnızca kullandığınız kadar ödeyin" modeli kullanır. Sınır, hizmetin isteklerinizi kısıtlama başlamadan önce ne kadar yüksek ölçeklenebileceğini tanımlar.
+Eşzamanlı Istek limitini **artırmak, maliyetlerinizi doğrudan etkilemez** . Konuşma hizmeti "yalnızca kullandığınız kadar ödeyin" modeli kullanır. Sınır, hizmetin isteklerinizi kısıtlama başlamadan önce ne kadar yüksek ölçeklenebileceğini tanımlar.
 
 Eşzamanlı Istek sınırı parametresinin mevcut değeri Azure portal, Command-Line araçları veya API istekleri aracılığıyla görünür **değil** . Mevcut değeri doğrulamak için bir Azure destek Isteği oluşturun.
 

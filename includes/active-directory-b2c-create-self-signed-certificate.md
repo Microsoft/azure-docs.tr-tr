@@ -5,12 +5,12 @@ ms.subservice: B2C
 ms.topic: include
 ms.date: 01/27/2021
 ms.author: mimart
-ms.openlocfilehash: 41d9962657aa81dbe34a52302d1b68ec655f2893
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e26dd7ea9f45af6f725f4deaefd9b5bd79a37e1c
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102095298"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106073210"
 ---
 Henüz bir sertifikanız yoksa, kendinden imzalı bir sertifika kullanabilirsiniz. Otomatik olarak imzalanan sertifika, bir sertifika yetkilisi (CA) tarafından imzalanmamış ve CA tarafından imzalanan bir sertifika için güvenlik garantisi sağlamayan bir güvenlik sertifikasıdır. 
 

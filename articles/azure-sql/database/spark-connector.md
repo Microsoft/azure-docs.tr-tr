@@ -12,10 +12,10 @@ ms.author: denzilr
 ms.reviewer: sstein
 ms.date: 09/02/2020
 ms.openlocfilehash: 2e01e74f5086f7f1eb7e85661fbd35f452d8dae8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92790211"
 ---
 # <a name="accelerate-real-time-big-data-analytics-using-the-spark-connector"></a>Spark bağlayıcısını kullanarak gerçek zamanlı büyük veri analizlerini hızlandırma

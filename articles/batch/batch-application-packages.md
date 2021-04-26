@@ -2,17 +2,17 @@
 title: İşlem düğümlerine uygulama paketleri dağıtma
 description: Toplu işlem düğümlerinde yüklenmek üzere birden çok uygulamayı ve sürümü kolayca yönetmek için Azure Batch uygulama paketleri özelliğini kullanın.
 ms.topic: how-to
-ms.date: 03/24/2021
+ms.date: 04/13/2021
 ms.custom:
 - H1Hack27Feb2017
 - devx-track-csharp
 - contperf-fy21q1
-ms.openlocfilehash: d0ed5cc47694d6576e6aea46b62dfab8ecb73459
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 9c4b40f0e99475fc0b19ec94a14f67af131e5f59
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105045799"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389392"
 ---
 # <a name="deploy-applications-to-compute-nodes-with-batch-application-packages"></a>Batch uygulama paketleriyle işlem düğümlerine uygulama dağıtma
 
@@ -61,7 +61,7 @@ Uygulama paketleriyle, havuzunuzun başlangıç görevinin düğümlere yüklene
 Batch hesabınızdaki uygulama paketlerini yönetmek için [Azure Portal](https://portal.azure.com) veya Batch yönetimi API 'lerini kullanabilirsiniz. Aşağıdaki bölümlerde, bir depolama hesabının nasıl bağlantılandırmasının yanı sıra Azure portal uygulama ve uygulama paketlerinin nasıl ekleneceği ve yönetileceği açıklanmaktadır.
 
 > [!NOTE]
-> Bir [ARM şablonunun](quick-create-template.md) [Microsoft.Batch/batchaccounts](/templates/microsoft.batch/batchaccounts) kaynağında uygulama değerlerini tanımlayabilmeniz mümkün olsa da, toplu iş hesabınızda kullanmak üzere uygulama paketlerini KARŞıYA yüklemek için bir ARM şablonu kullanmak mümkün değildir. Bunları, [aşağıda](#add-a-new-application)açıklandığı gibi bağlı depolama hesabınıza yüklemeniz gerekir.
+> Bir [ARM şablonunun](quick-create-template.md) [Microsoft.Batch/batchaccounts](/azure/templates/microsoft.batch/batchaccounts) kaynağında uygulama değerlerini tanımlayabilmeniz mümkün olsa da, toplu iş hesabınızda kullanmak üzere uygulama paketlerini KARŞıYA yüklemek için bir ARM şablonu kullanmak mümkün değildir. Bunları, [aşağıda](#add-a-new-application)açıklandığı gibi bağlı depolama hesabınıza yüklemeniz gerekir.
 
 ### <a name="link-a-storage-account"></a>Depolama hesabını bağlama
 
@@ -154,7 +154,13 @@ CloudPool myCloudPool =
         poolId: "myPool",
         targetDedicatedComputeNodes: 1,
         virtualMachineSize: "standard_d1_v2",
-        cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "5"));
+        VirtualMachineConfiguration: new VirtualMachineConfiguration(
+            imageReference: new ImageReference(
+                                publisher: "MicrosoftWindowsServer",
+                                offer: "WindowsServer",
+                                sku: "2019-datacenter-core",
+                                version: "latest"),
+            nodeAgentSkuId: "batch.node.windows amd64");
 
 // Specify the application and version to install on the compute nodes
 myCloudPool.ApplicationPackageReferences = new List<ApplicationPackageReference>

@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 10/25/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 69355b58e36f435b5b5dbe94af72d55d9806b156
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 49def79c467aa8f2b3fda9688dc77fcb003a34a5
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100557171"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256574"
 ---
 # <a name="tutorial-for-extending-azure-ad-b2c-to-protect-on-premises-applications-using-strata"></a>Strata kullanarak şirket içi uygulamaları korumak için Azure AD B2C genişletme öğreticisi
 
@@ -344,4 +344,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

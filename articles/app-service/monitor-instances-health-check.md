@@ -7,10 +7,10 @@ ms.topic: article
 ms.date: 12/03/2020
 ms.author: msangapu
 ms.openlocfilehash: e9d92c60e74ac9106246ccd445afaca926065e5f
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104871206"
 ---
 # <a name="monitor-app-service-instances-using-health-check"></a>Sistem durumu denetimini kullanarak App Service örnekleri izleme
@@ -48,7 +48,7 @@ Bu makale, App Service örnekleri izlemek için Azure portal sistem durumu denet
 
 Sistem durumu denetimi seçeneklerini yapılandırmanın yanı sıra, aşağıdaki [uygulama ayarlarını](configure-common.md)da yapılandırabilirsiniz:
 
-| Uygulama ayarı adı | İzin verilen değerler | Açıklama |
+| Uygulama ayarı adı | İzin verilen değerler | Description |
 |-|-|-|
 |`WEBSITE_HEALTHCHECK_MAXPINGFAILURES` | 2 - 10 | En fazla ping başarısızlığı sayısı. Örneğin, olarak ayarlandığında `2` , örneklerinizin başarısız ping işlemleri sonrasında kaldırılacak `2` . Ayrıca, ölçeği büyütme veya küçültme sırasında, yeni örneklerin hazır olmasını sağlamak için sistem durumu denetim yoluna ping App Service. |
 |`WEBSITE_HEALTHCHECK_MAXUNHEALTYWORKERPERCENT` | 0 - 100 | Sağlıklı olmayan örneklere engel olmak için örneklerin yarısını hariç tutulamayacak. Örneğin, bir App Service planı dört örneğe ölçeklenirse ve üçü uygun değilse, en fazla iki durum hariç tutulur. Diğer iki örnek (bir sağlıklı ve bir sağlıksız) istekleri almaya devam edecektir. Tüm örneklerin sağlıksız olduğu en kötü durum senaryosunda, hiçbiri dışlanacaktır. Bu davranışı geçersiz kılmak için, uygulama ayarını ve arasında bir değere `0` ayarlayın `100` . Daha yüksek bir değer, daha sağlıksız örneklerin kaldırılabileceği anlamına gelir (varsayılan değer 50 ' dir). |

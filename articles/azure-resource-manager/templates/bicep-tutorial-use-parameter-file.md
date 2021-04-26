@@ -6,10 +6,10 @@ ms.date: 03/10/2021
 ms.topic: tutorial
 ms.author: jgao
 ms.openlocfilehash: ca3a73cde9549bfcdfd47bc4f1955904fac69d1c
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102632365"
 ---
 # <a name="tutorial-use-parameter-files-to-deploy-azure-resource-manager-bicep-file"></a>Öğretici: Azure Resource Manager bicep dosyasını dağıtmak için parametre dosyalarını kullanma

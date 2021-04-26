@@ -6,12 +6,12 @@ ms.author: sunila
 ms.service: mysql
 ms.topic: how-to
 ms.date: 07/23/2020
-ms.openlocfilehash: 808c3589ba5b51b035ccc8165489c4d11203dd66
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: 492e56e09129f9d47b863624cd72cd508801c143
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105612237"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728275"
 ---
 # <a name="use-azure-active-directory-for-authentication-with-mysql"></a>MySQL ile kimlik doğrulaması için Azure Active Directory kullanma
 
@@ -78,7 +78,6 @@ Azure AD kimliği doğrulanmış kullanıcı için adım 1 ' den MySQL için Azu
 ```azurecli-interactive
 az account get-access-token --resource https://ossrdbms-aad.database.windows.net
 ```
-
 Yukarıdaki kaynak değeri tam olarak gösterildiği gibi belirtilmelidir. Diğer bulutlarda, kaynak değeri şu kullanılarak aranabilir:
 
 ```azurecli-interactive
@@ -90,6 +89,13 @@ Azure CLı sürüm 2.0.71 ve üzeri için, komut tüm bulutlar için aşağıdak
 ```azurecli-interactive
 az account get-access-token --resource-type oss-rdbms
 ```
+PowerShell kullanarak, erişim belirtecini almak için aşağıdaki komutu kullanabilirsiniz:
+
+```azurepowershell-interactive
+$accessToken = Get-AzAccessToken -ResourceUrl https://ossrdbms-aad.database.windows.net
+$accessToken.Token | out-file C:\temp\MySQLAccessToken.txt
+```
+
 
 Kimlik doğrulaması başarılı olduktan sonra Azure AD, bir erişim belirteci döndürür:
 
@@ -105,13 +111,17 @@ Kimlik doğrulaması başarılı olduktan sonra Azure AD, bir erişim belirteci 
 
 Belirteç, kimliği doğrulanmış kullanıcıyla ilgili tüm bilgileri kodlayan ve MySQL için Azure veritabanı hizmetine hedeflenen bir temel 64 dizesidir.
 
-> [!NOTE]
-> Erişim belirteci geçerliliği, 5 dakikadan 60 dakika arasında bir süre sürer. MySQL için Azure veritabanı 'nda oturum açmayı başlatmadan önce erişim belirtecini almanızı öneririz.
+Erişim belirteci geçerliliği, ***5 dakikadan 60 dakika*** arasında bir süre sürer. MySQL için Azure veritabanı 'nda oturum açmayı başlatmadan önce erişim belirtecini almanızı öneririz. Belirteç geçerliliğini görmek için aşağıdaki PowerShell komutunu kullanabilirsiniz. 
+
+```azurepowershell-interactive
+$accessToken.ExpiresOn.DateTime
+```
 
 ### <a name="step-3-use-token-as-password-for-logging-in-with-mysql"></a>3. Adım: MySQL ile oturum açmak için belirteci parola olarak kullanın
 
-Bağlantı sırasında MySQL Kullanıcı parolası olarak erişim belirtecini kullanmanız gerekir. Mysqlme gibi GUI istemcilerini kullanırken, belirteci almak için yukarıdaki yöntemi kullanabilirsiniz. 
+Bağlantı sırasında MySQL Kullanıcı parolası olarak erişim belirtecini kullanmanız gerekir. Mysqlme gibi GUI istemcilerini kullanırken, belirteci almak için yukarıda açıklanan yöntemi kullanabilirsiniz. 
 
+#### <a name="using-mysql-cli"></a>MySQL CLı kullanma
 CLı kullanırken, bu kısa süreli bağlantı kurmak için şunu kullanabilirsiniz: 
 
 **Örnek (Linux/macOS):**
@@ -121,8 +131,15 @@ mysql -h mydb.mysql.database.azure.com \
   --enable-cleartext-plugin \ 
   --password=`az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken`
 ```
+#### <a name="using-mysql-workbench"></a>MySQL çalışma ekranı kullanma
+* MySQL çalışma ekranı 'nı başlatın ve veritabanı seçeneğine tıklayın, ardından "veritabanına Bağlan" seçeneğine tıklayın
+* Ana bilgisayar adı alanına MySQL FQDN 'sini girin. mydb.mysql.database.azure.com
+* Kullanıcı adı alanında, MySQL Azure Active Directory yönetici adını girin ve bunu FQDN değil MySQL sunucu adına ekleyin (örneğin,). user@tenant.onmicrosoft.com@mydb
+* Parola alanında, "kasa içinde depola" ' ya tıklayın ve dosyadan erişim belirtecini yapıştırın, örneğin C:\temp\MySQLAccessToken.txt
+* Gelişmiş sekmesine tıklayın ve "düz metin kimlik doğrulaması eklentisini etkinleştir" seçeneğini işaretleyin
+* Veritabanına bağlanmak için Tamam 'a tıklayın
 
-Bağlanırken dikkat edilmesi gereken önemli noktalar:
+#### <a name="important-considerations-when-connecting"></a>Bağlanırken dikkat edilmesi gereken önemli noktalar:
 
 * `user@tenant.onmicrosoft.com` , bağlanmaya çalıştığınız Azure AD kullanıcısının veya grubunun adıdır
 * Azure AD Kullanıcı/Grup adından sonra sunucu adını her zaman Ekle (örn. `@mydb` )

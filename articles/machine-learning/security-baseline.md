@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 03/16/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: f8bde45cfdf9cf1c9d50faee76161461d8b0aa0a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6457624329d7bb5e367e9de5a1963884e11ad2e3
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104607846"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817008"
 ---
 # <a name="azure-security-baseline-for-azure-machine-learning"></a>Azure Machine Learning için Azure Güvenlik temeli
 
@@ -192,7 +192,7 @@ Ayrıca, güvenlik ve uyumluluk amaçları için Machine Learning hizmeti işlem
 
 - [Azure 'da günlüğe kaydetme ve farklı günlük türlerini anlama](/azure/azure-monitor/platform/platform-logs-overview)
 
-- [Azure Machine Learning oturum açmayı etkinleştir](how-to-track-experiments.md)
+- [Azure Machine Learning oturum açmayı etkinleştir](how-to-log-view-metrics.md)
 
 - [İzleme Azure Machine Learning](monitor-azure-machine-learning.md)
 
@@ -232,7 +232,7 @@ Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri et
 
 - [Log Analytics çalışma alanlarında Azure Machine Learning sorguları gerçekleştirme](https://docs.microsoft.com/azure/machine-learning/monitor-azure-machine-learning#analyzing-log-data)
 
-- [Azure Machine Learning oturum açmayı etkinleştir](how-to-track-experiments.md)
+- [Azure Machine Learning oturum açmayı etkinleştir](how-to-log-view-metrics.md)
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 

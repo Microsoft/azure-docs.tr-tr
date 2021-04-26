@@ -8,12 +8,12 @@ ms.date: 08/20/2018
 ms.topic: conceptual
 ms.service: iot-accelerators
 services: iot-accelerators
-ms.openlocfilehash: e1409b43f0ce1fc0d8c622dda79e857ac6abdd33
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 90a4b808daccc76e8cc9125973c69b13e8086fbf
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96854572"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107713975"
 ---
 # <a name="use-time-series-insights-to-visualize-telemetry-sent-from-the-device-simulation-solution-accelerator"></a>Cihaz simülasyonu çözüm hızlandırıcısında gönderilen Telemetriyi görselleştirmek için Time Series Insights kullanın
 
@@ -23,7 +23,7 @@ Cihaz benzetimi Çözüm Hızlandırıcısı, IoT çözümlerinizi test etmek i�
 
 Bu nasıl yapılır kılavuzundaki adımları izleyerek etkin bir Azure aboneliğine ihtiyacınız vardır. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
-Bu nasıl yapılır kılavuzundaki adımlarda, cihaz benzetimi çözüm Hızlandırıcısını Azure aboneliğinize dağıttığınız varsayılmaktadır. Henüz cihaz benzetimi dağıtmadıysanız, GitHub 'da [cihaz benzetimi dağıtımı](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md) ' na bakın.
+Bu nasıl yapılır kılavuzundaki adımlarda, cihaz benzetimi çözüm Hızlandırıcısını Azure aboneliğinize dağıttığınız varsayılmaktadır. Henüz cihaz benzetimi dağıtmadıysanız, GitHub 'da [cihaz benzetimi dağıtımı](https://github.com/Azure/azure-iot-pcs-device-simulation/blob/master/README.md) ' na bakın.
 
 Bu makalede, çözüm hızlandırıcının adının **contoso simülasyonu** olduğu varsayılır. Aşağıdaki adımları tamamladıktan sonra **contoso simülasyonu** çözüm hızlandırıcısının adıyla değiştirin.
 

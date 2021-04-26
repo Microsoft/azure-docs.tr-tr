@@ -9,10 +9,10 @@ author: swinarko
 ms.author: sawinark
 ms.reviewer: jburchel
 ms.openlocfilehash: 9775266c986b3be547d8b78b8c74765c3b72a92e
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104786864"
 ---
 # <a name="open-and-save-files-on-premises-and-in-azure-with-ssis-packages-deployed-in-azure"></a>Azure 'da dağıtılmış SSIS paketleri ile şirket içinde ve Azure 'da dosya açma ve kaydetme

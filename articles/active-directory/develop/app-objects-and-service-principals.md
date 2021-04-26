@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 02/15/2021
+ms.date: 04/16/2021
 ms.author: ryanwi
 ms.custom: aaddev, identityplatformtop40
 ms.reviewer: sureshja
-ms.openlocfilehash: 358e066631304e727d18d092bd4b9a5b2a0bb89a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fc1b5356ab607ecb60a457a7295831958e6815e1
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103199605"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727069"
 ---
 # <a name="application-and-service-principal-objects-in-azure-active-directory"></a>Azure Active Directory'deki uygulama ve hizmet sorumlusu nesneleri
 
@@ -47,15 +47,21 @@ Microsoft Graph [uygulama varlığı][MS-Graph-App-Entity] , uygulama nesnesinin
 ## <a name="service-principal-object"></a>Hizmet sorumlusu nesnesi
 Bir Azure AD kiracısı tarafından güvenliği sağlanmış olan kaynaklara erişmek için, erişim gerektiren varlık bir güvenlik sorumlusu tarafından temsil etmelidir. Bu gereksinim, hem kullanıcılar (Kullanıcı sorumlusu) hem de uygulamalar (hizmet sorumlusu) için geçerlidir. Güvenlik sorumlusu, Azure AD kiracısında Kullanıcı/uygulama için erişim ilkesini ve izinleri tanımlar. Bu, oturum açma sırasında kullanıcı/uygulamanın kimlik doğrulaması ve kaynak erişimi sırasında yetkilendirme gibi temel özellikleri sunar.
 
-Hizmet sorumlusu, tek bir Kiracıdaki veya dizindeki genel uygulama nesnesinin yerel temsili veya uygulama örneğidir. Hizmet sorumlusu, uygulama nesnesinden oluşturulan somut bir örneğidir ve bu uygulama nesnesinden belirli özellikleri devralır. Uygulamanın kullanıldığı her kiracıda bir hizmet sorumlusu oluşturulur ve genel olarak benzersiz uygulama nesnesine başvurur.  Hizmet sorumlusu nesnesi, uygulamanın belirli bir kiracıda ne yapabileceğini, uygulamaya kimlerin erişebileceğini ve uygulamanın erişebileceği kaynakları tanımlar.
+Üç tür hizmet sorumlusu vardır: uygulama, yönetilen kimlik ve eski.
+
+Hizmet sorumlusu ilk türü, tek bir Kiracıdaki veya dizindeki genel uygulama nesnesinin yerel temsili veya uygulama örneğidir. Bu durumda, hizmet sorumlusu uygulama nesnesinden oluşturulan somut bir örneğidir ve bu uygulama nesnesinden belirli özellikleri devralır. Uygulamanın kullanıldığı her kiracıda bir hizmet sorumlusu oluşturulur ve genel olarak benzersiz uygulama nesnesine başvurur.  Hizmet sorumlusu nesnesi, uygulamanın belirli bir kiracıda ne yapabileceğini, uygulamaya kimlerin erişebileceğini ve uygulamanın erişebileceği kaynakları tanımlar.
 
 Bir uygulamaya bir Kiracıdaki kaynaklara erişim izni verildiğinde (kayıt veya [onay](developer-glossary.md#consent)sağlandığında), bir hizmet sorumlusu nesnesi oluşturulur. Ayrıca [Azure PowerShell](howto-authenticate-service-principal-powershell.md), [Azure CLI](/cli/azure/create-an-azure-service-principal-azure-cli), [Microsoft Graph](/graph/api/serviceprincipal-post-serviceprincipals?tabs=http), [Azure Portal][AZURE-Portal]ve diğer araçları kullanarak bir kiracıda hizmet sorumlusu nesneleri oluşturabilirsiniz. Portalı kullanırken, bir uygulamayı kaydettiğinizde bir hizmet sorumlusu otomatik olarak oluşturulur.
+
+Hizmet sorumlusu ikinci türü, [yönetilen bir kimliği](/azure/active-directory/managed-identities-azure-resources/overview)temsil etmek için kullanılır. Yönetilen kimlikler, geliştiricilerin kimlik bilgilerini yönetme gereksinimini ortadan kaldırır. Yönetilen kimlikler, uygulamalar için Azure AD kimlik doğrulamasını destekleyen kaynaklara bağlanırken kullanılacak bir kimlik sağlar. Yönetilen bir kimlik etkinleştirildiğinde, kiracınızda yönetilen kimliği temsil eden bir hizmet sorumlusu oluşturulur. Yönetilen kimlikleri temsil eden hizmet sorumlularına erişim ve izinler verilebilir, ancak doğrudan güncelleştirilemez veya değiştirilemez.
+
+Üçüncü hizmet asıl türü eski bir uygulamayı temsil eder (uygulama kayıtları, eski deneyimler aracılığıyla tanıtılmadan önce oluşturulan bir uygulama). Eski bir hizmet sorumlusu kimlik bilgileri, hizmet sorumlusu adları, yanıt URL 'Leri ve yetkili bir kullanıcı tarafından düzenlenebilir ancak ilişkili bir uygulama kaydı olmayan diğer özelliklere sahip olabilir. Hizmet sorumlusu yalnızca oluşturulduğu kiracıda kullanılabilir.
+
+Microsoft Graph [ServicePrincipal varlığı][MS-Graph-Sp-Entity] , bir hizmet sorumlusu nesnesinin özelliklerine ilişkin şemayı tanımlar.
 
 Portaldaki **Kurumsal uygulamalar** dikey penceresi, bir Kiracıdaki hizmet sorumlularını listelemek ve yönetmek için kullanılır. Hizmet sorumlusunun izinlerini, Kullanıcı onaylı izinleri, hangi kullanıcıların onay, oturum açma bilgileri ve daha fazlasını yapmış olduğunu görebilirsiniz.
 
 ![Kurumsal uygulamalar dikey penceresi](./media/app-objects-and-service-principals/enterprise-apps-blade.png)
-
-Microsoft Graph [ServicePrincipal varlığı][MS-Graph-Sp-Entity] , bir hizmet sorumlusu nesnesinin özelliklerine ilişkin şemayı tanımlar.
 
 ## <a name="relationship-between-application-objects-and-service-principals"></a>Uygulama nesneleri ve hizmet sorumluları arasındaki ilişki
 

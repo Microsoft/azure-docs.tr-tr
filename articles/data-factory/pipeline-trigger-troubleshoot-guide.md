@@ -3,16 +3,16 @@ title: Azure Data Factory 'da işlem hattı düzenleme ve Tetikleyicileri sorunl
 description: Azure Data Factory içinde işlem hattı tetikleme sorunlarını gidermek için farklı yöntemler kullanın.
 author: ssabat
 ms.service: data-factory
-ms.date: 03/13/2021
+ms.date: 04/01/2021
 ms.topic: troubleshooting
 ms.author: susabat
 ms.reviewer: susabat
-ms.openlocfilehash: 72f2a5eec25b9acc2aedd7b006fe3380141781c8
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 49205025e26f7c0eb609638e70a58c9c0c14748e
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563421"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106385420"
 ---
 # <a name="troubleshoot-pipeline-orchestration-and-triggers-in-azure-data-factory"></a>Azure Data Factory 'da işlem hattı düzenleme ve Tetikleyicileri sorunlarını giderme
 
@@ -66,7 +66,7 @@ Kopyalama etkinliği oluştururken **Ikili kopya** seçeneğini belirleyin. Bu �
 
 ### <a name="a-pipeline-run-fails-when-you-reach-the-capacity-limit-of-the-integration-runtime-for-data-flow"></a>Veri akışı için tümleştirme çalışma zamanının kapasite sınırına ulaştığınızda işlem hattı çalıştırması başarısız olur
 
-**Konuda**
+**Sorun**
 
 Hata iletisi:
 
@@ -83,7 +83,26 @@ Tümleştirme çalışma zamanının kapasite sınırına ulaştınız. Aynı t�
 - İşlem hatlarınızı farklı tetikleyici saatlerinde çalıştırın.
 - Yeni bir tümleştirme çalışma zamanı oluşturun ve işlem hatlarınızı birden çok tümleştirme çalışma zamanına ayırın.
 
-### <a name="how-to-perform-activity-level-errors-and-failures-in-pipelines"></a>İşlem hatlarında etkinlik düzeyindeki hataları ve hataları gerçekleştirme
+### <a name="a-pipeline-run-error-while-invoking-rest-api-in-a-web-activity"></a>Web etkinliğinde REST API çağrılırken işlem hattı çalıştırma hatası
+
+**Sorun**
+
+Hata iletisi:
+
+`
+Operation on target Cancel failed: {“error”:{“code”:”AuthorizationFailed”,”message”:”The client ‘<client>’ with object id ‘<object>’ does not have authorization to perform action ‘Microsoft.DataFactory/factories/pipelineruns/cancel/action’ over scope ‘/subscriptions/<subscription>/resourceGroups/<resource group>/providers/Microsoft.DataFactory/factories/<data factory name>/pipelineruns/<pipeline run id>’ or the scope is invalid. If access was recently granted, please refresh your credentials.”}}
+`
+
+**Neden**
+
+İşlem hatları, yalnızca Azure Data Factory üyesine katkıda bulunan rolü atanırsa ADF REST API yöntemlerini çağırmak için Web etkinliğini kullanabilir. Önce Azure Data Factory yönetilen kimliği, katkıda bulunan güvenlik rolüne Ekle ' ye yapılandırmalısınız. 
+
+**Çözünürlük**
+
+Azure Data Factory REST API bir Web etkinliğinin ayarlar sekmesinde kullanılmadan önce, güvenliğin yapılandırılması gerekir. Azure Data Factory işlem hatları, yalnızca Azure Data Factory yönetilen kimliğe *katkıda*  bulunan rolü atanırsa ADF REST API yöntemlerini çağırmak için Web etkinliğini kullanabilir. Azure portal açarak ve Sol menüdeki **tüm kaynaklar** bağlantısına tıklayarak başlayın. *Rol ataması Ekle* kutusunda **Ekle** düğmesine tıklayarak, KATKıDA bulunan rolü olan ADF yönetilen kimliği eklemek için **Azure Data Factory** ' ı seçin.
+
+
+### <a name="how-to-check-and-branch-on-activity-level-success-and-failure-in-pipelines"></a>İşlem hatlarında etkinlik düzeyindeki başarıyı ve başarısızlığı denetleme ve dallandırma
 
 **Neden**
 
@@ -115,7 +134,7 @@ Başarısız Data Factory işlem hatlarını dakikalar içinde izlemeniz, 5 daki
 
 *Foreach* hakkında bilinen olgular
  * Foreach, varsayılan değer 20 ve Max 50 olan Batch Count (n) adlı bir özelliğe sahiptir.
- * Toplu iş sayısı n, n kuyruk oluşturmak için kullanılır. Daha sonra bu sıraların nasıl oluşturulduğu hakkında bazı ayrıntılar ele alınacaktır.
+ * Toplu iş sayısı n, n kuyruk oluşturmak için kullanılır. 
  * Her sıra sırayla çalışır, ancak paralel olarak çalışan birkaç kuyruğa sahip olabilirsiniz.
  * Kuyruklar önceden oluşturulur. Bu, çalışma zamanı sırasında kuyrukların yeniden dengelenmesi gerekmediği anlamına gelir.
  * Her zaman, kuyruk başına en çok bir öğe işlem yapmış olursunuz. Bu, belirli bir zamanda en fazla n öğe işlenen anlamına gelir.
@@ -124,7 +143,8 @@ Başarısız Data Factory işlem hatlarını dakikalar içinde izlemeniz, 5 daki
 **Çözünürlük**
 
  * *Her biri* paralel olarak çalıştırılan her bir Için *SetVariable* etkinliğini kullanmamalısınız.
- * Kuyrukların *oluşturulduğu şekilde* göz önünde bulundurarak, müşteri, her bir foreach 'in benzer işleme süresine sahip olduğu birden çok dikkatli ayarlayarak foreach performansını iyileştirebilirler. Bu, uzun çalıştırmanın ardışık olarak değil paralel olarak işlenmesini güvence altına alacak.
+ * Kuyrukların oluşturulduğu şekilde göz önünde bulundurarak, müşteri, her *foreach* 'in benzer işleme süresine sahip olduğu *foreach* ' i ayarlayarak foreach performansını iyileştirebilir. 
+ * Bu, uzun çalıştırmanın ardışık olarak değil paralel olarak işlenmesini güvence altına alacak.
 
  ### <a name="pipeline-status-is-queued-or-stuck-for-a-long-time"></a>İşlem hattı durumu kuyruğa alındı veya uzun bir süre takıldı
  
@@ -135,7 +155,7 @@ Başarısız Data Factory işlem hatlarını dakikalar içinde izlemeniz, 5 daki
  **Çözünürlük**
  
 * Eşzamanlılık sınırı: işlem hattınızda bir eşzamanlılık ilkesi varsa, devam eden eski bir işlem hattı çalıştırması olmadığını doğrulayın. Azure Data Factory izin verilen en fazla ardışık düzen eşzamanlılık 10 işlem hatdır. 
-* Sınırları izleme: ADF yazma tuvaline gidin, işlem hattınızı seçin ve kendisine atanmış bir eşzamanlılık özelliği olup olmadığını belirleyin. Varsa, Izleme görünümüne gidin ve devam eden son 45 gün içinde hiçbir şey olmadığından emin olun. Devam eden bir sorun varsa iptal edebilir ve yeni işlem hattı çalışmasının başlaması gerekir.
+* Sınırları izleme: ADF yazma tuvaline gidin, işlem hattınızı seçin ve kendisine atanmış bir eşzamanlılık özelliği olup olmadığını belirleyin. Varsa, İzleme görünümüne gidin ve son 45 gün içinde devam eden hiçbir şey olmadığından emin olun. Devam eden bir sorun varsa iptal edebilir ve yeni işlem hattı çalışmasının başlaması gerekir.
 * Geçici sorunlar: çalıştırmalarınızın geçici bir ağ sorunundan, kimlik bilgisi hatalarından, hizmet kesintilerine göre etkilenmesi mümkündür.  Bu durumda Azure Data Factory, tüm çalıştırmaları izleyen ve bir sorun olduğunu fark edildiğinde Başlatan bir iç kurtarma işlemine sahiptir. Bu işlem bir saat sonra gerçekleşir, bu nedenle çalıştırma bir saatten uzun bir süre boyunca takılırsa bir destek talebi oluşturun.
  
 ### <a name="longer-start-up-times-for-activities-in-adf-copy-and-data-flow"></a>ADF kopyalama ve veri akışı etkinliklerinin daha uzun süre başlangıç zamanı

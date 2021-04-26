@@ -8,37 +8,37 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: conceptual
-ms.date: 08/06/2020
+ms.date: 04/19/2021
 ms.author: lajanuar
-ms.openlocfilehash: 2bc2c1361c7d2f73ff8a67e906a6db725f669d52
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b5beb222ec20b1e7941f9438c0aacf98879a567a
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "98895416"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727951"
 ---
 # <a name="request-limits-for-translator"></a>Çevirmen için istek sınırları
 
-Bu makale, çevirmen için azaltma sınırları sağlar. Hizmetler çeviri, alfabelik, cümle uzunluğu algılama, dil algılama ve alternatif çeviriler içerir.
+Bu makale, çevirmen çevirisi, alfabelik, cümle uzunluğu algılama, dil algılama ve alternatif çeviriler için azaltma sınırları sağlar.
 
 ## <a name="character-and-array-limits-per-request"></a>İstek başına karakter ve dizi sınırları
 
-Her çeviri isteği, çeviri yaptığınız tüm hedef dillerde 10.000 karakterle sınırlıdır. Örneğin, 3 farklı dile çevirmek için 3.000 karakterlik çeviri isteği gönderilmesi, istek sınırını karşılayan 3000x3 = 9.000 karakter istek boyutuyla sonuçlanır. İstek sayısına göre değil, karakter başına ücretlendirilirsiniz. Daha kısa istekler göndermeniz önerilir.
+Her çeviri isteği, çeviri yaptığınız tüm hedef dillerde 10.000 karakterle sınırlıdır. Örneğin, üç farklı dile çevrilecek 3.000 karakterlik bir çeviri isteği gönderilmesi, istek sınırını karşılayan 3000x3 = 9.000 karakterlik bir istek boyutuyla sonuçlanır. İstek sayısına göre değil, karakter başına ücretlendirilirsiniz. Daha kısa istekler göndermeniz önerilir.
 
 Aşağıdaki tabloda, çeviricisinin her bir işlemi için dizi öğesi ve karakter sınırları listelenmektedir.
 
 | İşlem | Dizi öğesinin en büyük boyutu |    En fazla dizi öğesi sayısı |    En fazla Istek boyutu (karakter) |
 |:----|:----|:----|:----|
-| Çeviri | 10,000    | 100   | 10,000 |
-| Karakter Dönüştürme | 5.000 | 10    | 5.000 |
-| Algılama | 50,000 | 100 |   50,000 |
-| BreakSentence | 50,000    | 100 | 50,000 |
-| Sözlük Arama| 100 |  10  | 1.000 |
-| Sözlük Örnekleri | "metin için 100 ve çeviri için 100 (200 toplam)| 10|   2.000 |
+| Çeviri | 10,000| 100| 10,000 |
+| Karakter Dönüştürme | 5.000| 10| 5.000 |
+| Algılama | 50,000 |100 |50,000 |
+| BreakSentence | 50,000| 100 |50,000 |
+| Sözlük Arama| 100 |10| 1.000 |
+| Sözlük Örnekleri | "metin için 100 ve çeviri için 100 (200 toplam)| 10|2.000 |
 
 ## <a name="character-limits-per-hour"></a>Saat başına karakter sınırları
 
-Saat başına karakter sınırınız, çevirmen abonelik katmanınızı temel alır. 
+Saat başına karakter sınırınız, çevirmen abonelik katmanınızı temel alır.
 
 Saatlik kota, saat boyunca eşit olarak tüketilmelidir. Örneğin, saat başına 2.000.000 karakterlik F0 katman sınırında, karakterler dakikada kabaca 33.300 karakterden daha hızlı bir şekilde tüketilmelidir (2.000.000 karakter, 60 dakikaya bölünür).
 
@@ -54,11 +54,11 @@ Bu sınırlara ulaşan veya daha fazla bilgi alırsanız veya kısa bir süre i�
 
 [Çok hizmet abonelikleri](./reference/v3-0-reference.md#authentication) limitleri S1 katmanıyla aynı.
 
-Bu sınırlar, Microsoft 'un standart çeviri modelleriyle kısıtlıdır. Özel çevirici kullanan özel çeviri modelleri saniyede 1.800 karakter ile sınırlıdır.
+Bu sınırlar, Microsoft 'un standart çeviri modelleriyle kısıtlıdır. Özel çevirici kullanan özel çeviri modelleri, her model için saniyede 1.800 karakter ile sınırlıdır.
 
 ## <a name="latency"></a>Gecikme süresi
 
-Özel modeller kullanılırken, çevirmen, Standart modeller ve 120 saniye kullanarak en fazla 15 saniye gecikme süresine sahiptir. Genellikle, *100 karakter içindeki metin* yanıtları 150 milisaniyelik ile 300 milisaniyeye döndürülür. Özel çevirmen modelleri sürekli istek hızında benzer gecikme özelliklerine sahiptir ve istek hızlarınız aralıklı olduğunda daha yüksek bir gecikme süresine sahip olabilir. Yanıt süreleri, istek ve dil çiftinin boyutuna bağlı olarak değişir. Bu zaman diliminde bir çeviri veya [hata yanıtı](./reference/v3-0-reference.md#errors) almazsanız lütfen kodunuzu, ağ bağlantınızı kontrol edin ve yeniden deneyin. 
+Özel modeller kullanılırken, çevirmen, Standart modeller ve 120 saniye kullanarak en fazla 15 saniye gecikme süresine sahiptir. Genellikle, *100 karakter içindeki metin* yanıtları 150 milisaniyelik ile 300 milisaniyeye döndürülür. Özel çevirmen modelleri sürekli istek hızında benzer gecikme özelliklerine sahiptir ve istek hızlarınız aralıklı olduğunda daha yüksek bir gecikme süresine sahip olabilir. Yanıt süreleri, istek ve dil çiftinin boyutuna bağlı olarak değişir. Bu zaman diliminde bir çeviri veya [hata yanıtı](./reference/v3-0-reference.md#errors) almazsanız, kodunuzu, ağ bağlantınızı kontrol edin ve yeniden deneyin.
 
 ## <a name="sentence-length-limits"></a>Tümce uzunluğu sınırları
 

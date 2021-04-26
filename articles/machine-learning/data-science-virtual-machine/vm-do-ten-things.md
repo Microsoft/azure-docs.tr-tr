@@ -10,10 +10,10 @@ ms.author: laobri
 ms.topic: conceptual
 ms.date: 05/08/2020
 ms.openlocfilehash: c44c40f2ddab53cf0beb5ecd48127d126fdb4333
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "101657409"
 ---
 # <a name="data-science-with-a-windows-data-science-virtual-machine"></a>Windows Veri Bilimi Sanal Makinesi ile veri bilimi

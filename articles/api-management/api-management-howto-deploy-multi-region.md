@@ -2,23 +2,17 @@
 title: Azure API Management hizmetlerini birden çok Azure bölgesine dağıtma
 titleSuffix: Azure API Management
 description: Azure API Management hizmet örneğini birden çok Azure bölgesine dağıtmayı öğrenin.
-services: api-management
-documentationcenter: ''
 author: mikebudzynski
-manager: cfowler
-editor: ''
 ms.service: api-management
-ms.workload: mobile
-ms.tgt_pltfrm: na
-ms.topic: article
-ms.date: 04/20/2020
+ms.topic: how-to
+ms.date: 04/13/2021
 ms.author: apimpm
-ms.openlocfilehash: 427ebfe865002612be2f9aeb9db416f5c2f41e52
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9546813173e72b1f264c3668ee889bbeea07ce7f
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88065463"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107534086"
 ---
 # <a name="how-to-deploy-an-azure-api-management-service-instance-to-multiple-azure-regions"></a>Bir Azure API Management hizmeti örneğini birden fazla Azure bölgesine dağıtma
 
@@ -27,24 +21,30 @@ Azure API Management, API yayımcılarının herhangi bir sayıda desteklenen Az
 Yeni bir Azure API Management hizmeti başlangıçta tek bir Azure bölgesinde, birincil bölgede yalnızca bir [birim][unit] içerir. Birincil veya Ikincil bölgelere ek birimler eklenebilir. API Management ağ geçidi bileşeni, seçilen her birincil ve Ikincil bölgeye dağıtılır. Gelen API istekleri, en yakın bölgeye otomatik olarak yönlendirilir. Bir bölge çevrimdışı kalırsa, API istekleri otomatik olarak, başarısız bölge sonraki en yakın ağ geçidine yönlendirilir.
 
 > [!NOTE]
-> Yalnızca API Management ağ geçidi bileşeni tüm bölgelere dağıtılır. Hizmet Yönetimi bileşeni ve geliştirici portalı yalnızca birincil bölgede barındırılır. Bu nedenle, birincil bölge kesintisi durumunda, geliştirici portalına erişim ve yapılandırmayı değiştirebilme (ör. API ekleme, ilkeleri uygulama), birincil bölge yeniden çevrimiçi olana kadar zayıflatılabilir. Birincil bölge çevrimdışı iken kullanılabilir olan Ikincil bölgeler, API trafiği için kullanılabilen en son yapılandırmayı kullanmaya devam eder.
+> Yalnızca API Management ağ geçidi bileşeni tüm bölgelere dağıtılır. Hizmet Yönetimi bileşeni ve geliştirici portalı yalnızca birincil bölgede barındırılır. Bu nedenle, birincil bölge kesintisi durumunda, geliştirici portalına erişim ve yapılandırmayı değiştirebilme (ör. API ekleme, ilkeleri uygulama), birincil bölge yeniden çevrimiçi olana kadar zayıflatılabilir. Birincil bölge çevrimdışıyken, kullanılabilir Ikincil bölgeler, kullanılabilir en son yapılandırmayı kullanarak API trafiğini sunmaya devam edecektir. Birincil veya Ikincil bölgelerin kullanılabilirliğini ve esnekliğini geliştirmek için isteğe bağlı olarak [bölge rederini](zone-redundancy.md) etkinleştirin.
 
 >[!IMPORTANT]
 > Müşteri verilerinin tek bir bölgede depolanmasını etkinleştirme özelliği şu anda yalnızca Asya Pasifik coğrafi bölgenin Güneydoğu Asya bölgesinde (Singapur) kullanılabilir. Diğer tüm bölgeler için müşteri verileri coğrafi olarak depolanır.
 
 [!INCLUDE [premium.md](../../includes/api-management-availability-premium.md)]
 
-## <a name="deploy-api-management-service-to-a-new-region"></a><a name="add-region"> </a>API Management hizmetini yeni bir bölgeye dağıtma
 
-> [!NOTE]
-> Henüz bir API Management hizmet örneği oluşturmadıysanız, bkz. [API Management hizmet örneği oluşturma][create an api management service instance].
+## <a name="prerequisites"></a>Önkoşullar
 
-1. Azure portal, API Management hizmetinize gidin ve menüdeki **konumlar** girdisine tıklayın.
-2. Üstteki çubukta **+ Ekle** ' ye tıklayın.
-3. Açılan listeden konumu seçin ve kaydırıcıyla birim sayısını ayarlayın.
-4. Onaylamak için **Ekle** düğmesine tıklayın.
-5. Tüm konumları yapılandırmadan bu işlemi tekrarlayın.
-6. Dağıtım işlemini başlatmak için üstteki çubukta **Kaydet** ' e tıklayın.
+* Henüz bir API Management hizmet örneği oluşturmadıysanız, bkz. [API Management hizmet örneği oluşturma](get-started-create-service-instance.md). Premium hizmet katmanını seçin.
+* API Management örneğiniz bir [Sanal ağda](api-management-using-with-vnet.md)dağıtılmışsa, eklemeyi planladığınız konumda bir sanal ağ, alt ağ ve genel IP adresi oluşturduğunuzdan emin olun.
+
+## <a name="deploy-api-management-service-to-an-additional-location"></a><a name="add-region"> </a>API Management hizmetini ek bir konuma dağıtma
+
+1. Azure portal, API Management hizmetinize gidin ve menüden **konumlar** ' ı seçin.
+1. Üstteki çubukta **+ Ekle** ' yi seçin.
+1. Açılan listeden konumu seçin.
+1. Konumdaki ölçek **[birimi](upgrade-and-scale.md)** sayısını seçin.
+1. İsteğe bağlı olarak [**kullanılabilirlik bölgelerini**](zone-redundancy.md)etkinleştirin.
+1. API Management örneği bir [Sanal ağda](api-management-using-with-vnet.md)dağıtılmışsa, konumdaki sanal ağ ayarlarını yapılandırın. Konumda bulunan mevcut bir sanal ağ, alt ağ ve genel IP adresi seçin.
+1. Onaylamak için **Ekle** ' yi seçin.
+1. Tüm konumları yapılandırmadan bu işlemi tekrarlayın.
+1. Dağıtım işlemini başlatmak için üstteki çubukta **Kaydet** ' i seçin.
 
 ## <a name="delete-an-api-management-service-location"></a><a name="remove-region"> </a>API Management hizmet konumunu silme
 

@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 05/26/2020
-ms.openlocfilehash: 8e1fc816e32e563161e1604bdcd7a7006353e4ed
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 175473f5abd74fa208962fd94852e9ddedfaf7e3
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102047394"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105825"
 ---
 # <a name="create-a-log-analytics-workspace-with-azure-cli-20"></a>Azure CLı 2,0 ile Log Analytics çalışma alanı oluşturma
 
@@ -107,7 +107,7 @@ Aşağıdaki parametreler varsayılan bir değer ayarlar:
 
 2. Gereksinimlerinizi karşılayacak şekilde şablonu düzenleyin. Hangi özelliklerin ve değerlerin desteklendiğini öğrenmek için [Microsoft. Operationalınsights/Workspaces şablon](/azure/templates/microsoft.operationalinsights/2015-11-01-preview/workspaces) başvurusunu gözden geçirin.
 3. Bu dosyayı yerel bir klasöre **deploylaworkspacetemplate.js** olarak kaydedin.   
-4. Bu şablonu dağıtmaya hazırsınız. Şablonu içeren klasörden aşağıdaki komutları kullanın. Bir çalışma alanı adı sorulduğunda, tüm Azure abonelikleri genelinde genel olarak benzersiz bir ad sağlayın.
+4. Bu şablonu dağıtmaya hazırsınız. Şablonu içeren klasörden aşağıdaki komutları kullanın. Bir çalışma alanı adı sorulduğunda, kaynak grubunuzda benzersiz bir ad sağlayın.
 
     ```azurecli
     az deployment group create --resource-group <my-resource-group> --name <my-deployment-name> --template-file deploylaworkspacetemplate.json
@@ -120,7 +120,7 @@ Dağıtımın tamamlanması birkaç dakika sürebilir. Tamamlandığında, sonuc
 ## <a name="troubleshooting"></a>Sorun giderme
 Son 14 gün içinde silinen bir çalışma alanı oluşturduğunuzda ve [geçici silme durumunda](../logs/delete-workspace.md#soft-delete-behavior)işlem, çalışma alanı yapılandırmanıza bağlı olarak farklı bir sonuca sahip olabilir:
 1. Silinen çalışma alanında aynı çalışma alanı adı, kaynak grubu, abonelik ve bölge sağlarsanız, çalışma alanınız veri, yapılandırma ve bağlı aracılar dahil kurtarılacak.
-2. Aynı çalışma alanı adını, ancak farklı kaynak grubunu, aboneliği veya bölgeyi kullanıyorsanız, *' Workspace-Name ' çalışma alanı adı benzersiz değil* veya *Çakışma* olduğunda bir hata alırsınız. Geçici silme işlemini geçersiz kılmak ve çalışma alanınızı kalıcı olarak silmek ve aynı ada sahip yeni bir çalışma alanı oluşturmak için, önce çalışma alanını kurtarmak ve kalıcı silme gerçekleştirmek için şu adımları izleyin:
+2. Çalışma alanı adı her kaynak grubu için benzersiz olmalıdır. Zaten var olan bir çalışma alanı adı kullanırsanız, kaynak grubunuzda de geçici silme sırasında, *' Workspace-Name ' çalışma alanı adı benzersiz değil* veya *Çakışma* olan bir hata alırsınız. Geçici silme işlemini geçersiz kılmak ve çalışma alanınızı kalıcı olarak silmek ve aynı ada sahip yeni bir çalışma alanı oluşturmak için, önce çalışma alanını kurtarmak ve kalıcı silme gerçekleştirmek için şu adımları izleyin:
    * Çalışma alanınızı [kurtarma](../logs/delete-workspace.md#recover-workspace)
    * Çalışma alanınızı [kalıcı olarak silme](../logs/delete-workspace.md#permanent-workspace-delete)
    * Aynı çalışma alanı adını kullanarak yeni bir çalışma alanı oluştur

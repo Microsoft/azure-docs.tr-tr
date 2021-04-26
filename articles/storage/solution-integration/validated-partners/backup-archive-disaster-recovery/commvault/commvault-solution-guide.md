@@ -8,12 +8,12 @@ ms.date: 03/15/2021
 ms.topic: conceptual
 ms.service: storage
 ms.subservice: partner
-ms.openlocfilehash: ce321574ce2878f51864f55bf5618df2c96d1068
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fa60b6f002e49babc1e1f014bcb941e7953a43a8
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104589897"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484787"
 ---
 # <a name="backup-to-azure-with-commvault"></a>Commkasasıyla Azure 'da yedekleme
 
@@ -224,7 +224,7 @@ Ayrıca, bir servis talebi açmak veya e-posta yoluyla Commkasa desteğine ulaş
 Daha ayrıntılı bilgi için aşağıdaki Commkasası belgelerine bakın:
 
 - [Commkasakasası Kullanıcı Kılavuzu](https://documentation.commvault.com/commvault/v11/article?p=37684_1.htm)
-- [Commkasakasası Azure mimari Kılavuzu](https://www.commvault.com/resources/public-cloud-architecture-guide-for-microsoft-azure-v11-sp16)
+- [Commkasakasası Azure mimari Kılavuzu](https://documentation.commvault.com/commvault/v11/others/pdf/public-cloud-architecture-guide-for-microsoft-azure11-19.pdf)
 
 ### <a name="marketplace-offerings"></a>Market teklifleri
 

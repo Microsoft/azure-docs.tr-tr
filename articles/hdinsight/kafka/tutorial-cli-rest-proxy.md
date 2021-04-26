@@ -5,12 +5,12 @@ ms.service: hdinsight
 ms.topic: tutorial
 ms.date: 02/27/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: ff11b8461b483f5a66df19bb1b108a1fe1168fb9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: cfb9ff9e6b107c9da84b164a055453994fc29229
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98944021"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786648"
 ---
 # <a name="tutorial-create-an-apache-kafka-rest-proxy-enabled-cluster-in-hdinsight-using-azure-cli"></a>Öğretici: Azure CLı kullanarak HDInsight 'ta Apache Kafka REST proxy etkin kümesi oluşturma
 
@@ -82,7 +82,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
     export componentVersion=kafka=2.1
     ```
 
-1. Aşağıdaki komutu girerek [kaynak grubunu oluşturun](/cli/azure/group#az-group-create) :
+1. Aşağıdaki komutu girerek [kaynak grubunu oluşturun](/cli/azure/group#az_group_create) :
 
     ```azurecli
      az group create \
@@ -90,7 +90,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
         --name $resourceGroupName
     ```
 
-1. Aşağıdaki komutu girerek [bir Azure depolama hesabı oluşturun](/cli/azure/storage/account#az-storage-account-create) :
+1. Aşağıdaki komutu girerek [bir Azure depolama hesabı oluşturun](/cli/azure/storage/account#az_storage_account_create) :
 
     ```azurecli
     # Note: kind BlobStorage is not available as the default storage account.
@@ -103,7 +103,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
         --sku Standard_LRS
     ```
 
-1. Azure Storage hesabından [birincil anahtarı ayıklayın](/cli/azure/storage/account/keys#az-storage-account-keys-list) ve aşağıdaki komutu girerek bir değişkende saklayın:
+1. Azure Storage hesabından [birincil anahtarı ayıklayın](/cli/azure/storage/account/keys#az_storage_account_keys_list) ve aşağıdaki komutu girerek bir değişkende saklayın:
 
     ```azurecli
     export storageAccountKey=$(az storage account keys list \
@@ -112,7 +112,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
         --query [0].value -o tsv)
     ```
 
-1. Aşağıdaki komutu girerek [bir Azure depolama kapsayıcısı oluşturun](/cli/azure/storage/container#az-storage-container-create) :
+1. Aşağıdaki komutu girerek [bir Azure depolama kapsayıcısı oluşturun](/cli/azure/storage/container#az_storage_container_create) :
 
     ```azurecli
     az storage container create \
@@ -121,7 +121,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
         --account-name $storageAccount
     ```
 
-1. [HDInsight kümesini oluşturun](/cli/azure/hdinsight#az-hdinsight-create). Komutu girmeden önce aşağıdaki parametreleri aklınızda edin:
+1. [HDInsight kümesini oluşturun](/cli/azure/hdinsight#az_hdinsight_create). Komutu girmeden önce aşağıdaki parametreleri aklınızda edin:
 
     1. Kafka kümeleri için gerekli parametreler:
 

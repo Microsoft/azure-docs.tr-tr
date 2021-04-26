@@ -6,13 +6,13 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: include
 author: mingshen-ms
 ms.author: krsh
-ms.date: 03/25/2021
-ms.openlocfilehash: 8898a762e8a1e7a2d5c104f99d12032c676a5ca4
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.date: 04/16/2021
+ms.openlocfilehash: e119d40cd0b8f482d33c3c86c644cf6a0846390a
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105630057"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727134"
 ---
 ## <a name="generalize-the-image"></a>Görüntüyü genelleştirin
 
@@ -40,6 +40,9 @@ Aşağıdaki işlem bir Linux sanal makinesini genelleştirir ve ayrı bir VM ol
 
 ### <a name="capture-image"></a>Görüntü yakala
 
+> [!NOTE]
+> Imza içeren Azure aboneliğinin, yayımlamak için yayımcı hesabıyla aynı kiracı altında olması gerekir. Ayrıca, yayımcı hesabının SıG içeren aboneliğe en az katkıda bulunan erişimi olmalıdır.
+
 VM 'niz çalışmaya başladıktan sonra Azure Paylaşılan görüntü galerisinde bu dosyayı yakalayabilirsiniz. Yakalamak için aşağıdaki adımları izleyin:
 
 1. [Azure Portal](https://ms.portal.azure.com/), sanal makinenizin sayfasına gidin.
@@ -51,8 +54,6 @@ VM 'niz çalışmaya başladıktan sonra Azure Paylaşılan görüntü galerisin
 7. Görüntü için bir **sürüm numarası** belirtin.
 8. Seçimlerinizi gözden geçirmek için **gözden geçir + oluştur** ' u seçin.
 9. Doğrulama başarılı olduktan sonra **Oluştur**' u seçin.
-
-Imza içeren Azure aboneliğinin, yayımlamak için yayımcı hesabıyla aynı kiracı altında olması gerekir. Ayrıca, yayımcı hesabının SıG 'a sahip erişimi olması gerekir. 
 
 Erişim vermek için:
 

@@ -8,12 +8,12 @@ author: palanis-MSFT
 ms.author: palanis
 ms.reviewer: stmummer
 ms.date: 3/17/2021
-ms.openlocfilehash: db502f4652a6ae541a504249475898e3e771f90d
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: ab7a0c3fa947fdf62672013b5a557d0447eb67c5
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563404"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107106862"
 ---
 # <a name="configure-co-sell-for-a-commercial-marketplace-offer"></a>Ticari Market teklifi için ortak satışı yapılandırma
 
@@ -38,7 +38,7 @@ Ortak satış seçeneği aşağıdaki teklif türleri için kullanılabilir.
 1. [Iş Ortağı Merkezi](https://partner.microsoft.com/dashboard/home)' nde oturum açın.
 1. Sol gezinti menüsünde **ticari Market**  >  **genel bakış**' ı seçin.
     > [!TIP]
-    > Sol gezinti bölmesinde **ticari Market** görmüyorsanız, [iş ortağı merkezi 'nde ticari Market hesabı oluşturun](./partner-center-portal/create-account.md) ve hesabınızın ticari Market programına kayıtlı olduğundan emin olun.
+    > Sol gezinti bölmesinde **ticari Market** görmüyorsanız, [iş ortağı merkezi 'nde ticari Market hesabı oluşturun](create-account.md) ve hesabınızın ticari Market programına kayıtlı olduğundan emin olun.
 1. **Genel bakış** sekmesinde, ortak satış yapmak istediğiniz teklifi seçin.
     > [!NOTE]
     > Henüz yayımlanmamış veya zaten yayınlanmış bir teklifle birlikte, ortak satışı yapılandırabilirsiniz.

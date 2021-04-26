@@ -3,15 +3,15 @@ title: Windows sanal masaüstü (klasik) konak havuzu Azure Marketi-Azure
 description: Azure Marketi 'ni kullanarak Windows sanal masaüstü (klasik) konak havuzu oluşturma.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 03/30/2020
+ms.date: 03/31/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 04184a658ae1efd03afd3e920818eb5317bc7553
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: fa271ba87f68d46452633d2b426c7fd805f8566b
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88008602"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445168"
 ---
 # <a name="tutorial-create-a-host-pool-in-windows-virtual-desktop-classic"></a>Öğretici: Windows sanal masaüstü 'nde bir konak havuzu oluşturma (klasik)
 
@@ -80,10 +80,10 @@ Bundan sonra, uygun sekmelerin bilgilerini girmek için sonraki bölümde yer al
 1. Varsayılanları kabul edin ya da sanal makinelerin sayısını ve boyutunu özelleştirin.
 
     >[!NOTE]
-    >Aradığınız belirli bir sanal makine boyutu, boyut seçicisinde görünmüyorsa, bunun nedeni, henüz Azure Market aracına eklendi. Bir boyut istemek için [Windows sanal masaüstü UserVoice forumundaki](https://windowsvirtualdesktop.uservoice.com/forums/921118-general)bir istek oluşturun veya var olan bir isteği oylayın.
+    >Aradığınız belirli bir sanal makine boyutu, boyut seçicisinde görünmüyorsa, bunun nedeni, henüz Azure Market aracına eklendi.
 
-1. Sanal makinelerin adları için bir ön ek girin. Örneğin, *ön ek* girerseniz, sanal makineler **önek-0**, **ön ek-1** vb. olarak adlandırılır.
-1. **İleri ' yi seçin: sanal makine ayarları**.
+2. Sanal makinelerin adları için bir ön ek girin. Örneğin, *ön ek* girerseniz, sanal makineler **önek-0**, **ön ek-1** vb. olarak adlandırılır.
+3. **İleri ' yi seçin: sanal makine ayarları**.
 
 ### <a name="virtual-machine-settings"></a>Sanal makine ayarları
 

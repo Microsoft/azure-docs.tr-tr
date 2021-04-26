@@ -8,10 +8,10 @@ ms.service: data-factory
 ms.topic: conceptual
 ms.date: 01/10/2018
 ms.openlocfilehash: 644a0d645abb186731ddb1f408cd36e5b9ba3c3f
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104780030"
 ---
 # <a name="invoke-spark-programs-from-azure-data-factory-pipelines"></a>Azure Data Factory işlem hatlarından Spark programları çağırma
@@ -324,17 +324,17 @@ Aşağıdaki tabloda JSON tanımında kullanılan JSON özellikleri açıklanmak
 | Özellik | Açıklama | Gerekli |
 | -------- | ----------- | -------- |
 | name | İşlem hattındaki etkinliğin adı. | Yes |
-| açıklama | Etkinliğin ne yaptığını açıklayan metin. | Hayır |
+| açıklama | Etkinliğin ne yaptığını açıklayan metin. | No |
 | tür | Bu özellik HDInsightSpark olarak ayarlanmalıdır. | Yes |
 | linkedServiceName | Spark programının çalıştığı HDInsight bağlı hizmetinin adı. | Yes |
 | rootPath | Spark dosyasını içeren blob kapsayıcısı ve klasörü. Dosya adı büyük/küçük harfe duyarlıdır. | Yes |
 | entryFilePath | Spark kodunun/paketinin kök klasörünün göreli yolu. | Yes |
-| Sınıf | Uygulamanın Java/Spark ana sınıfı. | Hayır |
-| değişkenlerinden | Spark programına yönelik komut satırı bağımsız değişkenlerinin listesi. | Hayır |
-| proxyUser | Spark programını yürütmek için kimliğe bürünmeye yönelik kullanıcı hesabı. | Hayır |
-| Mini yapılandırma | [Spark yapılandırması: uygulama özellikleri](https://spark.apache.org/docs/latest/configuration.html#available-properties)' nde listelenen Spark yapılandırma özellikleri için değerleri belirtin. | Hayır |
-| GetDebugInfo | Spark günlük dosyalarının, mini iş Linkedservice tarafından belirtilen HDInsight kümesi (veya) tarafından kullanılan depolamaya ne zaman kopyalanacağını belirtir. İzin verilen değerler None, Always veya Failure 'Tur. Varsayılan değer, Yok'tur. | Hayır |
-| Mini iş Linkedservice | Spark iş dosyasını, bağımlılıklarını ve günlüklerini tutan depolama bağlı hizmeti. Bu özellik için bir değer belirtmezseniz, HDInsight kümesiyle ilişkili depolama kullanılır. | Hayır |
+| Sınıf | Uygulamanın Java/Spark ana sınıfı. | No |
+| değişkenlerinden | Spark programına yönelik komut satırı bağımsız değişkenlerinin listesi. | No |
+| proxyUser | Spark programını yürütmek için kimliğe bürünmeye yönelik kullanıcı hesabı. | No |
+| Mini yapılandırma | [Spark yapılandırması: uygulama özellikleri](https://spark.apache.org/docs/latest/configuration.html#available-properties)' nde listelenen Spark yapılandırma özellikleri için değerleri belirtin. | No |
+| GetDebugInfo | Spark günlük dosyalarının, mini iş Linkedservice tarafından belirtilen HDInsight kümesi (veya) tarafından kullanılan depolamaya ne zaman kopyalanacağını belirtir. İzin verilen değerler None, Always veya Failure 'Tur. Varsayılan değer, Yok'tur. | No |
+| Mini iş Linkedservice | Spark iş dosyasını, bağımlılıklarını ve günlüklerini tutan depolama bağlı hizmeti. Bu özellik için bir değer belirtmezseniz, HDInsight kümesiyle ilişkili depolama kullanılır. | No |
 
 ## <a name="folder-structure"></a>Klasör yapısı
 Spark etkinliği, Pig olarak bir satır içi betiği desteklemez ve Hive etkinlikleri bunu yapmaz. Spark işleri, Pig/Hive işlerinin daha da genişletilebilir. Spark işleri için, jar paketleri (Java SıNıFYOLUNA yerleştirilmiş), Python dosyaları (PYTHONPATH üzerine yerleştirilmiş) ve diğer tüm dosyalar gibi birden çok bağımlılığı sağlayabilirsiniz.

@@ -9,10 +9,10 @@ ms.date: 07/08/2020
 ms.topic: article
 ms.custom: devx-track-csharp
 ms.openlocfilehash: ec7ecb77d37ed1cdf1d13aa7191f5d50e0008c20
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98790808"
 ---
 # <a name="tutorial-publish-subscribe-to-events-in-cloud"></a>Öğretici: bulutta olaylara abone olma

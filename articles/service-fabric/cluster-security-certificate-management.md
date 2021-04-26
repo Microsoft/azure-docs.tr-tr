@@ -4,12 +4,12 @@ description: X. 509.440 sertifikalarıyla güvenliği sağlanmış bir Service F
 ms.topic: conceptual
 ms.date: 04/10/2020
 ms.custom: sfrev
-ms.openlocfilehash: a8a7e8954f3c9d5b54c2e1ed9caa330ef92d4512
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 7976d1419aeb0dda3ec2f94a32e9b185a6c14be7
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100099515"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304877"
 ---
 # <a name="certificate-management-in-service-fabric-clusters"></a>Service Fabric kümelerinde sertifika yönetimi
 
@@ -90,10 +90,10 @@ Bu noktada kasada bir sertifika mevcuttur, tüketim için hazırlanın. Onward:
 ### <a name="certificate-provisioning"></a>Sertifika sağlama
 Özel anahtarı dahil olmak üzere kasadan, sertifikayı alan ve kümenin ana bilgisayarlarının her birine yükleyen bir varlık olan ' sağlama Aracısı ' ' nı belirttik. (Service Fabric sertifika sağlamadıkları için çağırır.) Bağlamımızda küme, Azure VM 'Leri ve/veya sanal makine ölçek kümeleri koleksiyonunda barındırılacak. Azure 'da, bir kasadan VM/VMSS 'ye bir sertifika sağlamak, yukarıdaki şekilde, sağlama aracısının kasa sahibine göre kasada daha önce ' Al ' izinleri verildiğini varsayarak, aşağıdaki mekanizmalarla elde edilebilir: 
   - geçici: bir operatör sertifikayı kasadan alır (PFX/PKCS #12 veya ped olarak) ve her bir düğüme yüklenir
-  - dağıtım sırasında bir sanal makine ölçek kümesi olarak ' gizli ': Işlem hizmeti, işleç adına ilk taraf kimliğini kullanarak, şablon dağıtımı etkinleştirilmiş bir kasadan alınan sertifikaya ve sanal makine ölçek kümesinin her bir düğümüne ([bunun gibi](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.md#certificates)) yüklerse, Bu, yalnızca sürümlenmiş parolaların sağlanmasına izin verir
-  - [Key Vault VM uzantısını](../virtual-machines/extensions/key-vault-windows.md)kullanma; Bu, gözlemlenen sertifikaların düzenli olarak yenilenmesi için, sürüm daha az bildirimleri kullanarak sertifikaların sağlanmasına olanak tanır. Bu durumda, VM/VMSS 'nin, gözlemlenen sertifikaları içeren kasaya erişim izni verilen bir kimlik olan [yönetilen bir kimliğe](../virtual-machines/security-policy.md#managed-identities-for-azure-resources)sahip olması beklenir.
+  - dağıtım sırasında bir sanal makine ölçek kümesi olarak ' gizli ': Işlem hizmeti, işleç adına ilk taraf kimliğini kullanarak, şablon dağıtımı etkinleştirilmiş bir kasadan alınan sertifikaya ve sanal makine ölçek kümesinin her bir düğümüne ([bunun gibi](/virtual-machine-scale-sets/virtual-machine-scale-sets-faq.yml#certificates)) yüklerse, Bu, yalnızca sürümlenmiş parolaların sağlanmasına izin verir
+  - [Key Vault VM uzantısını](../virtual-machines/extensions/key-vault-windows.md)kullanma; Bu, gözlemlenen sertifikaların düzenli olarak yenilenmesi için, sürüm daha az bildirimleri kullanarak sertifikaların sağlanmasına olanak tanır. Bu durumda, VM/VMSS 'nin, gözlemlenen sertifikaları içeren kasaya erişim izni verilen bir kimlik olan [yönetilen bir kimliğe](/virtual-machines/security-policy.md#managed-identities-for-azure-resources)sahip olması beklenir.
 
-Geçici mekanizmanın birden çok nedenden dolayı kullanılması önerilmez, güvenliğin kullanılabilirliğine ve burada açıklanmayacaktır; Ayrıntılar için bkz. [sanal makine ölçek kümelerinde sertifikalara](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.md#certificates)bakın.
+Geçici mekanizmanın birden çok nedenden dolayı kullanılması önerilmez, güvenliğin kullanılabilirliğine ve burada açıklanmayacaktır; Ayrıntılar için bkz. [sanal makine ölçek kümelerinde sertifikalara](/virtual-machine-scale-sets/virtual-machine-scale-sets-faq.yml#certificates)bakın.
 
 VMSS-/COMPUTE-based sağlama güvenlik ve kullanılabilirlik avantajları sunar, ancak aynı zamanda kısıtlamaları da sunar. Bu, yalnızca parmak izi tarafından tanımlanan sertifikalarla güvenliği sağlanan kümeler için uygun hale getiren, tasarım kaynaklı gizli dizileri olarak bir sertifika bildirimi gerektirir. Buna karşılık, Key Vault VM Uzantısı tabanlı sağlama, her bir gözlemlenen sertifikanın en son sürümünü her zaman yükler. Bu, yalnızca konu ortak adı tarafından tanımlanan sertifikalarla güvenliği sağlanmış kümeler için uygun hale getirir. Vurgulamak için, örnekle (yani, parmak iziyle) belirtilen sertifikalar için bir oto yenileme sağlama mekanizması (KVVM uzantısı gibi) kullanmayın-kullanılabilirliği kaybetme riski önemli ölçüde olur.
 

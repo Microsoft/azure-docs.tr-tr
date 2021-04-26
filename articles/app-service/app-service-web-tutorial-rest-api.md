@@ -6,12 +6,12 @@ ms.devlang: dotnet
 ms.topic: tutorial
 ms.date: 04/28/2020
 ms.custom: devx-track-csharp, mvc, devcenter, seo-javascript-september2019, seo-javascript-october2019, seodec18
-ms.openlocfilehash: 9481b6d2740d27b8c3d1309e205edda6017868fa
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6d2f4d8fc7a2a7011a2417467f7131c4cfb26edc
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96005767"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788232"
 ---
 # <a name="tutorial-host-a-restful-api-with-cors-in-azure-app-service"></a>Öğretici: Azure App Service’te CORS ile RESTful API barındırma
 
@@ -160,7 +160,7 @@ Tarayıcı uygulaması (`http://localhost:5000`) ile uzak kaynak (`http://<app_n
 
 ### <a name="enable-cors"></a>CORS'yi etkinleştirme 
 
-Cloud Shell, komutunu kullanarak istemci URL 'nizin CORS 'yi etkinleştirin [`az webapp cors add`](/cli/azure/webapp/cors#az-webapp-cors-add) . _&lt; App-name>_ yer tutucusunu değiştirin.
+Cloud Shell, komutunu kullanarak istemci URL 'nizin CORS 'yi etkinleştirin [`az webapp cors add`](/cli/azure/webapp/cors#az_webapp_cors_add) . _&lt; App-name>_ yer tutucusunu değiştirin.
 
 ```azurecli-interactive
 az webapp cors add --resource-group myResourceGroup --name <app-name> --allowed-origins 'http://localhost:5000'

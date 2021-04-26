@@ -9,12 +9,12 @@ ms.date: 02/12/2021
 ms.author: normesta
 ms.reviewer: dineshm
 ms.subservice: blobs
-ms.openlocfilehash: 52fc7b9c1229421fd46b8110857a0a7a8a4f916a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 45ae3d80202bfb29074461f899798d278eb0895b
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100520434"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538350"
 ---
 # <a name="map-a-custom-domain-to-an-azure-blob-storage-endpoint"></a>Özel bir etki alanını Azure Blob depolama uç noktasıyla eşleme
 
@@ -414,7 +414,7 @@ Kullanıcıların HTTPS kullanarak blob veya Web içeriğinize erişmesine gerek
 
    * [Azure CDN Ile http-to-https yönlendirmesi](../../cdn/cdn-storage-custom-domain-https.md#http-to-https-redirection).
 
-   * [Azure CDN Ile BLOB depolama kullanılırken fiyatlandırma ve faturalandırma](../../cdn/cdn-storage-custom-domain-https.md#http-to-https-redirection).
+   * [Azure CDN Ile BLOB depolama kullanılırken fiyatlandırma ve faturalandırma](../../cdn/cdn-storage-custom-domain-https.md#pricing-and-billing).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

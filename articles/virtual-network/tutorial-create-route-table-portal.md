@@ -5,7 +5,6 @@ description: Bu öğreticide, Azure portalını kullanarak bir yönlendirme tabl
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
-Customer intent: I want to route traffic from one subnet, to a different subnet, through a network virtual appliance.
 ms.service: virtual-network
 ms.devlang: azurecli
 ms.topic: tutorial
@@ -13,12 +12,12 @@ ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure
 ms.date: 03/16/2021
 ms.author: kumud
-ms.openlocfilehash: f8090ea9c0d307d1bd290c4cf4dac9bfaabf7c4b
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7da59e996ec37d3653dbde68c5f56caa9e8261ee
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104576362"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106061919"
 ---
 # <a name="tutorial-route-network-traffic-with-a-route-table-using-the-azure-portal"></a>Öğretici: Azure portalını kullanarak bir yönlendirme tablosu ile ağ trafiğini yönlendirme
 
@@ -34,7 +33,9 @@ Azure, varsayılan olarak bir sanal ağ içindeki tüm alt ağlar arasındaki tr
 
 Bu öğretici [Azure Portal](https://portal.azure.com)kullanır. [Azure CLI](tutorial-create-route-table-cli.md) veya [Azure PowerShell](tutorial-create-route-table-powershell.md)de kullanabilirsiniz.
 
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
+## <a name="prerequisites"></a>Önkoşullar
+
+Başlamadan önce, etkin aboneliği olan bir Azure hesabı gerekir. Bir hesabınız yoksa, [ücretsiz olarak bir hesap oluşturabilirsiniz](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 
 ## <a name="prerequisites"></a>Önkoşullar
 

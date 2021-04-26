@@ -1,19 +1,19 @@
 ---
-title: Azure özel bağlantısı ile Redsıs için Azure önbelleği (Önizleme)
+title: Azure özel bağlantısı ile Redsıs için Azure önbelleği
 description: Azure özel uç noktası, Azure özel bağlantısı tarafından desteklenen, özel olarak ve güvenli bir şekilde Azure önbelleğine bağlayan bir ağ arabirimidir. Bu makalede, Azure portal kullanarak bir Azure önbelleği, Azure sanal ağı ve özel bir uç nokta oluşturmayı öğreneceksiniz.
 author: curib
 ms.author: cauribeg
 ms.service: cache
 ms.topic: conceptual
-ms.date: 10/14/2020
-ms.openlocfilehash: 22bdf93e7236ae5220a6bb7c6ead898628bb51a1
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 3/31/2021
+ms.openlocfilehash: 952f708d8f368b63f772e3af35f6fd441d65622d
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97007594"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106121668"
 ---
-# <a name="azure-cache-for-redis-with-azure-private-link-public-preview"></a>Redin için Azure önbelleği Azure özel bağlantısı (Genel Önizleme)
+# <a name="azure-cache-for-redis-with-azure-private-link"></a>Azure özel bağlantısı ile Redsıs için Azure önbelleği
 Bu makalede, Azure portal kullanarak özel bir uç nokta ile Redsıs örneği için bir sanal ağ ve Azure önbelleği oluşturmayı öğreneceksiniz. Ayrıca, Redsıs örneği için mevcut bir Azure önbelleğine özel bir uç nokta eklemeyi öğreneceksiniz.
 
 Azure özel uç noktası, Azure özel bağlantısı tarafından desteklenen, özel olarak ve güvenli bir şekilde Azure önbelleğine bağlayan bir ağ arabirimidir. 
@@ -22,8 +22,7 @@ Azure özel uç noktası, Azure özel bağlantısı tarafından desteklenen, öz
 * Azure aboneliği- [ücretsiz olarak bir tane oluşturun](https://azure.microsoft.com/free/)
 
 > [!IMPORTANT]
-> Özel uç noktaları kullanmak için, Redsıs örneği için Azure önbelleğinizin 28 Temmuz 2020 ' den sonra oluşturulmuş olması gerekir.
-> Şu anda, coğrafi çoğaltma, güvenlik duvarı kuralları, Portal konsolu desteği, kümelenmiş önbellek başına birden fazla uç nokta, güvenlik duvarı ve VNet 'e eklenen önbellekler için kalıcılık desteklenmez. 
+> Şu anda, bölge yedekliliği, Portal konsolu desteği ve güvenlik duvarı depolama hesaplarının kalıcılığı desteklenmez. 
 >
 >
 
@@ -112,19 +111,8 @@ Bir önbellek örneği oluşturmak için aşağıdaki adımları izleyin.
 > [!IMPORTANT]
 > 
 > `publicNetworkAccess`Varsayılan olarak bir bayrak vardır `Disabled` . 
-> Bu bayrak, isteğe bağlı olarak ayarlandıysa önbelleğe hem genel hem de özel uç nokta erişimine izin vermek için tasarlanmıştır `Enabled` . Olarak ayarlanırsa `Disabled` , yalnızca özel uç nokta erişimine izin verir. Değeri `Disabled` `Enabled` aşağıdaki düzeltme eki isteğiyle veya olarak ayarlayabilirsiniz. Önbelleğiniz için istediğiniz bayrağı yansıtmak için değeri düzenleyin.
-> ```http
-> PATCH  https://management.azure.com/subscriptions/{subscription}/resourceGroups/{resourcegroup}/providers/Microsoft.Cache/Redis/{cache}?api-version=2020-06-01
-> {    "properties": {
->        "publicNetworkAccess":"Disabled"
->    }
-> }
-> ```
+> Bu bayrak, isteğe bağlı olarak ayarlandıysa önbelleğe hem genel hem de özel uç nokta erişimine izin vermek için tasarlanmıştır `Enabled` . Olarak ayarlanırsa `Disabled` , yalnızca özel uç nokta erişimine izin verir. Değerini veya olarak ayarlayabilirsiniz `Disabled` `Enabled` . Değerin nasıl değiştirileceği hakkında daha fazla bilgi için bkz. [SSS](#how-can-i-change-my-private-endpoint-to-be-disabled-or-enabled-from-public-network-access)
 >
-
-> [!IMPORTANT]
-> 
-> Kümelenmiş bir önbelleğe bağlanmak için, `publicNetworkAccess` olarak ayarlanması gerekir `Disabled` ve yalnızca bir özel uç nokta bağlantısı olabilir. 
 >
 
 ## <a name="create-a-private-endpoint-with-an-existing-azure-cache-for-redis-instance"></a>Redsıs örneği için mevcut bir Azure önbelleği ile özel bir uç nokta oluşturma 
@@ -173,7 +161,7 @@ Bir sanal ağ oluşturmak için aşağıdaki adımları izleyin.
 
 2. Özel uç nokta eklemek istediğiniz önbellek örneğini seçin.
 
-3. Ekranın sol tarafında **Özel uç nokta ' ı (Önizleme)** seçin.
+3. Ekranın sol tarafında **Özel uç nokta**' ı seçin.
 
 4. Özel uç noktanızı oluşturmak için **Özel uç nokta** düğmesine tıklayın.
 
@@ -204,16 +192,36 @@ Bir sanal ağ oluşturmak için aşağıdaki adımları izleyin.
 
 13. Yeşil **doğrulama başarılı** Iletisi göründüğünde **Oluştur**' u seçin.
 
+> [!IMPORTANT]
+> 
+> `publicNetworkAccess`Varsayılan olarak bir bayrak vardır `Disabled` . 
+> Bu bayrak, isteğe bağlı olarak ayarlandıysa önbelleğe hem genel hem de özel uç nokta erişimine izin vermek için tasarlanmıştır `Enabled` . Olarak ayarlanırsa `Disabled` , yalnızca özel uç nokta erişimine izin verir. Değerini veya olarak ayarlayabilirsiniz `Disabled` `Enabled` . Değerin nasıl değiştirileceği hakkında daha fazla bilgi için bkz. [SSS](#how-can-i-change-my-private-endpoint-to-be-disabled-or-enabled-from-public-network-access)
+>
+>
+
+
 ## <a name="faq"></a>SSS
 
 ### <a name="why-cant-i-connect-to-a-private-endpoint"></a>Özel bir uç noktaya neden bağlanamıyorum?
-Önbelleğiniz zaten VNet 'e eklenmiş bir önbelleğiniz varsa, Özel uç noktalar önbellek örneğiniz ile kullanılamaz. Önbellek örneğiniz desteklenmeyen bir özellik kullanıyorsa (aşağıda listelenmiştir), Özel uç nokta örneğinize bağlanamazsınız. Buna ek olarak, Özel uç noktaları kullanmak için, 15 Temmuz 'dan sonra önbellek örneklerinin oluşturulması gerekir.
+Önbelleğiniz zaten VNet 'e eklenmiş bir önbelleğiniz varsa, Özel uç noktalar önbellek örneğiniz ile kullanılamaz. Önbellek örneğiniz desteklenmeyen bir özellik kullanıyorsa (aşağıda listelenmiştir), Özel uç nokta örneğinize bağlanamazsınız.
 
 ### <a name="what-features-are-not-supported-with-private-endpoints"></a>Özel uç noktalarla hangi özellikler desteklenmez?
-Coğrafi çoğaltma, güvenlik duvarı kuralları, Portal konsolu desteği, kümelenmiş önbellek başına birden fazla uç nokta, güvenlik duvarı kuralları ve bölge artıklığı kalıcılığı. 
+Şu anda, bölge yedekliliği, Portal konsolu desteği ve güvenlik duvarı depolama hesaplarının kalıcılığı desteklenmez. 
 
 ### <a name="how-can-i-change-my-private-endpoint-to-be-disabled-or-enabled-from-public-network-access"></a>Özel uç noktadan devre dışı bırakmak veya genel ağ erişiminin etkinleştirilmesi için nasıl değiştirebilirim?
-`publicNetworkAccess`Varsayılan olarak bir bayrak vardır `Disabled` . Bu bayrak, isteğe bağlı olarak ayarlandıysa önbelleğe hem genel hem de özel uç nokta erişimine izin vermek için tasarlanmıştır `Enabled` . Olarak ayarlanırsa `Disabled` , yalnızca özel uç nokta erişimine izin verir. Değeri `Disabled` `Enabled` aşağıdaki düzeltme eki isteğiyle veya olarak ayarlayabilirsiniz. Önbelleğiniz için istediğiniz bayrağı yansıtmak için değeri düzenleyin.
+`publicNetworkAccess`Varsayılan olarak bir bayrak vardır `Disabled` . Bu bayrak, isteğe bağlı olarak ayarlandıysa önbelleğe hem genel hem de özel uç nokta erişimine izin vermek için tasarlanmıştır `Enabled` . Olarak ayarlanırsa `Disabled` , yalnızca özel uç nokta erişimine izin verir. Değeri, `Disabled` `Enabled` Azure Portal veya bir RESTSIZE API yaması isteğiyle ayarlayabilirsiniz. 
+
+Azure portal değeri değiştirmek için aşağıdaki adımları izleyin.
+
+1. Azure portal, **Reda Için Azure önbelleği** araması yapın ve ENTER tuşuna basın veya arama önerilerinde seçin.
+
+2. Ortak ağ erişim değerini değiştirmek istediğiniz önbellek örneğini seçin.
+
+3. Ekranın sol tarafında **Özel uç nokta**' ı seçin.
+
+4. **Ortak ağ erişimini etkinleştir** düğmesine tıklayın.
+
+Yeniden düzenlenecek bir API düzeltme eki isteğiyle değeri değiştirmek için, aşağıda bulunan ve önbelleğiniz için istediğiniz bayrağı yansıtmak üzere değeri düzenleme bölümüne bakın.
 
 ```http
 PATCH  https://management.azure.com/subscriptions/{subscription}/resourceGroups/{resourcegroup}/providers/Microsoft.Cache/Redis/{cache}?api-version=2020-06-01
@@ -223,24 +231,23 @@ PATCH  https://management.azure.com/subscriptions/{subscription}/resourceGroups/
 }
 ```
 
+### <a name="how-can-i-have-multiple-endpoints-in-different-virtual-networks"></a>Farklı sanal ağlarda birden çok uç noktaya nasıl sahip olabilirim?
+Farklı sanal ağlarda birden çok özel uç noktası olması için, özel bir uç nokta oluşturmadan _önce_ özel DNS bölgesinin birden çok sanal ağa el ile yapılandırılması gerekir. Daha fazla bilgi için bkz. [Azure Özel Uç Nokta DNS yapılandırması](../private-link/private-endpoint-dns.md). 
+
+### <a name="what-happens-if-i-delete-all-the-private-endpoints-on-my-cache"></a>Önbelleğim tüm özel uç noktalarını silersem ne olur?
+Önbelleğinizin özel uç noktalarını sildikten sonra, genel ağ erişimini açıkça etkinleştirene veya başka bir özel uç nokta eklediğiniz sürece önbellek örneğiniz ulaşılamaz hale gelebilir. `publicNetworkAccess`Azure Portal bayrağını veya yeniden BIR API düzeltme eki isteği aracılığıyla değiştirebilirsiniz. Değerin nasıl değiştirileceği hakkında daha fazla bilgi için bkz. [SSS](#how-can-i-change-my-private-endpoint-to-be-disabled-or-enabled-from-public-network-access)
+
 ### <a name="are-network-security-groups-nsg-enabled-for-private-endpoints"></a>Ağ güvenlik grupları (NSG) özel uç noktalar için etkin mi?
 Hayır, Özel uç noktalar için devre dışı bırakılmıştır. Özel uç noktayı içeren alt ağlarda NSG ile ilişkili olabilir, kurallar özel uç nokta tarafından işlenen trafikte geçerli olmayacaktır. Bir alt ağda özel uç noktalar dağıtmak için [ağ ilkeleri zorlamasının devre dışı](../private-link/disable-private-endpoint-network-policy.md) olması gerekir. NSG aynı alt ağda barındırılan diğer iş yükleri üzerinde de zorlanır. Herhangi bir istemci alt ağındaki rotalar bir/32 öneki kullanacaktır, varsayılan yönlendirme davranışının değiştirilmesi benzer bir UDR gerektirir. 
 
 Kaynak istemcilerde giden trafik için NSG kurallarını kullanarak trafiği denetleyin. Özel uç nokta yollarını geçersiz kılmak için/32 ön ekiyle tek tek yolları dağıtın. Giden bağlantılar için NSG akış günlükleri ve izleme bilgileri hala destekleniyor ve kullanılabilir
 
-### <a name="can-i-use-firewall-rules-with-private-endpoints"></a>Güvenlik duvarı kurallarını özel uç noktalarla kullanabilir miyim?
-Hayır, bu özel uç noktaların geçerli bir sınırlamasıdır. Önbellek üzerinde güvenlik duvarı kuralları yapılandırılmışsa, Özel uç nokta düzgün çalışmaz.
-
-### <a name="how-can-i-connect-to-a-clustered-cache"></a>Kümelenmiş bir önbelleğe nasıl bağlanabilirim?
-`publicNetworkAccess` olarak ayarlanması gerekir `Disabled` ve yalnızca bir özel uç nokta bağlantısı olabilir.
-
 ### <a name="since-my-private-endpoint-instance-is-not-in-my-vnet-how-is-it-associated-with-my-vnet"></a>Özel uç nokta örneğim VNet 'imde olmadığından, sanal ağım ile nasıl ilişkilendirilir?
 Yalnızca VNet 'iniz ile bağlantılıdır. VNet 'iniz içinde olmadığından, NSG kurallarının bağımlı uç noktalar için değiştirilmesi gerekmez.
 
 ### <a name="how-can-i-migrate-my-vnet-injected-cache-to-a-private-endpoint-cache"></a>VNet 'e eklenen önbelleğinizi özel bir uç nokta önbelleğine nasıl geçirebilirim?
-VNet eklenen önbelleğinizi silmeniz ve özel bir uç nokta ile yeni bir önbellek örneği oluşturmanız gerekir.
+VNet eklenen önbelleğinizi silmeniz ve özel bir uç nokta ile yeni bir önbellek örneği oluşturmanız gerekir. Daha fazla bilgi için bkz. [redsıs Için Azure önbelleğine geçirme](cache-migration-guide.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-
 * Azure özel bağlantısı hakkında daha fazla bilgi edinmek için bkz. [Azure özel bağlantı belgeleri](../private-link/private-link-overview.md).
 * Önbellek örneğiniz için çeşitli ağ yalıtımı seçeneklerini karşılaştırmak için bkz. [redsıs ağ yalıtımı seçenekleri Için Azure önbelleği](cache-network-isolation.md).

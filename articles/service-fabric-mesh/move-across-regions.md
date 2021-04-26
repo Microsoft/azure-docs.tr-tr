@@ -6,12 +6,12 @@ ms.author: edoyle
 ms.topic: how-to
 ms.date: 01/14/2020
 ms.custom: subject-moving-resources
-ms.openlocfilehash: 1b59d482b8b88e37da2d61636ff3f254a46ba5c2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: bce61a00ae1b6b451927b43dbcf19ddb615f79a5
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99626096"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861184"
 ---
 # <a name="move-a-service-fabric-mesh-application-to-another-azure-region"></a>Service Fabric bir kafes uygulamasını başka bir Azure bölgesine taşıma
 
@@ -22,7 +22,7 @@ ms.locfileid: "99626096"
 
 Bu makalede, Service Fabric kafes uygulamanızın ve kaynaklarının farklı bir Azure bölgesine nasıl taşınacağı açıklanır. Birkaç nedenden dolayı kaynaklarınızı başka bir bölgeye taşıyabilirsiniz. Örneğin kesintilere yanıt olarak, yalnızca belirli bölgelerde bulunan özellik veya Hizmetleri, iç ilke ve idare gereksinimlerini karşılayacak şekilde veya kapasite planlama gereksinimlerine yanıt olarak elde etmek için.
 
- [Service Fabric kafesi](../azure-resource-manager/management/region-move-support.md#microsoftservicefabricmesh) , kaynakları Azure bölgelerinde doğrudan taşıma özelliğini desteklemez. Ancak, geçerli Azure Resource Manager şablonunuzun bir kopyasını yeni hedef bölgeye dağıtarak ve sonra giriş trafiğini ve bağımlılıklarını yeni oluşturulan Service Fabric kafes uygulamasına yönlendirerek kaynakları dolaylı olarak taşıyabilirsiniz.
+ [Service Fabric kafesi](../azure-resource-manager/management/move-support-resources.md#microsoftservicefabricmesh) , kaynakları Azure bölgelerinde doğrudan taşıma özelliğini desteklemez. Ancak, geçerli Azure Resource Manager şablonunuzun bir kopyasını yeni hedef bölgeye dağıtarak ve sonra giriş trafiğini ve bağımlılıklarını yeni oluşturulan Service Fabric kafes uygulamasına yönlendirerek kaynakları dolaylı olarak taşıyabilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -43,13 +43,13 @@ Bu makalede, Service Fabric kafes uygulamanızın ve kaynaklarının farklı bir
 
 2. Verdiğiniz şablonla, Azure portal kullanarak [özel şablondan kaynak dağıtma](../azure-resource-manager/templates/deploy-portal.md#deploy-resources-from-custom-template) ' daki adımları izleyin. [Azure CLI](../azure-resource-manager/templates/deploy-cli.md), [Azure PowerShell](../azure-resource-manager/templates/deploy-powershell.md)veya [REST API](../azure-resource-manager/templates/deploy-rest.md)de kullanabilirsiniz.
 
-3. [Azure depolama hesapları](../storage/common/storage-account-move.md)gibi ilgili kaynakları taşımaya yönelik yönergeler Için, [Azure kaynaklarını bölgeler arasında taşıma](../azure-resource-manager/management/move-region.md)konusunun altında yer alan hizmetlere yönelik kılavuza bakın.
+3. [Azure depolama hesapları](../storage/common/storage-account-move.md)gibi ilgili kaynakları taşımaya yönelik yönergeler Için, [Azure kaynaklarını bölgeler arasında taşıma](../azure-resource-manager/management/move-resources-overview.md#move-resources-across-regions)konusunun altında yer alan hizmetlere yönelik kılavuza bakın.
 
 ## <a name="verify"></a>Doğrulama
 
 1. Dağıtım tamamlandığında uygulamanızın işlevlerini doğrulamak için uygulama uç noktaları ' nı test edin.
 
-2. Ayrıca, uygulama durumunu denetleyerek (az önce uygulama[göster](/cli/azure/ext/mesh/mesh/app#ext-mesh-az-mesh-app-show)) ve [Azure Service Fabric kafes CLI](./service-fabric-mesh-quickstart-deploy-container.md#set-up-service-fabric-mesh-cli)kullanarak uygulama günlüklerini ve ([az kafes kodu-paket-günlüğü](/cli/azure/ext/mesh/mesh/code-package-log)) komutlarını inceleyerek uygulamanızın durumunu doğrulayabilirsiniz.
+2. Ayrıca, uygulama durumunu denetleyerek (az önce uygulama[göster](/cli/azure/mesh/app#az_mesh_app_show)) ve [Azure Service Fabric kafes CLI](./service-fabric-mesh-quickstart-deploy-container.md#set-up-service-fabric-mesh-cli)kullanarak uygulama günlüklerini ve ([az kafes kodu-paket-günlüğü](/cli/azure/mesh/code-package-log)) komutlarını inceleyerek uygulamanızın durumunu doğrulayabilirsiniz.
 
 ## <a name="commit"></a>İşleme
 
@@ -61,8 +61,8 @@ Service Fabric kafes uygulamasının taşınmasını tamamlamaya yönelik [kayna
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure kaynaklarını bölgeler arasında taşıma](../azure-resource-manager/management/move-region.md)
-* [Bölgeler arasında Azure kaynaklarını taşıma desteği](../azure-resource-manager/management/region-move-support.md)
+* [Azure kaynaklarını bölgeler arasında taşıma](../azure-resource-manager/management/move-resources-overview.md#move-resources-across-regions)
+* [Bölgeler arasında Azure kaynaklarını taşıma desteği](../azure-resource-manager/management/move-support-resources.md)
 * [Kaynakları yeni bir kaynak grubuna veya aboneliğe taşıma](../azure-resource-manager/management/move-resource-group-and-subscription.md)
 * [Kaynaklar için taşıma işlemi desteği](../azure-resource-manager/management/move-support-resources.md
 )

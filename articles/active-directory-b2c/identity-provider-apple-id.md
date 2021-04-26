@@ -13,12 +13,12 @@ ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 63183eb6a77b3a7aecfb6f3e8a7c9ee7c2544de2
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.openlocfilehash: f5e4ff93b90c7644c1d1498a14c8b9954041cb34
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105543916"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107028375"
 ---
 # <a name="set-up-sign-up-and-sign-in-with-an-apple-id--using-azure-active-directory-b2c-preview"></a>Azure Active Directory B2C kullanarak bir Apple KIMLIĞIYLE kaydolma ve oturum açma ayarlama (Önizleme)
 
@@ -250,7 +250,7 @@ Bir Apple KIMLIĞINI, ilkenizin uzantı dosyasındaki **Claimsproviders** öğes
 ## <a name="test-your-custom-policy"></a>Özel ilkenizi test etme
 
 1. Örneğin, bağlı olan taraf ilkenizi seçin `B2C_1A_signup_signin` .
-1. **Uygulama** için, [daha önce kaydetmiş](troubleshoot-custom-policies.md#troubleshoot-the-runtime)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
+1. **Uygulama** için, [daha önce kaydetmiş](tutorial-register-applications.md)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
 1. **Şimdi Çalıştır** düğmesini seçin.
 1. Kaydolma veya oturum açma sayfasından Apple KIMLIĞI ile oturum açmak için **Apple** ' ı seçin.
 

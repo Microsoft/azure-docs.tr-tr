@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/01/2020
 ms.author: duau
-ms.openlocfilehash: f894fd5ca7bb98c48b106c13b8fe6130b2c76c6e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f31e592f3e8fa9501b0aa1f8ed47fa5122f75820
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102201065"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869626"
 ---
 # <a name="tutorial-quickly-scale-and-protect-a-web-application-by-using-azure-front-door-and-azure-web-application-firewall-waf"></a>Öğretici: Azure ön kapısı ve Azure Web uygulaması güvenlik duvarı (WAF) kullanarak bir Web uygulamasını hızla ölçeklendirme ve koruma
 
@@ -48,7 +48,7 @@ Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
    ```
 
 > [!NOTE] 
-> Bu öğreticide kullanılan komutlar hakkında daha fazla bilgi için bkz. [ön kapı Için Azure CLI başvurusu](/cli/azure/ext/front-door).
+> Bu öğreticide kullanılan komutlar hakkında daha fazla bilgi için bkz. [ön kapı Için Azure CLI başvurusu](/cli/azure/).
 
 ## <a name="create-an-azure-front-door-resource"></a>Azure ön kapı kaynağı oluşturma
 
@@ -140,11 +140,11 @@ Son olarak, Web uygulamanıza erişmek için özel bir etki alanı kullanıyorsa
 
 ## <a name="lock-down-your-web-application"></a>Web uygulamanızı kilitleme
 
-Yalnızca Azure ön kapısının Web uygulamanızla iletişim kurabildiğinden emin olmanızı öneririz. Bunun yapılması, hiçbir birinin Azure ön kapı korumasını atlayamayacağını ve uygulamanıza doğrudan erişmesini sağlamaya devam edebilir. Bu kilidi başarmak için, [arka ucumun erişimini yalnızca Azure ön kapısına nasıl yaparım?](./front-door-faq.md#how-do-i-lock-down-the-access-to-my-backend-to-only-azure-front-door).
+Yalnızca Azure ön kapısının Web uygulamanızla iletişim kurabildiğinden emin olmanızı öneririz. Bunun yapılması, hiçbir birinin Azure ön kapı korumasını atlayamayacağını ve uygulamanıza doğrudan erişmesini sağlamaya devam edebilir. Bu kilidi başarmak için, [arka ucumun erişimini yalnızca Azure ön kapısına nasıl yaparım?](./front-door-faq.yml#how-do-i-lock-down-the-access-to-my-backend-to-only-azure-front-door-).
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu öğreticide kullanılan kaynaklara artık ihtiyacınız kalmadığında, [az Group Delete](/cli/azure/group#az-group-delete) komutunu kullanarak kaynak grubunu, ön kapıyı ve WAF ilkesini kaldırın:
+Bu öğreticide kullanılan kaynaklara artık ihtiyacınız kalmadığında, [az Group Delete](/cli/azure/group#az_group_delete) komutunu kullanarak kaynak grubunu, ön kapıyı ve WAF ilkesini kaldırın:
 
 ```azurecli-interactive
   az group delete \

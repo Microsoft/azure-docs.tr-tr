@@ -7,12 +7,12 @@ ms.topic: how-to
 ms.date: 11/30/2020
 ms.author: rosouz
 ms.custom: references_regions, synapse-cosmos-db
-ms.openlocfilehash: 60b720f3f5d91570e32ecf3d03aa7065f93990c5
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 24886ff3e01e9d9b4c01eabc917ced433599c0fa
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104868214"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727153"
 ---
 # <a name="configure-and-use-azure-synapse-link-for-azure-cosmos-db"></a>Azure Cosmos DB için Azure Synapse Link'i yapılandırma ve kullanma
 [!INCLUDE[appliesto-sql-mongodb-api](includes/appliesto-sql-mongodb-api.md)]
@@ -52,17 +52,17 @@ Azure SYNAPSE link, Azure Cosmos DB SQL API kapsayıcıları veya Mongo DB kolek
 > [!NOTE]
 > SYNAPSE bağlantısının etkinleştirilmesi, analitik depoyu otomatik olarak yapmaz. Cosmos DB hesapta SYNAPSE bağlantısını etkinleştirdikten sonra, işlem verilerinizi analitik depoya Çoğaltmaya başlamak için, onları oluşturduğunuz sırada kapsayıcı üzerinde analitik depoyu etkinleştirin. 
 
-### <a name="azure-cli"></a>Azure CLI
+### <a name="azure-cli"></a>Azure CLI’si
 
 Aşağıdaki bağlantılarda, SYNAPSE bağlantısının Azure CLı kullanılarak nasıl etkinleştirildiği gösterilmektedir:
 
-* [SYNAPSE bağlantısı etkin olan yeni bir Azure Cosmos DB hesabı oluşturun](https://docs.microsoft.com/cli/azure/cosmosdb?view=azure-cli-latest#az_cosmosdb_create-optional-parameters&preserve-view=true)
-* [SYNAPSE bağlantısını etkinleştirmek için mevcut bir Azure Cosmos DB hesabını güncelleştirin](https://docs.microsoft.com/cli/azure/cosmosdb?view=azure-cli-latest#az_cosmosdb_update-optional-parameters&preserve-view=true)
+* [SYNAPSE bağlantısı etkin olan yeni bir Azure Cosmos DB hesabı oluşturun](/cli/azure/cosmosdb#az_cosmosdb_create-optional-parameters)
+* [SYNAPSE bağlantısını etkinleştirmek için mevcut bir Azure Cosmos DB hesabını güncelleştirin](/cli/azure/cosmosdb#az_cosmosdb_update-optional-parameters)
 
 ### <a name="powershell"></a>PowerShell
 
-* [SYNAPSE bağlantısı etkin olan yeni bir Azure Cosmos DB hesabı oluşturun](https://docs.microsoft.com/powershell/module/az.cosmosdb/new-azcosmosdbaccount?view=azps-5.5.0#description&preserve-view=true)
-* [SYNAPSE bağlantısını etkinleştirmek için mevcut bir Azure Cosmos DB hesabını güncelleştirin](https://docs.microsoft.com/powershell/module/az.cosmosdb/update-azcosmosdbaccount?view=azps-5.5.0&preserve-view=true)
+* [SYNAPSE bağlantısı etkin olan yeni bir Azure Cosmos DB hesabı oluşturun](/powershell/module/az.cosmosdb/new-azcosmosdbaccount#description)
+* [SYNAPSE bağlantısını etkinleştirmek için mevcut bir Azure Cosmos DB hesabını güncelleştirin](/powershell/module/az.cosmosdb/update-azcosmosdbaccount)
 
 
 Aşağıdaki bağlantılarda PowerShell kullanılarak SYNAPSE bağlantısının nasıl etkinleştirildiği gösterilmektedir:
@@ -175,19 +175,19 @@ except exceptions.CosmosResourceExistsError:
     print('A container with already exists')
 ```
 
-### <a name="azure-cli"></a>Azure CLI
+### <a name="azure-cli"></a>Azure CLI’si
 
 Aşağıdaki bağlantılar, Azure CLı kullanarak bir analitik depo etkin kapsayıcıları oluşturmayı göstermektedir:
 
-* [Mongo DB için Azure Cosmos DB API 'SI](https://docs.microsoft.com/cli/azure/cosmosdb/mongodb/collection?view=azure-cli-latest#az_cosmosdb_mongodb_collection_create-examples&preserve-view=true)
-* [Azure Cosmos DB SQL API](https://docs.microsoft.com/cli/azure/cosmosdb/sql/container?view=azure-cli-latest#az_cosmosdb_sql_container_create&preserve-view=true)
+* [Mongo DB için Azure Cosmos DB API 'SI](/cli/azure/cosmosdb/mongodb/collection#az_cosmosdb_mongodb_collection_create-examples)
+* [Azure Cosmos DB SQL API](/cli/azure/cosmosdb/sql/container#az_cosmosdb_sql_container_create)
 
 ### <a name="powershell"></a>PowerShell
 
 Aşağıdaki bağlantılar, PowerShell kullanarak bir analitik depo etkin kapsayıcıları oluşturmayı göstermektedir:
 
-* [Mongo DB için Azure Cosmos DB API 'SI](https://docs.microsoft.com/powershell/module/az.cosmosdb/new-azcosmosdbmongodbcollection?view=azps-5.5.0#description&preserve-view=true)
-* [Azure Cosmos DB SQL API](https://docs.microsoft.com/cli/azure/cosmosdb/sql/container?view=azure-cli-latest#az_cosmosdb_sql_container_create&preserve-view=true)
+* [Mongo DB için Azure Cosmos DB API 'SI](/powershell/module/az.cosmosdb/new-azcosmosdbmongodbcollection#description)
+* [Azure Cosmos DB SQL API](/cli/azure/cosmosdb/sql/container#az_cosmosdb_sql_container_create)
 
 
 ## <a name="optional---update-the-analytical-store-time-to-live"></a><a id="update-analytical-ttl"></a> İsteğe bağlı-analitik depo zamanını canlı olarak güncelleştirin
@@ -241,19 +241,19 @@ container.replace(containerProperties).block();
 Şu anda desteklenmiyor.
 
 
-### <a name="azure-cli"></a>Azure CLI
+### <a name="azure-cli"></a>Azure CLI’si
 
 Aşağıdaki bağlantılarda, Azure CLı kullanılarak analitik TTL 'nin nasıl güncelleştirilmesi gösterilmektedir:
 
-* [Mongo DB için Azure Cosmos DB API 'SI](https://docs.microsoft.com/cli/azure/cosmosdb/mongodb/collection?view=azure-cli-latest#az_cosmosdb_mongodb_collection_update&preserve-view=true)
-* [Azure Cosmos DB SQL API](https://docs.microsoft.com/cli/azure/cosmosdb/sql/container?view=azure-cli-latest#az_cosmosdb_sql_container_update&preserve-view=true)
+* [Mongo DB için Azure Cosmos DB API 'SI](/cli/azure/cosmosdb/mongodb/collection#az_cosmosdb_mongodb_collection_update)
+* [Azure Cosmos DB SQL API](/cli/azure/cosmosdb/sql/container#az_cosmosdb_sql_container_update)
 
 ### <a name="powershell"></a>PowerShell
 
 Aşağıdaki bağlantılarda PowerShell kullanılarak analitik TTL 'nin nasıl güncelleştirilmesi gösterilmektedir:
 
-* [Mongo DB için Azure Cosmos DB API 'SI](https://docs.microsoft.com/powershell/module/az.cosmosdb/update-azcosmosdbmongodbcollection?view=azps-5.5.0&preserve-view=true)
-* [Azure Cosmos DB SQL API](https://docs.microsoft.com/powershell/module/az.cosmosdb/update-azcosmosdbsqlcontainer?view=azps-5.5.0&preserve-view=true)
+* [Mongo DB için Azure Cosmos DB API 'SI](/powershell/module/az.cosmosdb/update-azcosmosdbmongodbcollection)
+* [Azure Cosmos DB SQL API](/powershell/module/az.cosmosdb/update-azcosmosdbsqlcontainer)
 
 
 ## <a name="connect-to-a-synapse-workspace"></a><a id="connect-to-cosmos-database"></a> Bir Synapse çalışma alanına bağlanma

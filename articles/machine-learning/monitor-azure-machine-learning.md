@@ -10,12 +10,12 @@ ms.author: aashishb
 author: aashishb
 ms.custom: subject-monitoring
 ms.date: 10/01/2020
-ms.openlocfilehash: a18ee02b5e91b628a25655949a652270bd7436c4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e5fd0fdd5a6f9a4a7537a844b096efdfef253638
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100575142"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816863"
 ---
 # <a name="monitor-azure-machine-learning"></a>Azure Machine Learning'i izleme
 
@@ -24,8 +24,8 @@ Azure kaynaklarına bağlı kritik Uygulamalarınız ve iş süreçleriniz oldu�
 > [!TIP]
 > Bu belgedeki bilgiler, Azure Machine Learning hizmeti ve ilişkili Azure hizmetleri için izlemeyi açıkladığı gibi birincil olarak __Yöneticiler__ içindir. Bir __veri bilimcu__ veya __geliştiricisiyseniz__ ve *model eğitim çalışmalarınız* için özel bilgileri izlemek istiyorsanız aşağıdaki belgelere bakın:
 >
-> * [Eğitim çalıştırmalarını başlatın, izleyin ve iptal edin](how-to-manage-runs.md)
-> * [Eğitim çalıştırmaları için günlük ölçümleri](how-to-track-experiments.md)
+> * [Eğitim çalıştırmalarını başlatın, izleyin ve iptal edin](how-to-track-monitor-analyze-runs.md)
+> * [Eğitim çalıştırmaları için günlük ölçümleri](how-to-log-view-metrics.md)
 > * [MLflow ile denemeleri izleme](how-to-use-mlflow.md)
 > * [TensorBoard ile çalıştırmaları görselleştirme](how-to-monitor-tensorboard.md)
 >

@@ -7,12 +7,12 @@ ms.date: 03/11/2021
 ms.topic: how-to
 ms.service: security-center
 manager: rkarlin
-ms.openlocfilehash: d3627f6bcda7a18204c24fc2a1347c4a512c5369
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 13abb35d0fa9ad3ee949b6edf5205de601a02956
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103149741"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718566"
 ---
 # <a name="exempting-resources-and-recommendations-from-your-secure-score"></a>Güvenli puanınızdan kaynakları ve önerileri muaf tutma 
 
@@ -33,9 +33,9 @@ Bu gibi durumlarda öneri için bir istisna oluşturabilirsiniz:
 | Görünüş                          | Ayrıntılar                                                                                                                                                                                                                                                                                                                            |
 |---------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Yayın durumu:                  | Önizleme<br>[!INCLUDE [Legalese](../../includes/security-center-preview-legal-text.md)]                                                                                                                                                                                                                                             |
-| Fiyat                        | Bu, Azure Defender müşterileri için ek ücret ödemeden sunulan bir Premium Azure ilke özelliğidir. Diğer kullanıcılar için ücretler gelecekte uygulanabilir.                                                                                                                                                                 |
-| Gerekli roller ve izinler: | Muafiyet oluşturmak için **abonelik sahibi** veya **ilke katılımcısı**<br>Bir kural oluşturmak için Azure Ilkesinde ilkeleri düzenleme izinlerinizin olması gerekir.<br>Azure [Ilkesinde Azure RBAC izinleri](../governance/policy/overview.md#azure-rbac-permissions-in-azure-policy)hakkında daha fazla bilgi edinin.                                            |
-| Sınırlamalar:                    | Muafiyetler yalnızca güvenlik merkezi 'nin varsayılan girişim, Azure Güvenlik kıyaslaması veya sağlanan mevzuata standart girişimlerinin herhangi biri için eklenen öneriler için oluşturulabilir. Özel girişimlerden oluşturulan öneriler muaf tutulamaz. [İlkeler, girişimler ve öneriler](security-policy-concept.md)arasındaki ilişkiler hakkında daha fazla bilgi edinin. |
+| Fiyat                        | Bu, Azure Defender müşterileri için ek ücret ödemeden sunulan bir Premium Azure Ilke özelliğidir. Diğer kullanıcılar için ücretler gelecekte uygulanabilir.                                                                                                                                                                 |
+| Gerekli roller ve izinler: | Muafiyet oluşturmak için **sahip** veya **kaynak ilkesi katılımcısı**<br>Bir kural oluşturmak için Azure Ilkesinde ilkeleri düzenleme izinlerinizin olması gerekir.<br>Azure [Ilkesinde Azure RBAC izinleri](../governance/policy/overview.md#azure-rbac-permissions-in-azure-policy)hakkında daha fazla bilgi edinin.                                            |
+| Sınırlamalar:                    | Muafiyetler yalnızca güvenlik merkezi 'nin varsayılan girişim, [Azure Güvenlik kıyaslaması](https://docs.microsoft.com/security/benchmark/azure/introduction)veya sağlanan mevzuata standart girişimlerinin herhangi biri için eklenen öneriler için oluşturulabilir. Özel girişimlerden oluşturulan öneriler muaf tutulamaz. [İlkeler, girişimler ve öneriler](security-policy-concept.md)arasındaki ilişkiler hakkında daha fazla bilgi edinin. |
 | Larının                         | ![Yes](./media/icons/yes-icon.png) Ticari bulutlar<br>![No](./media/icons/no-icon.png) Ulusal/Sogeign (US Gov, Çin gov, diğer gov)                                                                                                                                                                                         |
 |                                 |                                                                                                                                                                                                                                                                                                                                    |
 

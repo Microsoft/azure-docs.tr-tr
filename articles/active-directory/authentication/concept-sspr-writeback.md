@@ -11,12 +11,12 @@ author: justinha
 manager: daveba
 ms.reviewer: rhicock
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 53f416a23dbb47660097c41ada09c8c135434bcb
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4b8a84da331568d36b6f6910054fdb2aea76f490
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96743658"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530334"
 ---
 # <a name="how-does-self-service-password-reset-writeback-work-in-azure-active-directory"></a>Self servis parola sıfırlama geri yazma özelliği Azure Active Directory nasıl çalışır?
 
@@ -140,7 +140,7 @@ Parolalar aşağıdaki durumlarda geri yazılır:
    * Herhangi bir yönetici self servis zorla parola değiştirme işlemi, örneğin parola süre sonu.
    * [Parola sıfırlama portalından](https://passwordreset.microsoftonline.com)kaynaklanan tüm yönetici self servis parola sıfırlaması.
    * Yönetici tarafından başlatılan son kullanıcı parolası [Azure Portal](https://portal.azure.com)sıfırlandı.
-   * [MICROSOFT Graph API Beta](/graph/api/passwordauthenticationmethod-resetpassword?tabs=http&view=graph-rest-beta)'dan yönetici tarafından başlatılan son kullanıcı parolası sıfırlandı.
+   * [MICROSOFT Graph API](/graph/api/passwordauthenticationmethod-resetpassword?tabs=http)'den yönetici tarafından başlatılan son kullanıcı parolası sıfırlandı.
 
 ## <a name="unsupported-writeback-operations"></a>Desteklenmeyen geri yazma işlemleri
 
@@ -149,7 +149,7 @@ Parolalar aşağıdaki durumların hiçbirinde geri yazılmadı:
 * **Desteklenmeyen Son Kullanıcı işlemleri**
    * PowerShell sürüm 1, sürüm 2 veya Microsoft Graph API 'sini kullanarak kendi parolalarını sıfırlayan herhangi bir son kullanıcı.
 * **Desteklenmeyen yönetici işlemleri**
-   * PowerShell sürüm 1, sürüm 2 veya Microsoft Graph API 'sinden yönetici tarafından başlatılan son kullanıcı parolası sıfırlanır ( [MICROSOFT Graph API Beta](/graph/api/passwordauthenticationmethod-resetpassword?tabs=http&view=graph-rest-beta) desteklenir).
+   * PowerShell sürüm 1, sürüm 2 veya Microsoft Graph API 'sinden yönetici tarafından başlatılan son kullanıcı parolası sıfırlanır ( [MICROSOFT Graph API](/graph/api/passwordauthenticationmethod-resetpassword?tabs=http) desteklenir).
    * [Microsoft 365 Yönetim merkezinden](https://admin.microsoft.com)yönetici tarafından başlatılan son kullanıcı parolası sıfırlandı.
    * Herhangi bir yönetici parola geri yazma için kendi parolasını sıfırlamak üzere parola sıfırlama aracını kullanamaz.
 

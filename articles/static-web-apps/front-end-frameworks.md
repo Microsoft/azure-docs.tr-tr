@@ -7,12 +7,12 @@ ms.service: static-web-apps
 ms.topic: conceptual
 ms.date: 07/18/2020
 ms.author: cshoe
-ms.openlocfilehash: 14564b0591ef0146131b3f9324556b613e25daac
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9f02c9ad10e2b03bddc7c3ca2cfb54932464b69a
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97901241"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105731760"
 ---
 # <a name="configure-front-end-frameworks-and-libraries-with-azure-static-web-apps-preview"></a>Azure statik Web Apps önizlemesi ile ön uç çerçeveleri ve kitaplıkları yapılandırma
 
@@ -52,6 +52,7 @@ Tablo sütunlarının amacı aşağıdaki öğeler tarafından açıklanmıştı
 | [Polimer](https://www.polymer-project.org/) | `build/default` | yok |
 | [Ön işlem](https://preactjs.com/) | `build` | yok |
 | [React](https://reactjs.org/) | `build` | yok |
+| [RedwoodJS](https://redwoodjs.com/) | `web/dist` | `yarn rw build` |
 | [Kalıbı](https://stenciljs.com/) | `www` | yok |
 | [Svelte](https://svelte.dev/) | `public` | yok |
 | [Three.js](https://threejs.org/) | `/` | yok |

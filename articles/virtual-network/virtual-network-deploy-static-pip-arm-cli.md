@@ -16,12 +16,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/08/2018
 ms.author: kumud
-ms.openlocfilehash: c4062dd086eeee712376a402da2792352fa3c3ae
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f0f61cc4ef02033a2c21ce5acde68caea483e743
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98221351"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790140"
 ---
 # <a name="create-a-virtual-machine-with-a-static-public-ip-address-using-the-azure-cli"></a>Azure CLı kullanarak statik genel IP adresi ile sanal makine oluşturma
 
@@ -32,13 +32,13 @@ Statik bir genel IP adresine sahip bir sanal makine oluşturabilirsiniz. Genel b
 Aşağıdaki adımları yerel bilgisayarınızdan veya Azure Cloud Shell kullanarak tamamlayabilirsiniz. Yerel bilgisayarınızı kullanmak için [Azure CLI 'nin yüklü](/cli/azure/install-azure-cli?toc=%2fazure%2fvirtual-network%2ftoc.json)olduğundan emin olun. Azure Cloud Shell kullanmak için, takip eden herhangi bir komut kutusunun sağ üst köşesinde bulunan **deneyin** ' i seçin. Cloud Shell sizi Azure 'da oturum açar.
 
 1. Cloud Shell kullanılıyorsa adım 2 ' ye atlayın. Bir komut oturumu açın ve ile Azure 'da oturum açın `az login` .
-2. [az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek, Doğu ABD Azure bölgesinde bir kaynak grubu oluşturur:
+2. [az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek, Doğu ABD Azure bölgesinde bir kaynak grubu oluşturur:
 
    ```azurecli-interactive
    az group create --name myResourceGroup --location eastus
    ```
 
-3. [az vm create](/cli/azure/vm#az-vm-create) komutuyla bir sanal makine oluşturun. `--public-ip-address-allocation=static`Seçeneği, sanal makineye statik bir genel IP adresi atar. Aşağıdaki örnek, *Mypublicıpaddress* adlı statik, temel SKU genel IP adresi ile birlikte bir Ubuntu sanal makinesi oluşturur:
+3. [az vm create](/cli/azure/vm#az_vm_create) komutuyla bir sanal makine oluşturun. `--public-ip-address-allocation=static`Seçeneği, sanal makineye statik bir genel IP adresi atar. Aşağıdaki örnek, *Mypublicıpaddress* adlı statik, temel SKU genel IP adresi ile birlikte bir Ubuntu sanal makinesi oluşturur:
 
    ```azurecli-interactive
    az vm create \
@@ -53,7 +53,7 @@ Aşağıdaki adımları yerel bilgisayarınızdan veya Azure Cloud Shell kullana
 
    Genel IP adresi standart bir SKU olmalıdır ve `--public-ip-sku Standard` önceki komuta ekleyin. [Genel IP adresi SKU 'ları](./public-ip-addresses.md#sku)hakkında daha fazla bilgi edinin. Sanal makine, genel bir Azure Load Balancer arka uç havuzuna eklenecektir, sanal makinenin genel IP adresi SKU 'su, yük dengeleyicinin genel IP adresi SKU 'SU ile aynı olmalıdır. Ayrıntılar için bkz. [Azure Load Balancer](../load-balancer/skus.md).
 
-4. Atanan genel IP adresini görüntüleyin ve statik, temel bir SKU adresi olarak oluşturulduğunu, [az Network public-IP Show](/cli/azure/network/public-ip#az-network-public-ip-show)komutuyla doğrulayın:
+4. Atanan genel IP adresini görüntüleyin ve statik, temel bir SKU adresi olarak oluşturulduğunu, [az Network public-IP Show](/cli/azure/network/public-ip#az_network_public_ip_show)komutuyla doğrulayın:
 
    ```azurecli-interactive
    az network public-ip show \
@@ -68,9 +68,11 @@ Aşağıdaki adımları yerel bilgisayarınızdan veya Azure Cloud Shell kullana
 > [!WARNING]
 > Sanal makinenin işletim sistemi içindeki IP adresi ayarlarını değiştirmeyin. İşletim sistemi, Azure genel IP adreslerinden oluşan farkında değildir. İşletim sistemine özel IP adresi ayarları ekleyebilse de, gerekmedikçe, [bir işletim sistemine özel bır IP adresi ekleme](virtual-network-network-interface-addresses.md#private)' yi bulana kadar yapmamasını öneririz.
 
+[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
+
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse, [az group delete](/cli/azure/group#az-group-delete) komutunu kullanarak kaynak grubunu ve içerdiği tüm kaynakları kaldırabilirsiniz:
+Artık gerekli değilse, [az group delete](/cli/azure/group#az_group_delete) komutunu kullanarak kaynak grubunu ve içerdiği tüm kaynakları kaldırabilirsiniz:
 
 ```azurecli-interactive
 az group delete --name myResourceGroup --yes

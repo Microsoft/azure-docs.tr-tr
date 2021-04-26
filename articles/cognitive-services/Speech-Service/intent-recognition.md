@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 10/13/2020
 ms.author: v-demjoh
 keywords: Amaç tanıma
-ms.openlocfilehash: 215b25e440b8cad76e0656e47d32b184edf4ac66
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 532101c8cc307e6a5bb65022702b516c492a51fe
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "95018710"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107210389"
 ---
 # <a name="what-is-intent-recognition"></a>Amaç tanıma nedir?
 
@@ -33,7 +33,7 @@ Amaç tanımayı kullanarak, uygulamalarınız, araçları ve cihazlarınız, LU
 
 ## <a name="get-started"></a>başlarken
 
-Amaç tanımayı kullanmaya başlamak için [hızlı](quickstarts/intent-recognition.md) başlangıca bakın.
+Amaç tanımayı kullanmaya başlamak için [hızlı](get-started-intent-recognition.md) başlangıca bakın.
 
 ## <a name="sample-code"></a>Örnek kod
 
@@ -53,6 +53,6 @@ Amaç tanıma için örnek kod:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Amaç tanıma [hızlı](quickstarts/intent-recognition.md) başlangıcını doldurun
+* Amaç tanıma [hızlı](get-started-intent-recognition.md) başlangıcını doldurun
 * [Ücretsiz bir konuşma hizmeti abonelik anahtarı alın](overview.md#try-the-speech-service-for-free)
 * [Konuşma SDK 'sını alın](speech-sdk.md)

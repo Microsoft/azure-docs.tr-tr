@@ -1,4 +1,4 @@
-- name: Cloud Services (genişletilmiş destek) belgeleri
+- name: Azure Cloud Services (genişletilmiş destek) belgeleri
   href: index.yml
 - name: Genel Bakış
   items:
@@ -51,14 +51,26 @@
           href: schema-cscfg-role.md
         - name: NetworkConfiguration şeması
           href: schema-cscfg-networkconfiguration.md
-    - name: Sık Sorulan Sorular
-      href: faq.md
 - name: Nasıl yapılır
   items:
-    - name: Uzak Masaüstü uzantısını Uygula
-      href: enable-rdp.md
-    - name: WAD uzantısını Uygula
-      href: enable-wad.md
+    - name: Azure Cloud Services 'e geçiş (genişletilmiş destek)
+      items:
+        - name: Geçişe genel bakış
+          href: in-place-migration-overview.md
+        - name: Geçiş teknik ayrıntıları
+          href: in-place-migration-technical-details.md
+        - name: Azure portal kullanarak geçirin
+          href: in-place-migration-portal.md
+        - name: PowerShell kullanarak geçirme
+          href: in-place-migration-powershell.md
+        - name: Yaygın hatalar ve bilinen sorunlar
+          href: in-place-migration-common-errors.md
+    - name: Uzantıları Uygula
+      items:
+        - name: Uzak Masaüstü uzantısını Uygula
+          href: enable-rdp.md
+        - name: WAD uzantısını Uygula
+          href: enable-wad.md
     - name: Uyarıları etkinleştirme
       href: enable-alerts.md
     - name: Ölçeklendirmeyi yapılandırma
@@ -67,9 +79,19 @@
       href: certificates-and-key-vault.md
     - name: Portalı kullanarak ARM şablonu oluşturma
       href: generate-template-portal.md
+    - name: Bulut hizmeti dağıtımlarını değiştirme
+      href: swap-cloud-service.md
+    - name: SKU ayrıntılarını geçersiz kıl
+      href: override-sku.md
+    - name: Sorun giderme
+      items:
+        - name: Rol başlatma hatası
+          href: role-startup-failure.md
+        - name: Sık sorulan sorular
+          href: faq.md
 - name: Örnekler
   items:
-    - name: Örnek Şablonlar
+    - name: Örnek şablonlar
       href: 'https://github.com/Azure-Samples/cloud-services-extended-support'
     - name: Yeni bir bulut hizmeti oluşturun
       href: sample-create-cloud-service.md
@@ -85,7 +107,7 @@
       href: 'https://www.powershellgallery.com/packages/Az.CloudService/0.1.0'
     - name: PowerShell cmdlet'leri
       href: /powershell/module/az.cloudservice/#cloudservice
-    - name: ARM şablon başvurusu
+    - name: ARM şablonu başvurusu
       href: /azure/templates/microsoft.compute/cloudservices
     - name: REST
       href: /rest/api/compute/cloudservices

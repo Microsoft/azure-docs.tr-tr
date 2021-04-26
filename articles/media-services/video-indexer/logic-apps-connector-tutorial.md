@@ -8,16 +8,16 @@ ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: tutorial
 ms.date: 09/21/2020
-ms.openlocfilehash: f3504ca4a706e92081209f4eaaa86af9f71c52b3
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: caff6a2496e907da1bdc140860c47476d1842df4
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98880919"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600684"
 ---
 # <a name="tutorial-use-video-indexer-with-logic-app-and-power-automate"></a>Öğretici: mantıksal uygulama ve güç otomatikleştirme ile Video Indexer kullanma
 
-Azure Media Services [video Indexer v2 REST API](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Delete-Video?) hem sunucudan sunucuya hem de istemciden sunucuya iletişimi destekler ve video Indexer kullanıcıların video ve ses öngörülerini kolayca uygulama mantığına tümleştirmesini sağlar.
+Azure Media Services [video Indexer v2 REST API](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Delete-Video) hem sunucudan sunucuya hem de istemciden sunucuya iletişimi destekler ve video Indexer kullanıcıların video ve ses öngörülerini kolayca uygulama mantığına tümleştirmesini sağlar.
 
 Tümleştirmeyi daha da kolay hale getirmek için, [](https://azure.microsoft.com/services/logic-apps/)   API 'imizde uyumlu olan Logic Apps ve [Güç otomatikleştirme](https://preview.flow.microsoft.com/connectors/shared_videoindexer-v2/video-indexer-v2/)   bağlayıcılarını destekliyoruz. Tek bir kod satırı yazmadan büyük miktarda video ve ses dosyasından öngörüleri etkin bir şekilde indekslemek ve ayıklamak üzere özel iş akışları ayarlamak için bağlayıcıları kullanabilirsiniz. Ayrıca, tümleştirmenize yönelik bağlayıcılar kullanılması, iş akışınızın sistem durumu ve hata ayıklamanın kolay bir yolu hakkında daha iyi görünürlük sağlar.  
 

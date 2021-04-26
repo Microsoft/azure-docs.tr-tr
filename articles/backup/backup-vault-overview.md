@@ -2,13 +2,13 @@
 title: Yedekleme kasalarına genel bakış
 description: Yedekleme kasalarına genel bakış.
 ms.topic: conceptual
-ms.date: 08/17/2020
-ms.openlocfilehash: c189997ecc4814917182246b35003649d317ac77
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/19/2021
+ms.openlocfilehash: e2d720da9474a35870de01559201d22c9e5b567f
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92091296"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739089"
 ---
 # <a name="backup-vaults-overview"></a>Yedekleme kasaları genel bakış
 
@@ -28,7 +28,8 @@ Yedekleme Kasası, zaman içinde oluşturulan yedeklemeleri ve kurtarma noktalar
 
 ## <a name="encryption-settings-in-the-backup-vault"></a>Yedekleme kasasındaki şifreleme ayarları
 
-Bu bölümde, yedekleme kasasında depolanan yedekleme verilerinizi şifrelemek için kullanılabilen seçenekler açıklanmaktadır.
+Bu bölümde, yedekleme kasasında depolanan yedekleme verilerinizi şifrelemek için kullanılabilen seçenekler açıklanmaktadır. Azure Backup hizmeti, yedekleme kasasının yönetilen kimliğine erişmek için **yedekleme yönetim hizmeti** uygulamasını kullanır, ancak Azure Key Vault.
+
 
 ### <a name="encryption-of-backup-data-using-platform-managed-keys"></a>Platform tarafından yönetilen anahtarlar kullanılarak yedekleme verilerinin şifrelenmesi
 
@@ -87,7 +88,7 @@ Aşağıdaki işlem bozucu olduğundan geri alınamaz. Korunan sunucuyla ilişki
 
 Bir kasayı doğru bir şekilde silmek için şu sırada bulunan adımları izlemeniz gerekir:
 
-- Korunan herhangi bir öğe olup olmadığını doğrulamak için ' i denetlemeniz gerekir:
+- Korunan herhangi bir öğe olup olmadığını doğrulayın:
   - Sol gezinti çubuğundaki **yedekleme örnekleri** ' ne gidin. Burada listelenen tüm öğelerin önce silinmesi gerekir.
 
 Bu adımları tamamladıktan sonra kasayı silmeye devam edebilirsiniz.

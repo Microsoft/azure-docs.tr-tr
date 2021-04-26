@@ -13,12 +13,12 @@ ms.date: 12/09/2020
 ms.author: kenwith
 ms.reviewer: luleon, paulgarn, jeedes
 ms.custom: aaddev
-ms.openlocfilehash: 0cccf45037320b476b1a44cafa8074bacadacbc8
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 25e737afb524cb8c6f45ac8e99f46a8064ae7855
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103600958"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107598848"
 ---
 # <a name="how-to-customize-claims-issued-in-the-saml-token-for-enterprise-applications"></a>Nasıl yapılır: kurumsal uygulamalar için SAML belirtecinde verilen talepleri özelleştirme
 
@@ -77,7 +77,7 @@ Geçici NameID de desteklenir, ancak açılan listede kullanılamaz ve Azure tar
 | Dizin genişletmeleri | [Azure AD Connect eşitleme kullanılarak şirket içi Active Directory eşitlenen](../hybrid/how-to-connect-sync-feature-directory-extensions.md) Dizin uzantıları |
 | Uzantı öznitelikleri 1-15 | Azure AD şemasını genişletmek için kullanılan şirket içi uzantı öznitelikleri |
 
-Daha fazla bilgi için bkz. [Tablo 3: kaynak başına GEÇERLI kimlik değerleri](active-directory-claims-mapping.md#table-3-valid-id-values-per-source).
+Daha fazla bilgi için bkz. [Tablo 3: kaynak başına GEÇERLI kimlik değerleri](reference-claims-mapping-policy-type.md#table-3-valid-id-values-per-source).
 
 Ayrıca, Azure AD 'de tanımladığınız talepler için herhangi bir sabit (statik) değer atayabilirsiniz. Sabit değer atamak için lütfen aşağıdaki adımları izleyin:
 

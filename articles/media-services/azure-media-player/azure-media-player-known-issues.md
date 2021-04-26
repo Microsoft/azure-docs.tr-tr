@@ -5,13 +5,13 @@ author: IngridAtMicrosoft
 ms.author: inhenkel
 ms.service: media-services
 ms.topic: reference
-ms.date: 05/11/2020
-ms.openlocfilehash: a31c089971b7e70e70c5906480deb2b17c197b9f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/05/2021
+ms.openlocfilehash: 9d2289f1cec0d3679b0e9400f75c75cf9fece60b
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87043620"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448840"
 ---
 # <a name="known-issues"></a>Bilinen Sorunlar #
 

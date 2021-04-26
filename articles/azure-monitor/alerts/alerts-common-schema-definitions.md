@@ -3,20 +3,20 @@ title: Azure Izleyici 'de uyarı şeması tanımları
 description: Azure Izleyici için ortak uyarı şeması tanımlarını anlama
 author: ofirmanor
 ms.topic: conceptual
-ms.date: 09/22/2020
-ms.openlocfilehash: 02092f5a241824d2a9aef242b544f8900af7ebec
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/12/2021
+ms.openlocfilehash: 6d835b6d2c3519bc47decf8256ab3f3380170df6
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102045403"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565126"
 ---
 # <a name="common-alert-schema-definitions"></a>Ortak uyarı şeması tanımları
 
 Bu makalede, Web kancaları, Azure Logic Apps, Azure Işlevleri ve Azure Otomasyonu runbook 'ları gibi Azure Izleyici için [genel uyarı şeması tanımları](./alerts-common-schema.md) açıklanmaktadır. 
 
 Herhangi bir uyarı örneği, etkilenen kaynağı ve uyarının nedenini açıklar. Bu örnekler, aşağıdaki bölümlerde ortak şemada açıklanmıştır:
-* **Essentials**: uyarının hangi kaynakla ilgili olduğunu açıklayan tüm uyarı türlerinde ortak olan standartlaştırılmış alanlar kümesi (örneğin, önem derecesi veya açıklama). 
+* **Essentials**: uyarının hangi kaynakla ilgili olduğunu açıklayan tüm uyarı türlerinde ortak olan standartlaştırılmış alanlar kümesi (örneğin, önem derecesi veya açıklama). Önem derecesine ilişkin tanımlamalar [uyarılara genel bakış](alerts-overview.md#overview)bölümünde bulunabilir. 
 * **Uyarı bağlamı**: uyarı türüne göre değişen alanlarla, uyarının nedenini açıklayan bir alan kümesi. Örneğin, bir ölçüm uyarısı, uyarı bağlamındaki ölçüm adı ve ölçüm değeri gibi alanları içerir, ancak bir etkinlik günlüğü uyarısıyla uyarıyı oluşturan olay hakkında bilgi bulunur. 
 
 **Örnek uyarı yükü**
@@ -72,7 +72,7 @@ Herhangi bir uyarı örneği, etkilenen kaynağı ve uyarının nedenini açıkl
 
 | Alan | Açıklama|
 |:---|:---|
-| alertId | GUID, uyarı örneğini benzersiz bir şekilde tanımlıyor. |
+| alertId | Uyarı örneğini tanımlayan benzersiz kaynak KIMLIĞI. |
 | alertRule | Uyarı örneğini oluşturan uyarı kuralının adı. |
 | Önem derecesi | Uyarının önem derecesi. Olası değerler: Sev0, Sev1, Sev2, Sev3 veya Sev4. |
 | signalType | Uyarı kuralının tanımlandığı sinyali tanımlar. Olası değerler: ölçüm, günlük veya etkinlik günlüğü. |
@@ -110,7 +110,7 @@ Herhangi bir uyarı örneği, etkilenen kaynağı ve uyarının nedenini açıkl
 
 ## <a name="alert-context"></a>Uyarı bağlamı
 
-### <a name="metric-alerts"></a>Ölçüm uyarıları
+### <a name="metric-alerts-excluding-availability-tests"></a>Ölçüm uyarıları (kullanılabilirlik testleri hariç)
 
 #### <a name="monitoringservice--platform"></a>`monitoringService` = `Platform`
 
@@ -136,6 +136,37 @@ Herhangi bir uyarı örneği, etkilenen kaynağı ve uyarının nedenini açıkl
               }
             ],
             "metricValue": 31.1105
+          }
+        ],
+        "windowStartTime": "2019-03-22T13:40:03.064Z",
+        "windowEndTime": "2019-03-22T13:45:03.064Z"
+      }
+    }
+}
+```
+
+### <a name="metric-alerts-availability-tests"></a>Ölçüm uyarıları (kullanılabilirlik testleri)
+
+#### <a name="monitoringservice--platform"></a>`monitoringService` = `Platform`
+
+**Örnek değerler**
+```json
+{
+  "alertContext": {
+      "properties": null,
+      "conditionType": "WebtestLocationAvailabilityCriteria",
+      "condition": {
+        "windowSize": "PT5M",
+        "allOf": [
+          {
+            "metricName": "Failed Location",
+            "metricNamespace": null,
+            "operator": "GreaterThan",
+            "threshold": "2",
+            "timeAggregation": "Sum",
+            "dimensions": [],
+            "metricValue": 5,
+            "webTestName": "myAvailabilityTest-myApplication"
           }
         ],
         "windowStartTime": "2019-03-22T13:40:03.064Z",

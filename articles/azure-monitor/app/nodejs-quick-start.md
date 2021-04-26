@@ -1,18 +1,17 @@
 ---
 title: 'Hızlı başlangıç: Azure Izleyici ile Node.js Izleme Application Insights'
 description: Azure Izleyici ile izleme için Node.js bir Web uygulamasını hızlıca ayarlamaya yönelik yönergeler sağlar Application Insights
-ms.subservice: application-insights
 ms.topic: quickstart
 author: lgayhardt
 ms.author: lagayhar
 ms.date: 07/12/2019
 ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019, devx-track-js
-ms.openlocfilehash: 75ac0cb2616eb86026218d2971ad192c1a557e5f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 96a60c88997226516d451124280053d87065e5b6
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100629111"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106381952"
 ---
 # <a name="quickstart-start-monitoring-your-nodejs-web-application-with-azure-application-insights"></a>Hızlı başlangıç: Node.js Web uygulamanızı Azure Application Insights izlemeye başlayın
 

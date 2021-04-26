@@ -1,7 +1,7 @@
 ---
 title: Azure Active Directory işletmeden müşteriye (B2C) yenilikleri
 description: Azure Active Directory işletmeden müşteriye (B2C) yönelik yeni ve güncelleştirilmiş belgeler.
-ms.date: 03/08/2021
+ms.date: 04/05/2021
 ms.service: active-directory
 ms.subservice: B2C
 ms.topic: reference
@@ -9,16 +9,37 @@ ms.workload: identity
 ms.author: mimart
 author: msmimart
 manager: CelesteDG
-ms.openlocfilehash: 3fcc4f01d926f5c624adabd51e6215e0106af1fa
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 61c24a7c14eb2fafff8a052f24a50a85f03de404
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105557879"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107225963"
 ---
 # <a name="azure-active-directory-b2c-whats-new"></a>Azure Active Directory B2C: yenilikler
 
 Azure Active Directory B2C belgelerindeki yenilikler 'e hoş geldiniz. Bu makalede, eklenen ve son üç ay içinde önemli güncelleştirmeleri olan yeni belgeler listelenir. B2C hizmetiyle ilgili yenilikler hakkında bilgi edinmek için bkz. [Azure Active Directory](../active-directory/fundamentals/whats-new.md)yenilikleri.
+
+## <a name="march-2021"></a>Mart 2021
+
+### <a name="new-articles"></a>Yeni makaleler
+
+- [Azure Active Directory B2C için özel etki alanlarını etkinleştir](custom-domain.md)
+- [Azure AD B2C kimlik koruması riskini araştırın](identity-protection-investigate-risk.md)
+- [Azure Active Directory B2C kullanarak bir Apple KIMLIĞIYLE kaydolma ve oturum açma ayarlama (Önizleme)](identity-provider-apple-id.md)
+- [Azure Active Directory B2C bir parolayı zorla sıfırlama akışı ayarlama](force-password-reset.md)
+- [Ekli oturum açma deneyimi](embedded-login.md)
+
+### <a name="updated-articles"></a>Güncelleştirilmiş makaleler
+
+- [Azure Active Directory B2C kullanarak bir Amazon hesabı ile kaydolma ve oturum açma ayarlama](identity-provider-amazon.md)
+- [Azure Active Directory B2C 'de SAML protokolünü kullanarak bir Salesforce SAML sağlayıcısı ile oturum açma ayarlama](identity-provider-salesforce-saml.md)
+- [OWıN tabanlı Web API 'sini b2clogin.com veya özel bir etki alanına geçirme](multiple-token-endpoints.md)
+- [Teknik profiller](technicalprofiles.md)
+- [Azure Active Directory B2C Kullanıcı akışlarına koşullu erişim ekleme](conditional-access-user-flow.md)
+- [Azure Active Directory B2C bir parola sıfırlama akışı ayarlayın](add-password-reset-policy.md)
+- [RelyingParty](relyingparty.md)
+
 
 ## <a name="february-2021"></a>Şubat 2021
 
@@ -66,7 +87,7 @@ Azure Active Directory B2C belgelerindeki yenilikler 'e hoş geldiniz. Bu makale
 - [Azure Active Directory B2C kullanarak bir Twitter hesabıyla kaydolma ve oturum açma ayarlama](identity-provider-twitter.md)
 - [Azure Active Directory B2C kullanarak bir WeChat hesabı ile kaydolma ve oturum açma ayarlama](identity-provider-wechat.md)
 - [Azure Active Directory B2C kullanarak oturum açma ve Weibo hesabı ile oturum açma ayarlama](identity-provider-weibo.md)
-- [Azure AD B2C özel ilkeye genel bakış](custom-policy-trust-frameworks.md)
+- [Azure AD B2C özel ilkeye genel bakış](custom-policy-overview.md)
 
 
 ## <a name="december-2020"></a>Aralık 2020

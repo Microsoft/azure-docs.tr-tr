@@ -8,14 +8,16 @@ ms.date: 03/10/2021
 ms.topic: quickstart
 ms.service: azure-communication-services
 zone_pivot_groups: acs-plat-web-ios-android
-ms.openlocfilehash: 39c35bc90986126d099e68023e15b97c58d0ac26
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 0e75d2b480a9cbfd2977d9d449c1ea12bdfe4920
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105108219"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106095620"
 ---
 # <a name="quickstart-join-your-calling-app-to-a-teams-meeting"></a>Hızlı başlangıç: çağıran uygulamanızı bir takımlar toplantısı 'na ekleme
+
+[!INCLUDE [Public Preview](../../includes/public-preview-include-document.md)]
 
 > [!IMPORTANT]
 > [Ekipte kiracı birlikte çalışabilirliğini](../../concepts/teams-interop.md)etkinleştirmek/devre dışı bırakmak için [Bu formu](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR21ouQM6BHtHiripswZoZsdURDQ5SUNQTElKR0VZU0VUU1hMOTBBMVhESS4u)doldurun.
@@ -33,6 +35,14 @@ JavaScript SDK 'sını kullanarak, çağırma çözümünüzü Microsoft ekipler
 ::: zone pivot="platform-ios"
 [!INCLUDE [Calling with iOS](./includes/teams-interop-ios.md)]
 ::: zone-end
+
+Bu belgede açıklanan işlevsellik, Iletişim Hizmetleri SDK 'larının genel erişilebilirlik sürümünü kullanır. Ekipler birlikte çalışabilirliği, Iletişim Hizmetleri SDK 'larının beta sürümünü gerektirir. Beta SDK 'Ları [sürüm notları sayfasında](https://github.com/Azure/Communication/tree/master/releasenotes)araştırılabilir.
+
+Beta SDK 'leriyle "paketi Kur" adımını yürütürken, `@1.0.0-beta.10` paket adında sürüm (Bu makalenin yazıldığı sırada sürüm) belirterek paketinizin sürümünü en son beta sürümüyle değiştirin `communication-calling` . `communication-common`Paket komutunu değiştirmeniz gerekmez. Örnek:
+
+```console
+npm install @azure/communication-calling@1.0.0-beta.10 --save
+```
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 

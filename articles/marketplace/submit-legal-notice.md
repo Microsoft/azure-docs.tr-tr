@@ -8,13 +8,13 @@ author: vikrambmsft
 ms.author: vikramb
 ms.date: 03/08/2021
 ms.openlocfilehash: 7acf7e8dc9f90c50f3c7d5555e6fe37260b35c93
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103022157"
 ---
-# <a name="notifying-microsoft-regarding-the-publisher-agreement"></a>Microsoft 'un yayımcı anlaşmasıyla ilgili bilgilendirilmesi
+# <a name="notifying-microsoft-regarding-the-publisher-agreement"></a>Yayımcı Sözleşmesi'ni Microsoft'a Bildirme
 
 Uygun eylem ve izlemeyi sağlamak için Microsoft Publisher anlaşmasıyla ilgili yasal bildirimleri Microsoft 'a göndermek için bir destek bileti kullanın.
 

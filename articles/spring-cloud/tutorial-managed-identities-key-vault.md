@@ -7,12 +7,12 @@ ms.service: spring-cloud
 ms.topic: tutorial
 ms.date: 07/08/2020
 ms.custom: devx-track-java, devx-track-azurecli
-ms.openlocfilehash: bbfafeaf9ce24911bb4893748d456d22e02fc411
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 870a04af244d18826e1041316895f746e27870eb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104879218"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786594"
 ---
 # <a name="tutorial-use-a-managed-identity-to-connect-key-vault-to-an-azure-spring-cloud-app"></a>Öğretici: Azure Spring Cloud uygulamasına Key Vault bağlamak için yönetilen bir kimlik kullanın
 
@@ -29,14 +29,14 @@ Azure Key Vault, uygulamanızın belirteçleri, parolaları, sertifikaları, API
 * [Maven 3,0 veya üstünü yükler](https://maven.apache.org/download.cgi)
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
-Kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. [Az Group Create](/cli/azure/group#az-group-create)komutunu kullanarak hem Key Vault hem de yay bulutunu içerecek bir kaynak grubu oluşturun:
+Kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. [Az Group Create](/cli/azure/group#az_group_create)komutunu kullanarak hem Key Vault hem de yay bulutunu içerecek bir kaynak grubu oluşturun:
 
 ```azurecli-interactive
 az group create --name "myResourceGroup" -l "EastUS"
 ```
 
 ## <a name="set-up-your-key-vault"></a>Key Vault ayarlama
-Key Vault oluşturmak için [az keykasacreate](/cli/azure/keyvault#az-keyvault-create)komutunu kullanın.
+Key Vault oluşturmak için [az keykasacreate](/cli/azure/keyvault#az_keyvault_create)komutunu kullanın.
 
 > [!Important]
 > Her Key Vault benzersiz bir adı olmalıdır. Aşağıdaki örneklerde <-keykasasının adı> Key Vault adıyla değiştirin.
@@ -47,7 +47,7 @@ az keyvault create --name "<your-keyvault-name>" -g "myResourceGroup"
 
 Döndürülen `vaultUri` "https://<-keykasa-adı>. Vault.Azure.net" biçiminde olacak döndürülen bir örneği yapın. Bu işlem, aşağıdaki adımda kullanılacaktır.
 
-Artık, [az keykasasecret set](/cli/azure/keyvault/secret#az-keyvault-secret-set)komutuyla Key Vault bir gizli dizi yerleştirebilirsiniz:
+Artık, [az keykasasecret set](/cli/azure/keyvault/secret#az_keyvault_secret_set)komutuyla Key Vault bir gizli dizi yerleştirebilirsiniz:
 
 ```azurecli-interactive
 az keyvault secret set --vault-name "<your-keyvault-name>" \

@@ -2,13 +2,13 @@
 title: Uzantı kaynak türleri
 description: Azure Kaynak türleri, diğer kaynak türlerinin yeteneklerini genişletmek için kullanılır.
 ms.topic: conceptual
-ms.date: 11/14/2020
-ms.openlocfilehash: 5561c480dd5a2849588ed2288eb5bcc35fc1446c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/12/2021
+ms.openlocfilehash: 7085c0894fbf3bd56b56e4187d56f9af54916962
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94658460"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107363997"
 ---
 # <a name="resource-types-that-extend-capabilities-of-other-resources"></a>Diğer kaynakların özelliklerini genişleten kaynak türleri
 
@@ -33,8 +33,17 @@ Uzantı kaynağı, başka bir kaynağın özelliklerine ekleyen bir kaynaktır. 
 - Microsoft. Authorization/Policymuafiyetleri
 - Microsoft. Authorization/policySetDefinitions
 - Microsoft. Authorization/privateLinkAssociations
+- Microsoft. Authorization/Roleatamaprofilsiz
 - Microsoft. Authorization/Roleatamalar
+- Microsoft. Authorization/Roleschedulementscheduleınstances
+- Microsoft. Authorization/roleAssignmentScheduleRequests
+- Microsoft. Authorization/Roleatamazamanlamaları
 - Microsoft. Authorization/roleDefinitions
+- Microsoft. Authorization/Roleeligibilityscheduleınstances
+- Microsoft. Authorization/roleEligibilityScheduleRequests
+- Microsoft. Authorization/Roleeligibilityzamanlamalar
+- Microsoft. Authorization/roleManagementPolicies
+- Microsoft. Authorization/Rolemanagementpolicyasatamaları
 
 ## <a name="microsoftautomanage"></a>Microsoft. oto Yönet
 
@@ -52,6 +61,14 @@ Uzantı kaynağı, başka bir kaynağın özelliklerine ekleyen bir kaynaktır. 
 
 - Microsoft. Blueprint/Blueprintasbir
 - Microsoft. Blueprint/planlar
+
+## <a name="microsoftcapacity"></a>Microsoft. Capacity
+
+- Microsoft. Capacity/Listsku 'Lar
+
+## <a name="microsoftchangeanalysis"></a>Microsoft. ChangeAnalysis
+
+- Microsoft. ChangeAnalysis/Changes
 
 ## <a name="microsoftconsumption"></a>Microsoft. tüketim
 
@@ -81,19 +98,28 @@ Uzantı kaynağı, başka bir kaynağın özelliklerine ekleyen bir kaynaktır. 
 
 - Microsoft. CostManagement/uyarılar
 - Microsoft. CostManagement/bütçeleri
+- Microsoft. CostManagement/Checknameavaılabılıty
 - Microsoft. CostManagement/Dimensions
 - Microsoft. CostManagement/dışarı aktarmalar
 - Microsoft. CostManagement/Externalabonelikleri
 - Microsoft. CostManagement/tahmin
+- Microsoft. CostManagement/GenerateDetailedCostReport
 - Microsoft. CostManagement/Insights
+- Microsoft. CostManagement/OperationResults
+- Microsoft. CostManagement/OperationStatus
 - Microsoft. CostManagement/Query
 - Microsoft. CostManagement/Reportconfigs
 - Microsoft. CostManagement/Reports
+- Microsoft. CostManagement/Scheduledadları
 - Microsoft. CostManagement/views
 
 ## <a name="microsoftcustomproviders"></a>Microsoft. CustomProviders
 
 - Microsoft. CustomProviders/ilişkilendirmeleri
+
+## <a name="microsoftdatamigration"></a>Microsoft. DataMigration
+
+- Microsoft. DataMigration/Databasegeçişleri
 
 ## <a name="microsofteventgrid"></a>Microsoft. EventGrid
 
@@ -156,6 +182,7 @@ Uzantı kaynağı, başka bir kaynağın özelliklerine ekleyen bir kaynaktır. 
 ## <a name="microsoftpolicyinsights"></a>Microsoft. Poliyelei
 
 - Microsoft. Poliyeleghts/belirlediğimizi karşıladığımızı
+- Microsoft. Poliyeleghts/eventGridFilters
 - Microsoft. Poliyeleghts/Poliyevents
 - Microsoft. Poliyeleghts/policyStates
 - Microsoft. Poliyeleghts/policyTrackedResources
@@ -171,7 +198,6 @@ Uzantı kaynağı, başka bir kaynağın özelliklerine ekleyen bir kaynaktır. 
 - Microsoft. ResourceHealth/childResources
 - Microsoft. ResourceHealth/olayları
 - Microsoft. ResourceHealth/ımpactedresources
-- Microsoft. ResourceHealth/bildirimleri
 
 ## <a name="microsoftresources"></a>Microsoft. resources
 
@@ -189,7 +215,11 @@ Uzantı kaynağı, başka bir kaynağın özelliklerine ekleyen bir kaynaktır. 
 - Microsoft. Security/Devices
 - Microsoft. Security/deviceSecurityGroups
 - Microsoft. Security/ınformationprotectionpolicies
+- Microsoft. Security/Insights
+- Microsoft. Security/ıotalerts
+- Microsoft. Security/ıotönerilerine
 - Microsoft. Security/ıotalgılayıcılar
+- Microsoft. Security/ıotsites
 - Microsoft. Security/Jpolicies
 - Microsoft. Security/serversecurity, açıklıkları
 - Microsoft. Security/Sqlgüvenlik açılar,
@@ -204,19 +234,29 @@ Uzantı kaynağı, başka bir kaynağın özelliklerine ekleyen bir kaynaktır. 
 - Microsoft. Securityınsights/durumlar
 - Microsoft. Securityınsights/veri bağlayıcıları
 - Microsoft. Securityınsights/dataConnectorsCheckRequirements
+- Microsoft. Securityınsights/zenginleştirme
 - Microsoft. Securityınsights/varlıklar
+- Microsoft. Securityınsights/entityQueryTemplates
 - Microsoft. Securityınsights/olaylar
 - Microsoft. Securityınsights/ayarlar
 - Microsoft. Securityınsights/Threatıntelligence
 - Microsoft. Securityınsights/Watchlists
 
-## <a name="microsoftserialconsoleppe"></a>Microsoft. SerialConsole. PPE
+## <a name="microsoftserialconsole"></a>Microsoft. SerialConsole
 
-- Microsoft. SerialConsole. PPE/seri bağlantı noktaları
+- Microsoft. SerialConsole/serialPorts
+
+## <a name="microsoftservicelinker"></a>Microsoft. ServiceLinker
+
+- Microsoft. ServiceLinker/linranlar
 
 ## <a name="microsoftsoftwareplan"></a>Microsoft. SoftwarePlan
 
 - Microsoft. SoftwarePlan/Hybriduseavantajlar
+
+## <a name="microsoftsubscription"></a>Microsoft. Subscription
+
+- Microsoft. Subscription/policies
 
 ## <a name="microsoftsupport"></a>Microsoft. support
 
@@ -224,10 +264,7 @@ Uzantı kaynağı, başka bir kaynağın özelliklerine ekleyen bir kaynaktır. 
 
 ## <a name="microsoftworkloadmonitor"></a>Microsoft. WorkloadMonitor
 
-- Microsoft. WorkloadMonitor/bileşenleri
-- Microsoft. WorkloadMonitor/Monitorınstances
 - Microsoft. WorkloadMonitor/izleyicileri
-- Microsoft. WorkloadMonitor/notificationSettings
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

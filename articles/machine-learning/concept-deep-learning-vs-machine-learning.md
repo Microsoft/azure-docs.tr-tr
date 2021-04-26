@@ -8,14 +8,14 @@ ms.subservice: core
 ms.topic: conceptual
 ms.author: lazzeri
 author: FrancescaLazzeri
-ms.date: 01/14/2020
+ms.date: 04/12/2021
 ms.custom: contperf-fy21q1,contperfq1
-ms.openlocfilehash: 48de06d28442b4d05cd3a7ab287732c0999e434c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a9e87796c3557f21bb6192c7d7d0c0925d08d786
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101659707"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311762"
 ---
 # <a name="deep-learning-vs-machine-learning-in-azure-machine-learning"></a>Derin öğrenme ile Machine Learning Azure Machine Learning
 
@@ -99,7 +99,7 @@ Uygun veri dönüşümünde, bir sinir ağı metin, ses ve görsel sinyalleri an
 
 Derin öğrenme yöntemlerine dayalı metin analizi, büyük miktarlarda metin verisini (örneğin, tıbbi belgeler veya gider alındıları) analiz etmeyi, desenleri tanımayı ve daha sonra düzenlenmiş ve kısa bilgiler oluşturmayı içerir.
 
-Şirketler, kamu yönetmelikleriyle Insider ticareti ve uyumluluğu algılamak üzere metin analizi gerçekleştirmek için derin öğrenme kullanır. Daha yaygın bir örnek sigorta dolandırıcılığı örneğidir: metin analizi, genellikle bir sigorta talebinin sahtekarlık olasılığını tanımak üzere büyük miktarda belgeyi çözümlemek için kullanılır. 
+Şirketler, kamu yönetmelikleriyle Insider ticareti ve uyumluluğu algılamak üzere metin analizi gerçekleştirmek için derin öğrenme kullanır. Daha yaygın bir örnek sigorta dolandırıcılığı örneğidir: metin analizi, genellikle bir sigorta talebinin sahtekarlık olasılığını tanımak üzere büyük miktarda belgeyi çözümlemek için kullanılır.
 
 ## <a name="artificial-neural-networks"></a>Yapay sinir ağları
 
@@ -111,15 +111,33 @@ Aşağıdaki bölümlerde en popüler yapay sinir Network typologies vardır.
 
 Feedforward sinir Network, yapay sinir Network 'ün en basit türüdür. Bir feedforward ağında, bilgiler giriş katmanından çıkış katmanına yalnızca bir yönde gider. Feedforward sinir Networks bir girişi bir dizi gizli katmana yerleştirerek bir girişi dönüştürür. Her katman bir dizi değilden oluşur ve her katman, daha önce katmandaki tüm neks 'e tam olarak bağlanır. Son tam bağlı katman (çıkış katmanı) oluşturulan tahminleri temsil eder.
 
-### <a name="recurrent-neural-network"></a>Yinelenen sinir ağı
+### <a name="recurrent-neural-network-rnn"></a>Yinelenen sinir ağı (RNN)
 
 Yinelenen sinir Networks, yaygın olarak kullanılan yapay bir sinir ağı. Bu ağlar bir katmanın çıkışını kaydeder ve katmanın sonucunun tahmin edilmesine yardımcı olması için giriş katmanına geri akışı sağlar. Yinelenen sinir ağlarında harika öğrenme becerileri vardır. Zaman serisi tahmin, öğrenme el yazısı ve dil tanıma gibi karmaşık görevler için yaygın olarak kullanılır.
 
-### <a name="convolutional-neural-network"></a>Evsel sinir ağı
+### <a name="convolutional-neural-network-cnn"></a>Evsel sinir ağı (CNN)
 
 Bir evsel sinir ağı, özellikle etkili bir yapay sinir ağı ve benzersiz bir mimari sunar. Katmanlar üç boyutta düzenlenmiştir: genişlik, yükseklik ve derinlik. Bir katmandaki katlara, bir sonraki katmandaki tüm neks 'ler bağlanır, ancak yalnızca katmanın nekatlarındaki küçük bir bölgedir. Son çıktı, derinlik boyutunun tek bir vektörüne indirgenecek ve derinlik boyutu üzerinde düzenlenmiştir. 
 
 Video tanıma, görüntü tanıma ve öneren sistemleri gibi alanlarda, evsel sinir ağları kullanılmıştır.
+
+### <a name="generative-adversarial-network-gan"></a>Genel ağ (GAN)
+
+Genel olarak oluşturulan ağlar, görüntüler gibi gerçekçi içerik oluşturmak için eğitilen modellerdir. Üretici ve ayrıştırıcı olarak bilinen iki ağdan oluşur. Her iki ağ da aynı anda eğitilir. Eğitim sırasında, Oluşturucu gerçek verilere benzer yeni yapay veriler oluşturmak için rastgele gürültü kullanır. Ayrıştırıcı, bir oluşturucunun çıktısını giriş olarak alır ve oluşturulan içeriğin gerçek veya yapay olup olmadığını anlamak için gerçek verileri kullanır. Her ağ birbirleriyle rekabet edilir. Oluşturucu gerçek içerikten ayırt edilemeyen yapay içerik oluşturmaya çalışıyor ve ayrıştırıcı, girdileri gerçek veya yapay olarak doğru sınıflandırmamaya çalışıyor. Daha sonra çıktı, ilgili hedeflerine daha iyi ulaşmak için her iki ağın ağırlıklarını güncelleştirmek üzere kullanılır.
+
+Görüntü çevirisi ve yaş ilerlemesi gibi sorunları gidermek için genel kullanım ağları kullanılır.
+
+### <a name="transformers"></a>Listesinde
+
+Dönüştürücüler, metin veya zaman serisi verileri gibi dizileri içeren sorunları çözmek için uygun olan bir model mimarisidir. [Kodlayıcı ve kod çözücü katmanlardan](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)#Encoder)oluşur. Kodlayıcı bir girişi alır ve bağlamı gibi bilgileri içeren sayısal bir gösterimiyle eşleştirir. Kod çözücü, çevrilmiş metin gibi bir çıktı oluşturmak için kodlayıcıdan bilgi kullanır. Dönüştürücüler, kodlayıcıları ve kod çözücüleri içeren diğer mimarlardan farklı hale getirir alt katmanlardır. Dikkat çekici bir şekilde, bir girdinin belirli bölümlerine odaklanmanın, bağlamdaki diğer girişlerle ilişkili olarak, içeriğinin önem derecesine göre önemli olması önerilir. Örneğin, bir haber makalesini özetleyerek, tüm tümceler önemli fikri açıklamaya uygun değildir. Özet, makale genelinde anahtar sözcüklere odaklanarak tek bir tümcede ve başlık içinde yapılabilir.
+
+Dönüştürücüler, çeviri, metin oluşturma, soru yanıtlama ve metin özetleme gibi doğal dil işleme sorunlarını gidermek için kullanılmıştır.
+
+Dönüştürücüler, bazı tanınmış uygulamalar şunlardır:
+
+- Dönüştürücüler (BERT) ile çift yönlü kodlayıcı gösterimleri
+- Genel eğitimli transformatör 2 (GPT-2)
+- Genel eğitimli transformatör 3 (GPT-3)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

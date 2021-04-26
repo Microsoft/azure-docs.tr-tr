@@ -16,12 +16,12 @@ ms.workload: infrastructure-services
 ms.date: 12/08/2020
 ms.author: blehr
 ms.custom: references_regions
-ms.openlocfilehash: 33c767d847d9e70e95b3ee1648be7852aa5cec98
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 74df338fd888bd7f654ddfc2fc5f9dddf10e84ab
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100522895"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107598423"
 ---
 # <a name="upgrade-public-ip-addresses"></a>Genel IP adreslerini yükseltme
 
@@ -146,7 +146,7 @@ Azure Resource Manager ' deki yeni bir kaynak grubu, geçirilen Ayrılmış IP a
 ## <a name="limitations"></a>Sınırlamalar
 
 * Temel bir genel IP 'yi yükseltmek için, herhangi bir Azure kaynağıyla ilişkilendirilemez.  Genel IP 'Lerin ilişkisini kaldırma hakkında daha fazla bilgi için lütfen [Bu sayfayı](./virtual-network-public-ip-address.md#view-modify-settings-for-or-delete-a-public-ip-address) gözden geçirin.  Benzer şekilde, bir Ayrılmış IP geçirmek için herhangi bir bulut hizmeti ile ilişkilendirilemez.  Ayrılmış IP 'Lerin ilişkisini kaldırma hakkında daha fazla bilgi için lütfen [Bu sayfayı](./remove-public-ip-address-vm.md) gözden geçirin.  
-* Temel ve standart SKU 'ya yükseltilen genel IP 'Ler, hiçbir [kullanılabilirlik](../availability-zones/az-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json#availability-zones) alanına sahip olmaya devam eder ve bu nedenle bölge yedekli veya zonal olan bir Azure kaynağıyla ilişkilendirilemez.  Bu, yalnızca kullanılabilirlik alanları sunan bölgeler için geçerlidir.
+* Temel ve standart SKU 'ya yükseltilen genel IP 'Ler, garantili [Kullanılabilirlik alanlarına](../availability-zones/az-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json#availability-zones)sahip olmaya devam eder.  IP adresinin ilişkilendirileceği kaynakları seçerken bunun aklınızda tutulduğundan emin olun.
 * Standart 'dan temel 'e indirgeyemezsiniz.
 
 ## <a name="next-steps"></a>Sonraki Adımlar

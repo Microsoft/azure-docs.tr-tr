@@ -7,12 +7,13 @@ ms.service: attestation
 ms.topic: overview
 ms.date: 03/26/2021
 ms.author: mbaldwin
-ms.openlocfilehash: 8ff2e73a8557c6b1761c852ac58a46037a122ddb
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: ceefd4695583822536d8cc4c14614af7f6736f70
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105628535"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830133"
 ---
 # <a name="quickstart-create-a-private-endpoint-using-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell kullanarak özel uç nokta oluşturma
 

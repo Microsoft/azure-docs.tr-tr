@@ -8,10 +8,10 @@ ms.date: 02/02/2021
 ms.topic: quickstart
 ms.service: azure-object-anchors
 ms.openlocfilehash: b5db9f3766bdd7d754f49403665a371f9d10afd7
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105047618"
 ---
 # <a name="quickstart-create-a-hololens-app-with-azure-object-anchors-in-cwinrt-and-directx"></a>Hızlı başlangıç: C++/Wınrt ve DirectX 'te Azure nesne bağlayıcıları ile bir HoloLens uygulaması oluşturma

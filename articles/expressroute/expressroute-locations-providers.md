@@ -7,12 +7,12 @@ ms.service: expressroute
 ms.topic: conceptual
 ms.date: 02/10/2021
 ms.author: duau
-ms.openlocfilehash: a43f95ad65e95db2b69b32c3fe8d62db71a98a17
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 5972e95425513e789725ed8de142c721d58011f3
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105025212"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739935"
 ---
 # <a name="expressroute-partners-and-peering-locations"></a>ExpressRoute ortakları ve eşleme konumları
 
@@ -82,11 +82,11 @@ Aşağıdaki tabloda bağlantı konumları ve her konum için hizmet sağlayıc�
 | **Atlanta** | [Equinix AT2](https://www.equinix.com/locations/americas-colocation/united-states-colocation/atlanta-data-centers/at2/) | 1 | yok | 10G, 100G | Equinix, Megaport |
 | **Auckland** | [Vocus grubu NZ Albümno](https://www.vocus.co.nz/business/cloud-data-centres) | 2 | yok | 'Yi | Devoli, Kordia, Megaport, REANNZ, Spark NZ, Vocus Group NZ |
 | **Bangkok** | [AıS](https://business.ais.co.th/solution/en/azure-expressroute.html) | 2 | yok | 'Yi | A,, UıH |
-| **Berlin** | [NTT GDC](https://www.e-shelter.de/en/location/berlin-1-data-center) | 1 | Almanya Kuzey | 'Yi | Equinx, NTT küresel veri merkezleri EMEA|
+| **Berlin** | [NTT GDC](https://www.e-shelter.de/en/location/berlin-1-data-center) | 1 | Almanya Kuzey | 'Yi | Colt, Equinx, NTT küresel veri merkezleri EMEA|
 | **Bogota** | [Equinix BG1](https://www.equinix.com/locations/americas-colocation/colombia-colocation/bogota-data-centers/bg1/) | 4 | yok | 'Yi | Equinix |
 | **Busan** | [LG CNS](https://www.lgcns.com/En/Service/DataCenter) | 2 | Güney Kore - Güney | yok | LG CNS |
-| **Kanberra** | [CDC](https://cdcdatacentres.com.au/content/about-cdc) | 1 | Orta Avustralya | 10G, 100G | CDC |
-| **Kanberra2** | [CDC](https://cdcdatacentres.com.au/content/about-cdc) | 1 | Orta Avustralya 2| 10G, 100G | CDC, Equinix |
+| **Kanberra** | [CDC](https://cdcdatacentres.com.au/about-us/) | 1 | Orta Avustralya | 10G, 100G | CDC |
+| **Kanberra2** | [CDC](https://cdcdatacentres.com.au/about-us/) | 1 | Orta Avustralya 2| 10G, 100G | CDC, Equinix |
 | **Cape Town** | [Teraco CT1](https://www.teraco.co.za/data-centre-locations/cape-town/) | 3 | Güney Afrika - Batı | 'Yi | BCX, Internet çözümleri-bulut bağlantısı, sıvı telekomünikasyon, Teraco |
 | **Chennai** | Tata Communications | 2 | Güney Hindistan | 'Yi | BSNL, küresel CloudXchange (GCX), SıFY, Tata Iletişimleri, Vodavfoneidea |
 | **Chennai2** | Airtel | 2 | Güney Hindistan | 'Yi | Airtel |
@@ -100,8 +100,8 @@ Aşağıdaki tabloda bağlantı konumları ve her konum için hizmet sağlayıc�
 | **Frankfurt** | [Interxiyon FRA11](https://www.interxion.com/Locations/frankfurt/) | 1 | Almanya Orta Batı | 10G, 100G | &T Netbono, CenturyLink Cloud Connect, Colt, DE-CIX, Equinix, Eunetçalışma, GEANT, Intercloud, ınterxiyon, Megaport, turuncu, Telia taşıyıcısı, T-Systems |
 | **Frankfurt2** | [Equinix FR7](https://www.equinix.com/locations/europe-colocation/germany-colocation/frankfurt-data-centers/fr7/) | 1 | Almanya Orta Batı | 10G, 100G | Equinix |
 | **Cenevre** | [Equinix GV2](https://www.equinix.com/locations/europe-colocation/switzerland-colocation/geneva-data-centers/gv2/) | 1 | İsviçre Batı | 10G, 100G | Equinx, Megaport, Swisscom |
-| **Hong Kong** | [Equinix HK1](https://www.equinix.com/locations/asia-colocation/hong-kong-colocation/hong-kong-data-center/hk1/) | 2 | Doğu Asya | 'Yi | Aryaka Networks, Ingiliz Teletası, CenturyLink Cloud Connect, baş Telem, Çin telekomünikasyon küresel, Çin Unicom, Equinix, Intercloud, Megaport, NTT Communications, turuncu, PCCW küresel Limited, Tata Iletişimleri, Telia taşıyıcısı, Verizon |
-| **Hong Kong2** | [MEGA-ı](https://www.iadvantage.net/index.php/locations/mega-i) | 2 | Doğu Asya | 'Yi | Çin Mobile International, Çin telekomünikasyon küresel, ıadvantage, Megaport, PCFA küresel sınırlı, SingTel |
+| **Hong Kong** | [Equinix HK1](https://www.equinix.com/locations/asia-colocation/hong-kong-colocation/hong-kong-data-center/hk1/) | 2 | Doğu Asya | 'Yi | Aryaka Networks, Ingiliz Teletası, CenturyLink Cloud Connect, baş Telem, Çin telekomünikasyon küresel, Çin Unicom, Colt, Equinix, Intercloud, Megaport, NTT Communications, turuncu, PCCW küresel Limited, Tata Iletişimleri, Telia taşıyıcısı, Verizon |
+| **Hong Kong2** | [ıadvantage MEGA-ı](https://www.iadvantage.net/index.php/locations/mega-i) | 2 | Doğu Asya | 'Yi | Çin Mobile International, Çin telekomünikasyon küresel, ıadvantage, Megaport, PCFA küresel sınırlı, SingTel |
 | **Cakarta** | Telın, Telkoa Endonezya | 4 | yok | 'Yi | Telın |
 | **Johannesburg** | [Teraco JB1](https://www.teraco.co.za/data-centre-locations/johannesburg/#jb1) | 3 | Güney Afrika - Kuzey | 'Yi | BCX, Ingiliz Telekoı, Internet çözümleri-bulut bağlantısı, sıvı telekomünikasyon, turuncu, Teraco |
 | **Kuala Lumpur** | [ZAMAN dotCom Menara AIMS](https://www.time.com.my/enterprise/connectivity/direct-cloud) | 2 | yok | yok | TIME dotCom |
@@ -110,7 +110,7 @@ Aşağıdaki tabloda bağlantı konumları ve her konum için hizmet sağlayıc�
 | **London2** | [Telehouse Kuzey Iki](https://www.telehouse.net/data-centres/emea/uk-data-centres/london-data-centres/north-two) | 1 | Güney Birleşik Krallık | 10G, 100G | İngiliz telek, CenturyLink Cloud Connect, Colt, GTT, x REACH, Equınix, Megaport, SES, Sohonet, Telehouse-KDDI |
 | **Los Angeles** | [CoreSite LA1](https://www.coresite.com/data-centers/locations/los-angeles/one-wilshire) | 1 | yok | 10G, 100G | CoreSite, Equinx, Megaport, Neutrona Networks, NTT, Zayo |
 | **Los Angeles2** | [Equinix LA1](https://www.equinix.com/locations/americas-colocation/united-states-colocation/los-angeles-data-centers/la1/) | 1 | yok | 10G, 100G | Equinix |
-| **Madrid** | [Interxiyon MAD1](https://www.interxion.com/es/donde-estamos/europa/madrid) | 1 | West Europe | 10G, 100G | |
+| **Madrid** | [Interxiyon MAD1](https://www.interxion.com/es/donde-estamos/europa/madrid) | 1 | West Europe | 10G, 100G | Interxion |
 | **Marsilya** |[Interxiyon MRS1](https://www.interxion.com/Locations/marseille/) | 1 | Güney Fransa | yok | DE-CIX, GEANT, ınterxiyon, Jaguar Network, Ooredoo Cloud Connect |
 | **Melbourne** | [NextDC M1](https://www.nextdc.com/data-centres/m1-melbourne-data-centre) | 2 | Güneydoğu Avustralya | 10G, 100G | AARNet, Devoli, Equinix, Megaport, NEXTDC, Ops, Telstra Corporation, TPG telekomünikasyon |
 | **Miami** | [Equinix MI1](https://www.equinix.com/locations/americas-colocation/united-states-colocation/miami-data-centers/mi1/) | 1 | yok | 10G, 100G | Claro, C3ntro, Equinix, Megaport, nörona Networks |
@@ -151,7 +151,7 @@ Aşağıdaki tabloda bağlantı konumları ve her konum için hizmet sağlayıc�
 | **Vancouver** | [Birlikte bulundurgix VAN1](https://www.cologix.com/data-centers/vancouver/van1/) | 1 | yok | 'Yi | Birlikte bulundurgix, Megaport, Telus |
 | **Washington DC** | [Equinix DC2](https://www.equinix.com/locations/americas-colocation/united-states-colocation/washington-dc-data-centers/dc2/) | 1 | Doğu ABD, Doğu ABD 2 | 10G, 100G | Aryaka Networks,&T Netbonı Ingiliz sev, CenturyLink Cloud Connect, Geregix, Colt, Comcast, Coresıte, Equinix, Internet2, Intercloud, Iron Sıradağlar, x REACH, düzey 3 Iletişimleri, Megaport, Neutrona Networks |
 | **Washington DC2** | [Coresite Reston](https://www.coresite.com/data-center-locations/northern-virginia-washington-dc) | 1 | Doğu ABD, Doğu ABD 2 | 10G, 100G | CenturyLink Cloud Connect, Coresite, Intelsat, Megaport, Viasat, Zayo | 
-| **Zürih** | [Interxiyon ZUR2](https://www.interxion.com/Locations/zurich/) | 1 | İsviçre Kuzey | 10G, 100G | Equinx, Intercloud, ınterxiyon, Megaport, Swisscom |
+| **Zürih** | [Interxiyon ZUR2](https://www.interxion.com/Locations/zurich/) | 1 | İsviçre Kuzey | 10G, 100G | Colt, Equinx, Intercloud, ınterxiyon, Megaport, Swisscom |
 
  **+** çok yakında geliyor
 
@@ -173,12 +173,12 @@ Azure Ulusal bulutlar birbirinden ve küresel ticari Azure 'dan yalıtılmışt�
 | **Washington DC** | [Equinix DC2](https://www.equinix.com/locations/americas-colocation/united-states-colocation/washington-dc-data-centers/dc2/) | US DoD Doğu, US Gov Virginia | 10G, 100G | &T Netbono, CenturyLink Cloud Connect, Equinx, düzey 3 Communications, Megaport, Verizon |
 
 ### <a name="china"></a>Çin
-| **Konum** | **Hizmet sağlayıcıları** |
-| --- | --- |
-| **Pekin** |China Telecom |
-| **Beijing2** | Çin Telem, Çin Unicom, GDS |
-| **Shanghai** |China Telecom |
-| **Shanghai2** | Çin Telem, Çin Unicom, GDS |
+| **Konum** | **Adres** | **Yerel Azure bölgeleri** | **ER doğrudan** | **Hizmet sağlayıcıları** |
+| --- | --- | --- | --- | --- |
+| **Pekin** | China Telecom | yok | 'Yi | China Telecom |
+| **Beijing2** | GDS | yok | 'Yi | Çin Telem, Çin Unicom, GDS |
+| **Shanghai** | China Telecom | yok | 'Yi | China Telecom |
+| **Shanghai2** | GDS | yok | 'Yi | Çin Telem, Çin Unicom, GDS |
 
 Daha fazla bilgi için bkz. [Çin 'de ExpressRoute](http://www.windowsazure.cn/home/features/expressroute/)
 
@@ -220,6 +220,7 @@ Uzaktan çalışıyorsanız ve fiber bağlantınız yoksa veya diğer bağlantı
 | **Amsterdam** | Equinx, ınterxiyon, düzey 3 Iletişimleri | BICS, CloudXpress, Eurofiber, Fastweb S. p. A, Gulf Köprüsü International, Kalaam Telebel B. S. C, MainOne, Nianet, POST Telepı, Proximus, RETN, TDC Erhverv, telekomünikasyon Italia parlak Le, Telekom Deutschland GmbH, Telia |
 | **Atlanta** | Equinix| Crown kalele
 | **Cape Town** | Teraco | MTN |
+| **Chennai** | Tata Communications | Tata TeleServices |
 | **Chicago** | Equinix| Crown kalele, SPI Enterprise, WINI akışı |
 | **Şubesi** | Equinix, Megaport | AXTEL, C3ntro Teley, Cox Iş, Crown, veri bulunan |
 | **Frankfurt** | Interxion | BICS, Cinia, Equinx, Nianet, QSC AG, Telekod Deutschland GmbH |
@@ -230,6 +231,7 @@ Uzaktan çalışıyorsanız ve fiber bağlantınız yoksa veya diğer bağlantı
 | **Los Angeles** | Equinix |Crown kalele, SPI kurumsal, Transtelco |
 | **Madrid** | Level3 | Zertia |
 | **Montreal** | Cologix| Airgate Technologies, Inc. Aptum teknolojileri, Roger, ZiRrO |
+| **Mumbai** | Tata Communications | Tata TeleServices |
 | **New Yok** |Equinix, Megaport | ALCE Iş, Crown role, SPI Enterprise, Webair |
 | **Paris** | Equinix | Proximus |
 | **Quebec City** | Megaport | Fibrenoire |

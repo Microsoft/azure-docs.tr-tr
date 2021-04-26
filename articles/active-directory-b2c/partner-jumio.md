@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 08/20/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 66ec0d4b09dc983eb898d63d45b3dd7cab291c4c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e344c849a8e9021daea9caebacec3289b99d03e6
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96928673"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256676"
 ---
 # <a name="tutorial-for-configuring-jumio-with-azure-active-directory-b2c"></a>Azure Active Directory B2C ile Jumio yapılandırma öğreticisi
 
@@ -139,7 +139,7 @@ Dizeyi oluşturmak için aşağıdaki PowerShell betiğini kullanın:
 
 1. Ilkeler klasöründeki [Azure AD B2C ilkesine](https://github.com/azure-ad-b2c/partner-integrations/tree/master/samples/Jumio/Policies) gidin.
 
-2. [LocalAccounts başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts)indirmek için [Bu makaleyi](./custom-policy-get-started.md?tabs=applications#custom-policy-starter-pack) izleyin.
+2. [LocalAccounts başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts)indirmek için [Bu makaleyi](tutorial-create-user-flows.md?pivots=b2c-custom-policy#custom-policy-starter-pack) izleyin.
 
 3. Azure AD B2C kiracı için ilkeyi yapılandırın.
 
@@ -170,4 +170,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 08/24/2020
 ms.openlocfilehash: 167fb0014f2f0a9e7a2530fe276289f94347146e
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104785793"
 ---
 # <a name="datasets-in-azure-data-factory"></a>Azure Data Factory'de veri kümeleri
@@ -67,7 +67,7 @@ Aşağıdaki tabloda, yukarıdaki JSON 'daki özellikler açıklanmaktadır:
 -------- | ----------- | -------- |
 name | Veri kümesinin adı. Bkz. [Azure Data Factory adlandırma kuralları](naming-rules.md). |  Yes |
 tür | Veri kümesinin türü. Data Factory tarafından desteklenen türlerden birini belirtin (örneğin: DelimitedText, Azurestabtable). <br/><br/>Ayrıntılar için bkz. [veri kümesi türleri](#dataset-type). | Yes |
-schema | Veri kümesinin şeması, fiziksel veri türü ve şeklini temsil eder. | Hayır |
+schema | Veri kümesinin şeması, fiziksel veri türü ve şeklini temsil eder. | No |
 typeProperties | Tür özellikleri her tür için farklıdır. Desteklenen türler ve özellikleri hakkında ayrıntılı bilgi için bkz. [veri kümesi türü](#dataset-type). | Yes |
 
 Veri kümesinin şemasını içeri aktardığınızda, **Şemayı Içeri aktar** düğmesini seçin ve kaynaktan veya yerel bir dosyadan içeri aktarmayı seçin. Çoğu durumda, şemayı doğrudan kaynaktan içeri aktarırsınız. Ancak zaten bir yerel şema dosyanız varsa (bir Parquet dosyası veya üst bilgiyle CSV), bu dosyadaki şemayı temel olarak Data Factory yönlendirebilirsiniz.

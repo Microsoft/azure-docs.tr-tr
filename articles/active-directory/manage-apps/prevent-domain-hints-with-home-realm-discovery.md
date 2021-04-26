@@ -2,23 +2,21 @@
 title: Giriş bölgesi bulma ilkesini kullanarak Azure AD 'de oturum açma otomatik hızlandırmasını engelle
 description: Federal IDPs 'Ler için domain_hint otomatik hızlandırmayı nasıl önleyeceğinizi öğrenin.
 services: active-directory
-documentationcenter: ''
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: infrastructure-services
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: how-to
 ms.date: 02/12/2021
-ms.author: hirsin
-ms.openlocfilehash: 53dfdfaf37695059d6d52428c2ba109970d9f7f7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.author: iangithinji
+ms.reviewer: hirsin
+ms.openlocfilehash: b89e0e1c8bd8109fac8b4b7c05a845a3e234b617
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104589387"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107375559"
 ---
 # <a name="disable-auto-acceleration-to-a-federated-idp-during-user-sign-in-with-home-realm-discovery-policy"></a>Giriş bölgesi bulma ilkesiyle Kullanıcı oturumu sırasında bir federe ıDP 'ye otomatik hızlandırmayı devre dışı bırak
 

@@ -4,10 +4,10 @@ description: Azure Service Bus ile iletişim kurmak için Java Ileti hizmeti (JM
 ms.topic: article
 ms.date: 01/17/2021
 ms.openlocfilehash: 492da46a5ce4f5955a72972d91a8c56d54c385bb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101726963"
 ---
 # <a name="azure-service-bus-jms-20-developer-guide"></a>Azure Service Bus JMS 2,0 Geliştirici Kılavuzu

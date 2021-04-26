@@ -120,7 +120,7 @@
               href: use-dynamic-groups.md
             - name: B2B kullanıcısını anlama
               href: user-properties.md
-            - name: Kullanım durumunu Sıfırla
+            - name: Kullanım durumunu Sıfırla (Önizleme)
               href: reset-redemption-status.md
             - name: Azure AD tümleşik uygulamaları için B2B
               href: configure-saas-apps.md

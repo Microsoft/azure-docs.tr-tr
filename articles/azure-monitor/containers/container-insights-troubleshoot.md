@@ -4,10 +4,10 @@ description: Bu makalede, kapsayıcı öngörüleri ile ilgili sorunları nasıl
 ms.topic: conceptual
 ms.date: 03/25/2021
 ms.openlocfilehash: b7618e9073308da67a8e17c82375a0f05925a542
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105627124"
 ---
 # <a name="troubleshooting-container-insights"></a>Kapsayıcı öngörüleri sorunlarını giderme

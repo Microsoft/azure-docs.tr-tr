@@ -2,13 +2,13 @@
 title: Şablon işlevleri-kaynaklar
 description: Kaynaklarla ilgili değerleri almak için bir Azure Resource Manager şablonunda (ARM şablonu) kullanılacak işlevleri açıklar.
 ms.topic: conceptual
-ms.date: 02/10/2021
-ms.openlocfilehash: efd7c554e6da8b60d4834d1a1290407a6b9e94d4
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.date: 04/01/2021
+ms.openlocfilehash: 2869f1ba1f7819fc793d95c7318b77fd8db8d7da
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105544120"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304894"
 ---
 # <a name="resource-functions-for-arm-templates"></a>ARM şablonları için kaynak işlevleri
 
@@ -17,10 +17,9 @@ Kaynak Yöneticisi, Azure Resource Manager şablonunuzda (ARM şablonu) kaynak d
 * [Extensionresourceıd](#extensionresourceid)
 * [Listele](#list)
 * [pickZones](#pickzones)
-* [sağlayıcılarla](#providers)
 * [başvurunun](#reference)
 * [resourceGroup](#resourcegroup)
-* [RESOURCEID](#resourceid)
+* [resourceId](#resourceid)
 * [aboneliğiniz](#subscription)
 * [Subscriptionresourceıd](#subscriptionresourceid)
 * [Tenantresourceıd](#tenantresourceid)
@@ -37,12 +36,12 @@ Parametrelerden, değişkenlerden veya geçerli dağıtımdan değer almak için
 
 ### <a name="parameters"></a>Parametreler
 
-| Parametre | Gerekli | Tür | Description |
+| Parametre | Gerekli | Tür | Açıklama |
 |:--- |:--- |:--- |:--- |
 | resourceId |Yes |string |Uzantı kaynağının uygulandığı kaynağın kaynak KIMLIĞI. |
 | resourceType |Yes |string |Kaynak sağlayıcısı ad alanı dahil olmak üzere kaynak türü. |
 | resourceName1 |Yes |string |Kaynağın adı. |
-| resourceName2 |No |string |Gerekirse, sonraki kaynak adı segmenti. |
+| resourceName2 |Hayır |string |Gerekirse, sonraki kaynak adı segmenti. |
 
 Kaynak türü daha fazla kesim içerdiğinde kaynak adlarını parametre olarak eklemeye devam edin.
 
@@ -179,11 +178,11 @@ Bu işlevin sözdizimi, liste işlemlerinin adına göre değişir. Her uygulama
 
 ### <a name="parameters"></a>Parametreler
 
-| Parametre | Gerekli | Tür | Description |
+| Parametre | Gerekli | Tür | Açıklama |
 |:--- |:--- |:--- |:--- |
 | resourceName veya ResourceIdentifier |Yes |string |Kaynak için benzersiz tanımlayıcı. |
 | apiVersion |Yes |string |Kaynak çalışma zamanı durumunun API sürümü. Genellikle, **yyyy-aa-gg** biçiminde. |
-| functionValues |No |object | İşlevi için değerler içeren bir nesne. Bu nesneyi yalnızca bir depolama hesabındaki **Listaccountsas** gibi parametre değerleriyle bir nesne almayı destekleyen işlevler için sağlayın. Bu makalede işlev değerlerini geçirme örneği gösterilmektedir. |
+| functionValues |Hayır |object | İşlevi için değerler içeren bir nesne. Bu nesneyi yalnızca bir depolama hesabındaki **Listaccountsas** gibi parametre değerleriyle bir nesne almayı destekleyen işlevler için sağlayın. Bu makalede işlev değerlerini geçirme örneği gösterilmektedir. |
 
 ### <a name="valid-uses"></a>Geçerli kullanımlar
 
@@ -233,10 +232,10 @@ Listenin olası kullanımları aşağıdaki tabloda gösterilmiştir.
 | Microsoft. DataFactory/DataFactory/ağ geçitleri | listauthkeys |
 | Microsoft. DataFactory/Factory/ıntegrationçalışma zamanları | [listauthkeys](/rest/api/datafactory/integrationruntimes/listauthkeys) |
 | Microsoft. DataLakeAnalytics/hesaplar/storageAccounts/kapsayıcılar | [listSasTokens](/rest/api/datalakeanalytics/storageaccounts/listsastokens) |
-| Microsoft. DataShare/hesaplar/paylaşımlar | [Listeşitlemeler](/rest/api/datashare/shares/listsynchronizations) |
-| Microsoft. DataShare/accounts/shareSubscriptions | [Listsourcesharesynitizationsettings](/rest/api/datashare/sharesubscriptions/listsourcesharesynchronizationsettings) |
-| Microsoft. DataShare/accounts/shareSubscriptions | [listSynchronizationDetails](/rest/api/datashare/sharesubscriptions/listsynchronizationdetails) |
-| Microsoft. DataShare/accounts/shareSubscriptions | [Listeşitlemeler](/rest/api/datashare/sharesubscriptions/listsynchronizations) |
+| Microsoft. DataShare/hesaplar/paylaşımlar | [Listeşitlemeler](/rest/api/datashare/2020-09-01/shares/listsynchronizations) |
+| Microsoft. DataShare/accounts/shareSubscriptions | [Listsourcesharesynitizationsettings](/rest/api/datashare/2020-09-01/sharesubscriptions/listsourcesharesynchronizationsettings) |
+| Microsoft. DataShare/accounts/shareSubscriptions | [listSynchronizationDetails](/rest/api/datashare/2020-09-01/sharesubscriptions/listsynchronizationdetails) |
+| Microsoft. DataShare/accounts/shareSubscriptions | [Listeşitlemeler](/rest/api/datashare/2020-09-01/sharesubscriptions/listsynchronizations) |
 | Microsoft. Devices/iotHubs | [ListKeys 'i al](/rest/api/iothub/iothubresource/listkeys) |
 | Microsoft. Devices/ıothubs/iotHubKeys | [ListKeys 'i al](/rest/api/iothub/iothubresource/getkeysforkeyname) |
 | Microsoft. Devices/provisioningServices/anahtarlar | [ListKeys 'i al](/rest/api/iot-dps/iotdpsresource/listkeysforkeyname) |
@@ -247,7 +246,7 @@ Listenin olası kullanımları aşağıdaki tabloda gösterilmiştir.
 | Microsoft. DevTestLab/Labs/virtualMachines | [Listapperepblezamanlamalar](/rest/api/dtl/virtualmachines/listapplicableschedules) |
 | UmentDB/databaseAccounts Microsoft.Doc | [listConnectionStrings](/rest/api/cosmos-db-resource-provider/2021-03-01-preview/databaseaccounts/listconnectionstrings) |
 | UmentDB/databaseAccounts Microsoft.Doc | [ListKeys 'i al](/rest/api/cosmos-db-resource-provider/2021-03-01-preview/databaseaccounts/listkeys) |
-| Microsoft.DocumentDB/databaseAccounts/Not Bookworkspaces | [Listconnectionınfo](/rest/api/cosmos-db-resource-provider/2021-03-01-preview/notebookworkspaces/listconnectioninfo) |
+| Microsoft.DocumentDB/databaseAccounts/Not Bookworkspaces | [Listconnectionınfo](/rest/api/cosmos-db-resource-provider/2021-03-15/notebookworkspaces/listconnectioninfo) |
 | Microsoft. DomainRegistration | [Listdomainönerilere](/rest/api/appservice/domains/listrecommendations) |
 | Microsoft. DomainRegistration/topLevelDomains | [listAgreements](/rest/api/appservice/topleveldomains/listagreements) |
 | Microsoft. EventGrid/Domains | [ListKeys 'i al](/rest/api/eventgrid/version2020-06-01/domains/listsharedaccesskeys) |
@@ -439,13 +438,13 @@ Bir kaynak türünün bir bölgenin bölgelerini destekleyip desteklemediğini b
 
 ### <a name="parameters"></a>Parametreler
 
-| Parametre | Gerekli | Tür | Description |
+| Parametre | Gerekli | Tür | Açıklama |
 |:--- |:--- |:--- |:--- |
 | providerNamespace | Yes | string | Bölge desteğini denetlenecek kaynak türü için kaynak sağlayıcısı ad alanı. |
 | resourceType | Yes | string | Bölge desteğini denetlenecek kaynak türü. |
 | location | Yes | string | Bölge desteğinin denetlenecek bölge. |
-| numberOfZones | No | tamsayı | Döndürülecek mantıksal bölge sayısı. Varsayılan değer 1'dir. Sayı 1 ile 3 arasında pozitif bir tamsayı olmalıdır.  Tek bölge kaynakları için 1 kullanın. Çok bölgeli kaynaklar için, değer desteklenen bölge sayısından küçük veya buna eşit olmalıdır. |
-| uzaklık | No | tamsayı | Başlangıç mantıksal bölgesinden gelen fark. Aralık artı numberOfZones desteklenen bölge sayısını aşarsa, işlev bir hata döndürür. |
+| numberOfZones | Hayır | tamsayı | Döndürülecek mantıksal bölge sayısı. Varsayılan değer 1'dir. Sayı 1 ile 3 arasında pozitif bir tamsayı olmalıdır.  Tek bölge kaynakları için 1 kullanın. Çok bölgeli kaynaklar için, değer desteklenen bölge sayısından küçük veya buna eşit olmalıdır. |
+| uzaklık | Hayır | tamsayı | Başlangıç mantıksal bölgesinden gelen fark. Aralık artı numberOfZones desteklenen bölge sayısını aşarsa, işlev bir hata döndürür. |
 
 ### <a name="return-value"></a>Döndürülen değer
 
@@ -540,94 +539,6 @@ Bölgelere yönelik null değer sağlayıp sağlamacağınızı veya farklı bö
 
 ---
 
-## <a name="providers"></a>sağlayıcılarla
-
-`providers(providerNamespace, [resourceType])`
-
-Kaynak sağlayıcısı ve desteklenen kaynak türleri hakkında bilgi döndürür. Kaynak türü sağlamazsanız, işlev kaynak sağlayıcısı için desteklenen tüm türleri döndürür.
-
-### <a name="parameters"></a>Parametreler
-
-| Parametre | Gerekli | Tür | Description |
-|:--- |:--- |:--- |:--- |
-| providerNamespace |Yes |string |Sağlayıcının ad alanı |
-| resourceType |No |string |Belirtilen ad alanı içindeki kaynak türü. |
-
-### <a name="return-value"></a>Döndürülen değer
-
-Desteklenen her tür aşağıdaki biçimde döndürülür:
-
-```json
-{
-  "resourceType": "{name of resource type}",
-  "locations": [ all supported locations ],
-  "apiVersions": [ all supported API versions ]
-}
-```
-
-Döndürülen değerlerin dizi sıralaması garanti edilmez.
-
-### <a name="providers-example"></a>Sağlayıcılar örneği
-
-Aşağıdaki [örnek şablon](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/providers.json) , sağlayıcı işlevinin nasıl kullanılacağını gösterir:
-
-# <a name="json"></a>[JSON](#tab/json)
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "providerNamespace": {
-      "type": "string"
-    },
-    "resourceType": {
-      "type": "string"
-    }
-  },
-  "resources": [],
-  "outputs": {
-    "providerOutput": {
-      "type": "object",
-      "value": "[providers(parameters('providerNamespace'), parameters('resourceType'))]"
-    }
-  }
-}
-```
-
-# <a name="bicep"></a>[Bicep](#tab/bicep)
-
-```bicep
-param providerNamespace string
-param resourceType string
-
-output providerOutput array = providers(providerNamespace, resourceType)
-```
-
----
-
-**Microsoft. Web** kaynak sağlayıcısı ve **siteleri** kaynak türü için, önceki örnek aşağıdaki biçimde bir nesne döndürür:
-
-```json
-{
-  "resourceType": "sites",
-  "locations": [
-    "South Central US",
-    "North Europe",
-    "West Europe",
-    "Southeast Asia",
-    ...
-  ],
-  "apiVersions": [
-    "2016-08-01",
-    "2016-03-01",
-    "2015-08-01-preview",
-    "2015-08-01",
-    ...
-  ]
-}
-```
-
 ## <a name="reference"></a>reference
 
 `reference(resourceName or resourceIdentifier, [apiVersion], ['Full'])`
@@ -636,11 +547,11 @@ Kaynağın çalışma zamanı durumunu temsil eden bir nesne döndürür.
 
 ### <a name="parameters"></a>Parametreler
 
-| Parametre | Gerekli | Tür | Description |
+| Parametre | Gerekli | Tür | Açıklama |
 |:--- |:--- |:--- |:--- |
 | resourceName veya ResourceIdentifier |Yes |string |Kaynağın adı veya benzersiz tanımlayıcısı. Geçerli şablondaki bir kaynağa başvururken, yalnızca kaynak adını parametre olarak belirtin. Daha önce dağıtılan bir kaynağa ya da kaynağın adı belirsiz olduğunda kaynak KIMLIĞI sağlayın. |
-| apiVersion |No |string |Belirtilen kaynağın API sürümü. **Kaynak aynı şablon içinde sağlanmıyorsa Bu parametre gereklidir.** Genellikle, **yyyy-aa-gg** biçiminde. Kaynağınız için geçerli API sürümleri için bkz. [şablon başvurusu](/azure/templates/). |
-| Tümünü |No |string |Tam kaynak nesnesinin döndürülüp döndürülmeyeceğini belirten değer. Belirtmezseniz `'Full'` , yalnızca kaynağın Özellikler nesnesi döndürülür. Tam nesne, kaynak KIMLIĞI ve konum gibi değerleri içerir. |
+| apiVersion |Hayır |string |Belirtilen kaynağın API sürümü. **Kaynak aynı şablon içinde sağlanmıyorsa Bu parametre gereklidir.** Genellikle, **yyyy-aa-gg** biçiminde. Kaynağınız için geçerli API sürümleri için bkz. [şablon başvurusu](/azure/templates/). |
+| Tümünü |Hayır |string |Tam kaynak nesnesinin döndürülüp döndürülmeyeceğini belirten değer. Belirtmezseniz `'Full'` , yalnızca kaynağın Özellikler nesnesi döndürülür. Tam nesne, kaynak KIMLIĞI ve konum gibi değerleri içerir. |
 
 ### <a name="return-value"></a>Döndürülen değer
 
@@ -1108,13 +1019,13 @@ Bir kaynağın benzersiz tanımlayıcısını döndürür. Bu işlevi, kaynak ad
 
 ### <a name="parameters"></a>Parametreler
 
-| Parametre | Gerekli | Tür | Description |
+| Parametre | Gerekli | Tür | Açıklama |
 |:--- |:--- |:--- |:--- |
-| subscriptionId |No |dize (GUID biçiminde) |Varsayılan değer geçerli abonelikte bulunur. Başka bir abonelikteki bir kaynağı almanız gerektiğinde bu değeri belirtin. Bu değeri yalnızca bir kaynak grubunun veya aboneliğin kapsamına dağıtma sırasında belirtin. |
-| resourceGroupName |No |string |Varsayılan değer geçerli kaynak grubudur. Başka bir kaynak grubundaki bir kaynağı almanız gerektiğinde bu değeri belirtin. Yalnızca bir kaynak grubunun kapsamına dağıtım yaparken bu değeri sağlayın. |
+| subscriptionId |Hayır |dize (GUID biçiminde) |Varsayılan değer geçerli abonelikte bulunur. Başka bir abonelikteki bir kaynağı almanız gerektiğinde bu değeri belirtin. Bu değeri yalnızca bir kaynak grubunun veya aboneliğin kapsamına dağıtma sırasında belirtin. |
+| resourceGroupName |Hayır |string |Varsayılan değer geçerli kaynak grubudur. Başka bir kaynak grubundaki bir kaynağı almanız gerektiğinde bu değeri belirtin. Yalnızca bir kaynak grubunun kapsamına dağıtım yaparken bu değeri sağlayın. |
 | resourceType |Yes |string |Kaynak sağlayıcısı ad alanı dahil olmak üzere kaynak türü. |
 | resourceName1 |Yes |string |Kaynağın adı. |
-| resourceName2 |No |string |Gerekirse, sonraki kaynak adı segmenti. |
+| resourceName2 |Hayır |string |Gerekirse, sonraki kaynak adı segmenti. |
 
 Kaynak türü daha fazla kesim içerdiğinde kaynak adlarını parametre olarak eklemeye devam edin.
 
@@ -1411,12 +1322,12 @@ Abonelik düzeyinde dağıtılan bir kaynak için benzersiz tanımlayıcıyı d�
 
 ### <a name="parameters"></a>Parametreler
 
-| Parametre | Gerekli | Tür | Description |
+| Parametre | Gerekli | Tür | Açıklama |
 |:--- |:--- |:--- |:--- |
-| subscriptionId |No |dize (GUID biçiminde) |Varsayılan değer geçerli abonelikte bulunur. Başka bir abonelikteki bir kaynağı almanız gerektiğinde bu değeri belirtin. |
+| subscriptionId |Hayır |dize (GUID biçiminde) |Varsayılan değer geçerli abonelikte bulunur. Başka bir abonelikteki bir kaynağı almanız gerektiğinde bu değeri belirtin. |
 | resourceType |Yes |string |Kaynak sağlayıcısı ad alanı dahil olmak üzere kaynak türü. |
 | resourceName1 |Yes |string |Kaynağın adı. |
-| resourceName2 |No |string |Gerekirse, sonraki kaynak adı segmenti. |
+| resourceName2 |Hayır |string |Gerekirse, sonraki kaynak adı segmenti. |
 
 Kaynak türü daha fazla kesim içerdiğinde kaynak adlarını parametre olarak eklemeye devam edin.
 
@@ -1543,11 +1454,11 @@ Kiracı düzeyinde dağıtılan bir kaynak için benzersiz tanımlayıcıyı dö
 
 ### <a name="parameters"></a>Parametreler
 
-| Parametre | Gerekli | Tür | Description |
+| Parametre | Gerekli | Tür | Açıklama |
 |:--- |:--- |:--- |:--- |
 | resourceType |Yes |string |Kaynak sağlayıcısı ad alanı dahil olmak üzere kaynak türü. |
 | resourceName1 |Yes |string |Kaynağın adı. |
-| resourceName2 |No |string |Gerekirse, sonraki kaynak adı segmenti. |
+| resourceName2 |Hayır |string |Gerekirse, sonraki kaynak adı segmenti. |
 
 Kaynak türü daha fazla kesim içerdiğinde kaynak adlarını parametre olarak eklemeye devam edin.
 

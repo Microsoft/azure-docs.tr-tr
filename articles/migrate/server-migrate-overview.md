@@ -6,12 +6,12 @@ ms.author: anvar
 ms.manager: bsiva
 ms.topic: conceptual
 ms.date: 06/08/2020
-ms.openlocfilehash: 7446b2050fdd7bbc7704953c053da0629231191c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 22a0629d50ee8181ffcbfe7dad32ab76fb3e68fd
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101715131"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714173"
 ---
 # <a name="select-a-vmware-migration-option"></a>VMware geçiş seçeneği seçin
 
@@ -34,7 +34,8 @@ Hangi yöntemin kullanılacağına karar vermenize yardımcı olması için bu s
 **Hedef disk** | Yönetilen diskler | Yönetilen diskler
 **Disk sınırları** | İşletim sistemi diski: 2 TB<br/><br/> Veri diski: 32 TB<br/><br/> En fazla disk: 60 | İşletim sistemi diski: 2 TB<br/><br/> Veri diski: 32 TB<br/><br/> En fazla disk: 63
 **Geçiş diskleri** | Desteklenmez | Desteklenir
-**UEFı önyüklemesi** | Destekleniyor. | Destekleniyor.
+**UEFı önyüklemesi** | Destekleniyor. | Destekleniyor. 
+**Bağlantı** | Genel internet <br/> Microsoft eşlemesiyle ExpressRoute <br/> <br/> Özel uç noktaları ExpressRoute özel eşlemesi veya S2S VPN bağlantısı üzerinden çoğaltma için [nasıl kullanacağınızı öğrenin](./replicate-using-expressroute.md) . |Genel internet <br/> Özel eşleme ile ExpressRoute <br/> Microsoft eşlemesiyle ExpressRoute <br/> Siteler arası VPN
 
 ## <a name="compare-deployment-steps"></a>Dağıtım adımlarını karşılaştırın
 

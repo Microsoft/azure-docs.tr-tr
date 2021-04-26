@@ -10,30 +10,36 @@ ms.topic: reference
 author: sachinpMSFT
 ms.author: sachinp
 ms.reviewer: sstein
-ms.date: 07/28/2020
-ms.openlocfilehash: aa520b7d77a283e7dda883e99475947a8ccfa862
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.date: 04/09/2021
+ms.openlocfilehash: 906d34a91736d28f0da4a5ba34b7114fbe410adb
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105625639"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306645"
 ---
 # <a name="resources-limits-for-elastic-pools-using-the-dtu-purchasing-model"></a>DTU satın alma modelini kullanarak elastik havuzlar için kaynak limitleri
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 Bu makalede, DTU satın alma modelini kullanan bir elastik havuzda Azure SQL veritabanı 'nda bulunan veritabanları için ayrıntılı kaynak sınırları sağlanmaktadır.
 
-* Azure SQL veritabanı için DTU satın alma modeli kaynak sınırları için bkz. [DTU kaynak limitleri-Azure SQL veritabanı](resource-limits-dtu-single-databases.md).
+* Bir sunucudaki tek veritabanları için DTU satın alma model sınırları için bkz. [bir sunucudaki kaynak sınırlarına genel bakış](resource-limits-logical-server.md).
+* Azure SQL veritabanı için DTU satın alma modeli kaynak sınırları için bkz. [DTU kaynak limitleri tek veritabanı](resource-limits-dtu-single-databases.md) ve [DTU kaynak sınırları elastik havuzlar](resource-limits-dtu-elastic-pools.md).
 * VCore kaynak sınırları için bkz. [Vcore kaynak limitleri-Azure SQL veritabanı](resource-limits-vcore-single-databases.md) ve [sanal çekirdek kaynak limitleri-elastik havuzlar](resource-limits-vcore-elastic-pools.md).
+* Farklı satın alma modelleriyle ilgili daha fazla bilgi için bkz. [model ve hizmet katmanları satın alma](purchasing-models.md).
+
+Her salt okunurdur çoğaltma, DTU 'Lar, çalışanlar ve oturumlar gibi kendi kaynaklarına sahiptir. Her salt okuma çoğaltması, bu makalede daha sonra ayrıntılı kaynak sınırlarına tabidir.
 
 ## <a name="elastic-pool-storage-sizes-and-compute-sizes"></a>Elastik havuz: depolama boyutları ve işlem boyutları
 
 Azure SQL veritabanı elastik havuzlar için aşağıdaki tablolarda, her bir hizmet katmanında ve işlem boyutunda kullanılabilen kaynaklar gösterilmektedir. Kullanarak hizmet katmanını, işlem boyutunu ve depolama miktarını ayarlayabilirsiniz:
 
+* [Alter database](/sql/t-sql/statements/alter-database-transact-sql#overview-sql-database) aracılığıyla [Transact-SQL](elastic-pool-scale.md)
 * [Azure portalı](elastic-pool-manage.md#azure-portal)
 * [PowerShell](elastic-pool-manage.md#powershell)
 * [Azure CLI](elastic-pool-manage.md#azure-cli)
-* [REST API](elastic-pool-manage.md#rest-api).
+* [REST API](elastic-pool-manage.md#rest-api)
+
 
 > [!IMPORTANT]
 > Ölçeklendirme Kılavuzu ve değerlendirmeleri için bkz. [elastik havuz ölçekleme](elastic-pool-scale.md)
@@ -76,7 +82,7 @@ Aynı sayıda DTU için, elastik bir havuza sunulan kaynaklar, elastik havuzun d
 | Havuz başına en fazla eşzamanlı oturum <sup>3</sup> | 30000 | 30000 | 30000 | 30000 | 30000 | 30000 |
 | Veritabanı seçenekleri başına en az DTU | 0, 10, 20, 50 | 0, 10, 20, 50, 100 | 0, 10, 20, 50, 100, 200 | 0, 10, 20, 50, 100, 200, 300 | 0, 10, 20, 50, 100, 200, 300, 400 | 0, 10, 20, 50, 100, 200, 300, 400, 800 |
 | Veritabanı seçenekleri başına en fazla DTU | 10, 20, 50 | 10, 20, 50, 100 | 10, 20, 50, 100, 200 | 10, 20, 50, 100, 200, 300 | 10, 20, 50, 100, 200, 300, 400 | 10, 20, 50, 100, 200, 300, 400, 800 |
-| Veritabanı başına maks. depolama alanı (GB) | 500 | 750 | 1024 | 1024 | 1024 | 1024 |
+| Veritabanı başına maks. depolama alanı (GB) | 1024 | 1024 | 1024 | 1024 | 1024 | 1024 |
 ||||||||
 
 <sup>1</sup> sağlanan ek depolama alanı nedeniyle daha fazla ücret ödediğinden ilgili ayrıntılı bilgi için bkz. [SQL Veritabanı fiyatlandırma seçenekleri](https://azure.microsoft.com/pricing/details/sql-database/elastic/) .
@@ -97,7 +103,7 @@ Aynı sayıda DTU için, elastik bir havuza sunulan kaynaklar, elastik havuzun d
 | Havuz başına en fazla eşzamanlı oturum <sup>3</sup> | 30000 | 30000 | 30000 | 30000 | 30000 |
 | Veritabanı seçenekleri başına en az DTU | 0, 10, 20, 50, 100, 200, 300, 400, 800, 1200 | 0, 10, 20, 50, 100, 200, 300, 400, 800, 1200, 1600 | 0, 10, 20, 50, 100, 200, 300, 400, 800, 1200, 1600, 2000 | 0, 10, 20, 50, 100, 200, 300, 400, 800, 1200, 1600, 2000, 2500 | 0, 10, 20, 50, 100, 200, 300, 400, 800, 1200, 1600, 2000, 2500, 3000 |
 | Veritabanı seçenekleri başına en fazla DTU | 10, 20, 50, 100, 200, 300, 400, 800, 1200 | 10, 20, 50, 100, 200, 300, 400, 800, 1200, 1600 | 10, 20, 50, 100, 200, 300, 400, 800, 1200, 1600, 2000 | 10, 20, 50, 100, 200, 300, 400, 800, 1200, 1600, 2000, 2500 | 10, 20, 50, 100, 200, 300, 400, 800, 1200, 1600, 2000, 2500, 3000 |
-| Veritabanı başına maks. depolama alanı (GB) | 1024 | 1024 | 1024 | 1024 | 1024 |
+| Veritabanı başına maks. depolama alanı (GB) | 1024 | 1536 | 1792 | 2304 | 2816 |
 |||||||
 
 <sup>1</sup> sağlanan ek depolama alanı nedeniyle daha fazla ücret ödediğinden ilgili ayrıntılı bilgi için bkz. [SQL Veritabanı fiyatlandırma seçenekleri](https://azure.microsoft.com/pricing/details/sql-database/elastic/) .
@@ -118,7 +124,7 @@ Aynı sayıda DTU için, elastik bir havuza sunulan kaynaklar, elastik havuzun d
 | Havuz başına en fazla eşzamanlı oturum <sup>3</sup> | 30000 | 30000 | 30000 | 30000 | 30000 |
 | Veritabanı başına Min. eDTU | 0, 25, 50, 75, 125 | 0, 25, 50, 75, 125, 250 | 0, 25, 50, 75, 125, 250, 500 | 0, 25, 50, 75, 125, 250, 500, 1000 | 0, 25, 50, 75, 125, 250, 500, 1000|
 | Veritabanı başına Maks. eDTU | 25, 50, 75, 125 | 25, 50, 75, 125, 250 | 25, 50, 75, 125, 250, 500 | 25, 50, 75, 125, 250, 500, 1000 | 25, 50, 75, 125, 250, 500, 1000|
-| Veritabanı başına maks. depolama alanı (GB) | 1024 | 1024 | 1024 | 1024 | 1024 |
+| Veritabanı başına maks. depolama alanı (GB) | 1024 | 1024 | 1024 | 1024 | 1536 |
 |||||||
 
 <sup>1</sup> sağlanan ek depolama alanı nedeniyle daha fazla ücret ödediğinden ilgili ayrıntılı bilgi için bkz. [SQL Veritabanı fiyatlandırma seçenekleri](https://azure.microsoft.com/pricing/details/sql-database/elastic/) .
@@ -139,7 +145,7 @@ Aynı sayıda DTU için, elastik bir havuza sunulan kaynaklar, elastik havuzun d
 | Havuz başına en fazla eşzamanlı oturum <sup>3</sup> | 30000 | 30000 | 30000 | 30000 | 30000 |
 | Veritabanı seçenekleri başına en az DTU | 0, 25, 50, 75, 125, 250, 500, 1000, 1750 | 0, 25, 50, 75, 125, 250, 500, 1000, 1750 | 0, 25, 50, 75, 125, 250, 500, 1000, 1750 | 0, 25, 50, 75, 125, 250, 500, 1000, 1750 | 0, 25, 50, 75, 125, 250, 500, 1000, 1750, 4000 |
 | Veritabanı seçenekleri başına en fazla DTU | 25, 50, 75, 125, 250, 500, 1000, 1750 | 25, 50, 75, 125, 250, 500, 1000, 1750 | 25, 50, 75, 125, 250, 500, 1000, 1750 | 25, 50, 75, 125, 250, 500, 1000, 1750 | 25, 50, 75, 125, 250, 500, 1000, 1750, 4000 |
-| Veritabanı başına maks. depolama alanı (GB) | 1024 | 1024 | 1024 | 1024 | 1024 |
+| Veritabanı başına maks. depolama alanı (GB) | 2048 | 2560 | 3072 | 3584 | 4096 |
 |||||||
 
 <sup>1</sup> sağlanan ek depolama alanı nedeniyle daha fazla ücret ödediğinden ilgili ayrıntılı bilgi için bkz. [SQL Veritabanı fiyatlandırma seçenekleri](https://azure.microsoft.com/pricing/details/sql-database/elastic/) .

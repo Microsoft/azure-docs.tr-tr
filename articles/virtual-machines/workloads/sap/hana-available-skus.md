@@ -11,43 +11,39 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 12/21/2020
+ms.date: 4/16/2021
 ms.author: juergent
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 25a11bf96ba680608e5bb22835becf80fadee4f3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: H1Hack27Feb2017, references_regions
+ms.openlocfilehash: 3ecbbe4d477f3e6c3c6606528c51b934b6cf534a
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101668936"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718746"
 ---
 # <a name="available-skus-for-hana-large-instances"></a>HANA büyük örnekleri için kullanılabilir SKU 'Lar
 
-Azure 'da (büyük örnekler) yalnızca düzeltme 3 damgalarına dayalı olarak SAP HANA, Azure bölgelerindeki çeşitli yapılandırmalarda kullanılabilir:
-
-- Doğu Avustralya
-- Güneydoğu Avustralya
-- Doğu Japonya
-- Batı Japonya
-
-Düzeltme 4 damgalarına dayanan Azure (büyük örnekler) hizmetinde SAP HANA, Azure bölgelerindeki çeşitli yapılandırmalarda mevcuttur:
-
-- Batı ABD 2
-- Doğu ABD
-
-Düzeltme 4,2 damgalarına dayalı olarak BareMetal altyapısı (SAP HANA iş yükleri için sertifikalı) hizmeti. Azure bölgelerinde çeşitli yapılandırmalarda mevcuttur:
+Rev 4,2 * temelinde BareMetal altyapısı (SAP HANA iş yükleri için sertifikalı) hizmeti aşağıdaki bölgelerde kullanılabilir:
 - West Europe
 - Kuzey Avrupa
+- Bölgeler desteğiyle Almanya Orta Batı
+- Bölgeler desteğiyle Doğu ABD
 - Doğu ABD 2
 - Orta Güney ABD
+- Bölgeler desteğiyle Batı ABD 2
+
+Rev 3 * temelinde BareMetal altyapısı (SAP HANA iş yükleri için sertifikalı) hizmeti, aşağıdaki bölgelerde sınırlı kullanılabilirliğe sahiptir:
+- Batı ABD
+- Doğu ABD 
+- Doğu Avustralya 
+- Güneydoğu Avustralya
+- Doğu Japonya
 
 
-
-
-Aşağıdakiler gibi sunulan kullanılabilir Azure büyük örneklerinin listesi.
+Aşağıda, kullanılabilir Azure büyük örneklerinin bir listesi verilmiştir.
 
 > [!IMPORTANT]
-> Listedeki büyük örnek türlerinin her biri için HANA sertifikası durumunu temsil eden ilk sütunu unutmayın. Sütun, **S** harfiyle başlayan Azure sku 'larının [SAP HANA donanım diziniyle](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure) bağıntılı olmalıdır
+> Listedeki büyük örnek türlerinin her biri için HANA sertifikası durumunu temsil eden ilk sütunu unutmayın. Sütun, **S** harfiyle başlayan Azure sku 'larının [SAP HANA donanım diziniyle](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure) bağıntılı olmalıdır.
 
 
 
@@ -63,29 +59,29 @@ Aşağıdakiler gibi sunulan kullanılabilir Azure büyük örneklerinin listesi
 | EVET <br />[OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=1983), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2268) | Azure S384 üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Işlemci E7-8890 v4<br /> 192 CPU çekirdeği ve 384 CPU iş parçacığı |  4,0 TB | 4,0 TB | --- | 16 TB | Kullanılabilir |
 | EVET <br />[OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2080) | Azure S384m üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Işlemci E7-8890 v4<br /> 192 CPU çekirdeği ve 384 CPU iş parçacığı |  6,0 TB | 6,0 TB | --- | 18 TB |  Kullanılabilir  |
 | EVET <br />[OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=1984), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2267) | Azure S384xm üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Işlemci E7-8890 v4<br /> 192 CPU çekirdeği ve 384 CPU iş parçacığı |  8,0 TB | 8,0 TB | --- | 22 TB | Kullanılabilir |
-| EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2411), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2378) | Azure S448 üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 6,0 TB |  6,0 TB |  --- | 10,5 TB | Kullanılabilir (yalnızca 4. Rev) |
-| EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2410), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2377) | Azure S448m üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 12,0 TB |  12,0 TB |  --- | 18,9 TB | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S448oo üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 9,0 TB |  3,0 TB |  6,0 TB | 14,8 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S448om üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 12,0 TB |  6,0 TB |  6,0 TB | 18,9 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S448ooo üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 15,0 TB |  3,0 TB |  12,0 TB | 23,2 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S448oom üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 18,0 TB |  6,0 TB |  12,0 TB | 27,4 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| EVET <br /> [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2049) | Azure S576m üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Işlemci E7-8890 v4<br /> 288 CPU çekirdeği ve 576 CPU iş parçacığı |  12,0 TB | 12,0 TB | --- | 28 TB | Kullanılabilir (yalnızca 4. Rev) |
+| EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2411), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2378) | Azure S448 üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 6,0 TB |  6,0 TB |  --- | 10,5 TB | Kullanılabilir (yalnızca Rev 4,2) |
+| EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2410), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2377) | Azure S448m üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 12,0 TB |  12,0 TB |  --- | 18,9 TB | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S448oo üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 9,0 TB |  3,0 TB |  6,0 TB | 14,8 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S448om üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 12,0 TB |  6,0 TB |  6,0 TB | 18,9 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S448ooo üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 15,0 TB |  3,0 TB |  12,0 TB | 23,2 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S448oom üzerinde SAP HANA<br /> – 8 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 224 CPU çekirdeği ve 448 CPU iş parçacığı | 18,0 TB |  6,0 TB |  12,0 TB | 27,4 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| EVET <br /> [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2049) | Azure S576m üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Işlemci E7-8890 v4<br /> 288 CPU çekirdeği ve 576 CPU iş parçacığı |  12,0 TB | 12,0 TB | --- | 28 TB | Kullanılabilir (yalnızca Rev 4,2) |
 | NO | Azure S576xm üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Işlemci E7-8890 v4<br /> 288 CPU çekirdeği ve 576 CPU iş parçacığı |  18,0 TB | 18.0 | --- |  41 TB | Kullanılabilir |
-| EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2409), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2380) | Azure S672 üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 9,0 TB |  9,0 TB |  --- | 14,7 TB | Kullanılabilir (yalnızca 4. Rev) |
-| EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2408), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2379) | Azure S672m üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 18,0 TB |  18,0 TB |  --- | 27,4 TB | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S672oo üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 13,5 TB |  4,5 TB |  9,0 TB | 21,1 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S672om üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 18,0 TB |  9,0 TB |  9,0 TB | 27,4 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S672ooo üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 22,5 TB |  4,5 TB |  18,0 TB | 33,7 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S672oom üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 27,0 TB |  9,0 TB |  18,0 TB | 40,0 TB  | Kullanılabilir (yalnızca 4. Rev) |
+| EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2409), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2380) | Azure S672 üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 9,0 TB |  9,0 TB |  --- | 14,7 TB | Kullanılabilir (yalnızca Rev 4,2) |
+| EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2408), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2379) | Azure S672m üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 18,0 TB |  18,0 TB |  --- | 27,4 TB | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S672oo üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 13,5 TB |  4,5 TB |  9,0 TB | 21,1 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S672om üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 18,0 TB |  9,0 TB |  9,0 TB | 27,4 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S672ooo üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 22,5 TB |  4,5 TB |  18,0 TB | 33,7 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S672oom üzerinde SAP HANA<br /> – 12 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 336 CPU çekirdeği ve 672 CPU iş parçacığı | 27,0 TB |  9,0 TB |  18,0 TB | 40,0 TB  | Kullanılabilir (yalnızca Rev 4,2) |
 | EVET <br />[OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=1985) | Azure S768m üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Işlemci E7-8890 v4<br /> 384 CPU çekirdeği ve 768 CPU iş parçacığı |  16,0 TB | 16,0 TB | -- | 36 TB | Kullanılabilir |
 | NO | Azure S768xm üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Işlemci E7-8890 v4<br /> 384 CPU çekirdeği ve 768 CPU iş parçacığı |  24,0 TB | 24,0 TB | --- | 56 TB | Kullanılabilir |
-|  EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2407), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2376)  | Azure S896 üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 12,0 TB |  12,0 TB |  --- | 18,9 TB | Kullanılabilir (yalnızca 4. Rev) |
+|  EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2407), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2376)  | Azure S896 üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 12,0 TB |  12,0 TB |  --- | 18,9 TB | Kullanılabilir (yalnızca Rev 4,2) |
 | EVET <br /> [OLAP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=iaas;ve:24&id=s:2406), [OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=2328) | Azure S896m üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 24,0 TB | 24,0 TB | -- | 35,8 TB | Kullanılabilir |
-| NO | Azure S896oo üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 18,0 TB |  6,0 TB |  12,0 TB | 27,4 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S896om üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 24,0 TB |  12,0 TB |  12,0 TB | 35,8 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S896ooo üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 30,0 TB |  6,0 TB |  24,0 TB | 44,3 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| NO | Azure S896oom üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 36,0 TB |  12,0 TB |  24,0 TB | 52,7 TB  | Kullanılabilir (yalnızca 4. Rev) |
-| EVET <br />[OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=1986) | Azure S960m üzerinde SAP HANA<br /> – 20 x Intel® Xeon® Işlemci E7-8890 v4<br /> 480 CPU çekirdeği ve 960 CPU iş parçacığı |  20,0 TB | 20,0 TB | -- | 46 TB | Kullanılabilir (yalnızca 4. Rev) |
+| NO | Azure S896oo üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 18,0 TB |  6,0 TB |  12,0 TB | 27,4 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S896om üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 24,0 TB |  12,0 TB |  12,0 TB | 35,8 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S896ooo üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 30,0 TB |  6,0 TB |  24,0 TB | 44,3 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| NO | Azure S896oom üzerinde SAP HANA<br /> – 16 x Intel® Xeon® Platinum 8276 işlemcisi <br /> 448 CPU çekirdeği ve 896 CPU iş parçacığı | 36,0 TB |  12,0 TB |  24,0 TB | 52,7 TB  | Kullanılabilir (yalnızca Rev 4,2) |
+| EVET <br />[OLTP](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure&recordid=1986) | Azure S960m üzerinde SAP HANA<br /> – 20 x Intel® Xeon® Işlemci E7-8890 v4<br /> 480 CPU çekirdeği ve 960 CPU iş parçacığı |  20,0 TB | 20,0 TB | -- | 46 TB | Kullanılabilir (yalnızca Rev 4,2) |
 
 
 - CPU çekirdekleri = sunucu biriminin işlemcilerin toplamının hiper iş parçacıklı olmayan CPU çekirdekleri toplamı.
@@ -121,5 +117,5 @@ HANA büyük örnekteki SAP HANA çalıştırma ve Azure 'da dağıtılan VM 'le
 - Azure 'dan farklı olarak, Azure 'daki SAP HANA (büyük örnekler) sunucu belirli bir müşteriye ayrılmıştır. Sunucu biriminin veya konağın sabit veya geçici olarak bölümlenmiş olması mümkün değildir. Sonuç olarak, bir kiracıya ve sizin için bir bütün olarak atanan bir HANA büyük örnek birimi kullanılır. Sunucunun yeniden başlatılması veya kapatılmasını, işletim sistemine otomatik olarak ve SAP HANA başka bir sunucuya dağıtılmayacak. (Tür ı sınıfı SKU 'Ları için tek istisna, bir sunucunun sorunlarla karşılaştığında ve yeniden dağıtımı başka bir sunucuda gerçekleştirilmesi gerekir.)
 - En iyi fiyat/performans oranı için ana bilgisayar işlemcisi türlerinin seçildiği Azure 'dan farklı olarak, Azure 'da SAP HANA için seçilen işlemci türleri (büyük örnekler), Intel E7v3 ve E7v4 işlemci hattının en yüksek gerçekleştirmesinden oluşur.
 
-**Sonraki adımlar**
-- [HLi boyutlandırmayı](hana-sizing.md) inceleyin
+## <a name="next-steps"></a>Sonraki adımlar
+- [HLi boyutlandırılmasına](hana-sizing.md)bakın.

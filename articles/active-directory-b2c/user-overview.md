@@ -11,12 +11,12 @@ ms.date: 11/05/2019
 ms.author: mimart
 ms.subservice: B2C
 ms.custom: b2c-support
-ms.openlocfilehash: f2473955db5439911280360b169f469b8c93eb93
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 4b35cfeded13a50e5e27c240b0826f1d108ff7eb
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105043606"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107529452"
 ---
 # <a name="overview-of-user-accounts-in-azure-active-directory-b2c"></a>Azure Active Directory B2C Kullanıcı hesaplarına genel bakış
 
@@ -74,7 +74,7 @@ Dış kullanıcıları kiracınıza Konuk Kullanıcı olarak davet edebilirsiniz
 
 Kiracınıza bir Konuk Kullanıcı davet ettiğinizde, alıcının e-posta adresini ve daveti açıklayan bir iletiyi sağlarsınız. Davet bağlantısı, kullanıcıyı onay sayfasına götürür. Bir gelen kutusu e-posta adresine iliştirilmemişse, Kullanıcı davet edilen kimlik bilgilerini kullanarak bir Microsoft sayfasına giderek onay sayfasına gidebilir. Daha sonra Kullanıcı, e-postadaki bağlantıya tıklanmakla aynı şekilde daveti kullanmaya zorlanır. Örneğin: `https://myapps.microsoft.com/B2CTENANTNAME`.
 
-Konuk Kullanıcı davet etmek için [MICROSOFT Graph API](/graph/api/invitation-post?view=graph-rest-beta) 'sini de kullanabilirsiniz.
+Konuk Kullanıcı davet etmek için [MICROSOFT Graph API](/graph/api/invitation-post) 'sini de kullanabilirsiniz.
 
 ## <a name="consumer-user"></a>Tüketici kullanıcısı
 

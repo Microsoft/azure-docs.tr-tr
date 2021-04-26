@@ -3,7 +3,7 @@ title: Azure DDoS koruması standardına genel bakış
 description: Azure DDoS Koruması Standart'ın, uygulama tasarımı en iyi yöntemleriyle birleştirildiğinde DDoS saldırılarına karşı nasıl savunma sağladığını öğrenin.
 services: virtual-network
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: conceptual
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/9/2020
 ms.author: yitoh
-ms.openlocfilehash: 2b0f8a73a6852883f87ba9fc4333cb6fa8101a39
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c8b3b0227e293c42ac9db8f888bc863e073ff6f5
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101703125"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103343"
 ---
 # <a name="azure-ddos-protection-standard-overview"></a>Azure DDoS koruması standardına genel bakış
 

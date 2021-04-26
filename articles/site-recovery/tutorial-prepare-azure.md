@@ -1,19 +1,16 @@
 ---
 title: Azure Site Recovery ile şirket içi olağanüstü durum kurtarma için Azure 'u hazırlama
 description: Azure Site Recovery ile şirket içi makinelerin olağanüstü durum kurtarma işlemleri için Azure’ın nasıl hazırlanacağını öğrenin.
-services: site-recovery
-author: rayne-wiselman
 ms.service: site-recovery
 ms.topic: tutorial
 ms.date: 09/09/2019
-ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: 0d697f2100360732666c9f5ea8050800dad154b4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 340b60cccbabeef404f0de13d493e171a5132331
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "88653826"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579261"
 ---
 # <a name="prepare-azure-for-on-premises-disaster-recovery-to-azure"></a>Azure'a şirket içi olağanüstü durum kurtarma için Azure'ı hazırlama
 

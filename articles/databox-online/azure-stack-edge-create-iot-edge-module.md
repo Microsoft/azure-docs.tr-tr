@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.date: 08/06/2019
 ms.author: alkohli
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 96a6692524eca3a2845d648ab3df2932d00ce823
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4519bc187c4ec53294e5eef15c4ad1954b691224
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91951154"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870850"
 ---
 # <a name="develop-a-c-iot-edge-module-to-move-files-with-azure-stack-edge-pro"></a>Dosyaları Azure Stack Edge Pro ile taşımak için C# IoT Edge modülünü geliştirme
 
@@ -57,7 +57,7 @@ Başlamadan önce aşağıdakilere sahip olduğunuzdan emin olun:
     - [Visual Studio Code](https://code.visualstudio.com/).
     - [Visual Studio Code için C# (OmniSharp tarafından desteklenen) uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).
     - [Visual Studio Code için Azure IoT Edge uzantısı](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-edge).
-    - [.NET Core 2.1 SDK'sı](https://www.microsoft.com/net/download).
+    - [.NET Core 2.1 SDK'sı](https://dotnet.microsoft.com/download/dotnet/2.1).
     - [Docker CE](https://store.docker.com/editions/community/docker-ce-desktop-windows). Yazılımı indirmek ve yüklemek için bir hesap oluşturmanız gerekebilir.
 
 ## <a name="create-a-container-registry"></a>Kapsayıcı kayıt defteri oluşturma

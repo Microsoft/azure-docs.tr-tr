@@ -1,5 +1,5 @@
 ---
-title: Azure yerleşik rolleri-Azure RBAC
+title: Azure yerleşik rolleri - Azure RBAC
 description: Bu makalede, Azure rol tabanlı erişim denetimi (Azure RBAC) için Azure yerleşik rolleri açıklanmaktadır. Eylemler, NotActions, DataActions ve NotDataActions öğelerini listeler.
 services: active-directory
 ms.service: role-based-access-control
@@ -7,22 +7,22 @@ ms.topic: reference
 ms.workload: identity
 author: rolyon
 ms.author: rolyon
-ms.date: 03/15/2021
+ms.date: 04/09/2021
 ms.custom: generated
-ms.openlocfilehash: ba5340fdc12bf3141c5e3f24b6b9d178a5db600d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0e8363ee29df84478e5ab5c14b43ea07e3bea8ee
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104602528"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815315"
 ---
 # <a name="azure-built-in-roles"></a>Yerleşik Azure rolleri
 
-[Azure rol tabanlı erişim denetimi (Azure RBAC)](overview.md) , kullanıcılara, gruplara, hizmet sorumlularına ve yönetilen kimliklere atayabileceğiniz birkaç Azure yerleşik rolüne sahiptir. Rol atamaları, Azure kaynaklarına erişimi denetlemenize olanak sağlar. Yerleşik roller kuruluşunuzun belirli ihtiyaçlarını karşılamıyorsa, kendi [Azure özel rollerinizi](custom-roles.md)de oluşturabilirsiniz.
+[Azure rol tabanlı erişim denetimi (Azure RBAC)](overview.md) , kullanıcılara, gruplara, hizmet sorumlularına ve yönetilen kimliklere atayabileceğiniz birkaç Azure yerleşik rolüne sahiptir. Rol atamaları, Azure kaynaklarına erişimi denetlemenize olanak sağlar. Yerleşik roller kuruluşunuzun belirli ihtiyaçlarını karşılamıyorsa, kendi [Azure özel rollerinizi](custom-roles.md)de oluşturabilirsiniz. Rol atama hakkında daha fazla bilgi için bkz. [Azure rolü atama adımları](role-assignments-steps.md).
 
-Bu makalede, her zaman gelişen Azure yerleşik rolleri listelenir. En son rolleri almak için [Get-AzRoleDefinition](/powershell/module/az.resources/get-azroledefinition) veya [az role Definition List](/cli/azure/role/definition#az-role-definition-list)komutunu kullanın. Azure Active Directory (Azure AD) için yönetici rolleri arıyorsanız, [Azure Active Directory Içindeki yönetici rolü izinleri](../active-directory/roles/permissions-reference.md)bölümüne bakın.
+Bu makalede, Azure yerleşik rolleri listelenir. Azure Active Directory (Azure AD) için yönetici rolleri arıyorsanız bkz. [Azure AD yerleşik rolleri](../active-directory/roles/permissions-reference.md).
 
-Aşağıdaki tabloda, her yerleşik rolün bir kısa açıklaması ve benzersiz KIMLIĞI verilmiştir. `Actions`Her rolün,, ve listesini görmek için rol adına `NotActions` tıklayın `DataActions` `NotDataActions` . Bu eylemlerin ne anlama geldiğini ve bunların yönetim ve veri düzlemleri için nasıl uygulandığını hakkında bilgi için bkz. [Azure rol tanımlarını anlama](role-definitions.md).
+Aşağıdaki tabloda, yerleşik her rolün kısa bir açıklaması verilmiştir. `Actions`Her rolün,, ve listesini görmek için rol adına `NotActions` tıklayın `DataActions` `NotDataActions` . Bu eylemlerin ne anlama geldiğini ve bunların yönetim ve veri düzlemleri için nasıl uygulandığını hakkında bilgi için bkz. [Azure rol tanımlarını anlama](role-definitions.md).
 
 ## <a name="all"></a>Tümü
 
@@ -77,6 +77,7 @@ Aşağıdaki tabloda, her yerleşik rolün bir kısa açıklaması ve benzersiz 
 > | **Web** |  |  |
 > | [Azure haritalar veri Katılımcısı](#azure-maps-data-contributor) | Azure haritalar hesabından ilgili verileri eşlemek için okuma, yazma ve silme erişimi verir. | 8f5e0ce6-4F7B-4dcf-bddf-e6f48634a204 |
 > | [Azure haritalar veri okuyucu](#azure-maps-data-reader) | Azure haritalar hesabından ilgili harita okuma verilerine erişim izni verir. | 423170ca-a8f6-4b0f-8487-9e4eb8f49bfa |
+> | [Azure yay bulutu veri okuyucu](#azure-spring-cloud-data-reader) | Azure yay bulut verilerine okuma erişimine izin ver | b5537268-8956-4941-a8f0-646150406f0c |
 > | [Katkıda bulunan Arama Hizmeti](#search-service-contributor) | Arama hizmetlerini yönetmenize izin verir, ancak bunlara erişim izni vermez. | 7ca78c08-252a-4471-8644-bb5ff32d4ba0 |
 > | [SignalR AccessKey okuyucusu](#signalr-accesskey-reader) | SignalR hizmeti erişim anahtarlarını okuyun | 04165923-9d83-45d5-8227-78b77b0a687e |
 > | [SignalR App Server (Önizleme)](#signalr-app-server-preview) | Uygulama sunucunuzun SignalR hizmetine AAD kimlik doğrulama seçenekleriyle erişmesini sağlar. | 420fcaa2-552c-430f-98ca-3264be4806c7 |
@@ -140,7 +141,7 @@ Aşağıdaki tabloda, her yerleşik rolün bir kısa açıklaması ve benzersiz 
 > | [Bilişsel hizmetler Soru-Cevap Oluşturma Düzenleyicisi](#cognitive-services-qna-maker-editor) | KB oluşturma, düzenleme, içeri aktarma ve dışarı aktarma işlemi yapmanızı sağlar. Bir KB yayımlayamaz veya silemezsiniz. | f4cc2bf9-21be-47a1-bdf1-5c5804381025 |
 > | [Bilişsel hizmetler Soru-Cevap Oluşturma okuyucu](#cognitive-services-qna-maker-reader) | Yalnızca bir KB 'yi okuyup test edelim. | 466ccd10-b268-4a11-b098-b4849f024126 |
 > | [Bilişsel hizmetler kullanıcısı](#cognitive-services-user) | Bilişsel hizmetler 'in anahtarlarını okuyup listelemenizi sağlar. | a97b65f3-24c7-4388-baec-2e87135dc908 |
-> | **Nesnelerin interneti** |  |  |
+> | **Nesnelerin İnterneti** |  |  |
 > | [Cihaz Güncelleştirme Yöneticisi](#device-update-administrator) | , Yönetim ve içerik işlemlerine tam erişim sağlar | 02ca0879-e8e4-47a5-a61e-5c618b76e64a |
 > | [Cihaz güncelleştirme Içerik Yöneticisi](#device-update-content-administrator) | , İçerik işlemlerine tam erişim sağlar | 0378884a-3af5-44ab-8323-f5b22f9f3c98 |
 > | [Cihaz güncelleştirme Içeriği okuyucusu](#device-update-content-reader) | İçerik işlemlerine yönelik okuma erişimi sağlar, ancak değişiklik yapmaya izin vermez | d1ee9a80-8b14-47f0-bdc2-f4a351625a7b |
@@ -181,6 +182,7 @@ Aşağıdaki tabloda, her yerleşik rolün bir kısa açıklaması ve benzersiz 
 > | **Güvenlik** |  |  |
 > | [Kanıtlama Katılımcısı](#attestation-contributor) | Kanıtlama sağlayıcısı örneğini okuyabilir veya silebilir | bbf86eb8-f7b4-4cce-96e4-18cddf81d86e |
 > | [Kanıtlama okuyucusu](#attestation-reader) | Kanıtlama sağlayıcısı özelliklerini okuyabilir | fd1bd22b-8476-40bc-a0bc-69b95687b9f3 |
+> | [Azure Sentinel Otomasyon Katılımcısı](#azure-sentinel-automation-contributor) | Azure Sentinel Otomasyon Katılımcısı | f4c81013-99ee-4d62-a7ee-b3f1f648599a |
 > | [Azure Sentinel Katkıda Bulunanı](#azure-sentinel-contributor) | Azure Sentinel Katkıda Bulunanı | ab8e14d6-4a74-4a29-9ba8-549422addade |
 > | [Azure Sentinel Okuyucusu](#azure-sentinel-reader) | Azure Sentinel Okuyucusu | 8d289c81-5878-46d4-8554-54e1e3d8b5cb |
 > | [Azure Sentinel Yanıtlayıcısı](#azure-sentinel-responder) | Azure Sentinel Yanıtlayıcısı | 3e150937-b8fe-4CFB-8069-0eaf05ecd056 |
@@ -213,12 +215,17 @@ Aşağıdaki tabloda, her yerleşik rolün bir kısa açıklaması ve benzersiz 
 > | [Automation Iş Işleci](#automation-job-operator) | Otomasyon Runbook 'Larını kullanarak Iş oluşturun ve yönetin. | 4fe576fe-1146-4730-92eb-48519fa6bf9f |
 > | [Automation Işleci](#automation-operator) | Automation Işleçleri, işleri başlatabilir, durdurabilir, askıya alabilir ve sürdürebilir | d3881f73-407A-4167-8283-e981cbba0404 |
 > | [Otomasyon Runbook Işleci](#automation-runbook-operator) | Runbook 'un Işlerini oluşturabilmek için Runbook özelliklerini okuyun. | 5fb5aef8-1081-4b8e-bb16-9d5d0385bab5 |
+> | [Azure Arc etkin Kubernetes kümesi Kullanıcı rolü](#azure-arc-enabled-kubernetes-cluster-user-role) | Küme kullanıcı kimlik bilgilerini Listele eylemi. | 00493d72-78f6-4148-b6c5-d3ce8e4799dd |
+> | [Azure Arc Kubernetes Yöneticisi](#azure-arc-kubernetes-admin) | Kaynak kotalarını ve ad alanlarını güncelleştirme veya silme dışında, küme/ad alanı altındaki tüm kaynakları yönetmenizi sağlar. | dffb1e0c-446f-4dde-a09f-99eb5cc68b96 |
+> | [Azure Arc Kubernetes Küme Yöneticisi](#azure-arc-kubernetes-cluster-admin) | Kümedeki tüm kaynakları yönetmenizi sağlar. | 8393591c-06b9-48A2-A542-1bd6b377f6a2 |
+> | [Azure Arc Kubernetes Görüntüleyici](#azure-arc-kubernetes-viewer) | Gizli dizileri hariç küme/ad alanındaki tüm kaynakları görüntülemenize izin verir. | 63f0a09d-1495-4db4-a681-037d84835eb4 |
+> | [Azure Arc Kubernetes yazıcı](#azure-arc-kubernetes-writer) | Küme/ad alanı (küme) rolleri ve (küme) rolü bağlamaları dışındaki her şeyi güncelleştirmenizi sağlar. | 5b999177-9696-4545-85C7-50de3797e5a1 |
 > | [Azure bağlı makine ekleme](#azure-connected-machine-onboarding) | , Azure bağlantılı makineler ekleyebilir. | b64e21ea-ac4e-4cdf-9dc9-5b892992bee7 |
 > | [Azure bağlı makine kaynak yöneticisi](#azure-connected-machine-resource-administrator) | Azure bağlı makinelerini okuyabilir, yazabilir, silebilir ve yeniden ekleyebilir. | cd570a14-e51a-42ad-bac8-bafd67325302 |
-> | [Faturalama okuyucusu](#billing-reader) | Faturalandırma verilerine okuma erişimi sağlar | fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64 |
+> | [Faturalama Okuyucusu](#billing-reader) | Faturalandırma verilerine okuma erişimi sağlar | fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64 |
 > | [Blueprint Katılımcısı](#blueprint-contributor) | Şema tanımlarını yönetebilir, ancak atamazsınız. | 41077137-e803-4205-871C-5a86e6a753b4 |
 > | [Blueprint Işleci](#blueprint-operator) | Varolan yayımlanmış şemaları atayabilir, ancak yeni şemaları oluşturamaz. Bu, yalnızca atama Kullanıcı tarafından atanan yönetilen bir kimlikle yapıldığında işe yarar. | 437d2ced-4a38-4302-8479-ed2bcb43d090 |
-> | [Maliyet yönetimi Katılımcısı](#cost-management-contributor) | Maliyetleri görüntüleyebilir ve maliyet yapılandırmasını yönetebilir (örn. bütçeler, dışarı aktarmalar) | 434105ed-43f6-45c7-a02f-909b2ba83430 |
+> | [Maliyet Yönetimi Katkıda Bulunanı](#cost-management-contributor) | Maliyetleri görüntüleyebilir ve maliyet yapılandırmasını yönetebilir (örn. bütçeler, dışarı aktarmalar) | 434105ed-43f6-45c7-a02f-909b2ba83430 |
 > | [Maliyet yönetimi okuyucusu](#cost-management-reader) | Maliyet verilerini ve yapılandırmayı görüntüleyebilir (örneğin, bütçeler, dışarı aktarmalar) | 72fafb9e-0641-4937-9268-a91bfd8191a3 |
 > | [Hiyerarşi Ayarları Yöneticisi](#hierarchy-settings-administrator) | Kullanıcıların hiyerarşi ayarlarını düzenlemesine ve silmesine izin verir | 350f8d15-c687-4448-8ae1-157740a3936d |
 > | [Kubernetes kümesi-Azure yay ekleme](#kubernetes-cluster---azure-arc-onboarding) | Herhangi bir kullanıcıya/hizmete Connectedkümeler kaynağı oluşturma yetkisi vermek için rol tanımı | 34e09817-6cbe-4d01-b1a2-e0eac5743d41 |
@@ -230,7 +237,7 @@ Aşağıdaki tabloda, her yerleşik rolün bir kısa açıklaması ve benzersiz 
 > | [Yönetim grubu okuyucusu](#management-group-reader) | Yönetim grubu okuyucusu rolü | ac63b705-f282-497d-ac71-919bf39d939d |
 > | [Yeni relik APM hesabı Katılımcısı](#new-relic-apm-account-contributor) | New Relic Application Performance Management hesaplarını ve uygulamaları yönetmenize izin verir, ancak bunlara erişimi kalmaz. | 5d28c62d-5b37-4476-8438-e587778df237 |
 > | [İlke öngörüleri veri yazıcısı (Önizleme)](#policy-insights-data-writer-preview) | Kaynak ilkelerine okuma erişimine ve kaynak bileşen ilkesi olaylarına yazma erişimine izin verir. | 66bb4e9e-B016-4A94-8249-4c0511c2be84 |
-> | [Kota Isteği operatörü rolü](#quota-request-operator-role) | Kota isteklerini okuyup oluşturun, kota isteği durumunu alın ve destek bileti oluşturun. | 0e5f05e5-9AB9-446B-b98d-1e2157c94125 |
+> | [Kota Isteği operatörü](#quota-request-operator) | Kota isteklerini okuyup oluşturun, kota isteği durumunu alın ve destek bileti oluşturun. | 0e5f05e5-9AB9-446B-b98d-1e2157c94125 |
 > | [Rezervasyon Satınalmacı](#reservation-purchaser) | Ayırmaları satın almanızı sağlar | f7b75c60-3036-4b75-91c3-6b41c27c1689 |
 > | [Kaynak İlkesine Katkıda Bulunan](#resource-policy-contributor) | Kaynak ilkesi oluşturma/değiştirme, destek bileti oluşturma ve kaynakları/hiyerarşisi okuma haklarına sahip kullanıcılar. | 36243c78-bf99-498c-9df9-86d9f8d28608 |
 > | [Site Recovery Katkıda Bulunanı](#site-recovery-contributor) | Kasa oluşturma ve rol atama dışında Site Recovery hizmetini yönetmenizi sağlar | 6670b86e-a3f7-4917-AC9B-5d6ab1be4567 |
@@ -2732,6 +2739,45 @@ Azure haritalar hesabından ilgili harita okuma verilerine erişim izni verir. [
 }
 ```
 
+### <a name="azure-spring-cloud-data-reader"></a>Azure yay bulutu veri okuyucu
+
+Azure yay bulut verilerine okuma erişimine izin ver [daha fazla bilgi](../spring-cloud/how-to-access-data-plane-azure-ad-rbac.md)
+
+> [!div class="mx-tableFixed"]
+> | Eylemler | Açıklama |
+> | --- | --- |
+> | *yok* |  |
+> | **NotActions** |  |
+> | *yok* |  |
+> | **Veri eylemleri** |  |
+> | [Microsoft. AppPlatform](resource-provider-operations.md#microsoftappplatform)/Spring/*/Read |  |
+> | **NotDataActions** |  |
+> | *yok* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Allow read access to Azure Spring Cloud Data",
+  "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/b5537268-8956-4941-a8f0-646150406f0c",
+  "name": "b5537268-8956-4941-a8f0-646150406f0c",
+  "permissions": [
+    {
+      "actions": [],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.AppPlatform/Spring/*/read"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Spring Cloud Data Reader",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
 ### <a name="search-service-contributor"></a>Katkıda bulunan Arama Hizmeti
 
 Arama hizmetlerini yönetmenize izin verir, ancak bunlara erişim izni vermez. [Daha fazla bilgi edinin](../search/search-security-rbac.md)
@@ -2970,6 +3016,8 @@ Azure SignalR hizmeti REST API 'Lerine tam erişim
 > | **NotActions** |  |
 > | *yok* |  |
 > | **Veri eylemleri** |  |
+> | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/auth/AccessKey/Action | Clienttoken imzalamak için geçici bir AccessKey oluşturun. |
+> | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/auth/clienttoken/Action | İstemci bağlantısı başlatmak için bir ClientToken oluşturun. |
 > | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/hub/Send/Action | Hub 'daki tüm istemci bağlantılarına ileti yayınlayın. |
 > | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/Group/Send/Action | Gruba yayın iletisi. |
 > | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/Group/Read | Grup varlığını veya Kullanıcı varlığını denetleyin. |
@@ -2979,7 +3027,7 @@ Azure SignalR hizmeti REST API 'Lerine tam erişim
 > | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/ClientConnection/Write | İstemci bağlantısını kapatın. |
 > | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/User/Send/Action | Kullanıcıya birden çok istemci bağlantısından oluşabilen iletiler gönderin. |
 > | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/User/Read | Kullanıcı varlığını denetleyin. |
-> | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/User/Write |  |
+> | [Microsoft. SignalRService](resource-provider-operations.md#microsoftsignalrservice)/SignalR/User/Write | Bir kullanıcıyı değiştirin. |
 > | **NotDataActions** |  |
 > | *yok* |  |
 
@@ -2996,6 +3044,8 @@ Azure SignalR hizmeti REST API 'Lerine tam erişim
       "actions": [],
       "notActions": [],
       "dataActions": [
+        "Microsoft.SignalRService/SignalR/auth/accessKey/action",
+        "Microsoft.SignalRService/SignalR/auth/clientToken/action",
         "Microsoft.SignalRService/SignalR/hub/send/action",
         "Microsoft.SignalRService/SignalR/group/send/action",
         "Microsoft.SignalRService/SignalR/group/read",
@@ -7758,6 +7808,51 @@ Kanıtlama sağlayıcısı özelliklerini okuyabilir [daha fazla bilgi edinin](.
 }
 ```
 
+### <a name="azure-sentinel-automation-contributor"></a>Azure Sentinel Otomasyon Katılımcısı
+
+Azure Sentinel Otomasyon katılımcısı [daha fazla bilgi](../sentinel/roles.md)
+
+> [!div class="mx-tableFixed"]
+> | Eylemler | Açıklama |
+> | --- | --- |
+> | [Microsoft. Authorization](resource-provider-operations.md#microsoftauthorization)/*/Read | Rolleri ve rol atamalarını oku |
+> | [Microsoft. Logic](resource-provider-operations.md#microsoftlogic)/Workflows/Triggers/Read | Tetikleyiciyi okur. |
+> | [Microsoft. Logic](resource-provider-operations.md#microsoftlogic)/Workflows/Triggers/listcallbackurl/Action | Tetikleyici için geri çağırma URL 'sini alır. |
+> | [Microsoft. Logic](resource-provider-operations.md#microsoftlogic)/Workflows/Runs/Read | İş akışı çalıştırmasını okur. |
+> | **NotActions** |  |
+> | *yok* |  |
+> | **Veri eylemleri** |  |
+> | *yok* |  |
+> | **NotDataActions** |  |
+> | *yok* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Azure Sentinel Automation Contributor",
+  "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/f4c81013-99ee-4d62-a7ee-b3f1f648599a",
+  "name": "f4c81013-99ee-4d62-a7ee-b3f1f648599a",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Logic/workflows/triggers/read",
+        "Microsoft.Logic/workflows/triggers/listCallbackUrl/action",
+        "Microsoft.Logic/workflows/runs/read"
+      ],
+      "notActions": [],
+      "dataActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Sentinel Automation Contributor",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
 ### <a name="azure-sentinel-contributor"></a>Azure Sentinel Katkıda Bulunanı
 
 Azure Sentinel katılımcısı [daha fazla bilgi](../sentinel/roles.md)
@@ -8115,7 +8210,7 @@ Tüm veri düzlemi işlemlerini bir anahtar kasasında ve içindeki tüm nesnele
 
 ### <a name="key-vault-contributor"></a>Katkıda bulunan Key Vault
 
-Anahtar kasalarını yönetin, ancak Azure RBAC 'de roller atamanıza izin vermez ve gizli dizi, anahtar veya sertifikalara erişmenize izin vermez. [Daha fazla bilgi edinin](../key-vault/general/secure-your-key-vault.md)
+Anahtar kasalarını yönetin, ancak Azure RBAC 'de roller atamanıza izin vermez ve gizli dizi, anahtar veya sertifikalara erişmenize izin vermez. [Daha fazla bilgi edinin](../key-vault/general/security-features.md)
 
 > [!div class="mx-tableFixed"]
 > | Eylemler | Açıklama |
@@ -8688,7 +8783,7 @@ Bu eski bir roldür. Lütfen bunun yerine Güvenlik Yöneticisi 'ni kullanın.
 }
 ```
 
-### <a name="security-reader"></a>Güvenlik Okuyucusu
+### <a name="security-reader"></a>Güvenlik okuyucusu
 
 Güvenlik Merkezi için izinleri görüntüleyin. Önerileri, uyarıları, güvenlik ilkesini ve güvenlik durumlarını görüntüleyebilir, ancak değişiklik yapamaz. [Daha fazla bilgi edinin](../security-center/security-center-permissions.md)
 
@@ -9484,6 +9579,449 @@ Runbook 'un Işlerini oluşturabilmek için Runbook özelliklerini okuyun. [Daha
 }
 ```
 
+### <a name="azure-arc-enabled-kubernetes-cluster-user-role"></a>Azure Arc etkin Kubernetes kümesi Kullanıcı rolü
+
+Küme kullanıcı kimlik bilgilerini Listele eylemi.
+
+> [!div class="mx-tableFixed"]
+> | Eylemler | Açıklama |
+> | --- | --- |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Deployments/Write | Bir dağıtımı oluşturur veya güncelleştirir. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/operationresults/Read | Abonelik işlem sonuçlarını alın. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/Read | Aboneliklerin listesini alır. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/ResourceGroups/Read | Kaynak gruplarını alır veya listeler. |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/listclusterusercredentials/Action | ClusterUser kimlik bilgisini Listele |
+> | [Microsoft. Authorization](resource-provider-operations.md#microsoftauthorization)/*/Read | Rolleri ve rol atamalarını oku |
+> | [Microsoft. Insights](resource-provider-operations.md#microsoftinsights)/Alertrules/* | Klasik ölçüm uyarısı oluşturma ve yönetme |
+> | [Microsoft. support](resource-provider-operations.md#microsoftsupport)/* | Destek bileti oluşturma ve güncelleştirme |
+> | **NotActions** |  |
+> | *yok* |  |
+> | **Veri eylemleri** |  |
+> | *yok* |  |
+> | **NotDataActions** |  |
+> | *yok* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "List cluster user credentials action.",
+  "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/00493d72-78f6-4148-b6c5-d3ce8e4799dd",
+  "name": "00493d72-78f6-4148-b6c5-d3ce8e4799dd",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Resources/deployments/write",
+        "Microsoft.Resources/subscriptions/operationresults/read",
+        "Microsoft.Resources/subscriptions/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Kubernetes/connectedClusters/listClusterUserCredentials/action",
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Support/*"
+      ],
+      "notActions": [],
+      "dataActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Arc Enabled Kubernetes Cluster User Role",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+### <a name="azure-arc-kubernetes-admin"></a>Azure Arc Kubernetes Yöneticisi
+
+Kaynak kotalarını ve ad alanlarını güncelleştirme veya silme dışında, küme/ad alanı altındaki tüm kaynakları yönetmenizi sağlar. [Daha fazla bilgi edinin](../azure-arc/kubernetes/azure-rbac.md)
+
+> [!div class="mx-tableFixed"]
+> | Eylemler | Açıklama |
+> | --- | --- |
+> | [Microsoft. Authorization](resource-provider-operations.md#microsoftauthorization)/*/Read | Rolleri ve rol atamalarını oku |
+> | [Microsoft. Insights](resource-provider-operations.md#microsoftinsights)/Alertrules/* | Klasik ölçüm uyarısı oluşturma ve yönetme |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Deployments/Write | Bir dağıtımı oluşturur veya güncelleştirir. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/operationresults/Read | Abonelik işlem sonuçlarını alın. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/Read | Aboneliklerin listesini alır. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/ResourceGroups/Read | Kaynak gruplarını alır veya listeler. |
+> | [Microsoft. support](resource-provider-operations.md#microsoftsupport)/* | Destek bileti oluşturma ve güncelleştirme |
+> | **NotActions** |  |
+> | *yok* |  |
+> | **Veri eylemleri** |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/controllerrevisions/Read | Controllerdüzeltmelerinizi okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Apps/daemonsets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/Deployments/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/replicasets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/statefulsets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Authorization.k8s.io/localsubjectaccessreviews/Write | Localsubjectaccessincelemeleri yazar |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/otomatik Scaling/horizontalpodavutoscalers/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Batch/cronjobs/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Batch/Jobs/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/configmaps/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/endpoints/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Events.k8s.io/Events/Read | Olayları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Events/Read | Olayları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Extensions/daemonsets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/Deployments/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/ingresses/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/networkpolicies/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/replicasets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/limitranges/Read | Limitaralıkları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/namespaces/Read | Ad alanlarını okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Networking.k8s.io/ingresses/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Networking.k8s.io/networkpolicies/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/persistentvolumeclaims/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/pods/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Policy/poddisruptionbudgets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/RBAC.Authorization.k8s.io/rolebindings/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/RBAC.Authorization.k8s.io/Roles/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/replicationcontrollers/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/replicationcontrollers/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/resourcequotas/Read | Resourcequotas okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Secrets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/serviceaccounts/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Services/* |  |
+> | **NotDataActions** |  |
+> | *yok* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Lets you manage all resources under cluster/namespace, except update or delete resource quotas and namespaces.",
+  "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/dffb1e0c-446f-4dde-a09f-99eb5cc68b96",
+  "name": "dffb1e0c-446f-4dde-a09f-99eb5cc68b96",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Resources/deployments/write",
+        "Microsoft.Resources/subscriptions/operationresults/read",
+        "Microsoft.Resources/subscriptions/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Support/*"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.Kubernetes/connectedClusters/apps/controllerrevisions/read",
+        "Microsoft.Kubernetes/connectedClusters/apps/daemonsets/*",
+        "Microsoft.Kubernetes/connectedClusters/apps/deployments/*",
+        "Microsoft.Kubernetes/connectedClusters/apps/replicasets/*",
+        "Microsoft.Kubernetes/connectedClusters/apps/statefulsets/*",
+        "Microsoft.Kubernetes/connectedClusters/authorization.k8s.io/localsubjectaccessreviews/write",
+        "Microsoft.Kubernetes/connectedClusters/autoscaling/horizontalpodautoscalers/*",
+        "Microsoft.Kubernetes/connectedClusters/batch/cronjobs/*",
+        "Microsoft.Kubernetes/connectedClusters/batch/jobs/*",
+        "Microsoft.Kubernetes/connectedClusters/configmaps/*",
+        "Microsoft.Kubernetes/connectedClusters/endpoints/*",
+        "Microsoft.Kubernetes/connectedClusters/events.k8s.io/events/read",
+        "Microsoft.Kubernetes/connectedClusters/events/read",
+        "Microsoft.Kubernetes/connectedClusters/extensions/daemonsets/*",
+        "Microsoft.Kubernetes/connectedClusters/extensions/deployments/*",
+        "Microsoft.Kubernetes/connectedClusters/extensions/ingresses/*",
+        "Microsoft.Kubernetes/connectedClusters/extensions/networkpolicies/*",
+        "Microsoft.Kubernetes/connectedClusters/extensions/replicasets/*",
+        "Microsoft.Kubernetes/connectedClusters/limitranges/read",
+        "Microsoft.Kubernetes/connectedClusters/namespaces/read",
+        "Microsoft.Kubernetes/connectedClusters/networking.k8s.io/ingresses/*",
+        "Microsoft.Kubernetes/connectedClusters/networking.k8s.io/networkpolicies/*",
+        "Microsoft.Kubernetes/connectedClusters/persistentvolumeclaims/*",
+        "Microsoft.Kubernetes/connectedClusters/pods/*",
+        "Microsoft.Kubernetes/connectedClusters/policy/poddisruptionbudgets/*",
+        "Microsoft.Kubernetes/connectedClusters/rbac.authorization.k8s.io/rolebindings/*",
+        "Microsoft.Kubernetes/connectedClusters/rbac.authorization.k8s.io/roles/*",
+        "Microsoft.Kubernetes/connectedClusters/replicationcontrollers/*",
+        "Microsoft.Kubernetes/connectedClusters/replicationcontrollers/*",
+        "Microsoft.Kubernetes/connectedClusters/resourcequotas/read",
+        "Microsoft.Kubernetes/connectedClusters/secrets/*",
+        "Microsoft.Kubernetes/connectedClusters/serviceaccounts/*",
+        "Microsoft.Kubernetes/connectedClusters/services/*"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Arc Kubernetes Admin",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+### <a name="azure-arc-kubernetes-cluster-admin"></a>Azure Arc Kubernetes Küme Yöneticisi
+
+Kümedeki tüm kaynakları yönetmenizi sağlar. [Daha fazla bilgi edinin](../azure-arc/kubernetes/azure-rbac.md)
+
+> [!div class="mx-tableFixed"]
+> | Eylemler | Açıklama |
+> | --- | --- |
+> | [Microsoft. Authorization](resource-provider-operations.md#microsoftauthorization)/*/Read | Rolleri ve rol atamalarını oku |
+> | [Microsoft. Insights](resource-provider-operations.md#microsoftinsights)/Alertrules/* | Klasik ölçüm uyarısı oluşturma ve yönetme |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Deployments/Write | Bir dağıtımı oluşturur veya güncelleştirir. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/operationresults/Read | Abonelik işlem sonuçlarını alın. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/Read | Aboneliklerin listesini alır. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/ResourceGroups/Read | Kaynak gruplarını alır veya listeler. |
+> | [Microsoft. support](resource-provider-operations.md#microsoftsupport)/* | Destek bileti oluşturma ve güncelleştirme |
+> | **NotActions** |  |
+> | *yok* |  |
+> | **Veri eylemleri** |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/* |  |
+> | **NotDataActions** |  |
+> | *yok* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Lets you manage all resources in the cluster.",
+  "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/8393591c-06b9-48a2-a542-1bd6b377f6a2",
+  "name": "8393591c-06b9-48a2-a542-1bd6b377f6a2",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Resources/deployments/write",
+        "Microsoft.Resources/subscriptions/operationresults/read",
+        "Microsoft.Resources/subscriptions/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Support/*"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.Kubernetes/connectedClusters/*"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Arc Kubernetes Cluster Admin",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+### <a name="azure-arc-kubernetes-viewer"></a>Azure Arc Kubernetes Görüntüleyici
+
+Gizli dizileri hariç küme/ad alanındaki tüm kaynakları görüntülemenize izin verir. [Daha fazla bilgi edinin](../azure-arc/kubernetes/azure-rbac.md)
+
+> [!div class="mx-tableFixed"]
+> | Eylemler | Açıklama |
+> | --- | --- |
+> | [Microsoft. Authorization](resource-provider-operations.md#microsoftauthorization)/*/Read | Rolleri ve rol atamalarını oku |
+> | [Microsoft. Insights](resource-provider-operations.md#microsoftinsights)/Alertrules/* | Klasik ölçüm uyarısı oluşturma ve yönetme |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Deployments/Write | Bir dağıtımı oluşturur veya güncelleştirir. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/operationresults/Read | Abonelik işlem sonuçlarını alın. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/Read | Aboneliklerin listesini alır. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/ResourceGroups/Read | Kaynak gruplarını alır veya listeler. |
+> | [Microsoft. support](resource-provider-operations.md#microsoftsupport)/* | Destek bileti oluşturma ve güncelleştirme |
+> | **NotActions** |  |
+> | *yok* |  |
+> | **Veri eylemleri** |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/controllerrevisions/Read | Controllerdüzeltmelerinizi okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Apps/daemonsets/Read | Daemonsets okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/Deployments/Read | Dağıtımları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/replicasets/Read | Replicasets 'i okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/statefulsets/Read | Statefulsets 'i okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/otomatik Scaling/horizontalpodadutoscalers/Read | Horizontalpodadutoscalers okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Batch/cronjobs/Read | Cronjobs okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Batch/Jobs/Read | İşleri okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/configmaps/Read | Configmaps 'u okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/endpoints/Read | Uç noktaları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Events.k8s.io/Events/Read | Olayları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Events/Read | Olayları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Extensions/daemonsets/Read | Daemonsets okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/Deployments/Read | Dağıtımları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/ingresses/Read | Gelen parolaları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/networkpolicies/Read | Networkpolicies okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/replicasets/Read | Replicasets 'i okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/limitranges/Read | Limitaralıkları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/namespaces/Read | Ad alanlarını okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Networking.k8s.io/ingresses/Read | Gelen parolaları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Networking.k8s.io/networkpolicies/Read | Networkpolicies okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/persistentvolumeclaims/Read | Persistentvolumeclaim okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/pods/Read | Pod 'leri okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Policy/poddisruptionbudgets/Read | Pod kesintiden oluşan bütçeleri okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/replicationcontrollers/Read | Replicationcontrollers okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/replicationcontrollers/Read | Replicationcontrollers okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/resourcequotas/Read | Resourcequotas okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/serviceaccounts/Read | Hizmet hesaplarını okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Services/Read | Hizmetleri okur |
+> | **NotDataActions** |  |
+> | *yok* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Lets you view all resources in cluster/namespace, except secrets.",
+  "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/63f0a09d-1495-4db4-a681-037d84835eb4",
+  "name": "63f0a09d-1495-4db4-a681-037d84835eb4",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Resources/deployments/write",
+        "Microsoft.Resources/subscriptions/operationresults/read",
+        "Microsoft.Resources/subscriptions/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Support/*"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.Kubernetes/connectedClusters/apps/controllerrevisions/read",
+        "Microsoft.Kubernetes/connectedClusters/apps/daemonsets/read",
+        "Microsoft.Kubernetes/connectedClusters/apps/deployments/read",
+        "Microsoft.Kubernetes/connectedClusters/apps/replicasets/read",
+        "Microsoft.Kubernetes/connectedClusters/apps/statefulsets/read",
+        "Microsoft.Kubernetes/connectedClusters/autoscaling/horizontalpodautoscalers/read",
+        "Microsoft.Kubernetes/connectedClusters/batch/cronjobs/read",
+        "Microsoft.Kubernetes/connectedClusters/batch/jobs/read",
+        "Microsoft.Kubernetes/connectedClusters/configmaps/read",
+        "Microsoft.Kubernetes/connectedClusters/endpoints/read",
+        "Microsoft.Kubernetes/connectedClusters/events.k8s.io/events/read",
+        "Microsoft.Kubernetes/connectedClusters/events/read",
+        "Microsoft.Kubernetes/connectedClusters/extensions/daemonsets/read",
+        "Microsoft.Kubernetes/connectedClusters/extensions/deployments/read",
+        "Microsoft.Kubernetes/connectedClusters/extensions/ingresses/read",
+        "Microsoft.Kubernetes/connectedClusters/extensions/networkpolicies/read",
+        "Microsoft.Kubernetes/connectedClusters/extensions/replicasets/read",
+        "Microsoft.Kubernetes/connectedClusters/limitranges/read",
+        "Microsoft.Kubernetes/connectedClusters/namespaces/read",
+        "Microsoft.Kubernetes/connectedClusters/networking.k8s.io/ingresses/read",
+        "Microsoft.Kubernetes/connectedClusters/networking.k8s.io/networkpolicies/read",
+        "Microsoft.Kubernetes/connectedClusters/persistentvolumeclaims/read",
+        "Microsoft.Kubernetes/connectedClusters/pods/read",
+        "Microsoft.Kubernetes/connectedClusters/policy/poddisruptionbudgets/read",
+        "Microsoft.Kubernetes/connectedClusters/replicationcontrollers/read",
+        "Microsoft.Kubernetes/connectedClusters/replicationcontrollers/read",
+        "Microsoft.Kubernetes/connectedClusters/resourcequotas/read",
+        "Microsoft.Kubernetes/connectedClusters/serviceaccounts/read",
+        "Microsoft.Kubernetes/connectedClusters/services/read"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Arc Kubernetes Viewer",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+### <a name="azure-arc-kubernetes-writer"></a>Azure Arc Kubernetes yazıcı
+
+Küme/ad alanı (küme) rolleri ve (küme) rolü bağlamaları dışındaki her şeyi güncelleştirmenizi sağlar. [Daha fazla bilgi edinin](../azure-arc/kubernetes/azure-rbac.md)
+
+> [!div class="mx-tableFixed"]
+> | Eylemler | Açıklama |
+> | --- | --- |
+> | [Microsoft. Authorization](resource-provider-operations.md#microsoftauthorization)/*/Read | Rolleri ve rol atamalarını oku |
+> | [Microsoft. Insights](resource-provider-operations.md#microsoftinsights)/Alertrules/* | Klasik ölçüm uyarısı oluşturma ve yönetme |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Deployments/Write | Bir dağıtımı oluşturur veya güncelleştirir. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/operationresults/Read | Abonelik işlem sonuçlarını alın. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/Read | Aboneliklerin listesini alır. |
+> | [Microsoft. resources](resource-provider-operations.md#microsoftresources)/Subscriptions/ResourceGroups/Read | Kaynak gruplarını alır veya listeler. |
+> | [Microsoft. support](resource-provider-operations.md#microsoftsupport)/* | Destek bileti oluşturma ve güncelleştirme |
+> | **NotActions** |  |
+> | *yok* |  |
+> | **Veri eylemleri** |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/controllerrevisions/Read | Controllerdüzeltmelerinizi okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Apps/daemonsets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/Deployments/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/replicasets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Apps/statefulsets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/otomatik Scaling/horizontalpodavutoscalers/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Batch/cronjobs/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Batch/Jobs/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/configmaps/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/endpoints/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Events.k8s.io/Events/Read | Olayları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Events/Read | Olayları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Extensions/daemonsets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/Deployments/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/ingresses/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/networkpolicies/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Extensions/replicasets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/limitranges/Read | Limitaralıkları okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/namespaces/Read | Ad alanlarını okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Networking.k8s.io/ingresses/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Networking.k8s.io/networkpolicies/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/persistentvolumeclaims/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/pods/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/connectedClusters/Policy/poddisruptionbudgets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/replicationcontrollers/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/replicationcontrollers/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/resourcequotas/Read | Resourcequotas okur |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Secrets/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/serviceaccounts/* |  |
+> | [Microsoft. Kubernetes](resource-provider-operations.md#microsoftkubernetes)/Connectedclusters/Services/* |  |
+> | **NotDataActions** |  |
+> | *yok* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Lets you update everything in cluster/namespace, except (cluster)roles and (cluster)role bindings.",
+  "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/5b999177-9696-4545-85c7-50de3797e5a1",
+  "name": "5b999177-9696-4545-85c7-50de3797e5a1",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Resources/deployments/write",
+        "Microsoft.Resources/subscriptions/operationresults/read",
+        "Microsoft.Resources/subscriptions/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Support/*"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.Kubernetes/connectedClusters/apps/controllerrevisions/read",
+        "Microsoft.Kubernetes/connectedClusters/apps/daemonsets/*",
+        "Microsoft.Kubernetes/connectedClusters/apps/deployments/*",
+        "Microsoft.Kubernetes/connectedClusters/apps/replicasets/*",
+        "Microsoft.Kubernetes/connectedClusters/apps/statefulsets/*",
+        "Microsoft.Kubernetes/connectedClusters/autoscaling/horizontalpodautoscalers/*",
+        "Microsoft.Kubernetes/connectedClusters/batch/cronjobs/*",
+        "Microsoft.Kubernetes/connectedClusters/batch/jobs/*",
+        "Microsoft.Kubernetes/connectedClusters/configmaps/*",
+        "Microsoft.Kubernetes/connectedClusters/endpoints/*",
+        "Microsoft.Kubernetes/connectedClusters/events.k8s.io/events/read",
+        "Microsoft.Kubernetes/connectedClusters/events/read",
+        "Microsoft.Kubernetes/connectedClusters/extensions/daemonsets/*",
+        "Microsoft.Kubernetes/connectedClusters/extensions/deployments/*",
+        "Microsoft.Kubernetes/connectedClusters/extensions/ingresses/*",
+        "Microsoft.Kubernetes/connectedClusters/extensions/networkpolicies/*",
+        "Microsoft.Kubernetes/connectedClusters/extensions/replicasets/*",
+        "Microsoft.Kubernetes/connectedClusters/limitranges/read",
+        "Microsoft.Kubernetes/connectedClusters/namespaces/read",
+        "Microsoft.Kubernetes/connectedClusters/networking.k8s.io/ingresses/*",
+        "Microsoft.Kubernetes/connectedClusters/networking.k8s.io/networkpolicies/*",
+        "Microsoft.Kubernetes/connectedClusters/persistentvolumeclaims/*",
+        "Microsoft.Kubernetes/connectedClusters/pods/*",
+        "Microsoft.Kubernetes/connectedClusters/policy/poddisruptionbudgets/*",
+        "Microsoft.Kubernetes/connectedClusters/replicationcontrollers/*",
+        "Microsoft.Kubernetes/connectedClusters/replicationcontrollers/*",
+        "Microsoft.Kubernetes/connectedClusters/resourcequotas/read",
+        "Microsoft.Kubernetes/connectedClusters/secrets/*",
+        "Microsoft.Kubernetes/connectedClusters/serviceaccounts/*",
+        "Microsoft.Kubernetes/connectedClusters/services/*"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Arc Kubernetes Writer",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
 ### <a name="azure-connected-machine-onboarding"></a>Azure bağlı makine ekleme
 
 , Azure bağlantılı makineler ekleyebilir. [Daha fazla bilgi edinin](../azure-arc/servers/onboard-service-principal.md)
@@ -9493,6 +10031,7 @@ Runbook 'un Işlerini oluşturabilmek için Runbook özelliklerini okuyun. [Daha
 > | --- | --- |
 > | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/, ines/Read | Tüm Azure Arc makinelerini okuyun |
 > | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/, ines/Write | Bir Azure Arc makinesi yazar |
+> | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/Privatelinkscopes/Read | Tüm Azure Arc privateLinkScopes 'ı okuyun |
 > | [Microsoft. GuestConfiguration](resource-provider-operations.md#microsoftguestconfiguration)/Guestconfigurationatamaments/Read | Konuk yapılandırma atamasını al. |
 > | **NotActions** |  |
 > | *yok* |  |
@@ -9514,6 +10053,7 @@ Runbook 'un Işlerini oluşturabilmek için Runbook özelliklerini okuyun. [Daha
       "actions": [
         "Microsoft.HybridCompute/machines/read",
         "Microsoft.HybridCompute/machines/write",
+        "Microsoft.HybridCompute/privateLinkScopes/read",
         "Microsoft.GuestConfiguration/guestConfigurationAssignments/read"
       ],
       "notActions": [],
@@ -9537,8 +10077,8 @@ Azure bağlı makinelerini okuyabilir, yazabilir, silebilir ve yeniden ekleyebil
 > | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/, ines/Read | Tüm Azure Arc makinelerini okuyun |
 > | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/, ines/Write | Bir Azure Arc makinesi yazar |
 > | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/, ines/Delete | Azure yay makinelerini siler |
-> | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/, ines/reconnect/Action |  |
 > | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/larines/Extensions/Write | Bir Azure Arc uzantısını yükleme veya güncelleştirme |
+> | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/Privatelinkscopes/* |  |
 > | [Microsoft. HybridCompute](resource-provider-operations.md#microsofthybridcompute)/*/Read |  |
 > | **NotActions** |  |
 > | *yok* |  |
@@ -9561,8 +10101,8 @@ Azure bağlı makinelerini okuyabilir, yazabilir, silebilir ve yeniden ekleyebil
         "Microsoft.HybridCompute/machines/read",
         "Microsoft.HybridCompute/machines/write",
         "Microsoft.HybridCompute/machines/delete",
-        "Microsoft.HybridCompute/machines/reconnect/action",
         "Microsoft.HybridCompute/machines/extensions/write",
+        "Microsoft.HybridCompute/privateLinkScopes/*",
         "Microsoft.HybridCompute/*/read"
       ],
       "notActions": [],
@@ -9721,7 +10261,7 @@ Varolan yayımlanmış şemaları atayabilir, ancak yeni şemaları oluşturamaz
 }
 ```
 
-### <a name="cost-management-contributor"></a>Maliyet yönetimi Katılımcısı
+### <a name="cost-management-contributor"></a>Maliyet Yönetimi Katkıda Bulunanı
 
 Maliyetleri görüntüleyebilir ve maliyet yapılandırmasını yönetebilir (örn. bütçeler, dışarı aktarmalar) [daha fazla bilgi edinin](../cost-management-billing/costs/understand-work-scopes.md)
 
@@ -10297,7 +10837,7 @@ Kaynak ilkelerine okuma erişimine ve kaynak bileşen ilkesi olaylarına yazma e
 }
 ```
 
-### <a name="quota-request-operator-role"></a>Kota Isteği operatörü rolü
+### <a name="quota-request-operator"></a>Kota Isteği operatörü
 
 Kota isteklerini okuyup oluşturun, kota isteği durumunu alın ve destek bileti oluşturun. [Daha fazla bilgi edinin](/rest/api/reserved-vm-instances/quotaapi)
 
@@ -10325,7 +10865,7 @@ Kota isteklerini okuyup oluşturun, kota isteği durumunu alın ve destek bileti
   "assignableScopes": [
     "/"
   ],
-  "description": "Role to read and create Quota Requests and get Quota Request Status.",
+  "description": "Read and create quota requests, get quota request status, and create support tickets.",
   "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/0e5f05e5-9ab9-446b-b98d-1e2157c94125",
   "name": "0e5f05e5-9ab9-446b-b98d-1e2157c94125",
   "permissions": [
@@ -10346,7 +10886,7 @@ Kota isteklerini okuyup oluşturun, kota isteği durumunu alın ve destek bileti
       "notDataActions": []
     }
   ],
-  "roleName": "Quota Request Operator Role",
+  "roleName": "Quota Request Operator",
   "roleType": "BuiltInRole",
   "type": "Microsoft.Authorization/roleDefinitions"
 }
@@ -11604,7 +12144,7 @@ Masaüstü Sanallaştırma çalışma alanının okuyucusu. [Daha fazla bilgi ed
 
 ### <a name="disk-backup-reader"></a>Disk yedekleme okuyucusu
 
-Disk yedeklemesi gerçekleştirmek için Yedekleme Kasası için izin sağlar. [Daha fazla bilgi edinin](../backup/disk-backup-faq.md)
+Disk yedeklemesi gerçekleştirmek için Yedekleme Kasası için izin sağlar. [Daha fazla bilgi edinin](../backup/disk-backup-faq.yml)
 
 > [!div class="mx-tableFixed"]
 > | Eylemler | Açıklama |
@@ -11859,6 +12399,6 @@ Hizmet hub 'ı operatörü, Service hub bağlayıcılarıyla ilgili tüm okuma, 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Kaynak sağlayıcısını hizmetle Eşleştir](../azure-resource-manager/management/azure-services-resource-providers.md)
+- [Azure portal kullanarak Azure rolleri atama](role-assignments-portal.md)
 - [Özel Azure rolleri](custom-roles.md)
 - [Azure Güvenlik Merkezi'nde İzinler](../security-center/security-center-permissions.md)

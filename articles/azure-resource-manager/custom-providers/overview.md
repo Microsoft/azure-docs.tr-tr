@@ -82,7 +82,7 @@ endpoint | *Yes* | İsteklerin yönlendirileceği uç nokta. Bu, yanıtın yanı
 
 Yukarıdaki örnek için Azure 'a eklenen API 'Ler:
 
-HttpMethod | Örnek URI | Açıklama
+HttpMethod | Örnek URI | Description
 ---|---|---
 PUT | /Subscriptions/{SubscriptionID}/ResourceGroups/{resourcegroupname}/<br>sağlayıcılar/Microsoft. CustomProviders/resourceProviders/{resourceProviderName}/<br>myCustomResources/{customResourceName}? api-Version = 2018-09 -01-Preview | Yeni bir kaynak oluşturmak için Azure REST API çağrısı.
 DELETE | /Subscriptions/{SubscriptionID}/ResourceGroups/{resourcegroupname}/<br>sağlayıcılar/Microsoft. CustomProviders/resourceProviders/{resourceProviderName}/<br>myCustomResources/{customResourceName}? api-Version = 2018-09 -01-Preview | Mevcut bir kaynağı silmek için Azure REST API çağrısı.
@@ -112,7 +112,7 @@ GET | /Subscriptions/{SubscriptionID}/ResourceGroups/{resourcegroupname}/<br>sa�
 
 Yukarıdaki örnek için Azure 'a eklenen API 'Ler:
 
-HttpMethod | Örnek URI | Açıklama
+HttpMethod | Örnek URI | Description
 ---|---|---
 POST | /Subscriptions/{SubscriptionID}/ResourceGroups/{resourcegroupname}/<br>sağlayıcılar/Microsoft. CustomProviders/resourceProviders/{resourceProviderName}/<br>myCustomAction? api-Version = 2018-09 -01-Preview | Eylemi etkinleştirmek için Azure REST API çağrısı.
 

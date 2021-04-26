@@ -9,12 +9,12 @@ ms.subservice: spark
 ms.date: 05/01/2020
 ms.author: luquinta
 ms.reviewer: jrasnick
-ms.openlocfilehash: 895d766cc1e70e6a001904770d6f3ef12b6945cd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8d045c1ec96bb7b31a710a28e30e3d428922b65e
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98018670"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378559"
 ---
 # <a name="use-net-for-apache-spark-with-azure-synapse-analytics"></a>Azure Synapse Analytics ile Apache Spark için .NET’i kullanma
 
@@ -29,19 +29,10 @@ Spark Batch iş tanımları veya etkileşimli Azure SYNAPSE Analytics Not defter
 [SYNAPSE Spark havuzları için Apache Spark iş tanımları oluşturmak](apache-spark-job-definitions.md)üzere Azure SYNAPSE Analytics 'i nasıl kullanacağınızı öğrenmek için öğreticiyi ziyaret edin. Uygulamanızı Azure SYNAPSE 'a göndermek üzere paketlenmemiş olarak ayarlarsanız aşağıdaki adımları izleyin.
 
 1. Uygulamanızı yayımlamak için aşağıdaki komutları çalıştırın. *MySparkApp* 'i uygulamanızın yoluyla değiştirdiğinizden emin olun.
-
-   **Windows 'da:**
-
-   ```dotnetcli
-   cd mySparkApp
-   dotnet publish -c Release -f netcoreapp3.1 -r win-x64
-   ```
    
-   **Linux 'ta:**
-
    ```dotnetcli
    cd mySparkApp
-   dotnet publish -c Release -f netcoreapp3.1 -r ubuntu.16.04-x64
+   dotnet publish -c Release -f netcoreapp3.1 -r ubuntu.18.04-x64
    ```
 
 2. Yayımlama klasörünün içeriği ( `publish.zip` Örneğin, 1. adım). Tüm derlemelerin ZIP dosyasının ilk katmanında olması ve ara klasör katmanı olmaması gerekir. Bu, sıkıştırmayı kaldırdığınızda `publish.zip` tüm derlemelerin geçerli çalışma dizininize ayıklandığını gösterir.

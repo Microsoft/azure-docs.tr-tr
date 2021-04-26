@@ -11,12 +11,12 @@ author: msmimart
 manager: celestedg
 ms.reviewer: elisolMS
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 74bfa4987f584bbd3490bc5f4f187dee5bc1bd87
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 22a5388d15b18180539eb95990a29f7ddf4f1951
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101646291"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739557"
 ---
 # <a name="conditional-access-for-b2b-collaboration-users"></a>B2B işbirliği kullanıcıları için koşullu erişim
 
@@ -67,7 +67,7 @@ Konuk kullanıcının kuruluşunda Multi-Factor Authentication özellikleri olsa
 6. Fabrikam, Azure AD Multi-Factor Authentication destekleyen, yeterli Premium Azure AD lisanslarına sahip olmalıdır. Contoso kullanıcısı bundan sonra Fabrikam ' dan bu lisansı kullanır. B2B lisanslaması hakkında bilgi için bkz. [Azure AD dış kimlikleri için faturalandırma modeli](./external-identities-pricing.md) .
 
 >[!NOTE]
->Azure AD Multi-Factor Authentication, öngörülebilirlik sağlamak için kaynak kiralamanın üzerinde yapılır.
+>Azure AD Multi-Factor Authentication, öngörülebilirlik sağlamak için kaynak kiralamanın üzerinde yapılır. Konuk Kullanıcı oturum açtığında, arka planda görünen kaynak kiracı oturum açma sayfasını ve ön planda kendi giriş kiracı oturum açma sayfasını ve Şirket logosunu görür.
 
 ### <a name="set-up-azure-ad-multi-factor-authentication-for-b2b-users"></a>B2B kullanıcıları için Azure AD Multi-Factor Authentication ayarlama
 

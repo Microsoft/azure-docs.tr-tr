@@ -10,12 +10,12 @@ services: iot-central
 ms.custom:
 - mvc
 - device-developer
-ms.openlocfilehash: 4423eea6c35ad44d55ad17f5703a95c6273422b8
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ebd2759d4dfb8ee79130f9b4876eba8d45226d04
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104585868"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718800"
 ---
 # <a name="iot-central-device-development-guide"></a>IoT Central cihaz geliştirme Kılavuzu
 
@@ -125,7 +125,7 @@ IoT Tak ve Kullan kuralları hakkında daha fazla bilgi edinmek için bkz. [ıot
 
 ### <a name="device-sdks"></a>Cihaz SDK 'Ları
 
-Cihazınızın davranışını uygulamak için [Azure IoT cihaz SDK](#languages-and-sdks) 'larından birini kullanın. Kod şu şekilde olmalıdır:
+Cihazınızın davranışını uygulamak için [Azure IoT cihaz SDK](../../iot-hub/iot-hub-devguide-sdks.md#azure-iot-hub-device-sdks) 'larından birini kullanın. Kod şu şekilde olmalıdır:
 
 - Cihazı DPS 'e kaydedin ve IoT Central uygulamanızdaki iç IoT Hub 'ına bağlanmak için DPS içindeki bilgileri kullanın.
 - Cihazın uyguladığı modelin DTMı 'sini duyurur.

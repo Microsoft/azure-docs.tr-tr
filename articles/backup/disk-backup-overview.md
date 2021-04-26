@@ -2,13 +2,13 @@
 title: Azure disk yedekleme 'ye Genel Bakış
 description: Azure disk yedekleme çözümü hakkında bilgi edinin.
 ms.topic: conceptual
-ms.date: 01/07/2021
-ms.openlocfilehash: 9449fdc57909cb143d381ae074913c79d24c8893
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.date: 04/09/2021
+ms.openlocfilehash: 42f37c1f500be719e0bd79bad41226ab3ab2d911
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107304"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107285148"
 ---
 # <a name="overview-of-azure-disk-backup"></a>Azure disk yedekleme 'ye Genel Bakış
 
@@ -31,20 +31,20 @@ Azure disk yedekleme, [Artımlı anlık görüntü](../virtual-machines/disks-in
 
 Azure disk yedekleme çözümü aşağıdaki senaryolarda kullanışlıdır:
 
-- Uygulama quiescent olmadan gün başına sık sık yedeklemeler gerekir
-- Bir küme senaryosunda çalışan uygulamalar: hem Windows Server yük devretme kümesi hem de Linux kümeleri paylaşılan disklere yazıyor
-- Uygulama üzerinde güvenlik veya performans sorunları nedeniyle aracısız yedekleme için özel gereksinim
+- Uygulama quiescent olmadan gün başına sık sık yedeklemeler olması gerekir.
+- Bir küme senaryosunda çalışan uygulamalar: hem Windows Server yük devretme kümesi hem de Linux kümeleri paylaşılan disklere yazıyor.
+- Uygulama üzerinde güvenlik veya performans sorunları nedeniyle aracısız yedekleme için özel gereksinim.
 - İş kolu uygulamaları Birim Gölge Kopyası Hizmeti (VSS) desteklemediğinden, sanal makinenin uygulamayla tutarlı yedeklemesi uygulanabilir değildir.
 
 Şu durumlarda Azure disk yedeklemesi 'ni göz önünde bulundurun:
 
-- görev açısından kritik bir uygulama, kurtarma noktası hedefini karşılamak için günde birden çok yedekleme gerektiren bir Azure sanal makinesinde çalışıyor, ancak üretim ortamını veya uygulama performansını etkilemeden
-- Kuruluşunuz veya sektör Yönetmeliği, güvenlik sorunları nedeniyle aracıları yüklemeyi kısıtlıyor
-- uygulamayla tutarlı yedekleme sağlamak için özel ön ve son betik yürütme ve Linux sanal makinelerinde dondurma ve çözme işlemini çağırma, üretim iş yükü kullanılabilirliği üzerinde vadesi dolan ek yükü
-- Azure Kubernetes Service (AKS kümesi) üzerinde çalışan Kapsayıcılı uygulamalar, kalıcı depolama olarak yönetilen diskleri kullanıyor. Bugün yönetilmesi zor olan otomasyon betikleri aracılığıyla yönetilen diski yedeklemeniz gerekir.
-- yönetilen bir disk, bir dosya paylaşma olarak kullanılan veya veritabanı yedekleme dosyalarını içeren kritik iş verilerini tutuyor ve Azure VM yedeklemesine yatırım yaparak yedekleme maliyetini iyileştirmek istiyorsunuz
-- Çok sayıda Linux ve Windows tek disksiz sanal makineniz (yani, yalnızca bir işletim sistemi diskine ve veri diskine bağlı olmayan bir sanal makine), Web sunucusu veya eyalet-daha az makineler barındırmakta ya da uygulama yapılandırma ayarları ile bir hazırlama ortamı görevi görür ve işletim sistemi diskini korumak için uygun maliyetli bir yedekleme çözümüne ihtiyacınız vardır. Örneğin, sanal makineyi yükseltmeden veya düzeltme eki uygulamadan önce hızlı bir isteğe bağlı yedekleme tetiklenmesi için
-- bir sanal makine, Azure VM yedekleme çözümü tarafından desteklenmeyen bir işletim sistemi yapılandırması çalıştırıyor (örneğin, Windows 2008 32-bit sunucu)
+- Görev açısından kritik bir uygulama, kurtarma noktası hedefini karşılamak için günde birden çok yedekleme talep eden, ancak üretim ortamını veya uygulama performansını etkilemeden bir Azure sanal makinesinde çalışmaktadır.
+- Kuruluşunuz veya sektör Yönetmeliği, güvenlik sorunları nedeniyle aracıları yüklemeyi kısıtlıyor.
+- Uygulamayla tutarlı yedekleme sağlamak için özel ön ve son betik yürütme ve Linux sanal makinelerinde dondurma ve çözme işlemini çağırma, üretim iş yükü kullanılabilirliği üzerinde vadesi dolan yükü ortadan kaldırır.
+- Azure Kubernetes Service (AKS kümesi) üzerinde çalışan Kapsayıcılı uygulamalar, kalıcı depolama olarak yönetilen diskleri kullanıyor. Günümüzde, yönetilen diski, yönetilmesi zor olan otomasyon betikleri aracılığıyla yedeklemeniz gerekir.
+- Yönetilen bir disk, dosya paylaşma olarak kullanılan veya veritabanı yedekleme dosyalarını içeren önemli iş verilerini barındırır ve Azure VM yedeklemesine yatırım yaparak yedekleme maliyetini iyileştirmek istiyorsunuz.
+- Web sunucusu, eyalet-daha az makineler barındıran veya uygulama yapılandırma ayarları ile hazırlama ortamı olarak hizmet veren çok sayıda Linux ve Windows tek disk sanal makineniz (yani yalnızca bir işletim sistemi diski olan bir sanal makine veya bağlı veri diski) vardır ve işletim sistemi diskini korumak için uygun maliyetli bir yedekleme çözümüne ihtiyacınız vardır. Örneğin, sanal makineyi yükseltmeden veya düzeltme eki uygulamadan önce hızlı bir isteğe bağlı yedeklemeyi tetiklemeniz gerekir.
+- Bir sanal makine, Azure VM yedekleme çözümü tarafından desteklenmeyen bir işletim sistemi yapılandırması çalıştırıyor (örneğin, Windows 2008 32-bit sunucu).
 
 ## <a name="how-the-backup-and-restore-process-works"></a>Yedekleme ve geri yükleme işleminin nasıl çalıştığı
 
@@ -54,7 +54,7 @@ Azure disk yedekleme çözümü aşağıdaki senaryolarda kullanışlıdır:
 
 - Yedeklemeyi yapılandırmak için yedekleme kasasına gidin, bir yedekleme ilkesi atayın, yedeklenmesi gereken yönetilen diski seçin ve anlık görüntülerin depolanacağı ve yönetildiği bir kaynak grubu sağlayın. Azure Backup, yedekleme sıklığına göre diskin artımlı bir anlık görüntüsünü oluşturan zamanlanmış yedekleme işlerini otomatik olarak tetikler. Daha eski anlık görüntüler, yedekleme ilkesi tarafından belirtilen saklama süresine göre silinir.
 
-- Azure Backup yönetilen diskin [Artımlı anlık görüntülerini](../virtual-machines/disks-incremental-snapshots.md#restrictions) kullanır. Artımlı anlık görüntüler, son anlık görüntüden itibaren diskte delta değişiklikleri için faturalandırılan yönetilen disklerin uygun maliyetli, zaman içinde bir yedeklemesinden oluşur. Bunlar her zaman, ana disklerin depolama türünden bağımsız olarak standart HDD depolaması olan en düşük maliyetli depolama alanı üzerinde depolanır. Diskin ilk anlık görüntüsü, diskin kullanılan boyutunu kaplayacaktır ve son anlık görüntüden bu yana arka arkaya Artımlı anlık görüntüler depolama Delta değişikliklerini diskte saklar.
+- Azure Backup yönetilen diskin [Artımlı anlık görüntülerini](../virtual-machines/disks-incremental-snapshots.md#restrictions) kullanır. Artımlı anlık görüntüler, son anlık görüntüden itibaren diskte delta değişiklikleri için faturalandırılan yönetilen disklerin uygun maliyetli, zaman içinde bir yedeklemesinden oluşur. Bunlar her zaman, ana disklerin depolama türü ne olursa olsun standart HDD depolamada en düşük maliyetli depolama alanı üzerinde depolanır. Diskin ilk anlık görüntüsü, diskin kullanılan boyutunu kaplayacaktır ve son anlık görüntüden bu yana arka arkaya Artımlı anlık görüntüler depolama Delta değişikliklerini diskte saklar.
 
 - Yönetilen bir diskin yedeklemesini yapılandırdıktan sonra, yedekleme kasasında bir yedekleme örneği oluşturulur. Yedekleme örneğini kullanarak, yedekleme işlemlerinin sistem durumunu bulabilir, isteğe bağlı yedeklemeleri tetikleyebilir ve geri yükleme işlemleri yapabilirsiniz. Ayrıca, tek bir cam görünümü bölmesi sağlayan yedekleme merkezi 'ni kullanarak birden çok kasada ve yedekleme örneklerinde yedeklemelerin sistem durumunu görüntüleyebilirsiniz.
 
@@ -62,12 +62,12 @@ Azure disk yedekleme çözümü aşağıdaki senaryolarda kullanışlıdır:
 
 - Yedekleme Kasası, diğer Azure kaynaklarına erişmek için yönetilen kimlik kullanır. Yönetilen bir diskin yedeklemesini yapılandırmak ve geçmiş yedeklemeden geri yüklemek için, yedekleme kasasının yönetilen kimliği, kaynak diskte bir izin kümesi, anlık görüntülerin oluşturulduğu ve yönetildiği anlık görüntü kaynak grubu ve yedeklemeyi geri yüklemek istediğiniz hedef kaynak grubu gerektirir. Azure rol tabanlı erişim denetimi (Azure RBAC) kullanarak yönetilen kimliğe izin verebilirsiniz. Yönetilen kimlik, yalnızca Azure kaynaklarıyla kullanılabilecek özel bir türün hizmet sorumlusundan oluşur. [Yönetilen kimlikler](../active-directory/managed-identities-azure-resources/overview.md)hakkında daha fazla bilgi edinin.
 
-- Şu anda Azure disk yedekleme, yönetilen disklerin işletimsel yedeklemesini destekler ve yedeklemeleri Yedekleme Kasası depolamasına kopyalamaz. Desteklenen ve desteklenmeyen senaryoların ve bölge kullanılabilirliğinin ayrıntılı bir listesi için [destek matrisine](disk-backup-support-matrix.md)bakın.
+- Şu anda Azure disk yedekleme, yönetilen disklerin işletimsel yedeklemesini destekler ve yedeklemeleri Yedekleme Kasası depolamasına kopyalamaz. Desteklenen ve desteklenmeyen senaryoların ve bölge kullanılabilirliğinin ayrıntılı bir listesi için [destek matrisine](disk-backup-support-matrix.md) bakın.
 
 ## <a name="pricing"></a>Fiyatlandırma
 
-Azure Backup, Azure disklerini korumak için bir anlık görüntü yaşam döngüsü yönetimi çözümü sunar. Azure Backup tarafından oluşturulan disk anlık görüntüleri, Azure aboneliğinizdeki kaynak grubunda depolanır ve **anlık görüntü depolama** ücretleri uygulanır. Anlık görüntü fiyatlandırması hakkında daha fazla bilgi için [yönetilen disk fiyatlandırmasını](https://azure.microsoft.com/pricing/details/managed-disks/) ziyaret edebilirsiniz. Anlık görüntüler yedekleme kasasına kopyalanmadığından, Azure Backup **korunan bir örnek** ücreti ödemez ve **yedekleme depolama** maliyeti uygulanmaz. Ayrıca, artımlı anlık görüntüler son anlık görüntüden sonra Delta değişikliklerini kaplar ve üst yönetilen disklerin depolama türünden bağımsız olarak her zaman standart depolamada depolanır ve standart depolama fiyatlandırmasına göre ücretlendirilir. Bu, Azure disk yedeklemesini uygun maliyetli bir çözüm yapar.
+Azure Backup, Azure disklerini korumak için bir anlık görüntü yaşam döngüsü yönetimi çözümü sunar. Azure Backup tarafından oluşturulan disk anlık görüntüleri, Azure aboneliğinizdeki kaynak grubunda depolanır ve **anlık görüntü depolama** ücretleri uygulanır. Anlık görüntü fiyatlandırması hakkında daha fazla bilgi için [yönetilen disk fiyatlandırmasını](https://azure.microsoft.com/pricing/details/managed-disks/) ziyaret edebilirsiniz.<br></br>Anlık görüntüler yedekleme kasasına kopyalanmadığından, Azure Backup **korunan bir örnek** ücreti ödemez ve **yedekleme depolama** maliyeti uygulanmaz. Ayrıca, artımlı anlık görüntüler, Delta değişikliklerini son anlık görüntü olarak kaplar ve ana yönetilen disklerin depolama türünden bağımsız olarak her zaman standart depolamada depolanır ve standart depolama fiyatlandırmasına göre ücretlendirilir. Bu, Azure disk yedeklemesini uygun maliyetli bir çözüm yapar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Disk Yedekleme destek matrisi](disk-backup-support-matrix.md)
+[Azure Disk Yedekleme destek matrisi](disk-backup-support-matrix.md)

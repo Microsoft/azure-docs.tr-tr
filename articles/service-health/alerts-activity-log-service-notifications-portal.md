@@ -4,10 +4,10 @@ description: Azure portal kullanarak hizmet durumu bildirimlerine yönelik etkin
 ms.topic: conceptual
 ms.date: 06/27/2019
 ms.openlocfilehash: 48126d923cb0baa33058c6fd55e48f31d793fade
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100570177"
 ---
 # <a name="create-activity-log-alerts-on-service-notifications-using-the-azure-portal"></a>Azure portal kullanarak hizmet bildirimlerinde etkinlik günlüğü uyarıları oluşturma

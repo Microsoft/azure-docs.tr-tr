@@ -9,12 +9,12 @@ ms.date: 03/03/2021
 ms.author: alkohli
 ms.subservice: common
 ms.custom: devx-track-azurepowershell, devx-track-azurecli, contperf-fy21q3
-ms.openlocfilehash: b62c3c4be4fdffd9f509b86d248cd028518ae89a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9c13ffc597349cdd2b304889d142ca7c2f89c713
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102181951"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861544"
 ---
 # <a name="use-azure-importexport-service-to-import-data-to-azure-files"></a>Azure Dosyaları'na veri aktarmak için Azure İçeri/Dışarı Aktarma hizmetini kullanma
 
@@ -183,7 +183,7 @@ Azure CLı 'de bir içeri aktarma işi oluşturmak için aşağıdaki adımları
 
 ### <a name="create-a-job"></a>Bir iş oluşturma
 
-1. [Az Import-Export](/cli/azure/ext/import-export/import-export) uzantısını eklemek için [az Extension Add](/cli/azure/extension#az_extension_add) komutunu kullanın:
+1. [Az Import-Export](/cli/azure/import-export) uzantısını eklemek için [az Extension Add](/cli/azure/extension#az_extension_add) komutunu kullanın:
 
     ```azurecli
     az extension add --name import-export
@@ -201,19 +201,19 @@ Azure CLı 'de bir içeri aktarma işi oluşturmak için aşağıdaki adımları
     az storage account create -resource-group myierg -name myssdocsstorage --https-only
     ```
 
-1. Diskleri sevk etmek için kullanabileceğiniz konumların bir listesini almak için [az Import-Export location List](/cli/azure/ext/import-export/import-export/location#ext_import_export_az_import_export_location_list) komutunu kullanın:
+1. Diskleri sevk etmek için kullanabileceğiniz konumların bir listesini almak için [az Import-Export location List](/cli/azure/import-export/location#az_import_export_location_list) komutunu kullanın:
 
     ```azurecli
     az import-export location list
     ```
 
-1. Bölgenize ait konumları almak için [az Import-Export konumunu göster](/cli/azure/ext/import-export/import-export/location#ext_import_export_az_import_export_location_show) komutunu kullanın:
+1. Bölgenize ait konumları almak için [az Import-Export konumunu göster](/cli/azure/import-export/location#az_import_export_location_show) komutunu kullanın:
 
     ```azurecli
     az import-export location show --location "West US"
     ```
 
-1. İçeri aktarma işi oluşturmak için aşağıdaki [az Import-Export Create](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_create) komutunu çalıştırın:
+1. İçeri aktarma işi oluşturmak için aşağıdaki [az Import-Export Create](/cli/azure/import-export#az_import_export_create) komutunu çalıştırın:
 
     ```azurecli
     az import-export create \
@@ -241,13 +241,13 @@ Azure CLı 'de bir içeri aktarma işi oluşturmak için aşağıdaki adımları
    > Tek bir kullanıcı için bir e-posta adresi belirtmek yerine, bir grup e-postası sağlayın. Bu, bir yönetici ayrılsa bile bildirimleri almanızı sağlar.
 
 
-1. Myierg kaynak grubu için tüm işleri görmek üzere [az Import-Export List](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_list) komutunu kullanın:
+1. Myierg kaynak grubu için tüm işleri görmek üzere [az Import-Export List](/cli/azure/import-export#az_import_export_list) komutunu kullanın:
 
     ```azurecli
     az import-export list --resource-group myierg
     ```
 
-1. İşinizi güncelleştirmek veya işinizi iptal etmek için [az Import-Export Update](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_update) komutunu çalıştırın:
+1. İşinizi güncelleştirmek veya işinizi iptal etmek için [az Import-Export Update](/cli/azure/import-export#az_import_export_update) komutunu çalıştırın:
 
     ```azurecli
     az import-export update --resource-group myierg --name MyIEjob1 --cancel-requested true

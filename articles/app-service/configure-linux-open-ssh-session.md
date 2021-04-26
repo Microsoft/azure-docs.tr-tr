@@ -7,13 +7,13 @@ ms.assetid: 66f9988f-8ffa-414a-9137-3a9b15a5573c
 ms.topic: article
 ms.date: 02/23/2021
 ms.author: msangapu
-ms.custom: seodec18
-ms.openlocfilehash: 8e9dd76b60d05b9fa5e3a4aaf7ccc6663f4a969b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 3610c4a571d73631ed39d416c72d0d6004dd170d
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101709045"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107871768"
 ---
 # <a name="open-an-ssh-session-to-a-linux-container-in-azure-app-service"></a>Azure App Service bir Linux kapsayıcısına SSH oturumu açın
 

@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 03/18/2021
 ms.topic: conceptual
-ms.openlocfilehash: c46a8753c87e981d9e3d6ecdd698bbbe6cba9894
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 338fb56c4af5c24b7b746ffd6508c2fe7d52b131
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104775791"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830205"
 ---
 # <a name="start-a-runbook-from-a-webhook"></a>Web kancasından runbook başlatma
 
@@ -120,7 +121,7 @@ http://<Webhook Server>/token?=<Token Value>
 
 İstemci, istekten aşağıdaki dönüş kodlarından birini alır `POST` .
 
-| Kod | Metin | Açıklama |
+| Kod | Metin | Description |
 |:--- |:--- |:--- |
 | 202 |Kabul edildi |İstek kabul edildi ve Runbook başarıyla kuyruğa alındı. |
 | 400 |Hatalı İstek |İstek aşağıdaki nedenlerden biri için kabul edilmedi: <ul> <li>Web kancası süresi doldu.</li> <li>Web kancası devre dışı bırakıldı.</li> <li>URL 'deki belirteç geçersiz.</li>  </ul> |

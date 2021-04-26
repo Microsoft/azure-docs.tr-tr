@@ -2,20 +2,20 @@
 title: Azure Active Directory uygulamalar için parola tabanlı çoklu oturum açmayı (SSO) anlayın
 description: Azure Active Directory uygulamalar için parola tabanlı çoklu oturum açmayı (SSO) anlayın
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: conceptual
 ms.date: 07/29/2020
-ms.author: kenwith
-ms.openlocfilehash: bac04bd70469d7b9c4d9485b6a87fd7133967154
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.author: iangithinji
+ms.openlocfilehash: ffa517f068dbc13f2734630216466373d9014ae6
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99255314"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374565"
 ---
 # <a name="understand-password-based-single-sign-on"></a>Parola tabanlı çoklu oturum açmayı anlama
 

@@ -10,12 +10,12 @@ ms.date: 03/02/2021
 ms.author: jovanpop
 ms.reviewer: jrasnick
 ms.custom: cosmos-db
-ms.openlocfilehash: 10262b168b91370956c9559ba688c72213ba7618
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 64a112fd29ee9e3fbb82d9b54322415569b3ff85
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104871002"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107209545"
 ---
 # <a name="query-azure-cosmos-db-data-with-a-serverless-sql-pool-in-azure-synapse-link"></a>Azure SYNAPSE link 'te sunucusuz SQL havuzu ile Azure Cosmos DB verileri sorgulama
 
@@ -33,22 +33,31 @@ Sunucusuz SQL havuzu, işlevi kullanarak analitik depolamayı Azure Cosmos DB so
 
 ### <a name="openrowset-with-key"></a>[Anahtarla OPENROWSET](#tab/openrowset-key)
 
-Azure Cosmos DB analitik depodaki verileri sorgulamayı ve çözümlemeyi desteklemek için, sunucusuz bir SQL havuzu aşağıdaki `OPENROWSET` sözdizimini kullanır:
+Azure Cosmos DB analitik depodaki verileri sorgulamayı ve çözümlemeyi desteklemek için sunucusuz bir SQL havuzu kullanılır. Sunucusuz SQL havuzu `OPENROWSET` SQL sözdizimini kullanır, bu nedenle öncelikle Azure Cosmos DB Bağlantı dizenizi bu biçime dönüştürmeniz gerekir:
 
 ```sql
 OPENROWSET( 
        'CosmosDB',
-       '<Azure Cosmos DB connection string>',
+       '<SQL connection string for Azure Cosmos DB>',
        <Container name>
     )  [ < with clause > ] AS alias
 ```
 
-Azure Cosmos DB bağlantı dizesi, işlev için Azure Cosmos DB hesap adı, veritabanı adı, veritabanı hesabı ana anahtarı ve isteğe bağlı bir bölge adı belirtir `OPENROWSET` .
+Azure Cosmos DB için SQL bağlantı dizesi Azure Cosmos DB hesap adı, veritabanı adı, veritabanı hesabı ana anahtarı ve işleve isteğe bağlı bir bölge adı belirtir `OPENROWSET` . Bu bilgilerden bazıları standart Azure Cosmos DB bağlantı dizesinden alınabilir.
 
-Bağlantı dizesi aşağıdaki biçimdedir:
+Standart Azure Cosmos DB bağlantı dizesi biçiminden dönüştürme:
+
+```
+AccountEndpoint=https://<database account name>.documents.azure.com:443/;AccountKey=<database account master key>;
+```
+
+SQL bağlantı dizesi aşağıdaki biçimdedir:
+
 ```sql
 'account=<database account name>;database=<database name>;region=<region name>;key=<database account master key>'
 ```
+
+Bölge isteğe bağlıdır. Atlanırsa, kapsayıcının birincil bölgesi kullanılır.
 
 Azure Cosmos DB kapsayıcı adı, sözdiziminde tırnak işareti olmadan belirtilir `OPENROWSET` . Kapsayıcı adında özel karakterler varsa (örneğin, bir tire (-) varsa, ad sözdiziminde köşeli ayraç () içine sarılanmış olmalıdır `[]` `OPENROWSET` .
 
@@ -59,13 +68,14 @@ Azure Cosmos DB kapsayıcı adı, sözdiziminde tırnak işareti olmadan belirti
 ```sql
 OPENROWSET( 
        PROVIDER = 'CosmosDB',
-       CONNECTION = '<Azure Cosmos DB connection string without account key>',
+       CONNECTION = '<SQL connection string for Azure Cosmos DB without account key>',
        OBJECT = '<Container name>',
        [ CREDENTIAL | SERVER_CREDENTIAL ] = '<credential name>'
     )  [ < with clause > ] AS alias
 ```
 
-Azure Cosmos DB bağlantı dizesi bu durumda anahtar içermiyor. Bağlantı dizesi aşağıdaki biçimdedir:
+Azure Cosmos DB için SQL bağlantı dizesi bu durumda bir anahtar içermiyor. Bağlantı dizesi aşağıdaki biçimdedir:
+
 ```sql
 'account=<database account name>;database=<database name>;region=<region name>'
 ```
@@ -165,6 +175,7 @@ Aşağıdaki yapıyla [ECDC COVıD veri kümesinden](https://azure.microsoft.com
 Azure Cosmos DB içindeki bu düz JSON belgeleri, SYNAPSE SQL 'de bir dizi satır ve sütun olarak gösterilebilir. `OPENROWSET`İşlevi, okumak istediğiniz özelliklerin bir alt kümesini ve yan tümcesindeki tam sütun türlerini belirtmenize olanak sağlar `WITH` :
 
 ### <a name="openrowset-with-key"></a>[Anahtarla OPENROWSET](#tab/openrowset-key)
+
 ```sql
 SELECT TOP 10 *
 FROM OPENROWSET(
@@ -173,7 +184,9 @@ FROM OPENROWSET(
        Ecdc
     ) with ( date_rep varchar(20), cases bigint, geo_id varchar(6) ) as rows
 ```
+
 ### <a name="openrowset-with-credential"></a>[Kimlik bilgisiyle OPENROWSET](#tab/openrowset-credential)
+
 ```sql
 /*  Setup - create server-level or database scoped credential with Azure Cosmos DB account key:
     CREATE CREDENTIAL MyCosmosDbAccountCredential
@@ -186,7 +199,9 @@ FROM OPENROWSET(
       OBJECT = 'Ecdc',
       SERVER_CREDENTIAL = 'MyCosmosDbAccountCredential'
     ) with ( date_rep varchar(20), cases bigint, geo_id varchar(6) ) as rows
+   
 ```
+
 ---
 Bu sorgunun sonucu aşağıdaki tablo gibi görünebilir:
 
@@ -256,7 +271,7 @@ WITH (  paper_id    varchar(8000),
 Bu sorgunun sonucu aşağıdaki tablo gibi görünebilir:
 
 | paper_id | başlık | meta veriler | düzenliyor |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | bb11206963e831f... | Tamamlayıcı bilgiler ekonomik-epidemi... | `{"title":"Supplementary Informati…` | `[{"first":"Julien","last":"Mélade","suffix":"","af…`| 
 | bb1206963e831f1... | Iconyascent sera 'nın Immune-E kullanımı... | `{"title":"The Use of Convalescent…` | `[{"first":"Antonio","last":"Lavazza","suffix":"", …` |
 | bb378eca9aac649... | Tylosema esculentum (marama) tuber ve B... | `{"title":"Tylosema esculentum (Ma…` | `[{"first":"Walter","last":"Chingwaru","suffix":"",…` | 

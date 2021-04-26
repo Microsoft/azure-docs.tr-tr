@@ -57,6 +57,12 @@
       href: ./export-delete-data.md
     - name: Uygulamanızı 3.0 API’sine güncelleştirin
       href: ./update-application-to-3.0-sdk.md
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/custom-vision-service/context/context
+        - name: Müşteri tarafından yönetilen anahtarları kullan
+          href: encrypt-data-at-rest.md
 - name: Başvuru
   items:
     - name: Özel Görüntü Eğitim API’si
@@ -81,6 +87,12 @@
           href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.1/customvision/prediction'
 - name: Kaynaklar
   items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/custom-vision-service/context/context
     - name: Örnekler
@@ -89,11 +101,5 @@
       href: limits-and-quotas.md
     - name: Azure yol haritası
       href: 'https://azure.microsoft.com/updates/?product=cognitive-services'
-    - name: Bölgesel kullanılabilirlik
-      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
-    - name: Şifreleme
-      href: encrypt-data-at-rest.md
     - name: Sürüm Notları
       href: release-notes.md

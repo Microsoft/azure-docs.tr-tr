@@ -126,6 +126,8 @@
       items:
         - name: Özel DNS bölgelerini ve kayıtlarını koruma
           href: dns-protect-private-zones-recordsets.md
+        - name: DNS bölge dosyasını içeri ve dışarı aktarma
+          href: private-dns-import-export.md
     - name: Sorun giderme
       items:
         - name: Sorun giderme kılavuzu

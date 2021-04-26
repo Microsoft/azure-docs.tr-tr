@@ -10,12 +10,12 @@ ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: cae82072785838d410453b2eb83685905b0ba04e
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 1d0644b9ec9009fe5d1db7701834cb9788f86ab0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102553791"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790176"
 ---
 # <a name="clone-a-managed-image-to-an-image-version-using-the-azure-cli"></a>Azure CLı kullanarak bir görüntü sürümüne yönetilen görüntü kopyalama
 Paylaşılan görüntü galerisine kopyalamak istediğiniz mevcut bir yönetilen görüntünüz varsa, doğrudan yönetilen görüntüden paylaşılan bir görüntü Galerisi görüntüsü oluşturabilirsiniz. Yeni görüntünüzü sınadıktan sonra, kaynak yönetilen görüntüyü silebilirsiniz. Ayrıca, [PowerShell](image-version-managed-image-powershell.md)kullanarak yönetilen bir görüntüden paylaşılan görüntü galerisine geçiş yapabilirsiniz.
@@ -43,7 +43,7 @@ Görüntü tanımı adları büyük veya küçük harflerden, rakamlardan, nokta
 
 Bir görüntü tanımı için belirtebileceğiniz değerler hakkında daha fazla bilgi için bkz. [görüntü tanımları](./shared-image-galleries.md#image-definitions).
 
-Galeride [az Sig Image-Definition Create](/cli/azure/sig/image-definition#az-sig-image-definition-create)kullanarak bir görüntü tanımı oluşturun.
+Galeride [az Sig Image-Definition Create](/cli/azure/sig/image-definition#az_sig_image_definition_create)kullanarak bir görüntü tanımı oluşturun.
 
 Bu örnekte, görüntü tanımı *Myımagedefinition* olarak adlandırılır ve [Genelleştirilmiş](./shared-image-galleries.md#generalized-and-specialized-images) bir Linux işletim sistemi görüntüsü içindir. Windows işletim sistemi kullanan görüntülerin tanımını oluşturmak için kullanın `--os-type Windows` . 
 
@@ -65,7 +65,7 @@ az sig image-definition create \
 
 ## <a name="create-the-image-version"></a>Görüntü sürümü oluşturma
 
-[Az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az-sig-image-version-create)kullanarak sürümler oluşturun. Görüntü sürümü oluşturmak için taban çizgisi olarak kullanılacak yönetilen görüntünün KIMLIĞINI geçirmeniz gerekir. Görüntülerinizin kimliklerini almak için [az Image List](/cli/azure/image?view#az-image-list) kullanabilirsiniz. 
+[Az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az_sig_image_version_create)kullanarak sürümler oluşturun. Görüntü sürümü oluşturmak için taban çizgisi olarak kullanılacak yönetilen görüntünün KIMLIĞINI geçirmeniz gerekir. Görüntülerinizin kimliklerini almak için [az Image List](/cli/azure/image?view#az_image_list) kullanabilirsiniz. 
 
 ```azurecli-interactive
 az image list --query "[].[name, id]" -o tsv

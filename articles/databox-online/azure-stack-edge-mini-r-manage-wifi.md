@@ -9,10 +9,10 @@ ms.topic: article
 ms.date: 03/24/2021
 ms.author: alkohli
 ms.openlocfilehash: a2cc0707c344c3ca537795666a3f60f648026596
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105043776"
 ---
 # <a name="use-the-local-web-ui-to-manage-wireless-connectivity-on-your-azure-stack-edge-mini-r"></a>Azure Stack Edge Mini R 'nizin kablosuz bağlantısını yönetmek için yerel Web Kullanıcı arabirimini kullanma

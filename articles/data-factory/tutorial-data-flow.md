@@ -7,13 +7,13 @@ ms.reviewer: makromer
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 03/11/2021
-ms.openlocfilehash: 2363afc4c84ee7606410ceecd6819c12d0333dbb
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.date: 04/16/2021
+ms.openlocfilehash: f8570c8b252fae91986508abd3725cbbedd361a0
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563302"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565432"
 ---
 # <a name="transform-data-using-mapping-data-flows"></a>Eşleme veri akışlarını kullanarak verileri dönüştürme
 
@@ -78,15 +78,15 @@ Bu adımda, bir veri akışı etkinliği içeren bir işlem hattı oluşturacaks
    ![İşlem hattı oluşturma](./media/doc-common-process/get-started-page.png)
 
 1. İşlem hattının **genel** sekmesinde, Işlem hattının **adı** için **transformfilmlerini** girin.
-1. Fabrika üst çubuğunda, **veri akışı hata ayıklama** kaydırıcısını üzerine kaydırın. Hata ayıklama modu, canlı bir Spark kümesine karşı dönüştürme mantığının etkileşimli olarak test edilmesine olanak tanır. Veri akışı kümelerinin ısınma için 5-7 dakika sürer ve veri akışı geliştirmeyi planlarsa, kullanıcıların hata ayıklamanın ilk kez etkinleştirilmesi önerilir. Daha fazla bilgi için bkz. [hata ayıklama modu](concepts-data-flow-debug-mode.md).
-
-    ![Veri akışı etkinliği](media/tutorial-data-flow/dataflow1.png)
 1. **Etkinlikler** bölmesinde, **taşıma ve dönüştürme** Accordion ' ı genişletin. Bölmedeki **veri akışı** etkinliğini, işlem hattı tuvaline sürükleyin ve bırakın.
 
     ![Veri akışı etkinliğini geçirebileceğiniz işlem hattı tuvalini gösteren ekran görüntüsü.](media/tutorial-data-flow/activity1.png)
 1. **Veri akışı ekleme** açılır penceresinde **Yeni veri akışı oluştur** ' u seçin ve ardından veri akışı **dönüştürfilmlerinizi** adlandırın. Bittiğinde son ' a tıklayın.
 
     ![Yeni bir veri akışı oluştururken veri akışınızı nerede bulabileceğiniz gösteren ekran görüntüsü.](media/tutorial-data-flow/activity2.png)
+1. İşlem hattı tuvalinin üst çubuğunda, **veri akışı hata ayıklama** kaydırıcısını üzerine kaydırın. Hata ayıklama modu, canlı bir Spark kümesine karşı dönüştürme mantığının etkileşimli olarak test edilmesine olanak tanır. Veri akışı kümelerinin ısınma için 5-7 dakika sürer ve veri akışı geliştirmeyi planlarsa, kullanıcıların hata ayıklamanın ilk kez etkinleştirilmesi önerilir. Daha fazla bilgi için bkz. [hata ayıklama modu](concepts-data-flow-debug-mode.md).
+
+    ![Veri akışı etkinliği](media/tutorial-data-flow/dataflow1.png)
 
 ## <a name="build-transformation-logic-in-the-data-flow-canvas"></a>Veri akışı tuvalinde dönüştürme mantığı oluşturma
 
@@ -100,7 +100,7 @@ Veri akışınızı oluşturduktan sonra otomatik olarak veri akışı tuvaline 
     ![Kaynağınızı doğruladıktan sonra yeni ' yi seçtiğiniz yeri gösteren ekran görüntüsü.](media/tutorial-data-flow/dataflow3.png)
 1. **Azure Data Lake Storage 2.** seçin. Devam’a tıklayın.
 
-    ![Azure Data Lake Storage 2. kutucuğunu gösteren ekran görüntüsü.](media/tutorial-data-flow/dataset1.png)
+    ![Azure Data Lake Storage 2. kutucuğun nerede olduğunu gösteren ekran görüntüsü.](media/tutorial-data-flow/dataset1.png)
 1. **Delimitedtext** öğesini seçin. Devam’a tıklayın.
 
     ![Delimitedmetin kutucuğunu gösteren ekran görüntüsü.](media/tutorial-data-flow/dataset2.png)

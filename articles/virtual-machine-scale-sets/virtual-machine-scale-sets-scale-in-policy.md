@@ -6,16 +6,16 @@ author: ju-shim
 ms.author: jushiman
 ms.topic: how-to
 ms.service: virtual-machine-scale-sets
-ms.subservice: autoscale
+ms.subservice: scale-in-policy
 ms.date: 02/26/2020
 ms.reviewer: avverma
 ms.custom: avverma, devx-track-azurecli
-ms.openlocfilehash: 9ca6310705d54d563aae746ab2dbfe6cb412e6a9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 10ed223311995e746beca24f7a09d795f7b3f0e6
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92747797"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105935712"
 ---
 # <a name="use-custom-scale-in-policies-with-azure-virtual-machine-scale-sets"></a>Azure sanal makine ölçek kümeleri ile özel ölçeklendirme ilkeleri kullanma
 

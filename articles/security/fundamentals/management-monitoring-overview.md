@@ -16,10 +16,10 @@ ms.workload: na
 ms.date: 01/24/2021
 ms.author: terrylan
 ms.openlocfilehash: f87ea1e1c9f43de4e9e0f94d1cd855615a0a880c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101712054"
 ---
 # <a name="azure-security-management-and-monitoring-overview"></a>Azure Güvenlik yönetimi ve izlemeye genel bakış

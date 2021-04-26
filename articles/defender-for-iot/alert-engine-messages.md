@@ -1,26 +1,22 @@
 ---
 title: Uyarı türleri ve açıklamaları
 description: IoT uyarı açıklamaları için Defender 'ı inceleyin.
-author: shhazam-ms
-manager: rkarlin
-ms.author: shhazam
-ms.date: 03/22/2021
+ms.date: 4/8/2021
 ms.topic: how-to
-ms.service: azure
-ms.openlocfilehash: 3c4cc5f7bb9f0c529e603b91ee96c6c1c476f20d
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 483563b53a5849b0354986269568bc42b9124cc2
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104787579"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107478004"
 ---
-# <a name="defender-for-iot-engine-alerts"></a>IoT motoru uyarıları için Defender
+# <a name="alert-types-and-descriptions"></a>Uyarı türleri ve açıklamaları
 
-Bu makalede, IoT altyapılarına yönelik Defender 'dan oluşturulabilecek uyarılar açıklanmaktadır. Uyarılar, uyarı olayını yönetebileceğiniz uyarılar penceresinde görüntülenir. 
+Bu makalede, IoT altyapılarına yönelik Defender 'dan oluşturulabilecek tüm uyarı türleri açıklanmaktadır. Uyarılar, uyarı olayını yönetmenizi sağlayan uyarılar penceresinde görüntülenir. 
 
 ## <a name="policy-engine-alerts"></a>İlke altyapısı uyarıları
 
-İlke altyapısı uyarıları, öğrenilen ana hat ağ davranışından sapmaları anlatmaktadır.
+İlke altyapısı uyarıları, öğrenilen taban çizgisi davranışından algılanan sapmaları tanımlıyor.
 
 | Başlık  | Açıklama | Önem derecesi |
 |--|--|--|
@@ -122,6 +118,8 @@ Bu makalede, IoT altyapılarına yönelik Defender 'dan oluşturulabilecek uyar�
 
 ## <a name="anomaly-engine-alerts"></a>Anomali motoru uyarıları
 
+Anomali altyapısı uyarıları, ağ etkinliğinde algılanan bozukluklar hakkında açıklama.
+
 | Başlık | Açıklama | Önem derecesi |
 |--|--|--|
 | Bağımlı içindeki olağan dışı özel durum deseninin | Kaynak cihazda çok fazla sayıda hata algılandı. Bu işlem sorunu nedeniyle ortaya çıkabilir. | İkincil |
@@ -150,6 +148,8 @@ Bu makalede, IoT altyapılarına yönelik Defender 'dan oluşturulabilecek uyar�
 | Standart bağlantı noktası için beklenmeyen trafik | Başka bir protokol için ayrılmış bağlantı noktası kullanan bir cihazda trafik algılandı. | Ana |
 
 ## <a name="protocol-violation-engine-alerts"></a>Protokol ihlali altyapı uyarıları
+
+Protokol altyapısı uyarıları, paket yapısında algılanan sapmaları veya protokol belirtimlerine kıyasla alan değerlerini anlatır.
 
 | Başlık | Açıklama | Önem derecesi |
 |--|--|--|
@@ -181,6 +181,8 @@ Bu makalede, IoT altyapılarına yönelik Defender 'dan oluşturulabilecek uyar�
 
 ## <a name="malware-engine-alerts"></a>Kötü amaçlı yazılım altyapısı uyarıları
 
+Kötü amaçlı yazılım altyapısı uyarıları algılanan kötü amaçlı ağ etkinliğini tanımlıyor.
+
 | Başlık | Açıklama| Önem derecesi |
 |--|--|--|
 | Bilinen kötü amaçlı IP 'ye bağlantı denemesi | Şüpheli ağ etkinliği algılandı. Bu etkinlik, bilinen kötü amaçlı yazılım tarafından kullanılan bir yöntemden yararlanılan bir saldırıya karşı ilişkilendirilebilir. | Ana |
@@ -210,6 +212,8 @@ Bu makalede, IoT altyapılarına yönelik Defender 'dan oluşturulabilecek uyar�
 | Şüpheli trafik algılandı | Şüpheli ağ etkinliği algılandı. Bu etkinlik, bilinen kötü amaçlı yazılım tarafından kullanılan bir yöntemden yararlanılan bir saldırıya karşı ilişkilendirilebilir. | Kritik |
 
 ## <a name="operational-engine-alerts"></a>İşlemsel altyapı uyarıları
+
+İşletimsel altyapı uyarıları algılanan işletimsel olayları veya hatalı çalışan varlıkları tanımlıyor.
 
 | Başlık | Açıklama | Önem derecesi |
 |--|--|--|

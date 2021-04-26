@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 03/05/2021
 ms.author: longl
 ms.custom: devx-track-csharp
-ms.openlocfilehash: cd4ed992557a3c333919b63cc36757beb2f70454
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 3d22f2fb0bb550d966cbc5e181882552514513b2
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102433565"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105936589"
 ---
 # <a name="specify-a-face-recognition-model"></a>Yüz tanıma modeli belirtme
 
@@ -87,7 +87,7 @@ Buna karşılık, bu **kişinin** karşılaştırılacağı yüzeyleri tespit et
 
 ## <a name="find-similar-faces-with-specified-model"></a>Belirtilen modelle benzer yüzler bulun
 
-Ayrıca, benzerlik arama için bir tanıma modeli de belirtebilirsiniz. `recognitionModel` [Calıst-Create] API veya [largecelıst-Create]ile yüz listesini oluştururken ile model sürümünü atayabilirsiniz. Bu parametreyi belirtmezseniz, `recognition_01` model varsayılan olarak kullanılır. Yüz listesi, her zaman ile oluşturulduğu tanıma modelini kullanır ve listeye eklendiğinde yeni yüzler bu modelle ilişkilendirilir; Bu, oluşturulduktan sonra değiştirilemez. Yüz listesinin hangi modelde yapılandırıldığını görmek için, şu şekilde, _Returnrecognıtionmodel_ parametresi **true** olarak ayarlanmış olan çok [yönlü liste-Al] API 'sini kullanın.
+Ayrıca, benzerlik arama için bir tanıma modeli de belirtebilirsiniz. Çok yönlü liste oluşturma `recognitionModel` API 'si veya [Largeçok yönlü liste-oluştur]ile çok **yönlü** liste oluştururken model sürümünü atayabilirsiniz. [] Bu parametreyi belirtmezseniz, `recognition_01` model varsayılan olarak kullanılır. Çok **yönlü bir liste** , her zaman ile oluşturulduğu tanıma modelini kullanır ve listeye eklendiğinde yeni yüzler bu modelle ilişkilendirilir; Bu, oluşturulduktan sonra değiştirilemez. Çok **yönlü bir listenin** hangi modelde yapılandırıldığını görmek için, tam olarak, _Returnrecognıtionmodel_ parametresi **true** olarak ayarlanmış olan çok [yönlü liste-Al] API 'sini kullanın.
 
 .NET istemci kitaplığı için aşağıdaki kod örneğine bakın.
 
@@ -95,7 +95,7 @@ Ayrıca, benzerlik arama için bir tanıma modeli de belirtebilirsiniz. `recogni
 await faceClient.FaceList.CreateAsync(faceListId, "My face collection", recognitionModel: "recognition_04");
 ```
 
-Bu kod `My face collection` , özellik ayıklama için _recognition_04_ modeli kullanılarak adlı bir yüz listesi oluşturur. Bu yüz listesini, benzer yüzler için yeni bir algılanan bir yüze aradığınızda, bu yüz _recognition_04_ modeli kullanılarak algılanan ([yüz Algıla]) olmalıdır. Önceki bölümde olduğu gibi, modelin tutarlı olması gerekir.
+Bu kod  `My face collection` , özellik ayıklama için _recognition_04_ modeli kullanılarak adlı bir çok yönlü liste oluşturur. Benzer yüzler için bu çok **yönlü listeyi** yeni algılanan bir yüze aradığınızda, bu yüz _recognition_04_ modeli kullanılarak algılanan ([yüz Algıla]) olmalıdır. Önceki bölümde olduğu gibi, modelin tutarlı olması gerekir.
 
 Yüz, benzer bir API 'yi [bulun] ; Yalnızca algılama sürümünde model sürümünü belirtirsiniz.
 

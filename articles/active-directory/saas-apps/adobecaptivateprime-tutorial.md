@@ -9,101 +9,78 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 01/17/2019
+ms.date: 03/31/2021
 ms.author: jeedes
-ms.openlocfilehash: 63bbec6de8f122178289cc313e5d938e3b926af2
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 87ce580e16d1ca3b90eb66562f06828d775b09ea
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97673263"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106285713"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-adobe-captivate-prime"></a>Öğretici: Adobe ile Azure Active Directory tümleştirme ana
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile Adobe Capizme ana 'ı tümleştirmeyi öğreneceksiniz.
-Azure AD ile Adobe açıklamalı ana ile tümleştirme, aşağıdaki avantajları sağlar:
+Bu öğreticide, Azure Active Directory (Azure AD) ile Adobe yamı ana ile tümleştirmeyi öğreneceksiniz. Azure AD ile Adobe Capced ana 'ı tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Azure AD 'de, Adobe Capced ana 'e erişimi olan denetimi yapabilirsiniz.
-* Kullanıcılarınızın Azure AD hesaplarıyla ana (çoklu oturum açma) ile otomatik olarak oturum açmasını sağlayabilirsiniz.
-* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
-
-Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](../manage-apps/what-is-single-sign-on.md).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+* Azure AD 'de, Adobe açıklamalı ana 'e erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesapları ile birlikte otomatik olarak oturum açmalarına olanak tanımak.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesini Adobe ana olarak yapılandırmak için aşağıdaki öğeler gereklidir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
-* Adobe ana çoklu oturum açma etkin aboneliğini etkinleştir
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Adobe ana çoklu oturum açma (SSO) özellikli aboneliği çapraz bir şekilde etkinleştir.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
 Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Adobe **Capıse ana, IDP** tarafından başlatılan SSO 'yu destekler
+* Adobe **Capıse ana, IDP** tarafından başlatılan SSO 'yu destekler.
 
-## <a name="adding-adobe-captivate-prime-from-the-gallery"></a>Galeriden Adobe açıklamalı ana ekleme
+> [!NOTE]
+> Bu uygulamanın tanımlayıcısı, tek bir kiracıda yalnızca bir örneğin yapılandırılabilmesini sağlamak için sabit bir dize değeridir.
+
+## <a name="add-adobe-captivate-prime-from-the-gallery"></a>Galeriden Adobe Capsi ana ekleyin
 
 Adobe ana yönetim 'in Azure AD ile tümleşmesini yapılandırmak için galerideki Adobe Capler ana öğesini yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**Galeriden Adobe capi ana eklemek için aşağıdaki adımları uygulayın:**
+1. Azure portal iş veya okul hesabı ya da kişisel Microsoft hesabı kullanarak oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **Adobe capsi ana** yazın.
+1. Sonuçlar panelinden **Adobe göster ana** öğesini seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
+## <a name="configure-and-test-azure-ad-sso-for-adobe-captivate-prime"></a>Azure AD SSO 'yu yapılandırma ve test etme ana
 
-    ![Azure Active Directory düğmesi](common/select-azuread.png)
+**B. Simon** adlı bir test kullanıcısı kullanarak Azure AD SSO 'Yu Adobe Capced ana ile yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ile ilişkili kullanıcı arasında Adobe ana hat arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
+Azure AD SSO 'yu Adobe Capced ana ile yapılandırmak ve test etmek için aşağıdaki adımları gerçekleştirin:
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    1. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    1. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[Adobe Capbir asal SSO 'Yu yapılandırın](#configure-adobe-captivate-prime-sso)** .
+    1. Kullanıcının Azure AD gösterimi ile bağlantılı olarak, Adobe 'da, bir veya daha fazla ana **[test kullanıcısı oluşturun](#create-adobe-captivate-prime-test-user)** .
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO’yu yapılandırma
 
-    ![Yeni uygulama düğmesi](common/add-new-app.png)
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-4. Arama kutusuna **Adobe Capları ana** yazın, sonuç panelinden **Adobe capları ana** ' yı seçin, sonra da uygulamayı eklemek için düğme **Ekle** ' ye tıklayın.
+1. Azure portal, **Adobe ana** uygulama tümleştirme sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** kalem simgesine tıklayın.
 
-    ![Sonuçlar listesinde Adobe ana başlığı](common/search-new-app.png)
-
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
-
-Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon** adlı bir test kullanıcısına bağlı olarak Adobe CAPI ana ile yapılandırıp test edersiniz.
-Çoklu oturum açma için, bir Azure AD kullanıcısı ile ilişkili kullanıcı arasındaki bir bağlantı ilişkisinin, Adobe ana hat 'in oluşturulması gerekir.
-
-Azure AD 'de çoklu oturum açmayı yapılandırmak ve test etmek için, aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
-
-1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
-2. Uygulama tarafında tek Sign-On ayarlarını yapılandırmak için, **[Adobe ana çoklu oturum açmayı yapılandırma](#configure-adobe-captivate-prime-single-sign-on)** .
-3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
-4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
-5. Kullanıcıların Azure AD gösterimi ile bağlantılı olarak, Adobe 'da, bir Kölüme ana **[test kullanıcısı oluşturun](#create-adobe-captivate-prime-test-user)** .
-6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
-
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
-
-Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
-
-Azure AD çoklu oturum açma 'yı Adobe Capced ana ile yapılandırmak için aşağıdaki adımları uygulayın:
-
-1. [Azure Portal](https://portal.azure.com/), **Adobe ana** Uygulama tümleştirmesini Etkinleştir sayfasında, **Çoklu oturum açma**' yı seçin.
-
-    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
-
-2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
-
-    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
-
-3. **SAML Ile tek Sign-On ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
-
-    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
 4. **SAML Ile tek Sign-On ayarlama** sayfasında, aşağıdaki adımları gerçekleştirin:
 
-    ![Adobe ana etki alanı ve URL 'Lerde çoklu oturum açma bilgilerini göster](common/idp-intiated.png)
+    a. **Tanımlayıcı** metin kutusuna URL 'yi yazın:`https://captivateprime.adobe.com`
 
-    a. **Tanımlayıcı** metin kutusuna bir URL yazın:`https://captivateprime.adobe.com`
-
-    b. **Yanıt URL** 'si metin kutusuna bir URL yazın:`https://captivateprime.adobe.com/saml/SSO`
+    b. **Yanıt URL** 'si metin kutusuna URL 'yi yazın:`https://captivateprime.adobe.com/saml/SSO`
 
 5. **SAML Ile tek Sign-On ayarlama** sayfasında, **SAML imza sertifikası** bölümünde, **Federasyon meta veri XML** 'sini gereksiniminize göre belirtilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
@@ -113,85 +90,50 @@ Azure AD çoklu oturum açma 'yı Adobe Capced ana ile yapılandırmak için aş
 
     ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL’si
-
-    b. Azure AD tanımlayıcısı
-
-    c. Oturum kapatma URL 'SI
-
 7. **Özellikler** sekmesine gidin, **Kullanıcı erişim URL 'Sini** kopyalayıp Not defteri 'ne yapıştırın.
 
-    ![Kullanıcı erişim bağlantısı](./media/adobecaptivateprime-tutorial/tutorial_adobecaptivateprime_appprop.png)
-
-### <a name="configure-adobe-captivate-prime-single-sign-on"></a>Adobe Capmi ana tek Sign-On yapılandırma
-
-**Adobe ana** tarafında tek oturum açma 'yı yapılandırmak için, Indirilen **Federasyon meta veri XML**'SINI, **Kullanıcı erişim URL 'Sini** ve uygun kopyalanmış URL 'leri Azure Portal ' den Adobe üst düzey [Destek ekibine](mailto:captivateprimesupport@adobe.com)göndermeniz gerekir. Bu ayar, SAML SSO bağlantısının her iki tarafında da düzgün bir şekilde ayarlanmasını sağlamak üzere ayarlanmıştır.
+    ![Kullanıcı erişim bağlantısı](./media/adobecaptivateprime-tutorial/adobe.png)
 
 ### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
-Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
-
-    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
-
-2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
-
-    ![Yeni Kullanıcı düğmesi](common/new-user.png)
-
-3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
-
-    ![Kullanıcı iletişim kutusu](common/user-properties.png)
-
-    a. **Ad** alanına **Brittasıon** girin.
-
-    b. **Kullanıcı adı** alanına **\@ bricompansıon yourcompanydomain. Extension** yazın  
-    Örneğin, BrittaSimon@contoso.com
-
-    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
-
-    d. **Oluştur**’a tıklayın.
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına, girin username@companydomain.extension . Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**’a tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak, Adobe açıklamalı ana 'e erişim izni vererek Britta Simon 'u etkinleştirin.
+Bu bölümde, Adobe ana oturum açma özelliğini kullanarak Azure 'da çoklu oturum açmayı kullanmaya yönelik olarak B. Simon 'u etkinleştireceksiniz.
 
-1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **Adobe üç ana**' yı seçin.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **Adobe birinci** olarak göster ' i seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, "varsayılan erişim" rolü seçili olduğunu görürsünüz.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+## <a name="configure-adobe-captivate-prime-sso"></a>Adobe Capde ana SSO 'yu yapılandırma
 
-2. Uygulamalar listesinde, **Adobe birinci** olarak göster ' i seçin.
-
-    ![Uygulamalar listesindeki Adobe ana hat](common/all-applications.png)
-
-3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
-
-    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
-
-4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
-
-    ![Atama Ekle bölmesi](common/add-assign-user.png)
-
-5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
-
-6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
-
-7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
+**Adobe ana** tarafında tek oturum açma 'yı yapılandırmak için, Indirilen **Federasyon meta veri XML**'SINI, **Kullanıcı erişim URL 'Sini** ve uygun kopyalanmış URL 'leri Azure Portal ' den Adobe üst düzey [Destek ekibine](mailto:captivateprimesupport@adobe.com)göndermeniz gerekir. Bu ayar, SAML SSO bağlantısının her iki tarafında da düzgün bir şekilde ayarlanmasını sağlamak üzere ayarlanmıştır.
 
 ### <a name="create-adobe-captivate-prime-test-user"></a>Adobe capi ana sınama kullanıcısı oluşturma
 
 Bu bölümde, Adobe köme ana 'da Britta Simon adlı bir Kullanıcı oluşturacaksınız. Adobe capi ana platformunda kullanıcıları eklemek için [Adobe ana destek ekibi](mailto:captivateprimesupport@adobe.com) ile çalışın. Çoklu oturum açma kullanılmadan önce kullanıcıların oluşturulması ve etkinleştirilmesi gerekir.
 
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
+## <a name="test-sso"></a>Test SSO 'SU
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
+Bu bölümde, Azure AD çoklu oturum açma yapılandırmanızı aşağıdaki seçeneklerle test edersiniz.
 
-Erişim panelinde Adobe Capkana kutucuğunu tıklattığınızda, SSO 'yu ayarladığınız Adobe ana, otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](../user-help/my-apps-portal-end-user-access.md).
+* Azure portal bu uygulamayı test et ' e tıklayın ve SSO 'yu ayarladığınız Adobe ana bilgisayarda otomatik olarak oturum açmış olmanız gerekir.
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+* Microsoft My Apps ' i kullanabilirsiniz. Uygulamalarım içindeki Adobe Capkma ana kutucuğunu tıklattığınızda, SSO 'yu ayarladığınız Adobe ana için otomatik olarak oturum açmış olmanız gerekir. Uygulamalarım hakkında daha fazla bilgi için bkz. [uygulamalarıma giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
-- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](./tutorial-list.md)
+## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
-
-- [Azure Active Directory Koşullu erişim nedir?](../conditional-access/overview.md)
+Adobe ayırt etme ana düzeyini yapılandırdıktan sonra, kuruluşunuzun hassas verilerinin gerçek zamanlı olarak ayıklanmasını ve zaman korumasını koruyan oturum denetimini zorunlu kılabilirsiniz. Oturum denetimi koşullu erişimden genişletiliyor. [Microsoft Cloud App Security ile oturum denetimini nasıl zorlayacağınızı öğrenin](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).

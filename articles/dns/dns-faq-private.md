@@ -8,10 +8,10 @@ ms.topic: article
 ms.date: 01/15/2021
 ms.author: rohink
 ms.openlocfilehash: 3272f4fea4169fd5e91b1ba2b97ad72dfbb49080
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98247395"
 ---
 # <a name="azure-private-dns-faq"></a>Azure Özel DNS hakkında SSS

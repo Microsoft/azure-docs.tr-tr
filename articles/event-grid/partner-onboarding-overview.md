@@ -3,12 +3,12 @@ title: İş ortağı eklemeye genel bakış (Azure Event Grid)
 description: Event Grid iş ortağı olarak nasıl kullanabileceğiniz hakkında genel bakış sağlar.
 ms.topic: conceptual
 ms.date: 10/29/2020
-ms.openlocfilehash: d16337eada829a817110abf7842f763972d0718f
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 40d0afe0aaeb40412948eb304a36a3627566551b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105109348"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869698"
 ---
 # <a name="partner-onboarding-overview-azure-event-grid"></a>İş ortağı eklemeye genel bakış (Azure Event Grid)
 
@@ -153,7 +153,7 @@ CloudEvents 1,0 şemasını kullanarak olayları Azure Event Grid yayımlayın. 
   * [ARM şablonu](/azure/templates/microsoft.eventgrid/allversions)
   * [ARM şablon şeması](https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2020-04-01-preview/Microsoft.EventGrid.json)
   * [REST API'leri](/azure/templates/microsoft.eventgrid/2020-04-01-preview/partnernamespaces)
-  * [CLı uzantısı](/cli/azure/ext/eventgrid/)
+  * [CLı uzantısı](/cli/azure/)
 
 ### <a name="sdks"></a>SDK
   * [.NET](https://www.nuget.org/packages/Microsoft.Azure.Management.EventGrid/5.3.1-preview)

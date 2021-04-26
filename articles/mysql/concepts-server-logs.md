@@ -6,12 +6,12 @@ ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 11/6/2020
-ms.openlocfilehash: efabb3de69e96ec1a8955b2691af20a36fbabfe4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e3342b38f782b718cefd63295ef4d4d26b525058
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100595940"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107259056"
 ---
 # <a name="slow-query-logs-in-azure-database-for-mysql"></a>MySQL için Azure Veritabanı'nda yavaş sorgu günlükleri
 MySQL için Azure veritabanı 'nda, yavaş sorgu günlüğü kullanıcılar tarafından kullanılabilir. İşlem günlüğüne erişim desteklenmez. Yavaş sorgu günlüğü, sorun giderme için performans sorunlarını belirlemek için kullanılabilir.
@@ -45,7 +45,7 @@ Yerel sunucu depolaması için, Azure portal veya Azure CLı kullanarak yavaş s
 Azure Izleyici tanılama günlükleri, Azure Izleyici günlüklerine (Log Analytics), Azure depolama 'ya veya Event Hubs yavaş sorgu günlüklerini boru etmenize olanak tanır. Daha fazla bilgi için [aşağıya](concepts-server-logs.md#diagnostic-logs) bakın.
 
 ## <a name="local-server-storage-log-retention"></a>Yerel sunucu depolama günlüğü saklama
-Sunucunun yerel depolama alanına oturum açarken, günlükleri oluşturulduktan yedi güne kadar kullanılabilir. Kullanılabilir günlüklerin toplam boyutu 7 GB 'yi aşarsa, alan kullanılabilir olana kadar en eski dosyalar silinir.
+Sunucunun yerel depolama alanına oturum açarken, günlükleri oluşturulduktan yedi güne kadar kullanılabilir. Kullanılabilir günlüklerin toplam boyutu 7 GB 'yi aşarsa, alan kullanılabilir olana kadar en eski dosyalar silinir. Sunucu günlükleri için 7 GB depolama sınırı, ücretsiz olarak kullanılabilir ve genişletilemez. 
 
 Günlükler her 24 saatte bir veya 7 GB döndürülür, hangisi önce gelir.
 

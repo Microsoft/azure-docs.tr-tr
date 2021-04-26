@@ -2,15 +2,17 @@
 title: Service Bus kuyruğu oluşturmak için Azure portal kullanma
 description: Bu hızlı başlangıçta, Azure portal kullanarak ad alanı ve bir sırayı Service Bus nasıl oluşturacağınızı öğreneceksiniz.
 author: spelluru
-ms.topic: quickstart
-ms.date: 08/12/2020
 ms.author: spelluru
-ms.openlocfilehash: 79dd751c43443790aafc494d89ad45e3b6705a64
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 08/12/2020
+ms.topic: quickstart
+ms.custom:
+- mode-portal
+ms.openlocfilehash: e38d32c93453737060f654add58f09902b05ee45
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95799220"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537204"
 ---
 # <a name="use-azure-portal-to-create-a-service-bus-namespace-and-a-queue"></a>Bir Service Bus ad alanı ve sıra oluşturmak için Azure portal kullanma
 Bu hızlı başlangıçta, [Azure Portal][Azure portal]kullanarak bir Service Bus ad alanı ve kuyruğun nasıl oluşturulacağı gösterilmektedir. Ayrıca, bir istemci uygulamanın sıraya/kuyruğa ileti göndermek/almak için kullanabileceği yetkilendirme kimlik bilgilerinin nasıl alınacağını gösterir. 

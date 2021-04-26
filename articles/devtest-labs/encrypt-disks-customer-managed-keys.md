@@ -4,10 +4,10 @@ description: Azure DevTest Labs 'de müşteri tarafından yönetilen anahtarlar�
 ms.topic: article
 ms.date: 09/01/2020
 ms.openlocfilehash: 26ef4ff1529483da9956c6dcc43807af0ffd6463
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96341229"
 ---
 # <a name="encrypt-operating-system-os-disks-using-customer-managed-keys-in-azure-devtest-labs"></a>Azure DevTest Labs 'de müşteri tarafından yönetilen anahtarları kullanarak işletim sistemi (OS) disklerini şifreleyin

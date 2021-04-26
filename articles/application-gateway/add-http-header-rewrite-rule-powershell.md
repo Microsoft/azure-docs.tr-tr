@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.topic: how-to
 ms.date: 04/12/2019
 ms.author: absha
-ms.openlocfilehash: 29ca3aff7d75c7a14bf7b325719924936762d191
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b674bdf59959715b666c521c0d0631f86f71b1d3
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101711697"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106093733"
 ---
 # <a name="rewrite-http-request-and-response-headers-with-azure-application-gateway---azure-powershell"></a>HTTP isteği ve yanıt üst bilgilerini Azure Application Gateway yeniden yazma-Azure PowerShell
 
@@ -66,9 +66,9 @@ Bu örnekte, konum üstbilgisi azurewebsites.net öğesine bir başvuru içerdi�
 
 ```azurepowershell
 $responseHeaderConfiguration = New-AzApplicationGatewayRewriteRuleHeaderConfiguration -HeaderName "Location" -HeaderValue "{http_resp_Location_1}://contoso.com{http_resp_Location_2}"
-$actionSet = New-AzApplicationGatewayRewriteRuleActionSet -RequestHeaderConfiguration $requestHeaderConfiguration -ResponseHeaderConfiguration $responseHeaderConfiguration
+$actionSet = New-AzApplicationGatewayRewriteRuleActionSet -ResponseHeaderConfiguration $responseHeaderConfiguration
 $condition = New-AzApplicationGatewayRewriteRuleCondition -Variable "http_resp_Location" -Pattern "(https?):\/\/.*azurewebsites\.net(.*)$" -IgnoreCase
-$rewriteRule = New-AzApplicationGatewayRewriteRule -Name LocationHeader -ActionSet $actionSet
+$rewriteRule = New-AzApplicationGatewayRewriteRule -Name LocationHeader -ActionSet $actionSet -Condition $condition
 $rewriteRuleSet = New-AzApplicationGatewayRewriteRuleSet -Name LocationHeaderRewrite -RewriteRule $rewriteRule
 ```
 
@@ -86,9 +86,11 @@ $reqRoutingRule = Get-AzApplicationGatewayRequestRoutingRule -Name rule1 -Applic
 
 ## <a name="update-the-application-gateway-with-the-configuration-for-rewriting-http-headers"></a>HTTP üstbilgilerini yeniden yazma yapılandırması ile uygulama ağ geçidini güncelleştirme
 
+Bu örnekte, yeniden yazma kümesi basit bir yönlendirme kuralına göre anında ilişkilendirilir. Yol tabanlı yönlendirme kuralı söz konusu olduğunda, ilişkilendirme varsayılan olarak etkinleştirilmez. Yeniden yazma kümesi, Portal aracılığıyla uygulanması gereken yolların denetlenmesi yoluyla ya da her yol için yeniden Writerulet kümesini belirten bir URL yol haritası yapılandırması sağlayarak etkinleştirilebilir.  
+
 ```azurepowershell
-Add-AzApplicationGatewayRewriteRuleSet -ApplicationGateway $appgw -Name LocationHeaderRewrite -RewriteRule $rewriteRuleSet.RewriteRules
-Set-AzApplicationGatewayRequestRoutingRule -ApplicationGateway $appgw -Name rule1 -RuleType $reqRoutingRule.RuleType -BackendHttpSettingsId $reqRoutingRule.BackendHttpSettings.Id -HttpListenerId $reqRoutingRule.HttpListener.Id -BackendAddressPoolId $reqRoutingRule.BackendAddressPool.Id -RewriteRuleSetId $rewriteRuleSet.Id
+Add-AzApplicationGatewayRewriteRuleSet -ApplicationGateway $appgw -Name $rewriteRuleSet.Name  -RewriteRule $rewriteRuleSet.RewriteRules
+Set-AzApplicationGatewayRequestRoutingRule -ApplicationGateway $appgw -Name $reqRoutingRule.Name -RuleType $reqRoutingRule.RuleType -BackendHttpSettingsId $reqRoutingRule.BackendHttpSettings.Id -HttpListenerId $reqRoutingRule.HttpListener.Id -BackendAddressPoolId $reqRoutingRule.BackendAddressPool.Id -RewriteRuleSetId $rewriteRuleSet.Id
 Set-AzApplicationGateway -ApplicationGateway $appgw
 ```
 

@@ -4,12 +4,12 @@ description: Bu hızlı başlangıçta, kapsayıcı kayıt defteriniz için Even
 ms.topic: article
 ms.date: 08/23/2018
 ms.custom: seodec18, devx-track-azurecli
-ms.openlocfilehash: b4038bb232c14278e838f2c34706dcc103def7e4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 43dea2640c9c9445ea464205f6c586bc1e486206
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98919672"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784034"
 ---
 # <a name="quickstart-send-events-from-private-container-registry-to-event-grid"></a>Hızlı başlangıç: özel kapsayıcı kayıt defterinden olayları Event Grid gönder
 
@@ -236,6 +236,6 @@ Bu hızlı başlangıçta bir kapsayıcı kayıt defteri dağıttığınızda, A
 
 <!-- LINKS - Internal -->
 [az-acr-create]: /cli/azure/acr/repository
-[az-acr-repository-delete]: /cli/azure/acr/repository#az-acr-repository-delete
-[az-eventgrid-event-subscription-create]: /cli/azure/eventgrid/event-subscription#az-eventgrid-event-subscription-create
-[az-group-create]: /cli/azure/group#az-group-create
+[az-acr-repository-delete]: /cli/azure/acr/repository#az_acr_repository_delete
+[az-eventgrid-event-subscription-create]: /cli/azure/eventgrid/event-subscription#az_eventgrid_event_subscription_create
+[az-group-create]: /cli/azure/group#az_group_create

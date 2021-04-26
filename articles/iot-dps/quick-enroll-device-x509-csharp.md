@@ -9,12 +9,12 @@ ms.service: iot-dps
 services: iot-dps
 ms.devlang: csharp
 ms.custom: mvc, devx-track-csharp
-ms.openlocfilehash: 9fc34532818a742ef67e4b2532966874d083199d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: b6b9331007ec633fe8b8368bd493ce18b4ddde24
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94959858"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862102"
 ---
 # <a name="quickstart-enroll-x509-devices-to-the-device-provisioning-service-using-c"></a>Hızlı başlangıç: C# kullanarak X.509 cihazlarını Cihaz Sağlama Hizmeti'ne kaydetme
 
@@ -31,7 +31,7 @@ Bu makaledeki adımlar hem Windows hem de Linux bilgisayarlarda çalışır, anc
 ## <a name="prerequisites"></a>Önkoşullar
 
 * [Visual Studio 2019](https://www.visualstudio.com/vs/)’u yükleyin.
-* [.NET Core SDK](https://www.microsoft.com/net/download/windows)'i yükler.
+* [.NET Core SDK](https://dotnet.microsoft.com/download)'i yükler.
 * [Git](https://git-scm.com/download/)'i yükler.
 
 ## <a name="prepare-test-certificates"></a>Test sertifikalarını hazırlama

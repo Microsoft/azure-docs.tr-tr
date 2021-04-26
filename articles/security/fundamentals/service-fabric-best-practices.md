@@ -7,12 +7,12 @@ ms.service: security
 ms.subservice: security-fundamentals
 ms.topic: article
 ms.date: 01/16/2019
-ms.openlocfilehash: a7396c9a29c7d9f69dbe6a9cc5cd085c72ebafde
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a7d87e2496158fec8ff33ab8586c845a6207f810
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94700955"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816071"
 ---
 # <a name="azure-service-fabric-security-best-practices"></a>Azure Service Fabric güvenliği en iyi yöntemleri
 Azure 'da uygulama dağıtmak hızlı, kolay ve ekonomik bir işlemdir. Bulut uygulamanızı üretime dağıtmadan önce, uygulamanızda güvenli kümeler uygulamaya yönelik temel ve önerilen en iyi yöntemler listesini gözden geçirin.
@@ -155,7 +155,7 @@ Service Fabric, bir kümeyi ve uygulamalarını güvenli hale getirmek için kim
 
 Service Fabric, bir kümeyi güvenli hale getirmek ve uygulama güvenliği özellikleri sağlamak için X. 509.440 sertifikaları kullanır. Azure 'da Service Fabric kümeler için [sertifikaları yönetmek](../../service-fabric/service-fabric-cluster-security-update-certs-azure.md) üzere Azure Key Vault kullanırsınız. Kümeleri oluşturan Azure Kaynak sağlayıcısı, sertifikaları bir anahtar kasasından çeker. Daha sonra sağlayıcı, Azure üzerinde dağıtıldığında sertifikaları VM 'Lere yüklenir.
 
-[Azure Key Vault](../../key-vault/general/secure-your-key-vault.md), Service Fabric kümesi ve sertifikaları kullanan kaynak sağlayıcısı arasında bir sertifika ilişkisi bulunur. Küme oluşturulduğunda, sertifika ilişkisiyle ilgili bilgiler bir anahtar kasasında depolanır.
+[Azure Key Vault](../../key-vault/general/security-features.md), Service Fabric kümesi ve sertifikaları kullanan kaynak sağlayıcısı arasında bir sertifika ilişkisi bulunur. Küme oluşturulduğunda, sertifika ilişkisiyle ilgili bilgiler bir anahtar kasasında depolanır.
 
 Bir Anahtar Kasası kurmak için iki temel adım vardır:
 1. Anahtar kasanız için özel olarak bir kaynak grubu oluşturun.

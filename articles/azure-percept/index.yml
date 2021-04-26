@@ -10,12 +10,12 @@ metadata:
   author: mimcco
   ms.author: mimcco
   ms.date: 03/25/2021
-  ms.openlocfilehash: 61e9d784d899cb8f0741f27aee0bdb7031bb37d1
-  ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+  ms.openlocfilehash: 0cf9e95897554cb51ff6837dec72700124471025
+  ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "105562554"
+  ms.lasthandoff: 04/01/2021
+  ms.locfileid: "106107736"
 landingContent:
 - title: Azure Percept nedir?
   linkLists:
@@ -33,13 +33,15 @@ landingContent:
       url: overview-percept-security.md
     - text: 80/20 tümleştirmesi
       url: overview-8020-integration.md
+    - text: Azure Percept AI modelleri
+      url: overview-ai-models.md
 - title: Azure Percept DK ile çalışmaya başlama
   linkLists:
   - linkListType: quickstart
     links:
     - text: Azure Percept DK 'yi kutudan kaldırma ve birleştirme
       url: quickstart-percept-dk-unboxing.md
-    - text: Azure Percept DK 'yi Azure 'a bağlama ve bir Vision AI modeli dağıtma
+    - text: Azure Percept DK 'nizi Azure 'a bağlama
       url: quickstart-percept-dk-set-up.md
   - linkListType: reference
     links:
@@ -47,13 +49,15 @@ landingContent:
       url: azure-percept-dk-datasheet.md
     - text: Azure Percept Vision veri sayfası
       url: azure-percept-vision-datasheet.md
-    - text: Sorun giderme
+    - text: Genel Azure Percept DK sorunlarını giderme
       url: troubleshoot-dev-kit.md
+    - text: Kurulum deneyimi sorunlarını giderme
+      url: how-to-troubleshoot-setup.md
 - title: Azure Percept Audio ile çalışmaya başlama
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Azure Percept ses kurma
+    - text: Azure Percept ses ayarlama
       url: quickstart-percept-audio-setup.md
   - linkListType: reference
     links:
@@ -61,9 +65,9 @@ landingContent:
       url: azure-percept-audio-datasheet.md
     - text: Azure Percept ses sorunlarını giderme
       url: troubleshoot-audio-accessory-speech-module.md
-    - text: Azure Percept ses ışığı ve düğmesi
+    - text: Azure Percept ses ışığı ve düğme davranışı
       url: audio-button-led-behavior.md
-- title: Kod içermeyen bir Vision AI prototipi oluşturun
+- title: Kod içermeyen bir Vision çözümü oluşturun
   linkLists:
   - linkListType: tutorial
     links:
@@ -79,11 +83,11 @@ landingContent:
       url: how-to-capture-images.md
     - text: Devkit 'in telemetrinizi görüntüleme
       url: how-to-view-telemetry.md
-  - linkListType: concept
+  - linkListType: reference
     links:
-    - text: AI çözümleriyle çalışma
-      url: overview-ai-models.md
-- title: Kod içermeyen sesli yardım çözümü oluşturma
+    - text: Vision çözüm sorunlarını giderme
+      url: vision-solution-troubleshooting.md
+- title: Kod içermeyen konuşma çözümü oluşturma
   linkLists:
   - linkListType: tutorial
     links:
@@ -91,9 +95,9 @@ landingContent:
       url: tutorial-no-code-speech.md
   - linkListType: how-to-guide
     links:
-    - text: Sesli yardımcınızı yönetin
+    - text: Azure Percept Studio 'da sesli yardımcınızı yapılandırma
       url: how-to-manage-voice-assistant.md
-    - text: IoT Hub kullanarak sesli yardımcınızı yapılandırın
+    - text: IoT Hub 'de sesli yardımcınızı yapılandırın
       url: how-to-configure-voice-assistant.md
 - title: Azure Percept ile gelişmiş geliştirme
   linkLists:
@@ -113,9 +117,9 @@ landingContent:
       url: overview-update-experience.md
   - linkListType: how-to-guide
     links:
-    - text: Kablosuz güncelleştirmeleri ayarlama
+    - text: Kablosuz (OTA) güncelleştirmelerini ayarlama
       url: how-to-set-up-over-the-air-updates.md
-    - text: Kablosuz güncelleştirmeler
+    - text: Cihazınızı kablosuz olarak güncelleştirme (OTA)
       url: how-to-update-over-the-air.md
-    - text: USB üzerinden güncelleştirme
+    - text: Cihazınızı USB üzerinden güncelleştirme
       url: how-to-update-via-usb.md

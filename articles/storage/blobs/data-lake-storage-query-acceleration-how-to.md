@@ -8,13 +8,13 @@ ms.topic: how-to
 ms.date: 01/06/2021
 ms.author: normesta
 ms.reviewer: jamsbak
-ms.custom: devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: a925d3f55395d094c7f19f65de4b72fd20a11a41
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 756258db1c6e91002bf3a7c2bd0f71f921ce655d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102213683"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769940"
 ---
 # <a name="filter-data-by-using-azure-data-lake-storage-query-acceleration"></a>Azure Data Lake Storage sorgu hızlandırmasını kullanarak verileri filtreleme
 
@@ -102,7 +102,7 @@ Sorgu hızlandırmasını kullanmak için, öncelikle aboneliğinizle birlikte s
 
    `<subscription-id>`Yer tutucu değerini ABONELIĞINIZIN kimliğiyle değiştirin.
 
-3. Sorgu hızlandırma özelliğini [az Feature Register](/cli/azure/feature#az-feature-register) komutunu kullanarak kaydedin.
+3. Sorgu hızlandırma özelliğini [az Feature Register](/cli/azure/feature#az_feature_register) komutunu kullanarak kaydedin.
 
    ```azurecli
    az feature register --namespace Microsoft.Storage --name BlobQuery
@@ -122,7 +122,7 @@ Get-AzProviderFeature -ProviderNamespace Microsoft.Storage -FeatureName BlobQuer
 
 #### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Kaydın tamamlandığını doğrulamak için [az Feature](/cli/azure/feature#az-feature-show) komutunu kullanın.
+Kaydın tamamlandığını doğrulamak için [az Feature](/cli/azure/feature#az_feature_show) komutunu kullanın.
 
 ```azurecli
 az feature show --namespace Microsoft.Storage --name BlobQuery
@@ -144,7 +144,7 @@ Register-AzResourceProvider -ProviderNamespace 'Microsoft.Storage'
 
 #### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Kaynak sağlayıcısını kaydetmek için [az Provider Register](/cli/azure/provider#az-provider-register) komutunu kullanın.
+Kaynak sağlayıcısını kaydetmek için [az Provider Register](/cli/azure/provider#az_provider_register) komutunu kullanın.
 
 ```azurecli
 az provider register --namespace 'Microsoft.Storage'

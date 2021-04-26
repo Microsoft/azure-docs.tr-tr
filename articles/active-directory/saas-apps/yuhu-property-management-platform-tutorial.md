@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 12/18/2019
 ms.author: jeedes
-ms.openlocfilehash: 2b5e852e3a32c4fb40dbe7ebc50a00302b4b82b4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 51e84e7e3a1e8a800769985e37374abf6d601f5c
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92519108"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077457"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-yuhu-property-management-platform"></a>Öğretici: yuhu özelliği yönetim platformuyla çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -93,7 +93,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
     | Name | Kaynak özniteliği|
     | ---------------| --------------- |
     | firstName | Kullanıcı. |
-    | lastName | User. soyadı ||
+    | lastName | User. soyadı |
     | e-posta | Kullanıcı. Mail |
 
 1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama Sertifikası** bölümünde **sertifika (ham)** bulun ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.

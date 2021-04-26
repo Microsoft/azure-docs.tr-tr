@@ -4,16 +4,16 @@ description: Bu makale, SSIS tümleştirme çalışma zamanı 'nda SSIS paketi y
 ms.service: data-factory
 ms.topic: conceptual
 ms.author: wenjiefu
-author: wenjiefu
+author: RodgeFu
 ms.reviewer: sawinark
 ms.custom: seo-lt-2019
 ms.date: 04/15/2019
-ms.openlocfilehash: 2bc56d39de392c9e4c20c25b554e3bdeea048bfb
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6eecedbc28bcb8bc0bd46534a2c2692636f6f2c1
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100361885"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105934011"
 ---
 # <a name="troubleshoot-package-execution-in-the-ssis-integration-runtime"></a>SSIS tümleştirme çalışma zamanı 'nda paket yürütmeye sorun giderme
 
@@ -121,7 +121,10 @@ Bu hata, SSIS tümleştirme çalışma zamanı özel kurulum için yapılandır�
 Olası bir neden, Azure AD Multi-Factor Authentication etkinleştirilmiş kullanıcı adının veya parolanın Azure Analysis Services kimlik doğrulaması için yapılandırılmış olması olabilir. Bu kimlik doğrulaması, SSIS tümleştirme çalışma zamanı 'nda desteklenmez. Azure Analysis Services kimlik doğrulaması için bir hizmet sorumlusu kullanmayı deneyin:
 
 1. Hizmet sorumlusu [Ile Otomasyon](../analysis-services/analysis-services-service-principal.md)bölümünde açıklandığı gibi bir hizmet sorumlusu hazırlayın.
-2. Bağlantı Yöneticisi 'nde **belirli bir Kullanıcı adı ve parola kullan**: **AppID** 'yi parola olarak Kullanıcı adı ve **ClientSecret** olarak ayarlayın.
+2. Bağlantı Yöneticisi 'nde **belirli bir Kullanıcı adı ve parola kullan:** **Uygulama:*&lt; AppID &gt;* @* &lt; tenantıd &gt;***, parola olarak Kullanıcı adı ve ClientSecret olarak ayarlayın. Doğru biçimli Kullanıcı adına bir örnek aşağıda verilmiştir:
+ 
+   `app:12345678-9012-3456-789a-bcdef012345678@9abcdef0-1234-5678-9abc-def0123456789abc`
+1. Bağlantı Yöneticisi 'nde **belirli bir Kullanıcı adı ve parola kullan**: **AppID** 'yi parola olarak Kullanıcı adı ve **ClientSecret** olarak ayarlayın.
 
 ### <a name="error-message-adonet-source-has-failed-to-acquire-the-connection-guid-with-the-following-error-message-login-failed-for-user-nt-authorityanonymous-logon-when-using-a-managed-identity"></a>Hata iletisi: "ADONET Source şu hata iletisiyle {GUID} bağlantısını alamadı: yönetilen bir kimlik kullanırken Kullanıcı ' NT AUTHORıTY\ANONYMOUS LOGON ' için oturum açma başarısız oldu
 

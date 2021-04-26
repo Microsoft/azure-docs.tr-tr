@@ -4,12 +4,12 @@ description: 'Hızlı başlangıç: Bu makale, Azure Event Hubs olayları Gönde
 ms.topic: quickstart
 ms.date: 06/23/2020
 ms.custom: devx-track-csharp
-ms.openlocfilehash: ea3ad7e90a947269833a03a4cacf3d4fe76a6620
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3c2ce58f86fa27544641c0917e96fa3172017232
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91334285"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309365"
 ---
 # <a name="quickstart-send-events-to-or-receive-events-from-azure-event-hubs-using-net-framework"></a>Hızlı başlangıç: .NET Framework kullanarak Azure Event Hubs olay gönderme veya olayları alma
 Azure Event Hubs saniyede milyonlarca olay alıp işleme kapasitesine sahip olan bir Büyük Veri akış platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Olay Hub’larının ayrıntılı genel bakışı için bkz. [Olay Hub’larına genel bakış](event-hubs-about.md) ve [Olay Hub’ları özellikleri](event-hubs-features.md).
@@ -208,7 +208,7 @@ Aşağıdaki makaleleri okuyun:
 
 - [EventProcessorHost](event-hubs-event-processor-host.md)
 - [Azure Event Hubs Özellikler ve terminoloji](event-hubs-features.md).
-- [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+- [Event Hubs ile ilgili SSS](event-hubs-faq.yml)
 
 
 <!-- Links -->

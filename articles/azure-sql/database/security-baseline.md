@@ -4,21 +4,19 @@ description: Azure SQL veritabanı güvenlik temeli, Azure Güvenlik kıyaslamas
 author: msmbaldwin
 ms.service: sql-database
 ms.topic: conceptual
-ms.date: 02/17/2021
+ms.date: 03/30/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: ca28c2a1943912ce6a244929e7438edd7680d131
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 29db5b82d73bf96465581ccd6a663455464bbeb9
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105565971"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599579"
 ---
 # <a name="azure-security-baseline-for-azure-sql-database"></a>Azure SQL veritabanı için Azure Güvenlik temeli
 
-Bu güvenlik temeli [Azure Güvenlik kıyaslama sürümü 1,0](../../security/benchmarks/overview.md) ' dan Azure SQL veritabanı 'na kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve Azure SQL veritabanı için geçerli olan ilgili kılavuza göre gruplandırılır. Azure SQL veritabanı için geçerli olmayan **denetimler** dışlandı.
-
-Azure SQL veritabanı 'nın Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için, [tam Azure SQL veritabanı güvenlik temeli eşleme dosyasına](https://github.com/MicrosoftDocs/SecurityBenchmarks/tree/master/Azure%20Offer%20Security%20Baselines)bakın.
+Bu güvenlik temeli [Azure Güvenlik kıyaslama sürümü 1.0](../../security/benchmarks/overview-v1.md) 'DAN Azure SQL veritabanı 'na kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve Azure SQL veritabanı için geçerli olan ilgili kılavuza göre gruplandırılır. **Denetimler** Azure SQL veritabanı için geçerli değildir veya Microsoft 'un sorumluluğunu Microsoft 'un dışında tutulur. Azure SQL veritabanı 'nın Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için, [tam Azure izleyici güvenlik temeli eşleme dosyasına](https://github.com/MicrosoftDocs/SecurityBenchmarks/tree/master/Azure%20Offer%20Security%20Baselines)bakın.
 
 ## <a name="network-security"></a>Ağ Güvenliği
 
@@ -32,9 +30,9 @@ Trafiğin Azure SQL veritabanına ulaşmasını sağlamak için, ağ güvenlik g
 
 Sanal ağ kuralları, Azure SQL veritabanı 'nın yalnızca bir sanal ağ içindeki seçili alt ağlardan gönderilen iletişimleri kabul etmesine olanak tanır.
 
-- [Azure SQL veritabanı için özel bağlantı ayarlama](./private-endpoint-overview.md#how-to-set-up-private-link-for-azure-sql-database)
+- [Azure SQL veritabanı için özel bağlantı ayarlama](/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database)
 
-- [Veritabanı sunucuları için sanal ağ hizmet uç noktalarını ve kurallarını kullanma](./vnet-service-endpoint-rule-overview.md)
+- [Veritabanı sunucuları için sanal ağ hizmet uç noktalarını ve kurallarını kullanma](/azure/sql-database/sql-database-vnet-service-endpoint-rule-overview)
 
 **Sorumluluk**: Müşteri
 
@@ -68,9 +66,9 @@ Ayrıca, NSG akış günlüklerini bir Log Analytics çalışma alanına gönder
 
 **Rehberlik**: dağıtılmış hizmet reddi saldırılarına karşı korumalar için SQL Server örneklarınızla Ilişkili sanal ağlarda DDoS koruma standardını etkinleştirin. Bilinen kötü amaçlı veya kullanılmayan Internet IP adresleriyle iletişimleri reddetmek için Azure Güvenlik Merkezi tümleşik tehdit zekasını kullanın.
 
-- [DDoS korumasını yapılandırma](../../ddos-protection/manage-ddos-protection.md)
+- [DDoS korumasını yapılandırma](/azure/virtual-network/manage-ddos-protection)
 
-- [Azure Güvenlik Merkezi tümleşik tehdit zekasını anlama](../../security-center/azure-defender.md)
+- [Azure Güvenlik Merkezi tümleşik tehdit zekasını anlama](/azure/security-center/security-center-alerts-data-services)
 
 **Sorumluluk**: Müşteri
 
@@ -92,7 +90,7 @@ Ayrıca, NSG akış günlüklerini bir Log Analytics çalışma alanına gönder
 
 **Kılavuz**: Azure SQL veritabanı Için Gelişmiş tehdit koruması 'Nı (ATP) etkinleştirin.  Kullanıcılar şüpheli veritabanı etkinlikleri, olası güvenlik açıkları ve SQL ekleme saldırılarına ve anormal veritabanı erişimi ve sorgu desenleri üzerine bir uyarı alırlar. Gelişmiş tehdit koruması Ayrıca uyarıları Azure Güvenlik Merkezi ile tümleştirir. 
 
-- [Azure SQL veritabanı için Gelişmiş tehdit korumasını anlama ve kullanma](./threat-detection-overview.md)
+- [Azure SQL veritabanı için Gelişmiş tehdit korumasını anlama ve kullanma](/azure/sql-database/sql-database-threat-detection-overview)
 
 **Sorumluluk**: Müşteri
 
@@ -104,7 +102,7 @@ Ayrıca, NSG akış günlüklerini bir Log Analytics çalışma alanına gönder
 
 Azure SQL veritabanı için hizmet uç noktaları kullanılırken, Azure SQL veritabanı genel IP adreslerine giden bağlantı gereklidir: bağlantıya izin vermek için ağ güvenlik grupları (NSG 'Ler) Azure SQL veritabanı IP 'lerine açılmalıdır. Bunu Azure SQL veritabanı için NSG hizmet etiketlerini kullanarak yapabilirsiniz.
 
-- [Hizmet etiketlerini Azure SQL veritabanı için hizmet uç noktaları ile anlayın](./vnet-service-endpoint-rule-overview.md#limitations)
+- [Hizmet etiketlerini Azure SQL veritabanı için hizmet uç noktaları ile anlayın](/azure/sql-database/sql-database-vnet-service-endpoint-rule-overview#limitations)
 
 - [Hizmet etiketlerini anlama ve kullanma](../../virtual-network/service-tags-overview.md)
 
@@ -136,7 +134,7 @@ Tüm kaynakların etiketlerle oluşturulmasını ve mevcut etiketlenmemiş kayna
 
 Azure PowerShell veya Azure CLı kullanarak, etiketlerine göre kaynakları arayabilir veya bunlarla ilgili eylemler gerçekleştirebilirsiniz.
 
-- [Etiketler oluşturma ve kullanma](../../azure-resource-manager/management/tag-resources.md)
+- [Etiketler oluşturma ve kullanma](/azure/azure-resource-manager/resource-group-using-tags)
 
 **Sorumluluk**: Müşteri
 
@@ -146,9 +144,9 @@ Azure PowerShell veya Azure CLı kullanarak, etiketlerine göre kaynakları aray
 
 **Kılavuz**: Azure etkinlik günlüğü 'nü kullanarak ağ kaynak yapılandırmasını Izleyin ve Azure SQL veritabanı sunucu örneklerinizle ilgili ağ kaynaklarına yönelik değişiklikleri tespit edin. Kritik ağ kaynaklarında yapılan değişiklikler yürürlüğe girdiğinde tetiklenecek Azure Izleyici içinde uyarılar oluşturun.
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](../../azure-monitor/essentials/activity-log.md#view-the-activity-log)
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](/azure/azure-monitor/platform/activity-log-view)
 
-- [Azure Izleyici 'de uyarı oluşturma](../../azure-monitor/alerts/alerts-activity-log.md)
+- [Azure Izleyici 'de uyarı oluşturma](/azure/azure-monitor/platform/alerts-activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -164,11 +162,11 @@ Azure PowerShell veya Azure CLı kullanarak, etiketlerine göre kaynakları aray
 
 Ayrıca Azure SQL tanılama telemetrisini, Azure SQL veritabanlarının ve Azure SQL yönetilen örneklerinin ölçeğini ölçekteki ve birden çok aboneliğin performansını izleyen bir bulut çözümü olan Azure SQL Analytics ' a akışla aktarabilirsiniz. Azure SQL veritabanı performans ölçümlerini toplamanıza ve görselleştirmenize yardımcı olabilir ve performans sorunlarını gidermek için yerleşik zekaya sahiptir.
 
-- [Azure SQL veritabanınız için Denetim kurma](./auditing-overview.md)
+- [Azure SQL veritabanınız için Denetim kurma](/azure/sql-database/sql-database-auditing)
 
-- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](./metrics-diagnostic-telemetry-logging-streaming-export-configure.md)
+- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](/azure/sql-database/sql-database-metrics-diag-logging)
 
-- [Tanılamayı Azure SQL Analytics olarak akışa alma](./metrics-diagnostic-telemetry-logging-streaming-export-configure.md#stream-into-sql-analytics)
+- [Tanılamayı Azure SQL Analytics olarak akışa alma](/azure/sql-database/sql-database-metrics-diag-logging#stream-into-azure-sql-analytics)
 
 **Sorumluluk**: Müşteri
 
@@ -178,7 +176,7 @@ Ayrıca Azure SQL tanılama telemetrisini, Azure SQL veritabanlarının ve Azure
 
 **Kılavuz**: Azure SQL veritabanı sunucu Örneğinizde denetimi etkinleştirin ve denetim günlükleri (Azure depolama, Log Analytics veya Olay Hub 'ı) için bir depolama konumu seçin.
 
-- [Azure SQL Server için denetimi etkinleştirme](./auditing-overview.md)
+- [Azure SQL Server için denetimi etkinleştirme](/azure/sql-database/sql-database-auditing)
 
 **Sorumluluk**: Müşteri
 
@@ -192,7 +190,7 @@ Ayrıca Azure SQL tanılama telemetrisini, Azure SQL veritabanlarının ve Azure
 
 **Kılavuz**: Azure SQL veritabanı günlüklerinizi bir Log Analytics çalışma alanında depolarken, kuruluşunuzun uyumluluk düzenlemelerine göre günlük tutma süresini ayarlayın.
 
-- [Günlük tutma parametrelerini ayarlama](../../azure-monitor/logs/manage-cost-storage.md#change-the-data-retention-period)
+- [Günlük tutma parametrelerini ayarlama](/azure/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period)
 
 **Sorumluluk**: Müşteri
 
@@ -206,7 +204,7 @@ Ayrıca Azure SQL tanılama telemetrisini, Azure SQL veritabanlarının ve Azure
 
 **Rehberlik**: anormal davranışlar için günlükleri çözümleyin ve izleyin ve sonuçları düzenli olarak gözden geçirin. Azure SQL veritabanı örneğiniz ile ilgili olağandışı etkinlikleri uyarmak için Azure Güvenlik Merkezi 'nin Gelişmiş tehdit koruması 'nı kullanın. Alternatif olarak, Azure SQL veritabanı örneklerinizle ilgili ölçüm değerlerine veya Azure etkinlik günlüğü girişlerine göre uyarıları yapılandırın.
 
-- [Gelişmiş tehdit koruması ve Azure SQL Server uyarma hakkında bilgi edinin](./threat-detection-overview.md)
+- [Gelişmiş tehdit koruması ve Azure SQL Server uyarma hakkında bilgi edinin](/azure/sql-database/sql-database-threat-detection-overview)
 
 - [Azure SQL veritabanı için özel uyarıları yapılandırma](alerts-insights-configure-portal.md)
 
@@ -218,7 +216,7 @@ Ayrıca Azure SQL tanılama telemetrisini, Azure SQL veritabanlarının ve Azure
 
 **Kılavuz**: Azure Güvenlik Merkezi Gelişmiş tehdit koruması 'Nı Azure SQL veritabanları için, anormal etkinlikleri izlemek ve uyarmak üzere kullanın. SQL veritabanlarınız için SQL için Azure Defender 'ı etkinleştirin. SQL için Azure Defender, hassas verileri bulma ve sınıflandırma, olası veritabanı güvenlik açıklarını ortaya koymasının yanı sıra veritabanlarınızın bir tehdidi oluşturabilecek anormal etkinlikleri algılamayla ilgili işlevsellik içerir.
 
-- [Azure SQL veritabanı için Gelişmiş tehdit koruması ve uyarı vermeyi anlama](./threat-detection-overview.md)
+- [Azure SQL veritabanı için Gelişmiş tehdit koruması ve uyarı vermeyi anlama](/azure/sql-database/sql-database-threat-detection-overview)
 
 - [Azure SQL veritabanı için Azure Defender 'ı etkinleştirme](azure-defender-for-sql.md)
 
@@ -240,9 +238,9 @@ Ayrıca Azure SQL tanılama telemetrisini, Azure SQL veritabanlarının ve Azure
 
 **Rehberlik**: Azure Active Directory (Azure AD), açıkça atanması ve sorgulanabilir olması gereken yerleşik roller içerir. Yönetim gruplarının üyesi olan hesapları bulmaya yönelik geçici sorgular gerçekleştirmek için Azure AD PowerShell modülünü kullanın.
 
-- [Azure AD 'de PowerShell ile dizin rolü alma](/powershell/module/azuread/get-azureaddirectoryrole?amp;preserve-view=true&view=azureadps-2.0)
+- [Azure AD 'de PowerShell ile dizin rolü alma](/powershell/module/azuread/get-azureaddirectoryrole)
 
-- [Azure AD 'de PowerShell ile bir dizin rolünün üyelerini alma](/powershell/module/azuread/get-azureaddirectoryrolemember?amp;preserve-view=true&view=azureadps-2.0)
+- [Azure AD 'de PowerShell ile bir dizin rolünün üyelerini alma](/powershell/module/azuread/get-azureaddirectoryrolemember)
 
 **Sorumluluk**: Müşteri
 
@@ -298,11 +296,11 @@ Ayrıca Azure SQL tanılama telemetrisini, Azure SQL veritabanlarının ve Azure
 
 Veritabanları için olağan dışı ve zararlı olabilecek girişimleri gösteren anormal etkinlikleri algılamak için Azure SQL veritabanı için Gelişmiş tehdit koruması 'nı kullanın.
 
-- [Riskli etkinlik bayrağıyla işaretlenen Azure AD kullanıcılarını belirleme](../../active-directory/identity-protection/overview-identity-protection.md)
+- [Riskli etkinlik bayrağıyla işaretlenen Azure AD kullanıcılarını belirleme](/azure/active-directory/reports-monitoring/concept-user-at-risk)
 
 - [Azure Güvenlik Merkezi 'nde Kullanıcı kimliğini ve erişim etkinliğini izleme](../../security-center/security-center-identity-access.md)
 
-- [Gelişmiş tehdit koruması ve olası uyarıları gözden geçirme](./threat-detection-overview.md#alerts)
+- [Gelişmiş tehdit koruması ve olası uyarıları gözden geçirme](https://docs.microsoft.com/azure/azure-sql/database/threat-detection-overview#alerts)
 
 **Sorumluluk**: Müşteri
 
@@ -360,7 +358,7 @@ Veritabanları için olağan dışı ve zararlı olabilecek girişimleri göster
 
 **Rehberlik**: Azure Active Directory (Azure AD) kimlik koruması ve risk algılamalarını kullanarak otomatik yanıtları, Kullanıcı kimlikleriyle ilgili şüpheli eylemleri tespit etmek üzere yapılandırın. Ayrıca, daha fazla araştırma için verileri Azure Sentinel 'e aktarabilirsiniz.
 
-- [Azure AD risk oturumunu görüntüleme](../../active-directory/identity-protection/overview-identity-protection.md)
+- [Azure AD risk oturumunu görüntüleme](/azure/active-directory/reports-monitoring/concept-risky-sign-ins)
 
 - [Kimlik koruması risk ilkelerini yapılandırma ve etkinleştirme](../../active-directory/identity-protection/howto-identity-protection-configure-risk-policies.md)
 
@@ -386,7 +384,7 @@ Veritabanları için olağan dışı ve zararlı olabilecek girişimleri göster
 
 **Rehberlik**: hassas bilgileri depolayan veya işleyen Azure kaynaklarını izlemeye yardımcı olması için etiketleri kullanın.
 
-- [Etiketler oluşturma ve kullanma](../../azure-resource-manager/management/tag-resources.md)
+- [Etiketler oluşturma ve kullanma](/azure/azure-resource-manager/resource-group-using-tags)
 
 **Sorumluluk**: Müşteri
 
@@ -400,13 +398,13 @@ Veritabanları için olağan dışı ve zararlı olabilecek girişimleri göster
 
 **Rehberlik**: geliştirme, test ve üretim için ayrı abonelikler ve/veya yönetim grupları uygulayın. Kaynaklar VNET/subnet ile ayrılmalıdır, uygun şekilde etiketlenebilir ve bir NSG veya Azure Güvenlik duvarı içinde güvenliği sağlanmış olmalıdır. Hassas verileri depolayan veya işleyen kaynaklar yalıtılmalıdır. Özel bağlantı kullan; Azure SQL Server sanal ağınız içinde dağıtın ve özel uç noktaları kullanarak özel olarak bağlayın.
 
-- [Ek Azure abonelikleri oluşturma](../../cost-management-billing/manage/create-subscription.md)
+- [Ek Azure abonelikleri oluşturma](/azure/billing/billing-create-subscription)
 
-- [Yönetim Grupları oluşturma](../../governance/management-groups/create-management-group-portal.md)
+- [Yönetim Grupları oluşturma](/azure/governance/management-groups/create)
 
-- [Etiketler oluşturma ve kullanma](../../azure-resource-manager/management/tag-resources.md)
+- [Etiketler oluşturma ve kullanma](/azure/azure-resource-manager/resource-group-using-tags)
 
-- [Azure SQL veritabanı için özel bağlantı ayarlama](./private-endpoint-overview.md#how-to-set-up-private-link-for-azure-sql-database)
+- [Azure SQL veritabanı için özel bağlantı ayarlama](/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database)
 
 **Sorumluluk**: Müşteri
 
@@ -418,7 +416,7 @@ Veritabanları için olağan dışı ve zararlı olabilecek girişimleri göster
 
 Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm müşteri içeriklerini gizli olarak değerlendirir ve müşteri veri kaybına ve açığa çıkmasına karşı koruma sağlamak için harika uzunluklara gider. Azure 'daki müşteri verilerinin güvende kalmasını sağlamak için Microsoft, bir dizi güçlü veri koruma denetimi ve özelliği uygulamıştır ve bakımını yapar.
 
-- [Azure SQL veritabanı örneklerinizdeki verilerin ayıklanmasını engellemek için özel bağlantı ve NSG 'ler yapılandırma](./private-endpoint-overview.md)
+- [Azure SQL veritabanı örneklerinizdeki verilerin ayıklanmasını engellemek için özel bağlantı ve NSG 'ler yapılandırma](/azure/sql-database/sql-database-private-endpoint-overview)
 
 - [Azure’da müşteri verilerinin korunmasını anlama](../../security/fundamentals/protection-customer-data.md)
 
@@ -430,7 +428,7 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure SQL veritabanı veri bulma ve sınıflandırma özelliğini kullanın. Veri bulma ve sınıflandırma, &amp; veritabanlarınızdaki hassas verileri korumak, sınıflandırmak ve etiketleme Için Azure SQL veritabanı 'nda yerleşik olarak bulunan gelişmiş yetenekler sağlar.
 
-- [Azure SQL Server veri bulma ve sınıflandırma kullanma](./data-discovery-and-classification-overview.md)
+- [Azure SQL Server veri bulma ve sınıflandırma kullanma](/azure/sql-database/sql-database-data-discovery-and-classification)
 
 **Sorumluluk**: Müşteri
 
@@ -444,9 +442,9 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure SQL veritabanı örneklerine erişimi kimlik doğrulaması ve denetlemeye yönelik Azure Active Directory (Azure AD) kullanın.
 
-- [Azure SQL Server kimlik doğrulaması için Azure AD ile tümleştirme](./authentication-aad-overview.md)
+- [Azure SQL Server kimlik doğrulaması için Azure AD ile tümleştirme](/azure/sql-database/sql-database-aad-authentication)
 
-- [Azure SQL Server erişimi denetleme](./logins-create-manage.md)
+- [Azure SQL Server erişimi denetleme](/azure/sql-database/sql-database-control-access)
 
 **Sorumluluk**: Müşteri
 
@@ -456,7 +454,7 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: saydam veri şifrelemesi (tde), bekleyen verileri şifreleyerek kötü niyetli çevrimdışı etkinlik tehditlerine KARŞı Azure SQL veritabanı, Azure SQL yönetilen örneği ve Azure veri ambarı ' nı korumanıza yardımcı olur. Bu özellik bütün bir veritabanı, yedekleri ve işlem günlüğü dosyaları için gerçek zamanlı şifreleme ve şifre çözme işlemlerini gerçekleştirir ve uygulamada değişiklik yapmayı gerektirmez. Varsayılan olarak, TDE, SQL veritabanı ve SQL yönetilen örneği 'nde yeni dağıtılan tüm veritabanları için etkinleştirilmiştir. TDE şifreleme anahtarı, Microsoft ya da müşteri tarafından yönetilebilir.
 
-- [Saydam veri şifrelemesini yönetme ve kendi şifreleme anahtarlarınızı kullanma](./transparent-data-encryption-tde-overview.md?tabs=azure-portal#manage-transparent-data-encryption)
+- [Saydam veri şifrelemesini yönetme ve kendi şifreleme anahtarlarınızı kullanma](https://docs.microsoft.com/azure/sql-database/transparent-data-encryption-azure-sql?tabs=azure-portal#manage-transparent-data-encryption)
 
 **Sorumluluk**: Müşteri
 
@@ -470,7 +468,7 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure SQL veritabanı 'nın üretim örneklerine ve diğer kritik veya ilgili kaynaklara yönelik değişikliklerin ne zaman gerçekleştiği hakkında uyarı oluşturmak Için Azure etkinlik günlüğü Ile Azure izleyici 'yi kullanın.
 
-- [Azure etkinlik günlüğü olayları için uyarı oluşturma](../../azure-monitor/alerts/alerts-activity-log.md)
+- [Azure etkinlik günlüğü olayları için uyarı oluşturma](/azure/azure-monitor/platform/alerts-activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -484,11 +482,11 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure SQL veritabanı Için Azure Defender 'ı etkinleştirin ve Azure SQL sunucularınızda güvenlik açığı değerlendirmesi gerçekleştirerek Azure Güvenlik Merkezi 'nden öneriler uygulayın.
 
-- [Azure SQL veritabanı 'nda güvenlik açığı değerlendirmeleri nasıl çalıştırılır](./sql-vulnerability-assessment.md)
+- [Azure SQL veritabanı 'nda güvenlik açığı değerlendirmeleri nasıl çalıştırılır](/azure/sql-database/sql-vulnerability-assessment)
 
 - [SQL için Azure Defender 'ı etkinleştirme](azure-defender-for-sql.md)
 
-- [Azure Güvenlik Merkezi güvenlik açığı değerlendirmesi önerilerini uygulama](../../security-center/deploy-vulnerability-assessment-vm.md)
+- [Azure Güvenlik Merkezi güvenlik açığı değerlendirmesi önerilerini uygulama](/azure/security-center/security-center-vulnerability-assessment-recommendations)
 
 **Sorumluluk**: Müşteri
 
@@ -502,7 +500,7 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure SQL veritabanı örneklerinizin düzenli olarak yinelenen taranmasını etkinleştirin; Bu işlem, bir güvenlik açığı değerlendirmesini, veritabanında haftada bir kez otomatik olarak bir tarama çalıştıracak şekilde yapılandırır. Sağladığınız e-posta adreslerine bir tarama sonucu özeti gönderilir. Güvenlik açıklarının düzeltildiğini doğrulamak için sonuçları karşılaştırın.
 
-- [Azure Güvenlik Merkezi 'nde güvenlik açığı değerlendirmesi raporunu dışarı aktarma](./sql-vulnerability-assessment.md#export-an-assessment-report)
+- [Azure Güvenlik Merkezi 'nde güvenlik açığı değerlendirmesi raporunu dışarı aktarma](/azure/sql-database/sql-vulnerability-assessment#implementing-vulnerability-assessment)
 
 **Sorumluluk**: Müşteri
 
@@ -512,7 +510,7 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure Güvenlik Merkezi tarafından sunulan varsayılan risk derecelendirmelerini (güvenli puan) kullanın.
 
-- [Azure Güvenlik Merkezi güvenli Puanını anlama](../../security-center/secure-score-security-controls.md)
+- [Azure Güvenlik Merkezi güvenli Puanını anlama](/azure/security-center/security-center-secure-score)
 
 **Sorumluluk**: Müşteri
 
@@ -534,7 +532,7 @@ Klasik Azure kaynakları kaynak Graph aracılığıyla bulunabilse de, ileri do�
 
 - [Azure Kaynak Graf ile sorgu oluşturma](../../governance/resource-graph/first-query-portal.md)
 
-- [Azure aboneliklerinizi görüntüleme](/powershell/module/az.accounts/get-azsubscription?amp;preserve-view=true&view=azps-4.8.0)
+- [Azure aboneliklerinizi görüntüleme](/powershell/module/az.accounts/get-azsubscription)
 
 - [Azure RBAC 'yi anlama](../../role-based-access-control/overview.md)
 
@@ -546,7 +544,7 @@ Klasik Azure kaynakları kaynak Graph aracılığıyla bulunabilse de, ileri do�
 
 **Kılavuz**: Azure kaynaklarına Etiketler uygulayarak bunları bir taksonomi halinde mantıksal olarak organize etmek için meta veriler verirsiniz.
 
-- [Etiketler oluşturma ve kullanma](../../azure-resource-manager/management/tag-resources.md)
+- [Etiketler oluşturma ve kullanma](/azure/azure-resource-manager/resource-group-using-tags)
 
 **Sorumluluk**: Müşteri
 
@@ -556,11 +554,11 @@ Klasik Azure kaynakları kaynak Graph aracılığıyla bulunabilse de, ileri do�
 
 **Rehberlik**: varlıkları düzenlemek ve izlemek için uygun yerlerde etiketleme, yönetim grupları ve ayrı abonelikler kullanın. Envanterin düzenli olarak mutabakatını yapın ve yetkisiz kaynakların aboneliğin zamanında silindiğinden emin olun.
 
-- [Ek Azure abonelikleri oluşturma](../../cost-management-billing/manage/create-subscription.md)
+- [Ek Azure abonelikleri oluşturma](/azure/billing/billing-create-subscription)
 
-- [Yönetim Grupları oluşturma](../../governance/management-groups/create-management-group-portal.md)
+- [Yönetim Grupları oluşturma](/azure/governance/management-groups/create)
 
-- [Etiketler oluşturma ve kullanma](../../azure-resource-manager/management/tag-resources.md)
+- [Etiketler oluşturma ve kullanma](/azure/azure-resource-manager/resource-group-using-tags)
 
 **Sorumluluk**: Müşteri
 
@@ -594,7 +592,7 @@ Aboneliklerinizin içindeki kaynakları sorgulamak/öğrenmek için Azure Kaynak
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](../../governance/policy/samples/built-in-policies.md#general)
+- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#general)
 
 **Sorumluluk**: Müşteri
 
@@ -640,9 +638,9 @@ Aboneliklerinizin içindeki kaynakları sorgulamak/öğrenmek için Azure Kaynak
 
 **Kılavuz**: özel Azure ilke tanımları kullanıyorsanız, kodunuzu güvenli bir şekilde depolamak ve yönetmek Için Azure devops veya Azure Repos kullanın.
 
-- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?amp;preserve-view=true&view=azure-devops)
+- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow)
 
-- [Azure Repos belgeleri](/azure/devops/repos/?amp;preserve-view=true&view=azure-devops)
+- [Azure Repos belgeleri](/azure/devops/repos/)
 
 **Sorumluluk**: Müşteri
 
@@ -662,7 +660,7 @@ Aboneliklerinizin içindeki kaynakları sorgulamak/öğrenmek için Azure Kaynak
 
 **Kılavuz**: Azure SQL sunucularınız ve veritabanlarına yönelik temel taramalar gerçekleştirmek Için Azure Güvenlik Merkezi 'nden yararlanın.
 
-- [Azure Güvenlik Merkezi 'nde öneriler nasıl düzeltileceği](../../security-center/security-center-remediate-recommendations.md)
+- [Azure Güvenlik Merkezi 'nde öneriler nasıl düzeltileceği](/azure/security-center/security-center-sql-service-recommendations)
 
 **Sorumluluk**: Müşteri
 
@@ -672,7 +670,7 @@ Aboneliklerinizin içindeki kaynakları sorgulamak/öğrenmek için Azure Kaynak
 
 **Kılavuz**: Azure SQL veritabanı saydam veri şifrelemesi (tde) için şifreleme anahtarlarını depolamak üzere Azure Key Vault kullanın.
 
-- [Azure SQL Server 'de depolanan hassas verileri koruma ve şifreleme anahtarlarını Azure Key Vault depolama](./always-encrypted-azure-key-vault-configure.md)
+- [Azure SQL Server 'de depolanan hassas verileri koruma ve şifreleme anahtarlarını Azure Key Vault depolama](/azure/sql-database/sql-database-always-encrypted-azure-key-vault)
 
 **Sorumluluk**: Müşteri
 
@@ -726,7 +724,7 @@ App Service, Data Lake Storage, BLOB depolama, Azure SQL Server vb. gibi işlem 
 
 Farklı uyumluluk gereksinimlerini karşılamak için haftalık, aylık ve/veya yıllık yedeklemeler için farklı saklama süreleri seçebilirsiniz. Depolama alanı tüketimi, seçilen yedekleme sıklığına ve bekletme dönemine bağlıdır.
 
-- [Azure SQL Server yedeklemeleri ve iş devamlılığını anlayın](./business-continuity-high-availability-disaster-recover-hadr-overview.md)
+- [Azure SQL Server yedeklemeleri ve iş devamlılığını anlayın](/azure/sql-database/sql-database-business-continuity)
 
 **Sorumluluk**: Paylaşılan
 
@@ -742,9 +740,9 @@ Farklı uyumluluk gereksinimlerini karşılamak için haftalık, aylık ve/veya 
 
 Saydam Veri Şifrelemesi için müşteri tarafından yönetilen anahtarlar kullanıyorsanız, anahtarlarınızın yedeklendiğinden emin olun.
 
-- [Azure SQL Server yedeklemeleri anlama](./automated-backups-overview.md?tabs=single-database)
+- [Azure SQL Server yedeklemeleri anlama](https://docs.microsoft.com/azure/sql-database/sql-database-automated-backups?tabs=single-database)
 
-- [Azure 'da Anahtar Kasası anahtarlarını yedekleme](/powershell/module/az.keyvault/backup-azkeyvaultkey?amp;preserve-view=true&view=azps-4.8.0)
+- [Azure 'da Anahtar Kasası anahtarlarını yedekleme](/powershell/module/az.keyvault/backup-azkeyvaultkey)
 
 **Sorumluluk**: Müşteri
 
@@ -758,9 +756,9 @@ Saydam Veri Şifrelemesi için müşteri tarafından yönetilen anahtarlar kulla
 
 **Rehberlik**: Azure Backup içindeki içeriğin düzenli olarak veri geri yüklemesini gerçekleştirme olanağı sağlar. Gerekirse, içeriği yalıtılmış bir VLAN 'a geri yükleme testi yapın. Yedeklenen müşteri tarafından yönetilen anahtarların test geri yüklemesi.
 
-- [Azure 'da Anahtar Kasası anahtarlarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultkey?amp;preserve-view=true&view=azps-4.8.0)
+- [Azure 'da Anahtar Kasası anahtarlarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultkey)
 
-- [Azure SQL veritabanı yedeklemelerini, zaman içinde nokta geri yükleme kullanarak kurtarma](./recovery-using-backups.md#point-in-time-restore)
+- [Azure SQL veritabanı yedeklemelerini, zaman içinde nokta geri yükleme kullanarak kurtarma](/azure/sql-database/sql-database-recovery-using-backups#point-in-time-restore)
 
 **Sorumluluk**: Müşteri
 
@@ -770,7 +768,7 @@ Saydam Veri Şifrelemesi için müşteri tarafından yönetilen anahtarlar kulla
 
 **Rehberlik**: anahtarları yanlışlıkla veya kötü amaçlı silmeye karşı korumak için Azure Key Vault geçici silme özelliğini etkinleştirin.
 
-- [Key Vault 'da geçici silme nasıl etkinleştirilir](../../storage/blobs/soft-delete-blob-overview.md?tabs=azure-portal)
+- [Key Vault 'da geçici silme nasıl etkinleştirilir](https://docs.microsoft.com/azure/storage/blobs/storage-blob-soft-delete?tabs=azure-portal)
 
 **Sorumluluk**: Müşteri
 
@@ -860,5 +858,5 @@ Saydam Veri Şifrelemesi için müşteri tarafından yönetilen anahtarlar kulla
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](../../security/benchmarks/overview.md)
-- [Azure güvenlik temelleri](../../security/benchmarks/security-baselines-overview.md) hakkında daha fazla bilgi edinin
+- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](/azure/security/benchmarks/overview)
+- [Azure güvenlik temelleri](/azure/security/benchmarks/security-baselines-overview) hakkında daha fazla bilgi edinin

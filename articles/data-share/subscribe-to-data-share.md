@@ -6,12 +6,12 @@ ms.author: jife
 ms.service: data-share
 ms.topic: tutorial
 ms.date: 03/24/2021
-ms.openlocfilehash: ccfda4975b6453ed67edc2640520bc0a76df5709
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: d063a0870616b5b977df18c56d9d66515b03d0a5
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105644889"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870869"
 ---
 # <a name="tutorial-accept-and-receive-data-using-azure-data-share"></a>Öğretici: Azure Veri Paylaşımı’nı kullanarak veri kabul etme ve alma  
 
@@ -106,7 +106,7 @@ Başlangıç olarak ortamınızı Azure CLI için hazırlayın:
 
 [!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-Geçerli davetlerinizi görmek için [az datashare Consumer davet List](/cli/azure/ext/datashare/datashare/consumer/invitation#ext_datashare_az_datashare_consumer_invitation_list) komutunu çalıştırın:
+Geçerli davetlerinizi görmek için [az datashare Consumer davet List](/cli/azure/datashare/consumer/invitation#az_datashare_consumer_invitation_list) komutunu çalıştırın:
 
 ```azurecli
 az datashare consumer invitation list --subscription 11111111-1111-1111-1111-111111111111
@@ -140,7 +140,7 @@ Bir sonraki bölümde kullanım için davet KIMLIĞINIZI kopyalayın.
 
 ### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Veri paylaşımının oluşturulması için [az datashare Consumer Share-Subscription Create](/cli/azure/ext/datashare/datashare/consumer/share-subscription#ext_datashare_az_datashare_consumer_share_subscription_create) komutunu kullanın.
+Veri paylaşımının oluşturulması için [az datashare Consumer Share-Subscription Create](/cli/azure/datashare/consumer/share-subscription#az_datashare_consumer_share_subscription_create) komutunu kullanın.
 
 ```azurecli
 az datashare consumer share-subscription create --resource-group share-rg \
@@ -175,7 +175,7 @@ Verileri almak istediğiniz yeri yapılandırmak için aşağıdaki adımları i
 
 Veri almak istediğiniz yeri yapılandırmak için bu komutları kullanın.
 
-1. Veri kümesi KIMLIĞINI almak için [az datashare tüketicisi Share-Subscription List-Source-DataSet](/cli/azure/ext/datashare/datashare/consumer/share-subscription#ext_datashare_az_datashare_consumer_share_subscription_list_source_dataset) komutunu çalıştırın:
+1. Veri kümesi KIMLIĞINI almak için [az datashare tüketicisi Share-Subscription List-Source-DataSet](/cli/azure/datashare/consumer/share-subscription#az_datashare_consumer_share_subscription_list_source_dataset) komutunu çalıştırın:
 
    ```azurecli
    az datashare consumer share-subscription list-source-dataset \
@@ -221,7 +221,7 @@ Veri almak istediğiniz yeri yapılandırmak için bu komutları kullanın.
      \"storage_account_name\":\"datashareconsumersa\",\"kind\":\"BlobFolder\",\"prefix\":\"consumer\"}'
    ```
 
-1. Veri kümesi eşlemesini oluşturmak için [az datashare tüketicisi DataSet-Mapping Create](/cli/azure/ext/datashare/datashare/consumer/dataset-mapping#ext_datashare_az_datashare_consumer_dataset_mapping_create) komutunu kullanın:
+1. Veri kümesi eşlemesini oluşturmak için [az datashare tüketicisi DataSet-Mapping Create](/cli/azure/datashare/consumer/dataset-mapping#az_datashare_consumer_dataset_mapping_create) komutunu kullanın:
 
    ```azurecli
    az datashare consumer dataset-mapping create --resource-group "share-rg" \
@@ -230,7 +230,7 @@ Veri almak istediğiniz yeri yapılandırmak için bu komutları kullanın.
      --subscription 11111111-1111-1111-1111-111111111111
    ```
 
-1. Veri kümesi eşitlemesini başlatmak için [az datashare Consumer Share-Subscription Synchronization start](/cli/azure/ext/datashare/datashare/consumer/share-subscription/synchronization#ext_datashare_az_datashare_consumer_share_subscription_synchronization_start) komutunu çalıştırın.
+1. Veri kümesi eşitlemesini başlatmak için [az datashare Consumer Share-Subscription Synchronization start](/cli/azure/datashare/consumer/share-subscription/synchronization#az_datashare_consumer_share_subscription_synchronization_start) komutunu çalıştırın.
 
    ```azurecli
    az datashare consumer share-subscription synchronization start \
@@ -239,7 +239,7 @@ Veri almak istediğiniz yeri yapılandırmak için bu komutları kullanın.
      --subscription 11111111-1111-1111-1111-111111111111
    ```
 
-   Eşitlerinizin bir listesini görmek için [az datashare Consumer Share-Subscription Synchronization List](/cli/azure/ext/datashare/datashare/consumer/share-subscription/synchronization#ext_datashare_az_datashare_consumer_share_subscription_synchronization_list) komutunu çalıştırın:
+   Eşitlerinizin bir listesini görmek için [az datashare Consumer Share-Subscription Synchronization List](/cli/azure/datashare/consumer/share-subscription/synchronization#az_datashare_consumer_share_subscription_synchronization_list) komutunu çalıştırın:
 
    ```azurecli
    az datashare consumer share-subscription synchronization list \
@@ -248,7 +248,7 @@ Veri almak istediğiniz yeri yapılandırmak için bu komutları kullanın.
      --subscription 11111111-1111-1111-1111-111111111111
    ```
 
-   Paylaşımınızda ayarlanan eşitleme ayarlarını görmek için [az datashare Consumer Share-Subscription List-Source-Share-Synchronization-Setting](/cli/azure/ext/datashare/datashare/consumer/share-subscription#ext_datashare_az_datashare_consumer_share_subscription_list_source_share_synchronization_setting) komutunu kullanın.
+   Paylaşımınızda ayarlanan eşitleme ayarlarını görmek için [az datashare Consumer Share-Subscription List-Source-Share-Synchronization-Setting](/cli/azure/datashare/consumer/share-subscription#az_datashare_consumer_share_subscription_list_source_share_synchronization_setting) komutunu kullanın.
 
    ```azurecli
    az datashare consumer share-subscription list-source-share-synchronization-setting \
@@ -274,7 +274,7 @@ Bu adımlar yalnızca anlık görüntü tabanlı paylaşım için geçerlidir.
 
 ### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Bir anlık görüntü tetiklemek için [az datashare tüketici tetikleyicisi Create](/cli/azure/ext/datashare/datashare/consumer/trigger#ext_datashare_az_datashare_consumer_trigger_create) komutunu çalıştırın:
+Bir anlık görüntü tetiklemek için [az datashare tüketici tetikleyicisi Create](/cli/azure/datashare/consumer/trigger#az_datashare_consumer_trigger_create) komutunu çalıştırın:
 
 ```azurecli
 az datashare consumer trigger create --resource-group "share-rg" \

@@ -7,16 +7,16 @@ ms.service: web-application-firewall
 ms.date: 11/10/2020
 ms.author: victorh
 ms.topic: conceptual
-ms.openlocfilehash: a92679bb3114c4a60870424f3ec68a8de7b303da
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 83baf03c414d9b0f7acb6a93db03794a539a3c58
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102499926"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107860842"
 ---
 # <a name="web-application-firewall-waf-with-front-door-service-exclusion-lists"></a>Ön kapı hizmeti dışlama listeleriyle Web uygulaması güvenlik duvarı (WAF) 
 
-Bazen Web uygulaması güvenlik duvarı (WAF), uygulamanız için izin vermek istediğiniz bir isteği engelleyebilirler. Örneğin Active Directory, kimlik doğrulaması için kullanılan belirteçleri ekler. Bu belirteçler, WAF kurallarından yanlış pozitif bir pozitif tetikleyebildiği özel karakterler içerebilir. WAF dışlama listeleri, bir WAF değerlendirmesinden belirli istek özniteliklerini atlamanızı sağlar.  Dışlama listesi  [PowerShell](/powershell/module/az.frontdoor/New-AzFrontDoorWafManagedRuleExclusionObject), [Azure CLı](/cli/azure/ext/front-door/network/front-door/waf-policy/managed-rules/exclusion#ext-front-door-az-network-front-door-waf-policy-managed-rules-exclusion-add), [REST API](/rest/api/frontdoorservice/webapplicationfirewall/policies/createorupdate)veya Azure Portal kullanılarak yapılandırılabilir. Aşağıdaki örnek Azure portal yapılandırmasını gösterir. 
+Bazen Web uygulaması güvenlik duvarı (WAF), uygulamanız için izin vermek istediğiniz bir isteği engelleyebilirler. Örneğin Active Directory, kimlik doğrulaması için kullanılan belirteçleri ekler. Bu belirteçler, WAF kurallarından yanlış pozitif bir pozitif tetikleyebildiği özel karakterler içerebilir. WAF dışlama listeleri, bir WAF değerlendirmesinden belirli istek özniteliklerini atlamanızı sağlar.  Dışlama listesi  [PowerShell](/powershell/module/az.frontdoor/New-AzFrontDoorWafManagedRuleExclusionObject), [Azure CLı](/cli/azure/network/front-door/waf-policy/managed-rules/exclusion#az_network_front_door_waf_policy_managed_rules_exclusion_add), [REST API](/rest/api/frontdoorservice/webapplicationfirewall/policies/createorupdate)veya Azure Portal kullanılarak yapılandırılabilir. Aşağıdaki örnek Azure portal yapılandırmasını gösterir. 
 ## <a name="configure-exclusion-lists-using-the-azure-portal"></a>Dışlama listelerini Azure portal kullanarak yapılandırma
 Özel **durumları yönetme** işlemi, WAF portalından **yönetilen kurallar** altında erişilebilir
 

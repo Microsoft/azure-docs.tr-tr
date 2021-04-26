@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 11/20/2020
 ms.author: cynthn
-ms.openlocfilehash: 9425759de1e08bc83cac80cd1b56c602edb59fb1
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: c57f66eca5d15024c6b10e8fad12ddb575b9f894
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102562971"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765908"
 ---
 # <a name="control-updates-with-maintenance-control-and-the-azure-cli"></a>Bakım denetimi ve Azure CLı ile güncelleştirmeleri denetleme
 
@@ -93,7 +93,7 @@ az maintenance assignment create \
 
 Bir yapılandırmayı adanmış bir konağa uygulamak için, `--resource-type hosts` `--resource-parent-name` konak grubunun adı ve ile birlikte dahil etmeniz gerekir `--resource-parent-type hostGroups` . 
 
-Parametresi, `--resource-id` KONAĞıN kimliğidir. Adanmış ana makinenizin KIMLIĞINI almak için [az VM Host Get-instance-View](/cli/azure/vm/host#az-vm-host-get-instance-view) ' i kullanabilirsiniz.
+Parametresi, `--resource-id` KONAĞıN kimliğidir. Adanmış ana makinenizin KIMLIĞINI almak için [az VM Host Get-instance-View](/cli/azure/vm/host#az_vm_host_get_instance_view) ' i kullanabilirsiniz.
 
 ```azurecli-interactive
 az maintenance assignment create \

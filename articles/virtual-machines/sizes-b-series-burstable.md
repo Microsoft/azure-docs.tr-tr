@@ -3,17 +3,17 @@ title: B serisi Burstable-Azure sanal makineleri
 description: Koyu Azure VM boyutlarının B serisini açıklar.
 services: virtual-machines
 ms.subservice: vm-sizes-general
-author: styli365
+author: rishabv90
 ms.service: virtual-machines
 ms.topic: conceptual
 ms.date: 02/03/2020
-ms.author: sttsinar
-ms.openlocfilehash: c19c47ac64f1e41fa998a29d3ea0480bf0d92a63
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.author: risverma
+ms.openlocfilehash: e0797dfd8c4bf1cf86e2eeafb824298c412e5f1f
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102554471"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106491823"
 ---
 # <a name="b-series-burstable-virtual-machine-sizes"></a>B serisi Burstable sanal makine boyutları
 

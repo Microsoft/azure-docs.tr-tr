@@ -1,25 +1,24 @@
 ---
 title: Azure Key Vault erişim ilkesi atama
-description: Hizmet sorumlusuna veya uygulama kimliğine Key Vault erişim ilkesi atamak için Azure portal, Azure CLı veya Azure PowerShell kullanma.
+description: Bir güvenlik sorumlusu veya uygulama kimliğine Key Vault erişim ilkesi atamak için Azure portal, Azure CLı veya Azure PowerShell kullanma.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: how-to
 ms.date: 08/27/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 4cf0393cdb0aae1b352b81df4893f874f34970cc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1c7c31f38d6a59f4ded17e1e1fd7e985ce59922a
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97934546"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751427"
 ---
 # <a name="assign-a-key-vault-access-policy-using-azure-powershell"></a>Azure PowerShell kullanarak Key Vault erişim ilkesi atama
 
-Key Vault erişim ilkesi, belirli bir hizmet sorumlusunun bir uygulama veya Kullanıcı grubu tarafından Key Vault [gizli](../secrets/index.yml)diziler, [anahtarlar](../keys/index.yml)ve [Sertifikalar](../certificates/index.yml)üzerinde farklı işlemler yapıp gerçekleştiremeyeceğini belirler. [Azure Portal](assign-access-policy-portal.md), [Azure CLI](assign-access-policy-cli.md)veya Azure PowerShell (Bu makale) kullanarak erişim ilkeleri atayabilirsiniz.
+Key Vault erişim ilkesi, bir Kullanıcı, uygulama veya Kullanıcı grubu gibi belirli bir güvenlik sorumlusunun Key Vault [gizli](../secrets/index.yml)diziler, [anahtarlar](../keys/index.yml)ve [Sertifikalar](../certificates/index.yml)üzerinde farklı işlemler yapıp gerçekleştiremeyeceğini belirler. [Azure Portal](assign-access-policy-portal.md), [Azure CLI](assign-access-policy-cli.md)veya Azure PowerShell (Bu makale) kullanarak erişim ilkeleri atayabilirsiniz.
 
 [!INCLUDE [key-vault-access-policy-limits.md](../../../includes/key-vault-access-policy-limits.md)]
 
@@ -80,5 +79,5 @@ Yalnızca `-PermissionsToSecrets` `-PermissionsToKeys` `-PermissionsToCertificat
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Azure Key Vault güvenliği: kimlik ve erişim yönetimi](security-overview.md#identity-management)
-- [Anahtar kasanızın güvenliğini sağlayın](secure-your-key-vault.md).
+- [Anahtar kasanızın güvenliğini sağlayın](security-overview.md).
 - [Geliştirici Kılavuzu Azure Key Vault](developers-guide.md)

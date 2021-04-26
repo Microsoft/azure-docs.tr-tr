@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 03/08/2021
 ms.author: amverma
 ms.reviewer: jushiman
-ms.openlocfilehash: 6978c8588b877c065a78bfd6e99a01f9f75066f3
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 25f0933c2d0b8b3c8ec227ce52c974a50a671043
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104800865"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309739"
 ---
 # <a name="hbv2-series"></a>HBv2 serisi
 
@@ -23,6 +23,7 @@ HBv2 serisi VM 'Ler özelliği 200 GB/sn Mellanox HDR InfiniBand. Bu VM 'Ler, iy
 
 [Premium Depolama](premium-storage-performance.md): desteklenir<br>
 [Premium depolama önbelleği](premium-storage-performance.md): desteklenir<br>
+[Ultra diskler](disks-types.md#ultra-disk): desteklenir (kullanılabilirlik, kullanım ve performans hakkında[daha fazla bilgi edinin](https://techcommunity.microsoft.com/t5/azure-compute/ultra-disk-storage-for-hpc-and-gpu-vms/ba-p/2189312) ) <br>
 [Dinamik geçiş](maintenance-and-updates.md): desteklenmiyor<br>
 [Güncelleştirmeleri koruyan bellek](maintenance-and-updates.md): desteklenmiyor<br>
 [VM oluşturma desteği](generation-2.md): 1. ve 2. nesil<br>

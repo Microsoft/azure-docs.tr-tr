@@ -4,10 +4,10 @@ description: ISO 27001 App Service ortamı/SQL veritabanı iş yükü şeması '
 ms.date: 02/05/2021
 ms.topic: sample
 ms.openlocfilehash: 5c329a9d7175772e80ea6d9d8da3baf85ce0d170
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104669653"
 ---
 # <a name="deploy-the-iso-27001-app-service-environmentsql-database-workload-blueprint-sample"></a>ISO 27001 App Service Ortamı/SQL veritabanı iş yükü şeması örneğini dağıtma

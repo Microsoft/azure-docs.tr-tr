@@ -11,16 +11,14 @@ ms.reviewer: Luis.Quintanilla
 ms.date: 07/09/2020
 ms.topic: conceptual
 ms.custom: how-to, devx-track-python, responsible-ml
-ms.openlocfilehash: fda1bc2ef0a112a8a32ba7c4caebf29028c8cdd7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d79458cfc76adcfd35a6b8dee40c0c45786abc28
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98222760"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107763298"
 ---
 # <a name="use-the-interpretability-package-to-explain-ml-models--predictions-in-python-preview"></a>Python 'da (Önizleme), ML modellerini & öngörülerini açıklamak için yorumlamalar paketini kullanın
-
-
 
 Bu nasıl yapılır kılavuzunda, aşağıdaki görevleri gerçekleştirmek için Azure Machine Learning Python SDK 'sının yorumlenebilirlik paketini kullanmayı öğreneceksiniz:
 
@@ -36,8 +34,9 @@ Bu nasıl yapılır kılavuzunda, aşağıdaki görevleri gerçekleştirmek içi
 * Inkoya sınırlama sırasında açıklamaları gözlemlemek için modelinize birlikte bir Puanlama açıklama dağıtın.
 
 
-
 Desteklenen yorumlenebilirlik teknikleri ve makine öğrenimi modelleri hakkında daha fazla bilgi için, Azure Machine Learning ve [örnek not defterlerinde](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/explain-model) [model yorumlenebilirliğini](how-to-machine-learning-interpretability.md) inceleyin.
+
+Otomatik makine öğrenimi ile eğitilen modeller için yorumlenebilirliği etkinleştirme hakkında yönergeler için bkz. [otomatik makine öğrenimi modelleri için model açıklamaları (Önizleme)](how-to-machine-learning-interpretability-automl.md). 
 
 ## <a name="generate-feature-importance-value-on-your-personal-machine"></a>Kişisel makinenizde Özellik önemi değeri oluştur 
 Aşağıdaki örnekte, Azure hizmetleriyle iletişim kurmadan kişisel makinenizde yorumlenebilirlik paketinin nasıl kullanılacağı gösterilmektedir.
@@ -296,7 +295,7 @@ Aşağıdaki örnek, `ExplanationClient` uzak çalıştırmalar için model yoru
 
 ## <a name="visualizations"></a>Görsel öğeler
 
-Yerel Jupyter Notebook açıklamaları indirdikten sonra, modelinizi anlamak ve yorumlamak için görselleştirme panosunu kullanabilirsiniz. Jupyter Notebook görselleştirme panosu pencere öğesini yüklemek için aşağıdaki kodu kullanın:
+Açıklamaları yerel Jupyter Notebook indirdikten sonra, modellerinizi anlamak ve yorumlamak için açıklamalar panosundaki görselleştirmeleri kullanabilirsiniz. Jupyter Notebook açıklamalar panosu pencere öğesini yüklemek için aşağıdaki kodu kullanın:
 
 ```python
 from interpret_community.widget import ExplanationDashboard
@@ -304,7 +303,7 @@ from interpret_community.widget import ExplanationDashboard
 ExplanationDashboard(global_explanation, model, datasetX=x_test)
 ```
 
-Görselleştirme, hem mühendislik uygulanan hem de ham özelliklerde açıklamaları destekler. Ham açıklamalar orijinal veri kümesindeki özellikleri temel alır ve uygulanan açıklamalar, özellik Mühendisliği uygulanmış olan veri kümesindeki özelliklere dayanır.
+Görselleştirmeler hem mühendislik uygulanan hem de ham özelliklerde açıklamaları destekler. Ham açıklamalar orijinal veri kümesindeki özellikleri temel alır ve uygulanan açıklamalar, özellik Mühendisliği uygulanmış olan veri kümesindeki özelliklere dayanır.
 
 Özgün veri kümesiyle ilgili bir modeli yorumlamaya çalışırken, her bir özellik önem derecesi özgün veri kümesindeki bir sütuna karşılık geldiği için ham açıklamaları kullanmanız önerilir. Bir kategorik özellikten tek tek kategorilerin etkisini incelerken, uygulanan açıklamaları yararlı olabilecek bir senaryo. Kategorik bir özelliğe tek yönlü bir kodlama uygulanmışsa, sonuçta elde edilen mühendislik uygulanan açıklamalar kategori başına farklı bir önem derecesi, tek başına mühendislik uygulanan bir özellik için de içerecektir. Bu, veri kümesinin hangi bölümünün modele en çok bilgilendirici olduğunu daraltdığınızda yararlı olabilir.
 
@@ -353,11 +352,11 @@ Açıklama sekmesinin dördüncü sekmesi, bireysel bir DataPoint ve bireysel ö
 
 ### <a name="visualization-in-azure-machine-learning-studio"></a>Azure Machine Learning Studio 'da görselleştirme
 
-[Uzaktan YORUMSİZ](how-to-machine-learning-interpretability-aml.md#generate-feature-importance-values-via-remote-runs) adımları tamamlarınız (üretilen açıklama Azure Machine Learning çalıştırma geçmişine yüklenirken), görselleştirme panosunu [Azure Machine Learning Studio](https://ml.azure.com)'da görüntüleyebilirsiniz. Bu Pano, yukarıda açıklanan görselleştirme panosunun daha basit bir sürümüdür. Azure Machine Learning Studio 'da gerçek zamanlı hesaplamalar gerçekleştirebilen etkin bir işlem olmadığından What-If DataPoint oluşturma ve buz çizimleri devre dışı bırakılmıştır.
+[Uzaktan yorumlanabilecek](how-to-machine-learning-interpretability-aml.md#generate-feature-importance-values-via-remote-runs) adımları tamamlarınız (Azure Machine Learning çalıştırma geçmişine oluşturulan açıklamaları karşıya yüklerken), görselleştirmeleri [Azure Machine Learning Studio](https://ml.azure.com)'daki açıklamalar panosunda görüntüleyebilirsiniz. Bu Pano, Jupyter Not defteriniz içinde oluşturulan pano pencere öğesinin daha basit bir sürümüdür. Azure Machine Learning Studio 'da gerçek zamanlı hesaplamalar gerçekleştirebilen etkin bir işlem olmadığından What-If DataPoint oluşturma ve buz çizimleri devre dışı bırakılmıştır.
 
 Veri kümesi, genel ve yerel açıklamalar varsa, veriler sekmelerin tümünü doldurur. Yalnızca genel bir açıklama varsa, bireysel Özellik önem düzeyi sekmesi devre dışı bırakılır.
 
-Azure Machine Learning Studio 'daki görselleştirme panosuna erişmek için bu yollardan birini izleyin:
+Azure Machine Learning Studio 'daki açıklamalar panosuna erişmek için bu yollardan birini izleyin:
 
 * **Denemeleri** bölmesi (Önizleme)
   1. Azure Machine Learning üzerinde çalıştırdığınız denemeleri listesini görmek için sol bölmedeki **denemeleri** öğesini seçin.
@@ -368,7 +367,7 @@ Azure Machine Learning Studio 'daki görselleştirme panosuna erişmek için bu 
 
 * **Modeller** bölmesi
   1. [Azure Machine Learning ile modelleri dağıtma](./how-to-deploy-and-where.md)bölümündeki adımları izleyerek orijinal modelinizi kaydettiniz, görüntülemek için sol bölmedeki **modeller** ' ı seçebilirsiniz.
-  1. Açıklama görselleştirme panosunu görüntülemek için bir model ve ardından **açıklamalar** sekmesini seçin.
+  1. Açıklamalar panosunu görüntülemek için bir model ve ardından **açıklamalar** sekmesini seçin.
 
 ## <a name="interpretability-at-inference-time"></a>Çıkarımı zamanında yorumlenebilirlik
 

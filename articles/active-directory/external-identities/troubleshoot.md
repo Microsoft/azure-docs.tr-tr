@@ -5,7 +5,7 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: B2B
 ms.topic: troubleshooting
-ms.date: 02/12/2021
+ms.date: 04/12/2021
 tags: active-directory
 ms.author: mimart
 author: msmimart
@@ -14,12 +14,12 @@ ms.custom:
 - it-pro
 - seo-update-azuread-jan"
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 60cd944ecb144a30e872259f6e959a11c3ea6319
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8c38bab420618b04f8153a123ce9b988215c40e8
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100365438"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304503"
 ---
 # <a name="troubleshooting-azure-active-directory-b2b-collaboration"></a>B2B işbirliği Azure Active Directory sorunlarını giderme
 
@@ -74,6 +74,9 @@ Dış kullanıcılar, yalnızca "atanan" veya "güvenlik" gruplarına eklenebili
 ## <a name="my-external-user-did-not-receive-an-email-to-redeem"></a>Dış Kullanıcı kullanılacak e-posta almadı
 
 Davetli kişinin, aşağıdaki adrese izin verildiğinden emin olmak için ISS veya e-posta filtresini denetlemesi gerekir: Invites@microsoft.com
+
+> [!NOTE]
+> Çin 'de 21Vianet tarafından işletilen Azure hizmeti için gönderici adresi olur Invites@oe.21vianet.com .
 
 ## <a name="i-notice-that-the-custom-message-does-not-get-included-with-invitation-messages-at-times"></a>Özel iletinin, zaman içinde davet iletilerine dahil edilmediğini fark ediyorum
 

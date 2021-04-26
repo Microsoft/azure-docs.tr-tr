@@ -3,12 +3,12 @@ title: Şablonlarla çoklu VM ortamları ve PaaS kaynakları oluşturma
 description: Azure Resource Manager şablonundan Azure DevTest Labs çoklu VM ortamları ve PaaS kaynakları oluşturmayı öğrenin
 ms.topic: article
 ms.date: 08/12/2020
-ms.openlocfilehash: 97659d4ab95fdbe75460161d0ceed71a1cb5cf82
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f285acffe642a85fa27792ee51ea67a57f6d35a5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88182417"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790122"
 ---
 # <a name="create-multi-vm-environments-and-paas-resources-with-azure-resource-manager-templates"></a>Azure Resource Manager şablonları ile çoklu VM ortamları ve PaaS kaynakları oluşturma
 
@@ -264,7 +264,7 @@ Aşağıdaki örnek betik laboratuvarınızda bir ortam oluşturur. Açıklamala
 Ayrıca, Kaynak Yöneticisi şablonlarıyla kaynakları dağıtmak için Azure CLı 'yi de kullanabilirsiniz. Daha fazla bilgi için bkz. [Kaynak Yöneticisi şablonları ve Azure CLI ile kaynak dağıtma](../azure-resource-manager/templates/deploy-cli.md).
 
 > [!NOTE]
-> Yalnızca laboratuvar sahibi izinleri olan bir Kullanıcı, Azure PowerShell kullanarak Kaynak Yöneticisi şablondan VM 'Ler oluşturabilir. VM oluşturmayı Kaynak Yöneticisi şablonu kullanarak otomatikleştirmek istiyorsanız ve yalnızca kullanıcı izinleriniz varsa, [az Lab VM Create](/cli/azure/lab/vm#az-lab-vm-create)CLI komutunu kullanabilirsiniz.
+> Yalnızca laboratuvar sahibi izinleri olan bir Kullanıcı, Azure PowerShell kullanarak Kaynak Yöneticisi şablondan VM 'Ler oluşturabilir. VM oluşturmayı Kaynak Yöneticisi şablonu kullanarak otomatikleştirmek istiyorsanız ve yalnızca kullanıcı izinleriniz varsa, [az Lab VM Create](/cli/azure/lab/vm#az_lab_vm_create)CLI komutunu kullanabilirsiniz.
 
 ## <a name="resource-manager-template-limitations-in-devtest-labs"></a>DevTest Labs 'de şablon kısıtlamalarını Kaynak Yöneticisi
 

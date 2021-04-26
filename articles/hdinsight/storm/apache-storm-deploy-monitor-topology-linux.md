@@ -6,10 +6,10 @@ ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/18/2019
 ms.openlocfilehash: fb57992c8e26560061faf68443c4993801f9713d
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104871580"
 ---
 # <a name="deploy-and-manage-apache-storm-topologies-on-azure-hdinsight"></a>Azure HDInsight 'ta Apache Storm topolojileri dağıtma ve yönetme
@@ -169,7 +169,7 @@ Fırtınası Kullanıcı arabirimi, çalışan topolojilerle çalışmaya yönel
 
 Fırtınası Kullanıcı arabiriminin ana sayfası aşağıdaki bilgileri sağlar:
 
-| Section | Açıklama |
+| Section | Description |
 | --- | --- |
 | Küme özeti| Fırtınası kümesiyle ilgili temel bilgiler. |
 | Nimbus Özeti | Temel Nimbus bilgilerinin listesi. |
@@ -185,7 +185,7 @@ Fırtınası Kullanıcı arabirimi ana sayfası bu Web sayfasına benzer şekild
 
 **Topoloji Özeti** bölümünden bir bağlantı seçmek topolojiyle ilgili aşağıdaki bilgileri görüntüler:
 
-| Section | Açıklama |
+| Section | Description |
 | --- | --- |
 | Topoloji Özeti | Topolojiyle ilgili temel bilgiler. |
 | Topoloji eylemleri| Topoloji için yapabileceğiniz yönetim eylemleri. Kullanılabilir eylemler, bu bölümün ilerleyen kısımlarında açıklanmıştır. |
@@ -202,7 +202,7 @@ Fırtınası topolojisi Özet sayfası, bu Web sayfasına benzer şekilde görü
 
 **Topoloji eylemleri** bölümünde, bir eylem yapmak için aşağıdaki düğmeleri seçebilirsiniz:
 
-| Düğme | Açıklama |
+| Düğme | Description |
 | --- | --- |
 | Etkinleştir | Devre dışı bırakılan bir topoloji işlemeyi sürdürür. |
 | Devre dışı bırak | Çalışan bir topolojiyi duraklatır. |
@@ -216,7 +216,7 @@ Fırtınası topolojisi Özet sayfası, bu Web sayfasına benzer şekilde görü
 
 **Spout** veya **cıvatalar** bölümlerinden bir biriktirmede seçim yapmak seçili öğeyle ilgili aşağıdaki bilgileri görüntüler:
 
-| Section | Açıklama |
+| Section | Description |
 | --- | --- |
 | Bileşen Özeti | Spout veya cıvam hakkındaki temel bilgiler. |
 | Bileşen eylemleri | **Hata Ayıkla ve** **Hata Ayıkla** düğmeleri. |
@@ -246,7 +246,7 @@ Linux tabanlı HDInsight kümelerinde REST API için temel URI, `https://HEADNOD
 
 Küme baş düğümü için tam etki alanı adını (FQDN) çeşitli yollarla bulabilirsiniz:
 
-| FQDN bulma yöntemi | Açıklama |
+| FQDN bulma yöntemi | Description |
 | --- | --- |
 | SSH oturumu | `headnode -f`Kümeden BIR SSH oturumunda komutunu kullanın. |
 | Ambarı web | Ambarı küme Web sayfasında ( `https://CLUSTERNAME.azurehdinsight.net` ), sayfanın üst kısmından **Hizmetler** ' i seçin ve ardından **fırtınası**' yi seçin. **Özet** sekmesinden, **fırtınası Kullanıcı arabirimi sunucusu**' nu seçin. Fırtınası Kullanıcı arabirimini barındıran düğümün FQDN 'SI ve REST API sayfanın en üstünde görüntülenir. |

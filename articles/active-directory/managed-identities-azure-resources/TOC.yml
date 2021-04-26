@@ -94,8 +94,6 @@
           href: how-to-use-vm-sign-in.md
         - name: Azure SDK'leriyle birlikte kullanma
           href: how-to-use-vm-sdk.md
-        - name: VM uzantısını kullanmayı durdurma ve Azure IMDS kullanmaya başlama
-          href: howto-migrate-vm-extension.md
     - name: Başka bir Azure kaynağına yönetilen kimlik erişimi atama
       items:
         - name: Portal
@@ -142,7 +140,9 @@
       href: 'https://golang.org/doc/'
 - name: Kaynaklar
   items:
-    - name: SSS ve bilinen sorunlar
+    - name: Sık sorulan sorular
+      href: managed-identities-faq.md
+    - name: Bilinen sorunlar
       href: known-issues.md
     - name: Azure kaynakları için yönetilen kimlikleri destekleyen Azure hizmetleri
       href: services-support-managed-identities.md

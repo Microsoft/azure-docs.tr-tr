@@ -10,14 +10,15 @@ ms.service: media-services
 ms.subservice: video-indexer
 ms.workload: na
 ms.topic: article
-ms.date: 02/16/2021
+ms.custom: references_regions
+ms.date: 03/30/2021
 ms.author: juliako
-ms.openlocfilehash: 618617d3602e45ebb15314c7cc5f6898a73bb71f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: b3602d421718cbd1de3509751491ec6db65b1b01
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102203734"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532895"
 ---
 # <a name="azure-media-services-video-indexer-release-notes"></a>Azure Media Services Video Indexer sürüm notları
 
@@ -32,9 +33,31 @@ En son gelişmelerden haberdar olmak için, bu makalede hakkında bilgi verilmek
 
 ## <a name="march-2021"></a>Mart 2021
 
+### <a name="audio-analysis"></a>Ses Analizi 
+
 Ses analizi artık farklı fiyat noktasındaki yeni ses özellikleri paketinde bulunabilir. Yeni **temel ses** Analizi ön ayarı yalnızca konuşma dökümünü, çeviri ve biçim çıkış başlıklarını ve alt yazıları ayıklamak için düşük maliyetli bir seçenek sağlar. **Temel ses** ön ayarı faturanızda bir satır ve başlık ve alt başlık biçimlendirmesi için ayrı bir satır dahil olmak üzere iki ayrı ölçü oluşturur. Fiyatlandırma hakkında daha fazla bilgi için [Media Services fiyatlandırma](https://azure.microsoft.com/pricing/details/media-services/) sayfasına bakın.
 
 Yeni eklenen paket,   ->  **temel ses** Önayarı ( **video + ses dizin oluşturma** açılan kutusu altında) seçeneğini belirleyerek dosyanızı dizin oluşturma veya yeniden dizin oluşturma sırasında kullanılabilir.
+
+### <a name="new-developer-portal"></a>Yeni geliştirici portalı 
+
+Yeni bir [Geliştirici portalına](https://api-portal.videoindexer.ai/)sahip video Indexer, yeni video Indexer API 'leri deneyin ve tüm ilgili kaynakları tek bir yerde bulun: [GitHub deposu](https://github.com/Azure-Samples/media-services-video-indexer), [yığın taşması](https://stackoverflow.com/questions/tagged/video-indexer) [video Indexer](https://techcommunity.microsoft.com/t5/azure-media-services/bg-p/AzureMediaServices/label-name/Video%20Indexer) , Ilgili blog gönderileri, [video Indexer SSS](faq.md), [Kullanıcı seslerine](https://feedback.azure.com/forums/932041-cognitive-services?category_id=399016) geri bildirimde bulunmak ve Özellikler önermek ve pencere öğesi kod örnekleri ile  [' codepen ' bağlantısı](https://codepen.io/videoindexer) . 
+ 
+### <a name="advanced-customization-capabilities-for-insight-widget"></a>Öngörüler pencere öğesi için Gelişmiş özelleştirme özellikleri 
+
+SDK artık Video Indexer öngörüleri pencere öğesini kendi hizmetinize eklemek ve stilini ve verilerini özelleştirmek için kullanılabilir. SDK Standart Video Indexer Öngörüler pencere öğesini ve tamamen özelleştirilebilir Öngörüler pencere öğesini destekler. Kod örneği [video Indexer GitHub deposunda](https://github.com/Azure-Samples/media-services-video-indexer/tree/master/Embedding%20widgets/widget-customization)kullanılabilir. Bu gelişmiş özelleştirme özellikleri sayesinde, çözüm geliştiricisi özel stil uygulayabilir ve müşterinin kendi AI verilerini getirebilir ve bunu, Öngörüler pencere öğesinde (Video Indexer içgörüler içeren veya olmayan) sunar. 
+
+### <a name="video-indexer-deployed-in-the-us-north-central--us-west-and-canada-central"></a>ABD Orta Kuzey, ABD Batı ve Kanada Orta dağıtılan Video Indexer 
+
+Artık ABD Orta Kuzey, ABD Batı ve Kanada Orta bölgelerinde Video Indexer ücretli bir hesap oluşturabilirsiniz
+ 
+### <a name="new-source-languages-support-for-speech-to-text-stt-translation-and-search"></a>Konuşmayı metne dönüştürme (STT), çeviri ve arama için yeni kaynak dilleri desteği 
+
+Video Indexer artık, Danca (' da-DK '), Norveççe (' NB-NO '), Isveççe (' SV-tr '), Fince (' FI-ı '), Kanada Fransızcası (' fr-CA '), Tay dili (' th-TH ') içinde STT, çeviri ve arama desteği Arapça (' ar-BH ', ' ar-EG ', ' ar-IQ ', ' ar-JO ', ' ar-KW ', ' ar-LB ', ' ar-OM ', ' ar-QA ', ' ar-S ' ve ' ar-SY ') ve Türkçe (' tr-TR '). Bu diller hem API 'de hem de Video Indexer Web sitesinde kullanılabilir. 
+ 
+### <a name="search-by-topic-in-video-indexer-website"></a>Video Indexer Web sitesinde konuya göre ara 
+
+Artık, belirli konularda video aramak için [video Indexer Web sitesi](https://www.videoindexer.ai/account/login) sayfasının en üstündeki arama özelliğini kullanabilirsiniz. 
 
 ## <a name="february-2021"></a>Şubat 2021
 
@@ -141,7 +164,7 @@ Yan panel, Kullanıcı tercihleri ve yardım için de kullanılır.
 
 Artık belirli konularda (yalnızca API) videoları aramak için arama API 'sini kullanabilirsiniz.
 
-Konular, `textScope` (isteğe bağlı parametre) bir parçası olarak eklenir. Ayrıntılar için bkz. [API](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Search-Videos) .  
+Konular, `textScope` (isteğe bağlı parametre) bir parçası olarak eklenir. Ayrıntılar için bkz. [API](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Search-Videos) .  
 
 ### <a name="labels-enhancement"></a>Etiket geliştirmesi
 
@@ -179,10 +202,10 @@ Güncelleştirilmiş tasarımla başlatılan yeni bir oyuncu kaplaması.
 
 * Günümüzde, aşağıdaki API 'Ler bir hesap nesnesi döndürüyor:
 
-    * [Ücretli hesap oluştur](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Create-Paid-Account)
-    * [Hesap al](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Account)
-    * [Hesap al-yetkilendirme](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Accounts-Authorization)
-    * [-Hesaplar-belirteç Ile](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Accounts-With-Token)
+    * [Ücretli hesap oluştur](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Create-Paid-Account)
+    * [Hesap al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Account)
+    * [Hesap al-yetkilendirme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Accounts-Authorization)
+    * [-Hesaplar-belirteç Ile](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Accounts-With-Token)
  
     Hesap nesnesi `Url` [video Indexer Web sitesinin](https://www.videoindexer.ai/)konumunu işaret eden bir alana sahiptir.
 Ücretli hesaplar için, `Url` alan şu anda genel Web sitesi yerine bir Iç URL 'yi işaret ediyor.
@@ -193,7 +216,7 @@ Güncelleştirilmiş tasarımla başlatılan yeni bir oyuncu kaplaması.
 
    Bunu şu şekilde yapabilirsiniz:
 
-    * URL 'yi Video Indexer pencere öğesi API 'Lerine işaret eden bir URL ile değiştirme (örneğin, [Öngörüler pencere öğesi](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Insights-Widget))
+    * URL 'yi Video Indexer pencere öğesi API 'Lerine işaret eden bir URL ile değiştirme (örneğin, [Öngörüler pencere öğesi](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Insights-Widget))
     * Yeni bir katıştırılmış URL oluşturmak için Video Indexer Web sitesini kullanma:
          
          Videonun sayfasına ulaşmak için **oynat** 'a basın-> **&lt; / &gt; ekleme** düğmesine tıklayın-> URL 'yi uygulamanıza kopyalayın:
@@ -216,13 +239,13 @@ Farklı projelere sahip yeni bir GitHub Video Indexer, başlangıç kılavuzlar�
  
 ### <a name="swagger-update"></a>Swagger güncelleştirmesi
 
-Tek bir [video Indexer Openapı belirtiminde (Swagger)](https://api-portal.videoindexer.ai/docs/services/Operations/export?DocumentFormat=OpenApiJson)birleştirilmiş **kimlik doğrulamaları** ve **işlemler** video Indexer. Geliştiriciler [video Indexer Geliştirici Portalında](https://api-portal.videoindexer.ai/)API 'leri bulabilir.
+Tek bir [video Indexer Openapı belirtiminde (Swagger)](https://api-portal.videoindexer.ai/api-details#api=Operations&operation)birleştirilmiş **kimlik doğrulamaları** ve **işlemler** video Indexer. Geliştiriciler [video Indexer Geliştirici Portalında](https://api-portal.videoindexer.ai/)API 'leri bulabilir.
 
 ## <a name="december-2019"></a>Aralık 2019
 
 ### <a name="update-transcript-with-the-new-api"></a>Yeni API ile dökümü Güncelleştir
 
-[Update-video-Index](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Update-Video-Index?&pattern=update) API 'sini kullanarak döküm dosyasında belirli bir bölümü güncelleştirin.
+[Update-video-Index](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Video-Index) API 'sini kullanarak döküm dosyasında belirli bir bölümü güncelleştirin.
 
 ### <a name="fix-account-configuration-from-the-video-indexer-portal"></a>Video Indexer portalından hesap yapılandırmasını onarma
 
@@ -252,7 +275,7 @@ Akış uç noktası devre dışı bırakıldığında, Video Indexer oynatıcı 
 
 ### <a name="error-handling-improvement"></a>Hata işleme geliştirmesi
 
-Durum kodu 409 şimdi, video etkin bir şekilde dizinlenerek, geçerli yeniden dizin değişikliklerinin yanlışlıkla yanlışlıkla geçersiz kılınmasını engellemek amacıyla video Dizin API 'lerini [yeniden dizinleyerek](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Re-Index-Video?https://api-portal.videoindexer.ai/docs/services/Operations/operations/Re-Index-Video?) video [dizini](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Update-Video-Index?) API 'lerinden geri döndürülecek.
+Durum kodu 409 şimdi, video etkin bir şekilde dizinlenerek, geçerli yeniden dizin değişikliklerinin yanlışlıkla yanlışlıkla geçersiz kılınmasını engellemek amacıyla video Dizin API 'lerini [yeniden dizinleyerek](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Re-Index-Video) video [dizini](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Video-Index) API 'lerinden geri döndürülecek.
 
 ## <a name="november-2019"></a>Kasım 2019
  
@@ -346,7 +369,7 @@ Artık Japonya Doğu bölgesinde Video Indexer ücretli bir hesap oluşturabilir
 
 ### <a name="create-and-repair-account-api-preview"></a>Hesap API 'SI oluşturma ve onarma (Önizleme)
 
-[Azure Media Service bağlantı noktasını veya anahtarını güncelleştirmenizi](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Update-Paid-Account-Azure-Media-Services?&groupBy=tag)sağlayan yenı bir API eklendi.
+[Azure Media Service bağlantı noktasını veya anahtarını güncelleştirmenizi](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Paid-Account-Azure-Media-Services)sağlayan yenı bir API eklendi.
 
 ### <a name="improve-error-handling-on-upload"></a>Karşıya yükleme sırasında hata işlemeyi geliştirme 
 
@@ -364,9 +387,9 @@ Artık düzenleyicide belirli bir öngörü zaman dilimini seçme sonucu olarak 
 
 ### <a name="update-custom-language-model-from-closed-caption-file"></a>Özel dil modelini kapalı açıklamalı altyazı dosyasından Güncelleştir
 
-[Özel dil modeli oluşturma](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Create-Language-Model?&groupBy=tag) ve [özel dil modellerini güncelleştirme](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Update-Language-Model?&groupBy=tag) API 'leri artık dil modellerı için girdi olarak VTT, SRT ve ttml dosya biçimlerini desteklemektedir.
+[Özel dil modeli oluşturma](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Create-Language-Model) ve [özel dil modellerini güncelleştirme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Language-Model) API 'leri artık dil modellerı için girdi olarak VTT, SRT ve ttml dosya biçimlerini desteklemektedir.
 
-[Update video döküm API 'si](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Update-Video-Transcript?&pattern=transcript)çağrılırken, döküm otomatik olarak eklenir. Videoyla ilişkili eğitim modeli de otomatik olarak güncelleştirilir. Dil modellerinizi özelleştirme ve eğitme hakkında daha fazla bilgi için bkz. [video Indexer bir dil modelini özelleştirme](customize-language-model-overview.md).
+[Update video döküm API 'si](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Video-Transcript)çağrılırken, döküm otomatik olarak eklenir. Videoyla ilişkili eğitim modeli de otomatik olarak güncelleştirilir. Dil modellerinizi özelleştirme ve eğitme hakkında daha fazla bilgi için bkz. [video Indexer bir dil modelini özelleştirme](customize-language-model-overview.md).
 
 ### <a name="new-download-transcript-formats--txt-and-csv"></a>Yeni karşıdan yükleme TRANSCRIPT biçimleri – TXT ve CSV
 

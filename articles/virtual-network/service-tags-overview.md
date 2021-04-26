@@ -10,15 +10,15 @@ ms.devlang: NA
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/30/2020
+ms.date: 4/14/2021
 ms.author: kumud
 ms.reviewer: kumud
-ms.openlocfilehash: 2d14ca2423d34926a9e297823a6515c2c5dde06a
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 4a18e0f257ac8d7b7d981d53249cf29f2f8f38bd
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105607125"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790158"
 ---
 # <a name="virtual-network-service-tags"></a>Sanal ağ hizmeti etiketleri
 <a name="network-service-tags"></a>
@@ -135,11 +135,13 @@ Hizmet etiketlerinin geçerli listesini, IP adres aralığı ayrıntıları ile 
 
 - [REST](/rest/api/virtualnetwork/servicetags/list)
 - [Azure PowerShell](/powershell/module/az.network/Get-AzNetworkServiceTag)
-- [Azure CLI](/cli/azure/network#az-network-list-service-tags)
+- [Azure CLI](/cli/azure/network#az_network_list_service_tags)
 
 > [!NOTE]
-> Ortak önizlemedeyken, bulma API 'si JSON İndirmeleri tarafından döndürülen bilgilerden daha az güncel bilgiler döndürebilir. (Sonraki bölüme bakın.)
+> Yeni hizmet etiketi verilerinin API sonuçlarına yayılması 4 hafta kadar sürer. Bu gerçekleştiğinde, yanıt meta verilerindeki değişiklik numarası artacaktır. Farklı konum değerleri belirtildiğinde sonuçlarda geçici farklılıklar olabilir. NSG kuralları oluşturmak için sonuçları kullanırken, konum parater ' ı NSG 'nin bölgesiyle eşleşecek şekilde ayarlamanız gerekir. 
 
+> [!NOTE]
+> API verileri, şu anda indirilebilir JSON dosyasındaki etiketlerin bir alt kümesi olan NSG kuralları ile kullanılabilen etiketleri temsil eder. Genel önizleme aşamasında, verilerin bir güncelleştirmeden sonraki bir güncelleştirmeden aynı kalacağından emin vermeyiz. 
 
 ### <a name="discover-service-tags-by-using-downloadable-json-files"></a>İndirilebilir JSON dosyalarını kullanarak hizmet etiketlerini bulma 
 Hizmet etiketlerinin geçerli listesini içeren JSON dosyalarını, IP adresi aralığı ayrıntıları ile birlikte indirebilirsiniz. Bu listeler haftalık olarak güncelleştirilir ve yayımlanır. Her bulutun konumları şunlardır:

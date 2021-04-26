@@ -11,10 +11,10 @@ ms.topic: conceptual
 ms.date: 04/13/2020
 ms.author: erhopf
 ms.openlocfilehash: 6d2ad87f6a8c79f61d62140a1549968cd88d83aa
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "101722322"
 ---
 # <a name="record-voice-samples-to-create-a-custom-voice"></a>Özel bir ses oluşturmak için ses örneklerini kaydetme
@@ -163,14 +163,14 @@ Kullanmakta olduğunuz mikrofonuna bağlı olarak, yüksek kaliteli bir ses arab
 
 İdeal olarak, yönetmenin, mühendisin ve taçilerin rollerinde farklı kişilerin sunmasını sağlayabilirsiniz. Bunu kendiniz yapmayı denemeyin. Bir pinç 'de, bir kişi hem yönetmen hem de mühendis olabilir.
 
-### <a name="before-the-session"></a>Oturumdan önce
+### <a name="before-the-session&quot;></a>Oturumdan önce
 
 Stüdyo süresini ortadan kaldırmak için, kayıt oturumundan önce sesli tasele birlikte betiği çalıştırın. Sesli taçın metni öğrenirken, Bilmediğiniz sözcüklerin söylenişini açıklığa kavuşturacak.
 
 > [!NOTE]
 > Çoğu kayıt Studios, kayıt standında betiklerin elektronik olarak görüntülenmesini sağlar. Bu durumda, komut dosyası belgesine doğrudan çalıştırma notlarınızı yazın. Yine de bir kağıt kopyasının oturum sırasında not almak isteyeceksiniz, ancak. Birçok mühendisler de sabit bir kopya ister. Bu durumda, bilgisayarın bir daha düşük olması durumunda tatatçine yönelik olarak üçüncü yazdırılmış bir kopyayı de bir yedekleme olarak isteyeceksiniz.
 
-Sesinizin taterli olması, bir tanesinde ("çalışmayan sözcük") vurgulamasını istediğiniz kelimeyi sorabilir. Bunlara, belirli bir vurgu olmadan doğal bir okuma istediğinizi söyleyin. Konuşma sentezleştirilmiştir vurgu eklenebilir; özgün kaydın bir parçası olmamalıdır.
+Sesinizin taterli olması, bir tanesinde (&quot;çalışmayan sözcük") vurgulamasını istediğiniz kelimeyi sorabilir. Bunlara, belirli bir vurgu olmadan doğal bir okuma istediğinizi söyleyin. Konuşma sentezleştirilmiştir vurgu eklenebilir; özgün kaydın bir parçası olmamalıdır.
 
 Tatatçinizi pronounce sözcüklere göre ayrı olarak yönlendirin. Betiğin her sözcüğü yazıldığı gibi görünmelidir. Sesler, *betikte bu şekilde yazılmadığı sürece*, sıradan konuşmaya ortak olduğu gibi atlanmamalıdır veya bir arada çıkarlanmamalıdır.
 

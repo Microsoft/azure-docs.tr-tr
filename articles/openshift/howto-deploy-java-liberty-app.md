@@ -7,12 +7,12 @@ ms.service: azure-redhat-openshift
 ms.topic: conceptual
 ms.date: 10/30/2020
 keywords: Java, jakartaee, JavaEE, mikro profil, açık-Liberty, WebSphere-Liberty, Aro, OpenShift, Red Hat
-ms.openlocfilehash: 08fd3ab112498a983b438d5ba1f1f100816cbf5d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2a308c7de754f395a3ef8a1bd97ed2441d27d21d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102213003"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783584"
 ---
 # <a name="deploy-a-java-application-with-open-libertywebsphere-liberty-on-an-azure-red-hat-openshift-4-cluster"></a>Azure Red Hat OpenShift 4 kümesinde açık Liberty/WebSphere özgürlük ile Java uygulaması dağıtma
 
@@ -40,7 +40,7 @@ Bu kılavuzda başarıyla gezinmek için aşağıdaki önkoşulları doldurun.
 
    Kümede yoğun bellek gerektiren uygulamalar çalıştırmayı planlıyorsanız, parametresini kullanarak çalışan düğümlerinin doğru sanal makine boyutunu belirtin `--worker-vm-size` . Örneğin, `Standard_E4s_v3` bir kümeye Elaun Search işlecini yüklemek için en düşük sanal makine boyutudur. Daha fazla bilgi için bkz.
 
-   * [Küme oluşturmak için Azure CLı](/cli/azure/aro#az-aro-create)
+   * [Küme oluşturmak için Azure CLı](/cli/azure/aro#az_aro_create)
    * [Bellek için iyileştirilmiş desteklenen sanal makine boyutları](./support-policies-v4.md#memory-optimized)
    * [Elaun Search Işlecini yükleme önkoşulları](https://docs.openshift.com/container-platform/4.3/logging/cluster-logging-deploying.html#cluster-logging-deploy-eo-cli_cluster-logging-deploying)
 

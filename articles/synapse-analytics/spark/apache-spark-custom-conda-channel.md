@@ -9,12 +9,12 @@ ms.date: 02/26/2020
 ms.author: midesa
 ms.reviewer: jrasnick
 ms.subservice: spark
-ms.openlocfilehash: 528ba4a1be3650a81772d78a438f03611b9bd761
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 26b6adefd2d334c9fe570bfa7e63bb06b55b9d20
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102107942"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588777"
 ---
 # <a name="create-a-custom-conda-channel-for-package-management"></a>Paket yönetimi için özel bir Conda kanalı oluşturma 
 Python paketleri yüklenirken, Conda Package Manager paketleri aramak için kanalları kullanır. Çeşitli nedenlerle özel bir Conda kanalı oluşturmanız gerekebilir. Örneğin, şunları görebilirsiniz:
@@ -92,7 +92,7 @@ conda index channel1/linux-64
 conda index channel1 
 ```
 
-Daha fazla bilgi için, özel kanallar oluşturmak üzere [Conda Kullanıcı kılavuzunu da ziyaret](https://docs.conda.io/projects/conda/latest/user-guide/tasks/create-custom-channels.html) edebilirsiniz. 
+Daha fazla bilgi için, özel kanallar oluşturmak üzere [Conda Kullanıcı kılavuzunu da ziyaret](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/create-custom-channels.html) edebilirsiniz. 
 
 ## <a name="storage-account-permissions"></a>Depolama hesabı izinleri
 Artık depolama hesabındaki izinleri doğrulamamız gerekir. Bu izinleri ayarlamak için, özel kanalın oluşturulacağı yola gidin. Ardından, ```privatechannel``` okuma, listeleme ve yürütme izinlerine sahip olan için BIR SAS belirteci oluşturun. 

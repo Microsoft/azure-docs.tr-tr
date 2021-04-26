@@ -9,13 +9,13 @@ ms.service: time-series-insights
 services: time-series-insights
 ms.topic: how-to
 ms.date: 03/15/2021
-ms.custom: seodec18
-ms.openlocfilehash: ed185413cff155610b2b088b1791169e33f6ce7a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 07e7f21bd706d9f83d2813b0ab491b01fbc53672
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103464527"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107867574"
 ---
 # <a name="create-an-azure-time-series-insights-gen2-environment-using-the-azure-cli"></a>Azure CLı kullanarak Azure Time Series Insights Gen2 ortamı oluşturma
 
@@ -62,19 +62,19 @@ az tsi environment gen2 create --name "my-tsi-env" --location eastus2 --resource
 
 Time Series Insights ortamı gibi tek bir kaynağı silmek veya bir kaynak grubunu ve tüm Time Series Insights ortamları dahil olmak üzere tüm kaynaklarını silmek için Azure CLı 'yi kullanabilirsiniz.
 
-[Time Series Insights ortamlarını silmek](/cli/azure/ext/timeseriesinsights/tsi/environment?view=azure-cli-latest#ext_timeseriesinsights_az_tsi_environment_delete)için şu komutu çalıştırın:
+[Time Series Insights ortamlarını silmek](/cli/azure/tsi/environment#az_tsi_environment_delete)için şu komutu çalıştırın:
 
 ```azurecli-interactive
 az tsi environment delete --name "my-tsi-env" --resource-group $rg
 ```
 
-[Depolama hesabını silmek](/cli/azure/storage/account?view=azure-cli-latest#az_storage_account_delete)için şu komutu çalıştırın:
+[Depolama hesabını silmek](/cli/azure/storage/account#az_storage_account_delete)için şu komutu çalıştırın:
 
 ```azurecli-interactive
 az storage account delete --name $storage --resource-group $rg
 ```
 
-[Bir kaynak grubunu](/cli/azure/group#az-group-delete) ve tüm kaynaklarını silmek için aşağıdaki komutu çalıştırın:
+[Bir kaynak grubunu](/cli/azure/group#az_group_delete) ve tüm kaynaklarını silmek için aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
 az group delete --name $rg

@@ -618,6 +618,8 @@
               href: active-directory-saml-protocol-reference.md
             - name: SAML belirteçleri
               href: reference-saml-tokens.md
+    - name: Azure CLI
+      href: /cli/azure/identity
     - name: Uygulama türleri ve OAuth 2.0
       displayName: 'App types, OAuth'
       href: v2-app-types.md
@@ -631,6 +633,8 @@
       href: reference-v2-libraries.md
     - name: Microsoft Graph’taki API’leri tanımlama ve bunlara erişme
       href: /graph/api/resources/azure-ad-overview
+    - name: Talep eşleme ilkesi türü
+      href: reference-claims-mapping-policy-type.md
     - name: Kimlik doğrulaması ve yetkilendirme hata kodları
       displayName: AADSTS
       href: reference-aadsts-error-codes.md

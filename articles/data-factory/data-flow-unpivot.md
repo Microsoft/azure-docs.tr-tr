@@ -48,9 +48,9 @@ Seçim Satırları null değerlerle bırakabilirsiniz.
 
 ![Unipivot anahtarı olarak meyve sütununu kullanarak unipivot dönüşümünden önce ve sonra, PO, satıcı ve meyve sütunlarını gösteren resim.](media/data-flow/unpivot3.png)
 
-Sütun düzenlemesini "normal" olarak ayarlamak, tüm yeni Özet sütunları tek bir değerden birlikte gruplandırır. Sütun düzenlemesini "yan yana" olarak ayarlamak, varolan bir sütundan oluşturulan yeni Özet sütunları birlikte gruplandırır.
+Sütun düzenlemesini "normal&quot; olarak ayarlamak, tüm yeni Özet sütunları tek bir değerden birlikte gruplandırır. Sütun düzenlemesini &quot;yan yana&quot; olarak ayarlamak, varolan bir sütundan oluşturulan yeni Özet sütunları birlikte gruplandırır.
 
-![Ekran görüntüsü dönüşümün sonucunu gösterir.](media/data-flow//unpivot7.png "Özet kaldırma seçenekleri 5")
+![Ekran görüntüsü dönüşümün sonucunu gösterir.](media/data-flow//unpivot7.png &quot;Özet kaldırma seçenekleri 5")
 
 Özet olmayan son veri sonuç kümesi, artık ayrı satır değerlerine göre özetlenen sütun toplamlarını gösterir.
 

@@ -10,12 +10,12 @@ author: saachigopal
 ms.date: 10/20/2020
 ms.topic: conceptual
 ms.custom: how-to
-ms.openlocfilehash: ea282cb0fcf25f7ac5f17bb9e2f693d189320078
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.openlocfilehash: 953d43f93635e25da008515afd9baf9a9e9b7afa
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104889170"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817080"
 ---
 # <a name="train-a-model-by-using-a-custom-docker-image"></a>Özel bir Docker görüntüsü kullanarak bir modeli eğitme
 
@@ -173,5 +173,5 @@ run.wait_for_completion(show_output=True)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Bu makalede, özel bir Docker görüntüsü kullanarak bir model eğitiliniz. Azure Machine Learning hakkında daha fazla bilgi edinmek için şu makalelere bakın:
-* Eğitim sırasında [çalıştırma ölçümlerini izleyin](how-to-track-experiments.md) .
+* Eğitim sırasında [çalıştırma ölçümlerini izleyin](how-to-log-view-metrics.md) .
 * Özel bir Docker görüntüsü kullanarak [bir model dağıtın](how-to-deploy-custom-docker-image.md) .

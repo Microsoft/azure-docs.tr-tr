@@ -5,10 +5,10 @@ ms.topic: overview
 ms.date: 03/25/2021
 ms.custom: contperf-fy21q1,contperf-fy21q3-portal
 ms.openlocfilehash: 6cd9aa82ad2f8a821ae82a361b3f11b72ca25f7a
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105608553"
 ---
 # <a name="what-is-azure-resource-manager"></a>Azure Resource Manager nedir?

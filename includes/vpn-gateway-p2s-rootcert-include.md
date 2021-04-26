@@ -9,10 +9,10 @@ ms.date: 10/28/2020
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 59d18c89a8f66f781f01d1dace9d8968df17a626
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "93041554"
 ---
 Kök sertifika için. cer dosyasını alın. Bir kurumsal çözümle oluşturulmuş bir kök sertifika (önerilir) ya da kendinden imzalı bir sertifika oluşturabilirsiniz. Kök sertifikayı oluşturduktan sonra, ortak sertifika verilerini (özel anahtarı değil) Base64 kodlamalı X. 509.952. cer dosyası olarak dışarı aktarın. Bu dosyayı daha sonra Azure 'a yüklersiniz.

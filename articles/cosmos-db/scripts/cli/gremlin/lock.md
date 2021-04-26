@@ -7,12 +7,12 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
 ms.topic: sample
 ms.date: 07/29/2020
-ms.openlocfilehash: 492246b5dfb19664ea54ce8b5462c7d77f8d951b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 19809d7150c8a461f97282d1583d0d870d6af8bb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94562721"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107770687"
 ---
 # <a name="create-a-resource-lock-for-azure-cosmos-gremlin-api-database-and-graph-using-azure-cli"></a>Azure CLı kullanarak Azure Cosmos Gremlin API veritabanı ve grafik için bir kaynak kilidi oluşturma
 [!INCLUDE[appliesto-gremlin-api](../../../includes/appliesto-gremlin-api.md)]
@@ -34,10 +34,10 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [az kilitle oluştur](/cli/azure/lock#az-lock-create) | Bir kilit oluşturur. |
-| [az Lock List](/cli/azure/lock#az-lock-list) | Kilit bilgilerini listeleyin. |
-| [az Lock Show](/cli/azure/lock#az-lock-show) | Kilidin özelliklerini göster. |
-| [az Lock Delete](/cli/azure/lock#az-lock-delete) | Bir kilidi siler. |
+| [az kilitle oluştur](/cli/azure/lock#az_lock_create) | Bir kilit oluşturur. |
+| [az Lock List](/cli/azure/lock#az_lock_list) | Kilit bilgilerini listeleyin. |
+| [az Lock Show](/cli/azure/lock#az_lock_show) | Kilidin özelliklerini göster. |
+| [az Lock Delete](/cli/azure/lock#az_lock_delete) | Bir kilidi siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

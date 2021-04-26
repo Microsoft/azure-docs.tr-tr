@@ -7,14 +7,14 @@ ms.reviewer: mikeray
 services: azure-arc
 ms.service: azure-arc
 ms.subservice: azure-arc-data
-ms.date: 03/02/2021
+ms.date: 04/09/2021
 ms.topic: conceptual
-ms.openlocfilehash: 6b4d5c1372a8351f1fe5a6608aff38bf232aabd8
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 1fe5974bafddcb4e474ef59a062836e071ab9461
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102121958"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304928"
 ---
 # <a name="release-notes---azure-arc-enabled-data-services-preview"></a>Sürüm notları-Azure Arc etkin veri Hizmetleri (Önizleme)
 
@@ -22,11 +22,50 @@ Bu makalede, Azure Arc etkin veri Hizmetleri için kısa süre önce yayınlanan
 
 [!INCLUDE [azure-arc-data-preview](../../../includes/azure-arc-data-preview.md)]
 
+## <a name="march-2021"></a>Mart 2021
+
+Mart 2021 sürümü başlangıçta 2021 5 Nisan 'da sunulmuştur ve sürümün son aşamaları 2021 9 Nisan 'da tamamlandı.
+
+Bilinen sorunlarda bu sürümün sınırlamalarını gözden geçirin [-Azure Arc etkin veri Hizmetleri (Önizleme)](known-issues.md).
+
+Azure Data CLı ( `azdata` ) sürüm numarası: 20.3.2. `azdata` [Azure Data CLI ( `azdata` ) uygulamasını yükleyebilirsiniz](/sql/azdata/install/deploy-install-azdata).
+
+### <a name="data-controller"></a>Veri denetleyicisi
+
+- Azure Arc etkin veri Hizmetleri veri denetleyicisini portaldan doğrudan bağlanma modunda dağıtın. [Veri denetleyicisini dağıtmaya başlama-doğrudan bağlantı modu-Önkoşullar](deploy-data-controller-direct-mode-prerequisites.md).
+
+### <a name="azure-arc-enabled-postgresql-hyperscale"></a>Azure Arc etkin PostgreSQL hiper ölçeği
+
+PostgreSQL için özel kaynak tanımları (CRD) tek bir CRD ile birleştirildi. Aşağıdaki tabloya bakın.
+
+|Yayınla |CRD |
+|-----|-----|
+|Şubat 2021 ve öncesi| postgresql-11s.arcdata.microsoft.com<br/>postgresql-12s.arcdata.microsoft.com |
+|Mart 2021 ' den itibaren | postgresqls.arcdata.microsoft.com
+
+Geçmiş yüklemeleri Temizleme sırasında önceki CRDs 'yi silecaksınız. Bkz. [Geçmiş yüklemelerinden Temizleme](create-data-controller-using-kubernetes-native-tools.md#cleanup-from-past-installations).
+
+### <a name="azure-arc-enabled-sql-managed-instance"></a>Azure Arc özellikli SQL Yönetilen Örneği
+
+- Artık doğrudan bağlı moddaki Azure portal bir SQL yönetilen örneği oluşturabilirsiniz.
+
+- Artık bir veritabanını 3 çoğaltmalarıyla SQL yönetilen örneği 'ne geri yükleyebilirsiniz ve kullanılabilirlik grubuna otomatik olarak eklenir. 
+
+- Artık 3 çoğaltmalarıyla dağıtılan SQL yönetilen örneklerinde ikincil bir salt okunurdur. `azdata arc sql endpoint list`İkincil salt okunurdur bağlantı uç noktasını görmek için kullanın.
+
+### <a name="known-issues"></a>Bilinen sorunlar
+
+- Doğrudan bağlı modda, kullanarak kullanım, ölçüm ve günlüklerin karşıya yüklenmesi `azdata arc dc upload` Şu anda engelleniyor. Kullanım otomatik olarak yüklenir. Dolaylı bağlı modda oluşturulan veri denetleyicisi için karşıya yükleme çalışmaya devam etmelidir.
+- Veri denetleyicisinin doğrudan modda dağıtılması yalnızca Azure portal yapılabilir ve azdata, Azure Data Studio veya kubectl gibi istemci araçlarından kullanılamaz.
+- Doğrudan modda Azure Arc etkin SQL yönetilen örneğinin dağıtılması yalnızca Azure portal yapılabilir ve azdata, Azure Data Studio veya kubectl gibi araçlardan kullanılamaz.
+- Doğrudan modda Azure Arc etkin PostgeSQL hiper ölçek dağıtımı şu anda kullanılamıyor.
+- Üzerinden proxy kullanılıyorsa, doğrudan bağlantı modundaki kullanım verilerinin otomatik olarak yüklenmesi başarılı olmaz `–proxy-cert <path-t-cert-file>` .
+
 ## <a name="february-2021"></a>Şubat 2021
 
 ### <a name="new-capabilities-and-features"></a>Yeni özellikler ve Özellikler
 
-Azure Data CLı ( `azdata` ) sürüm numarası: 20.3.1. Adresinden indirin [https://aka.ms/azdata](https://aka.ms/azdata) . `azdata` [Azure Data CLI ( `azdata` ) uygulamasını yükleyebilirsiniz](/sql/azdata/install/deploy-install-azdata).
+Azure Data CLı ( `azdata` ) sürüm numarası: 20.3.1. `azdata` [Azure Data CLI ( `azdata` ) uygulamasını yükleyebilirsiniz](/sql/azdata/install/deploy-install-azdata).
 
 Ek güncelleştirmeler şunlardır:
 
@@ -44,7 +83,7 @@ Bu sürümle ilişkili sorunlar için bkz. [bilinen sorunlar-Azure Arc etkin ver
 
 ### <a name="new-capabilities-and-features"></a>Yeni özellikler ve Özellikler
 
-Azure Data CLı ( `azdata` ) sürüm numarası: 20.3.0. Adresinden indirin [https://aka.ms/azdata](https://aka.ms/azdata) . `azdata` [Azure Data CLI ( `azdata` ) uygulamasını yükleyebilirsiniz](/sql/azdata/install/deploy-install-azdata).
+Azure Data CLı ( `azdata` ) sürüm numarası: 20.3.0. `azdata` [Azure Data CLI ( `azdata` ) uygulamasını yükleyebilirsiniz](/sql/azdata/install/deploy-install-azdata).
 
 Ek güncelleştirmeler şunlardır:
 - Yerelleştirilmiş Portal 17 yeni dil için kullanılabilir
@@ -70,7 +109,7 @@ Ek güncelleştirmeler şunlardır:
 
 ### <a name="new-capabilities--features"></a>Yeni yetenekler & özellikleri
 
-Azure Data CLı ( `azdata` ) sürüm numarası: 20.2.5. Adresinden indirin [https://aka.ms/azdata](https://aka.ms/azdata) .
+Azure Data CLı ( `azdata` ) sürüm numarası: 20.2.5. `azdata` [Azure Data CLI ( `azdata` ) uygulamasını yükleyebilirsiniz](/sql/azdata/install/deploy-install-azdata).
 
 SQL yönetilen örneği ve PostgreSQL hiper ölçek için uç noktalarını, Azure Data CLı ( `azdata` ) ile ve komutlarını kullanarak görüntüleyin `azdata arc sql endpoint list` `azdata arc postgres endpoint list` .
 
@@ -127,16 +166,9 @@ azdata arc dc create --profile-name azure-arc-aks-hci --namespace arc --name arc
 
    :::image type="content" source="media/release-notes/aks-zone-selector.png" alt-text="Hiçbirini belirtmek için her bir bölgenin onay kutularını temizleyin.":::
 
-#### <a name="postgresql"></a>PostgreSQL
-
-- Azure Arc etkin PostgreSQL hiper ölçek, belirttiğiniz zaman göreli noktaya geri yükleme yaparken yanlış bir hata iletisi döndürüyor. Örneğin, geri yükleme için yedeklemelerinizin içerebileceği sürümden daha eski bir nokta belirlediyseniz geri yükleme şu şekilde bir hata iletisiyle başarısız olur: hata: (404). Neden: bulunamadı. HTTP yanıt gövdesi: {"Code": 404, "ınternalstatus": "NOT_FOUND", "Neden": "sunucu yedeklemesi geri yüklenemedi...}
-Bu durumda, yedeklemeleriniz olan tarih aralığı içinde bir zaman noktası olduğunu belirterek komutu yeniden başlatın. Bu aralığı, yedeklemelerinizi listeleyerek ve bunların alındığı tarihlere bakarak belirlersiniz.
-- Zaman içindeki bir noktaya geri yükleme yalnızca sunucu grupları arasında desteklenir. Zaman içinde bir noktaya geri yükleme işleminin hedef sunucusu, yedeklemeyi aldığınız sunucu olamaz. Farklı bir sunucu grubu olmalıdır. Ancak, tam geri yükleme aynı sunucu grubu için desteklenir.
-- Tam geri yükleme yapılırken bir yedekleme kimliği gereklidir. Varsayılan olarak, bir yedekleme kimliği belirtmezseniz, en son yedekleme kullanılacaktır. Bu sürümde çalışmaz.
-
 ## <a name="october-2020"></a>Ekim 2020 
 
-Azure Data CLı ( `azdata` ) sürüm numarası: 20.2.3. Adresinden indirin [https://aka.ms/azdata](https://aka.ms/azdata) .
+Azure Data CLı ( `azdata` ) sürüm numarası: 20.2.3. `azdata` [Azure Data CLI ( `azdata` ) uygulamasını yükleyebilirsiniz](/sql/azdata/install/deploy-install-azdata).
 
 ### <a name="breaking-changes"></a>Yeni değişiklikler
 

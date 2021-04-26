@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 10/7/2020
 ms.topic: how-to
 ms.service: digital-twins
-ms.openlocfilehash: 1b7a846ee92da001ea2ac3ddd02efa9a870f72c6
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 958b0de97b79b447f2570dd9c57c87f380bcd551
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102501915"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107589405"
 ---
 # <a name="write-client-app-authentication-code"></a>İstemci uygulaması kimlik doğrulama kodunu yaz
 
@@ -107,6 +107,20 @@ Ayrıca, bir işlevde kimlik doğrulamasını kullanmak için şunları unutmay�
 * [Yönetilen kimliği etkinleştirme](../app-service/overview-managed-identity.md?tabs=dotnet)
 * [Ortam değişkenlerini](/sandbox/functions-recipes/environment-variables?tabs=csharp) uygun şekilde kullanın
 * İşlevler uygulamasına, dijital TWINS API 'Lerine erişmesini sağlayan izinler atayın. Azure Işlevleri işlemleri hakkında daha fazla bilgi için bkz. [*nasıl yapılır: verileri işlemek için bir Azure Işlevi ayarlama*](how-to-create-azure-function.md).
+
+## <a name="authenticate-across-tenants"></a>Kiracılar arasında kimlik doğrulaması
+
+Azure dijital TWINS yalnızca bir  [Azure Active Directory (Azure AD) kiracısı](../active-directory/develop/quickstart-create-new-tenant.md)destekleyen bir hizmettir: Azure dijital TWINS örneğinin bulunduğu abonelikteki ana kiracı.
+
+[!INCLUDE [digital-twins-tenant-limitation](../../includes/digital-twins-tenant-limitation.md)]
+
+Örnekten farklı bir kiracıya ait bir hizmet sorumlusu veya Kullanıcı hesabı kullanarak Azure dijital TWINS örneğinizi erişmeniz gerekiyorsa, başka bir kiracıya ait her bir federal kimliğin Azure dijital TWINS örneğinin "giriş" kiracısından bir **belirteç** istemesini sağlayabilirsiniz. 
+
+[!INCLUDE [digital-twins-tenant-solution-1](../../includes/digital-twins-tenant-solution-1.md)]
+
+Ayrıca, kodınızdaki kimlik bilgisi seçeneklerinde giriş kiracısını de belirtebilirsiniz. 
+
+[!INCLUDE [digital-twins-tenant-solution-2](../../includes/digital-twins-tenant-solution-2.md)]
 
 ## <a name="other-credential-methods"></a>Diğer kimlik bilgisi yöntemleri
 

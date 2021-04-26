@@ -9,19 +9,19 @@ ms.reviewer: jrasnick
 ms.service: synapse-analytics
 ms.subservice: workspace
 ms.topic: tutorial
-ms.date: 11/16/2020
-ms.openlocfilehash: 59364a0a2c1d1e411f41dc35dee812c8e920b72d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/04/2021
+ms.openlocfilehash: f4cc631bd3ff05dc63566677ec96ef0360d362c9
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98209211"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107517360"
 ---
 # <a name="explore-the-synapse-knowledge-center"></a>SYNAPSE bilgi merkezini araştırma
 
 Bu öğreticide, SYNAPSE Studio bilgi merkezini kullanmayı öğreneceksiniz.
 
-## <a name="getting-to-the-knowledge-center"></a>Bilgi merkezine alma
+## <a name="finding-to-the-knowledge-center"></a>Bilgi merkezine bulma
 
 SYNAPSE Studio 'da bilgi merkezini bulmanın iki yolu vardır:
 
@@ -30,23 +30,29 @@ SYNAPSE Studio 'da bilgi merkezini bulmanın iki yolu vardır:
 
 Herhangi bir yöntemi seçin ve **bilgi merkezini** açın.
 
-## <a name="overview"></a>Genel Bakış
+## <a name="exploring-the-knowledge-center"></a>Bilgi merkezini keşfetme
 
-**Bilgi Merkezi** , üç şey yapmanıza olanak sağlar:
+Görünür olduktan sonra, **Bilgi Merkezi** 'nin üç şey yapmanıza izin verdiğini görürsünüz:
 * **Örnekleri hemen kullanın**. SYNAPSE 'in nasıl çalıştığına ilişkin hızlı bir örnek istiyorsanız bu seçeneği belirleyin.
 * **Galeriye gözatamazsınız**. Bu seçenek, örnek veri kümelerini bağlamanızı ve SQL betikleri, Not defterleri ve işlem hatları biçiminde örnek kod eklemenizi sağlar.
 * **Tur SYNAPSE Studio**. Bu seçenek sizi SYNAPSE Studio 'nun temel bölümlerinin kısa bir turuna götürür. Daha önce SYNAPSE Studio 'Yu kullanmadıysanız bu kullanışlıdır.
 
-## <a name="exploring-blob-storage-with-serverless-sql-pool"></a>Sunucusuz SQL havuzuyla blob depolamayı keşfetme
+## <a name="use-samples-immediately-three-samples-to-help-you-get-started-fast"></a>Örnekleri hemen kullanın: hızlı başlamanıza yardımcı olacak üç örnek
 
-1. **Bilgi merkezine** gidin, **örnekleri hemen kullan**' a tıklayın.
+Bu bölümde üç öğe vardır:
+* Spark ile örnek verileri araştırma
+* SQL ile verileri sorgulama
+* SQL ile dış tablo oluşturma
+
+1. **Bilgi merkezinde**, **örnekleri hemen kullan**' a tıklayın.
 1. **SQL Ile sorgu verileri**' ni seçin.
 1. **Örnek kullan**' a tıklayın.
 1. Yeni bir örnek SQL betiği açılır.
 1. İlk sorguya kaydırın (28-32 satırları) ve sorgu metnini seçin.
 1. Çalıştır'a tıklayın. Yalnızca seçtiğiniz kodu çalıştırır.
 
-## <a name="loading-more-nyc-taxi-data"></a>Daha fazla NYC TAXI verisi yükleniyor
+## <a name="gallery-a-collectiopn-of-sample-data-sets-and-sample-code"></a>Galeri: örnek veri kümeleri ve örnek kod için bir collectiopn
+
 1. **Bilgi merkezine** gidin, **Galeriye** git ' e tıklayın.
 1. Üstteki **SQL betikleri** sekmesini seçin.
 1. **New York Taxicab veri kümesi** veri alım örneğini Yükle ' yi seçin, **devam**' a tıklayın.
@@ -61,6 +67,6 @@ Herhangi bir yöntemi seçin ve **bilgi merkezini** açın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure Synapse Analytics ile çalışmaya başlama](get-started.md)
-* [Çalışma alanı oluşturma](quickstart-create-workspace.md)
-* [Sunucusuz SQL havuzu kullanma](quickstart-sql-on-demand.md)
+> [!div class="nextstepaction"]
+> [Yönetici ekleme](get-started-add-admin.md)
+

@@ -8,12 +8,12 @@ ms.author: gachandw
 ms.reviewer: mimckitt
 ms.date: 10/13/2020
 ms.custom: ''
-ms.openlocfilehash: b63f42ccc0a9d8d138e38a262db528fd36ea701a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d36bae57a9e1609e053326cf7288b5b1bc470cef
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102123046"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166896"
 ---
 # <a name="deploy-cloud-services-extended-support-by-using-the-azure-sdk"></a>Azure SDK kullanarak Cloud Services (genişletilmiş destek) dağıtma
 
@@ -156,7 +156,8 @@ Cloud Services (genişletilmiş destek) için [dağıtım önkoşullarını](dep
     m_NrpClient.VirtualNetworks.CreateOrUpdate(resourceGroupName, “ContosoVNet”, vnet);
     ```
 
-7. Genel IP adresi oluşturun ve (isteğe bağlı olarak) genel IP adresinin DNS etiketi özelliğini ayarlayın. Statik IP kullanıyorsanız, hizmet yapılandırma dosyasında ayrılmış bir IP olarak başvurulmalıdır.
+7. Genel IP adresi oluşturun ve genel IP adresinin DNS etiketi özelliğini ayarlayın. Cloud Services (genişletilmiş destek) yalnızca [temel] ( https://docs.microsoft.com/azure/virtual-network/public-ip-addresses#basic) SKU genel IP adreslerini destekler. Standart SKU genel IP 'Leri Cloud Services çalışmaz.
+Statik IP kullanıyorsanız, bunu hizmet yapılandırma (. cscfg) dosyasında bir Ayrılmış IP olarak başvurmanız gerekir
 
     ```csharp
     PublicIPAddress publicIPAddressParams = new PublicIPAddress(name: “ContosIp”) 
@@ -171,7 +172,7 @@ Cloud Services (genişletilmiş destek) için [dağıtım önkoşullarını](dep
     PublicIPAddress publicIpAddress = m_NrpClient.PublicIPAddresses.CreateOrUpdate(resourceGroupName, publicIPAddressName, publicIPAddressParams);
     ```
 
-8. Bir ağ profili nesnesi oluşturun ve genel IP adresini platform tarafından oluşturulan yük dengeleyicinin ön ucuna ilişkilendirin.
+8. Bir ağ profili nesnesi oluşturun ve genel IP adresini yük dengeleyicinin ön ucunda ilişkilendirin. Azure platformu, bulut hizmeti kaynağıyla aynı abonelikte otomatik olarak bir ' klasik ' SKU yük dengeleyici kaynağı oluşturur. Yük dengeleyici kaynağı ARM 'de salt okuma kaynağıdır. Kaynaktaki tüm güncelleştirmeler yalnızca bulut hizmeti dağıtım dosyaları (. cscfg &. csdef) aracılığıyla desteklenir
 
     ```csharp
     LoadBalancerFrontendIPConfiguration feipConfiguration = new LoadBalancerFrontendIPConfiguration() 

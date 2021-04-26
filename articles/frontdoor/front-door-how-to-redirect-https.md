@@ -7,12 +7,12 @@ ms.service: frontdoor
 ms.topic: how-to
 ms.date: 09/30/2020
 ms.author: duau
-ms.openlocfilehash: 19908b3cba63bc76a205097ef8d16e612d58503b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: edc1ebe53969ceac0452818bee016e35de1e9322
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91626651"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167847"
 ---
 # <a name="create-a-front-door-with-http-to-https-redirection-using-the-azure-portal"></a>Azure portal kullanarak HTTP ile HTTPS yönlendirmesi arasında ön kapı oluşturma
 
@@ -29,7 +29,7 @@ TLS sonlandırma sertifikasıyla bir [ön kapı oluşturmak](quickstart-create-f
 1. Bir *abonelik* seçin ve ardından var olan bir kaynak grubunu kullanın veya yeni bir tane oluşturun. Yapılandırma sekmesini girmek için **İleri ' yi** seçin.
 
     > [!NOTE]
-    > Kullanıcı arabiriminde istenen konum yalnızca kaynak grubu içindir. Ön kapı yapılandırmanız, tüm [Azure ön KAPıSıNıN pop konumlarına](front-door-faq.md#what-are-the-pop-locations-for-azure-front-door)dağıtılır.
+    > Kullanıcı arabiriminde istenen konum yalnızca kaynak grubu içindir. Ön kapı yapılandırmanız, tüm [Azure ön KAPıSıNıN pop konumlarına](front-door-faq.yml#what-are-the-pop-locations-for-azure-front-door-)dağıtılır.
 
     :::image type="content" source="./media/front-door-url-redirect/front-door-create-basics.png" alt-text="Yeni ön kapıya yönelik temelleri yapılandırın":::
 

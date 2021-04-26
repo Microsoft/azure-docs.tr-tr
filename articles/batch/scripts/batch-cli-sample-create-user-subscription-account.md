@@ -4,12 +4,12 @@ description: Bu betik, kullanıcı aboneliği modunda bir Azure Batch hesabı ol
 ms.topic: sample
 ms.date: 01/29/2018
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: c9b8ba2ef782dcdc99cb18698175b8b53a53f0dd
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9bd7b7ac3dbb52ebafa00499e64ec3cff0969a13
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93076784"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107768368"
 ---
 # <a name="cli-example-create-a-batch-account-in-user-subscription-mode"></a>CLI örneği: Kullanıcı aboneliği modunda Batch hesabı oluşturma
 
@@ -38,12 +38,12 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 | [az role assignment create](/cli/azure/role) | Bir kullanıcı, grup veya hizmet sorumlusu için yeni bir rol ataması oluşturun. |
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az keyvault create](/cli/azure/keyvault#az-keyvault-create) | Bir anahtar kasasını güncelleştirir. |
-| [az keyvault set-policy](/cli/azure/keyvault#az-keyvault-set-policy) | Belirtilen anahtar kasasının güvenlik ilkesini güncelleştirin. |
-| [az batch account create](/cli/azure/batch/account#az-batch-account-create) | Batch hesabını oluşturur.  |
-| [az batch account login](/cli/azure/batch/account#az-batch-account-login) | Daha fazla CLI etkileşimi için belirtilen Batch hesabına karşı kimlik doğrulaması yapar.  |
-| [az group delete](/cli/azure/group#az-group-delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az keyvault create](/cli/azure/keyvault#az_keyvault_create) | Bir anahtar kasasını güncelleştirir. |
+| [az keyvault set-policy](/cli/azure/keyvault#az_keyvault_set_policy) | Belirtilen anahtar kasasının güvenlik ilkesini güncelleştirin. |
+| [az batch account create](/cli/azure/batch/account#az_batch_account_create) | Batch hesabını oluşturur.  |
+| [az batch account login](/cli/azure/batch/account#az_batch_account_login) | Daha fazla CLI etkileşimi için belirtilen Batch hesabına karşı kimlik doğrulaması yapar.  |
+| [az group delete](/cli/azure/group#az_group_delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

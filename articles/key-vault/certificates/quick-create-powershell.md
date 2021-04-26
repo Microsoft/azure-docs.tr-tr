@@ -3,20 +3,19 @@ title: Hızlı başlangıç-Azure PowerShell & görüntüleme Azure Key Vault se
 description: Azure PowerShell kullanarak Azure Key Vault bir sertifikanın nasıl ayarlanacağını ve alınacağını gösteren hızlı başlangıç
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: certificates
 ms.topic: quickstart
-ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019
+ms.custom: mvc, seo-javascript-september2019, seo-javascript-october2019, devx-track-azurepowershell
 ms.date: 01/27/2021
 ms.author: mbaldwin
-ms.openlocfilehash: 587815cf9628df35f1e1efdbc6a7a3c89a27ed55
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 32150fb4cce76d5a2537c5ec969f265e0d8aae20
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99071926"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816197"
 ---
 # <a name="quickstart-set-and-retrieve-a-certificate-from-azure-key-vault-using-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell kullanarak Azure Key Vault bir sertifikayı ayarlama ve alma
 
@@ -63,6 +62,18 @@ Get-AzKeyVaultCertificate -VaultName "<your-unique-keyvault-name>" -Name "Exampl
 
 Şimdi bir Key Vault oluşturdunuz, bir sertifikayı depolamıştır ve geri almıştır.
 
+**Sorun giderme**:
+
+İşlem geçersiz bir durum kodu döndürdü ' yasak '
+
+Bu hatayı alırsanız, Azure Key Vault erişen hesabın sertifika oluşturmak için uygun izinleri yoktur.
+
+Doğru izinleri atamak için aşağıdaki Azure PowerShell komutunu çalıştırın:
+
+```azurepowershell-interactive
+Set-AzKeyVaultAccessPolicy -VaultName <KeyVaultName> -ObjectId <AzureObjectID> -PermissionsToCertificates get,list,update,create
+```
+
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
 [!INCLUDE [Create a key vault](../../../includes/key-vault-powershell-delete-resources.md)]
@@ -73,4 +84,4 @@ Bu hızlı başlangıçta bir Key Vault oluşturup içinde bir sertifika depolad
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
 - [Azure PowerShell Key Vault cmdlet 'lerine](/powershell/module/az.keyvault/) yönelik başvuruya bakın
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu gözden geçirin
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu gözden geçirin

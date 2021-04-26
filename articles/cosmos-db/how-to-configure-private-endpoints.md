@@ -4,15 +4,15 @@ description: Bir sanal ağda özel bir IP adresi kullanarak bir Azure Cosmos hes
 author: ThomasWeiss
 ms.service: cosmos-db
 ms.topic: how-to
-ms.date: 03/02/2021
+ms.date: 03/26/2021
 ms.author: thweiss
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: d21943c90e1f77bd4a43cdfd27b183df018f6cc7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 034eb35eeef975be23cc318aa797282008d71728
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101690677"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105936912"
 ---
 # <a name="configure-azure-private-link-for-an-azure-cosmos-account"></a>Azure Cosmos hesabı için Azure özel bağlantısını yapılandırma
 [!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
@@ -70,7 +70,7 @@ Azure portal kullanarak mevcut bir Azure Cosmos hesabı için özel bir uç nokt
     | Sanal ağ| Sanal ağınızı seçin. |
     | Alt ağ | Alt ağlarınızı seçin. |
     |**Özel DNS tümleştirme**||
-    |Özel DNS bölgesi ile tümleştirme |**Evet**’i seçin. <br><br/> Özel uç noktanıza özel olarak bağlanmak için bir DNS kaydına ihtiyacınız vardır. Özel uç noktanızı özel bir DNS bölgesiyle tümleştirmenizi öneririz. Ayrıca, kendi DNS sunucularınızı kullanabilir veya sanal makinelerinizdeki konak dosyalarını kullanarak DNS kayıtları oluşturabilirsiniz. |
+    |Özel DNS bölgesi ile tümleştirme |**Evet**’i seçin. <br><br/> Özel uç noktanıza özel olarak bağlanmak için bir DNS kaydına ihtiyacınız vardır. Özel uç noktanızı özel bir DNS bölgesiyle tümleştirmenizi öneririz. Ayrıca, kendi DNS sunucularınızı kullanabilir veya sanal makinelerinizdeki konak dosyalarını kullanarak DNS kayıtları oluşturabilirsiniz. <br><br/> Bu seçenek için Evet ' i seçtiğinizde, özel bir DNS bölge grubu da oluşturulur. DNS bölgesi grubu, özel DNS bölgesi ve özel uç nokta arasındaki bağlantıdır. Bu bağlantı, Özel uç noktada bir güncelleştirme olduğunda özel DNS bölgesini otomatik olarak güncelleştirmenize yardımcı olur. Örneğin, bölge eklediğinizde veya kaldırdığınızda, özel DNS bölgesi otomatik olarak güncelleştirilir. |
     |Özel DNS Bölgesi |**privatelink.documents.Azure.com** öğesini seçin. <br><br/> Özel DNS bölgesi otomatik olarak belirlenir. Azure portal kullanarak değiştiremezsiniz.|
     |||
 
@@ -78,6 +78,8 @@ Azure portal kullanarak mevcut bir Azure Cosmos hesabı için özel bir uç nokt
 1. **Doğrulama başarılı** iletisini gördüğünüzde **Oluştur**’u seçin.
 
 Bir Azure Cosmos hesabı için özel bağlantıyı onayladıysanız, Azure portal, **güvenlik duvarı ve sanal ağlar** bölmesindeki **tüm ağlar** seçeneği kullanılamaz.
+
+## <a name="api-types-and-private-zone-names"></a><a id="private-zone-name-mapping"></a>API türleri ve özel bölge adları
 
 Aşağıdaki tabloda, farklı Azure Cosmos hesabı API türleri, desteklenen alt kaynaklar ve karşılık gelen özel bölge adları arasındaki eşleme gösterilmektedir. Ayrıca, Gremlin ve Tablo API'si hesaplarına SQL API aracılığıyla erişebilirsiniz, bu nedenle bu API 'Ler için iki giriş vardır.
 
@@ -145,6 +147,8 @@ $privateEndpoint = New-AzPrivateEndpoint -ResourceGroupName $ResourceGroupName -
 
 ```azurepowershell-interactive
 Import-Module Az.PrivateDns
+
+# Zone name differs based on the API type and group ID you are using. 
 $zoneName = "privatelink.documents.azure.com"
 $zone = New-AzPrivateDnsZone -ResourceGroupName $ResourceGroupName `
   -Name $zoneName
@@ -159,19 +163,19 @@ $pe = Get-AzPrivateEndpoint -Name $PrivateEndpointName `
 
 $networkInterface = Get-AzResource -ResourceId $pe.NetworkInterfaces[0].Id `
   -ApiVersion "2019-04-01"
- 
-foreach ($ipconfig in $networkInterface.properties.ipConfigurations) { 
-foreach ($fqdn in $ipconfig.properties.privateLinkConnectionProperties.fqdns) { 
-Write-Host "$($ipconfig.properties.privateIPAddress) $($fqdn)"  
-$recordName = $fqdn.split('.',2)[0] 
-$dnsZone = $fqdn.split('.',2)[1] 
-New-AzPrivateDnsRecordSet -Name $recordName `
-  -RecordType A -ZoneName $zoneName  `
-  -ResourceGroupName $ResourceGroupName -Ttl 600 `
-  -PrivateDnsRecords (New-AzPrivateDnsRecordConfig `
-  -IPv4Address $ipconfig.properties.privateIPAddress)  
-}
-}
+
+# Create DNS configuration
+
+$PrivateDnsZoneId = $zone.ResourceId
+
+$config = New-AzPrivateDnsZoneConfig -Name $zoneName`
+ -PrivateDnsZoneId $PrivateDnsZoneId
+
+## Create a DNS zone group
+New-AzPrivateDnsZoneGroup -ResourceGroupName $ResourceGroupName`
+ -PrivateEndpointName $PrivateEndpointName`
+ -Name "MyPrivateZoneGroup"`
+ -PrivateDnsZoneConfig $config
 ```
 
 ### <a name="fetch-the-private-ip-addresses"></a>Özel IP adreslerini getir
@@ -242,6 +246,7 @@ az network private-endpoint create \
 Özel uç noktasını oluşturduktan sonra, aşağıdaki Azure CLı betiğini kullanarak özel bir DNS bölgesi ile tümleştirebilirsiniz:
 
 ```azurecli-interactive
+#Zone name differs based on the API type and group ID you are using. 
 zoneName="privatelink.documents.azure.com"
 
 az network private-dns zone create --resource-group $ResourceGroupName \
@@ -253,15 +258,13 @@ az network private-dns link vnet create --resource-group $ResourceGroupName \
    --virtual-network $VNetName \
    --registration-enabled false 
 
-#Query for the network interface ID  
-networkInterfaceId=$(az network private-endpoint show --name $PrivateEndpointName --resource-group $ResourceGroupName --query 'networkInterfaces[0].id' -o tsv)
- 
-# Copy the content for privateIPAddress and FQDN matching the Azure Cosmos account 
-az resource show --ids $networkInterfaceId --api-version 2019-04-01 -o json 
- 
-#Create DNS records 
-az network private-dns record-set a create --name recordSet1 --zone-name privatelink.documents.azure.com --resource-group $ResourceGroupName
-az network private-dns record-set a add-record --record-set-name recordSet2 --zone-name privatelink.documents.azure.com --resource-group $ResourceGroupName -a <Private IP Address>
+#Create a DNS zone group
+az network private-endpoint dns-zone-group create \
+   --resource-group $ResourceGroupName \
+   --endpoint-name $PrivateEndpointName \
+   --name "MyPrivateZoneGroup" \
+   --private-dns-zone $zoneName \
+   --zone-name "myzone"
 ```
 
 ## <a name="create-a-private-endpoint-by-using-a-resource-manager-template"></a>Kaynak Yöneticisi şablonu kullanarak özel uç nokta oluşturma
@@ -460,38 +463,6 @@ Bu hesaplar için, her API türü için bir özel uç nokta oluşturmanız gerek
 }
 ```
 
-"PrivateZoneRecords_template.json" adlı bir Kaynak Yöneticisi şablonu oluşturmak için aşağıdaki kodu kullanın.
-
-```json
-{
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "DNSRecordName": {
-            "type": "string"
-        },
-        "IPAddress": {
-            "type":"string"
-        }        
-    },
-    "resources": [
-         {
-            "type": "Microsoft.Network/privateDnsZones/A",
-            "apiVersion": "2018-09-01",
-            "name": "[parameters('DNSRecordName')]",
-            "properties": {
-                "ttl": 300,
-                "aRecords": [
-                    {
-                        "ipv4Address": "[parameters('IPAddress')]"
-                    }
-                ]
-            }
-        }    
-    ]
-}
-```
-
 **Şablon için parametreler dosyasını tanımlayın**
 
 Şablon için aşağıdaki iki parametre dosyasını oluşturun. "PrivateZone_parameters.jsüzerinde" oluşturun. aşağıdaki kodla:
@@ -511,18 +482,65 @@ Bu hesaplar için, her API türü için bir özel uç nokta oluşturmanız gerek
 }
 ```
 
-"PrivateZoneRecords_parameters.jsüzerinde" oluşturun. aşağıdaki kodla:
+"PrivateZoneGroup_template.json" adlı bir Kaynak Yöneticisi şablonu oluşturmak için aşağıdaki kodu kullanın. Bu şablon, mevcut bir sanal ağdaki mevcut bir Azure Cosmos SQL API hesabı için özel bir DNS bölge grubu oluşturur.
+
+```json
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "privateZoneName": {
+            "type": "string"
+        },
+        "PrivateEndpointDnsGroupName": {
+            "value": "string"
+        },
+        "privateEndpointName":{
+            "value": "string"
+        }        
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('PrivateEndpointDnsGroupName')]",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateZoneName'))]",
+                "[variables('privateEndpointName')]"
+            ],
+          "properties": {
+            "privateDnsZoneConfigs": [
+              {
+                "name": "config1",
+                "properties": {
+                  "privateDnsZoneId": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateZoneName'))]"
+                }
+              }
+            ]
+          }
+        }
+    ]
+}
+```
+
+**Şablon için parametreler dosyasını tanımlayın**
+
+Şablon için aşağıdaki iki parametre dosyasını oluşturun. "PrivateZoneGroup_parameters.jsüzerinde" oluşturun. aşağıdaki kodla:
 
 ```json
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "DNSRecordName": {
+        "privateZoneName": {
             "value": ""
         },
-        "IPAddress": {
-            "type":"object"
+        "PrivateEndpointDnsGroupName": {
+            "value": ""
+        },
+        "privateEndpointName":{
+            "value": ""
         }
     }
 }
@@ -555,15 +573,18 @@ $PrivateZoneName = "myPrivateZone.documents.azure.com"
 # Name of the private endpoint to create
 $PrivateEndpointName = "myPrivateEndpoint"
 
+# Name of the DNS zone group to create
+$PrivateEndpointDnsGroupName = "myPrivateDNSZoneGroup"
+
 $cosmosDbResourceId = "/subscriptions/$($SubscriptionId)/resourceGroups/$($ResourceGroupName)/providers/Microsoft.DocumentDB/databaseAccounts/$($CosmosDbAccountName)"
 $VNetResourceId = "/subscriptions/$($SubscriptionId)/resourceGroups/$($ResourceGroupName)/providers/Microsoft.Network/virtualNetworks/$($VNetName)"
 $SubnetResourceId = "$($VNetResourceId)/subnets/$($SubnetName)"
 $PrivateZoneTemplateFilePath = "PrivateZone_template.json"
 $PrivateZoneParametersFilePath = "PrivateZone_parameters.json"
-$PrivateZoneRecordsTemplateFilePath = "PrivateZoneRecords_template.json"
-$PrivateZoneRecordsParametersFilePath = "PrivateZoneRecords_parameters.json"
 $PrivateEndpointTemplateFilePath = "PrivateEndpoint_template.json"
 $PrivateEndpointParametersFilePath = "PrivateEndpoint_parameters.json"
+$PrivateZoneGroupTemplateFilePath = "PrivateZoneGroup_template.json"
+$PrivateZoneGroupParametersFilePath = "PrivateZoneGroup_parameters.json"
 
 ## Step 2: Login your Azure account and select the target subscription
 Login-AzAccount 
@@ -594,21 +615,15 @@ $deploymentOutput = New-AzResourceGroupDeployment -Name "PrivateCosmosDbEndpoint
     -PrivateEndpointName $PrivateEndpointName
 $deploymentOutput
 
-## Step 6: Map the private endpoint to the private zone
-$networkInterface = Get-AzResource -ResourceId $deploymentOutput.Outputs.privateEndpointNetworkInterface.Value -ApiVersion "2019-04-01"
-foreach ($ipconfig in $networkInterface.properties.ipConfigurations) {
-    foreach ($fqdn in $ipconfig.properties.privateLinkConnectionProperties.fqdns) {
-        $recordName = $fqdn.split('.',2)[0]
-        $dnsZone = $fqdn.split('.',2)[1]
-        Write-Output "Deploying PrivateEndpoint DNS Record $($PrivateZoneName)/$($recordName) Template on $($resourceGroupName)"
-        New-AzResourceGroupDeployment -Name "PrivateEndpointDNSDeployment" `
-            -ResourceGroupName $ResourceGroupName `
-            -TemplateFile $PrivateZoneRecordsTemplateFilePath `
-            -TemplateParameterFile $PrivateZoneRecordsParametersFilePath `
-            -DNSRecordName "$($PrivateZoneName)/$($RecordName)" `
-            -IPAddress $ipconfig.properties.privateIPAddress
-    }
-}
+## Step 6: Create the private zone
+New-AzResourceGroupDeployment -Name "PrivateZoneGroupDeployment" `
+    -ResourceGroupName $ResourceGroupName `
+    -TemplateFile $PrivateZoneGroupTemplateFilePath `
+    -TemplateParameterFile $PrivateZoneGroupParametersFilePath `
+    -PrivateZoneName $PrivateZoneName `
+    -PrivateEndpointName $PrivateEndpointName`
+    -PrivateEndpointDnsGroupName $PrivateEndpointDnsGroupName
+
 ```
 
 ## <a name="configure-custom-dns"></a>Özel API'yi yapılandırma
@@ -653,13 +668,17 @@ Bir Azure Cosmos hesabıyla doğrudan mod bağlantısıyla özel bağlantı kull
 
 ## <a name="update-a-private-endpoint-when-you-add-or-remove-a-region"></a>Bölge eklediğinizde veya kaldırdığınızda özel bir uç noktayı güncelleştirme
 
-Özel bir DNS bölge grubu kullanmıyorsanız, bir Azure Cosmos hesabına bölge ekleme veya kaldırma, bu hesaba ait DNS girdilerini eklemenizi veya kaldırmanızı gerektirir. Bölgeler eklendikten veya kaldırıldıktan sonra alt ağın özel DNS bölgesini, eklenen veya kaldırılan DNS girişlerini ve bunlara karşılık gelen özel IP adreslerini yansıtacak şekilde güncelleştirebilirsiniz.
+Örneğin, üç bölgede bir Azure Cosmos hesabı dağıtırsanız: "Batı ABD," "Orta ABD" ve "Batı Avrupa." Hesabınız için özel bir uç nokta oluşturduğunuzda, alt ağda dört özel IP ayrılır. Üç bölgenin her biri için bir IP vardır ve küresel/bölge agtik uç noktası için bir IP vardır. Daha sonra, Azure Cosmos hesabına yeni bir bölge (örneğin, "Doğu ABD") ekleyebilirsiniz. Özel DNS bölgesi aşağıdaki şekilde güncelleştirilir:
 
-Örneğin, bir Azure Cosmos hesabını üç bölgede dağıtdığınızı düşünün: "Batı ABD," "Orta ABD," ve "Batı Avrupa." Hesabınız için özel bir uç nokta oluşturduğunuzda, alt ağda dört özel IP ayrılır. Üç bölgenin her biri için bir IP vardır ve küresel/bölge agtik uç noktası için bir IP vardır.
+* **Özel DNS bölge grubu kullanılıyorsa:**
 
-Daha sonra, Azure Cosmos hesabına yeni bir bölge (örneğin, "Doğu ABD") ekleyebilirsiniz. Yeni bölge eklendikten sonra, özel DNS bölgenize veya özel DNS 'e karşılık gelen bir DNS kaydı eklemeniz gerekir.
+  Özel bir DNS bölge grubu kullanıyorsanız, Özel uç nokta güncelleştirildiği zaman özel DNS bölgesi otomatik olarak güncelleştirilir. Önceki örnekte, yeni bir bölge eklendikten sonra, özel DNS bölgesi otomatik olarak güncelleştirilir.
 
-Bir bölgeyi kaldırırken de aynı adımları kullanabilirsiniz. Bölge kaldırıldıktan sonra, ilgili DNS kaydını özel DNS bölgeinizden veya özel DNS 'nizden kaldırmanız gerekir.
+* **Özel DNS bölge grubu kullanılmazsa:**
+
+  Özel bir DNS bölge grubu kullanmıyorsanız, bir Azure Cosmos hesabına bölge ekleme veya kaldırma, bu hesaba ait DNS girdilerini eklemenizi veya kaldırmanızı gerektirir. Bölgeler eklendikten veya kaldırıldıktan sonra alt ağın özel DNS bölgesini, eklenen veya kaldırılan DNS girişlerini ve bunlara karşılık gelen özel IP adreslerini yansıtacak şekilde güncelleştirebilirsiniz.
+
+  Önceki örnekte, yeni bölge eklendikten sonra, özel DNS bölgenize veya özel DNS 'ye karşılık gelen bir DNS kaydı eklemeniz gerekir. Bir bölgeyi kaldırırken de aynı adımları kullanabilirsiniz. Bölge kaldırıldıktan sonra, ilgili DNS kaydını özel DNS bölgeinizden veya özel DNS 'nizden kaldırmanız gerekir.
 
 ## <a name="current-limitations"></a>Geçerli sınırlamalar
 

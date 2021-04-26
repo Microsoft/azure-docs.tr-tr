@@ -8,12 +8,12 @@ ms.date: 11/18/2020
 ms.custom: devx-track-java
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 25baa278961b93b04e60f2e997b98753cb6cf3ab
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 115c55a5833906aa0dcc616a5b1b659468647282
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95024118"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814559"
 ---
 # <a name="develop-for-azure-files-with-java"></a>Java ile Azure Dosyaları için geliştirme
 
@@ -36,11 +36,11 @@ Verileri depolamak için Azure dosyaları kullanan Java uygulamaları geliştirm
 
 Azure dosyaları API 'Lerini kullanmak için aşağıdaki kodu, Azure dosyalarına erişmeyi planladığınız Java dosyasının en üstüne ekleyin.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_ImportStatements":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 ```java
 // Include the following imports to use Azure Files APIs v11
@@ -54,13 +54,13 @@ import com.microsoft.azure.storage.file.*;
 
 Azure dosyalarını kullanmak için Azure depolama hesabınıza bağlanmanız gerekir. Bir bağlantı dizesi yapılandırın ve depolama hesabınıza bağlanmak için kullanın. Bağlantı dizesini tutacak bir statik değişken tanımlayın.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 *\<storage_account_name\>* Ve *\<storage_account_key\>* değerlerini depolama hesabınızın gerçek değerleriyle değiştirin.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_ConnectionString":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 *Your_storage_account_name* ve *your_storage_account_key* değerini depolama hesabınızın gerçek değerleriyle değiştirin.
 
@@ -74,15 +74,15 @@ public static final String storageConnectionString =
 
 ---
 
-## <a name="access-azure-files-storage"></a>Azure dosya depolamaya erişme
+## <a name="access-an-azure-file-share"></a>Azure dosya paylaşımıyla erişme
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 Azure dosyalarına erişmek için bir [Shareclient](/java/api/com.azure.storage.file.share.shareclient) nesnesi oluşturun. Yeni bir **Shareclient** nesnesi derlemek için [ShareClientBuilder](/java/api/com.azure.storage.file.share.shareclientbuilder) sınıfını kullanın.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_createClient":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 Depolama hesabınıza erişmek için, **Cloudstorageaccount** nesnesini kullanarak bağlantı dizesini **ayrıştırma** yöntemine geçirerek.
 
@@ -103,13 +103,13 @@ try {
 
 Azure dosyalarındaki tüm dosyalar ve dizinler, Share adlı bir kapsayıcıda depolanır.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 Paylaşım zaten varsa, [Shareclient. Create](/java/api/com.azure.storage.file.share.shareclient.create) yöntemi bir özel durum oluşturur. Bir blokta **oluşturma** çağrısını koyun `try/catch` ve özel durumu işleyin.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_createFileShare":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 Bir paylaşıma ve içeriğine erişim elde etmek için bir Azure dosyaları istemcisi oluşturun.
 
@@ -141,13 +141,13 @@ Bu noktada **Share** , **örnek paylaşma** adlı bir paylaşımın başvurusunu
 
 Aşağıdaki örnek kod bir dosya paylaşımından siler.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 [Shareclient. Delete](/java/api/com.azure.storage.file.share.shareclient.delete) yöntemini çağırarak bir paylaşım silin.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_deleteFileShare":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 Bir **Cloudfileshare** nesnesinde **deleteifexists** metodunu çağırarak bir paylaşımı silin.
 
@@ -177,13 +177,13 @@ try
 
 Dosyaları kök dizinde kullanmak yerine alt dizinlere yerleştirerek depolamayı düzenleyin.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 Aşağıdaki kod, bir dizin [oluşturur.](/java/api/com.azure.storage.file.share.sharedirectoryclient.create) Örnek yöntem, `Boolean` dizinin başarıyla oluşturulup oluşturulmadığını gösteren bir değer döndürür.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_createDirectory":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 Aşağıdaki kod, kök dizin altında **sampledir** adlı bir alt dizin oluşturur.
 
@@ -207,13 +207,13 @@ if (sampleDir.createIfNotExists()) {
 
 Dizin silindiğinde basit bir görevdir. Hala dosya veya alt dizinler içeren bir dizini silemezsiniz.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 Dizin yoksa veya boş değilse, [Sharedirectoryclient. Delete](/java/api/com.azure.storage.file.share.sharedirectoryclient.delete) yöntemi bir özel durum oluşturur. Bir blokta **Delete** çağrısını koyun `try/catch` ve özel durumu işleyin.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_deleteDirectory":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 ```java
 // Get a reference to the root directory for the share.
@@ -232,13 +232,13 @@ if ( containerDir.deleteIfExists() ) {
 
 ## <a name="enumerate-files-and-directories-in-an-azure-file-share"></a>Azure dosya paylaşımındaki dosyaları ve dizinleri listeleme
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 Dosya ve dizinlerin bir listesini, [Sharedirectoryclient. Listfilesanddizinleri](/java/api/com.azure.storage.file.share.sharedirectoryclient.listfilesanddirectories)çağırarak alın. Yöntemi, üzerinde yineleyebilir olan [Sharefileıtem](/java/api/com.azure.storage.file.share.models.sharefileitem) nesnelerinin bir listesini döndürür. Aşağıdaki kod, *dirname* parametresi tarafından belirtilen dizin içindeki dosya ve dizinleri listeler.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_enumerateFilesAndDirs":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 Bir **Cloudfiledirectory** başvurusunda **listfilesanddizinler** çağırarak dosya ve dizinlerin listesini alın. Yöntemi, üzerinde yineleyebilir **Listfileıtem** nesnelerinin bir listesini döndürür. Aşağıdaki kod, kök dizin içindeki dosya ve dizinleri listeler.
 
@@ -257,13 +257,13 @@ for ( ListFileItem fileItem : rootDir.listFilesAndDirectories() ) {
 
 Yerel depolama alanından bir dosyayı karşıya yüklemeyi öğrenin.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 Aşağıdaki kod, [Sharefileclient. uploadFromFile](/java/api/com.azure.storage.file.share.sharefileclient.uploadfromfile) yöntemini çağırarak Azure dosya depolama 'ya yerel bir dosya yükler. Aşağıdaki örnek yöntemi, `Boolean` belirtilen dosyayı başarıyla karşıya yüklendiğini gösteren bir değer döndürür.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_uploadFile":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 Share nesnesinde **Getrootdirectoryreference** metodunu çağırarak dosyanın karşıya yükleneceği dizine bir başvuru alın.
 
@@ -286,15 +286,15 @@ cloudFile.uploadFromFile(filePath);
 
 ## <a name="download-a-file"></a>Dosya indirme
 
-Daha sık gerçekleştirilen işlemlerden biri dosyaları Azure dosya depolamadan indirmenin bir sayısıdır.
+Daha sık gerçekleştirilen işlemlerden biri dosyaları bir Azure dosya paylaşımından indirmenin bir kopyası.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 Aşağıdaki örnek, belirtilen dosyayı *DestDir* parametresinde belirtilen yerel dizine indirir. Örnek yöntem, karşıdan yüklenen dosya adının tarih ve saati ön bekliyor olarak benzersiz hale getirir.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_downloadFile":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 Aşağıdaki örnek SampleFile.txt indirir ve içeriğini görüntüler.
 
@@ -318,13 +318,13 @@ System.out.println(file.downloadText());
 
 Başka bir yaygın Azure dosyaları işlemi dosya silme işlemidir.
 
-# <a name="java-v12"></a>[Java V12](#tab/java)
+# <a name="azure-java-sdk-v12"></a>[Azure Java SDK V12](#tab/java)
 
 Aşağıdaki kod belirtilen belirtilen dosyayı siler. İlk olarak, örnek, *dirname* parametresine göre bir [parça edirectoryclient](/java/api/com.azure.storage.file.share.sharedirectoryclient) oluşturur. Ardından, kod *dosya adı* parametresine bağlı olarak dizin Istemcisinden bir [sharefileclient](/java/api/com.azure.storage.file.share.sharefileclient) alır. Son olarak, örnek yöntemi dosyayı silmek için [Sharefileclient. Delete](/java/api/com.azure.storage.file.share.sharefileclient.delete) ' i çağırır.
 
 :::code language="java" source="~/azure-storage-snippets/files/howto/java/java-v12/files-howto-v12/src/main/java/com/files/howto/App.java" id="Snippet_deleteFile":::
 
-# <a name="java-v11"></a>[Java v11](#tab/java11)
+# <a name="azure-java-sdk-v11"></a>[Azure Java SDK v11](#tab/java11)
 
 Aşağıdaki kod, **sampledir** adlı bir dizinin içinde depolanan SampleFile.txt adlı bir dosyayı siler.
 

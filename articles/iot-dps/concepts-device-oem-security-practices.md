@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: iot-dps
 ms.custom: iot-p0-scenario, iot-devices-deviceOEM
 ms.reviewer: nberdy
-ms.openlocfilehash: 788738082cbf9995fb2f7282bc3f574903275528
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: dad46e21b35225855d787c367d112362fc95a463
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "90527216"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107010550"
 ---
 # <a name="security-practices-for-azure-iot-device-manufacturers"></a>Azure IoT cihaz üreticilerine yönelik güvenlik uygulamaları
 Daha fazla üretici IoT cihazlarını serbest bıraktığından, yaygın uygulamaların etrafında rehberlik belirlemek yararlı olur. Bu makalede, cihazları Azure IoT cihaz sağlama hizmeti (DPS) ile birlikte kullanmak üzere üretdiğinizde göz önünde bulundurmanız gereken önerilen güvenlik uygulamaları özetlenmektedir.  
@@ -177,7 +177,7 @@ Aşağıdaki zaman çizelgesinde bir TPM 'nin bir üretim işleminden nasıl git
     > Bir yazılım TPM 'si kullanıyorsanız, şimdi yükleyebilirsiniz.  EK_pub aynı zamanda ayıklayın.
 
 #### <a name="step-4-device-is-packaged-and-sent-to-the-warehouse"></a>4. Adım: cihaz paketlenir ve ambara gönderilir
-Bir cihaz, dağıtılmadan önce 6-12 ay boyunca bir ambara ait olabilir. 
+Bir cihaz, bir ambarın dağıtılmadan ve DPS ile sağlanmadan önce bir yıla kadar bir ambara ait olabilir.  Bir cihaz, dağıtımdan önce uzun bir süre boyunca mevcutsa, cihazı dağıtan müşterilerin üretici yazılımı, yazılım veya süresi dolduğunda kimlik bilgilerini güncelleştirmesi gerekebilir.
 
 #### <a name="step-5-device-is-installed-into-the-location"></a>5. Adım: cihaz konuma yüklendi
 Cihaz son konumuna ulaştıktan sonra, DPS ile otomatik sağlama aracılığıyla geçer.

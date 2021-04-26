@@ -13,12 +13,12 @@ ms.workload: infrastructure
 ms.date: 07/15/2019
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 92cfa5b2e399811754b57bda64569753ccfa6be8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b1e37b2de2a3d4be0250d3e900fe48a36e45240e
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101668767"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309569"
 ---
 # <a name="sap-hana-large-instances-network-architecture"></a>SAP HANA (büyük örnekler) ağ mimarisi
 
@@ -186,7 +186,7 @@ HANA büyük örneği ve VM 'Ler arasında aktarılan veriler şifrelenmez. Anca
 
 ## <a name="use-hana-large-instance-units-in-multiple-regions"></a>Birden çok bölgede HANA büyük örnek birimlerini kullanma
 
-Olağanüstü durum kurtarma kümesi UPS 'i gerçekleştirmek için, birden çok Azure bölgesinde KıANA büyük örnek birimlere sahip olmanız gerekir. Azure [Global VNET eşlemesi] kullanılmasına karşın, iki farklı bölgede HANA büyük örnek kiracılar arasında varsayılan olarak geçişli yönlendirme çalışmaz. Ancak, Global Reach iki farklı bölgede sağladığınız HANA büyük örnek birimleri arasındaki iletişim yolunu açar. ExpressRoute Global Reach bu kullanım senaryosu şunları sunar:
+Olağanüstü durum kurtarma kümesi UPS 'i gerçekleştirmek için, birden çok Azure bölgesinde HANA büyük örnek birimlerine sahip olmanız gerekir. Azure [Global VNET eşlemesi] kullanılmasına karşın, iki farklı bölgede HANA büyük örnek kiracılar arasında varsayılan olarak geçişli yönlendirme çalışmaz. Ancak, Global Reach iki farklı bölgede sağladığınız HANA büyük örnek birimleri arasındaki iletişim yolunu açar. ExpressRoute Global Reach bu kullanım senaryosu şunları sunar:
 
  - Ek proxy veya güvenlik duvarları olmadan HANA sistem çoğaltması
  - Sistem kopyaları veya sistem yenilemeleri gerçekleştirmek üzere iki farklı bölgedeki HANA büyük örnek birimleri arasında yedeklemeleri kopyalama

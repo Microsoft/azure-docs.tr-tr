@@ -6,12 +6,12 @@ ms.service: signalr
 ms.topic: quickstart
 ms.date: 11/13/2019
 ms.author: zhshang
-ms.openlocfilehash: 2613f91e8c7f1ad3a05792a9a165f4560c09a637
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: dfcbb00ec20797248f41cc1676809f3198d51527
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94874534"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107866170"
 ---
 # <a name="quickstart-broadcast-real-time-messages-from-console-app"></a>Hızlı Başlangıç: Konsol uygulamasından gerçek zamanlı iletiler yayımlama
 
@@ -23,7 +23,7 @@ Bu hızlı başlangıçta C# dilinde bir komut satırı uygulamasından bağlı 
 
 Bu hızlı başlangıç; macOS, Windows veya Linux üzerinde çalıştırılabilir.
 
-* [.NET Core SDK](https://www.microsoft.com/net/download/core)
+* [.NET Core SDK](https://dotnet.microsoft.com/download)
 * Tercih ettiğiniz bir metin veya kod düzenleyicisi.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]

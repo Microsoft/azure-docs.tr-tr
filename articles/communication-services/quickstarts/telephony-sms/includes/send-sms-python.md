@@ -10,12 +10,12 @@ ms.date: 03/11/2021
 ms.topic: include
 ms.custom: include file
 ms.author: lakshmans
-ms.openlocfilehash: aba9b71ec2fbfedecf08577c7bd2eae7a28a5588
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 2b96d62fb2be27de03964212557446d2e792beb8
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105644367"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106112962"
 ---
 SMS mesajları göndermek için Iletişim Hizmetleri Python SMS SDK 'sını kullanarak Azure Iletişim Hizmetleri ile çalışmaya başlayın.
 
@@ -23,11 +23,11 @@ Bu hızlı başlangıcı tamamlamak, Azure hesabınızda birkaç ABD Doları vey
 
 <!--**TODO: update all these reference links as the resources go live**
 
-[API reference documentation](../../../references/overview.md) | [Library source code](#todo-sdk-repo) | [Package (PiPy)](#todo-nuget) | [Samples](#todo-samples)--> 
+[API reference documentation](../../../references/overview.md) | [Library source code](#todo-sdk-repo) | [Package (PiPy)](#todo-nuget) | [Samples](#todo-samples)-->
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Etkin aboneliği olan bir Azure hesabı. [Ücretsiz hesap oluşturun](https://azure.microsoft.com/free/?WT.mc_id=A261C142F). 
+- Etkin aboneliği olan bir Azure hesabı. [Ücretsiz hesap oluşturun](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 - [Python](https://www.python.org/downloads/) 2,7 veya 3.6 +.
 - Etkin bir Iletişim Hizmetleri kaynağı ve bağlantı dizesi. [Iletişim Hizmetleri kaynağı oluşturun](../../create-communication-resource.md).
 - SMS etkin telefon numarası. [Telefon numarası alın](../get-phone-number.md).
@@ -65,7 +65,7 @@ except Exception as ex:
 Hala uygulama dizininde, komutunu kullanarak Python paketi için Azure Communication Services SMS SDK 'sını yükleyebilirsiniz `pip install` .
 
 ```console
-pip install azure-communication-sms --pre
+pip install azure-communication-sms
 ```
 
 ## <a name="object-model"></a>Nesne modeli
@@ -104,7 +104,7 @@ sms_responses = sms_client.send(
 
 ```
 
-`<from-phone-number>`İletişim hizmetinize ve `<to-phone-number>` ileti göndermek istediğiniz telefon numarasıyla ILIŞKILI bir SMS etkin telefon numarasıyla değiştirmelisiniz. 
+`<from-phone-number>`İletişim hizmetinize ve `<to-phone-number>` ileti göndermek istediğiniz telefon numarasıyla ILIŞKILI bir SMS etkin telefon numarasıyla değiştirmelisiniz.
 
 > [!WARNING]
 > Telefon numaralarının E. 164 uluslararası standart biçiminde sağlanması gerektiğini unutmayın. (ör: + 14255550123).
@@ -125,7 +125,7 @@ sms_responses = sms_client.send(
 
 ```
 
-`<from-phone-number>`İletişim hizmetinize ve `<to-phone-number-1>` `<to-phone-number-2>` ileti göndermek istediğiniz telefon NUMARASıNA sahip bir SMS etkin telefon numarasıyla değiştirmelisiniz. 
+`<from-phone-number>`İletişim hizmetinize ve `<to-phone-number-1>` `<to-phone-number-2>` ileti göndermek istediğiniz telefon NUMARASıNA sahip bir SMS etkin telefon numarasıyla değiştirmelisiniz.
 
 > [!WARNING]
 > Telefon numaralarının E. 164 uluslararası standart biçiminde sağlanması gerektiğini unutmayın. (ör: + 14255550123).

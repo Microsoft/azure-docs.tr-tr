@@ -8,18 +8,18 @@ ms.topic: include
 ms.date: 12/04/2020
 ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: 4b708e80bf335ba8bdce074285857a6f8b77b972
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6e819e1078ac90ef16070702e7961122b06c1d6f
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103439222"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107880794"
 ---
 Önizleme aşamasında, NFS aşağıdaki sınırlamalara sahiptir:
 
 - NFS 4,1 Şu anda yalnızca [protokol belirtiminin](https://tools.ietf.org/html/rfc5661)birçok özelliğini desteklemektedir. Tüm tür temsilciler ve geri çağırma, yükseltme yükseltmeleri ve indirgenme, Kerberos kimlik doğrulaması ve şifreleme gibi bazı özellikler desteklenmez.
 - İsteklerinizin çoğunluğu meta veri merkezli ise, okuma/yazma/güncelleştirme işlemlerine kıyasla gecikme daha kötüleşmeyecektir.
-- NFS paylaşımının oluşturulması için yeni bir depolama hesabı oluşturulması gerekir.
+- NFS paylaşımları yalnızca yeni depolama hesabı/öğeleri üzerinde etkinleştirilebilir/oluşturulabilir ve mevcut olanları etkilemez
 - Yalnızca yönetim düzlemi REST API 'Leri desteklenir. Veri düzlemi REST API 'Leri kullanılabilir değildir; bu, Depolama Gezgini gibi araçların NFS paylaşımları ile çalışmamasına veya Azure portal NFS paylaşım verilerine gözatmanıza olanak sağlar.
 - AzCopy Şu anda desteklenmiyor.
 - Yalnızca Premium katmanı için kullanılabilir.

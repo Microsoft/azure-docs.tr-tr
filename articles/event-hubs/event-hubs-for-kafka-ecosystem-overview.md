@@ -3,12 +3,12 @@ title: Apache Kafka App 'ten Olay Hub 'ı kullanma-Azure Event Hubs | Microsoft 
 description: Bu makalede, Azure Event Hubs tarafından Apache Kafka desteği hakkında bilgi sağlanır.
 ms.topic: article
 ms.date: 09/25/2020
-ms.openlocfilehash: b0f0da76bba68f8a66695700d530e871cbd35e3c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1cd6d06b610ccccb8c80818d3bdec726ed94e875
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97861343"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505323"
 ---
 # <a name="use-azure-event-hubs-from-apache-kafka-applications"></a>Apache Kafka uygulamalardan Azure Event Hubs kullanma
 Event Hubs, kendi Apache Kafka kümenizi çalıştırmaya alternatif olarak, mevcut Apache Kafka istemci uygulamaları tarafından kullanılabilen Apache Kafka® üretici ve tüketici API 'Leri ile uyumlu bir uç nokta sağlar. Event Hubs, sürüm 1,0 ve üzeri sürümlerde Apache Kafka üreticisi ve tüketici API 'Lerini destekler.
@@ -67,7 +67,7 @@ bootstrap.servers=NAMESPACENAME.servicebus.windows.net:9093
 security.protocol=SASL_SSL
 sasl.mechanism=OAUTHBEARER
 sasl.jaas.config=org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
-sasl.login.callback.handler.class=CustomAuthenticateCallbackHandler;
+sasl.login.callback.handler.class=CustomAuthenticateCallbackHandler
 ```
 
 #### <a name="shared-access-signature-sas"></a>Paylaşılan Erişim İmzası (SAS)

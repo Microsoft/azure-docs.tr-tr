@@ -1,24 +1,24 @@
 ---
-title: Terminoloji-özel çevirici
+title: Anahtar terimleri-özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Özel çevirici makalelerinde kullanılan koşulların listesi.
+description: Özel çevirici makalelerinde kullanılan anahtar koşullarının listesi.
 author: laujan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 08/17/2020
+ms.date: 04/02/2021
 ms.author: lajanuar
 ms.topic: reference
-ms.openlocfilehash: 4461f584e365a5d47e7ceee942e33bc8b101b2d2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 4a0308f2b961ce9b1321fab3e202e038eb199674
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104657833"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106286428"
 ---
-# <a name="custom-translator-terminology"></a>Özel çevirmen terminolojisi
+# <a name="custom-translator-key-terms"></a>Özel çevirmen anahtar terimleri
 
-Aşağıdaki tabloda, [özel çevirmenle](https://portal.customtranslator.azure.ai)çalışırken bulabileceğiniz terimlerin bir listesi sunulmaktadır.
+Aşağıdaki tabloda, [özel çevirmenle](https://portal.customtranslator.azure.ai)çalışırken bulabileceğiniz önemli terimlerin bir listesi sunulmaktadır.
 
 | Sözcük veya tümcecik|Tanım|
 |------------------|-----------|

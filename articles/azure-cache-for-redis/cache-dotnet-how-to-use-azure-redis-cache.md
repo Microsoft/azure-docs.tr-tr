@@ -8,12 +8,12 @@ ms.devlang: dotnet
 ms.topic: quickstart
 ms.custom: devx-track-csharp, mvc
 ms.date: 06/18/2020
-ms.openlocfilehash: 1834f21a3e25308f6be86eba2961cc983b14a5db
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: effab14316c4a959f22467b9cc50984b6571da55
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104721554"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872164"
 ---
 # <a name="quickstart-use-azure-cache-for-redis-in-net-framework"></a>Hızlı başlangıç: .NET Framework Redsıs için Azure önbelleğini kullanma
 
@@ -27,7 +27,7 @@ Koda doğrudan atlamak istiyorsanız GitHub 'da [.NET Framework hızlı başlang
 
 - Azure aboneliği- [ücretsiz olarak bir tane oluşturun](https://azure.microsoft.com/free/)
 - [Visual Studio 2019](https://www.visualstudio.com/downloads/)
-- StackExchange. Redsıs istemcisi için gerekli olan [4 veya daha yüksek .NET Framework](https://www.microsoft.com/net/download/dotnet-framework-runtime).
+- StackExchange. Redsıs istemcisi için gerekli olan [4 veya daha yüksek .NET Framework](https://dotnet.microsoft.com/download/dotnet-framework).
 
 ## <a name="create-a-cache"></a>Bir önbellek oluşturma
 [!INCLUDE [redis-cache-create](../../includes/redis-cache-create.md)]
@@ -40,11 +40,11 @@ Bilgisayarınızda *CacheSecrets.config* adlı bir dosya oluşturun ve örnek uy
 
 ```xml
 <appSettings>
-    <add key="CacheConnection" value="<cache-name>.redis.cache.windows.net,abortConnect=false,ssl=true,allowAdmin=true,password=<access-key>"/>
+    <add key="CacheConnection" value="<host-name>,abortConnect=false,ssl=true,allowAdmin=true,password=<access-key>"/>
 </appSettings>
 ```
 
-`<cache-name>` adını, önbellek ana bilgisayar adınızla değiştirin.
+`<host-name>` adını, önbellek ana bilgisayar adınızla değiştirin.
 
 `<access-key>` adını, önbelleğinizin birincil anahtarıyla değiştirin.
 

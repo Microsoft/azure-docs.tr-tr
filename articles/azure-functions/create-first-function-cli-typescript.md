@@ -3,13 +3,13 @@ title: Komut satırından TypeScript işlevi oluşturma-Azure Işlevleri
 description: Komut satırından bir TypeScript işlevi oluşturmayı ve ardından yerel projeyi Azure Işlevleri 'nde sunucusuz barındırma için yayımlamayı öğrenin.
 ms.date: 11/03/2020
 ms.topic: quickstart
-ms.custom: devx-track-azurecli
-ms.openlocfilehash: 488ef9fa3fd5b6c09ed435483dbf8f6fa3eb5bef
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: c7b37700d93ea129ba46de81989f06dd2afe52ba
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97937204"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831825"
 ---
 # <a name="quickstart-create-a-typescript-function-in-azure-from-the-command-line"></a>Hızlı başlangıç: Azure 'da komut satırından TypeScript işlevi oluşturma
 

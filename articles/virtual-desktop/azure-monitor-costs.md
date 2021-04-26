@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: conceptual
 ms.date: 03/29/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 099def5a29c8a9b46733ba435befed7210756012
-ms.sourcegitcommit: dae6b628a8d57540263a1f2f1cdb10721ed1470d
+manager: femila
+ms.openlocfilehash: 26262f83e14602d6ea93f96ec47630ef870c357d
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105709990"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309314"
 ---
 # <a name="estimate-azure-monitor-costs"></a>Azure Izleyici maliyetlerini tahmin etme
 
@@ -35,7 +35,7 @@ Windows sanal masaüstü için Azure Izleyici için önceden tanımlanmış veri
 - Oturum konaklarından Windows olay günlükleri
 - Hizmet altyapısından Windows sanal masaüstü tanılaması
 
-Veri alımı ve depolama maliyetleriniz, ortamınızın boyutuna, sistem durumuna ve kullanımınıza bağlıdır. Bu makalede, bekleneceğiniz maliyet aralıklarını hesaplamak için, [sanal makine boyutlandırma kılavuzlarımızı](/remote/remote-desktop-services/virtual-machine-recs)temel alarak, beklediğimiz bir dizi veri alımı ve depolama maliyetlerini hesaplamak için, güç kullanımına açık çalışan sanal makinelere bağlı olan örnek tahminlerden de yararlanabilirsiniz.
+Veri alımı ve depolama maliyetleriniz, ortamınızın boyutuna, sistem durumuna ve kullanımınıza bağlıdır. Bu makalede, bekleneceğiniz maliyet aralıklarını hesaplamak için, [sanal makine boyutlandırma kılavuzlarımızı](/windows-server/remote/remote-desktop-services/virtual-machine-recs)temel alarak, beklediğimiz bir dizi veri alımı ve depolama maliyetlerini hesaplamak için, güç kullanımına açık çalışan sanal makinelere bağlı olan örnek tahminlerden de yararlanabilirsiniz.
 
 Örneğimizde kullanacağınız hafif kullanım sanal makinesi aşağıdaki bileşenleri içerir:
 

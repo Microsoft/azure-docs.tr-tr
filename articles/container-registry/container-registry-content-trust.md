@@ -3,12 +3,12 @@ title: İmzalı görüntüleri yönetme
 description: Azure Container Registry 'niz için içerik güvenini etkinleştirmeyi ve imzalı görüntüleri gönderme ve çekme hakkında bilgi edinin. İçerik güveni Docker içerik güvenini uygular ve Premium hizmet katmanının bir özelliğidir.
 ms.topic: article
 ms.date: 09/18/2020
-ms.openlocfilehash: f44cea09521dc235ad0d555264b165c9a3842a14
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 238908c0075ffa5d2193eda642175a0cfe75b839
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92148574"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784128"
 ---
 # <a name="content-trust-in-azure-container-registry"></a>Azure Container Registry'de içerik güveni
 
@@ -86,7 +86,7 @@ Bu örnekte, `AcrImageSigner` rol: "hizmet sorumlusu" adlı bir hizmet sorumlusu
 
 ![Azure portal ACR görüntü imzalama izinleri verme][content-trust-02-portal]
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 Azure CLI kullanarak bir kullanıcıya imzalama izni vermek için kullanıcıya `AcrImageSigner` rolünü atayın ve kapsamını kayıt defterinizle sınırlandırın. Komut biçimi şu şekildedir:
 
@@ -220,4 +220,4 @@ Kayıt defterinizde içerik güvenini devre dışı bırakmak için Azure portal
 
 <!-- LINKS - internal -->
 [azure-cli]: /cli/azure/install-azure-cli
-[az-acr-config-content-trust-update]: /cli/azure/acr/config/content-trust#az-acr-config-content-trust-update
+[az-acr-config-content-trust-update]: /cli/azure/acr/config/content-trust#az_acr_config_content_trust_update

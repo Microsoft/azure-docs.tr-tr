@@ -6,10 +6,10 @@ ms.topic: article
 ms.date: 01/13/2021
 ms.custom: devx-track-csharp
 ms.openlocfilehash: 57192ab2ee1624cb18de832ac91c95290da727df
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98539882"
 ---
 # <a name="dynamically-provision-service-bus-namespaces-and-entities"></a>Service Bus ad alanlarını ve varlıklarını dinamik olarak sağlama 

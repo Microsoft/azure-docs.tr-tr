@@ -8,12 +8,12 @@ ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 01/15/2021
-ms.openlocfilehash: 4ad362b983f81e2cdc10cdbccafd8dda951482d7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e2ab7a007a92bd2306a7a97781af5653f932d0b7
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98539551"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106580612"
 ---
 # <a name="how-to-estimate-and-manage-costs-of-an-azure-cognitive-search-service"></a>Azure Bilişsel Arama hizmeti 'nin maliyetlerini tahmin etme ve yönetme
 
@@ -64,7 +64,7 @@ Minimum ücret, faturalandırılabilir fiyata ilk arama birimidir (bir çoğaltm
 
 En düşük değerin ötesinde, çoğaltmaları ve bölümleri birbirinden bağımsız olarak ekleyebilirsiniz. Çoğaltmalar ve bölümler aracılığıyla kapasitenin artımlı artışları, faturanızı aşağıdaki formüle göre artırır: **(çoğaltmalar x Partitions x faturalandırma oranı)**; burada, ücretlendirilebilen oran seçtiğiniz fiyatlandırma katmanına bağlıdır.
 
-Bir arama çözümünün maliyetini tahmin ediyorsanız, fiyatlandırma ve kapasitenin doğrusal olmadığı ve (maliyetin iki katına çıkar değerinden fazla kapasite) doğrusal olmadığı göz önünde bulundurun. Formülün nasıl çalıştığına ilişkin bir örnek için bkz. [çoğaltmaları ve bölümleri ayırma](search-capacity-planning.md#how-to-allocate-replicas-and-partitions).
+Bir arama çözümünün maliyetini tahmin ediyorsanız, fiyatlandırma ve kapasitenin doğrusal değil (katlama kapasitesi aynı katmandaki maliyetin iki katına çıkar) olduğunu aklınızda bulundurun. Ayrıca, bazı bir noktada, daha yüksek bir katmana geçiş yapmak kabaca aynı fiyat noktasında daha iyi ve daha hızlı performans sağlayabilir. Daha fazla bilgi ve bir örnek için bkz. [Standart S2 katmanına yükseltme](search-performance-tips.md#tip-upgrade-to-a-standard-s2-tier).
 
 ### <a name="bandwidth-charges"></a>Bant genişliği ücretleri
 

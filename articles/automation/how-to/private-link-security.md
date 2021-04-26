@@ -6,12 +6,13 @@ ms.author: magoedte
 ms.topic: conceptual
 ms.date: 12/11/2020
 ms.subservice: ''
-ms.openlocfilehash: f3c9197faaae89e0ffb238f987ee66dafea8abdd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 28f4c314b65a27c71c7620ff5941463b1ea68b55
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100579802"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831465"
 ---
 # <a name="use-azure-private-link-to-securely-connect-networks-to-azure-automation"></a>Ağları Azure Otomasyonu 'na güvenli bir şekilde bağlamak için Azure özel bağlantısı 'nı kullanın
 
@@ -190,7 +191,7 @@ Bağlantı dizesinin bir parçası olarak tam etki alanı adı (FQDN) kullanarak
 
 * DNS ileticinizi kullanın (isteğe bağlı). Belirli bir özel bağlantı kaynağı için DNS çözümlemesini geçersiz kılmak üzere DNS ileticinizi kullanabilirsiniz. [DNS sunucunuz](../../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-that-uses-your-own-dns-server) bir sanal ağ üzerinde barındırılıyorsa, tüm özel bağlantı kaynakları için yapılandırmayı basitleştirmek üzere özel bir DNS bölgesi kullanmak üzere bir DNS iletme kuralı oluşturabilirsiniz.
 
-Daha fazla bilgi için bkz. [Azure özel uç nokta DNS yapılandırması](../../private-link/private-endpoint-dns.md).
+Daha fazla bilgi için bkz. [Azure Özel Uç Nokta DNS yapılandırması](../../private-link/private-endpoint-dns.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

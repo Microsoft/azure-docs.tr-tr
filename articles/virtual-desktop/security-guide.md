@@ -5,13 +5,13 @@ author: heidilohr
 ms.topic: conceptual
 ms.date: 12/15/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 0ddbd4b798d37498af92cec40af6a80a88115fab
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: fb0935ca2ffcad93ba47ccd207603dd870dc26b0
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103014902"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445712"
 ---
 # <a name="security-best-practices"></a>En iyi güvenlik uygulamaları
 
@@ -35,10 +35,10 @@ Windows sanal masaüstü dağıtımınızda sorumlu olduğunuz güvenlik ihtiya�
 |Oturum Ana Bilgisayarı işletim sistemi|Yes|
 |Dağıtım yapılandırması|Yes|
 |Ağ denetimleri|Yes|
-|Sanallaştırma denetim düzlemi|No|
-|Fiziksel konaklar|No|
-|Fiziksel ağ|No|
-|Fiziksel veri merkezi|No|
+|Sanallaştırma denetim düzlemi|Hayır|
+|Fiziksel konaklar|Hayır|
+|Fiziksel ağ|Hayır|
+|Fiziksel veri merkezi|Hayır|
 
 Müşterinin sorumlu olmadığı güvenlik ihtiyaçları Microsoft tarafından işlenir.
 

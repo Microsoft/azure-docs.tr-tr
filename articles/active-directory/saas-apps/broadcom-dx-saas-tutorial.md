@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 02/19/2021
 ms.author: jeedes
 ms.openlocfilehash: 35ab4d335560689a7e55bf1a8dff9fcb0bcc7d7f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104601525"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-broadcom-dx-saas"></a>Öğretici: Broadcom DX SaaS ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
@@ -106,7 +106,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
     ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user&quot;></a>Azure AD test kullanıcısı oluşturma
 
 Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
@@ -118,7 +118,7 @@ Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaks�
    1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
    1. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
+### <a name=&quot;assign-the-azure-ad-test-user&quot;></a>Azure AD test kullanıcısını atama
 
 Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak, Broadcom DX SaaS 'ye erişim izni vererek B. Simon 'u etkinleştireceksiniz.
 
@@ -127,16 +127,16 @@ Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak, Broadcom DX Saa
 1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
-1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, "varsayılan erişim" rolü seçili olduğunu görürsünüz.
+1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, &quot;varsayılan erişim&quot; rolü seçili olduğunu görürsünüz.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-## <a name="configure-broadcom-dx-saas-sso"></a>Broadcom DX SaaS SSO 'yu yapılandırma
+## <a name=&quot;configure-broadcom-dx-saas-sso&quot;></a>Broadcom DX SaaS SSO 'yu yapılandırma
 
 1. Broadcom DX SaaS şirket sitenizde yönetici olarak oturum açın.
 
 2. **Ayarlar** ' a gidin ve **Kullanıcılar** sekmesine tıklayın.
 
-    ![Kullanıcılar](./media/broadcom-dx-saas-tutorial/settings.png "Kullanıcılar")
+    ![Kullanıcılar](./media/broadcom-dx-saas-tutorial/settings.png &quot;Kullanıcılar")
 
 3. **Kullanıcı yönetimi** bölümünde üç nokta ve **SAML**' yi seçin.
 

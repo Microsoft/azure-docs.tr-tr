@@ -6,12 +6,12 @@ ms.author: sumuth
 ms.service: postgresql
 ms.topic: how-to
 ms.date: 09/22/2020
-ms.openlocfilehash: 278f8f816909a7e365d7e45d04c5169950e79a65
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9a7e16bf85293a412baf5015af825377438ebb7b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96493687"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778508"
 ---
 # <a name="manage-an-azure-database-for-postgresql---flexible-server-by-using-the-azure-cli"></a>Azure CLı kullanarak PostgreSQL için Azure veritabanı 'nı yönetme-esnek sunucu
 
@@ -26,13 +26,13 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
 
 Yerel olarak, Azure CLı sürüm 2,0 veya üstünü çalıştırıyor olmanız gerekir. Yüklü sürümü görmek için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekirse bkz. [Azure CLI’yı yükleme](/cli/azure/install-azure-cli).
 
-[Az Login](/cli/azure/reference-index#az-login) komutunu kullanarak hesabınızda oturum açın. 
+[Az Login](/cli/azure/reference-index#az_login) komutunu kullanarak hesabınızda oturum açın. 
 
 ```azurecli-interactive
 az login
 ```
 
-[Az Account set](/cli/azure/account) komutunu kullanarak aboneliğinizi seçin. Aşağıdaki komutta, **abonelik** bağımsız değişkeninin değeri olarak kullanılacak **az Login** çıktısından **ID** değerini bir yere unutmayın. Birden çok aboneliğiniz varsa, kaynağın faturalandırılması gereken aboneliği seçin. Tüm aboneliklerinizi belirlemek için [az Account List](/cli/azure/account#az-account-list) komutunu kullanın.
+[Az Account set](/cli/azure/account) komutunu kullanarak aboneliğinizi seçin. Aşağıdaki komutta, **abonelik** bağımsız değişkeninin değeri olarak kullanılacak **az Login** çıktısından **ID** değerini bir yere unutmayın. Birden çok aboneliğiniz varsa, kaynağın faturalandırılması gereken aboneliği seçin. Tüm aboneliklerinizi belirlemek için [az Account List](/cli/azure/account#az_account_list) komutunu kullanın.
 
 ```azurecli
 az account set --subscription <subscription id>
@@ -131,7 +131,7 @@ az postgres flexible-server update --resource-group myresourcegroup --name mydem
 
 ## <a name="delete-a-server"></a>Sunucu silme
 
-PostgreSQL için Azure veritabanı esnek sunucusunu silmek için [az Postgres esnek-sunucu Sil](/cli/azure/postgres/flexible-server#az-PostgreSQL-flexible-server-delete) komutunu çalıştırın.
+PostgreSQL için Azure veritabanı esnek sunucusunu silmek için [az Postgres esnek-sunucu Sil](/cli/azure/postgres/flexible-server#az_postgresql_flexible_server_delete) komutunu çalıştırın.
 
 ```azurecli-interactive
 az postgres flexible-server delete --resource-group myresourcegroup --name mydemoserver

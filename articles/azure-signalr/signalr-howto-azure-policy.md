@@ -6,12 +6,12 @@ ms.service: signalr
 ms.topic: conceptual
 ms.date: 06/17/2020
 ms.author: jixin
-ms.openlocfilehash: 018033d3a6123948191a7261f5a1ee2ae526e25a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c8776102602f5bdcf29139d808a6f603cc5c7473
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89295037"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784582"
 ---
 # <a name="audit-compliance-of-azure-signalr-service-resources-using-azure-policy"></a>Azure Ilkesi kullanarak Azure SignalR hizmeti kaynaklarının uyumluluğunu denetleme
 
@@ -53,7 +53,7 @@ Bir kaynak uyumsuz olduğunda birçok olası neden vardır. Nedenini öğrenmek 
 
 ### <a name="policy-compliance-in-the-azure-cli"></a>Azure CLı 'de ilke uyumluluğu
 
-Uyumluluk verilerini almak için Azure CLı 'yi de kullanabilirsiniz. Örneğin, uygulanan Azure SignalR hizmeti ilkelerinin ilke kimliklerini almak için CLı 'daki [az Policy atama listesi](/cli/azure/policy/assignment#az-policy-assignment-list) komutunu kullanın:
+Uyumluluk verilerini almak için Azure CLı 'yi de kullanabilirsiniz. Örneğin, uygulanan Azure SignalR hizmeti ilkelerinin ilke kimliklerini almak için CLı 'daki [az Policy atama listesi](/cli/azure/policy/assignment#az_policy_assignment_list) komutunu kullanın:
 
 ```azurecli
 az policy assignment list --query "[?contains(displayName,'SignalR')].{name:displayName, ID:id}" --output table
@@ -67,13 +67,13 @@ Name                                                                            
 [Preview]: Azure SignalR Service should use private links  /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/Microsoft.Authorization/policyAssignments/<assignmentId>
 ```
 
-Ardından, belirli bir kaynak grubundaki tüm kaynaklar için JSON biçimli uyumluluk durumunu döndürmek için [az Policy State List](/cli/azure/policy/state#az-policy-state-list) ' i çalıştırın:
+Ardından, belirli bir kaynak grubundaki tüm kaynaklar için JSON biçimli uyumluluk durumunu döndürmek için [az Policy State List](/cli/azure/policy/state#az_policy_state_list) ' i çalıştırın:
 
 ```azurecli
 az policy state list --g <resourceGroup>
 ```
 
-Veya belirli bir SignalR kaynağının JSON biçimli uyumluluk durumunu döndürmek için [az Policy State List](/cli/azure/policy/state#az-policy-state-list) ' i çalıştırın:
+Veya belirli bir SignalR kaynağının JSON biçimli uyumluluk durumunu döndürmek için [az Policy State List](/cli/azure/policy/state#az_policy_state_list) ' i çalıştırın:
 
 ```azurecli
 az policy state list \

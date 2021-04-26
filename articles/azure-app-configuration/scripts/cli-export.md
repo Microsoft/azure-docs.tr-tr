@@ -10,12 +10,12 @@ ms.topic: sample
 ms.date: 02/19/2020
 ms.author: alkemper
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: be3fac17ba99194a76b27c78040a76cce43405a0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1c4eb6e2aa150751dfbadc2307d64ab206b92b6d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96931121"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782234"
 ---
 # <a name="export-from-an-azure-app-configuration-store"></a>Azure uygulama yapılandırma deposundan dışarı aktarma
 
@@ -44,7 +44,7 @@ Bu betik, bir uygulama yapılandırma deposundan dışarı aktarmak için aşağ
 
 | Komut | Notlar |
 |---|---|
-| [az appconfig kV Export](/cli/azure/appconfig/kv#az-appconfig-kv-export) | Uygulama yapılandırma deposu kaynağından dışarı aktarır. |
+| [az appconfig kV Export](/cli/azure/appconfig/kv#az_appconfig_kv_export) | Uygulama yapılandırma deposu kaynağından dışarı aktarır. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

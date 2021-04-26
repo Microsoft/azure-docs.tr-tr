@@ -3,12 +3,12 @@ title: Rest 'te uygulama kaynağınızı şifreleyin
 description: Azure Storage 'da uygulama verilerinizi şifreleyin ve paket dosyası olarak dağıtın.
 ms.topic: article
 ms.date: 03/06/2020
-ms.openlocfilehash: 6e4cf16118e748e3ee1d1ff4899730463565ec70
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 71668bf27628bb2af2dfc7112d28ba10ecfdf9f3
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92108040"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107768822"
 ---
 # <a name="encrypt-your-application-data-at-rest-using-customer-managed-keys"></a>Müşteri tarafından yönetilen anahtarları kullanarak uygulama verilerinizi Rest 'te şifreleyin
 
@@ -43,7 +43,7 @@ Bu uygulama ayarı eklendiğinde, işlev uygulamanızın yeniden başlatılması
 
 Artık `WEBSITE_RUN_FROM_PACKAGE` uygulama ayarının DEĞERINI SAS kodlu URL 'ye bir Key Vault başvurusuyla değiştirebilirsiniz. Bu, ek bir güvenlik katmanı sağlayan Key Vault SAS URL 'sini şifreli tutar.
 
-1. [`az keyvault create`](/cli/azure/keyvault#az-keyvault-create)Bir Key Vault örneği oluşturmak için aşağıdaki komutu kullanın.       
+1. [`az keyvault create`](/cli/azure/keyvault#az_keyvault_create)Bir Key Vault örneği oluşturmak için aşağıdaki komutu kullanın.       
 
     ```azurecli    
     az keyvault create --name "Contoso-Vault" --resource-group <group-name> --location eastus    
@@ -51,13 +51,13 @@ Artık `WEBSITE_RUN_FROM_PACKAGE` uygulama ayarının DEĞERINI SAS kodlu URL 'y
 
 1. Uygulamanızı anahtar kasanıza [erişim izni vermek için aşağıdaki yönergeleri](../app-service/app-service-key-vault-references.md#granting-your-app-access-to-key-vault) izleyin:
 
-1. [`az keyvault secret set`](/cli/azure/keyvault/secret#az-keyvault-secret-set)Dış URL 'nizi anahtar kasanıza gizli dizi olarak eklemek için aşağıdaki komutu kullanın:   
+1. [`az keyvault secret set`](/cli/azure/keyvault/secret#az_keyvault_secret_set)Dış URL 'nizi anahtar kasanıza gizli dizi olarak eklemek için aşağıdaki komutu kullanın:   
 
     ```azurecli    
     az keyvault secret set --vault-name "Contoso-Vault" --name "external-url" --value "<SAS-URL>"    
     ```    
 
-1.  Aşağıdaki komutu kullanarak, [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) `WEBSITE_RUN_FROM_PACKAGE` DEĞERI dış URL 'ye Key Vault başvuru olarak değere sahip bir uygulama ayarı oluşturun:
+1.  Aşağıdaki komutu kullanarak, [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) `WEBSITE_RUN_FROM_PACKAGE` DEĞERI dış URL 'ye Key Vault başvuru olarak değere sahip bir uygulama ayarı oluşturun:
 
     ```azurecli    
     az webapp config appsettings set --settings WEBSITE_RUN_FROM_PACKAGE="@Microsoft.KeyVault(SecretUri=https://Contoso-Vault.vault.azure.net/secrets/external-url/<secret-version>"    

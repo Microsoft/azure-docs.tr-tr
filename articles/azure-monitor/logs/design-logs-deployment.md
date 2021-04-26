@@ -1,17 +1,16 @@
 ---
 title: Azure Izleyici günlükleri dağıtımınızı tasarlama | Microsoft Docs
 description: Bu makalede, Azure Izleyici 'de bir çalışma alanı dağıtmaya hazırlama müşterilerine yönelik konular ve öneriler açıklanmaktadır.
-ms.subservice: ''
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 09/20/2019
-ms.openlocfilehash: a889275782388781eadffb7cf0a24771bf6e9e4f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8502c35a145e4a041f9d44b8396fe16f5db3febc
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102030843"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384213"
 ---
 # <a name="designing-your-azure-monitor-logs-deployment"></a>Azure İzleyici Günlükleri dağıtımınızı tasarlama
 
@@ -64,7 +63,7 @@ Azure rol tabanlı erişim denetimi (Azure RBAC) sayesinde kullanıcılara yaln�
 
 Bir kullanıcının erişimi olan veriler, aşağıdaki tabloda listelenen faktörlerin birleşimiyle belirlenir. Her biri aşağıdaki bölümlerde açıklanmıştır.
 
-| Faktör | Description |
+| Faktör | Açıklama |
 |:---|:---|
 | [Erişim modu](#access-mode) | Kullanıcının çalışma alanına erişmek için kullandığı yöntem.  Kullanılabilir verilerin kapsamını ve uygulanan erişim denetimi modunu tanımlar. |
 | [Erişim denetimi modu](#access-control-mode) | Çalışma alanında izinlerin, çalışma alanında veya kaynak düzeyinde uygulanıp uygulanmadığını tanımlayan ayar. |

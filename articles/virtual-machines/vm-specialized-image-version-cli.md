@@ -10,12 +10,12 @@ ms.date: 04/23/2020
 ms.author: cynthn
 ms.reviewer: akjosh
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: fe081b0e74acf771e10406c15a3dea4e09956c37
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: b3498037f3d2088459784ab066b8e94ba344a275
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102560981"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792192"
 ---
 # <a name="create-a-vm-using-a-specialized-image-version-with-the-azure-cli"></a>Azure CLı ile özel görüntü sürümünü kullanarak VM oluşturma
 
@@ -23,7 +23,7 @@ Paylaşılan görüntü galerisinde depolanan [özelleştirilmiş görüntü sü
 
 Kaynak adlarını bu örnekte gereken şekilde değiştirin. 
 
-Tanımların adını ve KIMLIĞINI görmek için [az Sig Image-Definition List](/cli/azure/sig/image-definition#az-sig-image-definition-list) öğesini kullanarak bir galerideki görüntü tanımlarını listeleyin.
+Tanımların adını ve KIMLIĞINI görmek için [az Sig Image-Definition List](/cli/azure/sig/image-definition#az_sig_image_definition_list) öğesini kullanarak bir galerideki görüntü tanımlarını listeleyin.
 
 ```azurecli-interactive 
 resourceGroup=myGalleryRG
@@ -35,7 +35,7 @@ az sig image-definition list \
    --output tsv
 ```
 
-Görüntünün özelleşmiş bir görüntü olduğunu göstermek için,--özelleşmiş parametresini kullanarak [az VM Create](/cli/azure/vm#az-vm-create) kullanarak VM oluşturun. 
+Görüntünün özelleşmiş bir görüntü olduğunu göstermek için,--özelleşmiş parametresini kullanarak [az VM Create](/cli/azure/vm#az_vm_create) kullanarak VM oluşturun. 
 
 `--image`Kullanılabilir görüntünün en son sürümünden VM oluşturmak için görüntü tanımı kimliği ' ni kullanın. Ayrıca, için görüntü sürüm KIMLIĞI sağlayarak VM 'yi belirli bir sürümden da oluşturabilirsiniz `--image` . 
 

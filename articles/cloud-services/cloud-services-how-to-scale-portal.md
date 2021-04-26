@@ -3,17 +3,18 @@ title: Portalda bulut hizmetini otomatik ölçeklendirme (klasik) | Microsoft Do
 description: Azure 'da bir bulut hizmeti (klasik) rollerinin otomatik ölçek kurallarını yapılandırmak için portalını nasıl kullanacağınızı öğrenin.
 ms.topic: article
 ms.service: cloud-services
+ms.subservice: autoscale
 ms.date: 10/14/2020
 ms.author: tagore
 author: tanmaygore
 ms.reviewer: mimckitt
 ms.custom: ''
-ms.openlocfilehash: ba7b2279969acab93ac96c42e0033e76e9d0542d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ddf0f97e78ebc6f1eb8eade0d1842c912d167155
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99980839"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105935951"
 ---
 # <a name="how-to-configure-auto-scaling-for-a-cloud-service-classic-in-the-portal"></a>Portalda bir bulut hizmeti için otomatik ölçeklendirmeyi yapılandırma (klasik)
 

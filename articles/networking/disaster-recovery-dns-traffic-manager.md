@@ -13,33 +13,33 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 06/08/2018
+ms.date: 04/06/2021
 ms.author: kumud
-ms.openlocfilehash: 8cb1a490ac8edf2630253b45d99c3394bbe721b8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 077e92b67f0cf6dac673cc870b7ff8c86fbe60dd
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98234163"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106551297"
 ---
 # <a name="disaster-recovery-using-azure-dns-and-traffic-manager"></a>Azure DNS ve Traffic Manager kullanarak olağanüstü durum kurtarma
 
-Olağanüstü durum kurtarma, uygulama işlevselliğinin önemli bir kaybından kurtarılmasına odaklanır. Bir olağanüstü durum kurtarma çözümü seçmek için, iş ve teknoloji sahipleri öncelikle, bir olağanüstü durum (örneğin, azaltılmış işlevsellik veya geciktirilen kullanılabilirlik veya tamamen kullanılabilir) gibi bir olağanüstü durum sırasında gerekli işlevselliğin düzeyini belirlememelidir.
+Olağanüstü durum kurtarma, uygulama işlevselliğinin önemli bir kaybından kurtarılmasına odaklanır. Bir olağanüstü durum kurtarma çözümü seçmek için, iş ve teknoloji sahipleri öncelikle, bir olağanüstü durum (örneğin, azaltılmış işlevsellik veya geciktirilen kullanılabilirlik ya da tam olarak kullanılabilir) için gereken işlevsellik düzeyini belirlememelidir.
 Çoğu kurumsal müşteri, uygulama veya altyapı düzeyinde yük devretmeye karşı dayanıklılık için çok bölgeli bir mimari seçmektir. Müşteriler, ek mimari aracılığıyla yük devretme ve yüksek kullanılabilirlik elde etmek için, bu mühendisde çeşitli yaklaşımlar seçebilirler. Popüler yaklaşımlardan bazıları şunlardır:
 
-- **Etkin-edilgen soğuk bekleme**: Bu yük devretme çözümünde, yük devretme için gerekli olana kadar VM 'ler ve bekleme bölgesinde çalışan diğer gereçler etkin değildir. Ancak, üretim ortamı yedekler, VM görüntüleri veya Kaynak Yöneticisi şablonları şeklinde farklı bir bölgeye çoğaltılır. Bu yük devretme mekanizması düşük maliyetli, ancak tam yük devretme işleminin daha uzun sürmesine neden olur.
+- **Etkin-Pasif bekleme**: Bu yük devretme çözümünde, yük devretme için gerekli olana kadar VM 'ler ve bekleme bölgesinde çalışan diğer gereçler etkin değildir. Ancak, üretim ortamı yedekler, VM görüntüleri veya Kaynak Yöneticisi şablonları şeklinde farklı bir bölgeye çoğaltılır. Bu yük devretme mekanizması düşük maliyetli, ancak tam yük devretme işleminin daha uzun sürmesine neden olur.
  
     ![Soğuk bekleme ile etkin/Pasif](./media/disaster-recovery-dns-traffic-manager/active-passive-with-cold-standby.png)
     
     *Şekil-soğuk bekleme olağanüstü durum kurtarma yapılandırması ile etkin/Pasif*
 
-- **Etkin/Pasif ve pilot ışığı**: Bu yük devretme çözümünde, bekleme ortamı en düşük yapılandırmayla ayarlanır. Kurulum yalnızca en az ve kritik bir uygulama kümesini desteklemek için çalışan gerekli hizmetleri içerir. Bu senaryo, yerel biçiminde yalnızca minimum işlevleri yürütebilir ancak yük devretme gerçekleşirse üretim yükünü toplu olarak almak için ek hizmetler oluşturabilir ve oluşturabilir.
+- **Etkin/Pasif ve pilot ışığı**: Bu yük devretme çözümünde, bekleme ortamı en düşük yapılandırmayla ayarlanır. Kurulum yalnızca en az ve kritik bir uygulama kümesini desteklemek için çalışan gerekli hizmetleri içerir. Bu senaryo, yerel biçiminde yalnızca minimum işlevselliği yürütebilir, ancak bir yük devretme gerçekleşirse üretim yükünün toplu olması için daha fazla hizmet oluşturabilir ve oluşturabilir.
     
     ![Pilot hafif etkin/Pasif](./media/disaster-recovery-dns-traffic-manager/active-passive-with-pilot-light.png)
     
     *Şekil: pilot hafif olağanüstü durum kurtarma yapılandırması ile etkin/Pasif*
 
-- **Etkin/Pasif Ile etkin/Pasif**: Bu yük devretme çözümünde, bekleme bölgesi önceden çarpımış olur ve temel yükü almaya hazır, otomatik ölçeklendirme açıktır ve tüm örnekler çalışır durumda olur. Bu çözüm, tam üretim yükünü alacak, ancak işlevsel ve tüm hizmetler çalışır duruma sahip olmak için ölçeklendirilmez. Bu çözüm, pilot ışığı yaklaşımının genişletilmiş bir sürümüdür.
+- **Etkin/Pasif Ile etkin/Pasif**: Bu yük devretme çözümünde, bekleme bölgesi önceden çarpımış olur ve temel yükü almaya hazır hale gelir, otomatik ölçeklendirme açıktır ve tüm örnekler çalışır durumdadır. Bu çözüm, tam üretim yükünü alacak, ancak işlevsel ve tüm hizmetler çalışır durumda olacak şekilde ölçeklendirilmez. Bu çözüm, pilot ışığı yaklaşımının genişletilmiş bir sürümüdür.
     
     ![Yarı etkin bekleme ile etkin/Pasif](./media/disaster-recovery-dns-traffic-manager/active-passive-with-warm-standby.png)
     
@@ -94,7 +94,7 @@ Bu bölge içinde, aşağıda göster olarak üç kayıt (örneğin \. , www con
 
 *Şekil-Azure 'da DNS bölge kayıtları oluşturma*
 
-Bu senaryoda www \. contoso.com, 30 dakikalık BIR TTL 'e sahiptir ve bu, belirtilen RTO 'nın altında iyi bir değer olan ve Prod.contoso.com üretim sitesini işaret ediyor. Bu yapılandırma normal iş işlemleri sırasında yapılır. Prod.contoso.com ve dr.contoso.com TTL değeri 300 saniye veya 5 dakika olarak ayarlanmıştır. Azure Izleyici veya Azure Application Insights gibi bir Azure izleme hizmeti ya da dynaTrace gibi herhangi bir iş ortağı izleme çözümü kullanarak, uygulama veya sanal altyapı düzeyindeki sorunları izleyebildiği veya algılayan ev büyüme çözümlerini de kullanabilirsiniz.
+Bu senaryoda www \. contoso.com, 30 dakikalık BIR TTL 'e sahiptir ve bu, belirtilen RTO 'nın altında iyi bir değer olan ve Prod.contoso.com üretim sitesini işaret ediyor. Bu yapılandırma normal iş işlemleri sırasında yapılır. Prod.contoso.com ve dr.contoso.com TTL değeri 300 saniye veya 5 dakika olarak ayarlanmıştır. Azure Izleyici veya Azure Application Insights gibi bir Azure izleme hizmetini veya dynaTrace gibi iş ortağı izleme çözümlerini kullanabilirsiniz. Aynı şekilde, uygulama veya sanal altyapı düzeyindeki sorunları izleyebildiği veya algılayan ev büyüme çözümlerini de kullanabilirsiniz.
 
 ### <a name="step-3-update-the-cname-record"></a>3. Adım: CNAME kaydını güncelleştirme
 
@@ -116,7 +116,7 @@ CNAME değerini değiştirmek için aşağıdaki Azure CLı komutunu da çalış
 Bu adım el ile veya Otomasyon aracılığıyla çalıştırılabilir. Konsol veya Azure CLı aracılığıyla el ile yapılabilir. Azure SDK ve API, el ile müdahale gerekmeden CNAME güncelleştirmesini otomatikleştirmek için kullanılabilir. Otomasyon, Azure işlevleri aracılığıyla veya bir üçüncü taraf izleme uygulamasında veya Şirket içinden bile oluşturulabilir.
 
 ### <a name="how-manual-failover-works-using-azure-dns"></a>Azure DNS kullanarak el ile yük devretme nasıl kullanılır
-DNS sunucusu yük devretme veya olağanüstü durum bölgesinin dışında olduğundan, herhangi bir kesinti kesintiye karşı yalıtılmış olur. Bu, kullanıcının uygun maliyetli olan basit bir yük devretme senaryosunu mimarmasına olanak sağlar ve işlecin olağanüstü durum sırasında ağ bağlantısına sahip olduğunu ve ters çevirmeyi yapıp yapacağını kabul eden tüm zamanı işler. Çözüm komut dosyasıyla karşılaşırsanız, bunlardan biri, betiği çalıştıran sunucu veya hizmetin, üretim ortamını etkileyen soruna karşı yalıtılmış olmasını sağlamalıdır. Ayrıca, dünyanın her yerindeki bir çözümleyici bitiş noktasının uzun süre önbelleğe alınmasını ve müşterilerin RTO içindeki siteye erişmesini sağlamak için bölgeye göre ayarlanan düşük TTL 'yi aklınızda bulundurun. Bir soğuk bekleme ve pilot ışığı için, bir veya daha fazla yönetim etkinliği gerekli olabileceğinden, tek yapmanız gereken bir süre sonra da geçiş yapmadan önce yeterli zaman vermelidir.
+DNS sunucusu yük devretme veya olağanüstü durum bölgesinin dışında olduğundan, herhangi bir kapalı kalma süresine karşı ayrı olur. Bu, kullanıcının uygun maliyetli olan basit bir yük devretme senaryosunu mimarmasına olanak sağlar ve işlecin olağanüstü durum sırasında ağ bağlantısına sahip olduğunu ve ters çevirmeyi yapıp yapacağını kabul eden tüm zamanı işler. Çözüm komut dosyasıyla karşılaşırsanız, bunlardan biri, betiği çalıştıran sunucu veya hizmetin, üretim ortamını etkileyen soruna karşı yalıtılmış olmasını sağlamalıdır. Ayrıca, dünyanın her yerindeki bir çözümleyici bitiş noktasının uzun süre önbelleğe alınmasını ve müşterilerin RTO içindeki siteye erişmesini sağlamak için bölgeye göre ayarlanan düşük TTL 'yi aklınızda bulundurun. Bir soğuk bekleme ve pilot ışığı için, bir veya daha fazla yönetim etkinliği gerekli olabileceğinden, tek yapmanız gereken bir süre sonra da geçiş yapmadan önce yeterli zaman vermelidir.
 
 ## <a name="automatic-failover-using-azure-traffic-manager"></a>Azure Traffic Manager kullanarak otomatik yük devretme
 Karmaşık mimarilerin ve aynı işlevi gerçekleştirebilen birden çok kaynak kümesi olduğunda, kaynaklarınızın sistem durumunu denetlemek ve trafiği sağlıklı olmayan kaynaktan sağlıklı kaynağa yönlendirmek için Azure Traffic Manager (DNS tabanlı) yapılandırabilirsiniz. Aşağıdaki örnekte, hem birincil bölgenin hem de ikincil bölgenin tam dağıtımı vardır. Bu dağıtım, bulut hizmetlerini ve eşitlenmiş bir veritabanını içerir. 
@@ -126,7 +126,7 @@ Karmaşık mimarilerin ve aynı işlevi gerçekleştirebilen birden çok kaynak 
 *Şekil-Azure Traffic Manager kullanarak otomatik yük devretme*
 
 Ancak, yalnızca birincil bölge, kullanıcılardan gelen ağ isteklerini etkin bir şekilde işliyor. İkincil bölge yalnızca birincil bölge bir hizmet kesintisi yaşıyorsa etkin hale gelir. Bu durumda, tüm yeni ağ istekleri ikincil bölgeye yönlendirir. Veritabanının yedeklemesi anlık bir yerde olduğundan, her iki yük dengeleyicinin sistem durumu denetimli bir IP 'si vardır ve örnekler her zaman çalışır durumda olur ve bu topoloji, el ile müdahale olmadan düşük RTO ve yük devretme için bir seçenek sunar. Birincil bölgenin hatasından sonra, ikincil yük devretme bölgesinin hemen ardından etkin olması gerekir.
-Bu senaryo, http/https ve TCP gibi çeşitli türlerde sistem durumu denetimleri için yerleşik yoklamalar içeren Azure Traffic Manager kullanımı için idealdir. Azure Traffic Manager 'da Ayrıca, aşağıda açıklandığı gibi bir hata oluştuğunda yük devretmek üzere yapılandırılabilecek bir kural altyapısı vardır. Traffic Manager kullanarak aşağıdaki çözümü ele alalım:
+Bu senaryo, http/https ve TCP gibi çeşitli türlerde sistem durumu denetimleri için yerleşik yoklamalar içeren Azure Traffic Manager kullanımı için idealdir. Azure Traffic Manager 'da, aşağıda açıklandığı gibi bir hata oluştuğunda yük devretmek için yapılandırılabilecek bir kural altyapısı da vardır. Traffic Manager kullanarak aşağıdaki çözümü ele alalım:
 - Müşteri, prod.contoso.com olarak bilinen ve statik IP 'si 100.168.124.44 olarak bilinen bir #2 bölge #1 uç noktası olan bölgeye sahiptir. 
 -   Bu ortamların her biri, yük dengeleyici gibi genel kullanıma yönelik bir özellik aracılığıyla alınmıştır. Yük dengeleyici, yukarıda gösterildiği gibi, DNS tabanlı bir uç noktaya veya tam etki alanı adına (FQDN) sahip olacak şekilde yapılandırılabilir.
 -   Bölge 2 ' deki tüm örnekler, bölge 1 ' de neredeyse gerçek zamanlı çoğaltmada bulunur. Ayrıca, makine görüntüleri güncel olur ve tüm yazılım/yapılandırma verileri düzeltme eki uygulanır ve bölge 1 ' de yer alan bir satır içinde bulunur.  
@@ -155,7 +155,7 @@ Benzer şekilde, Traffic Manager de olağanüstü durum kurtarma uç noktası ol
 
 ### <a name="step-3-set-up-health-check-and-failover-configuration"></a>3. Adım: sistem durumu denetimi ve yük devretme yapılandırmasını ayarlama
 
-Bu adımda, DNS TTL 'sini, internet 'e yönelik özyinelemeli çözümleyicilerleyenler tarafından kabul edilecek şekilde 10 saniye olarak ayarlarsınız. Bu yapılandırma, hiçbir DNS Çözümleyicisinin 10 saniyeden uzun süre içinde bilgi önbelleğe alacağını belirtir. Uç nokta izleyici ayarları için, yol/veya root geçerli kümesidir, ancak bir yolu değerlendirmek için uç nokta ayarlarını özelleştirebilirsiniz, örneğin, prod.contoso.com/index. Aşağıdaki örnekte, yoklama protokolü olarak **https** gösterilmektedir. Ancak, **http** veya **TCP** de seçebilirsiniz. Protokol seçimi, son uygulamaya bağlıdır. Yoklama aralığı, hızlı yoklama sağlayan 10 saniye olarak ayarlanır ve yeniden deneme 3 olarak ayarlanır. Sonuç olarak, üç ardışık Aralık bir hata kaydetmede Traffic Manager ikinci uç noktaya devreder. Aşağıdaki formül otomatik yük devretme için toplam süreyi tanımlar: yük devretme için süre = TTL + yeniden dene * yoklama aralığı ve bu durumda, değer 10 + 3 * 10 = 40 saniye (max) olur.
+Bu adımda, DNS TTL 'sini, internet 'e yönelik özyinelemeli çözümleyicilerleyenler tarafından kabul edilecek şekilde 10 saniye olarak ayarlarsınız. Bu yapılandırma, hiçbir DNS Çözümleyicisinin 10 saniyeden uzun süre içinde bilgi önbelleğe alacağını belirtir. Uç nokta izleyici ayarları için, yol/veya root geçerli kümesidir, ancak bir yolu değerlendirmek için uç nokta ayarlarını özelleştirebilirsiniz, örneğin, prod.contoso.com/index. Aşağıdaki örnekte, yoklama protokolü olarak **https** gösterilmektedir. Ancak, **http** veya **TCP** de seçebilirsiniz. Protokol seçimi, son uygulamaya bağlıdır. Yoklama aralığı, hızlı yoklama sağlayan 10 saniye olarak ayarlanır ve yeniden deneme 3 olarak ayarlanır. Sonuç olarak, art arda üç Aralık bir hata kaydı olursa Traffic Manager ikinci uç noktaya yük devreder. Aşağıdaki formül otomatik yük devretme için toplam süreyi tanımlar: yük devretme için süre = TTL + yeniden dene * yoklama aralığı ve bu durumda, değer 10 + 3 * 10 = 40 saniye (max) olur.
 Yeniden deneme 1 olarak ayarlanmışsa ve TTL 10 saniye olarak ayarlanırsa, yük devretme 10 + 1 * 10 = 20 saniye için zaman. Hatalı pozitif sonuçlar veya herhangi bir küçük ağ hüşileri nedeniyle yük devretme olasılığını ortadan kaldırmak için yeniden denemeyi **1** ' den büyük bir değere ayarlayın. 
 
 
@@ -165,7 +165,7 @@ Yeniden deneme 1 olarak ayarlanmışsa ve TTL 10 saniye olarak ayarlanırsa, yü
 
 ### <a name="how-automatic-failover-works-using-traffic-manager"></a>Otomatik yük devretme Traffic Manager kullanarak nasıl kullanılır
 
-Bir olağanüstü durum sırasında, birincil uç nokta denetlenir ve durum **düşürülmüş** olarak değişir ve olağanüstü durum kurtarma sitesi **çevrimiçi** kalır. Traffic Manager varsayılan olarak tüm trafiği birincil (en yüksek öncelikli) uç noktaya gönderir. Birincil uç nokta düzeyi düşürülmüş görünüyorsa, Traffic Manager sağlıklı kaldığı sürece trafiği ikinci uç noktaya yönlendirir. Biri, ek yük devretme uç noktaları olarak kullanılabilecek Traffic Manager içinde daha fazla uç nokta yapılandırma seçeneğine sahiptir veya yük dengeleyiciler uç noktalar arasında paylaşımı paylaşıyor.
+Bir olağanüstü durum sırasında, birincil uç nokta denetlenir ve durum **düşürülmüş** olarak değişir ve olağanüstü durum kurtarma sitesi **çevrimiçi** kalır. Traffic Manager varsayılan olarak tüm trafiği birincil (en yüksek öncelikli) uç noktaya gönderir. Birincil uç nokta düzeyi düşürülmüş görünüyorsa, Traffic Manager sağlıklı kaldığı sürece trafiği ikinci uç noktaya yönlendirir. Bunlardan biri, ek yük devretme uç noktaları olarak kullanılabilecek Traffic Manager içinde daha fazla uç nokta yapılandırabilir veya yük dengeleyiciler uç noktalar arasında paylaşımı paylaşıyor.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - [Azure Traffic Manager](../traffic-manager/traffic-manager-overview.md)hakkında daha fazla bilgi edinin.

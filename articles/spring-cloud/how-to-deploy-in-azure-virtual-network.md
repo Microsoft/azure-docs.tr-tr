@@ -6,24 +6,24 @@ ms.author: brendm
 ms.service: spring-cloud
 ms.topic: how-to
 ms.date: 07/21/2020
-ms.custom: devx-track-java
-ms.openlocfilehash: 82dcd8c59c55a2866b51fd6dee896ea1298b6cf6
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.custom: devx-track-java, devx-track-azurecli
+ms.openlocfilehash: b0ea5728618c7b69403fcc4c0a3575b70fac6038
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878735"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107482611"
 ---
 # <a name="deploy-azure-spring-cloud-in-a-virtual-network"></a>Azure Spring Cloud 'ı bir sanal ağda dağıtma
 
-**Bu makale şu şekilde geçerlidir:** ✔️ Java ✔️ C #
+**Bu makale şu şekilde geçerlidir:** âœ "ï ̧ Java âœ" ï ̧ C #
 
 Bu öğreticide, sanal ağınıza bir Azure Spring Cloud örneğinin nasıl dağıtılacağı açıklanmaktadır. Bu dağıtım bazen VNet ekleme olarak adlandırılır.
 
 Dağıtım şunları sunar:
 
-* Şirket ağınızdaki Internet 'ten gelen Azure Mağazası bulut uygulamalarının ve hizmet çalışma zamanının yalıtımı.
-* Azure, şirket içi veri merkezlerinde veya diğer sanal ağlardaki Azure hizmetlerinde bulunan sistemlerle bulut etkileşimini ister.
+* Kurumsal networkâ € ‹ 'teki Internetâ € ‹ 'tan Azure Spring Cloud Apps ve hizmet çalışma zamanının yalıtımı.
+* Azure, diğer sanal ağlardaki â € ‹ şirket içi veri merkezleri â € ‹ veya Azure Hizmetleri olan sistemlerle bulut etkileşimini ister.
 * Müşterilerin Azure yay bulutu için gelen ve giden ağ iletişimlerini denetlemesine olanak sağlar.
 
 > [!Note]

@@ -6,13 +6,13 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 author: trkeya
 ms.author: trkeya
-ms.date: 03/30/2020
-ms.openlocfilehash: 5bea2cf256e30bd896957bbee0e0ad824057a569
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/09/2021
+ms.openlocfilehash: 0da1fd7b98b86ebd75926cc8a2d2bb5294d048ca
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98247191"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308192"
 ---
 # <a name="use-an-https-endpoint-to-manage-commercial-marketplace-leads"></a>Ticari Market müşteri adaylarını yönetmek için bir HTTPS uç noktası kullanın
 
@@ -31,13 +31,13 @@ Bu makalede, Iş Ortağı Merkezi 'nde müşteri adaylarını yapılandırmak i�
 
     ![Akışlarım oturum aç](./media/commercial-marketplace-lead-management-instructions-https/my-flows-automated.png)
 
-1. **+ Yeni** altında, **boş 'tan + anında**' yı seçin.
+1. **+ Yeni** altında **+ Hızlı bulut akışı**' nı seçin.
 
-    ![Akışlarım + otomatik--boş](./media/commercial-marketplace-lead-management-instructions-https/https-myflows-create-fromblank.png)
+    ![Akışlarım + otomatik--boş](./media/commercial-marketplace-lead-management-instructions-https/https-my-flows-create-from-blank.png)
 
 1. Akışınızı adlandırın ve ardından **bu akışın nasıl tetikleneceğini seçin** altında **bir http isteği alındığında** öğesini seçin.
 
-    ![Otomatik akış penceresi atlama düğmesi oluştur](./media/commercial-marketplace-lead-management-instructions-https/https-myflows-pick-request-trigger.png)
+    ![Otomatik akış penceresi atlama düğmesi oluştur](./media/commercial-marketplace-lead-management-instructions-https/https-my-flows-pick-request-trigger.png)
 
 1. Açmak için Flow adımına tıklayın.
 
@@ -137,9 +137,13 @@ Bu makalede, Iş Ortağı Merkezi 'nde müşteri adaylarını yapılandırmak i�
 ### <a name="connect-to-a-crm-system"></a>Bir CRM sistemine bağlanma
 
 1. **+ Yeni adım**’ı seçin.
-1. **Arama bağlayıcılar ve Eylemler '** in bulunduğu yeri arayarak istediğiniz CRM sistemini seçin. Yeni bir kayıt oluşturma eylemi ile **Eylemler** sekmesinde bunu seçin. Aşağıdaki ekran, örnek olarak **Yeni bir kayıt (Dynamics 365) oluşturur** .
+1. **Arama bağlayıcılar ve Eylemler '** in bulunduğu yeri arayarak istediğiniz CRM sistemini seçin. Aşağıdaki ekran, örnek olarak yeni bir kayıt (Common Data Service) oluşturmayı gösterir.
 
     ![Yeni kayıt oluşturma](./media/commercial-marketplace-lead-management-instructions-https/create-new-record.png)
+
+1. **Yeni kayıt oluşturma** eylemine sahip **Eylemler sekmesini** seçin.
+
+    ![Yeni kayıt oluştur ' u seçin](./media/commercial-marketplace-lead-management-instructions-https/select-create-new-record.png)
 
 1. CRM sistemiyle ilişkili **kuruluş adını** belirtin. **Varlık adı** açılır listesinden **müşteri adayları** ' nı seçin.
 

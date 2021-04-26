@@ -3,12 +3,14 @@ title: 'Hızlı başlangıç: ilk portal sorgunuz'
 description: Bu hızlı başlangıçta, Azure Kaynak Grafiği gezginini kullanarak Azure portal ilk sorgunuzu çalıştırmak için adımları izleyin.
 ms.date: 01/27/2021
 ms.topic: quickstart
-ms.openlocfilehash: cb62a1ae3a29a7aae793fcee6fd896fe0260dc10
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom:
+- mode-portal
+ms.openlocfilehash: 07e336121c6338b27c018acb5b2332653663e1b4
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98920112"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533079"
 ---
 # <a name="quickstart-run-your-first-resource-graph-query-using-azure-resource-graph-explorer"></a>Hızlı başlangıç: Azure Kaynak Grafiği gezginini kullanarak ilk kaynak Graph sorgunuzu çalıştırma
 

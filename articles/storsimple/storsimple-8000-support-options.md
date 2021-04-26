@@ -7,10 +7,10 @@ ms.topic: conceptual
 ms.date: 08/13/2019
 ms.author: alkohli
 ms.openlocfilehash: 55cc3049e437cc18eac6dc537de3ee1c0d894c23
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "87070331"
 ---
 # <a name="storsimple-solution-support"></a>StorSimple çözümü desteği

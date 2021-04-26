@@ -1,15 +1,15 @@
 ---
 title: Azure Event Hubs için yerleşik ilke tanımları
 description: Azure Event Hubs için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 ms.custom: subject-policy-reference
-ms.openlocfilehash: 84486285dd9566821b5b6bbe33e3cfbffb792532
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 6d71677d30372a2a749900418126eddde9709dbf
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105031350"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864550"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-event-hubs"></a>Azure için Azure Ilkesi yerleşik tanımları Event Hubs
 

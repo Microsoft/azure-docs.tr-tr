@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.custom: mvc
 ms.date: 12/03/2018
 ms.author: dobett
-ms.openlocfilehash: 7be0278fd8870395b8495168eb9723780eba4b26
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 27a23ff924c2fa9e9e35fec010ca2a177868eacc
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96852379"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107713921"
 ---
 # <a name="device-simulation-solution-accelerator-overview"></a>Cihaz Simülasyonu çözüm hızlandırıcısına genel bakış
 
@@ -32,11 +32,11 @@ Cihaz benzetimi ile gerçek cihazlarınızın benzetimini yapmak için cihaz mod
 
 Herhangi bir IoT Hub 'ına bağlanan binlerce cihaza yönelik benzetimleri çalıştırabilirsiniz. Test ile ilgili yardım için, isteğe bağlı olarak tek başına bir ortam için cihaz benzetimine sahip bir IoT Hub 'ı dağıtabilirsiniz.
 
-Cihaz benzetimi ücretsizdir. Ancak, cihaz benzetimi Bulutta Azure aboneliğinize dağıtılır ve Azure kaynaklarını kullanır. Cihaz benzetimi gereksinimlerinizi karşılamıyorsa, kopyalama ve değiştirme için [GitHub 'da kaynak kodu da mevcuttur](https://github.com/Azure/device-simulation-dotnet) .
+Cihaz benzetimi ücretsizdir. Ancak, cihaz benzetimi Bulutta Azure aboneliğinize dağıtılır ve Azure kaynaklarını kullanır. Cihaz benzetimi gereksinimlerinizi karşılamıyorsa, kopyalama ve değiştirme için [GitHub 'da kaynak kodu da mevcuttur](https://github.com/Azure/azure-iot-pcs-device-simulation) .
 
 ## <a name="sample-simulations"></a>Örnek benzetimler
 
-Cihaz simülasyonu dağıtırken, bazı örnek benzetimleri ve örnek cihazları alırsınız. Bu örnekleri, cihaz benzetimi kullanımını öğrenmek için kullanabilirsiniz. Başlamak için [örnek simülasyonu](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md)çalıştırın. Ayrıca, [belirtilen birçok örnek cihazdan birini kullanarak kendi simülasyoninizi oluşturabilirsiniz](iot-accelerators-device-simulation-create-simulation.md).
+Cihaz simülasyonu dağıtırken, bazı örnek benzetimleri ve örnek cihazları alırsınız. Bu örnekleri, cihaz benzetimi kullanımını öğrenmek için kullanabilirsiniz. Başlamak için [örnek simülasyonu](https://github.com/Azure/azure-iot-pcs-device-simulation/blob/master/README.md)çalıştırın. Ayrıca, [belirtilen birçok örnek cihazdan birini kullanarak kendi simülasyoninizi oluşturabilirsiniz](iot-accelerators-device-simulation-create-simulation.md).
 
 ![Benzetim yapılandırması](media/iot-accelerators-device-simulation-overview/samplesimulation1.png)
 
@@ -63,4 +63,4 @@ Gelişmiş cihaz modelleri şunları yapmanızı sağlar:
 Bu makalede cihaz benzetimi Çözüm Hızlandırıcısı ve özellikleri hakkında bilgi edindiniz. Çözüm hızlandırıcıyı dağıtmak için GitHub deposunu ziyaret edin:
 
 > [!div class="nextstepaction"]
-> [Azure 'da IoT cihaz benzetimi dağıtma ve çalıştırma](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md)
+> [Azure 'da IoT cihaz benzetimi dağıtma ve çalıştırma](https://github.com/Azure/azure-iot-pcs-device-simulation/blob/master/README.md)

@@ -4,12 +4,12 @@ description: Uçtan uca işlem tanılamayı Application Insights
 ms.topic: conceptual
 ms.date: 01/19/2018
 ms.reviewer: sdash
-ms.openlocfilehash: 7623b7131e6344a67c468d0436884ebfef9b0058
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 60365079c295e154ff0a38277c9ccdec35157e6e
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96746106"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481404"
 ---
 # <a name="unified-cross-component-transaction-diagnostics"></a>Birleştirilmiş çapraz bileşen işlem tanılaması
 
@@ -94,3 +94,6 @@ Zaman çizelgeleri, işlem grafiğindeki saat eğelerine göre ayarlanır. Tam z
 
 Bu tasarım gereğidir. Tüm bileşenler genelinde tüm ilgili öğeler zaten sol tarafta (üst ve alt bölümler) kullanılabilir. Yeni deneyim, sol taraftaki iki ilişkili öğeye sahiptir: Bu olaydan ve sonrasında beş dakikadan önceki ve sonraki tüm telemetri ve Kullanıcı zaman çizelgesi.
 
+*Application Insights JavaScript SDK 'sını kullanırken işlem tanılama deneyiminde beklenenden daha fazla olay görüyorum. İşlem başına daha az olay görmeniz için bir yol var mı?*
+
+İşlem tanılama deneyimi, tüm telemetrileri bir [Işlem kimliği](data-model-context.md#operation-id)paylaşan [tek bir işlemde](correlation.md#data-model-for-telemetry-correlation) gösterir. Varsayılan olarak, JavaScript için Application Insights SDK, her benzersiz sayfa görünümü için yeni bir işlem oluşturur. Tek sayfalı bir uygulamada (SPA), yalnızca bir sayfa görüntüleme olayı oluşturulur ve oluşturulan tüm telemetri için tek bir Işlem kimliği kullanılır, bu da birçok olayın aynı işlemle bağıntılı olması olabilir. Bu senaryolarda otomatik yol Izlemeyi kullanarak tek sayfalı uygulamanızda gezinti için otomatik olarak yeni işlemler oluşturabilirsiniz. URL yolu her güncelleştirildiği sırada bir sayfa görünümü oluşturulması için [Enableoto Routetracking](javascript.md#single-page-applications) ' i açmanız gerekir (mantıksal sayfa görünümü oluşur). Işlem kimliğini el ile yenilemek istiyorsanız, öğesini çağırarak bunu yapabilirsiniz `appInsights.properties.context.telemetryTrace.traceID = Microsoft.ApplicationInsights.Telemetry.Util.generateW3CId()` . Bir PageView olayını el ile tetiklemek Işlem kimliğini de sıfırlar.

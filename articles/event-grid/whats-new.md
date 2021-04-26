@@ -3,12 +3,12 @@ title: Yenilikler Sürüm notları-Azure Event Grid
 description: En son sürüm notları, bilinen sorunlar, hata düzeltmeleri, kullanım dışı işlevler ve yaklaşan değişiklikler gibi Azure Event Grid yenilikleri öğrenin.
 ms.topic: overview
 ms.date: 07/23/2020
-ms.openlocfilehash: da0b26e4f163f428e6955a37636ceb19bb34abc5
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: f135b25f28002c037dd24fa0cb3bb7476a06309f
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107542"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389596"
 ---
 # <a name="whats-new-in-azure-event-grid"></a>Azure Event Grid yenilikler nelerdir?
 
@@ -21,6 +21,24 @@ Azure Event Grid iyileştirmeleri sürekli olarak alır. En son gelişmelerden h
 - Hata düzeltmeleri
 - Kullanım dışı işlevsellik
 - Değişiklik planları
+
+## <a name="610-preview-2020-10"></a>6.1.0-Önizleme (2020-10)
+- [Sistem için Yönetilen kimlikler konuları](enable-identity-system-topics.md)
+- [Özel teslim özellikleri](delivery-properties.md)
+- [Depolama kuyruğu-ileti yaşam süresi (TTL)](delivery-properties.md#configure-time-to-live-on-outgoing-events-to-azure-storage-queues)
+- [Gelişmiş filtreleme geliştirmeleri](event-filtering.md#advanced-filtering)
+    - Gelen olaylardaki dizi verilerinde filtrelemeyi destekleme
+    - CloudEvents uzantıları bağlam özniteliklerinde filtrelemeye izin ver
+    - Yeni işleçler
+        - StringNotContains
+        - StringNotBeginsWith
+        - StringNotEndsWith
+        - Numberınrange
+        - NumberNotInRange
+        - IsNull
+        - IsNotNull
+- [Özel konular ve etki alanları için Event Grid şemasının CloudEvents 1,0 şema dönüşümlerine izin ver](cloudevents-schema.md#configure-event-grid-for-cloudevents)
+        
 
 ## <a name="600-2020-06"></a>6.0.0 (2020-06)
 - Yeni genel kullanıma açık (GA) hizmet API 'SI sürüm 2020-06-01 ' e destek ekleyin.

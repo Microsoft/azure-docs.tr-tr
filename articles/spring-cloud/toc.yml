@@ -93,13 +93,15 @@
           href: how-to-setup-autoscale.md
     - name: Tümleştirme
       items:
-        - name: Uygulamayı Azure CosmosDB’ye bağlama
+        - name: Azure CosmosDB
           href: how-to-bind-cosmos.md
-        - name: Uygulamayı Redis için Azure Cache'e bağlama
+        - name: Redis için Azure Cache
           href: how-to-bind-redis.md
-        - name: Uygulamayı Azure MySQL'e bağlama
+        - name: MySQL için Azure Veritabanı
           href: how-to-bind-mysql.md
-        - name: Azure Load Balance Çözümleriyle tümleştirme
+        - name: Yönetilen kimliğe sahip Azure SQL veritabanı
+          href: connect-managed-identity-to-azure-sql.md
+        - name: Azure Yük Dengeleme çözümleri
           href: how-to-integrate-azure-load-balancers.md
     - name: İzleme
       items:
@@ -133,6 +135,20 @@
           href: how-to-enable-system-assigned-managed-identity.md
         - name: Rol ve izinler oluşturma
           href: how-to-permissions.md
+        - name: Uçtan uca aktarım katmanı güvenliğini etkinleştir
+          href: how-to-enable-end-to-end-tls.md
+        - name: Erişim yapılandırması sunucusu ve hizmet kayıt defteri
+          href: how-to-access-data-plane-azure-ad-rbac.md
+    - name: Tümleştirme
+      items:
+        - name: Uygulamayı Azure CosmosDB’ye bağlama
+          href: how-to-bind-cosmos.md
+        - name: Uygulamayı Redis için Azure Cache'e bağlama
+          href: how-to-bind-redis.md
+        - name: Uygulamayı Azure MySQL'e bağlama
+          href: how-to-bind-mysql.md
+        - name: Azure Load Balance Çözümleriyle tümleştirme
+          href: how-to-integrate-azure-load-balancers.md
     - name: Otomatikleştirme
       items:
         - name: Azure DevOps ile CI/CD
@@ -178,7 +194,7 @@
 - name: Başvuru
   items:
     - name: Azure CLı eklentisi
-      href: /cli/azure/ext/spring-cloud/spring-cloud
+      href: /cli/azure/spring-cloud
     - name: Azure PowerShell
       href: /powershell/module/az.springcloud
     - name: Kaynaklar

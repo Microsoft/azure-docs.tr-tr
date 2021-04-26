@@ -3,13 +3,13 @@ title: Gelen/giden IP adresleri
 description: Gelen ve giden IP adreslerinin Azure App Service, ne zaman değişdikleri ve uygulamanızın adreslerini nasıl bulacağınızı öğrenin.
 ms.topic: article
 ms.date: 08/25/2020
-ms.custom: seodec18
-ms.openlocfilehash: 4237e51251a7ece05800aa7efa328a9c6cf65e76
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: seodec18, devx-track-azurepowershell
+ms.openlocfilehash: 1dda487d23c9f955aea8e35d16e5a560a890a173
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104591376"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834489"
 ---
 # <a name="inbound-and-outbound-ip-addresses-in-azure-app-service"></a>Azure App Service gelen ve giden IP adresleri
 

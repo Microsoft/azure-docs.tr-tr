@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.workload: identity
 ms.date: 06/09/2020
 ms.author: rolyon
-ms.openlocfilehash: efc3bfef7c182ea005ac17a59793ac8f6484a424
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 37d50c030a2b426cb3e9af57afb899b7fab68388
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102042020"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778483"
 ---
 # <a name="elevate-access-to-manage-all-azure-subscriptions-and-management-groups"></a>Tüm Azure aboneliklerini ve yönetim gruplarını yönetmek için erişimi yükseltme
 
@@ -143,7 +143,7 @@ Kullanıcı erişimi yönetici rolü atamasını kendinize veya kök kapsamdaki 
       -RoleDefinitionName "User Access Administrator" -Scope "/"
     ```
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 ### <a name="elevate-access-for-a-global-administrator"></a>Genel yönetici için erişimi yükseltme
 
@@ -163,7 +163,7 @@ Azure CLı kullanarak genel yöneticiye erişimi yükseltmek için aşağıdaki 
 
 ### <a name="list-role-assignment-at-root-scope-"></a>Kök kapsamda rol atamasını listeleyin (/)
 
-Kök kapsamdaki () bir kullanıcıya yönelik kullanıcı erişimi yönetici rolü atamasını listelemek için `/` [az role atama listesi](/cli/azure/role/assignment#az-role-assignment-list) komutunu kullanın.
+Kök kapsamdaki () bir kullanıcıya yönelik kullanıcı erişimi yönetici rolü atamasını listelemek için `/` [az role atama listesi](/cli/azure/role/assignment#az_role_assignment_list) komutunu kullanın.
 
 ```azurecli
 az role assignment list --role "User Access Administrator" --scope "/"
@@ -193,7 +193,7 @@ Kullanıcı erişimi yönetici rolü atamasını kendinize veya kök kapsamdaki 
 
 1. Yükseltilmiş erişimi kaldırabilirler bir kullanıcı olarak oturum açın. Bu, erişimi veya başka bir genel yöneticiyi kök kapsamda yükseltilmiş erişimle yükseltmek için kullanılan Kullanıcı ile aynı olabilir.
 
-1. Kullanıcı erişimi yönetici rolü atamasını kaldırmak için [az role atama Delete](/cli/azure/role/assignment#az-role-assignment-delete) komutunu kullanın.
+1. Kullanıcı erişimi yönetici rolü atamasını kaldırmak için [az role atama Delete](/cli/azure/role/assignment#az_role_assignment_delete) komutunu kullanın.
 
     ```azurecli
     az role assignment delete --assignee username@example.com --role "User Access Administrator" --scope "/"

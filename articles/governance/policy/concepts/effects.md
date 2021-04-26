@@ -1,14 +1,14 @@
 ---
 title: Efektlerin nasıl çalıştığını anlama
 description: Azure Ilke tanımlarının uyumluluğun nasıl yönetildiğini ve raporlanmadığını belirten çeşitli etkileri vardır.
-ms.date: 02/17/2021
+ms.date: 04/19/2021
 ms.topic: conceptual
-ms.openlocfilehash: 67445b3d0d63b3827f82822de00412bdab67c5ab
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e0d6eb5fb37ecf1b13edd945de52398b1e12f192
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101741829"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861562"
 ---
 # <a name="understand-azure-policy-effects"></a>Azure Ilke efektlerini anlama
 
@@ -64,7 +64,8 @@ Append efektinin yalnızca bir **ayrıntı** dizisi vardır ve bu gereklidir. **
 
 ### <a name="append-examples"></a>Ekleme örnekleri
 
-Örnek 1:  **\[\*\]** BIR depolama hesabında IP kuralları ayarlamak için bir dizi **değeri** olan [diğer ad](definition-structure.md#aliases) olmayan tek alan/değer çifti. **\[\*\]** Diğer ad olmayan bir dizi ise, efekt **değeri** tüm dizi olarak ekler. Dizi zaten varsa, çakışmadan bir reddetme olayı oluşur.
+Örnek 1:  **\[\*\]** 
+ bir depolama hesabında IP kuralları ayarlamak için bir dizi **değeri** olan [diğer ad](definition-structure.md#aliases) olmayan tek alan/değer çifti. **\[\*\]** Diğer ad olmayan bir dizi ise, efekt **değeri** tüm dizi olarak ekler. Dizi zaten varsa, çakışmadan bir reddetme olayı oluşur.
 
 ```json
 "then": {
@@ -518,7 +519,7 @@ Değişiklik efektinin **Ayrıntılar** özelliği, düzeltme için gereken izin
   - Bu özellik, abonelik tarafından erişilebilen rol tabanlı erişim denetimi rol KIMLIĞIYLE eşleşen bir dize dizisi içermelidir. Daha fazla bilgi için bkz. [Düzeltme-ilke tanımını yapılandırma](../how-to/remediate-resources.md#configure-policy-definition).
   - Tanımlanan rol, [katkıda bulunan](../../../role-based-access-control/built-in-roles.md#contributor) rolüne verilen tüm işlemleri içermelidir.
 - **conflictEffect** (isteğe bağlı)
-  - Hangi ilke tanımının birden fazla ilke tanımının aynı özelliği değiştirdiğine veya belirtilen diğer ad üzerinde değişiklik işleminin çalışmadığını belirler.
+  - Birden fazla ilke tanımı aynı özelliği değiştirirse veya değiştirme işlemi belirtilen diğer ad üzerinde çalışmazsa, "wins" ilke tanımını belirler.
     - Yeni veya güncelleştirilmiş kaynaklar için, _reddetme_ ile ilke tanımı öncelik kazanır. _Denetim_ tüm **işlemleri** atlayarak ilke tanımları. Birden fazla ilke tanımı _reddederse_, istek çakışma olarak reddedilir. Tüm ilke tanımlarında _Denetim_ varsa, çakışan ilke tanımlarının **işlemlerinden** hiçbiri işlenir.
     - Mevcut kaynaklar için, birden fazla ilke tanımı _reddederse_, uyumluluk durumu _Çakışma_ olur. Bir veya daha az ilke tanımı _reddederse_, her atama _uyumlu olmayan_ bir uyumluluk durumu döndürür.
   - Kullanılabilir değerler: _Denetim_, _reddetme_, _devre dışı_.

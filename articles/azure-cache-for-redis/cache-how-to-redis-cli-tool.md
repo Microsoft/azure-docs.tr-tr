@@ -6,12 +6,13 @@ ms.author: yegu
 ms.service: cache
 ms.topic: conceptual
 ms.date: 02/08/2021
-ms.openlocfilehash: e4f5fc7290b45f65067f6711f70476e13a010223
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 81327bd5fc76d14d60d26bd912da8de054e5308d
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102183395"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833971"
 ---
 # <a name="use-the-redis-command-line-tool-with-azure-cache-for-redis"></a>Redis için Azure Cache ile Redis komut satırı aracını kullanın
 

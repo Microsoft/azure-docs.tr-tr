@@ -1,15 +1,15 @@
 ---
 title: NıST SP 800-53 R4 için mevzuat uyumluluk ayrıntıları
 description: NıST SP 800-53 R4 mevzuatı uyumluluğu yerleşik girişiminin ayrıntıları. Her denetim, değerlendirmede yardımcı olan bir veya daha fazla Azure Ilke tanımına eşlenir.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: sample
 ms.custom: generated
-ms.openlocfilehash: 0544b3fe00ce68b248c8275e71f799993d01b568
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 01f5890d47d14355484d11e6d31585aff1f3a43d
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105032506"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870706"
 ---
 # <a name="details-of-the-nist-sp-800-53-r4-regulatory-compliance-built-in-initiative"></a>NıST SP 800-53 R4 mevzuatı uyumluluğu yerleşik girişiminin ayrıntıları
 
@@ -3333,7 +3333,7 @@ Bu yerleşik girişim, [NIST SP 800-53 R4 şema örneğinin](../../blueprints/sa
 |[Redsıs için yalnızca Azure önbelleğinize güvenli bağlantılar etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F22bee202-a82f-4305-9a2a-6d7f44d4dedb) |Redsıs için yalnızca SSL ile SSL aracılığıyla bağlantıların etkinleştirilmesini denetleme. Güvenli bağlantı kullanımı, sunucu ve hizmet arasında kimlik doğrulaması sağlar ve geçiş sırasında ortadaki adam, gizlice dinleme ve oturum ele geçirme gibi ağ katmanı saldırılarına karşı verileri korur |Denetim, reddetme, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Cache/RedisCache_AuditSSLPort_Audit.json) |
 |[Depolama hesaplarına güvenli aktarım etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F404c3081-a854-4457-ae30-26a93ef643f9) |Depolama hesabınızda güvenli aktarım gereksinimini denetleyin. Güvenli aktarım, depolama hesabınızı yalnızca güvenli bağlantılardan (HTTPS) istekleri kabul edecek şekilde zorlayan bir seçenektir. HTTPS kullanımı, sunucu ile hizmet arasında kimlik doğrulaması sağlar ve geçiş sırasında ortadaki adam, gizlice dinleme ve oturum ele geçirme gibi ağ katmanı saldırılarına karşı verileri korur |Denetim, reddetme, devre dışı |[2.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/Storage_AuditForHTTPSEnabled_Audit.json) |
 |[Web uygulaması yalnızca HTTPS üzerinden erişilebilir olmalıdır](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fa4af4a39-4135-47fb-b175-47fbdf85311d) |HTTPS kullanımı, sunucu/hizmet kimlik doğrulamasını sağlar ve ağ katmanı gizlice dinleme saldırılarına karşı geçiş sırasında verileri korur. |Denetim, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/App%20Service/AppServiceWebapp_AuditHTTP_Audit.json) |
-|[Windows Web sunucularının güvenli iletişim protokollerini kullanacak şekilde yapılandırılması gerekir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F5752e6d6-1206-46d8-8ab1-ecc2f71a8112) |Internet üzerinden iletilen bilgilerin gizliliğini korumak için web sunucularınız, sektör standardı şifreleme protokolü 'nün en son sürümünü (Aktarım Katmanı Güvenliği (TLS) kullanmalıdır. TLS, makineler arasında bir bağlantıyı şifrelemek için güvenlik sertifikalarını kullanarak bir ağ üzerinden iletişimin güvenliğini sağlar. TLS 1,3, önceki sürümlerden daha hızlı ve daha güvenlidir: TLS 1.0-1.2 ve SSL 2-3, tüm eski protokoller kabul edilir. |Auditınotexists, devre dışı |[2.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Guest%20Configuration/GuestConfiguration_SecureWebProtocol_AINE.json) |
+|[Windows Web sunucularının güvenli iletişim protokollerini kullanacak şekilde yapılandırılması gerekir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F5752e6d6-1206-46d8-8ab1-ecc2f71a8112) |Internet üzerinden iletilen bilgilerin gizliliğini korumak için web sunucularınız, sektör standardı şifreleme protokolü 'nün en son sürümünü (Aktarım Katmanı Güvenliği (TLS) kullanmalıdır. TLS, makineler arasında bir bağlantıyı şifrelemek için güvenlik sertifikalarını kullanarak bir ağ üzerinden iletişimin güvenliğini sağlar. |Auditınotexists, devre dışı |[2.1.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Guest%20Configuration/GuestConfiguration_SecureWebProtocol_AINE.json) |
 
 ### <a name="network-disconnect"></a>Ağ bağlantısı kesme
 

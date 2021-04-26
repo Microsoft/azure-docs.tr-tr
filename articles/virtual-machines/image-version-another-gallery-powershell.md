@@ -9,12 +9,12 @@ ms.workload: infrastructure
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: d9bbe40e35bdad6fac5c5ccb0b15b909e77b938c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 35346836767bc1da8c498e23fd3b42afe7a9c350
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102564025"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531198"
 ---
 # <a name="copy-an-image-from-another-gallery-using-powershell"></a>PowerShell kullanarak başka bir galerinin görüntüsünü kopyalama
 
@@ -123,7 +123,7 @@ $destinationImgDef  = New-AzGalleryImageDefinition `
 
 ## <a name="create-the-image-version"></a>Görüntü sürümü oluşturma
 
-[New-Azgallerımageversion](/powershell/module/az.compute/new-azgalleryimageversion)kullanarak bir görüntü sürümü oluşturun. `--managed-image`Hedef Galerinizdeki görüntü sürümünü oluşturmak için parametresindeki kaynak görüntünün kimliğini geçirmeniz gerekecektir. 
+[New-Azgallerımageversion](/powershell/module/az.compute/new-azgalleryimageversion)kullanarak bir görüntü sürümü oluşturun. `-Source`Hedef Galerinizdeki görüntü sürümünü oluşturmak için parametresindeki kaynak görüntünün kimliğini geçirmeniz gerekecektir. 
 
 Görüntü sürümü için izin verilen karakterler rakamlardan ve dönemlerdir. Sayılar 32 bitlik bir tamsayı aralığında olmalıdır. Biçim: *MajorVersion*. *MinorVersion*. *Düzeltme Eki*.
 

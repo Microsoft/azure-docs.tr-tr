@@ -6,10 +6,10 @@ ms.topic: overview
 ms.custom: hdinsightactive
 ms.date: 02/25/2020
 ms.openlocfilehash: baf41b9e66b14e4b255b6e13b22691357f9e7309
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104870815"
 ---
 # <a name="what-is-apache-kafka-in-azure-hdinsight"></a>Azure HDInsight 'ta Apache Kafka nedir?
@@ -58,7 +58,7 @@ Aracılar arasında konuların bölüm kayıtları. Kayıtları tüketirken, ver
 
 Aşağıda, HDInsight üzerinde Kafka kullanılarak gerçekleştirilebilen yaygın görevler ve desenler verilmiştir:
 
-|Kullanın |Açıklama |
+|Kullanın |Description |
 |---|---|
 |Apache Kafka verilerinin çoğaltılması|Kafka, Kafka kümeleri arasında veri çoğaltan MirrorMaker yardımcı programını sağlar. MirrorMaker kullanma hakkında daha fazla bilgi için bkz. [HDInsight 'ta Apache Kafka Apache Kafka konularına çoğaltma](apache-kafka-mirroring.md).|
 |Yayımla-abone ol mesajlaşma deseninin|Kafka, bir Kafka konusuna kayıt yayımlamak için bir üretici API 'SI sağlar. Bir konu başlığına abone olurken Consumer API (Tüketici API’si) kullanılır. Daha fazla bilgi için bkz. [HDInsight üzerinde Apache Kafka kullanmaya başlama](apache-kafka-get-started.md).|

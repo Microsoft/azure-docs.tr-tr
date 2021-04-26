@@ -3,16 +3,16 @@ title: Öğretici-API Management içindeki sahte API yanıtları Azure portal | 
 description: Bu öğreticide, bir API üzerinde bir ilke ayarlamak için API Management kullanırsınız, böylece arka uç gerçek yanıtları göndermek için kullanılamaz.
 author: vladvino
 ms.service: api-management
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.topic: tutorial
 ms.date: 02/09/2021
 ms.author: apimpm
-ms.openlocfilehash: 75727d139242e1b537505d2ed907ae20fc5479f8
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6214594f825908388762ac35cc8c8722ff9135f1
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100547287"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874360"
 ---
 # <a name="tutorial-mock-api-responses"></a>Öğretici: sahte API yanıtları
 

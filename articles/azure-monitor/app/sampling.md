@@ -5,12 +5,12 @@ ms.topic: conceptual
 ms.date: 01/17/2020
 ms.reviewer: vitalyg
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 7b53b0bc8c7cc3df2123d327bf87a85081f88f50
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ba7892c8afbe8e557c7dcf9aa3bd663f53a5728f
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100589552"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834759"
 ---
 # <a name="sampling-in-application-insights"></a>Application Insights’ta örnekleme
 
@@ -184,7 +184,7 @@ Yukarıdaki kod, uyarlamalı örneklemeyi devre dışı bırakacak. Daha fazla �
 `TelemetryProcessorChainBuilder`Örnekleme davranışını özelleştirmek için aşağıda gösterildiği gibi uzantı yöntemlerini kullanın.
 
 > [!IMPORTANT]
-> Örnekleme yapılandırmak için bu yöntemi kullanırsanız, lütfen `aiOptions.EnableAdaptiveSampling` çağrılırken özelliğini olarak ayarladığınızdan emin olun `false` `AddApplicationInsightsTelemetry()` .
+> Örnekleme yapılandırmak için bu yöntemi kullanırsanız, lütfen `aiOptions.EnableAdaptiveSampling` çağrılırken özelliğini olarak ayarladığınızdan emin olun `false` `AddApplicationInsightsTelemetry()` . Bu değişikliği yaptıktan sonra, özelleştirmelerinizi yerinde, uyarlamalı örneklemeyi yeniden etkinleştirmek için aşağıdaki kod bloğundaki yönergeleri **tam olarak** izlemeniz gerekir. Bunun yapılmaması, aşırı veri alımı oluşmasına neden olabilir. Her zaman değişen örnekleme ayarlarını test edin ve maliyetlerinizi denetlemeye yardımcı olması için uygun [günlük veri ucunu](pricing.md#set-the-daily-cap) ayarlayın.
 
 ```csharp
 using Microsoft.ApplicationInsights.Extensibility
@@ -320,7 +320,7 @@ Varsayılan olarak, Java Aracısı ve SDK 'da hiçbir örnekleme etkinleştirilm
 ```json
 {
   "sampling": {
-    "percentage": 10 //this is just an example that shows you how to enable only only 10% of transaction 
+    "percentage": 10 //this is just an example that shows you how to enable only 10% of transaction 
   }
 }
 ```
@@ -449,13 +449,13 @@ Uyarlamalı veya sabit oran örnekleme işlemi sırasında giriş örnekleme iş
 > [!WARNING]
 > Portal kutucuğunda gösterilen değer, alma örneklemesi için ayarladığınız değeri gösterir. Herhangi bir SDK örnekleme (Uyarlamalı veya sabit oran örnekleme) işleminde varsa, gerçek örnekleme hızını temsil etmez.
 
-## <a name="when-to-use-sampling"></a>Örnekleme ne zaman kullanılır?
+## <a name="when-to-use-sampling&quot;></a>Örnekleme ne zaman kullanılır?
 
 Genel olarak, çoğu küçük ve orta büyüklükte uygulamalar için örnekleme gerekmez. En yararlı tanılama bilgileri ve en doğru istatistikler, tüm Kullanıcı etkinliklerinizde veri toplanarak elde edilir. 
 
 Örnekleme 'nın başlıca avantajları şunlardır:
 
-* Uygulamanız kısa bir süre içinde çok yüksek düzeyde telemetri gönderdiğinde, hizmet bırakmaları ("kısıtlar") veri noktalarını Application Insights. Örnekleme, uygulamanızın azaltma işleminin oluşma olasılığını azaltır.
+* Uygulamanız kısa bir süre içinde çok yüksek düzeyde telemetri gönderdiğinde, hizmet bırakmaları (&quot;kısıtlar") veri noktalarını Application Insights. Örnekleme, uygulamanızın azaltma işleminin oluşma olasılığını azaltır.
 * Fiyatlandırma katmanınız için veri noktalarının [kotası](pricing.md) içinde tutulması. 
 * Telemetri koleksiyonundan ağ trafiğini azaltmak için. 
 

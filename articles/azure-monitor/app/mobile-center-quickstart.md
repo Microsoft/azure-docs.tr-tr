@@ -1,19 +1,18 @@
 ---
 title: Azure Izleyici Application Insights mobil uygulamaları izleme
 description: Azure Izleyici Application Insights ve App Center izleme için bir mobil uygulamayı hızlı bir şekilde ayarlamaya yönelik yönergeler sağlar
-ms.subservice: application-insights
 ms.topic: quickstart
 author: lgayhardt
 ms.author: lagayhar
 ms.date: 06/26/2019
 ms.reviewer: daviste
 ms.custom: mvc
-ms.openlocfilehash: 0c53569ea50d91bbd703197d1a4c3546e10e04ec
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d0d95a323e496b3b6d8a93f674535710d4099ef0
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100629055"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384723"
 ---
 # <a name="start-analyzing-your-mobile-app-with-app-center-and-application-insights"></a>Mobil uygulamanızı App Center ve Application Insights ile analiz etmeye başlama
 

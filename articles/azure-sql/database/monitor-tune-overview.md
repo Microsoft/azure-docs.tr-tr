@@ -12,10 +12,10 @@ ms.author: jovanpop
 ms.reviewer: wiassaf, sstein
 ms.date: 03/17/2021
 ms.openlocfilehash: 4c9edaea75215bc4b471cd2e0ac50c4e69546bb0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104592143"
 ---
 # <a name="monitoring-and-performance-tuning-in-azure-sql-database-and-azure-sql-managed-instance"></a>Azure SQL Veritabanı ve Azure SQL Yönetilen Örneği'nde izleme ve performansı ayarlama
@@ -119,7 +119,7 @@ Tanılama ayarlarını, tek veritabanları, havuza alınmış veritabanları, el
 
   Tanılama verilerinizi Azure hizmetlerinizden neredeyse gerçek zamanlı içgörüler halinde dönüştürmek için Event Hubs, Stream Analytics ve Power BI kullanın. Bkz. [Stream Analytics ve Power BI: Bu çözümdeki Ayrıntılar için veri akışı için gerçek zamanlı analiz panosu](../../stream-analytics/stream-analytics-power-bi-dashboard.md) .
 
-### <a name="azure-storage"></a>Azure Storage
+### <a name="azure-storage"></a>Azure Depolama
 
 [Azure depolama](../../azure-monitor/essentials/resource-logs.md#send-to-azure-storage)'ya ölçüm ve kaynak günlükleri akışı yapın. Önceki iki akış seçeneğinin maliyetinin bir bölümü boyunca çok miktarda tanılama telemetrisini arşivlemek için Azure Storage 'ı kullanın.
 

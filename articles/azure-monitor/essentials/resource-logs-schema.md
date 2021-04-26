@@ -2,18 +2,18 @@
 title: Azure kaynak günlüğü desteklenen Hizmetleri ve şemaları
 description: Azure Kaynak günlükleri için desteklenen Hizmetleri ve olay şemasını anlayın.
 ms.topic: reference
-ms.date: 09/01/2020
-ms.openlocfilehash: 661cba2d78dbb176bb04e6831cf8e045a285535e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/07/2020
+ms.openlocfilehash: 09415353d93313f1b3c4844202b59f577ef3838d
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102033104"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105774"
 ---
 # <a name="common-and-service-specific-schema-for-azure-resource-logs"></a>Azure Kaynak günlükleri için ortak ve hizmete özgü şema
 
 > [!NOTE]
-> Kaynak günlükleri daha önce tanılama günlükleri olarak bilinirdi. Azure Izleyici tarafından toplanan günlüklerin türleri yalnızca Azure kaynağına eşit olacak şekilde kaydırılacağı için ad Ekim 2019 ' de değiştirilmiştir. Ayrıca, bu makalede listelenmak üzere topladığınız kaynak günlüğü kategorilerinin listesi. [Kaynak günlüğü kategorilerine](resource-logs-categories.md)taşınmıştır. 
+> Kaynak günlükleri daha önce tanılama günlükleri olarak bilinirdi. Azure Izleyici tarafından toplanan günlüklerin türleri yalnızca Azure kaynağına eşit olacak şekilde kaydırılacağı için ad Ekim 2019 ' de değiştirilmiştir. Ayrıca, bu makalede listelenmak üzere toplayacağınız kaynak günlüğü kategorilerinin listesi. Bunlar artık [kaynak günlük kategorileridir](resource-logs-categories.md). 
 
 Azure [izleyici kaynak günlükleri](../essentials/platform-logs-overview.md) , bu hizmet veya kaynakların çalışmasını tanımlayan Azure hizmetleri tarafından oluşturulan günlüklerdir. Azure Izleyici aracılığıyla kullanılabilen tüm kaynak günlükleri, her bir hizmetin kendi olayları için benzersiz özellikler yaymasını sağlayan ortak bir üst düzey şemayı paylaşır.
 
@@ -65,6 +65,7 @@ Kaynak günlükleri şeması, kaynak ve günlük kategorisine göre değişir. B
 | MySQL için Azure Veritabanı | [MySQL için Azure veritabanı tanılama günlükleri](../../mysql/concepts-server-logs.md#diagnostic-logs) |
 | PostgreSQL için Azure Veritabanı | [PostgreSQL için Azure veritabanı günlükleri](../../postgresql/concepts-server-logs.md#resource-logs) |
 | Azure Databricks | [Azure Databricks'te tanılama günlüğü](/azure/databricks/administration-guide/account-settings/azure-diagnostic-logs) |
+| DDOS Koruması | [Azure DDoS koruması standardı için günlüğe kaydetme](../../ddos-protection/diagnostic-logging.md#log-schemas) |
 | Azure Digital Twins | [Azure dijital TWINS tanılamayı ayarlama](../../digital-twins/troubleshoot-diagnostics.md#log-schemas)
 | Event Hubs |[Azure Event Hubs günlükleri](../../event-hubs/event-hubs-diagnostic-logs.md) |
 | Express Route | Şema kullanılamıyor. |
@@ -76,13 +77,13 @@ Kaynak günlükleri şeması, kaynak ve günlük kategorisine göre değişir. B
 | Load Balancer |[Azure Load Balancer için Log Analytics](../../load-balancer/load-balancer-monitor-log.md) |
 | Logic Apps |[Logic Apps B2B özel izleme şeması](../../logic-apps/logic-apps-track-integration-account-custom-tracking-schema.md) |
 | Ağ Güvenlik Grupları |[Ağ güvenlik grupları (NSG’ler) için Log Analytics](../../virtual-network/virtual-network-nsg-manage-log.md) |
-| DDOS Koruması | [Azure DDoS koruması standardı için günlüğe kaydetme](../../ddos-protection/diagnostic-logging.md#log-schemas) |
 | Power BI Ayrılmış | [Azure 'da Power BI Embedded için günlüğe kaydetme](/power-bi/developer/azure-pbie-diag-logs) |
 | Kurtarma Hizmetleri | [Azure Backup için veri modeli](../../backup/backup-azure-reports-data-model.md)|
 | Arayın |[Arama Trafik Analizi etkinleştirme ve kullanma](../../search/search-traffic-analytics.md) |
 | Service Bus |[Azure Service Bus günlükleri](../../service-bus-messaging/service-bus-diagnostic-logs.md) |
 | SQL Veritabanı | [Azure SQL veritabanı günlüğü](../../azure-sql/database/metrics-diagnostic-telemetry-logging-streaming-export-configure.md) |
 | Stream Analytics |[İş günlükleri](../../stream-analytics/stream-analytics-job-diagnostic-logs.md) |
+| Depolama | [BLOB 'lar](/azure/storage/blobs/monitor-blob-storage-reference#resource-logs-preview), [dosyalar](/azure/storage/files/storage-files-monitoring-reference#resource-logs-preview), [Kuyruklar](/azure/storage/queues/monitor-queue-storage-reference#resource-logs-preview),  [Tablolar](/azure/storage/tables/monitor-table-storage-reference#resource-logs-preview) |
 | Traffic Manager | [Traffic Manager log şeması](../../traffic-manager/traffic-manager-diagnostic-logs.md) |
 | Sanal Ağlar | Şema kullanılamıyor. |
 | Sanal Ağ Geçitleri | Şema kullanılamıyor. |

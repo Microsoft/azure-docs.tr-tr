@@ -15,12 +15,12 @@ ms.author: curtand
 ms.reviewer: krbain
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0a4ba5a9211cdb89f6ac5a92a315378e58f5d08a
-ms.sourcegitcommit: dae6b628a8d57540263a1f2f1cdb10721ed1470d
+ms.openlocfilehash: 8af1a5e73592dc1c3392f0bc1fecfe6139a54710
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105709523"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107529843"
 ---
 # <a name="configure-the-expiration-policy-for-microsoft-365-groups"></a>Microsoft 365 grupları için süre sonu ilkesini yapılandırma
 
@@ -91,6 +91,7 @@ Silinen bir grubu geri yükleme izinleri hakkında daha fazla bilgi için, [Azur
 > - Son tarihi ayarladığınızda, süre sonu aralığından eski olan tüm gruplar, Grup otomatik olarak yenilenmediği veya sahip onu yenilemediği sürece süresi dolmadan 35 gün olarak ayarlanır.
 > - Dinamik bir grup silinip geri yüklendiğinde, yeni bir grup olarak görülür ve kurala göre yeniden doldurulur. Bu işlem, 24 saate kadar sürebilir.
 > - Ekiplerde kullanılan gruplar için süre sonu bildirimleri takımlar sahipleri akışında görüntülenir.
+> - Seçili gruplar için süre sonunu etkinleştirdiğinizde, listeye en fazla 500 grup ekleyebilirsiniz. 500 taneden fazla grup eklemeniz gerekiyorsa, tüm gruplarınız için süre sonunu etkinleştirebilirsiniz. Bu senaryoda, 500 Grup sınırlaması uygulanmaz.
 
 ## <a name="email-notifications"></a>E-posta bildirimleri
 
@@ -110,7 +111,7 @@ Geri yüklemekte olduğunuz grup belgeler, SharePoint siteleri veya diğer kalı
 
 ## <a name="how-to-retrieve-microsoft-365-group-expiration-date"></a>Microsoft 365 grubu sona erme tarihi alma
 
-Kullanıcıların, sona erme tarihi ve son yenilenme tarihi de dahil olmak üzere Grup ayrıntılarını görüntüleyebilecekleri erişim paneline ek olarak, bir Microsoft 365 grubunun sona erme tarihi Microsoft Graph REST API Beta 'dan alınabilir. bir grup özelliği olarak expirationDateTime, Microsoft Graph Beta 'da etkinleştirildi. Bu, bir GET isteğiyle alınabilir. Daha fazla ayrıntı için lütfen [Bu örneğe](/graph/api/group-get?view=graph-rest-beta#example)bakın.
+Kullanıcıların, sona erme tarihi ve son yenilenme tarihi de dahil olmak üzere Grup ayrıntılarını görüntüleyebilecekleri erişim paneline ek olarak, bir Microsoft 365 grubunun sona erme tarihi Microsoft Graph REST API Beta 'dan alınabilir. bir grup özelliği olarak expirationDateTime, Microsoft Graph Beta 'da etkinleştirildi. Bu, bir GET isteğiyle alınabilir. Daha fazla ayrıntı için lütfen [Bu örneğe](/graph/api/group-get?view=graph-rest-beta#example&preserve-view=true)bakın.
 
 > [!NOTE]
 > Erişim panelinde grup üyeliklerini yönetmek için, "erişim panelindeki gruplara erişimi kısıtla" ayarı, Azure Active Directory gruplar genel ayarında "Hayır" olarak ayarlanmalıdır.

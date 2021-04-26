@@ -7,10 +7,10 @@ ms.topic: conceptual
 ms.date: 03/22/2021
 ms.author: jingwang
 ms.openlocfilehash: 4aefeea33e61b6ee2541e929dbeb3fc36343cac5
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104771388"
 ---
 # <a name="monitor-copy-activity"></a>Kopyalama etkinliğini izleme
@@ -45,7 +45,7 @@ En son **yürütme ayrıntıları ve süreleri** , kopyalama etkinliğinizin üz
 
 Kopyalama etkinliği yürütme ayrıntıları ve performans özellikleri,   >  Kullanıcı arabirimi izleme görünümünü oluşturmak için kullanılan etkinlik çalıştırma sonucu **çıktısını** Kopyala bölümünde de döndürülür. Aşağıda, döndürülebilecek özelliklerin tamamı listelenmiştir. Yalnızca kopyalama senaryonuz için geçerli olan özellikleri görürsünüz. Etkinlik çalışmalarının genel olarak nasıl izleneceği hakkında daha fazla bilgi için bkz. [programlı bir Azure Data Factory 'yi izleme](monitor-programmatically.md).
 
-| Özellik adı  | Açıklama | Çıkışdaki birim |
+| Özellik adı  | Description | Çıkışdaki birim |
 |:--- |:--- |:--- |
 | dataRead | Kaynaktaki okunan gerçek veri miktarı. | Int64 değeri, bayt cinsinden |
 | Veri yazıldı | Havuza yazılan/havuza kaydedilen verilerin gerçek bağlaması. Boyut, `dataRead` her veri deposunun verileri nasıl depoladığını birbirleriyle ilişkilendiren şekilde boyutundan farklı olabilir. | Int64 değeri, bayt cinsinden |

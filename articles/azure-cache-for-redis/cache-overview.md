@@ -6,12 +6,12 @@ ms.author: yegu
 ms.service: cache
 ms.topic: overview
 ms.date: 02/08/2021
-ms.openlocfilehash: 5a0389b1074737728bd0ffa5d6db90d077a9f45f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 49a697e6c3a6a6c931f2bb9c545647e2d6f1322d
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101652189"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106056666"
 ---
 # <a name="about-azure-cache-for-redis"></a>Redis için Azure Önbelleği hakkında
 Redsıs için Azure önbelleği, [redin](https://redis.io/) yazılımını temel alan bellek içi veri deposu sağlar. Redsıs, arka uç veri depolarında yoğun bir şekilde kullanılan bir uygulamanın performansını ve ölçeklenebilirliğini geliştirir. Sık erişilen verileri hızlı bir şekilde yazılabilen ve hızla okunabilen sunucu belleğinde tutarak, büyük hacimde uygulama isteğini işleyebilir. Redin, modern uygulamalara kritik düşük gecikmeli ve yüksek performanslı veri depolama çözümü getirir.

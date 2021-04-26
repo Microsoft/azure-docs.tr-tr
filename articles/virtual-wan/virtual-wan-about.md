@@ -7,13 +7,12 @@ ms.service: virtual-wan
 ms.topic: overview
 ms.date: 09/22/2020
 ms.author: cherylmc
-Customer intent: As someone with a networking background, I want to understand what Virtual WAN is and if it is the right choice for my Azure network.
-ms.openlocfilehash: 641ed73f507d35d7af548d0164ef8e80979be217
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: ab54192480a1c36a27c175254d6d4d275b67c8b7
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96530485"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107835335"
 ---
 # <a name="what-is-azure-virtual-wan"></a>Azure Sanal WAN nedir?
 
@@ -74,7 +73,7 @@ Sanal WAN, aşağıdaki bağlantı türlerine izin verir: siteden siteye VPN, ku
 
 Azure 'daki kaynaklarınıza site IPSec/ıKE (Ikev2) bağlantısı üzerinden kaynaklarınıza bağlanabilirsiniz. Daha fazla bilgi için bkz. [sanal WAN kullanarak siteden siteye bağlantı oluşturma](virtual-wan-site-to-site-portal.md). 
 
-Bu tür bir bağlantı, bir VPN cihazı veya bir sanal WAN Iş ortağı cihazı gerektirir. Sanal WAN iş ortakları, cihaz bilgilerini Azure 'a dışarı aktarma, Azure yapılandırmasını indirme ve Azure sanal WAN hub 'ına bağlantı kurma özelliği olan bağlantı için Otomasyon sağlar. Kullanılabilir iş ortaklarının ve konumların bir listesi için bkz. [sanal WAN iş ortakları ve konumları](virtual-wan-locations-partners.md) makalesi. VPN/SD-WAN cihaz sağlayıcınız söz konusu bağlantıda listelenmiyorsa, bağlantıyı ayarlamak için [sanal WAN kullanarak siteden siteye bağlantı oluşturma](virtual-wan-site-to-site-portal.md) ' yı da kullanabilirsiniz.
+Bu tür bir bağlantı, bir VPN cihazı veya bir sanal WAN Iş ortağı cihazı gerektirir. Sanal WAN iş ortakları, cihaz bilgilerini Azure 'a dışarı aktarma, Azure yapılandırmasını indirme ve Azure sanal WAN hub 'ına bağlantı kurma özelliği olan bağlantı için Otomasyon sağlar. Kullanılabilir iş ortaklarının ve konumların bir listesi için bkz. [sanal WAN iş ortakları ve konumları](virtual-wan-locations-partners.md) makalesi. VPN/SD-WAN cihaz sağlayıcınız belirtilen bağlantıda listelenmiyorsa, bağlantıyı ayarlamak için [sanal WAN kullanarak siteden siteye bağlantı oluşturma](virtual-wan-site-to-site-portal.md) adımını yalnızca adım adım yönergeler ' i kullanabilirsiniz.
 
 ### <a name="user-vpn-point-to-site-connections"></a><a name="uservpn"></a>Kullanıcı VPN (Noktadan siteye) bağlantıları
 

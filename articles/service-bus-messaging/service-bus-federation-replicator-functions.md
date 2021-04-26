@@ -4,10 +4,10 @@ description: Bu makalede, Azure Işlevleri ile ileti çoğaltma görevleri ve uy
 ms.topic: article
 ms.date: 12/12/2020
 ms.openlocfilehash: 4db151f54a2ad236ba937b005ba6a1fd3edd5967
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "97657593"
 ---
 # <a name="message-replication-tasks-and-applications"></a>İleti çoğaltma görevleri ve uygulamaları

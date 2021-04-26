@@ -242,14 +242,28 @@
               href: azure-stack-edge-gpu-deploy-virtual-machine-custom-script-extension.md
             - name: VM görüntüsü oluşturma
               href: azure-stack-edge-gpu-create-virtual-machine-image.md
-            - name: Windows Genelleştirilmiş görüntüsünü kullan
+            - name: Windows Genelleştirilmiş görüntüsünü VHD 'den hazırlama
               href: azure-stack-edge-gpu-prepare-windows-vhd-generalized-image.md
+            - name: ISO kullanarak Genelleştirilmiş görüntü hazırlama
+              href: azure-stack-edge-gpu-prepare-windows-generalized-image-iso.md
+            - name: Windows özelleştirilmiş görüntüsünü kullan
+              href: azure-stack-edge-gpu-deploy-vm-specialized-image-powershell.md
             - name: 'Desteklenen VM boyutları, türleri'
               href: azure-stack-edge-gpu-virtual-machine-sizes.md
             - name: VM konsoluna bağlanma
               href: azure-stack-edge-gpu-connect-virtual-machine-console.md
             - name: Ağ arabirimlerini yönetme
               href: azure-stack-edge-gpu-manage-virtual-machine-network-interfaces-portal.md
+            - name: Diskleri yönetme
+              href: azure-stack-edge-gpu-manage-virtual-machine-disks-portal.md
+            - name: VM boyutlarını yönetme
+              href: azure-stack-edge-gpu-manage-virtual-machine-resize-portal.md
+            - name: VM etiketlerini yönetme
+              href: azure-stack-edge-gpu-manage-virtual-machine-tags-powershell.md
+            - name: Sanal anahtar oluştur
+              href: azure-stack-edge-gpu-create-virtual-switch-powershell.md
+            - name: VM disklerini yedekleme
+              href: azure-stack-edge-gpu-back-up-virtual-machine-disks.md
         - name: Sertifikaları yönetme
           items:
             - name: Gereksinimler
@@ -426,6 +440,10 @@
   items:
     - name: Güvenlik temeli
       href: security-baseline.md
+- name: Başvuru
+  items:
+    - name: Azure CLI
+      href: /cli/azure/databoxedge
 - name: Kaynaklar
   items:
     - name: Azure Stack Edge Pro C# modülü örnekleri (.NET)

@@ -3,15 +3,15 @@ title: Azure Data Factory 'de bir Azure-SSIS tümleştirme çalışma zamanı ol
 description: Azure 'da SSIS paketlerini dağıtıp çalıştırmak için Azure Data Factory 'de Azure-SSIS tümleştirme çalışma zamanı oluşturmayı öğrenin.
 ms.service: data-factory
 ms.topic: conceptual
-ms.date: 02/22/2021
+ms.date: 04/09/2021
 author: swinarko
 ms.author: sawinark
-ms.openlocfilehash: 4b26abe1d1340e4e8c5f034fad72f612f0b246a2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e4f60539e2eb524e95c76814f7527377630349e2
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101739427"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107285250"
 ---
 # <a name="create-an-azure-ssis-integration-runtime-in-azure-data-factory"></a>Azure Data Factory 'de bir Azure-SSIS tümleştirme çalışma zamanı oluşturma
 
@@ -95,7 +95,7 @@ Data Factory oluşturulduktan sonra, Azure portal genel bakış sayfasını aç�
 
 ### <a name="provision-an-azure-ssis-integration-runtime"></a>Azure-SSIS tümleştirme çalışma zamanı sağlama
 
-**Başlarken** sayfasında, **tümleştirme çalışma zamanı kurulum** bölmesini açmak Için **SSIS Integration Runtime Yapılandır** kutucuğunu seçin.
+**Başlarken** sayfasında, **tümleştirme çalışma zamanı kurulum** bölmesini açmak Için **SSIS tümleştirmesini Yapılandır** kutucuğunu seçin.
 
    ![SSIS Tümleştirme Çalışma Zamanı Yapılandır kutucuğu](./media/tutorial-create-azure-ssis-runtime-portal/configure-ssis-integration-runtime-tile.png)
 
@@ -123,7 +123,7 @@ Data Factory oluşturulduktan sonra, Azure portal genel bakış sayfasını aç�
 
    7. Tasarruf **için,** tümleştirme çalışma zamanı için Azure hibrit avantajı seçeneğini belirleyin: **Evet** veya **Hayır**. Karma kullanım ile maliyet tasarruflarından faydalanmak için kendi SQL Server lisansınızı Yazılım Güvencesine getirmek istiyorsanız **Evet** ' i seçin.
 
-   8. **İleri**’yi seçin.
+   8. **Devam**’ı seçin.
 
 #### <a name="deployment-settings-page"></a>Dağıtım ayarları sayfası
 
@@ -165,7 +165,7 @@ Onay kutusunu seçerseniz, kendi adınıza oluşturacağınız ve yönetecağım
 
    1. **Katalog veritabanı hizmet katmanı** IÇIN, SSISDB barındıracak veritabanı sunucunuzun hizmet katmanını seçin. Temel, standart veya Premium katmanını seçin veya elastik havuz adı seçin.
 
-Uygun olduğunda **Bağlantıyı Sına** ' yı seçin ve başarılı olursa **İleri**' yi seçin.
+Uygun olduğunda **Bağlantıyı Sına** ' yı seçin ve başarılı olursa **devam**' ı seçin.
 
 > [!NOTE]
    > SSıSDB barındırmak için Azure SQL veritabanı sunucusu kullanıyorsanız, verileriniz varsayılan olarak, yedeklemeler için coğrafi olarak yedekli depolama alanında depolanır. Verilerinizin diğer bölgelerde çoğaltılmasını istemiyorsanız, [PowerShell kullanarak yedekleme depolama yedekliliği yapılandırma](../azure-sql/database/automated-backups-overview.md?tabs=single-database#configure-backup-storage-redundancy-by-using-powershell)yönergelerini izleyin.
@@ -187,7 +187,7 @@ Bu onay kutusunu seçerseniz, **Yeni**' yi seçerek Azure-SSIS IR birden çok pa
    1. **Paket deposu bağlı hizmeti** için, paketlerinizin dağıtıldığı dosya sistemi/Azure dosyaları/Azure SQL yönetilen örneği için erişim bilgilerini depolayan mevcut bağlı hizmetinizi seçin veya **Yeni**' yi seçerek yeni bir tane oluşturun. **Yeni bağlı hizmet** bölmesinde aşağıdaki adımları izleyin.
    
       > [!NOTE]
-      > Azure dosyalarına erişmek için **Azure dosya depolama** veya **dosya sistemi** bağlı hizmetlerini kullanabilirsiniz. **Azure dosya depolama** bağlı hizmeti kullanıyorsanız, Azure-SSIS IR paket deposu şimdilik yalnızca **temel** ( **hesap anahtarı** veya **SAS URI**) kimlik doğrulama yöntemini destekler. **Azure dosya depolama** bağlı hizmetinde **temel** kimlik doğrulaması kullanmak için, `?feature.upgradeAzureFileStorage=false` Tarayıcınızda ADF Portal URL 'sine ekleyebilirsiniz. Alternatif olarak, bunun yerine Azure dosyalarına erişmek için **dosya sistemi** bağlı hizmeti ' ni kullanabilirsiniz. 
+      > Azure dosyalarına erişmek için **Azure dosya depolama** veya **dosya sistemi** bağlı hizmetlerini kullanabilirsiniz. **Azure dosya depolama** bağlı hizmeti kullanıyorsanız, Azure-SSIS IR paket deposu şimdilik yalnızca **temel** ( **hesap anahtarı** veya **SAS URI**) kimlik doğrulama yöntemini destekler.  
 
       ![Bağlı hizmetler için dağıtım ayarları](./media/tutorial-create-azure-ssis-runtime-portal/deployment-settings-linked-service.png)
 
@@ -199,7 +199,7 @@ Bu onay kutusunu seçerseniz, **Yeni**' yi seçerek Azure-SSIS IR birden çok pa
 
       1. Her zaman paket depoları için erişim bilgilerini getirmek üzere Azure-SSIS IR kullandığımızdan **Integration Runtime aracılığıyla bağlanmayı** yoksayabilirsiniz.
 
-      1. **Azure dosya depolama**' yı seçerseniz, aşağıdaki adımları izleyin. 
+      1. **Azure dosya depolama**' yı seçerseniz, **kimlik doğrulama yöntemi** için **temel**' yı seçin ve ardından aşağıdaki adımları uygulayın. 
 
          1. **Hesap seçme yöntemi** için **Azure aboneliği ' nden** seçim yapın veya **el ile girin**.
          
@@ -209,21 +209,21 @@ Bu onay kutusunu seçerseniz, **Yeni**' yi seçerek Azure-SSIS IR birden çok pa
 
       1. **Azure SQL yönetilen örneği**' ni seçerseniz, aşağıdaki adımları izleyin. 
 
-         1. El ile veya **Azure Key Vault** gizli olarak depolanacağı **bağlantı dizesini** seçin.
-         
+         1. **Bağlantı dizesini** veya **Azure Key Vault** gizli olarak depolandığını seçin.
+
          1. **Bağlantı dizesi**' ni seçerseniz, aşağıdaki adımları uygulayın. 
+             1. **Hesap seçme yöntemi** için **Azure aboneliği ' nden** seçim yaparsanız ilgili **Azure aboneliğini**, **sunucu adını**, **uç nokta türünü** ve **veritabanı adını** seçin. **El Ile gir**' i seçerseniz, aşağıdaki adımları uygulayın. 
+                1.  **Tam etki alanı adı** için, `<server name>.<dns prefix>.database.windows.net` `<server name>.public.<dns prefix>.database.windows.net,3342` sırasıyla Azure SQL yönetilen örneğinizin özel veya genel uç noktasını girin. Özel uç noktayı girerseniz, ADF Kullanıcı arabirimine ulaşamadığından **test bağlantısı** geçerli değildir.
 
-            1. **Tam etki alanı adı** için, `<server name>.<dns prefix>.database.windows.net` `<server name>.public.<dns prefix>.database.windows.net,3342` sırasıyla Azure SQL yönetilen örneğinizin özel veya genel uç noktasını girin. Özel uç noktayı girerseniz, ADF Kullanıcı arabirimine ulaşamadığından **test bağlantısı** geçerli değildir.
+                1. **Veritabanı adı** için girin `msdb` .
 
-            1. **Veritabanı adı** için girin `msdb` .
-               
             1. **Kimlik doğrulama türü** Için, **SQL kimlik doğrulaması**, **yönetilen kimlik** veya **hizmet sorumlusu**' nı seçin.
 
-            1. **SQL kimlik doğrulaması**' nı seçerseniz, Ilgili **Kullanıcı adını** ve **parolayı** girin veya gizli dizi olarak depolandığı **Azure Key Vault** seçin.
+                - **SQL kimlik doğrulaması**' nı seçerseniz, Ilgili **Kullanıcı adını** ve **parolayı** girin veya gizli dizi olarak depolandığı **Azure Key Vault** seçin.
 
-            1. **Yönetilen kimlik**' i SEÇERSENIZ, ADF tarafından yönetilen KIMLIĞI Azure SQL yönetilen örneğiniz için erişim izni verin.
+                -  **Yönetilen kimlik**' i SEÇERSENIZ, ADF tarafından yönetilen KIMLIĞI Azure SQL yönetilen örneğiniz için erişim izni verin.
 
-            1. **Hizmet sorumlusu**' nı seçerseniz, ilgili **hizmet sorumlusu kimliği** ve **hizmet sorumlusu anahtarını** girin veya gizli dizi olarak depolandığı **Azure Key Vault** seçin.
+                - **Hizmet sorumlusu**' nı seçerseniz, ilgili **hizmet sorumlusu kimliği** ve **hizmet sorumlusu anahtarını** girin veya gizli dizi olarak depolandığı **Azure Key Vault** seçin.
 
       1. **Dosya sistemi**' ni seçerseniz, paketlerinizin **konak** için dağıtıldığı klasörün UNC yolunu ve Ilgili **Kullanıcı adı** ve **parolayı** girin veya gizli dizi olarak depolandığı **Azure Key Vault** seçin.
 
@@ -231,7 +231,7 @@ Bu onay kutusunu seçerseniz, **Yeni**' yi seçerek Azure-SSIS IR birden çok pa
 
    1. Eklenmiş paket depolarınız **dağıtım ayarları** sayfasında görüntülenir. Bunları kaldırmak için onay kutularını işaretleyin ve ardından **Sil**' i seçin.
 
-Uygun olduğunda **Bağlantıyı Sına** ' yı seçin ve başarılı olursa **İleri**' yi seçin.
+Uygun olduğunda **Bağlantıyı Sına** ' yı seçin ve başarılı olursa **devam**' ı seçin.
 
 #### <a name="advanced-settings-page"></a>Gelişmiş ayarlar sayfası
 
@@ -314,7 +314,7 @@ Hub 'ı **Yönet** ' in **Bağlantılar** bölmesinde, **tümleştirme çalışm
 
 ### <a name="azure-ssis-integration-runtimes-in-the-portal"></a>Portalda Azure SSIS tümleştirmesi çalışma zamanları
 
-1. Azure Data Factory Kullanıcı arabiriminde, **Düzenle** sekmesine geçin ve **Bağlantılar**' ı seçin. Ardından, veri fabrikanızdaki mevcut tümleştirme çalışma zamanlarını görüntülemek için **tümleştirme çalışma zamanları** sekmesine geçin.
+1. Azure Data Factory Kullanıcı arabiriminde, **Yönet** sekmesine geçin ve sonra veri fabrikanızdaki mevcut tümleştirme çalışma zamanlarını görüntülemek için **Bağlantılar** bölmesindeki **tümleştirme çalışma zamanları** sekmesine geçin.
 
    ![Mevcut IR’leri görüntüle](./media/tutorial-create-azure-ssis-runtime-portal/view-azure-ssis-integration-runtimes.png)
 
@@ -322,7 +322,7 @@ Hub 'ı **Yönet** ' in **Bağlantılar** bölmesinde, **tümleştirme çalışm
 
    ![Menü aracılığıyla tümleştirme çalışma zamanı](./media/tutorial-create-azure-ssis-runtime-portal/edit-connections-new-integration-runtime-button.png)
 
-1. **Tümleştirme çalışma zamanı kurulumu** bölmesinde, Azure kutucuğunda **yürütmek üzere var olan SSIS paketlerini** seçin ve ardından **İleri**' yi seçin.
+1. **Tümleştirme çalışma zamanı kurulumu** bölmesinde, Azure kutucuğunda **yürütmek üzere var olan SSIS paketlerini** seçin ve ardından **devam**' ı seçin.
 
    ![Tümleştirme çalışma zamanının türünü belirtin](./media/tutorial-create-azure-ssis-runtime-portal/integration-runtime-setup-options.png)
 

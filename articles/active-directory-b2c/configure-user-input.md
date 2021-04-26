@@ -13,12 +13,12 @@ ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 4e709719d56aacacf61e247a5dbe215f766a891a
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 257ba16cf015705b8f6da264d9c25f28cef2ebb1
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102607960"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443449"
 ---
 #  <a name="add-user-attributes-and-customize-user-input-in-azure-active-directory-b2c"></a>Azure Active Directory B2C Kullanıcı öznitelikleri ekleme ve Kullanıcı girişini özelleştirme
 
@@ -60,7 +60,7 @@ Uygulama talepleri, uygulamaya döndürülen değerlerdir. Kullanıcı akışın
 1. **Sayfa düzenlerini** seçin.
 1. **Yerel hesap kaydolma sayfası**' nı seçin.
 1. **Kullanıcı öznitelikleri** altında **şehir**' i seçin.
-    1. **Kullanıcı giriş türü** açılan kutusunda **dropdownsingleselect**' i seçin.
+    1. **Kullanıcı giriş türü** açılan kutusunda **dropdownsingleselect**' i seçin. İsteğe bağlı: kaydolma sayfasındaki metin sırasını düzenlemek için "yukarı taşı/aşağı taşı" düğmelerini kullanın.
     1. **Isteğe bağlı** açılan kutuda **Hayır**' ı seçin.
 1. **Kaydet**’i seçin. 
 

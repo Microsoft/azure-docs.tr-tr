@@ -4,12 +4,12 @@ description: Bu öğreticide, başka bir özel Azure Container Registry 'de bir 
 ms.topic: tutorial
 ms.date: 11/20/2020
 ms.custom: devx-track-js, devx-track-azurecli
-ms.openlocfilehash: ce06e792fd5a4582e77d18313052ea91a38121a8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 27ab7c3fc0f04023c32cfac181d8f8650de23560
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98920215"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772370"
 ---
 # <a name="tutorial-automate-container-image-builds-when-a-base-image-is-updated-in-another-private-container-registry"></a>Öğretici: bir temel görüntü başka bir özel kapsayıcı kayıt defterinde güncelleştirildiği zaman kapsayıcı görüntüsü derlemelerini otomatikleştirin 
 
@@ -277,15 +277,14 @@ Bu öğreticide, temel görüntü güncelleştirildiğinde kapsayıcı görünt�
 
 <!-- LINKS - Internal -->
 [azure-cli]: /cli/azure/install-azure-cli
-[az-acr-build]: /cli/azure/acr#az-acr-build
-[az-acr-task-create]: /cli/azure/acr/task#az-acr-task-create
-[az-acr-task-update]: /cli/azure/acr/task#az-acr-task-update
-[az-acr-task-run]: /cli/azure/acr/task#az-acr-task-run
-[az-acr-task-show]: /cli/azure/acr/task#az-acr-task-show
-[az-acr-task-credential-add]: /cli/azure/acr/task/credential#az-acr-task-credential-add
-[az-acr-login]: /cli/azure/acr#az-acr-login
-[az-acr-task-list-runs]: /cli/azure/acr/task#az-acr-task-list-runs
-[az-acr-task]: /cli/azure/acr#az-acr-task
-[az-acr-show]: /cli/azure/acr#az-acr-show
-[az-role-assignment-create]: /cli/azure/role/assignment#az-role-assignment-create
-
+[az-acr-build]: /cli/azure/acr#az_acr_build
+[az-acr-task-create]: /cli/azure/acr/task#az_acr_task_create
+[az-acr-task-update]: /cli/azure/acr/task#az_acr_task_update
+[az-acr-task-run]: /cli/azure/acr/task#az_acr_task_run
+[az-acr-task-show]: /cli/azure/acr/task#az_acr_task_show
+[az-acr-task-credential-add]: /cli/azure/acr/task/credential#az_acr_task_credential_add
+[az-acr-login]: /cli/azure/acr#az_acr_login
+[az-acr-task-list-runs]: /cli/azure/acr/task#az_acr_task_list_runs
+[az-acr-task]: /cli/azure/acr#az_acr_task
+[az-acr-show]: /cli/azure/acr#az_acr_show
+[az-role-assignment-create]: /cli/azure/role/assignment#az_role_assignment_create

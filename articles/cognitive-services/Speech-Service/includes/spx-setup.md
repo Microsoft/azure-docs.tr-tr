@@ -5,12 +5,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 05/15/2020
 ms.author: v-demjoh
-ms.openlocfilehash: a995a110c4f777603e5b0273b6025cd68fe55b67
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: ec34ba7b2d3bc026376aeb1cb91847d8eac1cac5
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102532521"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107073370"
 ---
 ## <a name="download-and-install"></a>İndirme ve yükleme
 
@@ -23,7 +23,7 @@ Windows 'a konuşma CLı 'Yı yüklemek için aşağıdaki adımları izleyin:
 2. Şu komutu girerek NuGet kullanarak konuşma CLı 'Yı yüklersiniz:
 
    ```console
-   dotnet tool install --global Microsoft.CognitiveServices.Speech.CLI --version 1.15.0
+   dotnet tool install --global Microsoft.CognitiveServices.Speech.CLI
    ```
 `spx`Konuşma CLI yardımını görmek için yazın.
 
@@ -55,7 +55,7 @@ Linux 'ta konuşma CLı 'Yı x64 CPU 'ya yüklemek için şu adımları izleyin:
 1. [.NET Core 3,1 SDK 'sını](/dotnet/core/install/linux)yükler.
 2. Şu komutu girerek NuGet kullanarak konuşma CLı 'Yı yüklersiniz:
 
-    `dotnet tool install --global Microsoft.CognitiveServices.Speech.CLI --version 1.15.0`
+    `dotnet tool install --global Microsoft.CognitiveServices.Speech.CLI`
 
 `spx`Konuşma CLI yardımını görmek için yazın.
 

@@ -2,18 +2,18 @@
 title: Azure Resource Manager şablonu kullanarak bir Azure uygulama yapılandırma deposu oluşturma (ARM şablonu)
 titleSuffix: Azure App Configuration
 description: Azure Resource Manager şablonu (ARM şablonu) kullanarak bir Azure uygulama yapılandırma deposu oluşturmayı öğrenin.
-author: ZhijunZhao
-ms.author: zhijzhao
+author: GrantMeStrength
+ms.author: jken
 ms.date: 10/16/2020
-ms.service: azure-resource-manager
+ms.service: azure-app-configuration
 ms.topic: quickstart
-ms.custom: subject-armqs
-ms.openlocfilehash: c35b6d27a5e6d7ffd2a9f76ea201af4a138a77df
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: subject-armqs, devx-track-azurepowershell
+ms.openlocfilehash: 92ca80a6c807394c45be8f0187c7add736ba83ce
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99219120"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831789"
 ---
 # <a name="quickstart-create-an-azure-app-configuration-store-by-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonu kullanarak Azure uygulama yapılandırma deposu oluşturma
 

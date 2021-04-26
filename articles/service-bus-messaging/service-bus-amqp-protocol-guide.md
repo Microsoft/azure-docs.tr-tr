@@ -2,13 +2,13 @@
 title: Azure Service Bus ve Event Hubs protokol kılavuzunda AMQP 1,0 | Microsoft Docs
 description: Azure Service Bus ve Event Hubs AMQP 1,0 ifadelerine ve açıklamasına yönelik protokol Kılavuzu
 ms.topic: article
-ms.date: 06/23/2020
-ms.openlocfilehash: 2154221ebfe69b659ff83100ed614133e178ccdb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/14/2021
+ms.openlocfilehash: 8d346aeef74e1f67d3d525c061d40314ee5342aa
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98624498"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531016"
 ---
 # <a name="amqp-10-in-azure-service-bus-and-event-hubs-protocol-guide"></a>Azure Service Bus ve Event Hubs protokol kılavuzunda AMQP 1,0
 
@@ -359,26 +359,25 @@ Protokol hareketi, yönetim belirtimi tarafından tanımlanan bir istek/yanıt d
 
 | Anahtar | İsteğe Bağlı | Değer Türü | Değer Içeriği |
 | --- | --- | --- | --- |
-| operation |No |string |**Put belirteci** |
-| tür |No |string |Yerleştirmekte olan belirtecin türü. |
-| name |No |string |Belirtecin uygulandığı "hedef kitle". |
+| operation |Hayır |string |**Put belirteci** |
+| tür |Hayır |string |Yerleştirmekte olan belirtecin türü. |
+| name |Hayır |string |Belirtecin uygulandığı "hedef kitle". |
 | dolmadan |Yes |timestamp |Belirtecin süre sonu zamanı. |
 
 *Name* özelliği, belirtecin ilişkilendirilacağı varlığı tanımlar. Service Bus kuyruk veya konu/abonelik yoludur. *Type* özelliği, belirteç türünü tanımlar:
 
 | Belirteç türü | Belirteç açıklaması | Gövde türü | Notlar |
 | --- | --- | --- | --- |
-| AMQP: JWT |JSON Web Token (JWT) |AMQP değeri (dize) |Henüz kullanılamıyor. |
-| AMQP: SWT |Basit Web belirteci (SWT) |AMQP değeri (dize) |Yalnızca AAD/ACS tarafından verilen SWT belirteçleri için desteklenir |
+| JWT |JSON Web Token (JWT) |AMQP değeri (dize) | |
 | ServiceBus. Windows. net: sastoken |Service Bus SAS belirteci |AMQP değeri (dize) |- |
 
-Belirteçler yapılandırmacısı hakları. Service Bus üç temel hak biliyor: "Gönder" gönderimi, "dinlemek" almayı ve "Yönet", varlıkların işlenmesine izin vermez. AAD/ACS tarafından verilen SWT belirteçleri, bu hakları açıkça talep olarak içerir. Service Bus SAS belirteçleri, ad alanı veya varlıkta yapılandırılan kurallara başvurur ve bu kurallar, haklarla yapılandırılır. Belirteç bu kuralla ilişkilendirilen anahtarla imzalanmak, belirtecin ilgili hakları ifade etmelerini sağlar. *PUT belirtecini* kullanan bir varlıkla ilişkili belirteç, bağlı istemcinin, belirteç hakları başına varlıkla etkileşime geçmesini sağlar. *Gönderen* rolünü istemcinin aldığı bir bağlantı, "Gönder" hakkını gerektirir; *alıcı* rolünü almak Için "dinler" hakkı gerekir.
+Belirteçler yapılandırmacısı hakları. Service Bus üç temel hak biliyor: "Gönder" gönderimi, "dinlemek" almayı ve "Yönet", varlıkların işlenmesine izin vermez. Service Bus SAS belirteçleri, ad alanı veya varlıkta yapılandırılan kurallara başvurur ve bu kurallar, haklarla yapılandırılır. Belirteç bu kuralla ilişkilendirilen anahtarla imzalanmak, belirtecin ilgili hakları ifade etmelerini sağlar. *PUT belirtecini* kullanan bir varlıkla ilişkili belirteç, bağlı istemcinin, belirteç hakları başına varlıkla etkileşime geçmesini sağlar. *Gönderen* rolünü istemcinin aldığı bir bağlantı, "Gönder" hakkını gerektirir; *alıcı* rolünü almak Için "dinler" hakkı gerekir.
 
 Yanıt iletisinde aşağıdaki *uygulama özellikleri* değerleri bulunur
 
 | Anahtar | İsteğe Bağlı | Değer Türü | Değer Içeriği |
 | --- | --- | --- | --- |
-| durum kodu |No |int |HTTP yanıt kodu **[RFC2616]**. |
+| durum kodu |Hayır |int |HTTP yanıt kodu **[RFC2616]**. |
 | durum-açıklama |Yes |string |Durumun açıklaması. |
 
 İstemci, *yerleştirme belirtecini* sürekli olarak ve mesajlaşma altyapısındaki herhangi bir varlık için çağırabilir. Belirteçler, geçerli istemcinin kapsamına alınır ve geçerli bağlantıya bağlanır, yani bağlantı düşerse sunucu tüm korunan belirteçleri bırakır.

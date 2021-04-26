@@ -7,18 +7,18 @@ ms.author: baanders
 ms.date: 7/22/2020
 ms.topic: how-to
 ms.service: digital-twins
-ms.openlocfilehash: df826a682eec15d09b60857e63c363b0f9941c01
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 8a8cc6563d8e3cae942c4dfb43afa3d05f6f2b75
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104779945"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257318"
 ---
 # <a name="manage-endpoints-and-routes-in-azure-digital-twins-portal"></a>Azure dijital TWINS 'te uç noktaları ve yolları yönetme (portal)
 
 [!INCLUDE [digital-twins-route-selector.md](../../includes/digital-twins-route-selector.md)]
 
-Azure dijital TWINS 'de, [olay bildirimlerini](how-to-interpret-event-data.md) aşağı akış hizmetlerine veya bağlı işlem kaynaklarına yönlendirebilirsiniz. Bunu yapmak için öncelikle olayları alabilecek **uç noktaları** ayarlamanız gerekir. Daha sonra, Azure dijital TWINS tarafından oluşturulan olayların hangi uç noktalara teslim edildiğini belirten [**olay yolları**](concepts-route-events.md) oluşturabilirsiniz.
+Azure dijital TWINS 'de, [olay bildirimlerini](concepts-event-notifications.md) aşağı akış hizmetlerine veya bağlı işlem kaynaklarına yönlendirebilirsiniz. Bunu yapmak için öncelikle olayları alabilecek **uç noktaları** ayarlamanız gerekir. Daha sonra, Azure dijital TWINS tarafından oluşturulan olayların hangi uç noktalara teslim edildiğini belirten [**olay yolları**](concepts-route-events.md) oluşturabilirsiniz.
 
 Bu makalede, [Azure Portal](https://portal.azure.com)kullanarak uç noktalar ve rotalar oluşturma işlemi adım adım açıklanmaktadır.
 
@@ -153,7 +153,9 @@ Bir olay yolu oluştururken bir olay filtresi eklemek için, *olay yolu oluştur
 Bazı temel ortak filtre seçeneklerinden birini seçebilir veya kendi özel filtrelerinizi yazmak için gelişmiş filtre seçeneklerini kullanabilirsiniz.
 
 >[!NOTE]
-> Filtreler **büyük/küçük harfe duyarlıdır** ve yük durumuyla eşleşmesi gerekir (model durumuyla eşleşmeyebilir).
+> Filtreler **büyük/küçük harfe duyarlıdır** ve yük durumuyla eşleşmesi gerekir. 
+>
+> Telemetri filtreleri için bu, büyük küçük harf 'in cihaz tarafından gönderilen telemetrideki büyük/küçük harf ile eşleşmesi gerektiği anlamına gelir.
 
 #### <a name="use-the-basic-filters"></a>Temel filtreleri kullanma
 
@@ -200,4 +202,4 @@ Desteklenen yol filtreleri aşağıda verilmiştir. *Filtre metin şeması* süt
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Alabilmeniz için farklı olay iletisi türleri hakkında bilgi edinin:
-* [*Nasıl yapılır: olay verilerini yorumlama*](how-to-interpret-event-data.md)
+* [*Kavramlar: olay bildirimleri*](concepts-event-notifications.md)

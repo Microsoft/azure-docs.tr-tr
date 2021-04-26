@@ -8,13 +8,12 @@ ms.subservice: edge
 ms.topic: tutorial
 ms.date: 01/06/2021
 ms.author: alkohli
-Customer intent: As an IT admin, I need to understand how to configure compute on Azure Stack Edge Pro for advanced deployment flow so I can use it to transform the data before sending it to Azure.
-ms.openlocfilehash: 8946dfca9a416009effb45cad1e81348dd900f98
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 81953f573c47d229fcaccd7c11f62155acd2f119
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97968300"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106063653"
 ---
 # <a name="tutorial-transform-data-with-azure-stack-edge-pro-for-advanced-deployment-flow"></a>Öğretici: gelişmiş dağıtım akışı için Azure Stack Edge Pro ile veri dönüştürme
 
@@ -140,7 +139,7 @@ Bu öğreticide gelişmiş dağıtım için iki paylaşım gerekir: bir kenar pa
 
 4. Örnek yolu kopyalayın ve kaydedin. Bu örnek yolu değiştirecek ve daha sonra IoT Hub kullanacaksınız.
 
-    `"sampleroute": "FROM /* WHERE topic = 'mydbesmbedgelocalshare1' INTO BrokeredEndpoint(\"/modules/modulename/inputs/input1\")"`
+    `"sampleroute&quot;: &quot;FROM /* WHERE topic = 'mydbesmbedgelocalshare1' INTO BrokeredEndpoint(\"/modules/modulename/inputs/input1\")"`
 
     ![Tetikleyici Ekle 4](./media/azure-stack-edge-deploy-configure-compute-advanced/add-trigger-4.png)
 
@@ -218,7 +217,7 @@ Bu bölümde, [Azure Stack Edge Pro Için C# modülü geliştirme](azure-stack-e
     *Rotayı* , daha önce kopyaladığınız yol dizesi ile değiştirebilirsiniz. Bu örnekte, bulut paylaşımında veri alacak yerel paylaşımın adını girin. Öğesini `modulename` modülün adıyla değiştirin. **İleri**’yi seçin.
         
     ```
-    "route": "FROM /* WHERE topic = 'mydbesmbedgelocalshare1' INTO BrokeredEndpoint(\"/modules/filemove/inputs/input1\")"
+    "route&quot;: &quot;FROM /* WHERE topic = 'mydbesmbedgelocalshare1' INTO BrokeredEndpoint(\"/modules/filemove/inputs/input1\")"
     ```
 
     ![Rotaları belirt bölümü](./media/azure-stack-edge-deploy-configure-compute-advanced/add-module-8.png)

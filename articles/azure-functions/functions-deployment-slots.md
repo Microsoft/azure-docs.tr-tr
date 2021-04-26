@@ -5,12 +5,12 @@ author: craigshoemaker
 ms.topic: conceptual
 ms.date: 04/15/2020
 ms.author: cshoe
-ms.openlocfilehash: 2dbf7c31e6b0b40fa9dc2d59e86c0ecc731657e1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5f003b68283217f7877dc650ae4f07ddc5a31012
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102172418"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107789348"
 ---
 # <a name="azure-functions-deployment-slots"></a>Azure Işlevleri dağıtım Yuvaları
 
@@ -20,9 +20,6 @@ Aşağıdaki, işlevlerin takas yuvaları tarafından nasıl etkilendiğini yans
 
 - Trafik yeniden yönlendirmesi sorunsuz; bir değiştirme nedeniyle hiçbir istek atılamaz.
 - Bir işlev değiştirme sırasında çalışıyorsa, yürütme devam eder ve sonraki Tetikleyiciler, takas edilen uygulama örneğine yönlendirilir.
-
-> [!NOTE]
-> Yuvalar Şu anda Linux tüketim planı için kullanılamaz.
 
 ## <a name="why-use-slots"></a>Yuvalar neden kullanılmalıdır?
 
@@ -127,7 +124,7 @@ Tüm yuvalar, üretim yuvasında aynı çalışan sayısına göre ölçeklenir.
 
 ## <a name="add-a-slot"></a>Yuva ekleme
 
-[CLI](/cli/azure/functionapp/deployment/slot#az-functionapp-deployment-slot-create) aracılığıyla veya Portal aracılığıyla bir yuva ekleyebilirsiniz. Aşağıdaki adımlarda portalda nasıl yeni bir yuva oluşturacağınız gösterilmektedir:
+[CLI](/cli/azure/functionapp/deployment/slot#az_functionapp_deployment_slot_create) aracılığıyla veya Portal aracılığıyla bir yuva ekleyebilirsiniz. Aşağıdaki adımlarda portalda nasıl yeni bir yuva oluşturacağınız gösterilmektedir:
 
 1. İşlev uygulamanıza gidin.
 
@@ -141,7 +138,7 @@ Tüm yuvalar, üretim yuvasında aynı çalışan sayısına göre ölçeklenir.
 
 ## <a name="swap-slots"></a>Takas Yuvaları
 
-Yuvaları [CLI](/cli/azure/functionapp/deployment/slot#az-functionapp-deployment-slot-swap) aracılığıyla veya Portal üzerinden takas edebilirsiniz. Aşağıdaki adımlarda, portalda yuvaların nasıl takas yapılacağı gösterilmektedir:
+Yuvaları [CLI](/cli/azure/functionapp/deployment/slot#az_functionapp_deployment_slot_swap) aracılığıyla veya Portal üzerinden takas edebilirsiniz. Aşağıdaki adımlarda, portalda yuvaların nasıl takas yapılacağı gösterilmektedir:
 
 1. İşlev uygulamasına gidin.
 1. **Dağıtım yuvaları**' nı seçin ve ardından **Değiştir**' i seçin.
@@ -160,7 +157,7 @@ Bir değiştirme bir hatayla sonuçlanarak veya yalnızca bir değiştirmeyi "ge
 
 ## <a name="remove-a-slot"></a>Yuva kaldırma
 
-Bir yuvayı [CLI](/cli/azure/functionapp/deployment/slot#az-functionapp-deployment-slot-delete) aracılığıyla veya Portal üzerinden kaldırabilirsiniz. Aşağıdaki adımlarda portalda bir yuvanın nasıl kaldırılacağı gösterilmektedir:
+Bir yuvayı [CLI](/cli/azure/functionapp/deployment/slot#az_functionapp_deployment_slot_delete) aracılığıyla veya Portal üzerinden kaldırabilirsiniz. Aşağıdaki adımlarda portalda bir yuvanın nasıl kaldırılacağı gösterilmektedir:
 
 1. İşlev uygulamasındaki **dağıtım yuvaları** ' na gidin ve ardından yuva adını seçin.
 
@@ -182,11 +179,11 @@ Bir yuvayı [CLI](/cli/azure/functionapp/deployment/slot#az-functionapp-deployme
 
 [Azure CLI](/cli/azure/functionapp/deployment/slot)'yı kullanarak bir yuva için aşağıdaki işlemleri otomatikleştirebilirsiniz:
 
-- [oluşturma](/cli/azure/functionapp/deployment/slot#az-functionapp-deployment-slot-create)
-- [delete](/cli/azure/functionapp/deployment/slot#az-functionapp-deployment-slot-delete)
-- [list](/cli/azure/functionapp/deployment/slot#az-functionapp-deployment-slot-list)
-- [Kur](/cli/azure/functionapp/deployment/slot#az-functionapp-deployment-slot-swap)
-- [Otomatik takas](/cli/azure/functionapp/deployment/slot#az-functionapp-deployment-slot-auto-swap)
+- [oluşturma](/cli/azure/functionapp/deployment/slot#az_functionapp_deployment_slot_create)
+- [delete](/cli/azure/functionapp/deployment/slot#az_functionapp_deployment_slot_delete)
+- [list](/cli/azure/functionapp/deployment/slot#az_functionapp_deployment_slot_list)
+- [Kur](/cli/azure/functionapp/deployment/slot#az_functionapp_deployment_slot_swap)
+- [Otomatik takas](/cli/azure/functionapp/deployment/slot#az_functionapp_deployment_slot_auto_swap)
 
 ## <a name="change-app-service-plan"></a>App Service planını değiştir
 
@@ -229,7 +226,7 @@ Dağıtım yuvaları için iki düzey destek vardır:
 | Windows tüketimi       | Genel kullanılabilirlik |
 | Windows Premium           | Genel kullanılabilirlik  |
 | Windows ayrılmış         | Genel kullanılabilirlik |
-| Linux tüketimi         | Desteklenmeyen          |
+| Linux tüketimi         | Önizleme          |
 | Linux Premium             | Genel kullanılabilirlik  |
 | Linux adanmış           | Genel kullanılabilirlik |
 

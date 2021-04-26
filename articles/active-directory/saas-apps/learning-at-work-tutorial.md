@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 02/25/2021
 ms.author: jeedes
 ms.openlocfilehash: 13327beb5c40a1b00aedd754cb6d02dbca585f8c
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104953366"
 ---
 # <a name="tutorial-integrate-learning-at-work-with-azure-active-directory"></a>Öğretici: Azure Active Directory Iş üzerinde öğrenmeyi tümleştirin

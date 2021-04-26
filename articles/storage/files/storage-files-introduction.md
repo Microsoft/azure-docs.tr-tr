@@ -7,20 +7,15 @@ ms.topic: overview
 ms.date: 09/15/2020
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: f0dcd763240205bd396fc8cd0301c2046098473b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7279c5578d969db9178ce85734e3a43f9eccdf8d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98070142"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780056"
 ---
 # <a name="what-is-azure-files"></a>Azure Dosyalar nedir?
 Azure dosyaları, bulutta sektör standart [sunucu Ileti bloğu (SMB) protokolü](/windows/win32/fileio/microsoft-smb-protocol-and-cifs-protocol-overview) veya [ağ dosya sistemi (NFS) protokolü](https://en.wikipedia.org/wiki/Network_File_System)aracılığıyla erişilebilen tam olarak yönetilen dosya paylaşımları sunar. Azure dosya paylaşımları, bulut veya şirket içi dağıtımlar tarafından eşzamanlı olarak bağlanabilir. Azure dosyaları SMB dosya paylaşımlarına Windows, Linux ve macOS istemcilerinden erişilebilir. Azure dosyaları NFS dosya paylaşımlarına Linux veya macOS istemcilerinden erişilebilir. Ayrıca, Azure dosyaları SMB dosya paylaşımları, verilerin kullanıldığı yerden neredeyse hızlı erişim için Azure Dosya Eşitleme ile Windows sunucularında önbelleğe alınabilir.
-
-## <a name="videos"></a>Videolar
-| Azure Dosya Eşitleme tanıtımı | Eşitlenmiş Azure dosyaları (Ignite 2019)  |
-|-|-|
-| [![Giriş Azure Dosya Eşitleme ekran görüntüsü-oynatmak için tıklayın!](./media/storage-files-introduction/azure-file-sync-video-snapshot.png)](https://www.youtube.com/watch?v=Zm2w8-TRn-o) | [![Eşitleme sunumuna sahip Azure dosyalarının ekran kaydı-oynatmak için tıklayın!](./media/storage-files-introduction/ignite-2018-video.png)](https://www.youtube.com/embed/6E2p28XwovU) |
 
 Azure dosyalarının genel kullanım durumlarında bazı videolar aşağıda verilmiştir:
 * [Dosya sunucunuzu sunucusuz bir Azure dosya paylaşımıyla değiştirin](https://sec.ch9.ms/ch9/3358/0addac01-3606-4e30-ad7b-f195f3ab3358/ITOpsTalkAzureFiles_high.mp4)

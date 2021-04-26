@@ -1,17 +1,17 @@
 ---
 title: Azure IoT cihaz SDK 'Sı seçeneklerine genel bakış
 description: Geliştirme rolünüze ve görevlerinize göre hangi Azure IoT cihaz SDK 'sının kullanılacağını öğrenin.
-author: elhorton
-ms.author: elhorton
+author: philmea
+ms.author: philmea
 ms.service: iot-develop
 ms.topic: overview
 ms.date: 02/11/2021
-ms.openlocfilehash: c9624e9a23d005185429c82199324ac570cbd63e
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: c35a9045bf809c03630fbb7c57f9d31e7b143422
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102607739"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107876466"
 ---
 # <a name="overview-of-azure-iot-device-sdks"></a>Azure IoT cihaz SDK 'larına genel bakış
 

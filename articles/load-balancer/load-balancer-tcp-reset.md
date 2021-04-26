@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/07/2020
 ms.author: allensu
-ms.openlocfilehash: 0d02b46345af13770f77a7dac452127a665e01fd
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9b555d7972e88df85e08dbcb1737231755c21361
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94696753"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448857"
 ---
 # <a name="load-balancer-tcp-reset-and-idle-timeout"></a>Load Balancer TCP sıfırlaması ve boşta kalma zaman aşımı
 
@@ -58,7 +58,6 @@ TCP etkin tutma, pil ömrünün kısıtlama olmadığı senaryolar için geçerl
 ## <a name="limitations"></a>Sınırlamalar
 
 - TCP sıfırlaması yalnızca belırlenen durumda TCP bağlantısı sırasında gönderilir.
-- TCP sıfırlaması, HA bağlantı noktaları yapılandırılmış iç yük dengeleyiciler için gönderilmez.
 - TCP boşta kalma zaman aşımı, UDP protokolünde Yük Dengeleme kurallarını etkilemez.
 
 ## <a name="next-steps"></a>Sonraki adımlar

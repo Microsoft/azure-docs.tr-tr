@@ -1,7 +1,7 @@
 ---
 title: Linux için Azure sanal makinelerinde SQL Server genel bakış | Microsoft Docs
 description: Linux için Azure sanal makinelerinde tam SQL Server sürümlerinin nasıl çalıştırılacağı hakkında bilgi edinin. Tüm Linux SQL Server VM görüntülerinin ve ilgili içeriklerin doğrudan bağlantılarını alın.
-services: virtual-machines-linux
+services: virtual-machines-sql
 documentationcenter: ''
 author: MashaMSFT
 tags: azure-service-management
@@ -11,12 +11,12 @@ ms.workload: iaas-sql-server
 ms.date: 04/10/2018
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: c394fe2aa7639d32e5d79bcb22a01151f7666f5b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3613b8417c78d0a01582defb7396cc65521e2f4c
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96324627"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449491"
 ---
 # <a name="overview-of-sql-server-on-azure-virtual-machines-linux"></a>Azure Sanal Makinelerinde SQL Server'a Genel Bakış (Linux)
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]

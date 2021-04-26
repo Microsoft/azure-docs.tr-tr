@@ -11,12 +11,12 @@ ms.reviewer: peterlu
 ms.date: 09/28/2020
 ms.topic: conceptual
 ms.custom: how-to
-ms.openlocfilehash: 2b4af9dec2bf397ad2766c68d547eeac85a9a9a3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 555ec90bbd73cee401f6f35aa04598792d2f24f4
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102518373"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817155"
 ---
 # <a name="train-keras-models-at-scale-with-azure-machine-learning"></a>Azure Machine Learning ile keras modellerini ölçeklendirerek eğitme
 
@@ -243,7 +243,7 @@ for f in run.get_file_names():
 Bu makalede, Azure Machine Learning bir keras modeli eğitildiniz ve kaydettiniz. Modeli dağıtmayı öğrenmek için model dağıtım makalemize devam edin.
 
 * [Modellerin nasıl ve nereye dağıtılacağı](how-to-deploy-and-where.md)
-* [Eğitim sırasında çalıştırma ölçümlerini izleyin](how-to-track-experiments.md)
+* [Eğitim sırasında çalıştırma ölçümlerini izleyin](how-to-log-view-metrics.md)
 * [Hiperparametreleri ayarlama](how-to-tune-hyperparameters.md)
 * [Eğitilen model dağıtma](how-to-deploy-and-where.md)
 * [Azure 'da dağıtılmış derin öğrenme eğitimi için başvuru mimarisi](/azure/architecture/reference-architectures/ai/training-deep-learning)

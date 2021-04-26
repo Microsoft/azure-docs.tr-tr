@@ -4,10 +4,10 @@ description: Bu makalede, her iş yükü türü için yedekleme merkezi 'nin des
 ms.topic: conceptual
 ms.date: 09/07/2020
 ms.openlocfilehash: d6e5d34e201edda4fd1e9fda85f210fb88211e28
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102504516"
 ---
 # <a name="support-matrix-for-backup-center"></a>Yedekleme merkezi için destek matrisi

@@ -16,12 +16,12 @@ ms.date: 10/07/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2dac4b461d4506015f0ef374eae37f67c445791d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 87b9371bfe3b0bd8ff8b3bd509cc1431f0c2e1c6
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98107880"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107305778"
 ---
 # <a name="azure-active-directory-seamless-single-sign-on-frequently-asked-questions"></a>Kesintisiz çoklu oturum açma Azure Active Directory: sık sorulan sorular
 
@@ -90,7 +90,7 @@ Azure AD Connect çalıştırdığınız şirket içi sunucuda bu adımları izl
    **1. adım. Sorunsuz SSO 'nun etkinleştirildiği AD ormanları listesini alın**
 
    1. İlk olarak, [Azure AD PowerShell](/powershell/azure/active-directory/overview)'i indirin ve yükleyin.
-   2. `%programfiles%\Microsoft Azure Active Directory Connect` klasörüne gidin.
+   2. `$env:programfiles\Microsoft Azure Active Directory Connect` klasörüne gidin.
    3. Bu komutu kullanarak sorunsuz SSO PowerShell modülünü içeri aktarın: `Import-Module .\AzureADSSO.psd1` .
    4. PowerShell 'i yönetici olarak çalıştırın. PowerShell 'de, çağırın `New-AzureADSSOAuthenticationContext` . Bu komut, kiracınızın genel yönetici kimlik bilgilerini girebileceğiniz bir açılan menü vermelidir.
    5. Çağrısı yapın `Get-AzureADSSOStatus | ConvertFrom-Json` . Bu komut, bu özelliğin etkinleştirildiği AD ormanları listesini ("etki alanları" listesine bakın) sağlar.
@@ -126,7 +126,7 @@ Azure AD Connect çalıştırdığınız şirket içi sunucuda bu adımları izl
 
    Sihirbazı tamamladıktan sonra, kiracınızda sorunsuz SSO devre dışı bırakılacaktır. Bununla birlikte, ekranda şu şekilde okuyan bir ileti görürsünüz:
 
-   "Çoklu oturum açma artık devre dışı bırakıldı, ancak temizleme işlemini tamamlamak için el ile gerçekleştirilecek ek adımlar var. Daha fazla bilgi "
+   "Çoklu oturum açma artık devre dışı bırakıldı, ancak temizleme işlemini tamamlamak için el ile gerçekleştirilecek ek adımlar var. [Daha fazla bilgi](tshoot-connect-sso.md#step-3-disable-seamless-sso-for-each-active-directory-forest-where-youve-set-up-the-feature)"
 
    Temizleme işlemini gerçekleştirmek için Azure AD Connect çalıştırdığınız şirket içi sunucuda adım 2 ve 3 ' ü izleyin.
 
@@ -135,7 +135,7 @@ Azure AD Connect çalıştırdığınız şirket içi sunucuda bu adımları izl
    Azure AD Connect çalıştırdığınız şirket içi sunucuda aşağıdaki adımları çalıştırın:
 
    1. İlk olarak, [Azure AD PowerShell](/powershell/azure/active-directory/overview)'i indirin ve yükleyin.
-   2. `%programfiles%\Microsoft Azure Active Directory Connect` klasörüne gidin.
+   2. `$env:ProgramFiles\Microsoft Azure Active Directory Connect` klasörüne gidin.
    3. Bu komutu kullanarak sorunsuz SSO PowerShell modülünü içeri aktarın: `Import-Module .\AzureADSSO.psd1` .
    4. PowerShell 'i yönetici olarak çalıştırın. PowerShell 'de, çağırın `New-AzureADSSOAuthenticationContext` . Bu komut, kiracınızın genel yönetici kimlik bilgilerini girebileceğiniz bir açılan menü vermelidir.
    5. Çağrısı yapın `Enable-AzureADSSO -Enable $false` .
@@ -150,7 +150,7 @@ Azure AD Connect çalıştırdığınız şirket içi sunucuda bu adımları izl
    Azure AD Connect kullanarak sorunsuz SSO 'yu devre dışı bıraktığınız takdirde, aşağıdaki görevleri 1 ' den izleyin. Bunun yerine PowerShell kullanarak sorunsuz SSO 'yu devre dışı bırakırsanız, aşağıdaki görev 5 ' e atlayın.
 
    1. İlk olarak, [Azure AD PowerShell](/powershell/azure/active-directory/overview)'i indirin ve yükleyin.
-   2. `%programfiles%\Microsoft Azure Active Directory Connect` klasörüne gidin.
+   2. `$env:ProgramFiles\Microsoft Azure Active Directory Connect` klasörüne gidin.
    3. Bu komutu kullanarak sorunsuz SSO PowerShell modülünü içeri aktarın: `Import-Module .\AzureADSSO.psd1` .
    4. PowerShell 'i yönetici olarak çalıştırın. PowerShell 'de, çağırın `New-AzureADSSOAuthenticationContext` . Bu komut, kiracınızın genel yönetici kimlik bilgilerini girebileceğiniz bir açılan menü vermelidir.
    5. Çağrısı yapın `Get-AzureADSSOStatus | ConvertFrom-Json` . Bu komut, bu özelliğin etkinleştirildiği AD ormanları listesini ("etki alanları" listesine bakın) sağlar.

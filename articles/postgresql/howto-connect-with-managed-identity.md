@@ -7,12 +7,12 @@ ms.service: postgresql
 ms.topic: how-to
 ms.date: 05/19/2020
 ms.custom: devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: d59b449a2dbf2ed3b1177db6e543de4c34a8ecb1
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: beb5930e98a5c5498349dc3aa773423ee5d281bd
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105604167"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792480"
 ---
 # <a name="connect-with-managed-identity-to-azure-database-for-postgresql"></a>Yönetilen Kimlik ile PostgreSQL için Azure Veritabanı'na bağlanma
 
@@ -34,13 +34,13 @@ Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 ## <a name="creating-a-user-assigned-managed-identity-for-your-vm"></a>VM 'niz için Kullanıcı tarafından atanan yönetilen kimlik oluşturma
 
-[Az Identity Create](/cli/azure/identity#az-identity-create) komutunu kullanarak aboneliğinizde bir kimlik oluşturun. Sanal makinenizin üzerinde çalıştığı aynı kaynak grubunu veya farklı bir tane kullanabilirsiniz.
+[Az Identity Create](/cli/azure/identity#az_identity_create) komutunu kullanarak aboneliğinizde bir kimlik oluşturun. Sanal makinenizin üzerinde çalıştığı aynı kaynak grubunu veya farklı bir tane kullanabilirsiniz.
 
 ```azurecli-interactive
 az identity create --resource-group myResourceGroup --name myManagedIdentity
 ```
 
-Aşağıdaki adımlarda kimliği yapılandırmak için, kimliğin kaynak KIMLIĞINI ve istemci KIMLIĞINI değişkenlerde depolamak üzere [az Identity Show](/cli/azure/identity#az-identity-show) komutunu kullanın.
+Aşağıdaki adımlarda kimliği yapılandırmak için, kimliğin kaynak KIMLIĞINI ve istemci KIMLIĞINI değişkenlerde depolamak üzere [az Identity Show](/cli/azure/identity#az_identity_show) komutunu kullanın.
 
 ```azurecli
 # Get resource ID of the user-assigned identity
@@ -50,7 +50,7 @@ resourceID=$(az identity show --resource-group myResourceGroup --name myManagedI
 clientID=$(az identity show --resource-group myResourceGroup --name myManagedIdentity --query clientId --output tsv)
 ```
 
-Artık Kullanıcı tarafından atanan kimliği [az VM Identity Assign](/cli/azure/vm/identity#az-vm-identity-assign) komutuyla sanal makineye atayabiliriz:
+Artık Kullanıcı tarafından atanan kimliği [az VM Identity Assign](/cli/azure/vm/identity#az_vm_identity_assign) komutuyla sanal makineye atayabiliriz:
 
 ```azurecli
 az vm identity assign --resource-group myResourceGroup --name myVM --identities $resourceID

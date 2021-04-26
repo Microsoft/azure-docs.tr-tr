@@ -3,13 +3,15 @@ title: 'Hızlı başlangıç: Python ile bir yönetim grubu oluşturma'
 description: Bu hızlı başlangıçta, kaynaklarınızı bir kaynak hiyerarşisinde düzenlemek üzere bir yönetim grubu oluşturmak için Python 'u kullanırsınız.
 ms.date: 01/29/2021
 ms.topic: quickstart
-ms.custom: devx-track-python
-ms.openlocfilehash: e3c55cc14a8ac980318fd0de9485a3e0ca31b582
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom:
+- devx-track-python
+- mode-api
+ms.openlocfilehash: 9aec47e067ca62f4902df2dafb6a5d6d50a26d0e
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100101781"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533173"
 ---
 # <a name="quickstart-create-a-management-group-with-python"></a>Hızlı başlangıç: Python ile bir yönetim grubu oluşturma
 

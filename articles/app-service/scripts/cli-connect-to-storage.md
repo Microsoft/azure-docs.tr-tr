@@ -8,13 +8,13 @@ ms.devlang: azurecli
 ms.topic: sample
 ms.date: 12/11/2017
 ms.author: msangapu
-ms.custom: mvc, seodec18
-ms.openlocfilehash: 508fef1a7467af6874271b5ef37c30a9a16dec95
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: mvc, seodec18, devx-track-azurecli
+ms.openlocfilehash: 8f1eba39f8487df6dd62364574426315aed4c20d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97006330"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782368"
 ---
 # <a name="connect-an-app-service-app-to-a-storage-account-using-cli"></a>CLı kullanarak bir App Service uygulamasını depolama hesabına bağlama
 
@@ -39,12 +39,12 @@ Bu betik bir kaynak grubu, App Service uygulaması, depolama hesabı ve tüm ilg
 
 | Komut | Notlar |
 |---|---|
-| [`az group create`](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | App Service planı oluşturur. |
-| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | App Service uygulaması oluşturur. |
-| [`az storage account create`](/cli/azure/storage/account#az-storage-account-create) | Bir depolama hesabı oluşturur. |
-| [`az storage account show-connection-string`](/cli/azure/storage/account#az-storage-account-show-connection-string) | Bir depolama hesabının bağlantı dizesini alır. |
-| [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) | App Service uygulaması için bir uygulama ayarı oluşturur veya güncelleştirir. Uygulama ayarları, uygulamanız için ortam değişkenleri olarak kullanıma sunulur. |
+| [`az group create`](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az_appservice_plan_create) | App Service planı oluşturur. |
+| [`az webapp create`](/cli/azure/webapp#az_webapp_create) | App Service uygulaması oluşturur. |
+| [`az storage account create`](/cli/azure/storage/account#az_storage_account_create) | Bir depolama hesabı oluşturur. |
+| [`az storage account show-connection-string`](/cli/azure/storage/account#az_storage_account_show_connection_string) | Bir depolama hesabının bağlantı dizesini alır. |
+| [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) | App Service uygulaması için bir uygulama ayarı oluşturur veya güncelleştirir. Uygulama ayarları, uygulamanız için ortam değişkenleri olarak kullanıma sunulur. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

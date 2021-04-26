@@ -10,12 +10,12 @@ author: lobrien
 ms.date: 03/04/2021
 ms.topic: conceptual
 ms.custom: how-to, synapse-azureml
-ms.openlocfilehash: b03915608c6143a9e205ba1a1e08e411b8aa9093
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 2c69ec853cdeeed6f9e28fb9f2884053580ce08e
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104868656"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107576389"
 ---
 # <a name="how-to-use-apache-spark-powered-by-azure-synapse-analytics-in-your-machine-learning-pipeline-preview"></a>Machine Learning işlem hattınızda Apache Spark (Azure SYNAPSE Analytics tarafından desteklenir) kullanma (Önizleme)
 
@@ -199,7 +199,7 @@ Bu "veri hazırlama" betiği gerçek bir veri dönüştürmesi yapmaz, ancak ver
 
 ## <a name="use-the-synapsesparkstep-in-a-pipeline"></a>İşlem hattında kullanın `SynapseSparkStep`
 
-İşlem hattındaki diğer adımlar kendi benzersiz ortamlarına sahip olabilir ve eldeki göreve uygun farklı işlem kaynaklarında çalıştırılabilir. Örnek Not defteri, küçük bir CPU kümesi üzerinde "eğitim adımını" çalıştırır:
+Aşağıdaki örnek, `SynapseSparkStep` [önceki bölümde](#create-a-synapsesparkstep-that-uses-the-linked-apache-spark-pool)oluşturulan çıktısını kullanır. İşlem hattındaki diğer adımlar kendi benzersiz ortamlarına sahip olabilir ve eldeki göreve uygun farklı işlem kaynaklarında çalıştırılabilir. Örnek Not defteri, küçük bir CPU kümesi üzerinde "eğitim adımını" çalıştırır:
 
 ```python
 from azureml.core.compute import AmlCompute

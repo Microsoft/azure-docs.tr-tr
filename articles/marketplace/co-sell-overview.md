@@ -7,13 +7,13 @@ ms.topic: how-to
 author: vamahtan
 ms.author: vamahtan
 ms.reviewer: stmummer
-ms.date: 3/17/2021
-ms.openlocfilehash: b626012ad825b263e4f837159a067ed1d817d93a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 4/15/2021
+ms.openlocfilehash: dcb77e45f5e1469363eb279626a866c7f719de40
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104610034"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537545"
 ---
 # <a name="co-sell-with-microsoft-sales-teams-and-partners-overview"></a>Microsoft satış ekiplerine ve iş ortaklarına genel bakış ile ortak satış
 
@@ -80,7 +80,7 @@ _Azure IP ortak satış incentivized_ durumu elde eden teklifler bu ticari Marke
 - Market hizmeti ücreti %20 ile %10 arasında azaltılır. Bu indirim, ticari Market aracılığıyla satılan hizmet olarak altyapı (IaaS) çözümü veya hizmet olarak yazılım (SaaS) çözümü için geçerlidir. Daha fazla bilgi için bkz. [ticari Market hizmet ücretleri](marketplace-commercial-transaction-capabilities-and-considerations.md#commercial-marketplace-service-fees).
 - Bulut çözümü sağlayıcısı (CSP) iş ortakları, IaaS çözümünüzü veya SaaS teklifinizi satmaya yönelik %10 bir teşvik alır. CSP programı hakkında daha fazla bilgi edinmek için bkz. [bulut çözümü sağlayıcısı programı](cloud-solution-providers.md).
 - Azure Marketi aracılığıyla teklifinizin satışları, müşterilerin Azure tüketim taahhütlerine katkıda bulunur. Uygun müşteriler, Azure portal için **uygun olan Azure avantajı** olarak işaretlenmiş teklifi görür. Daha fazla bilgi için bkz. [Azure tüketim taahhüt avantajı](azure-consumption-commitment-benefit.md).
-- _Azure IP ortak satış incentivized_ durumu elde eden veya [Microsoft Business Applications ISV Connect programına](business-applications-isv-program.md) , ortak satış öncesi durumu ile kaydolduğu teklifler, çevrimiçi mağazalardaki teklif listesi sayfasında **Microsoft tarafından tercih edilen bir çözüm** rozet alır. Rozet, belirli bir sektör dikey veya çözüm alanında müşteri ihtiyaçlarını ele almak için bir teklifin kalitesini, performansını ve özelliklerini yükseltir.
+- _Azure IP ortak satış incentivized_ durumu elde eden veya [Microsoft Business Applications ISV Connect programına](business-applications-isv-program.md) ortak satış öncesi durumu ile kaydolduğu teklifler, çevrimiçi mağazalardaki teklif listesi sayfasında **Microsoft tarafından tercih edilen bir çözüm** rozet alır: [Azure Market](https://azuremarketplace.microsoft.com/) ve [appsource](https://appsource.microsoft.com/).  Bir teklif ilgili durumu aldıktan sonra, tercih edilen çözüm rozetinin çevrimiçi mağazada gösterilmesi 30 güne kadar sürebilir. Rozet, belirli bir sektör dikey veya çözüm alanında müşteri ihtiyaçlarını ele almak için bir teklifin kalitesini, performansını ve özelliklerini yükseltir.
 
 Ortak satış için hazırlanma ve ortak satış incentivized durumuna nasıl ulaştığımızı öğrenmek için bkz. [ortak satış için hazırlanın ve ortak satış incentivized gereksinimleri](co-sell-requirements.md).
 

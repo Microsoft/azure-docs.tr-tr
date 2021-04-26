@@ -1,18 +1,18 @@
 ---
 title: Azure Izleyici için Azure Ilke mevzuat uyumluluk denetimleri
 description: Azure Izleyici için kullanılabilen Azure Ilke mevzuat uyumluluk denetimlerini listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızın uyumluluğunu yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: sample
 author: rboucher
 ms.author: robb
 ms.service: azure-monitor
 ms.custom: subject-policy-compliancecontrols
-ms.openlocfilehash: 40b4a1326091dc8cb7e93ea17a08a8adc7d94f98
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: dcbabfb06cf54ec6fe9ce8fb769428741c061afa
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105036143"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869175"
 ---
 # <a name="azure-policy-regulatory-compliance-controls-for-azure-monitor"></a>Azure Izleyici için Azure Ilke mevzuat uyumluluk denetimleri
 

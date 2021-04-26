@@ -10,6 +10,8 @@
       href: hpc-cache-namespace.md
     - name: Önbellek kullanım modellerini anlama
       href: cache-usage-models.md
+    - name: HPC önbelleğinin doğru çözüm olup olmadığına karar verin
+      href: usage-scenarios.md
     - name: Güvenlik
       items:
         - name: Güvenlik temeli
@@ -54,8 +56,8 @@
           href: directory-services.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
-      href: /cli/azure/ext/hpc-cache/hpc-cache
+    - name: Azure CLI
+      href: /cli/azure/hpc-cache
     - name: Azure PowerShell
       href: /powershell/module/Az.HPCCache
 - name: Kaynaklar
@@ -68,6 +70,8 @@
       href: hpc-cache-blob-firewall-fix.md
     - name: NFS depolama hedefi oluşturma sorunlarını giderme
       href: troubleshoot-nas.md
+    - name: Azure HPC Cache ile NFS bağlı blob depolamayı kullanma
+      href: nfs-blob-considerations.md
     - name: Bölgesel kesintiden kurtulma
       href: hpc-region-recovery.md
     - name: Müşteri tarafından yönetilen şifreleme anahtarlarını kullanma

@@ -11,13 +11,13 @@ ms.workload: mobile
 ms.topic: sample
 ms.date: 11/16/2017
 ms.author: apimpm
-ms.custom: mvc
-ms.openlocfilehash: d80a63b1a52d1ed7750d1a025eb8f4cd9f254a94
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: e879c4df24e7913aac2aac09078bbf7f817ffcea
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87851146"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812615"
 ---
 # <a name="backup-and-restore-service"></a>Hizmet yedekleme ve geri yükleme
 

@@ -5,14 +5,14 @@ author: IngridAtMicrosoft
 ms.author: inhenkel
 ms.service: media-services
 ms.topic: overview
-ms.date: 04/20/2020
+ms.date: 04/05/2021
 ms.custom: devx-track-js
-ms.openlocfilehash: 24a38fde3d1b6bbe1efef9241458da846c186112
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0fadb679260582a788eb6408ff3761f00c2ceb1a
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97916346"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448839"
 ---
 # <a name="playback-technology-tech"></a>Kayıttan yürütme teknolojisi ("Tech") #
 
@@ -21,7 +21,7 @@ Kayıttan yürütme teknolojisi, video veya ses çalmak için kullanılan belirl
 - **azureHtml5JS**:, MSE ve eme standartlarından yararlanarak, AES-128 bit zarfı şifrelenmiş IÇERIK veya DRM ortak şifrelenmiş içerik (tarayıcının bunu desteklediği sırada PlayReady ve Widevine aracılığıyla Azure Media Services) DESTEĞIYLE kısa çizgi içeriğinin eklenti tabanlı kayıttan yürütülmesi için video öğesiyle birlikte
 - **flashss**: Azure MEDIA SERVICES 'den AES-128 bit zarfı şifre çözme desteğiyle sorunsuz içerik çalmak için Flash Player teknolojisini kullanır-11,4 veya üzeri Flash sürümünü gerektirir
 - **html5FairPlayHLS**: video öğesiyle HLS aracılığıyla tarayıcı tabanlı kayıttan yürütme teknolojisinde Safari 'ye özel bir işlem kullanır. Bu teknik, Azure Media Services 'den FairPlay korumalı içeriğin kayıttan yürütülmesi ve 10/19/16 itibariyle techOrder 'a eklenmesidir
-- **silverlightSS**: Azure Media Services 'ten PlayReady korumalı Içerik desteğiyle sorunsuz içerik çalmak için Silverlight teknolojisini kullanır.
+- **SilverlightSS**: Azure Media Services 'ten PlayReady korumalı Içerik desteğiyle sorunsuz içerik çalmak için Silverlight teknolojisini kullanır.
 - **HTML5**: video öğesiyle tarayıcı tabanlı kayıttan yürütme teknolojisinden yararlanır.  Bir Apple iOS veya Android cihazında, bu teknoloji, HLS akışlarının, AES-128 bit zarf şifrelemesi veya DRM içeriği (tarayıcı tarafından desteklendiği zaman FairPlay aracılığıyla) için bazı temel destekle birlikte oynatılmasını sağlar.
 
 ## <a name="tech-order"></a>Teknoloji siparişi ##
@@ -45,16 +45,16 @@ Azure Media Services akış içeriğiyle önerilen teknik sipariş verildiğinde
 | Tarayıcı        | İşletim Sistemi                                                       | Beklenen teknik (açık)  | Beklenen teknik (AES)  | Beklenen teknik (DRM)          |
 |----------------|----------------------------------------------------------|------------------------|----------------------|------------------------------|
 | EdgeIE 11      | Windows 10, Windows 8.1, Windows Phone 10<sup>1</sup>               | azureHtml5JS           | azureHtml5JS         | azureHtml5JS (PlayReady)     |
-| IE 11          | Windows 7, Windows Vista<sup>1</sup>                     | flashSS                | flashSS              | silverlightSS (PlayReady)    |
+| IE 11          | Windows 7, Windows Vista<sup>1</sup>                     | flashSS                | flashSS              | SilverlightSS (PlayReady)    |
 | IE 11          | Windows Phone 8.1                                        | azureHtml5JS           | azureHtml5JS         | desteklenmiyor                |
 | Edge           | Xbox One<sup>1</sup> (Kas 2015 güncelleştirmesi)                   | azureHtml5JS           | azureHtml5JS         | desteklenmiyor                |
 | Chrome 37 +     | Windows 10, Windows 8.1, macOS X Yosemite<sup>1</sup>   | azureHtml5JS           | azureHtml5JS         | azureHtml5JS (Widevine)      |
 | Firefox 47 +    | Windows 10, Windows 8.1, macOS X Yosemite +<sup>1</sup>  | azureHtml5JS           | azureHtml5JS         | azureHtml5JS (Widevine)      |
-| Firefox 42-46  | Windows 10, Windows 8.1, macOS X Yosemite +<sup>1</sup>  | azureHtml5JS           | azureHtml5JS         | silverlightSS (PlayReady)    |
-| Firefox 35-41  | Windows 10, Windows 8.1                                  | flashSS                | flashSS              | silverlightSS (PlayReady)    |
+| Firefox 42-46  | Windows 10, Windows 8.1, macOS X Yosemite +<sup>1</sup>  | azureHtml5JS           | azureHtml5JS         | SilverlightSS (PlayReady)    |
+| Firefox 35-41  | Windows 10, Windows 8.1                                  | flashSS                | flashSS              | SilverlightSS (PlayReady)    |
 | Safari         | iOS 6+                                                   | HTML5                  | HTML5 (belirteç yok) 3    | desteklenmiyor                |
 | Safari 8 +      | OS X Yosemite +                                           | azureHtml5JS           | azureHtml5JS         | html5FairPlayHLS (FairPlay)  |
-| Safari 6       | OS X Sıradağlar LION<sup>1</sup>                           | flashSS                | flashSS              | silverlightSS (PlayReady)    |
+| Safari 6       | OS X Sıradağlar LION<sup>1</sup>                           | flashSS                | flashSS              | SilverlightSS (PlayReady)    |
 | Chrome 37 +     | Android 4.4.4 +<sup>2</sup>                               | azureHtml5JS           | azureHtml5JS         | azureHtml5JS (Widevine)      |
 | Chrome 37 +     | Android 4,02                                             | HTML5                  | HTML5 (belirteç yok)<sup>3</sup>    | desteklenmiyor                |
 | Firefox 42 +    | Android 5.0 +<sup>2</sup>                                 | azureHtml5JS           | azureHtml5JS         | desteklenmiyor                |

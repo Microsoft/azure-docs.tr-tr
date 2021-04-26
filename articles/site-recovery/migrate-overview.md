@@ -2,18 +2,15 @@
 title: Azure 'a geçiş için Azure geçişi ve Site Recovery karşılaştırın
 description: Site Recovery yerine geçiş için Azure geçişi kullanmanın avantajlarını özetler.
 services: site-recovery
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 08/06/2020
-ms.author: raynew
-ms.openlocfilehash: 358efaa1493aa08fb76c9bb83e0e4289950e0969
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c4d30b8b21bf3a0ea27467d2120b04a107f5a73f
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87844329"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581402"
 ---
 # <a name="migrating-to-azure"></a>Azure’a Geçiş
 

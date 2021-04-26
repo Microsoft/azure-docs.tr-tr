@@ -2,17 +2,19 @@
 title: Bıcep modülleri
 description: Modülün nasıl tanımlanacağını ve kullanılacağını ve modül kapsamlarının nasıl kullanılacağını açıklar.
 ms.topic: conceptual
-ms.date: 03/25/2021
-ms.openlocfilehash: 7a680e8aa0fa4d5ef9cac7f9e7ba07a3aa4ee1e2
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.date: 03/30/2021
+ms.openlocfilehash: 6c325bbbe265e13241119761373985ca4552b158
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105611744"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105967889"
 ---
 # <a name="use-bicep-modules-preview"></a>Bıcep modüllerini kullanma (Önizleme)
 
-Bıcep, karmaşık bir çözümü modüllerle bozar etmenizi sağlar. Bir Bıcep modülü birlikte dağıtılacak bir veya daha fazla kaynak kümesidir. Modüller, ham kaynak bildiriminin, okunabilirliği artıran karmaşık ayrıntılarını soyutlar. Bu modülleri yeniden kullanabilir ve diğer kişilerle paylaşabilirsiniz. [Şablon Özellikleri](./template-specs.md)ile birlikte kullanıldığında, modülerlik ve kod yeniden kullanımı için bir yol oluşturur. Öğretici için bkz. [öğretici: Bıcep modülleri ekleme](./bicep-tutorial-add-modules.md).
+Bıcep, karmaşık bir çözümü modüllerle bozar etmenizi sağlar. Bir Bıcep modülü birlikte dağıtılacak bir veya daha fazla kaynak kümesidir. Modüller, ham kaynak bildiriminin, okunabilirliği artıran karmaşık ayrıntılarını soyutlar. Bu modülleri yeniden kullanabilir ve diğer kişilerle paylaşabilirsiniz. [Şablon Özellikleri](./template-specs.md)ile birlikte kullanıldığında, modülerlik ve kod yeniden kullanımı için bir yol oluşturur. Bıcep modülleri, dağıtım için [iç içe şablonlar](./linked-templates.md#nested-template) içeren tek bir ARM şablonuna transpiled. Bıcep 'de [_Bağımlıdson_](./template-syntax.md#resources) , otomatik olarak işlenir.
+
+Öğretici için bkz. [öğretici: Bıcep modülleri ekleme](./bicep-tutorial-add-modules.md).
 
 ## <a name="define-modules"></a>Modülleri tanımlama
 

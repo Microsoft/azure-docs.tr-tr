@@ -3,18 +3,17 @@ title: Azure Key Vault azaltma yönergeleri
 description: Key Vault azaltma, kaynakların aşırı kullanımını önleyen eşzamanlı çağrıların sayısını sınırlar.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
 ms.date: 12/02/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 7bdc3ac517df6b73fba7231cfe0fdc9855803782
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 7a215b53f673a7414f1b3662f519de5c26faaa9d
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102175762"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107749550"
 ---
 # <a name="azure-key-vault-throttling-guidance"></a>Azure Key Vault azaltma yönergeleri
 

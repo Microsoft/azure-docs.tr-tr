@@ -7,21 +7,21 @@ ms.service: spring-cloud
 ms.topic: how-to
 ms.date: 05/29/2020
 ms.custom: devx-track-java
-ms.openlocfilehash: c262ba87698c04da69728f7a370040c0679ec44e
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 03b29e6ddd16731073b33fef14d5aafb54df2abe
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878773"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107227866"
 ---
-# <a name="how-to-self-diagnose-and-solve-problems-in-azure-spring-cloud"></a>Azure Spring Cloud 'da sorunları kendi kendine tanılama ve çözme
+# <a name="self-diagnose-and-solve-problems-in-azure-spring-cloud"></a>Azure Spring Cloud 'da kendi kendine tanılama ve sorunları çözme
 
 **Bu makale şu şekilde geçerlidir:** ✔️ Java ✔️ C #
 
 Azure yay bulutu Tanılaması, yapılandırma olmadan uygulamanızın sorunlarını gidermeye yönelik etkileşimli bir deneyimdir. Azure yay Bulut Tanılaması sorunları tanımlar ve sorun gidermeye ve sorunları çözmeye yardımcı olan bilgileri size rehberlik eder.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
+Bu sertifikayı tamamlayabilmeniz için şunlar gerekir:
 
 * Azure aboneliği. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 * Dağıtılmış bir Azure yay bulut hizmeti örneği. Kullanmaya başlamak için [Azure CLI aracılığıyla uygulama dağıtmaya yönelik hızlı başlangıç hızımızı](spring-cloud-quickstart.md) izleyin.

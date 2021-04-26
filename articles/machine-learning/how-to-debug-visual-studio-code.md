@@ -9,12 +9,12 @@ ms.topic: conceptual
 author: luisquintanilla
 ms.author: luquinta
 ms.date: 09/30/2020
-ms.openlocfilehash: 783b5afdaef369582614cde3525f7968fdb5e567
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 69a69afedbd86871987a8e62b55dfc070121cc78
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102508648"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813875"
 ---
 # <a name="interactive-debugging-with-visual-studio-code"></a>Visual Studio Code ile etkileşimli hata ayıklama
 
@@ -278,7 +278,7 @@ ip_address: 10.3.0.5
 Değeri kaydedin `ip_address` . Sonraki bölümde kullanılır.
 
 > [!TIP]
-> Bu işlem hattı adımı için alt çalıştırma için çalıştırma günlüklerinden IP adresini de bulabilirsiniz. Bu bilgileri görüntüleme hakkında daha fazla bilgi için bkz. [Azure ML deneme çalıştırmaları ve ölçümlerini izleme](how-to-track-experiments.md).
+> Bu işlem hattı adımı için alt çalıştırma için çalıştırma günlüklerinden IP adresini de bulabilirsiniz. Bu bilgileri görüntüleme hakkında daha fazla bilgi için bkz. [Azure ML deneme çalıştırmaları ve ölçümlerini izleme](how-to-log-view-metrics.md).
 
 ### <a name="configure-development-environment"></a>Geliştirme ortamını yapılandırma
 

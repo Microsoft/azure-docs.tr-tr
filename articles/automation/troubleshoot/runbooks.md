@@ -4,13 +4,13 @@ description: Bu makalede, Azure Otomasyonu runbook 'larında sorunları gidermey
 services: automation
 ms.date: 02/11/2021
 ms.topic: troubleshooting
-ms.custom: has-adal-ref
-ms.openlocfilehash: 1ff5adf3ec974cc922d73cf5993a78722ca1b591
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: has-adal-ref, devx-track-azurepowershell
+ms.openlocfilehash: 7964bc62aefc912a0f61744841784600575c98de
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101723818"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831231"
 ---
 # <a name="troubleshoot-runbook-issues"></a>Runbook sorunlarını giderme
 
@@ -90,9 +90,9 @@ Neyin yanlış olduğunu belirlemek için şu adımları izleyin:
    ```powershell
    $Cred = Get-Credential
    #Using Azure Service Management
-   Add-AzureAccount –Credential $Cred
+   Add-AzureAccount -Credential $Cred
    #Using Azure Resource Manager
-   Connect-AzAccount –Credential $Cred
+   Connect-AzAccount -Credential $Cred
    ```
 
 1. Kimlik doğrulama işlemi yerel olarak başarısız olursa, Azure Active Directory (Azure AD) kimlik bilgilerinizi düzgün bir şekilde kurmadınız. Azure AD hesabını doğru bir şekilde ayarlamak için [Azure Active Directory kullanarak Azure 'Da kimlik doğrulama](../automation-use-azure-ad.md)makalesine bakın.
@@ -201,11 +201,11 @@ Azure 'da kimlik doğrulaması yapılıp kalmadığını ve seçmek istediğiniz
 
 1. Betiğinizin tek başına çalıştığından emin olmak için, Azure Otomasyonu dışında test edin.
 1. Cmdlet 'ini çalıştırmadan önce betiğin [Connect-AzAccount](/powershell/module/Az.Accounts/Connect-AzAccount) cmdlet 'ini çalıştırdığından emin olun `Select-*` .
-1. `Disable-AzContextAutosave –Scope Process`Runbook 'un başlangıcına ekleyin. Bu cmdlet, tüm kimlik bilgilerinin yalnızca geçerli runbook 'un yürütülmesine uygulanmasını sağlar.
+1. `Disable-AzContextAutosave -Scope Process`Runbook 'un başlangıcına ekleyin. Bu cmdlet, tüm kimlik bilgilerinin yalnızca geçerli runbook 'un yürütülmesine uygulanmasını sağlar.
 1. Hala hata iletisini görüyorsanız, için parametresini ekleyerek kodunuzu değiştirin `AzContext` `Connect-AzAccount` ve ardından kodu yürütün.
 
    ```powershell
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
 
    $Conn = Get-AutomationConnection -Name AzureRunAsConnection
    Connect-AzAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
@@ -242,7 +242,7 @@ Runbook birden çok runbook 'u çağırdığında abonelik bağlamı kaybolabili
 * Yanlış aboneliğe başvurmayı önlemek için, her runbook 'un başlangıcında aşağıdaki kodu kullanarak Otomasyon Runbook 'larınızda bağlam kaydetmeyi devre dışı bırakın.
 
    ```azurepowershell-interactive
-   Disable-AzContextAutosave –Scope Process
+   Disable-AzContextAutosave -Scope Process
    ```
 
 * Azure PowerShell cmdlet 'leri parametresini destekler `-DefaultProfile` . Bu, aynı işlemde birden fazla PowerShell betiğini çalıştırmayı desteklemek için tüm az ve Azurermcmdlet 'lerine eklenmiştir. bu sayede, her cmdlet için kullanılacak olan bağlamı ve hangi aboneliğin kullanılacağını belirtebilirsiniz. Runbook 'larınızla, runbook oluşturulduğunda (yani, bir hesap oturum açtığında) ve her değiştirildiğinde bağlam nesnesini runbook 'da kaydetmelisiniz ve az cmdlet belirttiğinizde bağlama başvurabilirsiniz.

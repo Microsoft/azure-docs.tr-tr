@@ -77,25 +77,25 @@
     - name: Sık sorulan sorular (SSS)
       items:
         - name: SSS-Kurtarma Hizmetleri kasası
-          href: backup-azure-backup-faq.md
+          href: backup-azure-backup-faq.yml
         - name: SSS-Yedekleme Merkezi
           href: backup-center-faq.yml
         - name: SSS-Azure VM yedeklemesi
           href: backup-azure-vm-backup-faq.yml
         - name: SSS-MARS aracısı
-          href: backup-azure-file-folder-backup-faq.md
+          href: backup-azure-file-folder-backup-faq.yml
         - name: SSS-Azure Dosyalar’ı yedekleme
-          href: backup-azure-files-faq.md
+          href: backup-azure-files-faq.yml
         - name: SSS- Azure Disk Yedekleme
-          href: disk-backup-faq.md
+          href: disk-backup-faq.yml
         - name: SSS-Azure VM’lerindeki SQL Server veritabanlarını yedekleme
-          href: faq-backup-sql-server.md
+          href: faq-backup-sql-server.yml
         - name: SSS-Azure VM’lerindeki SAP HANA veritabanlarını yedekleme
-          href: sap-hana-faq-backup-azure-vm.md
+          href: sap-hana-faq-backup-azure-vm.yml
         - name: SSS-Azure Backup Sunucusu ve DPM
-          href: backup-azure-dpm-azure-server-faq.md
+          href: backup-azure-dpm-azure-server-faq.yml
         - name: SSS - Azure Backup izleme uyarısı
-          href: backup-azure-monitor-alert-faq.md
+          href: backup-azure-monitor-alert-faq.yml
     - name: Backup mimarisi
       href: backup-architecture.md
     - name: Rehberlik ve en iyi deneyimler

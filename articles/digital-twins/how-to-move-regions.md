@@ -8,12 +8,12 @@ ms.date: 08/26/2020
 ms.topic: how-to
 ms.custom: subject-moving-resources
 ms.service: digital-twins
-ms.openlocfilehash: e268cca87479625af023b5970bb27c56721f6d39
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 62db56ac9791cea7d6f1a40f794241ed68fa90fa
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102049857"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107483590"
 ---
 # <a name="move-an-azure-digital-twins-instance-to-a-different-azure-region"></a>Azure dijital TWINS örneğini farklı bir Azure bölgesine taşıma
 
@@ -81,9 +81,13 @@ Bu örnek, tüm bir araç değildir. Yük testi değil, büyük boyuttaki grafik
 
 Azure dijital TWINS Gezgini ile devam etmek için, önce örnek uygulama kodunu indirin ve makinenizde çalışacak şekilde ayarlayın.
 
-Örneği almak için bkz. [Azure Digital TWINS Explorer](/samples/azure-samples/digital-twins-explorer/digital-twins-explorer/). Bu örnek kodun bir. zip dosyasını **Azure_Digital_Twins__ADT__explorer.zip** olarak makinenize ındırmek Için **ZIP indir** düğmesini seçin. Dosyanın sıkıştırmasını açın.
+Örneği almak için [Azure Digital Twins Gezgini](/samples/azure-samples/digital-twins-explorer/digital-twins-explorer/)' ne gidin. Başlığın altındaki **kodu görüntüle** düğmesini seçin, bu, sizi örnek için GitHub deposuna götürür. Örnek olarak indirmek için **kod** düğmesini SEÇIN ve **ZIP 'i indirin** *. ZIP* dosyasını makinenize.
 
-Sonra, Azure Digital TWINS Explorer için izinleri ayarlayın ve yapılandırın. Azure dijital TWINS hızlı başlangıç konusunun [Azure dijital TWINS ve Azure Digital TWINS Explorer 'ı ayarlama](quickstart-adt-explorer.md#set-up-azure-digital-twins-and-azure-digital-twins-explorer) bölümündeki yönergeleri izleyin. Bu bölümde aşağıdaki adımlarda izlenecek yol gösterilmektedir:
+:::image type="content" source="media/how-to-move-regions/download-repo-zip.png" alt-text="GitHub 'da dijital-TWINS-Explorer deposunun ekran görüntüsü. Kod düğmesi seçilidir ve posta Indirme düğmesinin vurgulandığı küçük bir iletişim kutusu oluşturulur." lightbox="media/how-to-move-regions/download-repo-zip.png":::
+
+Dosyanın sıkıştırmasını açın.
+
+Sonra, Azure Digital TWINS Explorer için izinleri ayarlayın ve yapılandırın. Azure dijital TWINS hızlı başlangıç konusunun [Azure dijital TWINS ve Azure Digital TWINS Explorer 'ı ayarlama](quickstart-azure-digital-twins-explorer.md#set-up-azure-digital-twins-and-azure-digital-twins-explorer) bölümündeki yönergeleri izleyin. Bu bölümde aşağıdaki adımlarda izlenecek yol gösterilmektedir:
 
 1. Bir Azure dijital TWINS örneği ayarlayın. Zaten bir örneğiniz olduğundan, bu bölümü atlayabilirsiniz.
 1. Örneğinize erişim sağlamak için yerel Azure kimlik bilgilerini ayarlayın.

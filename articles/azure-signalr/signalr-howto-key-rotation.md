@@ -6,12 +6,12 @@ ms.service: signalr
 ms.topic: conceptual
 ms.date: 03/01/2019
 ms.author: zhshang
-ms.openlocfilehash: 1f80742d48fc46c8c5e337794100ca5901818c88
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: cd03720b65883c5f43b11837d4a88a705209fb10
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102184398"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764108"
 ---
 # <a name="how-to-rotate-access-key-for-azure-signalr-service"></a>Azure SignalR Hizmeti için erişim anahtarını döndürme
 
@@ -35,7 +35,7 @@ Güvenlik nedenleriyle ve uyumluluk gereksinimlerinde, erişim anahtarlarınız�
 
    ![Anahtarları yeniden oluştur](media/signalr-howto-key-rotation/regenerate-keys.png)
 
-Ayrıca [Azure CLI](/cli/azure/signalr/key#az-signalr-key-renew)kullanarak anahtarları yeniden oluşturabilirsiniz.
+Ayrıca [Azure CLI](/cli/azure/signalr/key#az_signalr_key_renew)kullanarak anahtarları yeniden oluşturabilirsiniz.
 
 ## <a name="update-configurations-with-new-connection-strings"></a>Yeni bağlantı dizeleri ile güncelleştirme yapılandırması
 

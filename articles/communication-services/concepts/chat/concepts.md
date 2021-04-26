@@ -9,16 +9,16 @@ ms.author: mikben
 ms.date: 09/30/2020
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: cf500d529eb22cdd333d796f156eedcd284ea20d
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 292f430a1b08d59efdf05405437b3d1aa49ea2b7
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105642320"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168611"
 ---
 # <a name="chat-concepts"></a>Sohbet kavramları 
 
-[!INCLUDE [Public Preview Notice](../../includes/public-preview-include.md)]    
+[!INCLUDE [Public Preview Notice](../../includes/public-preview-include-chat.md)]
 
 Azure Iletişim Hizmetleri sohbeti SDK 'Ları, uygulamalarınıza gerçek zamanlı metin sohbeti eklemek için kullanılabilir. Bu sayfa, önemli sohbet kavramlarını ve yeteneklerini özetler.    
 

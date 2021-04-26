@@ -1,18 +1,52 @@
 ---
 title: Azure Arc etkin sunucu Aracısı bağlantı sorunlarını giderme
 description: Bu makalede, hizmete bağlanmaya çalışırken Azure Arc etkin sunucularıyla oluşan bağlı makine aracısında sorunları gidermeye ve gidermeye nasıl çözüm yapılacağı açıklanır.
-ms.date: 09/02/2020
+ms.date: 04/12/2021
 ms.topic: conceptual
-ms.openlocfilehash: 36feb6a65ec52d99dfd664ae54cb099ea6a7e239
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: ae26b599a72129b5ed7f47d76d10353be5c0e8ac
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "90900673"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107498008"
 ---
-# <a name="troubleshoot-the-connected-machine-agent-connection-issues"></a>Bağlı makine Aracısı bağlantı sorunlarını giderme
+# <a name="troubleshoot-azure-arc-enabled-servers-agent-connection-issues"></a>Azure Arc etkin sunucu Aracısı bağlantı sorunlarını giderme
 
 Bu makalede, Windows veya Linux için bağlı olan Azure Arc özellikli sunucular bağlı makine Aracısı 'nı yapılandırmaya çalışırken oluşabilecek sorunları giderme ve çözme hakkında bilgi verilmektedir. Hizmetle bağlantı yapılandırılırken hem etkileşimli hem de ölçekli yükleme yöntemleri dahildir. Genel bilgiler için bkz. [Arc etkin sunucularına genel bakış](./overview.md).
+
+## <a name="agent-error-codes"></a>Aracı hata kodları
+
+Azure Arc etkin sunucular Aracısı 'nı yapılandırırken bir hata alırsanız aşağıdaki tablo, olası nedeni belirlemenize yardımcı olabilir ve sorunu gidermek için önerilen adımları uygulayın. `AZCM0000`Devam etmek için konsola veya betik çıktısına yazdırılmış ("0000" herhangi bir 4 basamaklı sayı olabilir) hata kodu gerekir.
+
+| Hata kodu | Olası neden | Önerilen düzeltme |
+|------------|----------------|-----------------------|
+| AZCM0000 | Eylem başarılı oldu | Yok |
+| AZCM0001 | Bilinmeyen bir hata oluştu | Daha fazla yardım için Microsoft Desteği başvurun |
+| AZCM0011 | Kullanıcı eylemi iptal etti (CTRL + C) | Önceki komutu yeniden dene |
+| AZCM0012 | Belirtilen erişim belirteci geçersiz | Yeni bir erişim belirteci edinin ve yeniden deneyin |
+| AZCM0013 | Girilen Etiketler geçersiz | Etiketlerin virgülle ayırarak ve boşluklar içeren adların veya değerlerin tek tırnak içine alınmış olduğunu kontrol edin: `--tags "SingleName='Value with spaces',Location=Redmond"`
+| AZCM0014 | Bulut geçersiz | Desteklenen bir bulut belirtin: `AzureCloud` veya `AzureUSGovernment` |
+| AZCM0015 | Belirtilen bağıntı KIMLIĞI geçerli bir GUID değil | İçin geçerli bir GUID belirtin `--correlation-id` |
+| AZCM0016 | Zorunlu bir parametre eksik | Hangi parametrelerin eksik olduğunu belirlemek için çıktıyı gözden geçirin |
+| AZCM0017 | Kaynak adı geçersiz | Yalnızca alfasayısal karakter, kısa çizgi ve/veya alt çizgi kullanan bir ad belirtin. Ad, kısa çizgi veya alt çizgi ile bitemez. |
+| AZCM0018 | Komut yönetici ayrıcalıkları olmadan yürütüldü | Yükseltilmiş bir komut isteminde veya konsol oturumunda komutu yönetici veya kök ayrıcalıklarıyla yeniden deneyin. |
+| AZCM0041 | Sağlanan kimlik bilgileri geçersiz | Cihaz oturum açmaları için, belirtilen kullanıcı hesabının, sunucu kaynağının oluşturulacağı kiracıya ve aboneliğe erişimi olduğunu doğrulayın. Hizmet sorumlusu oturum açmaları için, istemci KIMLIĞINI ve gizli anahtarı doğruluğunu, gizli dizinin sona erme tarihini ve hizmet sorumlunun sunucu kaynağının oluşturulacağı kiracıdan olduğunu denetleyin. |
+| AZCM0042 | Yay etkin sunucu kaynağı oluşturulamadı | Belirtilen kullanıcı/hizmet sorumlusunun belirtilen kaynak grubunda yay özellikli sunucu kaynakları oluşturma erişimi olduğunu doğrulayın. |
+| AZCM0043 | Yay etkin sunucu kaynağını silme başarısız | Belirtilen kullanıcı/hizmet sorumlusunun, belirtilen kaynak grubundaki yay etkin sunucu kaynaklarını silme erişimi olduğunu doğrulayın. Kaynak artık Azure 'da yoksa, `--force-local-only` devam etmek için bayrağını kullanın. |
+| AZCM0044 | Aynı ada sahip bir kaynak zaten var | Parametre için farklı bir ad belirtin `--resource-name` veya Azure 'da var olan yay etkin sunucuyu silip yeniden deneyin. |
+| AZCM0061 | Aracı hizmetine ulaşılamıyor | Komutunu yükseltilmiş bir kullanıcı bağlamında (yönetici/kök) kullandığınızı ve HıMDS hizmetinin sunucunuzda çalıştığını doğrulayın. |
+| AZCM0062 | Sunucu bağlanırken bir hata oluştu | Daha ayrıntılı bilgi için çıkışdaki diğer hata kodlarını gözden geçirin. Azure kaynağı oluşturulduktan sonra hata oluştuysa, yeniden denemeden önce yay sunucusunu kaynak grupınızdan silmeniz gerekir. |
+| AZCM0063 | Sunucunun bağlantısı kesilirken bir hata oluştu | Daha ayrıntılı bilgi için çıkışdaki diğer hata kodlarını gözden geçirin. Bu hatayla karşılaşmaya devam ederseniz, kaynağı Azure 'da silebilir ve sonra `azcmagent disconnect --force-local-only` aracının bağlantısını kesmek için sunucuda çalıştırabilirsiniz. |
+| AZCM0064 | Aracı hizmeti yanıt vermiyor | `himds`Çalıştığından emin olmak için hizmetin durumunu denetleyin. Çalışmıyorsa hizmeti başlatın. Çalışıyorsa bir dakika bekleyip yeniden deneyin. |
+| AZCM0065 | Bir iç aracı iletişim hatası oluştu | Yardım için Microsoft Desteği başvurun |
+| AZCM0066 | Aracı Web hizmeti yanıt vermiyor veya kullanılamıyor | Yardım için Microsoft Desteği başvurun |
+| AZCM0067 | Aracı zaten Azure 'a bağlı | [Aracının bağlantısını kesme](manage-agent.md#unregister-machine) bölümündeki adımları izleyin ve sonra yeniden deneyin. |
+| AZCM0068 | Sunucunun Azure bağlantısı kesilirken bir iç hata oluştu | Yardım için Microsoft Desteği başvurun |
+| AZCM0081 | Azure Active Directory yönetilen kimlik sertifikası indirilirken bir hata oluştu | Sunucuyu Azure 'a bağlamaya çalışırken bu iletiyle karşılaşılırsa, aracı Azure Arc hizmeti ile iletişim kuramaz. Kaynağı Azure 'da silip yeniden bağlanmayı deneyin. |
+| AZCM0101 | Komut başarıyla ayrıştırılamadı | `azcmagent <command> --help`Doğru komut sözdizimini gözden geçirmek için komutunu çalıştırın |
+| AZCM0102 | Bilgisayar ana bilgisayar adı alınamıyor | `hostname`Sistem düzeyindeki hata iletilerini denetlemek için öğesini çalıştırın, sonra Microsoft desteği başvurun. |
+| AZCM0103 | RSA anahtarları üretilirken bir hata oluştu | Yardım için Microsoft Desteği başvurun |
+| AZCM0104 | Sistem bilgileri okunamadı | Çalıştırmak için kullanılan kimliğin `azcmagent` sistemde yönetici/kök ayrıcalıklarına sahip olduğundan emin olun ve yeniden deneyin. |
 
 ## <a name="agent-verbose-log"></a>Aracı ayrıntılı günlüğü
 

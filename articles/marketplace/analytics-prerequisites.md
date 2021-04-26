@@ -7,12 +7,12 @@ ms.topic: article
 author: sayantanroy83
 ms.author: sroy
 ms.date: 3/08/2021
-ms.openlocfilehash: 1cdd3dba8203ce9e8daeaa963f1722389d89d19d
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: b61608c0cb53ab808c5d3d789ec5ddc318c6923d
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563829"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107106811"
 ---
 # <a name="prerequisites-to-programmatically-access-analytics-data"></a>Analiz verilerine programlı olarak erişim önkoşulları
 
@@ -20,7 +20,7 @@ Ticari Market Analytics verilerine programlı bir şekilde erişebilmeniz için 
 
 ## <a name="commercial-marketplace-enrollment"></a>Ticari Market kaydı
 
-Ticari Market Analytics verilerine programlı bir şekilde erişmek için ticari Market programına kaydolduktan ve bir Iş Ortağı Merkezi hesabına sahip olmanız gerekir. Nasıl yapılacağını öğrenmek için bkz. [Iş Ortağı Merkezi 'nde ticari Market hesabı oluşturma](./partner-center-portal/create-account.md).
+Ticari Market Analytics verilerine programlı bir şekilde erişmek için ticari Market programına kaydolduktan ve bir Iş Ortağı Merkezi hesabına sahip olmanız gerekir. Nasıl yapılacağını öğrenmek için bkz. [Iş Ortağı Merkezi 'nde ticari Market hesabı oluşturma](create-account.md).
 
 ## <a name="create-azure-active-directory-application"></a>Azure Active Directory uygulaması oluşturma
 

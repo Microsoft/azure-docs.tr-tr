@@ -4,12 +4,12 @@ description: Bkz. Azure Kubernetes hizmeti (AKS) ile yatay Pod otomatik Scaler, 
 services: container-service
 ms.topic: conceptual
 ms.date: 02/28/2019
-ms.openlocfilehash: b72ed7cefc6a16eb484e1337dbd64e5f069a2201
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f6d2121403361c4225a7e0e64411875d83d93194
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94686047"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107305744"
 ---
 # <a name="scaling-options-for-applications-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) uygulamaları için ölçeklendirme seçenekleri
 
@@ -26,7 +26,7 @@ Bu makalede, AKS 'teki uygulamaları ölçeklendirmenize yardımcı olan temel k
 
 Uygulamanızın kullanılabilir kaynaklardaki ve durumdaki bir değişikliğe nasıl yanıt vereceğini test etmek için çoğaltmaları (pods) ve düğümleri el ile ölçekleyebilirsiniz. Kaynakları el ile ölçeklendirirken, düğüm sayısı gibi sabit bir maliyeti korumak için kullanılacak bir miktar kaynak kümesi tanımlamanızı da sağlar. El ile ölçeklendirmek için çoğaltma veya düğüm sayısını tanımlarsınız. Kubernetes API 'SI daha sonra bu çoğaltma veya düğüm sayısına bağlı olarak ek düğüm veya boşaltma düğümleri oluşturmayı zamanlar.
 
-Düğüm ölçeğini ölçeklendirirken, Kubernetes API 'SI, kümeniz tarafından kullanılan işlem türüne bağlı olan ilgili Azure Işlem API 'sini çağırır. Örneğin, VM Ölçek kümelerinde oluşturulan kümeler için, hangi düğümlerin kaldırılacağını seçme mantığı VM Ölçek Kümeleri API 'SI tarafından belirlenir. Düğümlerin ölçek azaltma sırasında kaldırılması için nasıl seçildiği hakkında daha fazla bilgi edinmek için bkz. [VMSS SSS](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.md#if-i-reduce-my-scale-set-capacity-from-20-to-15-which-vms-are-removed).
+Düğüm ölçeğini ölçeklendirirken, Kubernetes API 'SI, kümeniz tarafından kullanılan işlem türüne bağlı olan ilgili Azure Işlem API 'sini çağırır. Örneğin, VM Ölçek kümelerinde oluşturulan kümeler için, hangi düğümlerin kaldırılacağını seçme mantığı VM Ölçek Kümeleri API 'SI tarafından belirlenir. Düğümlerin ölçek azaltma sırasında kaldırılması için nasıl seçildiği hakkında daha fazla bilgi edinmek için bkz. [VMSS SSS](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.yml#if-i-reduce-my-scale-set-capacity-from-20-to-15--which-vms-are-removed-).
 
 Pod 'leri ve düğümleri el ile ölçeklendirmeye başlamak için bkz. [aks 'teki Uygulamaları ölçeklendirme][aks-scale].
 

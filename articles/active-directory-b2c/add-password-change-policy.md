@@ -12,12 +12,12 @@ ms.date: 03/22/2021
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 21da8f79772d9648836bedec89cb5d7014486dc6
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: cd63144074577d4ff3564da41e672dd1ca226dcb
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104798368"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257169"
 ---
 # <a name="configure-password-change-using-custom-policies-in-azure-active-directory-b2c"></a>Azure Active Directory B2C özel ilkeleri kullanarak parola değişikliğini yapılandırma
 
@@ -43,7 +43,7 @@ Azure Active Directory B2C (Azure AD B2C) ' de, bir yerel hesapla oturum açan k
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Active Directory B2C özel ilkeleri kullanmaya başlama](custom-policy-get-started.md)bölümündeki adımları uygulayın.
+* [Active Directory B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)bölümündeki adımları uygulayın.
 * Henüz yapmadıysanız, [bir Web uygulamasını Azure Active Directory B2C kaydedin](tutorial-register-applications.md).
 
 ## <a name="add-the-elements"></a>Öğeleri ekleyin

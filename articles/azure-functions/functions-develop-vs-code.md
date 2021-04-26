@@ -4,12 +4,12 @@ description: Visual Studio Code için Azure Işlevleri uzantısını kullanarak 
 ms.topic: conceptual
 ms.custom: devx-track-csharp
 ms.date: 08/21/2019
-ms.openlocfilehash: d4353e6be313d61716933879efa930e22472781b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: c2869b2b30722495523a9f0dfb2d70a17a205854
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99493964"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107871282"
 ---
 # <a name="develop-azure-functions-by-using-visual-studio-code"></a>Visual Studio Code kullanarak Azure İşlevleri geliştirme
 
@@ -85,7 +85,7 @@ Bu önkoşulların yalnızca [işlevlerinizi yerel olarak çalıştırmak ve hat
 
 + [PowerShell 7](/powershell/scripting/install/installing-powershell-core-on-windows) önerilir. Sürüm bilgileri için bkz. [PowerShell sürümleri](functions-reference-powershell.md#powershell-versions).
 
-+ Hem [.net core 3,1 çalışma zamanı](https://www.microsoft.com/net/download) hem de [.NET Core 2,1 çalışma zamanı](https://dotnet.microsoft.com/download/dotnet-core/2.1)  
++ Hem [.net core 3,1 çalışma zamanı](https://dotnet.microsoft.com/download) hem de [.NET Core 2,1 çalışma zamanı](https://dotnet.microsoft.com/download/dotnet/2.1)  
 
 + [Visual Studio Code Için PowerShell uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell).  
 

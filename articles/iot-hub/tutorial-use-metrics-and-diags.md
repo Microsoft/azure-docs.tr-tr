@@ -12,12 +12,12 @@ ms.custom:
 - mqtt
 - devx-track-azurecli
 - devx-track-csharp
-ms.openlocfilehash: 1e2983fb50ce3ad1482db85025677cba5fee0c2e
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.openlocfilehash: 96a9f7c50f3e30d86497c7a612ddda248db3f703
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104889606"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865702"
 ---
 # <a name="tutorial-set-up-and-use-metrics-and-logs-with-an-iot-hub"></a>Öğretici: IoT Hub ile ölçümleri ve günlükleri ayarlama ve kullanma
 
@@ -44,7 +44,7 @@ Bu öğreticide, aşağıdaki görevleri gerçekleştireceksiniz:
 
 - Azure aboneliği. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
-- Geliştirme makinenizde .NET Core SDK 2,1 veya üzeri bir sürümü gerekir. [.NET](https://www.microsoft.com/net/download/all)’ten birden fazla platform için .NET Core SDK’sını indirebilirsiniz.
+- Geliştirme makinenizde .NET Core SDK 2,1 veya üzeri bir sürümü gerekir. [.NET](https://dotnet.microsoft.com/download)’ten birden fazla platform için .NET Core SDK’sını indirebilirsiniz.
 
   Aşağıdaki komutu kullanarak geliştirme makinenizde geçerli C# sürümünü doğrulayabilirsiniz:
 
@@ -409,7 +409,7 @@ Microsoft Azure 'den e-postalar için gelen kutunuzu denetleyin. Konu satırınd
 
 Bu öğreticide oluşturduğunuz tüm kaynakları kaldırmak için kaynak grubunu silin. Bu eylem grubun içerdiği tüm kaynakları siler. Bu durumda, IoT Hub 'ı, Log Analytics çalışma alanını ve kaynak grubunun kendisini kaldırır. Panoya sabitlenmiş ölçüm grafikleri varsa, her grafiğin sağ üst köşesindeki üç noktaya tıklayarak ve **Kaldır**' ı seçerek bunları el ile kaldırmanız gerekir. Grafikleri sildikten sonra değişikliklerinizi kaydettiğinizden emin olun.
 
-Kaynak grubunu kaldırmak için [az group delete](/cli/azure/group#az-group-delete) komutunu kullanın.
+Kaynak grubunu kaldırmak için [az group delete](/cli/azure/group#az_group_delete) komutunu kullanın.
 
 ```azurecli-interactive
 az group delete --name ContosoResources

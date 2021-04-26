@@ -9,12 +9,12 @@ ms.service: azure-maps
 services: azure-maps
 manager: cpendle
 ms.custom: ''
-ms.openlocfilehash: 04bbb0465f26e82d247c53e7393c4476b9d36fde
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d2b80dfa091d6a2b892c8baf8e9c35084c5bee4e
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100386858"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076397"
 ---
 # <a name="tutorial-migrate-web-service-from-google-maps"></a>Öğretici: Google Maps 'tan Web hizmeti geçirme
 
@@ -46,11 +46,11 @@ Tablo, listelenen Google Maps hizmeti API 'Lerinde benzer işlevlere sahip Azure
 | Coğrafi Kodlama               | [Ara](/rest/api/maps/search)                                   |                         
 | Konum arama           | [Ara](/rest/api/maps/search)                                   |                         
 | Otomatik tamamlamayı yerleştir      | [Ara](/rest/api/maps/search)                                   |                         
-| Yola yasla            | Bkz. [rotaları ve yönleri hesaplama](#calculate-routes-and-directions) bölümü.            
-| Hız sınırları            | Bkz. [bir koordinat Için ters coğrafi kod](#reverse-geocode-a-coordinate) bölümü.                  
+| Yola yasla            | Bkz. [rotaları ve yönleri hesaplama](#calculate-routes-and-directions) bölümü.  |        
+| Hız sınırları            | Bkz. [bir koordinat Için ters coğrafi kod](#reverse-geocode-a-coordinate) bölümü.         |         
 | Statik eşleme              | [İşleme](/rest/api/maps/render/getmapimage)                       |                         
 | Saat Dilimi               | [Saat dilimi](/rest/api/maps/timezone)                              |                         
-| Nedeniyle               | [Yükseltme (Önizleme)](/rest/api/maps/elevation)                   |                         |
+| Nedeniyle               | [Yükseltme (Önizleme)](/rest/api/maps/elevation)                   | 
 
 Aşağıdaki hizmet API 'Leri Şu anda Azure haritalar 'da kullanılabilir değildir:
 

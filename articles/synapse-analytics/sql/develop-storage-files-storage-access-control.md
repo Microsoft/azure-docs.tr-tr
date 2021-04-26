@@ -9,12 +9,12 @@ ms.subservice: sql
 ms.date: 06/11/2020
 ms.author: fipopovi
 ms.reviewer: jrasnick
-ms.openlocfilehash: 545331fdea56aef3d7b9dac8062d4fc2d6891254
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 266a6c27261107b883fdc0c1cdd274e6345de6db
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102501591"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107483461"
 ---
 # <a name="control-storage-account-access-for-serverless-sql-pool-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te sunucusuz SQL havuzu için depolama hesabı erişimini denetleme
 
@@ -23,6 +23,13 @@ Sunucusuz bir SQL havuzu sorgusu, dosyaları doğrudan Azure Storage 'dan okur. 
 - **SQL hizmet düzeyi** -Kullanıcı [dış tablo](develop-tables-external-tables.md) kullanarak verileri okuma veya işlevi yürütme izni vermiş olmalıdır `OPENROWSET` . [Bu bölümde gerekli izinler](develop-storage-files-overview.md#permissions)hakkında daha fazla bilgi edinin.
 
 Bu makalede, kullanabileceğiniz kimlik bilgileri türleri ve SQL ve Azure AD kullanıcıları için kimlik bilgileri aramasının nasıl yapılacağı açıklanır.
+
+## <a name="storage-permissions"></a>Depolama izinleri
+
+SYNAPSE Analytics çalışma alanındaki sunucusuz bir SQL havuzu Azure Data Lake depolama alanında depolanan dosyaların içeriğini okuyabilir. Bir SQL sorgusunu yürüten bir kullanıcının dosyaları okumasını sağlamak için depolama izinlerini yapılandırmanız gerekir. Dosyalara erişimi etkinleştirmek için üç yöntem vardır>
+- **[Rol tabanlı erişim denetimi (RBAC)](../../role-based-access-control/overview.md)** , depolama alanının yerleştirildiği kiracıda BIR Azure AD kullanıcısına bir rol atamanızı sağlar. RBAC rolleri, Azure AD kullanıcılarına atanabilir. Okuyucu `Storage Blob Data Reader` , `Storage Blob Data Contributor` veya rolüne sahip olmalıdır `Storage Blob Data Owner` . Azure Storage 'da veri yazan bir kullanıcının `Storage Blob Data Writer` veya `Storage Blob Data Owner` rolü olmalıdır. `Storage Owner`Rolün bir kullanıcının de olduğunu göstermez `Storage Data Owner` .
+- **Access Control listeleri (ACL)** , Azure depolama 'daki dosya ve dizinlerde hassas izin modeli tanımlamanızı sağlar. ACL, Azure AD kullanıcılarına atanabilir. Okuyucular Azure Storage 'daki bir yoldaki dosyayı okumak istiyorlarsa, dosya yolundaki her klasör üzerinde Execute (X) ACL 'SI olmalıdır ve dosyadaki (R) ACL 'yi okur. [Depolama katmanında ACL izinleri ayarlama hakkında daha fazla bilgi edinin](../../storage/blobs/data-lake-storage-access-control.md#how-to-set-acls)
+- **Paylaşılan erişim imzası (SAS)** , bir okuyucunun zaman sınırlı belirteci kullanarak Azure Data Lake depolama üzerindeki dosyalara erişmesine olanak sağlar. Okuyucunun kimlik doğrulamasının Azure AD kullanıcısı olarak da olması gerekmez. SAS belirteci, okuyucuya verilen izinleri ve belirtecin geçerli olduğu süreyi içerir. SAS belirteci, aynı Azure AD kiracısında olması gerekmeyen tüm kullanıcılara zaman kısıtlı erişim için iyi bir seçimdir. SAS belirteci, depolama hesabında veya belirli dizinlerde tanımlanabilir. [Paylaşılan erişim imzalarını kullanarak Azure depolama kaynaklarına sınırlı erişim verme](../../storage/common/storage-sas-overview.md)hakkında daha fazla bilgi edinin.
 
 ## <a name="supported-storage-authorization-types"></a>Desteklenen depolama yetkilendirme türleri
 
@@ -36,11 +43,11 @@ Sunucusuz SQL havuzunda oturum açan bir kullanıcının, dosyalar herkese açı
 "Azure AD geçişi" olarak da bilinen **Kullanıcı kimliği**, veri erişimini yetkilendirmek için SUNUCUSUZ SQL havuzunda oturum açan Azure AD kullanıcısının kimliğinin kullanıldığı bir yetkilendirme türüdür. Verilere erişmeden önce Azure depolama yöneticisinin Azure AD kullanıcısına izin vermesi gerekir. Aşağıdaki tabloda gösterildiği gibi, SQL kullanıcı türü için de desteklenmez.
 
 > [!IMPORTANT]
-> Verilerinize erişmek için kimliğinizi kullanabilmeniz için bir Depolama Blobu veri sahibi/katkıda bulunan/okuyucu rolüne sahip olmanız gerekir.
-> Bir depolama hesabının sahibi olsanız bile, yine de Depolama Blobu veri rollerinden birine eklemeniz gerekir.
->
-> Azure Data Lake Store Gen2 ' de erişim denetimi hakkında daha fazla bilgi edinmek için [Azure Data Lake Storage 2. makalesinde erişim denetimini](../../storage/blobs/data-lake-storage-access-control.md) gözden geçirin.
->
+> AAD kimlik doğrulama belirteci, istemci uygulamaları tarafından önbelleğe alınmış olabilir. Örneğin, PowerBI tarafından AAD belirteci önbelleğe alınır ve aynı belirteci bir saat için yeniden kullanır. Sorgu yürütmenin ortasında belirtecin süresi dolarsa uzun süren sorgular başarısız olabilir. Sorgunun ortasında süresi dolan AAD erişim belirtecinin neden olduğu sorgu hatalarıyla karşılaşıyorsanız, [yönetilen kimliğe](develop-storage-files-storage-access-control.md?tabs=managed-identity#supported-storage-authorization-types) veya [paylaşılan erişim imzasına](develop-storage-files-storage-access-control.md?tabs=shared-access-signature#supported-storage-authorization-types)geçmeyi düşünün.
+
+Verilerinize erişmek için kimliğinizi kullanabilmeniz için bir Depolama Blobu veri sahibi/katkıda bulunan/okuyucu rolüne sahip olmanız gerekir. Alternatif olarak, dosyalara ve klasörlere erişmek için hassas ACL kuralları belirtebilirsiniz. Bir depolama hesabının sahibi olsanız bile, yine de Depolama Blobu veri rollerinden birine eklemeniz gerekir.
+Azure Data Lake Store Gen2 ' de erişim denetimi hakkında daha fazla bilgi edinmek için [Azure Data Lake Storage 2. makalesinde erişim denetimini](../../storage/blobs/data-lake-storage-access-control.md) gözden geçirin.
+
 
 ### <a name="shared-access-signature"></a>[Paylaşılan erişim imzası](#tab/shared-access-signature)
 
@@ -54,6 +61,10 @@ Sunucusuz SQL havuzunda oturum açan bir kullanıcının, dosyalar herkese açı
 > SAS belirteci:? ZF = 2018-03-28&SS = bfqt&SRT = SCO&SP = rwdlacup&se = 2019-04-18T20:42:12Z&St = 2019-04-18T12:42:12Z&spr = https&SIG = lQHczNvrk1KoYLCpFdSsMANd0ef9BrIPBNJ3VYEIq78% 3D
 
 Bir SAS belirteci kullanarak erişimi etkinleştirmek için, veritabanı kapsamlı veya sunucu kapsamlı kimlik bilgisi oluşturmanız gerekir 
+
+
+> [!IMPORTANT]
+> SAS belirteci ile özel depolama hesaplarına erişemezsiniz. Korumalı depolamaya erişmek için [yönetilen kimliğe](develop-storage-files-storage-access-control.md?tabs=managed-identity#supported-storage-authorization-types) veya [Azure AD geçişli](develop-storage-files-storage-access-control.md?tabs=user-identity#supported-storage-authorization-types) kimlik doğrulamasına geçmeyi düşünün.
 
 ### <a name="managed-identity"></a>[Yönetilen Kimlik](#tab/managed-identity)
 
@@ -75,7 +86,7 @@ Aşağıdaki tabloda kullanılabilir yetkilendirme türlerini bulabilirsiniz:
 | ------------------------------------- | ------------- | -----------    |
 | [Kullanıcı kimliği](?tabs=user-identity#supported-storage-authorization-types)       | Desteklenmez | Desteklenir      |
 | [SAS](?tabs=shared-access-signature#supported-storage-authorization-types)       | Desteklenir     | Desteklenir      |
-| [Yönetilen Kimlik](?tabs=managed-identity#supported-storage-authorization-types) | Desteklenmez | Desteklenir      |
+| [Yönetilen Kimlik](?tabs=managed-identity#supported-storage-authorization-types) | Desteklenir | Desteklenir      |
 
 ### <a name="supported-storages-and-authorization-types"></a>Desteklenen depolama alanları ve yetkilendirme türleri
 
@@ -99,7 +110,16 @@ Güvenlik duvarıyla korunan depolamaya erişirken **Kullanıcı kimliğini** ve
 
 #### <a name="user-identity"></a>Kullanıcı kimliği
 
-Kullanıcı kimliği aracılığıyla güvenlik duvarıyla korunan depolamaya erişmek için az. Storage PowerShell modülünü kullanabilirsiniz.
+Kullanıcı kimliği aracılığıyla güvenlik duvarıyla korunan depolamaya erişmek için, Azure portal Kullanıcı arabirimi veya PowerShell modülü az. Storage ' u kullanabilirsiniz.
+#### <a name="configuration-via-azure-portal"></a>Azure portal aracılığıyla yapılandırma
+
+1. Azure portal 'de depolama hesabınızı arayın.
+1. Bölüm ayarları altındaki Ağ ' a gidin.
+1. "Kaynak örnekleri" bölümünde, SYNAPSE çalışma alanınız için bir özel durum ekleyin.
+1. Kaynak türü olarak Microsoft. SYNAPSE/çalışma alanlarını seçin.
+1. Örnek adı olarak çalışma alanınızın adını seçin.
+1. Kaydet’e tıklayın.
+
 #### <a name="configuration-via-powershell"></a>PowerShell aracılığıyla yapılandırma
 
 Depolama hesabı güvenlik duvarını yapılandırmak ve SYNAPSE çalışma alanı için bir özel durum eklemek için aşağıdaki adımları izleyin.

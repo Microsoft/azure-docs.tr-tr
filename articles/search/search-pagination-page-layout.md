@@ -7,13 +7,13 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 12/09/2020
-ms.openlocfilehash: a7171d656ec9f839aea4ae73763ec6ebd20c2bb3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/06/2021
+ms.openlocfilehash: 92db62622c37241a76d7847931df030162de8f00
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98209840"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504235"
 ---
 # <a name="how-to-work-with-search-results-in-azure-cognitive-search"></a>Azure Bilişsel Arama arama sonuçlarıyla çalışma
 
@@ -95,7 +95,7 @@ Tam metin arama sorguları için, sonuçlar, bir arama puanı tarafından otomat
 
 Arama puanları, aynı sonuç kümesindeki diğer belgelere göre eşleşme gücünü yansıtan genel ilgi açısından önemli bir fikir elde ediyor. Ancak puanlar bir sorgudan sonrakine her zaman tutarlı değildir, bu nedenle sorgularla çalışırken arama belgelerinin nasıl sıralandığına ilişkin küçük tutarsızlıklar fark edebilirsiniz. Bunun neden olabileceği hakkında birkaç açıklamalar vardır.
 
-| Nedeni | Description |
+| Nedeni | Açıklama |
 |-----------|-------------|
 | Veri Vola | Belge eklerken, değiştirirken veya silerken Dizin içeriği farklılık gösterir. Dizin güncelleştirmeleri zaman içinde işlenirken, eşleşen belgelerin arama puanlarını etkileyen terim frekansları değişir. |
 | Birden çok çoğaltma | Birden çok çoğaltma kullanan hizmetler için sorgular her bir çoğaltmaya paralel olarak verilir. Bir arama Puanını hesaplamak için kullanılan dizin istatistikleri çoğaltma temelinde hesaplanır, sonuçlar birleştirilir ve sorgu yanıtında sıralanır. Çoğaltmalar genellikle birbirleriyle yansıtılıyordur, ancak durum bakımından küçük farklılıklar nedeniyle istatistikler farklılık gösterebilir. Örneğin, bir çoğaltma, diğer çoğaltmalardan birleştirilmiş olan, istatistiklere katkıda bulunan belgeleri silmiş olabilir. Genellikle, çoğaltma başına istatistikteki farklılıklar daha küçük dizinlerde daha belirgin olur. |
@@ -137,12 +137,16 @@ POST /indexes/hotels-sample-index/docs/search?api-version=2020-06-30
 
 Yeni davranışla:
 
-* Yalnızca tam tümcecik sorgusuyla eşleşen ifadeler döndürülür. "Super una" sorgusu şöyle sonuç verecektir:
++ Yalnızca tam tümcecik sorgusuyla eşleşen ifadeler döndürülür. "Super una" sorgu tümceciği şuna benzer vurgular döndürecek:
 
-    ```html
-    '<em>super bowl</em> is super awesome with a bowl of chips'
-    ```
-  *Yongalar* teriminin, tam tümcecikle eşleşmediğinden hiçbir vurgulamaya sahip olmadığını unutmayın.
+  ```json
+  "@search.highlights": {
+      "sentence": [
+          "The <em>super</em> <em>bowl</em> is super awesome with a bowl of chips"
+     ]
+  ```
+
+  Bu örnekler tam tümcecikle eşleşmediğinden diğer *süper* *ve o* örneklerinin vurgulanmadığını unutmayın.
 
 İsabet vurgulama uygulayan istemci kodu yazarken, bu değişikliği unutmayın. Tamamen yeni bir arama hizmeti oluşturmadığınız takdirde bunu etkilemeyecektir.
 

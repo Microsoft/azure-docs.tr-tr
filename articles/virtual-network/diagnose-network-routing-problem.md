@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/30/2018
 ms.author: kumud
-ms.openlocfilehash: 1c23244707179e05c63ed44b5915e58eefd3f4a3
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f84b74b054a073f2c1ae5ba2ac7d0d0a968367c6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "84705058"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767682"
 ---
 # <a name="diagnose-a-virtual-machine-routing-problem"></a>Bir sanal makine yönlendirme sorununu tanılama
 
@@ -87,7 +87,7 @@ NetworkInterfaces
 
 [Azure Cloud Shell](https://shell.azure.com/bash)izleyen komutları veya CLI 'yi bilgisayarınızdan çalıştırarak çalıştırabilirsiniz. Bu makale, Azure CLı sürüm 2.0.32 veya üstünü gerektirir. Yüklü sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme](/cli/azure/install-azure-cli). Azure CLı 'yi yerel olarak çalıştırıyorsanız, Ayrıca, `az login` [gerekli izinlere](virtual-network-network-interface.md#permissions)sahip bir hesapla Azure 'da çalıştırmanız ve oturum açmanız gerekir.
 
-[Az Network Nic Show-geçerli-Route-Table](/cli/azure/network/nic#az-network-nic-show-effective-route-table)ile bir ağ arabirimi için geçerli yolları alın. Aşağıdaki örnek, *Myresourcegroup* adlı bir kaynak grubunda bulunan *myVMNic1* adlı bir ağ arabirimi için geçerli yolları alır:
+[Az Network Nic Show-geçerli-Route-Table](/cli/azure/network/nic#az_network_nic_show_effective_route_table)ile bir ağ arabirimi için geçerli yolları alın. Aşağıdaki örnek, *Myresourcegroup* adlı bir kaynak grubunda bulunan *myVMNic1* adlı bir ağ arabirimi için geçerli yolları alır:
 
 ```azurecli-interactive
 az network nic show-effective-route-table \

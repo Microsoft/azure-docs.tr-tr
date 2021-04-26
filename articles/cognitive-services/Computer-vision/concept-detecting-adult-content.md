@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 10/01/2019
 ms.author: pafarley
 ms.custom: seodec18
-ms.openlocfilehash: 5d5961ecae2fbc154ae6f1acd74df2bb74024fa1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ceef604fe07a11be89376e26c6fecc49298ebacf
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96532627"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778868"
 ---
 # <a name="detect-adult-content"></a>Yetişkin içeriğini algıla
 
@@ -35,6 +35,6 @@ Görüntü İşleme, geliştiricilerin bu görüntülerin yazılımda görüntü
 
 ## <a name="use-the-api"></a>API’yi kullanma
 
-[Görüntü analizi](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/56f91f2e778daf14a499f21b) API 'siyle yetişkinlere yönelik içeriği algılayabilirsiniz. Değerini `Adult` **visualfeatures** sorgu parametresine eklediğinizde, API üç Boole özelliği, &mdash; `isAdultContent` `isRacyContent` ve `isGoryContent` &mdash; JSON yanıtında döndürür. Yöntemi ayrıca karşılık gelen özellikleri döndürür &mdash; `adultScore` `racyScore` ve ilgili `goreScore` &mdash; her kategori için sıfır ile bir arasındaki güven puanlarını temsil eder.
+[Görüntü analizi](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-ga/operations/56f91f2e778daf14a499f21b) API 'siyle yetişkinlere yönelik içeriği algılayabilirsiniz. Değerini `Adult` **visualfeatures** sorgu parametresine eklediğinizde, API üç Boole özelliği, &mdash; `isAdultContent` `isRacyContent` ve `isGoryContent` &mdash; JSON yanıtında döndürür. Yöntemi ayrıca karşılık gelen özellikleri döndürür &mdash; `adultScore` `racyScore` ve ilgili `goreScore` &mdash; her kategori için sıfır ile bir arasındaki güven puanlarını temsil eder.
 
 - [Hızlı başlangıç: Görüntü İşleme REST API veya istemci kitaplıkları](./quickstarts-sdk/client-library.md?pivots=programming-language-csharp)

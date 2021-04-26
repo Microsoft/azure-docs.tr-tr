@@ -2,21 +2,21 @@
 title: Azure Active Directory uygulamasına uygulama geçirme kaynakları | Microsoft Docs
 description: Uygulama erişimini ve kimlik doğrulamasını Azure Active Directory (Azure AD) ile geçirmenize yardımcı olacak kaynaklar.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: how-to
 ms.workload: identity
 ms.date: 02/29/2020
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: baselden
-ms.openlocfilehash: ac7e273ebcc4cf541bd94bf7e7fad05802db8d0b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2d01c174bbfa522700773b87737b1e3da2de422e
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99258312"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376656"
 ---
 # <a name="resources-for-migrating-applications-to-azure-active-directory"></a>Uygulamaları Azure Active Directory’ye geçirmeye yönelik kaynaklar
 

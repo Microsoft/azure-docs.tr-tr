@@ -11,12 +11,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 10/29/2020
-ms.openlocfilehash: 2412d3d2851d1b4d251b50ff3068b7dcafcccee8
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: eddcab2c0a34ef437e4f2f1e2203fee9065133a4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105642044"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781892"
 ---
 # <a name="quickstart-import-a-bacpac-file-to-a-database-in-azure-sql-database-or-azure-sql-managed-instance"></a>Hızlı başlangıç: BACPAC dosyasını Azure SQL veritabanı veya Azure SQL yönetilen örneği 'nde bir veritabanına aktarma
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -128,7 +128,7 @@ $importStatus
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure 'a bir veritabanı içeri aktarma isteği göndermek için [az-SQL-DB-Import](/cli/azure/sql/db#az-sql-db-import) komutunu kullanın. Veritabanı boyutuna bağlı olarak, almanın tamamlanması biraz zaman alabilir. DTU tabanlı sağlama modeli, her katman için seçim veritabanı en yüksek boyut değerlerini destekler. Bir veritabanını içeri aktarırken [Bu desteklenen değerlerden birini kullanın](/sql/t-sql/statements/create-database-transact-sql). 
+Azure 'a bir veritabanı içeri aktarma isteği göndermek için [az-SQL-DB-Import](/cli/azure/sql/db#az_sql_db_import) komutunu kullanın. Veritabanı boyutuna bağlı olarak, almanın tamamlanması biraz zaman alabilir. DTU tabanlı sağlama modeli, her katman için seçim veritabanı en yüksek boyut değerlerini destekler. Bir veritabanını içeri aktarırken [Bu desteklenen değerlerden birini kullanın](/sql/t-sql/statements/create-database-transact-sql). 
 
 ```azurecli
 # get the storage account key

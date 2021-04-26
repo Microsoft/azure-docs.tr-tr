@@ -5,12 +5,12 @@ ms.assetid: c9da27b2-47d4-4c33-a3cb-1819955ee43b
 ms.topic: article
 ms.date: 09/17/2019
 ms.custom: devx-track-csharp, seodec18
-ms.openlocfilehash: 03ef2110af2d9e642019c2b07b53fae3e32b1ea6
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: ffff4215ddbe3f01da927cb47fb4e06f4946a207
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104950187"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833859"
 ---
 # <a name="enable-diagnostics-logging-for-apps-in-azure-app-service"></a>Azure App Service uygulamalar için tanılama günlüğünü etkinleştirme
 ## <a name="overview"></a>Genel Bakış
@@ -23,7 +23,7 @@ Bu makalede tanılama günlükleri ile çalışmak için [Azure Portal](https://
 >
 >
 
-|Tür|Platform|Konum|Açıklama|
+|Tür|Platform|Konum|Description|
 |-|-|-|-|
 | Uygulama günlüğüne kaydetme | Windows, Linux | App Service dosya sistemi ve/veya Azure depolama Blobları | Uygulama kodunuz tarafından oluşturulan iletileri günlüğe kaydeder. İletiler seçtiğiniz Web çerçevesi tarafından veya Dilinizdeki standart günlük modelini kullanarak doğrudan uygulama kodunuzda oluşturulabilir. Her ileti şu kategorilerden birine atanır: **kritik**, **hata**, **Uyarı**, **bilgi**, **hata ayıklama** ve **izleme**. Uygulama günlüğünü etkinleştirdiğinizde önem düzeyini ayarlayarak günlüğün ne kadar ayrıntılı olmasını istediğinizi seçebilirsiniz.|
 | Web sunucusu günlüğü| Windows | App Service dosya sistemi veya Azure depolama Blobları| [W3C Genişletilmiş günlük dosyası biçimindeki](/windows/desktop/Http/w3c-logging)ham http istek verileri. Her günlük iletisi HTTP yöntemi, kaynak URI, istemci IP, istemci bağlantı noktası, Kullanıcı Aracısı, yanıt kodu vb. gibi verileri içerir. |
@@ -164,7 +164,7 @@ Linux/kapsayıcı uygulamaları için, ZIP dosyası hem Docker konağının hem 
 
 Windows uygulamaları için, ZIP dosyası App Service dosya sistemindeki *D:\home\logfiles* dizininin içeriğini içerir. Aşağıdaki yapıya sahiptir:
 
-| Günlük türü | Dizin | Açıklama |
+| Günlük türü | Dizin | Description |
 |-|-|-|
 | **Uygulama günlükleri** |*/LogFiles/Application/* | Bir veya daha fazla metin dosyası içeriyor. Günlük iletilerinin biçimi kullandığınız günlük sağlayıcısına bağlıdır. |
 | **Başarısız Istek Izlemeleri** | */LogFiles/W3SVC # # # # # # # # #/* | XML dosyalarını ve bir XSL dosyasını içerir. Biçimli XML dosyalarını tarayıcıda görüntüleyebilirsiniz. |
@@ -183,19 +183,21 @@ Yeni [Azure izleyici tümleştirmesiyle](https://aka.ms/appsvcblog-azmon), günl
 
 Aşağıdaki tabloda desteklenen günlük türleri ve açıklamaları gösterilmektedir: 
 
-| Günlük türü | Windows | Windows kapsayıcısı | Linux | Linux kapsayıcısı | Açıklama |
+| Günlük türü | Windows | Windows kapsayıcısı | Linux | Linux kapsayıcısı | Description |
 |-|-|-|-|-|-|
 | AppServiceConsoleLogs | Java & & Tomcat | Yes | Yes | Yes | Standart çıkış ve standart hata |
 | AppServiceHTTPLogs | Yes | Yes | Yes | Yes | Web sunucusu günlükleri |
 | AppServiceEnvironmentPlatformLogs | Yes | YOK | Evet | Yes | App Service Ortamı: ölçekleme, yapılandırma değişiklikleri ve durum günlükleri|
 | AppServiceAuditLogs | Yes | Yes | Yes | Yes | FTP ve kudu aracılığıyla oturum açma etkinliği |
 | AppServiceFileAuditLogs | Yes | Yes | TBA dili | TBA dili | Site içeriğinde yapılan dosya değişiklikleri; **yalnızca Premium katmanı ve üzeri için kullanılabilir** |
-| AppServiceAppLogs | ASP .NET | ASP .NET | Java s & Tomcat resimleri <sup>1</sup> | Java s & Tomcat resimleri <sup>1</sup> | Uygulama günlükleri |
+| AppServiceAppLogs | ASP .NET & Java Tomcat <sup>1</sup> | ASP .NET & Java Tomcat <sup>1</sup> | Java s & Tomcat resimleri <sup>2</sup> | Java s & Tomcat resimleri <sup>2</sup> | Uygulama günlükleri |
 | AppServiceIPSecAuditLogs  | Yes | Yes | Yes | Yes | IP kurallarından gelen istekler |
 | AppServicePlatformLogs  | TBA dili | Yes | Yes | Yes | Kapsayıcı işlem günlükleri |
 | AppServiceAntivirusScanAuditLogs | Yes | Yes | Yes | Yes | Microsoft Defender kullanarak virüsten [koruma taraması günlükleri](https://azure.github.io/AppService/2020/12/09/AzMon-AppServiceAntivirusScanAuditLogs.html) ; **yalnızca Premium katman için kullanılabilir** | 
 
-<sup>1</sup> Java SE uygulamaları için uygulama ayarlarına "$WEBSITE _AZMON_PREVIEW_ENABLED" ekleyin ve bunu 1 veya doğru olarak ayarlayın.
+<sup>1</sup> Java Tomcat uygulamaları için uygulama ayarlarına "TOMCAT_USE_STARTUP_BAT" ekleyin ve false veya 0 olarak ayarlayın. *En son* Tomcat sürümünde olması gerekir ve *Java. util. Logging* kullanın.
+
+<sup>2</sup> Java SE uygulamaları için uygulama ayarlarına "$WEBSITE _AZMON_PREVIEW_ENABLED" ekleyin ve bunu true ya da 1 olarak ayarlayın.
 
 ## <a name="next-steps"></a><a name="nextsteps"></a> Sonraki adımlar
 * [Azure Izleyici ile günlük sorgulama](../azure-monitor/logs/log-query-overview.md)

@@ -15,10 +15,10 @@ ms.workload: TBD
 ms.date: 02/09/2021
 ms.author: alkohli
 ms.openlocfilehash: 6f0a0fd48e3717d14a714e42c5566cd7bcf090d5
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100545392"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-manage-storsimple-volume-containers"></a>StorSimple birim kapsayıcılarını yönetmek için StorSimple Device Manager hizmetini kullanın

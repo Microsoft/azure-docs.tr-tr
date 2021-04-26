@@ -3,12 +3,12 @@ title: Kavramlar-özel bulut güncelleştirmeleri ve yükseltmeleri
 description: Azure VMware çözümünde anahtar yükseltme işlemi ve özellikleri hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 03/17/2021
-ms.openlocfilehash: 9810de40944f70a4efb7ec81d17868ffdf256c7d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ced5832a6d994f6cbc7e659d44ce4f6ac88681d0
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104586157"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107876823"
 ---
 # <a name="azure-vmware-solution-private-cloud-updates-and-upgrades"></a>Azure VMware çözümü özel bulut güncelleştirmeleri ve yükseltmeleri
 
@@ -61,8 +61,8 @@ Azure VMware çözümü, hatanın süresiyle bu bileşenleri yapılandırma yede
 
 Azure VMware çözümünde anahtar yükseltme süreçlerini ve özelliklerini artık kapsadığınıza göre şunları öğrenmek isteyebilirsiniz:
 
-- [Özel bulut oluşturma](tutorial-create-private-cloud.md).
-- [Azure VMware Çözüm kaynağını etkinleştirme](enable-azure-vmware-solution.md).
+- [Özel bulut oluşturma](tutorial-create-private-cloud.md)
+- [Azure VMware Çözüm kaynağını etkinleştirme](enable-azure-vmware-solution.md)
 
 <!-- LINKS - external -->
 

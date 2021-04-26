@@ -4,10 +4,10 @@ description: Yeni sertifikaların nasıl ekleneceğini, sertifikanın nasıl akt
 ms.topic: conceptual
 ms.date: 11/13/2018
 ms.openlocfilehash: 6dd4440d76bed9d110c13baab9f4e67b3a5c64c0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "94660925"
 ---
 # <a name="add-or-remove-certificates-for-a-service-fabric-cluster-in-azure"></a>Azure'da Service Fabric kümesine sertifika ekleme veya kaldırma

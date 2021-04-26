@@ -7,12 +7,12 @@ ms.prod: kinect-dk
 ms.date: 06/26/2019
 ms.topic: article
 keywords: Kinect, Windows, v2, Azure Kinect, karşılaştırma, SDK, farklar, donanım, yazılım
-ms.openlocfilehash: 0a8d399370f354524858bdd658ffd65c0494dd4d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1791767e842043bbb0eda058cc3ea92be90a00fb
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87031584"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078307"
 ---
 # <a name="azure-kinect-and-kinect-windows-v2-comparison"></a>Azure Kinect ve Kinect Windows V2 karşılaştırması
 
@@ -46,7 +46,7 @@ Aşağıdaki tabloda alt düzey cihaz algılayıcısı erişim yeteneği karşı
 
 | **İşlev**| **Azure Kinect** | **Windows için Kinect** | **Notlar** |
 |---------|---------|------------|---------|
-| **Derinliğini** | ✔️ | ✔️ |    |   |
+| **Derinliğini** | ✔️ | ✔️ |    | 
 | **IR** | ✔️ | ✔️ |  |
 | **Renk** | ✔️ | ✔️ | Renk biçimi farkları destekler, Azure Kinect DK şu kamera denetimlerini destekler: pozlama, beyaz dengesi, parlaklık, karşıtlık, doygunluk, netlik ve kazanç denetimi |
 | **Ses** | ✔️ | ✔️ | Azure Kinect DK miklerine konuşma SDK 'Sı veya Windows Native API aracılığıyla erişilir |

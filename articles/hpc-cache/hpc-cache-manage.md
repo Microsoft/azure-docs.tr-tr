@@ -6,12 +6,12 @@ ms.service: hpc-cache
 ms.topic: how-to
 ms.date: 03/08/2021
 ms.author: v-erkel
-ms.openlocfilehash: b34beb65bb8c4136887651d8365c937b17718572
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a831aa7b2f3b0d438d9db8fefa3d26428fea3680
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103471893"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862606"
 ---
 # <a name="manage-your-cache"></a>Önbelleğinizi yönetme
 
@@ -60,13 +60,13 @@ Durdurulmuş bir önbelleği yeniden etkinleştirmek için **Başlat** düğmesi
 
 [Azure HPC önbelleği Için Azure CLI 'Yi ayarlayın](./az-cli-prerequisites.md).
 
-[Az HPC-Cache stop](/cli/azure/ext/hpc-cache/hpc-cache#ext-hpc-cache-az-hpc-cache-stop) komutuyla bir önbelleği geçici olarak askıya alın. Bu eylem yalnızca önbelleğin durumu **sağlıklı** veya **düşürülmüş** olduğunda geçerlidir.
+[Az HPC-Cache stop](/cli/azure/hpc-cache#az_hpc_cache_stop) komutuyla bir önbelleği geçici olarak askıya alın. Bu eylem yalnızca önbelleğin durumu **sağlıklı** veya **düşürülmüş** olduğunda geçerlidir.
 
 Önbellek, durdurulmadan önce içeriğini depolama hedeflerine otomatik olarak temizler. Bu işlem biraz zaman alabilir, ancak veri tutarlılığını sağlar.
 
 Eylem tamamlandığında, önbellek durumu **durduruldu** olarak değişir.
 
-Durdurulmuş bir önbelleği [az HPC-Cache start](/cli/azure/ext/hpc-cache/hpc-cache#ext-hpc-cache-az-hpc-cache-start)ile yeniden etkinleştirin.
+Durdurulmuş bir önbelleği [az HPC-Cache start](/cli/azure/hpc-cache#az_hpc_cache_start)ile yeniden etkinleştirin.
 
 Başlat veya Durdur komutunu verdiğinizde, komut satırı işlem tamamlanana kadar bir "çalışıyor" durum iletisi gösterir.
 
@@ -115,7 +115,7 @@ Tüm veriler depolama hedeflerine kaydedildikten sonra, önbellek otomatik olara
 
 [Azure HPC önbelleği Için Azure CLI 'Yi ayarlayın](./az-cli-prerequisites.md).
 
-Önbelleğin tüm değiştirilen verileri depolama hedeflerine yazmasını zorlamak için [az HPC-Cache Flush](/cli/azure/ext/hpc-cache/hpc-cache#ext-hpc-cache-az-hpc-cache-flush) kullanın.
+Önbelleğin tüm değiştirilen verileri depolama hedeflerine yazmasını zorlamak için [az HPC-Cache Flush](/cli/azure/hpc-cache#az_hpc_cache_flush) kullanın.
 
 Örnek:
 
@@ -163,9 +163,9 @@ Yazılım güncelleştirmesini başlatmak için **Yükselt** düğmesine tıklay
 
 [Azure HPC önbelleği Için Azure CLI 'Yi ayarlayın](./az-cli-prerequisites.md).
 
-Azure CLı 'da, önbellek durumu raporunun sonuna yeni yazılım bilgileri dahildir. (Denetlemek için [az HPC-Cache Show](/cli/azure/ext/hpc-cache/hpc-cache#ext-hpc-cache-az-hpc-cache-show) öğesini kullanın.) İletideki "upgradeStatus" dizesini arayın.
+Azure CLı 'da, önbellek durumu raporunun sonuna yeni yazılım bilgileri dahildir. (Denetlemek için [az HPC-Cache Show](/cli/azure/hpc-cache#az_hpc_cache_show) öğesini kullanın.) İletideki "upgradeStatus" dizesini arayın.
 
-Varsa, güncelleştirmeyi uygulamak için [az HPC-Cache Upgrade-bellenim](/cli/azure/ext/hpc-cache/hpc-cache#ext-hpc-cache-az-hpc-cache-upgrade-firmware) kullanın.
+Varsa, güncelleştirmeyi uygulamak için [az HPC-Cache Upgrade-bellenim](/cli/azure/hpc-cache#az_hpc_cache_upgrade-firmware) kullanın.
 
 Hiçbir güncelleştirme kullanılamıyorsa, bu işlemin bir etkisi yoktur.
 
@@ -227,7 +227,7 @@ Depolama hedefleri olarak kullanılan arka uç depolama birimleri, önbelleği s
 
 [Azure HPC önbelleği Için Azure CLI 'Yi ayarlayın](./az-cli-prerequisites.md).
 
-Önbelleği kalıcı olarak kaldırmak için [az HPC-Cache Delete](/cli/azure/ext/hpc-cache/hpc-cache#ext-hpc-cache-az-hpc-cache-delete) Azure CLI komutunu kullanın.
+Önbelleği kalıcı olarak kaldırmak için [az HPC-Cache Delete](/cli/azure/hpc-cache#az_hpc_cache_delete) Azure CLI komutunu kullanın.
 
 Örnek:
 ```azurecli

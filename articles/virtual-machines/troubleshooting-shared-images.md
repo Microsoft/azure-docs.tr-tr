@@ -9,12 +9,12 @@ ms.workload: infrastructure
 ms.date: 10/27/2020
 ms.author: olayemio
 ms.reviewer: cynthn
-ms.openlocfilehash: 015fa201fe1c31dde2e30c2fe689ac13452b1b01
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 9652e940674ec7580b006cd38df2a7d17014f939
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105607601"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309994"
 ---
 # <a name="troubleshoot-shared-image-galleries-in-azure"></a>Azure 'da paylaşılan görüntü galerilerine sorun giderme
 
@@ -303,6 +303,14 @@ Paylaşılan görüntü galerileri, görüntü tanımları ve görüntü sürüm
 **Neden**: sanal makineyi dağıtmak için kullandığınız görüntü tanımı, en son içinde yer alan herhangi bir görüntü sürümü içermiyor.  
 **Geçici çözüm**: ' en sonuncuyu hariç tut ' değeri false olarak ayarlanmış en az bir görüntü sürümü olduğundan emin olun. 
 
+**İleti**: */subscriptions/<SubscriptionID \> /ResourceGroups/<ResourceGroup \> /providers/Microsoft.COMPUTE/Galleries/<gallername \> /images/<Gename \> /Versions/<versionNumber adlı Galeri görüntüsü \> <bölge \> bölgesinde kullanılamaz. Lütfen bu bölgeye çoğaltmak için görüntü sahibine başvurun veya istediğiniz bölgeyi değiştirin.*  
+**Neden**: dağıtım için seçilen sürüm yok ya da belirtilen bölgede bir çoğaltma yok.  
+**Geçici çözüm**: görüntü kaynağı adının doğru olduğundan ve belirtilen bölgede en az bir çoğaltma olduğundan emin olun. 
+
+**İleti**: */Subscriptions/<SubscriptionID \> /ResourceGroups/<ResourceGroup \> /providers/Microsoft.COMPUTE/Galleries/<gallername \> /images/<GörüntüAdı \> <bölge \> bölgesinde kullanılamaz. Lütfen bu bölgeye çoğaltmak için görüntü sahibine başvurun veya istediğiniz bölgeyi değiştirin.*  
+**Neden**: dağıtım için seçilen görüntü tanımında en son ve ayrıca belirtilen bölgede yer alan herhangi bir görüntü sürümü yok.  
+**Geçici çözüm**: ' en sonuncusun dışında tut ' değeri false olarak ayarlanmış bölgede en az bir görüntü sürümü olduğundan emin olun. 
+
 **İleti**: *istemci, RESOURCEID <kapsamında ' Microsoft. COMPUTE/galeriler/Images/Versions/Read ' eylemini gerçekleştirme iznine sahip \> ancak geçerli kiracı <tenantıd, \> bağlı aboneliğe <SubscriptionID 'ye erişim yetkisine sahip değil \> .*  
 **Neden**: sanal makine veya ölçek kümesi, başka bir KIRACıDAKI bir SIG görüntüsü kullanılarak oluşturulmuştur. Sanal makinede veya ölçek kümesinde değişiklik yapmayı denediniz, ancak görüntünün sahibi olan aboneliğe erişiminiz yok.  
 **Geçici çözüm**: görüntü sürümüne okuma erişimi sağlamak için görüntü sürümüne ait aboneliğin sahibine başvurun.
@@ -318,10 +326,6 @@ Paylaşılan görüntü galerileri, görüntü tanımları ve görüntü sürüm
 **İleti**: *gerekli ' osprofile ' parametresi eksik (null).*  
 **Neden**: VM genelleştirilmiş bir görüntüden oluşturulur ve Yönetici Kullanıcı adı, parola veya SSH anahtarları eksiktir. Genelleştirilmiş görüntüler Yönetici Kullanıcı adı, parola veya SSH anahtarlarını korumadığından, bu alanların bir VM veya ölçek kümesi oluşturulurken belirtilmesi gerekir.  
 **Geçici çözüm**: yönetici kullanıcı adını, parolayı veya SSH anahtarlarını belirtin veya özel bir görüntü sürümü kullanın.
-
-**İleti**: *\> üst Galeri görüntüsündeki (' özelleştirilmiş ') Işletim sistemi durumu ' Genelleştirilmiş ' olmadığından, bu öğeden Galeri görüntüsü sürümü oluşturulamıyor: <RESOURCEID.*  
-**Neden**: görüntü sürümü genelleştirilmiş bir kaynaktan oluşturulur, ancak üst tanımı özelleştirilmiş olur.  
-**Geçici çözüm**: özel bir kaynak kullanarak görüntü sürümü oluşturun ya da genelleştirilmiş bir üst tanımı kullanın.
 
 **İleti**: *\> VM Ölçek kümesinin geçerli işletim sistemi durumu Genelleştirilmiş olduğundan, sanal makine ölçek kümesi <vmssname güncelleştirilemiyor.*  
 **Neden**: ölçek kümesi için geçerli kaynak görüntüsü genelleştirilmiş bir kaynak görüntüdür, ancak özelleştirilmiş bir kaynak görüntüyle güncelleştiriliyor. Geçerli kaynak görüntüsü ve bir ölçek kümesi için yeni kaynak görüntüsü aynı durumda olmalıdır.  

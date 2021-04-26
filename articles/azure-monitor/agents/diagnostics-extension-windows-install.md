@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 02/17/2020
 ms.author: bwren
 ms.custom: devx-track-azurecli, devx-track-azurepowershell
-ms.openlocfilehash: 174f372f9dbe8dc0449c7f9b9f5b34c6206f92de
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3ff752b673c49047551c48c4c8693b00d7b5edeb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101708569"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787414"
 ---
 # <a name="install-and-configure-windows-azure-diagnostics-extension-wad"></a>Windows Azure tanılama uzantısı 'nı (WAD) yükleyip yapılandırma
 Azure [Tanılama uzantısı](diagnostics-extension-overview.md) , Azure izleyici 'de Konuk işletim sisteminden ve Azure sanal makinelerinin ve diğer işlem kaynaklarının iş yüklerinden izleme verilerini toplayan bir aracıdır. Bu makalede, Windows Tanılama uzantısı 'nı yükleme ve yapılandırma hakkında ayrıntılar ve verilerin ve Azure depolama hesabında nasıl depolandığı hakkında bir açıklama sağlanmaktadır.
@@ -77,7 +77,7 @@ Tanılama uzantısını, yapılandırma ile doğrudan çalışmaktan farklı bir
 Tanılama uzantısını Azure Resource Manager şablonlarıyla dağıtma hakkında [bir Windows sanal makinesi ve Azure Resource Manager şablonları ile izleme ve tanılamayı kullanma](../../virtual-machines/extensions/diagnostics-template.md) konusuna bakın. 
 
 ## <a name="azure-cli-deployment"></a>Azure CLı dağıtımı
-Azure CLı, aşağıdaki örnekte olduğu gibi [az VM Extension set](/cli/azure/vm/extension#az-vm-extension-set) kullanılarak mevcut bir sanal makineye Azure tanılama uzantısını dağıtmak için kullanılabilir. 
+Azure CLı, aşağıdaki örnekte olduğu gibi [az VM Extension set](/cli/azure/vm/extension#az_vm_extension_set) kullanılarak mevcut bir sanal makineye Azure tanılama uzantısını dağıtmak için kullanılabilir. 
 
 ```azurecli
 az vm extension set \

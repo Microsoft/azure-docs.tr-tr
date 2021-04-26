@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 03/27/2019
 ms.author: jeedes
 ms.openlocfilehash: 7195a126938deabf542e6fa3e52b72c2efdddac2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92515228"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-recognize"></a>Öğretici: tanıma sahip Azure Active Directory tümleştirme
@@ -219,7 +219,7 @@ Bu bölümde, tanıma erişim izni vererek Azure çoklu oturum açma özelliğin
 
 7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-recognize-test-user"></a>Tanı testi kullanıcısı oluştur
+### <a name="create-recognize-test-user&quot;></a>Tanı testi kullanıcısı oluştur
 
 Azure AD kullanıcılarının tanımasına oturum açmasını sağlamak için, bunların tanınması için sağlanması gerekir. Tanı söz konusu olduğunda, sağlama işlemi el ile gerçekleştirilen bir görevdir.
 
@@ -235,7 +235,7 @@ Bu uygulama SCıM sağlamasını desteklemez, ancak kullanıcıları sağlayan a
 
 4. **Kullanıcı eşitleme** bölümünde aşağıdaki adımları gerçekleştirin.
    
-    ![Yeni Kullanıcı](./media/recognize-tutorial/tutorial_recognize_005.png "Yeni Kullanıcı")
+    ![Yeni Kullanıcı](./media/recognize-tutorial/tutorial_recognize_005.png &quot;Yeni Kullanıcı")
    
     a. **Eşitleme etkinken** **Açık**' ı seçin.
    

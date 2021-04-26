@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 3/18/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 237b9bc4d7ac6366a67accb31fdf3c80c778b5d6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0bc686efbd07cf39d7932b175b6f9800b1ff185f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94636767"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774674"
 ---
 # <a name="create-and-manage-azure-database-for-mysql-vnet-service-endpoints-using-azure-cli"></a>Azure CLı kullanarak MySQL VNet için Azure veritabanı hizmet uç noktaları oluşturma ve yönetme
 Sanal Ağ (VNet) hizmetleri uç noktaları ve kuralları, bir Sanal Ağın özel adres alanını MySQL için Azure Veritabanı sunucunuza genişletir. Uygun Azure komut satırı arabirimi (CLı) komutlarını kullanarak sunucunuzu yönetmek için VNet hizmet uç noktalarını ve kurallarını oluşturabilir, güncelleştirebilir, silebilir, listeleyebilir ve gösterebilirsiniz. MySQL VNet hizmet uç noktaları için Azure veritabanı 'nda sınırlamalar da dahil genel bir bakış için bkz. [MySQL Için Azure veritabanı sunucu VNET hizmet uç noktaları](concepts-data-access-and-security-vnet.md). Sanal ağ hizmeti uç noktaları, MySQL için Azure veritabanı için desteklenen tüm bölgelerde kullanılabilir.
@@ -33,7 +33,7 @@ Sanal Ağ (VNet) hizmetleri uç noktaları ve kuralları, bir Sanal Ağın özel
 ## <a name="configure-vnet-service-endpoints-for-azure-database-for-mysql"></a>MySQL için Azure veritabanı için sanal ağ hizmet uç noktalarını yapılandırma
 [Az Network VNET](/cli/azure/network/vnet) komutları, sanal ağları yapılandırmak için kullanılır.
 
-Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. [az account set](/cli/azure/account#az-account-set) komutunu kullanarak hesabınız altındaki belirli bir abonelik kimliğini seçin. Abonelik KIMLIĞI yer tutucusuna aboneliğiniz için **az Login** çıktısından **ID** özelliğini değiştirin.
+Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. [az account set](/cli/azure/account#az_account_set) komutunu kullanarak hesabınız altındaki belirli bir abonelik kimliğini seçin. Abonelik KIMLIĞI yer tutucusuna aboneliğiniz için **az Login** çıktısından **ID** özelliğini değiştirin.
 
 - Hesap, sanal ağ ve hizmet uç noktası oluşturma izinlerine sahip olmalıdır.
 

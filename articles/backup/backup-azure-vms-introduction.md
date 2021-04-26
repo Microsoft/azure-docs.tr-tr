@@ -3,12 +3,12 @@ title: Azure VM yedeklemesi hakkında
 description: Bu makalede, Azure Backup hizmetinin Azure sanal makinelerini nasıl yedeklediği ve en iyi yöntemleri nasıl izledikleri hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 09/13/2019
-ms.openlocfilehash: 691fe991ad141696c0c68e915d7225001a1befd0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5ce76f64093bab362d62afcc3f94d07f7ee7883d
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98733580"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718458"
 ---
 # <a name="an-overview-of-azure-vm-backup"></a>Azure VM yedeklemesine genel bakış
 
@@ -24,26 +24,7 @@ Azure Backup Ayrıca, iş yükü algılayan, 15 dakikalık RPO (kurtarma noktas�
 
 Azure Backup, Azure VM'lerini şu şekilde yedekler:
 
-1. Yedekleme için seçilen Azure VM 'Leri için Azure Backup, belirttiğiniz yedekleme zamanlaması doğrultusunda bir yedekleme işi başlatır.
-1. İlk yedekleme sırasında VM çalışıyorsa VM 'ye bir yedekleme uzantısı yüklenir.
-    - Windows VM 'Leri için [VMSnapshot uzantısı](../virtual-machines/extensions/vmsnapshot-windows.md) yüklenir.
-    - Linux VM 'Leri için [VMSnapshotLinux uzantısı](../virtual-machines/extensions/vmsnapshot-linux.md) yüklenir.
-1. Çalıştıran Windows VM 'Leri için, VM 'nin uygulamayla tutarlı bir anlık görüntüsünü almak üzere Windows Birim Gölge Kopyası Hizmeti (VSS) ile yedekleme koordinatları.
-    - Varsayılan olarak, yedekleme tam VSS yedeklemeleri alır.
-    - Yedekleme uygulamayla tutarlı bir anlık görüntü alalamazsa, temeldeki depolamanın dosya ile tutarlı bir anlık görüntüsünü alır (VM durdurulduğunda hiçbir uygulama yazma işlemi gerçekleşmediğinden).
-1. Linux VM 'Leri için yedekleme, dosya ile tutarlı bir yedekleme gerçekleştirir. Uygulamayla tutarlı anlık görüntüler için, ön/son betikleri el ile özelleştirmeniz gerekir.
-1. Yedekleme, anlık görüntüyü aldıktan sonra verileri kasaya aktarır.
-    - VM diskleri paralel olarak yedeklenerek yedekleme işlemi iyileştirilir.
-    - Azure Backup, yedeklenen her disk için disk üzerindeki blokları okur ve yalnızca bir önceki yedekleme işleminden sonra değiştirilmiş olan veri bloklarını (delta) aktarır.
-    - Anlık görüntü verileri kasaya hemen kopyalanmayabilir. Yoğun zamanlarda birkaç saat sürebilir. Bir VM için toplam yedekleme süresi, günlük yedekleme ilkeleri için 24 saatten az olacaktır.
-1. Azure Backup etkinleştirildikten sonra bir Windows sanal makinesinde yapılan değişiklikler şunlardır:
-    - Microsoft Visual C++ 2013 Redistributable (x64)-12.0.40660, VM 'ye yüklenir
-    - Birim gölge kopyası hizmeti 'nin (VSS) başlangıç türü el ile otomatik olarak değiştirildi
-    - Iaasvmprovider Windows hizmeti eklendi
-
-1. Veri aktarımı tamamlandığında, anlık görüntü kaldırılır ve bir kurtarma noktası oluşturulur.
-
-![Azure sanal makine yedekleme mimarisi](./media/backup-azure-vms-introduction/vmbackup-architecture.png)
+[!INCLUDE [azure-vm-backup-process.md](../../includes/azure-vm-backup-process.md)]
 
 ## <a name="encryption-of-azure-vm-backups"></a>Azure VM yedeklemeleri şifrelemesi
 
@@ -76,7 +57,7 @@ Azure Backup, anlık görüntüleri yedekleme zamanlamalarına göre alır.
 
 Aşağıdaki tabloda farklı türde anlık görüntü tutarlılığı açıklanmaktadır:
 
-**Görüntüye** | **Ayrıntılar** | **Kurtarma** | **Değerlendirme**
+**Anlık Görüntü** | **Ayrıntılar** | **Kurtarma** | **Değerlendirme**
 --- | --- | --- | ---
 **Uygulamayla tutarlı** | Uygulamayla tutarlı yedeklemeler bellek içeriğini ve bekleyen g/ç işlemlerini yakalar. Uygulamayla tutarlı anlık görüntüler, bir yedekleme gerçekleşmeden önce uygulama verilerinin tutarlılığını sağlamak için bir VSS yazıcısı (veya Linux için ön betikler öncesi) kullanır. | VM 'yi uygulamayla tutarlı bir anlık görüntüyle kurtarırken, VM önyüklenir. Veri bozulması veya kaybı yok. Uygulamalar tutarlı bir durumda başlar. | Windows: tüm VSS yazıcıları başarılı oldu<br/><br/> Linux: ön/son betik yapılandırma ve başarılı
 **Dosya sistemiyle tutarlı** | Dosya sistemiyle tutarlı yedeklemeler, tüm dosyaların bir anlık görüntüsünü aynı anda alarak tutarlılık sağlar.<br/><br/> | Bir sanal makineyi dosya sistemiyle tutarlı bir anlık görüntüyle kurtarırken, VM önyüklenir. Veri bozulması veya kaybı yok. Geri yüklenen verilerin tutarlı olduğundan emin olmak için uygulamaların kendi "düzeltilmesi" mekanizmasını uygulaması gerekir. | Windows: bazı VSS yazıcıları başarısız oldu <br/><br/> Linux: varsayılan (ön/sonrası betikler yapılandırılmamışsa veya başarısız olursa)
@@ -89,7 +70,7 @@ Aşağıdaki tabloda farklı türde anlık görüntü tutarlılığı açıklanm
 
 **Değerlendirme** | **Ayrıntılar**
 --- | ---
-**Dis** | VM disklerinin yedeklenmesi paralel. Örneğin, bir VM 'nin dört diski varsa, yedekleme hizmeti dört diski paralel olarak yedeklemeye çalışır. Yedekleme artımlı (yalnızca değiştirilen veriler).
+**Disk** | VM disklerinin yedeklenmesi paralel. Örneğin, bir VM 'nin dört diski varsa, yedekleme hizmeti dört diski paralel olarak yedeklemeye çalışır. Yedekleme artımlı (yalnızca değiştirilen veriler).
 **Zamanlama** |  Yedekleme trafiğini azaltmak için günün farklı saatlerinde farklı VM 'Leri yedekleyin ve zamanların çakışmadığından emin olun. VM'lerin aynı anda yedeklenmesi trafik yoğunluğuna neden olur.
 **Yedeklemeler hazırlanıyor** | Yedeklemenin hazırlanması için gereken süreyi göz önünde bulundurun. Hazırlık süresi, yedekleme uzantısının yüklenmesi veya güncelleştirilmesi ve yedekleme zamanlamasına göre bir anlık görüntünün tetiklenmesi adımlarını kapsar.
 **Veri aktarımı** | Önceki yedeklemeden artımlı değişiklikleri belirlemek için Azure Backup gereken süreyi göz önünde bulundurun.<br/><br/> Azure Backup, artımlı yedekleme sırasında değişiklikleri belirlemek için bloğun sağlama toplamını hesaplar. Değiştirilen bloklar kasaya aktarılmak üzere işaretlenir. Hizmet, aktarılacak veri miktarını en aza indirmek için belirlenen blokları analiz eder. Azure Backup, değiştirilen tüm blokları değerlendirdikten sonra değişiklikleri kasaya aktarır.<br/><br/> Anlık görüntünün alınması ile kasaya kopyalanması arasında bir gecikme olabilir. Yoğun zamanlarda, anlık görüntülerin kasaya aktarılması sekiz saate kadar sürebilir. Günlük yedeklemeler için bir VM'nin yedeklenme süresi 24 saatten kısa olacaktır.
@@ -137,7 +118,7 @@ Benzer şekilde, yedekleme depolama alanı faturanız, her kurtarma noktasındak
 
 Örneğin, her biri en fazla 32 TB boyutunda iki ek veri diskine sahip olan a2 standart boyutlu bir VM alın. Aşağıdaki tabloda, bu disklerin her birinde depolanan gerçek veriler gösterilmektedir:
 
-**Dis** | **En büyük boyut** | **Gerçek veriler var**
+**Disk** | **En büyük boyut** | **Gerçek veriler var**
 --- | --- | ---
 İşletim sistemi diski | 32 TB | 17 GB
 Yerel/geçici disk | 135 GB | 5 GB (yedeklemeye dahil değil)

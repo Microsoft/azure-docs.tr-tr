@@ -11,16 +11,16 @@ ms.topic: conceptual
 ms.date: 07/05/2019
 ms.author: amishu
 ms.custom: devx-track-js, devx-track-csharp
-ms.openlocfilehash: f044596cf084e68b6c9ca10e3da4fbdf4c8c2062
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 32715ad1a01366d7d56e6fa8129151b15c315e1d
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95026531"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504184"
 ---
 # <a name="enable-logging-in-the-speech-sdk"></a>Konuşma SDK 'sında günlüğü etkinleştirme
 
-Dosyaya günlük kaydı, konuşma SDK 'Sı için isteğe bağlı bir özelliktir. Geliştirme günlüğü sırasında, konuşma SDK 'sının temel bileşenlerinden ek bilgi ve Tanılamalar sağlar. `Speech_LogFilename`Bir konuşma yapılandırma nesnesi üzerindeki özelliği günlük dosyasının konumu ve adı olarak ayarlanarak etkinleştirilebilir. Bu yapılandırmadan bir tanıyıcı oluşturulduktan sonra günlüğe kaydetme işlemi Global olarak etkinleştirilir ve daha sonra devre dışı bırakılamaz. Çalışan bir günlüğe kaydetme oturumu sırasında bir günlük dosyasının adını değiştiremezsiniz.
+Dosyaya günlük kaydı, konuşma SDK 'Sı için isteğe bağlı bir özelliktir. Geliştirme günlüğü sırasında, konuşma SDK 'sının temel bileşenlerinden ek bilgi ve Tanılamalar sağlar. `Speech_LogFilename`Bir konuşma yapılandırma nesnesi üzerindeki özelliği günlük dosyasının konumu ve adı olarak ayarlanarak etkinleştirilebilir. Günlüğe kaydetme, konuşma SDK 'sının yerel kitaplığındaki statik bir sınıf tarafından işlenir. Herhangi bir konuşma SDK 'Sı tanıyıcı veya birleştirici örneği için günlük kaydını etkinleştirebilirsiniz. Aynı işlemdeki tüm örnekler günlük girdilerini aynı günlük dosyasına yazar.
 
 > [!NOTE]
 > JavaScript dışında, desteklenen tüm konuşma SDK 'Sı programlama dillerinde konuşma SDK sürümü 1.4.0 bu yana günlüğe kaydetme kullanılabilir.

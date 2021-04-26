@@ -5,12 +5,12 @@ description: Azure Kubernetes Service 'te (AKS) Kubernetes rol tabanlı erişim 
 services: container-service
 ms.topic: article
 ms.date: 03/17/2021
-ms.openlocfilehash: 72b2c456d62b899f2b04041929434da668cad82d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0d5171e9e9a5d7f033ff615a3f1205b8dc93966f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104583539"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769562"
 ---
 # <a name="control-access-to-cluster-resources-using-kubernetes-role-based-access-control-and-azure-active-directory-identities-in-azure-kubernetes-service"></a>Azure Kubernetes hizmetinde Kubernetes rol tabanlı erişim denetimi ve Azure Active Directory kimliklerini kullanarak küme kaynaklarına erişimi denetleme
 
@@ -425,14 +425,14 @@ Kimlik ve kaynak denetiminde en iyi uygulamalar için bkz. [AKS 'de kimlik doğr
 [kubectl-run]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run
 
 <!-- LINKS - internal -->
-[az-aks-get-credentials]: /cli/azure/aks#az-aks-get-credentials
+[az-aks-get-credentials]: /cli/azure/aks#az_aks_get_credentials
 [install-azure-cli]: /cli/azure/install-azure-cli
 [azure-ad-aks-cli]: azure-ad-integration-cli.md
-[az-aks-show]: /cli/azure/aks#az-aks-show
-[az-ad-group-create]: /cli/azure/ad/group#az-ad-group-create
-[az-role-assignment-create]: /cli/azure/role/assignment#az-role-assignment-create
-[az-ad-user-create]: /cli/azure/ad/user#az-ad-user-create
-[az-ad-group-member-add]: /cli/azure/ad/group/member#az-ad-group-member-add
-[az-ad-group-show]: /cli/azure/ad/group#az-ad-group-show
-[rbac-authorization]: concepts-identity.md#kubernetes-role-based-access-control-kubernetes-rbac
+[az-aks-show]: /cli/azure/aks#az_aks_show
+[az-ad-group-create]: /cli/azure/ad/group#az_ad_group_create
+[az-role-assignment-create]: /cli/azure/role/assignment#az_role_assignment_create
+[az-ad-user-create]: /cli/azure/ad/user#az_ad_user_create
+[az-ad-group-member-add]: /cli/azure/ad/group/member#az_ad_group_member_add
+[az-ad-group-show]: /cli/azure/ad/group#az_ad_group_show
+[rbac-authorization]: concepts-identity.md#kubernetes-rbac
 [operator-best-practices-identity]: operator-best-practices-identity.md

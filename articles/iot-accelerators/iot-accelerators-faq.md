@@ -8,12 +8,12 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 02/15/2018
 ms.author: dobett
-ms.openlocfilehash: 1fd2b8461bd66c826dc4890c331b740c4703f896
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 61993df77b0831926f16339a741a2553e80c2a0d
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96903998"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107713849"
 ---
 # <a name="frequently-asked-questions-for-iot-solution-accelerators"></a>IoT çözüm hızlandırıcıları için sık sorulan sorular
 
@@ -24,7 +24,7 @@ Ayrıca bkz. [bağlı fabrikada özgü SSS](iot-accelerators-faq-cf.md).
 Kaynak kodu aşağıdaki GitHub depolarında depolanır:
 
 * [Bağlı fabrika çözümü Hızlandırıcısı](https://github.com/Azure/azure-iot-connected-factory)
-* [Cihaz benzetimi Çözüm Hızlandırıcısı](https://github.com/Azure/device-simulation-dotnet)
+* [Cihaz benzetimi Çözüm Hızlandırıcısı](https://github.com/Azure/azure-iot-pcs-device-simulation)
 
 ### <a name="where-can-i-find-the-remote-monitoring-and-predictive-maintenance-solution-accelerators"></a>Uzaktan izleme ve tahmine dayalı bakım çözüm hızlandırıcılarını nerede bulabilirim?
 
@@ -36,7 +36,7 @@ Mevcut dağıtımlar, uzaktan izleme ve tahmine dayalı bakım çözümü hızla
 
 ### <a name="how-do-i-deploy-device-simulation-solution-accelerator"></a>Cihaz benzetimi çözüm hızlandırıcıyı Nasıl yaparım?.
 
-Cihaz benzetimi çözüm Hızlandırıcısını dağıtmak için [cihaz benzetimi](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md) GitHub deposuna bakın.
+Cihaz benzetimi çözüm Hızlandırıcısını dağıtmak için [cihaz benzetimi](https://github.com/Azure/azure-iot-pcs-device-simulation/blob/master/README.md) GitHub deposuna bakın.
 
 ### <a name="where-can-i-find-information-about-the-removed-solution-accelerators"></a>Kaldırılmış çözüm hızlandırıcılarına ilişkin bilgileri nerede bulabilirim?
 

@@ -6,21 +6,21 @@ ms.service: cosmos-db
 ms.topic: how-to
 ms.date: 03/02/2021
 ms.author: anithaa
-ms.openlocfilehash: 2f15b397fbceb9e097d94080ba03fba50a96ed06
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fd0b3ada5fec283562cee9727e3f805a7d34c532
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102048514"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107479058"
 ---
-# <a name="configure-private-endpoints-for-azure-cosmos-db-analytical-store"></a>Azure Cosmos DB analitik depo için özel uç noktaları yapılandırma
+# <a name="configure-azure-private-link-for-azure-cosmos-db-analytical-store"></a>Azure Cosmos DB analitik depo için Azure özel bağlantısını yapılandırma
 [!INCLUDE[appliesto-sql-mongodb-api](includes/appliesto-sql-mongodb-api.md)]
 
-Bu makalede, Azure Cosmos DB analitik depo için yönetilen özel uç noktaları ayarlamayı öğreneceksiniz. İşlem deposunu kullanıyorsanız, bkz. [işlem deposu Için özel uç noktalar](how-to-configure-private-endpoints.md) . Yönetilen özel uç noktaları kullanarak, Azure Cosmos DB analitik deponun ağ erişimini Azure SYNAPSE tarafından yönetilen sanal ağa kısıtlayabilirsiniz. Yönetilen özel uç noktalar, analitik deponuza özel bir bağlantı kurar.
+Bu makalede, Azure Cosmos DB analitik depo için yönetilen özel uç noktaları ayarlamayı öğreneceksiniz. İşlem deposunu kullanıyorsanız, bkz. [işlem deposu Için özel uç noktalar](how-to-configure-private-endpoints.md) . [Yönetilen özel uç noktaları](../synapse-analytics/security/synapse-workspace-managed-private-endpoints.md)kullanarak, Azure Cosmos DB analitik deponuzda ağ erişimini Azure SYNAPSE çalışma alanınız ile Ilişkili bir yönetilen sanal ağa kısıtlayabilirsiniz. Yönetilen özel uç noktalar, analitik deponuza özel bir bağlantı kurar.
 
-## <a name="enable-private-endpoint-for-the-analytical-store"></a>Analitik depo için özel uç noktayı etkinleştir
+## <a name="enable-a-private-endpoint-for-the-analytical-store"></a>Analitik depo için özel bir uç noktayı etkinleştirme
 
-### <a name="set-up-an-azure-synapse-analytics-workspace-with-a-managed-virtual-network"></a>Yönetilen bir sanal ağla Azure SYNAPSE Analytics çalışma alanı ayarlama
+### <a name="set-up-azure-synapse-analytics-workspace-with-a-managed-virtual-network"></a>Azure SYNAPSE Analytics çalışma alanını yönetilen bir sanal ağla ayarlama
 
 [Azure SYNAPSE Analytics 'te Data-exfiltration özelliği etkinken bir çalışma alanı oluşturun.](../synapse-analytics/security/how-to-create-a-workspace-with-data-exfiltration-protection.md) [Veri alma koruması](../synapse-analytics/security/workspace-data-exfiltration-protection.md)sayesinde, kötü niyetli kullanıcıların Azure kaynaklarınızdan kuruluşunuzun kapsamı dışındaki konumlara veri kopyalayamıyor veya bu verileri aktarabilmesi için emin olabilirsiniz.
 

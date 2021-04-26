@@ -1,18 +1,15 @@
 ---
 title: İzleyici Azure Site Recovery | Microsoft Docs
 description: Portalı kullanarak Azure Site Recovery çoğaltma sorunlarını ve işlemlerini izleme ve sorun giderme
-author: raynew
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 07/30/2019
-ms.author: raynew
-ms.openlocfilehash: d441284b265ab11dd5ece42ec3737e455d662435
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a80f68c230bfed5caad4fd5ce474d8d06fd3d093
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96023576"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579327"
 ---
 # <a name="monitor-site-recovery"></a>Site Recovery’yi izleme
 
@@ -109,12 +106,12 @@ Yazılım güncelleştirmeleri | Yeni yazılım güncelleştirmelerinin kullanı
 
     **Senaryo** | **Durum**  | **Görünüm kullanılabilir mi?**
     --- |--- | ---
-    **Şirket içi siteler arasında çoğaltma** | Tüm eyaletler | No 
+    **Şirket içi siteler arasında çoğaltma** | Tüm eyaletler | Hayır 
     **Azure bölgeleri arasında Azure VM çoğaltma**  | Çoğaltma etkin/ilk çoğaltma devam ediyor | Yes
-    **Azure bölgeleri arasında Azure VM çoğaltma** | Yük devredildi/başarısız oldu | No   
+    **Azure bölgeleri arasında Azure VM çoğaltma** | Yük devredildi/başarısız oldu | Hayır   
     **Azure’a VMware çoğaltma** | Çoğaltma etkin/ilk çoğaltma devam ediyor | Yes     
-    **Azure’a VMware çoğaltma** | Yük devredildi/başarısız oldu | No      
-    **Azure'a Hyper-V çoğaltması** | Yük devredildi/başarısız oldu | No
+    **Azure’a VMware çoğaltma** | Yük devredildi/başarısız oldu | Hayır      
+    **Azure'a Hyper-V çoğaltması** | Yük devredildi/başarısız oldu | Hayır
 
 - Tek bir çoğaltma makinesine ait altyapı görünümünü görmek için kasa menüsünde **çoğaltılan öğeler**' e tıklayın ve bir sunucu seçin.  
 
@@ -152,7 +149,7 @@ Yazılım güncelleştirmeleri | Yeni yazılım güncelleştirmelerinin kullanı
 3. Ek sütunları göstermek için **sütunlar** ' a tıklayın, örneğin RPO, hedef yapılandırma sorunları ve çoğaltma hatalarını göstermek için.
 4. Çoğaltma durumu veya belirli bir çoğaltma ilkesi gibi belirli parametrelere göre bilgileri görüntülemek için **Filtrele** ' ye tıklayın.
 5. Test yük devretmesi veya onunla ilişkili belirli hata ayrıntılarını görüntülemek için bir makineye sağ tıklayın.
-6. Daha ayrıntılı bilgi edinmek için bir makineye tıklayın. Ayrıntılar şunları içerir:
+6. Daha ayrıntılı bilgi edinmek için bir makineye tıklayın. Ayrıntılar şunlardır:
    - **Çoğaltma bilgileri**: makinenin geçerli durumu ve durumu.
    - **RPO** (kurtarma noktası hedefi): sanal makine IÇIN geçerli RPO ve RPO 'nun en son hesaplanacağı zaman.
    - **Kurtarma noktaları**: makine için en son kullanılabilir kurtarma noktaları.

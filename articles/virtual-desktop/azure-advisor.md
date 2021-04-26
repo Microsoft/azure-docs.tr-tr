@@ -3,15 +3,15 @@ title: Windows sanal masaüstünü Azure Danışmanı ile tümleştirme-Azure
 description: Azure Advisor 'ı Windows sanal masaüstü dağıtımınızla kullanma.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 08/28/2020
+ms.date: 03/31/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 76b7f97b6020a3a0d5571a3a105d15f7d7893485
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: b141d3829e9d98cb793d2038e93331804d2e6b8f
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89147658"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448296"
 ---
 # <a name="use-azure-advisor-with-windows-virtual-desktop"></a>Azure Advisor 'ı Windows sanal masaüstü ile kullanma
 
@@ -61,5 +61,3 @@ Bir kategori seçtiğinizde, etkin öneriler sayfasına gidebilirsiniz. Bu sayfa
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Önerilerin nasıl çözümleneceğini öğrenmek için bkz. [Azure Advisor önerilerini çözümleme](azure-advisor-recommendations.md).
-
-Yeni öneriler için önerileriniz varsa [Azure Advisor Kullanıcı sesli forumumuza](https://windowsvirtualdesktop.uservoice.com/forums/930847-azure-advisor-recommendations)gönderin.

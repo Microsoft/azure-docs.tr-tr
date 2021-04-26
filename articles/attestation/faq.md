@@ -7,12 +7,12 @@ ms.service: attestation
 ms.topic: reference
 ms.date: 07/20/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 39f628845bdc9d54b48b1c8037f4a506a9d5c00a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9b15a336e97cad1fb03a63ec34f563a4453755ff
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89236713"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504201"
 ---
 # <a name="frequently-asked-questions-for-microsoft-azure-attestation"></a>Microsoft Azure kanıtlama için sık sorulan sorular
 
@@ -31,7 +31,7 @@ Azure PCK önbelleğe alma hizmeti:
 
 ## <a name="is-sgx-attestation-supported-by-azure-attestation-in-non-azure-environments"></a>Azure olmayan ortamlarda Azure kanıtlama tarafından desteklenen SGX kanıtlama
 
-Azure kanıtlama, TEEs doğrulamak için Azure PCK önbelleğe alma hizmeti tarafından belirtilen güvenlik temeline bağımlıdır. Azure PCK önbelleğe alma hizmeti şu anda yalnızca Azure gizli bilgi işlem düğümlerini destekleyecek şekilde tasarlandı. 
+Hayır. Azure kanıtlama, TEEs doğrulamak için Azure PCK önbelleğe alma hizmeti tarafından belirtilen güvenlik temeline bağımlıdır. Azure PCK önbelleğe alma hizmeti şu anda yalnızca Azure gizli bilgi işlem düğümlerini destekleyecek şekilde tasarlandı. 
 
 ## <a name="what-validations-does-azure-attestation-perform-for-attesting-sgx-enclaves"></a>Azure kanıtlama, bir attest SGX için hangi doğrulamaları gerçekleştirir?
 

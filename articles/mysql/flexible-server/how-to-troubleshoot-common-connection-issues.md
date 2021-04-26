@@ -7,12 +7,12 @@ ms.author: pariks
 ms.service: mysql
 ms.topic: troubleshooting
 ms.date: 9/21/2020
-ms.openlocfilehash: bdd52ba77fd9a65ce27985ff3c86a93fc887ddf9
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 6fc8e08757ee067e0616cc701a3037a9dbf4c6fd
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105110006"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106491755"
 ---
 # <a name="troubleshoot-connection-issues-to-azure-database-for-mysql---flexible-server"></a>MySQL için Azure veritabanı 'na yönelik bağlantı sorunlarını giderme-esnek sunucu
 
@@ -32,7 +32,7 @@ Bu makalede, bu hataları çözmek için bazı yaygın hatalardan ve adımlardan
 
 Uygulama, MySQL esnek sunucusu için Azure veritabanı 'na kalıcı olarak bağlanamıyorsa, genellikle aşağıdakilerden biriyle ilgili bir sorun olduğunu gösterir:
 
-* TLS/SSL kullanılarak şifrelenmiş bağlantı: esnek sunucu yalnızca Aktarım Katmanı Güvenliği (TLS 1,2) kullanılarak şifrelenmiş bağlantıları destekler ve **tls 1,0 ve tls 1,1 ile gelen tüm bağlantılar reddedilir**. TLS sürümünü devre dışı veya değiştiremezsiniz. [MySQL Için Azure veritabanı-esnek sunucu 'Da Aktarım Katmanı Güvenliği (TLS 1,2) kullanılarak şifrelenmiş bağlantı](./how-to-connect-tls-ssl.md)hakkında daha fazla bilgi edinin.
+* TLS/SSL kullanılarak şifrelenmiş bağlantı: esnek sunucu, Aktarım Katmanı Güvenliği (TLS 1,2) kullanılarak şifrelenmiş bağlantıları destekler ve **tls 1,0 ve tls 1,1 tüm gelen bağlantıları varsayılan olarak reddedilir**. Şifrelenmiş bağlantıların uygulanmasını devre dışı bırakabilir veya TLS sürümünü değiştirebilirsiniz. [MySQL Için Azure veritabanı-esnek sunucu 'Da Aktarım Katmanı Güvenliği (TLS 1,2) kullanılarak şifrelenmiş bağlantı](./how-to-connect-tls-ssl.md)hakkında daha fazla bilgi edinin.
 - *Özel erişimde esnek sunucu (VNET tümleştirmesi)*: esnek sunucu ile aynı sanal ağ içinden bağlanmakta olduğunuzdan emin olun. [MySQL için Azure veritabanı esnek sunucusu 'nda sanal ağ] bölümüne bakın.<!--(./concepts-networking-virtual-network.md)-->
 - Ortak erişime sahip esnek sunucu *(izin VERILEN IP adresleri)*, güvenlik duvarının istemcinizden gelen bağlantılara izin verecek şekilde yapılandırıldığından emin olun. [Azure Portal kullanarak esnek sunucu güvenlik duvarı kuralları oluşturma ve yönetme](./how-to-manage-firewall-portal.md)bölümüne bakın.
 * İstemci güvenlik duvarı yapılandırması: istemcinizdeki güvenlik duvarı, veritabanı sunucunuza yönelik bağlantılara izin vermelidir. Bazı güvenlik duvarlarındaki MySQL gibi uygulama adlarının yanı sıra, izin verilmeyen sunucunun IP adreslerine ve bağlantı noktalarına izin verilmesi gerekir.

@@ -5,12 +5,12 @@ description: Azure Kubernetes hizmetinde (aks) birden çok eş zamanlı Pod ile 
 services: container-service
 ms.topic: article
 ms.date: 03/01/2019
-ms.openlocfilehash: 4e009c5de2e24c1b0bd94fb4c11b0c52a3bc378d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7f3c8ae63e908f440740277084293a011b80b9d7
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102609082"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776097"
 ---
 # <a name="manually-create-and-use-a-volume-with-azure-files-share-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içinde Azure dosya paylaşımıyla bir birimi el ile oluşturma ve kullanma
 
@@ -245,10 +245,10 @@ Depolama sınıfı parametreleri için bkz. [statik sağlama (kendi dosya payla�
 [kubernetes-security-context]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 <!-- LINKS - internal -->
-[az-group-create]: /cli/azure/group#az-group-create
-[az-storage-create]: /cli/azure/storage/account#az-storage-account-create
-[az-storage-key-list]: /cli/azure/storage/account/keys#az-storage-account-keys-list
-[az-storage-share-create]: /cli/azure/storage/share#az-storage-share-create
+[az-group-create]: /cli/azure/group#az_group_create
+[az-storage-create]: /cli/azure/storage/account#az_storage_account_create
+[az-storage-key-list]: /cli/azure/storage/account/keys#az_storage_account_keys_list
+[az-storage-share-create]: /cli/azure/storage/share#az_storage_share_create
 [aks-quickstart-cli]: kubernetes-walkthrough.md
 [aks-quickstart-portal]: kubernetes-walkthrough-portal.md
 [install-azure-cli]: /cli/azure/install-azure-cli

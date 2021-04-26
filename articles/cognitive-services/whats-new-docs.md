@@ -8,10 +8,10 @@ ms.author: erhopf
 ms.service: cognitive-services
 ms.date: 03/08/2021
 ms.openlocfilehash: 4334166f435612370e7e0b7b380814fe85075f78
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105046632"
 ---
 # <a name="cognitive-services-docs-whats-new-for-february-1-2021---february-28-2021"></a>Bilişsel hizmetler belgeleri: 1 Şubat 2021 ' deki yenilikler-28 Şubat 2021

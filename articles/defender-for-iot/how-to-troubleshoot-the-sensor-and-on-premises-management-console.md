@@ -4,10 +4,10 @@ description: Sahip olabileceğiniz sorunları ortadan kaldırmak için sensöriz
 ms.date: 03/14/2021
 ms.topic: article
 ms.openlocfilehash: 83ffec959a5b38e9f4fd4d7d0dcfd3b1b9faa096
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104785453"
 ---
 # <a name="troubleshoot-the-sensor-and-on-premises-management-console"></a>Algılayıcı ve şirket içi yönetim konsolunda sorun giderme
@@ -254,7 +254,7 @@ Günlükleri dışarı aktarmak için:
 
 1. Dışarı aktarmak istediğiniz verileri tanımlamak için veri kategorilerini seçin:  
 
-    | Kategoriyi dışarı aktar | Açıklama |
+    | Kategoriyi dışarı aktar | Description |
     |--|--|
     | **İşletim sistemi günlükleri** | İşletim sistemi durumu hakkında bilgi almak için bu seçeneği belirleyin. |
     | **Yükleme/yükseltme günlükleri** | Yükleme ve yükseltme yapılandırma parametrelerinin araştırılması için bu seçeneği belirleyin. |

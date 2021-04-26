@@ -1,7 +1,7 @@
 ---
 title: Azure Active Directory Uygulama sağlamadaki yenilikler
 description: Azure Active Directory uygulama sağlama için yeni ve güncelleştirilmiş belgeler.
-ms.date: 03/08/2021
+ms.date: 04/05/2021
 ms.service: active-directory
 ms.subservice: app-provisioning
 ms.topic: reference
@@ -9,16 +9,27 @@ ms.workload: identity
 ms.author: kenwith
 author: kenwith
 manager: daveba
-ms.openlocfilehash: abee58607a5492548e4d64f44c15fd365876f3f5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8bb8dfbaf7ee1758811016dd3ddf08367a44bfae
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102453691"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443517"
 ---
 # <a name="azure-active-directory-application-provisioning-whats-new"></a>Uygulama sağlamayı Azure Active Directory: yenilikler
 
 Azure Active Directory uygulama sağlama belgelerindeki yenilikler ' e hoş geldiniz. Bu makalede, eklenen ve son üç ay içinde önemli güncelleştirmeleri olan yeni belgeler listelenir. Sağlama hizmetiyle ilgili yenilikler hakkında bilgi edinmek için bkz. [Azure Active Directory](../fundamentals/whats-new.md)yenilikleri.
+
+## <a name="march-2021"></a>Mart 2021
+
+### <a name="updated-articles"></a>Güncelleştirilmiş makaleler
+
+- [Uygulama sağlama için uzantı öznitelikleri eşitleniyor](user-provisioning-sync-attributes-for-mapping.md)
+- [Karantina durumunda uygulama sağlama](application-provisioning-quarantine-status.md)
+- [Azure portal kurumsal uygulamalar için Kullanıcı hesabı sağlamayı yönetme](configure-automatic-user-provisioning-portal.md)
+- [Azure AD 'de öznitelik eşlemeleri için ifade yazma başvurusu](functions-for-customizing-application-data.md)
+- [Öğretici: örnek SCıM uç noktası geliştirme](use-scim-to-build-users-and-groups-endpoints.md)
+
 
 ## <a name="february-2021"></a>Şubat 2021
 

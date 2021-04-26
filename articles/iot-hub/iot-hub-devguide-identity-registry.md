@@ -13,12 +13,12 @@ ms.custom:
 - mqtt
 - 'Role: Cloud Development'
 - 'Role: IoT Device'
-ms.openlocfilehash: 2d9b0d97fa1823314f5109a1c7fc79054806c148
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 42def04db63d81bdb3eff8098daa8c75924bffec
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93146935"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107502088"
 ---
 # <a name="understand-the-identity-registry-in-your-iot-hub"></a>IoT Hub 'ınızdaki kimlik kayıt defterini anlayın
 
@@ -106,7 +106,7 @@ Daha karmaşık bir uygulama, [Azure izleyici](../azure-monitor/index.yml) 'den 
 
 ## <a name="device-and-module-lifecycle-notifications"></a>Cihaz ve modül yaşam döngüsü bildirimleri
 
-IoT Hub, yaşam döngüsü bildirimleri göndererek bir kimlik oluşturulduğunda veya silindiğinde IoT çözümünüze bildirimde bulunabilir. Bunu yapmak için, IoT çözümünüzün bir rota oluşturması ve veri kaynağını *DeviceLifecycleEvents* veya *ModuleLifecycleEvents*' e eşit olarak ayarlaması gerekir. Varsayılan olarak, yaşam döngüsü bildirimleri gönderilmez, diğer bir deyişle, böyle bir yol önceden mevcut değildir. Bildirim iletisi özellikleri ve gövdesi içerir.
+IoT Hub, yaşam döngüsü bildirimleri gönderilerek bir cihaz kimliği oluşturulduğunda veya silindiğinde IoT çözümünüze bildirimde bulunabilir. Bunu yapmak için, IoT çözümünüzün bir rota oluşturması ve veri kaynağını *DeviceLifecycleEvents*' e eşit olarak ayarlaması gerekir. Varsayılan olarak, yaşam döngüsü bildirimleri gönderilmez, diğer bir deyişle, böyle bir yol önceden mevcut değildir. *DeviceLifecycleEvents*'e eşit veri kaynağıyla bir yol oluşturarak, her iki cihaz kimliği ve modül kimliği için yaşam döngüsü olayları gönderilir; Ancak, ileti içerikleri, olayların modül kimlikleri veya cihaz kimlikleri için oluşturulup oluşturulmayacağı göre farklılık gösterir.  IoT Edge modüller için, modül kimliği oluşturma akışının diğer modüllerden farklı olduğu unutulmamalıdır; bu nedenle IoT Edge modülleri için, güncelleştirilmiş IoT Edge modül kimliği için karşılık gelen IoT Edge aygıtı çalışıyorsa, oluşturma bildirimi yalnızca gönderilir. Diğer tüm modüller için, IoT Hub tarafında modül kimliği her güncelleştirildiğinde yaşam döngüsü bildirimleri gönderilir.  Bildirim iletisi özellikleri ve gövdesi içerir.
 
 Özellikler: Ileti sistemi özelliklerine sembol ön eki eklenir `$` .
 
@@ -188,7 +188,7 @@ Gövde: Bu bölüm JSON biçimindedir ve oluşturulan modül kimliğinin ikizi t
 
 Cihaz kimlikleri aşağıdaki özelliklerle JSON belgeleri olarak temsil edilir:
 
-| Özellik | Seçenekler | Description |
+| Özellik | Seçenekler | Açıklama |
 | --- | --- | --- |
 | deviceId |gerekli, güncelleştirmeler üzerinde salt okunurdur |ASCII 7 bit alfasayısal karakter ve belirli özel karakterler için büyük/küçük harfe duyarlı bir dize (en fazla 128 karakter uzunluğunda): `- . + % _ # * ? ! ( ) , : = @ $ '` . |
 | GenerationID |gerekli, salt okunurdur |128 karakter uzunluğunda bir IoT Hub 'ı tarafından üretilen, büyük/küçük harfe duyarlı dize. Bu değer, silinen ve yeniden oluşturulduğu zaman, cihazları aynı **DeviceID** ile ayırt etmek için kullanılır. |
@@ -212,7 +212,7 @@ Cihaz kimlikleri aşağıdaki özelliklerle JSON belgeleri olarak temsil edilir:
 
 Modül kimlikleri aşağıdaki özelliklerle JSON belgeleri olarak temsil edilir:
 
-| Özellik | Seçenekler | Description |
+| Özellik | Seçenekler | Açıklama |
 | --- | --- | --- |
 | deviceId |gerekli, güncelleştirmeler üzerinde salt okunurdur |ASCII 7 bit alfasayısal karakter ve belirli özel karakterler için büyük/küçük harfe duyarlı bir dize (en fazla 128 karakter uzunluğunda): `- . + % _ # * ? ! ( ) , : = @ $ '` . |
 | Modül kimliği |gerekli, güncelleştirmeler üzerinde salt okunurdur |ASCII 7 bit alfasayısal karakter ve belirli özel karakterler için büyük/küçük harfe duyarlı bir dize (en fazla 128 karakter uzunluğunda): `- . + % _ # * ? ! ( ) , : = @ $ '` . |

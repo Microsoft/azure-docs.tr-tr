@@ -4,12 +4,12 @@ description: Azure Container Instances içindeki kapsayıcı grupları hakkında
 ms.topic: article
 ms.date: 11/01/2019
 ms.custom: mvc
-ms.openlocfilehash: 72ebe6186da179bc5a1effddcc14327455eb7557
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a2cb3eac5baa5b1035749d28b9fb99bbb45b9ee6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89612406"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790896"
 ---
 # <a name="container-groups-in-azure-container-instances"></a>Azure Container Instances’taki kapsayıcı grupları
 
@@ -123,4 +123,4 @@ Azure Resource Manager şablonuyla çok kapsayıcılı bir kapsayıcı grubunu d
 [volume-gitrepo]: container-instances-volume-gitrepo.md
 [gpus]: container-instances-gpu.md
 [empty-directory]: container-instances-volume-emptydir.md
-[az-container-export]: /cli/azure/container#az-container-export
+[az-container-export]: /cli/azure/container#az_container_export

@@ -8,10 +8,10 @@ ms.subservice: purview-data-catalog
 ms.topic: how-to
 ms.date: 11/23/2020
 ms.openlocfilehash: c176fcafe13749ba89c04b34854f036aa5aea516
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101677651"
 ---
 # <a name="troubleshoot-your-connections-in-azure-purview"></a>Azure purview 'da bağlantılarınızın sorunlarını giderme

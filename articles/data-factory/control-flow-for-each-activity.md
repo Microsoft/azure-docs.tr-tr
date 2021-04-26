@@ -7,12 +7,12 @@ ms.reviewer: jburchel
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 01/23/2019
-ms.openlocfilehash: a0c3a3cbaa71d627f54550cf92c067afbb1eb3f0
-ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
+ms.openlocfilehash: d0fd9ab8286496b9801d6c10682761f1264e040a
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104786218"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106120920"
 ---
 # <a name="foreach-activity-in-azure-data-factory"></a>Azure Data Factory 'de ForEach etkinliği
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -79,7 +79,7 @@ Etkinlikler | Yürütülecek etkinlikler. | Etkinlikler Listesi | Yes
 **Issequential** , false olarak ayarlandıysa, etkinlik en fazla 20 eşzamanlı yineleme ile paralel olarak yinelenir. Bu ayar dikkatli kullanılmalıdır. Eşzamanlı yinelemeler aynı klasöre ancak farklı dosyalara yazıyorsanız, bu yaklaşım iyidir. Eşzamanlı yinelemeler aynı dosyaya aynı anda yazıyorsanız, bu yaklaşım büyük olasılıkla hataya neden olur. 
 
 ## <a name="iteration-expression-language"></a>Yineleme ifadesi dili
-ForEach etkinliğinde, özellik **öğeleri** için tekrarlandırılmış bir dizi sağlayın. " `@item()`Foreach etkinliğinde tek bir sabit listesi üzerinden yinelemek için kullanın. Örneğin, **öğeler** bir diziyse: [1, 2, 3], `@item()` ilk yinelemede 1, ikinci yinelemede 2 ve üçüncü yinelemede 3 döndürür.
+ForEach etkinliğinde, özellik **öğeleri** için tekrarlandırılmış bir dizi sağlayın. " `@item()`Foreach etkinliğinde tek bir sabit listesi üzerinden yinelemek için kullanın. Örneğin, **öğeler** bir diziyse: [1, 2, 3], `@item()` ilk yinelemede 1, ikinci yinelemede 2 ve üçüncü yinelemede 3 döndürür. `@range(0,10)`9 ile biten 0 ile başlayarak on kez yinelemek için LIKE ifadesi de kullanabilirsiniz.
 
 ## <a name="iterating-over-a-single-activity"></a>Tek bir etkinliğin üzerinde yineleme yapma
 **Senaryo:** Azure Blob 'daki aynı kaynak dosyasından Azure Blob 'daki birden çok hedef dosyasına kopyalama.

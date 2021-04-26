@@ -6,10 +6,10 @@ ms.topic: how-to
 ms.custom: contperf-fy21q1, contperf-fy21q2
 ms.date: 12/14/2020
 ms.openlocfilehash: 5dabae76308f32da7968d8cfa89b95f1eb19c142
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104863777"
 ---
 # <a name="automatically-scale-azure-hdinsight-clusters"></a>Azure HDInsight kümelerini otomatik olarak ölçeklendirme
@@ -221,7 +221,7 @@ Azure portal listelenen küme durumu, otomatik ölçeklendirme etkinliklerini iz
 
 Görebileceğiniz tüm küme durumu iletileri aşağıdaki listede açıklanmıştır.
 
-| Küme durumu | Açıklama |
+| Küme durumu | Description |
 |---|---|
 | Çalışma | Küme normal şekilde çalışıyor. Önceki otomatik ölçeklendirme etkinliklerinin tümü başarıyla tamamlandı. |
 | Güncelleştirme  | Küme otomatik ölçeklendirme yapılandırması güncelleştiriliyor.  |

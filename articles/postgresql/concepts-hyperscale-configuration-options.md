@@ -6,19 +6,22 @@ ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
 ms.topic: conceptual
-ms.date: 1/12/2021
-ms.openlocfilehash: 48537483501165d4a978afdbd05560613170d187
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: references_regions
+ms.date: 04/07/2021
+ms.openlocfilehash: 1dd0666c2946896ed324fb3986bb7946890b73de
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98165620"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107388712"
 ---
 # <a name="azure-database-for-postgresql--hyperscale-citus-configuration-options"></a>PostgreSQL için Azure veritabanı – Hyperscale (Citus) yapılandırma seçenekleri
 
 ## <a name="compute-and-storage"></a>İşlem ve depolama
  
 İşlem ve depolama ayarlarını, çalışan düğümleri ve bir hiper ölçek (Citus) sunucu grubundaki düzenleyici düğümü için bağımsız olarak seçebilirsiniz.  İşlem kaynakları, temel alınan donanımın mantıksal CPU 'sunu temsil eden sanal çekirdekler olarak sağlanır. Sağlama için depolama boyutu, Hiperscale (Citus) sunucu grubunuzdaki düzenleyici ve çalışan düğümlerinin kullanabildiği kapasiteyi ifade eder. Depolama veritabanı dosyalarını, geçici dosyaları, işlem günlüklerini ve Postgres sunucu günlüklerini içerir.
+
+### <a name="standard-tier"></a>Standart katmanı
  
 | Kaynak              | Çalışan düğümü           | Düzenleyici düğümü      |
 |-----------------------|-----------------------|-----------------------|
@@ -70,13 +73,47 @@ Tüm Hiperscale (Citus) kümesi için, toplanan ıOPS aşağıdaki değerlere g�
 | 19           | 29.184              | 58.368            | 116.812           |
 | 20           | 30.720              | 61.440            | 122.960           |
 
+### <a name="basic-tier-preview"></a>Temel katman (Önizleme)
+
+> [!IMPORTANT]
+> Hiperscale (Citus) temel katmanı Şu anda önizlemededir.  Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
+>
+> Diğer yeni özelliklerin bir listesini, [hiper ölçek için Önizleme özellikleri (Citus)](hyperscale-preview-features.md)sayfasına bakabilirsiniz.
+
+Hyperscale (Citus) [temel katmanı](concepts-hyperscale-tiers.md) , tek bir düğümü olan bir sunucu grubudur.  Koordinatör ve çalışan düğümleri arasında ayrım olmadığından işlem ve depolama kaynaklarını seçmek daha az karmaşıktır.
+
+| Kaynak              | Kullanılabilir seçenekler     |
+|-----------------------|-----------------------|
+| İşlem, sanal çekirdekler       | 2, 4, 8               |
+| VCore başına bellek, GiB | 4                     |
+| Depolama boyutu, GiB     | 128, 256, 512         |
+| Depolama türü          | Genel amaçlı (SSD) |
+| IOPS                  | En fazla 3 ıOPS/GiB      |
+
+Tek bir hiper ölçek (Citus) düğümündeki Toplam RAM miktarı, seçilen sayıda sanal çekirdek temel alır.
+
+| Sanal çekirdek | GiB RAM |
+|--------|---------|
+| 2      | 8       |
+| 4      | 16      |
+| 8      | 32      |
+
+Sağladığınız toplam depolama miktarı, temel katman düğümü için kullanılabilen g/ç kapasitesini de tanımlar.
+
+| Depolama boyutu, GiB | Maksimum ıOPS |
+|-------------------|--------------|
+| 128               | 384          |
+| 256               | 768          |
+| 512               | 1536        |
+
 ## <a name="regions"></a>Bölgeler
 Hiper ölçek (Citus) sunucu grupları aşağıdaki Azure bölgelerinde kullanılabilir:
 
-* Kuzey
+* Kuzey ve Güney Amerika: 
+    * Güney Brezilya
     * Orta Kanada
     * Central US
-    * Doğu ABD
+    * Doğu ABD *
     * Doğu ABD 2
     * Orta Kuzey ABD
     * Batı ABD 2
@@ -86,42 +123,14 @@ Hiper ölçek (Citus) sunucu grupları aşağıdaki Azure bölgelerinde kullanı
     * Güney Kore - Orta
     * Güneydoğu Asya
 * 'Ya
+    * Orta Fransa
     * Kuzey Avrupa
     * Güney Birleşik Krallık
     * West Europe
 
+( \* = [Önizleme özelliklerini](hyperscale-preview-features.md)destekler)
+
 Bu bölgelerden bazıları başlangıçta tüm Azure aboneliklerinde etkinleştirilmemiş olabilir. Yukarıdaki listeden bir bölge kullanmak ve bunu aboneliğinizde görmezseniz veya bu listede olmayan bir bölge kullanmak istiyorsanız, bir [destek isteği](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)açın.
-
-## <a name="limits-and-limitations"></a>Sınırlar ve sınırlamalar
-
-Aşağıdaki bölümde, hiper ölçek (Citus) hizmetindeki kapasite ve işlevsel sınırlar açıklanmaktadır.
-
-### <a name="maximum-connections"></a>En fazla bağlantı sayısı
-
-Her PostgreSQL bağlantısı (hatta boş olanlar) en az 10 MB bellek kullanır, bu nedenle eşzamanlı bağlantıların sınırlandırması önemlidir. Düğümlerin sağlıklı kalmasını sağlamak için seçtiğimiz sınırlar şunlardır:
-
-* Düzenleyici düğümü
-   * En fazla bağlantı: 300
-   * En fazla kullanıcı bağlantısı: 297
-* Çalışan düğümü
-   * En fazla bağlantı: 600
-   * En fazla kullanıcı bağlantısı: 597
-
-Bu limitlerin ötesine bağlanma denemeleri hata vererek başarısız olur. Sistem, izleme düğümleri için üç bağlantı ayırır. bu nedenle, bağlantı toplamı, Kullanıcı sorguları için en az üç bağlantı mevcuttur.
-
-Yeni bağlantıların kurulması zaman alır. Bu, çok sayıda kısa süreli bağlantı isteyen birçok uygulama için geçerlidir. Boştaki işlemleri azaltmak ve var olan bağlantıları yeniden kullanmak için hem bağlantı havuzlayıcı kullanılması önerilir. Daha fazla bilgi edinmek için [Blog gönderimizi](https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/not-all-postgres-connection-pooling-is-equal/ba-p/825717)ziyaret edin.
-
-### <a name="storage-scaling"></a>Depolama Ölçeklendirmesi
-
-Düzenleyici ve çalışan düğümlerinde depolamanın ölçeği ölçeklendirilebilir (artırılabilir), ancak ölçeği azalabilir (azaltılmış).
-
-### <a name="storage-size"></a>Depolama boyutu
-
-Koordinatör ve çalışan düğümlerinde en fazla 2 TiB depolama desteklenir. Düğüm ve küme boyutları için [Yukarıdaki](#compute-and-storage) kullanılabilir depolama SEÇENEKLERINE ve IOPS hesaplamasına bakın.
-
-### <a name="database-creation"></a>Veritabanı oluşturma
-
-Azure portal, hiper ölçek (Citus) sunucu grubu başına tam olarak bir veritabanına bağlanmak için kimlik bilgileri sağlar `citus` . Şu anda başka bir veritabanı oluşturulmasına izin verilmez ve CREATE DATABASE komutu bir hata vererek başarısız olur.
 
 ## <a name="pricing"></a>Fiyatlandırma
 En güncel fiyatlandırma bilgileri için bkz. hizmet [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/postgresql/).

@@ -3,12 +3,12 @@ title: Azure VMware çözüm dağıtımını planlama
 description: Bu makalede bir Azure VMware Çözüm dağıtımı iş akışı özetlenmektedir.  Nihai sonuç, sanal makine (VM) oluşturma ve geçirme için hazırlanma ortamıdır.
 ms.topic: tutorial
 ms.date: 03/17/2021
-ms.openlocfilehash: 2ded5d706ab71b3880633cd324fb366d0a1bccbe
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 60e0a4083c0253d322b2e10472d0df7496722c10
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104584644"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107253"
 ---
 # <a name="planning-the-azure-vmware-solution-deployment"></a>Azure VMware çözüm dağıtımını planlama
 
@@ -16,8 +16,12 @@ Bu makalede, dağıtım sırasında kullanacağınız bilgileri tanımlamak ve t
 
 Bu hızlı başlangıç bölümünde özetlenen adımlar, sanal makineler (VM 'Ler) ve geçiş için üretim için hazırlanmış bir ortam sağlar. 
 
->[!IMPORTANT]
->Azure VMware Çözüm kaynağınızı oluşturmadan önce, konaklarınızın ayrılmaları için bir destek bileti göndermek üzere [Azure VMware Çözüm kaynağını etkinleştirme](enable-azure-vmware-solution.md) makalesini izleyin. Destek ekibi isteğinizi aldıktan sonra, isteğinizi doğrulamak ve konaklarınızı ayırmak için beş iş günü sürer. Mevcut bir Azure VMware çözümü özel bulutunuz varsa ve daha fazla ana bilgisayar ayırmak istiyorsanız, aynı işlemden geçmeniz gerekir. 
+Toplayacağınız verileri izlemek için [HCX planlama denetim listesini](https://www.virtualworkloads.com/2021/04/hcx-planning-checklist/)alın.
+
+> [!IMPORTANT]
+> Azure VMware Çözüm kaynağınızı oluşturmaya hazırlanırken bir ana bilgisayar kotasını daha erken istemeniz önemlidir. Şimdi bir konak kotası isteyebilirsiniz, bu nedenle planlama işlemi tamamlandığında, Azure VMware çözümü özel bulutu 'nı dağıtmaya hazırsınız demektir. Destek ekibi bir konak kotası için isteğinizi aldıktan sonra, isteğinizi doğrulamak ve konaklarınızı ayırmak için beş iş günü sürer. Mevcut bir Azure VMware çözümü özel bulutunuz varsa ve daha fazla konağın ayrılmasını istiyorsanız, aynı işlemi tamamlayabilirsiniz. Daha fazla bilgi için, sahip olduğunuz abonelik türüne bağlı olarak aşağıdaki bağlantılara bakın:
+> - [EA müşterileri](enable-azure-vmware-solution.md?tabs=azure-portal#request-host-quota-for-ea-customers)
+> - [CSP müşterileri](enable-azure-vmware-solution.md?tabs=azure-portal#request-host-quota-for-csp-customers)
 
 ## <a name="subscription"></a>Abonelik
 
@@ -30,7 +34,7 @@ Azure VMware çözümünü dağıtmak için kullanmayı planladığınız abonel
 
 Azure VMware çözümünüz için kullanmak istediğiniz kaynak grubunu belirler.  Genellikle, Azure VMware çözümü için bir kaynak grubu oluşturulur, ancak var olan bir kaynak grubunu kullanabilirsiniz.
 
-## <a name="region"></a>Region
+## <a name="region"></a>Bölge
 
 Azure VMware çözümünün dağıtılmasını istediğiniz bölgeyi belirler.  Daha fazla bilgi için bkz. [bölgeye göre kullanılabilir Azure ürünleri kılavuzu](https://azure.microsoft.com/en-us/global-infrastructure/services/?products=azure-vmware).
 
@@ -82,18 +86,6 @@ Bu ağ kesimi öncelikle ilk dağıtım sırasında test amacıyla kullanılır.
 
 :::image type="content" source="media/pre-deployment/nsx-segment-diagram.png" alt-text="Sanal makine iş yükleri için IP adresi kesimini tanımla" border="false":::     
 
-## <a name="optional-extend-your-networks"></a>Seçim Ağlarınızı genişletin
-
-Ağ kesimlerini Şirket içinden Azure VMware çözümüne genişletebilirsiniz ve bunu yaparsanız bu ağları şimdi tanımlayabilirsiniz.  
-
-Şunları göz önünde bulundurun:
-
-- Ağları Şirket içinden genişletmeyi planlıyorsanız, bu ağlar şirket içi VMware ortamınızda bir [vSphere dağıtılmış anahtarına (vDS)](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.networking.doc/GUID-B15C6A13-797E-4BCB-B9D9-5CBC5A60C3A6.html) bağlanmalıdır.  
-- Bir [vSphere standart anahtarında](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.networking.doc/GUID-350344DE-483A-42ED-B0E2-C811EE927D59.html)canlı genişletmek istediğiniz ağ (ler) i yoksa genişletilemez.
-
->[!NOTE]
->Bu ağlar, dağıtım sırasında değil, yapılandırmanın son adımı olarak genişletilir.
-
 ## <a name="attach-azure-virtual-network-to-azure-vmware-solution"></a>Azure sanal ağını Azure VMware çözümüne ekleyin
 
 Azure VMware çözümüne bağlantı sağlamak için bir ExpressRoute, Azure VMware Çözüm özel bulutu 'ndan bir ExpressRoute sanal ağ geçidine oluşturulmuştur.
@@ -106,7 +98,7 @@ Azure VMware çözümüne bağlantı sağlamak için bir ExpressRoute, Azure VMw
 
 *Mevcut* bir ExpressRoute sanal ağ geçidi kullanmayı planlıyorsanız, Azure VMware çözümü ExpressRoute bağlantı hattı dağıtım sonrası bir adım olarak oluşturulur. Bu durumda, **sanal ağ** alanını boş bırakın.
 
-Genel bir öneri olarak, mevcut bir ExpressRoute sanal ağ geçidini kullanmak kabul edilebilir. Planlama amacıyla, hangi ExpressRoute sanal ağ geçidini kullanacağınızı ve ardından bir sonraki adımla devam edin.
+Genel bir öneri olarak, mevcut bir ExpressRoute sanal ağ geçidini kullanmak kabul edilebilir. Planlama amacıyla, hangi ExpressRoute sanal ağ geçidini kullanacağınızı ve ardından bir [sonraki adımla](#vmware-hcx-network-segments)devam edin.
 
 ### <a name="create-a-new-expressroute-virtual-network-gateway"></a>Yeni bir ExpressRoute sanal ağ geçidi oluştur
 
@@ -116,23 +108,36 @@ Genel bir öneri olarak, mevcut bir ExpressRoute sanal ağ geçidini kullanmak k
    1. Önceden var olan ExpressRoute sanal ağ geçitlerinin olmadığı bir Azure sanal ağını belirler.
    2. Dağıtımdan önce Azure sanal ağında bir [Gatewaysubnet](../expressroute/expressroute-howto-add-gateway-portal-resource-manager.md#create-the-gateway-subnet) oluşturun.
 
-- Yeni bir Azure sanal ağı için daha önce veya dağıtım sırasında oluşturabilirsiniz. **Sanal ağ** listesi altında **Yeni oluştur** bağlantısını seçin.
+- Yeni bir Azure sanal ağı ve sanal ağ geçidi için, **sanal ağ** listesi altında **Yeni oluştur** bağlantısını seçerek dağıtım sırasında bu seçeneği oluşturacaksınız.  Dağıtım adımlarını tamamladıktan sonra adres alanı ve alt ağları dağıtımın önceden tanımlamanız önemlidir, bu nedenle bu bilgileri girmeye hazırsınız.
 
 Aşağıdaki görüntüde, **sanal ağ** alanı vurgulanmış şekilde **özel bir bulut dağıtımı oluşturma** ekranı gösterilmektedir.
 
 :::image type="content" source="media/pre-deployment/azure-vmware-solution-deployment-screen-vnet-circle.png" alt-text="Sanal ağ alanı vurgulanmış şekilde Azure VMware Çözüm dağıtımı ekranının ekran görüntüsü.":::
 
->[!NOTE]
->Kullanılacak veya oluşturulacak sanal ağ, şirket içi ortamınız ve Azure VMware çözümünüz tarafından görülebilir, bu nedenle bu sanal ağda kullandığınız IP segmentinin ve alt ağların çakışmadığından emin olun.
+> [!NOTE]
+> Kullanılacak veya oluşturulacak sanal ağ, şirket içi ortamınız ve Azure VMware çözümünüz tarafından görülebilir, bu nedenle bu sanal ağda kullandığınız IP segmentinin ve alt ağların çakışmadığından emin olun.
 
 ## <a name="vmware-hcx-network-segments"></a>VMware HCX ağ kesimleri
 
-VMware HCX, Azure VMware çözümü ile paketlenmiş bir teknolojidir. VMware HCX 'in birincil kullanım örnekleri iş yükü geçişleri ve olağanüstü durum kurtarmasından sorumludur. Bunlardan birini yapmak istiyorsanız, şimdi ağı planlamanız en iyisidir.   Aksi halde, bir sonraki adıma atlayabilir ve devam edebilirsiniz.
+VMware HCX, Azure VMware çözümü ile paketlenmiş bir teknolojidir. VMware HCX 'in birincil kullanım örnekleri iş yükü geçişleri ve olağanüstü durum kurtarmasından sorumludur. Bunlardan birini yapmak istiyorsanız, şimdi ağı planlamanız en iyisidir. Aksi halde, bir sonraki adıma atlayabilir ve devam edebilirsiniz.
 
 [!INCLUDE [hcx-network-segments](includes/hcx-network-segments.md)]
 
+## <a name="optional-extend-your-networks"></a>Seçim Ağlarınızı genişletin
+
+Ağ kesimlerini Şirket içinden Azure VMware çözümüne genişletebilirsiniz. Ağ kesimlerini genişletirseniz, bu ağları şimdi tanımla.  
+
+Göz önünde bulundurulması gereken bazı etmenler şunlardır:
+
+- Ağları Şirket içinden genişletmeyi planlıyorsanız, bu ağlar şirket içi VMware ortamınızda bir [vSphere dağıtılmış anahtarına (vDS)](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.networking.doc/GUID-B15C6A13-797E-4BCB-B9D9-5CBC5A60C3A6.html) bağlanmalıdır.  
+- [VSphere standart anahtarındaki](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.networking.doc/GUID-350344DE-483A-42ED-B0E2-C811EE927D59.html) ağlar genişletilemiyor.
+
+>[!NOTE]
+>Bu ağlar, dağıtım sırasında değil, yapılandırmanın son adımı olarak genişletilir.
+>
 ## <a name="next-steps"></a>Sonraki adımlar
 Artık Toplandığınıza ve gerekli bilgileri belgeleolduğunuza göre, Azure VMware Çözüm özel bulutunuzu oluşturmak için sonraki bölüme devam edin.
 
 > [!div class="nextstepaction"]
 > [Azure VMware Çözümü dağıtma](deploy-azure-vmware-solution.md)
+> 

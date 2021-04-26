@@ -6,19 +6,18 @@ documentationcenter: na
 author: KumudD
 manager: mtillman
 ms.service: virtual-network
-Customer intent: As an Azure customer, I want to learn more about enabling routing preference for my CDN origin resources.
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2021
 ms.author: mnayak
-ms.openlocfilehash: 00e0d1afa2aa035fe27e73dae60e291ea53bd6b8
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: e6276ec1a1c3f52b6574ee60d40e743a183086eb
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105042858"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106060593"
 ---
 # <a name="what-is-routing-preference-unmetered"></a>Yönlendirme tercihi tarifeli değil mi?
 

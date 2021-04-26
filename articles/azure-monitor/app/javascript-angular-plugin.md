@@ -8,18 +8,19 @@ ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
 ms.date: 10/07/2020
 ms.author: lagayhar
-ms.openlocfilehash: d45d8bed328dc91dfeeabd6ce878074fa1218623
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7ac83d0c43026b431370fab1d8c49aec1adf6659
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101737027"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312731"
 ---
 # <a name="angular-plugin-for-application-insights-javascript-sdk"></a>JavaScript SDK Application Insights için angular eklentisi
 
 Application Insights JavaScript SDK 'Sı için angular eklentisi şunları sunar:
 
 - Yönlendirici değişikliklerinin izlenmesi
+- Yakalanamayan özel durumları izleme
 
 > [!WARNING]
 > Angular eklentisi ECMAScript 3 (ES3) uyumlu DEĞILDIR.
@@ -62,6 +63,24 @@ export class AppComponent {
         appInsights.loadAppInsights();
     }
 }
+```
+
+Yakalanamayan özel durumları izlemek için `app.module.ts` :
+
+```js
+import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+
+@NgModule({
+  ...
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: ApplicationinsightsAngularpluginErrorService
+    }
+  ]
+  ...
+})
+export class AppModule { }
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar

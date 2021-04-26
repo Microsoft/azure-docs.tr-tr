@@ -9,12 +9,12 @@ ms.service: media-services
 ms.topic: conceptual
 ms.date: 1/29/2020
 ms.author: inhenkel
-ms.openlocfilehash: 71a2b8f0734de80f71dbb2372f8600b464d6c606
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0bbfb54d6ba7483e96633bdf05bb580e5517d216
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99258448"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277751"
 ---
 # <a name="managed-identities"></a>Yönetilen kimlikler
 
@@ -47,8 +47,8 @@ Müşteri tarafından yönetilen anahtarlar ve Key Vault hakkında daha fazla bi
 
 Bu öğreticiler, yukarıda belirtilen senaryoların her ikisini de içerir.
 
-- [Azure portal, müşteri tarafından yönetilen anahtarları veya BYOK 'u Media Services ile birlikte kullanmak için kullanın](tutorial-byok-portal.md)
-- [Media Services REST API ile müşteri tarafından yönetilen anahtarları veya BYOK kullanın](tutorial-byok-postman.md).
+- [Azure portal, müşteri tarafından yönetilen anahtarları veya BYOK 'u Media Services ile birlikte kullanmak için kullanın](security-customer-managed-keys-portal-tutorial.md)
+- [Media Services REST API ile müşteri tarafından yönetilen anahtarları veya BYOK kullanın](security-customer-managed-keys-rest-postman-tutorial.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

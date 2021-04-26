@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.service: iot-dps
 services: iot-dps
 ms.custom: mvc
-ms.openlocfilehash: f45c3def84c548ba12221efa59e9ebbd4699df71
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 5707d873bbf67add78f9a8e29fcb9135898486d6
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91316078"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226846"
 ---
 # <a name="tutorial-configure-cloud-resources-for-device-provisioning-with-the-iot-hub-device-provisioning-service"></a>Öğretici: IoT Hub cihaz sağlama hizmeti ile cihaz sağlama için bulut kaynaklarını yapılandırma
 
@@ -120,7 +120,7 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 > * IoT hub’ı Cihaz Sağlama Hizmeti’ne bağlama
 > * Cihaz Sağlama Hizmeti’nde ayırma ilkesini ayarlama
 
-Sağlama için cihazınızın nasıl ayarlanacağını öğrenmek için sonraki öğreticiye ilerleyin.
+Cihazınızı sağlama için ayarlama hakkında bilgi edinmek için sonraki öğreticiye ilerleyin
 
 > [!div class="nextstepaction"]
 > [Sağlama için cihazı ayarlama](tutorial-set-up-device.md)

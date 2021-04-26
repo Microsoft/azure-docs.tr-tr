@@ -3,12 +3,12 @@ title: Azure VMware çözümünüz özel bulutunuzda GitHub Enterprise Server '�
 description: Azure VMware Çözüm özel bulutunuzda GitHub Enterprise Server 'ı ayarlamayı öğrenin.
 ms.topic: how-to
 ms.date: 02/11/2021
-ms.openlocfilehash: 59a76c3976f6fcda88423b7b78344f2abed1ea84
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0ff7ab87d7401cd3faaecf149fb1b07be3f8db42
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100382030"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862948"
 ---
 # <a name="set-up-github-enterprise-server-on-your-azure-vmware-solution-private-cloud"></a>Azure VMware çözümünüz özel bulutunuzda GitHub Enterprise Server 'ı ayarlama
 
@@ -229,6 +229,6 @@ Bu makalede, Azure VMware çözümünüz özel bulutunuzun en üstünde GitHub.c
 
 Azure VMware Çözüm özel bulutunuzda GitHub Enterprise Server ayarlamayı artık kapsadığınıza göre, şunları öğrenmek isteyebilirsiniz: 
 
-- [GitHub eylemleri ile çalışmaya](https://docs.github.com/en/actions)başlama.
-- [Beta programına katılma](https://resources.github.com/beta-signup/).
-- [GitHub Enterprise Server Yönetimi](https://githubtraining.github.io/admin-training/#/00_getting_started).
+- [GitHub eylemleri ile çalışmaya başlama](https://docs.github.com/en/actions)
+- [Beta programına nasıl katılır](https://resources.github.com/beta-signup/)
+- [GitHub Enterprise Server Yönetimi](https://githubtraining.github.io/admin-training/#/00_getting_started)

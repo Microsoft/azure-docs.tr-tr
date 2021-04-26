@@ -5,21 +5,21 @@ services: front-door
 author: duongau
 ms.service: frontdoor
 ms.topic: conceptual
-ms.date: 02/18/2021
+ms.date: 03/31/2021
 ms.author: yuajia
-ms.openlocfilehash: 8e6ceebc9e92dabe66baeb9aeff0ae9692e2bdad
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e3e5333b339101676582cec03dbb960148d59b56
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101100487"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106067563"
 ---
 # <a name="what-is-a-rule-set-for-azure-front-door-standardpremium-preview"></a>Azure ön kapısının Standart/Premium (Önizleme) için ayarlanan kural nedir?
 
 > [!Note]
 > Bu belge, Azure ön kapısının Standart/Premium (Önizleme) içindir. Azure ön kapısı hakkında bilgi mi arıyorsunuz? [Burada](../front-door-overview.md)görüntüleyin.
 
-Kural kümesi, kuralların bir birleşimini birden çok rotasıyla ilişkilendirebileceğiniz tek bir küme içine gruplandıran özelleştirilmiş bir kural altyapısıdır. Kural kümesi, isteklerin kenarda nasıl işlendiğini ve Azure ön kapısının bu istekleri nasıl işlediğini özelleştirmenizi sağlar.
+Kural kümesi, kuralların birleşimini tek bir küme içine gruplandıran özelleştirilmiş bir kural altyapısıdır. Bir kural kümesini birden çok rotasıyla ilişkilendirebilirsiniz. Kural kümesi, isteklerin kenarda nasıl işleneceğini ve Azure ön kapısının bu istekleri nasıl işlediğini özelleştirmenize olanak sağlar.
 
 > [!IMPORTANT]
 > Azure ön kapı Standart/Premium (Önizleme) Şu anda genel önizleme aşamasındadır.
@@ -32,7 +32,7 @@ Kural kümesi, kuralların bir birleşimini birden çok rotasıyla ilişkilendir
 
 * İstekleri istemci cihaz türüne bağlı olarak uygulamanızın mobil veya masaüstü sürümlerine yönlendirin.
 
-* Yeniden yönlendirme yeteneklerini kullanarak, yeni ana bilgisayar adları, yollar, sorgu dizesi veya protokollerine yönlendirmek için, istemciye 301, 302, 307 ve 308 geri yönlendirilmesi döndürün.
+* Yeniden yönlendirme yeteneklerini kullanarak, yeni ana bilgisayar adları, yollar, sorgu dizeleri veya protokollerine yönlendirmek için, istemciye 301, 302, 307 ve 308 geri yönlendirilmesi döndürün.
 
 * Yönlendirmenize ait önbelleğe alma yapılandırmasını gelen isteklere göre dinamik olarak değiştirin.
 
@@ -60,16 +60,19 @@ Azure ön kapı kural kümesi ile, her biri bir kural kümesinden oluşan kural 
 
 Daha fazla kota sınırı için [Azure aboneliği ve hizmet limitleri, Kotalar ve kısıtlamalar](../../azure-resource-manager/management/azure-subscription-service-limits.md)' a bakın.
 
-* *Kural kümesi*: bir veya birden çok [rotasıyla](concept-route.md)ilişkili bir kurallar kümesi. Her yapılandırma 25 kuralla sınırlıdır. En fazla 10 yapılandırma oluşturabilirsiniz.
+* *Kural kümesi*: bir veya birden çok [rotasıyla](concept-route.md)ilişkili bir kurallar kümesi.
 
-* Kural *kümesi kuralı*: en fazla 10 eşleşme koşulu ve 5 eylemden oluşan bir kural. Kurallar bir kural kümesi için yereldir ve kural kümeleri arasında kullanılmak üzere verilemez. Kullanıcılar aynı kuralı birden çok kural kümesinde oluşturabilir.
+* *Kural kümesi kuralı*: en fazla 10 eşleşme koşulu ve 5 eylemden oluşan bir kural. Kurallar bir kural kümesi için yereldir ve kural kümeleri arasında kullanılmak üzere verilemez. Kullanıcılar aynı kuralı birden çok kural kümesinde oluşturabilir.
 
-* *Koşulu Eşleştir*: gelen isteklerinizi ayrıştırmak için kullanılabilecek çok sayıda eşleşme koşulu vardır. Bir kural, en fazla 10 eşleşme koşulu içerebilir. Eşleşme koşulları bir **ve** işleciyle değerlendirilir. *Normal ifade koşullarda desteklenir*. [Kural kümesi koşulunda](concept-rule-set-match-conditions.md)eşleşme koşullarının tam listesi bulunabilir.
+* *Koşulu Eşleştir*: gelen isteklerinizi ayrıştırmak için kullanılabilecek çok sayıda eşleşme koşulu vardır. Bir kural, en fazla 10 eşleşme koşulu içerebilir. Eşleşme koşulları bir **ve** işleciyle değerlendirilir. *Normal ifade koşullarda desteklenir*. Eşleşen koşulların tam bir listesi, [kural kümesi eşleşme koşullarında](concept-rule-set-match-conditions.md)bulunabilir.
 
 * *Eylem*: Eylemler, eşleştirmeleri eşleşen koşullara göre gelen istekleri nasıl işleyenleri belirler. Önbelleğe alma davranışlarını değiştirebilir, istek üst bilgilerini/yanıt üstbilgilerini değiştirebilir, URL yeniden yazma ve URL yeniden yönlendirme işlemleri yapabilirsiniz. *Sunucu değişkenleri, eylemde desteklenir*. Bir kural, en fazla 10 eşleşme koşulu içerebilir. Eylemlerin tam listesi, [kural kümesi eylemleri](concept-rule-set-actions.md)bulunabilir.
+
+## <a name="arm-template-support"></a>ARM şablon desteği
+
+Kural kümeleri, Azure Resource Manager şablonlar kullanılarak yapılandırılabilir. [Bkz. örnek bir şablon](https://github.com/Azure/azure-quickstart-templates/tree/master/201-front-door-standard-premium-rule-set). Yöntemi, [eşleştirme koşulları](concept-rule-set-match-conditions.md) ve [eylemleri](concept-rule-set-actions.md)için belge örneklerine dahil edilen JSON veya bıcep kod parçacıklarını kullanarak özelleştirebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Ön kapı Standart/Premium oluşturmayı](create-front-door-portal.md)öğrenin.
 * İlk [kural kümesini](how-to-configure-rule-set.md)nasıl yapılandıracağınızı öğrenin.
- 

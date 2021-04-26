@@ -390,15 +390,12 @@
           href: how-to-migrate-from-estimators-to-scriptrunconfig.md
         - name: Eğitim takibi ve izleme
           items:
-            - name: 'Çalıştırmaları başlatma, izleme ve iptal etme'
+            - name: 'Çalışmaları izleme, izleme ve çözümleme'
               displayName: 'cancel, fail, status, child run'
-              href: how-to-manage-runs.md
-            - name: Günlükleri etkinleştirme
-              displayName: 'troubleshoot, log, files, tracing'
-              href: how-to-track-experiments.md
-            - name: Çalıştırmalar için günlükleri ve ölçümleri görüntüleme
+              href: how-to-track-monitor-analyze-runs.md
+            - name: Günlük & görünüm ölçümleri ve günlük dosyaları
               displayName: 'troubleshoot, log, files, tracing, metrics'
-              href: how-to-monitor-view-training-logs.md
+              href: how-to-log-view-metrics.md
             - name: TensorBoard ile çalıştırmaları görselleştirme
               displayName: 'log, monitor, metrics'
               href: how-to-monitor-tensorboard.md
@@ -440,9 +437,6 @@
         - name: Databricks ile otomatik ML kullanma
           displayName: automl
           href: how-to-configure-databricks-automl-environment.md
-        - name: Uzak işlem hedeflerini kullanma
-          displayName: automl automated auto ml
-          href: how-to-auto-train-remote.md
         - name: Tahmin modellerini otomatik olarak eğitme
           displayName: time series
           href: how-to-auto-train-forecast.md
@@ -450,7 +444,7 @@
           displayName: 'automl, feature engineering, feature importance'
           href: how-to-configure-cross-validation-data-splits.md
         - name: Otomatikleştirilmiş makine öğrenmesinde özellik geliştirme (Python)
-          displayName: 'automl, feature engineering, feature importance'
+          displayName: 'automl, feature engineering, feature importance, BERT'
           href: how-to-configure-auto-features.md
         - name: ML ardışık düzenlerinde otomatik ML kullanma (Python)
           displayName: machine learning automl
@@ -556,6 +550,9 @@
             - name: Verileri dönüştürme
               displayName: pipeline
               href: how-to-designer-transform-data.md
+            - name: İşlem hattı parametrelerini kullanma
+              displayName: 'designer, pipeline parameters'
+              href: how-to-use-pipeline-parameter.md
             - name: Yayımlanmış işlem hatlarını kullanarak yeniden eğitme
               displayName: 'retrain, designer, published pipeline'
               href: how-to-retrain-designer.md
@@ -621,6 +618,8 @@
     - name: Seçilen ortamlar
       displayName: 'environments, curated environments'
       href: resource-curated-environments.md
+    - name: Azure CLI
+      href: /cli/azure/ml
 - name: Kaynaklar
   items:
     - name: Sürüm notları

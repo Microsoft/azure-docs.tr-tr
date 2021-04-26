@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 23c64cc91378be605481eb554af2178100df3508
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 956c92c5c020f892b8148e9d43d403b1099fbdba
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629409"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106113427"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -54,7 +54,7 @@ npm install @azure/communication-phone-numbers --save
 
 ## <a name="authenticate-the-client"></a>İstemcinin kimliğini doğrulama
 
-**PhoneNumbersClient** istemci kitaplığından içeri aktarın ve bağlantı dizeniz ile örneğini oluşturun. Aşağıdaki kod, adlı bir ortam değişkeninden kaynak için bağlantı dizesini alır `COMMUNICATION_SERVICES_CONNECTION_STRING` . [Kaynak bağlantı dizesini yönetme](../../create-communication-resource.md#store-your-connection-string)hakkında bilgi edinin.
+**PhoneNumbersClient** istemci kitaplığından içeri aktarın ve bağlantı dizeniz ile örneğini oluşturun. Aşağıdaki kod, adlı bir ortam değişkeninden kaynak için bağlantı dizesini alır `COMMUNICATION_SERVICES_CONNECTION_STRING` . [Kaynağınızın bağlantı dizesini yönetme](../../create-communication-resource.md#store-your-connection-string)hakkında bilgi edinin.
 
 Aşağıdaki kodu **phone-numbers-quickstart.js** üst kısmına ekleyin:
 

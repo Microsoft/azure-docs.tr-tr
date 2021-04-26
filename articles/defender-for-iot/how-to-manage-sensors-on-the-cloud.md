@@ -1,16 +1,16 @@
 ---
-title: IoT portalı için Defender 'da algılayıcılar ve abonelikler ekleme ve yönetme
+title: IoT portalı için Defender 'daki algılayıcıları yönetme
 description: IoT portalı için Defender 'da sensöri ekleme, görüntüleme ve yönetme hakkında bilgi edinin.
-ms.date: 2/18/2021
+ms.date: 04/17/2021
 ms.topic: how-to
-ms.openlocfilehash: 5c529a5679e8b3d4879b003fa3d168e911f9b518
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: f407a65f60a1b969f17ebe00be39a888a09ec83d
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104781832"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107752723"
 ---
-# <a name="onboard-and-manage-sensors-and-subscriptions-in-the-defender-for-iot-portal"></a>IoT portalı için Defender 'da algılayıcılar ve abonelikler ekleme ve yönetme
+# <a name="manage-sensors-in-the-defender-for-iot-portal"></a>IoT portalı için Defender 'daki algılayıcıları yönetme
 
 Bu makalede, [IoT portalı Için Defender](https://portal.azure.com/#blade/Microsoft_Azure_IoT_Defender/IoTDefenderDashboard/Getting_Started)'da algılayıcıları ekleme, görüntüleme ve yönetme işlemlerinin nasıl yapılacağı açıklanır.
 
@@ -26,16 +26,14 @@ Kaydolmak için:
 1. **Yerleşik algılayıcı** seçin.
 1. Bir algılayıcı adı oluşturun. Adının bir parçası olarak yüklediğiniz sensör IP adresini dahil etmenizi veya kolayca tanımlanabilir bir ad kullanmanızı öneririz. Bu, [IoT portalındaki Azure Defender](https://portal.azure.com/#blade/Microsoft_Azure_IoT_Defender/IoTDefenderDashboard/Getting_Started) 'daki kayıt adı ve algılayıcı konsolunda görüntülenecek olan dağıtılan algılayıcının IP 'si ile ilgili daha kolay izleme ve tutarlı adlandırma sağlar.
 1. Algılayıcıyı bir Azure aboneliğiyle ilişkilendirin.
-1. **Buluta bağlı** geçişi kullanarak bir algılayıcı yönetimi modu seçin. Geçiş açık ise, algılayıcı buluta bağlanır. Geçiş kapalıysa, algılayıcı yerel olarak yönetilir.
+1. **Buluta bağlı** geçişi kullanarak bir algılayıcı bağlantı modu seçin. Geçiş açık ise, algılayıcı buluta bağlanır. Geçiş kapalıysa, algılayıcı yerel olarak yönetilir.
 
-   - **Buluta bağlı algılayıcılar**: algılayıcıyı algılayan bilgiler algılayıcı konsolunda görüntülenir. Uyarı bilgileri bir IoT Hub 'ı aracılığıyla dağıtılır ve Azure Sentinel gibi diğer Azure hizmetleriyle paylaşılabilir.
+   - **Buluta bağlı algılayıcılar**: algılayıcıyı algılayan bilgiler algılayıcı konsolunda görüntülenir. Uyarı bilgileri bir IoT Hub 'ı aracılığıyla dağıtılır ve Azure Sentinel gibi diğer Azure hizmetleriyle paylaşılabilir. Ayrıca, tehdit bilgileri paketleri IoT portalı için Azure Defender 'dan sensörlerden alınabilir. Buna karşılık, algılayıcı buluta bağlı değilse, Threat Intelligence paketlerini indirmeniz ve ardından bunları kurumsal sensörlerinize yüklemeniz gerekir. İş için Defender 'ın paketleri sensörlerden göndermeye izin vermek için, **Otomatik tehdit zekası güncelleştirmeleri** geçiş özelliğini etkinleştirin. Daha fazla bilgi için bkz. [Threat Intelligence Research and Packages](how-to-work-with-threat-intelligence-packages.md).
+   Bu algılayıcı ve IoT portalı için Azure Defender arasında bir ağ geçidi olarak kullanılacak bir IoT Hub 'ı seçin. Bir site adı ve bölgesi tanımlayın. Açıklayıcı Etiketler de ekleyebilirsiniz. Site adı, bölge ve Etiketler, [siteler ve algılayıcılar sayfasında](#view-onboarded-sensors)açıklayıcı girişlerdir.
 
    - **Yerel olarak yönetilen sensörler**: algılayıcıyı algılayan bilgiler algılayıcı konsolunda görüntülenir. Bir AIR-gapped ağında çalışıyorsanız ve birden çok yerel olarak yönetilen algılayıcı tarafından algılanan tüm bilgilerin birleştirilmiş bir görünümünü istiyorsanız, şirket içi yönetim konsoluyla çalışın.
 
-   Buluta bağlı sensörler için, ekleme sırasında tanımlanan ad, algılayıcı konsolunda görünen addır. Bu adı konsolundan doğrudan değiştiremezsiniz. Yerel olarak yönetilen sensörler için, ekleme sırasında uygulanan AD Azure 'da depolanır ve bu, algılayıcı konsolunda güncelleştirilebilen olabilir.
-
-1. Bu algılayıcı ve IoT için Azure Defender arasında bir ağ geçidi olarak kullanılacak bir IoT Hub 'ı seçin.
-1. Algılayıcı buluta bağlıysa, bir IoT Hub ile ilişkilendirin ve ardından bir site adı ve bölgesi tanımlayın. Açıklayıcı Etiketler de ekleyebilirsiniz. Site adı, bölge ve Etiketler, [siteler ve algılayıcılar sayfasında](#view-onboarded-sensors)açıklayıcı girişlerdir.
+   Buluta bağlı sensörler için, ekleme sırasında tanımlanan ad, algılayıcı konsolunda görünen addır. Bu adı konsolundan doğrudan değiştiremezsiniz. Yerel olarak yönetilen sensörler için, ekleme sırasında uygulanan AD Azure 'da depolanır, ancak algılayıcı konsolunda güncelleştirilebilen bir işlem olabilir.
 
 ### <a name="download-the-sensor-activation-file"></a>Algılayıcı etkinleştirme dosyasını indirin
 
@@ -48,15 +46,16 @@ Bir etkinleştirme dosyasını indirmek için:
 
 ## <a name="view-onboarded-sensors"></a>Eklendi sensörleri görüntüle
 
-[IoT Portal Için Defender](https://portal.azure.com/#blade/Microsoft_Azure_IoT_Defender/IoTDefenderDashboard/Getting_Started)'da, eklendi sensörleri hakkındaki temel bilgileri görüntüleyebilirsiniz.
+[IoT Portal Için Defender](https://portal.azure.com/#blade/Microsoft_Azure_IoT_Defender/IoTDefenderDashboard/Getting_Started)'da eklendi sensörleri hakkında önemli işletimsel bilgileri görüntüleyebilirsiniz.
 
-1. **Siteleri ve Algılayıcılar ' ı** seçin.
-1. Gereken algılayıcı ve tehdit bilgileri bilgilerini bulmak için filtre ve arama araçlarını kullanın.
+1. **Siteleri ve Algılayıcılar ' ı** seçin. Sayfa, kaç sensörün eklendi, bulut bağlı ve yerel olarak yönetilen sensörların sayısını ve şunları gösterir:
 
-- Kaç sensör eklendi
-- Buluta bağlı ve yerel olarak yönetilen sensörların sayısı
-- Bir eklendi algılayıcısı ile ilişkili Merkez
-- Ekleme sırasında sensöre atanan ad, sensörle ilişkilendirilen bölge veya etiketlerle eklenen diğer açıklayıcı bilgiler gibi bir algılayıcı hakkında daha fazla bilgi eklendi
+- ekleme sırasında atanan algılayıcı adı.
+- bağlantı türü (bulut bağlı veya yerel olarak yönetilen)
+- sensörle ilişkilendirilen bölge.
+- Yüklü algılayıcı sürümü
+- Buluta yönelik algılayıcı bağlantısı durumu.
+- Sensörin buluta bağlanırken algıladığı son zaman.
 
 ## <a name="manage-onboarded-sensors"></a>Eklendi sensörleri yönetme
 
@@ -119,24 +118,6 @@ Bir algılayıcıyı yeniden etkinleştirmek için:
 
 9. **Etkinleştir**' i seçin.
 
-## <a name="offboard-a-subscription"></a>Abonelik çıkarma
-
-Abonelikler aylık olarak yönetilir. Bir aboneliği boşaltdığınızda, ayın sonuna kadar bu abonelik için faturalandırılırsınız. 
-
-Aboneliği boşaltmadan önce abonelikle ilişkili tüm algılayıcıları kaldırın. Algılayıcıyı silme hakkında daha fazla bilgi için bkz. [algılayıcı silme](#delete-a-sensor). 
-
-Bir aboneliği bırakmak için:
-
-1. **Fiyatlandırma** sayfasına gidin.
-1. Aboneliği seçin ve ardından **Sil** simgesini seçin :::image type="icon" source="media/how-to-manage-sensors-on-the-cloud/delete-icon.png" border="false"::: .
-1. Onay açılan penceresinde, abonelikle ilişkili tüm algılayıcıları sildiğini onaylamak için onay kutusunu işaretleyin.
-
-    :::image type="content" source="media/how-to-manage-sensors-on-the-cloud/offboard-popup.png" alt-text="Onay kutusunu seçin ve sensöriz için kapalı Pano ' yı seçin.":::
-
-1. **Kapalı panosunu** seçin. 
-
-Şirket içi ortam etkilenmez, ancak ilgili verilerin şirket içi yönetim konsoluna akmasını engellemek için algılayıcıyı şirket içi ortamdan kaldırmanız veya algılayıcıyı başka bir aboneliğe yeniden atamanız gerekir. 
-
-## <a name="see-also"></a>Ayrıca bkz.
+## <a name="next-steps"></a>Sonraki adımlar
 
 [Algılayıcınızı etkinleştirme ve ayarlama](how-to-activate-and-set-up-your-sensor.md)

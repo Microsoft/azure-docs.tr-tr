@@ -7,15 +7,15 @@ metadata:
   services: baremetal-infrastructure
   ms.service: baremetal-infrastructure
   ms.topic: landing-page
-  author: shortpatti
-  ms.author: v-patsho
-  ms.date: 03/19/2021
-  ms.openlocfilehash: 89bd62f1462f4b3a20b1fdb9469ccb75de93ce78
-  ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+  author: Ajayan1008
+  ms.author: v-hborys
+  ms.date: 04/14/2021
+  ms.openlocfilehash: b54050ed75e16ff68594b3fe14b5ac2e52172d24
+  ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/24/2021
-  ms.locfileid: "104951615"
+  ms.lasthandoff: 04/17/2021
+  ms.locfileid: "107587740"
 landingContent:
 - title: BareMetal Infrastructure hakkında
   linkLists:
@@ -25,10 +25,36 @@ landingContent:
       url: concepts-baremetal-infrastructure-overview.md
     - text: Terimleri öğrenme
       url: know-baremetal-terms.md
-    - text: BareMetal iş yükü türleri
-      url: /azure/virtual-machines/workloads/sap/get-started?context=/azure/baremetal-infrastructure/workloads/sap/context/context
-    - text: Azure 'da BareMetal örnek birimlerini bağlama
+    - text: Azure 'da BareMetal örnekleri bağlama
       url: connect-baremetal-infrastructure.md
+- title: Oracle için BareMetal altyapısı
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Oracle için BareMetal Altyapısı nedir?
+      url: workloads/oracle/oracle-baremetal-overview.md
+    - text: Oracle iş yükleri için BareMetal SKU 'Ları
+      url: workloads/oracle/oracle-baremetal-skus.md
+    - text: Oracle için BareMetal 'da depolama
+      url: workloads/oracle/oracle-baremetal-storage.md
+    - text: Düzeltme eki uygulama konuları
+      url: workloads/oracle/oracle-baremetal-patching.md
+    - text: Ethernet yapılandırması
+      url: workloads/oracle/oracle-baremetal-ethernet.md
+    - text: Oracle için BareMetal mimarisi
+      url: workloads/oracle/oracle-baremetal-architecture.md
+    - text: Oracle için BareMetal sağlama
+      url: workloads/oracle/oracle-baremetal-provision.md
+  - linkListType: reference
+    links:
+    - text: Yüksek kullanılabilirlik ve olağanüstü durum kurtarma
+      url: workloads/oracle/concepts-oracle-high-availability.md
+    - text: Yüksek kullanılabilirlik özellikleri
+      url: workloads/oracle/high-availability-features.md
+    - text: Seçenekler ve önemli noktalar
+      url: workloads/oracle/options-considerations-high-availability.md
+    - text: Nasıl kurtarılacağı seçin
+      url: workloads/oracle/oracle-high-availability-recovery.md
 - title: Azure’da SAP HANA (Büyük Örnekler)
   linkLists:
   - linkListType: overview

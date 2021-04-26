@@ -3,12 +3,12 @@ title: CLı kullanarak Azure Event Grid sistem konuları oluşturma, görüntül
 description: Bu makalede, Azure CLı kullanarak sistem konuları oluşturma, görüntüleme ve silme işlemlerinin nasıl yapılacağı gösterilmektedir.
 ms.topic: conceptual
 ms.date: 07/07/2020
-ms.openlocfilehash: c1c847c7f25e3a656b798e186a408e560b9ee9e6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 34a098406762fd57dc9dc4b58fc375286f5d5b13
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98633231"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874306"
 ---
 # <a name="create-view-and-manage-event-grid-system-topics-using-azure-cli"></a>Azure CLı kullanarak Event Grid sistem konuları oluşturma, görüntüleme ve yönetme
 Bu makalede, Azure CLı kullanarak sistem konuları oluşturma ve yönetme işlemlerinin nasıl yapılacağı gösterilir. Sistem konularına genel bakış için bkz. [sistem konuları](system-topics.md).
@@ -30,7 +30,7 @@ Yerel yükleme için:
 ## <a name="create-a-system-topic"></a>Bir sistem konusu oluşturun
 
 - Önce bir Azure kaynağı üzerinde bir sistem konusu oluşturmak ve ardından bu konu için bir olay aboneliği oluşturmak için aşağıdaki başvuru konularına bakın:
-    - [az eventgrid sistem-konu oluştur](/cli/azure/ext/eventgrid/eventgrid/system-topic#ext-eventgrid-az-eventgrid-system-topic-create)
+    - [az eventgrid sistem-konu oluştur](/cli/azure/eventgrid/system-topic#az_eventgrid_system_topic_create)
 
         ```azurecli-interactive
         # Get the ID of the Azure source (for example: Azure Storage account)
@@ -53,14 +53,14 @@ Yerel yükleme için:
         ```azurecli-interactive
         az eventgrid topic-type  list --output json | grep -w id
         ```
-    - [az eventgrid System-topic olayı-abonelik oluşturma](/cli/azure/ext/eventgrid/eventgrid/system-topic/event-subscription#ext-eventgrid-az-eventgrid-system-topic-event-subscription-create)
+    - [az eventgrid System-topic olayı-abonelik oluşturma](/cli/azure/eventgrid/system-topic/event-subscription#az_eventgrid_system_topic_event-subscription-create)
 
         ```azurecli-interactive
         az eventgrid system-topic event-subscription create --name <SPECIFY EVENT SUBSCRIPTION NAME> \
             -g rg1 --system-topic-name <SYSTEM TOPIC NAME> \
             --endpoint <ENDPOINT URL>         
         ```
-- Bir Azure kaynağı için bir olay aboneliği oluştururken bir sistem konusu (örtük) oluşturmak için [az eventgrid Event-Subscription Create](/cli/azure/ext/eventgrid/eventgrid/event-subscription#ext-eventgrid-az-eventgrid-event-subscription-create) metodunu kullanın. Aşağıda bir örnek verilmiştir:
+- Bir Azure kaynağı için bir olay aboneliği oluştururken bir sistem konusu (örtük) oluşturmak için [az eventgrid Event-Subscription Create](/cli/azure/eventgrid/event-subscription#az_eventgrid_event_subscription_create) metodunu kullanın. Aşağıda bir örnek verilmiştir:
     
     ```azurecli-interactive
     storageid=$(az storage account show --name <AZURE STORAGE ACCOUNT NAME> --resource-group <AZURE RESOURCE GROUP NAME> --query id --output tsv)
@@ -76,12 +76,12 @@ Yerel yükleme için:
 ## <a name="view-all-system-topics"></a>Tüm sistem konularını görüntüleme
 Seçilen bir sistem konusunun tüm sistem konularını ve ayrıntılarını görüntülemek için aşağıdaki komutları kullanın:
 
-- [az eventgrid sistem-konu listesi](/cli/azure/ext/eventgrid/eventgrid/system-topic#ext-eventgrid-az-eventgrid-system-topic-list)
+- [az eventgrid sistem-konu listesi](/cli/azure/eventgrid/system-topic#az_eventgrid_system_topic_list)
 
     ```azurecli-interactive
     az eventgrid system-topic list   
      ```
-- [az eventgrid System-topic Show](/cli/azure/ext/eventgrid/eventgrid/system-topic#ext-eventgrid-az-eventgrid-system-topic-show)
+- [az eventgrid System-topic Show](/cli/azure/eventgrid/system-topic#az_eventgrid_system_topic_show)
 
     ```azurecli-interactive
     az eventgrid system-topic show -g <AZURE RESOURCE GROUP NAME> -n <SYSTEM TOPIC NAME>     
@@ -90,7 +90,7 @@ Seçilen bir sistem konusunun tüm sistem konularını ve ayrıntılarını gör
 ## <a name="delete-a-system-topic"></a>Bir sistem konusunu silme
 Bir sistem konusunu silmek için aşağıdaki komutu kullanın: 
 
-- [az eventgrid sistem-topic Delete](/cli/azure/ext/eventgrid/eventgrid/system-topic#ext-eventgrid-az-eventgrid-system-topic-delete)
+- [az eventgrid sistem-topic Delete](/cli/azure/eventgrid/system-topic#az_eventgrid_system_topic_delete)
 
     ```azurecli-interactive
     az eventgrid system-topic delete -g <AZURE RESOURCE GROUP NAME> --name <SYSTEM TOPIC NAME>   

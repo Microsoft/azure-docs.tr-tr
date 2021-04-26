@@ -7,18 +7,18 @@ ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: how-to
 ms.date: 07/22/2020
-ms.openlocfilehash: bff20468e8185073f5c192c1e115bc405dd089eb
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: d5eb253fb24f463106866f8b0fe17f634e805cbb
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97693612"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107486"
 ---
 # <a name="create-a-power-bi-app-offer"></a>Power BI uygulaması teklifi oluşturma
 
 Bu makalede, [Microsoft AppSource](https://appsource.microsoft.com/)için Power BI uygulama teklifinin nasıl oluşturulacağı ve yayımlanacağı açıklanır.
 
-Başlamadan önce, henüz yapmadıysanız [Iş Ortağı Merkezi 'nde bir ticari Market hesabı oluşturun](create-account.md) . Hesabınızın ticari Market programına kayıtlı olduğundan emin olun.
+Başlamadan önce, henüz yapmadıysanız [Iş Ortağı Merkezi 'nde bir ticari Market hesabı oluşturun](../create-account.md) . Hesabınızın ticari Market programına kayıtlı olduğundan emin olun.
 
 ## <a name="create-a-new-offer"></a>Yeni teklif oluşturma
 

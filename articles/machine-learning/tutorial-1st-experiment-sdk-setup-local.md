@@ -1,7 +1,7 @@
 ---
 title: 'Öğretici: Machine Learning ile çalışmaya başlama-Python'
 titleSuffix: Azure Machine Learning
-description: Bu öğreticide, kişisel geliştirme ortamınızda çalışan Python için Azure Machine Learning SDK 'sını kullanmaya başlayacaksınız.
+description: Kişisel geliştirme ortamınızda çalışan Python için Azure Machine Learning SDK ile çalışmaya başlayın.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -10,14 +10,14 @@ author: aminsaied
 ms.author: amsaied
 ms.reviewer: sgilley
 ms.date: 02/11/2021
-ms.custom: devx-track-python
+ms.custom: devx-track-python, contperf-fy21q3
 adobe-target: true
-ms.openlocfilehash: 5d61f330c823aff755a25e637bb58c132aa58100
-ms.sourcegitcommit: d4734bc680ea221ea80fdea67859d6d32241aefc
+ms.openlocfilehash: 69340245cdebda570b526afd4f11ac8314384b43
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/14/2021
-ms.locfileid: "100369161"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107210630"
 ---
 # <a name="tutorial-get-started-with-azure-machine-learning-in-your-development-environment-part-1-of-4"></a>Öğretici: geliştirme ortamınızda Azure Machine Learning kullanmaya başlayın (Bölüm 1/4)
 
@@ -30,16 +30,18 @@ Bu öğretici serisinin 1. bölümünde şunları yapmanız gerekir:
 > * Kod için dizin yapısını ayarlayın.
 > * Azure Machine Learning çalışma alanı oluşturun.
 > * Yerel geliştirme ortamınızı yapılandırın.
-> * Bir işlem kümesi ayarlayın.
+> * Modellerinizi eğitmek için bulut tabanlı bir kaynak olan bir işlem kümesi ayarlayın.
 
-> [!NOTE]
-> Bu öğretici serisi **toplu işleri** göndermek için gereken Azure Machine Learning kavramlara odaklanır. Bu, kodun buluta gönderildiği ve herhangi bir kullanıcı etkileşimi olmadan arka planda çalışacağı yerdir. Bu, tekrar tekrar çalıştırmak istediğiniz tamamlanmış betikler veya kodlar için ya da işlem yoğunluklu makine öğrenimi görevleri için yararlıdır. Araştırmacı iş akışıyla daha fazla ilgileniyorsanız, bunun yerine [Azure Machine Learning işlem örneği üzerinde jupi veya RStudio](tutorial-1st-experiment-sdk-setup.md)kullanabilirsiniz.
+Bu öğretici serisi **toplu işleri** göndermek için gereken Azure Machine Learning kavramlara odaklanır. Bu, kodun buluta gönderildiği ve herhangi bir kullanıcı etkileşimi olmadan arka planda çalışacağı yerdir. Bu, tekrar tekrar çalıştırmak istediğiniz tamamlanmış betikler veya kodlar için ya da işlem yoğunluklu makine öğrenimi görevleri için yararlıdır.
+
+Azure Machine Learning kullanmaya başlamak için harika bir yol, bir Jupileter not defteriyle birlikte bulunur.  Bkz. [öğretici: Jupyter not defterlerinde Azure Machine Learning kullanmaya başlama](tutorial-1st-experiment-sdk-setup.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Azure aboneliği. Azure aboneliğiniz yoksa başlamadan önce ücretsiz bir hesap oluşturun. [Azure Machine Learning](https://aka.ms/AMLFree)deneyin.
 - Python sanal ortamlarını yönetmek ve paketleri yüklemek için [Anaconda](https://www.anaconda.com/download/) veya [miniconda](https://www.anaconda.com/download/) .  
 - Conda kullanma hakkında bilgi sahibi değilseniz bkz. [Conda ile çalışmaya](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html)başlama.
+- Python betiklerinizi oluşturmak için herhangi bir IDE veya metin düzenleyici.
 
 ## <a name="install-the-azure-machine-learning-sdk"></a>Azure Machine Learning SDK 'sını yükler
 

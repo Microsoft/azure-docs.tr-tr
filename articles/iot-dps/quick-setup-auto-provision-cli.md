@@ -8,12 +8,12 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 611068fa020321be88be6e1d6da663266029c658
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3d52a83c8c0920c4d85aa5b4b6b89fd8d36e5fea
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94660194"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774980"
 ---
 # <a name="quickstart-set-up-the-iot-hub-device-provisioning-service-with-azure-cli"></a>Hızlı başlangıç: Azure CLı ile IoT Hub cihaz sağlama hizmetini ayarlama
 
@@ -30,7 +30,7 @@ Azure CLI, komut satırından veya betik içindeki Azure kaynaklarını oluştur
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-[az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
+[az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
 
 Aşağıdaki örnek *westus* konumunda *my-sample-resource-group* adlı bir kaynak grubu oluşturur.
 
@@ -45,7 +45,7 @@ az group create --name my-sample-resource-group --location westus
 
 ## <a name="create-an-iot-hub"></a>IoT hub oluşturma
 
-[az iot hub create](/cli/azure/iot/hub#az-iot-hub-create) komutuyla bir IoT hub oluşturun.
+[az iot hub create](/cli/azure/iot/hub#az_iot_hub_create) komutuyla bir IoT hub oluşturun.
 
 Aşağıdaki örnekte, *westus* konumunda *my-sample-hub* adlı bir IoT hub oluşturulur. IoT Hub adı Azure 'da genel olarak benzersiz olmalıdır; bu nedenle örnek adına benzersiz bir ön ek veya sonek eklemek ya da tamamen yeni bir ad seçmek isteyebilirsiniz. Adınızın bir IoT Hub 'ı için doğru adlandırma kurallarına uyduğundan emin olun: 3-50 karakter uzunluğunda olmalıdır ve yalnızca büyük veya küçük harf alfasayısal karakterlerini veya kısa çizgileri ('-') içerebilir. 
 
@@ -55,7 +55,7 @@ az iot hub create --name my-sample-hub --resource-group my-sample-resource-group
 
 ## <a name="create-a-device-provisioning-service"></a>Cihaz sağlama hizmeti oluşturma
 
-[Az IoT DPS Create](/cli/azure/iot/dps#az-iot-dps-create) komutuyla bir cihaz sağlama hizmeti oluşturun. 
+[Az IoT DPS Create](/cli/azure/iot/dps#az_iot_dps_create) komutuyla bir cihaz sağlama hizmeti oluşturun. 
 
 Aşağıdaki örnek *westus* konumunda *My-Sample-DPS* adlı bir sağlama hizmeti oluşturur. Ayrıca, kendi sağlama hizmetiniz için genel olarak benzersiz bir ad seçmeniz gerekir. IoT Hub cihaz sağlama hizmeti için doğru adlandırma kurallarına uyduğundan emin olun: 3-64 karakter uzunluğunda olmalıdır ve yalnızca büyük veya küçük harf alfasayısal karakterlerini veya kısa çizgileri ('-') içerebilir.
 
@@ -69,7 +69,7 @@ az iot dps create --name my-sample-dps --resource-group my-sample-resource-group
 
 ## <a name="get-the-connection-string-for-the-iot-hub"></a>IoT hub için bağlantı dizesini alma
 
-Cihaz Sağlama Hizmeti ile arasında bağlantı kurmak için IoT hub'ınızın bağlantı dizesine ihtiyacınız vardır. Bağlantı dizesini almak için [az iot hub show-connection-string](/cli/azure/iot/hub#az-iot-hub-show-connection-string) komutunu kullanın ve komutunu çıkışını kullanarak iki kaynağı bağlarken kullanacağınız değişkeni ayarlayın. 
+Cihaz Sağlama Hizmeti ile arasında bağlantı kurmak için IoT hub'ınızın bağlantı dizesine ihtiyacınız vardır. Bağlantı dizesini almak için [az iot hub show-connection-string](/cli/azure/iot/hub#az_iot_hub_show_connection_string) komutunu kullanın ve komutunu çıkışını kullanarak iki kaynağı bağlarken kullanacağınız değişkeni ayarlayın. 
 
 Aşağıdaki örnek, *Hubconnectionstring* değişkenini, hub 'ın *ıothubowner* ilkesinin birincil anahtarı için bağlantı dizesinin değerine ayarlar ( `--policy-name` parametresi farklı bir ilke belirtmek için kullanılabilir). Daha önce seçtiğiniz benzersiz IoT Hub adı için *My-Sample-hub ' ı* ticareti yapın. Komut, komut çıkışından bağlantı dizesini ayıklamak için Azure CLI [query](/cli/azure/query-azure-cli) ve [output](/cli/azure/format-output-azure-cli#tsv-output-format) seçeneklerini kullanır.
 
@@ -93,7 +93,7 @@ echo $hubConnectionString
 
 ## <a name="link-the-iot-hub-and-the-provisioning-service"></a>IoT hub ile cihaz sağlama hizmetini bağlama
 
-IoT hub ile sağlama hizmetinizi bağlamak için [az iot dps linked-hub create](/cli/azure/iot/dps/linked-hub#az-iot-dps-linked-hub-create) komutunu kullanın. 
+IoT hub ile sağlama hizmetinizi bağlamak için [az iot dps linked-hub create](/cli/azure/iot/dps/linked-hub#az_iot_dps_linked_hub_create) komutunu kullanın. 
 
 Aşağıdaki örnek, *westus* konumunda *My-Sample-hub* adlı bir IoT Hub 'ını ve *My-Sample-DPS* adlı bir cihaz sağlama hizmetini bağlar. Bu adları, daha önce seçtiğiniz benzersiz IoT Hub ve cihaz sağlama hizmeti adları için ticari olarak yapın. Bu komut, önceki adımda *Hubconnectionstring* değişkeninde depolanan IoT Hub 'ınız için bağlantı dizesini kullanır.
 
@@ -105,7 +105,7 @@ Komutun tamamlanması birkaç dakika sürebilir.
 
 ## <a name="verify-the-provisioning-service"></a>Sağlama hizmetini doğrulama
 
-[az iot dps show](/cli/azure/iot/dps#az-iot-dps-show) komutuyla sağlama hizmetinizin ayrıntılarını alın.
+[az iot dps show](/cli/azure/iot/dps#az_iot_dps_show) komutuyla sağlama hizmetinizin ayrıntılarını alın.
 
 Aşağıdaki örnekte *my-sample-dps* adlı sağlama hizmetinin ayrıntıları alınır. Kendi cihaz sağlama hizmeti adınız için bu adı dengeleyebilirsiniz.
 
@@ -120,18 +120,18 @@ Bağlı IoT hub, *properties.iotHubs* koleksiyonunda gösterilir.
 
 Bu koleksiyondaki diğer hızlı başlangıçlar, bu hızlı başlangıcı temel alır. Sonraki hızlı başlangıçlar veya öğreticilerle devam etmeyi planlıyorsanız, bu hızlı başlangıçta oluşturulan kaynakları temizlemeyin. Devam etmeyi planlamıyorsanız, aşağıdaki komutları kullanarak sağlama hizmetini, IoT hub'ı veya kaynak grubuyla bu grubun tüm kaynaklarını silebilirsiniz. Aşağıda yazılan kaynakların adlarını kendi kaynaklarınızın adlarıyla değiştirin.
 
-Sağlama hizmetini silmek için [az iot dps delete](/cli/azure/iot/dps#az-iot-dps-delete) komutunu çalıştırın:
+Sağlama hizmetini silmek için [az iot dps delete](/cli/azure/iot/dps#az_iot_dps_delete) komutunu çalıştırın:
 
 ```azurecli-interactive
 az iot dps delete --name my-sample-dps --resource-group my-sample-resource-group
 ```
-IoT hub'ı silmek için [az iot hub delete](/cli/azure/iot/hub#az-iot-hub-delete) komutunu çalıştırın:
+IoT hub'ı silmek için [az iot hub delete](/cli/azure/iot/hub#az_iot_hub_delete) komutunu çalıştırın:
 
 ```azurecli-interactive
 az iot hub delete --name my-sample-hub --resource-group my-sample-resource-group
 ```
 
-Kaynak grubuyla birlikte bu kaynak grubunun tüm kaynaklarını silmek için [az group delete](/cli/azure/group#az-group-delete) komutunu çalıştırın:
+Kaynak grubuyla birlikte bu kaynak grubunun tüm kaynaklarını silmek için [az group delete](/cli/azure/group#az_group_delete) komutunu çalıştırın:
 
 ```azurecli-interactive
 az group delete --name my-sample-resource-group

@@ -7,12 +7,12 @@ ms.service: mysql
 ms.topic: how-to
 ms.date: 09/21/2020
 ms.custom: references_regions
-ms.openlocfilehash: d65b074385311e74444929ef74901e402e29ec03
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e217dcaeafd553803f5c9699ab6d7779ed755b67
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93241744"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818304"
 ---
 # <a name="manage-zone-redundant-high-availability-in-azure-database-for-mysql-flexible-server-preview"></a>MySQL için Azure veritabanı esnek sunucusu 'nda bölge yedekli yüksek kullanılabilirliği yönetme (Önizleme)
 
@@ -62,6 +62,27 @@ Zaten bölge yedekliği ile yapılandırılmış esnek sunucunuz için yüksek k
 5.  Yüksek kullanılabilirliği devre dışı bırakmak için **ha düğmesini devre dışı bırak** seçeneğine tıklayın.
 
 6.  Bir bildirim, yüksek kullanılabilirlik dağıtımının açığa sürme sürecini gösterir.
+
+
+## <a name="forced-failover"></a>Zorlamalı yük devretme
+
+Birincil bilgisayarınızdan bekleme esnek sunucusuna yük devretmeyi zorlamak için bu adımları izleyin
+
+1.  [Azure Portal](https://portal.azure.com/), yüksek kullanılabilirlik özelliği etkin olan MySQL Için mevcut Azure veritabanı esnek sunucusunu seçin.
+
+2.  Esnek sunucu sayfasında, yüksek kullanılabilirlik sayfasını açmak için ön panelinden **yüksek kullanılabilirlik** ' e tıklayın.
+
+3.  **Birincil kullanılabilirlik alanını** ve **bekleme durumu kullanılabilirlik bölgesini** denetleyin
+
+4.  El ile yük devretme yordamını başlatmak için **zorlanan yük devretme** ' ye tıklayın. Bir açılır pencere, birincil çalışma yüküne bağlı olarak beklenen sürede yük devretme, son denetim noktasının en iyi yanı sıra iletiyi okuyup Tamam ' A tıklayacaktır.
+ 
+5. Yük devretme işleminin devam ettiğini belirten bir bildirim gösterilir.
+
+6. Bekleme sunucusuna yük devretme başarılı olduktan sonra bir bildirim açılır.
+
+7. Yeni **birincil kullanılabilirlik alanını** ve **bekleme durumu kullanılabilirlik bölgesini** kontrol edin.
+
+![Yük devretme zorlaması](media/how-to-configure-high-availability/how-to-forced-failover.png) 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

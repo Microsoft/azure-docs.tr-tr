@@ -1,15 +1,15 @@
 ---
 title: Azure Backup için yerleşik ilke tanımları
 description: Azure Backup için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 ms.custom: subject-policy-reference
-ms.openlocfilehash: 2a6055257a277171b2aae9197758a6eaa51b11cd
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 6ab3a4071678d61ab2d397a68955ef3c98b716b7
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105038371"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107878154"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-backup"></a>Azure Backup için Azure Ilkesi yerleşik tanımları
 

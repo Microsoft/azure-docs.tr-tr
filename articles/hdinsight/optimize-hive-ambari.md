@@ -5,10 +5,10 @@ ms.service: hdinsight
 ms.topic: how-to
 ms.date: 05/04/2020
 ms.openlocfilehash: 69a4e769677b6f0200f4157305a3a125f82ee76d
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104864826"
 ---
 # <a name="optimize-apache-hive-with-apache-ambari-in-azure-hdinsight"></a>Azure HDInsight 'ta Apache ambarı ile Apache Hive iyileştirin
@@ -131,10 +131,10 @@ Kullanılabilir sıkıştırma türleri şunlardır:
 
 | Biçimlendir | Araç | Algoritma | Dosya Uzantısı | Bölünebilir? |
 | --- | --- | --- | --- | --- |
-| Gzip | Gzip | Söndür | `.gz` | Hayır |
+| Gzip | Gzip | Söndür | `.gz` | No |
 | Bzip2 | Bzip2 | Bzip2 |`.bz2` | Yes |
 | LZO | `Lzop` | LZO | `.lzo` | Dizine alınmışsa Evet |
-| Snappy | Yok | Snappy | Snappy | Hayır |
+| Snappy | Yok | Snappy | Snappy | No |
 
 Genel bir kural olarak, sıkıştırma yöntemi bölünmüş tablo önemli olduğundan, bazı durumlarda birkaç mapas oluşturulur. Giriş verileri metin ise `bzip2` en iyi seçenektir. ORC biçimi için, Snappy en hızlı sıkıştırma seçeneğidir.
 

@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.workload: identity
 ms.date: 03/26/2021
 ms.author: rolyon
-ms.openlocfilehash: f354e3bb7fc0f7ced17d43acacf29c726ce1329c
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: b285755d24cdbf1f8ef06eb850fc218a00734f16
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629165"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107771740"
 ---
 # <a name="list-azure-role-definitions"></a>Azure rol tanımlarını listeleyin
 
@@ -183,11 +183,11 @@ Microsoft.Network/loadBalancers/backendAddressPools/join/action
 ...
 ```
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 ### <a name="list-all-roles"></a>Tüm rolleri Listele
 
-Azure CLı 'deki tüm rolleri listelemek için [az role Definition List](/cli/azure/role/definition#az-role-definition-list)kullanın.
+Azure CLı 'deki tüm rolleri listelemek için [az role Definition List](/cli/azure/role/definition#az_role_definition_list)kullanın.
 
 ```azurecli
 az role definition list
@@ -250,7 +250,7 @@ az role definition list --custom-role-only false --output json --query '[].{role
 
 ### <a name="list-a-role-definition"></a>Rol tanımı listeleme
 
-Rolün ayrıntılarını listelemek için [az role Definition List](/cli/azure/role/definition#az-role-definition-list)kullanın.
+Rolün ayrıntılarını listelemek için [az role Definition List](/cli/azure/role/definition#az_role_definition_list)kullanın.
 
 ```azurecli
 az role definition list --name {roleName}

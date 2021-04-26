@@ -295,6 +295,8 @@
           href: enable-host-encryption.md
     - name: İzleme ve günlüğe kaydetme
       items:
+        - name: Küme ölçümlerini görüntüleme
+          href: view-metrics.md
         - name: Kapsayıcılar için Azure İzleyici
           href: ../azure-monitor/containers/container-insights-overview.md
           maintainContext: true
@@ -349,6 +351,8 @@
       items:
         - name: Hizmet Ağları hakkında
           href: servicemesh-about.md
+        - name: Hizmet ağı AKS eklentisini aç (Önizleme)
+          href: servicemesh-osm-about.md
         - name: Istio'yu kullanma
           items:
             - name: Istio hakkında

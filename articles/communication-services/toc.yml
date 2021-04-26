@@ -26,8 +26,10 @@
           href: quickstarts/chat/meeting-interop.md
     - name: Telefon ve SMS
       items:
-        - name: Telefon numaralarını yönetme
+        - name: Telefon numarası alma
           href: quickstarts/telephony-sms/get-phone-number.md
+        - name: Azure 'da telefon numarası bağlantı noktası
+          href: quickstarts/telephony-sms/port-phone-number.md
         - name: Uygulamanıza telefonla arama ekleme
           href: quickstarts/voice-video-calling/pstn-call.md
         - name: SMS iletisi gönderme
@@ -92,6 +94,8 @@
           href: concepts/telephony-sms/messaging-policy.md
     - name: Sesli ve görüntülü arama
       items:
+        - name: Bilinen sorunlar
+          href: concepts/known-issues.md
         - name: SDK 'ya genel bakış
           href: concepts/voice-video-calling/calling-sdk-features.md
         - name: Ses ve görüntü kavramları
@@ -108,17 +112,6 @@
           href: concepts/ui-framework/ui-sdk-overview.md
         - name: UI çerçevesi özellikleri
           href: concepts/ui-framework/ui-sdk-features.md
-    - name: Veri ve Işlemler
-      items:
-        - name: Hizmet olayları (EventGrid)
-          href: ../event-grid/event-schema-communication-services.md
-          maintainContext: true
-        - name: Günlüğe kaydetme ve tanılama
-          href: concepts/logging-and-diagnostics.md
-        - name: Ölçümler
-          href: concepts/metrics.md
-        - name: Sorun giderme
-          href: concepts/troubleshooting-info.md
     - name: SDK 'Lar ve REST API 'Leri
       href: concepts/sdk-options.md
     - name: İstemci ve sunucu mimarisi
@@ -135,8 +128,15 @@
       href: concepts/notifications.md
     - name: Teams ile birlikte çalışabilirlik
       href: concepts/teams-interop.md
-    - name: Bilinen sorunlar
-      href: concepts/known-issues.md
+    - name: Hizmet olayları (EventGrid)
+      href: ../event-grid/event-schema-communication-services.md
+      maintainContext: true
+    - name: Günlüğe kaydetme ve tanılama
+      href: concepts/logging-and-diagnostics.md
+    - name: Ölçümler
+      href: concepts/metrics.md
+    - name: Sorun giderme
+      href: concepts/troubleshooting-info.md
 - name: Örnekler
   items:
     - name: Genel Bakış
@@ -151,6 +151,8 @@
   items:
     - name: Başvuru belgelerine genel bakış
       href: concepts/reference.md
+    - name: Azure CLI
+      href: /cli/azure/communication
     - name: REST API belgeleri
       href: /rest/api/communication/
     - name: Arama kitaplıkları
@@ -158,7 +160,7 @@
         - name: Arama (JavaScript)
           href: /javascript/api/azure-communication-services/@azure/communication-calling/
         - name: Arama (Android/Java)
-          href: /java/api/com.azure.communication.calling
+          href: /java/api/com.azure.android.communication.calling?view=communication-services-java-android
         - name: Arama (iOS)
           href: /objectivec/communication-services/calling/
     - name: Sohbet kitaplıkları

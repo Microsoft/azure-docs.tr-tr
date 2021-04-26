@@ -4,10 +4,10 @@ description: Defender-IoT-mikro-Agent TWINS kavramı ve IoT için Defender 'da n
 ms.topic: conceptual
 ms.date: 07/24/2019
 ms.openlocfilehash: 1ed6faf03d168ed7a2a2f07733cb7e238d234915
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104779180"
 ---
 # <a name="defender-iot-micro-agent"></a>Defender-IoT-Micro-Agent

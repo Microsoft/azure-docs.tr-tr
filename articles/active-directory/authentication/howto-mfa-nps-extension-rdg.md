@@ -11,12 +11,12 @@ author: justinha
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 20b0150c18f2c007ed104d34daacd49ab03131a7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6f50792ec45570f7e90893a97150ea26b63ebf9c
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96743386"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829845"
 ---
 # <a name="integrate-your-remote-desktop-gateway-infrastructure-using-the-network-policy-server-nps-extension-and-azure-ad"></a>Ağ Ilkesi sunucusu (NPS) uzantısını ve Azure AD 'yi kullanarak Uzak Masaüstü Ağ Geçidi altyapınızı tümleştirin
 
@@ -114,7 +114,9 @@ Bir hesap MFA için etkinleştirildikten sonra, ikinci kimlik doğrulama faktör
 > [!IMPORTANT]
 > Uzak Masaüstü Ağ Geçidi için oturum açma davranışı, Azure AD Multi-Factor Authentication bir doğrulama kodu girme seçeneği sağlamaz. Telefon doğrulaması için bir kullanıcı hesabı veya anında iletme bildirimleri olan Microsoft Authenticator uygulama için yapılandırılmış olmalıdır.
 >
-> Bu iki kimlik doğrulama yönteminden biri bir kullanıcı için yapılandırılmamışsa, Azure AD Multi-Factor Authentication sınamasını tamamlayamaz ve Uzak Masaüstü Ağ Geçidi oturum açamaz.
+> Bir kullanıcı için telefon doğrulaması veya anında iletme bildirimleri olan Microsoft Authenticator uygulama yapılandırılmamışsa, Kullanıcı Azure AD Multi-Factor Authentication sınamasını tamamlayıp Uzak Masaüstü Ağ Geçidi oturum açamaz.
+>
+> SMS metin yöntemi, bir doğrulama kodu girme seçeneğini sağlamadığından Uzak Masaüstü Ağ Geçidi birlikte çalışmıyor.
 
 ## <a name="install-and-configure-nps-extension"></a>NPS uzantısını yükleyip yapılandırma
 

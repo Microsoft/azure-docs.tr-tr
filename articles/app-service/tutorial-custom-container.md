@@ -7,12 +7,12 @@ ms.author: msangapu
 keywords: Azure App Service, Web uygulaması, Linux, Windows, Docker, kapsayıcı
 ms.custom: devx-track-csharp, mvc, seodec18, devx-track-python, devx-track-azurecli
 zone_pivot_groups: app-service-containers-windows-linux
-ms.openlocfilehash: 5d3a714230f0279bd68b39cd02624866b9b3bacf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0770b46a60f497d3a3da772e7be13ece0526eca0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102180522"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765712"
 ---
 # <a name="migrate-custom-software-to-azure-app-service-using-a-custom-container"></a>Özel bir kapsayıcı kullanarak Azure App Service özel yazılım geçirme
 
@@ -211,7 +211,7 @@ Akışı yapılan günlükler şuna benzer:
 
 ::: zone pivot="container-linux"
 
-Azure App Service, hem yerleşik görüntüleri hem de özel görüntüleri barındırmak için Docker kapsayıcı teknolojisini kullanır. Yerleşik görüntülerin bir listesini görmek için, [' az WebApp List-çalışma zamanları--Linux '](/cli/azure/webapp#az-webapp-list-runtimes)Azure CLI komutunu çalıştırın. Bu görüntüler gereksinimlerinizi karşılamadığı takdirde, özel bir görüntü oluşturup dağıtabilirsiniz.
+Azure App Service, hem yerleşik görüntüleri hem de özel görüntüleri barındırmak için Docker kapsayıcı teknolojisini kullanır. Yerleşik görüntülerin bir listesini görmek için, [' az WebApp List-çalışma zamanları--Linux '](/cli/azure/webapp#az_webapp_list_runtimes)Azure CLI komutunu çalıştırın. Bu görüntüler gereksinimlerinizi karşılamadığı takdirde, özel bir görüntü oluşturup dağıtabilirsiniz.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
@@ -333,7 +333,7 @@ ENTRYPOINT ["init.sh"]
 
 Bu bölümde ve bundan sonra, görüntüyü gönderdiğiniz ve ardından Azure App Service bir kapsayıcı dağıttığınız Azure 'da kaynak temin edersiniz. Bu kaynakların tümünün toplanacağı bir kaynak grubu oluşturarak başlayın.
 
-Bir kaynak grubu oluşturmak için [az Group Create](/cli/azure/group#az-group-create) komutunu çalıştırın:
+Bir kaynak grubu oluşturmak için [az Group Create](/cli/azure/group#az_group_create) komutunu çalıştırın:
 
 ```azurecli-interactive
 az group create --name AppSvc-DockerTutorial-rg --location westus2
@@ -345,7 +345,7 @@ az group create --name AppSvc-DockerTutorial-rg --location westus2
 
 Bu bölümde, görüntüyü App Service dağıtabilecek Azure Container Registry için gönderebilirsiniz.
 
-1. [`az acr create`](/cli/azure/acr#az-acr-create)Azure Container Registry oluşturmak için komutunu çalıştırın:
+1. [`az acr create`](/cli/azure/acr#az_acr_create)Azure Container Registry oluşturmak için komutunu çalıştırın:
 
     ```azurecli-interactive
     az acr create --name <registry-name> --resource-group AppSvc-DockerTutorial-rg --sku Basic --admin-enabled true
@@ -353,7 +353,7 @@ Bu bölümde, görüntüyü App Service dağıtabilecek Azure Container Registry
     
     `<registry-name>`Kayıt defteriniz için uygun bir adla değiştirin. Ad yalnızca harf ve rakam içermeli ve tüm Azure genelinde benzersiz olmalıdır.
 
-1. [`az acr show`](/cli/azure/acr#az-acr-show)Kayıt defteri için kimlik bilgilerini almak için komutunu çalıştırın:
+1. [`az acr show`](/cli/azure/acr#az_acr_show)Kayıt defteri için kimlik bilgilerini almak için komutunu çalıştırın:
 
     ```azurecli-interactive
     az acr credential show --resource-group AppSvc-DockerTutorial-rg --name <registry-name>
@@ -400,7 +400,7 @@ Bu bölümde, görüntüyü App Service dağıtabilecek Azure Container Registry
 
 Azure App Service bir kapsayıcı dağıtmak için, önce App Service üzerinde bir Web uygulaması oluşturun, ardından Web uygulamasını kapsayıcı kayıt defterine bağlayın. Web uygulaması başladığında, App Service görüntüyü otomatik olarak kayıt defterinden çeker.
 
-1. Komutunu kullanarak bir App Service planı oluşturun [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) :
+1. Komutunu kullanarak bir App Service planı oluşturun [`az appservice plan create`](/cli/azure/appservice/plan#az_appservice_plan_create) :
 
     ```azurecli-interactive
     az appservice plan create --name AppSvc-DockerTutorial-plan --resource-group AppSvc-DockerTutorial-rg --is-linux
@@ -408,7 +408,7 @@ Azure App Service bir kapsayıcı dağıtmak için, önce App Service üzerinde 
 
     App Service planı, Web uygulamasını barındıran sanal makineye karşılık gelir. Varsayılan olarak, önceki komut ilk ay için ücretsiz olan pahalı bir [B1 fiyatlandırma katmanını](https://azure.microsoft.com/pricing/details/app-service/linux/) kullanır. Katmanı parametresiyle kontrol edebilirsiniz `--sku` .
 
-1. Şu komutla Web uygulamasını oluşturun [`az webpp create`](/cli/azure/webapp#az-webapp-create) :
+1. Şu komutla Web uygulamasını oluşturun [`az webpp create`](/cli/azure/webapp#az_webapp_create) :
 
     ```azurecli-interactive
     az webapp create --resource-group AppSvc-DockerTutorial-rg --plan AppSvc-DockerTutorial-plan --name <app-name> --deployment-container-image-name <registry-name>.azurecr.io/appsvc-tutorial-custom-image:latest
@@ -416,7 +416,7 @@ Azure App Service bir kapsayıcı dağıtmak için, önce App Service üzerinde 
     
     `<app-name>`Web uygulaması için bir adla değiştirin. Bu, tüm Azure genelinde benzersiz olmalıdır. Ayrıca, `<registry-name>` önceki bölümde bulunan kayıt defterinizin adıyla değiştirin.
 
-1. [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) `WEBSITES_PORT` Ortam değişkenini uygulama kodu tarafından beklendiği gibi ayarlamak için kullanın: 
+1. [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) `WEBSITES_PORT` Ortam değişkenini uygulama kodu tarafından beklendiği gibi ayarlamak için kullanın: 
 
     ```azurecli-interactive
     az webapp config appsettings set --resource-group AppSvc-DockerTutorial-rg --name <app-name> --settings WEBSITES_PORT=8000
@@ -426,7 +426,7 @@ Azure App Service bir kapsayıcı dağıtmak için, önce App Service üzerinde 
     
     Bu ortam değişkeni hakkında daha fazla bilgi için örneğin [GitHub deposundaki Benioku dosyasına](https://github.com/Azure-Samples/docker-django-webapp-linux)bakın.
 
-1. Şu komutu kullanarak Web uygulaması için [yönetilen kimliği](./overview-managed-identity.md) etkinleştirin [`az webapp identity assign`](/cli/azure/webapp/identity#az-webapp-identity-assign) :
+1. Şu komutu kullanarak Web uygulaması için [yönetilen kimliği](./overview-managed-identity.md) etkinleştirin [`az webapp identity assign`](/cli/azure/webapp/identity#az_webapp_identity-assign) :
 
     ```azurecli-interactive
     az webapp identity assign --resource-group AppSvc-DockerTutorial-rg --name <app-name> --query principalId --output tsv
@@ -436,7 +436,7 @@ Azure App Service bir kapsayıcı dağıtmak için, önce App Service üzerinde 
 
     Yönetilen kimlik, belirli kimlik bilgilerine gerek duymadan Web uygulamasına diğer Azure kaynaklarına erişim izni vermenizi sağlar.
 
-1. Bir [`az account show`](/cli/azure/account#az-account-show) sonraki adımda ihtiyacınız olan komutuyla ABONELIK Kimliğinizi alın:
+1. Bir [`az account show`](/cli/azure/account#az_account_show) sonraki adımda ihtiyacınız olan komutuyla ABONELIK Kimliğinizi alın:
 
     ```azurecli-interactive
     az account show --query id --output tsv
@@ -459,7 +459,7 @@ Bu izinler hakkında daha fazla bilgi için bkz. [Azure rol tabanlı erişim den
 
 Görüntü kapsayıcı kayıt defterine gönderildikten sonra App Service tam olarak sağlandıktan sonra bu adımları tamamlayabilirsiniz.
 
-1. [`az webapp config container set`](/cli/azure/webapp/config/container#az-webapp-config-container-set)Kapsayıcı kayıt defterini ve Web uygulaması için dağıtılacak görüntüyü belirtmek için komutunu kullanın:
+1. [`az webapp config container set`](/cli/azure/webapp/config/container#az_webapp_config_container_set)Kapsayıcı kayıt defterini ve Web uygulaması için dağıtılacak görüntüyü belirtmek için komutunu kullanın:
 
     ```azurecli-interactive
     az webapp config container set --name <app-name> --resource-group AppSvc-DockerTutorial-rg --docker-custom-image-name <registry-name>.azurecr.io/appsvc-tutorial-custom-image:latest --docker-registry-server-url https://<registry-name>.azurecr.io

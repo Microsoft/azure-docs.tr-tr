@@ -8,12 +8,12 @@ ms.workload: infrastructure-services
 ms.topic: how-to
 ms.date: 11/3/2020
 ms.author: cynthn
-ms.openlocfilehash: 258d8ab6ab23a95d73b8ed0c2549f373cf097674
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 601b8236ca413dd510585bdfffddc3e892caa73b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102554097"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107759678"
 ---
 # <a name="preview-use-customer-managed-keys-for-encrypting-images"></a>Önizleme: görüntüleri şifrelemek için müşteri tarafından yönetilen anahtarları kullanın
 
@@ -162,7 +162,7 @@ az provider register -n Microsoft.Compute
 ```
 
 
-Bir görüntü sürümüne yönelik bir disk şifreleme kümesi belirtmek için, parametresiyle [az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az-sig-image-version-create) kullanın `--target-region-encryption` . Biçimi, `--target-region-encryption` işletim sistemi ve veri disklerini şifrelemek için bir virgülle ayrılmış anahtar listesidir. Şöyle görünmelidir: `<encryption set for the OS disk>,<Lun number of the data disk>,<encryption set for the data disk>,<Lun number for the second data disk>,<encryption set for the second data disk>` . 
+Bir görüntü sürümüne yönelik bir disk şifreleme kümesi belirtmek için, parametresiyle [az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az_sig_image_version_create) kullanın `--target-region-encryption` . Biçimi, `--target-region-encryption` işletim sistemi ve veri disklerini şifrelemek için bir virgülle ayrılmış anahtar listesidir. Şöyle görünmelidir: `<encryption set for the OS disk>,<Lun number of the data disk>,<encryption set for the data disk>,<Lun number for the second data disk>,<encryption set for the second data disk>` . 
 
 İşletim sistemi diskinin kaynağı yönetilen bir disk veya VM ise, `--managed-image` görüntü sürümü kaynağını belirtmek için öğesini kullanın. Bu örnekte kaynak, LUN 0 ' da işletim sistemi diskine ve veri diskine sahip olan yönetilen bir görüntüdür. İşletim sistemi diski DiskEncryptionSet1 ile şifrelenir ve veri diski DiskEncryptionSet2 ile şifrelenir.
 

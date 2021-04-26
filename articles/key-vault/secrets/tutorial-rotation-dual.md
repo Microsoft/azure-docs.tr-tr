@@ -10,12 +10,13 @@ ms.subservice: secrets
 ms.topic: tutorial
 ms.date: 06/22/2020
 ms.author: jalichwa
-ms.openlocfilehash: e7e63ea56edc2b76383ee4c034fd39dd8b8259c1
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: devx-track-azurepowershell, devx-track-azurecli
+ms.openlocfilehash: 1f656a41b0f447b90f58ec14173e418a2defb72e
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98786013"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484838"
 ---
 # <a name="automate-the-rotation-of-a-secret-for-resources-that-have-two-sets-of-authentication-credentials"></a>İki kimlik doğrulama kimlik doğrulaması kümesine sahip kaynaklar için gizli dizi döndürmeyi otomatikleştirin
 
@@ -53,11 +54,17 @@ Mevcut bir anahtar kasası ve mevcut depolama hesaplarınız yoksa, bu dağıtı
 
     ![Kaynak grubu oluşturmayı gösteren ekran görüntüsü.](../media/secrets/rotation-dual/dual-rotation-1.png)
 
-Artık bir anahtar kasası ve iki depolama hesabınız olacak. Şu komutu çalıştırarak bu kurulumu Azure CLı 'da doğrulayabilirsiniz:
-
+Artık bir anahtar kasası ve iki depolama hesabınız olacak. Bu kurulumu Azure CLı 'da veya Azure PowerShell, bu komutu çalıştırarak doğrulayabilirsiniz:
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az resource list -o table -g vaultrotation
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzResource -Name 'vaultrotation*' | Format-Table
+```
+---
 
 Sonuç şu çıkışa benzer şekilde görünecektir:
 
@@ -111,49 +118,97 @@ Yukarıdaki adımları tamamladıktan sonra bir depolama hesabınız, bir sunucu
 ## <a name="add-the-storage-account-access-keys-to-key-vault"></a>Depolama hesabı erişim anahtarlarını Key Vault ekleyin
 
 İlk olarak, Kullanıcı sorumlunuz için **gizli dizi yönetme** izinleri vermek üzere erişim ilkenizi ayarlayın:
-
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az keyvault set-policy --upn <email-address-of-user> --name vaultrotation-kv --secret-permissions set delete get list
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Set-AzKeyVaultAccessPolicy -UserPrincipalName <email-address-of-user> --name vaultrotation-kv -PermissionsToSecrets set,delete,get,list
+```
+---
 
 Artık değeri olarak depolama hesabı erişim anahtarı ile yeni bir gizli dizi oluşturabilirsiniz. Ayrıca, döndürme işlevinin depolama hesabındaki anahtarı yeniden oluşturabilmesi için, depolama hesabı kaynak KIMLIĞI, gizli geçerlilik süresi ve anahtar KIMLIĞI ' ne ihtiyacınız olacak.
 
 Depolama hesabı kaynak KIMLIĞINI belirleme. Bu değeri `id` özelliğinde bulabilirsiniz.
 
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az storage account show -n vaultrotationstorage
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzStorageAccount -Name vaultrotationstorage -ResourceGroupName vaultrotation | Select-Object -Property *
+```
+---
 
 Anahtar değerlerini alabilmeniz için depolama hesabı erişim anahtarlarını listeleyin:
-
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
-az storage account keys list -n vaultrotationstorage 
+az storage account keys list -n vaultrotationstorage
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzStorageAccountKey -Name vaultrotationstorage -ResourceGroupName vaultrotation
+```
+---
 
 Süre sonu tarihi yarın, 60 gün ve depolama hesabı kaynak kimliği için geçerlilik süresi olan Anahtar Kasası 'na gizli dizi ekleyin. Ve için elde edilen değerleri kullanarak bu komutu çalıştırın `key1Value` `storageAccountResourceId` :
 
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 $tomorrowDate = (get-date).AddDays(+1).ToString("yyy-MM-ddTHH:mm:ssZ")
 az keyvault secret set --name storageKey --vault-name vaultrotation-kv --value <key1Value> --tags "CredentialId=key1" "ProviderAddress=<storageAccountResourceId>" "ValidityPeriodDays=60" --expires $tomorrowDate
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+$tomorrowDate = (Get-Date).AddDays(+1).ToString('yyy-MM-ddTHH:mm:ssZ')
+$secretVaule = ConvertTo-SecureString -String '<key1Value>' -AsPlainText -Force
+$tags = @{
+    CredentialId='key1'
+    ProviderAddress='<storageAccountResourceId>'
+    ValidityPeriodDays='60'
+}
+Set-AzKeyVaultSecret -Name storageKey -VaultName vaultrotation-kv -SecretValue $secretVaule -Tag $tags -Expires $tomorrowDate
+```
+---
 
 Yukarıdaki Gizlilik, `SecretNearExpiry` birkaç dakika içinde olayı tetikler. Bu olay, sona erme tarihi 60 gün olarak ayarlanan gizli anahtarı döndürmek için işlevi tetikler. Bu yapılandırmada, ' Secretbir süre sonu ' olayı 30 günde bir tetiklenecek (süre sonu 30 gün) ve döndürme işlevi KEY1 ile key2 arasında bir döndürme işlemi olacaktır.
 
 Depolama hesabı anahtarını ve Key Vault gizliliğini alarak ve bunları karşılaştırarak erişim anahtarlarının yeniden oluşturulduğunu doğrulayabilirsiniz.
 
 Gizli bilgileri almak için bu komutu kullanın:
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az keyvault secret show --vault-name vaultrotation-kv --name storageKey
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzKeyVaultSecret -VaultName vaultrotation-kv -Name storageKey -AsPlainText
+```
+---
 
 `CredentialId`Alternatif olarak güncelleştirilmiş ve yeniden oluşturulan dikkat edin `keyName` `value` :
 
 ![İlk depolama hesabı için z keykasası gizli gösterme komutunun çıkışını gösteren ekran görüntüsü.](../media/secrets/rotation-dual/dual-rotation-4.png)
 
 Değerleri karşılaştırmak için erişim tuşlarını alın:
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az storage account keys list -n vaultrotationstorage 
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzStorageAccountKey -Name vaultrotationstorage -ResourceGroupName vaultrotation
+```
+---
+
 Anahtarın `value` anahtar kasasındaki gizli anahtarla aynı olduğuna dikkat edin:
 
 ![İlk depolama hesabı için z depolama hesabı anahtarları listesi komutunun çıkışını gösteren ekran görüntüsü.](../media/secrets/rotation-dual/dual-rotation-5.png)
@@ -185,36 +240,77 @@ Döndürme için mevcut bir işleve depolama hesabı anahtarları eklemek için 
 ### <a name="add-another-storage-account-access-key-to-key-vault"></a>Key Vault başka bir depolama hesabı erişim anahtarı ekleyin
 
 Depolama hesabı kaynak KIMLIĞINI belirleme. Bu değeri `id` özelliğinde bulabilirsiniz.
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az storage account show -n vaultrotationstorage2
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzStorageAccount -Name vaultrotationstorage -ResourceGroupName vaultrotation | Select-Object -Property *
+```
+---
 
 Depolama hesabı erişim anahtarlarını, key2 değerini alabilmeniz için listeleyin:
-
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
-az storage account keys list -n vaultrotationstorage2 
+az storage account keys list -n vaultrotationstorage2
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzStorageAccountKey -Name vaultrotationstorage2 -ResourceGroupName vaultrotation
+```
+---
 
 Süre sonu tarihi yarın, 60 gün ve depolama hesabı kaynak kimliği için geçerlilik süresi olan Anahtar Kasası 'na gizli dizi ekleyin. Ve için elde edilen değerleri kullanarak bu komutu çalıştırın `key2Value` `storageAccountResourceId` :
 
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
-$tomorrowDate = (get-date).AddDays(+1).ToString("yyy-MM-ddTHH:mm:ssZ")
+$tomorrowDate = (Get-Date).AddDays(+1).ToString('yyy-MM-ddTHH:mm:ssZ')
 az keyvault secret set --name storageKey2 --vault-name vaultrotation-kv --value <key2Value> --tags "CredentialId=key2" "ProviderAddress=<storageAccountResourceId>" "ValidityPeriodDays=60" --expires $tomorrowDate
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+$tomorrowDate = (get-date).AddDays(+1).ToString("yyy-MM-ddTHH:mm:ssZ")
+$secretVaule = ConvertTo-SecureString -String '<key1Value>' -AsPlainText -Force
+$tags = @{
+    CredentialId='key2';
+    ProviderAddress='<storageAccountResourceId>';
+    ValidityPeriodDays='60'
+}
+Set-AzKeyVaultSecret -Name storageKey2 -VaultName vaultrotation-kv -SecretValue $secretVaule -Tag $tags -Expires $tomorrowDate
+```
+---
 
 Gizli bilgileri almak için bu komutu kullanın:
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az keyvault secret show --vault-name vaultrotation-kv --name storageKey2
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzKeyVaultSecret -VaultName vaultrotation-kv -Name storageKey2 -AsPlainText
+```
+---
 
 `CredentialId`Alternatif olarak güncelleştirilmiş ve yeniden oluşturulan dikkat edin `keyName` `value` :
 
 ![İkinci depolama hesabı için z keykasası gizli gösterme komutunun çıkışını gösteren ekran görüntüsü.](../media/secrets/rotation-dual/dual-rotation-8.png)
 
 Değerleri karşılaştırmak için erişim tuşlarını alın:
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az storage account keys list -n vaultrotationstorage 
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Get-AzStorageAccountKey -Name vaultrotationstorage -ResourceGroupName vaultrotation
+```
+---
 
 Anahtarın `value` anahtar kasasındaki gizli anahtarla aynı olduğuna dikkat edin:
 

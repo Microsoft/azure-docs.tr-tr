@@ -13,12 +13,12 @@ author: williamdassafMSFT
 ms.author: wiassaf
 ms.reviewer: ''
 ms.date: 2/1/2021
-ms.openlocfilehash: 1f4bd28d2b95aeebe07fcad84d757327622d51f0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 295889cf64d27761021dd09549a3366ea142516e
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101690439"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107752041"
 ---
 # <a name="automate-management-tasks-using-elastic-jobs-preview"></a>Esnek işleri kullanarak yönetim görevlerini otomatikleştirme (Önizleme)
 
@@ -159,7 +159,7 @@ Her işte yürütülecek bir T-SQL betiği, bu T-SQL betiğinin çalıştırıla
 
 #### <a name="job-history"></a>İş geçmişi
 
-[Tablo jobs.job_executions sorgulayarak](elastic-jobs-tsql-create-manage.md#monitor-job-execution-status) *Iş veritabanındaki* elastik iş yürütme geçmişini görüntüleyin. Sistem temizleme işlemi 45 günden daha eski olan yürütme geçmişi verilerini siler. 45 günden daha yeni olan geçmişi kaldırmak için *İş veritabanında***sp_purge_history** saklı yordamını çağırın.
+[Tablo jobs.job_executions sorgulayarak](elastic-jobs-tsql-create-manage.md#monitor-job-execution-status) *Iş veritabanındaki* elastik iş yürütme geçmişini görüntüleyin. Sistem temizleme işlemi 45 günden daha eski olan yürütme geçmişi verilerini siler. 45 günden daha eski geçmişi kaldırmak için *iş veritabanında* **sp_purge_jobhistory** saklı yordamını çağırın.
 
 #### <a name="job-status"></a>İş durumu
 

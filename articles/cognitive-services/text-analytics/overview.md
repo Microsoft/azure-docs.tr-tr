@@ -8,16 +8,16 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: overview
-ms.date: 03/09/2021
+ms.date: 03/29/2021
 ms.author: aahi
 keywords: metin araştırma, yaklaşım analizi, metin analizi
 ms.custom: cog-serv-seo-aug-2020
-ms.openlocfilehash: 7fcc030e3c63c24fa255e578c2d8aaf1b466e99c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b586478b6b3943fb0154ed6c50bade6fd8b08b76
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104598975"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219510"
 ---
 # <a name="what-is-the-text-analytics-api"></a>Metin Analizi API'si nedir?
 
@@ -26,6 +26,12 @@ Metin Analizi API'si, metin madenciliği ve metin analizi için doğal dil Işle
 API, geliştirme projeleriniz için bulutta makine öğrenimi ve AI algoritmaları koleksiyonu olan Azure bilişsel [Hizmetler](../index.yml)'in bir parçasıdır. Bu özellikleri, REST API [sürüm 3,0](https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-V3-0/) veya [sürüm 3,1-Önizleme](https://westus2.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-1-preview-3/)veya [istemci kitaplığı](quickstarts/client-libraries-rest-api.md)ile kullanabilirsiniz.
 
 > [!VIDEO https://channel9.msdn.com/Shows/AI-Show/Whats-New-in-Text-Analytics-Opinion-Mining-and-Async-API/player]
+
+Bu belge aşağıdaki makale türlerini içerir:
+* [Hızlı başlangıç](./quickstarts/client-libraries-rest-api.md) , hizmete çağrı yapmanızı ve sonuçları kısa bir süre elde etmenize olanak tanıyan adım adım yönergeler. 
+* [Nasıl yapılır kılavuzlarında](./how-tos/text-analytics-how-to-call-api.md) , hizmetin daha belirli veya özelleştirilmiş yollarla kullanılmasına ilişkin yönergeler bulunur.
+* [Kavramlar](text-analytics-user-scenarios.md) , hizmetin işlevselliği ve özellikleri hakkında ayrıntılı açıklamalar sağlar.
+* [Öğreticiler](./tutorials/tutorial-power-bi-key-phrases.md) daha fazla iş çözümlerinde bu hizmeti bir bileşen olarak nasıl kullanacağınızı gösteren kılavuzlardır.
 
 ## <a name="sentiment-analysis"></a>Yaklaşım analizi
 

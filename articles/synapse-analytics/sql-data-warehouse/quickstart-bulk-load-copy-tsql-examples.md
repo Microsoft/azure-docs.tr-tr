@@ -2,19 +2,19 @@
 title: COPY ifadesiyle kimlik doğrulama mekanizmaları
 description: Verileri toplu olarak yüklemek için kimlik doğrulama mekanizmalarını özetler
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 ms.service: synapse-analytics
 ms.topic: quickstart
 ms.subservice: sql-dw
 ms.date: 07/10/2020
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: jrasnick
-ms.openlocfilehash: 70e8f15b2b02008f24c87cfe70372fccbf0506fd
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 510f2556fba42176817b782fe48d01d76eaa3fd7
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104600131"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107568463"
 ---
 # <a name="securely-load-data-using-synapse-sql"></a>SYNAPSE SQL kullanarak güvenli bir şekilde veri yükleme
 

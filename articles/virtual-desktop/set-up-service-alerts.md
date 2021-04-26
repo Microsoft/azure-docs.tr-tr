@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: tutorial
 ms.date: 06/11/2019
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 66617afee11b02eae0ba5e36d9ff91cbdf21911f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+manager: femila
+ms.openlocfilehash: ca5f225265b42ffc67a41a5252b2e789f7bcf500
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95023114"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445644"
 ---
 # <a name="tutorial-set-up-service-alerts"></a>Öğretici: hizmet uyarılarını ayarlama
 

@@ -1,22 +1,22 @@
 ---
 title: Azure IoT Central özel Analize genişletin | Microsoft Docs
 description: Çözüm geliştiricisi olarak, bir IoT Central uygulamasını özel analiz ve görselleştirmeler yapmak üzere yapılandırın. Bu çözüm Azure Databricks kullanır.
-author: TheRealJasonAndrew
-ms.author: v-anjaso
+author: philmea
+ms.author: philmea
 ms.date: 03/15/2021
 ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 ms.custom: mvc
 manager: philmea
-ms.openlocfilehash: 3132ec8fb3cb123653887d92a2f33788f40564c0
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 9ada9947b217944d9aec9f785f4716bfe43315b1
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105033832"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872776"
 ---
-# <a name="extend-azure-iot-central-with-custom-analytics-using-azure-databricks"></a>Azure Databricks kullanarak Azure IoT Central özel analiz ile genişletme
+# <a name="extend-azure-iot-central-with-custom-analytics-using-azure-databricks"></a>Azure Databricks kullanarak özel analizlerle Azure IoT Central’ın kapsamını genişletme
 
 Bu nasıl yapılır kılavuzunda, çözüm geliştiricisi olarak, IoT Central uygulamanızın özel analizler ve görselleştirmeler ile nasıl genişletileceği gösterilmektedir. Örnek, IoT Central telemetri akışını analiz etmek ve [kutu çizimleri](https://wikipedia.org/wiki/Box_plot)gibi görselleştirmeler oluşturmak için bir [Azure Databricks](/azure/azure-databricks/) çalışma alanı kullanır.  
 

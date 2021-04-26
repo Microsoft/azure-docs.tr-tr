@@ -12,21 +12,21 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 02/05/2021
+ms.date: 03/29/2021
 ms.author: b-juche
-ms.openlocfilehash: 12807e83f7841bc67999ce385d0cb82bf15f4c71
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5e7f71f91e5778b4f096bb760bfe5a0a89b5cbcb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102176000"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764288"
 ---
 # <a name="what-changing-to-volume-hard-quota-means-for-your-azure-netapp-files-service"></a>Azure NetApp Files hizmetiniz için birim sabit kotasında ne kadar değişiklik yapılır?
 
 Hizmetin başından Azure NetApp Files, kapasite havuzu sağlama ve otomatik büyüme mekanizması kullanıyor. Azure NetApp Files birimler, seçilen bir katmanın ve boyutun, müşteri tarafından sağlanan kapasite havuzunda ölçülü kaynak olarak sağlanır. Birim boyutları (kotalar) performans ve kapasite sağlamak için kullanılır ve Kotalar herhangi bir zamanda anında ayarlanabilir. Bu davranış, şu anda birim kotasının birim bant genişliğini denetlemek için kullanılan bir performans mandalı olduğu anlamına gelir. Şu anda Kapasite dolduğunda kapasite havuzlarının ölçeği otomatik olarak büyütülür.   
 
 > [!IMPORTANT] 
-> Birim ve kapasite havuzu sağlamanın Azure NetApp Files davranışı *el ile* ve *denetlenebilir* mekanizmaya değişecektir. **1 Nisan 2021 (güncelleştirilmiş) tarihinden itibaren, birim boyutları (Kota) bant genişliği performansını ve sağlanan kapasiteyi yönetir ve temel alınan kapasite havuzları artık otomatik olarak büyütülecektir.** 
+> Birim ve kapasite havuzu sağlamanın Azure NetApp Files davranışı *el ile* ve *denetlenebilir* mekanizmaya değişecektir. **30 Nisan 2021 (güncelleştirilmiş) tarihinden itibaren, birim boyutları (Kota) bant genişliği performansını ve sağlanan kapasiteyi yönetir ve temel alınan kapasite havuzları artık otomatik olarak büyütülecektir.** 
 
 ## <a name="reasons-for-the-change-to-volume-hard-quota"></a>Birim sabit kotası değişikliğine yönelik nedenler
 
@@ -196,13 +196,13 @@ Bu eylem Azure Cloud Shell açar:
 
 [![Cloud Shell penceresini gösteren ekran görüntüsü. ](../media/azure-netapp-files/hard-quota-update-cloud-shell-window.png)](../media/azure-netapp-files/hard-quota-update-cloud-shell-window.png#lightbox)
 
-Aşağıdaki örnekler, bir birimin boyutunu [göstermek](/cli/azure/netappfiles/volume#az-netappfiles-volume-show) ve [güncelleştirmek](/cli/azure/netappfiles/volume#az-netappfiles-volume-update) için komutları kullanır:
+Aşağıdaki örnekler, bir birimin boyutunu [göstermek](/cli/azure/netappfiles/volume#az_netappfiles_volume_show) ve [güncelleştirmek](/cli/azure/netappfiles/volume#az_netappfiles_volume_update) için komutları kullanır:
  
 [![Birim boyutunu göstermek Için PowerShell 'i kullanmayı gösteren ekran görüntüsü. ](../media/azure-netapp-files/hard-quota-update-powershell-volume-show.png)](../media/azure-netapp-files/hard-quota-update-powershell-volume-show.png#lightbox)
 
 [![Birim boyutunu güncelleştirmek Için PowerShell 'i kullanmayı gösteren ekran görüntüsü. ](../media/azure-netapp-files/hard-quota-update-powershell-volume-update.png)](../media/azure-netapp-files/hard-quota-update-powershell-volume-update.png#lightbox)
 
-Aşağıdaki örnekler, bir kapasite havuzunun boyutunu [göstermek](/cli/azure/netappfiles/pool#az-netappfiles-pool-show) ve [güncelleştirmek](/cli/azure/netappfiles/pool#az-netappfiles-pool-update) için komutları kullanır:
+Aşağıdaki örnekler, bir kapasite havuzunun boyutunu [göstermek](/cli/azure/netappfiles/pool#az_netappfiles_pool_show) ve [güncelleştirmek](/cli/azure/netappfiles/pool#az_netappfiles_pool_update) için komutları kullanır:
 
 [![Kapasite havuzu boyutunu göstermek Için PowerShell 'i kullanmayı gösteren ekran görüntüsü. ](../media/azure-netapp-files/hard-quota-update-powershell-pool-show.png)](../media/azure-netapp-files/hard-quota-update-powershell-pool-show.png#lightbox) 
 

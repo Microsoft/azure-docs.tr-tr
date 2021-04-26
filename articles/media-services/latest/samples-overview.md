@@ -8,12 +8,12 @@ ms.service: media-services
 ms.topic: overview
 ms.date: 03/24/2021
 ms.author: inhenkel
-ms.openlocfilehash: bfe39020da0be245f47d0c954de7598914d6534d
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 1d827d734c434204ff6b7ec60d27e507ae626abd
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105051359"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107227696"
 ---
 # <a name="media-services-v3-samples"></a>Media Services v3 örnekleri
 
@@ -47,7 +47,7 @@ Sekmelerin her birinde Aradığınız örneklere ilişkin açıklama ve bağlant
 | [ContentProtection/OfflinePlayReadyAndWidevine](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/main/ContentProtection/OfflinePlayReadyAndWidevine)|İçeriğinizi PlayReady ve Widevine DRM ile dinamik olarak şifreleyin ve lisans hizmetinden lisans istemeden içeriği yürütün. Yerleşik uyarlamalı akış ön ayarıyla bir dönüştürme oluşturmayı, bir işi göndermeyi, açık kısıtlama ve PlayReady/Widevine kalıcı yapılandırma ile ContentKeyPolicy oluşturmayı, ContentKeyPolicy 'yi StreamingLocator ile ilişkilendirmeyi ve kayıttan yürütme için bir URL yazdırmayı gösterir.|
 | [Akış/Assetfiltreleri](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/main/Streaming/AssetFilters)|Yerleşik uyarlamalı akış ön ayarıyla bir dönüşüm oluşturma, bir iş gönderme, bir varlık filtresi oluşturma ve bir hesap filtresi oluşturma, filtreleri akış bulleyicileri ile ilişkilendirme ve kayıttan yürütme için yazdırma URL 'leri.|
 | [Akış/StreamHLSAndDASH](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/main/Streaming/StreamHLSAndDASH)|Yerleşik uyarlanabilir akış ön ayarıyla bir dönüşüm oluşturma, iş gönderme, HLS ve DASH akışı için çıkış varlığını yayımlama.|
-| [HighAvailabilityEncodingStreaming](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/main/HighAvailabilityEncodingStreaming/) | İsteğe bağlı kodlama veya analiz kullanan bir üretim sistemine yönelik rehberlik ve en iyi uygulamalar. Okuyucular [Media Services ve VOD Ile yüksek kullanılabilirliğe](https://docs.microsoft.com/azure/media-services/latest/media-services-high-availability-encoding)sahip yardımcı makale ile başlamalıdır. [HighAvailabilityEncodingStreaming](/HighAvailabilityEncodingStreaming/Readme.md) örneği için sunulan ayrı bir çözüm dosyası vardır. |
+| [HighAvailabilityEncodingStreaming](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/main/HighAvailabilityEncodingStreaming/) | İsteğe bağlı kodlama veya analiz kullanan bir üretim sistemine yönelik rehberlik ve en iyi uygulamalar. Okuyucular [Media Services ve VOD Ile yüksek kullanılabilirliğe](https://docs.microsoft.com/azure/media-services/latest/architecture-high-availability-encoding-concept)sahip yardımcı makale ile başlamalıdır. [HighAvailabilityEncodingStreaming](https://github.com/Azure-Samples/media-services-v3-dotnet/blob/main/HighAvailabilityEncodingStreaming/README.md) örneği için sunulan ayrı bir çözüm dosyası vardır. |
 
 ## <a name="nodejs"></a>[Node.JS](#tab/node/)
 

@@ -2,25 +2,22 @@
 title: Azure AD 'de Federasyon sertifikalarını yönetme | Microsoft Docs
 description: Federasyon sertifikalarınız için sona erme tarihini özelleştirmeyi ve yakında süresi dolacak sertifikaların nasıl yenileneceğini öğrenin.
 services: active-directory
-documentationcenter: ''
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: conceptual
 ms.date: 04/04/2019
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 63054b18589cdcc2d950d70452b4f982c324a6c3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 594af54221dd242bd481fe3d2fc823f628c1f955
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104604007"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107379460"
 ---
 # <a name="manage-certificates-for-federated-single-sign-on-in-azure-active-directory"></a>Azure Active Directory 'da federe çoklu oturum açma için sertifikaları yönetme
 

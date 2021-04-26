@@ -10,21 +10,20 @@ ms.date: 03/10/2021
 ms.topic: include
 ms.custom: include file
 ms.author: mikben
-ms.openlocfilehash: 800acddcb3527b9ca16d7fc664c2a3c27b528c25
-ms.sourcegitcommit: 91361cbe8fff7c866ddc4835251dcbbe2621c055
+ms.openlocfilehash: e5b5433be4a95a9df9d3b3527473c3004d24acac
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105726707"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107327161"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Etkin aboneliği olan bir Azure hesabı. [Ücretsiz hesap oluşturun](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-- [Java Development Kit (JDK)](/java/azure/jdk/) sürüm 8 veya üzeri.
+- [Java Development Kit (JDK)](https://docs.microsoft.com/azure/developer/java/fundamentals/java-jdk-install) sürüm 8 veya üzeri.
 - [Apache Maven](https://maven.apache.org/download.cgi).
 - Dağıtılan bir Iletişim Hizmetleri kaynağı ve bağlantı dizesi. [Iletişim Hizmetleri kaynağı oluşturun](../../create-communication-resource.md).
 - Bir [Kullanıcı erişim belirteci](../../access-tokens.md). Kapsamı "sohbet" olarak ayarladığınızdan emin olun ve belirteç dizesinin yanı sıra Kullanıcı kimliği dizesini de unutmayın.
-
 
 ## <a name="setting-up"></a>Ayarlanıyor
 
@@ -56,7 +55,7 @@ Pod dosyanızda, `azure-communication-chat` sohbet API 'leriyle pakete başvurun
 <dependency>
     <groupId>com.azure</groupId>
     <artifactId>azure-communication-chat</artifactId>
-    <version>1.0.0-beta.7</version> 
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -66,7 +65,7 @@ Kimlik doğrulaması için, istemcinizin pakete başvurması gerekir `azure-comm
 <dependency>
     <groupId>com.azure</groupId>
     <artifactId>azure-communication-common</artifactId>
-    <version>1.0.0</version> 
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -82,7 +81,7 @@ Aşağıdaki sınıflar ve arabirimler, Java için Azure Communication Services 
 | ChatThreadAsyncClient | Bu sınıf, zaman uyumsuz sohbet Iş parçacığı işlevselliği için gereklidir. ChatAsyncClient aracılığıyla bir örnek edinirsiniz ve bu örneği kullanarak ileti gönderebilir/alabilir/güncelleştirebilir/silebilirsiniz, kullanıcıları ekleyin/kaldırın/alın, yazma bildirimleri gönderin ve okundu bilgilerini okuyun. |
 
 ## <a name="create-a-chat-client"></a>Sohbet istemcisi oluşturma
-Bir sohbet istemcisi oluşturmak için, Iletişim hizmeti uç noktasını ve önkoşul adımlarının bir parçası olarak oluşturulan erişim belirtecini kullanacaksınız. Kullanıcı erişimi belirteçleri, Azure Iletişim hizmetlerinde doğrudan kimlik doğrulayan istemci uygulamaları oluşturmanızı sağlar. Bu belirteçleri sunucunuzda oluşturduktan sonra bunları bir istemci cihazına geri geçirin. Belirteci sohbet istemcinize geçirmek için ortak SDK 'daki CommunicationTokenCredential sınıfını kullanmanız gerekir. 
+Bir sohbet istemcisi oluşturmak için, Iletişim hizmeti uç noktasını ve önkoşul adımlarının bir parçası olarak oluşturulan erişim belirtecini kullanacaksınız. Kullanıcı erişimi belirteçleri, Azure Iletişim hizmetlerinde doğrudan kimlik doğrulayan istemci uygulamaları oluşturmanızı sağlar. Bu belirteçleri sunucunuzda oluşturduktan sonra bunları bir istemci cihazına geri geçirin. Belirteci sohbet istemcinize geçirmek için ortak SDK 'daki CommunicationTokenCredential sınıfını kullanmanız gerekir.
 
 [Sohbet mimarisi](../../../concepts/chat/concepts.md) hakkında daha fazla bilgi edinin
 
@@ -94,8 +93,6 @@ package com.communication.quickstart;
 import com.azure.communication.chat.*;
 import com.azure.communication.chat.models.*;
 import com.azure.communication.common.*;
-import com.azure.core.http.HttpClient;
-import com.azure.core.http.netty.NettyAsyncHttpClientBuilder;
 import com.azure.core.http.rest.PagedIterable;
 
 import java.io.*;
@@ -106,14 +103,9 @@ public class App
     public static void main( String[] args ) throws IOException
     {
         System.out.println("Azure Communication Services - Chat Quickstart");
-        
+
         // Your unique Azure Communication service endpoint
         String endpoint = "https://<RESOURCE_NAME>.communication.azure.com";
-
-        // Create an HttpClient builder of your choice and customize it
-        // Use com.azure.core.http.netty.NettyAsyncHttpClientBuilder if that suits your needs
-        NettyAsyncHttpClientBuilder yourHttpClientBuilder = new NettyAsyncHttpClientBuilder();
-        HttpClient httpClient = yourHttpClientBuilder.build();
 
         // User access token fetched from your trusted service
         String userAccessToken = "<USER_ACCESS_TOKEN>";
@@ -124,8 +116,7 @@ public class App
         // Initialize the chat client
         final ChatClientBuilder builder = new ChatClientBuilder();
         builder.endpoint(endpoint)
-            .credential(userCredential)
-            .httpClient(httpClient);
+            .credential(userCredential);
         ChatClient chatClient = builder.buildClient();
     }
 }
@@ -139,15 +130,19 @@ public class App
 - `topic`Bu sohbete bir konu vermek için oluşturucunun parametresini kullanın; Konu, işlevi kullanılarak sohbet iş parçacığı oluşturulduktan sonra güncelleştirilemeyebilir `UpdateThread` .
 - `participants`İş parçacığına eklenecek iş parçacığı katılımcılarını listelemek için kullanın. `ChatParticipant`[Kullanıcı erişim belirteci](../../access-tokens.md) hızlı başlangıç bölümünde oluşturduğunuz kullanıcıyı alır.
 
-`CreateChatThreadResult` Yanıt, sohbet iş parçacığı oluşturmaktan döndü. `getChatThread()` `ChatThread` Oluşturulan iş parçacığında işlemleri gerçekleştirmek için kullanabileceğiniz iş parçacığı istemcisini almak için kullanılabilecek nesneyi döndüren bir yöntem içerir `ChatThreadClient` : katılımcı ekleme, ileti gönderme vb. `ChatThread`Nesnesi ayrıca `getId()` iş PARÇACıĞıNıN benzersiz kimliğini alan yöntemini içerir.
+`CreateChatThreadResult` Yanıt, sohbet iş parçacığı oluşturmaktan döndü.
+`getChatThread()` `ChatThread` Oluşturulan iş parçacığında işlemleri gerçekleştirmek için kullanabileceğiniz iş parçacığı istemcisini almak için kullanılabilecek nesneyi döndüren bir yöntem içerir `ChatThreadClient` : katılımcı ekleme, ileti gönderme vb. `ChatThread`Nesnesi ayrıca `getId()` iş PARÇACıĞıNıN benzersiz kimliğini alan yöntemini içerir.
 
 ```Java
+CommunicationUserIdentifier identity1 = new CommunicationUserIdentifier("<USER_1_ID>");
+CommunicationUserIdentifier identity2 = new CommunicationUserIdentifier("<USER_2_ID>");
+
 ChatParticipant firstThreadParticipant = new ChatParticipant()
-    .setCommunicationIdentifier(firstUser)
+    .setCommunicationIdentifier(identity1)
     .setDisplayName("Participant Display Name 1");
 
 ChatParticipant secondThreadParticipant = new ChatParticipant()
-    .setCommunicationIdentifier(secondUser)
+    .setCommunicationIdentifier(identity2)
     .setDisplayName("Participant Display Name 2");
 
 CreateChatThreadOptions createChatThreadOptions = new CreateChatThreadOptions("Topic")
@@ -247,12 +242,15 @@ Sohbet iş parçacığı oluşturulduktan sonra, bundan sonra kullanıcı ekleye
 ```Java
 List<ChatParticipant> participants = new ArrayList<ChatParticipant>();
 
+CommunicationUserIdentifier identity3 = new CommunicationUserIdentifier("<USER_3_ID>");
+CommunicationUserIdentifier identity4 = new CommunicationUserIdentifier("<USER_4_ID>");
+
 ChatParticipant thirdThreadParticipant = new ChatParticipant()
-    .setCommunicationIdentifier(user3)
+    .setCommunicationIdentifier(identity3)
     .setDisplayName("Display Name 3");
 
 ChatParticipant fourthThreadParticipant = new ChatParticipant()
-    .setCommunicationIdentifier(user4)
+    .setCommunicationIdentifier(identity4)
     .setDisplayName("Display Name 4");
 
 participants.add(thirdThreadParticipant);

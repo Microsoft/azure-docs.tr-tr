@@ -3,12 +3,12 @@ title: Sepet kapsayıcısı ile TLS 'yi etkinleştirme
 description: Sepet kapsayıcısında NGINX 'i çalıştırarak Azure Container Instances çalıştıran bir kapsayıcı grubu için SSL veya TLS uç noktası oluşturma
 ms.topic: article
 ms.date: 07/02/2020
-ms.openlocfilehash: 6587a84e7cbe655c509f74e9e39e93010e7058be
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 906a1f239d7050ea17fd7d1425138049ebf045c1
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96558088"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790986"
 ---
 # <a name="enable-a-tls-endpoint-in-a-sidecar-container"></a>Bir sepet kapsayıcısında TLS uç noktasını etkinleştirme
 
@@ -193,13 +193,13 @@ type: Microsoft.ContainerInstance/containerGroups
 
 ### <a name="deploy-the-container-group"></a>Kapsayıcı grubunu dağıtma
 
-[Az Group Create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun:
+[Az Group Create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location westus
 ```
 
-Bir bağımsız değişken olarak YAML dosyasını geçirerek, [az Container Create](/cli/azure/container#az-container-create) komutuyla kapsayıcı grubunu dağıtın.
+Bir bağımsız değişken olarak YAML dosyasını geçirerek, [az Container Create](/cli/azure/container#az_container_create) komutuyla kapsayıcı grubunu dağıtın.
 
 ```azurecli
 az container create --resource-group <myResourceGroup> --file deploy-aci.yaml
@@ -207,7 +207,7 @@ az container create --resource-group <myResourceGroup> --file deploy-aci.yaml
 
 ### <a name="view-deployment-state"></a>Dağıtım durumunu görüntüle
 
-Dağıtımın durumunu görüntülemek için, aşağıdaki [az Container Show](/cli/azure/container#az-container-show) komutunu kullanın:
+Dağıtımın durumunu görüntülemek için, aşağıdaki [az Container Show](/cli/azure/container#az_container_show) komutunu kullanın:
 
 ```azurecli
 az container show --resource-group <myResourceGroup> --name app-with-ssl --output table

@@ -1,22 +1,23 @@
 ### YamlMime:Landing
 title: Kurumsal kullanıcı yönetimi belgeleri - Azure AD
-summary: Azure AD grup ve lisans gibi kullanıcı yönetim hizmetleri sunar ve en önemli kullanıcı yönetme görevlerinizi hızla yapmanıza yardımcı olur. Lisans atayın, gruplara veya kullanıcılara uygulama erişimi atayın ve etki alanlarını ekleyin ya da yönetin.
+summary: Azure AD, lisans atayabilmeniz, gruplarınızı ve kullanıcılarınızı yönetebilmeniz ve etki alanı adlarını ekleyip yönetebilmeniz için kullanıcı yönetim hizmetleri sağlar.
 metadata:
-  title: Azure Active Directory kullanıcıları, grupları, lisansları ve etki alanlarıyla ilgili belgeler
+  title: Kullanıcıları, grupları, lisansları ve etki alanları belgelerini Azure Active Directory
   description: Azure AD kuruluşunuzda kullanıcı kimlik doğrulamasını yönetmek için grupları, etki alanı adlarını ve lisansları nasıl kullanacağınızı öğrenin.
   services: active-directory
   ms.service: active-directory
-  manager: daveba
+  ms.subservice: enterprise-users
+  manager: mtillman
   ms.topic: landing-page
-  ms.date: 10/19/2020
+  ms.date: 04/18/2021
   author: curtand
   ms.author: curtand
-  ms.openlocfilehash: a919a9785163776cfbcfb52a378405c0ac870035
-  ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
-  ms.translationtype: HT
+  ms.openlocfilehash: 8a129cf6e000a2e644f2fc7168d9e3105de0f957
+  ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
+  ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 11/23/2020
-  ms.locfileid: "95503049"
+  ms.lasthandoff: 04/20/2021
+  ms.locfileid: "107739305"
 landingContent:
 - title: Kurumsal kullanıcı yönetimi hakkında
   linkLists:

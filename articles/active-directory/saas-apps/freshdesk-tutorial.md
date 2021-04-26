@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 01/20/2021
 ms.author: jeedes
 ms.openlocfilehash: e1394eafdfd733b5d69a4d4abbb6b218b4c8c10d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101651962"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-freshdesk"></a>Öğretici: en güncel çalışma ile Azure Active Directory tümleştirme
@@ -95,7 +95,7 @@ Azure AD SSO 'yu bir sonraki adımda yapılandırmak ve test etmek için aşağ�
     ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
 
-### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user&quot;></a>Azure AD test kullanıcısı oluşturma 
 
 Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
@@ -107,7 +107,7 @@ Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaks�
    1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
    1. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
+### <a name=&quot;assign-the-azure-ad-test-user&quot;></a>Azure AD test kullanıcısını atama
 
 Bu bölümde, B. Simon 'u kullanarak tek bir oturum açma özelliğini etkinleştirerek, en sonra da isteğe bağlı olarak masasına erişin.
 
@@ -116,16 +116,16 @@ Bu bölümde, B. Simon 'u kullanarak tek bir oturum açma özelliğini etkinleş
 1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
-1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, "varsayılan erişim" rolü seçili olduğunu görürsünüz.
+1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, &quot;varsayılan erişim&quot; rolü seçili olduğunu görürsünüz.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-## <a name="configure-freshdesk-sso"></a>En güncel çalışma SSO 'yu yapılandırma
+## <a name=&quot;configure-freshdesk-sso&quot;></a>En güncel çalışma SSO 'yu yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, bir yönetici olarak iki adımda şirket sitenizde oturum açın.
 
 2. **Güvenlik simgesini** seçin ve **güvenlik** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Çoklu Oturum Açma](./media/freshdesk-tutorial/configure-1.png "Çoklu Oturum Açma")
+    ![Çoklu Oturum Açma](./media/freshdesk-tutorial/configure-1.png &quot;Çoklu Oturum Açma")
   
     a. **Çoklu oturum açma** için **Açık**' ı seçin.
 

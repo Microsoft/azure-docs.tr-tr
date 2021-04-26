@@ -3,16 +3,17 @@ title: Synapse Studio ve depolama alanı arasındaki bağlantı sorunlarını gi
 description: Synapse Studio ve depolama alanı arasındaki bağlantı sorunlarını giderme
 author: saveenr
 ms.service: synapse-analytics
+ms.subservice: workspace
 ms.topic: conceptual
 ms.date: 11/11/2020
 ms.author: xujiang1
 ms.reviewer: jrasnick
-ms.openlocfilehash: d570b4a8df5d59cf8828985bee20852d6bc79b1e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d5f79131608315f7e1c05cbfc0117300eea6c511
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98117070"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566282"
 ---
 # <a name="troubleshoot-connectivity-between-azure-synapse-analytics-synapse-studio-and-storage"></a>Azure Synapse Analytics Synapse Studio ile depolama alanı arasındaki bağlantı sorunlarını giderme
 

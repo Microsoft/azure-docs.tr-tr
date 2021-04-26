@@ -1,18 +1,18 @@
 ---
 title: SSS-Azure ExpressRoute | Microsoft Docs
-description: ExpressRoute SSS, desteklenen Azure Hizmetleri, maliyet, veri ve bağlantılar, SLA, sağlayıcılar ve konumlar, bant genişliği ve ek teknik ayrıntılar hakkında bilgiler içerir.
+description: ExpressRoute SSS, desteklenen Azure Hizmetleri, maliyet, veri ve bağlantılar, SLA, sağlayıcılar ve konumlar, bant genişliği ve diğer teknik ayrıntılar hakkında bilgiler içerir.
 services: expressroute
 author: duongau
 ms.service: expressroute
 ms.topic: conceptual
-ms.date: 03/12/2021
+ms.date: 03/29/2021
 ms.author: duau
-ms.openlocfilehash: da293f15ba070fc9a00ad37defd6a76175ded2f2
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: efa5c3192ca6f51c219cc308a776e6db7212103c
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104587288"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552249"
 ---
 # <a name="expressroute-faq"></a>ExpressRoute SSS
 
@@ -22,7 +22,7 @@ ExpressRoute, Microsoft veri merkezleri ile şirket içinde veya bir birlikte bu
 
 ### <a name="what-are-the-benefits-of-using-expressroute-and-private-network-connections"></a>ExpressRoute ve özel ağ bağlantılarını kullanmanın avantajları nelerdir?
 
-ExpressRoute bağlantıları ortak İnternet üzerinden geçmemektedir. Internet üzerinden tipik bağlantılardan daha düşük ve tutarlı gecikme süreleriyle daha yüksek güvenlik, güvenilirlik ve hız sunar. Bazı durumlarda, şirket içi cihazlar ve Azure arasında veri aktarmak için ExpressRoute bağlantılarını kullanmak önemli maliyet avantajları sağlayabilir.
+ExpressRoute bağlantıları, genel İnternet üzerinden geçmez. Internet üzerinden tipik bağlantılardan daha düşük ve tutarlı gecikme süreleriyle daha yüksek güvenlik, güvenilirlik ve hız sunar. Bazı durumlarda, şirket içi cihazlar ve Azure arasında veri aktarmak için ExpressRoute bağlantılarını kullanmak önemli maliyet avantajları sağlayabilir.
 
 ### <a name="where-is-the-service-available"></a>Hizmet nerede kullanılabilir?
 
@@ -46,7 +46,7 @@ Hayır. Hizmet sağlayıcınızdan herhangi bir hızda özel bir bağlantı sat�
 
 ### <a name="if-i-pay-for-an-expressroute-circuit-of-a-given-bandwidth-do-i-have-the-ability-to-use-more-than-my-procured-bandwidth"></a>Belirli bir bant genişliğine ait bir ExpressRoute bağlantı hattı için ödeme yapıyorsanız, temin bant genişliğinden daha fazlasını kullanma imkanım var mı?
 
-Evet, ExpressRoute devrenizin ikincil bağlantısında bulunan bant genişliğini kullanarak temin olduğunuz bant genişliği sınırını en fazla iki kez kullanabilirsiniz. Devrenizin yerleşik yedekliği, temin bant genişliğinin her biri, iki Microsoft kurumsal sınır yönlendiricilerine (MSEE) birincil ve ikincil bağlantılar kullanılarak yapılandırılır. İkincil bağlantınız aracılığıyla kullanılabilen bant genişliği, gerekirse ek trafik için kullanılabilir. Ancak ikincil bağlantı yedekliliğinden, bu garanti edilmez ve sürekli bir süre için ek trafik için kullanılmamalıdır. Trafiği iletmek için her iki bağlantıyı da kullanma hakkında daha fazla bilgi edinmek için bkz. [Use as Path dizinlenirken](./expressroute-optimize-routing.md#solution-use-as-path-prepending).
+Evet, ExpressRoute devrenizin ikincil bağlantısında bulunan bant genişliğini kullanarak temin olduğunuz bant genişliği sınırını en fazla iki kez kullanabilirsiniz. Devrenizin yerleşik yedekliği, temin bant genişliğinin her biri, iki Microsoft kurumsal sınır yönlendiricilerine (MSEE) birincil ve ikincil bağlantılar kullanılarak yapılandırılır. İkincil bağlantınız aracılığıyla kullanılabilen bant genişliği, gerekirse ek trafik için kullanılabilir. Ancak ikincil bağlantı yedekliliğinden, bu garanti edilmez ve sürekli bir süre için ek trafik için kullanılmamalıdır. Trafiği iletmek için her iki bağlantının de nasıl kullanılacağı hakkında daha fazla bilgi edinmek için bkz. [Use as Path dizinlenirken](./expressroute-optimize-routing.md#solution-use-as-path-prepending).
 
 Trafiği iletmek için yalnızca birincil bağlantınızı kullanmayı planlıyorsanız, bağlantı için bant genişliği düzeltilir ve abone olma denemesi, paket düşmesine neden olur. Trafik bir ExpressRoute ağ geçidiyle akar, ağ geçidi SKU 'SU için bant genişliği sabittir ve Burstable değildir. Her ağ geçidi SKU 'sunun bant genişliği için bkz. [ExpressRoute sanal ağ geçitleri hakkında](expressroute-about-virtual-network-gateways.md#aggthroughput).
 
@@ -95,7 +95,7 @@ ExpressRoute devreniz Azure Microsoft eşlemesi için etkinleştirilirse, devre 
 * Azure Active Directory
 * [Azure DevOps](https://blogs.msdn.microsoft.com/devops/2018/10/23/expressroute-for-azure-devops/) (Azure küresel hizmetler topluluğu)
 * IaaS için Azure genel IP adresleri (sanal makineler, sanal ağ geçitleri, yük dengeleyiciler vb.)  
-* Diğer Azure hizmetlerinin çoğu de desteklenir. Lütfen desteği doğrulamak için kullanmak istediğiniz hizmeti doğrudan denetleyin.
+* Diğer Azure hizmetlerinin çoğu de desteklenir. Desteği doğrulamak için kullanmak istediğiniz hizmeti doğrudan denetleyin.
 
 **Desteklenmez:**
 
@@ -108,7 +108,7 @@ ExpressRoute devreniz Azure Microsoft eşlemesi için etkinleştirilirse, devre 
 
 ### <a name="public-peering"></a>Ortak eşleme
 
-Genel eşleme, yeni ExpressRoute devreleri üzerinde devre dışı bırakıldı. Azure hizmetleri artık Microsoft eşlemesiyle sunulmaktadır. Ortak eşlemenin kullanım dışı bırakılmasından önce oluşturulmuş bir devreniz varsa, istediğiniz hizmetlere bağlı olarak Microsoft eşleme veya genel eşleme kullanmayı tercih edebilirsiniz.
+Genel eşleme, yeni ExpressRoute devreleri üzerinde devre dışı bırakıldı. Azure hizmetleri artık Microsoft eşlemesiyle sunulmaktadır. Ortak eşleme kullanım dışı olmadan önce oluşturulmuş bir bağlantı hattı varsa, istediğiniz hizmetlere bağlı olarak Microsoft eşleme veya genel eşleme kullanmayı seçebilirsiniz.
 
 Ortak eşleme için daha fazla bilgi ve yapılandırma adımları için bkz. [ExpressRoute genel eşleme](about-public-peering.md).
 
@@ -171,7 +171,7 @@ Yüksek kullanılabilirlik için tasarlamak üzere [buraya](./designing-for-high
 
 ### <a name="how-do-i-ensure-high-availability-on-a-virtual-network-connected-to-expressroute"></a>ExpressRoute 'a bağlı bir sanal ağ üzerinde yüksek kullanılabilirlik Nasıl yaparım? emin misiniz?
 
-Aynı eşleme konumunda en fazla dört ExpressRoute devresine sanal ağınıza bağlanarak veya ExpressRoute devreleri farklı eşleme konumlarında (örneğin, Singapur, Singapur2) sanal ağınıza bağlayarak yüksek kullanılabilirlik elde edebilirsiniz. Bir ExpressRoute bağlantı hattı devre dışı bırakılırsa, bağlantı başka bir ExpressRoute devresine yük devreder. Varsayılan olarak, Sanal ağınızı bırakma trafiği, eşit maliyetli çoklu yol yönlendirmesi (ECMP) temelinde yönlendirilir. Bağlantı ağırlığı ' nu kullanarak bir devreyi başka bir şekilde tercih edebilirsiniz. Daha fazla bilgi için bkz. [ExpressRoute yönlendirmeyi iyileştirme](expressroute-optimize-routing.md).
+Aynı eşleme konumunda bulunan 16 ExpressRoute devresine sanal ağınıza bağlanarak veya ExpressRoute devreleri farklı eşleme konumlarında (örneğin, Singapur, Singapur2) sanal ağınıza bağlayarak yüksek kullanılabilirlik elde edebilirsiniz. Bir ExpressRoute bağlantı hattı devre dışı bırakılırsa, bağlantı başka bir ExpressRoute devresine yük devreder. Varsayılan olarak, Sanal ağınızı bırakma trafiği, eşit maliyetli çoklu yol yönlendirmesi (ECMP) temelinde yönlendirilir. Bağlantı ağırlığı ' nu kullanarak bir devreyi başka bir şekilde tercih edebilirsiniz. Daha fazla bilgi için bkz. [ExpressRoute yönlendirmeyi iyileştirme](expressroute-optimize-routing.md).
 
 ### <a name="how-do-i-ensure-that-my-traffic-destined-for-azure-public-services-like-azure-storage-and-azure-sql-on-microsoft-peering-or-public-peering-is-preferred-on-the-expressroute-path"></a>Nasıl yaparım? Azure depolama ve Azure SQL gibi Azure genel hizmetleri 'ne yönelik yönlendirimin ExpressRoute yolunda tercih edildiği veya ortak eşleme ile ilgili olduğundan emin misiniz?
 
@@ -265,7 +265,7 @@ Evet. ExpressRoute, siteden siteye VPN 'Ler ile birlikte çalışabilir. Bkz. [E
 
 ### <a name="how-do-i-enable-routing-between-my-site-to-site-vpn-connection-and-my-expressroute"></a>Siteden siteye VPN bağlantısı ile ExpressRoute arasında yönlendirmeyi etkinleştirmek Nasıl yaparım?.
 
-Şubeleriniz arasında bir siteden siteye VPN bağlantısına bağlı olan dal arasında yönlendirmeyi etkinleştirmek istiyorsanız, [Azure Route Server](../route-server/expressroute-vpn-support.md)'ı ayarlamanız gerekir.
+ExpressRoute 'a bağlanmış dalınız ile bir siteden siteye VPN bağlantısına bağlı dalınız arasında yönlendirmeyi etkinleştirmek istiyorsanız, [Azure Route Server](../route-server/expressroute-vpn-support.md)'ı ayarlamanız gerekir.
 
 ### <a name="why-is-there-a-public-ip-address-associated-with-the-expressroute-gateway-on-a-virtual-network"></a>Bir sanal ağ üzerindeki ExpressRoute ağ geçidiyle ilişkili bir genel IP adresi neden var?
 
@@ -351,13 +351,17 @@ Maliyet için [fiyatlandırma ayrıntılarına](https://azure.microsoft.com/pric
 Evet. ExpressRoute Premium ücretleri, bağlantı sağlayıcısı tarafından istenen ExpressRoute devre ücretleri ve ücretlerine uygulanır.
 
 ## <a name="expressroute-local"></a>ExpressRoute yerel
+
 ### <a name="what-is-expressroute-local"></a>ExpressRoute yerel nedir?
-ExpressRoute yerel, standart SKU ve Premium SKU 'ya ek olarak ExpressRoute bağlantı hattının bir SKU 'SU. Yerel bir anahtar özelliği olan ExpressRoute eşleme konumundaki yerel bir devrenin, yalnızca aynı metro 'daki veya bu iki Azure bölgesine erişim sağlar. Buna karşılık, standart bir devre, coğrafi olarak tüm Azure bölgelerine ve tüm Azure bölgelerinin küresel bir devresine genel olarak erişmenizi sağlar. 
+
+ExpressRoute yerel, standart SKU ve Premium SKU 'ya ek olarak ExpressRoute bağlantı hattının bir SKU 'SU. Yerel bir anahtar özelliği olan ExpressRoute eşleme konumundaki yerel bir devrenin, yalnızca aynı metro 'daki veya bu iki Azure bölgesine erişim sağlar. Buna karşılık, standart bir devre, coğrafi olarak tüm Azure bölgelerine ve tüm Azure bölgelerinin küresel bir devresine genel olarak erişmenizi sağlar. Özellikle, yerel bir SKU ile, ExpressRoute bağlantı hattının karşılık gelen yerel bölgesinden yalnızca yolları (Microsoft ve özel eşleme üzerinden) tanıtabilirsiniz. Tanımlı yerel bölgeden farklı diğer bölgelere yönelik yolları alamazsınız.
 
 ### <a name="what-are-the-benefits-of-expressroute-local"></a>ExpressRoute yerel 'in avantajları nelerdir?
+
 Standart veya Premium ExpressRoute devreniz için çıkış veri aktarımını ödemeniz gerektiğinde, ExpressRoute yerel devresi için çıkış veri aktarımını ayrı olarak ödemezsiniz. Diğer bir deyişle, ExpressRoute yerel fiyatı, veri aktarımı ücretleri içerir. ExpressRoute yerel, aktarılacak büyük miktarda veriniz varsa daha ekonomik bir çözümdür ve verilerinizi istediğiniz Azure bölgelerindeki bir ExpressRoute eşleme konumuna özel bir bağlantı üzerinden taşıyabilirsiniz. 
 
 ### <a name="what-features-are-available-and-what-are-not-on-expressroute-local"></a>Hangi özellikler kullanılabilir ve ExpressRoute yerel üzerinde değil?
+
 Standart bir ExpressRoute devresine kıyasla, yerel bir bağlantı hattı aşağıdakiler dışında aynı özellik kümesine sahiptir:
 * Yukarıda açıklandığı gibi Azure bölgelerine erişim kapsamı
 * ExpressRoute Global Reach yerel üzerinde kullanılamıyor
@@ -365,6 +369,7 @@ Standart bir ExpressRoute devresine kıyasla, yerel bir bağlantı hattı aşağ
 ExpressRoute yerel Ayrıca kaynaklar üzerinde aynı sınırlara sahiptir (ör. devre başına VNET sayısı) standart olarak. 
 
 ### <a name="where-is-expressroute-local-available-and-which-azure-regions-is-each-peering-location-mapped-to"></a>ExpressRoute yerel olarak kullanılabilir ve hangi Azure bölgelerinin her eşleme konumu ile eşlenir?
+
 ExpressRoute yerel, bir veya iki Azure bölgesinin kapalı olduğu eşleme konumlarında kullanılabilir. Bu eyalet veya ülke/bölge içinde Azure bölgesinin olmadığı bir eşleme konumunda kullanılamaz. Lütfen [konumlar sayfasında](expressroute-locations-providers.md)tam eşlemelere bakın.  
 
 ## <a name="expressroute-for-microsoft-365"></a>Microsoft 365 için ExpressRoute

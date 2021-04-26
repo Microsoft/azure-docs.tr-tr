@@ -3,12 +3,12 @@ title: Azure VMware çözümü ile Azure NetApp Files
 description: Şirket içi sunucular, Azure VMware Çözüm VM 'Leri ve bulut altyapılarında veri geçirmek ve eşitlemek için Azure VMware Çözüm VM 'Leri ile Azure NetApp Files kullanın.
 ms.topic: how-to
 ms.date: 02/10/2021
-ms.openlocfilehash: 2f2e8fdeb777e7e4b2b4e89c1bb36b51c3083257
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 09b9ba2ff6b95e12558b1ac49e401ce6dede4942
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100575426"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870994"
 ---
 # <a name="azure-netapp-files-with-azure-vmware-solution"></a>Azure VMware çözümü ile Azure NetApp Files
 
@@ -107,7 +107,7 @@ Aşağıda yalnızca birkaç etkileyici Azure NetApp Files kullanım örnekleri 
 
 Azure VMware Çözüm iş yükleriniz ile Azure NetApp Files tümleştirmenin kapsandığına göre, şunları öğrenmek isteyebilirsiniz:
 
-- [Azure NetApp Files Için kaynak sınırları](../azure-netapp-files/azure-netapp-files-resource-limits.md#resource-limits).
-- [Azure NetApp Files ağ planlamasına yönelik yönergeler](../azure-netapp-files/azure-netapp-files-network-topologies.md).
-- [Azure NetApp Files birimlerinin çapraz bölge çoğaltması](../azure-netapp-files/cross-region-replication-introduction.md). 
-- [Azure NetApp Files hakkında SSS](../azure-netapp-files/azure-netapp-files-faqs.md).
+- [Azure NetApp Files için kaynak sınırlamaları](../azure-netapp-files/azure-netapp-files-resource-limits.md#resource-limits)
+- [Azure NetApp Files ağ planlaması yönergeleri](../azure-netapp-files/azure-netapp-files-network-topologies.md)
+- [Azure NetApp Files birimlerinin çapraz bölge çoğaltması](../azure-netapp-files/cross-region-replication-introduction.md) 
+- [Azure NetApp Files hakkında SSS](../azure-netapp-files/azure-netapp-files-faqs.md)

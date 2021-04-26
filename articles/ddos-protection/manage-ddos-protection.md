@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/17/2019
 ms.author: kumud
-ms.openlocfilehash: d0b2ccc0bf5d38e9a72bf780875d3b6f29733189
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: b38f2831136b0ccec4aa241135f2fd342c939845
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105026760"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105936895"
 ---
 # <a name="quickstart-create-and-configure-azure-ddos-protection-standard"></a>Hızlı başlangıç: Azure DDoS koruma standardı oluşturma ve yapılandırma
 
@@ -70,10 +70,9 @@ Sanal ağ için DDoS standardı etkinleştirildiğinde bir sanal ağı başka bi
 ### <a name="enable-ddos-protection-for-an-existing-virtual-network"></a>Mevcut bir sanal ağ için DDoS korumasını etkinleştir
 
 1. DDoS koruma planı [oluşturma](#create-a-ddos-protection-plan)bölümündeki adımları tamamlayarak bir DDoS koruma planı oluşturun.
-2. Azure portal sol üst köşesinde **kaynak oluştur** ' u seçin.
-3. Portalın üst kısmındaki **kaynakları, hizmetleri ve belgeleri ara kutusuna** Için DDoS koruması standardını etkinleştirmek istediğiniz sanal ağın adını girin. Arama sonuçlarında sanal ağın adı göründüğünde seçin.
-4. **Ayarlar** altında **DDoS koruması**' nı seçin.
-5. **Standart**' ı seçin. **DDoS koruma planı** altında var olan bir DDoS koruma planı veya 1. adımda oluşturduğunuz planı seçin ve ardından **Kaydet**' i seçin. Seçtiğiniz plan, sanal ağdan aynı veya farklı bir abonelikte olabilir, ancak her iki aboneliğin de aynı Azure Active Directory kiracısıyla ilişkilendirilmesi gerekir.
+2. Azure portal en üstündeki **kaynakları, hizmetleri ve belgeleri ara kutusuna** Için DDoS koruması standardını etkinleştirmek istediğiniz sanal ağ adını girin. Arama sonuçlarında sanal ağın adı göründüğünde seçin.
+3. **Ayarlar** altında **DDoS koruması**' nı seçin.
+4. **Standart**' ı seçin. **DDoS koruma planı** altında var olan bir DDoS koruma planı veya 1. adımda oluşturduğunuz planı seçin ve ardından **Kaydet**' i seçin. Seçtiğiniz plan, sanal ağdan aynı veya farklı bir abonelikte olabilir, ancak her iki aboneliğin de aynı Azure Active Directory kiracısıyla ilişkilendirilmesi gerekir.
 
 ### <a name="enable-ddos-protection-for-all-virtual-networks"></a>Tüm sanal ağlar için DDoS korumasını etkinleştir
 

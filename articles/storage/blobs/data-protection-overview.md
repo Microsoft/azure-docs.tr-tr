@@ -5,17 +5,17 @@ description: BLOB depolama ve Azure Data Lake Storage 2. verileriniz için kulla
 services: storage
 author: tamram
 ms.service: storage
-ms.date: 03/22/2021
+ms.date: 04/09/2021
 ms.topic: conceptual
 ms.author: tamram
 ms.reviewer: prishet
 ms.subservice: common
-ms.openlocfilehash: afd98e629500bc90cc9ddd1ed4ab2472f733e845
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 90c83397089b77d30694041a37debc0731ea2a38
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104803801"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304265"
 ---
 # <a name="data-protection-overview"></a>Veri korumaya genel bakış
 
@@ -30,7 +30,7 @@ Depolama hesabınız için temel veri koruma kapsamına ve içerdiği verilere b
 - Hesabı silme veya yapılandırma değişikliklerinden korumak için depolama hesabında bir Azure Resource Manager kilidi yapılandırın. [Daha fazla bilgi edinin...](../common/lock-account-resource.md)
 - Silinen kapsayıcıyı ve içeriğini kurtarmak üzere depolama hesabı için kapsayıcı geçici silme özelliğini etkinleştirin. [Daha fazla bilgi edinin...](soft-delete-container-enable.md)
 - Bir Blobun durumunu düzenli aralıklarla kaydet:
-  - BLOB depolama iş yükleri için blob sürümü oluşturma 'yı, blob her silindiğinde veya üzerine yazıldığında verilerinizin durumunu otomatik olarak kaydedecek şekilde etkinleştirin. [Daha fazla bilgi edinin...](versioning-enable.md)
+  - BLOB depolama iş yükleri için blob sürümü oluşturma 'yı etkinleştirin ve BLOB 'un üzerine yazıldığında verilerinizin durumunu otomatik olarak kaydedin. [Daha fazla bilgi edinin...](versioning-enable.md)
   - Azure Data Lake Storage iş yükleri için, verilerinizin durumunu belirli bir zamanda kaydetmek üzere el ile anlık görüntü alın. [Daha fazla bilgi edinin...](snapshots-overview.md)
 
 Bu seçeneklerin yanı sıra diğer senaryolara yönelik ek veri koruma seçenekleri de aşağıdaki bölümde daha ayrıntılı olarak açıklanmıştır.
@@ -46,7 +46,7 @@ Aşağıdaki tabloda, genel veri koruma senaryolarında Azure Storage 'da kullan
 | Bir depolama hesabının silinmesini veya değiştirilmesini engelleyin. | Azure Resource Manager kilidi<br />[Daha fazla bilgi edinin...](../common/lock-account-resource.md) | Depolama hesabının silinmesini engellemek için tüm depolama hesaplarınızı bir Azure Resource Manager kilidi ile kilitleyin. | Depolama hesabını silme veya yapılandırma değişikliklerine karşı korur.<br /><br />, Hesaptaki kapsayıcıların veya Blobların silinmesini veya üzerine yazılmasını korumaz. | Yes |
 | Bir kapsayıcının ve bloblarının, denetlediğiniz bir aralığa göre silinmesini veya değiştirilmesini engelleyin. | Bir kapsayıcıda dengeszlik kullanılabilirliği ilkesi<br />[Daha fazla bilgi edinin...](storage-blob-immutable-storage.md) | İş açısından kritik belgeleri korumak için, örneğin yasal veya yasal uyumluluk gereksinimlerini karşılamak üzere bir kapsayıcı üzerinde bir dengesyabilirlik ilkesi ayarlayın. | Bir kapsayıcıyı ve bloblarını tüm silmeler ve üzerine yazma olarak korur.<br /><br />Yasal bir saklama veya kilitli zaman tabanlı bekletme ilkesi etkin olduğunda, depolama hesabı da silinmeye karşı korunur. Hiçbir imlebilirlik kullanılabilirliği ilkesinin ayarlandığı kapsayıcılar silme işleminden korunmaz. | Evet, önizlemede |
 | Silinen bir kapsayıcıyı belirtilen bir Aralık içinde geri yükleyin. | Kapsayıcı geçici silme (Önizleme)<br />[Daha fazla bilgi edinin...](soft-delete-container-overview.md) | En az 7 günlük bekletme aralığı ile tüm depolama hesapları için kapsayıcı geçici silmeyi etkinleştirin.<br /><br />Kapsayıcıda tek tek Blobları korumak için blob sürümü oluşturma ve BLOB geçici silme özelliğini kapsayıcı geçici silme özelliğiyle birlikte etkinleştirin.<br /><br />Farklı saklama dönemleri gerektiren kapsayıcıları ayrı depolama hesaplarında saklayın. | Silinen kapsayıcı ve içerikleri saklama dönemi içinde geri yüklenebilir.<br /><br />Yalnızca kapsayıcı düzeyindeki işlemler (ör. [kapsayıcıyı sil](/rest/api/storageservices/delete-container)) geri yüklenebilir. Kapsayıcı geçici silme, blob silinirse tek bir Blobun kapsayıcıyı geri yüklemenize imkan vermez. | Evet, önizlemede |
-| Bir Blobun durumunu, üzerine yazıldığında veya silindiğinde önceki bir sürümde otomatik olarak kaydedin. | Blob sürümü oluşturma<br />[Daha fazla bilgi edinin...](versioning-overview.md) | Blob verileri için en iyi korumaya ihtiyacınız olan depolama hesapları için kapsayıcı geçici silme ve BLOB geçici silme ile birlikte blob sürüm oluşturmayı etkinleştirin.<br /><br />Maliyetleri sınırlamak üzere ayrı bir hesapta sürüm oluşturma gerektirmeyen blob verilerini depolayın. | Her blob üzerine yazma veya silme işlemi yeni bir sürüm oluşturur. Blob silinirse veya üzerine yazılırsa bir blob önceki sürümden geri yüklenebilir. | Hayır |
+| Üzerine yazıldığında, bir Blobun durumunu önceki bir sürümde otomatik olarak kaydet. | Blob sürümü oluşturma<br />[Daha fazla bilgi edinin...](versioning-overview.md) | Blob verileri için en iyi korumaya ihtiyacınız olan depolama hesapları için kapsayıcı geçici silme ve BLOB geçici silme ile birlikte blob sürüm oluşturmayı etkinleştirin.<br /><br />Maliyetleri sınırlamak üzere ayrı bir hesapta sürüm oluşturma gerektirmeyen blob verilerini depolayın. | Her blob yazma işlemi için yeni bir sürüm oluşturulur. Geçerli sürüm silinirse veya üzerine yazılırsa, bir Blobun geçerli sürümü önceki bir sürümden geri yüklenebilir. | Hayır |
 | Silinen bir Blobu veya blob sürümünü belirtilen bir Aralık içinde geri yükleyin. | Blob geçici silme<br />[Daha fazla bilgi edinin...](soft-delete-blob-overview.md) | En az 7 günlük bekletme aralığı ile tüm depolama hesapları için blob geçici silme özelliğini etkinleştirin.<br /><br />Blob verilerini en iyi şekilde koruması için blob sürüm oluşturma ve kapsayıcı geçici silme özelliğini blob geçici silme ile birlikte etkinleştirin.<br /><br />Ayrı depolama hesaplarında farklı saklama süreleri gerektiren blob 'ları depolayın. | Silinen bir blob veya blob sürümü Bekletme dönemi içinde geri yüklenebilir. | Hayır |
 | Blok Blobları kümesini zaman içinde önceki bir noktaya geri yükleyin. | Belirli bir noktaya geri yükleme<br />[Daha fazla bilgi edinin...](point-in-time-restore-overview.md) | Önceki bir duruma geri dönmek üzere belirli bir noktaya geri yükleme kullanmak için, kapsayıcıyı silmek yerine tek tek blok bloblarını silmek üzere uygulamanızı tasarlayın. | Blok Blobları kümesi, geçmişteki belirli bir noktada durumlarına geri döndürülebilir.<br /><br />Yalnızca blok Blobları üzerinde gerçekleştirilen işlemler geri döndürülür. Kapsayıcılar, sayfa Blobları veya ekleme Blobları üzerinde gerçekleştirilen işlemler geri döndürülemez. | Hayır |
 | Bir Blobun durumunu belirli bir zaman noktasına el ile kaydedin. | Blob anlık görüntüsü<br />[Daha fazla bilgi edinin...](snapshots-overview.md) | Sürüm oluşturma senaryolarınız için uygun olmadığında, maliyet veya diğer hususlar nedeniyle ya da depolama hesabında hiyerarşik bir ad alanı etkinken blob sürümü oluşturma için bir alternatif olarak önerilir. | Blob üzerine yazılırsa blob bir anlık görüntüden geri yüklenebilir. Blob silinirse, anlık görüntüler de silinir. | Evet, önizlemede |

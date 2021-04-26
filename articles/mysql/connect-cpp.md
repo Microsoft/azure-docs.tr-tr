@@ -8,12 +8,12 @@ ms.custom: mvc
 ms.devlang: cpp
 ms.topic: quickstart
 ms.date: 5/26/2020
-ms.openlocfilehash: e8b2842300e43a9de88cc0b9b3ae9ce6cd754612
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 723d3d3bfb36b17ebdacf9d5961b10071a12ab42
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94535852"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107863470"
 ---
 # <a name="quickstart-use-connectorc-to-connect-and-query-data-in-azure-database-for-mysql"></a>Hızlı başlangıç: MySQL için Azure veritabanı 'na bağlanmak ve veri sorgulamak için bağlayıcı/C++ kullanma
 
@@ -26,7 +26,7 @@ Bu hızlı başlangıçta, başlangıç noktası olarak aşağıdaki kılavuzlar
 - [Azure CLI aracını kullanarak MySQL için Azure Veritabanı sunucusu oluşturma](./quickstart-create-mysql-server-database-using-azure-cli.md)
 
 Şunları da yapmanız gerekir:
-- [.Net Framework](https://www.microsoft.com/net/download)'ü yükleme
+- [.Net Framework](https://dotnet.microsoft.com/download/dotnet-framework)'ü yükleme
 - [Visual Studio 'yu](https://www.visualstudio.com/downloads/) yükler
 - [MySQL Connector/C++](https://dev.mysql.com/downloads/connector/cpp/) yükleyin 
 - [Boost](https://www.boost.org/)’u yükleyin

@@ -7,12 +7,12 @@ ms.devlang: rest-api
 ms.topic: quickstart
 ms.date: 01/18/2021
 ms.author: jingwang
-ms.openlocfilehash: adcefc21ac4fc8a00d97d5ac4352bad1287b60de
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b1950fa5269460bd3daeb671a37a072dc4f5f050
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102517642"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106385267"
 ---
 # <a name="quickstart-create-an-azure-data-factory-and-pipeline-by-using-the-rest-api"></a>Hızlı Başlangıç: REST API kullanarak Azure veri fabrikası ve işlem hattı oluşturma
 
@@ -37,7 +37,9 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
 * Blob Depolama içinde bir **blob kapsayıcısı** oluşturun, kapsayıcıda bir giriş **klasörü** oluşturun ve bazı dosyaları klasöre yükleyin. Azure Blob depolamaya bağlanmak, blob kapsayıcısı oluşturmak, giriş dosyasını karşıya yüklemek ve çıkış dosyasını doğrulamak için [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/) gibi araçları kullanabilirsiniz.
 * **Azure PowerShell**'i yükler. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azure/install-Az-ps) bölümündeki yönergeleri izleyin. Bu hızlı başlangıçta RES API çağrılarını çağırmak için PowerShell kullanılır.
 * **Azure Active Directory’de**[bu yönergeyi](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal) izleyerek bir uygulama oluşturun. Sonraki adımlarda kullandığınız aşağıdaki değerleri unutmayın: **uygulama kimliği**, **clientgizlilikler** ve **Kiracı kimliği**. Uygulamayı "**Katkıda Bulunan**" rolüne atayın.
-
+>[!NOTE]
+>   Sovereign bulutları için, ActiveDirectoryAuthority ve ResourceManagerUrl (BaseUri) için buluta özgü uygun uç noktaları kullanmanız gerekir. PowerShell 'i, "Get-AzEnvironment | yürüterek çeşitli bulutlar için uç nokta URL 'Lerini kolayca almak üzere kullanabilirsiniz. Biçim listesi ", her bir bulut ortamı için uç nokta listesi döndürür.  
+>    
 ## <a name="set-global-variables"></a>Genel değişkenleri ayarlama
 
 1. **PowerShell**’i başlatın. Bu hızlı başlangıcın sonuna kadar Azure PowerShell’i açık tutun. Kapatıp yeniden açarsanız komutları yeniden çalıştırmanız gerekir.

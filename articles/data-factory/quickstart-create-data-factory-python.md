@@ -7,14 +7,14 @@ ms.reviewer: jburchel
 ms.service: data-factory
 ms.devlang: python
 ms.topic: quickstart
-ms.date: 01/15/2021
+ms.date: 04/12/2021
 ms.custom: seo-python-october2019, devx-track-python
-ms.openlocfilehash: 6b15585f029f9289736d8d498b61a3e0ba40f009
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.openlocfilehash: 534b5b3aca86cc2f6d7ee2d703939420f80abb8e
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104889425"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107365102"
 ---
 # <a name="quickstart-create-a-data-factory-and-pipeline-using-python"></a>Hızlı Başlangıç: Python kullanarak veri fabrikası ve işlem hattı oluşturma
 
@@ -40,7 +40,7 @@ Azure Data Factory, veri taşıma ve veri dönüştürmeyi düzenlemek ve otomat
 
 * [Azure Depolama Gezgini](https://storageexplorer.com/) (isteğe bağlı).
 
-* [Azure Active Directory bir uygulama](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal). Sonraki adımlarda kullanmak için aşağıdaki değerleri unutmayın: **uygulama kimliği**, **kimlik doğrulama anahtarı** ve **Kiracı kimliği**. Aynı makaledeki yönergeleri uygulayarak uygulamayı **katkıda bulunan** rolüne atayın.
+* [Azure Active Directory bir uygulama](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal). Bu bağlantıdaki adımları izleyerek uygulamayı oluşturun ve aynı makaledeki yönergeleri izleyerek uygulamayı  **katkıda bulunan** rolüne atayın. Sonraki adımlarda kullanılan makalede gösterilen şekilde aşağıdaki değerleri unutmayın: **uygulama kimliği (aşağıdaki hizmet sorumlusu kimliği), kimlik doğrulama anahtarı (aşağıda istemci parolası) ve KIRACı kimliği.**
 
 ## <a name="create-and-upload-an-input-file"></a>Giriş dosyası oluşturma ve yükleme
 
@@ -75,9 +75,12 @@ Azure Data Factory, veri taşıma ve veri dönüştürmeyi düzenlemek ve otomat
     ```
     > [!NOTE] 
     > "Azure-Identity" paketi bazı yaygın bağımlılıklarda "Azure-CLI" ile çakışıyor olabilir. Herhangi bir kimlik doğrulama sorununu karşılayabilir, "Azure-CLI" ve bağımlılıklarını kaldırın veya "Azure-CLI" paketini yüklemeden temiz bir makine kullanarak çalışır hale getirin.
+    > Sovereign bulutları için, buluta özgü uygun sabitleri kullanmanız gerekir.  Lütfen [Python çoklu bulut Için Azure kitaplıklarını kullanarak tüm bölgelere bağlanma | Bağımsız bulutlarda Python ile bağlantı kurmak için yönergeler Microsoft Docs.](https://docs.microsoft.com/azure/developer/python/azure-sdk-sovereign-domain)
+    
     
 ## <a name="create-a-data-factory-client"></a>Veri fabrikası istemcisi oluşturma
 
+  
 1. **datafactory.py** adlı bir dosya oluşturun. Ad alanlarına başvurular eklemek için aşağıdaki deyimleri ekleyin.
 
     ```python
@@ -122,6 +125,7 @@ Azure Data Factory, veri taşıma ve veri dönüştürmeyi düzenlemek ve otomat
     ```
 3. Aşağıdaki kodu DataFactoryManagementClient sınıfının bir örneğini oluşturan **Main** yöntemine ekleyin. Veri fabrikası, bağlı hizmet, veri kümeleri ve işlem hattı oluşturmak için bu nesneyi kullanırsınız. Bu nesneyi ayrıca işlem hattı ayrıntılarını izlemek için kullanabilirsiniz. **subscription_id** değişkenini Azure aboneliğinizin kimliğine ayarlayın. Data Factory'nin kullanılabileceği Azure bölgelerinin bir listesi için bir sonraki sayfada ilgilendiğiniz bölgeleri seçin ve **Analytics**'i genişleterek **Data Factory**: [Products available by region](https://azure.microsoft.com/global-infrastructure/services/) (Bölgeye göre kullanılabilir durumdaki ürünler) bölümünü bulun. Veri fabrikası tarafından kullanılan verileri depoları (Azure Depolama, Azure SQL Veritabanı vb.) ve işlemler (HDInsight vb.) başka bölgelerde olabilir.
 
+        
     ```python
     def main():
 
@@ -136,6 +140,11 @@ Azure Data Factory, veri taşıma ve veri dönüştürmeyi düzenlemek ve otomat
 
         # Specify your Active Directory client ID, client secret, and tenant ID
         credentials = ClientSecretCredential(client_id='<service principal ID>', client_secret='<service principal key>', tenant_id='<tenant ID>') 
+        
+        # Specify following for Soverign Clouds, import right cloud constant and then use it to connect.
+        # from msrestazure.azure_cloud import AZURE_PUBLIC_CLOUD as CLOUD
+        # credentials = DefaultAzureCredential(authority=CLOUD.endpoints.active_directory, tenant_id=tenant_id)
+        
         resource_client = ResourceManagementClient(credentials, subscription_id)
         adf_client = DataFactoryManagementClient(credentials, subscription_id)
 
@@ -217,6 +226,7 @@ Azure Blob’da kaynak verilerini temsil eden bir veri kümesi tanımlayın. Bu 
     print_item(dsOut)
 ```
 
+
 ## <a name="create-a-pipeline"></a>İşlem hattı oluşturma
 
 Aşağıdaki kodu **bir kopyalama etkinliği ile işlem hattı** oluşturan **Main** yöntemine ekleyin.
@@ -231,6 +241,13 @@ Aşağıdaki kodu **bir kopyalama etkinliği ile işlem hattı** oluşturan **Ma
     copy_activity = CopyActivity(name=act_name,inputs=[dsin_ref], outputs=[dsOut_ref], source=blob_source, sink=blob_sink)
 
     #Create a pipeline with the copy activity
+    
+    #Note1: To pass parameters to the pipeline, add them to the json string params_for_pipeline shown below in the format { “ParameterName1” : “ParameterValue1” } for each of the parameters needed in the pipeline.
+    #Note2: To pass parameters to a dataflow, create a pipeline parameter to hold the parameter name/value, and then consume the pipeline parameter in the dataflow parameter in the format @pipeline().parameters.parametername.
+    
+    p_name = 'copyPipeline'
+    params_for_pipeline = {}
+
     p_name = 'copyPipeline'
     params_for_pipeline = {}
     p_obj = PipelineResource(activities=[copy_activity], parameters=params_for_pipeline)

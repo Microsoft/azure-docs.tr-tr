@@ -4,10 +4,10 @@ description: IoT için Defender güvenlik hizmeti için Defender 'ı IoT güvenl
 ms.topic: how-to
 ms.date: 09/09/2020
 ms.openlocfilehash: 5ac9a5cdb4cc13ed91c0e5e29447b9cdbe71bcce
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104784416"
 ---
 # <a name="tutorial-configure-security-agents"></a>Öğretici: güvenlik aracılarını yapılandırma
@@ -107,7 +107,7 @@ Aşağıdaki tablo, IoT güvenlik aracıları için Defender 'ın denetlenebilir
 
 Varsayılan değerler [GitHub](https\://aka.ms/iot-security-module-default)'da uygun şemada mevcuttur.
 
-| Name| Durum | Geçerli değerler| Varsayılan değerler| Açıklama |
+| Name| Durum | Geçerli değerler| Varsayılan değerler| Description |
 |----------|--------|--|-------|----|
 |highPriorityMessageFrequency|Gerekli: false |Geçerli değerler: ISO 8601 biçimindeki süre |Varsayılan değer: PT7M |Yüksek öncelikli iletiler gönderilmeden önce en uzun zaman aralığı.|
 |lowPriorityMessageFrequency |Gerekli: false|Geçerli değerler: ISO 8601 biçimindeki süre |Varsayılan değer: PT5H |Düşük öncelikli iletiler gönderilmeden önce geçen en uzun süre.|

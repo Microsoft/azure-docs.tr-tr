@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 10/15/2020
-ms.openlocfilehash: 0db6ed7566c53429f8b9798ac8cdafe76ca7bd5a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 889a04d68de45a6270ae0c38615d841a526ad86a
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102052152"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106490701"
 ---
 # <a name="configure-monitoring-in-vm-insights-guest-health-using-data-collection-rules-preview"></a>Veri toplama kurallarını kullanarak VM öngörüleri Konuk durumunda izlemeyi yapılandırma (Önizleme)
 [VM öngörüleri Konuk durumu](vminsights-health-overview.md) , bir sanal makinenin durumunu, düzenli aralıklarla örneklendiği bir dizi performans ölçümlerine göre tanımlanan şekilde görüntülemenize olanak sağlar. Bu makalede, veri toplama kurallarını kullanarak birden çok sanal makine genelinde varsayılan izlemenin nasıl değiştirileceği açıklanır.
@@ -19,7 +19,7 @@ ms.locfileid: "102052152"
 ## <a name="monitors"></a>İzleyiciler
 Bir sanal makinenin sistem durumu, izleyicilerinin her birinden [sistem durumu toplamasına](vminsights-health-overview.md#health-rollup-policy) göre belirlenir. Aşağıdaki tabloda gösterildiği gibi, VM öngörüleri Konuk durumu 'nda iki tür izleyici vardır.
 
-| İzleyici | Description |
+| İzleyici | Açıklama |
 |:---|:---|
 | Birim izleyicisi | Bir kaynağın veya uygulamanın bazı özelliklerini ölçer. Bu kapsamda kaynağın performansını veya kullanılabilirliğini belirlemek için bir performans sayacı denetlenebilir. |
 | Toplam Değer İzleyicisi | Birden çok izleyiciyi gruplayarak tek ve toplu bir sistem durumu bilgisi sağlar. Bir toplam değer izleyicisinde bir veya daha fazla birim izleyicisi ve diğer toplam değer izleyicileri bulunabilir. |
@@ -29,7 +29,7 @@ VM öngörüleri Konuk durumu tarafından kullanılan izleyici kümesi ve yapıl
 ## <a name="monitor-properties"></a>İzleme özellikleri
 Aşağıdaki tabloda, her monitörde yapılandırılabilecek özellikler açıklanmaktadır.
 
-| Özellik | İzleyiciler | Description |
+| Özellik | İzleyiciler | Açıklama |
 |:---|:---|:---|
 | Etkin | Toplama<br>Birim | Doğru ise, durum İzleyicisi hesaplanır ve sanal makinenin durumuna katkıda bulunur. Uyarı uyarısının etkin olduğunu tetikleyebilirler. |
 | Uyarı | Toplama<br>Birim | True ise, uygun olmayan bir duruma geçirildiğinde izleyici için bir uyarı tetiklenir. Yanlışsa, izleyicinin durumu yine de bir uyarı tetikleyebilen sanal makinenin sistem durumuna katkıda bulunur. |
@@ -121,7 +121,7 @@ Uzantı ayarlarını içerir.
 | Öğe | Gerekli | Açıklama |
 |:---|:---|:---|
 | `schemaVersion` | Evet | Microsoft tarafından tanımlanan ve öğenin beklenen şemasını temsil eden dize. Şu anda 1,0 olarak ayarlanması gerekir |
-| `contentVersion` | No | Gerektiğinde, sistem durumu yapılandırmasının farklı sürümlerini izlemek için Kullanıcı tarafından tanımlanan dize. |
+| `contentVersion` | Hayır | Gerektiğinde, sistem durumu yapılandırmasının farklı sürümlerini izlemek için Kullanıcı tarafından tanımlanan dize. |
 | `healthRuleOverrides` | Yes | `healthRuleOverride`Varsayılan yapılandırmaya uygulanacak öğelerin dizisi. |
 
 ## <a name="healthrulesoverrides-element"></a>healthRulesOverrides öğesi
@@ -143,9 +143,9 @@ Uzantı ayarlarını içerir.
 |:---|:---|:---|
 | `scopes` | Evet | Bu geçersiz kılmanın geçerli olduğu sanal makineleri belirten bir veya daha fazla kapsam listesi. DCR bir sanal makineyle ilişkili olsa da, sanal makinenin, geçersiz kılmanın uygulanması için bir kapsam içinde olması gerekir. |
 | `monitors` | Yes | Hangi izleyicilerin bu geçersiz kılmayı alacağını tanımlayan bir veya daha fazla dizenin listesi.  |
-| `monitorConfiguration` | No | İzleyici için sistem sağlığı durumları ve nasıl hesaplandıkları gibi yapılandırma. |
-| `alertConfiguration` | No | İzleyici için uyarı yapılandırması. |
-| `isEnabled` | No | İzlemenin etkin olup olmadığını denetler. Devre dışı bırakılan izleyici, yeniden etkinleştirilmediği takdirde devre dışı *bırakılan özel durum* durumuna geçer. Atlanırsa, izleyici hiyerarşideki üst izleyiciden durumunu alır. |
+| `monitorConfiguration` | Hayır | İzleyici için sistem sağlığı durumları ve nasıl hesaplandıkları gibi yapılandırma. |
+| `alertConfiguration` | Hayır | İzleyici için uyarı yapılandırması. |
+| `isEnabled` | Hayır | İzlemenin etkin olup olmadığını denetler. Devre dışı bırakılan izleyici, yeniden etkinleştirilmediği takdirde devre dışı *bırakılan özel durum* durumuna geçer. Atlanırsa, izleyici hiyerarşideki üst izleyiciden durumunu alır. |
 
 
 ## <a name="scopes-element"></a>Scopes öğesi
@@ -175,17 +175,17 @@ Sistem durumu hiyerarşisinde hangi izleyicilerin bu geçersiz kılmayı alacağ
 Aşağıdaki tabloda geçerli kullanılabilir izleyici adları listelenmektedir.
 
 | Tür adı | Ad | Açıklama |
-|:---|:---|:---|
-| kök | kök | Sanal makine durumunu temsil eden üst düzey izleyici. | |
-| CPU kullanımı | CPU kullanımı | CPU kullanımı İzleyicisi. | |
-| mantıksal diskler | mantıksal diskler | Windows sanal makinesindeki tüm izlenen disklerin sistem durumu için toplam izleyici. | |
-| mantıksal diskler\|* | mantıksal diskler \| C:<br>mantıksal diskler \| D: | Windows sanal makinesinde belirli bir diskin toplam izleyici izleme durumu. | 
-| mantıksal disk \| * \| boş alanı | mantıksal diskler \| C: \| boş alan<br>mantıksal diskler \| D: \| boş alan | Windows sanal makinesinde disk boş alan İzleyicisi. |
+|:----------|:-----|:------------|
+| kök | kök | Sanal makine durumunu temsil eden üst düzey izleyici. |
+| CPU kullanımı | CPU kullanımı | CPU kullanımı İzleyicisi. |
+| mantıksal diskler | mantıksal diskler | Windows sanal makinesindeki tüm izlenen disklerin sistem durumu için toplam izleyici. |
+| mantıksal diskler\|\* | mantıksal diskler \| C:<br>mantıksal diskler \| D: | Windows sanal makinesinde belirli bir diskin toplam izleyici izleme durumu. |
+| mantıksal disk \| \* \| boş alanı | mantıksal diskler \| C: \| boş alan<br>mantıksal diskler \| D: \| boş alan | Windows sanal makinesinde disk boş alan İzleyicisi. |
 | dosya sistemleri | dosya sistemleri | Linux sanal makinesindeki tüm dosya sistemlerinin sistem durumu için toplam izleyici. |
-| dosya sistemleri\|* | dosya sistemleri\|/<br>dosya sistemleri \| /mnt | Linux sanal makinesinin bir FileSystem 'ın toplam izleyici izleme durumu. | dosya sistemleri|/var/log |
-| dosya sistemleri \| * \| boş alanı | dosya sistemleri \| / \| boş alanı<br>dosya sistemleri \| /mnt \| boş alan | Linux sanal makine FileSystem üzerinde disk boş alan İzleyicisi. | 
-| bellek | bellek | Sanal makine belleğinin sistem durumu için toplam izleyici. | |
-| \|kullanılabilir bellek| \|kullanılabilir bellek | İzleme, sanal makinede kullanılabilir belleği izler. | |
+| dosya sistemleri\|\* | dosya sistemleri\|/<br>dosya sistemleri \| /mnt | Linux sanal makinesinin bir FileSystem 'ın toplam izleyici izleme durumu. |
+| dosya sistemleri \| \* \| boş alanı | dosya sistemleri \| / \| boş alanı<br>dosya sistemleri \| /mnt \| boş alan | Linux sanal makine FileSystem üzerinde disk boş alan İzleyicisi. |
+| bellek | bellek | Sanal makine belleğinin sistem durumu için toplam izleyici. |
+| \|kullanılabilir bellek | \|kullanılabilir bellek | İzleme, sanal makinede kullanılabilir belleği izler. |
 
 
 ## <a name="alertconfiguration-element"></a>alertConfiguration öğesi
@@ -226,12 +226,12 @@ Geriye doğru geri alma aralığında daha az örnek olması durumunda `minSampl
 | Öğe | Zorunlu | Açıklama | 
 |:---|:---|:---|
 | `evaluationFrequencySecs` | Hayır | Sistem durumu değerlendirmesi için sıklığı tanımlar. Her izleyici, aracının başladığı sırada ve bundan sonra bu parametre tarafından tanımlanan düzenli bir aralıkta değerlendirilir. |
-| `lookbackSecs`   | No | Geriye doğru geri dönme penceresinin boyutu (saniye). |
-| `evaluationType` | No | `min` – Tüm örnek kümesinden en küçük değeri Al<br>`max` -Tüm örnek kümesinden en büyük değeri Al<br>`avg` – örnek kümesi değerlerini ortalama alın<br>`all` – küme içindeki her tek değeri eşiklere göre karşılaştırın. Anahtar durumunu yalnızca, küme içindeki tüm örnekler eşik koşulunu karşıdığında izler. |
-| `minSamples`     | No | Değeri hesaplamak için kullanılacak minimum değer sayısı. |
-| `maxSamples`     | No | Değeri hesaplamak için kullanılacak maksimum değer sayısı. |
-| `warningCondition`  | No | Uyarı koşulu için eşik ve karşılaştırma mantığı. |
-| `criticalCondition` | No | Kritik koşul için eşik ve karşılaştırma mantığı. |
+| `lookbackSecs`   | Hayır | Geriye doğru geri dönme penceresinin boyutu (saniye). |
+| `evaluationType` | Hayır | `min` – Tüm örnek kümesinden en küçük değeri Al<br>`max` -Tüm örnek kümesinden en büyük değeri Al<br>`avg` – örnek kümesi değerlerini ortalama alın<br>`all` – küme içindeki her tek değeri eşiklere göre karşılaştırın. Anahtar durumunu yalnızca, küme içindeki tüm örnekler eşik koşulunu karşıdığında izler. |
+| `minSamples`     | Hayır | Değeri hesaplamak için kullanılacak minimum değer sayısı. |
+| `maxSamples`     | Hayır | Değeri hesaplamak için kullanılacak maksimum değer sayısı. |
+| `warningCondition`  | Hayır | Uyarı koşulu için eşik ve karşılaştırma mantığı. |
+| `criticalCondition` | Hayır | Kritik koşul için eşik ve karşılaştırma mantığı. |
 
 
 ## <a name="warningcondition-element"></a>warningCondition öğesi
@@ -248,8 +248,8 @@ Uyarı koşulunun eşiğini ve karşılaştırma mantığını tanımlar. Bu ö�
 | Özellik | Zorunlu | Açıklama | 
 |:---|:---|:---|
 | `isEnabled` | Hayır | Koşulun etkinleştirilip etkinleştirilmeyeceğini belirtir. **False** olarak ayarlanırsa, eşik ve işleç özellikleri ayarlanmasa bile koşul devre dışı bırakılır. |
-| `threshold` | No | Değerlendirilen değeri karşılaştırmak için eşiği tanımlar. |
-| `operator`  | No | Eşik ifadesinde kullanılacak karşılaştırma işlecini tanımlar. Olası değerler: >, <, >=, <=, = =. |
+| `threshold` | Hayır | Değerlendirilen değeri karşılaştırmak için eşiği tanımlar. |
+| `operator`  | Hayır | Eşik ifadesinde kullanılacak karşılaştırma işlecini tanımlar. Olası değerler: >, <, >=, <=, = =. |
 
 
 ## <a name="criticalcondition-element"></a>Kritikcondition öğesi
@@ -266,8 +266,8 @@ Kritik koşul için eşiği ve karşılaştırma mantığını tanımlar. Bu ö�
 | Özellik | Zorunlu | Açıklama | 
 |:---|:---|:---|
 | `isEnabled` | Hayır | Koşulun etkinleştirilip etkinleştirilmeyeceğini belirtir. **False** olarak ayarlanırsa, eşik ve işleç özellikleri ayarlanmasa bile koşul devre dışı bırakılır. |
-| `threshold` | No | Değerlendirilen değeri karşılaştırmak için eşiği tanımlar. |
-| `operator`  | No | Eşik ifadesinde kullanılacak karşılaştırma işlecini tanımlar. Olası değerler: >, <, >=, <=, = =. |
+| `threshold` | Hayır | Değerlendirilen değeri karşılaştırmak için eşiği tanımlar. |
+| `operator`  | Hayır | Eşik ifadesinde kullanılacak karşılaştırma işlecini tanımlar. Olası değerler: >, <, >=, <=, = =. |
 
 ## <a name="sample-data-collection-rule"></a>Örnek veri toplama kuralı
 Konuk izlemeyi etkinleştiren örnek bir veri toplama kuralı için bkz. [Kaynak Yöneticisi şablonu kullanarak sanal makineyi etkinleştirme](vminsights-health-enable.md#enable-a-virtual-machine-using-resource-manager-template).

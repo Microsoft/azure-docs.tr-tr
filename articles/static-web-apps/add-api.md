@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.date: 05/29/2020
 ms.author: wachegha
 ms.custom: devx-track-js
-ms.openlocfilehash: 8a42ca4cf69515c99bb2e0bd28bb62dfed0e18f8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 33adaf33ba15b49b0a7e4d3e8f1b2a8c435a7966
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100650698"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449044"
 ---
 # <a name="add-an-api-to-azure-static-web-apps-preview-with-azure-functions"></a>Azure Işlevleri ile Azure statik Web Apps önizlemesine API ekleme
 
@@ -218,7 +218,7 @@ Visual Studio Code kullanarak değişikliklerinizi uzak git deposuna yürütün 
 
 ## <a name="create-a-static-web-app"></a>Statik web uygulaması oluşturma
 
-1. [Azure Portal](https://portal.azure.com) gidin
+1. [Azure portalına](https://portal.azure.com) gidin
 1. **Kaynak oluştur** seçeneğine tıklayın
 1. **Statik Web uygulaması** ara
 1. **Statik Web uygulaması (Önizleme)** seçeneğine tıklayın
@@ -255,7 +255,7 @@ Sonra, aşağıdaki derleme ayrıntılarını ekleyin.
 
     :::image type="content" source="media/add-api/github-action-flag.png" alt-text="GitHub Iş akışı":::
 
-1. Dağıtım tamamlandıktan sonra, _genel bakış_ sayfasında gösterilen _URL_ bağlantısına tıklayarak OU Web uygulamasına gidebilir.
+1. Dağıtım tamamlandıktan sonra, _genel bakış_ sayfasında gösterilen _URL_ bağlantısına tıklayarak web uygulamasına gidebilirsiniz.
 
     :::image type="content" source="media/add-api/static-app-url-from-portal.png" alt-text="Azure portal statik uygulama URL 'sine erişme":::
 
@@ -263,7 +263,7 @@ Sonra, aşağıdaki derleme ayrıntılarını ekleyin.
 
 Bu uygulamayı daha fazla kullanım için tutmak istemiyorsanız, Azure statik Web uygulamasını ve ilgili kaynaklarını silmek için aşağıdaki adımları kullanabilirsiniz.
 
-1. [Azure Portal](https://portal.azure.com) gidin
+1. [Azure portalına](https://portal.azure.com) gidin
 1. En üstteki arama çubuğunda **kaynak grupları** yazın
 1. **Kaynak grupları** ' na tıklayın
 1. **Myresourcegroup** seçin

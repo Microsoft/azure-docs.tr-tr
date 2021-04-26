@@ -5,10 +5,10 @@ ms.topic: reference
 ms.date: 09/07/2020
 ms.author: mlottner
 ms.openlocfilehash: e7000a7e6d8ba332432f1ececa12bd9543e9e4a7
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104779401"
 ---
 # <a name="defender-iot-micro-agent-for-azure-rtos-api-preview"></a>Defender-IoT-mikro-aracı Azure RTOS API (Önizleme)
@@ -25,7 +25,7 @@ Bu API yalnızca Azure RTOS için Defender-IoT-mikro-Agent ile kullanılmaya yö
 UINT nx_azure_iot_security_module_enable(NX_AZURE_IOT *nx_azure_iot_ptr);
 ```
 
-### <a name="description"></a>Açıklama
+### <a name="description"></a>Description
 
 Bu yordam, Azure IoT Defender-IoT-mikro-Agent alt sistemini sunar. Bir iç durum makinesi güvenlik olaylarının toplanmasını yönetir ve bunları Azure IoT Hub gönderir. Veri toplamayı yönetmek için yalnızca bir NX_AZURE_IOT_SECURITY_MODULE örneği gerekir ve gereklidir.
 
@@ -37,7 +37,7 @@ Bu yordam, Azure IoT Defender-IoT-mikro-Agent alt sistemini sunar. Bir iç durum
 
 ### <a name="return-values"></a>Dönüş değerleri
 
-|Dönüş değerleri  |Açıklama |
+|Dönüş değerleri  |Description |
 |---------|---------|
 |NX_AZURE_IOT_SUCCESS|   Azure IoT güvenlik modülü başarıyla etkinleştirildi.     |
 |NX_AZURE_IOT_FAILURE   |  Azure IoT güvenlik modülü bir iç hata nedeniyle etkinleştirilemedi.    |
@@ -58,7 +58,7 @@ Bu yordam, Azure IoT Defender-IoT-mikro-Agent alt sistemini sunar. Bir iç durum
 UINT nx_azure_iot_security_module_disable(NX_AZURE_IOT *nx_azure_iot_ptr);
 ```
 
-### <a name="description"></a>Açıklama
+### <a name="description"></a>Description
 
 Bu yordam, Azure IoT Defender-IoT-mikro-Agent alt sistemini devre dışı bırakır.
 
@@ -70,7 +70,7 @@ Bu yordam, Azure IoT Defender-IoT-mikro-Agent alt sistemini devre dışı bırak
 
 ### <a name="return-values"></a>Dönüş değerleri
 
-|Dönüş değerleri  |Açıklama |
+|Dönüş değerleri  |Description |
 |---------|---------|
 |NX_AZURE_IOT_SUCCESS     |   Azure IoT güvenlik modülü başarıyla devre dışı bırakıldığında başarılı olur.      |
 |NX_AZURE_IOT_INVALID_PARAMETER   |  Azure IoT Hub örneği, Singleton bileşik örneğinden farklı.       |

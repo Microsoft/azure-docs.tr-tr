@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: iot-central
 services: iot-central
 ms.custom: mvc
-ms.openlocfilehash: 72aa8e5e3284e0ee7fbe63e0fb617b9eba03292e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e762b8c2e2d7f72b89629c520560b205cedcd036
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100418237"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728568"
 ---
 # <a name="iot-central-solution-builder-guide"></a>IoT Central çözüm Oluşturucu Kılavuzu
 
@@ -51,9 +51,10 @@ IoT Central, bir işlecin bağlı cihazlardan akan verileri çözümlemek için 
 Bir çözüm Oluşturucusu olarak, diğer hizmetle tümleştirilecek IoT Central içindeki veri dışa aktarma ve kural yeteneklerini kullanabilirsiniz. Daha fazla bilgi edinmek için şu makalelere bakın:
 
 - [Veri dışarı aktarma kullanarak IoT verilerini bulut hedeflerine dışarı aktarma](howto-export-data.md)
+- [IoT Central için veri dönüştürme](howto-transform-data.md)
 - [Azure IoT Central uygulamanızı diğer bulut hizmetleriyle bütünleştirmek için iş akışlarını kullanma](howto-configure-rules-advanced.md)
 - [Stream Analytics, Azure İşlevleri ve SendGrid kullanarak özel kurallarla Azure IoT Central’ın kapsamını genişletme](howto-create-custom-rules.md)
-- [Azure Databricks kullanarak Azure IoT Central özel analiz ile genişletme](howto-create-custom-analytics.md)
+- [Azure Databricks kullanarak özel analizlerle Azure IoT Central’ın kapsamını genişletme](howto-create-custom-analytics.md)
 - [Azure IoT Central verilerinizi Power BI panosunda görselleştirin ve çözümleyin](howto-connect-powerbi.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar

@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 04/14/2019
 ms.author: jeedes
 ms.openlocfilehash: e93d03ac9ec404a18b480a0cd1bfe289944b60d8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101689122"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-bonusly"></a>Öğretici: primi ile tümleştirme Azure Active Directory
@@ -124,13 +124,13 @@ Azure AD çoklu oturum açmayı primi ile yapılandırmak için aşağıdaki ad�
 
     c. Oturum kapatma URL 'SI
 
-### <a name="configure-bonusly-single-sign-on"></a>Primi tek Sign-On yapılandırma
+### <a name="configure-bonusly-single-sign-on&quot;></a>Primi tek Sign-On yapılandırma
 
 1. Farklı bir tarayıcı penceresinde, **primi** kiracınızda oturum açın.
 
 1. Üstteki araç çubuğunda, **Ayarlar** ' a tıklayın ve ardından **tümleştirmeler ve uygulamalar**' ı seçin.
 
-    ![Bonalya sosyal bölüm](./media/bonus-tutorial/ic773686.png "Bonusly")
+    ![Bonalya sosyal bölüm](./media/bonus-tutorial/ic773686.png &quot;Bonusly")
 1. **Çoklu oturum açma** altında **SAML**' yi seçin.
 
 1. **SAML** iletişim sayfasında, aşağıdaki adımları uygulayın:
@@ -197,7 +197,7 @@ Bu bölümde, bonon 'un erişim izni vererek Azure çoklu oturum açma özelliğ
 
 7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-bonusly-test-user"></a>Primi test kullanıcısı oluştur
+### <a name="create-bonusly-test-user&quot;></a>Primi test kullanıcısı oluştur
 
 Azure AD kullanıcılarının primi 'da oturum açmasını sağlamak için, bunların primi sağlaması gerekir. Prime durumunda, sağlama el ile gerçekleştirilen bir görevdir.
 
@@ -210,7 +210,7 @@ Azure AD kullanıcılarının primi 'da oturum açmasını sağlamak için, bunl
 
 1. **Ayarlar**'a tıklayın.
 
-    ![Ayarlar](./media/bonus-tutorial/ic781041.png "Ayarlar")
+    ![Ayarlar](./media/bonus-tutorial/ic781041.png &quot;Ayarlar")
 
 1. **Kullanıcılar ve bonkullanımlar** sekmesine tıklayın.
 

@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 09/23/2020
+ms.date: 04/14/2021
 ms.author: ryanwi
 ms.reviewer: hirsin, jesakowi, jmprieur, marsma
 ms.custom: aaddev, fasttrack-edit, contperf-fy21q1, identityplatformtop40
-ms.openlocfilehash: 2658c088304eba457b25bb3dc421b356ba70b57f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2a975a0aba06ecfd010fe328ef6c8cda75290f2b
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100102487"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515592"
 ---
 # <a name="permissions-and-consent-in-the-microsoft-identity-platform"></a>Microsoft Identity platformunda izinler ve onay
 
@@ -43,11 +43,7 @@ Bu izin tanımları türleri nedeniyle, kaynağın verileri üzerinde ayrıntıl
 
 Bir kaynağın işlevselliği küçük izin kümelerine öbekli olduğunda, üçüncü taraf uygulamalar yalnızca kendi işlevlerini gerçekleştirmeleri için ihtiyaç duydukları izinleri istemek üzere oluşturulabilir. Kullanıcılar ve Yöneticiler, uygulamanın hangi verileri erişebileceği hakkında bilgi alabilir. Ayrıca, uygulamanın kötü amaçlı bir amaç ile davranmadığından daha emin olabilirler. Geliştiriciler, yalnızca uygulamalarının çalışması için ihtiyaç duydukları izinleri isteyen en az ayrıcalık ilkesine göre her zaman bilmelidir.
 
-OAuth 2,0 ' de, bu izin kümesi türleri *kapsamlar* olarak adlandırılır. Bunlar da genellikle *izinler* olarak adlandırılır. Microsoft Identity platformunda bir izin dize değeri olarak temsil edilir. Microsoft Graph örnek için, her izin için dize değeri aşağıda verilmiştir:
-
-* Kullanarak bir kullanıcının takvimini okuma `Calendars.Read`
-* Kullanarak bir kullanıcının takvimine yazma `Calendars.ReadWrite`
-* İle Kullanıcı olarak posta gönder `Mail.Send`
+OAuth 2,0 ' de, bu izin kümesi türleri *kapsamlar* olarak adlandırılır. Bunlar da genellikle *izinler* olarak adlandırılır. Microsoft Identity platformunda bir izin dize değeri olarak temsil edilir. Bir uygulama, sorgu parametresinde izni belirterek ihtiyaç duyacağı izinleri ister `scope` . Kimlik platformu, iyi tanımlanmış birkaç [OpenID Connect kapsamını](#openid-connect-scopes) ve kaynak tabanlı izinleri destekler (her izin, izin değeri kaynağın tanımlayıcısına veya uygulama kimliği URI 'sine eklenerek belirtilir). Örneğin, izin dizesi `https://graph.microsoft.com/Calendars.Read` Microsoft Graph kullanıcı takvimlerini okumak için izin istemek üzere kullanılır.
 
 Bu izinleri en yaygın olarak, Microsoft Identity platform yetkilendirme uç noktası isteklerindeki kapsamları belirterek ister. Ancak, bazı yüksek ayrıcalıklı izinler yalnızca yönetici onayı üzerinden verilebilir. [Yönetici onay uç noktası](#admin-restricted-permissions)kullanılarak talep edilebilir veya verilebilir. Daha fazla bilgi edinmek için okumaya devam edin.
 
@@ -270,7 +266,7 @@ Content-Type: application/json
     "grant_type": "authorization_code",
     "client_id": "6731de76-14a6-49ae-97bc-6eba6914391e",
     "scope": "https://outlook.office.com/mail.read https://outlook.office.com/mail.send",
-    "code": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq..."
+    "code": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...",
     "redirect_uri": "https://localhost/myapp",
     "client_secret": "zc53fwe80980293klaj9823"  // NOTE: Only required for web apps
 }

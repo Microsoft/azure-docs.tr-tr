@@ -3,12 +3,14 @@ title: 'Hızlı başlangıç: ilk PowerShell sorgunuz'
 description: Bu hızlı başlangıçta, Azure PowerShell için kaynak Graph modülünü etkinleştirmek ve ilk sorgunuzu çalıştırmak için adımları izleyin.
 ms.date: 01/27/2021
 ms.topic: quickstart
-ms.openlocfilehash: 131bed4fe60035682a317e186f11561bc005b298
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom:
+- mode-api
+ms.openlocfilehash: e5e276e3be80354eeaaeba2821eb9e3242b368ad
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98917682"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533073"
 ---
 # <a name="quickstart-run-your-first-resource-graph-query-using-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell kullanarak ilk kaynak grafik sorgunuzu çalıştırın
 

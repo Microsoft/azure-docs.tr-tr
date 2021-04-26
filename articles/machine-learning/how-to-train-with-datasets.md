@@ -12,18 +12,18 @@ ms.reviewer: nibaccam
 ms.date: 07/31/2020
 ms.topic: conceptual
 ms.custom: how-to, devx-track-python, data4ml
-ms.openlocfilehash: 8b984a17c8c10c3dff7c57b7d0223ba8b4197012
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 0b2bb49863e07e6f06512e868ed12ecf00cc11c2
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640115"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872398"
 ---
 # <a name="train-models-with-azure-machine-learning-datasets"></a>Azure Machine Learning veri kümeleriyle modelleri eğitme 
 
 Bu makalede makine öğrenimi modellerini eğitmek için [Azure Machine Learning veri kümeleriyle](/python/api/azureml-core/azureml.core.dataset%28class%29) nasıl çalışacağınızı öğreneceksiniz.  Bağlantı dizeleri veya veri yolları hakkında endişelenmeden, yerel veya uzaktan işlem Hedefinizdeki veri kümelerini kullanabilirsiniz. 
 
-Azure Machine Learning veri kümeleri, [ScriptRunConfig](/python/api/azureml-core/azureml.core.scriptrunconfig), [hyperdrive](/python/api/azureml-train-core/azureml.train.hyperdrive) ve [Azure Machine Learning işlem hatları](./how-to-create-machine-learning-pipelines.md)gibi Azure Machine Learning eğitim işlevleriyle sorunsuz bir tümleştirme sağlar.
+Azure Machine Learning veri kümeleri, [ScriptRunConfig](/python/api/azureml-core/azureml.core.scriptrunconfig), [hyperdrive](/python/api/azureml-train-core/azureml.train.hyperdrive)ve [Azure Machine Learning işlem hatları](./how-to-create-machine-learning-pipelines.md)gibi Azure Machine Learning eğitim işlevleriyle sorunsuz bir tümleştirme sağlar.
 
 Verilerinizi model eğitimi için kullanılabilir hale getirmek için hazır değilseniz, ancak verilerinizi veri araştırması için Not defterinize yüklemek istiyorsanız, bkz. veri [kümenizdeki verileri keşfetme](how-to-create-register-datasets.md#explore-data). 
 
@@ -44,7 +44,7 @@ Veri kümeleri oluşturup eğitmeniz için şunlar gerekir:
 
 Henüz bir veri kümesi olarak kayıtlı olmayan yapılandırılmış veriler varsa, bir TabularDataset oluşturun ve bunu yerel veya uzaktan denemenize yönelik eğitim betiğinizdeki doğrudan kullanın.
 
-Bu örnekte, kayıtlı olmayan bir [Tabulardataset](/python/api/azureml-core/azureml.data.tabulardataset) oluşturun ve bunu eğitim için ScriptRunConfig nesnesinde bir betik bağımsız değişkeni olarak belirtirsiniz. Bu TabularDataset 'i çalışma alanınızdaki diğer denemeleri birlikte yeniden kullanmak istiyorsanız, bkz. [veri kümelerini çalışma alanınıza kaydetme](how-to-create-register-datasets.md#register-datasets).
+Bu örnekte, kayıtlı olmayan bir [Tabulardataset](/python/api/azureml-core/azureml.data.tabulardataset) oluşturun ve bunu eğitim için [ScriptRunConfig](/python/api/azureml-core/azureml.core.script_run_config.scriptrunconfig) nesnesinde bir betik bağımsız değişkeni olarak belirtirsiniz. Bu TabularDataset 'i çalışma alanınızdaki diğer denemeleri birlikte yeniden kullanmak istiyorsanız, bkz. [veri kümelerini çalışma alanınıza kaydetme](how-to-create-register-datasets.md#register-datasets).
 
 ### <a name="create-a-tabulardataset"></a>TabularDataset oluşturma
 
@@ -119,16 +119,25 @@ run.wait_for_completion(show_output=True)
 
 Yapılandırılmamış verileriniz varsa, bir [dosya veri kümesi](/python/api/azureml-core/azureml.data.filedataset) oluşturun ve veri dosyalarınızı, eğitim için uzaktan işlem hedefi için kullanılabilir hale getirmek üzere bağlayın veya indirin. Uzaktan Eğitim denemeleri için [bağlama ve indirme](#mount-vs-download) bilgilerini ne zaman kullanacağınızı öğrenin. 
 
-Aşağıdaki örnek bir dosya veri kümesi oluşturur ve veri kümesini, eğitim betiğine bir bağımsız değişken olarak geçirerek işlem hedefine bağlar. 
+Aşağıdaki örnek, 
+
+* Eğitim verileriniz için bir giriş dosyası veri kümesi oluşturur `mnist_ds` .
+* Eğitim sonuçlarının nereye yazılacağını belirtir ve bu sonuçları bir dosya veri kümesi olarak yükseltir.
+* Giriş veri kümesini işlem hedefine bağlar.
 
 > [!Note]
 > Özel bir Docker temel görüntüsü kullanıyorsanız, `apt-get install -y fuse` veri kümesi bağlama 'nın çalışması için bir bağımlılık olarak kullanarak sigortası yüklemeniz gerekir. [Özel bir yapı görüntüsü](how-to-deploy-custom-docker-image.md#build-a-custom-base-image)oluşturmayı öğrenin.
 
+Not defteri örneği için bkz. [veri girişi ve çıkışı ile bir eğitim çalıştırmasını yapılandırma](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/work-with-data/datasets-tutorial/scriptrun-with-data-input-output/how-to-use-scriptrun.ipynb).
+
 ### <a name="create-a-filedataset"></a>Dosya veri kümesi oluşturma
 
-Aşağıdaki örnek, Web URL 'lerinden kaydedilmemiş bir dosya veri kümesi oluşturur. Diğer kaynaklardan [veri kümeleri oluşturma](how-to-create-register-datasets.md) hakkında daha fazla bilgi edinin.
+Aşağıdaki örnek, Web URL 'lerinden, kayıtsız bir dosya veri kümesi oluşturur `mnist_data` . Bu dosya veri kümesi, eğitim çalıştıralım için giriş verileri.
+
+Diğer kaynaklardan [veri kümeleri oluşturma](how-to-create-register-datasets.md) hakkında daha fazla bilgi edinin.
 
 ```Python
+
 from azureml.core.dataset import Dataset
 
 web_paths = [
@@ -137,22 +146,49 @@ web_paths = [
             'http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz',
             'http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz'
             ]
+
 mnist_ds = Dataset.File.from_files(path = web_paths)
+
+```
+### <a name="where-to-write-training-output"></a>Eğitim çıkışının nereden yazılacağı
+
+Bir [Outputfiledatasetconfig nesnesiyle](/python/api/azureml-core/azureml.data.output_dataset_config.outputfiledatasetconfig)eğitim sonuçlarınızı nereye yazacağınızı belirtebilirsiniz. 
+
+OutputFileDatasetConfig nesneleri şunları yapmanıza izin verir: 
+
+* Bir çalıştırmanın çıkışını belirttiğiniz bulut depolama alanına takın veya karşıya yükleyin.
+* Çıktıyı bir dosya veri kümesi olarak şu desteklenen depolama türlerine Kaydet:
+    * Azure blobu
+    * Azure dosya paylaşımı
+    * Azure Data Lake Storage nesilleri 1 ve 2
+* Eğitim çalıştırmaları arasında veri kökenini izleyin.
+
+Aşağıdaki kod, eğitim sonuçlarının `outputdataset` varsayılan blob veri deposunda bulunan klasöre bir dosya veri kümesi olarak kaydedilmesi gerektiğini belirtir `def_blob_store` . 
+
+```python
+from azureml.core import Workspace
+from azureml.data import OutputFileDatasetConfig
+
+ws = Workspace.from_config()
+
+def_blob_store = ws.get_default_datastore()
+output = OutputFileDatasetConfig(destination=(def_blob_store, 'sample/outputdataset'))
 ```
 
 ### <a name="configure-the-training-run"></a>Eğitim çalıştırmasını yapılandırma
 
-Oluşturucunun parametresi aracılığıyla bağlanırken veri kümesini bir bağımsız değişken olarak geçirmeyi öneririz `arguments` `ScriptRunConfig` . Bunu yaptığınızda, eğitim betiğinizdeki veri yolunu (takma noktası) bağımsız değişkenler aracılığıyla alacaksınız. Bu şekilde, yerel hata ayıklama ve herhangi bir bulut platformunda uzaktan eğitim için aynı eğitim betiğini kullanacaksınız.
+Oluşturucunun parametresi aracılığıyla bağlanırken veri kümesini bir bağımsız değişken olarak geçirmeyi öneririz `arguments` `ScriptRunConfig` . Bunu yaparak eğitim betiğinizdeki veri yolunu (takma noktası) bağımsız değişkenler aracılığıyla alırsınız. Bu şekilde, yerel hata ayıklama ve herhangi bir bulut platformunda uzaktan eğitim için aynı eğitim betiğini kullanabilirsiniz.
 
-Aşağıdaki örnek ile FileDataset içinde geçen bir ScriptRunConfig oluşturur `arguments` . Çalışmayı gönderdikten sonra, veri kümesi tarafından başvurulan veri dosyaları `mnist_ds` işlem hedefine bağlanır.
+Aşağıdaki örnek ile FileDataset içinde geçen bir ScriptRunConfig oluşturur `arguments` . Çalışmayı gönderdikten sonra, veri kümesi tarafından başvurulan veri dosyaları `mnist_ds` işlem hedefine bağlanır ve eğitim sonuçları, `outputdataset` varsayılan veri deposundaki belirtilen klasöre kaydedilir.
 
 ```python
 from azureml.core import ScriptRunConfig
 
+input_data= mnist_ds.as_named_input('input').as_mount()# the dataset will be mounted on the remote compute 
+
 src = ScriptRunConfig(source_directory=script_folder,
-                      script='train_mnist.py',
-                      # the dataset will be mounted on the remote compute and the mounted path passed as an argument to the script
-                      arguments=['--data-folder', mnist_ds.as_mount(), '--regularization', 0.5],
+                      script='dummy_train.py',
+                      arguments=[input_data, output],
                       compute_target=compute_target,
                       environment=myenv)
 
@@ -161,40 +197,31 @@ run = experiment.submit(src)
 run.wait_for_completion(show_output=True)
 ```
 
-### <a name="retrieve-data-in-your-training-script"></a>Eğitim betiğinizdeki verileri alma
+### <a name="simple-training-script"></a>Basit eğitim betiği
 
-Aşağıdaki kod, betiğinizdeki verilerin nasıl alınacağını gösterir.
+Aşağıdaki betik ScriptRunConfig aracılığıyla gönderilir. `mnist_ds `Veri kümesini girdi olarak okur ve dosyayı `outputdataset` varsayılan blob veri deposundaki klasöre yazar `def_blob_store` .
 
 ```Python
-%%writefile $script_folder/train_mnist.py
+%%writefile $source_directory/dummy_train.py
 
-import argparse
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+import sys
 import os
-import numpy as np
-import glob
 
-from utils import load_data
+print("*********************************************************")
+print("Hello Azure ML!")
 
-# retrieve the 2 arguments configured through `arguments` in the ScriptRunConfig
-parser = argparse.ArgumentParser()
-parser.add_argument('--data-folder', type=str, dest='data_folder', help='data folder mounting point')
-parser.add_argument('--regularization', type=float, dest='reg', default=0.01, help='regularization rate')
-args = parser.parse_args()
+mounted_input_path = sys.argv[1]
+mounted_output_path = sys.argv[2]
 
-data_folder = args.data_folder
-print('Data folder:', data_folder)
-
-# get the file paths on the compute
-X_train_path = glob.glob(os.path.join(data_folder, '**/train-images-idx3-ubyte.gz'), recursive=True)[0]
-X_test_path = glob.glob(os.path.join(data_folder, '**/t10k-images-idx3-ubyte.gz'), recursive=True)[0]
-y_train_path = glob.glob(os.path.join(data_folder, '**/train-labels-idx1-ubyte.gz'), recursive=True)[0]
-y_test = glob.glob(os.path.join(data_folder, '**/t10k-labels-idx1-ubyte.gz'), recursive=True)[0]
-
-# load train and test set into numpy arrays
-X_train = load_data(X_train_path, False) / 255.0
-X_test = load_data(X_test_path, False) / 255.0
-y_train = load_data(y_train_path, True).reshape(-1)
-y_test = load_data(y_test, True).reshape(-1)
+print("Argument 1: %s" % mounted_input_path)
+print("Argument 2: %s" % mounted_output_path)
+    
+with open(mounted_input_path, 'r') as f:
+    content = f.read()
+    with open(os.path.join(mounted_output_path, 'output.csv'), 'w') as fw:
+        fw.write(content)
 ```
 
 ## <a name="mount-vs-download"></a>Bağlama vs indirmesi
@@ -257,7 +284,7 @@ src.run_config.source_directory_data_store = "workspaceblobstore"
 
 ## <a name="notebook-examples"></a>Not defteri örnekleri
 
-+ [Veri kümesi Not defterleri](https://aka.ms/dataset-tutorial) bu makaledeki kavramları gösterir ve genişletir.
++ Ek veri kümesi örnekleri ve kavramlar için bkz. [DataSet Not defterleri](https://aka.ms/dataset-tutorial).
 + Bkz. ML işlem hatlarında [parametrize veri kümelerini](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/machine-learning-pipelines/intro-to-pipelines/aml-pipelines-showcasing-dataset-and-pipelineparameter.ipynb)öğrenin.
 
 ## <a name="troubleshooting"></a>Sorun giderme
@@ -289,7 +316,7 @@ Veri aktarımı gibi diğer iş yükleri için dosya paylaşma 'yı kullanıyors
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Tabulardataset ile [makine öğrenimi modellerini otomatik olarak eğitme](how-to-auto-train-remote.md) .
+* Tabulardataset ile [makine öğrenimi modellerini otomatik olarak eğitme](how-to-configure-auto-train.md#data-source-and-format) .
 
 * Dosya veri kümeleri ile [görüntü sınıflandırma modellerini eğitme](https://aka.ms/filedataset-samplenotebook) .
 

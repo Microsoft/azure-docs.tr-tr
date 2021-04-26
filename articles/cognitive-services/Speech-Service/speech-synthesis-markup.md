@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 03/23/2020
 ms.author: trbye
 ms.custom: devx-track-js, devx-track-csharp
-ms.openlocfilehash: c4e70c7f74c202b7de44a259b8a680f57aeaa041
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 1d21691af4d52892f507695a56331816b14bf517
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645040"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588386"
 ---
 # <a name="improve-synthesis-with-speech-synthesis-markup-language-ssml"></a>Konuşma birleştirme biçimlendirme dili (SSML) ile senssıs 'yi geliştirme
 
@@ -27,11 +27,9 @@ SSML konuşma hizmeti uygulamasının, World Wide Web Konsorsiyumu [konuşma Sen
 > [!IMPORTANT]
 > Çince, Japonca ve Korece karakterler, faturalandırma için iki karakter olarak sayılır. Daha fazla bilgi için bkz. [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/).
 
-## <a name="standard-neural-and-custom-voices"></a>Standart, sinir ve özel sesler
+## <a name="neural-and-custom-voices"></a>Sinir ve özel sesler
 
-Standart ve sinir sesler arasından seçim yapın ya da ürün veya marka için özel sesinizi benzersiz bir şekilde oluşturun. 45 ' den fazla dilde ve yerel ayarlarda 75 + standart sesler mevcuttur ve dört dilde ve yerel ayarlarda 5 sinir seste erişilebilir. Desteklenen dillerin, yerel ayarların ve seslerin (sinir ve standart) tüm listesi için bkz. [dil desteği](language-support.md).
-
-Standart, sinir ve özel sesler hakkında daha fazla bilgi edinmek için bkz. [metinden konuşmaya genel bakış](text-to-speech.md).
+İnsan benzeri bir sinir sesi kullanın ya da ürün veya marka için özel sesinizi benzersiz bir şekilde oluşturun. Desteklenen dillerin, yerel ayarların ve seslerin tüm listesi için bkz. [dil desteği](language-support.md). Sinir ve özel sesler hakkında daha fazla bilgi edinmek için bkz. [metinden konuşmaya genel bakış](text-to-speech.md).
 
 
 > [!NOTE]
@@ -194,12 +192,9 @@ speechConfig!.setPropertyTo(
 
 ## <a name="adjust-speaking-styles"></a>Konuşma stillerini ayarla
 
-> [!IMPORTANT]
-> Konuşma stillerinin ayarlanması yalnızca sinir seslerle çalışır.
+Varsayılan olarak, metinden konuşmaya hizmeti, sinir sesler için bağımsız bir konuşma stili kullanarak metni birleştirir. Konuşma stilini, peyerfullik, empabili ve Calm gibi farklı tarzları ifade etmek ya da bu öğeyi kullanarak Customer Service, newscadıya ve Voice Yardımcısı gibi farklı senaryolar için en iyi duruma getirebilirsiniz `mstts:express-as` . Bu, konuşma hizmetine özgü olan isteğe bağlı bir öğedir.
 
-Varsayılan olarak, metinden konuşmaya hizmeti, standart ve sinir sesler için bağımsız bir konuşma stili kullanarak metni birleştirir. Sinir seslerle, konuşma stilini, bu şekilde, peyerfullik, empabili ve Calm gibi farklı tarzları ifade etmek ya da bu öğeyi kullanarak Customer Service, newscadıya ve Voice Yardımcısı gibi farklı senaryolar için sesi en iyi duruma getirebilirsiniz `mstts:express-as` . Bu, konuşma hizmetine özgü olan isteğe bağlı bir öğedir.
-
-Şu anda, bu sinir sesleri için konuşma stil ayarlamaları desteklenir:
+Şu anda, şu sinir seslerinde konuşma stil ayarlamaları desteklenir:
 * `en-US-AriaNeural`
 * `en-US-JennyNeural`
 * `en-US-GuyNeural`
@@ -213,18 +208,13 @@ Varsayılan olarak, metinden konuşmaya hizmeti, standart ve sinir sesler için 
 * `zh-CN-XiaoxuanNeural` Önizle
 * `zh-CN-XiaoruiNeural` Önizle
 
-Konuşma stilinin yoğunluğu, kullanım örneğine daha iyi uyum sağlamak için daha fazla değiştirilebilir. `styledegree`Konuşmayı daha anlamlı veya daha fazla ifade etmek için ile daha güçlü veya Softer stili belirtebilirsiniz.
+Konuşma stilinin yoğunluğu, kullanım örneğine daha iyi uyum sağlamak için daha fazla değiştirilebilir. `styledegree`Konuşmayı daha anlamlı veya daha fazla ifade etmek için ile daha güçlü veya Softer stili belirtebilirsiniz. Şu anda, Çince (Mandarin, Basitleştirilmiş) sinir seslerinde konuşma stil ayarlamaları desteklenir.
 
-Şu anda, bu sinir sesleri için konuşma stil ayarlamaları desteklenir:
-* `zh-CN-XiaoxiaoNeural`
-
-Konuşma stillerini ve stil derecesini ayarlamayı birbirinden ayrı olarak, `role` sesin farklı bir yaş ve cinsiyet olarak taklit edebilmesi için parametresini de ayarlayabilirsiniz. Örneğin, erkek bir ses, bir kadın sesi taklit etmek için aralığı oluşturabilir ve intonation 'ı değiştirebilir.
-
-Şu anda, bu sinir seslerinde rol yürütme ayarlamaları desteklenir:
+Konuşma stillerini ve stil derecesini ayarlamayı birbirinden ayrı olarak, `role` sesin farklı bir yaş ve cinsiyet olarak taklit edebilmesi için parametresini de ayarlayabilirsiniz. Örneğin, erkek bir ses, aralığı yükseltir ve bir kadın sesine taklit etmek için intonation 'ı değiştirebilir, ancak ses adı değiştirilmez. Şu anda, bu Çince (Mandarin, Basitleştirilmiş) sinir seslerinde rol ayarlamaları desteklenir:
 * `zh-CN-XiaomoNeural`
 * `zh-CN-XiaoxuanNeural`
 
-Yukarıdaki değişiklikler tümce düzeyinde uygulanır ve stiller ve rol oynatılır seslere göre farklılık gösterir. Bir stil veya rol yürütme desteklenmiyorsa, hizmet konuşmayı varsayılan nötr konuşma şeklinde döndürür. [Ses listesi API 'si](rest-text-to-speech.md#get-a-list-of-voices) aracılığıyla veya kod Içermeyen [ses içeriği oluşturma](https://aka.ms/audiocontentcreation) platformu aracılığıyla her bir ses için hangi stillerin ve rol yürütdiklerin desteklendiğini görebilirsiniz.
+Yukarıdaki değişiklikler tümce düzeyinde uygulanır ve stiller ve rol oynatılır seslere göre farklılık gösterir. Bir stil veya rol yürütme desteklenmiyorsa, hizmet konuşmayı varsayılan nötr konuşma şeklinde döndürür. [Ses listesi API 'si](rest-text-to-speech.md#get-a-list-of-voices) aracılığıyla veya kod Içermeyen [ses içeriği oluşturma](https://aka.ms/audiocontentcreation) platformu aracılığıyla her bir ses için hangi stillerin ve rollerin desteklendiğini görebilirsiniz.
 
 **Syntax**
 
@@ -238,15 +228,15 @@ Yukarıdaki değişiklikler tümce düzeyinde uygulanır ve stiller ve rol oynat
 <mstts:express-as role="string" style="string"></mstts:express-as>
 ```
 > [!NOTE]
-> Şu anda `styledegree` yalnızca zh-cn-XiaoxiaoNeural desteklenir. `role` yalnızca zh-CN-XiaomoNeural ve zh-CN-XiaoxuanNeural destekler.
+> Şu anda `styledegree` yalnızca Çince (Mandarin, Basitleştirilmiş) sinir seslerini destekler. `role` yalnızca zh-CN-XiaomoNeural ve zh-CN-XiaoxuanNeural destekler.
 
 **Öznitelikler**
 
 | Öznitelik | Açıklama | Gerekli/Isteğe bağlı |
 |-----------|-------------|---------------------|
 | `style` | Konuşma stilini belirtir. Şu anda konuşma stilleri sese özgüdür. | Sinir Voice için konuşma stilini ayarlarken gereklidir. Kullanıyorsanız `mstts:express-as` stilin sağlanması gerekir. Geçersiz bir değer sağlanmışsa, bu öğe yok sayılır. |
-| `styledegree` | Konuşma stilinin yoğunluğunu belirtir. **Kabul edilen değerler**: 0,01 ile 2 arasında. Varsayılan değer 1 ' dir ve önceden tanımlanmış stil yoğunluğu anlamına gelir. En küçük birim, hedef stili için biraz daha fazla sonuç olarak 0,01 ' dir. 2 değeri, varsayılan stil yoğunluğu kattılmasına neden olur.  | İsteğe bağlı (Şu anda `styledegree` yalnızca zh-cn-XiaoxiaoNeural destekler.)|
-| `role` | Konuşan rol-yürütme ' yı belirtir. Ses, farklı bir yaş ve cinsiyeti olarak görev görür.  | İsteğe bağlı (Şu anda `role` yalnızca zh-cn-XiaomoNeural ve zh-cn-XiaoxuanNeural destekler.)|
+| `styledegree` | Konuşma stilinin yoğunluğunu belirtir. **Kabul edilen değerler**: 0,01 ile 2 arasında. Varsayılan değer 1 ' dir ve önceden tanımlanmış stil yoğunluğu anlamına gelir. En küçük birim, hedef stili için biraz daha fazla sonuç olarak 0,01 ' dir. 2 değeri, varsayılan stil yoğunluğu kattılmasına neden olur.  | İsteğe bağlı (Şu anda `styledegree` yalnızca Çince (Mandarin, Basitleştirilmiş) sinir seslerini destekler.)|
+| `role` | Konuşan rol-yürütme ' yı belirtir. Ses, farklı bir yaş ve cinsiyet gibi davranır, ancak ses adı değiştirilmez.  | İsteğe bağlı (Şu anda `role` yalnızca zh-cn-XiaomoNeural ve zh-cn-XiaoxuanNeural destekler.)|
 
 Her sinir sesi için hangi konuşma stillerinin desteklendiğini öğrenmek için bu tabloyu kullanın.
 
@@ -322,17 +312,19 @@ Her sinir sesi için hangi konuşma stillerinin desteklendiğini öğrenmek içi
 |                         | `style="angry"`           | Daha düşük bir, daha yüksek yoğunluk ve daha yüksek Vocal enerji ile birlikte bir angın ve annokızı ifade eder. Konuşmacı, IRate, görüntüleme kiraladığı ve boşaltmış bir durumdur.       |
 |                         | `style="fearful"`         | Daha yüksek aralıklı, daha yüksek Vocal enerji ve daha hızlı bir şekilde bir korya ve nervous sesini ifade eder. Konuşmacı, tenseness ve unkımın durumunda.                          |
 
-Her sinir sesi için hangi rollerin desteklendiğini öğrenmek için bu tabloyu kullanın.
+Desteklenen rolleri ve bunların tanımlarını denetlemek için bu tabloyu kullanın.
 
-| Ses                   | Rol                       | Açıklama                                                 |
-|-------------------------|----------------------------|-------------------------------------------------------------|
-| `zh-CN-XiaomoNeural`    | `role="YoungAdultFemale"`  | Ses, Başak yetişkin kadın olarak hazırlanmıştır.                 |
-|                         | `role="OlderAdultMale"`    | Ses, daha eski bir yetişkin erkek ile taklit.                   |
-|                         | `role="Girl"`              | Ses, bir kız.                               |
-|                         | `role="Boy"`               | Ses, bir erkek olarak taklit.                                |
-| `zh-CN-XiaoxuanNeural`  | `role="YoungAdultFemale"`  | Ses, Başak yetişkin kadın olarak hazırlanmıştır.                 |
-|                         | `role="OlderAdultFemale"`  | Ses, daha eski bir yetişkin kadın olarak hazırlanmıştır.                 |
-|                         | `role="OlderAdultMale"`    | Ses, daha eski bir yetişkin erkek ile taklit.                   |
+|Rol                     | Açıklama                |
+|-------------------------|----------------------------|
+|`role="Girl"`            | Ses, bir kız. |
+|`role="Boy"`             | Ses, bir erkek olarak taklit. |
+|`role="YoungAdultFemale"`| Ses, Başak yetişkin kadın olarak hazırlanmıştır.|
+|`role="YoungAdultMale"`  | Ses, Başak yetişkin erkek olarak hazırlanmıştır.|
+|`role="OlderAdultFemale"`| Ses, daha eski bir yetişkin kadın olarak hazırlanmıştır.|
+|`role="OlderAdultMale"`  | Ses, daha eski bir yetişkin erkek ile taklit.|
+|`role="SeniorFemale"`    | Ses, kıdemli kadın olarak hazırlanmıştır.|
+|`role="SeniorMale"`      | Ses, kıdemli erkek olarak hazırlanmıştır.|
+
 
 **Örnek**
 
@@ -634,7 +626,7 @@ Yukarıdaki örnekte, IPA telefon kümesi olarak da bilinen International foneti
 
 IPA 'in anımsanması kolay olmadığından, konuşma hizmeti yedi dil (,,,,,, `en-US` `fr-FR` `de-DE` `es-ES` `ja-JP` `zh-CN` ve `zh-TW` ) için bir fonetik kümesi tanımlar.
 
-`sapi`Özniteliği için değerini olarak, `alphabet` aşağıda gösterildiği gibi özel lexsimgeleri ile kullanabilirsiniz:
+`sapi` `alphabet` Aşağıdaki gibi özel lexsimgelerle özniteliğin değeri olarak kullanabilirsiniz:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -720,7 +712,7 @@ Sıklık değişiklikleri, standart seslere veya tümce düzeyinde uygulanabilir
 
 ```xml
 <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
-    <voice name="en-US-Guy24kRUS">
+    <voice name="en-US-AriaNeural">
         Welcome to <prosody pitch="high">Microsoft Cognitive Services Text-to-Speech API.</prosody>
     </voice>
 </speak>
@@ -1023,7 +1015,7 @@ Bookmark reached. Audio offset: 1462.5ms, bookmark text: flower_2.
 
 # <a name="swift"></a>[Swift](#tab/swift)
 
-Daha fazla bilgi için bkz <a href="https://docs.microsoft.com/swift/cognitive-services/speech/spxspeechsynthesizer#addbookmarkreachedeventhandler" target="_blank"> `addBookmarkReachedEventHandler` </a>..
+Daha fazla bilgi için bkz <a href="/objectivec/cognitive-services/speech/spxspeechsynthesizer" target="_blank"> `addBookmarkReachedEventHandler` </a>..
 
 ---
 

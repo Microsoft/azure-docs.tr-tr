@@ -5,12 +5,12 @@ services: container-service
 manager: gwallace
 ms.topic: article
 ms.date: 01/08/2021
-ms.openlocfilehash: 19ece696dabc81e643e8a904d506d22e40eaa099
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: ab8065a14aac9e798bfe7d632aa5b33c44706190
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102499161"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775837"
 ---
 # <a name="authenticate-with-azure-container-registry-from-azure-kubernetes-service"></a>Azure Kubernetes Service'ten Azure Container Registry ile Kimlik Doğrulaması Yapma
 
@@ -155,5 +155,5 @@ nginx0-deployment-669dfc4d4b-xdpd6   1/1     Running   0          20s
 * [ACR sistem durumu](../container-registry/container-registry-check-health.md) hakkında daha fazla bilgi edinin
 
 <!-- LINKS - external -->
-[AKS AKS CLI]: /cli/azure/aks#az-aks-create
+[AKS AKS CLI]: /cli/azure/aks#az_aks_create
 [Image Pull secret]: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/

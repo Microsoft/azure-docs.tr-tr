@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.date: 04/29/2020
 ms.custom: devx-track-csharp, seodec18, devx-track-azurecli
 zone_pivot_groups: app-service-platform-windows-linux
-ms.openlocfilehash: 8c3fca6cf7782c3aaac91388a8f8395e288f5ea5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e35a4abbcaf0cd2298d55c06de0ecfbef0dff354
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96558751"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765818"
 ---
 # <a name="tutorial-authenticate-and-authorize-users-end-to-end-in-azure-app-service"></a>Öğretici: Azure App Service'te kullanıcıların kimliğini doğrulama ve kullanıcıları uçtan uca yetkilendirme
 
@@ -367,7 +367,7 @@ Sunucu kodu istek üst bilgilerine erişebilse de, istemci kodu aynı erişim be
 
 ### <a name="configure-cors"></a>CORS Yapılandırma
 
-Cloud Shell, komutunu kullanarak istemci URL 'nizin CORS 'yi etkinleştirin [`az webapp cors add`](/cli/azure/webapp/cors#az-webapp-cors-add) . _\<back-end-app-name>_ Ve _\<front-end-app-name>_ yer tutucularını değiştirin.
+Cloud Shell, komutunu kullanarak istemci URL 'nizin CORS 'yi etkinleştirin [`az webapp cors add`](/cli/azure/webapp/cors#az_webapp_cors_add) . _\<back-end-app-name>_ Ve _\<front-end-app-name>_ yer tutucularını değiştirin.
 
 ```azurecli-interactive
 az webapp cors add --resource-group myAuthResourceGroup --name <back-end-app-name> --allowed-origins 'https://<front-end-app-name>.azurewebsites.net'

@@ -7,14 +7,14 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 03/18/2021
+ms.date: 04/01/2021
 ms.custom: references_regions
-ms.openlocfilehash: b5b33007f71cfc2a29005ce84f1fedba90dd1bf1
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 04300b8d148bb22bf585aa81481c475b347ad462
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105561976"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106222053"
 ---
 # <a name="semantic-search-in-azure-cognitive-search"></a>Azure Bilişsel Arama 'de anlamsal arama
 
@@ -64,7 +64,7 @@ Bir Standart katmanda (S1, S2, S3) oluşturulan ve bu bölgelerden birinde bulun
 
 Yazım denetimi aynı bölgelerde mevcuttur, ancak katman kısıtlamalarına sahip değildir. Katman ve bölge ölçütlerine uyan mevcut bir hizmetiniz varsa, yalnızca kaydolma gereklidir.
 
-2 Mart 'ta önizleme başlatma arasında 1 Nisan 'da, yazım düzeltme ve anlam derecelendirmesi ücretsiz olarak sunulur. 1 Nisan 'dan sonra, bu işlevi çalıştırmanın hesaplama maliyetleri faturalandırılabilir bir olay olur. Beklenen maliyet 250.000 sorguları için yaklaşık USD $500/ay olur. [Bilişsel arama fiyatlandırma sayfasında](https://azure.microsoft.com/pricing/details/search/) belgelenen ayrıntılı maliyet bilgilerini ve [tahmin etme ve maliyetleri yönetme](search-sku-manage-costs.md)' de bulabilirsiniz.
+2 Mart 'ta önizleme başlangıcı ile geç Nisan arasında, yazım düzeltme ve anlam derecelendirmesi ücretsiz olarak sunulur. Nisan ayında, bu işlevselliği çalıştırmanın daha sonra faturalandırılabilir bir olay olacaktır. Beklenen maliyet 250.000 sorguları için yaklaşık USD $500/ay olur. [Bilişsel arama fiyatlandırma sayfasında](https://azure.microsoft.com/pricing/details/search/) belgelenen ayrıntılı maliyet bilgilerini ve [tahmin etme ve maliyetleri yönetme](search-sku-manage-costs.md)' de bulabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

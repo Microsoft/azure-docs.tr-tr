@@ -3,12 +3,12 @@ title: Sanal makinelerin içeriğini denetleme hakkında bilgi edinin
 description: Azure Ilkesi 'nin sanal makineler içindeki ayarları denetlemek için konuk yapılandırma istemcisini nasıl kullandığını öğrenin.
 ms.date: 01/14/2021
 ms.topic: conceptual
-ms.openlocfilehash: a18f230c1b7b1eb2c953542e276127f4f47cbb39
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 6fb3ed3644ccdb5de8f03bedf56943a91570322b
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104802531"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105733035"
 ---
 # <a name="understand-azure-policys-guest-configuration"></a>Azure İlkesi’nin Konuk Yapılandırmasını anlama
 
@@ -176,7 +176,10 @@ Konuk yapılandırma uzantısı, günlük dosyalarını aşağıdaki konumlara Y
 
 Windows: `C:\ProgramData\GuestConfig\gc_agent_logs\gc_agent.log`
 
-Linux: `/var/lib/GuestConfig/gc_agent_logs/gc_agent.log`
+Linux
+
+- Azure VM: `/var/lib/GuestConfig/gc_agent_logs/gc_agent.log`
+- Azure VM: `/var/lib/GuestConfig/arc_policy_logs/gc_agent.log`
 
 ### <a name="collecting-logs-remotely"></a>Günlükleri uzaktan toplama
 
@@ -210,9 +213,9 @@ egrep -B $linesToIncludeBeforeMatch -A $linesToIncludeAfterMatch 'DSCEngine|DSCM
 Konuk yapılandırma istemcisi içerik paketlerini bir makineye indirir ve içeriği ayıklar.
 Hangi içeriğin indirilip depolandığını doğrulamak için aşağıda verilen klasör konumlarını görüntüleyin.
 
-Windows: `c:\programdata\guestconfig\configurations`
+Windows: `c:\programdata\guestconfig\configuration`
 
-Linux: `/var/lib/guestconfig/configurations`
+Linux: `/var/lib/GuestConfig/Configuration`
 
 ## <a name="guest-configuration-samples"></a>Konuk yapılandırma örnekleri
 

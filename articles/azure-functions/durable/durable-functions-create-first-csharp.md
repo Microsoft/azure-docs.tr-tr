@@ -6,12 +6,12 @@ ms.topic: quickstart
 ms.date: 03/18/2020
 ms.author: azfuncdf
 zone_pivot_groups: code-editors-set-one
-ms.openlocfilehash: d5b6ecc12cee983cee0772da8b6f8f26a3b5a8ae
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 36566baac2885c449e1eae762924357bf571b39f
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96008251"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106490225"
 ---
 # <a name="create-your-first-durable-function-in-c"></a>C 'de ilk dayanıklı işlevinizi oluşturma\#
 
@@ -90,7 +90,7 @@ Projeye yeni işlevleri içeren bir sınıf eklenir. VS Code Ayrıca depolama he
 
 İçeriğini görüntülemek için yeni *Helloorchestration. cs* dosyasını açın. Bu dayanıklı işlev, aşağıdaki yöntemlerle basit bir işlev zincirleme örneğidir:  
 
-| Yöntem | Ifadelerini | Description |
+| Yöntem | Ifadelerini | Açıklama |
 | -----  | ------------ | ----------- |
 | **`RunOrchestrator`** | `HelloOrchestration` | Dayanıklı düzenleme 'yi yönetir. Bu durumda, düzenleme başlar, bir liste oluşturur ve listeye yapılan üç işlev çağrısının sonucunu ekler.  Üç işlev çağrısı tamamlandığında, listeyi döndürür. |
 | **`SayHello`** | `HelloOrchestration_Hello` | İşlev bir merhaba döndürür. Düzenleyen iş mantığını içeren işlevdir. |
@@ -163,7 +163,7 @@ Bir C# dayanıklı işlev uygulaması oluşturmak ve yayımlamak için Visual St
 
 ::: zone pivot="code-editor-visualstudio"
 
-Bu makalede, "Hello World" dayanıklı işlevini yerel olarak oluşturma ve test etme hakkında bilgi edinmek için Visual Studio 2019 ile nasıl yapılacağını öğreneceksiniz.  Bu işlev, diğer işlevlere birlikte yapılan çağrıları düzenler ve zincirler. Ardından işlev kodunu Azure’da yayımlayacaksınız. Bu araçlar, Visual Studio 2019 ' de Azure geliştirme iş yükünün parçası olarak kullanılabilir.
+Bu makalede, "Hello World" dayanıklı işlevini yerel olarak oluşturmak ve test etmek için Visual Studio 2019 ' i nasıl kullanacağınızı öğreneceksiniz.  Bu işlev, diğer işlevlere birlikte yapılan çağrıları düzenler ve zincirler. Ardından işlev kodunu Azure’da yayımlayacaksınız. Bu araçlar, Visual Studio 2019 ' de Azure geliştirme iş yükünün parçası olarak kullanılabilir.
 
 ![Ekran görüntüsü, dayanıklı bir işlev içeren bir Visual Studio 2019 penceresini gösterir.](./media/durable-functions-create-first-csharp/functions-vs-complete.png)
 
@@ -217,7 +217,7 @@ Aşağıdaki adımlar, projenizde dayanıklı işlev kodu oluşturmak için bir 
 
 Uygulamaya yeni bir dayanıklı işlev eklenir.  İçeriğini görüntülemek için yeni. cs dosyasını açın. Bu dayanıklı işlev, aşağıdaki yöntemlerle basit bir işlev zincirleme örneğidir:  
 
-| Yöntem | Ifadelerini | Description |
+| Yöntem | Ifadelerini | Açıklama |
 | -----  | ------------ | ----------- |
 | **`RunOrchestrator`** | `<file-name>` | Dayanıklı düzenleme 'yi yönetir. Bu durumda, düzenleme başlar, bir liste oluşturur ve listeye yapılan üç işlev çağrısının sonucunu ekler.  Üç işlev çağrısı tamamlandığında, listeyi döndürür. |
 | **`SayHello`** | `<file-name>_Hello` | İşlev bir merhaba döndürür. Düzenleyen iş mantığını içeren işlevdir. |

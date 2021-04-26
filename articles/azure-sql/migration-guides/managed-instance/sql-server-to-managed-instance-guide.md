@@ -11,10 +11,10 @@ ms.author: mokabiru
 ms.reviewer: MashaMSFT
 ms.date: 11/06/2020
 ms.openlocfilehash: a1dcb72c30268dd82052e29232e79a485d86f72d
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105025314"
 ---
 # <a name="migration-guide-sql-server-to-azure-sql-managed-instance"></a>Geçiş Kılavuzu: Azure SQL yönetilen örneği 'ne SQL Server

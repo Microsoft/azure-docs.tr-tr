@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 01/05/2021
 ms.topic: conceptual
-ms.openlocfilehash: 915a0d75622a98b33f647041f3c3b622cb5236b1
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: a2650e3a9ce58b611c1aff1a569cc1e8f0980fd4
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99053729"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833499"
 ---
 # <a name="send-an-email-from-a-runbook"></a>Runbook’tan e-posta gönderme
 
@@ -99,8 +100,8 @@ Bir Key Vault oluşturup API anahtarınızı depoladıktan sonra `SendGrid` API 
 
     $Conn = Get-AutomationConnection -Name AzureRunAsConnection
     Connect-AzAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint | Out-Null
-    $VaultName = "<Enter your vault name>"
-    $SENDGRID_API_KEY = (Get-AzKeyVaultSecret -VaultName $VaultName -Name "SendGridAPIKey").SecretValue
+    $VaultName = "<Enter your vault name>&quot;
+    $SENDGRID_API_KEY = (Get-AzKeyVaultSecret -VaultName $VaultName -Name &quot;SendGridAPIKey").SecretValue
     $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
     $headers.Add("Authorization", "Bearer " + $SENDGRID_API_KEY)
     $headers.Add("Content-Type", "application/json")

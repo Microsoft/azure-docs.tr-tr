@@ -9,12 +9,12 @@ ms.subservice: spot
 ms.date: 02/26/2021
 ms.reviewer: cynthn
 ms.custom: devx-track-azurecli, devx-track-azurepowershell
-ms.openlocfilehash: ec73d1363fb18d1d6c46589fe69879a8f6df1dab
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 61bb87d84b96f988ae065a70b85d445fc8b96ccf
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104722574"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762956"
 ---
 # <a name="azure-spot-virtual-machines-for-virtual-machine-scale-sets"></a>Sanal Makine Ölçek Kümeleri için Azure spot sanal makineleri 
 
@@ -82,7 +82,7 @@ Bu yeni platform düzeyi özelliği, hedef örnek sayısını korumak için otom
 
 **CLI’yi kullanma**
 
-Aboneliğiniz için Önizlemeyi etkinleştirmek üzere [az Feature Register](/cli/azure/feature#az-feature-register) kullanın. 
+Aboneliğiniz için Önizlemeyi etkinleştirmek üzere [az Feature Register](/cli/azure/feature#az_feature_register) kullanın. 
 
 ```azurecli-interactive
 az feature register --namespace Microsoft.Compute --name SpotTryRestore 
@@ -139,7 +139,7 @@ Yerleştirme grubu, kendi hata etki alanları ve yükseltme etki alanları ile A
 Azure spot sanal makineleri kullanan bir ölçek kümesi oluşturma işlemi Başlarken [makalesinde](quick-create-portal.md)ayrıntılı olarak aynıdır. Bir ölçek kümesi dağıttığınızda, nokta bayrağını ve çıkarma ilkesini ayarlamayı seçebilirsiniz: ![ Azure spot sanal makineler ile ölçek kümesi oluşturma](media/virtual-machine-scale-sets-use-spot/vmss-spot-portal-max-price.png)
 
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 Azure spot sanal makineler ile bir ölçek kümesi oluşturma işlemi Başlarken [makalesinde](quick-create-cli.md)ayrıntılı olarak aynıdır. '--Priority noktası ' ve Ekle ' yi eklemeniz yeterlidir `--max-price` . Bu örnekte, `-1` Örneğin `--max-price` fiyata göre çıkarılamadığı için kullanırız.
 

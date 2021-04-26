@@ -7,10 +7,10 @@ ms.author: daviste
 ms.date: 05/03/2017
 ms.reviewer: mbullwin
 ms.openlocfilehash: 45f3a7152add8d64d961feb055413760df01eb94
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105025620"
 ---
 # <a name="user-retention-analysis-for-web-applications-with-application-insights"></a>Application Insights ile Web uygulamaları için Kullanıcı bekletme Analizi
@@ -36,7 +36,7 @@ Application Insights portalında bekletme aracında verileri henüz görmüyorsa
 
 Kullanıcılar, bir, hücrenin ne anlama geldiğini açıklayan analiz düğmesine ve araç ipuçlarına erişmek için bekletme aracında hücrelerin üzerine gelebilirler. Analiz düğmesi, kullanıcıları hücreden Kullanıcı oluşturmak için önceden doldurulmuş bir sorgu ile analiz aracına götürür. 
 
-## <a name="use-business-events-to-track-retention"></a>Saklama izlemek için iş olaylarını kullanma
+## <a name="use-business-events-to-track-retention&quot;></a>Saklama izlemek için iş olaylarını kullanma
 
 En kullanışlı bekletme analizini sağlamak için önemli iş etkinliklerini temsil eden olayları ölçün. 
 
@@ -45,7 +45,7 @@ En kullanışlı bekletme analizini sağlamak için önemli iş etkinliklerini t
 Önemli iş eylemlerini temsil eden özel olayları kodlayarak ve bunları bekletme analizinizi kullanacak şekilde kullanmak iyi bir uygulamadır. Oyunun sonucunu yakalamak için, Application Insights özel bir olay göndermek üzere bir kod satırı yazmanız gerekir. Web sayfası kodunda veya Node.JS yazarsanız, şöyle görünür:
 
 ```JavaScript
-    appinsights.trackEvent("won game");
+    appinsights.trackEvent(&quot;won game");
 ```
 
 ASP.NET sunucu kodu:

@@ -1,25 +1,24 @@
 ---
 title: Azure Key Vault erişim ilkesi atama (CLı)
-description: Azure CLı kullanarak bir hizmet sorumlusu veya uygulama kimliğine Key Vault erişim ilkesi atama.
+description: Azure CLı kullanarak bir güvenlik sorumlusu veya uygulama kimliğine Key Vault erişim ilkesi atama.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: how-to
 ms.date: 08/27/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 0c7910ac149c8de43eeac92913a0d314fcc1854e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 96b4daa027871201a201b253721114372e58f377
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97934586"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751445"
 ---
 # <a name="assign-a-key-vault-access-policy"></a>Key Vault erişim ilkesi atama
 
-Key Vault erişim ilkesi, belirli bir hizmet sorumlusunun bir uygulama veya Kullanıcı grubu tarafından Key Vault [gizli](../secrets/index.yml)diziler, [anahtarlar](../keys/index.yml)ve [Sertifikalar](../certificates/index.yml)üzerinde farklı işlemler yapıp gerçekleştiremeyeceğini belirler. [Azure Portal](assign-access-policy-portal.md), Azure CLI (Bu makale) veya [Azure PowerShell](assign-access-policy-powershell.md)kullanarak erişim ilkeleri atayabilirsiniz.
+Key Vault erişim ilkesi, bir Kullanıcı, uygulama veya Kullanıcı grubu gibi belirli bir güvenlik sorumlusunun Key Vault [gizli](../secrets/index.yml)diziler, [anahtarlar](../keys/index.yml)ve [Sertifikalar](../certificates/index.yml)üzerinde farklı işlemler yapıp gerçekleştiremeyeceğini belirler. [Azure Portal](assign-access-policy-portal.md), Azure CLI (Bu makale) veya [Azure PowerShell](assign-access-policy-powershell.md)kullanarak erişim ilkeleri atayabilirsiniz.
 
 [!INCLUDE [key-vault-access-policy-limits.md](../../../includes/key-vault-access-policy-limits.md)]
 
@@ -69,12 +68,12 @@ Erişim ilkesini atamak istediğiniz uygulamanın, grubun veya kullanıcının n
 az keyvault set-policy --name myKeyVault --object-id <object-id> --secret-permissions <secret-permissions> --key-permissions <key-permissions> --certificate-permissions <certificate-permissions>
 ```
 
-`<object-id>`Hizmet sorumlunun nesne kimliğiyle değiştirin.
+`<object-id>`Güvenlik sorumlusunun nesne kimliğiyle değiştirin.
 
 Yalnızca `--secret-permissions` `--key-permissions` `--certificate-permissions` Bu belirli türlere izinler atarken, ve dahil etmeniz gerekir. , Ve için izin verilen değerler, `<secret-permissions>` `<key-permissions>` `<certificate-permissions>` [az keykasa Set-Policy](/cli/azure/keyvault#az-keyvault-set-policy) belgelerinde verilmiştir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Azure Key Vault güvenliği: kimlik ve erişim yönetimi](security-overview.md#identity-management)
-- [Anahtar kasanızın güvenliğini sağlayın](secure-your-key-vault.md).
+- [Anahtar kasanızın güvenliğini sağlayın](security-overview.md).
 - [Geliştirici Kılavuzu Azure Key Vault](developers-guide.md)

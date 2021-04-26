@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 2/26/2021
 ms.topic: tutorial
 ms.service: digital-twins
-ms.openlocfilehash: d155d0c4a18b254f66ff5fb58ea91dbee22d2c34
-ms.sourcegitcommit: 4bda786435578ec7d6d94c72ca8642ce47ac628a
+ms.openlocfilehash: 578befe3e26ebb42fa2172976e07d0a5836e3743
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/16/2021
-ms.locfileid: "103496618"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107168"
 ---
 # <a name="tutorial-create-an-azure-digital-twins-graph-using-the-azure-cli"></a>Öğretici: Azure CLı kullanarak Azure dijital TWINS grafiği oluşturma
 
@@ -20,7 +20,7 @@ ms.locfileid: "103496618"
 
 Bu öğreticide, modeller, TWINS ve ilişkiler kullanarak Azure dijital TWINS 'de bir grafik oluşturacaksınız. Bu öğreticide, [ **Azure CLI** Için Azure dijital TWINS komutu ayarlanmış](how-to-use-cli.md)olan araç. 
 
-CLı komutlarını, model yükleme, TWINS oluşturma ve değiştirme ve ilişki oluşturma gibi temel Azure dijital TWINS eylemlerini gerçekleştirmek için kullanabilirsiniz. CLı komutlarının tam kümesini görmek için [ *az DT* komut kümesi için başvuru belgelerine](/cli/azure/ext/azure-iot/dt?preserve-view=true&view=azure-cli-latest) de bakabilirsiniz.
+CLı komutlarını, model yükleme, TWINS oluşturma ve değiştirme ve ilişki oluşturma gibi temel Azure dijital TWINS eylemlerini gerçekleştirmek için kullanabilirsiniz. CLı komutlarının tam kümesini görmek için [ *az DT* komut kümesi için başvuru belgelerine](/cli/azure/dt) de bakabilirsiniz.
 
 Bu öğreticide,...
 > [!div class="checklist"]
@@ -91,7 +91,7 @@ Modelleri tasarladıktan sonra Azure dijital TWINS örneğinizi yüklemeniz gere
     
     Makinenizde dosya *Room.js* gidin ve "Aç" ı seçin. Daha sonra *Floor.js* için bu adımı tekrarlayın.
 
-1. Ardından, güncelleştirilmiş *Oda* modelinizi Azure dijital TWINS örneğinize yüklemek için aşağıda gösterildiği gibi [**az DT model Create**](/cli/azure/ext/azure-iot/dt/model?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_model_create) komutunu kullanın. İkinci komut, farklı türlerde TWINS oluşturmak için de bir sonraki bölümde kullanacağınız bir başka model, *kat* yükler.
+1. Ardından, güncelleştirilmiş *Oda* modelinizi Azure dijital TWINS örneğinize yüklemek için aşağıda gösterildiği gibi [**az DT model Create**](/cli/azure/dt/model#az_dt_model_create) komutunu kullanın. İkinci komut, farklı türlerde TWINS oluşturmak için de bir sonraki bölümde kullanacağınız bir başka model, *kat* yükler.
 
     ```azurecli-interactive
     az dt model create -n <ADT_instance_name> --models Room.json
@@ -101,9 +101,9 @@ Modelleri tasarladıktan sonra Azure dijital TWINS örneğinizi yüklemeniz gere
     Her komutun çıktısı başarıyla karşıya yüklenen model hakkında bilgi gösterir.
 
     >[!TIP]
-    >Ayrıca, `--from-directory` model Oluştur komutu seçeneğini kullanarak bir dizin içindeki tüm modelleri aynı anda karşıya yükleyebilirsiniz. Daha fazla bilgi için bkz. [ *az DT model Create* için isteğe bağlı parametreler](/cli/azure/ext/azure-iot/dt/model?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_model_create-optional-parameters).
+    >Ayrıca, `--from-directory` model Oluştur komutu seçeneğini kullanarak bir dizin içindeki tüm modelleri aynı anda karşıya yükleyebilirsiniz. Daha fazla bilgi için bkz. [ *az DT model Create* için isteğe bağlı parametreler](/cli/azure/dt/model#az_dt_model_create-optional-parameters).
 
-1. Modellerin aşağıda gösterildiği gibi [**az DT model List**](/cli/azure/ext/azure-iot/dt/model?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_model_list) komutuyla oluşturulduğunu doğrulayın. Bu işlem, Azure dijital TWINS örneğine yüklenmiş tüm modellerin listesini tam bilgileriyle yazdırır. 
+1. Modellerin aşağıda gösterildiği gibi [**az DT model List**](/cli/azure/dt/model#az_dt_model_list) komutuyla oluşturulduğunu doğrulayın. Bu işlem, Azure dijital TWINS örneğine yüklenmiş tüm modellerin listesini tam bilgileriyle yazdırır. 
 
     ```azurecli-interactive
     az dt model list -n <ADT_instance_name> --definition
@@ -129,7 +129,7 @@ Modellerin üzerine yazılamaz, bu işlem şimdi hata kodu döndürür `ModelIdA
 
 Artık bazı modeller Azure dijital TWINS örneğinizi karşıya yüklediğinize göre, model tanımlarına göre [**dijital TWINS**](concepts-twins-graph.md) oluşturabilirsiniz. Dijital TWINS, iş ortamınızdaki varlıkları, bir gruptaki algılayıcılar gibi şeyler, bir bina içindeki odalar veya bir otomobilde ışıklar temsil eder. 
 
-Dijital bir ikizi oluşturmak için [**az DT ikizi Create**](/cli/azure/ext/azure-iot/dt/twin?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_twin_create) komutunu kullanın. İkizi 'in temel aldığı modele başvurmanız gerekir ve isteğe bağlı olarak modeldeki tüm özellikler için başlangıç değerlerini tanımlayabilir. Bu aşamada herhangi bir ilişki bilgisi iletmeniz gerekmez.
+Dijital bir ikizi oluşturmak için [**az DT ikizi Create**](/cli/azure/dt/twin#az_dt_twin_create) komutunu kullanın. İkizi 'in temel aldığı modele başvurmanız gerekir ve isteğe bağlı olarak modeldeki tüm özellikler için başlangıç değerlerini tanımlayabilir. Bu aşamada herhangi bir ilişki bilgisi iletmeniz gerekmez.
 
 1. Daha önce güncelleştirdiğiniz *Oda* modeline ve başka bir model, *kata* göre birkaç twıns oluşturmak için Cloud Shell bu kodu çalıştırın. *Odanın* üç özelliği olduğunu anımsayın, bu nedenle bunlar için başlangıç değerleriyle bağımsız değişken sağlayabilirsiniz. (Özellik değerlerini başlatmak genel olarak isteğe bağlıdır, ancak bu öğretici için gereklidir.)
 
@@ -151,7 +151,7 @@ Dijital bir ikizi oluşturmak için [**az DT ikizi Create**](/cli/azure/ext/azur
     
     Her komutun çıktısı, başarıyla oluşturulan ikizi (bunlarla başlatılan Oda TWINS özellikleri dahil) hakkındaki bilgileri gösterir.
 
-1. TWINS 'nin aşağıda gösterildiği gibi [**az DT ikizi Query**](/cli/azure/ext/azure-iot/dt/twin?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_twin_query) komutuyla oluşturulduğunu doğrulayabilirsiniz. Gösterilen sorgu, Azure dijital TWINS örneğinizin tüm dijital TWINS değerlerini bulur.
+1. TWINS 'nin aşağıda gösterildiği gibi [**az DT ikizi Query**](/cli/azure/dt/twin#az_dt_twin_query) komutuyla oluşturulduğunu doğrulayabilirsiniz. Gösterilen sorgu, Azure dijital TWINS örneğinizin tüm dijital TWINS değerlerini bulur.
     
     ```azurecli-interactive
     az dt twin query -n <ADT_instance_name> -q "SELECT * FROM DIGITALTWINS"
@@ -165,7 +165,7 @@ Dijital bir ikizi oluşturmak için [**az DT ikizi Create**](/cli/azure/ext/azur
 
 Ayrıca, oluşturduğunuz bir ikizi özelliklerini de değiştirebilirsiniz. 
 
-1. *Room0*'ın RoomName öğesini *room0* iken *PresidentialSuite* olarak değiştirmek için bu [**az DT ikizi Update**](/cli/azure/ext/azure-iot/dt/twin?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_twin_update) komutunu çalıştırın:
+1. *Room0*'ın RoomName öğesini *room0* iken *PresidentialSuite* olarak değiştirmek için bu [**az DT ikizi Update**](/cli/azure/dt/twin#az_dt_twin_update) komutunu çalıştırın:
 
     ```azurecli-interactive
     az dt twin update -n <ADT_instance_name> --twin-id room0 --json-patch '{"op":"add", "path":"/RoomName", "value": "PresidentialSuite"}'
@@ -183,7 +183,7 @@ Ayrıca, oluşturduğunuz bir ikizi özelliklerini de değiştirebilirsiniz.
 
     :::image type="content" source="media/tutorial-command-line/cli/output-update-twin.png" alt-text="PresidentialSuite mname öğesinin bir RoomName içeren Update komutunun sonucunu gösteren Cloud Shell ekran görüntüsü." lightbox="media/tutorial-command-line/cli/output-update-twin.png":::
 
-1. *Room0*'ın bilgilerini görmek için [**az DT ikizi Show**](/cli/azure/ext/azure-iot/dt/twin?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_twin_show) komutunu çalıştırarak güncelleştirmeyi başarılı bir şekilde doğrulayabilirsiniz:
+1. *Room0*'ın bilgilerini görmek için [**az DT ikizi Show**](/cli/azure/dt/twin#az_dt_twin_show) komutunu çalıştırarak güncelleştirmeyi başarılı bir şekilde doğrulayabilirsiniz:
 
     ```azurecli-interactive
     az dt twin show -n <ADT_instance_name> --twin-id room0
@@ -197,7 +197,7 @@ Daha sonra, bu TWINS arasında bir [**ikizi grafiğine**](concepts-twins-graph.m
 
 Bir ikizi arasında oluşturabileceğiniz ilişki türleri, daha önce yüklediğiniz [modeller](#model-a-physical-environment-with-dtdl) içinde tanımlanır. [ *Taban* için model tanımı](https://github.com/azure-Samples/digital-twins-samples/blob/master/AdtSampleApp/SampleClientApp/Models/Floor.json) , katörlerin, *Contains* adlı bir ilişki türüne sahip olduğunu belirtir. Bu, her bir *tabandan* içerdiği ilgili odaya bir *Contains*-Type ilişkisi oluşturulmasını mümkün kılar.
 
-Bir ilişki eklemek için [**az DT ikizi Relationship Create**](/cli/azure/ext/azure-iot/dt/twin/relationship?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_twin_relationship_create) komutunu kullanın. İlişkinin geldiği ikizi, ilişki türü ve ilişkinin bağlandığı ikizi belirtin. Son olarak, ilişkiye benzersiz bir KIMLIK verin. Bir ilişki özelliklerine sahip olacak şekilde tanımlanmışsa, bu komutta ilişki özelliklerini de başlatabilirsiniz.
+Bir ilişki eklemek için [**az DT ikizi Relationship Create**](/cli/azure/dt/twin/relationship#az_dt_twin_relationship_create) komutunu kullanın. İlişkinin geldiği ikizi, ilişki türü ve ilişkinin bağlandığı ikizi belirtin. Son olarak, ilişkiye benzersiz bir KIMLIK verin. Bir ilişki özelliklerine sahip olacak şekilde tanımlanmışsa, bu komutta ilişki özelliklerini de başlatabilirsiniz.
 
 1. Daha önce oluşturduğunuz her bir *taban* - *tür* ilişkisini karşılık gelen *odaya* ikizi eklemek için aşağıdaki kodu çalıştırın. İlişkiler *relationship0* ve *relationship1* olarak adlandırılır.
 
@@ -240,7 +240,7 @@ Bu öğreticide ayarladığınız TWINS ve ilişkiler aşağıdaki kavramsal gra
 
 ## <a name="query-the-twin-graph-to-answer-environment-questions"></a>Ortam sorularını yanıtlamak için ikizi grafiğini sorgulama
 
-Azure dijital TWINS 'in ana özelliği, ortamınız hakkında soruları yanıtlamak için ikizi grafınızı kolayca ve verimli bir şekilde [sorgulayabilir](concepts-query-language.md) . Azure CLı 'da bu, [**az DT ikizi Query**](/cli/azure/ext/azure-iot/dt/twin?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_twin_query) komutuyla yapılır.
+Azure dijital TWINS 'in ana özelliği, ortamınız hakkında soruları yanıtlamak için ikizi grafınızı kolayca ve verimli bir şekilde [sorgulayabilir](concepts-query-language.md) . Azure CLı 'da bu, [**az DT ikizi Query**](/cli/azure/dt/twin#az_dt_twin_query) komutuyla yapılır.
 
 Örnek ortamla ilgili bazı sorulara yanıt vermek için Cloud Shell aşağıdaki sorguları çalıştırın.
 
@@ -308,7 +308,7 @@ Bu Öğreticiyi tamamladıktan sonra, ne yapmak istediğinize bağlı olarak kal
 
 * **Sonraki öğreticiye devam etmeyi planlıyorsanız**, burada ayarladığınız kaynakları tutabilir ve arasında herhangi bir şeyi temizlemeden Azure dijital TWINS örneğini yeniden kullanabilirsiniz.
 
-* **Azure dijital TWINS örneğini kullanmaya devam etmek, ancak tüm modellerini, TWINS ve ilişkilerini temizlemek** istiyorsanız, örneğinizdeki ilişkileri, TWINS 'leri ve modelleri temizlemek için [**az DT ikizi Relationship Delete**](/cli/azure/ext/azure-iot/dt/twin/relationship?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_twin_relationship_delete), [**az DT ikizi Delete**](/cli/azure/ext/azure-iot/dt/twin?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_twin_delete)ve [**az DT model Delete**](/cli/azure/ext/azure-iot/dt/model?view=azure-cli-latest&preserve-view=true#ext_azure_iot_az_dt_model_delete) komutlarını kullanabilirsiniz.
+* **Azure dijital TWINS örneğini kullanmaya devam etmek, ancak tüm modellerini, TWINS ve ilişkilerini temizlemek** istiyorsanız, örneğinizdeki ilişkileri, TWINS 'leri ve modelleri temizlemek için [**az DT ikizi Relationship Delete**](/cli/azure/dt/twin/relationship#az_dt_twin_relationship_delete), [**az DT ikizi Delete**](/cli/azure/dt/twin#az_dt_twin_delete)ve [**az DT model Delete**](/cli/azure/dt/model#az_dt_model_delete) komutlarını kullanabilirsiniz.
 
 [!INCLUDE [digital-twins-cleanup-basic.md](../../includes/digital-twins-cleanup-basic.md)]
 

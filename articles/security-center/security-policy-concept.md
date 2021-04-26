@@ -7,12 +7,12 @@ manager: rkarlin
 ms.service: security-center
 ms.topic: conceptual
 ms.date: 03/04/2021
-ms.openlocfilehash: 4dc29c8b52a3d0953445666672a716af013ee408
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 4eea2611997732a263e9e824bc150b45ed145ecd
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102176442"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107738981"
 ---
 # <a name="what-are-security-policies-initiatives-and-recommendations"></a>Güvenlik ilkeleri, girişimler ve öneriler nelerdir?
 
@@ -35,7 +35,7 @@ Bir güvenlik girişimi, iş yüklerinizin istenen yapılandırmasını tanımla
 
 Güvenlik ilkeleri gibi güvenlik merkezi girişimleri de Azure Ilkesinde oluşturulur. İlkelerinizi yönetmek, girişimleri derlemek ve birden çok aboneliğe veya tüm yönetim gruplarına girişimler atamak için [Azure ilkesini](../governance/policy/overview.md) kullanabilirsiniz.
 
-Azure Güvenlik Merkezi 'ndeki her aboneliğe otomatik olarak atanan varsayılan girişim, Azure Güvenlik kıyaslamaktır. Bu kıyaslama, yaygın uyumluluk çerçevelerine göre güvenlik ve uyum en iyi uygulamaları için Microsoft tarafından yazılan, Azure 'a özgü bir dizi kılavuzlardır. Bu, yaygın olarak kullanılan kıyaslama, [Internet güvenliği (CIS) Için merkezden](https://www.cisecurity.org/benchmark/azure/) ve [ulusal standartlar ve teknolojı Enstitüsü (NIST)](https://www.nist.gov/) ile bulut merkezli güvenliğe odaklanarak yapılar oluşturur. [Azure Güvenlik Karşılaştırması](../security/benchmarks/introduction.md) hakkında daha fazla bilgi edinin.
+Azure Güvenlik Merkezi 'ndeki her aboneliğe otomatik olarak atanan varsayılan girişim, Azure Güvenlik kıyaslamaktır. Bu kıyaslama, yaygın uyumluluk çerçevelerine göre güvenlik ve uyum en iyi uygulamaları için Microsoft tarafından yazılan, Azure 'a özgü bir dizi kılavuzlardır. Bu, yaygın olarak kullanılan kıyaslama, [Internet güvenliği (CIS) Için merkezden](https://www.cisecurity.org/benchmark/azure/) ve [ulusal standartlar ve teknolojı Enstitüsü (NIST)](https://www.nist.gov/) ile bulut merkezli güvenliğe odaklanarak yapılar oluşturur. [Azure Güvenlik Karşılaştırması](https://docs.microsoft.com/security/benchmark/azure/introduction) hakkında daha fazla bilgi edinin.
 
 Güvenlik Merkezi, güvenlik girişimleri ve ilkeleriyle çalışmak için aşağıdaki seçenekleri sunar:
 

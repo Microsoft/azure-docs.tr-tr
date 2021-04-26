@@ -14,12 +14,12 @@ ms.devlang: ne
 ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
-ms.openlocfilehash: 002a7c61d6760decf65016870739ab62b15d5c72
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 55bf597d8df18085fc9a500a9213a6abe59fd5e3
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103013695"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106108261"
 ---
 # <a name="filters-and-dynamic-manifests"></a>Filtreler ve dinamik bildirimler
 
@@ -27,7 +27,7 @@ ms.locfileid: "103013695"
 
 > [!div class="op_single_selector" title1="Kullanmakta olduğunuz Media Services sürümünü seçin:"]
 > * [Sürüm 2](media-services-dynamic-manifest-overview.md)
-> * [Sürüm 3](../latest/filters-dynamic-manifest-overview.md)
+> * [Sürüm 3](../latest/filters-dynamic-manifest-concept.md)
 
 2,17 sürümünden itibaren, Media Services varlıklarınız için filtreler tanımlamanızı sağlar. Bu filtreler, müşterilerinizin şu şekilde işlem yapmasına izin veren sunucu tarafı kurallarıdır: videonun yalnızca bir bölümünü kayıttan yürütme (videonun tamamını çalmak yerine) veya yalnızca müşterinizin cihazının işleyebileceği ses ve video çevirilerinin bir alt kümesini (varlıkla ilişkili tüm yorumlamalar yerine) belirtin. Varlıklarınızın bu şekilde filtrelenmesi, müşterinizin, belirtilen filtreye göre video akışı isteği üzerine oluşturulan **dinamik bildirimle** gerçekleştirilir.
 

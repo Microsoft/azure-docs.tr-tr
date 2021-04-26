@@ -9,22 +9,23 @@ ms.author: twright
 ms.reviewer: mikeray
 ms.date: 09/22/2020
 ms.topic: how-to
-ms.openlocfilehash: 60c5ddcc67db6e4a0649458cfbd5c2949aa9a32a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ce46b7afe7344fabde03805dc2a0977411be5811
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102202051"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107716088"
 ---
 # <a name="delete-resources-from-azure"></a>Azure'dan kaynakları silme
 
-> [!NOTE]
->  Bu makaledeki kaynakları silmeye yönelik seçenekler geri alınamaz!
+Bu makalede, Azure 'dan kaynakların nasıl silineceği açıklanır.
 
-> [!NOTE]
->  Şu anda Azure Arc etkin veri Hizmetleri için sunulan tek bağlantı modu, dolaylı olarak bağlı mod olduğundan, Kubernetes 'ten bir örneği silmek, Azure 'dan kaldırmayacak ve bir örneği Azure 'dan silmeden Kubernetes 'ten kaldırmayacaktır.  Şu anda bir kaynağı silmek iki adımlı bir işlemdir ve bu, gelecekte iyileştirilerek sunulacaktır.  İleri, Kubernetes, Truth kaynağı olacak ve Azure onu yansıtacak şekilde güncelleştirilecektir.
+> [!WARNING]
+> Kaynakları bu makalede açıklandığı gibi sildiğinizde, bu eylemler geri alınamaz.
 
-Bazı durumlarda, Azure Arc etkin veri Hizmetleri kaynaklarını Azure Resource Manager (ARM) içinde el ile silmeniz gerekebilir.  Aşağıdaki seçeneklerden herhangi birini kullanarak bu kaynakları silebilirsiniz.
+Dolaylı bağlanma modunda, Kubernetes 'den bir örneği silmek, Azure 'dan kaldırmayacak ve Azure 'dan bir örnek silinirken, Kubernetes 'ten kaldırılmaz. Dolaylı bağlantı modu için, bir kaynağı silmek iki adımlı bir işlemdir ve bu işlem gelecekte iyileştirilmeyecektir. Kubernetes, Truth kaynağı olacak ve Portal onu yansıtacak şekilde güncelleştirilecektir.
+
+Bazı durumlarda, Azure 'da Azure Arc etkin veri Hizmetleri kaynaklarını el ile silmeniz gerekebilir.  Aşağıdaki seçeneklerden herhangi birini kullanarak bu kaynakları silebilirsiniz.
 
 - [Azure'dan kaynakları silme](#delete-resources-from-azure)
   - [Kaynak grubunun tamamını silme](#delete-an-entire-resource-group)
@@ -38,6 +39,7 @@ Bazı durumlarda, Azure Arc etkin veri Hizmetleri kaynaklarını Azure Resource 
 [!INCLUDE [azure-arc-data-preview](../../../includes/azure-arc-data-preview.md)]
 
 ## <a name="delete-an-entire-resource-group"></a>Kaynak grubunun tamamını silme
+
 Azure Arc etkin veri Hizmetleri için belirli ve ayrılmış bir kaynak grubu kullanıyorsanız ve kaynak grubunun içindeki *her şeyi* silmek istiyorsanız, içindeki her şeyi silecek kaynak grubunu silebilirsiniz.  
 
 Azure portal bir kaynak grubunu, aşağıdakileri yaparak silebilirsiniz:

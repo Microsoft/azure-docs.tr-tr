@@ -4,17 +4,17 @@ description: Azure Kubernetes Service (aks) içinde Pod SecurityPolicy kullanara
 services: container-service
 ms.topic: article
 ms.date: 03/25/2021
-ms.openlocfilehash: d95cdb51136511bdd8529c829c3f680d19e14ba9
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: d70b8e8efbf96e50575845ac88993012fed936d5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105611778"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767430"
 ---
 # <a name="preview---secure-your-cluster-using-pod-security-policies-in-azure-kubernetes-service-aks"></a>Önizleme-Azure Kubernetes Service (AKS) ' de Pod güvenlik ilkelerini kullanarak kümenizin güvenliğini sağlama
 
 > [!WARNING]
-> **Bu belgede açıklanan özellik, Pod güvenlik ilkesi (Önizleme), Kubernetes sürüm 1,21 ile kullanımdan kalkmaya başlayacak ve sürüm 1,25 ' de kaldırılır.** Kubernetes yukarı akış, kilometre taşına yaklaşırsa, Kubernetes topluluğu, önemli alternatifleri belgelemek için çalışır. Önceki kullanımdan kaldırma duyurusu, müşteriler için uygun bir seçenek olmadığından zamanında yapılmıştır. Kubernetes Community bir alternatif üzerinde çalıştık. artık Kubernetes 'in önüne geçmek için bir basmayla ilgili değildir.
+> **Bu belgede açıklanan özellik, Pod güvenlik ilkesi (Önizleme), Kubernetes sürüm 1,21 ile [kullanımdan kalkmaya](https://kubernetes.io/blog/2021/04/06/podsecuritypolicy-deprecation-past-present-and-future/) başlayacak ve sürüm 1,25 ' de kaldırılır.** Kubernetes yukarı akış, kilometre taşına yaklaşırsa, Kubernetes topluluğu, önemli alternatifleri belgelemek için çalışır. Önceki kullanımdan kaldırma duyurusu, müşteriler için uygun bir seçenek olmadığından zamanında yapılmıştır. Kubernetes Community bir alternatif üzerinde çalıştık. artık Kubernetes 'in önüne geçmek için bir basmayla ilgili değildir. 
 >
 > Pod güvenlik ilkesi (Önizleme) kullanım dışı olduktan sonra, gelecekteki küme yükseltmelerini gerçekleştirmek ve Azure desteği içinde kalmak için kullanımdan kaldırılan özelliği kullanarak mevcut kümelerin özelliğini devre dışı bırakmanız gerekir.
 
@@ -460,15 +460,15 @@ Pod ağ trafiğini sınırlama hakkında daha fazla bilgi için bkz. [aks 'deki 
 [aks-quickstart-portal]: kubernetes-walkthrough-portal.md
 [install-azure-cli]: /cli/azure/install-azure-cli
 [network-policies]: use-network-policies.md
-[az-feature-register]: /cli/azure/feature#az-feature-register
-[az-feature-list]: /cli/azure/feature#az-feature-list
-[az-provider-register]: /cli/azure/provider#az-provider-register
-[az-aks-get-credentials]: /cli/azure/aks#az-aks-get-credentials
+[az-feature-register]: /cli/azure/feature#az_feature_register
+[az-feature-list]: /cli/azure/feature#az_feature_list
+[az-provider-register]: /cli/azure/provider#az_provider_register
+[az-aks-get-credentials]: /cli/azure/aks#az_aks_get_credentials
 [az-aks-update]: /cli/azure/ext/aks-preview/aks#ext-aks-preview-az-aks-update
-[az-extension-add]: /cli/azure/extension#az-extension-add
+[az-extension-add]: /cli/azure/extension#az_extension_add
 [aks-support-policies]: support-policies.md
 [aks-faq]: faq.md
-[az-extension-add]: /cli/azure/extension#az-extension-add
-[az-extension-update]: /cli/azure/extension#az-extension-update
+[az-extension-add]: /cli/azure/extension#az_extension_add
+[az-extension-update]: /cli/azure/extension#az_extension_update
 [policy-samples]: ./policy-reference.md#microsoftcontainerservice
 [azure-policy-add-on]: ../governance/policy/concepts/policy-for-kubernetes.md

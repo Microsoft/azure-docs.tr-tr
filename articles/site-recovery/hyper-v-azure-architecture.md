@@ -1,18 +1,15 @@
 ---
 title: Azure Site Recovery 'de Hyper-V olağanüstü durum kurtarma mimarisi
 description: Bu makalede, şirket içi Hyper-V VM 'Leri (VMM olmadan) Azure Site Recovery hizmetiyle Azure 'a olağanüstü durum kurtarma dağıtımı sırasında kullanılan bileşenlere ve mimariye ilişkin bir genel bakış sunulmaktadır.
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/14/2019
-ms.author: raynew
-ms.openlocfilehash: c5025b83619b505728bfdf5c4e1ccc81d3bb225e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 73771a70bfe14e46fb08db75fd4baa522caaadb8
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97654770"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579610"
 ---
 # <a name="hyper-v-to-azure-disaster-recovery-architecture"></a>Hyper-V-Azure olağanüstü durum kurtarma mimarisi
 

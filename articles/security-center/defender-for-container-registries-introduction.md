@@ -3,16 +3,16 @@ title: Kapsayıcı için Azure Defender kayıt defterleri-avantajlar ve Özellik
 description: Kapsayıcı kayıt defterleri için Azure Defender 'ın avantajları ve özellikleri hakkında bilgi edinin.
 author: memildin
 ms.author: memildin
-ms.date: 9/22/2020
+ms.date: 04/07/2021
 ms.topic: overview
 ms.service: security-center
 manager: rkarlin
-ms.openlocfilehash: ab2ad15da9b1676924197d28e734f6baf59a02ef
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 4840fc27133b1d92cb8aaad80921f9d21901569d
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102176646"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107010701"
 ---
 # <a name="introduction-to-azure-defender-for-container-registries"></a>Kapsayıcı kayıt defterleri için Azure Defender’a giriş
 
@@ -47,7 +47,7 @@ Bir görüntü taraması için üç tetikleyici vardır:
 
 - **Gönderim sırasında** , Kayıt defterinize her görüntü gönderildiğinde, güvenlik merkezi bu görüntüyü otomatik olarak tarar. Bir görüntünün taramasını tetiklemek için onu deponuza gönderin.
 
-- **Yakın zamanda çekilen** her gün yeni güvenlik açıkları bulunduğundan, **kapsayıcı kayıt defterleri için Azure Defender** , son 30 gün içinde çekilen tüm görüntüyü de tarar. Yeniden tarama için ek ücret alınmaz; Yukarıda belirtildiği gibi, her görüntü için bir kez faturalandırılırsınız.
+- **Yakın zamanda çekilen** her gün yeni güvenlik açıkları bulunduğundan, **kapsayıcı kayıt defterleri için Azure Defender** , haftalık olarak, son 30 gün içinde çekilen tüm resimleri de tarar. Bu yeniden taramalar için ek ücret alınmaz. Yukarıda belirtildiği gibi, her görüntü için bir kez faturalandırılırsınız.
 
 - **Import** -Azure Container Registry, görüntüleri Docker Hub, Microsoft Container Registry veya başka bir Azure Container Registry 'den Kayıt defterinize getirmek için içeri aktarma araçlarına sahiptir. **Kapsayıcı kayıt defterleri Için Azure Defender** , içeri aktardığınız tüm desteklenen görüntüleri tarar. Kapsayıcı [görüntülerini kapsayıcı kayıt defterine Içeri aktarma](../container-registry/container-registry-import-images.md)hakkında daha fazla bilgi edinin.
  

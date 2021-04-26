@@ -2,13 +2,13 @@
 title: Visual Studio kaynak grubu projelerini oluşturma & dağıtma
 description: Azure Kaynak grubu projesi oluşturmak ve kaynakları Azure 'a dağıtmak için Visual Studio 'Yu kullanın.
 ms.topic: conceptual
-ms.date: 10/16/2019
-ms.openlocfilehash: f1a06a3e89c5fd2ea8906ff9a438c170f135d6ec
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/12/2021
+ms.openlocfilehash: 4c0e19042506e0cf1772398b0a02b81f0245b1c7
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98704423"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306985"
 ---
 # <a name="creating-and-deploying-azure-resource-groups-through-visual-studio"></a>Visual Studio aracılığıyla Azure kaynak grupları oluşturma ve dağıtma
 
@@ -41,13 +41,13 @@ Bu bölümde, bir **Web uygulaması** şablonuyla bir Azure Kaynak grubu projesi
 
     Web uygulaması şablonunu seçtiğinizden, aşağıdaki dosyaları görürsünüz:
 
-   | Dosya adı | Description |
+   | Dosya adı | Açıklama |
    | --- | --- |
    | Deploy-AzureResourceGroup.ps1 |Azure Resource Manager’da dağıtılacak PowerShell komutlarını çalıştıran PowerShell betiği. Visual Studio, şablonunuzu dağıtmak için bu PowerShell betiğini kullanır. |
    | Üzerinde WebSite.js |Azure’da dağıtmak istediğiniz altyapıyı tanımlayan Resource Manager şablonu ve dağıtım sırasında sağlayabileceğiniz parametreler. Resource Manager’ın kaynakları doğru sırayla dağıtmasını sağlamak için kaynaklarınız arasındaki bağımlılıkları da tanımlar. |
-   | Üzerinde WebSite.parameters.js |Şablon tarafından gereken değerleri içeren bir parametre dosyası. Her bir dağıtımı özelleştirmek için parametre değerlerini geçirirsiniz. |
+   | Üzerinde WebSite.parameters.js |Şablon tarafından gereken değerleri içeren bir parametre dosyası. Her bir dağıtımı özelleştirmek için parametre değerlerini geçirirsiniz. **Derleme eyleminin** **içerik** olarak ayarlandığını unutmayın. Daha fazla parametre dosyası eklerseniz, derleme eyleminin **içerik** olarak ayarlandığından emin olun. |
 
-    Tüm kaynak grubu dağıtım projeleri bu temel dosyaları içerir. Diğer projeler diğer işlevleri desteklemek için ek dosyalar içerebilir.
+    Tüm kaynak grubu dağıtım projeleri bu temel dosyaları içerir. Diğer projelerde diğer işlevleri desteklemek için daha fazla dosya olabilir.
 
 ## <a name="customize-resource-manager-template"></a>Kaynak Yöneticisi şablonu özelleştirme
 
@@ -245,7 +245,7 @@ Az Module betiğini kullanıyorsanız, şablonunuzda yapmanız gereken küçük 
 "packageUri": "[concat(parameters('_artifactsLocation'), parameters('ExampleAppPackageFolder'), '/', parameters('ExampleAppPackageFileName'), parameters('_artifactsLocationSasToken'))]",
 ```
 
-Yukarıdaki örnekte `'/',` **Parametreler arasında (' _artifactsLocation ')** ve **parametrelerden (' exampleapppackagefolder ')** olmadığını unutmayın.
+Önceki örnekte `'/',` **Parametreler (' _artifactsLocation ')** ve **Parametreler (' exampleapppackagefolder ')** arasında bir uyarı yok.
 
 Projeyi yeniden derleyin. Projeyi oluşturmak, dağıtmanız gereken dosyaların hazırlama klasörüne eklendiğinden emin olmanızı sağlar.
 

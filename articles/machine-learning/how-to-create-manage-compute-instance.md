@@ -11,12 +11,12 @@ ms.author: sgilley
 author: sdgilley
 ms.reviewer: sgilley
 ms.date: 10/02/2020
-ms.openlocfilehash: 2778f52b312e5d2fda7879b834fcd204285b7144
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 5ac525ae062efca25601c9e63a5c8f16f2be29be
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105628960"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861238"
 ---
 # <a name="create-and-manage-an-azure-machine-learning-compute-instance"></a>Azure Machine Learning işlem örneği oluşturma ve yönetme
 
@@ -93,7 +93,7 @@ Bu örnekte kullanılan sınıflar, Yöntemler ve parametreler hakkında daha fa
 az ml computetarget create computeinstance  -n instance -s "STANDARD_D3_V2" -v
 ```
 
-Daha fazla bilgi için, [az ml computetarget Create computeinstance](/cli/azure/ext/azure-cli-ml/ml/computetarget/create#ext_azure_cli_ml_az_ml_computetarget_create_computeinstance) Reference bölümüne bakın.
+Daha fazla bilgi için, [az ml computetarget Create computeinstance](/cli/azure/ml/computetarget/create#az_ml_computetarget_create_computeinstance) Reference bölümüne bakın.
 
 # <a name="studio"></a>[Studio](#tab/azure-studio)
 
@@ -181,7 +181,7 @@ Aşağıdaki örneklerde, işlem örneği adı **örnek**
     az ml computetarget stop computeinstance -n instance -v
     ```
 
-    Daha fazla bilgi için bkz. [az ml computetarget stop computeinstance](/cli/azure/ext/azure-cli-ml/ml/computetarget/computeinstance#ext-azure-cli-ml-az-ml-computetarget-computeinstance-stop).
+    Daha fazla bilgi için bkz. [az ml computetarget stop computeinstance](/cli/azure/ml/computetarget/computeinstance#az_ml_computetarget_computeinstance_stop).
 
 * Başlangıç 
 
@@ -189,7 +189,7 @@ Aşağıdaki örneklerde, işlem örneği adı **örnek**
     az ml computetarget start computeinstance -n instance -v
     ```
 
-    Daha fazla bilgi için bkz. [az ml computetarget start computeinstance](/cli/azure/ext/azure-cli-ml/ml/computetarget/computeinstance#ext-azure-cli-ml-az-ml-computetarget-computeinstance-start).
+    Daha fazla bilgi için bkz. [az ml computetarget start computeinstance](/cli/azure/ml/computetarget/computeinstance#az_ml_computetarget_computeinstance_start).
 
 * Yeniden başlat 
 
@@ -197,7 +197,7 @@ Aşağıdaki örneklerde, işlem örneği adı **örnek**
     az ml computetarget restart computeinstance -n instance -v
     ```
 
-    Daha fazla bilgi için bkz. [az ml computetarget restart computeinstance](/cli/azure/ext/azure-cli-ml/ml/computetarget/computeinstance#ext-azure-cli-ml-az-ml-computetarget-computeinstance-restart).
+    Daha fazla bilgi için bkz. [az ml computetarget restart computeinstance](/cli/azure/ml/computetarget/computeinstance#az_ml_computetarget_computeinstance_restart).
 
 * Sil
 
@@ -205,7 +205,7 @@ Aşağıdaki örneklerde, işlem örneği adı **örnek**
     az ml computetarget delete -n instance -v
     ```
 
-    Daha fazla bilgi için bkz. [az ml computetarget Delete computeinstance](/cli/azure/ext/azure-cli-ml/ml/computetarget#ext-azure-cli-ml-az-ml-computetarget-delete).
+    Daha fazla bilgi için bkz. [az ml computetarget Delete computeinstance](/cli/azure/ml/computetarget#az_ml_computetarget_delete).
 
 # <a name="studio"></a>[Studio](#tab/azure-studio)
 

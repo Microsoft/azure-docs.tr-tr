@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 12/10/2019
 ms.author: jeedes
 ms.openlocfilehash: 849236b9ac33cec92cc145bb32b4271b73476057
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "97608825"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-timeoffmanager"></a>Öğretici: TimeOffManager ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
@@ -140,13 +140,13 @@ Bu bölümde, TimeOffManager erişimi vererek Azure çoklu oturum açma özelli�
 1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-## <a name="configure-timeoffmanager-sso"></a>TimeOffManager SSO 'yu yapılandırma
+## <a name="configure-timeoffmanager-sso&quot;></a>TimeOffManager SSO 'yu yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, TimeOffManager şirket sitenizde yönetici olarak oturum açın.
 
 2. **Hesap \> hesabı seçenekleri \> tek Sign-On ayarları**' na gidin.
    
-    ![Ekran görüntüsü, hesap seçeneklerinden seçilen tek Sign-On ayarlarını gösterir.](./media/timeoffmanager-tutorial/ic795917.png "Tek Sign-On ayarları")
+    ![Ekran görüntüsü, hesap seçeneklerinden seçilen tek Sign-On ayarlarını gösterir.](./media/timeoffmanager-tutorial/ic795917.png &quot;Tek Sign-On ayarları")
 
 3. **Tek Sign-On ayarları** bölümünde aşağıdaki adımları gerçekleştirin:
    

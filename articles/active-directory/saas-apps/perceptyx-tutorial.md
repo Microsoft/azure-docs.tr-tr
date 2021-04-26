@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 06/14/2019
 ms.author: jeedes
 ms.openlocfilehash: 30dd7068a8ba2d0e30a2a4308e124886c4439641
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92515486"
 ---
 # <a name="tutorial-integrate-perceptyx-with-azure-active-directory"></a>Öğretici: Perceptyx ile tümleştirin Azure Active Directory

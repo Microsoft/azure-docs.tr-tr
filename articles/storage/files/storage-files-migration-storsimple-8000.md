@@ -7,12 +7,12 @@ ms.topic: how-to
 ms.date: 10/16/2020
 ms.author: fauhse
 ms.subservice: files
-ms.openlocfilehash: 814a2f7e32f173111e45fff02f00c3e4d2a9a670
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7bde8fe404e0839bf14500bff4fb92ce8cc4ea04
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103601092"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717360"
 ---
 # <a name="storsimple-8100-and-8600-migration-to-azure-file-sync"></a>StorSimple 8100 ve 8600 Azure Dosya Eşitleme 'e geçiş
 
@@ -65,11 +65,11 @@ StorSimple gerecinizi ilk kez ayarladığınızda, "hizmet veri şifreleme anaht
 
 Başarılı bir geçiş için "hizmet verileri şifreleme anahtarı" gereklidir. Bu anahtarı, stokunuzdaki her bir uygulama için bir tane olmak üzere kayıtlarınızdaki bu anahtarı almak için iyi bir zamandır.
 
-Kayıtlarınızda anahtarları bulamıyorsanız, Gereç içinden anahtarı alabilirsiniz. Her gereç benzersiz bir şifreleme anahtarına sahiptir. Anahtarı almak için:
+Kayıtlarınızda anahtarları bulamıyorsanız, Gereç içinden yeni bir anahtar oluşturabilirsiniz. Her gereç benzersiz bir şifreleme anahtarına sahiptir.
 
-* Azure portal üzerinden Microsoft Azure bir destek isteği dosyası. İstek, StorSimple cihaz seri numaranızı ve "hizmet veri şifreleme anahtarını" alma isteğini içermelidir.
-* StorSimple Destek Mühendisi, bir sanal Toplantı isteğiyle sizinle iletişim kuracaktır.
-* Toplantıdan başlamadan önce, [bir seri konsol](../../storsimple/storsimple-8000-windows-powershell-administration.md#connect-to-windows-powershell-for-storsimple-via-the-device-serial-console) veya [uzak bir PowerShell oturumu](../../storsimple/storsimple-8000-windows-powershell-administration.md#connect-remotely-to-storsimple-using-windows-powershell-for-storsimple)aracılığıyla StorSimple gerecinize bağlantığınızdan emin olun.
+#### <a name="change-the-service-data-encryption-key"></a>Hizmet veri şifreleme anahtarını değiştirme
+
+[!INCLUDE [storage-files-migration-generate-key](../../../includes/storage-files-migration-generate-key.md)]
 
 > [!CAUTION]
 > StorSimple gerecinize nasıl bağlanacağınıza karar verirken aşağıdakileri göz önünde bulundurun:
@@ -160,7 +160,7 @@ StorSimple verilerinizin (depolama hesabı) Şu anda bulunduğu farklı bir böl
 
 #### <a name="performance"></a>Performans
 
-Azure dosya paylaşımları veya standart depolama için Premium Depolama (SSD) seçme seçeneğiniz vardır. Standart depolama, [bir dosya paylaşımının çeşitli katmanlarını](storage-how-to-create-file-share.md#changing-the-tier-of-an-azure-file-share)içerir. Standart depolama, çoğu müşterinin StorSimple 'dan geçiş yapma konusunda doğru seçenektir.
+Azure dosya paylaşımları veya standart depolama için Premium Depolama (SSD) seçme seçeneğiniz vardır. Standart depolama, [bir dosya paylaşımının çeşitli katmanlarını](storage-how-to-create-file-share.md#change-the-tier-of-an-azure-file-share)içerir. Standart depolama, çoğu müşterinin StorSimple 'dan geçiş yapma konusunda doğru seçenektir.
 
 Hala emin değil misiniz?
 
@@ -213,7 +213,7 @@ Depolama hesaplarınız oluşturulduktan sonra depolama hesabının **dosya payl
         :::image type="content" source="media/storage-files-migration-storsimple-8000/storage-files-migration-storsimple-8000-new-share.png" alt-text="Yeni dosya paylaşma Kullanıcı arabirimini gösteren Azure portal ekran görüntüsü.":::
     :::column-end:::
     :::column:::
-        </br>**Ad**</br>Küçük harfler, rakamlar ve tireler desteklenir.</br></br>**Kota**</br>Buradaki kota, bir Windows Server örneğindeki SMB sabit kotasına benzer. En iyi yöntem, kotaya ulaşıldığında geçiş ve diğer hizmetleriniz başarısız olacağı için burada bir kota ayarlanmamalıdır.</br></br>**Katmanlar**</br>Yeni dosya paylaşımınız için **Iyileştirilmiş işlem** seçin. Geçiş sırasında birçok işlem gerçekleşmeyecektir. Daha sonra, katmanınızı daha sonra iş yükünüze en uygun katmana değiştirme maliyeti daha verimli.
+        </br>**Ad**</br>Küçük harfler, rakamlar ve tireler desteklenir.</br></br>**Kotasının**</br>Buradaki kota, bir Windows Server örneğindeki SMB sabit kotasına benzer. En iyi yöntem, kotaya ulaşıldığında geçiş ve diğer hizmetleriniz başarısız olacağı için burada bir kota ayarlanmamalıdır.</br></br>**Katmanlar**</br>Yeni dosya paylaşımınız için **Iyileştirilmiş işlem** seçin. Geçiş sırasında birçok işlem gerçekleşmeyecektir. Daha sonra, katmanınızı daha sonra iş yükünüze en uygun katmana değiştirme maliyeti daha verimli.
     :::column-end:::
 :::row-end:::
 

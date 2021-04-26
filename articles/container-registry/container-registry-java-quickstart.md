@@ -2,16 +2,19 @@
 title: Hızlı başlangıç-Maven ve JIB kullanarak Azure Container Registry Java kapsayıcı görüntülerini derleyin ve gönderin
 description: Kapsayıcılı bir Java uygulaması oluşturun ve Maven JIB eklentisini kullanarak Azure Container Registry gönderin.
 author: KarlErickson
-ms.custom: devx-track-java, devx-track-azurecli
 ms.author: karler
-ms.topic: quickstart
 ms.date: 02/26/2020
-ms.openlocfilehash: 9e400ee0bae2690a84f9cfd3f6a76359e08eabc2
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.topic: quickstart
+ms.custom:
+- devx-track-java
+- devx-track-azurecli
+- mode-api
+ms.openlocfilehash: 4d805458d90c73de879a9b87d5b08c98a8f1a250
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92018347"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537304"
 ---
 # <a name="quickstart-build-and-push-java-container-images-to-azure-container-registry"></a>Hızlı başlangıç: Java kapsayıcı görüntülerini derleyin ve Azure Container Registry gönderin
 

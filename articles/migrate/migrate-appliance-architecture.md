@@ -6,12 +6,12 @@ ms.author: vivikram
 ms.manager: abhemraj
 ms.topic: conceptual
 ms.date: 03/18/2021
-ms.openlocfilehash: f3a94576ef58eabf9d747c6e6c3a6372569d4cf1
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 4fc71f3242cc5607acebc68b62c5c0565b8f8e56
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104785249"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107715019"
 ---
 # <a name="azure-migrate-appliance-architecture"></a>Azure Geçişi aleti mimarisi
 
@@ -63,7 +63,7 @@ Gereç, aşağıdaki işlemi kullanarak bulma kaynaklarıyla iletişim kurar.
 ---|---|---|---
 **Bulmayı Başlat** | Gereç, varsayılan olarak TCP bağlantı noktası 443 üzerindeki vCenter Server ile iletişim kurar. VCenter sunucusu farklı bir bağlantı noktasını dinliyorsa, bunu gereç Yapılandırma Yöneticisi 'nde yapılandırabilirsiniz. | Gereç, WinRM bağlantı noktası 5985 (HTTP) üzerindeki Hyper-V konaklarıyla iletişim kurar. | Gereç, 22 (TCP) bağlantı noktası üzerinden Linux sunucularıyla WinRM bağlantı noktası 5985 (HTTP) üzerinden Windows sunucularıyla iletişim kurar.
 **Yapılandırma ve performans meta verilerini toplayın** | Gereç, bağlantı noktası 443 (varsayılan bağlantı noktası) veya başka herhangi bir bağlantı noktası üzerinden vCenter Server, vSphere API 'Leri kullanarak, vCenter Server üzerinde çalışan sunucuların meta verilerini toplar. | Gereç, 5985 numaralı bağlantı noktasında konaklarla Genel Bilgi Modeli (CıM) oturumu kullanarak Hyper-V konaklarında çalışan sunucuların meta verilerini toplar.| Gereç, 5985 numaralı bağlantı noktasında ve numaralı bağlantı noktasında SSH bağlantısı kullanan Linux sunucularından Genel Bilgi Modeli (CıM) oturumu kullanarak Windows sunucularından meta verileri toplar.
-**Bulgu verileri gönder** | Gereç, toplanan verileri Azure geçişi 'ne gönderir: bulma ve değerlendirme ve Azure geçişi: SSL bağlantı noktası 443 üzerinden sunucu geçişi.<br/><br/> Gereç, internet üzerinden veya ExpressRoute aracılığıyla Azure 'a bağlanabilir (Microsoft eşlemesi gerektirir). | Gereç, toplanan verileri Azure geçişi: SSL bağlantı noktası 443 üzerinden bulma ve değerlendirme 'a gönderir.<br/><br/> Gereç, internet üzerinden veya ExpressRoute aracılığıyla Azure 'a bağlanabilir (Microsoft eşlemesi gerektirir).| Gereç, toplanan verileri Azure geçişi: SSL bağlantı noktası 443 üzerinden bulma ve değerlendirme 'a gönderir.<br/><br/> Gereç, internet üzerinden veya ExpressRoute aracılığıyla Azure 'a bağlanabilir (Microsoft eşlemesi gerektirir).
+**Bulgu verileri gönder** | Gereç, toplanan verileri Azure geçişi 'ne gönderir: bulma ve değerlendirme ve Azure geçişi: SSL bağlantı noktası 443 üzerinden sunucu geçişi.<br/><br/>  Gereç, internet üzerinden veya ExpressRoute özel eşlemesi ya da Microsoft eşleme devreleri aracılığıyla Azure 'a bağlanabilir. | Gereç, toplanan verileri Azure geçişi: SSL bağlantı noktası 443 üzerinden bulma ve değerlendirme 'a gönderir.<br/><br/> Gereç, internet üzerinden veya ExpressRoute özel eşlemesi ya da Microsoft eşleme devreleri aracılığıyla Azure 'a bağlanabilir. | Gereç, toplanan verileri Azure geçişi: SSL bağlantı noktası 443 üzerinden bulma ve değerlendirme 'a gönderir.<br/><br/> Gereç, internet üzerinden veya ExpressRoute özel eşlemesi ya da Microsoft eşleme devreleri aracılığıyla Azure 'a bağlanabilir. 
 **Veri toplama sıklığı** | Yapılandırma meta verileri, her 30 dakikada bir toplanır ve gönderilir. <br/><br/> Performans meta verileri 20 saniyede bir toplanır ve her 10 dakikada bir veri noktasını Azure 'a göndermek için toplanır. <br/><br/> Yazılım envanteri verileri her 12 saatte bir Azure 'a gönderilir. <br/><br/> Aracısız bağımlılık verileri 5 dakikada bir toplanır ve her 6 saatte bir Azure 'a gönderilir. <br/><br/> SQL Server yapılandırma verileri her 24 saatte bir güncelleştirilir ve performans verileri her 30 saniyede yakalanır.| Yapılandırma meta verileri, her 30 dakikada bir toplanır ve gönderilir. <br/><br/> Performans meta verileri 30 saniyede bir toplanır ve Azure 'a her 10 dakikada bir veri noktası göndermek için toplanır.|  Yapılandırma meta verileri, her 30 dakikada bir toplanır ve gönderilir. <br/><br/> Performans meta verileri 5 dakikada bir toplanır ve her 10 dakikada bir veri noktasını Azure 'a göndermek için toplanır.
 **Değerlendirme ve geçirme** | Azure geçişi: bulma ve değerlendirme aracı kullanılarak gereç tarafından toplanan meta verilerden değerlendirmeler oluşturabilirsiniz.<br/><br/>Ayrıca, Azure geçişi: sunucu geçiş aracını kullanarak, aracısız sunucu çoğaltmasını organize etmek için VMware ortamınızda çalışan sunucuları geçirmeyi de başlatabilirsiniz.| Azure geçişi: bulma ve değerlendirme aracı kullanılarak gereç tarafından toplanan meta verilerden değerlendirmeler oluşturabilirsiniz. | Azure geçişi: bulma ve değerlendirme aracı kullanılarak gereç tarafından toplanan meta verilerden değerlendirmeler oluşturabilirsiniz.
 

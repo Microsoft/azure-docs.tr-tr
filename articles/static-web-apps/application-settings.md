@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.date: 05/08/2020
 ms.author: buhollan
 ms.custom: devx-track-js
-ms.openlocfilehash: 2886cb6433c4f8a65eb0661eded0ddd08248e137
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 152b96bee63b6d2280a807ca53842ed3a67ab67d
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102219191"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106279774"
 ---
 # <a name="configure-application-settings-for-azure-static-web-apps-preview"></a>Azure statik Web Apps önizlemesi için uygulama ayarlarını yapılandırma
 
@@ -168,4 +168,4 @@ Uygulama ayarları, Azure CLı aracılığıyla görüntüleyekullanılabilmekte
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Yerel geliştirme ayarlama](local-development.md)
+> [Ön uç çerçeveleri yapılandırma](front-end-frameworks.md)

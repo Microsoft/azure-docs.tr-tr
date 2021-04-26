@@ -1,21 +1,21 @@
 ---
 title: Azure Active Directory 'de parola tabanlı çoklu oturum açma sorunlarını giderme
 description: Parola tabanlı çoklu oturum açma için yapılandırılmış bir Azure AD uygulamasıyla ilgili sorunları giderin.
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: troubleshooting
 ms.date: 07/11/2017
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: asteen
-ms.openlocfilehash: fdbbc6c53e43d3ecc9fd4ecb563bd7ec798f8888
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2d9bcbdcb292f33d4b1f9dd1d0f6779d8d6cdd49
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99257596"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376486"
 ---
 # <a name="troubleshoot-password-based-single-sign-on-in-azure-ad"></a>Azure AD’de parola tabanlı çoklu oturum açma sorunlarını giderme
 

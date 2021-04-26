@@ -3,36 +3,28 @@ title: Windows sanal masaüstü 'Nü yapılandırma MALTı uygulaması PowerShel
 description: Windows sanal masaüstü için MSIX uygulama iliştirme için PowerShell betikleri oluşturma.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 12/14/2020
+ms.date: 04/13/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 5e45c51735e0b7ab4b263d3f3047b5848c82439d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: 43a8cb00804927784982999db13ee193c34f55ca
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98185776"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107835389"
 ---
-# <a name="create-powershell-scripts-for-msix-app-attach-preview"></a>MSIX uygulama iliştirme (Önizleme) için PowerShell betikleri oluşturma
-
-> [!IMPORTANT]
-> MSIX uygulama iliştirme Şu anda genel önizlemededir.
-> Bu önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve bunu üretim iş yükleri için kullanmanızı önermiyoruz. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+# <a name="create-powershell-scripts-for-msix-app-attach"></a>MSIX uygulama iliştirme için PowerShell betikleri oluşturma
 
 Bu konu başlığı altında, MSIX uygulama iliştirme için PowerShell betikleri ayarlama işleminde size yol gösterilir.
 
->[!IMPORTANT]
->Başlamadan önce, aboneliğinizde MSIX uygulama iliştirmeyi etkinleştirmek için [Bu formu](https://aka.ms/enablemsixappattach) doldurup gönderdiğinizden emin olun. Onaylanmış bir isteğiniz yoksa, MSIX uygulama iliştirme çalışmaz. İsteklerin onaylanması, iş günleri sırasında 24 saate kadar sürebilir. İsteğiniz kabul edildiğinde ve tamamlandığında bir e-posta alacaksınız.
-
 ## <a name="install-certificates"></a>Sertifikaları yükleme
 
-, MSIX uygulama iliştirme paketlerinizde AP 'leri barındıracak konak havuzundaki tüm oturum konaklarına sertifika yüklemelisiniz.
+Ana bilgisayar havuzundaki tüm oturum konaklarına sertifika yükleyerek, MSIX uygulama iliştirme paketinizdeki uygulamaları barındırabilirsiniz.
 
 Uygulamanız ortak güvenilir olmayan ya da kendinden imzalı bir sertifika kullanıyorsa, bunu nasıl yükleyeceksiniz:
 
 1. Pakete sağ tıklayın ve **Özellikler**' i seçin.
-2. Görüntülenen pencerede **dijital imzalar** sekmesini seçin. Aşağıdaki görüntüde gösterildiği gibi sekmedeki listede yalnızca bir öğe olmalıdır. Öğeyi vurgulamak için bu öğeyi seçin, sonra **Ayrıntılar**' ı seçin.
+2. Görüntülenen pencerede **dijital imzalar** sekmesini seçin. Sekmedeki listede yalnızca bir öğe olmalıdır. Öğeyi vurgulamak için bu öğeyi seçin, sonra **Ayrıntılar**' ı seçin.
 3. Dijital imza ayrıntıları penceresi göründüğünde **genel** sekmesini seçin, ardından **sertifikayı görüntüle**' yi seçin ve **sertifikayı yükler**' i seçin.
 4. Yükleyici açıldığında, depolama konumunuz olarak **yerel makine** ' yi seçin ve ardından **İleri**' yi seçin.
 5. Yükleyici, uygulamanın cihazınızda değişiklik yapmasına izin vermek isteyip istemediğinizi isterse, **Evet**' i seçin.

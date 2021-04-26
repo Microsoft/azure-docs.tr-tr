@@ -7,14 +7,14 @@ tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: conceptual
-ms.date: 12/14/2020
+ms.date: 03/31/2021
 ms.author: banders
-ms.openlocfilehash: 0d0dd5342cfc57da776e38ddef3df3b9c2199ac2
-ms.sourcegitcommit: 78ecfbc831405e8d0f932c9aafcdf59589f81978
+ms.openlocfilehash: b20134cbfb85c2dcaef1227e6390c8c6047ad5be
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/23/2021
-ms.locfileid: "98735784"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109399"
 ---
 # <a name="cancel-your-azure-subscription"></a>Azure aboneliğinizi iptal etme
 
@@ -77,6 +77,10 @@ Siparişiniz iptal edildikten sonra verilerinize erişmeniz gerekmesi veya fikri
 1. Silmek istediğiniz aboneliği seçin.
 1. **Genel Bakış**’ı ve sonra **Aboneliği sil**’i seçin.
 
+## <a name="delete-other-subscriptions"></a>Diğer abonelikleri Sil
+
+El ile silebilmeniz gereken tek abonelik türü, ücretsiz bir deneme aboneliğinden faydalanamaz. Kullandıkça Öde abonelikleri de dahil olmak üzere diğer tüm abonelik türleri yalnızca [abonelik iptal](#cancel-subscription-in-the-azure-portal) işlemi aracılığıyla silinir. Diğer bir deyişle, ücretsiz bir deneme aboneliği olmadığı takdirde aboneliği doğrudan silemezsiniz. Ancak, bir aboneliği iptal ettikten sonra, aboneliğin hemen silinmesini istemek için bir [Azure destek isteği](https://go.microsoft.com/fwlink/?linkid=2083458) oluşturabilirsiniz.
+
 ## <a name="reactivate-a-subscription"></a>Aboneliği yeniden etkinleştirme
 
 Aboneliğinizi Kullandıkça Öde tarifesine yanlışlıkla iptal ederseniz, [Azure Portal yeniden etkinleştirebilirsiniz](subscription-disabled.md).
@@ -89,7 +93,7 @@ Aboneliği iptal etmek için gerekli izinlere sahip olmayabilirsiniz. Çeşitli 
 
 ## <a name="how-do-i-delete-my-azure-account"></a>Azure hesabımı nasıl silerim?
 
-*Tüm kişisel bilgilerim dahil olmak üzere hesabımı kaldırmam gerekiyor. Etkin (Ücretsiz Deneme) aboneliklerimi zaten iptal ettim. Etkin aboneliğim yok ve hesabımı* tamamen silmek istiyorum.
+*Tüm kişisel bilgilerim dahil olmak üzere hesabımı kaldırdım. Etkin (ücretsiz deneme) aboneliklerimi zaten iptal ediyorum. Etkin Aboneliklerim yok ve Hesabımı tamamen silmek istiyor*.
 
 * Kuruluşunuz aracılığıyla edindiğiniz bir Azure Active Directory hesabınız varsa Azure AD yöneticisi hesabı silebilir. Ardından hizmetleriniz devre dışı bırakılır. Başka bir deyişle, sanal makineleriniz serbest bırakılır, geçici IP adresleri serbest bırakılır ve depolama salt okunur olur. Özetle, iptal ettiğinizde faturalama hemen durdurulur.
 

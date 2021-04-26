@@ -3,18 +3,18 @@ title: Azure EA portalı yönetimi
 description: Bu makalede, bir yöneticinin Azure EA portalında gerçekleştirdiği genel görevler açıklanmaktadır.
 author: bandersmsft
 ms.author: banders
-ms.date: 11/13/2020
+ms.date: 03/19/2021
 ms.topic: conceptual
 ms.service: cost-management-billing
 ms.subservice: enterprise
 ms.reviewer: boalcsva
 ms.custom: contperf-fy21q1
-ms.openlocfilehash: 3ce13a103b605ea7b6066e8b2868fa974f4e64e5
-ms.sourcegitcommit: d1e56036f3ecb79bfbdb2d6a84e6932ee6a0830e
+ms.openlocfilehash: 787f902311437e6ca8a679299ef7a28b34cee4ab
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/29/2021
-ms.locfileid: "99050575"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728419"
 ---
 # <a name="azure-ea-portal-administration"></a>Azure EA portalı yönetimi
 
@@ -36,7 +36,9 @@ Yalnızca mevcut Azure kuruluş yöneticileri, diğer kuruluş yöneticilerini o
 
 ### <a name="create-another-enterprise-administrator"></a>Başka bir kuruluş yöneticisi oluşturma
 
-Başka bir kuruluş yöneticisi eklemek için:
+Durumunuza göre aşağıdaki seçeneklerden birini kullanın.
+
+#### <a name="if-youre-already-an-enterprise-administrator"></a>Zaten bir kuruluş yöneticisiyseniz
 
 1. [Azure Enterprise Portal](https://ea.azure.com)'da oturum açın.
 1. **Yönet** > **Kayıt Ayrıntıları**'na gidin.
@@ -44,7 +46,11 @@ Başka bir kuruluş yöneticisi eklemek için:
 
 Kullanıcının e-posta adresine ve iş, okul veya Microsoft hesabı gibi tercih edilen kimlik doğrulama yöntemine sahip olduğunuzdan emin olun.
 
-Kuruluş yöneticisi değilseniz, sizi bir kayda eklemesini istemek için bir kuruluş yöneticisiyle iletişime geçin. Bir kayda eklendikten sonra etkinleştirme e-postası alırsınız.
+#### <a name="if-youre-not-an-enterprise-administrator"></a>Kurumsal Yönetici değilseniz
+
+Kurumsal Yönetici değilseniz, sizi bir kayıt için eklemesini istemek üzere bir kurumsal yöneticiye başvurun. Kurumsal Yönetici, sizi Kurumsal Yönetici olarak eklemek için önceki adımları kullanır. Bir kayda eklendikten sonra etkinleştirme e-postası alırsınız.
+
+#### <a name="if-your-enterprise-administrator-cant-help-you"></a>Kuruluş yöneticiniz size yardımcı olamaz
 
 Kuruluş yöneticiniz size yardımcı olamıyorsa bir [Azure Enterprise Portal destek isteği](https://support.microsoft.com/supportrequestform/cf791efa-485b-95a3-6fad-3daf9cd4027c) oluşturun. Şu bilgileri belirtin:
 
@@ -418,51 +424,6 @@ Başlamak için:
 1. Bunu yaptığınızda Microsoft hesabında silinebilecek etkin abonelik kalmamalıdır.
 1. Silinen hesaplar geçmişe dönük faturalama nedeniyle portalda kalır ancak devre dışı durumda görünür.  Yalnızca etkin hesapların görüntülenmesini sağlayan onay kutusunu seçerek eski hesapları görünümden kaldırabilirsiniz.
 
-## <a name="account-subscription-ownership-faq"></a>Hesap aboneliği sahipliği hakkında SSS
-
-Bu belgede hesap aboneliği sahipliğiyle ilgili sık sorulan sorular ve yanıtları yer almaktadır.
-
-### <a name="can-i-associate-my-existing-azure-account-to-azure-ea-enrollment"></a>Mevcut Azure hesabımı Azure EA kaydıyla ilişkilendirebilir miyim?
-
-Evet. Hesap sahibi olduğunuz tüm Azure aboneliklerinin Kurumsal Anlaşmanıza dönüştürülecek olmasıdır. Visual Studio, AzurePass, MPN ve BizSpark gibi aylık kredi kullanan abonelikler dahildir. Bu tür abonelikler dönüştürülürken aylık krediyi kaybedersiniz.
-
-### <a name="how-many-azure-account-owners-can-you-have-per-subscription"></a>Bir abonelikte kaç Azure hesabı sahibi olabilir?
-
-Her abonelikte yalnızca bir tane hesap sahibi bulunabilir.  Rol Tabanlı Erişim veya Erişim Denetimi (IAM) işlevlerini kullanarak daha fazla rol ekleyebilirsiniz. Bunun için [Azure portalı](https://portal.azure.com) sayfasının sol üst köşesindeki abonelik sekmesini kullanın.
-
-### <a name="is-it-possible-to-transfer-subscription-ownership-to-another-account"></a>Aboneliğin sahipliği başka bir hesaba aktarılabilir mi?
-
-Evet, aboneliğin sahipliğini başka bir hesaba aktarabilirsiniz. Örneğin A hesabında üç abonelik varsa kuruluş yöneticisi bu aboneliklerden birini B hesabına, birini C hesabına, diğerini de D hesabına veya tüm abonelikleri birden E hesabına aktarabilir.
-
-Abonelikleri aktarmak için:
-
-1. Azure Enterprise Portal'da **Yönet** > **Hesap** yolunu izleyin.
-1. En sağdaki **Hesap** girişinin üzerine gelerek **Sahipliği Aktar** (kişi simgesi) ve **Aboneliği Aktar** (liste simgesi) seçeneklerini görüntüleyin. Bu seçenekler yalnızca etkin hesaplar için görünür.
-
-### <a name="can-an-azure-account-owner-be-listed-under-more-than-one-department"></a>Bir Azure hesabı sahibi birden fazla bölümde listelenebilir mi?
-
-Hayır, hesap sahibi yalnızca bir bölümle ilişkilendirilebilir. Bu ilke bölümle ilişkilendirilmiş olan maliyetlerle harcamaların Azure EA Portal'daki EA kaydı altında doğru şekilde izlenebilmesine ve ayrılabilmesine yardımcı olur.
-
-### <a name="can-an-azure-account-owner-be-listed-as-a-security-group"></a>Bir Azure hesabı sahibi güvenlik grubu olarak listelenebilir mi?
-
-Hayır, abonelik sahibi benzersiz bir Microsoft hesabı (MSA) veya Azure Active Directory (Azure AD) kimlik doğrulamasına sahip olmalıdır. Kuruluşunuzdaki kullanıcı değişikliklerinden etkilenmemek için genel hesaplar oluşturup abonelik erişimini Azure AD ile yönetebilirsiniz.
-
-### <a name="can-an-individual-user-own-multiple-subscriptions"></a>Bir kullanıcı birden fazla aboneliğe sahip olabilir mi?
-
-Bir Azure hesabı sahibi sınırsız sayıda abonelik oluşturup yönetebilir.
-
-### <a name="how-can-i-accessview-all-my-organizations-subscriptions"></a>Kuruluşumun tüm aboneliklerine erişmek ve onları görüntülemek için ne yapabilirim?
-
-Şu an için bu işlevin ilke yoluyla sağlanması gerekir. Başka bir deyişle hesabınızın oluşturulan her abonelikte rol tabanlı erişim kullanılarak bir abonelik rolüne eklenmesini sağlamanız gerekir.
-
-### <a name="where-do-i-go-to-create-a-subscription"></a>Nereden abonelik oluşturabilirim?
-
-Kurumsal Azure (EA) teklifi aboneliği oluşturabilmeniz için hesabınızın Azure EA Portal'da EA kayıt yöneticiniz tarafından hesap sahibi rolüne eklenmesi gerekir. Ardından EA teklif türü aboneliklerini oluşturma yetkisini elde etmek için Azure EA Portal'da oturum açmanız gerekir. İlk EA aboneliğinizin EA Portal'daki abonelik sekmesinde yer alan ‘+ Abonelik Ekle’ bağlantısıyla oluşturulmasını öneririz.  Ancak hesabınız yetkilendirildikten sonra portal.azure.com adresindeki Abonelikler sekmesinin sol üst köşesinden hesap oluşturmak daha kolay olabilir. Burada tek adımda aboneliğinizi hem oluşturup hem de adını değiştirebilirsiniz.
-
-### <a name="who-can-create-a-subscription"></a>Kimler abonelik oluşturabilir?
-
-Kurumsal Azure teklifi türünde bir abonelik oluşturabilmek için [EA Portal](https://ea.azure.com)'da hesap sahibi rolüne sahip olmanız gerekir.
-
 ## <a name="azure-ea-term-glossary"></a>Azure EA terimleri sözlüğü
 
 - **Hesap**: Azure Enterprise Portal'daki kuruluş birimleridir. Abonelikleri yönetmek ve raporlama için kullanılır.
@@ -504,3 +465,4 @@ Kurumsal Azure teklifi türünde bir abonelik oluşturabilmek için [EA Portal](
 
 - [Sanal makine rezervasyonlarının](ea-portal-vm-reservations.md) paradan tasarruf etmenize nasıl yardımcı olduğu hakkında bilgi edinin.
 - Azure EA portalı sorunlarını gidermek için yardıma ihtiyacınız varsa [Azure EA portalı erişim sorunlarını giderme](ea-portal-troubleshoot.md) konusuna bakın.
+- EA abonelik sahipliği hakkında sorularınız için [maliyet yönetimi + FATURALANDıRMA SSS](../cost-management-billing-faq.yml) makalesini okuyun.

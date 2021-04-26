@@ -9,24 +9,23 @@ ms.topic: tutorial
 ms.date: 11/05/2020
 ms.author: raynew
 ms.custom: mvc
-ms.openlocfilehash: fa43f40d4849a8e773241fa17a1e1787ce86a8ff
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: b5e83f883b5e1e35842ab128e4732e993fb937a0
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102564756"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106383702"
 ---
 # <a name="tutorial-set-up-disaster-recovery-for-linux-virtual-machines"></a>Öğretici: Linux sanal makineleri için olağanüstü durum kurtarmayı ayarlama
-
 
 Bu öğreticide, Linux çalıştıran Azure VM 'Leri için olağanüstü durum kurtarmayı ayarlama gösterilmektedir. Bu makalede şunları yapmayı öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Linux VM için olağanüstü durum kurtarmayı etkinleştirme
-> * Olağanüstü durum kurtarma tatbikatı çalıştırma
+> * Beklendiği gibi çalışıp çalışmadığını denetlemek için bir olağanüstü durum kurtarma ayrıntısı çalıştırın
 > * Ayrıntıdan sonra VM 'yi çoğaltmayı durdur
 
-Bir sanal makine için çoğaltmayı etkinleştirdiğinizde, Site Recovery Mobility hizmeti uzantısı sanal makineye yüklenir ve [Azure Site Recovery](../../site-recovery/site-recovery-overview.md)kaydeder. Çoğaltma sırasında, VM disk yazmaları kaynak bölgedeki bir önbellek depolama hesabına gönderilir. Veriler buradan hedef bölgeye gönderilir ve kurtarma noktaları verilerden oluşturulur.  Olağanüstü durum kurtarma sırasında VM 'yi başka bir bölgeye devretmek, hedef bölgedeki VM 'yi geri yüklemek için bir kurtarma noktası kullanılır.
+Bir sanal makine için çoğaltmayı etkinleştirdiğinizde, Site Recovery Mobility hizmeti uzantısı sanal makineye yüklenir ve [Azure Site Recovery](../../site-recovery/site-recovery-overview.md)kaydeder. Çoğaltma sırasında VM disk yazmaları, kaynak VM bölgesindeki bir önbellek depolama hesabına gönderilir. Veriler buradan hedef bölgeye gönderilir ve kurtarma noktaları verilerden oluşturulur.  Olağanüstü durum kurtarma sırasında VM 'yi başka bir bölgeye devretmek, hedef bölgede bir VM oluşturmak için bir kurtarma noktası kullanılır.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/pricing/free-trial/) oluşturun.
 
@@ -60,26 +59,67 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
     GuestAndHybridManagement | Çoğaltma için etkinleştirilen VM 'lerde çalışan Site Recovery Mobility aracısını otomatik olarak yükseltmek istiyorsanız kullanın.
 5. VM 'Lerin en son kök sertifikalara sahip olduğundan emin olun. Linux sanal makinelerinde, VM 'deki en son güvenilen kök sertifikaları ve sertifika iptal listesini almak için Linux dağıtıcınız tarafından sunulan yönergeleri izleyin.
 
-## <a name="enable-disaster-recovery"></a>Olağanüstü durum kurtarmayı etkinleştir
+## <a name="create-a-vm-and-enable-disaster-recovery"></a>VM oluşturma ve olağanüstü durum kurtarmayı etkinleştirme
+
+Bir VM oluşturduğunuzda, isteğe bağlı olarak olağanüstü durum kurtarmayı etkinleştirebilirsiniz.
+
+1. [Bir LINUX VM oluşturun](quick-create-portal.md).
+2. **Yönetim** sekmesinde **Site Recovery** altında, **olağanüstü durum kurtarmayı etkinleştir**' i seçin.
+3. **İkincil bölgede**, olağanüstü durum kurtarma için VM 'yi çoğaltmak istediğiniz hedef bölgeyi seçin.
+4. **İkincil abonelikte**, hedef VM 'nin oluşturulacağı hedef aboneliği seçin. Kaynak bölgedeki kaynak sanal makineyi hedef bölgeye devretmek için hedef VM oluşturulur.
+5. **Kurtarma Hizmetleri Kasası**' nda, çoğaltma için kullanmak istediğiniz kasayı seçin. Kasanız yoksa **Yeni oluştur**' u seçin. Kasanın yerleştirileceği bir kaynak grubu ve kasa adını seçin.
+6. **Site Recovery ilke**' de, varsayılan ilkeyi bırakın veya özel değerleri ayarlamak Için **Yeni oluştur** ' u seçin.
+
+    - Kurtarma noktaları, belirli bir zaman noktasında alınan VM disklerinin anlık görüntülerinden oluşturulur. Bir VM 'nin yükünü devretmek için, hedef bölgedeki VM 'yi geri yüklemek üzere bir kurtarma noktası kullanırsınız. 
+    - Her beş dakikada bir çökme ile tutarlı bir kurtarma noktası oluşturulur. Bu ayar değiştirilemez. Kilitlenme ile tutarlı bir anlık görüntü, anlık görüntü çekilirken diskteki verileri yakalar. Bellekte herhangi bir şey içermez. 
+    - Varsayılan olarak Site Recovery, kilitlenme tutarlı kurtarma noktalarını 24 saat boyunca tutar. 0 ila 72 saat arasında bir özel değer ayarlayabilirsiniz.
+    - Her 4 saatte bir uygulamayla tutarlı bir anlık görüntü alınır.
+    - Varsayılan olarak Site Recovery kurtarma noktalarını 24 saat depolar.
+
+7. **Kullanılabilirlik seçenekleri**' nde, VM 'nin tek başına, bir kullanılabilirlik alanında veya bir kullanılabilirlik kümesinde dağıtıp dağıtmadığını belirtin.
+
+    :::image type="content" source="./media/tutorial-disaster-recovery/create-vm.png" alt-text="VM yönetimi Özellikler sayfasında çoğaltmayı etkinleştirin.":::
+
+8. VM oluşturmayı tamamlama.
+
+## <a name="enable-disaster-recovery-for-an-existing-vm"></a>Mevcut bir VM için olağanüstü durum kurtarmayı etkinleştirme
+
+Mevcut bir VM 'de olağanüstü durum kurtarmayı etkinleştirmek istiyorsanız, bu yordamı kullanın.
 
 1. Azure portal VM özellikleri sayfasını açın.
 2. **İşlemler** menüsünden **Olağanüstü durum kurtarma** seçeneğini belirleyin.
-3. **Temel bilgiler**  >  **hedef bölgesinde**, VM 'yi çoğaltmak istediğiniz bölgeyi seçin. Kaynak ve hedef bölgeler aynı Azure Active Directory kiracısında olmalıdır.
-4. **Gözden geçir + çoğaltmayı Başlat**' a tıklayın.
 
-    :::image type="content" source="./media/tutorial-disaster-recovery/disaster-recovery.png" alt-text="VM özellikleri olağanüstü durum kurtarma sayfasında çoğaltmayı etkinleştirin.":::
+    :::image type="content" source="./media/tutorial-disaster-recovery/existing-vm.png" alt-text="Mevcut bir VM için olağanüstü durum kurtarma seçeneklerini açın.":::
 
-5. **Gözden geçir + çoğaltmayı Başlat**' da ayarları doğrulayın:
+3. **Temel bilgiler**, VM bir kullanılabilirlik alanında dağıtılmışsa, kullanılabilirlik alanları arasında olağanüstü durum kurtarmayı seçebilirsiniz.
+4. **Hedef bölge**' de, VM 'yi çoğaltmak istediğiniz bölgeyi seçin. Kaynak ve hedef bölgeler aynı Azure Active Directory kiracısında olmalıdır.
 
-    - **Hedef ayarlar**. Varsayılan olarak, Site Recovery hedef kaynakları oluşturmak için kaynak ayarlarını yansıtır.
-    - **Depolama ayarları-önbellek depolama hesabı**. Kurtarma, kaynak bölgedeki bir depolama hesabını kullanır. Kaynak VM değişiklikleri, hedef konuma çoğaltılmadan önce bu hesapta önbelleğe alınır.
-    - **Depolama ayarları-çoğaltma diski**. Site Recovery, varsayılan olarak, kaynak VM ile yönetilen diskleri aynı depolama türüyle (Standart veya Premium) yansıtan hedef bölgede çoğaltma tarafından yönetilen diskler oluşturur.
-    - **Çoğaltma ayarları**. Kasa ayrıntılarını gösterir ve Site Recovery tarafından oluşturulan kurtarma noktalarının 24 saat boyunca tutulup tutulmadığını gösterir.
-    - **Uzantı ayarları**. Site Recovery, çoğaltılan VM 'lerde yüklü olan Site Recovery Mobility hizmeti uzantısı güncelleştirmelerini yöneteceğini gösterir. Belirtilen Azure Otomasyonu hesabı güncelleştirme işlemini yönetir.
+    :::image type="content" source="./media/tutorial-disaster-recovery/basics.png" alt-text="Bir VM için temel olağanüstü durum kurtarma seçeneklerini ayarlayın.":::
+
+5. **İleri ' yi seçin: Gelişmiş ayarlar**.
+6. **Gelişmiş ayarlar**' da ayarları gözden geçirebilir ve değerleri özel ayarlar ' da değiştirebilirsiniz. Varsayılan olarak, Site Recovery hedef kaynakları oluşturmak için kaynak ayarlarını yansıtır.
+
+    - **Hedef abonelik**. Yük devretmeden sonra hedef VM 'nin oluşturulduğu abonelik.
+    - **Hedef VM kaynak grubu**. Yük devretmeden sonra hedef VM 'nin oluşturulduğu kaynak grubu.
+    - **Hedef sanal ağ**. Yük devretmeden sonra oluşturulduğu sırada hedef VM 'nin bulunduğu Azure sanal ağı.
+    - **Hedef kullanılabilirliği**. Hedef VM tek bir örnek olarak oluşturulduğunda, bir kullanılabilirlik kümesinde veya kullanılabilirlik bölgesinde.
+    - **Yakınlık yerleşimi**. Uygulanabiliyorsa, yük devretmeden sonra hedef VM 'nin bulunduğu yakınlık yerleşimi grubunu seçin.
+    - **Depolama ayarları-önbellek depolama hesabı**. Kurtarma, kaynak bölgedeki bir depolama hesabını geçici bir veri deposu olarak kullanır. Kaynak VM değişiklikleri, hedef konuma çoğaltılmadan önce bu hesapta önbelleğe alınır.
+        - Varsayılan olarak, kasa başına bir önbellek depolama hesabı oluşturulur ve yeniden kullanılır.
+        - VM için önbellek hesabını özelleştirmek istiyorsanız farklı bir depolama hesabı seçebilirsiniz.
+    - **Depolama ayarları-çoğaltma yönetilen disk**. Site Recovery, varsayılan olarak, hedef bölgede çoğaltma tarafından yönetilen diskler oluşturur.
+        -  Varsayılan olarak, hedef yönetilen disk, aynı depolama türünü (Standart HDD/SSD veya Premium SSD) kullanarak kaynak VM tarafından yönetilen diskleri yansıtır.
+        - Depolama türünü gerektiği gibi özelleştirebilirsiniz.
+    - **Çoğaltma ayarları**. VM 'nin bulunduğu kasayı ve VM için kullanılan çoğaltma ilkesini gösterir. Varsayılan olarak, VM için Site Recovery tarafından oluşturulan kurtarma noktaları 24 saat boyunca tutulur.
+    - **Uzantı ayarları**. Site Recovery, çoğaltılan VM 'lerde yüklü olan Site Recovery Mobility hizmeti uzantısına yönelik güncelleştirmeleri yönettiğini gösterir.
+        - Belirtilen Azure Otomasyonu hesabı güncelleştirme işlemini yönetir.
+        - Otomasyon hesabını özelleştirebilirsiniz.
 
     :::image type="content" source="./media/tutorial-disaster-recovery/settings-summary.png" alt-text="Hedef ve çoğaltma ayarlarının özetini gösteren sayfa.":::
 
-2. **Çoğaltmayı Başlat**' ı seçin. Dağıtım başlar ve Site Recovery hedef kaynak oluşturmaya başlar. Bildirimlerde çoğaltma ilerlemesini izleyebilirsiniz.
+6. **Gözden geçir + çoğaltmayı Başlat**' ı seçin.
+
+7. **Çoğaltmayı Başlat**' ı seçin. Dağıtım başlar ve Site Recovery hedef kaynak oluşturmaya başlar. Bildirimlerde çoğaltma ilerlemesini izleyebilirsiniz.
 
     :::image type="content" source="./media/tutorial-disaster-recovery/notifications.png" alt-text="Çoğaltma ilerlemesi için bildirim.":::
 
@@ -97,7 +137,6 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 5. **Altyapı görünümü**' nde kaynak ve hedef VM 'ler, yönetilen diskler ve önbellek depolama hesabı için görsel bir genel bakış alın.
 
     :::image type="content" source="./media/tutorial-disaster-recovery/infrastructure.png" alt-text="VM olağanüstü durum kurtarma için altyapı görsel haritası.":::
-
 
 ## <a name="run-a-drill"></a>Detaya gitme Çalıştır
 

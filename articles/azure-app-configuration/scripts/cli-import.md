@@ -10,12 +10,12 @@ ms.topic: sample
 ms.date: 02/19/2020
 ms.author: alkemper
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: f7d68024dd86a1eb2a0311cecf607d41a7067deb
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5a80acd1261211fe3efaefa6a4b6025a321e2d65
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102173577"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774188"
 ---
 # <a name="import-to-an-azure-app-configuration-store"></a>Azure uygulama yapılandırma deposuna aktarma
 
@@ -44,7 +44,7 @@ Bu betik, bir uygulama yapılandırma deposuna aktarmak için aşağıdaki komut
 
 | Komut | Notlar |
 |---|---|
-| [az appconfig kV import](/cli/azure/appconfig/kv#az-appconfig-kv-import) | Bir uygulama yapılandırma deposu kaynağına içeri aktarır. |
+| [az appconfig kV import](/cli/azure/appconfig/kv#az_appconfig_kv_import) | Bir uygulama yapılandırma deposu kaynağına içeri aktarır. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

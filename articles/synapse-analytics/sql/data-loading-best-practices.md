@@ -2,21 +2,21 @@
 title: Veri yükleme en iyi yöntemleri
 description: Adanmış bir SQL havuzu Azure SYNAPSE Analytics 'e veri yüklemeye yönelik öneriler ve performans iyileştirmeleri.
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql
 ms.date: 04/15/2020
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: igorstan
 ms.custom: azure-synapse
-ms.openlocfilehash: 33212d44fcb6be3f01cf968d00751d55e3bd7b8f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 9fe7ef8e6ccbadd5e78de5bfd5f137132dbe6319
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104585460"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567953"
 ---
 # <a name="best-practices-for-loading-data-into-a-dedicated-sql-pool-azure-synapse-analytics"></a>Adanmış bir SQL havuzuna veri yüklemeye yönelik en iyi uygulamalar Azure SYNAPSE Analytics
 

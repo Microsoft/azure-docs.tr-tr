@@ -8,13 +8,14 @@ author: mgoedtel
 ms.author: magoedte
 ms.topic: conceptual
 ms.date: 12/10/2019
+ms.custom: devx-track-azurepowershell
 manager: carmonm
-ms.openlocfilehash: c0dc68bd7dacf0cd7f4be9732d45831e2dbb712c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d338c5f34d49663345582198ff53ba50a2919d7e
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98897012"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829431"
 ---
 # <a name="enable-azure-automation-state-configuration"></a>Azure Otomasyonu durum yapılandırmasını etkinleştirme
 

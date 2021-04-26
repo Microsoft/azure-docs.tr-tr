@@ -9,12 +9,12 @@ ms.author: twright
 ms.reviewer: mikeray
 ms.date: 09/22/2020
 ms.topic: how-to
-ms.openlocfilehash: 6e7f2e445c3e4e8df7420c0587e156968f3a2c92
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 3bbd778eabf150b734b04e004006dfeea2254ec4
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94542686"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077491"
 ---
 # <a name="sizing-guidance"></a>Boyutlandırma Kılavuzu
 
@@ -92,9 +92,9 @@ Oluşturulan her SQL yönetilen örnek Pod, üç kapsayıcı içerir:
 
 |Kapsayıcı adı|CPU Isteği|Bellek Isteği|CPU sınırı|Bellek sınırı|Notlar|
 |---|---|---|---|---|---|
-|floentbit|100 milyon|100 mı|Belirtilmemiş|Belirtilmemiş|Floentbit kapsayıcı kaynak istekleri, SQL yönetilen örneği için belirtilen isteklere _ek_ niteliğindedir.||
-|yay-sqlmı|Kullanıcı tarafından belirtilen veya belirtilmemiş.|Kullanıcı tarafından belirtilen veya belirtilmemiş.|Kullanıcı tarafından belirtilen veya belirtilmemiş.|Kullanıcı tarafından belirtilen veya belirtilmemiş.||
-|toplanan|Belirtilmemiş|Belirtilmemiş|Belirtilmemiş|Belirtilmemiş||
+|floentbit|100 milyon|100 mı|Belirtilmemiş|Belirtilmemiş|Floentbit kapsayıcı kaynak istekleri, SQL yönetilen örneği için belirtilen isteklere _ek_ niteliğindedir.|
+|yay-sqlmı|Kullanıcı tarafından belirtilen veya belirtilmemiş.|Kullanıcı tarafından belirtilen veya belirtilmemiş.|Kullanıcı tarafından belirtilen veya belirtilmemiş.|Kullanıcı tarafından belirtilen veya belirtilmemiş.|
+|toplanan|Belirtilmemiş|Belirtilmemiş|Belirtilmemiş|Belirtilmemiş|
 
 Tüm kalıcı birimler için varsayılan birim boyutu 5Gi ' dir.
 

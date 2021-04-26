@@ -12,14 +12,14 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 03/25/2021
+ms.date: 04/20/2021
 ms.author: b-juche
-ms.openlocfilehash: 3ca4938d8666fd60ebac9e75bb2da1780e0914d3
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 6cef4860184b217e96e8967ab24a3befc632e316
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105608009"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107811859"
 ---
 # <a name="faqs-about-azure-netapp-files"></a>Azure NetApp Files hakkında SSS
 
@@ -27,9 +27,9 @@ Bu makalede Azure NetApp Files hakkında sık sorulan sorular (SSS) yanıtlanmak
 
 ## <a name="networking-faqs"></a>Ağ oluşturma SSS
 
-### <a name="does-the-nfs-data-path-go-over-the-internet"></a>NFS veri yolu Internet üzerinden mi çalışıyor?  
+### <a name="does-the-data-path-for-nfs-or-smb-go-over-the-internet"></a>NFS veya SMB veri yolu Internet üzerinden mi çalışıyor?  
 
-Hayır. NFS veri yolu, Internet üzerinden geçmiyor. Azure NetApp Files, hizmetin kullanılabilir olduğu Azure sanal ağına (VNet) dağıtılan bir Azure yerel hizmetidir. Azure NetApp Files, temsilcili bir alt ağ kullanır ve doğrudan VNet üzerinde bir ağ arabirimi sağlar. 
+Hayır. NFS veya SMB için veri yolu, Internet üzerinden geçmiyor. Azure NetApp Files, hizmetin kullanılabilir olduğu Azure sanal ağına (VNet) dağıtılan bir Azure yerel hizmetidir. Azure NetApp Files, temsilcili bir alt ağ kullanır ve doğrudan VNet üzerinde bir ağ arabirimi sağlar. 
 
 Ayrıntılar için [Azure NetApp Files ağ planlaması kılavuzlarına](./azure-netapp-files-network-topologies.md) bakın.  
 
@@ -82,7 +82,21 @@ Hayır, şu anda ağ güvenlik gruplarını, Azure NetApp Files için temsilci a
 
 ### <a name="can-i-use-azure-rbac-with-azure-netapp-files"></a>Azure RBAC 'i Azure NetApp Files kullanabilir miyim?
 
-Evet, Azure RBAC özelliklerini destekler Azure NetApp Files.
+Evet, Azure RBAC özelliklerini destekler Azure NetApp Files. Yerleşik Azure rolleriyle birlikte Azure NetApp Files için [özel roller de oluşturabilirsiniz](../role-based-access-control/custom-roles.md) . 
+
+Azure NetApp Files izinlerinin tamamı listesi için bkz. Azure Kaynak sağlayıcısı işlemleri [`Microsoft.NetApp`](../role-based-access-control/resource-provider-operations.md#microsoftnetapp) .
+
+### <a name="are-azure-activity-logs-supported-on-azure-netapp-files"></a>Azure etkinlik günlükleri Azure NetApp Files destekleniyor mu?
+
+Azure NetApp Files bir Azure yerel hizmetidir. Azure NetApp Files için tüm PUT, POST ve DELETE API 'Leri günlüğe kaydedilir. Örneğin, Günlükler, anlık görüntüyü kimin oluşturduğunu, kimin birimi değiştirildiğini ve bu şekilde devam eden etkinlikleri gösterir.
+
+API işlemlerinin tüm listesi için bkz. [Azure NetApp Files REST API](/rest/api/netapp/).
+
+### <a name="can-i-use-azure-policies-with-azure-netapp-files"></a>Azure ilkelerini Azure NetApp Files kullanabilir miyim?
+
+Evet, [özel Azure ilkeleri](../governance/policy/tutorials/create-custom-policy-definition.md)oluşturabilirsiniz. 
+
+Ancak, Azure NetApp Files arabiriminde Azure ilkeleri (Özel adlandırma ilkeleri) oluşturamazsınız. [Azure NetApp Files ağ planlama yönergelerine](azure-netapp-files-network-topologies.md#considerations)bakın.
 
 ## <a name="performance-faqs"></a>Performans hakkında SSS
 
@@ -192,9 +206,55 @@ SMB istemcisi tarafından bildirilen birim boyutu, Azure NetApp Files biriminin 
 
 En iyi uygulama olarak, bilgisayar saati eşitlemesi için maksimum toleransı beş dakikaya ayarlayın. Daha fazla bilgi için bkz. [bilgisayar saati eşitlemesi Için maksimum tolerans](/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852172(v=ws.11)). 
 
+### <a name="can-i-manage-smb-shares-sessions-and-open-files-through-computer-management-console-mmc"></a>`SMB Shares`,, `Sessions` Ve `Open Files` Bilgisayar Yönetim Konsolu 'nu (MMC) yönetebilir miyim?
+
+`SMB Shares`, `Sessions` Ve `Open Files` Ile bilgisayar YÖNETIMI Konsolu (MMC) yönetimi şu anda desteklenmiyor.
+
 ### <a name="how-can-i-obtain-the-ip-address-of-an-smb-volume-via-the-portal"></a>Portal aracılığıyla bir SMB biriminin IP adresini nasıl alabilirim?
 
 Birime Genel Bakış bölmesinde **JSON görünümü** bağlantısını kullanın ve **Özellikler** bağlamahedefleri altında **startip** tanımlayıcısı ' nı arayın  ->  .
+
+### <a name="can-an-azure-netapp-files-smb-share-act-as-an-dfs-namespace-dfs-n-root"></a>Bir Azure NetApp Files SMB paylaşımının DFS ad alanı (DFS-N) kökü işlevi görebilir mi?
+
+Hayır. Ancak, Azure NetApp Files SMB paylaşımları, DFS ad alanı (DFS-N) klasörü hedefi olarak görev yapabilir.   
+DFS-N klasör hedefi olarak bir Azure NetApp Files SMB paylaşımının kullanılması için, [DFS klasör hedefi ekleme](/windows-server/storage/dfs-namespaces/add-folder-targets#to-add-a-folder-target) yordamını kullanarak Azure NetApp Files SMB paylaşımının evrensel adlandırma KURALı (UNC) bağlama yolunu sağlayın.  
+
+### <a name="smb-encryption-faqs"></a>SMB şifreleme SSS
+
+Bu bölümde, SMB şifrelemesi (SMB 3,0 ve SMB 3.1.1) hakkında sıkça sorulan sorular yanıtlanmaktadır.
+
+#### <a name="what-is-smb-encryption"></a>SMB şifrelemesi nedir?  
+
+[SMB şifrelemesi](/windows-server/storage/file-server/smb-security) , SMB verileri için uçtan uca şifrelemeyi sağlar ve verileri güvenilmeyen ağlarda izinsiz bir yerden bırakarak verileri korur. SMB şifreleme, SMB 3,0 ve üzeri bir sürümü destekler. 
+
+#### <a name="how-does-smb-encryption-work"></a>SMB şifrelemesi nasıl çalışır?
+
+Depolama alanına bir istek gönderilirken istemci, isteğin şifresini çözdüğü için isteği şifreler. Yanıtlar sunucu tarafından benzer şekilde şifrelenir ve istemci tarafından şifresi çözülür.
+
+#### <a name="which-clients-support-smb-encryption"></a>Hangi istemciler SMB şifrelemesini destekliyor?
+
+Windows 10, Windows 2012 ve sonraki sürümler SMB şifrelemesini destekler.
+
+#### <a name="with-azure-netapp-files-at-what-layer-is-smb-encryption-enabled"></a>Azure NetApp Files, SMB şifrelemesi hangi katmanda etkinleştirilmiştir?  
+
+SMB şifrelemesi, paylaşma düzeyinde etkindir.
+
+#### <a name="what-forms-of-smb-encryption-are-used-by-azure-netapp-files"></a>Azure NetApp Files hangi SMB şifrelemesi biçimlerini kullanır?
+
+SMB 3,0 AES-CCM algoritmasını kullanır, SMB 3.1.1 AES-GCM algoritmasını kullanır
+
+#### <a name="is-smb-encryption-required"></a>SMB şifrelemesi gerekli mi?
+
+SMB şifrelemesi gerekli değildir. Bu nedenle, yalnızca Kullanıcı Azure NetApp Files etkinleştirmek isterse, belirli bir paylaşıma yönelik olarak etkinleştirilir. Azure NetApp Files paylaşımlar Internet 'e hiçbir şekilde gösterilmez. Yalnızca belirli bir sanal ağ içinden VPN veya Express Route üzerinden erişilebilir, bu nedenle Azure NetApp Files paylaşımlar doğal olarak güvenlidir. SMB şifrelemesini etkinleştirme seçimi tamamen kullanıcıya tamamıyla yapılır. Bu özelliği etkinleştirmeden önce beklenen performans cezası hakkında dikkat edin.
+
+#### <a name="what-is-the-anticipated-impact-of-smb-encryption-on-client-workloads"></a><a name="smb_encryption_impact"></a>İstemci iş yükleri üzerinde SMB şifrelemenin beklenen etkisi nedir?
+
+SMB şifrelemesi hem istemciye (iletileri şifrelemek ve şifrelerini çözmek için CPU ek yükü) hem de depolama (aktarım hızı ile indirimleri) üzerinde etkilense de aşağıdaki tabloda yalnızca depolama etkisi vurgulanmaktadır. İş yüklerini üretime dağıtmaya başlamadan önce kendi uygulamalarınıza karşı şifreleme performansı etkisini test etmelisiniz.
+
+|     G/ç profili       |     Etki        |
+|-  |-  |
+|     İş yüklerini okuma ve yazma      |     %10 ila %15        |
+|     Meta veriler yoğun        |     %5    |
 
 ## <a name="capacity-management-faqs"></a>Kapasite Yönetimi SSS
 

@@ -9,12 +9,13 @@ ms.service: api-management
 ms.topic: article
 ms.date: 01/29/2021
 ms.author: apimpm
-ms.openlocfilehash: f6474dbd02c501612b951ddae490385a5d843fbf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 3dda6f18c2bf92b537c2f4be1c6a0a3b70cdc28a
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99500636"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815891"
 ---
 # <a name="set-up-a-service-fabric-backend-in-api-management-using-the-azure-portal"></a>Azure portal kullanarak API Management Service Fabric arka ucu ayarlama
 

@@ -3,14 +3,14 @@ title: Azure Event Grid hedefteki bir role yönetilen kimlik ekleme
 description: Bu makalede, yönetilen kimliğin Azure Service Bus ve Azure Event Hubs gibi hedeflere Azure rollerine nasıl ekleneceği açıklanmaktadır.
 ms.topic: how-to
 ms.date: 03/25/2021
-ms.openlocfilehash: 1bcef878c982122d80980dd7194fae2de6fc8762
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 1578e4c24201614ce89351b3c3cee52a09cadc30
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105630576"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280488"
 ---
-# <a name="add-an-identity-to-azure-roles-on-azure-event-grid-destinations"></a>Azure Event Grid hedeflerde Azure rollerine kimlik ekleme
+# <a name="grant-managed-identity-the-access-to-event-grid-destination"></a>Event Grid hedefe erişimi yönetilen kimliğe verme
 Bu bölümde, sistem konu başlığı, özel konu veya etki alanı için bir Azure rolüne nasıl kimlik ekleneceği açıklanmaktadır. 
 
 ## <a name="prerequisites"></a>Önkoşullar
@@ -89,6 +89,6 @@ az role assignment create --role "$role" --assignee "$topic_pid" --scope "$sbust
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Artık sistem konusuna, özel konuya veya etki alanına sistem tarafından atanan bir kimlik atadığınıza ve bu kimliği hedeflerdeki uygun rollere eklemiş olduğunuza göre, kimliği kullanarak hedeflere olay sunma konusunda [kimlik kullanarak devusing olaylarına](managed-service-identity.md) bakın.
+Artık sistem konusuna, özel konuya veya etki alanına sistem tarafından atanan bir kimlik atadığınıza ve bu kimliği hedeflere uygun rollere eklemiş olduğunuza göre, bkz. kimliği kullanarak hedeflere olay sunma hakkında [yönetilen kimlik kullanarak olay sunma](managed-service-identity.md) .
 
 

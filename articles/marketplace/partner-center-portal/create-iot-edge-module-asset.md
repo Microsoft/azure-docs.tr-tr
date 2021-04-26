@@ -7,12 +7,12 @@ ms.topic: conceptual
 author: keferna
 ms.author: keferna
 ms.date: 04/03/2020
-ms.openlocfilehash: aca27b89a3b92b410fa560c8b4bd7eb3d4e0a935
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f8eddd5d346003af0c2b41d65fc0aa09c86f48c7
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93346783"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167456"
 ---
 # <a name="prepare-your-iot-edge-module-technical-assets"></a>IoT Edge modülünüzü hazırlayın teknik varlıkları hazırlama
 
@@ -39,14 +39,14 @@ Modülünüzün IoT Edge tarafından desteklenen tüm katman 1 platformlarını 
 
 - [GitHub bildirim aracı](https://github.com/estesp/manifest-tool)ile oluşturulmuş bildirim etiketleri olan en son bir etiketi ve sürüm etiketini (örneğin, 1.0.1) belirtin.
 
-- [Azure IoT Edge sertifikalı cihaz kataloğuna](https://catalog.azureiotsolutions.com/alldevices?filters={%2218%22:[%221%22]}/) **yararlı bağlantılar** bölümünün altına bir bağlantı eklemek için [iş ortağı merkezi](https://partner.microsoft.com/dashboard/commercial-marketplace) 'nde teklif listesi sekmesini kullanın.
+- [Azure IoT Edge sertifikalı cihaz kataloğuna](https://devicecatalog.azure.com/devices?certificationBadgeTypes=IoTEdgeCompatible) **yararlı bağlantılar** bölümünün altına bir bağlantı eklemek için [iş ortağı merkezi](https://partner.microsoft.com/dashboard/commercial-marketplace) 'nde teklif listesi sekmesini kullanın.
 
 #### <a name="a-subset-of-tier-1-platforms-supported-by-iot-edge"></a>IoT Edge tarafından desteklenen katman 1 platformların bir alt kümesi
 
 Modülünüzün IoT Edge tarafından desteklenen katman 1 platformların bir alt kümesini (en az bir adet) desteklemesi gerekir ( [Azure IoT Edge destek](../../iot-edge/support.md)'te kaydedilir). Bu platform seçeneğini kullanan bir modül şunları içermelidir:
 
 - Birden fazla platform destekleniyorsa, GitHub [bildirim aracı](https://github.com/estesp/manifest-tool) ile oluşturulmuş bildirim etiketleri olan en son bir etiketi ve sürüm etiketini (örneğin, 1.0.1) belirtin. Bildirim etiketleri yalnızca bir platform desteklensırada isteğe bağlıdır.
-- **Faydalı bağlantılar** bölümünün altında, [Azure IoT Edge sertifikalı cihaz kataloğundan](https://catalog.azureiotsolutions.com/)en az bir IoT Edge cihaza bir bağlantı eklemek için [iş ortağı merkezi](https://partner.microsoft.com/dashboard/commercial-marketplace) ' ndeki teklif listesi sekmesini kullanın.
+- **Faydalı bağlantılar** bölümünün altında, [Azure IoT Edge sertifikalı cihaz kataloğundan](https://devicecatalog.azure.com/)en az bir IoT Edge cihaza bir bağlantı eklemek için [iş ortağı merkezi](https://partner.microsoft.com/dashboard/commercial-marketplace) ' ndeki teklif listesi sekmesini kullanın.
 
 :::image type="content" source="media/iot-edge-module-technical-assets-offer-listing.png" alt-text="Bu, Iş Ortağı Merkezi 'nde teklif listesi bölümünün görüntüsüdür":::
 
@@ -54,7 +54,7 @@ Modülünüzün IoT Edge tarafından desteklenen katman 1 platformların bir alt
 
 Hedeflenen IoT Edge cihazlarda IoT Edge modül boyutlarının (CPU, RAM, depolama ve GPU gibi) aşağıdaki gereksinimleri karşılaması gerekir:
 
-- Modül, [Azure IoT Edge sertifikalı cihaz kataloğundan](https://catalog.azureiotsolutions.com/)en az bir IoT Edge cihazından çalışmalıdır.
+- Modül, [Azure IoT Edge sertifikalı cihaz kataloğundan](https://devicecatalog.azure.com/)en az bir IoT Edge cihazından çalışmalıdır.
 
 - En düşük donanım gereksinimleri, teklifin açıklamasında ( [Iş Ortağı Merkezi](https://partner.microsoft.com/dashboard/commercial-marketplace)'nde teklif listesi sekmesi altında) son paragraf olarak belgelenmelidir. İsteğe bağlı olarak, önemli ölçüde farklılık gösterebilse de önerilen donanım gereksinimlerini listeleyebilirsiniz. Örneğin, teklif tanımlarınızın sonuna aşağıdaki bölümü ekleyin:
 

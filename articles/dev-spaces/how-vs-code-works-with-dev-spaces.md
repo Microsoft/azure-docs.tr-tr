@@ -6,10 +6,10 @@ ms.topic: conceptual
 description: Visual Studio Code ve Azure Dev Spaces Kubernetes uygulamalarınızı hata ayıklamanıza ve hızla yinelemenize nasıl yardımcı olduğunu öğrenin
 keywords: Azure Dev Spaces, dev Spaces, Docker, Kubernetes, Azure, AKS, Azure Kubernetes hizmeti, kapsayıcılar
 ms.openlocfilehash: edfcb8107280bb86144b798da2d5b1c16371528e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "91960754"
 ---
 # <a name="how-visual-studio-code-works-with-azure-dev-spaces"></a>Visual Studio Code nasıl kullanılır Azure Dev Spaces

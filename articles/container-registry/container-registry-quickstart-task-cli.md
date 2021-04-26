@@ -4,12 +4,12 @@ description: Azure bulutunda, isteğe bağlı olarak bir Docker kapsayıcı gör
 ms.topic: quickstart
 ms.date: 09/25/2020
 ms.custom: contperf-fy21q1, devx-track-azurecli
-ms.openlocfilehash: c6fe1fc246d112218b492072155175b2db99c8c9
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d3ef126812cb36874b74c8569d141787f71a29da
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97032958"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781460"
 ---
 # <a name="quickstart-build-and-run-a-container-image-using-azure-container-registry-tasks"></a>Hızlı başlangıç: Azure Container Registry görevleri kullanarak kapsayıcı görüntüsü oluşturma ve çalıştırma
 
@@ -197,11 +197,11 @@ Bu hızlı başlangıçta, yerel bir Docker yüklemesi olmadan Azure 'da bir Doc
 [azure-account]: https://azure.microsoft.com/free/
 
 <!-- LINKS - internal -->
-[az-acr-create]: /cli/azure/acr#az-acr-create
-[az-acr-build]: /cli/azure/acr#az-acr-build
-[az-acr-run]: /cli/azure/acr#az-acr-run
-[az-group-create]: /cli/azure/group#az-group-create
-[az-group-delete]: /cli/azure/group#az-group-delete
+[az-acr-create]: /cli/azure/acr#az_acr_create
+[az-acr-build]: /cli/azure/acr#az_acr_build
+[az-acr-run]: /cli/azure/acr#az_acr_run
+[az-group-create]: /cli/azure/group#az_group_create
+[az-group-delete]: /cli/azure/group#az_group_delete
 [azure-cli]: /cli/azure/install-azure-cli
 [container-registry-tasks-overview]: container-registry-tasks-overview.md
 [container-registry-tasks-multi-step]: container-registry-tasks-multi-step.md

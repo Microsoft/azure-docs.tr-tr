@@ -9,12 +9,12 @@ author: VasiyaKrishnan
 ms.author: vakrishn
 ms.reviewer: sourabha, sstein
 ms.date: 09/22/2020
-ms.openlocfilehash: 75e6ebaea4c5ba883820d2309212b35fed128142
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 5d768fdc2540496769883d839cfbb4f009a2000c
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93422136"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077644"
 ---
 # <a name="set-up-iot-edge-modules-and-connections"></a>IoT Edge modülleri ve bağlantıları ayarlama
 
@@ -42,12 +42,12 @@ Modül görüntülerinin barındırıldığı kapsayıcı kayıt defterlerinin k
 
 4. **Container Registry kimlik bilgileri** altında, aşağıdaki değerleri girin:
 
-   _Alan_|_Değer_
-   -------|-------
-   Name|Kayıt defteri adı
-   Adres|Oturum açma sunucusu
-   User Name|Kullanıcı adı
-   Parola|Parola
+   | _Alan_   | _Değer_       |
+   | -------   | -------       |
+   | Name      | Kayıt defteri adı |
+   | Adres   | Oturum açma sunucusu  | 
+   | User Name | Kullanıcı adı      | 
+   | Parola  | Parola      | 
   
 ## <a name="build-push-and-deploy-the-data-generator-module"></a>Veri Oluşturucu modülünü oluşturun, gönderin ve dağıtın
 

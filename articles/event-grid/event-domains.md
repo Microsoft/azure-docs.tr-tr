@@ -2,13 +2,13 @@
 title: Azure Event Grid içindeki olay etki alanları
 description: Bu makalede, çeşitli iş kuruluşlarınız, müşterileriniz veya uygulamalarınız için özel olayların akışını yönetmek üzere olay etki alanlarının nasıl kullanılacağı açıklanır.
 ms.topic: conceptual
-ms.date: 07/07/2020
-ms.openlocfilehash: 46a50a8ecc50bd1b80efcba41228564df1c36c9f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/13/2021
+ms.openlocfilehash: 32c06ac55f667ec9807c7952127c2cf0f0384024
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102198685"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374718"
 ---
 # <a name="understand-event-domains-for-managing-event-grid-topics"></a>Event Grid yönetmek için olay etki alanlarını anlama
 
@@ -23,7 +23,7 @@ Bu makalede, çeşitli iş kuruluşlarınız, müşterileriniz veya uygulamalar�
 
 Olay etki alanı, aynı uygulamayla ilgili çok sayıda Event Grid konu başlığı için bir yönetim aracıdır. Bunu, binlerce bireysel konuya sahip bir meta konu olarak düşünebilirsiniz.
 
-Olay etki alanları, olaylarını yayımlamak için Azure Hizmetleri (depolama ve IoT Hub gibi) tarafından kullanılan mimaride kullanılabilir hale getirir. Bunlar binlerce konuya etkinlik yayımlamanıza izin verir. Etki alanları, Kiracılarınızı bölümleyerek her konu için yetkilendirme ve kimlik doğrulama denetimi de sağlar.
+Olay etki alanları, Azure hizmetleri tarafından, olaylarını yayımlamak için depolama ve IoT Hub gibi kullanılan mimarinin aynısını sunar. Bunlar binlerce konuya etkinlik yayımlamanıza izin verir. Etki alanları, Kiracılarınızı bölümleyerek her konu için yetkilendirme ve kimlik doğrulama denetimi de sağlar.
 
 ## <a name="example-use-case"></a>Örnek kullanım örneği
 [!INCLUDE [event-grid-domain-example-use-case.md](../../includes/event-grid-domain-example-use-case.md)]
@@ -43,6 +43,9 @@ Bu roller hakkında daha fazla bilgi için bkz. [Event Grid Için yerleşik roll
 ## <a name="subscribing-to-topics"></a>Konulara abone olma
 
 Bir olay etki alanı içindeki bir konudaki olaylara abone olmak, [özel bir konu üzerinde olay aboneliği oluşturma](./custom-event-quickstart.md) veya bir Azure hizmetinden bir olaya abone olma ile aynıdır.
+
+> [!IMPORTANT]
+> Etki alanı konusu Event Grid bir **Otomatik yönetilen** kaynak olarak değerlendirilir. Etki alanı konusunu oluşturmadan etki alanı konu kapsamında bir olay aboneliği oluşturabilirsiniz. Bu durumda Event Grid, etki alanı konusunu sizin adınıza otomatik olarak oluşturur. Kuşkusuz, yine de etki alanı konusunu el ile oluşturmayı tercih edebilirsiniz. Bu davranış, çok sayıda etki alanı konusu ile ilgilenirken bir veya daha az kaynak hakkında endişelenmenize olanak tanır. Bir etki alanı konusunun son aboneliği silindiğinde, etki alanı konusunun el ile oluşturulup oluşturulmayacağı veya otomatik olarak oluşturulduğu dikkate alındığı zaman etki alanı konusu de silinir. 
 
 ### <a name="domain-scope-subscriptions"></a>Etki alanı kapsamı abonelikleri
 
@@ -94,7 +97,7 @@ Olay etki alanlarıyla ilgili sınırlamalar ve Kotalar aşağıda verilmiştir:
 - 50 etki alanı kapsamı abonelikleri 
 - saniye başına 5.000 olay alma oranı (bir etki alanına)
 
-Bu limitlere uygun değilse, bir destek bileti açarak veya uygulamasına bir e-posta göndererek ürün ekibine ulaşın [askgrid@microsoft.com](mailto:askgrid@microsoft.com) . 
+Bu sınırlar size uygun değilse, bir destek bileti açın veya adresine e-posta gönderin [askgrid@microsoft.com](mailto:askgrid@microsoft.com) . 
 
 ## <a name="pricing"></a>Fiyatlandırma
 Olay etki alanları, Event Grid ' deki diğer tüm özelliklerin kullandığı aynı [işlem fiyatlandırmasını](https://azure.microsoft.com/pricing/details/event-grid/) kullanır.

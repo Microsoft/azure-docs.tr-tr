@@ -7,12 +7,12 @@ ms.subservice: cosmosdb-sql
 ms.topic: how-to
 ms.date: 12/12/2019
 ms.author: thvankra
-ms.openlocfilehash: 53a3317f38cc22ffa3745f5f0e58cc01a54b825c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7dbb162749e0a2f84140b8e9394934198d096eac
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93096759"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107589627"
 ---
 # <a name="migrate-one-to-few-relational-data-into-azure-cosmos-db-sql-api-account"></a>Bire çok ilişkisel verileri Azure Cosmos DB SQL API hesabına geçirme
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -126,7 +126,7 @@ Azure Blob depolamada ara metin/JSON dosyalarını oluşturmadan verileri SQL ve
 > Netlik ve kolaylık sağlaması için aşağıdaki kod parçacıkları açık olarak satır içi boş veritabanı parolaları içerir, ancak her zaman gizli dizileri Azure Databricks kullanmanız gerekir.
 >
 
-İlk olarak, gerekli [SQL bağlayıcısını](https://docs.databricks.com/data/data-sources/sql-databases-azure.html) ve [Azure Cosmos DB bağlayıcı](https://docs.databricks.com/data/data-sources/azure/cosmosdb-connector.html) kitaplıklarını oluşturup Azure Databricks kümemize iliştirdik. Kitaplıkların yüklü olduğundan emin olmak için kümeyi yeniden başlatın.
+İlk olarak, gerekli [SQL bağlayıcısını](/connectors/sql/) ve [Azure Cosmos DB bağlayıcı](https://docs.databricks.com/data/data-sources/azure/cosmosdb-connector.html) kitaplıklarını oluşturup Azure Databricks kümemize iliştirdik. Kitaplıkların yüklü olduğundan emin olmak için kümeyi yeniden başlatın.
 
 :::image type="content" source="./media/migrate-relational-to-cosmos-sql-api/databricks1.png" alt-text="Gerekli SQL bağlayıcısının ve Azure Cosmos DB bağlayıcı kitaplıklarının Azure Databricks kümemize nerede oluşturulacağını ve iliştirilebileceği gösteren ekran görüntüsü.":::
 
@@ -136,7 +136,7 @@ Ardından, Scala ve Python için iki örnek sunuyoruz.
 Burada, SQL sorgusunun sonuçları bir veri çerçevesine "FOR JSON" çıktısı ile alınır:
 
 ```scala
-// Connect to Azure SQL https://docs.databricks.com/data/data-sources/sql-databases-azure.html
+// Connect to Azure SQL /connectors/sql/
 import com.microsoft.azure.sqldb.spark.config.Config
 import com.microsoft.azure.sqldb.spark.connect._
 val configSql = Config(Map(

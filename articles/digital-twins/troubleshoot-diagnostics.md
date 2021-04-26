@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 11/9/2020
 ms.topic: how-to
 ms.service: digital-twins
-ms.openlocfilehash: c600ced8896a3847b80d854c9e230310cca4c98d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 797de242b4b4464c0bfb5ae18af05710ab36bce6
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "100588598"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107285488"
 ---
 # <a name="troubleshooting-azure-digital-twins-diagnostics-logging"></a>Azure dijital TWINS sorunlarını giderme: tanılama günlüğü
 
@@ -115,7 +115,7 @@ API günlüklerinin alan ve özellik açıklamaları aşağıda verilmiştir.
 | Alan adı | Veri türü | Açıklama |
 |-----|------|-------------|
 | `Time` | DateTime | Bu olayın gerçekleştiği tarih ve saat (UTC) |
-| `ResourceID` | Dize | Olayın gerçekleştiği kaynak için Azure Resource Manager kaynak KIMLIĞI |
+| `ResourceId` | Dize | Olayın gerçekleştiği kaynak için Azure Resource Manager kaynak KIMLIĞI |
 | `OperationName` | Dize  | Olay sırasında gerçekleştirilen eylemin türü |
 | `OperationVersion` | Dize | Olay sırasında kullanılan API sürümü |
 | `Category` | Dize | Yayılmakta olan kaynağın türü |

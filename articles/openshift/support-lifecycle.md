@@ -5,13 +5,13 @@ author: sakthi-vetrivel
 ms.author: suvetriv
 ms.service: azure-redhat-openshift
 ms.topic: conceptual
-ms.date: 08/11/2020
-ms.openlocfilehash: fca01c77a1ff47cbeee167eb408ed9f29a1307bd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 03/06/2021
+ms.openlocfilehash: 35cbaf2b6d2618d116d2dd322ae5ac28f578cecc
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100634337"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107303551"
 ---
 # <a name="support-lifecycle-for-azure-red-hat-openshift-4"></a>Azure Red Hat OpenShift 4 için destek yaşam döngüsü
 
@@ -33,7 +33,7 @@ Sürümdeki her bir sayı, önceki sürümle genel uyumluluğu gösterir:
 * **İkincil sürüm**: yaklaşık olarak üç ayda bir yayınlandı. Küçük sürüm yükseltmeleri, özellik eklemeleri, geliştirmeler, kullanımdan kalkmalar, kaldırma işlemleri, hata düzeltmeleri, güvenlik geliştirmeleri ve diğer geliştirmeleri içerebilir.
 * **Düzeltme ekleri**: genellikle her hafta veya gerektiğinde yayımlanır. Düzeltme Eki sürüm yükseltmeleri hata düzeltmeleri, güvenlik geliştirmeleri ve diğer geliştirmeleri içerebilir.
 
-Müşteriler, çalıştırıldıkları ana sürümün en son küçük sürümünü çalıştırmayı hedeflemelidir. Örneğin, üretim kümeniz 4,4 ' de ise ve 4 serisinin en son genel kullanıma sunulan alt sürümünde 4,5 ise, her zaman, 4,5 ' ye yükseltmeniz gerekir.
+Müşteriler, çalıştırıldıkları ana sürümün en son küçük sürümünü çalıştırmayı hedeflemelidir. Örneğin, üretim kümeniz 4,4 ' de ise ve 4 serisinin en son genel kullanıma sunulan alt sürümünde 4,5 ise, her zaman, 4,5 ' ye yükseltmeniz gerekir. 
 
 ### <a name="upgrade-channels"></a>Yükseltme kanalları
 
@@ -106,12 +106,16 @@ Portalda veya Azure CLı ile bir Azure Red Hat OpenShift kümesi dağıttığın
 
 **Bir Kullanıcı bir OpenShift kümesini desteklenmeyen bir ikincil sürümle yükselttiğinde ne olur?**
 
-N-2 veya daha eski bir sürüm kullanıyorsanız, destek dışında olduğunuz ve yükseltmeniz istenecek demektir. N-2 sürümünden N-1 ' e yükseltme başarılı olursa, destek ilkilerimize geri dönebilirsiniz. Örnek:
+N-2 veya daha eski bir sürümdaysanız, destek dışında olduğunuz ve destek almaya devam etmek için yükseltme yapmanız istenecek demektir. N-2 sürümünden N-1 ' e yükseltme başarılı olursa, destek içine geri dönebilirsiniz. N-3 sürümünden veya daha eski sürümden desteklenen bir sürüme yükseltmek zor olabilir ve bazı durumlarda mümkün değildir. Olası yükseltme sorunlarından kaçınmak için kümenizi en son OpenShift sürümünde tutmanızı öneririz. Örnek:
 * Desteklenen en eski Azure Red Hat OpenShift sürümü 4.4. z ise ve 4.3. z veya daha eski bir sürümdaysanız, destek dışında olursunuz.
-* 4.3. z 'den 4.4. z 'ye veya daha yüksek bir sürüme yükseltme başarılı olduğunda, destek ilkilerimize geri dönebilirsiniz.
+* 4.3. z 'den 4.4. z 'ye veya daha yüksek bir sürüme yükseltme başarılı olduğunda, destek ilkilerimize geri dönebilirsiniz. 
 
 Kümenizi önceki bir sürüme geri döndürme veya geri alma desteklenmez. Yalnızca daha yeni bir sürüme yükseltme desteklenir.
 
 **"Destek dışında" ne anlama geliyor?**
 
-"Destek dışında", çalıştırdığınız sürümün desteklenen sürümler listesinin dışında olduğu anlamına gelir ve sürüm kullanımdan kaldırıldıktan sonra 30 günlük yetkisiz kullanım süresi içinde olmadığınız takdirde, desteği istemek için kümeyi desteklenen bir sürüme yükseltmeniz istenebilir. Ayrıca, Azure Red Hat OpenShift, 30 günlük yetkisiz kullanım süresi sonunda desteklenen sürümler listesinin dışındaki kümeler için çalışma zamanı veya SLA garantisi yapmaz.
+ARO kümeniz desteklenen sürümler listesinde olmayan bir OpenShift sürümü çalıştırıyorsa veya [Desteklenmeyen bir küme yapılandırması](https://docs.microsoft.com/azure/openshift/support-policies-v4)kullanıyorsa, kümeniz "destek dışında" olur. Sonuç olarak:
+- Kümeniz için bir destek bileti açılırken, kümeyi desteklenen bir sürüme yükseltmeniz istenir. destek almadan önce, sürüm desteği bittikten sonra 30 günlük yetkisiz kullanım süresi içinde olmadığınız durumlar dışında. 
+- Destek dışındaki kümeler için herhangi bir çalışma zamanı veya SLA garantisi hükümsüz kılındı.
+- Destek dışındaki kümeler yalnızca en iyi çaba temelinde düzeltme eki uygulanır.
+- Destek dışındaki kümeler izlenmeyecektir.

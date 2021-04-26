@@ -3,17 +3,18 @@ title: 'Hızlı başlangıç: Azure SYNAPSE çalışma alanı Azure Resource Man
 description: Azure Resource Manager şablonu kullanarak bir Synapse çalışma alanı oluşturmayı öğrenin (ARM şablonu).
 services: azure-resource-manager
 author: julieMSFT
-ms.service: azure-resource-manager
+ms.service: synapse-analytics
+ms.subservice: workspace
 ms.topic: quickstart
 ms.custom: subject-armqs
 ms.author: jrasnick
 ms.date: 08/07/2020
-ms.openlocfilehash: 2b05220081dde4db6f07f21fb9978d9e466235ca
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7317b7f51c6d0f9d72e3aad81794a569276d2145
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92740372"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566129"
 ---
 # <a name="quickstart-create-an-azure-synapse-workspace-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonu kullanarak Azure SYNAPSE çalışma alanı oluşturma
 

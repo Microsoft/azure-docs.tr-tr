@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 04/30/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: f2f01e2b58c997db08ad4427de7eef1ee3760c4a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: fdd74a09e49a352d18cf4ceccf406a25bf6dffb3
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96016820"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445848"
 ---
 # <a name="set-up-the-powershell-module-for-windows-virtual-desktop"></a>Windows sanal masaüstü için PowerShell modülünü ayarlama
 

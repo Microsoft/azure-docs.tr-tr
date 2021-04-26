@@ -13,12 +13,12 @@ ms.date: 10/30/2019
 ms.author: marsma
 ms.reviewer: saeeda
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 55cecc658b11b7a09665af7128df25fbbff800ef
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 90e81e30e26846bf05032dddf1441e8428bc7158
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100559517"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550991"
 ---
 # <a name="overview-of-the-microsoft-authentication-library-msal"></a>Microsoft kimlik doğrulama kitaplığı 'na genel bakış (MSAL)
 Microsoft kimlik doğrulama kitaplığı (MSAL), geliştiricilerin kullanıcıların kimliğini doğrulamak ve güvenli Web API 'Lerine erişmek için Microsoft Identity platformundan [belirteçler](developer-glossary.md#security-token) almasına olanak sağlar. Microsoft Graph, diğer Microsoft API 'Leri, üçüncü taraf Web API 'Lerine veya kendi Web API 'nize güvenli erişim sağlamak için kullanılabilir. MSAL, .NET, JavaScript, Java, Python, Android ve iOS dahil birçok farklı uygulama mimarilerini ve platformunu destekler.
@@ -53,6 +53,7 @@ MSAL, aşağıdakiler dahil birçok uygulama senaryosunda kullanılabilir:
 | [Android için MSAL](https://github.com/AzureAD/microsoft-authentication-library-for-android)|Android|
 | [MSAL angular](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-angular)| Angular ve Angular.js çerçeveler içeren tek sayfalı uygulamalar|
 | [iOS ve macOS için MSAL](https://github.com/AzureAD/microsoft-authentication-library-for-objc)|iOS ve macOS|
+| [MSAL Go (Önizleme)](https://github.com/AzureAD/microsoft-authentication-library-for-go)|Windows, macOS, Linux|
 | [MSAL Java](https://github.com/AzureAD/microsoft-authentication-library-for-java)|Windows, macOS, Linux|
 | [MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser)| Vue.js, Ember.js veya Durandal.js gibi JavaScript/TypeScript çerçeveleri|
 | [MSAL.NET](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet)| .NET Framework, .NET Core, Xamarin Android, Xamarin iOS, Evrensel Windows Platformu|

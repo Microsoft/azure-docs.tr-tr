@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 07/26/2019
+ms.date: 04/05/2021
 ms.author: zhchia
-ms.openlocfilehash: 2fcb85b2c16bc2dd418c2260420733dd8663382a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 809b32fcf6f39ba9dec2980a79e8824e282b54b7
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96179267"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106450098"
 ---
 # <a name="tutorial-configure-fuze-for-automatic-user-provisioning"></a>Öğretici: otomatik Kullanıcı sağlaması için belirsizlik yapılandırma
 
@@ -144,6 +144,7 @@ Hazırlama ayarlarını yapılandırdıktan sonra dağıtımınızı izlemek iç
 ## <a name="connector-limitations"></a>Bağlayıcı sınırlamaları
 
 * Belirsizlik, **yetkilendirmeler** ADLı özel SCIM özniteliklerini destekler. Bu öznitelikler yalnızca oluşturulup güncelleştirilemeyebilir. 
+* Belirsizlik API 'SI, Kullanıcı adı özniteliğinde filtrelemeyi desteklemez. Sonuç olarak, Kullanıcı adı özniteliği olmayan ancak Azure AD 'de userPrincipalName ile eşleşen bir e-posta ile bulunan mevcut bir kullanıcıyı eşitlemeye çalışırken günlüklerde hatalarla karşılaşabilirsiniz. 
 
 ## <a name="change-log"></a>Değişiklik günlüğü
 

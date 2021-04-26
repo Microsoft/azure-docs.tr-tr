@@ -1,15 +1,15 @@
 ---
 title: Azure Event Grid için yerleşik ilke tanımları
 description: Azure Event Grid için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 ms.custom: subject-policy-reference
-ms.openlocfilehash: f9f5c2c15d7625e35b7636e8a98f5c1a541cffe3
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 748c290698ded47e1bc47e38a65786624fd72e89
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105037589"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869662"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-event-grid"></a>Azure Event Grid için Azure Ilkesi yerleşik tanımları
 

@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.topic: troubleshooting
 ms.date: 02/22/2021
 ms.author: deanwe
-ms.openlocfilehash: 0b4e116210cf68dc672122ad4ddc98f85067f3b8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f5a9ff7661fda372631d1bb912b1c137b37c7e07
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101688017"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107363368"
 ---
 # <a name="frequently-asked-questions-for-azure-automanage-for-vms"></a>VM 'Ler için Azure oto yönetimi hakkında sık sorulan sorular
 
@@ -104,7 +104,10 @@ Hayır, tekrar Yönet bunu yeniden yapılandırmayacak. Bu hizmetle ilişkili ka
 
 **Neden sanal makinelerimin, oto Yönet portalında başarısız bir durumu var?**
 
-Durumu *başarısız* olarak GÖRÜRSENIZ, sanal makinenizin bulunduğu kaynak grubu aracılığıyla dağıtımda sorun giderebilirsiniz. **Kaynak grupları**' na gidin, kaynak grubunuzu seçin, **dağıtımlar** ' a tıklayın ve hata ayrıntılarıyla birlikte *başarısız* durumuna bakın.
+Durumu *başarısız* olarak görürseniz, birkaç farklı şekilde dağıtımda sorun gidermeye bakabilirsiniz:
+* **Kaynak grupları**' na gidin, kaynak grubunuzu seçin, **dağıtımlar** ' a tıklayın ve hata ayrıntılarıyla birlikte *başarısız* durumuna bakın.
+* **Abonelikler**' e gidin, kaynak grubunuzu seçin, **dağıtımlar** ' a tıklayın ve hata ayrıntılarıyla birlikte *başarısız* durumuna bakın.
+* Ayrıca, "yapılandırma profili atamaları oluşturma veya güncelleştirme" için bir giriş içeren bir sanal makinenin etkinlik günlüğünü de ziyaret edebilirsiniz. Bu, dağıtımınız hakkında daha fazla ayrıntı de içerebilir.
 
 **Oto yönetimi için nasıl sorun giderme desteği alabilirim?**
 

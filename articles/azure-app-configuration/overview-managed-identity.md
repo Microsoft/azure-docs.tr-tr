@@ -7,12 +7,12 @@ ms.date: 02/25/2020
 ms.author: barbkess
 ms.reviewer: lcozzens
 ms.service: azure-app-configuration
-ms.openlocfilehash: 5424b776b977d8a6939bbb28c5d4c9c428cac444
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e4fdff2515dde941b2e9037a21ad931ac27b6fef
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102179621"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764234"
 ---
 # <a name="how-to-use-managed-identities-for-azure-app-configuration"></a>Azure Uygulama yapılandırması için Yönetilen kimlikler kullanma
 
@@ -99,12 +99,12 @@ Aşağıdaki adımlar, Kullanıcı tarafından atanan bir kimlik ve bir uygulama
 
 ## <a name="removing-an-identity"></a>Kimlik kaldırma
 
-Azure CLı 'de [az appconfig Identity Remove](/cli/azure/appconfig/identity#az-appconfig-identity-remove) komutu kullanılarak özelliği devre dışı bırakarak, sistem tarafından atanan bir kimlik kaldırılabilir. Kullanıcı tarafından atanan kimlikler tek tek kaldırılabilir. Sistem tarafından atanan bir kimliğin bu şekilde kaldırılması, AAD 'den de silinecek. Uygulama kaynağı silindiğinde, sistem tarafından atanan kimlikler de AAD 'den otomatik olarak kaldırılır.
+Azure CLı 'de [az appconfig Identity Remove](/cli/azure/appconfig/identity#az_appconfig_identity_remove) komutu kullanılarak özelliği devre dışı bırakarak, sistem tarafından atanan bir kimlik kaldırılabilir. Kullanıcı tarafından atanan kimlikler tek tek kaldırılabilir. Sistem tarafından atanan bir kimliğin bu şekilde kaldırılması, AAD 'den de silinecek. Uygulama kaynağı silindiğinde, sistem tarafından atanan kimlikler de AAD 'den otomatik olarak kaldırılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
 > [Azure Uygulama yapılandırması ile ASP.NET Core uygulaması oluşturma](quickstart-aspnet-core-app.md)
 
-[az appconfig Identity Assign]: /cli/azure/appconfig/identity#az-appconfig-identity-assign
-[az login]: /cli/azure/reference-index#az-login
+[az appconfig Identity Assign]: /cli/azure/appconfig/identity#az_appconfig_identity_assign
+[az login]: /cli/azure/reference-index#az_login

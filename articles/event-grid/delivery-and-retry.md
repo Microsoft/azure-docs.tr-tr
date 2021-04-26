@@ -3,12 +3,12 @@ title: Azure Event Grid teslimi ve yeniden dene
 description: Azure Event Grid olayların nasıl teslim edildiğini ve teslim edilmemiş iletileri nasıl işlediğini açıklar.
 ms.topic: conceptual
 ms.date: 10/29/2020
-ms.openlocfilehash: e7fa627464ddb85ebded3ae99229b7fe8dd3fde3
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: e24b7540ea1ac41774e2c23781265f9a61940cb1
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629283"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106276748"
 ---
 # <a name="event-grid-message-delivery-and-retry"></a>İleti teslimini Event Grid ve yeniden deneyin
 
@@ -17,7 +17,7 @@ Bu makalede, teslimin onaylanmaması durumunda Azure Event Grid olayların nası
 Event Grid dayanıklı teslim sağlar. Her bir abonelik için her iletiyi **en az bir kez** sunar. Olaylar, her aboneliğin kayıtlı uç noktasına hemen gönderilir. Bir uç nokta bir olayın alındığını kabul etmezse, olayın yeniden denenmesini Event Grid.
 
 > [!NOTE]
-> Event Grid olay tesliminin sırasını garanti etmez, bu nedenle abone onları sıra dışı alabilir. 
+> Event Grid, olay tesliminin sırasını garanti etmez, bu nedenle aboneler onları sıra dışı alabilir. 
 
 ## <a name="batched-event-delivery"></a>Toplu olay teslimi
 
@@ -55,11 +55,11 @@ Azure CLı 'yı Event Grid kullanma hakkında daha fazla bilgi için bkz. [Azure
 
 ## <a name="retry-schedule-and-duration"></a>Zamanlamayı ve süreyi yeniden dene
 
-EventGrid bir olay teslim girişimi için bir hata aldığında, EventGrid teslim mi yoksa atılacak harfi mi yeniden denemeli ya da hatanın türüne göre olayı bırakmaya karar verir. 
+EventGrid bir olay teslim girişimi için bir hata aldığında, EventGrid teslimatı yeniden denemek mi, olayı teslim etmek mi yoksa olayı hata türüne göre mi bırakmak gerektiğine karar verir. 
 
-Abone olunan uç nokta tarafından döndürülen hata, yeniden denemeler ile çözülebilecek yapılandırmayla ilgili bir hata ise (örneğin, uç nokta silinirse), EventGrid olayı iptal eder ya da kullanılmayan harf yapılandırılmamışsa olayı yapmaz.
+Abone olunan uç noktası tarafından döndürülen hata, yeniden denemeler ile çözülebilecek yapılandırmayla ilgili bir hatadır (örneğin, uç nokta silinirse), EventGrid olay üzerinde atılacak işlemleri gerçekleştirir veya atılacak harf yapılandırılmamışsa olayı çözmez.
 
-Yeniden deneme gerçekleşmeyen uç nokta türleri aşağıda verilmiştir:
+Aşağıdaki tabloda, yeniden deneme gerçekleşmeyen uç nokta ve hata türleri açıklanmaktadır:
 
 | Uç nokta türü | Hata kodları |
 | --------------| -----------|
@@ -67,7 +67,7 @@ Yeniden deneme gerçekleşmeyen uç nokta türleri aşağıda verilmiştir:
 | Web Kancası | 400 Hatalı Istek, 413 Istek varlığı çok büyük, 403 Yasak, 404 bulunamadı, 401 yetkilendirilmemiş |
  
 > [!NOTE]
-> Uç nokta için Dead-Letter yapılandırılmamışsa, yukarıdaki hatalar gerçekleştiğinde olaylar bırakılır. Bu tür olayların kesilmesini istemiyorsanız, atılacak harfi yapılandırmayı düşünün.
+> Bir uç nokta için Dead-Letter yapılandırılmamışsa, yukarıdaki hatalar gerçekleştiğinde olaylar bırakılır. Bu tür olayların kesilmesini istemiyorsanız Dead-Letter yapılandırmayı düşünün.
 
 Abone olunan uç nokta tarafından döndürülen hata yukarıdaki listede değilse, EventGrid aşağıda açıklanan ilkeleri kullanarak yeniden denemeyi gerçekleştirir:
 
@@ -89,7 +89,7 @@ Uç nokta 3 dakika içinde yanıt verirse Event Grid, olayı en iyi çaba temeli
 
 Event Grid, tüm yeniden deneme adımlarına küçük bir rastgele seçim ekler ve bir uç nokta sürekli sağlıksız, uzun bir süre boyunca azaltılamadığında ya da yoğun bir şekilde göründüğünden belirli yeniden denemeleri atlayabilir mümkün olduğunda olabilir.
 
-Belirleyici davranış için, olay süresini, [abonelik yeniden deneme ilkelerindeki](manage-event-delivery.md)canlı ve en fazla teslimat denemesine ayarlayın.
+Belirleyici davranış için, [abonelik yeniden deneme ilkelerindeki](manage-event-delivery.md)olay yaşam süresi ve en fazla teslimat girişimlerini ayarlayın.
 
 Varsayılan olarak Event Grid, 24 saat içinde teslim edilmeyen tüm olayları sona ermez. Olay aboneliği oluştururken [yeniden deneme ilkesini özelleştirebilirsiniz](manage-event-delivery.md) . Maksimum teslim denemesi sayısı (varsayılan değer 30) ve olay yaşam süresi (varsayılan değer 1440 dakikadır) sağlarsınız.
 
@@ -115,7 +115,7 @@ Son bir olay teslim girişimi ve atılacak ileti konumuna teslim edildiğinde ol
 
 Atılacak mektup konumunu ayarlamadan önce, kapsayıcısı olan bir depolama hesabınız olmalıdır. Olay aboneliği oluştururken bu kapsayıcı için uç noktayı sağlarsınız. Uç nokta şu biçimdedir: `/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Storage/storageAccounts/<storage-name>/blobServices/default/containers/<container-name>`
 
-Atılacak mektup konumuna bir olay gönderildiğinde bildirim almak isteyebilirsiniz. Teslim edilmemiş olaylara yanıt vermek için Event Grid kullanmak için, atılacak ileti blobu depolaması için [bir olay aboneliği oluşturun](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json) . Atılacak ileti BLOB depolama alanı teslim edilmemiş bir olay aldığında Event Grid işleyicisine bildirir. İşleyici, teslim edilmemiş olayları uzlaştırmak için almak istediğiniz eylemlerle yanıt verir. Bir atılacak harf konumu ayarlamaya ve yeniden denemeye ilişkin bir örnek için, bkz. [atılacak mektup ve yeniden deneme ilkeleri](manage-event-delivery.md).
+Atılacak ileti konumuna bir olay gönderildiğinde bildirim almak isteyebilirsiniz. Teslim edilmemiş olaylara yanıt vermek için Event Grid kullanmak için, atılacak ileti blobu depolaması için [bir olay aboneliği oluşturun](../storage/blobs/storage-blob-event-quickstart.md?toc=%2fazure%2fevent-grid%2ftoc.json) . Atılacak ileti BLOB depolama alanı teslim edilmemiş bir olay aldığında Event Grid işleyicisine bildirir. İşleyici, teslim edilmemiş olayları uzlaştırmak için almak istediğiniz eylemlerle yanıt verir. Bir atılacak mektup konumu ayarlama ve ilkeleri yeniden deneme hakkında bir örnek için bkz. [atılacak mektup ve yeniden deneme ilkeleri](manage-event-delivery.md).
 
 ## <a name="delivery-event-formats"></a>Teslim olayı biçimleri
 Bu bölüm, farklı teslim şeması biçimlerinde (Event Grid şeması, CloudEvents 1,0 şeması ve özel şema) olayları ve kullanılmayan olayları örnekler sağlar. Bu biçimler hakkında daha fazla bilgi için bkz. [Event Grid şeması](event-schema.md) ve [bulut olayları 1,0 şema](cloud-event-schema.md) makaleleri. 
@@ -288,7 +288,7 @@ Yukarıdaki küme içinde olmayan diğer tüm kodlar (200-204) başarısızlık 
 | 503 Hizmet Kullanılamıyor | 30 saniye veya daha uzun bir süre sonra yeniden deneyin |
 | Tüm diğerleri | 10 saniye veya daha fazla süre sonra yeniden deneyin |
 
-## <a name="delivery-with-custom-headers"></a>Özel üstbilgileriyle teslim
+## <a name="custom-delivery-properties"></a>Özel teslim özellikleri
 Olay abonelikleri, teslim edilen olaylara dahil edilen HTTP üstbilgilerini ayarlamanıza olanak sağlar. Bu özellik, bir hedef için gereken özel üstbilgileri ayarlamanıza olanak sağlar. Bir olay aboneliği oluştururken en fazla 10 üst bilgi ayarlayabilirsiniz. Her üst bilgi değeri 4.096 (4K) bayttan büyük olmamalıdır. Aşağıdaki hedeflere teslim edilen olaylar üzerinde özel üstbilgiler belirleyebilirsiniz:
 
 - Web Kancaları
@@ -296,7 +296,7 @@ Olay abonelikleri, teslim edilen olaylara dahil edilen HTTP üstbilgilerini ayar
 - Azure Event Hubs
 - Geçiş Karma Bağlantılar
 
-Daha fazla bilgi için bkz. [özel üstbilgileriyle teslim](delivery-properties.md). 
+Daha fazla bilgi için bkz. [özel teslim özellikleri](delivery-properties.md). 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

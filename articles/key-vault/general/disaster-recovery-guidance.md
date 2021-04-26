@@ -2,19 +2,18 @@
 title: Kullanılabilirlik ve artıklık Azure Key Vault-Azure Key Vault | Microsoft Docs
 description: Azure Key Vault kullanılabilirliği ve artıklığı hakkında bilgi edinin.
 services: key-vault
-author: ShaneBala-keyvault
-manager: ravijan
+author: msmbaldwin
 ms.service: key-vault
 ms.subservice: general
 ms.topic: tutorial
-ms.date: 08/28/2020
-ms.author: sudbalas
-ms.openlocfilehash: 27184e267bb0472dad6fc9176dfdeee68d5eae58
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.date: 03/31/2021
+ms.author: mbaldwin
+ms.openlocfilehash: 3c5afc92044fcb109bedd38298b0b027ebeb437d
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105611829"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107749699"
 ---
 # <a name="azure-key-vault-availability-and-redundancy"></a>Azure Key Vault kullanılabilirliği ve yedekliliği
 

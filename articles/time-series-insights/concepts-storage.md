@@ -1,21 +1,21 @@
 ---
 title: Depolamaya genel bakış-Azure Time Series Insights Gen2 | Microsoft Docs
 description: Azure Time Series Insights Gen2 'de veri depolama hakkında bilgi edinin.
-author: lyrana
-ms.author: lyhughes
-manager: deepakpalled
+author: deepakpalled
+ms.author: dpalled
+manager: diviso
 ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
 ms.date: 01/21/2021
 ms.custom: seodec18
-ms.openlocfilehash: 748eaca93eaee5ec858ea43261995111cef8ceda
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: cd26df1de86ee4bdb33050d0bc4769663707733e
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98676860"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725035"
 ---
 # <a name="data-storage"></a>Veri Depolama
 
@@ -53,7 +53,7 @@ Isınma deponuzdaki veriler yalnızca [zaman serisi sorgu API 'leri](./concepts-
 
 * Etkinleştirildiğinde, ortamınızda akan tüm veriler, etkinlik zaman damgasına bakılmaksızın ısınma deponuza yönlendirilir. Akış alma işlem hattının neredeyse gerçek zamanlı akış için oluşturulup oluşturulmadığını ve geçmiş olayların [desteklenmediğini](./concepts-streaming-ingestion-event-sources.md#historical-data-ingestion)unutmayın.
 * Saklama dönemi, olay zaman damgasında değil, etkinliğin ısınma deposunda dizine alındığı zamana göre hesaplanır. Bu, olay zaman damgası ileride olsa bile, saklama süresi dolduktan sonra, verilerin artık ısınma deposunda kullanılamadığı anlamına gelir.
-  * Örnek: 10 günlük hava durumu tahminlerine sahip bir olay, 7 günlük saklama süresiyle yapılandırılmış bir sıcak depolama kapsayıcısında alınır ve dizinlenir. 7 gün geçtikten sonra, tahmine daha fazla yarı mağaza 'da erişilemez, ancak soğuk bir şekilde sorgulanabilir.
+  * Örnek: 10 günlük hava durumu tahminlerine sahip bir olay, 7 günlük saklama süresiyle yapılandırılmış bir sıcak depolama kapsayıcısında alınır ve dizinlenir. Yedi gün sonra, tahmine daha fazla yarı mağaza 'da erişilemez, ancak soğuk bir şekilde sorgulanabilir.
 * En yeni verileri soğuk depolamada dizinli olan mevcut bir ortamda yarı depolamayı etkinleştirirseniz, ısınma mağazalarınızın bu verilerle doldurulmadığını unutmayın.
 * Yalnızca yarı depolamayı etkinleştirdiyseniz ve en son verilerinizi gezgin 'de görüntülerken sorunlarla karşılaşıyorsanız, geçici olarak yarı mağaza sorgularını kapalı bırakabilirsiniz:
 
@@ -71,6 +71,9 @@ Azure Time Series Insights Gen2, Azure Depolama hesabınızdaki her bir olayın 
 
 Tüm verileriniz, Azure depolama hesabınızda süresiz olarak depolanır.
 
+> [!WARNING]
+> Time Series Insights tarafından kullanılan bir hub veya olay kaynağına yönelik genel Internet erişimini kısıtlamayın veya gerekli bağlantı bozulur.
+
 #### <a name="writing-and-editing-blobs"></a>Blob yazma ve düzenleniyor
 
 Sorgu performansı ve veri kullanılabilirliği sağlamak için, Azure Time Series Insights Gen2 tarafından oluşturulan blob 'ları düzenlemeyin veya silmeyin.
@@ -87,7 +90,7 @@ Azure Time Series Insights Gen2 dosyalarınızı silmeyin. Yalnızca Azure Time 
 
 ### <a name="parquet-file-format-and-folder-structure"></a>Parquet dosya biçimi ve klasör yapısı
 
-Parquet, verimli depolama ve performans için tasarlanan açık kaynaklı bir sütunlu dosya biçimidir. Azure Time Series Insights Gen2, ölçekte zaman serisi KIMLIK tabanlı sorgu performansını etkinleştirmek için Parquet kullanır.  
+Parquet, verimli depolama ve performans için tasarlanan açık kaynaklı bir sütunlu dosya biçimidir. Azure Time Series Insights Gen2, ölçekte zaman serisi KIMLIK tabanlı sorgu performansını etkinleştirmek için Parquet kullanır.
 
 Parquet dosya türü hakkında daha fazla bilgi için, [Parquet belgelerini](https://parquet.apache.org/documentation/latest/)okuyun.
 

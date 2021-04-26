@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 1/28/2021
 ms.topic: conceptual
 ms.service: digital-twins
-ms.openlocfilehash: 8010581667354f2e8484bc7341227ec41713d10f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2bfd36b79ad800c14a68948aa8488e842d3f4def
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "99072727"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481183"
 ---
 # <a name="what-is-the-new-azure-digital-twins-how-is-it-different-from-the-original-version-2018"></a>Yeni Azure dijital TWINS nedir? Özgün sürümden (2018) farklı mi?
 
@@ -42,6 +42,6 @@ Azure dijital TWINS sınırları listesi için bkz. [*Azure Digital TWINS hizmet
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Hızlı başlangıç: [*hızlı başlangıç: örnek bir senaryoyu araştırmak*](quickstart-adt-explorer.md)için geçerli sürümle çalışmaya göz atın.
+* Hızlı başlangıç: [*hızlı başlangıç: örnek bir senaryoyu araştırmak*](quickstart-azure-digital-twins-explorer.md)için geçerli sürümle çalışmaya göz atın.
 
 * Ya da kavramlarla ilgili temel kavramlar hakkında okumaya başlayabilirsiniz [*: özel modeller*](concepts-models.md).

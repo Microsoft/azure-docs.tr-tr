@@ -9,17 +9,19 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 09/09/2020
+ms.date: 04/02/2021
 ms.author: hirsin
 ms.reviewer: hirsin
-ms.custom: aaddev, identityplatformtop40
-ms:custom: fasttrack-edit
-ms.openlocfilehash: 21e0b800e06b7a5ad0351ff53d26a5e2cd2ba71c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom:
+- aaddev
+- identityplatformtop40
+- fasttrack-edit
+ms.openlocfilehash: 885379a02c8866f2829fb681683a93b1d8d314fa
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102175397"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530024"
 ---
 # <a name="microsoft-identity-platform-id-tokens"></a>Microsoft Identity platform KIMLIĞI belirteçleri
 
@@ -124,6 +126,12 @@ Belirteç boyutunun HTTP üst bilgi boyutu sınırlarını aşmadığından emin
   ...
 }
 ```
+
+## <a name="id-token-lifetime"></a>KIMLIK belirteci ömrü
+
+Varsayılan olarak, bir KIMLIK belirteci 1 saat boyunca geçerlidir; 1 saat sonra istemci yeni bir KIMLIK belirteci almalıdır.
+
+İstemci uygulamanın ne sıklıkta uygulama oturumunun süresinin dolacağını ve kullanıcının ne sıklıkta yeniden kimlik doğrulaması gerektirdiğini (sessizce veya etkileşimli olarak) denetlemek için bir KIMLIK belirtecinin ömrünü ayarlayabilirsiniz. Daha fazla bilgi için, [yapılandırılabilir belirteç yaşam sürelerini](active-directory-configurable-token-lifetimes.md)okuyun.
 
 ## <a name="validating-an-id_token"></a>İd_token doğrulama
 

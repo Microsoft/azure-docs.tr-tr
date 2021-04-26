@@ -10,15 +10,15 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 09/20/2020
+ms.date: 04/20/2021
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 3f89f218c82505fd6bc261d41938d4619b32bf8a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1e9030558779be3e417383f9f32612ee3e834a1c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101675968"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788088"
 ---
 # <a name="ibm-db2-azure-virtual-machines-dbms-deployment-for-sap-workload"></a>SAP iş yükü için IBM Db2 Azure Sanal Makineler DBMS dağıtımı
 
@@ -27,7 +27,7 @@ SAP Business Suite 'i LUW için IBM DB2 üzerinde çalıştırmaya ilişkin gene
 
 Azure 'da LUW için DB2 üzerinde SAP hakkında daha fazla bilgi ve güncelleştirme için bkz. SAP Note [2233094]. 
 
-, Azure 'da sunulan SAP iş yükünde çeşitli makalelerdir.  [Azure 'Da SAP iş yüküne başlamanız önerilir-kullanmaya](./get-started.md) başlayın ve ardından ilgilendiğiniz alanı seçin
+, Azure 'da sunulan SAP iş yükünde çeşitli makalelerdir.  [Azure 'Da SAP iş yükünün başlaması önerilir-kullanmaya](./get-started.md) başlayın ve ardından ilgi alanı alanını seçin
 
 Aşağıdaki SAP notları, bu belgede ele alınan alanla ilgili olarak Azure 'daki SAP ile ilgilidir:
 
@@ -45,7 +45,7 @@ Aşağıdaki SAP notları, bu belgede ele alınan alanla ilgili olarak Azure 'da
 | [2002167] |Red Hat Enterprise Linux 7. x: yükleme ve yükseltme |
 | [1597355] |Linux için takas boşluğu önerisi |
 
-Bir çekme isteği-bu belgeye okuma olarak, [SAP iş yükü Için Azure sanal MAKINELERI DBMS dağıtımı](dbms_guide_general.md) ve [Azure belgelerindeki SAP iş](./get-started.md)yükünde diğer kılavuzlar hakkında belge konularını okuduğunuzdan önce göz önünde bulundurmanız gerekir. 
+Bir çekme isteği-bu belgeye okuma olarak, [SAP iş yükü Için Azure sanal MAKINELERI DBMS dağıtımı](dbms_guide_general.md) ve [Azure belgelerindeki SAP iş](./get-started.md)yükünde diğer kılavuzlar hakkında belge konularını okuyun. 
 
 
 ## <a name="ibm-db2-for-linux-unix-and-windows-version-support"></a>Linux, UNIX ve Windows sürüm desteği için IBM DB2
@@ -55,7 +55,7 @@ Desteklenen SAP ürünleri ve Azure VM türleri hakkında daha fazla bilgi için
 
 ## <a name="ibm-db2-for-linux-unix-and-windows-configuration-guidelines-for-sap-installations-in-azure-vms"></a>Azure VM 'lerinde SAP yüklemeleri için Linux, UNIX ve Windows yapılandırma yönergeleri için IBM DB2
 ### <a name="storage-configuration"></a>Depolama Yapılandırması
-SAP iş yükü için Azure Depolama türleri 'ne genel bakış için [Azure depolama TÜRLERI SAP iş](./planning-guide-storage.md) yükleri makalesine başvurun. tüm veritabanı dosyaları Azure blok depolama 'nın bağlı disklerinde depolanmalıdır (Windows: NFFS, Linux: XFS, ext4 veya ext3). Aşağıdaki Azure hizmetleri gibi her türlü ağ sürücüsü veya uzak paylaşım veritabanı dosyaları için **desteklenmez:** 
+SAP iş yükü için Azure Depolama türleri 'ne genel bakış için [Azure depolama TÜRLERI SAP iş](./planning-guide-storage.md) yükleri makalesine başvurun. tüm veritabanı dosyaları Azure blok depolama 'nın bağlı disklerinde depolanmalıdır (WINDOWS: NTFS, Linux: XFS veya ext3). Aşağıdaki Azure hizmetleri gibi her türlü ağ sürücüsü veya uzak paylaşım veritabanı dosyaları için **desteklenmez:** 
 
 * [Microsoft Azure dosya hizmeti](/archive/blogs/windowsazurestorage/introducing-microsoft-azure-file-service)
 
@@ -71,11 +71,14 @@ Performans konuları için SAP yükleme kılavuzlarındaki Bölüm ' veri güven
 
 Alternatif olarak, birden çok disk üzerinde bir büyük mantıksal cihaz oluşturmak için, Windows Storage havuzlarını (yalnızca Windows Server 2012 ve üzeri sürümlerde kullanılabilir), [Azure sanal MAKINELER DBMS dağıtımı](dbms_guide_general.md) veya Linux üzerinde mdaddm Için açıklanan konular açıklanmaktadır.
 
-<!-- sapdata and saptmp are terms in the SAP and DB2 world and now spelling errors -->
-
-Ve dizinleriniz için DB2 depolama yollarını içeren diskler için `sapdata` `saptmp` , 512 kB boyutundaki bir fiziksel disk sektör boyutu belirtmeniz gerekir. Windows Storage havuzlarını kullanırken, parametresini kullanarak komut satırı arabirimi aracılığıyla depolama havuzlarını el ile oluşturmanız gerekir `-LogicalSectorSizeDefault` . Daha fazla bilgi için bkz. <https://technet.microsoft.com/itpro/powershell/windows/storage/new-storagepool>.
+<!-- log_dir, sapdata and saptmp are terms in the SAP and DB2 world and now spelling errors -->
 
 Azure M serisi VM için, işlem günlüklerine yazma gecikmesi, Azure Yazma Hızlandırıcısı kullanılırken Azure Premium depolama performansına kıyasla faktörlerle azaltılabilir. Bu nedenle, DB2 işlem günlüklerinin birimini oluşturan VHD 'ler için Azure Yazma Hızlandırıcısı dağıtmanız gerekir. Ayrıntılar belge [yazma Hızlandırıcısı](../../how-to-enable-write-accelerator.md)okunabilir.
+
+IBM DB2 LUW 11,5, 4 KB 'lık kesim boyutu için destek yayımladı. Daha eski DB2 sürümleri için 512 baytlık kesim boyutu kullanılmalıdır. Premium SSD diskler, 4 KB yerel ve 512 baytlık öykünmeye sahiptir. Ultra disk varsayılan olarak 4 KB 'lık kesim boyutunu kullanır. Ultra disk oluşturma sırasında 512 baytlık kesim boyutunu etkinleştirebilirsiniz. Ayrıntılar [Azure Ultra diskler kullanılarak](../../disks-enable-ultra-ssd.md#deploy-an-ultra-disk---512-byte-sector-size)kullanılabilir. Bu 512 baytlık kesim boyutu, 11,5 ' den daha düşük IBM DB2 LUW sürümleri için bir önkoşuldur.
+
+Windows 'da, ve dizinleri için DB2 depolama yolları için depolama havuzlarını kullanan `log_dir` `sapdata` `saptmp` bir fiziksel disk sektör boyutu 512 KB belirtmeniz gerekir. Windows Storage havuzlarını kullanırken, parametresini kullanarak komut satırı arabirimi aracılığıyla depolama havuzlarını el ile oluşturmanız gerekir `-LogicalSectorSizeDefault` . Daha fazla bilgi için bkz. <https://technet.microsoft.com/itpro/powershell/windows/storage/new-storagepool>.
+
 
 ## <a name="recommendation-on-vm-and-disk-structure-for-ibm-db2-deployment"></a>IBM DB2 dağıtımı için VM ve disk yapısı önerisi
 
@@ -234,13 +237,7 @@ Makaleyi okuyun
 
 - [SAP iş yükü için Azure sanal makineler DBMS dağıtımına yönelik konular](dbms_guide_general.md)
 
-[azure-cli]:../../../cli-install-nodejs.md
-[azure-portal]:https://portal.azure.com
-[azure-ps]:/powershell/azure/
-[azure-quickstart-templates-github]:https://github.com/Azure/azure-quickstart-templates
-[azure-script-ps]:https://go.microsoft.com/fwlink/p/?LinkID=395017
-[azure-resource-manager/management/azure-subscription-service-limits]:../../../azure-resource-manager/management/azure-subscription-service-limits.md
-[azure-resource-manager/management/azure-subscription-service-limits-subscription]:../../../azure-resource-manager/management/azure-subscription-service-limits.md#subscription-limits
+
 
 [dbms-guide]:dbms-guide.md 
 [dbms-guide-2.1]:dbms-guide.md#c7abf1f0-c927-4a7c-9c1d-c7b5b3b7212f 

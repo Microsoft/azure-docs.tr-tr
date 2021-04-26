@@ -16,12 +16,12 @@ ms.workload: web
 ms.date: 12/09/2019
 ms.author: madsd
 ms.custom: seodec18, devx-track-azurecli
-ms.openlocfilehash: 3820e7bf00f99a846dd2be0edeaf4248e0dfd8ad
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d30cc27fc3c546619e85bb9aabd0b31c10102e96
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97006098"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787818"
 ---
 # <a name="integrate-app-service-with-application-gateway-using-cli"></a>CLı kullanarak Application Gateway App Service tümleştirme
 
@@ -45,16 +45,16 @@ Bu betik bir kaynak grubu, App Service uygulaması, Cosmos DB ve tüm ilgili kay
 
 | Komut | Notlar |
 |---|---|
-| [`az group create`](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [`az network vnet create`](/cli/azure/network/vnet#az-network-vnet-create) | Sanal ağ oluşturur. |
-| [`az network public-ip create`](/cli/azure/network/public-ip#az-network-public-ip-create) | Genel bir IP adresi oluşturur. |
-| [`az network public-ip show`](/cli/azure/network/public-ip#az-network-public-ip-show) | Genel bir IP adresinin ayrıntılarını gösterin. |
-| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | App Service planı oluşturur. |
-| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | Bir App Service Web uygulaması oluşturur. |
-| [`az webapp show`](/cli/azure/webapp#az-webapp-show) | App Service bir Web uygulamasının ayrıntılarını gösterin. |
-| [`az webapp config access-restriction add`](/cli/azure/webapp/config/access-restriction#az-webapp-config-access-restriction-add) | App Service Web uygulamasına bir erişim kısıtlaması ekler. |
-| [`az network application-gateway create`](/cli/azure/network/application-gateway#az-network-application-gateway-create) | Bir Application Gateway oluşturur. |
-| [`az network application-gateway http-settings update`](/cli/azure/network/application-gateway/http-settings#az-network-application-gateway-http-settings-update) | Application Gateway HTTP ayarlarını güncelleştirir. |
+| [`az group create`](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [`az network vnet create`](/cli/azure/network/vnet#az_network_vnet_create) | Sanal ağ oluşturur. |
+| [`az network public-ip create`](/cli/azure/network/public-ip#az_network_public_ip_create) | Genel bir IP adresi oluşturur. |
+| [`az network public-ip show`](/cli/azure/network/public-ip#az_network_public_ip_show) | Genel bir IP adresinin ayrıntılarını gösterin. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az_appservice_plan_create) | App Service planı oluşturur. |
+| [`az webapp create`](/cli/azure/webapp#az_webapp_create) | Bir App Service Web uygulaması oluşturur. |
+| [`az webapp show`](/cli/azure/webapp#az_webapp_show) | App Service bir Web uygulamasının ayrıntılarını gösterin. |
+| [`az webapp config access-restriction add`](/cli/azure/webapp/config/access-restriction#az_webapp_config_access_restriction_add) | App Service Web uygulamasına bir erişim kısıtlaması ekler. |
+| [`az network application-gateway create`](/cli/azure/network/application-gateway#az_network_application_gateway_create) | Bir Application Gateway oluşturur. |
+| [`az network application-gateway http-settings update`](/cli/azure/network/application-gateway/http-settings#az_network-application-gateway-http_settings_update) | Application Gateway HTTP ayarlarını güncelleştirir. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

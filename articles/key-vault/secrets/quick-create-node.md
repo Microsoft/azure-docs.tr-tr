@@ -8,12 +8,12 @@ ms.service: key-vault
 ms.subservice: secrets
 ms.topic: quickstart
 ms.custom: devx-track-js
-ms.openlocfilehash: 769a63819925caa50ff364869b8d9a14c3258a2e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 90e505a4d505cc52920f1c7727afb321f4eda462
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102214550"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814163"
 ---
 # <a name="quickstart-azure-key-vault-secret-client-library-for-javascript-version-4"></a>Hızlı başlangıç: JavaScript için Azure Key Vault gizli istemci kitaplığı (sürüm 4)
 
@@ -154,7 +154,7 @@ const { SecretClient } = require("@azure/keyvault-secrets");
 
 Bu hızlı başlangıçta oturum açan kullanıcı, yerel geliştirme için tercih edilen yöntem olan Anahtar Kasası kimlik doğrulaması için kullanılır. Azure 'a dağıtılan uygulamalar için, yönetilen kimlik App Service veya sanal makineye atanmalıdır, daha fazla bilgi için bkz. [yönetilen kimliğe genel bakış](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview).
 
-Aşağıdaki örnekte, anahtar kasanızın adı, "https://. vault.azure.net" biçiminde Anahtar Kasası URI 'sine genişletilir \<your-key-vault-name\> . Bu örnek, [Azure Identity Library](https://docs.microsoft.com/javascript/api/overview/azure/identity-readme) [' DefaultAzureCredential () '](https://docs.microsoft.com/javascript/api/@azure/identity/defaultazurecredential) sınıfını kullanarak kimlik sağlamak için farklı seçeneklerle farklı ortamlarda aynı kodu kullanmamızı sağlar. Anahtar Kasası kimlik doğrulaması hakkında daha fazla bilgi için bkz. [Geliştirici Kılavuzu](https://docs.microsoft.com/azure/key-vault/general/developers-guide#authenticate-to-key-vault-in-code).
+Aşağıdaki örnekte, anahtar kasanızın adı, "https://. vault.azure.net" biçiminde Anahtar Kasası URI 'sine genişletilir \<your-key-vault-name\> . Bu örnek, [Azure Identity Library](https://docs.microsoft.com/javascript/api/overview/azure/identity-readme) [' DefaultAzureCredential () '](https://docs.microsoft.com/javascript/api/@azure/identity/defaultazurecredential) sınıfını kullanarak kimlik sağlamak için farklı seçeneklerle farklı ortamlarda aynı kodu kullanmamızı sağlar. Key Vault kimlik doğrulaması hakkında daha fazla bilgi için bkz. [Geliştirici Kılavuzu](https://docs.microsoft.com/azure/key-vault/general/developers-guide#authenticate-to-key-vault-in-code).
 
 Aşağıdaki kodu ' Main () ' işlevine ekleyin
 
@@ -285,6 +285,6 @@ Bu hızlı başlangıçta bir Anahtar Kasası oluşturdunuz, gizli dizi depoland
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
 - [Azure Key Vault gizliliklerin genel bakışını](about-secrets.md) okuyun
-- [Anahtar kasasına erişimi güvenli hale getirme](../general/secure-your-key-vault.md)
+- [Anahtar kasasına erişimi güvenli hale getirme](../general/security-features.md)
 - [Azure Key Vault geliştirici kılavuzuna](../general/developers-guide.md) bakın
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu gözden geçirin
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu gözden geçirin

@@ -4,14 +4,14 @@ description: Aboneliğinizdeki VM öngörüleri Konuk sistem durumunun nasıl et
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 11/16/2020
+ms.date: 04/05/2021
 ms.custom: references_regions
-ms.openlocfilehash: 5d4ff622f69445880c0de8cb74dc1aeee422c89b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6f6c67e0e9ef1dd2a4092033a9479801cd0e8e7d
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102052169"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449316"
 ---
 # <a name="enable-vm-insights-guest-health-preview"></a>VM öngörüleri Konuk durumunu etkinleştirme (Önizleme)
 VM öngörüleri Konuk durumu, bir sanal makinenin durumunu, düzenli aralıklarla örneklendiği bir dizi performans ölçümlerine göre tanımlanan şekilde görüntülemenize olanak sağlar. Bu makalede, aboneliğinizde bu özelliğin nasıl etkinleştirileceği ve her sanal makine için konuk izlemenin nasıl etkinleştirileceği açıklanır.
@@ -20,11 +20,14 @@ VM öngörüleri Konuk durumu, bir sanal makinenin durumunu, düzenli aralıklar
 VM öngörüleri Konuk durumu, genel önizlemede aşağıdaki sınırlamalara sahiptir:
 
 - Şu anda yalnızca Azure sanal makineleri desteklenmektedir. Sunucular için Azure Arc şu anda desteklenmemektedir.
+- Ağ proxy 'leri Şu anda desteklenmiyor.
 
 
 ## <a name="supported-operating-systems"></a>Desteklenen işletim sistemleri
 Sanal makinenin aşağıdaki işletim sistemlerinden birini çalıştırması gerekir: 
 
+  - CentOS 7,5, 7,6, 7,7, 7,8, 7,9
+  - RedHat 7,5, 7,6, 7,7, 7,8, 7,9
   - Ubuntu 16,04 LTS, Ubuntu 18,04 LTS
   - Windows Server 2012 veya üzeri
 

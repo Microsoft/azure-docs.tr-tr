@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 02/08/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 87bb2cc53ce056552e8f44aac4ade96e603a8787
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: dc094f62cb4c2d0b22d80835c273c48c613122d4
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89230050"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448058"
 ---
 # <a name="connect-to-windows-virtual-desktop-with-the-ios-client"></a>İOS istemcisiyle Windows sanal masaüstüne bağlanma
 

@@ -8,10 +8,10 @@ ms.date: 10/19/2019
 ms.author: rogarana
 ms.subservice: files
 ms.openlocfilehash: 4ace5620bf98b06956c294a12b6b08881422e718
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104952346"
 ---
 # <a name="use-azure-files-with-linux"></a>Azure Dosyaları'nı Linux ile kullanma
@@ -250,22 +250,22 @@ Linux Kernel 4,18 ' den itibaren, eski nedenler için çağrılan SMB çekirdek 
 
 | Dağıtım | SMB 1 devre dışı bırakabilir |
 |--------------|-------------------|
-| Ubuntu 14.04-16.04 | Hayır |
+| Ubuntu 14.04-16.04 | No |
 | Ubuntu 18.04 | Yes |
 | Ubuntu 19.04 + | Yes |
-| De, 8-9 | Hayır |
+| De, 8-9 | No |
 | De, 10 + | Yes |
 | Fedora 29 + | Yes |
-| CentOS 7 | Hayır | 
+| CentOS 7 | No | 
 | CentOS 8 + | Yes |
-| Red Hat Enterprise Linux 6. x-7. x | Hayır |
+| Red Hat Enterprise Linux 6. x-7. x | No |
 | Red Hat Enterprise Linux 8 + | Yes |
-| openSUSE artık 15,0 | Hayır |
+| openSUSE artık 15,0 | No |
 | openSUSE artık 15.1 + | Yes |
 | openSUSE Tpoed | Yes |
-| SUSE Linux Enterprise 11. x-12. x | Hayır |
-| SUSE Linux Enterprise 15 | Hayır |
-| SUSE Linux Enterprise 15,1 | Hayır |
+| SUSE Linux Enterprise 11. x-12. x | No |
+| SUSE Linux Enterprise 15 | No |
+| SUSE Linux Enterprise 15,1 | No |
 
 Aşağıdaki komutla, Linux dağılımının modül parametresini destekleyip desteklemediğini kontrol edebilirsiniz `disable_legacy_dialects` .
 

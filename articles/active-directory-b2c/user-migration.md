@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 03/11/2021
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: d2d4a61f653c5bedb31223d2eb3d37b92a076821
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 3e60b80a4ebeaef7d31d4c0c1d9d4bfc41ec3a56
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103010176"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256217"
 ---
 # <a name="migrate-users-to-azure-ad-b2c"></a>Kullanıcıları Azure AD B2C'ye geçirme
 
@@ -43,7 +43,7 @@ Eski kimlik sağlayıcıdaki düz metin parolalara erişilemezse sorunsuz geçi�
 - Parola, karma işlevi gibi tek yönlü şifrelenmiş biçimde depolanır.
 - Parola, eski kimlik sağlayıcısı tarafından erişim için bir şekilde depolanır. Örneğin, kimlik sağlayıcısı bir Web hizmetini çağırarak kimlik bilgilerini doğrular.
 
-Sorunsuz geçiş akışı hala Kullanıcı hesaplarının geçirilmesini gerektirir, ancak ardından ilk oturum açma sırasında her bir kullanıcının parolasını ayarlamak için bir [REST API](custom-policy-rest-api-intro.md) (oluşturduğunuz) sorgulamak için [özel bir ilke](custom-policy-get-started.md) kullanır.
+Sorunsuz geçiş akışı hala Kullanıcı hesaplarının geçirilmesini gerektirir, ancak ardından ilk oturum açma sırasında her bir kullanıcının parolasını ayarlamak için bir [REST API](custom-policy-rest-api-intro.md) (oluşturduğunuz) sorgulamak için [özel bir ilke](user-flow-overview.md) kullanır.
 
 Bu nedenle kesintisiz geçiş akışı iki aşamaya sahiptir: *geçiş öncesi* ve *kimlik bilgilerini ayarla*.
 

@@ -10,10 +10,10 @@ services: azure-maps
 manager: cpendle
 zone_pivot_groups: azure-maps-android
 ms.openlocfilehash: a60ee8faf8d19afba59e46c52aaba9395c3a5292
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105604456"
 ---
 # <a name="getting-started-with-azure-maps-android-sdk"></a>Azure haritalar 'ı kullanmaya başlama Android SDK
@@ -118,7 +118,7 @@ Dil "fr-FR" olarak ayarlanmış ve bölgesel görünüm "Auto" olarak ayarlanmı
 
 Desteklenen dillerin ve bölgesel görünümlerin tamamen listesi [burada](supported-languages.md)belgelenmiştir.
 
-## <a name="navigating-the-map"></a>Haritada gezinme
+## <a name="navigating-the-map&quot;></a>Haritada gezinme
 
 Haritanın Yakınlaştırılıp Yakınlaştırılıp döndürülmemiş, döndürülebileceği ve açık bir şekilde birçok farklı yolu vardır. Haritada gezinmek için kullanabileceğiniz farklı yollar aşağıda verilmiştir.
 
@@ -141,16 +141,16 @@ Haritanın Yakınlaştırılıp Yakınlaştırılıp döndürülmemiş, döndür
 
 * İki parmağınızla Haritayı dokunarak yukarı veya aşağı sürükleyin.
 
-## <a name="azure-government-cloud-support"></a>Azure Kamu bulut desteği
+## <a name=&quot;azure-government-cloud-support&quot;></a>Azure Kamu bulut desteği
 
 Azure Haritalar Android SDK Azure Kamu bulutunu destekler. Azure Maps Android SDK aynı Maven deposundan erişilir. Azure haritalar platformunun Azure Kamu bulut sürümüne bağlanmak için aşağıdaki görevlerin yapılması gerekir.
 
 Azure haritalar kimlik doğrulama ayrıntılarının belirtildiği aynı yerde, eşlemenin Azure haritalar kamu bulutu etki alanını kullanmasını söylemek için aşağıdaki kod satırını ekleyin.
 
-::: zone pivot="programming-language-java-android"
+::: zone pivot=&quot;programming-language-java-android&quot;
 
 ```java
-AzureMaps.setDomain("atlas.azure.us");
+AzureMaps.setDomain(&quot;atlas.azure.us");
 ```
 
 ::: zone-end

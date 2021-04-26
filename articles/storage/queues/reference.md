@@ -1,19 +1,19 @@
 ---
 title: Azure kuyruk depolama başvurusu
 description: Azure kuyruk depolama API 'SI başvurusunu, BENIOKU dosyalarını ve istemci kitaplığı paketlerini bulun.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.reviewer: ripohane
 ms.date: 09/10/2020
 ms.topic: conceptual
 ms.service: storage
 ms.subservice: queues
-ms.openlocfilehash: 609649c533b184b2ccc3d3a5fee79d75d1b66f5b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 92b822da14b75dc27c71b3d9400409cb37554cf6
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102506693"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106276731"
 ---
 # <a name="azure-queue-storage-reference"></a>Azure kuyruk depolama başvurusu
 

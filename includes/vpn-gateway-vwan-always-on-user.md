@@ -9,10 +9,10 @@ ms.date: 03/12/2020
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 3b68fce603801c7bc1aee2af871df257b5f69197
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96028546"
 ---
 1. İstemci sertifikalarını, bu [noktadan sıteye VPN istemci](../articles/vpn-gateway/point-to-site-how-to-vpn-client-install-azure-cert.md) makalesinde gösterildiği gibi Windows 10 istemcisine yükler. Sertifika, geçerli kullanıcı deposunda olmalıdır.

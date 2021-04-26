@@ -64,8 +64,8 @@ Hızlı başlangıçlarda yeni müşterilerin Media Services hızla deneyebilmes
 * [Uzak dosyayı kodlama ve videoyu akışla aktarma – REST](stream-files-tutorial-with-rest.md)
 * [Karşıya yüklenen dosyayı kodlama ve videoyu akışla aktarma – .NET](stream-files-tutorial-with-api.md)
 * [Canlı akış - .NET](stream-live-tutorial-with-api.md)
-* [Videonuzu analiz etme - .NET](analyze-videos-tutorial-with-api.md)
-* [AES-128 dinamik şifreleme - .NET](protect-with-aes128.md)
+* [Videonuzu analiz etme - .NET](analyze-videos-tutorial.md)
+* [AES-128 dinamik şifreleme - .NET](drm-playready-license-template-concept.md)
 
 ### <a name="samples"></a>Örnekler
 
@@ -75,12 +75,12 @@ Azure Media Services kod örneklerine gitmek için [Bu örnek tarayıcıyı](/sa
 
 Nasıl yapılır kılavuzlarında bir görevi tamamlamayı gösteren kod örnekleri yer almaktadır. Bu bölümde birçok örnek bulacaksınız. Bunlardan bazıları şunlardır:
 
-* [Hesap oluşturma - CLI](./create-account-howto.md)
+* [Hesap oluşturma - CLI](./account-create-how-to.md)
 * [API'lere erişim - CLI](./access-api-howto.md)
 * [İş girişi olarak HTTPS ile kodlama-.NET](job-input-from-http-how-to.md)  
 * [Olayları izleme - Portal](monitoring/monitor-events-portal-how-to.md)
-* [Multi-DRM-.NET ile dinamik olarak şifreleyin](protect-with-drm.md) 
-* [Özel bir dönüşümle kodlama-CLı](custom-preset-cli-howto.md)
+* [Multi-DRM-.NET ile dinamik olarak şifreleyin](drm-protect-with-drm-tutorial.md) 
+* [Özel bir dönüşümle kodlama-CLı](transform-custom-preset-cli-how-to.md)
 
 ## <a name="ask-questions-give-feedback-get-updates"></a>Soru sorun, geri bildirimde bulunun, güncelleştirmeleri al
 

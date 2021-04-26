@@ -10,12 +10,12 @@ metadata:
   author: cherylmc
   ms.author: cherylmc
   ms.date: 08/28/2019
-  ms.openlocfilehash: 8619e0948cc08d06d27a09864bbff13ad6ad3791
-  ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
-  ms.translationtype: HT
+  ms.openlocfilehash: 9fbb5a5963e74e07ac4cdfff9fe4fb88a1366874
+  ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
+  ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 12/07/2020
-  ms.locfileid: "96780340"
+  ms.lasthandoff: 04/07/2021
+  ms.locfileid: "107029446"
 landingContent:
 - title: VPN Gateway hakkında
   linkLists:
@@ -33,6 +33,10 @@ landingContent:
       url: about-zone-redundant-vnet-gateways.md
     - text: VPN Gateway SSS
       url: vpn-gateway-vpn-faq.md
+  - linkListType: learn
+    links:
+    - text: Şirket içi ağınızı VPN Ağ Geçidi ile Azure'a bağlama
+      url: /learn/modules/connect-on-premises-network-with-vpn-gateway/
 - title: başlarken
   linkLists:
   - linkListType: tutorial

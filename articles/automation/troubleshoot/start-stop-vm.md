@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 04/04/2019
 ms.topic: troubleshooting
-ms.openlocfilehash: f6d2696a68643f87de0fcaf2e723da9365d9953e
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: b03481b41e879acac4c3b193d72594454f650525
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104953859"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831195"
 ---
 # <a name="troubleshoot-startstop-vms-during-off-hours-issues"></a>VM'leri çalışma saatleri dışında başlat/durdur sorunlarını giderme
 

@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 03/04/2021
 ms.author: juliako
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 3a3c2812a4ecfa1a80539804122042bc2dc2f3a2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 90fca4342b1fe04adef97a1a4c1c2166ca7ec51e
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102199195"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532485"
 ---
 # <a name="upload-and-index-your-videos"></a>Videolarınızı karşıya yükleme ve dizinleme  
 
@@ -35,7 +35,7 @@ Makalesinde, bu seçeneklerle videolarınızı karşıya yükleme ve dizin oluş
 
 ## <a name="supported-file-formats-for-video-indexer"></a>Video Indexer için desteklenen dosya biçimleri
 
-Video Indexer ile kullanabileceğiniz dosya biçimlerinin bir listesi için bkz. [Giriş kapsayıcı/dosya biçimleri](../latest/media-encoder-standard-formats.md#input-containerfile-formats) makalesi.
+Video Indexer ile kullanabileceğiniz dosya biçimlerinin bir listesi için bkz. [Giriş kapsayıcı/dosya biçimleri](../latest/encode-media-encoder-standard-formats-reference.md) makalesi.
 
 ## <a name="video-files-storage"></a>Video dosyaları depolaması
 
@@ -62,11 +62,11 @@ Video Indexer ile kullanabileceğiniz dosya biçimlerinin bir listesi için bkz.
 
 ## <a name="upload-and-index-with-api"></a>API ile karşıya yükleme ve Dizin
 
-Videoları karşıya yüklemek ve bir URL 'ye göre dizinlemek için [video yükleme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) API 'sini kullanın. Aşağıdaki kod örneği, bayt dizisinin nasıl karşıya yükleneceğini gösteren açıklamalı dışarı çıkan kodu içerir. 
+Videoları karşıya yüklemek ve bir URL 'ye göre dizinlemek için [video yükleme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Upload-Video) API 'sini kullanın. Aşağıdaki kod örneği, bayt dizisinin nasıl karşıya yükleneceğini gösteren açıklamalı dışarı çıkan kodu içerir. 
 
 ### <a name="configurations-and-params"></a>Yapılandırmalar ve parametreler
 
-Bu bölümde, isteğe bağlı parametrelerin bazıları ve ayarlanmalarının ne zaman gerekeceği açıklanmaktadır. En güncel params bilgileri için [karşıya yükleme videosu](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) API 'sine bakın.
+Bu bölümde, isteğe bağlı parametrelerin bazıları ve ayarlanmalarının ne zaman gerekeceği açıklanmaktadır. En güncel params bilgileri için [karşıya yükleme videosu](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Upload-Video) API 'sine bakın.
 
 #### <a name="externalid"></a>externalID 
 
@@ -110,10 +110,10 @@ Videoların önceliklerine göre Video Indexer dizini oluşturulur. Dizin öncel
 
 Videonuz karşıya yüklendikten sonra Video Indexer, isteğe bağlı olarak videoyu kodlar. Video Indexer, ardından dizinlemeye ve videoyu analiz etmeye geçer. Video Indexer analizi tamamladığında video kimliğini içeren bir bildirim alırsınız.  
 
-[Videoyu karşıya yükleme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) veya [Videoyu Yeniden Dizinleme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-index-video?) API'sini kullanırken isteğe bağlı parametrelerden biri de `streamingPreset` parametresidir. `streamingPreset` parametresini `Default`, `SingleBitrate` veya `AdaptiveBitrate` olarak ayarlarsanız kodlama işlemi tetiklenir. Dizinleme ve kodlama işleri tamamlandıktan sonra video yayımlanır. Böylece videonuzun akışını da yapabilirsiniz. Video akışı yapmak istediğiniz Akış Uç Noktası **Çalışıyor** durumunda olmalıdır.
+[Videoyu karşıya yükleme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Upload-Video) veya [Videoyu Yeniden Dizinleme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Re-Index-Video) API'sini kullanırken isteğe bağlı parametrelerden biri de `streamingPreset` parametresidir. `streamingPreset` parametresini `Default`, `SingleBitrate` veya `AdaptiveBitrate` olarak ayarlarsanız kodlama işlemi tetiklenir. Dizinleme ve kodlama işleri tamamlandıktan sonra video yayımlanır. Böylece videonuzun akışını da yapabilirsiniz. Video akışı yapmak istediğiniz Akış Uç Noktası **Çalışıyor** durumunda olmalıdır.
 
 Tekbit hızı için standart kodlayıcı maliyeti çıkış başına uygulanır. Video yüksekliği 720 ' e eşit veya daha büyükse, Video Indexer 1280x720 olarak kodlar. Aksi takdirde, 640x468 olarak.
-Varsayılan ayar, [içerik duyarlı kodlanıyor](../latest/content-aware-encoding.md).
+Varsayılan ayar, [içerik duyarlı kodlanıyor](../latest/encode-content-aware-concept.md).
 
 Dizinleme ve kodlama işlerini çalıştırmak için [Video Indexer hesabınıza bağlı Azure Media Services hesabı](connect-to-azure.md) Ayrılmış Birimler gerektirir. Daha fazla bilgi için bkz. [Medya İşlemeyi Ölçeklendirme](../previous/media-services-scale-media-processing-overview.md). Bunlar işlem gücü kullanımı yoğun işler olduğundan S3 türü birimlerin kullanılması önemle tavsiye edilir. Ayrılmış birim sayısı, paralel olarak çalıştırılabilecek en fazla iş sayısını tanımlar. Önerilen temel kullanım 10 S3 ayrılmış birimdir. 
 
@@ -321,7 +321,7 @@ public class AccountContractSlim
 
 Upload işlemi aşağıdaki tabloda listelenen durum kodlarını döndürebilir.
 
-|Durum kodu|ErrorType (yanıt gövdesinde)|Description|
+|Durum kodu|ErrorType (yanıt gövdesinde)|Açıklama|
 |---|---|---|
 |409|VIDEO_INDEXING_IN_PROGRESS|Bu video zaten aynı hesapta işleniyor.|
 |400|VIDEO_ALREADY_FAILED|Bu videonun işlenmesi 2 saatten daha kısa bir süre önce aynı hesapta başarısız oldu. API istemcilerin videoyu yeniden yüklemek için en az 2 saat beklemesi gerekir.|

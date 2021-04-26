@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: quickstart
 ms.date: 06/25/2020
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 1d7b6cd6d61be6df66d215613222c12a0f2c9c5e
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: d4d3b44b0ee878028df369de41451e3dc1d3c6de
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105606751"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107875242"
 ---
 # <a name="quickstart-create-an-azure-database-for-postgresql-server-by-using-the-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak PostgreSQL için Azure veritabanı sunucusu oluşturma
 
@@ -24,7 +24,7 @@ Bu hızlı başlangıçta, beş dakikada bir PostgreSQL için Azure veritabanı 
 - Bu makale, Azure CLı 'nin 2,0 veya sonraki bir sürümünü gerektirir. Azure Cloud Shell kullanılıyorsa, en son sürüm zaten yüklüdür.
 
     > [!TIP]
-    >  Şu anda önizleme aşamasında olan daha basit [az Postgres up](/cli/azure/ext/db-up/postgres#ext-db-up-az-postgres-up) Azure CLI komutunu kullanmayı deneyin. [Hızlı](./quickstart-create-server-up-azure-cli.md)başlangıcı deneyin.
+    >  Şu anda önizleme aşamasında olan daha basit [az Postgres up](/cli/azure/postgres#az_postgres_up) Azure CLI komutunu kullanmayı deneyin. [Hızlı](./quickstart-create-server-up-azure-cli.md)başlangıcı deneyin.
 
 - [Az Account set](/cli/azure/account) komutunu kullanarak hesabınız altındaki belirli BIR abonelik kimliğini seçin.
 
@@ -34,11 +34,11 @@ Bu hızlı başlangıçta, beş dakikada bir PostgreSQL için Azure veritabanı 
         az account set --subscription <subscription id>
         ```
 
-    - Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. Tüm aboneliklerinizi almak için [az Account List](/cli/azure/account#az-account-list)kullanın.
+    - Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. Tüm aboneliklerinizi almak için [az Account List](/cli/azure/account#az_account_list)kullanın.
 
 ## <a name="create-an-azure-database-for-postgresql-server"></a>PostgreSQL için Azure Veritabanı sunucusu oluşturma
 
-[Az Group Create](/cli/azure/group#az-group-create) komutunu kullanarak bir [Azure Kaynak grubu](../azure-resource-manager/management/overview.md) oluşturun ve ardından bu kaynak grubunun Içinde PostgreSQL sunucunuzu oluşturun. Benzersiz bir ad sağlamanız gerekir. Aşağıdaki örnek `westus` konumunda `myresourcegroup` adlı bir kaynak grubu oluşturur.
+[Az Group Create](/cli/azure/group#az_group_create) komutunu kullanarak bir [Azure Kaynak grubu](../azure-resource-manager/management/overview.md) oluşturun ve ardından bu kaynak grubunun Içinde PostgreSQL sunucunuzu oluşturun. Benzersiz bir ad sağlamanız gerekir. Aşağıdaki örnek `westus` konumunda `myresourcegroup` adlı bir kaynak grubu oluşturur.
 
 ```azurecli-interactive
 az group create --name myresourcegroup --location westus
@@ -62,7 +62,7 @@ sku-name|GP_Gen5_2| Fiyatlandırma katmanının adı ve işlem yapılandırması
 
 >[!IMPORTANT] 
 >- Sunucunuzdaki varsayılan PostgreSQL sürümü 9,6 ' dir. Desteklenen tüm sürümleri görmek için bkz. [desteklenen PostgreSQL ana sürümleri](./concepts-supported-versions.md).
->- **Az Postgres Server Create** komutuyla ilgili tüm bağımsız değişkenleri görüntülemek için, [Bu başvuru belgesine](/cli/azure/postgres/server#az-postgres-server-create)bakın.
+>- **Az Postgres Server Create** komutuyla ilgili tüm bağımsız değişkenleri görüntülemek için, [Bu başvuru belgesine](/cli/azure/postgres/server#az_postgres_server_create)bakın.
 >- SSL, sunucunuzda varsayılan olarak etkinleştirilmiştir. SSL hakkında daha fazla bilgi için bkz. [SSL bağlantısını yapılandırma](./concepts-ssl-connection-security.md).
 
 ## <a name="configure-a-server-level-firewall-rule"></a>Sunucu düzeyinde güvenlik duvarı kuralı oluşturma 

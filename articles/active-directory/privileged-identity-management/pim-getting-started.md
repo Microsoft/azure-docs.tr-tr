@@ -14,12 +14,12 @@ ms.date: 09/15/2020
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5bcfb21ab15355653780355f1b5e459bc806ec8c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c00824e7fb0529cd14e3d7b757d513ee739fe283
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "90600730"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504422"
 ---
 # <a name="start-using-privileged-identity-management"></a>Privileged Identity Management'ı kullanmaya başlama
 
@@ -67,10 +67,10 @@ Privileged Identity Management kurulduktan sonra, bunun nasıl yapılacağını 
 
 ![Görevleri gösterme ve seçenekleri yönetme Privileged Identity Management gezinti penceresi](./media/pim-getting-started/pim-quickstart-tasks.png)
 
-| Görev + Yönet | Description |
+| Görev + Yönet | Açıklama |
 | --- | --- |
 | **Rollerim**  | Size atanan uygun ve etkin rollerin listesini görüntüler. Burada atanan uygun rolleri etkinleştirebilirsiniz. |
-| **İsteklerim** | Uygun rol atamalarını etkinleştirmek için bekleyen isteklerinizi görüntüler. |
+| **Bekleyen istekler** | Uygun rol atamalarını etkinleştirmek için bekleyen isteklerinizi görüntüler. |
 | **İstekleri onaylama** | Dizininizdeki, onaylamanız için belirlediğiniz kullanıcılara uygun rolleri etkinleştirme isteklerinin listesini görüntüler. |
 | **Erişimi gözden geçirme** | Kendinize veya başka birine yönelik erişimi gözden geçirirken, tamamlanmak üzere atadığınız etkin erişim incelemelerini listeler. |
 | **Azure AD rolleri** | Azure AD rol atamalarını yönetmek için ayrıcalıklı rol yöneticilerinin bir panosunu ve ayarlarını görüntüler. Bu pano, ayrıcalıklı rol yöneticisi olmayan kullanıcılar için devre dışıdır. Bu kullanıcılar Görünümüm adlı özel bir panoya erişebilir. My VIEW panosu, kuruluşun tamamında değil yalnızca panoya erişen kullanıcı hakkındaki bilgileri görüntüler. |

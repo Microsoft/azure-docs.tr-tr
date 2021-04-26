@@ -11,12 +11,12 @@ ms.subservice: core
 ms.date: 12/09/2020
 ms.topic: conceptual
 ms.custom: how-to, contperf-fy21q2, automl
-ms.openlocfilehash: b60e5f656b675a1382b8b4776975723a437183bc
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 2bed95385823a167c7a31eed11d752894984ea38
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104773122"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791886"
 ---
 # <a name="evaluate-automated-machine-learning-experiment-results"></a>Otomatik makine öğrenimi sonuçlarını değerlendir
 
@@ -74,7 +74,7 @@ Aşağıdaki tabloda, denemeniz için oluşturulan her sınıflandırma modeli i
 
 |Metric|Açıklama|Hesaplama|
 |--|--|---|
-|AUC | AUC, [alıcı Işletim özelliği eğrisinin](#roc-curve)altındaki alandır.<br><br> **Amaç:** 1 ' e yaklaşarak daha iyi <br> **Aralık:** [0, 1]<br> <br>Desteklenen ölçüm adları şunlardır <li>`AUC_macro`, her sınıf için AUC 'nin aritmetik ortalaması.<li> `AUC_micro`, gerçek pozitifleri ve her bir sınıftan yanlış pozitif durumları birleştirerek hesaplanır. <li> `AUC_weighted`, her sınıf için puanın aritmetik ortalaması, her bir sınıftaki doğru örnek sayısı tarafından ağırlıklı olarak hesaplanır.   |[Hesaplama](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html) | 
+|AUC | AUC, [alıcı Işletim özelliği eğrisinin](#roc-curve)altındaki alandır.<br><br> **Amaç:** 1 ' e yaklaşarak daha iyi <br> **Aralık:** [0, 1]<br> <br>Desteklenen ölçüm adları şunlardır <li>`AUC_macro`, her sınıf için AUC 'nin aritmetik ortalaması.<li> `AUC_micro`, gerçek pozitifleri ve her bir sınıftan yanlış pozitif durumları birleştirerek hesaplanır. <li> `AUC_weighted`, her sınıf için puanın aritmetik ortalaması, her bir sınıftaki doğru örnek sayısı tarafından ağırlıklı olarak hesaplanır.<br><br>Not: yalnızca iki sınıf varsa, otomatik ML tarafından bildirilen AUC değerleri ROC grafiğiyle eşleşmeyebilir. İkili sınıflandırma için, AUC 'nin temel alınan scikit-öğrenme uygulaması aslında makro/mikro/ağırlıklı ortalama uygulanmaz. Bunun yerine, en olası pozitif sınıf için AUC döndürülür. ROC grafiği, birden çok sınıf için olduğu gibi ikili sınıflandırma için sınıf ortalaması uygulamaya devam eder.  |[Hesaplama](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html) | 
 |accuracy| Doğruluk, doğru sınıf etiketleriyle tam olarak eşleşen tahminlerden oranıdır. <br> <br>**Amaç:** 1 ' e yaklaşarak daha iyi <br> **Aralık:** [0, 1]|[Hesaplama](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html)|
 |average_precision|Ortalama duyarlık, her bir eşiğin elde ettiği ağırlıklı ortalamanın ağırlıklı ortalaması olarak bir duyarlık geri çağırma eğrisini özetler ve bu da ağırlık olarak kullanılan önceki eşikten geri çekme artışı artar. <br><br> **Amaç:** 1 ' e yaklaşarak daha iyi <br> **Aralık:** [0, 1]<br> <br>Desteklenen ölçüm adları şunlardır<li>`average_precision_score_macro`, her sınıfın ortalama duyarlık puanının aritmetik ortalaması.<li> `average_precision_score_micro`, her kesme sırasında gerçek pozitif sonuçları ve yanlış pozitif durumları birleştirerek hesaplanır.<li>`average_precision_score_weighted`, her sınıfın ortalama duyarlık puanı, her sınıftaki doğru örnek sayısı ile ağırlıklı aritmetik ortasıdır.|[Hesaplama](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html)|
 balanced_accuracy|Dengeli doğruluk, her sınıf için geri çekmenin aritmetik ortalaması anlamına gelir.<br> <br>**Amaç:** 1 ' e yaklaşarak daha iyi <br> **Aralık:** [0, 1]|[Hesaplama](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html)|
@@ -117,6 +117,7 @@ Eğrinin altındaki alan (AUC) doğru sınıflandırılan örneklerin oranı ola
 Grafiğin sol üst köşesine yaklaşıtı bir eğri, olası en iyi modele %100 TPR ve 0% FPR 'ye yaklaşıyor. Rastgele bir model, sol alt köşedeki bir ROC eğrisi ve `y = x` sağ üst köşesinden üretir. Rastgele bir modelden daha kötü bir modelin, satırın altına göre bir ROC eğrisi vardır `y = x` .
 > [!TIP]
 > Sınıflandırma denemeleri için, otomatik ML modelleri için üretilen çizgi grafiklerin her biri, model başına modeli veya tüm sınıfların ortalaması olarak değerlendirmek için kullanılabilir. Grafiğin sağındaki göstergede sınıf etiketleri ' ne tıklayarak bu farklı görünümler arasında geçiş yapabilirsiniz.
+
 ### <a name="roc-curve-for-a-good-model"></a>İyi bir model için ROC eğrisi
 ![İyi bir model için ROC eğrisi](./media/how-to-understand-automated-ml/chart-roc-curve-good.png)
 
@@ -234,18 +235,9 @@ Bu örnekte, daha iyi bir modelin ideal satıra daha yakın olan tahmini ve ger�
 
 ## <a name="model-explanations-and-feature-importances"></a>Model açıklamaları ve özellik kaynakları
 
-Model değerlendirme ölçümleri ve grafikleri, bir modelin genel kalitesini ölçmek için uygun olmakla çalışırken, sorumlu AI oluştururken tahmine dayalı hale getirmek için kullanılan bir modelin hangi veri kümesini temel alan olduğunu inceleyerek. Bu nedenle otomatikleştirilen ML, veri kümesi özelliklerinin göreli katlarını ölçmek ve raporlamak için bir model yorumlu pano sağlar.
+Model değerlendirme ölçümleri ve grafikleri, bir modelin genel kalitesini ölçmek için uygun olmakla çalışırken, sorumlu AI oluştururken tahmine dayalı hale getirmek için kullanılan bir modelin hangi veri kümesini temel alan olduğunu inceleyerek. Bu nedenle otomatikleştirilen ML, veri kümesi özelliklerinin göreli katlarını ölçmek ve raporlamak için bir model açıklamaları panosu sağlar. Bkz. [Azure Machine Learning Studio 'da açıklamalar panosunu görüntüleme](how-to-use-automated-ml-for-ml-models.md#model-explanations-preview).
 
-Yorumlenebilirlik panosunu Studio 'da görüntülemek için:
-1. [Studio 'Da oturum açın](https://ml.azure.com/) ve çalışma alanınıza gidin
-2. Sol menüden **denemeleri** ' yi seçin.
-3. Denemeleri listesinden denemenizi seçin
-4. Sayfanın altındaki tabloda bir oto ml çalıştırması seçin
-5. **Modeller** sekmesinde, açıklamak Istediğiniz modelin **algoritma adını** seçin
-6. **Açıklamalar** sekmesinde, model en iyi durumda olduğunda bir açıklama daha önceden oluşturulmuş olabilir
-7. Yeni bir açıklama oluşturmak için, **açıkla model** ' i seçin ve açıklamaları hesaplamak için uzaktan işlem ' i seçin
-
-[OTOMATIK ml 'de model açıklamaları hakkında daha fazla bilgi edinin](how-to-machine-learning-interpretability-automl.md).
+Kod ilk deneyimi için, bkz. [Azure Machine Learning Python SDK ile OTOMATIKLEŞTIRILMIŞ ml denemeleri için model açıklamalarını](how-to-machine-learning-interpretability-automl.md)ayarlama.
 
 > [!NOTE]
 > Forekısıtcn modeli şu anda otomatik ML açıklamaları tarafından desteklenmiyor ve diğer tahmin modelleri, yorumlu araçlara sınırlı erişime sahip olabilir.

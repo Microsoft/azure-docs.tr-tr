@@ -9,17 +9,14 @@ ms.author: mikben
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: ad88a7a6c91128bb863eeb51cc7f26c8d71b9eed
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 5f7b1e6d600f5d3652ce6a66a72cbfbf33b336c4
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107916"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106091880"
 ---
 # <a name="pricing-scenarios"></a>Fiyatlandırma senaryoları
-
-[!INCLUDE [Public Preview Notice](../includes/public-preview-include.md)]
-
 
 Azure Iletişim Hizmetleri için fiyatlara genellikle Kullandıkça Öde modeli temel alınır. Aşağıdaki örneklerde bulunan fiyatlar tanım amaçlıdır ve en son Azure fiyatlandırmasını yansıtmayabilir.
 
@@ -47,6 +44,41 @@ Her çağrının katılımcısı, çağrıya bağlı oldukları her dakika için
 - 1 katılımcı x 43 dakika başına katılımcı başına x $0,004 dakikası = $0,172 [hem video hem de ses aynı hızda ücretlendirilir]
 
 **Grup çağrısı Için toplam maliyet**: $0,48 + $0,172 = $0,652
+
+
+### <a name="pricing-example-outbound-call-from-app-using-js-sdk-to-a-pstn-number"></a>Fiyatlandırma örneği: JS SDK 'sını bir PSTN numarasına kullanan uygulamadan giden çağrı
+
+Çiğdem, bir uygulamadan, ile başlayan ABD telefon numarası üzerinden emre 'ye bir PSTN çağrısı yapar `+1-425` .
+
+- Çiğdem uygulamayı derlemek için JS SDK 'sını kullandı.
+- Çağrı toplam 5 dakika sürer.
+
+**Maliyet hesaplamaları**
+
+- VoIP bacağı (Gamze), uygulamadan Iletişim Hizmetleri sunucularına, $0,04 dakikada günde bir katılımcı başına $0,004 x 10 dakika x katılımcı
+- PSTN giden bacağı (Charlie), Iletişim Hizmetleri sunucularından bir ABD telefon numarası x 10 dakika x $0,013, $0,13 dakikada bir katılımcı için haftada bir.
+
+Note: ABD $0,013 ' e kadar karışık ücretler `+1-425` . Ayrıntılar için aşağıdaki bağlantıya başvurun: https://github.com/Azure/Communication/blob/master/pricing/communication-services-pstn-rates.csv)
+
+**Grup çağrısı Için toplam maliyet**: $0,04 + $0,13 = $0,17
+
+
+### <a name="pricing-example-group-audio-call-using-js-sdk-and-1-pstn-leg"></a>Fiyatlandırma örneği: JS SDK ve 1 PSTN bayı kullanarak ses çağrısını gruplayın
+
+Çiğdem ve Bob, bir VOıP çağrısında. Bob, Charlie 'in, ile başlayan ABD telefon numarası olan, Charlie 'ın PSTN numarasına yönelik çağrısını ilerletildi `+1-425` .
+
+- Çiğdem uygulamayı derlemek için JS SDK 'sını kullandı. PSTN numarası üzerinde Charlie çağrılmadan önce 10 dakika boyunca yer alır.
+- Bob, PSTN numarası üzerinde Charlie çağrısını ilerledikçe, bu üç bir 10 dakika boyunca bağlı değildir.
+
+**Maliyet hesaplamaları**
+
+- VoIP bacağı (Gamze ve Bob), uygulamadan Iletişim Hizmetleri sunucularına, $0,16 dakikada her katılımcı için $0,004 x 20 dakika x katılımcı
+- PSTN giden bacağı (Charlie), Iletişim Hizmetleri sunucularından ABD telefon numarası günde 5 10 dakika x $0,013, dakikada bir katılımcı için aylık olarak 1 saat $0,13
+
+Note: ABD $0,013 ' e kadar karışık ücretler `+1-425` . Ayrıntılar için aşağıdaki bağlantıya başvurun: https://github.com/Azure/Communication/blob/master/pricing/communication-services-pstn-rates.csv)
+
+**VoIP + yükseltme çağrısının toplam maliyeti**: $0,16 + $0,13 = $. 29
+
 
 ### <a name="pricing-example-a-user-of-the-communication-services-javascript-sdk-joins-a-scheduled-microsoft-teams-meeting"></a>Fiyatlandırma örneği: Iletişim Hizmetleri JavaScript SDK 'sının bir kullanıcısı, zamanlanmış bir Microsoft ekipleri toplantısı 'nı birleştirir
 

@@ -1,5 +1,5 @@
 ---
-title: Uygulamalarım portalındaki Koleksiyonlar (Önizleme)-Azure AD
+title: Uygulamaları uygulamalarım portalındaki koleksiyonlar halinde düzenleme-Azure AD
 description: Uygulamamda uygulama koleksiyonlarını oluşturma, düzenleme, silme, gizleme ve gösterme hakkında bilgi edinin.
 services: active-directory
 author: curtand
@@ -8,22 +8,20 @@ ms.service: active-directory
 ms.subservice: user-help
 ms.workload: identity
 ms.topic: end-user-help
-ms.date: 01/19/2021
+ms.date: 04/07/2021
 ms.author: curtand
 ms.reviewer: kasimpso
 ms.custom: user-help, seo-update-azuread-jan
-ms.openlocfilehash: 843f957ef8871f6372c1b08a5534f6e90098cc85
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 7ac5dede27262d3ce8bc44b4b278ed623063f8e1
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100095129"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107209672"
 ---
-# <a name="user-collections-preview-in-my-apps"></a>Uygulamalarım içindeki Kullanıcı koleksiyonları (Önizleme)
+# <a name="organize-apps-using-collections-from-my-apps"></a>Uygulamalarımın koleksiyonlarını kullanarak uygulamaları düzenleme
 
 Uygulamalarım, tüm iş veya okul uygulamalarınızı başlatmak ve yönetmek için tek seferlik bir mağazanız. Uygulamalarınızı organize etmek ve ihtiyacınız olan uygulamaları bulmayı kolaylaştırmak için Koleksiyonlar oluşturun.
-
-[!INCLUDE [preview-notice](../../../includes/active-directory-end-user-my-apps-and-workspaces.md)]
 
 Bu makalede aşağıdakileri nasıl yapacağınızı öğreneceksiniz:
 
@@ -55,7 +53,7 @@ Bu makalede aşağıdakileri nasıl yapacağınızı öğreneceksiniz:
 
     :::image type="content" source="media/my-apps-portal-user-collections/3-add-apps.png" alt-text="Listeden koleksiyona uygulama ekleme":::
 
-1. Aşağıda, uygulamaları yeniden sıralayabilir veya silebilirsiniz ya da koleksiyon için daha fazla uygulama seçmek üzere **Uygulama Ekle** ' yi seçin. Seçimlerinizden memnun olduğunuzda **Yeni oluştur**' u seçin.  
+1. **Yeni oluştur** bölmesinde, uygulamaları yeniden sıralayabilir veya silebilir veya koleksiyon için daha fazla uygulama seçmek üzere **Uygulama Ekle** ' yi seçebilirsiniz. Seçimlerinizden memnun olduğunuzda **Yeni oluştur**' u seçin.  
 
     :::image type="content" source="media/my-apps-portal-user-collections/4-create-button.png" alt-text="Koleksiyonu uygulamalarıma kaydetmek için yeni oluştur düğmesini seçin":::
 

@@ -7,16 +7,16 @@ ms.service: static-web-apps
 ms.topic: quickstart
 ms.date: 08/13/2020
 ms.author: cshoe
-ms.openlocfilehash: 2d7a2dcbbd0b6e9a10ca8af93798bfddbee94ee3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fb874c25ab688cc5e6723d1023157b8acd9478b9
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102182664"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107483860"
 ---
 # <a name="quickstart-building-your-first-static-site-with-azure-static-web-apps"></a>Hızlı başlangıç: Azure statik Web Apps ilk statik sitenizi oluşturma
 
-Azure statik Web Apps bir GitHub deposundan uygulama oluşturarak bir Web sitesini üretim ortamına yayınlar. Bu hızlı başlangıçta, Azure statik Web uygulamalarına Visual Studio Code uzantısını kullanarak bir Web uygulaması dağıtırsınız.
+Azure statik Web Apps, bir kod deposundan uygulama oluşturarak bir Web sitesi yayımlar. Bu hızlı başlangıçta, Visual Studio Code uzantısını kullanarak bir uygulamayı Azure statik Web uygulamalarına dağıtırsınız.
 
 Azure aboneliğiniz yoksa [ücretsiz bir deneme hesabı oluşturun](https://azure.microsoft.com/free).
 
@@ -32,7 +32,7 @@ Azure aboneliğiniz yoksa [ücretsiz bir deneme hesabı oluşturun](https://azur
 
 [!INCLUDE [clone the repository](../../includes/static-web-apps-get-started-clone-repo.md)]
 
-Daha sonra, Visual Studio Code açın ve **dosya > klasöre** giderek, yeni bir düzenleyicide makinenize Klonladığınız depoyu açın.
+Sonra, Visual Studio Code açın ve **dosya > klasöre** giderek, düzenleyicide makinenize kopyaladığınız depoyu açın.
 
 ## <a name="create-a-static-web-app"></a>Statik web uygulaması oluşturma
 
@@ -43,7 +43,7 @@ Daha sonra, Visual Studio Code açın ve **dosya > klasöre** giderek, yeni bir 
     > [!NOTE]
     > Azure ve GitHub'da oturum açmanız gerekir. Daha önce Visual Studio Code'da Azure ve GitHub oturumu açmadıysanız oluşturma işlemi sırasında uzantı ikisinde de oturum açmanızı isteyecektir.
 
-1. Farenizi _Static Web Apps_ etiketinin üzerine getirip **artı işaretini** seçin.
+1. _Statik Web Apps_ etiketi altında **artı işaretini** seçin.
 
     :::image type="content" source="media/getting-started/extension-create-button.png" alt-text="Uygulama adı":::
 
@@ -53,45 +53,48 @@ Daha sonra, Visual Studio Code açın ve **dosya > klasöre** giderek, yeni bir 
 
     :::image type="content" source="media/getting-started/extension-create-app.png" alt-text="Statik web uygulaması oluşturma":::
 
-1. **main** dalını seçip **Enter** tuşuna basın.
+1. Uygulama türü ile eşleşen ön ayarları seçin.
 
-    :::image type="content" source="media/getting-started/extension-branch.png" alt-text="Dal adı":::
+    # <a name="no-framework"></a>[Çerçeve yok](#tab/vanilla-javascript)
+    :::image type="content" source="media/getting-started/extension-presets-no-framework.png" alt-text="Uygulama önayarları: çerçeve yok":::
 
-1. **/** Uygulama kodu için konum olarak öğesini seçin ve **ENTER** tuşuna basın.
+    Uygulama dosyalarının konumu olarak **./** girin.
 
-    :::image type="content" source="media/getting-started/extension-app-location.png" alt-text="Uygulama kodu konumu":::
+    :::image type="content" source="media/getting-started/extension-app-location.png" alt-text="Uygulama dosyaları konumu":::
 
-1. Uzantı, uygulamanızdaki API konumunu arar. Bu makalede API kullanılmaz.
-
-    **Şimdilik atla**'yı seçip **Enter** tuşuna basın.
+    Azure Işlevleri API 'sinin konumu olarak **Şimdi atla** ' yı seçin.
 
     :::image type="content" source="media/getting-started/extension-api-location.png" alt-text="API konumu":::
 
-1. Uygulamanızda üretim ortamı dosyalarının yer aldığı konumu seçin.
+    Yapı çıkış konumu olarak **./** girin.
 
-    # <a name="no-framework"></a>[Çerçeve yok](#tab/vanilla-javascript)
-
-    Kutuyu temizleyin ve **ENTER** tuşuna basın.
-
-    :::image type="content" source="media/getting-started/extension-artifact-no-framework.png" alt-text="Uygulama dosyaları yolu":::
+    :::image type="content" source="media/getting-started/extension-build-location.png" alt-text="Uygulama derlemesi çıkış konumu":::
 
     # <a name="angular"></a>[Angular](#tab/angular)
 
-    **Dist/angular-temel** yazın ve **ENTER** tuşuna basın.
+    Bir angular önayarı olsa da, bu uygulama için uygun bir çıkış konumu sağlayabilmeniz için **özel** seçeneğini belirleyin.
 
-    :::image type="content" source="media/getting-started/extension-artifact-angular.png" alt-text="Angular uygulamasındaki dosyaların yolu":::
+    :::image type="content" source="media/getting-started/extension-presets-no-framework.png" alt-text="Uygulama önayarları: angular":::
+
+    Uygulama dosyalarının konumu olarak **./** girin.
+
+    :::image type="content" source="media/getting-started/extension-app-location.png" alt-text="Uygulama dosyalarının konumu: angular":::
+
+    Azure Işlevleri API 'sinin konumu olarak **Şimdi atla** ' yı seçin.
+
+    :::image type="content" source="media/getting-started/extension-api-location.png" alt-text="API konumu: angular":::
+
+    Derleme çıkış konumu olarak **Dist/angular-Basic** girin.
+
+    :::image type="content" source="media/getting-started/extension-angular.png" alt-text="Uygulama derleme çıkış konumu: angular":::
 
     # <a name="react"></a>[React](#tab/react)
 
-    **build** yazın ve **Enter** tuşuna basın.
-
-    :::image type="content" source="media/getting-started/extension-artifact-react.png" alt-text="React uygulamasındaki dosyaların yolu":::
+    :::image type="content" source="media/getting-started/extension-presets-react.png" alt-text="Uygulama önayarları: tepki verme":::
 
     # <a name="vue"></a>[Vue](#tab/vue)
 
-    **dist** yazın ve **Enter** tuşuna basın.
-
-    :::image type="content" source="media/getting-started/extension-artifact-vue.png" alt-text="Vue uygulamasındaki dosyaların yolu":::
+    :::image type="content" source="media/getting-started/extension-presets-vue.png" alt-text="Uygulama önayarları: Vue":::
 
     ---
 
@@ -103,11 +106,13 @@ Daha sonra, Visual Studio Code açın ve **dosya > klasöre** giderek, yeni bir 
 
     :::image type="content" source="media/getting-started/extension-confirmation.png" alt-text="Oluşturma onayı":::
 
-1. Visual Studio Code Gezgin penceresinde, abonelik adınızın bulunduğu düğüme gidin ve genişletin. Dağıtımın tamamlanması birkaç dakika sürebilir. Ardından, statik Web Apps bölümüne dönüp uygulamanızın adını seçin ve ardından, Azure portal uygulamayı görüntülemek için ilk-statik-Web-uygulama ' ya sağ tıklayın ve portalda aç ' ı seçin.
+    Sonra, **GitHub 'Daki açık eylemler** düğmesine tıklayın. Bu sayfa, uygulamanın yapı durumunu gösterir.
 
-    :::image type="content" source="media/getting-started/extension-open-in-portal.png" alt-text="Portalda aç":::
+    GitHub eylemi tamamlandıktan sonra yayınlanan web sitesine gidebilirsiniz.
 
-[!INCLUDE [view website](../../includes/static-web-apps-get-started-view-website.md)]
+1. Web sitesini tarayıcıda görüntülemek için statik Web Apps uzantısında projeye sağ tıklayın ve **siteye gözatma**' yı seçin.
+
+    :::image type="content" source="media/getting-started/extension-browse-site.png" alt-text="Siteye gözatamıyorum":::
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 

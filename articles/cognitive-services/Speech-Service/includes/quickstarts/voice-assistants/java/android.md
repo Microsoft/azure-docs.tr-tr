@@ -10,14 +10,14 @@ ms.subservice: speech-service
 ms.topic: include
 ms.date: 04/04/2020
 ms.author: travisw
-ms.openlocfilehash: bc27c73fbf9e827ce9a95c8aaaddc82ffb0aec53
-ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
+ms.openlocfilehash: fdc38e2572f7e5dcf1f116af1f67407ef1c80376
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/26/2020
-ms.locfileid: "96187693"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106271509"
 ---
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Başlamadan önce şunları yaptığınızdan emin olun:
 
@@ -116,7 +116,7 @@ UI 'nizin metin ve grafik gösterimi şu şekilde görünmelidir:
 
     import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
     import com.microsoft.cognitiveservices.speech.audio.PullAudioOutputStream;
-    import com.microsoft.cognitiveservices.speech.dialog.DialogServiceConfig;
+    import com.microsoft.cognitiveservices.speech.dialog.BotFrameworkConfig;
     import com.microsoft.cognitiveservices.speech.dialog.DialogServiceConnector;
 
     import org.json.JSONException;
@@ -257,7 +257,7 @@ UI 'nizin metin ve grafik gösterimi şu şekilde görünmelidir:
 
 1. Android cihazınızı geliştirme bilgisayarınıza bağlayın. Cihazda [geliştirme modunu ve USB hata ayıklamasını](https://developer.android.com/studio/debug/dev-options) etkinleştirdiğinizden emin olun.
 
-1. Uygulamayı derlemek için CTRL + F9 tuşlarına basın veya menü çubuğunda projeyi **Oluştur ' u seçin**  >  **Make Project** .
+1. Uygulamayı derlemek için CTRL + F9 tuşlarına basın veya menü çubuğunda projeyi **Oluştur ' u seçin**  >   .
 
 1. Uygulamayı başlatmak için SHIFT + F10 tuşlarına basın **veya çalıştırmayı Çalıştır**  >  **' uygulama '** yı seçin.
 

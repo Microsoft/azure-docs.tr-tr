@@ -13,12 +13,12 @@ ms.custom:
 - mqtt
 - 'Role: Cloud Development'
 - 'Role: IoT Device'
-ms.openlocfilehash: 17b31e365e311b97e322828927827f40733313a6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ffb7d708921c96f57a617f82fc54d7f462fb4282
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97588837"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168765"
 ---
 # <a name="azure-iot-device-sdk-for-c"></a>C için Azure IoT cihaz SDK 'Sı
 
@@ -31,7 +31,7 @@ ms.locfileid: "97588837"
 
 C için Azure IoT cihaz SDK 'Sı, taşınabilirliği en üst düzeye çıkarmak için ANSI C 'de (C99) yazılmıştır. Bu özellik, kitaplıkları birden çok platformda ve cihazlarda çalışmaya uygun hale getirir, özellikle de disk ve bellek parmak İZLİĞİ en aza indirmeli.
 
-SDK 'nın test edilmiş çok çeşitli platformlar vardır (Ayrıntılar için bkz. [IoT Için Azure Sertifikalı cihaz kataloğuna](https://catalog.azureiotsolutions.com/) bakın). Bu makalede, Windows platformunda çalışan örnek koda ilişkin izlenecek yollar bulunmasına rağmen, bu makalede açıklanan kod Desteklenen platformların aralığı genelinde aynıdır.
+SDK 'nın test edilmiş çok çeşitli platformlar vardır (Ayrıntılar için bkz. [IoT Için Azure Sertifikalı cihaz kataloğuna](https://devicecatalog.azure.com/) bakın). Bu makalede, Windows platformunda çalışan örnek koda ilişkin izlenecek yollar bulunmasına rağmen, bu makalede açıklanan kod Desteklenen platformların aralığı genelinde aynıdır.
 
 Aşağıdaki videoda, C için Azure IoT SDK 'ya genel bakış sunulmaktadır:
 

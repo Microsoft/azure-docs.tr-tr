@@ -7,12 +7,12 @@ ms.service: attestation
 ms.topic: overview
 ms.date: 08/31/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 0d6d5a08ea85ebb666acc0336f1e1d7ec5e097da
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: e82e9fc93bf8c816fcbfd5869156745dea630313
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105044677"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107517564"
 ---
 # <a name="claim-sets"></a>Talep kümeleri
 
@@ -30,11 +30,66 @@ Microsoft Azure kanıtlama kullanan kuşışları ele geçirme sürecinde oluşt
 
 İlke yazarları tarafından bir SGX kanıtlama ilkesinde yetkilendirme kurallarını tanımlamak için kullanılacak talepler:
 
-- **x-MS-SGX-,-hata ayıklanabilir**: bir Boolean değeri, kuşmanın hata ayıklamasının etkin olup olmadığını belirtir
-- **x-MS-SGX-Product-ID**: SGX kuşatma ürün kimliği değeri 
-- **x-MS-SGX-mrimzalayan**: teklifin "mrimzalayan" alanının onaltılık kodlanmış değeri
-- **x-MS-SGX-mrenclave**: teklifin "mrenclave" alanının onaltılık kodlu değeri
-- **x-MS-SGX-SVN**: teklifte kodlanmış güvenlik sürümü numarası 
+- **x-MS-SGX-,-hata ayıklanabilir**: kuşatma hata ayıklamasının etkinleştirilip etkinleştirilmediğini gösteren bir Boole değeri.
+  
+  SGX şifreleme, hata ayıklama devre dışı bırakılmış veya etkin olarak yüklenebilir. ' In kuşatma içinde true olarak ayarlandığı durumlarda, şifreleme kodu için hata ayıklama özellikleri sağlar. Bu, şifreleme belleğine erişme olanağını içerir. Bu nedenle, bayrağın yalnızca geliştirme amacıyla true olarak ayarlanması önerilir. Üretim ortamında etkinleştirilirse, SGX güvenlik garantisi korunmaz.
+  
+  Azure kanıtlama kullanıcıları, hata ayıklamanın SGX şifreleme için devre dışı bırakılıp bırakılmadığını doğrulamak üzere kanıtlama ilkesini kullanabilir. İlke kuralı eklendikten sonra kötü niyetli bir Kullanıcı, şifreleme içeriğine erişim kazanmak için hata ayıklama desteğini açtığında kanıtlama başarısız olur.
+
+- **x-MS-SGX-Product-ID**: SGX kuşve ürün kimliğini gösteren bir tamsayı değeri.
+
+  Kuşatma Author, her bir kuşa bir ürün kimliği atar. Ürün KIMLIĞI, kuşatma yazarının aynı MRIMZALAYAN kullanılarak imzalanmış Kuşanlar segmentine olanak sağlar. Kanıtlama ilkesine bir doğrulama kuralı ekleyerek müşteriler, hedeflenen kuşkuları kullanıp kullanmadığını denetleyebilir. Kuşve ürün KIMLIĞI, şifreleme yazarı tarafından yayımlanan değerle eşleşmiyorsa kanıtlama başarısız olur.
+
+- **x-MS-SGX-mrimzalayan**: SGX Enclave yazarını tanımlayan bir dize değeri.
+
+  Mrimzalayan, kuşatma ikilisini imzalamak için kullanılan kuşatma Author 'ın ortak anahtarının karmasıdır. Bir kanıtlama ilkesi aracılığıyla MRIMZALAYAN doğrulayarak, müşteriler güvenilen ikililerin bir kuşın içinde çalışıp çalışmadığını doğrulayabilir. İlke talebi, şifreleme yazarının MRIMZALAYAN ile eşleşmediği zaman, kuşve ikilinin güvenilir bir kaynak tarafından imzalanmadığını ve kanıtlama başarısız olduğunu gösterir.
+  
+  Bir kuşatma yazarı, güvenlik nedenleriyle MRIMZALAYAN 'u döndürmeyi tercih ediyorsa, ikili dosyalar güncellenmadan önce yeni ve eski MRIMZALAYAN değerlerini destekleyecek şekilde Azure kanıtlama ilkesi 'nin güncellenmesi gerekir. Aksi takdirde, yetkilendirme denetimleri kanıtlama hatalarıyla sonuçlanır.
+  
+  Kanıtlama ilkesi aşağıdaki biçim kullanılarak güncellenmelidir. 
+ 
+  #### <a name="before-key-rotation"></a>Anahtar döndürmeden önce
+ 
+   ```
+    version= 1.0;
+    authorizationrules 
+    {
+    [ type=="x-ms-sgx-is-debuggable", value==false]&&
+    [ type=="x-ms-sgx-mrsigner", value=="mrsigner1"] => permit(); 
+    };
+  ```
+
+   #### <a name="during-key-rotation"></a>Anahtar döndürme sırasında
+
+    ```
+      version= 1.0;
+      authorizationrules 
+      {
+      [ type=="x-ms-sgx-is-debuggable", value==false]&&
+      [ type=="x-ms-sgx-mrsigner", value=="mrsigner1"] => permit(); 
+      [ type=="x-ms-sgx-is-debuggable", value==false ]&& 
+      [ type=="x-ms-sgx-mrsigner", value=="mrsigner2"] => permit(); 
+      };
+    ```
+
+   #### <a name="after-key-rotation"></a>Anahtar rotasyondan sonra
+
+    ```
+      version= 1.0;
+      authorizationrules 
+      { 
+      [ type=="x-ms-sgx-is-debuggable", value==false]&& 
+      [ type=="x-ms-sgx-mrsigner", value=="mrsigner2"] => permit(); 
+      };
+    ```
+
+- **x-MS-SGX-mrenclave**: şifreleme belleğine yüklenen kodu ve verileri tanımlayan bir dize değeri. 
+
+  MRENCLAVE, kuşve ikili dosyaları doğrulamak için kullanılabilen bir kuşatma ölçülerinin biridir. Bu, kuşatma içinde çalışan kodun karmasıdır. Ölçüm, şifreleme ikili kodunda yapılan her değişikliğe göre değişir. Bir kanıtlama ilkesiyle MRENCLAVE ' ı doğrulayarak müşteriler amaçlanan ikililerin bir kuşın içinde çalışıp çalışmadığını doğrulayabilir. Ancak, MRENCLAVE 'ın var olan koda herhangi bir önemsiz değişiklikle sık olarak değiştirilmesi beklendiğinden, bir kanıtlama ilkesinde MRIMZALAYAN doğrulaması kullanılarak kuşve ikili dosyaların doğrulanması önerilir.
+
+- **x-MS-SGX-SVN**: SGX şifreleme güvenlik sürümü numarasını gösteren bir tamsayı değeri
+
+  Kuşatma Author, her SGX kuşbir sürümüne bir güvenlik sürüm numarası (SVN) atar. Şifreleme kodunda bir güvenlik sorunu bulunduğunda, kuşatma Author, SVN değer sonrası güvenlik açığı düzeltmesini artırır. Güvenli olmayan kuşve kodla etkileşimde bulunmak için müşteriler, kanıtlama ilkesine bir doğrulama kuralı ekleyebilir. Kuşatma Code 'un SVN 'ı, kuşatma yazarı tarafından önerilen sürümle eşleşmiyorsa kanıtlama başarısız olur.
 
 Aşağıdaki talepler kullanım dışı olarak kabul edilir, ancak tam olarak desteklenir ve ileride dahil olmaya devam edecektir. Kullanımdan kaldırılmayan talep adlarını kullanmanız önerilir.
 

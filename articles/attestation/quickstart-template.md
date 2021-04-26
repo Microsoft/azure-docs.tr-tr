@@ -5,15 +5,15 @@ services: azure-resource-manager
 author: msmbaldwin
 ms.service: azure-resource-manager
 ms.topic: quickstart
-ms.custom: subject-armqs
+ms.custom: subject-armqs, devx-track-azurepowershell
 ms.author: mbaldwin
 ms.date: 10/16/2020
-ms.openlocfilehash: 8c56a37ebcc799b0170785666212eb4e3b00a5f0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7d70f9ebd071d6699412f56e9dca1abcebb38105
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92144981"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834255"
 ---
 # <a name="quickstart-create-an-azure-attestation-provider-with-an-arm-template"></a>Hızlı başlangıç: ARM şablonuyla Azure kanıtlama sağlayıcısı oluşturma
 

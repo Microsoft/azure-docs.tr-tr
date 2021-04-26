@@ -6,13 +6,13 @@ author: linda33wj
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 11/24/2020
-ms.openlocfilehash: bdf71276d59dec9a19e29ae7f49cb92a0512c05a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 03/29/2021
+ms.openlocfilehash: fcf533ad95e2567e62d44d6997752df6f3145ecb
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100364248"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105726796"
 ---
 # <a name="copy-data-to-and-from-azure-databricks-delta-lake-by-using-azure-data-factory"></a>Azure Databricks Delta Gölü 'a ve Azure Data Factory kullanarak veri kopyalama
 
@@ -42,7 +42,7 @@ Bu Azure Databricks Delta Lake bağlayıcısını kullanmak için, Azure Databri
 
 Databricks kümesinin, kaynak/havuz/hazırlama için kullanılan depolama kapsayıcısı/dosya sistemi ve Delta Gölü tabloları yazmak istediğiniz kapsayıcı/dosya sistemi için Azure Blob veya Azure Data Lake Storage 2. hesabına erişimi olması gerekir.
 
-- **Azure Data Lake Storage 2.** kullanmak Için, Databricks kümesinde Apache Spark yapılandırmasının bir parçası olarak bir **hizmet sorumlusu** veya **depolama hesabı erişim anahtarı** yapılandırabilirsiniz. [Doğrudan hizmet sorumlusu Ile erişim](/azure/databricks/data/data-sources/azure/azure-datalake-gen2#--access-directly-with-service-principal-and-oauth-20) veya [depolama hesabı erişim anahtarını kullanarak doğrudan](/azure/databricks/data/data-sources/azure/azure-datalake-gen2#--access-directly-using-the-storage-account-access-key)erişim bölümündeki adımları izleyin.
+- **Azure Data Lake Storage 2.** kullanmak Için, Databricks kümesinde Apache Spark yapılandırmasının bir parçası olarak bir **hizmet sorumlusu** yapılandırabilirsiniz. [Doğrudan hizmet sorumlusu Ile erişim](/azure/databricks/data/data-sources/azure/azure-datalake-gen2#--access-directly-with-service-principal-and-oauth-20)içindeki adımları izleyin.
 
 - **Azure Blob depolamayı** kullanmak için, Apache Spark yapılandırmasının bir parçası olarak Databricks kümesinde bir **depolama hesabı erişim anahtarı** veya **SAS belirteci** yapılandırabilirsiniz. [RDD API 'sini kullanarak Azure Blob depolama erişimi](/azure/databricks/data/data-sources/azure/azure-storage#access-azure-blob-storage-using-the-rdd-api)içindeki adımları izleyin.
 

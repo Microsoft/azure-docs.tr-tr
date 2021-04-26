@@ -5,14 +5,14 @@ services: frontdoor
 author: duongau
 ms.service: frontdoor
 ms.topic: conceptual
-ms.date: 03/24/2021
+ms.date: 03/31/2021
 ms.author: yuajia
-ms.openlocfilehash: 039effb885463c1c53085535a6980601be890340
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 9e8defa9e929d21f210c48ffbd3b22e44195c17d
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105561510"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106061630"
 ---
 # <a name="azure-front-door-standardpremium-preview-rule-set-match-conditions"></a>Azure ön kapı Standart/Premium (Önizleme) kural kümesi eşleşme koşulları
 
@@ -685,7 +685,7 @@ Bu örnekte, isteğin Protokolü kullandığı tüm istekleri eşleştik `HTTP` 
 
 ## <a name="request-url"></a><a name="RequestUrl"></a> İstek URL 'SI
 
-Belirtilen URL ile eşleşen istekleri tanımlar. Tüm URL değerlendirilir. Eşlemek için birden çok değer belirtebilirsiniz, bu, OR mantığı kullanılarak birleştirilir.
+Belirtilen URL ile eşleşen istekleri tanımlar. Protokol ve sorgu dizesi dahil olmak üzere tüm URL değerlendirilir, ancak parçadır. Eşlemek için birden çok değer belirtebilirsiniz, bu, OR mantığı kullanılarak birleştirilir.
 
 > [!TIP]
 > Bu kural koşulunu kullandığınızda, protokolü eklediğinizden emin olun. Örneğin, `https://www.contoso.com` yalnızca yerine kullanın `www.contoso.com` .
@@ -790,10 +790,6 @@ Normal ifadeler aşağıdaki işlemleri desteklemez:
 * `\K`Eşleşme sıfırlama yönergesinin başlangıcı.
 * Belirtme çizgileri ve gömülü kod.
 * Atomik gruplandırma ve sahip nicelik belirteçleri.
-
-## <a name="arm-template-support"></a>ARM şablon desteği
-
-Kural kümeleri, Azure Resource Manager şablonlar kullanılarak yapılandırılabilir. [Bkz. örnek bir şablon](https://github.com/Azure/azure-quickstart-templates/tree/master/201-front-door-standard-premium-rule-set). Yukarıdaki örneklere dahil edilen JSON veya Bıcep parçacıklarını kullanarak eşleşme koşulları ekleyebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

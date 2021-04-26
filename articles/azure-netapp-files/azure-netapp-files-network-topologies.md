@@ -12,14 +12,14 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 09/08/2020
+ms.date: 04/09/2021
 ms.author: ramakk
-ms.openlocfilehash: 96d8ba058a33d408ec2ee2a1adfba9011f393da9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d002932bca51300fa6a031ce7ab0d69186afe9c3
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96184493"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311694"
 ---
 # <a name="guidelines-for-azure-netapp-files-network-planning"></a>Azure NetApp Files ağ planlaması yönergeleri
 
@@ -46,7 +46,7 @@ Aşağıdaki özellikler Şu anda Azure NetApp Files için desteklenmiyor:
 
 Aşağıdaki ağ kısıtlamaları Azure NetApp Files için geçerlidir:
 
-* Azure NetApp Files (eşlenen sanal ağlar dahil) bir VNet 'te kullanılmakta olan IP sayısı 1000 ' i aşamaz. Müşteri ölçek taleplerini karşılamak için bu sınırı artırmak üzere çalışıyoruz. 
+* Azure NetApp Files olan bir VNet 'te kullanılmakta olan IP sayısı ( *hemen* eşlenmiş sanal ağlar dahil) 1000 ' i aşamaz. Müşteri ölçek taleplerini karşılamak için bu sınırı artırmak üzere çalışıyoruz. 
 * Her bir Azure sanal ağında (VNet), Azure NetApp Files için yalnızca bir alt ağ atanabilir.
 
 
@@ -58,7 +58,7 @@ Aşağıdaki tabloda Azure NetApp Files tarafından desteklenen ağ topolojileri
 |-------------------------------------------------------------------------------------------------------------------------------|--------------------|-----------------------------------------------------------------------------|
 |    Yerel VNet 'teki birime bağlantı    |    Yes    |         |
 |    Eşlenen VNet 'teki birime bağlantı (aynı bölge)    |    Yes    |         |
-|    Eşlenmiş VNet 'teki birime bağlantı (çapraz bölge veya genel eşleme)    |    No    |    Yok    |
+|    Eşlenmiş VNet 'teki birime bağlantı (çapraz bölge veya genel eşleme)    |    Hayır    |    Yok    |
 |    ExpressRoute ağ geçidi üzerinden bir birime bağlantı    |    Yes    |         |
 |    Şirket içinden bir bağlantı noktasında ExpressRoute ağ geçidi ile VNet eşlemesi ve ağ geçidi geçişi ile VNet eşlemesi    |    Yes    |        |
 |    Şirket içinden VPN Gateway üzerinden bağlı olan VNet 'teki bir birime bağlantı    |    Yes    |         |

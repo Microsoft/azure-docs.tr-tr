@@ -3,32 +3,30 @@ title: Azure Service Bus Azure özel bağlantı hizmeti ile tümleştirme
 description: Azure Service Bus Azure özel bağlantı hizmeti ile tümleştirme hakkında bilgi edinin
 author: spelluru
 ms.author: spelluru
-ms.date: 10/07/2020
+ms.date: 03/29/2021
 ms.topic: article
-ms.openlocfilehash: 66de9a4ff65c73264257cb6f7f215fc15820c95f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 833d7e9fb4d517b71aab5039ae9081407eed84cd
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94427156"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105960546"
 ---
 # <a name="allow-access-to-azure-service-bus-namespaces-via-private-endpoints"></a>Özel uç noktalar aracılığıyla Azure Service Bus ad alanlarına erişime izin ver
 Azure özel bağlantı hizmeti, Azure hizmetlerine (örneğin, Azure Service Bus, Azure depolama ve Azure Cosmos DB) ve Azure 'da barındırılan müşteri/iş ortağı hizmetlerine sanal ağınızdaki **özel bir uç nokta** üzerinden erişmenizi sağlar.
-
-> [!IMPORTANT]
-> Bu özellik, Azure Service Bus **Premium** katmanıyla desteklenir. Premium katmanı hakkında daha fazla bilgi için, [Service Bus Premium ve standart mesajlaşma katmanları](service-bus-premium-messaging.md) makalesine bakın.
 
 Özel uç nokta, Azure özel bağlantısı tarafından desteklenen bir hizmete özel ve güvenli bir şekilde bağlanan bir ağ arabirimidir. Özel uç nokta, sanal ağınızdan bir özel IP adresi kullanarak hizmeti sanal ağınıza etkin bir şekilde getiriyor. Hizmete giden tüm trafik özel uç nokta aracılığıyla yönlendirilebilir, bu nedenle ağ geçitleri, NAT cihazları, ExpressRoute veya VPN bağlantıları ya da genel IP adresleri gerekmez. Sanal ağınız ve hizmet arasındaki trafik, Microsoft omurga ağı üzerinden geçer ve genel İnternet’ten etkilenme olasılığı ortadan kaldırılır. Bir Azure kaynağı örneğine bağlanarak, erişim denetimi için en yüksek düzeyde ayrıntı düzeyi sağlayabilirsiniz.
 
 Daha fazla bilgi için bkz. [Azure özel bağlantısı nedir?](../private-link/private-link-overview.md)
 
->[!WARNING]
-> Özel uç noktaları uygulamak, diğer Azure hizmetlerinin Service Bus etkileşimde olmasını engelleyebilir. Özel uç noktalar etkinken bile belirli güvenilen hizmetlerden Service Bus kaynaklara erişime izin verebilirsiniz. Güvenilen hizmetler listesi için bkz. [Güvenilen hizmetler](#trusted-microsoft-services).
->
-> Aşağıdaki Microsoft hizmetlerinin bir sanal ağda olması gerekir
-> - Azure App Service
-> - Azure İşlevleri
+## <a name="important-points"></a>Önemli nokta
+- Bu özellik, Azure Service Bus **Premium** katmanıyla desteklenir. Premium katmanı hakkında daha fazla bilgi için, [Service Bus Premium ve standart mesajlaşma katmanları](service-bus-premium-messaging.md) makalesine bakın.
+- Özel uç noktaları uygulamak, diğer Azure hizmetlerinin Service Bus etkileşimde olmasını engelleyebilir. Özel uç noktalar etkinken bile belirli **Güvenilen hizmetlerden** Service Bus kaynaklara erişime izin verebilirsiniz. Güvenilen hizmetler listesi için bkz. [Güvenilen hizmetler](#trusted-microsoft-services).
 
+    Aşağıdaki Microsoft hizmetlerinin bir sanal ağda olması gerekir
+    - Azure App Service
+    - Azure İşlevleri
+- Yalnızca belirtilen IP adreslerinden veya bir sanal ağın alt ağından gelen trafiğe izin vermek için ad alanı için **en az BIR IP kuralı veya sanal ağ kuralı** belirtin. IP ve sanal ağ kuralları yoksa, ad alanına genel İnternet üzerinden erişilebilir (erişim anahtarı kullanılarak). 
 
 
 ## <a name="add-a-private-endpoint-using-azure-portal"></a>Azure portal kullanarak özel uç nokta ekleme
@@ -51,15 +49,16 @@ Zaten mevcut bir ad alanınız varsa, aşağıdaki adımları izleyerek özel bi
 1. [Azure portalında](https://portal.azure.com) oturum açın. 
 2. Arama çubuğuna **Service Bus** yazın.
 3. Listeden özel uç nokta eklemek istediğiniz **ad alanını** seçin.
-2. Sol taraftaki menüde, **Ayarlar** altında **ağ** seçeneği ' ni seçin. 
-
+2. Sol taraftaki menüde, **Ayarlar** altında **ağ** seçeneği ' ni seçin.     Varsayılan olarak, **Seçili ağlar** seçeneği seçilidir.
+ 
     > [!NOTE]
     > **Ağ** sekmesini yalnızca **Premium** ad alanları için görürsünüz.  
-    
-    Varsayılan olarak, **Seçili ağlar** seçeneği seçilidir. Bu sayfada en az bir IP güvenlik duvarı kuralı veya bir sanal ağ eklememeniz durumunda, ad alanına genel İnternet üzerinden erişilebilir (erişim anahtarı kullanılarak).
-
+   
     :::image type="content" source="./media/service-bus-ip-filtering/default-networking-page.png" alt-text="Ağ sayfası-varsayılan" lightbox="./media/service-bus-ip-filtering/default-networking-page.png":::
-    
+
+    > [!WARNING]
+    > Bu sayfada en az bir IP güvenlik duvarı kuralı veya bir sanal ağ eklememeniz durumunda, ad alanına genel İnternet üzerinden erişilebilir (erişim anahtarı kullanılarak).
+   
     **Tüm ağlar** seçeneğini belirlerseniz, Service Bus ad alanınız HERHANGI bir IP adresinden gelen bağlantıları kabul eder (erişim anahtarı kullanılarak). Bu varsayılan ayar 0.0.0.0/0 IP adres aralığını kabul eden kuralla eşdeğerdir. 
 
     ![Güvenlik Duvarı-tüm ağlar seçeneği seçildi](./media/service-bus-ip-filtering/firewall-all-networks-selected.png)

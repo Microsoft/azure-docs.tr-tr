@@ -15,12 +15,12 @@ ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 10ff568ede601c57369f8c942ed61cb7a39ba703
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: f2d965ec17fb605362c1e8cd8ef781a6bd2029d0
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103465717"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106067393"
 ---
 # <a name="use-media-services-to-deliver-drm-licenses-or-aes-keys"></a>DRM lisansları veya AES anahtarları sunmak için Media Services kullanın
 
@@ -54,7 +54,7 @@ Aşağıdaki diyagramda, PlayReady ve/veya Widevine lisanslarını teslim etmek 
     ```
  
 ## <a name="net-code-example"></a>.NET kod örneği
-Aşağıdaki kod örneği, ortak bir içerik anahtarının nasıl oluşturulduğunu ve PlayReady veya Widevine lisans alma URL 'Lerini nasıl alınacağını gösterir. Şirket içi sunucunuzu yapılandırmak için bir içerik anahtarı, anahtar KIMLIĞI ve lisans alımı URL 'SI gerekir. Şirket içi sunucunuzu yapılandırdıktan sonra, kendi akış sunucusundan akış yapabilirsiniz. Şifrelenmiş akış bir Media Services lisans sunucusuna işaret ettiğinden, oyuncusu Media Services bir lisans ister. Belirteç kimlik doğrulaması ' nı seçerseniz, Media Services lisans sunucusu HTTPS üzerinden gönderdiğiniz belirteci doğrular. Belirteç geçerliyse, lisans sunucusu lisansı Player 'a geri gönderir. Aşağıdaki kod örneği yalnızca ortak bir içerik anahtarı oluşturmayı ve PlayReady veya Widevine lisans alma URL 'Lerini almayı gösterir. AES-128 anahtarları sunmak istiyorsanız, bir zarf içerik anahtarı oluşturmanız ve anahtar alma URL 'SI almanız gerekir. Daha fazla bilgi için bkz. [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-protect-with-aes128.md).
+Aşağıdaki kod örneği, ortak bir içerik anahtarının nasıl oluşturulduğunu ve PlayReady veya Widevine lisans alma URL 'Lerini nasıl alınacağını gösterir. Şirket içi sunucunuzu yapılandırmak için bir içerik anahtarı, anahtar KIMLIĞI ve lisans alımı URL 'SI gerekir. Şirket içi sunucunuzu yapılandırdıktan sonra, kendi akış sunucusundan akış yapabilirsiniz. Şifrelenmiş akış bir Media Services lisans sunucusuna işaret ettiğinden, oyuncusu Media Services bir lisans ister. Belirteç kimlik doğrulaması ' nı seçerseniz, Media Services lisans sunucusu HTTPS üzerinden gönderdiğiniz belirteci doğrular. Belirteç geçerliyse, lisans sunucusu lisansı Player 'a geri gönderir. Aşağıdaki kod örneği yalnızca ortak bir içerik anahtarı oluşturmayı ve PlayReady veya Widevine lisans alma URL 'Lerini almayı gösterir. AES-128 anahtarları sunmak istiyorsanız, bir zarf içerik anahtarı oluşturmanız ve anahtar alma URL 'SI almanız gerekir. Daha fazla bilgi için bkz. [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-playready-license-template-overview.md).
 
 ```csharp
 using System;
@@ -357,4 +357,4 @@ namespace DeliverDRMLicenses
 
 ## <a name="see-also"></a>Ayrıca bkz.
 * [PlayReady ve/veya Widevine dinamik ortak şifreleme kullanma](media-services-protect-with-playready-widevine.md)
-* [AES-128 dinamik şifreleme ve anahtar dağıtım hizmetini kullanma](media-services-protect-with-aes128.md)
+* [AES-128 dinamik şifreleme ve anahtar dağıtım hizmetini kullanma](media-services-playready-license-template-overview.md)

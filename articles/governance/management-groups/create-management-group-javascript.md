@@ -3,13 +3,15 @@ title: 'Hızlı başlangıç: JavaScript ile bir yönetim grubu oluşturma'
 description: Bu hızlı başlangıçta, kaynaklarınızı bir kaynak hiyerarşisinde düzenlemek üzere bir yönetim grubu oluşturmak için JavaScript kullanırsınız.
 ms.date: 02/05/2021
 ms.topic: quickstart
-ms.custom: devx-track-js
-ms.openlocfilehash: 99a2ed406d4837f6fc346e68b3b400003feed38c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom:
+- devx-track-js
+- mode-api
+ms.openlocfilehash: 553133f30bd16543444356e8cda3e70458247b5c
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100099158"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107536009"
 ---
 # <a name="quickstart-create-a-management-group-with-javascript"></a>Hızlı başlangıç: JavaScript ile bir yönetim grubu oluşturma
 

@@ -2,13 +2,13 @@
 title: VMware yazılım sürümleri
 description: Azure VMware çözümü için desteklenen VMware yazılım sürümleri.
 ms.topic: include
-ms.date: 03/13/2021
-ms.openlocfilehash: 9a1781d163e67c2f9b6a4f756a616e59a969696f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/31/2021
+ms.openlocfilehash: a6441b55bbc6a8f694c50bbf022a6a2ae52d60bf
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103462532"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106097053"
 ---
 <!-- Used in faq.md and concepts-private-clouds-clusters.md -->
 
@@ -17,10 +17,10 @@ Azure VMware çözümü özel bulutlar kümelerinin yeni dağıtımlarında kull
 
 | Yazılım              |    Sürüm   |
 | :---                  |     :---:    |
-| VCSA/vSphere/ESXi |    6,7 U3    | 
-| ESXi                  |    6,7 U3    | 
-| vSAN                  |    6,7 U3    |
-| NSX-T <br />**Note:** NSX-T, NSX 'in desteklenen tek sürümüdür.               |      2.5     |
+| VCSA/vSphere/ESXi |    6,7 U3l    | 
+| ESXi                  |    6,7 U3l    | 
+| vSAN                  |    6,7 U3l    |
+| NSX-T <br />**Note:** NSX-T, NSX 'in desteklenen tek sürümüdür.               |      3.1.1     |
 
 
 Yeni kümeler var olan bir özel buluta eklendi, çalışmakta olan yazılım sürümü uygulandı. Daha fazla bilgi için bkz. [VMware yazılım sürümü gereksinimleri](https://docs.vmware.com/en/VMware-HCX/services/user-guide/GUID-54E5293B-8707-4D29-BFE8-EE63539CC49B.html).

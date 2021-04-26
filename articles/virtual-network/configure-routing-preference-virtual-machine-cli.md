@@ -13,12 +13,12 @@ ms.workload: infrastructure-services
 ms.date: 02/01/2021
 ms.author: mnayak
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: ad8f2d150c3cf17c4b24c6dc92188be9017dcfa9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b9155c3114d5a5a1b8729351dc189bc1e5c22369
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101665998"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764486"
 ---
 # <a name="configure-routing-preference-for-a-vm-using-azure-cli"></a>Azure CLı kullanarak bir VM için yönlendirme tercihini yapılandırma
 
@@ -28,7 +28,7 @@ Bu makalede, Azure CLı kullanarak genel İnternet üzerinden trafiği yönlendi
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 1. Cloud Shell kullanılıyorsa adım 2 ' ye atlayın. Bir komut oturumu açın ve ile Azure 'da oturum açın `az login` .
-2. [az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek, Doğu ABD Azure bölgesinde bir kaynak grubu oluşturur:
+2. [az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek, Doğu ABD Azure bölgesinde bir kaynak grubu oluşturur:
 
     ```azurecli
     az group create --name myResourceGroup --location eastus
@@ -54,7 +54,7 @@ Bir VM 'yi dağıtmadan önce, destekleyici ağ kaynakları (ağ güvenlik grubu
 
 ### <a name="create-a-network-security-group"></a>Ağ güvenlik grubu oluşturma
 
-[Az Network NSG Create](/cli/azure/network/nsg#az-network-nsg-create) ile VNET 'iniz içindeki gelen ve giden iletişimi yönetecek kurallar için bir ağ güvenlik grubu oluşturun
+[Az Network NSG Create](/cli/azure/network/nsg#az_network_nsg_create) ile VNET 'iniz içindeki gelen ve giden iletişimi yönetecek kurallar için bir ağ güvenlik grubu oluşturun
 
 ```azurecli
 az network nsg create \
@@ -65,7 +65,7 @@ az network nsg create \
 
 ### <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
 
-[az network vnet create](/cli/azure/network/vnet#az-network-vnet-create) komutu ile bir sanal ağ oluşturun. Aşağıdaki örnek, alt ağ ile *Myvnet* adlı bir sanal ağ oluşturur *mysubnet*:
+[az network vnet create](/cli/azure/network/vnet#az_network_vnet_create) komutu ile bir sanal ağ oluşturun. Aşağıdaki örnek, alt ağ ile *Myvnet* adlı bir sanal ağ oluşturur *mysubnet*:
 
 ```azurecli
 # Create a virtual network
@@ -85,7 +85,7 @@ az network vnet subnet create \
 
 ### <a name="create-a-nic"></a>NIC oluşturma
 
-[Az Network NIC Create](/cli/azure/network/nic#az-network-nic-create)komutuyla VM için BIR sanal NIC oluşturun. Aşağıdaki örnek, VM 'ye eklenecek bir sanal NIC oluşturur.
+[Az Network NIC Create](/cli/azure/network/nic#az_network_nic_create)komutuyla VM için BIR sanal NIC oluşturun. Aşağıdaki örnek, VM 'ye eklenecek bir sanal NIC oluşturur.
 
 ```azurecli-interactive
 # Create a NIC
@@ -101,7 +101,7 @@ az network nic create \
 
 ## <a name="create-a-virtual-machine"></a>Sanal makine oluşturma
 
-[az vm create](/cli/azure/vm#az-vm-create) ile bir VM oluşturun. Aşağıdaki örnekte, zaten mevcut değilse, bir Windows Server 2019 VM ve gerekli sanal ağ bileşenleri oluşturulur.
+[az vm create](/cli/azure/vm#az_vm_create) ile bir VM oluşturun. Aşağıdaki örnekte, zaten mevcut değilse, bir Windows Server 2019 VM ve gerekli sanal ağ bileşenleri oluşturulur.
 
 ```azurecli
 az vm create \
@@ -115,7 +115,7 @@ az vm create \
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse, [az group delete](/cli/azure/group#az-group-delete) komutunu kullanarak kaynak grubunu ve içerdiği tüm kaynakları kaldırabilirsiniz:
+Artık gerekli değilse, [az group delete](/cli/azure/group#az_group_delete) komutunu kullanarak kaynak grubunu ve içerdiği tüm kaynakları kaldırabilirsiniz:
 
 ```azurecli
 az group delete --name myResourceGroup --yes

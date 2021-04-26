@@ -3,18 +3,17 @@ title: Azure Event Grid ile Key Vault izleme
 description: Key Vault olaylarına abone olmak için Azure Event Grid kullanma
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
 ms.date: 11/12/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 1ee38196f0b1a6e00d385dc0d2c88d45a4291d3b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 4fb6d57bb84f4a3b4c5c138be9306489191bfce8
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "90087445"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107753371"
 ---
 # <a name="monitoring-key-vault-with-azure-event-grid"></a>Azure Event Grid ile Key Vault izleme
 

@@ -35,19 +35,19 @@ Bu modül, görüntü verilerini eğitim ve test kümelerine ayırmanız gerekti
 
 ### <a name="expected-inputs"></a>Beklenen girişler
 
-| Ad                  | Tür           | Açıklama              |
+| Ad                  | Tür           | Description              |
 | --------------------- | -------------- | ------------------------ |
 | Giriş resmi dizini | ImageDirectory | Bölünecek görüntü dizini |
 
 ### <a name="module-parameters"></a>Modül parametreleri
 
-| Ad                                   | Tür  | Aralık | İsteğe Bağlı | Açıklama                            | Varsayılan |
+| Ad                                   | Tür  | Aralık | İsteğe Bağlı | Description                            | Varsayılan |
 | -------------------------------------- | ----- | ----- | -------- | -------------------------------------- | ------- |
 | İlk çıktıda görüntülerin kesri | Float | 0-1   | Gerekli | İlk çıktıda görüntülerin kesri | 0,9     |
 
 ### <a name="outputs"></a>Çıkışlar
 
-| Ad                    | Tür           | Açıklama                              |
+| Ad                    | Tür           | Description                              |
 | ----------------------- | -------------- | ---------------------------------------- |
 | Çıkış resmi Directory1 | ImageDirectory | Seçili görüntüleri içeren görüntü dizini |
 | Çıkış resmi directory2 | ImageDirectory | Diğer tüm görüntüleri içeren görüntü dizini |

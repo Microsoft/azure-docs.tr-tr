@@ -1,20 +1,20 @@
 ---
 title: Blob dizini etiketleriyle Azure blob verilerini yönetme ve bulma (Önizleme)
 description: Blob nesnelerini kategorilere ayırmak, yönetmek ve sorgulamak için blob dizini etiketlerini nasıl kullanacağınızı öğrenin.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 03/18/2021
 ms.service: storage
 ms.subservice: common
 ms.topic: conceptual
 ms.reviewer: klaasl
 ms.custom: references_regions
-ms.openlocfilehash: 540f6ca165c80dd90f5004fb53e1577cdc35d770
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2188aaea0cf5a4616291d3fdad839aefb2dbc413
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104656048"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280709"
 ---
 # <a name="manage-and-find-azure-blob-data-with-blob-index-tags-preview"></a>Blob dizini etiketleriyle Azure blob verilerini yönetme ve bulma (Önizleme)
 

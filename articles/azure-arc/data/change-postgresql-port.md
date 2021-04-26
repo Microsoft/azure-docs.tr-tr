@@ -10,10 +10,10 @@ ms.reviewer: mikeray
 ms.date: 11/02/2020
 ms.topic: how-to
 ms.openlocfilehash: 45424408c790e4921be48464818c55fe74313fd3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "93328758"
 ---
 # <a name="change-the-port-on-which-the-server-group-is-listening"></a>Sunucu grubunun dinlediği bağlantı noktasını değiştirme 

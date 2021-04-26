@@ -9,12 +9,12 @@ ms.author: mlearned
 description: Bu makalede, Azure Arc etkin Kubernetes 'e genel bakış sunulmaktadır.
 keywords: Kubernetes, yay, Azure, kapsayıcılar
 ms.custom: references_regions
-ms.openlocfilehash: b3296aa1c1d5d463cc7f4cb932b44ad76632e19e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 69e9886f214d0076c8e66231fd6ad15bb060828f
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102121601"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449657"
 ---
 # <a name="what-is-azure-arc-enabled-kubernetes"></a>Azure Arc özellikli Kubernetes nedir?
 
@@ -43,9 +43,11 @@ Azure Arc etkin Kubernetes aşağıdaki senaryoları destekler:
 
 * Gilar tabanlı yapılandırma yönetimini kullanarak uygulamaları dağıtın ve yapılandırma uygulayın. 
 
-* Kapsayıcılar için Azure Izleyici 'yi kullanarak kümelerinizi görüntüleyin ve izleyin. 
+* Kapsayıcılar için Azure Izleyici 'yi kullanarak kümelerinizi görüntüleyin ve izleyin.
 
-* Kubernetes için Azure Ilkesini kullanarak ilkeleri uygulayın. 
+* Kubernetes için Azure Defender 'ı kullanarak tehdit koruması zorlayın.
+
+* Kubernetes için Azure Ilkesini kullanarak ilkeleri uygulayın.
 
 [!INCLUDE [azure-lighthouse-supported-service](../../../includes/azure-lighthouse-supported-service.md)]
 

@@ -14,12 +14,12 @@ ms.custom:
 - 'Role: Cloud Development'
 - devx-track-azurecli
 ms.date: 06/01/2020
-ms.openlocfilehash: 914df5b80dee7da041b268a3aaf25ac493d0cf5b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ec26e4a42cdeb7a693c8078c0f065241f32da949
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98624448"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864001"
 ---
 # <a name="quickstart-send-telemetry-from-a-device-to-an-iot-hub-and-read-it-with-a-service-application-net"></a>Hızlı başlangıç: bir cihazdan IoT Hub 'ına telemetri gönderin ve hizmet uygulamasıyla okuyun (.NET)
 
@@ -35,7 +35,7 @@ Hızlı başlangıçta, biri telemetriyi göndermek için, diğeri de hub’dan 
 
 * Bu hızlı başlangıçta çalıştırdığınız iki örnek uygulama, C# kullanılarak yazılır. Geliştirme makinenizde .NET Core SDK 3,1 veya üzeri bir sürümü gerekir.
 
-    [.NET](https://www.microsoft.com/net/download/all)’ten birden fazla platform için .NET Core SDK’sını indirebilirsiniz.
+    [.NET](https://dotnet.microsoft.com/download)’ten birden fazla platform için .NET Core SDK’sını indirebilirsiniz.
 
     Aşağıdaki komutu kullanarak geliştirme makinenizde geçerli C# sürümünü doğrulayabilirsiniz:
 

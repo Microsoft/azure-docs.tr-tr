@@ -10,10 +10,10 @@ services: azure-maps
 manager: philmea
 ms.custom: devx-track-js
 ms.openlocfilehash: b283cacf94ff3567428787e50a3d7db9ba91fd9c
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104864049"
 ---
 # <a name="use-the-azure-maps-map-control"></a>Azure Haritalar harita denetimini kullanma
@@ -200,9 +200,9 @@ Harita Denetimi istemci tarafı JavaScript kitaplığını kullanarak bir Web sa
 
    ![İşlenen sonucu gösteren harita resmi](./media/how-to-use-map-control/map-of-seattle.png)
 
-## <a name="localizing-the-map"></a>Haritayı yerelleştirme
+## <a name="localizing-the-map&quot;></a>Haritayı yerelleştirme
 
-Azure haritalar, işlenen harita için dili ve bölgesel görünümü ayarlamanın iki farklı yolunu sağlar. İlk seçenek, bu bilgileri genel `atlas` ad alanına eklemektir, bu da uygulamanızdaki tüm harita denetim örneklerinin bu ayarları varsayılan olarak alacak şekilde sonuçlanır. Aşağıdaki dil, dili Fransızca ("fr-FR") ve bölgesel görünüm olarak "Auto" olarak ayarlar:
+Azure haritalar, işlenen harita için dili ve bölgesel görünümü ayarlamanın iki farklı yolunu sağlar. İlk seçenek, bu bilgileri genel `atlas` ad alanına eklemektir, bu da uygulamanızdaki tüm harita denetim örneklerinin bu ayarları varsayılan olarak alacak şekilde sonuçlanır. Aşağıdaki dil, dili Fransızca (&quot;fr-FR") ve bölgesel görünüm olarak "Auto" olarak ayarlar:
 
 ```javascript
 atlas.setLanguage('fr-FR');

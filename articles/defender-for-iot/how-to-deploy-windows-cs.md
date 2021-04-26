@@ -4,10 +4,10 @@ description: 32-bit veya 64 bit Windows cihazlarına IoT Aracısı için Defende
 ms.topic: conceptual
 ms.date: 09/09/2020
 ms.openlocfilehash: b5efc9ce675fa068f378cdc2bdd5a077d3437a93
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104778772"
 ---
 # <a name="deploy-a-defender-for-iot-c-based-security-agent-for-windows"></a>Windows için IoT C# tabanlı güvenlik Aracısı için bir Defender dağıtma

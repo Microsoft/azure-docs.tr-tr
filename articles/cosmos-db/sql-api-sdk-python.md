@@ -6,15 +6,15 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: python
 ms.topic: reference
-ms.date: 08/12/2020
+ms.date: 04/06/2021
 ms.author: rosouz
 ms.custom: devx-track-python
-ms.openlocfilehash: 470ae497acab4c75e83a13e485d1bcb118485ab9
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: ff551c5d677029f39d9a3db3a64f3d03e2c57eba
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104799522"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107366044"
 ---
 # <a name="azure-cosmos-db-python-sdk-for-sql-api-release-notes-and-resources"></a>SQL API için Azure Cosmos DB Python SDK’sı: Sürüm notları ve kaynaklar
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -30,7 +30,8 @@ ms.locfileid: "104799522"
 > * [Zaman uyumlu Java SDK v2](sql-api-sdk-java.md)
 > * [Spring Verileri v2](sql-api-sdk-java-spring-v2.md)
 > * [Spring Verileri v3](sql-api-sdk-java-spring-v3.md)
-> * [Spark Bağlayıcısı](sql-api-sdk-java-spark.md)
+> * [Spark 3 OLTP Bağlayıcısı](sql-api-sdk-java-spark-v3.md)
+> * [Spark 2 OLTP Bağlayıcısı](sql-api-sdk-java-spark.md)
 > * [Python](sql-api-sdk-python.md)
 > * [REST](/rest/api/cosmos-db/)
 > * [REST kaynak sağlayıcısı](/rest/api/cosmos-db-resource-provider/)

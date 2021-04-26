@@ -8,19 +8,20 @@ ms.author: bobazile
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: d5e4920dcc422e848266f35c8a59175b5149b924
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7aebb10fb3855936d930685f1a8eef2588140ad1
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103492753"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105930464"
 ---
 # <a name="telephony-concepts"></a>Telefon kavramları
 
-[!INCLUDE [Private Preview Notice](../../includes/private-preview-include.md)]
+[!INCLUDE [Public Preview Notice](../../includes/public-preview-include-phone-numbers.md)]
+
 [!INCLUDE [Regional Availability Notice](../../includes/regional-availability-include.md)]
 
-İstemci kitaplıklarını çağıran Azure Iletişim Hizmetleri, uygulamalarınıza telefon ve PSTN eklemek için kullanılabilir. Bu sayfa, temel telefon kavramlarını ve yeteneklerini özetler. Belirli istemci kitaplığı dilleri ve özellikleri hakkında daha fazla bilgi edinmek için bkz. [arama kitaplığı](../../quickstarts/voice-video-calling/calling-client-samples.md) .
+SDK 'Ları çağıran Azure Iletişim Hizmetleri, uygulamalarınıza telefon ve PSTN eklemek için kullanılabilir. Bu sayfa, temel telefon kavramlarını ve yeteneklerini özetler. Belirli SDK dilleri ve özellikleri hakkında daha fazla bilgi edinmek için bkz. [arama kitaplığı](../../quickstarts/voice-video-calling/calling-client-samples.md) .
 
 ## <a name="overview-of-telephony"></a>Telefona genel bakış
 Kullanıcılarınız geleneksel bir telefon numarasıyla etkileşdiğinde, aramalar PSTN (ortak anahtarlı telefon ağı) sesli arama tarafından kolaylaştırılmış. PSTN çağrıları yapmak ve almak için, Azure Communication Services kaynağınız için telefon özellikleri eklemeniz gerekir. Bu durumda, sinyal ve medya, kullanıcılarınızı bağlamak için IP tabanlı ve PSTN tabanlı teknolojilerin birleşimini kullanır. İletişim Hizmetleri, PSTN ağına ulaşmak için iki farklı yol sağlar: Azure Cloud çağıran ve SIP arabirimi.

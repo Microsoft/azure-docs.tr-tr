@@ -5,16 +5,16 @@ author: avirishuv
 ms.author: avverma
 ms.topic: conceptual
 ms.service: virtual-machine-scale-sets
-ms.subservice: management
+ms.subservice: terminate-notification
 ms.date: 02/26/2020
 ms.reviewer: jushiman
 ms.custom: avverma, devx-track-azurecli
-ms.openlocfilehash: c4d6de1b3406e6d82bdac5ff9b5c72a2286da988
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: ed042afbcbb67a88e304c92302b14af56b26c8e1
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92747741"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105933415"
 ---
 # <a name="terminate-notification-for-azure-virtual-machine-scale-set-instances"></a>Azure sanal makine ölçek kümesi örnekleri için bildirimi sonlandırma
 Ölçek kümesi örnekleri, örnek sonlandırma bildirimleri almak için kabul edebilir ve Sonlandırma işlemine önceden tanımlanmış bir gecikme zaman aşımı kümesi ayarlayabilir. Sonlandırma bildirimi, yeniden başlatmalar ve yeniden dağıtım gibi kesin işlemleri bildirimleri ve ertelerini sağlayan Azure Metadata Service – [zamanlanan olaylar](../virtual-machines/windows/scheduled-events.md)aracılığıyla gönderilir. Çözüm başka bir olay – Terminate – Zamanlanan Olaylar listesine ekler ve Terminate olayının ilişkili gecikmesi, kullanıcılar tarafından ölçek kümesi modeli yapılandırmalarında belirtilen gecikme sınırına bağlıdır.

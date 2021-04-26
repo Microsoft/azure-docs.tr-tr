@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 02/18/2020
-ms.openlocfilehash: 19c39632a1ed040636372d6bad53bf6859960b94
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6aa960eb7aed7a579c3fc95748b6e32601201a61
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101732046"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107305132"
 ---
 # <a name="send-data-from-windows-azure-diagnostics-extension-to-azure-event-hubs"></a>Windows Azure tanılama uzantısı 'ndan Azure Event Hubs veri gönderme
 Azure tanılama uzantısı, Azure Izleyici 'de Konuk işletim sisteminden ve Azure sanal makinelerinin ve diğer işlem kaynaklarının iş yüklerinden izleme verilerini toplayan bir aracıdır. Bu makalede, Azure 'un dışındaki konumlara iletmek için Microsoft Azure tanılama uzantısı 'ndan (WAD) [azure Event Hubs](https://azure.microsoft.com/services/event-hubs/) veri gönderme işleminin nasıl yapılacağı açıklanır.
@@ -177,7 +177,7 @@ Verilerin Olay Hub 'ına gönderildiğini doğrulamak için çeşitli yöntemler
 
 * [Event Hubs genel bakış](../../event-hubs/event-hubs-about.md)
 * [Olay Hub 'ı oluşturma](../../event-hubs/event-hubs-create.md)
-* [Event Hubs ile ilgili SSS](../../event-hubs/event-hubs-faq.md)
+* [Event Hubs ile ilgili SSS](../../event-hubs/event-hubs-faq.yml)
 
 <!-- Images. -->
 [0]: ../../event-hubs/media/event-hubs-streaming-azure-diags-data/dashboard.png

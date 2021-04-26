@@ -11,12 +11,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 03/12/2019
-ms.openlocfilehash: e50cce74f7291a6673e5d43f3485a1c63c81d827
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4aaabdb3d21c41b973b21e6e52442be132796196
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93319283"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781604"
 ---
 # <a name="create-and-manage-servers-and-single-databases-in-azure-sql-database"></a>Azure SQL veritabanı 'nda sunucular ve tek veritabanları oluşturma ve yönetme
 
@@ -92,25 +92,25 @@ Sunucular, tek ve havuza alınmış veritabanları ve Azure PowerShell ile sunuc
 
 | Cmdlet | Açıklama |
 | --- | --- |
-|[az sql db create](/cli/azure/sql/db#az-sql-db-create) |Bir veritabanı oluşturur|
-|[az SQL DB List](/cli/azure/sql/db#az-sql-db-list)|Bir sunucudaki tüm veritabanlarını ve veri ambarlarını veya elastik havuzdaki tüm veritabanlarını listeler|
-|[az SQL DB List-Editions](/cli/azure/sql/db#az-sql-db-list-editions)|Kullanılabilir hizmet hedeflerini ve depolama sınırlarını listeler|
-|[az SQL DB List-kullanımlar](/cli/azure/sql/db#az-sql-db-list-usages)|Veritabanı kullanımlarını döndürür|
-|[az SQL DB Show](/cli/azure/sql/db#az-sql-db-show)|Bir veritabanını veya veri ambarını alır|
-|[az sql db update](/cli/azure/sql/db#az-sql-db-update)|Bir veritabanını güncelleştirir|
-|[az SQL DB Delete](/cli/azure/sql/db#az-sql-db-delete)|Bir veritabanını kaldırır|
-|[az group create](/cli/azure/group#az-group-create)|Bir kaynak grubu oluşturur|
-|[az sql server create](/cli/azure/sql/server#az-sql-server-create)|Sunucu oluşturur|
-|[az SQL Server List](/cli/azure/sql/server#az-sql-server-list)|Sunucuları listeler|
-|[az SQL Server List-kullanımlar](/cli/azure/sql/server#az-sql-server-list-usages)|Sunucu kullanımlarını döndürür|
-|[az SQL Server Show](/cli/azure/sql/server#az-sql-server-show)|Bir sunucu alır|
-|[az SQL Server Update](/cli/azure/sql/server#az-sql-server-update)|Bir sunucuyu güncelleştirir|
-|[az SQL Server DELETE](/cli/azure/sql/server#az-sql-server-delete)|Bir sunucuyu siler|
-|[az SQL Server Firewall-Rule Create](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-create)|Sunucu güvenlik duvarı kuralı oluşturur|
-|[az SQL Server Firewall-Rule List](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-list)|Bir sunucudaki güvenlik duvarı kurallarını listeler|
-|[az SQL Server Firewall-Rule Show](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-show)|Bir güvenlik duvarı kuralının ayrıntılarını gösterir|
-|[az SQL Server Firewall-Rule Update](/cli/azure/sql/server/firewall-rule##az-sql-server-firewall-rule-update)|Bir güvenlik duvarı kuralını güncelleştirir|
-|[az SQL Server Firewall-Rule Delete](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-delete)|Bir güvenlik duvarı kuralını siler|
+|[az sql db create](/cli/azure/sql/db#az_sql_db_create) |Bir veritabanı oluşturur|
+|[az SQL DB List](/cli/azure/sql/db#az_sql_db_list)|Bir sunucudaki tüm veritabanlarını ve veri ambarlarını veya elastik havuzdaki tüm veritabanlarını listeler|
+|[az SQL DB List-Editions](/cli/azure/sql/db#az_sql_db_list_editions)|Kullanılabilir hizmet hedeflerini ve depolama sınırlarını listeler|
+|[az SQL DB List-kullanımlar](/cli/azure/sql/db#az_sql_db_list_usages)|Veritabanı kullanımlarını döndürür|
+|[az SQL DB Show](/cli/azure/sql/db#az_sql_db_show)|Bir veritabanını veya veri ambarını alır|
+|[az sql db update](/cli/azure/sql/db#az_sql_db_update)|Bir veritabanını güncelleştirir|
+|[az SQL DB Delete](/cli/azure/sql/db#az_sql_db_delete)|Bir veritabanını kaldırır|
+|[az group create](/cli/azure/group#az_group_create)|Bir kaynak grubu oluşturur|
+|[az sql server create](/cli/azure/sql/server#az_sql_server_create)|Sunucu oluşturur|
+|[az SQL Server List](/cli/azure/sql/server#az_sql_server_list)|Sunucuları listeler|
+|[az SQL Server List-kullanımlar](/cli/azure/sql/server#az_sql_server_list-usages)|Sunucu kullanımlarını döndürür|
+|[az SQL Server Show](/cli/azure/sql/server#az_sql_server_show)|Bir sunucu alır|
+|[az SQL Server Update](/cli/azure/sql/server#az_sql_server_update)|Bir sunucuyu güncelleştirir|
+|[az SQL Server DELETE](/cli/azure/sql/server#az_sql_server_delete)|Bir sunucuyu siler|
+|[az SQL Server Firewall-Rule Create](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_create)|Sunucu güvenlik duvarı kuralı oluşturur|
+|[az SQL Server Firewall-Rule List](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_list)|Bir sunucudaki güvenlik duvarı kurallarını listeler|
+|[az SQL Server Firewall-Rule Show](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_show)|Bir güvenlik duvarı kuralının ayrıntılarını gösterir|
+|[az SQL Server Firewall-Rule Update](/cli/azure/sql/server/firewall-rule##az_sql_server_firewall_rule_update)|Bir güvenlik duvarı kuralını güncelleştirir|
+|[az SQL Server Firewall-Rule Delete](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_delete)|Bir güvenlik duvarı kuralını siler|
 
 ## <a name="transact-sql-t-sql"></a>Transact-SQL (T-SQL)
 
@@ -165,4 +165,3 @@ Sunucuları, veritabanlarını ve güvenlik duvarlarını oluşturup yönetmek i
 
 - SQL Server bir veritabanını Azure 'a geçirme hakkında bilgi edinmek için bkz. [Azure SQL veritabanı 'Na geçiş](migrate-to-database-from-sql-server.md).
 - Desteklenen özellikler hakkında bilgi için bkz. [Özellikler](features-comparison.md).
- 

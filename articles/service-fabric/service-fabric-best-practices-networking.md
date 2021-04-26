@@ -5,12 +5,12 @@ author: chrpap
 ms.topic: conceptual
 ms.date: 01/23/2019
 ms.author: chrpap
-ms.openlocfilehash: caba864e77822ccab649f694df7e63e0ee5d6e51
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: de6a80f73a97a5732f00e10107fff2330038210a
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101732573"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106122025"
 ---
 # <a name="networking"></a>Ağ
 
@@ -87,7 +87,7 @@ Gelen güvenlik kuralları hakkında daha fazla bilgi:
 
 * **Uygulama**. Uygulama bağlantı noktası aralığı uygulamalarınızın uç nokta gereksinimini kapsayacak kadar büyük olmalıdır. Bu Aralık, makinedeki dinamik bağlantı noktası aralığından, yani ephemeralPorts, yapılandırmada ayarlandığı şekilde özel olmalıdır. Service Fabric, yeni bağlantı noktaları gerektiğinde bu bağlantı noktalarını kullanır ve bu bağlantı noktalarının düğümlerde güvenlik duvarını açma işlemini gerçekleştirir.
 
-* **SMB**. SMB protokolü, ımakoya hizmeti tarafından iki senaryo için kullanılıyor. Bu bağlantı noktası, paketleri düğümler tarafından ımagesden yüklemek ve bunları çoğaltmalar arasında çoğaltmak için gereklidir. 
+* **SMB**. İsteğe bağlı, çalışma zamanı sürüm 7.1 +, varsayılan olarak SMB kullanmaz. SMB protokolü, ımakoya hizmeti tarafından iki senaryo için kullanılıyor. Bu bağlantı noktası, paketleri düğümler tarafından ımagesden yüklemek ve bunları çoğaltmalar arasında çoğaltmak için gereklidir. 
 
 * **RDP**. Internet veya VirtualNetwork for sıçrama kutusu senaryolarında RDP gerekliyse isteğe bağlı. 
 

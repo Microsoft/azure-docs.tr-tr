@@ -5,10 +5,10 @@ ms.topic: article
 ms.date: 01/20/2021
 ms.custom: devx-track-csharp
 ms.openlocfilehash: 80bef52d568130fa800a1da661f4867abb3df02c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98678997"
 ---
 # <a name="chaining-service-bus-entities-with-autoforwarding"></a>Oto Service Bus varlıkları tekrar yönlendirme ile zincirle
@@ -68,7 +68,7 @@ Oto iletme hakkında ayrıntılı bilgi için aşağıdaki başvuru konularına 
 
 Service Bus performans iyileştirmeleri hakkında daha fazla bilgi edinmek için bkz. 
 
-* [Service Bus Mesajlaşması kullanarak performans geliştirmek için en iyi yöntemler](service-bus-performance-improvements.md)
+* [Service Bus mesajlaşma kullanarak performans iyileştirmeleri için en iyi uygulamalar](service-bus-performance-improvements.md)
 * [Bölümlenmiş mesajlaşma varlıkları][Partitioned messaging entities].
 
 [QueueDescription.ForwardTo]: /dotnet/api/microsoft.servicebus.messaging.queuedescription.forwardto#Microsoft_ServiceBus_Messaging_QueueDescription_ForwardTo

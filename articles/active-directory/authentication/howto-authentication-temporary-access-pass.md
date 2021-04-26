@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 03/18/2021
+ms.date: 03/31/2021
 ms.author: justinha
 author: justinha
 manager: daveba
 ms.reviewer: inbarckms
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0805ac84318a4fee98c30127ac80c0dac2b96309
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 8774df6a2eee15f8b5a0c37362e5b20f14b07549
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105558270"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167371"
 ---
 # <a name="configure-temporary-access-pass-in-azure-ad-to-register-passwordless-authentication-methods-preview"></a>Azure AD 'de geçici erişim geçişini, passwordless kimlik doğrulama yöntemlerini (Önizleme) kaydetmek için yapılandırma
 
@@ -57,7 +57,7 @@ Geçici erişim geçişi kimlik doğrulama yöntemi ilkesini yapılandırmak iç
    | Bir kerelik kullanım | Yanlış | Doğru/yanlış | İlke false olarak ayarlandığında, Kiracıdaki geçişler bir veya birden çok kez (en fazla ömür süresi) bir kez kullanılabilir. Geçici erişim geçiş ilkesinde tek seferlik kullanımı zorlayarak kiracıda oluşturulan tüm geçişler tek seferlik kullanım olarak oluşturulur. |
    | Uzunluk | 8 | 8-48 karakter | Geçiş kodunun uzunluğunu tanımlar. |
 
-## <a name="create-a-temporary-access-pass-in-the-azure-ad-portal"></a>Azure AD portalında geçici erişim geçişi oluşturma
+## <a name="create-a-temporary-access-pass"></a>Geçici erişim geçişi oluşturma
 
 Bir ilkeyi etkinleştirdikten sonra, Azure AD 'de bir kullanıcı için geçici bir erişim geçişi oluşturabilirsiniz. Bu roller, geçici erişim geçişleriyle ilgili aşağıdaki eylemleri gerçekleştirebilir.
 
@@ -66,9 +66,7 @@ Bir ilkeyi etkinleştirdikten sonra, Azure AD 'de bir kullanıcı için geçici 
 - Kimlik doğrulama yöneticileri, Üyeler üzerinde geçici bir erişim geçişi oluşturabilir, silebilir, görüntüleyebilir (kendileri hariç)
 - Genel yönetici, kullanıcının geçici erişim geçiş ayrıntılarını (kodun kendisini okumadan) görüntüleyebilir.
 
-Geçici erişim geçişi oluşturmak için:
-
-1. Portalda genel yönetici, ayrıcalıklı kimlik doğrulama Yöneticisi veya kimlik doğrulama Yöneticisi olarak oturum açın. 
+1. Azure portal, genel yönetici, ayrıcalıklı kimlik doğrulama Yöneticisi veya kimlik doğrulama Yöneticisi olarak oturum açın. 
 1. **Azure Active Directory**' ye tıklayın, kullanıcılar ' a gidin, *Chris yeşil* gibi bir kullanıcı seçin, sonra **kimlik doğrulama yöntemleri**' ni seçin.
 1. Gerekirse, **Yeni Kullanıcı kimlik doğrulama yöntemleri deneyimini deneyin** seçeneğini belirleyin.
 1. **Kimlik doğrulama yöntemleri ekleme** seçeneğini belirleyin.
@@ -80,6 +78,30 @@ Geçici erişim geçişi oluşturmak için:
 1. Eklendikten sonra, geçici erişim geçişinin ayrıntıları gösterilir. Gerçek geçici erişim geçiş değerini bir yere getirin. Bu değeri kullanıcıya sağlarsınız. **Tamam**' a tıkladıktan sonra bu değeri görüntüleyemezsiniz.
    
    ![Geçici erişim geçiş ayrıntılarının ekran görüntüsü](./media/how-to-authentication-temporary-access-pass/details.png)
+
+Aşağıdaki komutlar PowerShell kullanarak nasıl geçici bir erişim geçişi oluşturulacağını ve alınacağını gösterir:
+
+```powershell
+# Create a Temporary Access Pass for a user
+$properties = @{}
+$properties.isUsableOnce = $True
+$properties.startDateTime = '2021-03-11 06:00:00'
+$propertiesJSON = $properties | ConvertTo-Json
+
+New-MgUserAuthenticationTemporaryAccessPassMethod -UserId user2@contoso.com -BodyParameter $propertiesJSON
+
+Id                                   CreatedDateTime       IsUsable IsUsableOnce LifetimeInMinutes MethodUsabilityReason StartDateTime         TemporaryAccessPass
+--                                   ---------------       -------- ------------ ----------------- --------------------- -------------         -------------------
+c5dbd20a-8b8f-4791-a23f-488fcbde3b38 9/03/2021 11:19:17 PM False    True         60                NotYetValid           11/03/2021 6:00:00 AM TAPRocks!
+
+# Get a user's Temporary Access Pass
+Get-MgUserAuthenticationTemporaryAccessPassMethod -UserId user3@contoso.com
+
+Id                                   CreatedDateTime       IsUsable IsUsableOnce LifetimeInMinutes MethodUsabilityReason StartDateTime         TemporaryAccessPass
+--                                   ---------------       -------- ------------ ----------------- --------------------- -------------         -------------------
+c5dbd20a-8b8f-4791-a23f-488fcbde3b38 9/03/2021 11:19:17 PM False    True         60                NotYetValid           11/03/2021 6:00:00 AM
+
+```
 
 ## <a name="use-a-temporary-access-pass"></a>Geçici bir erişim geçişi kullanın
 
@@ -108,6 +130,13 @@ Zaman aşımına uğradı geçici erişim geçişi kullanılamaz. Bir kullanıc�
 1. Azure AD portalında, **Kullanıcılar**' a gidin, Kullanıcı ' *ya dokunun*, ardından **kimlik doğrulama yöntemleri**' ni seçin.
 1. Listede gösterilen **geçici erişim geçişi (Önizleme)** kimlik doğrulama yönteminin sağ tarafında **Sil**' i seçin.
 
+PowerShell 'i de kullanabilirsiniz:
+
+```powershell
+# Remove a user's Temporary Access Pass
+Remove-MgUserAuthenticationTemporaryAccessPassMethod -UserId user3@contoso.com -TemporaryAccessPassAuthenticationMethodId c5dbd20a-8b8f-4791-a23f-488fcbde3b38
+```
+
 ## <a name="replace-a-temporary-access-pass"></a>Geçici erişim geçişini değiştirme 
 
 - Bir Kullanıcı yalnızca bir adet geçici erişim geçişine sahip olabilir. Geçiş kodu, geçici erişim geçişinin başlangıç ve bitiş saati sırasında kullanılabilir.
@@ -123,8 +152,8 @@ Bu sınırlamaları aklınızda bulundurun:
 
 - FIDO2 veya Phone oturum açma gibi bir passwordless yöntemi kaydetmek için tek seferlik bir geçici erişim geçişi kullanırken, kullanıcının kaydı tek seferlik geçici erişim geçişine sahip 10 dakikalık bir oturum açma süresi içinde tamamlaması gerekir. Bu sınırlama, birden çok kez kullanılabilecek geçici bir erişim geçişine uygulanmaz.
 - Konuk kullanıcılar geçici bir erişim geçişine oturum açamaz.
-- Self servis parola sıfırlama (SSPR) kayıt ilkesi kapsamındaki kullanıcıların, bir geçici erişim geçişine oturum açtıktan sonra SSPR yöntemlerinden birini kaydetmesi gerekecektir. Kullanıcı yalnızca FIDO2 anahtarını kullanacaksanız, SSPR ilkesinden hariç tutun veya SSPR kayıt ilkesini devre dışı bırakın. 
-- Geçici erişim geçişi, ağ Ilkesi sunucusu (NPS) uzantısı ve Active Directory Federasyon Hizmetleri (AD FS) (AD FS) bağdaştırıcısıyla birlikte kullanılamaz.
+- Self servis parola sıfırlama (SSPR) kayıt ilkesi *veya* [kimlik koruması Multi-Factor Authentication kayıt ilkesi](../identity-protection/howto-identity-protection-configure-mfa-policy.md) kapsamındaki kullanıcıların, geçici bir erişim geçişine oturum açtıktan sonra kimlik doğrulama yöntemlerini kaydetmesi gerekir. Bu ilkelerin kapsamındaki kullanıcılar, [Birleşik kaydın kesme moduna](concept-registration-mfa-sspr-combined.md#combined-registration-modes)yeniden yönlendirilir. Bu deneyim Şu anda FIDO2 ve telefonla oturum açma kaydını desteklememektedir. 
+- Geçici bir erişim geçişi, ağ Ilkesi sunucusu (NPS) uzantısı ve Active Directory Federasyon Hizmetleri (AD FS) (AD FS) bağdaştırıcısı ile kullanılamaz veya Windows Kurulumu/kutudan çıkar deneyimi (OOBE) ve AutoPilot. 
 - Kiracıya sorunsuz SSO etkinleştirildiğinde, kullanıcılardan bir parola girmesi istenir. **Bunun yerine geçici erişim geçişinizi kullanın** bağlantısı, kullanıcının geçici bir erişim geçişiyle oturum açması için kullanılabilir olacaktır.
 
   ![Bunun yerine geçici erişim geçişi kullan ekran görüntüsü](./media/how-to-authentication-temporary-access-pass/alternative.png)

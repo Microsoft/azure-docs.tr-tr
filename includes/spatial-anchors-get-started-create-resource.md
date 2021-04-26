@@ -4,18 +4,18 @@ ms.service: azure-spatial-anchors
 ms.topic: include
 ms.date: 11/20/2020
 ms.author: parkerra
-ms.openlocfilehash: 596b73f8fb205b6a5681fecf3d00fd2a67c1f59f
-ms.sourcegitcommit: 86acfdc2020e44d121d498f0b1013c4c3903d3f3
+ms.openlocfilehash: 2c85e26d5a9115b00621c4099e3ed36afb224e3f
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97628766"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107881361"
 ---
 ## <a name="create-a-spatial-anchors-resource"></a>Uzamsal bağlayıcı kaynağı oluşturma
 
 ### <a name="portal"></a>[Portal](#tab/azure-portal)
 
-<a href="https://portal.azure.com" target="_blank">Azure portalına</a> gidin.
+<a href="https://portal.azure.com" target="_blank">Azure Portal</a> gidin.
 
 Sol bölmede **kaynak oluştur**' u seçin.
 
@@ -76,7 +76,7 @@ Başlangıç olarak ortamınızı Azure CLI için hazırlayın:
 
    [!INCLUDE [resource group intro text](resource-group.md)]
 
-   [Az uzamsal-bağlayıcı hesabı listesi](/cli/azure/ext/mixed-reality/spatial-anchors-account#ext_mixed_reality_az_spatial_anchors_account_list) komutunu kullanarak bir kaynak grubu için geçerli uzamsal bağlayıcı hesaplarınızı görüntüleyebilirsiniz:
+   [Az uzamsal-bağlayıcı hesabı listesi](/cli/azure/spatial-anchors-account#az_spatial_anchors_account_list) komutunu kullanarak bir kaynak grubu için geçerli uzamsal bağlayıcı hesaplarınızı görüntüleyebilirsiniz:
 
    ```azurecli
    az spatial-anchors-account list --resource-group myResourceGroup
@@ -88,13 +88,13 @@ Başlangıç olarak ortamınızı Azure CLI için hazırlayın:
    az spatial-anchors-account list
    ```
 
-1. Uzamsal bağlayıcı hesabınızı oluşturmak için [az uzamsal-bağlayıcı-hesap oluştur](/cli/azure/ext/mixed-reality/spatial-anchors-account#ext_mixed_reality_az_spatial_anchors_account_create) komutunu çalıştırın:
+1. Uzamsal bağlayıcı hesabınızı oluşturmak için [az uzamsal-bağlayıcı-hesap oluştur](/cli/azure/spatial-anchors-account#az_spatial_anchors_account_create) komutunu çalıştırın:
 
    ```azurecli
    az spatial-anchors-account create --resource-group myResourceGroup --name MySpatialAnchorsQuickStart --location eastus2
    ```
 
-1. [Az uzamsal-bağlayıcı-hesap göster](/cli/azure/ext/mixed-reality/spatial-anchors-account#ext_mixed_reality_az_spatial_anchors_account_show) komutunu kullanarak kaynak özelliklerini görüntüleyin:
+1. [Az uzamsal-bağlayıcı-hesap göster](/cli/azure/spatial-anchors-account#az_spatial_anchors_account_show) komutunu kullanarak kaynak özelliklerini görüntüleyin:
 
    ```azurecli
    az spatial-anchors-account show --resource-group myResourceGroup --name MySpatialAnchorsQuickStart
@@ -102,7 +102,7 @@ Başlangıç olarak ortamınızı Azure CLI için hazırlayın:
 
    Kaynak **hesap kimliği** değerini ve kaynak **hesabı etki alanı** değerini daha sonra kullanmak üzere bir metin düzenleyicisine kopyalayın.
 
-1. Birincil ve ikincil anahtarlarınızı almak için [az uzamsal-bağlayıcı-hesap anahtarı göster](/cli/azure/ext/mixed-reality/spatial-anchors-account/key#ext_mixed_reality_az_spatial_anchors_account_key_show) komutunu çalıştırın:
+1. Birincil ve ikincil anahtarlarınızı almak için [az uzamsal-bağlayıcı-hesap anahtarı göster](/cli/azure/spatial-anchors-account/key#az_spatial_anchors_account_key_show) komutunu çalıştırın:
 
    ```azurecli
    az spatial-anchors-account key show --resource-group myResourceGroup --name MySpatialAnchorsQuickStart
@@ -110,14 +110,14 @@ Başlangıç olarak ortamınızı Azure CLI için hazırlayın:
 
    Anahtar değerlerini daha sonra kullanmak üzere bir metin düzenleyicisine kopyalayın.
 
-   Anahtarları yeniden oluşturmanız gerekiyorsa, [az uzamsal-bağlayıcı-hesap anahtar yenileme](/cli/azure/ext/mixed-reality/spatial-anchors-account/key#ext_mixed_reality_az_spatial_anchors_account_key_renew) komutunu kullanın:
+   Anahtarları yeniden oluşturmanız gerekiyorsa, [az uzamsal-bağlayıcı-hesap anahtar yenileme](/cli/azure/spatial-anchors-account/key#az_spatial_anchors_account_key_renew) komutunu kullanın:
 
    ```azurecli
    az spatial-anchors-account key renew --resource-group myResourceGroup --name example --key primary
    az spatial-anchors-account key renew --resource-group myResourceGroup --name example --key secondary
    ```
 
-[Az uzamsal-bağlayıcı-Account Delete](/cli/azure/ext/mixed-reality/spatial-anchors-account#ext_mixed_reality_az_spatial_anchors_account_delete) komutunu kullanarak bir hesabı silebilirsiniz:
+[Az uzamsal-bağlayıcı-Account Delete](/cli/azure/spatial-anchors-account#az_spatial_anchors_account_delete) komutunu kullanarak bir hesabı silebilirsiniz:
 
 ```azurecli
 az spatial-anchors-account delete --resource-group myResourceGroup --name MySpatialAnchorsQuickStart

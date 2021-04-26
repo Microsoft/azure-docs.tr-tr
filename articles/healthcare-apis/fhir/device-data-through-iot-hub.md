@@ -8,12 +8,12 @@ ms.subservice: iomt
 ms.topic: tutorial
 ms.date: 11/13/2020
 ms.author: punagpal
-ms.openlocfilehash: 36d6d8b4d4435b1db99f2721c817c9c06ca60945
-ms.sourcegitcommit: 225e4b45844e845bc41d5c043587a61e6b6ce5ae
+ms.openlocfilehash: 77d54ef0c9bef40af47c2fc48b9d4b5d6315b119
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103020350"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780404"
 ---
 # <a name="tutorial-receive-device-data-through-azure-iot-hub"></a>Öğretici: Azure IoT Hub aracılığıyla cihaz verileri alma
 
@@ -44,7 +44,7 @@ Azure IoT Hub, cihaz verilerini Olay Hub 'ı, depolama hesabı ve Service Bus gi
 İleti yönlendirmeyi ayarlama iki adımdan oluşur.
 
 ### <a name="add-an-endpoint"></a>Bir uç nokta ekleme
-Bu adım IoT Hub verileri yönlendiren bir uç nokta tanımlar. Bu uç noktayı, tercihlerinize göre [Add-AzIotHubRoutingEndpoint](/powershell/module/az.iothub/Add-AzIotHubRoutingEndpoint) PowerShell komutunu ya da [az IoT Hub Routing-ENDPOINT Create](/cli/azure/iot/hub/routing-endpoint#az-iot-hub-routing-endpoint-create) CLI komutunu kullanarak oluşturun.
+Bu adım IoT Hub verileri yönlendiren bir uç nokta tanımlar. Bu uç noktayı, tercihlerinize göre [Add-AzIotHubRoutingEndpoint](/powershell/module/az.iothub/Add-AzIotHubRoutingEndpoint) PowerShell komutunu ya da [az IoT Hub Routing-ENDPOINT Create](/cli/azure/iot/hub/routing-endpoint#az_iot_hub_routing_endpoint_create) CLI komutunu kullanarak oluşturun.
 
 Aşağıda, bir uç nokta oluşturmak için komutuyla birlikte kullanılacak parametrelerin listesi verilmiştir:
 
@@ -59,7 +59,7 @@ Aşağıda, bir uç nokta oluşturmak için komutuyla birlikte kullanılacak par
 |Dizisi|bağlantı dizesi|FHıR için Azure IoT bağlayıcınıza bağlantı dizesi. Önceki adımda edindiğiniz değeri kullanın.|
 
 ### <a name="add-a-message-route"></a>İleti yolu ekleme
-Bu adım, yukarıda oluşturulan uç noktayı kullanarak bir ileti yolunu tanımlar. Tercihinize göre [Add-AzIotHubRoute](/powershell/module/az.iothub/Add-AzIoTHubRoute) PowerShell komutunu veya [az IoT Hub Route Create](/cli/azure/iot/hub/route#az-iot-hub-route-create) CLI komutunu kullanarak bir yol oluşturun.
+Bu adım, yukarıda oluşturulan uç noktayı kullanarak bir ileti yolunu tanımlar. Tercihinize göre [Add-AzIotHubRoute](/powershell/module/az.iothub/Add-AzIoTHubRoute) PowerShell komutunu veya [az IoT Hub Route Create](/cli/azure/iot/hub/route#az_iot_hub_route_create) CLI komutunu kullanarak bir yol oluşturun.
 
 İleti yolu eklemek için komutuyla birlikte kullanılacak parametrelerin listesi aşağıdadır:
 

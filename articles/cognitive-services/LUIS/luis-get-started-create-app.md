@@ -4,13 +4,13 @@ description: Bu hızlı `HomeAutomation` Başlangıçta, ışıkları ve gereçl
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: quickstart
-ms.date: 10/13/2020
-ms.openlocfilehash: 2048079a9b1eb5234d03c6fe57073228bd892d53
-ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
+ms.date: 03/29/2021
+ms.openlocfilehash: e0972998fad647c1c70be814cb7c13f14a6e1141
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/21/2020
-ms.locfileid: "95019169"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277037"
 ---
 # <a name="quickstart-use-prebuilt-home-automation-app"></a>Hızlı başlangıç: Önceden oluşturulmuş ev otomasyonu uygulamasını kullanma
 
@@ -36,7 +36,7 @@ Görüntülenen pencerede, aşağıdaki bilgileri girin:
 |Description | Uygulamanız için bir açıklama.
 |Tahmin kaynağı | Sorgu alacak tahmin kaynağı. |
 
-**Bitti**'yi seçin.
+**Bitti** seçeneğini belirleyin.
 
 >[!NOTE]
 >Uygulama oluşturduktan sonra kültür değiştirilemez.
@@ -52,7 +52,7 @@ Görüntülenen pencerede, aşağıdaki bilgileri girin:
 
     Etki alanı başarıyla eklendiğinde önceden oluşturulmuş etki alanı kutusunda **Etki alanını kaldır** düğmesi görüntülenir.
 
-## <a name="intents-and-entities"></a>Amaçlar ve varlıklar
+## <a name="intents-and-entities&quot;></a>Amaçlar ve varlıklar
 
 1. HomeAutomation etki alanı amaçlarını görmek için sol gezinti menüsünde **amaçlar** ' ı seçin. Ve gibi örnek bir örnek vardır `HomeAutomation.QueryState`     `HomeAutomation.SetDevice` .
 
@@ -61,8 +61,8 @@ Görüntülenen pencerede, aşağıdaki bilgileri girin:
 
 1. **HomeAutomation.TurnOff** amacını seçin. Amaç, varlıklarla etiketlenmiş örnek bir listesini içerir.
 
-    > [!div class="mx-imgBorder"]
-    > [![HomeAutomation.TurnOff amacının ekran görüntüsü](media/luis-quickstart-new-app/home-automation-turnoff.png "HomeAutomation.TurnOff amacının ekran görüntüsü")](media/luis-quickstart-new-app/home-automation-turnoff.png)
+    > [!div class=&quot;mx-imgBorder&quot;]
+    > [![HomeAutomation.TurnOff amacının ekran görüntüsü](media/luis-quickstart-new-app/home-automation-turnoff.png &quot;HomeAutomation.TurnOff amacının ekran görüntüsü")](media/luis-quickstart-new-app/home-automation-turnoff.png)
 
 1. Uygulamanın varlıklarını görüntülemek istiyorsanız, **varlıklar**' ı seçin. Örneğin, **Homeautomation. aygıtadı** gibi varlıklardan birine tıklarsanız, onunla ilişkili değerlerin bir listesini görürsünüz. 
  
@@ -220,7 +220,5 @@ Bir sohbet bot veya diğer istemci uygulamasında bir LUO tahmini almak için, u
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Uç noktayı kod ile çağırabilirsiniz:
-
 > [!div class="nextstepaction"]
-> [Kod kullanarak bir LUIS uç noktasını çağırma](./luis-get-started-get-intent-from-rest.md)
+> [LUSıS için yinelemeli uygulama geliştirme](./luis-concept-app-iteration.md)

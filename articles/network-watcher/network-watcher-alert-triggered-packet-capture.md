@@ -14,10 +14,10 @@ ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
 ms.openlocfilehash: 8e2af73be0fc887b132f523133159472ce1d1f98
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100570983"
 ---
 # <a name="use-packet-capture-for-proactive-network-monitoring-with-alerts-and-azure-functions"></a>Uyarılar ve Azure Işlevleri ile öngörülü ağ izleme için paket yakalamayı kullanma
@@ -81,7 +81,7 @@ Bu senaryo şunları yapar:
     |**Kaynak Grubu**|PacketCaptureRG|İşlev uygulamasını içerecek kaynak grubu.|
     |**Barındırma Planı**|Tüketim Planı| İşlev uygulamanızın kullandığı planın türü. Seçenekler, tüketim veya Azure App Service planlardır. |
     |**Konum**|Central US| İşlev uygulamasının oluşturulacağı bölge.|
-    |**Depolama Hesabı**|otomatik olarak oluşturulan| Azure Işlevlerinin genel amaçlı depolama için ihtiyaç duyacağı depolama hesabı.|
+    |**Depolama hesabı**|otomatik olarak oluşturulan| Azure Işlevlerinin genel amaçlı depolama için ihtiyaç duyacağı depolama hesabı.|
 
 3. **Packetcaptureexample işlevi uygulamalar** dikey penceresinde **işlevler**  >  **özel işlev**' i seçin  > **+** .
 

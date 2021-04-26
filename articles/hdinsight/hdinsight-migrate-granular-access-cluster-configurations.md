@@ -6,12 +6,12 @@ ms.author: tyfox
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 04/20/2020
-ms.openlocfilehash: 47569309f35848e82488abd549751f6f1e5a1baa
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: afb30f4648f1649bf6cc6cc6a3bf02f433f49d45
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104954879"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774941"
 ---
 # <a name="migrate-to-granular-role-based-access-for-cluster-configurations"></a>Küme yapılandırmaları için ayrıntılı rol tabanlı erişime geçme
 
@@ -192,7 +192,7 @@ Küme yapılandırmalarının artık ayrıntılı rol tabanlı erişim denetimi 
 
 ### <a name="why-do-i-see-insufficient-privileges-to-complete-the-operation-when-running-the-azure-cli-command-to-assign-the-hdinsight-cluster-operator-role-to-another-user-or-service-principal"></a>HDInsight kümesi operatörü rolünü başka bir kullanıcıya veya hizmet sorumlusuna atamak için Azure CLı komutunu çalıştırırken "işlemi tamamlamaya yetecek ayrıcalıklara" neden görmüyorum?
 
-Sahip rolüne sahip olmanın yanı sıra, komutu yürüten Kullanıcı veya hizmet sorumlusu, atanan kişinin nesne kimliklerini aramak için yeterli Azure AD iznine sahip olmalıdır. Bu ileti, Azure AD izinlerinin yetersiz olduğunu gösterir. `-–assignee`Bağımsız değişkenini ile değiştirmeyi deneyin `–assignee-object-id` ve adı (ya da yönetilen bir kimlik söz konusu olduğunda asıl kimliği) yerine parametre olarak atanan e ' nın nesne kimliğini sağlayın. Daha fazla bilgi için [az role atama oluşturma belgelerinin](/cli/azure/role/assignment#az-role-assignment-create) isteğe bağlı parametreler bölümüne bakın.
+Sahip rolüne sahip olmanın yanı sıra, komutu yürüten Kullanıcı veya hizmet sorumlusu, atanan kişinin nesne kimliklerini aramak için yeterli Azure AD iznine sahip olmalıdır. Bu ileti, Azure AD izinlerinin yetersiz olduğunu gösterir. `-–assignee`Bağımsız değişkenini ile değiştirmeyi deneyin `–assignee-object-id` ve adı (ya da yönetilen bir kimlik söz konusu olduğunda asıl kimliği) yerine parametre olarak atanan e ' nın nesne kimliğini sağlayın. Daha fazla bilgi için [az role atama oluşturma belgelerinin](/cli/azure/role/assignment#az_role_assignment_create) isteğe bağlı parametreler bölümüne bakın.
 
 Bu hala işe yaramazsa, doğru izinleri almak için Azure AD yöneticinize başvurun.
 

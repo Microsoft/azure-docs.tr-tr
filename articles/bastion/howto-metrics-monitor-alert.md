@@ -8,12 +8,12 @@ ms.service: bastion
 ms.topic: how-to
 ms.date: 03/12/2021
 ms.author: mialdrid
-ms.openlocfilehash: 3a5beba3938b5a845a378ede155f2f64e6baac7a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c4e03318fae8d8d3a8b4d29538cad49f9ef39593
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103417952"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107259124"
 ---
 # <a name="how-to-configure-monitoring-and-metrics-for-azure-bastion-using-azure-monitor"></a>Azure Izleyici kullanarak Azure savunma için izleme ve ölçümleri yapılandırma
 
@@ -58,7 +58,7 @@ Azure savunma 'nın toplam bellek miktarını görüntüleyerek her bir savunma 
 
 #### <a name="used-cpu"></a><a name="used-cpu"></a>Kullanılan CPU
 
-Azure savunma 'nın CPU kullanımını, her bir savunma örneğine göre bölüşrmek üzere görüntüleyebilirsiniz. Bu ölçümü izlemek, Azure savunma oluşturan örneklerin kullanılabilirliğini ve kapasitesini ölçmeye yardımcı olur.
+Azure savunma 'nın CPU kullanımını, her bir savunma örneğine göre bölüşrmek üzere görüntüleyebilirsiniz. Bu ölçümü izlemek, Azure savunma oluşturan örneklerin kullanılabilirliğini ve kapasitesini ölçmeye yardımcı olur
 
 :::image type="content" source="./media/metrics-monitor-alert/used-cpu.png" alt-text="Kullanılan CPU 'YU gösteren ekran görüntüsü.":::
 
@@ -73,6 +73,12 @@ Her bir savunma örneğine göre bölünen her bir savunma örneği üzerinde be
 #### <a name="session-count"></a>Oturum sayısı
 
 Her bir oturum türü (RDP ve SSH) arasında toplanan etkin oturum başına etkin oturum sayısını görüntüleyebilirsiniz. Her bir Azure savunma, etkin RDP ve SSH oturumlarının bir aralığını destekleyebilir. Bu ölçümü izlemek, savunma hizmetini çalıştıran örnek sayısını ayarlamanız gerektiğini anlamanıza yardımcı olur. Azure savunma 'nın destekleyeabileceği oturum sayısı hakkında daha fazla bilgi için [Azure savunma hakkında SSS](bastion-faq.md)bölümüne bakın.
+
+Bu ölçüm yapılandırması için önerilen değerler şunlardır:
+
+* **Toplama:** Cin
+* **Ayrıntı düzeyi:** 5 veya 15 dakika
+* Daha doğru bir sayı almak için örneklere göre bölmek önerilir
 
 :::image type="content" source="./media/metrics-monitor-alert/session-count.png" alt-text="Oturum sayısını gösteren ekran görüntüsü.":::
 

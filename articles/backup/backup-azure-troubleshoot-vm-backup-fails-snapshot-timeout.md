@@ -5,10 +5,10 @@ ms.topic: troubleshooting
 ms.date: 07/05/2019
 ms.service: backup
 ms.openlocfilehash: 0313394ad149460f82c98c63cab95b922b4a3da2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102519614"
 ---
 # <a name="troubleshoot-azure-backup-failure-issues-with-the-agent-or-extension"></a>Sorun giderme Azure Backup hatası: aracıdaki veya uzantıdaki sorunlar
@@ -111,9 +111,9 @@ Bu hata, uzantı hatalarından biri VM 'yi sağlama başarısız durumuna koyark
 **Hata kodu**: usererrorrpcollectionlimitulaşıldı <br>
 **Hata iletisi**: geri yükleme noktası koleksiyonu en yüksek sınırına ulaşıldı. <br>
 
-- Kurtarma noktası kaynak grubunda bir kilit varsa, kurtarma noktalarının otomatik temizlenmesini engelliyorsa bu sorun oluşabilir.
-- Bu sorun, günlük birden çok yedeklemenin tetiklenmesi durumunda da gerçekleşebilir. Şu anda günde yalnızca bir yedekleme yapmanız önerilir, çünkü anında geri yükleme noktaları yapılandırılan anlık görüntü bekletmesine göre 1-5 gün boyunca korunur ve belirli bir zamanda bir VM ile yalnızca 18 anlık RPs ilişkilendirilebilir. <br>
-- Bir VM için geri yükleme noktası koleksiyonları ve kaynak grupları genelinde geri yükleme noktalarının sayısı 18 ' i aşamaz. Yeni bir geri yükleme noktası oluşturmak için, mevcut geri yükleme noktalarını silin.
+- Kurtarma noktası kaynak grubunda, kurtarma noktalarının otomatik temizlenmesini engelleyen bir kilit olduğunda bu sorun oluşabilir.
+- Bir günde birden çok yedeklemenin tetiklenmesi durumunda da bu sorun oluşabilir. Şu anda günde yalnızca bir yedekleme öneriyoruz çünkü anlık geri yükleme noktaları yapılandırılmış anlık görüntü saklaması başına 1-5 gün arası saklanıyor ve verili bir zamanda sanal makineyle yalnızca 18 anlık RP ilişkilendirilebiliyor. <br>
+- Bir VM için geri yükleme noktası koleksiyonları ve kaynak grupları genelinde geri yükleme noktalarının sayısı 18 ' i aşamaz. Yeni bir geri yükleme noktası oluşturmak için mevcut geri yükleme noktalarını silin.
 
 Önerilen Eylem:<br>
 Bu sorunu çözmek için VM 'nin kaynak grubundaki kilidi kaldırın ve temizleme işlemini tetiklemek için işlemi yeniden deneyin.
@@ -272,7 +272,7 @@ Aşağıdaki koşullar anlık görüntü görevinin başarısız olmasına neden
 | Nedeni | Çözüm |
 | --- | --- |
 | VM, Uzak Masaüstü Protokolü (RDP) ' de kapatıldığından VM durumu yanlış bildirilir. | VM 'yi RDP 'de kapatırsanız, VM 'nin durumunun doğru olup olmadığını öğrenmek için portalı denetleyin. Doğru değilse, sanal makine panosundaki **kapatma** seçeneğini kullanarak portalda VM 'yi kapatın. |
-| VM, DHCP 'den konak veya doku adresini alamıyor. | IaaS VM yedeklemesinin çalışması için, Konuk içinde DHCP 'nin etkinleştirilmesi gerekir. VM, DHCP yanıt 245 ' den ana bilgisayar veya doku adresini alamıyor, hiçbir uzantıyı indiremez veya çalıştıramıyorum. Statik bir özel IP gerekiyorsa, **Azure Portal** veya **PowerShell** aracılığıyla yapılandırmanız gerekır ve VM içindeki DHCP seçeneğinin etkin olduğundan emin olun. PowerShell ile statik IP adresi ayarlama hakkında [daha fazla bilgi edinin](../virtual-network/virtual-networks-static-private-ip-arm-ps.md#change-the-allocation-method-for-a-private-ip-address-assigned-to-a-network-interface) .
+| VM, DHCP 'den konak veya doku adresini alamıyor. | IaaS VM yedeklemesinin çalışması için konuğun içinde DHCP etkinleştirilmelidir. VM, DHCP yanıt 245 ' den ana bilgisayar veya doku adresini alamıyor, hiçbir uzantıyı indiremez veya çalıştıramıyorum. Statik bir özel IP gerekiyorsa, **Azure Portal** veya **PowerShell** aracılığıyla yapılandırmanız gerekır ve VM içindeki DHCP seçeneğinin etkin olduğundan emin olun. PowerShell ile statik IP adresi ayarlama hakkında [daha fazla bilgi edinin](../virtual-network/virtual-networks-static-private-ip-arm-ps.md#change-the-allocation-method-for-a-private-ip-address-assigned-to-a-network-interface) .
 
 ### <a name="remove-lock-from-the-recovery-point-resource-group"></a><a name="remove_lock_from_the_recovery_point_resource_group"></a>Kurtarma noktası kaynak grubundan kilidi kaldır
 

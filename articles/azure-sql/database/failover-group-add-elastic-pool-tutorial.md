@@ -4,19 +4,19 @@ description: Azure portal, PowerShell veya Azure CLı kullanarak bir yük devret
 services: sql-database
 ms.service: sql-database
 ms.subservice: high-availability
-ms.custom: seo-lt-2019 sqldbrb=1
+ms.custom: seo-lt-2019 sqldbrb=1, devx-track-azurecli
 ms.devlang: ''
 ms.topic: tutorial
 author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 08/27/2019
-ms.openlocfilehash: cdbc44158de2f24d7d33d68311979c3b8bdda85d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: dd0532469cd4390d9a72900dcebc22994239325b
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94593986"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107479177"
 ---
 # <a name="tutorial-add-an-azure-sql-database-elastic-pool-to-a-failover-group"></a>Öğretici: bir yük devretme grubuna Azure SQL veritabanı elastik havuzu ekleme
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -209,11 +209,11 @@ PowerShell kullanarak yük devretme grubunuz oluşturun.
    # Create a failover group between the servers
    Write-host "Creating failover group..."
    New-AzSqlDatabaseFailoverGroup `
-     –ResourceGroupName $resourceGroupName `
+     â€“ResourceGroupName $resourceGroupName `
       -ServerName $serverName `
       -PartnerServerName $drServerName  `
-      –FailoverGroupName $failoverGroupName `
-      –FailoverPolicy Automatic `
+      â€“FailoverGroupName $failoverGroupName `
+      â€“FailoverPolicy Automatic `
       -GracePeriodWithDataLossHours 2
    Write-host "Failover group created successfully."
 

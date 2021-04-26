@@ -7,12 +7,12 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.topic: sample
 ms.date: 10/07/2020
-ms.openlocfilehash: 6e76da71cb14122817090e64354babf5a618db8b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 12ee46316a3eadceedf6f1772ae41938d1cc903e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94562670"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107761953"
 ---
 # <a name="throughput-rus-operations-with-azure-cli-for-a-table-for-azure-cosmos-db-table-api"></a>Azure Cosmos DB için bir tablo için Azure CLı ile üretilen iş (RU/s) işlemleri Tablo API'si
 [!INCLUDE[appliesto-table-api](../../../includes/appliesto-table-api.md)]
@@ -41,12 +41,12 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az cosmosdb create](/cli/azure/cosmosdb#az-cosmosdb-create) | Azure Cosmos DB hesabı oluşturur. |
-| [az cosmosdb Table Create](/cli/azure/cosmosdb/table#az-cosmosdb-table-create) | Azure Cosmos Tablo API'si tablosu oluşturur. |
-| [az cosmosdb tablo üretilen iş güncelleştirmesi](/cli/azure/cosmosdb/table/throughput#az-cosmosdb-table-throughput-update) | Azure Cosmos Tablo API'si tablosu için üretilen işi güncelleştirin. |
-| [az cosmosdb tablo aktarım hızı geçişi](/cli/azure/cosmosdb/table/throughput#az-cosmosdb-table-throughput-migrate) | Azure Cosmos Tablo API'si tablosu için aktarım hızını geçirin. |
-| [az group delete](/cli/azure/resource#az-resource-delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az cosmosdb create](/cli/azure/cosmosdb#az_cosmosdb_create) | Azure Cosmos DB hesabı oluşturur. |
+| [az cosmosdb Table Create](/cli/azure/cosmosdb/table#az_cosmosdb_table_create) | Azure Cosmos Tablo API'si tablosu oluşturur. |
+| [az cosmosdb tablo üretilen iş güncelleştirmesi](/cli/azure/cosmosdb/table/throughput#az_cosmosdb_table_throughput_update) | Azure Cosmos Tablo API'si tablosu için üretilen işi güncelleştirin. |
+| [az cosmosdb tablo aktarım hızı geçişi](/cli/azure/cosmosdb/table/throughput#az_cosmosdb_table_throughput_migrate) | Azure Cosmos Tablo API'si tablosu için aktarım hızını geçirin. |
+| [az group delete](/cli/azure/resource#az_resource_delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -3,12 +3,12 @@ title: Application Insights için sürüm ek açıklamaları | Microsoft Docs
 description: Application Insights içinde Ölçüm Gezgini grafiklerinize dağıtım veya yapı işaretçileri ekleyin.
 ms.topic: conceptual
 ms.date: 08/14/2020
-ms.openlocfilehash: 776efd56aaa523d1c2621c51cba0446a42bb7411
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 9132e65e4705fd9125d97a5e095fe5f0850229a2
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103461921"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107011059"
 ---
 # <a name="annotations-on-metric-charts-in-application-insights"></a>Application Insights 'de ölçüm grafiklerindeki ek açıklamalar
 
@@ -96,7 +96,10 @@ Görselleştirmenin x ekseni üzerinde saat gösterdiği herhangi bir günlük t
 İstek sahibi, kaynak denetimi dalı, yayın işlem hattı ve ortam dahil olmak üzere sürüm hakkındaki ayrıntıları açmak için herhangi bir ek açıklama işaretleyicisi seçin.
 
 ## <a name="create-custom-annotations-from-powershell"></a>PowerShell 'den özel ek açıklamalar oluşturma
-Azure DevOps kullanmadan istediğiniz herhangi bir işlemden ek açıklama oluşturmak için GitHub ' dan CreateReleaseAnnotation PowerShell betiğini kullanabilirsiniz.
+Azure DevOps kullanmadan istediğiniz herhangi bir işlemden ek açıklama oluşturmak için CreateReleaseAnnotation PowerShell betiğini kullanabilirsiniz.
+
+> [!IMPORTANT]
+> PowerShell 7,1 kullanıyorsanız, `-SkipHttpErrorCheck` 26. satırın sonuna ekleyin. Örneğin: `$request = Invoke-WebRequest -Uri $fwLink -MaximumRedirection 0 -UseBasicParsing -ErrorAction Ignore -SkipHttpErrorCheck`.
 
 1. CreateReleaseAnnotation.ps1 yerel bir kopyasını oluşturun:
 
@@ -256,8 +259,8 @@ Azure DevOps kullanmadan istediğiniz herhangi bir işlemden ek açıklama oluş
 
 Örneğin, geçmiş için ek açıklamalar oluşturmak üzere betiği değiştirebilirsiniz.
 
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [İş öğeleri Oluştur](./diagnostic-search.md#create-work-item)
 * [PowerShell ile Automation](./powershell.md)
-

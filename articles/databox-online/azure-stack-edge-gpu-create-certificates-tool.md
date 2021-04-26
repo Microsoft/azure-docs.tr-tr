@@ -8,12 +8,12 @@ ms.subservice: edge
 ms.topic: how-to
 ms.date: 02/22/2021
 ms.author: alkohli
-ms.openlocfilehash: a04243093b89b6a2498efc48f80cbd7a47d57337
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8316dd0abfa437d4bf88e8268dfe034344c6614c
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102437732"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389341"
 ---
 # <a name="create-certificates-for-your-azure-stack-edge-pro-using-azure-stack-hub-readiness-checker-tool"></a>Azure Stack hub hazırlık Denetleyicisi aracını kullanarak Azure Stack Edge Pro için sertifikalar oluşturma 
 
@@ -73,7 +73,7 @@ Azure Stack Edge Pro cihaz sertifikalarını hazırlamak için aşağıdaki adı
     
 4. Bir sertifika isteği oluşturmak için aşağıdaki bilgileri sağlayın. VPN sertifikası oluşturuyorsanız, bu girişlerin bazıları uygulanmaz.
     
-    |Giriş |Description  |
+    |Giriş |Açıklama  |
     |---------|---------|
     |`OutputRequestPath`|Sertifika isteklerinin oluşturulmasını istediğiniz yerel istemcinizdeki dosya yolu.        |
     |`DeviceName`|Cihazınızın yerel Web Kullanıcı arabirimindeki **cihazlar** sayfasında Cihazınızın adı. <br> Bu alan, bir VPN sertifikası için gerekli değildir.         |
@@ -140,7 +140,7 @@ Sertifika yetkilinizden (CA) aldığınız sertifika dosyaları içeri aktarılm
 
 2. Uygun klasör yapısını oluşturmak için, komut isteminde şunu yazın:
 
-    `New-AzsCertificateFolder -CertificateType AzureStackEdge -OutputPath "$ENV:USERPROFILE\Documents\AzureStackCSR"`
+    `New-AzsCertificateFolder -CertificateType AzureStackEdgeDevice -OutputPath "$ENV:USERPROFILE\Documents\AzureStackCSR"`
 
 3. PFX parolasını güvenli bir dizeye dönüştürün. Şunu yazın:       
 
@@ -148,7 +148,7 @@ Sertifika yetkilinizden (CA) aldığınız sertifika dosyaları içeri aktarılm
 
 4. Ardından, sertifikaları doğrulayın. Şunu yazın:
 
-    `Invoke-AzsCertificateValidation -CertificateType AzureStackEdge -DeviceName mytea1 -NodeSerialNumber VM1500-00025 -externalFQDN azurestackedge.contoso.com -CertificatePath $ENV:USERPROFILE\Documents\AzureStackCSR\AzureStackEdge -pfxPassword $pfxPassword`
+    `Invoke-AzsCertificateValidation -CertificateType AzureStackEdgeDevice -DeviceName mytea1 -NodeSerialNumber VM1500-00025 -externalFQDN azurestackedge.contoso.com -CertificatePath $ENV:USERPROFILE\Documents\AzureStackCSR\AzureStackEdge -pfxPassword $pfxPassword`
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

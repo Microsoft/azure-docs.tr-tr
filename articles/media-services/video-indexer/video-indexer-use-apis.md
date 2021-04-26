@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/07/2021
 ms.author: juliako
 ms.custom: devx-track-csharp
-ms.openlocfilehash: fcd194e2503610db314f6a975a4afb1d27962f8c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ac0b206a86edf3157141b56e0c2623a8429b0c7a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98028214"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785532"
 ---
 # <a name="tutorial-use-the-video-indexer-api"></a>Öğretici: Video Indexer API'sini kullanma
 
@@ -38,18 +38,19 @@ Bu makalede geliştiricilerin [Video Indexer API’sinden](https://api-portal.vi
    > * Video Indexer için kaydolurken kullandığınız sağlayıcıyı kullanmanız gerekir.
    > * Kişisel Google ve Microsoft (Outlook/Live) hesapları yalnızca deneme hesapları için kullanılabilir. Azure'a bağlı hesaplar için Azure Active Directory gerekir.
    > * Her e-posta için yalnızca bir etkin hesap olabilir. Bir Kullanıcı, Google için ve daha sonraki bir adımda ile oturum açmaya çalışırsa, user@gmail.com user@gmail.com İkincisi bir hata sayfası görüntüleyecektir ve bu, kullanıcının zaten var olduğunu bildiriyor.
+
 2. Abone olun.
 
-    [Ürünler](https://api-portal.videoindexer.ai/products) sekmesini seçin. Sonra yetkilendirme ve abone ol ' u seçin.
+   [Ürünler](https://api-portal.videoindexer.ai/products) sekmesini seçin. Sonra yetkilendirme ve abone ol ' u seçin.
     
-    ![Video Indexer geliştirici portalındaki ürünler sekmesi](./media/video-indexer-use-apis/authorization.png)
+   ![Video Indexer geliştirici portalındaki ürünler sekmesi](./media/video-indexer-use-apis/authorization.png)
 
-    > [!NOTE]
-    > Yeni kullanıcılar otomatik olarak Yetkilendirme’ye abone edilir.
+   > [!NOTE]
+   > Yeni kullanıcılar otomatik olarak Yetkilendirme’ye abone edilir.
     
-    Abone olduktan sonra, aboneliğinizi **ürünlerin**  ->  **yetkilendirmesi** altında bulabilirsiniz. Abonelik sayfasında, birincil ve ikincil anahtarları bulacaksınız. Anahtarlar korunmalıdır. Anahtarlar yalnızca sunucu kodunuz tarafından kullanılmalıdır. İstemci tarafında (. js,. html vb.) kullanılamayacak.
+   Abone olduktan sonra, aboneliğinizi **ürünlerin**  ->  **yetkilendirmesi** altında bulabilirsiniz. Abonelik sayfasında, birincil ve ikincil anahtarları bulacaksınız. Anahtarlar korunmalıdır. Anahtarlar yalnızca sunucu kodunuz tarafından kullanılmalıdır. İstemci tarafında (. js,. html vb.) kullanılamayacak.
 
-    ![Video Indexer geliştirici portalındaki abonelik ve anahtarlar](./media/video-indexer-use-apis/subscriptions.png)
+   ![Video Indexer geliştirici portalındaki abonelik ve anahtarlar](./media/video-indexer-use-apis/subscriptions.png)
 
 > [!TIP]
 > Video Indexer kullanıcısı, tek bir abonelik anahtarını kullanarak birden çok Video Indexer hesabına bağlanabilir. Daha sonra bu Video Indexer hesaplarını farklı Media Services hesaplarına bağlayabilirsiniz.
@@ -64,7 +65,10 @@ Yetkilendirme API 'sine abone olduktan sonra erişim belirteçleri elde edebilir
 - Hesap düzeyi: hesap düzeyi erişim belirteçleri, **Hesap** düzeyinde veya **video** düzeyinde işlemler gerçekleştirmenize olanak tanır. Örneğin, videoyu karşıya yükleyin, tüm videoları listeleyin, video öngörüleri alın ve bu şekilde devam edin.
 - Video düzeyi: video düzeyi erişim belirteçleri, belirli bir **video** üzerinde işlemler gerçekleştirmenize olanak tanır. Örneğin, video öngörüleri edinin, resim yazıları indirin, pencere öğelerini alın vb.
 
-Bu belirteçlerin salt okunurdur veya **AllowEdit = true/false** belirterek düzenlenmesine izin verip vermeyeceklerini kontrol edebilirsiniz.
+Belirteçlerin izin düzeyini iki şekilde kontrol edebilirsiniz:
+
+* **Hesap** belirteçleri için, **hesap erişim belirtecini izin API 'siyle birlikte** kullanabilir ve izin türünü belirtebilirsiniz (**okuyucu** / **katkıda bulunan** / **myaccessmanager** / **sahibi**).
+* Tüm belirteç türleri ( **Hesap** belirteçleri dahil) Için, **AllowEdit = true/false** belirtebilirsiniz. **yanlış** bir **okuyucu** izninin (salt okunurdur) eşdeğeri ve **doğru** bir **katkıda bulunan** izninin (okuma-yazma) eşdeğeri.
 
 Çoğu sunucu-sunucu senaryosunda, büyük olasılıkla **Hesap** işlemlerini ve **video** işlemlerini kapsadığından aynı **Hesap** belirtecini kullanacaksınız. Ancak, Video Indexer için istemci tarafı çağrıları yapmayı planlıyorsanız (örneğin, JavaScript 'ten), istemcilerin tüm hesaba erişimini engellemek için bir **video** erişim belirteci kullanmak istersiniz. Ayrıca, istemci kodu Video Indexer Katıştırırken (örneğin, **öngörüleri al pencere öğesini** veya **Player pencere öğesini al**' ı kullanarak), bir **video** erişim belirteci sağlamanız gerekir.
 
@@ -88,7 +92,7 @@ Hesap Kimliği parametresi, işleme yönelik tüm API çağrıları için gerekl
 
 * Hesap Kimliğini programlı olarak almak için **Video Indexer Geliştirici Portalı**’nı kullanın.
 
-    [Hesap al](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Account?) API 'sini kullanın.
+    [Hesap al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Account) API 'sini kullanın.
 
     > [!TIP]
     > `generateAccessTokens=true` parametresini tanımlayarak hesaplar için erişim belirteçleri oluşturabilirsiniz.

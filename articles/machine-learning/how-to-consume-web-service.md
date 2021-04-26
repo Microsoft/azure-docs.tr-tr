@@ -11,12 +11,12 @@ ms.reviewer: larryfr
 ms.date: 10/12/2020
 ms.topic: conceptual
 ms.custom: how-to, devx-track-python, devx-track-csharp
-ms.openlocfilehash: e9fb801fce3e47fc83febeddd6f331ce2af207e6
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 8cab9331cdd4c15ab76b7c33f956be15ec2259ef
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102506982"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861202"
 ---
 # <a name="consume-an-azure-machine-learning-model-deployed-as-a-web-service"></a>Web hizmeti olarak dağıtılan bir Azure Machine Learning modelini kullanma
 
@@ -77,7 +77,7 @@ Dağıtılan Web Hizmetleri için bu bilgileri almanın birkaç yolu vardır:
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Dağıtılan hizmetin adını biliyorsanız [az ml Service Show](/cli/azure/ext/azure-cli-ml/ml/service#ext_azure_cli_ml_az_ml_service_show) komutunu kullanın:
+Dağıtılan hizmetin adını biliyorsanız [az ml Service Show](/cli/azure/ml/service#az_ml_service_show) komutunu kullanın:
 
 ```azurecli
 az ml service show -n <service-name>

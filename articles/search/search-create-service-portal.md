@@ -1,21 +1,21 @@
 ---
 title: Portalda arama hizmeti oluşturma
 titleSuffix: Azure Cognitive Search
-description: Bu portal hızlı başlangıcı ' nda, Azure portal Azure Bilişsel Arama kaynağını ayarlamayı öğrenin. Kaynak grupları, bölgeler ve SKU veya fiyatlandırma katmanı seçin.
+description: Azure portal Azure Bilişsel Arama kaynağını ayarlamayı öğrenin. Kaynak grupları, bölgeler ve SKU veya fiyatlandırma katmanını seçin.
 manager: nitinme
 author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
-ms.topic: quickstart
+ms.topic: conceptual
 ms.date: 02/15/2021
-ms.openlocfilehash: e183d81355d4db81e677f34b02330ddb9b631957
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 83e206a5fd7b34da0b0ac8590d5271a554855d3e
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100651995"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106580741"
 ---
-# <a name="quickstart-create-an-azure-cognitive-search-service-in-the-portal"></a>Hızlı Başlangıç: Portalda Azure Bilişsel Arama hizmeti oluşturma
+# <a name="create-an-azure-cognitive-search-service-in-the-portal"></a>Portalda Azure Bilişsel Arama hizmeti oluşturma
 
 [Azure bilişsel arama](search-what-is-azure-search.md) , özel uygulamalara tam metin arama deneyimi eklemek için kullanılan bir Azure kaynağıdır. Veri veya ek işlem sağlayan diğer Azure hizmetleriyle, ağ sunucularındaki uygulamalarla veya diğer bulut platformlarında çalışan yazılımlarla kolayca tümleştirilebilir.
 

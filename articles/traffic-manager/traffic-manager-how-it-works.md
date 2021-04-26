@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/05/2019
 ms.author: duau
-ms.openlocfilehash: a1e1bd107e8b3b9209f99d1abfc4d7e391c3c4a6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 376aa04228113c56f0f797f737833802c9eca021
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98184348"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107029497"
 ---
 # <a name="how-traffic-manager-works"></a>Traffic Manager nasıl kullanılır?
 
@@ -30,7 +30,7 @@ Traffic Manager iki temel avantaj sağlar:
 
 İstemcinin bir hizmete bağlanabilmesi için önce o hizmetin DNS adını bir IP adresine çözümlemesi gerekir. İstemci bu işlemin ardından ilgili IP adresine bağlanarak hizmete erişebilir.
 
-**Anlamanız gereken en önemli nokta, Traffic Manager DNS düzeyinde çalışmaktadır.**  Traffic Manager, istemcileri trafik yönlendirme yönteminin kurallarına göre belirli hizmet uç noktalarına yönlendirmek için DNS kullanır. İstemciler seçili uç noktaya **doğrudan** bağlanır. Traffic Manager bir proxy veya ağ geçidi değil. Traffic Manager istemci ile hizmet arasında geçen trafiği görmez.
+**Anlamanız gereken en önemli nokta, Traffic Manager uygulama katmanında (katman-7) olan DNS düzeyinde çalışmaktadır.**  Traffic Manager, istemcileri trafik yönlendirme yönteminin kurallarına göre belirli hizmet uç noktalarına yönlendirmek için DNS kullanır. İstemciler seçili uç noktaya **doğrudan** bağlanır. Traffic Manager bir proxy veya ağ geçidi değil. Traffic Manager istemci ile hizmet arasında geçen trafiği görmez.
 
 ## <a name="traffic-manager-example"></a>Traffic Manager örneği
 

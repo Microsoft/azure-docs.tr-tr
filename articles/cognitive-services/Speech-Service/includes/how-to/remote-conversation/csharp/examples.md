@@ -5,25 +5,27 @@ ms.topic: include
 ms.date: 03/09/2020
 ms.author: amishu
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 51b919c97a15946f57211cf8fe12d7c5efe435bf
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0ab175d122da379e0b0d45465837cdebeb8ec8bb
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "88934658"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106450238"
 ---
 ## <a name="upload-the-audio"></a>Sesi karşıya yükle
 
-Zaman uyumsuz döküm gerçekleştirilmeden önce, Microsoft bilişsel konuşma istemci SDK 'sını (sürüm 1.13.0 veya üzeri) kullanarak konuşmayı konuşmaya dönüştürme hizmetine göndermeniz gerekir.
+Zaman uyumsuz döküm için ilk adım, konuşma SDK 'sını (sürüm 1.13.0 veya üzeri) kullanarak konuşmayı konuşma dökümü hizmetine göndermektir.
 
-Bu örnek kod, yalnızca zaman uyumsuz mod için bir görüşme dökümünü oluşturmayı gösterir. Sese ses akışı sağlamak için [konuşma SDK 'sı ile gerçek zamanlı olarak konuşmadan](../../../../how-to-use-conversation-transcription.md)elde edilen ses akış kodu ekleyin. 
+Bu örnek kod, `ConversationTranscriber` salt zaman uyumsuz mod için nasıl oluşturulacağını gösterir. Sese ses akışı sağlamak için [konuşma SDK 'sı ile gerçek zamanlı olarak konuşmadan](../../../../how-to-use-conversation-transcription.md)elde edilen ses akış kodu ekleyin. 
 
 ```csharp
 async Task CompleteContinuousRecognition(ConversationTranscriber recognizer, string conversationId)
 {
+    var finishedTaskCompletionSource = new TaskCompletionSource<int>();
+
     recognizer.SessionStopped += (s, e) =>
     {
-        m_taskCompletionSource.TrySetResult(0);
+        finishedTaskCompletionSource.TrySetResult(0);
     };
     string canceled = string.Empty;
 
@@ -31,12 +33,12 @@ async Task CompleteContinuousRecognition(ConversationTranscriber recognizer, str
         canceled = e.ErrorDetails;
         if (e.Reason == CancellationReason.Error)
         {
-            m_taskCompletionSource.TrySetResult(0);
+            finishedTaskCompletionSource.TrySetResult(0);
         }
     };
 
     await recognizer.StartTranscribingAsync().ConfigureAwait(false);
-    await Task.WhenAny(m_taskCompletionSource.Task, Task.Delay(TimeSpan.FromSeconds(10)));
+    await Task.WhenAny(finishedTaskCompletionSource.Task, Task.Delay(TimeSpan.FromSeconds(10)));
     await recognizer.StopTranscribingAsync().ConfigureAwait(false);
 }
 
@@ -67,24 +69,24 @@ async Task UploadAudio()
     // Set the property for asynchronous transcription
     speechConfig.SetServiceProperty("transcriptionMode", "async", ServicePropertyChannel.UriQueryParameter);
 
-    // Set the property for real-time plus asynchronous transcription
-    //speechConfig.setServiceProperty("transcriptionMode", "RealTimeAndAsync", ServicePropertyChannel.UriQueryParameter);
+    // Alternatively: set the property for real-time plus asynchronous transcription
+    // speechConfig.setServiceProperty("transcriptionMode", "RealTimeAndAsync", ServicePropertyChannel.UriQueryParameter);
 
     // Create an audio stream from a wav file or from the default microphone if you want to stream live audio from the supported devices
     // Replace with your own audio file name and Helper class which implements AudioConfig using PullAudioInputStreamCallback
     PullAudioInputStreamCallback wavfilePullStreamCallback = Helper.OpenWavFile("16kHz16Bits8channelsOfRecordedPCMAudio.wav");
     // Create an audio stream format assuming the file used above is 16kHz, 16 bits and 8 channel pcm wav file
-    AudioStreamFormat audioStreamFormat = AudioStreamFormat.GetWaveFormatPCM((long)16000, (short)16,(short)8);
+    AudioStreamFormat audioStreamFormat = AudioStreamFormat.GetWaveFormatPCM(16000, 16, 8);
     // Create an input stream
     AudioInputStream audioStream = AudioInputStream.CreatePullStream(wavfilePullStreamCallback, audioStreamFormat);
 
-    // pick a conversation Id that is a GUID.
+    // Ensure the conversationId for a new conversation is a truly unique GUID
     String conversationId = Guid.NewGuid().ToString();
 
     // Create a Conversation
     using (var conversation = await Conversation.CreateConversationAsync(speechConfig, conversationId))
     {
-        using (var conversationTranscriber = TrackSessionId(new ConversationTranscriber(AudioConfig.FromStreamInput(audioStream))))
+        using (var conversationTranscriber = new ConversationTranscriber(AudioConfig.FromStreamInput(audioStream)))
         {
             await conversationTranscriber.JoinConversationAsync(conversation);
             // Helper function to get the real time transcription results
@@ -98,9 +100,9 @@ Gerçek zamanlı _artı_ zaman uyumsuz isterseniz, ilgili kod satırlarının a�
 
 ```csharp
 // Set the property for asynchronous transcription
-//speechConfig.SetServiceProperty("transcriptionMode", "async", ServicePropertyChannel.UriQueryParameter);
+// speechConfig.SetServiceProperty("transcriptionMode", "async", ServicePropertyChannel.UriQueryParameter);
 
-// Set the property for real-time plus asynchronous transcription
+// Alternatively: set the property for real-time plus asynchronous transcription
 speechConfig.SetServiceProperty("transcriptionMode", "RealTimeAndAsync", ServicePropertyChannel.UriQueryParameter);
 ```
 

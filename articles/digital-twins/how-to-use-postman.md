@@ -8,12 +8,12 @@ ms.service: digital-twins
 services: digital-twins
 ms.topic: how-to
 ms.date: 11/10/2020
-ms.openlocfilehash: d4a6e25578cd26b10b34f74a9f859d4957cc553b
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: a528e224511fda363afb80a7749a018e07b5fa26
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104783821"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588013"
 ---
 # <a name="how-to-use-postman-to-send-requests-to-the-azure-digital-twins-apis"></a>Azure dijital TWINS API 'Lerine istek göndermek için Postman kullanma
 
@@ -77,6 +77,8 @@ Aksi takdirde, tarayıcınızda bir [Azure Cloud Shell](https://shell.azure.com)
     ```
     ---
 
+    >[!NOTE]
+    > Örneğinden farklı bir Azure Active Directory kiracısına ait bir hizmet sorumlusu veya Kullanıcı hesabı kullanarak Azure dijital TWINS örneğinizi erişmeniz gerekiyorsa, Azure dijital TWINS örneğinin "giriş" kiracısından bir **belirteç** istemeniz gerekir. Bu işlem hakkında daha fazla bilgi için bkz. [*nasıl yapılır: yazma uygulaması kimlik doğrulaması kodu*](how-to-authenticate-client.md#authenticate-across-tenants).
 
 3. Sonuç olarak değerini kopyalayın `accessToken` ve sonraki bölümde kullanmak üzere kaydedin. Bu, isteklerinizi yetkilendirmek için Postman 'a sağlayabileceğiniz **belirteç değeridir** .
 

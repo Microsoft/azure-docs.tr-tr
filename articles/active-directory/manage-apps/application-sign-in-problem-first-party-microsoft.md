@@ -2,26 +2,22 @@
 title: Microsoft uygulamasında oturum açma sorunları | Microsoft Docs
 description: Azure AD 'yi kullanarak ilk taraf Microsoft uygulamalarında oturum açarken karşılaşılan yaygın sorunları giderin (Microsoft 365 gibi).
 services: active-directory
-documentationcenter: ''
-author: kenwith
-manager: daveba
-ms.assetid: ''
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: troubleshooting
 ms.date: 09/10/2018
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 79c8d6d072379853d6eca561d372f61dbb8acc8a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: c56e356a9bacc6479d3a3a33be905457c26e732e
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99260020"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378185"
 ---
 # <a name="problems-signing-in-to-a-microsoft-application"></a>Microsoft uygulamasında oturum açma sorunları
 

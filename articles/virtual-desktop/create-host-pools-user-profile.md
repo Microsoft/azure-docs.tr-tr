@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 08/20/2019
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 35b692033cc16f276b48bc6d973b27d994c1082a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: 69582f26544d954088fd5a57bfe5730750b7b5a8
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88002594"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106447922"
 ---
 # <a name="create-a-profile-container-for-a-host-pool-using-a-file-share"></a>Dosya paylaşımı kullanarak ana bilgisayar havuzu için profil kapsayıcısı oluşturma
 

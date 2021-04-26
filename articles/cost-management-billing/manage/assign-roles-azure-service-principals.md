@@ -7,14 +7,14 @@ tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 03/07/2021
+ms.date: 04/05/2021
 ms.author: banders
-ms.openlocfilehash: e7f5370e1e387947d196959fef31043ea8f4d3bd
-ms.sourcegitcommit: 15d27661c1c03bf84d3974a675c7bd11a0e086e6
+ms.openlocfilehash: d348eeb5cc789665d7e7004523b9feba0ea6e413
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/09/2021
-ms.locfileid: "102508529"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106490565"
 ---
 # <a name="assign-roles-to-azure-enterprise-agreement-service-principal-names"></a>Azure Kurumsal Anlaşma hizmet sorumlusu adlarına roller atama
 
@@ -62,12 +62,14 @@ Sonraki adımlar için, Azure AD uygulamasına bir EA rolü kullanarak eylemler 
 | Rol | İzin verilen eylemler | Rol tanımı KIMLIĞI |
 | --- | --- | --- |
 | KayıtBir okuyucu | , Tüm hesaplar ve aboneliklerde kullanım ve ücretleri görüntüleyebilir. Kayıt ile ilişkili Azure ön ödemeli (daha önce parasal taahhüt olarak adlandırılır) bakiyesini görüntüleyebilir. | 24f8edb6-1668-4659-b5e2-40bb5f3a7d7e |
+| EA Satınalmacı | Rezervasyon siparişleri satın alın ve rezervasyon işlemlerini görüntüleyin. , Tüm hesaplar ve aboneliklerde kullanım ve ücretleri görüntüleyebilir. Kayıt ile ilişkili Azure ön ödemeli (daha önce parasal taahhüt olarak adlandırılır) bakiyesini görüntüleyebilir. | da6647fb-7651-49ee-be91-c43c4877f0c4  |
 | DepartmentReader | Yönettikleri departmanın kullanım ayrıntılarını indirin. , Departmanlarıyla ilişkili kullanımı ve ücretleri görüntüleyebilir. | db609904-a47f-4794-9be8-9bd86fbffd8a |
 | SubscriptionCreator | Verilen hesap kapsamında yeni abonelikler oluşturun. | a0bcee42-bf30-4d1b-926a-48d21664ef71 |
 
 - Kayıt okuyucuyu yalnızca kayıt yazıcı rolüne sahip bir kullanıcı tarafından bir SPN 'ye atayabilirsiniz.
 - Bir departman okuyucusu, yalnızca kayıt yazıcı rolü veya departman yazıcı rolü olan bir kullanıcı tarafından bir SPN 'ye atanabilir.
-- Bir abonelik Oluşturucu rolü, yalnızca kayıt hesabının hesap sahibi olan bir kullanıcı tarafından bir SPN 'ye atanabilir.
+- Bir abonelik Oluşturucu rolü, yalnızca kayıt hesabının hesap sahibi olan bir kullanıcı tarafından bir SPN 'ye atanabilir. Rol EA portalında gösterilmez. Yalnızca programlı yollarla oluşturulur ve yalnızca programlı kullanım içindir.
+- EA Satınalmacı rolü EA portalında gösterilmez. Yalnızca programlı yollarla oluşturulur ve yalnızca programlı kullanım içindir.
 
 ## <a name="assign-enrollment-account-role-permission-to-the-spn"></a>SPN 'ye kaydolma hesabı rolü iznini atama
 
@@ -120,6 +122,14 @@ Komutu başlatmak için **Çalıştır** ' ı seçin.
 `200 OK`Yanıt, SPN 'nin başarıyla eklendiğini gösterir.
 
 Artık, EA API 'Lerine otomatik bir şekilde erişmek için SPN 'YI (nesne KIMLIĞI ile Azure AD Uygulaması) kullanabilirsiniz. SPN kayıtları KayıtAdı ' na sahiptir.
+
+## <a name="assign-ea-purchaser-role-permission-to-the-spn"></a>SPN 'ye EA Satınalmacı rolü izni atama 
+
+EA Satınalmacı rolü için, kayıt okuyucu için aynı adımları kullanın. `roleDefinitionId`Aşağıdaki örneği kullanarak öğesini belirtin.
+
+`"/providers/Microsoft.Billing/billingAccounts/1111111/billingRoleDefinitions/ da6647fb-7651-49ee-be91-c43c4877f0c4"`
+
+ 
 
 ## <a name="assign-the-department-reader-role-to-the-spn"></a>Bölüm okuyucusu rolünü SPN 'ye atama
 

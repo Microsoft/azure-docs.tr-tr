@@ -8,16 +8,16 @@ ms.date: 07/24/2020
 ms.author: normesta
 ms.subservice: common
 ms.reviewer: zezha-msft
-ms.openlocfilehash: 19d5a5214ae4d2d6c0a18b68863211aa1f6573c6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b3b4f7737320cc0359192f947271a0f4beb3c478
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98878995"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107503006"
 ---
 # <a name="azcopy"></a>azcopy
 
-AzCopy, Azure depolama 'ya ve dışına veri taşınan bir komut satırı aracıdır.
+AzCopy, Azure depolama 'ya ve dışına veri taşınan bir komut satırı aracıdır. AzCopy ['i indirmek Için AzCopy ile çalışmaya başlama](storage-use-azcopy-v10.md) makalesini inceleyin ve depolama hizmetine yetkilendirme kimlik bilgilerini nasıl sağlayabileceğiniz yolları hakkında bilgi edinin.
 
 ## <a name="synopsis"></a>Özeti
 
@@ -28,9 +28,9 @@ Sorunları bildirmek veya araç hakkında daha fazla bilgi edinmek için bkz [ht
 ## <a name="related-conceptual-articles"></a>İlgili kavramsal makaleler
 
 - [AzCopy’yi kullanmaya başlama](storage-use-azcopy-v10.md)
+- [Öğretici: AzCopy ile şirket içi verileri bulut depolamaya geçirme](storage-use-azcopy-migrate-on-premises-data.md)
 - [AzCopy ve BLOB Storage ile veri aktarma](./storage-use-azcopy-v10.md#transfer-data)
 - [AzCopy ve dosya depolama ile verileri aktarma](storage-use-azcopy-files.md)
-- [AzCopy 'i yapılandırma, iyileştirme ve sorun giderme](storage-use-azcopy-configure.md)
 
 ## <a name="options"></a>Seçenekler
 

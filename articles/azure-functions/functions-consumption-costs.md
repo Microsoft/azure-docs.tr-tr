@@ -3,12 +3,12 @@ title: Azure Işlevlerinde tüketim planı maliyetlerini tahmin etme
 description: İşlev uygulamanızı Azure 'da bir tüketim planında çalıştırırken tabi olabilecek maliyetleri daha iyi tahmin etme hakkında bilgi edinin.
 ms.date: 9/20/2019
 ms.topic: conceptual
-ms.openlocfilehash: 4967e0ff79a638891da4f784cf2f5f1ca4ddfe51
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 648be6325cce5bad36795b113c8bbccb3e21d37b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100578569"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774012"
 ---
 # <a name="estimating-consumption-plan-costs"></a>Tüketim planı maliyetlerini tahmin etme
 
@@ -103,9 +103,9 @@ Yürütme birimlerinin sayısı, yürütme sayısından çok daha fazla olduğu 
 
 Bu grafik `Function Execution Units` , MB cinsinden ölçülen, iki saatlik bir dönemde tüketilen toplam 1.110.000.000 sayısını gösterir. GB saniyeye dönüştürmek için 1024000 ile bölün. Bu örnekte, işlev uygulaması `1110000000 / 1024000 = 1083.98` GB-saniye tüketilebilir. Bu değeri alabilir ve [işlevler fiyatlandırma sayfası][fiyatlandırma sayfasındaki]geçerli yürütme süresi fiyatına göre çarpıp, size bu iki saatin maliyetini sağlayan, size herhangi bir ücretsiz yürütme süresi verdiğini kabul eden bir ücret verir. 
 
-#### <a name="azure-cli"></a>Azure CLI’si
+#### <a name="azure-cli"></a>Azure CLI
 
-[Azure CLI](/cli/azure/) , ölçümleri almak için komutlar içerir. CLı 'yi yerel bir komut ortamından veya [Azure Cloud Shell](../cloud-shell/overview.md)kullanarak doğrudan portaldan kullanabilirsiniz. Örneğin, aşağıdaki [az Monitor ölçümleri List](/cli/azure/monitor/metrics#az-monitor-metrics-list) komutu, daha önce kullanılan aynı zaman dilimine göre saatlik verileri döndürür.
+[Azure CLI](/cli/azure/) , ölçümleri almak için komutlar içerir. CLı 'yi yerel bir komut ortamından veya [Azure Cloud Shell](../cloud-shell/overview.md)kullanarak doğrudan portaldan kullanabilirsiniz. Örneğin, aşağıdaki [az Monitor ölçümleri List](/cli/azure/monitor/metrics#az_monitor_metrics_list) komutu, daha önce kullanılan aynı zaman dilimine göre saatlik verileri döndürür.
 
 `<AZURE_SUBSCRIPTON_ID>`Komutunu çalıştıran Azure ABONELIK Kimliğiniz ile değiştirdiğinizden emin olun.
 

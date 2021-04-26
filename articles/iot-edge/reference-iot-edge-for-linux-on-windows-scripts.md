@@ -9,12 +9,12 @@ ms.topic: reference
 ms.service: iot-edge
 services: iot-edge
 monikerRange: =iotedge-2018-06
-ms.openlocfilehash: 41827c5db58f3d4755fb34e46067357cd0255676
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: a24b39107d8f78c049afa230fe678ec92852eeb0
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105612781"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105959696"
 ---
 # <a name="powershell-scripts-for-iot-edge-for-linux-on-windows"></a>Windows üzerinde Linux için IoT Edge PowerShell betikleri
 
@@ -41,7 +41,7 @@ Bu makalede açıklanan komutlar `AzureEFLOW.psm1` , altında dizininizde buluna
 | RegistrationId | Mevcut bir IoT Edge cihazının kayıt KIMLIĞI | IoT Edge cihazının (**x509** veya **simetrik**) sağlanması için kayıt kimliği. |
 | ıdentitycertlocvm | Dizin yolu; hizmet tarafından sahip olunabilir bir klasörde olmalıdır `iotedge` | IoT Edge cihazının (**x509** veya **simetrik**) sağlanması için sanal makinenizde kimlik sertifikasının mutlak hedef yolu. |
 | ıdentitycertlocwin | Dizin yolu | Bir IoT Edge cihazının (**x509** veya **simetrik**) sağlanması için Windows 'da kimlik sertifikasının mutlak kaynak yolu. |
-| identityPkLocVm |  | Dizin yolu; hizmet tarafından sahip olunabilir bir klasörde olmalıdır `iotedge` | IoT Edge cihazının (**x509** veya **simetrik**) sağlanması için sanal makinenizde kimlik özel anahtarının mutlak hedef yolu. |
+| identityPkLocVm | Dizin yolu; hizmet tarafından sahip olunabilir bir klasörde olmalıdır `iotedge` | IoT Edge cihazının (**x509** veya **simetrik**) sağlanması için sanal makinenizde kimlik özel anahtarının mutlak hedef yolu. |
 | identityPkLocWin | Dizin yolu | Bir IoT Edge cihazının (**x509** veya **simetrik**) sağlanması için Windows 'daki kimlik özel anahtarının mutlak kaynak yolu. |
 | vmSizeDefintion | En fazla 30 karakter uzunluğunda | Sanal makine için çekirdek sayısının ve kullanılabilir RAM 'in tanımı. **Varsayılan değer**: Standard_K8S_v1. |
 | vmDiskSize | 8 GB ile 256 GB arasında | Dinamik olarak genişleyen sanal sabit diskin en büyük disk boyutu. **Varsayılan değer**: 16 GB. |
@@ -74,7 +74,7 @@ Bu makalede açıklanan komutlar `AzureEFLOW.psm1` , altında dizininizde buluna
 | RegistrationId | Mevcut bir IoT Edge cihazının kayıt KIMLIĞI | IoT Edge cihazının (**DPS**) sağlanması IÇIN kayıt kimliği. |
 | ıdentitycertlocvm | Dizin yolu; hizmet tarafından sahip olunabilir bir klasörde olmalıdır `iotedge` | Bir IoT Edge cihazının (**DPS**, **x509**) sağlanması için sanal makinenizde kimlik sertifikasının mutlak hedef yolu. |
 | ıdentitycertlocwin | Dizin yolu | IoT Edge cihaz sağlamak için Windows 'ta kimlik sertifikasının mutlak kaynak yolu (**DPS**, **x509**). |
-| identityPkLocVm |  | Dizin yolu; hizmet tarafından sahip olunabilir bir klasörde olmalıdır `iotedge` | Bir IoT Edge cihazının (**DPS**, **x509**) sağlanması için sanal makinenizde kimlik özel anahtarının mutlak hedef yolu. |
+| identityPkLocVm  | Dizin yolu; hizmet tarafından sahip olunabilir bir klasörde olmalıdır `iotedge` | Bir IoT Edge cihazının (**DPS**, **x509**) sağlanması için sanal makinenizde kimlik özel anahtarının mutlak hedef yolu. |
 | identityPkLocWin | Dizin yolu | Bir IoT Edge cihazının (**DPS**, **x509**) sağlanması için Windows 'daki kimlik özel anahtarının mutlak kaynak yolu. |
 
 ## <a name="get-eflowvmname"></a>Get-EflowVmName

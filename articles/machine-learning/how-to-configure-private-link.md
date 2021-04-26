@@ -11,12 +11,12 @@ ms.author: aashishb
 author: aashishb
 ms.reviewer: larryfr
 ms.date: 02/09/2021
-ms.openlocfilehash: 6fd497e0bc0fd282d57779c483f1e39e8f5ab60a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5e13c97427736d60f300d2d7b502c6f3e15fb481
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102505486"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861454"
 ---
 # <a name="configure-azure-private-link-for-an-azure-machine-learning-workspace"></a>Azure Machine Learning çalışma alanı için Azure özel bağlantısını yapılandırma
 
@@ -27,7 +27,7 @@ Azure özel bağlantısı, özel bir uç nokta kullanarak çalışma alanınıza
 > [!IMPORTANT]
 > Azure özel bağlantısı, çalışma alanını silme veya işlem kaynaklarını yönetme gibi Azure denetim düzlemi 'ni (yönetim işlemleri) etkilemez. Örneğin, bir işlem hedefi oluşturma, güncelleştirme veya silme. Bu işlemler, genel Internet üzerinden normal olarak gerçekleştirilir. Azure Machine Learning Studio, API 'Ler (yayınlanan işlem hatları dahil) veya SDK özel uç noktasını kullanır gibi veri düzlemi işlemleri.
 >
-> Mozilla Firefox kullanıyorsanız, çalışma alanınızın özel uç noktasına erişmeye çalışırken sorunlarla karşılaşabilirsiniz. Bu sorun, Mozilla 'de HTTPS üzerinden DNS ile ilişkili olabilir. Google Chrome 'un Microsoft Edge 'i geçici çözüm olarak kullanmanızı öneririz.
+> Mozilla Firefox kullanıyorsanız, çalışma alanınızın özel uç noktasına erişmeye çalışırken sorunlarla karşılaşabilirsiniz. Bu sorun, Mozilla 'de HTTPS üzerinden DNS ile ilişkili olabilir. Geçici çözüm olarak Microsoft Edge veya Google Chrome kullanmanızı öneririz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -66,7 +66,7 @@ ws = Workspace.create(name='myworkspace',
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-[Machine Learning Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md) [az ml çalışma alanı oluştur](/cli/azure/ext/azure-cli-ml/ml/workspace#ext_azure_cli_ml_az_ml_workspace_create) komutunu sağlar. Bu komut için aşağıdaki parametreler, özel bir ağla çalışma alanı oluşturmak için kullanılabilir, ancak var olan bir sanal ağ gerektirir:
+[Machine Learning Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md) [az ml çalışma alanı oluştur](/cli/azure/ml/workspace#az_ml_workspace_create) komutunu sağlar. Bu komut için aşağıdaki parametreler, özel bir ağla çalışma alanı oluşturmak için kullanılabilir, ancak var olan bir sanal ağ gerektirir:
 
 * `--pe-name`: Oluşturulan özel uç noktanın adı.
 * `--pe-auto-approval`: Çalışma alanına özel uç nokta bağlantılarının otomatik olarak onaylanıp onaylanmayacağı.
@@ -116,7 +116,7 @@ Bu örnekte kullanılan sınıflar ve yöntemler hakkında daha fazla bilgi içi
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-[Machine Learning Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md) [az ml Workspace Private-Endpoint Add](/cli/azure/ext/azure-cli-ml/ml/workspace/private-endpoint#ext_azure_cli_ml_az_ml_workspace_private_endpoint_add) komutunu sağlar.
+[Machine Learning Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md) [az ml Workspace Private-Endpoint Add](/cli/azure/ml/workspace/private-endpoint#az_ml_workspace_private_endpoint_add) komutunu sağlar.
 
 ```azurecli
 az ml workspace private-endpoint add -w myworkspace  --pe-name myprivateendpoint --pe-auto-approval true --pe-vnet-name myvnet
@@ -153,7 +153,7 @@ ws.delete_private_endpoint_connection(private_endpoint_connection_name=connectio
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-[Machine Learning Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md) [az ml Workspace Private-Endpoint Delete](/cli/azure/ext/azure-cli-ml/ml/workspace/private-endpoint#ext_azure_cli_ml_az_ml_workspace_private_endpoint_delete) komutunu sağlar.
+[Machine Learning Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md) [az ml Workspace Private-Endpoint Delete](/cli/azure/ml/workspace/private-endpoint#az_ml_workspace_private_endpoint_delete) komutunu sağlar.
 
 # <a name="portal"></a>[Portal](#tab/azure-portal)
 
@@ -175,7 +175,7 @@ Azure sanal makineleri hakkında daha fazla bilgi için bkz. [sanal makineler be
 Bazı durumlarda, birisinin VNet yerine ortak bir uç nokta üzerinden güvenli çalışma alanınıza bağlanmasına izin vermek isteyebilirsiniz. Çalışma alanını özel bir uç noktayla yapılandırdıktan sonra, isteğe bağlı olarak çalışma alanına genel erişimi etkinleştirebilirsiniz. Bunu yaptığınızda özel uç nokta kaldırılmaz. VNet 'in arkasındaki bileşenler arasındaki tüm iletişimler hala güvenli hale getirilir. VNet üzerinden özel erişime ek olarak yalnızca çalışma alanına genel erişim sağlar.
 
 > [!WARNING]
-> Genel uç nokta üzerinden bağlanılırken, bazı Studio özellikleri verilerinize erişemez. Bu sorun, veriler VNet 'in arkasında güvenliği sağlanmış bir hizmette depolandığında oluşur. Örneğin, bir Azure depolama hesabı.
+> Genel uç nokta üzerinden bağlanılırken, bazı Studio özellikleri verilerinize erişemez. Bu sorun, veriler VNet 'in arkasında güvenliği sağlanmış bir hizmette depolandığında oluşur. Örneğin, bir Azure depolama hesabı. Ayrıca, Jupiter/Jupiterlab/RStudio işlevinin işlem örneği ' ni not edin ve çalışan Not defterleri çalışmaz.
 
 Özel bir bağlantı etkin çalışma alanına genel erişimi etkinleştirmek için aşağıdaki adımları kullanın:
 
@@ -192,7 +192,7 @@ ws.update(allow_public_access_when_behind_vnet=True)
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-[Machine Learning Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md) [az ml Workspace Update](/cli/azure/ext/azure-cli-ml/ml/workspace#ext_azure_cli_ml_az_ml_workspace_update) komutunu sağlar. Çalışma alanına genel erişimi etkinleştirmek için parametresini ekleyin `--allow-public-access true` .
+[Machine Learning Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md) [az ml Workspace Update](/cli/azure/ml/workspace#az_ml_workspace_update) komutunu sağlar. Çalışma alanına genel erişimi etkinleştirmek için parametresini ekleyin `--allow-public-access true` .
 
 # <a name="portal"></a>[Portal](#tab/azure-portal)
 

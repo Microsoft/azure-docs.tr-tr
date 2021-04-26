@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 09/10/2020
 ms.author: yelevin
-ms.openlocfilehash: da7d540a4b7982c7f743a7ae968515485b45aa5a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 10812cf97f4f0dfc6f7957608eddf7acf929c3fc
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102035437"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579758"
 ---
 # <a name="use-logstash-to-connect-data-sources-to-azure-sentinel"></a>Veri kaynaklarını Azure Sentinel 'e bağlamak için Logstash 'i kullanma
 
@@ -44,7 +44,9 @@ Logstash altyapısı üç bileşenden oluşur:
 - Çıkış eklentileri: toplanan ve işlenen verilerin çeşitli hedeflere gönderilmesi özelleştirilmiş.
 
 > [!NOTE]
-> Azure Sentinel yalnızca kendi sağlanmış çıkış eklentisini destekler. Azure Sentinel için üçüncü taraf çıkış eklentilerini veya herhangi bir türdeki başka bir Logstash eklentisini desteklemez.
+> - Azure Sentinel yalnızca kendi sağlanmış çıkış eklentisini destekler. Bu eklentinin geçerli sürümü v 1.0.0, 2020-08-25 yayınlandı. Azure Sentinel için üçüncü taraf çıkış eklentilerini veya herhangi bir türdeki başka bir Logstash eklentisini desteklemez.
+>
+> - Azure Sentinel 'in Logstash çıkış eklentisi **7,0 ile 7,9 arasında yalnızca logstash sürümlerini** destekler.
 
 Logstash için Azure Sentinel çıktı eklentisi, Log Analytics çalışma alanınıza JSON biçimli verileri gönderir Log Analytics HTTP veri toplayıcı REST API ' nı kullanarak. Veriler özel günlüklere alınır.
 
@@ -65,21 +67,23 @@ Azure Sentinel çıktı eklentisi, Logstash koleksiyonunda kullanılabilir.
 
 [Bir yapılandırma dosyası](https://www.elastic.co/guide/en/logstash/current/configuration-file-structure.html) belgesinin Logstash yapısındaki bilgileri kullanın ve aşağıdaki anahtarlar ve değerlerle Azure Sentinel çıktı eklentisini yapılandırmaya ekleyin. (Doğru yapılandırma dosyası söz dizimi tablodan sonra gösterilir.)
 
-| Alan adı | Veri türü | Description |
+| Alan adı | Veri türü | Açıklama |
 |----------------|---------------|-----------------|
-| `workspace_id` | dize | Çalışma alanı KIMLIĞI GUID 'nizi girin. * |
-| `workspace_key` | string | Çalışma alanınızın birincil anahtar GUID 'nizi girin. * |
+| `workspace_id` | dize | Çalışma alanı KIMLIĞI GUID 'nizi girin (bkz. Ipucu). |
+| `workspace_key` | string | Çalışma alanınızın birincil anahtar GUID 'nizi girin (bkz. Ipucu). |
 | `custom_log_table_name` | string | Günlüklerin alınacağı tablonun adını ayarlayın. Her çıkış eklentisi için yalnızca bir tablo adı yapılandırılabilir. Günlük tablosu, **özel Günlükler** kategorisindeki **tablolarda** bulunan **Günlükler** altında Azure Sentinel 'de, bir sonek ile görünür `_CL` . |
 | `endpoint` | string | İsteğe bağlı alan. Bu, varsayılan olarak Log Analytics uç noktasıdır. Alternatif bir uç nokta ayarlamak için bu alanı kullanın. |
 | `time_generated_field` | string | İsteğe bağlı alan. Bu özellik Log Analytics varsayılan **TimeGenerated** alanını geçersiz kılar. Veri kaynağındaki zaman damgası alanının adını girin. Alandaki verilerin ISO 8601 biçimine () uyması gerekir `YYYY-MM-DDThh:mm:ssZ` |
 | `key_names` | array | Log Analytics çıktı şeması alanlarının bir listesini girin. Her liste öğesi tek tırnak içine, virgülle ayrılmış öğeleri ve köşeli parantez içine alınmış tüm listeyi kapsamalıdır. Aşağıdaki örneğe bakın. |
-| `plugin_flush_interval` | sayı | İsteğe bağlı alan. İleti aktarımları arasındaki en büyük aralığı (saniye olarak) Log Analytics olarak tanımlamak için ayarlayın. Varsayılan değer 5 ' tir. |
-    | `amount_resizing` | boolean | True veya false. İleti arabellek boyutunu alınan günlük verisi hacmine göre ayarlayan otomatik ölçeklendirme mekanizmasını etkinleştirin veya devre dışı bırakın. |
+| `plugin_flush_interval` | sayı | İsteğe bağlı alan. İleti aktarımları arasındaki en büyük aralığı (saniye olarak) Log Analytics olarak tanımlamak için ayarlayın. Varsayılan değer 5’tir. |
+| `amount_resizing` | boolean | True veya false. İleti arabellek boyutunu alınan günlük verisi hacmine göre ayarlayan otomatik ölçeklendirme mekanizmasını etkinleştirin veya devre dışı bırakın. |
 | `max_items` | sayı | İsteğe bağlı alan. Yalnızca `amount_resizing` "false" olarak ayarlandıysa geçerlidir. İleti arabellek boyutunda bir üst sınır ayarlamak için kullanın (kayıtlar). Varsayılan değer 2000’dir.  |
 | `azure_resource_id` | string | İsteğe bağlı alan. Verilerin bulunduğu Azure kaynağının KIMLIĞINI tanımlar. <br>Kaynak KIMLIĞI değeri, özellikle yalnızca belirli verilere erişim sağlamak için [Resource-Context RBAC](resource-context-rbac.md) kullanıyorsanız faydalıdır. |
 | | | |
 
-* Çalışma alanı KIMLIĞI ve birincil anahtarı, **aracılar yönetimi** altında çalışma alanı kaynağında bulabilirsiniz.
+> [!TIP]
+> - Çalışma alanı KIMLIĞI ve birincil anahtarı, **aracılar yönetimi** altında çalışma alanı kaynağında bulabilirsiniz.
+> - **Ancak**, yapılandırma dosyalarında düz metin olarak saklanan kimlik bilgileri ve diğer hassas bilgiler en iyi güvenlik uygulamalarıyla birlikte olmadığından, **çalışma alanı kimliğinizi** ve **çalışma alanı birincil anahtarınızı** yapılandırmaya güvenli bir şekilde eklemek için **logstash anahtar deposunu** kullanmanız önemle önerilir. Yönergeler için bkz. [elastik belgeler](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-started-logstash-user.html) .
 
 #### <a name="sample-configurations"></a>Örnek yapılandırma
 
@@ -175,5 +179,5 @@ Bu günlük dosyasında herhangi bir veri görmüyorsanız, çıkış eklentisin
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu belgede, Azure Sentinel 'e dış veri kaynakları bağlamak için Logstash 'in nasıl kullanılacağını öğrendiniz. Azure Sentinel hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
-- [Verilerinize nasıl görünürlük alabileceğinizi ve olası tehditleri](quickstart-get-visibility.md)öğrenin.
+- [Verilerinize ve olası tehditlere nasıl görünürlük alabileceğinizi](quickstart-get-visibility.md)öğrenin.
 - [Yerleşik](tutorial-detect-threats-built-in.md) veya [özel](tutorial-detect-threats-custom.md) kurallar kullanarak Azure Sentinel ile tehditleri algılamaya başlayın.

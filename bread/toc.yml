@@ -67,6 +67,9 @@
         - name: Raporlar ve izleme
           tocHref: /azure/active-directory/reports-monitoring/
           topicHref: /azure/active-directory/reports-monitoring/
+        - name: Doğrulanabilir kimlik bilgileri
+          tocHref: /azure/active-directory/verifiable-credentials/
+          topicHref: /azure/active-directory/verifable-credentials/
     - name: Analysis Services
       tocHref: /azure/analysis-services/
       topicHref: /azure/analysis-services/
@@ -248,6 +251,9 @@
         - name: Azure Haritalar
           tocHref: /azure/azure-maps/
           topicHref: /azure/azure-maps/
+        - name: Azure Sertifikalı cihaz
+          tocHref: /azure/certification/
+          topicHref: /azure/certification/
     - name: Resource Manager
       tocHref: /azure/azure-resource-manager/
       topicHref: /azure/azure-resource-manager/
@@ -647,6 +653,8 @@
       tocHref: /azure/networking/
       topicHref: /azure/networking/
       items:
+        - name: Temel Bilgiler
+          tocHref: /azure/networking/fundamentals
         - name: Application Gateway
           tocHref: /azure/application-gateway/
           topicHref: /azure/application-gateway/
@@ -765,6 +773,9 @@
         - name: Geliştirme
           tocHref: /azure/security/develop/
           topicHref: /azure/security/develop/
+        - name: Yolculuk
+          tocHref: /azure/security/journey
+          topicHref: /azure/security/journey
         - name: Karşılaştırmalar
           tocHref: /azure/security/benchmarks/
           topicHref: /azure/security/benchmarks/
@@ -853,6 +864,9 @@
         - name: Dosyalar
           tocHref: /azure/storage/files/
           topicHref: /azure/storage/files/storage-files-introduction
+        - name: Dosya Eşitleme
+          tocHref: /azure/storage/file-sync/
+          topicHref: /azure/storage/file-sync/file-sync-introduction
         - name: Kuyruklar
           tocHref: /azure/storage/queues/
           topicHref: /azure/storage/queues/storage-queues-introduction

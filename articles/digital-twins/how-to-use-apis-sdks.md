@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 06/04/2020
 ms.topic: how-to
 ms.service: digital-twins
-ms.openlocfilehash: f4f3fc8c928cd284088cc51120f1a7b485b4fac0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 21247f6b396cb1f7016c74cbec528149c0583724
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104595354"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107587216"
 ---
 # <a name="use-the-azure-digital-twins-apis-and-sdks"></a>Azure Digital Twins API’lerini ve SDK’larını kullanma
 
@@ -180,6 +180,7 @@ Aşağıdaki listede, API 'Leri ve SDK 'ları kullanmaya yönelik ek ayrıntıla
 * Azure dijital TWINS API 'Lerine doğrudan çağrı yapmak için Postman gibi bir HTTP REST test aracı kullanabilirsiniz. Bu işlem hakkında daha fazla bilgi için bkz. [*nasıl yapılır: Istekleri Postman Ile oluşturma*](how-to-use-postman.md).
 * SDK 'yı kullanmak için, sınıfın örneğini oluşturun `DigitalTwinsClient` . Oluşturucu, paketteki çeşitli kimlik doğrulama yöntemleriyle elde edilebilir kimlik bilgileri gerektirir `Azure.Identity` . Daha fazla bilgi için `Azure.Identity` bkz. [ad alanı belgeleri](/dotnet/api/azure.identity). 
 * Başlarken faydalı olduğunu fark edebilirsiniz `InteractiveBrowserCredential` , ancak [yönetilen kimliğin](/dotnet/api/azure.identity.interactivebrowsercredential)kimlik bilgileri de dahil olmak üzere, Azure Digital TWINS ['e karşı MSI ile ayarlanan Azure işlevleri](../app-service/overview-managed-identity.md?tabs=dotnet) kimlik doğrulaması için kullanacağınız diğer birkaç seçenek vardır. Hakkında daha fazla bilgi için `InteractiveBrowserCredential` bkz. [sınıf belgeleri](/dotnet/api/azure.identity.interactivebrowsercredential).
+* Azure dijital TWINS API 'Lerine yönelik istekler, Azure Digital TWINS örneğinin bulunduğu aynı [Azure Active Directory](../active-directory/fundamentals/active-directory-whatis.md) (Azure AD) kiracısının parçası olan bir kullanıcı veya hizmet sorumlusu gerektirir. Azure dijital TWINS uç noktalarının kötü taramasını engellemek için, kaynak kiracının dışından erişim belirteçleri olan istekler bir "404 Sub-Domain bulunamadı" hata iletisi döndürür. Bu hata, kullanıcıya veya hizmet sorumlusuna Azure [AD B2B](../active-directory/external-identities/what-is-b2b.md) işbirliği aracılığıyla bir Azure dijital TWINS veri sahibi veya Azure Digital TWINS veri okuyucusu rolü verilse *bile* döndürülür. Birden çok kiracı genelinde erişim elde etme hakkında daha fazla bilgi için bkz. [*nasıl yapılır: yazma uygulaması kimlik doğrulaması kodu*](how-to-authenticate-client.md#authenticate-across-tenants).
 * Tüm hizmet API çağrıları, sınıf üzerinde üye işlevleri olarak gösterilir `DigitalTwinsClient` .
 * Tüm hizmet işlevleri, zaman uyumlu ve zaman uyumsuz sürümlerde bulunur.
 * Tüm hizmet işlevleri, 400 veya üzeri bir dönüş durumu için bir özel durum oluşturur. Çağrıları bir bölüme sardığınızdan `try` ve en azından yakaladığınızdan emin olun `RequestFailedExceptions` . Bu tür özel durum hakkında daha fazla bilgi için [buraya](/dotnet/api/azure.requestfailedexception)bakın.
@@ -187,6 +188,7 @@ Aşağıdaki listede, API 'Leri ve SDK 'ları kullanmaya yönelik ek ayrıntıla
 * Disk belleğine alınmış sonuçları olan hizmet yöntemleri, `Pageable<T>` veya `AsyncPageable<T>` sonuçlarını döndürür. Sınıfı hakkında daha fazla bilgi için buraya bakın `Pageable<T>` . hakkında daha fazla bilgi için [](/dotnet/api/azure.pageable-1) `AsyncPageable<T>` [buraya](/dotnet/api/azure.asyncpageable-1)bakın.
 * Bir döngüsü kullanarak, disk belleğine alınmış sonuçları yineleyebilirsiniz `await foreach` . Bu süreç hakkında daha fazla bilgi için [buraya](/archive/msdn-magazine/2019/november/csharp-iterating-with-async-enumerables-in-csharp-8)bakın.
 * Temel alınan SDK `Azure.Core` . SDK altyapısı ve türleri hakkında başvuru için bkz. [Azure ad alanı belgeleri](/dotnet/api/azure) .
+
 
 Hizmet yöntemleri mümkün olduğunda kesin türü belirtilmiş nesneler döndürür. Ancak, Azure dijital TWINS, çalışma zamanında Kullanıcı tarafından özel olarak yapılandırılmış modelleri temel aldığı için (hizmete yüklenen DTDL modelleri aracılığıyla), çoğu hizmet API 'Leri JSON biçiminde ikizi verileri alır ve döndürür.
 

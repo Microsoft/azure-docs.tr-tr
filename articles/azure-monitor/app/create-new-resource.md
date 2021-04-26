@@ -3,12 +3,12 @@ title: Yeni bir Azure Application Insights kaynağı oluşturma | Microsoft Docs
 description: Yeni bir canlı uygulama için Application Insights izlemeyi el ile ayarlayın.
 ms.topic: conceptual
 ms.date: 02/10/2021
-ms.openlocfilehash: 459f61d9e13a2098403f3e78c7a529e49bf65e59
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6158b5604046897e20053c67321f26d650c21b7f
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102100942"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566231"
 ---
 # <a name="create-an-application-insights-resource"></a>Application Insights kaynağı oluşturma
 
@@ -32,7 +32,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
    | **Ad**      | `Unique value` | İzlemekte olduğunuz uygulamayı tanımlayan ad. |
    | **Kaynak Grubu**     | `myResourceGroup`      | App Insights verilerini barındıracak yeni veya mevcut kaynak grubunun adı. |
    | **Bölge** | `East US` | Size yakın bir konum seçin veya uygulamanızın nerede barındırıldığını görürsünüz. |
-   | **Kaynak modu** | `Classic` veya `Workspace-based` | Çalışma alanı tabanlı kaynaklar şu anda genel önizlemededir ve Application Insights telemetrinizi ortak bir Log Analytics çalışma alanına göndermenizi sağlar. Daha fazla bilgi için [çalışma alanı tabanlı kaynaklardaki makaleye](create-workspace-resource.md)bakın.
+   | **Kaynak modu** | `Classic` veya `Workspace-based` | Çalışma alanı tabanlı kaynaklar Application Insights telemetrinizi ortak bir Log Analytics çalışma alanına göndermenizi sağlar. Daha fazla bilgi için [çalışma alanı tabanlı kaynaklardaki makaleye](create-workspace-resource.md)bakın.
 
 > [!NOTE]
 > Aynı kaynak adını farklı kaynak grupları arasında kullanabilmeniz mümkün olsa da, genel olarak benzersiz bir ad kullanılması yararlı olabilir. Bu, gerekli sözdizimini basitleştirdiği için [çapraz kaynak sorguları gerçekleştirmeyi](../logs/cross-workspace-query.md#identifying-an-application) planlıyorsanız yararlı olabilir.

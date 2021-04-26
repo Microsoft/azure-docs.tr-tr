@@ -8,12 +8,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 4/9/2019
 ms.author: mayg
-ms.openlocfilehash: 29457f2f5021fed9d8785f5764c4119de4be1fa9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8e5a1f727f32fda7740b958cb3f03a3a4a3ae03f
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95999221"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727561"
 ---
 # <a name="cost-estimation-report-by-azure-site-recovery-deployment-planner"></a>Azure Site Recovery Dağıtım Planlayıcısı maliyet tahmini raporu 
 
@@ -168,13 +168,13 @@ eastus, eastus2, westus, centralus, northcentralus, southcentralus, northeurope,
 Site Recovery Dağıtım Planlayıcısı aşağıdaki para birimlerinin tümünde maliyet raporu oluşturabilir.
 
 |Para Birimi|Name|Para Birimi|Name|Para Birimi|Name|
-|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|
 |ARS|Arjantin pesosu ($)|AUD|Avustralya doları ($)|BRL|Brezilya reali (R$)|
 |CAD|Kanada doları ($)|CHF|İsviçre frangı (chf)|DKK|Danimarka kronu (kr)|
-|EUR|Euro (€)|GBP|İngiliz Sterlini (£)|HKD|Hong Kong doları (HK$)|
+|EUR|Euro ( &euro; )|GBP|İngiliz Sterlini (£)|HKD|Hong Kong doları (HK$)|
 |IDR|Endonezya Rupisi (Rp)|INR|Hint Rupisi (₹)|JPY|Japon yen (¥)|
 |KRW|Kore Wonu (₩)|MXN|Meksika pesosu (MX$)|MYR|Malezya ringgiti (RM$)|
-|NOK|Norveç kronu (kr)||NZD|Yeni Zelanda doları ($)||RUB|Rusça Rublesi (руб)|
+|NOK|Norveç kronu (kr)|NZD|Yeni Zelanda doları ($)|RUB|Rusça Rublesi (руб)|
 |SAR|Suudi riyali (SR)|SEK|İsveç kronu (kr)|TWD|Tayvan doları (NT$)|
 |TRY|Türk lirası (TL)|USD| ABD doları ($)|ZAR|Güney Afrika randı (R)|
 

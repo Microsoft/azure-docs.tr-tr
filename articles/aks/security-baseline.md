@@ -4,22 +4,20 @@ description: Azure Kubernetes hizmeti güvenlik temeli, Azure Güvenlik kıyasla
 author: msmbaldwin
 ms.service: container-service
 ms.topic: conceptual
-ms.date: 02/17/2021
+ms.date: 03/30/2021
 ms.author: mbaldwin
-ms.custom: subject-security-benchmark
-ms.openlocfilehash: 2ebfe8e8b3d948d3e11bc8c24def6d5dbcb58de9
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.custom: subject-security-benchmark, devx-track-azurepowershell
+ms.openlocfilehash: 0564f1f39ac9d492dfffdf0e7adacdde08db0874
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105558916"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769598"
 ---
 # <a name="azure-security-baseline-for-azure-kubernetes-service"></a>Azure Kubernetes hizmeti için Azure Güvenlik temeli
 
-Bu güvenlik temeli [Azure Güvenlik kıyaslama sürümü 1,0](../security/benchmarks/overview-v1.md) ' dan Azure Kubernetes 'e kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar.
-İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve Azure Kubernetes için geçerli olan ilgili kılavuza göre gruplandırılır. Azure Kubernetes için geçerli olmayan **denetimler** dışlandı.
+Bu güvenlik temeli [Azure Güvenlik kıyaslama sürümü 1.0'Dan](../security/benchmarks/overview-v1.md) Azure Kubernetes 'e kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve Azure Kubernetes için geçerli olan ilgili kılavuza göre gruplandırılır. **Denetimler** , Azure Kubernetes için geçerli değildir veya sorumluluğun Microsoft tarafından çıkarılmadığı anlamına gelir.
 
- 
 Azure Kubernetes 'in Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için, [tam Azure Kubernetes güvenlik taban çizgisi eşleme dosyasına](https://github.com/MicrosoftDocs/SecurityBenchmarks/tree/master/Azure%20Offer%20Security%20Baselines)bakın.
 
 ## <a name="network-security"></a>Ağ Güvenliği
@@ -114,7 +112,7 @@ Aboneliğinizde bir sanal ağ oluşturduğunuzda veya güncelleştirdiğinizde s
 
 Yük denetimi veya davranış analizine dayalı olarak yetkisiz giriş algılama ve/veya önleme bir gereksinim değilse, WAF içeren bir Azure Application Gateway, uyarıları ve tehditleri günlüğe kaydetmek için "algılama modunda" kullanılabilir ve yapılandırılabilir ve algılanan yetkisiz erişimi ve saldırıları etkin bir şekilde engellemek için "önleme modu" kullanabilirsiniz.
 
-- [AKS kümenizi bir WAF ile güvenli hale getirmek için en iyi yöntemleri anlama](./operator-best-practices-network.md#secure-traffic-with-a-web-application-firewall-waf)
+- [AKS kümenizi bir WAF ile güvenli hale getirmek için en iyi yöntemleri anlama](https://docs.microsoft.com/azure/aks/operator-best-practices-network#secure-traffic-with-a-web-application-firewall-waf)
 
 - [Azure Application Gateway dağıtma (Azure WAF)](../web-application-firewall/ag/application-gateway-web-application-firewall-portal.md)
 
@@ -158,7 +156,7 @@ Ek bilgiler başvurulan bağlantılarda bulunabilir.
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Ağ için Azure Ilke örnekleri](../governance/policy/samples/built-in-policies.md#network)
+- [Ağ için Azure Ilke örnekleri](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#network)
 
 **Sorumluluk**: Müşteri
 
@@ -190,11 +188,11 @@ Kritik ağ kaynaklarında yapılan değişiklikler yürürlüğe girdiğinde tet
 
 Azure Izleyici günlüklerini kullanarak, bir ana bileşen bileşenleri olan kuin-apiserver ve kuin-Controller-Manager arasındaki günlükleri etkinleştirebilir ve sorgulayın. Kapsayıcı çalışma zamanı ile kubelet çalıştıran düğümleri oluşturun ve yönetin, yönetilen Kubernetes API sunucusu aracılığıyla uygulamalarını dağıtın. 
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](../azure-monitor/essentials/activity-log.md#view-the-activity-log)
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](/azure/azure-monitor/platform/activity-log#view-the-activity-log)
 
-- [Azure Izleyici 'de uyarı oluşturma](../azure-monitor/alerts/alerts-activity-log.md)
+- [Azure Izleyici 'de uyarı oluşturma](/azure/azure-monitor/platform/alerts-activity-log)
 
-- [Azure Kubernetes Service (AKS) içindeki Kubernetes ana düğüm günlüklerini etkinleştirme ve inceleme](./view-control-plane-logs.md)
+- [Azure Kubernetes Service (AKS) içindeki Kubernetes ana düğüm günlüklerini etkinleştirme ve inceleme](/azure/aks/view-master-logs)
 
 **Sorumluluk**: Müşteri
 
@@ -232,13 +230,13 @@ Bu günlükleri Log Analytics veya başka bir depolama platformuna dışarı akt
 
 Kurumsal iş gereksinimlerinize bağlı olarak bu verileri Azure Sentinel 'e veya üçüncü taraf bir SıEM 'e etkinleştirin ve yerleşik olarak yapın.
 
-- [Günlük rollerini içeren günlük şemasını buraya gözden geçirin](./view-control-plane-logs.md)
+- [Günlük rollerini içeren günlük şemasını buraya gözden geçirin](/azure/aks/view-master-logs)
 
-- [Kapsayıcılar için Azure Izleyicisini anlama](../azure-monitor/containers/container-insights-overview.md)
+- [Kapsayıcılar için Azure Izleyicisini anlama](/azure/azure-monitor/insights/container-insights-overview)
 
-- [Kapsayıcılar için Azure Izleyicisini etkinleştirme](../azure-monitor/containers/container-insights-onboard.md)
+- [Kapsayıcılar için Azure Izleyicisini etkinleştirme](/azure/azure-monitor/insights/container-insights-onboard)
 
-- [Azure Kubernetes Service (AKS) içindeki Kubernetes ana düğüm günlüklerini etkinleştirme ve inceleme](./view-control-plane-logs.md)
+- [Azure Kubernetes Service (AKS) içindeki Kubernetes ana düğüm günlüklerini etkinleştirme ve inceleme](/azure/aks/view-master-logs)
 
 **Sorumluluk**: Müşteri
 
@@ -265,7 +263,7 @@ AKS ana bileşenlerinde denetim günlüklerini etkinleştirin; örneğin:
 
 Kuin-Audit gibi diğer denetim günlüklerini de açın. 
 
-- [AKS 'de Kubernetes ana düğüm günlüklerini etkinleştirme ve gözden geçirme](./view-control-plane-logs.md)
+- [AKS 'de Kubernetes ana düğüm günlüklerini etkinleştirme ve gözden geçirme](/azure/aks/view-master-logs)
 
 **Sorumluluk**: Müşteri
 
@@ -287,7 +285,7 @@ Eksik güncelleştirmelere görünürlük sağlamak için veri toplama gerekir, 
 
 **Kılavuz**: Azure Kubernetes hizmeti (aks) örneklerinizi Azure izleyicisine ekleme ve ilgili Azure Log Analytics çalışma alanı bekletme dönemini kuruluşunuzun uyumluluk gereksinimlerine göre ayarlama. 
 
-- [Log Analytics çalışma alanları için günlük saklama parametrelerini ayarlama](../azure-monitor/logs/manage-cost-storage.md#change-the-data-retention-period)
+- [Log Analytics çalışma alanları için günlük saklama parametrelerini ayarlama](/azure/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period)
 
 **Sorumluluk**: Müşteri
 
@@ -301,11 +299,11 @@ Günlükleri gözden geçirmek ve günlük verilerinde sorgular gerçekleştirme
 
 Uygulama ve hizmetlerinizin sorunlarını gidermek için AKS ana bileşenleri tarafından oluşturulan günlükleri görüntüleyin (kuııcuonver ve Kuto-controllermanager). Merkezi günlük yönetimi ve izleme için verileri Azure Sentinel 'e veya üçüncü taraf bir SıEM 'e etkinleştirin.
 
-- [AKS 'de Kubernetes ana düğüm günlüklerini etkinleştirme ve gözden geçirme](./view-control-plane-logs.md)
+- [AKS 'de Kubernetes ana düğüm günlüklerini etkinleştirme ve gözden geçirme](/azure/aks/view-master-logs)
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-- [Azure Izleyici 'de özel sorgular gerçekleştirme](../azure-monitor/logs/get-started-queries.md)
+- [Azure Izleyici 'de özel sorgular gerçekleştirme](/azure/azure-monitor/log-query/get-started-queries)
 
 **Sorumluluk**: Müşteri
 
@@ -333,7 +331,7 @@ Konuk ve küme düzeyinde algılanan tehditler ve kötü amaçlı etkinliklerde 
 
 - [Güvenlik uyarıları başvuru kılavuzu](../security-center/alerts-reference.md)
 
-- [Kapsayıcılar için uyarılar-Azure Kubernetes hizmet kümeleri](../security-center/alerts-reference.md#alerts-akscluster)
+- [Kapsayıcılar için uyarılar-Azure Kubernetes hizmet kümeleri](https://docs.microsoft.com/azure/security-center/alerts-reference#alerts-akscluster)
 
 **Sorumluluk**: Müşteri
 
@@ -417,7 +415,7 @@ Adanmış yönetim hesaplarının kullanımı etrafında ilke ve yordamlar oluş
 
 **Rehberlik**: BIR aks kümesi için Azure Active Directory (Azure AD) tümleşik kimlik doğrulaması Ile Azure Kubernetes hizmeti (aks) için çoklu oturum açma kullanın.
 
-- [Kubernetes günlüklerini, olayları ve pod ölçümlerini gerçek zamanlı olarak görüntüleme](../azure-monitor/containers/container-insights-livedata-overview.md)
+- [Kubernetes günlüklerini, olayları ve pod ölçümlerini gerçek zamanlı olarak görüntüleme](/azure/azure-monitor/insights/container-insights-livedata-overview)
 
 **Sorumluluk**: Müşteri
 
@@ -514,7 +512,7 @@ Destek veya sorun giderme amacıyla kullanılan rollerden haberdar olun. Örneğ
 **Rehberlik**: Azure Kubernetes hizmeti (aks) için Kullanıcı kimlik doğrulamasını Azure Active Directory (Azure AD) ile tümleştirin. Denetim ve oturum açma günlüklerini Azure Log Analytics çalışma alanına göndererek Azure AD için Tanılama ayarları oluşturun. Azure Log Analytics çalışma alanında istenen uyarıları (devre dışı bırakılmış bir hesabın oturum açmaya çalıştığı gibi) yapılandırın.
 - [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](../active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics.md)
 
-- [Azure Izleyici kullanarak günlük uyarıları oluşturma, görüntüleme ve yönetme](../azure-monitor/alerts/alerts-log.md)
+- [Azure Izleyici kullanarak günlük uyarıları oluşturma, görüntüleme ve yönetme](/azure/azure-monitor/platform/alerts-log)
 
 **Sorumluluk**: Müşteri
 
@@ -664,11 +662,11 @@ Düğümlerde veya kapsayıcılardaki CPU ve bellek kullanımı, tanımlanan eş
 
 AKS kümelerinizi ve ilgili kaynaklarınızı yüksek düzeyde izlemek için Azure etkinlik günlüğü 'nü kullanın. Özel uyarılar, panolar oluşturmak ve ayrıntılı analiz gerçekleştirmek için sorguları kullanarak düğümlerden ve Kubernetes tarafından toplanan uygulama ve iş yükü ölçümlerini görüntülemek için Prometheus ile tümleştirin.
 
-- [Kapsayıcılar için Azure Izleyicisini anlama](../azure-monitor/containers/container-insights-overview.md)
+- [Kapsayıcılar için Azure Izleyicisini anlama](/azure/azure-monitor/insights/container-insights-overview)
 
-- [Kapsayıcılar için Azure Izleyicisini etkinleştirme](../azure-monitor/containers/container-insights-onboard.md)
+- [Kapsayıcılar için Azure Izleyicisini etkinleştirme](/azure/azure-monitor/insights/container-insights-onboard)
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](../azure-monitor/essentials/activity-log.md#view-the-activity-log)
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](/azure/azure-monitor/platform/activity-log#view-the-activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -704,7 +702,7 @@ Windows Server düğümleri günlük güncelleştirmeler almamasına gerek kalma
 
 - [Güncelleştirmelerin Linux çalıştıran AKS küme düğümlerine nasıl uygulandığını anlayın](node-updates-kured.md)
 
-- [Windows Server düğümleri kullanan AKS kümeleri için AKS düğüm havuzunu yükseltme](./use-multiple-node-pools.md#upgrade-a-node-pool)
+- [Windows Server düğümleri kullanan AKS kümeleri için AKS düğüm havuzunu yükseltme](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#upgrade-a-node-pool)
 
 - [Azure Kubernetes hizmeti (AKS) düğümü görüntü yükseltmeleri](node-image-upgrade.md)
 
@@ -792,7 +790,7 @@ Litre, Etiketler veya Etiketler envanterin düzenli olarak mutabakatını sağla
 
 - [Yönetilen kümeler-güncelleştirme etiketleri](/rest/api/aks/managedclusters/updatetags)
 
-- [Düğüm havuzu için bir taınt, etiket veya etiket belirtme](./use-multiple-node-pools.md#specify-a-taint-label-or-tag-for-a-node-pool)
+- [Düğüm havuzu için bir taınt, etiket veya etiket belirtme](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#specify-a-taint-label-or-tag-for-a-node-pool)
 
 **Sorumluluk**: Müşteri
 
@@ -887,7 +885,7 @@ Aboneliklerinizde kaynakları sorgulamak/öğrenmek için Azure Kaynak Grafiği 
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](../governance/policy/samples/built-in-policies.md#general)
+- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#general)
 
 **Sorumluluk**: Müşteri
 
@@ -1030,7 +1028,7 @@ Konak işletim sisteminde yerleşik olarak bulunan Internet Security (CIS) denet
 
 - [AKS aracı düğümü konak işletim sistemi için güvenlik sağlamlaştırma](security-hardened-vm-host-image.md)
 
-- [AKS kümelerinin durum yapılandırmasını anlama](./concepts-clusters-workloads.md#control-plane)
+- [AKS kümelerinin durum yapılandırmasını anlama](https://docs.microsoft.com/azure/aks/concepts-clusters-workloads#control-plane)
 
 - [AKS sanal makine konaklarında güvenlik sağlamlaştırma anlayın](security-hardened-vm-host-image.md)
 
@@ -1070,7 +1068,7 @@ Sistem yapılandırmasını denetlemek ve zorlamak için özel ilkeler oluşturu
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Diğer adları kullanma](../governance/policy/concepts/definition-structure.md#aliases)
+- [Diğer adları kullanma](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#aliases)
 
 **Sorumluluk**: Müşteri
 
@@ -1086,7 +1084,7 @@ AKS konaklarında yerleşik olarak bulunan Internet güvenliği (CIS) denetimler
 
 - [AKS sanal makine konaklarında güvenlik sağlamlaştırma anlayın](security-hardened-vm-host-image.md)
 
-- [AKS kümelerinin durum yapılandırmasını anlama](./concepts-clusters-workloads.md#control-plane)
+- [AKS kümelerinin durum yapılandırmasını anlama](https://docs.microsoft.com/azure/aks/concepts-clusters-workloads#control-plane)
 
 **Sorumluluk**: Müşteri
 
@@ -1124,7 +1122,7 @@ Sabit veya paylaşılan kimlik bilgilerinin kullanılmasını önleyin.
 
 - [Azure Kubernetes Service’teki (AKS) uygulamalar ve kümeler için güvenlik kavramları](concepts-security.md)
 
-- [AKS kümeniz ile Key Vault kullanma](./developer-best-practices-pod-security.md#limit-credential-exposure)
+- [AKS kümeniz ile Key Vault kullanma](https://docs.microsoft.com/azure/aks/developer-best-practices-pod-security#limit-credential-exposure)
 
 **Sorumluluk**: Müşteri
 
@@ -1138,7 +1136,7 @@ Pod tarafından yönetilen kimliklerin yalnızca Linux Pod ve kapsayıcı görü
 
 Hizmet sorumluları, AKS kümelerinde da kullanılabilir. Ancak, hizmet sorumlularını kullanan kümeler sonunda kümenin çalışmasını sağlamak için hizmet sorumlusunun yenilenmesi gereken bir duruma ulaşabilir. Hizmet sorumlularını yönetmek karmaşıklık ekler ve bunun yerine yönetilen kimliklerin kullanılması daha kolay olur. Aynı izin gereksinimleri hem hizmet sorumluları hem de yönetilen kimlikler için geçerlidir.
 
-- [Azure Kubernetes Service (AKS) ile yönetilen kimlikleri ve Key Vault anlayın](./developer-best-practices-pod-security.md#limit-credential-exposure)
+- [Azure Kubernetes Service (AKS) ile yönetilen kimlikleri ve Key Vault anlayın](https://docs.microsoft.com/azure/aks/developer-best-practices-pod-security#limit-credential-exposure)
 
 - [Azure AD Pod kimliği](https://github.com/Azure/aad-pod-identity)
 
@@ -1170,9 +1168,9 @@ Uygulama kodunuzda kimlik bilgileri tanımlamadan kimlik bilgisi pozlamasını s
 
 - [Güvenlik uyarıları başvuru kılavuzu](../security-center/alerts-reference.md)
 
-- [Kapsayıcılar için uyarılar-Azure Kubernetes hizmet kümeleri](../security-center/alerts-reference.md#alerts-akscluster)
+- [Kapsayıcılar için uyarılar-Azure Kubernetes hizmet kümeleri](https://docs.microsoft.com/azure/security-center/alerts-reference#alerts-akscluster)
 
-- [AKS paylaşılan sorumluluk ve Daemon kümeleri](./support-policies.md#shared-responsibility)
+- [AKS paylaşılan sorumluluk ve Daemon kümeleri](https://docs.microsoft.com/azure/aks/support-policies#shared-responsibility)
 
 **Sorumluluk**: Paylaşılan
 
@@ -1194,9 +1192,9 @@ Uygulama kodunuzda kimlik bilgileri tanımlamadan kimlik bilgisi pozlamasını s
 
 - [Güvenlik uyarıları başvuru kılavuzu](../security-center/alerts-reference.md)
 
-- [Kapsayıcılar için uyarılar-Azure Kubernetes hizmet kümeleri](../security-center/alerts-reference.md#alerts-akscluster)
+- [Kapsayıcılar için uyarılar-Azure Kubernetes hizmet kümeleri](https://docs.microsoft.com/azure/security-center/alerts-reference#alerts-akscluster)
 
-- [AKS paylaşılan sorumluluk ve Daemon kümeleri](./support-policies.md#shared-responsibility)
+- [AKS paylaşılan sorumluluk ve Daemon kümeleri](https://docs.microsoft.com/azure/aks/support-policies#shared-responsibility)
 
 **Sorumluluk**: Paylaşılan
 
@@ -1238,7 +1236,7 @@ PowerShell komutlarıyla Key Vault sertifikaların, anahtarların, yönetilen de
 
 - [Key Vault gizli dizileri yedekleme](/powershell/module/azurerm.keyvault/backup-azurekeyvaultsecret)
 
-- [Azure Backup etkinleştirme](../backup/index.yml)
+- [Azure Backup etkinleştirme](/azure/backup/)
 
 **Sorumluluk**: Müşteri
 
@@ -1250,15 +1248,15 @@ PowerShell komutlarıyla Key Vault sertifikaların, anahtarların, yönetilen de
 
 PowerShell komutlarıyla Key Vault sertifikaların, anahtarların, yönetilen depolama hesaplarının ve parolaların düzenli aralıklarla veri geri yüklemesini gerçekleştirin.
 
-- [Key Vault sertifikalarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultcertificate?amp;preserve-view=true&view=azps-4.8.0)
+- [Key Vault sertifikalarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultcertificate)
 
-- [Key Vault anahtarlarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultkey?amp;preserve-view=true&view=azps-4.8.0)
+- [Key Vault anahtarlarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultkey)
 
 - [Key Vault yönetilen depolama hesaplarını geri yükleme](/powershell/module/az.keyvault/backup-azkeyvaultmanagedstorageaccount)
 
-- [Key Vault parolaları geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultsecret?amp;preserve-view=true&view=azps-4.8.0)
+- [Key Vault parolaları geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultsecret)
 
-- [Azure sanal makine yedeklemesinden dosyaları kurtarma](../backup/backup-azure-restore-files-from-vm.md)
+- [Azure sanal makine yedeklemesinden dosyaları kurtarma](/azure/backup/backup-azure-restore-files-from-vm)
 
 **Sorumluluk**: Müşteri
 
@@ -1272,7 +1270,7 @@ Azure Kubernetes Service (AKS) dağıtımları için ile birlikte kullanılıyor
 
 - [Azure Depolama Hizmeti Şifrelemesi anlama](../storage/common/storage-service-encryption.md)
 
-- [Key Vault Soft-Delete etkinleştirme](../storage/blobs/soft-delete-blob-overview.md?tabs=azure-portal)
+- [Key Vault Soft-Delete etkinleştirme](https://docs.microsoft.com/azure/storage/blobs/soft-delete-blob-overview?tabs=azure-portal)
 
 **Sorumluluk**: Müşteri
 
@@ -1371,5 +1369,5 @@ Uyarıları Azure Sentinel 'e, gerek başına ve kurumsal iş gereksinimlerine b
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](../security/benchmarks/overview.md)
-- [Azure güvenlik temelleri](../security/benchmarks/security-baselines-overview.md) hakkında daha fazla bilgi edinin
+- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](/azure/security/benchmarks/overview)
+- [Azure güvenlik temelleri](/azure/security/benchmarks/security-baselines-overview) hakkında daha fazla bilgi edinin

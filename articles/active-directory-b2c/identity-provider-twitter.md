@@ -8,17 +8,17 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: how-to
-ms.date: 03/17/2021
+ms.date: 04/06/2021
 ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 3699743c5d1b3330715984d2b6116cfebafe74f1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 97a8134e858112d7e1deff6744b5555c172692f2
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104579850"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107028188"
 ---
 # <a name="set-up-sign-up-and-sign-in-with-a-twitter-account-using-azure-active-directory-b2c"></a>Azure Active Directory B2C kullanarak bir Twitter hesabıyla kaydolma ve oturum açma ayarlama
 
@@ -45,7 +45,7 @@ Azure AD B2C bir Twitter hesabı olan kullanıcılar için oturum açmayı etkin
 1. **Kimlik doğrulama ayarları** altında **Düzenle** ' yi seçin.
     1. **3-lelenmiş OAuth** onay kutusunu Etkinleştir ' i seçin.
     1. **Kullanıcılardan e-posta adresini iste** onay kutusunu seçin.
-    1. **Geri çağırma URL 'leri** için girin `https://your-tenant.b2clogin.com/your-tenant-name.onmicrosoft.com/your-user-flow-Id/oauth1/authresp` .  [Özel bir etki alanı](custom-domain.md)kullanıyorsanız, girin `https://your-domain-name/your-tenant-name.onmicrosoft.com/your-user-flow-Id/oauth1/authresp` . Azure AD B2C büyük harfle tanımlansalar bile kiracı adınızı ve Kullanıcı akış kimliğinizi girerken tüm küçük harfleri kullanın. Değiştir:
+    1. **Geri çağırma URL 'leri** için girin `https://your-tenant.b2clogin.com/your-tenant-name.onmicrosoft.com/your-user-flow-Id/oauth1/authresp` .  [Özel bir etki alanı](custom-domain.md)kullanıyorsanız, girin `https://your-domain-name/your-tenant-name.onmicrosoft.com/your-user-flow-Id/oauth1/authresp` . Azure AD B2C büyük harfle tanımlansalar bile kiracı adınızı ve Kullanıcı akış KIMLIĞINIZI girerken tüm küçük harfleri kullanın. Değiştir:
         - `your-tenant-name` , kiracı adınızın adı ile.
         - `your-domain-name` Özel etki alanınız ile.
         - `your-user-flow-Id` Kullanıcı akışlarınızın tanımlayıcısıyla. Örneğin, `b2c_1a_signup_signin_twitter`. 
@@ -179,7 +179,7 @@ Bir Twitter hesabını, ilkenizin uzantı dosyasındaki **Claimsproviders** öğ
 ## <a name="test-your-custom-policy"></a>Özel ilkenizi test etme
 
 1. Örneğin, bağlı olan taraf ilkenizi seçin `B2C_1A_signup_signin` .
-1. **Uygulama** için, [daha önce kaydetmiş](troubleshoot-custom-policies.md#troubleshoot-the-runtime)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
+1. **Uygulama** için, [daha önce kaydetmiş](tutorial-register-applications.md)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
 1. **Şimdi Çalıştır** düğmesini seçin.
 1. Kayıt veya oturum açma sayfasından Twitter hesabıyla oturum açmak için **Twitter** ' ı seçin.
 

@@ -8,12 +8,12 @@ ms.service: security-center
 ms.topic: how-to
 ms.date: 03/17/2021
 ms.author: memildin
-ms.openlocfilehash: eacca5573c672e9f4485c26b1b580ee4c982c5d2
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1a6a9080a8957b56d12eca289a500fd45f0e709b
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104580768"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310827"
 ---
 # <a name="protect-your-kubernetes-workloads"></a>Kubernetes iş yüklerinizi koruma
 
@@ -80,12 +80,12 @@ Azure Güvenlik Merkezi, **Kubernetes Için Azure ilke eklentisini** yüklediği
 
     | Öneri adı                                                         | Güvenlik denetimi                         | Yapılandırma gerekli |
     |-----------------------------------------------------------------------------|------------------------------------------|------------------------|
-    | Kapsayıcı CPU ve bellek sınırları zorunlu kılınmalıdır                          | DDoS saldırılarına karşı uygulamaları koruma | No                     |
-    | Ayrıcalıklı kapsayıcılar kaçınılmalıdır                                     | Erişimi ve izinleri yönetme            | No                     |
-    | Kapsayıcılar için sabit (salt okunurdur) kök dosya sistemi zorunlu kılınmalıdır     | Erişimi ve izinleri yönetme            | No                     |
-    | Ayrıcalık yükseltme ile kapsayıcının önlenebilir olması gerekir                       | Erişimi ve izinleri yönetme            | No                     |
-    | Kök kullanıcı olarak çalışan kapsayıcılar önlenebilir olmalıdır                           | Erişimi ve izinleri yönetme            | No                     |
-    | Gizli ana bilgisayar ad alanlarını paylaşan kapsayıcıların önlenebilir olması gerekir              | Erişimi ve izinleri yönetme            | No                     |
+    | Kapsayıcı CPU ve bellek sınırları zorunlu kılınmalıdır                          | DDoS saldırılarına karşı uygulamaları koruma | Hayır                     |
+    | Ayrıcalıklı kapsayıcılar kaçınılmalıdır                                     | Erişimi ve izinleri yönetme            | Hayır                     |
+    | Kapsayıcılar için sabit (salt okunurdur) kök dosya sistemi zorunlu kılınmalıdır     | Erişimi ve izinleri yönetme            | Hayır                     |
+    | Ayrıcalık yükseltme ile kapsayıcının önlenebilir olması gerekir                       | Erişimi ve izinleri yönetme            | Hayır                     |
+    | Kök kullanıcı olarak çalışan kapsayıcılar önlenebilir olmalıdır                           | Erişimi ve izinleri yönetme            | Hayır                     |
+    | Gizli ana bilgisayar ad alanlarını paylaşan kapsayıcıların önlenebilir olması gerekir              | Erişimi ve izinleri yönetme            | Hayır                     |
     | Kapsayıcılar için en az ayrıcalıklı Linux özellikleri zorlanmalıdır       | Erişimi ve izinleri yönetme            | **Evet**                |
     | Pod HostPath birimi takmaları kullanımı bilinen bir listeyle sınırlandırılmalıdır    | Erişimi ve izinleri yönetme            | **Evet**                |
     | Kapsayıcılar yalnızca izin verilen bağlantı noktalarında dinleme yapılmalıdır                              | Yetkisiz ağ erişimini kısıtla     | **Evet**                |
@@ -154,7 +154,6 @@ spec:
       labels:
         app: redis
       annotations:
-        apparmor.security.beta.kubernetes.io/pod: runtime/default
         container.apparmor.security.beta.kubernetes.io/redis: runtime/default
     spec:
       containers:

@@ -11,12 +11,12 @@ author: sopand
 manager: daveba
 ms.reviewer: dawoo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5a1cb71917fdb30ffccda21bedffe1c7f2a428c1
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 699ff88e4181dada5eacaa3f13469722cdf7ceaa
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105557964"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530456"
 ---
 # <a name="authentication-methods-activity"></a>Kimlik Doğrulama Yöntemleri Etkinliği 
 
@@ -34,7 +34,7 @@ Aşağıdaki izinlerle yerleşik ve özel roller, kimlik doğrulama yöntemleri 
 Aşağıdaki roller gerekli izinlere sahiptir:
 
 - Rapor okuyucu
-- Güvenlik Okuyucusu
+- Güvenlik okuyucusu
 - Genel okuyucu
 - Güvenlik operatörü
 - Güvenlik Yöneticisi
@@ -139,6 +139,6 @@ Kayıt ayrıntıları raporu, her kullanıcı için aşağıdaki bilgileri göst
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Kimlik doğrulama yöntemleri kullanım raporu API 'SI ile çalışma](/graph/api/resources/authenticationmethods-usage-insights-overview?view=graph-rest-beta)
+- [Kimlik doğrulama yöntemleri kullanım raporu API 'SI ile çalışma](/graph/api/resources/authenticationmethods-usage-insights-overview)
 - [Kuruluşunuz için kimlik doğrulama yöntemlerini seçme](concept-authentication-methods.md)
 - [Birleşik kayıt deneyimi](concept-registration-mfa-sspr-combined.md)

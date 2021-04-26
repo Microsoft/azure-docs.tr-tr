@@ -206,7 +206,7 @@
         - name: Akka Streams’i bir olay hub’ına bağlama
           href: event-hubs-kafka-akka-streams-tutorial.md
         - name: SSS - Kafka için Event Hubs
-          href: apache-kafka-frequently-asked-questions.md
+          href: apache-kafka-frequently-asked-questions.yml
     - name: Yönetme ve izleme
       items:
         - name: Azure İzleme ile Event Hubs’ı izleme
@@ -297,6 +297,8 @@
           href: 'https://pkg.go.dev/github.com/Azure/azure-event-hubs-go?tab=doc'
         - name: Yönetim kitaplığı
           href: 'https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/services/eventhub/mgmt/2017-04-01/eventhub?tab=doc'
+    - name: Azure CLI
+      href: /cli/azure/eventhubs
     - name: REST
       href: /rest/api/eventhub
     - name: Resource Manager şablonu
@@ -313,7 +315,7 @@
     - name: Microsoft Learn ile becerilerinizi geliştirin
       href: /learn/browse/?products=azure-event-hubs
     - name: SSS
-      href: event-hubs-faq.md
+      href: event-hubs-faq.yml
     - name: Azure Yol Haritası
       href: 'https://azure.microsoft.com/roadmap/?category=iot'
     - name: Fiyatlandırma

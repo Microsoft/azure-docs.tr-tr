@@ -3,12 +3,12 @@ title: Azure ağ kaynaklarını yeni aboneliğe veya kaynak grubuna taşıma
 description: Sanal ağları ve diğer ağ kaynaklarını yeni bir kaynak grubuna veya aboneliğe taşımak için Azure Resource Manager kullanın.
 ms.topic: conceptual
 ms.date: 10/16/2019
-ms.openlocfilehash: 0cd6887d3489f2ffede0f5e3d63533a33a6ccc04
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b7aaf01b696b13136a0f4077f315b137c8917906
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "75485240"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106120138"
 ---
 # <a name="move-guidance-for-networking-resources"></a>Ağ kaynakları için kılavuzu taşıma
 
@@ -16,7 +16,10 @@ Bu makalede, belirli senaryolar için sanal ağların ve diğer ağ kaynakların
 
 ## <a name="dependent-resources"></a>Bağımlı kaynaklar
 
-Bir sanal ağı taşırken bağımlı kaynaklarını da taşımanız gerekir. VPN ağ geçitleri için IP adreslerini, sanal ağ geçitlerini ve tüm ilişkili bağlantı kaynaklarını taşımanız gerekir. Yerel ağ geçitleri farklı bir kaynak grubunda olabilir.
+> [!NOTE]
+> Lütfen genel IP adresleriyle ilişkili VPN ağ geçitlerinin kaynak grupları veya abonelikler arasında şu anda taşınamayacak olduğunu unutmayın.
+
+Bir kaynağı taşırken, bağımlı kaynaklarını da (örn. genel IP adresleri, sanal ağ geçitleri, tüm ilişkili bağlantı kaynakları) taşımanız gerekir. Yerel ağ geçitleri farklı bir kaynak grubunda olabilir.
 
 Bir sanal makineyi bir ağ arabirimi kartıyla yeni bir aboneliğe taşımak için tüm bağımlı kaynakları taşımanız gerekir. Ağ arabirim kartının sanal ağını, sanal ağ için tüm diğer ağ arabirimi kartlarını ve VPN ağ geçitlerini taşıyın.
 

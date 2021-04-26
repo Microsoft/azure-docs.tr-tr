@@ -4,12 +4,12 @@ ms.author: erhopf
 ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/20/2020
-ms.openlocfilehash: fa0ec830bdd7cd15b2137f2937befe3892e62bc8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5c91007902f33bc3caf52bbf78eaf0348604eefc
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96183114"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107880045"
 ---
 > [!IMPORTANT]
-> TLS 1,2, bu hizmete yönelik tüm HTTP istekleri için de zorlanır. Daha fazla bilgi için bkz. Azure bilişsel [Hizmetler güvenliği](../articles/cognitive-services/cognitive-services-security.md).
+> [Aktarım Katmanı Güvenliği (TLS) 1,2](../articles/cognitive-services/cognitive-services-security.md?tabs=command-line%2Ccsharp#transport-layer-security-tls) artık bu hizmete YÖNELIK tüm http istekleri için zorlanır. Daha fazla bilgi için bkz. Azure bilişsel [Hizmetler güvenliği](../articles/cognitive-services/cognitive-services-security.md).

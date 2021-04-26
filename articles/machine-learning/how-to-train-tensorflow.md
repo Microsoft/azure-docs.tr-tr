@@ -10,12 +10,12 @@ author: mx-iao
 ms.date: 09/28/2020
 ms.topic: conceptual
 ms.custom: how-to
-ms.openlocfilehash: 583f588004f41fc07037e7f5e4ce75538a581c70
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 0eac999fa53679ef67c2a322bd8cc7841197d493
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102518339"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107819151"
 ---
 # <a name="train-tensorflow-models-at-scale-with-azure-machine-learning"></a>TensorFlow modellerini Azure Machine Learning ölçeklendirerek eğitme
 
@@ -361,6 +361,6 @@ Daha ayrıntılı Azure Machine Learning dağıtımı [nasıl](how-to-deploy-and
 
 Bu makalede, bir TensorFlow modeli eğitilmiş ve kaydettiniz ve dağıtım seçenekleri hakkında bilgi edindiniz. Azure Machine Learning hakkında daha fazla bilgi edinmek için bu makaleye bakın.
 
-* [Eğitim sırasında çalıştırma ölçümlerini izleyin](how-to-track-experiments.md)
+* [Eğitim sırasında çalıştırma ölçümlerini izleyin](how-to-log-view-metrics.md)
 * [Hiperparametreleri ayarlama](how-to-tune-hyperparameters.md)
 * [Azure 'da dağıtılmış derin öğrenme eğitimi için başvuru mimarisi](/azure/architecture/reference-architectures/ai/training-deep-learning)

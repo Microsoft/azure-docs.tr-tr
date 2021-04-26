@@ -212,8 +212,8 @@ Yukarıda gösterilen varlık yapısıyla, son ada göre aramayı etkinleştirme
 
 Aşağıdaki adımlarda, ikinci seçeneği kullanıyorsanız yeni bir çalışan eklerken izlemeniz gereken işlem ana hatlarıyla verilmiştir. Bu örnekte, KIMLIĞI 000152 olan bir çalışan ve satış departmanında soyadı Jones olan bir ad veriyoruz:  
 
-1. "Sales" **partitionkey** değerine ve "Jones" **rowkey** değerine sahip dizin varlığını alın. 2. adımda kullanmak üzere bu varlığın ETag öğesini kaydedin.  
-2. Yeni çalışan kimliğini (**partitionkey** değeri "Sales" ve **rowkey** değeri "000152") ekleyen bir varlık grubu işlemi (bir toplu işlem) oluşturun ve yeni çalışan kimliğini employeıdds alanındaki listeye ekleyerek Dizin varlığını (**partitionkey** değeri "Sales" ve **rowkey** değeri "Jones") güncelleştirir. Varlık grubu işlemleri hakkında daha fazla bilgi için bkz. varlık grubu Işlemleri.  
+1. "Sales&quot; **partitionkey** değerine ve &quot;Jones&quot; **rowkey** değerine sahip dizin varlığını alın. 2. adımda kullanmak üzere bu varlığın ETag öğesini kaydedin.  
+2. Yeni çalışan kimliğini (**partitionkey** değeri &quot;Sales&quot; ve **rowkey** değeri &quot;000152") ekleyen bir varlık grubu işlemi (bir toplu işlem) oluşturun ve yeni çalışan kimliğini employeıdds alanındaki listeye ekleyerek Dizin varlığını (**partitionkey** değeri "Sales" ve **rowkey** değeri "Jones") güncelleştirir. Varlık grubu işlemleri hakkında daha fazla bilgi için bkz. varlık grubu Işlemleri.  
 3. Bir iyimser eşzamanlılık hatası nedeniyle varlık grubu işlemi başarısız olursa (başka biri dizin varlığını değiştirmiştir), 1. adımda tekrar başlatmanız gerekir.  
 
 İkinci seçeneği kullanıyorsanız, bir çalışanı silmek için benzer bir yaklaşım kullanabilirsiniz. Üç varlığı güncelleştiren bir varlık grubu işlemi yürütmeniz gerektiğinden, çalışanın soyadını değiştirmek biraz daha karmaşıktır: çalışan varlığı, eski soyadı için Dizin varlığı ve yeni soyadı için Dizin varlığı. Daha sonra iyimser eşzamanlılık kullanarak güncelleştirmeleri gerçekleştirmek için kullanabileceğiniz ETag değerlerini almak için herhangi bir değişiklik yapmadan önce her bir varlığı almalısınız.  

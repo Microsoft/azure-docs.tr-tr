@@ -4,16 +4,16 @@ description: Bu makalede, Azure sanal makinesinde çalışan SQL Server Azure Ba
 ms.topic: article
 ms.service: virtual-machines
 ms.subservice: extensions
-author: dcurwin
-ms.author: dacurwin
+author: v-amallick
+ms.author: v-amallick
 ms.collection: windows
 ms.date: 07/05/2019
-ms.openlocfilehash: 46cc4b23ca7dd70da3f917a3399406480dc9fdbd
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: c10be941206dd60887c9d82025506d1ea15c51a2
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102557106"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107517258"
 ---
 # <a name="azure-backup-for-sql-server-running-in-azure-vm"></a>Azure VM 'de çalışan SQL Server için Azure Backup
 
@@ -114,4 +114,4 @@ Komut bu kaynağın bir **yedekleme kapsayıcısını** döndürür ve durum **k
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Azure SQL Server VM yedekleme sorunlarını giderme yönergeleri hakkında [daha fazla bilgi edinin](../../backup/backup-sql-server-azure-troubleshoot.md)
-- Azure sanal makinelerinde (VM 'Ler) çalışan ve Azure Backup hizmetini kullanan SQL Server veritabanlarının yedeklenmesi hakkında [genel sorular](../../backup/faq-backup-sql-server.md) .
+- Azure sanal makinelerinde (VM 'Ler) çalışan ve Azure Backup hizmetini kullanan SQL Server veritabanlarının yedeklenmesi hakkında [genel sorular](../../backup/faq-backup-sql-server.yml) .

@@ -6,12 +6,12 @@ ms.suite: integration
 ms.reviewer: logicappspm
 ms.topic: article
 ms.date: 11/06/2020
-ms.openlocfilehash: ec72431d927fd59677075e7adfdf7df171574882
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 44131ecf6fd3d8d2f07f0fe567fb924ac8621682
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104772952"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106110011"
 ---
 # <a name="overview-automate-deployment-for-azure-logic-apps-by-using-azure-resource-manager-templates"></a>Genel Bakış: Azure Resource Manager şablonları kullanarak Azure Logic Apps dağıtımı otomatikleştirin
 
@@ -67,7 +67,7 @@ Mantıksal uygulama şablonu için öncelikle bu şablon nesneleriyle çalışı
 |-----------|-------------|
 | `parameters` | Azure 'da dağıtım için kaynakları oluştururken ve özelleştirirken kullanılacak değerleri kabul etmek için [şablon parametrelerini](../azure-resource-manager/templates/template-syntax.md#parameters) bildirir. Örneğin, bu parametreler mantıksal uygulamanızın adı ve konumu, bağlantıları ve dağıtım için gereken diğer kaynaklarla ilgili değerleri kabul eder. Bu parametre değerlerini, bu konunun ilerleyen kısımlarında açıklanan bir [Parametreler dosyasında](#template-parameter-files)saklayabilirsiniz. Genel Ayrıntılar için bkz. [Parametreler-Kaynak Yöneticisi Şablon yapısı ve sözdizimi](../azure-resource-manager/templates/template-syntax.md#parameters). |
 | `resources` | Mantıksal uygulamanız, bağlantılarınız, Azure depolama hesaplarınız ve benzeri bir Azure Kaynak grubu oluşturmak veya güncelleştirmek ve dağıtmak için [kaynakları](../azure-resource-manager/templates/template-syntax.md#resources) tanımlar. Genel Ayrıntılar için bkz. [Resources-Kaynak Yöneticisi Şablon yapısı ve sözdizimi](../azure-resource-manager/templates/template-syntax.md#resources). |
-||||
+|||
 
 Mantıksal uygulama şablonunuz bu dosya adı biçimini kullanır:
 
@@ -331,11 +331,11 @@ Mantıksal uygulama kaynak tanımınıza özel öznitelikler şunlardır:
 | Öznitelik | Gerekli | Tür | Açıklama |
 |-----------|----------|------|-------------|
 | `state` | Evet | Dize | Mantıksal uygulamanızın dağıtım sırasındaki durumu, mantıksal uygulamanızın `Enabled` etkin olduğu ve mantıksal uygulamanızın etkin olmadığı `Disabled` anlamına gelir. Örneğin, mantıksal uygulamanızın canlı olmaya devam etmek, ancak taslak sürümü dağıtmak istiyorsanız, `Disabled` seçeneğini kullanabilirsiniz. |
-| `integrationAccount` | Hayır | Nesne | Mantıksal uygulamanız, işletmeden işletmeye (B2B) senaryolar için yapıtları depolayan bir tümleştirme hesabı kullanıyorsa, bu nesne `id` tümleştirme HESABıNıN kimliğini belirten özniteliğini içerir. |
+| `integrationAccount` | No | Nesne | Mantıksal uygulamanız, işletmeden işletmeye (B2B) senaryolar için yapıtları depolayan bir tümleştirme hesabı kullanıyorsa, bu nesne `id` tümleştirme HESABıNıN kimliğini belirten özniteliğini içerir. |
 | `definition` | Yes | Nesne | Mantıksal uygulamanızın temel alınan iş akışı tanımı, kod görünümünde görüntülenen ve bu nesne, [Iş akışı tanımlama dili Için şema başvurusu](../logic-apps/logic-apps-workflow-definition-language.md) içinde tam olarak açıklanmıştır. Bu iş akışı tanımında nesne, `parameters` mantıksal uygulama çalışma zamanında kullanılacak değerler için parametreler bildirir. Daha fazla bilgi için bkz. [Iş akışı tanımı ve parametreleri](#workflow-definition-parameters). <p><p>Mantıksal uygulamanızın iş akışı tanımındaki öznitelikleri görüntülemek için, Azure portal veya Visual Studio 'da "Tasarım görünümü" ne "kod görünümü" ne, yoksa [Azure Kaynak Gezgini](https://resources.azure.com)gibi bir araç kullanarak geçiş yapın. |
-| `parameters` | Hayır | Nesne | Mantıksal uygulama çalışma zamanında kullanılacak [iş akışı tanımı parametre değerleri](#workflow-definition-parameters) . Bu değerler için parametre tanımları, [iş akışı tanımınızın parametreler nesnesinin](#workflow-definition-parameters)içinde görünür. Ayrıca, mantıksal uygulamanız diğer hizmetlere ve sistemlere erişmek için [yönetilen bağlayıcılar](../connectors/apis-list.md) kullanıyorsa, bu nesne, `$connections` çalışma zamanında kullanılacak bağlantı değerlerini ayarlayan bir nesnesi içerir. |
-| `accessControl` | Hayır | Nesne | Mantıksal uygulamanıza yönelik olarak IP erişimini kısıtlama veya çalıştırma geçmişi girişleri ve çıkışları gibi güvenlik özniteliklerini belirtmek için. Daha fazla bilgi için bkz. [Logic Apps 'e güvenli erişim](../logic-apps/logic-apps-securing-a-logic-app.md). |
-| `runtimeConfiguration` | Hayır | Nesne | `operationOptions`Mantıksal uygulamanızın çalışma zamanında davranma biçimini denetleyen özellikleri belirtmek için. Örneğin, mantıksal uygulamanızı [yüksek aktarım hızı modunda](../logic-apps/logic-apps-limits-and-config.md#run-high-throughput-mode)çalıştırabilirsiniz. |
+| `parameters` | No | Nesne | Mantıksal uygulama çalışma zamanında kullanılacak [iş akışı tanımı parametre değerleri](#workflow-definition-parameters) . Bu değerler için parametre tanımları, [iş akışı tanımınızın parametreler nesnesinin](#workflow-definition-parameters)içinde görünür. Ayrıca, mantıksal uygulamanız diğer hizmetlere ve sistemlere erişmek için [yönetilen bağlayıcılar](../connectors/apis-list.md) kullanıyorsa, bu nesne, `$connections` çalışma zamanında kullanılacak bağlantı değerlerini ayarlayan bir nesnesi içerir. |
+| `accessControl` | No | Nesne | Mantıksal uygulamanıza yönelik olarak IP erişimini kısıtlama veya çalıştırma geçmişi girişleri ve çıkışları gibi güvenlik özniteliklerini belirtmek için. Daha fazla bilgi için bkz. [Logic Apps 'e güvenli erişim](../logic-apps/logic-apps-securing-a-logic-app.md). |
+| `runtimeConfiguration` | No | Nesne | `operationOptions`Mantıksal uygulamanızın çalışma zamanında davranma biçimini denetleyen özellikleri belirtmek için. Örneğin, mantıksal uygulamanızı [yüksek aktarım hızı modunda](../logic-apps/logic-apps-limits-and-config.md#run-high-throughput-mode)çalıştırabilirsiniz. |
 |||||
 
 Bu Logic Apps nesnelerinin kaynak tanımları hakkında daha fazla bilgi için bkz [. Microsoft. Logic Resource Types](/azure/templates/microsoft.logic/allversions):

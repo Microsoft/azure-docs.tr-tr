@@ -4,10 +4,10 @@ description: Azure Service Fabric tek başına veya şirket içi küme içinde v
 ms.topic: conceptual
 ms.date: 10/15/2017
 ms.openlocfilehash: d75c644be47ea44f6a8a6ccac91b785af0132833
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98791046"
 ---
 # <a name="secure-a-standalone-cluster-on-windows-by-using-x509-certificates"></a>X. 509.440 sertifikalarını kullanarak Windows 'da tek başına kümeyi güvenli hale getirme

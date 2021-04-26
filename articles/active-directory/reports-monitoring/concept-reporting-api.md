@@ -17,12 +17,12 @@ ms.date: 01/21/2021
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b6ef122cd36c3d4e9135876647075f22158df0d1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8e5a095c87e46839c7c120bdd6d8db1595164e57
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101653244"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532530"
 ---
 # <a name="get-started-with-the-azure-active-directory-reporting-api"></a>Azure Active Directory Reporting API 'SI ile çalışmaya başlama
 
@@ -49,9 +49,9 @@ Ayrıntılı yönergeler için [Azure Active Directory Raporlama API 'sine eriş
 
 Denetim günlükleri için Microsoft Graph API uç noktası `https://graph.microsoft.com/v1.0/auditLogs/directoryAudits` ve oturum açma işlemleri için MICROSOFT Graph API uç noktası `https://graph.microsoft.com/v1.0/auditLogs/signIns` . Daha fazla bilgi için bkz. [API başvurusunu denetleme](/graph/api/resources/directoryaudit) ve [oturum açma API başvurusu](/graph/api/resources/signIn).
 
-Microsoft Graph kullanarak güvenlik algılamalarından programlı erişim kazanmak için [kimlik koruması risk ALGıLAMA API](/graph/api/resources/identityriskevent?view=graph-rest-beta) 'sini kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory kimlik koruması ve Microsoft Graph ile çalışmaya başlama](../identity-protection/howto-identity-protection-graph-api.md). 
+Microsoft Graph kullanarak güvenlik algılamalarından programlı erişim kazanmak için [kimlik koruması risk ALGıLAMA API](/graph/api/resources/identityriskevent?view=graph-rest-beta&preserve-view=true) 'sini kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory kimlik koruması ve Microsoft Graph ile çalışmaya başlama](../identity-protection/howto-identity-protection-graph-api.md). 
   
-Kiracınızdaki sağlama olaylarına programlı erişim sağlamak için [sağlama GÜNLÜKLERI API](/graph/api/resources/provisioningobjectsummary?view=graph-rest-beta) 'sini de kullanabilirsiniz. 
+Kiracınızdaki sağlama olaylarına programlı erişim sağlamak için [sağlama GÜNLÜKLERI API](/graph/api/resources/provisioningobjectsummary?view=graph-rest-beta&preserve-view=true) 'sini de kullanabilirsiniz. 
 
 ## <a name="apis-with-microsoft-graph-explorer"></a>Microsoft Graph Explorer ile API 'Ler
 

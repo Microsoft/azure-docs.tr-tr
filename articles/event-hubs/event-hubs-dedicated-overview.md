@@ -3,12 +3,12 @@ title: Adanmış Olay Hub 'larına genel bakış-Azure Event Hubs | Microsoft Do
 description: Bu makalede, özel Azure Event Hubs, Olay Hub 'larının tek kiracılı dağıtımlarını sunan bir genel bakış sunulmaktadır.
 ms.topic: article
 ms.date: 10/23/2020
-ms.openlocfilehash: 721acf354c7d14c1362b4f760982af37d59115f9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: fe63b074bfdd01191d81dfb7024af5532a87a12f
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101715624"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310776"
 ---
 # <a name="overview-of-event-hubs-dedicated"></a>Event Hubs Ayrılmış genel bakış
 
@@ -71,4 +71,4 @@ Event Hubs Ayrılmış hakkında daha fazla bilgi edinmek için Microsoft satı�
 
 - [Azure portal aracılığıyla Event Hubs kümesi oluşturma](https://aka.ms/eventhubsclusterquickstart) 
 - [Event Hubs ayrılmış fiyatlandırması](https://azure.microsoft.com/pricing/details/event-hubs/). Ayrıca, Event Hubs Ayrılmış kapasitesi hakkında ek ayrıntılar almak için Microsoft satış temsilcinizle veya Microsoft Desteği başvurabilirsiniz.
-- [Event HUBS SSS](event-hubs-faq.md) , fiyatlandırma bilgilerini içerir ve Event Hubs hakkında sık sorulan bazı sorulara yanıt verir.
+- [Event HUBS SSS](event-hubs-faq.yml) , fiyatlandırma bilgilerini içerir ve Event Hubs hakkında sık sorulan bazı sorulara yanıt verir.

@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 03/11/2021
 ms.author: trbye
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 16158b4ecfb46ea9092fe9eeb31cc4dee259b1ab
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 28a044f42d0774d940521964b68b38a0f35bcdbb
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103573753"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107387964"
 ---
 # <a name="speech-service-containers-frequently-asked-questions-faq"></a>Konuşma hizmeti kapsayıcıları hakkında sık sorulan sorular (SSS)
 
@@ -536,76 +536,6 @@ auto result = synthesizer->SpeakTextAsync("{{{text2}}}").get();
 ```
 
  `SetSpeechSynthesisVoiceName`İşlev, güncelleştirilmiş bir metin okuma altyapısına sahip kapsayıcılar ses adı gerektirdiğinden çağrılır.
-
-<br>
-</details>
-
-<details>
-<summary>
-<b>Konuşma kapsayıcısı ile konuşma SDK 'sını nasıl kullanabilirim?</b>
-</summary>
-
-**Cevap:** Farklı kullanımlar için konuşma kapsayıcısında üç uç nokta bulunur ve bunlar konuşma modları olarak tanımlanır: aşağıya bakın:
-
-## <a name="speech-modes"></a>Konuşma modları
-
-[!INCLUDE [speech-modes](includes/speech-modes.md)]
-
-Bunlar farklı amaçlara yöneliktir ve farklı şekilde kullanılır.
-
-Python [örnekleri](https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/master/samples/python/console/speech_sample.py):
-- Özel bir uç nokta (yani, bir uç nokta parametresiyle) ile tek tanıma (etkileşimli mod) için `SpeechConfig` bkz `speech_recognize_once_from_file_with_custom_endpoint_parameters()` ..
-- Sürekli tanıma (konuşma modu) için ve yalnızca yukarıdaki gibi özel uç nokta kullanmak üzere değiştirin, bkz `speech_recognize_continuous_from_file()` ..
-- Yukarıdaki örneklerde (yalnızca gerçekten ihtiyaç duyuyorsanız) dikte etmeyi etkinleştirmek için, oluşturduktan sonra `speech_config` kodu ekleyin `speech_config.enable_dictation()` .
-
-Dikte etmeyi etkinleştirmek Için C# ' de `SpeechConfig.EnableDictation()` işlevi çağırın.
-
-### <a name="fromendpoint-apis"></a>`FromEndpoint` GetVersionEx
-| Dil | API ayrıntıları |
-|----------|:------------|
-| C++ | <a href="https://docs.microsoft.com/cpp/cognitive-services/speech/speechconfig#fromendpoint" target="_blank">`SpeechConfig::FromEndpoint` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| C# | <a href="https://docs.microsoft.com/dotnet/api/microsoft.cognitiveservices.speech.speechconfig.fromendpoint" target="_blank">`SpeechConfig.FromEndpoint` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| Java | <a href="https://docs.microsoft.com/java/api/com.microsoft.cognitiveservices.speech.speechconfig.fromendpoint" target="_blank">`SpeechConfig.fromendpoint` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| Objective-C | <a href="https://docs.microsoft.com/objectivec/cognitive-services/speech/spxspeechconfiguration#initwithendpoint" target="_blank">`SPXSpeechConfiguration:initWithEndpoint;` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| Python | <a href="https://docs.microsoft.com/python/api/azure-cognitiveservices-speech/azure.cognitiveservices.speech.speechconfig" target="_blank">`SpeechConfig;` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| JavaScript | Şu anda desteklenmiyor ve planlanmıyor. |
-
-<br>
-</details>
-
-<details>
-<summary>
-<b>Konuşma kapsayıcısı ile konuşma SDK 'sını nasıl kullanabilirim?</b>
-</summary>
-
-**Cevap:** Yeni bir API var `FromHost` . Bu, var olan API 'Leri değiştirmez veya değiştirmez. Yalnızca özel bir ana bilgisayar kullanarak bir konuşma yapılandırması oluşturmak için alternatif bir yol ekler.
-
-### <a name="fromhost-apis"></a>`FromHost` GetVersionEx
-
-| Dil | API ayrıntıları |
-|--|:-|
-| C# | <a href="https://docs.microsoft.com/dotnet/api/microsoft.cognitiveservices.speech.speechconfig.fromhost" target="_blank">`SpeechConfig.FromHost` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| C++ | <a href="https://docs.microsoft.com/cpp/cognitive-services/speech/speechconfig#fromhost" target="_blank">`SpeechConfig::FromHost` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| Java | <a href="https://docs.microsoft.com/java/api/com.microsoft.cognitiveservices.speech.speechconfig.fromhost" target="_blank">`SpeechConfig.fromHost` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| Objective-C | <a href="https://docs.microsoft.com/objectivec/cognitive-services/speech/spxspeechconfiguration#initwithhost" target="_blank">`SPXSpeechConfiguration:initWithHost;` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| Python | <a href="https://docs.microsoft.com/python/api/azure-cognitiveservices-speech/azure.cognitiveservices.speech.speechconfig" target="_blank">`SpeechConfig;` <span class="docon docon-navigate-external x-hidden-focus"></span></a> |
-| JavaScript | Şu anda desteklenmiyor |
-
-> Parametreler: Konak (zorunlu), abonelik anahtarı (hizmeti olmadan kullanacaksanız, isteğe bağlı).
-
-Ana bilgisayar için biçim `protocol://hostname:port` , `:port` isteğe bağlıdır (aşağıya bakın):
-- Kapsayıcı yerel olarak çalışıyorsa, ana bilgisayar adı olur `localhost` .
-- Kapsayıcı uzak bir sunucuda çalışıyorsa, bu sunucunun ana bilgisayar adını veya IPv4 adresini kullanın.
-
-Konuşmayı metne yönelik ana bilgisayar parametresi örnekleri:
-- `ws://localhost:5000` -bağlantı noktası 5000 kullanılarak yerel bir kapsayıcıya güvenli olmayan bağlantı
-- `ws://some.host.com:5000` -uzak sunucuda çalışan bir kapsayıcıya güvenli olmayan bağlantı
-
-Yukarıdaki Python örnekleri, ancak `host` yerine parametresini kullanın `endpoint` :
-
-```python
-speech_config = speechsdk.SpeechConfig(host="ws://localhost:5000")
-```
 
 <br>
 </details>

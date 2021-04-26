@@ -11,12 +11,12 @@ author: lostmygithubaccount
 ms.date: 06/25/2020
 ms.topic: conceptual
 ms.custom: how-to, data4ml, contperf-fy21q2
-ms.openlocfilehash: 5a3d16445c5a4276f07f4ed502b9830a10c4ff72
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 95fb2dfeea98b988eaeaea43efc4ea44fd6e33fd
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102518917"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107770318"
 ---
 # <a name="detect-data-drift-preview-on-datasets"></a>Veri kümelerinde veri kayması (Önizleme) Algıla
 
@@ -28,7 +28,7 @@ Azure Machine Learning veri kümesi izleyicileri (Önizleme) ile şunları yapab
 * Herhangi bir taban çizgisi ve hedef veri kümesi arasındaki farklılıklar için **yeni verileri izleyin** .
 * İstatistik özelliklerinin zaman içinde nasıl değişme şeklini izlemek için **verilerdeki özellikleri profil** oluşturma.
 * Olası sorunlara yönelik erken uyarılar için **veri kayması hakkında uyarı ayarlayın** . 
-* **[Yeni bir veri kümesi sürümü oluşturun] (verileri belirlerken nasıl yapılır** -------------------
+* Verilerin düzeltebilecekler çok fazla olduğunu belirlediğinizde **[Yeni bir veri kümesi sürümü oluşturun](how-to-version-track-datasets.md)** .
 
 İzlemeyi oluşturmak için bir [Azure Machine Learning veri kümesi](how-to-create-register-datasets.md) kullanılır. Veri kümesi bir zaman damgası sütunu içermelidir.
 

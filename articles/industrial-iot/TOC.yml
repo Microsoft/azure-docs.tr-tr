@@ -6,8 +6,6 @@
       href: overview-what-is-industrial-iot.md
     - name: OPC yayımcısı nedir?
       href: overview-what-is-opc-publisher.md
-    - name: Endüstriyel IoT Platformu nedir?
-      href: overview-what-is-industrial-iot-platform.md
 - name: Öğreticiler
   items:
     - name: OPC yayımcısı tek başına öğreticiler

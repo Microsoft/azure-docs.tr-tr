@@ -66,6 +66,12 @@
           href: automation-create-standalone-account.md
         - name: Resource Manager şablonu ile Otomasyon hesabı oluşturma
           href: quickstart-create-automation-account-template.md
+        - name: Yönetilen kimlik
+          items:
+            - name: Yönetilen kimliği etkinleştirme
+              href: enable-managed-identity-for-automation.md
+            - name: Yönetilen kimliği devre dışı bırak
+              href: disable-managed-identity-for-automation.md
         - name: Farklı Çalıştır hesabı
           items:
             - name: Farklı Çalıştır hesabı oluştur
@@ -86,6 +92,8 @@
           href: automation-role-based-access-control.md
         - name: Otomasyon hesabını başka bir aboneliğe taşıma
           href: how-to/move-account.md
+        - name: Otomasyon hesabını Sil
+          href: delete-account.md
         - name: Orchestrator’dan Azure Otomasyonu’na (Beta) geçiş
           href: automation-orchestrator-migration.md
     - name: Paylaşılan kaynaklar
@@ -114,7 +122,7 @@
           href: troubleshoot/shared-resources.md
     - name: Süreç otomasyonu
       items:
-        - name: PowerShell Galerisi’nde runbook’ları ve modülleri kullanma
+        - name: Mevcut runbook 'ları ve modülleri kullanma
           href: automation-runbook-gallery.md
         - name: PowerShell İş Akışı hakkında bilgi edinme
           href: automation-powershell-workflow.md
@@ -332,6 +340,8 @@
           href: ../data-factory/how-to-schedule-azure-ssis-integration-runtime.md#create-and-schedule-azure-automation-runbook-that-startsstops-azure-ssis-ir
 - name: Başvuru
   items:
+    - name: Azure CLI
+      href: /cli/azure/ext/automation/automation
     - name: Azure PowerShell Az
       href: /powershell/module/az.automation
     - name: Azure PowerShell AzureRM

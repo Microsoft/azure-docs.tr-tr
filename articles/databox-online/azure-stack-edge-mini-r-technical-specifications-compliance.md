@@ -6,14 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: conceptual
-ms.date: 03/01/2021
+ms.date: 04/12/2021
 ms.author: alkohli
-ms.openlocfilehash: 3a0b87f04e60fd56d543c7c7a752cd788e087c78
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b0f3b81ac12d0ae96dde0397bc01a4570d992ea9
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101727490"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310181"
 ---
 # <a name="azure-stack-edge-mini-r-technical-specifications"></a>Azure Stack Edge Mini Teknik özellikleri
 
@@ -24,31 +24,35 @@ Microsoft Azure Stack Edge Mini R cihazınızın donanım bileşenleri, bu makal
 
 Azure Stack Edge Mini R cihazının işlem ve bellek için aşağıdaki belirtimleri vardır:
 
-| Belirtim           | Değer                  |
-|-------------------------|------------------------|
-| CPU    | 16 çekirdekli CPU, Intel Xeon-D 1577 |
-| Bellek              | 48 GB RAM (2400 MT/sn)                  |
+| Belirtim           | Değer                           |
+|-------------------------|---------------------------------|
+| CPU türü                | Intel Xeon-D 1577               |
+| CPU: ham                | 16 toplam çekirdek, 32 Toplam vCPU  |
+| CPU: kullanılabilir             | 24 vCPU                        |
+| Bellek türü             | 16 GB 2400 MT/s SODıMM          |
+| Bellek: ham             | 48 GB RAM (3 x 16 GB)           |
+| Bellek: kullanılabilir          | 32 GB RAM                       |
 
 
 ## <a name="compute-acceleration-specifications"></a>İşlem hızlandırma belirtimleri
 
 Bir vizyon Işleme birimi (VPU), Kubernetes, derin sinir ağı ve bilgisayar Vision tabanlı uygulamalar sağlayan her Azure Stack Edge Mini R cihazına dahildir.
 
-| Belirtim           | Değer                  |
-|-------------------------|------------------------|
-| İşlem hızlandırma kartı         | Intel Movidius Myriad X VPU <br> Daha fazla bilgi için bkz. [Intel Movidius Myriad X VPU](https://www.movidius.com/MyriadX) |
+| Belirtim             | Değer                  |
+|---------------------------|------------------------|
+| İşlem hızlandırma kartı | Intel Movidius Myriad X VPU <br> Daha fazla bilgi için bkz. [Intel Movidius Myriad X VPU](https://www.movidius.com/MyriadX) |
 
 
 ## <a name="storage-specifications"></a>Depolama belirtimleri
 
 Azure Stack Edge Mini R cihazının 1 veri diski ve 1 önyükleme diski vardır (işletim sistemi depolama işlevi görür). Aşağıdaki tabloda, cihazın depolama kapasitesine ilişkin ayrıntılar gösterilmektedir.
 
-|     Belirtim                          |     Değer             |
-|--------------------------------------------|-----------------------|
-|    Katı hal sürücüleri (SSD 'Ler) sayısı     |    2 X 1 TB disk <br> Bir veri diski ve bir önyükleme diski                  |
-|    Tek SSD kapasitesi                     |    1 TB               |
-|    Toplam Kapasite (yalnızca veri)              |    1 TB              |
-|    Toplam kullanılabilir kapasite *                  |    ~ 750 GB        |
+|     Belirtim                          |     Değer                                              |
+|--------------------------------------------|--------------------------------------------------------|
+|    Katı hal sürücüleri (SSD 'Ler) sayısı     |    2 X 1 TB disk <br> Bir veri diski ve bir önyükleme diski |
+|    Tek SSD kapasitesi                     |    1 TB                                                |
+|    Toplam Kapasite (yalnızca veri)              |    1 TB                                                |
+|    Toplam kullanılabilir kapasite *                  |    ~ 750 GB                                            |
 
 **Bazı boşluklar iç kullanım için ayrılmıştır.*
 
@@ -85,9 +89,9 @@ Azure Stack Edge Mini R cihazı, güç kaynağı tarafından ücretlendirilen bi
 Ek bir [2590 pili](https://www.bren-tronics.com/bt-70791ck.html) , kart ücretleri arasında kullanımı genişletmek için yerleşik pille birlikte kullanılabilir. Bu pil, kullanım ülkesinde geçerli olan tüm güvenlik, ulaşım ve çevresel yönetmelikleriyle uyumlu olmalıdır.
 
 
-| Belirtim           | Değer                      |
-|-------------------------|----------------------------|
-| Yerleşik pil kapasitesi | 73 ÇS                    |
+| Belirtim            | Değer                      |
+|--------------------------|----------------------------|
+| Yerleşik pil kapasitesi | 73 WH                     |
 
 ## <a name="enclosure-dimensions-and-weight-specifications"></a>Kutu boyutları ve ağırlık belirtimleri
 
@@ -99,18 +103,18 @@ Aşağıdaki tabloda, Rugged Case for milimetre and inç ile birlikte, cihaz boy
 
 |     Kutu     |     Milimetre     |     Cm     |
 |-------------------|---------------------|----------------|
-|    Height         |    68            |    2,68          |
-|    Width          |    208          |      8,19          |
-|    Uzunluk          |   259           |    10,20          |
+|    Height         |    68               |    2,68        |
+|    Width          |    208              |      8,19      |
+|    Uzunluk          |   259              |    10,20       |
 
 
 ### <a name="enclosure-weight"></a>Kasa ağırlığı
 
 Aşağıdaki tabloda, pili dahil Cihaz ağırlığı listelenmektedir.
 
-|     Kutu                                 |     Ağırlık          |
-|-----------------------------------------------|---------------------|
-|    Cihazın toplam ağırlığı     |    7 lbs.          |
+|     Kutu                     |     Ağırlık          |
+|-----------------------------------|---------------------|
+|    Cihazın toplam ağırlığı     |     7 lbs           |
 
 ## <a name="enclosure-environment-specifications"></a>Muhafaza ortamı belirtimleri
 
@@ -118,7 +122,7 @@ Aşağıdaki tabloda, pili dahil Cihaz ağırlığı listelenmektedir.
 Bu bölümde sıcaklık, nem ve yükseklik gibi çevre duvarı ortamıyla ilgili belirtimler listelenmektedir.
 
 
-|     Belirtimler             |     Description                                                          |
+|     Belirtimler             |     Açıklama                                                          |
 |--------------------------------|--------------------------------------------------------------------------|
 |     Sıcaklık aralığı          |     0 – 43 ° C (işletimsel)                                              |
 |     Titreşimi                  |     MIL-STD-810 yöntemi 514,7 *<br> İşlem ı CAT 4, 20                  |

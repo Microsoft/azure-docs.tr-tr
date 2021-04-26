@@ -1,0 +1,24 @@
+### YamlMime:Landing
+title: Azure Sertifikalı cihaz belgeleri
+summary: Bu program, Azure 'da çalışmak üzere oluşturulan IoT cihazlarını kolayca farklılaştırmaya, yükseltmenize ve bulmaya yönelik bir duruyor.
+metadata:
+  title: Azure Sertifikalı cihaz programı
+  description: Bu program, Azure 'da çalışmak üzere oluşturulan IoT cihazlarını kolayca farklılaştırmaya, yükseltmenize ve bulmaya yönelik bir duruyor.
+  ms.service: certification
+  ms.topic: landing-page
+  author: cbroad
+  ms.author: cbroad
+  ms.date: 03/18/2021
+  ms.openlocfilehash: 3fa7e18388fc35eebdfdd0d0aec2be308765b4e1
+  ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
+  ms.translationtype: MT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 03/30/2021
+  ms.locfileid: "105970107"
+landingContent:
+- title: Azure Sertifikalı cihaz programı hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Sertifikalı cihaz programı nedir?
+      url: ./overview.md

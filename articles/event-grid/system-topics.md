@@ -3,12 +3,12 @@ title: Azure Event Grid sistem konuları
 description: Azure Event Grid içindeki Sistem konularını açıklar.
 ms.topic: conceptual
 ms.date: 09/24/2020
-ms.openlocfilehash: b1fbecb1e372602f9c252d43d2a1f93524ef1846
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ca59dd6bb99b9b7d06f0622e8c0cb4e4234e21ff
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99052974"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105733052"
 ---
 # <a name="system-topics-in-azure-event-grid"></a>Azure Event Grid sistem konuları
 Event Grid bir sistem konusu, Azure depolama ve Azure Event Hubs gibi Azure hizmetleri tarafından yayınlanan bir veya daha fazla olayı temsil eder. Örneğin, bir sistem konusu **tüm blob olaylarını** veya yalnızca **BLOB oluşturulmuş** ve **belirli bir depolama hesabı** için yayımlanan **BLOB silinen** olayları temsil edebilir. Bu örnekte, bir BLOB depolama hesabına yüklendiğinde Azure Storage hizmeti, Event Grid ' deki Sistem konusuna **BLOB tarafından oluşturulan** bir olay yayımlar, daha sonra olayı alan ve işleyen [abonelere](event-handlers.md) iletir. 
@@ -30,6 +30,7 @@ Bunlar üzerinde sistem konuları oluşturmayı destekleyen Azure hizmetlerinin 
 - [Azure Machine Learning](event-schema-machine-learning.md)
 - [Azure Haritalar](event-schema-azure-maps.md)
 - [Azure Media Services](event-schema-media-services.md)
+- [Azure İlkesi](./event-schema-policy.md)
 - [Azure kaynak grupları](event-schema-resource-groups.md)
 - [Azure Service Bus](event-schema-service-bus.md)
 - [Azure SignalR](event-schema-azure-signalr.md)

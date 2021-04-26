@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 03/16/2018
 ms.topic: conceptual
-ms.openlocfilehash: bbac794263fec176e03c7148d860c479a2ed9d39
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 88492d914b710c7a738dd6d7f501e22d490065b6
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "102501237"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833823"
 ---
 # <a name="author-graphical-runbooks-in-azure-automation"></a>Azure Otomasyonu 'nda grafik runbook 'ları yazma
 
@@ -328,19 +329,19 @@ Değerleri karşılaştırmak veya bir değerin belirtilen bir Düzenle eşleşi
 Örneğin, aşağıdaki koşul adlı bir etkinlikten sanal makinenin `Get-AzureVM` Şu anda durdurulmuş olup olmadığını belirler.
 
 ```powershell-interactive
-$ActivityOutput["Get-AzureVM"].PowerState –eq "Stopped"
+$ActivityOutput["Get-AzureVM"].PowerState -eq "Stopped"
 ```
 
 Aşağıdaki koşul, aynı sanal makinenin durdurulmuş dışında bir durumda olup olmadığını belirler.
 
 ```powershell-interactive
-$ActivityOutput["Get-AzureVM"].PowerState –ne "Stopped"
+$ActivityOutput["Get-AzureVM"].PowerState -ne "Stopped"
 ```
 
 Veya gibi [mantıksal bir işleç](/powershell/module/microsoft.powershell.core/about/about_logical_operators)kullanarak runbook 'inizdeki birden çok koşulu birleştirebilirsiniz `-and` `-or` . Örneğin, aşağıdaki koşul, önceki örnekteki sanal makinenin durdurulmuş veya durduruluyor durumunda olup olmadığını denetler.
 
 ```powershell-interactive
-($ActivityOutput["Get-AzureVM"].PowerState –eq "Stopped") -or ($ActivityOutput["Get-AzureVM"].PowerState –eq "Stopping")
+($ActivityOutput["Get-AzureVM"].PowerState -eq "Stopped") -or ($ActivityOutput["Get-AzureVM"].PowerState -eq "Stopping")
 ```
 
 ### <a name="use-hashtables"></a>Diyez tabloları kullanma

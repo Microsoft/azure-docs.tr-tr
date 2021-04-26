@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 02/17/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: 57862a450d313f5d8850b14047ecc3d25d6ba5c1
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 33417a9bda9ad4ce36dd6e14f74a53911f3c3473
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563693"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107587162"
 ---
 # <a name="azure-security-baseline-for-event-hubs"></a>Event Hubs için Azure Güvenlik temeli
 
@@ -743,7 +743,7 @@ Event Hubs verileri yakalamak için kullanılan Azure depolama hesabı için ge�
 
 - [Anahtarlar içeren bir Anahtar Kasası ayarlama](configure-customer-managed-key.md)
 
-- [Azure Depolama blobları için geçici silme](//azure/storage/blobs/storage-blob-soft-delete?tabs=azure-portal)
+- [Azure Depolama blobları için geçici silme](/azure/storage/blobs/soft-delete-blob-overview)
 
 **Sorumluluk**: Müşteri
 

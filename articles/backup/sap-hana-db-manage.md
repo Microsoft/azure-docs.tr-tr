@@ -4,10 +4,10 @@ description: Bu makalede, Azure sanal makinelerinde çalışan SAP HANA veritaba
 ms.topic: conceptual
 ms.date: 11/12/2019
 ms.openlocfilehash: 54d3341a83873ad3cc50815f04a0b252bb44438e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101703775"
 ---
 # <a name="manage-and-monitor-backed-up-sap-hana-databases"></a>Yedeklenen SAP HANA veritabanlarını yönetme ve izleme

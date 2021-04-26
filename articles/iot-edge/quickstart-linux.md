@@ -4,17 +4,17 @@ description: Bu hızlı başlangıçta, Linux üzerinde IoT Edge bir cihaz oluş
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 03/12/2021
+ms.date: 04/07/2021
 ms.topic: quickstart
 ms.service: iot-edge
 services: iot-edge
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 37f4a63d0a901fd70e0a60bb435efdaf08868616
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: cdc5dd2df0dc6ac682d37aea3328545fcb7e5ad2
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103463499"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728617"
 ---
 # <a name="quickstart-deploy-your-first-iot-edge-module-to-a-virtual-linux-device"></a>Hızlı başlangıç: ilk IoT Edge modülünüzü bir sanal Linux cihazına dağıtma
 
@@ -142,14 +142,14 @@ Bu bölüm, yeni bir sanal makine oluşturmak ve buna IoT Edge çalışma zaman�
 <!-- 1.2 -->
 :::moniker range=">=iotedge-2020-11"
 
-Önceden oluşturulmuş [ıotedge-VM-Deploy](https://github.com/Azure/iotedge-vm-deploy/tree/1.2.0-rc4) şablonuna dayalı IoT Edge cihazınızı oluşturmak IÇIN aşağıdaki CLI komutunu kullanın.
+Önceden oluşturulmuş [ıotedge-VM-Deploy](https://github.com/Azure/iotedge-vm-deploy/tree/1.2.0) şablonuna dayalı IoT Edge cihazınızı oluşturmak IÇIN aşağıdaki CLI komutunu kullanın.
 
 * Bash veya Cloud Shell kullanıcılar için, aşağıdaki komutu bir metin düzenleyicisine kopyalayın, yer tutucu metnini bilgilerinizi ile değiştirin ve sonra bash veya Cloud Shell pencerenize kopyalayın:
 
    ```azurecli-interactive
    az deployment group create \
    --resource-group IoTEdgeResources \
-   --template-uri "https://raw.githubusercontent.com/Azure/iotedge-vm-deploy/1.2.0-rc4/edgeDeploy.json" \
+   --template-uri "https://raw.githubusercontent.com/Azure/iotedge-vm-deploy/1.2.0/edgeDeploy.json" \
    --parameters dnsLabelPrefix='<REPLACE_WITH_VM_NAME>' \
    --parameters adminUsername='azureUser' \
    --parameters deviceConnectionString=$(az iot hub device-identity connection-string show --device-id myEdgeDevice --hub-name <REPLACE_WITH_HUB_NAME> -o tsv) \
@@ -162,7 +162,7 @@ Bu bölüm, yeni bir sanal makine oluşturmak ve buna IoT Edge çalışma zaman�
    ```azurecli
    az deployment group create `
    --resource-group IoTEdgeResources `
-   --template-uri "https://raw.githubusercontent.com/Azure/iotedge-vm-deploy/1.2.0-rc4/edgeDeploy.json" `
+   --template-uri "https://raw.githubusercontent.com/Azure/iotedge-vm-deploy/1.2.0/edgeDeploy.json" `
    --parameters dnsLabelPrefix='<REPLACE_WITH_VM_NAME>' `
    --parameters adminUsername='azureUser' `
    --parameters deviceConnectionString=$(az iot hub device-identity connection-string show --device-id myEdgeDevice --hub-name <REPLACE_WITH_HUB_NAME> -o tsv) `
@@ -263,32 +263,76 @@ Azure IoT Edge cihazınızı, IoT Hub'ına telemetri verileri gönderecek bir mo
 
 ![Diyagram-modülü buluttan cihaza dağıt](./media/quickstart-linux/deploy-module.png)
 
-[!INCLUDE [iot-edge-deploy-module](../../includes/iot-edge-deploy-module.md)]
+<!-- [!INCLUDE [iot-edge-deploy-module](../../includes/iot-edge-deploy-module.md)]
+
+Include content included below to support versioned steps in Linux quickstart. Can update include file once Windows quickstart supports v1.2 -->
+
+Azure IoT Edge temel yetilerinden biri, buluttan IoT Edge cihazlarınıza kod dağıtmakta. *IoT Edge modüller* , kapsayıcı olarak uygulanan yürütülebilir paketlerdir. Bu bölümde, [Azure Marketi 'nin IoT Edge modüller bölümünden](https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?page=1&subcategories=iot-edge-modules) doğrudan Azure IoT Hub ' den önceden oluşturulmuş bir modül dağıtırsınız.
+
+Bu bölümde dağıttığınız modül bir algılayıcısı taklit eder ve üretilen verileri gönderir. Bu modül, geliştirme ve test amacıyla sanal verileri kullanabilmeniz için IoT Edge kullanmaya başlarken yararlı bir kod parçasıdır. Bu modülün tam olarak ne yaptığını görmek isterseniz, [sanal sıcaklık algılayıcısı kaynak kodunu](https://github.com/Azure/iotedge/blob/027a509549a248647ed41ca7fe1dc508771c8123/edge-modules/SimulatedTemperatureSensor/src/Program.cs)görüntüleyebilirsiniz.
+
+Azure Marketi 'nden ilk modülünüzü dağıtmak üzere **modülleri ayarlama** sihirbazını başlatmak için bu adımları izleyin.
+
+1. [Azure Portal](https://portal.azure.com) oturum açın ve IoT Hub 'ınıza gidin.
+
+1. Soldaki menüden, **otomatik cihaz yönetimi** altında **IoT Edge**' yi seçin.
+
+1. Cihaz listesinden hedef cihazın cihaz KIMLIĞINI seçin.
+
+1. Üstteki çubukta **modülleri ayarla**' yı seçin.
+
+   ![Set modules seçen ekran görüntüsü.](./media/quickstart/select-set-modules.png)
+
+### <a name="modules"></a>Modül
+
+Sihirbazın ilk adımı, cihazınızda hangi modüllerin çalıştırılmasını istediğinizi seçin.
+
+**IoT Edge modüller** altında, **Ekle** açılan menüsünü açın ve ardından **Market modülü**' nü seçin.
+
+   ![Ekle açılan menüsünü gösteren ekran görüntüsü.](./media/quickstart/add-marketplace-module.png)
+
+**IoT Edge Module marketi**' nde, modülü arayın ve seçin `Simulated Temperature Sensor` . Modül, istenen **çalışma** durumu Ile IoT Edge modüller bölümüne eklenir.
 
 <!-- 1.2 -->
 :::moniker range=">=iotedge-2020-11"
 
-IoT Edge sürüm 1,2 genel önizlemede olduğundan, çalışma zamanı modüllerini genel önizleme sürümlerine de güncelleştirmek için bir ek adım vardır.
+EdgeHub ve edgeAgent modüllerinin ayarlarını açmak için **çalışma zamanı ayarları** ' nı seçin. Bu ayarlar bölümü, ortam değişkenleri ekleyerek veya oluşturma seçeneklerini değiştirerek çalışma zamanı modüllerini yönetebileceğiniz yerdir.
 
-1. Cihaz ayrıntıları sayfasında **modülleri yeniden ayarla** ' yı seçin.
+Hem edgeHub hem de edgeAgent modüllerinin **görüntü** alanını 1,2 sürüm etiketini kullanacak şekilde güncelleştirin. Örnek:
 
-1. **Çalışma zamanı ayarları**' nı seçin.
+* `mcr.microsoft.com/azureiotedge-hub:1.2`
+* `mcr.microsoft.com/azureiotedge-agent:1.2`
 
-1. IoT Edge hub ve IoT Edge aracı modülleri için **görüntü** alanını 1.2.0-RC4 sürüm etiketini kullanacak şekilde güncelleştirin. Örnek:
-
-   * `mcr.microsoft.com/azureiotedge-hub:1.2.0-rc4`
-   * `mcr.microsoft.com/azureiotedge-agent:1.2.0-rc4`
-
-1. Sanal sıcaklık algılayıcısı modülü hala modüller bölümünde listelenmelidir. Genel önizleme için bu modülde herhangi bir değişiklik yapmanız gerekmez.
-
-1. **Gözden geçir ve oluştur**’u seçin.
-
-1. **Oluştur**’u seçin.
-
-1. Cihaz ayrıntıları sayfasında, modül ayrıntılarının görüntünün genel önizleme sürümünü yansıtmasını görmek için **$edgeAgent** veya **$edgeHub** seçebilirsiniz.
+Çalışma zamanı modüllerine yaptığınız değişiklikleri uygulamak için **Kaydet** ' i seçin.
 
 :::moniker-end
-<!-- end 1.2 -->
+<!--end 1.2-->
+
+**İleri ' yi seçin:** Sihirbazın bir sonraki adımına devam etmek için yollar.
+
+   ![Modül eklendikten sonra sonraki adıma devam eden gösteren ekran görüntüsü.](./media/quickstart/view-temperature-sensor-next-routes.png)
+
+### <a name="routes"></a>Yollar
+
+**Rotalar** sekmesinde, varsayılan yolu, **route**' u kaldırın ve ardından İleri ' yi seçin. sihirbazın sonraki adımına devam etmek Için yeni ' yi **inceleyin ve oluştur** ' a tıklayın.
+
+   >[!Note]
+   >Yollar ad ve değer çiftleri kullanılarak oluşturulur. Bu sayfada iki yol görmeniz gerekir. Varsayılan yol, **route**, tüm iletileri IoT Hub gönderir (denir `$upstream` ). Azure Marketi 'nden modülü eklediğinizde, **SimulatedTemperatureSensorToIoTHub** adlı ikinci bir yol otomatik olarak oluşturulmuştur. Bu yol, sanal sıcaklık modülünden tüm iletileri IoT Hub gönderir. Bu durumda gereksiz olduğu için varsayılan yolu silebilirsiniz.
+
+   ![Sonraki adıma geçmek üzere varsayılan yolun kaldırılmasını gösteren ekran görüntüsü.](./media/quickstart/delete-route-next-review-create.png)
+
+### <a name="review-and-create"></a>Gözden geçir ve oluştur
+
+JSON dosyasını gözden geçirin ve ardından **Oluştur**' u seçin. JSON dosyası IoT Edge cihazınıza dağıttığınız tüm modülleri tanımlar. **SimulatedTemperatureSensor** modülünü ve iki çalışma zamanı modülünü, **edgeagent** ve **edgehub**'ı görürsünüz.
+
+   >[!Note]
+   >IoT Edge cihazına yeni bir dağıtım gönderdiğinizde cihazınıza hiçbir şey gönderilmez. Bunun yerine cihaz, IoT Hub'ı düzenli olarak sorgulayarak yeni yönergeler olup olmadığını denetler. Güncelleştirilmiş bir dağıtım bildirimi bulması halinde cihaz yeni dağıtımla ilgili bilgileri kullanarak buluttaki modül görüntülerini çeker ve modülleri yerel ortamda çalıştırmaya başlar. Bu işlem birkaç dakika sürebilir.
+
+Modül dağıtım ayrıntılarını oluşturduktan sonra, sihirbaz sizi cihaz ayrıntıları sayfasına döndürür. **Modüller** sekmesinde dağıtım durumunu görüntüleyin.
+
+Üç modül görmeniz gerekir: **$edgeAgent**, **$edgeHub** ve **SimulatedTemperatureSensor**. Bir veya daha fazla modülden **dağıtımda belirtilen** **Evet** varsa ancak **cihaz tarafından raporlanmadığında**, IoT Edge cihazınız hala başlatılıyor demektir. Birkaç dakika bekleyin ve sonra sayfayı yenileyin.
+
+   ![Dağıtılan modüller listesinde sanal sıcaklık algılayıcısı gösteren ekran görüntüsü.](./media/quickstart/view-deployed-modules.png)
 
 ## <a name="view-generated-data"></a>Oluşturulan verileri görüntüleme
 

@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: hafowler
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 18b43a99eb561cbfa340e0b3f318782bef2ca17c
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 11182b8331f218b970d867764f575ba5b7854d62
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105023444"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550702"
 ---
 # <a name="manage-device-identities-using-the-azure-portal"></a>Azure portalını kullanarak cihaz kimliklerini yönetme
 
@@ -66,7 +66,7 @@ Her iki seçenek de yöneticilere şunları yapabilme olanağı sağlar:
 > [!TIP]
 > - Karma Azure AD 'ye katılmış Windows 10 cihazlarının sahibi yok. Bir cihazı sahibine göre arıyorsanız ve bulamıyorsanız, cihaz KIMLIĞINE göre arama yapın.
 >
-> - KAYıTLı sütun altında "bekliyor" durumuna sahip "hibrit Azure AD 'ye katılmış" bir cihaz görürseniz, cihazın Azure AD Connect 'ten eşitlendiğini ve istemciden kayıt tamamlamayı beklediğini gösterir. [Hibrit Azure AD JOIN uygulamanızın nasıl planlanacağı](hybrid-azuread-join-plan.md)hakkında daha fazla bilgi edinin. Daha fazla bilgi için, [cihazlar sık sorulan sorular](faq.md)makalesinde bulunabilir.
+> - KAYıTLı sütun altında "bekliyor" durumuna sahip "hibrit Azure AD 'ye katılmış" bir cihaz görürseniz, cihazın Azure AD Connect 'ten eşitlendiğini ve istemciden kayıt tamamlamayı beklediğini gösterir. [Hibrit Azure AD JOIN uygulamanızın nasıl planlanacağı](hybrid-azuread-join-plan.md)hakkında daha fazla bilgi edinin. Daha fazla bilgi için, [cihazlar sık sorulan sorular](faq.yml)makalesinde bulunabilir.
 >
 > - Bazı iOS cihazlarında, kesme işaretleri içeren cihaz adları, kesme işareti gibi farklı karakterler kullanabilir. Bu nedenle, bu tür cihazları aramak biraz karmaşık değildir. arama sonuçlarını doğru şekilde görmüyorsanız, arama dizesinin eşleşen kesme işareti karakteri içerdiğinden emin olun.
 
@@ -123,7 +123,7 @@ BitLocker anahtarlarını görüntülemek veya kopyalamak için, cihazın sahibi
 - Yardım Masası Yöneticisi
 - Intune Hizmet Yöneticisi
 - Güvenlik Yöneticisi
-- Güvenlik Okuyucusu
+- Güvenlik okuyucusu
 
 ### <a name="device-list-filtering-preview"></a>Cihaz listesi filtrelemesi (Önizleme)
 

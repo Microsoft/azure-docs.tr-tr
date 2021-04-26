@@ -5,21 +5,39 @@
   href: overview.md
 - name: Hesap yönetimi
   items:
-    - name: Yeni bir İş Ortağı Merkezi hesabı oluşturma
-      href: partner-center-portal/create-account.md
-    - name: Hesabınızı yönetme
-      href: partner-center-portal/manage-account.md
-    - name: Şirket iş hesabı bulma veya oluşturma
-      href: partner-center-portal/company-work-accounts.md
-    - name: CPP’den İş Ortağı Merkezi’ne hesap geçişi
-      href: partner-center-portal/account-migration-from-cpp-to-pc.md
-    - name: Microsoft 'a bildirme
-      href: submit-legal-notice.md
+    - name: Genel hesap yönetimi
+      items:
+        - name: Yeni bir İş Ortağı Merkezi hesabı oluşturma
+          href: create-account.md
+        - name: Yeni yayımcılar ekleme
+          href: add-publishers.md
+        - name: Hesabınızı yönetme
+          href: manage-account.md
+        - name: Hesapları değiştir
+          href: switch-accounts.md
+        - name: Kiracılar yönetme
+          href: manage-tenants.md
+        - name: Şirket iş hesabı bulma veya oluşturma
+          href: company-work-accounts.md
+        - name: CPP’den İş Ortağı Merkezi’ne hesap geçişi
+          href: account-migration-from-cpp-to-pc.md
+        - name: Microsoft 'a bildirme
+          href: submit-legal-notice.md
+    - name: Kullanıcıları yönetme
+      items:
+        - name: Kullanıcı ekleme ve yönetme
+          href: add-manage-users.md
+        - name: Kullanıcı rolleri atama
+          href: user-roles.md
+        - name: Grupları yönetme
+          href: manage-groups.md
+        - name: Azure AD uygulamaları ekleme ve yönetme
+          href: manage-aad-apps.md
 - name: Kavramlar
   items:
     - name: Listeleme seçenekleri
       href: determine-your-listing-type.md
-    - name: Ticari markette işlem yapma
+    - name: Transact özellikleri
       href: marketplace-commercial-transaction-capabilities-and-considerations.md
     - name: Özel teklifler
       href: private-offers.md
@@ -43,25 +61,18 @@
           href: test-drive-hosted-detailed-config.md
         - name: Barındırılan test sürüşleri için Azure aboneliğini ayarlama
           href: test-drive-azure-subscription-setup.md
-    - name: Azure müşteri kullanım atısyonu
+    - name: Azure iş ortağı müşteri kullanımı ilişkilendirmesi
       href: azure-partner-customer-usage-attribution.md
     - name: Markete sunma seçenekleri
       items:
         - name: Market avantajlarınız
           href: gtm-your-marketplace-benefits.md
-          items: null
-        - name: Microsoft ile ortak satış yapma
-          items:
-            - name: Ortak satış genel bakış
-              href: co-sell-overview.md
-            - name: Ortak satış gereksinimleri
-              href: co-sell-requirements.md
-            - name: Ortak satışı yapılandırma
-              href: co-sell-configure.md
-            - name: Ortak satışın durumunu doğrulama
-              href: co-sell-status.md
-            - name: OCP GTM’den ortak satış çözümlerini geçirme
-              href: co-sell-solution-migration.md
+        - name: Ortak satış iş ortağı etkileşimi
+          href: marketplace-co-sell.md
+        - name: İş Ortağı Merkezi’nde ortak satış seçeneği
+          href: commercial-marketplace-co-sell.md
+        - name: OCP GTM’den ortak satış çözümlerini geçirme
+          href: co-sell-solution-migration.md
         - name: CSP İş Ortakları aracılığıyla perakende satış
           href: cloud-solution-providers.md
         - name: Program ekleme kılavuzunu bağlama
@@ -188,20 +199,32 @@
           href: create-consulting-service-pricing-availability.md
     - name: Dynamics 365 teklifleri
       items:
-        - name: Dynamics 365 teklifi planlama
-          href: appsource-offer-publishing-guide.md
-        - name: Dynamics 365 teklifi oluşturma ve yayımlama
+        - name: Teklifinizi planlayın
+          href: marketplace-dynamics-365.md
+        - name: Power Apps teklifi & bir müşteri katılımı oluşturma
           items:
-            - name: Dynamics 365 Customer Engagement ve Power Apps teklifi oluşturma
-              href: partner-center-portal/create-new-customer-engagement-offer.md
+            - name: Teklifi oluşturma
+              href: dynamics-365-customer-engage-offer-setup.md
+            - name: Özellikler
+              href: dynamics-365-customer-engage-properties.md
+            - name: Teklif listesi
+              href: dynamics-365-customer-engage-offer-listing.md
+            - name: Kullanılabilirlik
+              href: dynamics-365-customer-engage-availability.md
+            - name: Teknik yapılandırma
+              href: dynamics-365-customer-engage-technical-configuration.md
+            - name: Ek içerik
+              href: dynamics-365-customer-engage-supplemental-content.md
+            - name: İnceleme ve yayımlama
+              href: dynamics-365-customer-engage-review-publish.md
+        - name: Işlem teklifi oluşturma
+          items:
             - name: Dynamics 365 for Operations teklifi oluşturma
-              items:
-                - name: Dynamics 365 for Operations teklifi oluşturma
-                  href: partner-center-portal/create-new-operations-offer.md
-                - name: İşlevsel doğrulama
-                  href: dynamics-365-finance-operations-functional-validation.md
-            - name: Dynamics 365 Business Central teklifi oluşturma
-              href: partner-center-portal/create-new-business-central-offer.md
+              href: partner-center-portal/create-new-operations-offer.md
+            - name: İşlevsel doğrulama
+              href: dynamics-365-finance-operations-functional-validation.md
+        - name: Iş Merkezi teklifi oluşturma
+          href: partner-center-portal/create-new-business-central-offer.md
     - name: IoT Edge modül teklifleri
       items:
         - name: IoT Edge modülü teklifi planlama
@@ -210,8 +233,6 @@
           href: partner-center-portal/azure-iot-edge-module-creation.md
         - name: IoT Edge modülü teknik varlıklarını hazırlama
           href: partner-center-portal/create-iot-edge-module-asset.md
-        - name: Sertifika öncesi denetim listesi
-          href: iot-edge-checklist.md
     - name: Yönetilen Hizmet teklifleri
       items:
         - name: Yönetilen Hizmet teklifi planlama
@@ -310,48 +331,6 @@
       href: partner-center-portal/downloads-dashboard.md
     - name: Derecelendirme ve incelemeler panosu
       href: partner-center-portal/ratings-reviews.md
-    - name: Analiz için programlı erişim
-      items:
-        - name: başlarken
-          href: analytics-get-started.md
-        - name: Programlı erişim önkoşulları
-          href: analytics-prerequisites.md
-        - name: Programlı erişim paradigması
-          href: analytics-programmatic-access.md
-        - name: İlk API çağrısını yapın
-          href: analytics-make-your-first-api-call.md
-        - name: Sistem sorgularının listesi
-          href: analytics-system-queries.md
-        - name: Örnek sorgular
-          href: analytics-sample-queries.md
-        - name: Örnek uygulama
-          href: analytics-sample-application.md
-        - name: Özel sorgu belirtimi
-          href: analytics-custom-query-specification.md
-        - name: Programlı analiz SSS
-          href: analytics-programmatic-faq.md
-        - name: Analytics API başvurusu
-          items:
-            - name: API listesi
-              href: analytics-available-apis.md
-            - name: Tüm veri kümelerini al
-              href: analytics-api-get-all-datasets.md
-            - name: Rapor sorguları al API 'SI
-              href: analytics-api-get-report-queries.md
-            - name: Rapor sorguları API 'sini Sil
-              href: analytics-api-delete-report-queries.md
-            - name: Rapor sorguları API 'sini deneyin
-              href: analytics-api-try-report-queries.md
-            - name: Rapor API 'SI al
-              href: analytics-api-get-report.md
-            - name: Rapor API 'sini Güncelleştir
-              href: analytics-api-update-report.md
-            - name: Rapor API 'sini Sil
-              href: analytics-api-delete-report.md
-            - name: Rapor yürütmeleri API 'sini Duraklat
-              href: analytics-api-pause-report-executions.md
-            - name: Rapor yürütmeleri API 'sini sürdürür
-              href: analytics-api-resume-report-executions.md
     - name: Tarifeli faturalandırma anormalilerini yönetin
       href: anomaly-detection.md
     - name: Analiz hakkındaki yaygın sorular
@@ -366,6 +345,10 @@
       href: /legal/marketplace/rating-review-policies?context=/azure/marketplace/context/context
     - name: Azure Market koşulları
       href: /legal/marketplace/terms?context=/azure/marketplace/context/context
+    - name: Microsoft Publisher Sözleşmesi
+      href: /legal/marketplace/msft-publisher-agreement
+    - name: Microsoft Publisher sözleşmesi için değişiklik geçmişi
+      href: /legal/marketplace/mpa-change-history
 - name: Başvuru
   items:
     - name: CPP API başvurusu
@@ -448,8 +431,6 @@
       href: commercial-marketplace-co-sell-countries.md
     - name: Ortak satış eyalet kodları
       href: commercial-marketplace-co-sell-states.md
-    - name: Başvuru mimarisi diyagramı
-      href: reference-architecture-diagram.md
     - name: Kategoriler ve alt kategoriler
       href: categories.md
     - name: Desteklenen HTML etiketleri

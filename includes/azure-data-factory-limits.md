@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 11/16/2020
 ms.author: chez
 ms.custom: include file
-ms.openlocfilehash: 10aa9b06af439fe701c53ef736ec691167560f95
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 96c67327a8272a02e677cc40b46c3177e470b684
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102109312"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106126082"
 ---
 Azure Data Factory, müşteri aboneliklerinin diğer iş yüklerinden korunduğundan emin olmak için aşağıdaki varsayılan sınırlara sahip çok kiracılı bir hizmettir. Sınırlandırmaları aboneliğinizin en büyük sınırına yükseltmek için desteğe başvurun.
 
@@ -49,6 +49,7 @@ Azure Data Factory, müşteri aboneliklerinin diğer iş yüklerinden korunduğu
 | Tümleştirme çalışma zamanı başına eşzamanlı veri akışı sayısı | 50 | [Desteğe başvurun](https://azure.microsoft.com/blog/2014/06/04/azure-limits-quotas-increase-requests/). |
 | Her fabrika için Kullanıcı başına eşzamanlı veri akışı hata ayıklama oturumu sayısı | 3 | 3 |
 | Veri akışı Azure IR TTL sınırı | 4 saat |  4 saat |
+| Bir fabrikada meta veri varlık boyutu sınırı | 2 GB | [Desteğe başvurun](https://azure.microsoft.com/blog/2014/06/04/azure-limits-quotas-increase-requests/). |
 
 <sup>1</sup> veri tümleştirme birimi (Diu), buluttan buluta kopyalama işleminde kullanılır, [veri tümleştirme birimlerinden (sürüm 2)](../articles/data-factory/copy-activity-performance.md#data-integration-units)daha fazla bilgi edinin. Faturalandırma hakkında bilgi için bkz. [Azure Data Factory fiyatlandırması](https://azure.microsoft.com/pricing/details/data-factory/).
 

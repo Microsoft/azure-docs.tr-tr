@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.author: mbaldwin
 ms.date: 08/06/2019
 ms.custom: seodec18
-ms.openlocfilehash: 81c026893c3185c6c9f960cdb6acb2d0c2d49cc4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a1ea83dc62c2752e34584b89de2cdb6dbde3dfa0
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104580360"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443927"
 ---
 # <a name="azure-disk-encryption-for-linux-vms"></a>Linux VM'leri için Azure Disk Şifrelemesi 
 
@@ -71,7 +71,8 @@ Azure tarafından onaylanan Linux sunucu dağıtımları, Azure disk şifrelemes
 | RedHat | RHEL 8-LVM | 8-LVM | RedHat: RHEL: 8-LVM: latest | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
 | RedHat | RHEL 8,2 | 8.2 | RedHat: RHEL: 8.2: en son | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
 | RedHat | RHEL 8.1 | 8.1 | RedHat: RHEL: 8.1: latest | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
-| RedHat | RHEL 7-LVM | 7-LVM | RedHat: RHEL: 7-LVM: 7.8.2020111201 | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
+| RedHat | RHEL 7-LVM | 7-LVM | RedHat: RHEL: 7-LVM: 7.9.2020111202 | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
+| RedHat | RHEL 7,9 | 7_9 | RedHat: RHEL: 7_9: en son | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
 | RedHat | RHEL 7,8 | 7.8 | RedHat: RHEL: 7,8: latest | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
 | RedHat | RHEL 7,7 | 7.7 | RedHat: RHEL: 7.7: latest | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
 | RedHat | RHEL 7,6 | 7.6 | RedHat: RHEL: 7.6: latest | İşletim sistemi ve veri diski (aşağıdaki nota bakın) |
@@ -84,8 +85,9 @@ Azure tarafından onaylanan Linux sunucu dağıtımları, Azure disk şifrelemes
 | OpenLogic | CentOS 8-LVM | 8-LVM | OpenLogic: CentOS-LVM: 8-LVM: en son | İşletim sistemi ve veri diski |
 | OpenLogic | CentOS 8,2 | 8_2 | OpenLogic: CentOS: 8_2: latest | İşletim sistemi ve veri diski |
 | OpenLogic | CentOS 8,1 | 8_1 | OpenLogic: CentOS: 8_1: en son | İşletim sistemi ve veri diski |
-| OpenLogic | CentOS 7-LVM | 7-LVM | OpenLogic: CentOS-LVM: 7-LVM: 7.8.2020111100 | İşletim sistemi ve veri diski |
-| OpenLogic | CentOS 7,8 | 7.8 | OpenLogic: CentOS: 7_8: en son | İşletim sistemi ve veri diski |
+| OpenLogic | CentOS 7-LVM | 7-LVM | OpenLogic: CentOS-LVM: 7-LVM: 7.9.2021020400 | İşletim sistemi ve veri diski |
+| OpenLogic | CentOS 7,9 | 7_9 | OpenLogic: CentOS: 7_9: en son | İşletim sistemi ve veri diski |
+| OpenLogic | CentOS 7,8 | 7_8 | OpenLogic: CentOS: 7_8: en son | İşletim sistemi ve veri diski |
 | OpenLogic | CentOS 7,7 | 7.7 | OpenLogic: CentOS: 7.7: latest | İşletim sistemi ve veri diski |
 | OpenLogic | CentOS 7,6 | 7.6 | OpenLogic: CentOS: 7.6: latest | İşletim sistemi ve veri diski |
 | OpenLogic | CentOS 7.5 | 7,5 | OpenLogic: CentOS: 7.5: en son | İşletim sistemi ve veri diski |
@@ -149,7 +151,7 @@ Aşağıdaki tabloda, Azure disk şifrelemesi belgelerinde kullanılan bazı yay
 | Terminoloji | Tanım |
 | --- | --- |
 | Azure Key Vault | Key Vault, Federal bilgi Işleme standartları (FIPS) tarafından doğrulanan donanım güvenlik modüllerini temel alan bir şifreleme, anahtar yönetim hizmetidir. Bu standartlar, şifreleme anahtarlarınızı ve hassas gizli dizileri korumaya yardımcı olur. Daha fazla bilgi için bkz. [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) belgeleri ve [Azure disk şifrelemesi için bir Anahtar Kasası oluşturma ve yapılandırma](disk-encryption-key-vault.md). |
-| Azure CLI’si | [Azure CLI,](/cli/azure/install-azure-cli) Azure kaynaklarını komut satırından yönetmek ve yönetmek için iyileştirilmiştir.|
+| Azure CLI | [Azure CLI,](/cli/azure/install-azure-cli) Azure kaynaklarını komut satırından yönetmek ve yönetmek için iyileştirilmiştir.|
 | DM-Crypt |[Dm-crypt](https://gitlab.com/cryptsetup/cryptsetup/wikis/DMCrypt) , Linux sanal makinelerinde disk şifrelemeyi etkinleştirmek Için kullanılan Linux tabanlı, saydam disk şifreleme alt sistemidir. |
 | Anahtar şifreleme anahtarı (KEK) | Gizli anahtarı korumak veya kaydırmak için kullanabileceğiniz asimetrik anahtar (RSA 2048). Donanım güvenlik modülü (HSM) korumalı bir anahtar veya yazılımla korunan anahtar sağlayabilirsiniz. Daha fazla bilgi için bkz. [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) belgeleri ve [Azure disk şifrelemesi için bir Anahtar Kasası oluşturma ve yapılandırma](disk-encryption-key-vault.md). |
 | PowerShell cmdlet'leri | Daha fazla bilgi için bkz. [Azure PowerShell cmdlet 'leri](/powershell/azure/). |

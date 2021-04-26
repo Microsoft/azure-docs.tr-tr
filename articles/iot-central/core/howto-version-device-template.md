@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 ms.custom: device-developer
-ms.openlocfilehash: 93545c63013c95e3db498b079061da3d9b189efd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 03d4b0e43c9f692b90f4ab5d4d136dac92b74de6
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95995769"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107715055"
 ---
 # <a name="create-a-new-device-template-version"></a>Yeni bir cihaz şablonu sürümü oluştur
 
@@ -86,7 +86,7 @@ Bir cihaz şablonunu sürüm için:
 
 ## <a name="version-an-interface"></a>Bir arabirim sürümü
 
-Bir arabirimin sürümü oluşturma, önceden oluşturduğunuz arabirim içindeki özellikleri eklemenize, güncelleştirmenize ve kaldırmanıza olanak sağlar.
+Bir arabirimin sürümü oluşturma, daha önce oluşturmuş olduğunuz arabirim içinde özellik eklemenize ve güncelleştirmenize olanak tanır.
 
 Bir arabirimi sürüm için:
 

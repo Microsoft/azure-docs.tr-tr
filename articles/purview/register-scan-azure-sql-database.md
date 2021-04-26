@@ -7,12 +7,12 @@ ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: tutorial
 ms.date: 10/02/2020
-ms.openlocfilehash: 74a8bc4209696682c294bccab450d25ae86e3645
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 9873ec2113c0c5704ccca4fa10daf6ac8d572989
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105643923"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107440"
 ---
 # <a name="register-and-scan-an-azure-sql-database"></a>Azure SQL veritabanını kaydetme ve tarama
 
@@ -28,7 +28,8 @@ Azure SQL veritabanı veri kaynağı aşağıdaki işlevleri destekler:
 
 ### <a name="known-limitations"></a>Bilinen sınırlamalar
 
-Azure purview, Azure SQL veritabanı 'nda [görünümlerin](/sql/relational-databases/views/views?view=azuresqldb-current&preserve-view=true) taranmasını desteklemez.
+> * Azure purview, Azure SQL veritabanı 'nda [görünümlerin](/sql/relational-databases/views/views?view=azuresqldb-current&preserve-view=true) taranmasını desteklemez.
+> * Azure purview, şema sekmesinde 300 sütundan fazlasını desteklemez ve "ek sütunlar-kesildi" olarak gösterilir. 
 
 ## <a name="prerequisites"></a>Önkoşullar
 

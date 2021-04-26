@@ -15,12 +15,12 @@ ms.workload: iaas-sql-server
 ms.date: 03/25/2021
 ms.author: dpless
 ms.reviewer: jroth
-ms.openlocfilehash: 001a9a15c259d0b0d73eec9c9a39ad7c27f26721
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 23e006c637285ad484e98b23b2a9f506156f519c
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105572579"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389732"
 ---
 # <a name="storage-performance-best-practices-for-sql-server-on-azure-vms"></a>Depolama: Azure VM 'lerinde SQL Server için en iyi performans uygulamaları
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
@@ -53,7 +53,7 @@ Makalenin geri kalanının daha ayrıntılı bir şekilde ele aldığı depolama
 - [Kredi tabanlı disk](../../../virtual-machines/disk-bursting.md#credit-based-bursting) patlaması (P1-P20) yalnızca daha küçük geliştirme/test iş yükleri ve departman sistemleri için düşünülmelidir.
 - Depolama hesabını SQL Server VM aynı bölgede sağlayın. 
 - Azure coğrafi olarak yedekli depolamayı (coğrafi çoğaltma) devre dışı bırakın ve depolama hesabında LRS (yerel yedekli depolama) kullanın.
-- Veri diskinizi, geçici `D:\` sürücü dışında (varsayılan 4 KB 'ye sahiptir) bir sürücüye yerleştirilmiş tüm veri dosyaları için 64 KB ayırma birimi boyutu kullanacak şekilde biçimlendirin. Azure Marketi aracılığıyla dağıtılan SQL Server VM 'Ler, depolama havuzu boyutu 64 KB olarak ayarlanan ayırma birimi boyutu ve ayırma ile biçimlendirilen veri disklerinde gelir. 
+- Veri diskinizi, geçici `D:\` sürücü dışında (varsayılan 4 KB 'ye sahiptir) bir sürücüye yerleştirilmiş tüm veri dosyalarının 64 KB blok boyutunu (ayırma birim boyutu) kullanacak şekilde biçimlendirin. Azure Marketi aracılığıyla dağıtılan SQL Server VM 'Ler, depolama havuzu 64 KB olarak ayarlanan bir blok boyutu ve ayırma ile biçimlendirilen veri disklerinde gelir. 
 
 Depolama denetim listesini başkalarıyla karşılaştırmak için, kapsamlı [performans en iyi yöntemleri denetim listelerine](performance-guidelines-best-practices-checklist.md)bakın. 
 

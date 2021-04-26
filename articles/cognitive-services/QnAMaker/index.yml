@@ -11,12 +11,12 @@ metadata:
   services: cognitive-services
   title: Soru-Cevap Oluşturma Belgeleri
   description: Soru-Cevap Oluşturma, verilerinizi temel alan bir sohbet ve soru-cevap katmanı oluşturan bulut tabanlı bir API hizmetidir. Soru-Cevap Oluşturma, SSS belgeleri, URL'ler ve ürün kılavuzları gibi yarı yapılandırılmış içeriklerinizden bir soru cevap hizmeti oluşturmanızı sağlar. Soru-Cevap Oluşturma hizmeti, kullanıcılarınızın doğal dil sorularını Bilgi Bankanızda bulunan en iyi cevapla eşleştirerek cevap verir.
-  ms.openlocfilehash: d993dfcc4d486190e2501940465598b53808b965
-  ms.sourcegitcommit: d135e9a267fe26fbb5be98d2b5fd4327d355fe97
+  ms.openlocfilehash: 05ea6890e9b02c82bfca563108c92ed00e0f759b
+  ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/10/2021
-  ms.locfileid: "102613893"
+  ms.lasthandoff: 04/20/2021
+  ms.locfileid: "107766888"
 landingContent:
 - title: Soru-Cevap Oluşturma hakkında
   linkLists:
@@ -109,7 +109,7 @@ landingContent:
     - text: Azure PowerShell
       url: /powershell/module/az.cognitiveservices/#cognitive_services
     - text: Azure Komut Satırı Arabirimi (CLI)
-      url: /cli/azure/cognitiveservices#az-cognitiveservices-list
+      url: /cli/azure/cognitiveservices#az_cognitiveservices_list
 - title: Yardım ve geri bildirim
   linkLists:
   - linkListType: reference

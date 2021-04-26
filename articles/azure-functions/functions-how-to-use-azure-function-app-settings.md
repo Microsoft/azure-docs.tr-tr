@@ -4,13 +4,13 @@ description: Azure Işlevleri 'nde işlev uygulaması ayarlarını yapılandırm
 ms.assetid: 81eb04f8-9a27-45bb-bf24-9ab6c30d205c
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.custom: cc996988-fb4f-47, devx-track-azurecli
-ms.openlocfilehash: 5080d16a7b14506b24e07e2ee4ba862c645f83a8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: cc996988-fb4f-47, devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 6775fdf8d5174600344f3c7177a3130ef63e8f76
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98875458"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832689"
 ---
 # <a name="manage-your-function-app"></a>İşlev uygulamanızı yönetme 
 
@@ -46,14 +46,14 @@ Uygulama ayarlarını bulmak için [Azure Portal kullanmaya başlama](#get-start
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azurecli)
 
-[`az functionapp config appsettings list`](/cli/azure/functionapp/config/appsettings#az-functionapp-config-appsettings-list)Komut, aşağıdaki örnekte olduğu gibi var olan uygulama ayarlarını döndürür:
+[`az functionapp config appsettings list`](/cli/azure/functionapp/config/appsettings#az_functionapp_config_appsettings_list)Komut, aşağıdaki örnekte olduğu gibi var olan uygulama ayarlarını döndürür:
 
 ```azurecli-interactive
 az functionapp config appsettings list --name <FUNCTION_APP_NAME> \
 --resource-group <RESOURCE_GROUP_NAME>
 ```
 
-[`az functionapp config appsettings set`](/cli/azure/functionapp/config/appsettings#az-functionapp-config-appsettings-set)Komut bir uygulama ayarı ekler veya güncelleştirir. Aşağıdaki örnek, adında bir anahtar ve değeri olan bir ayar oluşturur `CUSTOM_FUNCTION_APP_SETTING` `12345` :
+[`az functionapp config appsettings set`](/cli/azure/functionapp/config/appsettings#az_functionapp_config_appsettings_set)Komut bir uygulama ayarı ekler veya güncelleştirir. Aşağıdaki örnek, adında bir anahtar ve değeri olan bir ayar oluşturur `CUSTOM_FUNCTION_APP_SETTING` `12345` :
 
 
 ```azurecli-interactive
@@ -260,7 +260,7 @@ Modern tarayıcılar istemcide kötü amaçlı kod yürütmeyi engellemek için 
 
 Joker karakteri ( `*` ) kullanıldığında, diğer tüm etki alanları yok sayılır. 
 
-[`az functionapp cors add`](/cli/azure/functionapp/cors#az-functionapp-cors-add)İzin verilen çıkış noktaları listesine bir etki alanı eklemek için komutunu kullanın. Aşağıdaki örnek contoso.com etki alanını ekler:
+[`az functionapp cors add`](/cli/azure/functionapp/cors#az_functionapp_cors_add)İzin verilen çıkış noktaları listesine bir etki alanı eklemek için komutunu kullanın. Aşağıdaki örnek contoso.com etki alanını ekler:
 
 ```azurecli-interactive
 az functionapp cors add --name <FUNCTION_APP_NAME> \
@@ -268,9 +268,9 @@ az functionapp cors add --name <FUNCTION_APP_NAME> \
 --allowed-origins https://contoso.com
 ```
 
-[`az functionapp cors show`](/cli/azure/functionapp/cors#az-functionapp-cors-show)Mevcut izin verilen kaynakları listelemek için komutunu kullanın.
+[`az functionapp cors show`](/cli/azure/functionapp/cors#az_functionapp_cors_show)Mevcut izin verilen kaynakları listelemek için komutunu kullanın.
 
-### <a name="authentication"></a><a name="auth"></a>Kimlik Doğrulaması
+### <a name="authentication"></a><a name="auth"></a>Yetkilendirmesi
 
 ![İşlev uygulaması için kimlik doğrulamasını yapılandırma](./media/functions-how-to-use-azure-function-app-settings/configure-function-app-authentication.png)
 
@@ -280,7 +280,7 @@ az functionapp cors add --name <FUNCTION_APP_NAME> \
 ## <a name="next-steps"></a>Sonraki adımlar
 
 + [Azure App Service ayarlarını yapılandırma](../app-service/configure-common.md)
-+ [Azure Işlevleri için sürekli dağıtım](functions-continuous-deployment.md)
++ [Azure İşlevleri için sürekli dağıtım](functions-continuous-deployment.md)
 
 [Azure CLI]: /cli/azure/
 [Azure portalı]: https://portal.azure.com

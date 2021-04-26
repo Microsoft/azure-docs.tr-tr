@@ -8,17 +8,17 @@ ms.devlang: azurecli
 ms.topic: quickstart
 ms.date: 07/15/2020
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 4f774351fc0eaaf32069687a1943c72b74b6308a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 63c7fe703a1fbf4cb46532085a33efd74e6a76ef
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96494333"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107875386"
 ---
 # <a name="quickstart-create-an-azure-database-for-mysql-server-using-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak MySQL için Azure veritabanı sunucusu oluşturma
 
 > [!TIP]
-> Daha basit [az MySQL up](/cli/azure/ext/db-up/mysql#ext-db-up-az-mysql-up) Azure CLI komutunu kullanmayı düşünün (Şu anda önizleme aşamasındadır). [Hızlı](./quickstart-create-server-up-azure-cli.md)başlangıcı deneyin.
+> Daha basit [az MySQL up](/cli/azure/mysql#az_mysql_up) Azure CLI komutunu kullanmayı düşünün (Şu anda önizleme aşamasındadır). [Hızlı](./quickstart-create-server-up-azure-cli.md)başlangıcı deneyin.
 
 Bu hızlı başlangıçta, beş dakikada bir MySQL için Azure veritabanı sunucusu oluşturmak üzere [Azure Cloud Shell](https://shell.azure.com) ' de [Azure CLI](/cli/azure/get-started-with-azure-cli) komutlarının nasıl kullanılacağı gösterilmektedir. 
 
@@ -28,7 +28,7 @@ Bu hızlı başlangıçta, beş dakikada bir MySQL için Azure veritabanı sunuc
 
  - Bu hızlı başlangıç, Azure CLı 'nin 2,0 veya sonraki bir sürümünü gerektirir. Azure Cloud Shell kullanılıyorsa, en son sürüm zaten yüklüdür.
 
- - [Az Account set](/cli/azure/account) komutunu kullanarak hesabınız altındaki belirli bir aboneliği seçin. Komutta **abonelik** bağımsız değişkeninin değeri olarak kullanılacak **az Login** çıktısından **ID** değerini bir yere unutmayın. Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. Aboneliğinizi tamamen almak için [az Account List](/cli/azure/account#az-account-list)kullanın.
+ - [Az Account set](/cli/azure/account) komutunu kullanarak hesabınız altındaki belirli bir aboneliği seçin. Komutta **abonelik** bağımsız değişkeninin değeri olarak kullanılacak **az Login** çıktısından **ID** değerini bir yere unutmayın. Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. Aboneliğinizi tamamen almak için [az Account List](/cli/azure/account#az_account_list)kullanın.
 
    ```azurecli
    az account set --subscription <subscription id>
@@ -41,7 +41,7 @@ Bu hızlı başlangıçta, beş dakikada bir MySQL için Azure veritabanı sunuc
 az group create --name myresourcegroup --location westus
 ```
 
-[Az MySQL Server Create](/cli/azure/mysql/server#az-mysql-server-create) komutunu kullanarak MySQL Için Azure veritabanı sunucusu oluşturun. Bir sunucu birden çok veritabanı içerebilir.
+[Az MySQL Server Create](/cli/azure/mysql/server#az_mysql_server_create) komutunu kullanarak MySQL Için Azure veritabanı sunucusu oluşturun. Bir sunucu birden çok veritabanı içerebilir.
 
 ```azurecli
 az mysql server create --resource-group myresourcegroup --name mydemoserver --location westus --admin-user myadmin --admin-password <server_admin_password> --sku-name GP_Gen5_2 
@@ -60,7 +60,7 @@ sku-name|GP_Gen5_2|Fiyatlandırma katmanının adını ve işlem yapılandırmas
 
 >[!IMPORTANT] 
 >- Sunucunuzdaki varsayılan MySQL sürümü 5,7 ' dir. Şu anda 5,6 ve 8,0 sürümleri de mevcuttur.
->- **Az MySQL Server Create** komutunun tüm bağımsız değişkenlerini görüntülemek için bu [Başvuru belgesine](/cli/azure/mysql/server#az-mysql-server-create)bakın.
+>- **Az MySQL Server Create** komutunun tüm bağımsız değişkenlerini görüntülemek için bu [Başvuru belgesine](/cli/azure/mysql/server#az_mysql_server_create)bakın.
 >- SSL, sunucunuzda varsayılan olarak etkinleştirilmiştir. SSL üzerinde daha fazla bilgi için bkz. [SSL bağlantısını yapılandırma](howto-configure-ssl.md)
 
 ## <a name="configure-a-server-level-firewall-rule"></a>Sunucu düzeyinde güvenlik duvarı kuralı oluşturma 
@@ -126,7 +126,7 @@ Bu kaynaklara başka bir hızlı başlangıç/öğretici için gereksinim duymuy
 az group delete --name myresourcegroup
 ```
 
-Yeni oluşturulan sunucuyu silmek istiyorsanız [az mysql server delete](/cli/azure/mysql/server#az-mysql-server-delete) komutunu kullanabilirsiniz.
+Yeni oluşturulan sunucuyu silmek istiyorsanız [az mysql server delete](/cli/azure/mysql/server#az_mysql_server_delete) komutunu kullanabilirsiniz.
 
 ```azurecli-interactive
 az mysql server delete --resource-group myresourcegroup --name mydemoserver

@@ -3,7 +3,7 @@ title: Azure DDoS koruması standart sık sorulan sorular
 description: Azure DDoS koruma standardı hakkında sık sorulan sorular ve bu, DDoS saldırılarına karşı savunma sağlamaya yardımcı olur.
 services: virtual-network
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: article
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/28/2020
 ms.author: yitoh
-ms.openlocfilehash: 89685d1b8c3a57fa142bbbfd1114f9aa0ff0c400
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 584db62b20806c6864be478b2e18e2a9cab60a30
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98611126"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103309"
 ---
 # <a name="azure-ddos-protection-standard-frequent-asked-questions"></a>Azure DDoS koruması standart sık sorulan sorular
 

@@ -4,12 +4,12 @@ description: Bir İşlev Uygulaması oluşturma ve işlev kodunu Azure DevOps'ta
 ms.date: 07/03/2018
 ms.topic: sample
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: f89da9fc146d753442f2a8c8aa38861e66c9a3d9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f31c6a76412939d179cdd282e5e643ab7e8531b5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97934390"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786234"
 ---
 # <a name="create-a-function-in-azure-that-is-deployed-from-azure-devops"></a>Azure DevOps 'tan dağıtılan Azure 'da bir işlev oluşturma
 
@@ -40,10 +40,10 @@ Bu betik, bir kaynak grubu, depolama hesabı, işlev uygulaması ve tüm ilgili 
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az storage account create](/cli/azure/storage/account#az-storage-account-create) | İşlev uygulaması için gereken depolama hesabını oluşturur. |
-| [az functionapp create](/cli/azure/functionapp#az-functionapp-create) | Sunucusuz [Tüketim planında](../consumption-plan.md)bir işlev uygulaması oluşturur. |
-| [az functionapp deployment source config](/cli/azure/functionapp/deployment/source#az-functionapp-deployment-source-config) | Bir işlev uygulamasını Git veya Mercurial deposu ile ilişkilendirir. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az storage account create](/cli/azure/storage/account#az_storage_account_create) | İşlev uygulaması için gereken depolama hesabını oluşturur. |
+| [az functionapp create](/cli/azure/functionapp#az_functionapp_create) | Sunucusuz [Tüketim planında](../consumption-plan.md)bir işlev uygulaması oluşturur. |
+| [az functionapp deployment source config](/cli/azure/functionapp/deployment/source#az_functionapp_deployment_source_config) | Bir işlev uygulamasını Git veya Mercurial deposu ile ilişkilendirir. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

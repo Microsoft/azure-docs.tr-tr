@@ -1,16 +1,18 @@
 ---
 title: Hızlı başlangıç-Azure portal bir VM 'yi yedekleme
 description: Bu hızlı başlangıçta, bir kurtarma hizmetleri Kasası oluşturmayı, bir Azure VM 'de korumayı etkinleştirmeyi ve Azure portal VM 'yi yedeklemeyi öğrenin.
-ms.devlang: azurecli
-ms.topic: quickstart
 ms.date: 05/12/2020
-ms.custom: mvc
-ms.openlocfilehash: cd0d4928d5cd0eb15f4f1372a0a3417fc85d13bb
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.topic: quickstart
+ms.devlang: azurecli
+ms.custom:
+- mvc
+- mode-portal
+ms.openlocfilehash: 9779f84e6ddf1958ee234a96267171869a33e4e0
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91328793"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535051"
 ---
 # <a name="back-up-a-virtual-machine-in-azure"></a>Azure'daki bir sanal makineyi yedekleme
 

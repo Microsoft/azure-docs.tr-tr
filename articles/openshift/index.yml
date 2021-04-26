@@ -9,12 +9,12 @@ metadata:
   author: jimzim
   ms.author: jzim
   ms.date: 03/06/2020
-  ms.openlocfilehash: 06c6b14d62bb471ecc6dee50d72f11469e3cd161
-  ms.sourcegitcommit: 58ff80474cd8b3b30b0e29be78b8bf559ab0caa1
+  ms.openlocfilehash: d6c9d2ae5a2f91cd0c9c5b0b902b254ffcd8c8f8
+  ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 02/17/2021
-  ms.locfileid: "100633215"
+  ms.lasthandoff: 04/15/2021
+  ms.locfileid: "107517887"
 landingContent:
 - title: About Azure Red Hat OpenShift Hakkında
   linkLists:
@@ -26,22 +26,24 @@ landingContent:
   linkLists:
   - linkListType: tutorial
     links:
-    - text: Azure Red Hat OpenShift 4 kümesi oluşturma
+    - text: Azure Red Hat OpenShift kümesi oluşturma
       url: tutorial-create-cluster.md
-    - text: Azure Red Hat OpenShift 4 kümesine bağlanma
+    - text: Azure Red Hat OpenShift kümesine bağlanma
       url: tutorial-connect-cluster.md
-    - text: Azure Red Hat OpenShift 4 kümesini silme
+    - text: Azure Red Hat OpenShift kümesini silme
       url: tutorial-delete-cluster.md
-- title: Ayarlama
+- title: Kurulum
   linkLists:
   - linkListType: how-to-guide
     links:
-    - text: Özel bir Azure Red Hat OpenShift 4 kümesi oluşturma
-      url: ./howto-create-private-cluster-3x.md
-    - text: Azure Red Hat OpenShift 4 kümesi için DNS İletmeyi yapılandırma
+    - text: Özel bir Azure Red Hat OpenShift kümesi oluşturma
+      url: ./howto-create-private-cluster-4x.md
+    - text: Azure Red Hat OpenShift kümesi için DNS Iletmeyi yapılandırma
       url: dns-forwarding.md
-    - text: Azure Red Hat OpenShift 4 için yerleşik kapsayıcı kayıt defterini yapılandırma
+    - text: Azure Red Hat OpenShift için yerleşik kapsayıcı kayıt defterini yapılandırma
       url: built-in-container-registry.md
+    - text: OpenShift sunucusuz kullanarak Azure Red Hat OpenShift 'e uygulama dağıtma
+      url: howto-deploy-with-serverless.md
     - text: Azure Red Hat OpenShift 4 kümesinde bir Open Liberty/WebSphere Liberty uygulaması dağıtma
       url: howto-deploy-java-liberty-app.md
 - title: Başvuru

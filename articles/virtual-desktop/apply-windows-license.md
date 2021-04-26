@@ -1,16 +1,16 @@
 ---
 title: Windows lisansını oturum ana bilgisayarına uygulama sanal makineleri-Azure
 description: Windows sanal masaüstü VM 'Leri için Windows lisansının nasıl uygulanacağını açıklar.
-author: ChristianMontoya
+author: Heidilohr
 ms.topic: how-to
 ms.date: 08/14/2019
-ms.author: chrimo
-ms.openlocfilehash: 5f3749be36f5f035e49fcb862f92180e4902101f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.author: helohr
+ms.openlocfilehash: fa3c9f82e99536b07a27656e0143d6b2fcc89a44
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88010149"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833877"
 ---
 # <a name="apply-windows-license-to-session-host-virtual-machines"></a>Windows lisansını oturum ana bilgisayarı sanal makinelerine Uygula
 
@@ -61,3 +61,7 @@ Azure aboneliğinizde Windows lisansı uygulanmış tüm oturum ana bilgisayar V
 $vms = Get-AzVM
 $vms | Where-Object {$_.LicenseType -like "Windows_Client"} | Select-Object ResourceGroupName, Name, LicenseType
 ```
+
+## <a name="requirements-for-deploying-windows-server-remote-desktop-services"></a>Windows Server Uzak Masaüstü Hizmetleri dağıtma gereksinimleri
+
+Windows Server 2019, 2016 veya 2012 R2 'yi dağıtımınızda Windows sanal masaüstü konakları olarak dağıtırsanız, bu sanal makinelerden Uzak Masaüstü Hizmetleri bir lisans sunucusuna erişilebilir olması gerekir. Uzak Masaüstü Hizmetleri lisans sunucusu şirket içinde veya Azure 'da bulunabilir. Daha fazla bilgi için bkz. [Uzak Masaüstü Hizmetleri lisans sunucusunu etkinleştirme](/windows-server/remote/remote-desktop-services/rds-activate-license-server).

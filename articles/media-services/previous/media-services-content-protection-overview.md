@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
-ms.openlocfilehash: edffa2dddd0ec877a4b825a69a76fb158928c89f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2922586d586dbbb98ae85fb86f3f76889a75aa6b
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103016772"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106067410"
 ---
 # <a name="content-protection-overview"></a>İçerik korumaya genel bakış
 
@@ -36,7 +36,7 @@ Aşağıdaki görüntüde içerik koruma iş akışı Media Services gösterilme
 
 Bu makalede, Media Services ile içerik korumayı anlamak için ilgili kavramlar ve terminoloji açıklanmaktadır. Makale Ayrıca içeriği nasıl koruyabileceğinizi tartışan makalelere bağlantılar sağlar. 
 
-## <a name="dynamic-encryption"></a>Dinamik şifreleme
+## <a name="dynamic-encryption&quot;></a>Dinamik şifreleme
 
 Media Services, PlayReady, Widevine veya FairPlay kullanarak, içeriğinizi AES şifresiz anahtar veya DRM şifrelemesi ile dinamik olarak dağıtmak için kullanabilirsiniz. İçerik AES şifresiz anahtarla şifrelenirse ve HTTPS üzerinden gönderildiğinde, istemciye ulaşıncaya kadar net değildir. 
 
@@ -55,8 +55,8 @@ Ayrıca varlığın teslim ilkesini de yapılandırmanız gerekir. Depolama ile 
 
 Bir akış bir oyuncu tarafından istendiğinde, Media Services AES şifresiz anahtar veya DRM şifrelemesini kullanarak içeriğinizi dinamik olarak şifrelemek için belirtilen anahtarı kullanır. Akışın şifresini çözmek için, Player anahtarı Media Services anahtar teslim hizmetinden ister. Kullanıcının anahtarı almak için yetkilendirilip yetkilendirilmeyeceğine karar vermek için, hizmet anahtar için belirttiğiniz yetkilendirme ilkelerini değerlendirir.
 
-## <a name="aes-128-clear-key-vs-drm"></a>AES-128 şifresiz anahtar ve DRM
-Müşteriler genellikle AES şifrelemesi mi yoksa bir DRM sistemi mi kullanacağınızı merak ediyor. İki sistem arasındaki birincil fark, AES şifrelemesi ile içerik anahtarının istemciye şifrelenmemiş bir biçimde ("açık") aktarıldıysa. Sonuç olarak, içeriği şifrelemek için kullanılan anahtar, istemci üzerindeki bir ağ izlemede düz metin olarak görüntülenebilir. AES-128 şifresiz anahtar şifrelemesi, görüntüleyicisinin güvenilir bir taraf olduğu (örneğin, bir şirkette şirket içinde dağıtılan şirket videolarını, çalışanlar tarafından görüntülenmek üzere şifreleme) kullanım durumları için uygundur.
+## <a name=&quot;aes-128-clear-key-vs-drm&quot;></a>AES-128 şifresiz anahtar ve DRM
+Müşteriler genellikle AES şifrelemesi mi yoksa bir DRM sistemi mi kullanacağınızı merak ediyor. İki sistem arasındaki birincil fark, AES şifrelemesi ile içerik anahtarının istemciye şifrelenmemiş bir biçimde (&quot;açık") aktarıldıysa. Sonuç olarak, içeriği şifrelemek için kullanılan anahtar, istemci üzerindeki bir ağ izlemede düz metin olarak görüntülenebilir. AES-128 şifresiz anahtar şifrelemesi, görüntüleyicisinin güvenilir bir taraf olduğu (örneğin, bir şirkette şirket içinde dağıtılan şirket videolarını, çalışanlar tarafından görüntülenmek üzere şifreleme) kullanım durumları için uygundur.
 
 PlayReady, Widevine ve FairPlay All, AES-128 şifresiz anahtar şifrelemeye kıyasla daha yüksek düzeyde şifreleme sağlar. İçerik anahtarı şifreli bir biçimde iletilir. Ayrıca, şifre çözme, işletim sistemi düzeyinde güvenli bir ortamda işlenir ve bu, kötü niyetli bir kullanıcının saldırılarına karşı daha zordur. Görüntüleyici 'nin güvenilir bir taraf olmadığı ve en yüksek düzeyde güvenlik düzeyi gerektiren kullanım durumları için DRM önerilir.
 
@@ -117,7 +117,7 @@ Aşağıdaki noktalara dikkat edilmelidir:
 Aşağıdaki makaleler, içerik korumasına başlamanıza yardımcı olacak sonraki adımları anlatmaktadır:
 
 * [Depolama şifrelemesi ile koruma](media-services-rest-storage-encryption.md)
-* [AES şifrelemesi ile koruma](media-services-protect-with-aes128.md)
+* [AES şifrelemesi ile koruma](media-services-playready-license-template-overview.md)
 * [PlayReady ve/veya Widevine ile koruma](media-services-protect-with-playready-widevine.md)
 * [FairPlay ile koruma](media-services-protect-hls-with-FairPlay.md)
 

@@ -11,10 +11,10 @@ ms.date: 09/30/2020
 ms.topic: conceptual
 ms.custom: how-to, fasttrack-edit
 ms.openlocfilehash: 472bc66c75881d622e8ecfe23031f58db773a919
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102518934"
 ---
 # <a name="create-and-manage-azure-machine-learning-workspaces"></a>Azure Machine Learning çalışma alanları oluşturma ve yönetme 
@@ -195,7 +195,7 @@ Azure Machine Learning Python SDK 'Sı, özel bir uç nokta ile bir çalışma a
 2. __Ayarlar__' da, __sanal ağ bağlantıları__' nı seçin.
 3. __Add (Ekle)__ seçeneğini belirleyin. __Sanal ağ bağlantısı ekle__ sayfasında, benzersiz bir __bağlantı adı__ girin ve eklenecek __sanal ağı__ seçin. Ağ bağlantısını eklemek için __Tamam ' ı__ seçin.
 
-Daha fazla bilgi için bkz. [Azure özel uç nokta DNS yapılandırması](../private-link/private-endpoint-dns.md).
+Daha fazla bilgi için bkz. [Azure Özel Uç Nokta DNS yapılandırması](../private-link/private-endpoint-dns.md).
 
 ### <a name="vulnerability-scanning"></a>Güvenlik açığı taraması
 

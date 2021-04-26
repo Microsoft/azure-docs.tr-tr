@@ -10,25 +10,36 @@ ms.topic: reference
 author: oslake
 ms.author: moslake
 ms.reviewer: sstein
-ms.date: 03/23/2021
-ms.openlocfilehash: fa21acc09858f4468e53788428e4928dc381a94e
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.date: 04/09/2021
+ms.openlocfilehash: 1d58f79d0fe8accc728c4484dd5d92159836aa88
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107865"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107305149"
 ---
 # <a name="resource-limits-for-elastic-pools-using-the-vcore-purchasing-model"></a>Sanal çekirdek satın alma modelini kullanarak elastik havuzlar için kaynak sınırları
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 Bu makalede, sanal çekirdek satın alma modeli kullanılarak Azure SQL veritabanı elastik havuzları ve havuza alınmış veritabanları için ayrıntılı kaynak sınırları sağlanmaktadır.
 
-DTU satın alma modeli sınırları için bkz. [SQL VERITABANı DTU kaynak limitleri-elastik havuzlar](resource-limits-dtu-elastic-pools.md).
+* Bir sunucudaki tek veritabanları için DTU satın alma model sınırları için bkz. [bir sunucudaki kaynak sınırlarına genel bakış](resource-limits-logical-server.md).
+* Azure SQL veritabanı için DTU satın alma modeli kaynak sınırları için bkz. [DTU kaynak limitleri tek veritabanı](resource-limits-dtu-single-databases.md) ve [DTU kaynak sınırları elastik havuzlar](resource-limits-dtu-elastic-pools.md).
+* VCore kaynak sınırları için bkz. [Vcore kaynak limitleri-Azure SQL veritabanı](resource-limits-vcore-single-databases.md) ve [sanal çekirdek kaynak limitleri-elastik havuzlar](resource-limits-vcore-elastic-pools.md).
+* Farklı satın alma modelleriyle ilgili daha fazla bilgi için bkz. [model ve hizmet katmanları satın alma](purchasing-models.md).
 
 > [!IMPORTANT]
 > Bazı durumlarda, kullanılmayan alanı geri kazanmak için bir veritabanını daraltmanız gerekebilir. Daha fazla bilgi için bkz. [Azure SQL veritabanı 'nda dosya alanını yönetme](file-space-manage.md).
 
-Hizmet katmanını, işlem boyutunu (hizmet hedefi) ve depolama miktarını [Azure Portal](elastic-pool-manage.md#azure-portal), [POWERSHELL](elastic-pool-manage.md#powershell), [Azure CLI](elastic-pool-manage.md#azure-cli)veya [REST API](elastic-pool-manage.md#rest-api)kullanarak ayarlayabilirsiniz.
+Her salt okunurdur çoğaltma, Vçekirdekler, bellek, veri ıOPS, TempDB, çalışanlar ve oturumlar gibi kendi kaynaklarına sahiptir. Her salt okuma çoğaltması, bu makalede daha sonra ayrıntılı kaynak sınırlarına tabidir.
+
+Kullanarak hizmet katmanını, işlem boyutunu (hizmet hedefi) ve depolama miktarını ayarlayabilirsiniz:
+
+* [Alter database](/sql/t-sql/statements/alter-database-transact-sql#overview-sql-database) aracılığıyla [Transact-SQL](elastic-pool-scale.md)
+* [Azure portalı](elastic-pool-manage.md#azure-portal)
+* [PowerShell](elastic-pool-manage.md#powershell)
+* [Azure CLI](elastic-pool-manage.md#azure-cli)
+* [REST API](elastic-pool-manage.md#rest-api)
 
 > [!IMPORTANT]
 > Ölçeklendirme Kılavuzu ve değerlendirmeleri için bkz. [elastik havuz ölçekleme](elastic-pool-scale.md).

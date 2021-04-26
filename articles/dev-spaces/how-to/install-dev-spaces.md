@@ -4,13 +4,14 @@ services: azure-dev-spaces
 ms.date: 07/24/2019
 ms.topic: conceptual
 description: AKS kümesinde Azure Dev Spaces etkinleştirmeyi ve istemci tarafı araçları yüklemeyi öğrenin.
+ms.custom: devx-track-azurecli
 keywords: Docker, Kubernetes, Azure, AKS, Azure Kubernetes hizmeti, kapsayıcılar, Held, hizmet ağı, hizmet kafesi yönlendirme, kubectl, k8s
-ms.openlocfilehash: 177496a53d204306b2b655b8736ce063dedf0f61
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 079a9e1b28b315457ac20d3aa9e7d29ce28fa077
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102202255"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107505369"
 ---
 # <a name="enable-azure-dev-spaces-on-an-aks-cluster-and-install-the-client-side-tools"></a>AKS kümesinde Azure Dev Spaces etkinleştirme ve istemci tarafı araçları 'nı yüklemeye
 
@@ -18,7 +19,7 @@ ms.locfileid: "102202255"
 
 Bu makalede, bir AKS kümesinde Azure Dev Spaces etkinleştirmenin yanı sıra istemci tarafı araçları yüklemek için kullanabileceğiniz çeşitli yollar gösterilmektedir.
 
-## <a name="enable-azure-dev-spaces-using-the-cli"></a>CLı kullanarak Azure Dev Spaces etkinleştirme
+## <a name="enable-azure-dev-spaces-using-the-azure-cli"></a>Azure CLı kullanarak Azure Dev Spaces etkinleştirme
 
 CLı kullanarak dev alanlarını etkinleştirebilmeniz için şunlar gerekir:
 * Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz hesap][az-portal-create-account] oluşturabilirsiniz.
@@ -59,7 +60,7 @@ Yerel makinenizden bir AKS kümesindeki dev Spaces ile etkileşim kurmak için A
 * [Visual Studio 2019][visual-studio]' de Azure geliştirme iş yükünü yükledikten sonra.
 * [Windows][cli-win], [Mac][cli-mac]veya [Linux][cli-linux] CLI 'yı indirip yükleyin.
 
-## <a name="remove-azure-dev-spaces-using-the-cli"></a>CLı kullanarak Azure Dev Spaces kaldırma
+## <a name="remove-azure-dev-spaces-using-the-azure-cli"></a>Azure CLı kullanarak Azure Dev Spaces kaldırma
 
 AKS kümenizdeki Azure Dev Spaces kaldırmak için `azds remove` komutunu kullanın.
 

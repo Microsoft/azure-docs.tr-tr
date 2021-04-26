@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/08/2021
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: f3eb2d9469ab3a3d2c1d09e4adc3ee2cb1f86e6e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a5ae81cde28efbf57965beda2f82915854579e43
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99979082"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106073206"
 ---
 ## <a name="extract-the-zip-file"></a>ZIP dosyasını Ayıkla
 

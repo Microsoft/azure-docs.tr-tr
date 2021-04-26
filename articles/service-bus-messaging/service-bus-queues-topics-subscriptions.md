@@ -2,13 +2,13 @@
 title: Azure Service Bus mesajlaşma-kuyruklar, konular ve abonelikler
 description: Bu makalede, Azure Service Bus mesajlaşma varlıklarına (kuyruk, konular ve abonelikler) genel bir bakış sunulmaktadır.
 ms.topic: conceptual
-ms.date: 02/16/2021
-ms.openlocfilehash: b8fb68509ad920fc6911290377f49b89ec610b58
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/08/2021
+ms.openlocfilehash: ccd91d5091dbbba072cf222e5a73c3db1d48c321
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101096328"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107209833"
 ---
 # <a name="service-bus-queues-topics-and-subscriptions"></a>Service Bus kuyrukları, konu başlıkları ve abonelikleri
 Azure Service Bus, güvenilir Message Queuing ve dayanıklı yayımlama/abone olma iletileri dahil olmak üzere bulut tabanlı, ileti yönelimli bir ara yazılım teknolojilerini destekler. Bu Aracılı mesajlaşma özellikleri, Service Bus mesajlaşma iş yükünü kullanarak yayımlama-abone olma, zamana bağlı ayırma ve yük dengeleme senaryolarını destekleyen ayrılmış mesajlaşma özellikleri olarak düşünülebilir. Ayrılmış iletişimin birçok avantajı vardır. Örneğin, istemciler ve sunucular gerektiğinde bağlanabilir ve işlemlerini zaman uyumsuz bir biçimde gerçekleştirebilir.
@@ -53,7 +53,7 @@ Birçok senaryoda, belirli özelliklere sahip olan iletiler farklı yollarla iş
 
 Tam çalışma örneği için GitHub 'da [Topicsubscriptionwithruleoperationssample örneğine](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/GettingStarted/Microsoft.Azure.ServiceBus/TopicSubscriptionWithRuleOperationsSample) bakın.
 
-Olası filtre değerleri hakkında daha fazla bilgi için [Sqlfilter](/dotnet/api/microsoft.azure.servicebus.sqlfilter) ve [sqlruleaction](/dotnet/api/microsoft.azure.servicebus.sqlruleaction) sınıfları belgelerine bakın.
+Filtreler hakkında daha fazla bilgi için bkz. [Konu filtreleri ve eylemleri](topic-filters.md).
 
 ## <a name="java-message-service-jms-20-entities"></a>Java ileti hizmeti (JMS) 2,0 varlıkları
 Aşağıdaki varlıklara Java ileti hizmeti (JMS) 2,0 API 'SI aracılığıyla erişilebilir.

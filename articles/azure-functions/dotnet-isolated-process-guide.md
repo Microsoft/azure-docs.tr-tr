@@ -5,12 +5,12 @@ ms.service: azure-functions
 ms.topic: conceptual
 ms.date: 03/01/2021
 ms.custom: template-concept
-ms.openlocfilehash: 4da685c247427e78297df1753779ee9b5c7866b8
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 53f3c79886d26b20a584d747759176ea842741cf
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105023206"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739287"
 ---
 # <a name="guide-for-running-functions-on-net-50-in-azure"></a>Azure 'da .NET 5,0 üzerinde işlev çalıştırmaya yönelik kılavuz
 
@@ -74,6 +74,8 @@ Aşağıdaki kod, [Hostbuilder] işlem hattının bir örneğini göstermektedir
 
 :::code language="csharp" source="~/azure-functions-dotnet-worker/samples/FunctionApp/Program.cs" id="docsnippet_startup":::
 
+Bu kod için gerekir `using Microsoft.Extensions.DependencyInjection;` . 
+
 Bir [Hostbuilder] , işlev uygulamanızı başlatmak için zaman uyumsuz olarak çalıştırdığınız, tam olarak başlatılmış bir [IHOST] örneği oluşturmak ve döndürmek için kullanılır. 
 
 :::code language="csharp" source="~/azure-functions-dotnet-worker/samples/FunctionApp/Program.cs" id="docsnippet_host_run":::
@@ -103,7 +105,7 @@ Aşağıdaki örnek bir tek hizmet bağımlılığını çıkarır:
  
 :::code language="csharp" source="~/azure-functions-dotnet-worker/samples/FunctionApp/Program.cs" id="docsnippet_dependency_injection" :::
 
-Daha fazla bilgi için bkz. [ASP.NET Core bağımlılık ekleme](/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0&preserve-view=true).
+Bu kod için gerekir `using Microsoft.Extensions.DependencyInjection;` . Daha fazla bilgi için bkz. [ASP.NET Core bağımlılık ekleme](/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0&preserve-view=true).
 
 ### <a name="middleware"></a>Ara yazılım
 
@@ -224,4 +226,4 @@ Bu bölümde, .NET 5,0 ' de çalışan, işlem içi .NET sınıf kitaplığı i�
 [HttpResponseData]: /dotnet/api/microsoft.azure.functions.worker.http.httpresponsedata?view=azure-dotnet&preserve-view=true
 [HttpRequest]: /dotnet/api/microsoft.aspnetcore.http.httprequest?view=aspnetcore-5.0&preserve-view=true
 [ObjectResult]: /dotnet/api/microsoft.aspnetcore.mvc.objectresult?view=aspnetcore-5.0&preserve-view=true
-[JsonSerializerOptions]: /api/system.text.json.jsonserializeroptions?view=net-5.0&preserve-view=true
+[JsonSerializerOptions]: /dotnet/api/system.text.json.jsonserializeroptions?view=net-5.0&preserve-view=true

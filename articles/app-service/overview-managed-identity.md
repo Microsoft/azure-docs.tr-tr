@@ -7,12 +7,12 @@ ms.date: 05/27/2020
 ms.author: mahender
 ms.reviewer: yevbronsh
 ms.custom: devx-track-csharp, devx-track-python, devx-track-azurepowershell, devx-track-azurecli
-ms.openlocfilehash: 16cd4685f513eb628372802cc158195b81bce72a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: badc6b6f1b45938e950ffadeefe30d81ed383440
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98736180"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762452"
 ---
 # <a name="how-to-use-managed-identities-for-app-service-and-azure-functions"></a>App Service ve Azure Işlevleri için Yönetilen kimlikler kullanma
 
@@ -56,7 +56,7 @@ Azure CLı kullanarak yönetilen bir kimlik ayarlamak için, `az webapp identity
 
 Aşağıdaki adımlar, bir Web uygulaması oluşturma ve CLı kullanarak bir kimlik atama işleminde size kılavuzluk eder:
 
-1. Azure CLI'yi yerel bir konsolda kullanıyorsanız, önce [az login](/cli/azure/reference-index#az-login) kullanarak Azure'da oturum açın. Uygulamayı dağıtmak istediğiniz Azure aboneliğiyle ilişkili bir hesabı kullanın:
+1. Azure CLI'yi yerel bir konsolda kullanıyorsanız, önce [az login](/cli/azure/reference-index#az_login) kullanarak Azure'da oturum açın. Uygulamayı dağıtmak istediğiniz Azure aboneliğiyle ilişkili bir hesabı kullanın:
 
     ```azurecli-interactive
     az login

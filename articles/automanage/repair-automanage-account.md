@@ -8,12 +8,13 @@ ms.workload: infrastructure
 ms.topic: conceptual
 ms.date: 11/05/2020
 ms.author: alsin
-ms.openlocfilehash: 4694fa679c7bbff309a0452219ff39bacf2488c4
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: e6bf5404a33e0b4e57c2ff8d82d8791eda3d0f06
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96183711"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834201"
 ---
 # <a name="repair-an-automanage-account"></a>Bir oto Yönet hesabını onarma
 [Azure otomatik Yönet hesabınız](./automanage-virtual-machines.md#automanage-account) , otomatik işlemlerin oluştuğu güvenlik bağlamına veya kimliğe sahiptir. Kısa süre önce yeni bir kiracıya bir oto Yönet hesabı içeren bir abonelik taşıdıysanız, hesabı yeniden yapılandırmanız gerekir. Yeniden yapılandırmak için kimlik türünü sıfırlamanız ve hesap için uygun rolleri atamanız gerekir.
@@ -117,7 +118,7 @@ Aşağıdaki ARM şablonunu çalıştırın. Oto Yönet hesabınızın asıl KIM
 }
 ```
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 Şu komutları çalıştırın:
 
 ```azurecli

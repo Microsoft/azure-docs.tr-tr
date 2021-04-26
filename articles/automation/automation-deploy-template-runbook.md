@@ -5,13 +5,14 @@ services: automation
 ms.subservice: process-automation
 ms.date: 09/22/2020
 ms.topic: conceptual
+ms.custom: devx-track-azurepowershell
 keywords: PowerShell, runbook, JSON, Azure Otomasyonu
-ms.openlocfilehash: d9b443d1840840d3d6202140da235589c73453cc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 20dbf9f9bbf97ed0c24ea3a525c56c7cde2db428
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99051405"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834849"
 ---
 # <a name="deploy-an-azure-resource-manager-template-in-a-powershell-runbook"></a>PowerShell runbook 'unda Azure Resource Manager şablonu dağıtma
 

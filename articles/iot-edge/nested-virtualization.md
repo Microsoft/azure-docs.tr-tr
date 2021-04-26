@@ -9,19 +9,19 @@ ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
 monikerRange: =iotedge-2018-06
-ms.openlocfilehash: 0e0021ec3564ca079f9ab02fe5ed3f0cfa5a1560
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4f01362fd9342c1f508f165b34e121a11e8d07e2
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104610038"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107496597"
 ---
 # <a name="nested-virtualization-for-azure-iot-edge-for-linux-on-windows"></a>Windows üzerinde Linux için Azure IoT Edge iç içe sanallaştırma
 Windows üzerinde Linux için Azure IoT Edge birlikte iç içe sanallaştırma ile uyumlu iki biçim vardır. Kullanıcılar, yerel bir VM veya Azure VM aracılığıyla dağıtmayı seçebilirler. Bu makale, kullanıcılara, senaryoları için en uygun seçeneği açıklığa kavuşturmak ve yapılandırma gereksinimleriyle ilgili öngörüler sağlar.
 
 > [!NOTE]
 >
-> İç içe sanallaştırma için bir veya daha fazla etkinleştirme [seçeneğinin](/virtualization/hyper-v-on-windows/user-guide/nested-virtualization#networking-options) etkinleştirildiğinden emin olun. Bunun başarısız olması, yükleme hatalarına neden olur. 
+> İç içe sanallaştırma için tek bir [ağ seçeneğinin](/virtualization/hyper-v-on-windows/user-guide/nested-virtualization#networking-options) etkinleştirildiğinden emin olun. Bunun başarısız olması, yükleme hatalarına neden olur. 
 
 ## <a name="deployment-on-local-vm"></a>Yerel VM 'de dağıtım
 Bu, Windows üzerinde Linux için Azure IoT Edge barındıran herhangi bir Windows sanal makinesi için temel yaklaşımdır. Bu durumda, dağıtım başlatılmadan önce iç içe sanallaştırmanın etkinleştirilmesi gerekir. Bu senaryoyu yapılandırma hakkında daha fazla bilgi için [, Iç Içe sanallaştırmaya sahip bir sanal makinede Hyper-V '](https://docs.microsoft.com/virtualization/hyper-v-on-windows/user-guide/nested-virtualization) y i çalıştırın.

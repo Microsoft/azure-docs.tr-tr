@@ -7,12 +7,12 @@ ms.subservice: cosmosdb-sql
 ms.topic: how-to
 ms.date: 3/18/2019
 ms.author: mjbrown
-ms.openlocfilehash: 0f08ca84597b08b9a236b7bfb0fc9c849423a752
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5cd90e994e620960e0d974ef7609a67f8a5eb58b
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93335900"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448568"
 ---
 # <a name="query-an-azure-cosmos-container"></a>Azure Cosmos kapsayıcısını sorgulama
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -26,19 +26,19 @@ Kapsayıcılardan veri sorguladığınızda, sorguda bir bölüm anahtarı filtr
 Örneğin, aşağıdaki sorguyu üzerinde bir eşitlik filtresiyle göz önünde bulundurun `DeviceId` . Bu sorguyu üzerinde bölümlenen bir kapsayıcıda çalıştırırsanız `DeviceId` , bu sorgu tek bir fiziksel bölüme filtre uygulanır.
 
 ```sql
-    SELECT * FROM c WHERE c.DeviceId = 'XMS-0001'
+SELECT * FROM c WHERE c.DeviceId = 'XMS-0001'
 ```
 
 Önceki örnekte olduğu gibi, bu sorgu da tek bir bölüme filtre de sağlar. Üzerinde ek filtre ekleme `Location` bunu değiştirmez:
 
 ```sql
-    SELECT * FROM c WHERE c.DeviceId = 'XMS-0001' AND c.Location = 'Seattle'
+SELECT * FROM c WHERE c.DeviceId = 'XMS-0001' AND c.Location = 'Seattle'
 ```
 
 Bölüm anahtarında Aralık filtresi bulunan ve tek bir fiziksel bölüm kapsamına alınmayacak bir sorgu aşağıda verilmiştir. Bölüm içi bir sorgu olması için sorgunun, Bölüm anahtarını içeren bir eşitlik filtresi olması gerekir:
 
 ```sql
-    SELECT * FROM c WHERE c.DeviceId > 'XMS-0001'
+SELECT * FROM c WHERE c.DeviceId > 'XMS-0001'
 ```
 
 ## <a name="cross-partition-query"></a>Bölümler arası sorgu
@@ -46,7 +46,7 @@ Bölüm anahtarında Aralık filtresi bulunan ve tek bir fiziksel bölüm kapsam
 Aşağıdaki sorguda, Bölüm anahtarında () bir filtre yok `DeviceId` . Bu nedenle, her bir bölümün dizininde çalıştığı tüm fiziksel bölümlere karşı bir yelpamalıdır:
 
 ```sql
-    SELECT * FROM c WHERE c.Location = 'Seattle`
+SELECT * FROM c WHERE c.Location = 'Seattle`
 ```
 
 Her fiziksel bölümün kendi dizini vardır. Bu nedenle, bir kapsayıcıda çapraz bölümlü bir sorgu çalıştırdığınızda fiziksel bölüm *başına* bir sorgu verimli bir şekilde çalıştırıyorsunuz demektir. Azure Cosmos DB, sonuçları farklı fiziksel bölümler arasında otomatik olarak toplar.

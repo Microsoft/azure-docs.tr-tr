@@ -2,21 +2,21 @@
 title: Azure Active Directory izin isteklerini uygulamalar için yönetme ve izin isteklerini değerlendirme
 description: Kullanıcı onayı devre dışı bırakıldığında veya kısıtlandıktan sonra izin isteklerini yönetmeyi ve Azure Active Directory bir uygulamaya kiracı genelindeki yönetici onayı için bir istek değerlendirmeyi öğrenin.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: how-to
 ms.date: 12/27/2019
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: phsignor
-ms.openlocfilehash: 189a89276d922665dd1ad0fbacc77ba499137048
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 3405181f9bace023950e583dfe1a334216bf0aa0
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99253111"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107373953"
 ---
 # <a name="managing-consent-to-applications-and-evaluating-consent-requests"></a>Uygulamalara onayı yönetme ve izin isteklerini değerlendirme
 
@@ -26,7 +26,7 @@ Son Kullanıcı izni devre dışı bırakıldıktan veya kısıtlandıktan sonra
 
 ## <a name="process-changes-and-education"></a>Değişiklikleri ve eğitimi işleme
 
- 1. Kullanıcıların doğrudan onay ekranından yönetici onayı istemesine izin vermek için [yönetici onayı iş akışını (Önizleme)](configure-admin-consent-workflow.md) etkinleştirmeyi düşünün.
+ 1. Kullanıcıların doğrudan onay ekranından yönetici onayı istemesine izin vermek için [yönetici onayı iş akışını](configure-admin-consent-workflow.md) etkinleştirmeyi düşünün.
 
  2. Tüm yöneticilerin [izinleri ve onay çerçevesini](../develop/consent-framework.md)anlamalarına, [izin isteminin](../develop/application-consent-experience.md) nasıl çalıştığını ve [kiracı genelindeki yönetici onayı için bir isteğin nasıl değerlendirileceğini](#evaluating-a-request-for-tenant-wide-admin-consent)doğrulayın.
  3. Kullanıcıların bir uygulama için yönetici onayı istemesi ve gerekirse güncelleştirmeler yapması için kuruluşunuzun mevcut süreçlerini gözden geçirin. İşlem değiştirilirse:

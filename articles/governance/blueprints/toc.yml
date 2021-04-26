@@ -271,8 +271,8 @@
   href: ./troubleshoot/general.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
-      href: /cli/azure/ext/blueprint/blueprint
+    - name: Azure CLI
+      href: /cli/azure/blueprint
     - name: Azure PowerShell
       href: /powershell/module/az.blueprint/#blueprint
     - name: .NET için Azure SDK

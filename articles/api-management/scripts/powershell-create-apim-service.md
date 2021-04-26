@@ -11,13 +11,13 @@ ms.workload: mobile
 ms.topic: sample
 ms.date: 11/16/2017
 ms.author: apimpm
-ms.custom: mvc
-ms.openlocfilehash: 6cfa643d8949f80e8dcf99c2c8e64cf20588b928
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: 17e1d76e95e38922e081e4a4e44c0a103db101fa
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87851064"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817170"
 ---
 # <a name="create-an-api-management-service"></a>API Management hizmeti oluşturma
 

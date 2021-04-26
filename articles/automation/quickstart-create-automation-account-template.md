@@ -3,18 +3,20 @@ title: 'Hızlı başlangıç: Otomasyon hesabı oluşturma-Azure şablonu'
 titleSuffix: Azure Automation
 description: Bu hızlı başlangıçta, Azure Resource Manager şablonu kullanılarak bir Otomasyon hesabının nasıl oluşturulacağı gösterilmektedir.
 services: automation
-Customer intent: I want to create an Automation account by using an Azure Resource Manager template so that I can automate processes with runbooks.
+ms.author: magoedte
+ms.date: 01/07/2021
 ms.topic: quickstart
 ms.workload: infrastructure-services
-ms.date: 01/07/2021
-ms.author: magoedte
-ms.custom: mvc,subject-armqs
-ms.openlocfilehash: 4d7d4b5af9b86fe5116dc29f6ed1a789cdbf2047
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom:
+- mvc
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: 50a8c057a6fdf6350a18225cd2dc538942d6686d
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100581086"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538400"
 ---
 # <a name="quickstart-create-an-automation-account-by-using-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak Otomasyon hesabı oluşturma
 

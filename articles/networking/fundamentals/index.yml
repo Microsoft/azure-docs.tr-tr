@@ -1,0 +1,143 @@
+### YamlMime:Landing
+title: Azure Ağ temelleri belgeleri
+summary: Azure Ağ Hizmetleri, Azure kaynaklarına ve şirket içi kaynaklara bağlanmanıza, uygulamalarınızı Azure ağı 'nda korumanıza, sunmanıza ve izlemenize olanak sağlar.
+metadata:
+  title: Azure Ağ temelleri belgeleri
+  description: Azure kaynakları arasında bağlantı sağlayan, şirket içi ağdan Azure kaynaklarına bağlantı sağlayan ağ hizmetleri hakkında bilgi edinin, ağ kaynaklarınızı korumanıza, uygulama teslimini ölçeklendirmenize ve ağınızı izlemenize yardımcı olun.
+  ms.service: networking
+  ms.topic: landing-page
+  ms.collection: collection
+  author: KumudD
+  ms.author: kumud
+  ms.date: 03/30/2021
+  ms.openlocfilehash: aff3552a239bb3ed2859001ae02bcabefc66ff39
+  ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
+  ms.translationtype: MT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 04/07/2021
+  ms.locfileid: "107030381"
+landingContent:
+- title: Azure ağı hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Ağ nedir?
+      url: networking-overview.md
+  - linkListType: concept
+    links:
+    - text: Microsoft küresel ağı nedir?
+      url: ../microsoft-global-network.md
+  - linkListType: learn
+    links:
+    - text: Azure 'da ağ altyapınızı oluşturun
+      url: /learn/paths/architect-network-infrastructure/
+    - text: Azure ağ hizmetlerini keşfetme
+      url: /learn/modules/azure-networking-fundamentals/
+- title: başlarken
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Sanal Ağı nedir?
+      url: ../../virtual-network/virtual-networks-overview.md
+  - linkListType: quickstart
+    links:
+    - text: Sanal ağ oluşturma
+      url: ../../virtual-network/quick-create-portal.md
+- title: İnternet ile iletişim kurma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Genel IP adresi nedir?
+      url: ../../virtual-network/virtual-networks-overview.md
+    - text: Sanal ağ NAT ağ geçidi nedir?
+      url: ../../virtual-network/nat-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Genel IP adresi oluşturma
+      url: ../../virtual-network/create-public-ip-portal.md
+    - text: NAT ağ geçidi oluşturma
+      url: ../../virtual-network/tutorial-create-nat-gateway-portal.md
+  - linkListType: learn
+    links:
+    - text: Azure dağıtımınız için bir IP adresleme düzeni tasarlama
+      url: /learn/modules/design-ip-addressing-for-azure/
+- title: Sanal ağları bağlama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Sanal ağ eşleme
+      url: ../../virtual-network/virtual-network-peering-overview.md
+  - linkListType: tutorial
+    links:
+    - text: Sanal ağ eşlemesi ile sanal ağları bağlama
+      url: ../../virtual-network/tutorial-connect-virtual-networks-portal.md
+- title: Ağ kaynaklarına özel erişim
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Özel Uç Nokta nedir?
+      url: ../../private-link/private-endpoint-overview.md
+  - linkListType: tutorial
+    links:
+    - text: Özel Uç Nokta oluşturma
+      url: ../../private-link/create-private-endpoint-portal.md
+- title: Uygulamalarınızın yükünü dengeleyin
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Ağ yük dengeleyici
+      url: ../../load-balancer/load-balancer-overview.md
+    - text: Güvenli bulut CDN ve küresel yük dengeleyici
+      url: ../../frontdoor/front-door-overview.md
+    - text: Web uygulaması yük dengeleyici
+      url: ../../application-gateway/overview.md
+    - text: DNS tabanlı yük dengeleyici
+      url: ../../traffic-manager/traffic-manager-overview.md
+  - linkListType: tutorial
+    links:
+    - text: Ağ Yük dengeleyici oluşturma
+      url: ../../load-balancer/quickstart-load-balancer-standard-public-portal.md
+    - text: Güvenli bir bulut CDN ve küresel yük dengeleyici dağıtma
+      url: ../../frontdoor/quickstart-create-front-door.md
+    - text: Web uygulaması yük dengeleyici oluşturma
+      url: ../../application-gateway/quick-create-portal.md
+    - text: DNS tabanlı yük dengeleyici oluşturma
+      url: ../../traffic-manager/quickstart-create-traffic-manager-profile.md
+- title: Sanal ağınızı güvenli hale getirme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Ağ güvenlik grupları
+      url: ../../virtual-network/network-security-groups-overview.md
+    - text: Azure DDoS Koruması Standart
+      url: ../../ddos-protection/ddos-protection-overview.md
+    - text: Azure Güvenlik Duvarı
+      url: ../../firewall/overview.md
+  - linkListType: tutorial
+    links:
+    - text: PaaS kaynaklarına ağ erişimini kısıtlama
+      url: ../../virtual-network/tutorial-restrict-network-access-to-resources.md
+    - text: Azure DDoS koruma standardı oluşturma ve yapılandırma
+      url: ../../ddos-protection/manage-ddos-protection.md
+    - text: Azure Güvenlik Duvarı'nı dağıtma ve yapılandırma
+      url: ../../firewall/tutorial-firewall-deploy-portal.md
+  - linkListType: learn
+    links:
+    - text: Azure'da ağ bağlantılarının güvenliğini sağlama
+      url: /learn/modules/secure-network-connectivity-azure/
+- title: Şirket içi ağları sanal ağlara bağlama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: VPN bağlantıları-VPN Gateway
+      url: ../../vpn-gateway/vpn-gateway-about-vpngateways.md
+    - text: Adanmış özel bağlantılar-ExpressRoute
+      url: ../../expressroute/expressroute-introduction.md
+    - text: VPN ve adanmış özel bağlantılar-sanal WAN
+      url: ../../virtual-wan/virtual-wan-about.md
+  - linkListType: tutorial
+    links:
+    - text: Şirket içi ağı bir sanal ağa bağlama-VPN şifrelemesi
+      url: ../../vpn-gateway/tutorial-site-to-site-portal.md
+    - text: ExpressRoute kullanarak şirket içi ağı Azure 'a genişletme
+      url: ../../expressroute/expressroute-howto-circuit-portal-resource-manager.md

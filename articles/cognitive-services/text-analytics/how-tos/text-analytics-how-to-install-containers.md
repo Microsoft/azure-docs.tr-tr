@@ -9,15 +9,15 @@ ms.custom: seodec18, cog-serv-seo-aug-2020
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: conceptual
-ms.date: 03/02/2021
+ms.date: 03/29/2021
 ms.author: aahi
 keywords: Şirket içi, Docker, kapsayıcı, yaklaşım analizi, doğal dil işleme
-ms.openlocfilehash: ac82781ed4a05fbbca7f5b16edb0b5349dfc400a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 012e725e31097af5af634a1aba7693048c4c6b3e
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102432086"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277479"
 ---
 # <a name="install-and-run-text-analytics-containers"></a>Metin Analizi kapsayıcılarını yükleme ve çalıştırma
 
@@ -32,7 +32,7 @@ Kapsayıcılar Metin Analizi API'lerini kendi ortamınızda çalıştırabilmeni
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/cognitive-services/) oluşturun.
 
 > [!IMPORTANT]
-> Ücretsiz hesap, ayda 5.000 işlem ile sınırlıdır ve kapsayıcılar için yalnızca **ücretsiz** ve **Standart** <a href="https://azure.microsoft.com/pricing/details/cognitive-services/text-analytics" target="_blank">fiyatlandırma katmanları</a> geçerlidir. İşlem isteği ücretleri hakkında daha fazla bilgi için bkz. [veri limitleri](../overview.md#data-limits).
+> Ücretsiz hesap, ayda 5.000 işlem ile sınırlıdır ve kapsayıcılar için yalnızca **ücretsiz** ve **Standart** <a href="https://azure.microsoft.com/pricing/details/cognitive-services/text-analytics" target="_blank">fiyatlandırma katmanları</a> geçerlidir. İşlem isteği ücretleri hakkında daha fazla bilgi için bkz. [veri limitleri](../concepts/data-limits.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -49,6 +49,8 @@ Metin Analizi kapsayıcıları kullanmadan önce aşağıdaki önkoşulları kar
 |Metin Analizi kaynağı |Kapsayıcısını kullanabilmeniz için şunları yapmanız gerekir:<br><br>Ücretsiz (F0) veya standart (ler) [fiyatlandırma katmanına](https://azure.microsoft.com/pricing/details/cognitive-services/text-analytics/)sahip bir Azure [metin analizi kaynağı](../../cognitive-services-apis-create-account.md) . Azure portal kaynağın **anahtar ve uç** nokta sayfasına gıderek ilişkili API anahtarını ve uç nokta URI 'sini almanız gerekecektir. <br><br>**{API_KEY}**: kullanılabilir iki kaynak anahtardan biri. <br><br>**{ENDPOINT_URI}**: kaynağınız için uç nokta. |
 
 [!INCLUDE [Gathering required parameters](../../containers/includes/container-gathering-required-parameters.md)]
+
+Sistem durumu kapsayıcısı için Metin Analizi kullanıyorsanız [sorumlu AI](https://docs.microsoft.com/legal/cognitive-services/text-analytics/transparency-note-health)  (rampa) bildirimi de değeri ile birlikte bulunmalıdır `accept` .
 
 ## <a name="the-host-computer"></a>Ana bilgisayar
 

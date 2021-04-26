@@ -4,16 +4,16 @@ description: Ağ dosya sistemi protokolü kullanılarak iliştirilenebilir bir A
 author: roygara
 ms.service: storage
 ms.topic: how-to
-ms.date: 01/22/2021
+ms.date: 04/05/2021
 ms.author: rogarana
 ms.subservice: files
 ms.custom: references_regions, devx-track-azurecli
-ms.openlocfilehash: b085b9991175d8cd43e2dac0db80c5af4e703c34
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: b549c625f0a6ff0480eafc38f84d292e66350950
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102521246"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717140"
 ---
 # <a name="how-to-create-an-nfs-share"></a>NFS paylaşma oluşturma
 Azure dosya paylaşımları, bulutta yaşayan tamamen yönetilen dosya paylaşımlardır. Bu makalede NFS protokolünü kullanan bir dosya paylaşımının oluşturulması ele alınmaktadır. Her iki protokol hakkında daha fazla bilgi için bkz. [Azure dosya paylaşma protokolleri](storage-files-compare-protocols.md).
@@ -107,25 +107,24 @@ Bir dosya depolama depolama hesabı oluşturmak için Azure portal gidin.
 
 1. Azure portal sol taraftaki menüden **depolama hesapları** ' nı seçin.
 
-    ![Ana sayfa Azure portal depolama hesabı seçin](media/storage-how-to-create-premium-fileshare/azure-portal-storage-accounts.png)
+    ![Ana sayfa Azure portal depolama hesabı seçin.](media/storage-how-to-create-premium-fileshare/azure-portal-storage-accounts.png)
 
-2. Açılan **Depolama Hesapları** penceresinde **Ekle**'yi seçin.
-3. Depolama hesabının oluşturulacağı aboneliği seçin.
-4. Depolama hesabının oluşturulacağı kaynak grubunu seçin
+1. Açılan **Depolama Hesapları** penceresinde **Ekle**'yi seçin.
+1. Depolama hesabının oluşturulacağı aboneliği seçin.
+1. Depolama hesabının oluşturulacağı kaynak grubunu seçin
+1. Ardından, depolama hesabınız için bir ad girin. Seçtiğiniz ad Azure genelinde benzersiz olmalıdır. Ad ayrıca 3 - 24 karakter uzunluğunda olmalıdır ve yalnızca rakam ve küçük harf içerebilir.
+1. Depolama hesabınız için bir konum seçin veya varsayılan konumu kullanın.
+1. **Performans** için **Premium** seçin.
 
-5. Ardından, depolama hesabınız için bir ad girin. Seçtiğiniz ad Azure genelinde benzersiz olmalıdır. Ad ayrıca 3 - 24 karakter uzunluğunda olmalıdır ve yalnızca rakam ve küçük harf içerebilir.
-6. Depolama hesabınız için bir konum seçin veya varsayılan konumu kullanın.
-7. **Performans** için **Premium** seçin.
+    **Dosya paylaşımları** için **Premium** ' u, **Hesap türü** açılan listesinde kullanılabilir bir seçenek olacak şekilde seçmelisiniz.
 
-    **Dosya depolama** için **Premium** ' u seçerek **Hesap türü** açılan listesinde kullanılabilir bir seçenek olması gerekir.
+1. **Premium hesap türü** Için **dosya paylaşımları**' nı seçin.
 
-8. **Hesap türü** ' nü seçin ve **FileStorage**' ı seçin.
-9. **Çoğaltmayı** **yerel olarak yedekli depolama (LRS)** varsayılan değerine ayarlı bırakın.
+    :::image type="content" source="media/storage-how-to-create-file-share/files-create-smb-share-performance-premium.png" alt-text="Premium performans ekranının ekran görüntüsü.":::
 
-    ![Premium dosya paylaşımında depolama hesabı oluşturma](media/storage-how-to-create-premium-fileshare/create-filestorage-account.png)
-
-10. Depolama hesabı ayarlarınızı gözden geçirmek ve hesabı oluşturmak için **Gözden Geçir + Oluştur**’u seçin.
-11. **Oluştur**’u seçin.
+1. **Çoğaltmayı** **yerel olarak yedekli depolama (LRS)** varsayılan değerine ayarlı bırakın.
+1. Depolama hesabı ayarlarınızı gözden geçirmek ve hesabı oluşturmak için **Gözden Geçir + Oluştur**’u seçin.
+1. **Oluştur**’u seçin.
 
 Depolama hesabı kaynağınız oluşturulduktan sonra şuraya gidin.
 
@@ -180,7 +179,7 @@ Bir dosya depolama hesabı oluşturup ağı yapılandırdığınıza göre, bir 
     
 1. **Oluştur**’u seçin.
 
-    :::image type="content" source="media/storage-files-how-to-create-mount-nfs-shares/create-nfs-file-share.png" alt-text="Dosya paylaşma oluşturma dikey penceresinin ekran görüntüsü":::
+    :::image type="content" source="media/storage-files-how-to-create-mount-nfs-shares/files-nfs-create-share.png" alt-text="Dosya paylaşma oluşturma dikey penceresinin ekran görüntüsü.":::
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 

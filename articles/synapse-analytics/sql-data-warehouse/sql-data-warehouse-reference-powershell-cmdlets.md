@@ -2,21 +2,21 @@
 title: Adanmış SQL Havuzu (eski adıyla SQL DW) için PowerShell & REST API 'Leri
 description: Bir veritabanının nasıl duraklatılacağı ve sürdürüleceği dahil, Azure SYNAPSE Analytics 'te adanmış SQL Havuzu (eskiden SQL DW) için en iyi PowerShell cmdlet 'leri.
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql-dw
 ms.date: 04/17/2018
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, devx-track-azurepowershell
-ms.openlocfilehash: 83e6082025f068e91a3d531f052b746870ffd57a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1f00f470fb0aa8ac98b431c6fc9428f501b553ed
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104584117"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566452"
 ---
 # <a name="powershell--rest-apis-for-for-dedicated-sql-pool-formerly-sql-dw-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te adanmış SQL Havuzu (eski adıyla SQL DW) için PowerShell & REST API 'Leri 
 

@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: cefdf77052e559853cc85d129799e288032186b8
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: c642b0e5f459b2412bca6588c8ae625142f0f59f
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645392"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106450495"
 ---
 ## <a name="add-managed-identity-to-your-communication-services-solution"></a>Iletişim Hizmetleri çözümünüze yönetilen kimlik ekleme
 
@@ -26,14 +26,16 @@ from azure.identity import DefaultAzureCredential
 
 Aşağıdaki örneklerde [DefaultAzureCredential](/python/api/azure-identity/azure.identity.defaultazurecredential)kullanılmaktadır. Bu kimlik bilgisi üretim ve geliştirme ortamları için uygundur.
 
-Uygulamayı geliştirme ortamında kaydetmek ve ortam değişkenlerini ayarlamak için bkz. [yönetilen kimlikle erişimi yetkilendirme](../managed-identity-from-cli.md)
+Yönetilen kimlik doğrulaması kullanarak kolayca geçebileceğiniz kolay bir yol için bkz. [yönetilen kimlikle erişimi yetkilendirme](../managed-identity-from-cli.md)
+
+DefaultAzureCredential nesnesinin nasıl çalıştığı ve bu hızlı başlangıçta belirtilmeyen yollarla nasıl kullanabileceğiniz hakkında daha ayrıntılı bir bakış için bkz. [Python Için Azure Identity istemci kitaplığı](https://docs.microsoft.com/python/api/overview/azure/identity-readme)
 
 ### <a name="create-an-identity-and-issue-a-token"></a>Bir kimlik oluşturma ve belirteç verme
 
 Aşağıdaki kod örneği, yönetilen kimliğe sahip bir hizmet istemci nesnesinin nasıl oluşturulduğunu gösterir ve ardından yeni bir kullanıcı için bir belirteç vermek üzere istemciyi kullanır:
 
 ```python
-from azure.communication.identity import CommunicationIdentityClient 
+from azure.communication.identity import CommunicationIdentityClient
 
 def create_identity_and_get_token(resource_endpoint):
      credential = DefaultAzureCredential()
@@ -41,12 +43,11 @@ def create_identity_and_get_token(resource_endpoint):
 
      user = client.create_user()
      token_response = client.get_token(user, scopes=["voip"])
-     
+
      return token_response
 ```
 
 ### <a name="send-an-sms-with-azure-managed-identity"></a>Azure yönetilen kimliği ile SMS gönderin
-
 Aşağıdaki kod örneği, Azure yönetilen kimliği ile bir hizmet istemci nesnesinin nasıl oluşturulduğunu gösterir ve ardından bir SMS iletisi göndermek için istemcisini kullanır:
 
 ```python
@@ -62,4 +63,18 @@ def send_sms(resource_endpoint, from_phone_number, to_phone_number, message_cont
           message=message_content,
           enable_delivery_report=True  # optional property
      )
+```
+
+### <a name="list-all-your-purchased-phone-numbers"></a>Satın alınan tüm telefon numaralarınızı listeleyin
+
+Aşağıdaki kod örneği, Azure yönetilen kimliği ile bir hizmet istemci nesnesinin nasıl oluşturulduğunu gösterir ve ardından kaynağın sahip olduğu tüm satın alınan telefon numaralarını görmek için istemcisini kullanır:
+
+```python
+from azure.communication.phonenumbers import PhoneNumbersClient
+
+def list_purchased_phone_numbers(resource_endpoint):
+     credential = DefaultAzureCredential()
+     phone_numbers_client = PhoneNumbersClient(resource_endpoint, credential)
+
+     return phone_numbers_client.list_purchased_phone_numbers()
 ```

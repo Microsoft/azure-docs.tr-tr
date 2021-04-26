@@ -6,13 +6,13 @@ ms.service: automation
 ms.topic: conceptual
 ms.date: 02/17/2021
 ms.author: mbaldwin
-ms.custom: subject-security-benchmark
-ms.openlocfilehash: ea75b9c1e8c7a1a242406b5a7f73db1b05c70276
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.custom: subject-security-benchmark, devx-track-azurepowershell
+ms.openlocfilehash: 7f87fcac0c1b07e108082c4b4f48bde046dc63c7
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105562214"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834507"
 ---
 # <a name="azure-security-baseline-for-automation"></a>Otomasyon için Azure Güvenlik temeli
 

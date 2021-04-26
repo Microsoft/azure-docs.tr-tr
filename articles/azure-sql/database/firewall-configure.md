@@ -12,12 +12,12 @@ author: VanMSFT
 ms.author: vanto
 ms.reviewer: sstein
 ms.date: 06/17/2020
-ms.openlocfilehash: bbad7dcaa1d92df4969c88e4ba86a62987509e39
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 200df14e7d18c4bdfb903bef46c169f6f7bf5ca5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98632825"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781784"
 ---
 # <a name="azure-sql-database-and-azure-synapse-ip-firewall-rules"></a>Azure SQL veritabanı ve Azure SYNAPSE IP güvenlik duvarı kuralları
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -215,11 +215,11 @@ New-AzSqlServerFirewallRule -ResourceGroupName "myResourceGroup" `
 
 | Cmdlet | Level | Description |
 | --- | --- | --- |
-|[az SQL Server Firewall-Rule Create](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-create)|Sunucu|Sunucu IP güvenlik duvarı kuralı oluşturur|
-|[az SQL Server Firewall-Rule List](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-list)|Sunucu|Bir sunucudaki IP güvenlik duvarı kurallarını listeler|
-|[az SQL Server Firewall-Rule Show](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-show)|Sunucu|Bir IP güvenlik duvarı kuralının ayrıntılarını gösterir|
-|[az SQL Server Firewall-Rule Update](/cli/azure/sql/server/firewall-rule##az-sql-server-firewall-rule-update)|Sunucu|Bir IP güvenlik duvarı kuralını güncelleştirir|
-|[az SQL Server Firewall-Rule Delete](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-delete)|Sunucu|Bir IP güvenlik duvarı kuralını siler|
+|[az SQL Server Firewall-Rule Create](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_create)|Sunucu|Sunucu IP güvenlik duvarı kuralı oluşturur|
+|[az SQL Server Firewall-Rule List](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_list)|Sunucu|Bir sunucudaki IP güvenlik duvarı kurallarını listeler|
+|[az SQL Server Firewall-Rule Show](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_show)|Sunucu|Bir IP güvenlik duvarı kuralının ayrıntılarını gösterir|
+|[az SQL Server Firewall-Rule Update](/cli/azure/sql/server/firewall-rule##az_sql_server_firewall_rule_update)|Sunucu|Bir IP güvenlik duvarı kuralını güncelleştirir|
+|[az SQL Server Firewall-Rule Delete](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_delete)|Sunucu|Bir IP güvenlik duvarı kuralını siler|
 
 Aşağıdaki örnek, sunucu düzeyinde bir IP güvenlik duvarı kuralı ayarlamak için CLı kullanır:
 

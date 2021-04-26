@@ -7,12 +7,12 @@ ms.author: chez
 ms.reviewer: jburchel
 ms.topic: conceptual
 ms.date: 03/11/2021
-ms.openlocfilehash: ae8b1eab81e3c898c25a613f552a49c8de64f49d
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.openlocfilehash: 3021d049a38f1d883518fc7c45aa8ca0a906c2f7
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104889136"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106221594"
 ---
 # <a name="create-a-trigger-that-runs-a-pipeline-in-response-to-a-storage-event"></a>Bir depolama olayına yanıt olarak bir işlem hattı çalıştıran bir tetikleyici oluşturma
 
@@ -71,9 +71,12 @@ Bu bölümde, Azure Data Factory Kullanıcı arabirimi içinde bir depolama olay
 
 1. İşlem hattınızda parametreler varsa, bunları tetikleyici parametre tarafı gezin ' i çalıştırır ' de belirtebilirsiniz. Depolama olayı tetikleyicisi, Blobun klasör yolunu ve dosya adını özelliklerine ve özelliklerine yakalar `@triggerBody().folderPath` `@triggerBody().fileName` . Bu özelliklerin değerlerini bir işlem hattında kullanmak için, özellikleri işlem hattı parametrelerine eşlemeniz gerekir. Özellikleri parametrelere eşleştirdikten sonra, tetikleyici tarafından yakalanan değerlere işlem `@pipeline().parameters.parameterName` hattı boyunca ifade aracılığıyla erişebilirsiniz. Ayrıntılı açıklama için bkz. işlem hatlarında [başvuru tetikleyici meta verileri](how-to-use-trigger-parameterization.md)
 
-    :::image type="content" source="media/how-to-create-event-trigger/event-based-trigger-image4.png" alt-text="Depolama olayı tetikleyicisi eşleme özelliklerinin işlem hattı parametrelerine yönelik ekran görüntüsü.":::
+   :::image type="content" source="media/how-to-create-event-trigger/event-based-trigger-image4.png" alt-text="Depolama olayı tetikleyicisi eşleme özelliklerinin işlem hattı parametrelerine yönelik ekran görüntüsü.":::
 
-    Önceki örnekte tetikleyici, kapsayıcı _örnek verilerinde_. csv dosyasında bir blob yolu oluşturulduğunda,. csv _' de sonlanan_ bir blob yolu başlatıldığında tetiklenecek şekilde yapılandırılmıştır. **FolderPath** ve **filename** özellikleri yeni Blobun konumunu yakalar. Örneğin, yola MoviesDB.csv eklendiğinde-Data/Event-Testing `@triggerBody().folderPath` değeri, değerine sahiptir `sample-data/event-testing` ve değeri vardır `@triggerBody().fileName` `moviesDB.csv` . Bu değerler, örnekte işlem hattı parametrelerine `sourceFolder` ve `sourceFile` sırasıyla, ardışık düzen boyunca kullanılabilecek şekilde eşlenir `@pipeline().parameters.sourceFolder` `@pipeline().parameters.sourceFile` .
+   Önceki örnekte tetikleyici, kapsayıcı _örnek verilerinde_. csv dosyasında bir blob yolu oluşturulduğunda,. csv _' de sonlanan_ bir blob yolu başlatıldığında tetiklenecek şekilde yapılandırılmıştır. **FolderPath** ve **filename** özellikleri yeni Blobun konumunu yakalar. Örneğin, yola MoviesDB.csv eklendiğinde-Data/Event-Testing `@triggerBody().folderPath` değeri, değerine sahiptir `sample-data/event-testing` ve değeri vardır `@triggerBody().fileName` `moviesDB.csv` . Bu değerler, örnekte işlem hattı parametrelerine `sourceFolder` ve `sourceFile` sırasıyla, ardışık düzen boyunca kullanılabilecek şekilde eşlenir `@pipeline().parameters.sourceFolder` `@pipeline().parameters.sourceFile` .
+
+   > [!NOTE]
+   > [Azure SYNAPSE Analytics](../synapse-analytics/overview-what-is.md)'te işlem hattınızı ve tetikleyiciyi oluşturuyorsanız, `@trigger().outputs.body.fileName` ve `@trigger().outputs.body.folderPath` parametreleri olarak kullanmanız gerekir. Bu iki özellik blob bilgilerini yakalar. Ve kullanmak yerine bu özellikleri kullanın `@triggerBody().fileName` `@triggerBody().folderPath` .
 
 1. İşiniz bittiğinde **son** ' a tıklayın.
 
@@ -96,7 +99,7 @@ Bu bölümde, depolama olay tetikleyicisi ayarlarının örnekleri verilmiştir.
 > [!IMPORTANT]
 > `/blobs/`Her kapsayıcı ve klasör, kapsayıcı ve dosya ya da kapsayıcı, klasör ve dosya belirttiğinizde, aşağıdaki örneklerde gösterildiği gibi yolun segmentini eklemeniz gerekir. **Blobpathbeginswith** için, Data Factory kullanıcı ARABIRIMI, `/blobs/` JSON tetikleyicisi içindeki klasör ve kapsayıcı adı arasına otomatik olarak eklenir.
 
-| Özellik | Örnek | Açıklama |
+| Özellik | Örnek | Description |
 |---|---|---|
 | **Blob yolu şununla başlar** | `/containername/` | Kapsayıcıdaki tüm Bloblar için olayları alır. |
 | **Blob yolu şununla başlar** | `/containername/blobs/foldername/` | Kapsayıcı ve klasördeki Bloblar için olayları alır `containername` `foldername` . |

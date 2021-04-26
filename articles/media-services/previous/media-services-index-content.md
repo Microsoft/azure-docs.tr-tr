@@ -16,19 +16,19 @@ ms.date: 03/10/2021
 ms.author: inhenkel
 ms.reviewer: johndeu
 ms.custom: devx-track-csharp
-ms.openlocfilehash: c575904d994232726cf8d0d9152b02130fd29cea
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 68b72cca319772fa52829c6b95237e15f083a2e7
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103013263"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105962671"
 ---
 # <a name="indexing-media-files-with-azure-media-indexer"></a>Azure Media Indexer ile medya dosyalarını dizine alma
 
 [!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!IMPORTANT]
-> Müşterilerin Dizin Oluşturucu v1 ve Dizin Oluşturucu v2, [Media Services v3 Audioanalön ayarlı temel modunu](../latest/analyzing-video-audio-files-concept.md)kullanarak geçiş yapmanız önerilir. [Azure Media Indexer](media-services-index-content.md) medya işlemcisi ve [Azure Media Indexer 2 Preview](./legacy-components.md) medya işlemcileri kullanımdan kaldırılıyor. Kullanımdan kaldırma tarihleri için, bu [eski bileşenler](legacy-components.md) konusuna bakın.
+> Müşterilerin Dizin Oluşturucu v1 ve Dizin Oluşturucu v2, [Media Services v3 Audioanalön ayarlı temel modunu](../latest/analyze-video-audio-files-concept.md)kullanarak geçiş yapmanız önerilir. [Azure Media Indexer](media-services-index-content.md) medya işlemcisi ve [Azure Media Indexer 2 Preview](./legacy-components.md) medya işlemcileri kullanımdan kaldırılıyor. Kullanımdan kaldırma tarihleri için, bu [eski bileşenler](legacy-components.md) konusuna bakın.
 
 Azure Media Indexer, medya dosyalarınızın içeriğini aranabilir hale getirmenizi ve kapalı açıklamalı alt yazı ve anahtar sözcükler için tam metin dökümü oluşturmanıza olanak sağlar. Bir toplu işte bir medya dosyası veya birden çok medya dosyası işleyebilirsiniz.  
 

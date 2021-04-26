@@ -3,14 +3,14 @@ title: Azure HDInsight kümeleriyle Azure Data Lake Storage 2. Nesil hizmetini k
 description: Azure Data Lake Storage 2. Azure HDInsight kümeleri ile nasıl kullanacağınızı öğrenin.
 ms.service: hdinsight
 ms.topic: how-to
-ms.custom: hdinsightactive,seoapr2020, devx-track-azurecli
+ms.custom: hdinsightactive,seoapr2020
 ms.date: 04/24/2020
-ms.openlocfilehash: 2bbfbd2d953ea663453f0092ff366e95f6dd5ea7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ea9dc2627d5a6498f69ca8c61a9cac8089816886
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98945374"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378593"
 ---
 # <a name="use-azure-data-lake-storage-gen2-with-azure-hdinsight-clusters"></a>Azure HDInsight kümeleriyle Azure Data Lake Storage 2. Nesil hizmetini kullanma
 

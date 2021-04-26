@@ -13,13 +13,13 @@ ms.workload: infrastructure-services
 ms.date: 01/04/2021
 ms.author: genli
 ms.openlocfilehash: c28790b2ef423a3d0f996d7c6030b04198756eb1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102607620"
 ---
-# <a name="troubleshoot-outbound-smtp-connectivity-problems-in-azure"></a>Azure 'da giden SMTP bağlantısı sorunlarını giderme
+# <a name="troubleshoot-outbound-smtp-connectivity-problems-in-azure"></a>Azure'da giden SMTP bağlantı sorunlarını giderme
 
 15 Kasım 2017 tarihinden itibaren, bir sanal makineden (VM) doğrudan dış etki alanlarına (outlook.com ve gmail.com gibi) gönderilen giden e-posta iletileri yalnızca Azure 'daki belirli Abonelik türleri için kullanılabilir hale getirilir. TCP bağlantı noktası 25 kullanan giden SMTP bağlantıları engellendi. (Bağlantı noktası 25, genellikle kimliği doğrulanmamış e-posta teslimi için kullanılır.)
 

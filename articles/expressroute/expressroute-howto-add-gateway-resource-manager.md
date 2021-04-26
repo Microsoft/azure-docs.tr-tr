@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 10/05/2020
 ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: c2fa1441f5b7d8af4d610c5341f60009e57173af
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 120bfe2eefae3c1721073060231c6c2a1962b7c8
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105560956"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106110283"
 ---
 # <a name="tutorial-configure-a-virtual-network-gateway-for-expressroute-using-powershell"></a>Öğretici: PowerShell kullanarak ExpressRoute için sanal ağ geçidi yapılandırma
 > [!div class="op_single_selector"]
@@ -77,7 +77,7 @@ Bu görevin adımları aşağıdaki yapılandırma başvurusu listesindeki değe
    ```azurepowershell-interactive
    $vnet = Get-AzVirtualNetwork -Name $VNetName -ResourceGroupName $RG
    ```
-1. Sanal ağınıza bir ağ geçidi alt ağı ekleyin. Ağ geçidi alt ağı "GatewaySubnet" olarak adlandırılmalıdır. Ağ geçidi alt ağı/27 veya daha büyük (/26,/25 vb.) olmalıdır.
+1. Sanal ağınıza bir ağ geçidi alt ağı ekleyin. Ağ geçidi alt ağı "GatewaySubnet" olarak adlandırılmalıdır. Ağ geçidi alt ağı/27 veya daha büyük (/26,/25 vb.) olmalıdır. Ağ geçidinize 16 ExpressRoute devreleri bağlamayı planlıyorsanız,/26 veya daha büyük bir ağ geçidi alt ağı oluşturmanız **gerekir** .
 
    ```azurepowershell-interactive
    Add-AzVirtualNetworkSubnetConfig -Name GatewaySubnet -VirtualNetwork $vnet -AddressPrefix 192.168.200.0/26

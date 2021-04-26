@@ -2,13 +2,13 @@
 title: MABS ile Hyper-V sanal makinelerini yedekleme
 description: Bu makale, Microsoft Azure Backup sunucusu (MABS) kullanarak sanal makinelerin yedeklenmesi ve kurtarılması için prosedürleri içerir.
 ms.topic: conceptual
-ms.date: 07/18/2019
-ms.openlocfilehash: a020559229771fff1ecc8fb512a5b2af70240cdd
-ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
+ms.date: 04/20/2021
+ms.openlocfilehash: b4de791269161b477fc07d6539feaa975fdd72ad
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102509515"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107740007"
 ---
 # <a name="back-up-hyper-v-virtual-machines-with-azure-backup-server"></a>Azure Backup Sunucusu ile Hyper-V sanal makinelerini yedekleme
 
@@ -63,7 +63,7 @@ Bunlar, MABS ile Hyper-V sanal makinelerini yedeklemeye yönelik önkoşullardı
 |Önkoşul|Ayrıntılar|
 |------------|-------|
 |MABS önkoşulları|-Sanal makineler için öğe düzeyinde kurtarma gerçekleştirmek istiyorsanız (dosyaları, klasörleri, birimleri kurtarma), daha sonra Hyper-V rolünü MABS sunucusuna yüklemeniz gerekir.  Öğe düzeyi değil yalnızca sanal makineyi kurtarmak istiyorsanız rol gerekli değildir.<br />-Her bir MABS sunucusunda 800 GB 'a kadar sanal 100 makine koruyabilir ve daha büyük kümeleri destekleyen birden çok MABS sunucusuna izin verebilirsiniz.<br />-MABS, sanal makine yedekleme performansını geliştirmek için sayfa dosyasını artımlı yedeklerden dışlar.<br />-MABS, bir Hyper-V sunucusu veya kümesini MABS sunucusuyla aynı etki alanında veya alt veya güvenilen bir etki alanında yedekleyebilir. Hyper-V ' y i bir çalışma grubunda veya güvenilmeyen bir etki alanında yedeklemek istiyorsanız, kimlik doğrulamasını ayarlamanız gerekir. Tek bir Hyper-V sunucusu için NTLM veya sertifika kimlik doğrulaması kullanabilirsiniz. Bir küme için yalnızca sertifika kimlik doğrulaması kullanabilirsiniz.<br />-   Doğrudan geçiş disklerinde sanal makine verilerini yedeklemek için konak düzeyinde yedekleme kullanımı desteklenmez. Bu senaryoda, konakta görünmeyen diğer verileri yedeklemek üzere VHD dosyalarını ve konuk düzeyi yedeklemeyi yedeklemek için ana bilgisayar düzeyinde yedekleme kullanmanızı öneririz.<br />   -Yinelenenleri kaldırılmış birimlerde depolanan VM 'Leri yedekleyebilirsiniz.|
-|Hyper-V VM önkoşulları|-Sanal makinede çalışan Tümleştirme Bileşenleri sürümünün Hyper-V konağının sürümüyle aynı olması gerekir. <br />-   Her bir sanal makine yedeklemesinde, Hyper-V'ye yedekleme sırasında farklı diskler (AVHD'nin) için yeterince alan bırakmak üzere sanal sabit disk dosyalarını barındıran birimde boş alan olması gerekir. Alan en az, hesaplanan **İlk disk boyutu\*Karmaşıklık oranı\*Yedekleme** penceresi zamanına eşit olmalıdır. Bir kümede birden fazla yedekleme çalıştırıyorsanız AVHD'leri bu hesaplamayı kullanan her bir sanal makine için uygun hale getirmek üzere yeterli depolama kapasitesine sahip olmanız gerekir.<br />-Windows Server 2012 R2 çalıştıran Hyper-V ana bilgisayar sunucularında bulunan sanal makineleri yedeklemek için, sanal makinenin herhangi bir şeye bağlı olmasa bile belirtilen bir SCSI denetleyicisi olmalıdır. (Windows Server 2012 R2 online yedekleme 'de, Hyper-V konağı VM 'de yeni bir VHD takar ve daha sonra onu takar. Bunu yalnızca SCSI denetleyicisi destekleyebilir ve bu nedenle sanal makinenin çevrimiçi yedeklemesi için gereklidir.  Bu ayar olmadan, sanal makineyi yedeklemeye çalıştığınızda 10103 olay KIMLIĞI verilecek.)|
+|Hyper-V VM önkoşulları|-Sanal makinede çalışan Tümleştirme Bileşenleri sürümünün Hyper-V konağının sürümüyle aynı olması gerekir. <br />-   Her bir sanal makine yedeklemesinde, Hyper-V'ye yedekleme sırasında farklı diskler (AVHD'nin) için yeterince alan bırakmak üzere sanal sabit disk dosyalarını barındıran birimde boş alan olması gerekir. Alan en az, hesaplanan **İlk disk boyutu\*Karmaşıklık oranı\*Yedekleme** penceresi zamanına eşit olmalıdır. Bir kümede birden fazla yedekleme çalıştırıyorsanız AVHD'leri bu hesaplamayı kullanan her bir sanal makine için uygun hale getirmek üzere yeterli depolama kapasitesine sahip olmanız gerekir.<br />-Windows Server 2012 R2 çalıştıran Hyper-V ana bilgisayar sunucularında bulunan sanal makineleri yedeklemek için, sanal makinenin herhangi bir şeye bağlı olmasa bile belirtilen bir SCSI denetleyicisi olmalıdır. (Windows Server 2012 R2 yedekleme 'de, Hyper-V konağı VM 'de yeni bir VHD takar ve daha sonra onu takar. Bunu yalnızca SCSI denetleyicisi destekleyebilir ve bu nedenle sanal makinenin çevrimiçi yedeklemesi için gereklidir.  Bu ayar olmadan, sanal makineyi yedeklemeye çalıştığınızda 10103 olay KIMLIĞI verilecek.)|
 |Linux önkoşulları|-MABS kullanarak Linux sanal makinelerini yedekleyebilirsiniz. Yalnızca dosya tutarlı anlık görüntüler desteklenir.|
 |CSV depolama ile VM’leri yedekleyin|-   CSV depolama için Hyper-V sunucusuna Birim Gölge Kopya Hizmetleri (VSS) donanım sağlayıcısını yükleyin. VSS donanım sağlayıcısı için depolama alanı ağı (SAN) satıcınıza başvurun.<br />-Tek bir düğüm bir CSV kümesinde beklenmedik bir şekilde kapatılırsa, MABS bu düğümde çalışan sanal makinelere karşı bir tutarlılık denetimi gerçekleştirir.<br />-   CSV kümesinde BitLocker Sürücü Şifrelemesi etkinleştirilmiş bir Hyper-V sunucusunu yeniden başlatmanız gerekirse, Hyper-V sanal makinelerine yönelik bir tutarlılık denetimi gerçekleştirmeniz gerekir.|
 |SMB deposu ile VM’leri yedekleyin|-Sanal makine korumasını etkinleştirmek için Hyper-V çalıştıran sunucuda otomatik bağlama özelliğini açın.<br />   -   TCP Kanalı Boşaltma'yı devre dışı bırakın.<br />-   Tüm Hyper-V machine$ hesaplarının ilgili uzak SMB dosya paylaşımlarında tam izinleri olduğundan emin olun.<br />-Diğer konuma kurtarma sırasında tüm sanal makine bileşenlerinin dosya yolunun 260 karakterden kısa olduğundan emin olun. Değilse, kurtarma başarılı olabilir ancak Hyper-V sanal makineyi bağlayamayacak.<br />-Aşağıdaki senaryolar desteklenmez:<br />     Bazı sanal makine bileşenlerinin yerel birimlerde olduğu ve bazı bileşenlerin uzak birimlerde olduğu dağıtımlar; depolama konumu dosya sunucusu için IPv4 veya IPv6 adresi ve bir sanal makinenin uzak SMB paylaşımlarını kullanan bir bilgisayara kurtarılması.<br />-Dosya sunucusu VSS Aracısı hizmetini her SMB sunucusunda etkinleştirmeniz gerekir. **rol ve Özellik Ekle**' de  >  **sunucu rolleri**  >  **dosya ve depolama hizmetleri** dosya  >  **Hizmetleri** dosya  >  **hizmeti** dosya  >  **sunucusu VSS Aracısı hizmeti**' ni seçin.|
@@ -76,7 +76,7 @@ Bunlar, MABS ile Hyper-V sanal makinelerini yedeklemeye yönelik önkoşullardı
    - 800 VM için toplam boyut: 80 TB
    - Yedekleme deposu için gereken alan: 80 TB
 
-2. MABS koruma aracısını Hyper-V sunucusunda veya Hyper-V küme düğümlerinde ayarlayın. Konuk düzeyinde yedekleme yapıyorsanız, aracıyı Konuk düzeyinde yedeklemek istediğiniz VM 'Lere yükleyeceksiniz.
+2. MABS koruma aracısını Hyper-V sunucusunda veya Hyper-V küme düğümlerinde ayarlayın.
 
 3. Mabs yönetici **konsolunda koruma**  >  **koruma grubu oluştur** ' u seçerek **yeni koruma grubu oluşturma** Sihirbazı ' nı açın.
 
@@ -88,7 +88,7 @@ Bunlar, MABS ile Hyper-V sanal makinelerini yedeklemeye yönelik önkoşullardı
 
     > [!NOTE]
     >
-    >Uygulama iş yüklerini koruyorsanız, uygulamanın artımlı yedeklemeleri desteklemesi koşuluyla kurtarma noktaları Eşitleme sıklığına uygun olarak oluşturulur. Değilse, MABS artımlı yedekleme yerine hızlı bir tam yedekleme çalıştırır ve hızlı yedekleme zamanlamasına uygun olarak kurtarma noktaları oluşturur.
+    >Uygulama iş yüklerini koruyorsanız, uygulamanın artımlı yedeklemeleri desteklemesi koşuluyla kurtarma noktaları Eşitleme sıklığına uygun olarak oluşturulur. Değilse, MABS artımlı yedekleme yerine hızlı bir tam yedekleme çalıştırır ve hızlı yedekleme zamanlamasına uygun olarak kurtarma noktaları oluşturur.<br></br>Yedekleme işlemi VM 'lerle ilişkili kontrol noktalarını yedeketmez.
 
 7. **Disk ayırmayı İncele** sayfasında, koruma grubu için ayrılmış depolama havuzu disk alanını gözden geçirin.
 
@@ -126,7 +126,7 @@ Bir yük devretme başlatılana kadar bir çoğaltma sanal makine kapalıdır ve
 
 Yedeklenen bir sanal makineyi kurtardığınızda, sanal makineyi ve özgül kurtarma noktasını seçmek için Kurtarma sihirbazını kullanırsınız. Kurtarma Sihirbazı'nı açmak ve bir sanal makineyi kurtarmak için:
 
-1. MABS Yönetici Konsolu 'nda, VM 'nin adını yazın veya korunan öğeler listesini genişletin ve kurtarmak istediğiniz VM 'yi seçin.
+1. MABS yönetici konsolunda, VM 'nin adını yazın veya korunan öğelerin listesini genişletin, **tüm korumalı hyperv verilerine** gidin ve kurtarmak istediğiniz VM 'yi seçin.
 
 2. Kurtarma **noktaları** bölmesinde, takvim üzerinde, kullanılabilir kurtarma noktalarını görmek için herhangi bir tarih seçin. Sonra, **Yol** bölmesinde, Kurtarma sihirbazında kullanmak istediğiniz kurtarma noktasını seçin.
 

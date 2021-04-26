@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.topic: quickstart
 ms.date: 04/06/2020
 ms.author: JenCook
-ms.openlocfilehash: aba23b67574fb74b7cd571dc5d4642bb8b991b93
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: be935dbd7e4559bcad8c5cf78622a5c63810f54c
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102566643"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812399"
 ---
 # <a name="quickstart-deploy-an-azure-confidential-computing-vm-in-the-marketplace"></a>Hızlı başlangıç: market 'te Azure gizli bilgi Işlem VM 'si dağıtma
 
@@ -128,7 +128,7 @@ Linux VM'lerinize bağlanma hakkında daha fazla bilgi için bkz. [Portal kullan
 
 Bir Ubuntu 18,04 LTS Gen 2 görüntüsünü çalıştıran DCsv2-Series sanal makinesine [OE SDK 'yı](https://github.com/openenclave/openenclave) yüklemek için adım adım yönergeleri izleyin. 
 
-Sanal makineniz Ubuntu 16,04 LTS Gen 2 üzerinde çalışıyorsa [ubuntu 16,04 yükleme yönergelerini](https://github.com/openenclave/openenclave/blob/master/docs/GettingStartedDocs/install_oe_sdk-Ubuntu_16.04.md)izlemeniz gerekir. 
+Sanal makineniz Ubuntu 18,04 LTS Gen 2 üzerinde çalışıyorsa [ubuntu 18,04 yükleme yönergelerini](https://github.com/openenclave/openenclave/blob/master/docs/GettingStartedDocs/install_oe_sdk-Ubuntu_18.04.md)izlemeniz gerekir. 
 
 #### <a name="1-configure-the-intel-and-microsoft-apt-repositories"></a>1. Intel ve Microsoft APT depolarını yapılandırma
 
@@ -144,11 +144,18 @@ wget -qO - https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add 
 ```
 
 #### <a name="2-install-the-intel-sgx-dcap-driver"></a>2. Intel SGX DCAP sürücüsünü yükler
+Ubuntu 'ın bazı sürümlerinde Intel SGX sürücüsü zaten yüklü olabilir. Aşağıdaki komutu kullanarak denetleyin: 
+
+```bash
+dmesg | grep -i sgx
+[  106.775199] sgx: intel_sgx: Intel SGX DCAP Driver {version}
+``` 
+Çıkış boşsa, sürücüyü yükler: 
 
 ```bash
 sudo apt update
 sudo apt -y install dkms
-wget https://download.01.org/intel-sgx/sgx-dcap/1.4/linux/distro/ubuntuServer18.04/sgx_linux_x64_driver_1.21.bin -O sgx_linux_x64_driver.bin
+wget https://download.01.org/intel-sgx/sgx-dcap/1.7/linux/distro/ubuntu18.04-server/sgx_linux_x64_driver_1.35.bin -O sgx_linux_x64_driver.bin
 chmod +x sgx_linux_x64_driver.bin
 sudo ./sgx_linux_x64_driver.bin
 ```
@@ -159,7 +166,7 @@ sudo ./sgx_linux_x64_driver.bin
 #### <a name="3-install-the-intel-and-open-enclave-packages-and-dependencies"></a>3. Intel ve Open Enclade paketlerini ve bağımlılıklarını yükleme
 
 ```bash
-sudo apt -y install clang-7 libssl-dev gdb libsgx-enclave-common libsgx-enclave-common-dev libprotobuf10 libsgx-dcap-ql libsgx-dcap-ql-dev az-dcap-client open-enclave
+sudo apt -y install clang-8 libssl-dev gdb libsgx-enclave-common libprotobuf10 libsgx-dcap-ql libsgx-dcap-ql-dev az-dcap-client open-enclave
 ```
 
 > [!NOTE] 

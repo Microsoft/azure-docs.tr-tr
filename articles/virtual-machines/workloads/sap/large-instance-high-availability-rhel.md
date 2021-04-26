@@ -3,18 +3,20 @@ title: Azure büyük örnekler RHEL 'de SAP için yüksek kullanılabilirlik
 description: Red Hat Enterprise Linux bir Paceoluşturucu kümesi kullanarak SAP HANA veritabanı yük devretmesini nasıl otomatikleştirebileceğinizi öğrenin.
 author: jaawasth
 ms.author: jaawasth
-ms.service: virtual-machines-linux
-ms.subservice: workloads
+ms.service: virtual-machines-sap
 ms.topic: how-to
-ms.date: 02/08/2021
-ms.openlocfilehash: 99e9994d01e4579bf6ef2e369e0fe85c48af52ef
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/19/2021
+ms.openlocfilehash: f7b6e6efbbd17655b4f68d79ac26ee34ae754a3b
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102182443"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728455"
 ---
 # <a name="azure-large-instances-high-availability-for-sap-on-rhel"></a>Azure büyük örnekler RHEL 'de SAP için yüksek kullanılabilirlik
+
+> [!NOTE]
+> Bu makale, Microsoft 'un artık kullanmadığını gösteren bir terim olan *kara liste* dönemi başvuruları içerir. Bu terim yazılımlardan kaldırıldığında, bu makaleyi kaldıracağız.
 
 Bu makalede, bir SAP HANA veritabanı yük devretmesini otomatikleştirmek üzere RHEL 7,6 ' de Paceoluşturucu kümesini nasıl yapılandıracağınızı öğreneceksiniz. Bu kılavuzdaki adımları tamamlayabilmeniz için Linux, SAP HANA ve Paceyapıcısı hakkında iyi bir fikir sahibi olmanız gerekir.
 
@@ -35,33 +37,23 @@ Kümeyi yapılandırmaya başlayabilmeniz için önce düğümler arasında güv
     ```
     root@sollabdsm35 ~]# cat /etc/hosts
     27.0.0.1 localhost localhost.azlinux.com
-    0.60.0.35 sollabdsm35.azlinux.com sollabdsm35 node1
-    0.60.0.36 sollabdsm36.azlinux.com sollabdsm36 node2
-    0.20.251.150 sollabdsm36-st
-
+    10.60.0.35 sollabdsm35.azlinux.com sollabdsm35 node1
+    10.60.0.36 sollabdsm36.azlinux.com sollabdsm36 node2
+    10.20.251.150 sollabdsm36-st
     10.20.251.151 sollabdsm35-st
-
-    
-
     10.20.252.151 sollabdsm36-back
-
     10.20.252.150 sollabdsm35-back
-
-    
-
     10.20.253.151 sollabdsm36-node
-
     10.20.253.150 sollabdsm35-node
-
     ```
 
 2.  SSH anahtarlarını oluşturma ve değiştirme.
     1. SSH anahtarları oluşturun.
 
-       ```
+    ```
        [root@sollabdsm35 ~]# ssh-keygen -t rsa -b 1024
        [root@sollabdsm36 ~]# ssh-keygen -t rsa -b 1024
-       ```
+    ```
     2. Anahtarları, passwordless SSH için diğer konaklara kopyalayın.
     
        ```
@@ -79,8 +71,6 @@ Kümeyi yapılandırmaya başlayabilmeniz için önce düğümler arasında güv
 
     SELINUX=disabled
 
-    
-
     [root@sollabdsm36 ~]# vi /etc/selinux/config
 
     ...
@@ -94,8 +84,6 @@ Kümeyi yapılandırmaya başlayabilmeniz için önce düğümler arasında güv
     [root@sollabdsm35 ~]# sestatus
 
     SELinux status: disabled
-
-    
 
     [root@sollabdsm36 ~]# sestatus
 
@@ -131,8 +119,6 @@ Kümeyi yapılandırmaya başlayabilmeniz için önce düğümler arasında güv
     
         Ref time (UTC) : Thu Jan 28 18:46:10 2021
     
-        
-    
         chronyc sources
     
         210 Number of sources = 8
@@ -159,7 +145,6 @@ Kümeyi yapılandırmaya başlayabilmeniz için önce düğümler arasında güv
         ```
         node1:~ # yum update
         ```
- 
 
 7. SAP HANA ve RHEL-HA depoları ' nı yükler.
 
@@ -173,11 +158,11 @@ Kümeyi yapılandırmaya başlayabilmeniz için önce düğümler arasında güv
     ```
       
 
-8. Tüm düğümlere Paceyapıcısı, SBD, Openıpmı, ıpmıtools ve fencing_sbd araçları 'nı yükler.
+8. Tüm düğümlere Paceyapıcısı, SBD, Openıpmı, ıpmıtool ve fencing_sbd araçları 'nı yükler.
 
     ``` 
     yum install pcs sbd fence-agent-sbd.x86_64 OpenIPMI
-    ipmitools
+    ipmitool
     ```
 
   ## <a name="configure-watchdog"></a>Izleme 'yi yapılandırma
@@ -199,8 +184,6 @@ Bu bölümde, Izleme 'yi yapılandırmayı öğreneceksiniz. Bu bölümde, `soll
 
     Active: inactive (dead)
 
-    
-
     Nov 28 23:02:40 sollabdsm35 systemd[1]: Collecting watchdog.service
 
     ```
@@ -208,7 +191,6 @@ Bu bölümde, Izleme 'yi yapılandırmayı öğreneceksiniz. Bu bölümde, `soll
 2. Yükleme sırasında yüklenecek olan varsayılan Linux izleme, UCS ve HPE SDFlex sistemleri tarafından desteklenmeyen ICO İzleyicisi 'dir. Bu nedenle, bu izleme devre dışı bırakılmalıdır.
     1. Sistemde yanlış izleme yüklendi ve yüklendi:
        ```
-   
        sollabdsm35:~ # lsmod |grep iTCO
    
        iTCO_wdt 13480 0
@@ -225,7 +207,6 @@ Bu bölümde, Izleme 'yi yapılandırmayı öğreneceksiniz. Bu bölümde, `soll
         
     3. Sürücünün bir sonraki sistem önyüklemesi sırasında yüklenmediğini doğrulamak için sürücünün blocklistelenmesi gerekir. ICO modüllerini engelleme için, dosyanın sonuna şunu ekleyin `50-blacklist.conf` :
        ```
-   
        sollabdsm35:~ # vi /etc/modprobe.d/50-blacklist.conf
    
         unload the iTCO watchdog modules
@@ -263,8 +244,6 @@ Bu bölümde, Izleme 'yi yapılandırmayı öğreneceksiniz. Bu bölümde, `soll
 3. Varsayılan olarak, gerekli cihaz/dev/izleme oluşturulmaz.
 
     ```
-    No watchdog device was created
-
     sollabdsm35:~ # ls -l /dev/watchdog
 
     ls: cannot access /dev/watchdog: No such file or directory
@@ -329,7 +308,7 @@ Bu bölümde, Izleme 'yi yapılandırmayı öğreneceksiniz. Bu bölümde, `soll
 ## <a name="sbd-configuration"></a>SBD yapılandırması
 Bu bölümde, SBD 'i yapılandırmayı öğrenirsiniz. Bu bölümde, `sollabdsm35` `sollabdsm36` Bu makalenin başlangıcında başvurulan iki ana bilgisayar kullanılır.
 
-1.  Iscsı veya FC diskinin her iki düğümde de göründüğünden emin olun. Bu örnek, FC tabanlı bir SBD cihazı kullanır. SBD balıklesi hakkında daha fazla bilgi için [başvuru belgelerine](http://www.linux-ha.org/wiki/SBD_Fencing)bakın.
+1.  Iscsı veya FC diskinin her iki düğümde de göründüğünden emin olun. Bu örnek, FC tabanlı bir SBD cihazı kullanır. SBD uçuşlama hakkında daha fazla bilgi için bkz. [RHEL yüksek kullanılabilirlik kümeleri Için tasarım kılavuzu-SBD konuları](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Faccess.redhat.com%2Farticles%2F2941601&data=04%7C01%7Cralf.klahr%40microsoft.com%7Cd49d7a3e3871449cdecc08d8c77341f1%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637478645171139432%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=c%2BUAC5gmgpFNWZCQFfiqcik8CH%2BmhH2ly5DsOV1%2FE5M%3D&reserved=0).
 2.  LUN KIMLIĞI tüm düğümlerde aynı olmalıdır.
   
 3.  SBD cihazının çok yollu durumunu denetleyin.
@@ -399,18 +378,15 @@ Bu bölümde, SBD 'i yapılandırmayı öğrenirsiniz. Bu bölümde, `sollabdsm3
 7.  SBD cihazını SBD yapılandırma dosyasına ekleyin.
 
     ```
-    \# SBD_DEVICE specifies the devices to use for exchanging sbd messages
-
-    \# and to monitor. If specifying more than one path, use ";" as
-
-    \# separator.
-
-    \#
+    # SBD_DEVICE specifies the devices to use for exchanging sbd messages
+    # and to monitor. If specifying more than one path, use ";" as
+    # separator.
+    #
 
     SBD_DEVICE="/dev/mapper/3600a098038304179392b4d6c6e2f4b62"
-    \## Type: yesno
+    ## Type: yesno
      Default: yes
-     \# Whether to enable the pacemaker integration.
+     # Whether to enable the pacemaker integration.
     SBD_PACEMAKER=yes
     ```
 
@@ -440,22 +416,16 @@ Bu bölümde, kümeyi başlatırsınız. Bu bölümde, `sollabdsm35` `sollabdsm3
     ```
     systemctl start pcsd
     ```
-  
-  
 
 5.  Küme kimlik doğrulamasını yalnızca Düğüm1 adresinden çalıştırın.
 
     ```
     pcs cluster auth sollabdsm35 sollabdsm36
 
-
-
         Username: hacluster
 
             Password:
-
             sollabdsm35.localdomain: Authorized
-
             sollabdsm36.localdomain: Authorized
 
      ``` 
@@ -506,20 +476,16 @@ Bu bölümde, kümeyi başlatırsınız. Bu bölümde, `sollabdsm35` `sollabdsm3
 
 8. Bir düğüm, güvenlik duvarı çalışmaya devam ediyorsa küme denetimine katılmaz.
 
-  
-
 9. SBD cihazını oluşturma ve etkinleştirme
     ```
     pcs stonith create SBD fence_sbd devices=/dev/mapper/3600a098038303f4c467446447a
     ```
   
-
 10. Kümeyi durdurun küme hizmetlerini (tüm düğümlerde) yeniden başlatın.
 
     ```
     pcs cluster stop --all
     ```
-
 
 11. Küme hizmetlerini yeniden başlatın (tüm düğümlerde).
 
@@ -628,7 +594,7 @@ Bu bölümde, kümeyi başlatırsınız. Bu bölümde, `sollabdsm35` `sollabdsm3
 
     Present Countdown: 19 sec
 
-    [root@sollabdsm351 ~] lsof /dev/watchdog
+    [root@sollabdsm35 ~] lsof /dev/watchdog
 
     COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
 
@@ -667,6 +633,7 @@ Bu bölümde, kümeyi başlatırsınız. Bu bölümde, `sollabdsm35` `sollabdsm3
 19. SAP HANA kümelemesinin geri kalanı için şu ayarı yaparak STONITH 'yi devre dışı bırakabilirsiniz:
 
    * PCs özellik kümesi `stonith-enabled=false`
+   * Sistemin beklenmedik şekilde yeniden başlatmaları önleyebileceğiniz için, kümenin kurulumu sırasında STONITH 'nin devre dışı bırakılması daha kolay olacaktır.
    * Üretken kullanım için bu parametrenin true olarak ayarlanması gerekir. Bu parametre true olarak ayarlanmamışsa, küme desteklenmeyecektir.
    * PCs özellik kümesi `stonith-enabled=true`
 
@@ -690,7 +657,7 @@ HANA 'yı tümleştirmek için iki seçenek vardır. İlk seçenek, QAS sistemin
    
        * su - hr2adm
    
-       * hdbsql -u system -p SAPhana10 -i 00 "select value from
+       * hdbsql -u system -p $YourPass -i 00 "select value from
        "SYS"."M_INIFILE_CONTENTS" where key='log_mode'"
    
        
@@ -701,7 +668,7 @@ HANA 'yı tümleştirmek için iki seçenek vardır. İlk seçenek, QAS sistemin
        ```
     2. SAP HANA sistem çoğaltması, yalnızca ilk yedekleme gerçekleştirildikten sonra çalışır. Aşağıdaki komut dizinde bir başlangıç yedeklemesi oluşturur `/tmp/` . Veritabanı için uygun bir yedekleme dosya sistemi seçin. 
        ```
-       * hdbsql -i 00 -u system -p SAPhana10 "BACKUP DATA USING FILE
+       * hdbsql -i 00 -u system -p $YourPass "BACKUP DATA USING FILE
        ('/tmp/backup')"
    
    
@@ -718,18 +685,14 @@ HANA 'yı tümleştirmek için iki seçenek vardır. İlk seçenek, QAS sistemin
    
        -rw-r----- 1 hr2adm sapsys 1996496896 Oct 26 23:31 backup_databackup_3_1
    
-       ```
-    
+       ```  
 
     3. Bu veritabanının tüm veritabanı kapsayıcılarını yedekleyin.
-       ```
+       ``` 
+       * hdbsql -i 00 -u system -p $YourPass -d SYSTEMDB "BACKUP DATA USING
+       FILE ('/tmp/sydb')"     
    
-       * hdbsql -i 00 -u system -p SAPhana10 -d SYSTEMDB "BACKUP DATA USING
-       FILE ('/tmp/sydb')"
-   
-       
-   
-       * hdbsql -i 00 -u system -p SAPhana10 -d SYSTEMDB "BACKUP DATA FOR HR2
+       * hdbsql -i 00 -u system -p $YourPass -d SYSTEMDB "BACKUP DATA FOR HR2
        USING FILE ('/tmp/rh2')"
    
        ```
@@ -956,7 +919,7 @@ HANA 'yı tümleştirmek için iki seçenek vardır. İlk seçenek, QAS sistemin
 
 #### <a name="log-replication-mode-description"></a>Günlük çoğaltma modu açıklaması
 
-Günlük çoğaltma modu hakkında daha fazla bilgi için bkz. [RESMI SAP belgeleri](https://help.sap.com/viewer/6b94445c94ae495c83a19646e7c3fd56/2.0.01/c039a1a5b8824ecfa754b55e0caffc01.html).
+Günlük çoğaltma modu hakkında daha fazla bilgi için bkz. [RESMI SAP belgeleri](https://help.sap.com/viewer/6b94445c94ae495c83a19646e7c3fd56/2.0.01/627bd11e86c84ec2b9fcdf585d24011c.html).
   
 
 #### <a name="network-setup-for-hana-system-replication"></a>HANA sistem çoğaltması için ağ kurulumu
@@ -979,7 +942,7 @@ Aşağıdaki örnekte, `[system_replication_communication]listeninterface` param
 
   
 
-### <a name="source-sap-ag-sap-hana-hrs-networking"></a>Kaynak SAP AG SAP HANA saat ağı
+Daha fazla bilgi için bkz. [SAP HANA sistem çoğaltması Için ağ yapılandırması](https://www.sap.com/documents/2016/06/18079a1c-767c-0010-82c7-eda71af511fa.html).
 
   
 
@@ -1021,9 +984,8 @@ Aşağıdaki önkoşulların karşılandığından emin olun:
     [root@node1 ~]# pcs resource defaults migration-threshold=5000
     ```
 2.  Corosync 'i yapılandırın.
+    Daha fazla bilgi için bkz. [RHEL 7 yüksek kullanılabilirlik kümenizi pacemaker ve Corosync Ile nasıl yapılandırabilirim](https://access.redhat.com/solutions/1293523).
     ```
-    https://access.redhat.com/solutions/1293523 --> quorum information RHEL7
-
     cat /etc/corosync/corosync.conf
 
     totem {
@@ -1087,71 +1049,60 @@ Aşağıdaki önkoşulların karşılandığından emin olun:
     ```
   
 
-1.  Kopyalanmış SAPHanaTopology kaynağı oluşturun.
-    ```
-    pcs resource create SAPHanaTopology_HR2_00 SAPHanaTopology SID=HR2 InstanceNumber=00 --clone clone-max=2 clone-node-max=1 interleave=true
-    SAPHanaTopology resource is gathering status and configuration of SAP
-    HANA System Replication on each node. SAPHanaTopology requires
-    following attributes to be configured.
+3.  Kopyalanmış SAPHanaTopology kaynağı oluşturun.
+    SAPHanaTopology kaynağı her düğümde SAP HANA sistem çoğaltmasının durumunu ve yapılandırmasını topluyor. SAPHanaTopology için aşağıdaki özniteliklerin yapılandırılması gerekir.
+       ```
+       pcs resource create SAPHanaTopology_HR2_00 SAPHanaTopology SID=HR2 InstanceNumber=00 --clone clone-max=2 clone-node-max=1    interleave=true
+       ```
 
+    | Öznitelik adı | Description  |
+    |---|---|
+    | SID | SAP HANA yüklemesinin SAP sistem tanımlayıcısı (SID). Tüm düğümler için aynı olmalıdır. |
+    | Örneksayısı | 2 basamaklı SAP örneği Idntifier.|
 
-
-        Attribute Name Description
-
-        SID SAP System Identifier (SID) of SAP HANA installation. Must be
-    same for all nodes.
-
-    InstanceNumber 2-digit SAP Instance identifier.
-    pcs resource show SAPHanaTopology_HR2_00-clone
-
-    Clone: SAPHanaTopology_HR2_00-clone
-
+    * Kaynak durumu
+       ```
+       pcs resource show SAPHanaTopology_HR2_00
+   
+       InstanceNumber 2-digit SAP Instance identifier.
+       pcs resource show SAPHanaTopology_HR2_00-clone
+   
+       Clone: SAPHanaTopology_HR2_00-clone
+   
         Meta Attrs: clone-max=2 clone-node-max=1 interleave=true
-
+   
         Resource: SAPHanaTopology_HR2_00 (class=ocf provider=heartbeat
-    type=SAPHanaTopology)
-
+       type=SAPHanaTopology)
+   
         Attributes: InstanceNumber=00 SID=HR2
-
+   
         Operations: monitor interval=60 timeout=60
-    (SAPHanaTopology_HR2_00-monitor-interval-60)
-
+       (SAPHanaTopology_HR2_00-monitor-interval-60)
+   
         start interval=0s timeout=180
-    (SAPHanaTopology_HR2_00-start-interval-0s)
-
+       (SAPHanaTopology_HR2_00-start-interval-0s)
+   
         stop interval=0s timeout=60 (SAPHanaTopology_HR2_00-stop-interval-0s)
+   
+       ```
 
-    ```
+4.  Birincil/Ikincil SAPHana kaynağı oluşturun.
+    * SAPHana kaynağı SAP HANA veritabanını başlatma, durdurma ve yeniden konumlandırmaktan sorumludur. Bu kaynağın birincil/Ikincil küme kaynağı olarak çalıştırılması gerekir. Kaynak aşağıdaki özniteliklere sahiptir.
 
-3.  Birincil/Ikincil SAPHana kaynağı oluşturun.
-
-    ```
-    SAPHana resource is responsible for starting, stopping and relocating the SAP HANA database. This resource must be run as a Primary/    Secondary cluster resource. The resource has the following attributes.
-
-    
-
-    Attribute Name Required? Default value Description
-
-    SID Yes None SAP System Identifier (SID) of SAP HANA installation. Must be same for all nodes.
-
-    InstanceNumber Yes none 2-digit SAP Instance identifier.
-
-    PREFER_SITE_TAKEOVER
-
-    no yes Should cluster prefer to switchover to secondary instance instead of restarting primary locally? ("no": Do prefer restart locally;   "yes": Do prefer takeover to remote site)
-
-    AUTOMATED_REGISTER no false Should the former SAP HANA primary be registered as secondary after takeover and DUPLICATE_PRIMARY_TIMEOUT?     ("false": no, manual intervention will be needed; "true": yes, the former primary will be registered by resource agent as secondary)
-
-    DUPLICATE_PRIMARY_TIMEOUT no 7200 Time difference (in seconds) needed between primary time stamps, if a dual-primary situation occurs. If   the time difference is less than the time gap, then the cluster holds one or both instances in a "WAITING" status. This is to give an   admin a chance to react on a failover. A failed former primary will be registered after the time difference is passed. After this   registration to the new primary all data will be overwritten by the system replication.
-    ```
-  
+| Öznitelik adı            | Gerekli mi? | Varsayılan değer | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|---------------------------|-----------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SID                       | Yes       | Yok          | SAP HANA yüklemesinin SAP sistem tanımlayıcısı (SID). Tüm düğümler için aynı olmalıdır.                                                                                                                                                                                                                                                                                                                                                                                       |
+| Örneksayısı            | Yes       | yok          | 2 basamaklı SAP örnek tanımlayıcısı.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| PREFER_SITE_TAKEOVER      | hayır        | evet           | Küme, birincil yerel olarak yeniden başlatmak yerine ikincil örneğe geçiş yapmayı tercih ediyor mu? ("Hayır": yerel olarak yeniden başlatmayı tercih edin; "Evet": uzak siteye devralmayı tercih etme                                                                                                                                                                                                                                                                                            |
+|                           |           |               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| AUTOMATED_REGISTER        | hayır        | FALSE         | Birinci SAP HANA birincil, devralındıktan ve DUPLICATE_PRIMARY_TIMEOUT sonra ikincil olarak kaydedilmelidir mi? ("false": Hayır, el ile müdahale gerekli olacaktır; "true": Evet, eski birincil, kaynak Aracısı tarafından ikincil olarak kaydedilecek                                                                                                                                                                                                                        |
+| DUPLICATE_PRIMARY_TIMEOUT | hayır        | 7200          | Bir çift birincil durum oluşursa, birincil zaman damgaları arasında zaman farkı (saniye cinsinden). Zaman farkı zaman aralığından azsa, küme "bekleme" durumundaki bir veya her iki örneği de barındırır. Bu, yöneticiye yük devretme konusunda tepki verme şansı vermektir. Başarısız olan eski birincil süre, saat farkı geçtikten sonra kaydedilecek. Bu yeni birincili kaydedildikten sonra, sistem çoğaltması tarafından tüm verilerin üzerine yazılır. |
 
 5.  HANA kaynağını oluşturun.
     ```
     pcs resource create SAPHana_HR2_00 SAPHana SID=HR2 InstanceNumber=00 PREFER_SITE_TAKEOVER=true DUPLICATE_PRIMARY_TIMEOUT=7200   AUTOMATED_REGISTER=true primary notify=true clone-max=2 clone-node-max=1 interleave=true
 
     pcs resource show SAPHana_HR2_00-primary
-
 
 
     Primary: SAPHana_HR2_00-primary
@@ -1249,10 +1200,8 @@ Aşağıdaki önkoşulların karşılandığından emin olun:
     ```
 
 6.  Sanal IP adresi kaynağı oluşturun.
-
+    Küme, SAP HANA birincil örneğine ulaşmak için sanal IP adresine sahip olacaktır. Aşağıda IP 10.7.0.84/24 ile IPaddr2 kaynağı oluşturmak için örnek komut verilmiştir.
     ```
-    Cluster will contain Virtual IP address in order to reach the Primary instance of SAP HANA. Below is example command to create IPaddr2  resource with IP 10.7.0.84/24
-
     pcs resource create vip_HR2_00 IPaddr2 ip="10.7.0.84"
     pcs resource show vip_HR2_00
 
@@ -1269,13 +1218,11 @@ Aşağıdaki önkoşulların karşılandığından emin olun:
     ```
 
 7.  Kısıtlama oluşturun.
-
-    ```
-    For correct operation we need to ensure that SAPHanaTopology resources are started before starting the SAPHana resources and also that  the virtual IP address is present on the node where the Primary resource of SAPHana is running. To achieve this, the following 2    constraints need to be created.
-
-    pcs constraint order SAPHanaTopology_HR2_00-clone then SAPHana_HR2_00-primary symmetrical=false
-    pcs constraint colocation add vip_HR2_00 with primary SAPHana_HR2_00-primary 2000
-    ```
+    * Doğru işlem için sapetatopolojisi kaynaklarının SAPHana kaynaklarını başlatmadan önce başlatıldığından ve ayrıca sanal IP adresinin SAPHana 'nın birincil kaynağının çalıştığı düğümde mevcut olduğundan emin olunması gerekir. Bunu başarmak için aşağıdaki 2 kısıtlamaların oluşturulması gerekir.
+       ```
+       pcs constraint order SAPHanaTopology_HR2_00-clone then SAPHana_HR2_00-primary symmetrical=false
+       pcs constraint colocation add vip_HR2_00 with primary SAPHana_HR2_00-primary 2000
+       ```
 
 ###  <a name="testing-the-manual-move-of-saphana-resource-to-another-node"></a>SAPHana kaynağının el ile taşınmasını başka bir düğüme test etme
 
@@ -1322,7 +1269,7 @@ Node Attributes:
   * indirgenen konak:
 
     ```
-    hdbsql -i 00 -u system -p SAPhana10 -n 10.7.0.82
+    hdbsql -i 00 -u system -p $YourPass -n 10.7.0.82
 
     result:
 
@@ -1333,7 +1280,7 @@ Node Attributes:
   * Yükseltilen konak:
 
     ```
-    hdbsql -i 00 -u system -p SAPhana10 -n 10.7.0.84
+    hdbsql -i 00 -u system -p $YourPass -n 10.7.0.84
     
     Welcome to the SAP HANA Database interactive terminal.
     
@@ -1357,20 +1304,17 @@ Node Attributes:
 Seçeneği ile `AUTOMATED_REGISTER=false` , geri ve ileri geçiş yapılamaz.
 
 Bu seçenek false olarak ayarlandıysa, düğümü yeniden kaydetmeniz gerekir:
-
-  
 ```
 hdbnsutil -sr_register --remoteHost=node2 --remoteInstance=00 --replicationMode=syncmem --name=DC1
 ```
-  
 
 Artık birincil olan Düğüm2, ikincil ana bilgisayar işlevi görür.
 
 İndirgenen konağın kaydını otomatik hale getirmek için bu seçeneği true olarak ayarlamayı düşünün.
-
   
 ```
 pcs resource update SAPHana_HR2_00-primary AUTOMATED_REGISTER=true
-
 pcs cluster node clear node1
 ```
+
+Otomatik kaydetmeyi tercih etmeksizin müşteri senaryosuna bağlıdır. Bir reregistering, işlem ekibi için bir yük devri daha kolay olacak şekilde otomatik olarak düğüm. Ancak, her şeyin beklendiği gibi çalıştığından emin olmak için, daha önce ek testler çalıştırmak üzere düğümü el ile kaydetmek isteyebilirsiniz.

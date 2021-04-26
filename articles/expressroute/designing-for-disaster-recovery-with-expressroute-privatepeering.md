@@ -7,12 +7,12 @@ ms.service: expressroute
 ms.topic: article
 ms.date: 03/22/2021
 ms.author: duau
-ms.openlocfilehash: 3da044057784763df8d071af6c101f7baffbefc6
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: d0aa9e8bfd565eeb7599d52adc0ac5b854e750bb
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105562316"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105937235"
 ---
 # <a name="designing-for-disaster-recovery-with-expressroute-private-peering"></a>ExpressRoute özel eşlemesi ile olağanüstü durum kurtarma için tasarlama
 
@@ -47,7 +47,7 @@ Bununla birlikte, coğrafi olarak yedekli paralel yollar arasında trafiği deng
 
 ### <a name="different-metros"></a>Farklı Metros
 
-Artıklık için farklı Metros kullanılırken, ikincil konum aynı [coğrafi politik bölgede](expressroute-locations-providers.md#locations)olmalıdır. Coğrafi politik bölgenin dışında bir konum seçmek için, paralel yollarda her iki devrede Premium SKU kullanmanız gerekir. Bu yapılandırmanın avantajı doğal bir olağanüstü durum olma ihtimaline yol açar, ancak her iki bağlantı da kesintiye neden olur ancak gecikme süresi uçtan uca artar.
+Artıklık için farklı Metros kullanırken, aynı [coğrafi politik bölgede](expressroute-locations-providers.md#locations)ikincil konumu seçmeniz gerekir. Coğrafi politik bölgenin dışında bir konum seçmek için, paralel yollarda her iki devrede Premium SKU kullanmanız gerekir. Bu yapılandırmanın avantajı doğal bir olağanüstü durum olma ihtimaline neden olur, ancak her iki bağlantı da kesintiye yol açabilir ancak gecikme süresi uçtan uca artar.
 
 Bu makalede, coğrafi olarak yedekli yolları yapılandırırken karşılaşabileceğiniz sorunları nasıl ele vertiğimizden bahsedelim.
 

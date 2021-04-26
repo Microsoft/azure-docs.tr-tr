@@ -11,12 +11,12 @@ ms.subservice: face-api
 ms.topic: conceptual
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: 2f608843e27b79d02697df8e2a7f2aba6695e10a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5287fe6df4a2f0cb728bf0e705a4ce989ca38487
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "80878434"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105934045"
 ---
 # <a name="configure-face-docker-containers"></a>Yüz Docker kapsayıcılarını yapılandırma
 
@@ -67,7 +67,7 @@ Bölümündeki yapılandırma ayarları, `CloudAI` kapsayıcınıza özel kapsay
 
 ### <a name="storage-scenario-settings"></a>Depolama senaryosu ayarları
 
-Yüz kapsayıcısı, depolanmaya bağlı olarak blob, önbellek, meta veri ve kuyruk verilerini depolar. Örneğin, büyük bir kişi grubu için eğitim dizinleri ve sonuçları blob verileri olarak depolanır. Yüz kapsayıcısı, bu veri türlerini kullanarak ve depolarken iki farklı depolama senaryosu sağlar:
+Yüz kapsayıcısı, depolanmaya bağlı olarak blob, önbellek, meta veri ve kuyruk verilerini depolar. Örneğin, bir **Largepersongroup** için eğitim dizinleri ve sonuçları blob verileri olarak depolanır. Yüz kapsayıcısı, bu veri türlerini kullanarak ve depolarken iki farklı depolama senaryosu sağlar:
 
 * Bellek  
   Dört tür veri, bellekte depolanır. Bunlar dağıtılmaz ve kalıcı değildir. Yüz kapsayıcısı durdurulmuşsa veya kaldırılırsa, o kapsayıcı için depolama alanındaki tüm veriler yok edilir.  

@@ -10,12 +10,12 @@ ms.topic: sample
 ms.date: 02/19/2020
 ms.author: alkemper
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 54ad9f389070e1d5d280517a2f6c41e9a0f8f33e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: bc329feffbf22d63774ab0f3779d62d3ccf53adb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96929999"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774149"
 ---
 # <a name="work-with-key-values-in-an-azure-app-configuration-store"></a>Azure uygulama yapılandırma deposundaki anahtar değerleriyle çalışma
 
@@ -83,9 +83,9 @@ Bu tabloda, örnek betiğimizde kullanılan komutlar listelenmektedir.
 
 | Komut | Notlar |
 |---|---|
-| [az appconfig kV set](/cli/azure/appconfig/kv#az-appconfig-kv-set) | Anahtar-değer çifti oluşturun veya güncelleştirin. |
-| [az appconfig kV List](/cli/azure/appconfig/kv#az-appconfig-kv-list) | Bir uygulama yapılandırma deposundaki anahtar-değer çiftlerini listeleyin. |
-| [az appconfig kV Delete](/cli/azure/appconfig/kv#az-appconfig-kv-delete) | Anahtar-değer çiftini silin. |
+| [az appconfig kV set](/cli/azure/appconfig/kv#az_appconfig_kv_set) | Anahtar-değer çifti oluşturun veya güncelleştirin. |
+| [az appconfig kV List](/cli/azure/appconfig/kv#az_appconfig_kv_list) | Bir uygulama yapılandırma deposundaki anahtar-değer çiftlerini listeleyin. |
+| [az appconfig kV Delete](/cli/azure/appconfig/kv#az_appconfig_kv_delete) | Anahtar-değer çiftini silin. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

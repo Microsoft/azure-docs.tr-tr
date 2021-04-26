@@ -2,25 +2,21 @@
 title: Self Servis uygulama atamasını yapılandırma | Microsoft Docs
 description: Kullanıcıların kendi uygulamalarını bulmasına izin vermek için self servis uygulama erişimini etkinleştirme
 services: active-directory
-documentationcenter: ''
-author: kenwith
-manager: daveba
-ms.assetid: ''
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: how-to
 ms.date: 04/20/2020
-ms.author: kenwith
+ms.author: iangithinji
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9742a21cf00733607237c0eaf548f96b434abb33
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 29c3043cc38c8ab3d3387b171ea6f3793d485730
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99260223"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107373970"
 ---
 # <a name="how-to-configure-self-service-application-assignment"></a>Self Servis uygulama atamasını yapılandırma
 

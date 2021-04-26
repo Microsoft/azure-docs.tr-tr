@@ -5,12 +5,12 @@ description: Bir Azure Kubernetes hizmeti (AKS) kümesi için hizmet sorumlusu v
 services: container-service
 ms.topic: article
 ms.date: 03/11/2019
-ms.openlocfilehash: 91d40a5a738737098b0941bf3e41e4edd515e6df
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 0b750eb9af7dfd7bcbada7500b6ef71b015db11f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640480"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767484"
 ---
 # <a name="update-or-rotate-the-credentials-for-azure-kubernetes-service-aks"></a>Azure Kubernetes hizmeti (AKS) için kimlik bilgilerini güncelleştirme veya döndürme
 
@@ -133,12 +133,12 @@ Bu makalede, AKS kümesi için hizmet sorumlusu ve AAD tümleştirme uygulamalar
 
 <!-- LINKS - internal -->
 [install-azure-cli]: /cli/azure/install-azure-cli
-[az-aks-show]: /cli/azure/aks#az-aks-show
-[az-aks-update-credentials]: /cli/azure/aks#az-aks-update-credentials
+[az-aks-show]: /cli/azure/aks#az_aks_show
+[az-aks-update-credentials]: /cli/azure/aks#az_aks_update_credentials
 [best-practices-identity]: operator-best-practices-identity.md
 [aad-integration]: ./azure-ad-integration-cli.md
 [create-aad-app]: ./azure-ad-integration-cli.md#create-azure-ad-server-component
-[az-ad-sp-create]: /cli/azure/ad/sp#az-ad-sp-create-for-rbac
-[az-ad-sp-credential-list]: /cli/azure/ad/sp/credential#az-ad-sp-credential-list
-[az-ad-sp-credential-reset]: /cli/azure/ad/sp/credential#az-ad-sp-credential-reset
+[az-ad-sp-create]: /cli/azure/ad/sp#az_ad_sp_create_for_rbac
+[az-ad-sp-credential-list]: /cli/azure/ad/sp/credential#az_ad_sp_credential_list
+[az-ad-sp-credential-reset]: /cli/azure/ad/sp/credential#az_ad_sp_credential_reset
 [node-image-upgrade]: ./node-image-upgrade.md

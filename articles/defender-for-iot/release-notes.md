@@ -1,20 +1,74 @@
 ---
 title: IoT için Azure Defender 'daki yenilikler
 description: Bu makale, IoT için Defender 'ın en son sürümündeki yenilikleri öğrenmenizi sağlar.
-ms.topic: how-to
-ms.date: 03/14/2021
-ms.openlocfilehash: 970d46a76f125dcaf82491fdea877e6874e2384f
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.topic: overview
+ms.date: 04/19/2021
+ms.openlocfilehash: da5358ccf0f69ca2ba8f5722b75889b6b7c92c07
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104778704"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107752615"
 ---
 # <a name="whats-new-in-azure-defender-for-iot"></a>IoT için Azure Defender 'daki yenilikler nelerdir?
 
 Bu makalede, IoT için Defender için yeni özellikler ve özellik geliştirmeleri listelenmektedir.
 
 Belirtilen özellikler ÖNIZLEMEDEDIR. [Azure önizleme ek koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) , Beta, önizleme veya henüz genel kullanıma sunulmayan Azure özelliklerine uygulanan ek yasal koşulları içerir.
+
+## <a name="april-2021"></a>2021 Nisan
+
+### <a name="work-with-automatic-threat-intelligence-updates-public-preview"></a>Otomatik tehdit zekası güncelleştirmeleriyle çalışma (Genel Önizleme)
+
+Yeni tehdit bilgileri paketleri artık IoT için Microsoft Defender tarafından yayımlandıkları sürece bulut bağlantılı sensörler için otomatik olarak gönderilebilirler. Bu, tehdit zekalarının indirilemelerine ve ardından bunları sensörlerden yüklemeye ek niteliğindedir.
+
+Otomatik güncelleştirmelerle çalışma, işletimsel çabaları azaltmaya ve daha fazla güvenlik sağlanmasına yardımcı olur. **Otomatik tehdit bilgileri güncelleştirmeleri** etkin olan IoT portalı için Defender 'a bağlı sensörinizi ekleyerek otomatik güncelleştirmeyi etkinleştirin.
+
+Tehdit bilgileri verilerinizi güncelleştirmeye yönelik daha koruyucu bir yaklaşım almak isterseniz, IoT portalı için Azure Defender 'daki paketleri, yalnızca gerekli olduğu durumlarda bulut bağlantılı sensörlerine el ile gönderebilirsiniz.
+Bu, bir paketin ne zaman yükleneceğini, indirmenize ve sonra Sensörlerinizi yüklemeye gerek kalmadan denetlemenize olanak tanır. IoT **siteleri ve algılayıcılar** için Defender 'daki sensörlerden güncelleştirmeleri el ile gönderin.
+
+Tehdit zekası paketleriyle ilgili aşağıdaki bilgileri de gözden geçirebilirsiniz:
+
+- Paket sürümü yüklendi
+- Tehdit bilgileri güncelleştirme modu 
+- Tehdit zekası güncelleştirme durumu
+
+### <a name="view-cloud-connected-sensor-information-public-preview"></a>Bulut bağlantılı algılayıcı bilgilerini görüntüle (Genel Önizleme)
+
+**Site ve algılayıcılar** sayfasında bulut bağlantılı algılayıcılar hakkında önemli işletimsel bilgileri görüntüleyin.
+
+- Yüklü algılayıcı sürümü
+- Buluta yönelik algılayıcı bağlantısı durumu.
+- Sensörin buluta bağlanırken algıladığı son zaman.
+
+### <a name="alert-api-enhancements"></a>Uyarı API 'SI geliştirmeleri
+
+Yeni alanlar, uyarı API 'Leri ile çalışan kullanıcılar için kullanılabilir.
+
+**Şirket içi yönetim konsolu**
+
+- Kaynak ve hedef adresi
+- Düzeltme adımları
+- Kullanıcı tarafından tanımlanan sensör adı
+- Sensörle ilişkili bölgenin adı 
+- Sensörle ilişkili sitenin adı
+
+**Algılayıcısı**
+
+- Kaynak ve hedef adresi
+- Düzeltme adımları
+
+Yeni alanlarla çalışırken API sürüm 2 gereklidir.
+
+### <a name="features-delivered-as-generally-available-ga"></a>Genel kullanıma sunulan Özellikler (GA)
+
+Aşağıdaki özellikler daha önce genel önizlemede kullanıma sunulmuştur ve genel kullanıma sunuldu (GA) özelliklerdir:
+
+- Algılayıcı gelişmiş özel uyarı kuralları
+- Şirket içi yönetim konsolu-uyarıları dışarı aktarma
+- Şirket içi yönetim konsoluna ikinci ağ arabirimi ekleme
+- Cihaz Oluşturucu-yeni mikro aracı
+
 ## <a name="march-2021"></a>Mart 2021
 
 ### <a name="sensor---enhanced-custom-alert-rules-public-preview"></a>Algılayıcı gelişmiş özel uyarı kuralları (Genel Önizleme)
@@ -26,6 +80,12 @@ Bu özellik, sürüm 10,2 sürümü ile sensörde mevcuttur.
 ### <a name="on-premises-management-console---export-alerts-public-preview"></a>Şirket içi yönetim konsolu-uyarıları dışarı aktarma (Genel Önizleme)
 
 Uyarı bilgileri artık şirket içi yönetim konsolundan bir. csv dosyasına aktarılabilir. Filtrelenmiş görünüme göre algılanan tüm uyarıların veya dışarı aktarma bilgilerinin bilgilerini dışarı aktarabilirsiniz.
+
+Bu özellik, sürüm 10,2 sürümü ile şirket içi yönetim konsolunda kullanılabilir.
+
+### <a name="add-second-network-interface-to-on-premises-management-console-public-preview"></a>Şirket içi yönetim konsoluna ikinci ağ arabirimi ekleme (Genel Önizleme)
+
+Artık şirket içi yönetim konsoluna ikinci bir ağ arabirimi ekleyerek dağıtımınızın güvenliğini geliştirebilirsiniz. Bu özellik, şirket içi yönetimin tek bir güvenli ağ üzerinde bağlı algılayıcıların olmasına olanak sağlarken, kullanıcılarınızın şirket içi yönetim konsoluna ikinci ayrı bir ağ arabirimi aracılığıyla erişmesini sağlar.
 
 Bu özellik, sürüm 10,2 sürümü ile şirket içi yönetim konsolunda kullanılabilir.
 

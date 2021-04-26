@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: sample
 ms.custom: mvc, devx-track-azurecli
 ms.date: 12/02/2019
-ms.openlocfilehash: c7a46f98f74648ccae9f9f9f94c218d42056decb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3504f1221c501b997b04d9c81c721aba2903fba6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98664656"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777068"
 ---
 # <a name="list-and-update-configurations-of-an-azure-database-for-mariadb-server-using-azure-cli"></a>Azure CLı kullanarak MariaDB sunucusu için Azure veritabanı 'nın yapılandırmasını listeleme ve güncelleştirme
 Bu örnek CLı betiği, tüm kullanılabilir yapılandırma parametrelerini ve ayrıca, MariaDB sunucusu için Azure veritabanı için izin verilen değerleri listeler ve *innodb_lock_wait_timeout* varsayılan değer dışında bir değere ayarlar.
@@ -35,14 +35,14 @@ Betik çalıştırıldıktan sonra aşağıdaki komutu kullanarak kaynak grubunu
 ## <a name="script-explanation"></a>Betik açıklaması
 Bu betik, aşağıdaki tabloda ana hatları verilen komutları kullanır:
 
-| **Komut** | **Notlar** |
+| **Komutundaki** | **Notlar** |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az MariaDB sunucu oluştur](/cli/azure/mariadb/server#az-mariadb-server-create) | Veritabanlarını barındıran bir MariaDB sunucusu oluşturur. |
-| [az MariaDB sunucu yapılandırma listesi](/cli/azure/mariadb/server/configuration#az-mariadb-server-configuration-list) | MariaDB sunucusu için Azure veritabanı 'nın yapılandırmasını listeleyin. |
-| [az MariaDB sunucu yapılandırma kümesi](/cli/azure/mariadb/server/configuration#az-mariadb-server-configuration-set) | MariaDB sunucusu için Azure veritabanı yapılandırmasını güncelleştirin. |
-| [az MariaDB sunucu yapılandırma Show](/cli/azure/mariadb/server/configuration#az-mariadb-server-configuration-show) | MariaDB sunucusu için Azure veritabanı yapılandırmasını gösterir. |
-| [az group delete](/cli/azure/group#az-group-delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az MariaDB sunucu oluştur](/cli/azure/mariadb/server#az_mariadb_server_create) | Veritabanlarını barındıran bir MariaDB sunucusu oluşturur. |
+| [az MariaDB sunucu yapılandırma listesi](/cli/azure/mariadb/server/configuration#az_mariadb_server_configuration_list) | MariaDB sunucusu için Azure veritabanı 'nın yapılandırmasını listeleyin. |
+| [az MariaDB sunucu yapılandırma kümesi](/cli/azure/mariadb/server/configuration#az_mariadb_server_configuration_set) | MariaDB sunucusu için Azure veritabanı yapılandırmasını güncelleştirin. |
+| [az MariaDB sunucu yapılandırma Show](/cli/azure/mariadb/server/configuration#az_mariadb_server_configuration_show) | MariaDB sunucusu için Azure veritabanı yapılandırmasını gösterir. |
+| [az group delete](/cli/azure/group#az_group_delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - Azure CLI hakkında daha fazla bilgi okuyun: [Azure CLI belgeleri](/cli/azure).

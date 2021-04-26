@@ -15,12 +15,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/28/2021
 ms.author: Zhchia
-ms.openlocfilehash: 24c8e2aafed6ee7b8823effc350dee4edb5e4873
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: db33cc43419b4228ca270d3a69c0e88de2c05638
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101650864"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107752057"
 ---
 # <a name="tutorial-configure-hoxhunt-for-automatic-user-provisioning"></a>Öğretici: otomatik Kullanıcı sağlaması için Hoxhunt 'yi yapılandırma
 
@@ -130,6 +130,9 @@ Hazırlama ayarlarını yapılandırdıktan sonra dağıtımınızı izlemek iç
 * Hazırlama işlemi başarılı ve başarısız olan kullanıcıları belirlemek için [hazırlama günlüklerini](../reports-monitoring/concept-provisioning-logs.md) kullanın
 * Hazırlama döngüsünün durumunu ve tamamlanması için kalan miktarı görmek için [ilerleme çubuğuna](../app-provisioning/application-provisioning-when-will-provisioning-finish-specific-user.md) bakın
 * Hazırlama yapılandırmasının durumu iyi görünmüyorsa uygulama karantinaya geçer. Karantina durumu hakkında daha fazla bilgi edinmek için [buraya](../app-provisioning/application-provisioning-quarantine-status.md) bakın.  
+
+## <a name="change-log"></a>Değişiklik Günlüğü
+* 04/20/2021-"preferredLanguage" ve kuruluş uzantısı özniteliği için "urn: IETF: params: SCIM: schemas: Extension: Enterprise: 2.0: User: bölme" desteği eklendi.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

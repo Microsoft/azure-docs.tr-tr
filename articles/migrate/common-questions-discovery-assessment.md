@@ -6,12 +6,12 @@ ms.author: rajosh
 ms.manager: abhemraj
 ms.topic: conceptual
 ms.date: 06/09/2020
-ms.openlocfilehash: 629459d22b18b326307b45bb512d16622808b533
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: c10963d28e0d2ecee73150e8b5af89cee96d28b2
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105562639"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077015"
 ---
 # <a name="discovery-assessment-and-dependency-analysis---common-questions"></a>Keşif, değerlendirme ve bağımlılık analizi-genel sorular
 
@@ -85,6 +85,10 @@ Performans sayaçlarından herhangi biri eksikse, Azure SQL değerlendirmesi Bu 
 - Azure VM ve AVS değerlendirmelerinde, bulma başlatıldıktan sonra birkaç sunucu oluşturulmuştur. Örneğin, son bir ayın performans geçmişi için bir değerlendirme oluşturuyorsanız ancak ortamda yalnızca bir hafta önce birkaç sunucu oluşturuluyorsa. Bu durumda, yeni sunucular için performans verileri sürenin tamamına uygun olmayacaktır ve güvenirlik derecelendirmesi düşük olacaktır. [Daha fazla bilgi edinin](./concepts-assessment-calculation.md#confidence-ratings-performance-based)
 
 - Azure SQL değerlendirmelerinde, bulma başlatıldıktan sonra birkaç SQL örneği veya veritabanı oluşturuldu. Örneğin, son bir ayın performans geçmişi için bir değerlendirme oluşturuyorsanız ancak ortamda yalnızca bir hafta önce birkaç SQL örneği veya veritabanı oluşturuluyorsa. Bu durumda, yeni sunucular için performans verileri sürenin tamamına uygun olmayacaktır ve güvenirlik derecelendirmesi düşük olacaktır. [Daha fazla bilgi edinin](./concepts-azure-sql-assessment-calculation.md#confidence-ratings)
+
+## <a name="-the-number-of-azure-vm-or-avs-assessments-on-the-discovery-and-assessment-tool-are-incorrect"></a>Bulma ve değerlendirme aracında Azure VM veya AVS değerlendirmelerinin sayısı > hatalı
+ Bunu düzeltmek için, Tüm değerlendirmelere gitmek ve Azure VM veya AVS değerlendirmesini yeniden hesaplamak için toplam değerlendirme sayısına tıklayın. Bulma ve değerlendirme aracı daha sonra bu değerlendirme türü için doğru sayıyı gösterir.
+
 
 ## <a name="i-want-to-try-out-the-new-azure-sql-assessment"></a>Yeni Azure SQL değerlendirmesi 'ni denemek istiyorum
 VMware ortamınızda çalışan SQL Server örnekleri ve veritabanlarının keşfi ve değerlendirmesi artık önizlemededir. [Bu öğreticiyi](tutorial-discover-vmware.md)kullanmaya başlayın. Bu özelliği mevcut bir projede denemek istiyorsanız, lütfen bu makaledeki [önkoşulları](how-to-discover-sql-existing-project.md) tamamladığınızdan emin olun.

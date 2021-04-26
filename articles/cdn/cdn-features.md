@@ -9,12 +9,12 @@ ms.topic: overview
 ms.date: 11/15/2019
 ms.author: allensu
 ms.custom: mvc
-ms.openlocfilehash: 3a794d8915c820abecd530911f05ac649e5e538c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9aa394cda245bd3a457a16c19660bfe08553d14d
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100379922"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106058893"
 ---
 # <a name="what-are-the-comparisons-between-azure-cdn-product-features"></a>Azure CDN ürün özellikleri arasındaki karşılaştırmalar nelerdir?
 
@@ -71,7 +71,7 @@ Aşağıdaki tabloda her ürünle birlikte sunulan özellikler karşılaştırı
 | **Kullanım kolaylığı** | **Standart Microsoft** | **Standart Akamai** | **Standard Verizon** | **Premium Verizon** | 
 | [Depolama](cdn-create-a-storage-account-with-cdn.md), [Web Apps](cdn-add-to-web-app.md) ve [Media Services](../media-services/previous/media-services-portal-manage-streaming-endpoints.md) gibi Azure hizmetleriyle kolay tümleştirme  | **&#x2713;** |**&#x2713;** |**&#x2713;** |**&#x2713;** |
 | [REST API](/rest/api/cdn/), [.net](cdn-app-dev-net.md), [Node.js](cdn-app-dev-node.md)veya [PowerShell](cdn-manage-powershell.md) aracılığıyla yönetim  | **&#x2713;** |**&#x2713;** |**&#x2713;** |**&#x2713;** |
-| [Sıkıştırma MIME türleri](./cdn-improve-performance.md)  |Yalnızca varsayılan |Yapılandırılabilir |Yapılandırılabilir  |Yapılandırılabilir  |
+| [Sıkıştırma MIME türleri](./cdn-improve-performance.md)  |Yapılandırılabilir |Yapılandırılabilir |Yapılandırılabilir  |Yapılandırılabilir  |
 | Sıkıştırma kodlamaları  |gzip, brotli |gzip |gzip, söndür, bzip2, brotli  |gzip, söndür, bzip2, brotli  |
 
 ## <a name="migration"></a>Geçiş

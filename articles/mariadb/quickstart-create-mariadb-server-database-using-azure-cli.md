@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: quickstart
 ms.date: 3/18/2020
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 3279150d0cb7b287f0a78581094a51356033596c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 042c70fdd08a6de2b97c4560eb2b6a24eec0bb34
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98662169"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107789996"
 ---
 # <a name="quickstart-create-an-azure-database-for-mariadb-server-by-using-the-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak MariaDB sunucusu için Azure veritabanı oluşturma
 
@@ -25,7 +25,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
 
 - Bu makale, Azure CLı 'nin 2,0 veya sonraki bir sürümünü gerektirir. Azure Cloud Shell kullanılıyorsa, en son sürüm zaten yüklüdür.
 
-Birden fazla aboneliğiniz varsa kaynağı içeren aboneliği veya faturalandırıldığınız aboneliği seçin. Hesabınızdaki belirli bir abonelik kimliğini seçmek için [az account set](/cli/azure/account#az-account-set) komutunu kullanın:
+Birden fazla aboneliğiniz varsa kaynağı içeren aboneliği veya faturalandırıldığınız aboneliği seçin. Hesabınızdaki belirli bir abonelik kimliğini seçmek için [az account set](/cli/azure/account#az_account_set) komutunu kullanın:
 
 ```azurecli-interactive
 az account set --subscription 00000000-0000-0000-0000-000000000000
@@ -33,7 +33,7 @@ az account set --subscription 00000000-0000-0000-0000-000000000000
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-[az group create](/cli/azure/group#az-group-create) komutunu kullanarak bir [Azure kaynak grubu](../azure-resource-manager/management/overview.md) oluşturun. Kaynak grubu, Azure kaynaklarının grup olarak dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır.
+[az group create](/cli/azure/group#az_group_create) komutunu kullanarak bir [Azure kaynak grubu](../azure-resource-manager/management/overview.md) oluşturun. Kaynak grubu, Azure kaynaklarının grup olarak dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır.
 
 Aşağıdaki örnek `westus` konumunda `myresourcegroup` adlı bir kaynak grubu oluşturur:
 
@@ -43,7 +43,7 @@ az group create --name myresourcegroup --location westus
 
 ## <a name="create-an-azure-database-for-mariadb-server"></a>MariaDB için Azure Veritabanı sunucusu oluşturma
 
-[az mariadb server create](/cli/azure/mariadb/server#az-mariadb-server-create) komutunu kullanarak MariaDB için Azure Veritabanı sunucusu oluşturun. Bir sunucu birden çok veritabanını yönetebilir. Genellikle her proje veya kullanıcı için farklı bir veritabanı kullanılır.
+[az mariadb server create](/cli/azure/mariadb/server#az_mariadb_server_create) komutunu kullanarak MariaDB için Azure Veritabanı sunucusu oluşturun. Bir sunucu birden çok veritabanını yönetebilir. Genellikle her proje veya kullanıcı için farklı bir veritabanı kullanılır.
 
 Ayar | Örnek değer | Description
 ---|---|---
@@ -77,7 +77,7 @@ az mariadb server create --resource-group myresourcegroup --name mydemoserver  -
 
 ## <a name="configure-a-firewall-rule"></a>Güvenlik duvarı kuralını yapılandırma
 
-[az maridb server firewall-rule create](/cli/azure/mariadb/server/firewall-rule#az-mariadb-server-firewall-rule-create) komutunu kullanarak MariaDB için Azure Veritabanı sunucusu düzeyinde bir güvenlik duvarı kuralı oluşturun. Sunucu düzeyindeki bir güvenlik duvarı kuralı, mysql komut satırı aracı veya MySQL Workbench gibi bir dış uygulamanın MariaDB için Azure Veritabanı hizmetinin güvenlik duvarı üzerinden sunucunuza bağlanmasına imkan tanır.
+[az maridb server firewall-rule create](/cli/azure/mariadb/server/firewall-rule#az_mariadb_server_firewall_rule_create) komutunu kullanarak MariaDB için Azure Veritabanı sunucusu düzeyinde bir güvenlik duvarı kuralı oluşturun. Sunucu düzeyindeki bir güvenlik duvarı kuralı, mysql komut satırı aracı veya MySQL Workbench gibi bir dış uygulamanın MariaDB için Azure Veritabanı hizmetinin güvenlik duvarı üzerinden sunucunuza bağlanmasına imkan tanır.
 
 Aşağıdaki örnek `AllowMyIP` adında ve 192.168.0.1 IP adresinden gelen bağlantılara izin veren bir güvenlik duvarı kuralı oluşturur. Bağlandığınız konuma ait IP adresi veya IP adresi aralığıyla değiştirin.
 
@@ -231,7 +231,7 @@ Bu hızlı başlangıçta kullandığınız kaynaklara başka bir hızlı başla
 az group delete --name myresourcegroup
 ```
 
-Yalnızca bu hızlı başlangıçta oluşturduğunuz sunucuyu silmek istiyorsanız [az mariadb server delete](/cli/azure/mariadb/server#az-mariadb-server-delete) komutunu çalıştırın:
+Yalnızca bu hızlı başlangıçta oluşturduğunuz sunucuyu silmek istiyorsanız [az mariadb server delete](/cli/azure/mariadb/server#az_mariadb_server_delete) komutunu çalıştırın:
 
 ```azurecli-interactive
 az mariadb server delete --resource-group myresourcegroup --name mydemoserver

@@ -3,12 +3,12 @@ title: Apache Kafka için Azure Event Hubs 'e geçiş
 description: Bu makalede, istemcilerin Apache Kafka 'den Azure Event Hubs 'a nasıl geçirileceği açıklanmaktadır.
 ms.topic: article
 ms.date: 06/23/2020
-ms.openlocfilehash: d9f3775a85df5a881c2c38566628e4e1d4d8c40e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8db14f6ec18843bf7d592d56b3cf2352c3901a9a
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "90061453"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310045"
 ---
 # <a name="migrate-to-azure-event-hubs-for-apache-kafka-ecosystems"></a>Apache Kafka ekosistemleri için Azure Event Hubs'a geçiş yapma
 Azure Event Hubs, Kafka protokolünü kullanarak Event Hubs bağlanmanızı sağlayan bir Apache Kafka uç noktası sunar. Mevcut Kafka uygulamanızda en az değişiklik yaparak Azure Event Hubs bağlanabilir ve Azure ekosisteminin avantajlarından yararlanabilirsiniz. Event Hubs, MirrorMaker da dahil olmak üzere mevcut Kafka uygulamalarınızın birçoğu ile işe yarar. Daha fazla bilgi için bkz. [Event Hubs Apache Kafka](event-hubs-for-kafka-ecosystem-overview.md)
@@ -59,6 +59,6 @@ Olayları Olay Hub 'ına gönderen Kafka uygulamanızı çalıştırın. Daha so
 Kafka için Event Hubs ve Event Hubs hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:  
 
 - [Event Hubs için sorun giderme kılavuzu Apache Kafka](apache-kafka-troubleshooting-guide.md)
-- [Sık Sorulan Sorular-Apache Kafka için Event Hubs](apache-kafka-frequently-asked-questions.md)
+- [Sık Sorulan Sorular-Apache Kafka için Event Hubs](apache-kafka-frequently-asked-questions.yml)
 - [Azure Event Hubs için Apache Kafka Geliştirici Kılavuzu](apache-kafka-developer-guide.md)
 - [Önerilen yapılandırma](apache-kafka-configurations.md)

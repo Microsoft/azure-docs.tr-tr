@@ -7,10 +7,10 @@ ms.date: 3/18/2021
 ms.topic: tutorial
 ms.service: iot-hub-device-update
 ms.openlocfilehash: 66da860a5cdae1f5c7c18e4136b1f2d960492ca8
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105629062"
 ---
 # <a name="device-update-for-azure-iot-hub-tutorial-using-azure-real-time-operating-system-rtos"></a>Azure gerçek zamanlı Işletim sistemi (RTOS) kullanarak Azure IoT Hub öğreticisi için cihaz güncelleştirmesi

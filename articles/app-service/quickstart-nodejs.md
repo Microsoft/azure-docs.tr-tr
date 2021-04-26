@@ -10,12 +10,12 @@ adobe-target: true
 adobe-target-activity: DocsExp–386541–A/B–Enhanced-Readability-Quickstarts–2.19.2021
 adobe-target-experience: Experience B
 adobe-target-content: ./quickstart-nodejs-uiex
-ms.openlocfilehash: 6c6f0543dcfbecd16ba4176272f928ffd0eb54de
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3b1ff02d6a9b3e8c7b7abaf1b185a9becd2be12b
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101735123"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105842"
 ---
 # <a name="create-a-nodejs-web-app-in-azure"></a>Azure App Service'te Node.js web uygulaması oluşturma
 
@@ -313,11 +313,11 @@ Aynı işlemi kullanarak ve yeni bir uygulama oluşturmak yerine var olan uygula
 
 Bu bölümde, çalışan App Service uygulamasındaki günlüklerin nasıl görüntüleneceğini (veya "Tail") öğreneceksiniz. Uygulamada yapılan tüm çağrılar `console.log` Visual Studio Code çıkış penceresinde görüntülenir.
 
-Uygulamayı **Azure App SERVICE** Explorer 'da bulun, uygulamaya sağ tıklayın ve **akış günlüklerini görüntüle**' yi seçin.
+Uygulamayı **Azure App SERVICE** Explorer 'da bulun, uygulamaya sağ tıklayın ve **akış günlüklerini Başlat**' ı seçin.
 
 VS Code çıkış penceresi, günlük akışı bağlantısıyla açılır.
 
-![Akış günlüklerini görüntüle](./media/quickstart-nodejs/view-logs.png)
+![Akış günlüklerini başlatma](./media/quickstart-nodejs/view-logs.png)
 
 :::image type="content" source="./media/quickstart-nodejs/enable-restart.png" alt-text="Dosya günlüğünü etkinleştirmek ve Evet düğmesi seçili olarak Web uygulamasını yeniden başlatmak için VS Code isteminin ekran görüntüsü.":::
 

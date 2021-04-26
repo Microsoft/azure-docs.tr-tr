@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 08/03/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 46c6eac80ddbff73d99e05c070e66aa1700da174
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1441210303984bf777c6b580f6f7ab0c67ce6f21
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96928639"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257866"
 ---
 # <a name="tutorial-for-configuring-onfido-with-azure-active-directory-b2c"></a>Azure Active Directory B2C ile Onfido yapılandırma öğreticisi
 
@@ -142,7 +142,7 @@ Belirtilen [özel ilkelerde](https://github.com/azure-ad-b2c/partner-integration
 
 ### <a name="part-4---configure-the-azure-ad-b2c-policy"></a>Bölüm 4-Azure AD B2C ilkesini yapılandırma
 
-Azure AD B2C kiracınızı ayarlama ve ilkeleri yapılandırma hakkında yönergeler için bu [belgeye](./custom-policy-get-started.md?tabs=applications#custom-policy-starter-pack) başvurun.
+Azure AD B2C kiracınızı ayarlama ve ilkeleri yapılandırma hakkında yönergeler için bu [belgeye](tutorial-create-user-flows.md?pivots=b2c-custom-policy#custom-policy-starter-pack) başvurun.
 
 >[!NOTE]
 > En iyi uygulama olarak, müşterilerin öznitelik koleksiyonu sayfasına onay bildirimi eklemesini öneririz. Kimlik doğrulaması için bilgilerin üçüncü taraf hizmetlere gönderileceğini kullanıcılara bildirin.
@@ -171,4 +171,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

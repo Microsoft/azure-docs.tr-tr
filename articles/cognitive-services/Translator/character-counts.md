@@ -10,12 +10,12 @@ ms.subservice: translator-text
 ms.topic: conceptual
 ms.date: 05/26/2020
 ms.author: lajanuar
-ms.openlocfilehash: 6e81736e3151c9e97a8926b1f67c0a7a0d4c2f3d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 53fc22e1dbdac3240f72e8d64fbaee690597950f
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "98895892"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107373936"
 ---
 # <a name="how-the-translator-counts-characters"></a>Translator 'ın karakterleri sayısı
 
@@ -38,5 +38,7 @@ Hangi sayımlar şunlardır:
 İstek, sözcük, bayt veya cümle sayısı karakter sayısında ilgisiz değildir.
 
 Algılama ve Breakcümlesi yöntemlerine yapılan çağrılar, karakter tüketimine göre sayılmaz. Ancak, Algıla ve Breakcümlesi yöntemlerine yapılan çağrıların, sayılan diğer işlevlerin kullanımına yönelik makul bir ORANTA olmasını umuz. Yaptığınız algılama veya Breakcümle çağrılarının sayısı 100 kez diğer sayılan yöntemlerin sayısını aşarsa, Microsoft, Algıla ve Breakcümlesi yöntemlerinin kullanımını kısıtlama hakkını saklı tutar.
+
+Çeviri işlevine gönderilen her karakter, içerik değiştirilmese veya kaynak ve hedef dil aynı olduğunda bile sayılır.
 
 Karakter sayıları hakkında daha fazla bilgi, [ÇEVIRMEN SSS](https://www.microsoft.com/en-us/translator/faq.aspx)' de yer alır.

@@ -1,0 +1,469 @@
+### YamlMime:FAQ
+metadata:
+  title: Maliyet yönetimi + faturalandırma hakkında sık sorulan sorular (SSS)
+  titleSuffix: Azure Cost Management + Billing
+  description: Sık sorulan sorular ve yanıtlar.
+  author: bandersmsft
+  ms.reviewer: adwise
+  ms.service: cost-management-billing
+  ms.topic: conceptual
+  ms.date: 04/15/2021
+  ms.author: banders
+  ms.openlocfilehash: e96ba3c42ddce1ed12ad560b2d73b99a35c61f8b
+  ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
+  ms.translationtype: MT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 04/19/2021
+  ms.locfileid: "107728633"
+title: Azure maliyet yönetimi + faturalandırma hakkında sık sorulan sorular (SSS)
+summary: ''
+sections:
+- name: Genel faturalandırma soruları
+  questions:
+  - question: Nasıl yaparım? Azure Faturalandırma desteği 'ne başvurun mi?
+    answer: >
+      [Azure Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)bir destek isteği oluşturun.
+  - question: Nasıl yaparım? faturanızı ödemem mi?
+    answer: >
+      Bkz. [Azure aboneliğiniz için vadesi geçmiş bakiyeyi çözme](manage/resolve-past-due-balance.md).
+  - question: Nasıl yaparım? faturanızı bulun mi?
+    answer: >
+      Bkz. [Microsoft Azure faturanızı görüntüleme ve indirme](understand/download-azure-invoice.md).
+  - question: Neden ücretlendirildim? Ücretsiz bir Azure hesabım var.
+    answer: >
+      Ücretsiz hizmetlerin limitleri vardır. Büyük olasılıkla, ücretsiz sınırları aştık. Bkz. [Azure Ücretsiz hesabınızla ücretlerden kaçının](manage/avoid-charges-free-account.md).
+  - question: Nasıl yaparım? faturanızı anladım mı?
+    answer: >
+      Azure aboneliğinizi Azure Web sitesi üzerinden satın aldıysanız bkz. [bireysel Azure abonelik faturanızı gözden geçirme](understand/review-individual-bill.md).
+  - question: Nasıl yaparım? ücretlerimi hızla görebilir mi?
+    answer: >
+      Bkz. [Maliyet Analizi ile maliyetleri inceleyin ve çözümleyin](costs/quick-acm-cost-analysis.md).
+  - question: Beklenmeyen ücretim var. Nasıl yaparım? anladım mı?
+    answer: >
+      Bkz. [beklenmeyen ücretleri çözümleme](understand/analyze-unexpected-charges.md).
+  - question: Nasıl yaparım? Azure aboneliğimi iptal edilsin mi?
+    answer: >
+      Bkz. [Azure aboneliğinizi Iptal etme](manage/cancel-azure-subscription.md).
+- name: Maliyet yönetimi soruları
+  questions:
+  - question: Maliyetleri görüntülemek için erişimi nasıl etkinleştirebilirim?
+    answer: >
+      Bkz. [maliyet yönetimi verilerine erişim atama](costs/assign-access-acm-data.md).
+  - question: Maliyet yönetimi hangi iş ortağı tekliflerini destekler?
+    answer: >
+      Maliyet yönetimi, müşterileri bir Azure planına sahip olan iş ortakları tarafından kullanılabilir. Bir ilke ayarını etkinleştirerek, iş ortakları müşterilerinin maliyet bilgilerini görüntülemesine izin verebilir. Daha fazla bilgi için bkz. [İş ortakları için Azure Maliyet Yönetimi'ni kullanmaya başlama](costs/get-started-partners.md). Klasik CSP, maliyet yönetimine göre destek vermez.
+  - question: Tahmin edilen maliyetleri nasıl görebilirim?
+    answer: >
+      Azure portalda **Maliyet Yönetimi + Faturalama** > **Maliyet Yönetimi** > **Maliyet analizi**’ne gidin. Varsayılan görünümde, en üstteki grafik Gerçek/İtfa Edilmiş maliyeti ve tahmin edilen maliyet bölümlerini gösterir. Grafiğin düz rengi, Gerçek/İtfa Edilmiş maliyetinizi gösterir. Gölgeli renk, tahmin edilen maliyeti gösterir.
+  - question: Azure hizmetine göre bir maliyet dökümü mi Nasıl yaparım??
+    answer: >
+      Azure Portal **maliyet yönetimi + faturalandırma**  >  **maliyet yönetimi**  >  **Maliyet Analizi**' ne gidin. **Hizmete göre maliyet**'i seçip **Hizmet katmanı** ölçütüne göre gruplandırın. Görünümü **Tablo** olarak değiştirin.
+  - question: Nasıl yaparım? fatura maliyetlerimi görmek mi istiyorsunuz?
+    answer: >
+      Azure portal, analiz ettiğiniz faturayla ilişkili kapsamın maliyet analizi ' ne gidin. **Fatura ayrıntıları** görünümünü seçin. Fatura ayrıntıları, faturanızda gösterilen ücretleri gösterir.
+  - question: Bir etiket için Nasıl yaparım? maliyeti görüntülensin mi?
+    answer: >
+      Azure portalda **Maliyet Yönetimi + Faturalama** > **Maliyet Yönetimi** > **Maliyet analizi**’ne gidin. Etiketiniz için **Gruplandırma ölçütü** seçin. Etiketler; satın alma işlemleri, aboneliklerle ilişkilendirilmemiş olan kiracı kaynakları, kaynak grubuna dağıtılmamış abonelik kaynakları veya klasik kaynaklar için kullanılamaz. Bazı hizmetler kullanım verilerinde etiket içermez. Daha fazla bilgi için bkz. [Azure kaynakları Için etiket desteği](../azure-resource-manager/management/tag-support.md).
+  - question: Nasıl yaparım? EA kaydımın maliyetlerini görmek mi istiyorsunuz?
+    answer: >
+      Azure portal **maliyet yönetimi + faturalandırma** > genel bakış ' a gidin. **Döküm** bağlantısını seçin.
+  - question: AWS maliyetimi maliyet yönetimi 'nde nasıl görüntüleyebilirim?
+    answer: >
+      Bkz. [AW maliyeti ve kullanım raporu tümleştirmesini ayarlama ve yapılandırma](costs/aws-integration-set-up-configure.md).
+  - question: Nasıl yaparım? bütçe mi oluşturulsun?
+    answer: >
+      [Azure bütçelerini oluşturma ve yönetme](costs/tutorial-acm-create-budgets.md) öğreticisine bakın.
+  - question: Belirli bir filtre veya etiket için bir bütçe mi Nasıl yaparım??
+    answer: >
+      Bütçe Oluştur penceresinde, oluşturmak istediğiniz bütçenin kapsamını seçin. Bu bütçe için eklemek istediğiniz filtre veya bir etiketi seçmek için **Filtre Ekle** ' yi seçin. Daha fazla bilgi için [Azure bütçelerini oluşturma ve yönetme](costs/tutorial-acm-create-budgets.md#create-a-budget-in-the-azure-portal) öğreticisine bakın.
+  - question: Maliyet yönetimi verileri dışarı Nasıl yaparım? mı?
+    answer: >
+      Alınan [verileri oluşturma ve yönetme](costs/tutorial-export-acm-data.md) öğreticisine bakın.
+  - question: Kiracımda bir Azure aboneliğiniz yoksa, maliyet yönetimi verilerini iş ortağı olarak dışarı aktarmak Nasıl yaparım?.
+    answer: >
+      [Azure depolama HESABı SAS anahtarı ile maliyet verilerini dışa aktarma](costs/export-cost-data-storage-account-sas-key.md) makalesini inceleyin.
+  - question: Bir CSP iş ortağı olarak, Azure planında klasik CSP teklifinde maliyet yönetimi destekleniyor mu?
+    answer: "[Yeni ticaret deneyiminde](https://www.microsoft.com/licensing/news/new-azure-experience-in-csp), klasik CSP 'de müşterileri Azure planına geçirmeye yönelik planlar verildiğinde, Azure maliyet yönetimi yalnızca Azure planında olan doğrudan iş ortakları ve dolaylı müşteriler için kullanılabilir. \n"
+  - question: Bir CSP iş ortağı (genel yönetici) olarak, Azure planındaki son müşterilerimiz ve satıcılarım için abonelik kapsamında maliyet görünürlüğü ilkesini nasıl etkinleştirebilirim?
+    answer: >
+      Aboneliğin Azure RBAC kullanıcıları için perakende tarifelerinde Azure tüketilen hizmetler için maliyet görünürlüğü ilkesini etkinleştirmek üzere [Müşteri kiracı abonelikleri Için maliyet yönetimini etkinleştirme](costs/get-started-partners.md#enable-cost-management-for-customer-tenant-subscriptions) konusuna bakın. Doğrudan ortağın veya dolaylı sağlayıcının genel yöneticisi olarak, ilkeden bağımsız olarak müşterinin kiracısındaki maliyetleri görüntüleyebilirsiniz.
+  - question: Maliyetleri nasıl geri alabilirim?
+    answer: >
+      Maliyet analizinde abonelikler, kaynak grupları veya etiketlere dağıttığınız maliyetleri görmek için maliyet yönetimi ' nde maliyetler ayırabilirsiniz. Daha fazla bilgi için [Azure maliyet ayırma kuralları oluşturma ve yönetme](costs/allocate-costs.md) makalesine bakın.
+  - question: Power BI, maliyetleri görüntülemek için kullanabilir miyim?
+    answer: >
+      Evet, [maliyet yönetimi verilerine bağlanmak için Power BI Desktop](/power-bi/connect-data/desktop-connect-azure-cost-management) kullanırsınız veya [EAS için maliyet yönetimi Power BI uygulamasını](costs/analyze-cost-data-azure-cost-management-power-bi-template-app.md)kullanabilirsiniz.
+  - question: Maliyet yönetiminde desteklenen teklif türleri nelerdir?
+    answer: >
+      Bkz. [desteklenen Microsoft Azure teklifleri](/costs/understand-cost-mgt-data.md#supported-microsoft-azure-offers).
+  - question: Azure maliyet yönetimi 'nde maliyet ve kullanım verilerimi ne kadar yakında görebilirim?
+    answer: >
+      Bkz. [maliyet ve kullanım verileri güncelleştirmeleri ve bekletme](/costs/understand-cost-mgt-data.md#cost-and-usage-data-updates-and-retention).
+  - question: Maliyetimi ilgili tüm bilgileri Azure maliyet yönetimi 'nde bulabilir miyim?
+    answer: >
+      Bkz. [maliyet yönetimi 'ne dahil edilen maliyetler](costs/understand-cost-mgt-data.md#costs-included-in-cost-management).
+  - question: Tahsis edilen maliyetler bütçeleri ve tahmin görünümlerine göre ayrılmıştır mı?
+    answer: >
+      <a name="budgets-forecast"></a>Evet. Ayrılan maliyetler hem bütçelerde hem de tahmin görünümlerinde hesaba katılır ve bunlar tarafından desteklenir. Bütçe ve tahmin görünümleri, maliyet ayırma kuralları tarafından yapılandırıldığı şekilde kendilerine ayrılan maliyetleri gösterir.
+  - question: Bir maliyet ayırma kuralı silindiğinde ne olur?
+    answer: >
+      <a name="delete-rule"></a>Bir maliyet ayırma kuralı silindiğinde, hedeflere ayrılan tüm açık ve geçerli fatura ayı maliyetleri kaldırılır. Maliyet ayırma kuralı birkaç ay boyunca yer aldıysa önceki ayların ayırma verileri, ayırma kuralı tarafından ayarlandığı şekliyle kalır.
+  - question: Maliyet ayırma kuralları oluşturmak için neden bir kayıt yöneticisi veya ödeme hesabı yöneticisi gerekli?
+    answer: >
+      <a name="why-admin"></a>Maliyet ayırma kuralları ya kayıt kapsamında (Kurumsal Anlaşma) ya da Faturalandırma hesabı kapsamında (Microsoft Müşteri Sözleşmesi) oluşturulur. Bu kapsamlarda değişiklik yapma izinleri için faturalandırma yöneticisi ayrıcalıkları gerekir.
+  - question: Maliyet ayırma kaynakları ve hedefleri kural başına 25 ile sınırlıdır?
+    answer: >
+      <a name="source-target-rule-limit"></a>Bu sınır, iyi bir maliyet ayırma performansı ve ölçeklenebilirlik elde etmek amacıyla koyulan önizleme sınırlamasıdır. Maliyet ayırma genel kullanılabilirlik (GA) aşamasına geçtiğinde sınırlar muhtemelen artacak veya tamamen kaldırılacaktır.
+  - question: Maliyet ayırma kuralları (kaynak/hedef) çakışırsa ne olabilir?
+    answer: >
+      <a name="rule-overlap"></a>Çakışan kaynaklara veya hedeflere sahip kurallar önerilmez. Maliyet Ayırma kuralları oluşturulma tarihlerine göre uygulanır. Dolayısıyla, ayırma kuralıyla çakışan maliyet ayırma kurallarında en erken oluşturulma tarihine sahip olan öncelik kazanır.
+- name: Maliyet yönetimi + faturalandırma API 'SI soruları
+  questions:
+  - question: EA Raporlama API 'Leri ne zaman kullanımdan kalktı?
+    answer: >
+      Maliyet yönetimi + faturalandırma ekibi, API 'Ler için kullanımdan kaldırılmayan bir zaman çizelgesi duyurmadı. API 'Ler artık etkin geliştirme aşamasındadır. Onlardan geçiş yapmak için gereken işleri planlamanız önerilir.
+  - question: EA Raporlama API 'Lerinin kapatılmasını Nasıl yaparım? ve hangi yeni API 'Leri çağıramalıyım?
+    answer: >
+      Bkz. [EA raporlama 'dan Azure Resource Manager API 'Lerine geçiş](costs/migrate-from-enterprise-reporting-to-azure-resource-manager-apis.md).
+  - question: Kullanım ayrıntıları API 'SI zaman aşımlarını neden alıyorum?
+    answer: >
+      Kullanım ayrıntıları veri kümesi genellikle çok büyük olabilir (birden çok GB veya daha fazla). İstediğiniz veri kümesinin boyutu arttıkça, hizmet, size göndermeden önce verileri derlemeye kadar uzun sürer. Gecikme nedeniyle, sayfalandırılmış [JSON kullanım ayrıntıları API 'si](/rest/api/consumption/usagedetails/list) gibi zaman uyumlu API çözümleri, verileriniz sağlanmadan önce zaman aşımına uğrayabilir. Zaman aşımları ile karşılaşırsanız veya sıklıkla büyük miktarda kullanım ayrıntılarını çekmek için gereken işlemlere sahipseniz, bkz. [dışarı aktarmalar ile büyük kullanım veri kümelerini yinelenen olarak alma](costs/ingest-azure-usage-at-scale.md).
+  - question: Nasıl yaparım? EA Raporlama API 'Lerinden Microsoft Müşteri Sözleşmesi API 'Lerine geçiş yapılsın mı?
+    answer: >
+      Bkz. [Kurumsal Anlaşma 'Den Microsoft Müşteri Sözleşmesi API 'Lerine geçiş](costs/migrate-cost-management-api.md).
+- name: Azure ayırmaları soruları
+  questions:
+  - question: Nasıl yaparım? rezervasyon ücretleri görüntülensin mi?
+    answer: >
+      Azure portalda **Maliyet Yönetimi + Faturalama** > **Maliyet Yönetimi** > **Maliyet analizi**’ne gidin. **Fiyatlandırma Modeli: Rezervasyon** için bir filtre ekleyin. Kapsam ' ın altında ve gösterilen maliyet ' in yanındaki aşağı ok simgesini seçin ve ardından **gerçek maliyet** veya **itfası maliyetli** ölçüm ' i seçin.
+  - question: Nasıl yaparım? rezervasyon tasarrufunu gör?
+    answer: >
+      Tasarruflarınızı görüntülemenin birkaç yolu vardır.
+
+      -  Bir EA müşterisiyseniz, [RI tasarrufu raporunu](/costs/analyze-cost-data-azure-cost-management-power-bi-template-app#reports-available-with-the-app.md)görüntülemek için EA Için Azure maliyet yönetimi Power BI uygulamasını kullanabilirsiniz.
+
+      -  [Rezervasyon tasarrufunu](reservations/understand-reserved-instance-usage-ea.md#determine-reservation-savings)el ile öğrenmek için kullanım + ücretler veri dosyasını kullanın.
+  - question: Nasıl yaparım? ayırma kullanımını görüntüleme
+    answer: >
+      Azure portalında oturum açın. Ardından, tüm hizmetler > **ayırmalar** ' ı seçin ve bir ayırma için **kullanımı (%)** göz önünde edin. Bir rezervasyon seçin. Zaman içinde rezervasyonun kullanım eğilimini gözden geçirin. Daha fazla bilgi için bkz. [Azure Portal ayırma kullanımını görüntüleme](reservations/manage-reserved-vm-instance.md?toc=/azure/cost-management-billing/reservations/toc.json#view-reservation-use-in-the-azure-portal). Ayrıca, [kullanılmayan rezervasyon maliyetlerini maliyet analizi ' nde görüntüleyebilirsiniz](costs/cost-analysis-common-uses.md#view-unused-ri-costs-in-cost-analysis).
+  - question: Rezervasyon maliyetlerini yeniden ücretlendirilebilirim?
+    answer: >
+      Ayrıntılı bilgi için bkz. [Azure rezervasyon maliyetlerini geri ödeme](reservations/charge-back-usage.md?toc=/azure/cost-management-billing/reservations/toc.json) .
+  - question: Spot VM 'Ler için tahakkuk eden ücretleri nasıl görüntüleyebilirim?
+    answer: >
+      Bkz. [spot sanal makine ücretlerinizi görüntüleme](/costs/cost-analysis-common-uses.md#view-your-spot-vm-charges).
+  - question: Rezervasyon Ayrıntıları raporu Nasıl yaparım? mi?
+    answer: >
+      [Bir ayırma Ayrıntıları raporu oluşturmak](/rest/api/cost-management/generatereservationdetailsreport)için API belgelerini okuyun.
+- name: Azure Kurumsal Anlaşma (EA) ve EA Portalı soruları
+  questions:
+  - question: Nasıl yaparım?, kayıt iznime SPN izinleri atansın mı?
+    answer: >
+      Bkz. [EA SPN 'lere rol atama](manage/assign-roles-azure-service-principals.md).
+  - question: Neden etkinleştirme e-postası aldım?
+    answer: >
+      Azure EA portalından gelen etkinleştirme e-postası *waep@microsoft.com* adresinden gönderilir. Etkinleştirme e-postasını almadıysanız istenmeyen veya gereksiz posta klasörünüzü gözden geçirin. Bu e-posta _Microsoft Azure service_subject Görüntüleme/Yönetme Daveti_ ile gönderilir. Yeni eklenen tüm EA yöneticilerine gönderilir.
+
+
+      EA yöneticisi olarak ayarladığınızdan eminseniz, Azure EA portalında oturum açmak için etkinleştirme e-postasını beklemeniz gerekmez. Bunun yerine https://ea.azure.com adresine giderek e-posta adresinizle (iş, okul veya Microsoft hesabı) ve parolanızla oturum açabilirsiniz.
+  - question: Nasıl yaparım?, kaydma yeni bir EA Yöneticisi eklensin mi?
+    answer: >
+      Yeni bir kuruluş yöneticisi ancak mevcut kuruluş yöneticileri tarafından eklenebilir. EA yöneticisiyseniz lütfen EA Portal'da oturum açın, **Yönet**'e ve ardından sağ üst köşedeki **+ Yönetici Ekle**'ye tıklayıp yeni EA yöneticisi ekleyin. Kullanıcıları eklemek için lütfen e-posta adreslerine ve iş veya okul hesabı ya da Microsoft Live ID gibi tercih edilen oturum açma bilgilerine sahip olduğunuzdan emin olun.
+
+
+      EA yöneticisi değilseniz lütfen şirketinizdeki EA yöneticilerine ulaşarak sizi kayda eklemelerini isteyin. Sizi kayda eklediklerinde bir etkinleştirme postası alacaksınız.
+
+
+      Ancak EA yöneticilerinin size yardımcı olamadığı durumlarda aşağıdaki bilgileri iletmeniz halinde sizi onların adına kayda ekleyebiliriz:
+
+      - Kayıt numarası.
+
+      - Eklenecek e-posta adresi ve kimlik doğrulama türü (iş/okul/MS).
+
+      - EA yöneticisinden gelen onay e-postası.
+
+
+      Gerekli tüm bilgilere sahip olduktan sonra lütfen [https://aka.ms/AzureEntSupport](https://aka.ms/AzureEntSupport) adresinden istek gönderin.
+  - question: Nasıl yaparım? kayıt üzerindeki ilk EA Yöneticisi güncelleştirilsin mi?
+    answer: >
+      İlk EA yöneticisini güncelleştirmek için toplu lisanslama hizmet merkezinde bildirim ilgili kişisini ve çevrimiçi yöneticiyi güncelleştirmeniz gerekir. Değişikliklerin EA portalına uygulanması yaklaşık 24 saat sürer. Güncelleştirme tamamlandıktan sonra yeni EA yöneticisine bir etkinleştirme e-postası gönderilir.
+
+
+      VLSC portalına erişiminiz yoksa veya ilk EA yöneticiniz artık kaydı yönetemiyorsa ve EA portalına erişimi yoksa güncelleştirme isteğinde bulunmak için lütfen [https://aka.ms/AzureEntSupport](https://aka.ms/AzureEntSupport) üzerinden bir istek gönderin ve şu bilgileri dahil edin:
+
+      - Kayıt numarası
+
+      - Eklenecek e-posta adresi ve kimlik doğrulama türü (iş/okul/MS)
+
+      - İlk EA yöneticisini değiştirme nedeni
+
+      - İlk EA yöneticisinden gelen onay e-postası
+  - question: Geçerli EA yöneticim artık şirket ile değil. Ne yapmalıyım?
+    answer: >
+      Bir EA kaydında birden fazla EA yöneticisi olabilir ve başka bir EA yöneticisine ulaşarak yeni EA yöneticisi/hesap sahibi/bölüm yöneticisi eklemesini isteyebilirsiniz. Ancak şirketinizdeki EA yöneticisinin kim olduğunu bilmiyorsanız veya kayıtta başka bir EA yöneticisi yoksa lütfen aşağıdaki bilgilerle birlikte bize ulaşın:
+
+      - Kayıt numarası
+
+      - Eklenecek e-posta adresi ve kimlik doğrulama türü (iş/okul/MS)
+
+      - Geçerli EA yöneticisinin şirketten ayrıldığına dair destekleyici bilgiler
+
+
+      Kayıtta başka EA yöneticileri varsa kayıtta gerçekleştirilecek yönetim değişiklikleriyle ilgili olarak mevcut EA yöneticilerine ulaşacağımızı lütfen unutmayın.
+  - question: Kaydım bekleme durumunda görünüyor. Kaydımı nasıl etkinleştirebilirim?
+    answer: >
+      İlk EA yöneticisi henüz oturum açmadıysa kayıt bekleme durumunda görünür. EA yöneticisi sizdeniz lütfen Azure EA Portal'da oturum açın. Tüm kayıt numaralarının yer aldığı giriş sayfasında bekleyen kaydınızı göremeyebilirsiniz. Lütfen EA Portal'ın sağ üst köşesinde yer alan "etkin" kutusunun işaretini kaldırın. Bunu yaptığınızda bekleme durumundaki kayıtlar da görüntülenir. Ayrıntılı bilgilere ulaşmak için lütfen kayda tıklayın. Kaydın "Yönet" sayfasına ulaştığınızda "Beklemede" olan durum, "Etkin" olarak güncelleştirilir.
+  - question: Hesabım neden bekleme durumunda takılı kaldı?
+    answer: >
+      Kayda ilk kez eklenen yeni Hesap Sahiplerinin (AO) durumu her zaman "beklemede" olarak görünür. Hesap sahibi etkinleştirme karşılama e-postasını aldıktan sonra oturum açarak hesabını etkinleştirebilir. Oturum açıldığında "beklemede" olan hesap durumu "etkin" olarak değişir.
+  - question: Azure EA portalında oturum açarken neden bir hata görüyorum?
+    answer: "Oturum açma sırasında Azure EA Portal'da hatayla karşılaşmanızın birkaç nedeni olabilir. Lütfen şu sorun giderme adımlarını izleyin:\n\n 1. Lütfen doğru EA Portal URL'si olan [https://ea.azure.com](https://ea.azure.com) adresini kullandığınızdan emin olun.\n 1. Azure EA Portal'a erişiminizin iş veya okul hesabı olarak mı yoksa Microsoft Live ID olarak mı eklendiğini belirleyin. İş hesabınızı kullanıyorsanız lütfen iş e-postanızı ve parolanızı girin. Microsoft Live ID kullanıyorsanız lütfen Live ID e-postanızı ve Microsoft Live ID parolanızı girin. Microsoft Live ID parolanızı unuttuysanız lütfen [https://account.live.com/password/reset](https://account.live.com/password/reset) adresinden sıfırlayın.\n 1. Önceki/mevcut oturumların tanımlama bilgilerinin veya önbellek verilerinin tutulmaması için gizli tarayıcı penceresinden oturum açmanız önerilir. Önbelleği temizleyin ve [https://ea.azure.com](https://ea.azure.com) adresini özel göz atma modundan/gizli pencereden açın.\n 1. Microsoft hesabı kullanıyor ve Geçersiz Kullanıcı hatası alıyorsanız birden fazla Microsoft hesabınız olabilir ve oturum açmak için kullandığınız hesap, birincil diğer ad olmayabilir. Birincil diğer adı denetlemek için account.live.com adresine gidin:\n     - \"Bilgileriniz\" > \"Oturum açma e-posta adresinizi veya telefon numaranızı yönetin\" yolunu izleyin.\n     - Alternatif bir e-posta adresini doğrulamak ve hassas bilgilere erişim kodunu almak için ekrandaki yönergeleri izleyin.\n     - Güvenlik kodunu girin.\n     - İki adımlı kimlik doğrulamayı daha sonra ayarlamak istiyorsanız \"Daha sonra ayarla\"yı seçin.\n     - Sahip olduğunuz hesap diğer adlarının yer aldığı \"Hesap diğer adlarınızı yönetin\" sayfası açılır. Azure EA Portal'da oturum açmak için kullandığınız diğer adın birincil diğer ad olduğundan emin olun. Değilse, bunu birincil diğer adınız yapabilir veya bunun yerine EA Portal'daki birincil diğer adı kullanabilirsiniz.\n \n Yukarıdaki sorun giderme adımları başarısız olduysa lütfen [https://aka.ms/AzureEntSupport](https://aka.ms/AzureEntSupport) adresinden aşağıdaki bilgilerle birlikte bir istek gönderin:\n   - Kullanılan tarayıcılar ve sürüm.\n   - Hata iletisinin ekran görüntüsü.\n   - Hata veren sayfanın URL'si.  \n   - Hatanın gerçekleştiği tarih, saat ve saat dilimi.\n\n- Ayrıca günlük dosyasına ulaşabilirseniz faydalı olacaktır. Aşağıdaki adımları izleyerek ağ izlemesi yakalayabilirsiniz:\n\n1. Internet Explorer'ı açın.\n1. F12 tuşuna basın; IE'nin en altında bir kutu açılır.\n1. **Ağ** sekmesini seçin.\n1. **Yakalamaya Başla**'ya tıklayın.\n1. Hataya neden olan eylemi gerçekleştirin.\n1. Hatayı aldıktan sonra **Yakalamayı Durdur**'a tıklayın.\n1. Dosyayı kaydedin ve destek isteğine gerekli bilgileri ekleyin.\n1. Destek isteğine kayıt numaranızı ve e-posta adresinizi yazmayı unutmayın.\n"
+  - question: İş veya okul hesabı ile Microsoft hesabı arasındaki fark nedir?
+    answer: >
+      **Microsoft hesabı:** [https://signup.live.com](https://signup.live.com) adresindeki Live ID ile ilişkilendirilmiş hesaplardır.
+
+
+      **İş veya okul hesabı:** Yalnızca Buluta Federasyon ile Active Directory ayarlamış olan ve tüm hesapları tek bir kiracıda bulunan şirketler tarafından kullanılabilir. Şirketin iç Active Directory hizmeti ile bulut arasında federasyon varsa kullanıcılar iş veya okul kimlik doğrulamasıyla eklenebilir.
+
+
+      Microsoft, Eylül 2016'dan itibaren iş veya okul e-posta adreslerinin Microsoft hesabı olarak kaydedilmesine izin vermemektedir. Daha fazla ayrıntı için şu belgelere başvurun: [https://blogs.technet.microsoft.com/enterprisemobility/2016/09/15/cleaning-up-the-azure-ad-and-microsoft-account-overlap/](https://blogs.technet.microsoft.com/enterprisemobility/2016/09/15/cleaning-up-the-azure-ad-and-microsoft-account-overlap/).
+
+
+      Kuruluşunuzla bulut arasında federasyon yoksa iş veya okul e-posta adresinizi kullanamazsınız. Bunun yerine lütfen yeni bir e-posta adresi kaydedin veya oluşturun ve bunu Microsoft hesabı olarak kaydedin.
+  - question: Azure EA Portalı parolamı unuttum. Ne yapmalıyım?
+    answer: >
+      Microsoft Live ID parolanızı unuttuysanız lütfen [https://account.live.com/password/reset](https://account.live.com/password/reset) adresinden sıfırlayın.
+
+
+      Çalışma parolanızı unuttuysanız lütfen şirketinizin BT yöneticisine başvurun.
+  - question: Geçerli bir iş veya okul hesabıdır. Neden EA portalına ekleyemiyorum?
+    answer: >
+      Farklı bir kiracıda iş veya okul hesabınız varsa lütfen kayıt ayrıntıları sayfasındaki yetkilendirme düzeyini "Kiracılar Arası İş veya Okul Hesabı" olarak değiştirin. Bu ayarı yaptıktan sonra hesabı ekleyebilirsiniz.
+  - question: Mevcut Azure hesabımı yanlışlıkla Azure EA kaydıyla ilişkilendirdim. Bunun sonucunda aylık kredimi kaybettim. Aylık kredimi geri alabilir miyim?
+    answer: >
+      Azure EA hesap sahibi olarak oturum açarken Visual Studio aboneliğinizle aynı kimlik bilgilerini kullandıysanız aşağıdaki eylemlerden birini gerçekleştirerek bireysel Visual Studio aboneliği Azure avantajınızı kurtarabilirsiniz:
+
+
+      - İlgili Azure aboneliklerini kaldırdıktan veya taşıdıktan sonra hesap sahibinizi Azure Enterprise Portal'dan silin. Ardından bireysel Visual Studio Azure avantajlarına yeniden kaydolun.
+
+      - VLSC'deki yönetici sitesinden Visual Studio abonesini silin ve aboneliği bu kez farklı kimlik bilgilerine sahip bir hesaba atayın. Ardından bireysel Visual Studio Azure avantajlarına yeniden kaydolun.
+  - question: Ne tür bir abonelik oluşturmalıyım?
+    answer: >
+      Azure Enterprise Portal, kurumsal müşteriler için iki tür abonelik sunar:
+
+
+      - Microsoft Azure Kurumsal; şu kullanımlar için idealdir:
+
+      - Her türlü üretim amaçlı kullanımlar
+
+      - Altyapı harcamasına göre en iyi fiyatlar
+
+
+      Daha fazla bilgi için [Azure satış ekibiyle iletişime geçin](https://azure.microsoft.com/pricing/enterprise-agreement/).
+
+
+      - Kurumsal Geliştirme ve Test; şu kullanımlar için idealdir:
+
+      - Ekiple yürütülen tüm geliştirme ve test iş yükleri
+
+      - Orta ve ağır düzeyde bireysel geliştirme/test iş yükleri
+
+      - Özel MSDN görüntülerine erişim ve tercihe bağlı hizmet ücretleri
+
+
+      Daha fazla bilgi için bkz. [Kurumsal Geliştirme ve Test teklifi](https://azure.microsoft.com/offers/ms-azr-0148p/).
+  - question: Aboneliğimin adı, teklifin adıyla aynı. Aboneliğin adını kuruluşum için daha anlamlı olacak bir adla değiştirmeli miyim?
+    answer: >
+      Yeni bir abonelik oluşturduğunuzda ad için varsayılan olarak seçtiğiniz teklif türü kullanılır. Daha kolay takip edebilmeniz için aboneliğin adını daha anlamlı olacak şekilde değiştirmeniz önerilir.
+
+
+      Adı değiştirmek için:
+
+
+      1. [https://account.windowsazure.com](https://account.windowsazure.com) adresinde oturum açın.
+
+      1. Abonelik listesini seçin.
+
+      1. Düzenlemek istediğiniz aboneliği seçin.
+
+      1. **Aboneliği Yönet** simgesini seçin.
+
+      1. Abonelik ayrıntılarını düzenleyin.
+  - question: Maliyetleri maliyet merkezine göre nasıl izleyebilirim?
+    answer: >
+      Maliyetleri maliyet merkezine göre izlemek için şu düzeylerden birinde maliyet merkezi tanımlamanız gerekir:
+
+
+      - Bölüm
+
+      - Hesap
+
+      - Abonelik
+
+
+      Gereksinimlerinize bağlı olarak belirli bir maliyet merkezi ile ilişkilendirilmiş olan kullanımı ve maliyeti izlemek için aynı maliyet merkezini kullanabilirsiniz.
+
+
+      Örneğin birden fazla bölümün dahil olduğu özel bir projenin maliyetini izlemek için kullanım ve maliyet takibini abonelik düzeyinde maliyet merkezi tanımlayarak yapabilirsiniz.
+
+
+      Hizmet düzeyinde maliyet merkezi tanımlayamazsınız. Kullanımı hizmet düzeyinde izlemek istiyorsanız hizmet düzeyindeki _Etiket_ özelliğini kullanabilirsiniz.
+  - question: Kuruluşumun farklı bölümleri tarafından gerçekleştirilen kullanımları ve harcamaları nasıl izleyebilirim?
+    answer: >
+      Azure EA kaydı çerçevesinde istediğiniz kadar bölüm oluşturabilirsiniz. Kullanımı doğru şekilde izlemek için aboneliklerin birden fazla bölüm arasında paylaşılmadığından emin olmanız gerekir.
+
+
+      Departmanları ve abonelikleri oluşturduktan sonra verileri kullanım raporunda görebilirsiniz. Bu bilgiler, departman düzeyinde kullanımı izlemenize ve maliyet ile harcama yönetimi gerçekleştirmenize yardımcı olabilir.
+
+
+      Kullanım verilerine raporlama API'si aracılığıyla da erişebilirsiniz. Ayrıntılı bilgi ve örnek kod için bkz. [Azure Kurumsal REST API’leri](manage/ea-portal-rest-apis.md).
+  - question: Harcama kotası ayarlayabilir ve belirlediğim limite yaklaştığımda uyarı gönderilmesini sağlayabilir miyim?
+    answer: >
+      Bölüm düzeyinde harcama kotası ayarlayabilirsiniz. Harcama limitleriniz tanımladığınız kotanın %50, %75, %90 ve %100'üne ulaştığında sistem otomatik bildirim gönderir.
+
+
+      Harcama kotanızı tanımlamak için bir departman seçin ve ardından düzenle simgesini seçin. Harcama limiti ayrıntılarını düzenledikten sonra **Kaydet**'i seçin.
+  - question: Azure RBAC uygulamak ve kullanımı izlemek için kaynak gruplarını kullandım. İlgili kullanım ayrıntılarını nasıl görüntüleyebilirim?
+    answer: >
+      _Kaynak grupları_ ve _etiketler_ kullandıysanız bu bilgiler hizmet düzeyinde izlenir ve erişmek için ayrıntılı kullanım dosyasını (CSV) indirebilirsiniz. Azure Enterprise Portal'da [kullanım raporunu indirme](https://ea.azure.com/report/downloadusage) sayfasını inceleyin.
+
+
+      Ayrıca API aracılığıyla da erişebilirsiniz. Ayrıntılı bilgi ve örnek kod için bkz. [Azure Kurumsal REST API’leri](manage/ea-portal-rest-apis.md).
+
+
+      > [!NOTE]
+
+      > Etiketleri yalnızca Azure Resource Manager işlemlerini destekleyen kaynaklara uygulayabilirsiniz. Klasik dağıtım modeli (klasik portal gibi) ile oluşturduğunuz sanal makine, sanal ağ veya depolama alanı gibi kaynaklara etiket uygulayamazsınız. Etiketleme desteği eklemek için bu kaynakları Resource Manager üzerinden yeniden dağıtmanız gerekir. Diğer tüm kaynaklar etiketlemeyi destekler.
+  - question: Power BI kullanarak analiz yapabilir miyim?
+    answer: >
+      Evet, Azure harcamalarınızı daha iyi anlamanıza yardımcı olan güçlü, özelleştirilmiş görselleştirmeler ve raporlar oluşturmak için [Azure maliyet yönetimi bağlayıcısını Power BI Desktop için](/power-bi/connect-data/desktop-connect-azure-cost-management) kullanabilirsiniz. Bir Kurumsal Anlaşma (EA) kullanıyorsanız, [Azure maliyet yönetimi şablon uygulamasını](costs/analyze-cost-data-azure-cost-management-power-bi-template-app.md)da kullanabilirsiniz. Azure maliyet yönetimi şablon uygulaması, harcamalarınızı azaltmak için maliyetleri, hizmet kullanım eğilimlerini ve maliyet iyileştirme seçeneklerini tanımlamayı sağlar.               Power BI raporlarını Azure EA doğrudan, iş ortağı ve fatura bilgilerini görüntüleme yetkisine sahip olan dolaylı müşteriler kullanabilir.
+  - question: Mevcut Azure hesabımı Azure EA kaydıyla ilişkilendirebilir miyim?
+    answer: >
+      Evet. Hesap sahibi olduğunuz tüm Azure aboneliklerinin Kurumsal Anlaşmanıza dönüştürülecek olmasıdır. Visual Studio, AzurePass, MPN ve BizSpark gibi aylık kredi kullanan abonelikler dahildir. Bu tür abonelikler dönüştürülürken aylık krediyi kaybedersiniz.
+  - question: Bir abonelikte kaç Azure hesabı sahibi olabilir?
+    answer: >
+      Her abonelikte yalnızca bir tane hesap sahibi bulunabilir.  Rol Tabanlı Erişim veya Erişim Denetimi (IAM) işlevlerini kullanarak daha fazla rol ekleyebilirsiniz. Bunun için [Azure portalı](https://portal.azure.com) sayfasının sol üst köşesindeki abonelik sekmesini kullanın.
+  - question: Aboneliğin sahipliği başka bir hesaba aktarılabilir mi?
+    answer: >
+      Evet, aboneliğin sahipliğini başka bir hesaba aktarabilirsiniz. Örneğin A hesabında üç abonelik varsa kuruluş yöneticisi bu aboneliklerden birini B hesabına, birini C hesabına, diğerini de D hesabına veya tüm abonelikleri birden E hesabına aktarabilir.
+
+
+      Abonelikleri aktarmak için:
+
+
+      1. Azure Enterprise Portal'da **Yönet** > **Hesap** yolunu izleyin.
+
+      1. En sağdaki **Hesap** girişinin üzerine gelerek **Sahipliği Aktar** (kişi simgesi) ve **Aboneliği Aktar** (liste simgesi) seçeneklerini görüntüleyin. Bu seçenekler yalnızca etkin hesaplar için görünür.
+  - question: Bir Azure hesabı sahibi birden fazla bölümde listelenebilir mi?
+    answer: >
+      Hayır, hesap sahibi yalnızca bir bölümle ilişkilendirilebilir. Bu ilke bölümle ilişkilendirilmiş olan maliyetlerle harcamaların Azure EA Portal'daki EA kaydı altında doğru şekilde izlenebilmesine ve ayrılabilmesine yardımcı olur.
+  - question: Bir Azure hesabı sahibi güvenlik grubu olarak listelenebilir mi?
+    answer: >
+      Hayır, abonelik sahibi benzersiz bir Microsoft hesabı (MSA) veya Azure Active Directory (Azure AD) kimlik doğrulamasına sahip olmalıdır. Kuruluşunuzdaki kullanıcı değişikliklerinden etkilenmemek için genel hesaplar oluşturup abonelik erişimini Azure AD ile yönetebilirsiniz.
+  - question: Bir kullanıcı birden fazla aboneliğe sahip olabilir mi?
+    answer: >
+      Bir Azure hesabı sahibi sınırsız sayıda abonelik oluşturup yönetebilir.
+  - question: Kuruluşumun tüm aboneliklerine erişmek ve onları görüntülemek için ne yapabilirim?
+    answer: >
+      Şu an için bu işlevin ilke yoluyla sağlanması gerekir. Başka bir deyişle hesabınızın oluşturulan her abonelikte rol tabanlı erişim kullanılarak bir abonelik rolüne eklenmesini sağlamanız gerekir.
+  - question: Nereden abonelik oluşturabilirim?
+    answer: >
+      Kurumsal Azure (EA) teklifi aboneliği oluşturabilmeniz için hesabınızın Azure EA Portal'da EA kayıt yöneticiniz tarafından hesap sahibi rolüne eklenmesi gerekir. Ardından EA teklif türü aboneliklerini oluşturma yetkisini elde etmek için Azure EA Portal'da oturum açmanız gerekir. İlk EA aboneliğinizin EA Portal'daki abonelik sekmesinde yer alan ‘+ Abonelik Ekle’ bağlantısıyla oluşturulmasını öneririz.  Ancak hesabınız yetkilendirildikten sonra portal.azure.com adresindeki Abonelikler sekmesinin sol üst köşesinden hesap oluşturmak daha kolay olabilir. Burada tek adımda aboneliğinizi hem oluşturup hem de adını değiştirebilirsiniz.
+  - question: Kimler abonelik oluşturabilir?
+    answer: >
+      Kurumsal Azure teklifi türünde bir abonelik oluşturabilmek için [EA Portal](https://ea.azure.com)'da hesap sahibi rolüne sahip olmanız gerekir.
+  - question: Maliyetim neden $0 olarak görünür?
+    answer: >
+      **Doğrudan kayıt anlaşması** müşterileri için kuruluş yöneticileri, hesap sahiplerine ve bölüm yöneticilerine kullanım raporlarındaki maliyet/fiyatlandırma bilgilerine erişim sağlayabilir. Şu adımları uygulayın:
+
+
+      1. Azure Enterprise Portal'ın sol tarafındaki gezinti menüsünden **Yönet**'i seçin.
+
+      1. DA (bölüm yöneticisi) ücretleri görüntüle öğesinin yanındaki mavi kalem simgesini seçin.
+
+      1. **Etkin**'i seçin ve kaydedin.
+
+      1. AO (hesap sahibi) ücretleri görüntüle öğesinin yanındaki mavi kalem simgesini seçin.
+
+      1. **Etkin**'i seçin ve kaydedin.
+
+
+      > [!NOTE]
+
+      > Hesap sahibi veya bölümü yöneticisiyseniz lütfen kuruluş yöneticinizle iletişime geçerek fiyatlandırma özelliğini etkinleştirmesini isteyin.
+
+
+      **Dolaylı kayıt** müşterileri, fiyatlandırma özelliğinin etkin olup olmadığını kontrol etmek için iş ortaklarıyla iletişime geçebilir. Bu işlem yalnızca iş ortağı tarafından gerçekleştirilebilir. Bu özellik etkinleştirildikten sonra kuruluş yöneticisi olarak kaydınızdaki ücretleri ve fiyatları görüntüleyebilirsiniz.
+
+
+      Bir hesap sahibi veya bölüm yöneticisi için ücretleri görüntüleme özelliğini etkinleştirmek isteyen iş ortaklarının **doğrudan kayıt anlaşması** bölümündeki adımları izlemesi gerekir.
+  - question: Kullanım ayrıntıları raporunda neden SKU bilgileri yok?
+    answer: >
+      Kullanım ayrıntıları raporunda SKU bilgileri bulunmaz. Ancak rapordaki kullanım bilgileri sayesinde fiyat sayfası raporunu indirip SKU bilgilerine ulaşabilirsiniz.
+  - question: Kullanımla ilgili özet ve ayrıntılı raporlarda Azure Market toplam tutarı neden farklı?
+    answer: >
+      Azure Market ücretleri raporu, yalnızca kullanıma dayalı ücretleri gösterir. Tek seferlik ücretler gösterilmez. Kullanıma dayalı ve tek seferlik ücretlerle ilgili en güncel kullanımlar için kullanım özeti sayfasını inceleyin.
+  - question: API raporumda neden hiç bilgi yok?
+    answer: >
+      API anahtarları altı ay boyunca geçerlidir. Sorun yaşıyorsanız kuruluş yöneticisinin yeni bir API anahtarı oluşturması gerekir. API Raporları Hakkında SSS sayfasındaki adımları izlemeyi unutmayın.
+  - question: Power BI raporum neden çalışmıyor?
+    answer: >
+      Power BI ile ilgili sorunlar için [Power BI destek ekibine](https://support.powerbi.com) bilet gönderin.
+  - question: Kaynak etiketlerimin neden Raporlarım gösterilmez?
+    answer: >
+      Kaynak etiketleri Azure portalında yönetilir. [Azure portalından](https://portal.azure.com) Azure abonelik ekibiyle iletişime geçebilirsiniz. [Azure destek isteği oluşturma](../azure-portal/supportability/how-to-create-azure-support-request.md) makalesindeki adımları izleyin.
+  - question: Kaynak ücretim neden her gün değişiyor?
+    answer: >
+      Ayrıntılı kullanım raporunda gösterilen kaynak ücreti, hesaplanmış bir değerdir. Hizmet için ücretlendirilen ortalama aylık ücreti temsil eder. Kaynak ücreti, bir hizmet birimine ait aylık ortalama taahhüdünüz ve aylık fazla kullanım ücretleriniz kullanılarak hesaplanır. Taahüdünüzden tahsil edilen kullanım miktarı ve fazla kullanım ücretleri, ay sonuna kadar değişecektir. Bu nedenle listelenen ücret de ay içinde değişir. Kaynak ücreti, ay sonundan itibaren beşinci günde sabitlenir.
+  - question: Azure Market hizmetleri ve Azure EA Ön Ödemesi ile neler değişti?
+    answer: >
+      1 Mart 2018 itibariyle, bazı üçüncü taraf bayi hizmetleri Azure EA ön ödemeli kullanır. Azure ayrılmış sanal makine örnekleri (RI) dışındaki hizmetler Azure EA Ön Ödemesinden ayrı bir şekilde faturalandırılıyordu.
+
+
+      Azure Ön Ödeme kullanım kapsamını Azure Market’te yayımlanmış olan ve sıklıkla satın alınan bazı üçüncü taraf hizmetleri kapsayacak şekilde genişlettik. Azure Market’teki bu hizmetler için Azure EA Ön Ödemesi, satın alma ve ödeme yönetiminin kolaylaştırılmasına yardımcı olur.
+
+
+      Müşteriler, ön Azure ön ödemeyi kullanmanın diğer yollarını istetiğinden değişiklik yapılmıştır. Bu, müşteriler tarafından sıklıkla istenen bir değişiklikti ve Azure Market müşterilerinin büyük bir bölümünü etkiledi.
+  - question: EA anlaşmasıyla Azure Marketi satın alımlarım için Azure ön ödemeli Nasıl yaparım? avantajdan yararlanın?
+    answer: >
+      Daha basit bir faturalandırma deneyimine sahip olabilir ve Azure EA Ön Ödemesini daha iyi harcayabilirsiniz. Hizmetler Azure ön ödemeniz kapsamında bulunduğundan, Azure EA ön ödemeniz daha değerli hale gelir.
+  - question: Azure EA Ön Ödemesini kullanan Azure Market hizmetlerini nasıl tespit edebilirim?
+    answer: >
+      Azure Ön Ödemesini kullanan bir hizmet satın aldığınızda Azure Market'te bir sorumluluk reddi görüntülenir. Desteklenen bazı hizmetler Red hat, SUSE, Autodesk ve Oracle tarafından yayımlanır. Şu anda başkaları tarafından yayımlanan benzer ada sahip hizmetler Azure Ön Ödemesini kullanmamaktadır. Programa katılan ürünlerin tam bir listesi için [Azure ön ödemeli kullanan üçüncü taraf hizmetlere](https://azure.microsoft.com/updates/azure-marketplace-third-party-reseller-services-now-use-azure-monetary-commitment) bakın.
+  - question: Azure EA ön ödeme, Azure Market satın alımları için biterse ne olacak?
+    answer: >
+      Azure Ön Ödemenizi bitirip fazla kullanıma geçerseniz bu hizmetlerle ilgili ücretler, diğer tüketilen hizmetlerle birlikte bir sonraki fazla kullanım faturanıza yansıtılacaktır. 1 Mart 2018 tarihinden önce bu ücretler diğer Azure Market hizmetleriyle birlikte faturalandırılıyordu.
+  - question: Neden tüm Azure Market hizmetleri Azure Ön Ödemesini kullanmıyor?
+    answer: >
+      Azure Ön Ödemesi ile ilgili en iyi müşteri deneyimi sunmak için düzenli güncelleştirmeler yapıyoruz. Azure EA 'daki en son değişiklikler, çok sayıda müşteriyi ve Azure Marketi 'nde toplam harcamanın önemli bir kısmını ilgilenmiştir. İleride farklı hizmetler de eklenebilir.
+  - question: Azure Market Hizmetleri ve Azure EA ön ödeme değişiklikleri, dolaylı kayıt ve iş ortaklarını nasıl etkiler?
+    answer: >
+      Dolaylı kayıt müşterileri veya iş ortakları bu durumdan etkilenmeyecektir. Bu hizmetler, diğer tüketim hizmetleriyle aynı iş ortağı kar payı özelliklerine sahiptir. Buradaki tek değişiklik, ücretlerin farklı bir faturada görünmesi ve ücretlerin ödemesinin müşterinin Azure EA Ön Ödemesi ile yapılmasıdır.
+  - question: Azure EA ön ödemeli hizmetini kullanan Azure Market hizmetlerini nereden görebilirim?
+    answer: >
+      Belirli Azure Market teklifleri, Azure Ön Ödeme fonlarını kullanabilir. Programa katılan ürünlerin tam bir listesi için [Azure ön ödemeli kullanan üçüncü taraf hizmetlere](https://azure.microsoft.com/updates/azure-marketplace-third-party-reseller-services-now-use-azure-monetary-commitment) bakın.
+- name: İş ortağı soruları
+  questions:
+  - question: İş ortağı KIMLIĞINI kimler bağlayamalıdır?
+    answer: >
+      İş ortağı kuruluştan bir müşterinin Power Apps kaynakları üzerinde çalışan herhangi bir kullanıcının iş ortağı KIMLIĞINI hesaba bağlayabilmesini sağlayabilirsiniz. İdeal olarak, PAL 'teki ilişki projenin başlangıcında yapılmalıdır. Ancak, müşterinin dizinine her eriştiğinizde bu yapılabilir.
+  - question: Bir iş ortağı kimliği bağlandıktan sonra değiştirilebilir mi?
+    answer: >
+      Evet. Bağlı bir iş ortağı kimliği değiştirilebilir, eklenebilir veya kaldırılabilir. Bu durum için bir örnek, şirketinizdeki bir çalışan kuruluştan ayrıldığında olabilir. Müşteri ile bir proje veya sözleşme sona erdiğinde başka bir örnek de olabilir.
+  - question: Bir kullanıcının birden fazla müşteri kiracısında hesabı varsa ne olur?
+    answer: >
+      Her müşteri kiracısı için iş ortağı kimliği ve hesap arasında bağlantı oluşturulur. Her müşteri kiracısında iş ortağı kimliğini bağlayın.
+  - question: Diğer iş ortakları veya müşteriler, iş ortağı kimliğine bağlantıyı düzenleyebilir ya da kaldırabilir mi?
+    answer: >
+      Bağlantı, kullanıcı hesabı düzeyinde ilişkilendirilir. Yalnızca siz iş ortağı kimliğine bağlantıyı düzenleyebilir veya kaldırabilirsiniz. Müşteri ve diğer iş ortakları, iş ortağı kimliğine bağlantıyı değiştiremez.
+  - question: Şirketimin birden çok MPN kimliği varsa hangisini kullanmalıyım?
+    answer: >
+      İş ortağı profilinizde gösterilen **İlişkili MPN kimliğini** kullandığınızdan emin olun. Bu, genellikle kuruluşunuzla yerel hesap KIMLIĞI ilişkidir.
+  - question: Müşterime PAL Nasıl yaparım? açıkla mı?
+    answer: >
+      PAL, Microsoft 'un müşterilerin iş hedeflerine ulaşmasını ve bulutta değer elde etmesini sağlayan iş ortaklarını belirlemesine ve tanımasını sağlar. Müşterilerin, önce Power Apps kaynaklarına bir iş ortağı erişimi sağlaması gerekir. Erişim verildiğinde, ortağın Microsoft İş Ortağı Ağı KIMLIĞI (MPN KIMLIĞI) ilişkilendirilir. Bu ilişkilendirme, Microsoft 'un hizmet sağlayıcılarını anlamasına ve müşterileri en iyi şekilde desteklemesi için gereken araçları ve programları iyileştirmesine yardımcı olur.
+  - question: PAL hangi verileri toplar?
+    answer: >
+      Mevcut kimlik bilgilerine PAL ilişkilendirmesi Microsoft'a yeni müşteri verileri sağlamaz. Bu, bir ortağın bir müşterinin güç uygulamaları ortamlarında etkin olarak bulunduğu Microsoft 'a bilgi sağlar. Microsoft, Müşteri ortamından, iş ortağına müşteri tarafından sunulan hesap izinleri (Power Apps rolü) ve kapsamı (kiracı, kaynak grubu, kaynak) temelinde iş ortağı kuruluşa kullanım ve etkinin üzerinde çalışma özelliği verebilir.
+  - question: PAL ilişkilendirmesi bir müşterinin Power Apps ortamının güvenliğini etkiler mi?
+    answer: PAL ilişkilendirmesi yalnızca ortağın MPN KIMLIĞINI zaten sağlanmış olan kimlik bilgisine ekler. Herhangi bir izni değiştirmez (Power Apps rolü) veya iş ortağı veya Microsoft 'a ek Power Apps hizmet verileri sağlar.

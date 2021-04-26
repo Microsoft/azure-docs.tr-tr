@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/06/2019
 ms.author: kumud
-ms.openlocfilehash: 2bb80ba421617d5fd1699826deda00e56f1e43af
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 401124ed4b2794d891ca224ba3dc1c78edcae8d5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98943663"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783422"
 ---
 # <a name="add-or-remove-a-subnet-delegation"></a>Alt ağ temsili ekleme veya kaldırma
 
@@ -70,7 +70,7 @@ Bu bölümde, önceki bölümde oluşturduğunuz alt ağı bir Azure hizmetine d
 3. **Ayarlar** altında **alt ağlar**' ı seçin ve ardından **mysubnet**' i seçin.
 4. *Mysubnet* sayfasında **alt ağ temsilcisi** listesi için **alt ağ temsilcisi** altında listelenen hizmetlerden **hiçbiri** ' ni seçin. 
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 Ortamınızı Azure CLı için hazırlayın.
 
@@ -113,7 +113,7 @@ Yerleşik [ağ katılımcısı](../role-based-access-control/built-in-roles.md?t
 
 Bu bölümde, önceki bölümde oluşturduğunuz alt ağı bir Azure hizmetine devredebilirsiniz. 
 
-**Mysubnet** adlı alt ağı bir Azure hizmetine temsilciyle güncelleştirmek için [az Network VNET subnet Update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) kullanın.  Bu örnekte, örnek temsili için **Microsoft. DBforPostgreSQL/serversv2** kullanılmıştır:
+**Mysubnet** adlı alt ağı bir Azure hizmetine temsilciyle güncelleştirmek için [az Network VNET subnet Update](/cli/azure/network/vnet/subnet#az_network_vnet_subnet_update) kullanın.  Bu örnekte, örnek temsili için **Microsoft. DBforPostgreSQL/serversv2** kullanılmıştır:
 
 ```azurecli-interactive
   az network vnet subnet update \
@@ -123,7 +123,7 @@ Bu bölümde, önceki bölümde oluşturduğunuz alt ağı bir Azure hizmetine d
   --delegations Microsoft.DBforPostgreSQL/serversv2
 ```
 
-Temsilinin uygulandığını doğrulamak için [az Network VNET subnet Show](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-show)kullanın. Hizmetin, **HizmetAdı** özelliği altındaki alt ağa atanmış olduğunu doğrulayın:
+Temsilinin uygulandığını doğrulamak için [az Network VNET subnet Show](/cli/azure/network/vnet/subnet#az_network_vnet_subnet_show)kullanın. Hizmetin, **HizmetAdı** özelliği altındaki alt ağa atanmış olduğunu doğrulayın:
 
 ```azurecli-interactive
   az network vnet subnet show \
@@ -152,7 +152,7 @@ Temsilinin uygulandığını doğrulamak için [az Network VNET subnet Show](/cl
 
 ### <a name="remove-subnet-delegation-from-an-azure-service"></a>Azure hizmetinden alt ağ temsilcisini kaldırma
 
-**Mysubnet** adlı alt ağdan temsilciyi kaldırmak için [az Network VNET subnet Update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) kullanın:
+**Mysubnet** adlı alt ağdan temsilciyi kaldırmak için [az Network VNET subnet Update](/cli/azure/network/vnet/subnet#az_network_vnet_subnet_update) kullanın:
 
 ```azurecli-interactive
   az network vnet subnet update \
@@ -161,7 +161,7 @@ Temsilinin uygulandığını doğrulamak için [az Network VNET subnet Show](/cl
   --vnet-name myVnet \
   --remove delegations
 ```
-Temsilinin kaldırıldığını doğrulamak için [az Network VNET subnet Show](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-show)kullanın. Hizmetin **ServiceName** özelliği altındaki alt ağdan kaldırıldığını doğrulayın:
+Temsilinin kaldırıldığını doğrulamak için [az Network VNET subnet Show](/cli/azure/network/vnet/subnet#az_network_vnet_subnet_show)kullanın. Hizmetin **ServiceName** özelliği altındaki alt ağdan kaldırıldığını doğrulayın:
 
 ```azurecli-interactive
   az network vnet subnet show \

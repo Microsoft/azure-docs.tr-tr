@@ -12,12 +12,12 @@ ms.topic: how-to
 ms.date: 03/17/2021
 ms.author: inhenkel
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 47d079aa5038a5ef09df30f0561c258bfbf6a9f7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 967b509ff4832bb8c70c5802699d62f1b209c516
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104610074"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105959662"
 ---
 # <a name="create-and-monitor-media-services-events-with-event-grid-using-the-azure-cli"></a>Azure CLı kullanarak Event Grid Media Services olaylar oluşturma ve izleme
 
@@ -34,7 +34,7 @@ Bu makalede, Azure CLı kullanarak Azure Media Services hesabınıza yönelik ol
 
     Şu anda, tüm [Media Services v3 CLI](/cli/azure/ams) komutları Azure Cloud Shell çalışmaz. CLı 'nın yerel olarak kullanılması önerilir.
 
-- [Media Services hesabı oluşturun](../create-account-howto.md).
+- [Media Services hesabı oluşturun](../account-create-how-to.md).
 
     Kaynak grubu adı ve Media Services hesap adı için kullandığınız değerleri anımsadığınızdan emin olun.
 

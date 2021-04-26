@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 02/17/2021
 ms.author: jeedes
 ms.openlocfilehash: 41f6db8cf2454c224addac525e9d039954a95712
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104601508"
 ---
 # <a name="tutorial-integrate-dropbox-business-with-azure-active-directory"></a>Öğretici: Dropbox Işletmelerini Azure Active Directory ile tümleştirme
@@ -133,7 +133,7 @@ Bu bölümde, Dropbox Business 'a erişim vererek Azure çoklu oturum açma öze
 
 3. Dropbox Işlerinizi el ile ayarlamak istiyorsanız, yeni bir Web tarayıcısı penceresi açın ve Dropbox iş kiracınıza gidin ve Dropbox Iş kiracınızda oturum açın. ve aşağıdaki adımları gerçekleştirin:
 
-    !["Dropbox Iş oturum açma" sayfasını gösteren ekran görüntüsü.](./media/dropboxforbusiness-tutorial/account.png "Çoklu oturum açmayı yapılandırma")
+    !["Dropbox Iş oturum açma&quot; sayfasını gösteren ekran görüntüsü.](./media/dropboxforbusiness-tutorial/account.png &quot;Çoklu oturum açmayı yapılandırma")
 
 4. **Kullanıcı simgesine** tıklayın ve **Ayarlar** sekmesini seçin.
 

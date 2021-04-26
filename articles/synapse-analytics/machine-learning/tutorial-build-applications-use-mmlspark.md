@@ -9,12 +9,12 @@ ms.reviewer: ''
 ms.date: 03/08/2021
 author: ruixinxu
 ms.author: ruxu
-ms.openlocfilehash: 928e2ef8b373626a91a291b1798f3ebb7ef290e8
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 5258d8f16e288e7df7e1286eb1902cc6ba6d10f7
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105608842"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107227730"
 ---
 # <a name="tutorial-build-machine-learning-applications-using-microsoft-machine-learning-for-apache-spark-preview"></a>Öğretici: Apache Spark için Microsoft Machine Learning kullanarak makine öğrenimi uygulamaları oluşturma (Önizleme)
 
@@ -23,7 +23,7 @@ SYNAPSE Spark aşağıdakiler dahil yerleşik MMLSpark kitaplıklarını sağlar
 
 - [Vowpal Wabbit](https://github.com/Azure/mmlspark/blob/master/docs/vw.md) – makine öğrenimi 'nde yaklaşım analizi gibi metin analizlerini etkinleştirmek üzere Machine Learning için Kitaplık Hizmetleri.
 - [Spark üzerinde](https://github.com/Azure/mmlspark/blob/master/docs/cogsvc.md) bilişsel hizmetler – anomali algılama gibi bilişsel veri modelleme Hizmetleri için çözüm tasarımı elde etmek amacıyla, Azure bilişsel hizmetler 'In, Mini erişimli bir ml işlem hattı içinde özelliklerini birleştirmek için
-- [Lightbgn](https://github.com/Azure/mmlspark/blob/master/docs/lightgbm.md) – lightgbm, ağaç tabanlı öğrenme algoritmaları kullanan bir gradyan artırma çerçevesidir. Dağıtılması ve daha yüksek verimlilik sağlamak üzere tasarlanmıştır.
+- [Lightgbm](https://github.com/Azure/mmlspark/blob/master/docs/lightgbm.md) – lightgbm, ağaç tabanlı öğrenme algoritmaları kullanan bir gradyan artırma çerçevesidir. Dağıtılması ve daha yüksek verimlilik sağlamak üzere tasarlanmıştır.
 - Koşullu KNN-koşullu sorgularla ölçeklenebilir KNN modelleri.
 - [Spark üzerinde http](https://github.com/Azure/mmlspark/blob/master/docs/http.md) – Spark ve http protokol tabanlı erişilebilirliği tümleştirerek dağıtılmış mikro hizmetleri düzenlemeye izin vermez.
 

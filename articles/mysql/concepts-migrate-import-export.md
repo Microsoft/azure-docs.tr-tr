@@ -5,14 +5,14 @@ author: savjani
 ms.author: pariks
 ms.service: mysql
 ms.subservice: migration-guide
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/30/2020
-ms.openlocfilehash: 049a0ad45ea82210d8fac28db0fb3d067841bba4
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 641dfa2439513138b5dd8f56843e81c31eb38609
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105625152"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389783"
 ---
 # <a name="migrate-your-mysql-database-by-using-import-and-export"></a>İçeri ve dışarı aktarmayı kullanarak MySQL veritabanınızı geçirme
 
@@ -41,7 +41,7 @@ Bağlanmak için aşağıdakileri yapın:
 
 1. Bağlantı bilgilerini MySQL çalışma ekranına ekleyin.
 
-   :::image type="content" source="./media/concepts-migrate-import-export/2_setup-new-connection.png" alt-text="MySQL çalışma ekranı bağlantı dizesi":::
+   :::image type="content" source="./media/concepts-migrate-import-export/2_setup-new-connection.png" alt-text="MySQL çalışma ekranı bağlantı dizesinin ekran görüntüsü.":::
 
 ## <a name="determine-when-to-use-import-and-export-techniques"></a>İçeri ve dışarı aktarma tekniklerini ne zaman kullanacağınızı belirleme
 
@@ -50,14 +50,14 @@ Bağlanmak için aşağıdakileri yapın:
 
 Aşağıdaki senaryolarda, MySQL araçları kullanarak veritabanlarını içeri aktarıp MySQL veritabanınıza dışarı aktarabilirsiniz. Diğer araçlar için [MySQL to Azure veritabanı geçiş kılavuzu](https://github.com/Azure/azure-mysql/blob/master/MigrationGuide/MySQL%20Migration%20Guide_v1.1.pdf)' na yönelik "geçiş yöntemleri" bölümüne (sayfa 22) gidin. 
 
-- Mevcut bir MySQL veritabanından Azure MySQL veritabanınıza içeri aktarmak için seçmeli olarak birkaç tablo seçmeniz gerektiğinde, bu, içeri ve dışarı aktarma tekniğinin kullanılması en iyisidir.  Bunu yaptığınızda, zaman ve kaynakları kazanmak için geçişten gereksiz tabloları atlayabilirsiniz. Örneğin, `--include-tables` `--exclude-tables` [mysqlpump](https://dev.mysql.com/doc/refman/5.7/en/mysqlpump.html#option_mysqlpump_include-tables) ile veya anahtarını `--tables` [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html#option_mysqldump_tables)ile anahtarla kullanın.
+- Mevcut bir MySQL veritabanından Azure MySQL veritabanınıza içeri aktarmak için seçmeli olarak birkaç tablo seçmeniz gerektiğinde, bu, içeri ve dışarı aktarma tekniğinin kullanılması en iyisidir. Bunu yaptığınızda, zaman ve kaynakları kazanmak için geçişten gereksiz tabloları atlayabilirsiniz. Örneğin, `--include-tables` `--exclude-tables` [mysqlpump](https://dev.mysql.com/doc/refman/5.7/en/mysqlpump.html#option_mysqlpump_include-tables)ile veya anahtarını ve `--tables` [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html#option_mysqldump_tables)ile anahtarı kullanın.
 - Tablo dışındaki veritabanı nesnelerini taşırken, bu nesneleri açıkça oluşturun. Kısıtlama (birincil anahtar, yabancı anahtar ve dizinler), görünümler, işlevler, yordamlar, Tetikleyiciler ve geçirmek istediğiniz diğer veritabanı nesneleri dahil edin.
 - MySQL veritabanı dışındaki dış veri kaynaklarından veri geçirirken, düz dosyalar oluşturun ve [mysqlimport](https://dev.mysql.com/doc/refman/5.7/en/mysqlimport.html)kullanarak içeri aktarın.
 
 > [!Important]
-> Tek sunucu ve esnek sunucu *yalnızca InnoDB depolama altyapısını* destekler. MySQL için Azure veritabanınıza veri yüklerken veritabanındaki tüm tabloların InnoDB Storage altyapısını kullanmasını sağlayın.
+> Tek sunucu ve esnek sunucu yalnızca InnoDB depolama altyapısını destekler. MySQL için Azure veritabanınıza veri yüklerken veritabanındaki tüm tabloların InnoDB Storage altyapısını kullanmasını sağlayın.
 >
-> Kaynak veritabanınız başka bir depolama altyapısı kullanıyorsa, veritabanını geçirmeden önce InnoDB altyapısına dönüştürün. Örneğin, MyISAM altyapısını kullanan bir WordPress veya Web uygulamanız varsa, önce verileri InnoDB tablolarına geçirerek tabloları dönüştürün. Yan tümcesini kullanarak `ENGINE=INNODB` tablo oluşturma altyapısını ayarlayın ve ardından geçişten önce verileri uyumlu tabloya aktarın.
+> Kaynak veritabanınız başka bir depolama altyapısı kullanıyorsa veritabanını geçirmeden önce InnoDB altyapısına dönüştürün. Örneğin, MyISAM altyapısını kullanan bir WordPress veya Web uygulamanız varsa, önce verileri InnoDB tablolarına geçirerek tabloları dönüştürün. Yan tümcesini kullanarak `ENGINE=INNODB` tablo oluşturma altyapısını ayarlayın ve ardından geçişten önce verileri uyumlu tabloya aktarın.
 
    ```sql
    INSERT INTO innodb_table SELECT * FROM myisam_table ORDER BY primary_key_columns
@@ -127,7 +127,7 @@ MySQL verilerinizi dışarı aktarmak için **veri dışa aktarma** bölmesini k
 
 1. Dışarı aktarılacak veritabanı nesnelerini seçin ve ilgili seçenekleri yapılandırın.
 1. Geçerli nesneleri yüklemek için **Yenile** ' yi seçin.
-1. İsteğe bağlı olarak, dışarı aktarma işlemini iyileştirmek için sağ üst köşedeki **Gelişmiş Seçenekler** ' i seçin. Örneğin, tablo kilitleri ekleyin, INSERT deyimleri yerine Replace kullanın, ve tırnak tanımlayıcıları de backtick karakterlerinden oluşur.
+1. İsteğe bağlı olarak, dışarı aktarma işlemini iyileştirmek için sağ üst köşedeki **Gelişmiş Seçenekler** ' i seçin. Örneğin, tablo kilitleri ekleyin, `replace` deyimler yerine kullanın `insert` ve tırnak tanımlayıcıları ve geri değer karakterleri kullanın.
 1. Dışarı aktarma işlemini başlatmak için **dışarı aktarmayı Başlat** ' ı seçin.
 
 

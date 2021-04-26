@@ -8,12 +8,12 @@ ms.date: 10/06/2019
 ms.author: brendm
 ms.custom: devx-track-java
 zone_pivot_groups: programming-languages-spring-cloud
-ms.openlocfilehash: f55a82eeddc8d4515b0f1333b615244976975097
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 6bcb020b14952541c673592c1040fca211ed4edf
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878734"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107011860"
 ---
 # <a name="use-distributed-tracing-with-azure-spring-cloud"></a>Azure Spring Cloud ile dağıtılmış izleme kullanma
 
@@ -82,7 +82,7 @@ Aşağıdaki ayarları, uygulama Azure yay bulutu 'nda çalıştırıldığında
 2. Eureka sunucusu, yapılandırma sunucusu ve kullanıcı uygulamaları arasında gönderilen izlenen yayılmaları görmek isterseniz: `management.tracing.egressIgnorePattern` "/api/v2/birleþi |/v2/Apps/" olarak ayarlayın.*/Permissions |/Eureka/.*| /OAuth/. * ".
 
 Örneğin, *appsettings.js* , aşağıdaki özellikleri içerir:
- 
+
 ```json
 "management": {
     "tracing": {
@@ -119,25 +119,58 @@ Bu yordamları izlemek için, zaten sağlanmış ve çalışan bir Azure yay bul
 
 1. [Azure yay bulut uygulaması hazırlama kılavuzumuzu](how-to-prepare-app-deployment.md)izlediyseniz bu adımı atlayın. Aksi takdirde, yerel geliştirme ortamınıza gidin ve pom.xml dosyanızı düzenleyerek aşağıdaki yay bulutu uykuya geçme bağımlılığını ekleyin:
 
-    ```xml
-    <dependencyManagement>
-        <dependencies>
+    * Spring Boot sürüm < 2.4. x.
+
+      ```xml
+      <dependencyManagement>
+          <dependencies>
+              <dependency>
+                  <groupId>org.springframework.cloud</groupId>
+                  <artifactId>spring-cloud-sleuth</artifactId>
+                  <version>${spring-cloud-sleuth.version}</version>
+                  <type>pom</type>
+                  <scope>import</scope>
+              </dependency>
+          </dependencies>
+      </dependencyManagement>
+      <dependencies>
+          <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-sleuth</artifactId>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-zipkin</artifactId>
+          </dependency>
+      </dependencies>
+      ```
+
+    * Spring Boot sürüm >= 2,4. x.
+
+      ```xml
+      <dependencyManagement>
+          <dependencies>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-sleuth</artifactId>
-                <version>${spring-cloud-sleuth.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-sleuth</artifactId>
-        </dependency>
-    </dependencies>
-    ```
+                  <groupId>org.springframework.cloud</groupId>
+                  <artifactId>spring-cloud-sleuth</artifactId>
+                  <version>${spring-cloud-sleuth.version}</version>
+                  <type>pom</type>
+                  <scope>import</scope>
+              </dependency>
+          </dependencies>
+      </dependencyManagement>
+      <dependencies>
+          <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-sleuth</artifactId>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+           </dependency>
+      </dependencies>
+      ```
+
 
 1. Bu değişiklikleri yansıtacak şekilde Azure Spring Cloud Service için derleyin ve dağıtın.
 

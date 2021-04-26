@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 01/08/2021
 ms.author: trbye
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 76b4a749bff94cbf218d3cd3c7d132eef119b7ef
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0c041d64b3dbd0c38979f4d8d0fa563a72f6a4b1
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104606914"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168204"
 ---
 # <a name="speech-to-text-rest-api"></a>Konuşmayı metne dönüştürme REST API'si
 
@@ -153,7 +153,7 @@ var pronAssessmentHeader = Convert.ToBase64String(pronAssessmentParamsBytes);
 Ses verilerinin, gecikme süresini önemli ölçüde azaltan akış (öbekli) karşıya yükleme işlemini kesinlikle öneririz. Akışı etkinleştirme hakkında bilgi için bkz. [farklı programlama dillerinde örnek kod](https://github.com/Azure-Samples/Cognitive-Speech-TTS/tree/master/PronunciationAssessment) .
 
 >[!NOTE]
->Telaffuz değerlendirmesi özelliği şu anda yalnızca dilde kullanılabilir `en-US` .
+> Telaffuz değerlendirmesi özelliği şu anda `en-US` tüm [konuşmadan metin bölgelerinde](regions.md#speech-to-text)kullanılabilen dili desteklemektedir. Ve dillerini destekler, ve `en-GB` `zh-CN` bölgelerinde bulunan önizleme aşamasındadır `westus` `eastasia` `centralindia` .
 
 ### <a name="sample-request"></a>Örnek istek
 

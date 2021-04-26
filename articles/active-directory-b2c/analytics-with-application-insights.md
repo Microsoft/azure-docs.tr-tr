@@ -12,12 +12,12 @@ ms.date: 01/29/2021
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 92da0b12a3119b048866eef5b18f658916595294
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2cde44ddb49ede8002b8a25ab47ae92ccd602a9d
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101645934"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226379"
 ---
 # <a name="track-user-behavior-in-azure-ad-b2c-by-using-application-insights"></a>Application Insights kullanarak Azure AD B2C Kullanıcı davranışını izleme
 
@@ -252,7 +252,7 @@ Teknik profillere başvuran yeni düzenleme adımları ekleyin.
 
 ### <a name="manipulate-claims"></a>Talepleri işleme
 
-Giriş taleplerini değiştirmek veya Application Insights göndermeden önce yenilerini oluşturmak için [giriş talep dönüşümlerini](custom-policy-trust-frameworks.md#manipulating-your-claims) kullanabilirsiniz. Aşağıdaki örnekte, teknik profil, `CheckIsAdmin` giriş talep dönüşümünü içerir.
+Giriş taleplerini değiştirmek veya Application Insights göndermeden önce yenilerini oluşturmak için [giriş talep dönüşümlerini](custom-policy-overview.md#manipulating-your-claims) kullanabilirsiniz. Aşağıdaki örnekte, teknik profil, `CheckIsAdmin` giriş talep dönüşümünü içerir.
 
 ```xml
 <TechnicalProfile Id="AppInsights-SignInComplete">
@@ -269,7 +269,7 @@ Giriş taleplerini değiştirmek veya Application Insights göndermeden önce ye
 
 ### <a name="add-events"></a>Olay Ekle
 
-Bir olay eklemek için teknik profili içeren yeni bir teknik profil oluşturun `AppInsights-Common` . Ardından yeni teknik profili, [Kullanıcı yolculuğuna](custom-policy-trust-frameworks.md#orchestration-steps)düzenleme adımı olarak ekleyin. Hazırlanıyor olayını tetiklemek için [Önkoşul](userjourneys.md#preconditions) öğesini kullanın. Örneğin, yalnızca kullanıcılar çok faktörlü kimlik doğrulaması aracılığıyla çalıştırıldığında olayı rapor edin.
+Bir olay eklemek için teknik profili içeren yeni bir teknik profil oluşturun `AppInsights-Common` . Ardından yeni teknik profili, [Kullanıcı yolculuğuna](custom-policy-overview.md#orchestration-steps)düzenleme adımı olarak ekleyin. Hazırlanıyor olayını tetiklemek için [Önkoşul](userjourneys.md#preconditions) öğesini kullanın. Örneğin, yalnızca kullanıcılar çok faktörlü kimlik doğrulaması aracılığıyla çalıştırıldığında olayı rapor edin.
 
 ```xml
 <TechnicalProfile Id="AppInsights-MFA-Completed">

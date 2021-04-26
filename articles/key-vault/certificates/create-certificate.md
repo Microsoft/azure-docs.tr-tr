@@ -3,19 +3,18 @@ title: Sertifika oluşturma yöntemleri
 description: Azure Key Vault bir Key Vault sertifikası oluşturmak veya içeri aktarmak için farklı seçenekler hakkında bilgi edinin. Key Vault sertifikası oluşturmanın birkaç yolu vardır.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: certificates
 ms.topic: conceptual
 ms.date: 01/07/2019
 ms.author: mbaldwin
-ms.openlocfilehash: a9545c040809331a5556b11f6cc7536931e2d421
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 72ff2a1a7b8bcff768248833183ce03a169f9a4d
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93289568"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107752129"
 ---
 # <a name="certificate-creation-methods"></a>Sertifika oluşturma yöntemleri
 
@@ -50,7 +49,7 @@ Aşağıdaki açıklamalar, önceki diyagramdaki yeşil bir şekilde açıklanan
 ## <a name="asynchronous-process"></a>Zaman uyumsuz işlem
 KV sertifika oluşturma zaman uyumsuz bir işlemdir. Bu işlem bir KV sertifika isteği oluşturur ve 202 (kabul edildi) http durum kodunu döndürür. İsteğin durumu, bu işlem tarafından oluşturulan bekleyen nesne yoklanarak izlenebilir. Bekleyen nesnenin tam URI 'SI konum üst bilgisinde döndürülür.  
 
-KV sertifikası oluşturma isteği tamamlandığında, bekleyen nesnenin durumu "tamamlandı" olarak değişir ve KV sertifikasının yeni bir sürümü oluşturulur. Bu, geçerli sürüm olacak.  
+KV sertifikası oluşturma isteği tamamlandığında, bekleyen nesnenin durumu "tamamlandı" iken "tamamlandı" olarak değişecektir ve KV sertifikasının yeni bir sürümü oluşturulacaktır. Bu, geçerli sürüm olacak.  
 
 ## <a name="first-creation"></a>İlk oluşturma
  Bir KV sertifikası ilk kez oluşturulduğunda, sertifikayla aynı ada sahip bir adreslenebilir anahtar ve gizli dizi da oluşturulur. Ad zaten kullanımda ise, işlem 409 (çakışma) http durum koduyla başarısız olur.
@@ -93,4 +92,5 @@ Bir sipariş veren sağlayıcıya yerleştirildiğinde, sertifika türüne bağl
 
 ## <a name="see-also"></a>Ayrıca Bkz.
 
+ - [Portal](https://docs.microsoft.com/azure/key-vault/certificates/quick-create-portal), [Azure CLI](https://docs.microsoft.com/azure/key-vault/certificates/quick-create-cli), [Azure PowerShell](https://docs.microsoft.com/azure/key-vault/certificates/quick-create-powershell) kullanarak Key Vault sertifika oluşturma kılavuzu
  - [Sertifika oluşturmayı izleme ve yönetme](create-certificate-scenarios.md)

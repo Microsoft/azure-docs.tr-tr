@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.service: iot-central
 services: iot-central
 manager: abjork
-ms.openlocfilehash: 476a0c2d75dcbee5c1ed4d758e0cbc9d4726ff95
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b65013bbf21faa8bffdcf799a991952b69f5fead
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97587205"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714479"
 ---
 # <a name="tutorial-create-a-water-consumption-monitoring-application-with-azure-iot-central"></a>Öğretici: Azure IoT Central su tüketim izleme uygulaması oluşturma
 
@@ -200,22 +200,23 @@ Oluşturduğunuz su tüketim izleme uygulamasının üç önceden yapılandırı
 
    ![Kurallar bölmesi](./media/tutorial-waterconsumptionmonitoring/waterconsumptionmonitoring-rules.png)
 
-1. Uygulamanın önceden yapılandırılmış kurallarından biri olan **yüksek pH uyarısı**' nı seçin.
+1. Uygulamanın önceden yapılandırılmış kurallarından biri olan **yüksek su akış uyarısı**' nı seçin.
 
      ![Yüksek pH uyarısı](./media/tutorial-waterconsumptionmonitoring/waterconsumptionmonitoring-highflowalert.png)
 
-    `High flow alert`Kural, koşula karşı denetlenecek şekilde yapılandırılır `Acidity (pH)` `greater than` `Max flow threshold` . Maksimum akış eşiği, **akıllı vana** cihaz şablonunda tanımlanan bir bulut özelliğidir. Değeri `Max flow threshold` cihaz örneği başına ayarlanır.
+    `High water flow alert`Kural, koşula karşı denetlenecek şekilde yapılandırılır `Flow` `greater than` `Max flow threshold` . Maksimum akış eşiği, **akıllı vana** cihaz şablonunda tanımlanan bir bulut özelliğidir. Değeri `Max flow threshold` cihaz örneği başına ayarlanır.
 
 Şimdi bir e-posta eylemi oluşturalım.
 
 Kurala bir eylem eklemek için:
 
 1. **+ E-posta** seçeneğini belirleyin.
-1. Eylem için kolay **görünen ad** olarak **yüksek pH uyarısı** girin.
+1. Eylem için kolay **görünen ad** olarak **yüksek akış uyarısı** girin.
 1. **' Deki** Azure IoT Central hesabınızla ilişkili e-posta adresini girin.
 1. İsteğe bağlı olarak, e-posta metnine dahil etmek için bir Note girin.
 1. Eylemi gerçekleştirmek için **bitti** ' yi seçin.
-1. Yeni kuralı kaydetmek ve etkinleştirmek için **Kaydet** ' i seçin.
+1. Yeni kuralı kaydetmek için **Kaydet** ' i seçin.
+1. Kuralı etkinleştirin.
 
 Birkaç dakika içinde, yapılandırılan koşul karşılandıktan sonra bir e-posta almalısınız.
 

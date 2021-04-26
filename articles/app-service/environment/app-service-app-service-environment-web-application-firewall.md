@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.date: 03/03/2018
 ms.author: stefsch
 ms.custom: mvc, seodec18
-ms.openlocfilehash: 354568fa3ab3816b643a8f08305ab55868a9b0b6
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 56d931f2346e5a0b615d3f11dce3b06396e586b4
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "90973705"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588726"
 ---
 # <a name="configuring-a-web-application-firewall-waf-for-app-service-environment"></a>App Service Ortamı için Web Uygulaması Güvenlik Duvarı (WAF) Yapılandırma
 ## <a name="overview"></a>Genel Bakış
@@ -66,7 +66,7 @@ Oturum açtıktan sonra, aşağıdaki görüntüde gösterildiği gibi WAF korum
 
 ![Yönetim Panosu][ManagementDashboard]
 
-**Hizmetler** sekmesine tıklayarak WAF’yi koruduğu hizmetler için yapılandırabilirsiniz. Barracuda WAF’nizi yapılandırma hakkında daha ayrıntılı bilgi için [ilgili belgelere](https://techlib.barracuda.com/waf/getstarted1) bakın. Aşağıdaki örnekte, HTTP ve HTTPS üzerinde trafiğe hizmet veren bir App Service uygulaması yapılandırılmıştır.
+**Hizmetler** sekmesine tıklayarak WAF’yi koruduğu hizmetler için yapılandırabilirsiniz. Barracuda WAF’nizi yapılandırma hakkında daha ayrıntılı bilgi için [ilgili belgelere](https://campus.barracuda.com/product/webapplicationfirewall/doc/4259884/configure-the-barracuda-web-application-firewall-from-the-web-interface/) bakın. Aşağıdaki örnekte, HTTP ve HTTPS üzerinde trafiğe hizmet veren bir App Service uygulaması yapılandırılmıştır.
 
 ![Yönetim Hizmet Ekleme][ManagementAddServices]
 

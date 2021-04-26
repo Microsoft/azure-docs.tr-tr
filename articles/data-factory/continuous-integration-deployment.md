@@ -6,13 +6,13 @@ author: dcstwh
 ms.author: weetok
 ms.reviewer: jburchel
 ms.topic: conceptual
-ms.date: 03/11/2021
-ms.openlocfilehash: 24aa3bc455bf716c074526d707594bd3b4170619
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.date: 04/01/2021
+ms.openlocfilehash: 7ffcb93493ada36df59c0a8305e941176e8320b8
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105564186"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106121481"
 ---
 # <a name="continuous-integration-and-delivery-in-azure-data-factory"></a>Azure Data Factory’de sürekli tümleştirme ve teslim
 
@@ -697,6 +697,9 @@ Dağıtım öncesi betiği çalıştırırken, **betik bağımsız değişkenler
 Dağıtım sonrası betiği çalıştırırken, **betik bağımsız değişkenleri** alanında aşağıdaki parametrelerin bir çeşidini belirtmeniz gerekecektir.
 
 `-armTemplate "$(System.DefaultWorkingDirectory)/<your-arm-template-location>" -ResourceGroupName <your-resource-group-name> -DataFactoryName <your-data-factory-name>  -predeployment $false -deleteDeployment $true`
+
+> [!NOTE]
+> `-deleteDeployment`Bayrak, ARM 'de dağıtım GEÇMIŞINDEN ADF dağıtım girişinin silinmesini belirtmek için kullanılır.
 
 ![Azure PowerShell görevi](media/continuous-integration-deployment/continuous-integration-image11.png)
 

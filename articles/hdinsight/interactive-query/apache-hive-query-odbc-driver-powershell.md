@@ -7,10 +7,10 @@ ms.topic: tutorial
 ms.date: 06/27/2019
 ms.custom: devx-track-azurepowershell
 ms.openlocfilehash: 34ee7eb25b1d106ea8bb53197d69ca5a9d528773
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104871614"
 ---
 # <a name="tutorial-query-apache-hive-with-odbc-and-powershell"></a>Öğretici: ODBC ve PowerShell ile Apache Hive sorgulama

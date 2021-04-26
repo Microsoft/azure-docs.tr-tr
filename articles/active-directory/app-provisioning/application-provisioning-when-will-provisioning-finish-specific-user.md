@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 09/03/2019
 ms.author: kenwith
 ms.reviewer: arvinh
-ms.openlocfilehash: 890c4a8a5aec3b15b150908c64bb114bd85a61a1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9835ba2b6db2d71d0ff5825f2eb1996133e75537
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99256771"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530825"
 ---
 # <a name="check-the-status-of-user-provisioning"></a>Kullanıcı hazırlama durumunu denetleme
 
@@ -30,7 +30,7 @@ Otomatik sağlamayı ilk yapılandırdığınızda, sayfanın en altındaki **ge
 - Şu anda çalışmakta olan veya en son tamamlanan sağlama döngüsünün (ilk veya artımlı) türü.
 - Tamamlanan sağlama döngüsünün yüzdesini gösteren bir **ilerleme çubuğu** . Yüzde değeri, sağlanan sayfa sayısını yansıtır. Her sayfanın birden çok kullanıcı veya grup içerebileceğini unutmayın. bu nedenle yüzde, izin sağlanan Kullanıcı, Grup veya rol sayısıyla doğrudan bağıntılı değildir.
 - Görünümü güncelleştirilmesini sağlamak için kullanabileceğiniz bir **yenileme** düğmesi.
-- Bağlayıcı veri deposundaki **Kullanıcı** ve **grupların** sayısı. Sayma, sağlama kapsamına her bir nesne eklendiğinde artar. Kullanıcı geçici olarak silinmiş veya kalıcı olarak siliniyorsa, bu, nesneyi bağlayıcı veri deposundan kaldırmadığından, sayı aşağı gitmeyecektir. CD [sıfırlandıktan](/graph/api/synchronization-synchronizationjob-restart?tabs=http&view=graph-rest-beta) sonra sayı ilk eşitleme yeniden hesaplanacak 
+- Bağlayıcı veri deposundaki **Kullanıcı** ve **grupların** sayısı. Sayma, sağlama kapsamına her bir nesne eklendiğinde artar. Kullanıcı geçici olarak silinmiş veya kalıcı olarak siliniyorsa, bu, nesneyi bağlayıcı veri deposundan kaldırmadığından, sayı aşağı gitmeyecektir. CD [sıfırlandıktan](/graph/api/synchronization-synchronizationjob-restart?tabs=http&view=graph-rest-beta&preserve-view=true) sonra sayı ilk eşitleme yeniden hesaplanacak 
 - Bireysel kullanıcıların sağlama durumu da dahil olmak üzere, Kullanıcı sağlama hizmeti tarafından çalıştırılan tüm işlemler hakkındaki ayrıntılar için Azure AD sağlama günlüklerini **görüntüleme** (aşağıdaki [sağlama günlüklerini kullanma](#use-provisioning-logs-to-check-a-users-provisioning-status) bölümüne bakın).
 
 Bir sağlama süresi tamamlandıktan sonra, tarihe göre **İstatistikler** bölümü, son döngüsünün tamamlanma tarihi ve süresiyle birlikte tarih olarak sağlanan Toplam Kullanıcı ve grup sayısını gösterir. **Etkınlık kimliği** en son sağlama döngüsünü benzersiz şekilde tanımlar. **Iş kimliği** , sağlama işi için benzersiz bir tanımlayıcıdır ve kiracınızdaki uygulamaya özeldir.

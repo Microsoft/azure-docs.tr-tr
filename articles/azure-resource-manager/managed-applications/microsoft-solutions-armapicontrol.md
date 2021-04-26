@@ -5,14 +5,14 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 07/14/2020
 ms.author: tomfitz
-ms.openlocfilehash: bbe36e072d10b81c421331b2212d8b161afd2693
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: fdc299ef1945e3ee0810f1c314fc07edfb4f4873
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87099910"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313309"
 ---
-# <a name="microsoftcommonarmapicontrol-ui-element"></a>Microsoft. Common. ArmApiControl UI öğesi
+# <a name="microsoftsolutionsarmapicontrol-ui-element"></a>Microsoft. Solutions. ArmApiControl UI öğesi
 
 ArmApiControl, Azure Resource Manager API işleminin sonuçlarını almanızı sağlar. Diğer denetimlerde dinamik içeriği doldurmak için sonuçları kullanın.
 
@@ -46,7 +46,14 @@ Denetimin çıktısı kullanıcıya gösterilmez. Bunun yerine, işlemin sonucu 
 ## <a name="remarks"></a>Açıklamalar
 
 - `request.method`ÖZELLIĞI http yöntemini belirtir. Yalnızca `GET` veya `POST` buna izin verilir.
-- `request.path`Özelliği, URL 'nin göreli yolunu belirtir. Bu bir statik yol olabilir veya diğer denetimlerin çıkış değerleriyle dinamik olarak oluşturulabilir.
+- Özelliği, bir `request.path` ARM uç noktası için göreli yol olması gereken BIR URL 'yi belirtir. Bu bir statik yol olabilir veya diğer denetimlerin çıkış değerleriyle dinamik olarak oluşturulabilir.
+
+  Örneğin, kaynak sağlayıcısına bir ARM çağrısı `Microsoft.Network/expressRouteCircuits` :
+
+  ```json
+  "path": "<subid>/resourceGroup/<resourceGroupName>/providers/Microsoft.Network/expressRouteCircuits/<routecircuitName>/?api-version=2020-05-01"
+  ```
+
 - `request.body`Özelliği isteğe bağlıdır. İstekle birlikte gönderilen bir JSON gövdesi belirtmek için bunu kullanın. Gövde statik içerik olabilir veya diğer denetimlerden çıkış değerlerine başvurarak dinamik olarak oluşturulabilir.
 
 ## <a name="example"></a>Örnek
@@ -81,5 +88,5 @@ Bir kaynak adının kullanılabilirliğini denetlemek için ArmApiControl kullan
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* UI tanımları oluşturmaya giriş için bkz. [Createuıdefinition ile çalışmaya başlama](create-uidefinition-overview.md).
-* UI öğelerindeki ortak özelliklerin açıklaması için bkz. [Createuıdefinition Elements](create-uidefinition-elements.md).
+- UI tanımları oluşturmaya giriş için bkz. [Createuıdefinition ile çalışmaya başlama](create-uidefinition-overview.md).
+- UI öğelerindeki ortak özelliklerin açıklaması için bkz. [Createuıdefinition Elements](create-uidefinition-elements.md).

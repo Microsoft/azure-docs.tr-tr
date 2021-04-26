@@ -12,12 +12,12 @@ ms.reviewer: jrasnick
 manager: craigg
 ms.custom: seo-lt-2019
 tags: azure-synapse
-ms.openlocfilehash: 4f333c4bb66195e6c99bd45dcc7c29a0b9a2eaa9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f6431328a0969ced0d98cbc7ff047cc0673ecb91
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100591419"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106074565"
 ---
 # <a name="dedicated-sql-pool-formerly-sql-dw-in-azure-synapse-analytics-release-notes"></a>Azure SYNAPSE Analytics sürüm notlarında adanmış SQL Havuzu (eski adıyla SQL DW)
 
@@ -90,7 +90,9 @@ Araç geliştirmeleri için sürüm notunda belirtilen doğru sürümün yüklü
 | Hizmet geliştirmeleri | Ayrıntılar |
 | --- | --- |
 |**Veritabanı uyumluluk düzeyi (Önizleme)**| Bu sürümde, kullanıcılar artık bir veritabanının uyumluluk düzeyini, SYNAPSE SQL altyapısının belirli bir sürümünün Transact-SQL dilini ve sorgu işleme davranışlarını almak için ayarlayabilir. Daha fazla bilgi için bkz. [sys.database_scoped_configurations](/sql/relational-databases/system-catalog-views/sys-database-scoped-configurations-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) ve [alter database kapsamlıdır Configuration](/sql/t-sql/statements/alter-database-scoped-configuration-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true).|
-|**Sp_describe_undeclared_parameters**| Kullanıcıların bir Transact-SQL toplu işindeki bildirilmemiş parametrelerle ilgili meta verileri görmesine izin verin. Daha fazla bilgi için bkz. [sp_describe_undeclared_parameters](/sql/relational-databases/system-stored-procedures/sp-describe-undeclared-parameters-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true).| <br/><br/><br/>
+|**Sp_describe_undeclared_parameters**| Kullanıcıların bir Transact-SQL toplu işindeki bildirilmemiş parametrelerle ilgili meta verileri görmesine izin verin. Daha fazla bilgi için bkz. [sp_describe_undeclared_parameters](/sql/relational-databases/system-stored-procedures/sp-describe-undeclared-parameters-transact-sql?toc=/azure/synapse-analytics/sql-data-warehouse/toc.json&bc=/azure/synapse-analytics/sql-data-warehouse/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true).| 
+
+<br/><br/><br/>
 
 | Araç geliştirmeleri                                         | Ayrıntılar                                                      |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |

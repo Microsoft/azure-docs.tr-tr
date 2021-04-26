@@ -4,16 +4,16 @@ description: Azure Data Lake Storage 2. için hiyerarşik ad alanı kavramını 
 author: normesta
 ms.service: storage
 ms.topic: conceptual
-ms.date: 02/11/2020
+ms.date: 04/01/2021
 ms.author: normesta
 ms.reviewer: jamesbak
 ms.subservice: data-lake-storage-gen2
-ms.openlocfilehash: 26062d73ae4c61af77b15dd2cac0541f2a988d11
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: de7f62dd4d4205e819278e6dc90d905e825580f2
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95913003"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220513"
 ---
 # <a name="azure-data-lake-storage-gen2-hierarchical-namespace"></a>Azure Data Lake Storage 2. hiyerarşik ad alanı
 
@@ -44,6 +44,10 @@ Genel olarak, dizinleri işleyen dosya sistemleri için tasarlanan depolama iş 
 Hiyerarşik ad alanını etkinleştirme nedenleri bir TCO Analizi tarafından belirlenir. Genel olarak, depolama hızlandırmasının nedeniyle iş yükü gecikmede yapılan iyileştirmeler, daha az zaman için işlem kaynakları gerektirir. Hiyerarşik bir ad alanı tarafından etkinleştirilen atomik dizin düzenlemesi nedeniyle birçok iş yükü gecikmesi artırılabilir. Birçok iş yükünde, işlem kaynağı toplam maliyetinin %85 ' ünü temsil > eder ve bu nedenle iş yükü gecikmede bir azalma azalmasıyla önemli miktarda TCO tasarrufu elde edilir. Hiyerarşik bir ad alanının etkinleştirilmesinde depolama maliyetlerini artıran durumlarda bile, daha az işlem maliyeti nedeniyle TCO düşürüldü.
 
 Veri depolama fiyatlarındaki farkları, işlem fiyatlarını ve düz bir hiyerarşik ad alanı olan hesaplar arasında hiyerarşik bir ad alanına karşı depolama kapasitesi ayırma fiyatlandırmasını çözümlemek için bkz. [Azure Data Lake Storage 2. fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/data-lake/).
+
+## <a name="enabling-a-hierarchical-namespace"></a>Hiyerarşik ad alanını etkinleştirme
+
+Var olan bir depolama hesabında hiyerarşik bir ad alanını etkinleştiremezsiniz. Hiyerarşik bir ad alanını yalnızca bir depolama hesabı oluşturduğunuzda etkinleştirebilirsiniz. Rehberlik için bkz. [Azure Data Lake Storage 2. ile kullanılacak depolama hesabı oluşturma](create-data-lake-storage-account.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

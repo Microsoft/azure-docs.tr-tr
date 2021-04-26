@@ -1,19 +1,16 @@
 ---
 title: Azure geçişi/Site Recovery ile Windows Server 2008 sunucularını Azure 'a geçirme
 description: Bu makalede, şirket içi Windows Server 2008 makinelerini Azure 'a nasıl geçirebileceğiniz ve Azure geçişi önerilmektedir.
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: tutorial
 ms.date: 07/27/2020
-ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: 6cc0855d3a4540de780a566a4613b4dbc647cfc5
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 492bcddaca3cbec2877343c37a665ae62fadcabb
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92369497"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581260"
 ---
 # <a name="migrate-servers-running-windows-server-2008-to-azure"></a>Windows Server 2008 çalıştıran sunucuları Azure'a geçirme
 

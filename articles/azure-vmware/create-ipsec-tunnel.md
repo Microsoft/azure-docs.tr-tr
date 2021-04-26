@@ -4,10 +4,10 @@ description: Azure VMware çözümlerinde VPN (IPSec IKEv1 ve Ikev2) siteden sit
 ms.topic: how-to
 ms.date: 03/23/2021
 ms.openlocfilehash: 280ffdd3fec77208d5b49c8e624b7b22bca1daaf
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105027050"
 ---
 # <a name="create-an-ipsec-tunnel-into-azure-vmware-solution"></a>Azure VMware çözümüne bir IPSec tüneli oluşturma

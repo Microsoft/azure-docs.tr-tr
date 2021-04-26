@@ -11,13 +11,13 @@ ms.workload: mobile
 ms.topic: sample
 ms.date: 12/14/2017
 ms.author: apimpm
-ms.custom: mvc
-ms.openlocfilehash: 16da7891b5321006708dc59ec8d482754beb7d9e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: ce7ac9a27dd2708e3a32758c6e86011e493ea33a
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87853305"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817098"
 ---
 # <a name="set-up-custom-domain"></a>Özel etki alanı ayarlama
 

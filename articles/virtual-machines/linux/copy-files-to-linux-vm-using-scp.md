@@ -1,26 +1,27 @@
 ---
-title: SCP ile Azure Linux VM 'lerine/dosyalarından dosya taşıma
+title: Bir VM 'ye/sanal makineye dosya taşımak için SCP 'yi kullanma
 description: SCP 'yi ve SSH anahtar çiftini kullanarak Azure 'da Linux VM 'ye ve bu sanal makineye dosyaları güvenle taşıyın.
 author: cynthn
 ms.service: virtual-machines
 ms.collection: linux
 ms.workload: infrastructure
 ms.topic: how-to
-ms.date: 07/12/2017
+ms.date: 04/20/2021
 ms.author: cynthn
-ms.subservice: disks
-ms.openlocfilehash: 83b57055ee7a3fedab014abeab96520c3877b843
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.subservice: ''
+ms.openlocfilehash: edfc44f79cff25486fde6326ac954fe5b575d846
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102558449"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816449"
 ---
-# <a name="move-files-to-and-from-a-linux-vm-using-scp"></a>SCP kullanarak bir Linux VM 'ye veya buradan dosya taşıma
+# <a name="use-scp-to-move-files-to-and-from-a-linux-vm"></a>Linux sanal makinesine dosya taşımak için SCP 'yi kullanma 
 
 Bu makalede, güvenli kopya (SCP) kullanarak iş istasyonunuzdan bir Azure Linux VM 'sine veya bir Azure Linux VM 'sinden iş istasyonunuza kadar dosya taşıma işlemlerinin nasıl yapılacağı gösterilir. Hızlı ve güvenli bir şekilde iş istasyonunuz ve Linux VM arasında dosya taşımak, Azure altyapınızı yönetmek için önemlidir. 
 
-Bu makalede, [SSH ortak ve özel anahtar dosyaları](mac-create-ssh-keys.md)kullanılarak Azure 'da dağıtılan BIR Linux sanal makinesine ihtiyacınız vardır. Ayrıca yerel bilgisayarınız için bir SCP istemcisine ihtiyacınız vardır. SSH üzerinde oluşturulmuştur ve çoğu Linux ve Mac bilgisayarın ve bazı Windows kabukların varsayılan bash kabuğu 'nda bulunur.
+Bu makalede, [SSH ortak ve özel anahtar dosyaları](mac-create-ssh-keys.md)kullanılarak Azure 'da dağıtılan BIR Linux sanal makinesine ihtiyacınız vardır. Ayrıca yerel bilgisayarınız için bir SCP istemcisine ihtiyacınız vardır. SSH üzerinde oluşturulmuştur ve çoğu Linux ve Mac bilgisayarın ve PowerShell 'in varsayılan bash kabuğu 'nda bulunur.
+
 
 ## <a name="quick-commands"></a>Hızlı komutlar
 
@@ -50,7 +51,7 @@ SCP, aktarım katmanı için SSH kullanır. SSH, hedef konaktaki kimlik doğrula
 
 İlk örnekte, Otomasyonu dağıtmak için kullanılan bir Linux sanal makinesine bir Azure yapılandırma dosyası kopyalayacağız. Bu dosya gizli dizileri içeren Azure API kimlik bilgilerini içerdiğinden güvenlik önemlidir. SSH tarafından sunulan şifreli tünel, dosyanın içeriğini korur.
 
-Aşağıdaki komut yerel *. Azure/config* dosyasını FQDN *myserver.eastus.cloudapp.Azure.com* ile bir Azure VM 'sine kopyalar. Azure VM 'deki Yönetici Kullanıcı adı *azureuser*. Dosya */Home/azureuser/* dizinine yöneliktir. Bu komutta kendi değerlerinizi yerine koyun.
+Aşağıdaki komut yerel *. Azure/config* dosyasını FQDN *myserver.eastus.cloudapp.Azure.com* ile bir Azure VM 'sine kopyalar. Bir [FQDN ayarlanmamışsa](../create-fqdn.md), sanal makinenin IP adresini de kullanabilirsiniz. Azure VM 'deki Yönetici Kullanıcı adı *azureuser*. Dosya */Home/azureuser/* dizinine yöneliktir. Bu komutta kendi değerlerinizi yerine koyun.
 
 ```bash
 scp ~/.azure/config azureuser@myserver.eastus.cloudapp.com:/home/azureuser/config

@@ -10,12 +10,12 @@ ms.author: sgilley
 author: sdgilley
 ms.date: 08/20/2020
 ms.custom: seoapril2019, seodec18
-ms.openlocfilehash: dc1954c97da0d7f40deaf0f4efa7ca99793107bb
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: f1eb7a5b4697801775d23091c610ab594b0b27ec
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102503700"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813389"
 ---
 # <a name="how-azure-machine-learning-works-architecture-and-concepts"></a>Azure Machine Learning nasıl kullanılır: mimari ve kavramlar
 
@@ -116,9 +116,9 @@ Bir çalıştırma gönderdiğinizde, Azure Machine Learning betiği içeren diz
 
 ### <a name="logging"></a>Günlüğe Kaydetme
 
-Azure Machine Learning, standart çalıştırma ölçümlerini sizin için otomatik olarak günlüğe kaydeder. Ancak, [isteğe bağlı ölçümleri günlüğe kaydetmek Için Python SDK 'sını](how-to-track-experiments.md)de kullanabilirsiniz.
+Azure Machine Learning, standart çalıştırma ölçümlerini sizin için otomatik olarak günlüğe kaydeder. Ancak, [isteğe bağlı ölçümleri günlüğe kaydetmek Için Python SDK 'sını](how-to-log-view-metrics.md)de kullanabilirsiniz.
 
-Günlüklerinizi görüntülemenin birden çok yolu vardır: çalışma durumunu gerçek zamanlı olarak izleme veya tamamlandığında sonuçları görüntüleme. Daha fazla bilgi için bkz. [ml çalıştırma günlüklerini izleme ve görüntüleme](how-to-monitor-view-training-logs.md).
+Günlüklerinizi görüntülemenin birden çok yolu vardır: çalışma durumunu gerçek zamanlı olarak izleme veya tamamlandığında sonuçları görüntüleme. Daha fazla bilgi için bkz. [ml çalıştırma günlüklerini izleme ve görüntüleme](how-to-log-view-metrics.md).
 
 
 > [!NOTE]
@@ -256,8 +256,8 @@ Machine Learning işlem [hatlarını](concept-ml-pipelines.md) kullanarak makine
 Azure Machine Learning aşağıdaki izleme ve günlüğe kaydetme yeteneklerini sağlar:
 
 * __Veri bilimcileri__ için denemeleri ve günlük bilgilerinizi eğitim çalışmalarından izleyebilirsiniz. Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
-   * [Eğitim çalıştırmalarını başlatın, izleyin ve iptal edin](how-to-manage-runs.md)
-   * [Eğitim çalıştırmaları için günlük ölçümleri](how-to-track-experiments.md)
+   * [Eğitim çalıştırmalarını başlatın, izleyin ve iptal edin](how-to-track-monitor-analyze-runs.md)
+   * [Eğitim çalıştırmaları için günlük ölçümleri](how-to-log-view-metrics.md)
    * [MLflow ile denemeleri izleme](how-to-use-mlflow.md)
    * [TensorBoard ile çalıştırmaları görselleştirme](how-to-monitor-tensorboard.md)
 * __Yöneticiler__ Için, Azure izleyici kullanarak çalışma alanı, ilgili Azure kaynakları ve kaynak oluşturma ve silme gibi olaylar hakkındaki bilgileri izleyebilirsiniz. Daha fazla bilgi için bkz. [izleme Azure Machine Learning](monitor-azure-machine-learning.md).

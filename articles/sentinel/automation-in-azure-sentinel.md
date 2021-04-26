@@ -16,10 +16,10 @@ ms.topic: conceptual
 ms.date: 03/14/2021
 ms.author: yelevin
 ms.openlocfilehash: 54d7c997ce17c927a692e84f6094e3a08f707af7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104610097"
 ---
 # <a name="security-orchestration-automation-and-response-soar-in-azure-sentinel"></a>Azure Sentinel 'de güvenlik düzenlemesi, otomasyon ve yanıt (SOAR)

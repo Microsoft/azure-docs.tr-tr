@@ -6,12 +6,12 @@ ms.author: timlt
 ms.service: iot-develop
 ms.topic: overview
 ms.date: 02/15/2021
-ms.openlocfilehash: bc8317e3402fa0185186c06ed1f89e062e99fd5e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 536b9092a7bddd353b58874e7aa97291839bafcc
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "100654999"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107589542"
 ---
 # <a name="getting-started-with-azure-iot-embedded-device-development"></a>Azure IoT Embedded cihaz geliştirmeyle çalışmaya başlama
 
@@ -40,4 +40,4 @@ Aşağıdaki öğreticiler Başlangıç Kılavuzu 'na eklenmiştir:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Bu kılavuzda cihaza özgü hızlı başlangıç adımlarını tamamladıktan sonra, Azure RTOS Başlarken deposunda bulunan cihaza özgü diğer makaleleri ve örnekleri göz atın:
-* [Azure RTOS ve Azure IoT ile çalışmaya başlama](https://github.com/azure-rtos/getting-started)
+* [Azure RTOS ve Azure IoT ile çalışmaya başlama](https://github.com/azure-rtos/getting-started#getting-started-with-azure-rtos-and-azure-iot)

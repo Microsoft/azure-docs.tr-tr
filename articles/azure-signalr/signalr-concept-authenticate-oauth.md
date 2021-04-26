@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 11/13/2019
 ms.author: zhshang
 ms.custom: devx-track-js, devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: cd5b709843ba2d98170aaa58eb5c3cc1ec8883af
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: aace45f78bab273b792d10754be431ed3949e4c6
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98734690"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869860"
 ---
 # <a name="azure-signalr-service-authentication"></a>Azure SignalR hizmeti kimlik doğrulaması
 
@@ -47,7 +47,7 @@ Bu öğreticiyi tamamlamak için aşağıdaki ön koşullara sahip olmanız gere
 
 - [GitHub](https://github.com/)'da oluşturulan bir hesap
 - [Git](https://git-scm.com/)
-- [.NET Core SDK](https://www.microsoft.com/net/download/windows)
+- [.NET Core SDK](https://dotnet.microsoft.com/download)
 - Bash ortamı için yapılandırılmış [Azure Cloud Shell](../cloud-shell/quickstart.md) .
 - [AzureSignalR-Sample](https://github.com/aspnet/AzureSignalR-samples) GitHub deposunu indirin veya kopyalayın.
 

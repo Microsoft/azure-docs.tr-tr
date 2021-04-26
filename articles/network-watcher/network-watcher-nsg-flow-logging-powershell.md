@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/07/2021
 ms.author: damendo
-ms.openlocfilehash: 771b4ce2999357d729c3ffe557b778cf62a5c0f6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 29340852cabcc77b7488f734a4677697b4a9b972
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98010991"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535221"
 ---
 # <a name="configuring-network-security-group-flow-logs-with-powershell"></a>Ağ güvenlik grubu akış günlüklerini PowerShell ile yapılandırma
 
@@ -28,6 +28,8 @@ ms.locfileid: "98010991"
 > - [REST API](network-watcher-nsg-flow-logging-rest.md)
 
 Ağ güvenlik grubu akış günlükleri, bir ağ güvenlik grubu üzerinden giriş ve çıkış IP trafiği hakkındaki bilgileri görüntülemenize olanak tanıyan bir ağ Izleyicisi özelliğidir. Bu akış günlükleri, JSON biçiminde yazılır ve bir kural temelinde giden ve gelen akışları gösterir, akışın akışı (kaynak/hedef IP 'si, kaynak/hedef bağlantı noktası, protokol) ve trafiğe izin verildiyse veya reddedildiyse, 5 demet bilgi için geçerlidir.
+
+AzPowerShell 'in çeşitli sürümlerine yönelik tüm NSG akış günlüğü komutlarının ayrıntılı belirtimi [burada](https://docs.microsoft.com/powershell/module/az.network/#network-watcher) bulunabilir
 
 ## <a name="register-insights-provider"></a>Insights sağlayıcısını kaydetme
 

@@ -14,12 +14,12 @@ ms.author: rolyon
 ms.reviewer: vincesm
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f56f8ac42f0db3d2cd27453cd023a2e869b0cde0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ae5761c4a31662f447a107e6b5eb89bcf02f70c8
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103466091"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106055544"
 ---
 # <a name="roles-for-microsoft-365-services-in-azure-active-directory"></a>Azure Active Directory Microsoft 365 hizmetleri için roller
 

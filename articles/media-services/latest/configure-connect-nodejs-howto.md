@@ -14,12 +14,12 @@ ms.topic: how-to
 ms.date: 02/17/2021
 ms.author: inhenkel
 ms.custom: devx-track-js
-ms.openlocfilehash: 33d84ca86ac3cd4696dce3797b015b861884182a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fcb9fd9f0539b42d9253db783fd5da840f358e66
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102216437"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105960733"
 ---
 # <a name="connect-to-media-services-v3-api---nodejs"></a>Media Services v3 API 'sine bağlanma-Node.js
 
@@ -32,7 +32,7 @@ Bu makalede hizmet sorumlusu oturum açma yöntemi kullanılarak Azure Media Ser
 - Visual Studio Code yüklemesi.
 - [Node.js](https://nodejs.org/en/download/)'i yükler.
 - [TypeScript](https://www.typescriptlang.org/download)'i yükler.
-- [Media Services hesabı oluşturun](./create-account-howto.md). Kaynak grubu adını ve Media Services hesap adını unutduğunuzdan emin olun.
+- [Media Services hesabı oluşturun](./account-create-how-to.md). Kaynak grubu adını ve Media Services hesap adını unutduğunuzdan emin olun.
 - Uygulamanız için bir hizmet sorumlusu oluşturun. Bkz. [erişim API 'leri](./access-api-howto.md).<br/>**Pro İpucu!** Bu pencereyi açık tutun veya JSON sekmesindeki her şeyi not defteri 'ne kopyalayın. 
 - [JavaScript Için Azudüzeltici Aservices SDK 'sının](https://www.npmjs.com/package/@azure/arm-mediaservices)en son sürümünü aldığınızdan emin olun.
 

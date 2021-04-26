@@ -5,15 +5,15 @@ services: static-web-apps
 author: craigshoemaker
 ms.service: static-web-apps
 ms.topic: conceptual
-ms.date: 05/08/2020
+ms.date: 04/09/2021
 ms.author: cshoe
 ms.custom: devx-track-js
-ms.openlocfilehash: d5a1d810c357aa83b8069023b00d76352da124df
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9aca1e76c825de52744da817f6a0bf236eef617c
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94844804"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313615"
 ---
 # <a name="accessing-user-information-in-azure-static-web-apps-preview"></a>Azure statik Web Apps önizlemede Kullanıcı bilgilerine erişme
 
@@ -25,12 +25,12 @@ Birçok kullanıcı arabirimi, Kullanıcı kimlik doğrulama verilerini yoğun b
 
 İstemci sorumlusu veri nesnesi, uygulamanıza Kullanıcı tarafından tanımlanabilir bilgiler sunar. Aşağıdaki özellikler istemci sorumlusu nesnesinde öne çıkanlar:
 
-| Özellik  | Açıklama |
-|-----------|---------|
-| `identityProvider` | [Kimlik sağlayıcısının](authentication-authorization.md)adı. |
-| `userId` | Kullanıcı için Azure statik Web Apps özgü benzersiz tanımlayıcı. <ul><li>Değer, uygulama başına temelinde benzersizdir. Örneğin, aynı kullanıcı `userId` farklı bir statik Web Apps kaynağı üzerinde farklı bir değer döndürür.<li>Değer, bir kullanıcının ömrü boyunca devam ettirir. Aynı kullanıcıyı siler ve uygulamaya geri eklerseniz, yeni bir `userId` oluşturulur.</ul>|
-| `userDetails` | Kullanıcının Kullanıcı adı veya e-posta adresi. Bazı sağlayıcılar [kullanıcının e-posta adresini](authentication-authorization.md)döndürür, diğer bir deyişle [Kullanıcı tanıtıcısı](authentication-authorization.md)gönderilir. |
-| `userRoles`     | [Kullanıcının atanan rollerinin](authentication-authorization.md)dizisi. |
+| Özellik           | Açıklama                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `identityProvider` | [Kimlik sağlayıcısının](authentication-authorization.md)adı.                                                                                                                                                                                                                                                                                              |
+| `userId`           | Kullanıcı için Azure statik Web Apps özgü benzersiz tanımlayıcı. <ul><li>Değer, uygulama başına temelinde benzersizdir. Örneğin, aynı kullanıcı `userId` farklı bir statik Web Apps kaynağı üzerinde farklı bir değer döndürür.<li>Değer, bir kullanıcının ömrü boyunca devam ettirir. Aynı kullanıcıyı siler ve uygulamaya geri eklerseniz, yeni bir `userId` oluşturulur.</ul> |
+| `userDetails`      | Kullanıcının Kullanıcı adı veya e-posta adresi. Bazı sağlayıcılar [kullanıcının e-posta adresini](authentication-authorization.md)döndürür, diğer bir deyişle [Kullanıcı tanıtıcısı](authentication-authorization.md)gönderilir.                                                                                                                                                                    |
+| `userRoles`        | [Kullanıcının atanan rollerinin](authentication-authorization.md)dizisi.                                                                                                                                                                                                                                                                                          |
 
 Aşağıdaki örnek bir örnek istemci asıl nesnesidir:
 
@@ -39,7 +39,7 @@ Aşağıdaki örnek bir örnek istemci asıl nesnesidir:
   "identityProvider": "facebook",
   "userId": "d75b260a64504067bfc5b2905e3b8182",
   "userDetails": "user@example.com",
-  "userRoles": [ "anonymous", "authenticated" ]
+  "userRoles": ["anonymous", "authenticated"]
 }
 ```
 
@@ -53,7 +53,7 @@ Oturum açmış kullanıcılar için, yanıt bir istemci sorumlusu JSON nesnesi 
 
 ```javascript
 async function getUserInfo() {
-  const response = await fetch("/.auth/me");
+  const response = await fetch('/.auth/me');
   const payload = await response.json();
   const { clientPrincipal } = payload;
   return clientPrincipal;
@@ -64,7 +64,7 @@ console.log(getUserInfo());
 
 ## <a name="api-functions"></a>API işlevleri
 
-Azure Işlevleri arka ucu aracılığıyla statik Web Apps kullanılabilir olan API işlevleri, istemci uygulamasıyla aynı kullanıcı bilgilerine erişebilir. API Kullanıcı tanımlı bilgiler aldığından, kullanıcının kimliği doğrulandıysa veya gerekli bir rolle eşleşiyorsa kendi denetimlerini gerçekleştirmez. Erişim denetimi kuralları [`routes.json`](routes.md) dosyada tanımlanmıştır.
+Azure Işlevleri arka ucu aracılığıyla statik Web Apps kullanılabilir olan API işlevleri, istemci uygulamasıyla aynı kullanıcı bilgilerine erişebilir. API Kullanıcı tanımlı bilgiler aldığından, kullanıcının kimliği doğrulandıysa veya gerekli bir rolle eşleşiyorsa kendi denetimlerini gerçekleştirmez. Erişim denetimi kuralları [`staticwebapp.config.json`](routes.md) dosyada tanımlanmıştır.
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
@@ -74,14 +74,14 @@ Aşağıdaki örnek işlev, Kullanıcı bilgilerinin nasıl okunacağını ve ge
 
 ```javascript
 module.exports = async function (context, req) {
-  const header = req.headers["x-ms-client-principal"];
-  const encoded = Buffer.from(header, "base64");
-  const decoded = encoded.toString("ascii");
+  const header = req.headers['x-ms-client-principal'];
+  const encoded = Buffer.from(header, 'base64');
+  const decoded = encoded.toString('ascii');
 
   context.res = {
     body: {
-      clientPrincipal: JSON.parse(decoded)
-    }
+      clientPrincipal: JSON.parse(decoded),
+    },
   };
 };
 ```
@@ -90,7 +90,7 @@ Yukarıdaki işlevin adlandırıldığını varsayarsak `user` , aşağıdaki s�
 
 ```javascript
 async function getUser() {
-  const response = await fetch("/api/user");
+  const response = await fetch('/api/user');
   const payload = await response.json();
   const { clientPrincipal } = payload;
   return clientPrincipal;

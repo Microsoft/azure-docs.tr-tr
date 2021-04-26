@@ -13,12 +13,12 @@ ms.date: 03/17/2021
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: e152d9c242a44fe869eb7bfe7a16fbd7dfc8049d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b6c0d9d5430d84006b208c50e78b8d875c95b8ac
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104580135"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107028392"
 ---
 # <a name="set-up-sign-up-and-sign-in-with-an-amazon-account-using-azure-active-directory-b2c"></a>Azure Active Directory B2C kullanarak bir Amazon hesabı ile kaydolma ve oturum açma ayarlama
 
@@ -175,7 +175,7 @@ Bir Amazon hesabını, ilkenizin uzantı dosyasındaki **Claimsproviders** öğe
 ## <a name="test-your-custom-policy"></a>Özel ilkenizi test etme
 
 1. Örneğin, bağlı olan taraf ilkenizi seçin `B2C_1A_signup_signin` .
-1. **Uygulama** için, [daha önce kaydetmiş](troubleshoot-custom-policies.md#troubleshoot-the-runtime)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
+1. **Uygulama** için, [daha önce kaydetmiş](tutorial-register-applications.md)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
 1. **Şimdi Çalıştır** düğmesini seçin.
 1. Kaydolma veya oturum açma **sayfasından Amazon hesabıyla oturum açmak için Amazon** ' ı seçin.
 

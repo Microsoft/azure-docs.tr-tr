@@ -51,6 +51,8 @@
   items:
     - name: Güvenlik iş ortağı sağlayıcılarını dağıtma
       href: deploy-trusted-security-partner.md
+    - name: Güvenli özel uç noktalar
+      href: private-link-inspection-secure-virtual-hub.md
     - name: Güvenlik Duvarı ilkesine geçme - PowerShell
       href: migrate-to-policy.md
     - name: DNS ayarları
@@ -62,7 +64,7 @@
 - name: Başvuru
   items:
     - name: Azure CLI
-      href: /cli/azure/ext/azure-firewall/network/firewall/policy
+      href: /cli/azure/network/firewall/policy
     - name: Azure PowerShell
       href: /powershell/module/az.network/new-azfirewallpolicy
     - name: .NET

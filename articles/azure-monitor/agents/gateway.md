@@ -5,18 +5,14 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 12/24/2019
-ms.openlocfilehash: bae48dc78eb6973e5bce4d535091bc330c4c897f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0c26a7f53609193bf373c3f7f9b1037405d4e518
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102509039"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106122144"
 ---
 # <a name="connect-computers-without-internet-access-by-using-the-log-analytics-gateway-in-azure-monitor"></a>Azure Izleyici 'de Log Analytics ağ geçidini kullanarak internet erişimi olmadan bilgisayarları bağlama
-
->[!NOTE]
->Microsoft Azure Izleyicisine Microsoft Operations Management Suite (OMS) geçişleri, terminoloji değişiyor. Bu makale, Azure Log Analytics ağ geçidi olarak OMS ağ geçidine başvurur. 
->
 
 Bu makalede, doğrudan bağlı olan veya Operations Manager tarafından izlenen bilgisayarların internet erişimi olmadığında Log Analytics ağ geçidini kullanarak Azure Otomasyonu ve Azure Izleyici ile iletişimin nasıl yapılandırılacağı açıklanır. 
 
@@ -89,6 +85,9 @@ Log Analytics ağ geçidi şu dillerde kullanılabilir:
 Log Analytics ağ geçidi yalnızca Aktarım katmanı güvenliğini destekler (TLS) 1,0, 1,1 ve 1,2.  Güvenli Yuva Katmanı (SSL) desteklemez.  Log Analytics yoldaki verilerin güvenliğini sağlamak için, ağ geçidini en az TLS 1,2 kullanacak şekilde yapılandırın. TLS veya SSL 'nin eski sürümleri savunmasızdır. Bunlar şu anda geriye dönük uyumlulukla izin verse de kullanmaktan kaçının.  
 
 Daha fazla bilgi için [TLS 1,2 kullanarak verileri güvenli bir şekilde göndermeyi](../logs/data-security.md#sending-data-securely-using-tls-12)inceleyin. 
+
+>[!NOTE]
+>Ağ Geçidi, hiçbir veri depomayan bir iletme proxy 'dir. Aracı Azure Izleyici ile bağlantı kurduktan sonra, ağ geçidi ile veya ağ geçidi olmadan aynı şifreleme akışını izler. Veriler, istemci ve uç nokta arasında şifrelenir. Ağ geçidi yalnızca bir tünel olduğundan, ne gönderileceğini incelemeye sahip değildir.
 
 ### <a name="supported-number-of-agent-connections"></a>Desteklenen aracı bağlantısı sayısı
 

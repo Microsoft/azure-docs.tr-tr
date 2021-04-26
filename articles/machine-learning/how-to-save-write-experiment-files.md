@@ -12,12 +12,12 @@ ms.subservice: core
 ms.topic: conceptual
 ms.custom: how-to
 ms.date: 03/10/2020
-ms.openlocfilehash: ad641c2270f94b9d902a25e8d061fb1137a0cdb7
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 59955b291ce706a77d0dd5ab052809fe725166d9
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102518611"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107387896"
 ---
 # <a name="where-to-save-and-write-files-for-azure-machine-learning-experiments"></a>Azure Machine Learning denemeleri için dosya kaydetme ve yazma
 
@@ -36,7 +36,7 @@ Deneme anlık görüntülerinin depolama sınırı 300 MB ve/veya 2000 dosyadır
 
 Bu nedenle şunları öneririz:
 
-* **Dosyalarınızı Azure Machine Learning [veri deposunda](/python/api/azureml-core/azureml.data)depolama.** Bu, deneme süresi sorunlarını önler ve uzaktan bir işlem hedefinden verilere erişmenin avantajlarından yararlanır, bu da kimlik doğrulama ve bağlama Azure Machine Learning tarafından yönetilir. Kaynak dizininiz olarak bir veri deposu belirtme ve [verileri veri depoları makalesindeki erişim verilerine](how-to-access-data.md) yükleme hakkında daha fazla bilgi edinin.
+* **Dosyalarınızı Azure Machine Learning [veri kümesinde](/python/api/azureml-core/azureml.data)depolama.** Bu, deneme süresi sorunlarını önler ve uzaktan bir işlem hedefinden verilere erişmenin avantajlarından yararlanır, bu da kimlik doğrulama ve bağlama Azure Machine Learning tarafından yönetilir. Veri kümesi [ile](how-to-train-with-datasets.md)eğitim betiğinizdeki giriş veri kaynağınız olarak veri kümesini belirtme hakkında daha fazla bilgi edinin.
 
 * **Yalnızca birkaç veri dosyası ve bağımlılık betiklerine Ihtiyacınız varsa ve bir veri deposu kullanamaz,** dosyaları eğitim betiğinizle aynı klasör dizinine yerleştirin. Bu klasörü `source_directory` doğrudan eğitim betiğinizdeki veya eğitim betiğinizi çağıran kodda belirtin.
 
@@ -64,9 +64,9 @@ Jupyter Notebooks| Bir `.amlignore` dosya oluşturun veya not defterinizi yeni, 
 
 Eğitim denemeleri yalıtımı nedeniyle, çalışma sırasında oluşan dosyalardaki değişiklikler ortamınızın dışında kalıcı hale gelmez. Betiğinizin yerel olarak işlem yapmasını değiştirirse, değişiklikler sonraki denemenizin çalıştırılması için kalıcı olmaz ve istemci makinesine otomatik olarak geri yayılmaz. Bu nedenle, ilk deneme sırasında yapılan değişiklikler çalışmaz ve ikinciden etkilenmemelidir.
 
-Değişiklikleri yazarken, bir Azure Machine Learning veri deposuna dosya yazılmasını öneririz. Bkz. [veri mağazalarınızın verilerine erişme](how-to-access-data.md).
+Değişiklikleri yazarken, [Outputfiledatasetconfig nesnesine](/python/api/azureml-core/azureml.data.output_dataset_config.outputfiledatasetconfig)sahip bir Azure Machine Learning veri kümesi aracılığıyla depolama alanına dosya yazılmasını öneririz. Bkz. [OutputFileDatasetConfig oluşturma](how-to-train-with-datasets.md#where-to-write-training-output).
 
-Bir veri deposu gerekmiyorsa, dosyaları `./outputs` ve/veya `./logs` klasörüne yazın.
+Aksi takdirde, dosyaları `./outputs` ve/veya klasörüne yazın `./logs` .
 
 >[!Important]
 > İki klasör, *Çıkış* ve *günlük*, Azure Machine Learning özel bir işleme alır. Eğitim sırasında, dosyaları `./outputs` ve `./logs` klasörlere yazdığınızda, dosyalar çalışma geçmişinize otomatik olarak yüklenir, böylece çalıştırma tamamlandıktan sonra bunlara erişebilirsiniz.
@@ -77,6 +77,6 @@ Bir veri deposu gerekmiyorsa, dosyaları `./outputs` ve/veya `./logs` klasörün
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Veri mağazalarınızın verilerine erişme](how-to-access-data.md)hakkında daha fazla bilgi edinin.
+* [Depolama alanından verilere erişme](how-to-access-data.md)hakkında daha fazla bilgi edinin.
 
 * [Model eğitimi ve dağıtımı için işlem hedefleri oluşturma](how-to-create-attach-compute-studio.md) hakkında daha fazla bilgi edinin

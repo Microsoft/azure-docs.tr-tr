@@ -2,21 +2,21 @@
 author: DCtheGeek
 ms.service: azure-policy
 ms.topic: include
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.author: dacoulte
 ms.custom: generated
-ms.openlocfilehash: 6602b3c51acfdab1fdeebd62187d58570d97a727
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 00c20b719abeaf104304f92727fe150f29f1b911
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105031687"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107876070"
 ---
 |Name<br /><sub>(Azure portal)</sub> |Description |Efekt (ler) |Sürüm<br /><sub>GitHub</sub> |
 |---|---|---|---|
 |[Azure Dosya Eşitleme özel bağlantı kullanmalıdır](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F1d320205-c6a1-4ac6-873d-46224024e8e2) |Belirtilen depolama eşitleme hizmeti kaynağı için özel bir uç nokta oluşturulması, depolama eşitleme hizmeti kaynağınızı, internet erişimli genel uç nokta yerine kuruluşunuzun ağının özel IP adresi alanından adresetmenize olanak tanır. Özel bir uç noktanın kendi başına oluşturulması, genel uç noktayı devre dışı bırakmaz. |Auditınotexists, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/StorageSync_PrivateEndpoint_AuditIfNotExists.json) |
 |[Özel uç noktalarla Azure Dosya Eşitleme yapılandırma](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fb35dddd9-daf7-423b-8375-5a5b86806d5a) |Belirtilen depolama eşitleme hizmeti kaynağı için özel bir uç nokta dağıtılır. Bu, depolama eşitleme hizmeti kaynağınızın, internet erişimli genel uç nokta yerine, kuruluşunuzun ağının özel IP adresi alanından adreslemenize olanak sağlar. Tek başına bir veya daha fazla özel bitiş noktasının varlığı, genel uç noktasını devre dışı bırakmaz. |DeployIfNotExists, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/StorageSync_PrivateEndpoint_DeployIfNotExists.json) |
-|[Log Analytics çalışma alanına depolama hesapları için tanılama ayarlarını yapılandırma](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F6f8f98a4-f108-47cb-8e98-91a0d85cd474) |, Bu tanılama ayarlarının eksik olduğu herhangi bir depolama hesabı oluşturulduğu veya güncelleştirildiği zaman bir Log Analytics çalışma alanına kaynak günlüklerini akışa almak üzere depolama hesapları için tanılama ayarlarını dağıtır. |DeployIfNotExists, devre dışı |[1.2.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/DataConnectorsStorageAccounts%20_PolicyAssignment.json) |
+|[Log Analytics çalışma alanına depolama hesapları için tanılama ayarlarını yapılandırma](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F6f8f98a4-f108-47cb-8e98-91a0d85cd474) |, Bu tanılama ayarlarının eksik olduğu herhangi bir depolama hesabı oluşturulduğu veya güncelleştirildiği zaman bir Log Analytics çalışma alanına kaynak günlüklerini akışa almak üzere depolama hesapları için tanılama ayarlarını dağıtır. |DeployIfNotExists, devre dışı |[1.3.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/DataConnectorsStorageAccounts%20_PolicyAssignment.json) |
 |[Depolama hesabını özel bağlantı bağlantısı kullanacak şekilde yapılandırma](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F9f766f00-8d11-464e-80e1-4091d7874074) |Özel uç noktalar, Sanal ağınızı kaynak veya hedefte genel bir IP adresi olmadan Azure hizmetlerine bağlayın. Özel uç noktaları depolama hesabınıza eşleyerek, veri sızıntısı risklerini azaltabilirsiniz. Özel bağlantılar hakkında daha fazla bilgi edinin [https://aka.ms/azureprivatelinkoverview](https://aka.ms/azureprivatelinkoverview) |DeployIfNotExists, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/StorageAccountPrivateEndpointEnabled_DeployIfNotExists.json) |
 |[Depolama hesaplarında Gelişmiş tehdit koruması dağıtma](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F361c2074-3595-4e5d-8cab-4f21dffc835c) |Bu ilke, depolama hesaplarında Gelişmiş tehdit koruması sunar. |DeployIfNotExists, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/StorageAdvancedThreatProtection_Deploy.json) |
 |[Depolama hesapları için coğrafi olarak yedekli depolama etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fbf045164-79ba-4215-8f95-f8048dc1780b) |Yüksek oranda kullanılabilir uygulamalar oluşturmak için coğrafi artıklığı kullanın |Denetim, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/GeoRedundant_StorageAccounts_Audit.json) |

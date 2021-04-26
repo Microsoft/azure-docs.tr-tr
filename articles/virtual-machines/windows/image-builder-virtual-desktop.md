@@ -10,10 +10,10 @@ ms.service: virtual-machines-windows
 ms.collection: windows
 ms.subservice: imaging
 ms.openlocfilehash: 69718b219d239ac13e5d932b05a7dd29619adaa3
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105045595"
 ---
 # <a name="create-a-windows-virtual-desktop-image-using-azure-vm-image-builder-and-powershell"></a>Azure VM Image Builder ve PowerShell kullanarak Windows sanal masaüstü görüntüsü oluşturma

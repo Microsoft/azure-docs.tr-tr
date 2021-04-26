@@ -4,12 +4,12 @@ description: Docker CLı kullanarak Azure 'daki özel kapsayıcı Kayıt defteri
 ms.topic: article
 ms.date: 01/23/2019
 ms.custom: seodec18, H1Hack27Feb2017
-ms.openlocfilehash: 83ef385313b035f5e5d7d993e7948725906c75a7
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 48f5f1707881ac8461e12212be631d3b80c16ca7
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99987763"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783836"
 ---
 # <a name="push-your-first-image-to-your-azure-container-registry-using-the-docker-cli"></a>Docker CLı kullanarak ilk görüntünüzü Azure Container Registry 'nize gönderin
 
@@ -24,7 +24,7 @@ Aşağıdaki adımlarda, bir genel [NGINX görüntüsünü](https://store.docker
 
 ## <a name="log-in-to-a-registry"></a>Kayıt defterinde oturum açma
 
-Özel kapsayıcı kayıt defterinizde [kimlik doğrulamanın birkaç yolu](container-registry-authentication.md) vardır. Komut satırında çalışırken önerilen yöntem, [az ACR Login](/cli/azure/acr#az-acr-login)Azure CLI komutuna sahip olur. Örneğin, *myregistry* adlı bir kayıt defterinde oturum açmak IÇIN Azure CLI 'da oturum açın ve kayıt defterinizde kimlik doğrulaması yapın:
+Özel kapsayıcı kayıt defterinizde [kimlik doğrulamanın birkaç yolu](container-registry-authentication.md) vardır. Komut satırında çalışırken önerilen yöntem, [az ACR Login](/cli/azure/acr#az_acr_login)Azure CLI komutuna sahip olur. Örneğin, *myregistry* adlı bir kayıt defterinde oturum açmak IÇIN Azure CLI 'da oturum açın ve kayıt defterinizde kimlik doğrulaması yapın:
 
 ```azurecli
 az login
@@ -39,7 +39,7 @@ docker login myregistry.azurecr.io
 
 Her iki komut de `Login Succeeded` tamamlandığında döndürülür.
 > [!NOTE]
->* Daha hızlı ve daha uygun bir oturum açma işlemi için Docker uzantı ile Visual Studio Code kullanmak isteyebilirsiniz.
+>* Daha hızlı ve daha uygun bir oturum açma için Docker uzantılı Visual Studio Code kullanmak isteyebilirsiniz.
 
 > [!TIP]
 > `docker login`' İ kullanırken ve Kayıt defterinize göndermek üzere resimleri etiketlediğinizde, her zaman tam olarak nitelenmiş kayıt defteri adını (tümü küçük harf) belirtin. Bu makaledeki örneklerde, tam nitelikli ad *myregistry.azurecr.io*' dir.
@@ -114,7 +114,7 @@ Artık NGINX görüntüsüne ihtiyacınız yoksa [Docker rmi](https://docs.docke
 docker rmi myregistry.azurecr.io/samples/nginx
 ```
 
-Azure Container Registry 'nizden görüntüleri kaldırmak için [az ACR Repository Delete](/cli/azure/acr/repository#az-acr-repository-delete)Azure CLI komutunu kullanabilirsiniz. Örneğin, aşağıdaki komut etiket tarafından başvurulan bildirimi `samples/nginx:latest` , tüm benzersiz katman verilerini ve bildirime başvuran diğer tüm etiketleri siler.
+Azure Container Registry 'nizden görüntüleri kaldırmak için [az ACR Repository Delete](/cli/azure/acr/repository#az_acr_repository_delete)Azure CLI komutunu kullanabilirsiniz. Örneğin, aşağıdaki komut etiket tarafından başvurulan bildirimi `samples/nginx:latest` , tüm benzersiz katman verilerini ve bildirime başvuran diğer tüm etiketleri siler.
 
 ```azurecli
 az acr repository delete --name myregistry --image samples/nginx:latest

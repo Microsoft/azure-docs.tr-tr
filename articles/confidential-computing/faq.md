@@ -8,12 +8,12 @@ ms.service: virtual-machines
 ms.subservice: confidential-computing
 ms.date: 4/17/2020
 ms.author: jencook
-ms.openlocfilehash: a5ecd3827bbdc12b098684f1feda2df652f11940
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: aa78d6495eeffd0ea733451e029f07413602ce0d
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102551921"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812741"
 ---
 # <a name="frequently-asked-questions-for-azure-confidential-computing"></a>Azure gizli bilgi Işlem için sık sorulan sorular
 
@@ -32,7 +32,7 @@ Bir DCsv2 VM dağıtımı için bazı yollar şunlardır:
 
 **Tüm işletim sistemi görüntüleri Azure gizli bilgi işlem ile çalışacak mı?**
 
-Hayır. Sanal makineler yalnızca Ubuntu Server 18,04, Ubuntu Server 16,04, Windows Server 2019 Datacenter ve Windows Server 2016 Datacenter ile 2. nesil işletim makinelerine dağıtılabilir. [Linux](../virtual-machines/generation-2.md) ve [Windows](../virtual-machines/generation-2.md) üzerinde gen 2 VM 'ler hakkında daha fazla bilgi edinin
+Hayır. Sanal makineler yalnızca Ubuntu Server 18,04, Ubuntu Server 20,04, Windows Server 2019 Datacenter ve Windows Server 2016 Datacenter ile 2. nesil işletim makinelerine dağıtılabilir. [Linux](../virtual-machines/generation-2.md) ve [Windows](../virtual-machines/generation-2.md) üzerinde gen 2 VM 'ler hakkında daha fazla bilgi edinin
 
 **DCsv2 sanal makineler portalda gri renkte bulunur ve bir tane seçemiyorum**
 
@@ -76,4 +76,3 @@ Azure veya şirket içi bir makineye OE SDK 'Yı yükleme yönergeleri için, [O
 Ayrıca, işletim sistemine özgü yükleme yönergeleri için açık şifreleme SDK GitHub ' a bakabilirsiniz:
    - [Windows 'a OE SDK 'Yı yükler](https://github.com/openenclave/openenclave/blob/master/docs/GettingStartedDocs/install_oe_sdk-Windows.md)
    - [Ubuntu 18,04 ' ye OE SDK 'Yı kurma](https://github.com/openenclave/openenclave/blob/master/docs/GettingStartedDocs/install_oe_sdk-Ubuntu_18.04.md)
-   - [Ubuntu 16,04 ' ye OE SDK 'Yı kurma](https://github.com/openenclave/openenclave/blob/master/docs/GettingStartedDocs/install_oe_sdk-Ubuntu_16.04.md)

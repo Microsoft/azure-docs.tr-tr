@@ -5,12 +5,13 @@ services: automation
 ms.subservice: shared-capabilities
 ms.date: 12/22/2020
 ms.topic: conceptual
-ms.openlocfilehash: cbf9eb6c97dcceeca5e86e8bef47a39fb685792f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 788f15cd1edad228e695e6e87f5b630b8e4fdf55
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97734819"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834453"
 ---
 # <a name="manage-certificates-in-azure-automation"></a>Azure Otomasyonu 'nda sertifikaları yönetme
 
@@ -76,7 +77,7 @@ $PfxCertPath = '.\MyCert.pfx'
 $CertificatePassword = ConvertTo-SecureString -String 'P@$$w0rd' -AsPlainText -Force
 $ResourceGroup = "ResourceGroup01"
 
-New-AzAutomationCertificate -AutomationAccountName "MyAutomationAccount" -Name $certificateName -Path $PfxCertPath –Password $CertificatePassword -Exportable -ResourceGroupName $ResourceGroup
+New-AzAutomationCertificate -AutomationAccountName "MyAutomationAccount" -Name $certificateName -Path $PfxCertPath -Password $CertificatePassword -Exportable -ResourceGroupName $ResourceGroup
 ```
 
 ### <a name="create-a-new-certificate-with-a-resource-manager-template"></a>Kaynak Yöneticisi şablonuyla yeni bir sertifika oluşturma
@@ -136,7 +137,7 @@ Aşağıdaki örnek, bir runbook 'ta bir bulut hizmetine nasıl sertifika eklene
 $serviceName = 'MyCloudService'
 $cert = Get-AutomationCertificate -Name 'MyCertificate'
 $certPwd = Get-AzAutomationVariable -ResourceGroupName "ResourceGroup01" `
-–AutomationAccountName "MyAutomationAccount" –Name 'MyCertPassword'
+-AutomationAccountName "MyAutomationAccount" -Name 'MyCertPassword'
 Add-AzureCertificate -ServiceName $serviceName -CertToDeploy $cert
 ```
 

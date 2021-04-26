@@ -4,17 +4,19 @@ titleSuffix: Azure DNS
 description: Azure DNS'te DNS bölgesi ve kaydı oluşturma hakkında bilgi edinin. Bu, Azure Resource Manager şablonu (ARM şablonu) kullanarak ilk DNS bölgenizi ve kaydınızı oluşturmak ve yönetmek için adım adım hızlı bir başlangıç sağlar.
 services: dns
 author: duongau
-ms.service: dns
-ms.topic: quickstart
-ms.date: 09/8/2020
 ms.author: duau
-ms.custom: subject-armqs
-ms.openlocfilehash: 24460167e2279e7d3001d0bc16d050beb5b55289
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 09/8/2020
+ms.topic: quickstart
+ms.service: dns
+ms.custom:
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: 34e810fa8244cf3ff00e57f193624a2c1fa4d755
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92791010"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107539010"
 ---
 # <a name="quickstart-create-an-azure-dns-zone-and-record-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak Azure DNS bölgesi ve kaydı oluşturma
 

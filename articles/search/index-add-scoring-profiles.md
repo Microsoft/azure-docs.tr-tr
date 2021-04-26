@@ -8,12 +8,12 @@ ms.author: ramero
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 05/06/2020
-ms.openlocfilehash: 97797e309c32c6ea996d5ae1901b9a266a683173
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: afe56bb8637c9b2a88bda23944fd5097413fce97
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91537642"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077729"
 ---
 # <a name="add-scoring-profiles-to-an-azure-cognitive-search-index"></a>Azure Bilişsel Arama dizinine puanlama profilleri ekleme
 
@@ -161,7 +161,7 @@ Arama puanı, verilerin istatistiksel özelliklerine ve sorgusuna göre hesaplan
 
  Puanlama profili gövdesi ağırlıklı alanlar ve işlevlerden oluşturulur.  
 
-|||  
+|Özellikler |Description|  
 |-|-|  
 |**Çizgi**|Bir alana göreli ağırlık atayan ad-değer çiftlerini belirtin. [Örnekte](#bkmk_ex), albümbaşlık, tarz ve artistName alanları sırasıyla 1,5, 5 ve 2 ' dir. Tarzı neden diğerlerinden çok daha yüksek maliyetli? Arama, biraz hogenou olan veriler üzerinde yürütülmüştür (' de ' tarz ' ile ilgili olduğu gibi `musicstoreindex` ), göreli ağırlıklarla daha büyük bir varyans olması gerekebilir. Örneğin, `musicstoreindex` ' Rock ' içinde hem bir tarz hem de özdeş phrased tarzı açıklamalarıyla birlikte görünür. Tarz 'ın tarz açıklamasına göre daha yüksek bir değere sahip olmasını istiyorsanız, tarz alanı için çok daha yüksek bir göreli ağırlık gerekir.|  
 |**İşlevler**|Belirli bağlamlar için ek hesaplamalar gerektiğinde kullanılır. Geçerli değerler `freshness`, `magnitude`, `distance` veya `tag` değerleridir. Her işlevin benzersiz parametreleri vardır.<br /><br /> -   `freshness` bir öğenin yeni mi yoksa eski mi olduğunu artırmak istediğinizde kullanılmalıdır. Bu işlev yalnızca alanlarla birlikte kullanılabilir `datetime` (EDM. Veri Timesapmayı). `boostingDuration`Özniteliğin yalnızca işleviyle kullanıldığını unutmayın `freshness` .<br />-   `magnitude` bir sayısal değerin yüksek veya düşük olduğu bir değere göre artırmak istediğinizde kullanılmalıdır. Bu işlevi çağıran senaryolar, kar marjına, en yüksek fiyata, en düşük fiyata veya bir indirme sayısına göre yükseltme içerir. Bu işlev yalnızca Double ve Integer alanları ile kullanılabilir.<br />     Bu işlev için, `magnitude` ters deseninin (örneğin, daha yüksek fiyatlı öğelerden daha fazlasını artırmak için) (örneğin, daha fazla fiyatlandırıltı olan öğelerden daha fazla) isterseniz aralığı ters çevirebilirsiniz. $100 ile $1 arasında bir dizi fiyat verildiğinde, `boostingRangeStart` `boostingRangeEnd` düşük fiyatlı öğeleri artırmak için 100 ve 1 ' de ayarlanır.<br />-   `distance` yakınlığa veya coğrafi konuma göre artırmak istediğinizde kullanılmalıdır. Bu işlev, yalnızca alanlarla birlikte kullanılabilir `Edm.GeographyPoint` .<br />-   `tag` belgeler ve arama sorguları arasında ortak olan etiketlere göre artırmak istediğinizde kullanılmalıdır. Bu işlev yalnızca ve alanları ile kullanılabilir `Edm.String` `Collection(Edm.String)` .<br /><br /> **İşlevleri kullanma kuralları**<br /><br /> İşlev türü ( `freshness` , `magnitude` , `distance` ), `tag` küçük harf olmalıdır.<br /><br /> İşlevler null veya boş değerler içeremez. Özellikle, FieldName eklerseniz, onu bir şeye ayarlamanız gerekir.<br /><br /> İşlevler yalnızca filtrelenebilir alanlara uygulanabilir. Filtrelenebilir alanlar hakkında daha fazla bilgi için bkz. [Create ındex &#40;Azure Bilişsel Arama REST API&#41;](/rest/api/searchservice/create-index) .<br /><br /> İşlevler, yalnızca bir dizinin alanlar koleksiyonunda tanımlanan alanlara uygulanabilir.|  

@@ -7,13 +7,13 @@ ms.date: 03/02/2021
 ms.topic: conceptual
 ms.service: virtual-machines
 ms.subservice: disks
-ms.custom: references_regions
-ms.openlocfilehash: 733d441705c7c77f0667f88151e96f76975ee0b2
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: references_regions, devx-track-azurecli
+ms.openlocfilehash: 5110e580bada7bb1090b17d6df22a9354622e8e4
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104596408"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107483155"
 ---
 # <a name="enable-on-demand-bursting"></a>İsteğe bağlı patlaması etkinleştirin
 

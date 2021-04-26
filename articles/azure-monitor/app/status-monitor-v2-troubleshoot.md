@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: TimothyMothra
 ms.author: tilee
 ms.date: 04/23/2019
-ms.openlocfilehash: 2641218fa9ddef65c45f2f1a9c9ce807cef35048
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: cf3d8fd1566f3d71541aab7648680063e85079bf
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105642741"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106121838"
 ---
 # <a name="troubleshooting-application-insights-agent-formerly-named-status-monitor-v2"></a>Application Insights Agent sorunlarını giderme (eski adıyla Durum İzleyicisi v2)
 
@@ -152,16 +152,6 @@ Bu cmdlet 'in nasıl kullanılacağına ilişkin ayrıntılı bir açıklama iç
 3. Yönetici ayrıcalıklarına sahip bir komut konsolunda, `iisreset /start` IIS 'yi başlatmak için komutunu çalıştırın.
 4. Uygulamanıza gözatmayı deneyin.
 5. Uygulamanız yüklendikten sonra PerfView ' a dönüp **toplamayı durdur**' u seçin.
-
-### <a name="how-to-capture-full-sql-command-text"></a>Tam SQL komut metnini yakalama
-
-Tam SQL komut metnini yakalamak için applicationinsights.config dosyasını aşağıdaki gibi değiştirmeniz gerekir:
-
-```xml
-<Add Type="Microsoft.ApplicationInsights.DependencyCollector.DependencyTrackingTelemetryModule, Microsoft.AI.DependencyCollector">,
-<EnableSqlCommandTextInstrumentation>true</EnableSqlCommandTextInstrumentation>
-</Add>
-```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

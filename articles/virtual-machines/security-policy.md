@@ -8,12 +8,12 @@ ms.workload: infrastructure-services
 ms.date: 11/27/2018
 ms.author: cynthn
 ms.topic: conceptual
-ms.openlocfilehash: 291b9a210bf5f8cc18ccf8a523e282d3fc85aa28
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6754e4e60c31c35531b27e6cc2047e9f8ce3d0bc
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101673349"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817404"
 ---
 # <a name="secure-and-use-policies-on-virtual-machines-in-azure"></a>Azure'daki sanal makinelerde ilkeleri güvenli hale getirme ve kullanma
 
@@ -53,7 +53,7 @@ Azure 'da sanal diskleri şifrelemek için ücret alınmaz. Şifreleme anahtarla
 
 Gizlilikler ve sertifikalar, kaynak olarak modellenebilir ve [Key Vault](../key-vault/general/basic-concepts.md)tarafından sağlanabilecek. [Windows VM](windows/key-vault-setup.md) 'ler için anahtar kasalarını ve [Linux sanal MAKINELERI](linux/key-vault-setup.md)için Azure clı 'yi oluşturmak üzere Azure PowerShell kullanabilirsiniz. Şifreleme için anahtarlar da oluşturabilirsiniz.
 
-Anahtar Kasası erişim ilkeleri anahtarlar, gizlilikler ve sertifikalara ayrı ayrı izinler verir. Örneğin, bir kullanıcıya parolalar için herhangi bir izin vermeden yalnızca anahtarlar için erişim verebilirsiniz. Ancak, anahtar, parola veya sertifikalara erişim izni kasa düzeyinde verilir. Diğer bir deyişle, [Anahtar Kasası erişim ilkesi](../key-vault/general/secure-your-key-vault.md) nesne düzeyindeki izinleri desteklemez.
+Anahtar Kasası erişim ilkeleri anahtarlar, gizlilikler ve sertifikalara ayrı ayrı izinler verir. Örneğin, bir kullanıcıya parolalar için herhangi bir izin vermeden yalnızca anahtarlar için erişim verebilirsiniz. Ancak, anahtar, parola veya sertifikalara erişim izni kasa düzeyinde verilir. Diğer bir deyişle, [Anahtar Kasası erişim ilkesi](../key-vault/general/security-features.md) nesne düzeyindeki izinleri desteklemez.
 
 VM 'lere bağlandığınızda, üzerinde oturum açmak için daha güvenli bir yol sağlamak üzere ortak anahtar şifrelemeyi kullanmanız gerekir. Bu işlem, bir Kullanıcı adı ve parola yerine kendi kimlik doğrulaması için güvenli kabuk (SSH) komutunu kullanan ortak ve özel anahtar değişimini içerir. Parolalar, özellikle de Web sunucuları gibi Internet 'e yönelik VM 'lerde, deneme yanılma saldırılarına karşı savunmasız kalır. Secure Shell (SSH) anahtar çifti ile, kimlik doğrulaması için SSH anahtarları kullanan bir [Linux sanal makinesi](linux/mac-create-ssh-keys.md) oluşturabilir ve oturum açmak için parola gereksinimini ortadan kaldırabilirsiniz. [WINDOWS VM](linux/ssh-from-windows.md) 'den Linux sanal makinesine bağlanmak için SSH anahtarlarını da kullanabilirsiniz.
 

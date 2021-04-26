@@ -6,10 +6,10 @@ author: noakup
 ms.author: noakuper
 ms.date: 09/03/2020
 ms.openlocfilehash: a6d4c5811c08aa8c4de2eeea5f5f53967c3006b2
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105025365"
 ---
 # <a name="using-customer-managed-storage-accounts-in-azure-monitor-log-analytics"></a>Using Azure İzleyici Log Analytics'te müşteri tarafından yönetilen depolama hesaplarını kullanma

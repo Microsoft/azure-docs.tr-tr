@@ -13,12 +13,12 @@ ms.author: baselden
 ms.reviewer: ajburnle
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f06a54f59405d9833194b2e7d4488bc93d2437ae
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 89744b63a555cc02d35815b4066ce572b7f77e38
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98725187"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531901"
 ---
 # <a name="manage-external-access-with-entitlement-management"></a>Yetkilendirme yönetimiyle dış erişimi yönetme 
 
@@ -96,13 +96,13 @@ Erişim gözden geçirmeleri hakkında daha fazla bilgi için bkz. [Azure AD eri
 
 [Microsoft Graph kullanarak yetkilendirme yönetimi işlevleri](/graph/tutorial-access-package-api)gerçekleştirebilirsiniz.
 
-* [Erişim paketlerini Yönet](/graph/api/resources/accesspackage?view=graph-rest-beta)
+* [Erişim paketlerini Yönet](/graph/api/resources/accesspackage?view=graph-rest-beta&preserve-view=true)
 
-* [Erişim incelemelerini yönetme](/graph/api/resources/accessreviewsv2-root?view=graph-rest-beta)
+* [Erişim incelemelerini yönetme](/graph/api/resources/accessreviewsv2-root?view=graph-rest-beta&preserve-view=true)
 
-* [Bağlı kuruluşları yönetme](/graph/api/resources/connectedorganization?view=graph-rest-beta)
+* [Bağlı kuruluşları yönetme](/graph/api/resources/connectedorganization?view=graph-rest-beta&preserve-view=true)
 
-* [Yetkilendirme Yönetimi ayarlarını yönetme](/graph/api/resources/entitlementmanagementsettings?view=graph-rest-beta)
+* [Yetkilendirme Yönetimi ayarlarını yönetme](/graph/api/resources/entitlementmanagementsettings?view=graph-rest-beta&preserve-view=true)
 
 ## <a name="recommendations"></a>Öneriler 
 
@@ -112,7 +112,7 @@ Yetkilendirme yönetimiyle dış erişimi yönetmek için yöntemler öneririz.
 
 * Dizininizde zaten B2B kullanıcıları varsa, bunları uygun erişim paketlerine de doğrudan atayabilirsiniz.
 
-* [Azure Portal](../governance/entitlement-management-access-package-assignments.md)veya [Microsoft Graph](/graph/api/resources/accesspackageassignmentrequest?view=graph-rest-beta)aracılığıyla erişim atayabilirsiniz.
+* [Azure Portal](../governance/entitlement-management-access-package-assignments.md)veya [Microsoft Graph](/graph/api/resources/accesspackageassignmentrequest?view=graph-rest-beta&preserve-view=true)aracılığıyla erişim atayabilirsiniz.
 
 **Erişim paketleri sona erdiğinde, dizininizdeki kullanıcıları kaldırmak Için kimlik idare ayarlarınızı kullanın**.
 

@@ -4,10 +4,10 @@ description: Kuyruklar, konular ve aboneliklerle bir mağaza ve ileriye yönelik
 ms.topic: article
 ms.date: 06/23/2020
 ms.openlocfilehash: e37c18b95bca7ef1e6e8f0d74976bb73b214624a
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "102500640"
 ---
 # <a name="asynchronous-messaging-patterns-and-high-availability"></a>Zaman uyumsuz mesajlaşma desenleri ve yüksek kullanılabilirlik

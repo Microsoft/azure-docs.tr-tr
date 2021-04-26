@@ -13,12 +13,12 @@ ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 12e8222ad59aae31baa7a549519c97550b711703
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 60a846d72c1760c7f9dddac891f36e834b8364f3
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104579952"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107028171"
 ---
 # <a name="set-up-sign-up-and-sign-in-with-a-microsoft-account-using-azure-active-directory-b2c"></a>Microsoft hesabı Azure Active Directory B2C kullanarak kaydolma ve oturum açma ayarlama
 
@@ -196,7 +196,7 @@ Artık ilkenizi, Azure AD 'de Microsoft hesabı uygulamanızla nasıl iletişim 
 ## <a name="test-your-custom-policy"></a>Özel ilkenizi test etme
 
 1. Örneğin, bağlı olan taraf ilkenizi seçin `B2C_1A_signup_signin` .
-1. **Uygulama** için, [daha önce kaydetmiş](troubleshoot-custom-policies.md#troubleshoot-the-runtime)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
+1. **Uygulama** için, [daha önce kaydetmiş](tutorial-register-applications.md)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
 1. **Şimdi Çalıştır** düğmesini seçin.
 1. Kaydolma veya oturum açma sayfasından **Microsoft** 'u seçerek Microsoft hesabı oturum açın.
 

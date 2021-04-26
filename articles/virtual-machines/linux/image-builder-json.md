@@ -9,12 +9,12 @@ ms.service: virtual-machines
 ms.subservice: image-builder
 ms.collection: linux
 ms.reviewer: cynthn
-ms.openlocfilehash: aaaabe758b036335062907c8e5549ae876c63997
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 77460d1675b806e04c72e5f46da0ec4274d99d41
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104594742"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762542"
 ---
 # <a name="preview-create-an-azure-image-builder-template"></a>Önizleme: Azure görüntü Oluşturucu şablonu oluşturma 
 
@@ -222,7 +222,7 @@ Kaynak görüntüyü paylaşılan görüntü galerisinde var olan bir görüntü
    } 
 ```
 
-`imageVersionId`Görüntü sürümünün RESOURCEID olmalıdır. Resim sürümlerini listelemek için [az Sig Image-Version List](/cli/azure/sig/image-version#az-sig-image-version-list) kullanın.
+`imageVersionId`Görüntü sürümünün RESOURCEID olmalıdır. Resim sürümlerini listelemek için [az Sig Image-Version List](/cli/azure/sig/image-version#az_sig_image_version_list) kullanın.
 
 
 ## <a name="properties-buildtimeoutinminutes"></a>Özellikler: Buildtimeoutınminutes

@@ -14,18 +14,21 @@ ms.devlang: na
 ms.topic: how-to
 ms.date: 11/09/2020
 ms.author: b-juche
-ms.openlocfilehash: c1cdeaa41dda11f2ab520cf8d31ddb2116587082
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e0b86a7014af42f2ffb067c2de797f270a5b1855
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94409578"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105967481"
 ---
 # <a name="configure-an-nfs-client-for-azure-netapp-files"></a>Azure NetApp Files için NFS istemcisini yapılandırma
 
 Bu makalede açıklanan NFS istemci yapılandırması, [NFSv 4.1 Kerberos şifrelemesini yapılandırırken](configure-kerberos-encryption.md) veya [bir çift protokol birimi oluşturduğunuzda](create-volumes-dual-protocol.md)kurulum 'un bir parçasıdır. Azure NetApp Files ile kullanılabilecek çok çeşitli Linux dağıtımları vardır. Bu makalede, daha yaygın olarak kullanılan ortamların ikisi için yapılandırma açıklanmaktadır: RHEL 8 ve Ubuntu 18,04. 
 
+## <a name="requirements-and-considerations"></a>Gereksinimler ve önemli noktalar  
+
 Kullandığınız Linux Flavor ne olursa olsun, aşağıdaki konfigürasyonlar gereklidir:
+
 * Zaman eğimiyle ilgili sorunları önlemek için bir NTP İstemcisi yapılandırın.
 * Ad çözümlemesi için Linux istemcisinin DNS girişlerini yapılandırın.  
     Bu yapılandırma, "A" (ileri) kaydı ve PTR (ters) kaydını içermelidir. 

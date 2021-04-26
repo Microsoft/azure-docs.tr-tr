@@ -1,25 +1,25 @@
 ---
 title: Azure Güvenlik Merkezi için yerleşik ilke tanımları
 description: Azure Güvenlik Merkezi için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 author: memildin
 ms.author: memildin
 ms.service: security-center
 ms.custom: subject-policy-reference
-ms.openlocfilehash: a96dcc3b6f4abafd6cf72c11b2f52480fe3780ec
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 0fc5e2ed183020f32b59fec7f4436754467968e0
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105036721"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872438"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-security-center"></a>Azure Güvenlik Merkezi için Azure İlkesi yerleşik tanımları
 
 Bu sayfa, Azure Güvenlik Merkezi ile ilgili [Azure ilkesi](../governance/policy/overview.md) yerleşik ilke tanımlarının bir dizinidir. Aşağıdaki ilke tanımlarının gruplandırmaları kullanılabilir:
 
 - [Girişimler](#azure-security-center-initiatives) grubu, "Güvenlik Merkezi" kategorisindeki Azure ilke girişim tanımlarını listeler.
-- [Varsayılan girişim](#azure-security-center-initiatives) grubu, güvenlik merkezi 'nin varsayılan girişim, [Azure Güvenlik kıyaslamalarından](../security/benchmarks/introduction.md)oluşan tüm Azure ilke tanımlarını listeler. Bu Microsoft tarafından yazılmış, yaygın olarak kullanılan kıyaslanmalar, [Internet güvenliği (CIS) Için merkezden](https://www.cisecurity.org/benchmark/azure/) ve [ulusal standartlar ve teknolojı Enstitüsü (NIST)](https://www.nist.gov/) ile bulut merkezli güvenliğe odaklanarak yapılar oluşturur.
+- [Varsayılan girişim](#azure-security-center-initiatives) grubu, güvenlik merkezi 'nin varsayılan girişim, [Azure Güvenlik kıyaslamalarından](https://docs.microsoft.com/security/benchmark/azure/introduction)oluşan tüm Azure ilke tanımlarını listeler. Bu Microsoft tarafından yazılmış, yaygın olarak kullanılan kıyaslanmalar, [Internet güvenliği (CIS) Için merkezden](https://www.cisecurity.org/benchmark/azure/) ve [ulusal standartlar ve teknolojı Enstitüsü (NIST)](https://www.nist.gov/) ile bulut merkezli güvenliğe odaklanarak yapılar oluşturur.
 - [Kategori](#azure-security-center-category) grubu, "Güvenlik Merkezi" kategorisindeki tüm Azure ilke tanımlarını listeler.
 
 Güvenlik ilkeleri hakkında daha fazla bilgi için bkz. [güvenlik Ilkeleriyle çalışma](./tutorial-security-policy.md). Diğer hizmetlere yönelik diğer Azure Ilkesi için yerleşik olarak [bulunan Azure ilkesi yerleşik tanımları](../governance/policy/samples/built-in-policies.md)bölümüne bakın.

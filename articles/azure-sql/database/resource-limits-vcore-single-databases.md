@@ -10,22 +10,33 @@ ms.topic: reference
 author: stevestein
 ms.author: sstein
 ms.reviewer: ''
-ms.date: 03/23/2021
-ms.openlocfilehash: a3cd68b610b0e0db05f60450009bc83a80c3037b
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.date: 04/09/2021
+ms.openlocfilehash: 7f96e6638bd021777d2f4bb888ef70c49c42c716
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107627"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313802"
 ---
 # <a name="resource-limits-for-single-databases-using-the-vcore-purchasing-model"></a>Sanal çekirdek satın alma modeli kullanıldığında tek veritabanları için kaynak sınırları
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 Bu makalede, sanal çekirdek satın alma modelini kullanarak Azure SQL veritabanı 'nda tek veritabanlarına yönelik ayrıntılı kaynak limitleri sağlanmaktadır.
 
-Bir sunucudaki tek veritabanları için DTU satın alma model sınırları için bkz. [bir sunucudaki kaynak sınırlarına genel bakış](resource-limits-logical-server.md).
+* Bir sunucudaki tek veritabanları için DTU satın alma model sınırları için bkz. [bir sunucudaki kaynak sınırlarına genel bakış](resource-limits-logical-server.md).
+* Azure SQL veritabanı için DTU satın alma modeli kaynak sınırları için bkz. [DTU kaynak limitleri tek veritabanı](resource-limits-dtu-single-databases.md) ve [DTU kaynak sınırları elastik havuzlar](resource-limits-dtu-elastic-pools.md).
+* VCore kaynak sınırları için bkz. [Vcore kaynak limitleri-Azure SQL veritabanı](resource-limits-vcore-single-databases.md) ve [sanal çekirdek kaynak limitleri-elastik havuzlar](resource-limits-vcore-elastic-pools.md).
+* Farklı satın alma modelleriyle ilgili daha fazla bilgi için bkz. [model ve hizmet katmanları satın alma](purchasing-models.md).
 
-[Azure Portal](single-database-manage.md#the-azure-portal), [Transact-SQL](single-database-manage.md#transact-sql-t-sql), [PowerShell](single-database-manage.md#powershell), [Azure CLI](single-database-manage.md#the-azure-cli)veya [REST API](single-database-manage.md#rest-api)kullanarak tek bir veritabanı için hizmet katmanını, işlem boyutunu (hizmet hedefi) ve depolama miktarını ayarlayabilirsiniz.
+Her salt okunurdur çoğaltma, Vçekirdekler, bellek, veri ıOPS, TempDB, çalışanlar ve oturumlar gibi kendi kaynaklarına sahiptir. Her salt okuma çoğaltması, bu makalede daha sonra ayrıntılı kaynak sınırlarına tabidir.
+
+Kullanarak tek bir veritabanı için hizmet katmanını, işlem boyutunu (hizmet hedefi) ve depolama miktarını ayarlayabilirsiniz:
+
+* [Alter database](/sql/t-sql/statements/alter-database-transact-sql#overview-sql-database) aracılığıyla [Transact-SQL](single-database-manage.md#transact-sql-t-sql)
+* [Azure portalı](single-database-manage.md#the-azure-portal)
+* [PowerShell](single-database-manage.md#powershell)
+* [Azure CLI](single-database-manage.md#the-azure-cli)
+* [REST API](single-database-manage.md#rest-api)
 
 > [!IMPORTANT]
 > Ölçeklendirme Kılavuzu ve konuları için bkz. [tek bir veritabanını ölçeklendirme](single-database-scale.md).

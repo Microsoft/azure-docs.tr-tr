@@ -5,16 +5,16 @@ author: bandersmsft
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 03/12/2021
+ms.date: 03/29/2021
 ms.reviewer: andalmia
 ms.author: banders
 ms.custom: devx-track-azurepowershell, devx-track-azurecli
-ms.openlocfilehash: 3f07d18ccdca87f6395b24e4e3f9e6ee91cfaee3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e57f385dce6446ebb3aa2df0ceb48f97a7e0c2f4
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104593994"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877919"
 ---
 # <a name="programmatically-create-azure-enterprise-agreement-subscriptions-with-the-latest-apis"></a>En son API’lerle program aracılığıyla Azure Kurumsal Anlaşma abonelikleri oluşturma
 
@@ -31,7 +31,8 @@ Program aracılığıyla Azure aboneliği oluşturduğunuzda, bu abonelik Micros
 Abonelik oluşturmak için Kayıt Hesabında Sahip rolünüzün olması gerekir. Rolü almanın iki yolu vardır:
 
 * Kaydınızın Kuruluş Yöneticisi [sizi Hesap Sahibi yapabilir](https://ea.azure.com/helpdocs/addNewAccount) (oturum açma gereklidir) ve bu durumda Kayıt Hesabının Sahibi olursunuz.
-* Kayıt Hesabının mevcut Sahibi [size erişim verebilir](/rest/api/billing/2019-10-01-preview/enrollmentaccountroleassignments/put). Benzer şekilde, EA aboneliğini oluştururken bir hizmet sorumlusu kullanmak için [söz konusu hizmet sorumlusuna abonelik oluşturabilme becerisi](/rest/api/billing/2019-10-01-preview/enrollmentaccountroleassignments/put) vermelisiniz. 
+* Kayıt Hesabının mevcut Sahibi [size erişim verebilir](/rest/api/billing/2019-10-01-preview/enrollmentaccountroleassignments/put). Benzer şekilde, EA aboneliğini oluştururken bir hizmet sorumlusu kullanmak için [söz konusu hizmet sorumlusuna abonelik oluşturabilme becerisi](/rest/api/billing/2019-10-01-preview/enrollmentaccountroleassignments/put) vermelisiniz.  
+    Abonelik oluşturmak için bir SPN kullanıyorsanız, [Azure Active Directory PowerShell](/powershell/module/azuread/get-azureadserviceprincipal?view=azureadps-2.0) veya [Azure CLı](/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_list)kullanarak Azure AD uygulama kaydının ObjectID 'sini hizmet sorumlusu ObjectID olarak kullanın.
   > [!NOTE]
   > Kayıt hesabı sahip izinleri vermek için doğru API sürümünü kullandığınızdan emin olun. Bu makale ve makalede belgelenen API'ler için [2019-10-01-preview](/rest/api/billing/2019-10-01-preview/enrollmentaccountroleassignments/put) API'sini kullanın. Daha yeni API'leri kullanmaya geçiyorsanız [2019-10-01-preview](/rest/api/billing/2019-10-01-preview/enrollmentaccountroleassignments/put) kullanarak yeniden sahip izni vermeniz gerekir. [2015-07-01 version](grant-access-to-create-subscription.md) ile yapılmış olan önceki yapılandırmanız daha yeni API'lerle çalışacak şekilde otomatik olarak dönüştürülmez.
 
@@ -231,7 +232,7 @@ Modülün `New-AzSubscriptionAlias` cmdlet'ini içeren en son sürümünü yükl
 `"/providers/Microsoft.Billing/BillingAccounts/1234567/enrollmentAccounts/7654321"` faturalama kapsamını kullanarak aşağıdaki [New-AzSubscriptionAlias](/powershell/module/az.subscription/new-azsubscription) komutunu çalıştırın. 
 
 ```azurepowershell-interactive
-New-AzSubscriptionAlias -AliasName "sampleAlias" -SubscriptionName "Dev Team Subscription" -BillingScope "/providers/Microsoft.Billing/BillingAccounts/1234567/enrollmentAccounts/7654321" -Workload 'Production"
+New-AzSubscriptionAlias -AliasName "sampleAlias" -SubscriptionName "Dev Team Subscription" -BillingScope "/providers/Microsoft.Billing/BillingAccounts/1234567/enrollmentAccounts/7654321" -Workload "Production"
 ```
 
 Komutun yanıtının bir parçası olarak subscriptionId bilgisini alırsınız.
@@ -252,7 +253,7 @@ Komutun yanıtının bir parçası olarak subscriptionId bilgisini alırsınız.
 
 İlk olarak, `az extension add --name account` ve `az extension add --name alias` komutlarını çalıştırarak uzantıyı yükleyin.
 
-Aşağıdaki [az account alias create](/cli/azure/ext/account/account/alias#ext_account_az_account_alias_create) komutunu çalıştırıp `enrollmentAccounts` hesaplarınızdan birindeki `billing-scope` ve `id` bilgilerini sağlayın. 
+Aşağıdaki [az account alias create](/cli/azure/account/alias#az_account_alias_create) komutunu çalıştırıp `enrollmentAccounts` hesaplarınızdan birindeki `billing-scope` ve `id` bilgilerini sağlayın. 
 
 ```azurecli-interactive
 az account alias create --name "sampleAlias" --billing-scope "/providers/Microsoft.Billing/billingAccounts/1234567/enrollmentAccounts/654321" --display-name "Dev Team Subscription" --workload "Production"

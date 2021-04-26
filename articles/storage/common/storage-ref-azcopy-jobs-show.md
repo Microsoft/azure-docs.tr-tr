@@ -8,12 +8,12 @@ ms.date: 07/24/2020
 ms.author: normesta
 ms.subservice: common
 ms.reviewer: zezha-msft
-ms.openlocfilehash: 57970371b947c5240be97e58c10299d2f4dfe525
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a14546d8bfc50531902b5150d38ee5ce8b8b5769
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98879080"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107503363"
 ---
 # <a name="azcopy-jobs-show"></a>azcopy işleri gösterme
 
@@ -36,7 +36,6 @@ azcopy jobs show [jobID] [flags]
 - [AzCopy’yi kullanmaya başlama](storage-use-azcopy-v10.md)
 - [AzCopy ve BLOB Storage ile veri aktarma](./storage-use-azcopy-v10.md#transfer-data)
 - [AzCopy ve dosya depolama ile verileri aktarma](storage-use-azcopy-files.md)
-- [AzCopy 'i yapılandırma, iyileştirme ve sorun giderme](storage-use-azcopy-configure.md)
 
 ## <a name="options"></a>Seçenekler
 

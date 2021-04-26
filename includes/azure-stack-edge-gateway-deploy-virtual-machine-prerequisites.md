@@ -4,12 +4,12 @@ ms.service: databox
 ms.topic: include
 ms.date: 01/15/2021
 ms.author: alkohli
-ms.openlocfilehash: e459ea1e9d8d7d51a62ba3ed1d2de8815a1b4222
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: f166413507afb9aff814eaddaade099d2e34ae68
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105104608"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106554577"
 ---
 Azure Stack Edge cihazınızda VM 'Leri dağıtabilmeniz için önce, istemcinizi Azure PowerShell üzerinden Azure Resource Manager aracılığıyla cihaza bağlanacak şekilde yapılandırmanız gerekir. Ayrıntılı yönergeler için bkz. [Azure Stack Edge cihazınızda Azure Resource Manager bağlama](../articles/databox-online/azure-stack-edge-gpu-connect-resource-manager.md).
 
@@ -23,7 +23,7 @@ Azure Stack Edge cihazınızda VM 'Leri dağıtabilmeniz için önce, istemciniz
 
 1. Kimlik doğrulaması için yerel cihaz API 'Lerini çağırmak için şunu girin: 
 
-    `login-AzureRMAccount -EnvironmentName <Environment Name>`
+    `login-AzureRMAccount -EnvironmentName <Environment Name> -TenantId c0257de7-538f-415c-993a-1b87a031879d`
 
     Azure Resource Manager aracılığıyla bağlanmak için, Kullanıcı adı *Edgearmuser* ve parolanızı sağlayın.
 

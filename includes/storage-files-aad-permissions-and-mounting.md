@@ -7,13 +7,13 @@ ms.service: storage
 ms.topic: include
 ms.date: 08/26/2020
 ms.author: rogara
-ms.custom: include file
-ms.openlocfilehash: 4773446ec0007ffbed99bc01939d1f92f5823d99
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: include file, devx-track-azurecli
+ms.openlocfilehash: 200bf290543747cf9abab6113b8013e2eec852a8
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95556123"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107513611"
 ---
 ## <a name="assign-access-permissions-to-an-identity"></a>Kimliğe erişim izinleri atama
 
@@ -93,7 +93,7 @@ Aşağıdaki izin kümeleri bir dosya paylaşımının kök dizininde destekleni
 
 ### <a name="mount-a-file-share-from-the-command-prompt"></a>Komut isteminden bir dosya paylaşma bağlama
 
-Azure dosya paylaşımından bağlamak için Windows **net use** komutunu kullanın. Aşağıdaki örnekteki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın. Dosya paylaşımları bağlama hakkında daha fazla bilgi için bkz. [Windows Ile Azure dosya paylaşımı kullanma](../articles/storage/files/storage-how-to-use-files-windows.md). 
+Azure dosya paylaşımından bağlamak için Windows **net use** komutunu kullanın. Aşağıdaki örnek içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın. Dosya paylaşımları bağlama hakkında daha fazla bilgi için bkz. [Windows Ile Azure dosya paylaşımı kullanma](../articles/storage/files/storage-how-to-use-files-windows.md). 
 
 ```
 $connectTestResult = Test-NetConnection -ComputerName <storage-account-name>.file.core.windows.net -Port 445
@@ -126,7 +126,7 @@ Kök dizin dahil olmak üzere dosya paylaşımındaki tüm dizinlere ve dosyalar
 
 ### <a name="configure-ntfs-permissions-with-icacls"></a>Iacl 'lerle NTFS izinlerini yapılandırma
 
-Kök dizin dahil olmak üzere, dosya paylaşımındaki tüm dizin ve dosyalara tam izinler vermek için aşağıdaki Windows komutunu kullanın. Örnekteki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın.
+Kök dizin dahil olmak üzere, dosya paylaşımındaki tüm dizin ve dosyalara tam izinler vermek için aşağıdaki Windows komutunu kullanın. Örnekteki yer tutucu değerlerini kendi değerlerinizle değiştirdiğinizden hatırlayın.
 
 ```
 icacls <mounted-drive-letter>: /grant <user-email>:(f)

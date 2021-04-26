@@ -7,10 +7,10 @@ ms.author: akaleshian
 ms.service: spring-cloud
 description: Bu başvuru mimarisi, Azure Spring Cloud kullanımı için tipik bir kurumsal hub ve bağlı bileşen tasarımı kullanan bir temelidir.
 ms.openlocfilehash: 74183ca2decf8487e5c41cf36d5784538021077f
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104878764"
 ---
 # <a name="azure-spring-cloud-reference-architecture"></a>Azure yay bulut başvurusu mimarisi

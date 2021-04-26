@@ -6,15 +6,15 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: how-to
-ms.date: 03/09/2021
+ms.date: 03/30/2021
 ms.author: tamram
-ms.custom: devx-track-azurepowershell
-ms.openlocfilehash: 85520032e9bc63b6296e40dd1c1055e36762dcc8
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.custom: devx-track-azurepowershell, devx-track-azurecli
+ms.openlocfilehash: d6d94efea52d920b8bfe69be2ee07c8b829792d8
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102555015"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484107"
 ---
 # <a name="upgrade-to-a-general-purpose-v2-storage-account"></a>Genel amaçlı v2 depolama hesabına yükseltme
 
@@ -28,7 +28,7 @@ Genel amaçlı v1 veya blob depolama hesaplarınızdan genel amaçlı v2 depolam
 > [!NOTE]
 > Microsoft çoğu senaryo için genel amaçlı v2 hesapları önerse de, Microsoft yeni ve mevcut müşteriler için genel amaçlı v1 hesaplarını desteklemeye devam edecektir. Azure Storage bu bölgelerde kullanılabilir olduğunda, yeni bölgelerde genel amaçlı v1 depolama hesapları oluşturabilirsiniz. Microsoft 'un, genel amaçlı v1 hesapları için desteği kullanımdan kaldırmaya yönelik bir planı yoktur ve herhangi bir Azure depolama özelliğinin kullanım dışı bırakılmadan önce en az bir yıllık ön uyarı sağlar. Microsoft, genel amaçlı v1 hesapları için güvenlik güncelleştirmeleri sağlamaya devam edecek, ancak bu hesap türü için yeni bir özellik geliştirmesi beklenmez.
 >
-> 1 Ekim 2020 itibariyle, yeni Azure depolama bölgelerinde genel amaçlı v1 hesapları için fiyatlandırma, bu bölgelerdeki genel amaçlı v2 hesapları için fiyatlandırmaya eşittir. Mevcut Azure depolama bölgelerinde fiyatlandırma değişmemiştir. Belirli bir bölgedeki genel amaçlı v1 hesapları için fiyatlandırma ayrıntıları için bkz. Azure Depolama fiyatlandırması sayfası. Bölgenizi seçin ve ardından **fiyatlandırma teklifleri**' nin yanındaki **diğer**' i seçin.
+> 1 Ekim 2020 ' den sonra çevrimiçi olan yeni Azure bölgeleri için, genel amaçlı v1 hesapları için fiyatlandırma değişmiştir ve bu bölgelerdeki genel amaçlı v2 hesapları için fiyatlandırmaya eşittir. 1 Ekim 2020 ' den önceki Azure bölgelerindeki genel amaçlı v1 hesapları fiyatlandırması değişmemiştir. Belirli bir bölgedeki genel amaçlı v1 hesapları için fiyatlandırma ayrıntıları için bkz. Azure Depolama fiyatlandırması sayfası. Bölgenizi seçin ve ardından **fiyatlandırma teklifleri**' nin yanındaki **diğer**' i seçin.
 
 ## <a name="upgrade-an-account"></a>Bir hesabı yükseltme
 

@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/15/2021
 ms.author: spelluru
 ms.custom: include file
-ms.openlocfilehash: 2cb203a00bb00767126f95e1fdc2f5aff8990f01
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1dd78ba3799573e05e4ebbf55887bae3d9674b7c
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103601290"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310092"
 ---
 Event Hubs bir olay hub 'ına bir veya daha fazla bölüme gönderilen olay dizilerini düzenler. Daha yeni olaylar geldikçe, bu sıranın sonuna eklenir. 
 
@@ -32,7 +32,7 @@ Event Hubs, büyük hacimden olayların işlenmesine yardımcı olmak üzere tas
 ### <a name="number-of-partitions"></a>Bölüm sayısı
 Bölüm sayısı, oluşturma sırasında belirtilmiştir ve Event Hubs standardında 1 ile 32 arasında olmalıdır. Bölüm sayısı Event Hubs Ayrılmış Kapasite birimi başına en fazla 2000 bölüm olabilir. 
 
-Bu belirli olay hub 'ı için uygulamanızın en yoğun yükü sırasında sürekli [üretilen iş birimleri (tu)](../articles/event-hubs/event-hubs-faq.md#what-are-event-hubs-throughput-units) için gereken en az sayıda bölüm seçmenizi öneririz. 1 TU işleme kapasitesine sahip tek bir bölümle hesaplamanız gerekir (1 Mbde, 2 Mbtu çıkış). Ad alanınızı veya kümenizin kapasite birimlerini bölüm sayısından bağımsız olarak ölçeklendirebilirsiniz. 32 bölümden oluşan bir olay hub 'ı veya 1 bölümlü bir olay hub 'ı, ad alanı 1 TU kapasitesine ayarlandığında tam olarak aynı maliyette olur. 
+Bu belirli olay hub 'ı için uygulamanızın en yoğun yükü sırasında sürekli [üretilen iş birimleri (tu)](../articles/event-hubs/event-hubs-faq.yml#what-are-event-hubs-throughput-units-) için gereken en az sayıda bölüm seçmenizi öneririz. 1 TU işleme kapasitesine sahip tek bir bölümle hesaplamanız gerekir (1 Mbde, 2 Mbtu çıkış). Ad alanınızı veya kümenizin kapasite birimlerini bölüm sayısından bağımsız olarak ölçeklendirebilirsiniz. 32 bölümden oluşan bir olay hub 'ı veya 1 bölümlü bir olay hub 'ı, ad alanı 1 TU kapasitesine ayarlandığında tam olarak aynı maliyette olur. 
 
 [Ayrılmış bir Event Hubs kümesindeki](../articles/event-hubs/event-hubs-dedicated-overview.md) bir olay hub 'ının bölüm sayısı, Olay Hub 'ı oluşturulduktan sonra [artırılabilir](../articles/event-hubs/dynamically-add-partitions.md) , ancak bölümler arasında akış dağıtımı, Bölüm anahtarlarının bölüm değişikliklerinin eşlenmesiyle yapıldığında, bu değişikliklerden kaçınmaya devam etmeniz gerekir. bu nedenle, olayların göreli sırası uygulamanızda önemli olduğunda bu değişikliklere engel olmak için katı çalışmanız gerekir.
 

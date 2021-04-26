@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: b9999ae92840d79bb19464216c0f28504011b3f3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: 601512d9a236c1e6f5b09e1a310610597df59c0f
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "88008330"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445185"
 ---
 # <a name="create-a-host-pool-in-windows-virtual-desktop-classic-with-an-azure-resource-manager-template"></a>Azure Resource Manager şablonuyla Windows sanal masaüstü 'nde (klasik) bir konak havuzu oluşturma
 

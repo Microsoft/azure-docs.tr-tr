@@ -5,12 +5,12 @@ services: container-service
 ms.topic: article
 ms.date: 02/1/2021
 ms.author: miwithro
-ms.openlocfilehash: b7918ecc31fe152bd25153ac8c899ce3ff8fdacb
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 3db9f8d895b4c13b5f969859f422e7b566722ffc
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640591"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783080"
 ---
 # <a name="aks-managed-azure-active-directory-integration"></a>AKS tarafından yönetilen Azure Active Directory tümleştirme
 
@@ -20,7 +20,7 @@ AKS tarafından yönetilen Azure AD tümleştirmesi, kullanıcıların daha önc
 
 Küme yöneticileri, Kubernetes rol tabanlı erişim denetimini (Kubernetes RBAC) bir kullanıcının kimliğine veya dizin grubu üyeliğine göre yapılandırabilir. Azure AD kimlik doğrulaması, OpenID Connect ile AKS kümelerine sağlanır. OpenID Connect, OAuth 2,0 protokolünün üstünde oluşturulmuş bir kimlik katmanıdır. OpenID Connect hakkında daha fazla bilgi için bkz. [Açık kimlik bağlantısı belgeleri][open-id-connect].
 
-[Azure Active Directory tümleştirme kavramları belgelerindeki](concepts-identity.md#azure-active-directory-integration)Azure AD tümleştirme akışı hakkında daha fazla bilgi edinin.
+[Azure Active Directory tümleştirme kavramları belgelerindeki](concepts-identity.md#azure-ad-integration)Azure AD tümleştirme akışı hakkında daha fazla bilgi edinin.
 
 ## <a name="limitations"></a>Sınırlamalar 
 
@@ -315,11 +315,11 @@ Güvenlik grubunun yöneticisinin hesabınıza *etkin* bir atama vermiş olduğu
 [azure-rbac-integration]: manage-azure-rbac.md
 [aks-concepts-identity]: concepts-identity.md
 [azure-ad-rbac]: azure-ad-rbac.md
-[az-aks-create]: /cli/azure/aks#az-aks-create
-[az-aks-get-credentials]: /cli/azure/aks#az-aks-get-credentials
-[az-group-create]: /cli/azure/group#az-group-create
+[az-aks-create]: /cli/azure/aks#az_aks_create
+[az-aks-get-credentials]: /cli/azure/aks#az_aks_get_credentials
+[az-group-create]: /cli/azure/group#az_group_create
 [open-id-connect]:../active-directory/develop/v2-protocols-oidc.md
-[az-ad-user-show]: /cli/azure/ad/user#az-ad-user-show
+[az-ad-user-show]: /cli/azure/ad/user#az_ad_user_show
 [rbac-authorization]: concepts-identity.md#role-based-access-controls-rbac
 [operator-best-practices-identity]: operator-best-practices-identity.md
 [azure-ad-rbac]: azure-ad-rbac.md

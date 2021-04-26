@@ -8,10 +8,10 @@ ms.service: virtual-machines
 ms.date: 11/11/2020
 ms.author: cynthn
 ms.openlocfilehash: 9c220814ae1f714e9eac0c0c11a50d9cf68a621d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98897417"
 ---
 # <a name="tagging-a-vm-using-the-portal"></a>Portalı kullanarak VM etiketleme

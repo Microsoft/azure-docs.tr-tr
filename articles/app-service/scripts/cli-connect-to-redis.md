@@ -8,13 +8,13 @@ ms.devlang: azurecli
 ms.topic: sample
 ms.date: 12/11/2017
 ms.author: msangapu
-ms.custom: mvc, seodec18
-ms.openlocfilehash: e4d9fc6e597fb51f607a3e2833ae6ddd7d9281fc
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: mvc, seodec18, devx-track-azurecli
+ms.openlocfilehash: 24658525ca1248aa82732a31eb9a40df1403203c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97006350"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782432"
 ---
 # <a name="connect-an-app-service-app-to-an-azure-cache-for-redis-using-cli"></a>CLı kullanarak bir App Service uygulamasını Redsıs için Azure önbelleğine bağlama
 
@@ -38,12 +38,12 @@ Bu betik, bir kaynak grubu, App Service uygulaması, redin için Azure önbelle�
 
 | Komut | Notlar |
 |---|---|
-| [`az group create`](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | App Service planı oluşturur. |
-| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | App Service uygulaması oluşturur. |
-| [`az redis create`](/cli/azure/redis#az-redis-create) | Redsıs örneği için yeni Azure önbelleği oluşturun. |
-| [`az redis list-keys`](/cli/azure/redis#az-redis-list-keys) | Redsıs örneği için Azure önbelleği erişim anahtarlarını listeler. |
-| [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) | App Service uygulaması için bir uygulama ayarı oluşturur veya güncelleştirir. Uygulama ayarları, uygulamanız için ortam değişkenleri olarak kullanıma sunulur. |
+| [`az group create`](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az_appservice_plan_create) | App Service planı oluşturur. |
+| [`az webapp create`](/cli/azure/webapp#az_webapp_create) | App Service uygulaması oluşturur. |
+| [`az redis create`](/cli/azure/redis#az_redis-create) | Redsıs örneği için yeni Azure önbelleği oluşturun. |
+| [`az redis list-keys`](/cli/azure/redis#az_redis_list_keys) | Redsıs örneği için Azure önbelleği erişim anahtarlarını listeler. |
+| [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) | App Service uygulaması için bir uygulama ayarı oluşturur veya güncelleştirir. Uygulama ayarları, uygulamanız için ortam değişkenleri olarak kullanıma sunulur. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

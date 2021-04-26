@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 10/06/2020
 ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: 69067ca34b231f1b14f8cc854288c3ed4c4ac82a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: eda575e0f29abbe18750a24fbfc212a9d84819cf
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91855999"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106110368"
 ---
 # <a name="tutorial-connect-a-virtual-network-to-an-expressroute-circuit"></a>Öğretici: bir sanal ağı ExpressRoute devresine bağlama
 > [!div class="op_single_selector"]
@@ -28,7 +28,7 @@ Bu makale, Kaynak Yöneticisi dağıtım modelini ve PowerShell 'i kullanarak sa
 
 * 10 adede kadar sanal ağı standart bir ExpressRoute devresine bağlayabilirsiniz. Standart bir ExpressRoute bağlantı hattı kullanılırken tüm sanal ağların aynı geopolitik bölgede olması gerekir. 
 
-* Tek bir sanal ağ, en fazla dört ExpressRoute devresine bağlanabilir. Bağlanmakta olduğunuz her ExpressRoute devresi için yeni bir bağlantı nesnesi oluşturmak üzere bu makaledeki adımları kullanın. ExpressRoute devreleri aynı abonelikte, farklı aboneliklerde veya her ikisinin karışımı olabilir.
+* Tek bir sanal ağ, en fazla 16 ExpressRoute devresine bağlanabilir. Bağlanmakta olduğunuz her ExpressRoute devresi için yeni bir bağlantı nesnesi oluşturmak üzere bu makaledeki adımları kullanın. ExpressRoute devreleri aynı abonelikte, farklı aboneliklerde veya her ikisinin karışımı olabilir.
 
 * ExpressRoute Premium eklentisini etkinleştirirseniz, ExpressRoute devresinin coğrafi bölgesinin dışındaki sanal ağları bağlayabilirsiniz. Premium eklenti Ayrıca, seçilen bant genişliğine bağlı olarak ExpressRoute bağlantı hattına 10 ' dan fazla sanal ağ bağlamanıza olanak tanır. Premium eklenti hakkında daha fazla bilgi için [SSS bölümüne](expressroute-faqs.md) bakın.
 

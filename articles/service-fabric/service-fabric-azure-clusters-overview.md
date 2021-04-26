@@ -5,12 +5,12 @@ services: service-fabric
 documentationcenter: .net
 ms.topic: conceptual
 ms.date: 02/01/2019
-ms.openlocfilehash: bbfdc0a30aa673e8602ec9233fde4236c99ef5aa
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 4aed4ab38db9f8d8b95647b6662245c93778afed
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97882220"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107520165"
 ---
 # <a name="overview-of-service-fabric-clusters-on-azure"></a>Azure 'da Service Fabric kümelerine genel bakış
 Service Fabric küme, mikro hizmetlerinizin dağıtıldığı ve yönetildiği, ağa bağlı bir sanal veya fiziksel makine kümesidir. Bir kümenin parçası olan makineye veya VM 'ye küme düğümü denir. Kümeler, binlerce düğüme ölçeklendirebilir. Kümeye yeni düğümler eklerseniz, hizmet bölümü çoğaltmaları ve örneklerinin artan düğüm sayısı genelinde yeniden dengelenmesi Service Fabric. Genel uygulama performansı, bellek düşüşlerine erişim için gelişir ve çekişmeyi geliştirir. Kümedeki düğümler verimli bir şekilde kullanılmıyorsa, kümedeki düğümlerin sayısını azaltabilirsiniz. Service Fabric, her düğümdeki donanımın daha iyi kullanılmasını sağlamak için bölüm çoğaltmalarını ve örnekleri, azaltılmış düğüm sayısı genelinde yeniden dengeler.
@@ -92,25 +92,7 @@ Azure Service Fabric kümesi, sahip olduğunuz ancak kısmen Microsoft tarafınd
 Daha fazla bilgi için, [kümeleri yükseltme](service-fabric-cluster-upgrade.md)makalesini okuyun.
 
 ## <a name="supported-operating-systems"></a>Desteklenen işletim sistemleri
-Bu işletim sistemlerini çalıştıran sanal makinelerde kümeler oluşturabilirsiniz:
-
-| İşletim sistemi | Desteklenen en erken Service Fabric sürümü | Son desteklenen Service Fabric sürümü |
-| --- | --- | --- | 
-| Windows Server 2019 | 6.4.654.9590 | Yok |
-| Windows Server 2016 | Tüm sürümler | Yok |
-| Windows Server 20H2 | 7.2.445.9590 | Yok |
-| Windows Server 1809 | 6.4.654.9590 | 7.2.445.9590 |
-| Windows Server 1803 | 6.4 | 7.2.445.9590 |
-| Windows Server 1709 | 6.0 | 7.2.445.9590 |
-| Windows Server 2012 | Tüm sürümler | Yok | 
-| Linux Ubuntu 16,04 | 6.0 | Yok |
-| Linux Ubuntu 18,04 | 7.1 | Yok |
-
-Daha fazla bilgi için bkz. [Azure 'Da desteklenen küme sürümleri](./service-fabric-versions.md#supported-operating-systems)
-
-> [!NOTE]
-> Windows Server 1709 ' de Service Fabric dağıtmaya karar verirseniz, (1) uzun süreli bakım dalı olmadığından, daha sonra sürümleri taşımanız gerekebilir ve (2) kapsayıcıları dağıtırsanız, Windows Server 2016 ' de oluşturulan kapsayıcılar Windows Server 1709 üzerinde çalışmaz ve tam tersi (bunları dağıtmak için yeniden oluşturmanız gerekir).
->
+Lütfen daha fazla bilgi için bkz. [Azure 'Da desteklenen sürümler](./service-fabric-versions.md)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

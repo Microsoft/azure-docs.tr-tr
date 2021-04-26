@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 09/09/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 9194f38ddea5570d94ba6c87ea6a537cb41fb98c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 95ab5917779a73b7221a5b431126164aef88b494
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102051387"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812129"
 ---
 # <a name="data-encryption-models"></a>Veri şifreleme modelleri
 
@@ -102,7 +102,7 @@ Azure Key Vault içindeki müşteri tarafından yönetilen anahtarlarla sunucu t
 Bekleyen verileri şifrelemek veya şifrelerini çözmek için bir anahtar almak üzere Kaynak Yöneticisi hizmet örneğinin çalışacağı hizmet kimliğinin UnwrapKey olması gerekir (şifre çözme anahtarını almak için) ve WrapKey (yeni anahtar oluştururken anahtar kasasına bir anahtar eklemek için).
 
 >[!NOTE]
->Key Vault yetkilendirmesi hakkında daha fazla ayrıntı için, [Azure Key Vault belgelerindeki](../../key-vault/general/secure-your-key-vault.md)anahtar kasasının güvenliğini sağlama sayfasına bakın.
+>Key Vault yetkilendirmesi hakkında daha fazla ayrıntı için, [Azure Key Vault belgelerindeki](../../key-vault/general/security-features.md)anahtar kasasının güvenliğini sağlama sayfasına bakın.
 
 **Avantajlar**
 
@@ -197,7 +197,7 @@ Her şifreleme modelini destekleyen Azure hizmetleri:
 | Tablo Depolama                    | Yes                | Yes                | Evet                |
 | Azure Cosmos DB                  | Evet                | Yes                | -                  |
 | Azure Databricks                 | Yes                | Yes                | -                  |
-| Azure Veritabanı Geçiş Hizmeti | Yes                | Yok\*              | -                  |
+| Azure Veritabanı Geçiş Hizmeti | Yes                | yok\*              | -                  |
 | **DevOps**                       |                    |                    |                    |
 | Azure DevOps Services            | Yes                | -                  | -                  |
 | Azure Repos                      | Yes                | -                  | -                  |
@@ -230,7 +230,7 @@ Her şifreleme modelini destekleyen Azure hizmetleri:
 | Dosya Eşitleme                        | Yes                | Yes                | -                  |
 | Kuyruk Depolama                    | Yes                | Yes                | Yes                |
 | Avere vFXT                       | Yes                | -                  | -                  |
-| Redis için Azure Cache            | Yes                | Yok\*              | -                  |
+| Redis için Azure Cache            | Yes                | yok\*              | -                  |
 | Azure NetApp Files               | Yes                | Yes                | -                  |
 | Arşiv Depolama                  | Yes                | Yes                | -                  |
 | StorSimple                       | Yes                | Yes                | Yes                |

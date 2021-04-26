@@ -12,12 +12,12 @@ ms.custom:
 - 'Role: Cloud Development'
 - 'Role: Data Analytics'
 - devx-track-azurecli
-ms.openlocfilehash: 53b5add7526b0c20487e8fe3adb0b8ebe207a2ce
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 4f2f0678b421ac6965b2848cc25564b4e95c7c6b
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102200029"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567073"
 ---
 # <a name="visualize-real-time-sensor-data-from-your-azure-iot-hub-in-a-web-application"></a>Azure IoT Hub 'ınızdaki gerçek zamanlı algılayıcı verilerini bir Web uygulamasında görselleştirin
 
@@ -25,23 +25,11 @@ ms.locfileid: "102200029"
 
 [!INCLUDE [iot-hub-get-started-note](../../includes/iot-hub-get-started-note.md)]
 
-## <a name="what-you-learn"></a>Öğrenecekleriniz
+Bu makalede, IoT Hub 'ınızın yerel bilgisayarınızda çalışan bir node.js Web uygulamasıyla aldığı gerçek zamanlı algılayıcı verilerini görselleştirmeyi öğreneceksiniz. Web uygulamasını yerel olarak çalıştırdıktan sonra, isteğe bağlı olarak, Azure App Service Web uygulamasını barındırmak için adımları izleyebilirsiniz. Power BI kullanarak IoT Hub 'ınızdaki verileri görselleştirmeye denemek istiyorsanız bkz. [Azure IoT Hub 'deki gerçek zamanlı algılayıcı verilerini görselleştirmek için Power BI kullanma](iot-hub-live-data-visualization-in-power-bi.md).
 
-Bu öğreticide, IoT Hub 'ınızın yerel bilgisayarınızda çalışan bir node.js Web uygulamasıyla aldığı gerçek zamanlı algılayıcı verilerini görselleştirmeyi öğreneceksiniz. Web uygulamasını yerel olarak çalıştırdıktan sonra, isteğe bağlı olarak, Azure App Service Web uygulamasını barındırmak için adımları izleyebilirsiniz. Power BI kullanarak IoT Hub 'ınızdaki verileri görselleştirmeye denemek istiyorsanız bkz. [Azure IoT Hub 'deki gerçek zamanlı algılayıcı verilerini görselleştirmek için Power BI kullanma](iot-hub-live-data-visualization-in-power-bi.md).
+## <a name="prerequisites"></a>Önkoşullar
 
-## <a name="what-you-do"></a>Yapabilecekleriniz
-
-* Web uygulamasının algılayıcı verilerini okumak için kullanacağı IoT Hub 'ınıza bir tüketici grubu ekleyin
-* Web uygulaması kodunu GitHub 'dan indirin
-* Web uygulaması kodunu inceleyin
-* Ortam değişkenlerini, Web uygulamanız için gereken IoT Hub yapıtları tutacak şekilde yapılandırma
-* Geliştirme makinenizde Web uygulamasını çalıştırma
-* IoT Hub 'ınızdan gerçek zamanlı sıcaklık ve nem verilerini görmek için bir Web sayfası açın
-* Seçim Azure CLı kullanarak Web uygulamanızı barındırma Azure App Service
-
-## <a name="what-you-need"></a>Gerekenler
-
-* [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun; Örneğin, [node.jsRaspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md). Bu, aşağıdaki gereksinimleri kapsar:
+* [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun. Örneğin, [node.jsIle Raspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md) 'ye gidebilir veya [Telemetriyi gönder](quickstart-send-telemetry-dotnet.md) hızlı başlangıçlarından birine gidebilirsiniz. Bu makaleler aşağıdaki gereksinimleri kapsar:
 
   * Etkin bir Azure aboneliği
   * Aboneliğiniz kapsamındaki bir IoT Hub 'ı

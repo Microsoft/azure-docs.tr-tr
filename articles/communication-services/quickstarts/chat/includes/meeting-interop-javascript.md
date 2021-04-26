@@ -5,12 +5,12 @@ ms.author: askaur
 ms.date: 03/10/2021
 ms.topic: quickstart
 ms.service: azure-communication-services
-ms.openlocfilehash: 773bca81694534346019e30e9d55190af6f51e74
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 49f9bac40ae803f980a22c19fd5d44d85fa99e9e
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105106811"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107564684"
 ---
 ## <a name="joining-the-meeting-chat"></a>Toplantı sohbetine katılma 
 
@@ -286,7 +286,7 @@ sendMessageButton.addEventListener("click", async () =>
 
 ## <a name="get-a-teams-meeting-chat-thread-for-a-communication-services-user"></a>Bir Iletişim Hizmetleri kullanıcısına yönelik sohbet iş parçacığını toplantıya yönelik bir takım alın
 
-Toplantı bağlantısı ve sohbet, Graph API 'Leri kullanılarak, [grafik belgelerinde](/graph/api/onlinemeeting-createorget?tabs=http&view=graph-rest-beta)ayrıntılı şekilde alınabilir. SDK 'Yı çağıran Iletişim Hizmetleri, bir tam takımlar toplantısı bağlantısını kabul eder. Bu bağlantı, `onlineMeeting` [grafiğin API 'leri](/graph/api/onlinemeeting-createorget?tabs=http&view=graph-rest-beta)ile [ `joinWebUrl` özelliği](/graph/api/resources/onlinemeeting?view=graph-rest-beta) altında erişilebilen kaynağın bir parçası olarak döndürülür `threadId` . Yanıt, içeren bir nesnesine sahip olur `chatInfo` `threadID` . 
+Toplantı bağlantısı ve sohbet, Graph API 'Leri kullanılarak, [grafik belgelerinde](/graph/api/onlinemeeting-createorget?tabs=http&view=graph-rest-beta&preserve-view=true)ayrıntılı şekilde alınabilir. SDK 'Yı çağıran Iletişim Hizmetleri, bir tam takımlar toplantısı bağlantısını kabul eder. Bu bağlantı, `onlineMeeting` [grafiğin API 'leri](/graph/api/onlinemeeting-createorget?tabs=http&view=graph-rest-beta&preserve-view=true)ile [ `joinWebUrl` özelliği](/graph/api/resources/onlinemeeting?view=graph-rest-beta&preserve-view=true) altında erişilebilen kaynağın bir parçası olarak döndürülür `threadId` . Yanıt, içeren bir nesnesine sahip olur `chatInfo` `threadID` . 
 
 Gerekli toplantı bilgilerini ve iş parçacığı KIMLIĞINI, ekipteki **toplantıya katılarak** davet etme URL 'sinden de alabilirsiniz.
 Bir ekip toplantısı bağlantısı şöyle görünür: `https://teams.microsoft.com/l/meetup-join/meeting_chat_thread_id/1606337455313?context=some_context_here` . , `threadId` Bağlantı nerede olacaktır `meeting_chat_thread_id` . `meeting_chat_thread_id`Kullanılmadan önce bunun atlanmadan emin olun. Aşağıdaki biçimde olmalıdır: `19:meeting_ZWRhZDY4ZGUtYmRlNS00OWZaLTlkZTgtZWRiYjIxOWI2NTQ4@thread.v2`

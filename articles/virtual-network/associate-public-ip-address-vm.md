@@ -13,18 +13,20 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/21/2019
 ms.author: allensu
-ms.openlocfilehash: 6ea16da3844b8098d87d65e1016f92c69ae34067
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6e8fe92f88a5934c55febf42a0768274211ed76f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98945151"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767718"
 ---
 # <a name="associate-a-public-ip-address-to-a-virtual-machine"></a>Genel IP adresini bir sanal makineyle ilişkilendir
 
 Bu makalede, genel IP adresini var olan bir sanal makineyle (VM) ilişkilendirmeyi öğreneceksiniz. Bir sanal makineye internet 'ten bağlanmak istiyorsanız, VM ile ilişkili bir genel IP adresi olmalıdır. Genel IP adresi ile yeni bir VM oluşturmak istiyorsanız, [Azure Portal](virtual-network-deploy-static-pip-arm-portal.md), [Azure komut SATıRı arabirimi (CLI)](virtual-network-deploy-static-pip-arm-cli.md)veya [PowerShell](virtual-network-deploy-static-pip-arm-ps.md)'i kullanarak bunu yapabilirsiniz. Genel IP adreslerinin nominal bir ücreti vardır. Ayrıntılar için bkz. [fiyatlandırma](https://azure.microsoft.com/pricing/details/ip-addresses/). Abonelik başına kullanabileceğiniz genel IP adresi sayısı için bir sınır vardır. Ayrıntılar için bkz. [sınırlar](../azure-resource-manager/management/azure-subscription-service-limits.md?toc=%2fazure%2fvirtual-network%2ftoc.json#publicip-address).
 
 Genel IP adresini bir VM ile ilişkilendirmek için [Azure Portal](#azure-portal), Azure [komut satırı arabirimi](#azure-cli) 'ni (CLI) veya [PowerShell](#powershell) 'i kullanabilirsiniz.
+
+[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
 
 ## <a name="azure-portal"></a>Azure portalı
 
@@ -60,12 +62,12 @@ Genel IP adresini bir VM ile ilişkilendirmek için [Azure Portal](#azure-portal
 
 7. Ağ güvenlik grubundaki güvenlik kuralları ile [VM 'ye ağ trafiğine Izin verin](#allow-network-traffic-to-the-vm) .
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 [Azure CLI](/cli/azure/install-azure-cli?toc=%2fazure%2fvirtual-network%2ftoc.json)'yi veya Azure Cloud Shell kullanın. Azure Cloud Shell doğrudan Azure portalının içinde çalıştırabileceğiniz ücretsiz bir Bash kabuğudur. Azure CLI, kabuğa önceden yüklenmiştir ve kabuk, hesabınızla birlikte kullanılacak şekilde yapılandırılmıştır. Aşağıdaki CLı komutlarında **deneyin** düğmesini seçin. **Dene** ' nin seçilmesi, ile Azure hesabınızda oturum açmak için kullanabileceğiniz bir Cloud Shell çağırır.
 
 1. CLı 'yi Bash içinde yerel olarak kullanıyorsanız, ile Azure 'da oturum açın `az login` .
-2. Genel IP adresi, bir VM 'ye bağlı bir ağ arabiriminin IP yapılandırmasıyla ilişkilendirilir. Genel IP adresini bir IP yapılandırmasıyla ilişkilendirmek için [az Network Nic-ip-config Update](/cli/azure/network/nic/ip-config#az-network-nic-ip-config-update) komutunu kullanın. Aşağıdaki örnek, *myVMPublicIP* adlı mevcut BIR genel IP adresini, *myresourcegroup* adlı bir kaynak grubunda bulunan *myvmvmnıc* adlı mevcut bir ağ ARABIRIMININ *ıpconfigmyvm* adlı IP yapılandırmasına ilişkilendirir.
+2. Genel IP adresi, bir VM 'ye bağlı bir ağ arabiriminin IP yapılandırmasıyla ilişkilendirilir. Genel IP adresini bir IP yapılandırmasıyla ilişkilendirmek için [az Network Nic-ip-config Update](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_update) komutunu kullanın. Aşağıdaki örnek, *myVMPublicIP* adlı mevcut BIR genel IP adresini, *myresourcegroup* adlı bir kaynak grubunda bulunan *myvmvmnıc* adlı mevcut bir ağ ARABIRIMININ *ıpconfigmyvm* adlı IP yapılandırmasına ilişkilendirir.
   
    ```azurecli-interactive
    az network nic ip-config update \
@@ -75,7 +77,7 @@ Genel IP adresini bir VM ile ilişkilendirmek için [Azure Portal](#azure-portal
      --public-ip-address myVMPublicIP
    ```
 
-   - Var olan bir genel IP adresiniz yoksa, oluşturmak için [az Network public-IP Create](/cli/azure/network/public-ip#az-network-public-ip-create) komutunu kullanın. Örneğin, aşağıdaki komut *Myresourcegroup* adlı bir kaynak grubunda *myVMPublicIP* adlı bir genel IP adresi oluşturur.
+   - Var olan bir genel IP adresiniz yoksa, oluşturmak için [az Network public-IP Create](/cli/azure/network/public-ip#az_network_public_ip_create) komutunu kullanın. Örneğin, aşağıdaki komut *Myresourcegroup* adlı bir kaynak grubunda *myVMPublicIP* adlı bir genel IP adresi oluşturur.
   
      ```azurecli-interactive
      az network public-ip create --name myVMPublicIP --resource-group myResourceGroup
@@ -84,7 +86,7 @@ Genel IP adresini bir VM ile ilişkilendirmek için [Azure Portal](#azure-portal
      > [!NOTE]
      > Önceki komut, özelleştirmek isteyebileceğiniz çeşitli ayarlar için varsayılan değerleri içeren bir genel IP adresi oluşturur. Tüm genel IP adresi ayarları hakkında daha fazla bilgi için bkz. [genel IP adresi oluşturma](virtual-network-public-ip-address.md#create-a-public-ip-address). Adres, her bir Azure bölgesi için kullanılan bir genel IP adresi havuzundan atanır. Her bölgede kullanılan adres havuzlarının listesini görmek için bkz. [Microsoft Azure veri MERKEZI IP aralıkları](https://www.microsoft.com/download/details.aspx?id=41653).
 
-   - Sanal makinenize bağlı bir ağ arabiriminin adını bilmiyorsanız, görüntülemek için [az VM Nic List](/cli/azure/vm/nic#az-vm-nic-list) komutunu kullanın. Örneğin aşağıdaki komut, *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı bir VM 'ye bağlı ağ arabirimlerinin adlarını listeler:
+   - Sanal makinenize bağlı bir ağ arabiriminin adını bilmiyorsanız, görüntülemek için [az VM Nic List](/cli/azure/vm/nic#az_vm_nic_list) komutunu kullanın. Örneğin aşağıdaki komut, *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı bir VM 'ye bağlı ağ arabirimlerinin adlarını listeler:
 
      ```azurecli-interactive
      az vm nic list --vm-name myVM --resource-group myResourceGroup
@@ -98,13 +100,13 @@ Genel IP adresini bir VM ile ilişkilendirmek için [Azure Portal](#azure-portal
 
      Önceki örnekte, *Myvmvmnıc* , ağ arabiriminin adıdır.
 
-   - Bir ağ arabirimi için bir IP yapılandırmasının adını bilmiyorsanız, bunları almak için [az Network Nic IP-Config List](/cli/azure/network/nic/ip-config#az-network-nic-ip-config-list) komutunu kullanın. Örneğin, aşağıdaki komut, *Myresourcegroup* adlı bir kaynak grubunda *Myvmvmnıc* adlı BIR ağ arabirimi için IP yapılandırmalarının adlarını listeler:
+   - Bir ağ arabirimi için bir IP yapılandırmasının adını bilmiyorsanız, bunları almak için [az Network Nic IP-Config List](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_list) komutunu kullanın. Örneğin, aşağıdaki komut, *Myresourcegroup* adlı bir kaynak grubunda *Myvmvmnıc* adlı BIR ağ arabirimi için IP yapılandırmalarının adlarını listeler:
 
      ```azurecli-interactive
      az network nic ip-config list --nic-name myVMVMNic --resource-group myResourceGroup --out table
      ```
 
-3. [Az VM List-ip-addresses](/cli/azure/vm#az-vm-list-ip-addresses) komutuyla IP yapılandırmasına atanan genel IP adresini görüntüleyin. Aşağıdaki örnekte, *Myresourcegroup* adlı kaynak grubunda *myvm* adlı mevcut BIR VM 'ye atanan IP adresleri gösterilmektedir.
+3. [Az VM List-ip-addresses](/cli/azure/vm#az_vm_list_ip_addresses) komutuyla IP yapılandırmasına atanan genel IP adresini görüntüleyin. Aşağıdaki örnekte, *Myresourcegroup* adlı kaynak grubunda *myvm* adlı mevcut BIR VM 'ye atanan IP adresleri gösterilmektedir.
 
    ```azurecli-interactive
    az vm list-ip-addresses --name myVM --resource-group myResourceGroup --out table

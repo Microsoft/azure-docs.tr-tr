@@ -8,16 +8,14 @@ ms.author: chpalm
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: a52931b69187d18984b9b6938832dafe64111ffe
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: beb8b81710cf4728259a8eb1df920cd74efce3ce
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105641050"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728139"
 ---
 # <a name="region-availability-and-data-residency"></a>Bölge kullanılabilirliği ve veri yerleşikliği
-
-[!INCLUDE [Public Preview Notice](../includes/public-preview-include.md)]
 
 Azure Iletişim Hizmetleri, müşterilerimizin gizlilik ve kişisel veri gereksinimlerini karşıladığından yardımcı olmaya kararlıdır. Uygulama kullanan insanlarla doğrudan ilişki ile Iletişim hizmetlerini kullanan bir geliştirici olarak, büyük olasılıkla kendi verilerinin bir denetleyicisidir. Azure Iletişim Hizmetleri bu verileri sizin adınıza depolarken ve şifrelerken, büyük olasılıkla bu verilerin bir işlemcisi olabilir. Bu sayfada hizmetin verileri nasıl sakladığı ve bu verileri nasıl tanımlayabilmeniz, dışarı aktarılacağı ve silebilmeniz özetlenmektedir.
 

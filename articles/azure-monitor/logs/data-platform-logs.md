@@ -6,12 +6,12 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.date: 10/22/2020
 ms.author: bwren
-ms.openlocfilehash: 6cb85bc1da7d98d3e2ad46229588a91d971ce014
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 9794c5f048b8795652e4b31e0134b36a77715abe
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105567299"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873388"
 ---
 # <a name="azure-monitor-logs-overview"></a>Azure İzleyici Günlükleri'ne genel bakış
 Azure Izleyici günlükleri, [izlenen kaynaklardan](../monitor-reference.md)gelen günlük ve performans verilerini toplayan ve düzenleyen bir Azure izleyici özelliğidir. Azure hizmetlerinden gelen [Platform günlükleri](../essentials/platform-logs-overview.md) , [sanal makine aracılarından](../agents/agents-overview.md)gelen günlük ve performans verileri ve [uygulamalardan](../app/app-insights-overview.md) kullanım ve performans verileri gibi farklı kaynaklardaki veriler tek bir çalışma alanında birleştirilebilir ve bu sayede milyonlarca kaydı hızlı bir şekilde analiz etme yeteneğine sahip olan gelişmiş bir sorgu dili kullanılarak analiz edilebilir. Yalnızca belirli bir kayıt kümesini alan basit bir sorgu gerçekleştirebilir veya izleme verilerinizde kritik desenleri belirlemek için gelişmiş veri analizi gerçekleştirebilirsiniz. Log Analytics kullanarak günlük sorgularıyla ve sonuçlarıyla etkileşimli olarak çalışın, sorunları önceden bilgilendirmeye yönelik bir uyarı kurallarında kullanın veya sonuçları bir çalışma kitabı veya panoda görselleştirin.
@@ -29,7 +29,7 @@ Aşağıdaki tabloda Azure Izleyici 'de günlükleri kullanmanın farklı yollar
 | **Uyarı** | Sorgu sonuçları belirli bir sonuçla eşleşiyorsa bildirim gönderen veya [otomatik eylem](../alerts/action-groups.md) alan bir [günlük uyarı kuralı](../alerts/alerts-log.md) yapılandırın. |
 | **Görselleştirme** | Bir [Azure panosuna](../../azure-portal/azure-portal-dashboards.md)tablo veya grafik olarak işlenen sorgu sonuçlarını sabitleme.<br>Etkileşimli bir raporda birden fazla veri kümesiyle birleştirilecek bir [çalışma kitabı](../visualize/workbooks-overview.md) oluşturun. <br>Farklı görselleştirmeler kullanmak ve Azure dışındaki kullanıcılarla paylaşmak için bir sorgunun sonuçlarını [Power BI](../visualize/powerbi.md) dışarı aktarın.<br>Bir sorgunun sonuçlarını [Grafana](../visualize/grafana-plugin.md) olarak dışa aktarın ve diğer veri kaynaklarıyla birleştirin.|
 | **İçgörüler** | Belirli uygulamalar ve hizmetler için özelleştirilmiş bir izleme deneyimi sağlayan [öngörüleri](../monitor-reference.md#insights-and-core-solutions) destekleme.  |
-| **Almanın** | [Azure CLI](/cli/azure/ext/log-analytics/monitor/log-analytics)kullanarak bir komut satırından günlük sorgusu sonuçlarına erişin.<br>[PowerShell cmdlet 'lerini](/powershell/module/az.operationalinsights)kullanarak bir komut satırından günlük sorgusu sonuçlarına erişin.<br>[REST API](https://dev.loganalytics.io/)kullanarak özel bir uygulamadan günlük sorgusu sonuçlarına erişin. |
+| **Almanın** | [Azure CLI](/cli/azure/monitor/log-analytics)kullanarak bir komut satırından günlük sorgusu sonuçlarına erişin.<br>[PowerShell cmdlet 'lerini](/powershell/module/az.operationalinsights)kullanarak bir komut satırından günlük sorgusu sonuçlarına erişin.<br>[REST API](https://dev.loganalytics.io/)kullanarak özel bir uygulamadan günlük sorgusu sonuçlarına erişin. |
 | **Dışarı Aktarma** | Azure depolama hesabına veya Azure Event Hubs [otomatik olarak günlük verilerinin dışarı aktarılmasını](./logs-data-export.md) yapılandırın.<br>Günlük verilerini almak ve [Logic Apps](./logicapp-flow-connector.md)kullanarak bir dış konuma kopyalamak için bir iş akışı oluşturun. |
 
 ![Günlüklere genel bakış](media/data-platform-logs/logs-overview.png)

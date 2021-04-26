@@ -3,12 +3,12 @@ title: DPM ile bir SharePoint grubunu Azure 'a yedekleme
 description: Bu makalede, Azure 'da bir SharePoint grubunun DPM/Azure Backup sunucu korumasına genel bakış sunulmaktadır
 ms.topic: conceptual
 ms.date: 03/09/2020
-ms.openlocfilehash: 7661d64e487c8b8badca240852d17bcf736ba8cf
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3524107b545c151fcf931b89c629a61d83f47ace
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91254440"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515167"
 ---
 # <a name="back-up-a-sharepoint-farm-to-azure-with-dpm"></a>DPM ile bir SharePoint grubunu Azure 'a yedekleme
 
@@ -75,5 +75,5 @@ Birden fazla ön uç Web sunucunuz varsa ve DPM 'nin grubu korumak için kulland
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure Backup Sunucusu ve DPM-SSS](backup-azure-dpm-azure-server-faq.md)
+* [Azure Backup Sunucusu ve DPM-SSS](backup-azure-dpm-azure-server-faq.yml)
 * [System Center Data Protection Manager sorunlarını giderme](backup-azure-scdpm-troubleshooting.md)

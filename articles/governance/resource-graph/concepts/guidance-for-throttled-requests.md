@@ -1,15 +1,15 @@
 ---
 title: Kısıtlanan istekler için yönergeler
 description: Azure Kaynak Grafiği tarafından daraltılan isteklerin önüne geçmek için, paralel olarak Grup, Stagger, sayfal ve sorgu yapmayı öğrenin.
-ms.date: 01/27/2021
+ms.date: 04/09/2021
 ms.topic: conceptual
 ms.custom: devx-track-csharp
-ms.openlocfilehash: ddd3cf4d411733e831c94039c3bc9aeaf0e95271
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 891d5951670dd6022b66ae2936ee855f73f8b33a
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98917716"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107283550"
 ---
 # <a name="guidance-for-throttled-requests-in-azure-resource-graph"></a>Azure Kaynak grafiğinde kısıtlanmış isteklere yönelik kılavuz
 
@@ -231,7 +231,7 @@ Azure Kaynak Graph tek bir sorgu yanıtında en fazla 1000 girişi döndürdüğ
 
 ## <a name="still-get-throttled"></a>Hala kısıtlanıyor musunuz?
 
-Yukarıdaki önerileri kullandıktan sonra azaldıysanız, ' de ekibine başvurun [resourcegraphsupport@microsoft.com](mailto:resourcegraphsupport@microsoft.com) .
+Yukarıdaki önerileri kullandıktan sonra daraldıysanız [Azure Kaynak Grafiği ekibine](mailto:resourcegraphsupport@microsoft.com)başvurun.
 
 Şu ayrıntıları sağlayın:
 

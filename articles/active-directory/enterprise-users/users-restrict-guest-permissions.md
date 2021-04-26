@@ -13,22 +13,22 @@ ms.workload: identity
 ms.custom: it-pro
 ms.reviewer: krbain
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: bf2d0d3335468147575eb53a99940866baa18375
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: df4cb32720d80dd23289be7e760c9934e9a8db8a
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98222530"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107501510"
 ---
 # <a name="restrict-guest-access-permissions-preview-in-azure-active-directory"></a>Azure Active Directory 'de Konuk erişim izinlerini (Önizleme) kısıtlama
 
 Azure Active Directory (Azure AD), dış konuk kullanıcıların Azure AD 'de kuruluşlarındaki neleri görebileceğini kısıtlayasağlar. Konuk kullanıcılar varsayılan olarak Azure AD 'de sınırlı bir izin düzeyine ayarlanır, ancak üye kullanıcıları için varsayılan değer varsayılan Kullanıcı izinlerinin tam kümesidir. Bu, daha fazla kısıtlanmış erişim için Azure AD kuruluşunuzun dış işbirliği ayarlarındaki yeni bir Konuk Kullanıcı izin düzeyinin önizlemesidir, bu nedenle artık Konuk erişim seçenekleriniz şunlardır:
 
-İzin düzeyi         | Erişim düzeyi
-----------------         | ------------
-Üye kullanıcılarla aynı     | Konuklar, Azure AD kaynaklarına üye kullanıcıları olarak aynı erişime sahiptir
-Sınırlı erişim (varsayılan) | Konuklar, tüm gizli olmayan grupların üyeliğini görebilir
-**Kısıtlı erişim (yeni)**  | **Konuklar herhangi bir grubun üyeliğini göremez**
+İzin düzeyi         | Erişim düzeyi | Değer
+----------------         | ------------ | -----
+Üye kullanıcılarla aynı     | Konuklar, Azure AD kaynaklarına üye kullanıcıları olarak aynı erişime sahiptir | a0b1b346-4d3e-4e8b-98f8-753987be4970
+Sınırlı erişim (varsayılan) | Konuklar, tüm gizli olmayan grupların üyeliğini görebilir | 10dae51f-b6af-4016-8d66-8c2a99b929b3
+**Kısıtlı erişim (yeni)**  | **Konuklar herhangi bir grubun üyeliğini göremez** | **2af84b1e-32c8-42b7-82bc-dada82404023b**
 
 Konuk erişimi kısıtlandıktan sonra, konuklar yalnızca kendi kullanıcı profilini görüntüleyebilir. Konuk Kullanıcı asıl adına veya ObjectID 'ye göre arama yapılsa bile diğer kullanıcıları görüntüleme izni verilmez. Kısıtlı erişim, konuk kullanıcıların bulundukları grupların üyeliğini görmesini de kısıtlar. Konuk Kullanıcı izinleri dahil olmak üzere genel varsayılan kullanıcı izinleri hakkında daha fazla bilgi için bkz. [Azure Active Directory varsayılan kullanıcı Izinleri nelerdir?](../fundamentals/users-default-permissions.md).
 

@@ -5,17 +5,17 @@ ms.service: digital-twins
 ms.topic: include
 ms.date: 10/29/2020
 ms.author: baanders
-ms.openlocfilehash: 3f46f7131d5465ec6542d9212e310c04a656f50c
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 270be8a38a0419527622ffbdaa1874dfdc5d694c
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104774213"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107480744"
 ---
-Bu makalede Azure Digital TWINS ile çalışmak için öncelikle **bir Azure dijital TWINS örneği** ve bu uygulamayı kullanmak için gerekli izinleri ayarlamanız gerekir. Önceki çalışmalardan daha önceden ayarlanmış bir Azure dijital TWINS örneğiniz varsa, bu örneği kullanabilirsiniz.
+Bu makalede Azure Digital TWINS ile çalışmak için önce *bir Azure dijital TWINS örneği ayarlamanız* gerekir. Ayrıca, kullanmak için gerekli izinlere de ihtiyacınız vardır. Zaten ayarlanmış bir Azure dijital TWINS örneğiniz varsa, bunun yerine kullanabilirsiniz.
 
-Aksi takdirde, [*nasıl yapılır: örnek ve kimlik doğrulaması ayarlama*](../articles/digital-twins/how-to-set-up-instance-portal.md)bölümündeki yönergeleri izleyin. Yönergeler Ayrıca, her adımı başarıyla tamamlayıp tamamladığınızdan ve yeni örneğinizi kullanmaya başlamaya hazırlamış olduğunuzu doğrulamaya yönelik adımları da içerir.
+Aksi takdirde, [örnek ayarlama ve kimlik doğrulama](../articles/digital-twins/how-to-set-up-instance-portal.md)bölümündeki yönergeleri izleyin. Yönergeler, her adımı başarıyla tamamladığınızı doğrulamanıza yardımcı olacak bilgiler içerir.
 
-Azure dijital TWINS örneğinizi ayarladıktan sonra, örneğe daha sonra bağlanmanız için gereken aşağıdaki değerleri unutmayın:
-* Örneğin **ana bilgisayar adı**. Bu değeri Azure portal ([yönergeler](../articles/digital-twins/how-to-set-up-instance-portal.md#verify-success-and-collect-important-values)) içinde bulabilirsiniz.
-* örneği oluşturmak için kullandığınız **Azure aboneliği** (adı ya da kimliği çalışacaktır). [Azure Portal](https://portal.azure.com)örneğiniz Için aynı *genel bakış* sayfasını görüntüleyerek bir Azure dijital TWINS örneğinin hangi abonelikte olduğunu görebilirsiniz.
+Örneğinizi ayarladıktan sonra, aşağıdaki değerleri unutmayın. Örneğe daha sonra bağlanmak için bu değerlere ihtiyacınız olacak:
+* Örneğin *ana bilgisayar adı*. [Ana bilgisayar adını Azure Portal bulabilirsiniz](../articles/digital-twins/how-to-set-up-instance-portal.md#verify-success-and-collect-important-values).
+* Örneği oluşturmak için kullandığınız *Azure aboneliği* . Adı veya KIMLIĞI çalışır durumda. Aboneliğinizi, [Azure Portal](https://portal.azure.com)örneğinizin **genel bakış** sayfasında bulabilirsiniz.

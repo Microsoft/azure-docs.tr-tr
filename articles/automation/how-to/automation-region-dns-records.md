@@ -5,12 +5,12 @@ services: automation
 ms.subservice: process-automation
 ms.date: 11/25/2020
 ms.topic: conceptual
-ms.openlocfilehash: 8630afa7410aad81a7a3c61540fc74702fc6481c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d41d825c7bc33e05815c7528b436c85873859928
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100575994"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168935"
 ---
 # <a name="dns-records-for-azure-regions-used-by-azure-automation"></a>Azure Otomasyonu tarafından kullanılan Azure bölgelerinin DNS kayıtları
 
@@ -98,7 +98,7 @@ Azure Otomasyonu 'nda [özel bağlantıyı](../../private-link/private-link-over
 * [Azure IP aralıkları ve hizmet etiketleri-Azure genel](https://www.microsoft.com/download/details.aspx?id=56519)
 * [Azure IP aralıkları ve hizmet etiketleri-Azure Kamu](https://www.microsoft.com/download/details.aspx?id=57063)
 * [Azure IP aralıkları ve hizmet etiketleri-Azure Almanya](https://www.microsoft.com/download/details.aspx?id=57064)
-* [Azure IP aralıkları ve hizmet etiketleri – Azure Çin Vianet 21](https://www.microsoft.com/download/details.aspx?id=57062)
+* [Azure IP aralıkları ve hizmet etiketleri-Azure Çin Vianet 21](https://www.microsoft.com/download/details.aspx?id=57062)
 
 IP adresi dosyası Microsoft Azure veri merkezlerinde kullanılan IP adresi aralıklarını listeler. İşlem, SQL ve depolama aralıklarını içerir ve şu anda dağıtılmış aralıkları ve IP aralıklarında yaklaşan değişiklikleri yansıtır. Dosyada görüntülenen yeni aralıklar, en az bir hafta için veri merkezlerinde kullanılmıyor.
 

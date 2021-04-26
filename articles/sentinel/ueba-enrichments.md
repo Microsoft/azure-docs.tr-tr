@@ -16,10 +16,10 @@ ms.topic: reference
 ms.date: 01/04/2021
 ms.author: yelevin
 ms.openlocfilehash: daba8fc1f645b51dc8668c806be63744b6ae0842
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "97901793"
 ---
 # <a name="azure-sentinel-ueba-enrichments-reference"></a>Azure Sentinel ueba zenginleştirmeleri başvurusu
@@ -155,7 +155,7 @@ Bu tablolar, güvenlik olaylarınızın araştırılmasını odaklamak ve keskin
 | --- | --- | --- | --- |
 | **Kullanıcı eylemi son gerçekleştirmedi**<br>*(Lasttimeuserperformedadction)* | 180 | Kullanıcının aynı eylemi gerçekleştirdiği son zaman. | <Timestamp> |
 | **Benzer eylem geçmişte gerçekleştirilmedi**<br>*(SimilarActionWasn'tPerformedInThePast)* | 30 | Kullanıcı tarafından aynı kaynak sağlayıcıda hiçbir eylem gerçekleştirilmedi. | Doğru, yanlış |
-| **Kaynak IP konumu**<br>*(SourceIPLocation)* | *Yok* | Ülke, eylemin kaynak IP 'sinden çözüldü. | [Surey, England] |
+| **Kaynak IP konumu**<br>*(SourceIPLocation)* | *yok* | Ülke, eylemin kaynak IP 'sinden çözüldü. | [Surey, England] |
 | **Yaygın olmayan yüksek işlem hacmi**<br>*(UncommonHighVolumeOfOperations)* | 7 | Kullanıcı aynı sağlayıcı içinde benzer işlemler için bir veri bloğu gerçekleştirdi | Doğru, yanlış |
 | **Olağandışı sayıda Azure AD koşullu erişim başarısızlığı**<br>*(Unusualnumberofaadconditionalaccessarızaları)* | 5 | Koşullu erişim nedeniyle olağan dışı sayıda kullanıcı kimlik doğrulaması başarısız oldu | Doğru, yanlış |
 | **Olağan dışı sayıda cihaz eklendi**<br>*(UnusualNumberOfDevicesAdded)* | 5 | Kullanıcı olağan dışı sayıda cihaz ekledi. | Doğru, yanlış |

@@ -10,12 +10,12 @@ ms.author: laobri
 author: lobrien
 ms.date: 02/26/2021
 ms.custom: devx-track-python
-ms.openlocfilehash: 584e421b6beac0e4ecfab5b3e3cb735b8465e1b4
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 57f5da06909436e0cbce92559c29c309ca9e20e3
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102503530"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107819241"
 ---
 # <a name="what-are-azure-machine-learning-pipelines"></a>Azure Machine Learning işlem hatları nelerdir?
 
@@ -47,7 +47,7 @@ Bağımsız adımlar, birden fazla veri bilimcilerinin aynı işlem hattı üzer
 
 İşlem hatları ile farklı görevler için farklı donanımlar kullanmayı seçebilirsiniz. Azure, kullandığınız çeşitli [işlem hedeflerini](concept-azure-machine-learning-architecture.md) koordine eder, bu sayede ara veriniz aşağı akış işlem hedeflerine sorunsuzca akar.
 
-İşlem [hattı denemeleri için ölçümleri](./how-to-track-experiments.md) doğrudan Azure Portal veya [çalışma alanı giriş sayfanız (Önizleme)](https://ml.azure.com)içinde izleyebilirsiniz. Bir işlem hattı yayımlandıktan sonra, herhangi bir platform veya yığından işlem hattını yeniden çalıştırmanıza olanak sağlayan bir REST uç noktası yapılandırabilirsiniz.
+İşlem [hattı denemeleri için ölçümleri](./how-to-log-view-metrics.md) doğrudan Azure Portal veya [çalışma alanı giriş sayfanız (Önizleme)](https://ml.azure.com)içinde izleyebilirsiniz. Bir işlem hattı yayımlandıktan sonra, herhangi bir platform veya yığından işlem hattını yeniden çalıştırmanıza olanak sağlayan bir REST uç noktası yapılandırabilirsiniz.
 
 Kısacası, makine öğrenimi yaşam döngüsünün tüm karmaşık görevlerine işlem hatları ile yardımcı olabilir. Diğer Azure ardışık düzen teknolojilerinin kendi güçlü yönleri vardır. [Azure Data Factory işlem hatları](../data-factory/concepts-pipelines-activities.md) , verilerle çalışma ve [Azure Pipelines](https://azure.microsoft.com/services/devops/pipelines/) sürekli tümleştirme ve dağıtım için doğru araçtır. Ancak odaklanmanız makine öğrenimi ise, Azure Machine Learning işlem hatları, iş akışı gereksinimleriniz için en iyi seçenektir. 
 

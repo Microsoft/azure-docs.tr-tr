@@ -12,12 +12,12 @@ manager: daveba
 ms.reviewer: jairoc
 ms.collection: M365-identity-device-management
 ms.custom: has-adal-ref
-ms.openlocfilehash: 1eb4194354a07d5b580f07cfe5962785a4e100bd
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 63415037b9f91936e04fa715405bfb86bf022cdd
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104578031"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106551773"
 ---
 # <a name="troubleshooting-hybrid-azure-active-directory-joined-devices"></a>Hibrit Azure Active Directory'ye katılmış cihazlarla ilgili sorunları giderme
 
@@ -371,6 +371,12 @@ Ekleme hatalarıyla ilgili aşamayı ve hata kodu hatasını bulmak için Olay G
    - Neden: sunucu bağlantısı anormal olarak sonlandırıldı.
    - Çözüm: bir süre sonra yeniden deneyin veya alternatif bir kararlı ağ konumundan katılmayı deneyin.
 
+##### <a name="other-errors"></a>Diğer hatalar
+
+- **DSREG_AUTOJOIN_ADCONFIG_READ_FAILED** (0x801c001d/-2145648611)
+   - Neden: EventID 220, Kullanıcı cihaz kaydı olay günlüklerinde bulunur. Windows, Active Directory bilgisayar nesnesine erişemiyor. Olaya bir Windows hata kodu dahil edilebilir. ERROR_NO_SUCH_LOGON_SESSION (1312) ve ERROR_NO_SUCH_USER (1317) hata kodları için, bunlar şirket içi AD 'deki çoğaltma sorunlarıyla ilgilidir.
+   - Çözüm: AD 'de çoğaltma sorunlarını giderin. Çoğaltma sorunları geçici olabilir ve bir süre sonra değişebilir.
+
 ##### <a name="federated-join-server-errors"></a>Federasyon birleşimi sunucu hataları
 
 | Sunucu hata kodu | Sunucu hata iletisi | Olası nedenler | Çözüm |
@@ -417,4 +423,4 @@ Değerler **Hayır** ise bunun nedeni şu olabilir:
 
 [Dsregcmd komutunu kullanarak cihazlarda sorun gidermeye](troubleshoot-device-dsregcmd.md) devam edin
 
-Sorular için bkz. [cihaz YÖNETIMI SSS](faq.md)
+Sorular için bkz. [cihaz YÖNETIMI SSS](faq.yml)

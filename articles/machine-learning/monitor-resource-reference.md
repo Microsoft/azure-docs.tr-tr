@@ -9,13 +9,13 @@ ms.reviewer: larryfr
 ms.author: aashishb
 author: aashishb
 ms.custom: subject-monitoring
-ms.date: 10/02/2020
-ms.openlocfilehash: f130fc0c65c49c33c838812fc2758619e0d1bca0
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.date: 04/07/2021
+ms.openlocfilehash: de4d934144d6721db8c00d7199061842e518e44f
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102521348"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107031078"
 ---
 # <a name="monitoring-azure-machine-learning-data-reference"></a>Azure Machine Learning veri başvurusunu izleme
 
@@ -28,49 +28,62 @@ Bu bölümde, Azure Machine Learning için toplanan otomatik olarak toplanan tü
 **Modelleme**
 
 | Metric | Birim | Description |
-| ----- | ----- | ----- |
-| Model dağıtılamadı | Count | Başarısız olan model dağıtımı sayısı. |
-| Model dağıtımı başlatıldı | Count | Başlatılan model dağıtımı sayısı. |
-| Model dağıtımı başarılı oldu | Count | Başarılı olan model dağıtımı sayısı. |
-| Model kaydı başarısız oldu | Count | Başarısız olan model kaydı sayısı. |
-| Model kaydı başarılı oldu | Count | Başarılı olan model kaydı sayısı. |
+|--|--|--|
+| Model kaydı başarılı oldu | Count | Bu çalışma alanında başarılı olan model kaydı sayısı |
+| Model kaydı başarısız oldu | Count | Bu çalışma alanında başarısız olan model kayıtlarının sayısı |
+| Model Dağıtımı başladı | Count | Bu çalışma alanında başlatılan model dağıtımı sayısı |
+| Model Dağıtımı başarılı oldu | Count | Bu çalışma alanındaki başarılı olan model dağıtımı sayısı |
+| Model Dağıtımı başarısız oldu | Count | Bu çalışma alanında başarısız olan model dağıtımı sayısı |
 
 **Kota**
 
 Kota bilgileri yalnızca Azure Machine Learning işlem amaçlıdır.
 
 | Metric | Birim | Description |
-| ----- | ----- | ----- |
-| Etkin çekirdekler | Count | Etkin işlem çekirdekleri sayısı. |
-| Etkin düğümler | Count | Etkin düğümlerin sayısı. |
-| Boştaki çekirdekler | Count | Boşta işlem çekirdekleri sayısı. |
-| Boştaki düğümler | Count | Boşta işlem düğümlerinin sayısı. |
-| Çekirdekleri bırakma | Count | Çekirdekleri bırakma sayısı. |
-| Düğümlerden çıkılıyor | Count | Düğüm sayısı. |
-| Önden çekirdekler | Count | Yok edilecek çekirdek sayısı. |
-| Önden düğümler | Count | Yok edilecek düğüm sayısı. |
-| Kota kullanım yüzdesi | Yüzde | Kullanılan Kota yüzdesi. |
-| Toplam çekirdek | Count | Toplam çekirdek sayısı. |
-| Toplam düğüm sayısı | Count | Toplam düğüm sayısı. |
-| Kullanılamayan çekirdekler | Count | Kullanılamayan çekirdek sayısı. |
-| Kullanılamayan düğümler | Count | Kullanılamayan düğüm sayısı. |
+|--|--|--|
+| Toplam düğüm sayısı | Count | Toplam düğüm sayısı. Bu toplam etkin düğümlerin, boşta düğümlerin, kullanılamayan düğümlerin, Önkullanılmayan düğümlerin, düğüm dışı düğümlerin bazılarını içerir |
+| Etkin düğümler | Count | Etkin düğümlerin sayısı. Etkin bir işi çalıştıran düğümler. |
+| Boştaki düğümler | Count | Boştaki düğüm sayısı. Boştaki düğümler, herhangi bir işi çalıştırmayan ancak varsa yeni işi kabul edebilecek düğümlerdir. |
+| Kullanılamayan düğümler | Count | Kullanılamayan düğüm sayısı. Çözümlenebilen bazı sorunlar nedeniyle kullanılamaz düğümler çalışmıyor. Azure bu düğümleri geri dönüştürecek. |
+| Önden düğümler | Count | Yok edilecek düğüm sayısı. Bu düğümler, kullanılabilir düğüm havuzundan alınan düşük öncelikli düğümlerdir. |
+| Düğümlerden çıkılıyor | Count | Düğüm sayısı. Düğüm ayrıldığınızda, bir işi işlemeyi tamamlamış olan düğümlerdir ve boşta durumuna gidecektir. |
+| Toplam çekirdek sayısı | Count | Toplam çekirdek sayısı |
+| Etkin çekirdekler | Count | Etkin çekirdek sayısı |
+| Boştaki çekirdekler | Count | Boşta çekirdek sayısı |
+| Kullanılamayan çekirdekler | Count | Kullanılamayan çekirdek sayısı |
+| Önden çekirdekler | Count | Yok edilecek çekirdek sayısı |
+| Çekirdekleri bırakma | Count | Bırakma çekirdekleri sayısı |
+| Kota kullanım yüzdesi | Count | Kullanılan Kota yüzdesi |
 
 **Kaynak**
 
-| Metric | Birim | Description |
-| ----- | ----- | ----- |
-| Cpukullanımı | Yüzde | Bir çalıştırma/iş sırasında belirli bir düğüm için CPU 'nun yüzde ne kadarı kullanıldı. Bu ölçüm yalnızca bir düğüm üzerinde bir iş çalışırken yayımlanır. Bir iş, bir veya daha fazla düğüm kullanabilir. Bu ölçüm düğüm başına yayımlanır. |
-| Gpukullanım | Yüzde | Bir çalıştırma/iş sırasında belirli bir düğüm için GPU 'nun ne kadarının kullanıldığı. Bir düğümde bir veya daha fazla GPU bulunabilir. Bu ölçüm, düğüm başına GPU başına yayımlanır. |
+| Metric| Birim | Description |
+|--|--|--|
+| Cpukullanımı | Count | Bir CPU düğümündeki kullanım yüzdesi. Kullanım, tek dakikalık aralıklarla raporlanır. |
+| Gpukullanım | Count | Bir GPU düğümündeki kullanım yüzdesi. Kullanım, tek dakikalık aralıklarla raporlanır. |
+| Gpumemoryutilileştirme | Count | Bir GPU düğümündeki bellek kullanımının yüzdesi. Kullanım, tek dakikalık aralıklarla raporlanır. |
+| Gpuenerjcayjoules | Count | Bir GPU düğümündeki Joules 'de Aralık enerji. Enerji, tek dakikalık aralıklarla raporlanır. |
 
 **Çalıştır**
 
-Eğitim çalıştırmaları hakkında bilgiler.
+Çalışma alanı için eğitim çalıştırmaları hakkında bilgiler.
 
 | Metric | Birim | Description |
-| ----- | ----- | ----- |
-| Tamamlanan çalıştırmalar | Count | Tamamlanan çalıştırma sayısı. |
-| Başarısız çalıştırmalar | Count | Başarısız çalıştırmaların sayısı. |
-| Başlatılan çalıştırmalar | Count | Başlatılan çalıştırma sayısı. |
+|--|--|--|
+| İptal edilen çalıştırmalar | Count | Bu çalışma alanı için iptal edilen çalıştırma sayısı. Bir çalıştırma başarıyla iptal edildiğinde sayı güncelleştirilir. |
+| Istenen çalıştırmaları iptal et | Count | Bu çalışma alanı için iptal edilen çalıştırma sayısı. Bir çalıştırma için iptal isteği alındığında sayı güncelleştirilir. |
+| Tamamlanan çalıştırmalar | Count | Bu çalışma alanı için çalıştırma sayısı başarıyla tamamlandı. Bir çalıştırma tamamlandığında ve çıkış toplandığında sayı güncelleştirilir. |
+| Başarısız çalıştırmalar | Count | Bu çalışma alanı için başarısız olan çalıştırma sayısı. Bir çalıştırma başarısız olduğunda sayı güncelleştirilir. |
+| Çalıştırmalar sonlandırılıyor | Count | Bu çalışma alanı için sonlandırılıyor durum girilen çalıştırma sayısı. Bir çalıştırma tamamlandığında ancak çıkış koleksiyonu hala devam ederken sayı güncelleştirilir. | 
+| Yanıt vermiyor çalıştırmaları | Count | Bu çalışma alanı için yanıt vermeyen çalıştırma sayısı. Bir çalıştırma yanıt vermiyorsa, sayı güncelleştirilir. |
+| Başlatılmamış çalıştırmalar | Count | Bu çalışma alanı için başlatılmamış durumdaki çalıştırma sayısı. Sayı, çalıştırma oluşturmak için bir istek alındığında ancak çalıştırma bilgisi henüz doldurulmadığında güncelleştirilir. |
+| Çalıştırmalar hazırlanıyor | Count | Bu çalışma alanı için hazırlanma çalıştırmaların sayısı. Çalışma ortamı hazırlanırken bir çalıştırma duruma hazırlık girdiğinde sayı güncellenir. |
+| Sağlama çalıştırmaları | Count | Bu çalışma alanı için sağlama olan çalıştırma sayısı. Bir çalıştırma, işlem hedefi oluşturmayı veya sağlamayı beklerken, sayı güncelleştirilir. |
+| Sıraya alınan çalıştırmalar | Count | Bu çalışma alanı için sıraya alınan çalıştırmaların sayısı. Bir çalıştırma işlem hedefinde sıraya alınmışsa, sayı güncelleştirilir. Gerekli işlem düğümlerinin hazırlanmasını beklerken gerçekleşebilir. |
+| Başlatılan çalıştırmalar | Count | Bu çalışma alanı için çalıştırılan çalıştırma sayısı. Çalıştırma, gerekli kaynaklar üzerinde çalışmaya başladığında, sayı güncelleştirilir. |
+| Çalıştırmalar başlatılıyor | Count | Bu çalışma alanı için başlatılan çalıştırma sayısı. Sayı, çalıştırma kimliği oluşturma ve çalıştırma kimliği gibi çalışma bilgisi doldurulduktan sonra güncelleştirilir. |
+| Hatalar | Count | Bu çalışma alanındaki çalıştırma hatalarının sayısı. Çalışma bir hatayla karşılaştığında, sayı güncellenir. |
+| Uyarılar | Count | Bu çalışma alanındaki çalışma uyarısı sayısı. Bir çalıştırma bir uyarıyla karşılaştığında, sayı güncellenir. |
 
 ## <a name="metric-dimensions"></a>Ölçüm boyutları
 

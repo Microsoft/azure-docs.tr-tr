@@ -6,18 +6,18 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 author: cpercy737
 ms.author: camper
-ms.date: 03/22/2021
+ms.date: 04/12/2021
 ms.custom: devx-track-terraform
-ms.openlocfilehash: 53edd3ec9a8d30d0c25f994db4a8b6f0199c2169
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 7f09e744dfdd7be73c62c70bcfa91804f14aaa68
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105558440"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313683"
 ---
 # <a name="azure-customer-usage-attribution"></a>Azure müşteri kullanım atısyonu
 
-Müşteri kullanımı attributıon, IP 'nizi sizinle bir iş ortağı olarak dağıttığınızda oluşturulan müşteri aboneliklerindeki Azure kaynaklarından kullanımı ilişkilendirir. Bu ilişkilerin iç Microsoft sistemlerinde oluşi, yazılımınızı çalıştıran Azure ayak izine daha fazla görünürlük getirir. [Ticari Market 'Teki Azure Uygulama teklifleri](#commercial-marketplace-azure-apps)için, bu Izleme özelliği Microsoft satış ekipleriyle uyum sağlamanıza ve Microsoft iş ortağı programları için kredi elde etmenize yardımcı olur.
+Müşteri kullanımı attributıon, IP 'nizi sizinle bir iş ortağı olarak dağıttığınızda oluşturulan müşteri aboneliklerindeki Azure kaynaklarından kullanımı ilişkilendirir. Bu ilişkilerin iç Microsoft sistemlerinde oluşi, yazılımınızı çalıştıran Azure ayak izine daha fazla görünürlük getirir. [Ticari Market 'Teki Azure Uygulama teklifleri](#commercial-marketplace-azure-apps)için, bu Izleme özelliği Microsoft satış ekipleriyle uyum sağlamanıza ve Microsoft iş ortağı programları için kredi elde etmenize yardımcı olur. Müşteri kullanım atısyonu [, ticari Market 'Teki Azure sanal makine teklifleri](./azure-vm-create.md)için geçerli değildir. Azure tüketiminin son müşteri aboneliklerinde izlenmesini sağlamak için bir market yayımcısının sanal makine teklifleri için yapması gereken bir şey yoktur.
 
 Müşteri kullanım attributıon üç dağıtım seçeneğini destekler:
 

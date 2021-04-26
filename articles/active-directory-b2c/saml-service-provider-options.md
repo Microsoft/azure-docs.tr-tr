@@ -8,17 +8,17 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: how-to
-ms.date: 03/15/2021
+ms.date: 04/05/2021
 ms.author: mimart
 ms.subservice: B2C
 ms.custom: fasttrack-edit
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 09cfdd026105a34db976118f38b011e2c4578a24
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fea39388b6b4387dfc4fe95d1cdfb3e523a8089c
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103470784"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106382445"
 ---
 # <a name="options-for-registering-a-saml-application-in-azure-ad-b2c"></a>Azure AD B2C SAML uygulaması kaydetme seçenekleri
 
@@ -34,7 +34,86 @@ Bu makalede, SAML uygulamanızla Azure Active Directory (Azure AD B2C) bağlanı
 
 ::: zone pivot="b2c-custom-policy"
 
-## <a name="encrypted-saml-assertions"></a>Şifrelenmiş SAML onayları
+
+## <a name="saml-response-signature"></a>SAML yanıt imzası
+
+SAML iletilerini imzalamak için kullanılacak bir sertifika belirtebilirsiniz. İleti, bir `<samlp:Response>` SAML yanıtı İçindeki öğesidir ve uygulamaya gönderilir.
+
+Zaten bir ilke anahtarınız yoksa [bir tane oluşturun](saml-service-provider.md#create-a-policy-key). Ardından, `SamlMessageSigning` SAML belirteci verenin teknik profilindeki meta veri öğesini yapılandırın. , `StorageReferenceId` Ilke anahtarı adına başvurmalıdır.
+
+```xml
+<ClaimsProvider>
+  <DisplayName>Token Issuer</DisplayName>
+  <TechnicalProfiles>
+    <!-- SAML Token Issuer technical profile -->
+    <TechnicalProfile Id="Saml2AssertionIssuer">
+      <DisplayName>Token Issuer</DisplayName>
+      <Protocol Name="SAML2"/>
+      <OutputTokenFormat>SAML2</OutputTokenFormat>
+        ...
+      <CryptographicKeys>
+        <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_SamlMessageCert"/>
+        ...
+      </CryptographicKeys>
+    ...
+    </TechnicalProfile>
+```
+
+### <a name="saml-response-signature-algorithm"></a>SAML yanıtı imza algoritması
+
+SAML onaylama işlemi imzalamak için kullanılan imza algoritmasını yapılandırabilirsiniz. Olası değerler şunlardır,, `Sha256` `Sha384` `Sha512` veya `Sha1` . Teknik profilin ve uygulamanın aynı imza algoritmasını kullanmasından emin olun. Yalnızca sertifikanızın desteklediği algoritmayı kullanın.
+
+`XmlSignatureAlgorithm`Bağlı olan taraf meta veri öğesi içindeki meta veri anahtarını kullanarak imza algoritmasını yapılandırın.
+
+```xml
+<RelyingParty>
+  <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
+  <TechnicalProfile Id="PolicyProfile">
+    <DisplayName>PolicyProfile</DisplayName>
+    <Protocol Name="SAML2"/>
+    <Metadata>
+      <Item Key="XmlSignatureAlgorithm">Sha256</Item>
+    </Metadata>
+   ..
+  </TechnicalProfile>
+</RelyingParty>
+```
+
+## <a name="saml-assertions-signature"></a>SAML onaylama imzası
+
+Uygulamanız SAML onaylama bölümünün imzalanmasını beklediğinde, SAML hizmeti sağlayıcısının ' ı ' olarak ayarladığınızdan emin olun `WantAssertionsSigned` `true` . Olarak ayarlanırsa `false` veya yoksa onaylama bölümü işaret etmez. Aşağıdaki örnek, olarak ayarlanmış bir SAML hizmet sağlayıcısı meta verilerini gösterir `WantAssertionsSigned` `true` .
+
+```xml
+<EntityDescriptor ID="id123456789" entityID="https://samltestapp2.azurewebsites.net" validUntil="2099-12-31T23:59:59Z" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+  <SPSSODescriptor  WantAssertionsSigned="true" AuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+  ...
+  </SPSSODescriptor>
+</EntityDescriptor>
+```  
+
+### <a name="saml-assertions-signature-certificate"></a>SAML onayları imza sertifikası
+
+İlkenize SAML yanıtının SAML onayları bölümünü imzalamak için kullanılacak bir sertifika belirtilmelidir. Zaten bir ilke anahtarınız yoksa [bir tane oluşturun](saml-service-provider.md#create-a-policy-key). Ardından, `SamlAssertionSigning` SAML belirteci verenin teknik profilindeki meta veri öğesini yapılandırın. , `StorageReferenceId` Ilke anahtarı adına başvurmalıdır.
+
+```xml
+<ClaimsProvider>
+  <DisplayName>Token Issuer</DisplayName>
+  <TechnicalProfiles>
+    <!-- SAML Token Issuer technical profile -->
+    <TechnicalProfile Id="Saml2AssertionIssuer">
+      <DisplayName>Token Issuer</DisplayName>
+      <Protocol Name="SAML2"/>
+      <OutputTokenFormat>SAML2</OutputTokenFormat>
+        ...
+      <CryptographicKeys>
+        <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_SamlMessageCert"/>
+        ...
+      </CryptographicKeys>
+    ...
+    </TechnicalProfile>
+```
+
+## <a name="saml-assertions-encryption"></a>SAML onayları şifrelemesi
 
 Uygulamanız SAML onayları 'nin şifreli bir biçimde olmasını beklediği zaman, Azure AD B2C ilkesinde şifrelemenin etkinleştirildiğinden emin olmanız gerekir.
 
@@ -158,26 +237,6 @@ SAML test uygulaması ile test etmek için kullanabileceğiniz, örnek bir ilke 
 1. `TenantId`Kiracı adınızla eşleşecek şekilde güncelleştirin, örneğin *contoso.b2clogin.com*.
 1. İlke adını *B2C_1A_signup_signin_saml* tutun.
 
-## <a name="saml-response-signature-algorithm"></a>SAML yanıtı imza algoritması
-
-SAML onaylama işlemi imzalamak için kullanılan imza algoritmasını yapılandırabilirsiniz. Olası değerler şunlardır,, `Sha256` `Sha384` `Sha512` veya `Sha1` . Teknik profilin ve uygulamanın aynı imza algoritmasını kullanmasından emin olun. Yalnızca sertifikanızın desteklediği algoritmayı kullanın.
-
-`XmlSignatureAlgorithm`Bağlı olan taraf meta veri öğesi içindeki meta veri anahtarını kullanarak imza algoritmasını yapılandırın.
-
-```xml
-<RelyingParty>
-  <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
-  <TechnicalProfile Id="PolicyProfile">
-    <DisplayName>PolicyProfile</DisplayName>
-    <Protocol Name="SAML2"/>
-    <Metadata>
-      <Item Key="XmlSignatureAlgorithm">Sha256</Item>
-    </Metadata>
-   ..
-  </TechnicalProfile>
-</RelyingParty>
-```
-
 ## <a name="saml-response-lifetime"></a>SAML yanıtı ömrü
 
 SAML yanıtının geçerli kaldığı sürenin uzunluğunu yapılandırabilirsiniz. `TokenLifeTimeInSeconds`SAML belirteci verenin teknik profili içindeki meta veri öğesini kullanarak yaşam süresini ayarlayın. Bu değer, `NotBefore` belirteç verme sırasında hesaplanan zaman damgasından geçebilecek saniye sayısıdır. Varsayılan yaşam süresi 300 saniyedir (5 dakika).
@@ -279,9 +338,9 @@ Farklı değerlere bağlı birden çok SAML uygulamanız varsa `entityID` , `iss
 
 `UseTechnicalProfileForSessionManagement`Öğesini ve [Samlssosessionprovider](custom-policy-reference-sso.md#samlssosessionprovider)öğesini kullanarak Azure AD B2C ve SAML bağlı olan taraf uygulaması arasındaki oturumu yönetebilirsiniz.
 
-## <a name="force-users-to-re-authenticate"></a>Kullanıcıları yeniden kimlik doğrulamaya zorla 
+## <a name="force-users-to-reauthenticate"></a>Kullanıcıları yeniden kimlik doğrulaması için zorlayın 
 
-Kullanıcıları yeniden kimlik doğrulamaya zorlamak için, uygulama `ForceAuthn` SAML kimlik doğrulama isteğine özniteliğini içerebilir. `ForceAuthn`Özniteliği bir Boole değeridir. True olarak ayarlandığında, kullanıcılar oturumu Azure AD B2C geçersiz kılınır ve Kullanıcı yeniden kimlik doğrulamaya zorlanır. Aşağıdaki SAML kimlik doğrulama isteği, `ForceAuthn` özniteliği true olarak ayarlamayı gösterir. 
+Kullanıcıları yeniden kimlik doğrulamaya zorlamak için, uygulama `ForceAuthn` SAML kimlik doğrulama isteğine özniteliğini içerebilir. `ForceAuthn`Özniteliği bir Boole değeridir. True olarak ayarlandığında, kullanıcıların oturumu Azure AD B2C geçersiz kılınır ve Kullanıcı yeniden kimlik doğrulaması zorlanır. Aşağıdaki SAML kimlik doğrulama isteği, `ForceAuthn` özniteliği true olarak ayarlamayı gösterir. 
 
 
 ```xml
@@ -290,6 +349,28 @@ Kullanıcıları yeniden kimlik doğrulamaya zorlamak için, uygulama `ForceAuth
        ForceAuthn="true" ...>
     ...
 </samlp:AuthnRequest>
+```
+
+## <a name="sign-the-azure-ad-b2c-idp-saml-metadata"></a>IDP SAML meta verilerini Azure AD B2C imzala
+
+Azure AD B2C, uygulama için gerekliyse SAML IDP meta veri belgesini imzalayabilmeniz için talimat verebilir. Zaten bir ilke anahtarınız yoksa [bir tane oluşturun](saml-service-provider.md#create-a-policy-key). Ardından, `MetadataSigning` SAML belirteci verenin teknik profilindeki meta veri öğesini yapılandırın. , `StorageReferenceId` İlke anahtarı adına başvurmalıdır.
+
+```xml
+<ClaimsProvider>
+  <DisplayName>Token Issuer</DisplayName>
+  <TechnicalProfiles>
+    <!-- SAML Token Issuer technical profile -->
+    <TechnicalProfile Id="Saml2AssertionIssuer">
+      <DisplayName>Token Issuer</DisplayName>
+      <Protocol Name="SAML2"/>
+      <OutputTokenFormat>SAML2</OutputTokenFormat>
+        ...
+      <CryptographicKeys>
+        <Key Id="MetadataSigning" StorageReferenceId="B2C_1A_SamlMetadataCert"/>
+        ...
+      </CryptographicKeys>
+    ...
+    </TechnicalProfile>
 ```
 
 ## <a name="debug-the-saml-protocol"></a>SAML protokolünde hata ayıklama

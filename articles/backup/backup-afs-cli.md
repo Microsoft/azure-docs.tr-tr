@@ -3,12 +3,12 @@ title: Azure CLı ile Azure dosya paylaşımlarını yedekleme
 description: Azure CLı kullanarak kurtarma hizmetleri kasasındaki Azure dosya paylaşımlarını nasıl yedekleyeceğinizi öğrenin
 ms.topic: conceptual
 ms.date: 01/14/2020
-ms.openlocfilehash: 34eea8daa6a0a8920c842178664055838b06a78a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a5f7472c511a5a50415a6ceb47497dd6f4f1e60b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94565900"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773630"
 ---
 # <a name="back-up-azure-file-shares-with-azure-cli"></a>Azure CLı ile Azure dosya paylaşımlarını yedekleme
 
@@ -30,7 +30,7 @@ Kurtarma Hizmetleri Kasası, tüm yedekleme öğelerinde birleştirilmiş bir g�
 
 Kurtarma Hizmetleri Kasası oluşturmak için aşağıdaki adımları izleyin:
 
-1. Kasa, bir kaynak grubuna yerleştirilir. Mevcut bir kaynak grubunuz yoksa, [az Group Create](/cli/azure/group#az-group-create) komutuyla yeni bir tane oluşturun. Bu öğreticide, Doğu ABD bölgesinde yeni kaynak grubu *azurefiles* oluşturacağız.
+1. Kasa, bir kaynak grubuna yerleştirilir. Mevcut bir kaynak grubunuz yoksa, [az Group Create](/cli/azure/group#az_group_create) komutuyla yeni bir tane oluşturun. Bu öğreticide, Doğu ABD bölgesinde yeni kaynak grubu *azurefiles* oluşturacağız.
 
     ```azurecli-interactive
     az group create --name AzureFiles --location eastus --output table
@@ -42,7 +42,7 @@ Kurtarma Hizmetleri Kasası oluşturmak için aşağıdaki adımları izleyin:
     eastus      AzureFiles
     ```
 
-1. Kasayı oluşturmak için [az Backup Kasası Create](/cli/azure/backup/vault#az-backup-vault-create) cmdlet 'ini kullanın. Kaynak grubu için kullanılan kasa için aynı konumu belirtin.
+1. Kasayı oluşturmak için [az Backup Kasası Create](/cli/azure/backup/vault#az_backup_vault_create) cmdlet 'ini kullanın. Kaynak grubu için kullanılan kasa için aynı konumu belirtin.
 
     Aşağıdaki örnek, Doğu ABD bölgesinde *azurefilesvault* adlı bir kurtarma hizmetleri Kasası oluşturur.
 
@@ -58,11 +58,11 @@ Kurtarma Hizmetleri Kasası oluşturmak için aşağıdaki adımları izleyin:
 
 ## <a name="enable-backup-for-azure-file-shares"></a>Azure dosya paylaşımları için yedeklemeyi etkinleştir
 
-Bu bölümde, yedeklemesini yapılandırmak istediğiniz bir Azure dosya paylaşımınız olduğu varsayılır. Yoksa, [az Storage Share Create](/cli/azure/storage/share#az-storage-share-create) komutunu kullanarak bir Azure dosya paylaşma oluşturun.
+Bu bölümde, yedeklemesini yapılandırmak istediğiniz bir Azure dosya paylaşımınız olduğu varsayılır. Yoksa, [az Storage Share Create](/cli/azure/storage/share#az_storage_share_create) komutunu kullanarak bir Azure dosya paylaşma oluşturun.
 
-Dosya paylaşımları için yedeklemeyi etkinleştirmek üzere, bir yedekleme işinin ne zaman çalışacağını ve kurtarma noktalarının ne kadar süreyle depolandığını tanımlayan bir koruma ilkesi oluşturmanız gerekir. [Az Backup Policy Create](/cli/azure/backup/policy#az-backup-policy-create) cmdlet 'ini kullanarak bir yedekleme ilkesi oluşturabilirsiniz.
+Dosya paylaşımları için yedeklemeyi etkinleştirmek üzere, bir yedekleme işinin ne zaman çalışacağını ve kurtarma noktalarının ne kadar süreyle depolandığını tanımlayan bir koruma ilkesi oluşturmanız gerekir. [Az Backup Policy Create](/cli/azure/backup/policy#az_backup_policy_create) cmdlet 'ini kullanarak bir yedekleme ilkesi oluşturabilirsiniz.
 
-Aşağıdaki örnek, *Schedule 1* yedekleme ilkesini kullanarak *afsaccount* depolama hesabındaki *azurefiles* dosya paylaşımının yedeklemesini etkinleştirmek için [az Backup Protection Enable-for-azurefileshare](/cli/azure/backup/protection#az-backup-protection-enable-for-azurefileshare) cmdlet 'ini kullanır:
+Aşağıdaki örnek, *Schedule 1* yedekleme ilkesini kullanarak *afsaccount* depolama hesabındaki *azurefiles* dosya paylaşımının yedeklemesini etkinleştirmek için [az Backup Protection Enable-for-azurefileshare](/cli/azure/backup/protection#az_backup_protection_enable_for_azurefileshare) cmdlet 'ini kullanır:
 
 ```azurecli-interactive
 az backup protection enable-for-azurefileshare --vault-name azurefilesvault --resource-group  azurefiles --policy-name schedule1 --storage-account afsaccount --azure-file-share azurefiles  --output table
@@ -74,16 +74,16 @@ Name                                  ResourceGroup
 0caa93f4-460b-4328-ac1d-8293521dd928  azurefiles
 ```
 
-Çıkışdaki **ad** özniteliği yedekleme hizmeti tarafından **yedekleme işleminizi etkinleştirmek** için oluşturulan işin adına karşılık gelir. İşin durumunu izlemek için [az Backup Job Show](/cli/azure/backup/job#az-backup-job-show) cmdlet 'ini kullanın.
+Çıkışdaki **ad** özniteliği yedekleme hizmeti tarafından **yedekleme işleminizi etkinleştirmek** için oluşturulan işin adına karşılık gelir. İşin durumunu izlemek için [az Backup Job Show](/cli/azure/backup/job#az_backup_job_show) cmdlet 'ini kullanın.
 
 ## <a name="trigger-an-on-demand-backup-for-file-share"></a>Dosya paylaşma için isteğe bağlı yedekleme tetikleyin
 
-Yedekleme ilkesinin işi zamanlanan saatte çalıştırmasını beklemek yerine dosya paylaşımınız için isteğe bağlı bir yedekleme tetiklemeniz istiyorsanız [az Backup Protection Backup-Now](/cli/azure/backup/protection#az-backup-protection-backup-now) cmdlet 'ini kullanın.
+Yedekleme ilkesinin işi zamanlanan saatte çalıştırmasını beklemek yerine dosya paylaşımınız için isteğe bağlı bir yedekleme tetiklemeniz istiyorsanız [az Backup Protection Backup-Now](/cli/azure/backup/protection#az_backup_protection_backup_now) cmdlet 'ini kullanın.
 
 İsteğe bağlı yedeklemeyi tetiklemek için aşağıdaki parametreleri tanımlamanız gerekir:
 
-* **--Container-Name** , dosya paylaşımının barındırıldığı depolama hesabının adıdır. Kapsayıcının **adını** veya **kolay adını** almak için [az Backup Container List](/cli/azure/backup/container#az-backup-container-list) komutunu kullanın.
-* **--öğe-adı** , isteğe bağlı yedeklemeyi tetiklemek istediğiniz dosya paylaşımının adıdır. Yedeklenen öğenin **adını** veya **kolay adını** almak için [az Backup Item List](/cli/azure/backup/item#az-backup-item-list) komutunu kullanın.
+* **--Container-Name** , dosya paylaşımının barındırıldığı depolama hesabının adıdır. Kapsayıcının **adını** veya **kolay adını** almak için [az Backup Container List](/cli/azure/backup/container#az_backup_container_list) komutunu kullanın.
+* **--öğe-adı** , isteğe bağlı yedeklemeyi tetiklemek istediğiniz dosya paylaşımının adıdır. Yedeklenen öğenin **adını** veya **kolay adını** almak için [az Backup Item List](/cli/azure/backup/item#az_backup_item_list) komutunu kullanın.
 * **--sakla-Until** , kurtarma noktasını bekletene kadar olan tarihi belirtir. Değer UTC saat biçiminde ayarlanmalıdır (gg-aa-yyyy).
 
 Aşağıdaki örnek, *20-01-2020*'e kadar bekletme ile *afsaccount* depolama hesabındaki *azurefiles* FileShare için isteğe bağlı bir yedeklemeyi tetikler.
@@ -98,7 +98,7 @@ Name                                  ResourceGroup
 9f026b4f-295b-4fb8-aae0-4f058124cb12  azurefiles
 ```
 
-Çıktıda **ad** özniteliği, "isteğe bağlı yedekleme" işlemi için yedekleme hizmeti tarafından oluşturulan işin adına karşılık gelir. Bir işin durumunu izlemek için [az Backup Job Show](/cli/azure/backup/job#az-backup-job-show) cmdlet 'ini kullanın.
+Çıktıda **ad** özniteliği, "isteğe bağlı yedekleme" işlemi için yedekleme hizmeti tarafından oluşturulan işin adına karşılık gelir. Bir işin durumunu izlemek için [az Backup Job Show](/cli/azure/backup/job#az_backup_job_show) cmdlet 'ini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

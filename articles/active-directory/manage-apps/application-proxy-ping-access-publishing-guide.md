@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 10/24/2019
 ms.author: kenwith
 ms.reviewer: japere
-ms.openlocfilehash: 4abef9c848a32d9fa6a34eabe407c4d10f913797
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 23008d785c27b901f3487d3eddff7cb8e7529f6e
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101643805"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600089"
 ---
 # <a name="header-based-authentication-for-single-sign-on-with-application-proxy-and-pingaccess"></a>Uygulama Ara Sunucusu ve PingAccess ile çoklu oturum açmak için üst bilgi tabanlı kimlik doğrulaması
 
@@ -193,14 +193,14 @@ PingAccess 'in kullanacağı access_token e-posta adresini eklemek için örnek:
 
 ### <a name="use-of-claims-mapping-policy-optional"></a>Talep eşleme ilkesi kullanımı (isteğe bağlı)
 
-AzureAD içinde mevcut olmayan öznitelikler için [talep eşleme ilkesi (Önizleme)](../develop/active-directory-claims-mapping.md#claims-mapping-policy-properties) . Talep eşleme, ADFS veya Kullanıcı nesneleriniz tarafından desteklenen ek özel talepler ekleyerek eski şirket içi uygulamaları buluta geçirmenize olanak sağlar
+AzureAD içinde mevcut olmayan öznitelikler için [talep eşleme ilkesi (Önizleme)](../develop/reference-claims-mapping-policy-type.md#claims-mapping-policy-properties) . Talep eşleme, ADFS veya Kullanıcı nesneleriniz tarafından desteklenen ek özel talepler ekleyerek eski şirket içi uygulamaları buluta geçirmenize olanak sağlar
 
-Uygulamanızın özel bir talep kullanmasını ve ek alanlar içermesini sağlamak için [özel bir talep eşleme ilkesi oluşturduğunuzdan ve uygulamaya atandığından](../develop/active-directory-claims-mapping.md#claims-mapping-policy-assignment)emin olun.
+Uygulamanızın özel bir talep kullanmasını ve ek alanlar içermesini sağlamak için [özel bir talep eşleme ilkesi oluşturduğunuzdan ve uygulamaya atandığından](../develop/active-directory-claims-mapping.md)emin olun.
 
 > [!NOTE]
 > Özel bir talep kullanmak için, tanımlanmış ve uygulamaya atanmış özel bir ilkeniz olması gerekir. Bu ilke tüm gerekli özel öznitelikleri içermelidir.
 >
-> PowerShell veya Microsoft Graph aracılığıyla ilke tanımı ve atama yapabilirsiniz. PowerShell 'de bunu yapıyorsanız, önce kullanmanız `New-AzureADPolicy` ve ardından uygulamaya atamanız gerekebilir `Add-AzureADServicePrincipalPolicy` . Daha fazla bilgi için bkz. [talep eşleme ilkesi ataması](../develop/active-directory-claims-mapping.md#claims-mapping-policy-assignment).
+> PowerShell veya Microsoft Graph aracılığıyla ilke tanımı ve atama yapabilirsiniz. PowerShell 'de bunu yapıyorsanız, önce kullanmanız `New-AzureADPolicy` ve ardından uygulamaya atamanız gerekebilir `Add-AzureADServicePrincipalPolicy` . Daha fazla bilgi için bkz. [talep eşleme ilkesi ataması](../develop/active-directory-claims-mapping.md).
 
 Örnek:
 ```powershell

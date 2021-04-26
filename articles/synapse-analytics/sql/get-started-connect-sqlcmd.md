@@ -5,16 +5,16 @@ services: synapse analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: overview
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: stefanazaric
 ms.reviewer: jrasnick
-ms.openlocfilehash: 7d6675f9584f90b67d8520091dcd4b04dd89e462
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3abdd44f0684282e92da147dff996ff54f0ef23f
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101667593"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565483"
 ---
 # <a name="connect-to-synapse-sql-with-sqlcmd"></a>Sqlcmd ile SYNAPSE SQL 'e bağlanma
 

@@ -7,12 +7,12 @@ ms.topic: article
 author: parthpandyaMSFT
 ms.author: parthp
 ms.date: 11/19/2020
-ms.openlocfilehash: ce9927a66da64d64e83f10e3dfd906005635e5ed
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e4cd22418c4f8a2f9504baf665c67a4a57f7f6f5
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99507545"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103394"
 ---
 # <a name="microsoft-business-applications-independent-software-vendor-isv-connect-program-onboarding-guide"></a>Microsoft Business Applications Bağımsız Yazılım Satıcısı (ISV) Connect Programı katılım kılavuzu
 
@@ -25,7 +25,7 @@ Business Applications ISV Connect programının teknik, pazarlama ve satış etk
 
 ## <a name="set-up-your-microsoft-partner-center-account"></a>Microsoft Iş Ortağı Merkezi hesabınızı ayarlama
 
-ISV Connect programı için hesabınızı ayarlamak ve yönetmek için şu makaledeki adımları uygulayın: [Iş Ortağı Merkezi 'nde ticari Market hesabı oluşturma](./partner-center-portal/create-account.md). Bu makalede, yeni bir hesap oluşturma ve ticari Market programına yeni yayımcılar ekleme hakkında bilgi verilmektedir.
+ISV Connect programı için hesabınızı ayarlamak ve yönetmek için şu makaledeki adımları uygulayın: [Iş Ortağı Merkezi 'nde ticari Market hesabı oluşturma](create-account.md). Bu makalede, yeni bir hesap oluşturma ve ticari Market programına yeni yayımcılar ekleme hakkında bilgi verilmektedir.
 
 > [!NOTE]
 > Bu adım Iş Ortağı Merkezi 'nde bir *sahip* veya *yönetici* rolü gerektirir.

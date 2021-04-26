@@ -1,24 +1,27 @@
 ---
 title: 'Hızlı başlangıç: Azure DevOps Starter ile Python için bir CI/CD işlem hattı oluşturma'
 description: DevOps Starter, Azure 'u kullanmaya başlamanızı kolaylaştırır. Birkaç hızlı adımda, tercih ettiğiniz bir Azure hizmetinde uygulama başlatmanıza yardımcı olur.
-ms.prod: devops
-ms.technology: devops-cicd
 services: vsts
 documentationcenter: vs-devops-build
 author: mlearned
+ms.author: mlearned
 manager: gwallace
+ms.date: 03/24/2020
+ms.prod: devops
+ms.technology: devops-cicd
+ms.topic: quickstart
 ms.workload: web
 ms.tgt_pltfrm: na
-ms.topic: quickstart
-ms.date: 03/24/2020
-ms.author: mlearned
-ms.custom: mvc, devx-track-python
-ms.openlocfilehash: 99ca60f2610d34d194c50e92501c0126a7c80323
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom:
+- mvc
+- devx-track-python
+- mode-api
+ms.openlocfilehash: d236eadd4c1c3bbda5a781d00de43e4ed3dc88b9
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102566558"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533269"
 ---
 # <a name="create-a-cicd-pipeline-for-python-with-azure-devops-starter"></a>Azure DevOps Starter ile Python için bir CI/CD işlem hattı oluşturma
 

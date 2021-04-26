@@ -10,14 +10,14 @@ ms.date: 11/09/2020
 ms.topic: conceptual
 ms.service: iot-edge
 monikerRange: '>=iotedge-2020-11'
-ms.openlocfilehash: 730680b0cb6e8a728ed3072419674346de649368
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1c4760362e7c2b3965638b3213910b5b8cd6f079
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200680"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107516187"
 ---
-# <a name="publish-and-subscribe-with-azure-iot-edge"></a>Azure IoT Edge yayımlayın ve abone olun
+# <a name="publish-and-subscribe-with-azure-iot-edge-preview"></a>Azure IoT Edge yayımlama ve abone olma (Önizleme)
 
 [!INCLUDE [iot-edge-version-202011](../../includes/iot-edge-version-202011.md)]
 
@@ -94,7 +94,7 @@ IoT Edge tarafından dağıtılan modüller, [simetrik anahtar kimlik doğrulama
 MQTT istemcisinin kimliği IoT Edge hub 'a doğrulandıktan sonra, bağlanmak için yetkilendirilmiş olması gerekir. Bağlandıktan sonra, belirli konularda yayımlama veya abone olma yetkisi olması gerekir. Bu yetkilendirmeler, yetkilendirme ilkesi temel alınarak IoT Edge hub tarafından verilir. Yetkilendirme ilkesi, ikizi aracılığıyla IoT Edge hub 'ına gönderilen JSON yapısı olarak ifade edilen deyimler kümesidir. Yetkilendirme ilkesini yapılandırmak için bir IoT Edge hub ikizi düzenleyin.
 
 > [!NOTE]
-> Genel önizleme için, MQTT aracısının yetkilendirme ilkelerinin düzenlenmesine yalnızca Visual Studio, Visual Studio Code veya Azure CLı aracılığıyla ulaşılabilir. Azure portal Şu anda IoT Edge hub ikizi ve yetkilendirme ilkesini düzenlemenizi desteklemiyor.
+> Genel önizleme için yalnızca Azure CLı, MQTT Broker yetkilendirme ilkelerini içeren dağıtımları destekler. Azure portal Şu anda IoT Edge hub ikizi ve yetkilendirme ilkesini düzenlemenizi desteklemiyor.
 
 Her yetkilendirme ilkesi beyanı,, ve ' nin birleşiminden oluşur `identities` `allow` `deny` `operations` `resources` :
 
@@ -170,10 +170,11 @@ Yetkilendirme ilkenizi yazarken göz önünde bulundurmanız gereken birkaç nok
 - Varsayılan olarak, tüm işlemler reddedilir.
 - Yetkilendirme deyimleri, JSON tanımında göründükleri sırayla değerlendirilir. `identities`' A bakarak ve sonra istekle eşleşen ilk izin verme veya reddetme deyimlerini seçerek başlar. İzin verme ve reddetme deyimleri arasındaki çakışmalar durumunda reddetme deyimi kazanır.
 - Yetkilendirme ilkesinde çeşitli değişkenler (örneğin, değişimler) kullanılabilir:
-    - `{{iot:identity}}` o anda bağlı olan istemcinin kimliğini temsil eder. Örneğin, gibi bir cihaz kimliği `myDevice` veya gibi bir modül kimliği `myEdgeDevice/SampleModule` .
-    - `{{iot:device_id}}` o anda bağlı olan aygıtın kimliğini temsil eder. Örneğin, gibi bir cihaz kimliği `myDevice` veya bir modülün çalıştığı cihaz kimliği `myEdgeDevice` .
-    - `{{iot:module_id}}` o anda bağlı olan modülün kimliğini temsil eder. Bu değişken bağlı cihazlar veya gibi bir modül kimliği için boştur `SampleModule` .
-    - `{{iot:this_device_id}}` yetkilendirme ilkesini çalıştıran IoT Edge cihazının kimliğini temsil eder. Örneğin, `myIoTEdgeDevice`.
+
+  - `{{iot:identity}}` o anda bağlı olan istemcinin kimliğini temsil eder. Örneğin, gibi bir cihaz kimliği `myDevice` veya gibi bir modül kimliği `myEdgeDevice/SampleModule` .
+  - `{{iot:device_id}}` o anda bağlı olan aygıtın kimliğini temsil eder. Örneğin, gibi bir cihaz kimliği `myDevice` veya bir modülün çalıştığı cihaz kimliği `myEdgeDevice` .
+  - `{{iot:module_id}}` o anda bağlı olan modülün kimliğini temsil eder. Bu değişken bağlı cihazlar veya gibi bir modül kimliği için boştur `SampleModule` .
+  - `{{iot:this_device_id}}` yetkilendirme ilkesini çalıştıran IoT Edge cihazının kimliğini temsil eder. Örneğin, `myIoTEdgeDevice`.
 
 IoT Hub konuları için yetkilendirmeler, Kullanıcı tanımlı konulardan biraz farklı şekilde işlenir. Anımsanması gereken önemli noktaları aşağıda bulabilirsiniz:
 
@@ -220,40 +221,43 @@ IoT Hub iki IoT cihazı oluşturun ve parolalarını alın. Terminalinizden Azur
 
 1. IoT Hub iki IoT cihazı oluşturun ve bunları IoT Edge cihazınıza ayırın:
 
-    ```azurecli-interactive
-    az iot hub device-identity create --device-id  sub_client --hub-name <iot_hub_name> --pd <edge_device_id>
-    az iot hub device-identity create --device-id  pub_client --hub-name <iot_hub_name> --pd <edge_device_id>
-    ```
+   ```azurecli-interactive
+   az iot hub device-identity create --device-id  sub_client --hub-name <iot_hub_name> --pd <edge_device_id>
+   az iot hub device-identity create --device-id  pub_client --hub-name <iot_hub_name> --pd <edge_device_id>
+   ```
 
 2. SAS belirteci oluşturarak parolalarını alın:
 
-    - Bir cihaz için:
-    
-       ```azurecli-interactive
-       az iot hub generate-sas-token -n <iot_hub_name> -d <device_name> --key-type primary --du 3600
-       ```
-    
-       Burada 3600, SAS belirtecinin saniye cinsinden süresi (örneğin, 3600 = 1 saat).
-    
-    - Bir modül için:
-    
-       ```azurecli-interactive
-       az iot hub generate-sas-token -n <iot_hub_name> -d <device_name> -m <module_name> --key-type primary --du 3600
-       ```
-    
-       Burada 3600, SAS belirtecinin saniye cinsinden süresi (örneğin, 3600 = 1 saat).
+   - Bir cihaz için:
+
+     ```azurecli-interactive
+     az iot hub generate-sas-token -n <iot_hub_name> -d <device_name> --key-type primary --du 3600
+     ```
+
+     Burada 3600, SAS belirtecinin saniye cinsinden süresi (örneğin, 3600 = 1 saat).
+
+   - Bir modül için:
+
+     ```azurecli-interactive
+     az iot hub generate-sas-token -n <iot_hub_name> -d <device_name> -m <module_name> --key-type primary --du 3600
+     ```
+
+     Burada 3600, SAS belirtecinin saniye cinsinden süresi (örneğin, 3600 = 1 saat).
 
 3. Çıktıdan "SAS" anahtarına karşılık gelen değer olan SAS belirtecini kopyalayın. Yukarıdaki Azure CLı komutundan bir örnek çıktı aşağıda verilmiştir:
 
-    ```
-    {
-       "sas": "SharedAccessSignature sr=example.azure-devices.net%2Fdevices%2Fdevice_1%2Fmodules%2Fmodule_a&sig=H5iMq8ZPJBkH3aBWCs0khoTPdFytHXk8VAxrthqIQS0%3D&se=1596249190"
-    }
-    ```
+   ```output
+   {
+      "sas": "SharedAccessSignature sr=example.azure-devices.net%2Fdevices%2Fdevice_1%2Fmodules%2Fmodule_a&sig=H5iMq8ZPJBkH3aBWCs0khoTPdFytHXk8VAxrthqIQS0%3D&se=1596249190"
+   }
+   ```
 
 ### <a name="authorize-publisher-and-subscriber-clients"></a>Yayımcı ve abone istemcilerini yetkilendirme
 
-Yayımcı ve aboneyi yetkilendirmek için, aşağıdaki yetkilendirme ilkesini dahil etmek üzere Azure CLı, Visual Studio veya Visual Studio Code aracılığıyla IoT Edge bir dağıtım oluşturarak IoT Edge hub ikizi 'ı düzenleyin:
+Yayımcıyı ve aboneyi yetkilendirmek için, aşağıdaki yetkilendirme ilkesini içeren bir IoT Edge dağıtımında IoT Edge hub ikizi düzenleyin.
+
+>[!NOTE]
+>Şu anda, MQTT yetkilendirme özelliklerini içeren dağıtımlar yalnızca Azure CLı kullanan IoT Edge cihazlara uygulanabilir.
 
 ```json
 {
@@ -377,13 +381,13 @@ Ayrıca, `FROM /messages/* INTO $upstream` IoT Edge MQTT aracılarından IoT Hub
 
 Cihaz/modül ikizi alma tipik bir MQTT deseninin değildir. İstemcinin, IoT Hub sunacak bir ikizi için bir istek vermesi gerekir.
 
-TWINS almak için, istemcinin IoT Hub belirli bir konuya abone olması gerekir `$iothub/twin/res/#` . Bu konu adı IoT Hub devralınır ve tüm istemcilerin aynı konuya abone olmaları gerekir. Cihazların veya modüllerin birbirini ikizi aldığı anlamına gelmez. IoT Hub ve IoT Edge hub, tüm cihazlar aynı konu adını dinlerken bile hangi ikizi teslim edileceğini bilir. 
+TWINS almak için, istemcinin IoT Hub belirli bir konuya abone olması gerekir `$iothub/twin/res/#` . Bu konu adı IoT Hub devralınır ve tüm istemcilerin aynı konuya abone olmaları gerekir. Cihazların veya modüllerin birbirini ikizi aldığı anlamına gelmez. IoT Hub ve IoT Edge hub, tüm cihazlar aynı konu adını dinlerken bile hangi ikizi teslim edileceğini bilir.
 
 Abonelik yapıldıktan sonra istemci, `$iothub/twin/GET/?rid=<request_id>/#` rastgele bir tanımlayıcı olan IoT Hub belirli bir konuya bir ileti yayımlayarak ikizi için istekte bulunur  `<request_id>` . IoT Hub daha sonra yanıtını, istemcinin abone olduğu konu üzerine istenen verilerle gönderir `$iothub/twin/res/200/?rid=<request_id>` . Bu, bir istemcinin isteklerini yanıtlarla eşleştirmesine yönelik bir istekdir.
 
 ### <a name="receive-twin-patches"></a>İkizi düzeltme eklerini al
 
-İkizi düzeltme eklerini almak için, bir istemcinin özel ıothub konusuna abone olması gerekir `$iothub/twin/PATCH/properties/desired/#` . Abonelik yapıldıktan sonra istemci, bu konuda IoT Hub tarafından gönderilen ikizi düzeltme eklerini alır. 
+İkizi düzeltme eklerini almak için, bir istemcinin özel ıothub konusuna abone olması gerekir `$iothub/twin/PATCH/properties/desired/#` . Abonelik yapıldıktan sonra istemci, bu konuda IoT Hub tarafından gönderilen ikizi düzeltme eklerini alır.
 
 ### <a name="receive-direct-methods"></a>Doğrudan Yöntemler al
 
@@ -398,23 +402,23 @@ Doğrudan bir yöntemi göndermek bir HTTP çağrısıdır ve bu nedenle MQTT ar
 İki MQTT aracılarını bağlamak için IoT Edge hub 'ı bir MQTT Köprüsü içerir. Bir MQTT Köprüsü, başka bir MQTT aracısına çalışan bir MQTT aracısına bağlanmak için yaygın olarak kullanılır. Yalnızca yerel trafiğin bir alt kümesi, genellikle başka bir aracıya gönderilir.
 
 > [!NOTE]
-> IoT Edge hub Köprüsü şu anda yalnızca iç içe IoT Edge cihazları arasında kullanılabilir. IoT Hub tam özellikli bir MQTT Aracısı olmadığından IoT Hub 'a veri göndermek için kullanılamaz. Daha fazla IoT Hub MQTT aracı özellikleri desteğini öğrenmek için bkz. [MQTT protokolünü kullanarak IoT Hub 'ınız Ile Iletişim kurma](../iot-hub/iot-hub-mqtt-support.md). IoT Edge cihazları iç içe geçirme hakkında daha fazla bilgi için bkz. [bir aşağı akış IoT Edge cihazını Azure IoT Edge ağ geçidine bağlama](how-to-connect-downstream-iot-edge-device.md#configure-iot-edge-on-devices) 
+> IoT Edge hub Köprüsü şu anda yalnızca iç içe IoT Edge cihazları arasında kullanılabilir. IoT Hub tam özellikli bir MQTT Aracısı olmadığından IoT Hub 'a veri göndermek için kullanılamaz. Daha fazla IoT Hub MQTT aracı özellikleri desteğini öğrenmek için bkz. [MQTT protokolünü kullanarak IoT Hub 'ınız Ile Iletişim kurma](../iot-hub/iot-hub-mqtt-support.md). IoT Edge cihazları iç içe geçirme hakkında daha fazla bilgi için bkz. [bir aşağı akış IoT Edge cihazını Azure IoT Edge ağ geçidine bağlama](how-to-connect-downstream-iot-edge-device.md#configure-iot-edge-on-devices).
 
 İç içe bir yapılandırmada, IoT Edge hub MQTT Köprüsü, üst MQTT aracısının bir istemcisi olarak davranır. bu nedenle, alt EdgeHub 'ın, köprünün yapılandırıldığı belirli kullanıcı tanımlı konuları yayımlamasına ve abone olmalarına izin vermek için üst EdgeHub 'da yetkilendirme kurallarının ayarlanması gerekir.
 
 MQTT Köprüsü IoT Edge, IoT Edge hub 'ına ikizi üzerinden gönderilen bir JSON yapısı aracılığıyla yapılandırılır. MQTT Köprüsü yapılandırmak için bir IoT Edge hub ikizi düzenleyin.
 
 > [!NOTE]
-> Genel önizleme için MQTT Köprüsü yapılandırması yalnızca Visual Studio, Visual Studio Code veya Azure CLı aracılığıyla kullanılabilir. Azure portal Şu anda IoT Edge hub ikizi ve MQTT Köprüsü yapılandırmasını düzenlemenizi desteklemiyor.
+> Genel önizleme için, MQTT köprü yapılandırması içeren dağıtımları yalnızca Azure CLı destekler. Azure portal Şu anda IoT Edge hub ikizi ve MQTT Köprüsü yapılandırmasını düzenlemenizi desteklemiyor.
 
 MQTT Köprüsü, bir IoT Edge hub MQTT aracısına birden çok dış aracıya bağlanacak şekilde yapılandırılabilir. Her dış aracı için aşağıdaki ayarlar gereklidir:
 
 - `endpoint` , Bağlanılacak uzak MQTT aracısının adresidir. Şu anda yalnızca üst IoT Edge cihazları destekleniyor ve değişken tarafından tanımlandı `$upstream` .
 - `settings` bir uç nokta için hangi konuların köprü oluşturmak gerektiğini tanımlar. Uç nokta başına birden fazla ayar olabilir ve yapılandırmak için aşağıdaki değerler kullanılır:
-    - `direction`: `in` Uzak aracı konularına abone olmak veya `out` Uzak aracı konularına yayımlamak için
-    - `topic`: eşleştirilecek temel konu deseninin. [MQTT joker karakterleri](https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718107) , bu düzenin tanımlanması için kullanılabilir. Yerel aracıda ve uzak aracıda bu konu düzenine farklı ön ekler uygulanabilir.
-    - `outPrefix`: `topic` Uzak aracıda modele uygulanan önek.
-    - `inPrefix`: `topic` Yerel aracıda modele uygulanan önek.
+  - `direction`: `in` Uzak aracı konularına abone olmak veya `out` Uzak aracı konularına yayımlamak için
+  - `topic`: eşleştirilecek temel konu deseninin. [MQTT joker karakterleri](https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718107) , bu düzenin tanımlanması için kullanılabilir. Yerel aracıda ve uzak aracıda bu konu düzenine farklı ön ekler uygulanabilir.
+  - `outPrefix`: `topic` Uzak aracıda modele uygulanan önek.
+  - `inPrefix`: `topic` Yerel aracıda modele uygulanan önek.
 
 Aşağıda, bir üst IoT Edge cihazının konu başlıkları üzerinde alınan tüm iletileri `alerts/#` aynı konularda bir alt IoT Edge cihazına yeniden yayımlayan ve bir alt IoT Edge cihazının konu başlıkları üzerinde gönderilen tüm iletileri `/local/telemetry/#` konularda bir üst IoT Edge cihaza yeniden yayımlayan IoT Edge MQTT Köprüsü yapılandırmasına bir örnek verilmiştir `/remote/messages/#` .
 
@@ -430,9 +434,9 @@ Aşağıda, bir üst IoT Edge cihazının konu başlıkları üzerinde alınan t
                 },
                 {
                     "direction": "out",
-                    "topic": "",
-                    "inPrefix": "/local/telemetry",
-                    "outPrefix": "/remote/messages"
+                    "topic": "#",
+                    "inPrefix": "/local/telemetry/",
+                    "outPrefix": "/remote/messages/"
                 }
             ]
         }]

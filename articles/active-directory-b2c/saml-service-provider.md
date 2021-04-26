@@ -8,17 +8,17 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: how-to
-ms.date: 03/03/2021
+ms.date: 04/05/2021
 ms.author: mimart
 ms.subservice: B2C
 ms.custom: fasttrack-edit
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 1035f43642f3884e7cc0f6ab47e9c9afd1f29170
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 652bc9a236a4e4b9d3f99dab640919f2be985984
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102107772"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257730"
 ---
 # <a name="register-a-saml-application-in-azure-ad-b2c"></a>Azure AD B2C bir SAML uygulaması kaydetme
 
@@ -47,7 +47,7 @@ Müşteri kimliği ve erişim yönetimi çözümü olarak Azure AD B2C kullanan 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Azure AD B2C özel ilkeleri kullanmaya başlama](custom-policy-get-started.md)bölümündeki adımları uygulayın. Makalesinde açıklanan özel ilke başlangıç paketinden *SocialAndLocalAccounts* özel ilkesine ihtiyacınız vardır.
+* [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)bölümündeki adımları uygulayın. Makalesinde açıklanan özel ilke başlangıç paketinden *SocialAndLocalAccounts* özel ilkesine ihtiyacınız vardır.
 * SAML protokolünün temel olarak anlaşılmasına ve uygulamanın SAML uygulamasına aşina olma.
 * SAML uygulaması olarak yapılandırılmış bir Web uygulaması. Bu öğreticide, sağladığımız bir [SAML test uygulaması][samltest] kullanabilirsiniz.
 
@@ -78,15 +78,35 @@ Uygulamanız ve Azure AD B2C arasında bir güven ilişkisi oluşturmak için he
 
 | Kullanım | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| SAML yanıt imzalama | Yes | Azure AD B2C içinde depolanan özel anahtara sahip bir sertifika. Bu sertifika, uygulamanıza gönderilen SAML Yanıtını imzalamak için Azure AD B2C tarafından kullanılır. Uygulamanız SAML yanıtının imzasını doğrulamak için Azure AD B2C meta veri ortak anahtarını okur. |
+| SAML yanıt imzalama | Yes  | Azure AD B2C içinde depolanan özel anahtara sahip bir sertifika. Bu sertifika, uygulamanıza gönderilen SAML Yanıtını imzalamak için Azure AD B2C tarafından kullanılır. Uygulamanız SAML yanıtının imzasını doğrulamak için Azure AD B2C meta veri ortak anahtarını okur. |
+| SAML onaylama imzalama | Yes | Azure AD B2C içinde depolanan özel anahtara sahip bir sertifika. Bu sertifika, SAML yanıtının onayını imzalamak için Azure AD B2C tarafından kullanılır. `<saml:Assertion>`SAML yanıtının parçası.  |
 
 Bir üretim ortamında, bir ortak sertifika yetkilisi tarafından verilen sertifikaların kullanılmasını öneririz. Bununla birlikte, otomatik olarak imzalanan sertifikalarla da bu yordamı tamamlayabilirsiniz.
 
-### <a name="prepare-a-self-signed-certificate-for-saml-response-signing"></a>SAML yanıt imzalama için otomatik olarak imzalanan sertifika hazırlama
+### <a name="create-a-policy-key"></a>İlke anahtarı oluşturma
 
-Uygulamanızın Azure AD B2C onay yoluyla güvenmesi için bir SAML yanıt imzalama sertifikası oluşturmanız gerekir.
+Uygulamanız ve Azure AD B2C arasında bir güven ilişkisine sahip olmak için bir SAML yanıt imzalama sertifikası oluşturun. Azure AD B2C, uygulamanıza gönderilen SAML Yanıtını imzalamak için bu sertifikayı kullanır. Uygulamanız SAML yanıtının imzasını doğrulamak için Azure AD B2C meta veri ortak anahtarını okur. 
+
+> [!TIP]
+> Bu bölümde, [SAML onaylama](saml-service-provider-options.md#saml-assertions-signature)'da oturum açma gibi başka amaçlar için oluşturduğunuz ilke anahtarını kullanabilirsiniz. 
+
+### <a name="obtain-a-certificate"></a>Sertifika edinme
 
 [!INCLUDE [active-directory-b2c-create-self-signed-certificate](../../includes/active-directory-b2c-create-self-signed-certificate.md)]
+
+### <a name="upload-the-certificate"></a>Sertifikayı güncelleştirin
+
+Sertifikanızı Azure AD B2C kiracınızda depolamanız gerekir.
+
+1. [Azure portalında](https://portal.azure.com/) oturum açın.
+1. Azure AD B2C kiracınızı içeren dizini kullandığınızdan emin olun. Üstteki menüden **Dizin + abonelik** filtresini seçin ve kiracınızı içeren dizini seçin.
+1. Azure portal sol üst köşesindeki **tüm hizmetler** ' i seçin ve ardından **Azure AD B2C**' i arayıp seçin.
+1. Genel Bakış sayfasında **kimlik deneyimi çerçevesi**' ni seçin.
+1. **Ilke anahtarlarını** seçin ve ardından **Ekle**' yi seçin.
+1. **Seçenekler** için öğesini seçin `Upload` .
+1. İlke anahtarı için bir **ad** girin. Örneğin, `SamlIdpCert`. Ön ek, `B2C_1A_` anahtarınızın adına otomatik olarak eklenir.
+1. Özel anahtarla Certificate. pfx dosyanıza gidin ve bu dosyayı seçin.
+1. **Oluştur**’a tıklayın.
 
 ## <a name="enable-your-policy-to-connect-with-a-saml-application"></a>İlkenizin SAML uygulamasıyla bağlantı kurmasını sağlama
 
@@ -111,6 +131,7 @@ SAML uygulamanıza bağlanmak için Azure AD B2C SAML yanıtları oluşturabileb
       </Metadata>
       <CryptographicKeys>
         <Key Id="SamlAssertionSigning" StorageReferenceId="B2C_1A_SamlIdpCert"/>
+        <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_SamlIdpCert"/>
       </CryptographicKeys>
       <InputClaims/>
       <OutputClaims/>
@@ -147,51 +168,6 @@ SAML uygulamanıza bağlanmak için Azure AD B2C SAML yanıtları oluşturabileb
     </TechnicalProfile>
 ```
 
-#### <a name="sign-the-azure-ad-b2c-idp-saml-metadata-optional"></a>Azure AD B2C IDP SAML meta verilerini imzala (isteğe bağlı)
-
-Azure AD B2C, uygulama için gerekliyse SAML IDP meta veri belgesini imzalayabilmeniz için talimat verebilir. Bunu yapmak için, [SAML yanıt imzalama için otomatik olarak imzalanan sertifika hazırlama](#prepare-a-self-signed-certificate-for-saml-response-signing)bölümünde gösterildiği gıbı bir SAML IDP meta veri imzalama ilkesi anahtarı oluşturun ve karşıya yükleyin. Ardından, `MetadataSigning` SAML belirteci verenin teknik profilindeki meta veri öğesini yapılandırın. , `StorageReferenceId` İlke anahtarı adına başvurmalıdır.
-
-```xml
-<ClaimsProvider>
-  <DisplayName>Token Issuer</DisplayName>
-  <TechnicalProfiles>
-    <!-- SAML Token Issuer technical profile -->
-    <TechnicalProfile Id="Saml2AssertionIssuer">
-      <DisplayName>Token Issuer</DisplayName>
-      <Protocol Name="SAML2"/>
-      <OutputTokenFormat>SAML2</OutputTokenFormat>
-        ...
-      <CryptographicKeys>
-        <Key Id="MetadataSigning" StorageReferenceId="B2C_1A_SamlMetadataCert"/>
-        ...
-      </CryptographicKeys>
-    ...
-    </TechnicalProfile>
-```
-
-#### <a name="sign-the-azure-ad-b2c-idp-saml-response-element-optional"></a>Azure AD B2C IDP SAML yanıtı öğesini imzala (isteğe bağlı)
-
-SAML iletilerini imzalamak için kullanılacak bir sertifika belirtebilirsiniz. İleti, bir `<samlp:Response>` SAML yanıtı İçindeki öğesidir ve uygulamaya gönderilir.
-
-Bir sertifika belirtmek için, [SAML yanıt imzalama için otomatik olarak imzalanan sertifika hazırlama](#prepare-a-self-signed-certificate-for-saml-response-signing)bölümünde gösterildiği gibi bir ilke anahtarı oluşturun ve karşıya yükleyin. Ardından, `SamlMessageSigning` SAML belirteci verenin teknik profilindeki meta veri öğesini yapılandırın. , `StorageReferenceId` Ilke anahtarı adına başvurmalıdır.
-
-```xml
-<ClaimsProvider>
-  <DisplayName>Token Issuer</DisplayName>
-  <TechnicalProfiles>
-    <!-- SAML Token Issuer technical profile -->
-    <TechnicalProfile Id="Saml2AssertionIssuer">
-      <DisplayName>Token Issuer</DisplayName>
-      <Protocol Name="SAML2"/>
-      <OutputTokenFormat>SAML2</OutputTokenFormat>
-        ...
-      <CryptographicKeys>
-        <Key Id="SamlMessageSigning" StorageReferenceId="B2C_1A_SamlMessageCert"/>
-        ...
-      </CryptographicKeys>
-    ...
-    </TechnicalProfile>
-```
 ## <a name="configure-your-policy-to-issue-a-saml-response"></a>Bir SAML yanıtı vermek için ilkenizi yapılandırma
 
 İlkenizin SAML yanıtları oluşturdığına göre, ilkeyi uygulamanıza varsayılan JWT yanıtı yerine bir SAML yanıtı verecek şekilde yapılandırmanız gerekir.

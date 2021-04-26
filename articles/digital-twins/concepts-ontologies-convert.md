@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 2/12/2021
 ms.topic: conceptual
 ms.service: digital-twins
-ms.openlocfilehash: aa4dde51c077152dd5c8a938ad64ad0a051f89ad
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 22b41fce59bf7dbe9db1186036c5ed44f07a4aad
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "100561833"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484494"
 ---
 # <a name="convert-industry-standard-ontologies-to-dtdl-for-azure-digital-twins"></a>Azure dijital TWINS için sektör standardı ontolo, DTDL 'ye Dönüştür
 
@@ -49,7 +49,9 @@ Azure dijital TWINS hizmeti tarafından kullanılmak üzere RDF tabanlı model d
 
 Örneği buradan edinebilirsiniz: [**Rdftodtdlconverter**](/samples/azure-samples/rdftodtdlconverter/digital-twins-model-conversion-samples/). 
 
-Kodu makinenize indirmek için, örnek giriş sayfasındaki başlığın altındaki *ZIP 'ı indir* düğmesine basın. Bu işlem, daha sonra unzip ve keşfedebileceğiniz *RdfToDtdlConverter_sample_application_to_convert_RDF_to_DTDL.zip* adı altında bir *ZIP* dosyası indirir.
+Kodu makinenize indirmek için örnek sayfasındaki başlığın altında bulunan **koda gözatıp** düğmesini seçin. Bu, sizi örnek için GitHub deposuna götürür. Örnek olarak indirmek için **kod** düğmesini SEÇIN ve **ZIP 'i indirin** *. ZIP* dosyası *RdfToDtdlConverter-main.zip* çağırdı. Sonra dosyayı açabilir ve kodu keşfedebilirsiniz.
+
+:::image type="content" source="media/concepts-ontologies-convert/download-repo-zip.png" alt-text="GitHub 'daki RdfToDtdlConverter deposunun ekran görüntüsü. Kod düğmesi seçilidir ve posta Indirme düğmesinin vurgulandığı küçük bir iletişim kutusu oluşturulur." lightbox="media/concepts-ontologies-convert/download-repo-zip.png":::
 
 Bu örneği, dönüştürme düzenlerini bağlam içinde görmek ve kendi uygulamalarınız için kendi özel gereksinimlerinize göre model dönüştürmeleri gerçekleştiren bir yapı taşı olarak kullanmak için kullanabilirsiniz.
 

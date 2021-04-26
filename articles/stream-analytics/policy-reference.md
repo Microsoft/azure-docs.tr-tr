@@ -1,18 +1,18 @@
 ---
 title: Azure Stream Analytics için yerleşik ilke tanımları
 description: Azure Stream Analytics için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 author: sidramadoss
 ms.author: sidram
 ms.service: stream-analytics
 ms.custom: subject-policy-reference
-ms.openlocfilehash: 7ef9606da62ebd5ff53eca5fc21c22591bd3ce3b
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 6f17943f14ca545cb76be9b57f7a3a5fefd9ece4
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105037470"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873442"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-stream-analytics"></a>Azure Stream Analytics için Azure Ilkesi yerleşik tanımları
 

@@ -3,26 +3,21 @@ title: Disk şifrelemesi etkinleştirilmiş havuz oluşturma
 description: Platform tarafından yönetilen bir anahtarla düğümleri şifrelemek için disk şifreleme yapılandırması 'nı nasıl kullanacağınızı öğrenin.
 author: pkshultz
 ms.topic: how-to
-ms.date: 01/27/2021
+ms.date: 04/16/2021
 ms.author: peshultz
-ms.custom: references_regions
-ms.openlocfilehash: 41fc827459b454e2bcb120a925cdab8fcd46e310
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 01d2ea03768a09c1ad4e019b9e8ed43a26443637
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99055323"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728527"
 ---
 # <a name="create-a-pool-with-disk-encryption-enabled"></a>Disk şifrelemesi etkinleştirilmiş havuz oluşturma
 
 [Sanal makine yapılandırmasını](nodes-and-pools.md#virtual-machine-configuration)kullanarak bir Azure Batch havuzu oluşturduğunuzda, disk şifrelemesi yapılandırmasını belirterek, havuzdaki işlem düğümlerini platform tarafından yönetilen bir anahtarla şifreleyebilirsiniz.
 
 Bu makalede, disk şifrelemesi etkin olan bir Batch havuzunun nasıl oluşturulacağı açıklanmaktadır.
-
-> [!IMPORTANT]
-> Azure Batch ' de platform tarafından yönetilen anahtar kullanılarak konakta şifreleme desteği şu anda Doğu ABD, Batı ABD 2, Orta Güney ABD, US Gov Virginia ve US Gov Arizona bölgeleri için genel önizlemededir.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## <a name="why-use-a-pool-with-disk-encryption-configuration"></a>Disk şifreleme yapılandırması ile neden havuz kullanılmalıdır?
 
@@ -99,7 +94,7 @@ client-request-id: 00000000-0000-0000-0000-000000000000
 }
 ```
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 ```azurecli-interactive
 az batch pool create \

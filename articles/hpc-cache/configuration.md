@@ -4,14 +4,14 @@ description: MTU, özel NTP ve DNS yapılandırması gibi önbellek için ek aya
 author: ekpgh
 ms.service: hpc-cache
 ms.topic: how-to
-ms.date: 03/17/2021
+ms.date: 04/08/2021
 ms.author: v-erkel
-ms.openlocfilehash: 6e1e1283cb82dcb900da6473de65ef087a5cea82
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 0b3996df3c75ff31d0825be1d332dbd055305963
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104773241"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107259770"
 ---
 # <a name="configure-additional-azure-hpc-cache-settings"></a>Ek Azure HPC önbellek ayarlarını yapılandırma
 
@@ -47,24 +47,26 @@ Azure [VM 'leri Için TCP/IP performans ayarlamayı](../virtual-network/virtual-
 
 ## <a name="customize-ntp"></a>NTP 'yi özelleştirme
 
-Önbelleğiniz, varsayılan olarak Azure tabanlı saat sunucusu time.microsoft.com kullanır. Önbelleğinizin farklı bir NTP sunucusu kullanmasını istiyorsanız, bunu **NTP yapılandırma** bölümünde belirtin. Tam etki alanı adı veya IP adresi kullanın.
+Önbelleğiniz, varsayılan olarak Azure tabanlı saat sunucusu time.windows.com kullanır. Önbelleğinizin farklı bir NTP sunucusu kullanmasını istiyorsanız, bunu **NTP yapılandırma** bölümünde belirtin. Tam etki alanı adı veya IP adresi kullanın.
 
 ## <a name="set-a-custom-dns-configuration"></a>Özel bir DNS yapılandırması ayarlama
 
 > [!CAUTION]
 > İhtiyacınız yoksa önbellek DNS yapılandırmanızı değiştirmeyin. Yapılandırma hataları d sonuçlara sahip olabilir. Yapılandırmanız Azure hizmet adlarını çözümleyemezse, HPC önbellek örneğine kalıcı olarak ulaşılamayan olur.
+>
+> Özel bir DNS yapılandırması ayarlamayı denemeden önce Azure temsilcileriniz ile görüşün.
 
 Azure HPC önbelleği, güvenli ve kullanışlı Azure DNS sistemi kullanacak şekilde otomatik olarak yapılandırılır. Ancak, birkaç olağandışı yapılandırma önbelleğin Azure sistemi yerine ayrı, şirket içi bir DNS sistemi kullanmasını gerektirir. **Ağ** sayfasının **DNS yapılandırması** bölümü, bu tür bir sistem belirtmek için kullanılır.
 
 Azure temsilcileriniz ile görüşün veya özel bir önbellek DNS yapılandırması kullanıp kullanmayacağınızı öğrenmek için Microsoft hizmet ve destek 'e başvurun.
 
-Azure HPC önbelleğinin kullanması için kendi şirket içi DNS sisteminizi yapılandırırsanız, yapılandırmanın Azure hizmetleri için Azure uç nokta adlarını çözümleyebiliyorsanız emin olmanız gerekir. Özel DNS ortamınızı, belirli ad çözümleme isteklerini Azure DNS veya başka bir sunucuya gerektiği gibi iletecek şekilde yapılandırmanız gerekir.
+Azure HPC önbelleğinin kullanması için kendi şirket içi DNS sisteminizi yapılandırırsanız, yerel DNS sunucunuzun Azure hizmet uç noktası adlarını doğrudan çözümleyebildiğinizden emin olmanız gerekir. DNS sunucunuz ortak ad çözümlenme kısıtlamışsa HPC önbelleği çalışmaz.
 
 DNS yapılandırmanızın bir Azure HPC önbelleği için kullanmadan önce bu öğeleri başarıyla çözümleyediğinden emin olun:
 
 * ``*.core.windows.net``
 * Sertifika iptal listesi (CRL) indirme ve çevrimiçi sertifika durumu Protokolü (OCSP) doğrulama hizmetleri. Bu [Azure TLS makalesinin](../security/fundamentals/tls-certificate-changes.md)sonundaki [güvenlik duvarı kuralları öğesinde](../security/fundamentals/tls-certificate-changes.md#will-this-change-affect-me) kısmi bir liste sağlanır, ancak tüm gereksinimleri anlamak için bir Microsoft Teknik temsilcisine danışmanız gerekir.
-* NTP sunucunuzun tam etki alanı adı (time.microsoft.com veya özel bir sunucu)
+* NTP sunucunuzun tam etki alanı adı (time.windows.com veya özel bir sunucu)
 
 Önbelleğiniz için özel bir DNS sunucusu ayarlamanız gerekiyorsa, belirtilen alanları kullanın:
 

@@ -5,12 +5,12 @@ ms.date: 03/01/2021
 ms.topic: how-to
 ms.reviewer: ravastra
 ms.custom: contperf-fy21q3
-ms.openlocfilehash: 70c9498bae9117585963e111bea4f1e127cab232
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f4b12a9b3b830fcc4f45cb5e957232fee5a756a3
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102097950"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078654"
 ---
 # <a name="deploy-ethereum-proof-of-authority-consortium-solution-template-on-azure"></a>Azure 'da Ethereum yetki kanıtlama Konsorsiyumu çözüm şablonu dağıtma
 
@@ -169,8 +169,8 @@ Parametre | Açıklama | Örnek değer
 İzleme | İzlemeyi etkinleştirme seçeneği | Etkinleştir
 Mevcut Azure Izleyici günlüklerine bağlanma | Yeni bir Azure Izleyici günlükleri örneği oluşturma veya var olan bir örneğe katma seçeneği | Yeni oluştur
 Konum | Yeni örneğin dağıtıldığı bölge | Doğu ABD
-Mevcut Log Analytics çalışma alanı KIMLIĞI (mevcut Azure Izleyici günlüklerine Bağlan = var olanı Birleştir)|Mevcut Azure Izleyici günlükleri örneğinin çalışma alanı KIMLIĞI||NA
-Mevcut Log Analytics birincil anahtarı (mevcut Azure Izleyici günlüklerine bağlanma = var olanı Birleştir)|Mevcut Azure Izleyici günlükleri örneğine bağlanmak için kullanılan birincil anahtar||NA
+Mevcut Log Analytics çalışma alanı KIMLIĞI (mevcut Azure Izleyici günlüklerine Bağlan = var olanı Birleştir)|Mevcut Azure Izleyici günlükleri örneğinin çalışma alanı KIMLIĞI|NA
+Mevcut Log Analytics birincil anahtarı (mevcut Azure Izleyici günlüklerine bağlanma = var olanı Birleştir)|Mevcut Azure Izleyici günlükleri örneğine bağlanmak için kullanılan birincil anahtar|NA
 
 **Tamam**’ı seçin.
 

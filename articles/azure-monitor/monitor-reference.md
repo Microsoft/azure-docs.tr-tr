@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: rboucher
 ms.author: robb
 ms.date: 08/15/2020
-ms.openlocfilehash: 4bf792dd02e7cddcc40ef868e4a602fdb03ab3c6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 513f262f5d09cf56c4506a4f20c9aa41507c2abd
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102052288"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515286"
 ---
 # <a name="what-is-monitored-by-azure-monitor"></a>Azure Izleyici ile neler izlenir?
 Bu makalede, Azure Izleyici tarafından izlenen farklı uygulama ve hizmetler açıklanır. 
@@ -22,7 +22,7 @@ Temel Öngörüler ve çözümler Azure Izleyici 'nin bir parçası olarak kabul
 
 Öngörüler, belirli uygulamalar ve hizmetler için özelleştirilmiş bir izleme deneyimi sağlar. Hem günlükleri hem de ölçümleri toplar ve analiz eder.
 
-| İçgörü | Description |
+| İçgörü | Açıklama |
 |:---|:---|
 | [Uygulama Bilgileri](app/app-insights-overview.md) | Canlı Web uygulamanızı herhangi bir platformda izlemek için Genişletilebilir uygulama performans yönetimi (APM) hizmeti. |
 | [Kapsayıcı öngörüleri](containers/container-insights-overview.md) | Azure Kubernetes Service (AKS) üzerinde barındırılan Azure Container Instances ya da yönetilen Kubernetes kümelerine dağıtılan kapsayıcı iş yüklerinin performansını izler. |
@@ -39,7 +39,7 @@ Temel Öngörüler ve çözümler Azure Izleyici 'nin bir parçası olarak kabul
 
 Çözümler, belirli bir uygulama veya hizmet için özelleştirilmiş günlük sorgularını ve görünümleri temel alır. Bunlar yalnızca günlükleri toplayıp analiz eder ve Öngörüler için zaman içinde kullanım dışıdır.
 
-| Çözüm | Description |
+| Çözüm | Açıklama |
 |:---|:---|
 | [Aracı sistem durumu](insights/solution-agenthealth.md) | Log Analytics aracılarının sistem durumunu ve yapılandırmasını çözümleyin. |
 | [Uyarı yönetimi](insights/alert-management-solution.md) | System Center Operations Manager, Nagios veya Zabbix ' ten toplanan uyarıları analiz edin. |
@@ -167,7 +167,7 @@ Aşağıdaki tabloda Azure hizmetleri ve Azure Izleyici 'de topladıkları veril
 |Sanal Ağ | Yes | Yes | [Evet](insights/network-insights-overview.md) |  |
 |Sanal ağ-NSG akış günlükleri | Hayır | Yes | Hayır |  |
 |VPN Gateway | Yes | Yes | Hayır |  |
-|Windows Sanal Masaüstü | Hayır | Hayır | Hayır |  |
+|Windows Sanal Masaüstü | Hayır | Yes | Hayır |  |
 
 ## <a name="virtual-machine-agents"></a>Sanal makine aracıları
 Aşağıdaki tabloda, sanal makinelerin Konuk işletim sisteminden veri toplayabileceği ve Izlemek için veri gönderebilen aracılar listelenmektedir. Her aracı farklı verileri toplayabilir ve Azure Izleyici 'de ölçümler ya da günlüklere gönderebilir. 
@@ -186,7 +186,7 @@ Her bir aracının toplayabileceği veriler hakkında ayrıntılı bilgi için b
 ## <a name="product-integrations"></a>Ürün tümleştirmeleri
 Aşağıdaki tabloda yer alan hizmetler ve çözümler, Azure Izleyici tarafından toplanan diğer günlük verileriyle çözümlenebilmesi için verilerini bir Log Analytics çalışma alanında depolar.
 
-| Ürün/hizmet | Description |
+| Ürün/hizmet | Açıklama |
 |:---|:---|
 | [Azure Otomasyonu](../automation/index.yml) | Windows ve Linux bilgisayarlarda işletim sistemi güncelleştirmelerini yönetin ve değişiklikleri izleyin. Bkz. [değişiklik izleme](../automation/change-tracking/overview.md) ve [güncelleştirme yönetimi](../automation/update-management/overview.md). |
 | [Azure Information Protection ](/azure/information-protection/) | Belge ve e-postaları sınıflandırma ve isteğe bağlı olarak koruma. Bkz. [Azure Information Protection Için merkezi raporlama](/azure/information-protection/reports-aip#configure-a-log-analytics-workspace-for-the-reports). |
@@ -207,7 +207,7 @@ Aşağıdaki tabloda yer alan hizmetler ve çözümler, Azure Izleyici tarafınd
 ## <a name="other-solutions"></a>Diğer çözümler
 Farklı uygulama ve hizmetleri izlemek için diğer çözümler mevcuttur, ancak etkin geliştirme durdurulur ve tüm bölgelerde kullanılamayabilir. Bunlar Azure Log Analytics veri alma hizmeti düzeyi sözleşmesi kapsamında ele alınmıştır.
 
-| Çözüm | Description |
+| Çözüm | Açıklama |
 |:---|:---|
 | [Active Directory sistem durumu denetimi](insights/ad-assessment.md) | Active Directory ortamlarınızın riskini ve sistem durumunu değerlendirin. |
 | [Active Directory çoğaltma durumu](insights/ad-replication-status.md) | Active Directory ortamınızı tüm çoğaltma hatalarıyla düzenli olarak izler. |
@@ -221,7 +221,7 @@ Farklı uygulama ve hizmetleri izlemek için diğer çözümler mevcuttur, ancak
 
 ## <a name="third-party-integration"></a>Üçüncü taraf tümleştirmesi
 
-| Çözüm | Description |
+| Çözüm | Açıklama |
 |:---|:---|
 | [ITSM](alerts/itsmc-overview.md) | BT Hizmet Yönetimi Bağlayıcısı (ITSMC), Azure ile desteklenen BT Hizmet Yönetimi (ITSM) ürünü/hizmeti arasında bağlantı kurmanızı sağlar.  |
 

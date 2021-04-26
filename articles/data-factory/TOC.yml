@@ -15,6 +15,8 @@
       href: quickstart-create-data-factory-portal.md
     - name: Veri Fabrikası oluşturma-veri kopyalama aracı
       href: quickstart-create-data-factory-copy-data-tool.md
+    - name: Veri Fabrikası oluşturma-Azure CLı
+      href: quickstart-create-data-factory-azure-cli.md
     - name: Veri fabrikası oluşturma - Azure PowerShell
       href: quickstart-create-data-factory-powershell.md
     - name: Veri fabrikası oluşturma - .NET
@@ -105,6 +107,8 @@
       items:
         - name: Eşleme veri akışlarıyla verileri dönüştürme
           items:
+            - name: ADLS 2. ile Gölü giriş verileri için en iyi yöntemler
+              href: tutorial-data-flow-write-to-lake.md
             - name: 'Delte, Delta Gölü verileri dönüştürme'
               href: tutorial-data-flow-delta-lake.md
             - name: Eşleme veri akışlarıyla verileri dönüştürme
@@ -792,6 +796,8 @@
           items:
             - name: Veri akışlarına genel bakış
               href: data-flow-troubleshoot-guide.md
+            - name: Bağlayıcı ve biçim
+              href: data-flow-troubleshoot-connector-format.md
         - name: Sürekli Tümleştirme ve Dağıtım
           href: ci-cd-github-troubleshoot-guide.md
         - name: Güvenlik ve erişim denetimi
@@ -820,6 +826,8 @@
       href: /python/api/overview/azure/datafactory
     - name: Azure İlkesi yerleşik ilkeler
       href: policy-reference.md
+    - name: Azure CLI
+      href: /cli/azure/datafactory
 - name: Kaynaklar
   items:
     - name: Teknik incelemeler

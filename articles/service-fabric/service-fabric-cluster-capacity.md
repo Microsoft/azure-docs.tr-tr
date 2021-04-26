@@ -4,12 +4,12 @@ description: Service Fabric kümenizi planlarken dikkate alınması gereken dü�
 ms.topic: conceptual
 ms.date: 05/21/2020
 ms.author: pepogors
-ms.openlocfilehash: b3361337bb0cf60e47efe198aad7aa8cc20ae7b3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9268dfef15d8302eb31cc1b649c7fd713aab6721
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101714944"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105732593"
 ---
 # <a name="service-fabric-cluster-capacity-planning-considerations"></a>Service Fabric küme kapasitesi planlama konuları
 
@@ -111,7 +111,7 @@ Gümüş veya altın dayanıklılık ile düğüm türlerini yönetmek için bu 
 * Dayanıklılık düzeyi Gold veya gümüş etkin olan herhangi bir sanal makine ölçek kümesi için en az beş düğüm sayısını koruyun. Bu eşiğin altına ölçeklendirirseniz kümeniz hata durumuna girer ve kaldırılan düğümler için durumu () el ile temizlemeniz gerekir `Remove-ServiceFabricNodeState` .
 * Dayanıklılık düzeyi gümüş veya altın sahip her sanal makine ölçek kümesi, Service Fabric kümesinde kendi düğüm türüne eşlenmelidir. Birden çok sanal makine ölçek kümesini tek bir düğüm türüyle eşlemek, Service Fabric kümesi ile Azure altyapısının düzgün çalışmasını engeller.
 * Rastgele VM örneklerini silmeyin, her zaman özelliğindeki sanal makine ölçek kümesi ölçeğini kullanın. Rastgele sanal makine örneklerinin silinmesi, sanal makine örneğinde [yükseltme etki alanları](service-fabric-cluster-resource-manager-cluster-description.md#upgrade-domains) ve [hata etki alanları](service-fabric-cluster-resource-manager-cluster-description.md#fault-domains)arasında yer aldığı bir dengesbakiyinin oluşturulmasına neden vardır. Bu dengesizliği, sistem hizmet örnekleri/hizmet çoğaltmaları arasında doğru şekilde yük dengelemesi yapabilme yeteneğini olumsuz etkileyebilir.
-* Otomatik ölçeklendirme kullanıyorsanız, (sanal makine örneklerinin kaldırılması) işlemleri aynı anda yalnızca bir düğüm olarak ayarlanır. Aynı anda birden fazla örneğin ölçeğini azaltma güvenli değildir.
+* Otomatik ölçeklendirme kullanıyorsanız, (sanal makine örneklerinin kaldırılması) işlemleri aynı anda yalnızca bir düğüm olarak ayarlanır. Tek seferde birden fazla örneğin ölçeklendirilmesi güvenli değildir.
 * Birincil düğüm türünde VM 'Leri silmek veya ayırmayı geri alıyorsa, güvenilirlik katmanının gerektirdiği ayrılmış VM 'lerin sayısını hiçbir şekilde azalmayın. Bu işlemler, bir ölçek kümesinde sonsuz veya altın bir dayanıklılık düzeyine kadar süresiz olarak engellenir.
 
 ### <a name="changing-durability-levels"></a>Dayanıklılık düzeylerini değiştirme

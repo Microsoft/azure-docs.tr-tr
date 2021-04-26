@@ -11,12 +11,12 @@ ms.subservice: core
 ms.date: 10/02/2020
 ms.topic: conceptual
 ms.custom: how-to, devx-track-python, contperf-fy21q1
-ms.openlocfilehash: 9fa6a1758bc2e2a76291efc3bb239c5249a6e21e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a3a70ac5d5603cad98c199cbd8e3b98bb095d131
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103149350"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167677"
 ---
 # <a name="set-up-compute-targets-for-model-training-and-deployment"></a>Model eğitimi ve dağıtımı için işlem hedefleri ayarlama
 
@@ -53,7 +53,7 @@ Azure Machine Learning tarafından yönetilen işlem hedeflerini kullanmak için
 
 ## <a name="whats-a-compute-target"></a>İşlem hedefi nedir?
 
-Azure Machine Learning, modelinizi toplu olarak [__işlem hedefleri__](concept-azure-machine-learning-architecture.md#compute-targets)olarak adlandırılan çeşitli kaynaklar veya ortamlar üzerinde eğitebilirsiniz. İşlem hedefi bir yerel makine veya Azure Machine Learning Işlem, Azure HDInsight veya uzak bir sanal makine gibi bir bulut kaynağı olabilir.  Ayrıca ["modellerinizi dağıtma"](how-to-deploy-and-where.md)bölümünde açıklandığı gibi model dağıtımı için işlem hedeflerini de kullanırsınız.
+Azure Machine Learning, modelinizi toplu olarak [__işlem hedefleri__](concept-azure-machine-learning-architecture.md#compute-targets)olarak adlandırılan çeşitli kaynaklarda veya ortamlarda eğitebilirsiniz. İşlem hedefi bir yerel makine veya Azure Machine Learning Işlem, Azure HDInsight veya uzak bir sanal makine gibi bir bulut kaynağı olabilir.  Ayrıca ["modellerinizi dağıtma"](how-to-deploy-and-where.md)bölümünde açıklandığı gibi model dağıtımı için işlem hedeflerini de kullanırsınız.
 
 
 ## <a name="local-computer"></a><a id="local"></a>Yerel bilgisayar
@@ -64,9 +64,12 @@ Yerel bilgisayarınızı **çıkarım** Için kullandığınızda Docker 'ın y�
 
 ## <a name="remote-virtual-machines"></a><a id="vm"></a>Uzak sanal makineler
 
-Azure Machine Learning Ayrıca bir Azure sanal makinesini eklemeyi destekler. VM bir Azure Veri Bilimi Sanal Makinesi (DSVM) olmalıdır. Bu VM, Azure 'da önceden yapılandırılmış bir veri bilimi ve AI geliştirme ortamıdır. VM, tam yaşam döngüsü makine öğrenimi geliştirmesi için seçkin bir araç ve çerçeve seçeneği sunar. DSVM 'nin Azure Machine Learning ile nasıl kullanılacağı hakkında daha fazla bilgi için bkz. [bir geliştirme ortamı yapılandırma](./how-to-configure-environment.md#dsvm).
+Azure Machine Learning Ayrıca bir Azure sanal makinesini eklemeyi destekler. VM bir Azure Veri Bilimi Sanal Makinesi (DSVM) olmalıdır. VM, tam yaşam döngüsü makine öğrenimi geliştirmesi için seçkin bir araç ve çerçeve seçeneği sunar. DSVM 'nin Azure Machine Learning ile nasıl kullanılacağı hakkında daha fazla bilgi için bkz. [bir geliştirme ortamı yapılandırma](./how-to-configure-environment.md#dsvm).
 
-1. **Oluştur**: modelinize eğitebilmeniz için kullanmadan önce dsvm oluşturun. Bu kaynağı oluşturmak için bkz. [Linux için veri bilimi sanal makinesi sağlama (Ubuntu)](./data-science-virtual-machine/dsvm-ubuntu-intro.md).
+> [!TIP]
+> Uzak bir VM yerine [Azure Machine Learning işlem örneğini](concept-compute-instance.md)kullanmanızı öneririz. Azure Machine Learning özgü, tam olarak yönetilen, bulut tabanlı bir işlem çözümüdür. Daha fazla bilgi için bkz. [Azure Machine Learning işlem örneği oluşturma ve yönetme](how-to-create-manage-compute-instance.md).
+
+1. **Oluşturma**: Azure Machine Learning sizin IÇIN uzak VM oluşturamaz. Bunun yerine, VM 'yi oluşturmanız ve ardından Azure Machine Learning çalışma alanınıza bağlamanız gerekir. DSVM oluşturma hakkında daha fazla bilgi için bkz. [Linux için veri bilimi sanal makinesi sağlama (Ubuntu)](./data-science-virtual-machine/dsvm-ubuntu-intro.md).
 
     > [!WARNING]
     > Azure Machine Learning yalnızca **Ubuntu** çalıştıran sanal makineleri destekler. Bir VM oluşturduğunuzda veya var olan bir VM 'yi seçtiğinizde Ubuntu kullanan bir VM seçmeniz gerekir.
@@ -120,11 +123,16 @@ Azure Machine Learning Ayrıca bir Azure sanal makinesini eklemeyi destekler. VM
    src = ScriptRunConfig(source_directory=".", script="train.py", compute_target=compute, environment=myenv) 
    ```
 
+> [!TIP]
+> Bir VM 'yi çalışma alanınızdan __kaldırmak__ (ayırmak) Istiyorsanız [remotecompute. detach ()](https://docs.microsoft.com/python/api/azureml-core/azureml.core.compute.remotecompute#detach--) yöntemini kullanın.
+>
+> Azure Machine Learning VM 'yi sizin için silmez. VM 'yi, Azure VM için Azure portal, CLı veya SDK 'yı kullanarak el ile silmeniz gerekir.
+
 ## <a name="azure-hdinsight"></a><a id="hdinsight"></a>Azure HDInsight 
 
 Azure HDInsight, büyük veri analizi için popüler bir platformdur. Platform, modelinizi eğitebilmeniz için kullanılabilecek Apache Spark sağlar.
 
-1. **Oluştur**: modelinize eğitebilmeniz Için önce HDInsight kümesini oluşturun. HDInsight kümesinde Spark oluşturmak için bkz. [HDInsight 'Ta Spark kümesi oluşturma](../hdinsight/spark/apache-spark-jupyter-spark-sql.md). 
+1. **Oluşturma**: Azure Machine Learning, sizin için HDInsight kümesi oluşturamaz. Bunun yerine, kümeyi oluşturmanız ve ardından Azure Machine Learning çalışma alanınıza bağlamanız gerekir. Daha fazla bilgi için bkz. [HDInsight 'Ta Spark kümesi oluşturma](../hdinsight/spark/apache-spark-jupyter-spark-sql.md). 
 
     > [!WARNING]
     > Azure Machine Learning, HDInsight kümesinin __Genel BIR IP adresine__ sahip olmasını gerektirir.
@@ -165,8 +173,10 @@ Azure HDInsight, büyük veri analizi için popüler bir platformdur. Platform, 
 
    [!code-python[](~/aml-sdk-samples/ignore/doc-qa/how-to-set-up-training-targets/hdi.py?name=run_hdi)]
 
-
-Bu işlemi yaptıktan sonra, çalışmanızı yapılandırdığınıza göre, sonraki adım [eğitim çalıştırmasını göndermektedir](how-to-set-up-training-targets.md).
+> [!TIP]
+> Çalışma alanından bir HDInsight kümesini __kaldırmak__ Istiyorsanız, [HDInsightCompute. detach ()](https://docs.microsoft.com/python/api/azureml-core/azureml.core.compute.hdinsight.hdinsightcompute#detach--) yöntemini kullanın.
+>
+> Azure Machine Learning, HDInsight kümesini sizin için silmez. Azure HDInsight için Azure portal, CLı veya SDK 'Yı kullanarak el ile silmeniz gerekir.
 
 ## <a name="azure-batch"></a><a id="azbatch"></a>Azure Batch 
 
@@ -215,7 +225,7 @@ print("Using Batch compute:{}".format(batch_compute.cluster_resource_id))
 
 Azure Databricks, Azure bulutu 'nda Apache Spark tabanlı bir ortamdır. Bir Azure Machine Learning işlem hattı ile işlem hedefi olarak kullanılabilir.
 
-Kullanmadan önce bir Azure Databricks çalışma alanı oluşturun. Bir çalışma alanı kaynağı oluşturmak için Azure Databricks belge [üzerinde bir Spark Işi çalıştırma](/azure/databricks/scenarios/quickstart-create-databricks-workspace-portal) ' ya bakın.
+> [! ÖNEMLI} Azure Machine Learning Azure Databricks işlem hedefi oluşturamaz. Bunun yerine, bir Azure Databricks çalışma alanı oluşturmanız ve sonra bunu Azure Machine Learning workspacee bağlamanız gerekir. Bir çalışma alanı kaynağı oluşturmak için Azure Databricks belge [üzerinde bir Spark Işi çalıştırma](/azure/databricks/scenarios/quickstart-create-databricks-workspace-portal) ' ya bakın.
 
 Azure Databricks bir işlem hedefi olarak eklemek için aşağıdaki bilgileri sağlayın:
 
@@ -330,7 +340,6 @@ Azure Container Instances (acı), bir modeli dağıtırken dinamik olarak oluşt
 ## <a name="azure-kubernetes-service"></a>Azure Kubernetes Service
 
 Azure Kubernetes hizmeti (AKS) Azure Machine Learning ile kullanıldığında çeşitli yapılandırma seçeneklerine izin verir. Daha fazla bilgi için bkz. [Azure Kubernetes hizmeti oluşturma ve iliştirme](how-to-create-attach-kubernetes.md).
-
 
 ## <a name="notebook-examples"></a>Not defteri örnekleri
 

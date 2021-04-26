@@ -4,10 +4,10 @@ description: IoT için Defender, 1 Mart 2022 ' e kadar C, C# ve Edge 'i destekle
 ms.date: 1/21/2021
 ms.topic: how-to
 ms.openlocfilehash: 782e2e8ab0c54e21da643ca73f647a7ea21e4223
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104784535"
 ---
 # <a name="feature-support-and-retirement"></a>Özellik desteği ve kullanımdan kaldırma

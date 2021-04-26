@@ -7,6 +7,10 @@
       href: ../understand/mca-overview.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
 - name: Kavramlar
   items:
+    - name: Sözleşmenizi imzalamadan sonra Denetim listesi
+      href: microsoft-customer-agreement-get-started.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
+    - name: Sözleşmenizde kiracılar yönetme
+      href: manage-tenants.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
     - name: Kullanım ve faturalandırma döngünüzü anlayın
       href: ../understand/mca-understand-your-invoice.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
     - name: Kullanım ve ücretler dosya koşulları
@@ -40,7 +44,7 @@
       href: ../manage/pay-by-invoice.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
     - name: Faturanızı ödeme
       href: ../understand/pay-bill.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
-    - name: Faturalandırma sahipliğini al
+    - name: Fatura sahipliğini aktarma
       href: ../manage/mca-request-billing-ownership.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
     - name: EA 'yı Microsoft Müşteri Sözleşmesi API 'Lerine geçirme
       href: ../costs/migrate-cost-management-api.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
@@ -50,3 +54,7 @@
       href: ../manage/ea-pricing.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
     - name: Microsoft Müşteri anlaşmasındaki EA görevleri
       href: ../manage/mca-enterprise-operations.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
+    - name: Sorun giderme
+      items:
+        - name: Abonelik erişimi
+          href: troubleshoot-subscription-access.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json

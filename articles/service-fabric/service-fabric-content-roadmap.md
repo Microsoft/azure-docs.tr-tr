@@ -3,12 +3,12 @@ title: Azure Service Fabric hakkında daha fazla bilgi
 description: Azure Service Fabric 'nin temel kavramları ve ana alanlarıyla ilgili bilgi edinin. Service Fabric genişletilmiş bir genel bakış sağlar ve mikro hizmetlerin nasıl oluşturulacağını açıklar.
 ms.topic: conceptual
 ms.date: 12/08/2017
-ms.openlocfilehash: c709abe1087a9cc69c9e6e23cd1ff344a3dbebd2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6e5a7445706a6e7842822ec784a64555d9226923
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100589037"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727663"
 ---
 # <a name="so-you-want-to-learn-about-service-fabric"></a>Service Fabric hakkında bilgi edinmek istiyor musunuz?
 Azure Service Fabric; ölçeklenebilir ve güvenilir mikro hizmetleri paketlemeyi, dağıtmayı ve yönetmeyi kolaylaştırmayı sağlayan bir dağıtılmış sistemler platformudur.  Service Fabric, ancak büyük bir yüzey alanına sahiptir ve öğrenilmesi çok önemlidir.  Bu makalede bir Service Fabric Özeti ve temel kavramlar, programlama modelleri, uygulama yaşam döngüsü, test, kümeler ve sistem durumu izleme açıklanmaktadır. Bir giriş ve mikro hizmetler oluşturmak için Service Fabric nasıl kullanılabileceği hakkında [genel bakış](service-fabric-overview.md) ve [mikro hizmetler nelerdir?](service-fabric-overview-microservices.md) makalesini okuyun. Bu makale kapsamlı bir içerik listesi içermez, ancak Service Fabric her alanı için genel bakış ve başlangıç makalelerine bağlantı sağlar. 
@@ -87,7 +87,7 @@ Service Fabric Web ve API uygulamaları oluşturmak için birinci sınıf progra
 ## <a name="application-lifecycle"></a>Uygulama yaşam döngüsü
 Diğer platformlarda olduğu gibi, Service Fabric bir uygulama genellikle şu aşamalardan geçer: tasarım, geliştirme, test, dağıtım, yükseltme, bakım ve kaldırma. Service Fabric bulut uygulamalarının tam uygulama yaşam döngüsü için, dağıtım, günlük yönetim ve son kullanımdan kaldırma ile bakım aracılığıyla geliştirme aşamasından ilk sınıf destek sağlar. Hizmet modeli birçok farklı rolün uygulama yaşam döngüsüne bağımsız olarak katılmasına olanak sağlar. [Service Fabric uygulama yaşam döngüsü](service-fabric-application-lifecycle.md) , API 'lerin yanı sıra Service Fabric uygulama yaşam döngüsünün aşamaları boyunca farklı roller tarafından nasıl kullanıldıklarından bir genel bakış sağlar. 
 
-Tüm uygulama yaşam döngüsü [PowerShell cmdlet](/powershell/module/servicefabric/?view=azureservicefabricps)'leri, [CLI komutları](service-fabric-sfctl.md), [C# API](/dotnet/api/system.fabric.fabricclient.applicationmanagementclient)'Leri, [Java API 'leri](/java/api/overview/azure/servicefabric)ve [REST API](/rest/api/servicefabric/)'leri kullanılarak yönetilebilir. Ayrıca, [Azure Pipelines](./service-fabric-tutorial-deploy-app-with-cicd-vsts.md) veya [Jenkins](/azure/developer/jenkins/deploy-to-service-fabric-cluster)gibi araçları kullanarak sürekli tümleştirme/sürekli dağıtım işlem hatları da ayarlayabilirsiniz.
+Tüm uygulama yaşam döngüsü [PowerShell cmdlet](/powershell/module/servicefabric/?preserve-view=true&view=azureservicefabricps)'leri, [CLI komutları](service-fabric-sfctl.md), [C# API](/dotnet/api/system.fabric.fabricclient.applicationmanagementclient)'Leri, [Java API 'leri](/java/api/overview/azure/servicefabric)ve [REST API](/rest/api/servicefabric/)'leri kullanılarak yönetilebilir. Ayrıca, [Azure Pipelines](./service-fabric-tutorial-deploy-app-with-cicd-vsts.md) veya [Jenkins](/azure/developer/jenkins/deploy-to-service-fabric-cluster)gibi araçları kullanarak sürekli tümleştirme/sürekli dağıtım işlem hatları da ayarlayabilirsiniz.
 
 ## <a name="test-applications-and-services"></a>Uygulama ve hizmetleri test etme
 Gerçekten bulut ölçekli hizmetler oluşturmak için, uygulamalarınızın ve hizmetlerinizin gerçek hayatta hatalara sahip olduğunu doğrulamak önemlidir. Hata analiz hizmeti, Service Fabric oluşturulan Hizmetleri test etmek için tasarlanmıştır. [Hata analiz hizmeti](service-fabric-testability-overview.md)ile, anlamlı hatalara sahip olabilir ve uygulamalarınızda test senaryolarını tamamen çalıştırabilirsiniz. Bu hatalar ve senaryolar, bir hizmetin yaşam süresi boyunca, denetimli, güvenli ve tutarlı bir şekilde deneyilecek çok sayıda durum ve geçiş yapar ve doğrular.
@@ -160,7 +160,7 @@ Kutudan çıkan, bileşen Service Fabric kümedeki tüm varlıklarda sistem duru
 
 Service Fabric sistem durumu deposunda toplanan [sistem durumu raporlarını görüntülemek](service-fabric-view-entities-aggregated-health.md) için birden çok yol sağlar:
 * [Service Fabric Explorer](service-fabric-visualizing-your-cluster.md) veya diğer görselleştirme araçları.
-* Sistem durumu sorguları ( [PowerShell](/powershell/module/servicefabric/?view=azureservicefabricps), [CLI](service-fabric-sfctl.md), [C# FabricClient API](/dotnet/api/system.fabric.fabricclient.healthclient) 'Leri ve [Java FabricClient API 'leri](/java/api/system.fabric)veya [REST API](/rest/api/servicefabric)'leri aracılığıyla).
+* Sistem durumu sorguları ( [PowerShell](/powershell/module/servicefabric/?preserve-view=true&view=azureservicefabricps), [CLI](service-fabric-sfctl.md), [C# FabricClient API](/dotnet/api/system.fabric.fabricclient.healthclient) 'Leri ve [Java FabricClient API 'leri](/java/api/system.fabric)veya [REST API](/rest/api/servicefabric)'leri aracılığıyla).
 * Özelliklerden biri (PowerShell, CLı, API 'Ler veya REST aracılığıyla) durumuna sahip varlıkların bir listesini döndüren genel sorgular.
 
 ## <a name="monitoring-and-diagnostics"></a>İzleme ve tanılama

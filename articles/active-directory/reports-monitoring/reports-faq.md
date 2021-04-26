@@ -16,12 +16,12 @@ ms.date: 05/12/2020
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 45b6b182d030c267dcec7ed57c0c0dd1901b0cb1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4da0083a236900037b388798d825515e94613c20
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97935096"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533690"
 ---
 # <a name="frequently-asked-questions-around-azure-active-directory-reports"></a>Azure Active Directory raporlarının etrafında sık sorulan sorular
 
@@ -37,7 +37,7 @@ Y **:** [Etkinlik raporlarına erişmek için API 'leri nasıl kullanabileceğin
 
 **S: Şu anda `https://graph.windows.net/<tenant-name>/reports/` Azure AD güvenlik raporlarını (IP adreslerinden gelen kimlik bilgileri veya anonim IP adreslerinden oturum açma işlemleri gibi), raporlama sistemlerimize programlı olarak çekmek için uç nokta API 'lerini kullanıyorum. Ne geçiş yapmam gerekir?**
 
-Y **:** Güvenlik algılamalarını Microsoft Graph aracılığıyla erişmek için [kimlik koruması risk ALGıLAMA API](../identity-protection/howto-identity-protection-graph-api.md) 'sini kullanabilirsiniz. Bu yeni biçim, Gelişmiş filtreleme, alan seçimi ve daha fazlası ile verileri nasıl sorgulayabilme ve risk algılamalarını bir tür halinde kullanarak Sıems ve diğer veri toplama araçlarına daha kolay tümleştirme için daha fazla esneklik sağlar. Veriler farklı bir biçimde olduğundan eski sorgularınız için yeni bir sorgu yerine kullanamazsınız. Ancak, [yenı API](/graph/api/resources/identityriskevent?view=graph-rest-beta), Microsoft 365 veya Azure AD gibi bu API 'Ler için Microsoft standard olan Microsoft Graph kullanır. Bu nedenle, gereken iş, geçerli Microsoft Graph yatırımlarınızı genişletebilir veya bu yeni standart platforma geçişinizi başlamanıza yardımcı olabilir.
+Y **:** Güvenlik algılamalarını Microsoft Graph aracılığıyla erişmek için [kimlik koruması risk ALGıLAMA API](../identity-protection/howto-identity-protection-graph-api.md) 'sini kullanabilirsiniz. Bu yeni biçim, Gelişmiş filtreleme, alan seçimi ve daha fazlası ile verileri nasıl sorgulayabilme ve risk algılamalarını bir tür halinde kullanarak Sıems ve diğer veri toplama araçlarına daha kolay tümleştirme için daha fazla esneklik sağlar. Veriler farklı bir biçimde olduğundan eski sorgularınız için yeni bir sorgu yerine kullanamazsınız. Ancak, [yenı API](/graph/api/resources/identityriskevent?view=graph-rest-beta&preserve-view=true), Microsoft 365 veya Azure AD gibi bu API 'Ler için Microsoft standard olan Microsoft Graph kullanır. Bu nedenle, gereken iş, geçerli Microsoft Graph yatırımlarınızı genişletebilir veya bu yeni standart platforma geçişinizi başlamanıza yardımcı olabilir.
 
 ---
 

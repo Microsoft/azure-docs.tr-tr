@@ -10,12 +10,12 @@ ms.reviewer: veyalla
 ms.service: iot-edge
 ms.custom: devx-track-azurecli
 services: iot-edge
-ms.openlocfilehash: f4f2f8522f6d3d1039673803d946323deb485db9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 39e7bb5c151d490e79ef111589f52f260c3e6c7a
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200258"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107483172"
 ---
 # <a name="monitor-iot-edge-deployments"></a>IoT Edge dağıtımlarını izleme
 
@@ -27,7 +27,7 @@ Her iki cihaz ve modülün da bağlantı gibi benzer verileri vardır, bu nedenl
 
 IoT Hub hizmeti cihaz ve modül TWINS tarafından bildirilen verileri toplar ve cihazların sahip olabileceği çeşitli durumların sayısını sağlar. IoT Hub hizmeti bu verileri dört ölçüm grubuna düzenler:
 
-| Tür | Description |
+| Tür | Açıklama |
 | --- | ---|
 | Hedeflenen | Dağıtım hedefleme durumuyla eşleşen cihazları gösterir IoT Edge. |
 | Uygulandı | Daha yüksek önceliğe sahip başka bir dağıtım tarafından hedeflenilmemiş hedeflenen IoT Edge cihazları gösterir. |
@@ -45,7 +45,7 @@ Bir dağıtımın ayrıntılarını görüntülemek ve çalıştıran cihazları
 1. **IoT Edge dağıtımları** sekmesini seçin.
 1. Dağıtım listesini inceleyin. Her dağıtım için aşağıdaki ayrıntıları görebilirsiniz:
 
-    | Sütun | Description |
+    | Sütun | Açıklama |
     | --- | --- |
     | ID | Dağıtımın adı. |
     | Tür | Dağıtım türü, **dağıtım** ya da **katmanlı dağıtım**. |
@@ -69,7 +69,7 @@ Dağıtımınızda değişiklik yapmak için bkz. [bir dağıtımı değiştirme
 
 ## <a name="monitor-a-deployment-with-azure-cli"></a>Azure CLı ile bir dağıtımı izleme
 
-Tek bir dağıtımın ayrıntılarını görüntülemek için [az IoT Edge Deployment Show](/cli/azure/ext/azure-iot/iot/edge/deployment#ext-azure-iot-az-iot-edge-deployment-show) komutunu kullanın:
+Tek bir dağıtımın ayrıntılarını görüntülemek için [az IoT Edge Deployment Show](/cli/azure/iot/edge/deployment) komutunu kullanın:
 
 ```azurecli
 az iot edge deployment show --deployment-id [deployment id] --hub-name [hub name]
@@ -87,7 +87,7 @@ Komut penceresinde dağıtımı inceleyin. **Ölçümler** özelliği her bir hu
 * **Reportedbaşarıyla Fulcount** -IoT Edge istemci çalışma zamanının başarılı olarak bildirdiği IoT Edge cihazların sayısını belirten bir cihaz ölçümü.
 * **Reportedfailedcount** -IoT Edge istemci çalışma zamanından dağıtım raporlama hatası içindeki IoT Edge cihazlarının sayısını belirten bir cihaz ölçümü.
 
-[Az IoT Edge Deployment Show-Metric](/cli/azure/ext/azure-iot/iot/edge/deployment#ext-azure-iot-az-iot-edge-deployment-show-metric) komutuyla her ölçüm Için cihaz kimliklerinin veya nesnelerinin bir listesini gösterebilirsiniz:
+[Az IoT Edge Deployment Show-Metric](/cli/azure/iot/edge/deployment) komutuyla her ölçüm Için cihaz kimliklerinin veya nesnelerinin bir listesini gösterebilirsiniz:
 
 ```azurecli
 az iot edge deployment show-metric --deployment-id [deployment id] --metric-id [metric id] --hub-name [hub name]

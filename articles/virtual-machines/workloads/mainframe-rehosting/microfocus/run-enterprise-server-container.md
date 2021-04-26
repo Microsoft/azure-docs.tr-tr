@@ -14,10 +14,10 @@ keywords: ''
 ms.service: virtual-machines
 ms.subservice: mainframe-rehosting
 ms.openlocfilehash: 146fc59704719fd3aebb03b9b90a176221beea10
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104950697"
 ---
 # <a name="run-micro-focus-enterprise-server-50-in-a-docker-container-on-azure"></a>Azure 'daki bir Docker kapsayıcısında mikro odak kurumsal sunucu 5,0 ' i çalıştırın

@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 10/1/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 4009d8047dae7bf8d9ba66566ff8797fa09a8878
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a3ebcf5a381efceb5e7de503caf88f4ffd3b504e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98662313"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774746"
 ---
 # <a name="configure-server-parameters-in-azure-database-for-mariadb-using-the-azure-cli"></a>Azure CLı kullanarak MariaDB için Azure veritabanı 'nda sunucu parametrelerini yapılandırma
 Azure komut satırı yardımcı programını kullanarak bir MariaDB sunucusu için Azure veritabanı için yapılandırma parametrelerini listeleyebilir, gösterebilir ve güncelleştirebilirsiniz. Altyapı yapılandırmalarının bir alt kümesi sunucu düzeyinde sunulur ve değiştirilebilir.
@@ -27,7 +27,7 @@ Bu nasıl yapılır kılavuzunda ilerlemek için şunlar gerekir:
 - [Azure CLI](/cli/azure/install-azure-cli) komut satırı yardımcı programı veya Azure Cloud Shell tarayıcıda kullanın.
 
 ## <a name="list-server-configuration-parameters-for-azure-database-for-mariadb-server"></a>MariaDB sunucusu için Azure veritabanı için sunucu yapılandırma parametrelerini listeleyin
-Bir sunucudaki tüm değiştirilebilir parametreleri ve değerlerini listelemek için [az MariaDB sunucu yapılandırma listesi](/cli/azure/mariadb/server/configuration#az-mariadb-server-configuration-list) komutunu çalıştırın.
+Bir sunucudaki tüm değiştirilebilir parametreleri ve değerlerini listelemek için [az MariaDB sunucu yapılandırma listesi](/cli/azure/mariadb/server/configuration#az_mariadb_server_configuration_list) komutunu çalıştırın.
 
 Sunucu **mydemoserver.MariaDB.Database.Azure.com** için sunucu yapılandırma parametrelerini, **myresourcegroup** kaynak grubu altında listeleyebilirsiniz.
 ```azurecli-interactive
@@ -37,7 +37,7 @@ az mariadb server configuration list --resource-group myresourcegroup --server m
 Listelenen parametrelerin her birinin tanımı için [sunucu sistem değişkenlerinde](https://mariadb.com/kb/en/library/server-system-variables/)MariaDB başvurusu bölümüne bakın.
 
 ## <a name="show-server-configuration-parameter-details"></a>Sunucu yapılandırma parametresi ayrıntılarını göster
-Bir sunucu için belirli bir yapılandırma parametresi ayrıntılarını göstermek üzere [az MariaDB Server Configuration Show](/cli/azure/mariadb/server/configuration#az-mariadb-server-configuration-show) komutunu çalıştırın.
+Bir sunucu için belirli bir yapılandırma parametresi ayrıntılarını göstermek üzere [az MariaDB Server Configuration Show](/cli/azure/mariadb/server/configuration#az_mariadb_server_configuration_show) komutunu çalıştırın.
 
 Bu örnekte, **myresourcegroup** kaynak grubu altındaki Server **mydemoserver.MariaDB.Database.Azure.com** için **yavaş \_ sorgu \_ günlüğü** sunucusu yapılandırma parametresinin ayrıntıları gösterilmektedir.
 ```azurecli-interactive
@@ -45,7 +45,7 @@ az mariadb server configuration show --name slow_query_log --resource-group myre
 ```
 
 ## <a name="modify-a-server-configuration-parameter-value"></a>Sunucu yapılandırma parametre değerini değiştirme
-Ayrıca, MariaDB sunucu altyapısının temel yapılandırma değerini güncelleştiren belirli bir sunucu yapılandırma parametresinin değerini de değiştirebilirsiniz. Yapılandırmayı güncelleştirmek için [az MariaDB Server Configuration set](/cli/azure/mariadb/server/configuration#az-mariadb-server-configuration-set) komutunu kullanın. 
+Ayrıca, MariaDB sunucu altyapısının temel yapılandırma değerini güncelleştiren belirli bir sunucu yapılandırma parametresinin değerini de değiştirebilirsiniz. Yapılandırmayı güncelleştirmek için [az MariaDB Server Configuration set](/cli/azure/mariadb/server/configuration#az_mariadb_server_configuration_set) komutunu kullanın. 
 
 Sunucu **mydemoserver.MariaDB.Database.Azure.com** 'nin **yavaş \_ sorgu \_ günlüğü** sunucu yapılandırma parametresini **myresourcegroup** kaynak grubu altında güncelleştirmek için.
 ```azurecli-interactive
@@ -91,7 +91,7 @@ SELECT name FROM mysql.time_zone_name;
 
 ### <a name="setting-the-global-level-time-zone"></a>Genel düzey saat dilimini ayarlama
 
-Genel düzey saat dilimi, [az MariaDB sunucu yapılandırma kümesi](/cli/azure/mariadb/server/configuration#az-mariadb-server-configuration-set) komutu kullanılarak ayarlanabilir.
+Genel düzey saat dilimi, [az MariaDB sunucu yapılandırma kümesi](/cli/azure/mariadb/server/configuration#az_mariadb_server_configuration_set) komutu kullanılarak ayarlanabilir.
 
 Aşağıdaki komut, **myresourcegroup** kaynak grubu altındaki Server **mydemoserver.MariaDB.Database.Azure.com** 'ın **Saat \_ dilimi** sunucu yapılandırma parametresini **ABD/Pasifik** olarak güncelleştirir.
 

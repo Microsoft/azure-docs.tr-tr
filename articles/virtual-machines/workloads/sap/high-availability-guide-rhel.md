@@ -12,14 +12,14 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 01/11/2021
+ms.date: 04/12/2021
 ms.author: radeltch
-ms.openlocfilehash: 2f55df70b2ebdaed9b7f15c940d3f4f0553a2856
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: cf71f180a1ce845df436391b98227ae173fe77f1
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101676902"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107303670"
 ---
 # <a name="azure-virtual-machines-high-availability-for-sap-netweaver-on-red-hat-enterprise-linux"></a>Red Hat Enterprise Linux SAP NetWeaver için Azure sanal makineleri yüksek kullanılabilirliği
 
@@ -198,7 +198,6 @@ Azure Marketi, yeni sanal makineler dağıtmak için kullanabileceğiniz Red Hat
          1. Yeni yük dengeleyici kuralının adını girin (örneğin, **NW1-lb-ascs**)
          1. Daha önce oluşturduğunuz ön uç IP adresini, arka uç havuzunu ve sistem durumu araştırmasını seçin (örneğin, **NW1-ascs-ön uç**, **NW1-arka uç** ve **NW1-ascs-HP**)
          1. **Ha bağlantı noktalarını** seçin
-         1. Boşta kalma zaman aşımını 30 dakikaya yükselt
          1. **Kayan IP 'yi etkinleştirdiğinizden emin olun**
          1. Tamam 'a tıklayın
          * ÇÖZÜMLEYICILER için Yük Dengeleme kuralları oluşturmak için yukarıdaki adımları tekrarlayın (örneğin, **NW1-lb-ers**)

@@ -4,14 +4,14 @@ description: Microsoft Azure'deki DNS barındırma hizmetine genel bakış. Etki
 author: rohinkoul
 ms.service: dns
 ms.topic: overview
-ms.date: 3/25/2021
+ms.date: 4/20/2021
 ms.author: rohink
-ms.openlocfilehash: 41d2fdca653828588a5881daa0fa16c3bc71b5c4
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: a04e9aa2a0c342ff86b8f603c02a78952c55af88
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105046496"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817657"
 ---
 # <a name="what-is-azure-dns"></a>Azure DNS nedir?
 

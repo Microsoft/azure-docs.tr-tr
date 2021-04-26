@@ -5,12 +5,12 @@ ms.topic: quickstart
 ms.date: 03/16/2021
 ms.reviewer: astay; kraigb
 ms.custom: mvc, seodec18, devx-track-python, devx-track-azurecli
-ms.openlocfilehash: 094755ed6c018b3ac82d6f62a43f17e2536bbd9a
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 605d1e0f67ac959d2c7325e04e2fd10d9d2419be
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104953519"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829503"
 ---
 # <a name="configure-a-linux-python-app-for-azure-app-service"></a>Azure App Service için bir Linux Python uygulaması yapılandırma
 
@@ -27,7 +27,7 @@ Yapılandırma için [Azure Portal](https://portal.azure.com) ya da Azure CLI 'y
 - **Azure CLI**: iki seçeneğiniz vardır.
 
     - [Azure Cloud Shell](../cloud-shell/overview.md)komutları çalıştırın.
-    - [Azure CLI](/cli/azure/install-azure-cli)'nın en son sürümünü yükleyerek komutları yerel olarak çalıştırın ve [az Login](/cli/azure/reference-index#az-login)komutunu kullanarak Azure 'da oturum açın.
+    - [Azure CLI](/cli/azure/install-azure-cli)'nın en son sürümünü yükleyerek komutları yerel olarak çalıştırın ve [az Login](/cli/azure/reference-index#az_login)komutunu kullanarak Azure 'da oturum açın.
     
 > [!NOTE]
 > Linux Şu anda App Service ' de Python uygulamalarını çalıştırmak için önerilen seçenektir. Windows seçeneği hakkında bilgi için, [App Service Windows üzerinde Python](/visualstudio/python/managing-python-on-azure-app-service)konusuna bakın.
@@ -129,7 +129,7 @@ Aşağıdaki tabloda, Azure ile ilgili üretim ayarları açıklanmaktadır. Bu 
 
 | Docgo ayarı | Azure için yönergeler |
 | --- | --- |
-| `SECRET_KEY` | Değeri, [uygulama ayarlarında ortam değişkenleri olarak erişim](#access-app-settings-as-environment-variables)bölümünde açıklandığı gibi bir App Service ayarında depolayın. [Değeri, Azure Key Vault ' de bir "secrete" olarak da saklayabilirsiniz](../key-vault/secrets/quick-create-python.md). |
+| `SECRET_KEY` | Değeri, [uygulama ayarlarında ortam değişkenleri olarak erişim](#access-app-settings-as-environment-variables)bölümünde açıklandığı gibi bir App Service ayarında depolayın. [Değeri, Azure Key Vault ' de bir "gizli dizi" olarak da saklayabilirsiniz](../key-vault/secrets/quick-create-python.md). |
 | `DEBUG` | `DEBUG`App Service 0 (false) değeriyle bir ayar oluşturun ve ardından değeri bir ortam değişkeni olarak yükleyin. Geliştirme ortamınızda, `DEBUG` 1 değerine sahip bir ortam değişkeni oluşturun (true). |
 | `ALLOWED_HOSTS` | Üretimde, Docgo, uygulamanın URL 'sini `ALLOWED_HOSTS` *Settings.py* dizisine dahil etmeniz gerekir. Bu URL 'YI çalışma zamanında bu kodla elde edebilirsiniz `os.environ['WEBSITE_HOSTNAME']` . App Service, `WEBSITE_HOSTNAME` ortam değişkenini otomatik olarak uygulamanın URL 'si olarak ayarlar. |
 | `DATABASES` | Veritabanı bağlantısı için App Service ayarları tanımlayın ve sözlüğü doldurmak için ortam değişkenleri olarak yükleyin [`DATABASES`](https://docs.djangoproject.com/en/3.1/ref/settings/#std:setting-DATABASES) . Değerleri (özellikle Kullanıcı adı ve parola) [gizli Azure Key Vault](../key-vault/secrets/quick-create-python.md)olarak saklayabilirsiniz. |
@@ -169,8 +169,10 @@ App Service için aşağıdaki değişiklikleri yapın:
 1. Ayrıca, `MIDDLEWARE` ve `INSTALLED_APPS` listelerini de içerecek şekilde değiştirin:
 
     ```python
-    MIDDLEWARE = [
-        "whitenoise.middleware.WhiteNoiseMiddleware",
+    MIDDLEWARE = [                                                                   
+        'django.middleware.security.SecurityMiddleware',
+        # Add whitenoise middleware after the security middleware                             
+        'whitenoise.middleware.WhiteNoiseMiddleware',
         # Other values follow
     ]
 

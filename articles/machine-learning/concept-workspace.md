@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.author: sgilley
 author: sdgilley
 ms.date: 09/22/2020
-ms.openlocfilehash: bf2419799ad6c229c6ffb891bc588479e134d427
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 215da0e38045a2e66a4a11b54204c26e7720815c
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102500402"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107719070"
 ---
 # <a name="what-is-an-azure-machine-learning-workspace"></a>Azure Machine Learning çalışma alanı nedir?
 
@@ -105,7 +105,7 @@ Yeni bir çalışma alanı oluşturduğunuzda, bu, çalışma alanı tarafından
   > [!IMPORTANT]
   > Varsayılan olarak, depolama hesabı genel amaçlı bir v1 hesabıdır. Çalışma alanı oluşturulduktan sonra [bunu genel amaçlı v2 'ye yükseltebilirsiniz](../storage/common/storage-account-upgrade.md) . Genel amaçlı v2 'ye yükselttikten sonra depolama hesabında hiyerarşik ad alanını etkinleştirmeyin.
 
-  Mevcut bir Azure Depolama hesabını kullanmak için bu bir Premium hesap (Premium_LRS ve Premium_GRS) olamaz. Ayrıca hiyerarşik bir ad alanına sahip olamaz (Azure Data Lake Storage 2. ile kullanılır). Çalışma alanının _varsayılan_ depolama hesabıyla Premium Depolama veya hiyerarşik ad alanları desteklenmez. Premium Storage veya sıradüzensel ad alanını _varsayılan olmayan_ depolama hesaplarıyla birlikte kullanabilirsiniz.
+  Mevcut bir Azure Depolama hesabını kullanmak için BlobStorage türünde veya Premium bir hesap (Premium_LRS ve Premium_GRS) olamaz. Ayrıca hiyerarşik bir ad alanına sahip olamaz (Azure Data Lake Storage 2. ile kullanılır). Çalışma alanının _varsayılan_ depolama hesabıyla Premium Depolama veya hiyerarşik ad alanları desteklenmez. Premium Storage veya sıradüzensel ad alanını _varsayılan olmayan_ depolama hesaplarıyla birlikte kullanabilirsiniz.
   
 + [Azure Container Registry](https://azure.microsoft.com/services/container-registry/): eğitim sırasında ve bir modeli dağıtırken kullandığınız Docker kapsayıcılarını kaydeder. Maliyetleri en aza indirmek için, dağıtım görüntüleri oluşturuluncaya kadar ACR **yavaş yüklenir** .
 

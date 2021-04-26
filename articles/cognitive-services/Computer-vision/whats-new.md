@@ -10,16 +10,29 @@ ms.subservice: computer-vision
 ms.topic: overview
 ms.date: 01/13/2021
 ms.author: pafarley
-ms.openlocfilehash: 78746e7623f58af5ae9df829b48245295dc39f01
-ms.sourcegitcommit: 8d1b97c3777684bd98f2cfbc9d440b1299a02e8f
+ms.openlocfilehash: e42096fc32a504ae329d3b179004b6a123de4469
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/09/2021
-ms.locfileid: "102487109"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107365646"
 ---
 # <a name="whats-new-in-computer-vision"></a>Görüntü İşleme yenilikleri
 
 Hizmette nelerin yeni olduğunu öğrenin. Bu öğeler sürüm notları, videolar, blog gönderileri ve diğer bilgi türleri olabilir. Hizmette güncel kalmak için bu sayfaya yer işareti ekleyin.
+
+## <a name="april-2021"></a>2021 Nisan
+
+### <a name="computer-vision-v32-ga"></a>Görüntü İşleme v 3.2 GA
+
+Görüntü İşleme API'si v 3.2, artık aşağıdaki güncelleştirmelerle genel kullanıma sunulmuştur:
+* Geliştirilmiş görüntü etiketleme modeli: görsel içeriği analiz eder ve görüntüde görünen nesnelere, eylemlere ve içeriğe göre ilgili etiketler oluşturur. Bu, [Tag Image API 'si](https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/56f91f2e778daf14a499f200)ile kullanılabilir. Daha fazla bilgi için bkz. görüntü analizi [nasıl yapılır Kılavuzu](https://docs.microsoft.com/azure/cognitive-services/computer-vision/vision-api-how-to-topics/howtocallvisionapi) ve [genel bakış](https://docs.microsoft.com/azure/cognitive-services/computer-vision/overview-image-analysis) .
+* Güncelleştirilmiş içerik denetleme modeli: yetişkinlere yönelik içeriklerin varlığını algılar ve yetişkinlere, kcy ve Gori görsel içeriğini içeren görüntüleri filtrelemek için bayraklar sağlar. Bu, [Çözümle API 'si](https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/56f91f2e778daf14a499f21b)aracılığıyla kullanılabilir. Daha fazla bilgi için bkz. görüntü analizi [nasıl yapılır Kılavuzu](https://docs.microsoft.com/azure/cognitive-services/computer-vision/vision-api-how-to-topics/howtocallvisionapi) ve [genel bakış](https://docs.microsoft.com/azure/cognitive-services/computer-vision/overview-image-analysis) .
+* Basitleştirilmiş ve geleneksel Çince, Japonca, Korece ve Latin dilleri dahil olmak üzere [73 dilleri Için OCR (okuma) kullanılabilir](./language-support.md#optical-character-recognition-ocr) .
+* [OCR (okuma)](./overview-ocr.md) , şirket içi dağıtım Için [daha az bir kapsayıcı](./computer-vision-how-to-install-containers.md?tabs=version-3-2) olarak da kullanılabilir.
+
+> [!div class="nextstepaction"]
+> [Bkz. Görüntü İşleme v 3.2 GA](https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005)
 
 ## <a name="march-2021"></a>Mart 2021
 
@@ -40,7 +53,7 @@ Görüntü İşleme, bulut hizmeti ve Docker kapsayıcısı olarak sunulan Read 
 * Yalnızca bir çok sayfalı belge için seçili sayfalar için metin ayıkla.
 * Şirket içi dağıtım için [daha az bir kapsayıcı](./computer-vision-how-to-install-containers.md?tabs=version-3-2) olarak kullanılabilir.
 
-Okuma API 'SI hakkında [daha fazla bilgi edinin](concept-recognizing-text.md) .
+Daha fazla bilgi için bkz. [API nasıl yapılır kılavuzunu okuyun](Vision-API-How-to-Topics/call-read-api.md) .
 
 > [!div class="nextstepaction"]
 > [Read API v 3.2 genel önizlemeyi kullanın](https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-preview-3/operations/5d986960601faab4bf452005)
@@ -83,7 +96,7 @@ Görüntü İşleme Read API v 3.1 Genel önizlemesi şu özellikleri ekler:
 
 * Okuma API 'sinin bu önizleme sürümü Ingilizce, Felemenkçe, Fransızca, Almanca, Italyanca, Japonca, Portekizce, Basitleştirilmiş Çince ve Ispanyolca dilleri destekler.
 
-Daha fazla bilgi için [okuma API 'sine genel bakış](concept-recognizing-text.md) bölümüne bakın.
+Daha fazla bilgi için bkz. [API nasıl yapılır kılavuzunu okuyun](Vision-API-How-to-Topics/call-read-api.md) .
 
 > [!div class="nextstepaction"]
 > [Okuma API v 3.1 genel önizleme 2 hakkında daha fazla bilgi edinin](https://westus2.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-preview-2/operations/5d986960601faab4bf452005)
@@ -95,18 +108,20 @@ Görüntü İşleme okuma API v 3.1 genel önizleme, Basitleştirilmiş Çince d
 
 * Okuma API 'sinin bu önizleme sürümü Ingilizce, Felemenkçe, Fransızca, Almanca, Italyanca, Portekizce, Basitleştirilmiş Çince ve Ispanyolca dilleri destekler.
 
-Daha fazla bilgi için [okuma API 'sine genel bakış](concept-recognizing-text.md) bölümüne bakın.
+Daha fazla bilgi için bkz. [API nasıl yapılır kılavuzunu okuyun](Vision-API-How-to-Topics/call-read-api.md) .
 
 > [!div class="nextstepaction"]
 > [Okuma API v 3.1 Genel Önizleme 1 hakkında daha fazla bilgi edinin](https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-preview-1/operations/5d986960601faab4bf452005)
 
 ## <a name="may-2020"></a>Mayıs 2020
-Görüntü İşleme API'si v 3.0 genel kullanılabilirliği ve [API 'Yi okumak](concept-recognizing-text.md)için güncelleştirmeler ile girilmiş:
+Görüntü İşleme API'si v 3.0 genel kullanılabilirliği, okuma API 'SI güncelleştirmeleriyle birlikte girilmiş:
 
 * Ingilizce, Felemenkçe, Fransızca, Almanca, Italyanca, Portekizce ve Ispanyolca desteği
 * İyileştirilmiş doğruluk
 * Ayıklanan her sözcüğün Güvenirlik puanı
 * Yeni çıkış biçimi
+
+Daha fazla bilgi için bkz. [OCR genel bakış](overview-ocr.md) .
 
 ## <a name="march-2020"></a>Mart 2020
 

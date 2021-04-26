@@ -1,18 +1,15 @@
 ---
 title: Azure Site Recovery ile Azure 'da Hyper-V VM 'lerinin olağanüstü durum kurtarma desteği
 description: Azure Site Recovery ile Azure 'da Hyper-V VM olağanüstü durum kurtarma için desteklenen bileşenleri ve gereksinimleri özetler
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 7/14/2020
-ms.author: raynew
-ms.openlocfilehash: 8d748f93337a770e0d565bab79fdfb3625bda70d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 936950ef5dd2c1c7343e30536ab8836fcd198bd0
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101735531"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106580832"
 ---
 # <a name="support-matrix-for-disaster-recovery-of-on-premises-hyper-v-vms-to-azure"></a>Şirket içi Hyper-V VM 'lerinin Azure 'a olağanüstü durum kurtarması için destek matrisi
 
@@ -142,7 +139,7 @@ Premium depolama | Yes | Yes
 Standart depolama | Yes | Yes
 İçeri/dışarı aktarma hizmeti | Hayır | Hayır
 Güvenlik Duvarı etkin Azure depolama hesapları | Evet. Hedef depolama ve önbellek için. | Evet. Hedef depolama ve önbellek için.
-Depolama hesabını değiştir | Hayır. Hedef Azure depolama hesabı, çoğaltma etkinleştirildikten sonra değiştirilemez. Değişiklik yapmak için, olağanüstü durum kurtarmayı devre dışı bırakıp yeniden etkinleştirin. | No
+Depolama hesabını değiştir | Hayır. Hedef Azure depolama hesabı, çoğaltma etkinleştirildikten sonra değiştirilemez. Değişiklik yapmak için, olağanüstü durum kurtarmayı devre dışı bırakıp yeniden etkinleştirin. | Hayır
 Güvenli aktarım seçeneği | Yes | Yes
 
 

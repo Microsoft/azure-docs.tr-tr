@@ -4,13 +4,13 @@ description: Bu hızlı başlangıçta, Azure-mesajlaşma-ServiceBus paketini ku
 ms.topic: quickstart
 ms.tgt_pltfrm: dotnet
 ms.date: 03/16/2021
-ms.custom: devx-track-csharp
-ms.openlocfilehash: 7b313caf6709429de9e0dcac219a4180c7391cf7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: contperf-fy21q3
+ms.openlocfilehash: 79eb7783fd3daf546539dd5b9048f4e9f484374f
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104607625"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106279808"
 ---
 # <a name="send-messages-to-an-azure-service-bus-topic-and-receive-messages-from-subscriptions-to-the-topic-net"></a>Azure Service Bus konuya ileti gönderme ve aboneliklerden konuya ileti alma (.NET)
 Bu öğreticide, aşağıdaki görevleri yapmak için bir C# uygulaması oluşturacaksınız:

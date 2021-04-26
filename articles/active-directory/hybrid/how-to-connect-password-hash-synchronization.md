@@ -15,12 +15,12 @@ ms.author: billmath
 search.appverid:
 - MET150
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 47d7d541ed7d9805641ffdfde381d482c8700006
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: ee22ba3816e667bc58247fa81142e54587124fd6
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96858748"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865306"
 ---
 # <a name="implement-password-hash-synchronization-with-azure-ad-connect-sync"></a>Azure AD Connect eşitlemesi ile parola karması eşitlemeyi uygulama
 Bu makale, Kullanıcı parolalarınızı şirket içi Active Directory örneğinden bulut tabanlı Azure Active Directory (Azure AD) örneğine eşitlemeniz için gereken bilgileri sağlar.
@@ -210,7 +210,7 @@ Sunucunuz Federal bilgi Işleme standardı (FIPS) uyarınca kilitliyse, MD5 devr
 
 **Parola karması eşitlemesi için MD5 etkinleştirmek üzere aşağıdaki adımları uygulayın:**
 
-1. %Programfiles%\Azure AD Sync\Bin. 'e gidin
+1. %Programfiles%\Microsoft Azure AD Sync\Bin. 'e gidin
 2. miiserver.exe.config açın.
 3. Dosyanın sonundaki yapılandırma/çalışma zamanı düğümüne gidin.
 4. Aşağıdaki düğümü ekleyin: `<enforceFIPSPolicy enabled="false"/>`

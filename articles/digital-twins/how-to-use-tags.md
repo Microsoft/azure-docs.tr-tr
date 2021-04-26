@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 7/22/2020
 ms.topic: how-to
 ms.service: digital-twins
-ms.openlocfilehash: 70bf46de072a97eca810dda60a5331df14172ed6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0d45ef8c32e61b5567798b7c42af28badb222601
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100555149"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376724"
 ---
 # <a name="add-tags-to-digital-twins"></a>Dijital TWINS 'e etiket ekleme 
 
@@ -41,6 +41,10 @@ Bir ikizi modelinden, bir işaretçi etiketini özellik olarak uygulayan bir al�
 Üç TWINS için işaretçiyi dolduran bir örnek aşağıda verilmiştir `tags` :
 
 :::code language="csharp" source="~/digital-twins-docs-samples/sdks/csharp/twin_operations_other.cs" id="TagPropertiesMarker":::
+
+`tags` [.NET SDK](/dotnet/api/overview/azure/digitaltwins/client)kullanarak bir ikizi için işaretin nasıl ayarlanacağı hakkında bir kod örneği aşağıda verilmiştir:
+
+:::code language="csharp" source="~/digital-twins-docs-samples/sdks/csharp/twin_operations_other.cs" id="TagPropertiesCsharp":::
 
 ### <a name="query-with-marker-tags"></a>İşaret etiketleriyle sorgu
 

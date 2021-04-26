@@ -6,13 +6,13 @@ ms.assetid: a7738a24-89ef-43d3-bff1-77f43d5a3952
 ms.topic: article
 ms.date: 03/22/2021
 ms.author: ccompy
-ms.custom: seodec18, references_regions
-ms.openlocfilehash: 25bdfb7a0301af472baa89d3d9e73aacf8cff139
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.custom: seodec18, references_regions, devx-track-azurecli
+ms.openlocfilehash: 796ee38140e72a56f1f22b0594dd904a43ac53c0
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104954624"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865234"
 ---
 # <a name="app-service-environment-management-addresses"></a>Yönetim adreslerini App Service Ortamı
 

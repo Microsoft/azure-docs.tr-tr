@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
 ms.topic: how-to
-ms.date: 03/24/2021
+ms.date: 04/20/2021
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 711d4bdf2be2ad3158c12e4690a70fb83fe7a846
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 05aca853e2eba98d224131c98751b4e2f4200024
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105559511"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765656"
 ---
 # <a name="conditional-access-securing-security-info-registration"></a>Koşullu Erişim: Güvenlik bilgileri kaydının güvenliğini sağlama
 
@@ -52,7 +52,7 @@ Aşağıdaki ilke, birleştirilmiş kayıt deneyimini kullanarak kaydolmayı den
 1. **İlkeyi etkinleştir**’i **Açık** duruma getirin.
 1. Ardından **Oluştur**’u seçin.
 
-Yöneticiler artık yeni kullanıcılara geçici erişim geçiş kimlik bilgileri vermek zorunda kalacak, böylelikle Multi-Factor Authentication 'ın kaydedileceği gereksinimleri karşılayabilirler. Bu görevi gerçekleştirmek için gereken adımlar, [Azure AD portalında geçici erişim geçişi oluşturma](../authentication/howto-authentication-temporary-access-pass.md#create-a-temporary-access-pass-in-the-azure-ad-portal)bölümünde bulunur.
+Yöneticiler artık yeni kullanıcılara geçici erişim geçiş kimlik bilgileri vermek zorunda kalacak, böylelikle Multi-Factor Authentication 'ın kaydedileceği gereksinimleri karşılayabilirler. Bu görevi gerçekleştirmek için gereken adımlar, [Azure AD portalında geçici erişim geçişi oluşturma](../authentication/howto-authentication-temporary-access-pass.md#create-a-temporary-access-pass)bölümünde bulunur.
 
 Kuruluşlar, 6B adımında **Multi-Factor Authentication gerektir** ' in yanı sıra diğer izin denetimleri gerektirmesinin gerekli olmasını seçebilirler. Birden çok denetim seçerken, bu değişikliği yaparken seçili denetimlerden **Tümünü** veya **birini** gerektirmek için uygun radyo düğmesini seçtiğinizden emin olun.
 
@@ -85,3 +85,5 @@ Dizininizde Multi-Factor Authentication 'a kaydolmaları gereken [Konuk kullanı
 [Koşullu erişim yalnızca rapor modunu kullanarak etkiyi belirleme](howto-conditional-access-insights-reporting.md)
 
 [Koşullu erişim What If aracını kullanarak oturum açma davranışının benzetimini yapma](troubleshoot-conditional-access-what-if.md)
+
+[Kullanıcıların kimlik doğrulama bilgilerini yeniden onaylamasını gerektir](../authentication/concept-sspr-howitworks.md#reconfirm-authentication-information)

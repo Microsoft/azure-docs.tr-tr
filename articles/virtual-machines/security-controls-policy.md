@@ -1,18 +1,18 @@
 ---
 title: Azure sanal makineleri için Azure Ilke mevzuat uyumluluk denetimleri
 description: Azure sanal makineleri için kullanılabilen Azure Ilke mevzuat uyumluluk denetimlerini listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızın uyumluluğunu yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: sample
 author: cynthn
 ms.author: cynthn
 ms.service: virtual-machines
 ms.custom: subject-policy-compliancecontrols
-ms.openlocfilehash: 4782980d380846a1b311af15243d68d5627b6877
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 0afe3279bbce3e47e1a87c8189f273ccb9e273f4
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105036296"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865359"
 ---
 # <a name="azure-policy-regulatory-compliance-controls-for-azure-virtual-machines"></a>Azure sanal makineleri için Azure Ilke mevzuat uyumluluk denetimleri 
 

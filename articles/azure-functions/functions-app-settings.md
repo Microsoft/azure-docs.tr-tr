@@ -4,10 +4,10 @@ description: Azure Işlevleri uygulama ayarları veya ortam değişkenleri için
 ms.topic: conceptual
 ms.date: 09/22/2018
 ms.openlocfilehash: 327f120d387a3a08f0de9db2da718d530346e545
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104773088"
 ---
 # <a name="app-settings-reference-for-azure-functions"></a>Azure İşlevleri için uygulama ayarları başvurusu
@@ -109,7 +109,7 @@ Bu uygulama ayarı atlandığında veya olarak ayarlandığında `false` , URL '
 
 ![İşlev uygulaması giriş sayfası](media/functions-app-settings/function-app-landing-page.png)
 
-## <a name="azurewebjobsdotnetreleasecompilation"></a>AzureWebJobsDotNetReleaseCompilation
+## <a name="azurewebjobsdotnetreleasecompilation&quot;></a>AzureWebJobsDotNetReleaseCompilation
 
 `true` , .NET kodu derlenirken yayın modunun kullanılacağı anlamına gelir; `false` hata ayıklama modunu kullanma anlamına gelir. `true` varsayılan değerdir.
 
@@ -117,7 +117,7 @@ Bu uygulama ayarı atlandığında veya olarak ayarlandığında `false` , URL '
 |---|------------|
 |AzureWebJobsDotNetReleaseCompilation|true|
 
-## <a name="azurewebjobsfeatureflags"></a>AzureWebJobsFeatureFlags
+## <a name=&quot;azurewebjobsfeatureflags&quot;></a>AzureWebJobsFeatureFlags
 
 Etkinleştirilecek beta özellikleri için virgülle ayrılmış bir liste. Bu bayraklar tarafından etkinleştirilen beta özellikleri üretime hazırlanmaz, ancak canlı çalışmadan önce deneysel kullanım için etkinleştirilebilir.
 
@@ -125,9 +125,9 @@ Etkinleştirilecek beta özellikleri için virgülle ayrılmış bir liste. Bu b
 |---|------------|
 |AzureWebJobsFeatureFlags|özellik1, Özellik2|
 
-## <a name="azurewebjobssecretstoragetype"></a>AzureWebJobsSecretStorageType
+## <a name=&quot;azurewebjobssecretstoragetype&quot;></a>AzureWebJobsSecretStorageType
 
-Anahtar depolaması için kullanılacak depoyu veya sağlayıcıyı belirtir. Şu anda, desteklenen depolar BLOB depolama ("blob") ve yerel dosya sistemi ("dosyalar") ' dir. Varsayılan, sürüm 2 ' deki blob ve sürüm 1 ' de dosya sistemidir.
+Anahtar depolaması için kullanılacak depoyu veya sağlayıcıyı belirtir. Şu anda, desteklenen depolar BLOB depolama (&quot;blob") ve yerel dosya sistemi ("dosyalar") ' dir. Varsayılan, sürüm 2 ' deki blob ve sürüm 1 ' de dosya sistemidir.
 
 |Anahtar|Örnek değer|
 |---|------------|

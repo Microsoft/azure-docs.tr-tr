@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
-ms.date: 11/11/2020
+ms.date: 04/21/2021
 ms.author: justinha
 author: justinha
 manager: daveba
 ms.reviewer: librown
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 51e6cd7efcd0e851c15975aba5ff9b99c615eb7d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d586294f101c271f139867d0046576dc9a32f076
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101653482"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861798"
 ---
 # <a name="enable-passwordless-sign-in-with-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamayla passwordless oturum açmayı etkinleştirme 
 
@@ -38,6 +38,7 @@ Microsoft Authenticator uygulamasıyla passwordless telefon oturum açma 'yı ku
 
 - Bir doğrulama yöntemi olarak izin verilen anında iletme bildirimleri ile Azure AD Multi-Factor Authentication.
 - İOS 8,0 veya üzerini çalıştıran cihazlarda yüklü Microsoft Authenticator en son sürümü veya Android 6,0 veya üzeri.
+- Microsoft Authenticator uygulamasının yüklü olduğu cihaz, Azure AD kiracısı içinde tek bir kullanıcıya kaydedilmelidir. 
 
 > [!NOTE]
 > Azure AD PowerShell kullanarak parolasız Microsoft Authenticator oturum açma 'yı etkinleştirdiyseniz, bu, tüm dizininiz için etkinleştirilmiştir. Bu yeni yöntemi kullanmayı etkinleştirirseniz, PowerShell ilkesinin yerini almaz. Yeni *kimlik doğrulama yöntemleri* menüsü aracılığıyla kiracınızdaki tüm kullanıcılar için etkinleştirmenizi öneririz, aksi halde yeni ilkede olmayan kullanıcılar artık parolasız oturum açamaz.

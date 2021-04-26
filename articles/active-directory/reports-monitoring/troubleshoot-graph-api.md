@@ -17,12 +17,12 @@ ms.date: 11/13/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: abc8badf261e631dd6ceb7af9a6a0cb3676ae25d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 445514297550210d80cd50895201d1129fac4f20
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96017602"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533719"
 ---
 # <a name="troubleshoot-errors-in-azure-active-directory-reporting-api"></a>Azure Active Directory Raporlama API 'sindeki hataların sorunlarını giderme
 
@@ -50,5 +50,5 @@ Lütfen uygulamanızın doğru izin kümesiyle çalıştığından emin olmak i�
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-[Denetim API 'si başvurusunu kullanma](/graph/api/resources/directoryaudit?view=graph-rest-beta) 
- [Oturum açma Etkinliği raporu API başvurusunu kullanın](/graph/api/resources/signin?view=graph-rest-beta)
+[Denetim API 'si başvurusunu kullanma](/graph/api/resources/directoryaudit) 
+ [Oturum açma Etkinliği raporu API başvurusunu kullanın](/graph/api/resources/signin)

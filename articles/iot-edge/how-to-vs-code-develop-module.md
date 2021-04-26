@@ -9,12 +9,12 @@ ms.date: 08/07/2019
 ms.topic: conceptual
 ms.service: iot-edge
 ms.custom: devx-track-js
-ms.openlocfilehash: eae6f1ec8cb6917d0d51deca8c9e88725c9b01a7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7cc5061911ffc2cbc91dfa8c0d2fd1a6e59ff1a1
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200625"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107875674"
 ---
 # <a name="use-visual-studio-code-to-develop-and-debug-modules-for-azure-iot-edge"></a>Azure IoT Edge için modülleri geliştirmek ve hatalarını ayıklamak için Visual Studio Code kullanın
 
@@ -47,7 +47,7 @@ Geliştirme makineniz olarak Windows, macOS veya Linux çalıştıran bir bilgis
 
 Ayrıca modülünüzü geliştirmek için dile özgü bazı ek araçlar yüklemeniz gerekir:
 
-- Azure Işlevleri dahil olmak üzere C#: [.NET Core 2,1 SDK](https://www.microsoft.com/net/download)
+- Azure Işlevleri dahil olmak üzere C#: [.NET Core 2,1 SDK](https://dotnet.microsoft.com/download/dotnet/2.1)
 
 - Python: Python paketlerini yüklemek için [Python](https://www.python.org/downloads/) ve [PIP](https://pip.pypa.io/en/stable/installing/#installation) (genellikle Python yüklemenize dahildir).
 

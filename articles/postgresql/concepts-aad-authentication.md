@@ -1,17 +1,17 @@
 ---
 title: Active Directory kimlik doğrulaması-PostgreSQL için Azure veritabanı-tek sunucu
 description: PostgreSQL için Azure veritabanı-tek sunucu ile kimlik doğrulaması için Azure Active Directory kavramları hakkında bilgi edinin
-author: lfittl
-ms.author: lufittl
+author: sunilagarwal
+ms.author: sunila
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 07/23/2020
-ms.openlocfilehash: 0a19bd9d1547c16937ee575c08ea15a52589ccd0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ff588a2fdc079c4b5a1cd50ddc4441a079d3feed
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87171051"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105960929"
 ---
 # <a name="use-azure-active-directory-for-authenticating-with-postgresql"></a>Azure Active Directory ile PostgreSQL kimlik doğrulaması gerçekleştirme
 

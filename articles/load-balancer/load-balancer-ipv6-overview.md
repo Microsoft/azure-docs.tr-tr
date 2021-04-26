@@ -14,10 +14,10 @@ ms.workload: infrastructure-services
 ms.date: 08/24/2018
 ms.author: allensu
 ms.openlocfilehash: 4061a3dbf4dc92d6d412528115d46edc36d20d5e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "94700700"
 ---
 # <a name="overview-of-ipv6-for-azure-load-balancer"></a>Azure Load Balancer için IPv6 'ya genel bakış
@@ -40,12 +40,12 @@ Aşağıdaki resimde Azure Load Balancer IPv6 işlevselliği gösterilmektedir.
 
 Bir IPv4 veya IPv6 etkin Internet istemcisi dağıtıldıktan sonra, Azure Internet 'e yönelik Load Balancer genel IPv4 veya IPv6 adresleriyle (veya ana bilgisayar adları) iletişim kurabilir. Yük dengeleyici, IPv6 paketlerini ağ adresi çevirisi (NAT) kullanarak VM 'lerin özel IPv6 adreslerine yönlendirir. IPv6 Internet istemcisi, VM 'lerin IPv6 adresiyle doğrudan iletişim kuramaz.
 
-## <a name="features"></a>Özellikler
+## <a name="features&quot;></a>Özellikler
 
 Azure Resource Manager aracılığıyla dağıtılan VM 'Ler için yerel IPv6 desteği şunları sağlar:
 
 1. Internet 'te IPv6 istemcileri için yük dengeli IPv6 Hizmetleri
-2. VM 'lerde yerel IPv6 ve IPv4 uç noktaları ("çift yığılmış")
+2. VM 'lerde yerel IPv6 ve IPv4 uç noktaları (&quot;çift yığılmış")
 3. Gelen ve giden tarafından başlatılan yerel IPv6 bağlantıları
 4. TCP, UDP ve HTTP gibi desteklenen protokoller, eksiksiz bir hizmet mimarisi yelpazesi sağlar
 

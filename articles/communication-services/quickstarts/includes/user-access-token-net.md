@@ -10,12 +10,12 @@ ms.date: 03/10/2021
 ms.topic: include
 ms.custom: include file
 ms.author: tchladek
-ms.openlocfilehash: 8eaa5c0bee007d9fd253f42bcdccdd31f68bd0f5
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 653692812507c05c6cfc58b00d3c93ece19019bb
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107168"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106112806"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -45,7 +45,7 @@ dotnet build
 Hala uygulama dizininde, komutunu kullanarak .NET için Azure Iletişim Hizmetleri kimlik kitaplığı 'nı yükleyebilirsiniz `dotnet add package` .
 
 ```console
-dotnet add package Azure.Communication.Identity --version 1.0.0-beta.5
+dotnet add package Azure.Communication.Identity --version 1.0.0
 ```
 
 ### <a name="set-up-the-app-framework"></a>Uygulama çerçevesini ayarlama
@@ -78,7 +78,7 @@ namespace AccessTokensQuickstart
 ```
 ## <a name="authenticate-the-client"></a>İstemcinin kimliğini doğrulama
 
-`CommunicationIdentityClient`Bağlantı dizeniz ile bir başlatın. Aşağıdaki kod, adlı bir ortam değişkeninden kaynak için bağlantı dizesini alır `COMMUNICATION_SERVICES_CONNECTION_STRING` . [Kaynak bağlantı dizesini yönetme](../create-communication-resource.md#store-your-connection-string)hakkında bilgi edinin.
+`CommunicationIdentityClient`Bağlantı dizeniz ile bir başlatın. Aşağıdaki kod, adlı bir ortam değişkeninden kaynak için bağlantı dizesini alır `COMMUNICATION_SERVICES_CONNECTION_STRING` . [Kaynağınızın bağlantı dizesini yönetme](../create-communication-resource.md#store-your-connection-string)hakkında bilgi edinin.
 
 `Main` yöntemine aşağıdaki kodu ekleyin:
 
@@ -150,8 +150,7 @@ Console.WriteLine(token);
 Bir erişim belirtecini yenilemek için nesnesinin bir örneğini geçirin `CommunicationUserIdentifier` `GetTokenAsync` . Bunu depoladıysanız `Id` ve yeni bir oluşturmanız gerekiyorsa `CommunicationUserIdentifier` , bu durumda, `Id` aşağıdaki gibi, depolama alanınızı oluşturucuya geçirerek bunu yapabilirsiniz `CommunicationUserIdentifier` :
 
 ```csharp
-// In this example, userId is a string containing the Id property of a previously-created CommunicationUser
-var identityToRefresh = new CommunicationUserIdentifier(userId);
+var identityToRefresh = new CommunicationUserIdentifier(identity.Id);
 var tokenResponse = await client.GetTokenAsync(identityToRefresh, scopes: new [] { CommunicationTokenScope.VoIP });
 ```
 

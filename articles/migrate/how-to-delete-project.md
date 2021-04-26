@@ -6,12 +6,12 @@ ms.author: panshar
 ms.manager: abhemraj
 ms.topic: how-to
 ms.date: 10/22/2019
-ms.openlocfilehash: bfb4db5d3ebf69f9c7f552c175d33a8b817d1562
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8c94bb23f5d514fef5cdacb855657efdf5219631
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100595147"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714749"
 ---
 # <a name="delete-an-azure-migrate-project"></a>Azure Geçişi projesini silme
 
@@ -49,7 +49,9 @@ Bu tablolar, bir Azure geçişi projesinde bulma, değerlendirme ve geçiş içi
 > [!NOTE]
 > Anahtar kasasını, güvenlik anahtarları içerebileceğinden dikkatli bir şekilde silin.
 
-### <a name="vmwarephysical-server"></a>VMware/fiziksel sunucu
+### <a name="projects-with-public-endpoint-connectivity"></a>Ortak uç nokta bağlantısı olan projeler
+
+#### <a name="vmwarephysical-server"></a>VMware/fiziksel sunucu
 
 **Kaynak** | **Tür**
 --- | ---
@@ -63,9 +65,9 @@ migrateappligwsa* | Depolama hesabı
 migrateappzasa * | Depolama hesabı
 migrateapplicsa* | Depolama hesabı
 migrateapplikv * | Key Vault
-migrateapplisbns16041 | Service Bus Ad Alanı
+migrateapplisbns* | Service Bus Ad Alanı
 
-### <a name="hyper-v-vm"></a>Hyper-V VM 
+#### <a name="hyper-v-vm"></a>Hyper-V VM
 
 **Kaynak** | **Tür**
 --- | ---
@@ -74,6 +76,50 @@ ProjectName | Microsoft. Migrate/migrateprojects
 HyperV * kV | Key Vault
 HyperV * sitesi | Microsoft. OffAzure/HyperVSites
 "ProjectName"-Migratekasa-* | Kurtarma Hizmetleri kasası
+
+<br/>
+Aşağıdaki tabloda, Azure [özel bağlantısı](./how-to-use-azure-migrate-with-private-endpoints.md)kullanarak özel bir ağ üzerinden sunucu bulma, değerlendirme ve geçirme Için Azure geçişi tarafından oluşturulan kaynaklar özetlenmektedir.
+
+### <a name="projects-with-private-endpoint-connectivity"></a>Özel uç nokta bağlantısı olan projeler
+
+#### <a name="vmware-vms---agentless-migrations"></a>VMware VM 'Leri-aracısız geçişler
+
+**Tür** | **Kaynak** | **Özel uç nokta <br/>** |
+--- | --- | ---
+Microsoft. Migrate/migrateprojects | ProjectName | "ProjectName" \* PE 
+Bulma sitesi (ana site) | "ProjectName" * mastersite | "ProjectName" \* mastersite \* PE 
+Microsoft. Migrate/assessmentProjects | "ApplianceName" * projesi | "ApplianceName" \* Proje \* PE 
+Key Vault | "ProjectName" * kV | "ProjectName" \* kV \* PE
+Microsoft. OffAzure/VMwareSites | "ApplianceName" * sitesi | NA
+Kurtarma Hizmetleri kasası | "ApplianceName" * kasa | NA
+Depolama hesabı | "ApplianceName" * ABD | "ApplianceName" \* USA \* PE
+Kurtarma Hizmetleri kasası | "ProjectName"-Migratekasa-* | NA
+Depolama hesabı | migrateappligwsa* | NA
+Depolama hesabı | migrateappzasa * | NA
+Key Vault | migrateapplikv * | NA
+Service Bus Ad Alanı | migrateapplisbns* | NA
+
+#### <a name="hyper-v-vms"></a>Hyper-V Sanal Makineleri 
+
+**Tür** | **Kaynak** | **Özel uç nokta <br/>** |
+--- | --- | ---
+Microsoft. Migrate/migrateprojects | ProjectName | "ProjectName" \* PE 
+Bulma sitesi (ana site) | "ProjectName" * mastersite | "ProjectName" \* mastersite \* PE 
+Microsoft. Migrate/assessmentProjects | "ApplianceName" * projesi | "ApplianceName" \* Proje \* PE 
+Key Vault | "ProjectName" * kV | "ProjectName" \* kV \* PE
+Microsoft. OffAzure/HyperVSites | "ApplianceName" * sitesi | NA
+Kurtarma Hizmetleri kasası | "ProjectName"-Migratekasa-* | "ProjectName"-Migratekasa-* PE
+
+#### <a name="physical-servers--aws-vms--gcp-vms"></a>Fiziksel sunucular/AWS VM 'Leri/GCP VM 'Leri 
+
+**Tür** | **Kaynak** | **Özel uç nokta <br/>** |
+--- | --- | ---
+Microsoft. Migrate/migrateprojects | ProjectName | "ProjectName" \* PE 
+Bulma sitesi (ana site) | "ProjectName" * mastersite | "ProjectName" \* mastersite \* PE 
+Microsoft. Migrate/assessmentProjects | "ApplianceName" * projesi | "ApplianceName" \* Proje \* PE 
+Key Vault | "ProjectName" * kV | "ProjectName" \* kV \* PE
+Microsoft. OffAzure/sunucusites | "ApplianceName" * sitesi | NA
+Kurtarma Hizmetleri kasası | "ProjectName"-Migratekasa-* | "ProjectName"-Migratekasa-* PE
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

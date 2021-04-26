@@ -15,19 +15,19 @@ ms.topic: article
 ms.date: 3/10/2021
 ms.author: willzhan
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 828895894464eafc53f74e7c8b5798db4db03533
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 58222b3d188cd9db4f092956c88dece7e5cf2696
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103016143"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106055952"
 ---
 # <a name="offline-playready-streaming-for-windows-10"></a>Windows 10 için Çevrimdışı PlayReady Akışı
 
 [!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector" title1="Kullanmakta olduğunuz Media Services sürümünü seçin:"]
-> * [Sürüm 3](../latest/offline-plaready-streaming-for-windows-10.md)
+> * [Sürüm 3](../latest/drm-offline-playready-streaming-for-windows-10.md)
 > * [Sürüm 2](offline-playready-streaming-windows-10.md)
 
 > [!NOTE]

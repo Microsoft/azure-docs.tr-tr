@@ -12,10 +12,10 @@ ms.author: sstein
 ms.reviewer: ''
 ms.date: 01/08/2020
 ms.openlocfilehash: 3a02876234d43df2e98a3a4e60453fc3f1f74ef6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98724178"
 ---
 # <a name="import-or-export-an-azure-sql-database-without-allowing-azure-services-to-access-the-server"></a>Azure hizmetlerinin sunucuya erişmesine izin vermeden bir Azure SQL veritabanını içeri veya dışarı aktarma
@@ -132,7 +132,7 @@ Dışarı aktarma hızları birçok faktöre (örneğin, veri şekli) göre fark
 
 En iyi performansı elde etmek için aşağıdaki stratejileri deneyebilirsiniz:
 
-1. Veritabanında başka iş yükünün çalıştığından emin olun. Dışa aktarma işleminden önce bir kopya oluşturun başka iş yükünün çalıştığından emin olmak için en iyi çözüm olabilir.
+1. Veritabanında çalışan başka bir iş yükü olmadığından emin olun. Dışa aktarma işleminden önce bir kopya oluşturun başka iş yükünün çalıştığından emin olmak için en iyi çözüm olabilir.
 2. Dışa aktarma iş yükünü (birincil olarak okuma g/ç) daha iyi işlemek için veritabanı hizmet düzeyi hedefini (SLO) artırın. Veritabanı şu anda GP_Gen5_4, belki de İş Açısından Kritik katmanı okuma iş yüküne yardımcı olabilir.
 3. Özellikle büyük tablolar için kümelenmiş dizinler bulunduğundan emin olun.
 4. Sanal makinelerin (VM 'Ler) ağ kısıtlamalarına engel olmak için veritabanıyla aynı bölgede olması gerekir.

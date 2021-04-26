@@ -4,12 +4,12 @@ description: Bu betik, Azure Batch ' de bir Linux işlem düğümü havuzu oluş
 ms.topic: sample
 ms.date: 01/29/2018
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: b2e0fbf44be5718cf5577f6bc9aea436968e2fc3
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b5e1bdccefffa7803fbe744e27c1b36ca719560d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93073553"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107768296"
 ---
 # <a name="cli-example-create-and-manage-a-linux-pool-in-azure-batch"></a>CLI örneği: Azure Batch’te bir Linux havuzu oluşturma ve yönetme
 
@@ -37,17 +37,17 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az batch account create](/cli/azure/batch/account#az-batch-account-create) | Batch hesabını oluşturur. |
-| [az batch account login](/cli/azure/batch/account#az-batch-account-login) | Daha fazla CLI etkileşimi için belirtilen Batch hesabına karşı kimlik doğrulaması yapar.  |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az batch account create](/cli/azure/batch/account#az_batch_account_create) | Batch hesabını oluşturur. |
+| [az batch account login](/cli/azure/batch/account#az_batch_account_login) | Daha fazla CLI etkileşimi için belirtilen Batch hesabına karşı kimlik doğrulaması yapar.  |
 | [az batch pool node-agent-skus list](../batch-linux-nodes.md#list-of-virtual-machine-images) | Kullanılabilir düğüm aracısı SKU’larını ve görüntü bilgilerini listeler.  |
-| [az batch pool create](/cli/azure/batch/pool#az-batch-pool-create) | İşlem düğümleri havuzu oluşturur.  |
-| [az batch pool resize](/cli/azure/batch/pool#az-batch-pool-resize) | Belirtilen havuzda çalışan VM’lerin sayısını yeniden boyutlandırır.  |
-| [az batch pool show](/cli/azure/batch/pool#az-batch-pool-show) | Havuzun özelliklerini görüntüler.  |
-| [az batch node list](/cli/azure/batch/node#az-batch-node-list) | Belirtilen havuzdaki işlem düğümlerinin tümünü listeler.  |
-| [az batch node reboot](/cli/azure/batch/node#az-batch-node-reboot) | Belirtilen işlem düğümünü yeniden başlatır.  |
-| [az batch node delete](/cli/azure/batch/node#az-batch-node-delete) | Listelenen düğümleri belirtilen havuzdan siler.  |
-| [az group delete](/cli/azure/group#az-group-delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
+| [az batch pool create](/cli/azure/batch/pool#az_batch_pool_create) | İşlem düğümleri havuzu oluşturur.  |
+| [az batch pool resize](/cli/azure/batch/pool#az_batch_pool_resize) | Belirtilen havuzda çalışan VM’lerin sayısını yeniden boyutlandırır.  |
+| [az batch pool show](/cli/azure/batch/pool#az_batch_pool_show) | Havuzun özelliklerini görüntüler.  |
+| [az batch node list](/cli/azure/batch/node#az_batch_node_list) | Belirtilen havuzdaki işlem düğümlerinin tümünü listeler.  |
+| [az batch node reboot](/cli/azure/batch/node#az_batch_node_reboot) | Belirtilen işlem düğümünü yeniden başlatır.  |
+| [az batch node delete](/cli/azure/batch/node#az_batch_node_delete) | Listelenen düğümleri belirtilen havuzdan siler.  |
+| [az group delete](/cli/azure/group#az_group_delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

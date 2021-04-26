@@ -3,16 +3,16 @@ title: Microsoft kimlik doğrulamasını yapılandırma
 description: Microsoft hesabı kimlik doğrulamasını App Service veya Azure Işlevleri uygulamanız için bir kimlik sağlayıcısı olarak yapılandırmayı öğrenin.
 ms.assetid: ffbc6064-edf6-474d-971c-695598fd08bf
 ms.topic: article
-ms.date: 08/08/2019
+ms.date: 03/29/2021
 ms.custom:
 - seodec18
 - fasttrack-edit
-ms.openlocfilehash: 9ec9c102680496407106a3bf9b7683890c7a63ee
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 5e7b4c7ed1950b2fa585639a3097cc1f5688d739
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93043248"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077967"
 ---
 # <a name="configure-your-app-service-or-azure-functions-app-to-use-microsoft-account-login"></a>App Service veya Azure Işlevleri uygulamanızı Microsoft hesabı oturum açma bilgilerini kullanacak şekilde yapılandırma
 
@@ -20,8 +20,8 @@ ms.locfileid: "93043248"
 
 Bu konu başlığı altında, kişisel Microsoft hesabı oturumlarını desteklemek için AAD 'yi kullanmak üzere Azure App Service veya Azure Işlevlerinin nasıl yapılandırılacağı gösterilmektedir.
 
-> [!NOTE]
-> Hem kişisel Microsoft hesapları hem de kuruluş hesapları AAD kimlik sağlayıcısını kullanır. Şu anda, bu kimlik sağlayıcısını her iki oturum açma türünü de destekleyecek şekilde yapılandırmak mümkün değildir.
+> [!IMPORTANT]
+> Microsoft hesabı sağlayıcısı hala desteklenirken, bunun yerine [Microsoft Identity platform sağlayıcısını (Azure AD)](./configure-authentication-provider-aad.md)kullanmanız önerilir. Microsoft Identity platformu hem kurumsal hesaplar hem de kişisel Microsoft hesapları için destek sunar.
 
 ## <a name="register-your-app-with-microsoft-account"></a><a name="register-microsoft-account"> </a>Uygulamanızı Microsoft hesabı ile kaydedin
 

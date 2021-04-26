@@ -8,20 +8,20 @@ manager: dongli
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 03/10/2021
+ms.date: 04/2/2021
 ms.author: heikora
-ms.openlocfilehash: b8e02071eca139cde02a8bad1b0e0e443db6ab86
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b82a732533c3d069b519b07c3209d4b96c472900
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103555701"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106385034"
 ---
 # <a name="model-and-endpoint-lifecycle"></a>Model ve uç nokta yaşam döngüsü
 
-Özel Konuşma Tanıma hem *temel modelleri* hem de *özel modelleri* kullanır. Her dilin bir veya daha fazla temel modeli vardır. Genellikle, normal konuşma hizmetine yeni bir konuşma modeli sunulduğunda, yeni bir temel model olarak Özel Konuşma Tanıma hizmetine de aktarılır. Her 6 ayda bir güncelleştirilir. En yeni model genellikle daha fazla doğruluk sağladığından, eski modeller genellikle zaman içinde daha az yararlı hale gelir.
-
-Buna karşılık, özel modeller belirli bir müşteri senaryoınızdan alınan verilerle seçili bir temel modeli uyarlayarak oluşturulur. Gereksinimlerinizi karşıladıktan sonra, belirli bir özel modeli uzun bir süre kullanmaya devam edebilirsiniz. Ancak, en son temel modele düzenli olarak güncelleştirmeniz ve ek verilerle zaman içinde yeniden eğitmeniz önerilir. 
+Standart (özelleştirilmemiş) konuşma, temel modelleri çağırdığımız AI modelleri üzerine kurulmuştur. Çoğu durumda, destekduğumuz her konuşulan dil için farklı bir temel model eğiyoruz.  Doğruluk ve kaliteyi artırmak için konuşma hizmetini birkaç ayda bir yeni temel modellerle güncelleştiririz.  
+Özel Konuşma Tanıma, özel modeller, belirli bir müşteri senaryoınızdan alınan verilerle seçili bir temel modeli uyarlayarak oluşturulur. Özel bir model oluşturduktan sonra, standart konuşma hizmetinde uyarlandığı karşılık gelen temel model güncelleştiribilse bile bu model güncellenmez veya değiştirilmez.  
+Bu ilke, gereksinimlerinizi karşılayan özel bir modelden daha uzun bir süre boyunca belirli bir özel modeli kullanmaya devam etmenizi sağlar.  Ancak, geliştirilmiş doğruluk ve kalite avantajlarından yararlanmak için en son temel modelden uyarlanabilmeniz için özel modelinizi düzenli aralıklarla yeniden oluşturmanız önerilir.
 
 Model yaşam döngüsüyle ilgili diğer önemli terimler şunlardır:
 
@@ -59,7 +59,7 @@ Model eğitimi özetinin bir örneği aşağıda verilmiştir:
 
 Ayrıca, [`GetModel`](https://westus.dev.cognitive.microsoft.com/docs/services/speech-to-text-api-v3-0/operations/GetModel) [`GetBaseModel`](https://westus.dev.cognitive.microsoft.com/docs/services/speech-to-text-api-v3-0/operations/GetBaseModel) JSON yanıtında özelliği altındaki ve özel konuşma API 'leri aracılığıyla sona erme tarihlerini de denetleyebilirsiniz `deprecationDates` .
 
-GetModel API çağrısından alınan süre sonu verilerine bir örnek aşağıda verilmiştir. "KULLANıMDAN kaldırıldı CATIONTARIHLERE" şunu gösterir: 
+GetModel API çağrısından alınan süre sonu verilerine bir örnek aşağıda verilmiştir. Kullanım dışı olan **Cationtarihleriniz** modelin süresinin ne zaman dolacağını gösterir: 
 ```json
 {
     "SELF": "HTTPS://WESTUS2.API.COGNITIVE.MICROSOFT.COM/SPEECHTOTEXT/V3.0/MODELS/{id}",
@@ -80,7 +80,7 @@ GetModel API çağrısından alınan süre sonu verilerine bir örnek aşağıda
     },
     "PROPERTIES": {
     "DEPRECATIONDATES": {
-        "ADAPTATIONDATETIME": "2022-01-15T00:00:00Z",     // last date this model can be used for adaptation
+        "ADAPTATIONDATETIME": "2022-01-15T00:00:00Z",     // last date the base model can be used for adaptation
         "TRANSCRIPTIONDATETIME": "2023-03-01T21:27:29Z"   // last date this model can be used for decoding
     }
     },
@@ -96,6 +96,13 @@ GetModel API çağrısından alınan süre sonu verilerine bir örnek aşağıda
 }
 ```
 Bir özel konuşma uç noktasındaki modeli, konuşma Studio 'nun dağıtım bölümünde uç nokta tarafından kullanılan modeli değiştirerek veya özel konuşma API 'SI aracılığıyla yükseltebileceğinizi unutmayın.
+
+## <a name="what-happens-when-models-expire-and-how-to-update-them"></a>Modellerin süre dolduğunda ve bunların nasıl güncelleştirilmesi durumunda ne olur?
+Bir modelin süresi dolarsa ve modelin güncelleştirilmesi, nasıl kullanıldığına bağlıdır.
+### <a name="batch-transcription"></a>Toplu iş transkripsiyonu
+[Toplu iş dökümü](batch-transcription.md) ile kullanılan bir modelin süresi dolmuşsa, bir 4xx hatası ile başarısız olur. Bu güncelleştirmeyi engellemek için, döküm `model` isteği gövdesinde GÖNDERILEN JSON 'daki parametresi, daha yeni bir temel modele veya daha yeni bir özel modele işaret etmek üzere **oluşturulur** . Ayrıca, `model` her zaman en son temel modeli kullanacak şekılde JSON 'dan girişi kaldırabilirsiniz.
+### <a name="custom-speech-endpoint"></a>Özel konuşma uç noktası
+[Özel bir konuşma uç noktası](how-to-custom-speech-train-model.md)tarafından kullanılan bir modelin süresi dolmuşsa, hizmet otomatik olarak kullandığınız dil için en son temel modeli kullanmaya geri döner. kullanıyorsunuz, sayfanın üst kısmındaki **özel konuşma tanıma** menüsünde **dağıtım** ' ı seçebilir ve sonra ayrıntılarını görmek için uç nokta adına tıklayabilirsiniz. Ayrıntılar sayfasının en üstünde, bu uç nokta tarafından kullanılan modeli kapalı kalma süresi olmadan sorunsuz bir şekilde güncelleştirmenize olanak sağlayan bir **güncelleştirme modeli** düğmesi görürsünüz. Ayrıca, [**güncelleştirme modeli**](https://westus.dev.cognitive.microsoft.com/docs/services/speech-to-text-api-v3-0/operations/UpdateModel) REST API 'sini kullanarak bu değişikliği programlı bir şekilde yapabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

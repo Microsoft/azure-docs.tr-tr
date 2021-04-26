@@ -3,12 +3,12 @@ title: Azure Site Recovery ile şirket içi uygulamalar için olağanüstü duru
 description: Azure Site Recovery hizmeti ile olağanüstü durum kurtarma kullanılarak korunabilen iş yüklerini açıklar.
 ms.topic: conceptual
 ms.date: 03/18/2020
-ms.openlocfilehash: 2b901425a0020c0ccc7b834ee36d965910028018
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1a5d20e6feacfe72052142c07dc45753b9bc3138
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "80062833"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599120"
 ---
 # <a name="about-disaster-recovery-for-on-premises-apps"></a>Şirket içi uygulamalar için olağanüstü durum kurtarma hakkında
 
@@ -50,7 +50,7 @@ Site Recovery, desteklenen bir makinede çalışan herhangi bir uygulamayı ço�
 | Linux (işletim sistemi ve uygulamalar) |Evet (Microsoft tarafından test edilmiştir) |Evet (Microsoft tarafından test edilmiştir) |Evet (Microsoft tarafından test edilmiştir) |Evet (Microsoft tarafından test edilmiştir) |Evet (Microsoft tarafından test edilmiştir)|
 | Dynamics AX |Yes |Yes |Yes |Yes |Yes|
 | Windows Dosya Sunucusu |Yes |Yes |Yes |Yes |Yes|
-| Citrix XenApp ve XenDesktop |Yes|YOK |Evet |YOK |Evet |
+| Citrix XenApp ve XenDesktop |No|Yok |No |Yok |No |
 
 ## <a name="replicate-active-directory-and-dns"></a>Active Directory'yi ve DNS'yi çoğaltma
 
@@ -151,14 +151,7 @@ IIS için olağanüstü durum kurtarma hakkında [daha fazla bilgi edinin](site-
 
 ## <a name="protect-citrix-xenapp-and-xendesktop"></a>Citrix XenApp ve XenDesktop’u koruma
 
-Citrix XenApp ve XenDesktop dağıtımlarınızı korumak için aşağıdaki gibi Site Recovery kullanın:
-
-- Citrix XenApp ve XenDesktop dağıtımının korunmasını etkinleştirin. Farklı dağıtım katmanlarını Azure 'a çoğaltın: Active Directory, DNS sunucusu, SQL veritabanı sunucusu, Citrix teslim denetleyicisi, StoreFront Server, XenApp Master (VDA), Citrix XenApp License Server.
-- Citrix XenApp ve XenDesktop dağıtımınızı Azure’a geçirmek için Site Recovery’yi kullanarak buluta geçişi basitleştirin.
-- Test ve hata ayıklama uygulamaları için isteğe bağlı üretim benzeri bir kopya oluşturarak Citrix XenApp/XenDesktop testlerini basitleştirin.
-- Bu çözüm, istemci sanal masaüstlerinin değil yalnızca Windows Server sanal masaüstleri için geçerlidir. İstemci sanal masaüstlerini henüz Azure 'da lisanslama için desteklemez. Azure’da istemci/sunucu masaüstlerini lisanslama hakkında [daha fazla bilgi edinin](https://azure.microsoft.com/pricing/licensing-faq/).
-
-Citrix XenApp ve XenDesktop dağıtımları için olağanüstü durum kurtarma hakkında [daha fazla bilgi edinin](site-recovery-citrix-xenapp-and-xendesktop.md) . Veya [Citrix teknik incelemesine](https://aka.ms/citrix-xenapp-xendesktop-with-asr)başvurabilirsiniz.
+2020 Mart itibariyle Citrix, genel bulut tarafından barındırılan iş yükleri için kullanımdan kaldırma ve destek sonu duyurmuştur. Bu nedenle, Citrix iş yüklerini korumak için Site Recovery kullanmanızı önermiyoruz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

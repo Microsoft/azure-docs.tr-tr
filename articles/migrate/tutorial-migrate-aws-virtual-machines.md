@@ -7,12 +7,12 @@ ms.manager: bsiva
 ms.topic: tutorial
 ms.date: 08/19/2020
 ms.custom: MVC
-ms.openlocfilehash: 430ece58bd3dc1651ac391ba0e29515085ee507b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4879c8370953a5ac8c6b46efe8010db9692d3052
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98878197"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714515"
 ---
 # <a name="discover-assess-and-migrate-amazon-web-services-aws-vms-to-azure"></a>Amazon Web Services (AWS) sanal makinelerini bulma, değerlendirme ve Azure’a geçirme
 
@@ -145,7 +145,9 @@ Geçişin ilk adımı, çoğaltma gerecini ayarlamaya yönelik. AWS VM 'Leri ge�
 5. **Kaynak oluştur**' a tıklayın. Bu, arka planda bir Azure Site Recovery Kasası oluşturur.
     - Azure geçişi sunucu geçişi ile geçiş zaten ayarladıysanız, kaynaklar daha önce ayarlandığı için hedef seçenek yapılandırılamaz.
     - Bu düğmeye tıkladıktan sonra bu proje için hedef bölgeyi değiştiremezsiniz.
-    - Sanal makinelerinizi farklı bir bölgeye geçirmek için yeni/farklı bir Azure geçişi projesi oluşturmanız gerekir.
+    - Sanal makinelerinizi farklı bir bölgeye geçirmek için yeni/farklı bir Azure geçişi projesi oluşturmanız gerekir.  
+    > [!NOTE]
+    > Oluşturulan Azure geçişi projesi için bağlantı yöntemi olarak özel uç nokta ' ı seçtiyseniz, kurtarma hizmetleri kasası da özel uç nokta bağlantısı için yapılandırılır. Özel uç noktalara çoğaltma gerecinden erişilebildiğinden emin olun. [**Daha fazla bilgi edinin**](how-to-use-azure-migrate-with-private-endpoints.md#troubleshoot-network-connectivity)
 
 6. **Yeni bir çoğaltma gereci yüklemek** istiyor musunuz?, **çoğaltma gereci yüklensin**' i seçin.
 7. **Çoğaltma gereci yazılımını indirip yükleyin** bölümünde gereç yükleyicisini ve kayıt anahtarını indirin. Gereci kaydettirmek için anahtar gerekir. Anahtar indirildikten beş gün sonra geçerlidir.
@@ -244,13 +246,18 @@ Geçirilecek kaynak AWS VM 'lerine Mobility hizmeti aracısının yüklü olmas�
     ![VM 'Leri seçin](./media/tutorial-migrate-physical-virtual-machines/select-vms.png)
 
 8. **Hedef ayarları**’nda aboneliği ve geçiş yapacağınız hedef bölgeyi seçin. Daha sonra Azure VM’lerinin geçişten sonra bulunacağı kaynak grubunu belirtin.
-9. **Sanal Ağ**’da Azure VM’lerinin geçişten sonra katılacağı Azure sanal ağını/alt ağını seçin.
-10. **Kullanılabilirlik seçenekleri**' nde şunları seçin:
+9. **Sanal Ağ**’da Azure VM’lerinin geçişten sonra katılacağı Azure sanal ağını/alt ağını seçin.  
+10. **Önbellek depolama hesabı**' nda, proje için otomatik olarak oluşturulan önbellek depolama hesabını kullanmak için varsayılan seçeneği değiştirmeyin. Çoğaltma için önbellek depolama hesabı olarak kullanmak üzere farklı bir depolama hesabı belirtmek istiyorsanız açılan listesini kullanın. <br/> 
+    > [!NOTE]
+    >
+    > - Azure geçişi projesi için bağlantı yöntemi olarak özel uç nokta ' ı seçtiyseniz, kurtarma hizmetleri kasasının önbellek depolama hesabına erişimine izin verin. [**Daha fazla bilgi edinin**](how-to-use-azure-migrate-with-private-endpoints.md#grant-access-permissions-to-the-recovery-services-vault)
+    > - Özel eşleme ile ExpressRoute kullanarak çoğaltmak için önbellek depolama hesabı için özel bir uç nokta oluşturun. [**Daha fazla bilgi edinin**](how-to-use-azure-migrate-with-private-endpoints.md#create-a-private-endpoint-for-the-storage-account-optional) 
+11. **Kullanılabilirlik seçenekleri**' nde şunları seçin:
     -  Bölge içindeki belirli bir kullanılabilirlik bölgesine geçirilen makineyi sabitlemek için kullanılabilirlik alanı. Kullanılabilirlik Alanları arasında çok düğümlü bir uygulama katmanı oluşturan sunucuları dağıtmak için bu seçeneği kullanın. Bu seçeneği belirlerseniz, Işlem sekmesinde seçilen makinenin her biri için kullanılacak kullanılabilirlik alanını belirtmeniz gerekir. Bu seçenek yalnızca geçiş için seçilen hedef bölge Kullanılabilirlik Alanları destekliyorsa kullanılabilir
     -  Geçirilen makinenin bir kullanılabilirlik kümesine yerleştirileceği kullanılabilirlik kümesi. Bu seçeneği kullanabilmek için seçilen hedef kaynak grubunun bir veya daha fazla kullanılabilirlik kümesi olmalıdır.
     - Geçirilen makineler için bu kullanılabilirlik yapılandırmalarının herhangi birine ihtiyacınız yoksa, altyapı artıklığı gerekli değildir.
     
-11. **Disk şifreleme türü**' nde şunları seçin:
+12. **Disk şifreleme türü**' nde şunları seçin:
     - Platform tarafından yönetilen anahtar ile bekleyen şifreleme
     - Müşteri tarafından yönetilen anahtarla bekleyen şifreleme
     - Platform tarafından yönetilen ve müşteri tarafından yönetilen anahtarlarla Çift şifreleme
@@ -258,14 +265,14 @@ Geçirilecek kaynak AWS VM 'lerine Mobility hizmeti aracısının yüklü olmas�
    > [!NOTE]
    > VM 'Leri CMK ile çoğaltmak için hedef kaynak grubu altında [bir disk şifreleme kümesi oluşturmanız](../virtual-machines/disks-enable-customer-managed-keys-portal.md#set-up-your-disk-encryption-set) gerekir. Bir disk şifreleme kümesi nesnesi yönetilen diskleri, SSE için kullanılacak CMK 'yi içeren bir Key Vault eşler.
   
-12. **Azure Hibrit Avantajı**’nda:
+13. **Azure Hibrit Avantajı**’nda:
 
     - Azure Hibrit Avantajı’nı uygulamak istemiyorsanız **Hayır**’ı seçin. Ardından **İleri**'ye tıklayın.
     - Etkin Yazılım Güvencesi veya Windows Server abonelikleri kapsamında olan Windows Server makineleriniz varsa ve avantajı geçirdiğiniz makinelere uygulamak istiyorsanız **Evet**’i seçin. Ardından **İleri**'ye tıklayın.
 
     ![Hedef ayarları](./media/tutorial-migrate-vmware/target-settings.png)
 
-13. **İşlem** bölümünde VM adı, boyutu, işletim sistemi disk türü ve kullanılabilirlik yapılandırmasını (önceki adımda seçildiyse) gözden geçirin. VM’ler [Azure gereksinimleriyle](migrate-support-matrix-physical-migration.md#azure-vm-requirements)uyumlu olmalıdır.
+14. **İşlem** bölümünde VM adı, boyutu, işletim sistemi disk türü ve kullanılabilirlik yapılandırmasını (önceki adımda seçildiyse) gözden geçirin. VM’ler [Azure gereksinimleriyle](migrate-support-matrix-physical-migration.md#azure-vm-requirements)uyumlu olmalıdır.
 
     - **VM boyutu**: değerlendirme önerilerini KULLANıYORSANıZ, VM boyutu açılan listesi önerilen boyutu gösterir. Aksi takdirde Azure Geçişi, Azure aboneliğindeki en yakın eşleşmeye göre bir boyut seçer. Alternatif olarak **Azure VM boyutu**’nda el ile bir boyut seçin.
     - **Işletim sistemi diski**: VM için işletim sistemi (önyükleme) diskini belirtin. İşletim Sistemi diski, işletim sistemi önyükleyiciye ve yükleyiciye sahip disktir.
@@ -274,13 +281,13 @@ Geçirilecek kaynak AWS VM 'lerine Mobility hizmeti aracısının yüklü olmas�
 
 ![İşlem ayarları](./media/tutorial-migrate-physical-virtual-machines/compute-settings.png)
 
-14. **Diskler**' de, VM disklerinin Azure 'da çoğaltılıp çoğaltılmayacağını belirtin ve Azure 'da disk türünü (Standart SSD/HDD veya Premium yönetilen diskler) seçin. Ardından **İleri**'ye tıklayın.
+15. **Diskler**' de, VM disklerinin Azure 'da çoğaltılıp çoğaltılmayacağını belirtin ve Azure 'da disk türünü (Standart SSD/HDD veya Premium yönetilen diskler) seçin. Ardından **İleri**'ye tıklayın.
     - Diskleri çoğaltmadan çıkarabilirsiniz.
     - Diskleri çıkarırsanız bu diskler geçişten sonra Azure VM’de bulunmaz. 
 
     ![Disk ayarları](./media/tutorial-migrate-physical-virtual-machines/disks.png)
 
-15. **Çoğaltmayı gözden geçir ve başlat** bölümünde ayarları gözden geçirin ve sunuculara yönelik ilk çoğaltmayı başlatmak için **Çoğalt** üzerine tıklayın.
+16. **Çoğaltmayı gözden geçir ve başlat** bölümünde ayarları gözden geçirin ve sunuculara yönelik ilk çoğaltmayı başlatmak için **Çoğalt** üzerine tıklayın.
 
 > [!NOTE]
 > Çoğaltma ayarlarını, çoğaltma başlamadan önce dilediğiniz zaman güncelleştirebilirsiniz,   >  **çoğaltılan makineleri** yönetin. Çoğaltma başladıktan sonra ayarlar değiştirilemez.

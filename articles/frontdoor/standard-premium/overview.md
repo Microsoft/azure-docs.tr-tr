@@ -8,12 +8,12 @@ ms.topic: overview
 ms.workload: infrastructure-services
 ms.date: 02/18/2021
 ms.author: duau
-ms.openlocfilehash: 574340825567dcd512a5da1b311c57fe12954e34
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5c3ae5c7b1c45d170548f6fa00481094117e1737
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102030554"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105937371"
 ---
 # <a name="what-is-azure-front-door-standardpremium-preview"></a>Azure ön kapısının Standart/Premium nedir (Önizleme)?
 
@@ -28,7 +28,7 @@ Azure ön kapısının Standart/Premium sayesinde, genel tüketicisini ve kurums
 
 Azure ön kapı Standart/Premium, genel bağlantıyı geliştirmek için bölünmüş TCP ve Microsoft 'un küresel ağı ile her noktaya yayın protokolünü kullanarak katman 7 ' de (HTTP/HTTPS katmanı) çalışmaktadır. Kurallar kümesi kullanılarak özelleştirilmiş yönlendirme yönteminiz temelinde, Azure ön kapısının istemci isteklerinizi en hızlı ve en yüksek kaynağa yönlendirdiğinden emin olabilirsiniz. Uygulama kaynağı, Azure içinde veya dışında barındırılan Internet 'e yönelik herhangi bir hizmettir. Azure ön kapı Standart/Premium, farklı uygulama ihtiyaçlarına ve otomatik yük devretme senaryolarına uyacak şekilde çeşitli trafik yönlendirme yöntemleri ve kaynak sistem durumu izleme seçenekleri sağlar. Traffic Manager benzer şekilde, ön kapı, Azure bölgesinin tamamına yönelik hatalarla birlikte hatalara karşı dayanıklıdır.
 
-Azure ön kapısının yanı sıra tümleşik Web uygulaması güvenlik duvarı koruması, Bot koruması ve yerleşik düzenleme 3/katman 4 dağıtılmış hizmet reddi (DDoS) koruması ile uygulamanızı koruyabilirsiniz. Özel arka uçlarınızın özel bağlantı hizmetiyle de güvenliğini sağlar. Azure ön kapısının küresel ölçekte Microsoft 'un en iyi yöntem güvenliğini sağlar.  
+Azure ön kapısının yanı sıra tümleşik Web uygulaması güvenlik duvarı koruması, Bot koruması ve yerleşik katman 3/katman 4 dağıtılmış hizmet reddi (DDoS) koruması ile uygulamanızı koruyabilirsiniz. Özel arka uçlarınızın özel bağlantı hizmetiyle de güvenliğini sağlar. Azure ön kapısının küresel ölçekte Microsoft 'un en iyi yöntem güvenliğini sağlar.  
 
 >[!NOTE]
 > Azure, senaryolarınız için tam olarak yönetilen yük dengeleme çözümleri sunar.

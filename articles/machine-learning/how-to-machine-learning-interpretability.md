@@ -11,12 +11,12 @@ ms.author: mithigpe
 author: minthigpen
 ms.reviewer: Luis.Quintanilla
 ms.date: 02/25/2021
-ms.openlocfilehash: 44ccf6b6d2459b87040fcac7d9cdcd336cc7b82f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c517cf2fc8491d62cf2379c87acd2eaadde8fe15
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102522045"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107576440"
 ---
 # <a name="model-interpretability-in-azure-machine-learning-preview"></a>Azure Machine Learning model yorumlenebilirliği (Önizleme)
 
@@ -104,5 +104,6 @@ Azure Machine Learning Işlem sırasında açıklamayı Uzaktan çalıştırabil
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Modeller için [, hem](how-to-machine-learning-interpretability-aml.md) yerel olarak hem de uzaktan işlem kaynakları Azure Machine Learning için yorumlenebilirliği etkinleştirme konusuna bakın. 
+- [Otomatik makine öğrenimi modelleri için yorumlenebilirliği](how-to-machine-learning-interpretability-automl.md)nasıl etkinleştireceğinizi öğrenin.
 - Ek senaryolar için [örnek not defterlerine](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/explain-model) bakın. 
 - Metin senaryoları için yorumlarla ilgileniyorsanız, NLP için yorumlamış teknikler için bkz. yorumlama [-metin](https://github.com/interpretml/interpret-text), ilgili bir açık kaynak deposu [yorumlamaya yönelik yorum-topluluk](https://github.com/interpretml/interpret-community/). `azureml.interpret` paket şu anda bu teknikleri desteklemez, ancak [metin sınıflandırmasına örnek bir not defteri](https://github.com/interpretml/interpret-text/blob/master/notebooks/text_classification/text_classification_classical_text_explainer.ipynb)ile çalışmaya başlayın.

@@ -5,10 +5,38 @@
   items:
     - name: Metin Analizi API'si nedir?
       href: overview.md
-    - name: Örnek kullanıcı senaryoları
-      href: text-analytics-user-scenarios.md
+    - name: Dil desteği
+      href: language-support.md
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/text-analytics/'
     - name: Yenilikler
       href: whats-new.md
+    - name: Metin Analizi SSS
+      href: text-analytics-resource-faq.md
+- name: Hızlı Başlangıç
+  href: quickstarts/client-libraries-rest-api.md
+- name: Örnekler
+  items:
+    - name: v3.0
+      items:
+        - name: C#
+          href: 'https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.0.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples'
+        - name: Python
+          href: 'https://github.com/Azure/azure-sdk-for-js/tree/%40azure/ai-text-analytics_5.0.0/sdk/textanalytics/ai-text-analytics/samples'
+        - name: Java
+          href: 'https://github.com/Azure/azure-sdk-for-java/tree/azure-ai-textanalytics_5.0.0/sdk/textanalytics/azure-ai-textanalytics/src/samples/java/com/azure/ai/textanalytics'
+        - name: JavaScript
+          href: 'https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/textanalytics/ai-text-analytics/samples'
+    - name: v 3.1-Önizleme
+      items:
+        - name: C#
+          href: 'https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics/samples'
+        - name: Python
+          href: 'https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.TextAnalytics_5.0.0/sdk/textanalytics/Azure.AI.TextAnalytics/samples'
+        - name: Java
+          href: 'https://github.com/Azure/azure-sdk-for-java/tree/azure-ai-textanalytics_5.1.0-beta.3/sdk/textanalytics/azure-ai-textanalytics/src/samples/java/com/azure/ai/textanalytics'
+        - name: JavaScript
+          href: 'https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/textanalytics/azure-ai-textanalytics/samples'
 - name: Yapay zekanın sorumluluk sahibi bir biçimde kullanılması
   items:
     - name: Saydamlık notları
@@ -28,37 +56,6 @@
     - name: Tümleştirme ve sorumlu kullanım
       href: /legal/cognitive-services/text-analytics/guidance-integration-responsible-use?context=/azure/cognitive-services/text-analytics/context/context
       displayName: 'Responsible deployment, Responsible use, Responsible integration, AI deployment, AI use'
-- name: Hızlı Başlangıçlar
-  expanded: true
-  items:
-    - name: İstemci kitaplığını veya REST API'yi kullanma
-      href: quickstarts/client-libraries-rest-api.md
-- name: Öğreticiler
-  items:
-    - name: Müşteri geri bildirimini analiz etmek için Power BI’ı tümleştirme
-      href: Tutorials/tutorial-power-bi-key-phrases.md
-    - name: Power Apps’te Metin Analizi
-      href: 'https://powerapps.microsoft.com/tutorials/cognitive-services-api/'
-    - name: Azure Databricks kullanarak akış verileri üzerinde yaklaşım analizi
-      maintainContext: true
-      href: /azure/databricks/scenarios/databricks-sentiment-analysis-cognitive-services
-    - name: 'Metin çevirmek, yaklaşımı analiz etmek ve konuşmayı birleştirmek için Flask kullanma'
-      maintainContext: true
-      href: ../translator/tutorial-build-flask-app-translation-synthesis.md
-    - name: Power Automate kullanarak Excel’de verileri ayıklama
-      href: tutorials/extract-excel-information.md
-- name: Kavramlar
-  items:
-    - name: Adlandırılmış varlık türleri
-      href: named-entity-types.md
-    - name: Dil desteği
-      href: language-support.md
-    - name: Metin uzaklıkları
-      href: concepts/text-offsets.md
-    - name: Veri sınırları
-      href: concepts/data-limits.md
-    - name: Model sürümü oluşturma
-      href: concepts/model-versioning.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Metin Analizi API’sini çağırma
@@ -69,8 +66,9 @@
       href: How-tos/text-analytics-how-to-sentiment-analysis.md
     - name: Anahtar ifade ayıklama
       href: How-tos/text-analytics-how-to-keyword-extraction.md
-    - name: Adlandırılmış varlık tanıma
+    - name: Adlandırılmış varlık tanıma ve PII
       href: How-tos/text-analytics-how-to-entity-linking.md
+      displayName: 'NER, Named entity recognition, PII, redaction'
     - name: Sistem durumu için Metin Analizi
       href: How-tos/text-analytics-for-health.md
     - name: Kapsayıcıları kullanma
@@ -86,14 +84,42 @@
           href: how-tos/text-analytics-how-to-use-kubernetes-service.md
         - name: Bilişsel Hizmetler kapsayıcıları belgeleri
           href: ../containers/index.yml
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/text-analytics/context/context
+        - name: Azure AD kimlik doğrulamasını kullanma
+          href: ../authentication.md?context=/azure/cognitive-services/text-analytics/context/context
     - name: API’nin 3. sürümüne geçirme
       href: migration-guide.md
+- name: Kavramlar
+  items:
+    - name: Örnek kullanıcı senaryoları
+      href: text-analytics-user-scenarios.md
+    - name: Adlandırılmış varlık türleri
+      href: named-entity-types.md
+    - name: Unicode kodlamalar ve metin uzaklıkları
+      href: concepts/text-offsets.md
+    - name: Veri sınırları
+      href: concepts/data-limits.md
+    - name: Model sürümü oluşturma
+      href: concepts/model-versioning.md
+- name: Öğreticiler
+  items:
+    - name: Müşteri geri bildirimini analiz etmek için Power BI’ı tümleştirme
+      href: Tutorials/tutorial-power-bi-key-phrases.md
+    - name: Power Apps’te Metin Analizi
+      href: 'https://powerapps.microsoft.com/tutorials/cognitive-services-api/'
+    - name: Azure Databricks kullanarak akış verileri üzerinde yaklaşım analizi
+      maintainContext: true
+      href: /azure/databricks/scenarios/databricks-sentiment-analysis-cognitive-services
+    - name: 'Metin çevirmek, yaklaşımı analiz etmek ve konuşmayı birleştirmek için Flask kullanma'
+      maintainContext: true
+      href: ../translator/tutorial-build-flask-app-translation-synthesis.md
+    - name: Power Automate kullanarak Excel’de verileri ayıklama
+      href: tutorials/extract-excel-information.md
 - name: Başvuru
   items:
-    - name: CLI başvurusu
-      href: /cli/azure/cognitiveservices#az_cognitiveservices_list
-    - name: PowerShell başvurusu
-      href: /powershell/module/azurerm.cognitiveservices/
     - name: Metin Analizi API’si
       items:
         - name: v3.1.preview.3
@@ -102,8 +128,18 @@
           href: 'https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-0'
         - name: v2 (devre dışı bırakma)
           href: 'https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v2-1'
-    - name: SDK’lar
+    - name: SDK
       items:
+        - name: v 3.1-Önizleme
+          items:
+            - name: .NET
+              href: /dotnet/api/azure.ai.textanalytics?view=azure-dotnet-preview
+            - name: Python
+              href: /python/api/azure-ai-textanalytics/azure.ai.textanalytics?view=azure-python-preview
+            - name: Java
+              href: /java/api/overview/azure/ai-textanalytics-readme?view=azure-java-preview
+            - name: Node.js
+              href: /javascript/api/overview/azure/ai-text-analytics-readme?view=azure-node-preview
         - name: v3.0
           items:
             - name: .NET
@@ -126,19 +162,19 @@
               href: /javascript/api/@azure/cognitiveservices-textanalytics/
             - name: Go
               href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/textanalytics'
+    - name: CLI başvurusu
+      href: /cli/azure/cognitiveservices#az_cognitiveservices_list
+    - name: PowerShell başvurusu
+      href: /powershell/module/azurerm.cognitiveservices/
 - name: Kaynaklar
   items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/text-analytics/context/context
     - name: Dış içerik ve topluluk içeriği
       href: text-analytics-resource-external-community.md
-    - name: SSS
-      href: text-analytics-resource-faq.md
-    - name: Fiyatlandırma
-      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/text-analytics/'
-    - name: Bölgesel kullanılabilirlik
-      href: 'https://azure.microsoft.com/global-infrastructure/services/'
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
-    - name: Deneyin!
-      href: 'https://azure.microsoft.com/services/cognitive-services/text-analytics/'

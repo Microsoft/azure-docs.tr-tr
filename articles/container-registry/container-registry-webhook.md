@@ -3,12 +3,12 @@ title: Kayıt defteri eylemlerine yanıt vermek için Web kancaları
 description: Kayıt defteri depolarınızda gönderme veya çekme eylemleri gerçekleştiğinde olayları tetiklemek için Web kancalarını nasıl kullanacağınızı öğrenin.
 ms.topic: article
 ms.date: 05/24/2019
-ms.openlocfilehash: 5374b58ba72727500294a173c26e9a131b29fe34
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4f6fb719f8d9d51429a19616aa5548b32a2687e0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101722254"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773409"
 ---
 # <a name="using-azure-container-registry-webhooks"></a>Azure Container Registry Web kancalarını kullanma
 
@@ -47,7 +47,7 @@ Web kancası istekleri hakkında daha fazla bilgi için bkz. [Azure Container Re
 
 ## <a name="create-webhook---azure-cli"></a>Web kancası oluşturma-Azure CLı
 
-Azure CLı kullanarak bir Web kancası oluşturmak için [az ACR Web kancası Create](/cli/azure/acr/webhook#az-acr-webhook-create) komutunu kullanın. Aşağıdaki komut, kayıt defteri *mycontainerregistry* içindeki tüm görüntü silme olayları için bir Web kancası oluşturur:
+Azure CLı kullanarak bir Web kancası oluşturmak için [az ACR Web kancası Create](/cli/azure/acr/webhook#az_acr_webhook_create) komutunu kullanın. Aşağıdaki komut, kayıt defteri *mycontainerregistry* içindeki tüm görüntü silme olayları için bir Web kancası oluşturur:
 
 ```azurecli-interactive
 az acr webhook create --registry mycontainerregistry --name myacrwebhook01 --actions delete --uri http://webhookuri.com
@@ -65,9 +65,9 @@ Web kancasını kullanmadan önce **ping** düğmesini kullanarak test edebilirs
 
 ![Azure portal ACR Web kancası oluşturma kullanıcı arabirimi](./media/container-registry-webhook/webhook-02.png)
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
-Bir ACR Web kancasını Azure CLı ile test etmek için [az ACR Web kancası ping](/cli/azure/acr/webhook#az-acr-webhook-ping) komutunu kullanın.
+Bir ACR Web kancasını Azure CLı ile test etmek için [az ACR Web kancası ping](/cli/azure/acr/webhook#az_acr_webhook_ping) komutunu kullanın.
 
 ```azurecli-interactive
 az acr webhook ping --registry mycontainerregistry --name myacrwebhook01
@@ -85,7 +85,7 @@ az acr webhook list-events --registry mycontainerregistry08 --name myacrwebhook0
 
 Her Web kancası, Web kancası ve ardından Azure portal **Sil** düğmesi seçilerek silinebilir.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 ```azurecli-interactive
 az acr webhook delete --registry mycontainerregistry --name myacrwebhook01

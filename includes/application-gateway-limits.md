@@ -4,12 +4,12 @@ ms.service: application-gateway
 ms.topic: include
 ms.date: 03/04/2020
 ms.author: victorh
-ms.openlocfilehash: 4c7c68bf690097004f2f3310a8d89ce954d7f87f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1166585c7291c4fe0d78cbc9540e3f08f985db6c
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98612912"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107590206"
 ---
 | Kaynak | Sınır | Not |
 | --- | --- | --- |
@@ -35,9 +35,9 @@ ms.locfileid: "98612912"
 | Yeniden yazma kuralı kümesi sayısı |400| |
 | Yeniden yazma kuralı kümesi başına üst bilgi veya URL yapılandırması sayısı|40| |
 | Yeniden yazma kuralı kümesi başına koşulların sayısı|40| |
-| Eşzamanlı WebSocket bağlantıları |Orta ağ geçitleri 20.000<br> Büyük ağ geçitleri 50.000| |
+| Eşzamanlı WebSocket bağlantıları |Orta ağ geçitleri 20.000<sup>2</sup><br> Büyük ağ geçitleri 50.000<sup>2</sup>| |
 | En fazla URL uzunluğu|AŞAMAZ| |
-| HTTP/2 için üst bilgi boyutu üst sınırı |4 KB 'DIR| |
+| HTTP/2 için üst bilgi boyutu üst sınırı |16 KB| |
 | Dosya karşıya yükleme boyutu üst sınırı, standart |2 GB | |
 | En fazla dosya yükleme boyutu WAF |V1 orta WAF ağ geçitleri, 100 MB<br>V1 büyük WAF ağ geçitleri, 500 MB<br>V2 WAF, 750 MB| |
 | WAF gövde boyutu sınırı, dosyalar olmadan|128 KB||
@@ -45,3 +45,5 @@ ms.locfileid: "98612912"
 | Application Gateway başına en fazla WAF dışlamaları|40||
 
 <sup>1</sup> WAF özellikli SKU 'lar söz konusu olduğunda, kaynak sayısını 40 ile sınırlamanız gerekir.
+
+<sup>2</sup> Application Gateway kaynak başına değil Application Gateway örnek başına sınır.

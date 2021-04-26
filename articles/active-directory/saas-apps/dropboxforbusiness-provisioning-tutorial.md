@@ -11,19 +11,19 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 05/20/2019
 ms.author: jeedes
-ms.openlocfilehash: 04d17e17ef11696efd52f04ea83639f2a9b81fea
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4e718ef30d029995c49efe36f19a6efcf7de0616
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96938775"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107589610"
 ---
 # <a name="tutorial-configure-dropbox-for-business-for-automatic-user-provisioning"></a>Öğretici: otomatik Kullanıcı hazırlama için Iş Dropbox 'ı yapılandırma
 
 Bu öğreticinin amacı, Kullanıcı ve/veya grupları otomatik olarak sağlamak ve devre dışı bırakmak için Azure AD 'yi yapılandırmak üzere Iş için Dropbox ve Azure Active Directory (Azure AD) ' de gerçekleştirilecek adımları göstermektir.
 
 > [!IMPORTANT]
-> Microsoft ve Dropbox, eski Dropbox tümleştirmesi etkin 04/01/2021 ' i kullanımdan kaldırır. Hizmetin kesintiye uğramaması için, grupları destekleyen yeni Dropbox tümleştirmesi ' ne geçiş yapmanızı öneririz. Yeni Dropbox tümleştirmesine geçiş yapmak için aşağıdaki adımları kullanarak Azure AD kiracınızda sağlama için yeni bir Dropbox örneği ekleyin ve yapılandırın. Yeni Dropbox tümleştirmesini yapılandırdıktan sonra, sağlama çakışmalarını önlemek için eski Dropbox tümleştirmesinde sağlamayı devre dışı bırakın. Yeni Dropbox tümleştirmesini geçirmeye yönelik daha ayrıntılı adımlar için bkz. [Azure ad kullanarak iş için en yeni Dropbox 'A güncelleştirme](https://help.dropbox.com/installs-integrations/third-party/update-dropbox-azure-ad-connector).
+> Gelecekte, Microsoft ve Dropbox eski Dropbox tümleştirmesini kullanımdan kaldırır. Bu, başlangıçta 4/1/2021 için planlanmıştı, ancak süresiz olarak ertelendi. Ancak, hizmetin kesintiye uğramaması için, grupları destekleyen yeni SCıM 2,0 Dropbox tümleştirmesi ' ne geçiş yapmanızı öneririz. Yeni Dropbox tümleştirmesine geçiş yapmak için aşağıdaki adımları kullanarak Azure AD kiracınızda sağlama için yeni bir Dropbox örneği ekleyin ve yapılandırın. Yeni Dropbox tümleştirmesini yapılandırdıktan sonra, sağlama çakışmalarını önlemek için eski Dropbox tümleştirmesinde sağlamayı devre dışı bırakın. Yeni Dropbox tümleştirmesini geçirmeye yönelik daha ayrıntılı adımlar için bkz. [Azure ad kullanarak iş için en yeni Dropbox 'A güncelleştirme](https://help.dropbox.com/installs-integrations/third-party/update-dropbox-azure-ad-connector).
 
 > [!NOTE]
 > Bu öğreticide, Azure AD Kullanıcı sağlama hizmeti ' nin üzerine oluşturulmuş bir bağlayıcı açıklanmaktadır. Hizmetin işlevleri ve çalışma şekli hakkında daha fazla bilgi edinmek ve sık sorulan soruları incelemek için bkz. [Azure Active Directory ile SaaS uygulamalarına kullanıcı hazırlama ve kaldırma işlemlerini otomatik hale getirme](../app-provisioning/user-provisioning.md).

@@ -7,12 +7,12 @@ ms.service: iot-develop
 ms.devlang: node
 ms.topic: quickstart
 ms.date: 03/25/2021
-ms.openlocfilehash: 047700be674dfab997b5c87f7446c19fdea9e0eb
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 0e1c99124228da9490abaa17ecc41b931631d9fb
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105605969"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107876985"
 ---
 # <a name="quickstart-send-telemetry-from-a-device-to-an-iot-hub-nodejs"></a>Hızlı başlangıç: bir cihazdan IoT Hub 'ına telemetri gönderme (Node.js)
 
@@ -91,7 +91,7 @@ Bu bölümde, sanal cihazınızdan IoT Hub 'ınıza ileti göndermek için Node.
     ```bash
     export IOTHUB_DEVICE_SECURITY_TYPE="connectionString"
     ```
-1. Açık CLı kabuğunuzun içinde, sanal IoT cihazınızdan olayları izlemeye başlamak için [az IoT Hub Monitor-Events](/cli/azure/ext/azure-iot/iot/hub#ext-azure-iot-az-iot-hub-monitor-events) komutunu çalıştırın.  Olay iletileri, geldikçe terminalde yazdırılacaktır.
+1. Açık CLı kabuğunuzun içinde, sanal IoT cihazınızdan olayları izlemeye başlamak için [az IoT Hub Monitor-Events](/cli/azure/iot/hub#az_iot_hub_monitor_events) komutunu çalıştırın.  Olay iletileri, geldikçe terminalde yazdırılacaktır.
 
     ```azurecli
     az iot hub monitor-events --output table --hub-name {YourIoTHubName}
@@ -128,12 +128,12 @@ Bu hızlı başlangıçta oluşturulan Azure kaynaklarına artık ihtiyacınız 
 > Silinen kaynak grupları geri alınamaz. Kaynak grubu ve içindeki tüm kaynaklar kalıcı olarak silinir. Yanlış kaynak grubunu veya kaynakları yanlışlıkla silmediğinizden emin olun. 
 
 Bir kaynak grubunu adıyla silmek için:
-1. [Az Group Delete](/cli/azure/group#az-group-delete) komutunu çalıştırın. Bu komut, kaynak grubunu, IoT Hub ve oluşturduğunuz cihaz kaydını kaldırır.
+1. [Az Group Delete](/cli/azure/group#az_group_delete) komutunu çalıştırın. Bu komut, kaynak grubunu, IoT Hub ve oluşturduğunuz cihaz kaydını kaldırır.
 
     ```azurecli
     az group delete --name MyResourceGroup
     ```
-1. Kaynak grubunun silindiğini onaylamak için [az Group List](/cli/azure/group#az-group-list) komutunu çalıştırın.  
+1. Kaynak grubunun silindiğini onaylamak için [az Group List](/cli/azure/group#az_group_list) komutunu çalıştırın.  
 
     ```azurecli
     az group list

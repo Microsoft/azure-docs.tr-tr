@@ -15,12 +15,12 @@ ms.custom:
 - 'Role: Cloud Development'
 - devx-track-azurecli
 ms.date: 06/16/2020
-ms.openlocfilehash: c1ea343a2674346e1028f8bb1f3d8ee61cb7e20e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 18163c3e5cdf83d736cdb52a3de028bf8890e728
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98624884"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107568582"
 ---
 # <a name="quickstart-send-telemetry-from-a-device-to-an-iot-hub-and-read-it-with-a-back-end-application-python"></a>Hızlı başlangıç: bir cihazdan IoT Hub 'ına telemetri gönderme ve arka uç uygulamasıyla (Python) okuma
 
@@ -34,7 +34,7 @@ Bu hızlı başlangıçta, sanal bir cihaz uygulamasından Azure IoT Hub aracıl
 
 * [Python 3.7 +](https://www.python.org/downloads/). Desteklenen Python 'un diğer sürümleri için bkz. [Azure IoT cihaz özellikleri](https://github.com/Azure/azure-iot-sdk-python/tree/master/azure-iot-device#azure-iot-device-features).
 
-* [Örnek bir Python projesi](https://github.com/Azure-Samples/azure-iot-samples-python/archive/master.zip).
+* GitHub 'dan [örnek bir Python projesi](https://github.com/Azure-Samples/azure-iot-samples-python/) . GitHub deposundaki **kod** düğmesini kullanarak örnekleri indirin veya kopyalayın.
 
 * Bağlantı noktası 8883 güvenlik duvarınızda açık. Bu hızlı başlangıçta bulunan cihaz örneği, 8883 bağlantı noktası üzerinden iletişim kuran MQTT protokolünü kullanır. Bu bağlantı noktası, bazı kurumsal ve eğitim ağ ortamlarında engellenebilir. Bu sorunu geçici olarak çözmek için daha fazla bilgi ve IoT Hub bkz. [bağlanma (MQTT)](iot-hub-mqtt-support.md#connecting-to-iot-hub).
 
@@ -91,6 +91,8 @@ Bir cihazın bağlanabilmesi için IoT hub’ınıza kaydedilmesi gerekir. Bu h�
 ## <a name="send-simulated-telemetry"></a>Simülasyon telemetrisi gönderme
 
 Simülasyon cihazı uygulaması, IoT hub’ınız üzerindeki cihaza özgü bir uç noktaya bağlanır ve sanal sıcaklık ve nem telemetrisi gönderir.
+
+1. Azure-IoT-Samples-Python [deposu sayfasındaki](https://github.com/Azure-Samples/azure-iot-samples-python/) **kod** düğmesini kullanarak Azure-IoT-Samples-Python deposunu indirin veya kopyalayın.
 
 1. Yerel terminal penceresinde, örnek Python projesinin kök klasörüne gidin. Daha sonra **iot-hub\Quickstarts\simulated-device** klasörüne gidin.
 

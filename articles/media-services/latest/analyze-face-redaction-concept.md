@@ -1,6 +1,6 @@
 ---
-title: Azure Media Services v3 API 'sindeki yüzeyleri redaksiyonu | Microsoft Docs
-description: Azure Media Services v3, bir video dosyası göndermenizi, yüzleri algılamanıza ve bunları tek bir Birleşik geçişte ya da düzenlenmesine izin veren iki aşamalı bir işlem aracılığıyla uygulamanıza olanak tanıyan bir yüz algılama ve redaksiyon ön ayarı sağlar. Bu makalede, v3 API 'sindeki yüz algılayıcısı ön ayarıyla yüzlerin nasıl redaksiyonun yapılacağı gösterilmektedir.
+title: Azure Media Services v3 API 'sindeki yüzeyleri bulma ve redaksiyonu | Microsoft Docs
+description: Azure Media Services v3, bir video dosyası göndermenizi, yüzleri algılamanıza ve isteğe bağlı olarak tek bir Birleşik geçişte ya da düzenlenmesine izin veren iki aşamalı bir işlem aracılığıyla bunları bir araya getirmenizi (Bulanıklaştırma) uygulamanızı sağlayan bir yüz algılama ve redaksiyon (Bulanıklaştırma) ön ayarı sağlar. Bu makalede, v3 API 'sindeki yüz algılayıcısı ön ayarıyla yüz bulma ve redaksiyonun nasıl yapılacağı gösterilir.
 services: media-services
 documentationcenter: ''
 author: IngridAtMicrosoft
@@ -14,14 +14,14 @@ ms.topic: article
 ms.date: 03/25/2021
 ms.author: johndeu
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 6db93aa369366936c90446c41406eafe9ee6e414
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 4907a81fc8cb55499fa97f2b02a3e19e7117bbbc
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105630589"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106286394"
 ---
-# <a name="redact-faces-with-the-face-detector-preset"></a>Yüz algılayıcısı ön ayarıyla yüzeyleri redaksiyonu
+# <a name="find-and-redact-blur-faces-with-the-face-detector-preset"></a>Yüz algılayıcısı ön ayarıyla yüz bulma ve redaksiyonu (Bulanıklaştırma)
 
 [!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
@@ -29,10 +29,11 @@ Azure Media Services v3 API 'SI, bulutta ölçeklenebilir yüz algılama ve reda
 
 Bu makale, **yüz algılayıcısı ön ayarıyla** ilgili ayrıntıları verir ve .net IÇIN Azure Media Services SDK ile nasıl kullanacağınızı gösterir.
 
+[!INCLUDE [regulation](../video-indexer/includes/regulation.md)]
+
 ## <a name="compliance-privacy-and-security"></a>Uyumluluk, gizlilik ve güvenlik
  
 Önemli bir anımsatıcı olarak, Azure Media Services Analize ait tüm geçerli kanunlarla uyumlu olmanız gerekir. Azure Media Services veya başka bir Azure hizmetini, diğer kullanıcıların haklarını ihlal eden bir şekilde kullanmamalıdır. Biyometrik veriler de dahil olmak üzere herhangi bir videoyu, işleme ve depolama için Azure Media Services hizmetine yüklemeden önce, videodaki kişilerden gelen tüm uygun haklara sahip olmanız gerekir. Azure Media Services Azure bilişsel [Hizmetler koşulları](https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/)'nda uyumluluk, gizlilik ve güvenlik hakkında bilgi edinmek için. Microsoft 'un gizlilik yükümlülüklerini ve verilerinizi işleme için, Microsoft 'un [Gizlilik bildirimini](https://privacy.microsoft.com/PrivacyStatement), [çevrimiçi hizmet koşulları](https://www.microsoft.com/licensing/product-licensing/products) 'nı (OST) ve [veri Işleme eki](https://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=67) 'ni ("DPA") gözden geçirin. Veri saklama, silme/yok etme dahil olmak üzere daha fazla gizlilik bilgisi, OST ve [burada](../video-indexer/faq.md)bulunabilir. Azure Media Services kullanarak, bilişsel hizmetler koşulları, OST, DPA ve gizlilik bildirimiyle bağlanmayı kabul etmiş olursunuz.
-
 
 ## <a name="face-redaction-modes"></a>Yüz redaksiyon modları
 
@@ -147,9 +148,6 @@ Bu, bir ID seçili olan bir ıdlist öğesinden alınan çıktıdır.
 **Birleşik** veya **REDAKCT** modunda, JSON giriş yapılandırması aracılığıyla aralarından seçim yapabileceğiniz beş farklı bulanıklaştırma modu vardır: **düşük**, **Med**, **High**, **Box** ve **Black**. Varsayılan olarak **Med** kullanılır.
 
 Aşağıdaki bulanıklaştırma türlerinin örneklerini bulabilirsiniz.
-
-### <a name="example-settings-for-face-detector-preset"></a>Yüz algılayıcısı önayarı için örnek ayarlar
-[!code-csharp[Main](../../../media-services-v3-dotnet/VideoAnalytics/FaceRedactor/Program.cs#FaceDetectorPreset)]
 
 
 #### <a name="low"></a>Düşük

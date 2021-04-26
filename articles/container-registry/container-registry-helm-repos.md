@@ -2,22 +2,19 @@
 title: Held grafiklerini depola
 description: Azure Container Registry içindeki depoları kullanarak Kubernetes uygulamalarınız için hele grafiklerini depolamayı öğrenin
 ms.topic: article
-ms.date: 06/12/2020
-ms.openlocfilehash: 69b16f35589586787e1c31a0e9755b9030af755d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/15/2021
+ms.openlocfilehash: c7dcdf222e9628daedb7e1c3617efb0b9c7af185
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "86537876"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772388"
 ---
 # <a name="push-and-pull-helm-charts-to-an-azure-container-registry"></a>Azure Container Registry 'de Held grafikleri gönderme ve çekme
 
 Kubernetes uygulamalarını hızlıca yönetmek ve dağıtmak için, [Açık kaynaklı HELI paket yöneticisini][helm]kullanabilirsiniz. Held ile uygulama paketleri, bir [Held grafik deposunda](https://helm.sh/docs/topics/chart_repository/)toplanan ve depolanan [grafikler](https://helm.sh/docs/topics/charts/)olarak tanımlanır.
 
 Bu makalede, Heln 3 komutlarını kullanarak bir Azure Container Registry 'de hele grafik depolarının nasıl barındırılacağını gösterilmektedir. Birçok senaryoda, geliştirdiğiniz uygulamalar için kendi grafiklerinizi derleyip karşıya yüklersiniz. Kendi HELI grafiklerinizi oluşturma hakkında daha fazla bilgi için bkz. [grafik şablonu Geliştirici Kılavuzu][develop-helm-charts]. Ayrıca, başka bir Held deposundan var olan bir Helu grafiğini de saklayabilirsiniz.
-
-> [!IMPORTANT]
-> Azure Container Registry 'de Held grafikleri için destek şu anda önizlemededir. Önizlemeler, ek [kullanım koşullarını][terms-of-use]kabul ettiğiniz koşulda size sunulur. Bu özelliğin bazı yönleri genel kullanıma açılmadan önce değişebilir.
 
 ## <a name="helm-3-or-helm-2"></a>Helb 3 veya Held 2?
 
@@ -26,12 +23,12 @@ Held grafiklerini depolamak, yönetmek ve yüklemek için bir hele istemcisi ve 
 Hele grafiklerini Azure Container Registry barındırmak için helm3 kullanılmalıdır. Helb 3 ile şunları yapabilirsiniz:
 
 * Bir Azure Container Registry 'de bir veya daha fazla Held deposu oluşturabilir
-* Helm3 grafiklerini bir kayıt defterinde [OCI yapıtları](container-registry-image-formats.md#oci-artifacts)olarak depolayın. Şu anda, OCı için Held 3 desteği *deneysel*.
+* Helm3 grafiklerini bir kayıt defterinde [OCI yapıtları](container-registry-image-formats.md#oci-artifacts)olarak depolayın. Azure Container Registry, Held grafikleri dahil [OCI yapıtları](container-registry-oci-artifacts.md)için GA desteği sağlar.
 * Komutunu kullanarak kayıt defterinizde kimlik doğrulaması yapın `helm registry login` .
 * `helm chart`Bir kayıt defterinde Held grafiklerini göndermek, çekmek ve yönetmek Için HELı CLI içindeki komutları kullanın
 * `helm install`Yerel bir depo önbelleğinden bir Kubernetes kümesine grafik yüklemek için kullanın.
 > [!NOTE]
-> Helm 3 itibariyle, Helm 2 istemcisiyle kullanım için [az ACR Helm][az-acr-helm] komutları kullanım dışı bırakılıyor. Bkz. [ürün yol haritası](https://github.com/Azure/acr/blob/master/docs/acr-roadmap.md#acr-helm-ga). Daha önce helk 2 grafikleri dağıttıysanız, bkz. [Held v2 'yi v3 'e geçirme](https://helm.sh/docs/topics/v2_v3_migration/).
+> Helm 3 itibariyle, Helm 2 istemcisiyle kullanım için [az ACR Helm][az-acr-helm] komutları kullanım dışı bırakılıyor. Komut kaldırma işleminin ardından en az 3 ay ' bildirim sunulacaktır. Daha önce helk 2 grafikleri dağıttıysanız, bkz. [Held v2 'yi v3 'e geçirme](https://helm.sh/docs/topics/v2_v3_migration/).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -294,12 +291,12 @@ az acr repository delete --name mycontainerregistry --image helm/hello-world:v1
 [azure-cli-install]: /cli/azure/install-azure-cli
 [aks-quickstart]: ../aks/kubernetes-walkthrough.md
 [acr-bestpractices]: container-registry-best-practices.md
-[az-configure]: /cli/azure/reference-index#az-configure
-[az-acr-login]: /cli/azure/acr#az-acr-login
+[az-configure]: /cli/azure/reference-index#az_configure
+[az-acr-login]: /cli/azure/acr#az_acr_login
 [az-acr-helm]: /cli/azure/acr/helm
 [az-acr-repository]: /cli/azure/acr/repository
-[az-acr-repository-show]: /cli/azure/acr/repository#az-acr-repository-show
-[az-acr-repository-delete]: /cli/azure/acr/repository#az-acr-repository-delete
-[az-acr-repository-show-tags]: /cli/azure/acr/repository#az-acr-repository-show-tags
-[az-acr-repository-show-manifests]: /cli/azure/acr/repository#az-acr-repository-show-manifests
+[az-acr-repository-show]: /cli/azure/acr/repository#az_acr_repository_show
+[az-acr-repository-delete]: /cli/azure/acr/repository#az_acr_repository_delete
+[az-acr-repository-show-tags]: /cli/azure/acr/repository#az_acr_repository_show_tags
+[az-acr-repository-show-manifests]: /cli/azure/acr/repository#az_acr_repository_show_manifests
 [acr-tasks]: container-registry-tasks-overview.md

@@ -3,15 +3,15 @@ title: Kimlik doğrulaması ve yetkilendirme
 description: Azure App Service ve Azure Işlevlerinde yerleşik kimlik doğrulama ve yetkilendirme desteği hakkında bilgi edinin ve uygulamanızın yetkisiz erişime karşı nasıl güvenli hale getirilmesine yardımcı olabilir.
 ms.assetid: b7151b57-09e5-4c77-a10c-375a262f17e5
 ms.topic: article
-ms.date: 07/08/2020
+ms.date: 03/29/2021
 ms.reviewer: mahender
 ms.custom: seodec18, fasttrack-edit, has-adal-ref
-ms.openlocfilehash: 35513abdfb61d889abdbd4af7125b1fbb556d7b8
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: 1b6e600fcaf32a115af14be2444144fee099d635
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105612764"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106075347"
 ---
 # <a name="authentication-and-authorization-in-azure-app-service-and-azure-functions"></a>Azure App Service ve Azure Işlevlerinde kimlik doğrulama ve yetkilendirme
 
@@ -33,8 +33,7 @@ App Service, üçüncü taraf bir kimlik sağlayıcısının sizin için Kullan�
 
 | Sağlayıcı | Oturum açma uç noktası | How-To Kılavuzu |
 | - | - | - |
-| [Azure Active Directory](../active-directory/fundamentals/active-directory-whatis.md) | `/.auth/login/aad` | [Azure AD oturum açma App Service](configure-authentication-provider-aad.md) |
-| [Microsoft Hesabı](../active-directory/develop/v2-overview.md) | `/.auth/login/microsoftaccount` | [Microsoft hesabı oturum açma App Service](configure-authentication-provider-microsoft.md) |
+| [Microsoft Identity platformu](../active-directory/fundamentals/active-directory-whatis.md) | `/.auth/login/aad` | [App Service Microsoft Identity platform oturumu açma](configure-authentication-provider-aad.md) |
 | [Facebook](https://developers.facebook.com/docs/facebook-login) | `/.auth/login/facebook` | [Facebook oturum App Service](configure-authentication-provider-facebook.md) |
 | [Google](https://developers.google.com/identity/choose-auth) | `/.auth/login/google` | [Google oturum App Service](configure-authentication-provider-google.md) |
 | [Twitter](https://developer.twitter.com/en/docs/basics/authentication) | `/.auth/login/twitter` | [App Service Twitter oturumu açma](configure-authentication-provider-twitter.md) |
@@ -110,21 +109,17 @@ Aşağıdaki tabloda, kimlik doğrulama akışı adımları gösterilmektedir.
 
 #### <a name="authorization-behavior"></a>Yetkilendirme davranışı
 
-[Azure Portal](https://portal.azure.com), gelen isteğin kimliği doğrulanmamış bir dizi davranışla App Service yetkilendirmeyi yapılandırabilirsiniz.
+[Azure Portal](https://portal.azure.com), gelen isteğin kimliği doğrulanmamış bir dizi davranışa sahip App Service yapılandırabilirsiniz. Aşağıdaki başlıklar seçenekleri anlatmaktadır.
 
-!["İstek kimlik doğrulaması olmadığında gerçekleştirilecek eylemi" açılan ekran görüntüsü](media/app-service-authentication-overview/authorization-flow.png)
-
-Aşağıdaki başlıklar seçenekleri anlatmaktadır.
-
-**Anonim isteklere izin ver (eylem yok)**
+**Kimliği doğrulanmamış isteklere izin ver**
 
 Bu seçenek, uygulama kodunuza kimliği doğrulanmamış trafik yetkilendirmesini erteler. Kimliği doğrulanmış istekler için, App Service HTTP üstbilgilerinde kimlik doğrulama bilgileri boyunca de geçirilir.
 
 Bu seçenek, anonim istekleri işlemek için daha fazla esneklik sağlar. Örneğin, kullanıcılarınıza [birden çok oturum açma sağlayıcısı sunmanıza](app-service-authentication-how-to.md#use-multiple-sign-in-providers) olanak tanır. Ancak, kod yazmanız gerekir.
 
-**Yalnızca kimliği doğrulanmış isteklere izin ver**
+**Kimlik doğrulaması gerektir**
 
-Seçeneği **\<provider> Ile oturum açın**. App Service, tüm anonim istekleri `/.auth/login/<provider>` seçtiğiniz sağlayıcıya yönlendirir. Anonim istek yerel bir mobil uygulamadan geliyorsa, döndürülen yanıt bir olur `HTTP 401 Unauthorized` .
+Bu seçenek, uygulamanıza yönelik tüm kimliği doğrulanmamış trafiği reddeder. Bu reddetme, yapılandırılmış kimlik sağlayıcılarından birine bir yeniden yönlendirme eylemi olabilir. Bu durumlarda, bir tarayıcı istemcisi seçtiğiniz sağlayıcıya yeniden yönlendirilir `/.auth/login/<provider>` . Anonim istek yerel bir mobil uygulamadan geliyorsa, döndürülen yanıt bir olur `HTTP 401 Unauthorized` . Reddetme `HTTP 401 Unauthorized` isteğini, tüm istekler için veya olarak da yapılandırabilirsiniz `HTTP 403 Forbidden` .
 
 Bu seçenekle, uygulamanızda herhangi bir kimlik doğrulama kodu yazmanız gerekmez. Role özgü yetkilendirme gibi daha ayrıntılı yetkilendirme, kullanıcının taleplerini inceleyerek (bkz. [erişim kullanıcı talepleri](app-service-authentication-how-to.md#access-user-claims)) işlenebilir.
 

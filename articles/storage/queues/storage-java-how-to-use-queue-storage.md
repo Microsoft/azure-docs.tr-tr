@@ -1,20 +1,20 @@
 ---
 title: Java-Azure Storage 'da kuyruk depolama 'yı kullanma
 description: Kuyruk depolamayı kullanarak kuyruklar oluşturma ve silme hakkında bilgi edinin. Java için Azure Storage istemci kitaplığı ile ileti eklemeyi, Peek, almak ve silmek hakkında bilgi edinin.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.reviewer: dineshm
 ms.date: 08/19/2020
 ms.topic: how-to
 ms.service: storage
 ms.subservice: queues
 ms.custom: devx-track-java
-ms.openlocfilehash: 997a37ac4252813abf1b35877cd34e192ec3e2ae
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5ea00adacff1f76eb5ec81728e3a11f703a5fe8c
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97585726"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106276272"
 ---
 # <a name="how-to-use-queue-storage-from-java"></a>Java 'da kuyruk depolama 'yı kullanma
 

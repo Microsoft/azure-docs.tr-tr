@@ -4,10 +4,10 @@ description: IoT Edge üzerinde canlı video analizi, bir grafik uzantısı dü�
 ms.topic: overview
 ms.date: 09/14/2020
 ms.openlocfilehash: 4a7aea7cc60a67603d8a0376cf84228072659d6c
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105557624"
 ---
 # <a name="media-graph-extension"></a>Medya grafiği uzantısı

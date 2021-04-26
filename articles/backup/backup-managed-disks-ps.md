@@ -4,10 +4,10 @@ description: Azure PowerShell kullanarak Azure yönetilen disklerini nasıl yede
 ms.topic: conceptual
 ms.date: 03/26/2021
 ms.openlocfilehash: 2e286128185c1ac7fe4861a9b06de52e10d4139a
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105630592"
 ---
 # <a name="back-up-azure-managed-disks-using-azure-powershell"></a>Azure PowerShell kullanarak Azure yönetilen disklerini yedekleme

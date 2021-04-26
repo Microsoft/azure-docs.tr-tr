@@ -5,13 +5,13 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: estfan, logicappspm, azla
 ms.topic: conceptual
-ms.date: 01/11/2021
-ms.openlocfilehash: 4d83609eea57c2350881360ef757b1a291627c23
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 03/24/2021
+ms.openlocfilehash: 3070083040424b877159955dc2138f15319f05c8
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100374737"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107766398"
 ---
 # <a name="access-to-azure-virtual-network-resources-from-azure-logic-apps-by-using-integration-service-environments-ises"></a>Tümleştirme hizmeti ortamlarını (sesleri) kullanarak Azure Logic Apps Azure sanal ağ kaynaklarına erişim
 
@@ -33,7 +33,7 @@ Mantıksal uygulamaları kendi ayrı ayrılmış Örneğinizde çalıştırmak, 
 
 * Sanal ağınıza doğrudan veya bağlı olan kaynaklara doğrudan erişim
 
-  Bir ıSE içinde oluşturduğunuz ve çalıştırdığınız Logic Apps, [özel olarak tasarlanmış ve çalışır durumda çalışan bağlayıcılar](../connectors/apis-list.md#ise-connectors)kullanabilir. Şirket içi bir sistem veya veri kaynağı için ıSE Bağlayıcısı varsa, Şirket [içi veri ağ geçidini](../logic-apps/logic-apps-gateway-connection.md)kullanmak zorunda kalmadan doğrudan bağlanabilirsiniz. Daha fazla bilgi için, bu konunun ilerleyen kısımlarında, [adanmış ve çok kiracılı](#difference) ve [Şirket içi sistemlere erişim](#on-premises) bölümüne bakın.
+  Bir ıSE içinde oluşturduğunuz ve çalıştırdığınız Logic Apps, [özel olarak tasarlanmış ve çalışır durumda çalışan bağlayıcılar](../connectors/managed.md#ise-connectors)kullanabilir. Şirket içi bir sistem veya veri kaynağı için ıSE Bağlayıcısı varsa, Şirket [içi veri ağ geçidini](../logic-apps/logic-apps-gateway-connection.md)kullanmak zorunda kalmadan doğrudan bağlanabilirsiniz. Daha fazla bilgi için, bu konunun ilerleyen kısımlarında, [adanmış ve çok kiracılı](#difference) ve [Şirket içi sistemlere erişim](#on-premises) bölümüne bakın.
 
 * Sanal ağınıza bağlı olan veya olmayan kaynaklara devam eden erişim
 
@@ -53,7 +53,7 @@ Bir ıSE 'de Logic Apps oluşturup çalıştırdığınızda, aynı kullanıcı 
 
 * Yerleşik Tetikleyiciler ve HTTP gibi eylemler, **çekirdek** etiketi görüntüler ve mantıksal uygulamanız ile aynı çalışma alanında çalışır.
 
-* **Ise** etiketini görüntüleyen yönetilen bağlayıcılar, özel olarak TASE için tasarlanmıştır ve *mantıksal uygulamanızla aynı çalışma alanında çalışır*. Örneğin, [Ise sürümlerini sunan bazı bağlayıcılar](../connectors/apis-list.md#ise-connectors)aşağıda verilmiştir:<p>
+* **Ise** etiketini görüntüleyen yönetilen bağlayıcılar, özel olarak TASE için tasarlanmıştır ve *mantıksal uygulamanızla aynı çalışma alanında çalışır*. Örneğin, [Ise sürümlerini sunan bazı bağlayıcılar](../connectors/managed.md#ise-connectors)aşağıda verilmiştir:<p>
 
   * Azure Blob depolama, dosya depolama ve tablo depolama
   * Azure Service Bus, Azure kuyrukları, Azure Event Hubs
@@ -79,7 +79,7 @@ Bir ıSE içinde çalışan Logic Apps, bu öğeleri kullanarak bir Azure sanal 
 
 * Şirket içi sistem veya veri kaynağı için varsa **Ise** Bağlayıcısı
 
-  ISE Bağlayıcısı varsa, [Şirket içi veri ağ geçidi](../logic-apps/logic-apps-gateway-connection.md)olmadan sisteme veya veri kaynağına doğrudan erişebilirsiniz. Ancak, bir ıSE 'den SQL Server erişmeniz ve Windows kimlik doğrulaması kullanmanız gerekiyorsa, bağlayıcının ıSE sürümü ve şirket içi veri ağ geçidi kullanmanız gerekir. Bağlayıcının ıSE sürümü Windows kimlik doğrulamasını desteklemez. Daha fazla bilgi için bkz. [Ise bağlayıcıları](../connectors/apis-list.md#ise-connectors) ve [bir tümleştirme hizmeti ortamından bağlanma](../connectors/apis-list.md#integration-service-environment).
+  ISE Bağlayıcısı varsa, [Şirket içi veri ağ geçidi](../logic-apps/logic-apps-gateway-connection.md)olmadan sisteme veya veri kaynağına doğrudan erişebilirsiniz. Ancak, bir ıSE 'den SQL Server erişmeniz ve Windows kimlik doğrulaması kullanmanız gerekiyorsa, bağlayıcının ıSE sürümü ve şirket içi veri ağ geçidi kullanmanız gerekir. Bağlayıcının ıSE sürümü Windows kimlik doğrulamasını desteklemez. Daha fazla bilgi için bkz. [Ise bağlayıcıları](../connectors/managed.md#ise-connectors) ve [bir tümleştirme hizmeti ortamından bağlanma](../connectors/managed.md#integration-account-connectors).
 
 * Özel bir bağlayıcı
 

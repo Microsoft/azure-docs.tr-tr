@@ -1,18 +1,18 @@
 ---
 title: Bir cihazı Azure IoT Central 'a taşıma IoT Hub
 description: Cihazı Azure IoT Central IoT Hub 'tan taşıma
-author: TheRealJasonAndrew
-ms.author: v-anjaso
+author: philmea
+ms.author: philmea
 ms.date: 02/20/2021
 ms.topic: how-to
 ms.service: iot-central
 services: iot-central
-ms.openlocfilehash: 543c3f1c72857098540cc2a77e8a0093b907b799
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 79aead5b374714e7856897a9b85349198341cb3d
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102210844"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872740"
 ---
 # <a name="how-to-transfer-a-device-to-azure-iot-central-from-iot-hub"></a>IoT Hub 'dan bir cihazı Azure IoT Central aktarma
 

@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: troubleshooting
 ms.date: 05/20/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 8a034cb8371972c2c7908cdba4dd491c17d8cc9f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: afd5ba23838f2771825511c4aa67b39934e757f6
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "88008551"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106444199"
 ---
 # <a name="windows-virtual-desktop-classic-service-connections"></a>Windows sanal masaüstü (klasik) hizmet bağlantıları
 

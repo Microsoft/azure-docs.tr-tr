@@ -8,16 +8,16 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: troubleshooting
-ms.date: 03/10/2021
+ms.date: 04/05/2021
 ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 435a0b85d205328d10f8762498c7a981d7ee45f5
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 074bffb8614be1f71ba1956fd5a238bc19354c58
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102611836"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107028752"
 ---
 # <a name="collect-azure-active-directory-b2c-logs-with-application-insights"></a>Application Insights ile Azure Active Directory B2C günlüklerini toplayın
 
@@ -31,6 +31,18 @@ Burada açıklanan ayrıntılı etkinlik günlükleri **yalnızca** özel ilkele
 ## <a name="set-up-application-insights"></a>Application Insights ayarlama
 
 Henüz bir tane yoksa, aboneliğinizde bir Application Insights örneği oluşturun.
+
+> [!TIP]
+> Application Insights tek bir örneği birden çok Azure AD B2C kiracıda kullanılabilir. Daha sonra sorgunuzda, kiracıya veya ilke adına göre filtreleme yapabilirsiniz. Daha fazla bilgi için [Application Insights örnekleri içindeki günlüklere bakın](#see-the-logs-in-application-insights) .
+
+Aboneliğinizdeki Application Insights çıkış örneğini kullanmak için şu adımları izleyin:
+
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+1. Üst menüden **Dizin + abonelik** filtresi ' ni seçin ve Azure aboneliğinizi içeren dizini (Azure AD B2C dizininiz değil) seçin.
+1. Daha önce oluşturduğunuz Application Insights kaynağını açın.
+1. **Genel bakış** sayfasında, **izleme anahtarını** kaydedin
+
+Aboneliğinizde bir Application Insights örneği oluşturmak için aşağıdaki adımları izleyin:
 
 1. [Azure portalında](https://portal.azure.com) oturum açın.
 1. Üst menüden **Dizin + abonelik** filtresi ' ni seçin ve Azure aboneliğinizi içeren dizini (Azure AD B2C dizininiz değil) seçin.
@@ -96,12 +108,59 @@ Günlükleri görmek için kullanabileceğiniz bir sorgu listesi aşağıda veri
 
 | Sorgu | Description |
 |---------------------|--------------------|
-`traces` | Azure AD B2C tarafından oluşturulan tüm günlüklere bakın |
-`traces | where timestamp > ago(1d)` | Son gün için Azure AD B2C tarafından oluşturulan tüm günlüklere bakın
+| `traces` | Azure AD B2C tarafından oluşturulan tüm günlükleri al |
+| `traces | where timestamp > ago(1d)` | Son gün için Azure AD B2C tarafından oluşturulan tüm günlükleri alın.|
+| `traces | where message contains "exception" | where timestamp > ago(2h)`|  Son iki saatten hata içeren tüm günlükleri alın.|
+| `traces | where customDimensions.Tenant == "contoso.onmicrosoft.com" and customDimensions.UserJourney  == "b2c_1a_signinandup"` | Azure AD B2C *contoso.onmicrosoft.com* kiracısı tarafından oluşturulan tüm günlükleri alın ve Kullanıcı yolculuğu *b2c_1a_signinandup*. |
+| `traces | where customDimensions.CorrelationId == "00000000-0000-0000-0000-000000000000"`| İlişki KIMLIĞI için Azure AD B2C tarafından oluşturulan tüm günlükleri alın. Bağıntı KIMLIĞINI bağıntı KIMLIĞINIZ ile değiştirin. | 
 
 Girişler uzun olabilir. Daha yakından bir görünüm için CSV 'ye aktarın.
 
 Sorgulama hakkında daha fazla bilgi için bkz. [Azure izleyici 'de günlük sorgularına genel bakış](../azure-monitor/logs/log-query-overview.md).
+
+## <a name="see-the-logs-in-vs-code-extension"></a>VS Code uzantılı günlüklere bakın
+
+[Vs Code](https://code.visualstudio.com/)için [Azure AD B2C uzantısını](https://marketplace.visualstudio.com/items?itemName=AzureADB2CTools.aadb2c) yüklemenizi öneririz. Azure AD B2C Uzantısı ile, Günlükler sizin için ilke adı, bağıntı KIMLIĞI (Application Insights bağıntı KIMLIĞI için ilk basamağı gösterir) ve günlük zaman damgası tarafından düzenlenir. Bu özellik, yerel zaman damgasına göre ilgili günlüğü bulmanıza ve Azure AD B2C tarafından yürütülen kullanıcının yolculuğunu görmenizi sağlar.
+
+> [!NOTE]
+> Topluluk, kimlik geliştiricilerine yardımcı olmak için Azure AD B2C vs Code uzantısını geliştirmiştir. Uzantı Microsoft tarafından desteklenmez ve tamamen olduğu gibi kullanılabilir hale getirilir.
+
+### <a name="set-application-insights-api-access"></a>Application Insights API erişimi ayarla
+
+Application Insights ayarladıktan ve özel ilkeyi yapılandırdıktan sonra, Application Insights **API kimliğinizi** almanız ve **API anahtarı** oluşturmanız gerekir. Hem API KIMLIĞI hem de API anahtarı, Application Insights olaylarını okumak için Azure AD B2C uzantısı tarafından kullanılır (Telemetriler). API anahtarlarınızın parolalar gibi yönetilmesi gerekir. Gizli tut.
+
+> [!NOTE]
+> Daha önce oluşturduğunuz Application Insights izleme anahtarı, Application Insights Telemetriler göndermek için Azure AD B2C tarafından kullanılır. İzleme anahtarını, vs Code uzantısında değil yalnızca Azure AD B2C ilkenizde kullanırsınız.
+
+Application Insights KIMLIĞI ve anahtarı almak için:
+
+1. Azure portal, uygulamanız için Application Insights kaynağını açın.
+1. **Ayarlar**' ı ve ardından **API erişimi**' ni seçin.
+1. **Uygulama kimliğini** kopyalama
+1. **API anahtarı oluştur** ' u seçin
+1. **Telemetriyi oku** kutusunu işaretleyin.
+1. API anahtarı oluştur dikey penceresini kapatmadan önce **anahtarı** kopyalayın ve güvenli bir yere kaydedin. Anahtarı kaybederseniz, bir tane oluşturmanız gerekir.
+
+    ![API erişim anahtarı oluşturmayı gösteren ekran görüntüsü.](./media/troubleshoot-with-application-insights/application-insights-api-access.png)
+
+### <a name="set-up-azure-ad-b2c-vs-code-extension"></a>Azure AD B2C VS Code uzantısını ayarlama
+
+Artık Azure Application Insights API 'SI KIMLIĞINIZ ve anahtarınız varsa, vs Code uzantısını günlükleri okumak için yapılandırabilirsiniz. Azure AD B2C VS Code uzantısı, ayarlar için iki kapsam sağlar:
+
+- **Kullanıcı genel ayarları** -açtığınız vs Code herhangi bir örneğine küresel olarak uygulanan ayarlar.
+- **Çalışma alanı ayarları** -çalışma alanınızda depolanan ayarlar ve yalnızca çalışma alanı açıldığında (vs Code **açık klasör** kullanılarak) geçerlidir.
+
+1. **Azure AD B2C izleme** Gezgini ' nden, **Ayarlar** simgesine tıklayın.
+
+    ![Uygulamasının Application Insights ayarlarını seçmesini gösteren ekran görüntüsü.](./media/troubleshoot-with-application-insights/app-insights-settings.png)
+
+1. Azure Application Insights **kimliği** ve **anahtarını** sağlayın.
+1. **Kaydet**’e tıklayın
+
+Ayarları kaydettikten sonra, Application Insights günlükleri **Azure AD B2C trace (App Insights)** penceresinde görüntülenir.
+
+![Vscode için Azure AD B2C uzantısının ekran görüntüsü, Azure Application Insights izlemesini sunuyor.](./media/troubleshoot-with-application-insights/vscode-extension-application-insights-trace.png)
+
 
 ## <a name="configure-application-insights-in-production"></a>Üretimde Application Insights yapılandırma
 
@@ -128,12 +187,8 @@ Sorgulama hakkında daha fazla bilgi için bkz. [Azure izleyici 'de günlük sor
    
 1. İlkenizi karşıya yükleyin ve test edin.
 
+
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Topluluk kimlik geliştiricilerine yardımcı olmak için bir kullanıcı yolculuğu izleyicisi geliştirmiştir. Application Insights örneğinizden okur ve kullanıcı yolculuğu olayları içi iyi yapılandırılmış bir görünüm sağlar. Kaynak kodunu elde edersiniz ve kendi çözümünüze dağıtırsınız.
-
-Kullanıcı yolculuğu oyuncusu Microsoft tarafından desteklenmez ve tamamen olduğu gibi kullanılabilir hale getirilir.
-
-GitHub 'daki Application Insights olayları okuyan görüntüleyici sürümünü buradan öğrenebilirsiniz:
-
-[Azure-Samples/Active-Directory-B2C-Advanced-policies](https://github.com/Azure-Samples/active-directory-b2c-advanced-policies/tree/master/wingtipgamesb2c/src/WingTipUserJourneyPlayerWebApplication)
+- [Azure AD B2C özel ilkelerle ilgili sorunları nasıl giderebileceğinizi](troubleshoot-custom-policies.md) öğrenin

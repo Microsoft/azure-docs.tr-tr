@@ -9,10 +9,10 @@ ms.date: 6/9/2020
 ms.author: aschhab
 ms.custom: include file
 ms.openlocfilehash: 574507fcc6a3c05919c441bd6d0ec9c573d4b6ae
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "100652619"
 ---
 Aşağıdaki tabloda Azure Service Bus Şu anda desteklediği Java Ileti hizmeti (JMS) özellikleri listelenmektedir. Ayrıca desteklenmeyen özellikleri gösterir.

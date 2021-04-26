@@ -12,14 +12,15 @@ ms.date: 09/10/2018
 ms.author: ajburnle
 ms.custom: it-pro, seodec18, fasttrack-edit
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: eeea88d8c21ba754fbeadbb24891126b639616c7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: fc51c645c470f2b5b0a009eaf831db2f1957617e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96437249"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780147"
 ---
 # <a name="quickstart-create-a-new-tenant-in-azure-active-directory"></a>Hızlı başlangıç: Azure Active Directory yeni bir kiracı oluşturun
+
 Kuruluşunuz için yeni bir kiracı oluşturulması da dahil olmak üzere, Azure Active Directory (Azure AD) portalı kullanarak tüm yönetim görevlerinizi gerçekleştirebilirsiniz. 
 
 Bu hızlı başlangıçta, Azure portala ve Azure Active Directory’ye nasıl erişeceğinizi ve kuruluşunuz için temel bir kiracının nasıl oluşturulacağını öğreneceksiniz.
@@ -27,6 +28,7 @@ Bu hızlı başlangıçta, Azure portala ve Azure Active Directory’ye nasıl e
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="create-a-new-tenant-for-your-organization"></a>Kuruluşunuz için yeni bir kiracı oluşturma
+
 Azure portalda oturum açtıktan sonra kuruluşunuz için yeni bir kiracı oluşturabilirsiniz. Yeni kiracınız kuruluşunuzu temsil eder ve şirket içindeki ve dışındaki kullanıcılarınız için belirli bir Microsoft bulut hizmetleri örneğini yönetmenize yardımcı olur.
 
 ### <a name="to-create-a-new-tenant"></a>Yeni kiracı oluşturmak için
@@ -59,10 +61,20 @@ Azure portalda oturum açtıktan sonra kuruluşunuz için yeni bir kiracı oluş
 
 contoso.onmicrosoft.com etki alanıyla yeni kiracınız oluşturulur.
 
+## <a name="your-user-account-in-the-new-tenant"></a>Yeni Kiracıdaki Kullanıcı hesabınız
+
+Yeni bir Azure AD kiracısı oluşturduğunuzda, bu kiracının ilk kullanıcısı olursunuz. İlk kullanıcı olarak, [genel yönetici](https://docs.microsoft.com/azure/active-directory/roles/permissions-reference#global-administrator) rolünü otomatik olarak atamış olursunuz. [**Kullanıcılar**](https://portal.azure.com/#blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/MsGraphUsers) sayfasına giderek Kullanıcı hesabınıza göz atın.
+
+Varsayılan olarak, kiracıya yönelik [teknik iletişim kişisi](https://docs.microsoft.com/microsoft-365/admin/manage/change-address-contact-and-more?view=o365-worldwide#what-do-these-fields-mean) olarak da listelenir. Teknik iletişim bilgileri, [**özelliklerde**](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Properties)değiştirebilmeniz için bir şeydir.
+
+> [!WARNING]
+> Dizininizde, genel yönetici ayrıcalıklarına sahip en az iki hesap atanmış olduğundan emin olun. Bu, bir genel yöneticinin kilitlenme olasılığına karşı yardımcı olur. Daha ayrıntılı bilgi için [Azure AD 'de acil durum erişim hesaplarını yönetme](../roles/security-emergency-access.md)makalesine bakın.
+
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
+
 Bu uygulamayı kullanmaya devam etmeyecekecekseniz, aşağıdaki adımları kullanarak kiracıyı silebilirsiniz:
 
-- Azure portal **Dizin + abonelik** filtresi aracılığıyla silmek istediğiniz dizinde oturum açtığınızdan ve gerekirse hedef dizine geçiş yapıldığından emin olun.
+- Azure portal **Dizin + abonelik** filtresi aracılığıyla silmek istediğiniz dizinde oturum açtığınızdan emin olun. Gerekirse hedef dizine geçiş yapın.
 - **Azure Active Directory** seçeneğini belirleyin ve sonra **Contoso - Genel Bakış** sayfasında **Dizini sil**’i seçin.
 
     Kiracı ve ilişkili bilgileri silinir.
@@ -70,6 +82,7 @@ Bu uygulamayı kullanmaya devam etmeyecekecekseniz, aşağıdaki adımları kull
     <kbd>![Vurgulanan dizini Sil düğmesi ile genel bakış sayfası](media/active-directory-access-create-new-tenant/azure-ad-delete-new-tenant.png)</kbd>
 
 ## <a name="next-steps"></a>Sonraki adımlar
+
 - Etki alanı adlarını değiştirme veya ekleme; bkz. [Azure Active Directory’ye özel etki alanı adı ekleme](add-custom-domain.md)
 
 - Kullanıcı ekleme; bkz. [Yeni kullanıcı ekleme veya silme](add-users-azure-active-directory.md)

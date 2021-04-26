@@ -3,12 +3,12 @@ title: Azure Lab Services Labs 'i yönetme | Microsoft Docs
 description: Bir sınıf Laboratuvarı oluşturma ve yapılandırma, tüm laboratuvarları görüntüleme, kayıt bağlantısını laboratuar kullanıcısı ile paylaşma veya bir laboratuvarı silme hakkında bilgi edinin.
 ms.topic: how-to
 ms.date: 06/26/2020
-ms.openlocfilehash: db7a2f58f99252a7e5076dd86c37b65bbe8ea37a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c6acb9609abac15b9ff92250e3d5d44c585881cc
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96434218"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481812"
 ---
 # <a name="manage-labs-in-azure-lab-services"></a>Azure Lab Services laboratuvarları yönetme 
 Bu makalede bir sınıf Laboratuvarı oluşturma ve silme açıklanmaktadır. Ayrıca laboratuvar hesabındaki tüm laboratuvarları nasıl görüntüleyekullanabileceğinizi gösterir. 
@@ -18,7 +18,7 @@ Bir laboratuvar hesabında sınıf laboratuvarı ayarlamak için ilgili laboratu
 
 ## <a name="create-a-classroom-lab"></a>Sınıf laboratuvarı oluşturma
 
-1. [Azure Lab Services web sitesine](https://labs.azure.com) gidin. Internet Explorer 11 henüz desteklenmiyor. 
+1. [Azure Lab Services web sitesine](https://labs.azure.com) gidin.
 1. **Oturum aç**’ı seçip kimlik bilgilerinizi girin. Laboratuvar hesabındaki **Laboratuvar Oluşturucu** rolünün bir üyesi olan BIR **Kullanıcı kimliği** seçin veya girin ve parola girin. Azure Lab Services, kuruluş hesaplarını ve Microsoft hesaplarını destekler. 
 1. **Yeni laboratuvar**' ı seçin. 
     
@@ -89,7 +89,7 @@ Bir laboratuvar hesabında sınıf laboratuvarı ayarlamak için ilgili laboratu
 
 ### <a name="vm-sizes"></a>VM boyutları  
 
-| Boyut | Çekirdekler | RAM | Description | 
+| Boyut | Çekirdekler | RAM | Açıklama | 
 | ---- | ----- | --- | ----------- | 
 | Küçük | 2 | 3,5 GB | Bu boyut, komut satırı, Web tarayıcısı, düşük trafikli web sunucuları, küçük ve orta ölçekli veritabanları için idealdir. |
 | Orta | 4 | 7 GB | Bu boyut, ilişkisel veritabanları, bellek içi önbelleğe alma ve analiz için idealdir | 

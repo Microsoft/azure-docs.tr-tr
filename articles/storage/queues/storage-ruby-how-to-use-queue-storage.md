@@ -1,19 +1,19 @@
 ---
 title: Ruby-Azure depolama 'dan kuyruk depolama kullanma
 description: Kuyrukları oluşturmak ve silmek ve ileti eklemek, almak ve silmek için Azure kuyruk depolama 'yı nasıl kullanacağınızı öğrenin. Ruby dilinde yazılan örnekler.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.reviewer: dineshm
 ms.date: 12/08/2016
 ms.topic: how-to
 ms.service: storage
 ms.subservice: queues
-ms.openlocfilehash: 8558949e49bcf551c9276458d375fb9ac9636184
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 257b435f0136884e8568f4201794a7ce5cf0c209
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97587671"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106275864"
 ---
 # <a name="how-to-use-queue-storage-from-ruby"></a>Ruby 'den kuyruk depolama kullanma
 

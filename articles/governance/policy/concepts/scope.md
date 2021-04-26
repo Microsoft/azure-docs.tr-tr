@@ -1,20 +1,19 @@
 ---
 title: Azure Ilkesinde kapsamı anlayın
 description: Azure Resource Manager kapsamında kapsam kavramını ve Azure ilkesi 'nin hangi kaynaklarda değerlendirileceğini denetlemek için Azure Ilkesi 'nin nasıl uygulanacağını açıklar.
-ms.date: 09/22/2020
+ms.date: 03/31/2021
 ms.topic: conceptual
-ms.openlocfilehash: 83eda330a35b007abfa37046a202b14728726849
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c198d2d2961b6d9e10a3b78481183cba7f7197ca
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "90984433"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167745"
 ---
 # <a name="understand-scope-in-azure-policy"></a>Azure Ilkesinde kapsamı anlayın
 
-Hangi kaynakların değerlendirilemekte olduğunu ve hangi kaynakların Azure Ilkesi tarafından değerlendirildiğini belirleyen bir dizi ayar vardır. Bu denetimlerin birincil kavramı _kapsamdadır_.
-Üst düzey bir genel bakış için [Azure Resource Manager kapsam](../../../azure-resource-manager/management/overview.md#understand-scope)bölümüne bakın.
-Bu makalede, _kapsamın_ Azure ilkesinde ve ilgili nesne ve özellikler üzerindeki etkileri açıklanmaktadır.
+Hangi kaynakların değerlendirilemekte olduğunu ve hangi kaynakların Azure Ilkesi tarafından değerlendirildiğini belirleyen birçok ayar vardır. Bu denetimlerin birincil kavramı _kapsamdadır_. Azure Ilkesindeki kapsam, kapsamın Azure Resource Manager nasıl çalıştığını temel alır. Üst düzey bir genel bakış için [Azure Resource Manager kapsam](../../../azure-resource-manager/management/overview.md#understand-scope)bölümüne bakın.
+Bu makalede, Azure Ilkesinde _kapsamın_ önem derecesi ve ilgili nesneler ve özellikler açıklanmaktadır.
 
 ## <a name="definition-location"></a>Tanım konumu
 

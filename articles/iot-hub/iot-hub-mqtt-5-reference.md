@@ -8,10 +8,10 @@ ms.topic: reference
 ms.date: 11/19/2020
 ms.author: jlian
 ms.openlocfilehash: 5f0af7d6bf16a05fad1ca9df5db1729abd088010
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96603560"
 ---
 # <a name="iot-hub-data-plane-mqtt-5-api-reference"></a>Veri düzlemi IoT Hub MQTT 5 API başvurusu

@@ -7,12 +7,12 @@ ms.topic: troubleshooting
 ms.date: 09/13/2019
 ms.author: jeffpatt
 ms.subservice: files
-ms.openlocfilehash: 242c0819e916f3ea7912d4d57b7d3e338152e4d9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 115c083a75adab96e416fc200bf7db287a99ff4e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98878519"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788430"
 ---
 # <a name="troubleshoot-azure-files-problems-in-windows-smb"></a>Windows 'da Azure dosyaları sorunlarını giderme (SMB)
 
@@ -28,7 +28,7 @@ Bir dosya payını bağlamaya çalıştığınızda, şu hatayı alabilirsiniz:
 
 - Sistem hatası 5 oluştu. Erişim reddedildi.
 
-### <a name="cause-1-unencrypted-communication-channel"></a>Neden 1: şifrelenmemiş iletişim kanalı
+### <a name="cause-1-unencrypted-communication-channel"></a>Neden 1: Şifrelenmemiş iletişim kanalı
 
 Güvenlik nedeniyle, iletişim kanalı şifrelenmemişse ve bağlantı girişimi Azure dosya paylaşımlarının bulunduğu veri merkezinden yapılmıyorsa Azure dosya paylaşımlarına bağlantılar engellenir. Depolama hesabında [Güvenli aktarım gerekli](../common/storage-require-secure-transfer.md) ayarı etkinleştirildiyse aynı veri merkezi içinde şifrelenmemiş bağlantılar da engellenebilir. Şifrelenmiş bir iletişim kanalının sağlanabilmesi için kullanıcının istemcisi SMB şifrelemesini desteklemelidir.
 
@@ -39,7 +39,7 @@ Her sistemin Windows 8, Windows Server 2012 ve üstü sürümleri şifrelemeyi d
 1. SMB şifrelemesini (Windows 8, Windows Server 2012 veya üzeri) destekleyen bir istemciden bağlanın veya aynı veri merkezindeki bir sanal makineden Azure dosya paylaşımında kullanılan Azure depolama hesabıyla bağlanın.
 2. İstemci SMB şifrelemesini desteklemiyorsa, depolama hesabında [Güvenli aktarım gerekli](../common/storage-require-secure-transfer.md) ayarının devre dışı olduğunu doğrulayın.
 
-### <a name="cause-2-virtual-network-or-firewall-rules-are-enabled-on-the-storage-account"></a>Neden 2: depolama hesabında sanal ağ veya güvenlik duvarı kuralları etkin 
+### <a name="cause-2-virtual-network-or-firewall-rules-are-enabled-on-the-storage-account"></a>Neden 2: Depolama hesabında sanal ağ veya güvenlik duvarı kuralları etkinleştirildi 
 
 Depolama hesabında sanal ağ (VNET) ve güvenlik duvarı kuralları yapılandırıldıysa, istemci IP adresine veya sanal ağa erişim izni verilmediği sürece ağ trafiğinin erişimi reddedilir.
 
@@ -111,7 +111,7 @@ TcpTestSucceeded : True
 ### <a name="solution-for-cause-1"></a>Neden 1 için çözüm
 
 #### <a name="solution-1---use-azure-file-sync"></a>Çözüm 1 - Azure Dosya Eşitleme'yi kullanın
-Azure Dosya Eşitleme, şirket içi Windows Server 'larınızı Azure dosya paylaşımınızın hızlı bir önbelleğine dönüştürebilir. Verilere yerel olarak erişmek için Windows Server üzerinde kullanılabilen tüm protokolleri (SMB, NFS ve FTPS gibi) kullanabilirsiniz. Azure Dosya Eşitleme, 443 numaralı bağlantı noktası üzerinden çalıştığından 445 numaralı bağlantı noktası engellenmiş olan istemcilerden Azure Dosyalar'a erişmek için geçici çözüm olarak kullanılabilir. [Azure dosya eşitleme ayarlamayı öğrenin](./storage-sync-files-extend-servers.md).
+Azure Dosya Eşitleme, şirket içi Windows Server 'larınızı Azure dosya paylaşımınızın hızlı bir önbelleğine dönüştürebilir. Verilere yerel olarak erişmek için Windows Server üzerinde kullanılabilen tüm protokolleri (SMB, NFS ve FTPS gibi) kullanabilirsiniz. Azure Dosya Eşitleme, 443 numaralı bağlantı noktası üzerinden çalıştığından 445 numaralı bağlantı noktası engellenmiş olan istemcilerden Azure Dosyalar'a erişmek için geçici çözüm olarak kullanılabilir. [Azure dosya eşitleme ayarlamayı öğrenin](../file-sync/file-sync-extend-servers.md).
 
 #### <a name="solution-2---use-vpn"></a>Çözüm 2 - VPN kullanın
 Belirli depolama hesabınıza bir VPN ayarlayarak trafik, internet üzerinden değil, güvenli bir tünelden geçer. Azure Dosyalar'a Windows'dan erişmek için [VPN kurulum yönergelerini](storage-files-configure-p2s-vpn-windows.md) izleyin.

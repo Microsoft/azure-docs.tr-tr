@@ -9,12 +9,12 @@ ms.subservice: extensions
 ms.date: 05/06/2020
 ms.reviewer: mimckitt
 ms.custom: mimckitt
-ms.openlocfilehash: a38a715b45ab4d0810862ef4d016e4187ea507ab
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 381573ae40f6c31a1c7dbf18bc60be5944fff39e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "84783053"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762902"
 ---
 # <a name="using-application-health-extension-with-virtual-machine-scale-sets"></a>Sanal makine ölçek kümeleriyle Uygulama Sistem Durumu uzantısını kullanma
 Uygulamanızın sistem durumunu izlemek, dağıtımınızı yönetmek ve yükseltmek için önemli bir sinyaldir. Azure sanal makine ölçek kümeleri, dağıtımınızı yükseltmek için ayrı örneklerin sistem durumu izlemesini kullanan [Otomatik işletim sistemi görüntüsü yükseltmeleri](virtual-machine-scale-sets-automatic-upgrade.md)dahil olmak üzere, çalışan [yükseltmeler](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model) için destek sağlar. Ayrıca, ölçek kümesindeki her bir örneğin uygulama durumunu izlemek ve [Otomatik örnek onarımları](virtual-machine-scale-sets-automatic-instance-repairs.md)kullanarak örnek onarımları gerçekleştirmek için sistem durumu uzantısı ' nı da kullanabilirsiniz.
@@ -141,7 +141,7 @@ Update-AzVmss -ResourceGroupName $vmScaleSetResourceGroup `
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
 
-Ölçek kümesi model tanımına uygulama durumu uzantısı eklemek için [az VMSS Extension set](/cli/azure/vmss/extension#az-vmss-extension-set) komutunu kullanın.
+Ölçek kümesi model tanımına uygulama durumu uzantısı eklemek için [az VMSS Extension set](/cli/azure/vmss/extension#az_vmss_extension_set) komutunu kullanın.
 
 Aşağıdaki örnek, uygulama durumu uzantısını Linux tabanlı ölçek kümesinin ölçek kümesi modeline ekler.
 

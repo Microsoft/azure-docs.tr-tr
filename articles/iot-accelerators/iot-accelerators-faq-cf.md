@@ -8,12 +8,12 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 12/12/2017
 ms.author: dobett
-ms.openlocfilehash: c6a695030d399cb1609c63ef5652419a9bef1bbf
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 038403743caf13087655066f4acbec4dcee598c7
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105646218"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874216"
 ---
 # <a name="frequently-asked-questions-for-connected-factory-solution-accelerator"></a>Bağlı fabrika çözümü Hızlandırıcısı için sık sorulan sorular
 
@@ -125,7 +125,7 @@ Alternatif olarak, SSH aracılığıyla VM 'de oturum açın ve çalışma zaman
 
 ### <a name="how-can-i-check-if-the-simulation-is-sending-data-to-the-cloud"></a>Simülasyonun buluta veri gönderip göndermesinin nasıl kontrol edebilirim?
 
-[Azure IoT Explorer](https://github.com/Azure/azure-iot-explorer) veya [Azure IoT CLI uzantısı izleyici-olayları](/cli/azure/ext/azure-iot/iot/hub#ext-azure-iot-az-iot-hub-monitor-events) komutuyla, belirli cihazlardan IoT Hub gönderilen verileri inceleyebilirsiniz. Bu araçları kullanmak için, dağıtımınızdaki IoT Hub 'ı için bağlantı dizesini bilmeniz gerekir. [Çözümünüz tarafından kullanılan IoT Hub 'ı bağlantı dizesini öğrenmek nasıl yaparım? bakın mi?](#how-do-i-find-out-the-connection-string-of-the-iot-hub-used-by-my-solution)
+[Azure IoT Explorer](https://github.com/Azure/azure-iot-explorer) veya [Azure IoT CLI uzantısı izleyici-olayları](/cli/azure/iot/hub#az_iot_hub_monitor_events) komutuyla, belirli cihazlardan IoT Hub gönderilen verileri inceleyebilirsiniz. Bu araçları kullanmak için, dağıtımınızdaki IoT Hub 'ı için bağlantı dizesini bilmeniz gerekir. [Çözümünüz tarafından kullanılan IoT Hub 'ı bağlantı dizesini öğrenmek nasıl yaparım? bakın mi?](#how-do-i-find-out-the-connection-string-of-the-iot-hub-used-by-my-solution)
 
 Yayımcı cihazlarından biri tarafından gönderilen verileri inceleyin:
 

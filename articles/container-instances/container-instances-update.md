@@ -3,12 +3,12 @@ title: Kapsayıcı grubunu Güncelleştir
 description: Azure Container Instances kapsayıcı gruplarınızdaki çalışan kapsayıcıları güncelleştirme hakkında bilgi edinin.
 ms.topic: article
 ms.date: 04/17/2020
-ms.openlocfilehash: fb31eeda83532c408a303e879439006bcd7d4e45
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: cbb2e830490d2591645b8156ee830856da0f9049
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102200657"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786972"
 ---
 # <a name="update-containers-in-azure-container-instances"></a>Azure Container Instances’taki kapsayıcıları güncelleştirme
 
@@ -89,6 +89,6 @@ Bu makalede birkaç kez bahsedildiği **kapsayıcı grubu**. Azure Container Ins
 <!-- LINKS - External -->
 
 <!-- LINKS - Internal -->
-[az-container-create]: /cli/azure/container#az-container-create
+[az-container-create]: /cli/azure/container#az_container_create
 [azure-cli-install]: /cli/azure/install-azure-cli
-[az-container-export]: /cli/azure/container#az-container-export
+[az-container-export]: /cli/azure/container#az_container_export

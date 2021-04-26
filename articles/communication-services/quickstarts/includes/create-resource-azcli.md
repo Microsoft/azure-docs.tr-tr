@@ -4,12 +4,12 @@ ms.service: azure-communication-services
 ms.topic: include
 ms.date: 03/10/2021
 ms.author: mikben
-ms.openlocfilehash: 22a9cf3338f422341928a77f2bf14c497aa2ba31
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 69857915620eada94586754a6c934edaf0b294a9
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563794"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107881066"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -51,4 +51,4 @@ az communication show --name "<communicationName>" --resource-group "<resourceGr
 az communication show --name "<communicationName>" --resource-group "<resourceGroup>" --subscription "<subscriptionID>"
 ```
 
-Ek komutlar hakkında daha fazla bilgi için bkz. [az Communication](/cli/azure/ext/communication/communication).
+Ek komutlar hakkında daha fazla bilgi için bkz. [az Communication](/cli/azure/communication).

@@ -7,12 +7,12 @@ ms.author: andyriv
 ms.date: 2/16/2021
 ms.topic: conceptual
 ms.service: iot-hub-device-update
-ms.openlocfilehash: 2903407f88b57a7be948cdeb0610e6d65df975b0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6e7b8d567034cc9557a2d9fcec4afbffa878cf75
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101663914"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107811847"
 ---
 # <a name="configure-microsoft-connected-cache-for-device-update-for-azure-iot-hub"></a>Azure için cihaz güncelleştirmesi için Microsoft bağlı önbelleğini yapılandırma IoT Hub
 
@@ -26,10 +26,10 @@ Microsoft bağlı önbellek Azure IoT Edge modülü ortam değişkenleri, temel 
 
 | Değişken Adı                 | Değer biçimi                           | Gerekli/İsteğe Bağlı | İşlev                                    |
 | ----------------------------- | ---------------------------------------| ----------------- | ------------------------------------------------ |
-| CUSTOMER_ID                   | Azure abonelik KIMLIĞI GUID 'SI             | Gerekli          | Bu, güvenli bir şekilde sağlanan, müşterinin anahtarıdır<br>Dağıtım Iyileştirmesi için önbellek düğümünün kimlik doğrulaması<br>Servislere. Modülün çalışması için gereklidir. |
-| CACHE_NODE_ID                 | Önbellek düğüm KIMLIĞI GUID 'SI                     | Gerekli          | Microsoft bağlı önbelleğini benzersiz şekilde tanımlar<br>Teslim Iyileştirme Hizmetleri için düğüm. İçin gerekli<br> modülün çalışması için. |
+| CUSTOMER_ID                   | Azure abonelik KIMLIĞI GUID 'SI             | Gerekli          | Bu, güvenli bir şekilde sağlanan, müşterinin anahtarıdır<br>Dağıtım Iyileştirmesi için önbellek düğümünün kimlik doğrulaması<br>Servislere.<br>Modülün çalışması için gereklidir. |
+| CACHE_NODE_ID                 | Önbellek düğüm KIMLIĞI GUID 'SI                     | Gerekli          | Microsoft bağlı önbelleğini benzersiz şekilde tanımlar<br>Teslim Iyileştirme Hizmetleri için düğüm.<br>İçin gerekli<br> modülün çalışması için. |
 | CUSTOMER_KEY                  | Müşteri anahtarı GUID 'SI                     | Gerekli          | Bu, güvenli bir şekilde sağlanan, müşterinin anahtarıdır<br>En Iyi duruma getirme hizmetlerini teslim etmek için önbellek düğümünün kimlik doğrulaması.<br>Modülün çalışması için gereklidir.|
-| STORAGE_ *N* _SIZE_GB           | Burada N, gereken GB sayısıdır   | Gerekli          | İçeriği önbelleğe almak ve belirtmek için en fazla dokuz sürücü belirtin<br>Her önbellek sürücüsünde içerik ayırmak için gigabayt olarak en fazla alan. Örnekler:<br>STORAGE_1_SIZE_GB = 150<br>STORAGE_2_SIZE_GB = 50<br>Sürücü sayısı, belirtilen önbellek sürücüsü bağlama değerleriyle aynı olmalıdır<br>Kapsayıcı oluştur seçeneği için MicrosoftConnectedCache *N* değeri|
+| STORAGE_ *N* _SIZE_GB           | Burada N, önbellek sürücüsüdür   | Gerekli          | İçeriği önbelleğe almak için 9 adede kadar sürücü belirtin ve içindeki en fazla alanı belirtin<br>Her önbellek sürücüsünde içerik ayrılacak gigabayt. Örnekler:<br>STORAGE_1_SIZE_GB = 150<br>STORAGE_2_SIZE_GB = 50<br>Sürücü sayısı, belirtilen önbellek sürücüsü bağlama değerleriyle aynı olmalıdır<br>Kapsayıcı oluştur seçeneği için MicrosoftConnectedCache *N* değeri<br>Önbelleğin en küçük boyutu 10 GB 'dir.|
 | UPSTREAM_HOST                 | FQDN/ıP                                | İsteğe Bağlı          | Bu değer, Microsoft 'a bağlı bir yukarı akış belirtebilir<br>Bağlı önbellek düğümü varsa proxy görevi gören önbellek düğümü<br> İnternet bağlantısı kesildi. Bu ayar, desteklemek için kullanılır<br> Iç Içe IoT senaryosu.<br>**Note:** Microsoft bağlı önbelleği, http varsayılan bağlantı noktası 80 ' i dinler.|
 | UPSTREAM_PROXY                | FQDN/ıP: BAĞLANTı NOKTASı                           | İsteğe Bağlı          | Giden internet proxy 'si.<br>Bu, bir ISA 95 ağı ise OT DMZ proxy de olabilir. |
 | CACHEABLE_CUSTOM_ *N* _HOST     | ANA BILGISAYAR/ıP<br>FQDN                        | İsteğe Bağlı          | Özel paket depolarını desteklemek için gereklidir.<br>Depolar yerel olarak veya internet üzerinde barındırılabilir.<br>Yapılandırılabilecek özel ana bilgisayar sayısı için bir sınır yoktur.<br><br>Örnekler:<br>Ad = CACHEABLE_CUSTOM_1_HOST değer = packages.foo.com<br> Ad = CACHEABLE_CUSTOM_2_HOST değer = packages.bar.com    |
@@ -52,14 +52,6 @@ Kapsayıcı depolama konumunu diskteki depolama konumuyla eşlemek için gerekli
 
 Bu seçenek, içerik istekleri için MCC tarafından dinlediği dış makine http bağlantı noktasını belirtir. Varsayılan HostPort, bağlantı noktası 80 ve diğer bağlantı noktaları, ADU istemcisi bağlantı noktası 80 ' de istek yaptığı için şu anda desteklenmiyor. TCP bağlantı noktası 8081, MCC 'nin dinlediği ve değiştirilemeyen iç kapsayıcı bağlantı noktasıdır.
 
-```markdown
-8081/tcp": [
-   {
-       "HostPort": "80"
-   }
-]
-```
-
 ### <a name="container-service-tcp-port-mappings"></a>Kapsayıcı hizmeti TCP bağlantı noktası eşlemeleri
 
 Microsoft bağlı önbellek modülünün, çeşitli işlevler için önbelleğe alma altyapısı tarafından kullanılan bir .NET Core hizmeti vardır.
@@ -67,12 +59,29 @@ Microsoft bağlı önbellek modülünün, çeşitli işlevler için önbelleğe 
 >[!Note]
 >Azure IoT Iç Içe kenarını desteklemek için, HostPort 5000 olarak ayarlanmamalıdır, çünkü kayıt defteri proxy modülü zaten 5000 ana bilgisayar bağlantı noktasını dinliyor.
 
-```markdown
-5000/tcp": [
-   {
-       "HostPort": "5001"
-   }
-]
+
+Örnek kapsayıcı oluşturma seçenekleri
+
+```json
+{
+    "HostConfig": {
+        "Binds": [
+            "/microsoftConnectedCache1/:/nginx/cache1/"
+        ],
+        "PortBindings": {
+            "8081/tcp": [
+                {
+                    "HostPort": "80"
+                }
+            ],
+            "5000/tcp": [
+                {
+                    "HostPort": "5100"
+                }
+            ]
+        }
+    }
+}
 ```
 
 ## <a name="microsoft-connected-cache-summary-report"></a>Microsoft bağlı önbellek özet raporu
@@ -84,4 +93,5 @@ Microsoft bağlı önbellek modülünün, çeşitli işlevler için önbelleğe 
 * **Eggressbytes** -bu, Hitbytes ve hatalı baytların toplamıdır ve istemcilere teslim edilen toplam bayttır.
 * **hitRatioBytes** -bu, Hitbytes 'In Yumurressbytes olarak oranıdır.  Bir dönemde teslim edilen eggressBytes %100, Itbytes 'a eşitse bu, örneğin 1 olacaktır.
 
-Özet raporu şurada bulunabilir `http://<FQDN/IP of Azure IoT Edge Gateway hosting MCC>:5001/summary` (Bu raporun görünürlüğü hakkında bilgi için aşağıdaki ortam değişkeni ayrıntılarına bakın).
+
+Özet raporu, `http://<FQDN/IP of Azure IoT Edge Gateway hosting MCC>:5001/summary` \<Azure IoT Edge Gateway IP\> IoT Edge Ağ GEÇIDINIZIN IP adresi veya ana bilgisayar adı ile değiştirilir. (Bu raporun görünürlüğü hakkında bilgi için ortam değişkeni ayrıntılarına bakın).

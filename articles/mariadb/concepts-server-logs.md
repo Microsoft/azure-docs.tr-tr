@@ -6,12 +6,12 @@ ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
 ms.date: 11/6/2020
-ms.openlocfilehash: 2e7e56616300566839fadef762c2165c8d989e6e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c0cb9e0da3ba5dd899cac56f393d7332bac6c597
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100570807"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258495"
 ---
 # <a name="slow-query-logs-in-azure-database-for-mariadb"></a>MariaDB için Azure veritabanı 'nda yavaş sorgu günlükleri
 MariaDB için Azure veritabanı 'nda yavaş sorgu günlüğü kullanıcılar tarafından kullanılabilir. İşlem günlüğüne erişim desteklenmez. Yavaş sorgu günlüğü, sorun giderme için performans sorunlarını belirlemek için kullanılabilir.
@@ -45,7 +45,7 @@ Yerel sunucu depolaması için, Azure portal veya Azure CLı kullanarak yavaş s
 Azure Izleyici tanılama günlükleri, Azure Izleyici günlüklerine (Log Analytics), Azure depolama 'ya veya Event Hubs yavaş sorgu günlüklerini boru etmenize olanak tanır. Daha fazla bilgi için [aşağıya](concepts-server-logs.md#diagnostic-logs) bakın.
 
 ## <a name="local-server-storage-log-retention"></a>Yerel sunucu depolama günlüğü saklama
-Sunucunun yerel depolama alanına oturum açarken, günlükleri oluşturulduktan yedi güne kadar kullanılabilir. Kullanılabilir günlüklerin toplam boyutu 7 GB 'yi aşarsa, alan kullanılabilir olana kadar en eski dosyalar silinir.
+Sunucunun yerel depolama alanına oturum açarken, günlükleri oluşturulduktan yedi güne kadar kullanılabilir. Kullanılabilir günlüklerin toplam boyutu 7 GB 'yi aşarsa, alan kullanılabilir olana kadar en eski dosyalar silinir. Sunucu günlükleri için 7 GB depolama sınırı, ücretsiz olarak kullanılabilir ve genişletilemez. 
 
 Günlükler her 24 saatte bir veya 7 GB döndürülür, hangisi önce gelir.
 

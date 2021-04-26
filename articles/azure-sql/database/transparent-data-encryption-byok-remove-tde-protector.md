@@ -1,23 +1,23 @@
 ---
 title: TDE koruyucuyu kaldırma (Azure CLı & PowerShell)
 titleSuffix: Azure SQL Database & Azure Synapse Analytics
-description: Kendi anahtarını getir (BYOK) desteği ile TDE kullanarak Azure SQL veritabanı veya Azure SYNAPSE Analytics için riskli olabilecek bir TDE uzlaşın nasıl yanıtlanacağını öğrenin.
+description: Kendi Anahtarını Getir (BYOK) desteğiyle TDE kullanarak Azure SQL veritabanı veya Azure SYNAPSE Analytics için riskli olabilecek bir TDE için nasıl yanıt verileceğini öğrenin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: security
 ms.custom: seo-lt-2019 sqldbrb=1, devx-track-azurecli
 ms.devlang: ''
 ms.topic: how-to
-author: jaszymas
-ms.author: jaszymas
+author: shohamMSFT
+ms.author: shohamd
 ms.reviewer: vanto
 ms.date: 02/24/2020
-ms.openlocfilehash: 31298be4d50c7f562e2e2b9adbf889b165b197e5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f98dcdd9c1a479703c82c01b4fd240507ea355de
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96461864"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784478"
 ---
 # <a name="remove-a-transparent-data-encryption-tde-protector-using-powershell"></a>PowerShell kullanarak Saydam Veri Şifrelemesi (TDE) koruyucusunu kaldırma
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -136,7 +136,7 @@ Alternatif olarak, PowerShell veya Azure CLı 'yi de kullanabilirsiniz:
 
 Komut başvurusu için bkz. [Azure CLI Anahtar Kasası](/cli/azure/keyvault/key).
 
-1. [Key Vault yeni bir anahtar](/cli/azure/keyvault/key#az-keyvault-key-create)oluşturun. Bu yeni anahtarın, çok riskli bir TDE koruyucudan farklı bir anahtar kasasında oluşturulduğundan emin olun, çünkü erişim denetimi bir kasa düzeyinde sağlanır.
+1. [Key Vault yeni bir anahtar](/cli/azure/keyvault/key#az_keyvault_key_create)oluşturun. Bu yeni anahtarın, çok riskli bir TDE koruyucudan farklı bir anahtar kasasında oluşturulduğundan emin olun, çünkü erişim denetimi bir kasa düzeyinde sağlanır.
 
 2. Yeni anahtarı sunucuya ekleyin ve sunucunun yeni TDE koruyucusu olarak güncelleştirin.
 

@@ -12,17 +12,17 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 08/10/2020
-ms.openlocfilehash: 1d8859f4790610e72ad517f74bbbbf0cf77d9316
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1fe39e0ff9acc0c092199ab2dd199cf396f67d01
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97705218"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874774"
 ---
 # <a name="quickstart-use-net-and-c-in-visual-studio-to-connect-to-and-query-a-database"></a>Hızlı başlangıç: bir veritabanına bağlanmak ve veritabanını sorgulamak için Visual Studio 'Da .NET ve C# kullanın
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi-asa.md)]
 
-Bu hızlı başlangıçta, Azure SQL veya SYNAPSE SQL ile Transact-SQL deyimleriyle bir veritabanını sorgulamak için Visual Studio 'da [.NET Framework](https://www.microsoft.com/net/) ve C# kodunun nasıl kullanılacağı gösterilmektedir.
+Bu hızlı başlangıçta, Azure SQL veya SYNAPSE SQL ile Transact-SQL deyimleriyle bir veritabanını sorgulamak için Visual Studio 'da [.NET Framework](https://dotnet.microsoft.com) ve C# kodunun nasıl kullanılacağı gösterilmektedir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 

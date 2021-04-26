@@ -8,10 +8,10 @@ ms.service: data-factory
 ms.topic: tutorial
 ms.date: 01/22/2018
 ms.openlocfilehash: 9794aa0750a886803aac3fec7622f6b3770acf9d
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104785589"
 ---
 # <a name="tutorial-build-your-first-data-factory-by-using-the-azure-portal"></a>Öğretici: Azure portalını kullanarak ilk veri fabrikanızı oluşturma
@@ -204,7 +204,7 @@ Bu adımda, Hive işlenmesi için girdi ve çıktı verilerini temsil edecek ver
     ```
     Aşağıdaki tabloda, kod parçacığında kullanılan JSON özellikleri için açıklamalar verilmiştir.
 
-   | Özellik | İç içe geçmiş | Açıklama |
+   | Özellik | İç içe geçmiş | Description |
    |:--- |:--- |:--- |
    | tür | properties |Veriler blob depolamada yer aldığından, type özelliği **AzureBlob** olarak ayarlanır. |
    | linkedServiceName | biçim |Daha önce oluşturduğunuz AzureStorageLinkedService hizmetine başvurur. |
@@ -431,7 +431,7 @@ Bu öğreticide, HDInsight Hadoop kümesindeki Hive betiği çalıştırılarak 
 Bu makalede, isteğe bağlı HDInsight kümesinde bir Hive betiği çalıştıran dönüştürme etkinliğine (HDInsight etkinliği) sahip işlem hattı oluşturdunuz. Blob depolamadan Azure SQL veritabanı 'na veri kopyalamak için kopyalama etkinliği kullanma hakkında bilgi için bkz. [öğretici: blob DEPOLAMADAN SQL veritabanına veri kopyalama](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md).
 
 ## <a name="see-also"></a>Ayrıca bkz.
-| Konu | Açıklama |
+| Konu | Description |
 |:--- |:--- |
 | [Pipelines](data-factory-create-pipelines.md) |Bu makale, Data Factory’de işlem hatlarını ve etkinliklerini anlamanıza ve senaryonuz ya da işletmeniz için uçtan uca veri odaklı iş akışları oluşturmak amacıyla bunları nasıl kullanacağınızı anlamanıza yardımcı olur. |
 | [Veri kümeleri](data-factory-create-datasets.md) |Bu makale, Data Factory’deki veri kümelerini anlamanıza yardımcı olur. |

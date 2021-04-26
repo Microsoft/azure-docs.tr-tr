@@ -10,13 +10,13 @@ metadata:
   ms.collection: collection
   author: bandersmsft
   ms.author: banders
-  ms.date: 03/01/2021
-  ms.openlocfilehash: f2dcb2687a5a765e674a3dce7ac9016e58056b81
-  ms.sourcegitcommit: 87a6587e1a0e242c2cfbbc51103e19ec47b49910
+  ms.date: 04/07/2021
+  ms.openlocfilehash: bc04150b8aedcb02fcee888b390e2819c97d7a01
+  ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/16/2021
-  ms.locfileid: "103574721"
+  ms.lasthandoff: 04/14/2021
+  ms.locfileid: "107478106"
 landingContent:
 - title: başlarken
   linkLists:
@@ -24,16 +24,22 @@ landingContent:
     links:
     - text: Microsoft Müşteri Sözleşmesi nedir?
       url: ../understand/mca-overview.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
+  - linkListType: get-started
+    links:
+    - text: Sözleşmeyi kabul ettikten sonra anahtar sonraki adımlar
+      url: microsoft-customer-agreement-get-started.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
   - linkListType: how-to-guide
     links:
-    - text: Kredi kartından faturaya taşıma
+    - text: Fatura sahipliğini PAYG 'den MCA 'e aktarma
       url: ../manage/mca-request-billing-ownership.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
-    - text: Etki alanı KIMLIĞIYLE aboneliğe erişin
+    - text: Faturalandırma sahipliğini EA 'dan MCA 'e aktarma
       url: ../manage/mca-setup-account.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
     - text: Abonelik kullanıcılarını yönetmek için yönetici ayarlama
       url: ../manage/add-change-subscription-administrator.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
     - text: Yeni abonelik oluşturma
       url: ../manage/create-subscription.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
+    - text: Abonelik erişimi sorunlarını giderme
+      url: troubleshoot-subscription-access.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
 - title: Faturalandırmayı yönetme
   linkLists:
   - linkListType: concept
@@ -48,9 +54,7 @@ landingContent:
     links:
     - text: Faturalandırma profili nedir ve nasıl yönetebilirim?
       url: ../manage/mca-section-invoice.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
-    - text: Faturaya göre fatura öde
-      url: ../manage/pay-by-invoice.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
-    - text: Faturayı kredi veya banka kartına veya çek ya da hat aktarımına göre ödeyin
+    - text: Faturanızı ödeme
       url: ../understand/pay-bill.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
     - text: Faturalandırmayı yönetmek için yönetici ayarlama
       url: ../manage/understand-mca-roles.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
@@ -72,3 +76,5 @@ landingContent:
     links:
     - text: Active Directory nedir?
       url: ../../active-directory/fundamentals/active-directory-whatis.md?toc=/azure/cost-management-billing/microsoft-customer-agreement/toc.json
+    - text: Kiracılar yönetme
+      url: manage-tenants.md

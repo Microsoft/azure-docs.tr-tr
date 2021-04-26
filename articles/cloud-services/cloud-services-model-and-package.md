@@ -9,10 +9,10 @@ author: tanmaygore
 ms.reviewer: mimckitt
 ms.custom: ''
 ms.openlocfilehash: 1cf8e966b80e005a0cb2cf7ea46f355e38cb0011
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98741545"
 ---
 # <a name="what-is-the-cloud-service-classic-model-and-how-do-i-package-it"></a>Bulut hizmeti (klasik) modeli nedir ve bunu nasıl paketederim?

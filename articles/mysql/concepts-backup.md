@@ -7,10 +7,10 @@ ms.service: mysql
 ms.topic: conceptual
 ms.date: 3/27/2020
 ms.openlocfilehash: 883b76929ac3310dd3089ecb088a4691adbb4ca1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103010363"
 ---
 # <a name="backup-and-restore-in-azure-database-for-mysql"></a>MySQL için Azure veritabanı 'nda yedekleme ve geri yükleme
@@ -96,7 +96,7 @@ Sunucunun kurtarılmasına yönelik tahmini süre, çeşitli faktörlere bağlı
 ```sql
 select tab.table_schema as database_name, tab.table_name from information_schema.tables tab left join information_schema.table_constraints tco on tab.table_schema = tco.table_schema and tab.table_name = tco.table_name and tco.constraint_type = 'PRIMARY KEY' where tco.constraint_type is null and tab.table_schema not in('mysql', 'information_schema', 'performance_schema', 'sys') and tab.table_type = 'BASE TABLE' order by tab.table_schema, tab.table_name;
 ```
-Büyük veya çok etkin bir veritabanı için geri yükleme birkaç saat sürebilir. Bir bölgede uzun süren bir kesinti varsa, olağanüstü durum kurtarma için yüksek sayıda coğrafi geri yükleme isteği başlatılabilir. Çok sayıda istek olduğunda, bireysel veritabanlarının kurtarma süresi artabilir. Çoğu veritabanı son geri yükleme işlemi 12 saatten az sürer.
+Büyük veya çok etkin bir veritabanı için geri yükleme birkaç saat sürebilir. Bölgede uzun süren bir kesinti olursa, olağanüstü durum kurtarma için çok sayıda coğrafi geri yükleme isteğinin başlatılması mümkündür. Çok sayıda istek olduğunda tek tek veritabanlarının kurtarma süresi uzayabilir. Çoğu veritabanı son geri yükleme işlemi 12 saatten az sürer.
 
 > [!IMPORTANT]
 > Silinen sunucular yalnızca, yedeklemelerin silinmesinden sonra **beş gün** içinde geri yüklenebilir. Veritabanı yedeklemesine yalnızca sunucuyu barındıran Azure aboneliğinden erişilebilir ve geri yüklenebilir. Bırakılan bir sunucuyu geri yüklemek için [belgelenen adımlara](howto-restore-dropped-server.md)bakın. Sunucu kaynaklarını korumak için dağıtım sonrası, yanlışlıkla silme veya beklenmeyen değişikliklerden, Yöneticiler [Yönetim kilitlerinin](../azure-resource-manager/management/lock-resources.md)faydalanabilir.

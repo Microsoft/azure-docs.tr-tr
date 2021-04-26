@@ -4,12 +4,12 @@ description: Azure CLI Betiği Örneği - Azure Cosmos DB'ye bağlanan bir Azure
 ms.topic: sample
 ms.date: 07/03/2018
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 9ec4d3cb9d47608aa98075ba98aacfde51f341cd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 261ede1493b93ccd3cfed19125bbabc3be871698
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97934433"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786306"
 ---
 # <a name="create-an-azure-function-that-connects-to-an-azure-cosmos-db"></a>Azure Cosmos DB’ye bağlanan bir Azure İşlevi oluşturma
 
@@ -35,20 +35,16 @@ Bu betik şu komutları kullanır: Tablodaki her komut, komuta özgü belgelere 
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Konum ile bir kaynak grubu oluşturun |
-| [az storage accounts create](/cli/azure/storage/account#az-storage-account-create) | Depolama hesabı oluşturma |
-| [az functionapp create](/cli/azure/functionapp#az-functionapp-create) | Sunucusuz [Tüketim planında](../consumption-plan.md)bir işlev uygulaması oluşturur. |
-| [az cosmosdb create](/cli/azure/cosmosdb#az-cosmosdb-create) | Azure Cosmos DB veritabanı oluşturun. |
-| [az cosmosdb Show](/cli/azure/cosmosdb#az-cosmosdb-show)| Veritabanı hesabı bağlantısını alır. |
-| [az cosmosdb list-keys](/cli/azure/cosmosdb#az-cosmosdb-list-keys)| Veritabanı için anahtarları alır. |
-| [az functionapp config appSettings kümesi](/cli/azure/functionapp/config/appsettings#az-functionapp-config-appsettings-set) | İşlev uygulamasındaki uygulama ayarı olarak bağlantı dizesini ayarlar. |
+| [az group create](/cli/azure/group#az_group_create) | Konum ile bir kaynak grubu oluşturun |
+| [az storage accounts create](/cli/azure/storage/account#az_storage_account_create) | Depolama hesabı oluşturma |
+| [az functionapp create](/cli/azure/functionapp#az_functionapp_create) | Sunucusuz [Tüketim planında](../consumption-plan.md)bir işlev uygulaması oluşturur. |
+| [az cosmosdb create](/cli/azure/cosmosdb#az_cosmosdb_create) | Azure Cosmos DB veritabanı oluşturun. |
+| [az cosmosdb Show](/cli/azure/cosmosdb#az_cosmosdb_show)| Veritabanı hesabı bağlantısını alır. |
+| [az cosmosdb list-keys](/cli/azure/cosmosdb#az_cosmosdb_list_keys)| Veritabanı için anahtarları alır. |
+| [az functionapp config appSettings kümesi](/cli/azure/functionapp/config/appsettings#az_functionapp_config_appsettings_set) | İşlev uygulamasındaki uygulama ayarı olarak bağlantı dizesini ayarlar. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Azure CLI hakkında daha fazla bilgi için bkz. [Azure CLI belgeleri](/cli/azure).
 
 Ek Azure İşlevleri CLI betiği örnekleri, [Azure İşlevleri belgelerinde](../functions-cli-samples.md) bulunabilir.
-
-
-
-

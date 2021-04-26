@@ -5,16 +5,16 @@ services: synapse analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: overview
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: stefanazaric
 ms.reviewer: jrasnick
-ms.openlocfilehash: 6b039d934993d2acee630205c5b5e5d8e0f6145e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1529e45bd7f799a727a29c8c2e26f7ed77c4e2a0
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101667601"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565602"
 ---
 # <a name="connect-to-synapse-sql-with-azure-data-studio"></a>Azure Data Studio ile SYNAPSE SQL 'e bağlanma
 

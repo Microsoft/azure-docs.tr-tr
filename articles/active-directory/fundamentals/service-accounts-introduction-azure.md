@@ -13,12 +13,12 @@ ms.author: baselden
 ms.reviewer: ajburnle
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 27353e6086085aadae622e007a38f97e15cbcb7f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: d657f1df14b083631227cb7c19f64b65be8801d0
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104587874"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107010474"
 ---
 # <a name="introduction-to-securing-azure-service-accounts"></a>Azure hizmet hesaplarının güvenliğini sağlama konusuna giriş
 
@@ -26,7 +26,7 @@ Azure Active Directory için yerel olarak üç tür hizmet hesabı vardır: Yön
 
 ## <a name="types-of-azure-active-directory-service-accounts"></a>Azure Active Directory hizmet hesabı türleri
 
-Azure 'da barındırılan hizmetler için mümkünse yönetilen bir kimlik ve hizmet sorumlusu kullanılması önerilir. Yönetilen kimlikler, Azure dışında barındırılan hizmetler için kullanılamaz. Bu durumda, bir hizmet sorumlusu önerilir. Yönetilen bir kimlik veya hizmet sorumlusu kullanabilmeniz için bunu yapın. Hizmet sorumlusu olarak Azure Active Directory bir kullanıcı hesabı kullanmanızı öneririz. Özet için aşağıdaki tabloya bakın.
+Azure 'da barındırılan hizmetler için mümkünse yönetilen bir kimlik ve hizmet sorumlusu kullanılması önerilir. Yönetilen kimlikler, Azure dışında barındırılan hizmetler için kullanılamaz. Bu durumda, bir hizmet sorumlusu önerilir. Yönetilen bir kimlik veya hizmet sorumlusu kullanabilmeniz için bunu yapın. Bir Azure Active Directory Kullanıcı hesabını hizmet hesabı olarak kullanmanızı öneririz. Özet için aşağıdaki tabloya bakın.
  
 
 | Hizmet barındırma| Yönetilen kimlik| Hizmet sorumlusu| Azure Kullanıcı hesabı |
@@ -54,7 +54,7 @@ Hizmet sorumlusu, tek bir Azure AD kiracısında bir uygulama nesnesinin yerel g
 
 Hizmet sorumlularını kullanarak kimlik doğrulama için iki mekanizma vardır: istemci sertifikaları ve istemci gizli dizileri. Sertifikalar daha güvenlidir: mümkünse istemci sertifikalarını kullanın. İstemci gizliliklerinden farklı olarak, istemci sertifikaları yanlışlıkla koda Katıştırılamaz.
 
-Hizmet sorumlularının güvenliğini sağlama hakkında bilgi için bkz. hizmet sorumlularını güvenli hale getirme.
+Hizmet sorumlularının güvenliğini sağlama hakkında bilgi için bkz. [hizmet sorumlularını güvenli hale getirme](service-accounts-principal.md).
 
  
 ## <a name="next-steps"></a>Sonraki adımlar

@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 09/01/2020
+ms.date: 04/13/2021
 ms.author: jeedes
-ms.openlocfilehash: 13b62646728eb03a7470d9bb57741bcb90cc24fb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 02fcd8fc14a300b7031677185a91d7e6c9aa3b09
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92447747"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107518397"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-grammarly"></a>Öğretici: Grammarly ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -37,8 +37,8 @@ Başlamak için aşağıdaki öğeler gereklidir:
 
 Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* Grammarly, **IDP** tarafından başlatılan SSO 'yu destekler
-* Grammarly **, tam zamanında** Kullanıcı sağlamayı destekler
+* Grammarly, **IDP** tarafından başlatılan SSO 'yu destekler.
+* Grammarly **, tam zamanında** Kullanıcı sağlamayı destekler.
 
 > [!NOTE]
 > Bu uygulamanın tanımlayıcısı, tek bir kiracıda yalnızca bir örneğin yapılandırılabilmesini sağlamak için sabit bir dize değeridir.
@@ -53,7 +53,6 @@ Dilinizin Azure AD ile tümleştirilmesini yapılandırmak için Galeri 'den yö
 1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
 1. **Galeriden Ekle** bölümünde, arama kutusuna **dilbilgisi** yazın.
 1. Sonuçlar panelinden **dilbilgisi** ' yı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
-
 
 ## <a name="configure-and-test-azure-ad-sso-for-grammarly"></a>Azure AD SSO 'yu dilbilgisi için yapılandırma ve test etme
 
@@ -74,7 +73,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
 1. Azure portal, **dilbilgisi** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
 1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
-1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
@@ -131,12 +130,12 @@ Bu bölümde, B. Simon adlı bir Kullanıcı, dilbilgisi içinde oluşturulur. G
 
 ## <a name="test-sso"></a>Test SSO 'SU 
 
-Bu bölümde, Azure AD çoklu oturum açma yapılandırmanızı aşağıdaki seçeneklerle test edersiniz. 
+Bu bölümde, Azure AD çoklu oturum açma yapılandırmanızı aşağıdaki seçeneklerle test edersiniz.
 
-1. Azure portal **Bu uygulamayı test et** ' e tıklayın ve SSO 'Yu ayarladığınız dilte otomatik olarak oturum açmış olmanız gerekir 
+* Azure portal bu uygulamayı test et ' e tıklayın ve SSO 'yu ayarladığınız Dilte otomatik olarak oturum açmış olmanız gerekir.
 
-2. Microsoft Access panel ' i kullanabilirsiniz. Erişim panelinde dilsiz Kutucuğa tıkladığınızda, SSO 'yu ayarladığınız Dilte otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](../user-help/my-apps-portal-end-user-access.md).
+* Microsoft My Apps ' i kullanabilirsiniz. Uygulamalarım bölümünde dilbilgisi kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Dilte otomatik olarak oturum açmış olmanız gerekir. Uygulamalarım hakkında daha fazla bilgi için bkz. [uygulamalarıma giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Dilbilgisi 'yı yapılandırdıktan sonra, kuruluşunuzun hassas verilerinin gerçek zamanlı olarak ayıklanmasını ve kurtarılmasını koruyan oturum denetimini zorunlu kılabilirsiniz. Oturum denetimi koşullu erişimden genişletiliyor. [Microsoft Cloud App Security ile oturum denetimini nasıl zorlayacağınızı öğrenin](/cloud-app-security/proxy-deployment-any-app).
+Dilbilgisi 'yı yapılandırdıktan sonra, kuruluşunuzun hassas verilerinin gerçek zamanlı olarak ayıklanmasını ve kurtarılmasını koruyan oturum denetimini zorunlu kılabilirsiniz. Oturum denetimi koşullu erişimden genişletiliyor. [Microsoft Cloud App Security ile oturum denetimini nasıl zorlayacağınızı öğrenin](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).

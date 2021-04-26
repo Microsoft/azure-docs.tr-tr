@@ -12,18 +12,25 @@ ms.date: 09/01/2020
 ms.author: erhopf
 ms.custom: devx-track-csharp, cog-serv-seo-aug-2020
 keywords: konuşma çevirisi
-ms.openlocfilehash: 94ddd06068513261b5b73b313877e273c7251d62
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 99541d7fe9eaa867860af93bc1423d476ce8bf4a
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104954971"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449945"
 ---
 # <a name="what-is-speech-translation"></a>Konuşma çevirisi nedir?
 
 [!INCLUDE [TLS 1.2 enforcement](../../../includes/cognitive-services-tls-announcement.md)]
 
 Bu genel bakışta, ses akışlarının gerçek zamanlı, [çok dilli konuşmadan](language-support.md#speech-translation) konuşmaya ve konuşmaya metin çevirisi sağlayan konuşma çevirisi hizmetinin avantajları ve özellikleri hakkında bilgi edinebilirsiniz. Konuşma SDK 'Sı ile uygulamalarınızın, araçların ve cihazlarınızın, sunulan ses için kaynak dökümlerini ve çeviri çıkışlarını erişimi vardır. Okuma tespit edildiğinde ve nihai sonuçlar sentezleştirilmiş konuşmaya dönüştürülebileceğinden, geçici döküm ve çeviri sonuçları döndürülür.
+
+Bu belge aşağıdaki makale türlerini içerir:
+
+* **Hızlı** başlangıçlarda, hizmette istek yapma konusunda size kılavuzluk eden başlangıç yönergeleri bulunur.
+* **Nasıl yapılır kılavuzlarında** , hizmetin daha belirli veya özelleştirilmiş yollarla kullanılmasına ilişkin yönergeler bulunur.
+* **Kavramlar** , hizmet işlevselliği ve özelliklerinin ayrıntılı açıklamalarını sağlar.
+* **Öğreticiler** daha fazla iş çözümlerinde hizmeti bir bileşen olarak nasıl kullanacağınızı gösteren kılavuzlardır.
 
 ## <a name="core-features"></a>Temel Özellikler
 

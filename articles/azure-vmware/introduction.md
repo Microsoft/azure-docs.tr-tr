@@ -1,29 +1,24 @@
 ---
 title: Giriş
-description: Azure 'da VMware tabanlı iş yüklerini dağıtmak ve yönetmek için Azure VMware çözümünün özelliklerini ve avantajlarını öğrenin.
+description: Azure 'da VMware tabanlı iş yüklerini dağıtmak ve yönetmek için Azure VMware çözümünün özelliklerini ve avantajlarını öğrenin. Azure VMware Çözüm SLA 'Sı, Azure VMware yönetim araçları 'nın (vCenter Server ve NSX Manager) en az% 99,9 kullanılabilir olacağını garanti eder.
 ms.topic: overview
-ms.date: 03/24/2021
-ms.openlocfilehash: a75c04cf6b51068ef9867e3f9438b2820da703fe
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.date: 04/20/2021
+ms.openlocfilehash: 9471aa2e427d28e0b8211dc8b25b2e61a4bfa8c4
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105048825"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107752651"
 ---
 # <a name="what-is-azure-vmware-solution"></a>Azure VMware Çözümü nedir?
 
-Azure VMware çözümü, adanmış çıplak Azure altyapısından oluşturulan vSphere kümelerini içeren özel bulutlar sağlar. En düşük ilk dağıtım üç ana bilgisayar olmakla kalmaz, küme başına en fazla 16 ana bilgisayar için aynı anda ek konaklar eklenebilir.  Sağlanan tüm özel bulutların vCenter Server, vSAN, vSphere ve NSX-T vardır. Şirket içi ortamlarınızdaki iş yüklerini geçirebilir, yeni sanal makineler (VM 'Ler) dağıtabilir ve özel bulutlarınızdaki Azure hizmetlerini kullanabilirsiniz.
+Azure VMware çözümü, adanmış çıplak Azure altyapısından oluşturulan vSphere kümelerini içeren özel bulutlar sağlar. En düşük ilk dağıtım üç ana bilgisayar olmakla kalmaz, küme başına en fazla 16 ana bilgisayar için aynı anda ek konaklar eklenebilir.  Sağlanan tüm özel bulutların vCenter Server, vSAN, vSphere ve NSX-T vardır. Şirket içi ortamlarınızdaki iş yüklerini geçirebilir, yeni sanal makineler (VM 'Ler) dağıtabilir ve özel bulutlarınızdaki Azure hizmetlerini kullanabilirsiniz.  Azure VMware Yönetim Araçları (vCenter Server ve NSX Manager) en az% 99,9 kullanılabilir olacaktır. Daha fazla bilgi için bkz. [Azure VMware Çözüm SLA 'sı](https://aka.ms/avs/sla).
 
 Azure VMware çözümü, geliştirme ve yükseltmelerin üzerinde doğrulanmasını ve test edilmesine yönelik bir VMware tarafından doğrulanan çözümdür. Microsoft özel bulut altyapısını ve yazılımlarını yönetir ve korur. Özel bulutlarınızın iş yüklerini geliştirmeye ve çalıştırmaya odaklanabilmenize olanak tanır. 
 
 Diyagramda, Azure, Azure hizmetleri ve şirket içi ortamlarda özel bulutlar ile sanal ağlar arasındaki Bitişiklik gösterilmektedir. Özel bulutlardan Azure hizmetlerine veya sanal ağlara ağ erişimi, Azure hizmet uç noktaları için SLA odaklı tümleştirme sağlar. ExpressRoute Global Reach şirket içi ortamınızı Azure VMware çözümünüz özel bulutuna bağlar. 
 
 ![Azure VMware çözümünün özel bulut Bitişiklik ve şirket içi](./media/adjacency-overview-drawing-final.png)
-
-## <a name="customer-communication"></a>Müşteri iletişimi
-Hizmet sorunları, planlı bakım, sistem durumu danışmanları, Güvenlik Danışma belgeleri bildirimleri Azure portal **hizmet durumu** üzerinden yayımlanır. Bu bildirimler için etkinlik günlüğü uyarılarını ayarlarken zamanında işlem yapabilirsiniz. Daha fazla bilgi için bkz. [Azure Portal kullanarak hizmet durumu uyarıları oluşturma](../service-health/alerts-activity-log-service-notifications-portal.md#create-service-health-alert-using-azure-portal).
-
-:::image type="content" source="media/service-health.png" alt-text="Hizmet durumu bildirimlerinin ekran görüntüsü":::
 
 ## <a name="hosts-clusters-and-private-clouds"></a>Konaklar, kümeler ve özel bulutlar
 
@@ -60,6 +55,9 @@ Azure VMware çözümü aboneliğinize dağıtıldıktan sonra, [Azure izleyici 
 
 Azure VMware çözümünün içindeki izleme desenleri, IaaS platformunda Azure VM 'lerine benzerdir. Daha fazla bilgi ve Nasıl-TOS için bkz. Azure [izleyici Ile Azure VM 'Leri izleme](../azure-monitor/vm/monitor-vm-azure.md).
 
+## <a name="customer-communication"></a>Müşteri iletişimi
+[!INCLUDE [customer-communications](includes/customer-communications.md)]
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bir sonraki adım, anahtar [özel bulut ve küme kavramlarını](concepts-private-clouds-clusters.md)öğrenecekti.
@@ -68,3 +66,5 @@ Bir sonraki adım, anahtar [özel bulut ve küme kavramlarını](concepts-privat
 
 <!-- LINKS - internal -->
 [concepts-private-clouds-clusters]: ./concepts-private-clouds-clusters.md
+
+

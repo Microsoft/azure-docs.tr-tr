@@ -7,13 +7,13 @@ ms.date: 09/03/2020
 ms.service: key-vault
 ms.subservice: keys
 ms.topic: quickstart
-ms.custom: devx-track-python, devx-track-azurecli
-ms.openlocfilehash: b2c69b4358b99bfd4fff2a3434ff8fe956a2a1f5
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.custom: devx-track-python
+ms.openlocfilehash: dbff065fc4ee0f4618cae3fa0b012a286d4a0645
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104801171"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815423"
 ---
 # <a name="quickstart-azure-key-vault-keys-client-library-for-python"></a>Hızlı başlangıç: Python için Azure Key Vault anahtarlar istemci kitaplığı
 
@@ -179,7 +179,7 @@ Key Vault bir anahtarı okumak için [get_key](/python/api/azure-keyvault-keys/a
 retrieved_key = client.get_key(keyName)
  ```
 
-Anahtarın, [az keykasakey Show](/cli/azure/keyvault/key?#az-keyvault-key-show)Azure CLI komutuyla ayarlandığını da doğrulayabilirsiniz.
+Anahtarın, [az keykasakey Show](/cli/azure/keyvault/key?#az_keyvault_key_show)Azure CLI komutuyla ayarlandığını da doğrulayabilirsiniz.
 
 ### <a name="delete-a-key"></a>Bir anahtarı silme
 
@@ -192,7 +192,7 @@ deleted_key = poller.result()
 
 `begin_delete_key`Yöntemi zaman uyumsuzdur ve bir Poller nesnesi döndürür. Poller 'ın metodunu çağırma işleminin `result` tamamlanmasını bekler.
 
-Anahtarın Azure CLı komutuyla silindiğini, [az keykasakey Show](/cli/azure/keyvault/key?#az-keyvault-key-show)komutunu doğrulayabilirsiniz.
+Anahtarın Azure CLı komutuyla silindiğini, [az keykasakey Show](/cli/azure/keyvault/key?#az_keyvault_key_show)komutunu doğrulayabilirsiniz.
 
 Silinen bir anahtar, bir süredir silinmiş ancak kurtarılabilir durumunda kalır. Kodu yeniden çalıştırırsanız, farklı bir anahtar adı kullanın.
 
@@ -209,7 +209,7 @@ az group delete --resource-group KeyVault-PythonQS-rg
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Azure Anahtar Kasası'na Genel Bakış](../general/overview.md)
-- [Anahtar kasasına erişimin güvenliğini sağlama](../general/secure-your-key-vault.md)
+- [Anahtar kasasına erişimin güvenliğini sağlama](../general/security-features.md)
 - [Geliştirici Kılavuzu Azure Key Vault](../general/developers-guide.md)
-- [Key Vault güvenliğe genel bakış](../general/security-overview.md)
+- [Key Vault güvenliğe genel bakış](../general/security-features.md)
 - [Key Vault ile kimlik doğrulama](../general/authentication.md)

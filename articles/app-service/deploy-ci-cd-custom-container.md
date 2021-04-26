@@ -7,14 +7,14 @@ ms.assetid: a47fb43a-bbbd-4751-bdc1-cd382eae49f8
 ms.topic: article
 ms.date: 03/12/2021
 ms.author: msangapu
-ms.custom: seodec18
+ms.custom: seodec18, devx-track-azurecli
 zone_pivot_groups: app-service-containers-windows-linux
-ms.openlocfilehash: 654b0f842a3165926242d1ef03f2dfe4e5bacfdc
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 6519f3fe7335ed41f4d5ef67771aaa738a33e4a8
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105643354"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782612"
 ---
 # <a name="continuous-deployment-with-custom-containers-in-azure-app-service"></a>Azure App Service özel kapsayıcılarla sürekli dağıtım
 
@@ -176,7 +176,7 @@ GitHub eylemleri derleme sağlayıcısını aşağıdaki yollarla özelleştireb
 
 Bu isteğe bağlı yapılandırma, varsayılan kimlik doğrulamanın oluşturulan iş akışı dosyasındaki yayımlama profilleriyle yerini alır.
 
-[Azure CLI](/cli/azure/)'de [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az-ad-sp-create-for-rbac) komutuyla bir hizmet sorumlusu **oluşturun** . Aşağıdaki örnekte,, *\<subscription-id>* *\<group-name>* ve *\<app-name>* değerlerini kendi değerlerinizle değiştirin. Sonraki adımda, en üst düzey dahil olmak üzere tüm JSON çıkışını **kaydedin** `{}` .
+[Azure CLI](/cli/azure/)'de [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az_ad_sp_create_for_rbac) komutuyla bir hizmet sorumlusu **oluşturun** . Aşağıdaki örnekte,, *\<subscription-id>* *\<group-name>* ve *\<app-name>* değerlerini kendi değerlerinizle değiştirin. Sonraki adımda, en üst düzey dahil olmak üzere tüm JSON çıkışını **kaydedin** `{}` .
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name "myAppDeployAuth" --role contributor \
@@ -213,7 +213,7 @@ az ad sp create-for-rbac --name "myAppDeployAuth" --role contributor \
 
 ## <a name="automate-with-cli"></a>CLı ile otomatikleştirin
 
-Kapsayıcı kayıt defterini ve Docker görüntüsünü yapılandırmak için [az WebApp config Container set](/cli/azure/webapp/config/container#az-webapp-config-container-set) **komutunu çalıştırın** .
+Kapsayıcı kayıt defterini ve Docker görüntüsünü yapılandırmak için [az WebApp config Container set](/cli/azure/webapp/config/container#az_webapp_config_container_set) **komutunu çalıştırın** .
 
 # <a name="azure-container-registry"></a>[Azure Container Registry](#tab/acr)
 
@@ -240,14 +240,14 @@ az webapp config container set --name <app-name> --resource-group <group-name> -
 -----
 
 ::: zone pivot="container-linux"
-Çok Kapsayıcılı (Docker Compose) bir uygulamayı yapılandırmak için, bir Docker Compose dosyayı yerel olarak **hazırlayın** ve ardından parametresiyle [az WebApp config Container set](/cli/azure/webapp/config/container#az-webapp-config-container-set) **komutunu çalıştırın** `--multicontainer-config-file` . Docker Compose dosyanız özel görüntüler içeriyorsa,  `--docker-registry-server-*` Önceki örnekte gösterildiği gibi parametreleri ekleyin.
+Çok Kapsayıcılı (Docker Compose) bir uygulamayı yapılandırmak için, bir Docker Compose dosyayı yerel olarak **hazırlayın** ve ardından parametresiyle [az WebApp config Container set](/cli/azure/webapp/config/container#az_webapp_config_container_set) **komutunu çalıştırın** `--multicontainer-config-file` . Docker Compose dosyanız özel görüntüler içeriyorsa,  `--docker-registry-server-*` Önceki örnekte gösterildiği gibi parametreleri ekleyin.
 
 ```azurecli-interactive
 az webapp config container set --resource-group <group-name> --name <app-name> --multicontainer-config-file <docker-compose-file>
 ```
 ::: zone-end
 
-Kapsayıcı kayıt defterinden uygulamanıza olan CI/CD 'yi yapılandırmak için  [az WebApp Deployment Container config](/cli/azure/webapp/deployment/container#az-webapp-deployment-container-config) `--enable-cd` parametresini parametresiyle çalıştırın. Komut, Web kancası URL 'sini çıkarır, ancak Web kancasını kayıt defterinizde el ile ayrı bir adımda oluşturmanız gerekir. Aşağıdaki örnek, uygulamanızda CI/CD 'yi sağlar ve ardından Azure Container Registry ' de Web kancasını oluşturmak için çıktıda Web kancası URL 'sini kullanır.
+Kapsayıcı kayıt defterinden uygulamanıza olan CI/CD 'yi yapılandırmak için  [az WebApp Deployment Container config](/cli/azure/webapp/deployment/container#az_webapp_deployment-container-config) `--enable-cd` parametresini parametresiyle çalıştırın. Komut, Web kancası URL 'sini çıkarır, ancak Web kancasını kayıt defterinizde el ile ayrı bir adımda oluşturmanız gerekir. Aşağıdaki örnek, uygulamanızda CI/CD 'yi sağlar ve ardından Azure Container Registry ' de Web kancasını oluşturmak için çıktıda Web kancası URL 'sini kullanır.
 
 ```azurecli-interactive
 ci_cd_url=$(az webapp deployment container config --name <app-name> --resource-group <group-name> --enable-cd true --query CI_CD_URL --output tsv)

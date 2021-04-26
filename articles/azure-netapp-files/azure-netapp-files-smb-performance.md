@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 09/30/2020
 ms.author: b-juche
-ms.openlocfilehash: 9a07c6ae48cdca68a95db7770d90076eb8f10f95
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1ec58b056bd610773500c8ace1fb12d268b980e0
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91929465"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107726727"
 ---
 # <a name="faqs-about-smb-performance-for-azure-netapp-files"></a>Azure NetApp Files için SMB performansı hakkında SSS
 
@@ -153,6 +153,9 @@ SMB Imzalama, SMB performansının üzerine bir çok değerli etkiye sahiptir. P
 
 ![SMB Imzalama performansı etkisini gösteren grafik.](../media/azure-netapp-files/azure-netapp-files-smb-signing-performance.png)
 
+## <a name="what-is-the-anticipated-impact-of-smb-encryption-on-client-workloads"></a>İstemci iş yükleri üzerinde SMB şifrelemenin beklenen etkisi nedir?
+
+Bkz. [SMB şifreleme SSS](azure-netapp-files-faqs.md#smb_encryption_impact).
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 

@@ -11,18 +11,18 @@ ms.custom:
 - mqtt
 - device-developer
 zone_pivot_groups: programming-languages-set-twenty-six
-ms.openlocfilehash: 8f1b5eabe235d107b48dc7b2db5b6d4b1188a3fa
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: bbf94b6e000d5c082debd6a0d41a8d62b8b3f26e
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99833975"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106491109"
 ---
 # <a name="tutorial-create-and-connect-a-client-application-to-your-azure-iot-central-application"></a>Öğretici: Azure IoT Central uygulamanıza istemci uygulaması oluşturma ve bağlama
 
 *Bu makale, çözüm oluşturucular ve cihaz geliştiricileri için geçerlidir.*
 
-Bu öğreticide, bir cihaz geliştiricisi olarak, bir istemci uygulamasını Azure IoT Central uygulamanıza nasıl bağlayabilmeniz gösterilmektedir. Uygulama, bir termostat cihazının davranışının benzetimini yapar. Uygulama IoT Central bağlandığı zaman, termostat cihaz modelinin model KIMLIĞINI gönderir. IoT Central, cihaz modelini almak ve sizin için bir cihaz şablonu oluşturmak üzere model KIMLIĞINI kullanır. Bir işlecin bir cihazla etkileşime geçmesini sağlamak için cihaz şablonuna özelleştirmeler ve görünümler eklersiniz.
+Bu öğreticide, bir cihaz geliştiricisi olarak, bir istemci uygulamasını Azure IoT Central uygulamanıza nasıl bağlayabilmeniz gösterilmektedir. Uygulama, bir sıcaklık denetleyicisi cihazının davranışını taklit eder. Uygulama IoT Central bağlandığı zaman, ısı denetleyicisi cihaz modelinin model KIMLIĞINI gönderir. IoT Central, cihaz modelini almak ve sizin için bir cihaz şablonu oluşturmak üzere model KIMLIĞINI kullanır. Bir işlecin bir cihazla etkileşime geçmesini sağlamak için cihaz şablonuna özelleştirmeler ve görünümler eklersiniz.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
@@ -70,7 +70,7 @@ Bir cihaz geliştiricisi olarak, cihazınızın IoT Central gönderdiği ham ver
 
 :::image type="content" source="media/tutorial-connect-device/raw-data.png" alt-text="Ham veri görünümü":::
 
-Bu görünümde, görüntülenecek sütunları seçebilir ve görüntülenecek zaman aralığını ayarlayabilirsiniz. **Modellenmemiş veriler** sütunu, cihazdaki herhangi bir özellik veya telemetri tanımından hiçbiriyle eşleşmeyen verileri gösterir.
+Bu görünümde, görüntülenecek sütunları seçebilir ve görüntülenecek zaman aralığını ayarlayabilirsiniz. **Modellenmemiş veriler** sütunu, cihaz şablonundaki herhangi bir özellik veya telemetri tanımından eşleşmeyen cihaz verilerini gösterir.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 

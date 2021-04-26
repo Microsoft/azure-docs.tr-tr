@@ -5,15 +5,15 @@ author: msftradford
 manager: MehranAzimi-msft
 services: azure-spatial-anchors
 ms.author: parkerra
-ms.date: 2/3/2021
+ms.date: 03/30/2021
 ms.topic: how-to
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 56532c17c91e6c703a6acd7990bbae47cd248165
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fe9160f22754c62888b2a61ce9751f596842604e
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99576574"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076725"
 ---
 # <a name="configuring-azure-spatial-anchors-in-a-unity-project"></a>Unity projesinde Azure uzamsal bağlayıcılarını yapılandırma
 

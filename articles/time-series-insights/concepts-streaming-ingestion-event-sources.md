@@ -1,20 +1,20 @@
 ---
 title: Akış alma olay kaynakları-Azure Time Series Insights Gen2 | Microsoft Docs
 description: Azure Time Series Insights Gen2 ' e akış verileri hakkında bilgi edinin.
-author: lyrana
-ms.author: lyhughes
-manager: deepakpalled
+author: deepakpalled
+ms.author: dpalled
+manager: diviso
 ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
 ms.date: 03/18/2021
-ms.openlocfilehash: ec41f7503ec179cb1fa6172e94e613933f719c93
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: e0d40a4e0e376a42841bd8df5d76e5c83d11b1e3
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104953626"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865491"
 ---
 # <a name="azure-time-series-insights-gen2-event-sources"></a>Azure Time Series Insights Gen2 olay kaynakları
 
@@ -29,11 +29,14 @@ Olayların UTF-8 kodlu JSON olarak gönderilmesi gerekir.
 
 Olay kaynağı, hub 'ınız ve Azure Time Series Insights Gen2 ortamınız arasındaki bağlantıdır ve kaynak grubunuzda farklı türde bir kaynak `Time Series Insights event source` oluşturulur. IoT Hub veya Olay Hub 'ı kaynakları, Azure Time Series Insights Gen2 ortamınız veya farklı bir abonelikle aynı Azure aboneliğinde bulunabilir. Ancak, Azure Time Series Insights ortamınızı ve IoT Hub ya da Olay Hub 'ını aynı Azure bölgesi içinde barındırmak en iyi uygulamadır.
 
-Ortamınızın olay kaynaklarını oluşturmak, düzenlemek veya kaldırmak için [Azure Portal](./tutorials-set-up-tsi-environment.md#create-an-azure-time-series-insights-gen2-environment), [Azure CLI](https://docs.microsoft.com/cli/azure/ext/timeseriesinsights/tsi/event-source), [Azure Resource Manager şablonları](time-series-insights-manage-resources-using-azure-resource-manager-template.md)ve [REST API](/rest/api/time-series-insights/management(gen1/gen2)/eventsources) kullanabilirsiniz.
+Ortamınızın olay kaynaklarını oluşturmak, düzenlemek veya kaldırmak için [Azure Portal](./tutorials-set-up-tsi-environment.md#create-an-azure-time-series-insights-gen2-environment), [Azure CLI](/cli/azure/tsi/event-source), [Azure Resource Manager şablonları](time-series-insights-manage-resources-using-azure-resource-manager-template.md)ve [REST API](/rest/api/time-series-insights/management(gen1/gen2)/eventsources) kullanabilirsiniz.
+
+> [!WARNING]
+> Time Series Insights tarafından kullanılan bir hub veya olay kaynağına yönelik genel Internet erişimini kısıtlamayın veya gerekli bağlantı bozulur.
 
 ## <a name="start-options"></a>Başlatma seçenekleri
 
-Bir olay kaynağı oluştururken, önceden varolan verilerin ne şekilde toplandığını belirtme seçeneğiniz vardır. Bu ayar isteğe bağlıdır. Aşağıdaki seçenekler kullanılabilir:
+Bir olay kaynağı oluştururken, önceden mevcut verilerin ne şekilde toplandığını belirtebilirsiniz. Bu ayar isteğe bağlıdır. Aşağıdaki seçenekler kullanılabilir:
 
 | Ad   |  Açıklama  |  Azure Resource Manager şablonu örneği |
 |----------|-------------|------|
@@ -46,18 +49,17 @@ Bir olay kaynağı oluştururken, önceden varolan verilerin ne şekilde topland
 > - EarliestAvailable ' ı seçerseniz ve önceden var olan verilere sahipseniz, Azure Time Series Insights Gen2 ortamınız tüm verilerinizi işlerken yüksek gecikme süresine karşılaşabilirsiniz.
 > - Verilerin dizinlendiği için bu yüksek gecikme süresi sonunda alt kenar olmalıdır. Devam eden yüksek gecikme süresi yaşarsanız Azure portal aracılığıyla bir destek bileti gönderebilirsiniz.
 
-* EarliestAvailable
+- EarliestAvailable
 
 ![EarliestAvailable diyagramı](media/concepts-streaming-event-sources/event-source-earliest-available.png)
 
-* EventSourceCreationTime
+- EventSourceCreationTime
 
 ![EventSourceCreationTime diyagramı](media/concepts-streaming-event-sources/event-source-creation-time.png)
 
-* CustomEnqueuedTime
+- CustomEnqueuedTime
 
 ![CustomEnqueuedTime diyagramı](media/concepts-streaming-event-sources/event-source-custom-enqueued-time.png)
-
 
 ## <a name="streaming-ingestion-best-practices"></a>Akış alma en iyi uygulamaları
 
@@ -75,7 +77,7 @@ Bir olay kaynağı oluştururken, önceden varolan verilerin ne şekilde topland
 
 - Olay kaynağı bağlantı dizeleri sağlarken en az ayrıcalık ilkesini izleyin. Event Hubs için, yalnızca *gönderme* talebiyle bir paylaşılan erişim ilkesi yapılandırın ve IoT Hub için yalnızca *hizmet bağlantı* iznini kullanın.
 
-> [!CAUTION] 
+> [!CAUTION]
 > IoT Hub veya Olay Hub 'ınızı siler ve aynı ada sahip yeni bir kaynağı yeniden oluşturursanız, yeni bir olay kaynağı oluşturmanız ve yeni IoT Hub ya da Olay Hub 'ını eklemeniz gerekir. Bu adım tamamlanana kadar veriler alınamaz.
 
 ## <a name="production-workloads"></a>Üretim iş yükleri
@@ -113,9 +115,9 @@ Tarih damgalarının ISO 8601 biçiminde gönderilmesi ve UTC 'de depolanacak ol
 
 Saat dilimi boşluğu, aşağıdakilerden biri olarak biçimlendirilmelidir:
 
-± HHMMZ</br>
-± HH: MM</br>
-± HH: MMZ</br>
+± HHMMZ<br />
+± HH: MM<br />
+± HH: MMZ
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

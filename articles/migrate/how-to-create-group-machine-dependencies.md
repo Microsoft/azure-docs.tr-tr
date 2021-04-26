@@ -6,12 +6,12 @@ ms.author: rajosh
 ms.manager: abhemraj
 ms.topic: how-to
 ms.date: 11/25/2020
-ms.openlocfilehash: 84a672f76de4b11558f2b39bf417a3eda2e31a36
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 6ded5d4ed8c2a55939bba908a05adbd2dea2ccbf
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104786541"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714785"
 ---
 # <a name="set-up-dependency-visualization"></a>Bağımlılık görselleştirmesini ayarlama
 
@@ -54,6 +54,8 @@ Bu makalede, Azure geçişi: bulma ve değerlendirme 'da aracı tabanlı bağım
 
     ![Yeni bir çalışma alanı Ekle](./media/how-to-create-group-machine-dependencies/workspace.png)
 
+> [!Note]
+> Özel uç nokta bağlantısı için OMS çalışma alanını yapılandırmayı [öğrenin](https://docs.microsoft.com/azure/azure-monitor/logs/private-link-security) .  
 
 ## <a name="download-and-install-the-vm-agents"></a>Sanal makine aracılarını indirip yükleme
 

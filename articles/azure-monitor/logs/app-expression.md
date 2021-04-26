@@ -5,19 +5,19 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 05/09/2019
-ms.openlocfilehash: 235a6bf4a0dd9afcac8751067b2eac3ddb37c0cd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9d60857503402554381068fc36121fa3f7b61622
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102031251"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107283567"
 ---
 # <a name="app-expression-in-azure-monitor-query"></a>Azure Izleyici sorgusunda App () ifadesi
 
 Bu `app` ifade, bir Azure izleyici sorgusunda aynı kaynak grubunda, başka bir kaynak grubunda veya başka bir abonelikte bulunan belirli bir Application Insights uygulamasından verileri almak için kullanılır. Bu, uygulama verilerini bir Azure Izleyici günlük sorgusuna eklemek ve bir Application Insights sorgusunda birden çok uygulama arasında veri sorgulamak için yararlıdır.
 
 > [!IMPORTANT]
-> Günlük verileri bir Log Analytics çalışma alanında depolandığından, bu, bir [çalışma alanı tabanlı Application Insights kaynağı](../app/create-workspace-resource.md) kullanıyorsanız, uygulama () ifadesi kullanılmaz. Birden çok çalışma alanındaki uygulamayı içeren bir sorgu yazmak için log () ifadesini kullanın. Aynı çalışma alanındaki birden çok uygulama için, bir çapraz çalışma alanı sorgusuna gerek yoktur.
+> Günlük verileri bir Log Analytics çalışma alanında depolandığından, bu, bir [çalışma alanı tabanlı Application Insights kaynağı](../app/create-workspace-resource.md) kullanıyorsanız, uygulama () ifadesi kullanılmaz. Birden çok çalışma alanındaki uygulamayı içeren bir sorgu yazmak için Workspace () ifadesini kullanın. Aynı çalışma alanındaki birden çok uygulama için, bir çapraz çalışma alanı sorgusuna gerek yoktur.
 
 ## <a name="syntax"></a>Syntax
 
@@ -33,7 +33,7 @@ Bu `app` ifade, bir Azure izleyici sorgusunda aynı kaynak grubunda, başka bir 
 | Kaynak Adı | Uygulamanın okunabilir adı ("bileşen adı" olarak da bilinir) | uygulama ("fabrikamapp") |
 | Tam ad | Şu biçimdeki uygulamanın tam adı: "subscriptionName/resourceGroup/componentName" | uygulama (' AI-Prototype/fabrikam/fabrikamapp ') |
 | ID | Uygulamanın GUID 'SI | uygulama ("988ba129-363e-4415-8fe7-8cbe5447518") |
-| Azure Kaynak KIMLIĞI | Azure kaynağı için tanımlayıcı |uygulama ("/subscriptions/7293b69-db12-44fc-9a66-9c2005c3051d/resourcegroups/Fabrikam/providers/microsoft.insights/components/fabrikamapp") |
+| Azure Kaynak Kimliği | Azure kaynağı için tanımlayıcı |uygulama ("/subscriptions/7293b69-db12-44fc-9a66-9c2005c3051d/resourcegroups/Fabrikam/providers/microsoft.insights/components/fabrikamapp") |
 
 
 ## <a name="notes"></a>Notlar

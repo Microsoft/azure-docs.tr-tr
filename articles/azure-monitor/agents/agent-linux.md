@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 08/21/2020
-ms.openlocfilehash: 5171cefdb82b958ae8148ff63f1daef5f67916c6
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 23597804a34a9bc409db179010569024aa472016
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105044966"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725935"
 ---
 # <a name="install-log-analytics-agent-on-linux-computers"></a>Linux bilgisayarlarına Log Analytics aracısını yükleme
 Bu makalede, aşağıdaki yöntemleri kullanarak Linux bilgisayarlarına Log Analytics aracısını yükleme hakkında ayrıntılı bilgi verilmektedir:
@@ -71,16 +71,16 @@ Python2 yürütülebilir dosyası *Python*'un diğer adı olmalıdır. Aşağıd
     ```
 
 ## <a name="supported-linux-hardening"></a>Desteklenen Linux sağlamlaştırma
-OMS aracısının Linux için özelleştirme desteği sınırlıdır. 
+OMS aracısında Linux için sınırlı özelleştirme ve sağlamlaştırma desteği vardır.
 
 Aşağıdakiler şu anda desteklenmektedir: 
 - FIPS
 
-Aşağıdakiler göz önünde bulundurulmalıdır ancak henüz desteklenmemektedir:
+Aşağıdakiler desteklenmez:
 - CI
 - SELINUX
 
-Diğer sağlamlaştırma ve özelleştirme yöntemleri, OMS Aracısı için desteklenmez veya planlanmaz.  
+CIS ve SELINUX sağlamlaştırma desteği, [Azure Izleme Aracısı](https://docs.microsoft.com/azure/azure-monitor/agents/azure-monitor-agent-overview)için planlanmaktadır. Daha fazla sağlamlaştırma ve özelleştirme yöntemleri, OMS Aracısı için desteklenmez veya planlanmaz.  
 
 ## <a name="agent-prerequisites"></a>Aracı önkoşulları
 

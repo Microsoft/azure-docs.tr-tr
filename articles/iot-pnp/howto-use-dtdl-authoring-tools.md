@@ -7,12 +7,12 @@ ms.date: 09/14/2020
 ms.topic: how-to
 ms.service: iot-pnp
 services: iot-pnp
-ms.openlocfilehash: 40d1ae4da07e159c24970c065d1c39e22b89a29a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 62a89fbb654624e1b1f9242d21d3bbb188140157
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93280204"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106067495"
 ---
 # <a name="install-and-use-the-dtdl-authoring-tools"></a>DTDL yazma araçlarını yükle ve kullan
 

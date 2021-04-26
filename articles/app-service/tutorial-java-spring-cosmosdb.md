@@ -6,13 +6,13 @@ ms.author: routlaw
 ms.devlang: java
 ms.topic: tutorial
 ms.date: 12/10/2018
-ms.custom: mvc, seodec18, seo-java-july2019, seo-java-august2019, seo-java-september2019, devx-track-java
-ms.openlocfilehash: 5a481e7ef37e36578b7f71a7afe70dcad737de89
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: mvc, seodec18, seo-java-july2019, seo-java-august2019, seo-java-september2019, devx-track-java, devx-track-azurecli
+ms.openlocfilehash: 7a0dd1198bcad675f7662a2cf4eb369f2a276445
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102217474"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107479415"
 ---
 # <a name="tutorial-build-a-java-spring-boot-web-app-with-azure-app-service-on-linux-and-azure-cosmos-db"></a>Öğretici: Linux ve Azure Cosmos DB üzerinde Azure App Service bir Java Spring Boot Web uygulaması oluşturun
 
@@ -185,7 +185,7 @@ Uygulama başlatıldıktan sonra Spring TODO uygulamasına bu bağlantıyı kull
     <plugin>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-webapp-maven-plugin</artifactId>
-        <version>1.11.0</version>
+        <version>1.13.0</version>
         <configuration>
             <schemaVersion>v2</schemaVersion>
 
@@ -275,7 +275,7 @@ bash-3.2$ mvn azure-webapp:deploy
 Çıktı, dağıtılan uygulamanızın URL 'sini içerir (Bu örnekte, `https://spring-todo-app.azurewebsites.net` ). Uygulamanızı yüklemek için, bu URL 'YI Web tarayıcınıza kopyalayabilir veya Terminal pencerenizde aşağıdaki komutu çalıştırabilirsiniz.
 
 ```bash
-curl https://spring-todo-app.azurewebsites.net
+explorer https://spring-todo-app.azurewebsites.net
 ```
 
 Adres çubuğunda uzak URL ile çalışan uygulamayı görmeniz gerekir:
@@ -299,8 +299,7 @@ az appservice plan update --number-of-workers 2 \
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu kaynaklara başka bir öğretici (bkz. [Sonraki adımlar](#next)) için gereksinim duymuyorsanız, Cloud Shell'de aşağıdaki komutu çalıştırarak bu kaynakları silebilirsiniz: 
-  
+Bu kaynaklara başka bir öğretici için ihtiyaç duymuyorsanız (bkz. [sonraki adımlar](#next)), Cloud Shell şu komutu çalıştırarak silebilirsiniz: â Â € ̄Â 
 ```azurecli
 az group delete --name <your-azure-group-name>
 ```

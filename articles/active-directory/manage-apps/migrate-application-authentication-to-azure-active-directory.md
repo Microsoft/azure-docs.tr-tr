@@ -2,24 +2,22 @@
 title: Uygulama kimlik doğrulamasını Azure Active Directory geçir
 description: Bu Teknik İnceleme, uygulama kimlik doğrulamasını Azure AD 'ye geçirmeye yönelik planlama ve avantajların ayrıntılarını sağlar.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: how-to
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.date: 02/05/2021
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: baselden
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1e05a7af3f0b95470432b4fb9602e1b41da9f72f
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 3458f358c12ef33a337e50066e83b6e59273ccf1
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104952975"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376758"
 ---
 # <a name="migrate-application-authentication-to-azure-active-directory"></a>Uygulama kimlik doğrulamasını Azure Active Directory geçir
 

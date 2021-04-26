@@ -10,12 +10,12 @@ ms.author: luquinta
 author: luisquintanilla
 ms.date: 02/25/2021
 ms.custom: responsible-ml
-ms.openlocfilehash: f849968c16d2c3d8940a71da0e0cda536882d9c8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: aeff928c14bd61a374f8b2610f35c0347a7cfc39
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101692071"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106062429"
 ---
 # <a name="what-is-responsible-machine-learning-preview"></a>Machine Learning sorumlu nedir? (önizleme)
 

@@ -12,18 +12,25 @@ ms.date: 09/01/2020
 ms.author: trbye
 ms.custom: cog-serv-seo-aug-2020
 keywords: Metinden konuşmaya
-ms.openlocfilehash: 45977faec9ab54fed0c1e7054c567b4d18b11f50
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 73e37fde4b3c2dd1aeb6ab171c3726f1b4353949
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645025"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107106097"
 ---
 # <a name="what-is-text-to-speech"></a>Metin okuma nedir?
 
 [!INCLUDE [TLS 1.2 enforcement](../../../includes/cognitive-services-tls-announcement.md)]
 
-Bu genel bakışta, uygulamanızın, araçların veya cihazların metni insan benzeri sentezleştirilmiş konuşmaya dönüştürmesini sağlayan, metinden konuşmaya hizmetinin avantajları ve özellikleri hakkında bilgi edinebilirsiniz. Standart ve sinir sesler arasından seçim yapın ya da ürün veya marka için benzersiz özel bir ses oluşturun. 75 + standart sesler 45 ' den fazla dilde ve yerel ayarlarda kullanılabilir ve bir dizi dilde ve yerel ayara 5 sinir seste erişilebilir. Desteklenen seslerin, dillerin ve yerel ayarların tam listesi için bkz. [desteklenen diller](language-support.md#text-to-speech).
+Bu genel bakışta, uygulamanızın, araçların veya cihazların metni insan benzeri sentezleştirilmiş konuşmaya dönüştürmesini sağlayan, metinden konuşmaya hizmetinin avantajları ve özellikleri hakkında bilgi edinebilirsiniz. İnsan benzeri sinir seslerini kullanın veya ürün veya marka için benzersiz özel bir ses oluşturun. Desteklenen seslerin, dillerin ve yerel ayarların tam listesi için bkz. [desteklenen diller](language-support.md#text-to-speech).
+
+Bu belge aşağıdaki makale türlerini içerir:
+
+* **Hızlı** başlangıçlarda, hizmette istek yapma konusunda size kılavuzluk eden başlangıç yönergeleri bulunur.
+* **Nasıl yapılır kılavuzlarında** , hizmetin daha belirli veya özelleştirilmiş yollarla kullanılmasına ilişkin yönergeler bulunur.
+* **Kavramlar** , hizmet işlevselliği ve özelliklerinin ayrıntılı açıklamalarını sağlar.
+* **Öğreticiler** daha fazla iş çözümlerinde hizmeti bir bileşen olarak nasıl kullanacağınızı gösteren kılavuzlardır.
 
 > [!NOTE]
 > Bing Konuşma, 15 Ekim 2019 ' de kullanımdan çıkarıldı. Uygulamalarınız, araçlar veya ürünleriniz Bing Konuşma API 'Leri veya Özel Konuşma Tanıma kullanıyorsa, konuşma hizmetine geçiş yapmanıza yardımcı olacak kılavuzlar oluşturduk.
@@ -35,8 +42,6 @@ Bu genel bakışta, uygulamanızın, araçların veya cihazların metni insan be
 
 * Zaman uyumsuz birleştirme uzun seslidir-metin okuma dosyalarını 10 dakikadan uzun zaman uyumsuz bir şekilde birleştirmek için [uzun ses API](long-audio-api.md) 'sini kullanın (örneğin, ses defterleri veya seminerler). Konuşma SDK 'Sı veya konuşmadan metne REST API kullanarak senkinden farklı olarak, yanıtlar gerçek zamanlı olarak döndürülmez. Beklentiler, isteklerin zaman uyumsuz olarak gönderilmesi, yanıtların yoklandığının ve hizmetten kullanıma hazır hale getirilme sesinin indirilmesinden kaynaklandır. Yalnızca özel sinir sesleri desteklenir.
 
-* Standart sesler-Istatistiksel parametrik sen, ve/veya birleştirme birleştirme tekniklerini kullanarak oluşturulur. Bu sesler, yüksek oranda anlaşılır ve sessiz doğal bir şekilde yapılır. Uygulamalarınızın çok sayıda dilde 45 konuşmasını, çok çeşitli ses seçenekleriyle kolayca sağlayabilirsiniz. Bu sesler, kısaltmalar, kısaltma genişletmeleri, tarih/saat yorumlamalar, polyphones ve daha fazlası için destek de dahil olmak üzere yüksek telaffuz doğruluk sağlar. Standart seslerin tam listesi için bkz. [desteklenen diller](language-support.md#text-to-speech).
-
 * Sinir seslerde, geleneksel konuşma senillerinin sınırlarını aşmak için derin sinir ağları, konuşma ve söylenen dilde stres ve kullanım ile ilgili olarak kullanılır. Prosody tahmini ve ses birleştirmesinin eşzamanlı olarak gerçekleştirilmesi, daha akıcı ve doğal bir çıkış ile sonuçlanır. Sinir sesleri, chatbots ve ses yardımcılarıyla daha doğal ve etkileyici bir şekilde etkileşim kurmak, e-kitaplar gibi dijital metinleri audiobooks 'a dönüştürmek ve oto içi gezinti sistemlerini geliştirmek için kullanılabilir. İnsan benzeri doğal Prosody ve sözcüklerin bir kısmını temizleyerek, AI sistemleriyle etkileşime geçerek sinir seslileri büyük ölçüde dinlemeyi azaltır. Sinir sesin tam listesi için bkz. [desteklenen diller](language-support.md#text-to-speech).
 
 * SSML ile konuşma stillerini ayarlama-konuşma Sensleme dili (SSML), konuşmadan metne çıktıları özelleştirmek için kullanılan XML tabanlı bir biçimlendirme dilidir. SSML ile, aralığı ayarlayabilir, duraklamalar ekleyebilir, söylenişi artırabilir veya yavaşlatır, konuşma hızını artırabilir veya azaltabilir, hacmi artırabilir veya azaltabilirsiniz ve tek bir belgeye birden çok ses özniteliği ekleyebilirsiniz. Konuşma stillerini [ayarlama için bkz](speech-synthesis-markup.md) ..
@@ -44,7 +49,7 @@ Bu genel bakışta, uygulamanızın, araçların veya cihazların metni insan be
 * Visemes- [visemes](how-to-speech-synthesis-viseme.md) , belirli bir phoneme oluştururken LIP 'ler, Jaw ve dil düzeyi dahil olmak üzere gözlemlenen konuşmayla ilgili önemli pozlardır. Visemes, sesler ve phonemes ile güçlü bir bağıntı vardır. Konuşma SDK 'sında viseme olaylarını kullanarak, LIP 'yi okuma, eğitim, eğlence ve müşteri hizmetleri gibi yüzlere animasyon eklemek için kullanılabilecek yüz animasyon verileri oluşturabilirsiniz.
 
 > [!NOTE]
-> Viseme, şimdilik yalnızca `en-US-AriaNeural` Ses için geçerlidir.
+> Viseme olayları şu anda yalnızca ses için destekleniyor `en-US-AriaNeural` .
 
 ## <a name="get-started"></a>başlarken
 
@@ -59,7 +64,7 @@ Metinden konuşmaya yönelik örnek kod GitHub ' da kullanılabilir. Bu örnekle
 
 ## <a name="customization"></a>Özelleştirme
 
-Standart ve sinir seslerinizin yanı sıra, ürün veya marka için benzersiz özel sesler oluşturabilir ve bunları hassas bir şekilde ayarlayabilirsiniz. Kullanmaya başlamak her şey için çok sayıda ses dosyası ve ilişkili dökümlerdir. Daha fazla bilgi için bkz. [özel sesle çalışmaya başlama](how-to-custom-voice.md)
+Sinir seslerinizin yanı sıra, ürün veya marka için özel sesler oluşturabilir ve bunları hassas bir şekilde ayarlayabilirsiniz. Kullanmaya başlamak her şey için çok sayıda ses dosyası ve ilişkili dökümlerdir. Daha fazla bilgi için bkz. [özel sesle çalışmaya başlama](how-to-custom-voice.md)
 
 ## <a name="pricing-note"></a>Fiyatlandırma notunun
 

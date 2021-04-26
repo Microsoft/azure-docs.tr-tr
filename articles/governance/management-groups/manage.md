@@ -3,12 +3,12 @@ title: Yönetim gruplarınız ile çalışma-Azure Idare
 description: Yönetim grubu hiyerarşinizi görüntülemeyi, bakımını yapmayı, güncelleştirmeyi ve silmeyi öğrenin.
 ms.date: 01/15/2021
 ms.topic: conceptual
-ms.openlocfilehash: 05e78d66c29e500842d14a6eeb563c4569ecf0bd
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 09d11450ff63046ab458f930f64534d10863f451
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100596482"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258359"
 ---
 # <a name="manage-your-resources-with-management-groups"></a>Kaynakları yönetim gruplarıyla yönetme
 
@@ -388,5 +388,5 @@ Yönetim grupları hakkında daha fazla bilgi almak için bkz.:
 - [Azure kaynaklarını düzenlemek için yönetim grupları oluşturma](./create-management-group-portal.md)
 - [Yönetim gruplarınızı değiştirme, silme veya yönetme](./manage.md)
 - [Azure PowerShell Kaynak Modülünde yönetim gruplarını gözden geçirme](/powershell/module/az.resources#resources)
-- [REST API'de yönetim gruplarını gözden geçirme](/rest/api/resources/managementgroups)
+- [REST API'de yönetim gruplarını gözden geçirme](/rest/api/managementgroups/managementgroups)
 - [Azure CLI'de yönetim gruplarını gözden geçirme](/cli/azure/account/management-group)

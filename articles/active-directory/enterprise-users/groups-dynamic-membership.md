@@ -14,12 +14,12 @@ ms.author: curtand
 ms.reviewer: krbain
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c25504e3313234ac6b6f80a6e00c77fce28b1400
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 41bdf5251881fa9307a3cd4d214081845e967900
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102174538"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107209528"
 ---
 # <a name="dynamic-membership-rules-for-groups-in-azure-active-directory"></a>Azure Active Directory gruplar için dinamik üyelik kuralları
 
@@ -52,19 +52,19 @@ Daha fazla adım adım yönergeler için bkz. [dinamik grup oluşturma veya gün
 
 ![Dinamik bir grup için üyelik kuralı ekle](./media/groups-dynamic-membership/update-dynamic-group-rule.png)
 
-### <a name="rule-syntax-for-a-single-expression"></a>Tek bir ifade için kural sözdizimi
+### <a name="rule-syntax-for-a-single-expression&quot;></a>Tek bir ifade için kural sözdizimi
 
 Tek bir ifade, üyelik kuralının en basit biçimidir ve yalnızca yukarıda belirtilen üç bölümden oluşur. Tek bir ifade içeren bir kural şuna benzer: `Property Operator Value` , burada özelliğin sözdizimi Object. Property adıdır.
 
 Aşağıda, tek bir ifadeyle doğru şekilde oluşturulmuş bir üyelik kuralına örnek verilmiştir:
 
 ```
-user.department -eq "Sales"
+user.department -eq &quot;Sales&quot;
 ```
 
-Parantezler tek bir ifade için isteğe bağlıdır. Üyelik kuralınız gövdesinin toplam uzunluğu 2048 karakteri aşamaz.
+Parantezler tek bir ifade için isteğe bağlıdır. Üyelik kuralınız gövdesinin toplam uzunluğu 3072 karakteri aşamaz.
 
-## <a name="constructing-the-body-of-a-membership-rule"></a>Üyelik kuralının gövdesini oluşturma
+## <a name=&quot;constructing-the-body-of-a-membership-rule&quot;></a>Üyelik kuralının gövdesini oluşturma
 
 Bir grubu Kullanıcı veya cihazlarla otomatik olarak dolduran bir üyelik kuralı, doğru veya yanlış bir sonuç elde eden bir ikili ifadedir. Basit bir kuralın üç bölümü şunlardır:
 
@@ -74,7 +74,7 @@ Bir grubu Kullanıcı veya cihazlarla otomatik olarak dolduran bir üyelik kural
 
 İfade içindeki parçaların sırası, söz dizimi hatalarından kaçınmak için önemlidir.
 
-## <a name="supported-properties"></a>Desteklenen özellikler
+## <a name=&quot;supported-properties&quot;></a>Desteklenen özellikler
 
 Üyelik kuralı oluşturmak için kullanılabilecek üç tür özellik vardır.
 
@@ -84,18 +84,18 @@ Bir grubu Kullanıcı veya cihazlarla otomatik olarak dolduran bir üyelik kural
 
 Aşağıda, tek bir ifade oluşturmak için kullanabileceğiniz Kullanıcı özellikleri verilmiştir.
 
-### <a name="properties-of-type-boolean"></a>Boole türü özellikleri
+### <a name=&quot;properties-of-type-boolean&quot;></a>Boole türü özellikleri
 
 | Özellikler | İzin verilen değerler | Kullanım |
 | --- | --- | --- |
 | accountEnabled |doğru yanlış |User. accountEnabled-EQ doğru |
 | dirSyncEnabled |doğru yanlış |User. dirSyncEnabled-EQ doğru |
 
-### <a name="properties-of-type-string"></a>Dize türü özellikleri
+### <a name=&quot;properties-of-type-string&quot;></a>Dize türü özellikleri
 
 | Özellikler | İzin verilen değerler | Kullanım |
 | --- | --- | --- |
-| city |Herhangi bir dize değeri veya *null* |(User. City-EQ "değer") |
+| city |Herhangi bir dize değeri veya *null* |(User. City-EQ &quot;değer") |
 | ülke |Herhangi bir dize değeri veya *null* |(User. Country-EQ "değer") |
 | Tadı | Herhangi bir dize değeri veya *null* | (User. companyName-EQ "değer") |
 | bölüm |Herhangi bir dize değeri veya *null* |(User. Department-EQ "değer") |

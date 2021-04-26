@@ -6,10 +6,10 @@ ms.custom: hdinsightactive
 ms.topic: how-to
 ms.date: 06/17/2019
 ms.openlocfilehash: 46a22b78ade3d137f25b14e5cbdaff3264208228
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104868401"
 ---
 # <a name="install-third-party-apache-hadoop-applications-on-azure-hdinsight"></a>Azure HDInsight 'a üçüncü taraf Apache Hadoop uygulamaları yüklemeyin
@@ -20,7 +20,7 @@ An HDInsight uygulama, kullanıcıların bir HDInsight kümesine yükleyebir uyg
 
 Aşağıdaki listede yayımlanan uygulamalar gösterilmektedir:
 
-|Uygulama |Küme türleri | Açıklama |
+|Uygulama |Küme türleri | Description |
 |---|---|---|
 |[AtScale zeka platformu](https://aws.amazon.com/marketplace/pp/AtScale-AtScale-Intelligence-Platform/B07BWWHH18) |Hadoop |AtScale, HDInsight kümenizi genişleme bir OLAP sunucusuna dönüştürür ve Microsoft Excel, Power BI, Tableau Software to QlikView ' den daha önce bildiğiniz, sahip olduğunuz ve sevdiğiniz BI araçlarını kullanarak milyarlarca verileri etkileşimli olarak sorgulamanızı sağlar. |
 |[HDInsight için CDAP](https://azuremarketplace.microsoft.com/marketplace/apps/cask.cdap-for-hdinsight) |HBase |CDAP, Hadoop için zaman değerini hızlandıran ve self servis verileri sağlamasına olanak tanıyan büyük verilere yönelik ilk Birleşik tümleştirme platformudur. Açık kaynak ve genişletilebilir, CDAP yeniliklere yönelik engelleri kaldırır. Gereksinimler: 4 bölge düğümü, min D3 v2. |
@@ -86,7 +86,7 @@ Portal bir küme için yüklü HDInsight uygulamalarının listesini ve yüklü 
     |Durum |Uygulama durumu. |
     |Web |Kenar düğümüne dağıttığınız Web uygulamasının URL 'SI. Kimlik bilgisi, küme için yapılandırdığınız HTTP kullanıcısı kimlik bilgileri ile aynıdır. |
     |SSH uç noktası |Kenar düğümüne bağlanmak için SSH kullanabilirsiniz. SSH kimlik bilgileri, küme için yapılandırdığınız SSH kullanıcısı kimlik bilgileriyle aynıdır. Bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md). |
-    |Açıklama | Uygulama açıklaması. |
+    |Description | Uygulama açıklaması. |
 
 6. Bir uygulamayı silmek için, uygulamaya sağ tıklayın ve ardından bağlam menüsünden **Sil** ' e tıklayın.
 

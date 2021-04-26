@@ -7,14 +7,14 @@ tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: managed-hsm
 ms.topic: tutorial
-ms.date: 09/15/2020
+ms.date: 03/30/2021
 ms.author: mbaldwin
-ms.openlocfilehash: 7420ffbe5b365c635c1eac2620cfd54ceb649ebf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0d5749894fd277ff6a2f77e3db9721e6989d72ac
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102211813"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109246"
 ---
 # <a name="managed-hsm-logging"></a>Yönetilen HSM günlüğü 
 
@@ -74,9 +74,10 @@ az monitor diagnostic-settings create --name ContosoMHSM-Diagnostics --resource 
 Günlüğe kaydedilenler:
 
 * Erişim izinlerinin, sistem hatalarının veya hatalı isteklerin sonucu olarak başarısız istekler dahil tüm kimliği doğrulanmış REST API istekleri.
-* Oluşturma, silme ve Etiketler gibi öznitelikleri güncelleştirme dahil olmak üzere, yönetilen HSM 'deki işlemler.
+* Yönetilen HSM kaynağında, oluşturma, silme ve Etiketler gibi öznitelikleri güncelleştirme dahil olmak üzere yönetilen düzlem işlemleri.
 * Başlatma & indirme, kurtarma başlatma, yükleme gibi güvenlik etki alanına ilgili işlemler
 * Tam HSM yedekleme, geri yükleme ve seçmeli geri yükleme işlemleri
+* Rol atamaları oluşturma/görüntüleme/silme ve özel rol tanımlarını oluşturma/görüntüleme/silme gibi rol yönetimi işlemleri
 * Anahtarlar üzerinde aşağıdakiler de dahil olmak üzere işlemler:
   * Anahtarları oluşturma, değiştirme veya silme.
   * Anahtarları imzalama, doğrulama, şifreleme, şifre çözme, sarmalama ve geri sarma, anahtarları listeleme.
@@ -121,30 +122,13 @@ Tek blob 'lar bir JSON olarak biçimlendirilen metin olarak depolanır. Bir örn
 ]
 ```
 
-Aşağıdaki tabloda alan adları ve açıklamaları listelenmektedir:
 
-| Alan adı | Description |
-| --- | --- |
-| **Değerine** | Yönetilen HSM 'nin oluşturulduğu aboneliğin kiracı KIMLIĞINI Azure Active Directory |
-| **ışınızda** |UTC olarak tarih ve saat. |
-| **RESOURCEID** |Azure Resource Manager kaynak KIMLIĞI. Yönetilen HSM günlükleri için bu her zaman yönetilen HSM kaynak KIMLIĞIDIR. |
-| **operationName** |Sonraki tabloda belirtildiği gibi işlemin adı. |
-| **operationVersion** |İstemci tarafından istenen sürümü REST API. |
-| **alan** |Sonuç türü. Yönetilen HSM günlükleri için, **auditevent** tek, kullanılabilir bir değerdir. |
-| **'ı** |REST API isteğinin sonucu. |
-| **özelliklerinin** |İşleme göre farklılık gösteren bilgiler (**OperationName**)|
-| **resultSignature** |HTTP durumu. |
-| **resultDescription** |Kullanılabilir olduğunda sonuç hakkında ek açıklama. |
-| **Ort** |Milisaniye cinsinden REST API'si isteğini sunmak için geçen süre. Buna ağ gecikme süresi dahil değildir; bu nedenle istemci tarafında ölçtüğünüz süre bu süreyle eşleşmeyebilir. |
-| **callerIpAddress** |İsteği yapan istemcinin IP adresi. |
-| **ID** |İstemci tarafı günlüklerinin hizmet tarafı günlükleriyle ilişkilendirilmesi için istemcinin geçecan isteğe bağlı bir GUID. |
-| **IDENTITY** |REST API isteğinde sunulan belirteçten kimlik. Bu genellikle "Kullanıcı", "hizmet sorumlusu" dir. |
-| **requestUri** | REST API istek URI 'SI |
-| **Clıentınfo** | 
 
 ## <a name="use-azure-monitor-logs"></a>Azure İzleyici günlüklerini kullanma
 
-Yönetilen HSM **auditevent** günlüklerini gözden geçirmek Için Azure izleyici günlüklerinde Key Vault çözümünü kullanabilirsiniz. Azure Izleyici günlüklerinde, verileri analiz etmek ve ihtiyacınız olan bilgileri almak için günlük sorgularını kullanırsınız. 
+Yönetilen HSM **auditevent** günlüklerini gözden geçirmek Için Azure izleyici günlüklerinde Key Vault çözümünü kullanabilirsiniz. Azure Izleyici günlüklerinde, verileri analiz etmek ve ihtiyacınız olan bilgileri almak için günlük sorgularını kullanırsınız.
+
+Bunu ayarlama dahil daha fazla bilgi için bkz. [Azure izleyici 'de Azure Key Vault](../../azure-monitor/insights/key-vault-insights-overview.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -4,12 +4,12 @@ description: Azure Backup hizmetini kullanarak Microsoft Azure Kurtarma Hizmetle
 ms.reviewer: srinathv
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 25f0c41b535f9403d0a7027687cc5261cd437275
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4306f01d608542f7453b32b32a1a6894c2379159
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97368605"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515031"
 ---
 # <a name="manage-microsoft-azure-recovery-services-mars-agent-backups-by-using-the-azure-backup-service"></a>Azure Backup hizmetini kullanarak Microsoft Azure Kurtarma Hizmetleri (MARS) aracı yedeklemelerini yönetme
 
@@ -196,7 +196,7 @@ MARS aracısının işlemiyle ilgili çakışmaları önlemek için virüsten ko
 
 1. **Yol dışlamaları ekleme**: performans ve olası çakışmaların azalmasına engel olmak için, aşağıdaki yolları virüsten koruma yazılımının gerçek zamanlı izlemelerinden hariç tutun:
     1. `%ProgramFiles%\Microsoft Azure Recovery Services Agent` ve alt klasörler
-    1. **Karalama klasörü**: karalama klasörü standart konumda değilse, bunları dışlamalarla birlikte ekleyin.  Karalama klasörü konumunu belirleme [adımları için buraya bakın](backup-azure-file-folder-backup-faq.md#how-to-check-if-scratch-folder-is-valid-and-accessible) .
+    1. **Karalama klasörü**: karalama klasörü standart konumda değilse, bunları dışlamalarla birlikte ekleyin.  Karalama klasörü konumunu belirleme [adımları için buraya bakın](backup-azure-file-folder-backup-faq.yml#how-to-check-if-scratch-folder-is-valid-and-accessible-) .
 1. **Ikili Dışlamalar ekleme**: yedekleme ve konsol etkinliklerinin azalmasına engel olmak için, aşağıdaki ikili dosyalar için işlemleri virüsten koruma yazılımının gerçek zamanlı izlemeden hariç tutun:
     1. `%ProgramFiles%\Microsoft Azure Recovery Services Agent\bin\cbengine.exe`
 
@@ -207,4 +207,4 @@ MARS aracısının işlemiyle ilgili çakışmaları önlemek için virüsten ko
 
 - Desteklenen senaryolar ve sınırlamalar hakkında daha fazla bilgi için, [Mars aracısının destek matrisine](./backup-support-matrix-mars-agent.md)bakın.
 - [İsteğe bağlı yedekleme ilkesi saklama davranışı](backup-windows-with-mars-agent.md#set-up-on-demand-backup-policy-retention-behavior)hakkında daha fazla bilgi edinin.
-- Daha sık sorulan sorular için bkz. [Mars ARACıSı SSS](backup-azure-file-folder-backup-faq.md).
+- Daha sık sorulan sorular için bkz. [Mars ARACıSı SSS](backup-azure-file-folder-backup-faq.yml).

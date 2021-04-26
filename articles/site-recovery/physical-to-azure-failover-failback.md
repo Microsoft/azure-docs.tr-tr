@@ -2,18 +2,15 @@
 title: Site Recovery ile fiziksel sunucular için yük devretme ve yeniden çalışma ayarlama
 description: Fiziksel sunucuların yükünü Azure 'a devretmek ve Azure Site Recovery ile olağanüstü durum kurtarma için şirket içi siteye geri dönme hakkında bilgi edinin
 services: site-recovery
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: article
 ms.date: 12/17/2019
-ms.author: raynew
-ms.openlocfilehash: 2994f68e4159c7c4aa7d82bef7a5891deb5055a0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 68427d264b6d2eea1a38e3b8bc5273409221c126
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96017432"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579912"
 ---
 # <a name="fail-over-and-fail-back-physical-servers-replicated-to-azure"></a>Yük devretme ve geri dönme fiziksel sunucuları Azure 'a çoğaltma
 

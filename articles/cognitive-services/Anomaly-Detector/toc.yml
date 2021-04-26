@@ -3,82 +3,109 @@
 - name: Genel Bakış
   expanded: true
   items:
-    - name: Anomali Algılayıcısı API'si nedir?
+    - name: Anomali algılayıcısı nedir (çok değişen)?
+      href: overview-multivariate.md
+    - name: Anomali algılayıcısı nedir (Univariate)?
       href: overview.md
+    - name: Fiyatlandırma
+      href: 'https://aka.ms/adpricing'
 - name: Hızlı Başlangıçlar
-  expanded: true
   items:
-    - name: İstemci kitaplığı
-      items:
-        - name: Anomali Algılayıcısı istemci kitaplıkları
-          href: ./quickstarts/client-libraries.md
-- name: Öğreticiler
+    - name: Çok değişkenli istemci kitaplıkları
+      href: ./quickstarts/client-libraries-multivariate.md
+    - name: Tek istemci kitaplıkları
+      href: ./quickstarts/client-libraries.md
+- name: Örnekler
   items:
-    - name: Power BI kullanarak anomalileri toplu olarak görselleştirme
-      href: tutorials/batch-anomaly-detection-powerbi.md
+    - name: Etkileşimli Tanıtım (tek değişkenli)
+      href: 'https://aka.ms/adDemo'
+    - name: Jupyter Notebook (tek değişkenli)
+      href: 'https://github.com/Azure-Samples/AnomalyDetector/tree/master/ipython-notebook'
+    - name: Jupyter Notebook (çok değişen)
+      href: 'https://github.com/Azure-Samples/AnomalyDetector/blob/master/ipython-notebook/Multivariate%20API%20Demo%20Notebook.ipynb'
+    - name: Azure örneklerinden
+      href: 'https://docs.microsoft.com/samples/browse/?products=azure&terms=anomaly-detector'
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Verilerinizdeki anomalileri belirleme
       href: how-to/identify-anomalies.md
-    - name: IoT Edge'e dağıtma
-      href: how-to/deploy-anomaly-detection-on-iot-edge.md
-    - name: Kapsayıcıları kullanma
+    - name: Anomali algılayıcısı dağıtma
       items:
-        - name: Kapsayıcıları yükleme ve çalıştırma
-          displayName: 'docker, container, package, packaged app, swagger, open api, openapi, train, publish, az, acr, cli, tps, core, curl, try it now, import, pull'
-          href: anomaly-detector-container-howto.md
-        - name: Kapsayıcıları yapılandırma
-          href: anomaly-detector-container-configuration.md
-          displayName: 'docker, container, apikey, billing, log, mount, run, pull, port'
-        - name: Kapsayıcı örnekleri kullanma
-          href: how-to/deploy-anomaly-detection-on-container-instances.md
-        - name: Bilişsel Hizmetler kapsayıcıları belgeleri
-          href: ../containers/index.yml
+        - name: IoT Edge'e dağıtma
+          href: how-to/deploy-anomaly-detection-on-iot-edge.md
+        - name: Kapsayıcılar
+          items:
+            - name: Bilişsel Hizmetler kapsayıcıları belgeleri
+              href: 'https://docs.microsoft.com/azure/cognitive-services/containers/'
+            - name: Kapsayıcıları yükleme ve çalıştırma
+              displayName: 'docker, container, package, packaged app, swagger, open api, openapi, train, publish, az, acr, cli, tps, core, curl, try it now, import, pull'
+              href: anomaly-detector-container-howto.md
+            - name: Kapsayıcıları yapılandırma
+              href: anomaly-detector-container-configuration.md
+              displayName: 'docker, container, apikey, billing, log, mount, run, pull, port'
+            - name: Kapsayıcı örnekleri kullanma
+              href: how-to/deploy-anomaly-detection-on-container-instances.md
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/anomaly-detector/context/context
+        - name: Azure AD kimlik doğrulamasını kullanma
+          href: ../authentication.md?context=/azure/cognitive-services/anomaly-detector/context/context
 - name: Kavramlar
   items:
-    - name: Anomali algılayıcı API en iyi uygulamaları
+    - name: Anomali algılayıcı API en iyi uygulamaları (çoklu varilar)
+      href: concepts/best-practices-multivariate.md
+    - name: Anomali algılayıcı API en iyi uygulamaları (tek değişkenli)
       href: concepts/anomaly-detection-best-practices.md
+    - name: Tahmine dayalı bakım mimarisi (çok değişen)
+      href: concepts/multivariate-architecture.md
+    - name: Çok sayıda sorun giderme
+      href: concepts/troubleshoot.md
+    - name: Spectral artımı (SR) ve evsel sinir net (CNN) anomali algılama
+      href: 'https://arxiv.org/abs/1906.03821'
+    - name: Grafik dikkat ağı aracılığıyla çok sayıda zaman serisi anomali algılama
+      href: 'https://arxiv.org/abs/2009.02040'
+- name: Öğreticiler
+  items:
+    - name: Power BI kullanarak anomalileri toplu olarak görselleştirme
+      href: tutorials/batch-anomaly-detection-powerbi.md
 - name: Başvuru
   items:
-    - name: REST API Başvurusu
+    - name: Anomali algılayıcısı REST API
       href: 'https://aka.ms/anomaly-detector-rest-api-ref'
-    - name: SDK’lar
-      items:
-        - name: .NET
-          href: 'https://aka.ms/anomaly-detector-dotnet-ref'
-        - name: Başlayın
-          href: 'https://go.microsoft.com/fwlink/?linkid=2089915'
-        - name: Python
-          href: 'https://go.microsoft.com/fwlink/?linkid=2090370'
-        - name: Node.js
-          href: 'https://go.microsoft.com/fwlink/?linkid=2090788'
-    - name: Teknik bloglar
-      items:
-        - name: Azure Anomali Algılayıcısı API’sine giriş
-          href: 'https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Introducing-Azure-Anomaly-Detector-API/ba-p/490162'
-        - name: SR-CNN algoritmasına genel bakış
-          href: 'https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Overview-of-SR-CNN-algorithm-in-Azure-Anomaly-Detector/ba-p/982798'
-    - name: Tanıtım
-      items:
-        - name: Etkileşimli tanıtım
-          href: 'https://aka.ms/adDemo'
-        - name: Jupyter Notebook hakkında
-          href: 'https://github.com/Azure-Samples/AnomalyDetector/tree/master/ipython-notebook'
-    - name: KDD 2019’daki SR-CNN ile ilgili makale
-      href: 'https://arxiv.org/abs/1906.03821'
+    - name: Anomali algılayıcısı REST API Önizlemesi (çok değişen)
+      href: 'https://westus2.dev.cognitive.microsoft.com/docs/services/AnomalyDetector-v1-1-preview/operations/DetectAnomaly'
+    - name: .NET
+      href: 'https://www.nuget.org/packages/Azure.AI.AnomalyDetector/3.0.0-preview.3'
+    - name: Java
+      href: 'https://repo1.maven.org/maven2/com/azure/azure-ai-anomalydetector/3.0.0-beta.2/'
+    - name: Python
+      href: 'https://pypi.org/project/azure-ai-anomalydetector/3.0.0b3/'
+    - name: Node.js
+      href: 'https://www.npmjs.com/package/@azure/ai-anomaly-detector/v/3.0.0-beta.3'
 - name: Kaynaklar
   items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://aka.ms/adregion'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/anomaly-detector/context/context
-    - name: Fiyatlandırma
-      href: 'https://aka.ms/adpricing'
-    - name: Bölgesel kullanılabilirlik
-      href: 'https://aka.ms/adregion'
+    - name: Microsoft Learn modülleri
+      href: 'https://docs.microsoft.com/learn/modules/intro-to-anomaly-detector/'
     - name: Kullanıcı tarafından oluşturulan içerikler
       href: user-generated-content.md
     - name: Microsoft Teams üzerinde Anomali Algılayıcısı Danışmanları grubuna katılın
       href: 'https://aka.ms/adadvisorsjoin'
     - name: Çözüm mimarisi başvurusu
       href: 'https://azure.microsoft.com/solutions/architecture/anomaly-detector-process/'
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
+    - name: Azure güncelleştirmeleri
+      href: 'https://azure.microsoft.com/en-us/updates/?product=cognitive-services'
+    - name: Teknik bloglar
+      items:
+        - name: Azure Anomali Algılayıcısı API’sine giriş
+          href: 'https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Introducing-Azure-Anomaly-Detector-API/ba-p/490162'
+        - name: SR-CNN algoritmasına genel bakış
+          href: 'https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Overview-of-SR-CNN-algorithm-in-Azure-Anomaly-Detector/ba-p/982798'

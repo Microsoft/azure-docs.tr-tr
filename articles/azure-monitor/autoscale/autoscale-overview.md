@@ -5,10 +5,10 @@ ms.subservice: autoscale
 ms.topic: conceptual
 ms.date: 09/24/2018
 ms.openlocfilehash: 4727d562e21b92e58c8091f1161cf53198ff0b26
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101726011"
 ---
 # <a name="overview-of-autoscale-in-microsoft-azure"></a>Microsoft Azure otomatik ölçeklendirmeyi genel bakış
@@ -81,8 +81,8 @@ Kod örnekleri için bkz.
 * [VM Ölçek Kümeleri için Kaynak Yöneticisi şablonları kullanarak gelişmiş otomatik ölçeklendirme yapılandırması](autoscale-virtual-machine-scale-sets.md)  
 * [Otomatik ölçeklendirme REST API](/rest/api/monitor/autoscalesettings)
 
-## <a name="horizontal-vs-vertical-scaling"></a>Yatay vs dikey ölçekleme
-Otomatik ölçeklendirme yalnızca, sanal makine örneği sayısında artış ("Out") veya azalma ("ın") olan yatay olarak ölçeklendirilir.  Yükü işlemek için büyük olasılıkla binlerce VM çalıştırmanızı sağlayan bir bulut durumunda yatay daha esnektir.
+## <a name="horizontal-vs-vertical-scaling&quot;></a>Yatay vs dikey ölçekleme
+Otomatik ölçeklendirme yalnızca, sanal makine örneği sayısında artış (&quot;Out") veya azalma ("ın") olan yatay olarak ölçeklendirilir.  Yükü işlemek için büyük olasılıkla binlerce VM çalıştırmanızı sağlayan bir bulut durumunda yatay daha esnektir.
 
 Buna karşılık dikey ölçeklendirme farklıdır. Aynı sayıda VM 'yi tutar, ancak VM 'Leri daha fazla ("yukarı") veya daha az ("aşağı") güçlü hale getirir. Güç, bellek, CPU hızı, disk alanı vb. ile ölçülür.  Dikey ölçeklendirmenin daha fazla sınırlaması vardır. Daha büyük bir donanımın kullanılabilirliğine bağımlıdır ve bu, üst sınıra hızla ve bölgeye göre farklılık gösterebilir. Dikey ölçekleme Ayrıca genellikle bir VM 'nin durdurulup yeniden başlatılmasını gerektirir.
 

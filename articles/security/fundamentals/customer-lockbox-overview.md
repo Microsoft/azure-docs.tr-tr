@@ -7,27 +7,28 @@ ms.subservice: security-fundamentals
 ms.topic: article
 ms.author: terrylan
 manager: rkarlin
-ms.date: 02/19/2021
-ms.openlocfilehash: 0146e4fcaf70d37975dc587a266c47bf4b3f4601
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/05/2021
+ms.openlocfilehash: 80d1e4f39d69f761b801ccec834c0228057e4847
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103461683"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448534"
 ---
 # <a name="customer-lockbox-for-microsoft-azure"></a>Microsoft Azure için Müşteri Kasası
 
 > [!NOTE]
 > Bu özelliği kullanmak için, kuruluşunuzda en az **Geliştirici** düzeyi olan bir [Azure Destek planına](https://azure.microsoft.com/support/plans/) sahip olmanız gerekir.
 
-Microsoft Azure için Müşteri Kasası müşterilerin, müşteri verilerine yönelik erişim isteklerini gözden geçirmesi ve onaylaması için arabirim sağlar. Bu arabirim Microsoft mühendisinin destek isteği sırasında müşterinin verilerine erişmesi gerektiğinde kullanılır.
+Microsoft personeli ve alt işlemciler tarafından gerçekleştirilen çoğu işlem, destek ve sorun giderme, müşteri verilerine erişim gerektirmez. Bu tür erişimin gerekli olduğu nadir koşullarda, Microsoft Azure için Müşteri Kasası müşterilerin müşteri verileri erişim isteklerini gözden geçirmesi ve onaylaması veya reddetmesi için bir arabirim sağlar. Müşteri tarafından başlatılan bir destek biletine veya Microsoft tarafından tanımlanan bir soruna yanıt olarak, Microsoft mühendisinin müşteri verilerine erişmesi gereken durumlarda kullanılır.
 
 Bu makalede, Müşteri Kasası nasıl etkinleştirileceği ve kasa isteklerinin nasıl başlatıldığı, izlendiği ve daha sonraki incelemeler ve denetimler için nasıl depolandığı ele alınmaktadır.
 
 <a name='supported-services-and-scenarios-in-general-availability'></a><a name='supported-services-and-scenarios-in-preview'></a>
-## <a name="supported-services-and-scenarios-general-availability"></a>Desteklenen hizmetler ve senaryolar (genel kullanılabilirlik)
+## <a name="supported-services-and-scenarios"></a>Desteklenen hizmetler ve senaryolar
 
-Aşağıdaki hizmetler artık Müşteri Kasası için genel kullanıma sunulmuştur:
+### <a name="general-availability"></a>Genel kullanılabilirlik
+Aşağıdaki hizmetler Müşteri Kasası için genel kullanıma sunulmuştur:
 
 - Azure API Management
 - Azure App Service
@@ -49,6 +50,12 @@ Aşağıdaki hizmetler artık Müşteri Kasası için genel kullanıma sunulmuş
 - Azure Synapse Analytics
 - Azure 'daki sanal makineler (uzak masaüstü erişimini, bellek dökümüne erişimi ve yönetilen diskleri kapsayan)
 
+### <a name="public-preview"></a>Genel Önizleme
+Aşağıdaki hizmetler şu anda Müşteri Kasası için önizleme aşamasındadır:
+
+- Azure Machine Learning
+- Azure Batch
+
 ## <a name="enable-customer-lockbox"></a>Müşteri Kasası etkinleştir
 
 Artık Müşteri Kasası dikey penceresindeki [Yönetim modülünden](https://aka.ms/customerlockbox/administration) müşteri kasası etkinleştirebilirsiniz.  
@@ -66,7 +73,7 @@ Aşağıdaki adımlarda Müşteri Kasası isteği için tipik bir iş akışı a
 
 3. Azure Destek Mühendisi, hizmet isteğini inceler ve sorunu çözmeye yönelik sonraki adımları belirler.
 
-4. Destek Mühendisi standart araçları ve telemetrisi kullanarak sorunu gideremez bir sonraki adım, tam zamanında (JıT) erişim hizmeti kullanarak yükseltilmiş izinler isteğidir. Bu istek, Azure DevOps ekibine ilerletiğinden, bu istek orijinal destek mühendisinden veya farklı bir mühendisden olabilir.
+4. Destek Mühendisi standart araçları ve hizmet tarafından üretilen verileri kullanarak sorunu gideremez bir sonraki adım, tam zamanında (JıT) erişim hizmeti kullanarak yükseltilmiş izinler isteğidir. Bu istek, Azure DevOps ekibine ilerletiğinden, bu istek orijinal destek mühendisinden veya farklı bir mühendisden olabilir.
 
 5. Azure mühendisi tarafından erişim isteği gönderildikten sonra, tam zamanında hizmeti, isteği şu şekilde hesaba katmasının önüne değerlendirir:
     - Kaynağın kapsamı
@@ -129,8 +136,10 @@ Azure Güvenlik kıyaslaması 'nda Müşteri Kasası uygulanabilirliğini içere
 
 Müşteri Kasası istekleri aşağıdaki mühendislik desteği senaryolarında tetiklenmez:
 
-- Microsoft mühendisinin standart çalışma yordamlarının dışında kalan bir eylem gerçekleştirmesi gerekiyor. Örneğin beklenmeyen veya öngörülemeyen senaryolarda hizmetleri kurtarmak veya geri yüklemek için olabilir.
-- Microsoft mühendisi sorun giderme işlemi kapsamında Azure platformuna erişiyor ve yanlışlıkla müşteri verilere erişiyor. Örneğin Azure Ağ Ekibi sorun giderme işlemi yapıyor ve bu işlem sonucunda ağ cihazında bir paket yakalanıyor olabilir. Bu senaryoda, müşteri aktarım sırasında verileri şifreledikten sonra mühendis verileri okuyamaz.
+- Standart işletim yordamları dışında kalan acil durum senaryoları. Örneğin, bir ana hizmet kesintisi, beklenmeyen veya öngörülemeyen bir senaryoda Hizmetleri kurtarmak veya geri yüklemek için hemen ilgilenilmesi gerekir. Bu "kesme camı" olayları nadir ve çoğu örnekte çözümlemek üzere müşteri verilerine erişim gerekmez.
+- Microsoft mühendis, sorun gidermenin bir parçası olarak Azure platformuna erişir ve yanlışlıkla müşteri verilerine açık olarak sunulur. Örneğin Azure Ağ Ekibi sorun giderme işlemi yapıyor ve bu işlem sonucunda ağ cihazında bir paket yakalanıyor olabilir. Bu tür senaryolar, anlamlı miktarda müşteri verilerine erişim elde edilmesine neden olur. Müşteriler, verilerini transit ve bekleyen şifrelemeyle kullanarak daha fazla koruyabilir.
+
+Müşteri Kasası istekler, veriler için de dış yasal talepler tarafından tetiklenmez. Ayrıntılar için bkz. Microsoft Güven Merkezi 'nde [veriler için kamu istekleri](https://www.microsoft.com/trust-center/) tartışması.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

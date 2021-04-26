@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 02/25/2021
 ms.author: jeedes
 ms.openlocfilehash: c58566c628eedd1dbc3d86ae6a142156cbf31211
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104585239"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-boomi"></a>Öğretici: Boomı ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
@@ -155,17 +155,17 @@ Bu bölümde, B. Simon 'u, Boomi 'ya erişim vererek Azure çoklu oturum açma �
 
     f. **Kaydet** düğmesine tıklayın.
 
-### <a name="create-boomi-test-user"></a>Boomı test kullanıcısı oluştur
+### <a name="create-boomi-test-user&quot;></a>Boomı test kullanıcısı oluştur
 
 Azure AD kullanıcılarının, Boomı 'da oturum açmasını etkinleştirmek için, bu kullanıcıların Boomı 'da sağlanması gerekir. Boomi durumunda, sağlama işlemi el ile gerçekleştirilen bir görevdir.
 
-### <a name="to-provision-a-user-account-perform-the-following-steps"></a>Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:
+### <a name=&quot;to-provision-a-user-account-perform-the-following-steps&quot;></a>Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:
 
 1. Bir yönetici olarak Boomı şirket sitenizde oturum açın.
 
 1. Oturum açtıktan sonra **Kullanıcı yönetimi** ' ne gidin ve **Kullanıcılar**' a gidin.
 
-    ![Ekran görüntüsü, kullanıcıların seçtiği Kullanıcı Yönetimi sayfasını gösterir.](./media/boomi-tutorial/user.png "Kullanıcılar")
+    ![Ekran görüntüsü, kullanıcıların seçtiği Kullanıcı Yönetimi sayfasını gösterir.](./media/boomi-tutorial/user.png &quot;Kullanıcılar")
 
 1. Simge ' ye tıklayın **+**  ve **Kullanıcı rolleri ekle/koru** iletişim kutusu açılır.
 

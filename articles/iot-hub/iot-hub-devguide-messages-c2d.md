@@ -9,12 +9,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 03/15/2018
 ms.custom: mqtt, devx-track-azurecli
-ms.openlocfilehash: 154b496a6c14d307c09ddcd1b42bf4ba568cb315
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7bb3ca2b31eaef5c0639f30e0f2a329a37dfe7e0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104607900"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107761790"
 ---
 # <a name="send-cloud-to-device-messages-from-an-iot-hub"></a>IoT Hub 'ından buluttan cihaza iletileri gönderme
 
@@ -149,7 +149,7 @@ Yapılandırma seçeneklerini aşağıdaki yollarla ayarlayabilirsiniz:
 
     ![Portalda, buluttan cihaza mesajlaşma için yapılandırma seçeneklerini ayarlama](./media/iot-hub-devguide-messages-c2d/c2d-configuration-portal.png)
 
-* **Azure CLI**: [az IoT Hub Update](/cli/azure/iot/hub#az-iot-hub-update) komutunu kullanın:
+* **Azure CLI**: [az IoT Hub Update](/cli/azure/iot/hub#az_iot_hub_update) komutunu kullanın:
 
     ```azurecli
     az iot hub update --name {your IoT hub name} \

@@ -7,10 +7,10 @@ ms.service: hdinsight
 ms.topic: how-to
 ms.date: 01/05/2021
 ms.openlocfilehash: a1602f29a6d0066ec3c99e990532411621652c47
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98788138"
 ---
 # <a name="updating-net-for-apache-spark-to-version-v10--in-hdinsight"></a>HDInsight 'ta Apache Spark için .NET sürümü v 1.0 sürümüne güncelleştirme

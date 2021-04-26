@@ -9,12 +9,12 @@ ms.date: 07/06/2020
 ms.author: ericg
 ms.service: app-service
 ms.workload: web
-ms.openlocfilehash: acebc75b579b13ebb2cfad0e18057245781165ad
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 3c8d0927c3fb74c52e54ceb5ff8ba5c0361c4f46
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102175286"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787862"
 ---
 # <a name="create-an-app-service-app-and-deploy-private-endpoint-using-azure-cli"></a>Azure CLı kullanarak App Service uygulaması oluşturma ve özel uç nokta dağıtma
 
@@ -37,7 +37,7 @@ az group create --name myResourceGroup --location francecentral
 ## <a name="create-an-app-service-plan"></a>App Service Planı oluşturma
 
 Web uygulamanızı barındırmak için bir App Service planı oluşturmanız gerekir.
-[Az appservice plan Create](/cli/azure/appservice/plan#az-appservice-plan-create)komutuyla bir App Service planı oluşturun.
+[Az appservice plan Create](/cli/azure/appservice/plan#az_appservice_plan_create)komutuyla bir App Service planı oluşturun.
 Bu örnek, *P1V2* SKU 'su ve yalnızca bir Worker ile *francecına al* konumunda *Myappserviceplan* adlı App Service planı oluşturur: 
 
 ```azurecli-interactive
@@ -52,7 +52,7 @@ az appservice plan create \
 ## <a name="create-a-web-app"></a>Web Uygulaması oluşturma
 
 Artık bir App Service planınız olduğuna göre, bir Web uygulaması dağıtabilirsiniz.
-[Az appservice plan Create] ile bir Web uygulaması oluşturun (/cli/Azure/WebApp # az-WebApp-Create.
+[Az appservice plan Create] (/cli/Azure/WebApp # az_webapp_create ile bir Web uygulaması oluşturun.
 Bu örnek, *Myappserviceplan* adlı planda *mysitename* adlı bir Web uygulaması oluşturur
 
 ```azurecli-interactive
@@ -78,7 +78,7 @@ az network vnet create \
 
 ## <a name="configure-the-subnet"></a>Alt ağı yapılandırma 
 
-Özel uç nokta ağ ilkelerini devre dışı bırakmak için alt ağı güncelleştirmeniz gerekir. [Az Network VNET subnet Update](https://docs.microsoft.com/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update)Ile *mysubnet* adlı bir alt ağ yapılandırmasını güncelleştirin:
+Özel uç nokta ağ ilkelerini devre dışı bırakmak için alt ağı güncelleştirmeniz gerekir. [Az Network VNET subnet Update](https://docs.microsoft.com/cli/azure/network/vnet/subnet#az_network_vnet_subnet_update)Ile *mysubnet* adlı bir alt ağ yapılandırmasını güncelleştirin:
 
 ```azurecli-interactive
 az network vnet subnet update \

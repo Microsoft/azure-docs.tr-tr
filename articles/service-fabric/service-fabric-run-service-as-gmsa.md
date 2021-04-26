@@ -4,10 +4,10 @@ description: Bir hizmeti Service Fabric Windows tek başına kümesi üzerinde g
 ms.topic: how-to
 ms.date: 03/29/2018
 ms.openlocfilehash: 9750042764306c5df7a391429cc6926704db05ab
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "91838917"
 ---
 # <a name="run-a-service-as-a-group-managed-service-account"></a>Grup tarafından Yönetilen Hizmet Hesabı olarak hizmet çalıştırma

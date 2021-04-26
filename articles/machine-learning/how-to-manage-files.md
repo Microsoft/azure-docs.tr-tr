@@ -11,12 +11,12 @@ ms.subservice: core
 ms.topic: conceptual
 ms.custom: how-to
 ms.date: 02/05/2021
-ms.openlocfilehash: 474b3123513e4b8acf19ba9cdb42c3384ea3ced2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5bfa7d83c00386ae922f0eba221ad9f2f74639ae
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100101643"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106066152"
 ---
 # <a name="how-to-create-and-manage-files-in-your-workspace"></a>Çalışma alanınızda dosya oluşturma ve yönetme
 

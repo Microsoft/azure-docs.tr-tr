@@ -8,10 +8,10 @@ ms.topic: conceptual
 ms.date: 07/23/2020
 ms.custom: devx-track-java
 ms.openlocfilehash: 5473daedc8a7ad5a3b6ddffc65234160d4b3019d
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104878799"
 ---
 # <a name="app-and-deployment-in-azure-spring-cloud"></a>Azure yay bulutu 'nda uygulama ve dağıtım
@@ -29,7 +29,7 @@ Azure yay bulutu standart katmanı, bir uygulamanın bir üretim dağıtımına 
 ## <a name="app"></a>Uygulama
 Aşağıdaki özellikler/Özellikler uygulama düzeyinde tanımlanmıştır.
 
-| Özellikler | Açıklama |
+| Özellikler | Description |
 |:--|:----------------|
 | Genel</br>Uç Nokta | Uygulamaya erişmek için URL |
 | Özel</br>Etki alanı | Özel etki alanının güvenliğini sağlayan CNAME kaydı |

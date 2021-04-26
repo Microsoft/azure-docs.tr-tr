@@ -8,12 +8,12 @@ author: gachandw
 ms.author: gachandw
 ms.reviewer: mimckitt
 ms.custom: ''
-ms.openlocfilehash: 2650da2579f13ec1588af7a25e5b28908209bc82
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: ed2d48288bf97fe3ebaa1e8ffc1336d8a82d940e
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101700193"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107719034"
 ---
 # <a name="azure-cloud-services-extended-support-config-networkconfiguration-schema"></a>Azure Cloud Services (genişletilmiş destek) config networkConfiguration şeması
 
@@ -70,7 +70,7 @@ Aşağıdaki tablo, öğesinin alt öğelerini açıklar `NetworkConfiguration` 
 | Localnetworksite | İsteğe bağlı. Bulut hizmetinizi dağıtmak istediğiniz sanal ağ sitesinin adını belirtir. Bu ayar bir sanal ağ sitesi oluşturmaz. Sanal ağınız için Ağ dosyasında daha önce tanımlanan bir siteye başvurur. Bulut hizmeti yalnızca bir sanal ağın üyesi olabilir. Bu ayarı belirtmezseniz, bulut hizmeti sanal bir ağa dağıtılmaz. Sanal ağ sitesinin adı, öznitelik için bir dize tarafından tanımlanır `name` .|
 | Instanceaddress | İsteğe bağlı. Sanal ağdaki bir alt ağ veya alt ağ kümesi için bir rolün ilişkilendirmesini belirtir. Bir rol adını bir örnek adresiyle ilişkilendirdiğinizde, bu rolün ilişkilendirilmesini istediğiniz alt ağları belirtebilirsiniz. , `InstanceAddress` Bir alt ağ öğesi içerir. Alt ağ veya alt ağlarla ilişkili rolün adı, öznitelik için bir dize tarafından tanımlanır `roleName` .|
 | Alt ağ | İsteğe bağlı. Ağ yapılandırma dosyasındaki alt ağ adına karşılık gelen alt ağı belirtir. Alt ağın adı, öznitelik için bir dize tarafından tanımlanır `name` .|
-| Ayrıl | İsteğe bağlı. Dağıtımla ilişkilendirilmesi gereken ayrılmış IP adresini belirtir. Ayrılmış IP adresini oluşturmak için Create Ayrılmış IP adresini kullanmanız gerekir. Bir bulut hizmetindeki her dağıtım, ayrılmış bir IP adresi ile ilişkilendirilebilir. Ayrılmış IP adresinin adı, öznitelik için bir dize tarafından tanımlanır `name` .|
+| Ayrıl | İsteğe bağlı. Dağıtımla ilişkilendirilmesi gereken ayrılmış IP adresini belirtir. Ayrılmış bir IP için ayırma yönteminin, `Static` şablon ve PowerShell dağıtımları için olarak belirtilmesi gerekir. Bir bulut hizmetindeki her dağıtım, yalnızca bir ayrılmış IP adresi ile ilişkilendirilebilir. Ayrılmış IP adresinin adı, öznitelik için bir dize tarafından tanımlanır `name` .|
 
 ## <a name="see-also"></a>Ayrıca bkz.
 [Bulut hizmeti (genişletilmiş destek) yapılandırma şeması](schema-cscfg-file.md).

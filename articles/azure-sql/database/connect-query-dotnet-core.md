@@ -12,17 +12,17 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 05/29/2020
-ms.openlocfilehash: 1d25f43ef5a694d8b94710055bf1be72a7fcb45c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 221b69d428556b031efd3bd91e16d12cfeb71393
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97705226"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874810"
 ---
 # <a name="quickstart-use-net-core-c-to-query-a-database"></a>Hızlı başlangıç: bir veritabanını sorgulamak için .NET Core (C#) kullanma
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi-asa.md)]
 
-Bu hızlı başlangıçta, bir veritabanına bağlanmak için [.NET Core](https://www.microsoft.com/net/) ve C# Code 'u kullanacaksınız. Daha sonra verileri sorgulamak için bir Transact-SQL ifadesini çalıştıracaksınız.
+Bu hızlı başlangıçta, bir veritabanına bağlanmak için [.NET Core](https://dotnet.microsoft.com) ve C# Code 'u kullanacaksınız. Daha sonra verileri sorgulamak için bir Transact-SQL ifadesini çalıştıracaksınız.
 
 > [!TIP]
 > Aşağıdaki Microsoft Learn modülü, [Azure SQL veritabanında bir veritabanını sorgulayan bir ASP.NET uygulamasının nasıl geliştirileceği ve yapılandırılacağı](/learn/modules/develop-app-that-queries-azure-sql/) hakkında bilgi edinmenize yardımcı olur
@@ -32,7 +32,7 @@ Bu hızlı başlangıçta, bir veritabanına bağlanmak için [.NET Core](https:
 Bu hızlı başlangıcı tamamlamak için aşağıdakilere ihtiyacınız vardır:
 
 - Etkin aboneliği olan bir Azure hesabı. [Ücretsiz hesap oluşturun](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
-- [İşletim sisteminiz için .NET Core](https://www.microsoft.com/net/core) yüklendi.
+- [İşletim sisteminiz .NET Core SDK](https://dotnet.microsoft.com/download) yüklendi.
 - Sorgunuzu çalıştırabileceğiniz bir veritabanı. 
 
   [!INCLUDE[create-configure-database](../includes/create-configure-database.md)]

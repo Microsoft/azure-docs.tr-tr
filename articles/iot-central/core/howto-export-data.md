@@ -4,16 +4,16 @@ description: Yeni veri dışa aktarma kullanarak IoT verilerinizi Azure 'a ve ö
 services: iot-central
 author: viv-liu
 ms.author: viviali
-ms.date: 01/27/2021
+ms.date: 03/24/2021
 ms.topic: how-to
 ms.service: iot-central
 ms.custom: contperf-fy21q1, contperf-fy21q3
-ms.openlocfilehash: 7152012c7c4a342c7491e5f8b835eaede4269c4c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 7d57f24f8cb4b59ce9b9cd5853be11fb2d104d75
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100522623"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277904"
 ---
 # <a name="export-iot-data-to-cloud-destinations-using-data-export"></a>Veri dışarı aktarma kullanarak IoT verilerini bulut hedeflerine dışarı aktarma
 
@@ -24,7 +24,7 @@ Bu makalede, Azure IoT Central 'de yeni veri dışa aktarma özelliğinin nasıl
 
 Örneğin, şunları yapabilirsiniz:
 
-- Telemetri verilerini ve özellik değişikliklerini neredeyse gerçek zamanlı olarak JSON biçiminde dışarı aktarın.
+- Telemetri, özellik değişiklikleri, cihaz yaşam döngüsü ve cihaz şablonu yaşam döngüsü verilerini neredeyse gerçek zamanlı olarak JSON biçiminde dışarı aktarın.
 - Özel koşullara uyan verileri dışarı aktarmak için veri akışlarını filtreleyin.
 - Veri akışlarını cihazdan özel değerler ve özellik değerleriyle zenginleştirin.
 - Verileri Azure Event Hubs, Azure Service Bus, Azure Blob depolama ve Web kancası uç noktaları gibi hedeflere gönderin.
@@ -133,21 +133,19 @@ Verilerinizi dışarı aktarmak için bir hedef olduğuna göre, IoT Central uyg
     | :------------- | :---------- | :----------- |
     |  Telemetri | Neredeyse gerçek zamanlı olarak cihazlardan telemetri iletileri dışarı aktarın. Her bir dışarıya ileti, özgün cihaz iletisinin normalleştirilmiş, Normalleştirilmemiş.   |  [Telemetri ileti biçimi](#telemetry-format)   |
     | Özellik değişiklikleri | Değişiklikleri cihaz ve bulut özelliklerine neredeyse gerçek zamanlı olarak dışa aktarın. Salt okuma cihaz özellikleri için, bildirilen değerlerde yapılan değişiklikler verilir. Okuma-yazma özellikleri için hem bildirilen hem de istenen değerler verilir. | [Özellik değiştirme iletisi biçimi](#property-changes-format) |
+    | Cihaz yaşam döngüsü | Kaydedilen ve silinen olayları dışarı aktar. | [Cihaz yaşam döngüsü değişiklikleri ileti biçimi](#device-lifecycle-changes-format) |
+    | Cihaz şablonu yaşam döngüsü | Oluşturulan, güncellenen ve Silinen cihaz şablonu değişikliklerini dışarı aktarın. | [Cihaz şablonu yaşam döngüsü değişiklikleri ileti biçimi](#device-template-lifecycle-changes-format) | 
 
-<a name="DataExportFilters"></a>
-1. İsteğe bağlı olarak, dışarıya aktarılmış veri miktarını azaltmak için filtre ekleyin. Her bir veri dışa aktarma türü için farklı filtre türleri mevcuttur:
-
-    Telemetriyi filtrelemek için şunları yapabilirsiniz:
-
-    - Yalnızca cihaz adı, cihaz KIMLIĞI ve cihaz şablonu filtre koşulu ile eşleşen cihazlardan gelen telemetri dahil olmak üzere, dışarıya alınan akışı **filtreleyin** .
-    - Özellikleri **filtreleme** : **ad** açılan listesinde bir telemetri öğesi seçerseniz, bu akış yalnızca filtre koşulunu karşılayan telemetri içerir. **Ad** açılan listesinde bir cihaz veya bulut Özellik öğesi seçerseniz, bu akış yalnızca, filtre koşuluyla eşleşen özelliklere sahip cihazlardan telemetri içerir.
-    - **İleti özelliği filtresi**: cihaz SDK 'larını kullanan cihazlar her telemetri iletisinde *ileti özellikleri* veya *uygulama özellikleri* gönderebilir. Özellikler, özel tanımlayıcılarla iletiyi etiketleyerek anahtar-değer çiftlerinin bir çantadir. İleti özellik filtresi oluşturmak için Aradığınız ileti özelliği anahtarını girip bir koşul belirtin. Yalnızca belirtilen filtre koşuluyla eşleşen özelliklere sahip telemetri iletileri verilir. Şu dize karşılaştırma işleçleri destekleniyor: eşittir, eşit değildir, içerir, içermez, yok, yok. [IoT Hub belgelerinden uygulama özellikleri hakkında daha fazla bilgi edinin](../../iot-hub/iot-hub-devguide-messages-construct.md).
-
-    Özellik değişikliklerini filtrelemek için bir **yetenek filtresi** kullanın. Açılan listede bir özellik öğesi seçin. İçe aktarılmış akış yalnızca seçili özellikte filtre koşulunu karşılayan değişiklikleri içerir.
-
-<a name="DataExportEnrichmnents"></a>
-1. İsteğe bağlı olarak, daha fazla anahtar-değer çifti meta verileriyle dışarıya aktarılmış iletileri zenginleştirin. Aşağıdaki enzenginler, telemetri ve özellik değişiklikleri veri dışa aktarma türleri için kullanılabilir:
-
+1. İsteğe bağlı olarak, dışarıya aktarılmış veri miktarını azaltmak için filtre ekleyin. Her bir veri dışa aktarma türü için farklı filtre türleri mevcuttur: <a name="DataExportFilters"></a>
+    
+    | Veri türü | Kullanılabilir filtreler| 
+    |--------------|------------------|
+    |Telemetri|<ul><li>Cihaz adına, cihaz KIMLIĞINE ve cihaz şablonuna göre filtrele</li><li>Akışı yalnızca filtre koşullarını karşılayan telemetri içerecek şekilde filtrele</li><li>Akışı yalnızca filtre koşullarıyla eşleşen özelliklere sahip cihazlardan telemetri içerecek şekilde filtreleyin</li><li>Akışı yalnızca, filtre koşulunu karşılayan *ileti özelliklerine sahip Telemetriyi* içerecek şekilde filtreleyin. *İleti özellikleri* ( *uygulama özellikleri* olarak da bilinir), Isteğe bağlı olarak cihaz SDK 'larını kullanan cihazlar tarafından gönderilen her telemetri iletisindeki anahtar-değer çiftlerinin bir paketinde gönderilir. İleti özellik filtresi oluşturmak için Aradığınız ileti özelliği anahtarını girip bir koşul belirtin. Yalnızca belirtilen filtre koşuluyla eşleşen özelliklere sahip telemetri iletileri verilir. [IoT Hub belgelerinden uygulama özellikleri hakkında daha fazla bilgi edinin](../../iot-hub/iot-hub-devguide-messages-construct.md) </li></ul>|
+    |Özellik değişiklikleri|<ul><li>Cihaz adına, cihaz KIMLIĞINE ve cihaz şablonuna göre filtrele</li><li>Akışı yalnızca filtre koşullarını karşılayan özellik değişikliklerini içerecek şekilde filtrele</li></ul>|
+    |Cihaz yaşam döngüsü|<ul><li>Cihaz adına, cihaz KIMLIĞINE ve cihaz şablonuna göre filtrele</li><li>Akışı yalnızca filtre koşullarıyla eşleşen özelliklere sahip cihazlardan gelen değişiklikleri içerecek şekilde filtreleyin</li></ul>|
+    |Cihaz şablonu yaşam döngüsü|<ul><li>Cihaz şablonuna göre filtrele</li></ul>|
+    
+1. İsteğe bağlı olarak, daha fazla anahtar-değer çifti meta verileriyle dışarıya aktarılmış iletileri zenginleştirin. Aşağıdaki enzenginler, telemetri ve özellik değişiklikleri veri dışa aktarma türleri için kullanılabilir: <a name="DataExportEnrichmnents"></a>
     - **Özel dize**: her iletiye özel bir statik dize ekler. Herhangi bir anahtar girin ve herhangi bir dize değeri girin.
     - **Özellik**: geçerli cihazdaki bildirilen özelliği veya bulut özelliği değerini her iletiye ekler. Herhangi bir anahtar girin ve bir cihaz ya da bulut özelliği seçin. Verdiğiniz ileti, belirtilen özelliğe sahip olmayan bir cihazdan ise, bu, verdiğiniz ileti zenginleştirme almaz.
 
@@ -207,6 +205,7 @@ Her bir dışarıya gönderilen ileti, cihazın ileti gövdesinde gönderdiği t
 - `deviceId`: Telemetri iletisini gönderen cihazın KIMLIĞI.
 - `schema`: Yük şemasının adı ve sürümü.
 - `templateId`: Cihazla ilişkili cihaz şablonu KIMLIĞI.
+- `enqueuedTime`: IoT Central tarafından bu iletinin alındığı zaman.
 - `enrichments`: Dışa aktarma üzerinde herhangi bir zenginleştirme ayarlanır.
 - `messageProperties`: Cihazın iletiyle birlikte gönderdiği ek özellikler. Bu özellikler bazen *uygulama özellikleri* olarak adlandırılır. [IoT Hub belgelerinden daha fazla bilgi edinin](../../iot-hub/iot-hub-devguide-messages-construct.md).
 
@@ -349,6 +348,7 @@ Her ileti veya kayıt, bir cihaz veya bulut özelliğindeki bir değişikliği t
 - `messageType`: `cloudPropertyChange` , `devicePropertyDesiredChange` , Veya `devicePropertyReportedChange` .
 - `deviceId`: Telemetri iletisini gönderen cihazın KIMLIĞI.
 - `schema`: Yük şemasının adı ve sürümü.
+- `enqueuedTime`: IoT Central tarafından bu değişikliğin algılandığı zaman.
 - `templateId`: Cihazla ilişkili cihaz şablonu KIMLIĞI.
 - `enrichments`: Dışa aktarma üzerinde herhangi bir zenginleştirme ayarlanır.
 
@@ -377,13 +377,78 @@ Aşağıdaki örnek, Azure Blob depolamada alınan bir ihraç özelliği değiş
 }
 ```
 
+## <a name="device-lifecycle-changes-format"></a>Cihaz yaşam döngüsü değişiklikleri biçimi
+
+Her ileti veya kayıt tek bir cihazdaki bir değişikliği temsil eder. Verdiğiniz iletideki bilgiler şunları içerir:
+
+- `applicationId`: IoT Central uygulamasının KIMLIĞI.
+- `messageSource`: İleti kaynağı- `deviceLifecycle` .
+- `messageType`: `registered` Ya da `deleted` .
+- `deviceId`: Değiştirilen cihazın KIMLIĞI.
+- `schema`: Yük şemasının adı ve sürümü.
+- `templateId`: Cihazla ilişkili cihaz şablonu KIMLIĞI.
+- `enqueuedTime`: IoT Central içinde bu değişikliğin gerçekleştiği zaman.
+- `enrichments`: Dışa aktarma üzerinde herhangi bir zenginleştirme ayarlanır.
+
+Event Hubs ve Service Bus için, IoT Central yeni iletileri olay hub 'ınıza veya Service Bus kuyruğuna veya konuya neredeyse gerçek zamanlı olarak dışa aktarır. Her iletinin Kullanıcı özelliklerinde (uygulama özellikleri olarak da anılır),,, `iotcentral-device-id` `iotcentral-application-id` `iotcentral-message-source` ve `iotcentral-message-type` otomatik olarak eklenir.
+
+BLOB depolama için, iletiler toplu ve dakikada bir kez verilir.
+
+Aşağıdaki örnek, Azure Blob depolamada alınan bir aktarılmış cihaz yaşam döngüsü iletisini gösterir.
+
+```json
+{
+  "applicationId": "1dffa667-9bee-4f16-b243-25ad4151475e",
+  "messageSource": "deviceLifecycle",
+  "messageType": "registered",
+  "deviceId": "1vzb5ghlsg1",
+  "schema": "default@v1",
+  "templateId": "urn:qugj6vbw5:___qbj_27r",
+  "enqueuedTime": "2021-01-01T22:26:55.455Z",
+  "enrichments": {
+    "userSpecifiedKey": "sampleValue"
+  }
+}
+```
+## <a name="device-template-lifecycle-changes-format"></a>Cihaz şablonu yaşam döngüsü değişiklikleri biçimi
+
+Her ileti veya kayıt, tek bir yayımlanan cihaz şablonuna yapılan bir değişikliği temsil eder. Verdiğiniz iletideki bilgiler şunları içerir:
+
+- `applicationId`: IoT Central uygulamasının KIMLIĞI.
+- `messageSource`: İleti kaynağı- `deviceTemplateLifecycle` .
+- `messageType`: `created` , `updated` , Veya `deleted` .
+- `schema`: Yük şemasının adı ve sürümü.
+- `templateId`: Cihazla ilişkili cihaz şablonu KIMLIĞI.
+- `enqueuedTime`: IoT Central içinde bu değişikliğin gerçekleştiği zaman.
+- `enrichments`: Dışa aktarma üzerinde herhangi bir zenginleştirme ayarlanır.
+
+Event Hubs ve Service Bus için, IoT Central yeni iletileri olay hub 'ınıza veya Service Bus kuyruğuna veya konuya neredeyse gerçek zamanlı olarak dışa aktarır. Her iletinin Kullanıcı özelliklerinde (uygulama özellikleri olarak da anılır),,, `iotcentral-device-id` `iotcentral-application-id` `iotcentral-message-source` ve `iotcentral-message-type` otomatik olarak eklenir.
+
+BLOB depolama için, iletiler toplu ve dakikada bir kez verilir.
+
+Aşağıdaki örnek, Azure Blob depolamada alınan bir aktarılmış cihaz yaşam döngüsü iletisini gösterir.
+
+```json
+{
+  "applicationId": "1dffa667-9bee-4f16-b243-25ad4151475e",
+  "messageSource": "deviceTemplateLifecycle",
+  "messageType": "created",
+  "schema": "default@v1",
+  "templateId": "urn:qugj6vbw5:___qbj_27r",
+  "enqueuedTime": "2021-01-01T22:26:55.455Z",
+  "enrichments": {
+    "userSpecifiedKey": "sampleValue"
+  }
+}
+```
+
 ## <a name="comparison-of-legacy-data-export-and-data-export"></a>Eski veri dışa aktarma ve veri dışa aktarma karşılaştırması
 
 Aşağıdaki tabloda, [eski veri dışa aktarma](howto-export-data-legacy.md) ve yeni veri dışa aktarma özellikleri arasındaki farklar gösterilmektedir:
 
 | Özellikler  | Eski veri dışa aktarma | Yeni veri dışa aktarma |
 | :------------- | :---------- | :----------- |
-| Kullanılabilir veri türleri | Telemetri, cihazlar, cihaz şablonları | Telemetri, özellik değişiklikleri |
+| Kullanılabilir veri türleri | Telemetri, cihazlar, cihaz şablonları | Telemetri, özellik değişiklikleri, cihaz yaşam döngüsü değişiklikleri, cihaz şablonu yaşam döngüsü değişiklikleri |
 | Filtreleme | Yok | , Dışarıya aktarılmış veri türüne bağlıdır. Telemetri için telemetri, ileti özellikleri, özellik değerleri ile filtreleme |
 | Zenginleştirmeleri | Yok | Cihazdaki özel bir dize veya özellik değeri ile zenginleştirme |
 | Hedefler | Azure Event Hubs, Azure Service Bus kuyruklar ve konular, Azure Blob depolama | Eski veri dışa aktarma ve Web kancaları ile aynı|

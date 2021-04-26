@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 07/02/2020
 ms.author: sngun
 ms.reviewer: sngun
-ms.openlocfilehash: 1b47ad27abbe59eceabd15d091f88f4659d8dad6
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 592a9b89379094c88881c3c8485c7e38a1613b34
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102486395"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219493"
 ---
 # <a name="global-data-distribution-with-azure-cosmos-db---under-the-hood"></a>Azure Cosmos DB ile küresel veri dağıtımı-
 [!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
@@ -61,7 +61,7 @@ Hizmet, Cosmos veritabanlarınızı tek bir yazma bölgesiyle veya birden fazla 
 
 ## <a name="conflict-resolution"></a>Çakışma çözümü
 
-Güncelleştirme yayma, çakışma çözümü ve küçük önem derecesine yönelik tasarımımız, [epidemıc algoritmalarından](https://www.cs.utexas.edu/~lorenzo/corsi/cs395t/04S/notes/naor98load.pdf) ve [Bayou](https://zoo.cs.yale.edu/classes/cs422/2013/bib/terry95managing.pdf) sisteminde yer alan önceki çalışmalardan sorumludur. Fikirlerin çekirdekleri ilerlediklerinde ve Cosmos DB sistem tasarımına iletişim kurmak için uygun bir başvuru çerçevesi sağlarken, bunları Cosmos DB sistemine uyguladığımız için de önemli bir dönüşüm de gerçekleştirdi. Bu işlem, önceki sistemler kaynak İdaresi ile veya Cosmos DB çalışması gereken ölçeklendirmeye veya özellikleri (örneğin, sınırlı stalet tutarlılığı) ve Cosmos DB müşterilerine sunduğu sıkı ve kapsamlı SLA 'Ları sağlamak için gereklidir.  
+Güncelleştirme yayma, çakışma çözümü ve küçük önem derecesine yönelik tasarımımız, [epidemıc algoritmalarından](https://www.cs.utexas.edu/~lorenzo/corsi/cs395t/04S/notes/naor98load.pdf) ve [Bayou](https://people.cs.umass.edu/~mcorner/courses/691M/papers/terry.pdf) sisteminde yer alan önceki çalışmalardan sorumludur. Fikirlerin çekirdekleri ilerlediklerinde ve Cosmos DB sistem tasarımına iletişim kurmak için uygun bir başvuru çerçevesi sağlarken, bunları Cosmos DB sistemine uyguladığımız için de önemli bir dönüşüm de gerçekleştirdi. Bu işlem, önceki sistemler kaynak İdaresi ile veya Cosmos DB çalışması gereken ölçeklendirmeye veya özellikleri (örneğin, sınırlı stalet tutarlılığı) ve Cosmos DB müşterilerine sunduğu sıkı ve kapsamlı SLA 'Ları sağlamak için gereklidir.  
 
 Bölüm kümesinin birden çok bölgeye dağıtıldığını ve verileri belirli bir bölüm kümesini kapsayan fiziksel bölümler arasında çoğaltmak için Cosmos DBs (çok bölgeli yazma) çoğaltma protokolünü geri çekin. Her fiziksel bölüm (bir bölüm kümesi), yazma işlemlerini kabul eder ve genellikle bu bölgeye yerel olan istemcilere okuma işlemleri yapar. Bir bölgedeki fiziksel bölüm tarafından kabul edilen yazma işlemleri, istemciye alınmadan önce fiziksel bölüm içinde yüksek oranda kullanılabilir hale getirilir. Bunlar belirsiz yazmalar ve bölüm kümesi içindeki diğer fiziksel bölümlere, bir entropi koruma kanalı kullanılarak dağıtılır. İstemciler, istek üst bilgisini geçirerek geçici veya kaydedilmiş yazma işlemleri yapabilir. Entropi yayılması (yayma sıklığı dahil), Bölüm kümesinin topolojisine, fiziksel bölümlerin bölgesel yakınlığının ve yapılandırılan tutarlılık düzeyinin temel alınarak dinamik bir değer. Bölüm kümesi içinde, Cosmos DB dinamik olarak seçilmiş bir Arbiter bölümü ile birincil bir kayıt düzeni izler. Arbiter seçimi dinamiktir ve, Bölüm kümesinin, kaplamanın topolojisine göre yeniden yapılandırılmasına ilişkin integral bir parçasıdır. Kaydedilmiş yazmaları (çok satırlı/toplu güncelleştirmeler dahil) sıralı olarak garanti edilir. 
 

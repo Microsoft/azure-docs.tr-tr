@@ -8,32 +8,32 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 8bb1f8bb2aaeab88e5a9ea19534c8983af8c1626
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6c80b9fd65588fe6c390f44b34509168f3bfb549
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97895759"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077695"
 ---
 # <a name="ensure-application-high-availability-when-running-in-vmware-on-azure"></a>Azure 'da VMware 'de çalışırken uygulamanın yüksek oranda kullanılabilir olmasını sağlayın
 
 CloudSimple çözümü, Azure ortamında VMware üzerinde çalışan uygulamalarınız için yüksek kullanılabilirlik sağlar. Aşağıdaki tabloda hata senaryoları ve ilişkili yüksek kullanılabilirlik özellikleri listelenmektedir.
 
-| Hata senaryosu | Uygulama korumalı mı? | Platform HA özelliği | VMware HA özelliği | Azure HA özelliği |
------------- | ------------- | ------------ | ------------ | ------------- |
-| Disk hatası | EVET | Hatalı düğümü hızlı değiştirme | [VSAN varsayılan depolama Ilkesi hakkında](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.virtualsan.doc/GUID-C228168F-6807-4C2A-9D74-E584CAF49A2A.html) |
-| Fan hatası | EVET | Gereksiz fanlar, başarısız olan düğümün hızlı değiştirilmesi |  |  |
-| NIC hatası | EVET | Yedekli NIC, başarısız olan düğümün hızlı değiştirilmesi
-| Konak güç hatası | EVET | Yedekli güç kaynağı |  |  |
-| ESXi ana bilgisayar arızası | EVET | Hatalı düğümü hızlı değiştirme | [Yüksek kullanılabilirlik VMware vSphere](https://www.vmware.com/products/vsphere/high-availability.html) |  |  |
-| VM hatası | EVET | [Yük dengeleyiciler](load-balancers.md)  | [Yüksek kullanılabilirlik VMware vSphere](https://www.vmware.com/products/vsphere/high-availability.html) | Durum bilgisiz VMware VM 'Leri için Azure Load Balancer |
-| Yaprak anahtar bağlantı noktası hatası | EVET | Yedekli NIC |  |  |
-| Yaprak anahtar hatası | EVET | Yedekli yaprak anahtarları |  |  |
-| Raf hatası | EVET | Yerleştirme grupları |  |  |
-| Şirket içi DC 'ye ağ bağlantısı | EVET  | Yedekli ağ hizmetleri |  | Yedekli ER devreleri |
-| Azure ile ağ bağlantısı | EVET | |  | Yedekli ER devreleri |
-| Veri merkezi hatası | EVET |  |  | Kullanılabilirlik alanları |
-| Bölgesel hata | EVET  |  |  | Azure bölgeleri |
+|  Hata senaryosu  |  Uygulama korumalı mı?  |  Platform HA özelliği  |  VMware HA özelliği  |  Azure HA özelliği  |
+|----------------------------------------|------------------------|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
+|  Disk hatası  |  EVET  |  Hatalı düğümü hızlı değiştirme  |  [VSAN varsayılan depolama Ilkesi hakkında](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.virtualsan.doc/GUID-C228168F-6807-4C2A-9D74-E584CAF49A2A.html)  |  |
+|  Fan hatası  |  EVET  |  Gereksiz fanlar, başarısız olan düğümün hızlı değiştirilmesi  |  |  |
+|  NIC hatası  |  EVET  |  Yedekli NIC, başarısız olan düğümün hızlı değiştirilmesi  |  |  |
+|  Konak güç hatası  |  EVET  |  Yedekli güç kaynağı  |  |  |
+|  ESXi ana bilgisayar arızası  |  EVET  |  Hatalı düğümü hızlı değiştirme  |  [Yüksek kullanılabilirlik VMware vSphere](https://www.vmware.com/products/vsphere/high-availability.html)  |  |
+|  VM hatası  |  EVET  |  [Yük dengeleyiciler](load-balancers.md)  |  [Yüksek kullanılabilirlik VMware vSphere](https://www.vmware.com/products/vsphere/high-availability.html)  |  Durum bilgisiz VMware VM 'Leri için Azure Load Balancer  |
+|  Yaprak anahtar bağlantı noktası hatası  |  EVET  |  Yedekli NIC  |  |  |
+|  Yaprak anahtar hatası  |  EVET  |  Yedekli yaprak anahtarları  |  |  |
+|  Raf hatası  |  EVET  |  Yerleştirme grupları  |  |  |
+|  Şirket içi DC 'ye ağ bağlantısı  |  EVET  |  Yedekli ağ hizmetleri  |  |  Yedekli ER devreleri  |
+|  Azure ile ağ bağlantısı  |  EVET  |  |  |  Yedekli ER devreleri  |
+|  Veri merkezi hatası  |  EVET  |  |  |  Kullanılabilirlik alanları  |
+|  Bölgesel hata  |  EVET  |  |  |  Azure bölgeleri  |
 
 CloudSimple tarafından sağlanan Azure VMware çözümü, aşağıdaki yüksek kullanılabilirlik özelliklerini sağlar.
 

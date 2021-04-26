@@ -15,13 +15,13 @@ ms.workload: identity
 ms.date: 01/29/2021
 ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.custom: devx-track-azurecli
-ms.openlocfilehash: 61e83bd27c9434c4222e0161e3b643b183d1aa84
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 59366f1a5b4bd0572af1b36f7be2f5bf91392660
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99090969"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784794"
 ---
 # <a name="how-to-use-managed-identities-for-azure-resources-on-an-azure-vm-for-sign-in"></a>Azure VM 'de oturum açma için Azure kaynakları için Yönetilen kimlikler kullanma 
 
@@ -49,7 +49,7 @@ Azure kaynakları için Yönetilen kimlikler, VM 'deki [Azure kaynakları için 
 
 Azure kaynakları için Yönetilen kimlikler sayesinde, komut dosyası istemciniz artık Azure kaynakları hizmet sorumlusu için Yönetilen kimlikler altında oturum açabilse de bunu yapması gerekmez. 
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 Aşağıdaki betik, aşağıdakilerin nasıl yapılacağını göstermektedir:
 

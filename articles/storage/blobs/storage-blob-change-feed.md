@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: storage
 ms.subservice: blobs
 ms.reviewer: sadodd
-ms.openlocfilehash: 43aa86504d265927cb94e4333f86bb9cc9d2e2ea
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 6da83ceb6d8ee51916d25949309d7ddfba0e4b30
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101095562"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107503612"
 ---
 # <a name="change-feed-support-in-azure-blob-storage"></a>Azure Blob depolamada akış desteğini değiştirme
 
@@ -67,14 +67,11 @@ Değişiklik akışını etkinleştirdiğinizde göz önünde bulundurmanız ger
 Azure portal kullanarak depolama hesabınızda değişiklik akışını etkinleştirin:
 
 1. [Azure Portal](https://portal.azure.com/)depolama hesabınızı seçin.
+1. **Veri yönetimi** altında **veri koruma** seçeneğine gidin.
+1. **İzleme** altında **BLOB değişiklik akışını etkinleştir**' i seçin.
+1. Veri koruma ayarlarınızı onaylamak için **Kaydet** düğmesini seçin.
 
-2. **BLOB hizmeti** altındaki **veri koruma** seçeneğine gidin.
-
-3. **BLOB değişiklik akışı** altında **etkin** ' e tıklayın.
-
-4. **Veri koruma** ayarlarınızı onaylamak için **Kaydet** düğmesini seçin.
-
-    ![Veri koruma ayarlarını gösteren ekran görüntüsü.](media/soft-delete-blob-enable/storage-blob-soft-delete-portal-configuration.png)
+    :::image type="content" source="media/storage-blob-change-feed/change-feed-enable-portal.png" alt-text="Azure portal değişiklik akışını etkinleştirmeyi gösteren ekran görüntüsü":::
 
 ### <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 

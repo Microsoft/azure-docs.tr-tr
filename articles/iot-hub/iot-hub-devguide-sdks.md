@@ -12,12 +12,12 @@ ms.custom:
 - mqtt
 - 'Role: IoT Device'
 - 'Role: Cloud Development'
-ms.openlocfilehash: d35535c87ca20bfc573995bf15f79bc149619776
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 1a94bdfd03d4e48495601b5c494204ac1ad50378
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102611598"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168340"
 ---
 # <a name="understand-and-use-azure-iot-hub-sdks"></a>Azure IoT Hub SDK'larını anlama ve kullanma
 
@@ -41,7 +41,7 @@ Ayrıca, [cihaz sağlama hizmeti](../iot-dps/about-iot-dps.md)ile çalışmaya y
 
 SDK 'lar için desteklenen platformlar [Azure IoT SDK 'Ları platformu desteği](iot-hub-device-sdk-platform-support.md)' nde bulunabilir.
 
-Belirli donanım cihazlarıyla SDK uyumluluğu hakkında daha fazla bilgi için bkz. [IoT Için Azure Sertifikalı cihaz kataloğu](https://catalog.azureiotsolutions.com/) veya tek depo.
+Belirli donanım cihazlarıyla SDK uyumluluğu hakkında daha fazla bilgi için bkz. [IoT Için Azure Sertifikalı cihaz kataloğu](https://devicecatalog.azure.com/) veya tek depo.
 
 ## <a name="azure-iot-hub-device-sdks"></a>Azure IoT Hub cihaz SDK 'Ları
 

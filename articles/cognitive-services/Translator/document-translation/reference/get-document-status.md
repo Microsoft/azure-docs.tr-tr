@@ -1,5 +1,5 @@
 ---
-title: Belge çevirisi belge durumunu Al yöntemi
+title: Belge durumunu Al yöntemi
 titleSuffix: Azure Cognitive Services
 description: Belge durumunu Al yöntemi, belirli bir belgenin durumunu döndürür.
 services: cognitive-services
@@ -8,16 +8,16 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: reference
-ms.date: 03/25/2021
+ms.date: 04/21/2021
 ms.author: v-jansk
-ms.openlocfilehash: 79bc3d076c1a7e164cab9c3231b29be84370e04a
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: 4c6e82af46a012ad53dfa1cc1db1252ef2c0443e
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105613154"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864946"
 ---
-# <a name="document-translation-get-document-status"></a>Belge çevirisi: belge durumunu al
+# <a name="get-document-status"></a>Belge durumunu al
 
 Belge durumunu Al yöntemi, belirli bir belgenin durumunu döndürür. Yöntemi, istek KIMLIĞI ve belge KIMLIĞI temelinde belirli bir belge için çeviri durumunu döndürür.
 

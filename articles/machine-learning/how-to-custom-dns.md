@@ -8,19 +8,19 @@ ms.subservice: core
 ms.reviewer: larryfr
 ms.author: jhirono
 author: jhirono
-ms.date: 03/12/2021
+ms.date: 04/01/2021
 ms.topic: conceptual
 ms.custom: how-to, contperf-fy21q3
-ms.openlocfilehash: c3f21471e486f88daf8d79b74633c076d27ac8e2
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 9021c3f70c9fc053998d1b31271a1ca3b0124b4d
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105557590"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106169547"
 ---
 # <a name="how-to-use-your-workspace-with-a-custom-dns-server"></a>Çalışma alanınızı özel DNS sunucusuyla kullanma
 
-Özel bir uç nokta ile Azure Machine Learning çalışma alanı kullanırken, [DNS ad çözümlemesini işlemek için birkaç yol](../private-link/private-endpoint-dns.md)vardır. Varsayılan olarak, Azure, çalışma alanınız ve özel uç noktanız için ad çözümlemesini otomatik olarak işler. Bunun yerine _kendi özel DNS sunucunuzu kullanıyorsanız_, DNS girdilerini el ile oluşturmanız veya çalışma alanı için koşullu ileticiler kullanmanız gerekir.
+Özel bir uç nokta ile Azure Machine Learning çalışma alanı kullanırken, [DNS ad çözümlemesini işlemek için birkaç yol](../private-link/private-endpoint-dns.md)vardır. Varsayılan olarak, Azure, çalışma alanınız ve özel uç noktanız için ad çözümlemesini otomatik olarak işler. Bunun yerine __kendi özel DNS sunucunuzu kullanıyorsanız__, el ile DNS girişleri oluşturmanız veya çalışma alanı için koşullu ileticiler kullanmanız gerekir.
 
 > [!IMPORTANT]
 > Bu makalede, bu girdilerin yalnızca tam etki alanı adını (FQDN) ve IP adreslerini bulmak için DNS kayıtlarını yapılandırma hakkında bilgi sağlamayan bilgiler yer alır. Kayıt ekleme hakkında bilgi edinmek için DNS yazılımınızın belgelerine bakın.
@@ -46,11 +46,12 @@ Aşağıdaki liste, bir ortak bölgedeyse, çalışma alanınız tarafından kul
 * `ml-<workspace-name, truncated>-<region>-<workspace-guid>.notebooks.azure.net`
 
     > [!NOTE]
-    > Bu FQDN için çalışma alanı adı kesilebilir. En az 63 karakterden oluşan FQDN 'yi korumak için kesme yapılır.
+    > Bu FQDN için çalışma alanı adı kesilebilir. Kesme, 63 karakter tutmak için yapılır `ml-<workspace-name, truncated>-<region>-<workspace-guid>` .
 * `<instance-name>.<region>.instances.azureml.ms`
 
     > [!NOTE]
-    > İşlem örneklerine yalnızca sanal ağ içinden erişilebilir.
+    > * İşlem örneklerine yalnızca sanal ağ içinden erişilebilir.
+    > * Bu FQDN için IP adresi, işlem örneğinin IP 'si **değil** . Bunun yerine, çalışma alanı özel uç noktasının (girdilerin IP 'si) özel IP adresini kullanın `*.api.azureml.ms` .
 
 ## <a name="azure-china-21vianet-regions"></a>Azure Çin 21Vianet bölgeleri
 
@@ -61,7 +62,7 @@ Aşağıdaki FQDN 'Ler Azure Çin 21Vianet bölgeleri içindir:
 * `ml-<workspace-name, truncated>-<region>-<workspace-guid>.notebooks.chinacloudapi.cn`
 
     > [!NOTE]
-    > Bu FQDN için çalışma alanı adı kesilebilir. En az 63 karakterden oluşan FQDN 'yi korumak için kesme yapılır.
+    > Bu FQDN için çalışma alanı adı kesilebilir. Kesme, 63 karakter tutmak için yapılır `ml-<workspace-name, truncated>-<region>-<workspace-guid>` .
 * `<instance-name>.<region>.instances.ml.azure.cn`
 ## <a name="find-the-ip-addresses"></a>IP adreslerini bulma
 
@@ -108,7 +109,7 @@ Tüm yöntemlerden döndürülen bilgiler aynıdır; kaynaklar için FQDN ve öz
 > * `<workspace-GUID>.workspace.<region>.experiments.azureml.net`
 > * `<workspace-GUID>.workspace.<region>.modelmanagement.azureml.net`
 > * `<workspace-GUID>.workspace.<region>.aether.ms`
-> * İşlem örneğiniz varsa, öğesini kullanın; `<instance-name>.<region>.instances.azureml.ms` burada, `<instance-name>` işlem örneğinizin adıdır. Lütfen çalışma alanı özel uç noktasının özel IP adresini kullanın. Lütfen işlem örneğine yalnızca sanal ağ içinden erişilebilir.
+> * İşlem örneğiniz varsa, öğesini kullanın; `<instance-name>.<region>.instances.azureml.ms` burada, `<instance-name>` işlem örneğinizin adıdır. Çalışma alanı özel uç noktasının özel IP adresini kullanın. İşlem örneğine yalnızca sanal ağ içinden erişilebilir.
 >
 > Bu IP adreslerinin tümü için, `*.api.azureml.ms` önceki adımlardan döndürülen girişlerle aynı adresi kullanın.
 

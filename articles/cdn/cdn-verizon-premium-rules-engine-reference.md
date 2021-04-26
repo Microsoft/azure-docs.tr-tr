@@ -67,7 +67,7 @@ Bir ilkenin üretim veya hazırlama ortamına uygulanabileceğini içeren iş ak
 
 ![İlke dağıtımı iş akışı](./media/cdn-verizon-premium-rules-engine-reference/policy-deployment-workflow.png)
 
-|Adım |Açıklama |
+|Adım |Description |
 |---------|---------|
 |[Taslak Oluştur](https://docs.vdms.com/cdn/index.html#HRE/AdministeringDraftsandRules.htm#Create)    |    Bir taslak, içeriğinize yönelik isteklerin CDN tarafından nasıl işleneceğini tanımlayan bir kurallar kümesinden oluşur.     |
 |Taslağı kilitle   |     Bir taslak sonlandırıldıktan sonra kilitleme ve salt okunurdur bir ilkeye dönüştürülmesi gerekir.    |
@@ -105,7 +105,7 @@ deeri | Tek bir teklifin özel anlamı yoktur. Ancak, bir değerin değişmez de
 
 Normal ifadeler, metin değeri içinde aranan bir model tanımlar. Normal ifade gösterimi çeşitli simgelere özgü anlamları tanımlar. Aşağıdaki tabloda, özel karakterlerin, normal ifadeleri destekleyen koşullar ve özellikler ile nasıl işlendiği gösterilmektedir.
 
-Özel karakter | Açıklama
+Özel karakter | Description
 ------------------|------------
 \ | Ters eğik çizgi, bu karakterin normal ifade anlamı yerine değişmez değer olarak işlenmesine neden olan karakteri izler. Örneğin, aşağıdaki sözdizimi bir yıldız işaretine çıkar: `\*`
 % | Bir yüzde sembolünün anlamı, kullanımına bağlıdır.<br/><br/> `%{HTTPVariable}`: Bu sözdizimi bir HTTP değişkenini tanımlar.<br/>`%{HTTPVariable%Pattern}`: Bu sözdizimi bir HTTP değişkenini ve sınırlayıcı olarak tanımlamak için bir yüzde simgesi kullanır.<br />`\%`: Bir yüzde sembolünü kaçış, bir sabit değer olarak veya URL kodlamasının (örneğin,) kullanılmasına izin verir `\%20` .

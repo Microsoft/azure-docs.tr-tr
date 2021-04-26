@@ -8,12 +8,12 @@ ms.collection: linux
 ms.topic: article
 ms.date: 06/01/2020
 ms.author: kegorman
-ms.openlocfilehash: b27db94775e2ba8275dbdab4bf5bd61cc0fdf5c8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 04a3fb9e4e7dd1d498714cd3b2ebd4c5f6b55bec
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101666879"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107210355"
 ---
 # <a name="oracle-application-solutions-integrating-microsoft-azure-and-oracle-cloud-infrastructure"></a>Microsoft Azure ve Oracle bulut altyapısını tümleştirerek Oracle uygulama çözümleri
 
@@ -50,6 +50,8 @@ Aşağıdaki diyagramda bağlı çözüme üst düzey bir genel bakış sunulmak
 * Azure Batı Avrupa (WestEurope) & OCı Amsterdam (Hollanda kuzeybatı)
 * Azure Japonya Doğu (JapanEast) & OCı Tokyo (Japonya Doğu)
 * Azure Batı ABD (WestUS) & OCı San Jode (ABD Batı)
+* Almanya Orta Batı (Frankfurt) & OCı Almanya Orta (Frankfurt)
+
 
 ## <a name="networking"></a>Ağ
 

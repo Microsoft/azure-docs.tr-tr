@@ -10,28 +10,28 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 10/21/2020
+ms.date: 03/26/2021
 ms.author: duau
-ms.openlocfilehash: 6c6d33a36c4a0b71932e8c19c8f6dd105c33817c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4291a7d46c723f799cf9d09ca0e7a3f6d614971f
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101740792"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389749"
 ---
 # <a name="tutorial-configure-https-on-a-front-door-custom-domain"></a>Öğretici: Front Door özel etki alanı üzerinde HTTPS'yi yapılandırma
 
-Bu öğreticide ön uç konakları bölümü altında Front Door’unuzla ilişkili özel bir etki alanı için HTTPS protokolünün nasıl etkinleştirileceği gösterilir. Özel etki alanınızda HTTPS protokolünü kullanarak (örneğin, https:\//www.contoso.com), hassas veriler internet üzerinden gönderildiğinde bunların TLS/SSL şifrelemesi ile güvenli bir şekilde teslim edilmesini sağlarsınız. Web tarayıcınız HTTPS üzerinden bir web sitesine bağlanırken, web sitesinin güvenlik sertifikasını onaylar ve bu sertifikanın yasal bir sertifika yetkilisi tarafından verildiğini doğrular. Bu işlem güvenlik sağlar ve web uygulamalarınızı saldırılara karşı korur.
+Bu öğreticide ön uç konakları bölümü altında Front Door’unuzla ilişkili özel bir etki alanı için HTTPS protokolünün nasıl etkinleştirileceği gösterilir. Özel etki alanında HTTPS protokolünü kullanarak (örneğin, https: \/ /www.contoso.com), hassas verilerinizin internet üzerinden GÖNDERILDIĞINDE TLS/SSL şifrelemesi aracılığıyla güvenli bir şekilde teslim edildiğinden emin olursunuz. Web tarayıcınız HTTPS üzerinden bir web sitesine bağlanırken, web sitesinin güvenlik sertifikasını onaylar ve bu sertifikanın yasal bir sertifika yetkilisi tarafından verildiğini doğrular. Bu işlem güvenlik sağlar ve web uygulamalarınızı saldırılara karşı korur.
 
-Azure ön kapısı, varsayılan olarak ön kapı varsayılan ana bilgisayar adı üzerinde HTTPS 'yi destekler. Örneğin, bir ön kapı oluşturursanız (gibi `https://contoso.azurefd.net` ), https istekleri için otomatik olarak etkinleştirilir `https://contoso.azurefd.net` . Öte yandan, 'www.contoso.com' özel etki alanını ekledikten sonra bu ön uç konağı için HTTPS'yi etkinleştirmeniz gerekecektir.   
+Azure ön kapısı, varsayılan olarak ön kapı varsayılan ana bilgisayar adı üzerinde HTTPS 'yi destekler. Örneğin, bir ön kapı oluşturursanız (gibi `https://contoso.azurefd.net` ), https istekleri için otomatik olarak etkinleştirilir `https://contoso.azurefd.net` . Ancak, ' www.contoso.com ' özel etki alanını ekledikten sonra bu ön uç ana bilgisayarı için HTTPS 'yi de etkinleştirmeniz gerekir.   
 
 Özel HTTPS özelliğinin en önemli niteliklerinden bazıları şunlardır:
 
-- Ek ücret yoktur: Sertifika edinme veya yenileme işlemleri için herhangi bir maliyet söz konusu değildir ve HTTPS trafiği için ek ücret alınmaz. 
+- Ek maliyet yok: sertifika alma veya yenileme maliyetleri yoktur ve HTTPS trafiği için ek maliyet yoktur. 
 
 - Basit etkinleştirme: Tek tıklamayla sağlama özelliği [Azure portalından](https://portal.azure.com) kullanılabilir. Özelliği etkinleştirmek için REST API’yi veya diğer geliştirici araçlarını kullanabilirsiniz.
 
-- Eksiksiz sertifika yönetimi kullanılabilir: Sizin için tüm sertifika tedariki ve yönetimi gerçekleştirilir. Sertifikalar sona ermeden önce otomatik olarak sağlanır ve yenilenir. Bu da sertifika süre sonu nedeniyle hizmette yaşanabilecek kesinti risklerini ortadan kaldırır.
+- Eksiksiz sertifika yönetimi kullanılabilir: Sizin için tüm sertifika tedariki ve yönetimi gerçekleştirilir. Sertifikalar, süresi dolmak üzere otomatik olarak sağlanır ve yenilenir, bu da bir sertifikanın süresi dolduğunda hizmet kesintisi riskini ortadan kaldırır.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > [!div class="checklist"]
@@ -63,15 +63,15 @@ Azure ön kapısının yönettiği bir sertifika kullandığınızda, HTTPS öze
 
 2. Ön uç konakları listesinde, özel etki alanınızın eklenmesi için HTTPS’yi etkinleştirmek istediğiniz özel etki alanını seçin.
 
-3. **Özel etki alanı HTTPS’si** bölümünde **Etkin**’e tıklayın ve sertifika kaynağı olarak **Front Door ile yönetilen**’i seçin.
+3. **Özel etki alanı https** bölümü altında, **etkin**' i seçin ve sertifika kaynağı olarak **yönetilen ön kapı** ' ı seçin.
 
-4. Kaydet’e tıklayın.
+4. Kaydet’i seçin.
 
-5. [Etki alanını doğrulama](#validate-the-domain) adımına ilerleyin.
+5. [Etki alanını doğrulamaya](#validate-the-domain)devam edin.
 
 > [!NOTE]
-> AFD tarafından yönetilen sertifikalar için DigiCert 64 karakter sınırı zorlanır. Bu sınır aşılırsa doğrulama başarısız olur.
-
+> * AFD tarafından yönetilen sertifikalar için DigiCert 64 karakter sınırı zorlanır. Bu sınır aşılırsa doğrulama başarısız olur.
+> * Ön kapı yönetilen sertifikası aracılığıyla HTTPS 'yi etkinleştirmek, tepesinde/root etki alanları için desteklenmez (örnek: contoso.com). Bu senaryo için kendi sertifikanızı kullanabilirsiniz.  Daha fazla ayrıntı için lütfen seçenek 2 ile devam edin.
 
 ### <a name="option-2-use-your-own-certificate"></a>Seçenek 2: Kendi sertifikanızı kullanın
 
@@ -128,30 +128,27 @@ Azure Key Vault hesabınızdaki sertifikalara erişmek için Azure ön kapısın
 
 3. Sertifika yönetimi türü bölümünde **Kendi sertifikamı kullan**’ı seçin. 
 
-4. Azure ön kapısı, Key Vault hesabının aboneliğinin ön kapasitenizin ile aynı olmasını gerektirir. Bir anahtar kasası, sertifika (gizli gizi) ve sertifika sürümü seçin.
+4. Azure ön kapısı, Key Vault hesabının aboneliğinin ön kapasitenizin ile aynı olmasını gerektirir. Bir Anahtar Kasası, gizli dizi ve gizli dizi sürümü seçin.
 
     Azure ön kapısı aşağıdaki bilgileri listeler: 
     - Abonelik kimliğiniz için anahtar kasası hesapları. 
-    - Seçilen anahtar kasası altındaki sertifikalar (gizli diziler). 
-    - Kullanılabilir sertifika sürümleri. 
+    - Seçili anahtar kasasının altındaki gizli diziler. 
+    - Kullanılabilir gizli dizi sürümleri.
 
-> [!NOTE]
-> Sertifika sürümünün boş bırakılması şu şekilde olur:
-> - Sertifikanın en son sürümü seçili.
-> - Key Vault sertifikanın daha yeni bir sürümü kullanılabilir olduğunda, sertifikaların otomatik olarak en son sürüme dönmesi.
+    > [!NOTE]
+    >  Sertifikanın Key Vault daha yeni bir sürümü kullanıma hazır olduğunda sertifikanın en son sürüme otomatik olarak döndürülmesi için lütfen gizli sürümü ' en son ' olarak ayarlayın. Belirli bir sürüm seçilirse, sertifika döndürme için yeni sürümü el ile yeniden seçmeniz gerekir. Sertifika/gizli dizi yeni sürümünün dağıtılması 24 saate kadar sürer. 
  
-5. Kendi sertifikanızı kullanıyorsanız etki alanı doğrulaması gerekmez. [Yayılma için bekleme](#wait-for-propagation) adımına geçin.
+5. Kendi sertifikanızı kullandığınızda etki alanı doğrulaması gerekli değildir. [Yayılmayı beklemeye](#wait-for-propagation)devam edin.
 
 ## <a name="validate-the-domain"></a>Etki alanını doğrulama
 
-CNAME kaydı kullanılarak özel uç noktanızla eşlenen ve kullanılmakta olan bir özel etki alanınız zaten varsa ya da kendi sertifikanızı kullanıyorsanız şu adıma geçin:  
-[Özel etki alanı, Front Door’unuzla eşlendi](#custom-domain-is-mapped-to-your-front-door-by-a-cname-record). Böyle bir etki alanınız yoksa, etki alanınıza yönelik CNAME kaydı girişinin artık mevcut olmaması veya afdverify alt etki alanını içeriyor olması durumunda [Özel etki alanı Front Door’unuzla eşlenmedi](#custom-domain-is-not-mapped-to-your-front-door) adımına geçin.
+Bir CNAME kaydıyla özel uç noktanıza eşlenmiş veya kendi sertifikanızı kullandığınız özel bir etki alanınız zaten varsa, [özel etki alanı ön kapıya eşlenmeye](#custom-domain-is-mapped-to-your-front-door-by-a-cname-record)devam edin. Aksi takdirde, etki alanınızın CNAME kaydı girişi artık yoksa veya afdverify alt etki alanını içeriyorsa, [özel etki alanına devam et, ön kapıya eşlenmedi](#custom-domain-is-not-mapped-to-your-front-door).
 
 ### <a name="custom-domain-is-mapped-to-your-front-door-by-a-cname-record"></a>Özel etki alanı bir CNAME kaydı kullanılarak Front Door’unuzla eşlendi
 
-Front Door’unuzun ön uç konaklarına özel etki alanı eklediğinizde etki alanı kayıt yetkilinizin DNS tablosunda, Front Door’unuzun varsayılan .azurefd.net konak adıyla eşlenecek bir CNAME kaydı oluşturmuş oldunuz. Bu CNAME kaydı hala mevcutsa ve afdverify alt etki alanını içermiyorsa DigiCert Sertifika Yetkilisi (CA), özel etki alanınızın sahipliğini otomatik olarak doğrulamak için bunu kullanır. 
+Front Door’unuzun ön uç konaklarına özel etki alanı eklediğinizde etki alanı kayıt yetkilinizin DNS tablosunda, Front Door’unuzun varsayılan .azurefd.net konak adıyla eşlenecek bir CNAME kaydı oluşturmuş oldunuz. Bu CNAME kaydı hala varsa ve afdverify alt etki alanını içermiyorsa, DigiCert sertifika yetkilisi bunu özel etki alanınızın sahipliğini otomatik olarak doğrulamak için kullanır. 
 
-Kendi sertifikanızı kullanıyorsanız etki alanı doğrulaması gerekmez.
+Kendi sertifikanızı kullanıyorsanız, etki alanı doğrulaması gerekli değildir.
 
 CNAME kaydınız, *Ad*’ın özel etki alanınız, *Değer*’in ise Front Door’unuzun varsayılan .azurefd.net konak adı olduğu aşağıdaki biçimde olmalıdır:
 
@@ -161,7 +158,7 @@ CNAME kaydınız, *Ad*’ın özel etki alanınız, *Değer*’in ise Front Door
 
 CNAME kayıtları hakkında daha fazla bilgi için bkz. [CNAME DNS kaydı oluşturma](../cdn/cdn-map-content-to-custom-domain.md).
 
-CNAME kaydınız doğru biçimdeyse DigiCert, özel etki alanı adınızı otomatik olarak doğrular ve etki alanı adınız için ayrılmış bir sertifika oluşturur. DigitCert size doğrulama e-postası göndermez ve isteğinizi onaylamanız gerekmez. Sertifika bir yıl boyunca geçerlidir ve süresi dolmadan önce autorenewed olacaktır. [Yayılma için bekleme](#wait-for-propagation) adımına geçin. 
+CNAME kaydınız doğru biçimdeyse DigiCert, özel etki alanı adınızı otomatik olarak doğrular ve etki alanı adınız için ayrılmış bir sertifika oluşturur. DigitCert size doğrulama e-postası göndermez ve isteğinizi onaylamanız gerekmez. Sertifika bir yıl boyunca geçerlidir ve süresi dolmadan önce autorenewed olacaktır. [Yayılmayı beklemeye](#wait-for-propagation)devam edin. 
 
 Otomatik doğrulama genellikle birkaç dakika sürer. Bir saat içinde etki alanınızı doğrulanmış olarak görmüyorsanız destek bileti açın.
 
@@ -176,7 +173,7 @@ Uç noktanız için CNAME kaydı girişi artık mevcut değilse veya afdverify a
 
 ![WHOIS kaydı](./media/front-door-custom-domain-https/whois-record.png)
 
-DigiCert ayrıca ek e-posta adreslerine de bir doğrulama e-postası gönderir. WHOIS kayıt yetkilisi bilgileri özelse doğrudan şu adreslerden birini kullanarak onaylayabildiğinizi doğrulayın:
+DigiCert Ayrıca diğer e-posta adreslerine bir doğrulama e-postası gönderir. WHOIS kayıt yetkilisi bilgileri özelse doğrudan şu adreslerden birini kullanarak onaylayabildiğinizi doğrulayın:
 
 admin@&lt;etki-alanı-adınız.com&gt;  
 administrator@&lt;etki-alanı-adınız.com&gt;  
@@ -184,11 +181,11 @@ webmaster@&lt;etki-alanı-adınız.com&gt;
 hostmaster@&lt;etki-alanı-adınız.com&gt;  
 postmaster@&lt;.com&gt;  
 
-Birkaç dakika içinde sizden isteği onaylamanızı isteyen, aşağıdaki örneğe benzer bir e-posta alırsınız. Bir istenmeyen posta filtresi kullanıyorsanız, admin@digicert.com izin verilenler listesine ekleyin. E-postayı 24 saat içinde almazsanız Microsoft destek ekibine başvurun.
+Birkaç dakika içinde sizden isteği onaylamanızı isteyen, aşağıdaki örneğe benzer bir e-posta alırsınız. Bir istenmeyen posta filtresi kullanıyorsanız, admin@digicert.com allowlist öğesine ekleyin. E-postayı 24 saat içinde almazsanız Microsoft destek ekibine başvurun.
 
-Onay bağlantısına tıkladığınızda, çevrimiçi bir onay formuna yönlendirilirsiniz. Formdaki yönergeleri uygulayın. İki doğrulama seçeneğiniz vardır:
+Onay bağlantısını seçtiğinizde, çevrimiçi onay formuna yönlendirilirsiniz. Formdaki yönergeleri uygulayın. İki doğrulama seçeneğiniz vardır:
 
-- contoso.com gibi aynı kök etki alanı için aynı hesap üzerinden verilen gelecekteki tüm siparişleri onaylayabilirsiniz. Aynı kök etki alanı için ek özel etki alanları eklemeyi planlıyorsanız bu yaklaşım önerilir.
+- contoso.com gibi aynı kök etki alanı için aynı hesap üzerinden verilen gelecekteki tüm siparişleri onaylayabilirsiniz. Aynı kök etki alanı için daha fazla özel etki alanı eklemeyi planlıyorsanız bu yaklaşım önerilir.
 
 - Yalnızca bu istekte kullanılan söz konusu ana bilgisayar adını onaylayabilirsiniz. Sonraki istekler için ek onay gereklidir.
 
@@ -200,17 +197,17 @@ Etki alanı doğrulandıktan sonra özel etki alanı HTTPS özelliğinin etkinle
 
 ### <a name="operation-progress"></a>İşlem ilerleme durumu
 
-Aşağıdaki tabloda, HTTPS’yi etkinleştirdiğinizde oluşan işlem ilerleme durumunu gösterir. HTTPS’yi etkinleştirmenizin ardından özel etki alanı iletişim kutusunda dört işlem adımı görünür. Her adım etkin hale gelir ve ilerledikçe adımın altında ek alt adım ayrıntıları görüntülenir. Bu alt adımların hiçbiri gerçekleşmez. Bir adım başarıyla tamamlandıktan sonra adımın yanında yeşil bir onay işareti görünür. 
+Aşağıdaki tabloda, HTTPS’yi etkinleştirdiğinizde oluşan işlem ilerleme durumunu gösterir. HTTPS’yi etkinleştirmenizin ardından özel etki alanı iletişim kutusunda dört işlem adımı görünür. Her adım etkin hale geldiğinde, daha fazla alt adım ayrıntıları ilerledikçe adımın altında görüntülenir. Bu alt adımların hiçbiri gerçekleşmez. Bir adım başarıyla tamamlandıktan sonra adımın yanında yeşil bir onay işareti görünür. 
 
 | İşlem adımı | İşlem alt adımı ayrıntıları | 
 | --- | --- |
 | 1 İstek gönderiliyor | İstek gönderiliyor |
 | | HTTPS isteğiniz gönderiliyor. |
 | | HTTPS isteğiniz başarıyla gönderildi. |
-| 2 Etki alanı doğrulaması | Front Door’unuzun varsayılan .azurefd.net ön uç konağıyla eşlenen CNAME ise etki alanı otomatik olarak doğrulanır. Eşleme yapılmadıysa etki alanınızın kayıt kaydında listelenen e-posta adresine (WHOIS kayıt şirketi) bir doğrulama isteği gönderilir. Etki alanını mümkün olan en kısa süre içinde doğrulayın. |
+| 2 Etki alanı doğrulaması | Etki alanı, ön kapılarınızın default. azurefd.net ön uç konağına eşlenmişse otomatik olarak onaylanır. Eşleme yapılmadıysa etki alanınızın kayıt kaydında listelenen e-posta adresine (WHOIS kayıt şirketi) bir doğrulama isteği gönderilir. Etki alanını mümkün olan en kısa süre içinde doğrulayın. |
 | | Etki alanı sahipliğiniz başarıyla doğrulandı. |
-| | Etki alanı doğrulama isteğinin süresi doldu. (Müşteri büyük olasılıkla 6 gün içinde yanıt vermedi.) HTTPS, etki alanınızda etkinleştirilmeyecek. * |
-| | Etki alanı sahipliğini doğrulama isteği, müşteri tarafından reddedildi. HTTPS, etki alanınızda etkinleştirilmeyecek. * |
+| | Etki alanı doğrulama isteğinin süresi doldu. (Müşteri büyük olasılıkla 6 gün içinde yanıt vermedi.) HTTPS, etki alanınız üzerinde etkinleştirilmez. * |
+| | Etki alanı sahipliğini doğrulama isteği, müşteri tarafından reddedildi. HTTPS, etki alanınız üzerinde etkinleştirilmez. * |
 | 3 Sertifika sağlanıyor | Sertifika yetkilisi şu anda etki alanınızdaki HTTPS'nin etkinleştirilmesi için gereken sertifikayı veriyor. |
 | | Sertifika verildi ve şu anda Front Door’unuz için dağıtılıyor. Bu işlem 1 saat kadar sürebilir. |
 | | Sertifika, Front Door’unuz için başarıyla dağıtıldı. |
@@ -236,7 +233,7 @@ We encountered an unexpected error while processing your HTTPS request. Please t
 
 3. *DigiCert’ten etki alanı doğrulama e-postası almazsam ne olur?*
 
-    Özel etki alanınız için doğrudan uç nokta ana bilgisayar adına işaret eden bir CNAME girişiniz varsa (ve afdverify alt etki alanı adını kullanmıyorsanız) etki alanı doğrulama e-postası almazsınız. Doğrulama otomatik olarak gerçekleşir. Ancak CNAME girişiniz yoksa ve e-postayı 24 saat içinde almazsanız Microsoft destek ekibine başvurun.
+    Özel etki alanınız için uç nokta ana bilgisayar adına doğrudan işaret eden bir CNAME girdiniz varsa (ve afdverify alt etki alanı adını kullanmıyorsanız), bir etki alanı doğrulama e-postası almazsınız. Doğrulama otomatik olarak gerçekleşir. Ancak CNAME girişiniz yoksa ve e-postayı 24 saat içinde almazsanız Microsoft destek ekibine başvurun.
 
 4. *Ayrılmış sertifika kullanmak, SAN sertifikasından daha mı güvenlidir?*
     
@@ -244,27 +241,27 @@ We encountered an unexpected error while processing your HTTPS request. Please t
 
 5. *DNS sağlayıcım ile Sertifika Yetkilisi Yetkilendirme kaydı kullanmam gerekir mi?*
 
-    Hayır, Sertifika Yetkilisi Yetkilendirme kaydı şu anda gerekli değildir. Ancak, varsa, geçerli CA olarak DigiCert’i içermelidir.
+    Hayır, sertifika yetkilisi yetkilendirme kaydı Şu anda gerekli değildir. Ancak, varsa, geçerli CA olarak DigiCert’i içermelidir.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Önceki adımlarda özel etki alanınızda HTTPS protokolünü etkinleştirdiniz. Artık HTTPS ile özel etki alanınızı kullanmak istiyorsanız, aşağıdaki adımları uygulayarak HTTPS’yi devre dışı bırakabilirsiniz:
+Önceki adımlarda özel etki alanınızda HTTPS protokolünü etkinleştirdiniz. Artık HTTPS ile özel etki alanınızı kullanmak istemiyorsanız, şu adımları uygulayarak HTTPS 'yi devre dışı bırakabilirsiniz:
 
 ### <a name="disable-the-https-feature"></a>HTTPS özelliğini devre dışı bırakma 
 
 1. [Azure Portal](https://portal.azure.com) **Azure ön kapı** yapılandırmanıza gidin.
 
-2. Ön uç konakları listesinde HTTPS’yi devre dışı bırakmak istediğiniz özel etki alanına tıklayın.
+2. Ön uç Konakları listesinde, HTTPS 'yi devre dışı bırakmak istediğiniz özel etki alanını seçin.
 
 3. HTTPS’yi devre dışı bırakmak için **Devre Dışı**’na ve sonra da **Kaydet**’e tıklayın.
 
 ### <a name="wait-for-propagation"></a>Yayılma için bekleme
 
-Özel etki alanı HTTPS özelliği devre dışı bırakıldıktan sonra bu işlemin geçerli olması 6-8 saate kadar sürebilir. İşlem tamamlandığında, Azure portalındaki özel HTTPS durumu **Devre Dışı** olarak ayarlanır ve özel etki alanı iletişim kutusundaki üç işlem adımı tamamlandı olarak işaretlenir. Özel etki alanınız artık HTTPS’yi kullanamaz.
+Özel etki alanı HTTPS özelliği devre dışı bırakıldıktan sonra bu işlemin geçerli olması 6-8 saate kadar sürebilir. İşlem tamamlandığında, Azure portal özel HTTPS durumu **devre dışı** olarak ayarlanır ve özel etki alanı iletişim kutusundaki üç işlem adımı tamamlanmış olarak işaretlenir. Özel etki alanınız artık HTTPS’yi kullanamaz.
 
 #### <a name="operation-progress"></a>İşlem ilerleme durumu
 
-Aşağıdaki tabloda, HTTPS’yi devre dışı bıraktığınızda oluşan işlem ilerleme durumunu gösterir. HTTPS’yi devre dışı bırakmanızın ardından özel etki alanı iletişim kutusunda üç işlem adımı görünür. Her adım etkin hale gelir ve adımın altında ek ayrıntılar görüntülenir. Bir adım başarıyla tamamlandıktan sonra adımın yanında yeşil bir onay işareti görünür. 
+Aşağıdaki tabloda, HTTPS’yi devre dışı bıraktığınızda oluşan işlem ilerleme durumunu gösterir. HTTPS’yi devre dışı bırakmanızın ardından özel etki alanı iletişim kutusunda üç işlem adımı görünür. Her adım etkin hale geldiğinde, adım altında daha fazla ayrıntı görüntülenir. Bir adım başarıyla tamamlandıktan sonra adımın yanında yeşil bir onay işareti görünür. 
 
 | İşlem ilerleme durumu | İşlem ayrıntıları | 
 | --- | --- |
@@ -280,7 +277,7 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 * Bir etki alanını doğrulayın.
 * Özel etki alanınız için HTTPS 'yi etkinleştirin.
 
-Ön kapıya yönelik coğrafi filtreleme ilkesi ayarlamayı öğrenmek için bir sonraki öğreticiye geçin.
+Ön kapılarınız için coğrafi filtreleme ilkesi ayarlamayı öğrenmek için bir sonraki öğreticiye geçin.
 
 > [!div class="nextstepaction"]
 > [Coğrafi filtreleme ilkesi ayarlama](front-door-geo-filtering.md)

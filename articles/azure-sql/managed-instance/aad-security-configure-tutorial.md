@@ -11,13 +11,13 @@ ms.author: mireks
 ms.reviewer: vanto
 ms.date: 11/06/2019
 ms.openlocfilehash: 50544507f9d83c216bb6c18e004c5ce7ad1ca346
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105639843"
 ---
-# <a name="tutorial-security-in-azure-sql-managed-instance-using-azure-ad-server-principals-logins"></a>Öğretici: Azure AD Server sorumlularını (oturum açma) kullanarak Azure SQL yönetilen örneği 'nde güvenlik
+# <a name="tutorial-security-in-azure-sql-managed-instance-using-azure-ad-server-principals-logins"></a>Öğretici: Azure AD sunucu sorumlularını (oturum açmalar) kullanarak Azure SQL Yönetilen Örneği'nde güvenlik
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
 Azure SQL yönetilen örneği, en son SQL Server (Enterprise Edition) veritabanı altyapısının sahip olduğu neredeyse tüm güvenlik özelliklerini sağlar:

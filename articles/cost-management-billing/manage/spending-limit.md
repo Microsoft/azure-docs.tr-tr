@@ -7,18 +7,18 @@ tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 08/20/2020
+ms.date: 03/29/2021
 ms.author: banders
-ms.openlocfilehash: df5c5ed74a5e0a63727962fa86d261cfb588a384
-ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
-ms.translationtype: HT
+ms.openlocfilehash: 47f1a1ed182420852682e908c7cd8b5e094bc085
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/20/2020
-ms.locfileid: "88690570"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105932565"
 ---
 # <a name="azure-spending-limit"></a>Azure harcama limiti
 
-Azure’daki harcama limiti, harcamanızın kredi tutarınızın limitini aşmasını engeller. Ücretsiz Azure hesabına veya birden çok aya yayılan krediler içeren abonelik türlerine kaydolan tüm yeni müşterilerin harcama limiti, varsayılan olarak açık olacaktır. Harcama limiti, kredi miktarına eşittir ve değiştirilemez. Örneğin, ücretsiz Azure hesabı için kaydolduysanız harcama limiti 200 USD olur ve bunu 500 USD olarak değiştiremezsiniz. Ancak harcama limitini kaldırabilirsiniz. Bu nedenle, herhangi bir limitiniz yoktur veya kredi miktarına eşit bir limitiniz vardır. Bu limit birçok türde harcamayı yapmanıza engel olur. Harcama limiti, taahhüt planları veya kullandıkça öde fiyatlandırmasının geçerli olduğu abonelikler için kullanılamaz. [Tüm Azure abonelik türlerini ve harcama limiti kullanılabilirliğini gösteren listeye](https://azure.microsoft.com/support/legal/offer-details/) göz atın.
+Azure’daki harcama limiti, harcamanızın kredi tutarınızın limitini aşmasını engeller. Ücretsiz Azure hesabına veya birden çok aya yayılan krediler içeren abonelik türlerine kaydolan tüm yeni müşterilerin harcama limiti, varsayılan olarak açık olacaktır. Harcama limiti, kredi miktarına eşittir. Harcama limiti miktarını değiştiremezsiniz. Örneğin, ücretsiz Azure hesabı için kaydolduysanız harcama limiti 200 USD olur ve bunu 500 USD olarak değiştiremezsiniz. Ancak harcama limitini kaldırabilirsiniz. Bu nedenle, herhangi bir limitiniz yoktur veya kredi miktarına eşit bir limitiniz vardır. Bu limit birçok türde harcamayı yapmanıza engel olur. Harcama limiti, taahhüt planları veya kullandıkça öde fiyatlandırmasının geçerli olduğu abonelikler için kullanılamaz. [Tüm Azure abonelik türlerini ve harcama limiti kullanılabilirliğini gösteren listeye](https://azure.microsoft.com/support/legal/offer-details/) göz atın.
 
 ## <a name="reaching-a-spending-limit"></a>Harcama limitine ulaşma
 

@@ -8,10 +8,10 @@ ms.author: lle
 ms.custom: seo-lt-2019
 ms.date: 12/25/2020
 ms.openlocfilehash: 972015f0f42a8a869de0edcc8f0e921ae7278cd1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100376267"
 ---
 # <a name="self-hosted-integration-runtime-auto-update-and-expire-notification"></a>Şirket içinde barındırılan tümleştirme çalışma zamanı için otomatik güncelleştirme ve süre sonu bildirimi

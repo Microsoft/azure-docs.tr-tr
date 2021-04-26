@@ -10,17 +10,17 @@ ms.subservice: keys
 ms.topic: tutorial
 ms.date: 02/24/2021
 ms.author: ambapat
-ms.openlocfilehash: f7761cf011a3a678bb7609e1063ac6ebec90d395
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: e8230404d71b0fe46e8a7cc536d2b5f3a4c5004f
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102499195"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588403"
 ---
 # <a name="import-hsm-protected-keys-for-key-vault-ncipher"></a>Key Vault için HSM korumalı anahtarları içeri aktarma (nCipher)
 
 > [!WARNING]
-> Bu belgede açıklanan HSM-Key içeri aktarma yöntemi **kullanımdan kaldırılmıştır** ve gelecekte desteklenecektir. Yalnızca üretici yazılımı 12.40.2 veya 12,50 olan nCipher nShield ailesi ile bir düzeltme ile birlikte kullanılabilir. [HSM anahtarları içeri aktarmak için yeni yöntem](hsm-protected-keys-byok.md) kullanılması önemle önerilir.
+> Bu belgede açıklanan HSM-Key içeri aktarma yöntemi **kullanımdan kaldırılmıştır** ve 30 Haziran 2021 ' den sonra desteklenecektir. Yalnızca üretici yazılımı 12.40.2 veya 12,50 olan nCipher nShield ailesi ile bir düzeltme ile birlikte kullanılabilir. [HSM anahtarları içeri aktarmak için yeni yöntem](hsm-protected-keys-byok.md) kullanılması önemle önerilir.
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 

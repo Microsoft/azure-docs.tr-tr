@@ -7,12 +7,12 @@ ms.author: alkarche
 ms.date: 9/15/2020
 ms.topic: how-to
 ms.service: digital-twins
-ms.openlocfilehash: de16932f1f77e569302b222fe2948de3046fabd6
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: a5e00ef81afc709a9072eedbb07983057f57eb08
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104950606"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304313"
 ---
 # <a name="ingest-iot-hub-telemetry-into-azure-digital-twins"></a>Azure dijital TWINS 'e alma IoT Hub telemetrisi
 
@@ -45,7 +45,7 @@ Termostat cihazı tarafından bir sıcaklık telemetri olayı gönderildiğinde,
 
 Bu bölümde, Azure dijital TWINS 'de, termostat cihazını temsil edecek bir [dijital ikizi](concepts-twins-graph.md) ayarlayacaksınız ve IoT Hub bilgiler ile güncelleştirilecektir.
 
-Bir termostat türü ikizi oluşturmak için önce, bir termostat 'nın özelliklerini açıklayan ve daha sonra ikizi oluşturmak için kullanılacak olan termostat [modelini](concepts-models.md) örneğinizi yüklemeniz gerekir. 
+Bir termostat türü ikizi oluşturmak için önce, bir termostat 'nın özelliklerini açıklayan ve daha sonra ikizi oluşturmak için kullanılacak olan termostat [modelini](concepts-models.md) örneğinizi yüklemeniz gerekir.
 
 [!INCLUDE [digital-twins-thermostat-model-upload.md](../../includes/digital-twins-thermostat-model-upload.md)]
 

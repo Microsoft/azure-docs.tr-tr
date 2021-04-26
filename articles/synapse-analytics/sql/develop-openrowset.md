@@ -9,12 +9,12 @@ ms.subservice: sql
 ms.date: 05/07/2020
 ms.author: fipopovi
 ms.reviewer: jrasnick
-ms.openlocfilehash: a6af8f4600544007a9ecb4fcff5ac9016fd7dfbf
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 28c54865ab9c2876d998896f5f536a11088962f8
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640342"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566435"
 ---
 # <a name="how-to-use-openrowset-using-serverless-sql-pool-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te sunucusuz SQL havuzu kullanarak OPENROWSET kullanma
 
@@ -138,9 +138,9 @@ Unstructured_data_path bir klasör olacak şekilde belirtirseniz, sunucusuz bir 
 Yolun sonunda/* belirterek, daha az SQL havuzunun klasörlere geçiş yapmasını sağlayabilirsiniz: `https://sqlondemandstorage.blob.core.windows.net/csv/population/**`
 
 > [!NOTE]
-> Hadoop ve PolyBase 'in aksine, yolun sonunda/* * belirtmediğiniz müddetçe sunucusuz SQL havuzu alt klasör döndürmez. Ayrıca, Hadoop ve PolyBase 'den farklı olarak sunucusuz SQL havuzu, dosya adının altı çizili (_) veya nokta (.) ile başladığı dosyaları döndürür.
+> Hadoop ve PolyBase 'in aksine, yolun sonunda/* * belirtmediğiniz müddetçe sunucusuz SQL havuzu alt klasör döndürmez. Yalnızca Hadoop ve PolyBase gibi, dosya adının altı çizili (_) veya nokta (.) ile başladığı dosyaları döndürmez.
 
-Aşağıdaki örnekte, unstructured_data_path = ise `https://mystorageaccount.dfs.core.windows.net/webdata/` , sunucusuz BIR SQL havuzu sorgusu mydata.txt ve _hidden.txt satırları döndürür. Bir alt klasörde bulunduğundan mydata2.txt ve mydata3.txt döndürmez.
+Aşağıdaki örnekte, unstructured_data_path = ise `https://mystorageaccount.dfs.core.windows.net/webdata/` , sunucusuz BIR SQL havuzu sorgusu mydata.txt satırları döndürür. Bir alt klasörde bulunduğundan mydata2.txt ve mydata3.txt döndürmez.
 
 ![Dış tablolar için özyinelemeli veriler](./media/develop-openrowset/folder-traversal.png)
 

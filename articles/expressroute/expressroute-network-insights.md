@@ -5,32 +5,40 @@ services: expressroute
 author: duongau
 ms.service: expressroute
 ms.topic: how-to
-ms.date: 03/23/2021
+ms.date: 04/05/2021
 ms.author: duau
-ms.openlocfilehash: 7033ea6a1ba6d85f9aa15e14bb9577b2439c59a8
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: a5e01a4fc84f852b43e5a76114bebe145da10793
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105050682"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443598"
 ---
 # <a name="azure-expressroute-insights-using-network-insights"></a>Ağ öngörülerini kullanarak Azure ExpressRoute öngörüleri
 
 Bu makalede, ağ öngörülerinin tek bir yerde ExpressRoute ölçümlerini ve konfigürasyonlarınızı görüntülemenize nasıl yardımcı olduğu açıklanmaktadır. Ağ öngörüleri aracılığıyla, önemli ExpressRoute bilgilerini içeren topik haritaları ve sistem durumu panolarını, ek bir kurulumu tamamlamaya gerek kalmadan görüntüleyebilirsiniz.
 
-:::image type="content" source="./media/expressroute-network-insights/monitor-landing-page.png" alt-text="ExpressRoute İzleyicisi giriş sayfasının ekran görüntüsü." lightbox="./media/expressroute-network-insights/monitor-landing-page-expanded.png":::
+:::image type="content" source="./media/expressroute-network-insights/network-monitor-page.png" alt-text="Ağ İzleyicisi giriş sayfasının ekran görüntüsü." lightbox="./media/expressroute-network-insights/monitor-landing-page-expanded.png":::
 
 ## <a name="visualize-functional-dependencies"></a>İşlevsel bağımlılıkları görselleştirin
 
-Bu çözümü görüntülemek için *Azure izleyici* sayfasına gidin, *ağlar*' ı seçin ve ardından *ExpressRoute devreleri* kartını seçin. Ardından, görüntülemek istediğiniz devre için topoloji düğmesini seçin.
+1. *Azure izleyici* sayfasına gidin ve ardından *ağlar*' ı seçin.
 
-İşlevsel bağımlılık görünümü, farklı ExpressRoute bileşenleri (peerler, bağlantılar, ağ geçitleri) arasındaki ilişkiyi göstermek için ExpressRoute kurulumlarınızın net bir resmini sağlar.
+    :::image type="content" source="./media/expressroute-network-insights/monitor-page.png" alt-text="Izleyici giriş sayfasının ekran görüntüsü.":::
 
-:::image type="content" source="./media/expressroute-network-insights/topology-view.png" alt-text="Ağ öngörüleri için topoloji görünümü ekran görüntüsü." lightbox="./media/expressroute-network-insights/topology-view-expanded.png":::
+1. *ExpressRoute* bağlantı hattı kartını seçin. 
 
-Yapılandırma bilgilerini görüntülemek için topoloji eşlemesindeki herhangi bir bileşenin üzerine gelin. Örneğin, devre bant genişliği ve Global Reach etkinleştirme gibi ayrıntıları görüntülemek için bir ExpressRoute eşleme bileşeninin üzerine gelin.
+1. Ardından, görüntülemek istediğiniz devre için topoloji düğmesini seçin.
 
-:::image type="content" source="./media/expressroute-network-insights/topology-hovered.png" alt-text="Topoloji görünümü kaynakları üzerinde vurgulama ekran görüntüsü." lightbox="./media/expressroute-network-insights/topology-hovered-expanded.png":::
+   :::image type="content" source="./media/expressroute-network-insights/monitor-landing-page.png" alt-text="ExpressRoute İzleyicisi giriş sayfasının ekran görüntüsü." lightbox="./media/expressroute-network-insights/monitor-landing-page-expanded.png"::: 
+
+1. İşlevsel bağımlılık görünümü, farklı ExpressRoute bileşenleri (peerler, bağlantılar, ağ geçitleri) arasındaki ilişkiyi göstermek için ExpressRoute kurulumlarınızın net bir resmini sağlar.
+
+    :::image type="content" source="./media/expressroute-network-insights/topology-view.png" alt-text="Ağ öngörüleri için topoloji görünümü ekran görüntüsü." lightbox="./media/expressroute-network-insights/topology-view-expanded.png":::
+
+1. Yapılandırma bilgilerini görüntülemek için topoloji eşlemesindeki herhangi bir bileşenin üzerine gelin. Örneğin, devre bant genişliği ve Global Reach etkinleştirme gibi ayrıntıları görüntülemek için bir ExpressRoute eşleme bileşeninin üzerine gelin.
+
+    :::image type="content" source="./media/expressroute-network-insights/topology-hovered.png" alt-text="Topoloji görünümü kaynakları üzerinde vurgulama ekran görüntüsü." lightbox="./media/expressroute-network-insights/topology-hovered-expanded.png":::
 
 ## <a name="view-a-detailed-and-pre-loaded-metrics-dashboard"></a>Ayrıntılı ve önceden yüklenmiş ölçüm panosunu görüntüleme
 

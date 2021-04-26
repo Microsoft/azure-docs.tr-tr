@@ -44,16 +44,24 @@
               href: /sql/azdata/install/deploy-install-azdata-pip?toc=/azure/azure-arc/data/toc.json&bc=/azure/azure-arc/data/breadcrumb/toc.json
     - name: Veri denetleyicisi oluşturma
       items:
-        - name: Azure Data Studio
-          href: create-data-controller-azure-data-studio.md
-        - name: Azure portal
-          href: create-data-controller-resource-in-azure-portal.md
-        - name: Azure Veri CLI’si (azdata)
-          href: create-data-controller-using-azdata.md
-        - name: Kubernetes araçları
-          href: create-data-controller-using-kubernetes-native-tools.md
-        - name: SCC uygulama (OpenShift)
-          href: how-to-apply-security-context-constraint.md
+        - name: Dolaylı bağlantı modu
+          items:
+            - name: Azure Data Studio
+              href: create-data-controller-azure-data-studio.md
+            - name: Azure portal
+              href: create-data-controller-resource-in-azure-portal.md
+            - name: Azure Veri CLI’si (azdata)
+              href: create-data-controller-using-azdata.md
+            - name: Kubernetes araçları
+              href: create-data-controller-using-kubernetes-native-tools.md
+            - name: SCC uygulama (OpenShift)
+              href: how-to-apply-security-context-constraint.md
+        - name: Doğrudan bağlantı modu
+          items:
+            - name: Önkoşullar
+              href: deploy-data-controller-direct-mode-prerequisites.md
+            - name: Dağıtma
+              href: deploy-data-controller-direct-mode.md
     - name: Azure Arc özellikli veri hizmetlerindeki yaygın deneyimler
       items:
         - name: Panolar ile izleme (Azure Data Studio)

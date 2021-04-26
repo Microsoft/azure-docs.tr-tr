@@ -3,18 +3,18 @@ title: Günlük yeniden yürütme hizmeti 'ni kullanarak veritabanlarını SQL y
 description: Günlük yeniden yürütme hizmeti 'ni kullanarak SQL Server veritabanlarını SQL yönetilen örneğine geçirmeyi öğrenin
 services: sql-database
 ms.service: sql-managed-instance
-ms.custom: seo-lt-2019, sqldbrb=1
+ms.custom: seo-lt-2019, sqldbrb=1, devx-track-azurecli
 ms.topic: how-to
 author: danimir
 ms.author: danil
 ms.reviewer: sstein
-ms.date: 03/01/2021
-ms.openlocfilehash: 1b2a3f018b16258622b817648cb00e230313bf49
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.date: 03/31/2021
+ms.openlocfilehash: 522f4ec2f28f9d8975a8a7a7b10e435f602af855
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105564526"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484039"
 ---
 # <a name="migrate-databases-from-sql-server-to-sql-managed-instance-by-using-log-replay-service-preview"></a>Günlük yeniden yürütme hizmeti 'ni (Önizleme) kullanarak SQL Server veritabanlarını SQL yönetilen örneğine geçirme
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -34,6 +34,7 @@ Aşağıdaki durumlarda LRS 'yi kullanmayı düşünebilirsiniz:
 - Veritabanı geçiş hizmeti yürütülebilir dosyasının veritabanı yedeklerine dosya erişimi yok.
 - Konak işletim sistemine erişim yok veya yönetici ayrıcalıkları yok.
 - Ortamınızdaki ağ bağlantı noktalarını Azure 'a açamazsınız.
+- Ağ daraltma veya ortamınızda ara sunucu engelleme sorunları.
 - Yedeklemeler, seçeneği aracılığıyla doğrudan Azure Blob depolama alanına depolanır `TO URL` .
 - Değişiklik yedeklemeleri kullanmanız gerekir.
 
@@ -70,7 +71,7 @@ LRS durdurulduktan sonra otomatik tamamlama aracılığıyla veya cutover aracı
 | **2. bulutta LRS 'Yi başlatın**. | Hizmeti bir cmdlet seçimi ile yeniden başlatabilirsiniz: PowerShell ([Start-azsqlınstancedatabaselogreplay](/powershell/module/az.sql/start-azsqlinstancedatabaselogreplay)) veya Azure clı ([az_sql_midb_log_replay_start cmdlet 'leri](/cli/azure/sql/midb/log-replay#az_sql_midb_log_replay_start)). <br /><br /> Blob depolamada bir yedekleme klasörünü işaret eden her veritabanı için LRS 'yi ayrı olarak başlatın. <br /><br /> Hizmeti başlattıktan sonra, BLOB depolama kapsayıcısından yedeklemeler alınır ve bunları SQL yönetilen örneği 'ne geri yüklemeye başlar.<br /><br /> LRS 'yi sürekli modda başlattıysanız, başlangıçta karşıya yüklenen tüm yedeklemeler geri yüklendikten sonra hizmet, klasöre yüklenen tüm yeni dosyaları izleyebilir. Hizmet, günlük sıra numarası (LSN) zincirine göre günlükleri, durduruluncaya kadar sürekli olarak uygular. |
 | **2,1. işlemin Ilerlemesini izleyin**. | Geri yükleme işleminin ilerlemesini bir cmdlet seçimi ile izleyebilirsiniz: PowerShell ([Get-azsqlınstancedatabaselogreplay](/powershell/module/az.sql/get-azsqlinstancedatabaselogreplay)) veya Azure clı ([az_sql_midb_log_replay_show cmdlet 'leri](/cli/azure/sql/midb/log-replay#az_sql_midb_log_replay_show)). |
 | **2,2. gerekirse Işlemi durdurun**. | Geçiş işlemini durdurmanız gerekiyorsa, cmdlet seçiminiz vardır: PowerShell ([stop-azsqlınstancedatabaselogreplay](/powershell/module/az.sql/stop-azsqlinstancedatabaselogreplay)) veya Azure clı ([az_sql_midb_log_replay_stop](/cli/azure/sql/midb/log-replay#az_sql_midb_log_replay_stop)). <br /><br /> İşlem durdurulduğunda SQL yönetilen örneği üzerinde geri yüklemekte olduğunuz veritabanı silinir. Bir işlemi durdurduktan sonra, bir veritabanı için LRS 'yi sürdürülemez. Geçiş işlemini sıfırdan yeniden başlatmanız gerekir. |
-| **3. hazırsanız buluta kesin**. | Uygulamayı ve iş yükünü durdurun. Son günlük kuyruğu yedeklemesini gerçekleştirin ve Azure Blob depolama alanına yükleyin.<br /><br /> Bir LRS işlemini bir cmdlet seçimi ile başlatarak tam geçişi ' i doldurun `complete` : PowerShell ([tam-azsqlınstancedatabaselogreplay](/powershell/module/az.sql/complete-azsqlinstancedatabaselogreplay)) veya Azure CLI [az_sql_midb_log_replay_complete](/cli/azure/sql/midb/log-replay#az_sql_midb_log_replay_complete). Bu işlem LRS 'yi durduracak ve SQL yönetilen örneği üzerinde okuma ve yazma kullanımı için veritabanının çevrimiçi duruma gelmesine neden olacak.<br /><br /> Uygulama bağlantı dizesinin SQL Server SQL yönetilen örneği 'ne yeniden işaret edin. |
+| **3. hazırsanız buluta kesin**. | Uygulamayı ve iş yükünü durdurun. Son günlük kuyruğu yedeklemesini gerçekleştirin ve Azure Blob depolama alanına yükleyin.<br /><br /> Bir LRS işlemini bir cmdlet seçimi ile başlatarak tam geçişi ' i doldurun `complete` : PowerShell ([tam-azsqlınstancedatabaselogreplay](/powershell/module/az.sql/complete-azsqlinstancedatabaselogreplay)) veya Azure CLI [az_sql_midb_log_replay_complete](/cli/azure/sql/midb/log-replay#az_sql_midb_log_replay_complete). Bu işlem LRS 'yi durduracak ve SQL yönetilen örneği üzerinde okuma ve yazma kullanımı için veritabanının çevrimiçi duruma gelmesine neden olacak.<br /><br /> Uygulama bağlantı dizesinin SQL Server SQL yönetilen örneği 'ne yeniden işaret edin. Bu adımı uygulamanızda el ile bağlantı dizesi değişikliği aracılığıyla kendiniz veya otomatik olarak (örneğin, uygulamanızın bir özellikten veya bir veritabanından bağlantı dizesini okuyabilir) düzenleyebilmeniz gerekecektir. |
 
 ## <a name="requirements-for-getting-started"></a>Başlangıç gereksinimleri
 
@@ -94,7 +95,7 @@ Blob depolamada uygun bir klasöre işaret ederek LRS 'yi her veritabanı için 
 
 ### <a name="azure-rbac-permissions"></a>Azure RBAC izinleri
 LRS 'yi belirtilen istemcilerle çalıştırmak için aşağıdaki Azure rollerinden biri gerekir:
-- Abonelik sahibi rolü
+- Abonelik Sahibi rolü
 - [Yönetilen örnek katılımcısı](../../role-based-access-control/built-in-roles.md#sql-managed-instance-contributor) rolü
 - Aşağıdaki izne sahip özel rol: `Microsoft.Sql/managedInstances/databases/*`
 
@@ -399,9 +400,9 @@ LRS 'nin işlevsel sınırlamaları şunlardır:
 LRS 'yi başlattıktan sonra, `get-azsqlinstancedatabaselogreplay` işlemin durumunu görmek için izleme cmdlet 'ini (veya `az_sql_midb_log_replay_show` ) kullanın. LRS bir süre sonra başlatılamazsa ve bir hata alırsanız, en sık karşılaşılan sorunları kontrol edin:
 
 - SQL yönetilen örneğindeki mevcut bir veritabanı, SQL Server geçirmeye çalıştığınız adla aynı ada sahip mi? Veritabanlarından birini yeniden adlandırarak bu çakışmayı çözün.
-- Veritabanı yedeklemesi, seçeneği aracılığıyla SQL Server `CHECKSUM` mı?
-- SAS belirtecindeki izinler yalnızca LRS için okuma ve listeleme izinlerine sahiptir mi?
-- LRS için SAS belirtecini, soru işaretinden ( `?` ) sonra şu şekilde başlayan içerikle kopyaladınız: `sv=2020-02-10...` ? 
+- Veritabanı yedeklemesi SQL Server, bu `CHECKSUM` seçenek aracılığıyla mi yapıldı?
+- SAS Simge² izinleri yalnızca LRS için okuma ve listeleme izinleridir?
+- LRS için SAS belirtecini, soru işaretinden ( `?` ) sonra şu şekilde başlayan içerikle kopyaladınız: `sv=2020-02-10...` ? Lið 
 - Geçiş işlemini başlatma ve tamamlama zaman penceresi için SAS belirteci geçerlilik süresi geçerli mi? SQL yönetilen örneği ve SAS belirteci için kullanılan farklı saat dilimlerine bağlı olarak uyuşmazlıklar olabilir. SAS belirtecini yeniden üretmeyi ve geçerli tarihten önce ve sonra zaman penceresinin belirteç geçerliliğini genişletmenize çalışın.
 - Veritabanı adı, kaynak grubu adı ve yönetilen örnek adı doğru yazılmış mı?
 - LRS 'yi otomatik tamamlama modunda başlattıysanız, belirtilen son yedekleme dosyası için geçerli bir dosya adı idi mı?

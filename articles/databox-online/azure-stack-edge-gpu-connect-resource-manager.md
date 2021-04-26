@@ -8,12 +8,12 @@ ms.subservice: edge
 ms.topic: how-to
 ms.date: 03/01/2021
 ms.author: alkohli
-ms.openlocfilehash: 27c0c211b9844a34b0cb43dcd05037ba4a548f3e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e244c93fbe809c52eff1c42c284ce2e8389bbcc4
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102638705"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553592"
 ---
 # <a name="connect-to-azure-resource-manager-on-your-azure-stack-edge-pro-device"></a>Azure Stack Edge Pro cihazınızda Azure Resource Manager bağlanma
 
@@ -360,7 +360,7 @@ Azure Resource Manager ortamını ayarlayın ve cihazınızın Azure Resource Ma
         
             Oturum açmanın alternatif bir yolu da `login-AzureRmAccount` cmdlet 'ini kullanmaktır. 
             
-            `login-AzureRMAccount -EnvironmentName <Environment Name>` -Tenantıd c0257de7-538f-415c-993a-1b87a031879d 
+            `login-AzureRMAccount -EnvironmentName <Environment Name> -TenantId c0257de7-538f-415c-993a-1b87a031879d` 
 
             Komutun örnek bir çıktısı aşağıda verilmiştir. 
          

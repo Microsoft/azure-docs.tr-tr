@@ -1,22 +1,22 @@
 ---
-title: SQL API sürüm notları ve kaynakları için Cosmos DB Apache Spark Bağlayıcısı
-description: Sürüm tarihleri, kullanımdan kaldırma tarihleri ve Azure Cosmos DB SQL zaman uyumsuz Java SDK 'sının her sürümü arasında yapılan değişiklikler dahil olmak üzere SQL API için Azure Cosmos DB Apache Spark Bağlayıcısı hakkında bilgi edinin.
+title: SQL API sürüm notları ve kaynakları için Azure Cosmos DB Apache Spark 2 OLTP Bağlayıcısı
+description: Sürüm tarihleri, kullanımdan kaldırma tarihleri ve Azure Cosmos DB SQL zaman uyumsuz Java SDK 'sının her sürümü arasında yapılan değişiklikler dahil olmak üzere SQL API için Azure Cosmos DB Apache Spark 2 OLTP Bağlayıcısı hakkında bilgi edinin.
 author: anfeldma-ms
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: java
 ms.topic: reference
-ms.date: 08/12/2020
+ms.date: 04/06/2021
 ms.author: anfeldma
 ms.custom: devx-track-java
-ms.openlocfilehash: 7ff75bf9d45803dd96927bcf7c70e7c7912db979
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: bd948814b4b647bcc3fbfe58b090b1e794504232
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93097167"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107363640"
 ---
-# <a name="azure-cosmos-db-apache-spark-connector-for-core-sql-api-release-notes-and-resources"></a>Çekirdek (SQL) API 'SI için Azure Cosmos DB Apache Spark Bağlayıcısı: sürüm notları ve kaynakları
+# <a name="azure-cosmos-db-apache-spark-2-oltp-connector-for-core-sql-api-release-notes-and-resources"></a>Core (SQL) API 'SI için Azure Cosmos DB Apache Spark 2 OLTP Bağlayıcısı: sürüm notları ve kaynakları
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 > [!div class="op_single_selector"]
@@ -30,7 +30,8 @@ ms.locfileid: "93097167"
 > * [Zaman uyumlu Java SDK v2](sql-api-sdk-java.md)
 > * [Spring Verileri v2](sql-api-sdk-java-spring-v2.md)
 > * [Spring Verileri v3](sql-api-sdk-java-spring-v3.md)
-> * [Spark Bağlayıcısı](sql-api-sdk-java-spark.md)
+> * [Spark 3 OLTP Bağlayıcısı](sql-api-sdk-java-spark-v3.md)
+> * [Spark 2 OLTP Bağlayıcısı](sql-api-sdk-java-spark.md)
 > * [Python](sql-api-sdk-python.md)
 > * [REST](/rest/api/cosmos-db/)
 > * [REST kaynak sağlayıcısı](/rest/api/cosmos-db-resource-provider/)
@@ -38,7 +39,7 @@ ms.locfileid: "93097167"
 > * [Toplu yürütücü - .NET v2](sql-api-sdk-bulk-executor-dot-net.md)
 > * [Toplu yürütücü - Java](sql-api-sdk-bulk-executor-java.md)
 
-Çekirdek (SQL) için Azure Cosmos DB Apache Spark bağlayıcısını kullanarak büyük veri analizlerini hızlandırabilirsiniz. Spark Bağlayıcısı, Azure Cosmos DB depolanan veriler üzerinde [Spark](https://spark.apache.org/) işleri çalıştırmanızı sağlar. Toplu işlem ve akış işleme desteklenir.
+Core (SQL) için Azure Cosmos DB Apache Spark 2 OLTP bağlayıcısını kullanarak büyük veri analizlerini hızlandırabilirsiniz. Spark Bağlayıcısı, Azure Cosmos DB depolanan veriler üzerinde [Spark](https://spark.apache.org/) işleri çalıştırmanızı sağlar. Toplu işlem ve akış işleme desteklenir.
 
 Bağlayıcıyı Azure 'da yönetilen Spark kümeleri sağlayan [Azure Databricks](https://azure.microsoft.com/services/databricks) veya [Azure HDInsight](https://azure.microsoft.com/services/hdinsight/)ile kullanabilirsiniz. Aşağıdaki tabloda desteklenen sürümler gösterilmektedir:
 

@@ -4,13 +4,13 @@ description: App Service uygulamanızı PowerShell kullanarak yeni bir uygulamay
 ms.assetid: f9a5cfa1-fbb0-41e6-95d1-75d457347a35
 ms.topic: article
 ms.date: 01/14/2016
-ms.custom: seodec18
-ms.openlocfilehash: e3ae342e7cbd8a9c2e126de7666d07f0664be407
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: seodec18, devx-track-azurepowershell
+ms.openlocfilehash: 63ab20b16ae41aa48822f1b5c8e733c93d97f581
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103573651"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833193"
 ---
 # <a name="azure-app-service-app-cloning-using-powershell"></a>PowerShell kullanarak uygulama kopyalamayı Azure App Service
 

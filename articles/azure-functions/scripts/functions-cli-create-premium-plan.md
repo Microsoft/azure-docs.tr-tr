@@ -5,12 +5,12 @@ ms.service: azure-functions
 ms.topic: sample
 ms.date: 11/23/2019
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 714dd8d886f567bcdf07c93803662ef4b2c635f3
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 7d9f72fa433364f8d71ba44207d570bb827cd243
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94565204"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786226"
 ---
 # <a name="create-a-function-app-in-a-premium-plan---azure-cli"></a>Premium planda bir işlev uygulaması oluşturma-Azure CLı
 
@@ -36,10 +36,10 @@ Tablodaki her komut, komuta özgü belgelere yönlendirir. Bu betik şu komutlar
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az storage account create](/cli/azure/storage/account#az-storage-account-create) | Azure Depolama hesabı oluşturur. |
-| [az functionapp plan oluşturma](/cli/azure/functionapp/plan#az-functionapp-plan-create) | [Belirli BIR SKU](../functions-premium-plan.md#available-instance-skus)'da Premium planı oluşturur. |
-| [az functionapp create](/cli/azure/functionapp#az-functionapp-create) | App Service planında bir işlev uygulaması oluşturur. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az storage account create](/cli/azure/storage/account#az_storage_account_create) | Azure Depolama hesabı oluşturur. |
+| [az functionapp plan oluşturma](/cli/azure/functionapp/plan#az_functionapp_plan_create) | [Belirli BIR SKU](../functions-premium-plan.md#available-instance-skus)'da Premium planı oluşturur. |
+| [az functionapp create](/cli/azure/functionapp#az_functionapp_create) | App Service planında bir işlev uygulaması oluşturur. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

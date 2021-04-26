@@ -13,10 +13,10 @@ ms.author: aiwang
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.openlocfilehash: 01af0e620ecb100839f7b1101e5ff9fcfc874eea
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92206678"
 ---
 # <a name="migrate-android-applications-that-use-a-broker-from-adalnet-to-msalnet"></a>ADAL.NET 'den MSAL.NET 'e aracı kullanan Android uygulamalarını geçirme
@@ -113,7 +113,7 @@ MSAL.NET ' de, Android için etkinliği ayarlamak için iki şey yapın:
 
 1. Acquiretokenınteractıve çağrısında `.WithParentActivityOrWindow(App.RootViewController)` kullanın ve kullanacağınız etkinliğin başvurusunu geçirin. Bu örnek MainActivity ' i kullanacaktır.
 
-**Örneğin:**
+**Örnek:**
 
 *App. cs*'de:
 

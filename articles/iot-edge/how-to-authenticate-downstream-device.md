@@ -8,12 +8,12 @@ ms.date: 10/15/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: c799e38092c5983b4ad0e3daea6aae99934c7302
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4702682dcd6af68242fd5a34d1fb2e0a9273da36
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200893"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107482033"
 ---
 # <a name="authenticate-a-downstream-device-to-azure-iot-hub"></a>Azure IoT Hub’da bir aşağı akış cihazının kimliğini doğrulama
 
@@ -76,7 +76,7 @@ Yeni cihaz kimliğini oluşturduğunuzda, aşağıdaki bilgileri sağlayın:
    >
    >**AuthenticationMode** ortam değişkenini **cloudandscope** değerine ayarlayarak, IoT Edge hub 'ını önceki davranışa geri dönmek için yapılandırabilirsiniz.
 
-Aynı işlemi gerçekleştirmek için [Azure CLI Için IoT uzantısını](https://github.com/Azure/azure-iot-cli-extension) da kullanabilirsiniz. Aşağıdaki örnek, simetrik anahtar kimlik doğrulaması ile yeni bir IoT cihazı oluşturmak ve bir üst cihazı atamak için [az IoT Hub Device-Identity](/cli/azure/ext/azure-iot/iot/hub/device-identity) komutunu kullanır:
+Aynı işlemi gerçekleştirmek için [Azure CLI Için IoT uzantısını](https://github.com/Azure/azure-iot-cli-extension) da kullanabilirsiniz. Aşağıdaki örnek, simetrik anahtar kimlik doğrulaması ile yeni bir IoT cihazı oluşturmak ve bir üst cihazı atamak için [az IoT Hub Device-Identity](/cli/azure/iot/hub/device-identity) komutunu kullanır:
 
 ```azurecli
 az iot hub device-identity create -n {iothub name} -d {new device ID} --pd {existing gateway device ID}
@@ -131,7 +131,7 @@ X. 509.440 otomatik imzalı kimlik doğrulaması için bazen parmak izi kimlik d
    * Java: [SendEventX509. Java](https://github.com/Azure/azure-iot-sdk-java/tree/master/device/iot-device-samples/send-event-x509)
    * Python: [send_message_x509. Kopyala](https://github.com/Azure/azure-iot-sdk-python/blob/master/azure-iot-device/samples/async-hub-scenarios/send_message_x509.py)
 
-Aynı cihaz oluşturma işlemini gerçekleştirmek için [Azure CLI Için IoT uzantısını](https://github.com/Azure/azure-iot-cli-extension) da kullanabilirsiniz. Aşağıdaki örnek, X. 509.440 otomatik imzalı kimlik doğrulaması ile yeni bir IoT cihazı oluşturmak için [az IoT Hub Device-Identity](/cli/azure/ext/azure-iot/iot/hub/device-identity) komutunu kullanır ve bir üst cihaz atar:
+Aynı cihaz oluşturma işlemini gerçekleştirmek için [Azure CLI Için IoT uzantısını](https://github.com/Azure/azure-iot-cli-extension) da kullanabilirsiniz. Aşağıdaki örnek, X. 509.440 otomatik imzalı kimlik doğrulaması ile yeni bir IoT cihazı oluşturmak için [az IoT Hub Device-Identity](/cli/azure/iot/hub/device-identity) komutunu kullanır ve bir üst cihaz atar:
 
 ```azurecli
 az iot hub device-identity create -n {iothub name} -d {device ID} --pd {gateway device ID} --am x509_thumbprint --ptp {primary thumbprint} --stp {secondary thumbprint}
@@ -175,7 +175,7 @@ Bu bölüm, [Azure IoT Hub 'ınızda X. 509.440 güvenliğini ayarlama](../iot-h
    * Java: [SendEventX509. Java](https://github.com/Azure/azure-iot-sdk-java/tree/master/device/iot-device-samples/send-event-x509)
    * Python: [send_message_x509. Kopyala](https://github.com/Azure/azure-iot-sdk-python/blob/master/azure-iot-device/samples/async-hub-scenarios/send_message_x509.py)
 
-Aynı cihaz oluşturma işlemini gerçekleştirmek için [Azure CLI Için IoT uzantısını](https://github.com/Azure/azure-iot-cli-extension) da kullanabilirsiniz. Aşağıdaki örnek, X. 509.952 CA imzalı kimlik doğrulaması ile yeni bir IoT cihazı oluşturmak için [az IoT Hub Device-Identity](/cli/azure/ext/azure-iot/iot/hub/device-identity) komutunu kullanır ve bir üst cihaz atar:
+Aynı cihaz oluşturma işlemini gerçekleştirmek için [Azure CLI Için IoT uzantısını](https://github.com/Azure/azure-iot-cli-extension) da kullanabilirsiniz. Aşağıdaki örnek, X. 509.952 CA imzalı kimlik doğrulaması ile yeni bir IoT cihazı oluşturmak için [az IoT Hub Device-Identity](/cli/azure/iot/hub/device-identity) komutunu kullanır ve bir üst cihaz atar:
 
 ```azurecli
 az iot hub device-identity create -n {iothub name} -d {device ID} --pd {gateway device ID} --am x509_ca

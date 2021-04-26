@@ -2,25 +2,30 @@
 title: Azure BareMetal altyapısının koşullarını öğrenin
 description: Azure BareMetal altyapısının koşullarını öğrenin.
 ms.topic: conceptual
-ms.date: 1/4/2021
-ms.openlocfilehash: b22a6cecb2647df3878cb8fd4ade93d9a7d963fd
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.subservice: workloads
+ms.date: 04/06/2021
+ms.openlocfilehash: 61ff958e75952f73efb222df3f0c4d5437668cd3
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104770895"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725467"
 ---
 # <a name="know-the-terms-for-baremetal-infrastructure"></a>BareMetal altyapısının koşullarını öğrenin
 
-Bu makalede bazı önemli BareMetal terimleri ele alacağız.
+Bu makalede, BareMetal altyapısıyla ilgili bazı önemli koşullar ele alınacaktır.
 
-- **Düzeltme**: düzeltme 3 (Rev 3) olarak bilinen bir özgün damga düzeltmesi ve BareMetal örnek damgaları için iki farklı damga düzeltmesi vardır. Her damga mimaride ve Azure sanal makine konaklarına yakınlığa göre farklılık gösterir:
-    - **Düzeltme 4** (Rev 4): Azure sanal MAKINESI (VM) konaklarına daha yakın bir yakınlık sağlayan ve Azure VM 'Leri Ile BareMetal örnek birimleri arasındaki gecikmeyi alçalkan daha yeni bir tasarım. 
-    - **Düzeltme 4,2** (Rev 4,2): var olan Rev 4 mimarisini kullanan en son yeniden markalı BareMetal altyapısı. Rev 4, Azure sanal makinesi (VM) konaklarına daha yakın bir yakınlık sağlar. Bu, Azure VM 'Ler ile karemetal örnek birimleri arasında, Rev 4 Damgalarında veya satırlarda dağıtılan ağ gecikmesi açısından önemli geliştirmeler sunar. BareMetal örneklerinizi Azure portal aracılığıyla erişebilir ve yönetebilirsiniz.    
+- **Düzeltme**: BareMetal ıNFRASTRUCTURE (Hana büyük örnek) damgaları için iki farklı damga düzeltmesi vardır. Bunlar, mimaride ve Azure sanal makine konaklarına yakınlığa göre farklılık gösterir:
+    - "Düzeltme 3" (Rev 3): özgün tasarım orta 2016 ' i dağıttı.
+    - "Düzeltme 4,2" (Rev 4,2): Azure VM 'Leri ve HANA büyük örnekleri arasında Ultra düşük ağ gecikme süresi ile Azure sanal makine konaklarına daha yakından yakınlık sağlayan yeni bir tasarım. Azure portal kaynaklar "BareMetal altyapısı" olarak adlandırılır ve müşteriler kaynaklarına Azure portal BareMetal örnekleri olarak erişebilir.
 
-- **Damga**: BareMetal örneklerinin Microsoft iç dağıtım boyutunu tanımlar. Örnek birimlerinin dağıtılması için, işlem, ağ ve depolama raflarından oluşan bir BareMetal örnek damgası, bir veri merkezi konumuna dağıtılmalıdır. Bu tür bir dağıtıma BareMetal örnek damgası veya düzeltme 4,2 ' den denir.
+- **Damga**: BareMetal örneklerinin Microsoft iç dağıtım boyutunu tanımlar. Örneklerin dağıtılması için işlem, ağ ve depolama raflarından oluşan bir BareMetal örnek damgası, bir veri merkezi konumuna dağıtılmalıdır. Böyle bir dağıtıma BareMetal örnek damgası denir.
 
-- **Kiracı**: BareMetal örnek damgasında dağıtılan bir müşteri bir *kiracıya yalıtılmış.* Bir kiracı, diğer kiracılardan ağ, depolama ve işlem katmanında yalıtılmıştır. Farklı kiracılara atanan depolama ve işlem birimleri, her birinin veya BareMetal örnek damgası düzeyinde birbirleriyle iletişim kuramazlar. Müşteri, farklı kiracılarda dağıtımları olmasını seçebilir. Daha sonra bile, BareMetal örnek damgası düzeyinde kiracılar arasında iletişim yoktur.
+- **Kiracı**: bir BareMetal örnek damgası dağıtan bir müşteri, kiracı olarak yalıtılır *.* Bir kiracı, diğer kiracılardan ağ, depolama ve işlem katmanında yalıtılmıştır. Farklı kiracılara atanan depolama ve işlem birimleri, her birinin veya BareMetal örnek damgası düzeyinde birbirleriyle iletişim kuramazlar. Müşteri, farklı kiracılarda dağıtımları olmasını seçebilir. Daha sonra bile, BareMetal örnek damgası düzeyinde kiracılar arasında iletişim yoktur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Baremetal altyapısı](concepts-baremetal-infrastructure-overview.md) hakkında daha fazla bilgi edinin veya [Baremetal örnek birimlerinin nasıl tanımlanacağına ve etkileşime gireceğini](connect-baremetal-infrastructure.md)öğrenin. 
+
+BareMetal altyapısının önemli terimlerinin tanıtıldığına göre, şu bilgileri öğrenmek isteyebilirsiniz:
+- [Baremetal altyapısının](concepts-baremetal-infrastructure-overview.md)daha fazla ayrıntısı.
+- [Azure 'Da BareMetal altyapı örneklerine bağlanma](connect-baremetal-infrastructure.md).
+

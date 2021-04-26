@@ -1,21 +1,20 @@
 ---
 title: SYNAPSE SQL için bağlantı dizeleri
 description: SYNAPSE SQL için bağlantı dizeleri
-services: synapse-analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: overview
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: stefanazaric
 ms.reviewer: jrasnick
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 5ce411f3a2f3be162f9af16422d20b3e8b536fee
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: fb68a15bb64640fd8aa18d2ee01fd4a03d809125
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98120929"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565279"
 ---
 # <a name="connection-strings-for-synapse-sql"></a>SYNAPSE SQL için bağlantı dizeleri
 

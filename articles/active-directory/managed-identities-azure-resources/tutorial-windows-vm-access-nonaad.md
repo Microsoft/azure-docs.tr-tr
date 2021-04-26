@@ -1,5 +1,5 @@
 ---
-title: Öğretici `:` Azure Key Vault erişmek için yönetilen bir kimlik kullanma-Windows-Azure AD
+title: 'Öğretici: Azure Key Vault erişmek için yönetilen bir kimlik kullanma-Windows-Azure AD'
 description: Windows VM üzerinde bir sistem tarafından atanmış yönetilen kimlik kullanarak Azure Key Vault’a erişme işleminde size yol gösteren bir öğretici.
 services: active-directory
 documentationcenter: ''
@@ -15,12 +15,12 @@ ms.workload: identity
 ms.date: 12/10/2020
 ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0f29c9daba80ffc57b96cf5bd82690dea9ac6429
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 92ded2d327fd7c75633bf7ef6b7dd3041725c921
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101093744"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378270"
 ---
 # <a name="tutorial-use-a-windows-vm-system-assigned-managed-identity-to-access-azure-key-vault"></a>Öğretici: Azure Key Vault'a erişmek için Windows VM sistem tarafından atanan yönetilen kimlik kullanma 
 

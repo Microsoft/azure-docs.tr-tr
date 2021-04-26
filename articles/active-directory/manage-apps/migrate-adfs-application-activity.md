@@ -2,23 +2,21 @@
 title: AD FS uygulamalarını Azure Active Directory taşımak için etkinlik raporunu kullanın | Microsoft Docs '
 description: Active Directory Federasyon Hizmetleri (AD FS) (AD FS) uygulama etkinliği raporu AD FS uygulamaları hızla Azure Active Directory (Azure AD) ile geçirmenize olanak sağlar. AD FS için bu geçiş aracı, Azure AD ile uyumluluğu tanımlar ve geçiş kılavuzu sağlar.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: how-to
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.date: 01/14/2019
-ms.author: kenwith
+ms.author: iangithinji
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 88a4d0f108d4e3c27ce17aaa83aafca38063c9ae
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6b9265a61b0879078332b8ccc2d10e711b4ac8f1
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104589472"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377429"
 ---
 # <a name="use-the-ad-fs-application-activity-report-to-migrate-applications-to-azure-ad"></a>Uygulamaları Azure AD 'ye geçirmek için AD FS uygulama etkinliği raporunu kullanın
 
@@ -78,7 +76,7 @@ AD FS uygulama etkinliği raporu, Azure AD **kullanımı & Öngörüler** raporl
 
 Aşağıdaki tabloda AD FS uygulamalarda gerçekleştirilen tüm yapılandırma sınamaları listelenmektedir.
 
-|Sonuç  |Geçiş/uyarı/başarısız  |Description  |
+|Sonuç  |Geçiş/uyarı/başarısız  |Açıklama  |
 |---------|---------|---------|
 |Test-ADFSRPAdditionalAuthenticationRules <br> AdditionalAuthentication için en az bir geçirilip geçirilemeyeceğini denetleyin olmayan kural algılandı.       | Geçiş/uyarı          | Bağlı olan taraf, Multi-Factor Authentication (MFA) için sorulacak kurallara sahiptir. Azure AD 'ye geçmek için bu kuralları koşullu erişim ilkelerine çevirin. Şirket içi MFA kullanıyorsanız Azure AD MFA 'ya geçmeniz önerilir. [Koşullu erişim hakkında daha fazla bilgi edinin](../authentication/concept-mfa-howitworks.md).        |
 |Test-ADFSRPAdditionalWSFedEndpoint <br> Bağlı olan tarafın AdditionalWSFedEndpoint değeri true olarak ayarlanmıştır.       | Başarılı/Başarısız          | AD FS bağlı olan taraf, birden çok WS-Fed onay uç noktasına izin verir.Şu anda Azure AD yalnızca bir tane destekler.Bu sonucun geçişi engellediği bir senaryonuz varsa [bize bilgi verin](https://feedback.azure.com/forums/169401-azure-active-directory/suggestions/38695621-allow-multiple-ws-fed-assertion-endpoints).     |

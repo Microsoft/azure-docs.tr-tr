@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.subservice: fundamentals
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 3/4/2021
+ms.date: 3/31/2021
 ms.author: ajburnle
 ms.reviewer: dhanyahk
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 03e783353f65ba2017dda9f6ca21a68ae6cff4de
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: 81a909d946b55ee8b06d68aa8bee53bc50d2190e
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105612254"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532309"
 ---
 # <a name="whats-new-in-azure-active-directory"></a>Azure Active Directory yenilikler nelerdir?
 
@@ -38,6 +38,205 @@ Azure AD, iyileştirmeleri sürekli olarak alır. En son gelişmelerden haberdar
 Bu sayfa aylık olarak güncelleştirildiğinden düzenli olarak yeniden ziyaret edin. Altı aydan eski olan öğeleri arıyorsanız, [Azure Active Directory yenilikleri Için arşiv](whats-new-archive.md)halinde bulabilirsiniz.
 
 ---
+
+## <a name="march-2021"></a>Mart 2021
+
+### <a name="guidance-on-how-to-enable-support-for-tls-12-in-your-environment-in-preparation-for-upcoming-azure-ad-tls-1011-deprecation"></a>Yakında Azure AD TLS 1.0/1.1 kullanım dışı bırakma için hazırlanmaya yönelik ortamınızda TLS 1,2 desteğinin nasıl etkinleştirileceği hakkında rehberlik
+
+**Şunu yazın:** Değişiklik planı  
+**Hizmet kategorisi:** yok  
+**Ürün yeteneği:** Standartlarına
+
+Azure Active Directory 30 Haziran 2021 ' den itibaren Azure Active Directory dünya çapındaki bölgelerde aşağıdaki protokolleri kullanımdan kaldırır:
+
+
+- TLS 1.0
+- TLS 1.1
+- 3DES şifre paketi (TLS_RSA_WITH_3DES_EDE_CBC_SHA)
+
+Etkilenen ortamlar şunlardır:
+
+- Azure ticari bulut
+- Office 365 GCC ve WW
+
+Ek rehberlik için, [Azure AD TLS 1,1 ve 1,0 kullanım dışı için ORTAMıNıZDA TLS 1,2 desteğini etkinleştirme](https://docs.microsoft.com/troubleshoot/azure/active-directory/enable-support-tls-environment)bölümüne bakın.
+
+---
+
+### <a name="public-preview---azure-ad-entitlement-management-now-supports-multi-geo-sharepoint-online"></a>Genel Önizleme-Azure AD Yetkilendirme Yönetimi artık çok coğrafi coğrafi SharePoint Online 'ı destekliyor
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Farklı  
+**Ürün yeteneği:** Yetkilendirme Yönetimi
+ 
+Çok coğrafi coğrafi SharePoint Online kullanan kuruluşlar için artık belirli çok coğrafi bilgisayarlı ortamları, Yetkilendirme Yönetimi erişim paketlerinize ekleyebilirsiniz. [Daha fazla bilgi edinin](../governance/entitlement-management-catalog-create.md#add-a-multi-geo-sharepoint-site-preview).
+
+---
+
+### <a name="public-preview---restore-deleted-apps-from-app-registrations"></a>Genel Önizleme-Uygulama kayıtları silinen uygulamaları geri yükleme
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Farklı  
+**Ürün yeteneği:** Geliştirici deneyimi
+ 
+Müşteriler artık Azure portal silinen uygulama kayıtlarını görüntüleyebilir, geri yükleyebilir ve kalıcı olarak kaldırabilir. Bu, yalnızca bir dizinle ilişkili uygulamalar için geçerlidir, kişisel bir Microsoft hesabı uygulamalar değildir. [Daha fazla bilgi edinin](../develop/quickstart-restore-app.md).
+ 
+---
+
+### <a name="public-preview---new-user-action-in-conditional-access-for-registering-or-joining-devices"></a>Genel Önizleme-cihazları kaydetmek veya katılmak için koşullu erişimde yeni "Kullanıcı eylemi"
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Koşullu erişim  
+**Ürün yeteneği:** Kimlik güvenliği & koruması
+ 
+ Koşullu erişim bölümünde "cihazları Kaydet veya Birleştir" adlı yeni bir kullanıcı eylemi mevcuttur. Bu Kullanıcı eylemi, Azure AD cihaz kaydı için Multi-Factor Authentication (MFA) ilkelerini denetlemenize olanak tanır. 
+
+Şu anda, bu kullanıcı eylemi yalnızca kullanıcılar cihazları kaydederken veya Azure AD 'ye birleştirmekte olan MFA 'yı bir denetim olarak etkinleştirmenizi sağlar. Azure AD cihaz kaydına bağımlı olan veya buna bağlı olan diğer denetimler bu kullanıcı eylemiyle devre dışı bırakıldı. [Daha fazla bilgi edinin](../conditional-access/concept-conditional-access-cloud-apps.md#user-actions). 
+ 
+---
+
+### <a name="public-preview---optimize-connector-groups-to-use-the-closest-application-proxy-cloud-service"></a>Genel Önizleme-en yakın uygulama proxy 'Si bulut hizmetini kullanmak için bağlayıcı gruplarını Iyileştirme
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Uygulama proxy 'Si  
+**Ürün yeteneği:** Access Control
+ 
+Bu yeni özellik sayesinde bağlayıcı grupları, bir uygulamanın barındırıldığı en yakın bölgesel uygulama proxy hizmetine atanabilir. Bu, uygulamaların ana kiracının bölgesi dışındaki bölgelerde barındırıldığı senaryolarda uygulama performansını iyileştirebilir. [Daha fazla bilgi edinin](../manage-apps/application-proxy-network-topology.md#optimize-connector-groups-to-use-closest-application-proxy-cloud-service-preview). 
+ 
+---
+
+### <a name="public-preview---external-identities-self-service-sign-up-in-aad-using-email-one-time-passcode-accounts"></a>Genel Önizleme-e-posta One-Time geçiş kodu hesapları kullanarak AAD 'de kaydolma Self-Service
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** EAı  
+**Ürün yeteneği:** B2B/B2C
+
+Dış kullanıcılar artık Azure AD 1. taraf ve LOB uygulamalarında oturum açmak için e-posta One-Time geçiş kodu hesaplarını kullanabiliyor. [Daha fazla bilgi edinin](../external-identities/one-time-passcode.md).
+
+---
+
+### <a name="public-preview---availability-of-ad-fs-sign-ins-in-azure-ad"></a>Genel Önizleme-Azure AD 'de AD FS Sign-Ins kullanılabilirliği
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Kimlik doğrulamaları (oturum açma)  
+**Ürün yeteneği:** & raporlamayı izleme
+ 
+AD FS oturum açma etkinliği artık Azure AD etkinlik raporlama ile tümleştirilebilir, karma kimlik altyapısının birleştirilmiş bir görünümünü sağlar. Azure AD Sign-Ins raporu, Log Analytics ve Azure Izleyici çalışma kitaplarını kullanarak, hem AD FS AAD 'nin hem de AD FS hesabı kilitlenmelerinin, hatalı parola denemelerinde ve beklenmedik oturum açma denemelerinin olumsuz artışlarına yönelik derinlemesine analizler gerçekleştirmek mümkündür.
+
+Daha fazla bilgi edinmek için, [Connect Health Ile Azure AD 'de oturum açma AD FS](../hybrid/how-to-connect-health-ad-fs-sign-in.md)ziyaret edin.
+
+---
+
+### <a name="general-availability---staged-rollout-to-cloud-authentication"></a>Bulut kimlik doğrulaması için genel kullanılabilirlik-hazırlanmış dağıtım
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** AD Connect  
+**Ürün yeteneği:** Kullanıcı kimlik doğrulaması
+ 
+Bulut kimlik doğrulamasına yönelik hazırlanmış dağıtım artık genel kullanıma sunulmuştur. Hazırlanan dağıtım özelliği, Kullanıcı gruplarını, geçiş kimlik doğrulaması (PTA) veya parola karması eşitleme (PHS) gibi bulut kimlik doğrulama yöntemleriyle seçmeli olarak test etmenize olanak tanır. Diğer bir deyişle, Federasyon etki alanlarındaki diğer tüm kullanıcılar, kullanıcıların kimliğini doğrulamak için AD FS veya başka bir Federasyon hizmeti gibi Federasyon hizmetlerini kullanmaya devam eder. [Daha fazla bilgi edinin](../hybrid/how-to-connect-staged-rollout.md).
+
+---
+
+### <a name="general-availability---user-type-attribute-can-now-be-updated-in-the-azure-admin-portal"></a>Genel kullanılabilirlik-Kullanıcı türü özniteliği artık Azure yönetim portalı 'nda güncelleştirilebilen olabilir
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Kullanıcı deneyimi ve yönetimi  
+**Ürün yeteneği:** Kullanıcı Yönetimi
+ 
+Müşteriler artık Azure yönetici portalından Kullanıcı profili bilgilerini güncelleştirdiklerinde Azure AD kullanıcılarının kullanıcı türünü güncelleştirebilir. Kullanıcı türü de Microsoft Graph güncelleştirilebilen olabilir. Daha fazla bilgi için bkz. [Kullanıcı profili bilgilerini ekleme veya güncelleştirme](active-directory-users-profile-azure-portal.md).
+ 
+---
+
+### <a name="general-availability---replica-sets-for-azure-active-directory-domain-services"></a>Genel kullanılabilirlik-Azure Active Directory Domain Services için çoğaltma kümeleri
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Azure AD Domain Services  
+**Ürün yeteneği:** Azure AD Domain Services
+ 
+Azure AD DS 'de çoğaltma kümelerinin yeteneği artık genel kullanıma sunulmuştur. [Daha fazla bilgi edinin](https://docs.microsoft.com/azure/active-directory-domain-services/concepts-replica-sets).
+ 
+---
+
+### <a name="general-availability---collaborate-with-your-partners-using-email-one-time-passcode-in-the-azure-government-cloud"></a>Genel kullanılabilirlik-Azure Kamu bulutunda e-posta One-Time geçiş kodu kullanarak iş ortaklarınızla Işbirliği yapın
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** EAı  
+**Ürün yeteneği:** B2B/B2C
+ 
+Microsoft Azure Kamu buluttaki kuruluşlar artık konuklarının e-posta One-Time geçiş kodu ile davetleri kullanmalarına olanak sağlayabilir. Bu, Azure Kamu bulutunda Azure AD, Microsoft veya Gmail hesabı olmayan tüm konuk kullanıcıların, paylaşılan kaynaklarda oturum açmak üzere geçici bir kod isteyerek ve girerek iş ortaklarıyla işbirliği yapabilmesini sağlar. [Daha fazla bilgi edinin](../external-identities/one-time-passcode.md#note-for-azure-us-government-customers).
+
+---
+
+### <a name="new-federated-apps-available-in-azure-ad-application-gallery---march-2021"></a>Azure AD uygulama galerisinde yeni Federasyon uygulamaları kullanılabilir-Mart 2021
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Kurumsal uygulamalar  
+**Ürün yeteneği:** üçüncü taraf tümleştirmesi
+ 
+Şu Mart 2021 ' de, federasyon desteğiyle App Gallery 'de aşağıdaki 37 yeni uygulamaları ekledik:
+
+[Bambuser Live video alışverişi](https://lcx.bambuser.com/), [deepdyve Inc](https://www.deepdyve.com/azure-sso), [Moqups](../saas-apps/moqups-tutorial.md), [RICOH Spaces mobil](https://ricohspaces.app/welcome), [flipgrid](https://auth.flipgrid.com/), [Hcaptcha Enterprise](../saas-apps/hcaptcha-enterprise-tutorial.md), [SchoolStream asa](https://jsd.schoolstreamk12.com/ASA/ASAlogin.aspx), [transkusursuz GlobalLink panosu](../saas-apps/transperfect-globallink-dashboard-tutorial.md) [SimplificaCI](https://app.simplificaci.com.br/), [Misyonumuz LXP](../saas-apps/thrive-lxp-tutorial.md), [lexonin TalentScape](../saas-apps/lexonis-talentscape-tutorial.md), [exium](../saas-apps/exium-tutorial.md), [sapient](../saas-apps/sapient-tutorial.md), [truechoice](../saas-apps/truechoice-tutorial.md), [RICOH Spaces](https://ricohspaces.app/welcome), [Saba Cloud](../saas-apps/learning-at-work-tutorial.md), [Acunetix 360](../saas-apps/acunetix-360-tutorial.md), [exceed.ai](../saas-apps/exceed-ai-tutorial.md), [GitHub kurumsal yönetilen kullanıcısı](../saas-apps/github-enterprise-managed-user-tutorial.md), [Outlook için Kurumsal Vault.Cloud](https://login.microsoftonline.com/common/oauth2/v2.0/authorize?response_type=id_token&scope=openid%20profile%20User.Read&client_id=7176efe5-e954-4aed-b5c8-f5c85a980d3a&nonce=4b9e1981-1bcb-4938-a283-86f6931dc8cb), [smartlook](../saas-apps/smartlook-tutorial.md), [Accenture akademik My](../saas-apps/accenture-academy-tutorial.md), [OnShape](../saas-apps/onshape-tutorial.md), [Tradeshift](../saas-apps/tradeshift-tutorial.md), [JuriBlox](../saas-apps/juriblox-tutorial.md), [securitystudio](../saas-apps/securitystudio-tutorial.md), et [verileri](https://app.clicdata.com/), [etgreen](../saas-apps/evergreen-tutorial.md), [patchdestesi](https://patchdeck.com/ad_auth/authenticate/), [Faks. Ayrıca](../saas-apps/fax.plus-tutorial.md), [validsign](../saas-apps/validsign-tutorial.md), [AWS çoklu oturum açma](../saas-apps/aws-single-sign-on-tutorial.md), [Nura Space](https://dashboard.nuraspace.com/login), [Broadcom DX SaaS](../saas-apps/broadcom-dx-saas-tutorial.md), [Interplay Learning](https://skilledtrades.interplaylearning.com/#login), [sendpro Enterprise](../saas-apps/sendpro-enterprise-tutorial.md), [fortisase sıya](../saas-apps/fortisase-sia-tutorial.md)
+
+Ayrıca, tüm uygulamaların belgelerini buradan bulabilirsiniz: https://aka.ms/AppsTutorial
+
+Uygulamanızı Azure AD uygulama galerisinde listelemek için buradaki ayrıntıları okuyun: https://aka.ms/AzureADAppRequest
+
+---
+
+### <a name="new-provisioning-connectors-in-the-azure-ad-application-gallery---march-2021"></a>Azure AD uygulama galerisinde yeni sağlama bağlayıcıları-Mart 2021
+
+**Şunu yazın:** Yeni Özellik  
+**Hizmet kategorisi:** Uygulama sağlama  
+**Ürün yeteneği:** üçüncü taraf tümleştirmesi
+
+Artık yeni tümleştirilmiş uygulamalar için Kullanıcı hesapları oluşturmayı, güncellemeyi ve silmeyi otomatik hale getirebilirsiniz:
+
+- [AWS çoklu oturum açma](../saas-apps/aws-single-sign-on-provisioning-tutorial.md)
+- [Bpanda](../saas-apps/bpanda-provisioning-tutorial.md)
+- [Britive](../saas-apps/britive-provisioning-tutorial.md)
+- [GitHub kurumsal yönetilen Kullanıcı](../saas-apps/github-enterprise-managed-user-provisioning-tutorial.md)
+- [Grammarly](../saas-apps/grammarly-provisioning-tutorial.md)
+- [LogicGate](../saas-apps/logicgate-provisioning-tutorial.md)
+- [SecureLogin](../saas-apps/secure-login-provisioning-tutorial.md)
+- [TravelPerk](../saas-apps/travelperk-provisioning-tutorial.md)
+
+Otomatik Kullanıcı hesabı sağlamayı kullanarak kuruluşunuzun daha iyi güvenliğini sağlama hakkında daha fazla bilgi için bkz. [Azure AD Ile SaaS uygulamalarına Kullanıcı sağlamayı otomatikleştirme](../app-provisioning/user-provisioning.md).
+ 
+---
+
+### <a name="introducing-ms-graph-api-for-company-branding"></a>Şirket markası için MS Graph API 'ye giriş
+
+**Şunu yazın:** Değiştirilen özellik  
+**Hizmet kategorisi:** MS grafiği  
+**Ürün yeteneği:** B2B/B2C
+
+[Şirket markalaması Için MS Graph API](https://docs.microsoft.com/graph/api/resources/organizationalbrandingproperties)  , Azure AD veya Microsoft 365 oturum açma deneyiminde, marka parametrelerinin programlı olarak yönetimine izin vermek için kullanılabilir.
+
+---
+
+### <a name="general-availability---header-based-authentication-sso-with-application-proxy"></a>Uygulama proxy 'Si ile genel kullanılabilirlik-üst bilgi tabanlı kimlik doğrulama SSO 'SU
+
+**Şunu yazın:** Değiştirilen özellik  
+**Hizmet kategorisi:** Uygulama proxy 'Si  
+**Ürün yeteneği:** Access Control
+ 
+Üst bilgi tabanlı kimlik doğrulaması için Azure AD Uygulama Ara Sunucusu yerel desteği genel kullanıma sunuldu. Bu özellikle, dağıtım için gerekli ek bileşenler olmadan uygulama için HTTP üstbilgileri olarak gereken kullanıcı özniteliklerini yapılandırabilirsiniz. [Daha fazla bilgi edinin](../manage-apps/application-proxy-configure-single-sign-on-with-headers.md).
+
+---
+
+### <a name="two-way-sms-for-mfa-server-is-no-longer-supported"></a>MFA sunucusu için iki yönlü SMS artık desteklenmiyor
+
+**Şunu yazın:** Kullanım dışı  
+**Hizmet kategorisi:** MFA  
+**Ürün yeteneği:** Kimlik güvenliği & koruması
+ 
+
+MFA sunucusu için iki yönlü SMS, başlangıçta 2018 ' de kullanımdan kaldırılmıştır ve 24 Şubat 2021 ' den sonra desteklenmeyecektir. Yöneticiler, hala iki yönlü SMS kullanan kullanıcılar için başka bir yöntemi etkinleştirmelidir.
+
+E-posta bildirimleri ve Azure portalı hizmet durumu bildirimleri, 8 Aralık 2020 ve 28 Ocak 2021 tarihinde etkilenen yöneticilere gönderilmiştir. Uyarılar, aboneliğe bağlı olan sahip, Ikincil sahip, yönetici ve hizmet yöneticisi RBAC rollerine gitti. [Daha fazla bilgi edinin](../authentication/how-to-authentication-two-way-sms-unsupported.md).
+ 
+---
+ 
 ## <a name="february-2021"></a>Şubat 2021
 
 ### <a name="email-one-time-passcode-authentication-on-by-default-starting-october-2021"></a>Varsayılan olarak bir kerelik geçiş kodu kimlik doğrulamasını e-posta 2021 tarihinde başlayarak
@@ -109,7 +308,7 @@ Müşteriler artık mevcut dış Konuk kullanıcıları, kullanım durumlarını
 **Hizmet kategorisi:** Uygulama sağlama  
 **Ürün yeteneği:** Kimlik yaşam döngüsü yönetimi
  
-Müşteriler artık, eşitleme API 'Lerini çağırmak için uygulama izni olarak Application. ReadWrite. ownedcan kullanabilir. Bu, yalnızca Azure AD 'den üçüncü taraf uygulamalara (örneğin, AWS, veri blokları, vb.) sağlanması için desteklenir. Bu, şu anda HR sağlama (Workday/başarılı faktörleri) veya bulut eşitleme (AD ile Azure AD) için desteklenmiyor. [Daha fazla bilgi edinin](/graph/api/resources/provisioningobjectsummary?view=graph-rest-beta).
+Müşteriler artık, eşitleme API 'Lerini çağırmak için uygulama izni olarak Application. ReadWrite. ownedcan kullanabilir. Bu, yalnızca Azure AD 'den üçüncü taraf uygulamalara (örneğin, AWS, veri blokları, vb.) sağlanması için desteklenir. Bu, şu anda HR sağlama (Workday/başarılı faktörleri) veya bulut eşitleme (AD ile Azure AD) için desteklenmiyor. [Daha fazla bilgi edinin](/graph/api/resources/provisioningobjectsummary?view=graph-rest-beta&preserve-view=true).
  
 ---
 
@@ -557,7 +756,7 @@ Daha fazla bilgi için [Azure AD yetkilendirme yönetiminde bir erişim paketini
 **Hizmet kategorisi:** Tüm Azure AD uygulamaları  
 **Ürün yeteneği:** Standartlarına
 
-Azure Active Directory 30 Haziran 2021 ' ye kadar dünya çapında Azure Active Directory bölgelerinde aşağıdaki protokolleri kullanımdan kaldırır:
+Azure Active Directory 30 Haziran 2021 ' den itibaren Azure Active Directory dünya çapındaki bölgelerde aşağıdaki protokolleri kullanımdan kaldırır:
 
 - TLS 1.0
 - TLS 1.1
@@ -568,6 +767,8 @@ Etkilenen ortamlar:
 - Office 365 GCC ve WW
 
 İlgili duyuru tüm istemci-sunucu ve tarayıcı-sunucu birleşimleri, Azure, Office 365 ve Microsoft 365 hizmetleri için Azure Active Directory güvenli bir bağlantı sağlamak üzere TLS 1,2 ve modern şifre paketleri kullanmalıdır. Bu değişiklik [Azure ACTIVE DIRECTORY TLS 1,0 & 1,1 ve 3Des şifre paketi US gov bulutuna kullanımdan kalkmasıyla](whats-new.md#azure-active-directory-tls-10-tls-11-and-3des-deprecation-in-us-gov-cloud)ilgilidir.
+
+Kullanım dışı protokol bağımlılıklarını kaldırma kılavuzu için lütfen [ORTAMıNıZDAKI tls 1,2 desteğini etkinleştirmek Için Azure AD TLS 1,1 ve 1,0](https://docs.microsoft.com/troubleshoot/azure/active-directory/enable-support-tls-environment)kullanım dışı bölümüne bakın.
 
 ---
 
@@ -703,7 +904,7 @@ Bulut sağlama Aracısı genel önizlemede yayımlanmıştır ve artık Portal �
  
 Daha önce,/BitLocker uç noktası aracılığıyla BitLocker anahtarlarını kurtarabilirsiniz. Bu uç noktayı kullanımdan kaldıracağız ve müşteriler artık/ınformationprotectionaltında olan API 'YI kullanmaya başlamalıdır. 
 
-Bu değişiklikleri yansıtmak için belgelerdeki güncelleştirmeler için bkz. [BitLocker kurtarma API 'si](/graph/api/resources/bitlockerrecoverykey?view=graph-rest-beta) .
+Bu değişiklikleri yansıtmak için belgelerdeki güncelleştirmeler için bkz. [BitLocker kurtarma API 'si](/graph/api/resources/bitlockerrecoverykey?view=graph-rest-beta&preserve-view=true) .
 
 ---
 
@@ -785,7 +986,7 @@ Yalnızca belirli bir sertifika Iptal listesi (CRL) indirmesi için giden çağr
 **Hizmet kategorisi:** Tüm Azure AD uygulamaları  
 **Ürün yeteneği:** Standartlarına
  
-Azure Active Directory, aşağıdaki protokolleri 31 Mart 2021 tarihine kadar kullanımdan kaldırır:
+Azure Active Directory, 31 Mart 2021 ' den itibaren aşağıdaki protokolleri kullanımdan kaldırır:
 - TLS 1.0
 - TLS 1.1
 - 3DES şifre paketi (TLS_RSA_WITH_3DES_EDE_CBC_SHA)
@@ -795,10 +996,12 @@ Tüm istemci-sunucu ve tarayıcı-sunucu birleşimleri, Azure, Office 365 ve Mic
 Etkilenen ortamlar:
 - Azure US Gov
 - [Office 365 GCC High & DoD](/microsoft-365/compliance/tls-1-2-in-office-365-gcc)
+
+Kullanım dışı protokol bağımlılıklarını kaldırma kılavuzu için lütfen [ORTAMıNıZDAKI tls 1,2 desteğini etkinleştirmek Için Azure AD TLS 1,1 ve 1,0](https://docs.microsoft.com/troubleshoot/azure/active-directory/enable-support-tls-environment)kullanım dışı bölümüne bakın.
  
 ---
 
-### <a name="assign-applications-to-roles-on-au-and-object-scope"></a>AU ve nesne kapsamındaki rollere uygulama atama
+### <a name="assign-applications-to-roles-on-administrative-unit-and-object-scope"></a>Yönetim birimi ve nesne kapsamındaki rollere uygulama atama
 
 **Şunu yazın:** Yeni Özellik  
 **Hizmet kategorisi:** RAPORDAKI  
@@ -869,7 +1072,7 @@ Tümleştirme Yardımcısı (Önizleme) deneyimi artık Azure AD B2C Uygulama ka
 
 Artık Azure portal her bir Azure AD rolünün şablon KIMLIĞINI görüntüleyebilirsiniz. Azure AD 'de seçili rolün  **açıklamasını** seçin. 
 
-Müşterilerin, görünen ad yerine, PowerShell betiklerinde ve kodunda rol şablonu kimliklerini kullanması önerilir. Rol şablonu KIMLIĞI [Directoryroles](/graph/api/resources/directoryrole) ve [roledefinition](/graph/api/resources/unifiedroledefinition?view=graph-rest-beta) nesnelerinde kullanılmak üzere desteklenir. Rol şablonu kimlikleri hakkında daha fazla bilgi için bkz. [Azure AD yerleşik rolleri](../roles/permissions-reference.md).
+Müşterilerin, görünen ad yerine, PowerShell betiklerinde ve kodunda rol şablonu kimliklerini kullanması önerilir. Rol şablonu KIMLIĞI [Directoryroles](/graph/api/resources/directoryrole) ve [roledefinition](/graph/api/resources/unifiedroledefinition?view=graph-rest-beta&preserve-view=true) nesnelerinde kullanılmak üzere desteklenir. Rol şablonu kimlikleri hakkında daha fazla bilgi için bkz. [Azure AD yerleşik rolleri](../roles/permissions-reference.md).
 
 ---
 
@@ -993,183 +1196,4 @@ Son zamanlarda, kimlik doğrulamasını 365 güne kadar genişletmek için güve
 
 En iyi kullanıcı deneyimi için, güvenilir cihazlarda, konumlarda veya düşük riskli oturumlarda oturum ömrünü uzatmak için güvenilen bir cihaz ayarında MFA hatırlama konusuna alternatif olarak, koşullu erişim oturum açma sıklığını kullanmanızı öneririz. Başlamak için, yeniden [kimlik doğrulama deneyimini iyileştirmek üzere en son kılavuzumuzu](../authentication/concepts-azure-multi-factor-authentication-prompts-session-lifetime.md)inceleyin.
 
----
-
-## <a name="september-2020"></a>Eylül 2020
-
-### <a name="new-provisioning-connectors-in-the-azure-ad-application-gallery---september-2020"></a>Azure AD uygulama galerisinde yeni sağlama bağlayıcıları-Eylül 2020
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Uygulama sağlama  
-**Ürün yeteneği:** üçüncü taraf tümleştirmesi
- 
-Artık yeni tümleştirilmiş uygulamalar için Kullanıcı hesapları oluşturmayı, güncellemeyi ve silmeyi otomatik hale getirebilirsiniz:
-
-- [CODA](../saas-apps/coda-provisioning-tutorial.md)
-- [Cofense Alıcı Eşitleme](../saas-apps/cofense-provision-tutorial.md)
-- [InVision](../saas-apps/invision-provisioning-tutorial.md)
-- [myday](../saas-apps/myday-provision-tutorial.md)
-- [SAP Analytics Cloud](../saas-apps/sap-analytics-cloud-provisioning-tutorial.md)
-- [Webroot güvenlik tanıma](../saas-apps/webroot-security-awareness-training-provisioning-tutorial.md)
-
-Otomatik Kullanıcı hesabı sağlamayı kullanarak kuruluşunuzun daha iyi güvenliğini sağlama hakkında daha fazla bilgi için bkz. [Azure AD Ile SaaS uygulamalarına Kullanıcı sağlamayı otomatikleştirme](../app-provisioning/user-provisioning.md).
- 
----
-### <a name="cloud-provisioning-public-preview-refresh"></a>Bulut sağlama genel önizlemeyi yenileme
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Azure AD bulut sağlama **ürün yeteneği:** kimlik yaşam döngüsü yönetimi
- 
-Azure AD Connect bulut sağlama genel önizleme yenileme özellikleri müşteri geri bildirimlerinden geliştirilen iki önemli geliştirmelere sahiptir: 
-
-- Azure portal aracılığıyla öznitelik eşleme deneyimi
-
-    Bu özellikle, BT yöneticileri Kullanıcı, Grup veya iletişim özniteliklerini AD 'den Azure AD 'ye eşleyerek bugün mevcut çeşitli eşleme türlerini kullanarak eşleyebilirsiniz. Öznitelik eşleme, Active Directory ' den Azure Active Directory akan özniteliklerin değerlerini standartlaştırarak kullanılan bir özelliktir. Bunlardan biri, AD 'den Azure AD 'ye ait olan öznitelik değerinin doğrudan eşlenip eşlenmeyeceğini belirleyebilir veya kullanıcıları sağlarken öznitelik değerlerini dönüştürmek için ifadeler kullanın. [Daha fazla bilgi edinin](../cloud-sync/how-to-attribute-mapping.md)
-
-- İsteğe bağlı sağlama veya test Kullanıcı deneyimi
-
-    Yapılandırmanızı ayarladıktan sonra, Kullanıcı dönüşümünün kapsamdaki tüm kullanıcılarınıza uygulamadan önce beklendiği gibi çalışıp çalışmadığını görmek için test etmek isteyebilirsiniz. İsteğe bağlı sağlama sayesinde, BT yöneticileri bir AD kullanıcısının ayırt edici adını (DN) girebilir ve beklenen şekilde eşitlenip eşitlenmediğini görebilirler. İsteğe bağlı sağlama, daha önce beklenen şekilde çalışan öznitelik eşleştirmelerinin sağlanması için harika bir yol sağlar. [Daha Fazla Bilgi](../cloud-sync/how-to-on-demand-provision.md)
- 
----
-
-### <a name="audited-bitlocker-recovery-in-azure-ad---public-preview"></a>Azure AD 'de denetlenen BitLocker kurtarma-genel önizleme
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Cihaz erişim yönetimi  
-**Ürün yeteneği:** Cihaz yaşam döngüsü yönetimi
- 
-BT yöneticileri veya son kullanıcılar erişimi olan BitLocker kurtarma anahtarlarını okuduklarında, Azure Active Directory artık kurtarma anahtarına kimin eriştiğini yakalayan bir denetim günlüğü oluşturur. Aynı denetim, BitLocker anahtarının ilişkilendirildiği cihazın ayrıntılarını sağlar.
-
-Son kullanıcılar [, kendi Kurtarma anahtarlarına Hesabım aracılığıyla erişebilirler](../user-help/my-account-portal-devices-page.md#view-a-bitlocker-key). BT yöneticileri, [Beta 'Daki BitLocker kurtarma anahtarı API 'si](/graph/api/resources/bitlockerrecoverykey?view=graph-rest-beta) veya Azure AD portalı aracılığıyla Kurtarma anahtarlarına erişebilir. Daha fazla bilgi için bkz. [Azure AD portalındaki BitLocker anahtarlarını görüntüleme veya kopyalama](../devices/device-management-azure-portal.md#view-or-copy-bitlocker-keys).
-
----
-
-### <a name="teams-devices-administrator-built-in-role"></a>Ekip cihazları yönetici yerleşik rolü
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** RAPORDAKI  
-**Ürün yeteneği:** Access Control
- 
-[Takımlar cihazları yönetici](../roles/permissions-reference.md#teams-devices-administrator) rolüne sahip kullanıcılar takımlar yönetim merkezinden [ekipten sertifikalı cihazları](https://www.microsoft.com/microsoft-365/microsoft-teams/across-devices/devices) yönetebilir. 
-
-Bu rol, kullanıcının tüm cihazları tek bakışta görüntülemesine olanak tanır ve bu sayede cihazları arayabilir ve filtreleyebilirsiniz. Kullanıcı oturum açma hesabı ve cihazın marka ve modeli dahil olmak üzere her bir cihazın ayrıntılarını da denetleyebilir. Kullanıcı cihazdaki ayarları değiştirebilir ve yazılım sürümlerini güncelleştirebilir. Bu rol, ekip etkinliklerini denetlemek ve cihazın kalitesini çağırmak için izinler vermez.
- 
----
-
-### <a name="advanced-query-capabilities-for-directory-objects"></a>Dizin nesneleri için Gelişmiş sorgu özellikleri
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** MS grafiği  
-**Ürün yeteneği:** Geliştirici deneyimi
- 
-Azure AD API 'Lerinde dizin nesneleri için sunulan tüm yeni sorgu özellikleri artık v 1.0 uç noktasında ve üretime hazır olarak sunulmaktadır. Geliştiriciler, Standart OData işleçlerini kullanarak Dizin nesnelerini ve ilgili bağlantıları sayabilir, arayabilir, filtreleyip sıralayabilir.
-
-Daha fazla bilgi edinmek için [buradaki](https://aka.ms/BlogPostMezzoGA)belgelere bakın ve bu [kısa anketle](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR_yN8EPoGo5OpR1hgmCp1XxUMENJRkNQTk5RQkpWTE44NEk2U0RIV0VZRy4u)de geri bildirim gönderebilirsiniz.
- 
----
-
-### <a name="public-preview-continuous-access-evaluation-for-tenants-who-configured-conditional-access-policies"></a>Genel Önizleme: koşullu erişim ilkelerini yapılandıran kiracılar için sürekli erişim değerlendirmesi
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Kimlik doğrulamaları (oturum açma)  
-**Ürün yeteneği:** Kimlik güvenliği & koruması
- 
-Artık sürekli erişim değerlendirmesi (CAE), koşullu erişim ilkelerine sahip Azure AD kiracılar için genel önizlemede kullanıma sunulmuştur. CAE ile kritik güvenlik olayları ve ilkeleri gerçek zamanlı olarak değerlendirilir. Buna hesap devre dışı bırakma, parola sıfırlama ve konum değişikliği dahildir. Daha fazla bilgi için bkz. [sürekli erişim değerlendirmesi](../conditional-access/concept-continuous-access-evaluation.md).
-
----
-
-### <a name="public-preview-ask-users-requesting-an-access-package-additional-questions-to-improve-approval-decisions"></a>Genel Önizleme: kullanıcılardan bir erişim paketi talep etmesini isteyin onay kararlarını artırmak için ek sorular
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Kullanıcı erişim yönetimi  
-**Ürün yeteneği:** Yetkilendirme Yönetimi
- 
-Yöneticiler artık bir erişim paketi isteyen kullanıcıların, Azure AD Yetkilendirme Yönetimi 'nin erişim portalından yalnızca iş gerekçesinin ötesinde ek sorulara yanıt yanıtlamasını gerektirebilir. Daha sonra bu kullanıcıların yanıtları daha doğru bir erişim onayı kararı vermek için onaylayanlara gösterilir. Daha fazla bilgi edinmek için bkz. [onay için ek istek sahibi bilgileri toplama (Önizleme)](../governance/entitlement-management-access-package-approval-policy.md#collect-additional-requestor-information-for-approval-preview).
- 
----
-
-### <a name="public-preview-enhanced-user-management"></a>Genel Önizleme: Gelişmiş Kullanıcı Yönetimi
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Kullanıcı Yönetimi  
-**Ürün yeteneği:** Kullanıcı Yönetimi
- 
-
-Azure AD portalı, tüm kullanıcılar ve silinen kullanıcılar sayfalarındaki kullanıcıları bulmayı kolaylaştıracak şekilde güncelleştirilmiştir. Önizlemedeki değişiklikler şunları içerir: 
-- Nesne KIMLIĞI, Dizin eşitleme durumu, oluşturma türü ve kimlik veren gibi daha görünür Kullanıcı özellikleri.
-- Arama şimdi ad, e-posta ve nesne kimliklerinin birleştirilmiş aramasına izin veriyor.
-- Kullanıcı türüne göre Gelişmiş filtreleme (üye, konuk ve yok), Dizin eşitleme durumu, oluşturma türü, şirket adı ve etki alanı adı.
-- Ad, Kullanıcı asıl adı ve silinme tarihi gibi özelliklerde yeni sıralama özellikleri.
-- Yeni bir Toplam Kullanıcı sayısı, tüm aramalarla veya filtrelerle güncelleştirilir.
-
-Daha fazla bilgi için lütfen [Azure Active Directory Içindeki Kullanıcı yönetimi geliştirmeleri (Önizleme)](../enterprise-users/users-search-enhanced.md)bölümüne bakın.
-
----
-
-### <a name="new-notes-field-for-enterprise-applications"></a>Kurumsal uygulamalar için yeni notlar alanı
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Kurumsal uygulamalar **ürün yeteneği:** SSO
-
-Kurumsal uygulamalara ücretsiz metin notları ekleyebilirsiniz. Kurumsal uygulamalar altındaki uygulamaları yönetici yapmanıza yardımcı olacak ilgili bilgileri ekleyebilirsiniz. Daha fazla bilgi için bkz. [hızlı başlangıç: Azure Active Directory (Azure AD) kiracınızdaki bir uygulamanın özelliklerini yapılandırma](../manage-apps/add-application-portal-configure.md). 
-
----
-
-### <a name="new-federated-apps-available-in-azure-ad-application-gallery---september-2020"></a>Azure AD uygulama galerisinde yeni Federasyon uygulamaları kullanılabilir-Eylül 2020
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Kurumsal uygulamalar  
-**Ürün yeteneği:** üçüncü taraf tümleştirmesi
-
-Eylül 2020 ' de, federasyon desteğiyle App Gallery 'de aşağıdaki 34 yeni uygulamaları ekledik:
-
-[VMware ufuk-birleştirilmiş erişim ağ geçidi](), [Pulse Secure PC](../saas-apps/vmware-horizon-unified-access-gateway-tutorial.md), [Inventory360](../saas-apps/pulse-secure-pcs-tutorial.md), [innetleştirilmiş](https://services.enteksystems.de/sso/microsoft/signup), [bookpencere](https://www.bookwidgets.com/sso/office365), [ZVD_Server](https://zaas.zenmutech.com/user/signin), [Iş için HashData](https://hashdata.app/login.xhtml), [securelogin](https://securelogin.securelogin.nu/sso/azure/login), [cybersolutions MAILBASEΣ/CMSS](../saas-apps/cybersolutions-mailbase-tutorial.md), [sibsolutions CYBERMAILΣ](../saas-apps/cybersolutions-cybermail-tutorial.md), [limbpacmms](https://auth.limblecmms.com/), [Glint Inc](../saas-apps/glint-inc-tutorial.md), MB [Yükseklik](../saas-apps/zeroheight-tutorial.md), [cinsiyet uygunluk](https://app.genderfitness.com/), [COEO portalı](https://my.coeo.com/), [Grammarly](../saas-apps/grammarly-tutorial.md), [fivetran](../saas-apps/fivetran-tutorial.md), [Kumolus](../saas-apps/kumolus-tutorial.md), [RSA dever Suite](../saas-apps/rsa-archer-suite-tutorial.md), [teamzbeceri](../saas-apps/teamzskill-tutorial.md), [raumfürraum](../saas-apps/raumfurraum-tutorial.md), [Saviynt](../saas-apps/saviynt-tutorial.md), [BIZMERLINHR](https://marketplace.bizmerlin.net/bmone/signup), [Mobil dolap](../saas-apps/mobile-locker-tutorial.md), [zengine](../saas-apps/zengine-tutorial.md), [CLOUDCADı](https://app.cloudcadi.com/login), [sıtem](https://simfonianalytics.com/accounts/microsoft/login/), [bir kimlik & erişim yönetimi](https://my.priva.com/), [Nitro Pro](https://www.gonitro.com/nps/product-details/downloads), [eventfinity](../saas-apps/eventfinity-tutorial.md), [fexa](../saas-apps/fexa-tutorial.md), [güvenli imzalama Enterprise Portal](https://www.securedsigning.com/aad/Auth/ExternalLogin/AdminPortal), [güvenli imzalama Enterprise Portal AAD kurulumu](https://www.securedsigning.com/aad/Auth/ExternalLogin/AdminPortal), [wınfc çevrimiçi](https://wisteconline.com/auth/oidc), [Oracle PeopleSoft tarafından korunan, F5 BIG-IP APM](../saas-apps/oracle-peoplesoft-protected-by-f5-big-ip-apm-tutorial.md)
-
-Ayrıca, tüm uygulamaların belgelerini buradan bulabilirsiniz: https://aka.ms/AppsTutorial .
-
-Uygulamanızı Azure AD uygulama galerisinde listelemek için buradaki ayrıntıları okuyun: https://aka.ms/AzureADAppRequest .
-
----
-
-### <a name="new-delegation-role-in-azure-ad-entitlement-management-access-package-assignment-manager"></a>Azure AD Yetkilendirme Yönetimi 'nde yeni temsili rolü: paket atama Yöneticisi 'ne erişim
-
-**Şunu yazın:** Yeni Özellik  
-**Hizmet kategorisi:** Kullanıcı erişim yönetimi  
-**Ürün yeteneği:** Yetkilendirme Yönetimi
- 
-Atamaları yönetmek için ayrıntılı izinler sağlamak üzere Azure AD Yetkilendirme Yönetimi 'ne yeni bir erişim paketi atama Yöneticisi rolü eklenmiştir. Artık bu roldeki bir kullanıcıya görevler temsilcisinden, bir erişim paketinin atama yönetimini iş sahibine devredebilir. Ancak, Access Package atama Yöneticisi, erişim paketi ilkelerini veya yöneticiler tarafından ayarlanan diğer özellikleri değiştiremez. 
-
-Bu yeni rolle, atamaların yönetimini devretmek ve diğer tüm erişim paketi yapılandırmalarında yönetim denetimini sürdürmek için gereken en az ayrıcalıklardan yararlanabilirsiniz. Daha fazla bilgi için bkz. [Yetkilendirme Yönetimi rolleri](../governance/entitlement-management-delegate.md#entitlement-management-roles).
- 
----
-
-### <a name="changes-to-privileged-identity-managements-onboarding-flow"></a>Privileged Identity Management ekleme akışında yapılan değişiklikler
-
-**Şunu yazın:** Değiştirilen özellik  
-**Hizmet kategorisi:** Privileged Identity Management  
-**Ürün yeteneği:** Privileged Identity Management
- 
-Daha önce, Privileged Identity Management (PıM) gerekli Kullanıcı onayını ve Azure AD MFA 'ya kayıt içeren PıM 'nin dikey penceresindeki bir ekleme akışını ekleme. Azure AD rolleri ve yöneticiler dikey penceresinde PıM deneyiminin son tümleştirmesi ile bu deneyimi kaldırdık. Geçerli P2 lisansına sahip herhangi bir kiracı, PıM 'ye otomatik olarak eklendi.
-
-PıM 'ye ekleme, kiracınızda herhangi bir dolaysız olumsuz etkiye sahip değildir. Aşağıdaki değişiklikleri bekleyebilir:
-- Etkin vs. gibi ek atama seçenekleri, PıM veya Azure AD rolleri ve yöneticiler dikey penceresinde atama yaptığınızda başlangıç ve bitiş zamanına uygundur. 
-- Doğrudan atama deneyimine getirilen yönetim birimleri ve özel roller gibi ek kapsam mekanizmaları. 
-- Genel yönetici veya ayrıcalıklı rol yöneticisiyseniz, PıM haftalık Özeti gibi birkaç ek e-posta almaya başlayabilirsiniz. 
-- Ayrıca, rol atamasıyla ilgili denetim günlüğünde MS-PIM hizmet sorumlusu ' nı da görebilirsiniz. Bu beklenen değişikliğin normal iş akışınızı etkilememesi gerekir.
-
- Daha fazla bilgi için bkz. [Privileged Identity Management kullanmaya başlama](../privileged-identity-management/pim-getting-started.md).
-
----
-
-### <a name="azure-ad-entitlement-management-the-select-pane-of-access-package-resources-now-shows-by-default-the-resources-currently-in-the-selected-catalog"></a>Azure AD Yetkilendirme Yönetimi: erişim paketi kaynaklarının seçme bölmesi artık varsayılan olarak seçili katalogdaki kaynakları gösterir
-
-**Şunu yazın:** Değiştirilen özellik  
-**Hizmet kategorisi:** Kullanıcı erişim yönetimi  
-**Ürün yeteneği:** Yetkilendirme Yönetimi
- 
-
-Erişim paketi oluşturma akışında, kaynak rolleri sekmesinde, seçim bölmesi davranışı değişiyor. Şu anda varsayılan davranış, seçilen kataloğa eklenen kullanıcının ve kaynakların sahip olduğu tüm kaynakları göstermek olur. 
-
-Bu deneyim, kullanıcıların katalogdan kolayca kaynak seçebilmek için varsayılan olarak katalogda zaten eklenen kaynakları görüntüleyecek şekilde değiştirilecektir. Güncelleştirme, erişim paketlerine eklenecek kaynakların keşfediliğine yardımcı olur ve kataloğun parçası olmayan kullanıcıya ait kaynakları yanlışlıkla ekleme riskini azaltır. Daha fazla bilgi edinmek için bkz. [Azure AD yetkilendirme yönetiminde yeni bir erişim paketi oluşturma](../governance/entitlement-management-access-package-create.md#resource-roles).
- 
 ---

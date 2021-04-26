@@ -4,13 +4,13 @@ description: Uygulamaları üretim dışı bir yuvaya dağıtmayı ve üretime n
 ms.assetid: e224fc4f-800d-469a-8d6a-72bcde612450
 ms.topic: article
 ms.date: 04/30/2020
-ms.custom: fasttrack-edit
-ms.openlocfilehash: c779e95b790d91b801d5d35b4702191f5e7986d5
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.custom: fasttrack-edit, devx-track-azurepowershell
+ms.openlocfilehash: 8a26332250f5c53116d940a2b625eb8d7991c187
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104802973"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833121"
 ---
 # <a name="set-up-staging-environments-in-azure-app-service"></a>Azure App Service’ta hazırlık ortamları ayarlama
 <a name="Overview"></a>
@@ -248,7 +248,7 @@ Ayar kaydedildikten sonra, belirtilen istemci yüzdesi, bir üretim dışı yuva
 İstemci belirli bir yuvaya otomatik olarak yönlendirildikten sonra, o istemci oturumunun ömrü için bu yuvaya "sabitlenmiş" olur. İstemci tarayıcısında, `x-ms-routing-name` http başlıklarınızın tanımlama bilgisine bakarak oturumunuzun hangi yuvaya sabitlendiği hakkında bilgi alabilirsiniz. "Hazırlama" yuvasına yönlendirilen bir istek tanımlama bilgisine sahiptir `x-ms-routing-name=staging` . Üretim yuvasına yönlendirilen bir istek tanımlama bilgisine sahiptir `x-ms-routing-name=self` .
 
    > [!NOTE]
-   > Azure portal yanında, [`az webapp traffic-routing set`](/cli/azure/webapp/traffic-routing#az-webapp-traffic-routing-set) DevOps işlem hatları veya diğer otomasyon sistemleri gıbı CI/CD araçlarından yönlendirme yüzdelerini ayarlamak Için Azure CLI 'daki komutunu da kullanabilirsiniz.
+   > Azure portal yanında, [`az webapp traffic-routing set`](/cli/azure/webapp/traffic-routing#az_webapp_traffic_routing_set) DevOps işlem hatları veya diğer otomasyon sistemleri gıbı CI/CD araçlarından yönlendirme yüzdelerini ayarlamak Için Azure CLI 'daki komutunu da kullanabilirsiniz.
    > 
 
 ### <a name="route-production-traffic-manually"></a>Üretim trafiğini el ile yönlendirin

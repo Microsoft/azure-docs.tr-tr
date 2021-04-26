@@ -13,12 +13,12 @@ ms.topic: overview
 ms.custom: mvc, seodec18
 ms.date: 03/25/2021
 ms.author: keithp
-ms.openlocfilehash: 0e07839c3c5ce542335eeadc92e6a3c98fe87856
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 418c8f0844bf2336ce0d4a681071f237d81877ca
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105606989"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107505726"
 ---
 # <a name="what-is-azure-dedicated-hsm"></a>Azure Ayrılmış HSM nedir?
 
@@ -32,7 +32,7 @@ Bunlar sağlandıktan sonra, HSM cihazları doğrudan bir müşterinin sanal ağ
 
 ### <a name="fips-140-2-level-3-compliance"></a>FIPS 140-2 düzey-3 uyumluluğu
 
-Birçok kuruluşta, şifreleme anahtarlarının [fıps 140-2 düzey 3 tarafından](https://csrc.nist.gov/publications/detail/fips/140/2/final) doğrulanan HSM 'lerde depolanması gerektiğini belirten katı sektör düzenlemeleri vardır. Azure ayrılmış HSM ve yeni bir tek kiracılı teklif, [Azure Key Vault YÖNETILEN HSM (Önizleme)](https://docs.microsoft.com/azure/key-vault/managed-hsm), finansal hizmetler sektör, kamu kurumları ve DIĞER kişilerin FIPS 140-2 düzey 3 gereksinimlerini karşıladığından farklı sektör segmentlerinden müşterilere yardımcı olma. Microsoft 'un çok kiracılı [Azure Key Vault](https://docs.microsoft.com/azure/key-vault) hizmeti şu anda FIPS 140-2 düzey 2 tarafından doğrulanan HSM 'leri kullanmaktadır. 
+Birçok kuruluşta, şifreleme anahtarlarının [fıps 140-2 düzey 3 tarafından](https://csrc.nist.gov/publications/detail/fips/140/2/final) doğrulanan HSM 'lerde depolanması gerektiğini belirten katı sektör düzenlemeleri vardır. Azure ayrılmış HSM ve yeni bir tek kiracılı teklif, [Azure Key Vault YÖNETILEN HSM](https://docs.microsoft.com/azure/key-vault/managed-hsm), finansal hizmetler sektör, kamu kurumları ve diğerleri FIPS 140-2 düzey 3 gereksinimlerini karşılar. Microsoft 'un çok kiracılı [Azure Key Vault](https://docs.microsoft.com/azure/key-vault) hizmeti şu anda FIPS 140-2 düzey 2 tarafından doğrulanan HSM 'leri kullanmaktadır. 
 
 ### <a name="single-tenant-devices"></a>Tek kiracılı cihazlar
 
@@ -72,7 +72,7 @@ Azure ayrılmış HSM aşağıdaki tür senaryoya uygun değildir: Azure adanmı
 
 ### <a name="it-depends"></a>Duruma göre değişir
 
-Azure ayrılmış HSM 'nin sizin için çalışıp çalışmadığına göre, gereksinimlerinize ve yapamayacaksınız. FIPS 140-2 düzey 3 gereksinimi bir örnektir. Bu gereksinim ortak ve Azure adanmış HSM ve yeni bir tek kiracılı tekliftir, [Azure Key Vault YÖNETILEN HSM (Önizleme)](https://docs.microsoft.com/azure/key-vault/managed-hsm) , şu anda bu dosyayı toplantıya yönelik seçeneklerdir. Bu uygulanan gereksinimleri ilgili değilse, genellikle Azure Key Vault ve Azure adanmış HSM arasında bir seçimdir. Karar vermeden önce gereksinimlerinizi değerlendirin.
+Azure ayrılmış HSM 'nin sizin için çalışıp çalışmadığına göre, gereksinimlerinize ve yapamayacaksınız. FIPS 140-2 düzey 3 gereksinimi bir örnektir. Bu gereksinim, yaygın ve Azure ayrılmış HSM ve yeni bir tek kiracılı tekliftir ve [Azure Key Vault YÖNETILEN HSM](https://docs.microsoft.com/azure/key-vault/managed-hsm) , şu anda bu dosyayı toplantıya yönelik seçeneklerdir. Bu uygulanan gereksinimleri ilgili değilse, genellikle Azure Key Vault ve Azure adanmış HSM arasında bir seçimdir. Karar vermeden önce gereksinimlerinizi değerlendirin.
 
 Seçenekleriniz için gereken durumlar şunlardır: 
 

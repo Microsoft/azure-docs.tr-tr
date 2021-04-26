@@ -15,12 +15,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 09/23/2020
 ms.author: yelevin
-ms.openlocfilehash: f8d795dcf64230140e1dd07e3f30ca3aa6825ab4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2164b8ac6e62b8826d5879da07384769c503bfb5
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99807012"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107598610"
 ---
 # <a name="bring-your-own-machine-learning-ml-into-azure-sentinel"></a>Kendi Machine Learning (ML) Azure Sentinel 'e taşıyın
 
@@ -137,7 +137,7 @@ az monitor log-analytics workspace data-export list --resource-group "RG_NAME" -
 
 ### <a name="export-custom-data"></a>Özel verileri dışarı aktar
 
-Log Analytics otomatik dışarı aktarma tarafından desteklenmeyen özel veriler için, mantıksal uygulama veya diğer çözümleri kullanarak verilerinizi taşıyabilirsiniz. [Dışarı aktarma Log Analytics verilerine blob Store](https://www.borninthecloud.com/exporting-log-analytics-data-to-blob-store/?preview=true) bloguna ve betiğe başvurabilirsiniz.
+Log Analytics otomatik dışarı aktarma tarafından desteklenmeyen özel veriler için, mantıksal uygulama veya diğer çözümleri kullanarak verilerinizi taşıyabilirsiniz. [Dışarı aktarma Log Analytics verilerine blob Store](https://techcommunity.microsoft.com/t5/azure-monitor/log-analytics-data-export-preview/ba-p/1783530) bloguna ve betiğe başvurabilirsiniz.
 
 ### <a name="correlate-with-data-outside-of-azure-sentinel"></a>Azure sentinel dışındaki verilerle bağıntı
 

@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/04/2021
 ms.author: damendo
-ms.openlocfilehash: f4d97b81bf8f11b8380f04dcbfdb72bd658805ab
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 98c0a6f88da717256e78a748902317a90a369a9c
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100579234"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533632"
 ---
 # <a name="traffic-analytics-frequently-asked-questions"></a>Trafik Analizi sık sorulan sorular
 
@@ -59,62 +59,6 @@ Bir abonelik için kullanıcıya atanan rolleri denetlemek için:
 3. Belirtilen bir kullanıcıya atanan tüm rolleri listelemek için  **Get-Azroleatama-Signınname [User email]-IncludeClassicAdministrators** komutunu kullanın. 
 
 Herhangi bir çıkış görmüyorsanız, komutları çalıştırmak için erişim sağlamak üzere ilgili abonelik yöneticisine başvurun. Daha ayrıntılı bilgi için bkz. [Azure PowerShell kullanarak Azure rol atamaları ekleme veya kaldırma](../role-based-access-control/role-assignments-powershell.md).
-
-
-## <a name="in-which-azure-regions-is-traffic-analytics-available"></a>Hangi Azure bölgeleri Trafik Analizi kullanılabilir?
-
-NSG 'ler için trafik analizini aşağıdaki desteklenen bölgelerden herhangi birinde kullanabilirsiniz:
-- Orta Kanada
-- Orta Batı ABD
-- Doğu ABD
-- Doğu ABD 2
-- Orta Kuzey ABD
-- Orta Güney ABD
-- Central US
-- Batı ABD
-- Batı ABD 2
-- Orta Fransa
-- West Europe
-- Kuzey Avrupa
-- Güney Brezilya
-- Batı Birleşik Krallık
-- Güney Birleşik Krallık
-- Doğu Avustralya
-- Güneydoğu Avustralya 
-- Doğu Asya
-- Güneydoğu Asya
-- Güney Kore - Orta
-- Orta Hindistan
-- Güney Hindistan
-- Doğu Japonya
-- Batı Japonya
-- US Gov Virginia
-- Çin Doğu 2
-
-Log Analytics çalışma alanı aşağıdaki bölgelerde bulunmalıdır:
-- Orta Kanada
-- Orta Batı ABD
-- Doğu ABD
-- Doğu ABD 2
-- Orta Kuzey ABD
-- Orta Güney ABD
-- Central US
-- Batı ABD
-- Batı ABD 2
-- Orta Fransa
-- West Europe
-- Kuzey Avrupa
-- Batı Birleşik Krallık
-- Güney Birleşik Krallık
-- Doğu Avustralya
-- Güneydoğu Avustralya
-- Doğu Asya
-- Güneydoğu Asya 
-- Güney Kore - Orta
-- Orta Hindistan
-- Doğu Japonya
-- US Gov Virginia
-- Çin Doğu 2
 
 ## <a name="can-the-nsgs-i-enable-flow-logs-for-be-in-different-regions-than-my-workspace"></a>NSG 'ler, akış günlüklerini çalışma alanım 'ın farklı bölgelerinde mi etkinleştirebilirim?
 

@@ -5,14 +5,14 @@ author: vhorne
 ms.service: firewall-manager
 services: firewall-manager
 ms.topic: overview
-ms.date: 03/16/2021
+ms.date: 03/29/2021
 ms.author: victorh
-ms.openlocfilehash: 506799f94676be007cf94320e3958bd305ce85f0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6725bea562d3e7841b5ab82acc0a54f91f0488b4
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103573464"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105732933"
 ---
 # <a name="what-is-azure-firewall-manager"></a>Azure Güvenlik Duvarı Yöneticisi nedir?
 
@@ -66,7 +66,7 @@ Bağlı olan sanal ağlarda Kullanıcı tanımlı yolları (UDR) el ile ayarlama
 
 Bu özellik yalnızca güvenli sanal hub dağıtımları ile kullanılabilir.
 
-Şube için üçüncü taraf sağlayıcıları (B2I) trafik filtrelemesini, VNet 'Ten sanal ağa (B2V), VNET 'Ten VNET 'e (V2V) ve VNET 'Ten Internet 'e (V2I) yönelik Azure Güvenlik Duvarı ile yan yana kullanabilirsiniz. V2I trafik filtreleme için üçüncü taraf sağlayıcıları, B2V veya V2V için Azure Güvenlik Duvarı gerekmediği sürece de kullanabilirsiniz. 
+Şube için üçüncü taraf sağlayıcıları (B2I) trafik filtrelemesini, VNet 'Ten sanal ağa (B2V), VNET 'Ten VNET 'e (V2V) ve VNET 'Ten Internet 'e (V2I) yönelik Azure Güvenlik Duvarı ile yan yana kullanabilirsiniz. 
 
 ## <a name="region-availability"></a>Bölge kullanılabilirliği
 

@@ -10,12 +10,12 @@ ms.subservice: metrics-advisor
 ms.topic: overview
 ms.date: 09/14/2020
 ms.author: mbullwin
-ms.openlocfilehash: 901d86b5569be61f89178dac460b8750bce9ea73
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: dfdd7286013bbb6462fb8e5b1bdf52e6ed738029
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105605544"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384689"
 ---
 # <a name="what-is-metrics-advisor-preview"></a>Ölçüm Danışmanı (Önizleme) nedir? 
 
@@ -27,6 +27,11 @@ ms.locfileid: "105605544"
 * Kök neden analizi ile ilgili bozukluklar ve yardım
 
 :::image type="content" source="media/metrics-advisor-overview.png" alt-text="Ölçüm danışmanına genel bakış":::
+
+Bu belge aşağıdaki makale türlerini içerir:
+* [Hızlı başlangıç](./Quickstarts/web-portal.md) , hizmete çağrı yapmanızı ve sonuçların kısa bir süre içinde elde etmenize olanak tanıyan adım adım yönergelerdir. 
+* [Nasıl yapılır kılavuzlarında](./how-tos/onboard-your-data.md) , hizmeti daha belirli veya özelleştirilmiş yollarla kullanmaya yönelik yönergeler bulunur.
+* [Kavramsal makaleler](glossary.md) , hizmetin işlevselliği ve özellikleri hakkında ayrıntılı açıklamalar sağlar.
 
 ## <a name="connect-to-a-variety-of-data-sources"></a>Çeşitli veri kaynaklarına bağlanma
 

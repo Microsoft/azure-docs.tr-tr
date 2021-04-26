@@ -4,10 +4,10 @@ description: Azure DevTest Labs, kullanıcıların laboratuvar kaynaklarını ol
 ms.topic: article
 ms.date: 06/26/2020
 ms.openlocfilehash: febcff640efc29eb4916250366641635f9d8721e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98788430"
 ---
 # <a name="configure-a-shared-image-gallery-in-azure-devtest-labs"></a>Azure DevTest Labs’de paylaşılan resim galerisi yapılandırma

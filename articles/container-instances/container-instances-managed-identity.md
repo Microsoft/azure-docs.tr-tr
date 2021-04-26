@@ -3,12 +3,12 @@ title: Kapsayıcı grubunda yönetilen kimliği etkinleştir
 description: Diğer Azure hizmetleriyle kimlik doğrulayabilecek Azure Container Instances yönetilen bir kimliği nasıl etkinleştirebileceğinizi öğrenin
 ms.topic: article
 ms.date: 07/02/2020
-ms.openlocfilehash: a0d029e39122ca7bb858103f4d7f88e2536850d5
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f8f3c646487d86f4e1bce13ccbf28992b8b1497a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102198328"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764018"
 ---
 # <a name="how-to-use-managed-identities-with-azure-container-instances"></a>Azure Container Instances ile yönetilen kimlikleri kullanma
 
@@ -53,13 +53,13 @@ Yönetilen bir kimlik kullanmak için, kimliğin abonelikte bir veya daha fazla 
 
 Bu makaledeki örneklerde Azure Anahtar Kasası gizliliğine erişmek için Azure Container Instances yönetilen bir kimlik kullanılır. 
 
-İlk olarak aşağıdaki [az group create](/cli/azure/group#az-group-create) komutunu kullanarak *eastus* bölgesinde *myResourceGroup* adlı bir kaynak grubu oluşturun:
+İlk olarak aşağıdaki [az group create](/cli/azure/group#az_group_create) komutunu kullanarak *eastus* bölgesinde *myResourceGroup* adlı bir kaynak grubu oluşturun:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus
 ```
 
-Bir Anahtar Kasası oluşturmak için [az keykasacreate](/cli/azure/keyvault#az-keyvault-create) komutunu kullanın. Benzersiz bir Anahtar Kasası adı belirttiğinizden emin olun. 
+Bir Anahtar Kasası oluşturmak için [az keykasacreate](/cli/azure/keyvault#az_keyvault_create) komutunu kullanın. Benzersiz bir Anahtar Kasası adı belirttiğinizden emin olun. 
 
 ```azurecli-interactive
 az keyvault create \
@@ -68,7 +68,7 @@ az keyvault create \
   --location eastus
 ```
 
-[Az keykasasecret set](/cli/azure/keyvault/secret#az-keyvault-secret-set) komutunu kullanarak anahtar kasasında örnek bir gizli dizi depolayın:
+[Az keykasasecret set](/cli/azure/keyvault/secret#az_keyvault_secret_set) komutunu kullanarak anahtar kasasında örnek bir gizli dizi depolayın:
 
 ```azurecli-interactive
 az keyvault secret set \
@@ -83,7 +83,7 @@ Azure Container Instances içinde Kullanıcı tarafından atanan veya sistem tar
 
 ### <a name="create-an-identity"></a>Kimlik oluşturma
 
-İlk olarak [az Identity Create](/cli/azure/identity#az-identity-create) komutunu kullanarak aboneliğinizde bir kimlik oluşturun. Anahtar kasasını oluşturmak için kullanılan kaynak grubunu kullanabilir veya farklı bir tane kullanabilirsiniz.
+İlk olarak [az Identity Create](/cli/azure/identity#az_identity_create) komutunu kullanarak aboneliğinizde bir kimlik oluşturun. Anahtar kasasını oluşturmak için kullanılan kaynak grubunu kullanabilir veya farklı bir tane kullanabilirsiniz.
 
 ```azurecli-interactive
 az identity create \
@@ -91,7 +91,7 @@ az identity create \
   --name myACIId
 ```
 
-Aşağıdaki adımlarda kimliği kullanmak için, kimliğin hizmet sorumlusu KIMLIĞINI ve kaynak KIMLIĞINI değişkenlerde depolamak üzere [az Identity Show](/cli/azure/identity#az-identity-show) komutunu kullanın.
+Aşağıdaki adımlarda kimliği kullanmak için, kimliğin hizmet sorumlusu KIMLIĞINI ve kaynak KIMLIĞINI değişkenlerde depolamak üzere [az Identity Show](/cli/azure/identity#az_identity_show) komutunu kullanın.
 
 ```azurecli-interactive
 # Get service principal ID of the user-assigned identity
@@ -121,7 +121,7 @@ Anahtar kasasında bir erişim ilkesi ayarlamak için aşağıdaki [az keykasas�
 
 ### <a name="enable-user-assigned-identity-on-a-container-group"></a>Kapsayıcı grubunda Kullanıcı tarafından atanan kimliği etkinleştirme
 
-Microsoft 'un görüntüsüne dayalı bir kapsayıcı örneği oluşturmak için aşağıdaki [az Container Create](/cli/azure/container#az-container-create) komutunu çalıştırın `azure-cli` . Bu örnek, diğer Azure hizmetlerine erişmek için Azure CLı 'yı çalıştırmak üzere etkileşimli olarak kullanabileceğiniz tek bir kapsayıcı grubu sağlar. Bu bölümde, yalnızca temel işletim sistemi kullanılır. Kapsayıcıda Azure CLı 'yı kullanma örneği için bkz. [bir kapsayıcı grubunda sistem tarafından atanan kimliği etkinleştirme](#enable-system-assigned-identity-on-a-container-group). 
+Microsoft 'un görüntüsüne dayalı bir kapsayıcı örneği oluşturmak için aşağıdaki [az Container Create](/cli/azure/container#az_container_create) komutunu çalıştırın `azure-cli` . Bu örnek, diğer Azure hizmetlerine erişmek için Azure CLı 'yı çalıştırmak üzere etkileşimli olarak kullanabileceğiniz tek bir kapsayıcı grubu sağlar. Bu bölümde, yalnızca temel işletim sistemi kullanılır. Kapsayıcıda Azure CLı 'yı kullanma örneği için bkz. [bir kapsayıcı grubunda sistem tarafından atanan kimliği etkinleştirme](#enable-system-assigned-identity-on-a-container-group). 
 
 `--assign-identity`Parametresi, Kullanıcı tarafından atanan yönetilen kimliğinizi gruba geçirir. Uzun süre çalışan komut kapsayıcıyı çalışır durumda tutar. Bu örnek, anahtar kasasını oluşturmak için kullanılan kaynak grubunu kullanır, ancak farklı bir tane belirtebilirsiniz.
 
@@ -134,7 +134,7 @@ az container create \
   --command-line "tail -f /dev/null"
 ```
 
-Birkaç saniye içinde Azure CLI'den dağıtımın tamamlandığını belirten bir yanıt almanız gerekir. [Az Container Show](/cli/azure/container#az-container-show) komutuyla durumunu kontrol edin.
+Birkaç saniye içinde Azure CLI'den dağıtımın tamamlandığını belirten bir yanıt almanız gerekir. [Az Container Show](/cli/azure/container#az_container_show) komutuyla durumunu kontrol edin.
 
 ```azurecli-interactive
 az container show \
@@ -206,7 +206,7 @@ Yanıt, gizliliği gösteren aşağıdakine benzer şekilde görünür. Kodunuzd
 
 ### <a name="enable-system-assigned-identity-on-a-container-group"></a>Bir kapsayıcı grubunda sistem tarafından atanan kimliği etkinleştirme
 
-Microsoft 'un görüntüsüne dayalı bir kapsayıcı örneği oluşturmak için aşağıdaki [az Container Create](/cli/azure/container#az-container-create) komutunu çalıştırın `azure-cli` . Bu örnek, diğer Azure hizmetlerine erişmek için Azure CLı 'yı çalıştırmak üzere etkileşimli olarak kullanabileceğiniz tek bir kapsayıcı grubu sağlar. 
+Microsoft 'un görüntüsüne dayalı bir kapsayıcı örneği oluşturmak için aşağıdaki [az Container Create](/cli/azure/container#az_container_create) komutunu çalıştırın `azure-cli` . Bu örnek, diğer Azure hizmetlerine erişmek için Azure CLı 'yı çalıştırmak üzere etkileşimli olarak kullanabileceğiniz tek bir kapsayıcı grubu sağlar. 
 
 `--assign-identity`Ek değer içermeyen parametre, grupta sistem tarafından atanan yönetilen kimliği mümkün bir şekilde sunar. Kimlik, kapsayıcı grubunun kaynak grubunun kapsamına alınır. Uzun süre çalışan komut kapsayıcıyı çalışır durumda tutar. Bu örnek, kimlik kapsamındaki anahtar kasasını oluşturmak için kullanılan kaynak grubunu kullanır.
 
@@ -223,7 +223,7 @@ az container create \
   --command-line "tail -f /dev/null"
 ```
 
-Birkaç saniye içinde Azure CLI'den dağıtımın tamamlandığını belirten bir yanıt almanız gerekir. [Az Container Show](/cli/azure/container#az-container-show) komutuyla durumunu kontrol edin.
+Birkaç saniye içinde Azure CLI'den dağıtımın tamamlandığını belirten bir yanıt almanız gerekir. [Az Container Show](/cli/azure/container#az_container_show) komutuyla durumunu kontrol edin.
 
 ```azurecli-interactive
 az container show \

@@ -5,13 +5,13 @@ author: IngridAtMicrosoft
 ms.author: inhenkel
 ms.service: media-services
 ms.topic: quickstart
-ms.date: 04/20/2020
-ms.openlocfilehash: 0d0fa88fdf182ae2214da40ee3fe8b20ced025e4
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.date: 04/05/2021
+ms.openlocfilehash: a6fd603318a25e15d1d4dcc1e3eaf75f96fc5ade
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104956069"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448636"
 ---
 # <a name="azure-media-player-quickstart"></a>Azure Media Player hızlı başlangıcı
 Azure Media Player kolayca ayarlanabilir. Azure Media Services hesabınızdan medya içeriğinin temel oynatımını almak yalnızca birkaç dakika sürer. Bu bölümde ayrıntılara girilmeden temel adımlar anlatılmaktadır. Aşağıdaki bölümlerde Azure Media Player ayarlama ve yapılandırma hakkında size ilişkin ayrıntılar verilmektedir.  Aşağıdakileri belgenizin `<head>` bölümüne eklemeniz yeterlidir:
@@ -22,7 +22,7 @@ Azure Media Player kolayca ayarlanabilir. Azure Media Services hesabınızdan me
 ```
 
 > [!IMPORTANT]
-> Bu,  `latest` isteğe bağlı olarak değişikliğe tabi olduğu için üretimde sürümü kullanmamalısınız. `latest`Azure Media Player bir sürümüyle değiştirin; örneğin `latest` , ile değiştirin `1.0.0` . Azure Media Player sürümler [buradan](azure-media-player-changelog.md)sorgulanabilir.
+> Bu,  `latest` isteğe bağlı olarak değişikliğe tabi olduğu için üretimde sürümü kullanmamalısınız. `latest`Azure Media Player bir sürümüyle değiştirin; örneğin `latest` , ile değiştirin `1.0.0` . Azure Media Player sürümler [buradan](https://amp.azure.net/libs/amp/latest/docs/changelog.html)sorgulanabilir.
 
 ## <a name="use-the-video-element"></a>Video öğesini kullanma
 

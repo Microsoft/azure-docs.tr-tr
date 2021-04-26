@@ -9,12 +9,12 @@ ms.subservice: enterprise
 ms.topic: tutorial
 ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 643aac7927cc7b14693387fbb5765bdcd0214dc2
-ms.sourcegitcommit: fc401c220eaa40f6b3c8344db84b801aa9ff7185
-ms.translationtype: HT
+ms.openlocfilehash: 5d945c421dc0a4abed17b3a355339c131dd922df
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/20/2021
-ms.locfileid: "98598248"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728059"
 ---
 # <a name="understand-your-azure-enterprise-agreement-bill"></a>Azure Kurumsal Anlaşma faturanızı anlama
 
@@ -396,51 +396,6 @@ See [Power BI self-service sign up](https://powerbi.microsoft.com/documentation/
 
     Buraya girmeniz gereken API anahtarını Azure Enterprise Portal'ın **Kullanımı İndir** sekmesinden alabilirsiniz. **API Erişim Anahtarı**'nı seçin ve anahtarı **Hesap Anahtarı** kutusuna yapıştırın.
 1. Veri kümelerinin boyutuna bağlı olarak verilerin Power BI'a yüklenmesi 5-30 dakika arasında sürebilir.
-
-## <a name="reports-faq"></a>Raporlar Hakkında SSS
-
-Bu bölümde raporlarla ilgili sık sorulan soruların yanıtları verilmiştir.
-
-### <a name="why-is-my-cost-showing-as-0"></a>Maliyetlerim neden $0 görünüyor?
-
-**Doğrudan kayıt anlaşması** müşterileri için kuruluş yöneticileri, hesap sahiplerine ve bölüm yöneticilerine kullanım raporlarındaki maliyet/fiyatlandırma bilgilerine erişim sağlayabilir. Şu adımları uygulayın:
-
-1. Azure Enterprise Portal'ın sol tarafındaki gezinti menüsünden **Yönet**'i seçin.
-1. DA (bölüm yöneticisi) ücretleri görüntüle öğesinin yanındaki mavi kalem simgesini seçin.
-1. **Etkin**'i seçin ve kaydedin.
-1. AO (hesap sahibi) ücretleri görüntüle öğesinin yanındaki mavi kalem simgesini seçin.
-1. **Etkin**'i seçin ve kaydedin.
-
-> [!NOTE]
-> Hesap sahibi veya bölümü yöneticisiyseniz lütfen kuruluş yöneticinizle iletişime geçerek fiyatlandırma özelliğini etkinleştirmesini isteyin.
-
-**Dolaylı kayıt** müşterileri, fiyatlandırma özelliğinin etkin olup olmadığını kontrol etmek için iş ortaklarıyla iletişime geçebilir. Bu işlem yalnızca iş ortağı tarafından gerçekleştirilebilir. Bu özellik etkinleştirildikten sonra kuruluş yöneticisi olarak kaydınızdaki ücretleri ve fiyatları görüntüleyebilirsiniz.
-
-Bir hesap sahibi veya bölüm yöneticisi için ücretleri görüntüleme özelliğini etkinleştirmek isteyen iş ortaklarının **doğrudan kayıt anlaşması** bölümündeki adımları izlemesi gerekir.
-
-### <a name="why-is-there-no-sku-information-on-my-usage-detail-report"></a>Kullanım ayrıntıları raporunda neden SKU bilgileri yok?
-
-Kullanım ayrıntıları raporunda SKU bilgileri bulunmaz. Ancak rapordaki kullanım bilgileri sayesinde fiyat sayfası raporunu indirip SKU bilgilerine ulaşabilirsiniz.
-
-### <a name="why-doesnt-the-total-amount-on-azure-marketplace-match-the-reports-for-usage-summary-and-detail"></a>Kullanımla ilgili özet ve ayrıntılı raporlarda Azure Market toplam tutarı neden farklı?
-
-Azure Market ücretleri raporu, yalnızca kullanıma dayalı ücretleri gösterir. Tek seferlik ücretler gösterilmez. Kullanıma dayalı ve tek seferlik ücretlerle ilgili en güncel kullanımlar için kullanım özeti sayfasını inceleyin.
-
-### <a name="why-is-there-no-information-on-my-api-report"></a>API raporumda neden hiç bilgi yok?
-
-API anahtarları altı ay boyunca geçerlidir. Sorun yaşıyorsanız kuruluş yöneticisinin yeni bir API anahtarı oluşturması gerekir. API Raporları Hakkında SSS sayfasındaki adımları izlemeyi unutmayın.
-
-### <a name="why-isnt-my-power-bi-report-working"></a>Power BI raporum neden çalışmıyor?
-
-Power BI ile ilgili sorunlar için [Power BI destek ekibine](https://support.powerbi.com) bilet gönderin.
-
-### <a name="why-dont-my-resource-tags-show-on-my-reports"></a>Kaynak etiketlerim neden raporlarımda görünmüyor?
-
-Kaynak etiketleri Azure portalında yönetilir. [Azure portalından](https://portal.azure.com) Azure abonelik ekibiyle iletişime geçebilirsiniz. [Azure destek isteği oluşturma](../../azure-portal/supportability/how-to-create-azure-support-request.md) makalesindeki adımları izleyin.
-
-### <a name="why-does-my-resource-rate-change-every-day"></a>Kaynak ücretim neden her gün değişiyor?
-
-Ayrıntılı kullanım raporunda gösterilen kaynak ücreti, hesaplanmış bir değerdir. Hizmet için ücretlendirilen ortalama aylık ücreti temsil eder. Kaynak ücreti, bir hizmet birimine ait aylık ortalama taahhüdünüz ve aylık fazla kullanım ücretleriniz kullanılarak hesaplanır. Taahüdünüzden tahsil edilen kullanım miktarı ve fazla kullanım ücretleri, ay sonuna kadar değişecektir. Bu nedenle listelenen ücret de ay içinde değişir. Kaynak ücreti, ay sonundan itibaren beşinci günde sabitlenir.
 
 ### <a name="glossary-of-processes-for-calculating-the-resource-rate"></a>Kaynak ücretini hesaplamak için kullanılan işlemlerle ilgili sözlük
 

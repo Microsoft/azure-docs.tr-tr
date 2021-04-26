@@ -4,12 +4,12 @@ description: App Service uygulamanızdan iş süreçlerini çağırmayı öğren
 ms.topic: tutorial
 ms.date: 04/08/2020
 ms.custom: devx-track-csharp, mvc
-ms.openlocfilehash: 8072a941cd89290af3e25cc63c4fccccce705df9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6b15c09162146de7aef8abfcdba40627eb77621c
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95014671"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830943"
 ---
 # <a name="tutorial-send-email-and-invoke-other-business-processes-from-app-service"></a>Öğretici: App Service e-posta gönderin ve diğer iş süreçlerini çağırın
 
@@ -270,13 +270,14 @@ Python 'da HTTP POST 'u [isteklerle](https://pypi.org/project/requests/)kolayca 
 ```python
 # Requires pip install requests && pip freeze > requirements.txt
 import requests
+import os
 ...
 payload = {
     "email": "a-valid@emailaddress.com",
     "due": "4/1/2020",
     "task": "My new task!"
 }
-response = requests.post("https://prod-112.westeurope.logic.azure.com:443/workfl$
+response = requests.post(os.environ['LOGIC_APP_URL'], data = payload)
 print(response.status_code)
 ```
 <!-- ```python

@@ -8,13 +8,12 @@ ms.subservice: edge
 ms.topic: tutorial
 ms.date: 02/04/2021
 ms.author: alkohli
-Customer intent: As an IT admin, I need to understand how to connect and activate Azure Stack Edge Pro R so I can use it to transfer data to Azure.
-ms.openlocfilehash: 11c1d76b5784587f234455f81595778897569eb1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a1f3966c8794b50f6ec369f1ea86905c4d8aaf3f
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99594358"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106059947"
 ---
 # <a name="tutorial-configure-network-for-azure-stack-edge-pro-r"></a>Öğretici: Azure Stack Edge Pro R için ağı yapılandırma
 

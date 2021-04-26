@@ -8,20 +8,16 @@ ms.author: gachandw
 ms.reviewer: mimckitt
 ms.date: 10/13/2020
 ms.custom: ''
-ms.openlocfilehash: 0c1b67e42e7988a836ec58ac022b11d736210bca
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: a7e4e76aa0619d78a91d766a9a43c0b1a02a48d3
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104865630"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717396"
 ---
 # <a name="deploy-a-cloud-service-extended-support-using-azure-powershell"></a>Azure PowerShell kullanarak bir bulut hizmeti (genişletilmiş destek) dağıtma
 
 Bu makalede, `Az.CloudService` Azure 'da birden çok rol (WebRole ve WorkerRole) ve Uzak Masaüstü uzantısı olan Cloud Services (genişletilmiş destek) dağıtmak için PowerShell modülünün nasıl kullanılacağı gösterilmektedir. 
-
-> [!IMPORTANT]
-> Cloud Services (genişletilmiş destek) Şu anda genel önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
@@ -73,13 +69,14 @@ Cloud Services (genişletilmiş destek) için [dağıtım önkoşullarını](dep
     $virtualNetwork = New-AzVirtualNetwork -Name “ContosoVNet” -Location “East US” -ResourceGroupName “ContosOrg” -AddressPrefix "10.0.0.0/24" -Subnet $subnet 
     ```
  
-7. Genel IP adresi oluşturun ve (isteğe bağlı olarak) genel IP adresinin DNS etiketi özelliğini ayarlayın. Statik IP kullanıyorsanız, hizmet yapılandırma dosyasında bir Ayrılmış IP olarak başvurulması gerekir.  
+7. Genel IP adresi oluşturun ve genel IP adresinin DNS etiketi özelliğini ayarlayın. Cloud Services (genişletilmiş destek) yalnızca [temel](https://docs.microsoft.com/azure/virtual-network/public-ip-addresses#basic) SKU genel IP adreslerini destekler. Standart SKU genel IP 'Leri Cloud Services çalışmaz.
+Statik IP kullanıyorsanız, bunu hizmet yapılandırma (. cscfg) dosyasında bir Ayrılmış IP olarak başvurmanız gerekir 
 
     ```powershell
     $publicIp = New-AzPublicIpAddress -Name “ContosIp” -ResourceGroupName “ContosOrg” -Location “East US” -AllocationMethod Dynamic -IpAddressVersion IPv4 -DomainNameLabel “contosoappdns” -Sku Basic 
     ```
 
-8. Ağ profili nesnesi oluşturun ve genel IP adresini platform tarafından oluşturulan yük dengeleyicinin ön ucu ile ilişkilendirin.  
+8. Bir ağ profili nesnesi oluşturun ve genel IP adresini yük dengeleyicinin ön ucunda ilişkilendirin. Azure platformu, bulut hizmeti kaynağıyla aynı abonelikte otomatik olarak bir ' klasik ' SKU yük dengeleyici kaynağı oluşturur. Yük dengeleyici kaynağı ARM 'de salt okuma kaynağıdır. Kaynaktaki tüm güncelleştirmeler yalnızca bulut hizmeti dağıtım dosyaları (. cscfg &. csdef) aracılığıyla desteklenir
 
     ```powershell
     $publicIP = Get-AzPublicIpAddress -ResourceGroupName ContosOrg -Name ContosIp  

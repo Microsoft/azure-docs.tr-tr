@@ -2,15 +2,17 @@
 title: Service Bus konuları ve abonelikleri oluşturmak için Azure portal kullanın
 description: 'Hızlı başlangıç: Bu hızlı başlangıçta, Azure portal kullanarak bu konuya bir Service Bus konu ve abonelik oluşturmayı öğreneceksiniz.'
 author: spelluru
-ms.topic: quickstart
-ms.date: 06/23/2020
 ms.author: spelluru
-ms.openlocfilehash: 749ba3d2947dfd7defdf2549305f2a61c16ba713
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 06/23/2020
+ms.topic: quickstart
+ms.custom:
+- mode-portal
+ms.openlocfilehash: 25b0579f05c1f7669a8dfc1df02e9a1f575ea066
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95803279"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537140"
 ---
 # <a name="use-the-azure-portal-to-create-a-service-bus-topic-and-subscriptions-to-the-topic"></a>Azure portalını kullanarak Service Bus konusunu ve konunun aboneliklerini oluşturma
 Bu hızlı başlangıçta, bir Service Bus konu oluşturmak ve ardından bu konuya abonelikler oluşturmak için Azure portal kullanın. 

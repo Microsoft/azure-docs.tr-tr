@@ -8,12 +8,12 @@ ms.date: 01/19/2021
 ms.topic: how-to
 ms.prod: windows-server-threshold
 ms.technology: identity-adfs
-ms.openlocfilehash: 174ec8c42ea17ccae04769d7c0baaa91b8e7025b
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 65022d98c7ee7e90d8f1fe5b6854605c841ad05b
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102517880"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530313"
 ---
 # <a name="cloud-sync-troubleshooting"></a>Bulut eşitleme sorunlarını giderme
 
@@ -197,7 +197,7 @@ Sağlama işini yeniden başlatmak için Azure portal kullanın. Aracı yapılan
 
   ![Sağlamayı yeniden Başlat](media/how-to-troubleshoot/quarantine-3.png)
 
-- [Sağlama işini yeniden başlatmak](/graph/api/synchronization-synchronizationjob-restart?tabs=http&view=graph-rest-beta)için Microsoft Graph kullanın. Yeniden başlatdıklarınız üzerinde tam denetime sahip olacaksınız. Şunları temizleyebilirsiniz:
+- [Sağlama işini yeniden başlatmak](/graph/api/synchronization-synchronizationjob-restart?tabs=http&view=graph-rest-beta&preserve-view=true)için Microsoft Graph kullanın. Yeniden başlatdıklarınız üzerinde tam denetime sahip olacaksınız. Şunları temizleyebilirsiniz:
   - Et, karantina durumuna doğru tahakkuk eden Emanet sayacını yeniden başlatacak.
   - Karantina, uygulamayı karantinadan kaldırma.
   - Fli. 

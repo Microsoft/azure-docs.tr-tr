@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.custom: mvc, amqp, devx-track-csharp
 ms.date: 11/06/2018
 ms.author: dobett
-ms.openlocfilehash: 77a795b8f704084b612a2dcbd364b8d5be0a3333
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2d2c33d0b6f86bc1a779361b86d242cde4c5df38
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96852159"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873676"
 ---
 # <a name="serialize-telemetry-using-protocol-buffers"></a>Protokol arabellekleri kullanarak telemetri serileştirme
 
@@ -37,7 +37,7 @@ Bu nasıl yapılır kılavuzundaki adımlarda şu adımları nasıl kullanabilec
 Bu nasıl yapılır kılavuzundaki adımları izlemek için şunlar gerekir:
 
 * Visual Studio Code. [Mac, Linux ve Windows için Visual Studio Code](https://code.visualstudio.com/download)indirebilirsiniz.
-* .NET Core. [Mac, Linux ve Windows için .NET Core 'u](https://www.microsoft.com/net/download)indirebilirsiniz.
+* .NET Core. [Mac, Linux ve Windows için .NET Core 'u](https://dotnet.microsoft.com/download)indirebilirsiniz.
 * Postman. [Mac, Windows veya Linux Için Postman](https://www.getpostman.com/apps)indirebilirsiniz.
 * [Azure aboneliğinize dağıtılan bir IoT Hub 'ı](../iot-hub/iot-hub-create-through-portal.md). Bu kılavuzdaki adımları tamamlayabilmeniz için IoT Hub 'ın bağlantı dizesine ihtiyacınız vardır. Bağlantı dizesini Azure portal alabilirsiniz.
 * SQL API 'sini kullanan ve [güçlü tutarlılık](../cosmos-db/how-to-manage-database-account.md)Için yapılandırılmış [Azure aboneliğinize dağıtılan bir Cosmos DB veritabanı](../cosmos-db/create-sql-api-dotnet.md#create-account) . Bu kılavuzdaki adımları tamamlayabilmeniz için Cosmos DB veritabanının bağlantı dizesine ihtiyacınız vardır. Bağlantı dizesini Azure portal alabilirsiniz.
@@ -57,7 +57,7 @@ Bu makaledeki yönergeler Windows kullandığınızı varsayar. Başka bir işle
 
 GitHub 'dan [Uzaktan Izleme mikro hizmetlerini](https://github.com/Azure/remote-monitoring-services-dotnet/archive/master.zip) indirin ve yerel makinenizde uygun bir konuma ayıklayın. Bu depo, bu nasıl yapılır için ihtiyacınız olan depolama bağdaştırıcısı mikro hizmetini içerir.
 
-[Cihaz benzetimi mikro hizmetini](https://github.com/Azure/device-simulation-dotnet/archive/master.zip) GitHub 'dan yerel makinenizde uygun bir konuma indirip sıkıştırmasını açın.
+[Cihaz benzetimi mikro hizmetini](https://github.com/Azure/azure-iot-pcs-device-simulation/archive/master.zip) GitHub 'dan yerel makinenizde uygun bir konuma indirip sıkıştırmasını açın.
 
 ### <a name="run-the-storage-adapter-microservice"></a>Depolama bağdaştırıcısı mikro hizmetini çalıştırma
 
@@ -277,4 +277,4 @@ Birçok IoT Hub özellik, prototip veya diğer ikili biçimleri yerel olarak des
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Telemetri göndermek için cihaz benzetiminin prototip kullanmak üzere nasıl özelleştirileceğini öğrendiniz bir sonraki adım, daha fazla [cihaz benzetimi](https://github.com/Azure/device-simulation-dotnet)öğrenmek için GitHub deposunu ziyaret etmektir.
+Telemetri göndermek için cihaz benzetiminin prototip kullanmak üzere nasıl özelleştirileceğini öğrendiniz bir sonraki adım, daha fazla [cihaz benzetimi](https://github.com/Azure/azure-iot-pcs-device-simulation)öğrenmek için GitHub deposunu ziyaret etmektir.

@@ -3,12 +3,12 @@ title: Öğretici-VMware HCX 'i dağıtma ve yapılandırma
 description: Azure VMware çözümünüz özel bulutunuz için bir VMware HCX çözümünü dağıtmayı ve yapılandırmayı öğrenin.
 ms.topic: tutorial
 ms.date: 03/13/2021
-ms.openlocfilehash: ab59b4a29f8ba372c1892613d5e0461bf3fdc512
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 9ee451ce4be59c51299d66e4042ed344026100cf
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104869098"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107011009"
 ---
 # <a name="deploy-and-configure-vmware-hcx"></a>VMware HCX’i dağıtma ve yapılandırma
 
@@ -20,7 +20,7 @@ VMware HCX gelişmiş Bağlayıcısı, Azure VMware çözümünde önceden dağ�
 >VMware yapılandırma en yüksek Aracı, şirket içi bağlayıcı ile bulut Yöneticisi arasında en yüksek site çiftlerini 25 olacak şekilde tanımlıyor olsa da, bu lisans bunu HCX Advanced ve HCX Enterprise Edition için 10 ' un üç ile sınırlandırır.
 
 >[!NOTE]
->VMware HCX Enterprise, Önizleme hizmeti olarak Azure VMware çözümü ile kullanılabilir. Bu ücretsizdir ve bir önizleme hizmeti için hüküm ve koşullara tabidir. VMware HCX Enterprise hizmeti genel kullanıma sunulduğunda, faturalandırmaya geçiş yapılacak 30 günlük bir bildirim alırsınız. Ayrıca hizmeti kapatma veya devre dışı bırakma seçeneğiniz de vardır. VMware HCX Enterprise 'tan VMware HCX gelişmiş 'e basit bir düşürme yolu yoktur. Düşürme kararı verirseniz, kapalı kalma süresini yeniden dağıtmanız gerekir.
+>VMware HCX Enterprise, Önizleme hizmeti olarak Azure VMware çözümü ile kullanılabilir. Bu ücretsizdir ve bir önizleme hizmeti için hüküm ve koşullara tabidir. VMware HCX Enterprise hizmeti genel kullanıma sunulduğunda, faturalandırmaya geçiş yapılacak 30 günlük bir bildirim alırsınız. Ayrıca hizmeti kapatma veya devre dışı bırakma seçeneğiniz de vardır. HCx Enterprise 'tan HCX gelişmiş 'e yeniden dağıtım yapmanız gerekmez, ancak bu eylemin gerçekleşmesi için bir destek bileti günlüğe kaydetmek zorunda olacaksınız. Bir indirgeme planlanırsa, hiçbir geçişin planlanmadığından ve ya da PV gibi özelliklerin kullanımda olmadığından emin olun.
 
 İlk olarak, [başlamadan önce](#before-you-begin), [yazılım sürümü gereksinimleri](https://docs.vmware.com/en/VMware-HCX/services/user-guide/GUID-54E5293B-8707-4D29-BFE8-EE63539CC49B.html)ve [önkoşulları](#prerequisites)gözden geçirin. 
 

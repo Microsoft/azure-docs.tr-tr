@@ -49,7 +49,7 @@
     - name: DDoS koruması
       href: front-door-ddos.md
     - name: Front Door hakkında SSS
-      href: front-door-faq.md
+      href: front-door-faq.yml
     - name: Coğrafi filtreleme
       href: front-door-geo-filtering.md
     - name: Sistem durumu araştırmaları
@@ -98,8 +98,8 @@
           href: front-door-troubleshoot-allowed-ca.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
-      href: /cli/azure/ext/front-door/
+    - name: Azure CLI
+      href: /cli/azure/afd/
     - name: Azure PowerShell
       href: /powershell/module/az.frontdoor
     - name: REST API

@@ -11,10 +11,10 @@ ms.author: mathoma
 ms.reviewer: MashaMSFT
 ms.date: 12/15/2020
 ms.openlocfilehash: c407b62b5f0308fbb6d9ff7223a3554ca09592db
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105027219"
 ---
 # <a name="assessment-rules-for-sql-server-to-azure-sql-database-migration"></a>Azure SQL veritabanı geçişine SQL Server için değerlendirme kuralları

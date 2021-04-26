@@ -7,12 +7,12 @@ ms.date: 07/31/2020
 ms.topic: how-to
 ms.service: iot-central
 services: iot-central
-ms.openlocfilehash: a9e35c7d4d64279c65971dd512bcd2107dad6594
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c25af944b4c748307f4f974ca8616ecc9f7b28c3
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92000064"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714533"
 ---
 # <a name="how-to-roll-x509-device-certificates-in-iot-central-application"></a>IoT Central uygulamasında X. 509.440 cihaz sertifikalarını alma
 

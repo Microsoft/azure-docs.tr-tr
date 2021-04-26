@@ -7,17 +7,17 @@ author: divyaswarnkar
 ms.author: divswa
 ms.reviewer: jonfan, logicappspm
 ms.topic: overview
-ms.date: 08/01/2019
-ms.openlocfilehash: adf15904d4490647074d6e2b46ac7e9e871dd388
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 03/24/2021
+ms.openlocfilehash: 09d253aae4c054db5efdc252f62986044e1d366b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "86536411"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107771866"
 ---
 # <a name="b2b-enterprise-integration-solutions-with-azure-logic-apps-and-enterprise-integration-pack"></a>Azure Logic Apps ve Enterprise Integration Pack ile B2B kurumsal tümleştirme çözümleri
 
-İşletmeler arası (B2B) çözümleri ve kuruluşlar arasındaki sorunsuz iletişim için [Azure Logic Apps](../logic-apps/logic-apps-overview.md)ile Enterprise Integration Pack (EIP) kullanarak otomatik ölçeklendirilebilir kurumsal tümleştirme iş akışları oluşturabilirsiniz. Kuruluşlar farklı protokoller ve biçimler kullanmasına karşın, iletileri elektronik olarak değiş tokuş edebilirler. EıP, farklı biçimleri, kuruluşların sistemlerinin [AS2](../logic-apps/logic-apps-enterprise-integration-as2.md), [x12](logic-apps-enterprise-integration-x12.md)ve [ediolgu](../logic-apps/logic-apps-enterprise-integration-edifact.md)gibi sektör standardı protokollerini işleyebildiğine ve desteklediğinden bir biçime dönüştürür. Ayrıca, hem şifreleme hem de dijital imza kullanarak iletiler için güvenliği geliştirebilirsiniz. EıP, bu [kurumsal tümleştirme bağlayıcılarını](../connectors/apis-list.md#integration-account-connectors) ve bu sektör standartlarını destekler:
+İşletmeler arası (B2B) çözümleri ve kuruluşlar arasındaki sorunsuz iletişim için [Azure Logic Apps](../logic-apps/logic-apps-overview.md)ile Enterprise Integration Pack (EIP) kullanarak otomatik ölçeklendirilebilir kurumsal tümleştirme iş akışları oluşturabilirsiniz. Kuruluşlar farklı protokoller ve biçimler kullanmasına karşın, iletileri elektronik olarak değiş tokuş edebilirler. EıP, farklı biçimleri, kuruluşların sistemlerinin [AS2](../logic-apps/logic-apps-enterprise-integration-as2.md), [x12](logic-apps-enterprise-integration-x12.md)ve [ediolgu](../logic-apps/logic-apps-enterprise-integration-edifact.md)gibi sektör standardı protokollerini işleyebildiğine ve desteklediğinden bir biçime dönüştürür. Ayrıca, hem şifreleme hem de dijital imza kullanarak iletiler için güvenliği geliştirebilirsiniz. EıP, bu [kurumsal tümleştirme bağlayıcılarını](../connectors/managed.md#enterprise-connectors) ve bu sektör standartlarını destekler:
 
 * Elektronik veri değişimi (EDI)
 * Kurumsal uygulama tümleştirme (EAı)

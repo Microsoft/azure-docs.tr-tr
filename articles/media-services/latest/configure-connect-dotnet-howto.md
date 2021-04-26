@@ -14,12 +14,12 @@ ms.topic: how-to
 ms.date: 11/17/2020
 ms.author: inhenkel
 ms.custom: has-adal-ref, devx-track-csharp
-ms.openlocfilehash: 8946f6e94dd26db45622bc7609fb2375d59bb57e
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: e4d1ed0c015b75cc058c7d6136069a8858d835e2
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102455391"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106492537"
 ---
 # <a name="connect-to-media-services-v3-api---net"></a>Media Services v3 API-.NET ' e bağlanın
 
@@ -29,7 +29,7 @@ Bu makalede hizmet sorumlusu oturum açma yöntemi kullanılarak Azure Media Ser
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- [Media Services hesabı oluşturun](./create-account-howto.md). Kaynak grubu adını ve Media Services hesap adını hatırlayacağınızdan emin olun
+- [Media Services hesabı oluşturun](./account-create-how-to.md). Kaynak grubu adını ve Media Services hesap adını hatırlayacağınızdan emin olun
 - .NET geliştirme için kullanmak istediğiniz bir araç yükler. Bu makaledeki adımlarda, [Visual Studio 2019 Community Edition](https://www.visualstudio.com/downloads/)'ın nasıl kullanılacağı gösterilmektedir. Visual Studio Code kullanabilirsiniz, bkz. [C# ile çalışma](https://code.visualstudio.com/docs/languages/csharp). Ya da farklı bir kod düzenleyicisi kullanabilirsiniz.
 
 > [!IMPORTANT]
@@ -237,14 +237,14 @@ namespace ConsoleApp1
 
 - [Öğretici: videoları karşıya yükleme, kodlama ve akışla-.NET](stream-files-tutorial-with-api.md) 
 - [Öğretici: Media Services v3-.NET ile canlı akış](stream-live-tutorial-with-api.md)
-- [Öğretici: Media Services v3-.NET ile videoları analiz etme](analyze-videos-tutorial-with-api.md)
+- [Öğretici: Media Services v3-.NET ile videoları analiz etme](analyze-videos-tutorial.md)
 - [Yerel dosyadan iş girişi oluşturma-.NET](job-input-from-local-file-how-to.md)
 - [HTTPS URL 'sinden iş girişi oluşturma-.NET](job-input-from-http-how-to.md)
-- [Özel dönüşümle kodlama-.NET](customize-encoder-presets-how-to.md)
-- [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanın-.NET](protect-with-aes128.md)
-- [DRM dinamik şifrelemesini ve lisans teslim hizmetini kullanma-.NET](protect-with-drm.md)
-- [Var olan ilkeden bir imzalama anahtarı al-.NET](get-content-key-policy-dotnet-howto.md)
-- [Media Services .NET ile filtre oluşturma](filters-dynamic-manifest-dotnet-howto.md)
+- [Özel dönüşümle kodlama-.NET](transform-custom-presets-how-to.md)
+- [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanın-.NET](drm-playready-license-template-concept.md)
+- [DRM dinamik şifrelemesini ve lisans teslim hizmetini kullanma-.NET](drm-protect-with-drm-tutorial.md)
+- [Var olan ilkeden bir imzalama anahtarı al-.NET](drm-get-content-key-policy-dotnet-how-to.md)
+- [Media Services .NET ile filtre oluşturma](filters-dynamic-manifest-dotnet-how-to.md)
 - [Media Services v3 ile Azure Işlevleri v2 'ye yönelik gelişmiş video isteğe bağlı örnekleri](https://aka.ms/ams3functions)
 
 ## <a name="see-also"></a>Ayrıca bkz.

@@ -11,12 +11,12 @@ ms.author: mimart
 author: msmimart
 manager: celested
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 6325a890ea297a3aa2bdad76a1d95c10448a7b61
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0e6a872891f09f60ea963fa783e6f49dc4e94a54
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102033957"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861868"
 ---
 # <a name="add-conditional-access-to-user-flows-in-azure-active-directory-b2c"></a>Azure Active Directory B2C Kullanıcı akışlarına koşullu erişim ekleme
 
@@ -160,6 +160,71 @@ Koşullu erişim ilkesi eklemek için:
 Azure AD koşullu erişim ilkesini ekledikten sonra, Kullanıcı akışınız veya özel ilkenizde koşullu erişimi etkinleştirin. Koşullu erişimi etkinleştirdiğinizde bir ilke adı belirtmeniz gerekmez.
 
 Her zaman tek bir kullanıcı için birden fazla koşullu erişim ilkesi uygulanabilir. Bu durumda, en katı erişim denetimi ilkesi önceliklidir. Örneğin, bir ilke çok faktörlü kimlik doğrulaması (MFA) gerektiriyorsa, diğer erişimi engelliyorsa Kullanıcı engellenir.
+
+## <a name="conditional-access-template-1-sign-in-risk-based-conditional-access"></a>Koşullu erişim şablonu 1: oturum açma riski tabanlı koşullu erişim
+
+Çoğu kullanıcı, takip edilebilen normal bir davranışa sahiptir ve davranışları normalin dışına çıktığında oturum açmalarına izin vermek riskli olabilir. Bu kullanıcıyı engellemek veya belki de gerçekten söylediklerini kanıtlamak üzere çok faktörlü kimlik doğrulaması gerçekleştirmesini istemeniz gerekebilir.
+
+Bir oturum açma riski, belirli bir kimlik doğrulama isteğinin kimlik sahibi tarafından yetkilendirilmemiş olma olasılığını temsil eder. P2 lisanslarına sahip kuruluşlar, [Azure AD kimlik koruması oturum açma riski algılamalarını](https://docs.microsoft.com/azure/active-directory/identity-protection/concept-identity-protection-risks#sign-in-risk)Içeren koşullu erişim ilkeleri oluşturabilir. Lütfen [B2C Için kimlik koruması algılamalarıyla ilgili sınırlamalar](https://docs.microsoft.com/azure/active-directory-b2c/identity-protection-investigate-risk?pivots=b2c-user-flow#service-limitations-and-considerations)olduğunu unutmayın.
+
+Risk algılanırsa, kullanıcılar, yöneticilerin gereksiz gürültüsünü engellemek için riskli oturum açma olayını kendi kendine düzeltebileceği ve kapatan çok faktörlü kimlik doğrulaması gerçekleştirebilir.
+
+Kuruluşlar, oturum açma riski orta veya yüksek olduğunda Multi-Factor Authentication (MFA) gerektiren bir oturum açma riski tabanlı koşullu erişim ilkesini etkinleştirmek için aşağıdaki seçeneklerden birini tercih etmelidir.
+
+### <a name="enable-with-conditional-access-policy"></a>Koşullu erişim ilkesiyle etkinleştir
+
+1. **Azure portalında** oturum açın.
+2. **Azure AD B2C**  >  **güvenlik**  >  **koşullu erişimi**'ne gidin.
+3. **Yeni ilke**' yi seçin.
+4. İlkenize bir ad verin. Kuruluşların ilkelerinin adları için anlamlı bir standart oluşturmasını öneririz.
+5. **Atamalar** altında **Kullanıcılar ve gruplar**’ı seçin.
+   1. **Ekle**' nin altında **tüm kullanıcılar**' ı seçin.
+   2. **Dışla** altında, **Kullanıcılar ve gruplar** ' ı seçin ve kuruluşunuzun acil erişim veya kesme camı hesaplarını seçin. 
+   3. **Bitti** seçeneğini belirleyin.
+6. **Bulut uygulamaları veya eylemleri**  >  **dahil**, **tüm bulut uygulamaları**' nı seçin.
+7. **Koşullar**  >  **oturum açma riski** altında **Yapılandır** ' ı **Evet** olarak ayarlayın. **Bu ilkenin uygulanacağı oturum açma risk düzeyini seçin** altında 
+   1. **Yüksek** ve **Orta**' yı seçin.
+   2. **Bitti** seçeneğini belirleyin.
+8. **Erişim denetimleri**  >  **izni** altında **erişim ver**' i seçin, **Multi-Factor Authentication gerektir**' i seçin ve **Seç**' i seçin
+9. Ayarlarınızı doğrulayın ve **ilke** ayarını **Açık** olarak ayarlayın.
+10. İlkenizi etkinleştirmek için oluşturmak **için Oluştur ' u seçin.**
+
+### <a name="enable-with-conditional-access-apis"></a>Koşullu erişim API 'Leri ile etkinleştirme
+
+Koşullu erişim API 'Leri içeren bir oturum açma riski tabanlı koşullu erişim ilkesi oluşturmak için lütfen [koşullu erişim API 'leri](https://docs.microsoft.com/azure/active-directory/conditional-access/howto-conditional-access-apis#graph-api)belgelerine bakın.
+
+Aşağıdaki şablon, "CA002: Orta ve oturum açma riski için MFA gerektir" görünen adına sahip bir koşullu erişim ilkesi oluşturmak için kullanılabilir.
+
+```json
+{
+    "displayName": "Template 1: Require MFA for medium+ sign-in risk",
+    "state": "enabledForReportingButNotEnforced",
+    "conditions": {
+        "signInRiskLevels": [ "high" ,
+            "medium"
+        ],
+        "applications": {
+            "includeApplications": [
+                "All"
+            ]
+        },
+        "users": {
+            "includeUsers": [
+                "All"
+            ],
+            "excludeUsers": [
+                "f753047e-de31-4c74-a6fb-c38589047723"
+            ]
+        }
+    },
+    "grantControls": {
+        "operator": "OR",
+        "builtInControls": [
+            "mfa"
+        ]
+    }
+}
+```
 
 ## <a name="enable-multi-factor-authentication-optional"></a>Multi-Factor Authentication 'ı etkinleştir (isteğe bağlı)
 

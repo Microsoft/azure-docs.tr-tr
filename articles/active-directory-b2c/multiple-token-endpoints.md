@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 03/15/2021
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 860f167913211ee7c511e515937f29ba5bf954cf
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2ab93a8742d210969ef6ad10683bed92221c1a57
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103491581"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256710"
 ---
 # <a name="migrate-an-owin-based-web-api-to-b2clogincom-or-a-custom-domain"></a>OWıN tabanlı Web API 'sini b2clogin.com veya özel bir etki alanına geçirme
 
@@ -30,7 +30,7 @@ Aşağıdaki bölümler, [Microsoft OWIN][katana] ara yazılım bileşenleri (Ka
 
 Bu makaledeki adımlarla devam etmeden önce aşağıdaki Azure AD B2C kaynaklara sahip olmanız gerekir:
 
-* Kiracınızda oluşturulan [Kullanıcı akışları](tutorial-create-user-flows.md) veya [özel ilkeler](custom-policy-get-started.md)
+* Kiracınızda oluşturulan [Kullanıcı akışları](tutorial-create-user-flows.md?pivots=b2c-user-flow) veya [özel ilkeler](tutorial-create-user-flows.md?pivots=b2c-custom-policy)
 
 ## <a name="get-token-issuer-endpoints"></a>Belirteç Verenin uç noktalarını al
 

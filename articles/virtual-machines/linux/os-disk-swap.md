@@ -1,6 +1,6 @@
 ---
-title: CLı kullanarak işletim sistemi diskleri arasında takas et
-description: CLı kullanarak bir Azure sanal makinesi tarafından kullanılan işletim sistemi diskini değiştirin.
+title: Azure CLı 'yı kullanarak işletim sistemi diskleri arasında takas etme
+description: Azure CLı kullanarak bir Azure sanal makinesi tarafından kullanılan işletim sistemi diskini değiştirin.
 author: cynthn
 ms.service: virtual-machines
 ms.subservice: disks
@@ -8,14 +8,15 @@ ms.workload: infrastructure-services
 ms.topic: how-to
 ms.date: 04/24/2018
 ms.author: cynthn
-ms.openlocfilehash: adcbc5b0ba0056c79576e8d4c8ded2150b206513
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 85d6350a36e62ace8f1922d30493d0f1d448d315
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87371881"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765944"
 ---
-# <a name="change-the-os-disk-used-by-an-azure-vm-using-the-cli"></a>CLı kullanarak bir Azure VM tarafından kullanılan işletim sistemi diskini değiştirme
+# <a name="change-the-os-disk-used-by-an-azure-vm-using-the-azure-cli"></a>Azure CLı kullanarak bir Azure VM tarafından kullanılan işletim sistemi diskini değiştirme
 
 
 Var olan bir VM varsa, ancak diski bir yedekleme diski veya başka bir işletim sistemi diski için değiştirmek istiyorsanız, işletim sistemi disklerini değiştirmek için Azure CLı 'yi kullanabilirsiniz. VM 'yi silip yeniden oluşturmanız gerekmez. Zaten kullanımda olmadığı sürece, başka bir kaynak grubunda yönetilen bir disk de kullanabilirsiniz.
@@ -46,13 +47,13 @@ az vm stop \
 ```
 
 
-Parametresi için yeni diskin tam kaynak KIMLIĞIYLE [az VM Update](/cli/azure/vm#az-vm-update) kullanın `--osdisk` 
+Parametresi için yeni diskin tam kaynak KIMLIĞIYLE [az VM Update](/cli/azure/vm#az_vm_update) kullanın `--osdisk` 
 
 ```azurecli-interactive 
 az vm update \
    -g myResourceGroup \
    -n myVM \
-   --os-disk /subscriptions/<subscription ID>/resourceGroups/swap/providers/Microsoft.Compute/disks/myDisk 
+   --os-disk /subscriptions/<subscription ID>/resourceGroups/<resource group>/providers/Microsoft.Compute/disks/myDisk 
    ```
    
 [Az VM start](/cli/azure/vm)kullanarak VM 'yi yeniden başlatın.

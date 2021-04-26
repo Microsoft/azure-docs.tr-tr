@@ -13,23 +13,23 @@ ms.devlang: na
 ms.topic: article
 ms.date: 3/10/2021
 ms.author: inhenkel
-ms.openlocfilehash: eb4f662a4b34d748da0e97da9b64a386be3f5c49
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2b1960aa2d08a189e04aea8906c10e761dc1c57a
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103016432"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105962654"
 ---
 # <a name="migrate-from-media-indexer-and-media-indexer-2-to-video-indexer"></a>Media Indexer ve Media Indexer 2 ' den Video Indexer 'e geçiş
 
 [!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!IMPORTANT]
-> Müşterilerin Dizin Oluşturucu v1 ve Dizin Oluşturucu v2, [Media Services v3 Audioanalön ayarlı temel modunu](../latest/analyzing-video-audio-files-concept.md)kullanarak geçiş yapmanız önerilir. [Azure Media Indexer](media-services-index-content.md) medya işlemcisi ve [Azure Media Indexer 2 Preview](./legacy-components.md) medya işlemcileri kullanımdan kaldırılıyor. Kullanımdan kaldırma tarihleri için, bu [eski bileşenler](legacy-components.md) konusuna bakın.
+> Müşterilerin Dizin Oluşturucu v1 ve Dizin Oluşturucu v2, [Media Services v3 Audioanalön ayarlı temel modunu](../latest/analyze-video-audio-files-concept.md)kullanarak geçiş yapmanız önerilir. [Azure Media Indexer](media-services-index-content.md) medya işlemcisi ve [Azure Media Indexer 2 Preview](./legacy-components.md) medya işlemcileri kullanımdan kaldırılıyor. Kullanımdan kaldırma tarihleri için, bu [eski bileşenler](legacy-components.md) konusuna bakın.
 
 Azure Media Services Video Indexer Azure Media Analytics, Azure Bilişsel Arama, bilişsel hizmetler (Yüz Tanıma API'si, Microsoft Translator, Görüntü İşleme API'si ve Özel Konuşma Tanıma hizmeti) üzerinde oluşturulmuştur. Video Indexer’ın görüntülü ve sesli modellerini kullanarak videolarınızdan içgörü ayıklamanıza olanak sağlar. Hangi senaryolar Video Indexer kullanılabileceğini, hangi özellikleri sunduğunu ve nasıl başladıklarınızı görmek için bkz. [video Indexer video ve ses modelleri](../video-indexer/video-indexer-overview.md). 
 
-[Azure Media Services v3 çözümleyici önayarlarını](../latest/analyzing-video-audio-files-concept.md) kullanarak veya doğrudan [video Indexer API 'lerini](https://api-portal.videoindexer.ai/)kullanarak video ve ses dosyalarınızda öngörüleri ayıklayabilirsiniz. Şu anda, Video Indexer API 'leri ve Media Services v3 API 'Leri tarafından sunulan özellikler arasında bir çakışma var.
+[Azure Media Services v3 çözümleyici önayarlarını](../latest/analyze-video-audio-files-concept.md) kullanarak veya doğrudan [video Indexer API 'lerini](https://api-portal.videoindexer.ai/)kullanarak video ve ses dosyalarınızda öngörüleri ayıklayabilirsiniz. Şu anda, Video Indexer API 'leri ve Media Services v3 API 'Leri tarafından sunulan özellikler arasında bir çakışma var.
 
 > [!NOTE]
 > Video Indexer ile Media Services çözümleyici ön ayarları arasındaki farkları anlamak için [karşılaştırma belgesine](../video-indexer/compare-video-indexer-with-media-services-presets.md)bakın.
@@ -49,7 +49,7 @@ Aşağıdaki bölümde ilgili bağlantılar [gösterilmektedir: video Indexer ku
 
 ## <a name="getting-started-with-media-services-v3-apis"></a>Media Services v3 API 'Leri ile çalışmaya başlama
 
-Azure Media Services v3 API, [Azure Media Services v3 Çözümleyicisi ön ayarları](../latest/analyzing-video-audio-files-concept.md)aracılığıyla video ve ses dosyalarından öngörüleri ayıklamanızı sağlar.
+Azure Media Services v3 API, [Azure Media Services v3 Çözümleyicisi ön ayarları](../latest/analyze-video-audio-files-concept.md)aracılığıyla video ve ses dosyalarından öngörüleri ayıklamanızı sağlar.
 
 **Audioanalsete önceden ayarlanmış** , bir ses veya video dosyasından birden çok ses öngörülerini ayıklamanızı sağlar. Çıktı, ses dökümü için bir VTT veya TTML dosyası ve bir JSON dosyası (tüm ek ses öngörüleri ile) içerir. Ses öngörüleri, anahtar sözcükleri, konuşmacı dizin oluşturma ve konuşma yaklaşımı analizini içerir. Audioanalönayarı belirli diller için dil algılamayı de destekler. Ayrıntılı bilgi için bkz. [dönüşümler](/rest/api/media/transforms/createorupdate#audioanalyzerpreset).
 
@@ -57,7 +57,7 @@ Azure Media Services v3 API, [Azure Media Services v3 Çözümleyicisi ön ayarl
 
 Başlamak için bkz:
 
-* [Öğretici](../latest/analyze-videos-tutorial-with-api.md)
+* [Öğretici](../latest/analyze-videos-tutorial.md)
 * Audioanaliz Zerönayar örnekleri: [Java SDK](https://github.com/Azure-Samples/media-services-v3-java/tree/master/AudioAnalytics/AudioAnalyzer) veya [.NET SDK](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/master/AudioAnalytics/AudioAnalyzer)
 * Videoanaliz Zerönayar örnekleri: [Java SDK](https://github.com/Azure-Samples/media-services-v3-java/tree/master/VideoAnalytics/VideoAnalyzer) veya [.NET SDK](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/master/VideoAnalytics/VideoAnalyzer)
 

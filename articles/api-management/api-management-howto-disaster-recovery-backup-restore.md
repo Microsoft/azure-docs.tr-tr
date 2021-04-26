@@ -13,12 +13,13 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 12/05/2020
 ms.author: apimpm
-ms.openlocfilehash: 223d119786d99eac611ece597fc0e8de4fcaf6bd
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: c7901dd4a238b27a31f95f1e22ddf9dc1ae5327a
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98762409"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813078"
 ---
 # <a name="how-to-implement-disaster-recovery-using-service-backup-and-restore-in-azure-api-management"></a>Azure API Management'ta hizmet yedekleme ve geri yükleme işlevlerini kullanarak acil durumda kurtarma
 
@@ -78,11 +79,14 @@ Azure Resource Manager kullanan kaynaklarda yaptığınız tüm görevlerin aşa
 5. **Azure hizmet yönetimi**'ni seçin.
 6. **Seç**' e basın.
 
-    ![İzin ekleme](./media/api-management-howto-disaster-recovery-backup-restore/add-app.png)
+    :::image type="content" source="./media/api-management-howto-disaster-recovery-backup-restore/add-app-permission.png" alt-text="Uygulama izinlerinin nasıl ekleneceğini gösteren ekran görüntüsü."::: 
 
 7. Yeni eklenen uygulamanın yanındaki **temsilci izinleri** ' ne tıklayın, **Azure hizmet yönetimi 'ne (Önizleme) erişim** kutusunu işaretleyin.
+
+    :::image type="content" source="./media/api-management-howto-disaster-recovery-backup-restore/delegated-app-permission.png" alt-text="Atanmış uygulama izinleri eklemeyi gösteren ekran görüntüsü.":::
+
 8. **Seç**' e basın.
-9. **Izin ver**' e tıklayın.
+9. **Izin Ekle**' ye tıklayın.
 
 ### <a name="configuring-your-app"></a>Uygulamanızı yapılandırma
 
@@ -227,7 +231,7 @@ Restore, tamamlanması 30 veya daha fazla dakika süren uzun süredir çalışan
 -   [Yönetilen kimlik](api-management-howto-use-managed-service-identity.md) yapılandırması.
 -   [Azure Izleyici tanısı](api-management-howto-use-azure-monitor.md) Yapılandırmada.
 -   [Protokoller ve şifre](api-management-howto-manage-protocols-ciphers.md) ayarları.
--   [Geliştirici Portalı](api-management-howto-developer-portal.md#is-the-portals-content-saved-with-the-backuprestore-functionality-in-api-management) içeriği.
+-   [Geliştirici Portalı](developer-portal-faq.md#is-the-portals-content-saved-with-the-backuprestore-functionality-in-api-management) içeriği.
 
 Hizmet yedeklemeleri gerçekleştirdiğiniz sıklık, kurtarma noktası hedefini etkiler. Bunu en aza indirmek için, API Management hizmetinize değişiklikler yaptıktan sonra düzenli yedeklemeler uygulamanızı ve isteğe bağlı yedeklemeler gerçekleştirmenizi öneririz.
 

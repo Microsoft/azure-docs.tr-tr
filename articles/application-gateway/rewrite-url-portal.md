@@ -2,24 +2,24 @@
 title: Azure Application Gateway ile URL ve sorgu dizesi yeniden yazma Azure portal
 description: URL 'YI ve sorgu dizesini yeniden yazmak üzere bir Azure Application Gateway yapılandırmak için Azure portal nasıl kullanacağınızı öğrenin
 services: application-gateway
-author: surajmb
+author: azhar2005
 ms.service: application-gateway
 ms.topic: how-to
-ms.date: 7/16/2020
-ms.author: surmb
-ms.openlocfilehash: ec58c6f97efdbcb91071bcea98bbbc614833246d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 4/05/2021
+ms.author: azhussai
+ms.openlocfilehash: b8ddc5e57b9ce56d6bce7e220bc840ba0fa43ae2
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92215782"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384766"
 ---
-# <a name="rewrite-url-with-azure-application-gateway---azure-portal-preview"></a>URL 'YI Azure Application Gateway yeniden yazma-Azure portal (Önizleme)
+# <a name="rewrite-url-with-azure-application-gateway---azure-portal"></a>URL 'YI Azure Application Gateway yeniden yazma-Azure portal
 
 Bu makalede, URL 'YI yeniden yazmak için [Application Gateway v2 SKU](application-gateway-autoscaling-zone-redundant.md) örneğini yapılandırmak üzere Azure Portal nasıl kullanılacağı açıklanır.
 
 >[!NOTE]
-> URL yeniden yazma özelliği önizlemededir ve yalnızca Application Gateway Standard_v2 ve WAF_v2 SKU 'SU için kullanılabilir. Üretim ortamında kullanılması önerilmez. Önizlemeler hakkında daha fazla bilgi edinmek için [buradaki kullanım koşullarına](https://azure.microsoft.com/support/legal/preview-supplemental-terms/)bakın.
+> URL yeniden yazma özelliği yalnızca Application Gateway Standard_v2 ve WAF_v2 SKU 'SU için kullanılabilir. Bir WAF etkin ağ geçidinde URL yeniden yazma yapılandırıldığında, yeniden yazma isteği üst bilgileri ve URL 'SI üzerinde WAF değerlendirmesi gerçekleşmeyecektir. [Daha fazla bilgi edinin](rewrite-http-headers-url.md#using-url-rewrite-or-host-header-rewrite-with-web-application-firewall-waf_v2-sku).
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 

@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 10/08/2019
-ms.openlocfilehash: af2803a945821a23ff59f196967d792a6593009f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: cb778d826ef094d71fd27f3c10bc1f2c292baa47
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102033393"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862408"
 ---
 # <a name="monitoring-azure-resources-with-azure-monitor"></a>Azure İzleyici ile Azure kaynaklarını izleme
 Azure kaynaklarına bağlı kritik Uygulamalarınız ve iş süreçleriniz olduğunda, bu kaynakları kullanılabilirlik, performans ve işlem için izlemek istersiniz. Bu makalede, Azure kaynakları tarafından oluşturulan izleme verileri ve bu verileri çözümlemek ve uyarmak için Azure Izleyici 'nin özelliklerini nasıl kullanabileceğiniz açıklanır.
@@ -131,7 +131,7 @@ Azure Izleyici günlükleri, güçlü bir sorgu aracıyla analizler için birden
 Bir komut satırından kaynağından toplanan izleme verilerine erişebilir veya [Azure PowerShell](/powershell/azure/) veya [Azure komut satırı arabirimini](/cli/azure/)kullanarak bir komut dosyasına dahil edebilirsiniz. 
 
 - CLı 'dan ölçüm verilerine erişmek için bkz. [CLI ölçümleri başvurusu](/cli/azure/monitor/metrics) .
-- CLı 'dan günlük sorgusu kullanarak Azure Izleyici günlük verilerine erişmek için bkz. [clı Log Analytics başvurusu](/cli/azure/ext/log-analytics/monitor/log-analytics) .
+- CLı 'dan günlük sorgusu kullanarak Azure Izleyici günlük verilerine erişmek için bkz. [clı Log Analytics başvurusu](/cli/azure/monitor/log-analytics) .
 - Azure PowerShell ölçüm verilerine erişmek için [Azure PowerShell ölçüm başvurusuna](/powershell/module/azurerm.insights/get-azurermmetric) bakın.
 - Azure PowerShell bir günlük sorgusu kullanarak Azure Izleyici günlük verilerine erişmek için [Azure PowerShell günlük sorgu başvurusu](/powershell/module/az.operationalinsights/Invoke-AzOperationalInsightsQuery) ' na bakın.
 

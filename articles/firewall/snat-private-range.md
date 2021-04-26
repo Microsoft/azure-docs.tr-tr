@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: how-to
-ms.date: 01/11/2021
+ms.date: 04/14/2021
 ms.author: victorh
-ms.openlocfilehash: c425afc314435c38d15d53ab0c38dcd48e35a40b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 91d4d631376c03b668128936f3840ce1119f9b6f
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102508937"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107482760"
 ---
 # <a name="azure-firewall-snat-private-ip-address-ranges"></a>Azure Güvenlik Duvarı SNAT özel IP adresi aralıkları
 
@@ -32,13 +32,28 @@ Kuruluşunuz özel ağlar için genel bir IP adresi aralığı kullanıyorsa, Az
 > [!IMPORTANT]
 > Kendi özel IP adresi aralıklarını belirtmek ve varsayılan ıANA RFC 1918 adres aralıklarını korumak istiyorsanız, özel listenizin ıANA RFC 1918 aralığını hala içerdiğinden emin olun. 
 
+Aşağıdaki yöntemleri kullanarak SNAT özel IP adreslerini yapılandırabilirsiniz. Yapılandırmanızda uygun yöntemi kullanarak SNAT özel adreslerini yapılandırmanız gerekir. Bir güvenlik duvarı ilkesiyle ilişkili güvenlik duvarları, ilkede Aralık belirtmeli ve kullanımda olmamalıdır `AdditionalProperties` .
+
+
+|Yöntem            |Klasik kuralları kullanma  |Güvenlik Duvarı İlkesi kullanma  |
+|---------|---------|---------|
+|Azure portalı     | [Destek](#classic-rules-3)| [Destek](#firewall-policy-1)|
+|Azure PowerShell     |[yapılandırma `PrivateRange`](#classic-rules)|Şu anda desteklenmiyor|
+|Azure CLI|[yapılandırma `--private-ranges`](#classic-rules-1)|Şu anda desteklenmiyor|
+|ARM şablonu     |[`AdditionalProperties`güvenlik duvarı özelliğinde yapılandırma](#classic-rules-2)|[`snat/privateRanges`güvenlik duvarı ilkesinde yapılandırma](#firewall-policy)|
+
+
 ## <a name="configure-snat-private-ip-address-ranges---azure-powershell"></a>SNAT özel IP adresi aralıklarını Yapılandırma-Azure PowerShell
+### <a name="classic-rules"></a>Klasik kurallar
 
 Güvenlik Duvarı için özel IP adresi aralıklarını belirtmek üzere Azure PowerShell kullanabilirsiniz.
 
-### <a name="new-firewall"></a>Yeni güvenlik duvarı
+> [!NOTE]
+> Güvenlik Duvarı `PrivateRange` özelliği bir güvenlik duvarı ilkesiyle ilişkili güvenlik duvarları için yok sayılır. `SNAT`Özelliğini, `firewallPolicies` [SNAT özel IP adresı aralıkları-ARM şablonunu yapılandırma](#firewall-policy)bölümünde açıklandığı gibi kullanmanız gerekir.
 
-Yeni bir güvenlik duvarı için Azure PowerShell cmdlet 'i şunlardır:
+#### <a name="new-firewall"></a>Yeni güvenlik duvarı
+
+Klasik kuralları kullanan yeni bir güvenlik duvarı için Azure PowerShell cmdlet 'i şunlardır:
 
 ```azurepowershell
 $azFw = @{
@@ -60,9 +75,9 @@ New-AzFirewall @azFw
 
 Daha fazla bilgi için bkz. [New-AzFirewall](/powershell/module/az.network/new-azfirewall).
 
-### <a name="existing-firewall"></a>Mevcut güvenlik duvarı
+#### <a name="existing-firewall"></a>Mevcut güvenlik duvarı
 
-Mevcut bir güvenlik duvarını yapılandırmak için aşağıdaki Azure PowerShell cmdlet 'lerini kullanın:
+Klasik kuralları kullanarak var olan bir güvenlik duvarını yapılandırmak için aşağıdaki Azure PowerShell cmdlet 'lerini kullanın:
 
 ```azurepowershell
 $azfw = Get-AzFirewall -Name '<fw-name>' -ResourceGroupName '<resourcegroup-name>'
@@ -71,12 +86,13 @@ Set-AzFirewall -AzureFirewall $azfw
 ```
 
 ## <a name="configure-snat-private-ip-address-ranges---azure-cli"></a>SNAT özel IP adresi aralıklarını Yapılandırma-Azure CLı
+### <a name="classic-rules"></a>Klasik kurallar
 
-Güvenlik Duvarı için özel IP adresi aralıklarını belirtmek üzere Azure CLı kullanabilirsiniz.
+Klasik kuralları kullanarak güvenlik duvarı için özel IP adresi aralıklarını belirtmek üzere Azure CLı kullanabilirsiniz. 
 
-### <a name="new-firewall"></a>Yeni güvenlik duvarı
+#### <a name="new-firewall"></a>Yeni güvenlik duvarı
 
-Yeni bir güvenlik duvarı için, Azure CLı komutu şu şekilde olur:
+Klasik kuralları kullanan yeni bir güvenlik duvarı için Azure CLı komutu şu şekilde olur:
 
 ```azurecli-interactive
 az network firewall create \
@@ -89,11 +105,11 @@ az network firewall create \
 > Azure CLı komutunu kullanarak Azure Güvenlik Duvarı 'Nı dağıtmak `az network firewall create` , genel IP adresleri ve IP yapılandırması oluşturmak için ek yapılandırma adımları gerektirir. Tam dağıtım kılavuzu için bkz. [Azure CLI kullanarak Azure Güvenlik duvarını dağıtma ve yapılandırma](deploy-cli.md) .
 
 > [!NOTE]
-> IANAPrivateRanges, diğer aralıklar buna eklenirken Azure Güvenlik duvarında geçerli varsayılan değerlere genişletilir. Özel Aralık belirtimde IANAPrivateRanges varsayılan kalmasını sağlamak için, `PrivateRange` Aşağıdaki örneklerde gösterildiği gibi belirtimde kalması gerekir.
+> IANAPrivateRanges, diğer aralıklar buna eklenirken Azure Güvenlik duvarında geçerli varsayılan değerlere genişletilir. Özel Aralık belirtimde IANAPrivateRanges varsayılan kalmasını sağlamak için, `private-ranges` Aşağıdaki örneklerde gösterildiği gibi belirtimde kalması gerekir.
 
-### <a name="existing-firewall"></a>Mevcut güvenlik duvarı
+#### <a name="existing-firewall"></a>Mevcut güvenlik duvarı
 
-Mevcut bir güvenlik duvarını yapılandırmak için, Azure CLı komutu şu şekilde olur:
+Klasik kuralları kullanarak var olan bir güvenlik duvarını yapılandırmak için, Azure CLı komutu şu şekilde olur:
 
 ```azurecli-interactive
 az network firewall update \
@@ -103,6 +119,7 @@ az network firewall update \
 ```
 
 ## <a name="configure-snat-private-ip-address-ranges---arm-template"></a>SNAT özel IP adresi aralıklarını yapılandırma-ARM şablonu
+### <a name="classic-rules"></a>Klasik kurallar
 
 ARM Şablon dağıtımı sırasında SNAT 'yi yapılandırmak için, özelliğine aşağıdakileri ekleyebilirsiniz `additionalProperties` :
 
@@ -111,8 +128,29 @@ ARM Şablon dağıtımı sırasında SNAT 'yi yapılandırmak için, özelliğin
    "Network.SNAT.PrivateRanges": "IANAPrivateRanges , IPRange1, IPRange2"
 },
 ```
+### <a name="firewall-policy"></a>Güvenlik duvarı ilkesi
+
+Bir güvenlik duvarı ilkesiyle ilişkili Azure Güvenlik duvarları, 2020-11-01 API sürümünden bu yana SNAT özel aralıklarını destekliyordu. Şu anda, güvenlik duvarı Ilkesinde SNAT özel aralığını güncelleştirmek için bir şablon kullanabilirsiniz. Aşağıdaki örnek güvenlik duvarını **her zaman** SNAT ağ trafiğine yapılandırır:
+
+```json
+{ 
+
+            "type": "Microsoft.Network/firewallPolicies", 
+            "apiVersion": "2020-11-01", 
+            "name": "[parameters('firewallPolicies_DatabasePolicy_name')]", 
+            "location": "eastus", 
+            "properties": { 
+                "sku": { 
+                    "tier": "Standard" 
+                }, 
+                "snat": { 
+                    "privateRanges": [255.255.255.255/32] 
+                } 
+            } 
+```
 
 ## <a name="configure-snat-private-ip-address-ranges---azure-portal"></a>SNAT özel IP adresi aralıklarını Yapılandırma-Azure portal
+### <a name="classic-rules"></a>Klasik kurallar
 
 Güvenlik Duvarı için özel IP adresi aralıklarını belirtmek üzere Azure portal kullanabilirsiniz.
 
@@ -125,6 +163,18 @@ Güvenlik Duvarı için özel IP adresi aralıklarını belirtmek üzere Azure p
 
 1. Varsayılan olarak, **IANAPrivateRanges** yapılandırılır.
 2. Ortamınız için özel IP adresi aralıklarını düzenleyin ve ardından **Kaydet**' i seçin.
+
+### <a name="firewall-policy"></a>Güvenlik duvarı ilkesi
+
+1.  Kaynak grubunuzu seçin ve ardından güvenlik duvarı ilkenizi seçin.
+2.  **Ayarlar** sütununda **özel IP aralıkları (SNAT)** seçeneğini belirleyin.
+
+    Varsayılan olarak, **varsayılan Azure Güvenlik Duvarı ILKESI SNAT davranışını kullan** seçilidir. 
+3. SNAT yapılandırmasını özelleştirmek için onay kutusunun işaretini kaldırın ve **SNAT gerçekleştir** altında ORTAMıNıZ için SNAT gerçekleştirme koşullarını seçin.
+      :::image type="content" source="media/snat-private-range/private-ip-ranges-snat.png" alt-text="Özel IP aralıkları (SNAT)":::
+
+
+4.   **Uygula**’yı seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

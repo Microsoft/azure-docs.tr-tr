@@ -1,0 +1,47 @@
+### YamlMime:Landing
+title: Doğrulanabilir kimlik bilgileri Azure Active Directory belgeleri
+summary: Doğrulanabilir kimlik bilgileri, müşterilerin kendi verilerini yönetmesini güçlendiren çözümler oluşturmanıza yardımcı olur.
+metadata:
+  author: barclayn
+  description: Kendi kendileriyle ilgili bilgileri denetlemek için müşterileri güçlendirin ve çözümlerinize doğrulanabilir kimlik bilgileri ekleme hakkında bilgi edinin
+  manager: daveba
+  ms.author: barclayn
+  ms.collection: na
+  ms.date: 03/30/2021
+  ms.service: active-directory
+  ms.subservice: na
+  ms.topic: landing-page
+  services: active-directory
+  ms.openlocfilehash: 13eb88e8e8613c913f66185eba751a1fe3c36e1e
+  ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
+  ms.translationtype: MT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 04/01/2021
+  ms.locfileid: "106175714"
+landingContent:
+- title: Doğrulanabilir kimlik bilgileri hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Doğrulanabilir kimlik bilgilerine Azure Active Directory giriş
+      url: decentralized-identifier-overview.md
+  - linkListType: video
+    links:
+    - text: Kaynaklarınıza erişimi idare etme
+      url: https://www.youtube.com/watch?v=r20hCF9NbTo
+- title: Doğrulanabilir kimlik bilgileri, kişisel bilgilerini denetlemek için kişi yerleştirir
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Doğrulanabilir kimlik bilgileriyle çalışmaya başlama
+      url: get-started-verifiable-credentials.md
+  - linkListType: concept
+    links:
+    - text: Veren hizmeti iletişim örnekleri
+      url: issuer-openid.md
+- title: YAPTıĞıNıZ bağlantıyı bağlama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Etki alanınızı dağıtılmış Tanımlayıcla ilişkilendirin
+      url: how-to-dnsbind.md

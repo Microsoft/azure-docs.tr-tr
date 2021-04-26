@@ -1,342 +1,336 @@
-### YamlMime:Hub
+### YamlMime:Hub 
 title: Azure ağ belgeleri
-summary: Azure’daki kaynaklarınıza bağlantı sağlayan, uygulamaları teslim edip koruyan ve ağınızın güvenliğini sağlamaya yardımcı olan çeşitli Azure ağ hizmetleri hakkında bilgi edinin.
+summary: 'Azure’daki kaynaklarınıza bağlantı sağlayan, uygulamaları teslim edip koruyan ve ağınızın güvenliğini sağlamaya yardımcı olan çeşitli Azure ağ hizmetleri hakkında bilgi edinin.'
 brand: azure
 metadata:
   title: Azure ağ belgeleri
-  description: Azure ağ hizmetleri Azure’daki kaynaklarınıza bağlantı sağlar, uygulamaları teslim eder ve korur, ayrıca ağınızın güvenliğini sağlamaya yardımcı olur.
+  description: 'Azure ağ hizmetleri Azure’daki kaynaklarınıza bağlantı sağlar, uygulamaları teslim eder ve korur, ayrıca ağınızın güvenliğini sağlamaya yardımcı olur.'
   ms.service: virtual-network
   ms.topic: hub-page
-  ms.collection: 
+  ms.collection: null
   author: KumudD
   ms.author: kumud
   manager: mtillman
-  ms.date: 09/28/2020
-  ms.openlocfilehash: c701f1f54955257fd60fe8d58fb703a1d26d1169
-  ms.sourcegitcommit: 15d27661c1c03bf84d3974a675c7bd11a0e086e6
-  ms.translationtype: MT
-  ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/09/2021
-  ms.locfileid: "102503406"
+  ms.date: 03/30/2021
 highlightedContent:
   items:
-  - title: Azure Ağ nedir?
-    itemType: overview
-    url: networking-overview.md
-  - title: Azure Ağ’daki yenilikler
-    itemType: whats-new
-    url: https://azure.microsoft.com/updates/?category=networking
-  - title: Azure’da yük dengeleme seçenekleri
-    itemType: architecture
-    url: /azure/architecture/guide/technology-choices/load-balancing-overview
-  - title: Azure'da merkez-uç ağ topolojisi
-    itemType: architecture
-    url: /azure/architecture/reference-architectures/hybrid-networking/hub-spoke
-  - title: Azure Orbital nedir?
-    itemType: concept
-    url: azure-orbital-overview.md
-  - title: Azure hizmetlerini kullanarak uzaktan çalışma
-    itemType: concept
-    url: working-remotely-support.md
+    - title: Azure Ağ nedir?
+      itemType: overview
+      url: fundamentals/networking-overview.md
+    - title: Azure Ağ’daki yenilikler
+      itemType: whats-new
+      url: 'https://azure.microsoft.com/updates/?category=networking'
+    - title: Azure’da yük dengeleme seçenekleri
+      itemType: architecture
+      url: /azure/architecture/guide/technology-choices/load-balancing-overview
+    - title: Azure'da merkez-uç ağ topolojisi
+      itemType: architecture
+      url: /azure/architecture/reference-architectures/hybrid-networking/hub-spoke
+    - title: Azure Orbital nedir?
+      itemType: concept
+      url: azure-orbital-overview.md
+    - title: Azure hizmetlerini kullanarak uzaktan çalışma
+      itemType: concept
+      url: working-remotely-support.md
 conceptualContent:
   items:
-  - title: Sanal ağ
-    links:
-    - url: ../virtual-network/virtual-networks-overview.md
-      itemType: concept
-      text: Azure sanal ağı nedir?
-    - url: ../virtual-network/tutorial-restrict-network-access-to-resources.md
-      itemType: tutorial
-      text: Kaynaklar için ağ erişimini kısıtlama
-    - url: ../virtual-network/tutorial-connect-virtual-networks-portal.md
-      itemType: tutorial
-      text: Azure sanal ağlarını bağlama
-    - url: ../virtual-network/diagnose-network-traffic-filter-problem.md
-      itemType: how-to-guide
-      text: Ağ trafiği filtre sorunlarını giderme
-    footerLink:
-      url: ../virtual-network/index.yml
-      text: Daha fazla göster
-  - title: Şirket içini Azure’a bağlama - VPN şifrelemesi
-    links:
-    - url: ../vpn-gateway/vpn-gateway-about-vpngateways.md
-      itemType: overview
-      text: Azure VPN Gateway nedir?
-    - url: ../vpn-gateway/tutorial-site-to-site-portal.md
-      itemType: tutorial
-      text: Siteler arası bağlantılar
-    - url: ../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md
-      itemType: how-to-guide
-      text: Noktadan siteye bağlantılar
-    - url: ../vpn-gateway/vpn-gateway-troubleshoot.md
-      itemType: how-to-guide
-      text: VPN Gateway sorunlarını giderme
-    footerLink:
-      url: ../vpn-gateway/index.yml
-      text: Daha fazla göster
-  - title: Şirket içini Azure’a genişletme - özel bağlantı
-    links:
-    - url: ../expressroute/expressroute-introduction.md
-      itemType: concept
-      text: Azure ExpressRoute nedir?
-    - url: ../expressroute/expressroute-howto-circuit-portal-resource-manager.md
-      itemType: tutorial
-      text: ExpressRoute bağlantı hattını oluşturma ve değiştirme
-    - url: ../expressroute/expressroute-howto-linkvnet-portal-resource-manager.md
-      itemType: tutorial
-      text: ExpressRoute bağlantı hattına bir sanal ağı bağlama
-    - url: ../expressroute/expressroute-troubleshooting-network-performance.md
-      itemType: how-to-guide
-      text: Ağ performansı sorunlarını giderme
-    footerLink:
-      url: ../expressroute/index.yml
-      text: Daha fazla göster
-  - title: DNS
-    links:
-    - url: ../dns/dns-overview.md
-      itemType: overview
-      text: Azure DNS nedir?
-    - url: ../private-link/private-endpoint-overview.md
-      itemType: overview
-      text: Azure Özel DNS nedir?
-    - url: ../dns/dns-delegate-domain-azure-dns.md
-      itemType: tutorial
-      text: Etki alanınızı ve alt etki alanınızı barındırma
-    - url: ../dns/dns-getstarted-portal.md
-      itemType: tutorial
-      text: Azure DNS sorunlarını giderme
-    footerLink:
-      url: ../dns/index.yml
-      text: Daha fazla göster
-  - title: Ağ yük dengeleyici
-    links:
-    - url: ../load-balancer/load-balancer-overview.md
-      itemType: overview
-      text: Azure Load Balancer nedir?
-    - url: https://azure.microsoft.com/updates/?category=networking&query=load%20balancer
-      itemType: whats-new
-      text: Yenilikler
-    - url: ../load-balancer/quickstart-load-balancer-standard-public-portal.md
-      itemType: quickstart
-      text: Sanal makinelerin internet trafiğinde yük dengeleme
-    - url: ../load-balancer/load-balancer-troubleshoot.md
-      itemType: how-to-guide
-      text: Azure Load Balancer sorunlarını giderme
-    footerLink:
-      url: ../load-balancer/index.yml
-      text: Daha fazla göster
-  - title: DNS tabanlı yük dengeleyici
-    links:
-    - url: ../traffic-manager/traffic-manager-overview.md
-      itemType: overview
-      text: Azure Traffic Manager nedir?
-    - url: ../traffic-manager/tutorial-traffic-manager-improve-website-response.md
-      itemType: tutorial
-      text: Düşük gecikme süresi için trafiği yönlendirme
-    - url: ../traffic-manager/traffic-manager-routing-methods.md
-      itemType: concept
-      text: Trafik yönlendirme yöntemleri
-    - url: ../traffic-manager/traffic-manager-troubleshooting-degraded.md
-      itemType: how-to-guide
-      text: Traffic Manager’ın düzeyi düşürülmüş durum sorunlarını giderme
-    footerLink:
-      url: ../traffic-manager/index.yml
-      text: Daha fazla göster
-  - title: Web uygulaması yük dengeleyici
-    links:
-    - url: ../application-gateway/overview.md
-      itemType: overview
-      text: Azure Application Gateway nedir?
-    - url: ../application-gateway/quick-create-portal.md
-      itemType: quickstart
-      text: Portalı kullanarak web trafiğini yönlendirme
-    - url: ../application-gateway/application-gateway-faq.yml
-      itemType: concept
-      text: Sık sorulan sorular
-    - url: ../application-gateway/application-gateway-troubleshooting-502.md
-      itemType: how-to-guide
-      text: Hatalı Ağ Geçidi hatalarında sorun giderme
-    footerLink:
-      url: ../application-gateway/index.yml
-      text: Daha fazla göster
-  - title: Güvenli bulut CDN ve küresel yük dengeleyici
-    links:
-    - url: ../frontdoor/front-door-overview.md
-      itemType: overview
-      text: Azure Front Door Hizmeti nedir?
-    - url: ../frontdoor/standard-premium/overview.md
-      itemType: overview
-      text: Azure ön kapısının Standart/Premium nedir (Önizleme)?
-    - url: ../frontdoor/front-door-custom-domain.md
-      itemType: how-to-guide
-      text: Azure Front Door Service’inize özel etki alanı ekleme
-    - url: ../frontdoor/front-door-how-to-redirect-https.md
-      itemType: how-to-guide
-      text: HTTP’den HTTPS’ye yeniden yönlendirme
-    footerLink:
-      url: ../frontdoor/index.yml
-      text: Daha fazla göster
-  - title: Ağ durumunu izleme
-    links:
-    - url: ../network-watcher/network-watcher-monitoring-overview.md
-      itemType: overview
-      text: Azure Ağ İzleyicisi nedir?
-    - url: ../network-watcher/traffic-analytics.md
-      itemType: concept
-      text: Azure’da Trafik Analizi
-    - url: ../network-watcher/network-watcher-nsg-flow-logging-portal.md
-      itemType: tutorial
-      text: VM’ye gelen ve VM’den giden ağ trafiği akışını günlüğe kaydetme
-    footerLink:
-      url: ../network-watcher/index.yml
-      text: Daha fazla göster
-  - title: Ağ güvenlik duvarı
-    links:
-    - url: ../firewall/overview.md
-      itemType: overview
-      text: Azure Güvenlik Duvarı nedir?
-    - url: ../firewall/tutorial-firewall-deploy-portal.md
-      itemType: tutorial
-      text: Azure Güvenlik Duvarı'nı dağıtma ve yapılandırma
-    - url: ../firewall/tutorial-firewall-dnat.md
-      itemType: tutorial
-      text: Azure Güvenlik Duvarı’nı kullanarak gelen İnternet trafiğini filtreleme
-    footerLink:
-      url: ../firewall/index.yml
-      text: Daha fazla göster
-  - title: Azure sanal makinelerine güvenli erişim
-    links:
-    - url: ../bastion/bastion-overview.md
-      itemType: overview
-      text: Azure Bastion nedir?
-    - url: ../bastion/tutorial-create-host-portal.md
-      itemType: how-to-guide
-      text: Azure Bastion konağı oluşturma
-    - url: ../bastion/troubleshoot.md
-      itemType: how-to-guide
-      text: Azure Bastion sorunlarını giderme
-    footerLink:
-      url: ../bastion/index.yml
-      text: Daha fazla göster
-  - title: Ağ güvenlik yönetimi
-    links:
-    - url: ../firewall-manager/overview.md
-      itemType: overview
-      text: Azure Güvenlik Duvarı Yöneticisi nedir?
-    - url: ../firewall-manager/secured-virtual-hub.md
-      itemType: concept
-      text: Güvenli sanal merkez nedir?
-    - url: ../firewall-manager/secure-cloud-network.md
-      itemType: tutorial
-      text: Azure Güvenlik Duvarı Yöneticisi’ni kullanarak sanal WAN’nizin güvenliğini sağlama
-    footerLink:
-      url: ../firewall-manager/index.yml
-      text: Daha fazla göster
-  - title: Web uygulaması güvenlik duvarı
-    links:
-    - url: ../web-application-firewall/overview.md
-      itemType: overview
-      text: Azure web uygulaması güvenlik duvarı nedir?
-    - url: ../web-application-firewall/ag/ag-overview.md
-      itemType: concept
-      text: Application Gateway üzerinde WAF
-    - url: ../web-application-firewall/afds/afds-overview.md
-      itemType: concept
-      text: Azure Front Door Service üzerinde WAF
-    - url: ../web-application-firewall/cdn/cdn-overview.md
-      itemType: concept
-      text: Azure CDN üzerinde WAF
-    - url: ../web-application-firewall/ag/web-application-firewall-troubleshoot.md
-      itemType: how-to-guide
-      text: Application Gateway için WAF sorunlarını giderme
-    footerLink:
-      url: ../web-application-firewall/index.yml
-      text: Daha fazla göster
-  - title: Hizmete özel erişim
-    links:
-    - url: ../private-link/private-link-overview.md
-      itemType: overview
-      text: Azure Özel Bağlantı nedir?
-    - url: ../private-link/private-endpoint-overview.md
-      itemType: concept
-      text: Azure özel uç noktası nedir?
-    - url: ../private-link/troubleshoot-private-link-connectivity.md
-      itemType: how-to-guide
-      text: Azure Özel Bağlantı sorunlarını giderme
-    footerLink:
-      url: ../private-link/index.yml
-      text: Daha fazla göster
-  - title: DDOS Koruması
-    links:
-    - url: ../ddos-protection/ddos-protection-overview.md
-      itemType: overview
-      text: Azure DDoS Koruması Standart nedir?
-    - url: ../ddos-protection/manage-ddos-protection.md
-      itemType: how-to-guide
-      text: DDoS Koruması’nı yönetme
-    - url: ../ddos-protection/ddos-protection-partner-onboarding.md
-      itemType: concept
-      text: Eklenen iş ortakları
-    footerLink:
-      url: ../ddos-protection/index.yml
-      text: Daha fazla göster
-  - title: İçerik teslim ağı
-    links:
-    - url: ../cdn/cdn-overview.md
-      itemType: overview
-      text: Azure Content Delivery Network nedir?
-    - url: ../cdn/cdn-create-new-endpoint.md
-      itemType: quickstart
-      text: CDN profili ve uç noktası oluşturma
-    - url: ../cdn/cdn-standard-rules-engine-reference.md
-      itemType: concept
-      text: Azure CDN için standart kural altyapısı başvurusu
-    - url: ../cdn/cdn-troubleshoot-endpoint.md
-      itemType: how-to-guide
-      text: Azure CDN uç noktalarının sorunlarını giderme
-    footerLink:
-      url: ../cdn/index.yml
-      text: Daha fazla göster
-  - title: Birleştirilmiş merkez-uç ağı oluşturma
-    links:
-    - url: ../virtual-wan/virtual-wan-about.md
-      itemType: overview
-      text: Azure Sanal WAN nedir?
-    - url: ../virtual-wan/virtual-wan-global-transit-network-architecture.md
-      itemType: concept
-      text: Genel geçiş ağ mimarisi - Azure Sanal WAN
-    - url: ../virtual-wan/virtual-wan-locations-partners.md
-      itemType: concept
-      text: Azure Sanal WAN iş ortakları ve konumları
-    - url: ../virtual-wan/migrate-from-hub-spoke-topology.md
-      itemType: how-to-guide
-      text: Merkez-uç topolojisinden geçiş yapma
-    footerLink:
-      url: ../virtual-wan/index.yml
-      text: Daha fazla göster
-  - title: Eşleme Hizmetleri
-    links:
-    - url: ../peering-service/about.md
-      itemType: overview
-      text: Azure Eşleme Hizmeti nedir?
-    - url: ../internet-peering/overview.md
-      itemType: overview
-      text: İnternet Eşlemesi nedir?
-    - url: ../internet-peering/overview-peering-service.md
-      itemType: concept
-      text: Internet eşlemesi ve Azure’da Eşleme Hizmeti
-    footerLink:
-      url: ../peering-service/index.yml
-      text: Daha fazla göster
+    - title: Azure 'da ağ temellerini anlama
+      links:
+        - url: fundamentals/networking-overview.md
+          itemType: overview
+          text: Azure Ağ nedir?
+        - url: ../virtual-network/quick-create-portal.md
+          itemType: get-started
+          text: Sanal ağ oluşturma
+        - url: microsoft-global-network.md
+          itemType: concept
+          text: Microsoft küresel ağı
+      footerLink:
+        url: ../networking/fundamentals/index.yml
+        text: Daha fazla göster
+    - title: Sanal ağ
+      links:
+        - url: ../virtual-network/virtual-networks-overview.md
+          itemType: concept
+          text: Azure sanal ağı nedir?
+        - url: ../virtual-network/tutorial-restrict-network-access-to-resources.md
+          itemType: tutorial
+          text: Kaynaklar için ağ erişimini kısıtlama
+        - url: ../virtual-network/tutorial-connect-virtual-networks-portal.md
+          itemType: tutorial
+          text: Azure sanal ağlarını bağlama
+        - url: ../virtual-network/diagnose-network-traffic-filter-problem.md
+          itemType: how-to-guide
+          text: Ağ trafiği filtre sorunlarını giderme
+      footerLink:
+        url: ../virtual-network/index.yml
+        text: Daha fazla göster
+    - title: Şirket içini Azure’a bağlama - VPN şifrelemesi
+      links:
+        - url: ../vpn-gateway/vpn-gateway-about-vpngateways.md
+          itemType: overview
+          text: Azure VPN Gateway nedir?
+        - url: ../vpn-gateway/tutorial-site-to-site-portal.md
+          itemType: tutorial
+          text: Siteler arası bağlantılar
+        - url: ../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md
+          itemType: how-to-guide
+          text: Noktadan siteye bağlantılar
+        - url: ../vpn-gateway/vpn-gateway-troubleshoot.md
+          itemType: how-to-guide
+          text: VPN Gateway sorunlarını giderme
+      footerLink:
+        url: ../vpn-gateway/index.yml
+        text: Daha fazla göster
+    - title: Şirket içini Azure’a genişletme - özel bağlantı
+      links:
+        - url: ../expressroute/expressroute-introduction.md
+          itemType: concept
+          text: Azure ExpressRoute nedir?
+        - url: ../expressroute/expressroute-howto-circuit-portal-resource-manager.md
+          itemType: tutorial
+          text: ExpressRoute bağlantı hattını oluşturma ve değiştirme
+        - url: ../expressroute/expressroute-howto-linkvnet-portal-resource-manager.md
+          itemType: tutorial
+          text: ExpressRoute bağlantı hattına bir sanal ağı bağlama
+        - url: ../expressroute/expressroute-troubleshooting-network-performance.md
+          itemType: how-to-guide
+          text: Ağ performansı sorunlarını giderme
+      footerLink:
+        url: ../expressroute/index.yml
+        text: Daha fazla göster
+    - title: DNS
+      links:
+        - url: ../dns/dns-overview.md
+          itemType: overview
+          text: Azure DNS nedir?
+        - url: ../private-link/private-endpoint-overview.md
+          itemType: overview
+          text: Azure Özel DNS nedir?
+        - url: ../dns/dns-delegate-domain-azure-dns.md
+          itemType: tutorial
+          text: Etki alanınızı ve alt etki alanınızı barındırma
+        - url: ../dns/dns-getstarted-portal.md
+          itemType: tutorial
+          text: Azure DNS sorunlarını giderme
+      footerLink:
+        url: ../dns/index.yml
+        text: Daha fazla göster
+    - title: Ağ yük dengeleyici
+      links:
+        - url: ../load-balancer/load-balancer-overview.md
+          itemType: overview
+          text: Azure Load Balancer nedir?
+        - url: 'https://azure.microsoft.com/updates/?category=networking&query=load%20balancer'
+          itemType: whats-new
+          text: Yenilikler
+        - url: ../load-balancer/quickstart-load-balancer-standard-public-portal.md
+          itemType: quickstart
+          text: Sanal makinelerin internet trafiğinde yük dengeleme
+        - url: ../load-balancer/load-balancer-troubleshoot.md
+          itemType: how-to-guide
+          text: Azure Load Balancer sorunlarını giderme
+      footerLink:
+        url: ../load-balancer/index.yml
+        text: Daha fazla göster
+    - title: DNS tabanlı yük dengeleyici
+      links:
+        - url: ../traffic-manager/traffic-manager-overview.md
+          itemType: overview
+          text: Azure Traffic Manager nedir?
+        - url: ../traffic-manager/tutorial-traffic-manager-improve-website-response.md
+          itemType: tutorial
+          text: Düşük gecikme süresi için trafiği yönlendirme
+        - url: ../traffic-manager/traffic-manager-routing-methods.md
+          itemType: concept
+          text: Trafik yönlendirme yöntemleri
+        - url: ../traffic-manager/traffic-manager-troubleshooting-degraded.md
+          itemType: how-to-guide
+          text: Traffic Manager’ın düzeyi düşürülmüş durum sorunlarını giderme
+      footerLink:
+        url: ../traffic-manager/index.yml
+        text: Daha fazla göster
+    - title: Web uygulaması yük dengeleyici
+      links:
+        - url: ../application-gateway/overview.md
+          itemType: overview
+          text: Azure Application Gateway nedir?
+        - url: ../application-gateway/quick-create-portal.md
+          itemType: quickstart
+          text: Portalı kullanarak web trafiğini yönlendirme
+        - url: ../application-gateway/application-gateway-faq.yml
+          itemType: concept
+          text: Sık sorulan sorular
+        - url: ../application-gateway/application-gateway-troubleshooting-502.md
+          itemType: how-to-guide
+          text: Hatalı Ağ Geçidi hatalarında sorun giderme
+      footerLink:
+        url: ../application-gateway/index.yml
+        text: Daha fazla göster
+    - title: Güvenli bulut CDN ve küresel yük dengeleyici
+      links:
+        - url: ../frontdoor/front-door-overview.md
+          itemType: overview
+          text: Azure Front Door Hizmeti nedir?
+        - url: ../frontdoor/standard-premium/overview.md
+          itemType: overview
+          text: Azure ön kapısının Standart/Premium nedir (Önizleme)?
+        - url: ../frontdoor/front-door-custom-domain.md
+          itemType: how-to-guide
+          text: Azure Front Door Service’inize özel etki alanı ekleme
+        - url: ../frontdoor/front-door-how-to-redirect-https.md
+          itemType: how-to-guide
+          text: HTTP’den HTTPS’ye yeniden yönlendirme
+      footerLink:
+        url: ../frontdoor/index.yml
+        text: Daha fazla göster
+    - title: Ağ durumunu izleme
+      links:
+        - url: ../network-watcher/network-watcher-monitoring-overview.md
+          itemType: overview
+          text: Azure Ağ İzleyicisi nedir?
+        - url: ../network-watcher/traffic-analytics.md
+          itemType: concept
+          text: Azure’da Trafik Analizi
+        - url: ../network-watcher/network-watcher-nsg-flow-logging-portal.md
+          itemType: tutorial
+          text: VM’ye gelen ve VM’den giden ağ trafiği akışını günlüğe kaydetme
+      footerLink:
+        url: ../network-watcher/index.yml
+        text: Daha fazla göster
+    - title: Ağ güvenlik duvarı
+      links:
+        - url: ../firewall/overview.md
+          itemType: overview
+          text: Azure Güvenlik Duvarı nedir?
+        - url: ../firewall/tutorial-firewall-deploy-portal.md
+          itemType: tutorial
+          text: Azure Güvenlik Duvarı'nı dağıtma ve yapılandırma
+        - url: ../firewall/tutorial-firewall-dnat.md
+          itemType: tutorial
+          text: Azure Güvenlik Duvarı’nı kullanarak gelen İnternet trafiğini filtreleme
+      footerLink:
+        url: ../firewall/index.yml
+        text: Daha fazla göster
+    - title: Azure sanal makinelerine güvenli erişim
+      links:
+        - url: ../bastion/bastion-overview.md
+          itemType: overview
+          text: Azure Bastion nedir?
+        - url: ../bastion/tutorial-create-host-portal.md
+          itemType: how-to-guide
+          text: Azure Bastion konağı oluşturma
+        - url: ../bastion/troubleshoot.md
+          itemType: how-to-guide
+          text: Azure Bastion sorunlarını giderme
+      footerLink:
+        url: ../bastion/index.yml
+        text: Daha fazla göster
+    - title: Ağ güvenlik yönetimi
+      links:
+        - url: ../firewall-manager/overview.md
+          itemType: overview
+          text: Azure Güvenlik Duvarı Yöneticisi nedir?
+        - url: ../firewall-manager/secured-virtual-hub.md
+          itemType: concept
+          text: Güvenli sanal merkez nedir?
+        - url: ../firewall-manager/secure-cloud-network.md
+          itemType: tutorial
+          text: Azure Güvenlik Duvarı Yöneticisi’ni kullanarak sanal WAN’nizin güvenliğini sağlama
+      footerLink:
+        url: ../firewall-manager/index.yml
+        text: Daha fazla göster
+    - title: Web uygulaması güvenlik duvarı
+      links:
+        - url: ../web-application-firewall/overview.md
+          itemType: overview
+          text: Azure web uygulaması güvenlik duvarı nedir?
+        - url: ../web-application-firewall/ag/ag-overview.md
+          itemType: concept
+          text: Application Gateway üzerinde WAF
+        - url: ../web-application-firewall/afds/afds-overview.md
+          itemType: concept
+          text: Azure Front Door Service üzerinde WAF
+        - url: ../web-application-firewall/cdn/cdn-overview.md
+          itemType: concept
+          text: Azure CDN üzerinde WAF
+        - url: ../web-application-firewall/ag/web-application-firewall-troubleshoot.md
+          itemType: how-to-guide
+          text: Application Gateway için WAF sorunlarını giderme
+      footerLink:
+        url: ../web-application-firewall/index.yml
+        text: Daha fazla göster
+    - title: Hizmete özel erişim
+      links:
+        - url: ../private-link/private-link-overview.md
+          itemType: overview
+          text: Azure Özel Bağlantı nedir?
+        - url: ../private-link/private-endpoint-overview.md
+          itemType: concept
+          text: Azure özel uç noktası nedir?
+        - url: ../private-link/troubleshoot-private-link-connectivity.md
+          itemType: how-to-guide
+          text: Azure Özel Bağlantı sorunlarını giderme
+      footerLink:
+        url: ../private-link/index.yml
+        text: Daha fazla göster
+    - title: DDOS Koruması
+      links:
+        - url: ../ddos-protection/ddos-protection-overview.md
+          itemType: overview
+          text: Azure DDoS Koruması Standart nedir?
+        - url: ../ddos-protection/manage-ddos-protection.md
+          itemType: how-to-guide
+          text: DDoS Koruması’nı yönetme
+        - url: ../ddos-protection/ddos-protection-partner-onboarding.md
+          itemType: concept
+          text: Eklenen iş ortakları
+      footerLink:
+        url: ../ddos-protection/index.yml
+        text: Daha fazla göster
+    - title: İçerik teslim ağı
+      links:
+        - url: ../cdn/cdn-overview.md
+          itemType: overview
+          text: Azure Content Delivery Network nedir?
+        - url: ../cdn/cdn-create-new-endpoint.md
+          itemType: quickstart
+          text: CDN profili ve uç noktası oluşturma
+        - url: ../cdn/cdn-standard-rules-engine-reference.md
+          itemType: concept
+          text: Azure CDN için standart kural altyapısı başvurusu
+        - url: ../cdn/cdn-troubleshoot-endpoint.md
+          itemType: how-to-guide
+          text: Azure CDN uç noktalarının sorunlarını giderme
+      footerLink:
+        url: ../cdn/index.yml
+        text: Daha fazla göster
+    - title: Birleştirilmiş merkez-uç ağı oluşturma
+      links:
+        - url: ../virtual-wan/virtual-wan-about.md
+          itemType: overview
+          text: Azure Sanal WAN nedir?
+        - url: ../virtual-wan/virtual-wan-global-transit-network-architecture.md
+          itemType: concept
+          text: Genel geçiş ağ mimarisi - Azure Sanal WAN
+        - url: ../virtual-wan/virtual-wan-locations-partners.md
+          itemType: concept
+          text: Azure Sanal WAN iş ortakları ve konumları
+        - url: ../virtual-wan/migrate-from-hub-spoke-topology.md
+          itemType: how-to-guide
+          text: Merkez-uç topolojisinden geçiş yapma
+      footerLink:
+        url: ../virtual-wan/index.yml
+        text: Daha fazla göster
 additionalContent:
   sections:
-  - items:
-    - title: Azure ağı için Azure PowerShell komutları
-      summary: Azure ağı cmdlet’leri hakkında daha fazla bilgi edinin.
-      url: /powershell/module/az.network/#networking
-    - title: Azure ağı için Azure CLI komutları
-      summary: CLI başvurusunda Azure ağı komutlarını bulun.
-      url: /cli/azure/network
-    - title: Azure ağı blogları
-      summary: Azure ağıyla ilgili en son blobları görüntüleyin.
-      url: https://azure.microsoft.com/blog/topics/networking/
+    - items:
+        - title: Azure ağı için Azure PowerShell komutları
+          summary: Azure ağı cmdlet’leri hakkında daha fazla bilgi edinin.
+          url: /powershell/module/az.network/#networking
+        - title: Azure ağı için Azure CLI komutları
+          summary: CLI başvurusunda Azure ağı komutlarını bulun.
+          url: /cli/azure/network
+        - title: Azure ağı blogları
+          summary: Azure ağıyla ilgili en son blobları görüntüleyin.
+          url: 'https://azure.microsoft.com/blog/topics/networking/'

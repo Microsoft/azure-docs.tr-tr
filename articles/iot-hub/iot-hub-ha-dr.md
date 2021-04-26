@@ -7,12 +7,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 03/17/2020
 ms.author: philmea
-ms.openlocfilehash: 9d2ffac813456398c02066c978c37bdb09501aeb
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 10a3360f30d211336e4ce861b124a307c85fb150
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105628994"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308260"
 ---
 # <a name="iot-hub-high-availability-and-disaster-recovery"></a>IoT Hub yüksek kullanılabilirlik ve olağanüstü durum kurtarma
 
@@ -64,7 +64,7 @@ IoT Hub 'ı için yük devretme işlemi tamamlandıktan sonra, cihazdaki ve arka
 >
 > - Yerleşik olaylar uç noktasına bağlanmak için Azure Işlevleri veya Azure Stream Analytics kullanıyorsanız, **yeniden başlatma** gerçekleştirmeniz gerekebilir. Bunun nedeni yük devretme sırasında önceki uzaklıklar artık geçerli değildir.
 >
-> - Depolama alanına yönlendirirken, tüm Blobların veya dosyaların bölüm üzerinde herhangi bir varsayımından okunmalarını sağlamak için Blobları veya dosyaları listeleyip daha sonra bunları yinelemenizi öneririz. Bölüm aralığı, Microsoft tarafından başlatılan bir yük devretme veya el ile yük devretme sırasında değişebilir. Dosya listesi için Blobların listesini veya [ADLS 2. API](/rest/api/storageservices/datalakestoragegen2/filesystem/listpaths) listesini listelemek Için, [LISTE bloblarını API](/rest/api/storageservices/list-blobs) 'sini kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure depolama, yönlendirme uç noktası olarak](iot-hub-devguide-messages-d2c.md#azure-storage-as-a-routing-endpoint).
+> - Depolama alanına yönlendirirken, tüm Blobların veya dosyaların bölüm üzerinde herhangi bir varsayımından okunmalarını sağlamak için Blobları veya dosyaları listeleyip daha sonra bunları yinelemenizi öneririz. Bölüm aralığı, Microsoft tarafından başlatılan bir yük devretme veya el ile yük devretme sırasında değişebilir. Dosya listesi için Blobların listesini veya [ADLS 2. API](/rest/api/storageservices/datalakestoragegen2/filesystem/list) listesini listelemek Için, [LISTE bloblarını API](/rest/api/storageservices/list-blobs) 'sini kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure depolama, yönlendirme uç noktası olarak](iot-hub-devguide-messages-d2c.md#azure-storage-as-a-routing-endpoint).
 
 ## <a name="microsoft-initiated-failover"></a>Microsoft tarafından başlatılan yük devretme
 
@@ -134,9 +134,9 @@ Bu makalede sunulan HA/DR seçeneklerinin Özeti, çözümünüz için uygun ola
 
 | HA/DR seçeneği | RTO | RPO | El ile müdahale gerektiriyor mu? | Uygulama karmaşıklığı | Ek maliyet etkisi|
 | --- | --- | --- | --- | --- | --- |
-| Microsoft tarafından başlatılan yük devretme |2-26 saat|Yukarıdaki RPO tablosuna başvurun|No|Yok|Yok|
+| Microsoft tarafından başlatılan yük devretme |2-26 saat|Yukarıdaki RPO tablosuna başvurun|Hayır|Yok|Yok|
 | El ile yük devretme |10 dk-2 saat|Yukarıdaki RPO tablosuna başvurun|Yes|Çok düşük. Bu işlemi yalnızca portaldan tetiklemeniz gerekir.|Yok|
-| Çapraz bölge HA |< 1 dk|Özel HA çözümünüzün çoğaltma sıklığına bağlıdır|No|Yüksek|> 1x, 1 IoT Hub 'ın maliyeti|
+| Çapraz bölge HA |< 1 dk|Özel HA çözümünüzün çoğaltma sıklığına bağlıdır|Hayır|Yüksek|> 1x, 1 IoT Hub 'ın maliyeti|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

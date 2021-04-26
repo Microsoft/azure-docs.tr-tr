@@ -22,6 +22,8 @@
       href: groups-concept.md
     - name: Yönetim birimleri
       href: administrative-units.md
+    - name: En iyi uygulamalar
+      href: best-practices.md
     - name: Güvenlik
       items:
         - name: Rol güvenliği planlaması

@@ -9,12 +9,12 @@ ms.workload: infrastructure
 ms.date: 06/30/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: c809edd3699d0b9827fe15da53d5d18b12cbe6e6
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 2dc6d99b8b1c913479fc584b52f6ff919dfac675
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102556970"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792300"
 ---
 # <a name="create-an-image-from-a-managed-disk-or-snapshot-in-a-shared-image-gallery-using-the-azure-cli"></a>Azure CLı kullanarak paylaşılan bir görüntü galerisinde yönetilen diskten veya anlık görüntüden görüntü oluşturma
 
@@ -35,13 +35,13 @@ Bu makalede çalışırken, kaynak adlarını gereken yerde değiştirin.
 
 ## <a name="find-the-snapshot-or-managed-disk"></a>Anlık görüntü veya yönetilen disk bulma 
 
-[Az Snapshot List](/cli/azure/snapshot#az-snapshot-list)kullanılarak bir kaynak grubunda kullanılabilir olan anlık görüntülerin listesini görebilirsiniz. 
+[Az Snapshot List](/cli/azure/snapshot#az_snapshot_list)kullanılarak bir kaynak grubunda kullanılabilir olan anlık görüntülerin listesini görebilirsiniz. 
 
 ```azurecli-interactive
 az snapshot list --query "[].[name, id]" -o tsv
 ```
 
-Anlık görüntü yerine yönetilen disk de kullanabilirsiniz. Yönetilen bir disk almak için [az disk List](/cli/azure/disk#az-disk-list)kullanın. 
+Anlık görüntü yerine yönetilen disk de kullanabilirsiniz. Yönetilen bir disk almak için [az disk List](/cli/azure/disk#az_disk_list)kullanın. 
 
 ```azurecli-interactive
 az disk list --query "[].[name, id]" -o tsv
@@ -56,7 +56,7 @@ Yansımanıza dahil etmek istediğiniz tüm veri disklerini almak için aynı i�
 
 Görüntü tanımını oluşturmak için görüntü galerisi hakkında bilgilere ihtiyacınız olacaktır.
 
-[Az SIG List](/cli/azure/sig#az-sig-list)kullanarak kullanılabilir görüntü galerileriyle ilgili bilgileri listeleyin. Galerinin daha sonra kullanmak için hangi kaynak grubunun içinde olduğunu göz önünde bir şekilde adlandırın.
+[Az SIG List](/cli/azure/sig#az_sig_list)kullanarak kullanılabilir görüntü galerileriyle ilgili bilgileri listeleyin. Galerinin daha sonra kullanmak için hangi kaynak grubunun içinde olduğunu göz önünde bir şekilde adlandırın.
 
 ```azurecli-interactive 
 az sig list -o table
@@ -71,7 +71,7 @@ Görüntü tanımınızı yaparken, doğru bilgilerin tümünün bulunduğundan 
 
 Bir görüntü tanımı için belirtebileceğiniz değerler hakkında daha fazla bilgi için bkz. [görüntü tanımları](./shared-image-galleries.md#image-definitions).
 
-Galeride [az Sig Image-Definition Create](/cli/azure/sig/image-definition#az-sig-image-definition-create)kullanarak bir görüntü tanımı oluşturun.
+Galeride [az Sig Image-Definition Create](/cli/azure/sig/image-definition#az_sig_image_definition_create)kullanarak bir görüntü tanımı oluşturun.
 
 Bu örnekte, görüntü tanımı *Myımagedefinition* olarak adlandırılır ve [özelleştirilmiş](./shared-image-galleries.md#generalized-and-specialized-images) bir Linux işletim sistemi görüntüsü içindir. Windows işletim sistemi kullanan görüntülerin tanımını oluşturmak için kullanın `--os-type Windows` . 
 
@@ -95,7 +95,7 @@ az sig image-definition create \
 
 ## <a name="create-the-image-version"></a>Görüntü sürümü oluşturma
 
-[Az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az-sig-image-version-create)kullanarak bir görüntü sürümü oluşturun. 
+[Az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az_sig_image_version_create)kullanarak bir görüntü sürümü oluşturun. 
 
 Görüntü sürümü için izin verilen karakterler rakamlardan ve dönemlerdir. Sayılar 32 bitlik bir tamsayı aralığında olmalıdır. Biçim: *MajorVersion*. *MinorVersion*. *Düzeltme Eki*.
 

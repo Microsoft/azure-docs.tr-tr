@@ -5,16 +5,16 @@ author: mimckitt
 ms.author: mimckitt
 ms.topic: conceptual
 ms.service: virtual-machine-scale-sets
-ms.subservice: management
+ms.subservice: maintenance-control
 ms.date: 11/12/2020
 ms.reviewer: jushiman
-ms.custom: mimckitt, devx-track-azurecli
-ms.openlocfilehash: b4c705e65b5b8c4f9e34dc5ff1474e87da5bee02
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: mimckitt
+ms.openlocfilehash: ec8d211bd25eb04f9e000af950cea9a28a0d1874
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102209806"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762848"
 ---
 # <a name="planned-maintenance-notifications-for-virtual-machine-scale-sets"></a>Sanal makine ölçek kümeleri için planlı bakım bildirimleri
 
@@ -143,7 +143,7 @@ Set-AzVmss -ResourceGroupName rgName -VMScaleSetName vmssName -InstanceId id -Pe
 
 ## <a name="check-maintenance-status-by-using-the-cli"></a>CLı kullanarak bakım durumunu denetleme
 
-Planlanan bakım bilgilerini [az VMSS List-Instances](/cli/azure/vmss#az-vmss-list-instances)kullanarak görüntüleyebilirsiniz.
+Planlanan bakım bilgilerini [az VMSS List-Instances](/cli/azure/vmss#az_vmss_list_instances)kullanarak görüntüleyebilirsiniz.
  
 Bakım bilgileri yalnızca bakım planlandığından döndürülür. VM örneğini etkileyen bakım zamanlanmamışsa, komut herhangi bir bakım bilgisi döndürmez. 
 

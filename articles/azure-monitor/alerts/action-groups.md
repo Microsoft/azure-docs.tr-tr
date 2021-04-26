@@ -3,14 +3,14 @@ title: Azure portalında eylem gruplarını oluşturma ve yönetme
 description: Azure portal eylem grupları oluşturmayı ve yönetmeyi öğrenin.
 author: dkamstra
 ms.topic: conceptual
-ms.date: 02/25/2021
+ms.date: 04/07/2021
 ms.author: dukek
-ms.openlocfilehash: fb067e603c181482a863dc9fd75556e32a801bc6
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 1486415c5d225163dd2b2c7e79cd008ad0a76588
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104772357"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107514878"
 ---
 # <a name="create-and-manage-action-groups-in-the-azure-portal"></a>Azure portalında eylem gruplarını oluşturma ve yönetme
 Bir eylem grubu, bir Azure aboneliğinin sahibi tarafından tanımlanan bildirim tercihleri koleksiyonudur. Azure Izleyici ve hizmet durumu uyarıları, kullanıcılara bir uyarının tetiklendiğini bildirmek için eylem gruplarını kullanır. Çeşitli uyarılar, kullanıcının gereksinimlerine bağlı olarak aynı eylem grubunu veya farklı eylem gruplarını kullanabilir. 
@@ -148,6 +148,13 @@ Yalnızca *birincil e-posta* adresine bir bildirim e-postası gönderilir.
 
 Bir eylem grubunda sınırlı sayıda e-posta eylemi olabilir. Bkz. [hız sınırlandırma bilgileri](./alerts-rate-limiting.md) makalesi.
 
+*E-posta ARM rolünü* ayarlarken 3 koşulun karşılandığından emin olmanız gerekir:
+
+1. Role atanan varlığın türünün **"user"** olması gerekir.
+2. Atamanın **abonelik** düzeyinde yapılması gerekir.
+3. Kullanıcının **AAD profilinde** yapılandırılmış bir e-posta olması gerekir. 
+
+
 ### <a name="function"></a>İşlev
 [Azure işlevlerinde](../../azure-functions/functions-get-started.md)var olan bir http tetikleyici uç noktasını çağırır. Bir isteği işlemek için uç noktanızın HTTP POST fiilini işlemesi gerekir.
 
@@ -162,12 +169,10 @@ Bir eylem grubunda sınırlı sayıda ıSM eylemi olabilir.
 Bir eylem grubunda sınırlı sayıda mantıksal uygulama eylemi olabilir.
 
 ### <a name="secure-webhook"></a>Güvenli Web Kancası
+Eylem grupları güvenli Web kancası eylemi, eylem grubunuz ve korumalı Web API 'niz (Web kancası uç noktası) arasındaki bağlantıyı güvenli hale getirmek için Azure Active Directory avantajlarından yararlanmanızı sağlar. Bu işlevden yararlanmak için genel iş akışı aşağıda açıklanmıştır. Azure AD uygulamalarına ve hizmet sorumlularına genel bakış için bkz. [Microsoft Identity platform (v 2.0) genel bakış](../../active-directory/develop/v2-overview.md).
 
 > [!NOTE]
 > Web kancası eyleminin kullanılması için hedef Web kancası uç noktasının, uyarının ayrıntılarının başarıyla çalışması gerekmez veya POST işleminin bir parçası olarak sağlanmış olan uyarı bağlamı bilgilerini ayrıştırmaktan emin olmanız gerekir. Web kancası uç noktası, uyarı bağlamı bilgilerini kendi kendine işleyemez, Web kancasının beklenen veri biçimiyle eşleşecek şekilde uyarı bağlamı bilgilerini özel bir şekilde işlemek için bir [mantıksal uygulama eylemi](./action-groups-logic-app.md) gibi bir çözüm kullanabilirsiniz.
-> Güvenliğin ihlal olmadığından emin olmak için kullanıcının Web kancası hizmet sorumlusu 'nın **sahibi** olması gerekir. Herhangi bir Azure müşterisi Portal aracılığıyla tüm nesne kimliklerine erişebilir, sahibi denetlemeden, herkes güvenliği ihlal eden Azure izleyici uyarı bildirimi için güvenli Web kancasını kendi eylem grubuna ekleyebilir.
-
-Eylem grupları Web kancası eylemi, eylem grubunuz ve korumalı Web API 'niz (Web kancası uç noktası) arasındaki bağlantıyı güvenli hale getirmek için Azure Active Directory avantajlarından yararlanmanızı sağlar. Bu işlevden yararlanmak için genel iş akışı aşağıda açıklanmıştır. Azure AD uygulamalarına ve hizmet sorumlularına genel bakış için bkz. [Microsoft Identity platform (v 2.0) genel bakış](../../active-directory/develop/v2-overview.md).
 
 1. Korumalı Web API 'niz için bir Azure AD uygulaması oluşturun. Bkz. [korumalı Web API 'si: uygulama kaydı](../../active-directory/develop/scenario-protected-web-api-app-registration.md).
     - Korumalı API 'nizi [bir Daemon uygulaması tarafından çağrılacak](../../active-directory/develop/scenario-protected-web-api-app-registration.md#if-your-web-api-is-called-by-a-daemon-app)şekilde yapılandırın.

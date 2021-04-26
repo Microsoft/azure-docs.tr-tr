@@ -6,12 +6,12 @@ ms.service: data-factory
 ms.topic: conceptual
 ms.date: 06/22/2020
 ms.author: jingwang
-ms.openlocfilehash: 0aee6030e5608b5413864d6a32dc8442dd346f42
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 68d90fa56d5dce902a44a32b322e582a81e419d5
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100392791"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107011650"
 ---
 # <a name="schema-and-data-type-mapping-in-copy-activity"></a>Kopyalama etkinliğinde şema ve veri türü eşleme
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -22,7 +22,7 @@ Bu makalede, Azure Data Factory kopyalama etkinliğinin, kaynak verilerden havuz
 
 ### <a name="default-mapping"></a>Varsayılan eşleme
 
-Varsayılan olarak, etkinlik, kaynak verilerini, **sütun adlarına göre** , büyük/küçük harfe duyarlı şekilde, havuza eşler. Havuz yoksa, örneğin, dosya (ler) i yazmak için kaynak alanı adları havuz adları olarak kalıcı olur. Bu tür varsayılan eşleme, kaynak veri deposu tarafından döndürülen tüm veriler havuza kopyalanabilir ve kaynaktan havuza kadar esnek şemaları ve şema drmasını destekler.
+Varsayılan olarak, etkinlik, kaynak verilerini, **sütun adlarına göre** , büyük/küçük harfe duyarlı şekilde, havuza eşler. Havuz yoksa, örneğin, dosya (ler) i yazmak için kaynak alanı adları havuz adları olarak kalıcı olur. Havuz zaten varsa, kaynaktan Kopyalanmakta olan tüm sütunları içermesi gerekir. Bu tür varsayılan eşleme, kaynak veri deposu tarafından döndürülen tüm veriler havuza kopyalanabilir ve kaynaktan havuza kadar esnek şemaları ve şema drmasını destekler.
 
 Kaynağınız başlık satırı olmayan bir metin dosyası ise, kaynak sütun adlarını içermediğinden [Açık eşleme](#explicit-mapping) gerekir.
 

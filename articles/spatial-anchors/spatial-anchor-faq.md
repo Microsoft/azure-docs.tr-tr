@@ -8,12 +8,12 @@ ms.author: parkerra
 ms.date: 11/20/2020
 ms.topic: overview
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 01eb0ce83efa54366e027d35d9c3c3bbf86eff7b
-ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
+ms.openlocfilehash: fc92543f5954cda9db42e53cab18db1d8f3366c3
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95487376"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107284213"
 ---
 # <a name="frequently-asked-questions-about-azure-spatial-anchors"></a>Azure uzamsal bağlantıları hakkında sık sorulan sorular
 
@@ -53,6 +53,10 @@ Y **:** Çıpaları Azure hesabı tarafından yalıtılmıştır. Yalnızca hesa
 
 Y **:** Tüm veriler, Microsoft tarafından yönetilen bir veri şifreleme anahtarıyla şifrelenmiş olarak depolanır ve tüm veriler her kaynak için bölgesel olarak depolanır.
 
+**S: Azure uzamsal, verileri nerede depolıyor?**
+
+Y **:** Azure uzamsal bağlayıcı hesapları, verilerinizin depolanacağı bölgeyi belirtmenize olanak tanır. Microsoft, dayanıklılık açısından verileri diğer bölgelere çoğaltabilir, ancak Microsoft, Coğrafya dışında verileri çoğaltmaz veya taşımaz. Bu veriler, Azure uzamsal bağlayıcı hesabının yapılandırıldığı bölgede depolanır. Örneğin, hesap Doğu ABD bölgesinde kayıtlıysa, bu veriler Doğu ABD bölgesinde depolanır, ancak esneklik sağlamak için Kuzey Amerika coğrafya içindeki başka bir bölgeye çoğaltılabiliyor.
+
 **S: Azure uzamsal bağlayıcıları kullanılırken bir ortamla ilgili hangi bilgiler iletilir ve hizmete depolanır? Aktarılan ve depolanan ortamın resimleri mı var?**
 
 Y **: bağlantıları** oluştururken veya bulmada, ortamın resimleri, cihazda türetilmiş bir biçimde işlenir. Bu türetilmiş biçim öğesine iletilir ve hizmete depolanır.
@@ -80,7 +84,7 @@ Y **:** Evet, Azure uzamsal bağlantıları genel kullanıma sunulmuştur ve sta
 
 **S: herhangi bir azaltma sınırlarınız var mı?**
 
-Y **: Evet**, azaltma sınırımız var.  Bunlara, tipik uygulama geliştirme ve test için ulaşacağız. Üretim dağıtımları için, müşterilerimizin yüksek ölçekli gereksinimlerini desteklemeye hazırız. Tartışmak için [bizimle Iletişim kurun](mailto:azuremrs@microsoft.com) . 
+Y **: Evet**, azaltma sınırımız var.  Bunlara, tipik uygulama geliştirme ve test için ulaşacağız. Üretim dağıtımları için, müşterilerimizin yüksek ölçekli gereksinimlerini desteklemeye hazırız. Tartışmak için [bizimle Iletişim kurun](mailto:azuremrscontact@microsoft.com) .
 
 **S: Azure uzamsal çıpası hangi bölgelerde kullanılabilir?**
 

@@ -5,13 +5,13 @@ services: automation
 ms.subservice: dsc
 ms.date: 08/08/2018
 ms.topic: conceptual
-ms.custom: references_regions
-ms.openlocfilehash: bb5f7b5e8214bd3b04bd7b9544ab4bc589f6c4bf
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: references_regions, devx-track-azurepowershell
+ms.openlocfilehash: 717561614a3e42995bbce6746839fd9b7cbca37e
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98896334"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834867"
 ---
 # <a name="set-up-continuous-deployment-with-chocolatey"></a>Chocolatey ile sürekli dağıtım ayarlama
 
@@ -73,8 +73,8 @@ Bu kullanım örneği için tam kaynak, GitHub 'daki [Bu Visual Studio projem](h
 Kimliği doğrulanmış ( `Connect-AzAccount` ) PowerShell komut satırında: (çekme sunucusu ayarlandığında birkaç dakika sürebilir)
 
 ```azurepowershell-interactive
-New-AzResourceGroup –Name MY-AUTOMATION-RG –Location MY-RG-LOCATION-IN-QUOTES
-New-AzAutomationAccount –ResourceGroupName MY-AUTOMATION-RG –Location MY-RG-LOCATION-IN-QUOTES –Name MY-AUTOMATION-ACCOUNT
+New-AzResourceGroup -Name MY-AUTOMATION-RG -Location MY-RG-LOCATION-IN-QUOTES
+New-AzAutomationAccount -ResourceGroupName MY-AUTOMATION-RG -Location MY-RG-LOCATION-IN-QUOTES -Name MY-AUTOMATION-ACCOUNT
 ```
 
 Otomasyon hesabınızı şu bölgelerden birine (konum olarak da bilinir) koyabilirsiniz: Doğu ABD 2, Orta Güney ABD, US Gov Virginia, Batı Avrupa, Güneydoğu Asya, Japonya Doğu, Orta Hindistan ve Avustralya Güneydoğu, Kanada Orta, Kuzey Avrupa.
@@ -103,7 +103,7 @@ Ayrıca, daha sonra yükseltmek istemediğiniz müddetçe, kaynak başına yaln�
 2. Tümleştirme modülünü yükler.
 
     ```azurepowershell-interactive
-    Install-Module –Name MODULE-NAME`    <—grabs the module from the PowerShell Gallery
+    Install-Module -Name MODULE-NAME`    <—grabs the module from the PowerShell Gallery
     ```
 
 3. Modül klasörünü **C:\Program Files\WindowsPowerShell\Modules\MODULE-NAME** konumundan geçici bir klasöre kopyalayın.
@@ -119,14 +119,14 @@ Ayrıca, daha sonra yükseltmek istemediğiniz müddetçe, kaynak başına yaln�
     ```azurepowershell-interactive
     New-AzAutomationModule `
       -ResourceGroupName MY-AUTOMATION-RG -AutomationAccountName MY-AUTOMATION-ACCOUNT `
-      -Name MODULE-NAME –ContentLinkUri 'https://STORAGE-URI/CONTAINERNAME/MODULE-NAME.zip'
+      -Name MODULE-NAME -ContentLinkUri 'https://STORAGE-URI/CONTAINERNAME/MODULE-NAME.zip'
     ```
 
 Dahil edilen örnek, cChoco ve xNetworking için bu adımları uygular. 
 
 ## <a name="step-4-add-the-node-configuration-to-the-pull-server"></a>4. Adım: düğüm yapılandırmasını çekme sunucusuna ekleme
 
-Yapılandırmanızı çekme sunucusuna ilk kez aktardığınızda ve derlemenizde özel bir şey yoktur. Aynı yapılandırmanın tüm sonraki içeri aktarmaları veya derlemeleri tamamen aynı şekilde görünür. Paketinizi her güncelleştirdiğinizde ve üretime göndermeniz gerektiğinde, paketinizin yeni sürümü de dahil olmak üzere, yapılandırma dosyasının doğru olduğundan emin olduktan sonra bu adımı gerçekleştirebilirsiniz. Yapılandırma dosyası şu şekildedir **ISVBoxConfig.ps1**:
+Yapılandırmanızı çekme sunucusuna ilk kez aktardığınızda ve derlemenizde özel bir şey yoktur. Aynı yapılandırmanın tüm sonraki içeri aktarmaları veya derlemeleri tamamen aynı şekilde görünür. Paketinizi her güncelleştirdiğinizde ve üretime göndermeniz gerektiğinde, paketinizin yeni sürümü de dahil olmak üzere yapılandırma dosyasının doğru olduğundan emin olduktan sonra bu adımı yapabilirsiniz. Yapılandırma dosyası şu şekildedir **ISVBoxConfig.ps1**:
 
 ```powershell
 Configuration ISVBoxConfig
@@ -175,18 +175,18 @@ Configuration ISVBoxConfig
 
 ```powershell
 Import-AzAutomationDscConfiguration `
-    -ResourceGroupName MY-AUTOMATION-RG –AutomationAccountName MY-AUTOMATION-ACCOUNT `
+    -ResourceGroupName MY-AUTOMATION-RG -AutomationAccountName MY-AUTOMATION-ACCOUNT `
     -SourcePath C:\temp\AzureAutomationDsc\ISVBoxConfig.ps1 `
-    -Published –Force
+    -Published -Force
 
 $jobData = Start-AzAutomationDscCompilationJob `
-    -ResourceGroupName MY-AUTOMATION-RG –AutomationAccountName MY-AUTOMATION-ACCOUNT `
+    -ResourceGroupName MY-AUTOMATION-RG -AutomationAccountName MY-AUTOMATION-ACCOUNT `
     -ConfigurationName ISVBoxConfig
 
 $compilationJobId = $jobData.Id
 
 Get-AzAutomationDscCompilationJob `
-    -ResourceGroupName MY-AUTOMATION-RG –AutomationAccountName MY-AUTOMATION-ACCOUNT `
+    -ResourceGroupName MY-AUTOMATION-RG -AutomationAccountName MY-AUTOMATION-ACCOUNT `
     -Id $compilationJobId
 ```
 

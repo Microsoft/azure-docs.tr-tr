@@ -3,7 +3,7 @@ title: Azure DDoS koruması başvuru mimarileri
 description: Azure DDoS koruması başvuru mimarilerini öğrenin.
 services: ddos-protection
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 ms.service: ddos-protection
 ms.devlang: na
 ms.topic: article
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/08/2020
 ms.author: yitoh
-ms.openlocfilehash: e5472620fe9b07d152a5325b0654044cb1505fd7
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: b74ebf332790fd9a08840c8c76d99e2b014dac43
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94992446"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103088"
 ---
 # <a name="ddos-protection-reference-architectures"></a>DDoS koruması başvuru mimarileri
 
@@ -59,6 +59,20 @@ Azure Traffic Manager, gelen istekleri bölgelerden birinde Application Gateway 
 Katman 7 (HTTP/HTTPS/WebSocket) saldırılarına karşı korumaya yardımcı olmak için Application Gateway WAF SKU 'SU (mod engelleme) yapılandırmanızı öneririz. Ayrıca, Web Apps [yalnızca Application Gateway IP adresinden gelen trafiği kabul](https://azure.microsoft.com/blog/ip-and-domain-restrictions-for-windows-azure-web-sites/) edecek şekilde yapılandırılmıştır.
 
 Bu başvuru mimarisi hakkında daha fazla bilgi için [Bu makaleye](/azure/architecture/reference-architectures/app-service-web-app/multi-region)bakın.
+
+## <a name="protecting-on-premises-resources"></a>Şirket içi kaynakları koruma
+
+Azure 'da genel bir IP adresi barındırarak ve trafiği şirket içi ortamınıza arka uç kaynağına yönlendirerek şirket içi kaynaklarınızı korumak için Azure DDoS koruma standardı 'nın ölçeklendirilmesi, kapasitesi ve verimliliğinden yararlanabilirsiniz.
+
+![Şirket içi kaynakları koruma](./media/reference-architectures/ddos-on-prem.png)
+
+Internet 'ten trafik alan bir Web uygulamanız varsa, Web uygulamasını Application Gateway arkasında barındırabilirsiniz ve sonra SQL ekleme ve Yavaşsus gibi katman 7 Web saldırılarına karşı WAF ile koruyabilirsiniz. Uygulamanızın arka uç kaynakları, VPN üzerinden bağlanan şirket içi ortamınızda yer alır. 
+
+Şirket içi ortamdaki arka uç kaynakları, genel İnternet 'e gösterilmez. Yalnızca AppGW/WAF genel IP 'si Internet 'e açıktır ve uygulamanızın DNS adı bu genel IP adresine eşlenir. 
+
+DDoS koruma standardı, AppGW/WAF içeren sanal ağ üzerinde etkinleştirildiğinde, DDoS koruma standardı, hatalı trafiği azaltarak uygulamanızı savunarak uygulamanıza gereken Temizleme trafiğini yönlendirerek uygulamanızı savunacaktır. 
+
+Bu [makalede](https://docs.microsoft.com/azure/azure-vmware/protect-azure-vmware-solution-with-application-gateway) , Azure VMware çözümünde çalışan bir Web uygulamasını korumak için Application Gateway birlikte DDoS koruma standardı 'nı nasıl kullanabileceğiniz gösterilmektedir.
 
 ## <a name="mitigation-for-non-web-paas-services"></a>Web dışı PaaS hizmetleri için risk azaltma
 

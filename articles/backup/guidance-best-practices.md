@@ -3,12 +3,12 @@ title: Rehberlik ve en iyi deneyimler
 description: Buluta ve şirket içi iş yükünü buluta yedeklemeye yönelik en iyi yöntemleri ve Kılavuzu bulun
 ms.topic: conceptual
 ms.date: 07/22/2020
-ms.openlocfilehash: 0b3f70061be4d158ae717a97779d6ab0445f5858
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 14476533cf896434182e1d63f89c6a1279b36362
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100593343"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519072"
 ---
 # <a name="backup-cloud-and-on-premises-workloads-to-cloud"></a>Buluta ve şirket içi iş yüklerini buluta yedekleyin
 
@@ -62,7 +62,7 @@ Azure Backup, yedeklemeleri düzenlemek ve yönetmek için kasalarını (kurtarm
 
 ### <a name="align-to-subscription-design-strategy"></a>Abonelik tasarım stratejisine Hizala
 
-Kasa bir abonelik kapsamında olduğundan, aboneliklerin belirli uygulamalara veya hizmetlere göre veya uygulama arşiv satırları üzerinde ayrıldığı *uygulama kategorisi stratejisi* gibi abonelik tasarımı stratejisini karşılamak için kasa tasarımınıza uyum yapın. Daha fazla bilgi için bu [makaleye](/azure/cloud-adoption-framework/decision-guides/subscriptions/)bakın.
+Kasa bir abonelik kapsamında olduğundan, aboneliklerin belirli uygulamalara veya hizmetlere göre veya uygulama arşiv satırları üzerinde ayrıldığı *uygulama kategorisi stratejisi* gibi abonelik tasarımı stratejisini karşılamak için kasa tasarımınıza uyum yapın. Daha fazla bilgi için [bu makaleye](/azure/cloud-adoption-framework/decision-guides/subscriptions/) bakın.
 
 ### <a name="single-or-multiple-vault"></a>Tek veya birden çok kasa
 
@@ -261,4 +261,4 @@ Bir yedekleme kullanıcısı veya Yöneticisi olarak, tüm yedekleme çözümler
 Azure Backup kullanmaya yönelik başlangıç noktaları olarak aşağıdaki makaleleri okumanızı öneririz:
 
 * [Azure Backup genel bakış](backup-overview.md)
-* [Sık Sorulan Sorular](backup-azure-backup-faq.md)
+* [Sık Sorulan Sorular](backup-azure-backup-faq.yml)

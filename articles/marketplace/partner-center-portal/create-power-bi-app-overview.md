@@ -7,12 +7,12 @@ ms.topic: conceptual
 author: navits09
 ms.author: navits
 ms.date: 04/02/2020
-ms.openlocfilehash: b02c5bbf2e6accbea9c7a33dc26c4e89e46bb697
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 13c659592b7e0b45d0d58519e3620babb8cb3c6a
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97679143"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107576"
 ---
 # <a name="power-bi-app-creation-overview"></a>Power BI uygulama oluşturmaya genel bakış
 
@@ -72,7 +72,7 @@ Uygulamanız Power BI ' de oluşturulup test edildikten sonra, uygulama yükleme
 
 İş gereksinimleri, yordamsal, sözleşmeli ve yasal yükümlülükleri içerir. Şunları yapmanız gerekir:
 
-- Kayıtlı bir ticari Market yayımcısı olun. Kaydolmadıysanız, [Iş Ortağı Merkezi 'nde ticari Market hesabı oluşturma](create-account.md)bölümündeki adımları izleyin.
+- Kayıtlı bir ticari Market yayımcısı olun. Kaydolmadıysanız, [Iş Ortağı Merkezi 'nde ticari Market hesabı oluşturma](../create-account.md)bölümündeki adımları izleyin.
 - Önerinizi AppSource 'ta listelenecek ölçütlere uyan içeriği sağlayın. Daha fazla bilgi için bkz. [AppSource 'ta bir uygulamayı listelemek için mi? İşte](https://appsource.microsoft.com/blogs/have-an-app-to-list-on-appsource-here-s-how).
 - [Microsoft gizlilik bildirimi](https://privacy.microsoft.com/privacystatement)'ni kabul edin ve izleyin.
 

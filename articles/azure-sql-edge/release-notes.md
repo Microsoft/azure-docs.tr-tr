@@ -10,17 +10,27 @@ author: VasiyaKrishnan
 ms.author: vakrishn
 ms.reviewer: sstein
 ms.date: 11/24/2020
-ms.openlocfilehash: e078fb91b3279b6f4321cd51dfb094f82bbe5f14
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6218715878ec40fecee79f1c93bf2ca1820af007
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98696388"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277020"
 ---
 # <a name="azure-sql-edge-release-notes"></a>Azure SQL Edge sürüm notları 
 
 Bu makalede, yenilikler ve her yeni Azure SQL Edge derlemesi ile nelerin değiştiğini açıklanmaktadır.
 
+## <a name="azure-sql-edge-103"></a>Azure SQL Edge 1.0.3
+
+SQL Engine derleme 15.0.2000.1554
+
+### <a name="fixes"></a>Düzeltmeler
+
+- ONNX çalışma zamanını 1.5.3 'e yükselt
+- Microsoft. SqlServer. DACFx 150.5084.2 sürümüne Güncelleştir
+- Çeşitli hata düzeltmeleri  
+   
 ## <a name="azure-sql-edge-102"></a>Azure SQL Edge 1.0.2
 
 SQL Engine derleme 15.0.2000.1554

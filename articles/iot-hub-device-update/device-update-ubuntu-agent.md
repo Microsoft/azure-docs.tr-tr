@@ -6,20 +6,20 @@ ms.author: vimeht
 ms.date: 2/16/2021
 ms.topic: tutorial
 ms.service: iot-hub-device-update
-ms.openlocfilehash: ee09928cab6419d799d06de9cf2f69987e42d157
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 6464ad632251053ac481fbd1f6a3e1197aa470df
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105644443"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106121311"
 ---
 # <a name="device-update-for-azure-iot-hub-tutorial-using-the-package-agent-on-ubuntu-server-1804-x64"></a>Ubuntu Server 18,04 x64 üzerinde paket aracısını kullanarak Azure IoT Hub öğreticisi için cihaz güncelleştirmesi
 
 IoT Hub cihaz güncelleştirmesi iki güncelleştirme biçimini destekler: görüntü tabanlı ve paket tabanlı.
 
-Paket tabanlı güncelleştirmeler, cihazdaki yalnızca belirli bir bileşeni veya uygulamayı değiştirecek olan güncelleştirmeler için geçerlidir. Bu, bant genişliği tüketimini azaltmaya ve güncelleştirmeyi indirme ve yükleme süresini azaltmaya yardımcı olur. Paket güncelleştirmeleri genellikle bir güncelleştirme uygulanırken cihazların daha az kapalı kalma süresine izin verir ve görüntü oluşturma yükünden kaçınır.
+Paket tabanlı güncelleştirmeler, cihazdaki yalnızca belirli bir bileşeni veya uygulamayı değiştirecek olan güncelleştirmeler için geçerlidir. Paket tabanlı güncelleştirmeler, bant genişliğinin daha düşük tüketimine yol açabilir ve güncelleştirmeyi indirme ve yükleme süresini azaltmaya yardımcı olur. Paket güncelleştirmeleri genellikle bir güncelleştirme uygulanırken cihazların daha az kapalı kalma süresine izin verir ve görüntü oluşturma yükünden kaçınır.
 
-Bu öğreticide, IoT Hub için cihaz güncelleştirmesi aracılığıyla uçtan uca paket tabanlı bir güncelleştirmeyi tamamlamaya yönelik adımlarda adım adım gösterilmektedir. Bu öğreticide, Azure IoT Edge çalıştıran bir Ubuntu Server 18,04 x64 ve cihaz güncelleştirme paketi Aracısı kullanıyoruz. Öğretici, örnek bir paketin güncelleştirilmesini gösterir, ancak benzer adımları kullanarak Azure IoT Edge veya kullandığı kapsayıcı altyapısı gibi diğer paketleri güncelleştirebilirsiniz.
+Bu uçtan uca öğreticide, cihaz güncelleştirme paketi Aracısı 'nı kullanarak Ubuntu Server 18,04 x64 üzerinde Azure IoT Edge güncelleştirme işlemi adım adım açıklanmaktadır. Öğreticide IoT Edge güncelleştirme, benzer adımları kullanarak, kullandığı kapsayıcı altyapısı gibi diğer paketleri güncelleştirebilirsiniz.
 
 Bu öğreticideki araçlar ve kavramlar, farklı bir işletim sistemi platformu yapılandırması kullanmayı planlıyorsanız bile geçerlidir. Bir uçtan uca güncelleştirme işlemine giriş yapın, ardından ayrıntıları incelemek için tercih ettiğiniz güncelleştirme ve işletim sistemi platformu formunuzu seçin.
 
@@ -40,7 +40,7 @@ Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
 ## <a name="prepare-a-device"></a>Cihaz hazırlama
 ### <a name="using-the-automated-deploy-to-azure-button"></a>Otomatik olarak Azure 'a dağıt düğmesini kullanma
 
-Bu öğreticide kolaylık sağlaması için, bir Ubuntu 18,04 LTS sanal makinesini hızlıca ayarlamanıza yardımcı olması amacıyla bir [Cloud-init](../virtual-machines/linux/using-cloud-init.md)tabanlı [Azure Resource Manager şablonu](../azure-resource-manager/templates/overview.md) kullanılmaktadır. Hem Azure IoT Edge çalışma zamanını hem de cihaz güncelleştirme paketi aracısını yükleyip, daha sonra sağladığınız bir IoT Edge cihazının (Önkoşul) cihaz bağlantı dizesini kullanarak cihazı sağlama bilgileriyle otomatik olarak yapılandırır. Bu, kurulumu tamamlamaya yönelik bir SSH oturumu başlatma gereksinimini ortadan kaldırır.
+Bu öğreticide kolaylık sağlaması için, bir Ubuntu 18,04 LTS sanal makinesini hızlıca ayarlamanıza yardımcı olması amacıyla bir [Cloud-init](../virtual-machines/linux/using-cloud-init.md)tabanlı [Azure Resource Manager şablonu](../azure-resource-manager/templates/overview.md) kullanılmaktadır. Hem Azure IoT Edge çalışma zamanını hem de cihaz güncelleştirme paketi aracısını yükleyip, daha sonra sağladığınız bir IoT Edge cihazının (Önkoşul) cihaz bağlantı dizesini kullanarak cihazı sağlama bilgileriyle otomatik olarak yapılandırır. Azure Resource Manager şablonu, kurulumu tamamlamaya yönelik bir SSH oturumu başlatma gereksinimini de önler.
 
 1. Başlangıç olarak aşağıdaki düğmeye tıklayın:
 
@@ -75,7 +75,7 @@ Bu öğreticide kolaylık sağlaması için, bir Ubuntu 18,04 LTS sanal makinesi
 
 1. Dağıtımın başarıyla tamamlandığını doğrulayın. Yükleme sonrası ve yapılandırmanın IoT Edge ve cihaz paketi güncelleştirme aracısını yüklemeyi tamamlaması için dağıtım tamamlandıktan birkaç dakika bekleyin.
 
-   Seçilen kaynak grubuna bir sanal makine kaynağı dağıtılmış olmalıdır.  Makine adını, bu biçimde olmalıdır `vm-0000000000000` . Ayrıca ilişkili **DNS Adı**’nı da not alın; bu ad `<dnsLabelPrefix>`.`<location>`.cloudapp.azure.com biçiminde olmalıdır.
+   Seçilen kaynak grubuna bir sanal makine kaynağı dağıtılmış olmalıdır.  Biçimde olması gereken makine adını unutmayın `vm-0000000000000` . Ayrıca ilişkili **DNS Adı**’nı da not alın; bu ad `<dnsLabelPrefix>`.`<location>`.cloudapp.azure.com biçiminde olmalıdır.
 
     **DNS Adı**, Azure portalında yeni dağıtılan sanal makinenin **Genel Bakış** bölümünden alınabilir.
 
@@ -86,7 +86,7 @@ Bu öğreticide kolaylık sağlaması için, bir Ubuntu 18,04 LTS sanal makinesi
    > Kurulumdan sonra bu VM 'ye SSH eklemek istiyorsanız, ilişkili **DNS adını** komutuyla kullanın: `ssh <adminUsername>@<DNS_Name>`
 
 ### <a name="optional-manually-prepare-a-device"></a>Seçim Bir cihazı el ile hazırlama
-Cihazı yüklemek ve yapılandırmak için aşağıdaki el ile yapılan adımlar, bu [Cloud-init betiğinin](https://github.com/Azure/iotedge-vm-deploy/blob/1.2.0-rc4/cloud-init.txt)otomatikleştirilmesi ile eşdeğerdir. Fiziksel bir cihazı hazırlamak için kullanılabilirler.
+[Cloud-init betiğinin](https://github.com/Azure/iotedge-vm-deploy/blob/1.2.0-rc4/cloud-init.txt)otomatikleştirilmiş adımlarına benzer şekilde, aşağıdaki adımları izleyerek cihazı yüklemek ve yapılandırmak için el ile yapılan adımlar verilmektedir. Bu adımlar, fiziksel bir cihazı hazırlamak için kullanılabilir.
 
 1. [Azure IoT Edge çalışma zamanını yüklemek](../iot-edge/how-to-install-iot-edge.md?view=iotedge-2020-11&preserve-view=true)için yönergeleri izleyin.
    > [!NOTE]
@@ -110,9 +110,9 @@ Paket kullanmadan önce lisans koşullarını okuyun. Bir paketi yüklemeniz ve 
 
 1. [Azure Portal](https://portal.azure.com) açın ve IoT Hub gidin.
 
-2. Sol gezinti bölmesindeki ' IoT Edge ' içinden IoT Edge cihazınızı bulun ve cihaz Ikizi gidin.
+2. Sol gezinti bölmesindeki ' IoT Edge ' içinden, IoT Edge cihazınızı bulun ve cihaz Ikizi veya modül Ikizi sayfasına gidin.
 
-3. Cihaz Ikizi, var olan tüm cihaz güncelleştirme etiketi değerlerini null olarak ayarlayarak silin.
+3. Cihaz Güncelleştirme Aracısı modülünün Ikizi modülünde, var olan tüm cihaz güncelleştirme etiketi değerlerini null olarak ayarlayarak silin. Cihaz kimliği ile cihaz güncelleştirme aracısı kullanıyorsanız, bu değişiklikleri cihaz Ikizi üzerinde yapın.
 
 4. Aşağıda gösterildiği gibi yeni bir cihaz güncelleştirme etiketi değeri ekleyin.
 
@@ -149,7 +149,7 @@ Bu güncelleştirme, `aziot-identity-service` ve `aziot-edge` paketlerini cihaz�
 
 8. İçeri aktarma işlemini başlatmak için "Gönder" i seçin.
 
-9. İçeri aktarma işlemi başlar ve ekran "Içeri aktarma geçmişi" bölümünde değişir. İçeri aktarma işlemi tamamlanana kadar ilerlemeyi görüntülemek için "Yenile" yi seçin. Güncelleştirme boyutuna bağlı olarak, bu işlem birkaç dakika içinde tamamlanabilir ancak daha uzun sürebilir.
+9. İçeri aktarma işlemi başlar ve ekran "Içeri aktarma geçmişi" bölümünde değişir. İçeri aktarma işlemi tamamlanana kadar ilerlemeyi görüntülemek için "Yenile" yi seçin. Güncelleştirme boyutuna bağlı olarak, içeri aktarma işlemi birkaç dakika içinde tamamlanabilir, ancak daha uzun sürebilir.
 
    :::image type="content" source="media/import-update/update-publishing-sequence-2.png" alt-text="Güncelleştirme içeri aktarma sırasını gösteren ekran görüntüsü." lightbox="media/import-update/update-publishing-sequence-2.png":::
 
@@ -208,11 +208,11 @@ Etiket ekleme ve güncelleştirme grupları oluşturma hakkında [daha fazla bil
 
 1. En son durum ayrıntılarını görüntülemek için Yenile ' yi seçin. Durum başarılı olana kadar bu işleme devam edin.
 
-Bir Ubuntu Server 18,04 x64 cihazında IoT Hub için cihaz güncelleştirmesini kullanarak başarılı bir uçtan uca paket güncelleştirmesini tamamladınız. 
+Artık bir Ubuntu Server 18,04 x64 cihazında IoT Hub için cihaz güncelleştirmesi 'ni kullanarak başarılı bir uçtan uca paket güncelleştirmesini tamamladınız. 
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse, cihaz güncelleştirme hesabınızı, örneğinizi, IoT Hub ve IoT Edge cihazını (VM 'yi Azure 'a dağıt düğmesine kullanarak oluşturduysanız) temizleyin. Bunu, her bir kaynağa giderek ve "Sil" seçeneğini belirleyerek yapabilirsiniz. Cihaz güncelleştirme hesabını temizlemeden önce bir cihaz güncelleştirme örneği temizlemeniz gerektiğini unutmayın.
+Artık gerekli değilse, cihaz güncelleştirme hesabınızı, örneğinizi, IoT Hub ve IoT Edge cihazını (VM 'yi Azure 'a dağıt düğmesine kullanarak oluşturduysanız) temizleyin. Bunu, her bir kaynağa giderek ve "Sil" seçeneğini belirleyerek yapabilirsiniz. Cihaz güncelleştirme hesabını temizlemeden önce bir cihaz güncelleştirme örneği temizlemeniz gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

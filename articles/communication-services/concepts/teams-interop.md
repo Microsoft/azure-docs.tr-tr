@@ -9,14 +9,16 @@ ms.author: chpalm
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: 8b641ec37d134303ae6b31c092cd3c50811477a7
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: cf6553cd7c59febd19f9654e31188f127b8eb065
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105108426"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106276765"
 ---
 # <a name="teams-interoperability"></a>Teams ile birlikte çalışabilirlik
+
+[!INCLUDE [Public Preview](../includes/public-preview-include-document.md)]
 
 > [!IMPORTANT]
 > [Ekipte kiracı birlikte çalışabilirliğini](../concepts/teams-interop.md)etkinleştirmek/devre dışı bırakmak için [Bu formu](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR21ouQM6BHtHiripswZoZsdURDQ5SUNQTElKR0VZU0VUU1hMOTBBMVhESS4u)doldurun.
@@ -41,7 +43,7 @@ Bir Iletişim Hizmetleri kullanıcısı takımlar toplantısına katıldığınd
 
 İletişim hizmetleri ekiplerinin birlikte çalışması şu anda özel önizlemededir. Genel olarak kullanılabilir olduğunda, Iletişim Hizmetleri kullanıcıları "dış erişim kullanıcıları" gibi kabul edilir. [Microsoft ekiplerinde kuruluşunuzun dışındaki kişilerle çağrı, sohbet ve işbirliği yapma](/microsoftteams/communicate-with-users-from-other-organizations)hakkında daha fazla bilgi edinin.
 
-İletişim Hizmetleri kullanıcıları, [Toplantı ayarlarında](/microsoftteams/meeting-settings-in-teams)anonim birleşimler etkinleştirildiği sürece zamanlanan takımlar toplantılarına katılabilir.
+İletişim Hizmetleri kullanıcıları, [Toplantı ayarlarında](/microsoftteams/meeting-settings-in-teams)anonim birleşimler etkinleştirildiği sürece zamanlanan takımlar toplantılarına katılabilir. Toplantı bir kanal için zamanlanırsa, Iletişim Hizmetleri kullanıcıları sohbet 'e katılamaz veya ileti gönderemez veya alamaz.
 
 ## <a name="teams-in-government-clouds-gcc"></a>Kamu bulutlarındaki takımlar (GCC)
 Azure Iletişim Hizmetleri birlikte çalışabilirliği, şu anda [Microsoft 365 kamu bulutları (GCC)](/MicrosoftTeams/plan-for-government-gcc) kullanılarak gerçekleştirilen takımlar dağıtımıyla uyumlu değildir. 

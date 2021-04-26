@@ -11,12 +11,12 @@ ms.author: peterlu
 author: peterclu
 ms.date: 07/16/2020
 ms.custom: contperf-fy20q4, tracking-python, contperf-fy21q1
-ms.openlocfilehash: 81a6a6aeb826ba4a61fd4f0a4abdb63fe3674bc4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 59b766cd5721a9a77b3506cc438ec267e5131979
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103573736"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309461"
 ---
 # <a name="secure-an-azure-machine-learning-training-environment-with-virtual-networks"></a>Sanal ağlarla Azure Machine Learning eğitim ortamının güvenliğini sağlama
 
@@ -44,7 +44,7 @@ Bu makalede, bir sanal ağda aşağıdaki eğitim işlem kaynaklarını güvenli
 
 + Bir sanal ağa veya alt ağa kaynak dağıtmak için, Kullanıcı hesabınızın Azure rol tabanlı erişim denetimi 'nde (Azure RBAC) aşağıdaki eylemler için izinleri olmalıdır:
 
-    - Sanal ağ kaynağında "Microsoft. Network/virtualNetworks/JOIN/Action".
+    - Sanal ağ kaynağında "Microsoft. Network/virtualNetworks/*/Read".
     - Alt ağ kaynağında "Microsoft. Network/virtualNetworks/subnet/JOIN/Action".
 
     Ağ ile Azure RBAC hakkında daha fazla bilgi için bkz. [ağ yerleşik rolleri](../role-based-access-control/built-in-roles.md#networking)
@@ -59,7 +59,7 @@ Bir sanal ağda [yönetilen Azure Machine Learning __işlem hedefi__](concept-co
 > * İşlem örneği veya küme için belirtilen alt ağda, hedeflenen sanal makine sayısına uyum sağlamak için yeterli sayıda atanmamış IP adresi olmalıdır. Alt ağda yeterli sayıda atanmamış IP adresi yoksa, bir işlem kümesi kısmen tahsis edilir.
 > * Sanal ağın aboneliğine veya kaynak grubuna yönelik güvenlik ilkelerinizin veya kilitlerinizin sanal ağı yönetmek için izinleri kısıtlayıp kısıtlamamadığını denetleyin. Trafiği kısıtlayarak sanal ağın güvenliğini sağlamayı planlıyorsanız, bazı bağlantı noktalarını işlem hizmeti için açık bırakın. Daha fazla bilgi için, [gerekli bağlantı noktaları](#mlcports) bölümüne bakın.
 > * Bir sanal ağa birden çok işlem örneği veya kümesi koyacaksanız bir veya daha fazla kaynağınız için bir kota artışı istemeniz gerekebilir.
-> * Çalışma alanı için Azure depolama hesabı bir sanal ağda da güvenlik altına alınırsa, Azure Machine Learning işlem örneğiyle veya kümeyle aynı sanal ağda olmaları gerekir. 
+> * Çalışma alanı için Azure depolama hesabı bir sanal ağda da güvenlik altına alınırsa, Azure Machine Learning işlem örneği veya kümesi ile aynı sanal ağ ve alt ağ içinde olmalıdır. Lütfen sanal ağ ve alt ağ işlem ile iletişim sağlamak için depolama güvenlik duvarı ayarlarınızı yapılandırın. "Güvenilen Microsoft hizmetlerinin bu hesaba erişmesine Izin ver" onay kutusunu işaretleyerek, iletişimin işlem yapmasına izin vermek için yeterli olmadığından lütfen unutmayın.
 > * İşlem örneği jupi işlevinin çalışması için, Web yuva iletişiminin devre dışı bırakılmadığından emin olun. Lütfen ağınızın *. instances.azureml.net ve *. instances.azureml.ms öğesine WebSocket bağlantılarına izin verdiğinden emin olun. 
 > * İşlem örneği bir özel bağlantı çalışma alanında dağıtıldığında, yalnızca sanal ağ içinden erişilebilir. Özel DNS veya hosts dosyası kullanıyorsanız, lütfen `<instance-name>.<region>.instances.azureml.ms` çalışma alanı özel uç noktasının özel IP adresi ile için bir giriş ekleyin. Daha fazla bilgi için bkz. [özel DNS](./how-to-custom-dns.md) makalesi.
 > * İşlem kümesi/örneği dağıtmak için kullanılan alt ağ, ACI gibi başka bir hizmete devredilemez olmalıdır

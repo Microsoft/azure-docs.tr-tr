@@ -5,12 +5,12 @@ ms.topic: overview
 author: bwren
 ms.author: bwren
 ms.date: 11/17/2019
-ms.openlocfilehash: fe8714f38c6a04b311a748f3eb081be82eb86635
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: afe6e82c3cc9773fbf0c17992fd6894d199d177f
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105024157"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105937252"
 ---
 # <a name="azure-monitor-overview"></a>Azure İzleyici'ye genel bakış
 
@@ -60,7 +60,7 @@ Azure Izleyici, [çeşitli kaynaklardan](monitor-reference.md)veri toplayabilir.
 - **Azure aboneliği izleme verileri**: bir Azure aboneliğinin işlemi ve yönetimiyle ilgili veriler ve Azure 'un sistem durumu ve işlemi hakkındaki veriler. 
 - **Azure kiracı izleme verileri**: Azure Active Directory gibi kiracı düzeyinde Azure hizmetlerinin çalışması hakkındaki veriler.
 
-Bir Azure aboneliği oluşturup sanal makineler ve web uygulamaları gibi kaynaklar eklemeye başladığınızda Azure İzleyici veri toplamaya başlar.  Kaynaklar oluşturulduğunda veya değiştirildiğinde [etkinlik günlükleri](essentials/platform-logs-overview.md) kaydı. [Ölçümler](data-platform.md) , kaynağın nasıl çalıştığını ve tükettiği kaynakları bildirir. 
+Bir Azure aboneliği oluşturup sanal makineler ve web uygulamaları gibi kaynaklar eklemeye başladığınızda Azure İzleyici veri toplamaya başlar.  Kaynaklar oluşturulduğunda veya değiştirildiğinde [etkinlik günlükleri](essentials/platform-logs-overview.md) kaydı. [Ölçümler](essentials/data-platform-metrics.md) , kaynağın nasıl çalıştığını ve tükettiği kaynakları bildirir. 
 
 Topladığınızı verileri, kaynakların iç işlemine genişletmek için [tanılamayı etkinleştirin](essentials/platform-logs-overview.md) .  Konuk işletim sistemlerinden telemetri toplamak için işlem kaynaklarına [bir aracı ekleyin](agents/agents-overview.md) . 
 

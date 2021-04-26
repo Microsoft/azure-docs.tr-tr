@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: virtual-machines
 ms.subervice: image-builder
 ms.colletion: windows
-ms.openlocfilehash: 918cee723bfde69d08532aee6fe4f395dbddb4ee
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b93d236d0b716bfaf7dfb45b21c9524ece75fcae
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101695456"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764576"
 ---
 # <a name="preview-create-a-windows-vm-with-azure-image-builder"></a>Önizleme: Azure Image Builder ile Windows VM oluşturma
 
@@ -199,7 +199,7 @@ az resource delete \
 ```
 
 ## <a name="start-the-image-build"></a>Görüntü derlemesini Başlat
-[Az Resource Invoke-Action](/cli/azure/resource#az-resource-invoke-action)komutunu kullanarak görüntü oluşturma işlemini başlatın.
+[Az Resource Invoke-Action](/cli/azure/resource#az_resource_invoke_action)komutunu kullanarak görüntü oluşturma işlemini başlatın.
 
 ```azurecli-interactive
 az resource invoke-action \

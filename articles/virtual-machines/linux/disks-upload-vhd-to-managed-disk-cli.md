@@ -8,12 +8,12 @@ ms.date: 06/15/2020
 ms.topic: how-to
 ms.service: virtual-machines
 ms.subservice: disks
-ms.openlocfilehash: 473e87904742395eca6b7eeba0875cd93789104d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0f48856f085737040ca16afcca1e56be1da4843e
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91978994"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816755"
 ---
 # <a name="upload-a-vhd-to-azure-or-copy-a-managed-disk-to-another-region---azure-cli"></a>Bir VHD 'yi Azure 'a yükleme veya yönetilen bir diski başka bir bölgeye kopyalama-Azure CLı
 
@@ -26,7 +26,7 @@ ms.locfileid: "91978994"
 - Şirket içinden bir VHD yüklemeyi planlıyorsanız: [Azure için hazırlanan](../windows/prepare-for-upload-vhd-image.md)sabıt boyutlu VHD, yerel olarak depolanır.
 - Ya da bir kopyalama eylemi gerçekleştirmek istiyorsanız Azure 'da yönetilen bir disk.
 
-## <a name="getting-started"></a>Başlarken
+## <a name="getting-started"></a>Kullanmaya başlama
 
 Bir GUI aracılığıyla disk yüklemeyi tercih ediyorsanız, Azure Depolama Gezgini kullanarak bunu yapabilirsiniz. Ayrıntılar için bkz. [Azure yönetilen diskleri yönetmek için Azure Depolama Gezgini kullanma](../disks-use-storage-explorer-managed-disks.md)
 
@@ -44,7 +44,7 @@ Bu tür yönetilen disklerin iki benzersiz durumu vardır:
 
 Karşıya yüklemek üzere boş bir standart HDD oluşturabilmeniz için önce, yüklemek istediğiniz VHD 'nin bayt cinsinden dosya boyutu gerekir. Bunu sağlamak için ya da kullanabilirsiniz `wc -c <yourFileName>.vhd` `ls -al <yourFileName>.vhd` . Bu değer, **--karşıya yükleme-boyut-bayt** parametresi belirtildiğinde kullanılır.
 
-Bir [disk oluşturma](/cli/azure/disk#az-disk-create) cmdlet 'inde-- **for-upload** parametresini ve **--upload-size-bytes** parametresini belirterek KARŞıYA yüklemek için boş bir standart HDD oluşturun:
+Bir [disk oluşturma](/cli/azure/disk#az_disk_create) cmdlet 'inde-- **for-upload** parametresini ve **--upload-size-bytes** parametresini belirterek KARŞıYA yüklemek için boş bir standart HDD oluşturun:
 
 Öğesini `<yourdiskname>` `<yourresourcegroupname>` `<yourregion>` seçtiğiniz değerlerle değiştirin. `--upload-size-bytes`Parametresi örnek bir değeri içerir `34359738880` , bunu sizin için uygun bir değerle değiştirin.
 
@@ -122,7 +122,7 @@ targetSASURI=$(az disk grant-access -n $targetDiskName -g $targetRG  --access-le
 
 sourceSASURI=$(az disk grant-access -n $sourceDiskName -g $sourceRG --duration-in-seconds 86400 --query [accessSas] -o tsv)
 
-.\azcopy copy $sourceSASURI $targetSASURI --blob-type PageBlob
+azcopy copy $sourceSASURI $targetSASURI --blob-type PageBlob
 
 az disk revoke-access -n $sourceDiskName -g $sourceRG
 

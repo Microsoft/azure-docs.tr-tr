@@ -8,18 +8,22 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: conceptual
-ms.date: 01/05/2021
+ms.date: 03/29/2021
 ms.author: aahi
-ms.openlocfilehash: 9a4e179767cc38169cd794f4cd629604bdcdaab0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c38b7c33cfe787ba933ca1fc4961080eaa4ada61
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97955051"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106276068"
 ---
 # <a name="frequently-asked-questions-faq-about-the-text-analytics-api"></a>Metin Analizi API'si hakkında sık sorulan sorular (SSS)
 
  Azure bilişsel hizmetler 'deki Metin Analizi API'si ilgili kavramlar, kod ve senaryolar hakkında sık sorulan soruların yanıtlarını bulun.
+
+## <a name="what-is-the-maximum-size-and-number-of-requests-i-can-make-to-the-api"></a>API 'de yapabildiğim maksimum boyut ve istek sayısı nedir?
+
+Dakika ve saniye başına gönderebilmeniz için isteklerin boyutu ve sayısı hakkında bilgi için [veri sınırları](concepts/data-limits.md) makalesine bakın.
 
 ## <a name="can-text-analytics-identify-sarcasm"></a>Metin Analizi, sarcasm tanımlayabilir miyim?
 

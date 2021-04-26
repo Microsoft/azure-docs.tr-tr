@@ -3,12 +3,12 @@ title: Kayıt defteri hizmeti katmanları ve özellikleri
 description: Temel, standart ve Premium hizmet katmanlarında (SKU 'Lar) Azure Container Registry Özellikler ve sınırlar (kotalar) hakkında bilgi edinin.
 ms.topic: article
 ms.date: 05/18/2020
-ms.openlocfilehash: b55fc16dcd6dcb544ed4597ce4bdc6ba17b52646
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 323d36fe022d8b8e9618b8beb1facae93d22df4e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98015677"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781262"
 ---
 # <a name="azure-container-registry-service-tiers"></a>Azure Container Registry hizmet katmanları
 
@@ -34,7 +34,7 @@ Bir kayıt defterinin hizmet katmanını Azure CLı ile veya Azure portal deği�
 
 Hizmet katmanları arasında hareket ettiğinizde kayıt defteri işlemlerinde bir kayıt defteri kapalı kalma süresi veya etkisi yoktur.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 Azure CLı 'deki hizmet katmanları arasında gezinmek için [az ACR Update][az-acr-update] komutunu kullanın. Örneğin, Premium 'a geçmek için:
 
@@ -73,7 +73,7 @@ Hizmette yaklaşan özellikler hakkında bilgi edinmek için GitHub 'daki [ACR y
 [container-registry-uservoice]: https://feedback.azure.com/forums/903958-azure-container-registry
 
 <!-- LINKS - Internal -->
-[az-acr-update]: /cli/azure/acr#az-acr-update
+[az-acr-update]: /cli/azure/acr#az_acr_update
 [container-registry-geo-replication]: container-registry-geo-replication.md
 [container-registry-storage]: container-registry-storage.md
 [container-registry-delete]: container-registry-delete.md

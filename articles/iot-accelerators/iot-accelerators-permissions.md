@@ -8,12 +8,12 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 12/13/2018
 ms.author: dobett
-ms.openlocfilehash: 5a088cb07fa74b65e497de54be8c97bd51d31c16
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e3c9296a909ba23ee8a3475149911af629a01b1a
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97387845"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167473"
 ---
 # <a name="use-the-azureiotsolutionscom-site-to-deploy-your-solution-accelerator"></a>Çözüm hızlandırıcıyı dağıtmak için azureiotsolutions.com sitesini kullanın
 
@@ -54,7 +54,7 @@ Azure AD 'deki kullanıcılar ve roller hakkında daha fazla bilgi için aşağ�
 
 ## <a name="choose-your-device"></a>Cihazınızı seçin
 
-AzureIoTSolutions.com sitesi, [IoT Için Azure Sertifikalı cihaz kataloğuna](https://catalog.azureiotsolutions.com/)bağlantı sağlar.
+AzureIoTSolutions.com sitesi, [IoT Için Azure Sertifikalı cihaz kataloğuna](https://devicecatalog.azure.com/)bağlantı sağlar.
 
 Katalog, IoT çözümünüzü oluşturmaya başlamak için çözüm hızlandırıcılarınıza bağlanabilyebilmeniz için yüzlerce sertifikalı IoT donanım cihazını listeler.
 

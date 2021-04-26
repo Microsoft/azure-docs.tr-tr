@@ -3,16 +3,16 @@ title: Azure IoT Hub cihaz sağlama hizmeti-cihaz kavramları
 description: Azure IoT Hub cihaz sağlama hizmeti (DPS) için cihaz yeniden sağlama kavramlarını açıklar
 author: wesmc7777
 ms.author: wesmc
-ms.date: 04/04/2019
+ms.date: 04/16/2021
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-ms.openlocfilehash: 9653a584382584d982c55008a6e8547de28691b7
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: fbc83ec62c10fae00e371cd9ad95cf2860495fad
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91842861"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575777"
 ---
 # <a name="iot-hub-device-reprovisioning-concepts"></a>Cihaz yeniden sağlama kavramlarını IoT Hub
 
@@ -61,6 +61,9 @@ Senaryoya bağlı olarak, bir cihaz genellikle yeniden başlatma sırasında bir
     ![Kayıt girişiyle ilişkilendirilen cihazlar yeni bir sağlama isteği gönderdiğinde bir ilkenin nasıl işlem yapılacağını gösteren diyagram.](./media/concepts-device-reprovisioning/dps-reprovisioning-reset.png)
 
 * **Hiçbir şekilde yeniden sağlama**: cihaz, farklı bir hub 'a hiçbir şekilde yeniden atanmaz. Bu ilke geriye dönük uyumluluğu yönetmek için sağlanır.
+
+> [!NOTE]
+> Cihaz için yeni [Returndata](how-to-send-additional-data.md) olması durumunda, DPS, yeniden sağlama ilkesine bakılmaksızın her zaman özel ayırma Web kancasını çağırır. Yeniden sağlama ilkesi **hiçbir şekilde yeniden sağlanmayacak** şekilde ayarlandıysa, Web kancası çağrılır, ancak cihaz atanmış hub 'ını değiştirmez.
 
 ### <a name="managing-backwards-compatibility"></a>Geriye dönük uyumluluğu yönetme
 

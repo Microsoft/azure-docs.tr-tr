@@ -173,7 +173,7 @@ Aşağıda, API 'nin perspektifinden tanımlanan bir yoklama tetikleyicisi için
 
 | İstek şunları içerir `triggerState` ? | API yanıtı | 
 | -------------------------------- | -------------| 
-| Hayır | Bir HTTP `202 ACCEPTED` durumu `location` `triggerState` ve geçerli saate ayarlanmış bir üstbilgi ve 15 saniyeye kadar olan bir üst bilgi döndürür `retry-after` . | 
+| No | Bir HTTP `202 ACCEPTED` durumu `location` `triggerState` ve geçerli saate ayarlanmış bir üstbilgi ve 15 saniyeye kadar olan bir üst bilgi döndürür `retry-after` . | 
 | Yes | İçin ' den sonra eklenen dosyalar için hizmetinizi kontrol edin `DateTime` `triggerState` . | 
 ||| 
 

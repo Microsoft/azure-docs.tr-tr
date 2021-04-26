@@ -12,16 +12,18 @@ manager: celestedg
 ms.reviewer: mal
 ms.custom: it-pro, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c5e9983c265fcc032908424f747066f8f348771f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 32a931fe43b6be406f0b2a4b8193c1631261f7e5
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87910356"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575675"
 ---
 # <a name="grant-permissions-to-users-from-partner-organizations-in-your-azure-active-directory-tenant"></a>Azure Active Directory kiracınızdaki iş ortağı kuruluşlarından kullanıcılara izin verme
 
 Azure Active Directory (Azure AD) B2B işbirliği kullanıcıları, dizine Konuk Kullanıcı olarak eklenir ve dizindeki Konuk izinleri varsayılan olarak kısıtlıdır. İşletmeniz, bazı konuk kullanıcıların kuruluşunuzdaki yüksek ayrıcalıklı rolleri doldurmasına gerek duyar. Daha yüksek ayrıcalıklı rolleri tanımlamayı desteklemek için, Konuk kullanıcılar kuruluşunuzun ihtiyaçlarına bağlı olarak istediğiniz rollere eklenebilir.
+
+Bir dizin rolü bir konuk kullanıcıya atanırsa, Konuk Kullanıcı, temel okuma izinleri dahil olmak üzere rolle birlikte gelen ek izinlerle verilir. Bkz. [Azure AD yerleşik rolleri](https://docs.microsoft.com/azure/active-directory/roles/permissions-reference).
 
 ## <a name="default-role"></a>Varsayılan rol
 

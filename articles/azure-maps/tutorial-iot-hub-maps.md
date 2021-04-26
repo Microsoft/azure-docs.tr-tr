@@ -9,12 +9,12 @@ ms.service: azure-maps
 services: azure-maps
 manager: philmea
 ms.custom: mvc
-ms.openlocfilehash: b5c65035f8b51b53f617d4562fe1982f53f0deec
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9ebc6e266c93e55bc250e8450356f8b695dd9080
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98678280"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107715001"
 ---
 # <a name="tutorial-implement-iot-spatial-analytics-by-using-azure-maps"></a>Öğretici: Azure Maps kullanarak IoT uzamsal analizler uygulama
 
@@ -95,7 +95,7 @@ Aşağıdaki şekilde, bölge sınırı alanını mavi olarak vurgular. Kiralık
 
 ## <a name="create-an-azure-storage-account"></a>Azure depolama hesabı oluşturma
 
-Araba ihlali izleme verilerini depolamak için, kaynak grubunuzda [genel amaçlı v2 depolama hesabı](../storage/common/storage-account-overview.md#general-purpose-v2-accounts) oluşturun. Bir kaynak grubu oluşturmadıysanız, [kaynak grubu oluşturma](../azure-resource-manager/management/manage-resource-groups-portal.md#create-resource-groups)bölümündeki yönergeleri izleyin. Bu öğreticide kaynak grubunuzu *ContosoRental* olarak adlandırın.
+Araba ihlali izleme verilerini depolamak için, kaynak grubunuzda [genel amaçlı v2 depolama hesabı](../storage/common/storage-account-overview.md) oluşturun. Bir kaynak grubu oluşturmadıysanız, [kaynak grubu oluşturma](../azure-resource-manager/management/manage-resource-groups-portal.md#create-resource-groups)bölümündeki yönergeleri izleyin. Bu öğreticide kaynak grubunuzu *ContosoRental* olarak adlandırın.
 
 Depolama hesabı oluşturmak için [depolama hesabı oluşturma](../storage/common/storage-account-create.md?tabs=azure-portal)bölümündeki yönergeleri izleyin. Bu öğreticide, depolama hesabını *contosorentalstorage* olarak adlandırın, ancak genel olarak istediğiniz herhangi bir şeyi adlandırın.
 
@@ -282,7 +282,7 @@ Azure haritalar REST API 'lerinin tüm listesi için bkz.:
 
 IoT için Azure Sertifikalı cihazların listesini almak için şu adresi ziyaret edin:
 
-* [Azure Sertifikalı cihazlar](https://catalog.azureiotsolutions.com/)
+* [Azure Sertifikalı cihazlar](https://devicecatalog.azure.com/)
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 

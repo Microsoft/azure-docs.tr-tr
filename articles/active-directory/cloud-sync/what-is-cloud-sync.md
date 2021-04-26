@@ -11,17 +11,17 @@ ms.date: 12/11/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a3b880d70baf7c160f8235bd01a5000f83825c36
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: af4eaa5912cdf7463c81f501d71b69e934f8febb
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98614863"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306016"
 ---
 # <a name="what-is-azure-ad-connect-cloud-sync"></a>Azure AD Connect bulut eşitlemesi nedir?
 Azure AD Connect bulut eşitleme, Microsoft 'un, kullanıcıların, grupların ve kişilerin Azure AD 'ye eşitlemesine yönelik karma kimlik hedeflerinizi karşılamak ve gerçekleştirmek üzere tasarlanan yeni bir tekliftir.  Bunu, Azure AD Connect uygulaması yerine Azure AD bulut sağlama aracısını kullanarak gerçekleştirir.  Ancak, Azure AD Connect eşitleme ile birlikte kullanılabilir ve aşağıdaki avantajları sağlar:
     
-- Çok ormanlı bir Active Directory orman ortamından bir Azure AD kiracısına eşitleme desteği: genel senaryolar, elde edilen şirketin ad ormanlarının, genellikle birden çok ad ormanına sahip olduğu üst şirketin ad ormanlarından ve şirketlerinden yalıtılmış olduğu birleşme & alımı içerir.
+- Çok ormanlı bir Active Directory orman ortamından bir Azure AD kiracısına eşitleme desteği: genel senaryolar birleşme & alımı (alınan şirketin ad ormanlarının üst şirketin ad ormanlarından yalıtılmış olduğu) ve geçmişte birden çok ad ormanına sahip olan şirketlerin bir listesini içerir.
 - Hafif sağlama aracılarıyla Basitleştirilmiş Yükleme: aracılar, bulutta yönetilen tüm eşitleme yapılandırması ile Azure AD 'ye bir köprü görevi görür. 
 - Çoklu sağlama aracıları, AD 'den Azure AD 'ye Parola karması eşitlemesine bağlı olan kuruluşlar için özellikle kritik olan yüksek kullanılabilirlik dağıtımlarını basitleştirmek üzere kullanılabilir.
 - En fazla 50 k üye içeren büyük gruplar için destek. Büyük grupları eşitlerken yalnızca OU kapsam filtresi kullanılması önerilir.
@@ -30,7 +30,7 @@ Azure AD Connect bulut eşitleme, Microsoft 'un, kullanıcıların, grupların v
 ![Azure AD Connect nedir?](media/what-is-cloud-sync/architecture-1.png)
 
 ## <a name="how-is-azure-ad-connect-cloud-sync-different-from-azure-ad-connect-sync"></a>Azure AD Connect bulut eşitlemesi Azure AD Connect eşitlemeden farklı midir?
-Azure AD Connect bulut eşitlemeyle, AD 'den Azure AD 'ye sağlama, Microsoft Online Services 'ta düzenlenir. Kuruluşun, Azure AD ile AD arasında köprü görevi gören hafif bir aracı olan şirket içi ve IaaS barındırılan ortamlarında dağıtılması gerekir. Sağlama yapılandırması Azure AD 'de depolanır ve hizmetin bir parçası olarak yönetilir.
+Azure AD Connect bulut eşitlemeyle, AD 'den Azure AD 'ye sağlama, Microsoft Online Services 'ta düzenlenir. Kuruluşun yalnızca şirket içi veya IaaS barındırılan ortamlarında dağıtılması gerekir. Bu, Azure AD ile AD arasında köprü görevi gören bir açık ağırlık aracısıdır. Sağlama yapılandırması Azure AD 'de depolanır ve hizmetin bir parçası olarak yönetilir.
 
 ## <a name="azure-ad-connect-cloud-sync-video"></a>Azure AD Connect bulut eşitleme videosu
 Aşağıdaki kısa videoda Azure AD Connect bulut eşitlemesine mükemmel bir genel bakış sunulmaktadır:
@@ -63,7 +63,7 @@ Aşağıdaki tabloda Azure AD Connect ve Azure AD Connect bulut eşitlemesi aras
 | Federasyon desteği |●|●|
 | Sorunsuz Çoklu Oturum Açma|● |●|
 | Etki Alanı Denetleyicisi üzerinde yüklemeyi destekler |● |● |
-| Windows Server 2012 ve Windows Server 2012 R2 desteği |● |● |
+| Windows Server 2016 için destek|● |● |
 | Etki alanları/OU 'Lar/gruplar üzerinde filtrele |● |● |
 | Nesnelerin öznitelik değerlerini filtrele |● | |
 | Minimal öznitelik kümesinin eşitlenmesine izin ver (MinSync) |● |● |

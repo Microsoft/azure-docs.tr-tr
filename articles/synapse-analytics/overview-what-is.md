@@ -9,12 +9,12 @@ ms.subservice: overview
 ms.date: 03/24/2021
 ms.author: saveenr
 ms.reviewer: jrasnick
-ms.openlocfilehash: 78b31cb32e3df9b0d8e198d8c2122e492e609283
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 652f98659f96b36e3185432e50d9d36dc569bd43
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105625827"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537952"
 ---
 # <a name="what-is-azure-synapse-analytics"></a>Azure Synapse Analytics nedir?
 
@@ -43,9 +43,9 @@ ms.locfileid: "105625827"
 
 Azure SYNAPSE, SQL ve Spark ile birlikte kullanma arasındaki geleneksel teknoloji sınırlamalarını ortadan kaldırır. Gereksinimlerinize ve uzmanlığa göre sorunsuz bir şekilde karıştırabilir ve eşleştirebilirsiniz.
 
-* Paylaşılan bir Hive uyumlu meta veri sistemi, Veri Gölü dosyalarda tanımlanan tabloların Spark veya Hive tarafından sorunsuz bir şekilde tüketilmesi için izin verir.
+* Veri Gölü dosyalarda tanımlanmış tablolar Spark veya Hive tarafından sorunsuz bir şekilde tüketilebilir.
 * SQL ve Spark, Veri Gölü içinde depolanan Parquet, CSV, TSV ve JSON dosyalarını doğrudan keşfedebilir ve analiz edebilir.
-* SQL ve Spark veritabanları arasında devam eden veriler için hızlı ölçeklenebilir yükleme ve kaldırma
+* SQL ve Spark veritabanları arasında hızlı, ölçeklenebilir veri yükleme
 
 ## <a name="built-in-data-integration"></a>Yerleşik veri tümleştirmesi
 
@@ -55,26 +55,19 @@ Azure SYNAPSE, Azure SYNAPSE Analytics 'ten çıkmadan zengin ölçekli ETL işl
 * Veri akışı etkinlikleri ile Code-Free ETL
 * Not defterlerini, Spark işlerini, saklı yordamları, SQL betiklerini ve daha fazlasını düzenleyin
 
-## <a name="unified-management-monitoring-and-security"></a>Birleşik yönetim, izleme ve güvenlik
+## <a name="unified-experience"></a>Birleşik deneyim 
 
-Azure SYNAPSE, kuruluşların analiz kaynaklarını yönetmesi, kullanımı ve etkinlikleri izlemesi ve güvenliği zorunlu kılmak için tek bir yol sunar.
+**SYNAPSE Studio** , kuruluşların tek bir kullanıcı deneyiminde çözüm oluşturmak, sürdürmek ve güvenliğini sağlamak için tek bir yol sağlar
 
-* Analiz kaynaklarına erişimi basitleştirmek için kullanıcıları role atayın
-* Veriler ve kod üzerinde ayrıntılı erişim denetimi
-* SQL ve Spark genelinde kaynakları, kullanımı ve kullanıcıları izlemek için tek bir pano
+* Anahtar görevleri gerçekleştirin: alma, İnceleme, hazırlama, düzenleme, görselleştirme
+* SQL ve Spark genelinde kaynakları, kullanımı ve kullanıcıları izleme
+* Analiz kaynaklarına erişimi basitleştirmek için rol tabanlı erişim denetimi kullanma
+* SQL veya Spark Code yazın ve kurumsal CI/CD işlemleriyle tümleştirin
 
-## <a name="unified-experience"></a>Birleşik deneyim
+## <a name="engage-with-the-synapse-community"></a>SYNAPSE topluluğuyla etkileşim kurun
 
-**SYNAPSE Studio** , veri mühendislerine yönelik her şeyi birbirine bağlayan kullanıcı deneyimidir. Tüm analiz çözümü oluşturmak için ihtiyaç duydukları her görevi yapmasına izin verir.
-
-* Anahtar veri mühendisinin görevleri tek bir yerde: alma, İnceleme, hazırlama, düzenleme, görselleştirme
-* SQL veya Spark kodu yazmak için sektör lideri üretkenlik: yazma, hata ayıklama ve performans iyileştirmesi
-* Kurumsal CI/CD işlemiyle tümleştirin
-
-## <a name="engage-with-the-synapse-engineering-team"></a>SYNAPSE Mühendislik ekibiyle etkileşim kurun
-
+- [Microsoft Q&A](/answers/topics/azure-synapse-analytics.html): Teknik sorular sorun.
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-synapse): geliştirme sorularını sorun.
-- [Microsoft Q&soru sayfası](/answers/topics/azure-synapse-analytics.html): Teknik sorular sorun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

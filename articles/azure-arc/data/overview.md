@@ -1,20 +1,21 @@
 ---
 title: Azure Arc özellikli veri hizmetleri nedir?
 description: Azure Arc etkin veri hizmetlerini tanıtır
+ms.custom: references_regions
 author: twright-msft
 ms.author: twright
 ms.reviewer: mikeray
 services: azure-arc
 ms.service: azure-arc
 ms.subservice: azure-arc-data
-ms.date: 09/22/2020
+ms.date: 03/31/2021
 ms.topic: overview
-ms.openlocfilehash: ef16a4c0b6ea40fb4934307916f1fe79ccea72f9
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2d866dcb5b2a0be9e6468b3d40258e37ac93834e
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97609148"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107716106"
 ---
 # <a name="what-are-azure-arc-enabled-data-services-preview"></a>Azure Arc özellikli veri hizmetleri (önizleme) nelerdir?
 
@@ -46,6 +47,16 @@ Azure portal, Azure Data Studio ve gibi tanıdık araçları kullanarak [!INCLUD
 ## <a name="disconnected-scenario-support"></a>Bağlantısı kesik senaryo desteği
 
 Self Servis sağlama, otomatik yedeklemeler/geri yükleme ve izleme gibi hizmetlerin çoğu, altyapınızda yerel olarak Azure bağlantısı olmadan veya doğrudan bağlantılı olarak çalışabilir. Azure 'a doğrudan bağlantı kurmak, Azure Izleyici gibi diğer Azure hizmetleriyle ve Azure Arc etkin veri hizmetlerinizi yönetmek için dünyanın herhangi bir yerinden Azure portal ve Azure Resource Manager API 'Leri kullanma olanağı için ek seçenekler açar.
+
+## <a name="supported-regions"></a>Desteklenen bölgeler
+
+Aşağıdaki tabloda, Arc etkin veri Hizmetleri için şu anda desteklenen senaryolar açıklanmaktadır.
+
+|Azure Bölgeleri  |Doğrudan bağlı mod  |Dolaylı bağlı mod  |
+|---------|---------|---------|
+|Doğu ABD|Kullanılabilir|Kullanılabilir
+|West Europe |Kullanılabilir |Kullanılabilir
+|Kuzey Avrupa|Kullanılabilir|Kullanılabilir
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -8,12 +8,12 @@ ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: how-to
 ms.date: 03/19/2021
-ms.openlocfilehash: f652858f22e26eb7167a0cc7a2cfb8ef4b600ace
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 74d30b7c42002c8f134520e0198774eba1519bcd
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105047309"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553847"
 ---
 # <a name="how-to-create-a-saas-offer-in-the-commercial-marketplace"></a>Ticari Market 'te SaaS teklifi oluşturma
 
@@ -56,7 +56,7 @@ Daha önce yapmadıysanız, [ticari Market için bir SaaS teklifi planı](plan-s
    + 30 günlük ücretsiz deneme sürümü sağlamak için **ücretsiz deneme**' yı seçin ve AÇıLAN **deneme URL** 'si kutusunda, [Azure Active Directory (Azure AD) kullanarak tek tıklamayla kimlik doğrulama](azure-ad-saas.md)aracılığıyla müşterilerin ücretsiz denemenize erişebileceği URL 'yi ( *http* veya *https*'den başlayarak) girin. Örneğin, `https://contoso.com/trial/saas-app`.
    + Potansiyel müşterilerin teklifinizi satın alarak sizinle iletişim kurabilmesi için **benimle Iletişim kurun**' i seçin.
 
-### <a name="enable-a-test-drive-optional"></a>Sınama sürücüsünü etkinleştir (isteğe bağlı)
+## <a name="enable-a-test-drive-optional"></a>Sınama sürücüsünü etkinleştir (isteğe bağlı)
 
 Test sürücüsü, bu kullanıcılara, bir sabit sayıda saat boyunca önceden yapılandırılmış bir ortama erişim vererek, teklifinizi olası müşterilere sergilemenin harika bir yoludur. Sınama sürücüsü sunumu, daha fazla dönüştürme hızına neden olur ve yüksek oranda nitelikli müşteri adayları üretir. Sınama sürücüleri hakkında daha fazla bilgi için bkz. [test sürücüsü nedir?](./what-is-test-drive.md).
 
@@ -67,14 +67,14 @@ Test sürücüsü, bu kullanıcılara, bir sabit sayıda saat boyunca önceden y
 1.  **Test sürücüsü** altında, **sınama sürücüsünü etkinleştir** onay kutusunu seçin.
 1.  Görüntülenen listeden test sürücü türünü seçin.
 
-### <a name="configure-lead-management"></a>Müşteri adayı yönetimini yapılandırma
+## <a name="configure-lead-management"></a>Müşteri adayı yönetimini yapılandırma
 
 Müşteri ilişkileri yönetimi (CRM) sisteminizi ticari Market teklifinizi kullanarak bağlayın, böylece müşteri, faiz veya ürününüzü dağıtırken müşteri iletişim bilgilerini alabilirsiniz. Bu bağlantıyı, teklifi oluştururken veya sonrasında istediğiniz zaman değiştirebilirsiniz.
 
 > [!NOTE]
 > Teklifinizi Microsoft ile satdıysanız veya **benimle iletişim** listeleme seçeneğini belirlediyseniz, müşteri adayı yönetimini yapılandırmanız gerekir. Ayrıntılı kılavuz için bkz. [ticari Market teklifinizin müşteri adayları](partner-center-portal/commercial-marketplace-get-customer-leads.md).
 
-#### <a name="to-configure-the-connection-details-in-partner-center"></a>Iş Ortağı Merkezi 'nde bağlantı ayrıntılarını yapılandırmak için
+### <a name="configure-the-connection-details-in-partner-center"></a>Iş Ortağı Merkezi 'nde bağlantı ayrıntılarını yapılandırma
 
 1.  **Müşteri liderleri** altında **Bağlan** bağlantısını seçin.
 1. **Bağlantı ayrıntıları** iletişim kutusunda listeden bir müşteri adayı hedefi seçin.
@@ -88,6 +88,36 @@ Müşteri ilişkileri yönetimi (CRM) sisteminizi ticari Market teklifinizi kull
 
 1. Verdiğiniz yapılandırmayı doğrulamak için **Doğrula** bağlantısını seçin.
 1. İletişim kutusunu kapatmak için **Tamam**' ı seçin.
+
+## <a name="configure-microsoft-365-app-integration"></a>Microsoft 365 uygulama tümleştirmesini yapılandırma
+
+SaaS teklifinizin ve ilgili Microsoft 365 uygulama tüketiminin [birleştirilmiş bulma ve teslimini](./plan-SaaS-offer.md) , aralarında bağlantı kurarak açabilirsiniz.
+
+### <a name="integrate-with-microsoft-api"></a>Microsoft API ile tümleştirme
+
+1. SaaS teklifiniz Microsoft Graph API ile tümleştirilemez, **Hayır**' ı seçin. Yayımlanan Microsoft 365 uygulama tüketimi istemcilerini bağlamayı sürdürün.  
+
+1. SaaS teklifiniz Microsoft Graph API ile tümleşiyorsa **Evet**' i seçin ve sonra oluşturduğunuz ve Microsoft Graph API 'siyle tümleştirilecek Azure ACTIVE DIRECTORY uygulama kimliği ' ni belirtin. 
+
+### <a name="link-published-microsoft-365-app-consumption-clients"></a>Yayınlanan Microsoft 365 App tüketim istemcilerinin bağlantısını yapın
+
+1. SaaS teklifinizle birlikte çalışarak Office eklentisi, takımlar uygulamanız veya SharePoint Framework çözümlerini yayımlamadıysanız **Hayır**' ı seçin.
+
+1. SaaS teklifinizle birlikte çalışarak Office eklentisi, takımlar uygulaması veya SharePoint Framework çözümlerini yayımladıysanız, **Evet**' i seçin ve ardından yeni bağlantı eklemek için **+ başka bir Appsource bağlantısı ekle** ' yi seçin.  
+
+1. Geçerli bir AppSource bağlantısı sağlayın.
+
+1. Tüm bağlantıları ekleme **+ başka bir appsource bağlantısı ekle** ve geçerli appsource bağlantıları sağla ' yı seçerek devam edin.  
+
+1. Bağlı ürünlerin SaaS teklifinin liste sayfasında gösterildiği sıralama, derece değeri ile belirtilir, bunu seçerek, tutabilir ve = simgesini listede yukarı ve aşağı taşı olarak değiştirebilirsiniz. 
+
+1. Ürün satırında **Sil** ' i seçerek bağlantılı bir ürünü silebilirsiniz.  
+
+
+> [!IMPORTANT]
+> Bağlı bir ürünü durdurduktan sonra, SaaS teklifinde otomatik olarak bağlantısı kesilmez, bağlı ürünler listesinden silmeniz ve SaaS teklifini yeniden göndermeniz gerekir.  
+
+ 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

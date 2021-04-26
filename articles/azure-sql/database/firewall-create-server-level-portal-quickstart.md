@@ -12,10 +12,10 @@ ms.author: sachinp
 ms.reviewer: vanto, sstein
 ms.date: 02/11/2019
 ms.openlocfilehash: bef1e9bdafd91a51290fe84af074c8cece7cc371
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "102486735"
 ---
 # <a name="quickstart-create-a-server-level-firewall-rule-using-the-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak sunucu düzeyinde bir güvenlik duvarı kuralı oluşturma

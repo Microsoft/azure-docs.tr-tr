@@ -7,12 +7,12 @@ ms.topic: reference
 author: keferna
 ms.author: keferna
 ms.date: 03/08/2021
-ms.openlocfilehash: e583d39e2eed1b08dfeb17cafc1e12c583176d7b
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4833a5779b9c9d5edcbbe70045f2ba2ca2d72ebe
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103493042"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812543"
 ---
 # <a name="geographic-availability-and-currency-support-for-the-commercial-marketplace"></a>Ticari Market için coğrafi kullanılabilirlik ve para birimi desteği
 
@@ -200,7 +200,7 @@ Belirli teklif türleri için fiyat girme hakkında daha fazla bilgi için şu m
 - [Azure Container teklifi oluşturma](./create-azure-container-offer.md)
 - [Azure sanal makine teklifi oluşturma](azure-vm-create.md)
 - [Danışmanlık hizmeti teklifi oluşturma](./create-consulting-service-offer.md)
-- [Dynamics 365 for Customer Engagement ve PowerApps teklifi oluşturma](partner-center-portal/create-new-customer-engagement-offer.md)
+- [Power Apps teklifi & müşteri katılımı için Dynamics 365 oluşturma](dynamics-365-customer-engage-offer-setup.md)
 - [Dynamics 365 for Operations teklifi oluşturma](partner-center-portal/create-new-operations-offer.md)
 - [Dynamics 365 Business Central teklifi oluşturma](partner-center-portal/create-new-business-central-offer.md)
 - [IoT Edge modül teklifi oluşturma](partner-center-portal/azure-iot-edge-module-creation.md)

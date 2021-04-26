@@ -7,18 +7,18 @@ ms.service: vpn-gateway
 ms.topic: article
 ms.date: 09/02/2020
 ms.author: yushwang
-ms.openlocfilehash: 48756b43e64576a5dd38467bb1dd97e91c168a06
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d193850461eeaa5041e1cfd6d64def503ad676d4
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91360863"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374769"
 ---
 # <a name="highly-available-cross-premises-and-vnet-to-vnet-connectivity"></a>Yüksek Oranda Kullanılabilir Şirket İçi ve Dışı ile Sanal Ağdan Sanal Ağa Bağlantı
 Bu makalede Azure VPN gateways kullanan şirket içi ve dışı ile Sanal Ağdan Sanal Ağa bağlantınız için Yüksek Oranda Kullanılabilir yapılandırma seçeneklerine genel bakış sunulmaktadır.
 
 ## <a name="about-azure-vpn-gateway-redundancy"></a><a name = "activestandby"></a>Azure VPN gateway yedekliliği hakkında
-Her Azure VPN gateway, etkin bir bekleme yapılandırmasında iki örnekten oluşur. Etkin örnekte gerçekleşen herhangi bir planlı bakım veya plansız kesintide, beklemedeki örnek otomatik olarak yükü devralıp S2S VPN veya Sanal Ağdan Sanal Ağa bağlantıları sürdürür. Bu geçiş kısa bir kesintiye neden olur. Planlı bakım için bağlantı 10 ila 15 saniye içinde geri yüklenmelidir. Planlanmamış sorunlar için bağlantı kurtarma süresi yaklaşık 1 dakika ile en kötü durumda 1 buçuk dakika arasında değişir. Ağ geçidiyle P2S VPN istemci bağlantıları için P2S bağlantıları kesilir ve kullanıcıların istemci makinelerden yeniden bağlantı kurması gerekir.
+Her Azure VPN gateway, etkin bir bekleme yapılandırmasında iki örnekten oluşur. Etkin örnekte gerçekleşen herhangi bir planlı bakım veya plansız kesintide, beklemedeki örnek otomatik olarak yükü devralıp S2S VPN veya Sanal Ağdan Sanal Ağa bağlantıları sürdürür. Bu geçiş kısa bir kesintiye neden olur. Planlı bakım için bağlantı 10 ila 15 saniye içinde geri yüklenmelidir. Planlanmamış sorunlar için, bağlantı kurtarması daha uzun olacaktır, yaklaşık 1 ila 3 dakika boyunca en kötü durumda. Ağ geçidiyle P2S VPN istemci bağlantıları için P2S bağlantıları kesilir ve kullanıcıların istemci makinelerden yeniden bağlantı kurması gerekir.
 
 ![Diyagramda, etkin bir Azure V P N ağ geçidine bağlı olan ve Azure 'da barındırılan alt ağlara bağlanmak için bekleyen bir ağ geçidi olan bir şirket içi site olan özel ı P alt ağları ve şirket içi V P N 'yi gösterir.](./media/vpn-gateway-highlyavailable/active-standby.png)
 

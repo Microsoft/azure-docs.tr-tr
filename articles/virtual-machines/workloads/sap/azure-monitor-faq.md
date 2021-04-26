@@ -6,12 +6,12 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.date: 06/30/2020
 ms.author: radeltch
-ms.openlocfilehash: 3732189c1d2e09b648a2fba0a39e7e4113a76d48
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4b84f07f637b0a8925dec96c8c609101247ffd64
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101675949"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377133"
 ---
 # <a name="azure-monitor-for-sap-solutions-faq-preview"></a>SAP Çözümleri için Azure Izleyici SSS (Önizleme)
 ## <a name="frequently-asked-questions"></a>Sık sorulan sorular
@@ -60,13 +60,28 @@ Katkıda bulunan rolü.
 Önizlemeler hizmet düzeyi sözleşmelerinden çıkarılır. Lütfen SAP Solutions Market görüntüsü için Azure Izleyici aracılığıyla tam lisans terimini okuyun.  
 
  - **Bu çözüm aracılığıyla tüm Yatayı izleyebilir miyim?**  
-Şu anda HANA veritabanını, temel altyapıyı, yüksek kullanılabilirlik kümesini ve Microsoft SQL Server 'ı genel önizlemede izleyebilirsiniz.  
+Şu anda HANA veritabanını, temel altyapı, yüksek kullanılabilirlik kümesi, Microsoft SQL Server, SAP NetWeaver kullanılabilirliği ve SAP uygulama örneği kullanılabilirliği ölçümlerini genel önizlemede izleyebilirsiniz.  
 
  - **Bu hizmet SAP Solution Manager 'ın yerini mi?**  
 Hayır. Müşteriler, Iş süreci izleme için SAP Solution Manager 'ı kullanmaya devam edebilir.  
 
  - **SAP HANA kokpiti/Studio gibi geleneksel çözümler üzerinden bu hizmetin değeri nedir?**  
 SAP Çözümleri için Azure Izleyici, HANA veritabanına özgü değildir. SAP Çözümleri için Azure Izleyici de AnyDB 'yi destekler.  
+
+- **Hangi SAP NetWeaver sürümleri desteklenir?**  
+SAP NetWeaver 7,0 veya üzeri.  
+
+- **Hangi SAP NetWeaver yapılandırması desteklenir?**  
+ABAP, Java ve çift Stack SAP NetWeaver uygulama sunucusu yapılandırmasını destekler.
+
+- **SAP NetWeaver uygulama izleme yöntemlerinin neden korumasını kaldırma gereksinimim vardır?**  
+SAP yayımları >= 7,3 ' de, çoğu WebService yöntemi varsayılan olarak korunur. Bu yöntemleri çağırarak kullanılabilirlik ve performans ölçümlerini getirmek için şu yöntemlerin korumasını kaldırın: GetQueueStatistic, ABAPGetWPTable, GetProcessList, Enqgetistatistiğini ve Getsystemınstancelist.
+
+- **SAPCONTROL WebMethods korumasını kaldırmak için herhangi bir risk var mı?**  
+Genel [olarak,](https://launchpad.support.sap.com/#/notes/1439348)sapcontrol WebMethods 'ın korunmaması gibi bir güvenlik riski yoktur, ancak müşteriler, SAP Access Control List (ACL) bağlantı noktası aracılığıyla korumasız Web yöntemlerine erişimi kısıtlamak/yasaklamak istiyorsa, bu işlemi SAP List (ACL) ' de filtre ekleyerek, [OSS Not](https://service.sap.com/sap/support/notes/1495075) bunu gerçekleştirmek için gereken yapılandırmayı açıklar. 
+
+- **SAP NetWeaver sağlayıcısı ayarlamak için sistem yapılandırması gerçekleştirdikten sonra SAP örneklerimi yeniden başlatmem gerekiyor mu?**  
+Evet, SAP yapılandırma değişiklikleri aracılığıyla korumasız yöntemlere sahip olduğunuzda, yapılandırma değişikliklerinin güncelleştirildiğinden emin olmak için ilgili SAP sistemlerini yeniden başlatmanız gerekir.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

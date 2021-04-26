@@ -16,12 +16,12 @@ ms.date: 12/11/2020
 ms.author: barclayn
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8f08c25749bbd21e3624dee898d9a8c97fd74164
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 44b4e4bccde07d078c9749ee76c1653e6d431e63
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98059390"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532089"
 ---
 # <a name="add-a-connected-organization-in-azure-ad-entitlement-management"></a>Azure AD Yetkilendirme Yönetimi 'nde bağlı bir kuruluş ekleme
 
@@ -42,7 +42,7 @@ Yetkilendirme yönetiminin, bağlı bir kuruluş oluşturan kullanıcıları bel
 - Grafik tasarımı Enstitüsü, Azure AD 'yi kullanır ve kullanıcıların *graphicdesigninstitute.com* ile biten bir Kullanıcı asıl adı vardır.
 - Contoso henüz Azure AD kullanmıyor. Contoso kullanıcıları, *contoso.com* ile biten bir Kullanıcı asıl adına sahiptir.
 
-Bu durumda, iki bağlı kuruluş yapılandırabilirsiniz. Grafik Tasarım Enstitüsü ve contoso için bir bağlı kuruluş oluşturursunuz. Daha sonra, iki bağlı kuruluş bir ilkeye eklerseniz, her bir kuruluştan, ilkeyle eşleşen bir Kullanıcı asıl adına sahip kullanıcılar erişim paketleri isteyebilir. *Graphicdesigninstitute.com* etki alanına sahip bir Kullanıcı asıl adına sahip kullanıcılar, grafik tasarımı Enstitüsü bağlantılı kuruluşla eşleşir ve istek göndermesine izin verilir. *Contoso.com* etki alanına sahip bir Kullanıcı asıl adına sahip kullanıcılar, contoso bağlantılı kuruluşla eşleştirebilir ve ayrıca paket istemesine izin verilir. Ayrıca, grafik tasarımı Enstitüsü Azure AD 'yi kullandığından, *graphicdesignınstitute. example* gibi, kiracılarına eklenen [doğrulanmış bir etki alanıyla](../fundamentals/add-custom-domain.md#verify-your-custom-domain-name) eşleşen bir asıl adı olan tüm kullanıcılar aynı ilkeyi kullanarak erişim paketleri isteyebilecektir.
+Bu durumda, iki bağlı kuruluş yapılandırabilirsiniz. Grafik Tasarım Enstitüsü ve contoso için bir bağlı kuruluş oluşturursunuz. Daha sonra, iki bağlı kuruluş bir ilkeye eklerseniz, her bir kuruluştan, ilkeyle eşleşen bir Kullanıcı asıl adına sahip kullanıcılar erişim paketleri isteyebilir. Contoso.com etki alanına sahip bir Kullanıcı asıl adına sahip kullanıcılar, contoso bağlantılı kuruluşla eşleştirebilir ve ayrıca paket istemesine izin verilir. *Graphicdesigninstitute.com* etki alanına sahip bir Kullanıcı asıl adına sahip kullanıcılar, grafik tasarımı Enstitüsü bağlantılı kuruluşla eşleşir ve istek göndermesine izin verilir. Ayrıca, grafik tasarımı Enstitüsü Azure AD 'yi kullandığından, *graphicdesignınstitute. example* gibi, kiracılarına eklenen [doğrulanmış bir etki alanıyla](../fundamentals/add-custom-domain.md#verify-your-custom-domain-name) eşleşen bir asıl adı olan tüm kullanıcılar aynı ilkeyi kullanarak erişim paketleri isteyebilecektir. [E-posta bir kerelik geçiş kodu (OTP) kimlik doğrulaması](../external-identities/one-time-passcode.md) açıksa, bu etki alanlarından henüz, kaynaklarınıza erişirken e-posta OTP kullanarak kimlik doğrulaması yapacak Azure AD hesaplarına sahip olmayan kullanıcıları içerir. 
 
 ![Bağlı kuruluş örneği](./media/entitlement-management-organization/connected-organization-example.png)
 
@@ -140,7 +140,7 @@ Artık dış Azure AD dizini veya etki alanı ile bir ilişkiniz yoksa bağlı k
 
 ## <a name="managing-a-connected-organization-programmatically"></a>Bağlı bir kuruluşu program aracılığıyla yönetme
 
-Ayrıca Microsoft Graph kullanarak bağlı kuruluşlar oluşturabilir, listeleyebilir, güncelleştirebilir ve silebilirsiniz. Temsilci izni olan bir uygulamayla uygun bir roldeki kullanıcı `EntitlementManagement.ReadWrite.All` , [connectedorganization](/graph/api/resources/connectedorganization?view=graph-rest-beta) nesnelerini yönetmek ve bunlar için sponsorları ayarlamak üzere API 'yi çağırabilir.
+Ayrıca Microsoft Graph kullanarak bağlı kuruluşlar oluşturabilir, listeleyebilir, güncelleştirebilir ve silebilirsiniz. Temsilci izni olan bir uygulamayla uygun bir roldeki kullanıcı `EntitlementManagement.ReadWrite.All` , [connectedorganization](/graph/api/resources/connectedorganization?view=graph-rest-beta&preserve-view=true) nesnelerini yönetmek ve bunlar için sponsorları ayarlamak üzere API 'yi çağırabilir.
 
 ## <a name="state-properties-of-connected-organizations"></a>Bağlı kuruluşların durum özellikleri
 

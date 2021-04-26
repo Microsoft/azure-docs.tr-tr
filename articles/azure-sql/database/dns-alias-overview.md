@@ -11,12 +11,12 @@ author: rohitnayakmsft
 ms.author: rohitna
 ms.reviewer: genemi, jrasnick, vanto
 ms.date: 06/26/2019
-ms.openlocfilehash: 25c2157a8de237d0ec66caa72d59c810d419ac76
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6ef268b349d5a21cdbadd55ffd2199a35f650e5b
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94989131"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376299"
 ---
 # <a name="dns-alias-for-azure-sql-database"></a>Azure SQL veritabanı için DNS diğer adı
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -98,7 +98,7 @@ Kod örneğinde kullanılan cmdlet 'ler şunlardır:
 - [Set-Azsqlserverdnsalıas](/powershell/module/az.Sql/Set-azSqlServerDnsAlias): diğer adın, sunucu 1 ' den sunucu 2 ' ye başvuracak şekilde yapılandırıldığı sunucu adını değiştirir.
 - [Remove-Azsqlserverdnsalıas](/powershell/module/az.Sql/Remove-azSqlServerDnsAlias): DNS diğer adını sunucu 2 ' den diğer ad adını kullanarak kaldırın.
 
-## <a name="limitations-during-preview"></a>Önizleme sırasında sınırlamalar
+## <a name="limitations"></a>Sınırlamalar
 
 Şu anda bir DNS diğer adı aşağıdaki sınırlamalara sahiptir:
 
@@ -113,7 +113,7 @@ Kod örneğinde kullanılan cmdlet 'ler şunlardır:
 
 - Olağanüstü durum kurtarma dahil olmak üzere [Azure SQL veritabanı ile iş sürekliliği 'Ne genel bakış](business-continuity-high-availability-disaster-recover-hadr-overview.md).
 - [Azure REST API başvurusu](/rest/api/azure/)
-- [Sunucu DNS diğer adları API 'SI](/rest/api/sql/serverdnsaliases)
+- [Sunucu DNS diğer adları API 'SI](/rest/api/sql/2020-11-01-preview/serverdnsaliases)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

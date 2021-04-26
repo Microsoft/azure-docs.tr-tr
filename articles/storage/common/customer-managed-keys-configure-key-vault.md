@@ -11,12 +11,12 @@ ms.author: tamram
 ms.reviewer: ozgun
 ms.subservice: common
 ms.custom: devx-track-azurepowershell, devx-track-azurecli
-ms.openlocfilehash: 24fbe843986b732a04c9e356c54f3d768d6739be
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 77a01a270f47ddacb71962188e7fedd0a0a9f6d0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100558180"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790446"
 ---
 # <a name="configure-encryption-with-customer-managed-keys-stored-in-azure-key-vault"></a>Azure Key Vault’ta depolanan müşteri tarafından yönetilen anahtarlarla şifrelemeyi yapılandırma
 
@@ -83,7 +83,7 @@ Set-AzKeyVaultAccessPolicy `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı kullanarak yeni bir Anahtar Kasası oluşturmak için [az keykasa Create komutunu](/cli/azure/keyvault#az-keyvault-create)çağırın. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
+Azure CLı kullanarak yeni bir Anahtar Kasası oluşturmak için [az keykasa Create komutunu](/cli/azure/keyvault#az_keyvault_create)çağırın. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 
 ```azurecli-interactive
 az keyvault create \
@@ -97,7 +97,7 @@ Azure CLı ile mevcut bir anahtar kasası üzerinde Temizleme korumasını etkin
 
 Ardından, depolama hesabına sistem tarafından atanan bir yönetilen kimlik atayın. Bu yönetilen kimliği, depolama hesabı izinlerini anahtar kasasına erişim vermek için kullanacaksınız. Sistem tarafından atanan Yönetilen kimlikler hakkında daha fazla bilgi için bkz. [Azure kaynakları için Yönetilen kimlikler nelerdir?](../../active-directory/managed-identities-azure-resources/overview.md).
 
-Azure CLı kullanarak yönetilen bir kimlik atamak için [az Storage Account Update](/cli/azure/storage/account#az-storage-account-update)' i çağırın:
+Azure CLı kullanarak yönetilen bir kimlik atamak için [az Storage Account Update](/cli/azure/storage/account#az_storage_account_update)' i çağırın:
 
 ```azurecli-interactive
 az storage account update \
@@ -108,7 +108,7 @@ az storage account update \
 
 Son olarak, depolama hesabının bu hesaba erişim izinleri olması için Anahtar Kasası için erişim ilkesini yapılandırın. Bu adımda, daha önce depolama hesabına atadığınız yönetilen kimliği kullanacaksınız.
 
-Anahtar Kasası için erişim ilkesini ayarlamak için [az keykasa Set-Policy](/cli/azure/keyvault#az-keyvault-set-policy)komutunu çağırın:
+Anahtar Kasası için erişim ilkesini ayarlamak için [az keykasa Set-Policy](/cli/azure/keyvault#az_keyvault_set_policy)komutunu çağırın:
 
 ```azurecli-interactive
 storage_account_principal=$(az storage account show \
@@ -147,7 +147,7 @@ $key = Add-AzKeyVaultKey -VaultName $keyVault.VaultName `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı ile bir anahtar eklemek için [az keykasa Key Create komutunu](/cli/azure/keyvault/key#az-keyvault-key-create)çağırın. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın.
+Azure CLı ile bir anahtar eklemek için [az keykasa Key Create komutunu](/cli/azure/keyvault/key#az_keyvault_key_create)çağırın. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın.
 
 ```azurecli-interactive
 az keyvault key create \
@@ -213,7 +213,7 @@ Set-AzStorageAccount -ResourceGroupName $storageAccount.ResourceGroupName `
 
 Müşteri tarafından yönetilen anahtarları, Azure CLı ile anahtar sürümünün otomatik güncelleştirilmesiyle birlikte yapılandırmak için [Azure CLI sürüm 2.4.0](/cli/azure/release-notes-azure-cli#april-21-2020) veya üstünü yükler. Daha fazla bilgi için bkz. [Azure CLI 'Yı yüklerken](/cli/azure/install-azure-cli).
 
-Müşteri tarafından yönetilen bir anahtarın anahtar sürümünü otomatik olarak güncelleştirmek için, depolama hesabı için müşteri tarafından yönetilen anahtarlarla şifrelemeyi yapılandırırken anahtar sürümünü atlayın. Aşağıdaki örnekte gösterildiği gibi, depolama hesabının şifreleme ayarlarını güncelleştirmek için [az Storage Account Update](/cli/azure/storage/account#az-storage-account-update) ' i çağırın. Parametresi dahil edin `--encryption-key-source` ve `Microsoft.Keyvault` hesap için müşteri tarafından yönetilen anahtarları etkinleştirmek üzere olarak ayarlayın.
+Müşteri tarafından yönetilen bir anahtarın anahtar sürümünü otomatik olarak güncelleştirmek için, depolama hesabı için müşteri tarafından yönetilen anahtarlarla şifrelemeyi yapılandırırken anahtar sürümünü atlayın. Aşağıdaki örnekte gösterildiği gibi, depolama hesabının şifreleme ayarlarını güncelleştirmek için [az Storage Account Update](/cli/azure/storage/account#az_storage_account_update) ' i çağırın. Parametresi dahil edin `--encryption-key-source` ve `Microsoft.Keyvault` hesap için müşteri tarafından yönetilen anahtarları etkinleştirmek üzere olarak ayarlayın.
 
 Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın.
 
@@ -273,7 +273,7 @@ Anahtar sürümünü el ile güncelleştirdiğinizde, yeni sürümü kullanmak i
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Müşteri tarafından yönetilen anahtarları, anahtar sürümünün el ile güncelleştirilmesiyle birlikte yapılandırmak için, depolama hesabı için şifrelemeyi yapılandırırken açık olarak anahtar sürümünü sağlayın. Aşağıdaki örnekte gösterildiği gibi, depolama hesabının şifreleme ayarlarını güncelleştirmek için [az Storage Account Update](/cli/azure/storage/account#az-storage-account-update) ' i çağırın. Parametresi dahil edin `--encryption-key-source` ve `Microsoft.Keyvault` hesap için müşteri tarafından yönetilen anahtarları etkinleştirmek üzere olarak ayarlayın.
+Müşteri tarafından yönetilen anahtarları, anahtar sürümünün el ile güncelleştirilmesiyle birlikte yapılandırmak için, depolama hesabı için şifrelemeyi yapılandırırken açık olarak anahtar sürümünü sağlayın. Aşağıdaki örnekte gösterildiği gibi, depolama hesabının şifreleme ayarlarını güncelleştirmek için [az Storage Account Update](/cli/azure/storage/account#az_storage_account_update) ' i çağırın. Parametresi dahil edin `--encryption-key-source` ve `Microsoft.Keyvault` hesap için müşteri tarafından yönetilen anahtarları etkinleştirmek üzere olarak ayarlayın.
 
 Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın.
 
@@ -297,7 +297,7 @@ az storage account update
     --encryption-key-vault $key_vault_uri
 ```
 
-Anahtar sürümünü el ile güncelleştirdiğinizde, yeni sürümü kullanmak için depolama hesabının şifreleme ayarlarını güncelleştirmeniz gerekir. İlk olarak, az keykasa [Show](/cli/azure/keyvault#az-keyvault-show)komutunu çağırarak Anahtar Kasası URI 'sini sorgulama, [az keykasa anahtar listesi-sürümlerini](/cli/azure/keyvault/key#az-keyvault-key-list-versions)çağırarak anahtar sürümü için. Ardından, önceki örnekte gösterildiği gibi, depolama hesabının şifreleme ayarlarını anahtarın yeni sürümünü kullanacak şekilde güncelleştirmek için [az Storage Account Update](/cli/azure/storage/account#az-storage-account-update) ' i çağırın.
+Anahtar sürümünü el ile güncelleştirdiğinizde, yeni sürümü kullanmak için depolama hesabının şifreleme ayarlarını güncelleştirmeniz gerekir. İlk olarak, az keykasa [Show](/cli/azure/keyvault#az_keyvault_show)komutunu çağırarak Anahtar Kasası URI 'sini sorgulama, [az keykasa anahtar listesi-sürümlerini](/cli/azure/keyvault/key#az_keyvault_key_list-versions)çağırarak anahtar sürümü için. Ardından, önceki örnekte gösterildiği gibi, depolama hesabının şifreleme ayarlarını anahtarın yeni sürümünü kullanacak şekilde güncelleştirmek için [az Storage Account Update](/cli/azure/storage/account#az_storage_account_update) ' i çağırın.
 
 ---
 
@@ -319,7 +319,7 @@ Anahtarı PowerShell ile değiştirmek için, [set-AzStorageAccount](/powershell
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Anahtarı Azure CLı ile değiştirmek için, [müşteri tarafından yönetilen anahtarlarla şifrelemeyi yapılandırma](#configure-encryption-with-customer-managed-keys) bölümünde gösterildiği gibi [az Storage Account Update](/cli/azure/storage/account#az-storage-account-update) çağrısı yapın ve yeni anahtar adını ve sürümünü sağlayın. Yeni anahtar farklı bir anahtar kasasında ise, Anahtar Kasası URI 'sini de güncelleştirmeniz gerekir.
+Anahtarı Azure CLı ile değiştirmek için, [müşteri tarafından yönetilen anahtarlarla şifrelemeyi yapılandırma](#configure-encryption-with-customer-managed-keys) bölümünde gösterildiği gibi [az Storage Account Update](/cli/azure/storage/account#az_storage_account_update) çağrısı yapın ve yeni anahtar adını ve sürümünü sağlayın. Yeni anahtar farklı bir anahtar kasasında ise, Anahtar Kasası URI 'sini de güncelleştirmeniz gerekir.
 
 ---
 
@@ -342,7 +342,7 @@ Remove-AzKeyVaultAccessPolicy -VaultName $keyVault.VaultName `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Anahtar Kasası erişim ilkesini kaldırarak müşteri tarafından yönetilen anahtarları iptal edebilirsiniz. Azure CLı ile müşteri tarafından yönetilen bir anahtarı iptal etmek için, aşağıdaki örnekte gösterildiği gibi [az keykasa Delete-Policy](/cli/azure/keyvault#az-keyvault-delete-policy) komutunu çağırın. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi ve önceki örneklerde tanımlanan değişkenleri kullanmayı unutmayın.
+Anahtar Kasası erişim ilkesini kaldırarak müşteri tarafından yönetilen anahtarları iptal edebilirsiniz. Azure CLı ile müşteri tarafından yönetilen bir anahtarı iptal etmek için, aşağıdaki örnekte gösterildiği gibi [az keykasa Delete-Policy](/cli/azure/keyvault#az_keyvault_delete_policy) komutunu çağırın. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi ve önceki örneklerde tanımlanan değişkenleri kullanmayı unutmayın.
 
 ```azurecli-interactive
 az keyvault delete-policy \
@@ -375,7 +375,7 @@ Set-AzStorageAccount -ResourceGroupName $storageAccount.ResourceGroupName `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Müşteri tarafından yönetilen anahtarları Azure CLı ile devre dışı bırakmak için, aşağıdaki örnekte gösterildiği gibi [az Storage Account Update](/cli/azure/storage/account#az-storage-account-update) çağırın ve `--encryption-key-source parameter` öğesini olarak ayarlayın `Microsoft.Storage` . Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi ve önceki örneklerde tanımlanan değişkenleri kullanmayı unutmayın.
+Müşteri tarafından yönetilen anahtarları Azure CLı ile devre dışı bırakmak için, aşağıdaki örnekte gösterildiği gibi [az Storage Account Update](/cli/azure/storage/account#az_storage_account_update) çağırın ve `--encryption-key-source parameter` öğesini olarak ayarlayın `Microsoft.Storage` . Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi ve önceki örneklerde tanımlanan değişkenleri kullanmayı unutmayın.
 
 ```azurecli-interactive
 az storage account update

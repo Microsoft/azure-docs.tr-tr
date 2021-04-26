@@ -5,13 +5,13 @@ ms.service: logic-apps
 ms.reviewer: estfan, logicappspm, azla
 ms.topic: how-to
 ms.custom: subject-cost-optimization
-ms.date: 01/29/2021
-ms.openlocfilehash: 44351497ed58c8d49404c094f6800b52186edabb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 03/24/2021
+ms.openlocfilehash: ec2e1098df4c21704ee7c17852b893630cd3fd27
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101709640"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107761826"
 ---
 # <a name="plan-and-manage-costs-for-azure-logic-apps"></a>Azure Logic Apps maliyetlerini planlayın ve yönetin
 
@@ -210,7 +210,7 @@ Otherwise, if no other cost-saving recommendations or best practices exist to re
 
 Logic APS ve ilgili kaynaklarınızın maliyetlerini düşürmenize yardımcı olmak için şu seçenekleri deneyin:
 
-* Mümkünse, [yerleşik Tetikleyiciler ve eylemler](../connectors/apis-list.md#built-in)kullanın; Bu işlem, [yönetilen bağlayıcı tetikleyicilerine ve eylemlerine](../connectors/apis-list.md#managed-connectors)göre yürütme başına çalıştırılması gereken maliyeti azaltır.
+* Mümkünse, [yerleşik Tetikleyiciler ve eylemler](../connectors/built-in.md)kullanın; Bu işlem, [yönetilen bağlayıcı tetikleyicilerine ve eylemlerine](../connectors/managed.md)göre yürütme başına çalıştırılması gereken maliyeti azaltır.
 
   Örneğin, [http eylemini](../connectors/connectors-native-http.md) kullanarak veya [Azure işlevleri hizmetini](../azure-functions/functions-overview.md) kullanarak oluşturduğunuz bir Işlevi çağırarak ve [yerleşik Azure işlevleri eylemini](../logic-apps/logic-apps-azure-functions.md)kullanarak diğer kaynaklara erişirken maliyetleri azaltabilirsiniz. Ancak Azure Işlevleri 'nin kullanılması de maliyet doğurur, bu nedenle seçeneklerinizi karşılaştırdığınızdan emin olun.
 

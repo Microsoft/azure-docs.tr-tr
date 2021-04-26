@@ -6,12 +6,12 @@ ms.service: hpc-cache
 ms.topic: how-to
 ms.date: 09/30/2020
 ms.author: v-erkel
-ms.openlocfilehash: 63a179f7123f088c9c60fbfb8996a5b21d1c704d
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 02934a1943ef37d282dd2a2e7862c5695bbd6ecb
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104773275"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862714"
 ---
 # <a name="create-an-azure-hpc-cache"></a>Azure HPC önbelleği oluşturma
 
@@ -107,7 +107,7 @@ Oluşturma tamamlandığında, yeni Azure HPC önbellek örneğinin bağlantıs�
 > [!NOTE]
 > Azure CLı Şu anda müşteri tarafından yönetilen şifreleme anahtarlarıyla bir önbellek oluşturmayı desteklemiyor. Azure portalını kullanın.
 
-Yeni bir Azure HPC önbelleği oluşturmak için [az HPC-Cache Create](/cli/azure/ext/hpc-cache/hpc-cache#ext-hpc-cache-az-hpc-cache-create) komutunu kullanın.
+Yeni bir Azure HPC önbelleği oluşturmak için [az HPC-Cache Create](/cli/azure/hpc-cache#az_hpc_cache_create) komutunu kullanın.
 
 Bu değerleri sağlayın:
 
@@ -126,7 +126,7 @@ nets/<cache_subnet_name>"``
   * Önbellek boyutu (GB olarak)
   * Önbellek altyapısında kullanılan sanal makinelerin SKU 'SU
 
-  [az HPC-Cache SKU listesi](/cli/azure/ext/hpc-cache/hpc-cache/skus) , kullanılabilir SKU 'ları ve her biri için geçerli önbellek boyutu seçeneklerini gösterir. Önbellek boyutu seçenekleri 3 TB ile 48 TB arasındadır, ancak yalnızca bazı değerler desteklenir.
+  [az HPC-Cache SKU listesi](/cli/azure/hpc-cache/skus) , kullanılabilir SKU 'ları ve her biri için geçerli önbellek boyutu seçeneklerini gösterir. Önbellek boyutu seçenekleri 3 TB ile 48 TB arasındadır, ancak yalnızca bazı değerler desteklenir.
 
   Bu grafik, bu belgenin hazırlanması sırasında hangi önbellek boyutunun ve SKU birleşimlerinin geçerli olduğunu gösterir (2020 Temmuz).
 

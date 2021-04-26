@@ -7,13 +7,13 @@ ms.service: virtual-desktop
 ms.topic: how-to
 ms.date: 10/09/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 968f82a143872fd282222539ab71a70db488a20d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: 18089bc00e9d02087acb149511fbc2c55077c153
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91935771"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106446936"
 ---
 # <a name="set-up-a-business-continuity-and-disaster-recovery-plan"></a>İş sürekliliği ve olağanüstü durum kurtarma planı ayarlama
 

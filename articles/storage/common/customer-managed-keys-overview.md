@@ -5,25 +5,28 @@ description: Depolama hesabınızdaki verileri korumak için kendi şifreleme an
 services: storage
 author: tamram
 ms.service: storage
-ms.date: 03/23/2021
+ms.date: 03/30/2021
 ms.topic: conceptual
 ms.author: tamram
 ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: 72f7130aad12ee2b5d463195b0b5c7847022bdfd
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 07f8faf503bdea6be8263afa6240594956b61391
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645163"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106059455"
 ---
 # <a name="customer-managed-keys-for-azure-storage-encryption"></a>Azure depolama şifrelemesi için müşteri tarafından yönetilen anahtarlar
 
 Depolama hesabınızdaki verileri korumak için kendi şifreleme anahtarınızı kullanabilirsiniz. Müşteri tarafından yönetilen bir anahtar belirttiğinizde verilerinizi şifrelemek ve verilerinize erişimi denetlemek için bu anahtar kullanılır. Müşteri tarafından yönetilen anahtarlar erişim denetimlerini yönetmek için çok daha fazla esneklik sunar.
 
-Müşteri tarafından yönetilen anahtarlarınızın depolanması için Azure Key Vault ya da Azure Key Vault yönetilen donanım güvenlik modülünü (HSM) (Önizleme) kullanmanız gerekir. Kendi anahtarlarınızı oluşturabilir ve bunları anahtar kasasında veya yönetilen HSM 'de saklayabilir ya da anahtarlar oluşturmak için Azure Key Vault API 'Lerini kullanabilirsiniz. Depolama hesabı ve Anahtar Kasası ya da yönetilen HSM aynı bölgede ve aynı Azure Active Directory (Azure AD) kiracısında olmalıdır, ancak farklı aboneliklerde olabilir.
+Müşteri tarafından yönetilen anahtarlarınızı depolamak için aşağıdaki Azure anahtar depolarından birini kullanmanız gerekir:
 
-Azure Key Vault hakkında daha fazla bilgi için bkz. [Azure Key Vault nedir?](../../key-vault/general/overview.md).
+- [Azure Key Vault](../../key-vault/general/overview.md)
+- [Azure Key Vault yönetilen donanım güvenlik modülü (HSM) (Önizleme)](../../key-vault/managed-hsm/overview.md)
+
+Kendi anahtarlarınızı oluşturabilir ve bunları anahtar kasasında veya yönetilen HSM 'de saklayabilir ya da anahtarlar oluşturmak için Azure Key Vault API 'Lerini kullanabilirsiniz. Depolama hesabı ve Anahtar Kasası ya da yönetilen HSM aynı bölgede ve aynı Azure Active Directory (Azure AD) kiracısında olmalıdır, ancak farklı aboneliklerde olabilir.
 
 > [!IMPORTANT]
 >

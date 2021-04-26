@@ -3,12 +3,12 @@ title: Azure Red Hat OpenShift v3. x ' i kapsayıcı öngörüleri ile yapıland
 description: Bu makalede, Azure Red Hat OpenShift sürüm 3 ve üzerinde barındırılan Azure Izleyici ile bir Kubernetes kümesi izlemenin nasıl yapılandırılacağı açıklanır.
 ms.topic: conceptual
 ms.date: 06/30/2020
-ms.openlocfilehash: b46dfda0bdb0f3b582aa751786187a4d74524f75
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a2910655601548f39983547e12460d949901954d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101708382"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784686"
 ---
 # <a name="configure-azure-red-hat-openshift-v3-with-container-insights"></a>Azure Red Hat OpenShift v3 'i kapsayıcı öngörüleri ile yapılandırma
 
@@ -30,7 +30,7 @@ Kapsayıcı öngörüleri, Azure Kubernetes hizmeti (AKS) ve AKS motoru kümeler
 Azure Red Hat Openshıft 'in yeni veya bir veya daha fazla dağıtımı için, aşağıdaki desteklenen yöntemler kullanılarak kapsayıcı öngörüleri etkinleştirilebilir:
 
 - Azure portal veya Azure Resource Manager şablonu kullanarak var olan bir küme için.
-- Azure Resource Manager şablonu kullanan yeni bir küme için veya [Azure CLI](/cli/azure/openshift#az-openshift-create)kullanarak yeni bir küme oluştururken.
+- Azure Resource Manager şablonu kullanan yeni bir küme için veya [Azure CLI](/cli/azure/openshift#az_openshift_create)kullanarak yeni bir küme oluştururken.
 
 ## <a name="supported-and-unsupported-features"></a>Desteklenen ve desteklenmeyen özellikler
 

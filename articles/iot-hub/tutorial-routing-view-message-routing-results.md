@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.date: 03/25/2018
 ms.author: robinsh
 ms.custom: mvc, devx-track-csharp
-ms.openlocfilehash: f441a1cf97c069c4755b436bbb8cb9268b469eb3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 7d6b5f02a752e7bbdc1d4da83b60b1a86aba5626
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102199756"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775034"
 ---
 # <a name="tutorial-part-2---view-the-routed-messages"></a>Öğretici: 2. Bölüm-yönlendirilmiş iletileri görüntüleme
 
@@ -282,7 +282,7 @@ Bu öğreticinin her iki bölümünde da oluşturduğunuz tüm Azure kaynakları
 
 ### <a name="use-the-azure-cli-to-clean-up-resources"></a>Azure CLı kullanarak kaynakları Temizleme
 
-Kaynak grubunu kaldırmak için [az group delete](/cli/azure/group#az-group-delete) komutunu kullanın. `$resourceGroup` Bu öğreticinin başlangıcında **Contosoresources** olarak yeniden ayarlandı.
+Kaynak grubunu kaldırmak için [az group delete](/cli/azure/group#az_group_delete) komutunu kullanın. `$resourceGroup` Bu öğreticinin başlangıcında **Contosoresources** olarak yeniden ayarlandı.
 
 ```azurecli-interactive
 az group delete --name $resourceGroup

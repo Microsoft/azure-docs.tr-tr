@@ -7,13 +7,13 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
-ms.date: 04/30/2020
-ms.openlocfilehash: f16f3ec445af777c3bde1cb2ab0735df4b6614f8
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/13/2021
+ms.openlocfilehash: 12724175ebb9e23efa431169c01a804cd193cdd5
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "91542249"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107502598"
 ---
 # <a name="machine-learning-entity"></a>Makine öğrenimi varlığı
 
@@ -346,6 +346,6 @@ Bu varlık v2 tahmin çalışma zamanında kullanılamıyor.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Eğitim](tutorial-machine-learned-entity.md), [Kavramlar](luis-concept-entity-types.md#design-entities-for-decomposition)ve [nasıl yapılır Kılavuzu](luis-how-to-add-entities.md#create-a-machine-learned-entity)dahil olmak üzere makine öğrenimi varlığı hakkında daha fazla bilgi edinin.
+[Eğitim](tutorial-machine-learned-entity.md), [Kavramlar](luis-concept-entity-types.md#machine-learned-ml-entity)ve [nasıl yapılır Kılavuzu](luis-how-to-add-entities.md#create-a-machine-learned-entity)dahil olmak üzere makine öğrenimi varlığı hakkında daha fazla bilgi edinin.
 
 [Liste](reference-entity-list.md) varlığı ve [normal ifade](reference-entity-regular-expression.md) varlığı hakkında bilgi edinin.

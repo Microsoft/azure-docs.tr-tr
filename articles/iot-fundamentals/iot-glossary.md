@@ -7,12 +7,12 @@ ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
 ms.date: 03/08/2021
-ms.openlocfilehash: d7ae1e72dee28509c1338a1b56cf42a5293af9bf
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a45b8db1f17ead8e55bac2b2bf82aa44cb7f080e
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104670265"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304723"
 ---
 # <a name="glossary-of-iot-terms"></a>IoT terimleri sözlüğü
 
@@ -435,6 +435,12 @@ Modül kimliği ve modül ikizi, [cihaz kimliği](#device-identity) ve [cihaz ik
 [MQTT](https://mqtt.org/) , cihazlarla iletişim kurmak için [IoT Hub](#iot-hub) desteklediği mesajlaşma protokollerinden biridir. IoT Hub desteklediği mesajlaşma protokolleri hakkında daha fazla bilgi için, bkz. [IoT Hub ile Ileti gönderme ve alma](../iot-hub/iot-hub-devguide-messaging.md).
 
 ## <a name="o"></a>O
+
+### <a name="ontology"></a>Ontology
+
+Belirli bir etki alanı için, örneğin Emlak, akıllı şehir, IoT sistemleri, enerji kılavuzları ve daha fazlası gibi modeller kümesi. Ontoloiler, endüstri standartlarına ve en iyi yöntemlere dayalı bir başlangıç noktası sağladığından [Azure dijital TWINS](#azure-digital-twins)'teki gibi bilgi grafikler için genellikle şemalar olarak kullanılır.
+
+Ontolo, hakkında daha fazla bilgi için bkz. [ontology nedir?](../digital-twins/concepts-ontologies.md)
 
 ### <a name="operations-monitoring"></a>İşlemleri izleme
 

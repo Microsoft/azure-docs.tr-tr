@@ -1,15 +1,15 @@
 ---
 title: "Hızlı başlangıç: Azure RTOS için Defender-IoT-Micro-Agent 'ı yapılandırma ve etkinleştirme"
-description: Azure IoT Hub Azure RTOS hizmeti için Defender-IoT-mikro-Agent ' ı eklemeyi ve etkinleştirmeyi öğrenin.
+description: Bu hızlı başlangıçta, Azure IoT Hub Azure RTOS hizmeti için Defender-IoT-mikro-Agent ' ı eklemeyi ve etkinleştirmeyi öğrenin.
 services: defender-for-iot
 ms.topic: quickstart
 ms.date: 01/24/2021
-ms.openlocfilehash: db0fc0be3cd10bc57a46cb5a056ca5e057ae255a
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 0575e9303068b203a5d8cd51c8a8cc1843de6f4d
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104781169"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384644"
 ---
 # <a name="quickstart-defender-iot-micro-agent-for-azure-rtos-preview"></a>Hızlı başlangıç: Defender-IoT-mikro-aracı Azure RTOS (Önizleme)
 

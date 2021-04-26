@@ -1,14 +1,14 @@
 ---
 title: Özel uyarılar oluşturma
 description: IoT güvenlik hizmeti için Azure Defender için özel cihaz uyarılarını anlayın, oluşturun ve atayın.
-ms.topic: quickstart
+ms.topic: how-to
 ms.date: 09/04/2020
-ms.openlocfilehash: 836619fa200983bc91d26db4d063e8545b11a1b5
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 5d9bb7811396579ec9096715809a101aebbf36a3
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104781050"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384553"
 ---
 # <a name="create-custom-alerts"></a>Özel uyarılar oluşturma
 

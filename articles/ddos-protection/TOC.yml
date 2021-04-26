@@ -35,6 +35,8 @@
       href: ddos-response-strategy.md
     - name: Başvuru mimarileri
       href: ddos-protection-reference-architectures.md
+    - name: İş sürekliliği
+      href: ddos-disaster-recovery-guidance.md
     - name: Güvenlik temeli
       href: ../security/fundamentals/ddos-protection-security-baseline.md?toc=%2fazure%2fddos-protection%2ftoc.json
 - name: Nasıl yapılır kılavuzları
@@ -49,6 +51,8 @@
       href: ddos-protection-partner-onboarding.md
 - name: Başvuru
   items:
+    - name: Azure İlkesi yerleşik ilkeler
+      href: policy-reference.md
     - name: Azure CLI
       href: /cli/azure/network/ddos-protection
     - name: Azure PowerShell

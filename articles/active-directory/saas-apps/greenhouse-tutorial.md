@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 11/25/2020
+ms.date: 03/26/2021
 ms.author: jeedes
-ms.openlocfilehash: 77f72d6c63231f0854b58470f86c65ffc81c9775
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6a14b16e34faa827228594bf6d4f0bd9ed48cf72
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98731928"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106221764"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-greenhouse"></a>Öğretici: Çevhouse ile tümleştirme Azure Active Directory
 
@@ -40,7 +40,7 @@ Başlamak için aşağıdaki öğeler gereklidir:
 
 Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* Çevhouse, **SP** tarafından başlatılan SSO 'yu destekler
+* Çevhouse **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler.
 
 ## <a name="adding-greenhouse-from-the-gallery"></a>Galeriden Çevhouse ekleme
 
@@ -73,18 +73,28 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
 1. Azure portal, **Çevhouse** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
 1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
-1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** kalem simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
+1. **Temel SAML yapılandırması** bölümünde, **IDP** tarafından başlatılan modda uygulamayı yapılandırmak istiyorsanız aşağıdaki alanlar için değerleri girin:
 
-    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<companyname>.greenhouse.io`
+    a. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<COMPANYNAME>.greenhouse.io`
 
-    b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<companyname>.greenhouse.io`
+    b. **Yanıt URL 'si** metin kutusuna aşağıdaki desenlerden birini kullanarak bir URL yazın:
+    
+    | Yanıt URL'si|
+    | -------------- |
+    | `https://<COMPANYNAME>.greenhouse.io/users/saml/consume` |
+    | `https://app.greenhouse.io/<ENTITY ID>/users/saml/consume` |
+    |
+
+1. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
+
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<COMPANYNAME>.greenhouse.io`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için, [Çevhouse istemci destek ekibine](https://www.greenhouse.io/contact) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
+    > Bu değerler gerçek değildir. Bu değerleri gerçek tanımlayıcı, yanıt URL 'si ve oturum açma URL 'SI ile güncelleştirin. Bu değerleri almak için, [Çevhouse istemci destek ekibine](https://www.greenhouse.io/contact) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
 4. **SAML Ile tek Sign-On ayarlama** sayfasında, **SAML imza sertifikası** bölümünde, **Federasyon meta veri XML** 'sini gereksiniminize göre belirtilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
@@ -127,7 +137,7 @@ Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak, Çevhouse 'a er
 
     ![SSO sayfası ekran görüntüsü](./media/greenhouse-tutorial/configure.png)
 
-1. Tek Sign-On sayfasında aşağıdaki adımları gerçekleştirin.
+1. **Çoklu oturum açma** sayfasında aşağıdaki adımları gerçekleştirin.
 
     ![SSO yapılandırma sayfası için ekran görüntüsü](./media/greenhouse-tutorial/sso-page.png)
 
@@ -146,7 +156,7 @@ Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak, Çevhouse 'a er
     >[!NOTE]
     >Alternatif olarak, **Dosya Seç** seçeneğine tıklayarak **Federasyon meta veri XML** dosyasını da karşıya yükleyebilirsiniz.
 
-### <a name="create-greenhouse-test-user"></a>Doğa test kullanıcısı oluşturma
+### <a name="create-greenhouse-test-user&quot;></a>Doğa test kullanıcısı oluşturma
 
 Azure AD kullanıcılarının, Çevhouse 'da oturum açmasını sağlamak için, bunların bir Çevhouse 'a sağlanması gerekir. Büyük bir örnekte, sağlama işlemi el ile gerçekleştirilen bir görevdir.
 
@@ -159,7 +169,7 @@ Azure AD kullanıcılarının, Çevhouse 'da oturum açmasını sağlamak için,
 
 2. **Yeni kullanıcılar > yapılandırma > kullanıcılara** git
    
-    ![Kullanıcılar](./media/greenhouse-tutorial/create-user-1.png "Kullanıcılar")
+    ![Kullanıcılar](./media/greenhouse-tutorial/create-user-1.png &quot;Kullanıcılar")
 
 4. **Yeni Kullanıcı Ekle** bölümünde aşağıdaki adımları uygulayın:
    
@@ -172,15 +182,22 @@ Azure AD kullanıcılarının, Çevhouse 'da oturum açmasını sağlamak için,
       >[!NOTE]
       >Azure Active Directory hesap sahipleri, hesabı etkin hale gelmeden önce onaylama bağlantısı içeren bir e-posta alır.
 
-### <a name="test-sso"></a>Test SSO 'SU 
+## <a name="test-sso"></a>Test SSO 'SU 
 
 Bu bölümde, Azure AD çoklu oturum açma yapılandırmanızı aşağıdaki seçeneklerle test edersiniz. 
 
-* Azure portal içinde **Bu uygulamayı test et** ' e tıklayın. Bu işlem, oturum açma akışını başlatabileceğiniz bir Şhouse oturum açma URL 'sine yönlendirecektir. 
+#### <a name="sp-initiated"></a>SP başlatıldı:
+
+* Azure portal içinde **Bu uygulamayı test et** ' e tıklayın. Bu, oturum açma akışını başlatabileceğiniz Yeşilhouse oturum açma URL 'sine yeniden yönlendirilir.  
 
 * Doğrudan sağ taraf oturum açma URL 'sine gidin ve oturum açma akışını buradan başlatın.
 
-* Microsoft My Apps ' i kullanabilirsiniz. Uygulamalarım içindeki Çevhouse kutucuğuna tıkladığınızda bu işlem, bu URL 'yi sağ taraf oturum açma URL 'sine yönlendirir. Uygulamalarım hakkında daha fazla bilgi için bkz. [uygulamalarıma giriş](../user-help/my-apps-portal-end-user-access.md).
+#### <a name="idp-initiated"></a>IDP başlatıldı:
+
+* Azure portal ' de **Bu uygulamayı test et** ' e tıklayın ve SSO 'Yu ayarladığınız çevet 'de otomatik olarak oturum açmış olmanız gerekir 
+
+Uygulamayı dilediğiniz modda test etmek için Microsoft My Apps ' i de kullanabilirsiniz. Uygulamalarım içindeki Çevhouse kutucuğuna tıkladığınızda, SP modunda yapılandırıldıysa, oturum açma akışını başlatmak için uygulama oturum açma sayfasına yönlendirilirsiniz ve ıDP modunda yapılandırıldıysa, SSO 'yu ayarladığınız Kstaya otomatik olarak oturum açmış olmanız gerekir. Uygulamalarım hakkında daha fazla bilgi için bkz. [uygulamalarıma giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

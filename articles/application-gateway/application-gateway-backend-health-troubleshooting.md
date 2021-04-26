@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.topic: troubleshooting
 ms.date: 06/09/2020
 ms.author: surmb
-ms.openlocfilehash: 95b74e5fc6c5d2c09ff04b3f14e920ae675ab6e1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8664f9327af37345c7104c65b2521212669ae806
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99592764"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786335"
 ---
 <a name="troubleshoot-backend-health-issues-in-application-gateway"></a>Application Gateway'de arka uç durumu sorunlarını giderme
 ==================================================
@@ -24,7 +24,7 @@ Varsayılan olarak Azure Application Gateway, arka uç sunucularını inceleyere
 
 ### <a name="how-to-check-backend-health"></a>Arka uç durumunu denetleme
 
-Arka uç havuzunuzun durumunu denetlemek için Azure portal **arka uç sistem durumu** sayfasını kullanabilirsiniz. Ya da [Azure PowerShell](/powershell/module/az.network/get-azapplicationgatewaybackendhealth), [CLI](/cli/azure/network/application-gateway#az-network-application-gateway-show-backend-health)veya [REST API](/rest/api/application-gateway/applicationgateways/backendhealth)kullanabilirsiniz.
+Arka uç havuzunuzun durumunu denetlemek için Azure portal **arka uç sistem durumu** sayfasını kullanabilirsiniz. Ya da [Azure PowerShell](/powershell/module/az.network/get-azapplicationgatewaybackendhealth), [CLI](/cli/azure/network/application-gateway#az_network_application_gateway_show_backend_health)veya [REST API](/rest/api/application-gateway/applicationgateways/backendhealth)kullanabilirsiniz.
 
 Bu yöntemlerin herhangi biri tarafından alınan durum aşağıdakilerden biri olabilir:
 
@@ -176,12 +176,12 @@ Ayrıca, herhangi bir NSG/UDR/güvenlik duvarının IP 'ye ve bu arka ucun bağl
 
 | **Hata** | **Eylemler** |
 | --- | --- |
-| Araştırma durum kodu uyumsuzluğu: 401 alındı | Arka uç sunucusunun kimlik doğrulaması gerektirip gerektirmediğini denetleyin. Application Gateway araştırmaları kimlik doğrulaması için kimlik bilgilerini geçiremiyor. \" \" Araştırma durum kodu eşleşmesi veya araştırmasına yönelik http 401 ' i sunucunun kimlik doğrulaması gerektirmeyen bir yola izin verin. | |
-| Araştırma durum kodu uyumsuzluğu: 403 alındı | Erişim yasak. Arka uç sunucusunda yola erişime izin verilip verilmediğini denetleyin. | |
-| Araştırma durum kodu uyumsuzluğu: 404 alındı | Sayfa bulunamadı. Ana bilgisayar adı yolunun arka uç sunucusunda erişilebilir olup olmadığını denetleyin. Ana bilgisayar adı veya yol parametresini erişilebilir bir değer olarak değiştirin. | |
-| Araştırma durum kodu uyumsuzluğu: 405 alındı | Application Gateway için araştırma istekleri HTTP GET yöntemini kullanır. Sunucunuzun bu yöntemin izin verip içermediğini denetleyin. | |
-| Araştırma durum kodu uyumsuzluğu: 500 alındı | İç sunucu hatası. Arka uç sunucusunun sistem durumunu ve hizmetlerin çalışıp çalışmadığını denetleyin. | |
-| Araştırma durum kodu uyumsuzluğu: 503 alındı | Hizmet kullanılamıyor. Arka uç sunucusunun sistem durumunu ve hizmetlerin çalışıp çalışmadığını denetleyin. | |
+| Araştırma durum kodu uyumsuzluğu: 401 alındı | Arka uç sunucusunun kimlik doğrulaması gerektirip gerektirmediğini denetleyin. Application Gateway araştırmaları kimlik doğrulaması için kimlik bilgilerini geçiremiyor. \" \" Araştırma durum kodu eşleşmesi veya araştırmasına yönelik http 401 ' i sunucunun kimlik doğrulaması gerektirmeyen bir yola izin verin. |
+| Araştırma durum kodu uyumsuzluğu: 403 alındı | Erişim yasak. Arka uç sunucusunda yola erişime izin verilip verilmediğini denetleyin. |
+| Araştırma durum kodu uyumsuzluğu: 404 alındı | Sayfa bulunamadı. Ana bilgisayar adı yolunun arka uç sunucusunda erişilebilir olup olmadığını denetleyin. Ana bilgisayar adı veya yol parametresini erişilebilir bir değer olarak değiştirin. |
+| Araştırma durum kodu uyumsuzluğu: 405 alındı | Application Gateway için araştırma istekleri HTTP GET yöntemini kullanır. Sunucunuzun bu yöntemin izin verip içermediğini denetleyin. |
+| Araştırma durum kodu uyumsuzluğu: 500 alındı | İç sunucu hatası. Arka uç sunucusunun sistem durumunu ve hizmetlerin çalışıp çalışmadığını denetleyin. |
+| Araştırma durum kodu uyumsuzluğu: 503 alındı | Hizmet kullanılamıyor. Arka uç sunucusunun sistem durumunu ve hizmetlerin çalışıp çalışmadığını denetleyin. |
 
 Ya da yanıtın meşru olduğunu düşünüyorsanız ve Application Gateway diğer durum kodlarını sağlıklı olarak kabul etmek istiyorsanız, özel bir araştırma oluşturabilirsiniz. Bu yaklaşım, arka uç Web sitesinin kimlik doğrulaması gereken durumlarda yararlıdır. Araştırma istekleri herhangi bir kullanıcı kimlik bilgisi taşımadığından, bunlar başarısız olur ve arka uç sunucusu tarafından bir HTTP 401 durum kodu döndürülür.
 

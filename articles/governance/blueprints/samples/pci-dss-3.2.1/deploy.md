@@ -1,14 +1,14 @@
 ---
 title: Dağıtım PCI-DSS v 3.2.1 şema örneği
 description: Ödeme kartı sektör verileri güvenliği standart v 3.2.1 şema örneği için adımları dağıtın ve şema yapıtı parametresi ayrıntıları dahil.
-ms.date: 01/08/2021
+ms.date: 04/02/2021
 ms.topic: sample
-ms.openlocfilehash: 37e39231ee7395b951f69035cd98f2e14028ba1c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: da247a77ab347fffab21ce7614440bc11595e97e
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98045062"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106386132"
 ---
 # <a name="deploy-the-pci-dss-v321-blueprint-sample"></a>PCI DSS v 3.2.1 şema örneğini dağıtma
 

@@ -3,12 +3,12 @@ title: Dağıtım geçmişi silme işlemleri
 description: Azure Resource Manager dağıtım geçmişinden dağıtımları otomatik olarak silme işlemini açıklar. Geçmiş 800 sınırını aşmaya yakın olduğunda dağıtımlar silinir.
 ms.topic: conceptual
 ms.date: 03/23/2021
-ms.openlocfilehash: fc4f7f33cdd7ccce3158aa95bd002f12c8c44c00
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: b55c022c35c43be6818bb3c551d5db85b1927ebb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104951972"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781856"
 ---
 # <a name="automatic-deletions-from-deployment-history"></a>Dağıtım geçmişinden otomatik silme işlemleri
 
@@ -84,7 +84,7 @@ Otomatik silme işlemlerini yeniden etkinleştirmek için Azure REST API veya Az
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı için [az Feature Register](/cli/azure/feature#az-feature-register)kullanın.
+Azure CLı için [az Feature Register](/cli/azure/feature#az_feature_register)kullanın.
 
 ```azurecli-interactive
 az feature register --namespace Microsoft.Resources --name DisableDeploymentGrooming
@@ -96,7 +96,7 @@ Aboneliğinizin geçerli durumunu görmek için şunu kullanın:
 az feature show --namespace Microsoft.Resources --name DisableDeploymentGrooming
 ```
 
-Otomatik silme işlemlerini yeniden etkinleştirmek için [az Feature Unregister](/cli/azure/feature#az-feature-unregister)kullanın.
+Otomatik silme işlemlerini yeniden etkinleştirmek için [az Feature Unregister](/cli/azure/feature#az_feature_unregister)kullanın.
 
 ```azurecli-interactive
 az feature unregister --namespace Microsoft.Resources --name DisableDeploymentGrooming

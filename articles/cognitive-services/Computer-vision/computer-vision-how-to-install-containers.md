@@ -8,31 +8,28 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: computer-vision
 ms.topic: conceptual
-ms.date: 03/02/2021
+ms.date: 04/09/2021
 ms.author: aahi
 ms.custom: seodec18, cog-serv-seo-aug-2020
 keywords: Şirket içi, OCR, Docker, kapsayıcı
-ms.openlocfilehash: 1c9e681e3c02cb65b2a54070cc778051a0e7ac53
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: dead48d7d449d1d403359c518eb842b32a54c634
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102432562"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107779102"
 ---
-# <a name="install-read-ocr-docker-containers-preview"></a>Okuma OCR Docker kapsayıcılarını (Önizleme) yükler 
+# <a name="install-read-ocr-docker-containers"></a>Okuma OCR Docker Kapsayıcıları 'nı yükler
 
 [!INCLUDE [container hosting on the Microsoft Container Registry](../containers/includes/gated-container-hosting.md)]
 
 Kapsayıcılar, Görüntü İşleme API’lerini kendi ortamınızda çalıştırmanızı sağlar. Kapsayıcılar, belirli güvenlik ve veri idare gereksinimleri için çok kullanışlıdır. Bu makalede Görüntü İşleme kapsayıcıları indirme, yükleme ve çalıştırma hakkında bilgi edineceksiniz.
 
-*Okuma* OCR KAPSAYıCıSı, JPEG, PNG, BMP, PDF ve TIFF dosya biçimleri desteğiyle, görüntülerden ve belgelerden yazdırılmış ve el yazısı metinleri ayıklamanızı sağlar. Daha fazla bilgi için bkz. [okuma API 'si belgeleri](concept-recognizing-text.md#read-api).
+*Okuma* OCR KAPSAYıCıSı, JPEG, PNG, BMP, PDF ve TIFF dosya biçimleri desteğiyle, görüntülerden ve belgelerden yazdırılmış ve el yazısı metinleri ayıklamanızı sağlar. Daha fazla bilgi için bkz. [API nasıl yapılır Kılavuzu](Vision-API-How-to-Topics/call-read-api.md).
 
-## <a name="read-32-preview-container"></a>Okuma 3,2-Önizleme kapsayıcısı
+## <a name="read-32-container"></a>3,2 kapsayıcısını oku
 
-> [!NOTE]
-> Okuma 3,0-Önizleme kapsayıcısı kullanım dışı bırakılmıştır. 
-
-Okuma 3,2-Önizleme OCR kapsayıcısı şunları sağlar:
+Okuma 3,2 OCR kapsayıcısı şunları sağlar:
 * Gelişmiş doğruluk için yeni modeller.
 * Aynı belge içinde birden çok dil desteği.
 * Toplam 73 dil desteği. [OCR tarafından desteklenen dillerin](./language-support.md#optical-character-recognition-ocr)tam listesine bakın.
@@ -62,7 +59,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 Kapsayıcıyı çalıştırmak için onay istemek üzere [istek formunu](https://aka.ms/csgate) doldurun ve iletin. 
 
-[!INCLUDE [Request access to public preview](../../../includes/cognitive-services-containers-request-access.md)]
+[!INCLUDE [Request access to run the container](../../../includes/cognitive-services-containers-request-access.md)]
 
 [!INCLUDE [Gathering required container parameters](../containers/includes/container-gathering-required-parameters.md)]
 
@@ -92,16 +89,16 @@ Okuma için kapsayıcı görüntüleri kullanılabilir.
 | Kapsayıcı | Container Registry/depo/görüntü adı |
 |-----------|------------|
 | Okuma 2,0-Önizleme | `mcr.microsoft.com/azure-cognitive-services/vision/read:2.0-preview` |
-| Okuma 3,2-Önizleme | `mcr.microsoft.com/azure-cognitive-services/vision/read:3.2-preview.2` |
+| 3,2 okuyun | `mcr.microsoft.com/azure-cognitive-services/vision/read:3.2` |
 
 [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull/)Bir kapsayıcı görüntüsünü indirmek için komutunu kullanın.
 
-### <a name="docker-pull-for-the-read-container"></a>Okuma kapsayıcısı için Docker çekme
+### <a name="docker-pull-for-the-read-ocr-container"></a>Okuma OCR kapsayıcısı için Docker çekme
 
-# <a name="version-32-preview"></a>[Sürüm 3,2-Önizleme](#tab/version-3-2)
+# <a name="version-32"></a>[Sürüm 3,2](#tab/version-3-2)
 
 ```bash
-docker pull mcr.microsoft.com/azure-cognitive-services/vision/read:3.2-preview.2
+docker pull mcr.microsoft.com/azure-cognitive-services/vision/read:3.2
 ```
 
 # <a name="version-20-preview"></a>[Sürüm 2,0-Önizleme](#tab/version-2)
@@ -127,11 +124,11 @@ Kapsayıcıyı çalıştırmak için [Docker Run](https://docs.docker.com/engine
 
 Komut [örnekleri](computer-vision-resource-container-config.md#example-docker-run-commands) `docker run` mevcuttur.
 
-# <a name="version-32-preview"></a>[Sürüm 3,2-Önizleme](#tab/version-3-2)
+# <a name="version-32"></a>[Sürüm 3,2](#tab/version-3-2)
 
 ```bash
 docker run --rm -it -p 5000:5000 --memory 18g --cpus 8 \
-mcr.microsoft.com/azure-cognitive-services/vision/read:3.2-preview.2 \
+mcr.microsoft.com/azure-cognitive-services/vision/read:3.2 \
 Eula=accept \
 Billing={ENDPOINT_URI} \
 ApiKey={API_KEY}
@@ -139,7 +136,7 @@ ApiKey={API_KEY}
 
 Şu komut:
 
-* Kapsayıcı görüntüsünden okuma kapsayıcısını çalıştırır.
+* Kapsayıcı görüntüsünden OCR kapsayıcısını oku ' nı çalıştırır.
 * 8 CPU çekirdeği ve 18 gigabayt (GB) bellek ayırır.
 * TCP bağlantı noktası 5000 ' i gösterir ve kapsayıcı için bir sözde TTY ayırır.
 * Kapsayıcıyı çıktıktan sonra otomatik olarak kaldırır. Kapsayıcı görüntüsü hala ana bilgisayarda kullanılabilir.
@@ -156,7 +153,7 @@ ApiKey={API_KEY}
 
 Şu komut:
 
-* Kapsayıcı görüntüsünden okuma kapsayıcısını çalıştırır.
+* Kapsayıcı görüntüsünden OCR kapsayıcısını oku ' nı çalıştırır.
 * 8 CPU çekirdeği ve 16 gigabayt (GB) bellek ayırır.
 * TCP bağlantı noktası 5000 ' i gösterir ve kapsayıcı için bir sözde TTY ayırır.
 * Kapsayıcıyı çıktıktan sonra otomatik olarak kaldırır. Kapsayıcı görüntüsü hala ana bilgisayarda kullanılabilir.
@@ -189,9 +186,9 @@ Bağlantı dizenizi bulmak için:
 
 Kapsayıcı REST tabanlı sorgu tahmin uç noktası API’lerini sağlar. 
 
-# <a name="version-32-preview"></a>[Sürüm 3,2-Önizleme](#tab/version-3-2)
+# <a name="version-32"></a>[Sürüm 3,2](#tab/version-3-2)
 
-Kapsayıcı API’leri için `http://localhost:5000` konağını kullanın. Swagger yolunu şurada görebilirsiniz: `http://localhost:5000/swagger/vision-v3.2-preview-read/swagger.json` .
+Kapsayıcı API’leri için `http://localhost:5000` konağını kullanın. Swagger yolunu şurada görebilirsiniz: `http://localhost:5000/swagger/vision-v3.2-read/swagger.json` .
 
 # <a name="version-20-preview"></a>[Sürüm 2,0-Önizleme](#tab/version-2)
 
@@ -202,7 +199,7 @@ Kapsayıcı API’leri için `http://localhost:5000` konağını kullanın. Swag
 ### <a name="asynchronous-read"></a>Zaman uyumsuz okuma
 
 
-# <a name="version-32-preview"></a>[Sürüm 3,2-Önizleme](#tab/version-3-2)
+# <a name="version-32"></a>[Sürüm 3,2](#tab/version-3-2)
 
 `POST /vision/v3.2/read/analyze` `GET /vision/v3.2/read/operations/{operationId}` Görüntü işleme hizmetinin ilgili Rest işlemlerini nasıl kullandığına benzer şekilde bir görüntüyü zaman uyumsuz olarak okumak için konser içindeki ve işlemlerini kullanabilirsiniz. Zaman uyumsuz POST yöntemi, `operationId` HTTP GET isteğine tanımlayıcı olarak kullanılan bir döndürür.
 
@@ -392,13 +389,13 @@ Zaman uyumsuz GÖNDERI başarıyla çalıştırıldığında, bir **HTTP 202** d
 ---
 
 > [!IMPORTANT]
-> Bir yük dengeleyicinin arkasında birden çok okuma kapsayıcısı dağıtırsanız (örneğin, Docker Compose veya Kubernetes), bir dış önbelleğiniz olması gerekir. İşlem kapsayıcısı ve GET isteği kapsayıcısı aynı olamaz, çünkü bir dış önbellek sonuçları depolar ve kapsayıcılar arasında paylaşır. Önbellek ayarları hakkında daha fazla bilgi için bkz. [görüntü işleme Docker kapsayıcılarını yapılandırma](./computer-vision-resource-container-config.md).
+> Bir yük dengeleyicinin arkasında birden çok okuma OCR kapsayıcısı dağıtırsanız (örneğin, Docker Compose veya Kubernetes), bir dış önbelleğiniz olması gerekir. İşlem kapsayıcısı ve GET isteği kapsayıcısı aynı olamaz, çünkü bir dış önbellek sonuçları depolar ve kapsayıcılar arasında paylaşır. Önbellek ayarları hakkında daha fazla bilgi için bkz. [görüntü işleme Docker kapsayıcılarını yapılandırma](./computer-vision-resource-container-config.md).
 
 ### <a name="synchronous-read"></a>Zaman uyumlu okuma
 
 Bir görüntüyü eşzamanlı olarak okumak için aşağıdaki işlemi kullanabilirsiniz. 
 
-# <a name="version-32-preview"></a>[Sürüm 3,2-Önizleme](#tab/version-3-2)
+# <a name="version-32"></a>[Sürüm 3,2](#tab/version-3-2)
 
 `POST /vision/v3.2/read/syncAnalyze` 
 
@@ -443,9 +440,9 @@ Bu seçenekler hakkında daha fazla bilgi için bkz. [kapsayıcıları yapıland
 Bu makalede, Görüntü İşleme kapsayıcıları indirmek, yüklemek ve çalıştırmak için kavramları ve iş akışını öğrendiniz. Özet:
 
 * Görüntü İşleme, Docker için bir Linux kapsayıcısı sağlar ve bu da kapsülleme okur.
-* Kapsayıcı görüntüleri, Azure 'daki "kapsayıcı önizlemesi" kapsayıcı kayıt defterinden indirilir.
+* Okuma kapsayıcı görüntüsü bir uygulamanın çalıştırmasını gerektirir. 
 * Kapsayıcı görüntüleri Docker 'da çalışır.
-* Kapsayıcının ana bilgisayar URI 'sini belirterek okuma kapsayıcılarındaki işlemleri çağırmak için REST API veya SDK kullanabilirsiniz.
+* Kapsayıcının ana bilgisayar URI 'sini belirterek, okuma OCR kapsayıcılarındaki işlemleri çağırmak için REST API ya da SDK kullanabilirsiniz.
 * Bir kapsayıcıyı örnekledikten sonra faturalandırma bilgilerini belirtmeniz gerekir.
 
 > [!IMPORTANT]
@@ -454,7 +451,7 @@ Bu makalede, Görüntü İşleme kapsayıcıları indirmek, yüklemek ve çalı�
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * Yapılandırma ayarları için [kapsayıcıları](computer-vision-resource-container-config.md) yapılandırmayı gözden geçir
-* Basılan ve el yazısı metni tanıma hakkında daha fazla bilgi edinmek için [görüntü işleme genel bakışı](overview.md) inceleyin
-* Kapsayıcı tarafından desteklenen yöntemler hakkındaki ayrıntılar için [görüntü işleme API'si](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/56f91f2e778daf14a499f21b) başvurun.
+* [OCR genel bakışını](overview-ocr.md) inceleyerek yazdırılmış ve el yazısı metin tanıma hakkında daha fazla bilgi edinin
+* Kapsayıcı tarafından desteklenen yöntemler hakkındaki ayrıntılar için [okuma API](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-ga/operations/56f91f2e778daf14a499f21b) 'sine bakın.
 * Görüntü İşleme işlevlerle ilgili sorunları çözmek için [sık sorulan sorular (SSS)](FAQ.md) bölümüne bakın.
 * Daha fazla bilişsel [Hizmetler kapsayıcısı](../cognitive-services-container-support.md) kullanın

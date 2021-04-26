@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: jocastel
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 95fe70c774b933113c94125d227976e32a9e353f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e4c8e18979ff1575e1a050244a96e7858cdce46b
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98919638"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530252"
 ---
 # <a name="azure-active-directory-terms-of-use"></a>Kullanım koşulları Azure Active Directory
 
@@ -50,7 +50,7 @@ Azure AD kullanım koşulları ilkeleri aşağıdaki yeteneklere sahiptir:
 - Kullanım koşullarınıza sahip olan veya kabul edilmeyen liste.
 - Toplantı gizlilik düzenlemelerine yardımcı olun.
 - Uyumluluk ve denetim için kullanım koşulları ilke etkinliği günlüğünü görüntüleyin.
-- [Microsoft Graph API 'leri](/graph/api/resources/agreement?view=graph-rest-beta) kullanarak kullanım koşulları ilkeleri oluşturun ve yönetin (Şu anda önizleme aşamasındadır).
+- [Microsoft Graph API 'leri](/graph/api/resources/agreement) kullanarak kullanım koşulları ilkeleri oluşturun ve yönetin (Şu anda önizleme aşamasındadır).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -117,7 +117,7 @@ Kullanım koşullarınızı ilke belgesi ile sonuçladıktan sonra, eklemek içi
 
     ![İlke şablonu seçmek için koşullu erişim açılan listesi](./media/terms-of-use/conditional-access-templates.png)
 
-   | Şablon | Description |
+   | Şablon | Açıklama |
    | --- | --- |
    | **Tüm konuklar için bulut uygulamalarına erişim** | Tüm konuklar ve tüm bulut uygulamaları için bir koşullu erişim ilkesi oluşturulacaktır. Bu ilke Azure portal etkiler. Bu oluşturulduktan sonra oturumunuzu kapatıp açmanız gerekebilir. |
    | **Tüm kullanıcılar için bulut uygulamalarına erişim** | Tüm kullanıcılar ve tüm bulut uygulamaları için bir koşullu erişim ilkesi oluşturulacaktır. Bu ilke Azure portal etkiler. Bu oluşturulduktan sonra oturumunuzu kapatıp açmanız gerekecektir. |

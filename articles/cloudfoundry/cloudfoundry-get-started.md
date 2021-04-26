@@ -7,12 +7,12 @@ ms.subservice: workloads
 ms.topic: article
 ms.date: 01/19/2017
 ms.author: seanmck
-ms.openlocfilehash: d3b13dffcf251f79a04182d32f23fd40e6ed6044
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2f80f07cad0e82ee35fe71223e1282ea24f791bb
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102562903"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530919"
 ---
 # <a name="cloud-foundry-on-azure"></a>Azure’da Cloud Foundry
 
@@ -39,7 +39,7 @@ Microsoft, aşağıdaki topluluk kanalları aracılığıyla OSS CF için en iyi
 
 Özet Cloud Foundry, bir özel yönetim araçları ve kurumsal destek kümesiyle birlikte, OSS dağıtımı ile aynı çekirdek platformunu içerir. Azure 'da PCF 'yi çalıştırmak için, özetten bir lisans edinmeniz gerekir. Azure Marketi 'nden PCF teklifi 90 günlük bir deneme lisansı içerir.
 
-Araçlar, bir Cloud Foundry Foundation 'ın dağıtımını ve yönetimini kolaylaştıran bir Web uygulaması ve Kullanıcı ve uygulamaları yönetmeye yönelik bir Web uygulaması [olan özette](https://docs.pivotal.io/pivotalcf/console/) [Operations Manager](https://docs.pivotal.io/pivotalcf/customizing/)içerir.
+Araçlar, bir Cloud Foundry Foundation 'ın dağıtımını ve yönetimini kolaylaştıran bir Web uygulaması ve Kullanıcı ve uygulamaları yönetmeye yönelik bir Web uygulaması [olan özette](https://docs.pivotal.io/pivotalcf/console/) [Operations Manager](https://docs.pivotal.io/ops-manager/2-10/install/)içerir.
 
 Yukarıdaki OSS CF için listelenen destek kanallarına ek olarak, bir PCF lisansı, destek için özette iletişim kurmanız sahibine. Microsoft ve Özette, yardım için her iki tarafın da iletişim kurabilmesini sağlayan destek iş akışlarını da etkinleştirdi ve bu da sorunun nerede olduğuna bağlı olarak, sorgunuz uygun şekilde yönlendirilsin.
 

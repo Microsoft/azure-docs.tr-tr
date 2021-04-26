@@ -8,13 +8,13 @@ ms.topic: quickstart
 ms.service: cost-management-billing
 ms.subservice: cost-management
 ms.reviewer: micflan
-ms.custom: contperf-fy21q2
-ms.openlocfilehash: 86f7bbbb52b1596e20fb1f3a67e42b2dd27c501a
-ms.sourcegitcommit: 225e4b45844e845bc41d5c043587a61e6b6ce5ae
+ms.custom: contperf-fy21q2, devx-track-azurecli
+ms.openlocfilehash: 4d0062258919de29750b644b2f8e12990e25098b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103012624"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873226"
 ---
 # <a name="quickstart-explore-and-analyze-costs-with-cost-analysis"></a>Hızlı Başlangıç: Maliyet analiziyle maliyetleri araştırma ve analiz etme
 
@@ -169,7 +169,7 @@ Başlangıç olarak ortamınızı Azure CLI için hazırlayın:
 
 [!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-Oturum açtıktan sonra [az costmanagement query](/cli/azure/ext/costmanagement/costmanagement#ext_costmanagement_az_costmanagement_query) komutunu kullanarak aboneliğiniz için ay başından bugüne kadarki kullanım bilgilerini sorgulayın:
+Oturum açtıktan sonra [az costmanagement query](/cli/azure/costmanagement#az_costmanagement_query) komutunu kullanarak aboneliğiniz için ay başından bugüne kadarki kullanım bilgilerini sorgulayın:
 
 ```azurecli
 az costmanagement query --timeframe MonthToDate --type Usage \
@@ -186,7 +186,7 @@ az costmanagement query --timeframe MonthToDate --type Usage \
 
 **--dataset-filter** parametresi bir JSON dizesi veya `@json-file` alır.
 
-Kullanım verilerini bir Azure depolama hesabına aktarmak için [az costmanagement export](/cli/azure/ext/costmanagement/costmanagement/export) komutlarını da kullanabilirsiniz. Verileri oradan indirebilirsiniz.
+Kullanım verilerini bir Azure depolama hesabına aktarmak için [az costmanagement export](/cli/azure/costmanagement/export) komutlarını da kullanabilirsiniz. Verileri oradan indirebilirsiniz.
 
 1. Bir kaynak grubu oluşturun veya mevcut kaynak grubunu kullanın. Kaynak grubu oluşturmak için [az group create](/cli/azure/group#az_group_create) komutunu çalıştırın:
 
@@ -200,7 +200,7 @@ Kullanım verilerini bir Azure depolama hesabına aktarmak için [az costmanagem
    az storage account create --resource-group TreyNetwork --name cmdemo
    ```
 
-1. Dışarı aktarmayı oluşturmak için [az costmanagement export create](/cli/azure/ext/costmanagement/costmanagement/export#ext_costmanagement_az_costmanagement_export_create) komutunu kullanın:
+1. Dışarı aktarmayı oluşturmak için [az costmanagement export create](/cli/azure/costmanagement/export#az_costmanagement_export_create) komutunu kullanın:
 
    ```azurecli
    az costmanagement export create --name DemoExport --type Usage \

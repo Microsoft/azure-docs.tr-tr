@@ -2,25 +2,25 @@
 title: Azure 'a bir bulut hizmeti (klasik) dağıtımında Fabricınternalservererror veya ServiceAllocationFailure sorunlarını giderme | Microsoft Docs
 description: Bu makalede, Azure 'a bir bulut hizmeti (klasik) dağıtıldığında bir Fabricınternalservererror veya ServiceAllocationFailure özel durumunun nasıl çözümleneceği gösterilmektedir.
 services: cloud-services
-author: mibufo
-ms.author: v-mibufo
+author: mamccrea
+ms.author: mamccrea
 ms.service: cloud-services
 ms.topic: troubleshooting
 ms.date: 02/22/2021
-ms.openlocfilehash: 0a4111f569b751ace80a2a886ed2ce7e4968ce16
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0883178779179df2e531123b8a500c62d42530e4
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101746754"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877453"
 ---
 # <a name="troubleshoot-fabricinternalservererror-or-serviceallocationfailure-when-deploying-a-cloud-service-classic-to-azure"></a>Azure 'a bir bulut hizmeti (klasik) dağıtımında Fabricınternalservererror veya ServiceAllocationFailure sorunlarını giderme
 
 Bu makalede, bir Azure bulut hizmeti (klasik) dağıtımı sırasında yapı denetleyicisinin ayıramadığı ayırma hatalarının sorunlarını giderebileceksiniz.
 
-Bir bulut hizmetine örnekler dağıtırken veya yeni Web ya da çalışan rolü örnekleri eklediğinizde Microsoft Azure işlem kaynaklarını ayırır.
+Bulut Hizmetine örnekleri dağıtırken veya yeni web veya çalışan rolü örnekleri eklerken Microsoft Azure işlem kaynaklarını ayırır.
 
-Azure abonelik sınırına ulaşmadan bile bu işlemler sırasında zaman zaman bir hata alabilirsiniz.
+Azure abonelik sınırına ulaşmadan önce bile bu işlemler sırasında bazen hatalar alabilirsiniz.
 
 > [!TIP]
 > Ayrıca, hizmetlerinizin dağıtımını planlarken bilgiler de yararlı olabilir.

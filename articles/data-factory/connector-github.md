@@ -1,17 +1,17 @@
 ---
 title: GitHub'a Bağlan
 description: Ortak veri modeli varlık başvurularınızı belirtmek için GitHub kullanın
-author: djpmsft
+author: dcstwh
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 06/03/2020
-ms.author: daperlov
-ms.openlocfilehash: 5d555d7bc4d3aae9c016cacbe17b68c30859d99a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.author: weetok
+ms.openlocfilehash: 7461a0332a36509c7bb6dfdd6db5948b056b35a6
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100372289"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106222121"
 ---
 # <a name="use-github-to-read-common-data-model-entity-references"></a>Ortak veri modeli varlık başvurularını okumak için GitHub kullanın
 

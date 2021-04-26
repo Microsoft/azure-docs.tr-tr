@@ -1,19 +1,21 @@
 ---
 title: 'Hızlı başlangıç: Azure kuyruk depolama istemci kitaplığı V12-Python'
 description: Bir kuyruk oluşturmak ve bu iletiye ileti eklemek için Azure kuyruk depolama istemci kitaplığı V12 for Python 'un nasıl kullanılacağını öğrenin. Sonra sıradan iletileri okumayı ve silmeyi öğrenin. Ayrıca, bir kuyruğu silmeyi de öğreneceksiniz.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 12/10/2019
 ms.topic: quickstart
 ms.service: storage
 ms.subservice: queues
-ms.custom: devx-track-python
-ms.openlocfilehash: b4c25ceb2e7b3f224dccdd7d24d86389100c8a2e
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.custom:
+- devx-track-python
+- mode-api
+ms.openlocfilehash: 68f68c32b160757e82d59b1dd5ee4847a06ec698
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104801919"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107534353"
 ---
 # <a name="quickstart-azure-queue-storage-client-library-v12-for-python"></a>Hızlı başlangıç: Python için Azure kuyruk depolama istemci kitaplığı V12
 

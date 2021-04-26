@@ -3,12 +3,12 @@ title: Azure Event Hubs bir olay hub 'ına dinamik olarak bölüm ekleme
 description: Bu makalede, Azure Event Hubs 'te bir olay hub 'ına dinamik olarak bölüm ekleme konusu gösterilmektedir.
 ms.topic: how-to
 ms.date: 06/23/2020
-ms.openlocfilehash: e6efdc7bab309f825032555c97f1e1128f5addd6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: aeeee1bcefe58b006dac0b6913aaa609cbeefb8c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98625274"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775129"
 ---
 # <a name="dynamically-add-partitions-to-an-event-hub-apache-kafka-topic-in-azure-event-hubs"></a>Azure Event Hubs bir olay hub 'ına (Apache Kafka konuya) dinamik olarak bölüm ekleme
 Event Hubs her bir tüketicinin ileti akışında yalnızca belirli bir alt küme ya da bölümü okuduğu bölünmüş bir tüketici modeli aracılığıyla ileti akışı sağlar. Bu model, olay işleme için yatay ölçek sağlar ve kuyruklar ile konularda kullanılamayan diğer akış odaklı özellikleri sunar. Bölüm bir olay hub'ında tutulan olayların sıralı dizisidir. Daha yeni olaylar geldikçe, bu sıranın sonuna eklenir. Genel olarak bölümler hakkında daha fazla bilgi için bkz. [bölümler](event-hubs-scalability.md#partitions)
@@ -33,7 +33,7 @@ Set-AzureRmEventHub -ResourceGroupName MyResourceGroupName -Namespace MyNamespac
 ```
 
 ### <a name="cli"></a>CLI
-[`az eventhubs eventhub update`](/cli/azure/eventhubs/eventhub#az-eventhubs-eventhub-update)Bir olay hub 'ındaki bölümleri güncelleştirmek için CLI komutunu kullanın. 
+[`az eventhubs eventhub update`](/cli/azure/eventhubs/eventhub#az_eventhubs_eventhub_update)Bir olay hub 'ındaki bölümleri güncelleştirmek için CLI komutunu kullanın. 
 
 ```azurecli-interactive
 az eventhubs eventhub update --resource-group MyResourceGroupName --namespace-name MyNamespaceName --name MyEventHubName --partition-count 12
@@ -105,4 +105,3 @@ Bir tüketici grubu üyesi bir meta veri yenilemesi gerçekleştirdiğinde ve ye
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Bölümler hakkında daha fazla bilgi için bkz. [bölümler](event-hubs-scalability.md#partitions).
-

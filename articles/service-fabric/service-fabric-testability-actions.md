@@ -2,14 +2,14 @@
 title: Azure mikro hizmetlerindeki hataların benzetimini yapın
 description: Bu makale, Microsoft Azure Service Fabric bulunan test edilebilirlik eylemleri hakkında konuşur.
 ms.topic: conceptual
-ms.date: 06/07/2017
+ms.date: 03/26/2021
 ms.custom: devx-track-csharp
-ms.openlocfilehash: c57f54096a9593f5ab25a5722d3f2d2b9878b511
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9f8221d92ded33350b182cce5d28dd889beae4a5
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100595015"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105732882"
 ---
 # <a name="testability-actions"></a>Test edilebilirlik eylemleri
 Güvenilir olmayan bir altyapının benzetimini yapmak için Azure Service Fabric, çeşitli gerçek dünyada hataların ve durum geçişlerinin benzetimini yapmak için kullanabileceğiniz bir geliştirici sağlar. Bunlar, test edilebilirlik eylemleri olarak gösterilir. Eylemler, belirli bir hata ekleme, durum geçişi veya doğrulamaya neden olan alt düzey API 'lerdir. Bu eylemleri birleştirerek hizmetleriniz için kapsamlı test senaryoları yazabilirsiniz.
@@ -34,6 +34,7 @@ Daha iyi kalite doğrulaması için, çeşitli düzgün ve düzgün olmayan hata
 | Invokequorumkaybetme |Belirli bir durum bilgisi olan hizmet bölümünü çekirdek kaybına geçirir. |Invokequorumlossasync |Invoke-ServiceFabricQuorumLoss |Normal |
 | MovePrimary |Durum bilgisi olan bir hizmetin belirtilen birincil çoğaltmasını belirtilen küme düğümüne taşımadır. |Moveının Yasync |Move-ServiceFabricPrimaryReplica |Normal |
 | MoveSecondary |Durum bilgisi olan bir hizmetin geçerli ikincil çoğaltmasını farklı bir küme düğümüne taşımadır. |MoveSecondaryAsync |Move-ServiceFabricSecondaryReplica |Normal |
+| Moveınstance | Durum bilgisi olmayan bir hizmetin geçerli örneğini farklı bir küme düğümüne kaydırır. | Moveınstanceasync | Move-ServiceFabricInstance | Normal |
 | RemoveReplica |Kümeden bir çoğaltmayı kaldırarak bir çoğaltma başarısızlığının benzetimini yapar. Bu, çoğaltmayı kapatacak ve ' none ' rolüne geçirecek ve tüm durumu kümeden kaldırılarak bu uygulamayı kaldırır. |Removereperepasync |Remove-ServiceFabricReplica |Normal |
 | RestartDeployedCodePackage |Bir kümedeki düğüme dağıtılan bir kod paketini yeniden başlatarak kod paketi işlem başarısızlığının benzetimini yapar. Bu işlem, bu işlemde barındırılan tüm Kullanıcı Hizmeti çoğaltmalarını yeniden başlatacak olan kod paketi işlemini iptal eder. |RestartDeployedCodePackageAsync |Restart-ServiceFabricDeployedCodePackage |Yaşanmamasını |
 | RestartNode |Bir düğümü yeniden başlatarak Service Fabric küme düğümü hatasına benzetir. |RestartNodeAsync |Restart-ServiceFabricNode |Yaşanmamasını |

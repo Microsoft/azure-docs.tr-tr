@@ -5,12 +5,12 @@ ms.service: digital-twins
 ms.topic: include
 ms.date: 1/20/2021
 ms.author: baanders
-ms.openlocfilehash: 43cc3dfc5b425df6d9dd5e2c2f35a792907ccdea
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 00d584690d37f1dcc47b785ef533abe888befec3
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "103622117"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107510963"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -27,7 +27,7 @@ Bu öğreticiyi tamamlayabilmeniz için geliştirme makinenize **[Visual Studio 
 
 Öğretici, C# dilinde yazılmış örnek bir proje tarafından çalıştırılır. Örnek şurada bulunur: [Azure Digital TWINS uçtan uca örnekler](/samples/azure-samples/digital-twins-samples/digital-twins-samples). Örnek bağlantısına gidip başlık altındaki *kodu görüntüle* düğmesini seçerek makinenizde **örnek projeyi alın** . Bu işlem sizi, örnek olarak indirebileceğiniz GitHub deposuna götürür *.* *Kod* düğmesini seçip zip ' i *indirin*.
 
-:::image type="content" source="../articles/digital-twins/media/includes/download-repo-zip.png" alt-text="GitHub 'da dijital-TWINS-örnek deposunun görünümü. Kod düğmesi seçilidir ve posta Indirme düğmesinin vurgulandığı küçük bir iletişim kutusu oluşturulur." lightbox="../articles/digital-twins/media/includes/download-repo-zip.png":::
+:::image type="content" source="../articles/digital-twins/media/includes/download-repo-zip.png" alt-text="GitHub 'daki dijital-TWINS-örnek deposunun ekran görüntüsü. Kod düğmesi seçilidir ve posta Indirme düğmesinin vurgulandığı küçük bir iletişim kutusu oluşturulur." lightbox="../articles/digital-twins/media/includes/download-repo-zip.png":::
 
 Bu, bir yükler *. ZIP* klasörünü makinenize **digital-twins-samples-master.zip**. Klasörü sıkıştırmayı açın ve dosyaları ayıklayın.
 

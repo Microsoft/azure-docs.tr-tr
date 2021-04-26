@@ -7,12 +7,12 @@ ms.topic: overview
 ms.custom: devx-track-dotnet
 ms.date: 11/13/2019
 ms.author: zhshang
-ms.openlocfilehash: c65bc7e92d925f819a48fd8ab9a8160bc3eb72e3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d3b84756f390930be5124c6bda54d07078d29053
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100579307"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166930"
 ---
 # <a name="azure-signalr-service-faq"></a>Azure SignalR hizmeti hakkında SSS
 
@@ -62,13 +62,13 @@ Yeni uygulamalar için yalnızca varsayılan ve sunucusuz mod kullanılmalıdır
 
 Klasik mod, mevcut uygulamalar için geriye dönük uyumluluk için tasarlanmıştır, bu nedenle yeni uygulamalar için kullanılmamalıdır.
 
-[Bu belgedeki](concept-service-mode.md)hizmet modu hakkında daha fazla bilgi için.
+Hizmet modu hakkında daha fazla bilgi için bkz. [Azure SignalR hizmetinde hizmet modu](concept-service-mode.md).
 
 ## <a name="can-i-send-message-from-client-in-serverless-mode"></a>İstemciden sunucusuz modda ileti gönderebilir miyim?
 
 SignalR örneğiniz için yukarı akış yapılandırırsanız istemciden ileti gönderebilirsiniz. Yukarı akış, SignalR hizmetinden ileti ve bağlantı olayları alabilen bir uç nokta kümesidir. Yukarı akış yapılandırılmamışsa, istemciden gelen iletiler yok sayılır.
 
-Yukarı akış hakkında daha fazla bilgi için [Bu belgeye](concept-upstream.md)bakın.
+Yukarı akış hakkında daha fazla bilgi için bkz. [yukarı akış ayarları](concept-upstream.md).
 
 Yukarı akış şu anda genel önizleme aşamasındadır.
 

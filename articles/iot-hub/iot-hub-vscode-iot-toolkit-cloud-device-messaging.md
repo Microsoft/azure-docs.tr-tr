@@ -10,32 +10,24 @@ ms.date: 01/18/2019
 ms.author: junhan
 ms.custom:
 - 'Role: Cloud Development'
-ms.openlocfilehash: b9d8f0c2a573ba1749b414a389cd7181ddd5f95a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1c4a840233e576c528e9c58d57eca0b3d524bf4d
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87321692"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566937"
 ---
 # <a name="use-azure-iot-tools-for-visual-studio-code-to-send-and-receive-messages-between-your-device-and-iot-hub"></a>Cihazınız ile IoT Hub arasında ileti göndermek ve almak için Azure IoT araçları 'nı kullanın Visual Studio Code
 
 ![Uçtan uca diyagram](./media/iot-hub-vscode-iot-toolkit-cloud-device-messaging/e-to-e-diagram.png)
 
+Bu makalede cihazdan buluta iletileri izlemek ve buluttan cihaza iletiler göndermek için Visual Studio Code için Azure IoT araçları 'nı nasıl kullanacağınızı öğreneceksiniz. Cihazdan buluta iletiler, cihazınızın topladığı ve daha sonra IoT Hub 'ınıza gönderdiği algılayıcı verileri olabilir. Buluttan cihaza iletiler, IoT Hub 'ınızın cihazınıza bağlı bir ışığı yakıp söndürmek üzere cihazınıza gönderdiği komutlar olabilir.
+
 [Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-toolkit) , IoT Hub yönetimi ve IoT uygulaması geliştirmeyi kolaylaştıran yararlı bir Visual Studio Code uzantısıdır. Bu makalede, cihazınız ile IoT Hub 'ınız arasında ileti göndermek ve almak üzere Visual Studio Code için Azure IoT araçları 'nın nasıl kullanılacağı ele alınmaktadır.
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
-## <a name="what-you-will-learn"></a>Öğrenirsiniz
-
-Cihazdan buluta iletileri izlemek ve buluttan cihaza iletiler göndermek için Visual Studio Code için Azure IoT araçlarını kullanmayı öğreneceksiniz. Cihazdan buluta iletiler, cihazınızın topladığı ve daha sonra IoT Hub 'ınıza gönderdiği algılayıcı verileri olabilir. Buluttan cihaza iletiler, IoT Hub 'ınızın cihazınıza bağlı bir ışığı yakıp söndürmek üzere cihazınıza gönderdiği komutlar olabilir.
-
-## <a name="what-you-will-do"></a>Yapabilecekleriniz
-
-* Cihazdan buluta iletileri izlemek için Visual Studio Code için Azure IoT araçları 'nı kullanın.
-
-* Buluttan cihaza iletiler göndermek için Visual Studio Code için Azure IoT araçları 'nı kullanın.
-
-## <a name="what-you-need"></a>Gerekenler
+## <a name="prerequisites"></a>Önkoşullar
 
 * Etkin bir Azure aboneliği.
 

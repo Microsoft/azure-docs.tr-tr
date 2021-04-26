@@ -16,12 +16,12 @@ ms.date: 04/13/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3200dc6ad7756f77dc0d74df83a33c7e89d4bedb
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 1c5e71522d53bd4e528b2a5a106a4dcc344df3ab
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105044575"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105732865"
 ---
 # <a name="azure-active-directory-pass-through-authentication-quickstart"></a>Azure Active Directory geçişli kimlik doğrulaması: hızlı başlangıç
 
@@ -73,6 +73,7 @@ Aşağıdaki önkoşulların yerinde olduğundan emin olun.
      
      Güvenlik duvarınız kaynak kullanıcılara göre kuralları zorunlu tutuyorsa ağ hizmeti olarak çalışan Windows hizmetlerinden gelen trafik için bu bağlantı noktalarını açın.
    - Güvenlik duvarınız veya ara sunucunuz bir allowlist öğesine DNS girişleri eklemenize izin verir **\* . msappproxy.net** ve **\* . ServiceBus.Windows.net** öğesine bağlantı ekleyin. Aksi takdirde, haftalık olarak güncellenen [Azure veri MERKEZI IP aralıklarına](https://www.microsoft.com/download/details.aspx?id=41653)erişime izin verin.
+   - Azure PASSTHROUGH Aracısı ve Azure Uç Noktası arasındaki giden TLS iletişimlerinde satır içi İnceleme ve sonlandırma biçimlerinden kaçının. 
    - Giden bir HTTP proxy 'si varsa, bu URL 'nin autologon.microsoftazuread-sso.com, izin verilenler listesinde olduğundan emin olun. Joker karakter kabul edilmedikleri için bu URL 'YI açıkça belirtmeniz gerekir. 
    - Kimlik doğrulama aracılarınızın ilk kayıt için **login.Windows.net** ve **login.microsoftonline.com** 'e erişmesi gerekir. Bu URL 'Ler için güvenlik duvarınızı da açın.
     - Sertifika doğrulaması için şu URL 'Leri engellemeyi kaldırın: **crl3.DigiCert.com:80**, **crl4.DigiCert.com:80**, **ocsp.digicert.com:80**, **www \. d-trust.net:80**, **root-C3-CA2-2009.OCSP.d-Trust.net:80**, **CRL.Microsoft.com:80**, **oneocsp.Microsoft.com:80** ve **OCSP.msocsp.com:80**. Bu URL 'Ler diğer Microsoft ürünleriyle sertifika doğrulaması için kullanıldığından, bu URL 'Lerin engeli kaldırılmış olabilir.

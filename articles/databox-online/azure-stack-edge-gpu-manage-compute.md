@@ -9,10 +9,10 @@ ms.topic: how-to
 ms.date: 03/08/2021
 ms.author: alkohli
 ms.openlocfilehash: 057f80049b13a265925f2d6f24a008d1e1e04c96
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102639016"
 ---
 # <a name="manage-compute-on-your-azure-stack-edge-pro-gpu"></a>Azure Stack Edge Pro GPU 'unuzda işlem yönetme
@@ -51,7 +51,7 @@ Bir tetikleyici oluşturmak için Azure portal aşağıdaki adımları uygulayı
 
     - **Zamanlanan tetikleyici** -başlangıç tarihini/saatini ve yineleme aralığını saat, dakika veya saniye cinsinden belirtin. Ayrıca, konu başlığı için bir ad girin. Bir konu, tetikleyiciyi cihaza dağıtılan bir modüle yönlendirme esnekliği sağlayacaktır.
 
-        Örnek yol dizesi: `"route3": "FROM /* WHERE topic = 'topicname' INTO BrokeredEndpoint("modules/modulename/inputs/input1")"` .
+        Örnek yol dizesi: `"route3&quot;: &quot;FROM /* WHERE topic = 'topicname' INTO BrokeredEndpoint(&quot;modules/modulename/inputs/input1")"` .
 
         ![NFS paylaşımı ekleme](media/azure-stack-edge-gpu-manage-compute/add-scheduled-trigger.png)
 

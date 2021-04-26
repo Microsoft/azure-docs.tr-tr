@@ -5,13 +5,13 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: jonfan, logicappspm
 ms.topic: article
-ms.date: 03/18/2021
-ms.openlocfilehash: f4336350af92c27760369d668c6babddc4d4ea30
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/16/2021
+ms.openlocfilehash: 286da1412e8a74ffbf34e4abb493241914d4f925
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103462925"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764882"
 ---
 # <a name="limits-and-configuration-information-for-azure-logic-apps"></a>Azure Logic Apps için sınırlar ve yapılandırma bilgileri
 
@@ -120,11 +120,13 @@ Tek bir mantıksal uygulama çalıştırması için sınırlar şunlardır:
 | Until zaman aşımı | -Varsayılan: PT1H (1 saat) | "Until" döngüsünün çıkmadan önce çalıştırılabilmesi ve [ıso 8601 biçiminde](https://en.wikipedia.org/wiki/ISO_8601)belirtilmesi en fazla süre. Zaman aşımı değeri her döngü döngüsü için değerlendirilir. Döngüdeki herhangi bir eylem zaman aşımı sınırından daha uzun sürerse, geçerli döngü durdurulmaz. Ancak, bir sonraki döngüde, sınır koşulu karşılanmadığı için başlamaz. <p><p>Bu sınırı değiştirmek için, "Until" döngüsünde şekil **Değiştir**' i seçin ve **zaman aşımı** özelliği için değeri belirtin. |
 ||||
 
+<a name="concurrency-debatching"></a>
+
 ### <a name="concurrency-and-debatching"></a>Eşzamanlılık ve ayırmayı kaldırma
 
 | Name | Sınır | Notlar |
 | ---- | ----- | ----- |
-| Eşzamanlılık tetikleme | Eşzamanlılık kapalı ile: sınırsız <p><p>' İ etkinleştirdikten sonra geri alamazsınız: <p><p>-Varsayılan: 25 <br>-Min: 1 <br>-Max: 50 | Bu sınır, aynı anda veya paralel olarak çalışabilen mantıksal uygulama örneklerinin maksimum sayısıdır. <p><p>**Note**: eşzamanlılık açık olduğunda, ayırma sınırı, [toplu işleme dizileri](../logic-apps/logic-apps-workflow-actions-triggers.md#split-on-debatch)için 100 öğeye düşürülür. <p><p>Bu sınırı değiştirmek için bkz. [tetikleyici eşzamanlılık limitini değiştirme](../logic-apps/logic-apps-workflow-actions-triggers.md#change-trigger-concurrency) veya [örnekleri sıralı olarak tetikleme](../logic-apps/logic-apps-workflow-actions-triggers.md#sequential-trigger). |
+| Eşzamanlılık tetikleme | Eşzamanlılık kapalı ile: sınırsız <p><p>' İ etkinleştirdikten sonra geri alamazsınız: <p><p>-Varsayılan: 25 <br>-Min: 1 <br>-Max: 100 | Bu sınır, aynı anda veya paralel olarak çalışabilen mantıksal uygulama örneklerinin maksimum sayısıdır. <p><p>**Note**: eşzamanlılık açık olduğunda, ayırma sınırı, [toplu işleme dizileri](../logic-apps/logic-apps-workflow-actions-triggers.md#split-on-debatch)için 100 öğeye düşürülür. <p><p>Bu sınırı değiştirmek için bkz. [tetikleyici eşzamanlılık limitini değiştirme](../logic-apps/logic-apps-workflow-actions-triggers.md#change-trigger-concurrency) veya [örnekleri sıralı olarak tetikleme](../logic-apps/logic-apps-workflow-actions-triggers.md#sequential-trigger). |
 | En fazla bekleyen çalışma | Eşzamanlılık kapalı ile: <p><p>-Min: 1 <br>-Max: 50 <p><p>Eşzamanlılık açık: <p><p>-Min: 10 Plus eşzamanlı çalıştırma sayısı (eşzamanlılık tetikleme) <br>-Max: 100 | Bu sınır, mantıksal uygulamanız zaten en fazla eşzamanlı örnekleri çalıştırıyorsa çalışmayı beklemeleri gereken mantıksal uygulama örneklerinin maksimum sayısıdır. <p><p>Bu sınırı değiştirmek için bkz. [değişiklik bekleyen çalışma sınırı](../logic-apps/logic-apps-workflow-actions-triggers.md#change-waiting-runs). |
 | SplitOn öğeleri | Eşzamanlılık kapalı: 100.000 <p><p>Eşzamanlılık açık: 100 | Bir dizi döndüren Tetikleyiciler için, dizi öğelerini bir "foreach" döngüsü kullanmak yerine [birden çok iş akışı örneğine ayıran veya](../logic-apps/logic-apps-workflow-actions-triggers.md#split-on-debatch) içermeyen bir ' spton ' özelliği kullanan bir ifade belirtebilirsiniz. Bu ifade, her dizi öğesi için bir iş akışı örneği oluşturmak ve çalıştırmak için kullanılacak diziye başvurur. <p><p>**Note**: eşzamanlılık açık olduğunda, spton limiti 100 öğeye düşürülür. |
 ||||
@@ -389,7 +391,7 @@ Mantıksal uygulamanızın trafiği belirli IP adresleriyle sınırlayan bir gü
 
 Örneğin, Batı ABD bölgesindeki mantıksal uygulamaların, [http tetikleyicisi veya eylemi](../connectors/connectors-native-http.md)gibi yerleşik Tetikleyiciler ve eylemler aracılığıyla gönderme veya alma işlemini desteklemesi için, güvenlik duvarınızın, Batı ABD bölgesinde mevcut olan *Tüm* Logic Apps hizmeti gelen IP adresleri *ve* giden IP adresleri için erişime izin verilmesi gerekir.
 
-Mantıksal uygulamanız ayrıca Office 365 Outlook Bağlayıcısı veya SQL Bağlayıcısı gibi [yönetilen bağlayıcılar](../connectors/apis-list.md#managed-api-connectors)kullanıyorsa veya [özel bağlayıcılar](/connectors/custom-connectors/)kullanıyorsa, güvenlik duvarının ayrıca mantıksal uygulamanızın Azure bölgesindeki *Tüm* [yönetilen bağlayıcı giden IP adresleri](#outbound) için erişime izin verilmesi gerekir. Ayrıca, [Azure 'da şirket içi veri ağ geçidi kaynağı](logic-apps-gateway-connection.md)aracılığıyla şirket içi kaynaklara erişen özel bağlayıcılar kullanırsanız, ağ geçidi yüklemesini, ilgili *YÖNETILEN bağlayıcılar [giden IP adreslerine](#outbound)* erişime izin verecek şekilde ayarlamanız gerekir.
+Mantıksal uygulamanız ayrıca Office 365 Outlook Bağlayıcısı veya SQL Bağlayıcısı gibi [yönetilen bağlayıcılar](../connectors/managed.md)kullanıyorsa veya [özel bağlayıcılar](/connectors/custom-connectors/)kullanıyorsa, güvenlik duvarının ayrıca mantıksal uygulamanızın Azure bölgesindeki *Tüm* [yönetilen bağlayıcı giden IP adresleri](#outbound) için erişime izin verilmesi gerekir. Ayrıca, [Azure 'da şirket içi veri ağ geçidi kaynağı](logic-apps-gateway-connection.md)aracılığıyla şirket içi kaynaklara erişen özel bağlayıcılar kullanırsanız, ağ geçidi yüklemesini, ilgili *YÖNETILEN bağlayıcılar [giden IP adreslerine](#outbound)* erişime izin verecek şekilde ayarlamanız gerekir.
 
 Ağ geçidinde iletişim ayarlarını ayarlama hakkında daha fazla bilgi için şu konulara bakın:
 
@@ -404,7 +406,7 @@ Güvenlik duvarınızı IP adresleriyle ayarlamadan önce, şu hususları gözde
 
 * [Güç otomatikleştirme](/power-automate/getting-started)'yi kullanıyorsanız, **http** ve **http + openapı** gibi bazı eylemler doğrudan Azure Logic Apps HIZMETI aracılığıyla gider ve burada listelenen IP adreslerinden gelir. Güç otomatikleştirme tarafından kullanılan IP adresleri hakkında daha fazla bilgi için bkz. [Güç otomatikleştirme Için sınırlamalar ve yapılandırma](/flow/limits-and-config#ip-address-configuration).
 
-* [Azure Çin 21Vianet](/azure/china/)için, [özel bağlayıcılar](../logic-apps/custom-connector-overview.md) ve Azure depolama, SQL Server, Office 365 Outlook gibi [yönetilen BAĞLAYıCıLAR](../connectors/apis-list.md#managed-api-connectors)için sabit veya ayrılmış IP adresleri kullanılamaz.
+* [Azure Çin 21Vianet](/azure/china/)için, [özel bağlayıcılar](../logic-apps/custom-connector-overview.md) ve Azure depolama, SQL Server, Office 365 Outlook gibi [yönetilen BAĞLAYıCıLAR](../connectors/managed.md)için sabit veya ayrılmış IP adresleri kullanılamaz.
 
 * Mantıksal uygulamalarınız bir [tümleştirme hizmeti ortamında (ıSE)](connect-virtual-network-vnet-isolated-environment-overview.md)çalışıyorsa, [Bu bağlantı noktalarını da açtığınızdan](../logic-apps/connect-virtual-network-vnet-isolated-environment.md#network-ports-for-ise)emin olun.
 
@@ -542,9 +544,9 @@ Bu bölümde Azure Logic Apps hizmeti ve yönetilen bağlayıcılar için giden 
 | Güney Birleşik Krallık | 51.140.74.14, 51.140.73.85, 51.140.78.44, 51.140.137.190, 51.140.153.135, 51.140.28.225, 51.140.142.28, 51.140.158.24 | 51.140.74.150, 51.140.80.51, 51.140.61.124, 51.105.77.96 - 51.105.77.127, 51.140.148.0 - 51.140.148.15 |
 | Batı Birleşik Krallık | 51.141.54.185, 51.141.45.238, 51.141.47.136, 51.141.114.77, 51.141.112.112, 51.141.113.36, 51.141.118.119, 51.141.119.63 | 51.141.52.185, 51.141.47.105, 51.141.124.13, 51.140.211.0 - 51.140.211.15, 51.140.212.224 - 51.140.212.255 |
 | Orta Batı ABD | 52.161.27.190, 52.161.18.218, 52.161.9.108, 13.78.151.161, 13.78.137.179, 13.78.148.140, 13.78.129.20, 13.78.141.75 | 52.161.101.204, 52.161.102.22, 13.78.132.82, 13.71.195.32 - 13.71.195.47, 13.71.199.192 - 13.71.199.223 |
-| West Europe | 40.68.222.65, 40.68.209.23, 13.95.147.65, 23.97.218.130, 51.144.182.201, 23.97.211.179, 104.45.9.52, 23.97.210.126 | 52.166.78.89, 52.174.88.118, 40.91.208.65, 13.69.64.208 - 13.69.64.223, 13.69.71.192 - 13.69.71.223 |
+| West Europe | 40.68.222.65, 40.68.209.23, 13.95.147.65, 23.97.218.130, 51.144.182.201, 23.97.211.179, 104.45.9.52, 23.97.210.126, 13.69.71.160, 13.69.71.161, 13.69.71.162, 13.69.71.163, 13.69.71.164, 13.69.71.165, 13.69.71.166, 13.69.71.167 | 52.166.78.89, 52.174.88.118, 40.91.208.65, 13.69.64.208 - 13.69.64.223, 13.69.71.192 - 13.69.71.223 |
 | Batı Hindistan | 104.211.164.80, 104.211.162.205, 104.211.164.136, 104.211.158.127, 104.211.156.153, 104.211.158.123, 104.211.154.59, 104.211.154.7 | 104.211.189.124, 104.211.189.218, 20.38.128.224 - 20.38.128.255, 104.211.146.224 - 104.211.146.239 |
-| Batı ABD | 52.160.92.112, 40.118.244.241, 40.118.241.243, 157.56.162.53, 157.56.167.147, 104.42.49.145, 40.83.164.80, 104.42.38.32 | 13.93.148.62, 104.42.122.49, 40.112.195.87, 13.86.223.32 - 13.86.223.63, 40.112.243.160 - 40.112.243.175 |
+| Batı ABD | 52.160.92.112, 40.118.244.241, 40.118.241.243, 157.56.162.53, 157.56.167.147, 104.42.49.145, 40.83.164.80, 104.42.38.32, 13.86.223.0, 13.86.223.1, 13.86.223.2, 13.86.223.3, 13.86.223.4, 13.86.223.5 | 13.93.148.62, 104.42.122.49, 40.112.195.87, 13.86.223.32 - 13.86.223.63, 40.112.243.160 - 40.112.243.175 |
 | Batı ABD 2 | 13.66.210.167, 52.183.30.169, 52.183.29.132, 13.66.210.167, 13.66.201.169, 13.77.149.159, 52.175.198.132, 13.66.246.219 | 52.191.164.250, 52.183.78.157, 13.66.140.128 - 13.66.140.143, 13.66.145.96 - 13.66.145.127 |
 ||||
 

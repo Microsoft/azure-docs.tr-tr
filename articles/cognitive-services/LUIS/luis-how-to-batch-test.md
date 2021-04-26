@@ -8,13 +8,13 @@ ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: how-to
-ms.date: 12/29/2020
-ms.openlocfilehash: b297330f3562babf9e83d36934827f7b92d5ea35
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/13/2021
+ms.openlocfilehash: 9fe4f21a5c9e9e26a2f94b8a60cba47916842fe3
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98787021"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107501799"
 ---
 # <a name="batch-testing-with-a-set-of-example-utterances"></a>Bir dizi örnek ile toplu test
 
@@ -208,7 +208,7 @@ Uygulama sürümü KIMLIĞI
 
 Toplu işlem testi için *veri kümesi* olarak bilinen uttersünlerdeki toplu iş dosyasını gönder. Veri kümesi, en fazla 1.000 etiketli bir JSON biçimli dosyadır. Bir uygulamada en fazla 10 veri kümesi test edebilirsiniz. Daha fazla test etmeniz gerekiyorsa, bir veri kümesini silip yeni bir tane ekleyin. Toplu iş dosyası verilerinde karşılık gelen bir varlık olmasa bile, modeldeki tüm özel varlıklar, Batch test varlıkları filtresinde görüntülenir.
 
-Toplu iş dosyası, utbotlardan oluşur. Her bir söylemeye, algılanmak üzere bekleyen [makine öğrenimi varlıklarıyla](luis-concept-entity-types.md#types-of-entities) birlikte beklenen bir amaç tahmini olmalıdır.
+Toplu iş dosyası, utbotlardan oluşur. Her bir söylemeye, algılanmak üzere bekleyen [makine öğrenimi varlıklarıyla](luis-concept-entity-types.md#machine-learned-ml-entity) birlikte beklenen bir amaç tahmini olmalıdır.
 
 ### <a name="batch-syntax-template-for-intents-with-entities"></a>Varlıklar içeren amaçlar için Batch sözdizimi şablonu
 

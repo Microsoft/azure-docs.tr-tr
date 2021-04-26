@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/29/2018
 ms.author: kumud
-ms.openlocfilehash: 73562d8d32f265fa43ca80d2f8d4f84b1b631ec6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d6835d06015923a70301c95370c76efbd0c2163e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98223678"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776744"
 ---
 # <a name="diagnose-a-virtual-machine-network-traffic-filter-problem"></a>Bir sanal makine ağ trafiği Filtreleme sorununu Tanıla
 
@@ -115,7 +115,7 @@ NetworkInterfaces
 
 Bu makaledeki görevleri gerçekleştirmek için Azure komut satırı arabirimi (CLı) komutlarını kullanıyorsanız, [Azure Cloud Shell](https://shell.azure.com/bash)komutları çalıştırın ya da bilgisayarınızdan CLI 'yı çalıştırarak. Bu makale, Azure CLı sürüm 2.0.32 veya üstünü gerektirir. Yüklü sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme](/cli/azure/install-azure-cli). Azure CLı 'yi yerel olarak çalıştırıyorsanız, Ayrıca, `az login` [gerekli izinlere](virtual-network-network-interface.md#permissions)sahip bir hesapla Azure 'da çalıştırmanız ve oturum açmanız gerekir.
 
-[Az Network Nic List-etkilidir-NSG](/cli/azure/network/nic#az-network-nic-list-effective-nsg)ile bir ağ arabirimi için geçerli güvenlik kurallarını alın. Aşağıdaki örnek, *Myresourcegroup* adlı bir kaynak grubunda bulunan *Myvmvmnıc* adlı bir ağ arabirimi için geçerli güvenlik kurallarını alır:
+[Az Network Nic List-etkilidir-NSG](/cli/azure/network/nic#az_network_nic_list_effective_nsg)ile bir ağ arabirimi için geçerli güvenlik kurallarını alın. Aşağıdaki örnek, *Myresourcegroup* adlı bir kaynak grubunda bulunan *Myvmvmnıc* adlı bir ağ arabirimi için geçerli güvenlik kurallarını alır:
 
 ```azurecli-interactive
 az network nic list-effective-nsg \

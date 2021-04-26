@@ -12,12 +12,12 @@ metadata:
   ms.author: mbaldwin
   manager: rkarlin
   ms.date: 09/19/2019
-  ms.openlocfilehash: 6a8449eaf0e05498cc10ee87701fc246d5919835
-  ms.sourcegitcommit: 15d27661c1c03bf84d3974a675c7bd11a0e086e6
+  ms.openlocfilehash: aa8485b3ea4af3d618f175faaa4f685d4a2b77c3
+  ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/09/2021
-  ms.locfileid: "102503904"
+  ms.lasthandoff: 04/21/2021
+  ms.locfileid: "107815711"
 landingContent:
 - title: Azure Key Vault hakkında
   linkLists:
@@ -49,10 +49,8 @@ landingContent:
   linkLists:
   - linkListType: overview
     links:
-    - text: Güvenliğe genel bakış
-      url: security-overview.md
-    - text: Anahtar Kasanızın güvenliğini sağlama
-      url: secure-your-key-vault.md
+    - text: Güvenlik özellikleri
+      url: security-features.md
     - text: Güvenlik temeli
       url: security-baseline.md
   - linkListType: how-to-guide

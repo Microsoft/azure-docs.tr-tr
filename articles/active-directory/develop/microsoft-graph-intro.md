@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 02/13/2020
 ms.author: davidmu
 ms.custom: aaddev
-ms.openlocfilehash: a799d7c32ad632303931adf838ca8e2e715b2adc
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2e689e620a5aeb7c5028f1a1b30dd6def8e447ab
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96860193"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107529990"
 ---
 # <a name="microsoft-graph-api"></a>Microsoft Graph API
 
@@ -32,9 +32,9 @@ Microsoft Graph, aşağıdaki Microsoft 365 hizmetlerindeki verilere erişmek i�
 
 Microsoft Graph Şu anda iki sürümü desteklemektedir: v 1.0 ve Beta. V 1.0 sürümü, genel olarak kullanılabilir API 'Leri içerir. Tüm üretim uygulamaları için v 1.0 sürümünü kullanın. Beta, şu anda önizleme aşamasında olan API 'Leri içerir. Beta API 'lerimiz üzerinde önemli değişiklikler sunabileceğimizden, yalnızca geliştirme aşamasında olan uygulamaları test etmek için beta sürümünü kullanmanızı öneririz. üretim uygulamalarınızda Beta API 'Lerini kullanmayın. Daha fazla bilgi için, bkz. [Microsoft Graph Için sürüm oluşturma, destek ve bölme değiştirme ilkeleri](/graph/versioning-and-support).
 
-Beta API 'Lerini kullanmaya başlamak için bkz. [Microsoft Graph Beta uç noktası başvurusu](/graph/api/overview?view=graph-rest-beta)
+Beta API 'Lerini kullanmaya başlamak için bkz. [Microsoft Graph Beta uç noktası başvurusu](/graph/api/overview?view=graph-rest-beta&preserve-view=true)
 
-V 1.0 API 'Lerini kullanmaya başlamak için bkz. [Microsoft Graph REST API v 1.0 başvurusu](/graph/api/overview)
+V 1.0 API 'Lerini kullanmaya başlamak için bkz. [Microsoft Graph REST API v 1.0 başvurusu](/graph/api/overview?view=graph-rest-1.0&preserve-view=true)
 
 ## <a name="get-started"></a>başlarken
 
@@ -57,4 +57,4 @@ Hızlı başlangıcı tamamladığınızda, çalıştırmaya hazırlamış bir u
 
 Microsoft Graph Explorer, Microsoft Graph API 'Leri kullanarak istek derlemek ve test etmek için kullanabileceğiniz web tabanlı bir araçtır. Microsoft Graph Explorer 'a şu adreste erişebilirsiniz: `https://developer.microsoft.com/graph/graph-explorer` .
 
-Postman, Microsoft Graph API 'Lerini kullanarak istek derlemek ve test etmek için de kullanabileceğiniz bir araçtır. Postman 'yi şurada indirebilirsiniz: `https://www.getpostman.com/` . Postman 'da Microsoft Graph etkileşimde bulunmak için Postman 'da Microsoft Graph koleksiyonunu kullanırsınız. Daha fazla bilgi için bkz. [MICROSOFT Graph API Ile Postman kullanma](/graph/use-postman?context=graph%2Fapi%2Fbeta&view=graph-rest-beta).
+Postman, Microsoft Graph API 'Lerini kullanarak istek derlemek ve test etmek için de kullanabileceğiniz bir araçtır. Postman 'yi şurada indirebilirsiniz: `https://www.getpostman.com/` . Postman 'da Microsoft Graph etkileşimde bulunmak için Postman 'da Microsoft Graph koleksiyonunu kullanırsınız. Daha fazla bilgi için bkz. [MICROSOFT Graph API Ile Postman kullanma](/graph/use-postman).

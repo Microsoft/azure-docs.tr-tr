@@ -3,19 +3,18 @@ title: Ortak parametreler ve üst bilgiler
 description: Key Vault kaynaklarıyla ilgili yapabileceğiniz tüm işlemlerde ortak olan parametreler ve üstbilgiler.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
 ms.date: 01/07/2019
 ms.author: mbaldwin
-ms.openlocfilehash: d1d93bcd84fd9460e658b221089a4b24d46b0429
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 616b6061b08258d465b09902556de6903b873199
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "83005809"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107749879"
 ---
 # <a name="common-parameters-and-headers"></a>Ortak parametreler ve üst bilgiler
 
@@ -41,7 +40,7 @@ Hizmet, başarılı veya başarısız olduğunu göstermek için HTTP durum kodl
    }  
 ```
 
-|Öğe adı | Tür | Açıklama |
+|Öğe adı | Tür | Description |
 |---|---|---|
 | kod | string | Oluşan hata türü.|
 | message | string | Hatanın neden olduğuna ilişkin bir açıklama. |

@@ -6,12 +6,12 @@ author: zr-msft
 ms.topic: article
 ms.date: 03/15/2021
 ms.author: zarhoads
-ms.openlocfilehash: 4f5232920853908aa5ad714313ead201494caa0d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e293d0c58f265b25f3df0a218f84888467468f59
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103493093"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767502"
 ---
 # <a name="quickstart-develop-on-azure-kubernetes-service-aks-with-helm"></a>Hızlı başlangıç: Held ile Azure Kubernetes hizmeti (AKS) üzerinde geliştirme
 
@@ -208,11 +208,11 @@ Held kullanma hakkında daha fazla bilgi için HELI belgelerine bakın.
 > [!div class="nextstepaction"]
 > [Helm belgeleri][helm-documentation]
 
-[az-acr-create]: /cli/azure/acr#az-acr-create
-[az-acr-build]: /cli/azure/acr#az-acr-build
-[az-group-delete]: /cli/azure/group#az-group-delete
-[az aks get-credentials]: /cli/azure/aks#az-aks-get-credentials
-[az aks install-cli]: /cli/azure/aks#az-aks-install-cli
+[az-acr-create]: /cli/azure/acr#az_acr_create
+[az-acr-build]: /cli/azure/acr#az_acr_build
+[az-group-delete]: /cli/azure/group#az_group_delete
+[az aks get-credentials]: /cli/azure/aks#az_aks_get_credentials
+[az aks install-cli]: /cli/azure/aks#az_aks_install_cli
 [example-nodejs]: https://github.com/Azure/dev-spaces/tree/master/samples/nodejs/getting-started/webfrontend
 [kubectl]: https://kubernetes.io/docs/user-guide/kubectl/
 [helm]: https://helm.sh/

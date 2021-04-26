@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 04/29/2020
-ms.openlocfilehash: 61f3f2af61bc24f76d061de672a3eaacd54f7f0e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 87a2bcc386ec5688fadb68aabdd2e5239e205516
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96015205"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077483"
 ---
 # <a name="exchange-x12-messages-for-b2b-enterprise-integration-in-azure-logic-apps-with-enterprise-integration-pack"></a>Enterprise Integration Pack ile Azure Logic Apps B2B kurumsal tümleştirme için Exchange x12 iletileri
 
@@ -79,7 +79,6 @@ Anlaşma özelliklerini ayarladıktan sonra, bu sözleşmenin bu anlaşma aracı
 |----------|-------------|
 | **TA1 bekleniyor** | Değiş tokuş göndericisine teknik onay (TA1) döndürün. |
 | **SK bekleniyor** | Değişim göndericisine bir işlevsel bildirim (SK) döndürün. <p>Şema sürümüne göre **SK sürümü** özelliği için 997 veya 999 bildirimleri ' ni seçin. <p>Kabul edilen işlem kümelerine yönelik işlevsel AK2 döngüleri oluşturmayı etkinleştirmek için **AK2/IK2 döngüsünü dahil et**' i seçin. |
-||||
 
 <a name="inbound-schemas"></a>
 

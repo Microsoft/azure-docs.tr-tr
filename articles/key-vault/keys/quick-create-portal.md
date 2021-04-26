@@ -3,7 +3,6 @@ title: Azure hızlı başlangıç-Azure portal kullanarak Key Vault bir anahtar 
 description: Azure portal kullanarak Azure Key Vault bir anahtarın nasıl ayarlanacağını ve alınacağını gösteren hızlı başlangıç
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: keys
@@ -11,12 +10,12 @@ ms.topic: quickstart
 ms.custom: mvc
 ms.date: 03/24/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 419fe72d400177ce9fa3d9811d7dfa06e74c0810
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1c6cca640d8607a355e0ffca36e3af502df5052c
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97935062"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815513"
 ---
 # <a name="quickstart-set-and-retrieve-a-key-from-azure-key-vault-using-the-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak Azure Key Vault bir anahtar ayarlama ve alma
 
@@ -83,4 +82,4 @@ Bu hızlı başlangıçta bir Key Vault oluşturdunuz ve içinde bir anahtar dep
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
 - [Azure Key Vault geliştirici kılavuzuna](../general/developers-guide.md) bakın
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu gözden geçirin
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu gözden geçirin

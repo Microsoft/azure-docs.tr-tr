@@ -1,17 +1,17 @@
 ---
 title: Azure özel kaynak sağlayıcıları için yerleşik ilke tanımları
 description: Azure özel kaynak sağlayıcıları için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 author: jjbfour
 ms.author: jobreen
 ms.custom: subject-policy-reference
-ms.openlocfilehash: 2933bd0b36932e68532a4ffa40747c4490f24fd1
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: aa096f4912ccceb63d978bebaff2ab26869fb0b9
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105032404"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873244"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-custom-resource-providers"></a>Azure özel kaynak sağlayıcıları için Azure Ilkesi yerleşik tanımları
 

@@ -6,20 +6,20 @@ ms.author: anmuk
 ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: reference
-ms.date: 02/05/2021
-ms.openlocfilehash: 60aede65f8217d46844398d0199ff7edca7f36a9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 4/1/2021
+ms.openlocfilehash: e1d3d495d958465e966701aa7ce91bc2706b48e0
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200798"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219595"
 ---
 # <a name="supported-classifications-in-azure-purview"></a>Azure purview 'da desteklenen sınıflandırmalar
 
 Bu makalede, Azure purview (Önizleme) içinde desteklenen ve tanımlanan sistem sınıflandırmaları listelenmektedir.
 
 
-- **Ayrı eşleşme eşiği**: tarayıcıdan veri modelini çalıştırmadan önce bir sütunda bulunması gereken ayrı veri değerlerinin toplam sayısı. Sistem sınıflandırma kurallarımız, her sütunda sınıflandırılmaları için en az 8 farklı değer olmasını gerektirir. Bu değer, sütunun tarayıcıya doğru bir şekilde sınıflandırmasına yetecek kadar veri içerdiğinden emin olmak için bu değeri gerektirir. Örneğin, 1 değerini içeren birden çok satır içeren bir sütun sınıflandırılmayacaktır. Değer içeren bir satır içeren sütunlar ve satırların geri kalanı null değerleri de sınıflandırılmayacaktır. Birden çok desen belirtirseniz bu değer bunların her biri için geçerlidir.
+- **Ayrı eşleşme eşiği**: tarayıcıdan veri modelini çalıştırmadan önce bir sütunda bulunması gereken ayrı veri değerlerinin toplam sayısı. DISTINCT eşleşme eşiğinin, model eşleştirme ile hiçbir şey yok, ancak bu, bir model eşleştirme için önkoşul. Sistem sınıflandırma kurallarımız, her sütunda sınıflandırılmaları için en az 8 farklı değer olmasını gerektirir. Bu değer, sütunun tarayıcıya doğru bir şekilde sınıflandırmasına yetecek kadar veri içerdiğinden emin olmak için bu değeri gerektirir. Örneğin, 1 değerini içeren birden çok satır içeren bir sütun sınıflandırılmayacaktır. Değer içeren bir satır içeren sütunlar ve satırların geri kalanı null değerleri de sınıflandırılmayacaktır. Birden çok desen belirtirseniz bu değer bunların her biri için geçerlidir.
 
 - **En küçük eşleşme eşiği**: sınıflandırmanın uygulanması için tarayıcı tarafından bulunması gereken bir sütundaki veri değeri eşleştirmelerinin en düşük yüzdesidir. Sistem sınıflandırma değeri %60 olarak ayarlanır.
 

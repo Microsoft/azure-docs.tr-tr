@@ -1,17 +1,17 @@
 ---
-title: Veri çoğaltma yapılandırma-MySQL için Azure veritabanı
+title: Gelen Verileri Çoğaltma yapılandırma-MySQL için Azure veritabanı
 description: Bu makalede MySQL için Azure veritabanı 'nın Gelen Verileri Çoğaltma nasıl ayarlanacağı açıklanır.
 author: savjani
 ms.author: pariks
 ms.service: mysql
 ms.topic: how-to
-ms.date: 01/13/2021
-ms.openlocfilehash: d5a013fc4e4ef931579da4fa13f400d5f4fcff0d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/08/2021
+ms.openlocfilehash: 5f418867a2f22a16304d16c8889fff9a27a37ab3
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102030758"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312170"
 ---
 # <a name="how-to-configure-azure-database-for-mysql-data-in-replication"></a>MySQL için Azure veritabanı 'nı yapılandırma Gelen Verileri Çoğaltma
 
@@ -21,21 +21,18 @@ Bu makalede, kaynak ve çoğaltma sunucularını yapılandırarak MySQL için Az
 > Bu makale, Microsoft 'un artık kullandığı bir terim olan _bağımlı_ dönem başvuruları içerir. Terim yazılımlardan kaldırıldığında, bu makaleden kaldıracağız.
 >
 
-MySQL için Azure veritabanı hizmetinde bir çoğaltma oluşturmak için, [gelen verileri çoğaltma](concepts-data-in-replication.md)  verileri Şirket içindeki bir kaynak MySQL sunucusundan, sanal makinelerde (VM) veya bulut veritabanı hizmetlerinde eşitler. Gelen Verileri Çoğaltma, MySQL’de yerel olan ikili günlük (binlog) dosya konumuna dayalı çoğaltmayı temel alır. Binlog çoğaltma hakkında daha fazla bilgi edinmek için [MySQL binlog çoğaltmasına genel bakış](https://dev.mysql.com/doc/refman/5.7/en/binlog-replication-configuration-overview.html)bölümüne bakın.
+MySQL için Azure veritabanı hizmetinde bir çoğaltma oluşturmak için, [gelen verileri çoğaltma](concepts-data-in-replication.md) verileri Şirket içindeki bir kaynak MySQL sunucusundan, sanal makinelerde (VM) veya bulut veritabanı hizmetlerinde eşitler. Gelen Verileri Çoğaltma ikili günlük (binlog) dosya konumu tabanlı veya GTıD tabanlı çoğaltmayı MySQL 'e göre temel alır. Binlog çoğaltma hakkında daha fazla bilgi edinmek için [MySQL binlog çoğaltmasına genel bakış](https://dev.mysql.com/doc/refman/5.7/en/binlog-replication-configuration-overview.html)bölümüne bakın.
 
 Bu makaledeki adımları gerçekleştirmeden önce, verileri çoğaltmanın [sınırlamalarını ve gereksinimlerini](concepts-data-in-replication.md#limitations-and-considerations) gözden geçirin.
 
-## <a name="create-a-mysql-server-to-be-used-as-replica"></a>Çoğaltma olarak kullanılacak bir MySQL sunucusu oluşturma
+## <a name="create-an-azure-database-for-mysql-single-server-instance-to-use-as-a-replica"></a>Çoğaltma olarak kullanılacak MySQL için Azure veritabanı tek sunucu örneği oluşturma
 
-1. MySQL için yeni bir Azure veritabanı sunucusu oluşturun
-
-   Yeni bir MySQL sunucusu (örn.) oluşturun. "replica.mysql.database.azure.com"). Sunucu oluşturma için [Azure Portal kullanarak MySQL Için Azure veritabanı sunucusu oluşturma](quickstart-create-mysql-server-database-using-azure-portal.md) bölümüne bakın. Bu sunucu, Gelen Verileri Çoğaltma "çoğaltma" sunucusudur.
+1. MySQL tek sunucusu için Azure veritabanı 'nın yeni bir örneğini oluşturun (örn. "replica.mysql.database.azure.com"). Sunucu oluşturma için [Azure Portal kullanarak MySQL Için Azure veritabanı sunucusu oluşturma](quickstart-create-mysql-server-database-using-azure-portal.md) bölümüne bakın. Bu sunucu, Gelen Verileri Çoğaltma için "çoğaltma" sunucusudur.
 
    > [!IMPORTANT]
-   > MySQL için Azure veritabanı sunucusunun Genel Amaçlı veya bellek için Iyileştirilmiş fiyatlandırma katmanlarında oluşturulması gerekir.
-   >
+   > Veri içi çoğaltma yalnızca bu katmanlarda desteklendiğinden, MySQL için Azure veritabanı sunucusunun Genel Amaçlı veya bellek için Iyileştirilmiş fiyatlandırma katmanlarında oluşturulması gerekir.
 
-2. Aynı kullanıcı hesaplarını ve ilgili ayrıcalıkları oluşturma
+2. Aynı kullanıcı hesaplarını ve ilgili ayrıcalıkları oluşturun.
 
    Kullanıcı hesapları, kaynak sunucudan Çoğaltma sunucusuna çoğaltılmaz. Kullanıcılara Çoğaltma sunucusuna erişimi sağlamayı planlıyorsanız, bu yeni oluşturulan MySQL sunucusu için Azure veritabanı 'nda tüm hesapları ve ilgili ayrıcalıkları el ile oluşturmanız gerekir.
 
@@ -43,9 +40,13 @@ Bu makaledeki adımları gerçekleştirmeden önce, verileri çoğaltmanın [sı
 
    [Azure portalını](howto-manage-firewall-using-portal.md) veya [Azure CLI](howto-manage-firewall-using-cli.md)’yı kullanarak güvenlik duvarı kurallarını güncelleştirin.
 
-## <a name="configure-the-source-server"></a>Kaynak sunucuyu yapılandırma
+4. **Isteğe bağlı** -kaynak sunucudan MySQL Için Azure veritabanı çoğaltma sunucusuna [gtıd tabanlı çoğaltma](https://dev.mysql.com/doc/mysql-replication-excerpt/5.7/en/replication-gtids-concepts.html) kullanmak istiyorsanız aşağıdaki portal görüntüsünde gösterildiği gibi MySQL için Azure veritabanı sunucusunda aşağıdaki sunucu parametrelerini etkinleştirmeniz gerekir:
 
-Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir sanal makinede veya Gelen Verileri Çoğaltma için diğer bulut sağlayıcıları tarafından barındırılan veritabanı hizmetinde hazırlar ve yapılandırır. Bu sunucu, veri içindeki çoğaltmada "kaynak" dır.
+   :::image type="content" source="./media/howto-data-in-replication/enable-gtid.png" alt-text="MySQL için Azure veritabanı sunucusunda GTıD 'yi etkinleştirme":::
+
+## <a name="configure-the-source-mysql-server"></a>Kaynak MySQL sunucusunu yapılandırma
+
+Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir sanal makinede veya Gelen Verileri Çoğaltma için diğer bulut sağlayıcıları tarafından barındırılan veritabanı hizmetinde hazırlar ve yapılandırır. Bu sunucu, veri içi çoğaltma için "kaynak" dır.
 
 1. Devam etmeden önce [kaynak sunucu gereksinimlerini](concepts-data-in-replication.md#requirements) gözden geçirin.
 
@@ -55,7 +56,7 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
 
    Kuruluşunuz sıkı güvenlik ilkelerine sahipse ve kaynak sunucudaki tüm IP adreslerinin Azure 'dan kaynak sunucunuza iletişim kurmasını engellemesine izin vermedikçe, MySQL sunucunuzun IP adresini belirleyebilmek için aşağıdaki komutu kullanabilirsiniz.
 
-   1. MySQL komut satırı gibi bir araç kullanarak MySQL için Azure veritabanı 'nda oturum açın.
+   1. MySQL komut satırı gibi bir araç kullanarak MySQL için Azure veritabanı sunucusunda oturum açın.
 
    2. Aşağıdaki sorguyu yürütün.
 
@@ -74,7 +75,7 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
       ```
 
    3. MySQL komut satırından çıkın.
-   4. IP adresini almak için ping yardımcı programında aşağıdaki komutu yürütün.
+   4. IP adresini almak için ping yardımcı programında aşağıdaki komutu yürütün:
 
       ```bash
       ping <output of step 2b>
@@ -89,36 +90,36 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
 
    5. Kaynak sunucunuzun güvenlik duvarı kurallarını, 3306 numaralı bağlantı noktasına önceki adımın çıkış IP adresini içerecek şekilde yapılandırın.
 
-   > [!NOTE]
-   > Bu IP adresi, bakım/dağıtım işlemleri nedeniyle değişebilir. Bu bağlantı yöntemi yalnızca 3306 bağlantı noktasındaki tüm IP adreslerine izin veren müşteriler içindir.
+      > [!NOTE]
+      > Bu IP adresi, bakım/dağıtım işlemleri nedeniyle değişebilir. Bu bağlantı yöntemi yalnızca 3306 bağlantı noktasındaki tüm IP adreslerine izin veren müşteriler içindir.
   
-3. İkili günlüğü aç
+3. İkili günlüğü açın.
 
-   Aşağıdaki komutu çalıştırarak, kaynak üzerinde ikili günlük özelliğinin etkinleştirilip etkinleştirilmediğini denetleyin: 
+   Aşağıdaki komutu çalıştırarak, kaynak üzerinde ikili günlük özelliğinin etkinleştirilip etkinleştirilmediğini denetleyin:
 
    ```sql
    SHOW VARIABLES LIKE 'log_bin';
    ```
 
    Değişken [`log_bin`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_log_bin) "on" değeriyle döndürülürse, sunucunuzda ikili günlük etkin olur.
-   
-    `log_bin`"Off" değeriyle döndürülürse ve kaynak sunucunuz şirket içinde veya yapılandırma dosyasına (My. CNF) erişebileceğiniz sanal makinelerde çalışıyorsa, aşağıdaki adımları izleyebilirsiniz:
+
+   `log_bin`"Off" değeriyle döndürülürse ve kaynak sunucunuz şirket içinde veya yapılandırma dosyasına (My. CNF) erişebileceğiniz sanal makinelerde çalışıyorsa, aşağıdaki adımları izleyebilirsiniz:
    1. Kaynak sunucuda MySQL yapılandırma dosyanızı (My. CNF) bulun. Örneğin:/etc/mypst CNF
    2. Düzenlemek için yapılandırma dosyasını açın ve dosyadaki **mysqld** bölümünü bulun.
-   3.  Mysqld bölümünde aşağıdaki satırı ekleyin
-   
+   3. Mysqld bölümünde aşağıdaki satırı ekleyin:
+
        ```bash
        log-bin=mysql-bin.log
        ```
-     
+
    4. Değişikliklerin etkili olması için MySQL kaynak sunucusunu yeniden başlatın.
    5. Sunucu yeniden başlatıldıktan sonra, önceki ile aynı sorguyu çalıştırarak ikili günlüğün etkinleştirildiğini doğrulayın:
-   
+
       ```sql
       SHOW VARIABLES LIKE 'log_bin';
       ```
-   
-4. Kaynak sunucu ayarları
+
+4. Kaynak sunucu ayarlarını yapılandırın.
 
    Gelen Verileri Çoğaltma, parametrenin `lower_case_table_names` kaynak ve çoğaltma sunucuları arasında tutarlı olmasını gerektirir. Bu parametre, MySQL için Azure veritabanı 'nda varsayılan olarak 1 ' dir.
 
@@ -126,7 +127,16 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
    SET GLOBAL lower_case_table_names = 1;
    ```
 
-5. Yeni bir çoğaltma rolü oluşturma ve izin ayarlama
+   **Isteğe bağlı** - [gtıd tabanlı çoğaltma](https://dev.mysql.com/doc/mysql-replication-excerpt/5.7/en/replication-gtids-concepts.html)kullanmak istiyorsanız, kaynak sunucuda gtıd 'nin etkinleştirilip etkinleştirilmediğini denetlemeniz gerekir. Gtid_mode açık olup olmadığını görmek için kaynak MySQL sunucunuza aşağıdaki komutu çalıştırabilirsiniz.
+
+   ```sql
+   show variables like 'gtid_mode';
+   ```
+
+   >[!IMPORTANT]
+   > Tüm sunucuların varsayılan değeri kapalı gtid_mode ayarlanmış. Gelen Verileri Çoğaltma ayarlamak için kaynak MySQL sunucusunda GTıD 'yi etkinleştirmeniz gerekmez. GTıD kaynak sunucuda zaten etkinleştirilmişse, isteğe bağlı olarak GTıD tabanlı çoğaltma kullanarak Gelen Verileri Çoğaltma, MySQL için Azure veritabanı tek sunuculu çok fazla ayarlayabilirsiniz. Kaynak sunucudaki gitd_mode yapılandırmadan bağımsız olarak tüm sunucular için veri çoğaltmasını ayarlamak üzere dosya tabanlı çoğaltmayı kullanabilirsiniz.
+
+5. Yeni bir çoğaltma rolü oluşturun ve izin ayarlayın.
 
    Kaynak sunucuda, çoğaltma ayrıcalıklarıyla yapılandırılmış bir kullanıcı hesabı oluşturun. Bu, SQL komutları veya MySQL çalışma ekranı gibi bir araç aracılığıyla yapılabilir. Kullanıcı oluştururken belirtilmesi gereken SSL ile çoğaltmayı planlayıp planladığınızı düşünün. Kaynak sunucunuza [Kullanıcı hesaplarının nasıl ekleneceğini](https://dev.mysql.com/doc/refman/5.7/en/user-names.html) anlamak için MySQL belgelerine bakın.
 
@@ -166,7 +176,7 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
 
    :::image type="content" source="./media/howto-data-in-replication/replicationslave.png" alt-text="Çoğaltma bağımlı":::
 
-6. Kaynak sunucuyu salt okunurdur moduna ayarlama
+6. Kaynak sunucuyu salt okunurdur moduna ayarlayın.
 
    Veritabanının dökümünü başlatmadan önce, sunucunun salt okunurdur modunda yerleştirilmesi gerekir. Salt okuma modundayken, kaynak herhangi bir yazma işlemini işleyemeyecektir. İşletmenizin etkisini değerlendirin ve gerekirse, salt okuma penceresini yoğun olmayan bir zamanda zamanlayın.
 
@@ -175,25 +185,30 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
    SET GLOBAL read_only = ON;
    ```
 
-7. İkili günlük dosyası adı ve sapmasını al
+7. İkili günlük dosyası adı ve sapmasını alın.
 
    [`show master status`](https://dev.mysql.com/doc/refman/5.7/en/show-master-status.html)Geçerli ikili günlük dosyası adını ve sapmasını öğrenmek için komutunu çalıştırın.
 
    ```sql
     show master status;
    ```
-
-   Sonuçlar aşağıdakine benzer görünmelidir. Daha sonraki adımlarda kullanılacak şekilde, ikili dosya adını mutlaka unutmayın.
+   Sonuçlar aşağıdakine benzer görünmelidir. Sonraki adımlarda kullanmak üzere ikili dosya adını aklınızda olduğunuzdan emin olun.
 
    :::image type="content" source="./media/howto-data-in-replication/masterstatus.png" alt-text="Ana durum sonuçları":::
 
-## <a name="dump-and-restore-source-server"></a>Kaynak sunucu dökümünü al ve geri yükle
+## <a name="dump-and-restore-the-source-server"></a>Kaynak sunucu dökümünü alın ve geri yükleyin
 
 1. MySQL için Azure veritabanı 'na çoğaltmak istediğiniz veritabanlarını ve tabloları belirleme ve kaynak sunucudan döküm gerçekleştirme.
 
-    Yöneticinizdeki veritabanlarının dökümünü yapmak için mysqldump kullanabilirsiniz. Ayrıntılar için, [döküm & geri yükleme](concepts-migrate-dump-restore.md)bölümüne bakın. MySQL kitaplığı ve test kitaplığının dökümünü almak gereksizdir.
+    Birincil sunucunuzdaki veritabanlarının dökümünü yapmak için mysqldump kullanabilirsiniz. Ayrıntılar için, [döküm & geri yükleme](concepts-migrate-dump-restore.md)bölümüne bakın. MySQL kitaplığı ve test kitaplığının dökümünü almak gereksizdir.
 
-2. Kaynak sunucuyu okuma/yazma moduna ayarlayın.
+2. **Isteğe bağlı** - [gtıd tabanlı çoğaltma](https://dev.mysql.com/doc/mysql-replication-excerpt/5.7/en/replication-gtids-concepts.html)kullanmak istiyorsanız, birincil sırada yürütülen son işlemin gtıd 'sini belirlemeniz gerekir. Ana sunucuda yürütülen son işlemin GTıD 'sini aklınızda yapmak için aşağıdaki komutu kullanabilirsiniz.
+
+   ```sql
+   show global variables like 'gtid_executed';
+   ```
+
+3. Kaynak sunucuyu okuma/yazma moduna ayarlayın.
 
    Veritabanı oluşturulduktan sonra kaynak MySQL sunucusunu okuma/yazma moduna geri çevirin.
 
@@ -202,9 +217,15 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
    UNLOCK TABLES;
    ```
 
-3. Döküm dosyasını yeni sunucuya geri yükle.
+4. Döküm dosyasını yeni sunucuya geri yükle.
 
    Döküm dosyasını MySQL için Azure veritabanı hizmetinde oluşturulan sunucuya geri yükleyin. Bir MySQL sunucusuna bir döküm dosyası geri yüklemek için [döküm & geri yükleme](concepts-migrate-dump-restore.md) bölümüne bakın. Döküm dosyası büyükse, Çoğaltma sunucunuz ile aynı bölgedeki Azure 'daki bir sanal makineye yükleyin. Sanal makineden MySQL için Azure veritabanı sunucusuna geri yükleyin.
+
+5. **Isteğe bağlı** -birincil sunucuyla aynı olduğundan emin olmak için MySQL Için Azure veritabanı 'nda geri yüklenen sunucunun gtıd 'sini aklınızda olun. MySQL için Azure veritabanı çoğaltma sunucusu üzerindeki GTıD temizlenen değerin GTıD 'sini aklınızda bırakmak için aşağıdaki komutu kullanabilirsiniz. Gtid_purged değeri, GTıD tabanlı çoğaltmanın çalışması için adım 2 ' de belirtilen ana gtid_executed ile aynı olmalıdır.
+
+   ```sql
+   show global variables like 'gtid_purged';
+   ```
 
 ## <a name="link-source-and-replica-servers-to-start-data-in-replication"></a>Kaynak ve çoğaltma sunucularını başlangıç olarak bağlama Gelen Verileri Çoğaltma
 
@@ -215,12 +236,19 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
    İki sunucuyu bağlamak ve çoğaltmaya başlamak için MySQL için Azure DB hizmetinde hedef çoğaltma sunucusunda oturum açın ve dış örneği kaynak sunucu olarak ayarlayın. Bu işlem, `mysql.az_replication_change_master` MySQL Için Azure DB sunucusunda saklı yordam kullanılarak yapılır.
 
    ```sql
-   CALL mysql.az_replication_change_master('<master_host>', '<master_user>', '<master_password>', 3306, '<master_log_file>', <master_log_pos>, '<master_ssl_ca>');
+   CALL mysql.az_replication_change_master('<master_host>', '<master_user>', '<master_password>', <master_port>, '<master_log_file>', <master_log_pos>, '<master_ssl_ca>');
+   ```
+
+   **Isteğe bağlı** - [gtıd tabanlı çoğaltma](https://dev.mysql.com/doc/mysql-replication-excerpt/5.7/en/replication-gtids-concepts.html)kullanmak istiyorsanız, iki sunucuyu bağlamak için aşağıdaki komutu kullanmanız gerekir
+
+    ```sql
+   call mysql.az_replication_change_master_with_gtid('<master_host>', '<master_user>', '<master_password>', <master_port>, '<master_ssl_ca>');
    ```
 
    - master_host: kaynak sunucunun ana bilgisayar adı
    - master_user: kaynak sunucu için Kullanıcı adı
    - master_password: kaynak sunucu için parola
+   - master_port: kaynak sunucunun bağlantıları dinlediği bağlantı noktası numarası. (3306, MySQL 'in dinlediği varsayılan bağlantı noktasıdır)
    - master_log_file: çalışan ikili günlük dosyası adı `show master status`
    - master_log_pos: sıfırdan ikili günlük konumu `show master status`
    - master_ssl_ca: CA sertifikasının bağlamı. SSL kullanmıyorsanız, boş bir dize geçirin.
@@ -256,7 +284,7 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
       CALL mysql.az_replication_change_master('master.companya.com', 'syncuser', 'P@ssword!', 3306, 'mysql-bin.000002', 120, '');
       ```
 
-2. Menin.
+2. Filtrelemeyi ayarlayın.
 
    Ana bilgisayarınızdan bazı tabloların çoğaltılmasını atlamak istiyorsanız, `replicate_wild_ignore_table` çoğaltma sunucunuzdaki sunucu parametresini güncelleştirin. Virgülle ayrılmış bir liste kullanarak birden fazla tablo kalıbı sağlayabilirsiniz.
 
@@ -282,7 +310,7 @@ Aşağıdaki adımlar, şirket içinde barındırılan MySQL sunucusunu, bir san
 
    `Slave_IO_Running`Ve durumu `Slave_SQL_Running` "Yes" ise ve değeri `Seconds_Behind_Master` "0" ise, çoğaltma iyi çalışır. `Seconds_Behind_Master` çoğaltmanın ne kadar geç olduğunu gösterir. Değer "0" değilse, çoğaltmanın güncelleştirmeleri işlemesi anlamına gelir.
 
-## <a name="other-stored-procedures"></a>Diğer saklı yordamlar
+## <a name="other-useful-stored-procedures-for-data-in-replication-operations"></a>Gelen Verileri Çoğaltma işlemler için diğer yararlı saklı yordamlar
 
 ### <a name="stop-replication"></a>Çoğaltmayı durdurma
 
@@ -307,6 +335,22 @@ CALL mysql.az_replication_remove_master;
 ```sql
 CALL mysql.az_replication_skip_counter;
 ```
+
+ **Isteğe bağlı** - [gtıd tabanlı çoğaltma](https://dev.mysql.com/doc/mysql-replication-excerpt/5.7/en/replication-gtids-concepts.html)kullanmak istiyorsanız, bir işlemi atlamak için aşağıdaki saklı yordamı kullanın
+
+```sql
+call mysql. az_replication_skip_gtid_transaction(‘<transaction_gtid>’)
+```
+
+Yordam, verilen GTıD için işlemi atlayabilir. GTıD biçimi doğru değilse veya GTıD işlemi zaten yürütülürse, yordam yürütülemeyebilir. Bir işlem için GTıD, işlem olaylarını denetlemek için ikili günlük ayrıştırarak belirlenebilir. MySQL, ikili günlükleri ayrıştırmak ve içeriklerini metin biçiminde göstermek için [mysqlbinlog](https://dev.mysql.com/doc/refman/5.7/en/mysqlbinlog.html) yardımcı programı sağlar ve bu da işlemin gtıd 'sini tanımlamak için kullanılabilir.
+
+Geçerli çoğaltma konumundan sonraki işlemi atlamak için, aşağıda gösterildiği gibi sonraki işlemin GTıD 'sini tanımlamak için aşağıdaki komutu kullanın.
+
+```sql
+SHOW BINLOG EVENTS [IN 'log_name'] [FROM pos][LIMIT [offset,] row_count]
+```
+
+  :::image type="content" source="./media/howto-data-in-replication/show-binary-log.png" alt-text="İkili günlük sonuçlarını göster":::
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

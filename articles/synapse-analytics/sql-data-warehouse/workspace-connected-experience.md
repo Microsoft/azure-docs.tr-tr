@@ -11,10 +11,10 @@ ms.date: 11/23/2020
 ms.author: anvang
 ms.reviewer: jrasnick
 ms.openlocfilehash: 6d71d9889701ec834747e4bec1dd111157c3206e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101694623"
 ---
 # <a name="enabling-synapse-workspace-features-on-an-existing-dedicated-sql-pool-formerly-sql-dw"></a>Var olan ayrılmış bir SQL havuzunda SYNAPSE çalışma alanı özelliklerini etkinleştirme (eski adıyla SQL DW)

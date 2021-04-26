@@ -7,15 +7,15 @@ ms.service: machine-learning
 ms.subservice: core
 ms.author: keli19
 author: likebupt
-ms.date: 04/06/2020
+ms.date: 03/06/2021
 ms.topic: conceptual
 ms.custom: how-to, designer
-ms.openlocfilehash: 6efb0f095f8a157f723a3b7c0c2b229546ebb36b
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ed5f59fc1d751f92a7c016aa3586497659f778fd
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97708475"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105962960"
 ---
 # <a name="use-pipeline-parameters-to-retrain-models-in-the-designer"></a>Tasarımcıda modelleri yeniden eğitme işlem hattı parametrelerini kullanma
 
@@ -120,3 +120,5 @@ REST çağrısı yapmak için bir OAuth 2,0 taşıyıcı türü kimlik doğrulam
 Bu makalede, Tasarımcıyı kullanarak parametreli bir eğitim işlem hattı uç noktası oluşturmayı öğrendiniz.
 
 Tahmine dayalı hale getirmek üzere bir modeli nasıl dağıtacağınızı gösteren kapsamlı bir kılavuz için bkz. bir regresyon modeli eğitme ve dağıtmaya yönelik [Tasarımcı öğreticisi](tutorial-designer-automobile-price-train-score.md) .
+
+SDK kullanarak bir çalıştırma ardışık düzen uç noktasına yayımlama ve gönderme için, [Bu makaleye](how-to-deploy-pipelines.md)bakın.

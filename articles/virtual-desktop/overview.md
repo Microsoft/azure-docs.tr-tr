@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: overview
 ms.date: 09/14/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: f26d6b258c1e22d5d28353486378acc9aa0bbd5d
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+manager: femila
+ms.openlocfilehash: a6d98f827c39f973714441e308dcc4f2bd061c9b
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104889646"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107835587"
 ---
 # <a name="what-is-windows-virtual-desktop"></a>Windows Sanal Masaüstü nedir?
 
@@ -91,7 +91,7 @@ Windows sanal masaüstü için oluşturduğunuz Azure sanal makineleri şu şeki
 >[!NOTE]
 >Bir Azure aboneliğine ihtiyacınız varsa, bir [aylık ücretsiz deneme için kaydolabilirsiniz](https://azure.microsoft.com/free/). Azure 'un ücretsiz deneme sürümünü kullanıyorsanız, Windows Server Active Directory Azure Active Directory ile eşitlenmiş halde tutmak için Azure AD Domain Services kullanmanız gerekir.
 
-Windows sanal masaüstü dağıtımınızın beklendiği gibi çalışması için engellemesini kaldırmanız gereken URL 'lerin bir listesi için, bkz. [GÜVENLI URL listemize](safe-url-list.md)bakın.
+Windows sanal masaüstü dağıtımınızın beklendiği gibi çalışması için engellemesini kaldırmanız gereken URL 'lerin bir listesi için, [gereklı URL listemize](safe-url-list.md)bakın.
 
 Windows sanal masaüstü, kullanıcılara ve Microsoft tarafından Azure 'da bir hizmet olarak barındırılan yönetim çözümüne ait olan Windows Masaüstü ve uygulamalarını içerir. Masaüstleri ve uygulamalar, herhangi bir Azure bölgesindeki sanal makinelerde (VM) dağıtılabilir ve bu VM 'Lerin yönetim çözümü ve verileri Birleşik Devletler yer alır. Bu, Birleşik Devletler veri aktarımına neden olabilir.
 

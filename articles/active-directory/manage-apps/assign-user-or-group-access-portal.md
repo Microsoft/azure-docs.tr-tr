@@ -2,21 +2,21 @@
 title: Azure Active Directory’de uygulama için kullanıcı atamasını yönetme
 description: Kimlik yönetimi için Azure Active Directory kullanarak bir uygulama için kullanıcılar ve gruplar atamayı ve atamayı öğrenin.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: how-to
 ms.date: 02/21/2020
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: luleon
-ms.openlocfilehash: 50dcde478b708cd53d8229d70a9ddf4b1ff271be
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 097bf55cc7e5372749240c19afb09ba374d437af
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99259743"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377981"
 ---
 # <a name="manage-user-assignment-for-an-app-in-azure-active-directory"></a>Azure Active Directory’de uygulama için kullanıcı atamasını yönetme
 
@@ -155,5 +155,5 @@ Bu örnek, PowerShell kullanarak [Microsoft çalışma alanı analizi](https://p
 
 - [Tüm gruplarımı gör](../fundamentals/active-directory-groups-view-azure-portal.md)
 - [Bir kurumsal uygulamadan Kullanıcı veya grup atamasını kaldırma]()
-- [Kurumsal uygulama için Kullanıcı oturum açma işlemlerini devre dışı bırakma](disable-user-sign-in-portal.md)
+- [Kurumsal uygulama için kullanıcı oturum açma işlemlerini devre dışı bırakma](disable-user-sign-in-portal.md)
 - [Kurumsal uygulamanın adını veya logosunu değiştirme](./add-application-portal-configure.md)

@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 1/22/2020
 ms.author: kumud
-ms.openlocfilehash: 74e09b4798a648b6a881fb05f1128831ad5f4aff
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8003bf14bcade08f36a7877fdb3a53998aff9e63
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100586431"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773079"
 ---
 # <a name="create-change-or-delete-a-network-interface"></a>Ağ arabirimi oluşturma, değiştirme veya silme
 
@@ -66,6 +66,8 @@ Portal, ağ arabirimi oluştururken uygulama güvenlik gruplarına ağ arabirimi
 
 >[!Note]
 > Azure, ağ arabirimi bir sanal makineye eklendikten ve sanal makine ilk kez başlatıldıktan sonra ağ arabirimine bir MAC adresi atar. Azure 'un ağ arabirimine atadığı MAC adresini belirtemezsiniz. Ağ arabirimi silininceye veya birincil ağ arabiriminin birincil IP yapılandırmasına atanan özel IP adresi değiştirilinceye kadar MAC adresi ağ arabirimine atanmış olarak kalır. IP adresleri ve IP konfigürasyonları hakkında daha fazla bilgi edinmek için bkz. [IP adreslerini yönetme](virtual-network-network-interface-addresses.md)
+
+[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
 
 **Komutlar**
 
@@ -188,7 +190,7 @@ Ağ arabirimi bir sanal makineye bağlıysa, portalı kullanarak bir ağ arabiri
 
 **Komutlar**
 
-- Azure CLı: [az Network Nic Update](/cli/azure/network/nic#az-network-nic-update)
+- Azure CLı: [az Network Nic Update](/cli/azure/network/nic#az_network_nic_update)
 - PowerShell: [set-Aznetworkınterface](/powershell/module/az.network/set-aznetworkinterface)
 
 ## <a name="delete-a-network-interface"></a>Ağ arabirimini silme
@@ -227,7 +229,7 @@ Azure ağ Izleyicisi 'nin IP akışı doğrulama özelliği, güvenlik kurallar�
 
 **Komutlar**
 
-- Azure CLı: [az Network Nic List-etkin-NSG](/cli/azure/network/nic#az-network-nic-list-effective-nsg)
+- Azure CLı: [az Network Nic List-etkin-NSG](/cli/azure/network/nic#az_network_nic_list_effective_nsg)
 - PowerShell: [Get-AzEffectiveNetworkSecurityGroup](/powershell/module/az.network/get-azeffectivenetworksecuritygroup)
 
 ### <a name="view-effective-routes"></a>Geçerli yolları görüntüle
@@ -244,7 +246,7 @@ Azure ağ Izleyicisi 'nin sonraki atlama özelliği, yolların bir sanal makine 
 
 **Komutlar**
 
-- Azure CLı: [az Network Nic Show-etkin-Route-Table](/cli/azure/network/nic#az-network-nic-show-effective-route-table)
+- Azure CLı: [az Network Nic Show-etkin-Route-Table](/cli/azure/network/nic#az_network_nic_show_effective_route_table)
 - PowerShell: [Get-AzEffectiveRouteTable](/powershell/module/az.network/get-azeffectiveroutetable)
 
 ## <a name="permissions"></a>İzinler

@@ -5,12 +5,12 @@ ms.assetid: 94af2caf-a2ec-4415-a097-f60694b860b3
 ms.topic: overview
 ms.date: 07/06/2020
 ms.custom: devx-track-dotnet, mvc, seodec18
-ms.openlocfilehash: 668988ae34c2f97f3baca3f360c13e3ec3e30731
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 771c79f56a31c83f2152886ad6cf68367776f83f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100586354"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767237"
 ---
 # <a name="app-service-overview"></a>App Service’e genel bakış
 
@@ -44,7 +44,7 @@ App Service, Web uygulamalarını desteklenen uygulama yığınları için yerel
 
 ### <a name="built-in-languages-and-frameworks"></a>Yerleşik diller ve çerçeveler
 
-Linux üzerinde App Service, bir dizi dile özgü yerleşik görüntüyü destekler. Kodunuzu dağıtmanız yeterlidir. Desteklenen diller şunlardır: Node.js, Java (JRE 8 & JRE 11), PHP, Python, .NET Core ve Ruby. [`az webapp list-runtimes --linux`](/cli/azure/webapp#az-webapp-list-runtimes)En son dilleri ve desteklenen sürümleri görüntülemek için ' i çalıştırın. Uygulamanızın gerektirdiği çalışma zamanı yerleşik resimlerde desteklenmiyorsa, özel bir kapsayıcı ile dağıtabilirsiniz.
+Linux üzerinde App Service, bir dizi dile özgü yerleşik görüntüyü destekler. Kodunuzu dağıtmanız yeterlidir. Desteklenen diller şunlardır: Node.js, Java (JRE 8 & JRE 11), PHP, Python, .NET Core ve Ruby. [`az webapp list-runtimes --linux`](/cli/azure/webapp#az_webapp_list_runtimes)En son dilleri ve desteklenen sürümleri görüntülemek için ' i çalıştırın. Uygulamanızın gerektirdiği çalışma zamanı yerleşik resimlerde desteklenmiyorsa, özel bir kapsayıcı ile dağıtabilirsiniz.
 
 Süresi geçmiş çalışma zamanları, portalda Web Apps oluşturma ve yapılandırma dikey penceresinden düzenli aralıklarla kaldırılır. Bu çalışma zamanları, bakım organizasyonu tarafından kullanım dışı olduklarında veya önemli güvenlik açıklarına sahip olduğu durumlarda portaldan gizlenir. Bu seçenekler, müşterileri en başarılı olacağı en son çalışma zamanları ile rehberlik etmek için gizlidir. 
 

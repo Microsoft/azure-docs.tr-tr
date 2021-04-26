@@ -10,12 +10,12 @@ ms.topic: quickstart
 ms.custom: mvc,subject-armqs
 ms.date: 10/14/2020
 ms.author: sebansal
-ms.openlocfilehash: 48686fb78dc4295da3bd390d92ae3837cd09a4d0
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 048482c6b52d3fd9225224bd3b4ff3ee66bf24fd
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105639431"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815369"
 ---
 # <a name="quickstart-create-an-azure-key-vault-and-a-key-by-using-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak bir Azure Anahtar Kasası ve anahtar oluşturma 
 
@@ -223,4 +223,4 @@ Bu hızlı başlangıçta, bir ARM şablonu kullanarak bir anahtar kasası ve an
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
 - [Azure Resource Manager](../../azure-resource-manager/management/overview.md) hakkında daha fazla bilgi edinin
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu gözden geçirin
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu gözden geçirin

@@ -13,14 +13,14 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 02/01/2021
+ms.date: 04/12/2021
 ms.author: radeltch
-ms.openlocfilehash: dd000ca36bb0ad586b973b2bcdc638d8992b1a73
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c2610ed46d707af6acfb1b6004df4367add94391
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101668648"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107305166"
 ---
 # <a name="high-availability-of-sap-hana-scale-out-system-on-red-hat-enterprise-linux"></a>Red Hat Enterprise Linux üzerinde SAP HANA genişleme sisteminin yüksek kullanılabilirliği 
 
@@ -215,7 +215,6 @@ Bu belgede sunulan yapılandırma için yedi sanal makine dağıtın:
       1. Yeni yük dengeleyici kuralının adını girin (örneğin, **Hana-lb**).
       1. Ön uç IP adresini, arka uç havuzunu ve daha önce oluşturduğunuz sistem durumu araştırmasını (örneğin, **Hana-ön uç**, **Hana-arka uç** ve **Hana-HP**) seçin.
       1. **Ha bağlantı noktalarını** seçin.
-      1. **Boşta kalma zaman aşımını** 30 dakikaya yükseltin.
       1. **Kayan IP**'yi etkinleştirdiğinizden emin olun.
       1. **Tamam**’ı seçin.
 

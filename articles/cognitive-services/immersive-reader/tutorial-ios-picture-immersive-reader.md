@@ -9,18 +9,18 @@ ms.subservice: immersive-reader
 ms.topic: tutorial
 ms.date: 01/14/2020
 ms.author: metang
-ms.openlocfilehash: d8ee6b2344f0c953233195a693e774e410a8a8ea
-ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
+ms.openlocfilehash: 23e9fd586882d25aed646b984e17c5885145ccff
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/08/2020
-ms.locfileid: "94368211"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106284643"
 ---
 # <a name="tutorial-create-an-ios-app-that-launches-the-immersive-reader-with-content-from-a-photo-swift"></a>Öğretici: bir fotoğraftan içerikle modern okuyucu Başlatan bir iOS uygulaması oluşturma (Swift)
 
 [Tam ekran okuyucu](https://www.onenote.com/learningtools) , okuma kavramasını geliştirmek için kendini kanıtlamış teknikler uygulayan, ve dahil tasarlanmış bir araçtır.
 
-Görüntü İşleme bilişsel [Hizmetler okuma API 'si](../computer-vision/concept-recognizing-text.md) , Microsoft 'un en son tanıma modellerini kullanarak bir görüntüdeki metin içeriğini algılar ve tanımlanan metni makine tarafından okunabilen bir karakter akışına dönüştürür.
+Görüntü İşleme bilişsel [Hizmetler okuma API 'si](../computer-vision/overview-ocr.md) , Microsoft 'un en son tanıma modellerini kullanarak bir görüntüdeki metin içeriğini algılar ve tanımlanan metni makine tarafından okunabilen bir karakter akışına dönüştürür.
 
 Bu öğreticide, sıfırdan bir iOS uygulaması oluşturacaksınız ve okuma API 'SI ile modern okuyucu kullanarak tam ekran okuyucu SDK 'sını tümleştirirsiniz. Bu öğreticinin tam bir çalışma örneğine [buradan](https://github.com/microsoft/immersive-reader-sdk/tree/master/js/samples/ios)ulaşabilirsiniz.
 
@@ -38,7 +38,7 @@ Xcode 'da yeni bir proje oluşturun.
 
 ![Yeni Proje](./media/ios/xcode-create-project.png)
 
-**Tek görünüm uygulaması** ' nı seçin.
+**Tek görünüm uygulaması**' nı seçin.
 
 ![Yeni tek görünüm uygulaması](./media/ios/xcode-single-view-app.png)
 

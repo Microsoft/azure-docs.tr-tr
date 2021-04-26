@@ -1,17 +1,17 @@
 ---
 title: Planlı bakım bildirimi-PostgreSQL için Azure veritabanı-tek sunucu
 description: Bu makalede PostgreSQL için Azure veritabanı 'nda planlı bakım bildirimi özelliği (tek sunucu) açıklanmaktadır
-author: ambhatna
-ms.author: ambhatna
+author: sunilagarwal
+ms.author: sunila
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 10/21/2020
-ms.openlocfilehash: 8db556709f68a1184046989a15fad147542a05a7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 250ddf9f92559acd810aaed65d50ae45f2d7adc9
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98735750"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107227476"
 ---
 # <a name="planned-maintenance-notification-in-azure-database-for-postgresql---single-server"></a>PostgreSQL için Azure Veritabanı - Tek Sunucu'da planlı bakım bildirimi
 
@@ -23,13 +23,13 @@ PostgreSQL için Azure veritabanı hizmeti, temel alınan donanım, işletim sis
 
 Planlı bakım, bu hizmet güncelleştirmeleri belirli bir Azure bölgesindeki sunuculara dağıtıldığında bakım penceresidir. Planlı bakım sırasında, sunucularını barındıran Azure bölgesinde hizmet güncelleştirmesinin ne zaman dağıtılacağını müşteriye bildirmek için bir bildirim olayı oluşturulur. İki planlı bakım arasındaki en az süre 30 gündür. Sonraki bakım penceresi için 72 saat önce bildirim alırsınız.
 
-## <a name="planned-maintenance---duration-and-customer-impact"></a>Planlı bakım-süre ve müşteri etkisi
+## <a name="planned-maintenance---duration-and-customer-impact"></a>Planlı bakım - süre ve müşteri etkisi
 
 Belirli bir Azure bölgesinin planlı bir bakımının genellikle 15 saat içinde tamamlandığı beklenmektedir. Bu zaman penceresinde, gerektiğinde geri alma planının yürütülmesi için arabellek süresi de bulunur. PostgreSQL için Azure veritabanı sunucuları, veritabanı sunucusunun yeniden başlatılması genellikle 60-120 saniye sürer, ancak bu 15 saat içinde bu süre içinde bilmeniz gereken belirleyici bir yol olmasa da sunucunuz etkilenecek. Her sunucu yeniden başlatmalarının dahil olduğu tüm planlı bakım olayı, mühendislik ekibi tarafından dikkatle izlenir. Sunucu yük devretme süresi, veritabanı kurtarmaya bağımlıdır ve bu, yük devretme sırasında sunucuda ağır işlem etkinliğinizi varsa veritabanının daha fazla çevrimiçi olmasına neden olabilir. Yeniden başlatma zamanından daha uzun bir süre önlemek için planlı bakım olayları sırasında çalışan uzun işlemleri (toplu yükleme) önlemek önerilir.
 
 Özet olarak, planlanan bakım olayı 15 saat boyunca çalışırken, tek tek sunucu etkisi, sunucudaki hareketsel etkinliğe bağlı olarak genellikle 60 saniye sürer. Planlı bakım başlamadan önce bir bildirim 72 takvim saati, belirli bir bölge için bakım devam ederken ise başka bir uyarı gönderilir.
 
-## <a name="how-can-i-get-notified-of-planned-maintenance"></a>Planlı bakım hakkında nasıl bildirim alabilirim?
+## <a name="how-can-i-get-notified-of-planned-maintenance"></a>Planlı bakımla ilgili nasıl bildirim alabilirim?
 
 Planlı bakım bildirimleri özelliğini, yaklaşan bir planlı bakım olayına yönelik uyarılar almak için kullanabilirsiniz. Gelecekteki bakım 72 takvim saatleriyle ilgili bildirim, belirli bir bölge için bakım devam ederken olay ve başka bir durum hakkında bildirim alacaksınız.
 
@@ -63,11 +63,11 @@ Azure portal planlı bakım bildirimini denetleyebilir ya da uyarıları bildiri
 
 **Hizmet durumu uyarıları** oluşturma hakkında ayrıntılı adımlar için, [hizmet bildirimlerinde etkinlik günlüğü uyarıları oluşturma](../service-health/alerts-activity-log-service-notifications-portal.md)konusuna bakın.
 
-## <a name="can-i-cancel-or-postpone-planned-maintenance"></a>Planlı Bakımı iptal edebilir veya erteleyebilir miyim?
+## <a name="can-i-cancel-or-postpone-planned-maintenance"></a>Planlı bakımı iptal edebilir veya erteleyebilir miyim?
 
 Sunucunuzu güvenli, kararlı ve güncel tutmak için bakım yapmanız gerekir. Planlı bakım olayı iptal edilemez veya ertelenemez. Bildirim, belirli bir Azure bölgesine gönderildikten sonra, bu bölgedeki herhangi bir sunucu için düzeltme eki uygulama değişiklikleri yapılamaz. Düzeltme Eki, tüm bölge için aynı anda kullanıma alınır. PostgreSQL için Azure veritabanı-tek sunuculu hizmet, hizmet için ayrıntılı denetim veya özelleştirme gerektirmeyen bulut Yerel uygulaması için tasarlanmıştır. Sunucularınız için bakım zamanlanmasını istiyorsanız [Esnek sunucuları](./flexible-server/overview.md)düşünmeniz önerilir.
 
-## <a name="are-all-the-azure-regions-patched-at-the-same-time"></a>Tüm Azure bölgeleri aynı zamanda düzeltme eki uygulandı mı?
+## <a name="are-all-the-azure-regions-patched-at-the-same-time"></a>Tüm Azure bölgelerine düzeltme eki aynı zamanda mı uygulanır?
 
 Hayır, dağıtım Wise pencere zamanlamaları sırasında tüm Azure bölgelerinin düzeltme eki uygulanır. Dağıtım Wise penceresi genellikle belirli bir Azure bölgesinde 5 PM-8 ile yerel saat olan bir sonraki günden uzatılır. Coğrafi eşlenmiş Azure bölgeleri, farklı günlerde düzeltme eki uygulanmış. Veritabanı sunucularının yüksek kullanılabilirlik ve iş sürekliliği için, [çapraz bölge okuma Çoğaltmalarından](./concepts-read-replicas.md#cross-region-replication) yararlanmak önerilir.
 

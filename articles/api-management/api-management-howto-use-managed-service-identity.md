@@ -11,12 +11,13 @@ ms.workload: integration
 ms.topic: article
 ms.date: 03/09/2021
 ms.author: apimpm
-ms.openlocfilehash: 98237efae89e7d88dd23cb7e8fc9f7e9f05bca70
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 40ee196f53af040e4099fb344de5488109ce001b
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102521552"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812255"
 ---
 # <a name="use-managed-identities-in-azure-api-management"></a>Azure API Management Yönetilen kimlikler kullanma
 

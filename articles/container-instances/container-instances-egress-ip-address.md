@@ -3,12 +3,12 @@ title: Statik giden IP 'yi yapılandırma
 description: Giriş ve çıkış için güvenlik duvarının genel IP adresini kullanan Azure Container Instances iş yükleri için Azure Güvenlik duvarını ve Kullanıcı tanımlı yolları yapılandırma
 ms.topic: article
 ms.date: 07/16/2020
-ms.openlocfilehash: 497645b9fe7f908cc9b8b4d7ed0ba5e201570160
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a03c59652b9409d54bbe63c63a31fdd2228ac34e
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89566577"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107878695"
 ---
 # <a name="configure-a-single-public-ip-address-for-outbound-and-inbound-traffic-to-a-container-group"></a>Bir kapsayıcı grubuna giden ve gelen trafik için tek bir genel IP adresi yapılandırın
 
@@ -286,25 +286,19 @@ Trafiği yönetme ve Azure kaynaklarını koruma hakkında daha fazla bilgi içi
 
 
 
-[az-group-create]: /cli/azure/group#az-group-create
-[az-container-create]: /cli/azure/container#az-container-create
-[az-network-vnet-subnet-create]: /cli/azure/network/vnet/subnet#az-network-vnet-subnet-create
-[az-extension-add]: /cli/azure/extension#az-extension-add
-[az-network-firewall-update]: /cli/azure/ext/azure-firewall/network/firewall#ext-azure-firewall-az-network-firewall-update
-[az-network-public-ip-show]: /cli/azure/network/public-ip/#az-network-public-ip-show
-[az-network-route-table-create]:/cli/azure/network/route-table/#az-network-route-table-create
-[az-network-route-table-route-create]: /cli/azure/network/route-table/route#az-network-route-table-route-create
-[az-network-firewall-ip-config-list]: /cli/azure/ext/azure-firewall/network/firewall/ip-config#ext-azure-firewall-az-network-firewall-ip-config-list
-[az-network-vnet-subnet-update]: /cli/azure/network/vnet/subnet#az-network-vnet-subnet-update
-[az-container-exec]: /cli/azure/container#az-container-exec
-[az-vm-create]: /cli/azure/vm#az-vm-create
-[az-vm-open-port]: /cli/azure/vm#az-vm-open-port
-[az-vm-list-ip-addresses]: /cli/azure/vm#az-vm-list-ip-addresses
-[az-network-firewall-application-rule-create]: /cli/azure/ext/azure-firewall/network/firewall/application-rule#ext-azure-firewall-az-network-firewall-application-rule-create
-[az-network-firewall-nat-rule-create]: /cli/azure/ext/azure-firewall/network/firewall/nat-rule#ext-azure-firewall-az-network-firewall-nat-rule-create
-
-
-
-
-
-
+[az-group-create]: /cli/azure/group#az_group_create
+[az-container-create]: /cli/azure/container#az_container_create
+[az-network-vnet-subnet-create]: /cli/azure/network/vnet/subnet#az_network_vnet_subnet_create
+[az-extension-add]: /cli/azure/extension#az_extension_add
+[az-network-firewall-update]: /cli/azure/network/firewall#az_network_firewall_update
+[az-network-public-ip-show]: /cli/azure/network/public-ip/#az_network_public_ip_show
+[az-network-route-table-create]:/cli/azure/network/route-table/#az_network_route_table_create
+[az-network-route-table-route-create]: /cli/azure/network/route-table/route#az_network_route_table_route_create
+[az-network-firewall-ip-config-list]: /cli/azure/network/firewall/ip-config#az_network_firewall_ip_config_list
+[az-network-vnet-subnet-update]: /cli/azure/network/vnet/subnet#az_network_vnet_subnet_update
+[az-container-exec]: /cli/azure/container#az_container_exec
+[az-vm-create]: /cli/azure/vm#az_vm_create
+[az-vm-open-port]: /cli/azure/vm#az_vm_open_port
+[az-vm-list-ip-addresses]: /cli/azure/vm#az_vm_list_ip_addresses
+[az-network-firewall-application-rule-create]: /cli/azure/network/firewall/application-rule#az_network_firewall_application_rule_create
+[az-network-firewall-nat-rule-create]: /cli/azure/network/firewall/nat-rule#az_network_firewall_nat_rule_create

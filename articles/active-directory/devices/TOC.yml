@@ -66,7 +66,7 @@
     - name: Sık sorulan sorular
       items:
         - name: SSS
-          href: faq.md
+          href: faq.yml
         - name: Enterprise State’i etkinleştirme SSS’i
           href: enterprise-state-roaming-faqs.md
 - name: Başvuru

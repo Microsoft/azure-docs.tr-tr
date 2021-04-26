@@ -5,12 +5,12 @@ ms.date: 07/23/2020
 ms.topic: quickstart
 ms.reviewer: ravastra
 ms.custom: references_regions, devx-track-azurecli
-ms.openlocfilehash: 3442c3b6023edcde97aabcb13e91120ba6811027
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: da099aa75168e52d0024f4a4381c77b3e9ce67ab
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91323082"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107876661"
 ---
 # <a name="quickstart-create-an-azure-blockchain-service-blockchain-member-using-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak Azure blok zinciri hizmeti blok zinciri üyesi oluşturma
 
@@ -34,7 +34,7 @@ CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu hızlı başlang
 
 1. Oturum açın.
 
-    CLI’nın yerel yüklemesini kullanıyorsanız [az login](/cli/azure/reference-index#az-login) komutunu kullanarak oturum açın.
+    CLI’nın yerel yüklemesini kullanıyorsanız [az login](/cli/azure/reference-index#az_login) komutunu kullanarak oturum açın.
 
     ```azurecli
     az login
@@ -46,7 +46,7 @@ CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu hızlı başlang
 
     Azure CLI için uzantı başvurularıyla çalışırken önce uzantıyı yüklemeniz gerekir.  Azure CLI uzantıları, henüz temel CLI’nın parçası olarak gönderilmeyen deneysel ve ön sürüm komutlarına erişmenize olanak sağlar.  Güncelleştirme ve kaldırma da dahil olmak üzere uzantılar hakkında daha fazla bilgi edinmek için bkz. [Azure CLI ile uzantıları kullanma](/cli/azure/azure-cli-extensions-overview).
 
-    Aşağıdaki komutu çalıştırarak [Azure blok zinciri hizmeti uzantısını](/cli/azure/ext/blockchain/blockchain) yükler:
+    Aşağıdaki komutu çalıştırarak [Azure blok zinciri hizmeti uzantısını](/cli/azure/blockchain) yükler:
 
     ```azurecli-interactive
     az extension add --name blockchain
@@ -56,7 +56,7 @@ CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu hızlı başlang
 
     Tüm Azure kaynakları gibi Azure blok zinciri hizmeti 'nin bir kaynak grubuna dağıtılması gerekir. Kaynak grupları, ilgili Azure kaynaklarını düzenlemenizi ve yönetmenizi sağlar.
 
-    Bu hızlı başlangıç için, _eastus_ konumunda aşağıdaki [az Group Create](/cli/azure/group#az-group-create) komutuyla _myresourcegroup_ adlı bir kaynak grubu oluşturun:
+    Bu hızlı başlangıç için, _eastus_ konumunda aşağıdaki [az Group Create](/cli/azure/group#az_group_create) komutuyla _myresourcegroup_ adlı bir kaynak grubu oluşturun:
 
     ```azurecli-interactive
     az group create \

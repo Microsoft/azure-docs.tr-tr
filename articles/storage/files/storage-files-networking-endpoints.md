@@ -8,12 +8,12 @@ ms.date: 12/04/2020
 ms.author: rogarana
 ms.subservice: files
 ms.custom: devx-track-azurepowershell
-ms.openlocfilehash: 079d7aa9b654a318c7269a41605c3e146b08f127
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 42e83facec7817b6588bf69977fea5ab74b6b10d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96621340"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107759888"
 ---
 # <a name="configuring-azure-files-network-endpoints"></a>Azure dosyaları ağ uç noktalarını yapılandırma
 
@@ -23,7 +23,7 @@ Azure dosyaları, Azure dosya paylaşımlarına erişmek için iki ana uç nokta
 
 Azure depolama hesabında genel ve özel uç noktalar mevcuttur. Depolama hesabı, birden çok dosya paylaşımını ve BLOB kapsayıcıları ya da kuyrukları gibi diğer depolama kaynaklarını dağıtabileceğiniz, paylaşılan bir depolama havuzunu temsil eden bir yönetim yapısıdır.
 
-Bu makalede, Azure dosya paylaşımında doğrudan erişim için bir depolama hesabının uç noktalarının nasıl yapılandırılacağı ele alınmaktadır. Bu belgede sunulan ayrıntıların çoğu, depolama hesabının genel ve özel uç noktaları ile birlikte Azure Dosya Eşitleme için de geçerlidir. ancak, bir Azure Dosya Eşitleme dağıtımına yönelik ağ hususları hakkında daha fazla bilgi için, bkz [Azure dosya eşitleme proxy ve güvenlik duvarı ayarlarını yapılandırma](storage-sync-files-firewall-and-proxy.md).
+Bu makalede, Azure dosya paylaşımında doğrudan erişim için bir depolama hesabının uç noktalarının nasıl yapılandırılacağı ele alınmaktadır. Bu belgede sunulan ayrıntıların çoğu, depolama hesabının genel ve özel uç noktaları ile birlikte Azure Dosya Eşitleme için de geçerlidir. ancak, bir Azure Dosya Eşitleme dağıtımına yönelik ağ hususları hakkında daha fazla bilgi için, bkz [Azure dosya eşitleme proxy ve güvenlik duvarı ayarlarını yapılandırma](../file-sync/file-sync-firewall-and-proxy.md).
 
 Bu nasıl yapılır kılavuzu okumadan önce [Azure dosyaları ağ oluşturma konuları](storage-files-networking-overview.md) okumanız önerilir.
 

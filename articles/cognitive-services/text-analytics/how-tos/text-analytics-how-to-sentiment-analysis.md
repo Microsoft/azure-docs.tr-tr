@@ -8,18 +8,18 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: sample
-ms.date: 03/09/2021
+ms.date: 03/29/2021
 ms.author: aahi
-ms.openlocfilehash: e9d8e7b514dca7d4930ad33bf08d4ceb07fb860d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7cd2b0a6b943ceb32420ef119a7fc5eddefa2e19
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104599139"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277003"
 ---
 # <a name="how-to-sentiment-analysis-and-opinion-mining"></a>Nasıl yapılır: yaklaşım Analizi ve Görüşleme madenciliği
 
-Metin Analizi API'si Yaklaşım Analizi özelliği pozitif ve olumsuz yaklaşımı tespit etmek için iki yol sağlar. Bir Yaklaşım Analizi isteği gönderirseniz, API, tümce ve belge düzeyindeki yaklaşım etiketlerini ("negatif", "nötr" ve "pozitif") ve güvenirlik puanlarını döndürür. Ayrıca, kelimeyle ilgili (ürünlerin veya hizmetlerin öznitelikleri gibi) sözcüklerle ilgili ayrıntılı bilgiler sağlayan Yaklaşım Analizi uç noktası kullanarak da bilgi araştırma istekleri gönderebilirsiniz. 
+Metin Analizi API'si Yaklaşım Analizi özelliği pozitif ve olumsuz yaklaşımı tespit etmek için iki yol sağlar. Bir Yaklaşım Analizi isteği gönderirseniz, API, tümce ve belge düzeyindeki yaklaşım etiketlerini ("negatif", "nötr" ve "pozitif") ve güvenirlik puanlarını döndürür. Ayrıca, kelimeyle ilgili (ürünlerin veya hizmetlerin öznitelikleri gibi) sözcüklerle ilgili ayrıntılı bilgiler sağlayan Yaklaşım Analizi uç noktası kullanarak da bilgi araştırma istekleri gönderebilirsiniz.
 
 API tarafından kullanılan AI modelleri hizmet tarafından sağlanır, yalnızca analiz için içerik göndermeniz gerekir.
 
@@ -151,7 +151,7 @@ Hemen çıktı döndürülür. Sonuçları JSON kabul eden bir uygulamaya veya �
 
 Yaklaşım Analizi v 3.1, hem Yaklaşım Analizi hem de görüşün madenciliği için yanıt nesneleri döndürebilir.
   
-Yaklaşım analizi, tüm belge ve içindeki her cümle için bir yaklaşım etiketi ve Güvenirlik puanı döndürür. 1 ' e yakın puan, etiketin sınıflandırmasında daha yüksek bir güven gösterir, ancak daha düşük puanlar daha düşük güvenilirliğe işaret ediyor. Bir belgede birden fazla tümce olabilir ve her belge veya tümce içindeki güven puanları 1 ' e kadar eklenebilir. değerlendirme 
+Yaklaşım analizi, tüm belge ve içindeki her cümle için bir yaklaşım etiketi ve Güvenirlik puanı döndürür. 1 ' e yakın puan, etiketin sınıflandırmasında daha yüksek bir güven gösterir, ancak daha düşük puanlar daha düşük güvenilirliğe işaret ediyor. Bir belgede birden fazla tümce olabilir ve her belge veya tümce içindeki güven puanları 1 ' e kadar eklenebilir.
 
 Fikrinizi Inceleme, metinde hedefleri (isimler veya fiiller) ve bunlarla ilişkili değerlendirmeyi (sıfatıcı) bulur. Aşağıdaki yanıtta, *restorana tümce harika yiyecek içeriyordu ve garson kullanımı kolay* iki hedefe sahiptir: *yiyecek* ve *garson*. Her bir hedefin `relations` özelliği, `ref` ilişkili `documents` , ve nesnelerine URI başvurusu olan bir değer içerir `sentences` `assessments` .
 

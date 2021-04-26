@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 12/17/2020
+ms.date: 04/02/2021
 ms.author: jeedes
-ms.openlocfilehash: 8435cab1855e9df871d17ff7fa393b6ab2cf0cb1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5f07e9dbd574d8a27e6048154c72b9afc24b6ba4
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98736378"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106286196"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-netskope-administrator-console"></a>Öğretici: Netüse Yönetici Konsolu ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -37,13 +37,12 @@ Başlamak için aşağıdaki öğeler gereklidir:
 
 Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* Netüse Yönetici Konsolu **SP ve ıDP** tarafından başlatılan SSO 'yu destekler
+* Netüse Yönetici Konsolu **SP ve ıDP** tarafından başlatılan SSO 'yu destekler.
 
 > [!NOTE]
 > Bu uygulamanın tanımlayıcısı, tek bir kiracıda yalnızca bir örneğin yapılandırılabilmesini sağlamak için sabit bir dize değeridir.
 
-
-## <a name="adding-netskope-administrator-console-from-the-gallery"></a>Galeriden Netüse Yönetici Konsolu ekleme
+## <a name="add-netskope-administrator-console-from-the-gallery"></a>Galeriden Netüse Yönetici Konsolu ekleme
 
 Netüse Yönetici Konsolu tümleştirmesini Azure AD ile yapılandırmak için, Galeriden, yönetilen SaaS uygulamaları listenize Netüse Yönetici Konsolu eklemeniz gerekir.
 
@@ -142,19 +141,19 @@ Bu bölümde, Netüse Yönetici Konsolu erişim izni vererek Azure çoklu oturum
 
 1. Sol gezinti bölmesindeki **Ayarlar** sekmesine tıklayın.
 
-    ![Ekran görüntüsü, gezinti bölmesinde seçilen ayarı gösterir.](./media/netskope-cloud-security-tutorial/config-settings.png)
+    ![Ekran görüntüsü, gezinti bölmesinde seçilen ayarı gösterir.](./media/netskope-cloud-security-tutorial/configure-settings.png)
 
 1. **Yönetim** sekmesini tıklatın.
 
-    ![Ekran görüntüsü ayarlardan seçilen yönetimi gösterir.](./media/netskope-cloud-security-tutorial/config-administration.png)
+    ![Ekran görüntüsü ayarlardan seçilen yönetimi gösterir.](./media/netskope-cloud-security-tutorial/administration.png)
 
 1. **SSO** sekmesi ' ne tıklayın.
 
-    ![Ekran görüntüsü, Yönetim bölümünde seçilen S 'yi gösterir.](./media/netskope-cloud-security-tutorial/config-sso.png)
+    ![Ekran görüntüsü, Yönetim bölümünde seçilen S 'yi gösterir.](./media/netskope-cloud-security-tutorial/tab.png)
 
 1. **Ağ ayarları** bölümünde aşağıdaki adımları uygulayın:
     
-    ![Ekran görüntüsü, açıklanan değerleri girebileceğiniz ağ ayarlarını gösterir.](./media/netskope-cloud-security-tutorial/config-pasteurls.png)
+    ![Ekran görüntüsü, açıklanan değerleri girebileceğiniz ağ ayarlarını gösterir.](./media/netskope-cloud-security-tutorial/network.png)
 
     a. **Onaylama tüketici hizmeti URL 'si** değerini kopyalayın ve Azure Portal **temel SAML YAPıLANDıRMASı** bölümündeki **yanıt URL** metin kutusuna yapıştırın.
 
@@ -162,7 +161,7 @@ Bu bölümde, Netüse Yönetici Konsolu erişim izni vererek Azure çoklu oturum
 
 1. **SSO/SLO ayarları** bölümünün altındakı **düzenleme ayarları** ' na tıklayın.
 
-    ![Ekran görüntüsü, Ayarları Düzenle ' yi seçebileceğiniz S S/S L O ayarlarını gösterir.](./media/netskope-cloud-security-tutorial/config-editsettings.png)
+    ![Ekran görüntüsü, Ayarları Düzenle ' yi seçebileceğiniz S S/S L O ayarlarını gösterir.](./media/netskope-cloud-security-tutorial/settings.png)
 
 1. **Ayarlar** açılan penceresinde, aşağıdaki adımları gerçekleştirin;
 
@@ -188,11 +187,11 @@ Bu bölümde, Netüse Yönetici Konsolu erişim izni vererek Azure çoklu oturum
 
 1. Sol gezinti bölmesindeki **Ayarlar** sekmesine tıklayın.
 
-    ![Ekran görüntüsü seçili ayarları gösterir.](./media/netskope-cloud-security-tutorial/config-settings.png)
+    ![Ekran görüntüsü seçili ayarları gösterir.](./media/netskope-cloud-security-tutorial/configure-settings.png)
 
 1. **Etkin platform** sekmesi ' ne tıklayın.
 
-    ![Ekran görüntüsü ayarlarından seçilen etkin platformu gösterir.](./media/netskope-cloud-security-tutorial/user1.png)
+    ![Ekran görüntüsü ayarlarından seçilen etkin platformu gösterir.](./media/netskope-cloud-security-tutorial/user-1.png)
 
 1. **Kullanıcılar** sekmesi ' ne tıklayın.
 

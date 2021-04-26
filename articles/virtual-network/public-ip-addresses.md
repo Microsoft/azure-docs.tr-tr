@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/28/2020
 ms.author: allensu
-ms.openlocfilehash: ffdd673cc8a357a7156fb3b3e932c524c831db15
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: d1d412774dc68cba0c24709c7fc8a7999e0aeab8
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103418071"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106094770"
 ---
 # <a name="public-ip-addresses"></a>Genel IP adresleri
 
@@ -165,7 +165,7 @@ Azure yük dengeleyici SKU'ları hakkında daha fazla bilgi edinmek için bkz. [
 Uzak ağla iletişimi etkinleştirmek için VPN Gateway bir genel IP adresi atanır. 
 
 * Bir VPNGw 1-5 SKU ön uç yapılandırmasına **dinamik** temel genel IP atayın.
-* VPNGwAZ 1-5 SKU ön uç yapılandırmasına **statik** standart genel IP adresi atayın.
+* VPNGwAZ 1-5 SKU ön uç yapılandırmasına **statik** bir standart genel IP adresi atayın.
 
 ## <a name="application-gateways"></a>Uygulama ağ geçitleri
 

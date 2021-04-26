@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.date: 05/11/2020
 ms.author: normesta
 ms.reviewer: dineshm
-ms.openlocfilehash: d894ce71e0ffa5a0894a1f6b0035efe66271ded8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1900326bf03c6a32f25c7a019d8bd1e460735bd6
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100591463"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107505607"
 ---
 # <a name="move-an-azure-storage-account-to-another-region"></a>Bir Azure Depolama hesabını başka bir bölgeye taşıma
 
@@ -55,7 +55,7 @@ Bu şablon, depolama hesabınızı tanımlayan ayarlar içerir.
 
 2. **Tüm kaynaklar** ' ı seçin ve ardından depolama hesabınızı seçin.
 
-3. > **ayarları**  >  **dışarı aktarma şablonu**' nu seçin.
+3. > **Otomasyonu**  >  **dışarı aktarma şablonu**' nu seçin.
 
 4. **Şablonu dışarı aktar** dikey penceresinde **İndir** ' i seçin.
 

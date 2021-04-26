@@ -1,15 +1,17 @@
 ---
 title: Kaynak Yöneticisi şablonu kullanarak Azure hizmet bildirimlerinde etkinlik günlüğü uyarıları alma
 description: Azure hizmeti gerçekleştiğinde SMS, e-posta veya Web Kancası aracılığıyla bildirim alın.
-ms.topic: quickstart
-ms.custom: subject-armqs
 ms.date: 06/29/2020
-ms.openlocfilehash: 532fbae505e0bcaa6ab31a2e935362114537d134
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.topic: quickstart
+ms.custom:
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: 730c023de61275d95fe594642149770af42b34b9
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100594952"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535745"
 ---
 # <a name="quickstart-create-activity-log-alerts-on-service-notifications-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonu kullanarak hizmet bildirimlerinde etkinlik günlüğü uyarıları oluşturma
 

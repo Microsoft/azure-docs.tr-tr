@@ -3,12 +3,13 @@ title: Azure Işlevleri çalışma zamanı sürümlerini hedefleme
 description: Azure Işlevleri, çalışma zamanının birden çok sürümünü destekler. Azure 'da barındırılan bir işlev uygulamasının çalışma zamanı sürümünü belirtmeyi öğrenin.
 ms.topic: conceptual
 ms.date: 07/22/2020
-ms.openlocfilehash: e9aa5546b5f07b724fe22bc1e20a2e97feb2aec2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: ca107ec2f0ce04bf7b1eae3a98087217c267d33d
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102435571"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830925"
 ---
 # <a name="how-to-target-azure-functions-runtime-versions"></a>Azure Işlevleri çalışma zamanı sürümlerini hedefleme
 
@@ -106,7 +107,7 @@ az functionapp config appsettings set --name <FUNCTION_APP> \
 
 `<FUNCTION_APP>`İşlev uygulamanızın adıyla değiştirin. Ayrıca `<RESOURCE_GROUP>` , işlev uygulamanız için kaynak grubunun adıyla değiştirin. Ayrıca, öğesini `<VERSION>` belirli bir sürümle veya, ya da ile değiştirin `~3` `~2` `~1` .
 
-[Azure Cloud Shell](../cloud-shell/overview.md)komutu çalıştırmak için önceki kod örneğinde **deneyin** öğesini seçin. Bu komutu yürütmek için [Azure CLI 'yı yerel olarak](/cli/azure/install-azure-cli) da çalıştırabilirsiniz. Yerel olarak çalışırken, önce oturum açmak için [az Login](/cli/azure/reference-index#az-login) çalıştırmanız gerekir.
+[Azure Cloud Shell](../cloud-shell/overview.md)komutu çalıştırmak için önceki kod örneğinde **deneyin** öğesini seçin. Bu komutu yürütmek için [Azure CLI 'yı yerel olarak](/cli/azure/install-azure-cli) da çalıştırabilirsiniz. Yerel olarak çalışırken, önce oturum açmak için [az Login](/cli/azure/reference-index#az_login) çalıştırmanız gerekir.
 
 # <a name="powershell"></a>[PowerShell](#tab/powershell)
 
@@ -165,7 +166,7 @@ az functionapp config set --name <FUNCTION_APP> \
 
 `<FUNCTION_APP>`İşlev uygulamanızın adıyla değiştirin. Ayrıca `<RESOURCE_GROUP>` , işlev uygulamanız için kaynak grubunun adıyla değiştirin. Ayrıca, `<LINUX_FX_VERSION>` yukarıda açıklanan şekilde belirli bir görüntünün değeri ile değiştirin.
 
-Yukarıdaki kod örneğinde **deneyin** ' i seçerek bu komutu [Azure Cloud Shell](../cloud-shell/overview.md) çalıştırabilirsiniz. Ayrıca, oturum açmak için [az Login](/cli/azure/reference-index#az-login) komutunu çalıştırdıktan sonra bu komutu yürütmek IÇIN [Azure CLI 'yı yerel olarak](/cli/azure/install-azure-cli) da kullanabilirsiniz.
+Yukarıdaki kod örneğinde **deneyin** ' i seçerek bu komutu [Azure Cloud Shell](../cloud-shell/overview.md) çalıştırabilirsiniz. Ayrıca, oturum açmak için [az Login](/cli/azure/reference-index#az_login) komutunu çalıştırdıktan sonra bu komutu yürütmek IÇIN [Azure CLI 'yı yerel olarak](/cli/azure/install-azure-cli) da kullanabilirsiniz.
 
 # <a name="powershell"></a>[PowerShell](#tab/powershell)
 

@@ -4,10 +4,10 @@ description: Sensörler BT ve trafik için derin paket algılamayı otomatik ola
 ms.date: 12/07/2020
 ms.topic: how-to
 ms.openlocfilehash: b80ef4a4a1fca7383da80fda6fdf42831913f2bd
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104784450"
 ---
 # <a name="control-what-traffic-is-monitored"></a>Hangi trafiğin izleneceğini denetleme

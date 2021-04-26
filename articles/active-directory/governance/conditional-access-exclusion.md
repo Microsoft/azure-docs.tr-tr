@@ -16,12 +16,12 @@ ms.date: 12/23/2020
 ms.author: barclayn
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 426e28048ae370919529ea710717a3a3867d999d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d4b2ac36ad1140968fd17db0bed0b60a8aca6a02
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97746261"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532680"
 ---
 # <a name="use-azure-ad-access-reviews-to-manage-users-excluded-from-conditional-access-policies"></a>Koşullu erişim ilkelerinden dışlanan kullanıcıları yönetmek için Azure AD erişim incelemelerini kullanın
 
@@ -144,7 +144,7 @@ Eski kimlik doğrulaması ve daha eski istemci sürümlerini kullanan kullanıc�
     ![Bir erişim gözden geçirme bölmesi oluşturun örneğin 2](./media/conditional-access-exclusion/create-access-review-2.png)
 
 >[!IMPORTANT] 
->Çok sayıda dışlama grubunuz varsa ve bu nedenle birden çok erişim incelemesi oluşturmanız gerekiyorsa, Microsoft Graph Beta uç noktasında onları programlı bir şekilde oluşturmanıza ve yönetmenize olanak tanıyan bir API sunuyoruz. Başlamak için bkz. [Azure AD erişim gözden GEÇIRMELERI API başvurusu](/graph/api/resources/accessreviews-root?view=graph-rest-beta) ve [MICROSOFT Graph aracılığıyla Azure AD erişim gözden geçirmeleri alma örneği](https://techcommunity.microsoft.com/t5/Azure-Active-Directory/Example-of-retrieving-Azure-AD-access-reviews-via-Microsoft/td-p/236096).
+>Çok sayıda dışlama grubunuz varsa ve bu nedenle birden çok erişim incelemesi oluşturmanız gerekiyorsa, Microsoft Graph Beta uç noktasında onları programlı bir şekilde oluşturmanıza ve yönetmenize olanak tanıyan bir API sunuyoruz. Başlamak için bkz. [Azure AD erişim gözden GEÇIRMELERI API başvurusu](/graph/api/resources/accessreviewsv2-root?view=graph-rest-beta&preserve-view=true) ve [MICROSOFT Graph aracılığıyla Azure AD erişim gözden geçirmeleri alma örneği](https://techcommunity.microsoft.com/t5/Azure-Active-Directory/Example-of-retrieving-Azure-AD-access-reviews-via-Microsoft/td-p/236096).
 
 ## <a name="access-review-results-and-audit-logs"></a>Erişim gözden geçirmesi sonuçları ve denetim günlükleri
 

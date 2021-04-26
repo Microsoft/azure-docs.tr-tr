@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: reference
 ms.workload: identity
-ms.date: 09/09/2020
+ms.date: 03/29/2021
 ms.author: kenwith
 ms.reviewer: paulgarn
 ms.custom: aaddev
-ms.openlocfilehash: 9c3132985866a4c245984ef632107c05ca1b3350
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f636b8ec04d151c855112102421dd2df0ccb6ff8
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96348391"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105932888"
 ---
 # <a name="saml-token-claims-reference"></a>SAML belirteci talep başvurusu
 
@@ -34,7 +34,7 @@ Microsoft Identity platformu, her kimlik doğrulama akışının işlenmesinde b
 > |Kimlik Doğrulama Yöntemi | `amr` |Belirtecin konusunun nasıl doğrulandığını tanımlar. | `<AuthnContextClassRef>`<br>`http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationmethod/password`<br>`</AuthnContextClassRef>` |
 > |Ad | `given_name` |Azure AD Kullanıcı nesnesinde ayarlandığı gibi, kullanıcının ilk veya "verilen" adını sağlar. | `<Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname">`<br>`<AttributeValue>Frank<AttributeValue>`  |
 > |Gruplar | `groups` |Konunun grup üyeliklerini temsil eden nesne kimliklerini sağlar. Bu değerler benzersizdir (bkz. nesne KIMLIĞI) ve bir kaynağa erişmek için Yetkilendirmeyi zorlama gibi erişimi yönetmek için güvenli bir şekilde kullanılabilir. Gruplar talebine dahil olan gruplar uygulama bildiriminin "Groupmembershipclaim" özelliği aracılığıyla uygulama başına temelinde yapılandırılır. Null değeri tüm grupları dışlayacak, "SecurityGroup" değeri yalnızca Active Directory güvenlik grubu üyeliklerini içerir ve "All" değeri hem güvenlik gruplarını hem de Microsoft 365 dağıtım listelerini içerir. <br><br> **Notlar**: <br> Kullanıcının sayısı bir sınırı (SAML için 150 200, JWT için) üzerine gittiğinde, fazla kullanım talebi, Kullanıcı için Grup listesini içeren grafik uç noktasına işaret eden talep kaynaklarını da eklenecektir. | `<Attribute Name="http://schemas.microsoft.com/ws/2008/06/identity/claims/groups">`<br>`<AttributeValue>07dd8a60-bf6d-4e17-8844-230b77145381</AttributeValue>` |
-> | Gruplar fazla kullanım göstergesi | `groups:src1` | Uzunluğu sınırlı olmayan ancak belirteç için çok büyük olan belirteç istekleri için, Kullanıcı için tam gruplar listesine bir bağlantı dahil edilir. SAML için bu, talebin yerine yeni bir talep olarak eklenir `groups` . | `<Attribute Name=" http://schemas.microsoft.com/claims/groups.link">`<br>`<AttributeValue>https://graph.windows.net/{tenantID}/users/{userID}/getMemberObjects<AttributeValue>` |
+> | Gruplar fazla kullanım göstergesi | `groups:src1` | Uzunluğu sınırlı olmayan ancak belirteç için çok büyük olan belirteç istekleri için, Kullanıcı için tam gruplar listesine bir bağlantı dahil edilir. SAML için bu, talebin yerine yeni bir talep olarak eklenir `groups` . <br><br> **Notlar**: <br> Azure AD Graph API, Microsoft Graph API 'SI ile değiştiriliyor. Eşdeğer uç nokta hakkında daha fazla bilgi edinmek için bkz. [User: getMemberObjects](https://docs.microsoft.com/graph/api/user-getmemberobjects). | `<Attribute Name=" http://schemas.microsoft.com/claims/groups.link">`<br>`<AttributeValue>https://graph.windows.net/{tenantID}/users/{userID}/getMemberObjects<AttributeValue>` |
 > |Kimlik Sağlayıcı | `idp` |Belirtecin öznesinin kimliğini doğrulayan kimlik sağlayıcısını kaydeder. Bu değer, Kullanıcı hesabı verenden farklı bir kiracıda olmadığı takdirde veren talebinin değeriyle aynıdır. | `<Attribute Name=" http://schemas.microsoft.com/identity/claims/identityprovider">`<br>`<AttributeValue>https://sts.windows.net/cbb1a5ac-f33b-45fa-9bf5-f37db0fed422/<AttributeValue>` |
 > |Issuedat | `iat` |Belirtecin verildiği saati depolar. Genellikle belirtecin yeniliği ölçmek için kullanılır. | `<Assertion ID="_d5ec7a9b-8d8f-4b44-8c94-9812612142be" IssueInstant="2014-01-06T20:20:23.085Z" Version="2.0" xmlns="urn:oasis:names:tc:SAML:2.0:assertion">` |
 > |Veren | `iss` |Belirteci oluşturan ve döndüren güvenlik belirteci hizmetini (STS) belirler. Azure AD 'nin döndürdüğü belirteçlerde veren sts.windows.net. Verenin talep değerindeki GUID, Azure AD dizininin kiracı KIMLIĞIDIR. Kiracı KIMLIĞI, dizinin sabit ve güvenilir tanıtıcısıdır. | `<Issuer>https://sts.windows.net/cbb1a5ac-f33b-45fa-9bf5-f37db0fed422/</Issuer>` |

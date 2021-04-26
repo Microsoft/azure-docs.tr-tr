@@ -3,12 +3,12 @@ title: Azure DevTest Labs ' de bekletme ilkesi ayarlama | Microsoft Docs
 description: Bir bekletme ilkesi yapılandırmayı, fabrikası temizlemeyi ve eski görüntüleri DevTest Labs 'den devre dışı bırakmayı öğrenin.
 ms.topic: article
 ms.date: 06/26/2020
-ms.openlocfilehash: 85384e88f8d456c7bf67302a57618d7a9703a5ee
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4e642d7dc0733e55caa4ed62e3382ef4422030f9
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102550034"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727544"
 ---
 # <a name="set-up-retention-policy-in-azure-devtest-labs"></a>Azure DevTest Labs 'de bekletme ilkesi ayarlama
 Bu makalede bir bekletme ilkesi ayarlama, fabrikasını Temizleme ve eski görüntüleri kuruluştaki tüm diğer DevTest Labs 'den devre dışı bırakma konuları ele alınmaktadır. 
@@ -66,5 +66,5 @@ Fabrikanıza yeni bir görüntü eklemek de basittir. Fabrikanıza yeni bir gör
 ## <a name="next-steps"></a>Sonraki adımlar
 1. Görüntü fabrikasını düzenli aralıklarla çalıştırmak için [derlemenizi/sürümünüzü zamanlayın](/azure/devops/pipelines/build/triggers?tabs=designer) . Fabrika tarafından üretilen görüntülerinizi düzenli aralıklarla yeniler.
 2. Fabrikanızın daha fazla altın görüntüsünü oluşturun. Ayrıca sanal makine kurulum görevlerinizin ek parçalarını betiğe ve yapıtları fabrika yansımalarına dahil etmek için [yapıtlar oluşturmayı](devtest-lab-artifact-author.md) düşünebilirsiniz.
-4. **DistributeImages** betiğini ayrı olarak çalıştırmak için [ayrı bir derleme/yayın](/azure/devops/pipelines/overview?view=azure-devops-2019) oluşturun. Üzerinde Labs.jsdeğişiklikler yaptığınızda ve tüm görüntüleri yeniden oluşturmak zorunda kalmadan hedef laboratuvarlara kopyalanmış resimleri almak için bu betiği çalıştırabilirsiniz.
+4. **DistributeImages** betiğini ayrı olarak çalıştırmak için [ayrı bir derleme/yayın](/azure/devops/pipelines/overview) oluşturun. Üzerinde Labs.jsdeğişiklikler yaptığınızda ve tüm görüntüleri yeniden oluşturmak zorunda kalmadan hedef laboratuvarlara kopyalanmış resimleri almak için bu betiği çalıştırabilirsiniz.
 

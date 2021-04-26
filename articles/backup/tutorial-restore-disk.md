@@ -4,12 +4,12 @@ description: Yedekleme ve Kurtarma Hizmetleri ile Azure’da bir diskin nasıl g
 ms.topic: tutorial
 ms.date: 01/31/2019
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 999682c9bf4a4d70d886f0e85cede99f215aa046
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7f4d70f43f76c3a72cd8e53037d06d32e61c3cdb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97694726"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107768524"
 ---
 # <a name="restore-a-vm-with-azure-cli"></a>Azure CLI ile bir VM’yi geri yükleme
 
@@ -41,7 +41,7 @@ Veri aktarımı tamamlandığında, anlık görüntü kaldırılır ve bir kurta
 
 Bir diski geri yüklemek için, kurtarma verileri kaynağı olarak bir kurtarma noktası seçersiniz. Varsayılan ilke her gün bir kurtarma noktası oluşturup 30 gün boyunca bunları beklettiğinden, kurtarma için belirli bir nokta seçmenize olanak sağlayan bir kurtarma noktaları kümesini tutabilirsiniz.
 
-Kullanılabilir kurtarma noktalarının listesini görmek için [az backup recoverypoint list](/cli/azure/backup/recoverypoint#az-backup-recoverypoint-list) komutunu kullanın. Diskleri kurtarmak için kurtarma noktası **adı** kullanılır. Bu öğreticide, kullanılabilir en son kurtarma noktasını istiyoruz. `--query [0].name` parametresi aşağıdaki şekilde en son kurtarma noktası adını seçer:
+Kullanılabilir kurtarma noktalarının listesini görmek için [az backup recoverypoint list](/cli/azure/backup/recoverypoint#az_backup_recoverypoint_list) komutunu kullanın. Diskleri kurtarmak için kurtarma noktası **adı** kullanılır. Bu öğreticide, kullanılabilir en son kurtarma noktasını istiyoruz. `--query [0].name` parametresi aşağıdaki şekilde en son kurtarma noktası adını seçer:
 
 ```azurecli-interactive
 az backup recoverypoint list \
@@ -63,7 +63,7 @@ az backup recoverypoint list \
 
 Yedeklenen sanal makinede yönetilen diskler varsa ve kurtarma noktasından yönetilen diskleri geri yüklemek istiyorsanız, önce bir Azure depolama hesabı sağlarsınız. Bu depolama hesabı, VM yapılandırmasını ve daha sonra VM 'yi geri yüklenen disklerden dağıtmak için kullanılabilecek Dağıtım şablonunu depolamak için kullanılır. Daha sonra, yönetilen disklerin içine geri yükleneceği bir hedef kaynak grubu da sağlarsınız.
 
-1. Depolama hesabı oluşturmak için [az storage account create](/cli/azure/storage/account#az-storage-account-create) komutunu kullanın. Depolama hesabı adı tamamen küçük harflerden oluşmalı ve genel olarak benzersiz olmalıdır. *mystorageaccount* değerini kendi benzersiz adınızla değiştirin:
+1. Depolama hesabı oluşturmak için [az storage account create](/cli/azure/storage/account#az_storage_account_create) komutunu kullanın. Depolama hesabı adı tamamen küçük harflerden oluşmalı ve genel olarak benzersiz olmalıdır. *mystorageaccount* değerini kendi benzersiz adınızla değiştirin:
 
     ```azurecli-interactive
     az storage account create \
@@ -72,7 +72,7 @@ Yedeklenen sanal makinede yönetilen diskler varsa ve kurtarma noktasından yön
         --sku Standard_LRS
     ```
 
-2. [az backup restore restore-disks](/cli/azure/backup/restore#az-backup-restore-restore-disks) komutuyla kurtarma noktanızdan diski geri yükleyin. *mystorageaccount* değerini, önceki komutta oluşturduğunuz depolama hesabının adıyla değiştirin. *Myrecoverypointname* değerini, önceki [az Backup RecoveryPoint List](/cli/azure/backup/recoverypoint#az-backup-recoverypoint-list) komutunun çıktısında edindiğiniz kurtarma noktası adıyla değiştirin. ***Ayrıca, yönetilen disklerin geri yüklendiği hedef kaynak grubunu da sağlayın***.
+2. [az backup restore restore-disks](/cli/azure/backup/restore#az_backup_restore_restore_disks) komutuyla kurtarma noktanızdan diski geri yükleyin. *mystorageaccount* değerini, önceki komutta oluşturduğunuz depolama hesabının adıyla değiştirin. *Myrecoverypointname* değerini, önceki [az Backup RecoveryPoint List](/cli/azure/backup/recoverypoint#az_backup_recoverypoint_list) komutunun çıktısında edindiğiniz kurtarma noktası adıyla değiştirin. ***Ayrıca, yönetilen disklerin geri yüklendiği hedef kaynak grubunu da sağlayın***.
 
     ```azurecli-interactive
     az backup restore restore-disks \
@@ -107,7 +107,7 @@ Yedeklenen sanal makinede, yönetilmeyen diskler varsa ve diskleri kurtarma nokt
 
 Ek adımlarda, sanal makine oluşturmak için geri yüklenen disk kullanılır.
 
-1. Depolama hesabı oluşturmak için [az storage account create](/cli/azure/storage/account#az-storage-account-create) komutunu kullanın. Depolama hesabı adı tamamen küçük harflerden oluşmalı ve genel olarak benzersiz olmalıdır. *mystorageaccount* değerini kendi benzersiz adınızla değiştirin:
+1. Depolama hesabı oluşturmak için [az storage account create](/cli/azure/storage/account#az_storage_account_create) komutunu kullanın. Depolama hesabı adı tamamen küçük harflerden oluşmalı ve genel olarak benzersiz olmalıdır. *mystorageaccount* değerini kendi benzersiz adınızla değiştirin:
 
     ```azurecli-interactive
     az storage account create \
@@ -116,7 +116,7 @@ Ek adımlarda, sanal makine oluşturmak için geri yüklenen disk kullanılır.
         --sku Standard_LRS
     ```
 
-2. [az backup restore restore-disks](/cli/azure/backup/restore#az-backup-restore-restore-disks) komutuyla kurtarma noktanızdan diski geri yükleyin. *mystorageaccount* değerini, önceki komutta oluşturduğunuz depolama hesabının adıyla değiştirin. *myRecoveryPointName* değerini, önceki [az backup recoverypoint list](/cli/azure/backup/recoverypoint#az-backup-recoverypoint-list) komutunun çıktısından elde ettiğiniz kurtarma noktası adıyla değiştirin:
+2. [az backup restore restore-disks](/cli/azure/backup/restore#az_backup_restore_restore_disks) komutuyla kurtarma noktanızdan diski geri yükleyin. *mystorageaccount* değerini, önceki komutta oluşturduğunuz depolama hesabının adıyla değiştirin. *myRecoveryPointName* değerini, önceki [az backup recoverypoint list](/cli/azure/backup/recoverypoint#az_backup_recoverypoint_list) komutunun çıktısından elde ettiğiniz kurtarma noktası adıyla değiştirin:
 
     ```azurecli-interactive
     az backup restore restore-disks \
@@ -143,7 +143,7 @@ Yukarıda belirtildiği gibi, yönetilmeyen diskler özgün depolama hesapların
 
 ## Monitor the restore job
 
-To monitor the status of restore job, use [az backup job list](/cli/azure/backup/job#az-backup-job-list):
+To monitor the status of restore job, use [az backup job list](/cli/azure/backup/job#az_backup_job_list):
 
 ```azurecli-interactive
 az backup job list \
@@ -256,7 +256,7 @@ az deployment group create \
   --template-uri $url?$token
 ```
 
-Kurtarılan diskinizden sanal makinenizin oluşturulduğunu onaylamak için [az vm list](/cli/azure/vm#az-vm-list) komutuyla aşağıdaki şekilde kaynak grubunuzdaki sanal makineleri listeleyin:
+Kurtarılan diskinizden sanal makinenizin oluşturulduğunu onaylamak için [az vm list](/cli/azure/vm#az_vm_list) komutuyla aşağıdaki şekilde kaynak grubunuzdaki sanal makineleri listeleyin:
 
 ```azurecli-interactive
 az vm list --resource-group myResourceGroup --output table

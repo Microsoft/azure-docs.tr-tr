@@ -11,12 +11,12 @@ author: justinha
 manager: daveba
 ms.reviewer: jsimmons
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c8cae19bd07e1cc87a0aaa25e47cf5f431d566ba
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5134c0eeaf3ebd1467b35cf825aa64bd1b445bd5
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101653822"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107010588"
 ---
 # <a name="plan-and-deploy-on-premises-azure-active-directory-password-protection"></a>Şirket içi Azure Active Directory parola korumasını planlayın ve dağıtın
 
@@ -88,7 +88,7 @@ Aşağıdaki temel gereksinimler geçerlidir:
 * Anahtar Dağıtım Hizmeti, Windows Server 2012 ve sonraki sürümlerini çalıştıran etki alanındaki tüm etki alanı denetleyicilerinde etkinleştirilmelidir. Varsayılan olarak, bu hizmet el ile tetikleyici başlangıcı aracılığıyla etkinleştirilir.
 
 * Ağ bağlantısı, her etki alanındaki en az bir etki alanı denetleyicisi ve Azure AD parola koruması için proxy hizmetini barındıran en az bir sunucu arasında bulunmalıdır. Bu bağlantı, etki alanı denetleyicisinin RPC uç nokta Eşleyici bağlantı noktası 135 ve proxy hizmetindeki RPC sunucusu bağlantı noktasına erişmesine izin vermelidir.
-    * Varsayılan olarak, RPC sunucu bağlantı noktası dinamik bir RPC bağlantı noktasıdır, ancak [statik bir bağlantı noktası kullanacak](#static)şekilde yapılandırılabilir.
+    * Varsayılan olarak, RPC sunucu bağlantı noktası aralıktan (49152-65535) dinamik bir RPC bağlantı noktasıdır, ancak [statik bir bağlantı noktası kullanacak](#static)şekilde yapılandırılabilir.
 * Azure AD parola koruma Proxy hizmetinin yükleneceği tüm makinelerin aşağıdaki uç noktalara ağ erişimi olması gerekir:
 
     |**Uç Nokta**|**Amaç**|

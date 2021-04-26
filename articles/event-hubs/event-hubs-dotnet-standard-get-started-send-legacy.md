@@ -4,12 +4,12 @@ description: Bu makalede, Azure Event Hubs eski Microsoft. Azure. EventHubs pake
 ms.topic: quickstart
 ms.date: 06/23/2020
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 7092c3a4c32fe2ad46b71c5a796ac811e4253dbb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 00eadbed23b702e77aefaf34b174bd1e6800c307
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100653100"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877471"
 ---
 # <a name="send-events-to-or-receive-events-from-azure-event-hubs-using-net-core-microsoftazureeventhubs"></a>.NET Core (Microsoft. Azure. EventHubs) kullanarak Azure Event Hubs olay gönderme veya olayları alma
 Bu hızlı başlangıçta, **Microsoft. Azure. EventHubs** .NET Core kitaplığı kullanılarak Olay Hub 'ından olayları gönderme ve olayları alma işlemlerinin nasıl yapılacağı gösterilir.
@@ -24,7 +24,7 @@ Bu hızlı başlangıcı tamamlayabilmeniz için aşağıdaki önkoşullara sahi
 
 - **Microsoft Azure aboneliği**. Azure Event Hubs dahil olmak üzere Azure hizmetlerini kullanmak için bir aboneliğiniz olması gerekir.  Mevcut bir Azure hesabınız yoksa, [ücretsiz deneme](https://azure.microsoft.com/free/) için kaydolabilir veya [BIR hesap oluştururken](https://azure.microsoft.com)MSDN abonesi avantajlarınızı kullanabilirsiniz.
 - [Microsoft Visual Studio 2019](https://www.visualstudio.com).
-- [.NET Core Visual Studio 2015 veya 2017 araçları](https://www.microsoft.com/net/core). 
+- [.NET Core SDK](https://dotnet.microsoft.com/download). 
 - **Event Hubs bir ad alanı ve bir olay hub 'ı oluşturun**. İlk adım, Event Hubs türünde bir ad alanı oluşturmak için [Azure Portal](https://portal.azure.com) ve uygulamanızın Olay Hub 'ı ile iletişim kurması için gereken yönetim kimlik bilgilerini elde etmek için kullanılır. Bir ad alanı ve Olay Hub 'ı oluşturmak için [Bu makaledeki](event-hubs-create.md)yordamı izleyin. Ardından, makaledeki yönergeleri izleyerek **Olay Hub 'ı ad alanı için bağlantı dizesini** alın: [bağlantı dizesi al](event-hubs-get-connection-string.md#get-connection-string-from-the-portal). Bağlantı dizesini daha sonra bu hızlı başlangıçta kullanacaksınız.
 
 ## <a name="send-events"></a>Olayları gönderme 
@@ -367,6 +367,6 @@ Aşağıdaki makaleleri okuyun:
     Bu örnekler eski **Microsoft. Azure. EventHubs** kitaplığını kullanır, ancak en son **Azure. Messaging. eventhubs** kitaplığını kullanarak kolayca güncelleştirebilirsiniz. Eski kitaplığı kullanarak örneği yeni bir tane ile taşımak için [Microsoft. Azure. eventhubs 'Den Azure. Messaging. eventhubs 'ye geçiş kılavuzu](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs/MigrationGuide.md)'na bakın.
 - [EventProcessorHost](event-hubs-event-processor-host.md)
 - [Azure Event Hubs'ın özellikleri ve terminolojisi](event-hubs-features.md)
-- [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+- [Event Hubs ile ilgili SSS](event-hubs-faq.yml)
 
 

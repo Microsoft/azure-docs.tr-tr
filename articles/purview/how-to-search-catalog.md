@@ -7,12 +7,12 @@ ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: conceptual
 ms.date: 03/16/2021
-ms.openlocfilehash: 7799266bf9cece1ed789d6fab64ec970a09fbfcb
-ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
+ms.openlocfilehash: 178604335968c3664bde51c144759c1c040c359d
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104588482"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107564922"
 ---
 # <a name="search-the-azure-purview-data-catalog"></a>Azure purview Veri Kataloğu 'Nda arama
 
@@ -55,8 +55,8 @@ Aşağıda, bir arama sorgusu oluşturmak için kullanılabilen işleçler veril
 | NOT | Bir varlığın NOT yan tümcesinin sağ tarafındaki anahtar sözcüğü içeremeyeceği belirtir | Sorgu `hive NOT database` ' Hive ' içeren varlıkları döndürür, ancak ' Database ' değil. |
 | () | Bir anahtar sözcük ve işleç kümesini birlikte gruplandırır. Birden çok işleç birleştirilirken, parantez işlem sırasını belirtir. | Sorgu `hive AND (database OR warehouse)` ' Hive ' ve ' Database ' ya da ' Warehouse ' veya her ikisini de içeren varlıkları döndürür. |
 | "" | Sorgunun eşleşmesi gereken bir tümceciğin tam içeriğini belirtir. | Sorgu, `"hive database"` özelliklerinde "Hive veritabanı" ifadesini içeren varlıkları döndürür |
-| * | Bire çok karakterle eşleşen bir joker karakter. Anahtar kelimesinin ilk karakteri olamaz. | Sorgu *, ' `hiv\` Hive ' veya ' Hive-Table ' gibi ' IV ' ile başlayan özellikleri olan varlıkları döndürür. |
-| ? | Tek bir karakterle eşleşen bir joker karakter. Anahtar kelimesinin ilk karakteri olamaz | Sorgu, `hiv?` ' IV ' ile başlayan ve ' Hive ' veya ' Hiva ' gibi dört harf olan varlıkları döndürür. |
+| * | Bire çok karakterle eşleşen bir joker karakter. Anahtar kelimesinin ilk karakteri olamaz. | Sorgu, ' `dat*` Data ' veya ' Database ' gibi ' dat ' ile başlayan özellikleri olan varlıkları döndürür. |
+| ? | Tek bir karakterle eşleşen bir joker karakter. Anahtar kelimesinin ilk karakteri olamaz | Sorgu, `dat?` ' dat ' ile başlayan ve ' Date ' veya ' Data ' gibi dört harf olan varlıkları döndürür. |
 
 > [!Note]
 > Her zaman tüm büyük harfler içinde Boole işleçleri (**ve** **veya**, **değil**) belirtin. Aksi takdirde, büyük/küçük harf ek boşluklar değildir.

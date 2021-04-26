@@ -5,14 +5,14 @@ services: iot-hub
 author: jlian
 ms.service: iot-fundamentals
 ms.topic: conceptual
-ms.date: 01/14/2020
+ms.date: 03/31/2021
 ms.author: jlian
-ms.openlocfilehash: d36a7917693aef9063ade473759f2f451d3a677f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6a02b97957cc0599e2960cba551b536e83d1a902
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98234027"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106222564"
 ---
 # <a name="transport-layer-security-tls-support-in-iot-hub"></a>IoT Hub 'de Aktarım Katmanı Güvenliği (TLS) desteği
 
@@ -23,6 +23,10 @@ TLS 1,0 ve 1,1 eski olarak değerlendirilir ve kullanımdan kaldırma için plan
 ## <a name="iot-hubs-server-tls-certificate"></a>IoT Hub Server TLS sertifikası
 
 Bir TLS anlaşması sırasında, istemcileri bağlamak için RSA anahtarlı sunucu sertifikaları sunar IoT Hub. Kökü, Baltimore Sitrust kök CA 'dır. Son olarak, artık yeni ara sertifika yetkilileri (ICA) tarafından verilmek üzere TLS sunucu sertifikamızda bir değişiklik yaptık. Daha fazla bilgi için bkz. [IoT Hub TLS sertifikası güncelleştirme](https://azure.microsoft.com/updates/iot-hub-tls-certificate-update/).
+
+### <a name="4kb-size-limit-on-renewal"></a>4 KB yenileme sırasında boyut sınırı
+
+IoT Hub sunucu tarafı sertifikalarının yenilenmesi sırasında, IoT Hub hizmeti tarafında `Server Hello` 4KB 'ın boyutunu aşmamak için bir denetim yapılır. Bir istemcide, gelen TLS en fazla içerik uzunluğu arabelleği için en az 4KB RAM ayarlanmış olmalıdır. bu sayede, 4KB sınırı için ayarlanan mevcut cihazların sertifika Yenilemesindeki şekilde çalışmaya devam etmesi gerekir. Kısıtlanmış cihazlarda IoT Hub, önizleme aşamasında [en fazla TLS parça uzunluğu anlaşmasını](#tls-maximum-fragment-length-negotiation-preview)destekler. 
 
 ### <a name="elliptic-curve-cryptography-ecc-server-tls-certificate-preview"></a>Eliptik Eğri Şifreleme (ECC) sunucusu TLS sertifikası (Önizleme)
 

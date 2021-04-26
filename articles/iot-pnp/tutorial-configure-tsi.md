@@ -1,18 +1,19 @@
 ---
 title: Öğretici-Azure IoT Tak ve Kullan cihaz telemetrinizi depolamak ve analiz etmek için Azure Time Series Insights kullanma
 description: Öğretici-Time Series Insights ortamı ayarlama ve IoT Hub 'ınızı, IoT Tak ve Kullan cihazlarınızdan Telemetriyi görüntülemek ve analiz etmek için bağlayın.
-author: lyrana
-ms.author: lyhughes
+author: deepakpalled
+ms.author: dpalled
+manager: diviso
 ms.date: 10/14/2020
 ms.topic: tutorial
 ms.service: iot-pnp
 services: iot-pnp
-ms.openlocfilehash: 55fa10cce038c83f0758a9537a916e2dca7e13f9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 28cda9fb6997500f6cd7c4c4349635e7b7a36398
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102181695"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504286"
 ---
 # <a name="tutorial-create-and-configure-a-time-series-insights-gen2-environment"></a>Öğretici: Time Series Insights Gen2 ortamı oluşturma ve yapılandırma
 
@@ -26,7 +27,7 @@ Bu öğreticide şunları yaptınız:
 > * Sıcaklık denetleyicisi ve termostat cihazları için kullandığınız [dijital TWINS tanım dili (DTDL)](https://github.com/Azure/opendigitaltwins-dtdl) örnek model dosyalarını kullanın.
 
 > [!NOTE]
-> Time Series Insights ile IoT Tak ve Kullan arasındaki bu tümleştirme önizlemededir. DTDL cihaz modellerinin Time Series Insights zaman serisi modeliyle ne şekilde eşleşbir şekilde değiştirileceği. 
+> Time Series Insights ile IoT Tak ve Kullan arasındaki bu tümleştirme önizlemededir. DTDL cihaz modellerinin Time Series Insights zaman serisi modeliyle ne şekilde eşleşbir şekilde değiştirileceği.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -123,7 +124,7 @@ Daha sonra, DTDL cihaz modelinizi Azure Time Series Insights varlık modeline ç
 
 ### <a name="define-your-types"></a>Türlerinizi tanımlama
 
-Önceden tanımlanmış bir modele sahip olmadan Azure Time Series Insights Gen2 'e veri almaya başlayabilirsiniz. Telemetri geldiğinde, zaman serisi KIMLIĞI Özellik değerlerinizin temelinde zaman serisi örneklerini otomatik olarak çözümlemeye çalışır Time Series Insights. Tüm örneklere *Varsayılan tür* atanır. Örneklerinizi doğru şekilde kategorilere ayırmak için el ile yeni bir tür oluşturmanız gerekir. 
+Önceden tanımlanmış bir modele sahip olmadan Azure Time Series Insights Gen2 'e veri almaya başlayabilirsiniz. Telemetri geldiğinde, zaman serisi KIMLIĞI Özellik değerlerinizin temelinde zaman serisi örneklerini otomatik olarak çözümlemeye çalışır Time Series Insights. Tüm örneklere *Varsayılan tür* atanır. Örneklerinizi doğru şekilde kategorilere ayırmak için el ile yeni bir tür oluşturmanız gerekir.
 
 Aşağıdaki ayrıntılar, cihaz DTDL modellerinizi zaman serisi model türleriniz ile eşitlemeye yönelik en basit yöntemi özetler:
 
@@ -139,7 +140,7 @@ Aşağıdaki ayrıntılar, cihaz DTDL modellerinizi zaman serisi model türlerin
 |-----------|------------------|-------------|
 | `@id` | `id` | `dtmi:com:example:TemperatureController;1` |
 | `displayName`    | `name`   |   `Temperature Controller`  |
-| `description`  |  `description`  |  `Device with two thermostats and remote reboot.` |  
+| `description`  |  `description`  |  `Device with two thermostats and remote reboot.` |
 |`contents` dizide| `variables` nesne  | Aşağıdaki örneğe bakın.
 
 ![D T D L ile zaman serisi model türünü gösteren ekran görüntüsü.](./media/tutorial-configure-tsi/DTDL-to-TSM-Type.png)
@@ -161,7 +162,7 @@ Bir metin Düzenleyicisi açın ve aşağıdaki JSON 'ı yerel sürücünüze ka
           "kind": "numeric",
           "value": {
             "tsx": "coalesce($event.workingSet.Long, toLong($event.workingSet.Double))"
-          }, 
+          },
           "aggregation": {
             "tsx": "avg($value)"
           }

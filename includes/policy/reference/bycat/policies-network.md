@@ -2,15 +2,15 @@
 author: DCtheGeek
 ms.service: azure-policy
 ms.topic: include
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.author: dacoulte
 ms.custom: generated
-ms.openlocfilehash: 4b67952565ae7d5e8a05661fba2129177072007c
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: e1c4342a27ab8c7bf9e0df3edaee5b7d31f234c6
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105033653"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107867140"
 ---
 |Name<br /><sub>(Azure portal)</sub> |Description |Efekt (ler) |Sürüm<br /><sub>GitHub</sub> |
 |---|---|---|---|
@@ -36,6 +36,7 @@ ms.locfileid: "105033653"
 |[Internet 'ten SSH erişimi engellenmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F2c89a2e5-7285-40fe-afe0-ae8654b92fab) |Bu ilke, Internet 'ten SSH erişimine izin veren tüm ağ güvenlik kuralları 'nı denetler |Denetim, devre dışı |[2.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Network/NetworkSecurityGroup_SSHAccess_Audit.json) |
 |[Depolama hesapları bir sanal ağ hizmeti uç noktası kullanmalıdır](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F60d21c4f-21a3-4d94-85f4-b924e6aeeda4) |Bu ilke, bir sanal ağ hizmeti uç noktası kullanmak üzere yapılandırılmamış tüm depolama hesaplarını denetler. |Denetim, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Network/VirtualNetworkServiceEndpoint_StorageAccount_Audit.json) |
 |[Sanal makinelerin onaylanan bir sanal ağa bağlanması gerekir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Fd416745a-506c-48b6-8ab1-83cb814bcaa3) |Bu ilke, onaylanmamış bir sanal ağa bağlı tüm sanal makineleri denetler. |Denetim, reddetme, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Network/ApprovedVirtualNetwork_Audit.json) |
+|[Sanal ağlar Azure DDoS koruma standardı tarafından korunmalıdır](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F94de2ad3-e0c1-4caf-ad78-5d47bbc83d3d) |Azure DDoS koruma standardı ile sanal ağlarınızı Volumetric ve protokol saldırılarına karşı koruyun. Daha fazla bilgi için, adresini ziyaret edin [https://aka.ms/ddosprotectiondocs](https://aka.ms/ddosprotectiondocs) . |Değiştirme, denetim, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Network/VirtualNetworkDdosStandard_Audit.json) |
 |[Sanal ağlar belirtilen sanal ağ geçidini kullanmalıdır](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Ff1776c76-f58c-4245-a8d0-2b207198dc8b) |Varsayılan yol belirtilen sanal ağ geçidini işaret etmez, bu ilke tüm sanal ağı denetler. |Auditınotexists, devre dışı |[1.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Network/VirtualNetwork_ApprovedVirtualNetworkGateway_AuditIfNotExists.json) |
 |[Web uygulaması güvenlik duvarı (WAF) Application Gateway için etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F564feb30-bf6a-4854-b4bb-0d2d2d1e6c66) |Gelen trafiğin ek incelemesi için genel kullanıma yönelik Web uygulamalarının önünde Azure Web uygulaması güvenlik duvarını (WAF) dağıtın. Web uygulaması güvenlik duvarı (WAF), Web uygulamalarınızın, SQL ınjec, siteler arası betik oluşturma, yerel ve uzak dosya yürütmeleri gibi yaygın güvenlik açıklarından ve güvenlik açıklarından merkezi bir şekilde korunmasını sağlar. Web uygulamalarınıza erişimi, özel kurallar aracılığıyla ülkeler, IP adresi aralıkları ve diğer http (s) parametreleriyle de kısıtlayabilirsiniz. |Denetim, reddetme, devre dışı |[1.0.1](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Network/WAF_AppGatewayEnabled_Audit.json) |
 |[Azure ön kapı hizmeti hizmeti için Web uygulaması güvenlik duvarı (WAF) etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F055aa869-bc98-4af8-bafc-23f1ab6ffe2c) |Gelen trafiğin ek incelemesi için genel kullanıma yönelik Web uygulamalarının önünde Azure Web uygulaması güvenlik duvarını (WAF) dağıtın. Web uygulaması güvenlik duvarı (WAF), Web uygulamalarınızın, SQL ınjec, siteler arası betik oluşturma, yerel ve uzak dosya yürütmeleri gibi yaygın güvenlik açıklarından ve güvenlik açıklarından merkezi bir şekilde korunmasını sağlar. Web uygulamalarınıza erişimi, özel kurallar aracılığıyla ülkeler, IP adresi aralıkları ve diğer http (s) parametreleriyle de kısıtlayabilirsiniz. |Denetim, reddetme, devre dışı |[1.0.1](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Network/WAF_AFD_Enabled_Audit.json) |

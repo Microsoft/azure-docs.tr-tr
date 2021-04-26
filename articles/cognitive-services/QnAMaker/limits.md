@@ -5,12 +5,12 @@ ms.service: cognitive-services
 ms.subservice: qna-maker
 ms.topic: reference
 ms.date: 11/09/2020
-ms.openlocfilehash: 1e57ae537c271e61f0b2d37f5320cb177b04802b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ad498575b029f918538909a9b5b2d52c71c1389c
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98164881"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816377"
 ---
 # <a name="qna-maker-knowledge-base-limits-and-boundaries"></a>Bilgi tabanı sınırlarını ve sınırlarını Soru-Cevap Oluşturma
 
@@ -108,6 +108,26 @@ Bunlar her bir güncelleştirme eyleminin sınırlarını temsil eder; diğer bi
 * Eklenen veya silinen en fazla meta veri alanı sayısı: 10
 * Yenilenebilir en fazla URL sayısı: 5
 * Çağrı başına izin verilen en fazla QnAs sayısı: 1000
+
+## <a name="add-unstructured-file-limits"></a>Yapılandırılmamış dosya sınırları Ekle
+
+> [!NOTE]
+> * Sınırın izin verdiğinden daha büyük dosyalar kullanmanız gerekiyorsa, API 'ye göndermeden önce dosyayı daha küçük dosyalara kesebilirsiniz. 
+
+Bu, bir *KB oluşturmak* veya CREATEKNOWLEDGE API 'sini çağırmak için yapılandırılmamış dosyalar kullanıldığında sınırları temsil eder:
+* Dosya uzunluğu: ilk 32000 karakteri çıkaracağız
+* Dosya başına en fazla 3 yanıt.
+
+## <a name="prebuilt-question-answering-limits"></a>Önceden oluşturulmuş soru yanıtlama limitleri
+
+> [!NOTE]
+> * Sınırın izin verdiğinden daha büyük belgeler kullanmanız gerekiyorsa, API 'ye göndermeden önce metni daha küçük parçalara ayırın. 
+> * Belge, tek bir metin karakteri dizesidir.  
+
+Bunlar, *yanıt oluşturmak* veya GENERATEANSWER API 'sini çağırmak Için önceden oluşturulmuş API kullanıldığında sınırları temsil eder:
+* Belge sayısı: 5
+* Tek bir belgenin en büyük boyutu: 5.120 karakter
+* Belge başına en fazla 3 yanıt.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

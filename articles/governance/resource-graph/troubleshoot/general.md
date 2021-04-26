@@ -4,10 +4,10 @@ description: Azure Resource Graph ile Azure kaynaklarını sorgularken çeşitli
 ms.date: 01/27/2021
 ms.topic: troubleshooting
 ms.openlocfilehash: 0d783b9cb4fa30e3c3e0ff82536b4878c29c7a0d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98916712"
 ---
 # <a name="troubleshoot-errors-using-azure-resource-graph"></a>Azure Kaynak Grafiği 'ni kullanarak hatalarda sorun giderme

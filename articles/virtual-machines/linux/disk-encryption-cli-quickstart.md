@@ -9,12 +9,12 @@ ms.subservice: disks
 ms.topic: quickstart
 ms.date: 05/17/2019
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: b600c895f98c46dbaafce7deef86bbbee8f57c99
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 5b98fde5e15a3c57b56ecc8aea60023ffb8c22a8
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102561050"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774314"
 ---
 # <a name="quickstart-create-and-encrypt-a-linux-vm-with-the-azure-cli"></a>Hızlı başlangıç: Azure CLı ile Linux VM oluşturma ve şifreleme
 
@@ -26,7 +26,7 @@ Azure CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu hızlı ba
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-[az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu oluşturur:
+[az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu oluşturur:
 
 ```azurecli-interactive
 az group create --name "myResourceGroup" --location "eastus"
@@ -79,7 +79,7 @@ VM 'nizi [az VM Encryption](/cli/azure/vm/encryption)ile şifreleyin ve bu,--dis
 az vm encryption enable -g "MyResourceGroup" --name "myVM" --disk-encryption-keyvault "<your-unique-keyvault-name>"
 ```
 
-İşlemin döndürdüğü bir süre sonra, "şifreleme isteği kabul edildi. İlerlemeyi izlemek için lütfen ' göster ' komutunu kullanın. ". "Göster" komutu [az VM Show](/cli/azure/vm/encryption#az-vm-encryption-show)' dir.
+İşlemin döndürdüğü bir süre sonra, "şifreleme isteği kabul edildi. İlerlemeyi izlemek için lütfen ' göster ' komutunu kullanın. ". "Göster" komutu [az VM Show](/cli/azure/vm/encryption#az_vm_encryption_show)' dir.
 
 ```azurecli-interactive
 az vm encryption show --name "myVM" -g "MyResourceGroup"

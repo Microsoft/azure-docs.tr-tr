@@ -5,14 +5,14 @@ author: deborahc
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.topic: how-to
-ms.date: 07/30/2019
+ms.date: 03/29/2021
 ms.author: dech
-ms.openlocfilehash: 829fb28577fbb89c031a3b972d3ee5e04c935e9f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6041b58d5834afe3356778207083627d7bbe10d9
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102435010"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105937014"
 ---
 # <a name="estimate-rus-using-the-azure-cosmos-db-capacity-planner"></a>Azure Cosmos DB kapasite planlayıcısını kullanarak RU/s 'yi tahmin etme
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -25,31 +25,34 @@ Kapasite planlayıcısı iki modda kullanılabilir.
 
 |**Mod**  |**Açıklama**  |
 |---------|---------|
-|Temel|Hızlı, yüksek düzey RU/s ve maliyet tahmini sağlar. Bu mod, dizin oluşturma ilkesi, tutarlılık ve diğer parametrelerin varsayılan Azure Cosmos DB ayarlarını varsayar. <br/><br/>Azure Cosmos DB üzerinde çalışmak üzere olası bir iş yükünü değerlendirirken hızlı, yüksek düzey bir tahmin için temel modu kullanın.|
-|Gelişmiş|Ek ayarları ayarlama (Dizin oluşturma ilkesi, tutarlılık düzeyi ve maliyeti ve aktarım hızını etkileyen diğer parametreler) sayesinde daha ayrıntılı bir RU/s ve maliyet tahmini sağlar. <br/><br/>Yeni bir proje için RU/s Tahmini yaparken veya daha ayrıntılı bir tahmin istediğinizde Gelişmiş modu kullanın. |
+|Temel|Hızlı, yüksek düzey RU/s ve maliyet tahmini sağlar. Bu mod, dizin oluşturma ilkesi, tutarlılık ve diğer parametrelerin varsayılan Azure Cosmos DB ayarlarını varsayar. <br/><br/>Azure Cosmos DB üzerinde çalışmak üzere olası bir iş yükünü değerlendirirken hızlı, yüksek düzey bir tahmin için temel modu kullanın. Daha fazla bilgi edinmek için bkz. [temel modlu maliyeti tahmin](#basic-mode)etme.|
+|Gelişmiş|Ek ayarları ayarlama (Dizin oluşturma ilkesi, tutarlılık düzeyi ve maliyeti ve aktarım hızını etkileyen diğer parametreler) sayesinde daha ayrıntılı bir RU/s ve maliyet tahmini sağlar. <br/><br/>Yeni bir proje için RU/s Tahmini yaparken veya daha ayrıntılı bir tahmin istediğinizde Gelişmiş modu kullanın. Daha fazla bilgi edinmek için bkz. [maliyeti Gelişmiş mod ile tahmin](#advanced-mode)etme.|
 
-
-## <a name="estimate-provisioned-throughput-and-cost-using-basic-mode"></a>Temel mod kullanarak sağlanan aktarım hızını ve maliyeti tahmin etme
-Temel modu kullanarak iş yükünüz için hızlı bir tahmin sağlamak üzere [Kapasite planlayıcısı](https://cosmos.azure.com/capacitycalculator/)' na gidin. İş yükünüze göre aşağıdaki parametreleri girin: 
+## <a name="estimate-provisioned-throughput-and-cost-using-basic-mode"></a><a id="basic-mode"></a>Temel mod kullanarak sağlanan aktarım hızını ve maliyeti tahmin etme
+Temel modu kullanarak iş yükünüz için hızlı bir tahmin sağlamak üzere [Kapasite planlayıcısı](https://cosmos.azure.com/capacitycalculator/)' na gidin. İş yükünüze göre aşağıdaki parametreleri girin:
 
 |**Giriş**  |**Açıklama**  |
 |---------|---------|
+| API |Hesabınızın API türünü seçin. |
 |Bölge sayısı|Azure Cosmos DB tüm Azure bölgelerinde kullanılabilir. İş yükünüz için gereken bölge sayısını seçin. Cosmos hesabınızla istediğiniz sayıda bölgeyi ilişkilendirebilirsiniz. Daha fazla bilgi için bkz. Azure Cosmos DB [genel dağıtım](distribute-data-globally.md) .|
 |Çok bölgeli yazma işlemleri|[Çok bölgeli yazmaları](distribute-data-globally.md#key-benefits-of-global-distribution)etkinleştirirseniz, uygulamanız herhangi bir Azure bölgesini okuyup yazabilir. Çok bölgeli yazmaları devre dışı bırakırsanız, uygulamanız tek bir bölgeye veri yazabilir. <br/><br/> Farklı bölgelerde düşük Gecikmeli yazma işlemleri gerektiren etkin-etkin bir iş yükünüz olmasını beklemeniz durumunda çok bölgeli yazmaları etkinleştirin. Örneğin, farklı bölgelerdeki yüksek hacimde veritabanına veri yazan bir ıOT iş yükü. <br/><br/> Çok bölgeli yazma% 99,999 okuma ve yazma kullanılabilirliğini garanti eder. Çok bölgeli yazma işlemleri, tek yazma bölgeleriyle karşılaştırıldığında daha fazla verimlilik gerektirir. Daha fazla bilgi edinmek için bkz. [Rus, tek ve birden çok yazma bölgesi için nasıl farklıdır](optimize-cost-regions.md) makalesi.|
-|Depolanan toplam veri (bölge başına)|Tek bir bölgede GB cinsinden depolanan toplam tahmini veri.|
+|İşlem deposunda depolanan toplam veri sayısı |Tek bir bölgedeki işlem deposunda depolanan toplam tahmini veri (GB).|
+|Analitik depoda depolanan toplam veri | Bu seçenek, **analitik depoyu kullan** seçeneğini **açtığınızda görüntülenir** . Tek bir bölgedeki analitik depoda depolanan toplam tahmini verileri (GB) temsil eder.  |
 |Öğe boyutu|1 KB ile 2 MB arasında değişen veri öğesinin tahmini boyutu (örn. belge). |
-|Bölge başına Okuma/sn|Saniye başına beklenen okuma sayısı. |
-|Bölge başına yazma/sn|Saniye başına beklenen yazma sayısı. |
+|Bölge başına Okuma/sn|Saniye başına beklenen okuma işlemi sayısı. |
+|Bölge başına oluşturulan/sn|Saniye başına beklenen oluşturma işlemi sayısı. |
+|Bölge başına güncelleştirme/sn|Saniye başına beklenen güncelleştirme işlemi sayısı. |
+|Bölge başına silme/sn|Saniye başına beklenen silme işlemi sayısı. |
 
-Gerekli ayrıntıları doldurduktan sonra **Calculate**' yi seçin. **Maliyet tahmini** sekmesi, depolama ve sağlanan aktarım hızı için toplam maliyeti gösterir. Okuma ve yazma istekleri için gereken verimlilik dökümünü almak için bu sekmedeki **Ayrıntıları göster** bağlantısını genişletebilirsiniz. Herhangi bir alanın değerini her değiştirişinizde, tahmini maliyeti yeniden hesaplamak için **Hesapla** ' yı seçin. 
+Gerekli ayrıntıları doldurduktan sonra **Calculate**' yi seçin. **Maliyet tahmini** sekmesi, depolama ve sağlanan aktarım hızı için toplam maliyeti gösterir. Farklı CRUD istekleri için gereken verimlilik dökümünü almak üzere bu sekmedeki **Ayrıntıları göster** bağlantısını genişletebilirsiniz. Herhangi bir alanın değerini her değiştirişinizde, tahmini maliyeti yeniden hesaplamak için **Hesapla** ' yı seçin.
 
-:::image type="content" source="./media/estimate-ru-with-capacity-planner/basic-mode.png" alt-text="Kapasite planlayıcısı temel modu":::
+:::image type="content" source="./media/estimate-ru-with-capacity-planner/basic-mode.png" alt-text="Kapasite planlayıcısı temel modu" border="true":::
 
-## <a name="estimate-provisioned-throughput-and-cost-using-advanced-mode"></a>Gelişmiş modu kullanarak sağlanan aktarım hızını ve maliyeti tahmin etme
+## <a name="estimate-provisioned-throughput-and-cost-using-advanced-mode"></a><a id="advanced-mode"></a>Gelişmiş modu kullanarak sağlanan aktarım hızını ve maliyeti tahmin etme
 
-Gelişmiş mod, RU/s tahminini etkileyen daha fazla ayar sağlamanıza olanak tanır. Bu seçeneği kullanmak için, [Kapasite planlayıcısı](https://cosmos.azure.com/capacitycalculator/) ' na gidin ve Azure için kullandığınız bir hesapla araçta oturum açın. Oturum açma seçeneği sağ köşedeki kullanılabilir. 
+Gelişmiş mod, RU/s tahminini etkileyen daha fazla ayar sağlamanıza olanak tanır. Bu seçeneği kullanmak için, [Kapasite planlayıcısı](https://cosmos.azure.com/capacitycalculator/) ' na gidin ve Azure için kullandığınız bir hesapla araçta **oturum açın** . Oturum açma seçeneği sağ köşedeki kullanılabilir.
 
-Oturum açtıktan sonra, temel moddaki alanlarla karşılaştırılan ek alanlar görebilirsiniz. İş yükünüze göre ek parametreleri girin. 
+Oturum açtıktan sonra, temel moddaki alanlarla karşılaştırılan ek alanlar görebilirsiniz. İş yükünüze göre ek parametreleri girin.
 
 |**Giriş**  |**Açıklama**  |
 |---------|---------|
@@ -58,13 +61,18 @@ Oturum açtıktan sonra, temel moddaki alanlarla karşılaştırılan ek alanlar
 |Çok bölgeli yazma işlemleri|[Çok bölgeli yazmaları](distribute-data-globally.md#key-benefits-of-global-distribution)etkinleştirirseniz, uygulamanız herhangi bir Azure bölgesini okuyup yazabilir. Çok bölgeli yazmaları devre dışı bırakırsanız, uygulamanız tek bir bölgeye veri yazabilir. <br/><br/> Farklı bölgelerde düşük Gecikmeli yazma işlemleri gerektiren etkin-etkin bir iş yükünüz olmasını beklemeniz durumunda çok bölgeli yazmaları etkinleştirin. Örneğin, farklı bölgelerdeki yüksek hacimde veritabanına veri yazan bir ıOT iş yükü. <br/><br/> Çok bölgeli yazma% 99,999 okuma ve yazma kullanılabilirliğini garanti eder. Çok bölgeli yazma işlemleri, tek yazma bölgeleriyle karşılaştırıldığında daha fazla verimlilik gerektirir. Daha fazla bilgi edinmek için bkz. [Rus, tek ve birden çok yazma bölgesi için nasıl farklıdır](optimize-cost-regions.md) makalesi.|
 |Varsayılan tutarlılık|Azure Cosmos DB, geliştiricilerin tutarlılık, kullanılabilirlik ve gecikme süresi avantajları arasında zorunluluğunu getirir dengelamasına olanak tanımak için 5 tutarlılık düzeyini destekler. Daha fazla bilgi edinmek için [tutarlılık düzeyleri](consistency-levels.md) makalesine bakın. <br/><br/> Varsayılan olarak Azure Cosmos DB, oturum tutarlılığını kullanır ve bu, bir oturumdaki kendi yazma olanlarınızı okuyabilme olanağını garanti eder. <br/><br/> Güçlü veya sınırlandırılmış bir şekilde seçmek, oturum, tutarlı ön ek ve nihai tutarlılık ile karşılaştırıldığında, okuma için gereken RU/s 'yi gerektirir. Çok bölgeli yazmalarla güçlü tutarlılık desteklenmez ve otomatik olarak, güçlü tutarlılık içeren tek bölgeli yazmaları otomatik olarak varsayılan olarak kaydeder. |
 |Dizin oluşturma ilkesi|Varsayılan olarak, Azure Cosmos DB tüm öğelerdeki tüm özellikleri esnek ve verimli sorgular ( **Otomatik** dizin oluşturma ilkesiyle eşlenir) için [dizine](index-policy.md) ekler. <br/><br/> **Kapalı** seçeneğini belirlerseniz, özelliklerin hiçbiri dizinlenemez. Bu, yazma işlemleri için en düşük RU ücretine neden olur. Yalnızca [nokta okuma](/dotnet/api/microsoft.azure.cosmos.container.readitemasync) (anahtar değer aramaları) ve/veya yazma işlemleri ve sorgu yok olarak beklemeniz durumunda ilkeyi **Kapat** ' ı seçin. <br/><br/> Özel dizin oluşturma ilkesi, daha düşük yazma işleme ve depolama için dizinden belirli özellikleri dahil etmenize veya dışlayamazsınız. Daha fazla bilgi için bkz. [Dizin oluşturma ilkesi](index-overview.md) ve [örnek dizin oluşturma ilkeleri](how-to-manage-indexing-policy.md#indexing-policy-examples) makaleleri.|
-|Depolanan toplam veri (bölge başına)|Tek bir bölgede GB cinsinden depolanan toplam tahmini veri.|
+|İşlem deposunda depolanan toplam veri sayısı |Tek bir bölgedeki işlem deposunda depolanan toplam tahmini veri (GB).|
+|Analitik depoda depolanan toplam veri | Bu seçenek, **analitik depoyu kullan** seçeneğini **açtığınızda görüntülenir** . Tek bir bölgedeki analitik depoda depolanan toplam tahmini verileri (GB) temsil eder.  |
 |İş yükü modu|İş yükü biriminiz sabit ise **, sabit ' i seçin.** <br/><br/> İş yükü biriminiz zaman içinde değişirse **değişken** ' i seçin.  Örneğin, belirli bir gün veya ay boyunca. <br/><br/> Değişken iş yükü seçeneğini belirlerseniz aşağıdaki ayarlar kullanılabilir:<ul><li>En yoğun zaman yüzdesi: iş yükünüzün en yüksek (en yüksek) aktarım hızı gerektirdiği bir ayda zaman yüzdesi. <br/><br/> Örneğin, 9:00:00 – 18:00 iş saatlerinde yüksek etkinlik içeren bir iş yükünüz varsa, yoğun sürenin yüzdesi: 45 saat, tepe/730 saat/ay = %6 ' dır.<br/><br/></li><li>Bölge başına en yoğun Okuma/sn-en yoğun saniye başına beklenen okuma sayısı.</li><li>Her bölge için en yoğun yazma/sn: en yüksek saniyede beklenen yazma sayısı.</li><li>Bölge başına en yoğun Okuma/sn – yoğun bir şekilde saniye başına beklenen okuma sayısı.</li><li>Bölge başına en yoğun yazma/sn: en yoğun olarak saniye başına beklenen yazma sayısı.</li></ul>Yoğun ve yoğun olmayan aralıklarda, [sağlanan aktarım hızını](set-throughput.md#update-throughput-on-a-database-or-a-container) uygun şekilde yukarı ve aşağı ölçeklendirerek maliyetinizi iyileştirebilmenizi sağlayabilirsiniz.|
 |Öğe boyutu|1 KB ile 2 MB arasında değişen veri öğesi (ör. belge) boyutu. <br/><br/>**Örnek (JSON)** belgesini daha doğru bir tahmine göre de karşıya yükleyebilirsiniz.<br/><br/>İş yükünüz aynı kapsayıcıda birden çok türde öğe (farklı JSON içeriğiyle) varsa, birden fazla JSON belgesini karşıya yükleyebilir ve tahmini alabilirsiniz. Birden çok örnek JSON belgesi eklemek için **Yeni öğe Ekle** düğmesini kullanın.|
+|Bölge başına Okuma/sn|Saniye başına beklenen okuma işlemi sayısı. |
+|Bölge başına oluşturulan/sn|Saniye başına beklenen oluşturma işlemi sayısı. |
+|Bölge başına güncelleştirme/sn|Saniye başına beklenen güncelleştirme işlemi sayısı. |
+|Bölge başına silme/sn|Saniye başına beklenen silme işlemi sayısı. |
 
-Geçerli tahmini içeren bir CSV dosyasını indirmek için **tahmin kaydet** düğmesini de kullanabilirsiniz. 
+Geçerli tahmini içeren bir CSV dosyasını indirmek için **tahmin kaydet** düğmesini de kullanabilirsiniz.
 
-:::image type="content" source="./media/estimate-ru-with-capacity-planner/advanced-mode.png" alt-text="Kapasite planlayıcısı Gelişmiş modu":::
+:::image type="content" source="./media/estimate-ru-with-capacity-planner/advanced-mode.png" alt-text="Kapasite planlayıcısı Gelişmiş modu" border="true":::
 
 Azure Cosmos DB kapasite planlayıcısı 'nda gösterilen fiyatlar, üretilen iş ve depolama için genel fiyatlandırma ücretlerine göre tahminlerdir. Tüm fiyatlar ABD Doları cinsinden gösterilmiştir. Bölgelere göre tüm oranları görmek için [Azure Cosmos DB fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/cosmos-db/) bakın.  
 

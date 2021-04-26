@@ -12,12 +12,12 @@ author: jovanpop-msft
 ms.author: jovanpop
 ms.reviewer: sstein
 ms.date: 09/21/2020
-ms.openlocfilehash: 9faaf79958443c252a8d913fbd7448389c610e09
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 16f937286b967aaea8ec6a16e97835b2de5a0331
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105628586"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765512"
 ---
 # <a name="azure-sql-managed-instance-frequently-asked-questions-faq"></a>Azure SQL Yönetilen Örneği hakkında sık sorulan sorular (SSS)
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -94,7 +94,7 @@ Bu, alt ağ adını Regex ^ [a-za-Z_] [^ \\ \/ \: \* \? \" \<\> \| \` \' \^ ] * 
 
 **Yönetilen örnekten nasıl ölçeklendirebilirim?**
 
-Yönetilen örneğinizi [Azure Portal](../database/service-tiers-vcore.md?tabs=azure-portal#selecting-a-hardware-generation), [POWERSHELL](/archive/blogs/sqlserverstorageengine/change-size-azure-sql-managed-instance-using-powershell), [Azure CLI](/cli/azure/sql/mi#az-sql-mi-update) veya [ARM şablonlarından](/archive/blogs/sqlserverstorageengine/updating-azure-sql-managed-instance-properties-using-arm-templates)ölçeklendirebilirsiniz.
+Yönetilen örneğinizi [Azure Portal](../database/service-tiers-vcore.md?tabs=azure-portal#selecting-a-hardware-generation), [POWERSHELL](/archive/blogs/sqlserverstorageengine/change-size-azure-sql-managed-instance-using-powershell), [Azure CLI](/cli/azure/sql/mi#az_sql_mi_update) veya [ARM şablonlarından](/archive/blogs/sqlserverstorageengine/updating-azure-sql-managed-instance-properties-using-arm-templates)ölçeklendirebilirsiniz.
 
 **Yönetilen örnekten bir bölgeden diğerine taşıyabilir miyim?**
 
@@ -102,7 +102,7 @@ Evet, yazabilirsiniz. Yönergeler için bkz. [kaynakları bölgeler arasında ta
 
 **Yönetilen örnekten nasıl silebilirim?**
 
-Yönetilen örnekleri Azure portal, [PowerShell](/powershell/module/az.sql/remove-azsqlinstance), [Azure CLı](/cli/azure/sql/mi#az-sql-mi-delete) veya [Kaynak Yöneticisi REST API 'leri](/rest/api/sql/managedinstances/delete)aracılığıyla silebilirsiniz.
+Yönetilen örnekleri Azure portal, [PowerShell](/powershell/module/az.sql/remove-azsqlinstance), [Azure CLı](/cli/azure/sql/mi#az_sql_mi_delete) veya [Kaynak Yöneticisi REST API 'leri](/rest/api/sql/managedinstances/delete)aracılığıyla silebilirsiniz.
 
 **Bir örneği oluşturmak veya güncelleştirmek ya da bir veritabanını geri yüklemek için ne kadar süre sürer?**
 
@@ -337,7 +337,7 @@ Hayır, bu seçenek kullanılamaz.  Özel veri uç noktası için, yönetilen ö
 Hızlı rota devresi eşlemesi bunu yapmanın tercih edilen yoludur. Küresel sanal ağ eşlemesi, aşağıdaki notta açıklanan kısıtlamalarla desteklenir.  
 
 > [!IMPORTANT]
-> [9/22/2020 tarihinde yeni oluşturulan sanal kümeler için genel sanal ağ eşlemesi duyuruldu](https://azure.microsoft.com/en-us/updates/global-virtual-network-peering-support-for-azure-sql-managed-instance-now-available/). Diğer bir deyişle, duyuru tarihinden sonra boş alt ağlarda oluşturulan SQL yönetilen örnekleri ve bu alt ağlarda oluşturulan tüm sonraki yönetilen örnekler için genel sanal ağ eşlemesi desteklenir. Diğer tüm SQL yönetilen örnekler için eşleme desteği, [Genel sanal ağ eşlemesi kısıtlamalarından](../../virtual-network/virtual-network-manage-peering.md#requirements-and-constraints)dolayı aynı bölgedeki ağlarla sınırlıdır. Daha fazla bilgi için bkz. [Azure sanal ağlar sık sorulan sorular](../../virtual-network/virtual-networks-faq.md#what-are-the-constraints-related-to-global-vnet-peering-and-load-balancers) makalesinin ilgili bölümü. 
+> [22/9/2020’de yeni oluşturulan sanal kümeler için genel sanal ağ eşlemesinin duyurusunu yaptık](https://azure.microsoft.com/en-us/updates/global-virtual-network-peering-support-for-azure-sql-managed-instance-now-available/). Bu, hem duyuru tarihinden sonra boş alt ağlarda oluşturulan SQL Yönetilen Örnekleri için hem de söz konusu alt ağlarda daha sonra oluşturulan yönetilen örnekler için genel sanal ağ eşlemesinin desteklendiği anlamına geliyor. Diğer tüm SQL yönetilen örnekler için eşleme desteği, [Genel sanal ağ eşlemesi kısıtlamalarından](../../virtual-network/virtual-network-manage-peering.md#requirements-and-constraints)dolayı aynı bölgedeki ağlarla sınırlıdır. Daha fazla bilgi için bkz. [Azure sanal ağlar sık sorulan sorular](../../virtual-network/virtual-networks-faq.md#what-are-the-constraints-related-to-global-vnet-peering-and-load-balancers) makalesinin ilgili bölümü. 
 
 Hızlı rota devresi eşlemesi ve genel sanal ağ eşlemesi mümkün değilse, tek diğer seçenek siteden siteye VPN bağlantısı ([Azure Portal](../../vpn-gateway/tutorial-site-to-site-portal.md), [POWERSHELL](../../vpn-gateway/vpn-gateway-create-site-to-site-rm-powershell.md), [Azure CLI](../../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli.md)) oluşturmaktır.
 

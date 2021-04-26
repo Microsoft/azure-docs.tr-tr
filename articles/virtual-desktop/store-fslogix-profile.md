@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: conceptual
 ms.date: 10/14/2019
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 2ec166c1df9727052d4980f5d5758ece8c499880
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+manager: femila
+ms.openlocfilehash: 1ff8c645b1ad670f3824920d39aa0c6bf9783408
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99526611"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445559"
 ---
 # <a name="storage-options-for-fslogix-profile-containers-in-windows-virtual-desktop"></a>Windows sanal masaüstündeki FSLogix profil kapsayıcıları için depolama seçenekleri
 
@@ -44,6 +44,26 @@ Aşağıdaki tablolar, Windows sanal masaüstü FSLogix profil kapsayıcısı Ku
 |Azure Active Directory tümleştirmesi|[Yerel Active Directory ve Azure Active Directory Domain Services](../storage/files/storage-files-active-directory-overview.md)|[Azure Active Directory Domain Services ve yerel Active Directory](../azure-netapp-files/azure-netapp-files-faqs.md#does-azure-netapp-files-support-azure-active-directory)|Yalnızca yerel Active Directory veya Azure Active Directory Domain Services desteği|
 
 Depolama yönteminizi seçtikten sonra, fiyatlandırma planlarımız hakkında bilgi edinmek için [Windows sanal masaüstü fiyatlandırması](https://azure.microsoft.com/pricing/details/virtual-desktop/) ' na göz atın.
+
+## <a name="azure-files-tiers"></a>Azure dosyaları katmanları
+
+Azure dosyaları, iki farklı depolama katmanı sunar: Premium ve standart. Bu katmanlar, senaryonun gereksinimlerini karşılamak için dosya paylaşımlarınızın performansını ve maliyetini uyarlamanızı sağlar.
+
+- Premium dosya paylaşımları katı hal sürücüleri (SSD 'Ler) tarafından desteklenir ve FileStorage depolama hesabı türüne dağıtılır. Premium dosya paylaşımları, giriş ve çıkış (GÇ) yoğun iş yükleri için tutarlı yüksek performans ve düşük gecikme süresi sağlar. 
+
+- Standart dosya paylaşımları sabit disk sürücüleri (HDD 'Ler) tarafından desteklenir ve genel amaçlı sürüm 2 (GPv2) depolama hesabı türünde dağıtılır. Standart dosya paylaşımları, genel amaçlı dosya paylaşımları ve geliştirme/test ortamları gibi performans çeşitliliğine daha az duyarlı olan GÇ iş yükleri için güvenilir performans sağlar. Standart dosya paylaşımları yalnızca Kullandıkça Öde faturalandırma modelinde kullanılabilir.
+
+Aşağıdaki tabloda, iş yükünüze göre hangi performans katmanının kullanılacağı önerilerimizi listelenmektedir. Bu öneriler, performans hedeflerinizi, bütçenize ve bölgesel konuları karşılayan performans katmanını seçmenize yardımcı olur. Bu önerileri, [Uzak Masaüstü iş yükü türlerindeki](/windows-server/remote/remote-desktop-services/remote-desktop-workloads)örnek senaryolara dayandırdık. 
+
+| İş yükü türü | Önerilen dosya katmanı |
+|--------|-----------|
+| Hafif (200 kullanıcıdan az) | Standart dosya paylaşımları |
+| Hafif (200 'den fazla Kullanıcı) | Birden çok dosya paylaşımı ile Premium dosya paylaşımları veya standart |
+|Orta|Premium dosya paylaşımları|
+|Ağır|Premium dosya paylaşımları|
+|Güç|Premium dosya paylaşımları|
+
+Azure dosya performansı hakkında daha fazla bilgi için bkz. [dosya paylaşma ve dosya ölçeği hedefleri](../storage/files/storage-files-scale-targets.md#azure-files-scale-targets). Fiyatlandırma hakkında daha fazla bilgi için bkz. [Azure dosyaları fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/files/).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -16,12 +16,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/06/2019
 ms.author: terrylan
-ms.openlocfilehash: 86874a60d48ddcbdaca5ae779ad554ee58cc233b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6634a536828b3c19d771d135fdb3a1224d3dfdf3
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96498855"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717432"
 ---
 # <a name="azure-operational-security-best-practices"></a>Azure operasyonel güvenlik en iyi uygulamaları
 Bu makalede, Azure 'daki verilerinizi, uygulamalarınızı ve diğer varlıkları korumaya yönelik işlemsel en iyi uygulamalar sağlanır.
@@ -122,7 +122,7 @@ Internet güvenliği (CIS) denetimlerinin merkezini temel alan güvenli puan, ku
 **Ayrıntı**: [Azure izleyici 'yi kullanarak veri toplayın ve dışarı aktarın](../../azure-monitor/overview.md#integrate-and-export-data). Bu uygulama, güvenlik olay araştırmasını etkinleştirmek için önemlidir ve çevrimiçi günlük tutma sınırlı olur. Azure Sentinel kullanıyorsanız, bkz. [veri kaynaklarını bağlama](../../sentinel/connect-data-sources.md).
 
 **En iyi yöntem**: uç nokta algılama ve yanıt (EDR) yeteneklerini saldırı araştırmanıza tümleştirerek, araştırma ve işleme işlemlerinizi hızlandırın ve hatalı pozitif sonuçları azaltabilirsiniz.   
-**Ayrıntı**: Güvenlik Merkezi güvenlik Ilkeniz aracılığıyla [uç nokta tümleştirmesi Için Microsoft Defender 'ı etkinleştirme](../../security-center/security-center-wdatp.md#enabling-the-microsoft-defender-for-endpoint-integration) . Tehdit ve olay yanıtı için Azure Sentinel kullanmayı göz önünde bulundurun.
+**Ayrıntı**: Güvenlik Merkezi güvenlik Ilkeniz aracılığıyla [uç nokta tümleştirmesi Için Microsoft Defender 'ı etkinleştirin](../../security-center/security-center-wdatp.md#enable-the-microsoft-defender-for-endpoint-integration) . Tehdit ve olay yanıtı için Azure Sentinel kullanmayı göz önünde bulundurun.
 
 ## <a name="monitor-end-to-end-scenario-based-network-monitoring"></a>Uçtan uca senaryo tabanlı ağ izlemeyi izleme
 Müşteriler, ağ kaynaklarını bir sanal ağ, ExpressRoute, Application Gateway ve yük dengeleyiciler gibi birleştirerek Azure 'da uçtan uca bir ağ oluşturur. İzleme, ağ kaynaklarının her birinde kullanılabilir.

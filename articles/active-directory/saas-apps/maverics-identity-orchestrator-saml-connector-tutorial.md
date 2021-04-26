@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 03/17/2021
 ms.author: jeedes
-ms.openlocfilehash: 19f6b0601afe9ad84f02c93d7f6e1ae3a71a06a4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 402f6cd6961108cdf1e9c94fb4f93309fbf15ead
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104585103"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599035"
 ---
 # <a name="integrate-azure-ad-single-sign-on-with-maverics-identity-orchestrator-saml-connector"></a>Azure AD çoklu oturum açmayı Maverics Identity Orchestrator SAML Bağlayıcısı ile tümleştirme
 
@@ -35,7 +35,7 @@ Bu karma erişim öğreticisinde, kimlik doğrulama ve erişim denetimi için Az
 
 * Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
 * Maverics Identity Orchestrator SAML Bağlayıcısı SSO özellikli aboneliği. Maverics yazılımını almak için [Strata satışları](mailto:sales@strata.io)ile iletişim kurun.
-* Üst bilgi tabanlı kimlik doğrulaması kullanan en az bir uygulama. Örnekler, adresinde barındırılan sonar adlı bir uygulamaya https://app.sonarsystems.com ve adresinde barındırılan Connectulum adlı bir uygulamaya karşı çalışır https://app.connectulum.com .
+* Üst bilgi tabanlı kimlik doğrulaması kullanan en az bir uygulama. Örnekler adresinde barındırılan Connectulum adlı bir uygulamaya karşı çalışır `https://app.connectulum.com` .
 * Maverics Orchestrator 'ı barındıracak bir Linux makinesi
   * İşletim sistemi: RHEL 7,7 veya üzeri, CentOS 7 +
   * Disk: >= 10 GB
@@ -107,7 +107,7 @@ tls:
     keyFile: /etc/maverics/maverics.key
 ```
 
-TLS 'nin beklendiği gibi yapılandırıldığını doğrulamak için, Maverics hizmetini yeniden başlatın ve durum uç noktasına bir istek yapın. Tarayıcınızdan, ister https://sonar.maverics.com/status .
+TLS 'nin beklendiği gibi yapılandırıldığını doğrulamak için, Maverics hizmetini yeniden başlatın ve durum uç noktasına bir istek yapın.
 
 ## <a name="step-2-proxy-an-application"></a>2. Adım: uygulama proxy 'Si
 
@@ -131,7 +131,7 @@ appgateways:
     upstream: https://app.sonarsystems.com
 ```
 
-Proxy 'nin beklendiği gibi çalıştığını doğrulamak için Maverics hizmetini yeniden başlatın ve Maverics proxy 'si aracılığıyla uygulamaya bir istek yapın. Tarayıcınızdan, ister https://sonar.maverics.com . İsteğe bağlı olarak, örneğin, `https://sonar.maverics.com/RESOURCE` `RESOURCE` korumalı yukarı akış uygulamasının geçerli bir uygulama kaynağı olan belirli uygulama kaynaklarına bir istek yapabilirsiniz.
+Proxy 'nin beklendiği gibi çalıştığını doğrulamak için Maverics hizmetini yeniden başlatın ve Maverics proxy 'si aracılığıyla uygulamaya bir istek yapın. İsteğe bağlı olarak belirli uygulama kaynaklarına bir istek yapabilirsiniz.
 
 ## <a name="step-3-register-an-enterprise-application-in-azure-ad"></a>3. Adım: Kurumsal uygulamayı Azure AD 'ye kaydetme
 
@@ -325,7 +325,7 @@ connectors:
 
 Kodun `host` App Gateway tanımlarınıza bir alan ekleyeceğini fark etmiş olabilirsiniz. `host`Alan, Maverics Orchestrator 'ın hangi yukarı akış konağını proxy trafiğine ayırabilmesini sağlar.
 
-Yeni eklenen uygulama ağ geçidinin beklenen şekilde çalıştığını onaylamak için, ' a bir istek yapın https://connectulum.maverics.com .
+Yeni eklenen uygulama ağ geçidinin beklenen şekilde çalıştığını onaylamak için, ' a bir istek yapın `https://connectulum.maverics.com` .
 
 ## <a name="advanced-scenarios"></a>Gelişmiş senaryolar
 

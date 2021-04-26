@@ -1,16 +1,21 @@
 ---
 title: Java ile Azure Service Bus kuyruklarını kullanma (Azure-mesajlaşma-ServiceBus)
 description: Bu öğreticide, Java kullanarak Azure Service Bus kuyruğundan ileti gönderme ve iletileri alma hakkında bilgi edineceksiniz. Yeni Azure-mesajlaşma-ServiceBus paketini kullanın.
-ms.devlang: Java
-ms.topic: quickstart
 ms.date: 02/13/2021
-ms.custom: seo-java-july2019, seo-java-august2019, seo-java-september2019, devx-track-java
-ms.openlocfilehash: 1fab8d3f603b3c2c7e3c307d3d2ce53590d7511c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.topic: quickstart
+ms.devlang: Java
+ms.custom:
+- seo-java-july2019
+- seo-java-august2019
+- seo-java-september2019
+- devx-track-java
+- mode-api
+ms.openlocfilehash: e3998e812bb921ff8bea5e83199bc4e142ed2e83
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101739772"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533426"
 ---
 # <a name="send-messages-to-and-receive-messages-from-azure-service-bus-queues-java"></a>Azure Service Bus kuyruklarından ileti gönderme ve iletileri alma (Java)
 Bu hızlı başlangıçta, bir Azure Service Bus sırasından ileti göndermek ve ileti almak için bir Java uygulaması oluşturacaksınız. 

@@ -12,12 +12,12 @@ ms.workload: data-services
 ms.custom: seo-lt-2019
 ms.topic: tutorial
 ms.date: 08/04/2020
-ms.openlocfilehash: 4ee3e9e7d2aa0247011415b43517147fd421902a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5585eb210b54dfa016d25c430256508e1b0b9f61
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101094936"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076896"
 ---
 # <a name="tutorial-migrate-sql-server-to-an-azure-sql-managed-instance-online-using-dms"></a>Öğretici: DMS kullanarak Azure SQL yönetilen örneği 'ne çevrimiçi SQL Server geçirme
 
@@ -209,7 +209,7 @@ Hizmetin bir örneği oluşturulduktan sonra Azure portaldan bulun, açın ve ye
 
 1. **Geçiş ayarlarını yapılandırma** ekranında şu bilgileri girin:
 
-    | | |
+    | Parametre | Açıklama |
     |--------|---------|
     |**SMB Ağ konumu paylaşımı** | Azure veritabanı geçiş hizmeti 'nin geçiş için kullanabileceği tam veritabanı yedekleme dosyalarını ve işlem günlüğü yedekleme dosyalarını içeren yerel SMB ağ veya Azure dosya paylaşımıdır. Kaynak SQL Server örneğini çalıştıran hizmet hesabının ağ paylaşımında okuma/yazma ayrıcalıkları olmalıdır. Ağ paylaşımındaki bir sunucunun FQDN veya IP adresi değerini girin, örneğin: '\\\sunucuadi.etkialaniadi.com\yedeklemeklasoru' veya '\\\IP adresi\yedeklemeklasoru'. Daha iyi performans için, geçirilecek her veritabanı için ayrı bir klasör kullanılması önerilir. Veritabanı düzeyinde dosya paylaşımının yolunu, **Gelişmiş ayarlar** seçeneğini kullanarak sağlayabilirsiniz. SMB paylaşımıyla bağlantı kurma sorunları yaşıyorsanız, bkz. [SMB paylaşma](known-issues-azure-sql-db-managed-instance-online.md#smb-file-share-connectivity). |
     |**Kullanıcı adı** | Windows kullanıcısının yukarıda belirttiğiniz ağ paylaşımında tam denetim ayrıcalığına sahip olduğundan emin olun. Azure veritabanı geçiş hizmeti, yedekleme dosyalarını geri yükleme işlemi için Azure depolama kapsayıcısına yüklemek üzere Kullanıcı kimlik bilgisinin kimliğine bürünecektir. Azure dosya paylaşımının kullanılması durumunda Kullanıcı adı olarak AZURE \ ile önceden tamamlandı depolama hesabı adını kullanın. |

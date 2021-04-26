@@ -8,12 +8,12 @@ ms.subservice: security
 ms.date: 11/19/2020
 ms.author: nanditav
 ms.reviewer: jrasnick
-ms.openlocfilehash: d4bc59a9bd5299698bff9949aaaa881fbdf385ee
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 71249534c6a088088213659b5a45e042229721c7
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100526281"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813191"
 ---
 # <a name="encryption-for-azure-synapse-analytics-workspaces"></a>Azure Synapse Analytics çalışma alanları için şifreleme
 
@@ -53,7 +53,7 @@ Aşağıdaki SYNAPSE bileşenlerindeki veriler, çalışma alanı düzeyinde yap
 
 ### <a name="key-access-and-workspace-activation"></a>Anahtar erişimi ve çalışma alanı etkinleştirme
 
-Müşteri tarafından yönetilen anahtarlarla Azure SYNAPSE şifreleme modeli, gerektiğinde şifreleme ve şifre çözme için Azure Key Vault anahtarlara erişen çalışma alanını içerir. Anahtarlar, erişim ilkesi aracılığıyla veya [RBAC erişimi Azure Key Vault](../../key-vault/general/rbac-guide.md)çalışma alanı tarafından erişilebilir hale getirilir. Azure Key Vault erişim ilkesi aracılığıyla izin verirken, ilke oluşturma sırasında ["yalnızca uygulama"](../../key-vault/general/secure-your-key-vault.md#key-vault-authentication-options) seçeneğini belirleyin (çalışma alanının yönetilen kimliğini seçin ve yetkili bir uygulama olarak eklemeyin).
+Müşteri tarafından yönetilen anahtarlarla Azure SYNAPSE şifreleme modeli, gerektiğinde şifreleme ve şifre çözme için Azure Key Vault anahtarlara erişen çalışma alanını içerir. Anahtarlar, erişim ilkesi aracılığıyla veya [RBAC erişimi Azure Key Vault](../../key-vault/general/rbac-guide.md)çalışma alanı tarafından erişilebilir hale getirilir. Azure Key Vault erişim ilkesi aracılığıyla izin verirken, ilke oluşturma sırasında ["yalnızca uygulama"](../../key-vault/general/security-features.md#key-vault-authentication-options) seçeneğini belirleyin (çalışma alanının yönetilen kimliğini seçin ve yetkili bir uygulama olarak eklemeyin).
 
  Çalışma alanının, çalışma alanının etkinleştirilmeden önce anahtar kasasında ihtiyaç duyması gereken izinler verilmelidir. Çalışma alanı etkinleştirmesine yönelik bu aşamalı yaklaşım, çalışma alanındaki verilerin müşteri tarafından yönetilen anahtarla şifrelenmesini sağlar. Şifrelemenin adanmış SQL havuzları için etkinleştirilip etkinleştirilebileceğine veya devre dışı bırakılabileceğini unutmayın. her havuz varsayılan olarak şifreleme için etkinleştirilmemiştir.
 

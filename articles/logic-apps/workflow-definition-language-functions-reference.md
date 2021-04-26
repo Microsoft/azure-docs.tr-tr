@@ -5,13 +5,13 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: estfan, logicappspm, azla
 ms.topic: reference
-ms.date: 03/12/2021
-ms.openlocfilehash: 1414a7b0f17918caa16ccf854d70ea199fb42a47
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.date: 03/30/2021
+ms.openlocfilehash: d2ea08551299d66edd919a828877c134c84ef938
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104870203"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107477783"
 ---
 # <a name="reference-guide-to-using-functions-in-expressions-for-azure-logic-apps-and-power-automate"></a>Azure Logic Apps ve güç otomatikleştirme için ifadelerde işlevleri kullanmaya yönelik başvuru kılavuzu
 
@@ -131,7 +131,7 @@ Koşullara göre çalışmak, değerleri ve ifade sonuçlarını karşılaştır
 | [eşittir](../logic-apps/workflow-definition-language-functions-reference.md#equals) | Her iki değerin de eşdeğer olup olmadığını denetleyin. |
 | [büyüktür](../logic-apps/workflow-definition-language-functions-reference.md#greater) | İlk değerin ikinci değerden büyük olup olmadığını kontrol edin. |
 | [greaterOrEquals](../logic-apps/workflow-definition-language-functions-reference.md#greaterOrEquals) | İlk değerin ikinci değere eşit veya ondan büyük olup olmadığını kontrol edin. |
-| [if](../logic-apps/workflow-definition-language-functions-reference.md#if) | İfadenin true veya false olduğunu denetleyin. Sonuca göre belirtilen değeri döndürün. |
+| [kullandıysanız](../logic-apps/workflow-definition-language-functions-reference.md#if) | İfadenin true veya false olduğunu denetleyin. Sonuca göre belirtilen değeri döndürün. |
 | [büyüktür](../logic-apps/workflow-definition-language-functions-reference.md#less) | İlk değerin ikinci değerden küçük olup olmadığını kontrol edin. |
 | [lessOrEquals](../logic-apps/workflow-definition-language-functions-reference.md#lessOrEquals) | İlk değerin ikinci değere eşit veya ondan küçük olup olmadığını kontrol edin. |
 | [başlatılmadı](../logic-apps/workflow-definition-language-functions-reference.md#not) | İfadenin yanlış olup olmadığını denetleyin. |
@@ -145,7 +145,7 @@ Koşullara göre çalışmak, değerleri ve ifade sonuçlarını karşılaştır
 Bir değerin türünü veya biçimini değiştirmek için bu dönüştürme işlevlerini kullanabilirsiniz. Örneğin, Boole değerinden bir değeri tamsayı olarak değiştirebilirsiniz. Dönüştürme sırasında Logic Apps içerik türlerini nasıl işleyeceğinden ilgili daha fazla bilgi için bkz. [tanıtıcı içerik türleri](../logic-apps/logic-apps-content-type.md). Her işlev hakkında tam başvuru için [alfabetik listeye](../logic-apps/workflow-definition-language-functions-reference.md#alphabetical-list)bakın.
 
 > [!NOTE]
-> Azure Logic Apps, bazı veri türleri arasında değerleri otomatik olarak dönüştürür, bu da bu dönüşümleri el ile gerçekleştirmeniz gerekmediği anlamına gelir. Bununla birlikte, bunu yaparsanız, gerçek dönüştürmeleri etkilemeyen, yalnızca bunların nasıl gösterildiğine ilişkin beklenmeyen görüntüleme davranışları yaşayabilirsiniz. Daha fazla bilgi için bkz. [örtük veri türü dönüştürmeleri](#implicit-data-conversions).
+> Azure Logic Apps, kodlama ve kod çözme işlevlerini kullanarak otomatik olarak veya dolaylı olarak Base64 kodlaması ve kod çözme işlemini gerçekleştirir. Ancak, bu işlevleri tasarımcıda de kullanıyorsanız, tasarımcıda beklenmeyen işleme davranışları yaşayabilirsiniz. Bu davranışlar, işlevleri ve bunların etkilerini kodunuzdan kaldıran işlevlerin parametre değerlerini düzenlemedikçe yalnızca işlevlerin görünürlüğünü etkiler ve etkilerini etkilemez. Daha fazla bilgi için bkz. [örtük veri türü dönüştürmeleri](#implicit-data-conversions).
 
 | Dönüştürme işlevi | Görev |
 | ------------------- | ---- |
@@ -177,7 +177,7 @@ Bir değerin türünü veya biçimini değiştirmek için bu dönüştürme işl
 
 ## <a name="implicit-data-type-conversions"></a>Örtük veri türü dönüştürmeleri
 
-Azure Logic Apps, bazı veri türleri arasında otomatik olarak veya örtük olarak dönüşüm olarak bu türleri el ile dönüştürmeniz gerekmez. Örneğin, dizelerin giriş olarak beklenildiği dize olmayan değerler kullanırsanız Logic Apps dize olmayan değerleri otomatik olarak dizelere dönüştürür.
+Azure Logic Apps, bazı veri türleri arasında otomatik olarak veya örtük olarak dönüşüm, bu dönüşümleri el ile gerçekleştirmeniz gerekmez. Örneğin, dizelerin giriş olarak beklenildiği dize olmayan değerler kullanırsanız Logic Apps dize olmayan değerleri otomatik olarak dizelere dönüştürür.
 
 Örneğin, bir tetikleyicinin çıkış olarak bir sayısal değer döndürdüğünü varsayalım:
 
@@ -187,9 +187,11 @@ Bir URL gibi dize girişinin beklenildiği bu sayısal çıktıyı kullanırsan�
 
 `@{triggerBody()?['123']}`
 
+<a name="base64-encoding-decoding"></a>
+
 ### <a name="base64-encoding-and-decoding"></a>Base64 kodlama ve kod çözme
 
-Logic Apps otomatik olarak veya dolaylı olarak Base64 kodlaması veya kod çözme işlemini gerçekleştirerek, bu işlemleri ilgili ifadeleri kullanarak el ile gerçekleştirmeniz gerekmez:
+Logic Apps otomatik olarak veya dolaylı olarak Base64 kodlaması veya kod çözme işlemini gerçekleştirerek, bu dönüşümleri ilgili işlevleri kullanarak el ile gerçekleştirmeniz gerekmez:
 
 * `base64(<value>)`
 * `base64ToBinary(<value>)`
@@ -200,7 +202,7 @@ Logic Apps otomatik olarak veya dolaylı olarak Base64 kodlaması veya kod çöz
 * `decodeDataUri(<value>)`
 
 > [!NOTE]
-> Mantıksal uygulamanıza bu ifadeleri el ile eklerseniz, örneğin, ifade düzenleyicisini kullanarak Logic App Designer 'dan uzağa gidin ve tasarımcıya geri döndüğünüzde tasarımcı yalnızca parametre değerlerini gösterir. İfadeler kod görünümünde yalnızca parametre değerlerini düzenlememeniz durumunda korunur. Aksi takdirde, Logic Apps ifadeleri kod görünümünden kaldırır ve yalnızca parametre değerlerini bırakır. Bu davranış kodlama veya kod çözme işlemi, yalnızca ifadelerin gösterilip gösterilmeyeceğini etkilemez.
+> Mantıksal uygulama Tasarımcısı aracılığıyla iş akışınıza bu işlevlerden herhangi birini el ile eklerseniz, örneğin, ifade düzenleyicisini kullanarak tasarımcıdan uzağa gidin ve tasarımcıya geri döndüğünüzde işlev tasarımcıdan kaybolur ve yalnızca parametre değerlerinin arkasında bırakılır. Bu davranış, işlevin parametre değerlerini düzenlemeden bu işlevi kullanan bir tetikleyici veya eylem seçtiğinizde de gerçekleşir. Bu sonuç yalnızca işlevin görünürlüğünü etkiler, etkiyi etkilemez. Kod görünümünde, işlev etkilenmemiştir. Ancak, işlevin parametre değerlerini düzenlerseniz, işlev ve etkisi yalnızca işlevin parametre değerlerinin arkasında bırakarak kod görünümünden kaldırılır.
 
 <a name="math-functions"></a>
 
@@ -268,7 +270,7 @@ Her işlev hakkında tam başvuru için [alfabetik listeye](../logic-apps/workfl
 
 | İş akışı işlevi | Görev |
 | ----------------- | ---- |
-| [ön](../logic-apps/workflow-definition-language-functions-reference.md#action) | Çalışma zamanında geçerli eylemin çıkışını veya diğer JSON ad ve değer çiftleriyle değerleri döndürün. Ayrıca bkz. [Eylemler](../logic-apps/workflow-definition-language-functions-reference.md#actions). |
+| [action](../logic-apps/workflow-definition-language-functions-reference.md#action) | Çalışma zamanında geçerli eylemin çıkışını veya diğer JSON ad ve değer çiftleriyle değerleri döndürün. Ayrıca bkz. [Eylemler](../logic-apps/workflow-definition-language-functions-reference.md#actions). |
 | [actionBody](../logic-apps/workflow-definition-language-functions-reference.md#actionBody) | Çalışma zamanında bir eylemin `body` çıktısını döndürün. Ayrıca bkz. [gövde](../logic-apps/workflow-definition-language-functions-reference.md#body). |
 | [Actionçıktılar](../logic-apps/workflow-definition-language-functions-reference.md#actionOutputs) | Çalışma zamanında bir eylemin çıktısını döndürün. Bkz. [çıktılar](../logic-apps/workflow-definition-language-functions-reference.md#outputs) ve [Eylemler](../logic-apps/workflow-definition-language-functions-reference.md#actions). |
 | [eylem](../logic-apps/workflow-definition-language-functions-reference.md#actions) | Çalışma zamanında bir eylemin çıkışını veya diğer JSON ad ve-değer çiftleriyle değerleri döndürün. Ayrıca bkz. [eylem](../logic-apps/workflow-definition-language-functions-reference.md#action).  |
@@ -334,7 +336,7 @@ Bu bölüm, tüm kullanılabilir işlevleri alfabetik sırayla listeler.
 
 <a name="action"></a>
 
-### <a name="action"></a>eylem
+### <a name="action"></a>action
 
 Çalışma zamanında *geçerli* eylemin çıkışını veya diğer JSON ad ve-değer çiftleriyle bulunan değerleri döndürün, bu da ifadeye atayabilirsiniz.
 Varsayılan olarak, bu işlev tüm eylem nesnesine başvurur, ancak isteğe bağlı olarak değerini istediğiniz bir özelliği belirtebilirsiniz.
@@ -944,7 +946,7 @@ Ve şu sonucu döndürür: `["hello"]`
 Bir dize için Base64 kodlamalı sürüm döndürün.
 
 > [!NOTE]
-> Azure Logic Apps, otomatik olarak Base64 kodlaması ve kod çözme işlemi gerçekleştirir, bu da bu dönüşümleri el ile gerçekleştirmeniz gerekmediği anlamına gelir. Bununla birlikte, bunu yaparsanız, gerçek dönüştürmeleri etkilemeyen, yalnızca bunların nasıl gösterildiğine ilişkin beklenmeyen görüntüleme davranışları yaşayabilirsiniz. Daha fazla bilgi için bkz. [örtük veri türü dönüştürmeleri](#implicit-data-conversions).
+> Azure Logic Apps, kodlama ve kod çözme işlevlerini kullanarak otomatik olarak veya dolaylı olarak Base64 kodlaması ve kod çözme işlemini gerçekleştirir. Ancak, bu işlevleri de kullanırsanız, tasarımcıda beklenmeyen işleme davranışlarına karşılaşabilirsiniz. Bu davranışlar, işlevleri ve bunların etkilerini kodunuzdan kaldıran işlevlerin parametre değerlerini düzenlemedikçe yalnızca işlevlerin görünürlüğünü etkiler ve etkilerini etkilemez. Daha fazla bilgi için bkz. [Base64 kodlaması ve kod çözme](#base64-encoding-decoding).
 
 ```
 base64('<value>')
@@ -977,7 +979,7 @@ Ve şu sonucu döndürür: `"aGVsbG8="`
 Base64 ile kodlanmış bir dize için ikili sürümü döndürün.
 
 > [!NOTE]
-> Azure Logic Apps, otomatik olarak Base64 kodlaması ve kod çözme işlemi gerçekleştirir, bu da bu dönüşümleri el ile gerçekleştirmeniz gerekmediği anlamına gelir. Bununla birlikte, bunu yaparsanız, gerçek dönüştürmeleri etkilemeyen, yalnızca bunların nasıl gösterildiğine ilişkin beklenmeyen görüntüleme davranışları yaşayabilirsiniz. Daha fazla bilgi için bkz. [örtük veri türü dönüştürmeleri](#implicit-data-conversions).
+> Azure Logic Apps, kodlama ve kod çözme işlevlerini kullanarak otomatik olarak veya dolaylı olarak Base64 kodlaması ve kod çözme işlemini gerçekleştirir. Ancak, bu işlevleri tasarımcıda de kullanıyorsanız, tasarımcıda beklenmeyen işleme davranışları yaşayabilirsiniz. Bu davranışlar, işlevleri ve bunların etkilerini kodunuzdan kaldıran işlevlerin parametre değerlerini düzenlemedikçe yalnızca işlevlerin görünürlüğünü etkiler ve etkilerini etkilemez. Daha fazla bilgi için bkz. [Base64 kodlaması ve kod çözme](#base64-encoding-decoding).
 
 ```
 base64ToBinary('<value>')
@@ -1012,7 +1014,7 @@ Ve şu sonucu döndürür:
 Base64 ile kodlanmış bir dize için dize sürümünü döndürün ve Base64 dizesinin etkin bir şekilde kodunu çözerek. Kullanım dışı olan [decodeBase64 ()](#decodeBase64)yerine bu işlevi kullanın.
 
 > [!NOTE]
-> Azure Logic Apps, otomatik olarak Base64 kodlaması ve kod çözme işlemi gerçekleştirir, bu da bu dönüşümleri el ile gerçekleştirmeniz gerekmediği anlamına gelir. Bununla birlikte, bunu yaparsanız, gerçek dönüştürmeleri etkilemeyen, yalnızca bunların nasıl gösterildiğine ilişkin beklenmeyen görüntüleme davranışları yaşayabilirsiniz. Daha fazla bilgi için bkz. [örtük veri türü dönüştürmeleri](#implicit-data-conversions).
+> Azure Logic Apps, kodlama ve kod çözme işlevlerini kullanarak otomatik olarak veya dolaylı olarak Base64 kodlaması ve kod çözme işlemini gerçekleştirir. Ancak, bu işlevleri tasarımcıda de kullanıyorsanız, tasarımcıda beklenmeyen işleme davranışları yaşayabilirsiniz. Bu davranışlar, işlevleri ve bunların etkilerini kodunuzdan kaldıran işlevlerin parametre değerlerini düzenlemedikçe yalnızca işlevlerin görünürlüğünü etkiler ve etkilerini etkilemez. Daha fazla bilgi için bkz. [Base64 kodlaması ve kod çözme](#base64-encoding-decoding).
 
 ```
 base64ToString('<value>')
@@ -1074,9 +1076,7 @@ Ve şu sonucu döndürür:
 
 ### <a name="body"></a>body
 
-Çalışma zamanında bir eylemin `body` çıktısını döndürün.
-İçin toplu değer `actions('<actionName>').outputs.body` .
-Bkz. [Actionbody ()](#actionBody) ve [Actions ()](#actions).
+Çalışma zamanında bir eylemin `body` çıktısını döndürün. İçin toplu değer `actions('<actionName>').outputs.body` . Bkz. [Actionbody ()](#actionBody) ve [Actions ()](#actions).
 
 ```
 body('<actionName>')
@@ -1194,6 +1194,15 @@ Ve şu sonuçları döndürür:
 
 İki veya daha fazla dizeyi birleştirin ve Birleşik dizeyi döndürün.
 
+> [!NOTE]
+> Azure Logic Apps, `concat()` kodlama veya kod çözme gerektiren verilerle işlevi kullandığınızda bu dönüşümleri el ile gerçekleştirmek zorunda kalmazsınız.
+> 
+> * `concat('data:;base64,',<value>)`
+> * `concat('data:,',encodeUriComponent(<value>))`
+> 
+> Ancak, bu işlevi tasarımcıda de kullanıyorsanız, tasarımcıda beklenmeyen işleme davranışları yaşayabilirsiniz. İşlevin parametre değerlerini düzenleyemezsiniz, bu davranış işlevi ve işlevinizden etkiyi kaldıran, bu davranışlar yalnızca işlevin görünürlüğünü etkiler. 
+> Daha fazla bilgi için bkz. [Base64 kodlaması ve kod çözme](#base64-encoding-decoding).
+
 ```
 concat('<text1>', '<text2>', ...)
 ```
@@ -1222,9 +1231,7 @@ Ve şu sonucu döndürür: `"HelloWorld"`
 
 ### <a name="contains"></a>contains
 
-Bir koleksiyonun belirli bir öğeye sahip olup olmadığını denetleyin.
-Öğe bulunduğunda true, bulunamazsa false döndürün.
-Bu işlev, büyük/küçük harfe duyarlıdır.
+Bir koleksiyonun belirli bir öğeye sahip olup olmadığını denetleyin. Öğe bulunduğunda true, bulunamazsa false döndürün. Bu işlev, büyük/küçük harfe duyarlıdır.
 
 ```
 contains('<collection>', '<value>')
@@ -1277,7 +1284,7 @@ convertFromUtc('<timestamp>', '<destinationTimeZone>', '<format>'?)
 | Parametre | Gerekli | Tür | Açıklama |
 | --------- | -------- | ---- | ----------- |
 | <*ilişkin*> | Evet | Dize | Zaman damgasını içeren dize |
-| <*destinationTimeZone*> | Evet | Dize | Hedef saat diliminin adı. Saat dilimi adları için bkz. [Microsoft saat dilimi Dizin değerleri](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), ancak saat dilimi adından noktalama işaretlerini kaldırmanız gerekebilir. |
+| <*destinationTimeZone*> | Evet | Dize | Hedef saat diliminin adı. Saat dilimi adları için bkz. [Microsoft Windows varsayılan saat dilimleri](https://docs.microsoft.com/windows-hardware/manufacture/desktop/default-time-zones), ancak zaman dilimi adından noktalama işaretlerini kaldırmanız gerekebilir. |
 | <*formatını*> | Hayır | Dize | Tek bir [biçim belirticisi](/dotnet/standard/base-types/standard-date-and-time-format-strings) veya bir [özel biçim deseninin](/dotnet/standard/base-types/custom-date-and-time-format-strings)olması. Zaman damgası için varsayılan biçim, [ıso 8601](https://en.wikipedia.org/wiki/ISO_8601) ile uyumlu olan ve saat dilimi bilgilerini koruyan ["o"](/dotnet/standard/base-types/standard-date-and-time-format-strings) (yyyy-mm-ddTHH: mm: ss. gönderildiğinde fffffffK biçiminde) şeklindedir. |
 |||||
 
@@ -1319,8 +1326,8 @@ convertTimeZone('<timestamp>', '<sourceTimeZone>', '<destinationTimeZone>', '<fo
 | Parametre | Gerekli | Tür | Açıklama |
 | --------- | -------- | ---- | ----------- |
 | <*ilişkin*> | Evet | Dize | Zaman damgasını içeren dize |
-| <*sourceTimeZone*> | Evet | Dize | Kaynak saat diliminin adı. Saat dilimi adları için bkz. [Microsoft saat dilimi Dizin değerleri](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), ancak saat dilimi adından noktalama işaretlerini kaldırmanız gerekebilir. |
-| <*destinationTimeZone*> | Evet | Dize | Hedef saat diliminin adı. Saat dilimi adları için bkz. [Microsoft saat dilimi Dizin değerleri](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), ancak saat dilimi adından noktalama işaretlerini kaldırmanız gerekebilir. |
+| <*sourceTimeZone*> | Evet | Dize | Kaynak saat diliminin adı. Saat dilimi adları için bkz. [Microsoft Windows varsayılan saat dilimleri](https://docs.microsoft.com/windows-hardware/manufacture/desktop/default-time-zones), ancak zaman dilimi adından noktalama işaretlerini kaldırmanız gerekebilir. |
+| <*destinationTimeZone*> | Evet | Dize | Hedef saat diliminin adı. Saat dilimi adları için bkz. [Microsoft Windows varsayılan saat dilimleri](https://docs.microsoft.com/windows-hardware/manufacture/desktop/default-time-zones), ancak zaman dilimi adından noktalama işaretlerini kaldırmanız gerekebilir. |
 | <*formatını*> | Hayır | Dize | Tek bir [biçim belirticisi](/dotnet/standard/base-types/standard-date-and-time-format-strings) veya bir [özel biçim deseninin](/dotnet/standard/base-types/custom-date-and-time-format-strings)olması. Zaman damgası için varsayılan biçim, [ıso 8601](https://en.wikipedia.org/wiki/ISO_8601) ile uyumlu olan ve saat dilimi bilgilerini koruyan ["o"](/dotnet/standard/base-types/standard-date-and-time-format-strings) (yyyy-mm-ddTHH: mm: ss. gönderildiğinde fffffffK biçiminde) şeklindedir. |
 |||||
 
@@ -1362,7 +1369,7 @@ convertToUtc('<timestamp>', '<sourceTimeZone>', '<format>'?)
 | Parametre | Gerekli | Tür | Açıklama |
 | --------- | -------- | ---- | ----------- |
 | <*ilişkin*> | Evet | Dize | Zaman damgasını içeren dize |
-| <*sourceTimeZone*> | Evet | Dize | Kaynak saat diliminin adı. Saat dilimi adları için bkz. [Microsoft saat dilimi Dizin değerleri](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values), ancak saat dilimi adından noktalama işaretlerini kaldırmanız gerekebilir. |
+| <*sourceTimeZone*> | Evet | Dize | Kaynak saat diliminin adı. Saat dilimi adları için bkz. [Microsoft Windows varsayılan saat dilimleri](https://docs.microsoft.com/windows-hardware/manufacture/desktop/default-time-zones), ancak zaman dilimi adından noktalama işaretlerini kaldırmanız gerekebilir. |
 | <*formatını*> | Hayır | Dize | Tek bir [biçim belirticisi](/dotnet/standard/base-types/standard-date-and-time-format-strings) veya bir [özel biçim deseninin](/dotnet/standard/base-types/custom-date-and-time-format-strings)olması. Zaman damgası için varsayılan biçim, [ıso 8601](https://en.wikipedia.org/wiki/ISO_8601) ile uyumlu olan ve saat dilimi bilgilerini koruyan ["o"](/dotnet/standard/base-types/standard-date-and-time-format-strings) (yyyy-mm-ddTHH: mm: ss. gönderildiğinde fffffffK biçiminde) şeklindedir. |
 |||||
 
@@ -1622,7 +1629,7 @@ Bu işlev kullanım dışıdır, bu nedenle lütfen bunun yerine [base64ToString
 Bir veri Tekdüzen Kaynak tanımlayıcısı (URI) için ikili sürüm döndürün. Yerine [Datauritobinary ()](#dataUriToBinary)kullanmayı düşünün `decodeDataUri()` . Her iki işlev de aynı şekilde çalışır, ancak `dataUriToBinary()` tercih edilir.
 
 > [!NOTE]
-> Azure Logic Apps, otomatik olarak Base64 kodlaması ve kod çözme işlemi gerçekleştirir, bu da bu dönüşümleri el ile gerçekleştirmeniz gerekmediği anlamına gelir. Bununla birlikte, bunu yaparsanız, gerçek dönüştürmeleri etkilemeyen, yalnızca bunların nasıl gösterildiğine ilişkin beklenmeyen görüntüleme davranışları yaşayabilirsiniz. Daha fazla bilgi için bkz. [örtük veri türü dönüştürmeleri](#implicit-data-conversions).
+> Azure Logic Apps, kodlama ve kod çözme işlevlerini kullanarak otomatik olarak veya dolaylı olarak Base64 kodlaması ve kod çözme işlemini gerçekleştirir. Ancak, bu işlevleri tasarımcıda de kullanıyorsanız, tasarımcıda beklenmeyen işleme davranışları yaşayabilirsiniz. Bu davranışlar, işlevleri ve bunların etkilerini kodunuzdan kaldıran işlevlerin parametre değerlerini düzenlemedikçe yalnızca işlevlerin görünürlüğünü etkiler ve etkilerini etkilemez. Daha fazla bilgi için bkz. [Base64 kodlaması ve kod çözme](#base64-encoding-decoding).
 
 ```
 decodeDataUri('<value>')
@@ -1729,7 +1736,7 @@ div(11.0,5)
 URL-güvenli olmayan karakterleri kaçış karakterleriyle değiştirerek dize için Tekdüzen Kaynak tanımlayıcısı (URI) kodlu bir sürüm döndürün. Yerine [URIComponent ()](#uriComponent)kullanmayı düşünün `encodeUriComponent()` . Her iki işlev de aynı şekilde çalışır, ancak `uriComponent()` tercih edilir.
 
 > [!NOTE]
-> Azure Logic Apps, otomatik olarak Base64 kodlaması ve kod çözme işlemi gerçekleştirir, bu da bu dönüşümleri el ile gerçekleştirmeniz gerekmediği anlamına gelir. Bununla birlikte, bunu yaparsanız, gerçek dönüştürmeleri etkilemeyen, yalnızca bunların nasıl gösterildiğine ilişkin beklenmeyen görüntüleme davranışları yaşayabilirsiniz. Daha fazla bilgi için bkz. [örtük veri türü dönüştürmeleri](#implicit-data-conversions).
+> Azure Logic Apps, kodlama ve kod çözme işlevlerini kullanarak otomatik olarak veya dolaylı olarak Base64 kodlaması ve kod çözme işlemini gerçekleştirir. Ancak, bu işlevleri tasarımcıda de kullanıyorsanız, tasarımcıda beklenmeyen işleme davranışları yaşayabilirsiniz. Bu davranışlar, işlevleri ve bunların etkilerini kodunuzdan kaldıran işlevlerin parametre değerlerini düzenlemedikçe yalnızca işlevlerin görünürlüğünü etkiler ve etkilerini etkilemez. Daha fazla bilgi için bkz. [Base64 kodlaması ve kod çözme](#base64-encoding-decoding).
 
 ```
 encodeUriComponent('<value>')

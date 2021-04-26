@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.date: 02/25/2021
 ms.author: memildin
 zone_pivot_groups: manage-asc-initiatives
-ms.openlocfilehash: a901e71da640f8413e5714ad59073324f582c1b9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a41696ba92757550f9cbaa08ccf78d9a5da528d2
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102441066"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718908"
 ---
 # <a name="create-custom-security-initiatives-and-policies"></a>Özel güvenlik girişimleri ve ilkeleri oluşturma
 
@@ -90,7 +90,7 @@ Azure Ilkesinde önemli kavramlar:
 
 - **Atama** , bir girişim veya ilkenin belirli bir kapsama (Yönetim grubu, abonelik vb.) bir uygulamasıdır. 
 
-Güvenlik Merkezi 'nin tüm güvenlik ilkelerini içeren yerleşik bir girişimi olan Azure Güvenlik kıyaslaması vardır. Güvenlik Merkezi 'nin Azure kaynaklarınızın ilkelerini değerlendirmek için, yönetim grubunda veya değerlendirmek istediğiniz abonelikte bir atama oluşturmanız gerekir.
+Güvenlik Merkezi 'nin tüm güvenlik ilkelerini içeren yerleşik bir girişimi olan [Azure Güvenlik kıyaslaması](https://docs.microsoft.com/security/benchmark/azure/introduction)vardır. Güvenlik Merkezi 'nin Azure kaynaklarınızın ilkelerini değerlendirmek için, yönetim grubunda veya değerlendirmek istediğiniz abonelikte bir atama oluşturmanız gerekir.
 
 Yerleşik girişim, tüm güvenlik merkezi ilkelerinin varsayılan olarak etkinleştirilmiş olduğunu içerir. Yerleşik girişimden belirli ilkeleri devre dışı bırakmayı seçebilirsiniz. Örneğin, **Web uygulaması güvenlik duvarı** hariç tüm güvenlik merkezi ilkelerini uygulamak için, ilkenin efekt parametresinin değerini **devre dışı** olarak değiştirin.
 

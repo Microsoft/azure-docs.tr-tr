@@ -6,12 +6,13 @@ ms.topic: quickstart
 ms.custom:
 - devx-track-powershell
 - devx-track-azurecli
-ms.openlocfilehash: abbe3b9ed4d9a8c9bf30c6be3e6980228d319090
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+- devx-track-azurepowershell
+ms.openlocfilehash: 441cc17099379366755a6c1e41c7f544215dc19d
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97937238"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107866188"
 ---
 # <a name="quickstart-create-a-powershell-function-in-azure-from-the-command-line"></a>Hızlı başlangıç: Azure 'da komut satırından bir PowerShell işlevi oluşturma
 
@@ -37,7 +38,7 @@ Başlamadan önce aşağıdakilere sahip olmanız gerekir:
 
     + [Azure CLI](/cli/azure/install-azure-cli) sürüm 2,4 veya üzeri.
 
-+ [.NET Core SDK 3,1](https://www.microsoft.com/net/download)
++ [.NET Core 3,1 SDK 'sı](https://dotnet.microsoft.com/download)
 
 ### <a name="prerequisite-check"></a>Önkoşul denetimi
 

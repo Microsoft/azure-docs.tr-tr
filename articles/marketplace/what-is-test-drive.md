@@ -7,12 +7,12 @@ ms.topic: article
 author: trkeya
 ms.author: trkeya
 ms.date: 06/19/2020
-ms.openlocfilehash: 193e7bd78046a1d73cb55171c15c9cb6a7278297
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e44d5d94a8dc172962a26f3e0dae9ccbb7f8a865
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96490049"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818899"
 ---
 # <a name="what-is-a-test-drive"></a>Test sürüşü nedir?
 
@@ -60,7 +60,7 @@ Bu dağıtım şablonu, çözümünüzü oluşturan tüm Azure kaynaklarını i�
 
 Barındırılan bir test sürücüsü, Microsoft ana bilgisayarına izin vererek kurulum karmaşıklığını ortadan kaldırır ve test sürücüsü Kullanıcı sağlamasını ve sağlama işlemini gerçekleştiren hizmeti korur. Microsoft AppSource bir teklifiniz varsa, bir Dynamics AX/CRM örneğiyle bağlantı kurmak için test sürücünüzü oluşturun. Aşağıdaki AppSource tekliflerini kullanabilirsiniz:
 
-- Sales, Service, Project Service ve Field hizmeti gibi bir müşteri katılımı sistemi için [Dynamics 365](partner-center-portal/create-new-customer-engagement-offer.md) ' i kullanın.
+- Sales, Service, Project Service ve Field hizmeti gibi bir müşteri katılımı sistemi için [müşteri katılımı ve güç uygulamaları Için Dynamics 365](dynamics-365-customer-engage-offer-setup.md) kullanın.
 - Finans, işlemler ve üretim, tedarik zinciri gibi finans ve Işlemler kurumsal kaynak planlama sistemine yönelik [işlemler Için Dynamics 365](partner-center-portal/create-new-operations-offer.md) kullanın.
 
 ### <a name="logic-app-test-drive"></a>Mantıksal uygulama sınama sürücüsü

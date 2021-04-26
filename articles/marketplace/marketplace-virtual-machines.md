@@ -8,18 +8,18 @@ ms.topic: conceptual
 author: iqshahmicrosoft
 ms.author: iqshah
 ms.date: 10/19/2020
-ms.openlocfilehash: 9169d691b58ad4a59796123c64f856128a0f8c83
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6e391ca79c9dcf9ab533a7e67961c654b5f8630b
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98879335"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103377"
 ---
-# <a name="how-to-plan-a-virtual-machine-offer"></a>Bir sanal makine teklifini planlayın
+# <a name="plan-a-virtual-machine-offer"></a>Sanal makine teklifi planlama
 
 Bu makalede, ticari Market 'e bir sanal makine (VM) teklifi yayımlamaya yönelik farklı seçenekler ve gereksinimler açıklanmaktadır. VM teklifleri, Azure Marketi aracılığıyla dağıtılan ve faturalandırılan transactable tekliflerdir.
 
-Başlamadan önce, [Iş Ortağı Merkezi 'nde bir ticari Market hesabı oluşturun](./partner-center-portal/create-account.md) ve hesabınızın ticari Market programına kaydedildiğinden emin olun.
+Başlamadan önce, [Iş Ortağı Merkezi 'nde bir ticari Market hesabı oluşturun](create-account.md) ve hesabınızın ticari Market programına kaydedildiğinden emin olun.
 
 ### <a name="technical-fundamentals"></a>Teknik temel bilgiler
 
@@ -102,7 +102,7 @@ Görüntüyü ve fiyatlandırmayı özel bir plan olarak yayımlayarak, sanal ma
 
 Daha fazla bilgi için bkz. [Microsoft ticari marketi 'nde](private-offers.md) [ticari Market teklifleri ve özel teklifler için planlar ve fiyatlandırma](plans-pricing.md) .
 
-## <a name="test-drives"></a>Test sürüşleri
+## <a name="test-drive"></a>Sınama sürücüsü
 
 VM 'niz için bir test sürücüsünü etkinleştirmeyi seçebilirsiniz. Test sürücüleri, müşterilere sabit sayıda saat boyunca önceden yapılandırılmış bir ortama erişim sağlar. Herhangi bir yayımlama seçeneği için test sürücüleri etkinleştirebilirsiniz, ancak bu özellik ek gereksinimlere sahiptir. Sınama sürücüleri hakkında daha fazla bilgi için bkz. [test sürücüsü nedir?](what-is-test-drive.md). Farklı türlerde test sürücüleri yapılandırma hakkında daha fazla bilgi için bkz. [Test Drive Technical Configuration](test-drive-technical-configuration.md).
 

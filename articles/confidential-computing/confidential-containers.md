@@ -7,12 +7,13 @@ ms.topic: article
 ms.date: 2/11/2020
 ms.author: amgowda
 ms.service: container-service
-ms.openlocfilehash: cf62e6c4e54cc7e6488b26d4251ecb813d62e7ea
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.subservice: confidential-computing
+ms.openlocfilehash: 280f75e8d18d16dd76d0730a90755774af34d6f6
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102564314"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105933585"
 ---
 # <a name="confidential-containers"></a>Gizli kapsayıcılar
 

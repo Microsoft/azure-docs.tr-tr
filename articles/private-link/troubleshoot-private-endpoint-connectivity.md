@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/31/2020
 ms.author: rdhillon
-ms.openlocfilehash: 90831c0e8d5ab73f65dc801319a357d59799cbc6
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2a4f86d9fae7b78a57cf8da7ab42d2d4a4cd7be5
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97807561"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107835407"
 ---
 # <a name="troubleshoot-azure-private-endpoint-connectivity-problems"></a>Azure Özel Uç Nokta bağlantı sorunlarını giderme
 
@@ -59,7 +59,7 @@ Tüm olağan yapılandırmaların, Özel uç nokta kurulumlarınızla bağlantı
 1. Verilerin akan olup olmadığını görmek için [Azure izleyici](../azure-monitor/overview.md) 'yi kullanın.
 
     a. Özel uç nokta kaynağında, **İzle**' yi seçin.
-     - **Veri Içindeki verileri** veya **verileri** seçin. 
+     - **Bayt cinsinden** veya **giden** baytları seçin. 
      - Özel uç noktaya bağlanmaya çalıştığınızda verilerin akışa alındığını görün. Yaklaşık 10 dakikalık bir gecikme süresi bekler.
     
        ![Özel uç nokta telemetrisini doğrulama](./media/private-endpoint-tsg/private-endpoint-monitor.png)

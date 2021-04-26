@@ -3,12 +3,12 @@ title: Kayıt defterleri, depolar, görüntüler ve yapıtlar hakkında
 description: Azure Container kayıt defterleri, depolar, kapsayıcı görüntüleri ve diğer yapıtların temel kavramlarına giriş.
 ms.topic: article
 ms.date: 01/29/2021
-ms.openlocfilehash: 991be79b10b6061f2034eb19e4e139af65aef3cf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 64ab3812b3f23a7b3a480d3530c82bd39f2d29a5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100578084"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784092"
 ---
 # <a name="about-registries-repositories-and-artifacts"></a>Kayıt defterleri, depolar ve yapıtlar hakkında
 
@@ -77,17 +77,17 @@ Linux görüntüsü için temel bir bildirim aşağıdakine `hello-world` benzer
     "schemaVersion": 2,
     "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
     "config": {
-        "mediaType": "application/vnd.docker.container.image.v1+json",
-        "size": 1510,
-        "digest": "sha256:fbf289e99eb9bca977dae136fbe2a82b6b7d4c372474c9235adc1741675f587e"
-      },
+      "mediaType": "application/vnd.docker.container.image.v1+json",
+      "size": 1510,
+      "digest": "sha256:fbf289e99eb9bca977dae136fbe2a82b6b7d4c372474c9235adc1741675f587e"
+    },
     "layers": [
-        {
-          "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
-          "size": 977,
-          "digest": "sha256:2c930d010525941c1d56ec53b97bd057a67ae1865eebf042686d2a2d18271ced"
-        }
-      ]
+      {
+        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+        "size": 977,
+        "digest": "sha256:2c930d010525941c1d56ec53b97bd057a67ae1865eebf042686d2a2d18271ced"
+      }
+    ]
   }
   ```
 
@@ -111,21 +111,21 @@ az acr repository show-manifests --name myregistry --repository acr-helloworld
       "latest",
       "v3"
     ],
-    "timestamp": "2018-07-12T15:52:00.2075864Z"
+    "timestamp&quot;: &quot;2018-07-12T15:52:00.2075864Z"
   },
   {
     "digest": "sha256:3168a21b98836dda7eb7a846b3d735286e09a32b0aa2401773da518e7eba3b57",
     "tags": [
       "v2"
     ],
-    "timestamp": "2018-07-12T15:50:53.5372468Z"
+    "timestamp&quot;: &quot;2018-07-12T15:50:53.5372468Z"
   },
   {
     "digest": "sha256:7ca0e0ae50c95155dbb0e380f37d7471e98d2232ed9e31eece9f9fb9078f2728",
     "tags": [
       "v1"
     ],
-    "timestamp": "2018-07-11T21:38:35.9170967Z"
+    "timestamp&quot;: &quot;2018-07-11T21:38:35.9170967Z"
   }
 ]
 ```
@@ -184,6 +184,4 @@ Azure Container Registry 'de [kayıt defteri depolama](container-registry-storag
 Azure Container Registry [görüntüleri gönderme ve çekme](container-registry-get-started-docker-cli.md) hakkında bilgi edinin.
 
 <!-- LINKS - Internal -->
-[az-acr-repository-show-manifests]: /cli/azure/acr/repository#az-acr-repository-show-manifests
-
-
+[az-acr-repository-show-manifests]: /cli/azure/acr/repository#az_acr_repository_show_manifests

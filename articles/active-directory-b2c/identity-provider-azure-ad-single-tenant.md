@@ -13,12 +13,12 @@ ms.author: mimart
 ms.subservice: B2C
 ms.custom: fasttrack-edit, project-no-code
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: 490880e4a37711a92b44a0ffe01315edfa6ddb26
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 9a31fe8046e6bb0a933ade78ee2c7f4b208767a7
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104580139"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107028358"
 ---
 # <a name="set-up-sign-in-for-a-specific-azure-active-directory-organization-in-azure-active-directory-b2c"></a>Azure Active Directory B2C içinde belirli bir Azure Active Directory kuruluş için oturum açma ayarlayın
 
@@ -230,7 +230,7 @@ Azure AD uç noktasından bir belirteç almak için Azure AD B2C Azure AD ile il
 ## <a name="test-your-custom-policy"></a>Özel ilkenizi test etme
 
 1. Örneğin, bağlı olan taraf ilkenizi seçin `B2C_1A_signup_signin` .
-1. **Uygulama** için, [daha önce kaydetmiş](troubleshoot-custom-policies.md#troubleshoot-the-runtime)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
+1. **Uygulama** için, [daha önce kaydetmiş](tutorial-register-applications.md)olduğunuz bir Web uygulamasını seçin. **Yanıt URL 'si** gösterilmesi gerekir `https://jwt.ms` .
 1. **Şimdi Çalıştır** düğmesini seçin.
 1. Kaydolma veya oturum açma sayfasından Azure AD contoso hesabıyla oturum açmak için **contoso çalışanı** ' nı seçin.
 

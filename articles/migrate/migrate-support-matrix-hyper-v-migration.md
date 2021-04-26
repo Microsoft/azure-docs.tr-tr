@@ -6,12 +6,12 @@ ms.author: bsiva
 ms.manager: abhemraj
 ms.topic: conceptual
 ms.date: 04/15/2020
-ms.openlocfilehash: 90da16789344754c02d46022160db71ee261a056
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 33e34e777a78e1c609d2eacdcb501c0bce1f5c9d
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96754071"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714929"
 ---
 # <a name="support-matrix-for-hyper-v-migration"></a>Hyper-V geçişi için destek matrisi
 
@@ -83,7 +83,13 @@ backup.windowsazure.us | Çoğaltma veri aktarımı ve düzenlemesi.
 *. hypervrecoverymanager.windowsazure.us | Çoğaltma yönetimi için kullanılır.
 *. blob.core.usgovcloudapi.net | Verileri depolama hesaplarına yükleyin.
 dc.services.visualstudio.com | İç izleme için kullanılan uygulama günlüklerini karşıya yükleyin.
-time.nist.gov | Sistem ve genel saat arasındaki saat eşitlemesini doğrular.
+time.nist.gov | Sistem ve genel saat arasındaki saat eşitlemesini doğrular.   
+
+>[!Note]
+>
+> Projeyi geçirdiğinizde **Özel uç nokta bağlantısı** varsa, Hyper-V konaklarındaki çoğaltma sağlayıcısı yazılımının özel bağlantı desteği Için bu URL 'lere erişmesi gerekir. 
+> - *. blob.core.windows.com-çoğaltılan verileri depolayan depolama hesabına erişin. Bu isteğe bağlıdır ve depolama hesabının ekli bir özel uç noktası varsa gerekli değildir. 
+> - Active Directory kullanarak erişim denetimi ve kimlik yönetimi için login.windows.net.
 
 ## <a name="azure-vm-requirements"></a>Azure VM gereksinimleri
 

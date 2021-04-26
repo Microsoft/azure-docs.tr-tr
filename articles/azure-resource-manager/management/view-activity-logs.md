@@ -3,12 +3,12 @@ title: Kaynakları izlemek için Azure etkinlik günlüklerini görüntüleme
 description: Kullanıcı eylemlerini ve hataları gözden geçirmek için etkinlik günlüklerini kullanın. PowerShell, Azure CLı ve REST Azure portal gösterir.
 ms.topic: conceptual
 ms.date: 05/13/2019
-ms.openlocfilehash: 14015e9b2792515e6818af551b8bd9f54c686bee
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 7612146a0f9407663631f87c57f30ea4c590c7a4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91371601"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773936"
 ---
 # <a name="view-activity-logs-to-monitor-actions-on-resources"></a>Kaynaklardaki eylemleri izlemek için etkinlik günlüklerini görüntüleme
 
@@ -138,9 +138,9 @@ Get-AzLog -ResourceGroup ExampleGroup | Where-Object {$_.OperationName.value -eq
 
 Kaynak grafiğini, bir kaynağın değişiklik geçmişini görmek için kullanabilirsiniz. Daha fazla bilgi için bkz. [kaynak değişikliklerini al](../../governance/resource-graph/how-to/get-resource-changes.md).
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
-Günlük girişlerini almak için [az Monitor Activity-Log List](/cli/azure/monitor/activity-log#az-monitor-activity-log-list) komutunu, zaman aralığını belirtmek için bir uzaklığa sahip olarak çalıştırın.
+Günlük girişlerini almak için [az Monitor Activity-Log List](/cli/azure/monitor/activity-log#az_monitor_activity_log_list) komutunu, zaman aralığını belirtmek için bir uzaklığa sahip olarak çalıştırın.
 
 ```azurecli-interactive
 az monitor activity-log list --resource-group ExampleGroup --offset 7d

@@ -7,16 +7,16 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
 ms.topic: quickstart
-ms.date: 09/22/2020
-ms.custom: devx-track-dotnet
-ms.openlocfilehash: 224a1b67ff0282c216763229593fcfed81d7567b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/07/2021
+ms.custom: devx-track-dotnet, devx-track-azurecli
+ms.openlocfilehash: 6d3728596842702f20a96ca568ecd1a16d20c4d8
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93090112"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873874"
 ---
-# <a name="quickstart-build-a-console-app-using-the-net-v4-sdk-to-manage-azure-cosmos-db-sql-api-account-resources"></a>Hızlı başlangıç: Azure Cosmos DB SQL API hesabı kaynaklarını yönetmek için .NET v4 SDK 'sını kullanarak bir konsol uygulaması oluşturun.
+# <a name="quickstart-build-a-console-app-using-the-net-v4-sdk-preview-to-manage-azure-cosmos-db-sql-api-account-resources"></a>Hızlı başlangıç: Azure Cosmos DB SQL API hesabı kaynaklarını yönetmek için .NET v4 SDK 'sını (Önizleme) kullanarak bir konsol uygulaması oluşturun.
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 > [!div class="op_single_selector"]
@@ -24,13 +24,19 @@ ms.locfileid: "93090112"
 > * [.NET V4](create-sql-api-dotnet-V4.md)
 > * [Java SDK’sı v4](create-sql-api-java.md)
 > * [Spring Verileri v3](create-sql-api-spring-data.md)
+> * [Spark v3 Bağlayıcısı](create-sql-api-spark.md)
 > * [Node.js](create-sql-api-nodejs.md)
 > * [Python](create-sql-api-python.md)
 > * [Xamarin](create-sql-api-xamarin-dotnet.md)
 
-.NET için Azure Cosmos DB SQL API istemci kitaplığı ile çalışmaya başlayın. .NET v4 (Azure. Cosmos) paketini yüklemek, bir uygulama derlemek ve Azure Cosmos DB depolanan verilerdeki temel CRUD işlemleri için örnek kodu denemek üzere bu belgedeki adımları izleyin. 
+.NET için Azure Cosmos DB SQL API istemci kitaplığı ile çalışmaya başlayın. .NET v4 (Azure. Cosmos) paketini yüklemek, bir uygulama derlemek ve Azure Cosmos DB depolanan verilerdeki temel CRUD işlemleri için örnek kodu denemek üzere bu belgedeki adımları izleyin.
 
-Azure Cosmos DB, Microsoft 'un herhangi bir ölçekte açık API 'Leri olan hızlı NoSQL veritabanıdır. Anahtar/değer, belge ve grafik veritabanlarını hızlıca oluşturmak ve sorgulamak için Azure Cosmos DB kullanabilirsiniz. .NET için Azure Cosmos DB SQL API istemci kitaplığı 'nı kullanarak şunları yapın:
+> [!IMPORTANT]
+> Azure Cosmos DB için .NET v4 SDK 'Sı Şu anda genel önizlemededir.
+> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
+> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+
+Azure Cosmos DB, tüm ölçeklendirmeye yönelik açık API 'lerle birlikte Microsoftâ €™ s hızlı NoSQL veritabanıdır. Anahtar/değer, belge ve grafik veritabanlarını hızlıca oluşturmak ve sorgulamak için Azure Cosmos DB kullanabilirsiniz. .NET için Azure Cosmos DB SQL API istemci kitaplığı 'nı kullanarak şunları yapın:
 
 * Azure Cosmos veritabanı ve kapsayıcısı oluşturma
 * Kapsayıcıya örnek veri ekleme
@@ -90,7 +96,7 @@ Azure Cosmos hesabını oluşturma işlemi biraz zaman alır, işlem başarılı
 Tercih ettiğiniz düzenleyicide veya IDE 'de yeni bir .NET uygulaması oluşturun. Yerel bilgisayarınızdan Windows komut istemi veya bir Terminal penceresi açın. Komut istemi veya terminalden sonraki bölümlerde bulunan tüm komutları çalıştıracaksınız.  Adında yeni bir uygulama oluşturmak için aşağıdaki DotNet New komutunu çalıştırın `todo` . --LangVersion parametresi, oluşturulan proje dosyasındaki LangVersion özelliğini ayarlar.
 
    ```bash
-   dotnet new console –langVersion:8 -n todo
+   dotnet new console â€“langVersion:8 -n todo
    ```
 
 Dizininizi yeni oluşturulan uygulama klasörüyle değiştirin. Uygulamayı ile oluşturabilirsiniz:

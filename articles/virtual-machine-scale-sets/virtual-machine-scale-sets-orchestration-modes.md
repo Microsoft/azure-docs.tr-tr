@@ -5,16 +5,15 @@ author: fitzgeraldsteele
 ms.author: fisteele
 ms.topic: how-to
 ms.service: virtual-machine-scale-sets
-ms.subservice: extensions
 ms.date: 02/12/2021
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: cc862759ce28c4d23dbc2197f63311e29ba82709
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: d089708ead67891164aee074394e923d2a84a977
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104607512"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774458"
 ---
 # <a name="preview-orchestration-modes-for-virtual-machine-scale-sets-in-azure"></a>Önizleme: Azure 'da sanal makine ölçek kümeleri için düzenleme modları 
 
@@ -166,7 +165,7 @@ Register-AzResourceProvider -ProviderNamespace Microsoft.Compute
 ```
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0 
-Aboneliğiniz için Önizlemeyi etkinleştirmek üzere [az Feature Register](/cli/azure/feature#az-feature-register) kullanın. 
+Aboneliğiniz için Önizlemeyi etkinleştirmek üzere [az Feature Register](/cli/azure/feature#az_feature_register) kullanın. 
 
 ```azurecli-interactive
 az feature register --namespace Microsoft.Compute --name VMOrchestratorMultiFD
@@ -307,7 +306,7 @@ Esnek düzenleme modundaki bir ölçek kümesine en fazla 1000 VM ekleyebilirsin
 
 **Esnek düzenleme ile kullanılabilirlik, kullanılabilirlik kümeleri veya Tekdüzen düzenleme ile nasıl karşılaştırılır?**
 
-|   | Esnek düzenleme  | Tekdüzen düzenleme  | Kullanılabilirlik Kümeleri  |
+| Kullanılabilirlik özniteliği  | Esnek düzenleme  | Tekdüzen düzenleme  | Kullanılabilirlik Kümeleri  |
 |-|-|-|-|
 | Kullanılabilirlik alanları arasında dağıtma  | Hayır  | Yes  | Hayır  |
 | Bölge içindeki hata etki alanı kullanılabilirliği garantisi  | Evet, en fazla 1000 örnek, bölgedeki en fazla 3 hata etki alanına yayılabilecek. En fazla hata etki alanı sayısı bölgeye göre değişir  | Evet, en fazla 100 örnek  | Evet, en fazla 200 örnek  |

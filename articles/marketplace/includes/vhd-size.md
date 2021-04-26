@@ -8,10 +8,10 @@ author: emuench
 ms.author: mingshen
 ms.date: 10/09/2020
 ms.openlocfilehash: f4e34e850391696506beed9f6f386f85528dff24
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92284813"
 ---
 Bir işletim sistemi (ve isteğe bağlı ek hizmetler) ile önceden yapılandırılmış VM 'lerden birini seçtiyseniz, zaten standart bir Azure VM boyutu seçmiş olursunuz. Çözümünüzü önceden yapılandırılmış bir işletim sistemi ile başlatmak önerilen yaklaşımdır. Ancak, bir işletim sistemini el ile yüklüyorsanız, birincil VHD 'nizi VM yansımanıza göre boyutlandırmanız gerekir. İşletim sistemi disk boyutunun Linux veya Windows sınırları içinde olduğundan emin olun.

@@ -3,12 +3,12 @@ title: Azure VMware Çözüm iş yüklerini dengelemek için Traffic Manager da�
 description: Farklı bölgelerde birden fazla uç nokta arasında uygulama iş yüklerini dengelemek için Traffic Manager Azure VMware çözümü ile tümleştirmeyi öğrenin.
 ms.topic: how-to
 ms.date: 02/08/2021
-ms.openlocfilehash: 46570c5a61fc0a641d83126fd0f8ef35b3dc42cc
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 029bb9512bd19effd1c7aeb5104c7bb6d7ccdca5
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99988594"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107876931"
 ---
 # <a name="deploy-traffic-manager-to-balance-azure-vmware-solution-workloads"></a>Azure VMware Çözüm iş yüklerini dengelemek için Traffic Manager dağıtma
 
@@ -132,7 +132,7 @@ Aşağıdaki adımlar, Azure VMware Çözüm ortamındaki NSX-T segmentinin yap�
 
 Azure Traffic Manager Tümleştirmesini Azure VMware çözümüyle Tümleştirdiğiniz artık hakkında bilgi edinmek isteyebilirsiniz:
 
-- Azure [VMware çözümünde azure Application Gateway kullanma](protect-azure-vmware-solution-with-application-gateway.md).
-- [Yönlendirme yöntemleri Traffic Manager](../traffic-manager/traffic-manager-routing-methods.md).
-- [Yük Dengeleme hizmetlerini Azure 'Da birleştirme](../traffic-manager/traffic-manager-load-balancing-azure.md).
-- [Traffic Manager performansını ölçme](../traffic-manager/traffic-manager-performance-considerations.md).
+- [Azure VMware çözümünde Azure Application Gateway kullanma](protect-azure-vmware-solution-with-application-gateway.md)
+- [Traffic Manager yönlendirme yöntemleri](../traffic-manager/traffic-manager-routing-methods.md)
+- [Yük Dengeleme hizmetlerini Azure 'da birleştirme](../traffic-manager/traffic-manager-load-balancing-azure.md)
+- [Traffic Manager performansını ölçme](../traffic-manager/traffic-manager-performance-considerations.md)

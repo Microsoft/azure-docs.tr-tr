@@ -9,12 +9,12 @@ services: iot-edge
 ms.topic: conceptual
 ms.date: 10/06/2020
 ms.author: kgremban
-ms.openlocfilehash: d75f184a324a9d418b0af2e3cf5790205af0fa42
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b5d761cfa947b3fd4e5f718e603219c650e8dd72
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200712"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481880"
 ---
 # <a name="register-an-iot-edge-device-in-iot-hub"></a>IoT Hub bir IoT Edge cihazı kaydetme
 
@@ -111,7 +111,7 @@ IoT Hub 'ınız ile işlemler gerçekleştirmek için Visual Studio Code için A
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-IoT Hub 'ınızda yeni bir cihaz kimliği oluşturmak için [az IoT Hub Device-Identity Create](/cli/azure/ext/azure-iot/iot/hub/device-identity#ext-azure-iot-az-iot-hub-device-identity-create) komutunu kullanın. Örnek:
+IoT Hub 'ınızda yeni bir cihaz kimliği oluşturmak için [az IoT Hub Device-Identity Create](/cli/azure/iot/hub/device-identity) komutunu kullanın. Örnek:
 
    ```azurecli
    az iot hub device-identity create --device-id [device id] --hub-name [hub name] --edge-enabled
@@ -185,7 +185,7 @@ Azure portal IoT Hub 'ınızda, IoT Edge cihazlar kenar etkin olmayan IoT cihazl
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-IoT Hub 'ınızda yeni bir cihaz kimliği oluşturmak için [az IoT Hub Device-Identity Create](/cli/azure/ext/azure-iot/iot/hub/device-identity#ext-azure-iot-az-iot-hub-device-identity-create) komutunu kullanın. Örnek:
+IoT Hub 'ınızda yeni bir cihaz kimliği oluşturmak için [az IoT Hub Device-Identity Create](/cli/azure/iot/hub/device-identity) komutunu kullanın. Örnek:
 
    ```azurecli
    az iot hub device-identity create --device-id [device id] --hub-name [hub name] --edge-enabled --auth-method x509_thumbprint --primary-thumbprint [SHA thumbprint] --secondary-thumbprint [SHA thumbprint]
@@ -249,7 +249,7 @@ Ayrıca, çıkış penceresindeki bağlantı dizesi dahil tüm cihaz bilgilerini
 
 ### <a name="view-iot-edge-devices-with-the-azure-cli"></a>Azure CLı ile IoT Edge cihazları görüntüleme
 
-IoT Hub 'ınızdaki tüm cihazları görüntülemek için [az IoT Hub Device-Identity List](/cli/azure/ext/azure-iot/iot/hub/device-identity#ext-azure-iot-az-iot-hub-device-identity-list) komutunu kullanın. Örnek:
+IoT Hub 'ınızdaki tüm cihazları görüntülemek için [az IoT Hub Device-Identity List](/cli/azure/iot/hub/device-identity) komutunu kullanın. Örnek:
 
    ```azurecli
    az iot hub device-identity list --hub-name [hub name]
@@ -259,7 +259,7 @@ IoT Edge cihaz olarak kaydedilmiş tüm cihazlarda özellik **özellikleri olur.
 
 ### <a name="retrieve-the-connection-string-with-the-azure-cli"></a>Azure CLı ile bağlantı dizesini alma
 
-Cihazınızı ayarlamaya hazırsanız, fiziksel cihazınızı IoT Hub 'ındaki kimliğiyle bağlayan bağlantı dizesine ihtiyacınız vardır. Tek bir cihaza yönelik bağlantı dizesini döndürmek için [az IoT Hub cihazı-Identity Connection-String Show](/cli/azure/ext/azure-iot/iot/hub/device-identity/connection-string#ext_azure_iot_az_iot_hub_device_identity_connection_string_show) komutunu kullanın:
+Cihazınızı ayarlamaya hazırsanız, fiziksel cihazınızı IoT Hub 'ındaki kimliğiyle bağlayan bağlantı dizesine ihtiyacınız vardır. Tek bir cihaza yönelik bağlantı dizesini döndürmek için [az IoT Hub cihazı-Identity Connection-String Show](/cli/azure/iot/hub/device-identity/connection-string) komutunu kullanın:
 
    ```azurecli
    az iot hub device-identity connection-string show --device-id [device id] --hub-name [hub name]

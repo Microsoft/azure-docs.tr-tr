@@ -5,14 +5,14 @@ author: memildin
 manager: rkarlin
 ms.service: security-center
 ms.topic: overview
-ms.date: 03/18/2021
+ms.date: 04/20/2021
 ms.author: memildin
-ms.openlocfilehash: b9a93286b6a546160b6c621d084437f671eab4d3
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 3307d3aed422c3eab63412388244ef14ef3be699
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104773581"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751012"
 ---
 # <a name="important-upcoming-changes-to-azure-security-center"></a>Azure Güvenlik Merkezi 'Nde yapılan önemli değişiklikler
 
@@ -28,59 +28,12 @@ En son sürüm notlarını arıyorsanız, bunları [Azure Güvenlik Merkezi 'nde
 
 | Planlı değişiklik                                                                                                                                                        | Değişikliğin tahmini tarihi |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| ["Sistem güncelleştirmelerini Uygula" güvenlik denetiminin kullanım dışı olmasının iki önerisi](#two-recommendations-from-apply-system-updates-security-control-being-deprecated) | Mart 2021                |
-| [11 Azure Defender uyarılarının kullanımdan kaldırılması](#deprecation-of-11-azure-defender-alerts)                                                                                   | Mart 2021                |
 | [21 güvenlik denetimleri arasında hareket eden öneriler](#21-recommendations-moving-between-security-controls)                                                           | 2021 Nisan                |
-| ["Sistem güncelleştirmelerini Uygula" güvenlik denetiminin kullanım dışı bırakılmakta olan iki ek öneri](#two-further-recommendations-from-apply-system-updates-security-control-being-deprecated)                                                                                         | 2021 Nisan                |
-| [AWS 'nin önerileri genel kullanıma sunulacaktır (GA)](#recommendations-from-aws-will-be-released-for-general-availability-ga)                     | 2021 Nisan                |
+| ["Sistem güncelleştirmelerini Uygula" güvenlik denetiminin kullanım dışı olmasının iki önerisi](#two-recommendations-from-apply-system-updates-security-control-being-deprecated) | 2021 Nisan                |
+| [ISO 27001 ' nin eski uygulanması yeni ISO 27001:2013 ile değiştiriliyor](#legacy-implementation-of-iso-27001-is-being-replaced-with-new-iso-270012013)          | Haziran 2021                 |
+| [AWS 'nin önerileri genel kullanıma sunulacaktır (GA)](#recommendations-from-aws-will-be-released-for-general-availability-ga)                     | **Ağustos** 2021           |
 | [SQL veri sınıflandırması önerisine yönelik geliştirmeler](#enhancements-to-sql-data-classification-recommendation)                                                     | S2 2021                   |
 |                                                                                                                                                                       |                           |
-
-
-### <a name="two-recommendations-from-apply-system-updates-security-control-being-deprecated"></a>"Sistem güncelleştirmelerini Uygula" güvenlik denetiminin kullanım dışı olmasının iki önerisi 
-
-**Değişikliğin tahmini tarihi:** Mart 2021
-
-Aşağıdaki iki öneri Şubat 2021 ' de kullanımdan kalkmak üzere zamanlandı:
-
-- **Sistem güncelleştirmelerinin uygulanabilmesi için makinelerinizin yeniden başlatılması gerekiyor**. Bu, güvenli puanınızın küçük bir etkisi oluşmasına neden olur.
-- **İzleme Aracısı makinelerinizde yüklü olmalıdır**. Bu öneri yalnızca şirket içi makinelerle ilgilidir ve mantığının bir kısmı başka bir öneriye aktarılacaktır. **Log Analytics aracı sistem durumu sorunları makinelerinizde çözümlenmelidir**. Bu, güvenli puanınızın küçük bir etkisi oluşmasına neden olur.
-
-Bu önerilerin bunlara dahil edilip edilmeyeceğini görmek için sürekli dışarı aktarma ve iş akışı Otomasyonu yapılandırmalarının denetlenmesini öneririz. Ayrıca, bunları kullanıyor olabilecek panolar veya diğer izleme araçları da buna uygun şekilde güncelleştirilmeleri gerekir.
-
-[Güvenlik önerileri başvuru sayfasında](recommendations-reference.md)bu öneriler hakkında daha fazla bilgi edinin.
-
-### <a name="deprecation-of-11-azure-defender-alerts"></a>11 Azure Defender uyarılarının kullanımdan kaldırılması
-
-**Değişikliğin tahmini tarihi:** Mart 2021
-
-Sonraki ay, aşağıda listelenen on bir Azure Defender uyarısı kullanım dışı olacaktır.
-
-- Yeni uyarılar, bu iki uyarıyı değiştirecek ve daha iyi kapsam sağlayacak:
-
-    | AlertType                | AlertDisplayName                                                         |
-    |--------------------------|--------------------------------------------------------------------------|
-    | ARM_MicroBurstDomainInfo | PREVIEW-mikro patlama araç seti "Get-AzureDomainInfo" işlev çalıştırması algılandı |
-    | ARM_MicroBurstRunbook    | PREVIEW-mikro patlama araç seti "Get-AzurePasswords" işlev çalıştırması algılandı  |
-    |                          |                                                                          |
-
-- Bu dokuz uyarı, zaten kullanım dışı bırakılmış bir Azure Active Directory Kimlik Koruması Bağlayıcısı ile ilgilidir:
-
-    | AlertType           | AlertDisplayName              |
-    |---------------------|-------------------------------|
-    | UnfamiliarLocation  | Bilinmeyen oturum açma özellikleri |
-    | AnonymousLogin      | Anonim IP adresi          |
-    | Bulaşıp Teddevicelogin | Kötü amaçlı yazılım bağlı IP adresi     |
-    | Impossıbleseyahat    | Olağandışı yolculuk               |
-    | MaliciousIP         | Kötü amaçlı IP adresi          |
-    | LeakedCredentials   | Sızdırılan kimlik bilgileri            |
-    | Passwordpüskürtme       | Parola spreyi                |
-    | LeakedCredentials   | Azure AD tehdit bilgileri  |
-    | AADAı               | Azure AD AI                   |
-    |                     |                               |
- 
-
-
 
 
 ### <a name="21-recommendations-moving-between-security-controls"></a>21 güvenlik denetimleri arasında hareket eden öneriler 
@@ -98,7 +51,7 @@ Güvenlik denetimlerinde ve bunların önerilerinde her güvenlik denetiminde ha
 |||
 
 
-### <a name="two-further-recommendations-from-apply-system-updates-security-control-being-deprecated"></a>"Sistem güncelleştirmelerini Uygula" güvenlik denetiminin kullanım dışı bırakılmakta olan iki ek öneri
+### <a name="two-recommendations-from-apply-system-updates-security-control-being-deprecated"></a>"Sistem güncelleştirmelerini Uygula" güvenlik denetiminin kullanım dışı olmasının iki önerisi
 
 **Değişikliğin tahmini tarihi:** 2021 Nisan
 
@@ -108,9 +61,15 @@ Aşağıdaki iki öneri kullanım dışı bırakılmıştır:
 - **Kubernetes Hizmetleri, güvenlik açığı olmayan bir Kubernetes sürümüne yükseltilmelidir** . bu önerinin değerlendirmeleri, aralarında olmasını istediğimizde geniş kapsamlı değildir. Bu önerinin geçerli sürümü, sonunda müşterinin güvenlik gereksinimleriyle daha iyi hizalanan gelişmiş bir sürümle değiştirilmiştir.
 
 
+### <a name="legacy-implementation-of-iso-27001-is-being-replaced-with-new-iso-270012013"></a>ISO 27001 ' nin eski uygulanması yeni ISO 27001:2013 ile değiştiriliyor
+
+ISO 27001 ' nin eski sürümü güvenlik merkezi 'nin mevzuat uyumluluk panosundan kaldırılacak. ISO 27001 uyumluluğunu Güvenlik Merkezi ile izliyorsanız, tüm ilgili yönetim grupları veya abonelikleri için yeni ISO 27001:2013 standardını ekleyin ve geçerli eski ISO 27001 yakında panodan kaldırılır.
+
+:::image type="content" source="media/upcoming-changes/removing-iso-27001-legacy-implementation.png" alt-text="Güvenlik Merkezi 'nin, eski ISO 27001 uygulamasının kaldırılmasına ilişkin iletiyi gösteren yasal uyumluluk panosu." lightbox="media/upcoming-changes/removing-iso-27001-legacy-implementation.png":::
+
 ### <a name="recommendations-from-aws-will-be-released-for-general-availability-ga"></a>AWS 'nin önerileri genel kullanıma sunulacaktır (GA)
 
-**Değişikliğin tahmini tarihi:** 2021 Nisan
+**Değişikliğin tahmini tarihi:** Ağustos 2021
 
 Azure Güvenlik Merkezi, Azure, Amazon Web Services (AWS) ve Google Cloud Platform (GCP) iş yüklerini korur.
 
@@ -121,7 +80,7 @@ Bu değişiklik ile, AWS önerilerinden oluşan iki küme GA 'ye taşınır:
 - [Güvenlik Merkezi 'nin PCI DSS denetimleri](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-pci-controls.html)
 - [Güvenlik Merkezi 'nin CIS AWS temelleri kıyaslama denetimleri](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html)
 
-Bunlar GA ve değerlendirmeler AWS kaynaklarınız üzerinde çalıştırıldığında, sonuçlar tüm çok ve karma bulut kaynaklarınız için Birleşik güvenli puanınızı etkiler. 
+Bunlar GA ve değerlendirmeler AWS kaynaklarınız üzerinde çalıştırıldığında, sonuçlar tüm çok ve karma bulut kaynaklarınız için Birleşik güvenli puanınızı etkiler.
 
 
 

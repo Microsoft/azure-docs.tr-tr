@@ -11,12 +11,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 08/20/2019
-ms.openlocfilehash: c38e4681c76fb0dd52d77c7dc1438b87a9571a80
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 695409740348e78ae51b263b44d9ed1cbadc1054
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103562068"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531922"
 ---
 # <a name="what-is-sql-data-sync-for-azure"></a>Azure için SQL Data Sync nedir?
 
@@ -151,6 +151,7 @@ Eşitleme grubu oluşturma, güncelleştirme ve silme sırasında sağlama ve sa
 - Aynı ada sahip ancak farklı bir şemaya sahip tablolar varsa (örneğin, dbo. Customers ve Sales. Customers) yalnızca bir tablo eşitlemeye eklenebilir.
 - User-Defined veri türlerine sahip sütunlar desteklenmez
 - Sunucuları farklı abonelikler arasında taşımak desteklenmez. 
+- İki birincil anahtar yalnızca büyük/küçük harf olarak farklıysa (örn. foo ve foo), veri eşitleme bu senaryoyu desteklemez.
 
 #### <a name="unsupported-data-types"></a>Desteklenmeyen veri türleri
 
@@ -168,7 +169,7 @@ Veri eşitleme, salt okuma veya sistem tarafından oluşturulmuş sütunları e�
 
 #### <a name="limitations-on-service-and-database-dimensions"></a>Hizmet ve veritabanı boyutlarına ilişkin sınırlamalar
 
-| **Boyutlarına**                                                  | **Sınırlı**              | **Geçici çözüm**              |
+| **Boyutlarına**                                                  | **Sınır**              | **Geçici çözüm**              |
 |-----------------------------------------------------------------|------------------------|-----------------------------|
 | Herhangi bir veritabanının ait olduğu en fazla eşitleme grubu sayısı.       | 5                      |                             |
 | Tek bir eşitleme grubundaki en fazla uç nokta sayısı              | 30                     |                             |

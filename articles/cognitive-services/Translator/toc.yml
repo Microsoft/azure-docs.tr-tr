@@ -1,17 +1,19 @@
 - name: Translator hizmeti belgeleri
   href: index.yml
 - name: Genel Bakış
+  expanded: true
+  items:
+    - name: Dil Desteği
+      href: language-support.md
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/en-us/pricing/details/cognitive-services/translator'
+- name: Metin Çevirisi
+  expanded: true
   items:
     - name: Translator nedir?
       href: translator-info-overview.md
-    - name: Dil Desteği
-      href: language-support.md
-    - name: Fiyatlandırma ve limitler
-      href: 'https://azure.microsoft.com/en-us/pricing/details/cognitive-services/translator'
     - name: Translator Hakkında SSS
       href: 'https://www.microsoft.com/translator/faq.aspx'
-- name: Metin Çevirisi
-  items:
     - name: Hızlı Başlangıç
       href: quickstart-translator.md
     - name: Örnekler
@@ -84,10 +86,10 @@
   items:
     - name: Özel Çevirmen nedir?
       href: custom-translator/overview.md
-    - name: Hızlı Başlangıç
-      href: custom-translator/quickstart-build-deploy-custom-model.md
     - name: SSS
       href: custom-translator/faq.md
+    - name: Hızlı Başlangıç
+      href: custom-translator/quickstart-build-deploy-custom-model.md
     - name: Nasıl yapılır kılavuzları
       items:
         - name: Proje oluşturma
@@ -112,7 +114,7 @@
           href: custom-translator/unsupported-language-deployments.md
     - name: Kavramlar
       items:
-        - name: Terminoloji
+        - name: Önemli terimler
           href: custom-translator/terminology.md
         - name: Metin çevirisini özelleştirme ve iyileştirme
           href: customization.md
@@ -132,8 +134,6 @@
           href: custom-translator/training-and-model.md
         - name: BLEU Puanı
           href: custom-translator/what-is-bleu-score.md
-        - name: Şifreleme
-          href: encrypt-data-at-rest.md
 - name: Belge çevirisi
   items:
     - name: Belge çevirisi nedir?
@@ -146,29 +146,43 @@
           href: document-translation/create-sas-tokens.md
     - name: Başvuru
       items:
-        - name: Belge çevirisi REST API
-          href: /rest/api/cognitiveservices/translator/documenttranslation
-        - name: Belge biçimlerini al
-          href: document-translation/reference/get-document-formats.md
-        - name: Sözlük biçimlerini al
-          href: document-translation/reference/get-glossary-formats.md
-        - name: Belge depolama kaynağını al
-          href: document-translation/reference/get-document-storage-source.md
-        - name: Toplu istek gönder
-          href: document-translation/reference/submit-batch-request.md
-        - name: İşlem belgelerinin durumunu al
-          href: document-translation/reference/get-operation-documents-status.md
+        - name: Desteklenen belge biçimlerini al
+          href: document-translation/reference/get-supported-document-formats.md
+        - name: Desteklenen sözlük biçimlerini al
+          href: document-translation/reference/get-supported-glossary-formats.md
+        - name: Desteklenen depolama kaynaklarını al
+          href: document-translation/reference/get-supported-storage-sources.md
+        - name: Çeviriyi Başlat
+          href: document-translation/reference/start-translation.md
+        - name: Belge durumunu al
+          href: document-translation/reference/get-documents-status.md
         - name: Belge durumunu al
           href: document-translation/reference/get-document-status.md
-        - name: İşlemleri al
-          href: document-translation/reference/get-operations.md
-        - name: İşlemi iptal et
-          href: document-translation/reference/cancel-operation.md
-- name: Çevirmen kaynakları
+        - name: Çeviri durumunu al
+          href: document-translation/reference/get-translations-status.md
+        - name: Çeviri durumunu al
+          href: document-translation/reference/get-translation-status.md
+        - name: Çeviriyi iptal et
+          href: document-translation/reference/cancel-translation.md
+- name: Nasıl yapılır kılavuzları
   items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/translator/context/context
+        - name: Müşteri tarafından yönetilen anahtarları kullan
+          href: encrypt-data-at-rest.md
+- name: Kaynaklar
+  items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/translator/context/context
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/en-us/support/legal/cognitive-services-compliance-and-privacy'
     - name: GitHub’daki kod örnekleri
       href: 'https://aka.ms/TranslatorGitHub'
+    - name: Gizlilik ve tanımlama bilgileri
+      href: 'https://privacy.microsoft.com/en-US/privacystatement'

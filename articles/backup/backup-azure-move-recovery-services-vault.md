@@ -4,12 +4,12 @@ description: Kurtarma Hizmetleri kasasını Azure abonelikleri ve kaynak gruplar
 ms.topic: conceptual
 ms.date: 04/08/2019
 ms.custom: references_regions
-ms.openlocfilehash: 4f75bec533181b29625fb0a10cc26d03f2875036
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 49d6782af5a9c946eaf92147dab22e4605195d89
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103466380"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107514776"
 ---
 # <a name="move-a-recovery-services-vault-across-azure-subscriptions-and-resource-groups"></a>Kurtarma Hizmetleri kasasını Azure abonelikleri ve kaynak grupları arasında taşıma
 
@@ -21,9 +21,9 @@ Fransa Orta, Fransa Güney, Almanya Kuzeydoğu, Almanya Orta, Çin Kuzey, Çin N
 
 ## <a name="prerequisites-for-moving-recovery-services-vault"></a>Kurtarma Hizmetleri kasasını taşımaya yönelik önkoşullar
 
-- Kaynak grupları arasında kasa taşıma sırasında, hem kaynak hem de hedef kaynak grupları, yazma ve silme işlemlerini önleyecek şekilde kilitlidir. Daha fazla bilgi için bu [makaleye](../azure-resource-manager/management/move-resource-group-and-subscription.md)bakın.
+- Kaynak grupları arasında kasa taşıma sırasında, hem kaynak hem de hedef kaynak grupları, yazma ve silme işlemlerini önleyecek şekilde kilitlidir. Daha fazla bilgi için [bu makaleye](../azure-resource-manager/management/move-resource-group-and-subscription.md) bakın.
 - Yalnızca yönetici aboneliğinin bir kasayı taşıma izinleri vardır.
-- Kasaların abonelikler arasında taşınması için, hedef aboneliğin kaynak abonelikle aynı kiracıda bulunması ve durumunun etkinleştirilmesi gerekir. Bir kasayı farklı bir Azure AD dizinine taşımak için bkz. [aboneliği farklı bir dizin](../role-based-access-control/transfer-subscription.md) ve [kurtarma hizmeti Kasası SSS](backup-azure-backup-faq.md#recovery-services-vault)'ye aktarma.
+- Kasaların abonelikler arasında taşınması için, hedef aboneliğin kaynak abonelikle aynı kiracıda bulunması ve durumunun etkinleştirilmesi gerekir. Bir kasayı farklı bir Azure AD dizinine taşımak için bkz. [aboneliği farklı bir dizin](../role-based-access-control/transfer-subscription.md) ve [kurtarma hizmeti Kasası SSS](/backup-azure-backup-faq.yml#recovery-services-vault)'ye aktarma.
 - Hedef kaynak grubunda yazma işlemleri gerçekleştirmek için izninizin olması gerekir.
 - Kasanın taşınması yalnızca kaynak grubunu değiştirir. Kurtarma Hizmetleri Kasası aynı konumda yer alacak ve değiştirilemez.
 - Tek seferde her bölge için yalnızca bir kurtarma hizmetleri Kasası taşıyabilirsiniz.
@@ -31,7 +31,7 @@ Fransa Orta, Fransa Güney, Almanya Kuzeydoğu, Almanya Orta, Çin Kuzey, Çin N
 - VM 'nin kasayla taşınıp taşınmadığı veya değil, VM 'yi her zaman kasadaki Korunan yedekleme geçmişinden geri yükleyebilirsiniz.
 - Azure disk şifrelemesi, anahtar kasasının ve VM 'Lerin aynı Azure bölgesinde ve abonelikte bulunmasını gerektirir.
 - Bir sanal makineyi yönetilen disklere taşımak için, bu [makaleye](../azure-resource-manager/management/move-resource-group-and-subscription.md)bakın.
-- Klasik model aracılığıyla dağıtılan kaynakları taşımaya yönelik seçenekler, kaynakları bir abonelik içinde veya yeni bir aboneliğe taşıdığınıza bağlı olarak farklılık gösterir. Daha fazla bilgi için bu [makaleye](../azure-resource-manager/management/move-resource-group-and-subscription.md)bakın.
+- Klasik model aracılığıyla dağıtılan kaynakları taşımaya yönelik seçenekler, kaynakları bir abonelik içinde veya yeni bir aboneliğe taşıdığınıza bağlı olarak farklılık gösterir. Daha fazla bilgi için [bu makaleye](../azure-resource-manager/management/move-resource-group-and-subscription.md) bakın.
 - Kasa için tanımlanan yedekleme ilkeleri, kasalardan abonelikler arasında veya yeni bir kaynak grubuna taşındıktan sonra tutulur.
 - Yalnızca aşağıdaki yedekleme öğesi türlerinden herhangi birini içeren bir kasayı taşıyabilirsiniz. Aşağıda listelenmeyen türlerin yedekleme öğelerinin durdurulması ve verilerin kasadan taşınmadan önce kalıcı olarak silinmesi gerekir.
   - Azure Sanal Makineler

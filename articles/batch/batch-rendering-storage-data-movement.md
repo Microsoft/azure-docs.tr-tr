@@ -7,12 +7,12 @@ author: mscurrell
 ms.author: markscu
 ms.date: 08/02/2018
 ms.topic: how-to
-ms.openlocfilehash: 55ec04df2a107dabfc72298bc8849c13f3a926e0
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0a18ee6961cb601b0fa9db7213eb6115afa20096
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "86147301"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765206"
 ---
 # <a name="storage-and-data-movement-options-for-rendering-asset-and-output-files"></a>Varlık ve çıkış dosyalarını işlemeye yönelik depolama ve veri taşıma seçenekleri
 
@@ -126,7 +126,7 @@ Bir havuz şablonunda cmdkey 'ın örnek kullanımı (JSON dosyasında kullanım
 
 Azure dosyaları, Azure depolama desteği olan tüm ana API 'Ler ve araçlar tarafından desteklenir; Örneğin, AzCopy, Azure CLı, Depolama Gezgini, Azure PowerShell, Batch Explorer vb.
 
-[Azure dosya eşitleme](../storage/files/storage-sync-files-planning.md) , bir şirket içi dosya sistemi ve bir Azure dosya paylaşımından dosyaları otomatik olarak eşitlemeye yönelik olarak kullanılabilir.
+[Azure dosya eşitleme](../storage/file-sync/file-sync-planning.md) , bir şirket içi dosya sistemi ve bir Azure dosya paylaşımından dosyaları otomatik olarak eşitlemeye yönelik olarak kullanılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

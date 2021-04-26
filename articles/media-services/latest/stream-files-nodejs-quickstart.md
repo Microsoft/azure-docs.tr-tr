@@ -11,12 +11,12 @@ ms.workload: media
 ms.topic: tutorial
 ms.date: 02/17/2021
 ms.author: inhenkel
-ms.openlocfilehash: a431060be380952940bdb99c65abc7a9740091de
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 5bb061af37f6f6d7e6e27cf25f0faa63bca7353c
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105038167"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109195"
 ---
 # <a name="how-to-encode-and-stream-video-files-with-nodejs"></a>Node.JS ile video dosyalarını kodlama ve akışa alma
 
@@ -58,7 +58,7 @@ Aşağıdaki komutu kullanarak, akış Node.js örneğini içeren bir GitHub dep
 
 Örnek aşağıdaki eylemleri gerçekleştirir:
 
-1. [Içerik duyarlı kodlama önceden ayarlanmış](./content-aware-encoding.md)olarak bir **dönüşüm** oluşturur. Önce belirtilen dönüştürmenin var olup olmadığını denetler.
+1. [Içerik duyarlı kodlama önceden ayarlanmış](./encode-content-aware-concept.md)olarak bir **dönüşüm** oluşturur. Önce belirtilen dönüştürmenin var olup olmadığını denetler.
 1. Çıktıyı içeren kodlama **işi** tarafından kullanılan bir çıktı **varlığı** oluşturur
 1. İsteğe bağlı olarak, Depolama Blobu SDK 'sını kullanarak yerel bir dosyayı karşıya yükler
 1. Bir HTTPS URL 'sini veya karşıya yüklenen dosyayı temel alan **iş** girişini oluşturur

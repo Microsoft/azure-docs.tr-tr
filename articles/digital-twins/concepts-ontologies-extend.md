@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 2/12/2021
 ms.topic: conceptual
 ms.service: digital-twins
-ms.openlocfilehash: e5973f58887b212919ad739232faafddcf9e735c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b38b4910773c433ed63fd2082c5cbefce81e0e9e
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "100561768"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107480263"
 ---
 # <a name="extending-ontologies"></a>Ontolololoon genişletiliyor 
 
@@ -28,7 +28,7 @@ DTDL tabanlı Reatastatecore ontology, boşluk hiyerarşisi çeşitli boşluk t�
 
 Hiyerarşinin bir kısmı aşağıdaki diyagramda gibi görünür. 
 
-:::image type="content" source="media/concepts-extending-ontologies/RealEstateCore-original.png" alt-text="Reatastatecore alanı hiyerarşisinin bir kısmını gösteren akış diyagramı. En üst düzeyde, alan adlı bir öğe vardır; bir ' extends ' ile bağlı bir düzeyin aşağı okuna doğru bir şekilde bağlanır; Oda iki ' extends ' okunun bir düzeyi ConferenceRoom ve Office olarak bağlanır."::: 
+:::image type="content" source="media/concepts-ontologies-extend/real-estate-core-original.png" alt-text="Reatastatecore alanı hiyerarşisinin bir kısmını gösteren akış diyagramı. En üst düzeyde, alan adlı bir öğe vardır; bir ' extends ' ile bağlı bir düzeyin aşağı okuna doğru bir şekilde bağlanır; Oda iki ' extends ' okunun bir düzeyi ConferenceRoom ve Office olarak bağlanır."::: 
 
 Realetstatecore ontology hakkında daha fazla bilgi için bkz. [*Kavramlar: sektör standardı ontolofütlerini benimseme*](concepts-ontologies-adopt.md#realestatecore-smart-building-ontology).
 
@@ -51,7 +51,7 @@ Sektörün sektör ontology 'yi bu yeni kavram ile genişletmek için, sektör o
 
 Odak odası arabirimini ekledikten sonra, genişletilmiş hiyerarşi yeni oda türünü gösterir. 
 
-:::image type="content" source="media/concepts-extending-ontologies/RealEstateCore-extended-1.png" alt-text="Yeni bir ekleme ile, daha önce Reatastatecore alan hiyerarşisini gösteren akış diyagramı. ConferenceRoom ve Office ile en alt düzeyde, Focusoda adlı yeni bir öğe vardır (Ayrıca, odadan ' extends ' oku aracılığıyla da bağlanır)"::: 
+:::image type="content" source="media/concepts-ontologies-extend/real-estate-core-extended-1.png" alt-text="Yeni bir ekleme ile, daha önce Reatastatecore alan hiyerarşisini gösteren akış diyagramı. ConferenceRoom ve Office ile en alt düzeyde, Focusoda adlı yeni bir öğe vardır (Ayrıca, odadan ' extends ' oku aracılığıyla da bağlanır)"::: 
 
 ### <a name="add-additional-capabilities-to-existing-interfaces"></a>Mevcut arabirimlere ek yetenekler ekleme 
 
@@ -69,7 +69,7 @@ Sektör ontology genişletmek için, sektör ontology 'deki arabirimlerden geni�
 
 Yukarıda gösterilen hiyerarşinin bölümünü genişlettikten sonra genişletilmiş hiyerarşi aşağıdaki diyagramda gibi görünür. Burada genişletilmiş alan arabirimi, `drawingId` dijital Ikizi 3D çizimiyle ilişkilentiren BIR ID içeren özelliği ekler. Ayrıca, ConferenceRoom arabirimi, konferans odasının çevrimiçi durumunu içerecek bir "çevrimiçi" özelliği de ekler. Devralma aracılığıyla ConferenceRoom arabirimi, Reatastatecore ConferenceRoom arabiriminden tüm özellikleri ve genişletilmiş alan arabiriminden tüm özellikleri içerir. 
 
-:::image type="content" source="media/concepts-extending-ontologies/RealEstateCore-extended-2.png" alt-text="Daha yeni eklemeler sayesinde, yukarıda bulunan genişletilmiş Reatastatecore alanı hiyerarşisini gösteren akış diyagramı. Oda artık, düzeyini bir boşluk öğesi ile paylaşır, bu da bir düzeyi, ConferenceRoom ve Office 'in yanındaki yeni bir oda öğesine aşağı doğru bir şekilde bağlar.  Yeni öğeler, daha fazla ' extends ' ilişkisine sahip var olan ontology 'a bağlanır."::: 
+:::image type="content" source="media/concepts-ontologies-extend/real-estate-core-extended-2.png" alt-text="Daha yeni eklemeler sayesinde, yukarıda bulunan genişletilmiş Reatastatecore alanı hiyerarşisini gösteren akış diyagramı. Oda artık, düzeyini bir boşluk öğesi ile paylaşır, bu da bir düzeyi, ConferenceRoom ve Office 'in yanındaki yeni bir oda öğesine aşağı doğru bir şekilde bağlar.  Yeni öğeler, daha fazla ' extends ' ilişkisine sahip var olan ontology 'a bağlanır."::: 
 
 ## <a name="using-the-extended-space-hierarchy"></a>Genişletilmiş alan hiyerarşisini kullanma 
 
@@ -77,7 +77,7 @@ Genişletilmiş alan hiyerarşisini kullanarak dijital TWINS oluşturduğunuzda,
 
 Her dijital ikizi modeli, aşağıdaki diyagramda gösterilen genişletilmiş hiyerarşiden bir arabirim olacaktır. 
  
-:::image type="content" source="media/concepts-extending-ontologies/ontology-with-models.png" alt-text="Genişletilmiş Reatastatecore alanı hiyerarşisinden boşluk (en üst düzey), bir oda (orta seviye) ve ConferenceRoom, Office ve Focusodu (alt düzey) dahil bir alıntı. Modellerin adları her öğeye bağlıdır (örneğin, Oda Room101 adlı bir modele bağlıdır)."::: 
+:::image type="content" source="media/concepts-ontologies-extend/ontology-with-models.png" alt-text="Genişletilmiş Reatastatecore alanı hiyerarşisinden boşluk (en üst düzey), bir oda (orta seviye) ve ConferenceRoom, Office ve Focusodu (alt düzey) dahil bir alıntı. Modellerin adları her öğeye bağlıdır (örneğin, Oda Room101 adlı bir modele bağlıdır)."::: 
 
 Model KIMLIĞINI (işleci) kullanarak dijital TWINS için sorgulama yaparken `IS_OF_MODEL` , genişletilmiş hiyerarşideki model kimliklerinin kullanılması gerekir. Örneğin, `SELECT * FROM DIGITALTWINS WHERE IS_OF_MODEL('dtmi:com:example:Office;1')`. 
 

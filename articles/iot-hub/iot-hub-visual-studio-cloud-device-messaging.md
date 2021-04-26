@@ -7,36 +7,24 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/20/2019
 ms.author: xshi
-ms.openlocfilehash: c56bb7030b2ebc12e3afc24e2d8cb29ce2dda0bf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8461a77d06a63c2ac319323a91b5577ca4dce1cf
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "74079487"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567039"
 ---
 # <a name="use-cloud-explorer-for-visual-studio-to-send-and-receive-messages-between-your-device-and-iot-hub"></a>Cihazınız ve IoT Hub arasında ileti göndermek ve almak için Visual Studio için Cloud Explorer 'ı kullanın
 
 ![Uçtan uca diyagram](./media/iot-hub-visual-studio-cloud-device-messaging/e-to-e-diagram.png)
 
+Bu makalede, cihazdan buluta iletileri izlemek ve buluttan cihaza iletiler göndermek üzere Visual Studio için Cloud Explorer 'ı nasıl kullanacağınızı öğreneceksiniz. Cihazdan buluta iletiler, cihazınızın topladığı ve sonra IoT Hub gönderdiği algılayıcı verileri olabilir. Buluttan cihaza iletiler, IoT Hub cihazınıza göndereceğini belirten komutlardır. Örneğin, cihazınıza bağlı bir LED 'in yanıp sönmesini sağlar.
+
 [Bulut Gezgini](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.CloudExplorerForVS) , Azure kaynaklarınızı görüntülemenize, özelliklerini Incelemenize ve Visual Studio içinden önemli geliştirici eylemleri gerçekleştirmenize olanak tanıyan yararlı bir Visual Studio uzantısıdır. Bu makalede, bulut Gezgini 'ni kullanarak cihazınız ve hub 'ınız arasında ileti gönderme ve alma hakkında odaklanılır.
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
-## <a name="what-you-learn"></a>Öğrenecekleriniz
-
-Bu makalede, cihazdan buluta iletileri izlemek ve buluttan cihaza iletiler göndermek üzere Visual Studio için Cloud Explorer 'ı nasıl kullanacağınızı öğreneceksiniz. Cihazdan buluta iletiler, cihazınızın topladığı ve sonra IoT Hub gönderdiği algılayıcı verileri olabilir. Buluttan cihaza iletiler, IoT Hub cihazınıza göndereceğini belirten komutlardır. Örneğin, cihazınıza bağlı bir LED 'in yanıp sönmesini sağlar.
-
-## <a name="what-you-do"></a>Yapabilecekleriniz
-
-Bu makalede, aşağıdaki görevleri gerçekleştirebilirsiniz:
-
-- Cihazdan buluta iletileri izlemek için Visual Studio için Cloud Explorer 'ı kullanın.
-
-- Bulutta cihaza iletiler göndermek için Visual Studio için Cloud Explorer 'ı kullanın.
-
-## <a name="what-you-need"></a>Gerekenler
-
-Aşağıdaki önkoşulların olması gerekir:
+## <a name="prerequisites"></a>Önkoşullar
 
 - Etkin bir Azure aboneliği.
 

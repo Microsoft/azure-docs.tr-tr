@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 12/03/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: fc7892db2ca11ab7970835f8979360961ee01104
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: db1ac3f5de507a5cfdbfec7216afea9a0f4ac541
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103463349"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515048"
 ---
 # <a name="add-language-packs-to-a-windows-10-multi-session-image"></a>Windows 10 çoklu oturum görüntüsüne dil paketleri ekleme
 
@@ -55,6 +55,7 @@ Birden çok dil eklemek için Windows 10 Kurumsal Çoklu oturum görüntülerini
           - [Windows 10, sürüm 2004 veya 20H2 **11C** LXP ISO](https://software-download.microsoft.com/download/pr/LanguageExperiencePack.2011C.iso)
           - [Windows 10, sürüm 2004 veya 20H2 **1C** LXP ISO](https://software-download.microsoft.com/download/pr/LanguageExperiencePack.2101C.iso)
           - [Windows 10, sürüm 2004 veya 20H2 **2C** LXP ISO](https://software-download.microsoft.com/download/pr/LanguageExperiencePack.2102C.iso)
+          - [Windows 10, sürüm 2004 veya 20H2 **3c** LXP ISO](https://software-download.microsoft.com/download/pr/LanguageExperiencePack.2103C.iso)
 
 - Windows dosya sunucusu sanal makinesindeki bir Azure dosya paylaşma veya dosya paylaşma
 
@@ -265,4 +266,4 @@ Bir Kullanıcı dil ayarlarını değiştirdikten sonra, değişikliklerin etkil
 
 Dil paketlerine yönelik bilinen sorunları merak ediyorsanız, bkz. [Windows 10 ' da dil paketleri ekleme, sürüm 1803 ve sonraki sürümler: bilinen sorunlar](/windows-hardware/manufacture/desktop/language-packs-known-issue).
 
-Windows 10 Enterprise çoklu oturum hakkında başka sorularınız varsa, [SSS sorusuna](windows-10-multisession-faq.md)göz atın.
+Windows 10 Enterprise çoklu oturum hakkında başka sorularınız varsa, [SSS sorusuna](windows-10-multisession-faq.yml)göz atın.

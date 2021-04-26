@@ -2,24 +2,24 @@
 title: Çok kiracılı ve içerik yalıtımı
 titleSuffix: Azure Cognitive Search
 description: Azure Bilişsel Arama kullanırken çok kiracılı SaaS uygulamaları için ortak tasarım desenleri hakkında bilgi edinin.
-manager: nitinme
 author: LiamCavanagh
 ms.author: liamca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 09/25/2020
-ms.openlocfilehash: cd21197d6d1559b681ae622b974f6eb7ba95ad3d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/06/2021
+ms.openlocfilehash: 7833dcf8fbe2b6460346310a4d094c7bb5d606c4
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91397377"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581587"
 ---
 # <a name="design-patterns-for-multitenant-saas-applications-and-azure-cognitive-search"></a>Çok kiracılı SaaS uygulamaları ve Azure Bilişsel Arama için tasarım desenleri
 
 Çok kiracılı bir uygulama, başka bir kiracının verilerini görebilen veya paylaşabilen birçok kiracı için aynı hizmetleri ve özellikleri sağlayan bir uygulamadır. Bu belgede, Azure Bilişsel Arama ile oluşturulan çok kiracılı uygulamalar için kiracı yalıtımı stratejileri ele alınmaktadır.
 
 ## <a name="azure-cognitive-search-concepts"></a>Azure Bilişsel Arama kavramları
+
 Bir hizmet olarak arama çözümü olan [Azure bilişsel arama](search-what-is-azure-search.md) , geliştiricilerin herhangi bir altyapıyı yönetmeksizin veya bilgi alma konusunda uzman hale gelmeden uygulamalara zengin arama deneyimleri eklemesine olanak tanır. Veriler hizmete yüklenir ve ardından bulutta depolanır. Azure Bilişsel Arama API 'sine yönelik basit istekleri kullanarak veriler daha sonra değiştirilebilir ve aranabilir. 
 
 ### <a name="search-services-indexes-fields-and-documents"></a>Hizmetleri, dizinleri, alanları ve belgeleri arayın
@@ -31,14 +31,16 @@ Azure Bilişsel Arama kullanırken bir *arama hizmetine* abone olur. Veriler Azu
 Bir arama hizmeti içindeki her dizin kendi şemasına sahiptir ve bu bir dizi özelleştirilebilir *alan* tarafından tanımlanır. Veriler bir Azure Bilişsel Arama dizinine tek tek *Belgeler* biçiminde eklenir. Her belge belirli bir dizine yüklenmelidir ve bu dizinin şemasına sığması gerekir. Azure Bilişsel Arama kullanarak veri ararken tam metin arama sorguları belirli bir dizine göre verilir.  Bu kavramları bir veritabanınızla karşılaştırmak için, alanlar bir tablodaki sütunlara eklenebilir ve belgeler satırlara eklenebilir.
 
 ### <a name="scalability"></a>Ölçeklenebilirlik
+
 Standart [fiyatlandırma katmanındaki](https://azure.microsoft.com/pricing/details/search/) herhangi bir Azure bilişsel arama hizmeti, iki boyutta ölçeklendirilebilir: depolama ve kullanılabilirlik.
 
-* Bir arama hizmetinin depolanmasını artırmak için *bölümler* eklenebilir.
-* Bir arama hizmetinin işleyebileceği isteklerin verimini artırmak için bir hizmete *çoğaltmalar* eklenebilir.
++ Bir arama hizmetinin depolanmasını artırmak için *bölümler* eklenebilir.
++ Bir arama hizmetinin işleyebileceği isteklerin verimini artırmak için bir hizmete *çoğaltmalar* eklenebilir.
 
 ' De bölüm ve çoğaltmaları ekleme ve kaldırma, arama hizmeti kapasitesinin, uygulamanın talep aldığı veri ve trafik miktarıyla büyümesine izin verir. Bir arama hizmetinin bir okuma [SLA 'sı](https://azure.microsoft.com/support/legal/sla/search/v1_0/)elde etmek için iki çoğaltma gerekir. Bir hizmetin bir okuma-yazma [SLA 'sı](https://azure.microsoft.com/support/legal/sla/search/v1_0/)kullanabilmesi için, üç çoğaltma gerektirir.
 
 ### <a name="service-and-index-limits-in-azure-cognitive-search"></a>Azure Bilişsel Arama hizmet ve Dizin sınırları
+
 Azure Bilişsel Arama 'de birkaç farklı [fiyatlandırma katmanı](https://azure.microsoft.com/pricing/details/search/) vardır. her katmanda farklı [sınırlara ve Kotalar](search-limits-quotas-capacity.md)vardır. Bu limitlerden bazıları hizmet düzeyindedir, bazıları dizin düzeyindedir ve bazıları bölüm düzeyinde bulunur.
 
 |  | Temel | Standard1 | Standard2 | Standard3 | Standard3 HD |
@@ -50,7 +52,8 @@ Azure Bilişsel Arama 'de birkaç farklı [fiyatlandırma katmanı](https://azur
 | **Bölüm başına en fazla depolama alanı** |2 GB |25 GB |100 GB |200 GB |200 GB |
 | **Hizmet başına en fazla dizin** |5 |50 |200 |200 |3000 (en fazla 1000 dizin/bölüm) |
 
-#### <a name="s3-high-density"></a>S3 yüksek yoğunluklu '
+#### <a name="s3-high-density"></a>S3 yüksek yoğunluk
+
 Azure Bilişsel Arama S3 fiyatlandırma katmanında, çok kiracılı senaryolar için özel olarak tasarlanan yüksek yoğunluklu (HD) mod için bir seçenek vardır. Birçok durumda, basitlik ve maliyet verimliliği avantajlarından yararlanmak için tek bir hizmet altında çok sayıda daha küçük kiracılar desteklemek gereklidir.
 
 S3 HD, çok sayıda küçük dizinin tek bir hizmette daha fazla dizin barındırmanıza olanak sağlamak için bölümleri kullanarak Dizin ölçekleme yeteneği sunarak tek bir arama hizmetinin yönetimi altına paketlenebilmesini sağlar.
@@ -58,24 +61,32 @@ S3 HD, çok sayıda küçük dizinin tek bir hizmette daha fazla dizin barındı
 S3 hizmeti sabit sayıda dizin barındırmak için tasarlanmıştır (maksimum 200) ve hizmete yeni bölümler eklendikçe her dizinin yatay olarak boyutlandırılabilmesini sağlar. S3 HD hizmetlerine bölüm eklemek, hizmetin barındıradığı en fazla dizin sayısını artırır. Tek bir S3HD dizini için ideal en büyük boyut, sistem tarafından uygulanan her bir dizin üzerinde sabit boyut sınırı olmadığından 50-80 GB 'ın etrafında.
 
 ## <a name="considerations-for-multitenant-applications"></a>Çok kiracılı uygulamalar için dikkat edilmesi gerekenler
+
 Çok kiracılı uygulamalar, çeşitli kiracılar arasında bazı gizlilik düzeyini korurken, kaynakları kiracılar arasında verimli bir şekilde dağıtmalıdır. Bu tür bir uygulama için mimari tasarlarken bazı önemli noktalar vardır:
 
-* *Kiracı yalıtımı:* Uygulama geliştiricilerinin, kiracının diğer kiracıların verilerine yetkisiz veya istenmeyen erişim sahibi olmadığından emin olmak için uygun önlemleri almanız gerekir. Veri gizliliği perspektifinin ötesinde, kiracı yalıtım stratejileri, gürültülü komşulardan paylaşılan kaynakların ve korumanın etkili bir şekilde yönetilmesini gerektirir.
-* *Bulut kaynağı maliyeti:* Diğer uygulamalarda olduğu gibi, yazılım çözümlerinin de çok kiracılı bir uygulamanın bir bileşeni olarak maliyet rekabetçi kalması gerekir.
-* *Işlem kolaylığı:* Çok kiracılı bir mimari geliştirilirken, uygulamanın işlemleri ve karmaşıklığı üzerindeki etki önemli bir konudur. Azure Bilişsel Arama [% 99,9 SLA](https://azure.microsoft.com/support/legal/sla/search/v1_0/)'ya sahiptir.
-* *Global ayak izi:* Çok kiracılı uygulamaların dünya genelinde dağıtılan kiracılara etkin bir şekilde sunması gerekebilir.
-* *Ölçeklenebilirlik:* Uygulama geliştiricilerinin, en düşük düzeyde uygulama karmaşıklığı bulundurma ve uygulamayı kiracı sayısıyla ve kiracıların verilerinin ve iş yükünün boyutuyla ölçeklenebilecek şekilde tasarlama arasındaki uzlaşmaları göz önünde bulundurmanız gerekir.
++ *Kiracı yalıtımı:* Uygulama geliştiricilerinin, kiracının diğer kiracıların verilerine yetkisiz veya istenmeyen erişim sahibi olmadığından emin olmak için uygun önlemleri almanız gerekir. Veri gizliliği perspektifinin ötesinde, kiracı yalıtım stratejileri, gürültülü komşulardan paylaşılan kaynakların ve korumanın etkili bir şekilde yönetilmesini gerektirir.
+
++ *Bulut kaynağı maliyeti:* Diğer uygulamalarda olduğu gibi, yazılım çözümlerinin de çok kiracılı bir uygulamanın bir bileşeni olarak maliyet rekabetçi kalması gerekir.
+
++ *Işlem kolaylığı:* Çok kiracılı bir mimari geliştirilirken, uygulamanın işlemleri ve karmaşıklığı üzerindeki etki önemli bir konudur. Azure Bilişsel Arama [% 99,9 SLA](https://azure.microsoft.com/support/legal/sla/search/v1_0/)'ya sahiptir.
+
++ *Global ayak izi:* Çok kiracılı uygulamaların dünya genelinde dağıtılan kiracılara etkin bir şekilde sunması gerekebilir.
+
++ *Ölçeklenebilirlik:* Uygulama geliştiricilerinin, en düşük düzeyde uygulama karmaşıklığı bulundurma ve uygulamayı kiracı sayısıyla ve kiracıların verilerinin ve iş yükünün boyutuyla ölçeklenebilecek şekilde tasarlama arasındaki uzlaşmaları göz önünde bulundurmanız gerekir.
 
 Azure Bilişsel Arama, kiracıların verilerini ve iş yükünü yalıtmak için kullanılabilecek birkaç sınır sunar.
 
 ## <a name="modeling-multitenancy-with-azure-cognitive-search"></a>Azure Bilişsel Arama ile çok kiracılı Modellendirme
+
 Çok kiracılı bir senaryo söz konusu olduğunda, uygulama geliştiricisi bir veya daha fazla arama hizmeti kullanır ve kiracılarını hizmetler, dizinler veya her ikisi arasında böler. Azure Bilişsel Arama, çok kiracılı bir senaryo modellemesi sırasında bazı yaygın desenlere sahiptir:
 
-1. *Kiracı başına Dizin:* Her kiracının, diğer kiracılar ile paylaşılan bir arama hizmeti içinde kendi dizini vardır.
-2. *Kiracı başına hizmet:* Her kiracının, en yüksek düzeyde veri ve iş yükü ayrımı sunan kendi adanmış Azure Bilişsel Arama hizmeti vardır.
-3. *Her Ikisinin karışımı:* Daha büyük, daha etkin kiracılara, daha küçük kiracılar paylaşılan hizmetler içinde tekil dizinler atandığında, daha fazla etkin kiracılar adanmış hizmetler atanır.
++ *Kiracı başına bir dizin:* Her kiracının, diğer kiracılar ile paylaşılan bir arama hizmeti içinde kendi dizini vardır.
 
-## <a name="1-index-per-tenant"></a>1. kiracı başına Dizin
++ *Kiracı başına bir hizmet:* Her kiracının, en yüksek düzeyde veri ve iş yükü ayrımı sunan kendi adanmış Azure Bilişsel Arama hizmeti vardır.
+
++ *Her Ikisinin karışımı:* Daha büyük, daha etkin kiracılara, daha küçük kiracılar paylaşılan hizmetler içinde tekil dizinler atandığında, daha fazla etkin kiracılar adanmış hizmetler atanır.
+
+## <a name="model-1-one-index-per-tenant"></a>Model 1: kiracı başına bir dizin
 
 :::image type="content" source="media/search-modeling-multitenant-saas-applications/azure-search-index-per-tenant.png" alt-text="Kiracı başına Dizin modeline ait bir portrayal" border="false":::
 
@@ -93,7 +104,7 @@ Azure Bilişsel Arama, her iki dizinin ölçeğinin ve toplam dizin sayısının
 
 Toplam dizin sayısı tek bir hizmet için çok büyük büyürse, yeni kiracıları barındırmak için başka bir hizmetin sağlanması gerekir. Yeni hizmetler eklendikçe, Dizin arama hizmetleri arasında taşınmaları gerekiyorsa, Azure Bilişsel Arama bir dizinin taşınmasına izin vermediği için dizindeki verilerin bir dizinden diğerine el ile kopyalanması gerekir.
 
-## <a name="2-service-per-tenant"></a>2. kiracı başına hizmet
+## <a name="model-2-once-service-per-tenant"></a>Model 2: kiracı başına hizmet
 
 :::image type="content" source="media/search-modeling-multitenant-saas-applications/azure-search-service-per-tenant.png" alt-text="Kiracı başına hizmet modeline ait bir portrayal" border="false":::
 
@@ -109,7 +120,8 @@ Kiracı başına hizmet modeli, küresel bir parmak izine sahip uygulamalar içi
 
 Bu düzenin ölçeklendirildiği sorunlar, tek tek kiracılar kendi hizmetini büyürken oluşur. Azure Bilişsel Arama, bir arama hizmetinin fiyatlandırma katmanını yükseltmeyi desteklememektedir, bu nedenle tüm verilerin yeni bir hizmete el ile kopyalanması gerekir.
 
-## <a name="3-mixing-both-models"></a>3. her iki modeli de karıştırma
+## <a name="model-3-hybrid"></a>Model 3: karma
+
 Birden çok kiracının modellenmesi için başka bir model, kiracı başına dizin ve hizmet kiracıya yönelik stratejileri karıştırmalıdır.
 
 İki deseni karıştırarak, uygulamanın en büyük kiracılar, uzun süre daha az etkin olan, daha küçük kiracılar paylaşılan bir hizmette Dizin kaplayabilirler. Bu model, tüm gürültülü komşulardan daha küçük kiracılar korumaya yardımcı olurken en büyük kiracıların hizmetten sürekli olarak yüksek performansa sahip olmasını sağlar.
@@ -117,6 +129,7 @@ Birden çok kiracının modellenmesi için başka bir model, kiracı başına di
 Ancak, bu stratejiyi uygulamak, hangi kiracıların adanmış bir hizmette bir dizin ve bir paylaşılan hizmette Dizin gerektirdiğini tahmin etmek için de yararlanır. Bu çok kiracılı modellerin her ikisini de yönetme ihtiyacı ile uygulama karmaşıklığı artar.
 
 ## <a name="achieving-even-finer-granularity"></a>Daha da ayrıntılı ayrıntı düzeyi
+
 Bilişsel Arama Azure 'da çok kiracılı senaryolar modellenmesini sağlayan yukarıdaki tasarım desenleri, her kiracının bir uygulamanın bir örneği olduğu Tekdüzen bir kapsam olduğunu varsayar. Ancak, uygulamalar bazen birçok küçük kapsamı işleyebilir.
 
 Kiracı başına hizmet ve kiracı başına Dizin modelleri yeterince küçük kapsamlar değilse, bir dizini modelleyebilir ve daha da fazla ayrıntı düzeyi elde edebilirsiniz.
@@ -127,10 +140,8 @@ Bu yöntem ayrı kullanıcı hesaplarının işlevselliğini, farklı izin düze
 
 > [!NOTE]
 > Birden çok kiracıyı karşılamak üzere tek bir dizin yapılandırmak için yukarıda açıklanan yaklaşımın kullanılması, arama sonuçlarının uygunluğunu etkiler. Arama ilgi puanları, kiracı düzeyindeki bir kapsamda değil, dizin düzeyindeki bir kapsamda hesaplanır. bu nedenle, tüm kiracıların verileri, dönem sıklığı gibi temel istatistiklere dahil edilir.
-> 
-> 
+>
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure Bilişsel Arama birçok uygulama için etkileyici bir seçimdir. Çok kiracılı uygulamalar için çeşitli tasarım düzenlerini değerlendirirken, Azure Bilişsel Arama en iyi şekilde her boyuttaki uygulama iş yüklerine ve mimarilerine sığması için [çeşitli fiyatlandırma katmanlarını](https://azure.microsoft.com/pricing/details/search/) ve ilgili [hizmet sınırlarını](search-limits-quotas-capacity.md) göz önünde bulundurun.
 
-Azure Bilişsel Arama ve çoklu kiracı senaryolarıyla ilgili herhangi bir soru, öğesine yönlendirilebilir azuresearch_contact@microsoft.com .
+Azure Bilişsel Arama birçok uygulama için etkileyici bir seçimdir. Çok kiracılı uygulamalar için çeşitli tasarım düzenlerini değerlendirirken, Azure Bilişsel Arama en iyi şekilde her boyuttaki uygulama iş yüklerine ve mimarilerine sığması için [çeşitli fiyatlandırma katmanlarını](https://azure.microsoft.com/pricing/details/search/) ve ilgili [hizmet sınırlarını](search-limits-quotas-capacity.md) göz önünde bulundurun.

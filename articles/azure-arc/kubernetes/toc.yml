@@ -22,30 +22,44 @@
       href: conceptual-agent-architecture.md
     - name: Konfigürasyonlar ve Gilar
       href: conceptual-configurations.md
-    - name: Gilar kullanarak CI/CD iş akışı
-      href: conceptual-gitops-ci-cd.md
+    - name: Küme uzantıları
+      href: conceptual-extensions.md
+    - name: Küme bağlantısı
+      href: conceptual-cluster-connect.md
+    - name: Özel konumlar
+      href: conceptual-custom-locations.md
+    - name: Azure RBAC
+      href: conceptual-azure-rbac.md
     - name: Sık Sorulan Sorular
       href: faq.md
+    - name: Gilar kullanarak CI/CD iş akışı
+      href: conceptual-gitops-ci-cd.md
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Azure Arc’a bağlanma
-      items:
-        - name: Hizmet sorumlusu ekleme
-          href: create-onboarding-service-principal.md
-    - name: Yönetme
-      items:
-        - name: Aracı yükseltmeleri
-          href: agent-upgrade.md
+    - name: Hizmet sorumlusu kullanarak küme bağlama
+      href: create-onboarding-service-principal.md
+    - name: Aracıları yükselt
+      href: agent-upgrade.md
     - name: Senaryolar
       items:
         - name: GitOps kullanarak Helm chart’ları dağıtma
           href: use-gitops-with-helm.md
         - name: Azure İlkesi’ni kullanarak GitOps uygulama
           href: use-azure-policy.md
+        - name: Küme uzantılarını dağıtma ve yönetme
+          href: extensions.md
         - name: Kapsayıcılar için Azure İzleyici kullanarak izleme
-          href: ../../azure-monitor/containers/container-insights-enable-arc-enabled-clusters.md?toc=%2fazure%2fazure-arc%2fkubernetes%2ftoc.yml
+          href: ../../azure-monitor/containers/container-insights-enable-arc-enabled-clusters.md?toc=/azure/azure-arc/kubernetes/toc.json
+        - name: Azure Defender kullanarak tehdit korumasını zorlama
+          href: ../../security-center/defender-for-kubernetes-azure-arc.md?toc=/azure/azure-arc/kubernetes/toc.json
         - name: Azure İlkesi kullanarak giriş denetimi ilkeleri
-          href: ../../governance/policy/concepts/policy-for-kubernetes.md?toc=/azure/azure-arc/kubernetes/toc.yml
+          href: ../../governance/policy/concepts/policy-for-kubernetes.md?toc=/azure/azure-arc/kubernetes/toc.json
+        - name: Kümeye her yerden güvenli bir şekilde bağlanın
+          href: cluster-connect.md
+        - name: Yetkilendirme denetimleri için Azure AD RBAC kullanma
+          href: azure-rbac.md
+        - name: Özel konumlar oluşturma
+          href: custom-locations.md
         - name: IoT iş yüklerini dağıtma
           href: deploy-azure-iot-edge-workloads.md
     - name: Sorun giderme
@@ -59,5 +73,7 @@
       href: /powershell/module/Az.ConnectedKubernetes/
 - name: Kaynaklar
   items:
+    - name: Dağıtım planı
+      href: plan-at-scale-deployment.md
     - name: Azure Arc hızlı başlangıç
       href: 'https://azurearcjumpstart.io'

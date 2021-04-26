@@ -12,12 +12,12 @@ ms.date: 12/04/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0ecfd277f2cc86102d59b201e7b43fa8519bdd3a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4434b59044aed8c9814431864e5c3c9b7d98254c
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98937614"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575726"
 ---
 # <a name="azure-ad-connect-sync-v2-endpoint-api"></a>Azure AD Connect eşitleme v2 uç nokta API’si 
 Microsoft, Azure Active Directory için eşitleme hizmeti işlemlerinin performansını geliştiren Azure AD Connect için yeni bir uç nokta (API) dağıttı. Yeni v2 uç noktasından yararlanarak, Azure AD 'ye dışarı ve içeri aktarma sırasında dikkat çekici performans kazanımları yaşarsınız. Bu yeni uç nokta şunları destekler:
@@ -27,6 +27,12 @@ Microsoft, Azure Active Directory için eşitleme hizmeti işlemlerinin performa
  
 > [!NOTE]
 > Şu anda, yeni uç noktanın geri yazılan Microsoft 365 grupları için yapılandırılmış bir Grup boyutu sınırı yok. Bu, Active Directory ve eşitleme döngüleriyle gecikme süreleriyle ilgili bir etkiye sahip olabilir. Grup boyutlarınızı artımlı olarak artırmanız önerilir.  
+
+>[!NOTE]
+> Azure AD Connect Sync v2 uç nokta API 'SI Şu anda yalnızca şu Azure ortamlarında kullanılabilir:
+> - Azure ticari
+> - Azure Çin bulutu
+> - Azure ABD kamu bulutu Azure Almanya bulutu 'nda kullanıma sunulacaktır
 
 ## <a name="prerequisites"></a>Önkoşullar  
 Yeni v2 uç noktasını kullanabilmek için, [Azure AD Connect sürüm 1.5.30.0](https://www.microsoft.com/download/details.aspx?id=47594) veya üstünü kullanmanız ve aşağıdaki dağıtım adımlarını izleyerek Azure AD Connect sunucunuz için v2 uç noktasını etkinleştirmeniz gerekir.   

@@ -11,12 +11,12 @@ metadata:
   author: KumudD
   ms.author: kumud
   ms.date: 01/28/2021
-  ms.openlocfilehash: 25d73a08b5311d93f46830d6f23095c83db35091
-  ms.sourcegitcommit: 225e4b45844e845bc41d5c043587a61e6b6ce5ae
+  ms.openlocfilehash: ada227d0746b49ba73b6bea2104d3a7adcbaa1c5
+  ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/11/2021
-  ms.locfileid: "103010499"
+  ms.lasthandoff: 04/07/2021
+  ms.locfileid: "107027474"
 landingContent:
 - title: Sanal Ağ hakkında
   linkLists:
@@ -100,6 +100,10 @@ landingContent:
     links:
     - text: Ağ trafiğini yönlendirme - Portal
       url: tutorial-create-route-table-portal.md
+  - linkListType: learn
+    links:
+    - text: Azure dağıtımınızda yollarla trafik akışını yönetme ve denetleme
+      url: /learn/modules/control-network-traffic-flow-with-routes/
 - title: IP adresleri oluşturma
   linkLists:
   - linkListType: concept
@@ -164,7 +168,7 @@ landingContent:
   linkLists:
   - linkListType: reference
     links:
-    - text: Azure CLI’si
+    - text: Azure CLI
       url: /cli/azure/network
     - text: Azure PowerShell
       url: /powershell/module/az.network

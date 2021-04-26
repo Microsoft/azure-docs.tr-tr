@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 08/27/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: b80b1a4b3f9bcde6cf01b0e0e59425c6783bd5d9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 357c8d79259986e211dd04580b1d8205c25824da
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94953772"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257985"
 ---
 # <a name="tutorial-for-configuring-hypr-with-azure-active-directory-b2c"></a>Azure Active Directory B2C ile HYPR yapılandırma öğreticisi
 
@@ -62,7 +62,7 @@ Aşağıdaki mimari diyagram uygulamayı gösterir.
 
 1. Ilke klasöründeki [Azure AD B2C HYPR ilkesine](https://github.com/HYPR-Corp-Public/Azure-AD-B2C-HYPR-Sample/tree/master/policy) gidin.
 
-2. [LocalAccounts başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts) indirmek için bu [belgeyi](./custom-policy-get-started.md?tabs=applications#custom-policy-starter-pack) izleyin
+2. [LocalAccounts başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts) indirmek için bu [belgeyi](tutorial-create-user-flows.md?pivots=b2c-custom-policy#custom-policy-starter-pack) izleyin
 
 3. Azure AD B2C kiracı için ilkeyi yapılandırın.
 
@@ -93,4 +93,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

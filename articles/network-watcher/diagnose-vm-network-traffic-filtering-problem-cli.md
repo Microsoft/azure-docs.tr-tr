@@ -8,7 +8,6 @@ author: KumudD
 manager: twooley
 editor: ''
 tags: azure-resource-manager
-Customer intent: I need to diagnose a virtual machine (VM) network traffic filter problem that prevents communication to and from a VM.
 ms.assetid: ''
 ms.service: network-watcher
 ms.devlang: na
@@ -18,12 +17,12 @@ ms.workload: infrastructure
 ms.date: 01/07/2021
 ms.author: kumud
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 536a9e304d111b16e39c3187560a7a529d05c937
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 701df4353e8d2e36baf0496bd6944c4a95395414
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98013167"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107763280"
 ---
 # <a name="quickstart-diagnose-a-virtual-machine-network-traffic-filter-problem---azure-cli"></a>Hızlı Başlangıç: Sanal makine ağ trafiği filtreleme sorununu tanılama - Azure CLI
 
@@ -63,7 +62,7 @@ Ağ İzleyicisi ile ağ iletişimini test etmek için önce test etmek istediği
 
 ### <a name="enable-network-watcher"></a>Ağ izleyicisini etkinleştirme
 
-Doğu ABD bölgesinde etkinleştirilmiş bir ağ izleyicisi zaten varsa [IP akış doğrulamayı kullanma](#use-ip-flow-verify) bölümüne atlayın. Doğu ABD bölgesinde bir ağ izleyicisi oluşturmak için [az network watcher configure](/cli/azure/network/watcher#az-network-watcher-configure) komutunu kullanın:
+Doğu ABD bölgesinde etkinleştirilmiş bir ağ izleyicisi zaten varsa [IP akış doğrulamayı kullanma](#use-ip-flow-verify) bölümüne atlayın. Doğu ABD bölgesinde bir ağ izleyicisi oluşturmak için [az network watcher configure](/cli/azure/network/watcher#az_network_watcher_configure) komutunu kullanın:
 
 ```azurecli-interactive
 az network watcher configure \
@@ -74,7 +73,7 @@ az network watcher configure \
 
 ### <a name="use-ip-flow-verify"></a>IP akışı doğrulamayı kullanma
 
-Bir sanal makine oluşturduğunuzda Azure varsayılan olarak sanal makineye/sanal makineden ağ trafiğine izin verir veya ağ trafiğini reddeder. Daha sonra Azure’ın varsayılanlarını geçersiz kılarak ek trafik türlerine izin verebilir veya ek trafik türlerini reddedebilirsiniz. Farklı hedeflere giden trafiğe izin verilip verilmediğini veya farklı hedeflere giden trafiğin reddedilip reddedilmediğini test etmek için [az network watcher test-ip-flow](/cli/azure/network/watcher#az-network-watcher-test-ip-flow) komutunu kullanın.
+Bir sanal makine oluşturduğunuzda Azure varsayılan olarak sanal makineye/sanal makineden ağ trafiğine izin verir veya ağ trafiğini reddeder. Daha sonra Azure’ın varsayılanlarını geçersiz kılarak ek trafik türlerine izin verebilir veya ek trafik türlerini reddedebilirsiniz. Farklı hedeflere giden trafiğe izin verilip verilmediğini veya farklı hedeflere giden trafiğin reddedilip reddedilmediğini test etmek için [az network watcher test-ip-flow](/cli/azure/network/watcher#az_network_watcher_test_ip_flow) komutunu kullanın.
 
 Sanal makineden, www.bing.com adresinin IP adreslerinden birine giden iletişimi test etme:
 
@@ -126,7 +125,7 @@ Döndürülen sonuç, **DefaultInboundDenyAll** adlı bir güvenlik kuralı tara
 
 ## <a name="view-details-of-a-security-rule"></a>Bir güvenlik kuralının ayrıntılarını görüntüleme
 
-[IP akışı doğrulamayı kullanma](#use-ip-flow-verify) bölümündeki kuralların neden iletişime izin verdiğini veya iletişimi engellediğini belirlemek için [az network nic list-effective-nsg](/cli/azure/network/nic#az-network-nic-list-effective-nsg) komutunu kullanarak ağ arabirimi için etkili güvenlik kurallarını gözden geçirin:
+[IP akışı doğrulamayı kullanma](#use-ip-flow-verify) bölümündeki kuralların neden iletişime izin verdiğini veya iletişimi engellediğini belirlemek için [az network nic list-effective-nsg](/cli/azure/network/nic#az_network_nic_list_effective_nsg) komutunu kullanarak ağ arabirimi için etkili güvenlik kurallarını gözden geçirin:
 
 ```azurecli-interactive
 az network nic list-effective-nsg \

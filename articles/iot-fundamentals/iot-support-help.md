@@ -8,10 +8,10 @@ services: iot-fundamentals
 ms.topic: conceptual
 ms.date: 6/10/2020
 ms.openlocfilehash: b9b3b30592237e1bbe1b08b0ed1d118131b15a26
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92206059"
 ---
 # <a name="what-are-the-azure-iot-support-and-help-options"></a>Azure IoT desteği ve yardım seçenekleri nelerdir?
@@ -44,7 +44,7 @@ Arama kullanarak sorununuz için bir yanıt bulamazsanız, Microsoft Q&A 'ya yen
 - [Azure Digital Twins](/answers/topics/azure-digital-twins.html)
 - [Azure RTOS](/answers/topics/azure-rtos.html)
 - [Azure Sphere](/answers/topics/azure-sphere.html)
-- [Azure Zaman Serisi Görüşleri](/answers/topics/azure-time-series-insights.html)
+- [Azure Time Series Insights](/answers/topics/azure-time-series-insights.html)
 - [Azure Haritalar](/answers/topics/azure-maps.html)
 
 ## <a name="post-a-question-on-stack-overflow"></a>Stack Overflow soru gönderin
@@ -64,7 +64,7 @@ Stack Overflow için yeni bir soru gönderirseniz, soruyu oluştururken lütfen 
  - [Azure Digital Twins](https://stackoverflow.com/questions/tagged/azure-digital-twins)
  - [Azure RTOS](https://stackoverflow.com/questions/tagged/azure-rtos)
  - [Azure Sphere](https://stackoverflow.com/questions/tagged/azure-sphere)
- - [Azure Zaman Serisi Görüşleri](https://stackoverflow.com/questions/tagged/azure-timeseries-insights)
+ - [Azure Time Series Insights](https://stackoverflow.com/questions/tagged/azure-timeseries-insights)
  - [Azure Haritalar](https://stackoverflow.com/questions/tagged/azure-maps)
 
 ## <a name="submit-feedback-on-azure-feedback"></a>Azure geri bildirimi hakkında geri bildirim gönderin
@@ -83,7 +83,7 @@ Yeni özellikler istemek için Azure geri bildirimlerine gönderin. Azure IoT hi
 | Azure IoT Edge                | https://feedback.azure.com/forums/907045-azure-iot-edge |
 | Azure IoT Çözüm Hızlandırıcıları | https://feedback.azure.com/forums/916438-azure-iot-solution-accelerators |
 | Azure Haritalar                 | https://feedback.azure.com/forums/909172-azure-maps |
-| Azure Zaman Serisi Görüşleri | https://feedback.azure.com/forums/906859-azure-time-series-insights |
+| Azure Time Series Insights | https://feedback.azure.com/forums/906859-azure-time-series-insights |
 | Azure Digital Twins | https://feedback.azure.com/forums/916621-azure-digital-twins |
 | Azure Sphere | https://feedback.azure.com/forums/915433-azure-sphere |
 

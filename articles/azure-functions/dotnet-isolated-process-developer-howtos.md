@@ -4,12 +4,12 @@ description: .NET 5,0 kullanarak C# işlevleri oluşturup hata ayıklamanın yan
 ms.date: 03/03/2021
 ms.topic: how-to
 zone_pivot_groups: development-environment-functions
-ms.openlocfilehash: 9751d5d354d738a64d6b02e8153464491d78ec14
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c76fde9a61ca60171ac094ef541e8c5841846aab
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103201357"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107866281"
 ---
 # <a name="develop-and-publish-net-5-functions-using-azure-functions"></a>Azure Işlevleri 'ni kullanarak .NET 5 işlevleri geliştirme ve yayımlama 
 
@@ -24,7 +24,7 @@ Bu makalede, Azure Işlevleri çalışma zamanındaki işlem dışı çalışan 
 
 + Etkin aboneliği olan bir Azure hesabı. [Ücretsiz hesap oluşturun](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 
-+ [.NET SDK 5.0](https://www.microsoft.com/net/download)
++ [.NET 5,0 SDK](https://dotnet.microsoft.com/download)
 
 + Sürüm 3.0.3381 veya sonraki bir sürümü [Azure Functions Core Tools](functions-run-local.md#v2) .
 
@@ -160,7 +160,7 @@ Bu noktada, `func start` C# yalıtılmış işlevler projesini derlemek ve çal�
 
 1. Tarayıcınızın adres çubuğuna, aşağıdaki gibi görünen yerel işlev URL 'nizi yazın ve isteği çalıştırın. 
 
-    <http://localhost:7071/api/HttpExample>
+    `http://localhost:7071/api/HttpExample`
 
     Çalışan terminale yazılan istekten izleme çıktısını görmeniz gerekir. Kod yürütme, işlev kodunuzda ayarladığınız tüm kesme noktalarında duraklar.
 

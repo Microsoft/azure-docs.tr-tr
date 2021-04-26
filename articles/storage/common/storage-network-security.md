@@ -9,12 +9,12 @@ ms.date: 03/16/2021
 ms.author: normesta
 ms.reviewer: santoshc
 ms.subservice: common
-ms.openlocfilehash: 3d71a7ad2507909dacf54e7f1c49b6e768033113
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 5e8123c252d99b2999eeef42fecae189a05e382b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104600488"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778130"
 ---
 # <a name="configure-azure-storage-firewalls-and-virtual-networks"></a>Azure Depolama güvenlik duvarlarını ve sanal ağları yapılandırma
 
@@ -136,7 +136,7 @@ Bölgesel bir kesinti sırasında olağanüstü durum kurtarma için planlama ya
 
 ### <a name="required-permissions"></a>Gerekli izinler
 
-Bir depolama hesabına sanal ağ kuralı uygulamak için, kullanıcının eklenmekte olan alt ağlar için uygun izinlere sahip olması gerekir. Bir kuralı uygulamak, bir [depolama hesabı katılımcısı](../../role-based-access-control/built-in-roles.md#storage-account-contributor) veya `Microsoft.Network/virtualNetworks/subnets/joinViaServiceEndpoint/action` [Azure Kaynak sağlayıcısı Işlemi](../../role-based-access-control/resource-provider-operations.md#microsoftnetwork) için özel bir Azure rolü aracılığıyla izin verilen bir kullanıcı tarafından gerçekleştirilebilir.
+Depolama hesabına bir sanal ağ kuralı uygulamak için, kullanıcının eklenen alt ağlar üzerinde uygun izinleri olmalıdır. Bir kuralı uygulamak, bir [depolama hesabı katılımcısı](../../role-based-access-control/built-in-roles.md#storage-account-contributor) veya `Microsoft.Network/virtualNetworks/subnets/joinViaServiceEndpoint/action` [Azure Kaynak sağlayıcısı Işlemi](../../role-based-access-control/resource-provider-operations.md#microsoftnetwork) için özel bir Azure rolü aracılığıyla izin verilen bir kullanıcı tarafından gerçekleştirilebilir.
 
 Depolama hesabı ve erişim verilen sanal ağlar, farklı bir Azure AD kiracısının parçası olan abonelikler de dahil olmak üzere farklı aboneliklerde olabilir.
 
@@ -571,10 +571,10 @@ Güvenilen Azure hizmetlerine erişim izni verdiğinizde, aşağıdaki erişim t
 | Azure DevTest Labs       | Microsoft. DevTestLab       | Özel görüntü oluşturma ve yapıt yüklemesi. [Daha fazla bilgi edinin](../../devtest-labs/devtest-lab-overview.md). |
 | Azure Event Grid         | Microsoft. EventGrid        | Blob Storage olay yayımlamayı etkinleştirin ve Event Grid depolama sıralarında yayımlamaya izin verin. [BLOB depolama olayları](../../event-grid/overview.md#event-sources) ve [kuyruklarda yayımlama](../../event-grid/event-handlers.md)hakkında bilgi edinin. |
 | Azure Event Hubs         | Microsoft. EventHub         | Event Hubs yakalama ile verileri arşivleme. [Daha Fazla Bilgi Edinin](../../event-hubs/event-hubs-capture-overview.md). |
-| Azure Dosya Eşitleme          | Microsoft. Storagessync      | Şirket içi dosya sunucunuzu Azure dosya paylaşımları için bir önbelleğe dönüştürmenizi sağlar. Çok siteli eşitleme, hızlı olağanüstü durum kurtarma ve bulut tarafı yedekleme için izin verme. [Daha fazla bilgi edinin](../files/storage-sync-files-planning.md) |
+| Azure Dosya Eşitleme          | Microsoft. Storagessync      | Şirket içi dosya sunucunuzu Azure dosya paylaşımları için bir önbelleğe dönüştürmenizi sağlar. Çok siteli eşitleme, hızlı olağanüstü durum kurtarma ve bulut tarafı yedekleme için izin verme. [Daha fazla bilgi edinin](../file-sync/file-sync-planning.md) |
 | Azure HDInsight          | Microsoft. HDInsight        | Yeni bir HDInsight kümesi için varsayılan dosya sisteminin başlangıçtaki içeriğini sağlayın. [Daha fazla bilgi edinin](../../hdinsight/hdinsight-hadoop-use-blob-storage.md). |
 | Azure Içeri aktarma dışarı aktarma      | Microsoft. ımportexport     | Azure Storage Içeri/dışarı aktarma hizmeti kullanılarak verilerin Azure depolama 'ya aktarılmasını veya Azure Storage 'dan dışarı aktarılmasını sağlar. [Daha fazla bilgi edinin](../../import-export/storage-import-export-service.md).  |
-| Azure İzleyici            | Microsoft. Insights         | Kaynak günlükleri, Azure Active Directory oturum açma ve denetim günlükleri ve Microsoft Intune Günlükler dahil olmak üzere, izleme verilerinin güvenli bir depolama hesabına yazılmasına izin verir. [Daha fazla bilgi edinin](../../azure-monitor/roles-permissions-security.md). |
+| Azure İzleyici            | Microsoft.Insights         | Kaynak günlükleri, Azure Active Directory oturum açma ve denetim günlükleri ve Microsoft Intune Günlükler dahil olmak üzere, izleme verilerinin güvenli bir depolama hesabına yazılmasına izin verir. [Daha fazla bilgi edinin](../../azure-monitor/roles-permissions-security.md). |
 | Azure ağı         | Microsoft.Network          | Ağ Izleyicisi ve Trafik Analizi hizmetleri dahil olmak üzere ağ trafiği günlüklerini depolayın ve çözümleyin. [Daha fazla bilgi edinin](../../network-watcher/network-watcher-nsg-flow-logging-overview.md). |
 | Azure Site Recovery      | Microsoft. Sıterecovery     | Güvenlik Duvarı özellikli önbellek, kaynak veya hedef depolama hesapları kullanırken Azure IaaS sanal makinelerinin olağanüstü durum kurtarma için çoğaltmayı etkinleştirin.  [Daha fazla bilgi edinin](../../site-recovery/azure-to-azure-tutorial-enable-replication.md). |
 

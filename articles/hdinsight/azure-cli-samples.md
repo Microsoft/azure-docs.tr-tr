@@ -5,12 +5,12 @@ ms.service: hdinsight
 ms.topic: sample
 ms.date: 09/23/2019
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 9367c1b4d82e984b2b4200768a3f83f9245c7f0f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4502cb26b4aeedff4223aaf5a592581aee36a0e6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98946884"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775110"
 ---
 # <a name="azure-hdinsight-azure-cli-samples"></a>Azure HDInsight: Azure CLı örnekleri
 
@@ -29,7 +29,7 @@ Bu makalede ortak görevler için örnek betikler sağlanmaktadır. Her örnek i
 
 ## <a name="az-login"></a>az login
 
-[Azure 'Da oturum açın](/cli/azure/reference-index#az-login).
+[Azure 'Da oturum açın](/cli/azure/reference-index#az_login).
 
 ```azurecli
 az login
@@ -40,7 +40,7 @@ az login
 
 ## <a name="az-hdinsight-create"></a>az HDInsight oluştur
 
-[Yeni bir küme oluşturur](/cli/azure/hdinsight#az-hdinsight-create).
+[Yeni bir küme oluşturur](/cli/azure/hdinsight#az_hdinsight_create).
 
 ### <a name="create-a-cluster-with-an-existing-storage-account"></a>Mevcut depolama hesabı ile küme oluşturma
 
@@ -173,7 +173,7 @@ az hdinsight create \
 
 ## <a name="az-hdinsight-application-create"></a>az HDInsight uygulama oluştur
 
-[HDInsight kümesi için bir uygulama oluşturun](/cli/azure/hdinsight/application#az-hdinsight-application-create).
+[HDInsight kümesi için bir uygulama oluşturun](/cli/azure/hdinsight/application#az_hdinsight_application_create).
 
 ### <a name="create-an-application-with-a-script-uri"></a>Betik URI 'SI ile uygulama oluşturma
 
@@ -240,7 +240,7 @@ az hdinsight application create \
 
 ## <a name="az-hdinsight-script-action-execute"></a>az HDInsight betiği-eylem yürütme
 
-[Belirtilen HDInsight kümesinde betik eylemlerini yürütün](/cli/azure/hdinsight/script-action#az-hdinsight-script-action-execute).
+[Belirtilen HDInsight kümesinde betik eylemlerini yürütün](/cli/azure/hdinsight/script-action#az_hdinsight_script_action_execute).
 
 ### <a name="execute-a-script-action-and-persist-on-success"></a>Betik eylemi yürütme ve başarılı olma devam eden
 

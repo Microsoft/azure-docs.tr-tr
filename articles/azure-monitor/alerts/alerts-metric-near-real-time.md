@@ -5,13 +5,13 @@ author: harelbr
 ms.author: harelbr
 services: monitoring
 ms.topic: conceptual
-ms.date: 03/11/2021
-ms.openlocfilehash: efc1438fdc539af278ebff1f292c5fa0a91b7b91
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/08/2021
+ms.openlocfilehash: 24298734a46b8339a2a8818692641b4c10812294
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103016109"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107104890"
 ---
 # <a name="supported-resources-for-metric-alerts-in-azure-monitor"></a>Azure Izleyici 'de ölçüm uyarıları için desteklenen kaynaklar
 
@@ -29,7 +29,7 @@ Daha yeni uyarılar tarafından desteklenen Azure Izleyici ölçüm kaynakların
 
 |Kaynak türü  |Desteklenen boyutlar |Çoklu kaynak uyarıları| Kullanılabilir ölçümler|
 |---------|---------|-----|----------|
-|Microsoft. Aadihar/Azureadölçümlerini | Yes | Hayır | |
+|Microsoft. Aadihar/Azureadölçümlerini | Yes | Hayır | [Azure AD](../essentials/metrics-supported.md#microsoftaadiamazureadmetrics) |
 |Microsoft.ApiManagement/service | Yes | Hayır | [API Management](../essentials/metrics-supported.md#microsoftapimanagementservice) |
 |Microsoft. AppConfiguration/Configurationmağazaları |Yes | Hayır | [Uygulama Yapılandırması](../essentials/metrics-supported.md#microsoftappconfigurationconfigurationstores) |
 |Microsoft. AppPlatform/yay | Yes | Hayır | [Azure Spring Cloud](../essentials/metrics-supported.md#microsoftappplatformspring) |
@@ -37,7 +37,8 @@ Daha yeni uyarılar tarafından desteklenen Azure Izleyici ölçüm kaynakların
 |Microsoft. AVS/Privatebulutlar | Hayır | Hayır | [Azure VMware Çözümü](../essentials/metrics-supported.md#microsoftavsprivateclouds) |
 |Microsoft.Batch/batchAccounts | Yes | Hayır | [Toplu Hesaplar](../essentials/metrics-supported.md#microsoftbatchbatchaccounts) |
 |Microsoft. BotService/botServices | Yes | Hayır | [Bot Hizmetleri](../essentials/metrics-supported.md#microsoftbotservicebotservices) |
-|Microsoft. Cache/Redsıs | Yes | Yes | [Redis için Azure Önbelleği](../essentials/metrics-supported.md#microsoftcacheredis) |
+|Microsoft. Cache/redsıs | Yes | Yes | [Redis için Azure Önbelleği](../essentials/metrics-supported.md#microsoftcacheredis) |
+|MICROSOFT. CDN/profiller | Yes | Hayır | [CDN Profilleri](../essentials/metrics-supported.md#microsoftcdnprofiles) |
 |Microsoft. ClassicCompute/domainNames/yuvalar/roller | Hayır | Hayır | [Klasik Cloud Services](../essentials/metrics-supported.md#microsoftclassiccomputedomainnamesslotsroles) |
 |Microsoft. ClassicCompute/virtualMachines | Hayır | Hayır | [Klasik sanal makineler](../essentials/metrics-supported.md#microsoftclassiccomputevirtualmachines) |
 |Microsoft. ClassicStorage/storageAccounts | Yes | Hayır | [Depolama hesapları (klasik)](../essentials/metrics-supported.md#microsoftclassicstoragestorageaccounts) |
@@ -86,7 +87,7 @@ Daha yeni uyarılar tarafından desteklenen Azure Izleyici ölçüm kaynakların
 |Microsoft. Media/mediaservices/streamingEndpoints | Yes | Hayır | [Media Services akış uç noktaları](../essentials/metrics-supported.md#microsoftmediamediaservicesstreamingendpoints) |
 |Microsoft. NetApp/netAppAccounts/Capacityhavuzları | Yes | Yes | [Azure NetApp kapasite havuzları](../essentials/metrics-supported.md#microsoftnetappnetappaccountscapacitypools) |
 |Microsoft. NetApp/netAppAccounts/Capacityhavuzları/birimleri | Yes | Yes | [Azure NetApp birimleri](../essentials/metrics-supported.md#microsoftnetappnetappaccountscapacitypoolsvolumes) |
-|Microsoft. Network/Applicationgateway 'ler | Yes | Hayır | [Uygulama ağ geçitleri](../essentials/metrics-supported.md#microsoftnetworkapplicationgateways) |
+|Microsoft. Network/Applicationgateway 'ler | Yes | Hayır | [Uygulama Ağ Geçitleri](../essentials/metrics-supported.md#microsoftnetworkapplicationgateways) |
 |Microsoft. Network/azurefirewalls | Yes | Hayır | [Güvenlik duvarları](../essentials/metrics-supported.md#microsoftnetworkazurefirewalls) |
 |Microsoft. Network/dnsZones | Hayır | Hayır | [DNS Bölgeleri](../essentials/metrics-supported.md#microsoftnetworkdnszones) |
 |Microsoft. Network/Expressroutedevreleri | Yes | Hayır |[ExpressRoute devreleri](../essentials/metrics-supported.md#microsoftnetworkexpressroutecircuits) |

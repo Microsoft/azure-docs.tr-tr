@@ -4,10 +4,10 @@ description: Azure Lab Services bir derslik laboratuvar şablonu oluşturmayı v
 ms.topic: article
 ms.date: 06/26/2020
 ms.openlocfilehash: be84a05fd8b278f5176cd768191d10a20fc719e6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96434286"
 ---
 # <a name="create-and-manage-a-classroom-template-in-azure-lab-services"></a>Azure Lab Services bir sınıf şablonu oluşturma ve yönetme

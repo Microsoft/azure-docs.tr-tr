@@ -5,16 +5,16 @@ keywords: ''
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 03/01/2021
+ms.date: 04/07/2021
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: b24276974eba76aa841cdd7f02145210713474eb
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: e5034c228a354c98b5792492d484da9eb10b8cf2
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104872294"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310861"
 ---
 # <a name="update-the-iot-edge-security-daemon-and-runtime"></a>IoT Edge güvenlik daemon'ını ve çalışma zamanını güncelleştirme
 
@@ -87,17 +87,17 @@ Güvenlik arka plan programının en son sürümüne güncelleştirmek istiyorsa
    sudo apt-get install iotedge
    ```
 
-Güvenlik arka plan programının belirli bir sürümüne güncelleştirmek istiyorsanız, apt listesi çıktısından sürümü belirtin. **İotedge** güncelleştirildiğinde, otomatik olarak **libiothsm-STD** paketini en son sürümüne güncelleştirmeye çalışır ve bu da bağımlılık çakışmasına neden olabilir. En son sürüme gitmeyecekleriniz için her iki paketi de aynı sürüme hedeflediğinizden emin olun. Örneğin, aşağıdaki komut 1.0.9 sürümünün belirli bir sürümünü yüklüyor:
+Güvenlik arka plan programının belirli bir sürümüne güncelleştirmek istiyorsanız, apt listesi çıktısından sürümü belirtin. **İotedge** güncelleştirildiğinde, otomatik olarak **libiothsm-STD** paketini en son sürümüne güncelleştirmeye çalışır ve bu da bağımlılık çakışmasına neden olabilir. En son sürüme gitmeyecekleriniz için her iki paketi de aynı sürüme hedeflediğinizden emin olun. Örneğin, aşağıdaki komut 1,1 sürümünün belirli bir sürümünü yüklüyor:
 
    ```bash
-   sudo apt-get install iotedge=1.0.9-1 libiothsm-std=1.0.9-1
+   sudo apt-get install iotedge=1.1.1 libiothsm-std=1.1.1
    ```
 
 Yüklemek istediğiniz sürüm apt-get ile kullanılamıyorsa, [IoT Edge yayımları](https://github.com/Azure/azure-iotedge/releases) deposundaki herhangi bir sürümü hedeflemek için kıvrımlı kullanabilirsiniz. Yüklemek istediğiniz sürüm için cihazınız için uygun **libiothsm-STD** ve **ıotedge** dosyalarını bulun. Her dosya için dosya bağlantısına sağ tıklayın ve bağlantı adresini kopyalayın. Bu bileşenlerin belirli sürümlerini yüklemek için bağlantı adresini kullanın:
 
 ```bash
-curl -L <libiothsm-std link> -o libiothsm-std.deb && sudo dpkg -i ./libiothsm-std.deb
-curl -L <iotedge link> -o iotedge.deb && sudo dpkg -i ./iotedge.deb
+curl -L <libiothsm-std link> -o libiothsm-std.deb && sudo apt-get install ./libiothsm-std.deb
+curl -L <iotedge link> -o iotedge.deb && sudo apt-get install ./iotedge.deb
 ```
 <!-- end 1.1 -->
 :::moniker-end
@@ -140,7 +140,7 @@ Windows için IoT Edge ile, IoT Edge doğrudan Windows cihazında çalışır. P
 
 ## <a name="update-the-runtime-containers"></a>Çalışma zamanı kapsayıcılarını güncelleştirme
 
-IoT Edge aracısını ve IoT Edge hub kapsayıcılarını güncelleştirme yöntemi, dağıtımınızda (1,0 gibi) veya belirli Etiketler (örneğin, 1.0.7) kullanmanıza göre değişir.
+IoT Edge aracısını ve IoT Edge hub kapsayıcılarını güncelleştirme yöntemi, dağıtımda (1,1 gibi) veya belirli Etiketler (örneğin, 1.1.1) kullanıp kullanmayacağınızı bağlı olarak değişir.
 
 IoT Edge aracısının sürümünü ve şu anda cihazınızdaki IoT Edge hub modüllerini ve komutlarını kullanarak denetleyin `iotedge logs edgeAgent` `iotedge logs edgeHub` .
 
@@ -156,13 +156,13 @@ IoT Edge Aracısı ve IoT Edge hub görüntüleri ilişkili oldukları IoT Edge 
 
 ### <a name="update-a-rolling-tag-image"></a>Bir sıralı etiket görüntüsünü güncelleştirme
 
-Dağıtımınızda sıralı Etiketler kullanıyorsanız (örneğin, mcr.microsoft.com/azureiotedge-hub:**1,0**), cihazdaki kapsayıcı çalışma zamanını görüntünün en son sürümünü çekmek için zorlamanız gerekir.
+Dağıtımınızda sıralı Etiketler kullanıyorsanız (örneğin, mcr.microsoft.com/azureiotedge-hub:**1,1**), cihazdaki kapsayıcı çalışma zamanını görüntünün en son sürümünü çekmek için zorlamanız gerekir.
 
 IoT Edge cihazınızdan görüntünün yerel sürümünü silin. Windows makinelerinde, güvenlik arka plan programının kaldırılması çalışma zamanı görüntülerini da kaldırır, bu nedenle bu adımı tekrar yapmanız gerekmez.
 
 ```bash
-docker rmi mcr.microsoft.com/azureiotedge-hub:1.0
-docker rmi mcr.microsoft.com/azureiotedge-agent:1.0
+docker rmi mcr.microsoft.com/azureiotedge-hub:1.1
+docker rmi mcr.microsoft.com/azureiotedge-agent:1.1
 ```
 
 `-f`Görüntüleri kaldırmak için zorla bayrağını kullanmanız gerekebilir.
@@ -171,7 +171,7 @@ IoT Edge hizmeti, çalışma zamanı görüntülerinin en son sürümlerini çek
 
 ### <a name="update-a-specific-tag-image"></a>Belirli bir etiket görüntüsünü güncelleştirme
 
-Dağıtımınızda belirli Etiketler kullanırsanız (örneğin, mcr.microsoft.com/azureiotedge-hub:**1.0.8**), tüm yapmanız gereken, dağıtım bildiriminizde etiketi güncelleştirin ve değişiklikleri cihazınıza uygular.
+Dağıtımınızda belirli Etiketler kullanırsanız (örneğin, mcr.microsoft.com/azureiotedge-hub:**1.1.1**), tüm yapmanız gereken, dağıtım bildiriminizde etiketi güncelleştirip değişiklikleri cihazınıza uygular.
 
 1. Azure portal IoT Hub IoT Edge cihazınızı seçin ve **modülleri ayarla**' yı seçin.
 
@@ -202,9 +202,10 @@ Sürüm 1,2 ' den başlayarak, IoT Edge hizmeti yeni bir paket adı kullanır ve
 
 * Paket adı, **ıotedge** 'den **azıot-Edge** olarak değiştirildi.
 * **Libiothsm-STD** paketi artık kullanılmıyor. IoT Edge sürümünün bir parçası olarak sunulan standart paketi kullandıysanız, yapılandırmanız yeni sürüme aktarılabilir. Libiothsm-STD ' nin farklı bir uygulamasını kullandıysanız, cihaz kimlik sertifikası, cihaz CA ve güven paketi gibi kullanıcı tarafından sağlanmış tüm sertifikaların yeniden yapılandırılması gerekir.
-* Yeni bir kimlik hizmeti olan **azıot-Identity-Service** , 1,2 sürümünün bir parçası olarak sunulmuştur. Bu hizmet, IoT Edge için kimlik sağlamayı ve yönetimini ve Azure IoT Hub cihaz güncelleştirmesi gibi IoT Hub iletişim kurması gereken diğer cihaz bileşenlerini işler. <!--TODO: add link to ADU when available -->
-* Varsayılan yapılandırma dosyası, yeni bir ad ve konuma sahiptir. `/etc/iotedge/config.yaml`Daha önce, cihaz yapılandırma bilgilerinizin artık varsayılan olarak içinde olması bekleniyor `/etc/aziot/config.toml` . Bu `iotedge config import` komut, yapılandırma bilgilerinin yeni bir konum ve sözdizimini yeni bir konuma geçirmeye yardımcı olması için kullanılabilir.
-* Kalıcı verileri şifrelemek veya şifresini çözmek için IoT Edge iş yükü API 'sini kullanan tüm modüller, güncelleştirmeden sonra çözülemez. IoT Edge, iç kullanım için dinamik olarak ana kimlik anahtarı ve şifreleme anahtarı oluşturur. Bu anahtar yeni hizmete aktarılmaz. IoT Edge v 1.2 yeni bir tane oluşturur.
+* Yeni bir kimlik hizmeti olan **azıot-Identity-Service** , 1,2 sürümünün bir parçası olarak sunulmuştur. Bu hizmet, IoT Edge için kimlik sağlamayı ve yönetimini ve [IoT Hub Için cihaz güncelleştirmesi](../iot-hub-device-update/understand-device-update.md)gibi IoT Hub iletişim kurması gereken diğer cihaz bileşenlerini işler.
+* Varsayılan yapılandırma dosyası, yeni bir ad ve konuma sahiptir. `/etc/iotedge/config.yaml`Daha önce, cihaz yapılandırma bilgilerinizin artık varsayılan olarak içinde olması bekleniyor `/etc/aziot/config.toml` . Bu `iotedge config import` komut, yapılandırma bilgilerini eski konumdan ve söz dizimi yeni bir sözdizimine geçirmeye yardımcı olması için kullanılabilir.
+  * Import komutu bir cihazın güvenilir Platform Modülü 'ne (TPM) erişim kurallarını algılayamaz veya değiştiremezler. Cihazınız TPM kanıtlama kullanıyorsa, aziottpm hizmetine erişim sağlamak için/etc/udev/rules. d/tpmaccess.exe dosyasını el ile güncelleştirmeniz gerekir. Daha fazla bilgi için bkz. [TPM 'ye IoT Edge erişim verme](how-to-auto-provision-simulated-device-linux.md?view=iotedge-2020-11&preserve-view=true#give-iot-edge-access-to-the-tpm).
+* Sürüm 1,2 ' deki iş yükü API 'SI şifreli gizli dizileri yeni bir biçimde kaydeder. Eski bir sürümden sürüm 1,2 ' e yükseltirseniz, var olan ana şifreleme anahtarı içeri aktarılır. İş yükü API 'SI, içeri aktarılan şifreleme anahtarını kullanarak önceki biçimde kaydedilmiş gizli dizileri okuyabilir. Ancak, iş yükü API 'SI şifreli gizli dizileri eski biçimde yazamaz. Bir parola bir modülle yeniden şifrelendikten sonra yeni biçimde kaydedilir. Sürüm 1,2 ' de şifrelenen gizlilikler, sürüm 1,1 ' de aynı modülle okunamaz. Şifrelenmiş verileri konağa bağlı bir klasöre veya birime kalıcı yaparsanız, gerekli olduğunda düşürme özelliğini sürdürmek üzere yükseltmeden *önce* her zaman verilerin bir yedek kopyasını oluşturun.
 
 Herhangi bir güncelleştirme işlemini otomatikleştirmeye başlamadan önce, test makinelerinde çalıştığını doğrulayın.
 
@@ -267,9 +268,9 @@ Artık cihazlarınızda çalışan IoT Edge hizmeti güncelleştirildiğinden, [
 
 Azure IoT Edge, IoT Edge hizmetinin yeni sürümlerini düzenli olarak yayınlar. Her kararlı sürümden önce bir veya daha fazla sürüm adayı (RC) sürümü vardır. RC sürümleri, yayın için tüm planlı özellikleri içerir, ancak yine de test ve doğrulama işlemleri yapılır. Yeni bir özelliği erken test etmek istiyorsanız bir RC sürümü yükleyebilir ve GitHub aracılığıyla geri bildirim sağlayabilirsiniz.
 
-Sürüm adayı sürümleri, yayınların aynı numaralandırma kuralını izler, ancak **-RC** ve sonuna artımlı bir sayı eklenir. Sürüm adaylarını kararlı sürümlerle aynı [Azure IoT Edge yayınları](https://github.com/Azure/azure-iotedge/releases) listesinde görebilirsiniz. Örneğin, **1.0.9** önce gelen sürüm adaylarınızdan iki **1.0.9-RC5** ve **1.0.9-RC6** bulun. Ayrıca, RC sürümlerinin **yayın öncesi** etiketleriyle işaretlendiğini de görebilirsiniz.
+Sürüm adayı sürümleri, yayınların aynı numaralandırma kuralını izler, ancak **-RC** ve sonuna artımlı bir sayı eklenir. Sürüm adaylarını kararlı sürümlerle aynı [Azure IoT Edge yayınları](https://github.com/Azure/azure-iotedge/releases) listesinde görebilirsiniz. Örneğin, **1.2.0**'ten önce yayınlanan sürüm adaylarınızdan biri olan **1.2.0-RC4** bulun. Ayrıca, RC sürümlerinin **yayın öncesi** etiketleriyle işaretlendiğini de görebilirsiniz.
 
-IoT Edge Aracısı ve hub modülleri aynı kurala göre etiketlenmiş RC sürümlerine sahiptir. Örneğin, **MCR.Microsoft.com/azureiotedge-Hub:1.0.9-RC6**.
+IoT Edge Aracısı ve hub modülleri aynı kurala göre etiketlenmiş RC sürümlerine sahiptir. Örneğin, **MCR.Microsoft.com/azureiotedge-Hub:1.2.0-RC4**.
 
 Önizleme olarak, sürüm adayı sürümleri, normal yükleyicilerin hedefi olan en son sürüm olarak dahil değildir. Bunun yerine, sınamak istediğiniz RC sürümü için varlıkları el ile hedefleyebilirsiniz. Çoğu bölüm için, bir RC sürümüne yükleme veya güncelleştirme, IoT Edge diğer belirli sürümlerini hedefleyecek şekilde aynıdır.
 

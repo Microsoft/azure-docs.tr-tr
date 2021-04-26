@@ -7,12 +7,12 @@ ms.service: postgresql
 ms.topic: how-to
 ms.custom: subject-moving-resources
 ms.date: 06/29/2020
-ms.openlocfilehash: 204815d36baf9fe6e7fe8c0e194ac7acc14f72e4
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: e770eddc77c0c343880512695b2fdec44fd4d0af
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105606479"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106066560"
 ---
 # <a name="move-an-azure-database-for-azure-database-for-postgresql---single-server-to-another-region-by-using-the-azure-portal"></a>Azure veritabanı for PostgreSQL için Azure veritabanı-tek sunucu, Azure portal kullanarak başka bir bölgeye taşıma
 

@@ -4,10 +4,10 @@ description: Güvenlik önerileri kavramı ve bunların IoT Hub için Defender '
 ms.topic: conceptual
 ms.date: 02/16/2021
 ms.openlocfilehash: a9e33248354aab659694e39df605cc070fdaaf73
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104779350"
 ---
 # <a name="security-recommendations-for-iot-hub"></a>IoT Hub için güvenlik önerileri
@@ -21,7 +21,7 @@ Bu makalede, IoT Hub tetiklenebilecek önerilerin bir listesini bulacaksınız.
 
 Öneri uyarıları, ortamınızın güvenlik duruşunu iyileştirecek eylemler için Öngörüler ve öneriler sağlar.
 
-| Önem derecesi | Name | Veri Kaynağı | Açıklama |
+| Önem derecesi | Name | Veri Kaynağı | Description |
 |--|--|--|--|
 | Yüksek | Birden çok cihaz tarafından kullanılan özdeş kimlik doğrulama kimlik bilgileri | IoT Hub | IoT Hub kimlik doğrulama kimlik bilgileri birden çok cihaz tarafından kullanılır. Bu işlem, meşru bir cihazın kimliğine bürünerek uygun bir cihaz olduğunu gösterebilir. Yinelenen kimlik bilgileri kullanımı, kötü niyetli bir aktör tarafından cihaz kimliğe bürünme riskini artırır. |
 | Orta | Varsayılan IP filtresi ilkesi reddetme olmalıdır | IoT Hub | IP filtresi yapılandırması, izin verilen trafik için tanımlı kurallara sahip olmalıdır ve varsayılan olarak tüm diğer trafiği varsayılan olarak reddeder. |

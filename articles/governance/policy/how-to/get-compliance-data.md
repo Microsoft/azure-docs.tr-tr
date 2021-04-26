@@ -1,14 +1,14 @@
 ---
 title: İlke uyumluluk verilerini al
 description: Azure Ilke değerlendirmeleri ve etkileri uyumluluğu tespit edin. Azure kaynaklarınızın uyumluluk ayrıntılarını nasıl alabileceğinizi öğrenin.
-ms.date: 03/16/2021
+ms.date: 04/19/2021
 ms.topic: how-to
-ms.openlocfilehash: cdd23d685750fb8a5d3803f4b6030e7e67bbddce
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e1a9a7fcbbcbd7f490b2f665b40c7ed922ec61ee
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104598550"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864604"
 ---
 # <a name="get-compliance-data-of-azure-resources"></a>Azure kaynaklarının uyumluluk verilerini alın
 
@@ -35,6 +35,8 @@ Atanan ilkelerin ve girişimlerin değerlendirmeleri çeşitli olayların sonucu
 - Bir kapsama zaten atanmış olan bir ilke veya girişim güncellenir. Bu senaryonun değerlendirme çevrimi ve zamanlaması, bir kapsama yönelik yeni atama ile aynıdır.
 
 - Bir kaynak, Azure Resource Manager, REST API veya desteklenen bir SDK aracılığıyla atama ile bir kapsam içine dağıtılır veya güncelleştirilir. Bu senaryoda, tek tek kaynak için etkinlik olayı (ekleme, denetim, reddetme, dağıtma) ve uyumlu durum bilgileri portalda ve bu süre içinde 15 dakika daha sonra SDK 'larda kullanılabilir hale gelir. Bu olay diğer kaynakların değerlendirilmesine neden olmaz.
+
+- Bir abonelik (kaynak türü `Microsoft.Resource/subscriptions` ), abonelik kaynak türünü hedefleyen atanmış bir ilke tanımıyla bir [Yönetim grubu hiyerarşisi](../../management-groups/overview.md) içinde oluşturulur veya taşınır. Abonelik tarafından desteklenen efektlerin değerlendirmesi (denetim, Auditınotexist, deployIfNotExists, MODIFY), günlüğe kaydetme ve düzeltme eylemleri 30 dakika sürer.
 
 - [İlke muafiyeti](../concepts/exemption-structure.md) oluşturulur, güncellenir veya silinir. Bu senaryoda, ilgili atama tanımlanan muafiyet kapsamı için değerlendirilir.
 
@@ -355,7 +357,7 @@ Sonuçlarınız aşağıdaki örneğe benzer:
 
 İlke olaylarını sorgulama hakkında daha fazla bilgi için bkz. [Azure Ilke olayları](/rest/api/policy/policyevents) başvuru makalesi.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 Azure Ilkesi için [Azure CLI](/cli/azure/what-is-azure-cli) komut grubu, REST veya Azure PowerShell bulunan birçok işlemi içerir. Kullanılabilir komutların tam listesi için bkz. [Azure CLI-Azure Ilkesine genel bakış](/cli/azure/policy).
 

@@ -6,12 +6,12 @@ ms.author: valls
 ms.date: 2/12/2021
 ms.topic: conceptual
 ms.service: iot-hub-device-update
-ms.openlocfilehash: efe5d0171463668bda19a0d0445fc67f3734aaee
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 0d97287657b1e1fe7d540e8811c90794aaa5fece
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105561245"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739575"
 ---
 # <a name="device-update-for-iot-hub-agent-overview"></a>IoT Hub Aracısı için Cihaz Güncelleştirmesi'ne Genel Bakış
 
@@ -60,7 +60,7 @@ Simülatör güncelleştirme Işleyicisi simülatör platform katmanı tarafınd
 * [Görüntü güncelleştirme simülatörü](https://github.com/Azure/iot-hub-device-update/blob/main/src/content_handlers/swupdate_handler/inc/aduc/swupdate_simulator_handler.hpp)
 * [Paket güncelleştirmesi apt simülatörü](https://github.com/Azure/iot-hub-device-update/blob/main/src/content_handlers/apt_handler/inc/aduc/apt_simulator_handler.hpp)
 
-Note: AzureDeviceUpdateCore PnP arabirimindeki ınstalınstalte Criteria alanının içeriğin SHA256 karması olması gerekir. Bu, [Içeri aktarma bildirimi nesnesinde](import-update.md#create-device-update-import-manifest)mevcut olan karmadır. Ve arabirimi hakkında [daha fazla bilgi edinin](device-update-plug-and-play.md) `installedCriteria` `AzureDeviceUpdateCore` .
+Note: AzureDeviceUpdateCore PnP arabirimindeki ınstalınstalte Criteria alanının içeriğin SHA256 karması olması gerekir. Bu, [Içeri aktarma bildirimi nesnesinde](import-update.md#create-a-device-update-import-manifest)mevcut olan karmadır. Ve arabirimi hakkında [daha fazla bilgi edinin](device-update-plug-and-play.md) `installedCriteria` `AzureDeviceUpdateCore` .
 
 ### <a name="swupdate-update-handler"></a>`SWUpdate` Güncelleştirme Işleyicisi
 

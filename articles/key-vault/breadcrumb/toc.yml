@@ -49,6 +49,13 @@
               tocHref: /cli/azure/keyvault/secret
               topicHref: /azure/key-vault/
 - name: Azure
+  tocHref: /security/benchmark/azure/
+  topicHref: /azure/index
+  items:
+    - name: Key Vault
+      tocHref: /security/benchmark/azure/baselines
+      topicHref: /azure/key-vault/general/index
+- name: Azure
   tocHref: /sccm/
   topicHref: /azure/index
   items:

@@ -3,18 +3,19 @@ title: 'Hızlı başlangıç: Azure Resource Manager şablonu kullanarak ağ gü
 description: Ağ güvenlik grubu (NSG) akış günlüklerinin bir Azure Resource Manager şablonu (ARM şablonu) ve Azure PowerShell kullanarak programlı bir şekilde nasıl etkinleştirileceğini öğrenin.
 services: network-watcher
 author: damendo
-Customer intent: I need to enable the network security group flow logs by using an Azure Resource Manager template.
-ms.service: network-watcher
-ms.topic: quickstart
-ms.date: 01/07/2021
 ms.author: damendo
-ms.custom: subject-armqs
-ms.openlocfilehash: bc075e5074fe39ad38e45235af932b40fef78fce
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.date: 01/07/2021
+ms.topic: quickstart
+ms.service: network-watcher
+ms.custom:
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: df0ccb5bf5ecd60d80526085983e35abf58e9966
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102521875"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532446"
 ---
 # <a name="quickstart-configure-network-security-group-flow-logs-by-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak ağ güvenlik grubu akış günlüklerini yapılandırma
 

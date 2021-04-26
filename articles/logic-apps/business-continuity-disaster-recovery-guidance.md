@@ -3,15 +3,15 @@ title: İş sürekliliği ve olağanüstü durum kurtarma
 description: Verilerinizi korumak, kesintiye uğratan olayları hızla kurtarmak, kritik iş işlevleri için gereken kaynakları geri yüklemek ve Azure Logic Apps için iş sürekliliği sağlamak için stratejinizi tasarlayın
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, logicappspm
+ms.reviewer: estfan, logicappspm
 ms.topic: conceptual
-ms.date: 03/31/2020
-ms.openlocfilehash: 0a36cb468ebcb77c0614bffd0afc392df3655c20
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/24/2021
+ms.openlocfilehash: f974a99c59b19b5df7bf6ffcc66c2dc133743f0a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "89658200"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790548"
 ---
 # <a name="business-continuity-and-disaster-recovery-for-azure-logic-apps"></a>Azure Logic Apps için iş sürekliliği ve olağanüstü durum kurtarma
 
@@ -46,7 +46,7 @@ Yük devretme stratejisi için mantıksal uygulamalarınızın ve konumlarından
 
 * Her iki mantıksal uygulama örneği de aynı ana bilgisayar türüne sahiptir. Bu nedenle, her iki örnek de küresel çok kiracılı Azure 'daki bölgelere dağıtılır ya da her iki örnek de sesleri, mantıksal uygulamalarınızın bir Azure sanal ağındaki kaynaklara doğrudan erişmesini sağlayan bir şekilde dağıtılır. En iyi uygulamalar ve BCDR 'nin eşleştirilmiş bölgeleri hakkında daha fazla bilgi için bkz. [iş sürekliliği ve olağanüstü durum kurtarma (BCDR): Azure eşlenmiş bölgeler](../best-practices-availability-paired-regions.md).
 
-  Örneğin, birincil mantıksal uygulama bir ıSE içinde çalıştırıldığında ve [Ise sürümlü bağlayıcıları](../connectors/apis-list.md#ise-connectors), Azure sanal ağındaki kaynakları çağırmak için http eylemlerini veya her ikisini de kullandığında, birincil ve ikincil konumların her ikisi de bit olmalıdır. Bu senaryoda, ikincil mantıksal uygulamanız aynı zamanda ikincil konumda birincil mantıksal uygulama olarak benzer bir kuruluma sahip olmalıdır.
+  Örneğin, birincil mantıksal uygulama bir ıSE içinde çalıştırıldığında ve [Ise sürümlü bağlayıcıları](../connectors/managed.md#ise-connectors), Azure sanal ağındaki kaynakları çağırmak için http eylemlerini veya her ikisini de kullandığında, birincil ve ikincil konumların her ikisi de bit olmalıdır. Bu senaryoda, ikincil mantıksal uygulamanız aynı zamanda ikincil konumda birincil mantıksal uygulama olarak benzer bir kuruluma sahip olmalıdır.
 
   > [!NOTE]
   > Daha gelişmiş senaryolar için hem çok kiracılı Azure hem de bir ıSE 'yi konumlar olarak karıştırabilirsiniz. Ancak, [Logic Apps 'in BIR ıSE 'de nasıl çalıştığı, çok kiracılı Azure ile arasındaki farkları](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md#difference)göz önünde bulundurduğunuzdan ve anladığınızdan emin olun.

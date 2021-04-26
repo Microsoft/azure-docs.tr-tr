@@ -6,12 +6,12 @@ author: dlepow
 ms.author: apimpm
 ms.topic: tutorial
 ms.date: 12/10/2020
-ms.openlocfilehash: 0dea8e43d5f09b84c5795bc257cf3331ad919fcb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0090d981e93cee12f2feaaf7d2c12f341564f6ec
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101649555"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107482339"
 ---
 # <a name="tutorial-use-the-api-management-extension-for-visual-studio-code-to-import-and-manage-apis"></a>Öğretici: API 'Leri içeri ve yönetmek için Visual Studio Code API Management uzantısını kullanma
 
@@ -101,7 +101,7 @@ Bu bölümde API yanıtını dönüştüren API 'nize bazı ortak giden ilkeleri
 ### <a name="test-an-api-operation"></a>API işlemini test etme
 
 1. Gezgin bölmesinde, içeri aktardığınız *demo-Conference-API* altındaki **işlemler** düğümünü genişletin.
-1. *Gethoparlörler* gibi bir işlem seçin.
+1. *Gethoparlörler* gibi bir işlem seçin ve ardından işlemi sağ tıklatın ve **test işlemi**' ni seçin.
 1. Düzenleyici penceresinde, **OCP-apim-Subscription-Key**' ın yanındaki `{{SubscriptionKey}}` kopyaladığınız abonelik anahtarıyla değiştirin.
 1. **İstek gönder**’i seçin. 
 

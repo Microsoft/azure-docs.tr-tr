@@ -8,10 +8,10 @@ ms.topic: how-to
 ms.date: 06/22/2020
 ms.author: rogarana
 ms.openlocfilehash: 1dd2768c7541312b68e2a44a35fc4260d67c5655
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104587007"
 ---
 # <a name="part-four-mount-a-file-share-from-a-domain-joined-vm"></a>Dördüncü kısım: etki alanına katılmış bir VM 'den bir dosya paylaşma bağlama

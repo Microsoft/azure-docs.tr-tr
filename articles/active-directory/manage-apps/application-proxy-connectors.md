@@ -12,12 +12,12 @@ ms.date: 11/15/2018
 ms.author: kenwith
 ms.reviewer: japere
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f57d390ed71cb4e0e76972e02170afde7b13e4ae
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6b54e3cb3b4ce7eb8f541755df75e8d6a22eb7c2
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99253468"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575318"
 ---
 # <a name="understand-azure-ad-application-proxy-connectors"></a>Azure AD Uygulama Ara Sunucusu bağlayıcılarını anlama
 
@@ -65,7 +65,7 @@ Kullanılmayan bağlayıcıları el ile silmeniz gerekmez. Bir bağlayıcı çal
 
 ## <a name="automatic-updates"></a>Otomatik güncelleştirmeler
 
-Azure AD, dağıttığınız tüm bağlayıcılar için otomatik güncelleştirmeler sağlar. Uygulama proxy 'Si Bağlayıcı Güncelleştiricisi hizmeti çalıştığı sürece, bağlayıcılarınız otomatik olarak güncelleşmiş olur. Sunucunuzda Bağlayıcı Güncelleştiricisi hizmetini görmüyorsanız, tüm güncelleştirmeleri almak için [bağlayıcınızı yeniden yüklemeniz](application-proxy-add-on-premises-application.md) gerekir.
+Azure AD, dağıttığınız tüm bağlayıcılar için otomatik güncelleştirmeler sağlar. Uygulama proxy 'Si Bağlayıcı Güncelleştiricisi hizmeti çalıştığı sürece, bağlayıcılar [en son ana bağlayıcı sürümüyle otomatik olarak güncellidir](application-proxy-faq.yml#why-is-my-connector-still-using-an-older-version-and-not-auto-upgraded-to-latest-version-) . Sunucunuzda Bağlayıcı Güncelleştiricisi hizmetini görmüyorsanız, tüm güncelleştirmeleri almak için [bağlayıcınızı yeniden yüklemeniz](application-proxy-add-on-premises-application.md) gerekir.
 
 Otomatik güncelleştirme 'nin bağlayıcınıza gelmesini beklemek istemiyorsanız, el ile yükseltme yapabilirsiniz. Bağlayıcının bulunduğu sunucudaki [bağlayıcı indirme sayfasına](https://download.msappproxy.net/subscription/d3c8b69d-6bf7-42be-a529-3fe9c2e70c90/connector/download) gidin ve **İndir**' i seçin. Bu işlem, yerel bağlayıcı için yükseltmeyi devre dışı bırakır.
 

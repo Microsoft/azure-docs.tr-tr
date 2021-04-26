@@ -14,12 +14,12 @@ ms.workload: identity
 ms.date: 06/17/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: 31dabcf77f0db76047919fa76d00f1c5ed3c96d6
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d3d05ba65e0d3918f1651c36cd17700ebf74de76
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97369149"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778346"
 ---
 # <a name="create-or-update-azure-custom-roles-using-azure-cli"></a>Azure CLı kullanarak Azure özel rolleri oluşturma veya güncelleştirme
 
@@ -41,7 +41,7 @@ ms.locfileid: "97369149"
 
 ## <a name="list-custom-roles"></a>Özel rolleri listeleme
 
-Atama için kullanılabilen özel rolleri listelemek için [az role Definition List](/cli/azure/role/definition#az-role-definition-list)kullanın. Aşağıdaki örnekte, geçerli abonelikteki tüm özel roller listelenmektedir.
+Atama için kullanılabilen özel rolleri listelemek için [az role Definition List](/cli/azure/role/definition#az_role_definition_list)kullanın. Aşağıdaki örnekte, geçerli abonelikteki tüm özel roller listelenmektedir.
 
 ```azurecli
 az role definition list --custom-role-only true --output json --query '[].{roleName:roleName, roleType:roleType}'
@@ -66,7 +66,7 @@ az role definition list --custom-role-only true --output json --query '[].{roleN
 
 ## <a name="list-a-custom-role-definition"></a>Özel bir rol tanımı listeleme
 
-Özel bir rol tanımı listelemek için [az role Definition List](/cli/azure/role/definition#az-role-definition-list)kullanın. Bu, yerleşik bir rol için kullandığınız komuttur.
+Özel bir rol tanımı listelemek için [az role Definition List](/cli/azure/role/definition#az_role_definition_list)kullanın. Bu, yerleşik bir rol için kullandığınız komuttur.
 
 ```azurecli
 az role definition list --name {roleName}
@@ -140,7 +140,7 @@ az role definition list --name "Virtual Machine Operator" --output json --query 
 
 ## <a name="create-a-custom-role"></a>Özel rol oluşturma
 
-Özel bir rol oluşturmak için [az role Definition Create](/cli/azure/role/definition#az-role-definition-create)kullanın. Rol tanımı bir JSON açıklaması veya JSON açıklaması içeren bir dosyanın yolu olabilir.
+Özel bir rol oluşturmak için [az role Definition Create](/cli/azure/role/definition#az_role_definition_create)kullanın. Rol tanımı bir JSON açıklaması veya JSON açıklaması içeren bir dosyanın yolu olabilir.
 
 ```azurecli
 az role definition create --role-definition {roleDefinition}
@@ -183,7 +183,7 @@ az role definition create --role-definition ~/roles/vmoperator.json
 
 ## <a name="update-a-custom-role"></a>Özel rolü güncelleştirme
 
-Özel bir rolü güncelleştirmek için öncelikle rol tanımını almak üzere [az role Definition List](/cli/azure/role/definition#az-role-definition-list) öğesini kullanın. İkinci olarak, rol tanımında istenen değişiklikleri yapın. Son olarak, güncelleştirilmiş rol tanımını kaydetmek için [az role Definition Update](/cli/azure/role/definition#az-role-definition-update) kullanın.
+Özel bir rolü güncelleştirmek için öncelikle rol tanımını almak üzere [az role Definition List](/cli/azure/role/definition#az_role_definition_list) öğesini kullanın. İkinci olarak, rol tanımında istenen değişiklikleri yapın. Son olarak, güncelleştirilmiş rol tanımını kaydetmek için [az role Definition Update](/cli/azure/role/definition#az_role_definition_update) kullanın.
 
 ```azurecli
 az role definition update --role-definition {roleDefinition}
@@ -228,7 +228,7 @@ az role definition update --role-definition ~/roles/vmoperator.json
 
 ## <a name="delete-a-custom-role"></a>Özel rolü silme
 
-Özel bir rolü silmek için [az role Definition Delete](/cli/azure/role/definition#az-role-definition-delete)kullanın. Silinecek rolü belirtmek için rol adını veya rol KIMLIĞINI kullanın. Rol KIMLIĞINI öğrenmek için [az role Definition List](/cli/azure/role/definition#az-role-definition-list)kullanın.
+Özel bir rolü silmek için [az role Definition Delete](/cli/azure/role/definition#az_role_definition_delete)kullanın. Silinecek rolü belirtmek için rol adını veya rol KIMLIĞINI kullanın. Rol KIMLIĞINI öğrenmek için [az role Definition List](/cli/azure/role/definition#az_role_definition_list)kullanın.
 
 ```azurecli
 az role definition delete --name {roleNameOrId}

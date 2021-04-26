@@ -11,18 +11,18 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb, dawoo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 09f98e3d6c7997d9cae2737b25f4323021e29bfb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 84c8b82219f2b2aea39bbcd23f030243d9ea8635
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98892448"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861814"
 ---
 # <a name="how-to-block-legacy-authentication-to-azure-ad-with-conditional-access"></a>Nasıl yapılır: Koşullu Erişimle Azure AD'de eski kimlik doğrulama girişimlerini engelleme   
 
 Kullanıcılarınıza bulut uygulamalarınıza kolay erişim sağlamak için Azure Active Directory (Azure AD) eski kimlik doğrulaması dahil olmak üzere çok çeşitli kimlik doğrulama protokollerini destekler. Ancak, eski protokoller Multi-Factor Authentication 'ı (MFA) desteklemez. MFA birçok ortamda, kimlik hırsızlığına yönelik ortak bir gereksinimdir. 
 
-Alex Weinert, Microsoft 'taki kimlik Güvenliği Direktörü, 12 Mart 2020 ' de, [kuruluşunuzda eski kimlik doğrulamasını engellemek Için yeni araçlar](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/new-tools-to-block-legacy-authentication-in-your-organization/ba-p/1225302#) , kuruluşların eski kimlik doğrulamasını nasıl engelleyebileceklerini ve Microsoft 'un bu görevi gerçekleştirmek için sağladığı ek araçları vurgular:
+Alex Weinert, Microsoft 'taki kimlik Güvenliği Direktörü, 12 Mart 2020 ' de, [kuruluşunuzda eski kimlik doğrulamasını engellemek Için yeni araçlar](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/new-tools-to-block-legacy-authentication-in-your-organization/ba-p/1225302#) , kuruluşların eski kimlik doğrulamasını nasıl engelleyebileceklerini ve Microsoft 'un bu görevi gerçekleştirmek için sağladığı diğer araçların ne olduğunu vurgular:
 
 > MFA 'nın etkili olabilmesi için eski kimlik doğrulamasını da engellemeniz gerekir. Bunun nedeni, POP, SMTP, IMAP ve MAPI gibi eski kimlik doğrulama protokollerinin MFA 'ya zorlayamadığı için, bu nedenle bunları, duyuru işlemleri için tercih edilen giriş noktaları kuruluşunuza saldırıyor...
 > 
@@ -33,7 +33,7 @@ Alex Weinert, Microsoft 'taki kimlik Güvenliği Direktörü, 12 Mart 2020 ' de,
 > - Eski kimlik doğrulama 67 deneyimini devre dışı bırakmış olan kuruluşların Azure AD hesapları, eski kimlik doğrulamasının etkin olduğu kadardan daha az sayıda kombinasyon
 >
 
-Ortamınız, kiracınızın korumasını geliştirmek için eski kimlik doğrulamasını engellemeye hazırsanız, bu hedefi koşullu erişimle gerçekleştirebilirsiniz. Bu makalede, kiracınız için eski kimlik doğrulamasını engelleyen koşullu erişim ilkelerini nasıl yapılandırabileceğiniz açıklanmaktadır.
+Ortamınız, kiracınızın korumasını geliştirmek için eski kimlik doğrulamasını engellemeye hazırsanız, bu hedefi koşullu erişimle gerçekleştirebilirsiniz. Bu makalede, kiracınız için eski kimlik doğrulamasını engelleyen koşullu erişim ilkelerini nasıl yapılandırabileceğiniz açıklanmaktadır. Koşullu erişimi içeren lisansları olmayan müşteriler, eski kimlik doğrulamasını engellemek için [güvenlik varsayılanlarını](../fundamentals/concept-fundamentals-security-defaults.md)kullanabilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -46,7 +46,7 @@ Azure AD, eski kimlik doğrulama dahil olmak üzere en yaygın olarak kullanıla
 - Daha eski Microsoft Office uygulamalar
 - POP, IMAP ve SMTP gibi posta protokollerini kullanan uygulamalar
 
-Tek faktörlü kimlik doğrulaması (örneğin, Kullanıcı adı ve parola) bu günlerde yeterli değil. Parolaların tahmin edilmesi kolay olduğu ve bizim (insanların) iyi parola seçerken kötü olduğu için parolalar hatalı. Parolalar ayrıca kimlik avı ve parola spreyi gibi çeşitli saldırılara karşı savunmasız kalır. Parola tehditlerine karşı korumak için yapabileceğiniz en kolay şeylerden biri Multi-Factor Authentication (MFA) uygulamasıdır. MFA ile, bir saldırgan kullanıcının parolasını elinde bıraksa bile, parola kimlik doğrulaması ve verilere erişmek için tek başına yeterli değildir.
+Tek faktörlü kimlik doğrulaması (örneğin, Kullanıcı adı ve parola) bu günlerde yeterli değil. Parolaların tahmin edilmesi kolay olduğu ve bizim (insanların) iyi parola seçerken kötü olduğu için parolalar hatalı. Parolalar ayrıca kimlik avı ve parola spreyi gibi çeşitli saldırılara karşı savunmasızdır. Parola tehditlerine karşı korumak için yapabileceğiniz en kolay şeylerden biri Multi-Factor Authentication (MFA) uygulamasıdır. MFA ile, bir saldırgan kullanıcının parolasını elinde bıraksa bile, parola kimlik doğrulaması ve verilere erişmek için tek başına yeterli değildir.
 
 Eski kimlik doğrulaması kullanan uygulamaların kiracının kaynaklarına erişmesini nasıl önleyebilirim? Öneri yalnızca bir koşullu erişim ilkesiyle engellenmeniz önerilir. Gerekirse, yalnızca belirli kullanıcıların ve belirli ağ konumlarının eski kimlik doğrulamasına dayalı uygulamalar kullanmasına izin verebilirsiniz.
 
@@ -85,7 +85,7 @@ Dizininizde eski kimlik doğrulamasını engelleyebilmeniz için önce, kullanı
 1. **Filtre Ekle**  >  **Istemci uygulaması** > eski tüm kimlik doğrulama protokollerini seçin. Seçimlerinizi uygulamak ve iletişim kutusunu kapatmak için filtreleme iletişim kutusunun dışında ' yı seçin.
 1. [Yeni oturum açma etkinliği raporları önizlemesini](../reports-monitoring/concept-all-sign-ins.md)etkinleştirdiyseniz, yukarıdaki adımları **Kullanıcı oturum açma işlemleri (etkileşimli olmayan)** sekmesinde da yineleyin.
 
-Filtreleme yalnızca eski kimlik doğrulama protokolleri tarafından yapılan oturum açma girişimlerini gösterir. Her bir bireysel oturum açma girişimine tıkladığınızda ek ayrıntılar gösterilecektir. **Temel bilgi** sekmesindeki **istemci uygulaması** alanı, hangi eski kimlik doğrulama protokolünün kullanıldığını gösterir.
+Filtreleme yalnızca eski kimlik doğrulama protokolleri tarafından yapılan oturum açma girişimlerini gösterir. Her bir bireysel oturum açma girişimine tıkladığınızda daha fazla ayrıntı gösterilecektir. **Temel bilgi** sekmesindeki **istemci uygulaması** alanı, hangi eski kimlik doğrulama protokolünün kullanıldığını gösterir.
 
 Bu Günlükler, hangi kullanıcıların eski kimlik doğrulamasına bağlı olduğunu ve hangi uygulamaların kimlik doğrulama isteklerini yapmak için eski protokolleri kullandığını gösterir. Bu günlüklerde görünmeyen ve eski kimlik doğrulaması kullanmayan kullanıcılar için, yalnızca bu kullanıcılar için bir koşullu erişim ilkesi uygulayın.
 

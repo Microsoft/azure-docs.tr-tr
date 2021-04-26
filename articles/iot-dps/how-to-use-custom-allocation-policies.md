@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
 ms.custom: devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: 14a405dbab0460f841a5e9104dbfeff101568f44
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1432aee341509d8a5bdc9fffe89dd9bad33fc7de
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98919249"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107766506"
 ---
 # <a name="how-to-use-custom-allocation-policies"></a>Özel ayırma ilkeleri kullanma
 
@@ -58,7 +58,7 @@ Bu bölümde, **contoso Toalar bölümünü** ve **contoso ısı pumps bölümü
 > Bu makalede kullanılan komutlar, Batı ABD konumundaki sağlama hizmetini ve diğer kaynakları oluşturur. Kaynaklarınızın, cihaz sağlama hizmeti 'ni destekleyen en yakın bölgede oluşturulmasını öneririz. `az provider show --namespace Microsoft.Devices --query "resourceTypes[?resourceType=='ProvisioningServices'].locations | [0]" --out table` komutunu çalıştırarak veya [Azure Durumu](https://azure.microsoft.com/status/) sayfasına gidip "Cihaz Sağlama Hizmeti" için arama yaparak kullanılabilir konumların listesini görüntüleyebilirsiniz. Komutlarda, konumlar tek bir sözcük veya çok sözcüklü biçimde belirtilebilir; Örneğin: westus, Batı ABD, Batı ABD, vb. Değer büyük/küçük harfe duyarlı değildir. Konumu belirtirken birden çok sözcük biçimini kullanırsanız, değeri çift tırnak içine alın; örneğin, `-- location "West US"`.
 >
 
-1. [Az Group Create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturmak için Azure Cloud Shell kullanın. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır.
+1. [Az Group Create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturmak için Azure Cloud Shell kullanın. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır.
 
     Aşağıdaki örnek, *westus* bölgesinde *contoso-US-Resource-Group* adlı bir kaynak grubu oluşturur. Bu makalede oluşturulan tüm kaynaklar için bu grubu kullanmanız önerilir. Bu yaklaşım tamamlandığında Temizleme işlemi daha kolay hale getirir.
 
@@ -66,7 +66,7 @@ Bu bölümde, **contoso Toalar bölümünü** ve **contoso ısı pumps bölümü
     az group create --name contoso-us-resource-group --location westus
     ```
 
-2. [Az IoT DPS Create](/cli/azure/iot/dps#az-iot-dps-create) komutuyla bir cihaz sağlama HIZMETI (DPS) oluşturmak için Azure Cloud Shell kullanın. Sağlama hizmeti *contoso-US-Resource-Group*' a eklenecektir.
+2. [Az IoT DPS Create](/cli/azure/iot/dps#az_iot_dps_create) komutuyla bir cihaz sağlama HIZMETI (DPS) oluşturmak için Azure Cloud Shell kullanın. Sağlama hizmeti *contoso-US-Resource-Group*' a eklenecektir.
 
     Aşağıdaki örnek, *westus* konumunda *contoso-sağlama-Service-1098* adlı bir sağlama hizmeti oluşturur. Benzersiz bir hizmet adı kullanmanız gerekir. Hizmet adında **1098** yerine kendi son ekini oluşturun.
 
@@ -76,7 +76,7 @@ Bu bölümde, **contoso Toalar bölümünü** ve **contoso ısı pumps bölümü
 
     Bu komutun tamamlanması birkaç dakika sürebilir.
 
-3. [Az IoT Hub Create](/cli/azure/iot/hub#az-iot-hub-create) komutuyla **contoso Toave bölüm** IoT hub 'ını oluşturmak için Azure Cloud Shell kullanın. IoT Hub 'ı *contoso-US-Resource-Group*' a eklenecektir.
+3. [Az IoT Hub Create](/cli/azure/iot/hub#az_iot_hub_create) komutuyla **contoso Toave bölüm** IoT hub 'ını oluşturmak için Azure Cloud Shell kullanın. IoT Hub 'ı *contoso-US-Resource-Group*' a eklenecektir.
 
     Aşağıdaki örnek, *westus* konumunda *contoso-TOA,-hub-1098* adlı bir IoT Hub 'ı oluşturur. Benzersiz bir hub adı kullanmanız gerekir. Merkez adında **1098** yerine kendi son ekini oluşturun. 
 
@@ -89,7 +89,7 @@ Bu bölümde, **contoso Toalar bölümünü** ve **contoso ısı pumps bölümü
 
     Bu komutun tamamlanması birkaç dakika sürebilir.
 
-4. [Az IoT Hub Create](/cli/azure/iot/hub#az-iot-hub-create) komutuyla **contoso ısı pumps bölüm** IoT hub 'ını oluşturmak için Azure Cloud Shell kullanın. Bu IoT Hub 'ı, *contoso-US-Resource-Group*' a da eklenecektir.
+4. [Az IoT Hub Create](/cli/azure/iot/hub#az_iot_hub_create) komutuyla **contoso ısı pumps bölüm** IoT hub 'ını oluşturmak için Azure Cloud Shell kullanın. Bu IoT Hub 'ı, *contoso-US-Resource-Group*' a da eklenecektir.
 
     Aşağıdaki örnek, *westus* konumunda *contoso-heatpumps-hub-1098* adlı bir IoT Hub 'ı oluşturur. Benzersiz bir hub adı kullanmanız gerekir. Merkez adında **1098** yerine kendi son ekini oluşturun. 
 

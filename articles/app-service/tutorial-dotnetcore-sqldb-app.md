@@ -6,12 +6,12 @@ ms.topic: tutorial
 ms.date: 06/20/2020
 ms.custom: devx-track-csharp, mvc, cli-validate, seodec18, devx-track-azurecli
 zone_pivot_groups: app-service-platform-windows-linux
-ms.openlocfilehash: bafebcc54e4cbde87e8deb776eff227fc99035cc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 52a5b127312ef979791d17b27ca67b21a779e310
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98623863"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765766"
 ---
 # <a name="tutorial-build-an-aspnet-core-and-azure-sql-database-app-in-azure-app-service"></a>Öğretici: Azure App Service ASP.NET Core ve Azure SQL veritabanı uygulaması oluşturma
 
@@ -95,7 +95,7 @@ SQL Veritabanı için bu öğreticide [Azure SQL Veritabanı](/azure/sql-databas
 
 ### <a name="create-a-sql-database-logical-server"></a>SQL Veritabanı mantıksal sunucusu oluşturma
 
-Cloud Shell, komutuyla bir SQL veritabanı mantıksal sunucusu oluşturun [`az sql server create`](/cli/azure/sql/server#az-sql-server-create) .
+Cloud Shell, komutuyla bir SQL veritabanı mantıksal sunucusu oluşturun [`az sql server create`](/cli/azure/sql/server#az_sql_server_create) .
 
 *\<server-name>* Yer tutucusunu *benzersiz* bir SQL veritabanı adıyla değiştirin. Bu ad, genel olarak benzersiz SQL veritabanı uç noktasının parçası olarak kullanılır `<server-name>.database.windows.net` . Geçerli karakterler şunlardır `a` - `z` `0` - `9` `-` . Ayrıca, ve ' yi *\<db-username>* *\<db-password>* tercih ettiğiniz bir Kullanıcı adı ve parolayla değiştirin. 
 
@@ -126,7 +126,7 @@ SQL Veritabanı mantıksal sunucusu oluşturulduğunda Azure CLI, aşağıdaki �
 
 ### <a name="configure-a-server-firewall-rule"></a>Sunucu güvenlik duvarı kurallarını yapılandırma
 
-[`az sql server firewall create`](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-create) komutunu kullanarak [Azure SQL Veritabanı sunucusu düzeyinde güvenlik duvarı kuralı](../azure-sql/database/firewall-configure.md) oluşturun. Hem başlangıç hem bitiş IP’si 0.0.0.0 olarak ayarlandığında, güvenlik duvarı yalnızca diğer Azure kaynakları için açılır. 
+[`az sql server firewall create`](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_create) komutunu kullanarak [Azure SQL Veritabanı sunucusu düzeyinde güvenlik duvarı kuralı](../azure-sql/database/firewall-configure.md) oluşturun. Hem başlangıç hem bitiş IP’si 0.0.0.0 olarak ayarlandığında, güvenlik duvarı yalnızca diğer Azure kaynakları için açılır. 
 
 ```azurecli-interactive
 az sql server firewall-rule create --resource-group myResourceGroup --server <server-name> --name AllowAzureIps --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
@@ -144,7 +144,7 @@ az sql server firewall-rule create --name AllowLocalClient --server <server-name
 
 ### <a name="create-a-database"></a>Veritabanı oluşturma
 
-[`az sql db create`](/cli/azure/sql/db#az-sql-db-create) komutunu kullanarak sunucuda [S0 performans düzeyine](../azure-sql/database/service-tiers-dtu.md) sahip bir veritabanı oluşturun.
+[`az sql db create`](/cli/azure/sql/db#az_sql_db_create) komutunu kullanarak sunucuda [S0 performans düzeyine](../azure-sql/database/service-tiers-dtu.md) sahip bir veritabanı oluşturun.
 
 ```azurecli-interactive
 az sql db create --resource-group myResourceGroup --server <server-name> --name coreDB --service-objective S0
@@ -152,7 +152,7 @@ az sql db create --resource-group myResourceGroup --server <server-name> --name 
 
 ### <a name="create-connection-string"></a>Bağlantı dizesi oluşturma
 
-Komutunu kullanarak bağlantı dizesini alın [`az sql db show-connection-string`](/cli/azure/sql/db#az-sql-db-show-connection-string) .
+Komutunu kullanarak bağlantı dizesini alın [`az sql db show-connection-string`](/cli/azure/sql/db#az_sql_db_show_connection_string) .
 
 ```azurecli-interactive
 az sql db show-connection-string --client ado.net --server <server-name> --name coreDB
@@ -263,7 +263,7 @@ Bu adımda, SQL Veritabanı’na bağlı .NET Core uygulamanızı App Service’
 
 ### <a name="configure-connection-string"></a>Bağlantı dizesini Yapılandır
 
-Azure uygulamanıza yönelik bağlantı dizelerini ayarlamak için [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) Cloud Shell komutunu kullanın. Aşağıdaki komutta, *\<app-name>* ve *\<connection-string>* parametresini, daha önce oluşturduğunuz bağlantı dizesiyle değiştirin.
+Azure uygulamanıza yönelik bağlantı dizelerini ayarlamak için [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) Cloud Shell komutunu kullanın. Aşağıdaki komutta, *\<app-name>* ve *\<connection-string>* parametresini, daha önce oluşturduğunuz bağlantı dizesiyle değiştirin.
 
 ```azurecli-interactive
 az webapp config connection-string set --resource-group myResourceGroup --name <app-name> --settings MyDbConnection="<connection-string>" --connection-string-type SQLAzure
@@ -464,7 +464,7 @@ ASP.NET Core uygulama Azure App Service çalışırken konsol günlüklerini Clo
 - `Microsoft.Extensions.Logging.AzureAppServices` *Dotnetcoressqldb. csproj* içinde öğesine bir başvuru içerir.
 - `loggerFactory.AddAzureWebAppDiagnostics()` *Program. cs* içindeki çağrılar.
 
-App Service ASP.NET Core [günlük düzeyini](/aspnet/core/fundamentals/logging#log-level) varsayılan düzeyden olarak ayarlamak için `Information` `Error` , [`az webapp log config`](/cli/azure/webapp/log#az-webapp-log-config) Cloud Shell komutunu kullanın.
+App Service ASP.NET Core [günlük düzeyini](/aspnet/core/fundamentals/logging#log-level) varsayılan düzeyden olarak ayarlamak için `Information` `Error` , [`az webapp log config`](/cli/azure/webapp/log#az_webapp_log_config) Cloud Shell komutunu kullanın.
 
 ```azurecli-interactive
 az webapp log config --name <app-name> --resource-group myResourceGroup --application-logging filesystem --level information
@@ -473,7 +473,7 @@ az webapp log config --name <app-name> --resource-group myResourceGroup --applic
 > [!NOTE]
 > Projenin günlük düzeyi zaten `Information` *appsettings.js* öğesinde olarak ayarlanmıştır.
 
-Günlük akışını başlatmak için [`az webapp log tail`](/cli/azure/webapp/log#az-webapp-log-tail) Cloud Shell komutunu kullanın.
+Günlük akışını başlatmak için [`az webapp log tail`](/cli/azure/webapp/log#az_webapp_log_tail) Cloud Shell komutunu kullanın.
 
 ```azurecli-interactive
 az webapp log tail --name <app-name> --resource-group myResourceGroup

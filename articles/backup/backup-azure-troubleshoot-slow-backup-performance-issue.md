@@ -3,12 +3,12 @@ title: Dosya ve klasörlerin yavaş yedeklenmesinde sorun giderme
 description: Azure Backup performans sorunlarının nedenini tanılamanıza yardımcı olması için sorun giderme kılavuzu sağlar
 ms.topic: troubleshooting
 ms.date: 07/05/2019
-ms.openlocfilehash: b3f2ac343ef4a703f347ec8a57f242a636bb32d2
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 791f0edf5f50d27147e402f09e7a3e4c2ea7ca43
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "88824024"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107518533"
 ---
 # <a name="troubleshoot-slow-backup-of-files-and-folders-in-azure-backup"></a>Azure Backup’ta dosya ve klasörlerin yavaş yedekleme sorunlarını giderme
 
@@ -21,7 +21,7 @@ Bu makalede, Azure Backup kullanırken dosyalar ve klasörler için yavaş yedek
 
 Sorun giderme sorunlarını gidermeye başlamadan önce [en son Azure Backup aracısını](https://aka.ms/azurebackup_agent)indirip yüklemenizi öneririz. Çeşitli sorunları gidermek, özellikler eklemek ve performansı artırmak için yedekleme aracısında sık sık güncelleştirmeler yaptık.
 
-Ayrıca, yaygın yapılandırma sorunlarından biriyle karşılaşmadığınızdan emin olmak için [Azure Backup hizmeti hakkında SSS](backup-azure-backup-faq.md) 'yi incelemenizi öneririz.
+Ayrıca, yaygın yapılandırma sorunlarından biriyle karşılaşmadığınızdan emin olmak için [Azure Backup hizmeti hakkında SSS](backup-azure-backup-faq.yml) 'yi incelemenizi öneririz.
 
 [!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
@@ -99,4 +99,4 @@ Büyük diskleri yedeklemeye çalışıyorsanız, ilk yedekleme için [Azure Dat
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Dosya ve klasörleri yedekleme hakkında sık sorulan sorular](backup-azure-file-folder-backup-faq.md)
+* [Dosya ve klasörleri yedekleme hakkında sık sorulan sorular](backup-azure-file-folder-backup-faq.yml)

@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/14/2020
 ms.author: duau
-ms.openlocfilehash: 1727193faa028a1d681f2a74df950afeb9570ec9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e8462b98aee1d34b6c7a2ed671667223eca45a25
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91270058"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106551926"
 ---
 # <a name="tutorial-add-security-headers-with-rules-engine"></a>Öğretici: kural altyapısına güvenlik üst bilgileri ekleme
 
@@ -41,6 +41,9 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 1. Bu üst bilgiyi bu rotaya yönelik tüm gelen isteklere yanıt olarak **eklemek için, bu üstbilgiyi Ekle olarak** ayarlayın.
 
 1. Üst bilgi adını ekleyin: **Content-Security-Policy** ve bu üstbilginin kabul etmesi gereken değerleri tanımlayın. Bu senaryoda, *"Script-src ' Self ' öğesini seçtik https://apiphany.portal.azure-api.net .*
+
+   > [!NOTE]
+   > Üst bilgi değerleri 128 karakterle sınırlıdır.
 
 1. Yapılandırmanıza istediğiniz kuralların tümünü ekledikten sonra tercih ettiğiniz rotaya gidip kural motoru yapılandırmanızı yol kuralınız ile ilişkilendirmeyin. Kuralın çalışmasını sağlamak için bu adım gereklidir. 
 

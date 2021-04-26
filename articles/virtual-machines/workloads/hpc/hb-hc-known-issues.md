@@ -5,24 +5,27 @@ author: vermagit
 ms.service: virtual-machines
 ms.subservice: hpc
 ms.topic: article
-ms.date: 03/25/2021
+ms.date: 04/16/2021
 ms.author: amverma
 ms.reviewer: cynthn
-ms.openlocfilehash: d8c3a2d961cc5b6fd719b77dae07b6e46c3d8b65
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: f5bdae17126048da153f70bf27609bcc4b92fe21
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105604847"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599596"
 ---
 # <a name="known-issues-with-h-series-and-n-series-vms"></a>H serisi ve N serisi VM’lerdeki bilinen sorunlar
 
 Bu makale, [H serisi](../../sizes-hpc.md) ve [N SERISI](../../sizes-gpu.md) HPC ve GPU VM 'lerini kullanırken en son yaygın sorunları ve çözümlerini listemaya çalışır.
 
+## <a name="qp0-access-restriction"></a>qp0 erişim kısıtlaması
+
+Güvenlik açıklarına neden olan alt düzey donanım erişimini engellemek için, 0 kuyruk çifti Konuk VM 'Ler tarafından erişilemez. Bu yalnızca, yalnızca ConnectX InfiniBand NIC yönetimi ile ilişkili eylemleri ve ibdiagnet gibi bazı InfiniBand tanılamayı (son kullanıcı uygulamaları değil) etkilemelidir.
+
 ## <a name="mofed-installation-on-ubuntu"></a>Ubuntu 'da MOFED yüklemesi
-Ubuntu-18,04 ' de, Mellanox on çekirdekler `5.4.0-1039-azure #42` ve daha yeni bir sürümü ile birlikte VM önyükleme süresi yaklaşık 30 dakika boyunca artmaya neden oldu. Bu, hem Mellanox OFED Versions 5.2-1.0.4.0 ve 5.2-2.2.0.0 sürümleri için bildirilmiştir.
-Geçici çözüm, çekirdeği güncelleştirmek için **kurallı: UbuntuServer: 18_04-LTS-Gen2:18.04.202101290** Market Image veya daha eski bir sürümü kullanmaktır.
-Bu sorunun daha yeni bir MOFED (TBD) ile çözümlenmesi beklenmektedir.
+Çekirdekler sürümüne ve daha yeni bir sürüme sahip Ubuntu-18,04 tabanlı Market VM görüntülerinde `5.4.0-1039-azure #42` , bazı durumlarda, bazı durumlarda VM önyüklemesi süresi en fazla 30 dakika kadar bir artış olduğundan, bazı eski Mellanox 'ler uyumsuz olur. Bu, hem Mellanox OFED Versions 5.2-1.0.4.0 ve 5.2-2.2.0.0 sürümleri için bildirilmiştir. Bu sorun, Mellanox OFED 5.3-1.0.0.1 ile çözümlenir.
+Uyumsuz olarak kullanılması gerekiyorsa, bir çözüm **kurallı: UbuntuServer: 18_04-LTS-Gen2:18.04.202101290** Market VM görüntüsünü veya daha eski bir sürümü kullanarak çekirdeği güncelleştirmemelidir.
 
 ## <a name="mpi-qp-creation-errors"></a>MPı QP oluşturma hataları
 Herhangi bir MPI iş yüklerini çalıştırmak için, aşağıda gösterildiği gibi InfiniBand QP oluşturma hataları oluşturulur, sanal makineyi yeniden başlatmayı ve iş yükünü yeniden denemeyi öneririz. Bu sorun gelecekte düzeltilecektir.
@@ -72,10 +75,6 @@ Bu ' Cloud-init on Ubuntu ile yinelenen MAC, bilinen bir sorundur. Bu, yeni çek
       version: 2
     EOF
     ```
-
-## <a name="qp0-access-restriction"></a>qp0 erişim kısıtlaması
-
-Güvenlik açıklarına neden olan alt düzey donanım erişimini engellemek için, 0 kuyruk çifti Konuk VM 'Ler tarafından erişilemez. Bu, genellikle yalnızca ConnectX-5 NIC yönetimi ile ilişkili eylemleri ve ıdiagnet gibi bazı InfiniBand tanılamayı çalıştırıyor, ancak son kullanıcı uygulamalarının kendisini etkilemez.
 
 ## <a name="dram-on-hb-series-vms"></a>DRAM on HB Serisi VM 'Ler
 

@@ -2,13 +2,13 @@
 title: Resource Manager ve klasik dağıtım
 description: Resource Manager dağıtım modeli ile klasik (veya Hizmet Yönetimi) dağıtım modeli arasındaki farklılıkları açıklar.
 ms.topic: conceptual
-ms.date: 02/06/2020
-ms.openlocfilehash: da260db84de0cc8bd092eb95491b7cc38df93a12
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/12/2021
+ms.openlocfilehash: c2009034c431e53d162cb0f2c1f0d9815c8d1942
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96185853"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306948"
 ---
 # <a name="azure-resource-manager-vs-classic-deployment-understand-deployment-models-and-the-state-of-your-resources"></a>Azure Resource Manager ile klasik dağıtım karşılaştırması: Dağıtım modellerini ve kaynaklarınızın durumunu anlama
 
@@ -17,7 +17,7 @@ ms.locfileid: "96185853"
 
 Bu makalede Azure Resource Manager ve klasik dağıtım modelleri hakkında bilgi edineceksiniz. Resource Manager ve klasik dağıtım modelleri, Azure çözümlerinizi dağıtmanın ve yönetmenin iki farklı yolunu temsil eder. Bu dağıtım modelleriyle iki farklı API kümesi aracılığıyla çalışırsınız ve dağıtılan kaynaklar önemli farklılıklar içerebilir. İki model birbirleriyle uyumlu değildir. Bu makalede söz konusu farklılıklar açıklanmaktadır.
 
-Microsoft, kaynakların dağıtımını ve yönetimini kolaylaştırmak amacıyla tüm yeni kaynaklar için Resource Manager kullanmanızı önerir. Microsoft, mümkünse var olan kaynakları Resource Manager ile yeniden dağıtmanızı önerir.
+Microsoft, kaynakların dağıtımını ve yönetimini kolaylaştırmak amacıyla tüm yeni kaynaklar için Resource Manager kullanmanızı önerir. Microsoft, mümkünse var olan kaynakları Resource Manager ile yeniden dağıtmanızı önerir. Cloud Services kullandıysanız çözümünüzü [Cloud Services (genişletilmiş destek)](../../cloud-services-extended-support/overview.md)geçirebilirsiniz.
 
 Kaynak Yöneticisi yeni başladıysanız, önce [Azure Resource Manager genel bakışta](overview.md)tanımlanan terminolojiyi gözden geçirmek isteyebilirsiniz.
 
@@ -40,7 +40,7 @@ Resource Manager eklendiğinde, tüm kaynaklar geriye dönük olarak varsayılan
 
 Dikkat edilmesi gereken üç senaryo vardır:
 
-1. Cloud Services, Kaynak Yöneticisi dağıtım modelini desteklemez.
+1. [Cloud Services (klasik)](../../cloud-services/cloud-services-choose-me.md) Kaynak Yöneticisi dağıtım modelini desteklemez. [Cloud Services (genişletilmiş destek)](../../cloud-services-extended-support/overview.md) Kaynak Yöneticisi dağıtım modelini destekler.
 2. Sanal makineler, depolama hesapları ve sanal ağlar hem Resource Manager hem de klasik dağıtım modellerini destekler.
 3. Diğer tüm Azure hizmetleri, Resource Manager’ı destekler.
 
@@ -95,7 +95,7 @@ Klasik dağıtım bileşenleri ve aralarındaki ilişkiler aşağıda verilmişt
 
 Bir sanal makineyi barındırmaya yönelik klasik çözüm şunları içerir:
 
-* Sanal makineleri barındırmaya yönelik bir kapsayıcı olarak görev yapan zorunlu bir bulut hizmeti (işlem). Sanal makineler, bir ağ arabirimi kartı ve Azure tarafından atanan bir IP adresi ile otomatik olarak sağlanır. Ayrıca, bulut hizmeti bir dış yük dengeleyici örneği, bir ortak IP adresi ve Windows tabanlı sanal makineler için uzak masaüstü ile uzaktan PowerShell trafiğine, Linux tabanlı sanal makineler için de Secure Shell (SSH) trafiğine izin veren varsayılan uç noktalar içerir.
+* Cloud Services (klasik), sanal makineleri barındırmak için bir kapsayıcı görevi görür (işlem). Sanal makineler, bir ağ arabirimi kartı ve Azure tarafından atanan bir IP adresi ile otomatik olarak sağlanır. Ayrıca, bulut hizmeti bir dış yük dengeleyici örneği, bir ortak IP adresi ve Windows tabanlı sanal makineler için uzak masaüstü ile uzaktan PowerShell trafiğine, Linux tabanlı sanal makineler için de Secure Shell (SSH) trafiğine izin veren varsayılan uç noktalar içerir.
 * İşletim sistemi, geçici ve ek veri diskleri (depolama) dahil olmak üzere, sanal makine için sanal sabit diskleri depolayan gerekli bir depolama hesabı.
 * Bir alt ağ yapısı oluşturabileceğiniz ve sanal makinenin bulunduğu alt ağı seçebileceğiniz (ağ) ek bir kapsayıcı görevi gören isteğe bağlı bir sanal ağ.
 

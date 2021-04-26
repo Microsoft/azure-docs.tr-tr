@@ -6,14 +6,14 @@ ms.author: amverma
 ms.service: virtual-machines
 ms.subservice: hpc
 ms.topic: overview
-ms.date: 03/18/2021
+ms.date: 04/09/2021
 ms.reviewer: cynthn
-ms.openlocfilehash: 65b37a8c07e083f5e9809812e2d4446cc48717d1
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 554764b89e5da4cd6777ec89fcb2f2d5ad104ebf
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104720602"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600276"
 ---
 # <a name="high-performance-computing-on-infiniband-enabled-h-series-and-n-series-vms"></a>InfiniBand etkin H serisi ve N serisi VM 'lerde yüksek performanslı bilgi işlem
 
@@ -47,4 +47,5 @@ Dördüncü, performans ve ölçeklenebilirlik için, [HBv3-Series genel](hbv3-s
 - InfiniBand etkin [H serisi](../../sizes-hpc.md) ve [N serisi](../../sizes-gpu.md) VM 'ler [yapılandırmak ve iyileştirmek](configure.md) hakkında bilgi edinin.
 - Performans ve ölçeklenebilirlik için iş yüklerini en iyi şekilde yapılandırma hakkında bilgi edinmek için [HBv3-Series genel bakış](hb-series-overview.md) ve [HC Serisi genel bakışı](hc-series-overview.md) gözden geçirin
 - [Azure Işlem Tech Community bloglarında](https://techcommunity.microsoft.com/t5/azure-compute/bg-p/AzureCompute)en son Duyurular, HPC iş yükü örnekleri ve performans sonuçları hakkında bilgi edinin.
+- [Azure 'DA HPC uygulamalarını en iyi duruma getirmeye yönelik bir öğrenme modülüyle](https://docs.microsoft.com/learn/modules/optimize-tightly-coupled-hpc-apps/)bilginizi test edin.
 - Çalıştırılan HPC iş yüklerinin daha yüksek düzey mimari görünümü için bkz. [Azure 'Da yüksek performanslı bilgi işlem (HPC)](/azure/architecture/topics/high-performance-computing/).

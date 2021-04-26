@@ -2,21 +2,21 @@
 title: 'Hızlı başlangıç: tek bir T-SQL ifadesini kullanarak verileri toplu yükleme'
 description: COPY ifadesini kullanarak verileri toplu yükleme
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: quickstart
 ms.subservice: sql-dw
 ms.date: 11/20/2020
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: 2f97c630189a0f037f1231bb2386fcb7226a9350
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2b41342ab7d267c37b8e68fdbcaa9d570034ac17
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104600046"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107568446"
 ---
 # <a name="quickstart-bulk-load-data-using-the-copy-statement"></a>Hızlı başlangıç: COPY ifadesini kullanarak verileri toplu yükleme
 

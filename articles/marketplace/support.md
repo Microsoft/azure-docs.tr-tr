@@ -7,12 +7,12 @@ ms.topic: conceptual
 author: navits09
 ms.author: navits
 ms.date: 01/19/2020
-ms.openlocfilehash: a1726b29c153bf680d29fe821ac34aa958064335
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: cfe365af868f01b868e737a409724e92f1d57f81
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98879250"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107106998"
 ---
 # <a name="support-for-the-commercial-marketplace-program-in-partner-center"></a>Iş Ortağı Merkezi 'nde ticari Market programı desteği
 
@@ -24,7 +24,7 @@ Microsoft, çok çeşitli ürün ve hizmetler için destek sağlar. Doğru deste
 
 ## <a name="get-help-or-open-a-support-ticket"></a>Yardım alın veya bir destek bileti açın
 
-1. İş hesabınızla oturum açın. Henüz yapmadıysanız, [bir Iş Ortağı Merkezi hesabı oluşturmanız](partner-center-portal/create-account.md)gerekecektir.
+1. İş hesabınızla oturum açın. Henüz yapmadıysanız, [bir Iş Ortağı Merkezi hesabı oluşturmanız](create-account.md)gerekecektir.
 
 1. Sayfanın sağ üst kısmındaki menüde, **destek** simgesini seçin. **Yardım ve destek** bölmesi sayfanın sağ tarafında görünür.
 

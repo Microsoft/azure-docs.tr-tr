@@ -3,15 +3,15 @@ title: Windows sanal masaüstü Izleyiciyi Izlemeyi kullan-Azure
 description: Windows sanal masaüstü için Azure Izleyicisi 'ni kullanma.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 03/29/2021
+ms.date: 03/31/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 1b93e0c0d61eaa390eda66da2a583a4f429ddd79
-ms.sourcegitcommit: dae6b628a8d57540263a1f2f1cdb10721ed1470d
+manager: femila
+ms.openlocfilehash: 7da35f77dd232e5f523e2bdc3f125c68015ab871
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105709557"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448194"
 ---
 # <a name="use-azure-monitor-for-windows-virtual-desktop-to-monitor-your-deployment"></a>Dağıtımınızı izlemek için Windows sanal masaüstü için Azure Izleyicisini kullanın
 
@@ -43,7 +43,7 @@ Ortamınız için Windows sanal masaüstü için Azure Izleyicisini izleyen herk
 
 Windows sanal masaüstü için Azure Izleyici 'yi aşağıdaki yöntemlerden biriyle açabilirsiniz:
 
-- [Aka.MS/azmonwvdi](https://portal.azure.com/#blade/Microsoft_Azure_WVD/WvdManagerMenuBlade/workbooks)adresine gidin.
+- [Aka.MS/azmonwvdi](https://aka.ms/azmonwvdi)adresine gidin.
 - Azure portal **Windows sanal masaüstü** araması yapın ve seçin ve ardından **Öngörüler**' i seçin.
 - Azure portal **Azure izleyici** araması yapın ve seçin. **Öngörüler altında** **Öngörüler hub** ' ı seçin ve ardından **Windows sanal masaüstü**' nü seçin.
 Sayfayı açtıktan sonra, izlemek istediğiniz ortamın **aboneliğini**, **kaynak grubunu**, **ana bilgisayar havuzunu** ve **zaman aralığını** girin.
@@ -62,7 +62,7 @@ Windows sanal masaüstü için Azure Izleyici 'yi kullanmaya başlamak için en 
 
 Windows sanal masaüstü için Azure Izleyici 'yi ilk kez açtığınızda, Windows sanal masaüstü ortamınız için Azure Izleyiciyi ayarlamanız gerekir. Kaynaklarınızı yapılandırmak için:
 
-1. [Aka.MS/azmonwvdi](https://portal.azure.com/#blade/Microsoft_Azure_WVD/WvdManagerMenuBlade/workbooks)adresindeki Windows sanal masaüstü Için Azure izleyici Azure Portal açın ve sonra **yapılandırma çalışma kitabı**' nı seçin.
+1. [Aka.MS/azmonwvdi](https://aka.ms/azmonwvdi)adresindeki Windows sanal masaüstü Için Azure izleyici Azure Portal açın ve sonra **yapılandırma çalışma kitabı**' nı seçin.
 2. **Abonelik**, **kaynak grubu** ve **konak havuzu** altında yapılandırılacak bir ortam seçin.
 
 Yapılandırma çalışma kitabı, izleme ortamınızı ayarlar ve kurulum işlemini tamamladıktan sonra yapılandırmayı denetlemenizi sağlar. Panodaki öğeler doğru görüntülenmiyorsa veya ürün grubu yeni ayarlar gerektiren güncelleştirmeler yayımladığında, yapılandırmanızı denetlemeniz önemlidir.
@@ -193,4 +193,5 @@ Veri toplama ve kullanım hakkında daha fazla bilgi için [Microsoft Online Ser
 Artık Windows sanal masaüstü ortamınız için Azure Izleyicisini yapılandırdığınıza göre, ortamınızı izlemeye başlamanıza yardımcı olabilecek bazı kaynaklar aşağıda verilmiştir:
 
 - Windows sanal masaüstü için Azure Izleyici ile ilgili hüküm ve kavramlar hakkında daha fazla bilgi edinmek için [sözlüğümüze](azure-monitor-glossary.md) göz atın.
+- Veri depolama maliyetlerinizi tahmin etmek, ölçmek ve yönetmek için bkz. [Azure izleyici maliyetlerini tahmin](azure-monitor-costs.md)etme.
 - Bir sorunla karşılaşırsanız, yardım ve bilinen sorunlar için [sorun giderme kılavuzumuzu](troubleshoot-azure-monitor.md) inceleyin.

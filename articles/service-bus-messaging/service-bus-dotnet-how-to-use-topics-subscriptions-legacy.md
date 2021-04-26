@@ -5,12 +5,12 @@ ms.topic: quickstart
 ms.tgt_pltfrm: dotnet
 ms.date: 09/02/2020
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 28e94cdb0df0a18b41f4c8a0ded362b50df6dcac
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a64ccec49248f48a85782cfe9537513a97b2bdfc
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100652981"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868168"
 ---
 # <a name="get-started-with-service-bus-topics"></a>Service Bus konuları ile çalışmaya başlama
 Bu öğreticide aşağıdaki adımlar yer almaktadır:
@@ -30,7 +30,7 @@ Bu öğreticide aşağıdaki adımlar yer almaktadır:
     3. Ad alanında bir **Konu** oluşturun.
     4. Ad alanındaki konuya **bir abonelik** oluşturun.
 3. [Visual Studio 2017 Güncelleştirme 3 (sürüm 15.3, 26730.01)](https://www.visualstudio.com/vs) veya sonraki sürümler.
-4. [NET Core SDK](https://www.microsoft.com/net/download/windows), sürüm 2.0 veya sonraki sürümler.
+4. [NET Core SDK](https://dotnet.microsoft.com/download), sürüm 2.0 veya sonraki sürümler.
  
 ## <a name="send-messages-to-the-topic"></a>Konuya ileti gönderme
 

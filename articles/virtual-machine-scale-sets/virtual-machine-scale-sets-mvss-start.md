@@ -5,16 +5,15 @@ author: mimckitt
 ms.author: mimckitt
 ms.topic: conceptual
 ms.service: virtual-machine-scale-sets
-ms.subservice: template
 ms.date: 04/26/2019
 ms.reviewer: jushiman
 ms.custom: mimckitt
-ms.openlocfilehash: 55c826b4baf38732684aaa0465aeaab6a45564db
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c759cf564654990149424acf5aa3efaea4b37be0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87831507"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105933449"
 ---
 # <a name="learn-about-virtual-machine-scale-set-templates"></a>Sanal Makine Ölçek Kümesi şablonları hakkında bilgi edinin
 [Azure Resource Manager şablonları](../azure-resource-manager/templates/overview.md#template-deployment-process), ilgili kaynak gruplarını dağıtmanın harika bir yoludur. Bu öğretici serisinde, temel bir ölçek kümesi şablonunun nasıl oluşturulduğu ve bu şablonun çeşitli senaryolara uyacak şekilde nasıl değiştirileceği gösterilmektedir. Tüm örnekler bu [GitHub deposundan](https://github.com/gatneil/mvss)gelir.

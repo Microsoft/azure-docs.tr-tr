@@ -6,17 +6,17 @@ ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
 ms.topic: reference
-ms.date: 08/10/2020
-ms.openlocfilehash: f324ef44d002f50bf27c08072e904c1d92b5512f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/07/2021
+ms.openlocfilehash: b0aa9d5dec25d8d600ecbcde59a57e67917c6411
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "95026242"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107011161"
 ---
 # <a name="functions-in-the-hyperscale-citus-sql-api"></a>Hyperscale (Citus) SQL API 'sindeki işlevler
 
-Bu bölüm, Hyperscale (Citus) tarafından sunulan Kullanıcı tanımlı işlevlere ilişkin başvuru bilgilerini içerir. Bu işlevler, standart SQL komutları dışındaki Hyperscale 'e (Citus) ek dağıtılmış işlevsellik sağlamaya yardımcı olur.
+Bu bölüm, Hyperscale (Citus) tarafından sunulan Kullanıcı tanımlı işlevlere ilişkin başvuru bilgilerini içerir. Bu işlevler, Hyperscale 'e (Citus) dağıtılmış işlevsellik sağlamaya yardımcı olur.
 
 > [!NOTE]
 >
@@ -178,6 +178,48 @@ SELECT create_distributed_function(
 );
 ```
 
+### <a name="alter_columnar_table_set"></a>alter_columnar_table_set
+
+Alter_columnar_table_set () işlevi [sütunlu tablodaki](concepts-hyperscale-columnar.md)ayarları değiştirir. Bu işlevi sütunlu olmayan bir tabloda çağırmak bir hata verir. Tablo adı hariç tüm bağımsız değişkenler isteğe bağlıdır.
+
+Tüm sütunlu tablolar için geçerli seçenekleri görüntülemek üzere şu tabloya başvurun:
+
+```postgresql
+SELECT * FROM columnar.options;
+```
+
+Yeni oluşturulan tablolar için sütunlu ayarların varsayılan değerleri bu GUCs ile geçersiz kılınabilir:
+
+* sütunlu. sıkıştırma
+* columnar.compression_level
+* columnar.stripe_row_count
+* columnar.chunk_row_count
+
+#### <a name="arguments"></a>Bağımsız değişkenler
+
+**table_name:** Sütunlu tablonun adı.
+
+**chunk_row_count:** (isteğe bağlı) yeni Ekli veriler için öbek başına en fazla satır sayısı. Var olan veri öbekleri değiştirilmeyecektir ve bu en büyük değerden daha fazla satıra sahip olabilir. Varsayılan değer 10000 ' dir.
+
+**stripe_row_count:** (isteğe bağlı) yeni girilen veriler için her Stripe için en fazla satır sayısı. Varolan veri şeritleri değiştirilmeyecektir ve bu en büyük değerden daha fazla satıra sahip olabilir. Varsayılan değer 150000 ' dir.
+
+**sıkıştırma:** (isteğe bağlı) `[none|pglz|zstd|lz4|lz4hc]` Yeni Ekli veriler için sıkıştırma türü. Mevcut veriler yeniden sıkıştırılmaz veya sıkıştırması açılır. Varsayılan ve önerilen değer zstd ' dir (Eğer desteği ' de derlendiyse).
+
+**compression_level:** (isteğe bağlı) geçerli ayarlar 1 ile 19 arasında geçerlidir. Sıkıştırma yöntemi seçilen düzeyi desteklemiyorsa, bunun yerine en yakın düzey seçilir.
+
+#### <a name="return-value"></a>Döndürülen değer
+
+Yok
+
+#### <a name="example"></a>Örnek
+
+```postgresql
+SELECT alter_columnar_table_set(
+  'my_columnar_table',
+  compression => 'none',
+  stripe_row_count => 10000);
+```
+
 ## <a name="metadata--configuration-information"></a>Meta veri/yapılandırma bilgileri
 
 ### <a name="master_get_table_metadata"></a>Ana \_ \_ tablo Al \_ meta verileri
@@ -220,7 +262,7 @@ SELECT * from master_get_table_metadata('github_events');
 
 ### <a name="get_shard_id_for_distribution_column"></a>\_ \_ \_ \_ dağıtım sütunu için parça kimliği \_ Al
 
-Hiper ölçek (Citus), dağıtılmış bir tablonun her satırını, satırın dağıtım sütununun değerine ve tablonun dağıtım yöntemine göre bir parçaya atar. Çoğu durumda, kesin eşleme, veritabanı yöneticisinin yoksaydığı alt düzey bir ayrıntıdır. Bununla birlikte, el ile veritabanı bakım görevleri için ya da yalnızca öngörüye karşılamak üzere bir satırın parça belirlenmesi yararlı olabilir. `get_shard_id_for_distribution_column`İşlevi, bu bilgileri karma ve Aralık ile dağıtılan tablolar ve başvuru tabloları için sağlar. Ekleme dağıtımı için çalışmaz.
+Hiper ölçek (Citus), dağıtılmış bir tablonun her satırını, satırın dağıtım sütununun değerine ve tablonun dağıtım yöntemine göre bir parçaya atar. Çoğu durumda, kesin eşleme, veritabanı yöneticisinin yoksaydığı alt düzey bir ayrıntıdır. Bununla birlikte, el ile veritabanı bakım görevleri için ya da yalnızca öngörüye karşılamak üzere bir satırın parça belirlenmesi yararlı olabilir. `get_shard_id_for_distribution_column`İşlevi, karma dağıtılan, Aralık ile dağıtılan ve başvuru tabloları için bu bilgileri sağlar. Ekleme dağıtımı için çalışmaz.
 
 #### <a name="arguments"></a>Bağımsız değişkenler
 

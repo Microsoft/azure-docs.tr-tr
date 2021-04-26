@@ -7,12 +7,12 @@ ms.topic: article
 author: mingshen-ms
 ms.author: mingshen
 ms.date: 07/14/2020
-ms.openlocfilehash: e071692a1c6fe423b048dab884164d9b3c98f1fd
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 0a45e7c0479cf490ad8688230897ae89ce4d1020
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102613621"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107819133"
 ---
 # <a name="frequently-asked-questions-about-transitioning-from-the-cloud-partner-portal-to-partner-center"></a>Bulut İş Ortağı Portalı Iş ortağı merkezine geçiş hakkında sık sorulan sorular
 
@@ -24,7 +24,7 @@ Bulut İş Ortağı Portalı Iş Ortağı Merkezi 'ne geçti. İş Ortağı Merk
 
 | Alan | Değişiklikler |
 | --- | --- |
-| Hesap | Yeni bir Iş Ortağı Merkezi hesabı oluşturmanız gerekmez; Hesabınızı, kullanıcılarınızı, izinlerinizi ve faturanızı yönettiğiniz Iş Ortağı Merkezi 'Nde oturum açmak için mevcut Bulut İş Ortağı Portalı kimlik bilgilerinizi kullanabilirsiniz. Yayımlama sözleşmesi ve şirket profili bilgileri, yeni Iş Ortağı Merkezi hesabınıza geçirilir, bu da tüm ödeme profili bilgileri, Kullanıcı hesapları ve izinleri ve etkin tekliflerdir. [Iş Ortağı Merkezi 'nde ticari Market hesabınızı yönetme](partner-center-portal/manage-account.md)hakkında daha fazla bilgi edinin. |
+| Hesap | Yeni bir Iş Ortağı Merkezi hesabı oluşturmanız gerekmez; Hesabınızı, kullanıcılarınızı, izinlerinizi ve faturanızı yönettiğiniz Iş Ortağı Merkezi 'Nde oturum açmak için mevcut Bulut İş Ortağı Portalı kimlik bilgilerinizi kullanabilirsiniz. Yayımlama sözleşmesi ve şirket profili bilgileri, yeni Iş Ortağı Merkezi hesabınıza geçirilir, bu da tüm ödeme profili bilgileri, Kullanıcı hesapları ve izinleri ve etkin tekliflerdir. [Iş Ortağı Merkezi 'nde ticari Market hesabınızı yönetme](manage-account.md)hakkında daha fazla bilgi edinin. |
 | Teklif yayımlama ve teklif yönetimi deneyimi | Teklif verilerinizi Bulut İş Ortağı Portalı Iş Ortağı Merkezi 'ne taşıdık. Artık, gelişmiş bir kullanıcı deneyimi ve sezgisel arabirim sunan Iş Ortağı Merkezi 'nde tekliflerinizi erişirsiniz. [Ticari Market 'te mevcut bir teklifi güncelleştirmeyi](partner-center-portal/update-existing-offer.md)öğrenin. |
 | Ticari Market 'teki tekliflerinizin kullanılabilirliği | Değişiklik yok. Teklifinizin ticari Market 'te canlı olması durumunda canlı olmaya devam edecektir. |
 | Yeni satın almalar ve dağıtımlar | Değişiklik yok. Müşterileriniz, kesintiler olmadan tekliflerinizi satın alıp dağıtmaya devam edebilir. |
@@ -81,7 +81,7 @@ Iş Ortağı Merkezi 'nde desteklenen teklif türleri için tüm teklifler, duru
 | Sanal Makine | Yes | Yeni teklifler oluşturmak ve Bulut İş Ortağı Portalı oluşturulan teklifleri yönetmek için Iş Ortağı Merkezi ' nde oturum açın. [Bir sanal makine teklifi planlayın](marketplace-virtual-machines.md)hakkında daha fazla bilgi edinin. |
 | Azure uygulaması | Yes | Yeni teklifler oluşturmak ve Bulut İş Ortağı Portalı oluşturulan teklifleri yönetmek için Iş Ortağı Merkezi ' nde oturum açın. [Azure Uygulama teklifi oluşturma](create-new-azure-apps-offer.md)hakkında daha fazla bilgi edinin. |
 | Dynamics 365 Business Central | Evet | Yeni teklifler oluşturmak ve Bulut İş Ortağı Portalı oluşturulan teklifleri yönetmek için Iş Ortağı Merkezi ' nde oturum açın. [Dynamics 365 Iş Merkezi teklifi oluşturma](partner-center-portal/create-new-business-central-offer.md)hakkında daha fazla bilgi edinin. |
-| PowerApps & müşteri katılımı için Dynamics 365 | Yes | Yeni teklifler oluşturmak ve Bulut İş Ortağı Portalı oluşturulan teklifleri yönetmek için Iş Ortağı Merkezi ' nde oturum açın. Daha fazla bilgi edinmek [Için Dynamics 365 for Customer Engagement & PowerApps teklifini oluşturun](partner-center-portal/create-new-customer-engagement-offer.md). |
+| PowerApps & müşteri katılımı için Dynamics 365 | Yes | Yeni teklifler oluşturmak ve Bulut İş Ortağı Portalı oluşturulan teklifleri yönetmek için Iş Ortağı Merkezi ' nde oturum açın. Daha fazla bilgi edinmek [Için Dynamics 365 for Customer Engagement & PowerApps teklifini oluşturun](dynamics-365-customer-engage-offer-setup.md). |
 | Dynamics 365 for Operations | Yes | Yeni teklifler oluşturmak ve Bulut İş Ortağı Portalı oluşturulan teklifleri yönetmek için Iş Ortağı Merkezi ' nde oturum açın. [Dynamics 365 for Operations teklifini oluşturma](partner-center-portal/create-new-operations-offer.md)hakkında daha fazla bilgi edinin. |
 | Power BI App | Yes | Yeni teklifler oluşturmak ve Bulut İş Ortağı Portalı oluşturulan teklifleri yönetmek için Iş Ortağı Merkezi ' nde oturum açın. [AppSource için Power BI uygulaması oluşturma](partner-center-portal/create-power-bi-app-offer.md)hakkında daha fazla bilgi edinin. |
 | IoT Edge modülü | Yes | Yeni teklifler oluşturmak ve Bulut İş Ortağı Portalı oluşturulan teklifleri yönetmek için Iş Ortağı Merkezi ' nde oturum açın. [Azure Marketi 'nde IoT Edge modül teklifi oluşturma, yapılandırma ve yayımlama](partner-center-portal/azure-iot-edge-module-creation.md)hakkında daha fazla bilgi edinin. |

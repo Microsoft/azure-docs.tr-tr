@@ -3,13 +3,13 @@ title: Olayları & kapsayıcı örneği günlüklerini al
 description: Kapsayıcı sorunlarını gidermeye yardımcı olmak için Azure Container Instances kapsayıcı günlüklerini ve olaylarını almayı öğrenin
 ms.topic: article
 ms.date: 12/30/2019
-ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 20b6e1cfe6bb8f6ac721a401c3d0831d4f447edb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: mvc
+ms.openlocfilehash: f5eb8c878164846ed2f1daf1cb7e5014e0c62c55
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92746961"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764054"
 ---
 # <a name="retrieve-container-logs-and-events-in-azure-container-instances"></a>Azure Container Instances kapsayıcı günlüklerini ve olaylarını alma
 
@@ -154,6 +154,6 @@ Azure Container Instances için [yaygın kapsayıcı ve dağıtım sorunlarını
 [Azure izleyici günlüklerine](container-instances-log-analytics.md)kapsayıcı grupları için günlük ve olay verilerini gönderme hakkında bilgi edinin.
 
 <!-- LINKS - Internal -->
-[az-container-attach]: /cli/azure/container#az-container-attach
-[az-container-logs]: /cli/azure/container#az-container-logs
-[az-container-show]: /cli/azure/container#az-container-show
+[az-container-attach]: /cli/azure/container#az_container_attach
+[az-container-logs]: /cli/azure/container#az_container_logs
+[az-container-show]: /cli/azure/container#az_container_show

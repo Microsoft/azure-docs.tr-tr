@@ -10,12 +10,12 @@ ms.service: cognitive-services
 ms.topic: conceptual
 ms.date: 10/29/2020
 ms.author: aahi
-ms.openlocfilehash: cedcf8a3fcd656c4af0ca7493c598791d35d20d9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3b30b741008f00d435af7bb496990685f9b1781c
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95996143"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106067767"
 ---
 # <a name="use-docker-compose-to-deploy-multiple-containers"></a>Docker Compose kullanarak birden çok kapsayıcı dağıtma
 

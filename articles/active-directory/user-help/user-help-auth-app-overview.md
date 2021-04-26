@@ -71,7 +71,7 @@ Kuruluşunuz, hesap türüne bağlı olarak iki öğeli doğrulama kullanmanız 
 
 ## <a name="in-this-section"></a>Bu bölümde
 
-| Makale | Açıklama |
+| Makale | Description |
 | ------ | ------------ |
 | [Uygulamayı indirme ve yükleme](user-help-auth-app-download-install.md) | Android ve iOS çalıştıran cihazlar için Microsoft Authenticator uygulamasının nereden ve nasıl alınacağını ve yükleneceğini açıklar. |
 | [İş veya okul hesaplarınızı ekleyin](user-help-auth-app-add-work-school-account.md) | Çeşitli iş veya okul ve kişisel hesaplarınızın Microsoft Authenticator uygulamasına nasıl ekleneceğini açıklar. |

@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: troubleshooting
 ms.date: 03/29/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: dda58868432248fe93a9fbc83d1e538dfc9b61ba
-ms.sourcegitcommit: dae6b628a8d57540263a1f2f1cdb10721ed1470d
+manager: femila
+ms.openlocfilehash: a104f4d33e1bd38e130101b34d3fd2021de27cd2
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105709455"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445491"
 ---
 # <a name="troubleshoot-azure-monitor-for-windows-virtual-desktop"></a>Windows sanal masaüstü için Azure Izleyici sorunlarını giderme
 
@@ -81,4 +81,6 @@ Aşağıda, farkındayız ve düzeltilmesi için çalıştık sorunlar ve sını
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Verilerin nasıl yorumlanacağı konusunda emin değilseniz veya ortak terimler hakkında daha fazla bilgi edinmek istiyorsanız, [Windows sanal masaüstü sözlüğü Için Azure İzleyicisi](azure-monitor-glossary.md)'ne göz atın. Windows sanal masaüstü için Azure Izleyicisini ayarlama ve kullanma hakkında bilgi edinmek istiyorsanız, bkz. [dağıtımınızı izlemek Için Windows sanal masaüstü Için Azure İzleyicisi 'Ni kullanma](azure-monitor.md).
+- Başlamak için bkz. [dağıtımınızı izlemek Için Windows sanal masaüstü Için Azure izleyici 'Yi kullanma](azure-monitor.md).
+- Veri depolama maliyetlerinizi tahmin etmek, ölçmek ve yönetmek için bkz. [Azure izleyici maliyetlerini tahmin](azure-monitor-costs.md)etme.
+- Windows sanal masaüstü için Azure Izleyici ile ilgili hüküm ve kavramlar hakkında daha fazla bilgi edinmek için [sözlüğümüze](azure-monitor-glossary.md) göz atın.

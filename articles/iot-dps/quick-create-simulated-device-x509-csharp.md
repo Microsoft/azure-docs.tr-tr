@@ -9,12 +9,12 @@ ms.service: iot-dps
 services: iot-dps
 ms.devlang: csharp
 ms.custom: mvc
-ms.openlocfilehash: 7d2a21a30cefbc6e83e48c29d81191323387b8f2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7aca75d1abed5470d51de22f9285459381f684bd
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101705552"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868600"
 ---
 # <a name="quickstart-create-and-provision-an-x509-device-using-c-device-sdk-for-iot-hub-device-provisioning-service"></a>Hızlı başlangıç: IoT Hub cihaz sağlama hizmeti için C# cihaz SDK 'sını kullanarak bir X. 509.440 cihazı oluşturma ve sağlama
 
@@ -45,7 +45,7 @@ Bu makalede bireysel kayıtlar gösterilmektedir.
     git clone https://github.com/Azure-Samples/azure-iot-samples-csharp.git
     ```
 
-1. Makinenizde [.NET Core 3.0.0 SDK 'sının veya daha yeni bir sürümünün](https://www.microsoft.com/net/download/windows) yüklü olduğundan emin olun. Sürümünüzü denetlemek için aşağıdaki komutu kullanabilirsiniz.
+1. Makinenizde [.NET Core 3,1 SDK veya sonraki bir sürümünün](https://dotnet.microsoft.com/download) yüklü olduğundan emin olun. Sürümünüzü denetlemek için aşağıdaki komutu kullanabilirsiniz.
 
     ```bash
     dotnet --info

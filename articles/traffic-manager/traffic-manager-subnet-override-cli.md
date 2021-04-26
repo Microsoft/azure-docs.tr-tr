@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: traffic-manager
 ms.date: 09/18/2019
 ms.author: duau
-ms.openlocfilehash: 2e289728c7fde9b98256d079d45067aba1d4d805
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fab167884d9060edc4f626d3ee05fa0b23389d92
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102211337"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767808"
 ---
 # <a name="traffic-manager-subnet-override-using-azure-cli"></a>Azure CLı kullanarak alt ağ geçersiz kılma Traffic Manager
 
@@ -39,7 +39,7 @@ Bir Traffic Manager alt ağ geçersiz kılma oluşturmak için Azure CLı kullan
 - Bu makale, Azure CLı 'nin sürüm 2.0.28 veya üstünü gerektirir. Azure Cloud Shell kullanılıyorsa, en son sürüm zaten yüklüdür.
 
 ## <a name="update-the-traffic-manager-endpoint-with-subnet-override"></a>Traffic Manager uç noktasını alt ağ geçersiz kılma ile güncelleştirin.
-[Az Network Traffic-Manager Endpoint Update](/cli/azure/network/traffic-manager/endpoint#az-network-traffic-manager-endpoint-update)ile uç noktanızı güncelleştirmek IÇIN Azure CLI 'yi kullanın.
+[Az Network Traffic-Manager Endpoint Update](/cli/azure/network/traffic-manager/endpoint#az_network_traffic_manager_endpoint_update)ile uç noktanızı güncelleştirmek IÇIN Azure CLI 'yi kullanın.
 
 ```azurecli-interactive
 ### Add a range of IPs ###
@@ -59,7 +59,7 @@ az network traffic-manager endpoint update \
     --type AzureEndpoints
 ```
 
-IP adresi aralıklarını, [az Network Traffic-Manager uç noktası güncelleştirmesini](/cli/azure/network/traffic-manager/endpoint#az-network-traffic-manager-endpoint-update) **--Remove** seçeneğiyle çalıştırarak kaldırabilirsiniz.
+IP adresi aralıklarını, [az Network Traffic-Manager uç noktası güncelleştirmesini](/cli/azure/network/traffic-manager/endpoint#az_network_traffic_manager_endpoint_update) **--Remove** seçeneğiyle çalıştırarak kaldırabilirsiniz.
 
 ```azurecli-interactive
 az network traffic-manager endpoint update \

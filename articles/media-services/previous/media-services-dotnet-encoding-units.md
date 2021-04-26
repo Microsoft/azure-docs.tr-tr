@@ -17,10 +17,10 @@ ms.author: inhenkel
 ms.reviewer: milangada
 ms.custom: devx-track-csharp
 ms.openlocfilehash: 6feb28858271f11bef0933a352f86d7545ee5bd3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103014086"
 ---
 # <a name="how-to-scale-encoding-with-net-sdk"></a>.NET SDK ile kodlama ölçeklendirme

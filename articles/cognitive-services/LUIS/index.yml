@@ -3,7 +3,7 @@ title: Language Understanding (LUIS) belgeleri
 summary: Language Understanding’in, bir kişinin kendi sözcükleriyle ifade ettiği isteği uygulamanızın anlamasını nasıl sağladığını öğrenin.
 metadata:
   ms.topic: landing-page
-  ms.date: 06/15/2020
+  ms.date: 04/13/2021
   ms.author: nitinme
   author: nitinme
   ms.service: cognitive-services
@@ -12,12 +12,12 @@ metadata:
   title: Language Understanding (LUIS) Belgeleri
   titleSuffix: Azure Cognitive Services
   description: Language Understanding (LUIS) hizmeti, bir kişinin kendi sözcükleriyle ifade ettiği isteği uygulamanızın anlamasını sağlar. LUIS, geliştiricilerin doğal dilde kullanıcı girdisi alabilen ve bu girdiden anlam çıkarabilen uygulamalar derlemesini sağlamak için makine öğrenimini kullanır.
-  ms.openlocfilehash: ca9209295d8265eeac5545091e4d4c5c9678e994
-  ms.sourcegitcommit: 78ecfbc831405e8d0f932c9aafcdf59589f81978
+  ms.openlocfilehash: 793638552b35dd6dc65395e9c568c55a8ef9f946
+  ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 01/23/2021
-  ms.locfileid: "98738076"
+  ms.lasthandoff: 04/14/2021
+  ms.locfileid: "107497056"
 landingContent:
 - title: Language Understanding (LUIS) hakkında
   linkLists:
@@ -130,7 +130,7 @@ landingContent:
     - text: Önceden oluşturulmuş varlıklar
       url: luis-reference-prebuilt-entities.md
     - text: Özel Varlıklar
-      url: luis-concept-entity-types.md#types-of-entities
+      url: reference-entity-machine-learned-entity.md
     - text: Önceden oluşturulmuş etki alanları
       url: luis-reference-prebuilt-domains.md
 - title: Yardım ve geri bildirim

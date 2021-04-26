@@ -8,16 +8,16 @@ ms.date: 07/24/2020
 ms.author: normesta
 ms.subservice: common
 ms.reviewer: zezha-msft
-ms.openlocfilehash: dc3451a4b46a317dccda0e4292dcb1712b4171f0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 83d10a7a6e9eb14379d32cc88800a2c443feac60
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98878316"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107503057"
 ---
 # <a name="azcopy-sync"></a>azcopy eşitleme
 
-Kaynak konumunu hedef konuma çoğaltır.
+Kaynak konumunu hedef konuma çoğaltır. Bu makale, AzCopy Sync komutuna yönelik ayrıntılı bir başvuru sağlar. Kaynak ve hedef konumlar arasında blob 'ları eşitleme hakkında daha fazla bilgi edinmek için bkz. [AzCopy ile v10 arasındaki kullanarak Azure Blob depolama Ile eşitleme](storage-use-azcopy-blobs-synchronize.md). Azure dosyaları için bkz. [Synchronize Files](storage-use-azcopy-files.md#synchronize-files).
 
 ## <a name="synopsis"></a>Özeti
 
@@ -38,9 +38,9 @@ Eşitle komutu kopyalama komutundan farklı yollarla farklılık gösterir:
 ## <a name="related-conceptual-articles"></a>İlgili kavramsal makaleler
 
 - [AzCopy’yi kullanmaya başlama](storage-use-azcopy-v10.md)
+- [Öğretici: AzCopy ile şirket içi verileri bulut depolamaya geçirme](storage-use-azcopy-migrate-on-premises-data.md)
 - [AzCopy ve BLOB Storage ile veri aktarma](./storage-use-azcopy-v10.md#transfer-data)
 - [AzCopy ve dosya depolama ile verileri aktarma](storage-use-azcopy-files.md)
-- [AzCopy 'i yapılandırma, iyileştirme ve sorun giderme](storage-use-azcopy-configure.md)
 
 ### <a name="advanced"></a>Gelişmiş
 

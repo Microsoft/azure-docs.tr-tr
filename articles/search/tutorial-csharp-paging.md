@@ -10,10 +10,10 @@ ms.topic: tutorial
 ms.date: 01/26/2021
 ms.custom: devx-track-js, devx-track-csharp
 ms.openlocfilehash: bad4bc4d0016b2898b315bfb9799dc8972be7b12
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98785878"
 ---
 # <a name="tutorial-add-paging-to-search-results-using-the-net-sdk"></a>Öğretici: .NET SDK kullanarak arama sonuçlarına sayfalama ekleme

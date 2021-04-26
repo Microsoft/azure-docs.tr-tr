@@ -7,16 +7,16 @@ ms.topic: how-to
 author: keferna
 ms.author: keferna
 ms.date: 08/07/2020
-ms.openlocfilehash: 23af7b3f7cfd5ec0531c5cac73cf8a334ef4aa62
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 12600cadaa84ae116818eec06459d5db0c05304a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99096449"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773429"
 ---
 # <a name="create-an-iot-edge-module-offer"></a>IoT Edge modül teklifi oluşturma
 
-Bu makalede, Azure Marketi için bir Nesnelerin İnterneti (IoT) Edge modülü teklifinin nasıl oluşturulacağı ve yayımlanacağı açıklanır. Başlamadan önce, henüz yapmadıysanız [Iş Ortağı Merkezi 'nde bir ticari Market hesabı oluşturun](create-account.md) . Hesabınızın ticari Market programına kayıtlı olduğundan emin olun.
+Bu makalede, Azure Marketi için bir Nesnelerin İnterneti (IoT) Edge modülü teklifinin nasıl oluşturulacağı ve yayımlanacağı açıklanır. Başlamadan önce, henüz yapmadıysanız [Iş Ortağı Merkezi 'nde bir ticari Market hesabı oluşturun](../create-account.md) . Hesabınızın ticari Market programına kayıtlı olduğundan emin olun.
 
 ## <a name="create-a-new-offer"></a>Yeni teklif oluşturma
 
@@ -172,7 +172,7 @@ Teklifiniz hakkında ek çevrimiçi belgeler sağlayın. En fazla 25 bağlantı 
 - **Başlık** -müşteriler, teklifin ayrıntılar sayfasında başlığı görür.
 - **Bağlantı (URL)** -müşterilerin çevrimiçi belgenizi görüntülemesi için bir bağlantı girin. Bağlantı veya ile başlamalıdır `http://` `https://` .
 
-Belgelerinize en az bir bağlantı ve [Azure IoT cihaz kataloğundan](https://catalog.azureiotsolutions.com/)uyumlu IoT Edge cihazlara bir bağlantı eklediğinizden emin olun.
+Belgelerinize en az bir bağlantı ve [Azure IoT cihaz kataloğundan](https://devicecatalog.azure.com/)uyumlu IoT Edge cihazlara bir bağlantı eklediğinizden emin olun.
 
 ### <a name="contact-information"></a>İletişim bilgileri
 
@@ -419,7 +419,7 @@ Birden çok platformu hedefleyebilir ve Etiketler kullanarak modül kapsayıcı 
 
 1. Yönetici kullanıcı
 
-<br>**Azure Container Registry parolası**: Azure Container Registry ilişkili Yönetici Kullanıcı adı için parola belirtin ve kapsayıcı görüntünüzü içerir. Şirketinizin kayıt defterine erişiminin olduğundan emin olmak için Kullanıcı adı ve parola gereklidir. Azure Portal parolayı **Container Registry**  >  **erişim anahtarlarına** giderek veya [göster komutunu](/cli/azure/acr/credential#az-acr-credential-show) kullanarak Azure CLI ile öğrenebilirsiniz.
+<br>**Azure Container Registry parolası**: Azure Container Registry ilişkili Yönetici Kullanıcı adı için parola belirtin ve kapsayıcı görüntünüzü içerir. Şirketinizin kayıt defterine erişiminin olduğundan emin olmak için Kullanıcı adı ve parola gereklidir. Azure Portal parolayı **Container Registry**  >  **erişim anahtarlarına** giderek veya [göster komutunu](/cli/azure/acr/credential#az_acr_credential_show) kullanarak Azure CLI ile öğrenebilirsiniz.
 
 :::image type="content" source="media/example-iot-access-keys.png" alt-text="Azure portal erişim tuşu ekranını gösterir.":::
 

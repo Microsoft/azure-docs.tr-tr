@@ -10,12 +10,12 @@ ms.service: synapse-analytics
 ms.subservice: workspace
 ms.topic: tutorial
 ms.date: 12/31/2020
-ms.openlocfilehash: f18977bb92b37546d5980134cba858b1f76b464c
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 6b88a7e6a9851018fce255fac0e39a30563b9bf4
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104720024"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107363844"
 ---
 # <a name="analyze-data-in-a-storage-account"></a>Depolama hesabındaki verileri analiz etme
 
@@ -45,7 +45,7 @@ df.write.mode("overwrite").parquet("/NYCTaxi/PassengerCountStats_parquetformat")
 Çalışma alanınızın varsayılan ADLS 2. hesabındaki verileri çözümleyebilir veya "**Yönet**" > "**bağlı hizmetler**" > "**Yeni**" ADLS 2. veya bir BLOB depolama hesabını çalışma alanınıza bağlayabilirsiniz (aşağıdaki adımlar birincil ADLS 2. hesabına başvuracaktır).
 
 1. SYNAPSE Studio 'da **veri** merkezine gidin ve **bağlı**' yı seçin.
-1. **Azure Data Lake Storage Gen2**  >  **MyWorkspace 'e gidin (birincil-contosolake)**.
+1. **Azure Data Lake Storage 2.**  >  **MyWorkspace (Primary-contosolake)** bölümüne gidin.
 1. **Kullanıcıları (birincil)** seçin. **NYCTaxi** klasörünü görmeniz gerekir. İçinde **PassengerCountStats_csvformat** ve **PassengerCountStats_parquetformat** adlı iki klasör görmeniz gerekir.
 1. **PassengerCountStats_parquetformat** klasörünü açın. İçinde, benzer bir adı olan bir Parquet dosyası görürsünüz `part-00000-2638e00c-0790-496b-a523-578da9a15019-c000.snappy.parquet` .
 1. **. Parquet** öğesine sağ tıklayın, ardından **Yeni Not defteri**' ni ve ardından **dataframe 'e yükle**' yi seçin. Aşağıdaki gibi bir hücreyle yeni bir not defteri oluşturulur:
@@ -58,7 +58,7 @@ df.write.mode("overwrite").parquet("/NYCTaxi/PassengerCountStats_parquetformat")
     ```
 
 1. **Spark1** adlı Spark havuzuna ekleyin. Hücreyi çalıştırın.
-1. **Kullanıcılar** klasörüne geri ' ye tıklayın. **. Parquet** dosyasına tekrar sağ tıklayın ve ardından **Yeni SQL betiği**  >  **en üstteki 100 satırları** Seç ' i seçin. Şöyle bir SQL betiği oluşturur:
+1. **Kullanıcılar** klasörüne geri dön seçeneğini belirleyin. **. Parquet** dosyasına tekrar sağ tıklayın ve ardından **Yeni SQL betiği**  >  **en üstteki 100 satırları** Seç ' i seçin. Şöyle bir SQL betiği oluşturur:
 
     ```sql
     SELECT 

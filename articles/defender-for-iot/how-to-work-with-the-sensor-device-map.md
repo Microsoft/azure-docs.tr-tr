@@ -4,10 +4,10 @@ description: Cihaz eşlemesi, algılanan ağ cihazlarının grafik gösterimini 
 ms.date: 1/7/2021
 ms.topic: how-to
 ms.openlocfilehash: f7579cbca618baef404236556993c9831dd84bdf
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104784603"
 ---
 # <a name="investigate-sensor-detections-in-the-device-map"></a>Cihaz eşlemesindeki algılayıcı algılamalarını araştırın
@@ -32,7 +32,7 @@ Haritada çalışmak için aşağıdaki araçlar kullanılır.
 
 Kullanıcı rolünüz, cihaz Haritası penceresinde hangi araçların kullanılabildiğini belirler. Kullanıcı rolleri hakkındaki ayrıntılar için bkz. Kullanıcı [oluşturma ve yönetme](how-to-create-and-manage-users.md) .
 
-| Sembol | Açıklama |
+| Sembol | Description |
 |---|---|
 | :::image type="icon" source="media/how-to-work-with-maps/search-bar-icon-v2.png" border="false":::| Belirli bir cihaz için IP adresi veya MAC adresiyle arama yapın. Metin kutusuna IP adresini veya MAC adresini girin. Harita, aradığınız cihazı, kendisine bağlı cihazlarla görüntüler. |
 | Grup vurgulaması ve filtreleri <br /> :::image type="content" source="media/how-to-work-with-maps/group-highlight-and-filters-v2.png" alt-text="Grup vurguları ve filtreleri ekran görüntüsü."::: | Haritayı varsayılan ve özel cihaz gruplarına göre filtreleyin veya vurgulayın. |
@@ -114,7 +114,7 @@ Grupları şu şekilde görüntüle:
 
 Aşağıdaki önceden tanımlanmış gruplar kullanılabilir:
 
-| Grup adı | Açıklama |
+| Grup adı | Description |
 |--|--|
 | **Bilinen uygulamalar** | TCP gibi ayrılmış bağlantı noktaları kullanan cihazlar.  |
 | **Standart olmayan bağlantı noktaları (varsayılan)** | Standart olmayan bağlantı noktaları veya bir diğer ad atanmamış bağlantı noktaları kullanan cihazlar. |
@@ -263,7 +263,7 @@ Cihazlar hakkında daha fazla bilgi edinmek için cihaz haritasını oluşturan 
 
 Haritadaki cihazlarda aşağıdaki Etiketler ve göstergeler görünebilir:
 
-| Cihaz etiketi | Açıklama |
+| Cihaz etiketi | Description |
 |--|--|
 | :::image type="content" source="media/how-to-work-with-maps/host-v2.png" alt-text="IP ana bilgisayar adı"::: | IP adresi ana bilgisayar adı ve IP adresi veya alt ağ adresleri |
 | :::image type="content" source="media/how-to-work-with-maps/amount-alerts-v2.png" alt-text="Uyarı sayısı"::: | Cihazla ilişkili uyarı sayısı |
@@ -309,7 +309,7 @@ Aşağıdaki bilgiler el ile güncelleştirilebilen olabilir. El ile girilen bil
 
   - Takip tarihi katmanı
 
-  - Açıklama
+  - Description
 
 | Öğe | Açıklama |
 |--|--|
@@ -319,14 +319,14 @@ Aşağıdaki bilgiler el ile güncelleştirilebilen olabilir. El ile girilen bil
 | Satıcı | Cihaz satıcısı. Bu, cihaz MAC adresinin baştaki karakterleriyle belirlenir. Bu alan salt okunur durumdadır. |
 | Operating System | Algılayıcı tarafından algılanan cihaz işletim sistemi. |
 | Takip tarihi katmanı | Bu cihaz için algılayıcı tarafından tanımlanan, bu cihaz için gereken, aşağıdaki gibi bir katman: <br /> -Otomatik <br /> -İşlem denetimi <br /> -Supervizör <br /> - Enterprise |
-| Açıklama | Ücretsiz metin alanı. <br /> Cihaz hakkında daha fazla bilgi ekleyin. |
+| Description | Ücretsiz metin alanı. <br /> Cihaz hakkında daha fazla bilgi ekleyin. |
 | Öznitelikler | Öğrenme döneminde cihaz hakkında keşfedilen ve diğer kategorilere ait olmayan ek bilgiler, Öznitelikler bölümünde görünür. <br /> Bilgi RO. |
 | Ayarlar | Hatalı pozitif durumları engellemek için cihaz ayarlarını el ile değiştirebilirsiniz: <br /> - **Yetkili cihaz**: öğrenme döneminde, ağda bulunan tüm cihazlar yetkili cihaz olarak tanımlanır. Bir cihaz öğrenme süresinden sonra bulunduğunda, varsayılan olarak yetkisiz bir cihaz olarak görünür. Bu tanımı el ile değiştirebilirsiniz. <br /> - **Tarayıcı olarak bilinen**: Bu cihazın tarayıcı olarak bilinmediğini ve sorun hakkında sizi uyarmak gerekmediğini biliyorsanız bu seçeneği etkinleştirin. <br /> - **Programlama aygıtı**: Bu cihazın bir programlama aygıtı olarak bilinmediğini ve programlama değişiklikleri yapmak için kullanıldığını biliyorsanız bu seçeneği etkinleştirin. Bunu bir programlama cihazı olarak tanımlamak, bu varlıktan kaynaklanan değişikliklerin programlanması uyarılarını engeller. |
 | Özel gruplar | Bu cihazın katıldığı cihaz eşlemesindeki özel gruplar. |
 | Durum | Cihazın güvenliği ve yetkilendirme durumu: <br /> -Durum, uyarı olmadığında olur `Secured` <br /> -Cihaz hakkında uyarılar olduğunda, uyarı sayısı görüntülenir <br /> -Durum, `Unauthorized` öğrenme süresinden sonra ağa eklenen cihazlar için görüntülenir. Cihazı ayarlarda el ile tanımlayabilirsiniz `Authorized Device` <br /> -Bu cihazın adresinin dinamik bir adres olarak tanımlanması durumunda `DHCP` duruma eklenir. |
 
 
-| Ağ | Açıklama |
+| Ağ | Description |
 |--|--|
 | Arabirimler | Cihaz arabirimleri. Bir RO alanı. |
 | Protokoller | Cihaz tarafından kullanılan protokoller. Bir RO alanı. |
@@ -485,7 +485,7 @@ Bu bölümde, programlama dosyalarının nasıl görüntüleneceği ve sürümle
 
 :::image type="content" source="media/how-to-work-with-maps/timeline-view.png" alt-text="programlama zaman çizelgesi penceresi":::
 
-|Programlama zaman çizelgesi türü | Açıklama |
+|Programlama zaman çizelgesi türü | Description |
 |--|--|
 | Programlanmış cihaz | Ana bilgisayar adı ve dosya dahil olmak üzere programlanmış cihaz hakkında ayrıntılar sağlar. |
 | Son olaylar | Algılayıcı tarafından algılanan 50 en son olayları görüntüler. <br />Bir olayı vurgulamak için, üzerine gelin ve yıldıza tıklayın. :::image type="icon" source="media/how-to-work-with-maps/star.png" border="false"::: <br /> Son 50 olay görüntülenebilir. |
@@ -540,7 +540,7 @@ Karşılaştırmak için:
 
 Programlama zaman çizelgesindeki ayrıntıları gözden geçirmeye ek olarak, cihaz Özellikler penceresi ve cihaz envanterindeki programlama bilgilerine de erişebilirsiniz.
 
-| Cihaz Türü | Açıklama |
+| Cihaz Türü | Description |
 |--|--|
 | Cihaz özellikleri | Cihaz özellikleri penceresi, aygıt aygıtında algılanan son programlama olayı hakkında bilgi sağlar. :::image type="content" source="media/how-to-work-with-maps/information-from-device-v2.png" alt-text="Cihazınızın Özellikleri"::: |
 | Cihaz envanteri | Cihaz envanteri, cihazın bir programlama aygıtı olup olmadığını gösterir. :::image type="content" source="media/how-to-work-with-maps/inventory-v2.png" alt-text="Cihazların envanteri"::: |

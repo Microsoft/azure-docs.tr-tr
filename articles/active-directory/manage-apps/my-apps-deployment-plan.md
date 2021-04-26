@@ -3,20 +3,19 @@ title: Azure Active Directory Apps yapılandırması 'nı planla
 description: Kuruluşunuzdaki uygulamalarımı etkin bir şekilde kullanmak için Planlama Kılavuzu.
 services: active-directory
 author: barbaraselden
-manager: daveba
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: conceptual
 ms.workload: identity
 ms.date: 02/29/2020
-ms.author: kenwith
-ms.reviewer: baselden
-ms.openlocfilehash: 5184639d8c34be705aeeb691f1cf38486f850673
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.author: baselden
+ms.openlocfilehash: 777daecc119a158f11d865489e4eb497c3bc7899
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105543967"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376605"
 ---
 # <a name="plan-azure-active-directory-my-apps-configuration"></a>Azure Active Directory Apps yapılandırması 'nı planla
 

@@ -8,13 +8,12 @@ ms.subservice: edge
 ms.topic: tutorial
 ms.date: 03/12/2021
 ms.author: alkohli
-Customer intent: As an IT admin, I need to understand how to add and connect to storage accounts on Azure Stack Edge Pro so I can use it to transfer data to Azure.
-ms.openlocfilehash: 4d235136190845ba7531592fdeecd9cd05b0347c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: d20ade0fdf6262c08a4ae961d17b1ec8a9ba39f2
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200932"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106065812"
 ---
 # <a name="tutorial-transfer-data-via-storage-accounts-with-azure-stack-edge-pro-gpu"></a>Öğretici: Azure Stack Edge Pro GPU ile depolama hesapları aracılığıyla veri aktarımı 
 

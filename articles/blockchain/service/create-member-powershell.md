@@ -1,16 +1,19 @@
 ---
 title: Azure blok zinciri hizmeti üyesi oluşturma-Azure PowerShell
 description: Azure PowerShell kullanarak bir blok zinciri Konsorsiyumu için Azure blok zinciri hizmeti üyesi oluşturun.
+ms.reviewer: ravastra
 ms.date: 9/22/2020
 ms.topic: quickstart
-ms.reviewer: ravastra
-ms.custom: references_regions, devx-track-azurepowershell
-ms.openlocfilehash: b57c44e79d599ab41b2c3356ee337811acdf639d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom:
+- references_regions
+- devx-track-azurepowershell
+- mode-api
+ms.openlocfilehash: 9087bda9c1979a98f4bbf9f8343d012c4cf3098c
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91948366"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107529638"
 ---
 # <a name="quickstart-create-an-azure-blockchain-service-blockchain-member-using-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell kullanarak bir Azure blok zinciri hizmeti blok zinciri üyesi oluşturma
 

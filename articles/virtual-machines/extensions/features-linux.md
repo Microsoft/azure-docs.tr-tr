@@ -8,12 +8,12 @@ author: amjads1
 ms.author: amjads
 ms.collection: linux
 ms.date: 03/30/2018
-ms.openlocfilehash: 8ff7b2940ca9ce3e5dc5913c0e676a32857771e7
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: bdbbc4c421b83fd041c7d900fb0edd01c4d636e0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105046887"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785100"
 ---
 # <a name="virtual-machine-extensions-and-features-for-linux"></a>Linux için sanal makine uzantıları ve özellikleri
 
@@ -65,7 +65,7 @@ Aracı trafik isteklerini yeniden yönlendirmek için, Linux aracısının proxy
 
 ## <a name="discover-vm-extensions"></a>VM uzantılarını bulma
 
-Azure VM'leri ile kullanabileceğiniz birçok farklı VM uzantısı vardır. Listenin tamamını görmek için [az VM Extension image List](/cli/azure/vm/extension/image#az-vm-extension-image-list)kullanın. Aşağıdaki örnek, *westus* konumundaki tüm kullanılabilir uzantıları listeler:
+Azure VM'leri ile kullanabileceğiniz birçok farklı VM uzantısı vardır. Listenin tamamını görmek için [az VM Extension image List](/cli/azure/vm/extension/image#az_vm_extension_image_list)kullanın. Aşağıdaki örnek, *westus* konumundaki tüm kullanılabilir uzantıları listeler:
 
 ```azurecli
 az vm extension image list --location westus --output table
@@ -77,9 +77,9 @@ Azure VM uzantıları, mevcut VM 'lerde çalışır, bu, önceden dağıtılmı�
 
 Aşağıdaki yöntemler mevcut bir VM 'ye karşı bir uzantı çalıştırmak için kullanılabilir.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
-Azure VM uzantıları, [az VM Extension set](/cli/azure/vm/extension#az-vm-extension-set) komutuyla mevcut bir VM 'ye karşı çalıştırılabilir. Aşağıdaki örnek, *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı bir VM 'ye karşı özel Betik uzantısı 'nı çalıştırır. Örnek kaynak grubu adı, VM adı ve betiği (https: \/ /RAW.githubusercontent.com/Me/Project/Hello.sh) kendi bilgileriniz ile değiştirin. 
+Azure VM uzantıları, [az VM Extension set](/cli/azure/vm/extension#az_vm_extension_set) komutuyla mevcut bir VM 'ye karşı çalıştırılabilir. Aşağıdaki örnek, *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı bir VM 'ye karşı özel Betik uzantısı 'nı çalıştırır. Örnek kaynak grubu adı, VM adı ve betiği (https: \/ /RAW.githubusercontent.com/Me/Project/Hello.sh) kendi bilgileriniz ile değiştirin. 
 
 ```azurecli
 az vm extension set `
@@ -277,7 +277,7 @@ En son küçük sürüm hata düzeltmelerini almak için, uzantı dağıtımlar�
 
 #### <a name="identifying-if-the-extension-is-set-with-autoupgrademinorversion-on-a-vm"></a>Uzantının, bir VM 'de oto Upgrademinorversion ile ayarlanmış olup olmadığını belirleme
 
-Uzantının ' oto Upgrademinorversion ' ile sağlanması durumunda VM modelinden bakabilirsiniz. Denetlemek için [az VM Show](/cli/azure/vm#az-vm-show) kullanın ve kaynak grubunu ve VM adını aşağıdaki gibi sağlayın:
+Uzantının ' oto Upgrademinorversion ' ile sağlanması durumunda VM modelinden bakabilirsiniz. Denetlemek için [az VM Show](/cli/azure/vm#az_vm_show) kullanın ve kaynak grubunu ve VM adını aşağıdaki gibi sağlayın:
 
 ```azurecli
 az vm show --resource-group myResourceGroup --name myVM
@@ -346,7 +346,7 @@ Aşağıdaki sorun giderme adımları tüm VM uzantıları için geçerlidir.
 
 ### <a name="view-extension-status"></a>Uzantı durumunu görüntüle
 
-VM uzantısı bir VM 'ye karşı çalıştırıldıktan sonra, aşağıdaki gibi uzantı durumunu döndürmek için [az VM Get-instance-View](/cli/azure/vm#az-vm-get-instance-view) kullanın:
+VM uzantısı bir VM 'ye karşı çalıştırıldıktan sonra, aşağıdaki gibi uzantı durumunu döndürmek için [az VM Get-instance-View](/cli/azure/vm#az_vm_get_instance_view) kullanın:
 
 ```azurecli
 az vm get-instance-view \
@@ -379,7 +379,7 @@ Uzantı yürütme durumu Azure portal da bulunabilir. Bir uzantının durumunu g
 
 ### <a name="rerun-a-vm-extension"></a>VM uzantısını yeniden çalıştırma
 
-Bir VM uzantısının yeniden çalıştırılması gereken durumlar olabilir. Bir uzantıyı kaldırarak yeniden çalıştırabilir ve sonra uzantıyı seçtiğiniz bir yürütme yöntemiyle yeniden çalıştırabilirsiniz. Bir uzantıyı kaldırmak için [az VM Extension Delete](/cli/azure/vm/extension#az-vm-extension-delete) ' i aşağıda gösterildiği gibi kullanın:
+Bir VM uzantısının yeniden çalıştırılması gereken durumlar olabilir. Bir uzantıyı kaldırarak yeniden çalıştırabilir ve sonra uzantıyı seçtiğiniz bir yürütme yöntemiyle yeniden çalıştırabilirsiniz. Bir uzantıyı kaldırmak için [az VM Extension Delete](/cli/azure/vm/extension#az_vm_extension_delete) ' i aşağıda gösterildiği gibi kullanın:
 
 ```azurecli
 az vm extension delete \

@@ -5,12 +5,13 @@ services: automation
 ms.subservice: ''
 ms.topic: conceptual
 ms.date: 12/17/2020
-ms.openlocfilehash: 2b40cc3d4cea4476ffde8bee8cec694975eb5083
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 9ab4ce9b8691f27fe392d2e3099677d45900d2e3
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97724281"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834237"
 ---
 # <a name="azure-automation-frequently-asked-questions"></a>Azure Otomasyonu sık sorulan sorular
 

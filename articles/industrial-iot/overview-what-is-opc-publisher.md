@@ -1,32 +1,30 @@
 ---
 title: Microsoft OPC yayımcısı
 description: Bu makalede OPC Publisher Edge modülüne genel bakış sunulmaktadır.
-author: jehona-m
+author: v-condav
 ms.author: jemorina
 ms.service: industrial-iot
 ms.topic: conceptual
 ms.date: 3/22/2021
-ms.openlocfilehash: 3a44bdbadfe6ecd86a1b98fb7002f2d75c23bb6a
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 6df39c93e9bcfca522ac61a863c87269216cc592
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104800542"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816179"
 ---
 # <a name="what-is-the-opc-publisher"></a>OPC yayımcısı nedir?
 
-OPC Publisher, açık olarak geliştirilen ve endüstriyel varlıklar ve Microsoft Azure bulutu arasındaki boşluğu bağlayan, tam olarak desteklenen bir Microsoft ürünüdür. Bu, OPC UA özellikli varlıklara veya endüstriyel bağlantı yazılımına bağlanarak telemetri verilerini IEC62541 OPC UA PubSub standart biçimi (sürüm 2,6 ' den başlayarak) gibi çeşitli biçimlerde Azure IoT Hub yayımlar.
-
-Modül olarak Azure IoT Edge veya bir kapsayıcı olarak düz Docker üzerinde çalışır. .NET platformlar arası çalışma zamanının kullandığından, Linux ve Windows 10 ' da yerel olarak da çalışır.
+OPC yayımcısı, endüstriyel varlıklar ve Microsoft Azure bulutu arasındaki boşluğu bağlayan, tam olarak desteklenen bir Microsoft ürünüdür. OPC UA özellikli varlıkları veya endüstriyel bağlantı yazılımlarını Microsoft Azure buluta bağlayarak bunu yapar. Azure IoT Hub topladığı telemetri verilerini IEC62541 OPC UA PubSub standart biçimi (sürüm 2,6 ' den başlayarak) gibi çeşitli biçimlerde yayımlar. OPC yayımcısı, Azure IoT Edge bir modül olarak veya düz Docker üzerinde bir kapsayıcı olarak çalışır. .NET platformlar arası çalışma zamanının kullandığından, hem Linux hem de Windows 10 ' da yerel olarak çalışır.
 
 OPC yayımcısı, nasıl yapılacağını gösteren bir başvuru uygulamasıdır:
 
 - Mevcut OPC UA sunucularına bağlanın.
-- Azure IoT Hub için bir JSON yükü kullanarak OPC UA pub/Sub biçimindeki OPC UA sunucularından JSON kodlu telemetri verilerini yayımlayın.
+- Azure IoT Hub bir JSON yükü kullanarak OPC UA pub/Sub biçimindeki OPC UA sunucularından JSON kodlu telemetri verilerini yayımlayın.
 
-Azure IoT Hub istemci SDK 'sının desteklediği aktarım protokollerinden herhangi birini kullanabilirsiniz: HTTPS, AMQP ve MQTT.
+HTTPS, AMQP ve MQTT gibi Azure IoT Hub istemci SDK 'sının desteklediği aktarım protokollerinden herhangi birini kullanabilirsiniz.
 
-Başvuru uygulama şunları içerir:
+Başvuru uygulamasına aşağıdakiler dahildir.
 
 - Ağınızda bulunan mevcut OPC UA sunucularına bağlanmak için OPC UA *istemcisi* .
 - 62222 numaralı bağlantı noktasındaki OPC UA *sunucusu* , nelerin yayımlandığını yönetmek için kullanabileceğiniz ve doğrudan aynı yapmak için IoT Hub doğrudan yöntemler sunmaktadır.

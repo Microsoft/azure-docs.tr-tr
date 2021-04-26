@@ -3,12 +3,12 @@ title: Visual Studio Code-Azure Işlevleri kullanarak bir PowerShell işlevi olu
 description: PowerShell işlevi oluşturmayı öğrenin ve ardından Visual Studio Code içindeki Azure Işlevleri uzantısını kullanarak yerel projeyi Azure Işlevleri 'nde sunucusuz barındırma için yayımlayın.
 ms.topic: quickstart
 ms.date: 11/04/2020
-ms.openlocfilehash: 9833b154cdba24f8760e7e8d9040bfc72bbcd271
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 58a2b8a5fb386603361afa9fc26b4d323c487691
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99493609"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862570"
 ---
 # <a name="quickstart-create-a-powershell-function-in-azure-using-visual-studio-code"></a>Hızlı başlangıç: Visual Studio Code kullanarak Azure 'da PowerShell işlevi oluşturma
 
@@ -30,7 +30,7 @@ Başlamadan önce, aşağıdaki gereksinimlerin yerinde olduğundan emin olun:
 
 + [PowerShell 7](/powershell/scripting/install/installing-powershell-core-on-windows)
 
-+ Hem [.net core 3,1 çalışma zamanı](https://www.microsoft.com/net/download) hem de [.NET Core 2,1 çalışma zamanı](https://dotnet.microsoft.com/download/dotnet-core/2.1)  
++ Hem [.net core 3,1 çalışma zamanı](https://dotnet.microsoft.com/download) hem de [.NET Core 2,1 çalışma zamanı](https://dotnet.microsoft.com/download/dotnet/2.1)  
 
 + [Desteklenen platformlardan](https://code.visualstudio.com/docs/supporting/requirements#_platforms) birinde çalışan [Visual Studio Code](https://code.visualstudio.com/).    
 

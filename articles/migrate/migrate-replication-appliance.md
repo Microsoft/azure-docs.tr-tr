@@ -1,17 +1,17 @@
 ---
 title: Azure Geçişi çoğaltma gereci
-description: Aracı tabanlı VMWare geçişi için Azure geçişi çoğaltma gereci hakkında bilgi edinin.
+description: Aracı tabanlı VMware geçişi için Azure geçişi çoğaltma gereci hakkında bilgi edinin.
 author: anvar-ms
 ms.author: anvar
 ms.manager: bsiva
 ms.topic: conceptual
 ms.date: 01/30/2020
-ms.openlocfilehash: ec277bcc3e361561f54e72c54526d65487c113b4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5f63b033c3995932662fc9b68c1397bf57b0326e
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96754105"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714983"
 ---
 # <a name="replication-appliance"></a>Çoğaltma gereci
 
@@ -75,7 +75,7 @@ MySQL, çoğaltma gereç makinesinde yüklü olmalıdır. Bu yöntemlerin biri k
 **Yöntem** | **Ayrıntılar**
 --- | ---
 El ile indir ve yükle | MySQL uygulamasını indirin & C:\Temp\ASRSetup klasörüne yerleştirip el ile yükleyin.<br/> Gereç 'yi ayarlarken, MySQL zaten yüklü olarak gösterilir.
-Çevrimiçi indirme olmadan | MySQL Yükleyici uygulamasını C:\temp\asrsetupfolder klasörüne yerleştirin. Gereci yüklerken ve MySQL 'i indirip yüklemek için tıkladığınızda, kurulum eklediğiniz yükleyiciyi kullanır.
+Çevrimiçi indirme olmadan | MySQL Yükleyici uygulamasını C:\temp\asrsetupfolder klasörüne yerleştirin. Gereci yükledikten sonra MySQL indir ve Yükle ' yi seçtiğinizde, kurulum eklediğiniz yükleyiciyi kullanır.
 Azure geçişi 'ne indirme ve yükleme | Gereci yüklerken ve MySQL istendiğinde, **indir ve yükle**' yi seçin.
 
 ## <a name="url-access"></a>URL erişimi
@@ -89,7 +89,7 @@ Azure geçişi 'ne indirme ve yükleme | Gereci yüklerken ve MySQL istendiğind
 \*.blob.core.windows.net | Çoğaltılan verileri depolayan depolama hesabına erişmek için kullanılır
 \*.hypervrecoverymanager.windowsazure.com | Çoğaltma yönetimi işlemleri ve düzenlemesi için kullanılır
 https:\//management.azure.com | Çoğaltma yönetimi işlemleri ve düzenlemesi için kullanılır
-*.services.visualstudio.com | Telemetri amaçları için kullanılır (isteğe bağlıdır)
+*.services.visualstudio.com | Günlüğe kaydetme amacıyla kullanılır (isteğe bağlıdır)
 time.windows.com | Sistem ile genel saat arasındaki saat eşitlemesini denetlemek için kullanılır.
 https:\//login.microsoftonline.com <br/> https:\//secure.aadcdn.microsoftonline-p.com <br/> https: \/ /login.Live.com <br/> https: \/ /Graph.Windows.net <br/> https:\//login.windows.net <br/> https: \/ /www.Live.com <br/> https: \/ /www.Microsoft.com  | Gereç kurulumunun bu URL 'Lere erişmesi gerekiyor. Erişim denetimi ve kimlik yönetimi için Azure Active Directory tarafından kullanılır
 https: \/ /dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-5.7.20.0.msi | MySQL indirme işleminin tamamlanmasını sağlar. Birkaç bölgede, indirme CDN URL 'sine yeniden yönlendirilebilir. Gerekirse CDN URL 'sinin da izin verildiğinden emin olun.
@@ -106,10 +106,17 @@ https: \/ /dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-
 \*.blob.core.windows.net | Çoğaltılan verileri depolayan depolama hesabına erişmek için kullanılır
 \*. hypervrecoverymanager.windowsazure.us | Çoğaltma yönetimi işlemleri ve düzenlemesi için kullanılır
 https:\//management.usgovcloudapi.net | Çoğaltma yönetimi işlemleri ve düzenlemesi için kullanılır
-*.services.visualstudio.com | Telemetri amaçları için kullanılır (isteğe bağlıdır)
+*.services.visualstudio.com | Günlüğe kaydetme amacıyla kullanılır (isteğe bağlıdır)
 time.nist.gov | Sistem ile genel saat arasındaki saat eşitlemesini denetlemek için kullanılır.
 https:\//login.microsoftonline.com <br/> https:\//secure.aadcdn.microsoftonline-p.com <br/> https: \/ /login.Live.com <br/> https: \/ /Graph.Windows.net <br/> https:\//login.windows.net <br/> https: \/ /www.Live.com <br/> https: \/ /www.Microsoft.com  | OVA ile gereç kurulumunun bu URL 'lere erişmesi gerekir. Erişim denetimi ve kimlik yönetimi için Azure Active Directory tarafından kullanılır.
-https: \/ /dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-5.7.20.0.msi | MySQL indirme işleminin tamamlanmasını sağlar. Birkaç bölgede, indirme CDN URL 'sine yeniden yönlendirilebilir. Gerekirse CDN URL 'sinin da izin verildiğinden emin olun.
+https: \/ /dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-5.7.20.0.msi | MySQL indirme işleminin tamamlanmasını sağlar. Birkaç bölgede, indirme CDN URL 'sine yeniden yönlendirilebilir. Gerekirse CDN URL 'sinin da izin verildiğinden emin olun.  
+
+>[!Note]
+>
+> Projeyi geçirdiğinizde özel uç nokta bağlantısı varsa, özel bağlantı erişiminin üzerinden ve üzerinde aşağıdaki URL 'lere erişmeniz gerekir:   
+> - *. blob.core.windows.com-çoğaltılan verileri depolayan depolama hesabına erişin. Bu isteğe bağlıdır ve depolama hesabının ekli bir özel uç noktası varsa gerekli değildir. 
+> - https: \/ /Management.Azure.com, çoğaltma yönetimi işlemleri ve düzenlemesi için. 
+>- https:\//login.microsoftonline.com <br/>https:\//login.windows.net <br/> https: \/ /www.Live.com _ve_ <br/> \/Azure Active Directory tarafından erişim denetimi ve kimlik yönetimi için https:/www.Microsoft.com
 
 ## <a name="port-access"></a>Bağlantı noktası erişimi
 
@@ -138,7 +145,7 @@ VM'ler | VM 'lerde çalışan Mobility hizmeti, çoğaltma yönetimi için HTTPS
 
 Gereç, Azure geçiş hub 'ından el ile yükseltilir. En son sürümü her zaman çalıştırmanızı öneririz.
 
-1. Azure geçişi > sunucuları > Azure geçişi: Sunucu değerlendirmesi, altyapı sunucuları, **yapılandırma sunucuları**' na tıklayın.
+1. Azure geçişi > sunucuları > Azure geçişi: Sunucu değerlendirmesi, altyapı sunucuları, **yapılandırma sunucuları**' nı seçin.
 2. **Yapılandırma sunucularında**, çoğaltma gerecinin yeni bir sürümü kullanılabilir olduğunda **Aracı sürümünde** bir bağlantı görüntülenir. 
 3. Yükleyiciyi, çoğaltma gereci makinesine indirin ve yükseltmeyi yükleyin. Yükleyici, Gereç üzerinde çalışan geçerli sürümü algılar.
  

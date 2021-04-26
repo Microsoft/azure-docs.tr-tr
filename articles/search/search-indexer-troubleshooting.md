@@ -8,12 +8,12 @@ ms.author: magottei
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: 7eadc9121c54b636fa8b42579284d4018043e1c1
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: efdd9666c8876ddaf12b9555fa66beb62c56e93e
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91355134"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107740074"
 ---
 # <a name="troubleshooting-common-indexer-issues-in-azure-cognitive-search"></a>Azure Bilişsel Arama ortak Dizin Oluşturucu sorunlarını giderme
 
@@ -68,6 +68,86 @@ SQL yönetilen örneğindeki verilere erişim hakkında daha fazla ayrıntı [bu
 ### <a name="cosmosdb-indexing-isnt-enabled"></a>CosmosDB "Dizin oluşturma" etkin değil
 
 Azure Bilişsel Arama Cosmos DB Dizin oluşturma üzerinde örtük bir bağımlılığa sahiptir. Cosmos DB Otomatik Dizin oluşturmayı kapatırsanız Azure Bilişsel Arama başarılı bir durum döndürür, ancak kapsayıcı içerikleri dizinlemeye başarısız olur. Ayarları denetleme ve Dizin oluşturmayı açma hakkında yönergeler için, bkz. [Azure Cosmos DB Dizin oluşturmayı yönetme](../cosmos-db/how-to-manage-indexing-policy.md#use-the-azure-portal).
+
+### <a name="sharepoint-online-conditional-access-policies"></a>SharePoint Online koşullu erişim ilkeleri
+
+Bir SharePoint Online Indexer oluştururken, bir cihaz kodu sağladıktan sonra AAD uygulamanızda oturum açmanızı gerektiren bir adımla devam edersiniz. "Oturum açma işlemi başarılı oldu, ancak yöneticiniz, cihazın yönetilmek üzere erişim isteğinde bulunmasını istiyor" iletisini alırsanız, bir [koşullu erişim](https://review.docs.microsoft.com/azure/active-directory/conditional-access/overview) ilkesi nedeniyle dizin oluşturucunun SharePoint Online belge kitaplığına erişmesi olasıdır.
+
+İlkeyi, dizin oluşturucunun belge kitaplığına erişmesine izin verecek şekilde güncelleştirmek için aşağıdaki adımları izleyin:
+
+1. Azure portal açın ve **Azure AD koşullu erişim** araması yapın ve ardından sol menüdeki **ilkeler** ' i seçin. Bu sayfayı görüntülemek için erişiminiz yoksa, erişimi olan veya erişimi olan birini bulmanız gerekir.
+
+1. Hangi ilkenin SharePoint Online Indexer 'ın belge kitaplığına erişimini engellediğini belirleme. Dizin oluşturucuyu engelliyor olabilecek ilke, **Kullanıcılar ve gruplar** bölümünde Dizin Oluşturucu oluşturma adımı sırasında kimlik doğrulaması için kullandığınız kullanıcı hesabını içerir. İlke şu **koşullara** da sahip olabilir:
+    * **Windows** platformlarını kısıtlayın.
+    * **Mobil uygulamaları ve Masaüstü istemcilerini** kısıtlayın.
+    * **Cihaz durumunun** **Evet** olarak yapılandırıldığını.
+
+1. Dizin oluşturucuyu engelleyen bir ilke olduğunu doğruladıktan sonra, Dizin Oluşturucu için bir istisna yapmanız gerekir. Arama hizmeti IP adresini alın.
+
+    1. Arama hizmetinizin tam etki alanı adını (FQDN) alın. Bu, şöyle görünecektir `<search-service-name>.search.windows.net` . Azure portal arama hizmetinize arayarak FQDN 'yi bulabilirsiniz.
+
+   ![Hizmet FQDN 'SI al](media\search-indexer-howto-secure-access\search-service-portal.png "Hizmet FQDN 'SI al")
+
+    Arama hizmetinin IP adresi, `nslookup` FQDN 'nin bir (veya a) gerçekleştirerek elde edilebilir `ping` . Aşağıdaki örnekte, Azure Storage güvenlik duvarında gelen bir kurala "150.0.0.1" ekleyeceksiniz. Azure depolama hesabına erişebilmek için, arama hizmeti dizin oluşturucunun güvenlik duvarı ayarları güncelleştirildikten sonra 15 dakika kadar sürebilir.
+
+    ```azurepowershell
+
+    nslookup contoso.search.windows.net
+    Server:  server.example.org
+    Address:  10.50.10.50
+    
+    Non-authoritative answer:
+    Name:    <name>
+    Address:  150.0.0.1
+    Aliases:  contoso.search.windows.net
+    ```
+
+1. Bölgeniz için Dizin Oluşturucu yürütme ortamı için IP adresi aralıklarını alın.
+
+    Ek IP adresleri, dizin oluşturucunun [çok kiracılı yürütme ortamından](search-indexer-securing-resources.md#indexer-execution-environment)kaynaklanan istekler için kullanılır. Bu IP adresi aralığını hizmet etiketinden alabilirsiniz.
+
+    Hizmet etiketi için IP adresi aralıkları `AzureCognitiveSearch` [bulma API 'si (Önizleme)](../virtual-network/service-tags-overview.md#use-the-service-tag-discovery-api-public-preview) veya [indirilebilir JSON dosyası](../virtual-network/service-tags-overview.md#discover-service-tags-by-using-downloadable-json-files)aracılığıyla elde edilebilir.
+
+    Bu kılavuzda, arama hizmetinin Azure genel bulutu olduğu varsayıldığında, [Azure genel JSON dosyası](https://www.microsoft.com/download/details.aspx?id=56519) indirilmelidir.
+
+   ![JSON dosyasını indir](media\search-indexer-troubleshooting\service-tag.png "JSON dosyasını indir")
+
+    Arama hizmetinin Orta Batı ABD olduğu kabul edildiğinde JSON dosyasından, çok kiracılı Dizin Oluşturucu yürütme ortamı için IP adreslerinin listesi aşağıda listelenmiştir.
+
+    ```json
+        {
+          "name": "AzureCognitiveSearch.WestCentralUS",
+          "id": "AzureCognitiveSearch.WestCentralUS",
+          "properties": {
+            "changeNumber": 1,
+            "region": "westcentralus",
+            "platform": "Azure",
+            "systemService": "AzureCognitiveSearch",
+            "addressPrefixes": [
+              "52.150.139.0/26",
+              "52.253.133.74/32"
+            ]
+          }
+        }
+    ```
+
+1. Azure portal koşullu erişim sayfasına dönün, sol taraftaki menüden **adlandırılmış konumlar** ' ı seçin ve **+ IP aralıkları konumu**' nu seçin. Yeni adlandırılmış konumunuza bir ad verin ve en son iki adımda topladığınız arama hizmetiniz ve Dizin Oluşturucu yürütme ortamlarınız için IP aralıklarını ekleyin.
+    * Yalnızca geçerli IP aralıklarını kabul ettiğinden, arama hizmeti IP adresiniz için IP adresinin sonuna "/32" eklemeniz gerekebilir.
+    * Dizin Oluşturucu yürütme ortamı IP aralıkları için, yalnızca arama hizmetinizin bulunduğu bölgenin IP aralıklarını eklemeniz gerektiğini unutmayın.
+
+1. Yeni adlandırılmış konumu ilkeden dışlayın. 
+    1. Sol taraftaki menüden **ilkeler** ' i seçin. 
+    1. Dizin oluşturucuyu engelleyen ilkeyi seçin.
+    1. **Koşulları** seçin.
+    1. **Konum** seçin.
+    1. **Dışla** ' yı seçin ve ardından yeni adlandırılmış konumu ekleyin.
+    1. Değişiklikleri **kaydedin** .
+
+1. İlkenin yeni ilke kurallarını güncelleştirmesi ve zorlaması için birkaç dakika bekleyin.
+
+1. Dizin oluşturucuyu yeniden oluşturma girişimi
+    1. Oluşturduğunuz veri kaynağı nesnesi için bir güncelleştirme isteği gönderin.
+    1. Dizin Oluşturucu oluşturma isteğini yeniden gönderin. Oturum açmak için yeni kodu kullanın, sonra başarılı oturum açma işleminden sonra başka bir Dizin Oluşturucu oluşturma isteği gönderin.
 
 ## <a name="document-processing-errors"></a>Belge işleme hataları
 

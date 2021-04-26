@@ -13,14 +13,14 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 10/22/2020
+ms.date: 04/12/2021
 ms.author: radeltch
-ms.openlocfilehash: e33b514f61aec69c566eae455d2e59b1a66813f6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0d125f258be45889c6c917d9d1fe170bb9502cf7
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101673800"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107307529"
 ---
 # <a name="high-availability-for-sap-netweaver-on-azure-vms-on-suse-linux-enterprise-server-for-sap-applications"></a>SAP uygulamaları için SUSE Linux Enterprise Server Azure VM 'lerinde SAP NetWeaver için yüksek kullanılabilirlik
 
@@ -206,7 +206,6 @@ Tüm gerekli kaynakları dağıtmak için GitHub 'daki hızlı başlangıç şab
          1. Yeni yük dengeleyici kuralının adını girin (örneğin, **NW1-lb-ascs**)
          1. Daha önce oluşturduğunuz ön uç IP adresini, arka uç havuzunu ve sistem durumu araştırmasını seçin (örneğin, **NW1-ascs-ön uç**, **NW1-arka uç** ve **NW1-ascs-HP**)
          1. **Ha bağlantı noktalarını** seçin
-         1. Boşta kalma zaman aşımını 30 dakikaya yükselt
          1. **Kayan IP 'yi etkinleştirdiğinizden emin olun**
          1. Tamam 'a tıklayın
          * ÇÖZÜMLEYICILER için Yük Dengeleme kuralları oluşturmak için yukarıdaki adımları tekrarlayın (örneğin, **NW1-lb-ers**)

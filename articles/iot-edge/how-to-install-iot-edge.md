@@ -9,12 +9,12 @@ services: iot-edge
 ms.topic: conceptual
 ms.date: 03/26/2021
 ms.author: kgremban
-ms.openlocfilehash: a98eed61904b580988fe34302999f3ec6a24ac9e
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 39e165d862d6e174f763cd58529727fd26b8bd46
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640917"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311082"
 ---
 # <a name="install-or-uninstall-azure-iot-edge-for-linux"></a>Linux için Azure IoT Edge yükleme veya kaldırma
 
@@ -125,10 +125,10 @@ Güvenlik arka plan programının en son sürümünü yüklemek istiyorsanız, *
    sudo apt-get install iotedge
    ```
 
-Ya da güvenlik arka plan programının belirli bir sürümünü yüklemek istiyorsanız, apt liste çıktısından sürümü belirtin. Ayrıca, **libiothsm-STD** paketi için aynı sürümü belirtin, aksi takdirde en son sürümünü yükler. Örneğin, aşağıdaki komut 1.0.10 sürümünün en son sürümünü yüklüyor:
+Ya da güvenlik arka plan programının belirli bir sürümünü yüklemek istiyorsanız, apt liste çıktısından sürümü belirtin. Ayrıca, **libiothsm-STD** paketi için aynı sürümü belirtin, aksi takdirde en son sürümünü yükler. Örneğin, aşağıdaki komut 1,1 sürümünün en son sürümünü yüklüyor:
 
    ```bash
-   sudo apt-get install iotedge=1.0.10* libiothsm-std=1.0.10*
+   sudo apt-get install iotedge=1.1* libiothsm-std=1.1*
    ```
 
 Yüklemek istediğiniz sürüm listelenmemişse, bu makalenin ilerleyen kısımlarında yer alan [çevrimdışı veya belirli sürüm yükleme](#offline-or-specific-version-installation-optional) adımlarını izleyin. Bu bölümde, IoT Edge güvenlik arka plan programının veya sürüm adayı sürümlerinin önceki bir sürümünün nasıl hedeflenecek gösterilmektedir.
@@ -146,7 +146,7 @@ IoT kimlik hizmeti, IoT Edge sürüm 1,2 ile birlikte sunulmuştur. Bu hizmet, I
 Bu bölümdeki adımlarda, internet bağlantısı olan bir cihaza en son sürümü yüklemek için tipik bir işlem temsil etmektedir. Yayın öncesi sürüm gibi belirli bir sürümü yüklemeniz ya da çevrimdışıyken yüklemeniz gerekiyorsa, bu makalenin ilerleyen kısımlarında yer alarak [çevrimdışı veya belirli sürüm yükleme](#offline-or-specific-version-installation-optional) adımlarını izleyin.
 
 >[!NOTE]
->Bu bölümdeki adımlarda, şu anda genel önizlemede olan IoT Edge sürüm 1,2 ' nin nasıl yükleneceği gösterilmektedir. IoT Edge en son genel kullanıma sunulan sürümünü yüklemeye yönelik adımları arıyorsanız, bu makalenin [1,1 (LTS)](?view=iotedge-2018-06&preserve-view=true) sürümünü görüntüleyin.
+>Bu bölümdeki adımlarda IoT Edge sürüm 1,2 ' nin nasıl yükleneceği gösterilmektedir.
 >
 >Daha eski bir sürümü çalıştıran bir IoT Edge cihazınız zaten varsa ve 1,2 sürümüne yükseltmek istiyorsanız, [IoT Edge güvenlik cini ve çalışma zamanını güncelleştirme](how-to-update-iot-edge.md)bölümündeki adımları kullanın. Sürüm 1,2, yükseltmek için belirli adımların gerekli olduğu IoT Edge önceki sürümlerinden yeterince farklıdır.
 
@@ -168,15 +168,11 @@ En son IoT Edge sürümünü yüklemek istiyorsanız, kimlik hizmeti paketinin e
    sudo apt-get install aziot-edge
    ```
 
-<!-- commenting out for public preview. reintroduce at GA
-
-Or, if you want to install a specific version of IoT Edge and the identity service, specify the versions from the apt list output. Specify the same versions for both services.. For example, the following command installs the most recent version of the 1.2 release:
+Ya da IoT Edge belirli bir sürümünü ve kimlik hizmetini yüklemek istiyorsanız, apt liste çıktısından sürümleri belirtin. Her iki hizmet için de aynı sürümleri belirtin. Örneğin, aşağıdaki komut 1,2 sürümünün en son sürümünü yüklüyor:
 
    ```bash
    sudo apt-get install aziot-edge=1.2* aziot-identity-service=1.2*
    ```
-
--->
 
 <!-- end 1.2 -->
 ::: moniker-end
@@ -462,7 +458,7 @@ Kıvrımlı komutlarını kullanarak bileşen dosyalarını doğrudan IoT Edge G
    2. Hsmlib 'in bu sürümünü yüklemek için aşağıdaki komutta bulunan kopyalanmış bağlantıyı kullanın:
 
       ```bash
-      curl -L <libiothsm-std link> -o libiothsm-std.deb && sudo dpkg -i ./libiothsm-std.deb
+      curl -L <libiothsm-std link> -o libiothsm-std.deb && sudo apt-get install ./libiothsm-std.deb
       ```
 
    3. IoT Edge cihazınızın mimarisiyle eşleşen **iotedge** dosyasını bulun. Dosya bağlantısına sağ tıklayıp bağlantı adresini kopyalayın.
@@ -470,7 +466,7 @@ Kıvrımlı komutlarını kullanarak bileşen dosyalarını doğrudan IoT Edge G
    4. IoT Edge güvenlik arka plan programının bu sürümünü yüklemek için aşağıdaki komutta bulunan kopyalanmış bağlantıyı kullanın.
 
       ```bash
-      curl -L <iotedge link> -o iotedge.deb && sudo dpkg -i ./iotedge.deb
+      curl -L <iotedge link> -o iotedge.deb && sudo apt-get install ./iotedge.deb
       ```
 
 <!-- end 1.1 -->

@@ -7,13 +7,13 @@ ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 08/17/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: c6bf296b5173a662b1e9dd7b025648e3f16d23c8
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: cdbb7574f9da5ea6cd0695b74c269d8e1b88b7f4
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "88556350"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106444080"
 ---
 # <a name="what-is-msix-app-attach"></a>MSIX uygulama iliştirme nedir?
 

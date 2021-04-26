@@ -5,12 +5,12 @@ author: cgillum
 ms.topic: conceptual
 ms.date: 12/17/2019
 ms.author: azfuncdf
-ms.openlocfilehash: 4e4081ecca4714c713d105d363a83a4f96a0d3fc
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0ab9f33616547c073e8e3a2128a441238bf3a17d
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "84697852"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220462"
 ---
 # <a name="http-api-reference"></a>HTTP API başvurusu
 
@@ -18,7 +18,7 @@ Dayanıklı İşlevler uzantısı, düzenlemeler, [varlıklar](durable-functions
 
 Uzantı tarafından uygulanan tüm HTTP API 'Leri aşağıdaki parametreleri gerektirir. Tüm parametrelerin veri türü `string` .
 
-| Parametre        | Parametre türü  | Açıklama |
+| Parametre        | Parametre türü  | Description |
 |------------------|-----------------|-------------|
 | **`taskHub`**    | Sorgu dizesi    | [Görev hub 'ının](durable-functions-task-hubs.md)adı. Belirtilmemişse, geçerli işlev uygulamasının görev hub 'ı adı varsayılır. |
 | **`connection`** | Sorgu dizesi    | Depolama hesabı için bağlantı dizesinin **adı** . Belirtilmemişse, işlev uygulaması için varsayılan bağlantı dizesi varsayılır. |
@@ -128,6 +128,7 @@ GET /admin/extensions/DurableTaskExtension/instances/{instanceId}
     &showHistory=[true|false]
     &showHistoryOutput=[true|false]
     &showInput=[true|false]
+    &returnInternalServerErrorOnFailure=[true|false]
 ```
 
 Işlevler çalışma zamanının 2. x sürümünde, URL biçimi aynı parametrelere sahip ancak biraz farklı bir ön eke sahiptir:
@@ -140,6 +141,7 @@ GET /runtime/webhooks/durabletask/instances/{instanceId}
     &showHistory=[true|false]
     &showHistoryOutput=[true|false]
     &showInput=[true|false]
+    &returnInternalServerErrorOnFailure=[true|false]
 ```
 
 Bu API için istek parametreleri, daha önce belirtilen varsayılan kümeyi ve aşağıdaki benzersiz parametreleri içerir:
@@ -153,20 +155,21 @@ Bu API için istek parametreleri, daha önce belirtilen varsayılan kümeyi ve a
 | **`createdTimeFrom`**   | Sorgu dizesi    | İsteğe bağlı parametre. Belirtildiğinde, belirtilen ıSO8601 zaman damgasında veya bundan sonra oluşturulan döndürülen örneklerin listesini filtreler.|
 | **`createdTimeTo`**     | Sorgu dizesi    | İsteğe bağlı parametre. Belirtildiğinde, belirtilen ıSO8601 zaman damgasında veya daha önce oluşturulan döndürülen örneklerin listesini filtreler.|
 | **`runtimeStatus`**     | Sorgu dizesi    | İsteğe bağlı parametre. Belirtildiğinde, döndürülen örneklerin listesini çalışma zamanı durumlarına göre filtreler. Olası çalışma zamanı durum değerlerinin listesini görmek için, [örnekleri sorgulama](durable-functions-instance-management.md) makalesine bakın. |
+| **`returnInternalServerErrorOnFailure`**  | Sorgu dizesi    | İsteğe bağlı parametre. , Olarak ayarlandıysa `true` , örnek bir hata durumundaysa, bu apı 200 yerine BIR HTTP 500 yanıtı döndürür. Bu parametre otomatik durum yoklama senaryolarına yöneliktir. |
 
 ### <a name="response"></a>Yanıt
 
 Olası birkaç durum kodu değeri döndürülebilir.
 
-* **HTTP 200 (Tamam)**: belirtilen örnek tamamlanmış durumda.
+* **HTTP 200 (Tamam)**: belirtilen örnek tamamlanmış veya başarısız durumda.
 * **HTTP 202 (kabul edildi)**: belirtilen örnek devam ediyor.
 * **HTTP 400 (hatalı istek)**: belirtilen örnek başarısız oldu veya sonlandırıldı.
 * **HTTP 404 (bulunamadı)**: belirtilen örnek yok veya çalışmaya başlamadı.
-* **HTTP 500 (Iç sunucu hatası)**: belirtilen örnek işlenmeyen bir özel durumla başarısız oldu.
+* **HTTP 500 (Iç sunucu hatası)**: yalnızca `returnInternalServerErrorOnFailure` öğesine ayarlandığında `true` ve belirtilen örnek işlenmeyen bir özel durumla başarısız olduğunda döndürülür.
 
 **Http 200** ve **http 202** örnekleri için yanıt yükü AŞAĞıDAKI alanları içeren bir JSON nesnesidir:
 
-| Alan                 | Veri türü | Açıklama |
+| Alan                 | Veri türü | Description |
 |-----------------------|-----------|-------------|
 | **`runtimeStatus`**   | dize    | Örneğin çalışma zamanı durumu. Değerler *çalışıyor*, *bekliyor*, *başarısız*, *iptal edildi*, *sonlandırıldı*, *tamamlandı* olarak verilebilir. |
 | **`input`**           | JSON      | Örneği başlatmak için kullanılan JSON verileri. Bu alan, `null` `showInput` sorgu dizesi parametresi olarak ayarlanmışsa olur `false` .|
@@ -427,7 +430,7 @@ DELETE /runtime/webhooks/durabletask/instances
 
 Bu API için istek parametreleri, daha önce belirtilen varsayılan kümeyi ve aşağıdaki benzersiz parametreleri içerir:
 
-| Alan                 | Parametre türü  | Açıklama |
+| Alan                 | Parametre türü  | Description |
 |-----------------------|-----------------|-------------|
 | **`createdTimeFrom`** | Sorgu dizesi    | Verilen ıSO8601 zaman damgasında veya bundan sonra oluşturulan temizlenen örneklerin listesini filtreler.|
 | **`createdTimeTo`**   | Sorgu dizesi    | İsteğe bağlı parametre. Belirtildiğinde, belirtilen ıSO8601 zaman damgasında veya daha önce oluşturulan temizlenen örneklerin listesini filtreler.|

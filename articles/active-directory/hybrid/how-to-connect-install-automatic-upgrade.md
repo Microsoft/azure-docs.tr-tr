@@ -16,15 +16,16 @@ ms.date: 06/09/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9c8dcc8766b21551f3cd62289805fe735ef0f333
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3ec237af8cd0c79d5a7b62aad0bc6521e5cf3d7e
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91317625"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106059250"
 ---
 # <a name="azure-ad-connect-automatic-upgrade"></a>Azure AD Connect: Otomatik yükseltme
-Bu özellik Build 1.1.105.0 ile tanıtılmıştır [(2016 Şubat tarihinde yayımlanmıştır)](reference-connect-version-history.md).  Bu özellik [Build 1.1.561](reference-connect-version-history.md) içinde güncelleştirildi ve artık daha önce desteklenmeyen ek senaryoları destekliyor.
+Azure AD Connect otomatik yükseltme, Azure AD Connect yeni sürümlerini düzenli olarak denetleyen bir özelliktir. Sunucunuz otomatik yükseltme için etkinleştirilmişse ve sunucunuzun uygun olduğu daha yeni bir sürüm bulunursa, bu yeni sürüme otomatik olarak yükseltme gerçekleştirir.
+Otomatik yükseltmeyi gerçekleştiren aracının, indirilen sürümün dijital imzasına göre Azure AD Connect yeni derlemesini doğruladığını unutmayın.
 
 ## <a name="overview"></a>Genel Bakış
 Azure AD Connect yüklemenizin her zaman güncel olduğundan emin olmak, **otomatik yükseltme** özelliğiyle hiçbir zaman daha kolay olmamıştı. Bu özellik, hızlı yüklemeler ve DirSync yükseltmeleri için varsayılan olarak etkindir. Yeni bir sürüm yayınlandığında, yüklemeniz otomatik olarak yükseltilir.

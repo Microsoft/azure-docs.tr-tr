@@ -1,94 +1,127 @@
 ---
 title: Azure Logic Apps ile tümleşen bir işlev oluşturma
-description: Tweet duyarlılığını kategorilere ayırmak ve duyarlılık düşük olduğunda bildirim göndermek için Azure Logic Apps ve Azure Bilişsel Hizmetler ile tümleşen bir işlev oluşturun.
+description: Azure Logic Apps ve Azure bilişsel hizmetler ile tümleşen bir işlev oluşturun. Sonuçta elde edilen iş akışı, Tweet yaklaşımları e-posta bildirimleri gönderir.
 author: craigshoemaker
 ms.assetid: 60495cc5-1638-4bf0-8174-52786d227734
 ms.topic: tutorial
-ms.date: 04/27/2020
+ms.date: 04/10/2021
 ms.author: cshoe
 ms.custom: devx-track-csharp, mvc, cc996988-fb4f-47
-ms.openlocfilehash: 5750597d7d4d372be975aa64ce8db11859791da2
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3517835859de82117de07ad67cdf8027960ab777
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98674326"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107388685"
 ---
-# <a name="create-a-function-that-integrates-with-azure-logic-apps"></a>Azure Logic Apps ile tümleşen bir işlev oluşturma
+# <a name="tutorial-create-a-function-to-integrate-with-azure-logic-apps"></a>Öğretici: Azure Logic Apps ile tümleştirilecek bir işlev oluşturma
 
-Azure İşlevleri, Logic Apps Tasarımcısı'nda Azure Logic Apps ile tümleşir. Bu tümleştirme, İşlevlerin bilgi işlem gücünü diğer Azure hizmetleri ve üçüncü taraf hizmetler ile yapılan düzenlemelerde kullanmanıza olanak sağlar. 
+Azure İşlevleri, Logic Apps Tasarımcısı'nda Azure Logic Apps ile tümleşir. Bu tümleştirme, Işlevlerin bilgi işlem gücünü diğer Azure ve üçüncü taraf hizmetlerle birlikte kullanmanıza olanak sağlar.
 
-Bu öğreticide, Twitter gönderilerinden yaklaşım analizini çalıştırmak için Azure 'da Logic Apps ve bilişsel hizmetler ile Azure Işlevlerinin nasıl kullanılacağı gösterilmektedir. Bir HTTP tetikleyici işlevi, yaklaşım puanına göre yeşil, sarı veya kırmızı olarak kategorilere ayırır. Zayıf duyarlılık algılandığında bir e-posta gönderilir. 
+Bu öğreticide, Twitter etkinliğini çözümlemek için bir iş akışı oluşturma gösterilmektedir. Kavalar değerlendirildiğinde, bu iş akışı, olumlu sentiler algılandığında bildirim gönderir.
 
-![Logic App Tasarımcısı’nda uygulamanın ilk iki adımını gösteren görüntü](media/functions-twitter-email/00-logic-app-overview.png)
-
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
 
 > [!div class="checklist"]
 > * Bir Bilişsel Hizmetler API Kaynağı oluşturun.
 > * Tweet duyarlılığını kategorilere ayıran bir işlev oluşturun.
 > * Twitter’a bağlanan bir mantıksal uygulama oluşturun.
-> * Mantıksal uygulamaya duyarlılık algılama özelliğini ekleyin. 
+> * Mantıksal uygulamaya duyarlılık algılama özelliğini ekleyin.
 > * Mantıksal uygulamayı işleve bağlayın.
 > * İşlevden alınan yanıta göre bir e-posta gönderin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-+ Etkin bir [Twitter](https://twitter.com/) hesabı. 
-+ Bir [Outlook.com](https://outlook.com/) hesabı (bildirim göndermek için).
+* Etkin bir [Twitter](https://twitter.com/) hesabı.
+* Bir [Outlook.com](https://outlook.com/) hesabı (bildirim göndermek için).
 
 > [!NOTE]
-> Gmail bağlayıcısını kullanmak istiyorsanız, yalnızca G-Suite iş hesapları bu bağlayıcıyı mantıksal uygulamalarda kısıtlama olmadan kullanabilir. Gmail tüketicisi hesabınız varsa, Gmail bağlayıcısını yalnızca belirli Google-onaylanan uygulamalar ve hizmetlerle kullanabilir ya da [Gmail bağlayıcısında kimlik doğrulaması için kullanmak üzere bir Google istemci uygulaması oluşturabilirsiniz](/connectors/gmail/#authentication-and-bring-your-own-application). Daha fazla bilgi için, bkz. [Azure Logic Apps Google bağlayıcıları Için veri güvenliği ve gizlilik ilkeleri](../connectors/connectors-google-data-security-privacy-policy.md).
+> Gmail bağlayıcısını kullanmak istiyorsanız, yalnızca G-Suite iş hesapları bu bağlayıcıyı mantıksal uygulamalarda kısıtlama olmadan kullanabilir. Gmail tüketicisi hesabınız varsa, Gmail bağlayıcısını yalnızca belirli Google-onaylanan uygulamalar ve hizmetlerle kullanabilir ya da [Gmail bağlayıcısında kimlik doğrulaması için kullanmak üzere bir Google istemci uygulaması oluşturabilirsiniz](/connectors/gmail/#authentication-and-bring-your-own-application). <br><br>Daha fazla bilgi için, bkz. [Azure Logic Apps Google bağlayıcıları Için veri güvenliği ve gizlilik ilkeleri](../connectors/connectors-google-data-security-privacy-policy.md).
 
-+ Bu makalede, başlangıç noktası olarak [Azure portalında ilk işlevinizi oluşturma](./functions-get-started.md) bölümünde oluşturulan kaynaklar kullanılmaktadır.
-Daha önce yapmadıysanız işlev uygulamanızı oluşturmak için bu adımları uygulayın.
+## <a name="create-text-analytics-resource"></a>Metin Analizi kaynağı oluşturma
 
-## <a name="create-a-cognitive-services-resource"></a>Bilişsel Hizmetler kaynağı oluşturma
-
-Bilişsel Hizmetler API'leri Azure’da tek kaynaklar halinde kullanılabilir. İzlenmekte olan tweetlerin duyarlılığını algılamak için Metin Analizi API’sini kullanın.
+Bilişsel Hizmetler API'leri Azure’da tek kaynaklar halinde kullanılabilir. Metin Analizi API'si, deftere nakledilen kavalerin yaklaşımını algılamak için kullanın.
 
 1. [Azure portalında](https://portal.azure.com/) oturum açın.
 
-2. Azure portalının sol üst köşesinde bulunan **Kaynak oluştur** öğesine tıklayın.
+1. Azure portalının sol üst köşesinde bulunan **Kaynak oluştur** öğesini seçin.
 
-3. **AI + Machine Learning**  >  **metin analizi**' ne tıklayın. Sonra, tabloda belirtilen ayarları kullanarak kaynağı oluşturun.
+1. _Kategoriler_ altında **AI + Machine Learning** ' yi seçin.
 
-    ![Bilişsel kaynak sayfası oluşturma](media/functions-twitter-email/01-create-text-analytics.png)
+1. _Metin analizi_ altında **Oluştur**' u seçin.
 
-    | Ayar      |  Önerilen değer   | Açıklama                                        |
-    | --- | --- | --- |
-    | **Ad** | MyCognitiveServicesAccnt | Benzersiz bir hesap adı seçin. |
-    | **Konum** | Batı ABD | Size en yakın konumu kullanın. |
-    | **Fiyatlandırma katmanı** | F0 | En düşük katman ile başlayın. Çağrılarınız biterse daha yüksek bir katmana ölçeklendirin.|
-    | **Kaynak grubu** | myResourceGroup | Bu öğreticideki tüm hizmetler için aynı kaynak grubunu kullanın.|
+1. _Metin analizi oluştur_ ekranına aşağıdaki değerleri girin.
 
-4. Kaynağınızı oluşturmak için **Oluştur**'a tıklayın. 
+    | Ayar | Değer | Açıklamalar |
+    | ------- | ----- | ------- |
+    | Abonelik | Azure abonelik adınız | |
+    | Kaynak grubu | **Tweet-Sentiment** adlı yeni bir kaynak grubu oluşturma-öğretici | Daha sonra bu öğreticide oluşturulan tüm kaynakları kaldırmak için bu kaynak grubunu silersiniz. |
+    | Region | Size en yakın bölgeyi seçin | |
+    | Name | **Doldurulabilir Etsentimentapp** | |
+    | Fiyatlandırma katmanı | **Ücretsiz F0** seçin | |
 
-5. **Genel bakış** ' a tıklayın ve **uç noktanın** değerini bir metin düzenleyicisine kopyalayın. Bu değer, Bilişsel Hizmetler API’sine bağlantı oluşturulurken kullanılır.
+1. **Gözden geçir ve oluştur**’u seçin.
 
-    ![Bilişsel Hizmetler Ayarları](media/functions-twitter-email/02-cognitive-services.png)
+1. **Oluştur**’u seçin.
 
-6. Sol gezinti sütununda **Anahtarlar**’a tıklayın ve sonra **Anahtar 1** değerini metin düzenleyicisinde bir yere yazın. Anahtarı kullanarak mantıksal uygulamayı Bilişsel Hizmetler API'sine bağlayabilirsiniz. 
- 
-    ![Bilişsel Hizmetler Anahtarları](media/functions-twitter-email/03-cognitive-serviecs-keys.png)
+1. Dağıtım tamamlandıktan sonra **Kaynağa Git**' i seçin.
+
+## <a name="get-text-analytics-settings"></a>Metin Analizi ayarlarını al
+
+Metin Analizi kaynağı oluşturulduğunda, birkaç ayarı kopyalayıp daha sonra kullanılmak üzere kaydederek bunları ayarlayabilirsiniz.
+
+1. **Anahtarlar ve uç nokta** seçin.
+
+1. Giriş kutusunun sonundaki simgeye tıklayarak **anahtar 1** ' i kopyalayın.
+
+1. Değeri bir metin düzenleyicisine yapıştırın.
+
+1. Giriş kutusunun sonundaki simgeye tıklayarak **uç noktayı** kopyalayın.
+
+1. Değeri bir metin düzenleyicisine yapıştırın.
 
 ## <a name="create-the-function-app"></a>İşlev uygulaması oluşturma
 
-Azure Işlevleri, bir Logic Apps iş akışında işleme görevlerinin yükünü boşaltmanız için harika bir yol sağlar. Bu öğretici, bilişsel hizmetlerden Tweet yaklaşım puanlarını işlemek ve bir kategori değeri döndürmek için bir HTTP tetikleyici işlevi kullanır.  
+1. Üst arama kutusundan **işlev uygulaması**' nı arayıp seçin.
 
-[!INCLUDE [Create function app Azure portal](../../includes/functions-create-function-app-portal.md)]
+1. **Oluştur**’u seçin.
 
-## <a name="create-an-http-trigger-function"></a>HTTP tetikleyici işlevi oluşturma  
+1. Aşağıdaki değerleri girin.
 
-1. **İşlevler** penceresinin sol menüsünde **işlevler**' i seçin ve ardından üst menüden **Ekle** ' yi seçin.
+    | Ayar | Önerilen Değer | Açıklamalar |
+    | ------- | ----- | ------- |
+    | Abonelik | Azure abonelik adınız | |
+    | Kaynak grubu | **Tweet Sentiment-öğretici** | Bu öğreticide aynı kaynak grubu adını kullanın. |
+    | İşlev Uygulamasının adı | **Doldurulabilir Etsentimentapi** + benzersiz bir sonek | İşlev uygulaması adları genel olarak benzersizdir. Geçerli karakterler şunlardır: `a-z` (büyük/küçük harf duyarsız), `0-9` ve `-`. |
+    | Yayımlama | **Kod** | |
+    | Çalışma zamanı yığını | **.NET** | Sizin için belirtilen işlev kodu C# ' dir. |
+    | Sürüm | En son sürüm numarasını seçin | |
+    | Region | Size en yakın bölgeyi seçin | |
 
-2. **Yeni işlev** penceresinden **http tetikleyicisi**' ni seçin.
+1. **Gözden geçir ve oluştur**’u seçin.
 
-    ![HTTP tetikleyici işlevini seçin](./media/functions-twitter-email/06-function-http-trigger.png)
+1. **Oluştur**’u seçin.
 
-3. **Yeni işlev** sayfasında, **işlev oluştur**' u seçin.
+1. Dağıtım tamamlandıktan sonra **Kaynağa Git**' i seçin.
 
-4. Yeni HTTP tetikleyici işlevinizde, sol menüden **kod + test** ' i seçin, `run.csx` dosyanın içeriğini aşağıdaki kodla değiştirin ve ardından **Kaydet**' i seçin:
+## <a name="create-an-http-triggered-function"></a>HTTP ile tetiklenen işlev oluşturma  
+
+1. _İşlevler_ penceresinin sol menüsünde **işlevler**' i seçin.
+
+1. Üstteki menüden **Ekle** ' yi seçin ve aşağıdaki değerleri girin.
+
+    | Ayar | Değer | Açıklamalar |
+    | ------- | ----- | ------- |
+    | Geliştirme ortamı | **Portalda geliştirme** | |
+    | Şablon | **HTTP tetikleyicisi** | |
+    | Yeni Işlev | **Kavatimentişlevi** | Bu, işlevinizin adıdır. |
+    | Yetkilendirme düzeyi | **İşlev** | |
+
+1. **Ekle** düğmesini seçin.
+
+1. **Kod + test** düğmesini seçin.
+
+1. Kod Düzenleyicisi penceresinde aşağıdaki kodu yapıştırın.
 
     ```csharp
     #r "Newtonsoft.Json"
@@ -102,205 +135,224 @@ Azure Işlevleri, bir Logic Apps iş akışında işleme görevlerinin yükünü
     
     public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
     {
-        string category = "GREEN";
     
-        string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-        log.LogInformation(string.Format("The sentiment score received is '{0}'.", requestBody));
+        string requestBody = String.Empty;
+        using (StreamReader streamReader =  new  StreamReader(req.Body))
+        {
+            requestBody = await streamReader.ReadToEndAsync();
+        }
     
-        double score = Convert.ToDouble(requestBody);
+        dynamic score = JsonConvert.DeserializeObject(requestBody);
+        string value = "Positive";
     
         if(score < .3)
         {
-            category = "RED";
+            value = "Negative";
         }
         else if (score < .6) 
         {
-            category = "YELLOW";
+            value = "Neutral";
         }
     
         return requestBody != null
-            ? (ActionResult)new OkObjectResult(category)
-            : new BadRequestObjectResult("Please pass a value on the query string or in the request body");
+            ? (ActionResult)new OkObjectResult(value)
+           : new BadRequestObjectResult("Pass a sentiment score in the request body.");
     }
     ```
 
-    Bu işlev kodu, istekte alınan duyarlılık puanına göre bir renk kategorisi döndürür. 
+    Değer için bir kategori adı döndüren işleve bir yaklaşım puanı geçirilir.
 
-5. İşlevi test etmek için üstteki menüden **Test** ' i seçin. **Giriş** sekmesinde, `0.2` **gövdede** bir değer girin ve sonra **Çalıştır**' ı seçin. **Çıkış** sekmesindeki **http yanıtı içeriğinde** **Red** değeri döndürülür. 
+1. Değişikliklerinizi kaydetmek için araç çubuğundaki **Kaydet** düğmesini seçin.
 
-    :::image type="content" source="./media/functions-twitter-email/07-function-test.png" alt-text="Proxy ayarlarını tanımlama":::
+    > [!NOTE]
+    > İşlevi test etmek için üstteki menüden **Test/Çalıştır** ' ı seçin. _Giriş_ sekmesinde, gövde girişi kutusuna bir değer girin `0.9` ve sonra  **Çalıştır**' ı seçin. _Çıkış_ bölümündeki _http yanıt Içeriği_ kutusunda bir _pozitif_ değer döndürüldüğünden emin olun.
 
-Artık duyarlılık puanlarını kategorilere ayıran bir işleviniz vardır. bundan sonra, işlevinizi Twitter ve Bilişsel Hizmetler API’niz ile tümleştiren bir mantıksal uygulama oluşturun. 
+Ardından, Azure Işlevleri, Twitter ve bilişsel hizmetler API 'SI ile tümleşen bir mantıksal uygulama oluşturun.
 
-## <a name="create-a-logic-app"></a>Mantıksal uygulama oluşturma   
+## <a name="create-a-logic-app"></a>Mantıksal uygulama oluşturma
 
-1. Azure portal, Azure portal sol üst köşesinde bulunan **kaynak oluştur** düğmesine tıklayın.
+1. Üst arama kutusundan **Logic Apps** arayıp seçin.
 
-2. **Web**  >  **mantıksal uygulaması**' na tıklayın.
- 
-3. Ardından **Ad** alanına `TweetSentiment` gibi bir değer yazın ve tabloda belirtilen ayarları kullanın.
+1. **Add (Ekle)** seçeneğini belirleyin.
 
-    ![Azure portalda mantıksal uygulama oluşturma](./media/functions-twitter-email/08-logic-app-create.png)
+1. **Tüketim** ' i seçin ve aşağıdaki değerleri girin.
 
-    | Ayar      |  Önerilen değer   | Açıklama                                        |
-    | ----------------- | ------------ | ------------- |
-    | **Ad** | TweetSentiment | Uygulamanız için uygun bir ad seçin. |
-    | **Kaynak grubu** | myResourceGroup | Daha önceki ile aynı mevcut kaynak grubunu seçin. |
-    | **Konum** | Doğu ABD | Size yakın bir konum seçin. |    
+    | Ayar | Önerilen Değer |
+    | ------- | --------------- |
+    | Abonelik | Azure abonelik adınız |
+    | Kaynak grubu | **Tweet Sentiment-öğretici** |
+    | Mantıksal uygulama adı | **Doldurulabilir Etsentimentapp** |
+    | Region | Size en yakın bölgeyi, tercihen önceki adımlarda seçtiğiniz bölgeyi seçin. |
 
-4. Uygun ayar değerlerini girdikten sonra mantıksal uygulamanızı oluşturmak için **Oluştur**’a tıklayın. 
+    Tüm diğer ayarlar için varsayılan değerleri kabul edin.
 
-5. Uygulama oluşturulduktan sonra, panoya sabitlenmiş yeni mantıksal uygulamanıza tıklayın. Ardından Logic Apps Tasarımcısı'nda sayfayı aşağı kaydırıp **Boş Mantıksal Uygulama** şablonuna tıklayın. 
+1. **Gözden geçir ve oluştur**’u seçin.
 
-    ![Boş Mantıksal Uygulama şablonu](media/functions-twitter-email/09-logic-app-create-blank.png)
+1. **Oluştur**’u seçin.
 
-Artık Logic Apps Tasarımcısı'nı kullanarak uygulamanıza hizmetler ve tetikleyiciler ekleyebilirsiniz.
+1. Dağıtım tamamlandıktan sonra **Kaynağa Git**' i seçin.
+
+1. **Boş mantıksal uygulama** düğmesini seçin.
+
+    :::image type="content" source="media/functions-twitter-email/blank-logic-app-button.png" alt-text="Boş mantıksal uygulama düğmesi":::
+
+1. İlerleme durumunu kaydetmek için araç çubuğundaki **Kaydet** düğmesini seçin.
+
+Şimdi uygulamanıza hizmet ve tetikleyici eklemek için Logic Apps tasarımcısını kullanabilirsiniz.
 
 ## <a name="connect-to-twitter"></a>Twitter’a Bağlanma
 
-İlk olarak Twitter hesabınızla bir bağlantı oluşturun. Mantıksal uygulama tweetleri yoklar ve uygulamanın çalışması tetiklenir.
+Uygulamanızın yeni çetler için yoklama yapabilmesi için Twitter 'a bir bağlantı oluşturun.
 
-1. Tasarımcıda **Twitter** hizmetine ve **Yeni bir tweet gönderildiğinde** tetikleyicisine tıklayın. Twitter hesabınızda oturum açın ve Logic Apps’in hesabınızı kullanmasına izin verin.
+1. Üstteki arama kutusunda **Twitter** araması yapın.
 
-2. Tabloda belirtilen Twitter tetikleyici ayarlarını kullanın. 
+1. **Twitter** simgesini seçin.
 
-    ![Twitter bağlayıcı ayarları](media/functions-twitter-email/10-tweet-settings.png)
+1. **Yeni bir tweet gönderildiğinde** tetikleyicisini seçin.
 
-    | Ayar      |  Önerilen değer   | Açıklama                                        |
-    | ----------------- | ------------ | ------------- |
-    | **Arama metni** | #Azure | Seçilen aralıkta yeni tweetler oluşturmak için yeterince popüler olan bir diyez etiketi kullanın. Ücretsiz katmanını kullanırken diyez etiketiniz çok popüler olursa, Bilişsel Hizmetler API'nizdeki işlem kotasını hızlı bir şekilde tüketebilirsiniz. |
-    | **Aralık** | 15 | Sıklık birimleri cinsinden Twitter istekleri arasında geçen süre. |
-    | **Sıklık** | Dakika | Twitter’ı yoklamak için kullanılan sıklık birimi.  |
+1. Bağlantıyı kurmak için aşağıdaki değerleri girin.
 
-3.  Twitter hesabınıza bağlanmak için **Kaydet**’e tıklayın. 
+    | Ayar |  Değer |
+    | ------- | ---------------- |
+    | Bağlantı adı | **Mydallı bir bağlantı** |
+    | Kimlik Doğrulama Türü | **Varsayılan paylaşılan uygulamayı kullan** |
 
-Uygulamanız artık Twitter’a bağlıdır. Ardından, toplanan tweetlerin duyarlılığını algılamak için metin analizine bağlanın.
+1. **Oturum aç**'ı seçin.
 
-## <a name="add-sentiment-detection"></a>Duyarlılık algılama ekleme
+1. Twitter 'da oturum açmayı tamamlamaya yönelik açılan penceredeki yönergeleri izleyin.
 
-1. **Yeni Adım**’a ve sonra **Eylem ekle**’ye tıklayın.
+1. Ardından, _Yeni bir tweet_ gönderildiğinde kutusuna aşağıdaki değerleri girin.
 
-2. **Eylem seçin** alanına **Metin Analizi** yazın ve sonra **Duyarlılığı algıla** eylemine tıklayın.
-    
-    ![Arama kutusunda "Metin Analizi" ve "yaklaşım algılama" eyleminin seçildiği "Eylem Seç" bölümünü gösteren ekran görüntüsü. ](media/functions-twitter-email/11-detect-sentiment.png)
+    | Ayar | Değer |
+    | ------- | ----- |
+    | Arama metni | **#my-Twitter-öğretici** |
+    | Öğeleri ne şekilde denetlemek istiyorsunuz? | metin kutusunda **15** ve <br> Açılan menüdeki **dakika** |
 
-3. `MyCognitiveServicesConnection` gibi bir bağlantı adı yazın, metin düzenleyicide kaydettiğiniz Bilişsel Hizmetler API’nizin ve Bilişsel Hizmetler uç noktasının anahtarını yapıştırın, sonra **Oluştur**’a tıklayın.
+1. İlerleme durumunu kaydetmek için araç çubuğundaki **Kaydet** düğmesini seçin.
 
-    ![Yeni Adım ve sonra Eylem ekle](media/functions-twitter-email/12-connection-settings.png)
+Daha sonra, toplanan kavalerin yaklaşımını saptamak için metin analizinin bağlantısını yapın.
 
-4. Sonra, metin kutusuna **Tweet metni** girin ve ardından **yeni adım**' a tıklayın.
+## <a name="add-text-analytics-sentiment-detection"></a>Metin Analizi yaklaşım algılaması ekleme
 
-    ![Analiz edilecek metni tanımlama](media/functions-twitter-email/13-analyze-tweet-text.png)
+1. **Yeni adım**'ı seçin.
 
-Duyarlılık algılaması yapılandırıldıktan sonra işlevinize duyarlılık puanı çıktısını kullanan bir bağlantı ekleyebilirsiniz.
+1. Arama kutusunda **metin analizi** arayın.
 
-## <a name="connect-sentiment-output-to-your-function"></a>Duyarlılık çıktısını işlevinize bağlama
+1. **Metin analizi** simgesini seçin.
 
-1. Logic Apps tasarımcısında **yeni adım**  >  **Eylem Ekle**' ye tıklayın, **Azure işlevleri** 'ne filtre uygulayın ve **bir Azure işlevi seçin**' e tıklayın.
+1. Yaklaşımı **Algıla** ' yı seçin ve aşağıdaki değerleri girin.
 
-    ![Duyarlılığı Algıla](media/functions-twitter-email/14-azure-functions.png)
-  
-4. Daha önce oluşturduğunuz işlev uygulamasını seçin.
+    | Ayar | Değer |
+    | ------- | ----- |
+    | Bağlantı adı | **TextAnalyticsConnection** |
+    | Hesap anahtarı | Daha önce ayrılan Metin Analizi hesap anahtarını yapıştırın. |
+    | Site URL 'SI | Daha önce ayrılan Metin Analizi uç noktaya yapıştırın. |
 
-    ![İşlev uygulaması seçili olan "Eylem Seç" bölümünü gösteren ekran görüntüsü.](media/functions-twitter-email/15-select-function.png)
+1. **Oluştur**’u seçin.
 
-5. Bu öğretici için oluşturduğunuz işlevi seçin.
+1. _Yeni parametre Ekle_ kutusunun içine tıklayın ve açılır pencerede görünen **Belgeler** ' in yanındaki kutuyu işaretleyin.
 
-    ![İşlev seçme](media/functions-twitter-email/16-select-function.png)
+1. _Belge kimliği-1_ metin kutusunun içine tıklayarak dinamik içerik açılır penceresini açın.
 
-4. **İstek Gövdesi**’nde **Puan**’a ve ardından **Kaydet**’e tıklayın.
+1. _Dinamik içerik_ arama kutusunda **kimlik**' i arayın ve **Tweet ID**' ye tıklayın.
 
-    ![Puan](media/functions-twitter-email/17-function-input-score.png)
+1. _Belge metni-1_ metin kutusuna tıklayarak dinamik içerik açılır penceresini açın.
 
-Artık mantıksal uygulamadan bir duyarlılık puanı gönderildiğinde işleviniz tetiklenir. İşlev tarafından mantıksal uygulamaya renk kodlu bir kategori döndürülür. Daha sonra, işlevden **RED** duyarlılık değeri döndürüldüğünde gönderilen bir e-posta bildirimi ekleyin. 
+1. _Dinamik içerik_ arama kutusunda, **metin** araması yapın ve **Tweet metin**' e tıklayın.
+
+1. **Eylem seçin** alanına **Metin Analizi** yazın ve sonra **Duyarlılığı algıla** eylemine tıklayın.
+
+1. İlerleme durumunu kaydetmek için araç çubuğundaki **Kaydet** düğmesini seçin.
+
+Yaklaşım _algılama_ kutusu aşağıdaki ekran görüntüsüne benzer şekilde görünmelidir.
+
+:::image type="content" source="media/functions-twitter-email/detect-sentiment.png" alt-text="Yaklaşım ayarlarını algılama":::
+
+## <a name="connect-sentiment-output-to-function-endpoint"></a>Yaklaşım çıkışını işlev uç noktasına bağlama
+
+1. **Yeni adım**'ı seçin.
+
+1. Arama kutusunda **Azure işlevleri** araması yapın.
+
+1. **Azure işlevleri** simgesini seçin.
+
+1. Arama kutusunda işlev adınızı arayın. Yukarıdaki kılavuzunuzu izlediyseniz, işlev adınız, **doldurulabilir Etsentimentapi** ile başlar.
+
+1. İşlev simgesini seçin.
+
+1. **Arası doldurulabilir işlev** öğesini seçin.
+
+1. _Istek gövdesi_ kutusunun içine tıklayın ve açılır pencereden yaklaşım Puanını _Algıla_  öğesini seçin.
+
+1. İlerleme durumunu kaydetmek için araç çubuğundaki **Kaydet** düğmesini seçin.
+
+## <a name="add-conditional-step"></a>Koşullu adım Ekle
+
+1. **Eylem Ekle** düğmesini seçin.
+
+1. _Denetim_ kutusunun içine tıklayın ve açılır penceredeki **denetimi** arayın ve seçin.
+
+1. **Koşul** seçin.
+
+1. _Değer seçin_ kutusunun içine tıklayın ve açılır penceredeki _doldurulabilir işlev_ **gövdesi** öğesini seçin.
+
+1. _Değer seçin_ kutusuna **pozitif** girin.
+
+1. İlerleme durumunu kaydetmek için araç çubuğundaki **Kaydet** düğmesini seçin.
 
 ## <a name="add-email-notifications"></a>E-posta bildirimleri ekleme
 
-İş akışının son parçası, duyarlılık puanı _RED_ olduğunda bir e-postanın tetiklenmesidir. Bu makalede bir Outlook.com Bağlayıcısı kullanılmaktadır. Gmail veya Office 365 Outlook bağlayıcısını kullanmak için benzer adımlar gerçekleştirebilirsiniz.   
+1. _Doğru_ kutusunda **Eylem Ekle** düğmesini seçin.
 
-1. Logic Apps tasarımcısında **yeni adım**  >  **Koşul Ekle**' ye tıklayın. 
+1. Metin kutusunda **Office 365 Outlook 'u** arayın ve seçin.
 
-    ![Mantıksal uygulamaya koşul ekleyin.](media/functions-twitter-email/18-add-condition.png)
+1. **Gönder** ' i arayın ve metin kutusunda **e-posta gönder** ' i seçin.
 
-2. **Bir değer seçin** ve ardından **Gövde**’ye tıklayın. **Eşittir**’e tıklayın, **Bir değer seçin**’e tıklayın ve `RED` yazıp **Kaydet**’e tıklayın. 
+1. **Oturum aç** düğmesini seçin.
 
-    ![Koşul için bir eylem seçin.](media/functions-twitter-email/19-condition-settings.png)    
+1. Office 365 Outlook 'ta oturum açmayı tamamlamaya yönelik açılan penceredeki yönergeleri izleyin.
 
-3. **IF TRUE** alanında **Eylem ekle**’ye tıklayın, `outlook.com` ifadesini arayın, **E-posta gönder**’e tıklayın ve Outlook.com hesabınızda oturum açın.
+1. _Kutuya e_ -posta adresinizi girin.
 
-    !["Outlook.com" başlıklı ve "e-posta gönder" eylemi seçili olan "Eğer TRUE" bölümünü gösteren ekran görüntüsü.](media/functions-twitter-email/20-add-outlook.png)
+1. _Konu_ kutusunun içine tıklayın ve sonra da _doldurulabilir işlevi_ altındaki **Body** öğesine tıklayın. Listede _gövde_ öğesi gösterilmemişse, seçenekler listesini genişletmek için **daha fazla gör** bağlantısına tıklayın.
 
-    > [!NOTE]
-    > Bir Outlook.com hesabınız yoksa Gmail veya Office 365 Outlook gibi başka bir bağlayıcı seçebilirsiniz
+1. _Konu_ içindeki _gövde_ öğesinden sonra, Tweet metnini girin **:**.
 
-4. **E-posta gönder** eyleminde tabloda belirtilen e-posta ayarlarını kullanın. 
+1. _Tweet From: Text öğesinden_ sonra, kutuya yeniden tıklayın ve _Yeni bir tweet ne zaman postalanan_ seçenekler listesinden **Kullanıcı adı** ' nı seçin.
 
-    ![E-posta gönderme eylemi için e-postayı yapılandırın.](media/functions-twitter-email/21-configure-email.png)
-    
-| Ayar      |  Önerilen değer   | Açıklama  |
-| ----------------- | ------------ | ------------- |
-| **Kime** | E-posta adresinizi girin | Bildirimi alan e-posta adresi. |
-| **Konu** | Olumsuz tweet duyarlılığı algılandı  | E-posta bildiriminin konu satırı.  |
-| **Gövde** | Tweet metni, Konum | **Tweet metni** ve **Konum** parametrelerine tıklayın. |
+1. _Gövde_ kutusunun içine tıklayın ve _Yeni bir tweet nakledildiğinde_ seçenekler listesi altında **Tweet metin** ' i seçin. Listede _Tweet metin_ öğesi gösterilmemişse, seçenekler listesini genişletmek için **daha fazla gör** bağlantısına tıklayın.
 
-1. **Kaydet**’e tıklayın.
+1. İlerleme durumunu kaydetmek için araç çubuğundaki **Kaydet** düğmesini seçin.
 
-İş akışı tamamlandığına göre mantıksal uygulamayı etkinleştirip işlevin nasıl çalıştığını görebilirsiniz.
+E-posta kutusu artık bu ekran görüntüsüne benzer şekilde görünmelidir.
 
-## <a name="test-the-workflow"></a>İş akışını test etme
+:::image type="content" source="media/functions-twitter-email/email-notification.png" alt-text="E-posta bildirimi":::
 
-1. Logic Apps Tasarımcısı'nda, uygulamayı başlatmak için **Çalıştır**'a tıklayın.
+## <a name="run-the-workflow"></a>İş akışını çalıştırma
 
-2. Sol sütunda **Genel Bakış**’a tıklayarak mantıksal uygulamanın durumuna bakın. 
- 
-    ![Mantıksal uygulama yürütme durumu](media/functions-twitter-email/22-execution-history.png)
+1. Twitter hesabınızdan şu metni Tweet: **#my-Twitter-öğreticisini beğendiniz**.
 
-3. (İsteğe bağlı) Yürütme ayrıntılarını görmek için çalışmalardan birine tıklayın.
+1. Logic Apps Tasarımcısına dönün ve **Çalıştır** düğmesini seçin.
 
-4. İşlevinize gidin, günlükleri görüntüleyin ve duyarlılık değerlerinin alınıp işlendiğini doğrulayın.
- 
-    ![İşlev günlüklerini görüntüleme](media/functions-twitter-email/sent.png)
+1. İş akışından bir ileti için e-postanızı kontrol edin.
 
-5. Olumsuz olabilecek bir duyarlılık algılandığında bir e-posta alırsınız. Bir e-posta almadıysanız işlev kodunu her zaman RED döndürecek şekilde değiştirebilirsiniz:
+## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-    ```csharp
-    return (ActionResult)new OkObjectResult("RED");
-    ```
+Bu öğreticide oluşturulan tüm Azure hizmetlerini ve hesaplarını temizlemek için kaynak grubunu silin.
 
-    E-posta bildirimlerini doğruladıktan sonra özgün koda geri dönün:
+1. En üstteki arama kutusunda **kaynak gruplarını** arayın.
 
-    ```csharp
-    return requestBody != null
-        ? (ActionResult)new OkObjectResult(category)
-        : new BadRequestObjectResult("Please pass a value on the query string or in the request body");
-    ```
+1. **Tweet-Sentiment-öğreticisi**' ni seçin.
 
-    > [!IMPORTANT]
-    > Bu öğreticiyi tamamladıktan sonra mantıksal uygulamayı devre dışı bırakmanız gerekir. Uygulamayı devre dışı bırakarak yürütmeler için sizden ücret alınmasını ve Bilişsel Hizmetler API'nizdeki işlemlerin tükenmesini önlersiniz.
+1. **Kaynak grubunu sil** ' i seçin
 
-Artık Işlevleri bir Logic Apps iş akışı ile tümleştirmede ne kadar kolay olduğunu gördünüz.
+1. Metin kutusuna **Tweet-Sentiment-öğreticisi** girin.
 
-## <a name="disable-the-logic-app"></a>Mantıksal uygulamayı devre dışı bırakma
+1. **Sil** düğmesini seçin.
 
-Mantıksal uygulamayı devre dışı bırakmak için **Genel Bakış** ve sonra ekranın üstündeki **Devre Dışı Bırak**’a tıklayın. Uygulamayı devre dışı bıraktığınızda, uygulama silinmeden mantıksal uygulamanın çalışması ve ücretlerin yansıtılması durdurulur.
-
-![İşlev günlükleri](media/functions-twitter-email/disable-logic-app.png)
+İsteğe bağlı olarak, Twitter hesabınıza dönmek ve akışınızdan tüm test çlerinizi silmek isteyebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
-
-> [!div class="checklist"]
-> * Bir Bilişsel Hizmetler API Kaynağı oluşturun.
-> * Tweet duyarlılığını kategorilere ayıran bir işlev oluşturun.
-> * Twitter’a bağlanan bir mantıksal uygulama oluşturun.
-> * Mantıksal uygulamaya duyarlılık algılama özelliğini ekleyin. 
-> * Mantıksal uygulamayı işleve bağlayın.
-> * İşlevden alınan yanıta göre bir e-posta gönderin.
-
-İşlevinize yönelik sunucusuz bir API oluşturma hakkında bilgi edinmek için sonraki öğreticiye geçin.
-
-> [!div class="nextstepaction"] 
+> [!div class="nextstepaction"]
 > [Azure İşlevleri'ni kullanarak sunucusuz bir API oluşturma](functions-create-serverless-api.md)
-
-Logic Apps hakkında daha fazla bilgi için bkz. [Azure Logic Apps](../logic-apps/logic-apps-overview.md).

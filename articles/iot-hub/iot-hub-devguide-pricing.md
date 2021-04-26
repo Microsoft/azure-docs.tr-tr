@@ -11,12 +11,12 @@ ms.date: 03/11/2019
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: 4c7382f84522333b6aae0d79941aae8f2147a12f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 5b67f505a71d2af7950422a86ab45ef8aebb3bf4
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "81729154"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106056445"
 ---
 # <a name="azure-iot-hub-pricing-information"></a>Azure IoT Hub fiyatlandırma bilgileri
 
@@ -33,9 +33,9 @@ ms.locfileid: "81729154"
 | Buluttan cihaza iletiler | Başarıyla gönderilen iletiler 4 KB 'lık parçalar halinde ücretlendirilir. Örneğin, 6 KB 'lik bir ileti, 2 ileti olarak ücretlendirilir. |
 | Dosya karşıya yüklemeleri | Azure depolama 'ya dosya aktarımı IoT Hub tarafından tarifeli değildir. Dosya aktarımı başlatma ve tamamlama iletileri, 4 KB 'lik artışlarla ileti ölçümlü olarak ücretlendirilir. Örneğin, 10 MB 'lık bir dosyanın aktarılması, Azure depolama maliyetine ek olarak iki ileti olarak ücretlendirilir. |
 | Doğrudan yöntemler | Başarılı Yöntem istekleri 4 KB 'lık öbeklere göre ücretlendirilir ve yanıtlar ek iletiler olarak 4 KB 'lık parçalar halinde ücretlendirilir. Bağlantısı kesilen cihazlara yönelik istekler, 4 KB 'lık öbeklerdeki iletiler olarak ücretlendirilir. Örneğin, cihazdan gövdesi olmayan bir Yanıt ile sonuçlanan 4 KB 'lık gövdeye sahip bir yöntem iki ileti olarak ücretlendirilir. Cihazdan 1 KB Yanıt ile sonuçlanan 6 KB 'lık bir gövdeye sahip bir yöntem, istek için iki ileti ve yanıt için başka bir ileti olarak ücretlendirilir. |
-| Cihaz ve modül ikizi okumaları | Cihazdan veya modülden ikizi okumaları ve çözüm arka ucu, 512 baytlık öbeklerdeki iletiler olarak ücretlendirilir. Örneğin, 6 KB 'lik bir ikizi okumak 12 ileti olarak ücretlendirilir. |
-| Cihaz ve modül ikizi güncelleştirmeleri (Etiketler ve Özellikler) | İkizi güncelleştirmeleri cihazdan veya modülden ve çözüm arka ucundan 512 baytlık parçalar halinde ileti olarak ücretlendirilir. Örneğin, 6 KB 'lik bir ikizi okumak 12 ileti olarak ücretlendirilir. |
-| Cihaz ve modül ikizi sorguları | Sorgular, 512 baytlık öbeklerdeki sonuç boyutuna bağlı olarak ileti olarak ücretlendirilir. |
+| Cihaz ve modül ikizi okumaları | Cihazdan veya modülden ikizi okumaları ve çözüm arka ucu, 4 KB 'lık öbeklerdeki iletiler olarak ücretlendirilir. Örneğin, 8 KB 'lik ikizi okumak 2 ileti olarak ücretlendirilir. |
+| Cihaz ve modül ikizi güncelleştirmeleri (Etiketler ve Özellikler) | Cihazdan veya modülden ikizi güncelleştirmeleri ve çözüm arka ucu, 4 KB 'lık öbeklerdeki iletiler olarak ücretlendirilir. Örneğin, 12 KB 'lik bir ikizi okumak 3 ileti olarak ücretlendirilir. |
+| Cihaz ve modül ikizi sorguları | Sorgular, 4 KB 'lık öbeklerdeki sonuç boyutuna bağlı olarak ileti olarak ücretlendirilir. |
 | İş işlemleri <br/> (oluşturma, güncelleştirme, listeleme, silme) | Ücretlendirilmedi. |
 | Cihaz başına iş işlemleri | İşler (ikizi güncelleştirmeleri ve yöntemler gibi) işlemleri normal olarak ücretlendirilir. Örneğin, 1 KB istek ve boş gövde yanıtları ile 1000 Yöntem çağrısı sonucu olan bir iş, 1000 ileti üzerinden ücretlendirilir. |
 | Canlı tut iletileri | AMQP veya MQTT protokollerini kullanırken, bağlantıyı kurmak için değiş tokuş edilen iletiler ve anlaşmede değiştirilen mesajlar ücretlendirilmez. |

@@ -8,12 +8,12 @@ ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
 ms.date: 04/09/2018
-ms.openlocfilehash: 8aebb5b6f6a3ac53bc49fd1d2f75de88667865fb
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4ad57473e0950f031fbeadee2302f85557ed526f
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92147645"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107388270"
 ---
 # <a name="use-message-routes-and-custom-endpoints-for-device-to-cloud-messages"></a>Cihazdan buluta iletiler için ileti yollarını ve özel uç noktaları kullanın
 
@@ -32,13 +32,14 @@ Tek bir ileti birden çok yönlendirme sorgusunda koşulla eşleşir, bu durumda
 
 ## <a name="endpoints-and-routing"></a>Uç noktalar ve yönlendirme
 
-IoT Hub 'ının varsayılan bir [yerleşik uç noktası](iot-hub-devguide-messages-read-builtin.md)vardır. Aboneliğinizdeki diğer hizmetleri hub 'a bağlayarak, iletileri yönlendirmek için özel uç noktalar oluşturabilirsiniz. IoT Hub Şu anda Azure depolama kapsayıcıları, Event Hubs, Service Bus kuyruklarını ve Service Bus konularını özel uç noktalar olarak destekliyor.
+IoT Hub 'ının varsayılan bir [yerleşik uç noktası](iot-hub-devguide-messages-read-builtin.md)vardır. Sahip olduğunuz aboneliklerdeki diğer hizmetleri hub 'a bağlayarak, iletileri yönlendirmek için özel uç noktalar oluşturabilirsiniz. IoT Hub Şu anda Azure depolama kapsayıcıları, Event Hubs, Service Bus kuyruklarını ve Service Bus konularını özel uç noktalar olarak destekliyor.
 
 Yönlendirme ve özel uç noktaları kullandığınızda, iletiler yalnızca herhangi bir sorguyla eşleşmezse yerleşik uç noktaya dağıtılır. Yerleşik uç noktaya ve özel bir uç noktaya ileti teslim etmek için, yerleşik **Olaylar** uç noktasına ileti gönderen bir rota ekleyin.
 
 > [!NOTE]
 > * IoT Hub yalnızca blob olarak Azure depolama kapsayıcılarına veri yazılmasını destekler.
 > * Service Bus kuyruklar ve **Oturumlar** ve **yinelenen algılama** etkin olan konular özel uç noktalar olarak desteklenmez.
+> * Azure portal, yalnızca Hub 'ınız ile aynı abonelikte olan Azure kaynakları için özel yönlendirme uç noktaları oluşturabilirsiniz. Sahip olduğunuz diğer aboneliklerdeki kaynaklar için özel uç noktalar oluşturabilirsiniz, ancak özel uç noktaların Azure portal farklı bir yöntem kullanılarak yapılandırılması gerekir.
 
 IoT Hub özel uç noktalar oluşturma hakkında daha fazla bilgi için bkz. [IoT Hub uç noktaları](iot-hub-devguide-endpoints.md).
 

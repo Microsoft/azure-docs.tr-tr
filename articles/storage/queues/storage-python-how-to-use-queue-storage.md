@@ -1,20 +1,20 @@
 ---
 title: Python 'da Azure kuyruk depolama kullanma
 description: Sıraları oluşturup silmek ve iletileri eklemek, almak ve silmek için Python 'dan Azure kuyruk depolama 'yı kullanmayı öğrenin.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.reviewer: dineshm
 ms.date: 02/16/2021
 ms.topic: how-to
 ms.service: storage
 ms.subservice: queues
 ms.custom: seo-javascript-october2019, devx-track-python
-ms.openlocfilehash: 8c30d05cf49162155f84961e1fd8a32361444ba5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 32dc54673674ac10f8dc1e3351133ca33ef7665c
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100653270"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277428"
 ---
 # <a name="how-to-use-azure-queue-storage-from-python"></a>Python 'da Azure kuyruk depolama kullanma
 

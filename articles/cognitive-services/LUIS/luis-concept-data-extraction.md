@@ -4,13 +4,13 @@ description: Amaç ve varlıklar ile söylenişi metinlerdeki verileri ayıklay�
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 05/01/2020
-ms.openlocfilehash: e6f01354bb5aa2b78d3c9962bac49be39dd2c81f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/13/2021
+ms.openlocfilehash: dd7d113b1c23a0afec82a346e0f7baa1254ebbed
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95026002"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107500150"
 ---
 # <a name="extract-data-from-utterance-text-with-intents-and-entities"></a>Amaç ve varlıklar ile söylenişi metinlerinde veri ayıklama
 LUO, kullanıcının doğal dil dıklarından bilgi almanıza olanak tanır. Bilgiler, bir program, uygulama veya sohbet bot tarafından işlem gerçekleştirmek üzere kullanılabilecek şekilde ayıklanır. Aşağıdaki bölümlerde, veri ve varlıklardan JSON örnekleri ile hangi verilerin döndürüldüğünü öğrenin.
@@ -242,7 +242,7 @@ Konum adları, şehir, ilçe, eyalet, eyalet ve ülke/bölge gibi bir şekilde a
 
 ### <a name="new-and-emerging-names"></a>Yeni ve gelişen adlar
 
-Bazı uygulamaların, ürünler veya şirketler gibi yeni ve gelişmekte olan adları bulabilmeleri gerekir. Bu tür adlar, veri ayıklamanın en zor türüdür. **[Basit bir varlıkla](luis-concept-entity-types.md#simple-entity)** başlayın ve [tümcecik listesi](luis-concept-feature.md)ekleyin. Doğru tahmin edilemeyen adların etiketlenmesi için düzenli olarak uç nokta utslarını [gözden geçirin](./luis-how-to-review-endpoint-utterances.md) .
+Bazı uygulamaların, ürünler veya şirketler gibi yeni ve gelişmekte olan adları bulabilmeleri gerekir. Bu tür adlar, veri ayıklamanın en zor türüdür. **[Basit bir varlıkla](luis-concept-entity-types.md)** başlayın ve [tümcecik listesi](luis-concept-feature.md)ekleyin. Doğru tahmin edilemeyen adların etiketlenmesi için düzenli olarak uç nokta utslarını [gözden geçirin](./luis-how-to-review-endpoint-utterances.md) .
 
 ## <a name="patternany-entity-data"></a>Model. tüm varlık verileri
 

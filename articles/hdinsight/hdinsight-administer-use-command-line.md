@@ -5,12 +5,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive,hdiseo17may2017, devx-track-azurecli
 ms.date: 02/26/2020
-ms.openlocfilehash: b17c5a2abc036c16ff3ce36b81428f9149e36b4b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 14b88700f3968e3bfdc788abb2fc9ce90634068e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98942854"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107770354"
 ---
 # <a name="manage-azure-hdinsight-clusters-using-azure-cli"></a>Azure CLı kullanarak Azure HDInsight kümelerini yönetme
 
@@ -39,7 +39,7 @@ az login
 
 ## <a name="list-clusters"></a>Kümeleri Listele
 
-Kümeleri listelemek için [az HDInsight List](/cli/azure/hdinsight#az-hdinsight-list) kullanın. Aşağıdaki komutları, `RESOURCE_GROUP_NAME` kaynak grubunuzun adıyla değiştirin ve ardından komutları girin:
+Kümeleri listelemek için [az HDInsight List](/cli/azure/hdinsight#az_hdinsight_list) kullanın. Aşağıdaki komutları, `RESOURCE_GROUP_NAME` kaynak grubunuzun adıyla değiştirin ve ardından komutları girin:
 
 ```azurecli-interactive
 # List all clusters in the current subscription
@@ -57,7 +57,7 @@ az hdinsight list --resource-group RESOURCE_GROUP_NAME --query "[].{clusterName:
 
 ## <a name="show-cluster"></a>Kümeyi göster
 
-Belirtilen bir kümenin bilgilerini göstermek için [az HDInsight Show](/cli/azure/hdinsight#az-hdinsight-show) ' i kullanın. Aşağıdaki komutu `RESOURCE_GROUP_NAME` ve ilgili bilgileri değiştirerek aşağıdaki komutu düzenleyin `CLUSTER_NAME` :
+Belirtilen bir kümenin bilgilerini göstermek için [az HDInsight Show](/cli/azure/hdinsight#az_hdinsight_show) ' i kullanın. Aşağıdaki komutu `RESOURCE_GROUP_NAME` ve ilgili bilgileri değiştirerek aşağıdaki komutu düzenleyin `CLUSTER_NAME` :
 
 ```azurecli-interactive
 az hdinsight show --resource-group RESOURCE_GROUP_NAME --name CLUSTER_NAME
@@ -65,7 +65,7 @@ az hdinsight show --resource-group RESOURCE_GROUP_NAME --name CLUSTER_NAME
 
 ## <a name="delete-clusters"></a>Kümeleri Sil
 
-Belirtilen kümeyi silmek için [az HDInsight Delete](/cli/azure/hdinsight#az-hdinsight-delete) kullanın. Aşağıdaki komutu `RESOURCE_GROUP_NAME` ve ilgili bilgileri değiştirerek aşağıdaki komutu düzenleyin `CLUSTER_NAME` :
+Belirtilen kümeyi silmek için [az HDInsight Delete](/cli/azure/hdinsight#az_hdinsight_delete) kullanın. Aşağıdaki komutu `RESOURCE_GROUP_NAME` ve ilgili bilgileri değiştirerek aşağıdaki komutu düzenleyin `CLUSTER_NAME` :
 
 ```azurecli-interactive
 az hdinsight delete --resource-group RESOURCE_GROUP_NAME --name CLUSTER_NAME
@@ -79,7 +79,7 @@ az group delete --name RESOURCE_GROUP_NAME
 
 ## <a name="scale-clusters"></a>Ölçek Kümeleri
 
-Belirtilen HDInsight kümesini belirtilen boyuta göre yeniden boyutlandırmak için [az HDInsight Resize](/cli/azure/hdinsight#az-hdinsight-resize) ' i kullanın. Aşağıdaki komutu `RESOURCE_GROUP_NAME` , ve `CLUSTER_NAME` ile ilgili bilgilerle değiştirin. `WORKERNODE_COUNT`Kümeniz için istenen çalışan düğüm sayısıyla değiştirin. Kümeleri ölçeklendirme hakkında daha fazla bilgi için bkz. [HDInsight kümelerini ölçeklendirme](./hdinsight-scaling-best-practices.md). Şu komutu girin:
+Belirtilen HDInsight kümesini belirtilen boyuta göre yeniden boyutlandırmak için [az HDInsight Resize](/cli/azure/hdinsight#az_hdinsight_resize) ' i kullanın. Aşağıdaki komutu `RESOURCE_GROUP_NAME` , ve `CLUSTER_NAME` ile ilgili bilgilerle değiştirin. `WORKERNODE_COUNT`Kümeniz için istenen çalışan düğüm sayısıyla değiştirin. Kümeleri ölçeklendirme hakkında daha fazla bilgi için bkz. [HDInsight kümelerini ölçeklendirme](./hdinsight-scaling-best-practices.md). Şu komutu girin:
 
 ```azurecli-interactive
 az hdinsight resize --resource-group RESOURCE_GROUP_NAME --name CLUSTER_NAME --workernode-count WORKERNODE_COUNT

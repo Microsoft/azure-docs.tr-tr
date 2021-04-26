@@ -14,12 +14,12 @@ author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: ''
 ms.date: 3/02/2021
-ms.openlocfilehash: 3d64336184450514d52095097343a4588213f111
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e176c0399b191c7a511ea1d26388219b2cef1df8
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102034906"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106107155"
 ---
 # <a name="understand-and-resolve-azure-sql-database-blocking-problems"></a>Azure SQL veritabanı engelleme sorunlarını anlama ve çözme
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -429,3 +429,4 @@ Aşağıdaki tabloda, yaygın belirtilerin olası nedenleri eşlenir.
 * [Azure SQL ile tutarlı performans sunma](/learn/modules/azure-sql-performance/)
 * [Azure SQL veritabanı ve Azure SQL yönetilen örneği ile bağlantı sorunlarını ve diğer hataları giderme](troubleshoot-common-errors-issues.md)
 * [Geçici hata Işleme](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/transient-fault-handling)
+* [Azure SQL veritabanı 'nda maksimum paralellik derecesi (MAXDOP) yapılandırma](configure-max-degree-of-parallelism.md)

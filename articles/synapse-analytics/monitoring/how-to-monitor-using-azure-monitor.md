@@ -9,12 +9,12 @@ ms.subservice: monitoring
 ms.date: 11/30/2020
 ms.author: mahi
 ms.reviewer: mahi
-ms.openlocfilehash: 6861fd7a92c26fad883f14fb430a03b237c90122
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: ba730adaa1e3b111586012ba1849c6dc84d6db00
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105609267"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106554000"
 ---
 # <a name="use-azure-monitor-with-your-azure-synapse-analytics-workspace"></a>Azure Izleyici 'yi Azure SYNAPSE Analytics çalışma alanınız ile birlikte kullanma
 
@@ -103,16 +103,20 @@ Azure Portal oturum açın ve   >  uyarı oluşturmak için **uyarıları** İzl
 
 Azure SYNAPSE Analytics çalışma alanları tarafından yayılan Günlükler şunlardır:
 
-| Log Analytics tablo adı | Günlük kategorisi adı                 | Description |
-|-------------------------------|-------------------------------------------------|-------------|
-| SynapseGatewayApiRequests     | GatewayApiRequests             | Azure SYNAPSE ağ geçidi API istekleri. |
-| SynapseRbacOperations         | SynapseRbacOperations          | Azure SYNAPSE rol tabanlı erişim denetimi (SRTZB) işlemleri. |
+| Log Analytics tablo adı       | Günlük kategorisi adı              | Açıklama          |
+|--------------------------------|--------------------------------|----------------------|
+| SynapseGatewayApiRequests      | GatewayApiRequests             | Azure SYNAPSE ağ geçidi API istekleri. |
+| SynapseRbacOperations          | SynapseRbacOperations          | Azure SYNAPSE rol tabanlı erişim denetimi (SRTZB) işlemleri. |
+| SynapseBuiltinSqlReqsEnded     | BuiltinSqlReqsEnded            | Azure SYNAPSE yerleşik sunucusuz SQL havuzu sona erdi istekleri. |
+| SynapseIntegrationPipelineRuns | Integrationardışık düzen eylemsizlik        | Azure SYNAPSE Integration işlem hattı çalıştırmaları. |
+| SynapseIntegrationActivityRuns | Integrationactivityçalıştırmaları        | Azure SYNAPSE tümleştirme etkinliği çalışır. |
+| SynapseIntegrationTriggerRuns  | Integrationtriggerçalıştırmaları         | Azure SYNAPSE Tümleştirme tetikleyicisi çalışır. |
 
 ### <a name="dedicated-sql-pool-logs"></a>Adanmış SQL havuzu günlükleri
 
 Adanmış SQL havuzları tarafından yayılan Günlükler şunlardır:
 
-| Log Analytics tablo adı        | Günlük kategorisi adı             | Description |
+| Log Analytics tablo adı        | Günlük kategorisi adı             | Açıklama |
 |----------------------|--------------------------------------|-------------|
 | SynapseSqlPoolExecRequests  | ExecRequests | Azure SYNAPSE adanmış bir SQL havuzundaki SQL istekleri/sorguları hakkında bilgi.
 | SynapseSqlPoolDmsWorkers    | Dmsçalışanları   | Azure SYNAPSE adanmış bir SQL havuzunda DMS adımlarını tamamlayan çalışanlar hakkında bilgiler.
@@ -131,7 +135,7 @@ Bu Günlükler hakkında daha fazla bilgi için aşağıdaki bilgilere bakın:
 
 Apache Spark havuzları tarafından yayılan günlük aşağıda verilmiştir:
 
-| Log Analytics tablo adı               | Günlük kategorisi adı              | Description                 |
+| Log Analytics tablo adı               | Günlük kategorisi adı              | Açıklama                 |
 |-----------------------------|---------------------------------------|-----------------------------|
 | SynapseBigDataPoolApplicationsEnded | BigDataPoolAppsEnded | Sonlandırılan Apache Spark uygulamalar hakkında bilgi |
 

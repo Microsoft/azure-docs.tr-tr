@@ -3,21 +3,21 @@ title: Windows sanal masaüstündeki yenilikler nelerdir? - Azure
 description: Windows sanal masaüstü için yeni özellikler ve ürün güncelleştirmeleri.
 author: Heidilohr
 ms.topic: overview
-ms.date: 03/20/2021
+ms.date: 04/08/2021
 ms.author: helohr
 ms.reviewer: thhickli; darank
-manager: lizross
+manager: femila
 ms.custom: references_regions
-ms.openlocfilehash: acb9b6d9d2080c63243ec4b924d07a927d6ccdfd
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 2712115f19c7cc64a0475061e134d6be6de5d1ca
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104774448"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107867412"
 ---
 # <a name="whats-new-in-windows-virtual-desktop"></a>Windows sanal masaüstündeki yenilikler nelerdir?
 
-Windows sanal masaüstü güncelleştirmeleri düzenli aralıklarla yapılır. Bu makalede hakkında bilgi edinebilirsiniz:
+Windows sanal masaüstü güncelleştirmeleri düzenli olarak güncelleştirilir. Bu makalede hakkında bilgi edinebilirsiniz:
 
 - En son güncelleştirmeler
 - Yeni özellikler
@@ -42,12 +42,70 @@ Windows sanal masaüstü Aracısı ayda en az bir kez güncelleştirilir.
 
 Windows sanal masaüstü aracısında şu şekilde değişiklik yapılır:
 
-- Sürüm 1.0.2800.2800: Bu güncelleştirme Mart 2021 ' de yayımlanmıştır ve ters bir bağlantı sorunu düzeltildi.
-- Sürüm 1.0.2800.2700: Bu güncelleştirme Şubat 2021 ' de yayımlanmıştır ve erişim reddedildi düzenleme sorunu düzeltildi.
+- Sürüm 1.0.2990.800: Bu güncelleştirme 13 2021 Nisan tarihinde yayımlanmıştır ve aşağıdaki değişikliklere sahiptir:
+    - Aracı hata iletileri güncelleştirildi.
+    - Windows 7 VM 'lerine Windows 7 olmayan aracıların yüklenmesini önleyen bir özel durum ekler.
+    - Sinyal hizmeti mantığını güncelleştirmiş.
+- Sürüm 1.0.2944.1400: Bu güncelleştirme 7 Nisan 2021 ' de yayımlanmıştır ve aşağıdaki değişikliklere sahiptir:
+    - Windows sanal masaüstü Aracısı sorun giderme kılavuzu 'nda, aracı hataları için Olay Görüntüleyici günlüklerinde bağlantılar yerleştirildi.
+    - Daha iyi hata işleme için ek bir özel durum eklendi.
+    - Müşterilerin erişebileceği gerekli URL 'Leri denetlemesini sağlayan WVDAgentUrlTool.exe eklendi.
+- Sürüm 1.0.2866.1500: Bu güncelleştirme 26 Mart 2021 ' de yayımlanmıştır ve yığın sistem durumu denetiminde bir sorunu düzeltir.
+- Sürüm 1.0.2800.2802: Bu güncelleştirme 10 Mart 2021 ' de yayımlanmıştır ve genel iyileştirmeler ve hata düzeltmeleri içerir.
+- Sürüm 1.0.2800.2800: Bu güncelleştirme 2 Mart 2021 ' de yayımlanmıştır ve ters bir bağlantı sorununu düzeltir.
+- Sürüm 1.0.2800.2700: Bu güncelleştirme 10 Şubat 2021 ' de yayımlanmıştır ve genel iyileştirmeler ve hata düzeltmeleri içerir.
+- Sürüm 1.0.2800.2700: Bu güncelleştirme 4 Şubat 2021 ' de yayımlanmıştır ve erişim reddedildi düzenleme sorununu düzeltir.
 
 ## <a name="fslogix-updates"></a>FSLogix güncelleştirmeleri
 
 FSLogix için en son güncelleştirmeler mi merak ediyorsunuz? [FSLogix](/fslogix/whats-new)'teki yenilikleri inceleyin.
+
+## <a name="march-2021"></a>Mart 2021
+
+Mart 2021 ' de değiştirilen özellikler aşağıda verilmiştir.
+
+### <a name="updates-to-the-azure-portal-ui-for-windows-virtual-desktop"></a>Windows sanal masaüstü için Azure portal Kullanıcı arabirimindeki güncelleştirmeler
+
+Azure portal için Windows sanal masaüstü için aşağıdaki güncelleştirmeleri yaptık:
+
+- Konak havuzları oluşturmak ve VM 'Leri eklemek için iş akışlarının yeni kullanılabilirlik seçeneklerini (kullanılabilirlik kümesi ve bölgeleri) etkinleştirdik.
+- "Yardım gerekiyor" durumuna sahip bir konağın kullanılamaz olarak göründükleri bir sorunu düzelttik. Artık konağın yanında bir uyarı simgesi olacaktır.
+- Etkin oturumlar için sıralamayı etkinleştirdik.
+- Artık ana bilgisayar ayrıntıları sekmesinde belirli kullanıcılara ileti gönderebilir veya oturumu kapatabilirsiniz.
+- Maksimum oturum sınırı alanını değiştirdik.
+- Bir konak havuzu oluşturmak için iş akışına bir OU doğrulama yolu ekledik.
+- Kişisel bir konak havuzu oluştururken artık Windows 10 görüntüsünün en son sürümünü kullanabilirsiniz.
+
+### <a name="generation-2-images-and-trusted-launch"></a>2. nesil görüntüler ve güvenilir başlatma
+
+Azure Marketi 'nde artık Windows 10 Enterprise ve Windows 10 Enterprise çoklu oturum için 2. nesil görüntü vardır. Bu görüntüler, güvenilir başlatma VM 'lerini kullanmanıza olanak sağlar. 2. nesil VM 'Ler hakkında daha fazla bilgi için [1. nesil veya 2 sanal makine oluşturmalıyım](../virtual-machines/generation-2.md). Windows sanal masaüstü güvenilir başlatma sanal makinelerini sağlama hakkında bilgi edinmek için bkz. [TechCommunity gönderimize](https://techcommunity.microsoft.com/t5/windows-virtual-desktop/windows-virtual-desktop-support-for-trusted-launch/m-p/2206170)bakın.
+
+### <a name="fslogix-is-now-preinstalled-on-windows-10-enterprise-multi-session-images"></a>FSLogix artık Windows 10 Enterprise çoklu oturum görüntülerine önceden yüklendi
+
+Müşteri geri bildirimlerine bağlı olarak, bir FSLogix yapılandırılmamış sürümü zaten yüklü olan Windows 10 Enterprise çoklu oturum görüntüsünün yeni bir sürümünü ayarladık. Bu, Windows sanal masaüstü dağıtımınızı daha kolay hale getiriyor.
+
+### <a name="azure-monitor-for-windows-virtual-desktop-is-now-in-general-availability"></a>Windows sanal masaüstü için Azure Izleyici, genel kullanıma sunuldu
+
+Windows sanal masaüstü için Azure Izleyici, genel kullanıma sunulmuştur. Bu özellik, dağıtımlarınızı izleyen ve olayları, sistem durumunu ve sorun giderme önerilerini tek bir yerde görüntülemenize olanak tanıyan otomatikleştirilmiş bir hizmettir. Daha fazla bilgi için bkz. [belgelerimize](azure-monitor.md) bakın veya [techcommunity gönderimize](https://techcommunity.microsoft.com/t5/windows-virtual-desktop/azure-monitor-for-windows-virtual-desktop-is-generally-available/m-p/2242861)göz atın.
+
+### <a name="march-2021-updates-for-teams-on-windows-virtual-desktop"></a>Windows sanal masaüstündeki takımlar için Mart 2021 güncelleştirmeleri
+
+Windows sanal masaüstü 'nde takımlar için aşağıdaki güncelleştirmeleri yaptık:
+
+- Aramalar ve 2x2 modunda video kalitesi performansını geliştirdik.
+- Video işleme (XVP) donanım yük boşaltma kullanarak CPU kullanımını% 5-10 oranında azalttık (CPU oluşturmaya bağlı olarak).
+- Daha eski makineler artık, daha fazla gelen video akışını 2x2 modunda düzgünce göstermek için XVP ve donanım kodu çözme kullanabilir.
+- Daha iyi AV eşitleme performansı ve daha az geçici sorun için M74 ile M88 arasındaki WebRTC yığınını güncelleştirdik.
+- Yazılım H264 kodumuzu, giden kameranın video kalitesini arttığı OpenH264 (Web 'de ekiplerde kullanılan OSS) ile değiştirdik.
+- 30 Mart 'ta genel kullanıma yönelik takımlar sunucusu için 2x2 modunu etkinleştirdik. 2x2 modu, aynı anda dört adede kadar gelen video akışını gösterir.
+
+### <a name="start-vm-on-connect-public-preview"></a>Connect genel önizlemede VM 'yi Başlat
+
+Yeni konak havuzu ayarı, Connect 'te VM 'yi Başlat, artık genel önizlemede kullanıma sunuldu. Bu ayar, ihtiyacınız olduğunda sanal makinelerinizi açmanızı sağlar. Maliyetleri kaydetmek istiyorsanız, Azure Işlem ayarlarınızı yapılandırarak sanal makinelerinizi serbest getirmeniz gerekir. Daha fazla bilgi için [blog gönderimize](https://aka.ms/wvdstartvmonconnect) ve [belgelerimize](start-virtual-machine-connect.md)göz atın.
+
+### <a name="windows-virtual-desktop-specialty-certification"></a>Windows sanal masaüstü özel sertifikası
+
+AZ-140 sınavın, Azure 'da Windows sanal masaüstündeki uzmanlığınızı kanıtlamanızı sağlayacak bir beta sürümünü yayımladık. Daha fazla bilgi edinmek için [TechCommunity gönderimize](https://techcommunity.microsoft.com/t5/microsoft-learn-blog/beta-exam-prove-your-expertise-in-windows-virtual-desktop-on/ba-p/2147107)göz atın.
 
 ## <a name="february-2021"></a>Şubat 2021
 
@@ -257,7 +315,7 @@ Ağustos 2020 ' de değiştirilen özellikler:
 
 - Azure Advisor artık Windows sanal masaüstü 'nün bir parçasıdır. Windows sanal masaüstüne Azure portal aracılığıyla eriştiğinizde, Windows sanal masaüstü ortamınızı iyileştirmek için öneriler görebilirsiniz. [Azure Danışmanı](azure-advisor.md)hakkında daha fazla bilgi edinin.
 
-- Azure CLı artık Windows `az desktopvirtualization` sanal masaüstü dağıtımlarınızı otomatikleştirmenize yardımcı olmak Için Windows sanal masaüstü 'nü () desteklemektedir. Uzantı komutlarının bir listesi için [desktopvirtualization](/cli/azure/ext/desktopvirtualization/) 'a göz atın.
+- Azure CLı artık Windows `az desktopvirtualization` sanal masaüstü dağıtımlarınızı otomatikleştirmenize yardımcı olmak Için Windows sanal masaüstü 'nü () desteklemektedir. Uzantı komutlarının bir listesi için [desktopvirtualization](/cli/azure/) 'a göz atın.
 
 - Dağıtım şablonlarımızı Windows sanal masaüstü Azure Resource Manager arabirimleriyle tamamen uyumlu hale getirmek için güncelleştirdik. Şablonları [GitHub](https://github.com/Azure/RDS-Templates/tree/master/ARM-wvd-templates)' da bulabilirsiniz.
 

@@ -1,7 +1,7 @@
 ---
-title: 'Regresyon öğreticisi: otomatik ML'
+title: 'Öğretici: otomatik makine öğrenimi ile gerileme'
 titleSuffix: Azure Machine Learning
-description: Sağladığınız eğitim verilerine ve yapılandırma ayarlarına bağlı olarak sizin için bir regresyon modeli üreten otomatik bir Machine Learning denemesi oluşturun.
+description: Sizin için bir gerileme modeli üreten otomatik makine öğrenimi denemesi oluşturmak için Python SDK ile kod yazın.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -11,30 +11,34 @@ ms.author: anumamah
 ms.reviewer: nibaccam
 ms.date: 08/14/2020
 ms.custom: devx-track-python, automl
-ms.openlocfilehash: 7f3052905d7594d64be9455c16239ebabd219849
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 85129cf282e39b4f4932cc5e9f7cfd72d1e445b0
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105565087"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107210644"
 ---
 # <a name="tutorial-use-automated-machine-learning-to-predict-taxi-fares"></a>Öğretici: Taksi ücretlerini tahmin etmek için otomatik makine öğrenmesini kullanma
 
-
-Bu öğreticide, NYC TAXI tarifeli havayolu fiyatlarını tahmin etmek üzere bir gerileme modeli oluşturmak için Azure Machine Learning ' de otomatik makine öğrenimini kullanırsınız. Bu işlem, eğitim verilerini ve yapılandırma ayarlarını kabul eder ve en iyi modele ulaşmak için farklı özellik normalleştirme/standartlaştırma yöntemlerinin, modellerinin ve hiper parametre ayarlarının birleşimleri aracılığıyla otomatik olarak yinelenir.
+Bu öğreticide, NYC TAXI tarifeli havayolu fiyatlarını tahmin etmek üzere bir [gerileme modeli](concept-automated-ml.md#regression) oluşturmak için Azure Machine Learning SDK 'sında otomatik makine öğrenimini kullanırsınız. Bu işlem, eğitim verilerini ve yapılandırma ayarlarını kabul eder ve en iyi modele ulaşmak için farklı özellik normalleştirme/standartlaştırma yöntemlerinin, modellerinin ve hiper parametre ayarlarının birleşimleri aracılığıyla otomatik olarak yinelenir.
 
 ![Akış diyagramı](./media/tutorial-auto-train-models/flow2.png)
 
-Bu öğreticide aşağıdaki görevleri öğreneceksiniz:
+Bu öğreticide Python SDK 'sını kullanarak kod yazacaksınız.  Aşağıdaki görevleri öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Azure açık veri kümelerini kullanarak verileri indirme, dönüştürme ve Temizleme
 > * Otomatik makine öğrenimi regresyon modelini eğitme
 > * Model doğruluğunu hesapla
 
-Azure aboneliğiniz yoksa başlamadan önce ücretsiz bir hesap oluşturun. Azure Machine Learning [ücretsiz veya ücretli sürümünü](https://aka.ms/AMLFree) bugün deneyin.
+Ayrıca, bu diğer model türleri için otomatik makine öğrenimini deneyin: 
+
+* Öğretici: Azure Machine Learning-kodu olmayan bir örnek için [OTOMATIK ml ile bir sınıflandırma modeli oluşturun](tutorial-first-experiment-automated-ml.md) .
+* [Öğretici: otomatik makine öğrenimi ile talep tahmini](tutorial-automated-ml-forecast.md) -kod içermeyen bir örnek.
 
 ## <a name="prerequisites"></a>Önkoşullar
+
+Azure aboneliğiniz yoksa başlamadan önce ücretsiz bir hesap oluşturun. Azure Machine Learning [ücretsiz veya ücretli sürümünü](https://aka.ms/AMLFree) bugün deneyin.
 
 * Zaten bir Azure Machine Learning çalışma alanınız veya Not defteri sanal makineniz yoksa [Kurulum öğreticisini](tutorial-1st-experiment-sdk-setup.md) doldurun.
 * Kurulum öğreticisini tamamladıktan sonra, aynı not defteri sunucusunu kullanarak *öğreticiler/Regression-automl-NYC-Taxi-Data/Regression-Automated-ml. ipynb* Not defterini açın.

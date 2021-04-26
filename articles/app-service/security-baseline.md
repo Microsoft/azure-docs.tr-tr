@@ -6,13 +6,13 @@ ms.service: app-service
 ms.topic: conceptual
 ms.date: 02/17/2021
 ms.author: mbaldwin
-ms.custom: subject-security-benchmark
-ms.openlocfilehash: 7607b1726900423498a58502494c015f62da8829
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.custom: subject-security-benchmark, devx-track-azurepowershell
+ms.openlocfilehash: d3e9d7d8cd8e5ffad74b02179994e299a59c8894
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105559443"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833949"
 ---
 # <a name="azure-security-baseline-for-app-service"></a>App Service için Azure Güvenlik temeli
 

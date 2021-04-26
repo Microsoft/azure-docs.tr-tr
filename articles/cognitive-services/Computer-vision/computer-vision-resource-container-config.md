@@ -8,15 +8,15 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: computer-vision
 ms.topic: conceptual
-ms.date: 11/23/2020
+ms.date: 04/09/2021
 ms.author: aahi
 ms.custom: seodec18
-ms.openlocfilehash: ee2e4fca697c086b95e83feb9d40ce8e07dc344c
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 3e6c4b73e8aeb26c6ac4025ef3c07fb4f8d48eaf
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102611904"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308651"
 ---
 # <a name="configure-read-ocr-docker-containers"></a>Okuma OCR Docker kapsayıcılarını yapılandırma
 
@@ -33,14 +33,14 @@ Kapsayıcı Ayrıca, kapsayıcıya özgü aşağıdaki yapılandırma ayarların
 
 |Gerekli|Ayar|Amaç|
 |--|--|--|
-|No|ReadEngineConfig: ResultExpirationPeriod| yalnızca v 2.0 kapsayıcıları. Saat cinsinden sonuç süre sonu dönemi. Varsayılan değer 48 saattir. Ayar sistemin tanınma sonuçlarını ne zaman temizlemeli olduğunu belirtir. Örneğin, sistem, `resultExpirationPeriod=1` işlem sonrasında tanınma sonucunu 1 saat sonra temizler. İse `resultExpirationPeriod=0` , sistem, sonuç alındıktan sonra tanınma sonucunu temizler.|
-|No|Önbellek: Redsıs| yalnızca v 2.0 kapsayıcıları. Sonuçları depolamak için Redsıs depolamayı sunar. Bir yük dengeleyicinin arkasına birden çok okuma kapsayıcısı yerleştirilirse önbellek *gerekir* .|
-|No|Kuyruk: Kbıbitmq|yalnızca v 2.0 kapsayıcıları. Görevleri dağıtırken Kbıbitmq 'ı sunar. Bu ayar, bir yük dengeleyicinin arkasına birden çok okuma kapsayıcısı yerleştirildiğinde yararlıdır.|
-|No|Kuyruk: Azure: Queuevisibilitytimeoutınmilliseconds | yalnızca v3. x kapsayıcıları. Başka bir çalışan tarafından işlendiği zaman bir iletinin görünmez olması. |
-|No|Depolama::D Okısaentstore:: MongoDB|yalnızca v 2.0 kapsayıcıları. Kalıcı sonuç depolaması için MongoDB 'yi sunar. |
-|No|Depolama: ObjectStore: AzureBlob: ConnectionString| yalnızca v3. x kapsayıcıları. Azure Blob depolama bağlantı dizesi. |
-|No|Depolama: Timetoliveındays| yalnızca v3. x kapsayıcıları. Sonuç süre sonu dönemi (gün). Ayar sistemin tanınma sonuçlarını ne zaman temizlemeli olduğunu belirtir. Varsayılan değer 2 gündür (48 saat); Bu, bu dönemden daha uzun süre içinde olan tüm sonuçlar başarıyla alınmayacağından garanti edilmez. |
-|No|Görev: Maxrunningtimespanınminutes| yalnızca v3. x kapsayıcıları. Tek bir istek için en fazla çalışma süresi. Varsayılan değer 60 dakikadır. |
+|Hayır|ReadEngineConfig: ResultExpirationPeriod| yalnızca v 2.0 kapsayıcıları. Saat cinsinden sonuç süre sonu dönemi. Varsayılan değer 48 saattir. Ayar sistemin tanınma sonuçlarını ne zaman temizlemeli olduğunu belirtir. Örneğin, sistem, `resultExpirationPeriod=1` işlem sonrasında tanınma sonucunu 1 saat sonra temizler. İse `resultExpirationPeriod=0` , sistem, sonuç alındıktan sonra tanınma sonucunu temizler.|
+|Hayır|Önbellek: Redsıs| yalnızca v 2.0 kapsayıcıları. Sonuçları depolamak için Redsıs depolamayı sunar. Bir yük dengeleyicinin arkasına birden çok okuma OCR kapsayıcısı yerleştirilirse önbellek *gerekir* .|
+|Hayır|Kuyruk: Kbıbitmq|yalnızca v 2.0 kapsayıcıları. Görevleri dağıtırken Kbıbitmq 'ı sunar. Bu ayar, bir yük dengeleyicinin arkasına birden çok okuma OCR kapsayıcısı yerleştirildiğinde yararlıdır.|
+|Hayır|Kuyruk: Azure: Queuevisibilitytimeoutınmilliseconds | yalnızca v3. x kapsayıcıları. Başka bir çalışan tarafından işlendiği zaman bir iletinin görünmez olması. |
+|Hayır|Depolama::D Okısaentstore:: MongoDB|yalnızca v 2.0 kapsayıcıları. Kalıcı sonuç depolaması için MongoDB 'yi sunar. |
+|Hayır|Depolama: ObjectStore: AzureBlob: ConnectionString| yalnızca v3. x kapsayıcıları. Azure Blob depolama bağlantı dizesi. |
+|Hayır|Depolama: Timetoliveındays| yalnızca v3. x kapsayıcıları. Sonuç süre sonu dönemi (gün). Ayar sistemin tanınma sonuçlarını ne zaman temizlemeli olduğunu belirtir. Varsayılan değer 2 gündür (48 saat); Bu, bu dönemden daha uzun süre içinde olan tüm sonuçlar başarıyla alınmayacağından garanti edilmez. |
+|Hayır|Görev: Maxrunningtimespanınminutes| yalnızca v3. x kapsayıcıları. Tek bir istek için en fazla çalışma süresi. Varsayılan değer 60 dakikadır. |
 
 ## <a name="apikey-configuration-setting"></a>ApiKey yapılandırma ayarı
 
@@ -62,11 +62,11 @@ Bu ayar aşağıdaki yerde bulunabilir:
 
 * Azure portal: bilişsel **Hizmetler** genel bakış, etiketli `Endpoint`
 
-`vision/v1.0`Aşağıdaki tabloda gösterildiği gibi, yönlendirmeyi, uç nokta URI 'sine eklemeyi unutmayın. 
+`vision/<version>`Aşağıdaki tabloda gösterildiği gibi, yönlendirmeyi, uç nokta URI 'sine eklemeyi unutmayın. 
 
 |Gerekli| Name | Veri türü | Açıklama |
 |--|------|-----------|-------------|
-|Evet| `Billing` | Dize | Faturalama uç noktası URI 'SI<br><br>Örnek:<br>`Billing=https://westcentralus.api.cognitive.microsoft.com/vision/v1.0` |
+|Evet| `Billing` | Dize | Faturalama uç noktası URI 'SI<br><br>Örnek:<br>`Billing=https://westcentralus.api.cognitive.microsoft.com/vision/v3.2` |
 
 ## <a name="eula-setting"></a>EULA ayarı
 
@@ -119,16 +119,16 @@ Aşağıdaki örneklerde, komutlarının nasıl yazılacağını ve kullanılaca
 
 ## <a name="container-docker-examples"></a>Kapsayıcı Docker örnekleri
 
-Aşağıdaki Docker örnekleri okuma kapsayıcısı içindir.
+Aşağıdaki Docker örnekleri, okuma OCR kapsayıcısına yöneliktir.
 
 
-# <a name="version-32-preview"></a>[Sürüm 3,2-Önizleme](#tab/version-3-2)
+# <a name="version-32"></a>[Sürüm 3,2](#tab/version-3-2)
 
 ### <a name="basic-example"></a>Temel örnek
 
 ```bash
 docker run --rm -it -p 5000:5000 --memory 18g --cpus 8 \
-mcr.microsoft.com/azure-cognitive-services/vision/read:3.2-preview.1 \
+mcr.microsoft.com/azure-cognitive-services/vision/read:3.2 \
 Eula=accept \
 Billing={ENDPOINT_URI} \
 ApiKey={API_KEY}
@@ -139,7 +139,7 @@ ApiKey={API_KEY}
 
 ```bash
 docker run --rm -it -p 5000:5000 --memory 18g --cpus 8 \
-mcr.microsoft.com/azure-cognitive-services/vision/read:3.2-preview.1 \
+mcr.microsoft.com/azure-cognitive-services/vision/read:3.2 \
 Eula=accept \
 Billing={ENDPOINT_URI} \
 ApiKey={API_KEY}

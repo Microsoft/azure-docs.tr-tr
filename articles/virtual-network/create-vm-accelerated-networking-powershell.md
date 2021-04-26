@@ -15,10 +15,10 @@ ms.workload: infrastructure
 ms.date: 04/15/2020
 ms.author: gsilva
 ms.openlocfilehash: b0ebb75530858a589c3166e21261e2f737fff50d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98919978"
 ---
 # <a name="create-a-windows-vm-with-accelerated-networking-using-azure-powershell"></a>Azure PowerShell kullanarak hızlandırılmış ağ ile Windows sanal makinesi oluşturma
@@ -28,7 +28,7 @@ Bu öğreticide, hızlandırılmış ağ ile bir Windows sanal makinesi (VM) olu
 > [!NOTE]
 > Bir Linux sanal makinesiyle hızlandırılmış ağ kullanmak için bkz. [hızlandırılmış ağ Ile LINUX VM oluşturma](create-vm-accelerated-networking-cli.md).
 
-Hızlandırılmış ağ, bir VM 'ye tek köklü g/ç Sanallaştırması (SR-ıOV) sağlar ve ağ performansını büyük ölçüde geliştirir. Bu yüksek performanslı yol, desteklenen VM türlerindeki en zorlu ağ iş yükleri için gecikme, değişim ve CPU kullanımını azaltan veri yolundan Konağı atlar. Aşağıdaki diyagramda, iki VM 'nin hızlandırılmış ağ iletişimi olmadan ve ile nasıl iletişim kurduğu gösterilmektedir:
+Hızlandırılmış ağ, bir VM'ye tek köklü G/Ç sanallaştırmasını (SR-IOV) etkinleştirerek VM'nin ağ performansını büyük ölçüde geliştirir. Bu yüksek performanslı yol, veri yolunda konağı atladığından, desteklenen sanal makine türlerinde üzerindeki en zorlu ağ iş yükleri için gecikme süresini ve CPU kullanımını azaltır. Aşağıdaki diyagramda, iki VM 'nin hızlandırılmış ağ iletişimi olmadan ve ile nasıl iletişim kurduğu gösterilmektedir:
 
 ![Hızlandırılmış ağ ile ve olmadan Azure sanal makineler arasında iletişim](./media/create-vm-accelerated-networking/accelerated-networking.png)
 

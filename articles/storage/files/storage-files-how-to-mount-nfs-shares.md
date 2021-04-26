@@ -4,16 +4,16 @@ description: Ağ dosya sistemi paylaşımının nasıl bağlanacağını öğren
 author: roygara
 ms.service: storage
 ms.topic: how-to
-ms.date: 12/04/2020
+ms.date: 04/15/2021
 ms.author: rogarana
 ms.subservice: files
 ms.custom: references_regions
-ms.openlocfilehash: 8a993d9c1de35132198de5e3becc4f16d6a2a437
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4369619cd83dffe36cf156f523a951e1360438db
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96621306"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717086"
 ---
 # <a name="how-to-mount-an-nfs-file-share"></a>NFS dosya paylaşımından bağlama
 
@@ -55,7 +55,7 @@ ms.locfileid: "96621306"
 1. Kullanmak istediğiniz bağlama yolunu girip betiği kopyalayın.
 1. İstemcinizin bağlantısını yapın ve belirtilen bağlama betiğini kullanın.
 
-    :::image type="content" source="media/storage-files-how-to-create-mount-nfs-shares/mount-nfs-file-share-script.png" alt-text="Dosya paylaşma bağlantı dikey penceresinin ekran görüntüsü":::
+    :::image type="content" source="media/storage-files-how-to-create-mount-nfs-shares/mount-nfs-file-share-script.png" alt-text="Dosya paylaşma bağlantı dikey penceresinin ekran görüntüsü.":::
 
 Şimdi NFS paylaşımınızı taktıysanız.
 

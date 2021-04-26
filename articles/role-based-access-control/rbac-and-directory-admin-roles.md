@@ -11,16 +11,16 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: overview
-ms.date: 01/04/2021
+ms.date: 03/31/2021
 ms.author: rolyon
 ms.reviewer: bagovind
 ms.custom: it-pro;
-ms.openlocfilehash: 24ff39fba5ce4b484f23595a9f7d718b12faae10
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: bd5533f4bc8420ee6d8900e8a17dfe7099d7945f
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102037277"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106107206"
 ---
 # <a name="classic-subscription-administrator-roles-azure-roles-and-azure-ad-roles"></a>Klasik abonelik yöneticisi rolleri, Azure rolleri ve Azure AD rolleri
 
@@ -115,7 +115,7 @@ Azure rolleri, yüksek düzeyde Azure kaynakları 'nı yönetmek için izinleri 
 | --- | --- |
 | Azure kaynaklarına erişimi yönetme | Azure Active Directory kaynaklarına erişimi yönetme |
 | Özel rolleri destekler | Özel rolleri destekler |
-| Birden fazla düzeyde (yönetim grubu, abonelik, kaynak grubu, kaynak) kapsam belirtilebilir | Kapsam kiracı düzeyindedir |
+| Birden fazla düzeyde (yönetim grubu, abonelik, kaynak grubu, kaynak) kapsam belirtilebilir | [Kapsam](../active-directory/roles/custom-overview.md#scope) , kiracı düzeyinde (kuruluş genelinde), yönetim biriminde veya tek bir nesne üzerinde (örneğin, belirli bir uygulama) belirtilebilir |
 | Rol bilgilerine Azure portal, Azure CLI, Azure PowerShell, Azure Resource Manager şablonları, REST API'si aracılığıyla erişilebilir | Rol bilgilerine Azure yönetim portalı, Microsoft 365 Yönetim Merkezi, Microsoft Graph, AzureAD PowerShell ile erişilebilir |
 
 ### <a name="do-azure-roles-and-azure-ad-roles-overlap"></a>Azure rolleri ve Azure AD rolleri çakışıyor mu?

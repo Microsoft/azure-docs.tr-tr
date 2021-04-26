@@ -8,15 +8,15 @@ manager: nitinme
 ms.custom: seodec18, cog-serv-seo-aug-2020
 ms.service: cognitive-services
 ms.topic: article
-ms.date: 12/16/2020
+ms.date: 04/16/2021
 ms.author: aahi
 keywords: Şirket içi, Docker, kapsayıcı, Kubernetes
-ms.openlocfilehash: f5caac0a0da3595075dddd5a273a6883a0cca468
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c40e91d81df448021be74af768bc9d5952b263dd
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97861817"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588233"
 ---
 # <a name="azure-cognitive-services-containers"></a>Azure Bilişsel Hizmetler kapsayıcıları
 
@@ -51,7 +51,7 @@ Azure bilişsel hizmetler kapsayıcıları, her biri Azure bilişsel hizmetler '
 |--|--|--|--|
 | [LUIS][lu-containers] |  **Lusıs** ([görüntü](https://go.microsoft.com/fwlink/?linkid=2043204&clcid=0x409)) | Bir Docker kapsayıcısı olarak da bilinen eğitilen veya yayınlanan Language Understanding modelini bir Docker kapsayıcısına yükler ve kapsayıcının API uç noktalarından sorgu tahminlerine erişim sağlar. Kapsayıcıda sorgu günlüklerini toplayabilir ve uygulamanın tahmin doğruluğunu artırmak için bunları [Luo portalına](https://www.luis.ai) geri yükleyebilirsiniz. | Genel kullanıma sunuldu |
 | [Metin Analizi][ta-containers-keyphrase] | **Anahtar ifade ayıklama** ([görüntü](https://go.microsoft.com/fwlink/?linkid=2018757&clcid=0x409)) | Ana noktaları belirlemek için anahtar tümceleri ayıklar. Örneğin, "The food was delicious and there were wonderful staff" (Yemekler lezzetliydi ve personel harikaydı) giriş metni olduğunda API, "food" (yemek) ve "wonderful staff" (personel harikaydı) ana konuşma noktalarını döndürür. | Önizleme |
-| [Metin Analizi][ta-containers-language] |  **Metin dil algılama** ([görüntü](https://go.microsoft.com/fwlink/?linkid=2018759&clcid=0x409)) | 120 dilde dile kadar, giriş metninin hangi dilde yazıldığını algılar ve istekte gönderilen her belge için tek bir dil kodu bildirir. Dil kodu, puanın ağırlığını belirten bir puanla eşleştirilir. | Önizleme |
+| [Metin Analizi][ta-containers-language] |  **Metin dil algılama** ([görüntü](https://go.microsoft.com/fwlink/?linkid=2018759&clcid=0x409)) | 120 dilde dile kadar, giriş metninin hangi dilde yazıldığını algılar ve istekte gönderilen her belge için tek bir dil kodu bildirir. Dil kodu, puanın ağırlığını belirten bir puanla eşleştirilir. | Genel kullanıma sunuldu |
 | [Metin Analizi][ta-containers-sentiment] | **Yaklaşım Analizi v3** ([görüntü](https://go.microsoft.com/fwlink/?linkid=2018654&clcid=0x409)) | Olumlu veya negatif yaklaşım hakkında ipuçları için ham metni analiz eder. Bu yaklaşım analizinin bu sürümü, her belge ve tümce için yaklaşım etiketlerini (örneğin *pozitif* veya *negatif*) döndürür. |  Genel kullanıma sunuldu |
 | [Metin Analizi][ta-containers-health] |  **Sistem durumu için Metin Analizi** | Yapılandırılmamış klinik metinden tıp bilgilerini ayıklayın. | Geçişli önizleme. [Erişim isteyin][request-access]. |
 
@@ -76,7 +76,7 @@ Azure bilişsel hizmetler kapsayıcıları, her biri Azure bilişsel hizmetler '
 
 | Hizmet |  Kapsayıcı | Description | Kullanılabilirlik |
 |--|--|--|--|
-| [Görüntü İşleme][cv-containers] | **OCR** ([görüntü](https://hub.docker.com/_/microsoft-azure-cognitive-services-vision-read)) oku | Okuma OCR kapsayıcısı, JPEG, PNG, BMP, PDF ve TIFF dosya biçimleri desteğiyle, görüntülerden ve belgelerden yazdırılmış ve el yazısı metinleri ayıklamanızı sağlar. Daha fazla bilgi için bkz. [okuma API 'si belgeleri](./computer-vision/concept-recognizing-text.md). | Geçişli önizleme. [Erişim isteyin][request-access]. |
+| [Görüntü İşleme][cv-containers] | **OCR** ([görüntü](https://hub.docker.com/_/microsoft-azure-cognitive-services-vision-read)) oku | Okuma OCR kapsayıcısı, JPEG, PNG, BMP, PDF ve TIFF dosya biçimleri desteğiyle, görüntülerden ve belgelerden yazdırılmış ve el yazısı metinleri ayıklamanızı sağlar. Daha fazla bilgi için bkz. [okuma API 'si belgeleri](./computer-vision/overview-ocr.md). | Geçişli önizleme. [Erişim isteyin][request-access]. |
 | [Uzamsal Analiz][spa-containers] | **Uzamsal analiz** ([görüntü](https://hub.docker.com/_/microsoft-azure-cognitive-services-vision-spatial-analysis)) | Kişiler, taşınanlar ve fiziksel ortamlardaki nesnelerle etkileşimler arasındaki uzamsal ilişkileri anlamak için gerçek zamanlı akış videosunu analiz eder. | Geçişli önizleme. [Erişim isteyin][request-access]. |
 | [Yüz Tanıma][fa-containers] | **Yüz Tanıma** | Görüntülerde insan yüzlerini algılar ve yüzleri (Nosi ve gözler gibi), cinsiyet, yaş ve diğer makine tarafından öngörülen yüz özellikleri dahil olmak üzere öznitelikleri tanımlar. Algılamanın yanı sıra, benzer bir veya aynı yüzün zaten mevcut olup olmadığını görmek için aynı görüntüde veya farklı görüntülerde iki yüzün aynı olup olmadığını denetleyebilir veya bir veritabanı ile yüzleri karşılaştırın. Ayrıca, paylaşılan görsel nitelikleri kullanarak benzer yüzeyleri gruplar halinde düzenleyebilir. | Kullanılamaz |
 | [Form tanıyıcı][fr-containers] | **Form Tanıma** | Form, formlardan anahtar-değer çiftlerini ve tabloları tanımlamak ve ayıklamak için makine öğrenimi teknolojisini uygular. | Kullanılamaz | 
@@ -148,4 +148,4 @@ Azure bilişsel hizmetler 'de kapsayıcılar tarafından sunulan işlevleri yük
 [ta-containers-language]: text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=language
 [ta-containers-sentiment]: text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=sentiment
 [ta-containers-health]: text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=health
-[request-access]: https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRyQZ7B8Cg2FEjpibPziwPcZUNlQ4SEVORFVLTjlBSzNLRlo0UzRRVVNPVy4u
+[request-access]: https://aka.ms/csgate

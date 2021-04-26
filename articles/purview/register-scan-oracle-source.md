@@ -7,12 +7,12 @@ ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: overview
 ms.date: 2/25/2021
-ms.openlocfilehash: 76aadd667691e12c61e0e5e13c13ca0241a9f0ce
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 40c5e0ff2c2301607f5a548ff05c742c5c5a948d
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105045510"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107517071"
 ---
 # <a name="register-and-scan-oracle-source-preview"></a>Oracle kaynağını kaydetme ve tarama (Önizleme)
 
@@ -38,9 +38,7 @@ Oracle kaynağı bir Oracle veritabanından meta verileri ayıklamak için **tam
 
 5.  Desteklenen Oracle veritabanı sürümleri 6i ile 19c 'dir.
 
-6.  Kullanıcı izni: başarılı bir taramayı ilk kez sağlamak Için tam bir sys yönetici türü izni gereklidir.
-
-    Sonraki taramalarda, sistem tablolarına yönelik salt okuma erişimi gereklidir. Kullanıcının bir oturum oluşturma izni ve rol seçme katalog rolü ' nü SEÇIN \_ \_ . Alternatif olarak, Kullanıcı Bu bağlayıcının meta verileri sorgulayan her bir sistem tablosu için SELECT izni verilmiş olabilir:
+6.  Kullanıcı izni: sistem tablolarına yönelik salt okuma erişimi gereklidir. Kullanıcının bir oturum oluşturma izni ve rol seçme katalog rolü ' nü SEÇIN \_ \_ . Alternatif olarak, Kullanıcı Bu bağlayıcının meta verileri sorgulayan her bir sistem tablosu için SELECT izni verilmiş olabilir:
        > kullanıcıya oluşturma oturumu verme \[ \] ; \
         Tüm \_ kullanıcıları \[ kullanıcıya Seç \] ; \
         DBA \_ nesnelerinde kullanıcıya seçim izni verin \[ \] ; \

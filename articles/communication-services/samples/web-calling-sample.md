@@ -9,12 +9,12 @@ ms.author: mariusu
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: 0f456581e14f17b0ea3ebbd54d0768d419e800b3
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 35c3bd0213b6d895a81605f5858f924182e1e307
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105110653"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168867"
 ---
 # <a name="get-started-with-the-web-calling-sample"></a>Web 'i çağıran örnekle çalışmaya başlama
 
@@ -24,11 +24,8 @@ Bu örnek, geliştiriciler için oluşturulmuştur ve Iletişim Hizmetleri 'ni k
 
 ## <a name="get-started-with-the-web-calling-sample"></a>Web 'i çağıran örnekle çalışmaya başlama
 
-[!INCLUDE [Public Preview Notice](../includes/public-preview-include.md)]
-
-
 > [!IMPORTANT]
-> [Bu örnek GitHub ' da kullanılabilir.](https://github.com/Azure-Samples/communication-services-web-calling-tutorial/)
+> [Bu örnek **GitHub ' da** kullanılabilir.](https://github.com/Azure-Samples/communication-services-web-calling-tutorial/)
 
 Projeyi ayarlamak ve makinenizde yerel olarak çalıştırmak için/Project/Readme.exe ' i izleyin.
 [Web çağırma örneği](https://github.com/Azure-Samples/communication-services-web-calling-tutorial) makinenizde çalışır olduktan sonra, aşağıdaki giriş sayfasını görürsünüz:

@@ -1,14 +1,14 @@
 ---
 title: Sık karşılaşılan hataları giderme
 description: İlke tanımları, çeşitli SDK 'lar ve Kubernetes için eklenti oluşturma sorunlarını giderme hakkında bilgi edinin.
-ms.date: 01/26/2021
+ms.date: 04/19/2021
 ms.topic: troubleshooting
-ms.openlocfilehash: 6e0e4067f07266bae9c87fd4443d27314cc28c0b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c4feae11c6d8d78a43bae9882405e292a18e90bd
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100592607"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725071"
 ---
 # <a name="troubleshoot-errors-with-using-azure-policy"></a>Azure Ilkesini kullanmayla ilgili sorunları giderme
 
@@ -124,6 +124,24 @@ Yeni veya güncelleştirilmiş kaynağınızın kapsamına yönelik bir ilke ata
 #### <a name="resolution"></a>Çözüm
 
 Bir reddetme ilke atamasından alınan hata iletisi, ilke tanımı ve ilke atama kimliklerini içerir. İletideki hata bilgileri kaçırıldığında, [etkinlik günlüğünde](../../../azure-monitor/essentials/activity-log.md#view-the-activity-log)da kullanılabilir. Bu bilgileri, kaynak kısıtlamalarını anlamak ve izin verilen değerleri eşlemek için istekteki kaynak özelliklerini ayarlamak üzere daha fazla bilgi almak için kullanın.
+
+### <a name="scenario-definition-targets-multiple-resource-types"></a>Senaryo: tanım birden çok kaynak türünü hedefliyor
+
+#### <a name="issue"></a>Sorun
+
+Oluşturma veya güncelleştirme sırasında birden çok kaynak türü içeren bir ilke tanımı, aşağıdaki hatayla başarısız olur:
+
+```error
+The policy definition '{0}' targets multiple resource types, but the policy rule is authored in a way that makes the policy not applicable to the target resource types '{1}'.
+```
+
+#### <a name="cause"></a>Nedeni
+
+İlke tanımı kuralında, hedef kaynak türleri tarafından değerlendirilmeyecek bir veya daha fazla koşul vardır.
+
+#### <a name="resolution"></a>Çözüm
+
+Bir diğer ad kullanılırsa, diğer adın, öncesinde bir tür koşulu ekleyerek yalnızca ait olduğu kaynak türüne karşı değerlendirildiğinden emin olun. Bir alternatif, birden çok kaynak türünü hedeflemenin önüne geçmek için, ilke tanımını birden çok tanıma bölmaktır.
 
 ## <a name="template-errors"></a>Şablon hataları
 

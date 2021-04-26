@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 09/30/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: b60a6e53e8fecd71885204690231776ff69fc08f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: 37ecd06c4e3e71234e8fb1b6bad0cd05482dd31b
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "95018384"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727858"
 ---
 # <a name="configure-device-redirections"></a>Cihaz yeniden yönlendirmelerini yapılandırma
 
@@ -53,7 +53,7 @@ Kamera yeniden yönlendirmeyi yapılandırmak için aşağıdaki RDP özelliğin
 >[!NOTE]
 >`camerastoredirect:s:`Özelliği devre dışı olsa bile, yerel kameralar özelliği aracılığıyla yeniden yönlendirilebilir `devicestoredirect:s:` . Kamera yeniden yönlendirme kümesini tamamen devre dışı bırakmak `camerastoredirect:s:` ve `devicestoredirect:s:` herhangi bir kamera içermeyen Tak ve kullan cihazlarının bazı alt kümelerini ayarlamak ya da tanımlamak için.
 
-Ayrıca, gibi KSCATEGORY_VIDEO_CAMERA arabirimlerin noktalı virgülle ayrılmış bir listesini kullanarak belirli kameraları yeniden yönlendirebilirsiniz `camerastoredirect:s:\?\usb#vid_0bda&pid_58b0&mi` . 
+Ayrıca, gibi KSCATEGORY_VIDEO_CAMERA arabirimlerin noktalı virgülle ayrılmış bir listesini kullanarak belirli kameraları yeniden yönlendirebilirsiniz `camerastoredirect:s:\?\usb#vid_0bda&pid_58b0&mi` .
 
 ### <a name="clipboard-redirection"></a>Pano yeniden yönlendirme
 
@@ -100,6 +100,8 @@ Yerel sürücü yeniden yönlendirmeyi yapılandırmak için aşağıdaki RDP ö
 - `drivestoredirect:s:` Yerel sürücü yeniden yönlendirmeyi devre dışı bırakır.
 
 Ayrıca, gibi, noktalı virgülle ayrılmış bir liste kullanarak belirli sürücüleri de seçebilirsiniz `drivestoredirect:s:C:;E:;` .
+
+Web istemcisi dosya aktarımını yapılandırmak için, ayarlayın `drivestoredirect:s:*` .
 
 ### <a name="printer-redirection"></a>Yazıcı yeniden yönlendirme
 

@@ -5,13 +5,13 @@ author: deborahc
 ms.author: dech
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 03/19/2021
-ms.openlocfilehash: ab1b7028ce5f1afef861e696c98f25b56e78ef36
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.date: 04/07/2021
+ms.openlocfilehash: 099c65143f29f4fdf341b52e5d80731f1bdb0808
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104772476"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107031010"
 ---
 # <a name="partitioning-and-horizontal-scaling-in-azure-cosmos-db"></a>Azure Cosmos DB'de bölümleme ve yatay ölçeklendirme
 [!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
@@ -26,9 +26,9 @@ Bu makalede, mantıksal ve fiziksel bölümler arasındaki ilişki açıklanmakt
 
 ## <a name="logical-partitions"></a>Mantıksal bölümler
 
-Mantıksal bir bölüm, aynı bölüm anahtarına sahip bir öğe kümesinden oluşur. Örneğin, yiyecek ile ilgili verileri içeren bir kapsayıcıda, tüm öğeler bir `foodGroup` özellik içerir. `foodGroup`Kapsayıcı için bölüm anahtarı olarak ' i kullanabilirsiniz. , Ve gibi belirli değerlere sahip öğe grupları, `foodGroup` ve gibi `Beef Products` `Baked Products` `Sausages and Luncheon Meats` mantıksal bölümler oluşturur. Temel alınan veriler silindiğinde mantıksal bir bölümü silme konusunda endişelenmeniz gerekmez.
+Mantıksal bir bölüm, aynı bölüm anahtarına sahip bir öğe kümesinden oluşur. Örneğin, yiyecek ile ilgili verileri içeren bir kapsayıcıda, tüm öğeler bir `foodGroup` özellik içerir. `foodGroup`Kapsayıcı için bölüm anahtarı olarak ' i kullanabilirsiniz. , Ve gibi belirli değerlere sahip öğe grupları, `foodGroup` ve gibi `Beef Products` `Baked Products` `Sausages and Luncheon Meats` mantıksal bölümler oluşturur.
 
-Mantıksal bir bölüm ayrıca veritabanı işlemlerinin kapsamını tanımlar. Bir mantıksal bölüm içindeki öğeleri, [anlık görüntü yalıtımıyla bir işlem](database-transactions-optimistic-concurrency.md)kullanarak güncelleştirebilirsiniz. Bir kapsayıcıya yeni öğeler eklendiğinde, yeni mantıksal bölümler sistem tarafından saydam olarak oluşturulur.
+Mantıksal bir bölüm ayrıca veritabanı işlemlerinin kapsamını tanımlar. Bir mantıksal bölüm içindeki öğeleri, [anlık görüntü yalıtımıyla bir işlem](database-transactions-optimistic-concurrency.md)kullanarak güncelleştirebilirsiniz. Bir kapsayıcıya yeni öğeler eklendiğinde, yeni mantıksal bölümler sistem tarafından saydam olarak oluşturulur. Temel alınan veriler silindiğinde mantıksal bir bölümü silme konusunda endişelenmeniz gerekmez.
 
 Kapsayıcıınızda mantıksal bölüm sayısı için bir sınır yoktur. Her mantıksal bölüm, 20 GB 'a kadar veri saklayabilir. İyi bölüm anahtarı seçimleri çok sayıda olası değer aralığına sahiptir. Örneğin, tüm öğelerin bir özelliği içerdiği bir kapsayıcıda `foodGroup` , `Beef Products` mantıksal bölümün içindeki VERILER 20 GB 'a kadar büyüyebilir. Çok sayıda olası değeri olan [bir bölüm anahtarını seçmek](#choose-partitionkey) kapsayıcının ölçeklenmesini sağlar.
 
@@ -38,7 +38,8 @@ Bir kapsayıcı, verileri ve aktarım hızını fiziksel bölümler arasında da
 
 Kapsayıcılarınızın fiziksel bölümlerinin sayısı aşağıdakilere bağlıdır:
 
-* Sağlanan aktarım hızı sayısı (her bir fiziksel bölüm, saniyede en fazla 10.000 istek birimi sağlar).
+* Sağlanan aktarım hızı sayısı (her bir fiziksel bölüm, saniyede en fazla 10.000 istek birimi sağlar). Fiziksel bölümler için 10.000 RU/sn sınırı, her mantıksal bölüm yalnızca bir fiziksel bölüme eşlendiğinde mantıksal bölümlerin 10.000 RU/s sınırına sahip olduğunu gösterir.
+
 * Toplam veri depolama alanı (her bir fiziksel Bölüm 50 GB 'a kadar veri saklayabilir).
 
 > [!NOTE]

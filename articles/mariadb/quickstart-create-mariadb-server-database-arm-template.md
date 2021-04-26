@@ -3,16 +3,18 @@ title: 'Hızlı başlangıç: MariaDB için Azure DB-ARM şablonu oluşturma'
 description: Bu hızlı başlangıç makalesinde Azure Resource Manager şablonu kullanarak MariaDB sunucusu için Azure veritabanı oluşturmayı öğrenin.
 author: savjani
 ms.author: pariks
-ms.service: mariadb
-ms.topic: quickstart
-ms.custom: subject-armqs
 ms.date: 05/14/2020
-ms.openlocfilehash: de6df8349025c3e87e5b005196008053039fa49f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.topic: quickstart
+ms.service: mariadb
+ms.custom:
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: 6bf7f4d30f2ad4f9e0181aed332e3f6cb9265ca0
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98662085"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531330"
 ---
 # <a name="quickstart-use-an-arm-template-to-create-an-azure-database-for-mariadb-server"></a>Hızlı başlangıç: bir ARM şablonu kullanarak MariaDB sunucusu için Azure veritabanı oluşturma
 

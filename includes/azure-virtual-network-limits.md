@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 01/14/2020
 ms.author: anavin
 ms.custom: include file
-ms.openlocfilehash: 44245bc3cd9fd1afcfe9a74d60e2f51135a247ee
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 2262290486047c225cec8e8f6bb73242df7258fa
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101734094"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106271656"
 ---
 ### <a name="networking-limits---azure-resource-manager"></a><a name="azure-resource-manager-virtual-networking-limits"></a>Ağ sınırları-Azure Resource Manager
 Aşağıdaki sınırlar yalnızca, her abonelik için bölge başına **Azure Resource Manager** ile yönetilen ağ kaynakları için geçerlidir. [Geçerli kaynak kullanımınızı abonelik sınırlarınıza göre görüntülemeyi](../articles/networking/check-usage-against-limits.md)öğrenin.
@@ -73,12 +73,12 @@ Aşağıdaki sınırlar yalnızca abonelik başına bölgeye göre Azure Resourc
 | NIC başına kural (bir NIC 'deki tüm IP 'lerde) | 300                           |
 | Ön uç IP yapılandırması              | 600                           |
 | Arka uç havuzu boyutu                       | 1.000 IP yapılandırması, tek bir sanal ağ |
-| Load Balancer 1 başına arka uç kaynakları <sup><sup> | 250                   |
+| Load Balancer 1 başına arka uç kaynakları <sup><sup> | 1.200                   |
 | Yüksek kullanılabilirlik bağlantı noktaları                 | iç ön uç başına 1       |
 | Load Balancer başına giden kuralları        | 600                           |
 | VM başına yük dengeleyiciler                   | 2 (1 genel ve 1 iç)   |
 
-<sup>1</sup> sınır, tek başına sanal makine kaynaklarının, kullanılabilirlik kümesi kaynaklarının ve sanal makine ölçek kümesi yerleştirme gruplarının herhangi bir birleşiminde 150 kaynağa kadar olur.
+<sup>1</sup> sınır, tek başına sanal makine kaynaklarının, kullanılabilirlik kümesi kaynaklarının ve sanal makine ölçek kümesi yerleştirme gruplarının herhangi bir birleşiminde 1.200 kaynağa kadar olur.
 
 **Temel Load Balancer**
 

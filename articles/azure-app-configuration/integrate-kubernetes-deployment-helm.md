@@ -8,12 +8,12 @@ ms.service: azure-app-configuration
 ms.topic: tutorial
 ms.date: 04/14/2020
 ms.author: shuawan
-ms.openlocfilehash: 4e38366ddcee07f38ca390acf9d580b8764c1c00
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6276fc2027e92d5b7baaf9237a928e7828a3b021
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99979836"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775778"
 ---
 # <a name="integrate-with-kubernetes-deployment-using-helm"></a>Held kullanarak Kubernetes dağıtımıyla tümleştirin
 
@@ -185,7 +185,7 @@ settings:
 İlk olarak, yapılandırmayı uygulama yapılandırmasından bir *MyConfig. YAML* dosyasına indirin. Yalnızca ayarlarla başlayan anahtarları indirmek için bir anahtar filtresi kullanın **.** Anahtar filtresi, Key Vault başvuruların anahtarlarını hariç tutmak için yeterli değilse, **--Skip-keykasa** bağımsız değişkenini kullanarak bunları dışlayabilirsiniz. 
 
 > [!TIP]
-> [Dışa aktarma komutu](/cli/azure/appconfig/kv#az-appconfig-kv-export)hakkında daha fazla bilgi edinin. 
+> [Dışa aktarma komutu](/cli/azure/appconfig/kv#az_appconfig_kv_export)hakkında daha fazla bilgi edinin. 
 
 ```azurecli-interactive
 az appconfig kv export -n myAppConfiguration -d file --path myConfig.yaml --key "settings.*"  --separator "." --format yaml

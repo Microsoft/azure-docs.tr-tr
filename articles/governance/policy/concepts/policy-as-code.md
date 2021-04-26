@@ -1,14 +1,14 @@
 ---
 title: Kod olarak Azure İlkesi iş akışları tasarlama
 description: Azure Ilke tanımlarınızı kod olarak dağıtmak ve kaynakları otomatik olarak doğrulamak için iş akışları tasarlamayı öğrenin.
-ms.date: 10/20/2020
+ms.date: 03/31/2021
 ms.topic: conceptual
-ms.openlocfilehash: 74d2097e4db4442e6e65f30541864fb554f7379d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 233a5d4ca6583bc6a2cd9e8366e54f3ed1e2dad3
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94359689"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106094906"
 ---
 # <a name="design-azure-policy-as-code-workflows"></a>Kod olarak Azure İlkesi iş akışları tasarlama
 

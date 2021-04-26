@@ -4,12 +4,12 @@ description: Portal, PowerShell, Azure CLı ve REST API Azure Resource Manager d
 tags: top-support-issue
 ms.topic: conceptual
 ms.date: 09/23/2020
-ms.openlocfilehash: 00e0c51244d5c191d4c9f05f689b90ece81ec5a4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e7ed2096a696efdc9a2654a8fd0c294c82cbd4f7
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91284628"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781874"
 ---
 # <a name="view-deployment-history-with-azure-resource-manager"></a>Azure Resource Manager ile dağıtım geçmişini görüntüle
 
@@ -61,13 +61,13 @@ Bağıntı KIMLIĞINI almak için şunu kullanın:
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Bir kaynak grubunun dağıtımını listelemek için [az Deployment Group List](/cli/azure/group/deployment#az-deployment-group-list)kullanın.
+Bir kaynak grubunun dağıtımını listelemek için [az Deployment Group List](/cli/azure/group/deployment#az_deployment_group_list)kullanın.
 
 ```azurecli-interactive
 az deployment group list --resource-group ExampleGroup
 ```
 
-Belirli bir dağıtımı almak için [az Deployment Group Show](/cli/azure/group/deployment#az-deployment-group-show)' ı kullanın.
+Belirli bir dağıtımı almak için [az Deployment Group Show](/cli/azure/group/deployment#az_deployment_group_show)' ı kullanın.
 
 ```azurecli-interactive
 az deployment group show --resource-group ExampleGroup --name ExampleDeployment
@@ -147,7 +147,7 @@ Başarısız işlemlerin durum iletisini almak için aşağıdaki komutu kullan�
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Bir kaynak grubuna dağıtıma yönelik dağıtım işlemlerini görüntülemek için [az Deployment Operation Group List](/cli/azure/deployment/operation/group#az-deployment-operation-group-list) komutunu kullanın. Azure CLı 2.6.0 veya sonraki bir sürümü olmalıdır.
+Bir kaynak grubuna dağıtıma yönelik dağıtım işlemlerini görüntülemek için [az Deployment Operation Group List](/cli/azure/deployment/operation/group#az_deployment-operation-group-list) komutunu kullanın. Azure CLı 2.6.0 veya sonraki bir sürümü olmalıdır.
 
 ```azurecli-interactive
 az deployment operation group list --resource-group ExampleGroup --name ExampleDeployment
@@ -214,4 +214,3 @@ Yanıt bir hata iletisi içerir.
 * Belirli dağıtım hatalarını çözümlemede yardım için bkz. [Azure 'a kaynak dağıtılırken sık karşılaşılan hataları çözümleme Azure Resource Manager](common-deployment-errors.md).
 * Dağıtımların geçmişte nasıl yönetildiği hakkında bilgi edinmek için bkz. [dağıtım geçmişinden otomatik silme işlemleri](deployment-history-deletions.md).
 * Yürütmeden önce dağıtımınızı doğrulamak için, bkz. [Azure Resource Manager şablonuyla kaynak grubu dağıtma](deploy-powershell.md).
-

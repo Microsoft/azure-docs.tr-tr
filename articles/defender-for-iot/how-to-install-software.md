@@ -1,14 +1,14 @@
 ---
 title: IoT yüklemesi için Defender
 description: IoT için Azure Defender için bir algılayıcı ve şirket içi yönetim konsolu yüklemeyi öğrenin.
-ms.date: 12/2/2020
+ms.date: 4/20/2021
 ms.topic: how-to
-ms.openlocfilehash: 5bdb292750ea041be68a22519583511f58b3b517
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: e8366a3408e64d95e6c4d50e3ddef84309b4e8e5
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104782257"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829742"
 ---
 # <a name="defender-for-iot-installation"></a>IoT yüklemesi için Defender
 
@@ -328,11 +328,11 @@ Yüklemek için:
 
 1. **Algılayıcı-yayın- \<version\> kuruluş**' u seçin.
 
-   :::image type="content" source="media/tutorial-install-components/sensor-version-select-screen-v2.png" alt-text="Sürüm seçimini gösteren ekran görüntüsü.":::   
+   :::image type="content" source="media/tutorial-install-components/sensor-version-select-screen-v2.png" alt-text="Sensör sürümünüzü ve kuruluş türünü seçin.":::   
 
 1. Gereç profilini ve ağ özelliklerini tanımlayın:
 
-   :::image type="content" source="media/tutorial-install-components/appliance-profile-screen-v2.png" alt-text="Gereç profilini gösteren ekran görüntüsü.":::   
+   :::image type="content" source="media/tutorial-install-components/appliance-profile-screen-v2.png" alt-text="Gereç profilini ve ağ özelliklerini gösteren ekran görüntüsü.":::   
 
    | Parametre | Yapılandırma |
    |--|--|
@@ -470,7 +470,7 @@ Yazılımı yüklemek için:
 
     :::image type="content" source="media/tutorial-install-components/sensor-version-select-screen-v2.png" alt-text="Sürüm seçme ekranının ekran görüntüsü.":::
 
-1. Yükleme sihirbazında, Gereç profilini ve ağ özelliklerini tanımlayın:
+1. Yükleme sihirbazında, donanım profilini ve ağ özelliklerini tanımlayın:
 
     :::image type="content" source="media/tutorial-install-components/installation-wizard-screen-v2.png" alt-text="Yükleme Sihirbazı 'nı gösteren ekran görüntüsü.":::
 
@@ -554,7 +554,7 @@ Yüklemek için:
 
     :::image type="content" source="media/tutorial-install-components/sensor-version-select-screen-v2.png" alt-text="Sürümün seçildiğinin gösterildiği ekran görüntüsü.":::
 
-1. Yükleme sihirbazında, Gereç profilini ve ağ özelliklerini tanımlayın.
+1. Yükleme sihirbazında gereç profilini ve ağ özelliklerini tanımlayın.
 
     :::image type="content" source="media/tutorial-install-components/installation-wizard-screen-v2.png" alt-text="Yükleme Sihirbazı 'nı gösteren ekran görüntüsü.":::
 
@@ -703,6 +703,111 @@ Yüklemek için:
 
     :::image type="content" source="media/tutorial-install-components/defender-for-iot-sign-in-screen.png" alt-text="Yönetim konsoluna erişimi gösteren ekran görüntüsü.":::
 
+## <a name="on-premises-management-console-installation"></a>Şirket içi yönetim konsolu yüklemesi
+
+Yazılımı gereç üzerine yüklemeden önce, gerecin BIOS yapılandırmasını ayarlamanız gerekir:
+
+### <a name="bios-configuration"></a>BIOS yapılandırması
+
+Gereci BIOS 'UNU yapılandırmak için:
+
+1. [Uzaktan erişimi etkinleştirin ve parolayı güncelleştirin](#enable-remote-access-and-update-the-password).
+
+1. [BIOS 'U yapılandırın](#configure-the-hpe-bios).
+
+### <a name="software-installation"></a>Yazılım yükleme
+
+Yükleme işlemi yaklaşık 20 dakika sürer. Yükleme sonrasında, sistem birkaç kez yeniden başlatılır. 
+
+Yükleme işlemi sırasında, ikincil bir NIC ekleyebilirsiniz. Yükleme sırasında ikincil NIC yüklememeyi seçerseniz, daha sonra [İkincil BIR NIC ekleyebilirsiniz](#add-a-secondary-nic) . 
+
+Yazılımı yüklemek için:
+
+1. Yükleme işlemi için tercih ettiğiniz dili seçin.
+
+   :::image type="content" source="media/tutorial-install-components/on-prem-language-select.png" alt-text="Yükleme işlemi için tercih ettiğiniz dili seçin.":::     
+
+1. **Yönetim-yayın- \<version\> \<deployment type\>** seçeneğini belirleyin.
+
+   :::image type="content" source="media/tutorial-install-components/on-prem-install-screen.png" alt-text="Sürümünüzü seçin.":::   
+
+1. Yükleme sihirbazında, ağ özelliklerini tanımlayın:
+
+   :::image type="content" source="media/tutorial-install-components/on-prem-first-steps-install.png" alt-text="Gereç profilini gösteren ekran görüntüsü.":::   
+
+   | Parametre | Yapılandırma |
+   |--|--|
+   | **Yönetim ağı arabirimini yapılandırma** | Dell için: **eth0, eth1** <br /> HP için: **enu1, enu2** <br /> veya <br />**olası değer** |
+   | **Yönetim ağı IP adresini yapılandır:** | **Müşteri tarafından sunulan IP adresi** |
+   | **alt ağ maskesini yapılandırma:** | **Müşteri tarafından sunulan IP adresi** |
+   | **DNS yapılandırma:** | **Müşteri tarafından sunulan IP adresi** |
+   | **Varsayılan ağ geçidi IP adresini yapılandır:** | **Müşteri tarafından sunulan IP adresi** |
+   
+1. **(Isteğe bağlı)** İkincil bir ağ arabirim kartı (NIC) yüklemek isterseniz, aşağıdaki gereç profilini ve ağ özelliklerini tanımlayın:
+
+    :::image type="content" source="media/tutorial-install-components/on-prem-secondary-nic-install.png" alt-text="Ikincil NIC yüklemesi sorularını gösteren ekran görüntüsü.":::
+
+   | Parametre | Yapılandırma |
+   |--|--|
+   | **algılayıcı izleme arabirimini yapılandırma (Isteğe bağlı):** | **eth1** veya **olası değer** |
+   | **algılayıcı izleme arabirimi için bir IP adresi yapılandırın:** | **Müşteri tarafından sunulan IP adresi** |
+   | **algılayıcı izleme arabirimi için bir alt ağ maskesi yapılandırın:** | **Müşteri tarafından sunulan IP adresi** |
+
+1. Ayarları kabul edin ve yazarak devam edin `Y` . 
+
+1. 10 dakika sonra, iki kimlik bilgileri kümesi görüntülenir. Biri bir **Six** kullanıcısına, diğeri ise **destek** kullanıcısına yöneliktir.
+
+   :::image type="content" source="media/tutorial-install-components/credentials-screen.png" alt-text="Bu kimlik bilgilerini yeniden sunulmayacak şekilde kopyalayın.":::  
+
+   Kullanıcı adlarını ve parolaları kaydedin, ilk kez kullandığınızda platforma erişmek için bu kimlik bilgilerine ihtiyacınız vardır.
+
+1. Devam etmek için **ENTER** ' u seçin.
+
+Gerecinizde fiziksel bağlantı noktasını bulma hakkında daha fazla bilgi için, bkz. [bağlantı noktasını bulma](#find-your-port).
+
+### <a name="add-a-secondary-nic"></a>İkincil NIC ekleme
+
+İkincil bir NIC ekleyerek şirket içi yönetim konsolunuzun güvenliğini geliştirebilirsiniz. İkincil NIC ekleyerek kullanıcılarınız için ayrılmış bir ağ geçidinizin olur ve diğeri yönlendirilen ağlar için bir ağ geçidinin yapılandırmasını destekleyecektir. İkinci NIC, bir IP adresi aralığı içindeki tüm eklenmiş sensörlerden ayrılmıştır.
+
+Her iki NIC 'de Kullanıcı arabirimi (UI) etkinleştirilmiştir. Yönlendirme gerekli olmadığında, Kullanıcı arabirimi tarafından desteklenen tüm özellikler ikincil NIC 'de kullanılabilir olacaktır. Yüksek kullanılabilirlik ikincil NIC üzerinde çalışır.
+
+İkincil NIC dağıtmayacak seçeneğini belirlerseniz, tüm özellikler birincil NIC üzerinden kullanılabilir olacaktır. 
+
+Şirket içi yönetim konsolunuzu zaten yapılandırdıysanız ve şirket içi yönetim konsoluna ikincil bir NIC eklemek istiyorsanız aşağıdaki adımları kullanın:
+
+1. Ağ yeniden yapılandırma komutunu kullanın:
+
+    ```bash
+    sudo cyberx-management-network-reconfigure
+    ```
+
+1. Aşağıdaki sorulara aşağıdaki yanıtları girin:
+
+    :::image type="content" source="media/tutorial-install-components/network-reconfig-command.png" alt-text="Gerecinizi yapılandırmak için aşağıdaki yanıtları girin.":::
+
+    | Parametreler | Girilecek yanıt |
+    |--|--|
+    | **Yönetim ağı IP adresi** | `N` |
+    | **Alt ağ maskesi** | `N` |
+    | **DNS** | `N` |
+    | **Varsayılan ağ geçidi IP adresi** | `N` |
+    | **Algılayıcı izleme arabirimi (Isteğe bağlı. Algılayıcılar farklı bir ağ kesiminde olduğunda geçerlidir. Daha fazla bilgi için bkz. yükleme yönergeleri.**| `Y`, **olası bir değer seçin** |
+    | **Algılayıcı izleme arabirimi için bir IP adresi (sensörlerden erişilebilir)** | `Y`, **Müşteri tarafından sunulan IP adresi**|
+    | **Algılayıcı izleme arabirimi (sensörlerden erişilebilir) için bir alt ağ maskesi** | `Y`, **Müşteri tarafından sunulan IP adresi** |
+    | **Konak adı** | **Müşteri tarafından sağlanıyor** |
+
+1. Tüm seçimleri gözden geçirin ve `Y` değişiklikleri kabul etmek için girin. Sistem yeniden başlatılır.
+
+### <a name="find-your-port"></a>Bağlantı noktanızın bulun
+
+Cihazınızdaki fiziksel bağlantı noktasını bulmakta sorun yaşıyorsanız, aşağıdaki komutu kullanarak şunları yapabilirsiniz:
+
+```bash
+sudo ethtool -p <port value> <time-in-seconds>
+```
+
+Bu komut, belirtilen süre boyunca bağlantı noktasındaki ışığın yanıp sönmesine neden olur. Örneğin, girme `sudo ethtool -p eno1 120` 2 dakikalık eno1 Flash bağlantı noktasını, gerecinizin arkasında bulunan bağlantı noktasını bulmanıza olanak tanıyacak şekilde alır. 
+
 ## <a name="virtual-appliance-on-premises-management-console-installation"></a>Sanal Gereç: şirket içi yönetim konsolu yüklemesi
 
 Şirket içi yönetim konsolu VM aşağıdaki mimarilerin kullanılmasını destekler:
@@ -823,11 +928,7 @@ Hyper-V kullanarak bir sanal makine oluşturmak için:
 
 ### <a name="software-installation-esxi-and-hyper-v"></a>Yazılım yükleme (ESXi ve Hyper-V)
 
-Sanal makineyi başlatmak, yükleme işlemini ISO görüntüsünden başlatacak. Güvenliği artırmak için, şirket içi yönetim konsolunuzun ikinci bir ağ arabirimini oluşturabilirsiniz. Tek bir ağ arabirimi kullanıcılarınız için ayrılmıştır ve yönlendirilen ağlar için bir ağ geçidinin yapılandırılmasını destekleyebilir. İkinci ağ arabirimi, bir IP adresi aralığı içindeki tüm eklenmiş sensörlerden ayrılmıştır.
-
-Her iki ağ arabirimine de Kullanıcı arabirimi (UI) etkinleştirilmiştir ve UI tarafından desteklenen tüm özellikler, yönlendirme gerekmiyorsa ikincil ağ arabiriminde kullanılabilir olur. Yüksek kullanılabilirlik ikincil ağ arabiriminde çalışır.
-
-İkincil bir ağ arabirimi dağıtmayacak seçeneğini belirlerseniz, tüm özellikler birincil ağ arabirimi aracılığıyla kullanılabilir olacaktır. 
+Sanal makineyi başlatmak, yükleme işlemini ISO görüntüsünden başlatacak.
 
 Yazılımı yüklemek için:
 
@@ -837,22 +938,9 @@ Yazılımı yüklemek için:
 
 1. Algılayıcı yönetimi ağı için ağ arabirimini tanımlayın: arabirim, IP, alt ağ, DNS sunucusu ve varsayılan ağ geçidi.
 
-1. Seçim Şirket içi yönetim konsoluna ikinci bir ağ arabirimi ekleyin.
+1. Oturum açma kimlik bilgileri otomatik olarak oluşturulur. Kullanıcı adını ve parolaları kaydedin, ilk kez kullandığınızda platforma erişmek için bu kimlik bilgilerine ihtiyacınız vardır.
 
-    1. `Please type sensor monitoring interface (Optional. Applicable when sensors are on a different network segment. For more information see the Installation instructions): <name of interface>`
-    
-    1. `Please type an IP address for the sensor monitoring interface (accessible by the sensors): <ip address>`
-    
-    1. `Please type a subnet mask for the sensor monitoring interface (accessible by the sensors): <subnet>`
-
-1. Oturum açma kimlik bilgileri otomatik olarak oluşturulup sunulur. Oturum açma ve yönetim için gerekli olduklarından, bu kimlik bilgilerini güvenli bir yerde saklayın.
-
-    | Kullanıcı adı | Açıklama |
-    |--|--|
-    | Destek | Kullanıcı yönetimi için yönetici kullanıcı. |
-    | Six | Gerecle erişmek için kökün eşdeğeri. |
-
-1. Gereç yeniden başlatılır.
+   Gereç daha sonra yeniden başlatılır.
 
 1. Yönetim konsoluna daha önce yapılandırılan IP adresi aracılığıyla erişin: `<https://ip_address>` .
 

@@ -11,12 +11,12 @@ ms.author: tamram
 ms.reviewer: ozgun
 ms.subservice: common
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 06b37e8b25d932115384124a45156c801fb9708f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 53ad6dd922c1ccebd79aebcd2966b23b38de00e7
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100361681"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776906"
 ---
 # <a name="choose-how-to-authorize-access-to-blob-data-with-azure-cli"></a>Azure CLı ile blob verilerine erişim yetkisi verme seçeneğini belirleyin
 
@@ -63,7 +63,7 @@ Aşağıdaki örnekte Azure AD kimlik bilgilerinizi kullanarak Azure CLı 'dan n
     > [!IMPORTANT]
     > Azure rolü atamalarının yayılması birkaç dakika sürebilir.
 
-1. [](/cli/azure/storage/container#az-storage-container-create) `--auth-mode` `login` Azure AD kimlik bilgilerinizi kullanarak kapsayıcıyı oluşturmak için parametresi olarak ayarlanmış az Storage Container Create komutunu çağırın. Açılı ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
+1. [](/cli/azure/storage/container#az_storage_container_create) `--auth-mode` `login` Azure AD kimlik bilgilerinizi kullanarak kapsayıcıyı oluşturmak için parametresi olarak ayarlanmış az Storage Container Create komutunu çağırın. Açılı ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 
     ```azurecli
     az storage container create \

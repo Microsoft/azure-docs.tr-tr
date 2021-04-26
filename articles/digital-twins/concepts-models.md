@@ -7,12 +7,12 @@ ms.author: baanders
 ms.date: 3/12/2020
 ms.topic: conceptual
 ms.service: digital-twins
-ms.openlocfilehash: d3570a22fdd935237e673ea3e43ab5e463b66456
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b3f0dd599f982e19fee7febc3b85d46f91a55b35
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104590543"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107589304"
 ---
 # <a name="understand-twin-models-in-azure-digital-twins"></a>Azure Digital Twins'deki ikiz modellerini anlama
 
@@ -32,10 +32,18 @@ JSON-LD tabanlı bir dil olan DTDL, programlama dilinden bağımsız olarak çal
 
 Bu makalenin geri kalanı, dilin Azure dijital TWINS 'de nasıl kullanıldığını özetler.
 
-> [!NOTE] 
-> DTDL kullanan hizmetlerin hepsi aynı DTDL özelliklerinin aynısını uygulamaz. Örneğin, IoT Tak ve Kullan grafik için olan DTDL özelliklerini kullanmaz, Azure dijital TWINS Şu anda DTDL komutlarını uygulamıyor.
->
-> Azure dijital TWINS 'e özgü DTDL özellikleri hakkında daha fazla bilgi için [Azure Digital TWINS DTDL uygulama özellikleri](#azure-digital-twins-dtdl-implementation-specifics)' nde bu makalenin ilerleyen bölümüne bakın.
+### <a name="azure-digital-twins-dtdl-implementation-specifics"></a>Azure dijital TWINS DTDL uygulama özellikleri
+
+DTDL kullanan hizmetlerin hepsi aynı DTDL özelliklerinin aynısını uygulamaz. Örneğin, IoT Tak ve Kullan grafik için olan DTDL özelliklerini kullanmaz, Azure dijital TWINS Şu anda DTDL komutlarını uygulamıyor. 
+
+Bir DTDL modelinin Azure dijital TWINS ile uyumlu olması için, bu gereksinimleri karşılaması gerekir:
+
+* Bir modeldeki tüm üst düzey DTDL öğelerinin *Interface* türünde olması gerekir. Bunun nedeni, Azure Digital TWINS model API 'Lerinin bir arabirimi ya da arabirim dizisini temsil eden JSON nesnelerini almasına yönelik olması olabilir. Sonuç olarak, en üst düzeyde başka bir DTDL öğesi türüne izin verilmez.
+* Azure dijital TWINS için DTDL herhangi bir *komut* tanımlamamalıdır.
+* Azure dijital TWINS yalnızca tek bir bileşen iç içe geçme düzeyine izin verir. Bu, bileşen olarak kullanılan bir arabirimin hiçbir bileşene sahip olamayacağı anlamına gelir. 
+* Arabirimler, diğer DTDL arabirimleri içinde satır içi olarak tanımlanamaz; kendi kimlikleri olan ayrı en üst düzey varlıklar olarak tanımlanmalıdır. Daha sonra, başka bir arabirim bu arabirimi bir bileşen olarak veya devralma yoluyla eklemek istediğinde, KIMLIĞINE başvurabilir.
+
+Azure dijital TWINS, `writable` Özellikler veya ilişkilerdeki özniteliği de gözlemlemez. Bu, DTDL belirtimlerine göre ayarlanabilir, ancak değer Azure dijital TWINS tarafından kullanılmaz. Bunun yerine, bunlar her zaman Azure dijital TWINS hizmeti için genel yazma izinlerine sahip dış istemciler tarafından yazılabilir olarak değerlendirilir.
 
 ## <a name="elements-of-a-model"></a>Bir modelin öğeleri
 
@@ -50,7 +58,7 @@ Bir DTDL model arabirimi, aşağıdaki alanlardan her birinin sıfır, bir veya 
     
     >[!TIP] 
     >Bileşenler, bir model arabirimi içindeki ilgili özelliklerin kümelerini gruplamak için de kullanılabilir. Bu durumda, her bir bileşeni arabirim içinde bir ad alanı veya "klasör" olarak düşünebilirsiniz.
-* **İlişki** ilişkileri, dijital bir ikizi diğer dijital TWINS ile nasıl dahil edileceğini temsil etmenize olanak tanır. İlişkiler, *Contains* ("kat yer alan"), *cozı* ("HVAC Cozı"), *isbilledto* ("sıkıştırıcı kullanıcıya faturalandırılır") vb. gibi farklı anlam anlamlarını temsil edebilir. İlişkiler çözümün birbiriyle ilişkili varlıkların bir grafiğini sağlamasına izin verir.
+* **İlişki** ilişkileri, dijital bir ikizi diğer dijital TWINS ile nasıl dahil edileceğini temsil etmenize olanak tanır. İlişkiler, *Contains* ("kat yer alan"), *cozı* ("HVAC Cozı"), *isbilledto* ("sıkıştırıcı kullanıcıya faturalandırılır") vb. gibi farklı anlam anlamlarını temsil edebilir. İlişkiler çözümün birbiriyle ilişkili varlıkların bir grafiğini sağlamasına izin verir. İlişkiler Ayrıca kendi [özelliklerine](#properties-of-relationships) sahip olabilir.
 
 > [!NOTE]
 > [DTDL özelliği](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md) Ayrıca, dijital bir ikizi (sıfırlama komutu gibi) veya bir fanı açık veya kapalı bir komut olarak yürütülebilecek Yöntemler olan **komutları** tanımlar. Ancak, *Komutlar Şu anda Azure dijital TWINS 'te desteklenmemektedir.*
@@ -73,20 +81,40 @@ Telemetri ve özellikler genellikle cihazlardan veri girişini işlemek için bi
 
 Ayrıca Azure dijital TWINS API 'sinden bir telemetri olayı yayımlayabilirsiniz. Diğer telemetride olduğu gibi, işlemek için bir dinleyici gerektiren kısa süreli bir olaydır.
 
-### <a name="azure-digital-twins-dtdl-implementation-specifics"></a>Azure dijital TWINS DTDL uygulama özellikleri
+#### <a name="properties-of-relationships"></a>İlişkilerin özellikleri
 
-Bir DTDL modelinin Azure dijital TWINS ile uyumlu olması için, bu gereksinimleri karşılaması gerekir.
+DTDL Ayrıca **ilişkilerin** kendi özelliklerine sahip olmasını sağlar. Bir DTDL modeli içinde bir ilişki tanımlarken, ilişki, `properties` ilişkiye özgü durumu tanımlamak için özel özellikler tanımlayabileceğiniz kendi alanına sahip olabilir.
 
-* Bir modeldeki tüm üst düzey DTDL öğelerinin *Interface* türünde olması gerekir. Bunun nedeni, Azure Digital TWINS model API 'Lerinin bir arabirimi ya da arabirim dizisini temsil eden JSON nesnelerini almasına yönelik olması olabilir. Sonuç olarak, en üst düzeyde başka bir DTDL öğesi türüne izin verilmez.
-* Azure dijital TWINS için DTDL herhangi bir *komut* tanımlamamalıdır.
-* Azure dijital TWINS yalnızca tek bir bileşen iç içe geçme düzeyine izin verir. Bu, bileşen olarak kullanılan bir arabirimin hiçbir bileşene sahip olamayacağı anlamına gelir. 
-* Arabirimler, diğer DTDL arabirimleri içinde satır içi olarak tanımlanamaz; kendi kimlikleri olan ayrı en üst düzey varlıklar olarak tanımlanmalıdır. Daha sonra, başka bir arabirim bu arabirimi bir bileşen olarak veya devralma yoluyla eklemek istediğinde, KIMLIĞINE başvurabilir.
+## <a name="model-inheritance"></a>Model devralma
 
-Azure dijital TWINS, `writable` Özellikler veya ilişkilerdeki özniteliği de gözlemlemez. Bu, DTDL belirtimlerine göre ayarlanabilir, ancak değer Azure dijital TWINS tarafından kullanılmaz. Bunun yerine, bunlar her zaman Azure dijital TWINS hizmeti için genel yazma izinlerine sahip dış istemciler tarafından yazılabilir olarak değerlendirilir.
+Bazen bir modeli daha fazla özelleştirmek isteyebilirsiniz. Örneğin, genel bir model *odası* ve özelleştirilmiş çeşitler *conferenceroom* ve *Gym* olmak yararlı olabilir. Hızlı özelleşmede DTDL devralmayı destekler: arabirimler, bir veya daha fazla arabirimden devralınabilir. 
 
-## <a name="example-model-code"></a>Örnek model kodu
+Aşağıdaki örnek, önceki DTDL örneğinde bulunan *Planet* modelini daha büyük bir *ünalbody* modelinin alt türü olarak yeniden görüntüle. "Üst" model önce tanımlanmıştır ve ardından "alt" modeli alanını kullanarak bunu oluşturur `extends` .
+
+:::code language="json" source="~/digital-twins-docs-samples/models/CelestialBody-Planet-Crater.json":::
+
+Bu örnekte, bir ad, toplu ve sıcaklığın bir adı, bir kütle ve sıcaklık katkısında olduğunu *Ttıalgövdesi* . `extends`Bölüm bir arabirim adıdır veya arabirim adları dizisidir (uzatma arabirimine isterseniz birden çok üst modelden devralma olanağı sağlar).
+
+Devralma uygulandıktan sonra, genişletme arabirimi tüm devralma zincirinden tüm özellikleri sunar.
+
+Genişletme arabirimi üst arabirimlerin tanımlarından hiçbirini değiştiremez; yalnızca bunlara eklenebilir. Ayrıca, kendi üst arabirimlerinde tanımlanmış bir özelliği (özellikler aynı olarak tanımlanmış olsa bile) yeniden tanımlayamazsınız. Örneğin, bir üst arabirim bir `double` özellik *kütle* tanımlıyorsa, genişletme arabirimi de olsa bile bir *yığın* Bildirimi içeremez `double` .
+
+## <a name="model-code"></a>Model kodu
 
 İkizi tür modelleri, herhangi bir metin düzenleyicisinde yazılabilir. DTDL dili JSON söz dizimini izler, bu nedenle modelleri *. JSON* uzantısıyla depomalısınız. JSON uzantısının kullanılması, DTDL belgeleriniz için temel sözdizimi denetimi ve vurgulaması sağlamak üzere birçok programlama metin düzenleyicilerini etkinleştirir. Ayrıca, [Visual Studio Code](https://code.visualstudio.com/)Için bir [dtdl uzantısı](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.vscode-dtdl) da mevcuttur.
+
+### <a name="possible-schemas"></a>Olası şemalar
+
+Dtdl başına, *özellik* ve *telemetri* özniteliklerinin şeması standart temel türler,,, `integer` `double` `string` , ve gibi `Boolean` diğer türler olabilir `DateTime` `Duration` . 
+
+İlkel türlere ek olarak, *özellik* ve *telemetri* alanları bu karmaşık türlere sahip olabilir:
+* `Object`
+* `Map`
+* `Enum`
+
+*Telemetri* alanları da desteklenir `Array` .
+
+### <a name="example-model"></a>Örnek model
 
 Bu bölüm, DTDL arabirimi olarak yazılmış tipik bir modele örnek içerir. Model, her biri bir ad, yığın ve sıcaklığa sahip olan **plananları** açıklar.
  
@@ -106,31 +134,6 @@ Modelin alanları şunlardır:
 
 > [!NOTE]
 > Bileşen *arabiriminin (Bu* örnekteki), kendisini kullanan arabirimle (*Planet*) aynı dizide tanımlandığını unutmayın. Bu şekilde, arabirimin bulunması için API çağrılarında bu şekilde tanımlanması gerekir.
-
-### <a name="possible-schemas"></a>Olası şemalar
-
-Dtdl başına, *özellik* ve *telemetri* özniteliklerinin şeması standart temel türler,,, `integer` `double` `string` , ve gibi `Boolean` diğer türler olabilir `DateTime` `Duration` . 
-
-İlkel türlere ek olarak, *özellik* ve *telemetri* alanları bu karmaşık türlere sahip olabilir:
-* `Object`
-* `Map`
-* `Enum`
-
-*Telemetri* alanları da desteklenir `Array` .
-
-### <a name="model-inheritance"></a>Model devralma
-
-Bazen bir modeli daha fazla özelleştirmek isteyebilirsiniz. Örneğin, genel bir model *odası* ve özelleştirilmiş çeşitler *conferenceroom* ve *Gym* olmak yararlı olabilir. Hızlı özelleşmede DTDL devralmayı destekler: arabirimler, bir veya daha fazla arabirimden devralınabilir. 
-
-Aşağıdaki örnek, önceki DTDL örneğinde bulunan *Planet* modelini daha büyük bir *ünalbody* modelinin alt türü olarak yeniden görüntüle. "Üst" model önce tanımlanmıştır ve ardından "alt" modeli alanını kullanarak bunu oluşturur `extends` .
-
-:::code language="json" source="~/digital-twins-docs-samples/models/CelestialBody-Planet-Crater.json":::
-
-Bu örnekte, bir ad, toplu ve sıcaklığın bir adı, bir kütle ve sıcaklık katkısında olduğunu *Ttıalgövdesi* . `extends`Bölüm bir arabirim adıdır veya arabirim adları dizisidir (uzatma arabirimine isterseniz birden çok üst modelden devralma olanağı sağlar).
-
-Devralma uygulandıktan sonra, genişletme arabirimi tüm devralma zincirinden tüm özellikleri sunar.
-
-Genişletme arabirimi üst arabirimlerin tanımlarından hiçbirini değiştiremez; yalnızca bunlara eklenebilir. Ayrıca, kendi üst arabirimlerinde tanımlanmış bir özelliği (özellikler aynı olarak tanımlanmış olsa bile) yeniden tanımlayamazsınız. Örneğin, bir üst arabirim bir `double` özellik *kütle* tanımlıyorsa, genişletme arabirimi de olsa bile bir *yığın* Bildirimi içeremez `double` .
 
 ## <a name="best-practices-for-designing-models"></a>Model tasarlamak için en iyi uygulamalar
 

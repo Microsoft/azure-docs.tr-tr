@@ -12,12 +12,12 @@ ms.topic: how-to
 ms.custom: devx-track-csharp
 ms.date: 08/31/2020
 ms.author: inhenkel
-ms.openlocfilehash: 01854e7636f53ec1faab157b51cc84f3539582b4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 00a3fa397bf88520fa4923b6fbe7495c0aa0b8a2
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104596731"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277411"
 ---
 # <a name="signal-descriptive-audio-tracks"></a>Sinyal açıklayıcı ses parçaları
 
@@ -29,9 +29,9 @@ Bu makalede, bir videoyu kodlama, çıktı varlığına açıklayıcı ses içer
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- [Media Services hesabı oluşturun](./create-account-howto.md).
+- [Media Services hesabı oluşturun](./account-create-how-to.md).
 - [Azure CLI Ile Access Azure Media Services API 'sindeki](./access-api-howto.md) adımları izleyin ve kimlik bilgilerini kaydedin. API 'ye erişmek için bunları kullanmanız gerekir.
-- [Dinamik paketlemeyi](dynamic-packaging-overview.md)gözden geçirin.
+- [Dinamik paketlemeyi](encode-dynamic-packaging-concept.md)gözden geçirin.
 - [Karşıya yükleme, kodlama ve akış videoları](stream-files-tutorial-with-api.md) öğreticisini gözden geçirin.
 
 ## <a name="create-an-input-asset-and-upload-a-local-file-into-it"></a>Bir giriş varlığı oluşturma ve içine yerel dosya yükleme 
@@ -64,7 +64,7 @@ Bu makale söz konusu olduğunda, `outputAsset.Name` değeri `SubmitJobAsync` ve
 
 ## <a name="create-a-transform-and-a-job-that-encodes-the-uploaded-file"></a>Karşıya yüklenen dosyayı kodlayan bir dönüşüm ve iş oluşturma
 
-Media Services’te içerik kodlarken veya işlerken, kodlama ayarlarını bir tarif olarak ayarlamak yaygın bir modeldir. Daha sonra bu tarifi bir videoya uygulamak üzere bir **İş** gönderirsiniz. Her yeni video için yeni işler göndererek, bu tarifi kitaplığınızdaki tüm videolarınıza uygulayacaksanız. Media Services içinde tarif, **Dönüşüm** olarak adlandırılır. Daha fazla bilgi için [Dönüşümler ve İşler](./transforms-jobs-concept.md) konusuna bakın. Bu öğreticide açıklanan örnek, videoyu çeşitli iOS ve Android cihazlarına akışla aktarmak için kodlayan bir tarifi tanımlar. 
+Media Services’te içerik kodlarken veya işlerken, kodlama ayarlarını bir tarif olarak ayarlamak yaygın bir modeldir. Daha sonra bu tarifi bir videoya uygulamak üzere bir **İş** gönderirsiniz. Her yeni video için yeni işler göndererek, bu tarifi kitaplığınızdaki tüm videolarınıza uygulayacaksanız. Media Services içinde tarif, **Dönüşüm** olarak adlandırılır. Daha fazla bilgi için [Dönüşümler ve İşler](./transform-jobs-concept.md) konusuna bakın. Bu öğreticide açıklanan örnek, videoyu çeşitli iOS ve Android cihazlarına akışla aktarmak için kodlayan bir tarifi tanımlar. 
 
 Aşağıdaki örnek, bir dönüşüm (yoksa, yoksa) oluşturur.
 
@@ -245,4 +245,4 @@ Azure Media Player, test için kullanılabilir, ancak üretim ortamında kullan�
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Videoları analiz etme](analyze-videos-tutorial-with-api.md)
+[Videoları analiz etme](analyze-videos-tutorial.md)

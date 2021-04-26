@@ -3,12 +3,12 @@ title: Azure VM 'de SQL Server veritabanlarını yönetme ve izleme
 description: Bu makalede, bir Azure VM üzerinde çalışan SQL Server veritabanlarının nasıl yönetileceği ve izleneceği açıklanır.
 ms.topic: conceptual
 ms.date: 09/11/2019
-ms.openlocfilehash: e37e6fc211b34b7e427b66db374a705faafd25f9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3938e26e134f7d823d8a6f6fac631ebf4442e6ab
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97858747"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519145"
 ---
 # <a name="manage-and-monitor-backed-up-sql-server-databases"></a>Yedeklenmiş SQL Server veritabanlarını yönetme ve izleme
 
@@ -79,8 +79,8 @@ Bir veritabanının korumasını durdurmak için:
 >
 >Verileri Sil seçeneği hakkında daha fazla bilgi için aşağıdaki SSS bölümüne bakın:
 >
->- [Otomatik korumalı bir örnekten veritabanı silersem yedeklemelere ne olur?](faq-backup-sql-server.md#if-i-delete-a-database-from-an-autoprotected-instance-what-will-happen-to-the-backups)
->- [Otomatik korumalı bir veritabanının yedekleme işlemini durdurdum, davranışı ne olur?](faq-backup-sql-server.md#if-i-change-the-name-of-the-database-after-it-has-been-protected-what-will-be-the-behavior)
+>- [Otomatik korumalı bir örnekten veritabanı silersem yedeklemelere ne olur?](faq-backup-sql-server.yml#if-i-delete-a-database-from-an-autoprotected-instance--what-will-happen-to-the-backups-)
+>- [Otomatik korumalı bir veritabanının yedekleme işlemini durdurdum, davranışı ne olur?](faq-backup-sql-server.yml#if-i-change-the-name-of-the-database-after-it-has-been-protected--what-will-be-the-behavior-)
 >
 >
 

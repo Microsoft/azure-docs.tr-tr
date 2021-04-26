@@ -16,12 +16,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 10/10/2019
 ms.author: cynthn
-ms.openlocfilehash: 9d549d77b4a60f7543f69a9fd89e8b538c95d010
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: ecad48592ecfb6723548a27997cfe1b81545b24a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102564620"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107759608"
 ---
 # <a name="create-a-linux-vm-from-a-custom-disk-with-the-azure-cli"></a>Azure CLı ile özel diskten bir Linux VM oluşturma
 
@@ -50,7 +50,7 @@ Aşağıdaki adımları tamamlayabilmeniz için şunlar gerekir:
 > 
 
 
-- En son [Azure CLI](/cli/azure/install-az-cli2) 'nın yüklü olduğundan ve [az oturum açma](/cli/azure/reference-index#az-login)ile bir Azure hesabında oturum açtığınızdan emin olun.
+- En son [Azure CLI](/cli/azure/install-az-cli2) 'nın yüklü olduğundan ve [az oturum açma](/cli/azure/reference-index#az_login)ile bir Azure hesabında oturum açtığınızdan emin olun.
 
 Aşağıdaki örneklerde,, ve gibi örnek parametre adlarını kendi değerlerinizle değiştirin `myResourceGroup` `mystorageaccount` `mydisks` .
 
@@ -66,7 +66,7 @@ Azure çeşitli Linux dağıtımlarını destekler (bkz. [onaylı dağıtımlar]
 * [Red Hat Enterprise Linux](redhat-create-upload-vhd.md)
 * [SLES ve openSUSE](suse-create-upload-vhd.md)
 * [Ubuntu](create-upload-ubuntu.md)
-* [Diğerleri: onaylı olmayan dağıtımlar](create-upload-generic.md)
+* [Diğerleri: Desteklenmeyen Dağıtımlar](create-upload-generic.md)
 
 Ayrıca, Linux görüntülerini Azure için hazırlama hakkında daha genel ipuçları için bkz. [Linux yükleme notları](create-upload-generic.md#general-linux-installation-notes) .
 
@@ -121,7 +121,7 @@ az disk create \
 
 ## <a name="create-the-vm"></a>Sanal makineyi oluşturma
 
-VM 'nizi [az VM Create](/cli/azure/vm#az-vm-create) ve Attach (--Attach-OS-disk) ile yönetilen disk işletim sistemi diski olarak oluşturun. Aşağıdaki örnek, karşıya yüklenen VHD 'nizden oluşturduğunuz yönetilen diski kullanarak *mynewvm* adlı bir sanal makine oluşturur:
+VM 'nizi [az VM Create](/cli/azure/vm#az_vm_create) ve Attach (--Attach-OS-disk) ile yönetilen disk işletim sistemi diski olarak oluşturun. Aşağıdaki örnek, karşıya yüklenen VHD 'nizden oluşturduğunuz yönetilen diski kullanarak *mynewvm* adlı bir sanal makine oluşturur:
 
 ```azurecli
 az vm create \

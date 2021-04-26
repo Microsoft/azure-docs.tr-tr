@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 08/13/2020
 ms.author: b-juche
-ms.openlocfilehash: 0cd1f6210fbdb74e3fd511150157dccca3e92dda
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a765d689307b7f56e5100e75d9f7121e944cea14
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91932473"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168289"
 ---
 # <a name="benefits-of-using-azure-netapp-files-with-windows-virtual-desktop"></a>Windows Sanal Masaüstü ile Azure NetApp Files kullanmanın avantajları 
 
@@ -29,7 +29,7 @@ Azure NetApp Files, Azure 'un yüksek performanslı bir dosya depolama hizmetidi
 
 ## <a name="sample-blueprints"></a>Örnek planlar
 
-Aşağıdaki örnek planlar Windows sanal masaüstü 'nün Azure NetApp Files tümleştirmesini göstermektedir. Havuza alınmış bir masaüstü senaryosunda, kullanıcılar [Çoklu oturum sanal makinelerini](../virtual-desktop/windows-10-multisession-faq.md#what-is-windows-10-enterprise-multi-session)kullanarak, havuzdaki en iyi kullanılabilir oturuma (en [ilk mod](../virtual-desktop/host-pool-load-balancing.md#breadth-first-load-balancing-method)) ana bilgisayar olarak yönlendirilir. Diğer yandan, kişisel masaüstleri her bir kullanıcının kendi sanal makinesine sahip olduğu senaryolar için ayrılmıştır.
+Aşağıdaki örnek planlar Windows sanal masaüstü 'nün Azure NetApp Files tümleştirmesini göstermektedir. Havuza alınmış bir masaüstü senaryosunda, kullanıcılar [Çoklu oturum sanal makinelerini](../virtual-desktop/windows-10-multisession-faq.yml#what-is-windows-10-enterprise-multi-session)kullanarak, havuzdaki en iyi kullanılabilir oturuma (en [ilk mod](../virtual-desktop/host-pool-load-balancing.md#breadth-first-load-balancing-method)) ana bilgisayar olarak yönlendirilir. Diğer yandan, kişisel masaüstleri her bir kullanıcının kendi sanal makinesine sahip olduğu senaryolar için ayrılmıştır.
 
 ### <a name="pooled-desktop-scenario"></a>Havuza alınmış masaüstü senaryosu
 

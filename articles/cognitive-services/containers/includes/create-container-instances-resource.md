@@ -10,10 +10,10 @@ ms.topic: include
 ms.date: 04/01/2020
 ms.author: aahi
 ms.openlocfilehash: 24f6052c436b73d0075371fa74160d21826e2209
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "97866022"
 ---
 ## <a name="create-an-azure-container-instance-resource-using-the-azure-portal"></a>Azure portal kullanarak bir Azure Container Instance kaynağı oluşturma

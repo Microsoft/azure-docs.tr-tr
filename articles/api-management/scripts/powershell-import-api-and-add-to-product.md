@@ -11,13 +11,13 @@ ms.workload: mobile
 ms.topic: sample
 ms.date: 11/16/2017
 ms.author: apimpm
-ms.custom: mvc
-ms.openlocfilehash: 3644eda24790b9f711d6584b05a18eba23f227ba
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: 7748558fa7cee6972e4bb47fea0ba08ffb72b83e
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87850942"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816899"
 ---
 # <a name="import-an-api"></a>Bir API’yi içeri aktarma
 

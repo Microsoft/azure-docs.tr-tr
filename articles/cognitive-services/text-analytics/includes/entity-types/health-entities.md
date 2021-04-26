@@ -10,10 +10,10 @@ ms.topic: include
 ms.date: 03/11/2021
 ms.author: aahi
 ms.openlocfilehash: 805c726d33f2050f6f2797c0689069aa5ec4ee71
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104599344"
 ---
 [Sistem durumu işlemlerine metin analizi](../../how-tos/text-analytics-for-health.md) ve yapılandırılmamış tıp verilerinden öngörüleri ayıklar. Hizmet, tıp kavramlarını algılar ve yüzeyler, kavramlara onaylar atar ve kavramlar arasında semantik ilişkiler sağlar ve bunları ortak tıbbi ontoloyenlere bağlar.

@@ -9,12 +9,12 @@ ms.date: 10/16/2020
 ms.custom: subject-armqs, devx-track-azurecli
 zone_pivot_groups: app-service-platform-windows-linux
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 7437a5208f94b435576b8a38dc65a6e798303a72
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: bce6bfb61eb59d1fa66c550a133ac8b6f8d7f2c5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102179094"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769016"
 ---
 # <a name="quickstart-create-app-service-app-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak App Service uygulaması oluşturma
 
@@ -133,7 +133,7 @@ az deployment group create --resource-group myResourceGroup --parameters webAppN
 <ul>
 <li>Varsayılan oluşturma <abbr title="Birim olarak yönetebileceğiniz ilgili Azure kaynakları için mantıksal bir kapsayıcı.">kaynak grubu</abbr>.</li>
 <li>Varsayılan oluşturma <abbr title="Uygulamanızı barındıran Web sunucusu grubunun konumunu, boyutunu ve özelliklerini belirten plan.">App Service planı</abbr>.</li>
-<li><a href="/cli/azure/webapp#az-webapp-create">Oluşturma <abbr title="Uygulama kodunuzu, DNS ana bilgisayar adlarını, sertifikalarınızı ve ilgili kaynaklarınızı içeren Web uygulamanızın temsili. "> App Service uygulaması</abbr></a> Belirtilen ada sahip.</li>
+<li><a href="/cli/azure/webapp#az_webapp_create">Oluşturma <abbr title="Uygulama kodunuzu, DNS ana bilgisayar adlarını, sertifikalarınızı ve ilgili kaynaklarınızı içeren Web uygulamanızın temsili. "> App Service uygulaması</abbr></a> Belirtilen ada sahip.</li>
 </ul>
 </details>
 
@@ -191,4 +191,3 @@ Artık gerekli olmadığında [kaynak grubunu silin](../azure-resource-manager/m
 - [MySQL ile PHP](tutorial-php-mysql-app.md)
 - [Java ile Azure SQL veritabanı 'na bağlanma](../azure-sql/database/connect-query-java.md?toc=%2fazure%2fjava%2ftoc.json)
 - [Özel etki alanı eşleme](app-service-web-tutorial-custom-domain-uiex.md)
-

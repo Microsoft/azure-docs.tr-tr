@@ -9,10 +9,10 @@ ms.devlang: azurepowershell
 ms.date: 11/16/2020
 ms.custom: devx-track-azurepowershell
 ms.openlocfilehash: 3cb320a37818084f2fbcad22a3cc992655b19c3d
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104878745"
 ---
 # <a name="deploy-azure-spring-cloud-with-azure-powershell"></a>Azure PowerShell ile Azure Spring Cloud dağıtma

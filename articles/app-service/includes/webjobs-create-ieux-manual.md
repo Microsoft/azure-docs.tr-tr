@@ -5,12 +5,12 @@ ms.topic: include
 ms.date: 10/16/2018
 ms.title: include
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 5687fb99c27b8b2141e0a2a817327cfbb124951a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 40e9e2b0e7437566a132f2402d3bed01b284d11a
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "102109404"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081060"
 ---
 ## <a name="create-a-manually-triggered-webjob"></a><a name="CreateOnDemand"></a> El ile tetiklenen WebJob oluşturma
 
@@ -33,7 +33,7 @@ ms.locfileid: "102109404"
    | <abbr title="App Service uygulaması içinde benzersiz olan bir ad. Bir harf veya sayı ile başlamalı ve ve dışında özel karakterler içermemelidir `-` `_` .">Name</abbr> | myTriggeredWebJob | 
     | <abbr title="Yürütülebilir dosyayı veya betik dosyanızı içeren bir *. zip* dosyası ve program veya betiği çalıştırmak için gereken destekleyici dosyalar.">Karşıya dosya yükleme</abbr> | ConsoleApp.zip |
     | <abbr title="Türler arasında sürekli, tetiklenen.">Tür</abbr> | Diğini | 
-    | <abbr title="Zamanlanmış veya el ile türleri içerir">Tetikleyiciler</a> | El ile | |
+    | <abbr title="Zamanlanmış veya el ile türleri içerir">Tetikleyiciler</a> | El ile | 
 
 4. **Tamam**'a tıklayın. 
 

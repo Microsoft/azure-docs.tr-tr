@@ -11,16 +11,16 @@ ms.topic: sample
 ms.date: 08/11/2020
 ms.author: pafarley
 ROBOTS: NOINDEX
-ms.openlocfilehash: cfc9745fc4684a7b0d8f7da7e63149a6fe50f6d2
-ms.sourcegitcommit: 03713bf705301e7f567010714beb236e7c8cee6f
+ms.openlocfilehash: 7a05b04872b4f957e879d93972edc45e2932d059
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92331847"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107364099"
 ---
 # <a name="upgrade-from-read-v2x-to-read-v3x"></a>V2. x okuma sürümünden v3. x ' e yükseltme
 
-Bu kılavuzda, var olan kapsayıcınızı veya Cloud API kodunuzu Read v2. x adresinden okuma v 3.0 ve v 3.1 Preview sürümüne nasıl yükselteceğiniz gösterilmektedir.
+Bu kılavuzda, var olan kapsayıcınızı veya Cloud API kodunuzu Read v2. x adresinden v3. x ' e nasıl yükselteceğiniz gösterilmektedir.
 
 ## <a name="determine-your-api-path"></a>API yolunuzu belirleme
 Geçiş yaptığınız 3. x sürümünü temel alan API yolundaki **Sürüm dizesini** anlamak için aşağıdaki tabloyu kullanın.
@@ -69,7 +69,7 @@ JSON üzerinde aşağıdaki değişiklikleri aklınızda yapın:
 * Sayfa açısı `clockwiseOrientation` olarak yeniden adlandırıldı `angle` ve Aralık 0-360 derece-180 180 arasında olacak şekilde değiştirilmiştir. Kodunuza bağlı olarak, çoğu matematik işlevi her iki aralığı de işleyemediğinden değişiklik yapmanız gerekebilir.
 
 V 3.0 API 'SI, isteğe bağlı olarak kullanabileceğiniz aşağıdaki geliştirmeleri de sunar:
-* `createdDateTime` ve `lastUpdatedDateTime` , işleme süresini izleyebilmek için eklenir. Daha fazla bilgi için belgelere bakın. 
+* `createdDateTime` ve `lastUpdatedDateTime` , işleme süresini izleyebilmek için eklenir. Diğer ayrıntılar için belgelere bakın. 
 * `version` sonuçları oluşturmak için kullanılan API 'nin sürümünü söyler
 * Sözcük başına `confidence` eklendi. Bu değer, 0,95 değeri, tanımanın doğru olması için %95 olasılığı olacağı için ayarlanır. Güvenirlik puanı, insan gözden geçirmesi için hangi metnin gönderileceğini seçmek üzere kullanılabilir. 
     
@@ -174,7 +174,7 @@ V 3.0 'da, ayarlandı:
 ## <a name="service-only"></a>Yalnızca hizmet
 
 ### `Recognize Text`
-`Recognize Text`*tüm görüntü işleme API'si sürümlerinde kullanımdan*kaldırılmakta olan bir *Önizleme* işlemidir. `Recognize Text` `Read` ' Den (v 3.0) veya `Batch Read File` (v 2.0, v 2.1) sürümüne geçiş yapmanız gerekir. v 3.0 `Read` , metin tanıma ve ek özellikler için daha yeni, daha iyi modeller içerir, bu nedenle önerilir. Sürümünden sürümüne yükseltmek `Recognize Text` için `Read` :
+`Recognize Text`*tüm görüntü işleme API'si sürümlerinde kullanımdan* kaldırılmakta olan bir *Önizleme* işlemidir. `Recognize Text` `Read` ' Den (v 3.0) veya `Batch Read File` (v 2.0, v 2.1) sürümüne geçiş yapmanız gerekir. v 3.0 `Read` , metin tanıma ve ek özellikler için daha yeni, daha iyi modeller içerir, bu nedenle önerilir. Sürümünden sürümüne yükseltmek `Recognize Text` için `Read` :
 
 |Metin Tanıma 2. x |3. x oku  |
 |----------|-----------|
@@ -207,7 +207,7 @@ JSON üzerinde aşağıdaki değişiklikleri aklınızda yapın:
 * Sayfa dizisinin kökünü almak için, JSON hiyerarşisini ' den ' e değiştirin `recognitionResult` `analyzeResult` / `readResults` . Sayfa başına çizgi ve sözcükler JSON hiyerarşisi değişmeden kalır, bu nedenle kod değişikliği gerekli değildir.
 
 V 3.0 API 'SI, isteğe bağlı olarak kullanabileceğiniz aşağıdaki geliştirmeleri de sağlar. Daha fazla ayrıntı için API başvurusuna bakın:
-* `createdDateTime` ve `lastUpdatedDateTime` , işleme süresini izleyebilmek için eklenir. Daha fazla bilgi için belgelere bakın. 
+* `createdDateTime` ve `lastUpdatedDateTime` , işleme süresini izleyebilmek için eklenir. Diğer ayrıntılar için belgelere bakın. 
 * `version` sonuçları oluşturmak için kullanılan API 'nin sürümünü söyler
 * Sözcük başına `confidence` eklendi. Bu değer, 0,95 değeri, tanımanın doğru olması için %95 olasılığı olacağı için ayarlanır. Güvenirlik puanı, insan gözden geçirmesi için hangi metnin gönderileceğini seçmek üzere kullanılabilir. 
 * `angle` metnin, saat yönünde (-180, 180]) ölçülen genel yönü.

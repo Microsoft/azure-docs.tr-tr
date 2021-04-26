@@ -11,14 +11,14 @@ metadata:
   ms.author: mbaldwin
   manager: rkarlin
   ms.date: 09/15/2020
-  ms.openlocfilehash: be85f521d1db7cdcad9393de52ef1846989e6245
-  ms.sourcegitcommit: 24f30b1e8bb797e1609b1c8300871d2391a59ac2
+  ms.openlocfilehash: 7e4fa839d4bd85ef6a5d560ee19ddb87fe660ced
+  ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 02/10/2021
-  ms.locfileid: "100097968"
+  ms.lasthandoff: 04/21/2021
+  ms.locfileid: "107817531"
 landingContent:
-- title: Azure Key Vault Yönetilen HSM hakkında (önizleme)
+- title: Azure Key Vault Managed HSM hakkında
   linkLists:
   - linkListType: overview
     links:
@@ -80,7 +80,7 @@ landingContent:
       url: ../general/overview.md
     - text: Temel kavramlar
       url: ../general/basic-concepts.md
-    - text: Güvenliğe genel bakış
-      url: ../general/security-overview.md
+    - text: Güvenlik özellikleri
+      url: ../general/security-features.md
     - text: Geçici silmeye genel bakış
       url: ../general/soft-delete-overview.md

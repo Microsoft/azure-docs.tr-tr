@@ -22,7 +22,7 @@
 - name: Hızlı Başlangıçlar
   items:
     - name: Cihaz simülasyonu çözüm hızlandırıcısını dağıtma
-      href: 'https://github.com/Azure/device-simulation-dotnet/blob/master/README.md'
+      href: 'https://github.com/Azure/azure-iot-pcs-device-simulation/blob/master/README.md'
     - name: Bağlı fabrika çözümünü deneyin
       href: quickstart-connected-factory-deploy.md
   expanded: true
@@ -127,7 +127,7 @@
         - name: Geliştirici başvuru kılavuzu
           href: 'https://github.com/Azure/device-simulation-dotnet/wiki/Simulation-Service-Developer-Reference-Guide'
         - name: GitHub deposu
-          href: 'https://github.com/Azure/device-simulation-dotnet'
+          href: 'https://github.com/Azure/azure-iot-pcs-device-simulation'
     - name: Başvuru Mimarisi
       href: /azure/architecture/reference-architectures/iot
       items:

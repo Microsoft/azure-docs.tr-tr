@@ -8,12 +8,12 @@ ms.author: manoskow
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: 80db53a5ed8d2edc90bc847578d5df4d603cc437
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: db6aafc8c9db7a67c9ee70d524d17a642d03dfd8
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107236"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107259073"
 ---
 # <a name="troubleshooting-in-azure-communication-services"></a>Azure Iletişim hizmetlerinde sorun giderme
 
@@ -79,11 +79,11 @@ chat_client = ChatClient(
 
 ## <a name="access-your-call-id"></a>Çağrı KIMLIĞINIZE erişin
 
-Çağrı sorunlarıyla ilgili Azure portal bir destek isteği dosyalayarak, başvurduğunuz çağrının KIMLIĞINI sağlamanız istenebilir. Bu, çağıran SDK aracılığıyla erişilebilir:
+Ses veya video çağrılarında sorun giderirken bir sağlamanız istenebilir `call ID` . Bu, nesnenin özelliği aracılığıyla erişilebilir `id` `call` :
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 ```javascript
-// `call` is an instance of a call created by `callAgent.call` or `callAgent.join` methods
+// `call` is an instance of a call created by `callAgent.startCall` or `callAgent.join` methods
 console.log(call.id)
 ```
 
@@ -97,7 +97,7 @@ print(call.callId)
 # <a name="android"></a>[Android](#tab/android)
 ```java
 // The `call id` property can be retrieved by calling the `call.getCallId()` method on a call object after a call ends
-// `call` is an instance of a call created by `callAgent.call(…)` or `callAgent.join(…)` methods
+// `call` is an instance of a call created by `callAgent.startCall(…)` or `callAgent.join(…)` methods
 Log.d(call.getCallId())
 ```
 ---
@@ -127,17 +127,23 @@ console.log(result); // your message ID will be in the result
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-Aşağıdaki kod, `AzureLogger` JavaScript SDK 'sı kullanılarak günlüklere günlüklere çıktı olarak yapılandırmak için kullanılabilir:
+SDK 'Yı çağıran Azure Iletişim Hizmetleri, [@azure/logger](https://www.npmjs.com/package/@azure/logger) günlüğü denetlemek için dahili olarak kitaplığı kullanır.
+`setLogLevel` `@azure/logger` Günlük çıkışını yapılandırmak için paketteki yöntemi kullanın:
+
+```javascript
+import { setLogLevel } from '@azure/logger';
+setLogLevel('verbose');
+const callClient = new CallClient();
+```
+
+Yöntemi geçersiz kılarak Azure SDK 'larından günlüğe kaydetme çıkışını yeniden yönlendirmek için AzureLogger kullanabilirsiniz `AzureLogger.log` : Bu, günlükleri konsol dışındaki bir konuma yönlendirmek istiyorsanız yararlı olabilir.
 
 ```javascript
 import { AzureLogger } from '@azure/logger';
-
-AzureLogger.verbose = (...args) => { console.info(...args); }
-AzureLogger.info = (...args) => { console.info(...args); }
-AzureLogger.warning = (...args) => { console.info(...args); }
-AzureLogger.error = (...args) => { console.info(...args); }
-
-callClient = new CallClient({logger: AzureLogger});
+// redirect log output
+AzureLogger.log = (...args) => {
+  console.log(...args); // to console, file, buffer, REST API..
+};
 ```
 
 # <a name="ios"></a>[iOS](#tab/ios)

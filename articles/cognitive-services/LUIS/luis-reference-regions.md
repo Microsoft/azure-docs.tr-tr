@@ -6,14 +6,14 @@ ms.subservice: language-understanding
 author: aahill
 ms.author: aahi
 ms.topic: reference
-ms.date: 01/21/2021
+ms.date: 04/07/2021
 ms.custom: references_regions
-ms.openlocfilehash: 8b43fc472f3247a93414a0b18d9098c6dfb94917
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: fd02bf5c3291569b71416392b651967e0da701d9
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98681617"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226676"
 ---
 # <a name="authoring-and-publishing-regions-and-the-associated-keys"></a>Yazma ve yayımlama bölgeleri ve ilişkili anahtarlar
 
@@ -55,6 +55,7 @@ Yazma bölgesi uygulaması yalnızca ilgili yayımlama bölgesine yayımlanabili
 | Avrupa | `westeurope`| Kuzey Avrupa<br>`northeurope`     | `https://northeurope.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY`   |
 | Avrupa | `westeurope`| West Europe<br>`westeurope`    |  `https://westeurope.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY`   |
 | Avrupa | `westeurope`| Güney Birleşik Krallık<br>`uksouth`    |  `https://uksouth.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY`   |
+| Avrupa | `westeurope`| İsviçre Kuzey<br>`switzerlandnorth`    |  `https://switzerlandnorth.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY`   |
 
 ## <a name="publishing-to-australia"></a>Avustralya 'da yayımlama
 

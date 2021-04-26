@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 04/10/2017
-ms.openlocfilehash: 1e006dd690e9c008afada8a490da6c3238bc0791
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 09fb738a499d6016c3aead0d33436f034bc5d339
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91565420"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728411"
 ---
 # <a name="set-up-cross-region-disaster-recovery-for-integration-accounts-in-azure-logic-apps"></a>Azure Logic Apps tümleştirme hesapları için çapraz bölge olağanüstü durum kurtarmayı ayarlama
 
@@ -60,7 +60,7 @@ Logic Apps tümleştirme hesabındaki iş sürekliliği, B2B protokollerini teme
 
 Bir olağanüstü durum olayı sırasında, birincil bölge iş sürekliliği için kullanılamadığı zaman, ikincil bölgeye doğrudan trafik. İkincil bir bölge, bir işletmenin iş ortakları tarafından kabul edilen RPO/RTO karşılamak için işlevleri hızla kurtarmasına yardımcı olur. Ayrıca, bir bölgeden başka bir bölgeye yük devretme çabaları da en aza indirir. 
 
-Birincil bir bölgeden ikincil bölgeye denetim numaraları kopyalanırken beklenen bir gecikme süresi var. Bir olağanüstü durum olayı sırasında iş ortaklarına yinelenen üretilmiş denetim numaraları gönderilmesini önlemek için, [PowerShell cmdlet 'lerini](/powershell/module/azurerm.logicapp/set-azurermintegrationaccountgeneratedicn?view=azurermps-6.13.0)kullanarak ikincil bölge anlaşmalarındaki denetim numaralarını artırmaktır.
+Birincil bir bölgeden ikincil bölgeye denetim numaraları kopyalanırken beklenen bir gecikme süresi var. Bir olağanüstü durum olayı sırasında iş ortaklarına yinelenen üretilmiş denetim numaraları gönderilmesini önlemek için, [PowerShell cmdlet 'lerini](/powershell/module/azurerm.logicapp/set-azurermintegrationaccountgeneratedicn)kullanarak ikincil bölge anlaşmalarındaki denetim numaralarını artırmaktır.
 
 ## <a name="fall-back-to-a-primary-region-post-disaster-event"></a>Birincil bölgeye geri dönme-olağanüstü durum olayı
 
@@ -68,7 +68,7 @@ Kullanılabilir olduğunda bir birincil bölgeye geri dönmek için şu adımlar
 
 1. İkincil bölgedeki iş ortaklarından gelen iletileri kabul etmeyi durdurun.  
 
-2. [PowerShell cmdlet 'lerini](/powershell/module/azurerm.logicapp/set-azurermintegrationaccountgeneratedicn?view=azurermps-6.13.0)kullanarak tüm birincil bölge sözleşmeleri için oluşturulan denetim numaralarını artırın.  
+2. [PowerShell cmdlet 'lerini](/powershell/module/azurerm.logicapp/set-azurermintegrationaccountgeneratedicn)kullanarak tüm birincil bölge sözleşmeleri için oluşturulan denetim numaralarını artırın.  
 
 3. İkincil bölgeden birincil bölgeye doğrudan trafik.
 

@@ -8,10 +8,10 @@ ms.topic: conceptual
 ms.date: 06/24/2020
 ms.custom: devx-track-js
 ms.openlocfilehash: 7f5a24e4d351d7c133251900a80c70094b84cc4e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98019440"
 ---
 # <a name="debug-user-defined-functions-in-azure-stream-analytics"></a>Azure Stream Analytics 'da Kullanıcı tanımlı işlevlerde hata ayıkla 

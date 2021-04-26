@@ -6,13 +6,13 @@ author: mksuni
 ms.author: sumuth
 ms.topic: tutorial
 ms.date: 12/10/2020
-ms.custom: mvc
-ms.openlocfilehash: 8768f7f4ca898f3f1f81cdd2611679e62d999ef8
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 9315e6fd7dd9880d20108e3f0ed28cd32904f1a3
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645190"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791544"
 ---
 # <a name="tutorial-deploy-django-app-on-aks-with-azure-database-for-postgresql---flexible-server"></a>Öğretici: PostgreSQL için Azure veritabanı ile AKS 'de Docgo uygulaması dağıtma-esnek sunucu
 
@@ -31,7 +31,7 @@ Bu hızlı başlangıçta, Azure CLı 'yı kullanarak Azure Kubernetes Service (
 
    [![Ekli başlatma](https://shell.azure.com/images/launchcloudshell.png "Azure Cloud Shell’i başlatma")](https://shell.azure.com)  
 - Tercih ederseniz, CLı başvuru komutlarını çalıştırmak için Azure CLı 'yı [yükleyebilirsiniz](/cli/azure/install-azure-cli) .
-  - Yerel yükleme kullanıyorsanız [az login](/cli/azure/reference-index#az-login) komutunu kullanarak Azure CLI ile oturum açın.  Kimlik doğrulama işlemini tamamlamak için terminalinizde görüntülenen adımları izleyin.  Ek oturum açma seçenekleri için bkz. [Azure CLI ile oturum açma](/cli/azure/authenticate-azure-cli).
+  - Yerel yükleme kullanıyorsanız [az login](/cli/azure/reference-index#az_login) komutunu kullanarak Azure CLI ile oturum açın.  Kimlik doğrulama işlemini tamamlamak için terminalinizde görüntülenen adımları izleyin.  Ek oturum açma seçenekleri için bkz. [Azure CLI ile oturum açma](/cli/azure/authenticate-azure-cli).
   - İstendiğinde, ilk kullanımda Azure CLI uzantılarını yükleyin.  Uzantılar hakkında daha fazla bilgi için bkz. [Azure CLI ile uzantıları kullanma](/cli/azure/azure-cli-extensions-overview).
   - Yüklü sürümü ve bağımlı kitaplıkları bulmak için [az version](/cli/azure/reference-index?#az_version) komutunu çalıştırın. En son sürüme yükseltmek için [az upgrade](/cli/azure/reference-index?#az_upgrade) komutunu çalıştırın. Bu makale, Azure CLı 'nin en son sürümünü gerektirir. Azure Cloud Shell kullanılıyorsa, en son sürüm zaten yüklüdür.
 
@@ -67,7 +67,7 @@ Aşağıdaki örnek çıktıda başarıyla oluşturulan kaynak grubu gösterilme
 
 ## <a name="create-aks-cluster"></a>AKS kümesi oluşturma
 
-AKS kümesi oluşturmak için [az aks create](/cli/azure/aks#az-aks-create) komutunu kullanın. Aşağıdaki örnekte, bir düğüm ile *myAKSCluster* adlı bir küme oluşturulmuştur. Bu işlem birkaç dakika sürer.
+AKS kümesi oluşturmak için [az aks create](/cli/azure/aks#az_aks_create) komutunu kullanın. Aşağıdaki örnekte, bir düğüm ile *myAKSCluster* adlı bir küme oluşturulmuştur. Bu işlem birkaç dakika sürer.
 
 ```azurecli-interactive
 az aks create --resource-group django-project --name djangoappcluster --node-count 1 --generate-ssh-keys
@@ -80,13 +80,13 @@ Birkaç dakika sonra komut tamamlanır ve küme hakkında JSON biçimli bilgiler
 
 ## <a name="connect-to-the-cluster"></a>Kümeye bağlanma
 
-Kubernetes kümesini yönetmek için Kubernetes komut satırı istemcisi olan [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)'yi kullanırsınız. Azure Cloud Shell kullanıyorsanız, `kubectl` zaten yüklüdür. `kubectl`Yerel olarak yüklemek için [az aks install-cli](/cli/azure/aks#az-aks-install-cli) komutunu kullanın:
+Kubernetes kümesini yönetmek için Kubernetes komut satırı istemcisi olan [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)'yi kullanırsınız. Azure Cloud Shell kullanıyorsanız, `kubectl` zaten yüklüdür. `kubectl`Yerel olarak yüklemek için [az aks install-cli](/cli/azure/aks#az_aks_install_cli) komutunu kullanın:
 
 ```azurecli-interactive
 az aks install-cli
 ```
 
-`kubectl` istemcisini Kubernetes kümenize bağlanacak şekilde yapılandırmak için [az aks get-credentials](/cli/azure/aks#az-aks-get-credentials) komutunu kullanın. Bu komut, kimlik bilgilerini indirir ve Kubernetes CLı 'yi bunları kullanacak şekilde yapılandırır.
+`kubectl` istemcisini Kubernetes kümenize bağlanacak şekilde yapılandırmak için [az aks get-credentials](/cli/azure/aks#az_aks_get_credentials) komutunu kullanın. Bu komut, kimlik bilgilerini indirir ve Kubernetes CLı 'yi bunları kullanacak şekilde yapılandırır.
 
 ```azurecli-interactive
 az aks get-credentials --resource-group django-project --name djangoappcluster
@@ -133,9 +133,9 @@ Yeni bir [docgo uygulaması](https://docs.djangoproject.com/en/3.1/intro/) oluş
     └───models.py
     └───forms.py
     ├───templates
-        . . . . . . .
+          . . . . . . .
     ├───static
-        . . . . . . .
+         . . . . . . .
 └───my-django-project
     └───settings.py
     └───urls.py
@@ -378,7 +378,7 @@ Quit the server with CONTROL-C.
 
 ## <a name="clean-up-the-resources"></a>Kaynakları temizleme
 
-Azure ücretlerinden kaçınmak için gereksiz kaynakları temizlemeniz gerekir.  Kümeye artık ihtiyacınız yoksa [az group delete](/cli/azure/group?view=azure-cli-latest#az_group_delete) komutunu kullanarak kaynak grubunu, kapsayıcı hizmetini ve ilgili tüm kaynakları kaldırın.
+Azure ücretlerinden kaçınmak için gereksiz kaynakları temizlemeniz gerekir.  Kümeye artık ihtiyacınız yoksa [az group delete](/cli/azure/group#az_group_delete) komutunu kullanarak kaynak grubunu, kapsayıcı hizmetini ve ilgili tüm kaynakları kaldırın.
 
 ```azurecli-interactive
 az group delete --name django-project --yes --no-wait

@@ -9,12 +9,12 @@ ms.service: virtual-machines
 ms.subservice: vm-sizes-memory
 ms.topic: conceptual
 ms.date: 6/8/2020
-ms.openlocfilehash: 40ca03114d5a27ad3e5be54d75cb3bbe0221a501
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 677158c69ef15508ff9fc00e83ff87678cf9f983
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102560302"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443978"
 ---
 # <a name="ev4-and-esv4-series"></a>Ev4 ve Esv4 serisi
 
@@ -75,7 +75,7 @@ Esv4 serisi boyutlar Intel &reg; Xeon &reg; Platinum 8272CL (Cascade Lake) üzer
 | Standard_E32s_v4 | 32 | 256 | Yalnızca uzak depolama | 32 | 51200/768  | 8|16000 |
 | Standard_E48s_v4 | 48 | 384 | Yalnızca uzak depolama | 32 | 76800/1152 | 8|24000 |
 | Standard_E64s_v4 <sup>1</sup> | 64 | 504| Yalnızca uzak depolama | 32 | 80000/1200 | 8|30000 |
-| Standard_E80is_v4 <sup>2</sup> | 80 | 504 | Yalnızca uzak depolama | 32 | 80000/1200 | 8|30000 |
+| Standard_E80is_v4 <sup>2</sup> | 80 | 504 | Yalnızca uzak depolama | 32 | 80000/1500 | 8|30000 |
 
 <sup>1</sup> [kısıtlı çekirdek boyutları kullanılabilir)](./constrained-vcpu.md).
 

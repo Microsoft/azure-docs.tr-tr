@@ -6,14 +6,16 @@ ms.author: mikben
 ms.date: 03/10/2021
 ms.topic: quickstart
 ms.service: azure-communication-services
-ms.openlocfilehash: b68d3a92015a8add2dd97313f9971cf896f8e77e
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 38194ed7290d6cd9c4889d27ff458f950603c5be
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105108311"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "106073071"
 ---
 Bu hızlı başlangıçta, Android için SDK 'Yı çağıran Azure Iletişim Hizmetleri 'ni kullanarak bir çağrı başlatmayı öğreneceksiniz.
+
+[!INCLUDE [Public Preview Notice](../../../includes/public-preview-include-android-ios.md)]
 
 > [!NOTE]
 > Bu belge, çağıran SDK 'nın 1.0.0-Beta. 8 sürümünü kullanır.

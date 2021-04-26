@@ -2,13 +2,13 @@
 title: Azure VMware çözümü özel bulutu oluşturma
 description: Azure portal kullanarak bir Azure VMware çözümü özel bulutu oluşturma adımları.
 ms.topic: include
-ms.date: 02/17/2021
-ms.openlocfilehash: da79881e609f982960468a8f26c98178f972ad43
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/07/2021
+ms.openlocfilehash: 6b4e5631d1a4b6c5bf56b01aba12752595ef63b8
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101725413"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107073430"
 ---
 <!-- Used in deploy-azure-vmware-solution.md and tutorial-create-private-cloud.md -->
 
@@ -34,7 +34,7 @@ ms.locfileid: "101725413"
 1. İşiniz bittiğinde, **gözden geçir + oluştur**' u seçin. Sonraki ekranda, girilen bilgileri doğrulayın. Bilgilerin tümü doğru ise **Oluştur**' u seçin.
 
    > [!NOTE]
-   > Bu adım kabaca iki saat sürer. 
+   > Bu adım kabaca 3-4 saat sürer. Var olan/aynı kümede tek bir düğüm eklemek 30-45 dakika arasında sürer.
 
 1. Dağıtımın başarılı olduğunu doğrulayın. Oluşturduğunuz kaynak grubuna gidin ve özel bulutunuzu seçin.  Dağıtım tamamlandığında **başarılı** durumunu görürsünüz. 
 

@@ -6,19 +6,22 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 author: trkeya
 ms.author: trkeya
-ms.date: 10/06/2020
-ms.openlocfilehash: 3be967b611f6b75705a60bfa14523832b0652931
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/06/2021
+ms.openlocfilehash: 381ee45bd678ef22222483675ddf001e16970628
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98879233"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552062"
 ---
 # <a name="publishing-guide-by-offer-type"></a>Teklif türüne göre yayımlama kılavuzu
 
 Bu makalede, ticari Market 'te bulunan teklif türleri açıklanmaktadır. *Teklif türü* , ticari Market 'te sunulan meta verileri, yapıtları ve diğer içerikleri içeren teklif yapısını tanımlar.
 
 [Bir yayımlama seçeneğine karar](determine-your-listing-type.md)verdikten sonra, Iş Ortağı Merkezi 'nde teklifinizi oluşturmaya başlamadan önce bir teklif türü seçmeniz gerekir. Teklif türü, yayımlamak istediğiniz çözüm, uygulama veya hizmet teklifinin türüne, ayrıca Microsoft ürün ve hizmetlerine yönelik hizalamasını karşılayacak.
+
+> [!NOTE]
+> Bir teklif türü seçtikten sonra, teklifi başka bir tür olarak değiştiremezsiniz. Farklı bir teklif türü oluşturmak için yeni bir teklif oluşturmanız gerekir.
 
 Farklı yayımlama seçeneklerini etkinleştirmek için farklı yollarla tek bir teklif türü yapılandırabilirsiniz, listeleme seçeneği, sağlama veya fiyatlandırma. Teklif türünün yayımlama seçeneği ve yapılandırması Ayrıca, teklif uygunluğu ve teknik gereksinimlere de uyum sağlar.
 

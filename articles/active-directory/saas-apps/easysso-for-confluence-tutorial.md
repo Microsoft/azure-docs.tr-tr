@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 12/24/2020
+ms.date: 04/13/2021
 ms.author: jeedes
-ms.openlocfilehash: 325f6ad7d9685fac17e17b28c4ffbe31b1245cca
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ef121112bb4ff3ff6a297677a5c713f642cb3b78
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98734554"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519603"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-easysso-for-confluence"></a>Öğretici: Confluence için Easyswith ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -37,10 +37,10 @@ Başlamak için aşağıdaki öğeler gereklidir:
 
 Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* Confluence için EasySSO **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler
-* Confluence için EasySSO **, tam zamanında** Kullanıcı sağlamayı destekliyor
+* Confluence için EasySSO **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler.
+* Confluence için EasySSO **, tam zamanında** Kullanıcı sağlamayı destekler.
 
-## <a name="adding-easysso-for-confluence-from-the-gallery"></a>Galeri 'den Confluence için EasySSO ekleniyor
+## <a name="add-easysso-for-confluence-from-the-gallery"></a>Galeriden Confluence için EasySSO ekleyin
 
 EasySSO 'nun Azure AD 'ye yönelik tümleştirmesini yapılandırmak için, galerinin yönetilen SaaS uygulamaları listenize yönelik olarak EasySSO eklemeniz gerekir.
 
@@ -50,7 +50,6 @@ EasySSO 'nun Azure AD 'ye yönelik tümleştirmesini yapılandırmak için, gale
 1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
 1. **Galeriden Ekle** bölümünde, arama kutusuna **Confluence Için easysso** yazın.
 1. Sonuçlar panelinden **Confluence Için Easysso** ' yı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
-
 
 ## <a name="configure-and-test-azure-ad-sso-for-easysso-for-confluence"></a>Yapılandırma için Azure AD SSO 'yu yapılandırın ve test edin
 
@@ -71,7 +70,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
 1. Azure portal, **Confluence Için Easysso** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
 1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
-1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
@@ -129,9 +128,7 @@ Bu bölümde, Confluence için Easysa erişimi vererek Azure çoklu oturum açma
 1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
 1. Uygulamalar listesinde, **Confluence Için Easysso** öğesini seçin.
 1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
-
 1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
-
 1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, "varsayılan erişim" rolü seçili olduğunu görürsünüz.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.

@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 06/06/2020
 ms.author: vigunase
 ms.subservice: B2C
-ms.openlocfilehash: d8c0a5ce6f3befd41c0e1399363fd73726693837
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2c8a9121d0e36eb51cd02c2c884ddcaa0dd79a79
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96750229"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226218"
 ---
 # <a name="recommendations-and-best-practices-for-azure-active-directory-b2c"></a>Azure Active Directory B2C için öneriler ve en iyi uygulamalar
 
@@ -26,7 +26,7 @@ Aşağıdaki en iyi yöntemler ve öneriler, Azure Active Directory (Azure AD) B
 
 | En iyi yöntem | Description |
 |--|--|
-| Çoğu senaryo için Kullanıcı akışları seçin | Azure AD B2C kimlik deneyimi çerçevesi, hizmetin temel kuvvetidir. İlkeler kaydolma, oturum açma veya profil düzenlemesi gibi kimlik deneyimlerini tamamen anlatmaktadır. En yaygın kimlik görevlerini ayarlamanıza yardımcı olması için Azure AD B2C portalı, Kullanıcı akışları adlı önceden tanımlanmış ve yapılandırılabilir ilkeler içerir. Kullanıcı akışları ile yalnızca birkaç tıklamayla, dakikalar içinde harika kullanıcı deneyimleri oluşturabilirsiniz. [Kullanıcı akışları ile özel ilkelerin ne zaman kullanılacağını öğrenin](custom-policy-overview.md#comparing-user-flows-and-custom-policies).|
+| Çoğu senaryo için Kullanıcı akışları seçin | Azure AD B2C kimlik deneyimi çerçevesi, hizmetin temel kuvvetidir. İlkeler kaydolma, oturum açma veya profil düzenlemesi gibi kimlik deneyimlerini tamamen anlatmaktadır. En yaygın kimlik görevlerini ayarlamanıza yardımcı olması için Azure AD B2C portalı, Kullanıcı akışları adlı önceden tanımlanmış ve yapılandırılabilir ilkeler içerir. Kullanıcı akışları ile yalnızca birkaç tıklamayla, dakikalar içinde harika kullanıcı deneyimleri oluşturabilirsiniz. [Kullanıcı akışları ile özel ilkelerin ne zaman kullanılacağını öğrenin](user-flow-overview.md#comparing-user-flows-and-custom-policies).|
 | Uygulama kayıtları | Güvenliği sağlanmakta olan her uygulama (Web, yerel) ve API Azure AD B2C kayıtlı olmalıdır. Bir uygulamada iOS ve Android 'in hem Web hem de yerel sürümü varsa, bunları aynı istemci KIMLIĞINE sahip Azure AD B2C bir uygulama olarak kaydedebilirsiniz. [OıDC, SAML, Web ve yerel uygulamaları nasıl kaydedeceğinizi](./tutorial-register-applications.md?tabs=applications)öğrenin. [Azure AD B2C için kullanılabilecek uygulama türleri](./application-types.md)hakkında daha fazla bilgi edinin. |
 | Aylık etkin kullanıcıların faturalandırmasını taşıma | Azure AD B2C, aylık etkin kimlik doğrulamalarından aylık etkin kullanıcılar (MAU) faturalandırmaya taşınmıştır. Çoğu müşteri bu modeli uygun maliyetli olarak bulur. [Aylık etkin kullanıcıların faturalandırılması hakkında daha fazla bilgi edinin](https://azure.microsoft.com/updates/mau-billing/). |
 

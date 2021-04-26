@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.topic: tutorial
 ms.date: 03/02/2021
 ms.author: caya
-ms.openlocfilehash: bfff962f6d302f589acc437550fa25f76ec7ce35
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2fe615da256099c3135f607a7b6f8095bb93b442
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102040439"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772856"
 ---
 # <a name="tutorial-enable-application-gateway-ingress-controller-add-on-for-an-existing-aks-cluster-with-an-existing-application-gateway"></a>Öğretici: mevcut bir AKS kümesi için Application Gateway giriş denetleyicisi eklentisini mevcut bir Application Gateway etkinleştirin
 
@@ -36,7 +36,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-Azure 'da, ilgili kaynakları bir kaynak grubuna ayırabilirsiniz. [Az Group Create](/cli/azure/group#az-group-create)kullanarak bir kaynak grubu oluşturun. Aşağıdaki örnek, *canadamerkezi* konumunda (bölge) *myresourcegroup* adlı bir kaynak grubu oluşturur. 
+Azure 'da, ilgili kaynakları bir kaynak grubuna ayırabilirsiniz. [Az Group Create](/cli/azure/group#az_group_create)kullanarak bir kaynak grubu oluşturun. Aşağıdaki örnek, *canadamerkezi* konumunda (bölge) *myresourcegroup* adlı bir kaynak grubu oluşturur. 
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location canadacentral
@@ -52,7 +52,7 @@ Aşağıdaki örnekte, *Myresourcegroup* adlı kaynak grubundaki [Azure CNI](../
 az aks create -n myCluster -g myResourceGroup --network-plugin azure --enable-managed-identity 
 ```
 
-Komuta ek parametreler yapılandırmak için `az aks create` başvuruları [buraya](/cli/azure/aks#az-aks-create)ziyaret edin. 
+Komuta ek parametreler yapılandırmak için `az aks create` başvuruları [buraya](/cli/azure/aks#az_aks_create)ziyaret edin. 
 
 ## <a name="deploy-a-new-application-gateway"></a>Yeni bir Application Gateway dağıtma 
 
@@ -84,12 +84,12 @@ Agic eklentisini etkinleştirmek için Azure Portal kullanmak istiyorsanız, [( 
 
 ![Application Gateway giriş denetleyicisi portalı](./media/tutorial-ingress-controller-add-on-existing/portal-ingress-controller-add-on.png)
 
-## <a name="peer-the-two-virtual-networks-together"></a>İki sanal ağı birbirine eşler
+## <a name="peer-the-two-virtual-networks-together&quot;></a>İki sanal ağı birbirine eşler
 
 AKS kümesini kendi sanal ağında ve başka bir sanal ağdaki Application Gateway dağıttığımız için, trafiğin Application Gateway akışın kümedeki yığınlara akmasını sağlamak üzere iki sanal ağı birbirine eşleyebileceksiniz. İki sanal ağ arasındaki eşleme, bağlantının çift yönlü olduğundan emin olmak için Azure CLı komutunu iki ayrı kez çalıştırmayı gerektirir. İlk komut Application Gateway sanal ağından AKS sanal ağına bir eşleme bağlantısı oluşturacaktır; İkinci komut diğer yönde bir eşleme bağlantısı oluşturacaktır.
 
 ```azurecli-interactive
-nodeResourceGroup=$(az aks show -n myCluster -g myResourceGroup -o tsv --query "nodeResourceGroup")
+nodeResourceGroup=$(az aks show -n myCluster -g myResourceGroup -o tsv --query &quot;nodeResourceGroup")
 aksVnetName=$(az network vnet list -g $nodeResourceGroup -o tsv --query "[0].name")
 
 aksVnetId=$(az network vnet show -n $aksVnetName -g $nodeResourceGroup -o tsv --query "id")

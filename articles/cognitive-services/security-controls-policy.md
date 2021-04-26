@@ -1,18 +1,18 @@
 ---
 title: Azure bilişsel hizmetler için Azure Ilke mevzuat uyumluluk denetimleri
 description: Azure bilişsel hizmetler için kullanılabilen Azure Ilke mevzuat uyumluluk denetimlerini listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızın uyumluluğunu yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: sample
 author: nitinme
 ms.author: nitinme
 ms.service: cognitive-services
 ms.custom: subject-policy-compliancecontrols
-ms.openlocfilehash: 894b8fb8613d7ee71201fad93bda269cea148f7a
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 65a4c085fd67258e1777d281feb26ca44d27104e
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105031588"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877869"
 ---
 # <a name="azure-policy-regulatory-compliance-controls-for-azure-cognitive-services"></a>Azure bilişsel hizmetler için Azure Ilke mevzuat uyumluluk denetimleri
 

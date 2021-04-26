@@ -3,12 +3,12 @@ title: Azure Ilkesi kullanılarak uyumluluk
 description: Azure Container kayıt defterlerinden uyumluluğu denetlemek için Azure Ilkesinde yerleşik ilkeler atama
 ms.topic: article
 ms.date: 03/01/2021
-ms.openlocfilehash: 0fed0c4132043e1eaed7e634e1f45b27f7c6e933
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 62a1fd8d3c996fd3a0bac3cadf77fc7e7ace0ce3
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103014307"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784182"
 ---
 # <a name="audit-compliance-of-azure-container-registries-using-azure-policy"></a>Azure Ilkesi kullanarak Azure Container Registry 'nin uyumluluğunu denetleme
 
@@ -51,7 +51,7 @@ Bir kaynak uyumsuz olduğunda birçok olası neden vardır. Nedenini öğrenmek 
 
 ### <a name="policy-compliance-in-the-azure-cli"></a>Azure CLı 'de ilke uyumluluğu
 
-Uyumluluk verilerini almak için Azure CLı 'yi de kullanabilirsiniz. Örneğin, uygulanan Azure Container Registry ilkelerinin ilke kimliklerini almak için CLı 'daki [az Policy atama listesi](/cli/azure/policy/assignment#az-policy-assignment-list) komutunu kullanın:
+Uyumluluk verilerini almak için Azure CLı 'yi de kullanabilirsiniz. Örneğin, uygulanan Azure Container Registry ilkelerinin ilke kimliklerini almak için CLı 'daki [az Policy atama listesi](/cli/azure/policy/assignment#az_policy_assignment_list) komutunu kullanın:
 
 ```azurecli
 az policy assignment list --query "[?contains(displayName,'Container Registries')].{name:displayName, ID:id}" --output table
@@ -66,14 +66,14 @@ Container Registries should not allow unrestricted network access           /sub
 Container Registries should be encrypted with a Customer-Managed Key (CMK)  /subscriptions/<subscriptionID>/providers/Microsoft.Authorization/policyAssignments/cce1ed4f38a147ad994ab60a
 ```
 
-Ardından, belirli bir ilke KIMLIĞI altındaki tüm kaynaklar için JSON biçimli uyumluluk durumunu döndürmek üzere [az Policy State List](/cli/azure/policy/state#az-policy-state-list) öğesini çalıştırın:
+Ardından, belirli bir ilke KIMLIĞI altındaki tüm kaynaklar için JSON biçimli uyumluluk durumunu döndürmek üzere [az Policy State List](/cli/azure/policy/state#az_policy_state_list) öğesini çalıştırın:
 
 ```azurecli
 az policy state list \
   --resource <policyID>
 ```
 
-Veya, *myregistry* gibi belirli bir kayıt DEFTERI kaynağının JSON biçimli uyumluluk durumunu döndürmek için [az Policy State List](/cli/azure/policy/state#az-policy-state-list) ' i çalıştırın:
+Veya, *myregistry* gibi belirli bir kayıt DEFTERI kaynağının JSON biçimli uyumluluk durumunu döndürmek için [az Policy State List](/cli/azure/policy/state#az_policy_state_list) ' i çalıştırın:
 
 ```azurecli
 az policy state list \

@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 06/10/2019
 ms.author: jeedes
 ms.openlocfilehash: 3c665795325ed3863583eb0f21f3e0d3f534154a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103201422"
 ---
 # <a name="tutorial-integrate-syncplicity-with-azure-active-directory"></a>Öğretici: syncplicity ile tümleştirin Azure Active Directory
@@ -95,13 +95,13 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-### <a name="configure-syncplicity-sso"></a>Syncplicity SSO 'yu yapılandırma
+### <a name="configure-syncplicity-sso&quot;></a>Syncplicity SSO 'yu yapılandırma
 
 1. **Syncplicity** kiracınızda oturum açın.
 
 1. Üstteki menüde, **yönetici**' ye tıklayın, **Ayarlar**' ı seçin ve ardından **özel etki alanı ve çoklu oturum açma**' ya tıklayın.
 
-    ![Syncplicity](./media/syncplicity-tutorial/ic769545.png "Syncplicity")
+    ![Syncplicity](./media/syncplicity-tutorial/ic769545.png &quot;Syncplicity")
 
 1. **Tek Sign-On (SSO)** iletişim sayfasında, aşağıdaki adımları uygulayın:
 

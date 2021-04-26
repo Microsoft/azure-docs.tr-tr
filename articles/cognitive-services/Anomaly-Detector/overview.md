@@ -12,12 +12,12 @@ ms.date: 02/16/2021
 ms.author: mbullwin
 keywords: anomali algılama, makine öğrenimi, algoritmalar
 ms.custom: cog-serv-seo-aug-2020
-ms.openlocfilehash: ad3bd1eed6e5e7efb783c4a40958e16c3ca23691
-ms.sourcegitcommit: e559daa1f7115d703bfa1b87da1cf267bf6ae9e8
+ms.openlocfilehash: d63399d0f492f85a4a2d57a595a6d8ef5b606d92
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/17/2021
-ms.locfileid: "100572091"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599528"
 ---
 # <a name="what-is-the-anomaly-detector-api"></a>Anomali Algılayıcısı API'si nedir?
 
@@ -28,6 +28,12 @@ Anomali algılayıcı API 'SI, makine öğrenimini bilmeniz gerekmeden zaman ser
 ![Hizmet isteklerindeki model değişikliklerini Algıla](./media/anomaly_detection2.png)
 
 Anomali algılayıcısının kullanılması, Machine Learning 'de önceki bir deneyim gerektirmez ve yeniden işleme API 'SI, hizmeti uygulamalarınızın ve süreçlerinizle kolayca tümleştirmenize olanak sağlar.
+
+Bu belge aşağıdaki makale türlerini içerir:
+* [Hızlı başlangıç](./Quickstarts/client-libraries.md) , hizmete çağrı yapmanızı ve sonuçların kısa bir süre içinde elde etmenize olanak tanıyan adım adım yönergelerdir. 
+* [Nasıl yapılır kılavuzlarında](./how-to/identify-anomalies.md) , hizmeti daha belirli veya özelleştirilmiş yollarla kullanmaya yönelik yönergeler bulunur.
+* [Kavramsal makaleler](./concepts/anomaly-detection-best-practices.md) , hizmetin işlevselliği ve özellikleri hakkında ayrıntılı açıklamalar sağlar.
+* [Öğreticiler](./tutorials/batch-anomaly-detection-powerbi.md) daha fazla iş çözümlerinde bu hizmeti bir bileşen olarak nasıl kullanacağınızı gösteren kılavuzlardır.
 
 ## <a name="features"></a>Özellikler
 
@@ -107,5 +113,5 @@ Bölge dayanıklılığı sağlamak için hiçbir müşteri yapılandırması ge
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Hızlı başlangıç: anomali algılayıcısının kullanıldığı zaman serisi verilerinizde bozukluklar saptama](quickstarts/client-libraries.md)
-* Anomali algılayıcı API 'SI [çevrimiçi tanıtımı](https://notebooks.azure.com/AzureAnomalyDetection/projects/anomalydetector)
+* Anomali algılayıcı API 'SI [çevrimiçi tanıtımı](https://github.com/Azure-Samples/AnomalyDetector/tree/master/ipython-notebook)
 * Anomali algılayıcısı [REST API başvurusu](https://aka.ms/anomaly-detector-rest-api-ref)

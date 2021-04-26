@@ -10,13 +10,13 @@ author: aminsaied
 ms.author: amsaied
 ms.reviewer: sgilley
 ms.date: 02/11/2021
-ms.custom: devx-track-python
-ms.openlocfilehash: bee2b31f215758bf5cf73ff5393058fb915cdf25
-ms.sourcegitcommit: 956dec4650e551bdede45d96507c95ecd7a01ec9
+ms.custom: devx-track-python, contperf-fy21q3
+ms.openlocfilehash: 7e035406ce220728c316aaa2005e0f4d6089b5e2
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/09/2021
-ms.locfileid: "102522351"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105935524"
 ---
 # <a name="tutorial-train-your-first-machine-learning-model-part-3-of-4"></a>Öğretici: ilk makine öğrenimi modelinizi eğitme (Bölüm 3/4)
 

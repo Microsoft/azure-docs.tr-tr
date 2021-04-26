@@ -11,12 +11,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: sashan, moslake
 ms.date: 02/16/2021
-ms.openlocfilehash: f7a37e761e37e295bbb92e442b1813ebded2a7cd
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: b5f85e0dcb8ca70d5773b8f1c3b53e0b449ef013
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104955287"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107779210"
 ---
 # <a name="azure-hybrid-benefit---azure-sql-database--sql-managed-instance"></a>Azure Hibrit Avantajı-Azure SQL veritabanı & SQL yönetilen örneği
 [!INCLUDE[appliesto-sqldb-sqlmi](includes/appliesto-sqldb-sqlmi.md)]
@@ -51,9 +51,9 @@ PowerShell kullanarak lisans türünü ayarlamak veya güncelleştirmek için:
 
 Azure CLı kullanarak lisans türünü ayarlamak veya güncelleştirmek için:
 
-- [az sql db create](/cli/azure/sql/db#az-sql-db-create)
-- [az SQL mı oluştur](/cli/azure/sql/mi#az-sql-mi-create)
-- [az SQL mı güncelleştirmesi](/cli/azure/sql/mi#az-sql-mi-update)
+- [az sql db create](/cli/azure/sql/db#az_sql_db_create)
+- [az SQL mı oluştur](/cli/azure/sql/mi#az_sql_mi_create)
+- [az SQL mı güncelleştirmesi](/cli/azure/sql/mi#az_sql_mi_update)
 
 # <a name="rest-api"></a>[REST API](#tab/rest)
 

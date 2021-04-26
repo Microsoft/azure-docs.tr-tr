@@ -2,16 +2,16 @@
 title: Öğretici-& dağıtımı oluşturma Azure Resource Manager bicep dosyaları
 description: Azure kaynaklarını dağıtmak için ilk Bıcep dosyanızı oluşturun. Öğreticide, Bıcep dosyası söz dizimi ve depolama hesabı dağıtma hakkında bilgi edineceksiniz.
 author: mumian
-ms.date: 03/17/2021
+ms.date: 04/12/2021
 ms.topic: tutorial
 ms.author: jgao
 ms.custom: ''
-ms.openlocfilehash: 8979585d7ec0fa6eac1866375fe1e80214f2d2e2
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0ffd8a97d797144d458e7ec5836042cc6d8d8193
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104594283"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306693"
 ---
 # <a name="tutorial-create-and-deploy-first-azure-resource-manager-bicep-file"></a>Öğretici: ilk Azure Resource Manager Bıcep dosyası oluşturma ve dağıtma
 
@@ -57,7 +57,7 @@ Sorun devam ederseniz, Bıcep hakkında öğrenmeye başlamaya hazırsınız.
 
     ```bicep
     resource stg 'Microsoft.Storage/storageAccounts@2019-06-01' = {
-      name: '{provide-unique-name}'
+      name: '{provide-unique-name}'  // must be globally unique
       location: 'eastus'
       sku: {
         name: 'Standard_LRS'
@@ -85,6 +85,10 @@ Sorun devam ederseniz, Bıcep hakkında öğrenmeye başlamaya hazırsınız.
         [Storageaccounts 2016-05-01](/azure/templates/microsoft.storage/2016-05-01/storageaccounts)gibi eskı bir API sürümünü görüntülediğinizde, daha küçük bir özellik kümesinin kullanılabildiğini görürsünüz.
 
         Bir kaynağın API sürümünü değiştirmeye karar verirseniz, bu sürümün özelliklerini değerlendirdiğinizden emin olun ve Bıcep dosyanızı uygun şekilde ayarlayın.
+
+    Daha fazla bilgi için bkz. [Bıcep yapısı](./bicep-file.md).
+
+    Name özelliği için bir açıklama vardır.  `//`Tek satır açıklamaları veya `/* ... */` çok satırlı açıklamalar için kullanın
 
 1. `{provide-unique-name}`Küme ayraçları dahil, `{}` benzersiz bir depolama hesabı adıyla değiştirin.
 

@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 06/09/2020
 ms.author: jeedes
 ms.openlocfilehash: a920abacb0df030f7d38aed11e04a693cfa352a6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101686606"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-bluejeans-for-azure-ad"></a>Öğretici: Azure AD için BlueJeans ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
@@ -144,13 +144,13 @@ Bu bölümde, Azure AD 'ye yönelik şema erişimi vererek Azure çoklu oturum a
 1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-## <a name="configure-bluejeans-for-azure-ad-sso"></a>Azure AD SSO için şema yapılandırma
+## <a name="configure-bluejeans-for-azure-ad-sso&quot;></a>Azure AD SSO için şema yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, yönetici olarak **Azure AD** Şirket sitesi için şema yöneticinize oturum açın.
 
 2. **Yönetici \> grubu ayarları \> güvenliği**' ne gidin.
 
-    ![Ekran görüntüsü, yönetici sekmesi seçili olan ve Grup ayarı ve güvenlik seçili olan bir tarayıcı penceresinin bir parçasını gösterir.](./media/bluejeans-tutorial/ic785868.png "Yönetici")
+    ![Ekran görüntüsü, yönetici sekmesi seçili olan ve Grup ayarı ve güvenlik seçili olan bir tarayıcı penceresinin bir parçasını gösterir.](./media/bluejeans-tutorial/ic785868.png &quot;Yönetici")
 
 3. **Güvenlik** bölümünde aşağıdaki adımları uygulayın:
 

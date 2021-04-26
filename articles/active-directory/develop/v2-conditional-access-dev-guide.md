@@ -14,12 +14,12 @@ ms.subservice: develop
 ms.custom: aaddev
 ms.topic: conceptual
 ms.workload: identity
-ms.openlocfilehash: e4021f0ca2c1c9ca9434744a4aebb4b7938315f0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ed8007c81479c73e4503d74af4c4043e503baf2b
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99584239"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106120155"
 ---
 # <a name="developer-guidance-for-azure-active-directory-conditional-access"></a>Koşullu erişim Azure Active Directory için Geliştirici Kılavuzu
 
@@ -72,10 +72,10 @@ Microsoft Graph, koşullu erişim ortamlarında uygulama oluştururken özel hus
 Örneğin, bir uygulama aşağıdaki Microsoft Graph kapsamları isterse,
 
 ```
-scopes="Bookings.Read.All Mail.Read"
+scopes="ChannelMessages.Read.All Mail.Read"
 ```
 
-Bir uygulama, kullanıcılarının, kayıtlar ve Exchange üzerinde ayarlanan tüm ilkeleri yerine getirmelerini bekleyebilir. Bazı kapsamlar, erişim izni veriyorsa birden çok veri kümesine eşlenir.
+Bir uygulama, kullanıcılarının takımlar ve Exchange üzerinde ayarlanan tüm ilkeleri yerine getirmelerini bekleyebilir. Bazı kapsamlar, erişim izni veriyorsa birden çok veri kümesine eşlenir.
 
 ### <a name="complying-with-a-conditional-access-policy"></a>Koşullu erişim ilkesiyle uyumlu
 

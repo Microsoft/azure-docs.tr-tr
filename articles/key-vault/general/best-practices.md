@@ -9,12 +9,12 @@ ms.subservice: general
 ms.topic: conceptual
 ms.date: 01/29/2021
 ms.author: mbaldwin
-ms.openlocfilehash: e81cbd7e6584f4a280ab9507a989b52d3b188f2d
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 7cfa2059cc03b96db39183cfa5056c9934a02290
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105566617"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814361"
 ---
 # <a name="best-practices-to-use-key-vault"></a>Key Vault kullanmak için en iyi uygulamalar
 
@@ -24,7 +24,7 @@ ms.locfileid: "105566617"
 
 ## <a name="control-access-to-your-vault"></a>Kasanıza erişimi denetleme
 
-Azure Key Vault, şifreleme anahtarlarını ve sertifikalar, bağlantı dizeleri ve parolalar gibi gizli dizileri koruyan bir bulut hizmetidir. Bu veriler hassas ve iş açısından kritik olduğundan, yalnızca yetkili uygulamalara ve kullanıcılara izin vererek anahtar kasalarınıza güvenli bir şekilde erişmeniz gerekir. Bu [makalede](secure-your-key-vault.md) Key Vault erişim modeline genel bir bakış sunulmaktadır. Kimlik doğrulama ve yetkilendirmeyi açıklar ve anahtar kasalarınıza erişimin güvenliğini nasıl sağlayabileceğinizi açıklar.
+Azure Key Vault, şifreleme anahtarlarını ve sertifikalar, bağlantı dizeleri ve parolalar gibi gizli dizileri koruyan bir bulut hizmetidir. Bu veriler hassas ve iş açısından kritik olduğundan, yalnızca yetkili uygulamalara ve kullanıcılara izin vererek anahtar kasalarınıza güvenli bir şekilde erişmeniz gerekir. Bu [makalede](security-features.md) Key Vault erişim modeline genel bir bakış sunulmaktadır. Kimlik doğrulama ve yetkilendirmeyi açıklar ve anahtar kasalarınıza erişimin güvenliğini nasıl sağlayabileceğinizi açıklar.
 
 Kasanıza erişimi denetlerken öneriler aşağıdaki gibidir:
 1. Aboneliğiniz, kaynak grubunuz ve Anahtar kasaları (Azure RBAC) için erişimi kilitleme
@@ -44,9 +44,9 @@ Bir kasadaki nesnelerin güncelleştirme/silme/silme işlemleri sırasında kasa
 
 ### <a name="azure-cli-backup-commands"></a>Azure CLı yedekleme komutları
 
-* [Yedekleme sertifikası](/cli/azure/keyvault/certificate#az-keyvault-certificate-backup)
-* [Yedekleme anahtarı](/cli/azure/keyvault/key#az-keyvault-key-backup)
-* [Yedekleme gizli dizisi](/cli/azure/keyvault/secret#az-keyvault-secret-backup)
+* [Yedekleme sertifikası](/cli/azure/keyvault/certificate#az_keyvault_certificate_backup)
+* [Yedekleme anahtarı](/cli/azure/keyvault/key#az_keyvault_key_backup)
+* [Yedekleme gizli dizisi](/cli/azure/keyvault/secret#az_keyvault_secret_backup)
 
 
 ## <a name="turn-on-logging"></a>Günlüğü aç

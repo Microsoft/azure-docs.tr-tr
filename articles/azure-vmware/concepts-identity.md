@@ -3,12 +3,12 @@ title: Kavramlar-kimlik ve erişim
 description: Azure VMware çözümünün kimlik ve erişim kavramları hakkında bilgi edinin
 ms.topic: conceptual
 ms.date: 03/22/2021
-ms.openlocfilehash: 7b1880ccdee1d4c3ce25e264c004b1a949134a96
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 1d49ce27ee74621874281a555651c09a73048928
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105026913"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109824"
 ---
 # <a name="azure-vmware-solution-identity-concepts"></a>Azure VMware Çözüm kimliği kavramları
 
@@ -41,7 +41,7 @@ Azure VMware Çözüm CloudAdmin rolüne verilen ayrıcalıkları Azure VMware �
 
 Azure VMware çözümünde CloudAdmin rolü vCenter üzerinde aşağıdaki ayrıcalıklara sahiptir. Daha fazla ayrıntı için bkz. [VMware ürün belgeleri](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.security.doc/GUID-ED56F3C4-77D0-49E3-88B6-B99B8B437B62.html).
 
-| Privilege | Açıklama |
+| Privilege | Description |
 | --------- | ----------- |
 | **Alarmlar** | Alarmı kabul et<br />Alarm oluştur<br />Alarm eylemini devre dışı bırak<br />Uyarıyı Değiştir<br />Alarmı kaldır<br />Alarm durumunu ayarla |
 | **İçerik Kitaplığı** | Kitaplık öğesi Ekle<br />Yayımlanmış bir kitaplık için abonelik oluşturma<br />Yerel Kitaplık oluştur<br />Abone olunan Kitaplık oluştur<br />Kitaplık öğesini Sil<br />Yerel kitaplığı Sil<br />Abone olunan kitaplığı Sil<br />Yayımlanmış bir kitaplığın aboneliğini silme<br />Dosyaları indirme<br />Kitaplık öğelerini çıkar<br />Abone olunan kitaplığı çıkar<br />Depolama alanını içeri aktar<br />Araştırma aboneliği bilgileri<br />Bir kitaplık öğesini abonelere yayımlayın<br />Bir kitaplığı abonelerine yayımlama<br />Depolama alanını oku<br />Kitaplık öğesini Eşitle<br />Abone olunan kitaplığı Eşitle<br />İç denetim yazın<br />Yapılandırma ayarlarını Güncelleştir<br />Güncelleştirme dosyaları<br />Kitaplığı Güncelleştir<br />Kitaplık öğesini Güncelleştir<br />Yerel kitaplığı Güncelleştir<br />Abone olunan kitaplığı Güncelleştir<br />Yayımlanmış bir kitaplığın aboneliğini güncelleştirme<br />Yapılandırma ayarlarını görüntüle |
@@ -93,6 +93,9 @@ Atanmayan veya silinebilen rollerin oluşturulmasını engellemek için, Azure V
    Eklenen izin, nesnesinin **izinler** bölümünde görüntülenir.
 
 ## <a name="nsx-t-manager-access-and-identity"></a>NSX-T Yöneticisi erişimi ve kimliği
+
+>[!NOTE]
+>NSX-T 2,5 Şu anda destekleniyor.
 
 NSX-T Yöneticisi 'ne erişmek için *yönetici* hesabını kullanın. Tam ayrıcalıklara sahiptir ve Katman 1 (T1) ağ geçitleri, segmentler (mantıksal anahtarlar) ve tüm hizmetler oluşturup yönetmenize olanak sağlar. Ayrıcalıklar, NSX-T katmanı-0 (T0) ağ geçidine erişmenizi sağlar. T0 ağ geçidinde yapılan bir değişiklik, ağ performansının düşmesine neden olabilir veya özel bir bulut erişimi olmaz. NSX-T T0 ağ geçidinizdeki herhangi bir değişiklik istemek için Azure portal bir destek isteği açın.
 

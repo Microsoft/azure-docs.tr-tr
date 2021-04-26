@@ -4,16 +4,16 @@ description: Azure dosya paylaşımları için geçici silme ve verileri kurtarm
 author: roygara
 ms.service: storage
 ms.topic: conceptual
-ms.date: 05/28/2020
+ms.date: 03/29/2021
 ms.author: rogarana
 ms.subservice: files
 services: storage
-ms.openlocfilehash: 0fecc9fc954a1ac648e8f60badf69ad1d2e8f1cc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a879aff7c3fcaa7ac2c15be295c6c5bdca25ccdf
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93126949"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105937303"
 ---
 # <a name="prevent-accidental-deletion-of-azure-file-shares"></a>Azure dosya paylaşımlarının yanlışlıkla silinmesini engelle
 
@@ -33,7 +33,7 @@ Geçici olarak silinen Premium dosya paylaşımları için dosya paylaşım kota
 
 ### <a name="enabling-or-disabling-soft-delete"></a>Geçici silme etkinleştiriliyor veya devre dışı bırakılıyor
 
-Dosya paylaşımları için geçici silme, depolama hesabı düzeyinde etkinleştirilir, bu nedenle, geçici silme ayarları bir depolama hesabındaki tüm dosya paylaşımları için geçerlidir. Dilediğiniz zaman geçici silme özelliğini etkinleştirebilir veya devre dışı bırakabilirsiniz. Yeni bir depolama hesabı oluşturduğunuzda, dosya paylaşımları için geçici silme varsayılan olarak devre dışıdır, bu işlemi dağıtım sırasında veya daha sonra dilediğiniz zaman etkinleştirebilirsiniz. Geçici silme, mevcut depolama hesapları için varsayılan olarak devre dışı kalacak. Azure dosya paylaşımı için Azure dosya [paylaşımı yedeklemesini](../../backup/azure-file-share-backup-overview.md) yapılandırdıysanız, bu paylaşımın depolama hesabında Azure dosya paylaşımları için geçici silme özelliği otomatik olarak etkinleştirilir.
+Dosya paylaşımları için geçici silme, depolama hesabı düzeyinde etkinleştirilir, bu nedenle, geçici silme ayarları bir depolama hesabındaki tüm dosya paylaşımları için geçerlidir. Geçici silme, yeni depolama hesapları için varsayılan olarak etkindir ve herhangi bir zamanda devre dışı bırakılabilir veya etkinleştirilebilir. [Azure dosya paylaşma yedeklemesi](../../backup/azure-file-share-backup-overview.md) , bu depolama hesabındaki bir Azure dosya paylaşımında yapılandırılmadığı müddetçe, mevcut depolama hesaplarında geçici silme otomatik olarak etkinleştirilmez. Azure dosya paylaşımı yedeklemesi yapılandırıldıysa, Azure dosya paylaşımları için geçici silme, bu paylaşımın depolama hesabında otomatik olarak etkinleştirilir.
 
 Dosya paylaşımları için geçici silmeyi etkinleştirirseniz, bazı dosya paylaşımlarını silin ve ardından geçici silme devre dışı bırakın. paylaşımlar bu döneme kaydedildiyse, bu dosya paylaşımlarını erişebilmeye ve kurtarmaya devam edebilirsiniz. Geçici silme özelliğini etkinleştirdiğinizde, saklama süresini de yapılandırmanız gerekir.
 

@@ -13,14 +13,14 @@ ms.devlang: na
 ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 01/20/2021
+ms.date: 04/21/2021
 ms.author: yelevin
-ms.openlocfilehash: f8931fedb380cf81d72b7b5280a5795498daaa57
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d2cfc2d592c24cf5d15a489ea4bde36ea3c2f863
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99251990"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872380"
 ---
 # <a name="connect-azure-active-directory-azure-ad-data-to-azure-sentinel"></a>Azure Active Directory (Azure AD) verilerini Azure Sentinel 'e bağlama
 
@@ -44,7 +44,7 @@ Azure Sentinel 'in yerleşik bağlayıcısını kullanarak [Azure Active Directo
 > Yukarıda belirtildiği gibi, bazı kullanılabilir günlük türleri şu anda **Önizleme** aşamasındadır. Beta, önizleme veya henüz genel kullanıma sunulmayan Azure özelliklerine uygulanan ek koşullar için [Microsoft Azure önizlemeleri için ek kullanım koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) 'na bakın.
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Herhangi bir Azure AD lisansı (ücretsiz/O365/P1/P2), oturum açma günlüklerini Azure Sentinel 'e almak için yeterlidir. Azure Izleyici (Log Analytics) ve Azure Sentinel için ek gigabayt başına ücretler uygulanabilir.
+- Azure Sentinel 'de oturum açma günlüklerini almak için bir Azure Active Directory P1 veya P2 lisansı gerekir. Herhangi bir Azure AD lisansı (ücretsiz/O365/P1/P2) diğer günlük türlerini almak için yeterlidir. Azure Izleyici (Log Analytics) ve Azure Sentinel için ek gigabayt başına ücretler uygulanabilir.
 
 - Kullanıcı çalışma alanında Azure Sentinel katılımcısı rolüne atanmalıdır.
 

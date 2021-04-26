@@ -1,27 +1,23 @@
 ---
-title: Windows sanal masaüstü dosya paylaşımının kurulum dosyası paylaşılan MSIX uygulama iliştirme önizleme-Azure
+title: Windows sanal masaüstü dosya paylaşımının kurulum dosyası-Azure Uygulama iliştirme-Azure
 description: Windows sanal masaüstü için MSIX uygulama iliştirme için dosya paylaşımının nasıl ayarlanacağı.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 12/14/2020
+ms.date: 04/13/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 49a350b77958901aae5e54e82d856e4f3772702e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: a2d4ebee02d85d10d5db8ec2de0bb1be334770dc
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97930795"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717666"
 ---
-# <a name="set-up-a-file-share-for-msix-app-attach-preview"></a>MSIX uygulama iliştirme (Önizleme) için bir dosya paylaşma ayarlama
-
-> [!IMPORTANT]
-> MSIX uygulama iliştirme Şu anda genel önizlemededir.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+# <a name="set-up-a-file-share-for-msix-app-attach"></a>MSIX uygulama iliştirme için dosya paylaşma ayarlama
 
 Tüm MSIX görüntülerinin, salt okuma izinlerine sahip bir konak havuzundaki kullanıcılar tarafından erişilebilen bir ağ paylaşımında depolanması gerekir.
 
-MSIX uygulama iliştirme (Önizleme), dosya paylaşımının kullandığı depolama dokusunun türü üzerinde hiçbir bağımlılığı yok. MSIX uygulama iliştirme paylaşımıyla ilgili konular bir FSLogix paylaşımıyla aynı olanlardır. Depolama gereksinimleri hakkında daha fazla bilgi edinmek için bkz. [Windows sanal masaüstü 'Nde FSLogix profil kapsayıcıları Için depolama seçenekleri](store-fslogix-profile.md).
+MSIX uygulama iliştirme, dosya paylaşımının kullandığı depolama dokusunun türü üzerinde hiçbir bağımlılığı içermez. MSIX uygulama iliştirme paylaşımıyla ilgili konular bir FSLogix paylaşımıyla aynı olanlardır. Depolama gereksinimleri hakkında daha fazla bilgi edinmek için bkz. [Windows sanal masaüstü 'Nde FSLogix profil kapsayıcıları Için depolama seçenekleri](store-fslogix-profile.md).
 
 ## <a name="performance-requirements"></a>Performans gereksinimleri
 
@@ -81,7 +77,7 @@ Depolama hesabı ve dosya paylaşımında oturum ana bilgisayar VM 'Leri atamak 
 
 4. Depolama hesabı oluşturma.
 
-5. [Azure dosya paylaşma oluşturma](../storage/files/storage-how-to-create-file-share.md#create-file-share)bölümündeki yönergeleri izleyerek depolama hesabı altında bir dosya paylaşma oluşturun.
+5. [Azure dosya paylaşma oluşturma](../storage/files/storage-how-to-create-file-share.md#create-a-file-share)bölümündeki yönergeleri izleyerek depolama hesabı altında bir dosya paylaşma oluşturun.
 
 6. Birinci bölüm içindeki yönergeleri izleyerek AD DS depolama hesabına katılarak [Azure dosya paylaşımlarınız için AD DS kimlik doğrulamasını etkinleştirin](../storage/files/storage-files-identity-ad-ds-enable.md#option-one-recommended-use-azfileshybrid-powershell-module).
 

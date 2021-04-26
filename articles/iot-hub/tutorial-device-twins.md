@@ -16,10 +16,10 @@ ms.custom:
 - devx-track-js
 - devx-track-azurecli
 ms.openlocfilehash: 7dbc0404679927bcef1647dfdf46ce3360216a79
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98733308"
 ---
 <!-- **TODO** Update publish config with repo paths before publishing! -->
@@ -196,15 +196,15 @@ Aşağıdaki ekran görüntüsünde arka uç uygulamasından alınan çıkış g
 
 ![Arka uç uygulamasındaki çıktıyı gösteren ve nasıl bir güncelleştirme gönderdiğini vurgulayan ekran görüntüsü.](./media/tutorial-device-twins/BackEnd1.png)
 
-## <a name="receive-state-information"></a>Durum bilgilerini alma
+## <a name="receive-state-information&quot;></a>Durum bilgilerini alma
 
 Arka uç uygulamanız durum bilgilerini bir cihazdan bildirilen özellikler olarak alır. Bir cihaz, bildirilen özellikleri ayarlar ve hub’ınıza gönderir. Bir arka uç uygulaması, hub'ınızda depolanan cihaz ikizinden bildirilen özelliklerin geçerli değerlerini okuyabilir.
 
-### <a name="send-reported-properties-from-a-device"></a>Bir cihazdan bildirilen özellikler gönderme
+### <a name=&quot;send-reported-properties-from-a-device&quot;></a>Bir cihazdan bildirilen özellikler gönderme
 
 Bildirilen özellik değerlerine düzeltme eki olarak güncelleştirmeler gönderebilirsiniz. Aşağıdaki kod parçacığında simülasyon cihazının gönderdiği düzeltme eki için bir şablon gösterilmiştir. Simülasyon cihazı hub’a göndermeden önce düzeltme ekinin alanlarını güncelleştirir:
 
-[!code-javascript[Reported properties patches](~/iot-samples-node/iot-hub/Tutorials/DeviceTwins/SimulatedDevice.js?name=reportedpatch&highlight=2 "Reported properties patches")]
+[!code-javascript[Reported properties patches](~/iot-samples-node/iot-hub/Tutorials/DeviceTwins/SimulatedDevice.js?name=reportedpatch&highlight=2 &quot;Reported properties patches")]
 
 Simülasyon cihazı bildirilen özellikleri içeren düzeltme ekini hub’a göndermek için aşağıdaki işlevi kullanır:
 

@@ -10,14 +10,14 @@ ms.date: 06/03/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5c7f3de20ea3e86e3b56dc71d698354f7eaf782d
-ms.sourcegitcommit: dae6b628a8d57540263a1f2f1cdb10721ed1470d
+ms.openlocfilehash: 756e5e96a8040fb3d93273a5521236d46879e60d
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105709727"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306390"
 ---
-# <a name="migrate-to-cloud-authentication-using-staged-rollout-preview"></a>Hazırlanan piyasaya çıkma kullanarak bulut kimlik doğrulamasına geçiş (Önizleme)
+# <a name="migrate-to-cloud-authentication-using-staged-rollout"></a>Hazırlanan dağıtım kullanarak bulut kimlik doğrulamasına geçiş
 
 Hazırlanan dağıtım, etki alanlarınızı kesmeden önce Azure AD Multi-Factor Authentication (MFA), koşullu erişim, sızdırılan kimlik bilgileri için kimlik koruması, kimlik yönetimi ve diğerleri gibi bulut kimlik doğrulama özelliklerine sahip kullanıcı gruplarını seçmeli olarak test etmenize olanak tanır.  Bu makalede, anahtarın nasıl yapılacağı açıklanır. Ancak, hazırlanan piyasaya başlamadan önce, aşağıdaki koşullardan biri veya daha fazlası doğru olduğunda etkilerini göz önünde bulundurmanız gerekir:
     
@@ -79,7 +79,7 @@ Aşağıdaki senaryolar hazırlanan dağıtım için desteklenmez:
 - Yöneticiler, güvenlik gruplarını kullanarak bulut kimlik doğrulamasını alabilir. Şirket içi Active Directory güvenlik grupları kullanırken eşitleme gecikmesini önlemek için, bulut güvenlik grupları kullanmanızı öneririz. Aşağıdaki koşullar geçerlidir:
 
     - Her özellik için en fazla 10 grup kullanabilirsiniz. Diğer bir deyişle, *Parola karması eşitleme*, *geçişli kimlik doğrulama* ve *sorunsuz SSO* için 10 grup kullanabilirsiniz.
-    - İç içe gruplar *desteklenmiyor*. Bu kapsam, genel önizleme için de geçerlidir.
+    - İç içe gruplar *desteklenmiyor*. 
     - Dinamik Gruplar, hazırlanan dağıtım için *desteklenmez* .
     - Grup içindeki kişi nesneleri grubun eklenmesini engeller.
 
@@ -92,7 +92,7 @@ Aşağıdaki senaryolar hazırlanan dağıtım için desteklenmez:
 - Windows 10 hibrit JOIN veya Azure AD JOIN birincil yenileme belirteci alma, kullanıcının şirket içi UPN 'si yönlendirilebilir olmadığında. Bu senaryo, hazırlanan dağıtım modundayken WS-Trust uç noktasına geri dönecektir, ancak hazırlanan geçiş tamamlandığında ve Kullanıcı oturum açma artık federasyon sunucusuna bağlı olmadığında çalışmayı durduracaktır.
 
   >[!NOTE]
-  >Azure AD Connect veya PowerShell kullanarak, Federasyon kimlik doğrulamasından en son tam geçişi ' i yine de yapmanız gerekir. Hazırlanan dağıtım etki alanlarını federe 'dan yönetilene geçmez.  Etki alanı cutover hakkında daha fazla bilgi için bkz. [Federasyon 'dan Parola karması eşitlemesine geçiş](plan-migrate-adfs-password-hash-sync.md#step-3-change-the-sign-in-method-to-password-hash-synchronization-and-enable-seamless-sso) ve [Federasyondan geçişli kimlik doğrulamasına geçirme](plan-migrate-adfs-password-hash-sync.md#step-3-change-the-sign-in-method-to-password-hash-synchronization-and-enable-seamless-sso)
+  >Azure AD Connect veya PowerShell kullanarak, Federasyon kimlik doğrulamasından en son tam geçişi ' i yine de yapmanız gerekir. Hazırlanan dağıtım etki alanlarını federe 'dan yönetilene geçmez.  Etki alanı cutover hakkında daha fazla bilgi için bkz. [Federasyon 'dan parola karma eşitlemesine geçiş](plan-migrate-adfs-password-hash-sync.md#step-3-change-the-sign-in-method-to-password-hash-synchronization-and-enable-seamless-sso) ve [Federasyondan geçişli kimlik doğrulamaya](plan-migrate-adfs-pass-through-authentication.md#step-2-change-the-sign-in-method-to-pass-through-authentication-and-enable-seamless-sso)geçiş.
   
 ## <a name="get-started-with-staged-rollout"></a>Hazırlanan piyasaya çıkma ile çalışmaya başlama
 
@@ -168,19 +168,19 @@ Aşağıdaki seçeneklerden birini kullanabilirsiniz:
 
 Şunları yapın:
 
-1. Önizleme UX 'e erişmek için [Azure AD portalında](https://aka.ms/stagedrolloutux)oturum açın.
+1. UX 'e erişmek için [Azure AD portalında](https://aka.ms/stagedrolloutux)oturum açın.
 
-2. **Yönetilen Kullanıcı oturum açma (Önizleme) bağlantısı için hazırlanan dağıtımı etkinleştir** ' i seçin.
+2. **Yönetilen Kullanıcı oturum açma bağlantısı için hazırlanan dağıtımı etkinleştir** ' i seçin.
 
    Örneğin, *seçenek A*'yı etkinleştirmek istiyorsanız, aşağıdaki görüntülerde gösterildiği gibi **parola karma eşitlemesini** ve **kesintisiz çoklu oturum açma** denetimlerini **üzerine** kaydırın.
 
-   ![Azure AD Connect sayfası](./media/how-to-connect-staged-rollout/sr4.png)
+   
 
-   !["Hazırlanan dağıtım özelliklerini etkinleştir (Önizleme)" sayfası](./media/how-to-connect-staged-rollout/sr5.png)
+  
 
 3. *Doğrudan kimlik doğrulamayı* ve *sorunsuz SSO*'yu etkinleştirmek için grupları özelliğe ekleyin. Bir UX zaman aşımını önlemek için, güvenlik gruplarının başlangıçta 200 ' den fazla üye içermediğinden emin olun.
 
-   !["Parola karması eşitleme (Önizleme) için grupları yönet" sayfası](./media/how-to-connect-staged-rollout/sr6.png)
+   
 
    >[!NOTE]
    >Bir gruptaki üyeler, hazırlanan dağıtım için otomatik olarak etkinleştirilir. İç içe ve dinamik gruplar, hazırlanan dağıtım için desteklenmez.

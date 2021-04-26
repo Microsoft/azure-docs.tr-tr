@@ -54,8 +54,8 @@
   items:
     - name: Fortanix gizli bilgi Işlem yöneticisi
       href: how-to-fortanix-confidential-computing-manager.md
-    - name: Fortanix Enclave Manager
-      href: how-to-fortanix-enclave-manager.md
+    - name: Fortanix gizli bilgi Işlem yöneticisi düğüm Aracısı
+      href: how-to-fortanix-confidential-computing-manager-node-agent.md
 - name: Başvurular
   items:
     - name: SGX quote Yardımcısı özelliği

@@ -1,14 +1,14 @@
 ---
 title: Avustralya kamu ile korunan şema örnek denetimleri
 description: Avustralya kamu ile korunan şema örneğinin denetim eşlemesi. Her denetim, değerlendirmede yardımcı olan bir veya daha fazla Azure Ilke tanımına eşlenir.
-ms.date: 01/21/2021
+ms.date: 04/02/2021
 ms.topic: sample
-ms.openlocfilehash: df143a871db3d871fe6354eab23b7ca6dc012b78
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ecb6a912d0b1f319022f6b7deff68e1495dccbca
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98680005"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106386458"
 ---
 # <a name="control-mapping-of-the-australian-government-ism-protected-blueprint-sample"></a>Avustralya kamu ile korunan şema örneğine yönelik denetim eşlemesi
 

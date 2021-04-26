@@ -4,12 +4,12 @@ description: System Center 2012 R2 DPM kullanarak bir Exchange Server 'ı Azure 
 ms.reviewer: kasinh
 ms.topic: conceptual
 ms.date: 01/31/2019
-ms.openlocfilehash: ee89af311619922fa6ca585381d70ca66955f36a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a89c37b8447b318c44faf0d4e0b1921d305e7f59
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91271656"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519400"
 ---
 # <a name="back-up-an-exchange-server-to-azure-backup-with-system-center-2012-r2-dpm"></a>System Center 2012 R2 DPM ile Azure Backup’a Exchange sunucusu yedekleme
 
@@ -122,4 +122,4 @@ DPM koruma aracısını Exchange sunucusuna yüklemek için şu adımları izley
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure Backup SSS](backup-azure-backup-faq.md)
+* [Azure Backup SSS](backup-azure-backup-faq.yml)

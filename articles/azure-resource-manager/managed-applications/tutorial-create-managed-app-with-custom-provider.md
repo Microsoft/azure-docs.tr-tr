@@ -6,12 +6,12 @@ ms.author: lazinnat
 author: lazinnat
 ms.date: 06/20/2019
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 50a65583c41dd94b174a33432afcf42b31e67df0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 228d1a8bcd97daebae873de4c69cbec238e0c995
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96437057"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312544"
 ---
 # <a name="tutorial-create-managed-application-with-custom-actions-and-resources"></a>Öğretici: özel eylemler ve kaynaklarla yönetilen uygulama oluşturma
 
@@ -349,7 +349,7 @@ Yönetilen uygulama örneğine gidebilir ve "genel bakış" sayfasında **özel 
 
 ## <a name="looking-for-help"></a>Yardım aranıyor
 
-Azure yönetilen uygulamalar hakkında sorularınız varsa [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-managedapps)yapmayı deneyin. Benzer bir soru zaten istendi ve yanıtlamış olabilir, bu nedenle göndermeden önce kontrol edin. `azure-managedapps`Hızlı bir yanıt almak için etiketi ekleyin!
+Azure yönetilen uygulamalar hakkında sorularınız varsa, Azure tarafından yönetilen-uygulama etiketi ile Azure-Managed-App veya [Microsoft Q&](https://docs.microsoft.com/answers/topics/azure-managed-applications.html) ile [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-managed-app) isteyebilirsiniz. Benzer bir soru zaten istendi ve yanıtlamış olabilir, bu nedenle göndermeden önce kontrol edin. Daha hızlı yanıt için lütfen ilgili etiketleri kullanın. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

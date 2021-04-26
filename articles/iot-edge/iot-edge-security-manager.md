@@ -9,12 +9,12 @@ ms.author: eustacea
 ms.date: 08/30/2019
 ms.topic: conceptual
 ms.service: iot-edge
-ms.openlocfilehash: 468f1b91d6c6157cd2af6de9599bad7f43c1ad8f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ed73c114c015ce38fefa02d2b71e27e8f85dca39
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103492566"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107028681"
 ---
 # <a name="azure-iot-edge-security-manager"></a>Azure IoT Edge Güvenlik Yöneticisi
 
@@ -119,12 +119,17 @@ Güvenli Silicon, IoT Edge cihaz donanımının içindeki güveni bağlamak içi
 
 ## <a name="iot-edge-security-manager-integration-and-maintenance"></a>IoT Edge Security Manager tümleştirmesi ve bakım
 
-IoT Edge Güvenlik Yöneticisi, özel sağlamlaştırma için Azure IoT Edge platformunun güvenliğini ve bütünlüğünü savunmaya yönelik bileşenleri belirleyip yalıtmak üzere amaçlar. Cihaz üreticileri gibi üçüncü taraflar, cihaz donanımlarıyla kullanılabilen özel güvenlik özelliklerini kullanmalıdır.  Azure IoT Güvenlik Yöneticisi 'nin Linux ve Windows platformlarındaki Güvenilir Platform Modülü (TPM) ile nasıl sağlamlaştıralınacağını gösteren bağlantılar için sonraki adımlar bölümüne bakın. Bu örnekler, yazılım veya sanal TPMs kullanır, ancak Ayrık TPM cihazlarını kullanarak doğrudan uygulanır.  
+IoT Edge Güvenlik Yöneticisi, özel sağlamlaştırma için Azure IoT Edge platformunun güvenliğini ve bütünlüğünü savunmaya yönelik bileşenleri belirleyip yalıtmak üzere amaçlar. Cihaz üreticileri gibi üçüncü taraflar, cihaz donanımlarıyla kullanılabilen özel güvenlik özelliklerini kullanmalıdır.  
+
+Yazılım veya sanal TPMs kullanarak Azure IoT Güvenlik Yöneticisi 'ni Güvenilir Platform Modülü (TPM) ile nasıl sağlamlaştıracağınızı öğrenin:  
+
+[Linux sanal makinesinde sanal TPM ile bir IoT Edge cihazı](how-to-auto-provision-simulated-device-linux.md)oluşturun ve sağlayın.
+
+<!-- 1.1 -->
+:::moniker range="iotedge-2018-06"
+[Windows üzerinde sanal BIR TPM ile IoT Edge bir cihaz](how-to-auto-provision-simulated-device-windows.md)oluşturun ve sağlayın.
+:::moniker-end
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 [Akıllı kenarından güvenli hale](https://azure.microsoft.com/blog/securing-the-intelligent-edge/)getirmek için blogu okuyun.
-
-[Linux sanal makinesinde sanal TPM ile bir IoT Edge cihazı](how-to-auto-provision-simulated-device-linux.md)oluşturun ve sağlayın.
-
-[Windows üzerinde sanal BIR TPM ile IoT Edge bir cihaz](how-to-auto-provision-simulated-device-windows.md)oluşturun ve sağlayın.

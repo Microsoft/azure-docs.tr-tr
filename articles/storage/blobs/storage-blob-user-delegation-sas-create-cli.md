@@ -11,12 +11,12 @@ ms.author: tamram
 ms.reviewer: dineshm
 ms.subservice: blobs
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 536cd01fbcf2c5d18a8c12030b709427d9bb91b1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9ec434b9b6da3b3b80a3afddbb432ddeece2b389
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98703615"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788556"
 ---
 # <a name="create-a-user-delegation-sas-for-a-container-or-blob-with-the-azure-cli"></a>Azure CLı ile bir kapsayıcı veya blob için Kullanıcı temsili SAS oluşturma
 
@@ -65,7 +65,7 @@ Bir Kullanıcı temsili SAS oluşturulurken, `--auth-mode login` ve `--as-user p
 
 ### <a name="create-a-user-delegation-sas-for-a-container"></a>Bir kapsayıcı için Kullanıcı temsili SAS oluşturma
 
-Azure CLı ile bir kapsayıcı için Kullanıcı temsili SAS oluşturmak için [az Storage Container Generate-SAS](/cli/azure/storage/container#az-storage-container-generate-sas) komutunu çağırın.
+Azure CLı ile bir kapsayıcı için Kullanıcı temsili SAS oluşturmak için [az Storage Container Generate-SAS](/cli/azure/storage/container#az_storage_container_generate_sas) komutunu çağırın.
 
 Kapsayıcıda bir Kullanıcı temsili SAS için desteklenen izinler ekleme, oluşturma, silme, listeleme, okuma ve yazma içerir. İzinler, listedir veya Birleşik olarak belirtilebilir. Bu izinler hakkında daha fazla bilgi için bkz. [Kullanıcı TEMSILI SAS oluşturma](/rest/api/storageservices/create-user-delegation-sas).
 
@@ -89,7 +89,7 @@ se=2019-07-27&sp=r&sv=2018-11-09&sr=c&skoid=<skoid>&sktid=<sktid>&skt=2019-07-26
 
 ### <a name="create-a-user-delegation-sas-for-a-blob"></a>Blob için Kullanıcı temsili SAS oluşturma
 
-Azure CLı ile bir blob için Kullanıcı temsili SAS oluşturmak için [az Storage blob Generate-SAS](/cli/azure/storage/blob#az-storage-blob-generate-sas) komutunu çağırın.
+Azure CLı ile bir blob için Kullanıcı temsili SAS oluşturmak için [az Storage blob Generate-SAS](/cli/azure/storage/blob#az_storage_blob_generate_sas) komutunu çağırın.
 
 Blob üzerinde Kullanıcı temsili SAS için desteklenen izinler ekleme, oluşturma, silme, okuma ve yazma içerir. İzinler, listedir veya Birleşik olarak belirtilebilir. Bu izinler hakkında daha fazla bilgi için bkz. [Kullanıcı TEMSILI SAS oluşturma](/rest/api/storageservices/create-user-delegation-sas).
 
@@ -119,7 +119,7 @@ https://storagesamples.blob.core.windows.net/sample-container/blob1.txt?se=2019-
 
 ## <a name="revoke-a-user-delegation-sas"></a>Kullanıcı temsilciliğini iptal etme SAS
 
-Azure CLı 'dan bir Kullanıcı temsilciliğini iptal etmek için [az Storage Account revoke-temsilciyi-Keys](/cli/azure/storage/account#az-storage-account-revoke-delegation-keys) komutunu çağırın. Bu komut, belirtilen depolama hesabıyla ilişkili tüm Kullanıcı temsili anahtarlarını iptal eder. Bu anahtarlarla ilişkili tüm paylaşılan erişim imzaları geçersiz kılınır.
+Azure CLı 'dan bir Kullanıcı temsilciliğini iptal etmek için [az Storage Account revoke-temsilciyi-Keys](/cli/azure/storage/account#az_storage_account_revoke_delegation_keys) komutunu çağırın. Bu komut, belirtilen depolama hesabıyla ilişkili tüm Kullanıcı temsili anahtarlarını iptal eder. Bu anahtarlarla ilişkili tüm paylaşılan erişim imzaları geçersiz kılınır.
 
 Açılı ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 

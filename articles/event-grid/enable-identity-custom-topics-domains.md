@@ -3,12 +3,12 @@ title: Azure Event Grid özel konular ve etki alanlarında yönetilen kimliği e
 description: Bu makalede, Azure Event Grid özel konu veya etki alanı için yönetilen hizmet kimliğinin nasıl etkinleştirileceği açıklanır.
 ms.topic: how-to
 ms.date: 03/25/2021
-ms.openlocfilehash: 06fd4d6e472b33496e773596b0f3afc8e70be948
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: b93fd44282d9e19e7111dd52c73d8d4c01c67a10
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105630608"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106278227"
 ---
 # <a name="assign-a-system-managed-identity-to-an-event-grid-custom-topic-or-domain"></a>Event Grid özel bir konuya veya etki alanına sistem tarafından yönetilen bir kimlik atama 
 Bu makalede, Event Grid özel konu veya etki alanı için sistem tarafından yönetilen bir kimliğin nasıl etkinleştirileceği gösterilmektedir. Yönetilen kimlikler hakkında bilgi edinmek için bkz. [Azure kaynakları için Yönetilen kimlikler nelerdir](../active-directory/managed-identities-azure-resources/overview.md).
@@ -59,4 +59,4 @@ Var olan bir etki alanını güncelleştirme komutu benzerdir ( `az eventgrid do
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Kimliği, hedef üzerinde (örneğin, bir Service Bus kuyruğu) uygun bir role (örneğin, Service Bus veri gönderici) ekleyin. Ayrıntılı adımlar için bkz. [hedeflerdeki Azure rollerine kimlik ekleme](add-identity-roles.md). 
+Kimliği, hedef üzerinde (örneğin, bir Service Bus kuyruğu) uygun bir role (örneğin, Service Bus veri gönderici) ekleyin. Ayrıntılı adımlar için bkz. [yönetilen kimlik Event Grid hedefe erişim verme](add-identity-roles.md). 

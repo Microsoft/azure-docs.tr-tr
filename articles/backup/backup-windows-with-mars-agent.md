@@ -3,12 +3,12 @@ title: MARS Aracısı 'nı kullanarak Windows makinelerini yedekleme
 description: Windows makinelerini yedeklemek için Microsoft Azure Kurtarma Hizmetleri (MARS) aracısını kullanın.
 ms.topic: conceptual
 ms.date: 03/03/2020
-ms.openlocfilehash: 54932192d61633da55657e2ba57adf4e30c4fbc7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 54628c15ffb51c7157132c9a91f41c16873df340
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98702777"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519179"
 ---
 # <a name="back-up-windows-server-files-and-folders-to-azure"></a>Windows Server dosyalarını ve klasörlerini Azure 'a yedekleme
 
@@ -158,4 +158,4 @@ Daha fazla bilgi için bkz. [yedekleme Ilkesi oluşturma](#create-a-backup-polic
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Azure 'da dosyaları geri yüklemeyi](backup-azure-restore-windows-server.md)öğrenin.
-* [Dosya ve klasörleri yedekleme hakkında sık sorulan soruları](backup-azure-file-folder-backup-faq.md) bulun
+* [Dosya ve klasörleri yedekleme hakkında sık sorulan soruları](backup-azure-file-folder-backup-faq.yml) bulun

@@ -10,12 +10,12 @@ ms.subservice: text-analytics
 ms.topic: conceptual
 ms.date: 02/23/2021
 ms.author: aahi
-ms.openlocfilehash: f6a109c10491ad2eabb12069157e9e6f394bc1f4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c0d91f803822e018f4363bb78d9138e2efe16f8a
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101736619"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531429"
 ---
 # <a name="text-analytics-api-v3-language-support"></a>Metin Analizi API'si v3 dil desteği 
 
@@ -25,9 +25,11 @@ ms.locfileid: "101736619"
 |:----------------------|:-------------:|:----------:|:--------------------------:|-------------------:|
 | Basitleştirilmiş Çince    |   `zh-hans`   |     ✓      |         2019-10-01         | `zh` Ayrıca kabul edildi |
 | Geleneksel Çince   |   `zh-hant`   |    ✓      |         2019-10-01         |                    |
+| Felemenkçe                 |     `nl`      |     ✓      |         2019-10-01        |                    |
 | İngilizce               |     `en`      |     ✓      |         2019-10-01         |                    |
 | Fransızca                |     `fr`      |     ✓      |         2019-10-01         |                    |
 | Almanca                |     `de`      |     ✓      |         2019-10-01         |                    |
+| Hintçe                 |    `hi`       |     ✓      |         2020-04-01         |                    |
 | İtalyanca               |     `it`      |     ✓      |         2019-10-01         |                    |
 | Japonca              |     `ja`      |     ✓      |         2019-10-01         |                    |
 | Korece                |     `ko`      |    ✓      |         2019-10-01         |                    |

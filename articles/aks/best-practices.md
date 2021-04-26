@@ -3,19 +3,24 @@ title: Azure Kubernetes hizmeti (AKS) için en iyi yöntemler
 description: Azure Kubernetes Service (AKS) içinde uygulama derlemek ve yönetmek için küme operatörü ve geliştirici en iyi uygulamaları koleksiyonu
 services: container-service
 ms.topic: article
-ms.date: 12/07/2018
-ms.openlocfilehash: e8f9c1946567ac3c3ea1045a216d6b0486fd959a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 03/09/2021
+ms.openlocfilehash: f4bd109ce6827de26b1649380b6f6a2ba7c10e17
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94686268"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105910"
 ---
 # <a name="cluster-operator-and-developer-best-practices-to-build-and-manage-applications-on-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) üzerinde uygulama derlemek ve yönetmek için küme operatörü ve geliştirici en iyi uygulamaları
 
-Azure Kubernetes Service 'te (AKS) uygulamaları başarılı bir şekilde derlemek ve çalıştırmak için anlaşılması ve uygulanması gereken önemli noktalar vardır. Bu alanlarda çok kiracılı ve Zamanlayıcı özellikleri, küme ve pod güvenliği, iş sürekliliği ve olağanüstü durum kurtarma dahildir. Aşağıdaki en iyi yöntemler, küme İşletmenleri ve geliştiricilerin bu alanların her birine ilişkin konuları anlamasına ve uygun özellikleri uygulamasına yardımcı olmak üzere gruplandırılır.
+Azure Kubernetes Service 'te (AKS) uygulamaları başarıyla oluşturup çalıştırmak, aşağıdakiler dahil bazı önemli noktaların anlaşılmasına ve uygulanmasına gerek duyar:
+* Çok kiracılı ve Zamanlayıcı özellikleri.
+* Küme ve pod güvenliği.
+* İş sürekliliği ve olağanüstü durum kurtarma. 
 
-Bu en iyi yöntemler ve kavramsal makaleler, AKS ürün grubu, mühendislik takımları ve küresel siyah belts (GB 'ler) dahil alan ekipleriyle birlikte yazılmıştır.
+
+AKS ürün grubu, mühendislik ekipleri ve alan ekipleri (küresel siyah belts [GBBs) dahil), aşağıdaki en iyi yöntemleri ve kavramsal makaleleri içine katkıda bulunur. Bu durumlar, küme İşletmenleri ve geliştiricilerin yukarıdaki hususları anlamasına ve uygun özellikleri uygulamasına yardımcı olmaya yönelik amaçlardır.
+
 
 ## <a name="cluster-operator-best-practices"></a>Küme işleci en iyi uygulamaları
 

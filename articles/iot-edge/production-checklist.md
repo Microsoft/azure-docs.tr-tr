@@ -11,12 +11,12 @@ services: iot-edge
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: fda69d582f26b0c9189898bb5c8b0004a1e47360
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 711b4f6577b17e84a5d30774fa7be4c9033d4340
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104722778"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107031146"
 ---
 # <a name="prepare-to-deploy-your-iot-edge-solution-in-production"></a>IoT Edge çözümünüzü üretime dağıtmaya hazırlanma
 
@@ -174,7 +174,7 @@ Hizmet sorumlusu kullanarak kimlik doğrulaması yapmak için, ilk betikten edin
 
 ### <a name="use-tags-to-manage-versions"></a>Sürümleri yönetmek için etiketleri kullanma
 
-Etiket, Docker Kapsayıcıları sürümlerini ayırt etmek için kullanabileceğiniz bir Docker kavramıdır. Etiketler, bir kapsayıcı deposunun sonuna gelen **1,0** gibi sonlardır. Örneğin, **MCR.Microsoft.com/azureiotedge-Agent:1.0**. Etiketler değişebilir ve herhangi bir zamanda başka bir kapsayıcıya işaret etmek üzere değiştirilebilir, bu sayede, modül görüntülerini ileri doğru ilerleyen şekilde güncelleştirdiğinizde takımınızın izlenecek bir kuralı kabul etmesi gerekir.
+Etiket, Docker Kapsayıcıları sürümlerini ayırt etmek için kullanabileceğiniz bir Docker kavramıdır. Etiketler, bir kapsayıcı deposunun sonuna gelen **1,1** gibi sonlardır. Örneğin, **MCR.Microsoft.com/azureiotedge-Agent:1.1**. Etiketler değişebilir ve herhangi bir zamanda başka bir kapsayıcıya işaret etmek üzere değiştirilebilir, bu sayede, modül görüntülerini ileri doğru ilerleyen şekilde güncelleştirdiğinizde takımınızın izlenecek bir kuralı kabul etmesi gerekir.
 
 Etiketler, IoT Edge cihazlarınızda güncelleştirmeleri zorunlu etmenize de yardımcı olur. Bir modülün güncelleştirilmiş bir sürümünü kapsayıcı Kayıt defterinize gönderdiğinizde, etiketi artırın. Ardından, bir etiketi arttırılarak cihazlarınıza yeni bir dağıtım gönderin. Kapsayıcı altyapısı, arttırılan etiketi yeni bir sürüm olarak tanır ve en son modül sürümünü cihazınıza doğru olarak çeker.
 
@@ -263,6 +263,17 @@ Cihazlarınız bir ara sunucu kullanan bir ağda dağıtılırsa, IoT Hub ve kap
 
 Linux 'ta IoT Edge Daemon, günlükleri varsayılan günlük sürücüsü olarak kullanır. Komut satırı aracını kullanarak `journalctl` Daemon günlüklerini sorgulayın.
 
+<!-- 1.1 -->
+:::moniker range="iotedge-2018-06"
+Windows 'da IoT Edge Daemon, PowerShell tanılamayı kullanır. `Get-IoTEdgeLog`Arka plan programından günlükleri sorgulamak için kullanın. IoT Edge modüller, günlük kaydı için varsayılan olan JSON sürücüsünü kullanır.  
+
+```powershell
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Get-IoTEdgeLog
+```
+
+:::moniker-end
+<!-- end 1.1 -->
+
 <!--1.2-->
 :::moniker range=">=iotedge-2020-11"
 
@@ -281,12 +292,6 @@ Sürüm 1,2 ' den başlayarak, IoT Edge birden çok Daemon 'ları kullanır. Her
   ```
 
 :::moniker-end
-
-Windows 'da IoT Edge Daemon, PowerShell tanılamayı kullanır. `Get-IoTEdgeLog`Arka plan programından günlükleri sorgulamak için kullanın. IoT Edge modüller, günlük kaydı için varsayılan olan JSON sürücüsünü kullanır.  
-
-```powershell
-. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Get-IoTEdgeLog
-```
 
 Bir IoT Edge dağıtımını test ederken, genellikle, günlükleri almak ve sorunlarını gidermek için cihazlarınıza erişebilirsiniz. Bir dağıtım senaryosunda, bu seçeneğe sahip olmayabilirsiniz. Üretimde cihazlarınızla ilgili nasıl bilgi toplayacağınızı düşünün. Bir seçenek, diğer modüllerden bilgi toplayan ve buluta gönderen bir günlük modülü kullanmaktır. Günlüğe kaydetme modülüne bir örnek [logspout-loganalytics](https://github.com/veyalla/logspout-loganalytics)veya kendi tasarımınızı tasarlayabilmeniz gerekir.
 
@@ -308,12 +313,24 @@ Kapsayıcı motoru günlük seçeneklerinde tüm kapsayıcı günlük dosyaları
 }
 ```
 
-Bu bilgileri adlı bir dosyaya ekleyin (veya ekleyin) `daemon.json` ve cihaz platformunuzun doğru konumunu yerleştirin.
+Bu bilgileri adlı bir dosyaya ekleyin (veya ekleyin) `daemon.json` ve aşağıdaki konuma yerleştirin:
 
+<!-- 1.1 -->
+:::moniker range="iotedge-2018-06"
 | Platform | Konum |
 | -------- | -------- |
 | Linux | `/etc/docker/` |
 | Windows | `C:\ProgramData\iotedge-moby\config\` |
+:::moniker-end
+<!-- end 1.1 -->
+
+<!-- 1.2 -->
+:::moniker range=">=iotedge-2020-11"
+
+* `/etc/docker/`
+
+:::moniker-end
+<!-- end 1.2 -->
 
 Değişikliklerin etkili olması için kapsayıcı altyapısının yeniden başlatılması gerekir.
 

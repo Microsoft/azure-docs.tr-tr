@@ -3,17 +3,18 @@ title: Azure Cloud Services için ölçeklendirmeyi yapılandırma (genişletilm
 description: Azure Cloud Services için ölçeklendirme seçeneklerini etkinleştirme (genişletilmiş destek)
 ms.topic: how-to
 ms.service: cloud-services-extended-support
+ms.subservice: autoscale
 author: gachandw
 ms.author: gachandw
 ms.reviewer: mimckitt
 ms.date: 10/13/2020
 ms.custom: ''
-ms.openlocfilehash: cfa5be01a0d36764086c6c9adf97e6cb166d2bb6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: dab3411319f40a111144a3e1c1f02f1b67d011b0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101728170"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105935660"
 ---
 # <a name="configure-scaling-options-with-azure-cloud-services-extended-support"></a>Azure Cloud Services ölçeklendirme seçeneklerini yapılandırma (genişletilmiş destek) 
 

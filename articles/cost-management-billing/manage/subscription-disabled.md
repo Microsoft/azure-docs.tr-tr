@@ -8,14 +8,14 @@ tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 01/19/2021
+ms.date: 03/30/2021
 ms.author: banders
-ms.openlocfilehash: d7b5f1ae6db633bd1af10b1a0de1392c2a1fbcef
-ms.sourcegitcommit: b39cf769ce8e2eb7ea74cfdac6759a17a048b331
+ms.openlocfilehash: 37093900bf49e8a7613e2e3f4311548675791ceb
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/22/2021
-ms.locfileid: "98685550"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220892"
 ---
 # <a name="reactivate-a-disabled-azure-subscription"></a>Devre dışı bırakılmış bir Azure aboneliğini yeniden etkinleştirme
 
@@ -23,7 +23,7 @@ Kredinizin süresi dolduğu, harcama limitinize ulaştığınız, süresi geçmi
 
 ## <a name="your-credit-is-expired"></a>Kredinizin süresi doldu
 
-Azure ücretsiz hesabına kaydolduğunuzda size 30 gün boyunca kullanmak üzere 200 ABD doları Azure kredisi ve 12 ay boyunca ücretsiz hizmetler sağlayan bir Ücretsiz Deneme aboneliği alırsınız. 30 günün sonunda Azure aboneliğinizi devre dışı bırakır. Aboneliğiniz, abonelikle sağlanan krediyi ve ücretsiz hizmetleri yanlışlıkla aşan kullanım için ücretlendirilmeye karşı sizi korumak için devre dışı bırakılır. Azure hizmetlerini kullanmaya devam etmek için [aboneliğinizi yükseltmelisiniz](upgrade-azure-subscription.md). Yükseltme sonrasında aboneliğinizin yine 12 ay boyunca ücretsiz hizmetlere erişimi olacaktır. Yalnızca ücretsiz hizmet miktarı limitlerinin ötesinde kullanım ücreti alınır.
+Ücretsiz bir Azure hesabı için kaydolduğunuzda, 30 gün ve 12 aylık ücretsiz hizmet için faturalandırma para biriminizde 200 ABD Doları Azure kredisi sağlayan ücretsiz bir deneme aboneliği alırsınız. 30 günün sonunda Azure aboneliğinizi devre dışı bırakır. Aboneliğiniz, abonelikle sağlanan krediyi ve ücretsiz hizmetleri yanlışlıkla aşan kullanım için ücretlendirilmeye karşı sizi korumak için devre dışı bırakılır. Azure hizmetlerini kullanmaya devam etmek için [aboneliğinizi yükseltmelisiniz](upgrade-azure-subscription.md). Yükseltme sonrasında aboneliğinizin yine 12 ay boyunca ücretsiz hizmetlere erişimi olacaktır. Yalnızca ücretsiz hizmet miktarı limitlerinin ötesinde kullanım ücreti alınır.
 
 ## <a name="you-reached-your-spending-limit"></a>Harcama limitinize ulaştınız
 

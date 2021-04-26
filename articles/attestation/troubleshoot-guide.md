@@ -7,12 +7,13 @@ ms.service: attestation
 ms.topic: reference
 ms.date: 07/20/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 3ae3e12c11f194b3efcc149382dc952bd74d38b5
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 9d3e34bee3d0f1420b379638389e6fad0a2fed60
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97704325"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831573"
 ---
 # <a name="microsoft-azure-attestation-troubleshooting-guide"></a>Microsoft Azure kanıtlama sorun giderme kılavuzu
 
@@ -30,7 +31,6 @@ Aşağıda, Azure kanıtlama tarafından döndürülen hatalara ilişkin bazı �
 **Hata kodu** Erişilmesini
 
 **Senaryo örnekleri**
-  - Kullanıcı kanıtlama okuyucusu rolüyle atanmamışsa kanıtlama hatası
   - Kullanıcı uygun rollerle atanmadığı için kanıtlama ilkeleri yönetimedi
   - Kullanıcı uygun rollerle atanmadığı için kanıtlama ilkesi imzalayanlar yönetimi yapılamıyor
 
@@ -47,55 +47,25 @@ At line:1 char:1
 
 **Sorun giderme adımları**
 
-Kanıtlama ilkelerini/ilke İmzalayanları görüntülemek için bir Azure AD kullanıcısı "eylemler" için izin gerektirir:
+İlkeleri yönetmek için, bir Azure AD kullanıcısı "eylemler" için aşağıdaki izinleri gerektirir:
 - Microsoft. kanıtlama/attestationProviders/kanıtlama/okuma
-
-  Bu izin, "sahip" (joker izinleri) veya "okuyucu" (joker karakter izinleri) veya "kanıtlama okuyucu" gibi bir rol aracılığıyla bir AD kullanıcısına atanabilir (yalnızca Azure kanıtlama için özel izinler).
-
-İlke İmzalayanları eklemek/silmek veya ilkeleri yapılandırmak için, bir Azure AD kullanıcısı "eylemler" için aşağıdaki izinleri gerektirir:
 - Microsoft. kanıtlama/attestationProviders/kanıtlama/yazma
 - Microsoft. kanıtlama/attestationProviders/kanıtlama/silme
 
-  Bu izinler, "Owner" (joker izinleri), "katkıda bulunan" (joker karakter izinleri) veya "kanıtlama katılımcısı" (yalnızca Azure kanıtlama için özel izinler) gibi bir rol aracılığıyla bir AD kullanıcısına atanabilir.
+  Bu işlemleri gerçekleştirmek için, bir Azure AD kullanıcısının kanıtlama sağlayıcısında "kanıtlama katılımcısı" rolü olmalıdır. Bu izinler, abonelik/kaynak grubundaki "sahip" (joker karakter izinleri), "katkıda bulunan" (joker karakter izinleri) gibi rollerle da devralınabilir.  
 
-Müşteriler, kanıtlama için varsayılan sağlayıcıyı kullanmayı veya özel ilkelerle kendi sağlayıcılarını oluşturmayı tercih edebilir. Kanıtlama isteklerini özel kanıtlama sağlayıcılarına göndermek için, Kullanıcı için "Owner" (joker karakter izinleri) veya "okuyucu" (joker karakter izinleri) veya "kanıtlama okuyucu" rolü gereklidir. Varsayılan sağlayıcılara, herhangi bir Azure AD kullanıcısı tarafından erişilebilir.
+İlkeleri okumak için, bir Azure AD kullanıcısı "eylemler" için aşağıdaki izinleri gerektirir:
+- Microsoft. kanıtlama/attestationProviders/kanıtlama/okuma
+
+  Bu eylemi gerçekleştirmek için, bir Azure AD kullanıcısının kanıtlama sağlayıcısında "kanıtlama okuyucusu" rolü olmalıdır. Okuma izni Ayrıca, abonelik/kaynak grubundaki "okuyucu" (joker karakter izinleri) gibi rollerle devralınabilir.  
 
 PowerShell 'deki rolleri doğrulamak için aşağıdaki adımları çalıştırın:
 
 a. PowerShell 'i başlatın ve "Connect-AzAccount" cmdlet 'i aracılığıyla Azure 'da oturum açın
 
-b. Azure rolü atama ayarlarınızı doğrulayın
+b. Kanıtlama sağlayıcısında Azure rolü atamasını doğrulamak için lütfen [buradaki](../role-based-access-control/role-assignments-list-powershell.md) kılavuza başvurun
 
-
-  ```powershell
-  $c = Get-AzContext
-  Get-AzRoleAssignment -ResourceGroupName $attestationResourceGroup -ResourceName $attestationProvider -ResourceType Microsoft.Attestation/attestationProviders -SignInName $c.Account.Id
-  ```
-
-  Şuna benzer bir şey görmeniz gerekir:
-
-  ```
-  RoleAssignmentId   :/subscriptions/subscriptionId/providers/Microsoft.Authorization/roleAssignments/roleAssignmentId
-  
-  Scope              : /subscriptions/subscriptionId
-  
-  DisplayName        : displayName
-  
-  SignInName         : signInName
-  
-  RoleDefinitionName : Reader
-  
-  RoleDefinitionId   : roleDefinitionId
-  
-  ObjectId           : objectid
-  
-  ObjectType         : User
-  
-  CanDelegate        : False
- 
-  ```
-
-c. Listede uygun bir rol ataması bulamazsanız, [buradaki](../role-based-access-control/role-assignments-powershell.md) yönergeleri izleyin.
+c. Uygun bir rol ataması bulamıyorsanız [buradaki](../role-based-access-control/role-assignments-powershell.md) yönergeleri izleyin
 
 ## <a name="2-http--400-errors"></a>2. HTTP – 400 hata
 
@@ -280,7 +250,7 @@ PowerShell Galerisi etkileşim kurmaya devam etmek için Install-Module komutlar
 Kullanıcı uygun rollerle atandı. Ancak PowerShell aracılığıyla kanıtlama ilkelerini yönetirken karşılıklı yetkilendirme sorunları.
 
 ### <a name="error"></a>Hata
-Nesne kimliği &lt; nesne kimliğine sahip istemci, &gt;  ' subcrisettings/ &lt; SubscriptionID &gt; ResourceGroups/secure_enclave_poc/Providers/Microsoft.Authorization/roleassignments/ &lt; rol atamaadı &gt; ' veya kapsam geçersiz olarak Microsoft. Authorization/roleatamalar/Write eylemini gerçekleştirmeye yönelik yetkiye sahip değil. Erişim yakın zamanda verildiyse, lütfen kimlik bilgilerinizi yenileyin
+Nesne KIMLIĞI &lt; nesne kimliğine sahip istemci, &gt;  ' subcrisettings/ &lt; SubscriptionID &gt; ResourceGroups/secure_enclave_poc/Providers/Microsoft.Authorization/roleassignments/ &lt; rol atamaadı &gt; ' veya kapsam geçersiz olarak Microsoft. Authorization/roleatamalar/Write eylemini gerçekleştirmeye yönelik yetkiye sahip değil. Erişim yakın zamanda verildiyse, lütfen kimlik bilgilerinizi yenileyin
 
 ### <a name="troubleshooting-steps"></a>Sorun giderme adımları
 

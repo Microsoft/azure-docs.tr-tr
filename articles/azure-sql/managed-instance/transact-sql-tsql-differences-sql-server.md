@@ -11,12 +11,12 @@ ms.author: jovanpop
 ms.reviewer: sstein, bonova, danil
 ms.date: 3/16/2021
 ms.custom: seoapril2019, sqldbrb=1
-ms.openlocfilehash: 227b573d3771efd3fd36e6d3d6222696647849f7
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: f744b718919a6da75b2064efdc163ef4618b5a7c
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105644908"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815909"
 ---
 # <a name="t-sql-differences-between-sql-server--azure-sql-managed-instance"></a>SQL Server & Azure SQL yönetilen örneği arasındaki T-SQL farklılıkları
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -354,9 +354,9 @@ SQL Server ' de etkinleştirilen DBCC deyimleri SQL yönetilen örneği 'nde des
 
 ### <a name="distributed-transactions"></a>Dağıtılmış işlemler
 
-[Dağıtılmış işlemler](../database/elastic-transactions-overview.md) için kısmi destek şu anda genel önizlemededir. Desteklenen senaryolar şunlardır:
-* Katılımcıların yalnızca [sunucu güven grubunun](./server-trust-group-overview.md)parçası olan Azure SQL yönetilen örnekleri olduğu işlemler.
-* .NET (TransactionScope sınıfı) ve Transact-SQL ' den başlatılan işlemler.
+[Dağıtılmış işlemler](../database/elastic-transactions-overview.md) için kısmi destek şu anda genel önizlemededir. Dağıtılmış işlemler aşağıdaki koşullarda desteklenir (tümünün karşılanması gerekir):
+* tüm işlem katılımcıları, [sunucu güven grubunun](./server-trust-group-overview.md)parçası olan Azure SQL yönetilen örnekleridir.
+* işlemler .NET (TransactionScope sınıfı) veya Transact-SQL ' den başlatılır.
 
 Azure SQL yönetilen örneği şu anda MSDTC şirket içi veya Azure sanal makinelerinde düzenli olarak desteklenen diğer senaryoları desteklemez.
 

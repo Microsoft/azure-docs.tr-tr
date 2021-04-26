@@ -2,22 +2,18 @@
 title: Sanal ağlar ile Azure API Management’ı kullanma
 description: Azure API Management 'de bir sanal ağa bağlantı ayarlamayı ve üzerinden Web hizmetlerine erişmeyi öğrenin.
 services: api-management
-documentationcenter: ''
 author: vladvino
-manager: erikre
-editor: ''
 ms.service: api-management
-ms.tgt_pltfrm: na
-ms.topic: article
-ms.date: 12/10/2020
+ms.topic: how-to
+ms.date: 04/12/2021
 ms.author: apimpm
-ms.custom: references_regions
-ms.openlocfilehash: c63b71ad00a5621babe07597720a1e9ea87f1e4a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: references_regions, devx-track-azurepowershell
+ms.openlocfilehash: 5808cda95cdf9ce6477f47fcdbb8a0421d92e72a
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99260257"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817160"
 ---
 # <a name="how-to-use-azure-api-management-with-virtual-networks"></a>Sanal ağlar ile Azure API Management’ı kullanma
 Azure Sanal Ağları (VNET’ler) Azure kaynaklarınızdan herhangi birini, erişimini denetlediğiniz İnternet tabanlı olmayan ve yönlendirilebilir bir ağa yerleştirmenizi sağlar. Bu ağlar daha sonra, çeşitli VPN teknolojileri kullanılarak şirket içi ağlarınıza bağlanabilir. Azure sanal ağları hakkında daha fazla bilgi edinmek için buradaki bilgilerle başlayın: [Azure sanal ağına genel bakış](../virtual-network/virtual-networks-overview.md).
@@ -35,11 +31,13 @@ Azure API Management, sanal ağ (VNET) içinde dağıtılabilir ve bu sayede ağ
 
 Bu makalede açıklanan adımları gerçekleştirmek için şunları yapmanız gerekir:
 
-+ Etkin bir Azure aboneliği.
++ **Etkin bir Azure aboneliği.**
 
     [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-+ Bir APıM örneği. Daha fazla bilgi için bkz. [Azure API Management örneği oluşturma](get-started-create-service-instance.md).
++ **Bir API Management örneği.** Daha fazla bilgi için bkz. [Azure API Management örneği oluşturma](get-started-create-service-instance.md).
+
+[!INCLUDE [api-management-public-ip-for-vnet](../../includes/api-management-public-ip-for-vnet.md)]
 
 ## <a name="enable-vnet-connection"></a><a name="enable-vpn"> </a>VNET bağlantısını etkinleştir
 
@@ -47,14 +45,14 @@ Bu makalede açıklanan adımları gerçekleştirmek için şunları yapmanız g
 
 1. API Management örneğinizi bulmak için [Azure Portal](https://portal.azure.com) gidin. **API Management Hizmetleri** arayın ve seçin.
 
-2. API Management örneğinizi seçin.
+1. API Management örneğinizi seçin.
 
-3. **Sanal ağ**' ı seçin.
-4. API Management örneğini bir sanal ağın içine dağıtılacak şekilde yapılandırın.
+1. **Sanal ağ**' ı seçin.
+1. API Management örneğini bir sanal ağın içine dağıtılacak şekilde yapılandırın.
 
     :::image type="content" source="media/api-management-using-with-vnet/api-management-menu-vnet.png" alt-text="Azure portal sanal ağ ' ı seçin.":::
     
-5. İstenen erişim türünü seçin:
+1. İstenen erişim türünü seçin:
 
     * **Kapalı**: bu varsayılandır. API Management bir sanal ağa dağıtılmadı.
 
@@ -66,32 +64,46 @@ Bu makalede açıklanan adımları gerçekleştirmek için şunları yapmanız g
 
         ![Özel eşleme][api-management-vnet-private]
 
-6. **Dış** veya **iç**' yı seçtiyseniz, API Management hizmetinizin sağlandığı tüm bölgelerin bir listesini görürsünüz. Bir **konum** seçin ve ardından **sanal ağını** ve **alt ağını** seçin. Sanal ağ listesi, yapılandırdığınız bölgede ayarlanmış olan Azure aboneliklerinizde bulunan hem klasik hem de Kaynak Yöneticisi sanal ağlarla doldurulur.
+1. **Dış** veya **iç**' yı seçtiyseniz, API Management hizmetinizin sağlandığı tüm konumların (bölgeler) bir listesini görürsünüz. Bir **konum** seçin ve ardından **sanal ağını**, **alt ağını** ve **IP adresini** seçin. Sanal ağ listesi, yapılandırdığınız bölgede ayarlanan Azure aboneliklerinizde bulunan Kaynak Yöneticisi sanal ağlarla doldurulur.
 
-    > [!IMPORTANT]
-    > Bir Azure API Management örneğini bir Kaynak Yöneticisi VNET 'e dağıttığınızda, hizmet Azure API Management örnekleri dışında başka hiçbir kaynak içermeyen bir ayrılmış alt ağda olmalıdır. Azure API Management örneğini diğer kaynakları içeren bir Kaynak Yöneticisi VNET alt ağına dağıtmaya yönelik bir girişim yapılırsa, dağıtım başarısız olur.
-
-    Sonra **Uygula**'yı seçin. API Management örneğinizin **sanal ağ** sayfası, yeni sanal ağ ve alt ağ seçimlerinizle güncelleştirilir.
 
     :::image type="content" source="media/api-management-using-with-vnet/api-management-using-vnet-select.png" alt-text="Portalda sanal ağ ayarları.":::
 
+    > [!IMPORTANT]
+    > * İstemciniz, bir Azure API Management örneğini bir Kaynak Yöneticisi VNET 'te dağıtmak için **API sürüm 2020-12-01 veya öncesini** kullandığında, hizmet Azure API Management örnekleri dışında hiçbir kaynak içermeyen bir ayrılmış alt ağda olmalıdır. Azure API Management örneğini diğer kaynakları içeren bir Kaynak Yöneticisi VNET alt ağına dağıtmaya yönelik bir girişim yapılırsa, dağıtım başarısız olur.
+    > * İstemciniz bir sanal ağda Azure API Management örneği dağıtmak için **API sürüm 2021-01-01-önizleme veya sonraki** bir sürümünü kullandığında yalnızca bir kaynak yöneticisi sanal ağ desteklenir. Ayrıca, kullanılan alt ağ diğer kaynakları içerebilir. Örnekleri API Management için adanmış bir alt ağ kullanmanız gerekmez. 
+
+1. **Uygula**’yı seçin. API Management örneğinizin **sanal ağ** sayfası, yeni sanal ağ ve alt ağ seçimlerinizle güncelleştirilir.
+
+1. API Management örneğinizin kalan konumları için sanal ağ ayarlarını yapılandırmaya devam edin.
+
 7. Üst gezinti çubuğunda **Kaydet**' i ve ardından **ağ yapılandırması Uygula**' yı seçin.
 
+    API Management örneğinin güncelleştirilmesi 15 ila 45 dakika sürebilir.
+
 > [!NOTE]
-> API Management örneğinin VIP adresi, VNET 'in her etkin veya devre dışı bırakıldığı her seferinde değişecektir.
-> API Management **dış** sunucudan **iç** veya tam tersi yönde taşındığında VIP adresi de değişecektir.
->
+> API sürüm 2020-12-01 ve önceki sürümlerini kullanan istemcilerle, VNET 'in etkinleştirildiği veya devre dışı bırakıldığı her seferinde API Management örneğinin VIP adresi değişir. API Management **dış** **sanal ağa** taşındığında VIP adresi de değişir veya bunun tersi de geçerlidir.
 
 > [!IMPORTANT]
-> VNET 'ten API Management kaldırır veya içinde dağıtıldığı bir değişikliği değiştirirseniz, daha önce kullanılmış olan VNET, altı saate kadar kilitli kalabilir. Bu süre boyunca VNET 'i silmek veya yeni bir kaynak dağıtmak mümkün olmayacaktır. Bu davranış, API-sürüm 2018-01-01 ve öncesini kullanan istemciler için geçerlidir. API-sürüm 2019-01-01 ve üzeri kullanan istemciler, ilişkili API Management hizmeti silindikten hemen sonra sanal ağ serbest bırakılır.
+> VNET 'ten API Management kaldırır veya içinde dağıtıldığı bir değişikliği değiştirirseniz, daha önce kullanılmış olan VNET, altı saate kadar kilitli kalabilir. Bu süre boyunca VNET 'i silmek veya yeni bir kaynak dağıtmak mümkün olmayacaktır. Bu davranış, API sürüm 2018-01-01 ve öncesini kullanan istemciler için geçerlidir. API sürüm 2019-01-01 ve üzeri kullanan istemciler, ilişkili API Management hizmeti silindikten hemen sonra sanal ağ serbest bırakılır.
 
-## <a name="deploy-api-management-into-external-vnet"></a><a name="deploy-apim-external-vnet"> </a>Dış VNET 'e API Management dağıtma
+### <a name="deploy-api-management-into-external-vnet"></a><a name="deploy-apim-external-vnet"> </a>Dış VNET 'e API Management dağıtma
 
-[![Azure’a dağıtın](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-api-management-create-with-external-vnet%2Fazuredeploy.json)
+Ayrıca, aşağıdaki yöntemleri kullanarak sanal ağ bağlantısını etkinleştirebilirsiniz.
 
-* **VNET içinde API Management hizmeti oluşturma**: sanal ağ Içinde bir Azure API Management hizmeti oluşturmak için [New-Azapimana,](/powershell/module/az.apimanagement/new-azapimanagement) cmdlet 'ini kullanın.
+### <a name="api-version-2021-01-01-preview"></a>API sürüm 2021-01-01-Önizleme
 
-* **Mevcut bir API Management HIZMETINI VNET Içinde dağıtma**: var olan bir Azure API Management hizmetini bir sanal ağ içinde taşımak için [Update-AzApiManagementRegion](/powershell/module/az.apimanagement/update-azapimanagementregion) cmdlet 'ini kullanın.
+* Azure Resource Manager [şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/201-api-management-create-with-external-vnet-publicip)
+
+     [![Azure’a dağıtın](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-api-management-create-with-external-vnet-publicip%2Fazuredeploy.json)
+
+### <a name="api-version-2020-12-01"></a>API sürümü 2020-12-01
+
+* Azure Resource Manager [şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/201-api-management-create-with-external-vnet)
+    
+     [![Azure’a dağıtın](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-api-management-create-with-external-vnet%2Fazuredeploy.json)
+
+* Azure PowerShell cmdlet 'leri-sanal ağda bir API Management örneği [oluşturma](/powershell/module/az.apimanagement/new-azapimanagement) veya [güncelleştirme](/powershell/module/az.apimanagement/update-azapimanagementregion)
 
 ## <a name="connect-to-a-web-service-hosted-within-a-virtual-network"></a><a name="connect-vnet"> </a>Sanal ağ içinde barındırılan bir Web hizmetine bağlanma
 API Management hizmetiniz VNET 'e bağlandıktan sonra, içindeki arka uç hizmetlerine erişmek, ortak hizmetlere erişmeden farklı değildir. Yeni bir API oluştururken veya var olan bir API 'yi düzenlediğinizde, Web hizmetinizin Web hizmeti **URL 'si** ALANıNA yerel IP adresini veya ana bilgisayar adını (VNet IÇIN bir DNS sunucusu yapılandırılmışsa) yazmanız yeterlidir.
@@ -138,9 +150,9 @@ Aşağıda, API Management hizmeti bir sanal ağa dağıttığınızda oluşabil
 
     | Azure ortamı | Uç Noktalar                                                                                                                                                                                                                                                                                                                                                              |
     |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | Azure Genel      | <ul><li>gcs.prod.monitoring.core.windows.net (**Yeni**)</li><li>prod.warmpath.msftcloudes.com (**kullanım dışı**)</li><li>global.prod.microsoftmetrics.com (**Yeni**)</li><li>global.metrics.nsatc.net (**kullanım dışı**)</li><li>shoebox2.prod.microsoftmetrics.com (**Yeni**)</li><li>shoebox2.metrics.nsatc.net (**kullanım dışı**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3.metrics.nsatc.net (**kullanım dışı**)</li><li>prod3-black.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3-black.prod3.metrics.nsatc.net (**kullanım dışı**)</li><li>prod3-red.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3-red.prod3.metrics.nsatc.net (**kullanım dışı**)</li><li>gcs.prod.warm.ingestion.monitoring.azure.com</li></ul> |
-    | Azure Kamu  | <ul><li>fairfax.warmpath.usgovcloudapi.net</li><li>global.prod.microsoftmetrics.com (**Yeni**)</li><li>global.metrics.nsatc.net (**kullanım dışı**)</li><li>shoebox2.prod.microsoftmetrics.com (**Yeni**)</li><li>shoebox2.metrics.nsatc.net (**kullanım dışı**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3.metrics.nsatc.net (**kullanım dışı**)</li><li>prod3-black.prod.microsoftmetrics.com</li><li>prod3-red.prod.microsoftmetrics.com</li><li>prod5.prod.microsoftmetrics.com</li><li>prod5-black.prod.microsoftmetrics.com</li><li>prod5-red.prod.microsoftmetrics.com</li><li>gcs.prod.warm.ingestion.monitoring.azure.us</li></ul>                                                                                                                                                                                                                                                |
-    | Azure China 21Vianet     | <ul><li>mooncake.warmpath.chinacloudapi.cn</li><li>global.prod.microsoftmetrics.com (**Yeni**)</li><li>global.metrics.nsatc.net (**kullanım dışı**)</li><li>shoebox2.prod.microsoftmetrics.com (**Yeni**)</li><li>shoebox2.metrics.nsatc.net (**kullanım dışı**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3.metrics.nsatc.net (**kullanım dışı**)</li><li>prod3-black.prod.microsoftmetrics.com</li><li>prod3-red.prod.microsoftmetrics.com</li><li>prod5.prod.microsoftmetrics.com</li><li>prod5-black.prod.microsoftmetrics.com</li><li>prod5-red.prod.microsoftmetrics.com</li><li>gcs.prod.warm.ingestion.monitoring.azure.cn</li></ul>                                                                                                                                                                                                                                                |
+    | Azure Genel      | <ul><li>gcs.prod.monitoring.core.windows.net (**Yeni**)</li><li>global.prod.microsoftmetrics.com (**Yeni**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3-black.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3-red.prod.microsoftmetrics.com (**Yeni**)</li><li>gcs.prod.warm.ingestion.monitoring.azure.com</li></ul> |
+    | Azure Kamu  | <ul><li>fairfax.warmpath.usgovcloudapi.net</li><li>global.prod.microsoftmetrics.com (**Yeni**)</li><li>shoebox2.prod.microsoftmetrics.com (**Yeni**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3-black.prod.microsoftmetrics.com</li><li>prod3-red.prod.microsoftmetrics.com</li><li>prod5.prod.microsoftmetrics.com</li><li>prod5-black.prod.microsoftmetrics.com</li><li>prod5-red.prod.microsoftmetrics.com</li><li>gcs.prod.warm.ingestion.monitoring.azure.us</li></ul>                                                                                                                                                                                                                                                |
+    | Azure China 21Vianet     | <ul><li>mooncake.warmpath.chinacloudapi.cn</li><li>global.prod.microsoftmetrics.com (**Yeni**)</li><li>shoebox2.prod.microsoftmetrics.com (**Yeni**)</li><li>shoebox2-red.prod.microsoftmetrics.com</li><li>shoebox2-black.prod.microsoftmetrics.com</li><li>shoebox2-red.shoebox2.metrics.nsatc.net</li><li>shoebox2-black.shoebox2.metrics.nsatc.net</li><li>prod3.prod.microsoftmetrics.com (**Yeni**)</li><li>prod3-red.prod.microsoftmetrics.com</li><li>prod5.prod.microsoftmetrics.com</li><li>prod5-black.prod.microsoftmetrics.com</li><li>prod5-red.prod.microsoftmetrics.com</li><li>gcs.prod.warm.ingestion.monitoring.azure.cn</li></ul>                                                                                                                                                                                                                                                |
 
   >[!IMPORTANT]
   > DNS bölgesi **. nsatc.net** to **. microsoftmetrics.com** ile yukarıdaki kümelerin DEĞIŞIKLIĞI, genellikle bir DNS değişiklidir. Kümenin IP adresi değişmeyecektir.
@@ -209,7 +221,7 @@ Her ek ölçek birimi API Management için iki IP adresi gerekir.
 + Yük dengeli genel IP adresi, Azure portal genel bakış/Essentials dikey penceresinde bulunabilir.
 
 ## <a name="limitations"></a><a name="limitations"> </a>Sınırlamalar
-* API Management örnekleri içeren bir alt ağ başka hiçbir Azure Kaynak türünü içeremez.
+* API sürüm 2020-12-01 ve önceki sürümlerini kullanan istemciler için API Management örnekleri içeren bir alt ağ başka hiçbir Azure Kaynak türünü içeremez.
 * Alt ağ ve API Management hizmeti aynı abonelikte olmalıdır.
 * API Management örnekleri içeren bir alt ağ abonelikler arasında taşınamaz.
 * Dahili sanal ağ modunda yapılandırılan çok bölgeli API Management dağıtımlarda, kullanıcılar, yönlendirmeye sahip oldukları gibi birden çok bölgede yük dengelemeyi yönetmekten sorumludur.

@@ -7,12 +7,12 @@ ms.topic: conceptual
 author: trkeya
 ms.author: trkeya
 ms.date: 09/04/2020
-ms.openlocfilehash: 8b500a87613dee094c63e71fc76fb751d72aa049
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c9aa3c7258ceba73215e2b003e92bc43676ce6a7
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94491163"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818935"
 ---
 # <a name="offer-publishing-guide-for-microsoft-365-dynamics-365-power-apps-and-power-bi"></a>Microsoft 365, Dynamics 365, Power Apps ve Power BI için sunulan Yayımlama Kılavuzu
 
@@ -29,7 +29,7 @@ Her teklif türü için işlem ve yönergeleri yayımlamaya yönelik bağlantıl
 | Microsoft 365 | [Yayımlama işlemini ve yönergeleri](/office/dev/store/submit-to-appsource-via-partner-center)gözden geçirin. |
 | Dynamics 365 Business Central | Bir teklifi Iş Ortağı Merkezi 'nde yayımlamak için bkz. [Yeni Dynamics 365 Iş Merkezi teklifi oluşturma](./partner-center-portal/create-new-business-central-offer.md). |
 | Finans ve Operasyon için Dynamics 365 | Enterprise Edition için derleme yaparken [yayımlama işlemini ve yönergeleri](/dynamics365/fin-ops-core/dev-itpro/lcs-solutions/lcs-solutions-app-source)gözden geçirin.<br/>Bir teklifi Iş Ortağı Merkezi 'nde yayımlamak için bkz. [Yeni Dynamics 365 for Operations teklifi oluşturma](./partner-center-portal/create-new-operations-offer.md).  |
-| Müşteri Etkileşimi için Dynamics 365 | [Yayımlama işlemini ve yönergeleri](/dynamics365/customer-engagement/developer/publish-app-appsource)gözden geçirin.<br/>Iş Ortağı Merkezi 'nde bir teklif yayımlamak için bkz. [Power Apps için yeni Dynamics 365 for Customer Engagement & oluşturma](./partner-center-portal/create-new-customer-engagement-offer.md).  |
+| Power Apps & müşteri katılımı için Dynamics 365 | [Yayımlama işlemini ve yönergeleri](/dynamics365/customer-engagement/developer/publish-app-appsource)gözden geçirin.<br/>Bir teklifi Iş Ortağı Merkezi 'nde yayımlamak için bkz. [Power Apps Için Dynamics 365 for Customer Engagement & oluşturma](dynamics-365-customer-engage-offer-setup.md).  |
 | Power Apps | [Müşterilerin uygulamanızı AppSource 'ta nasıl test edelim](https://powerapps.microsoft.com/blog/appsource-test-drive/)hakkında bilgi edinin. |
 | Power BI | [Yayımlama işlemini ve yönergeleri](/power-bi/developer/office-store)gözden geçirin. |
 

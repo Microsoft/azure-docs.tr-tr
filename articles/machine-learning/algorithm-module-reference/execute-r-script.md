@@ -147,7 +147,7 @@ Tasarımcıda depolanan veri kümeleri, bu modülle yüklendiğinde otomatik ola
 1. **R betiği** metin kutusuna geçerli R betiği yazın veya yapıştırın.
 
     > [!NOTE]
-    > Betiğinizi yazarken dikkatli olun. Bildirilmemiş değişkenleri veya içeri aktarılmayan modülleri veya işlevleri kullanma gibi sözdizimi hatası olmadığından emin olun. Bu makalenin sonundaki önceden yüklenmiş paket listesine daha fazla dikkat ödeyin. Listelenmeyen paketleri kullanmak için, onları betiğe yüklersiniz. `install.packages("zoo",repos = "http://cran.us.r-project.org")` bunun bir örneğidir.
+    > Betiğinizi yazarken dikkatli olun. Bildirilmemiş değişkenleri veya içeri aktarılmayan modülleri veya işlevleri kullanma gibi sözdizimi hatası olmadığından emin olun. Bu makalenin sonundaki önceden yüklenmiş paket listesine daha fazla dikkat ödeyin. Listelenmeyen paketleri kullanmak için, onları betiğe yüklersiniz. `install.packages("zoo&quot;,repos = &quot;http://cran.us.r-project.org")` bunun bir örneğidir.
     
     Başlamanıza yardımcı olmak için **R betiği** metin kutusu, düzenlenebilir veya değiştirilebilir örnek kodla önceden doldurulur.
     

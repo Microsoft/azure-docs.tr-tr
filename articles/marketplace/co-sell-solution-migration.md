@@ -8,12 +8,12 @@ author: vamahtan
 ms.author: vamahtan
 ms.reviewer: stmummer
 ms.date: 3/04/2021
-ms.openlocfilehash: 7ffb5a3dfd23a1515c6d21784b82ccdbf0674f0e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: bb954a32a4e598c45578d4b06606bc133babb50d
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104593416"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107161"
 ---
 # <a name="migration-of-co-sell-solutions-from-ocp-gtm-to-the-commercial-marketplace"></a>OCP GTM 'den ticari Market 'e ortak satış çözümlerini geçirme
 
@@ -32,7 +32,7 @@ Ticari Market 'e kayıtlı bir Microsoft iş ortağı olarak şunları yapabilir
 Etkin bir Microsoft İş Ortağı Ağı üyeliğiniz olduğundan ve Iş Ortağı Merkezi 'nde ticari Market 'e kayıtlı olduğunuzdan emin olun.
 
 - [Microsoft iş ortağı ağı ücretsiz](https://partner.microsoft.com/dashboard/account/v3/enrollment/introduction/partnership)olarak ekleyin. İş ortağı olarak, işinizi büyütmek için özel kaynaklara, programlara, araçlara ve bağlantılara erişebilirsiniz.
-- Ticari Market 'te hesabınız yoksa, Microsoft ile ortak satış yapmaya devam etmek ve tam yayımlama deneyimine erişmek için [Şimdi kaydolun](partner-center-portal/create-account.md) .
+- Ticari Market 'te hesabınız yoksa, Microsoft ile ortak satış yapmaya devam etmek ve tam yayımlama deneyimine erişmek için [Şimdi kaydolun](create-account.md) .
 
 ## <a name="publishing-updates-for-attaining-co-sell-ready-status"></a>Ortak satış için hazırlık durumunu çalıştırmaya yönelik güncelleştirmeler yayımlanıyor
 
@@ -45,7 +45,7 @@ Ticari Market 'e kaydolduktan sonra, çözümlerinizi OCP GTM 'den geçirmeye ha
 
 Çözümlerinizi OCP GTM 'den içeri aktarmadan önce şu adımları izleyin:
 
-1. Şirketinizin [Yayımcı listesini](https://partner.microsoft.com/dashboard/account/v3/publishers/list)ziyaret edin. Bu, erişimi yayımlayan hesap sahibini, yöneticileri ve geliştiricileri içerir. [Iş Ortağı Merkezi Kullanıcı rolleri](./partner-center-portal/manage-account.md#define-user-roles-and-permissions)hakkında daha fazla bilgi edinin.
+1. Şirketinizin [Yayımcı listesini](https://partner.microsoft.com/dashboard/account/v3/publishers/list)ziyaret edin. Bu, erişimi yayımlayan hesap sahibini, yöneticileri ve geliştiricileri içerir. [Iş Ortağı Merkezi Kullanıcı rolleri](user-roles.md)hakkında daha fazla bilgi edinin.
 2. Yalnızca bu roller tarafından düzenlenebilir ve yayımlayabildiği için, listelenen kişilerden birini *yönetici* veya *Geliştirici* olarak ticari Market 'e [eklemek](https://partner.microsoft.com/dashboard/account/usermanagement) üzere sorun.
 3. Çözümlerinizi OCP GTM hesabınızdan ticari Market 'e taşımak için geliştiricilerinizden çalışın.
 4. Aşağıdakilerden hangisi yapmak istediğinize karar verin:
@@ -97,7 +97,7 @@ Ticari Market 'te henüz sunulan bir teklifi olmayan bir OCP GTM çözümünüz 
 
     [![Geçiş işleminin işlem 1 sekmesi.](media/co-sell-migrate/action-1-migrate.png)](media/co-sell-migrate/action-1-migrate.png#lightbox)
 
-1. **Eylem 2** sekmesinde, belirtilen listeden [Yayımcı profilini](partner-center-portal/create-account.md) seçin. Yayımcı hesabınız yoksa, [Iş Ortağı Merkezi](https://partner.microsoft.com/solutions/migration)' nde bir tane oluşturun ve buradan seçin.
+1. **Eylem 2** sekmesinde, belirtilen listeden [Yayımcı profilini](create-account.md) seçin. Yayımcı hesabınız yoksa, [Iş Ortağı Merkezi](https://partner.microsoft.com/solutions/migration)' nde bir tane oluşturun ve buradan seçin.
 
     [![Geçiş işleminin eylem 2 sekmesi.](media/co-sell-migrate/action-2-migrate.png)](media/co-sell-migrate/action-2-migrate.png#lightbox)
 

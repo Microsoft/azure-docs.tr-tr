@@ -10,12 +10,12 @@ ms.service: cognitive-services
 ms.topic: conceptual
 ms.date: 12/18/2020
 ms.author: aahi
-ms.openlocfilehash: 003b4411ac791898f4a7467b9b03f29aadba2fc7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4641723ed1ad334ab9f960728f4986b03fd0ac99
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97704852"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106065897"
 ---
 # <a name="deploy-and-run-container-on-azure-container-instance"></a>Azure Container Örneğinde kapsayıcı dağıtma ve çalıştırma
 

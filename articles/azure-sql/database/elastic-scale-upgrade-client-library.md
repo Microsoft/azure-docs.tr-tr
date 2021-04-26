@@ -12,10 +12,10 @@ ms.author: sstein
 ms.reviewer: ''
 ms.date: 01/03/2019
 ms.openlocfilehash: 74aed815d011503cb6caea56cfad5e076bdcbfbd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92793424"
 ---
 # <a name="upgrade-an-app-to-use-the-latest-elastic-database-client-library"></a>En son elastik veritabanı istemci kitaplığını kullanmak için bir uygulamayı yükseltme

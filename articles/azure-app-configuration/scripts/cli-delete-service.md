@@ -10,12 +10,12 @@ ms.topic: sample
 ms.date: 02/19/2020
 ms.author: alkemper
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 49d6a85faa55de5dbf50377998dbe2fc829d9f6f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 07c4ac3234dc67978f16f6c0c7e0702924bf2bb5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96929795"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107768958"
 ---
 # <a name="delete-an-azure-app-configuration-store"></a>Azure uygulama yapılandırma deposunu silme
 
@@ -44,7 +44,7 @@ Bu betik, bir uygulama yapılandırma deposunu silmek için aşağıdaki komutla
 
 | Komut | Notlar |
 |---|---|
-| [az appconfig Delete](/cli/azure/appconfig#az-appconfig-delete) | Bir uygulama yapılandırma deposu kaynağını siler. |
+| [az appconfig Delete](/cli/azure/appconfig#az_appconfig_delete) | Bir uygulama yapılandırma deposu kaynağını siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

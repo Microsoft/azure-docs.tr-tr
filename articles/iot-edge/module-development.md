@@ -8,12 +8,12 @@ ms.date: 11/10/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: a30b4b056d56e096f80b9494ab80a585fff76e66
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6274d0f0265220877938775ab6efd72ff22b84e4
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103489944"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107031141"
 ---
 # <a name="develop-your-own-iot-edge-modules"></a>Kendi IoT Edge modüllerinizi geliştirin
 
@@ -134,7 +134,7 @@ IoT Edge, gereksinimlerinize uyan senaryoyu oluşturabilmeniz için birden çok 
 
 ### <a name="linux"></a>Linux
 
-Aşağıdaki tablodaki tüm diller için IoT Edge AMD64 ve ARM32 Linux cihazları için geliştirmeyi destekler.
+Aşağıdaki tablodaki tüm diller için IoT Edge AMD64 ve ARM32 Linux kapsayıcıları için geliştirmeyi destekler.
 
 | Geliştirme dili | Geliştirme araçları |
 | -------------------- | ----------------- |
@@ -145,16 +145,30 @@ Aşağıdaki tablodaki tüm diller için IoT Edge AMD64 ve ARM32 Linux cihazlar�
 | Python | Visual Studio Code |
 
 >[!NOTE]
->ARM64 Linux cihazları için geliştirme ve hata ayıklama desteği [genel önizlemeye](https://azure.microsoft.com/support/legal/preview-supplemental-terms/)sunuldu. Daha fazla bilgi için bkz. [Visual Studio Code IoT Edge modüllerini geliştirme ve hata ayıklama (Önizleme)](https://devblogs.microsoft.com/iotdev/develop-and-debug-arm64-iot-edge-modules-in-visual-studio-code-preview).
+>ARM64 Linux kapsayıcıları için geliştirme ve hata ayıklama desteği [genel önizlemeye](https://azure.microsoft.com/support/legal/preview-supplemental-terms/)sunuldu. Daha fazla bilgi için bkz. [Visual Studio Code IoT Edge modüllerini geliştirme ve hata ayıklama (Önizleme)](https://devblogs.microsoft.com/iotdev/develop-and-debug-arm64-iot-edge-modules-in-visual-studio-code-preview).
 
 ### <a name="windows"></a>Windows
 
-Aşağıdaki tablodaki tüm diller için IoT Edge AMD64 Windows cihazları için geliştirmeyi destekler.
+<!-- 1.1 -->
+:::moniker range="iotedge-2018-06"
+Aşağıdaki tablodaki tüm diller için IoT Edge AMD64 Windows kapsayıcıları için geliştirmeyi destekler.
 
 | Geliştirme dili | Geliştirme araçları |
 | -------------------- | ----------------- |
 | C | Visual Studio 2017/2019 |
 | C# | Visual Studio Code (hata ayıklama özellikleri yok)<br>Visual Studio 2017/2019 |
+:::moniker-end
+<!-- end 1.1 -->
+
+<!-- 1.2 -->
+:::moniker range=">=iotedge-2020-11"
+
+IoT Edge 1,1 LTS, Windows kapsayıcılarını destekleyen son sürüm kanaldır. Sürüm 1,2 ' den başlayarak Windows kapsayıcıları desteklenmez.
+
+Windows kapsayıcılarıyla geliştirme hakkında daha fazla bilgi için bu makalenin [IoT Edge 1,1](?view=iotedge-2018-06&preserve-view=true) sürümüne bakın.
+
+:::moniker-end
+<!-- end 1.2 -->
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -394,26 +394,26 @@
               href: iot-hub-arduino-iot-devkit-az3166-mqtt-helloworld.md
             - name: Manyetik algılayıcıyı izleme ve Azure İşlevleri ile e-posta bildirimleri gönderme
               href: iot-hub-arduino-iot-devkit-az3166-door-monitor.md
-        - name: Genişletilmiş IoT senaryoları
-          items:
-            - name: VS Code için Azure IoT Araçları ile bulut cihazı mesajlaşmasını yönetme
-              href: iot-hub-vscode-iot-toolkit-cloud-device-messaging.md
-            - name: Visual Studio için Cloud Explorer ile bulut cihazı mesajlaşmasını yönetme
-              href: iot-hub-visual-studio-cloud-device-messaging.md
-            - name: Power BI’da Veri Görselleştirme
-              href: iot-hub-live-data-visualization-in-power-bi.md
-            - name: Web uygulamasında Veri Görselleştirme
-              href: iot-hub-live-data-visualization-in-web-apps.md
-            - name: Azure Machine Learning kullanarak hava durumu tahmini
-              href: iot-hub-weather-forecast-machine-learning.md
-            - name: VS Code için Azure IoT Araçları ile cihaz yönetimi
-              href: iot-hub-device-management-iot-toolkit.md
-            - name: Visual Studio için Cloud Explorer ile cihaz yönetimi
-              href: iot-hub-device-management-visual-studio.md
-            - name: Azure CLI için IoT uzantısıyla cihaz yönetimi
-              href: iot-hub-device-management-iot-extension-azure-cli-2-0.md
-            - name: Logic Apps ile uzaktan izleme ve bildirimler
-              href: iot-hub-monitoring-notifications-with-azure-logic-apps.md
+    - name: Genişletilmiş IoT senaryoları
+      items:
+        - name: VS Code için Azure IoT Araçları ile bulut cihazı mesajlaşmasını yönetme
+          href: iot-hub-vscode-iot-toolkit-cloud-device-messaging.md
+        - name: Visual Studio için Cloud Explorer ile bulut cihazı mesajlaşmasını yönetme
+          href: iot-hub-visual-studio-cloud-device-messaging.md
+        - name: Power BI’da Veri Görselleştirme
+          href: iot-hub-live-data-visualization-in-power-bi.md
+        - name: Web uygulamasında Veri Görselleştirme
+          href: iot-hub-live-data-visualization-in-web-apps.md
+        - name: Azure Machine Learning kullanarak hava durumu tahmini
+          href: iot-hub-weather-forecast-machine-learning.md
+        - name: VS Code için Azure IoT Araçları ile cihaz yönetimi
+          href: iot-hub-device-management-iot-toolkit.md
+        - name: Visual Studio için Cloud Explorer ile cihaz yönetimi
+          href: iot-hub-device-management-visual-studio.md
+        - name: Azure CLI için IoT uzantısıyla cihaz yönetimi
+          href: iot-hub-device-management-iot-extension-azure-cli-2-0.md
+        - name: Logic Apps ile uzaktan izleme ve bildirimler
+          href: iot-hub-monitoring-notifications-with-azure-logic-apps.md
     - name: Sorun giderme ve sorun çözümü
       items:
         - name: Cihaz bağlantısının kesilmesi
@@ -454,7 +454,7 @@
               href: iot-hub-troubleshoot-error-504101-gatewaytimeout.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
+    - name: Azure CLI
       href: /cli/azure/azure-cli-reference-for-IoT
     - name: Azure PowerShell
       href: /powershell/module/az.iothub#iothub
@@ -547,8 +547,8 @@
           href: 'https://azure.microsoft.com/resources/samples/azure-iot-samples-python/'
         - name: iOS Platformu
           href: 'https://azure.microsoft.com/resources/samples/azure-iot-samples-ios/'
-    - name: IoT için Azure Sertifikalı cihaz kataloğu
-      href: 'https://catalog.azureiotsolutions.com/'
+    - name: Azure Sertifikalı cihaz kataloğu
+      href: 'https://devicecatalog.azure.com/'
     - name: Azure IoT Geliştirici Merkezi
       href: 'https://azure.microsoft.com/develop/iot/'
     - name: Müşteri verisi istekleri

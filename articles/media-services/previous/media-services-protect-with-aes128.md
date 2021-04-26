@@ -15,19 +15,19 @@ ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 7dacc01b37fb91f02fe67f76fe79c0bfa9375ea7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b4375e7b68f0b279a971e92775ca454f06dcbd45
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103009547"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106067342"
 ---
 # <a name="use-aes-128-dynamic-encryption-and-the-key-delivery-service"></a>AES-128 dinamik şifreleme ve anahtar dağıtım hizmetini kullanma
 
 [!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector"]
-> * [.NET](media-services-protect-with-aes128.md)
+> * [.NET](media-services-playready-license-template-overview.md)
 > * [Java](https://github.com/rnrneverdies/azure-sdk-for-media-services-java-samples)
 > * [PHP](https://github.com/Azure/azure-sdk-for-php/tree/master/examples/MediaServices)
 >  
@@ -55,7 +55,7 @@ Media Services anahtar teslim hizmetini ve ayrıca dinamik şifrelemeyi kullanar
 
 2. [Dosyayı içeren varlığı Uyarlamalı bit hızı MP4 kümesine kodlayın](media-services-protect-with-aes128.md#encode_asset).
 
-3. [Bir içerik anahtarı oluşturun ve kodlanmış varlıkla ilişkilendirin](media-services-protect-with-aes128.md#create_contentkey). Media Services’de, içerik anahtarı varlığın şifreleme anahtarını içerir.
+3. [Bir içerik anahtarı oluşturun ve kodlanmış varlıkla ilişkilendirin] Media-Services-Protect-with-AES128. MD # create_contentkey). Media Services’de, içerik anahtarı varlığın şifreleme anahtarını içerir.
 
 4. [İçerik anahtarının yetkilendirme Ilkesini yapılandırın](media-services-protect-with-aes128.md#configure_key_auth_policy). İçerik anahtarı yetkilendirme ilkesini yapılandırmanız gerekir. İçerik anahtarının istemciye teslim edilebilmesi için önce istemcinin ilkeyi karşılaması gerekir.
 

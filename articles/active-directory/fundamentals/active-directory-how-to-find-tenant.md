@@ -11,14 +11,14 @@ ms.topic: how-to
 ms.date: 10/30/2020
 ms.author: ajburnle
 ms.reviewer: jeffsta
-ms.custom: it-pro, devx-track-azurecli
+ms.custom: it-pro, devx-track-azurepowershell
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 910e68e5b8933875f252faf65fb58e514dee8254
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: cba823775849fdad8407c7bb697a53761e8ccbcd
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96326599"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764360"
 ---
 # <a name="how-to-find-your-azure-active-directory-tenant-id"></a>Azure Active Directory kiracı KIMLIĞINIZI bulma
 

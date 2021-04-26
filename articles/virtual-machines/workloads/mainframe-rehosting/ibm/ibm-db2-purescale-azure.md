@@ -11,10 +11,10 @@ ms.topic: how-to
 ms.date: 11/09/2018
 ms.author: edprice
 ms.openlocfilehash: 4ab0dfabc5fc4773413e7009bb8a16e6b77d5c09
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104950204"
 ---
 # <a name="ibm-db2-purescale-on-azure"></a>Azure 'da IBM DB2 pureScale

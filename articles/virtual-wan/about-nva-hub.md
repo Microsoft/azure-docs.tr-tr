@@ -7,19 +7,18 @@ ms.service: virtual-wan
 ms.topic: conceptual
 ms.date: 09/22/2020
 ms.author: scottnap
-Customer intent: As someone with a networking background, I want to learn about Network Virtual Appliances in the Virtual WAN hub.
-ms.openlocfilehash: 365ed60e73be9bb2098022fa767f4ae54b93c37c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7c3ae14cd409e7bfc9be77c1a593964b73a12ddc
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98028089"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791058"
 ---
 # <a name="about-network-virtual-appliance-in-an-azure-virtual-wan-hub-preview"></a>Bir Azure sanal WAN hub 'ında ağ sanal gereci hakkında (Önizleme)
 
 Azure sanal WAN, müşteri şirket Içi ekipmanlarını (CPE) sanal hub 'daki bir Azure VPN ağ geçidine bağlamayı kolaylaştıran bir Otomasyon oluşturmak için ağ ortaklarıyla çalıştı. Azure, müşterilerin bir üçüncü taraf ağ sanal gereci (NVA) doğrudan sanal hub 'a dağıtmasını sağlamak üzere Select Networking partner ile çalışmaktadır. Bu, kendi şubelerini sanal hub 'daki aynı marka NVA 'ya bağlamak isteyen müşterilerin, özel uçtan uca SD-WAN özelliğinden yararlanabilmeleri için bu özellikleri sağlar.
 
-Barbcuda ağları ve Cisco sistemleri, doğrudan sanal WAN hub 'ına dağıtılabilecek NVA 'lar sağlayan ilk iş ortaklarıdır.  İlgili ürün belgeleri için bkz. [Barracuda CloudGen WAN](https://www.barracuda.com/products/cloudgenwan) ve [Cisco Cloud onrampa](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/cloudonramp/ios-xe-17/cloud-onramp-book-xe/cloud-onramp-multi-cloud.html#Cisco_Concept.dita_c61e0e7a-fff8-4080-afee-47b81e8df701) . Azure daha fazla iş ortaklarıyla çalışmaktadır, bu nedenle diğer tekliflerin izlediğini görmek beklenir.
+Barbcuda ağları ve Cisco sistemleri, doğrudan sanal WAN hub 'ına dağıtılabilecek NVA 'lar sağlayan ilk iş ortaklarıdır.  İlgili ürün belgeleri için bkz. [Barracuda CloudGen WAN](https://www.barracuda.com/products/cloudgenwan), Multi-Cloud ve [VMware SD-WAN](https://kb.vmware.com/s/article/82746) [için Cisco Cloud onrampa](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/cloudonramp/ios-xe-17/cloud-onramp-book-xe/cloud-onramp-multi-cloud.html#Cisco_Concept.dita_c61e0e7a-fff8-4080-afee-47b81e8df701) . Azure daha fazla iş ortaklarıyla çalışmaktadır, bu nedenle diğer tekliflerin izlediğini görmek beklenir.
 
 > [!NOTE]
 > Yalnızca sanal WAN hub 'ına dağıtılabilecek olan NVA teklifleri sanal WAN hub 'ına dağıtılabilir. Azure 'da rastgele bir sanal ağa dağıtılamaz.
@@ -78,13 +77,14 @@ Sanal hub 'daki NVA aşağıdaki bölgelerde önizleme için kullanılabilir:
 
 |Coğrafi bölge | Azure bölgeleri|
 |---|---|
-| Kuzey Amerika| Batı ABD, Orta Güney ABD, Doğu ABD 2   |
-| Güney Amerika | Güney Brezilya |
-| Avrupa | Batı Avrupa, UK Güney|
+| Kuzey Amerika| Kanada Orta, Kanada Doğu, Orta ABD, Doğu ABD, Doğu ABD 2, Orta Kuzey ABD, Orta Batı ABD, Batı ABD, Batı ABD 2 |
+| Güney Amerika | Brezilya Güney, Brezilya Güneydoğu |
+| Avrupa | Fransa Orta, Fransa Güney, Almanya Kuzey, Almanya Orta Batı, Kuzey Avrupa, Norveç Doğu, Norveç Batı, İsviçre Kuzey, İsviçre Batı, UK Güney, UK Batı, Batı Avrupa|
 |  Orta Doğu | BAE Kuzey |
-| Asya | Doğu Japonya |
-| Avustralya | Doğu Avustralya |
-
+| Asya |  Doğu Asya, Japonya Doğu, Japonya Batı, Kore Orta, Kore Güney, Güneydoğu Asya | 
+| Avustralya | Avustralya Güney Doğu, Avustralya Doğu, Avustralya Orta Avustralya Orta 2|
+| Afrika | Güney Afrika - Kuzey |
+| Hindistan | Güney Hindistan, Batı Hindistan, Orta Hindistan | 
 ## <a name="faq"></a>SSS
 
 ### <a name="i-am-a-network-appliance-partner-and-want-to-get-our-nva-in-the-hub--can-i-join-this-partner-program"></a>Bir ağ gereci iş ortalıyorum ve merkezinde NVA 'yı almak istiyorum.  Bu iş ortağı programına katılabilir miyim?
@@ -93,7 +93,7 @@ Ne yazık ki, şu anda yeni iş ortağı tekliflerini şirket içi olarak kapayo
 
 ### <a name="can-i-deploy-any-nva-from-azure-marketplace-into-the-virtual-wan-hub"></a>Azure Marketi 'nden bir NVA 'yı sanal WAN hub 'ına dağıtabilir miyim?
 
-Şu anda, sanal WAN hub 'ına yalnızca [Barraycuda CloudGen WAN](https://aka.ms/BarracudaMarketPlaceOffer) ve [Cisco Cloud vwan uygulaması](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/cisco.cisco_cloud_vwan_app?tab=Overview) dağıtılabilir.
+Şu anda, sanal WAN hub 'ına yalnızca [Barbcuda CloudGen WAN](https://aka.ms/BarracudaMarketPlaceOffer)  [Cisco Cloud vwan uygulaması](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/cisco.cisco_cloud_vwan_app?tab=Overview) ve [VMware SD-WAN](https://aka.ms/vmwareMarketplaceLink) dağıtılır.
 
 ### <a name="what-is-the-cost-of-the-nva"></a>NVA 'nın maliyeti nedir?
 
@@ -105,7 +105,7 @@ Hayır. Bir NVA dağıtmak istiyorsanız, standart bir hub kullanmanız gerekir.
 
 ### <a name="can-i-deploy-an-nva-into-a-secure-hub"></a>Bir NVA 'yı güvenli bir hub 'a dağıtabilir miyim?
 
-Evet. Barbcuda CloudGen WAN, Azure Güvenlik Duvarı ile bir hub 'a dağıtılabilir.
+Evet. İş ortağı NVA 'ler, Azure Güvenlik Duvarı ile bir hub 'a dağıtılabilir.
 
 ### <a name="can-i-connect-any-cpe-device-in-my-branch-office-to-barracuda-cloudgen-wan-nva-in-the-hub"></a>Şube ofisindeki herhangi bir CPE cihazını hub 'daki Barnetcuda CloudGen WAN NVA 'ya bağlayabilir miyim?
 

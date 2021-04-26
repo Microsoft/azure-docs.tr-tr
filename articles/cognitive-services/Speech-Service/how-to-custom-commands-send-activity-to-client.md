@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 06/18/2020
 ms.author: xiaojul
-ms.openlocfilehash: 52a4dbc4ff01515af8cd7d2503877184a09f7e64
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 52e0b750f02044afafe233a76e4f43755d9ed303
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94566104"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725107"
 ---
 # <a name="send-custom-commands-activity-to-client-application"></a>İstemci uygulamasına özel komutlar etkinliği gönder
 
@@ -161,4 +161,4 @@ connector.ActivityReceived += async (sender, activityReceivedEventArgs) =>
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Nasıl yapılır: Web uç noktalarını ayarlama (Önizleme)](./how-to-custom-commands-setup-web-endpoints.md)
+> [Nasıl yapılır: Web uç noktalarını ayarlama](./how-to-custom-commands-setup-web-endpoints.md)

@@ -8,10 +8,10 @@ author: linda33wj
 ms.custom: seo-lt-2019
 ms.date: 03/17/2021
 ms.openlocfilehash: eae085a73e8f43813aa3f02fa910c7931f10f36c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104597428"
 ---
 # <a name="copy-and-transform-data-in-azure-sql-managed-instance-by-using-azure-data-factory"></a>Azure Data Factory kullanarak Azure SQL yönetilen örneğindeki verileri kopyalama ve dönüştürme
@@ -42,7 +42,7 @@ Kopyalama etkinliği için bu Azure SQL Veritabanı Bağlayıcısı şu işlevle
 
 SQL yönetilen örnek [genel uç noktasına](../azure-sql/managed-instance/public-endpoint-overview.md)erişmek için Azure Data Factory yönetilen bir Azure tümleştirme çalışma zamanı kullanabilirsiniz. Azure Data Factory veritabanınıza bağlanabilmesi için, genel uç noktasını etkinleştirdiğinizden ve ağ güvenlik grubunda ortak uç nokta trafiğine izin verdiğinizden emin olun. Daha fazla bilgi için [bu kılavuza](../azure-sql/managed-instance/public-endpoint-configure.md)bakın.
 
-SQL yönetilen örnek özel uç noktasına erişmek için, veritabanına erişebilen, [Şirket içinde barındırılan bir tümleştirme çalışma zamanı](create-self-hosted-integration-runtime.md) ayarlayın. Şirket içinde barındırılan tümleştirme çalışma zamanını yönetilen örneğiniz ile aynı sanal ağda temin ediyorsanız, tümleştirme çalışma zamanı makinenizin yönetilen örnekten farklı bir alt ağda olduğundan emin olun. Şirket içinde barındırılan tümleştirme çalışma zamanını yönetilen örneğinizle farklı bir sanal ağda temin ediyorsanız, sanal ağ eşlemesi veya sanal ağ bağlantısı kullanabilirsiniz. Daha fazla bilgi için bkz. [UYGULAMANıZı SQL yönetilen örneğine bağlama](../azure-sql/managed-instance/connect-application-instance.md).
+SQL yönetilen örnek özel uç noktasına erişmek için, veritabanına erişebilen, [Şirket içinde barındırılan bir tümleştirme çalışma zamanı](create-self-hosted-integration-runtime.md) ayarlayın. Şirket içinde barındırılan tümleştirme çalışma zamanını yönetilen örneğinizle aynı sanal ağda sağlıyorsanız, tümleştirme çalışma zamanı makinenizin yönetilen örneğinizden farklı bir alt ağda yer aldığından emin olun. Şirket içinde barındırılan tümleştirme çalışma zamanınızı yönetilen örneğinizden farklı bir sanal ağda sağlıyorsanız, sanal ağ bağlantısına bir sanal ağ eşlemesi veya sanal ağ kullanabilirsiniz. Daha fazla bilgi için bkz. [UYGULAMANıZı SQL yönetilen örneğine bağlama](../azure-sql/managed-instance/connect-application-instance.md).
 
 ## <a name="get-started"></a>başlarken
 

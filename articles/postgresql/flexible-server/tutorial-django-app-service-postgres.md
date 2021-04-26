@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: tutorial
 ms.date: 09/22/2020
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: bcc9ca0175e0e03c62c2ce2b91d8ec337756a3cc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 84fd0c368bcf39af1bae90dc83336ffdb8489768
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92490110"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791526"
 ---
 # <a name="tutorial-deploy-django-app-with-app-service-and-azure-database-for-postgresql---flexible-server-preview"></a>Öğretici: App Service ve PostgreSQL için Azure veritabanı ile Docgo uygulaması dağıtma-esnek sunucu (Önizleme)
 
@@ -105,7 +105,7 @@ Bu bölümde App Service uygulamasında uygulama konağı oluşturur, bu uygulam
 
 Terminalde, uygulama kodunu içeren depo kökünde olduğunuzdan emin olun `djangoapp` .
 
-Komutuyla bir App Service uygulaması (ana bilgisayar işlemi) oluşturun [`az webapp up`](/cli/azure/webapp#az-webapp-up) :
+Komutuyla bir App Service uygulaması (ana bilgisayar işlemi) oluşturun [`az webapp up`](/cli/azure/webapp#az_webapp_up) :
 
 ```azurecli
 
@@ -129,7 +129,7 @@ az webapp config appsettings set --settings DJANGO_ENV="production" DBHOST="<pos
 - Zaten etkinleştirilmemişse, uygulama için varsayılan günlüğü etkinleştirin.
 - Derleme Otomasyonu etkinken ZIP dağıtımını kullanarak depoyu karşıya yükleyin.
 - **az WebApp VNET-Integration** komutu, Web uygulamasını Postgres sunucusuyla aynı sanal ağa ekler.
-- Uygulama kodu, çeşitli ortam değişkenlerinde veritabanı bilgilerini bulmayı bekler. App Service ortam değişkenlerini ayarlamak için, [az WebApp config appSettings set](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) komutuyla "uygulama ayarları" oluşturursunuz.
+- Uygulama kodu, çeşitli ortam değişkenlerinde veritabanı bilgilerini bulmayı bekler. App Service ortam değişkenlerini ayarlamak için, [az WebApp config appSettings set](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) komutuyla "uygulama ayarları" oluşturursunuz.
 
 > [!TIP]
 > Birçok Azure CLı komutu, kaynak grubunun adı ve App Service planı gibi ortak parametreleri önbelleğe *. Azure/config* dosyasına dönüştürür. Sonuç olarak, sonraki komutlarla aynı parametreyi belirtmeniz gerekmez. Örneğin, değişiklikleri yaptıktan sonra uygulamayı yeniden dağıtmak için `az webapp up` herhangi bir parametre olmadan yalnızca tekrar çalıştırabilirsiniz.

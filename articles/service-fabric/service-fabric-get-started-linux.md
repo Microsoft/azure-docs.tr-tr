@@ -4,12 +4,12 @@ description: Linux üzerinde çalışma zamanını ve SDK'yı yükleyip yerel bi
 ms.topic: conceptual
 ms.date: 10/16/2020
 ms.custom: devx-track-js
-ms.openlocfilehash: 14b8a278605a908b4182c724831b2e42de54a753
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: fcf0aeec27415d03c528e42ad5341a92bd299d88
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93086899"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869410"
 ---
 # <a name="prepare-your-development-environment-on-linux"></a>Linux üzerinde geliştirme ortamınızı hazırlama
 > [!div class="op_single_selector"]
@@ -261,7 +261,7 @@ Oluşturucuları yükledikten sonra, sırasıyla `yo azuresfguest` ve `yo azures
 
 ## <a name="set-up-net-core-31-development"></a>.NET Core 3,1 geliştirmeyi ayarlama
 
-[C# Service Fabric uygulamaları oluşturmaya](service-fabric-create-your-first-linux-application-with-csharp.md)başlamak Için [Ubuntu için .NET Core 3,1 SDK 'sını](https://www.microsoft.com/net/core#linuxubuntu) yükler. .NET Core Service Fabric uygulamaları için paketler NuGet.org üzerinde barındırılır.
+[C# Service Fabric uygulamaları oluşturmaya](service-fabric-create-your-first-linux-application-with-csharp.md)başlamak Için [Ubuntu için .NET Core 3,1 SDK 'sını](/dotnet/core/install/linux-ubuntu) yükler. .NET Core Service Fabric uygulamaları için paketler NuGet.org üzerinde barındırılır.
 
 ## <a name="set-up-java-development"></a>Java ile geliştirmeyi ayarlama
 

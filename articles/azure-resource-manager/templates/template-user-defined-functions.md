@@ -2,13 +2,13 @@
 title: Şablonlarda Kullanıcı tanımlı işlevler
 description: Bir Azure Resource Manager şablonunda (ARM şablonu) Kullanıcı tanımlı işlevlerin nasıl tanımlanacağını ve kullanılacağını açıklar.
 ms.topic: conceptual
-ms.date: 02/11/2021
-ms.openlocfilehash: 9c7480958e6315c8aea1fd8d12613bcf9d606723
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/12/2021
+ms.openlocfilehash: 802ac6e1c70db8caa58aecde3efe814430c79682
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100379633"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107307784"
 ---
 # <a name="user-defined-functions-in-arm-template"></a>ARM şablonunda Kullanıcı tanımlı işlevler
 
@@ -107,6 +107,7 @@ Bir Kullanıcı işlevi tanımlarken bazı kısıtlamalar vardır:
 * İşlevi yalnızca işlevinde tanımlanan parametreleri kullanabilir. Kullanıcı tanımlı bir işlev içinde [Parameters](template-functions-deployment.md#parameters) işlevini kullandığınızda, bu işlevin parametreleriyle sınırlandırılırsınız.
 * İşlev, Kullanıcı tanımlı diğer işlevleri çağıramaz.
 * İşlev, [başvuru](template-functions-resource.md#reference) işlevini veya [liste](template-functions-resource.md#list) işlevlerinden hiçbirini kullanamaz.
+* İşlev [Datetimeadd](template-functions-date.md#datetimeadd) işlevini kullanamaz.
 * İşlevin parametreleri varsayılan değerlere sahip olamaz.
 
 ## <a name="next-steps"></a>Sonraki adımlar

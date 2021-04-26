@@ -4,12 +4,12 @@ ms.service: media-services
 ms.topic: include
 ms.date: 09/16/2020
 ms.author: jroth
-ms.openlocfilehash: c315c071aeb36eea0bd1af84b1344cf2fef5f703
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: f4bdd5332b3c10cf375c7c04ede25137328714a2
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91329677"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106073126"
 ---
 >[!NOTE]
 >Düzeltilmeyen kaynaklar için, kotalarda artış istemek üzere bir destek bileti açın. Daha yüksek limitleri elde etmeye yönelik bir denemede ek Azure Media Services hesapları oluşturmayın.
@@ -41,7 +41,7 @@ ms.locfileid: "91329677"
 
 <sup>3</sup> İş varlıklarını listelemek için bir istek yaptığınızda, istek başına en fazla 1.000 iş döndürülür. Gönderilen tüm işleri izlemek için, [OData sistem sorgu seçenekleri](/previous-versions/dynamicscrm-2015/developers-guide/gg309461(v=crm.7))' nde açıklandığı gibi en üstteki veya sorguları atla ' yı kullanın.
 
-<sup>4</sup> Konumlandırıcı, Kullanıcı başına erişim denetimini yönetmek için tasarlanmamıştır. Bireysel kullanıcılara farklı erişim hakları vermek için dijital hak yönetimi (DRM) çözümlerini kullanın. Daha fazla bilgi için bkz. [Azure Media Services Içeriğinizi koruma](../articles/media-services/previous/media-services-content-protection-overview.md).
+<sup>4</sup> Konumlandırıcı, Kullanıcı başına erişim denetimini yönetmek için tasarlanmamıştır. Bireysel kullanıcılara farklı erişim hakları vermek için dijital hak yönetimi (DRM) çözümlerini kullanın. Daha fazla bilgi için bkz. [Azure Media Services Içeriğinizi koruma](../articles/media-services/latest/drm-content-protection-concept.md).
 
 <sup>5</sup> Depolama hesapları aynı Azure aboneliğinden olmalıdır.
 

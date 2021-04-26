@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 07/31/2019
 ms.author: sharrai
 ms.custom: mvc
-ms.openlocfilehash: 9cef163c1b53360222ca32a827552fa361e9dd40
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5209e715fab422a50e31810b5eb0d370d5fc61cd
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98874256"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792534"
 ---
 # <a name="protect-a-file-server-by-using-azure-site-recovery"></a>Azure Site Recovery kullanarak bir dosya sunucusunu koruma 
 
@@ -99,7 +99,7 @@ Aşağıdaki adımlar, Dosya Eşitleme özelliğinin kullanımıyla ilgili özet
 
 1. [Azure'da bir depolama hesabı oluşturun](../storage/common/storage-account-create.md?toc=/azure/storage/files/toc.json). Depolama hesaplarınız için okuma erişimli coğrafi olarak yedekli depolama seçeneğini kullanırsanız olağanüstü durum gerçekleştiğinde ikincil bölgedeki verilerinize okuma erişimine sahip olursunuz. Daha fazla bilgi için bkz. [olağanüstü durum kurtarma ve depolama hesabı yük devretme](../storage/common/storage-disaster-recovery-guidance.md?toc=%2fazure%2fstorage%2ffiless%2ftoc.json).
 2. [Dosya paylaşma oluşturun](../storage/files/storage-how-to-create-file-share.md).
-3. Azure dosya sunucunuzda [Dosya Eşitleme'yi başlatın](../storage/files/storage-sync-files-deployment-guide.md).
+3. Azure dosya sunucunuzda [Dosya Eşitleme'yi başlatın](../storage/file-sync/file-sync-deployment-guide.md).
 4. Eşitleme grubu oluşturun. Bir eşitleme grubu içindeki uç noktalar, birbiriyle eşitlenmiş durumda tutulur. Eşitleme grubu, bir Azure dosya paylaşımını temsil eden bir bulut uç noktası içermelidir. Eşitleme grubu ayrıca bir Windows sunucusu üzerindeki yolu temsil eden bir sunucu uç noktası içermelidir.
 5. Dosyalarınız artık Azure dosya paylaşımında ve şirket içi sunucunuzda eşitlenmiş durumdadır.
 6. Şirket içi ortamınızda olağanüstü durum oluşması halinde bir [kurtarma planı](site-recovery-create-recovery-plans.md) kullanarak yük devretme gerçekleştirin. [Azure dosya paylaşımını takma](../storage/files/storage-how-to-use-files-windows.md) ve paylaşıma sanal makinenizden erişme betiğini ekleyin.
@@ -148,7 +148,7 @@ Dosya Eşitleme'yi kullanmak için şu adımları izleyin:
 
 1. [Azure'da bir depolama hesabı oluşturun](../storage/common/storage-account-create.md?toc=/azure/storage/files/toc.json). Depolama hesaplarınız için okuma erişimli coğrafi olarak yedekli depolama seçeneğini kullanırsanız (önerilir) olağanüstü durum gerçekleştiğinde ikincil bölgedeki verilerinize okuma erişimine sahip olursunuz. Daha fazla bilgi için bkz. [olağanüstü durum kurtarma ve depolama hesabı yük devretme](../storage/common/storage-disaster-recovery-guidance.md?toc=%2fazure%2fstorage%2ffiless%2ftoc.json)..
 2. [Dosya paylaşma oluşturun](../storage/files/storage-how-to-create-file-share.md).
-3. [Dosya Eşitleme'yi](../storage/files/storage-sync-files-deployment-guide.md) şirket içi dosya sunucunuza dağıtın.
+3. [Dosya Eşitleme'yi](../storage/file-sync/file-sync-deployment-guide.md) şirket içi dosya sunucunuza dağıtın.
 4. Eşitleme grubu oluşturun. Bir eşitleme grubu içindeki uç noktalar, birbiriyle eşitlenmiş durumda tutulur. Eşitleme grubu, bir Azure dosya paylaşımını temsil eden bir bulut uç noktası içermelidir. Eşitleme grubu ayrıca şirket içi Windows sunucusu üzerindeki yolu temsil eden bir sunucu uç noktası içermelidir.
 5. Dosyalarınız artık Azure dosya paylaşımında ve şirket içi sunucunuzda eşitlenmiş durumdadır.
 6. Şirket içi ortamınızda olağanüstü durum oluşması halinde bir [kurtarma planı](site-recovery-create-recovery-plans.md) kullanarak yük devretme gerçekleştirin. Azure dosya paylaşımını takma ve paylaşıma sanal makinenizden erişme betiğini ekleyin.

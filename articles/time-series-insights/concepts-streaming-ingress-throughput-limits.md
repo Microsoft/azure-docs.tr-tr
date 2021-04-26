@@ -1,21 +1,21 @@
 ---
 title: Akış alma işleme sınırlamaları-Azure Time Series Insights Gen2 | Microsoft Docs
 description: Azure Time Series Insights Gen2 'de giriş aktarım hızı sınırları hakkında bilgi edinin.
-author: lyrana
-ms.author: lyhughes
-manager: dpalled
+author: deepakpalled
+ms.author: dpalled
+manager: diviso
 ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
 ms.date: 01/21/2021
 ms.custom: seodec18
-ms.openlocfilehash: 72b78f49ed8b7016b92262de7256492fa6d5d7d1
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d86cc6af34036f5bd638b4fc78abdb54d71e6859
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98676810"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306526"
 ---
 # <a name="streaming-ingestion-throughput-limits"></a>Akış alma performansı sınırları
 
@@ -59,7 +59,7 @@ Azure Time Series Insights Gen2 ortamınızı planlarken, Azure Time Series Insi
 
 *Bölüm* , bir hub 'da tutulan olayların sıralı dizisidir. Bölüm sayısı, hub oluşturma aşamasında ayarlanır ve değiştirilemez.
 
-Event Hubs bölümlendirme en iyi uygulamaları için [kaç bölümden Ihtiyacım olduğunu](../event-hubs/event-hubs-faq.md#how-many-partitions-do-i-need) gözden geçirin.
+Event Hubs bölümlendirme en iyi uygulamaları için [kaç bölümden Ihtiyacım olduğunu](../event-hubs/event-hubs-faq.yml#how-many-partitions-do-i-need-) gözden geçirin.
 
 > [!NOTE]
 > Azure Time Series Insights Gen2 ile kullanılan birçok IoT Hub 'ı yalnızca dört bölüme ihtiyaç duyar.

@@ -1,18 +1,18 @@
 ---
 title: Kısıtlanmış cihazlarda IoT Tak ve Kullan kullanma | Microsoft Docs
 description: Katıştırılmış C veya Azure RTOS için SDK kullanarak, kısıtlı cihazlarda IoT Tak ve Kullan nasıl uygulayabileceğinizi öğrenin.
-author: elhorton
-ms.author: elhorton
+author: EliotSeattle
+ms.author: eliotgra
 ms.date: 09/23/2020
 ms.topic: how-to
 ms.service: iot-pnp
 services: iot-pnp
-ms.openlocfilehash: d61ca10612a0935f8483745d164835d7498280c0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6c792fbbb44b7dc769e7cdc56850684bd69ea40b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92042822"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864146"
 ---
 # <a name="implement-iot-plug-and-play-on-constrained-devices"></a>Kısıtlanmış cihazlarda IoT Tak ve Kullan uygulama
 

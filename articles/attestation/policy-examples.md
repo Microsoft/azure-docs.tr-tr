@@ -7,12 +7,12 @@ ms.service: attestation
 ms.topic: overview
 ms.date: 08/31/2020
 ms.author: mbaldwin
-ms.openlocfilehash: de003025e98109599ecd69c0459e29950c9bd1fd
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 9c29ec3dbc4d4f7d0a7abe0ff9a90fc0b7565272
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104950578"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106442567"
 ---
 # <a name="examples-of-an-attestation-policy"></a>Kanıtlama ilkesi örnekleri
 
@@ -43,19 +43,16 @@ Verme kuralları bölümü zorunlu değildir. Bu bölüm, Kullanıcı tarafında
 
 ```
 version= 1.0;
-authorizationrules
-{
-    c:[type=="$is-debuggable"] => permit();
+authorizationrules {
+    => permit();
 };
-
-issuancerules
-{
-    c:[type=="$is-debuggable"] => issue(type="is-debuggable", value=c.value);
-    c:[type=="$sgx-mrsigner"] => issue(type="sgx-mrsigner", value=c.value);
-    c:[type=="$sgx-mrenclave"] => issue(type="sgx-mrenclave", value=c.value);
-    c:[type=="$product-id"] => issue(type="product-id", value=c.value);
-    c:[type=="$svn"] => issue(type="svn", value=c.value);
-    c:[type=="$tee"] => issue(type="tee", value=c.value);
+issuancerules {
+    c:[type=="x-ms-sgx-is-debuggable"] => issue(type="is-debuggable", value=c.value);
+    c:[type=="x-ms-sgx-mrsigner"] => issue(type="sgx-mrsigner", value=c.value);
+    c:[type=="x-ms-sgx-mrenclave"] => issue(type="sgx-mrenclave", value=c.value);
+    c:[type=="x-ms-sgx-product-id"] => issue(type="product-id", value=c.value);
+    c:[type=="x-ms-sgx-svn"] => issue(type="svn", value=c.value);
+    c:[type=="x-ms-attestation-type"] => issue(type="tee", value=c.value);
 };
 ```
 

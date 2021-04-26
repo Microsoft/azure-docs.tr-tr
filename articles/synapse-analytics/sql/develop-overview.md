@@ -10,12 +10,12 @@ ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: fipopovi
 ms.reviewer: jrasnick
-ms.openlocfilehash: d47b4847a12b63532e44a8a1a47101dd065f811b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4d842414d3046692c982ca3203957a96f8a01b37
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96446590"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377339"
 ---
 # <a name="design-decisions-and-coding-techniques-for-synapse-sql-features-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te SYNAPSE SQL özellikleri için tasarım kararları ve kodlama teknikleri
 Bu makalede, Özel SQL havuzu ve SYNAPSE SQL 'in sunucusuz SQL havuzu işlevlerine yönelik kaynakların bir listesini bulacaksınız. Önerilen makaleler iki bölüme ayrılır: temel tasarım kararları ve geliştirme ve kodlama teknikleri.
@@ -46,7 +46,7 @@ Aşağıda, geliştirmeye yönelik belirli kodlama tekniklerini, ipuçlarını v
 
 | Makale | adanmış SQL havuzu | sunucusuz SQL havuzu |
 | ------- | -------- | ------------- |
-| [Saklı yordamlar](develop-stored-procedures.md)  | Yes                | Hayır                      |
+| [Saklı yordamlar](develop-stored-procedures.md)  | Yes                | Yes                      |
 | [Etiketler](develop-label.md)                           | Yes                | Hayır                      |
 | [Görünümler](develop-views.md)                             | Yes                | Yes                     |
 | [Geçici tablolar](develop-tables-temporary.md)       | Yes                | Yes                     |

@@ -6,12 +6,12 @@ ms.author: vivikram
 ms.manager: abhemraj
 ms.topic: conceptual
 ms.date: 03/18/2021
-ms.openlocfilehash: dadca1fadef9d2967f20cae13e40d01de73d39e4
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: d7fc04e65e2b79d43c48acd5a8c621f28d5c0403
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104778347"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714677"
 ---
 # <a name="azure-migrate-appliance"></a>Azure Geçişi gereci
 
@@ -128,7 +128,44 @@ download.microsoft.com/download | Microsoft İndirme Merkezi 'nden indirmelere i
 *. discoverysrv.windowsazure.us <br/> *. migration.windowsazure.us | Azure geçişi hizmeti URL 'Lerine bağlanın.
 *. hypervrecoverymanager.windowsazure.us | **VMware aracısız geçişi için kullanılır**<br/><br/> Azure geçişi hizmeti URL 'Lerine bağlanın.
 *. blob.core.usgovcloudapi.net  |  **VMware aracısız geçişi için kullanılır**<br/><br/>Geçiş için verileri depolamaya yükleyin.
-*. applicationinsights.us | İç izleme için kullanılan gereç günlüklerini karşıya yükleyin.
+*. applicationinsights.us | İç izleme için kullanılan gereç günlüklerini karşıya yükleyin.  
+
+### <a name="public-cloud-urls-for-private-link-connectivity"></a>Özel bağlantı bağlantısı için genel bulut URL 'Leri
+
+Gereç, özel bağlantı erişiminin üzerinde ve üzerinde aşağıdaki URL 'Lere (doğrudan veya proxy aracılığıyla) erişim gerektirir. 
+
+**URL** | **Ayrıntılar**  
+--- | --- | 
+*.portal.azure.com  | Azure portalına gidin.
+*.windows.net <br/> *.msftauth.net <br/> *.msauth.net <br/> *.microsoft.com <br/> *.live.com <br/> *. office.com | Azure aboneliğinizde oturum açın.
+*.microsoftonline.com <br/> *.microsoftonline-p.com | Gereç için Azure geçişi ile iletişim kurmak üzere Azure Active Directory (AD) uygulamalar oluşturun.
+management.azure.com | Azure geçişi ile iletişim kurmak için gereç için Azure AD uygulamaları oluşturun.
+*. services.visualstudio.com (isteğe bağlı) | İç izleme için kullanılan gereç günlüklerini karşıya yükleyin.
+aka.ms/* (isteğe bağlı) | Diğer adıyla bağlantılarına erişime izin ver; alet Hizmetleri için en son güncelleştirmeleri indirmek ve yüklemek için kullanılır.
+download.microsoft.com/download | Microsoft İndirme Merkezi 'nden indirmelere izin ver.
+*.servicebus.windows.net | **VMware aracısız geçişi için kullanılır**<br/><br/> Gereç ve Azure geçişi hizmeti arasındaki iletişim.
+*.vault.azure.net | **VMware aracısız geçişi için kullanılır**<br/><br/>  Çoğaltma sunucularının bu sunucuya erişimi olduğundan emin olun.
+*.hypervrecoverymanager.windowsazure.com | **VMware aracısız geçişi için kullanılır**<br/><br/> Azure geçişi hizmeti URL 'Lerine bağlanın.
+*.blob.core.windows.net |  **VMware aracısız geçişi için kullanılır**<br/><br/>Geçiş için verileri depolamaya yükleyin.
+
+### <a name="government-cloud-urls-for-private-link-connectivity"></a>Özel bağlantı bağlantısı için kamu bulutu URL 'Leri   
+
+Gereç, özel bağlantı erişiminin üzerinde ve üzerinde aşağıdaki URL 'Lere (doğrudan veya proxy aracılığıyla) erişim gerektirir. 
+
+**URL** | **Ayrıntılar**  
+--- | --- |
+*. portal.azure.us  | Azure portalına gidin.
+graph.windows.net | Azure aboneliğinizde oturum açın.
+login.microsoftonline.us  | Gereç için Azure geçişi ile iletişim kurmak üzere Azure Active Directory (AD) uygulamalar oluşturun.
+management.usgovcloudapi.net | Azure geçişi hizmeti ile iletişim kurmak için gereç için Azure AD uygulamaları oluşturun.
+*. services.visualstudio.com (isteğe bağlı) | İç izleme için kullanılan gereç günlüklerini karşıya yükleyin.
+aka.ms/* (isteğe bağlı) | Diğer adıyla bağlantılarına erişime izin ver; alet Hizmetleri için en son güncelleştirmeleri indirmek ve yüklemek için kullanılır.
+download.microsoft.com/download | Microsoft İndirme Merkezi 'nden indirmelere izin ver.
+*. servicebus.usgovcloudapi.net  | **VMware aracısız geçişi için kullanılır**<br/><br/> Gereç ve Azure geçişi hizmeti arasındaki iletişim. 
+*. vault.usgovcloudapi.net | **VMware aracısız geçişi için kullanılır**<br/><br/> Azure Key Vault gizli dizileri yönetin.
+*. hypervrecoverymanager.windowsazure.us | **VMware aracısız geçişi için kullanılır**<br/><br/> Azure geçişi hizmeti URL 'Lerine bağlanın.
+*. blob.core.usgovcloudapi.net  |  **VMware aracısız geçişi için kullanılır**<br/><br/>Geçiş için verileri depolamaya yükleyin.
+*. applicationinsights.us (isteğe bağlı) | İç izleme için kullanılan gereç günlüklerini karşıya yükleyin.  
 
 ## <a name="collected-data---vmware"></a>Toplanan veriler-VMware
 
@@ -500,16 +537,15 @@ Disk ayrıntıları | Win32_PerfFormattedData_PerfDisk_PhysicalDisk | DiskWrites
 
 Bu, gerecin topladığı ve Azure 'a gönderdiği Linux sunucu performansı verileri.
 
-**Veriler** | **Komutlar**
---- | ---
-CPU kullanımı | Cat/proc/stat/| grep ' CPU '/proc/stat
-Bellek kullanımı | ücretsiz \| grep mem \| awk ' {Print $3/$ 2 * 100,0} '
-NIC sayısı | lshw sınıfı ağ \| grep ETH [0-60] \| WC-l
-NIC başına alınan veri | Cat/sys/Class/net/ETH $ NIC/istatistikler/rx_bytes
-NIC başına aktarılan veriler | Cat/sys/Class/net/ETH $ NIC/istatistikler/tx_bytes
-Disk sayısı | Fdisk-l \| egrep ' disk. * bayt ' \| awk ' {Print $2} ' \| Kes-F1-d ': '
-Disk ayrıntıları | Cat/proc/diskstats
-
+| **Veriler** | **Komutlar** |
+| --- | --- |
+| CPU kullanımı | Cat/proc/stat/ \| grep ' CPU '/proc/stat |
+| Bellek kullanımı | ücretsiz \| grep mem \| awk ' {Print $3/$ 2 * 100,0} ' |
+| NIC sayısı | lshw sınıfı ağ \| grep ETH [0-60] \| WC-l |
+| NIC başına alınan veri | Cat/sys/Class/net/ETH $ NIC/istatistikler/rx_bytes |
+| NIC başına aktarılan veriler | Cat/sys/Class/net/ETH $ NIC/istatistikler/tx_bytes |
+| Disk sayısı | Fdisk-l \| egrep ' disk. \* bayt ' \| awk ' {print $2} ' \| Kes-F1-d ': ' |
+| Disk ayrıntıları | Cat/proc/diskstats |
 
 ## <a name="appliance-upgrades"></a>Gereç yükseltmeleri
 

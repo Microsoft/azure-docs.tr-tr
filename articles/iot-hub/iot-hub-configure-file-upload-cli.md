@@ -8,12 +8,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/08/2017
 ms.author: robinsh
-ms.openlocfilehash: 4dbda13ffe04e0a4214b24ccaca2b8103a39b9f2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ea6ec30ad5f3b1cdbc906cc94cb211295b84e802
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92536071"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107761736"
 ---
 # <a name="configure-iot-hub-file-uploads-using-azure-cli"></a>Azure CLı kullanarak IoT Hub dosya yüklemelerini yapılandırma
 
@@ -27,7 +27,7 @@ Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
 
 * [Azure CLI](/cli/azure/install-azure-cli).
 
-* Azure IoT Hub 'ı. IoT Hub 'ınız yoksa, [portalı kullanarak bir IoT Hub](iot-hub-create-through-portal.md)'ı oluşturmak veya oluşturmak için [ `az iot hub create` komutunu](/cli/azure/iot/hub#az-iot-hub-create) kullanabilirsiniz.
+* Azure IoT Hub 'ı. IoT Hub 'ınız yoksa, [portalı kullanarak bir IoT Hub](iot-hub-create-through-portal.md)'ı oluşturmak veya oluşturmak için [ `az iot hub create` komutunu](/cli/azure/iot/hub#az_iot_hub_create) kullanabilirsiniz.
 
 * Azure Depolama hesabı. Azure depolama hesabınız yoksa, Azure CLı kullanarak bir tane oluşturabilirsiniz. Daha fazla bilgi için bkz. [Depolama hesabı oluşturma](../storage/common/storage-account-create.md).
 

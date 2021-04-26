@@ -3,7 +3,7 @@ title: Azure DDoS koruma standardı için DDoS koruması telemetrisini görünt�
 description: Azure DDoS koruma standardı için DDoS koruması telemetrisini görüntülemeyi ve yapılandırmayı öğrenin.
 services: ddos-protection
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 ms.service: ddos-protection
 ms.devlang: na
 ms.topic: article
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 12/28/2020
 ms.author: yitoh
-ms.openlocfilehash: 0be184921ff0bd6b98dd2975acb4e0d5c8b26ba0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0a04c6c58f8bfa5370a6529b81a5a85090413a2a
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101716202"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107542"
 ---
 # <a name="view-and-configure-ddos-protection-telemetry"></a>DDoS konuma telemetrisini görüntüleme ve yapılandırma
 

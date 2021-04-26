@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: conceptual
 ms.date: 12/04/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 872a67d8d9f41c0c809df54304352b2a5f58e011
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: 00ae761af44b9e6537149c96607c0ba00e6439c8
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98251769"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107514994"
 ---
 # <a name="required-url-list"></a>Gerekli URL listesi
 
@@ -19,6 +19,52 @@ Windows sanal masaüstü 'Nü dağıtmak ve kullanmak için, sanal makineleriniz
 
 >[!IMPORTANT]
 >Windows sanal masaüstü, bu makalede listelenen URL 'Leri engelleyen dağıtımları desteklemez.
+
+## <a name="required-url-check-tool"></a>Gerekli URL denetimi aracı
+
+Gerekli URL denetimi aracı, URL 'Leri doğrular ve sanal makinenin çalışması için gereken URL 'Lerin erişilebilir olup olmadığını görüntüler. Aksi takdirde, araç erişilemeyen URL 'Leri listeler, bu sayede, gerekirse engellemesini kaldırabilirsiniz.
+
+Aşağıdaki şeyleri aklınızda tutmanız önemlidir:
+
+- Ticari bulutlarda yalnızca dağıtım için gerekli URL denetim aracını kullanabilirsiniz.
+- Gerekli URL Denetim Aracı, joker karakterleri olan URL 'Leri denetleyemiyorum, bu nedenle önce bu URL 'Lerin engelini kaldırmanız gerekir.
+
+### <a name="requirements"></a>Gereksinimler
+
+Gerekli URL denetim aracını kullanmak için aşağıdaki noktalara ihtiyacınız vardır:
+
+- VM 'niz bir .NET 4.6.2 çerçevesine sahip olmalıdır
+- Rdadgent sürüm 1.0.2944.400 veya üzeri
+- WVDAgentUrlTool.exe dosya WVDAgentUrlTool.config dosyası ile aynı klasörde olmalıdır
+
+### <a name="how-to-use-the-required-url-check-tool"></a>Gerekli URL denetim aracını kullanma
+
+Gerekli URL denetim aracını kullanmak için:
+
+1. VM 'niz üzerinde yönetici olarak bir komut istemi açın.
+2. Dizini derleme aracısıyla aynı klasöre değiştirmek için aşağıdaki komutu çalıştırın:
+
+    ```console
+    cd C:\Program Files\Microsoft RDInfra\RDAgent_1.0.2944.1200
+    ```
+
+3. Şu komutu çalıştırın:
+
+    ```console
+    WVDAgentUrlTool.exe
+    ```
+ 
+4. Dosyayı çalıştırdıktan sonra, erişilebilir ve erişilemeyen URL 'Lerin listesini görürsünüz.
+
+    Örneğin, aşağıdaki ekran görüntüsünde, iki adet gerekli joker karakter olmayan URL 'nin engellemesini kaldırmanız gereken bir senaryo gösterilmektedir:
+
+    > [!div class="mx-imgBorder"]
+    > ![Erişilebilir olmayan URL 'Lerin ekran görüntüsü.](media/noaccess.png)
+    
+    Tüm gerekli joker karakter olmayan URL 'Lerin engeli kaldırıldıktan sonra çıktının şöyle görünmesi gerekir:
+
+    > [!div class="mx-imgBorder"]
+    > ![Erişilebilir URL 'Ler çıktısının ekran görüntüsü.](media/access.png)
 
 ## <a name="virtual-machines"></a>Sanal makineler
 

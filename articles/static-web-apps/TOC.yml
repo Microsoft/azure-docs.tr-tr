@@ -67,8 +67,14 @@
           href: deploy-nextjs.md
         - name: Nuxt.js
           href: deploy-nuxtjs.md
+    - name: Mongoose.js ve Cosmos DB bir veritabanı ekleme
+      href: add-mongoose.md
     - name: Azure DevOps ile yayımlama
       href: publish-devops.md
+- name: Başvuru
+  items:
+    - name: Azure CLI
+      href: /cli/azure/staticwebapp
 - name: Kaynaklar
   items:
     - name: Microsoft Learn ile becerilerinizi geliştirin

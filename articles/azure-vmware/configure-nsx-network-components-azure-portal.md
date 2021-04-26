@@ -3,16 +3,16 @@ title: Azure VMware çözümünde NSX ağ bileşenlerini yapılandırma
 description: NSX-T ağ kesimlerini yapılandırmak için Azure VMware Çözüm konsolu 'nu nasıl kullanacağınızı öğrenin.
 ms.topic: how-to
 ms.date: 02/16/2021
-ms.openlocfilehash: 0478582a9bc4fb77a1784c27ec4f5c302d6b89fc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a4702efe8ea26234d074f421d2e6eab871eba5f5
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101716998"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105733147"
 ---
 # <a name="configure-nsx-network-components-in-azure-vmware-solution"></a>Azure VMware çözümünde NSX ağ bileşenlerini yapılandırma
 
-Azure VMware çözümü özel bulutu, varsayılan olarak, yazılım tanımlı ağ (SDDC) olarak NSX-T ile birlikte gelir. Etkin/etkin modda bir NSX-T katmanı 0 ağ geçidi ve etkin/bekleme modunda varsayılan NSX-T katman 1 ağ geçidi ile önceden sağlanmış olarak sunulur.  Bu ağ geçitleri, segmentleri (mantıksal anahtarlar) bağlamanıza ve East-West ve North-South bağlantısı sağlamanıza olanak tanır. 
+Azure VMware çözümü özel bulutu, varsayılan olarak, yazılım tanımlı ağ (SDDC) olarak NSX-T ile birlikte gelir. Etkin **/etkin** modda bir NSX-t katmanı 0 ağ geçidi ve etkin/bekleme modunda varsayılan NSX-t katman 1 ağ geçidi ile önceden sağlanmış olarak sunulur.  Bu ağ geçitleri, segmentleri (mantıksal anahtarlar) bağlamanıza ve East-West ve North-South bağlantısı sağlamanıza olanak tanır. 
 
 Azure VMware çözümü özel bulutu dağıtıldıktan sonra, gerekli NSX-T nesnelerini Azure VMware Çözüm konsolundan **Iş yükü ağı** altında yapılandırabilirsiniz.  Konsol, bir VMware yöneticisinin her gün ihtiyacı olan ve NSX-T ' y i bilmediğiniz kullanıcılara hedeflenmiş NSX-T işlemlerinin Basitleştirilmiş görünümünü sunar.  
 

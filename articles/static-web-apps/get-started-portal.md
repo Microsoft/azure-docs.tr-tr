@@ -3,16 +3,18 @@ title: 'Hızlı başlangıç: Azure portal kullanarak Azure statik Web Apps ile 
 description: Azure portal ile Azure statik Web Apps statik bir site dağıtmayı öğrenin.
 services: static-web-apps
 author: craigshoemaker
-ms.service: static-web-apps
-ms.topic: quickstart
-ms.date: 09/03/2020
 ms.author: cshoe
-ms.openlocfilehash: b19c37a45131e3689fdc9726d186f220ab5ba9fe
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 09/03/2020
+ms.topic: quickstart
+ms.service: static-web-apps
+ms.custom:
+- mode-portal
+ms.openlocfilehash: 78af2290a2e71d349303d3913f8a40510eb9c6a0
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103149537"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531581"
 ---
 # <a name="quickstart-building-your-first-static-site-in-the-azure-portal"></a>Hızlı başlangıç: Azure portal ilk statik sitenizi oluşturma
 
@@ -31,7 +33,7 @@ Azure aboneliğiniz yoksa [ücretsiz bir deneme hesabı oluşturun](https://azur
 
 Artık depo oluşturulduktan sonra, Azure portal statik bir Web uygulaması oluşturabilirsiniz.
 
-1. [Azure Portal](https://portal.azure.com) gidin
+1. [Azure portalına](https://portal.azure.com) gidin
 1. **Kaynak oluştur** ' u seçin
 1. **Statik Web Uygulamaları** için arama yapın
 1. **Statik Web Apps seçin (Önizleme)**

@@ -1,18 +1,15 @@
 ---
 title: Site Recovery ile Hyper-V (VMM ile) ağ eşlemesi hakkında
 description: Hyper-V VM 'lerinin (VMM bulutlarında yönetilen) olağanüstü durum kurtarma için ağ eşlemesinin, Azure Site Recovery ile Azure 'a nasıl ayarlanacağını açıklar.
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/14/2019
-ms.author: raynew
-ms.openlocfilehash: 6b68b4c943ec96620427978c2309f27e1fb1f217
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 98e6f9e7cb937551e111625845ba07d09482eff5
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "74082570"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581148"
 ---
 # <a name="prepare-network-mapping-for-hyper-v-vm-disaster-recovery-to-azure"></a>Azure 'da Hyper-V VM olağanüstü durum kurtarma için ağ eşlemeyi hazırlama
 

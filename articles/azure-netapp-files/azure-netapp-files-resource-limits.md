@@ -12,14 +12,14 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 01/29/2021
+ms.date: 04/20/2021
 ms.author: b-juche
-ms.openlocfilehash: c82e834c0af3737c1e5ef19c7aa789b94d87f6d8
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f023bfa2b3941f7d667f4be34a8ee8dc1ed9a9c3
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99095400"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107750203"
 ---
 # <a name="resource-limits-for-azure-netapp-files"></a>Azure NetApp Files için kaynak sınırları
 
@@ -45,6 +45,7 @@ Aşağıdaki tabloda Azure NetApp Files için kaynak sınırları açıklanmakta
 |  Tek bir dosyanın en büyük boyutu     |    16 TiB    |    No    |    
 |  Tek bir dizindeki dizin meta verilerinin en büyük boyutu      |    320 MB    |    No    |    
 |  Birim başına en fazla dosya sayısı ([maxfiles](#maxfiles))     |    100.000.000    |    Yes    |    
+|  Birim başına en fazla dışarı aktarma ilkesi kuralı sayısı     |    5  |    No    | 
 |  El ile QoS birimi için atanan en düşük aktarım hızı     |    1 MIB/sn   |    No    |    
 |  El ile QoS birimi için atanan en yüksek aktarım hızı     |    4.500 MIB/sn    |    No    |    
 |  Çapraz bölge çoğaltma verileri koruma birimlerinin sayısı (hedef birimler)     |    5    |    Yes    |     
@@ -55,7 +56,7 @@ Daha fazla bilgi için bkz. [Kapasite Yönetimi SSS](azure-netapp-files-faqs.md#
 
 ## <a name="maxfiles-limits"></a>Maxfiles limitleri <a name="maxfiles"></a> 
 
-Azure NetApp Files birimlerde *maxfiles* adlı bir sınır vardır. Maxfiles sınırı, bir birimin içerebileceği dosya sayısıdır. Bir Azure NetApp Files birimi için maxfiles limiti, birimin boyutuna (Kota) göre dizinlenir. Bir birim için maxfiles sınırı, sağlanan birim boyutu başına 20.000.000 dosya hızında artar veya azalır. 
+Azure NetApp Files birimlerde *maxfiles* adlı bir sınır vardır. Maxfiles sınırı, bir birimin içerebileceği dosya sayısıdır. Linux dosya sistemleri, sınır olarak ifade eder *.* Bir Azure NetApp Files birimi için maxfiles limiti, birimin boyutuna (Kota) göre dizinlenir. Bir birim için maxfiles sınırı, sağlanan birim boyutu başına 20.000.000 dosya hızında artar veya azalır. 
 
 Hizmet, bir birimin sağlanan boyutuna bağlı olarak maxfiles sınırını dinamik olarak ayarlar. Örneğin, başlangıçta 1 TiB boyutuyla yapılandırılan bir birimin maxfiles sınırı 20.000.000 olur. Birimin boyutuyla ilgili sonraki değişiklikler, aşağıdaki kurallara göre maxfiles sınırının otomatik olarak yeniden okundu olarak oluşmasına neden olur: 
 
@@ -67,7 +68,9 @@ Hizmet, bir birimin sağlanan boyutuna bağlı olarak maxfiles sınırını dina
 |    > 3 TiB ancak <= 4 TiB    |    80.000.000     |
 |    > 4 TiB                 |    100.000.000    |
 
-Bir birim için en az 4 TiB kotayı zaten ayırdıysanız, maxfiles limitini 100.000.000 ' den fazla artırmak için bir [destek isteği](#limit_increase) başlatabilirsiniz. Artırmış olduğunuz her 100.000.000 dosya için (veya bir kesri), karşılık gelen birim kotasını 4 TiB ile artırmanız gerekir.  Örneğin, maxfiles limitini 100.000.000 dosyadan 200.000.000 dosya (veya aralarında herhangi bir sayı) olarak artırırsanız, birim kotasını 4 TiB 'den 8 TiB 'ye artırmanız gerekir.
+Bir birim için en az 4 TiB kota ayırdıysanız, maxfiles (ınomdes) limitini 100.000.000 ' den fazla artırmak için bir [destek isteği](#limit_increase) başlatabilirsiniz. Artırmış olduğunuz her 100.000.000 dosya için (veya bir kesri), karşılık gelen birim kotasını 4 TiB ile artırmanız gerekir.  Örneğin, maxfiles limitini 100.000.000 dosyadan 200.000.000 dosya (veya aralarında herhangi bir sayı) olarak artırırsanız, birim kotasını 4 TiB 'den 8 TiB 'ye artırmanız gerekir.
+
+Birim kotanızın en az 20 TiB olması durumunda maxfiles limitini 500.000.000 olarak artırabilirsiniz. <!-- ANF-11854 --> 
 
 ## <a name="request-limit-increase"></a>İstek sınırı artışı <a name="limit_increase"></a> 
 

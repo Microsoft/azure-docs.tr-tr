@@ -1,18 +1,18 @@
 ---
 title: Azure Container Registry için yerleşik ilke tanımları
 description: Azure Container Registry için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 author: dlepow
 ms.author: danlep
 ms.service: container-registry
 ms.custom: subject-policy-reference
-ms.openlocfilehash: 54fa2655dea79d129e773478b4097f41fbc878a4
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 80011eb401e6d3b81db681dc2efbc0c143e19251
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105034699"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869770"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-container-registry"></a>Azure Container Registry için Azure Ilkesi yerleşik tanımları
 

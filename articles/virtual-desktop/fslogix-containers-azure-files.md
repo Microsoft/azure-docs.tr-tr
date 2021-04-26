@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: conceptual
 ms.date: 01/04/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 0b977944f3a531365487b9655820e5d8f85e13d0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+manager: femila
+ms.openlocfilehash: 945bf806a813943d02fb4db1245dfb74eb7fb1f9
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99225924"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106446902"
 ---
 # <a name="fslogix-profile-containers-and-azure-files"></a>FSLogix profil kapsayıcıları ve Azure dosyaları
 
@@ -48,10 +48,10 @@ Aşağıdaki tabloda önceki Kullanıcı profili teknolojilerinin avantajları v
 | Teknoloji | Modern ayarlar | Win32 ayarları | İşletim sistemi ayarları | Kullanıcı verileri | Sunucu SKU 'sunda destekleniyor | Azure 'da arka uç depolama | Şirket içinde arka uç depolama | Sürüm desteği | Sonraki oturum açma zamanı |Notlar|
 | ---------- | :-------------: | :------------: | :---------: | --------: | :---------------------: | :-----------------------: | :--------------------------: | :-------------: | :---------------------: |-----|
 | **Kullanıcı profili diskleri (UPD)** | Yes | Yes | Yes | Yes | Yes | Hayır | Yes | Win 7 + | Yes | |
-| **Gezici Kullanıcı profili (RUP), bakım modu** | Hayır | Yes | Yes | Yes | Yes| Hayır | Yes | Win 7 + | No | |
-| **Enterprise State Roaming (ESR)** | Yes | Hayır | Yes | Hayır | Notlara bakın | Yes | Hayır | Win 10 | No | Sunucu SKU 'sunda işlevler ancak destekleyici Kullanıcı arabirimi yok |
-| **Kullanıcı deneyimi sanallaştırma (UE-V)** | Yes | Yes | Yes | Hayır | Yes | Hayır | Yes | Win 7 + | No |  |
-| **OneDrive bulut dosyaları** | Hayır | Hayır | Hayır | Yes | Notlara bakın | Notlara bakın  | Notlara bakın | Win 10 RS3 | No | Sunucu SKU 'sunda sınanmamıştır. Azure üzerinde arka uç depolama, eşitleme istemcisine bağlıdır. Arka uç depolamada şirket içi depolama için bir eşitleme istemcisi gerekir. |
+| **Gezici Kullanıcı profili (RUP), bakım modu** | Hayır | Yes | Yes | Yes | Yes| Hayır | Yes | Win 7 + | Hayır | |
+| **Enterprise State Roaming (ESR)** | Yes | Hayır | Yes | Hayır | Notlara bakın | Yes | Hayır | Win 10 | Hayır | Sunucu SKU 'sunda işlevler ancak destekleyici Kullanıcı arabirimi yok |
+| **Kullanıcı deneyimi sanallaştırma (UE-V)** | Yes | Yes | Yes | Hayır | Yes | Hayır | Yes | Win 7 + | Hayır |  |
+| **OneDrive bulut dosyaları** | Hayır | Hayır | Hayır | Yes | Notlara bakın | Notlara bakın  | Notlara bakın | Win 10 RS3 | Hayır | Sunucu SKU 'sunda sınanmamıştır. Azure üzerinde arka uç depolama, eşitleme istemcisine bağlıdır. Arka uç depolamada şirket içi depolama için bir eşitleme istemcisi gerekir. |
 
 #### <a name="performance"></a>Performans
 

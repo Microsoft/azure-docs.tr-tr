@@ -3,15 +3,15 @@ title: Azure Advisor Windows sanal masaüstü Izlenecek yol-Azure
 description: Windows sanal masaüstü için Azure Advisor önerilerini çözümleme.
 author: Heidilohr
 ms.topic: conceptual
-ms.date: 08/28/2020
+ms.date: 03/31/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 760e0212d2d863e6b869c23c2e523a0e056a28ed
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: 666f882dec6c00b9fe5421485afded1fbd57d961
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "90033039"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448313"
 ---
 # <a name="how-to-resolve-azure-advisor-recommendations"></a>Azure Advisor önerilerini çözme
 
@@ -72,10 +72,6 @@ Bu öneri, Işlemsel üstün kullanım altında görünür.
 Sanal makinenizin (VM) düzgün çalıştığından emin olmak için belirli URL 'Lerin engellemesini kaldırmanız gerekir. Listeyi [GÜVENLI URL listesinde](safe-url-list.md)görebilirsiniz. URL 'Lerin engeli engellenmemişse, VM 'niz düzgün çalışmaz.
 
 Bu öneriyi çözümlemek için [GÜVENLI URL listesindeki](safe-url-list.md)tüm URL 'lerin engelini kaldırmayı unutmayın. URL 'Leri kaldırmak için hizmet etiketi veya FQDN etiketleri kullanabilirsiniz.
-
-## <a name="propose-new-recommendations"></a>Yeni öneriler önerin
-
-Öneriler için fikirler göndererek Azure Advisor 'ı geliştirmemize yardımcı olabilirsiniz. Önerinizi başka bir kullanıcının zor bir noktadan çıkmasına yardımcı olabilir. Bir öneri göndermek için [UserVoice forumumuza](https://windowsvirtualdesktop.uservoice.com/forums/930847-azure-advisor-recommendations) gidin ve gönderim formunu doldurun. Formu doldururken, bize mümkün olduğunca fazla ayrıntı verdiğinizden emin olun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -2,17 +2,17 @@
 title: Azure 'a bir bulut hizmeti (klasik) dağıttığınızda LocationNotFoundForRoleSize sorunlarını giderme | Microsoft Docs
 description: Bu makalede, Azure 'a bir bulut hizmeti (klasik) dağıtımında bir LocationNotFoundForRoleSize özel durumunun nasıl çözümleneceği gösterilmektedir.
 services: cloud-services
-author: mibufo
-ms.author: v-mibufo
+author: mamccrea
+ms.author: mamccrea
 ms.service: cloud-services
 ms.topic: troubleshooting
 ms.date: 02/22/2021
-ms.openlocfilehash: 3d1a1135db0421d89d4c6c9f278c86e02cb5cb32
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 54af2387ec0ff6c8f86f96821baad17736e8d85b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105558967"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877975"
 ---
 # <a name="troubleshoot-locationnotfoundforrolesize-when-deploying-a-cloud-service-classic-to-azure"></a>Azure 'a bir bulut hizmeti (klasik) dağıttığınızda LocationNotFoundForRoleSize sorunlarını giderme
 
@@ -20,7 +20,7 @@ Bu makalede, bir Azure bulut hizmeti dağıtırken (klasik) bir sanal makine (VM
 
 Bir bulut hizmetine (klasik) örnekler dağıtırken veya yeni Web veya çalışan rolü örnekleri eklediğinizde Microsoft Azure işlem kaynaklarını ayırır.
 
-Azure abonelik sınırına ulaşmadan bile bu işlemler sırasında zaman zaman bir hata alabilirsiniz.
+Azure abonelik sınırına ulaşmadan önce bile bu işlemler sırasında bazen hatalar alabilirsiniz.
 
 > [!TIP]
 > Ayrıca, hizmetlerinizin dağıtımını planlarken bilgiler de yararlı olabilir.
@@ -47,7 +47,8 @@ Bu senaryoda, bulut hizmetinizi (klasik) dağıtmak için farklı bir bölge vey
 
 ### <a name="list-skus-in-region-using-azure-cli"></a>Azure CLı kullanarak bölgedeki SKU 'Ları listeleme
 
-[Az VM List-SKU](/cli/azure/vm.html#az_vm_list_skus) komutunu kullanabilirsiniz.
+[Az VM List-SKU] (/cli/Azure/VM? View = Azure-CLI-latest) kullanabilirsiniz.
+#<a name="az_vm_list_skus-command"></a>az_vm_list_skus) komutu.
 
 - Kullanmakta olduğunuz `--location` konuma çıktıyı filtrelemek için parametresini kullanın.
 - `--size`Kısmi bir boyut adına göre arama yapmak için parametresini kullanın.

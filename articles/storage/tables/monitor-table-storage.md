@@ -9,12 +9,12 @@ ms.date: 10/26/2020
 ms.author: normesta
 ms.reviewer: fryu
 ms.custom: monitoring, devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: d2973d95cf797123e02fd48dc2dfab1b172e05f5
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 11439afbe7bceb17dff5393d248c6c9f5d3f6b53
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102499480"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767844"
 ---
 # <a name="monitoring-azure-table-storage"></a>Azure Tablo depolamayı izleme
 
@@ -214,7 +214,7 @@ Daha fazla bilgi için bkz. Azure [izleyici 'de Log Analytics çalışma alanın
 
 Günlüklerinizi bir depolama hesabına arşivlemeyi seçerseniz, depolama hesabına gönderilen günlük hacmi için ödeme yaparsınız. Belirli fiyatlandırma için, [Azure izleyici fiyatlandırma](https://azure.microsoft.com/pricing/details/monitor/#platform-logs) sayfasının **Platform günlükleri** bölümüne bakın.
 
-[Az Monitor Diagnostic-Settings Create](/cli/azure/monitor/diagnostic-settings#az-monitor-diagnostic-settings-create) komutunu kullanarak günlükleri etkinleştirin.
+[Az Monitor Diagnostic-Settings Create](/cli/azure/monitor/diagnostic-settings#az_monitor_diagnostic_settings_create) komutunu kullanarak günlükleri etkinleştirin.
 
 ```azurecli-interactive
 az monitor diagnostic-settings create --name <setting-name> --storage-account <storage-account-name> --resource <storage-service-resource-id> --resource-group <resource-group> --logs '[{"category": <operations>, "enabled": true "retentionPolicy": {"days": <number-days>, "enabled": <retention-bool}}]'
@@ -234,7 +234,7 @@ Aşağıda bir örnek verilmiştir:
 
 Günlüklerinizi bir olay hub 'ına akışı yapmayı seçerseniz, Olay Hub 'ına gönderilen günlüklerin hacmi için ödeme yaparsınız. Belirli fiyatlandırma için, [Azure izleyici fiyatlandırma](https://azure.microsoft.com/pricing/details/monitor/#platform-logs) sayfasının **Platform günlükleri** bölümüne bakın.
 
-[Az Monitor Diagnostic-Settings Create](/cli/azure/monitor/diagnostic-settings#az-monitor-diagnostic-settings-create) komutunu kullanarak günlükleri etkinleştirin.
+[Az Monitor Diagnostic-Settings Create](/cli/azure/monitor/diagnostic-settings#az_monitor_diagnostic_settings_create) komutunu kullanarak günlükleri etkinleştirin.
 
 ```azurecli-interactive
 az monitor diagnostic-settings create --name <setting-name> --event-hub <event-hub-name> --event-hub-rule <event-hub-namespace-and-key-name> --resource <storage-account-resource-id> --logs '[{"category": <operations>, "enabled": true "retentionPolicy": {"days": <number-days>, "enabled": <retention-bool}}]'
@@ -246,7 +246,7 @@ Aşağıda bir örnek verilmiştir:
 
 #### <a name="send-logs-to-log-analytics"></a>Günlükleri Log Analytics’e gönderme
 
-[Az Monitor Diagnostic-Settings Create](/cli/azure/monitor/diagnostic-settings#az-monitor-diagnostic-settings-create) komutunu kullanarak günlükleri etkinleştirin.
+[Az Monitor Diagnostic-Settings Create](/cli/azure/monitor/diagnostic-settings#az_monitor_diagnostic_settings_create) komutunu kullanarak günlükleri etkinleştirin.
 
 ```azurecli-interactive
 az monitor diagnostic-settings create --name <setting-name> --workspace <log-analytics-workspace-resource-id> --resource <storage-account-resource-id> --logs '[{"category": <category name>, "enabled": true "retentionPolicy": {"days": <days>, "enabled": <retention-bool}}]'
@@ -317,7 +317,7 @@ Depolama hesabınızın veya tablo depolama hizmetinin hesap düzeyi ölçüm de
 
 #### <a name="list-the-account-level-metric-definition"></a>Hesap düzeyi ölçüm tanımını listeleyin
 
-Depolama hesabınızın veya tablo depolama hizmetinin ölçüm tanımını listeleyebilirsiniz. [Az Monitor ölçümleri List-Definitions](/cli/azure/monitor/metrics#az-monitor-metrics-list-definitions) komutunu kullanın.
+Depolama hesabınızın veya tablo depolama hizmetinin ölçüm tanımını listeleyebilirsiniz. [Az Monitor ölçümleri List-Definitions](/cli/azure/monitor/metrics#az_monitor_metrics_list_definitions) komutunu kullanın.
  
 Bu örnekte, `<resource-ID>` yer tutucuyu tüm depolama hesabının kaynak kimliğiyle veya tablo depolama hizmetinin kaynak kimliği ile değiştirin. Bu kaynak kimliklerini, Azure portal depolama hesabınızın **Özellikler** sayfalarında bulabilirsiniz.
 
@@ -327,7 +327,7 @@ Bu örnekte, `<resource-ID>` yer tutucuyu tüm depolama hesabının kaynak kimli
 
 #### <a name="read-account-level-metric-values"></a>Hesap düzeyindeki ölçüm değerlerini oku
 
-Depolama hesabınızın veya tablo depolama hizmetinin ölçüm değerlerini okuyabilirsiniz. [Az Monitor ölçümleri List](/cli/azure/monitor/metrics#az-monitor-metrics-list) komutunu kullanın.
+Depolama hesabınızın veya tablo depolama hizmetinin ölçüm değerlerini okuyabilirsiniz. [Az Monitor ölçümleri List](/cli/azure/monitor/metrics#az_monitor_metrics_list) komutunu kullanın.
 
 ```azurecli-interactive
    az monitor metrics list --resource <resource-ID> --metric "UsedCapacity" --interval PT1H

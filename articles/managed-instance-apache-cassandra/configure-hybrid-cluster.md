@@ -6,12 +6,12 @@ ms.author: thvankra
 ms.service: managed-instance-apache-cassandra
 ms.topic: quickstart
 ms.date: 03/02/2021
-ms.openlocfilehash: b022bff9db87c248881cd18cc21569aaef8f404a
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 9f3ad2a5d5b275ff611653855eff73bd36afda9f
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105562146"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107379426"
 ---
 # <a name="quickstart-configure-a-hybrid-cluster-with-azure-managed-instance-for-apache-cassandra-preview"></a>Hızlı başlangıç: Apache Cassandra için Azure yönetilen örneği ile karma küme yapılandırma (Önizleme)
 
@@ -39,10 +39,19 @@ Bu hızlı başlangıçta, Azure CLı komutlarının karma bir kümeyi yapıland
    :::image type="content" source="./media/configure-hybrid-cluster/subnet.png" alt-text="Sanal ağınıza yeni bir alt ağ ekleyin." lightbox="./media/configure-hybrid-cluster/subnet.png" border="true":::
     <!-- ![image](./media/configure-hybrid-cluster/subnet.png) -->
 
-1. Şimdi, Cassandra yönetilen örneğinin gerektirdiği VNet ve alt ağa bazı özel izinler uygulayacağız ve Azure CLı 'yı kullanmaktır. Komutunu kullanın,,, `az role assignment create` `<subscription ID>` `<resource group name>` `<VNet name>` ve `<subnet name>` değerlerini uygun değerlerle değiştirin:
+    > [!NOTE]
+    > Apache Cassandra için Azure yönetilen örneğinin dağıtımı, internet erişimi gerektirir. İnternet erişiminin kısıtlandığı ortamlarda dağıtım başarısız olur. VNet 'iniz içindeki erişimi, yönetilen Cassandra 'nin düzgün çalışması için gerekli olan aşağıdaki önemli Azure hizmetlerine engellemediğinizden emin olun:
+    > - Azure Storage
+    > - Azure KeyVault
+    > - Azure Sanal Makine Ölçek Kümeleri
+    > - Azure İzleme
+    > - Azure Active Directory
+    > - Azure Güvenlik
+
+1. Şimdi, Cassandra yönetilen örneğinin gerektirdiği VNet ve alt ağa bazı özel izinler uygulayacağız ve Azure CLı 'yı kullanmaktır. Komutunu, `az role assignment create` `<subscription ID>` `<resource group name>` ve yerine `<VNet name>` uygun değerleri kullanarak kullanın:
 
    ```azurecli-interactive
-   az role assignment create --assignee e5007d2c-4b13-4a74-9b6a-605d99f03501 --role 4d97b98b-1d4f-4787-a291-c67834d212e7 --scope /subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.Network/virtualNetworks/<VNet name>/subnets/<subnet name>
+   az role assignment create --assignee a232010e-820c-4083-83bb-3ace5fc29d0b --role 4d97b98b-1d4f-4787-a291-c67834d212e7 --scope /subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.Network/virtualNetworks/<VNet name>
    ```
 
    > [!NOTE]

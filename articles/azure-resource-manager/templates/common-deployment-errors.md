@@ -4,12 +4,12 @@ description: Azure 'a Azure Resource Manager kullanarak kaynak dağıtırken yay
 tags: top-support-issue
 ms.topic: troubleshooting
 ms.date: 01/20/2021
-ms.openlocfilehash: 40e6317a1d879704ef00e928a971ae08fc9e0f72
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 07c197f1b54522b96a3bfa2d6a5ce7b368be3b35
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105564356"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107789186"
 ---
 # <a name="troubleshoot-common-azure-deployment-errors-with-azure-resource-manager"></a>Azure Resource Manager'la yaygın Azure dağıtım hatalarını giderme
 
@@ -68,7 +68,7 @@ Bir hata kodu hakkında bilgi arıyorsanız ve bu makalede bilgi sağlanmazsa bi
 | RequestDisallowedByPolicy | Aboneliğiniz, dağıtım sırasında gerçekleştirmeye çalıştığınız bir eylemi önleyen bir kaynak ilkesi içerir. Eylemi engelleyen ilkeyi bulun. Mümkünse, ilkeden gelen sınırlamaları karşılamak için dağıtımınızı değiştirin. | [İlkeleri çözümle](error-policy-requestdisallowedbypolicy.md) |
 | ReservedResourceName | Ayrılmış bir ad içermeyen bir kaynak adı belirtin. | [Ayrılmış kaynak adları](error-reserved-resource-name.md) |
 | ResourceGroupBeingDeleted | Silmenin tamamlanmasını bekleyin. | |
-| ResourceGroupNotFound | Dağıtım için hedef kaynak grubunun adını denetleyin. Hedef kaynak grubu aboneliğinizde zaten var olmalıdır. Abonelik bağlamınızı denetleyin. | [Azure CLI](/cli/azure/account?#az-account-set) [PowerShell](/powershell/module/Az.Accounts/Set-AzContext) |
+| ResourceGroupNotFound | Dağıtım için hedef kaynak grubunun adını denetleyin. Hedef kaynak grubu aboneliğinizde zaten var olmalıdır. Abonelik bağlamınızı denetleyin. | [Azure CLI](/cli/azure/account?#az_account_set) [PowerShell](/powershell/module/Az.Accounts/Set-AzContext) |
 | ResourceNotFound | Dağıtımınız çözülemeyen bir kaynağa başvuruyor. **Başvuru** işlevi kullanmanın senaryonuz için gereken parametreleri içerdiğini doğrulayın. | [Başvuruları çözümle](error-not-found.md) |
 | ResourceQuotaExceeded | Dağıtım, aboneliğin, kaynak grubunun veya bölgenin kotasını aşan kaynaklar oluşturmaya çalışıyor. Mümkünse, altyapılarınızın kotalar dahilinde kalacak şekilde gözden geçirin. Aksi takdirde, kotalarınızda değişiklik yapmayı deneyin. | [Kotaları çözümleyin](error-resource-quota.md) |
 | SkuNotAvailable | Seçtiğiniz konum için kullanılabilir SKU (VM boyutu gibi) seçeneğini belirleyin. | [SKU 'YU çözümle](error-sku-not-available.md) |
@@ -166,7 +166,7 @@ Ya da yanıt içeriği:
 
 Bu bilgiler, şablondaki bir değerin yanlış şekilde ayarlanmış olup olmadığını belirlemenize yardımcı olabilir.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 Azure CLı Şu anda hata ayıklama günlük kaydını açmayı desteklemez, ancak hata ayıklama günlüğünü alabilirsiniz.
 

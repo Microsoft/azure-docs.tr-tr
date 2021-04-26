@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: cost-management-billing
 ms.subservice: cost-management
 ms.reviewer: micflan
-ms.openlocfilehash: 811b2cb7fd9a4f664e7a643f5a8e192a51416888
-ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
-ms.translationtype: HT
+ms.openlocfilehash: 46ad81f6723d160bf1d675b68a8459dd8df32c80
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/20/2020
-ms.locfileid: "88689108"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078358"
 ---
 # <a name="migrate-from-enterprise-agreement-to-microsoft-customer-agreement-apis"></a>Kurumsal Anlaşma'dan Microsoft Müşteri Sözleşmesi API'lerine geçiş
 
@@ -55,9 +55,9 @@ EA API'leri, kimlik doğrulaması ve yetkilendirme için API anahtarı kullanır
 | Kullanım (CSV) | [/usagedetails/download](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format)[/usagedetails/submit](/rest/api/billing/enterprise/billing-enterprise-api-usage-detail#csv-format) | [Microsoft.Consumption/usageDetails/download](/rest/api/consumption/usagedetails)<sup>1</sup> |
 | Market Kullanımı (CSV) | [/marketplacecharges](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge)[/marketplacechargesbycustomdate](/rest/api/billing/enterprise/billing-enterprise-api-marketplace-storecharge) | [Microsoft.Consumption/usageDetails/download](/rest/api/consumption/usagedetails)<sup>1</sup> |
 | Faturalama dönemleri | [/billingperiods](/rest/api/billing/enterprise/billing-enterprise-api-billing-periods) | Microsoft.Billing/billingAccounts/billingProfiles/invoices |
-| Fiyat listesi | [/pricesheet](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet) | Microsoft.Billing/billingAccounts/billingProfiles/pricesheet/default/download format=json|csv Microsoft.Billing/billingAccounts/…/billingProfiles/…/invoices/… /pricesheet/default/download format=json|csv Microsoft.Billing/billingAccounts/../billingProfiles/../providers/Microsoft.Consumption/pricesheets/download  |
+| Fiyat listesi | [/pricesheet](/rest/api/billing/enterprise/billing-enterprise-api-pricesheet) | Microsoft. faturalandırma/billingAccounts/billingProfiles/fiyat listesi/varsayılan/indirme biçimi = JSON \| CSV Microsoft. faturalandırma/billingAccounts/.../billingProfiles/.../faturalar/... /pricesheet/default/Download Format = JSON \| CSV Microsoft. faturalandırma/billingAccounts/.. /Billingprofiles/.exe. /providers/Microsoft.Consumption/pricesheets/download  |
 | Rezervasyon satın almaları | [/reservationcharges](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges) | Microsoft.Billing/billingAccounts/billingProfiles/transactions |
-| Rezervasyon önerileri | [/SharedReservationRecommendations](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-shared-reserved-instance-recommendations)[/](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations)[SingleReservationRecommendations](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations) | [Microsoft.Consumption/reservationRecommendations](/rest/api/consumption/reservationrecommendations/list) |
+| Rezervasyon önerileri | [/Sharedrezervationönerilere](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-shared-reserved-instance-recommendations) [/](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations) [SingleReservationRecommendations](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations) | [Microsoft.Consumption/reservationRecommendations](/rest/api/consumption/reservationrecommendations/list) |
 | Rezervasyon kullanımı | [/reservationdetails](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#request-for-reserved-instance-usage-details)[/reservationsummaries](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage) | [Microsoft.Consumption/reservationDetails](/rest/api/consumption/reservationsdetails)[Microsoft.Consumption/reservationSummaries](/rest/api/consumption/reservationssummaries) |
 
 <sup>1</sup> Azure hizmeti ve üçüncü taraf Market kullanımı, [Kullanım Ayrıntıları API'si](/rest/api/consumption/usagedetails) ile sunulmaktadır.
@@ -135,7 +135,7 @@ Programlama kodunda güncelleştirme yapmak için aşağıdaki querystring param
 
 | Eski parametreler | Yeni parametreler |
 | --- | --- |
-| `billingPeriod={billingPeriod}` | Desteklenmiyor |
+| `billingPeriod={billingPeriod}` | Desteklenmez |
 | `endTime=yyyy-MM-dd` | `endDate=yyyy-MM-dd` |
 | `startTime=yyyy-MM-dd` | `startDate=yyyy-MM-dd` |
 
@@ -176,26 +176,26 @@ Kullanım kayıtları dizisini içeren özelliğin adı "data" yerine _values_ o
 | ChargesBilledSeparately | isAzureCreditEligible | Bu özelliklerin karşıt olduğunu unutmayın. isAzureCreditEnabled true olduğunda ChargesBilledSeparately false olur. |
 | ConsumedQuantity | miktar | &nbsp; |
 | ConsumedService | consumedService | Tam dize değerleri farklı olabilir. |
-| ConsumedServiceId | Hiçbiri | &nbsp; |
+| ConsumedServiceId | Yok | &nbsp; |
 | CostCenter | costCenter | &nbsp; |
 | Date ve usageStartDate | date | &nbsp;  |
-| Gün | Hiçbiri | Tarihteki günü ayrıştırır. |
+| Gün | Yok | Tarihteki günü ayrıştırır. |
 | DepartmentId | invoiceSectionId | Tam değerler farklıdır. |
 | DepartmentName | invoiceSectionName | Tam dize değerleri farklı olabilir. Gerekirse fatura bölümlerini departmanlarla eşleşecek şekilde yapılandırın. |
 | ExtendedCost ve Cost | costInBillingCurrency | &nbsp;  |
 | InstanceId | resourceId | &nbsp;  |
-| Is Recurring Charge | Hiçbiri | &nbsp;  |
+| Is Recurring Charge | Yok | &nbsp;  |
 | Konum | location | &nbsp;  |
 | MeterCategory | meterCategory | Tam dize değerleri farklı olabilir. |
 | MeterId | meterId | Tam dize değerleri farklıdır. |
 | MeterName | meterName | Tam dize değerleri farklı olabilir. |
 | MeterRegion | meterRegion | Tam dize değerleri farklı olabilir. |
 | MeterSubCategory | meterSubCategory | Tam dize değerleri farklı olabilir. |
-| Ay | Hiçbiri | Tarihteki ayı ayrıştırır. |
-| Teklif Adı | Hiçbiri | publisherName ve productOrderName kullanın. |
-| OfferID | Hiçbiri | &nbsp;  |
-| Sipariş Numarası | Hiçbiri | &nbsp;  |
-| PartNumber | Hiçbiri | Fiyatları benzersiz şekilde tanımlamak için meterId ve productOrderName kullanın. |
+| Ay | Yok | Tarihteki ayı ayrıştırır. |
+| Teklif Adı | Yok | publisherName ve productOrderName kullanın. |
+| OfferID | Yok | &nbsp;  |
+| Sipariş Numarası | Yok | &nbsp;  |
+| PartNumber | Yok | Fiyatları benzersiz şekilde tanımlamak için meterId ve productOrderName kullanın. |
 | Plan Adı | productOrderName | &nbsp;  |
 | Ürün | Ürün |   |
 | ProductId | productId | Tam dize değerleri farklıdır. |
@@ -203,21 +203,21 @@ Kullanım kayıtları dizisini içeren özelliğin adı "data" yerine _values_ o
 | adlı yönetilen örnek, | resourceGroupName | &nbsp;  |
 | ResourceGuid | meterId | Tam dize değerleri farklıdır. |
 | ResourceLocation | resourceLocation | &nbsp;  |
-| ResourceLocationId | Hiçbiri | &nbsp;  |
+| ResourceLocationId | Yok | &nbsp;  |
 | ResourceRate | effectivePrice | &nbsp;  |
-| HizmetYöneticisiKimliği | Yok | &nbsp;  |
+| ServiceAdministratorId | Yok | &nbsp;  |
 | ServiceInfo1 | serviceInfo1 | &nbsp;  |
 | ServiceInfo2 | serviceInfo2 | &nbsp;  |
 | ServiceName | meterCategory | Tam dize değerleri farklı olabilir. |
 | ServiceTier | meterSubCategory | Tam dize değerleri farklı olabilir. |
 | StoreServiceIdentifier | Yok | &nbsp;  |
 | SubscriptionGuid | subscriptionId | &nbsp;  |
-| kaynak grubundaki | subscriptionId | &nbsp;  |
+| SubscriptionId | subscriptionId | &nbsp;  |
 | SubscriptionName | subscriptionName | &nbsp;  |
-| Etiketler | etiketler | Etiketler özelliği, iç içe yerleştirilmiş özellikler özelliğine değil kök nesneye uygulanır. |
+| Etiketler | tags | Etiketler özelliği, iç içe yerleştirilmiş özellikler özelliğine değil kök nesneye uygulanır. |
 | UnitOfMeasure | unitOfMeasure | Tam dize değerleri farklıdır. |
 | usageEndDate | date | &nbsp;  |
-| Yıl | Hiçbiri | Tarihteki yılı ayrıştırır. |
+| Yıl | Yok | Tarihteki yılı ayrıştırır. |
 | (yeni) | billingCurrency | Ücret için kullanılan para birimi. |
 | (yeni) | billingProfileId | Faturalama profili için benzersiz kimlik (kayıt ile aynı). |
 | (yeni) | billingProfileName | Faturalama profilinin adı (kayıt ile aynı). |
@@ -269,7 +269,7 @@ Tüm Azure Tüketim hizmetlerinin Fiyat Listesi verilerini JSON biçiminde gör�
 | --- | --- |
 | POST | `https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/pricesheet/default/download?api-version=2018-11-01-preview&startDate=2019-01-01&endDate=2019-01-31&format=json` |
 
-API kullanıldığında hesabın tamamı için geçerli olan fiyat listesi döndürülür. Ancak isterseniz fiyat listesinin sıkıştırılmış sürümünü PDF biçiminde alabilirsiniz. Özette belirli bir faturaya dahil olan Azure Tüketim ve Market tüketim hizmetleri bulunur. Fatura, Fatura Özeti PDF dosyalarında gösterilen **Fatura Numarası** ile aynı olan {invoiceId} ile tanımlanır. Bir örneği aşağıda verilmiştir.
+API kullanıldığında hesabın tamamı için geçerli olan fiyat listesi döndürülür. Ancak isterseniz fiyat listesinin sıkıştırılmış sürümünü PDF biçiminde alabilirsiniz. Özette belirli bir faturaya dahil olan Azure Tüketim ve Market tüketim hizmetleri bulunur. Fatura, Fatura Özeti PDF dosyalarında gösterilen **Fatura Numarası** ile aynı olan {invoiceId} ile tanımlanır. Aşağıda bir örneği yer alır.
 
 ![InvoiceId değerine karşılık gelen Fatura Numarasını gösteren görüntü](./media/migrate-cost-management-api/invoicesummary.png)
 
@@ -345,7 +345,7 @@ OData-EntityId: {operationId}
 
 ```
 
-Konuma başka bir GET çağrısı yapın. GET çağrısına verilen yanıt, işlem tamamlanana veya hata verene kadar aynı olur. İşlem tamamlandığında GET çağrısı yanıtı, indirme URL'sini döndürür. İşlem aynı anda yürütülmüş gibi olur. Bir örneği aşağıda verilmiştir:
+Konuma başka bir GET çağrısı yapın. GET çağrısına verilen yanıt, işlem tamamlanana veya hata verene kadar aynı olur. İşlem tamamlandığında GET çağrısı yanıtı, indirme URL'sini döndürür. İşlem aynı anda yürütülmüş gibi olur. Aşağıda bir örnek verilmiştir:
 
 ```
 HTTP Status 200
@@ -367,13 +367,13 @@ Aşağıdaki tabloda eski Enterprise GET fiyat listesi API'sindeki alanlar göst
 
 | Eski özellik | Yeni özellik | Notlar |
 | --- | --- | --- |
-| billingPeriodId  | _Geçerli değildir_ | Geçerli değildir. Microsoft Müşteri Sözleşmeleri için billingPeriodId kavramının yerini fatura ve ilgili fiyat listesi almıştır. |
+| billingPeriodId  | _Geçerli değil_ | Geçerli değildir. Microsoft Müşteri Sözleşmeleri için billingPeriodId kavramının yerini fatura ve ilgili fiyat listesi almıştır. |
 | meterId  | meterId | &nbsp;  |
 | unitOfMeasure  | unitOfMeasure | Tam dize değerleri farklı olabilir. |
 | includedQuantity  | includedQuantity | Microsoft Müşteri Sözleşmeleri kapsamındaki hizmetler için geçerli değildir. |
-| partNumber  | _Geçerli değildir_ | Bunun yerine productOrderName (offerID ile aynı) ve meterID kullanın. |
+| partNumber  | _Geçerli değil_ | Bunun yerine productOrderName (offerID ile aynı) ve meterID kullanın. |
 | unitPrice  | unitPrice | Birim fiyatı, Microsoft Müşteri Sözleşmeleri kapsamındaki hizmetler için geçerli değildir. |
-| currencyCode  | pricingCurrency | Microsoft Müşteri Sözleşmeleri, fiyatlandırma para birimi ve faturalandırma para birimi için fiyat gösterimlerine sahiptir. currencyCode, Microsoft Müşteri Sözleşmelerindeki pricingCurrency özelliğine karşılık gelir. |
+| currencyCode  | PricingCurrency | Microsoft Müşteri Sözleşmeleri, fiyatlandırma para birimi ve faturalandırma para birimi için fiyat gösterimlerine sahiptir. currencyCode, Microsoft Müşteri Sözleşmelerindeki pricingCurrency özelliğine karşılık gelir. |
 | offerID | productOrderName | OfferID yerine productOrderName kullanabilirsiniz ancak bu özellik OfferID ile aynı değildir. Ancak productOrderName ve ölçüm, Microsoft Müşteri Sözleşmelerinde eski kayıtlarda meterId ve OfferID ile belirtilen fiyatlandırmayı belirler. |
 
 ## <a name="consumption-price-sheet-api-operations"></a>Tüketim Fiyat Listesi API'si işlemleri
@@ -398,7 +398,7 @@ Microsoft Müşteri Sözleşmeleri için yukarıdaki API uç noktalarının yeri
 
 Bu API, Microsoft Müşteri Sözleşmelerine yöneliktir ve ek öznitelikler sunar.
 
-**Ödeme Hesabındaki Faturalama Profili kapsamı için Fiyat Listesi**
+**Faturalandırma hesabındaki bir faturalandırma profili kapsamının fiyat listesi**
 
 Bu API, mevcut API ile aynıdır. Bir ödeme hesabındaki faturalama profili için fiyat listesini sağlayacak şekilde güncelleştirilmiştir.
 
@@ -426,18 +426,18 @@ EA'nın kayıt kapsamında API yanıtı ve özellikleri aynıdır. Özellikler a
 
 [Azure Resource Manager Fiyat Listesi API'leri](/rest/api/consumption/pricesheet) için kullanılan eski özellikler ve karşılık gelen yeni özellikler aşağıdaki tabloda belirtilmiştir.
 
-| Eski Azure Resource Manager Fiyat Listesi API'si Özelliği  | Yeni Microsoft Müşteri Sözleşmesi Fiyat Listesi API'si Özelliği   | Açıklama |
+| Eski Azure Resource Manager Fiyat Listesi API'si Özelliği  | Yeni Microsoft Müşteri Sözleşmesi Fiyat Listesi API'si Özelliği   | Description |
 | --- | --- | --- |
-| Ölçüm Kimliği | _meterId_ | Ölçümün benzersiz tanımlayıcısı. meterID ile aynıdır. |
+| Ölçüm kimliği | _Ölçüm kimliği_ | Ölçümün benzersiz tanımlayıcısı. meterID ile aynıdır. |
 | Ölçüm adı | meterName | Ölçümün adı. Ölçüm, dağıtılabilen Azure hizmeti kaynağını temsil eder. |
 | Ölçüm kategorisi  | hizmet | Ölçüm için sınıflandırma kategorisinin adı. Microsoft Müşteri Sözleşmesi Fiyat Listesindeki hizmet ile aynıdır. Tam dize değerleri farklıdır. |
 | Ölçüm alt kategorisi | meterSubCategory | Ölçüm alt sınıflandırma kategorisinin adı. Hizmetteki üst düzey özellik kümesi farkı sınıflandırmasını temel alır. Örneğin Temel SQL Veritabanı ve Standart SQL Veritabanı. |
 | Ölçüm bölgesi | meterRegion | &nbsp;  |
-| Birim | _Geçerli değildir_ | unitOfMeasure değerinden ayrıştırılabilir. |
+| Birim | _Geçerli değil_ | unitOfMeasure değerinden ayrıştırılabilir. |
 | Ölçü birimi | unitOfMeasure | &nbsp;  |
-| Parça numarası | _Geçerli değildir_ | Parça numarası yerine productOrderName ve MeterID kullanarak faturalama profiline ait fiyatı benzersiz bir şekilde tanımlayabilirsiniz. MCA faturasında parça numarası yerine alanlar listelenir. |
+| Parça numarası | _Geçerli değil_ | Parça numarası yerine productOrderName ve MeterID kullanarak faturalama profiline ait fiyatı benzersiz bir şekilde tanımlayabilirsiniz. MCA faturasında parça numarası yerine alanlar listelenir. |
 | Birim fiyat | unitPrice | Microsoft Müşteri Sözleşmesi birim fiyatı. |
-| Para birimi kodu | pricingCurrency | Microsoft Müşteri Sözleşmeleri, fiyatları fiyatlandırma para birimi ve faturalandırma para birimi ile gösterir. Para birimi kodu, Microsoft Müşteri Sözleşmelerindeki pricingCurrency ile aynıdır. |
+| Para birimi kodu | PricingCurrency | Microsoft Müşteri Sözleşmeleri, fiyatları fiyatlandırma para birimi ve faturalandırma para birimi ile gösterir. Para birimi kodu, Microsoft Müşteri Sözleşmelerindeki pricingCurrency ile aynıdır. |
 | Dahil edilen miktar | includedQuantity | Microsoft Müşteri Sözleşmeleri kapsamındaki hizmetler için geçerli değildir. Sıfır değerleriyle gösterilir. |
 |  Teklif Kimliği  | productOrderName | OfferID yerine productOrderName kullanın. OfferID ile aynı değildir ancak productOrderName ve ölçüm, Microsoft Müşteri Sözleşmelerindeki fiyatlandırmayı belirler. Eski kayıtlardaki meterId ve OfferID ile ilgilidir. |
 
@@ -455,7 +455,7 @@ Fiyat listesi, kullanıma göre fiyatlandırılan hizmetlerin listesini içerir.
 
 Aşağıdaki alanlar, Microsoft Müşteri Sözleşmesi Fiyat Listesi API'lerinde mevcut değildir veya değiştirilmemiştir.
 
-|Kullanımdan kaldırılan alan| Açıklama|
+|Kullanımdan kaldırılan alan| Description|
 |---|---|
 | billingPeriodId | Geçerli değil. MCA için InvoiceId alanına karşılık gelir. |
 | offerID | Geçerli değildir. MCA için productOrderName alanına karşılık gelir. |
@@ -479,7 +479,7 @@ Satın alınan rezervasyonlara ait faturalandırma işlemlerini [Ayrılmış Ör
 
 ## <a name="recommendations-apis-replaced"></a>Öneriler API'si değiştirildi
 
-Ayrılmış Örnek Satın Alma Önerileri API'leri son 7, 30 veya 60 gün içindeki sanal makine kullanımını sunar. API'ler ayrıca rezervasyon satın alma önerileri de sunar. Şunları içerir:
+Ayrılmış Örnek Satın Alma Önerileri API'leri son 7, 30 veya 60 gün içindeki sanal makine kullanımını sunar. API'ler ayrıca rezervasyon satın alma önerileri de sunar. Bunlara aşağıdakiler dahildir:
 
 - [Paylaşılan Ayrılmış Örnek Öneri API'si](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-shared-reserved-instance-recommendations)
 - [Tek Ayrılmış Örnek Öneri API'si](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-recommendation#request-for-single-reserved-instance-recommendations)
@@ -496,9 +496,9 @@ Rezervasyon Önerileri API'si ile rezervasyon önerileri almak için:
 
 Ayrılmış Örnek Kullanımı API'si ile bir kayıt içindeki rezervasyon kullanımını alabilirsiniz. Kayıtta birden fazla rezervasyon örneği varsa bu API'yi kullanarak tüm rezervasyon örneği satın alma işlemlerinin kullanımını da alabilirsiniz.
 
-Şunları içerir:
+Bunlara aşağıdakiler dahildir:
 
-- [Ayrılmış Örnek Kullanımı Ayrıntıları](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#request-for-reserved-instance-usage-details)
+- [Ayrılmış Örnek Kullanımı ayrıntıları](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage#request-for-reserved-instance-usage-details)
 - [Ayrılmış Örnek Kullanımı Özeti](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage)
 
 Tüm Tüketim API'leri, kimlik doğrulaması ve yetkilendirme için Azure AD'yi kullanan yerel Azure API'leriyle değiştirilmiştir. Azure REST API'lerini çağırma hakkında daha fazla bilgi için bkz. [REST'i kullanmaya başlama](/rest/api/azure/#create-the-request). Önceden listelenen rezervasyon öneri API'leri [Microsoft.Consumption/reservationDetails](/rest/api/consumption/reservationsdetails) ve [Microsoft.Consumption/reservationSummaries](/rest/api/consumption/reservationssummaries) API'leri ile değiştirilmiştir.

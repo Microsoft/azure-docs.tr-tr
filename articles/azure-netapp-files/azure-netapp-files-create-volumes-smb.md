@@ -12,18 +12,20 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: how-to
-ms.date: 03/19/2021
+ms.date: 04/20/2021
 ms.author: b-juche
-ms.openlocfilehash: c673f7a9556193fb05e05ea372bfccd17cd3c5ed
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: d3ca94524c334a20f5ee75e5300ad419fa1542c5
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104868520"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873280"
 ---
 # <a name="create-an-smb-volume-for-azure-netapp-files"></a>Azure NetApp Files için SMB birimi oluşturma
 
-Azure NetApp Files, NFS (NFSv3 ve NFSv 4.1), SMB3 veya Dual Protocol (NFSv3 ve SMB) kullanarak birim oluşturmayı destekler. Birimin kapasite kullanımı, havuzunun sağlanan kapasitesinden sayılır. Bu makalede, SMB3 birimi oluşturma konusu gösterilmektedir.
+Azure NetApp Files, NFS (NFSv3 ve NFSv 4.1), SMB3 veya Dual Protocol (NFSv3 ve SMB) kullanarak birim oluşturmayı destekler. Birimin kapasite kullanımı, havuzunun sağlanan kapasitesinden sayılır. 
+
+Bu makalede, SMB3 birimi oluşturma konusu gösterilmektedir. NFS birimleri için bkz. [NFS birimi oluşturma](azure-netapp-files-create-volumes.md). Çift protokol birimleri için bkz. [çift protokol birimi oluşturma](create-volumes-dual-protocol.md).
 
 ## <a name="before-you-begin"></a>Başlamadan önce 
 
@@ -54,7 +56,7 @@ SMB birimi oluşturmadan önce bir Active Directory bağlantısı oluşturmanız
     * **Kapasite havuzu**  
         Birimin oluşturulmasını istediğiniz kapasite havuzunu belirtin.
 
-    * **Kota**  
+    * **Kotasının**  
         Birime ayrılmış mantıksal depolama miktarını belirtin.  
 
         **Kullanılabilir kota** alanı, yeni birimi oluştururken kullanabildiğiniz, seçilen kapasite havuzundaki kullanılmamış alan miktarını gösterir. Yeni birimin boyutu kullanılabilir kotayı aşamaz.  
@@ -89,12 +91,32 @@ SMB birimi oluşturmadan önce bir Active Directory bağlantısı oluşturmanız
     * Birimin protokol türü olarak **SMB** ' yi seçin. 
     * Açılır listeden **Active Directory** bağlantınızı seçin.
     * **Paylaşım adı**' nda paylaşılan birimin adını belirtin.
+    * SMB3 için şifrelemeyi etkinleştirmek istiyorsanız, **SMB3 protokol şifrelemesini etkinleştir**' i seçin.   
+        Bu özellik, uçuş SMB3 verileri için şifrelemeyi mümkün bir şekilde sunar. SMB3 şifrelemesi kullanmayan SMB istemcileri bu birime erişemeyecektir.  Bekleyen veriler, bu ayardan bağımsız olarak şifrelenir.  
+        Ek bilgi için bkz. [SMB şifreleme SSS](azure-netapp-files-faqs.md#smb-encryption-faqs) . 
+
+        **SMB3 Protokolü şifreleme** özelliği şu anda önizlemededir. Bu özelliği ilk kez kullanıyorsanız, özelliği kullanmadan önce kaydedin: 
+
+        ```azurepowershell-interactive
+        Register-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFSMBEncryption
+        ```
+
+        Özellik kaydının durumunu denetleyin: 
+
+        > [!NOTE]
+        > **Registrationstate** , ' a `Registering` değiştirilmeden önce 60 dakikaya kadar bir durumda olabilir `Registered` . Devam etmeden önce durum olana kadar bekleyin `Registered` .
+
+        ```azurepowershell-interactive
+        Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFSMBEncryption
+        ```
+        
+        Ayrıca, [Azure CLI komutlarını](/cli/azure/feature?preserve-view=true&view=azure-cli-latest) kullanarak `az feature register` `az feature show` özelliği kaydedebilir ve kayıt durumunu görüntüleyebilirsiniz.  
     * SMB birimi için sürekli kullanılabilirliği etkinleştirmek istiyorsanız **sürekli kullanılabilirliği etkinleştir**' i seçin.    
 
         > [!IMPORTANT]   
         > SMB sürekli kullanılabilirliği özelliği şu anda genel önizlemededir. **[Azure NetApp Files SMB sürekli kullanılabilirlik paylaşımları genel önizleme eklenebileceğinizi gönderim sayfası](https://aka.ms/anfsmbcasharespreviewsignup)** aracılığıyla özelliğe erişmek için bir eklenebileceğinizi isteği göndermeniz gerekir. Sürekli kullanılabilirlik özelliğini kullanmadan önce Azure NetApp Files ekibinden resmi bir onay e-postası için bekleyin.   
         > 
-        > Yalnızca SQL iş yükleri için sürekli kullanılabilirliği etkinleştirmeniz gerekir. SQL Server dışındaki iş yükleri için SMB sürekli kullanılabilirlik paylaşımlarının *kullanılması desteklenmez.* Bu özellik şu anda Windows SQL Server 'de desteklenmektedir. Linux SQL Server şu anda desteklenmiyor. SQL Server yüklemek için yönetici olmayan bir hesap kullanıyorsanız, hesapta gerekli güvenlik ayrıcalığının atandığından emin olun. Etki alanı hesabı gerekli güvenlik ayrıcalığına () sahip değilse `SeSecurityPrivilege` ve ayrıcalık etki alanı düzeyinde ayarlanamıyor ise, Active Directory bağlantıları 'Nın **güvenlik ayrıcalığı kullanıcıları** alanını kullanarak ayrıcalığı hesaba verebilirsiniz. Bkz. [Active Directory bağlantı oluşturma](create-active-directory-connections.md#create-an-active-directory-connection).
+        > Yalnızca SQL Server ve [Fslogix Kullanıcı profili kapsayıcıları](../virtual-desktop/create-fslogix-profile-container.md)Için sürekli kullanılabilirliği etkinleştirmeniz gerekir. SQL Server ve FSLogix Kullanıcı profili kapsayıcıları dışındaki iş yükleri için SMB sürekli kullanılabilirlik paylaşımlarının *kullanılması desteklenmez.* Bu özellik şu anda Windows SQL Server 'de desteklenmektedir. Linux SQL Server şu anda desteklenmiyor. SQL Server yüklemek için yönetici olmayan bir hesap kullanıyorsanız, hesapta gerekli güvenlik ayrıcalığının atandığından emin olun. Etki alanı hesabı gerekli güvenlik ayrıcalığına () sahip değilse `SeSecurityPrivilege` ve ayrıcalık etki alanı düzeyinde ayarlanamıyor ise, Active Directory bağlantıları 'Nın **güvenlik ayrıcalığı kullanıcıları** alanını kullanarak ayrıcalığı hesaba verebilirsiniz. Bkz. [Active Directory bağlantı oluşturma](create-active-directory-connections.md#create-an-active-directory-connection).
 
     <!-- [1/13/21] Commenting out command-based steps below, because the plan is to use form-based (URL) registration, similar to CRR feature registration -->
     <!-- 
@@ -128,10 +150,12 @@ SMB birimine erişim izinler aracılığıyla yönetilir.
 
 ### <a name="share-permissions"></a>İzinleri paylaşma  
 
-Varsayılan olarak, yeni bir birimde **Everyone/Full denetim** Share izinleri vardır. Domain Admins grubunun üyeleri, Azure NetApp Files birimi için kullanılan bilgisayar hesabında Bilgisayar Yönetimi ' ni kullanarak paylaşma izinlerini değiştirebilir.
+Varsayılan olarak, yeni bir birimde **Everyone/Full denetim** Share izinleri vardır. Domain Admins grubunun üyeleri, aşağıdaki gibi, paylaşma izinlerini değiştirebilir:  
 
-![SMB bağlama yolu ](../media/azure-netapp-files/smb-mount-path.png) 
- ![ kümesi paylaşma izinleri](../media/azure-netapp-files/set-share-permissions.png) 
+1. Paylaşımdan bir sürücü eşleştirin.  
+2. Sürücüye sağ tıklayın, **Özellikler**' i seçin ve ardından **güvenlik** sekmesine gidin.
+
+[![Paylaşma izinlerini ayarla](../media/azure-netapp-files/set-share-permissions.png)](../media/azure-netapp-files/set-share-permissions.png#lightbox)
 
 ### <a name="ntfs-file-and-folder-permissions"></a>NTFS dosya ve klasör izinleri  
 

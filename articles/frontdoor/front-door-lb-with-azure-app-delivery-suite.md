@@ -9,14 +9,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 09/28/2020
+ms.date: 04/06/2021
 ms.author: duau
-ms.openlocfilehash: 50e047325ad17710794b1640715ab1938373fe85
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0a7e81c57552fdc24262522343a08fdabba71bfd
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96019472"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552589"
 ---
 # <a name="load-balancing-with-azures-application-delivery-suite"></a>Azure uygulama teslim paketiyle yük dengeleme
 
@@ -40,8 +40,8 @@ Bu genel ve bölgesel Hizmetleri birleştirdiğinizde, uygulamanız son kullanı
 
 ## <a name="global-load-balancing"></a>Küresel Yük Dengeleme
 **Traffic Manager** genel DNS yük dengelemesi sağlar. Müşterinin seçtiği yönlendirme ilkesini izleyerek gelen DNS isteklerine bakar ve sağlıklı bir arka uca yanıt verir. Yönlendirme yöntemleri seçenekleri şunlardır:
-- * * Performans yönlendirme istekleri en düşük gecikme süresine sahip en yakın arka uca gönderir.
-- **Öncelik yönlendirme** , tüm trafiği yedekleme olarak diğer arka uçlarla doğrudan bir arka uca yönlendirir.
+- **Performans yönlendirme** istekleri en düşük gecikme süresine sahip en yakın arka uca gönderir.
+- **Öncelik yönlendirme** , tüm trafiği yedekleme olarak diğer arka uçlarla birlikte arka uca yönlendirir.
 - **Ağırlıklı hepsini bir kez deneme yönlendirmesi** , her bir arka uca atanan ağırlığa göre trafiği dağıtır.
 - **Coğrafi yönlendirme** , belirli coğrafi bölgelerden kaynakların kaynağını elde eden isteklerin bu bölgeler için eşlenmiş arka uçları tarafından işlenmesini sağlar. (Örneğin, Ispanya 'dan gelen tüm istekler Fransa Orta Azure bölgesine yönlendirilmelidir)
 - **Alt ağ yönlendirme** , IP adresi aralıklarını arka uçlara eşlemenizi sağlar. böylece, bu IP 'ler için gelen isteklerin belirli arka uca gönderilmesi gerekir. (Örneğin, kurumsal HQ 'ın IP adresi aralığından bağlanan tüm kullanıcılar genel kullanıcılardan farklı web içerikleri almalıdır)

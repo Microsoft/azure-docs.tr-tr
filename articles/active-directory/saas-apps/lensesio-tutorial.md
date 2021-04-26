@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 07/02/2020
 ms.author: jeedes
 ms.openlocfilehash: 181d58baf128c4848a538e776aea0e43213994dc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92458617"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-the-lensesio-dataops-portal"></a>Öğretici: Lenses.io DataOps portalı ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory

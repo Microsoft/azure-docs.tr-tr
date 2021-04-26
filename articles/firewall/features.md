@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: conceptual
-ms.date: 03/10/2021
+ms.date: 04/02/2021
 ms.author: victorh
-ms.openlocfilehash: 21bb1856409b7fbea1eeffb8b3769dd63119da50
-ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
+ms.openlocfilehash: 8dbfb23d4314f8ceb13ad36ca9733e446e176090
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102612856"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106278193"
 ---
 # <a name="azure-firewall-features"></a>Azure Güvenlik Duvarı özellikleri
 
@@ -55,7 +55,7 @@ Azure Güvenlik Duvarı Kullanılabilirlik Alanları, Kullanılabilirlik Alanlar
 > [!NOTE]
 > Kullanılabilirlik Alanları, yalnızca dağıtım sırasında yapılandırılabilir. Mevcut bir güvenlik duvarını Kullanılabilirlik Alanları içerecek şekilde yapılandıramazsınız.
 
-Kullanılabilirlik Alanları hakkında daha fazla bilgi için bkz. [Azure 'Da bölgeler ve kullanılabilirlik alanları](../availability-zones/az-overview.md)
+Kullanılabilirlik Alanları hakkında daha fazla bilgi için bkz. [Azure 'Da bölgeler ve kullanılabilirlik alanları](../availability-zones/az-overview.md).
 
 ## <a name="unrestricted-cloud-scalability"></a>Kısıtlamasız bulut ölçeklenebilirliği
 
@@ -86,6 +86,8 @@ Güvenlik duvarınızın, bilinen kötü amaçlı IP adreslerinden ve etki alanl
 Tüm giden sanal ağ trafiği IP adresleri Azure Güvenlik Duvarı genel IP’sine çevrilir (Kaynak Ağ Adresi Çevirisi). Sanal ağınızdan kaynaklanan uzak İnternet hedeflerine yönelik trafiği tanımlayabilir ve buna izin verebilirsiniz. Hedef IP, [ıANA RFC 1918](https://tools.ietf.org/html/rfc1918)başına özel bir IP aralığı olduğunda Azure GÜVENLIK duvarı SNAT değildir. 
 
 Kuruluşunuz özel ağlar için genel bir IP adresi aralığı kullanıyorsa, Azure Güvenlik Duvarı, trafiği AzureFirewallSubnet içindeki güvenlik duvarı özel IP adreslerinden birine karşı bir şekilde SNAT olarak kullanır. Azure Güvenlik duvarını, genel IP adresi aralığınızı **SNAT olarak** yapılandırmak için yapılandırabilirsiniz. Daha fazla bilgi için bkz. [Azure Güvenlik DUVARı SNAT özel IP adresi aralıkları](snat-private-range.md).
+
+Azure Güvenlik Duvarı ölçümlerinde SNAT bağlantı noktası kullanımını izleyebilirsiniz. Daha fazla bilgi edinin ve [güvenlik duvarı günlüklerimiz ve ölçüm belgelerimizde](logs-and-metrics.md#metrics), SNAT bağlantı noktası kullanımı önerimize bakın.
 
 ## <a name="inbound-dnat-support"></a>Gelen DNAT desteği
 

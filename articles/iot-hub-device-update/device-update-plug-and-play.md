@@ -6,12 +6,12 @@ ms.author: valls
 ms.date: 2/14/2021
 ms.topic: conceptual
 ms.service: iot-hub-device-update
-ms.openlocfilehash: 0283a84650abaadd454b4f5bca83d1473e443fb8
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: fbc3502952e11830ef9abb06cb709fcc60288343
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105561823"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739539"
 ---
 # <a name="device-update-for-iot-hub-and-iot-plug-and-play"></a>IoT Hub ve IoT Tak ve Kullan cihaz güncelleştirmesi
 
@@ -63,8 +63,8 @@ Hizmet meta verileri, cihaz güncelleştirme hizmetlerinin eylem ve verileri cih
 
 |Name|Şema|Yön|Description|
 |----|------|---------|-----------|
-|eylem|tamsayı|buluttan cihaza|Aracının gerçekleştirmesi gereken bir eyleme karşılık gelen bir tamsayıdır. Aşağıda listelenen değerler.|
-|updateManifest|string|buluttan cihaza|Bir güncelleştirmenin içeriğini tanımlamakta kullanılır. [Içeri aktarma bildiriminden](import-update.md#create-device-update-import-manifest) üretildi|
+|action|tamsayı|buluttan cihaza|Aracının gerçekleştirmesi gereken bir eyleme karşılık gelen bir tamsayıdır. Aşağıda listelenen değerler.|
+|updateManifest|string|buluttan cihaza|Bir güncelleştirmenin içeriğini tanımlamakta kullanılır. [Içeri aktarma bildiriminden](import-update.md#create-a-device-update-import-manifest) üretildi|
 |updateManifestSignature|JSON Nesnesi|buluttan cihaza|Kaynak doğrulaması için kullanılan JSON Web anahtarlarına sahip bir JSON Web Imzası (JWS).|
 |Dosya URL 'leri|Harita|buluttan cihaza|' `FileHash` E eşleyin `DownloadUri` . Aracıya, hangi dosyaların indirileceğini ve dosyaların doğru şekilde indirildiğini doğrulamak için kullanılacak karmayı söyler.|
 

@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 01/06/2020
 ms.author: brendm
 ms.custom: devx-track-java
-ms.openlocfilehash: c354435f689f5182dd368fd53fdab28f1ab63d48
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6472ba7dd055de97a1855211f21fd0c75eea814f
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102218800"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874126"
 ---
 # <a name="analyze-logs-and-metrics-with-diagnostics-settings"></a>Tanılama ayarlarıyla günlükleri ve ölçümleri çözümleme
 
@@ -27,7 +27,7 @@ Azure Spring Cloud 'ın tanılama işlevini kullanarak, aşağıdaki hizmetlerde
 İzlemek istediğiniz günlük kategorisini ve ölçüm kategorisini seçin.
 
 > [!TIP]
-> Günlüklerinizi akışa almak mı istiyorsunuz? Bu [Azure CLI komutuna](/cli/azure/ext/spring-cloud/spring-cloud/app#ext-spring-cloud-az-spring-cloud-app-logs)göz atın!
+> Günlüklerinizi akışa almak mı istiyorsunuz? Bu [Azure CLI komutuna](/cli/azure/spring-cloud/app#az_spring_cloud_app_logs)göz atın!
 
 ## <a name="logs"></a>Günlükler
 
@@ -110,7 +110,7 @@ Günlükleri ve ölçümleri aşağıdaki başlıklar altında açıklandığı 
 > [!NOTE]
 > `==` büyük/küçük harfe duyarlıdır, ancak `=~` değildir.
 
-Log Analytics 'de kullanılan sorgu dili hakkında daha fazla bilgi edinmek için bkz. [Azure izleyici günlük sorguları](/azure/data-explorer/kusto/query/).
+Log Analytics 'de kullanılan sorgu dili hakkında daha fazla bilgi edinmek için bkz. [Azure izleyici günlük sorguları](/azure/data-explorer/kusto/query/). Tüm Log Analytics günlüklerinizi merkezi bir istemciden sorgulamak için [Azure Veri Gezgini](https://docs.microsoft.com/azure/data-explorer/query-monitor-data)' e göz atın.
 
 ### <a name="use-your-storage-account"></a>Depolama hesabınızı kullanın
 

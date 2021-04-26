@@ -6,13 +6,13 @@ ms.author: shasb
 ms.service: azure-arc
 ms.topic: tutorial
 ms.date: 03/02/2021
-ms.custom: template-tutorial
-ms.openlocfilehash: 1459d4a0f15595c6f658d73fcb9cb533023f0eb8
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.custom: template-tutorial , devx-track-azurecli
+ms.openlocfilehash: 0f1172ffa0d29734e7ec005bf2812eeca215aa0d
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105025726"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484175"
 ---
 # <a name="tutorial-deploy-configurations-using-gitops-on-an-azure-arc-enabled-kubernetes-cluster"></a>Öğretici: Azure Arc etkin bir Kubernetes kümesinde giler kullanarak yapılandırma dağıtma 
 
@@ -21,7 +21,7 @@ Bu öğreticide, Azure Arc etkin bir Kubernetes kümesinde Gilar kullanarak yap�
 > [!div class="checklist"]
 > * Örnek bir git deposu kullanarak Azure Arc etkin bir Kubernetes kümesinde yapılandırma oluşturma.
 > * Yapılandırmanın başarıyla oluşturulduğunu doğrulayın.
-> * Yapılandırma formunu özel bir git deposu olarak uygulayın.
+> * Özel bir git deposundan yapılandırma uygulayın.
 > * Kubernetes yapılandırmasını doğrulayın.
 
 ## <a name="prerequisites"></a>Önkoşullar
@@ -30,6 +30,14 @@ Bu öğreticide, Azure Arc etkin bir Kubernetes kümesinde Gilar kullanarak yap�
 - Mevcut bir Azure Arc, Kubernetes bağlı kümesini etkinleştirdi.
     - Henüz bir küme bağlanamadıysanız, [Azure Arc özellikli bir Kubernetes kümesi hızlı başlangıç](quickstart-connect-cluster.md)' i inceleyin.
 - Bu özelliğin avantajları ve mimarisi hakkında bilgiler. Yapılandırmalarda daha fazla bilgi edinin [ve Azure Arc etkin Kubernetes makalesini](conceptual-configurations.md)okuyun.
+- `k8s-configuration`Sürüm >= 1.0.0 Azure CLI uzantısını yükler:
+  
+  ```azurecli
+  az extension add --name k8s-configuration
+  ```
+
+    >[!TIP]
+    > `k8s-configuration`Uzantı zaten yüklüyse, aşağıdaki komutu kullanarak en son sürüme güncelleştirebilirsiniz.`az extension update --name k8s-configuration`
 
 ## <a name="create-a-configuration"></a>Yapılandırma oluşturma
 

@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
 ms.custom: mvc
-ms.openlocfilehash: fea8f52ebf40ba8195de134098693f90315bb384
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 10742ec277f5742067c432a2823cbb7592e6a752
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103461428"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874709"
 ---
 # <a name="tutorial-develop-iot-edge-modules-with-linux-containers"></a>Öğretici: Linux kapsayıcılarıyla IoT Edge modülleri geliştirme
 
@@ -44,7 +44,7 @@ Geliştirme makinesi:
 * Bir kapsayıcı altyapısını çalıştırabilme ile ilgili çoğu işletim sistemi, Linux cihazları için IoT Edge modülleri geliştirmek üzere kullanılabilir. Bu öğretici bir Windows bilgisayarı kullanır, ancak macOS veya Linux üzerinde bilinen farklılıkları gösterir.
 * Bu öğreticide daha sonra modül şablonu paketleri çekmek için [Git](https://git-scm.com/)'i yükler.  
 * [Visual Studio Code için C# (OmniSharp tarafından desteklenen) uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).
-* [.NET Core 2.1 SDK'sı](https://www.microsoft.com/net/download).
+* [.NET Core 2.1 SDK'sı](https://dotnet.microsoft.com/download/dotnet/2.1).
 
 Bir Azure IoT Edge cihazı:
 

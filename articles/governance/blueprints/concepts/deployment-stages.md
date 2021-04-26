@@ -4,10 +4,10 @@ description: Azure şemaları hizmetlerinin bir şema ataması oluştururken üz
 ms.date: 01/27/2021
 ms.topic: conceptual
 ms.openlocfilehash: 473f8c7957994401ea6000ecc0d8023a89f8c349
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105560171"
 ---
 # <a name="stages-of-a-blueprint-deployment"></a>Şema dağıtımının aşamaları

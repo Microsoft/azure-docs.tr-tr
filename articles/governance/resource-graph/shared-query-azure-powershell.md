@@ -3,13 +3,15 @@ title: 'Hızlı başlangıç: Azure PowerShell paylaşılan bir sorgu oluşturma
 description: Bu hızlı başlangıçta, Azure PowerShell kullanarak kaynak grafiği paylaşılan sorgusu oluşturma adımlarını izleyin.
 ms.date: 01/11/2021
 ms.topic: quickstart
-ms.custom: devx-track-azurepowershell
-ms.openlocfilehash: 2b771253b1dea4bd1d2913bf7c48062112019a19
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom:
+- devx-track-azurepowershell
+- mode-api
+ms.openlocfilehash: 9015b6df99bdd6f153194e8f4cbbe7658cf1d6dc
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99981553"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535798"
 ---
 # <a name="quickstart-create-a-resource-graph-shared-query-using-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell kullanarak kaynak grafiği paylaşılan sorgusu oluşturma
 

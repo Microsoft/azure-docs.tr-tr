@@ -7,12 +7,12 @@ ms.topic: quickstart
 ms.author: jukullam
 ms.date: 10/12/2020
 ms.custom: github-actions-azure
-ms.openlocfilehash: c4e21267c5eee9d86c05c51bc57bebfee699ef2c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 807fdbb1844eb6f89f71e639537a65baf8c76ad5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200604"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107761772"
 ---
 # <a name="quickstart-use-github-actions-to-connect-to-azure-mysql"></a>Hızlı başlangıç: Azure MySQL 'e bağlanmak için GitHub eylemlerini kullanma
 
@@ -42,7 +42,7 @@ Dosya iki bölümden oluşur:
 
 ## <a name="generate-deployment-credentials"></a>Dağıtım kimlik bilgileri oluştur
 
-[Azure CLI](/cli/azure/)'de [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az-ad-sp-create-for-rbac&preserve-view=true) komutuyla bir [hizmet sorumlusu](../active-directory/develop/app-objects-and-service-principals.md) oluşturabilirsiniz. Bu komutu Azure portal [Azure Cloud Shell](https://shell.azure.com/) veya **deneyin** düğmesini seçerek çalıştırın.
+[Azure CLI](/cli/azure/)'de [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az_ad_sp_create_for_rbac&preserve-view=true) komutuyla bir [hizmet sorumlusu](../active-directory/develop/app-objects-and-service-principals.md) oluşturabilirsiniz. Bu komutu Azure portal [Azure Cloud Shell](https://shell.azure.com/) veya **deneyin** düğmesini seçerek çalıştırın.
 
 Yer tutucuları `server-name` Azure 'da barındırılan MySQL sunucunuzun adıyla değiştirin. Ve öğesini `subscription-id` `resource-group` MySQL sunucunuza bağlı abonelik kimliği ve kaynak grubuyla değiştirin.  
 

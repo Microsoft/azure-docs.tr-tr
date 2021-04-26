@@ -4,20 +4,16 @@ description: Azure API Management hizmetinin IP adreslerini nasıl alacağınız
 services: api-management
 documentationcenter: ''
 author: mikebudzynski
-manager: cfowler
-editor: ''
 ms.service: api-management
-ms.workload: mobile
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 08/26/2019
+ms.date: 04/13/2021
 ms.author: apimpm
-ms.openlocfilehash: 45501fee9ae6ff47643a1ed197a07c4ba598e981
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5939292b6e810634723fada17521bb227764b989
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "80047739"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107534037"
 ---
 # <a name="ip-addresses-of-azure-api-management"></a>Azure API Management IP adresleri
 
@@ -106,4 +102,4 @@ API Management geliştirici, temel, standart ve Premium katmanlarında genel IP 
 * Azure sanal ağı, hizmetine eklenir veya hizmete kaldırılır.
 * API Management hizmeti harici ve Iç VNet dağıtım modu arasında geçiş yaptı.
 
-[Çoklu bölgesel dağıtımlarda](api-management-howto-deploy-multi-region.md), bölge yeniden BELIRTILMIŞSE bölgesel IP adresi değişir.
+[Çoklu bölgesel dağıtımlarda](api-management-howto-deploy-multi-region.md), bölge yeniden BELIRTILMIŞSE bölgesel IP adresi değişir. Bölgesel IP adresi, [kullanılabilirlik bölgelerini](zone-redundancy.md)etkinleştirdiğinizde, eklediğinizde veya kaldırırken de değişir.

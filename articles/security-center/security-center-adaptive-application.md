@@ -5,14 +5,14 @@ author: memildin
 manager: rkarlin
 ms.service: security-center
 ms.topic: how-to
-ms.date: 02/07/2021
+ms.date: 04/21/2021
 ms.author: memildin
-ms.openlocfilehash: de5c5fbb6673d022517bba2486ed4aa1f739d19b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9e2dcace673a1c7215634434f9e89ddc6b953a63
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102439587"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834633"
 ---
 # <a name="use-adaptive-application-controls-to-reduce-your-machines-attack-surfaces"></a>Makinelerinizin saldırı yüzeylerini azaltmak için uyarlamalı uygulama denetimleri kullanma
 
@@ -237,10 +237,17 @@ REST API kullanılabilen işlevlerden bazıları:
 
 ## <a name="faq---adaptive-application-controls"></a>SSS-Uyarlamalı uygulama denetimleri
 
+- [Uygulama denetimlerini zorlamak için herhangi bir seçenek var mı?](#are-there-any-options-to-enforce-the-application-controls)
+- [Recommendeded uygulamamda neden bir Qualys uygulaması görüyorum?](#why-do-i-see-a-qualys-app-in-my-recommendeded-applications)
+
 ### <a name="are-there-any-options-to-enforce-the-application-controls"></a>Uygulama denetimlerini zorlamak için herhangi bir seçenek var mı?
 Şu anda kullanılabilir zorlama seçeneği yok. Uyarlamalı uygulama denetimleri, güvenli olarak tanımladıklarından başka herhangi bir uygulama çalıştırıyorsa **güvenlik uyarıları** sağlamaya yöneliktir. Bunlar, bir dizi avantaja sahiptir ([Uyarlamalı uygulama denetimlerinin avantajları nelerdir?](#what-are-the-benefits-of-adaptive-application-controls)) ve bu sayfada gösterildiği gibi son derece özelleştirilebilir.
 
- 
+### <a name="why-do-i-see-a-qualys-app-in-my-recommendeded-applications"></a>Recommendeded uygulamamda neden bir Qualys uygulaması görüyorum?
+[Sunucular Için Azure Defender](defender-for-servers-introduction.md) , ek ücret ödemeden makineleriniz için güvenlik açığı taraması içerir. Bir Qualys lisansına veya hatta bir Qualys hesabına ihtiyacınız yoktur. her şey güvenlik merkezi 'nin içinde sorunsuz bir şekilde işlenir. Bu tarayıcının ayrıntıları ve nasıl dağıtılacağı hakkında yönergeler için bkz. [Defender 'ın tümleşik güvenlik açığı değerlendirme çözümü](deploy-vulnerability-assessment-vm.md).
+
+Güvenlik Merkezi tarayıcıyı dağıttığında hiçbir uyarının oluşturulmemesini sağlamak için, uyarlamalı uygulama denetim önerilen izin listesi, tüm makineler için tarayıcıyı içerir. 
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Bu belgede, Azure Güvenlik Merkezi 'nde Uyarlamalı uygulama denetimi 'ni kullanarak Azure 'da ve Azure dışı makinelerde çalışan uygulamaların izin verilenler listesini nasıl tanımlayacağınızı öğrendiniz. Bazı güvenlik merkezi iş yükü koruma özellikleri hakkında daha fazla bilgi edinmek için bkz.:

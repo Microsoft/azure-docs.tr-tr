@@ -8,29 +8,41 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: how-to
-ms.date: 03/15/2021
+ms.date: 04/19/2021
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: c5381a93308b5b3c8988cb8e25df541af1043418
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+zone_pivot_groups: b2c-policy-type
+ms.openlocfilehash: d63e7916423038e53c375b2be4114582cf4d6152
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105031316"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725773"
 ---
 # <a name="custom-email-verification-with-sendgrid"></a>SendGrid ile özel e-posta doğrulama
 
-Uygulamalarınızı kullanmak üzere kaydolan kullanıcılara özelleştirilmiş e-posta göndermek için Azure Active Directory B2C (Azure AD B2C) içinde özel e-posta kullanın. [Displaycontrols](display-controls.md) (Şu anda önizleme aşamasında) ve üçüncü taraf e-posta sağlayıcısı SendGrid kullanarak kendi e-posta şablonunuzu ve *Kimden:* adres ve konu ' ı kullanabilir, ayrıca yerelleştirme ve özel bır kerelik parola (OTP) ayarlarını destekleyebilirsiniz.
+[!INCLUDE [active-directory-b2c-choose-user-flow-or-custom-policy](../../includes/active-directory-b2c-choose-user-flow-or-custom-policy.md)]
+
+Uygulamalarınızı kullanmak üzere kaydolan kullanıcılara özelleştirilmiş e-posta göndermek için Azure Active Directory B2C (Azure AD B2C) içinde özel e-posta kullanın. Üçüncü taraf e-posta sağlayıcısı SendGrid 'i kullanarak kendi e-posta şablonunuzu ve *Kimden:* adres ve konu ' ı kullanabilir, yerelleştirme ve özel bir kerelik parola (OTP) ayarlarını da destekleyebilirsiniz.
+
+::: zone pivot="b2c-user-flow"
+
+[!INCLUDE [active-directory-b2c-limited-to-custom-policy](../../includes/active-directory-b2c-limited-to-custom-policy.md)]
+
+::: zone-end
+
+::: zone pivot="b2c-custom-policy"
 
 Özel e-posta doğrulaması için [SendGrid](https://sendgrid.com), [Mailjet](https://Mailjet.com)veya [mini](https://sparkpost.com)posta, özel bir REST API veya herhangi bir HTTP tabanlı e-posta sağlayıcısı (kendinizğiniz dahil) gibi bir üçüncü taraf e-posta sağlayıcısının kullanılması gerekir. Bu makalede, SendGrid kullanan bir çözümün kurulması açıklanmaktadır.
-
-[!INCLUDE [b2c-public-preview-feature](../../includes/active-directory-b2c-public-preview.md)]
 
 ## <a name="create-a-sendgrid-account"></a>SendGrid hesabı oluşturma
 
 Henüz bir tane yoksa, bir SendGrid hesabı ayarlayarak başlayın (Azure müşterileri her ay 25.000 ücretsiz e-postaların kilidini açabilir). Kurulum yönergeleri için, [Azure Ile SendGrid kullanarak e-posta gönderme](../sendgrid-dotnet-how-to-send-email.md)konusunun [SendGrid hesabı oluşturma](../sendgrid-dotnet-how-to-send-email.md#create-a-sendgrid-account) bölümüne bakın.
 
 [SendGrid API anahtarı oluşturduğunuz](../sendgrid-dotnet-how-to-send-email.md#to-find-your-sendgrid-api-key)bölümünü tamamladığınızdan emin olun. API anahtarını sonraki bir adımda kullanmak üzere kaydedin.
+
+> [!IMPORTANT]
+> SendGrid, müşterilere Paylaşılan IP ve [ayrılmış IP adreslerinden](https://sendgrid.com/docs/ui/account-and-settings/dedicated-ip-addresses/)e-posta gönderme yeteneği sunar. Ayrılmış IP adreslerini kullanırken, bir IP adresi ısınma ile kendi saygınlığını doğru bir şekilde oluşturmanız gerekir. Daha fazla bilgi için bkz. [IP adresi hazırlama](https://sendgrid.com/docs/ui/sending-email/warming-up-an-ip-address/).
 
 ## <a name="create-azure-ad-b2c-policy-key"></a>Azure AD B2C İlkesi anahtarı oluştur
 
@@ -290,6 +302,9 @@ Bu örnek görüntü denetimi şu şekilde yapılandırılır:
 ## <a name="add-otp-technical-profiles"></a>OTP teknik profilleri ekleme
 
 `GenerateOtp`Teknik profil, e-posta adresi için bir kod oluşturur. `VerifyOtp`Teknik profil, e-posta adresiyle ilişkili kodu doğrular. Biçimin yapılandırmasını ve tek seferlik parolanın kullanım süresini değiştirebilirsiniz. OTP teknik profilleri hakkında daha fazla bilgi için bkz. [tek seferlik parola teknik profili tanımlama](one-time-password-technical-profile.md).
+
+> [!NOTE]
+> Web. TPEngine. Providers. OneTimePasswordProtocolProvider protokolü tarafından oluşturulan OTP kodları tarayıcı oturumuna bağlanır. Bu, bir kullanıcının ilgili oturumları için geçerli olan farklı tarayıcı oturumlarında benzersiz OTP kodları oluşturabileceği anlamına gelir. Bunun aksine, yerleşik Kullanıcı akışı tarafından oluşturulan bir OTP kodu tarayıcı oturumundan bağımsızdır, bu nedenle bir Kullanıcı yeni bir tarayıcı oturumunda yeni bir OTP kodu oluşturursa, önceki OTP kodunun yerini alır.
 
 Aşağıdaki teknik profilleri `<ClaimsProviders>` öğesine ekleyin.
 
@@ -556,3 +571,5 @@ GitHub 'da özel bir e-posta doğrulama ilkesi örneğini bulabilirsiniz:
 
 - [Özel e-posta doğrulama-DisplayControls](https://github.com/azure-ad-b2c/samples/tree/master/policies/custom-email-verifcation-displaycontrol)
 - Özel bir REST API veya herhangi bir HTTP tabanlı SMTP e-posta sağlayıcısı kullanma hakkında bilgi için, bkz. [Azure AD B2C bir özel ilkede, bir RESTAN teknik profili tanımlama](restful-technical-profile.md).
+
+::: zone-end

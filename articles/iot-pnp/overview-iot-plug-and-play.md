@@ -3,18 +3,18 @@ title: IoT Tak ve Kullan 'ye giriş | Microsoft Docs
 description: IoT Tak ve Kullan hakkında bilgi edinin. IoT Tak ve Kullan, akıllı IoT cihazlarının yeteneklerini bildirmesine olanak sağlayan bir açık modelleme dilini temel alır. IoT cihazları, bulut çözümlerine bağlandıklarında cihaz modeli olarak adlandırılan bu bildirimi sunar. Bulut çözümü daha sonra herhangi bir kod yazmadan cihazı otomatik olarak anlayabilir ve bununla etkileşime başlayabilir.
 author: rido-min
 ms.author: rmpablos
-ms.date: 07/06/2020
+ms.date: 03/21/2021
 ms.topic: conceptual
 ms.service: iot-pnp
 services: iot-pnp
 manager: eliotgra
 ms.custom: references_regions
-ms.openlocfilehash: dcdd19faec5e428ac26917178aa8114245c205b3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 91a09db16524ebc7e4c04069b69b1c42c67538c6
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99594578"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739719"
 ---
 # <a name="what-is-iot-plug-and-play"></a>IoT Tak Çalıştır nedir?
 
@@ -68,7 +68,7 @@ Bir cihaz Oluşturucu olarak IoT Tak ve Kullan destekleyen bir IoT donanım ür�
 
 ## <a name="device-certification"></a>Cihaz sertifikasyonu
 
-[Iot Tak ve kullan Cihaz Sertifikası programı](howto-certify-device.md) , bir cihazın IoT Tak ve kullan sertifika gereksinimlerini karşıladığını doğrular. [Azure IoT cihaz kataloğuna yönelik ortak sertifikalı](https://aka.ms/devicecatalog)sertifikalı bir cihaz ekleyebilirsiniz.
+[Iot Tak ve kullan Cihaz Sertifikası programı](../certification/program-requirements-pnp.md) , bir cihazın IoT Tak ve kullan sertifika gereksinimlerini karşıladığını doğrular. [Azure IoT cihaz kataloğuna yönelik ortak sertifikalı](https://aka.ms/devicecatalog)sertifikalı bir cihaz ekleyebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

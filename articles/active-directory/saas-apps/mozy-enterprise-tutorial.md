@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 03/01/2019
 ms.author: jeedes
 ms.openlocfilehash: dfeb99fdbd5cf2b0784982b385d46c3a16901ec8
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105567432"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-mozy-enterprise"></a>Öğretici: Mozy Enterprise ile Azure Active Directory tümleştirme
@@ -120,13 +120,13 @@ Azure AD çoklu oturum açmayı Mozy Enterprise ile birlikte yapılandırmak iç
 
     c. Oturum kapatma URL 'SI
 
-### <a name="configure-mozy-enterprise-single-sign-on"></a>Mozy Kurumsal tek Sign-On yapılandırma
+### <a name="configure-mozy-enterprise-single-sign-on&quot;></a>Mozy Kurumsal tek Sign-On yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, Mozy Kurumsal Şirket sitenizde yönetici olarak oturum açın.
 
 2. **Yapılandırma** bölümünde **kimlik doğrulama ilkesi**' ne tıklayın.
    
-    ![Ekran görüntüsü yapılandırmadan seçilen kimlik doğrulama Ilkesini gösterir.](./media/mozy-enterprise-tutorial/ic777314.png "Kimlik doğrulama ilkesi")
+    ![Ekran görüntüsü yapılandırmadan seçilen kimlik doğrulama Ilkesini gösterir.](./media/mozy-enterprise-tutorial/ic777314.png &quot;Kimlik doğrulama ilkesi")
 
 3. **Kimlik doğrulama ilkesi** bölümünde aşağıdaki adımları uygulayın:
    
@@ -199,7 +199,7 @@ Bu bölümde, Mozy Enterprise 'a erişim vererek Azure çoklu oturum açma özel
 
 7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-mozy-enterprise-test-user"></a>Mozy kurumsal test kullanıcısı oluştur
+### <a name="create-mozy-enterprise-test-user&quot;></a>Mozy kurumsal test kullanıcısı oluştur
 
 Azure AD kullanıcılarının Mozy Enterprise 'ta oturum açmasını sağlamak için, Mozy Enterprise 'a sağlanması gerekir. Mozy Enterprise söz konusu olduğunda, sağlama el ile gerçekleştirilen bir görevdir.
 
@@ -212,7 +212,7 @@ Azure AD kullanıcılarının Mozy Enterprise 'ta oturum açmasını sağlamak i
 
 2. **Kullanıcılar**' a ve ardından **Yeni Kullanıcı Ekle**' ye tıklayın.
    
-    ![Kullanıcılar](./media/mozy-enterprise-tutorial/ic777317.png "Kullanıcılar")
+    ![Kullanıcılar](./media/mozy-enterprise-tutorial/ic777317.png &quot;Kullanıcılar")
    
     >[!NOTE]
     >**Yeni Kullanıcı Ekle** seçeneği yalnızca, **kimlik doğrulama ilkesi** altında sağlayıcı olarak **Mozy** seçilirse görüntülenir. SAML kimlik doğrulaması yapılandırıldıysa, kullanıcılar çoklu oturum açma yoluyla ilk oturum açma bilgilerini otomatik olarak eklenir.

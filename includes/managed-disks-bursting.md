@@ -9,10 +9,10 @@ ms.date: 04/27/2020
 ms.author: albecker1
 ms.custom: include file
 ms.openlocfilehash: 0f85f2770b98507618d5cbfdec1b55f397c7f514
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "101749923"
 ---
 Azure, disk depolama ıOPS ve MB/sn performansını artırma olanağı sunarak, bu, hem sanal makineler (VM) hem de diskler için buralma olarak adlandırılır. Sanal makinelerinizde ve diskinizde daha iyi bir performans elde etmek için VM ve disk patlaması etkin bir şekilde yararlanabilir.

@@ -1,14 +1,14 @@
 ---
 title: Bir müşteriyi Azure Lighthouse’a ekleme
 description: Bir müşteriyi Azure Mathouse 'a eklemeyi öğrenin. böylece, kaynakları Azure tarafından atanan kaynak yönetimi kullanılarak kendi kiracınız aracılığıyla erişilebilir ve yönetilebilir.
-ms.date: 02/16/2021
+ms.date: 03/29/2021
 ms.topic: how-to
-ms.openlocfilehash: 4487dd82b30e14f9db2001dc10f7437a53e745f3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d8ad448ac022b07ecdea6b68c4544b8c955814b1
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100556098"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107497974"
 ---
 # <a name="onboard-a-customer-to-azure-lighthouse"></a>Bir müşteriyi Azure Lighthouse’a ekleme
 
@@ -38,7 +38,7 @@ Bu KIMLIK değerleri zaten yoksa, bunları aşağıdaki yollarla alabilirsiniz. 
 
 ### <a name="azure-portal"></a>Azure portalı
 
-Kiracı KIMLIĞINIZ, Azure portal sağ üst tarafındaki hesap adınızın üzerine gelerek veya **Dizin Değiştir**' i seçerek görülebilir. Kiracı KIMLIĞINIZI seçmek ve kopyalamak için Portal içinden "Azure Active Directory" araması yapın, ardından **Özellikler** ' i seçin ve **dizin kimliği** alanında gösterilen değeri kopyalayın. Müşterinin kiracısında bir aboneliğin KIMLIĞINI bulmak için, "abonelikler" araması yapın ve ardından uygun abonelik KIMLIĞINI seçin.
+Kiracı KIMLIĞINIZ, Azure portal sağ üst tarafındaki hesap adınızın üzerine gelerek veya **Dizin Değiştir**' i seçerek görülebilir. Kiracı KIMLIĞINIZI seçmek ve kopyalamak için Portal içinden "Azure Active Directory" araması yapın, ardından **Özellikler** ' i seçin ve **dizin kimliği** alanında gösterilen değeri kopyalayın. Müşteri kiracısında abonelik kimliğini bulmak için "Abonelikler" araması yapın ve ilgili abonelik kimliğini seçin.
 
 ### <a name="powershell"></a>PowerShell
 
@@ -143,7 +143,7 @@ Seçtiğiniz şablon, bir aboneliğin tüm aboneliğini, kaynak grubunu veya bir
 |Abonelik (Azure Marketi 'Nde yayınlanan bir teklifi kullanırken)   |[ ÜzerindemarketplaceDelegatedResourceManagement.js](https://github.com/Azure/Azure-Lighthouse-samples/blob/master/templates/marketplace-delegated-resource-management/marketplaceDelegatedResourceManagement.json)  |[ ÜzerindemarketplaceDelegatedResourceManagement.parameters.js](https://github.com/Azure/Azure-Lighthouse-samples/blob/master/templates/marketplace-delegated-resource-management/marketplaceDelegatedResourceManagement.parameters.json)    |
 
 > [!TIP]
-> Bir yönetim grubunun tamamını tek bir dağıtımda eklemenize karşın, [bir ilkeyi yönetim grubu düzeyinde dağıtabilirsiniz](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/policy-delegate-management-groups). İlke, yönetim grubundaki her aboneliğin belirtilen yönetim kiracıya devredildi olup olmadığını denetler ve yoksa, sağladığınız değerlere göre atamayı oluşturacaktır.
+> Bir yönetim grubunun tamamını tek bir dağıtımda eklemenize karşın, [bir ilkeyi yönetim grubu düzeyinde dağıtabilirsiniz](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/policy-delegate-management-groups). İlke, yönetim grubundaki her bir aboneliğin belirtilen yönetim kiracısına devredildi olup olmadığını denetlemek için [Deployifnotexists efektini](../../governance/policy/concepts/effects.md#deployifnotexists) kullanır ve aksi takdirde, sağladığınız değerlere göre atamayı oluşturacaktır. Daha sonra, yönetim grubundaki tüm aboneliklere erişim sahibi olacaksınız, ancak bunlar üzerinde ayrı abonelikler (bir bütün olarak eylemler gerçekleştirmek yerine) üzerinde çalışmanız gerekir.
 
 Aşağıdaki örnek, bir aboneliği eklemek için kullanılabilecek **delegatedResourceManagement.parameters.js** değiştirilmiş bir dosya gösterir. Kaynak grubu parametre dosyaları ( [RG-Temsilcili-kaynak-yönetim](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/rg-delegated-resource-management) klasöründe bulunur) benzerdir, ancak aynı zamanda eklendi olacak belirli kaynak gruplarını belirlemek Için bir **RgName** parametresi de içerir.
 
@@ -302,6 +302,11 @@ Get-AzManagedServicesAssignment
 # Log in first with az login if you're not using Cloud Shell
 
 az account list
+
+# Confirm successful onboarding for Azure Lighthouse
+
+az managedservices definition list
+az managedservices assignment list
 ```
 
 Müşteri eklendi sonra değişiklik yapmanız gerekirse, [temsilciyi güncelleştirebilirsiniz](update-delegation.md). Ayrıca [, temsilciye erişimi tamamen kaldırabilirsiniz](remove-delegation.md) .

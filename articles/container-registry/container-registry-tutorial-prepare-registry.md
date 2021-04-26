@@ -4,12 +4,12 @@ description: Bir Azure Container Registry oluşturun, coğrafi çoğaltma yapıl
 ms.topic: tutorial
 ms.date: 06/30/2020
 ms.custom: seodec18, mvc
-ms.openlocfilehash: 6abf1b7a524bc7dd28f1704a362749ac84de2389
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c5f5627462f016c857d956be46c276dda78e9b2b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97826075"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780668"
 ---
 # <a name="tutorial-prepare-a-geo-replicated-azure-container-registry"></a>Öğretici: Coğrafi çoğaltmalı Azure Container Registry’yi hazırlama
 
@@ -98,7 +98,7 @@ Azure portal yeni kapsayıcı Kayıt defterinize gidin ve **Ayarlar** altında *
 
 Coğrafi çoğaltmayı yapılandırdığınıza göre, bir kapsayıcı görüntüsü oluşturun ve kayıt defterinize gönderin. Görüntüleri göndermeden önce kayıt defterinizde oturum açmalısınız.
 
-Kimlik doğrulaması yapmak ve kayıt defterinize yönelik kimlik bilgilerini önbelleğe almak için [az acr login](/cli/azure/acr#az-acr-login) komutunu kullanın. `<acrName>` değerini, önceden oluşturduğunuz kayıt defterinin adıyla değiştirin.
+Kimlik doğrulaması yapmak ve kayıt defterinize yönelik kimlik bilgilerini önbelleğe almak için [az acr login](/cli/azure/acr#az_acr_login) komutunu kullanın. `<acrName>` değerini, önceden oluşturduğunuz kayıt defterinin adıyla değiştirin.
 
 ```azurecli
 az acr login --name <acrName>

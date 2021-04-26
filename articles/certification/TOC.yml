@@ -1,0 +1,49 @@
+- name: Azure Sertifikalı cihaz belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure Sertifikalı cihaz programı nedir?
+      href: overview.md
+- name: Öğreticiler
+  expanded: true
+  items:
+    - name: 1-doğru sertifikayı seçme
+      href: tutorial-00-selecting-your-certification.md
+    - name: 2-projenizi oluşturma
+      href: tutorial-01-creating-your-project.md
+    - name: 3-cihaz ayrıntıları ekleme
+      href: tutorial-02-adding-device-details.md
+    - name: 4-cihazınızı test etme
+      href: tutorial-03-testing-your-device.md
+    - name: 5-cihazınızı yayımlama
+      href: tutorial-04-publishing-your-device.md
+- name: Program Gereksinimleri
+  items:
+    - name: Azure Sertifikalı cihaz
+      href: program-requirements-azure-certified-device.md
+    - name: IoT Tak Çalıştır
+      href: program-requirements-pnp.md
+    - name: Sınır yönetiliyor
+      href: program-requirements-edge-managed.md
+    - name: Edge güvenli-çekirdek (Önizleme)
+      href: program-requirements-edge-secured-core.md
+- name: Kavramlar
+  items:
+    - name: Eski cihazlar
+      href: concepts-legacy.md
+    - name: Pazarlama kavramları
+      href: concepts-marketing.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Yayınlanan bir cihazı düzenleme
+      href: how-to-edit-published-device.md
+    - name: Dolaylı olarak bağlı bir cihazı onaylama
+      href: how-to-indirectly-connected-devices.md
+    - name: IoT Tak ve Kullan cihazlarınızın sorunlarını giderme
+      href: how-to-troubleshoot-pnp.md
+    - name: Bileşenler özelliğini kullanma
+      href: how-to-using-the-components-feature.md
+- name: Kaynaklar
+  items:
+    - name: Sertifika sözlüğü
+      href: resources-glossary.md

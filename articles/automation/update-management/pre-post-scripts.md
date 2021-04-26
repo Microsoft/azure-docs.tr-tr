@@ -5,12 +5,13 @@ services: automation
 ms.subservice: update-management
 ms.date: 03/08/2021
 ms.topic: conceptual
-ms.openlocfilehash: ce60c773626d951062de3cc830b898e3b875f3cb
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 51067095b7ebb33da61908b1424752b481668f5f
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102485546"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830817"
 ---
 # <a name="manage-pre-scripts-and-post-scripts"></a>Ön betikleri ve son betikleri yönetme
 
@@ -147,7 +148,7 @@ Python 2 ' de, özel durum işleme bir [TRY](https://www.python-course.eu/except
 * Farklı Çalıştır hesabı
 * Çalıştırmak istediğiniz runbook
 
-Azure makinelerle etkileşim kurmak için [Invoke-AzVMRunCommand](/powershell/module/az.compute/invoke-azvmruncommand) cmdlet 'Ini kullanarak Azure VM 'larınızla etkileşim kurun. Bunun nasıl yapılacağı hakkında bir örnek için bkz. runbook örneği [güncelleştirme yönetimi – Betiği Çalıştır komutuyla Çalıştır](https://github.com/azureautomation/update-management-run-script-with-run-command).
+Azure makinelerle etkileşim kurmak için [Invoke-AzVMRunCommand](/powershell/module/az.compute/invoke-azvmruncommand) cmdlet 'Ini kullanarak Azure VM 'larınızla etkileşim kurun. Bunu nasıl yapacağınızı gösteren bir örnek için, [Çalıştır komutuyla güncelleştirme yönetimi-Betiği Çalıştır komutuyla](https://github.com/azureautomation/update-management-run-script-with-run-command)runbook örneği ' ne bakın.
 
 ### <a name="interact-with-non-azure-machines"></a>Azure olmayan makinelerle etkileşim kurma
 
@@ -158,7 +159,7 @@ Azure makinelerle etkileşim kurmak için [Invoke-AzVMRunCommand](/powershell/mo
 * Yerel olarak çalıştırmak istediğiniz runbook
 * Üst runbook
 
-Azure olmayan makinelerle etkileşim kurmak için Azure bağlamında bir üst runbook çalıştırılır. Bu runbook, [Start-AzAutomationRunbook](/powershell/module/Az.Automation/Start-AzAutomationRunbook) cmdlet 'i ile bir alt runbook 'u çağırır. `RunOn`Parametresini belirtmeniz ve betiğin üzerinde çalışacağı karma Runbook Worker adını sağlamanız gerekir. Bkz. runbook örneği [güncelleştirme yönetimi – betiği yerel olarak çalıştır](https://github.com/azureautomation/update-management-run-script-locally).
+Azure olmayan makinelerle etkileşim kurmak için Azure bağlamında bir üst runbook çalıştırılır. Bu runbook, [Start-AzAutomationRunbook](/powershell/module/Az.Automation/Start-AzAutomationRunbook) cmdlet 'i ile bir alt runbook 'u çağırır. `RunOn`Parametresini belirtmeniz ve betiğin üzerinde çalışacağı karma Runbook Worker adını sağlamanız gerekir. [Betiği yerel olarak çalıştır güncelleştirme yönetimi](https://github.com/azureautomation/update-management-run-script-locally)runbook örneğine bakın.
 
 ## <a name="abort-patch-deployment"></a>Düzeltme Eki dağıtımını durdur
 
@@ -238,9 +239,9 @@ Write-Output $context
 #Example: How to create and write to a variable using the pre-script:
 <#
 #Create variable named after this run so it can be retrieved
-New-AzAutomationVariable -ResourceGroupName $ResourceGroup –AutomationAccountName $AutomationAccount –Name $runId -Value "" –Encrypted $false
+New-AzAutomationVariable -ResourceGroupName $ResourceGroup -AutomationAccountName $AutomationAccount -Name $runId -Value "" -Encrypted $false
 #Set value of variable
-Set-AutomationVariable –Name $runId -Value $vmIds
+Set-AutomationVariable -Name $runId -Value $vmIds
 #>
 
 #Example: How to retrieve information from a variable set during the pre-script

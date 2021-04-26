@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 02/25/2020
 ms.author: trbye
 ms.custom: devx-track-csharp
-ms.openlocfilehash: d91bfee228b946ff564f6d080976f9ce5c12caa4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fa449ad3d9a0e26bd0754a67581c8d63fa025e55
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102426272"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552317"
 ---
 # <a name="tutorial-voice-enable-your-bot-using-the-speech-sdk"></a>Öğretici: konuşma SDK 'sını kullanarak bot uygulamanızı etkinleştirin
 
@@ -83,7 +83,7 @@ Bu öğreticide oluşturacağınız istemci uygulaması, el ile Azure hizmetleri
 Bu öğretici için farklı bir bölge kullanmak istiyorsanız, bu faktörler seçimlerinizle sınırlı olabilir:
 
 * [Desteklenen bir Azure bölgesi](regions.md#voice-assistants)kullandığınızdan emin olun.
-* Doğrudan hat konuşma kanalı, standart ve sinir seslendirmeyi içeren metin okuma hizmetini kullanır. Sinir seslerini [belirli Azure bölgeleriyle sınırlıdır](regions.md#standard-and-neural-voices).
+* Doğrudan hat konuşma kanalı, sinir ve standart sesde bulunan metin okuma hizmetini kullanır. Sinir ve standart seslerin hepsi bu [Azure bölgelerinde](regions.md#neural-and-standard-voices)kullanılabilir.
 
 Bölgeler hakkında daha fazla bilgi için bkz. [Azure konumları](https://azure.microsoft.com/global-infrastructure/locations/).
 
@@ -328,7 +328,7 @@ Ana uygulama pencerenizde bir hata iletisi alırsanız, hatayı belirlemek ve gi
 |Hata (AuthenticationFailure): WebSocket yükseltmesi bir kimlik doğrulama hatasıyla başarısız oldu (401). Doğru abonelik anahtarını (veya yetkilendirme belirtecini) ve bölge adını denetleyin| Uygulamanın Ayarlar sayfasında, konuşma abonelik anahtarını ve bölgesini doğru şekilde girdiğinizden emin olun.<br>Konuşma anahtarınızın ve anahtar bölgenizin doğru girildiğinden emin olun. |
 |Hata (ConnectionFailure): bağlantı uzak ana bilgisayar tarafından kapatıldı. Hata kodu: 1011. Hata ayrıntıları: İleti göndermeden önce bot 'a bağlanamıyoruz | ["Akış uç noktasını etkinleştir"](#register-the-direct-line-speech-channel) kutusunu ve/veya [ **Web yuvalarını**](#enable-web-sockets) açık olarak iade ettiğinizden emin olun.<br>Azure App Service çalıştığından emin olun. Varsa App Service yeniden başlatmayı deneyin.|
 |Hata (ConnectionFailure): bağlantı uzak ana bilgisayar tarafından kapatıldı. Hata kodu: 1002. Hata ayrıntıları: ' 101 ' durum kodu beklenirken sunucu ' 503 ' durum kodunu döndürdü | ["Akış uç noktasını etkinleştir"](#register-the-direct-line-speech-channel) kutusunu ve/veya [ **Web yuvalarını**](#enable-web-sockets) açık olarak iade ettiğinizden emin olun.<br>Azure App Service çalıştığından emin olun. Varsa App Service yeniden başlatmayı deneyin.|
-|Hata (ConnectionFailure): bağlantı uzak ana bilgisayar tarafından kapatıldı. Hata kodu: 1011. Hata ayrıntıları: yanıt durum kodu başarıyı göstermiyor: 500 (ınternalservererror)| Bot, çıkış etkinliği [konuş](https://github.com/microsoft/botframework-sdk/blob/master/specs/botframework-activity/botframework-activity.md#speak) alanında bir sinir sesi belirtti, ancak konuşma abonelik anahtarınızla ilişkili Azure bölgesi sinir seslerini desteklemez. Bkz. [Standart ve sinir sesleri](./regions.md#standard-and-neural-voices).|
+|Hata (ConnectionFailure): bağlantı uzak ana bilgisayar tarafından kapatıldı. Hata kodu: 1011. Hata ayrıntıları: yanıt durum kodu başarıyı göstermiyor: 500 (ınternalservererror)| Bot, çıkış etkinliği [konuş](https://github.com/microsoft/botframework-sdk/blob/master/specs/botframework-activity/botframework-activity.md#speak) alanında bir sinir sesi belirtti, ancak konuşma abonelik anahtarınızla ilişkili Azure bölgesi sinir seslerini desteklemez. Bkz. [sinir ve standart sesler](./regions.md#neural-and-standard-voices).|
 
 Sorununuz tabloda giderilmemişse, bkz. [sesli Yardımcılar: sık sorulan sorular](faq-voice-assistants.md). Bu öğreticideki tüm adımları tamamladıktan sonra sorununuzu çözemezseniz, lütfen  [sesli yardım GitHub sayfasında](https://github.com/Azure-Samples/Cognitive-Services-Voice-Assistant/issues)yeni bir sorun girin.
 
@@ -475,7 +475,7 @@ Bu öğreticide dağıtılan Echo-bot 'ı kullanmaya devam edemeyecekseniz, **Sp
 ## <a name="see-also"></a>Ayrıca bkz.
 
 * Bot yanıt süresi iyileştirmesini görmek için [size yakın bir Azure bölgesine](https://azure.microsoft.com/global-infrastructure/locations/) dağıtım
-* [Yüksek kaliteli sınır TTS seslerini destekleyen bir Azure bölgesine](./regions.md#standard-and-neural-voices) dağıtım
+* [Yüksek kaliteli sınır TTS seslerini destekleyen bir Azure bölgesine](./regions.md#neural-and-standard-voices) dağıtım
 * Doğrudan hat konuşma kanalı ile ilişkili fiyatlandırma:
   * [Bot hizmeti fiyatlandırması](https://azure.microsoft.com/pricing/details/bot-service/)
   * [Konuşma hizmeti](https://azure.microsoft.com/pricing/details/cognitive-services/speech-services/)

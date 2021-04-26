@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 09/01/2020
+ms.date: 04/02/2021
 ms.author: jeedes
-ms.openlocfilehash: 397d59c60ed90e0e25df671baa3d46660eff1d47
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d96f1e0413dac8477e2fc40bf84e88318abf3f9d
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96181586"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106284999"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-rsa-archer-suite"></a>Öğretici: RSA ıleyici Suite ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -37,13 +37,13 @@ Başlamak için aşağıdaki öğeler gereklidir:
 
 Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* RSA ıleyici Suite, **SP** tarafından başlatılan SSO 'yu destekler
-* RSA Ise paketi **tam zamanında** Kullanıcı sağlamayı destekliyor
+* RSA ıleyici Suite, **SP** tarafından başlatılan SSO 'yu destekler.
+* RSA Ise paketi **, tam zamanında** Kullanıcı sağlamayı destekler.
 
 > [!NOTE]
 > Bu uygulamanın tanımlayıcısı, tek bir kiracıda yalnızca bir örneğin yapılandırılabilmesini sağlamak için sabit bir dize değeridir.
 
-## <a name="adding-rsa-archer-suite-from-the-gallery"></a>Galeriden RSA ıleyici paketi ekleme
+## <a name="add-rsa-archer-suite-from-the-gallery"></a>Galeriden RSA ıleyici Suite 'i ekleme
 
 RSA ıleyici Suite 'in Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden RSA Ise paketini, yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
@@ -53,7 +53,6 @@ RSA ıleyici Suite 'in Azure AD ile tümleştirilmesini yapılandırmak için, G
 1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
 1. **Galeriden Ekle** bölümünde, arama kutusuna **RSA ıleyici Suite** yazın.
 1. Sonuçlar panelinden **RSA ıleyici paketi** ' ni seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
-
 
 ## <a name="configure-and-test-azure-ad-sso-for-rsa-archer-suite"></a>RSA ıleyici Suite için Azure AD SSO 'yu yapılandırma ve test etme
 
@@ -74,7 +73,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
 1. Azure portal, **RSA ıleyici Suite** uygulama tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
 1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
-1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
@@ -141,7 +140,7 @@ Bu bölümde, RSA ıleyici Suite 'e erişim vererek Azure çoklu oturum açma ö
 
 1. Aşağıdaki sayfada aşağıdaki adımları gerçekleştirin.
 
-    ![RSA ıleyici Suite SSO 'yu yapılandırma](./media/rsa-archer-suite-tutorial/configuring-saml-sso.png)
+    ![RSA ıleyici Suite SSO 'yu yapılandırma](./media/rsa-archer-suite-tutorial/configuration.png)
 
     a. **Çoklu oturum açma** sekmesine gidin ve açılan listeden **tek bir Sign-On modu** olarak **SAML** ' yi seçin.
 

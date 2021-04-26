@@ -4,12 +4,12 @@ description: Azure Işlevleri için belirli sanal ağ görevlerinin nasıl gerç
 ms.topic: conceptual
 ms.date: 3/13/2021
 ms.custom: template-how-to
-ms.openlocfilehash: a28a59a0de40bba7914d1920b42034fbbc223ddc
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c123b20e163731f9a872a969f2f1564479b6e308
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104609990"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718440"
 ---
 # <a name="how-to-configure-azure-functions-with-a-virtual-network"></a>Azure Işlevlerini bir sanal ağ ile yapılandırma
 
@@ -30,7 +30,7 @@ Bir işlev uygulaması oluşturduğunuzda, blob, kuyruk ve tablo depolamayı des
 
 1. Farklı bir depolama hesabı oluşturun veya yapılandırın.  Bu, hizmet uç noktalarıyla güvenli hale yaptığımız depolama hesabıdır ve işlevimizi bağlayacağız.
 
-1. Güvenli depolama hesabında [bir dosya paylaşma oluşturun](../storage/files/storage-how-to-create-file-share.md#create-file-share) .
+1. Güvenli depolama hesabında [bir dosya paylaşma oluşturun](../storage/files/storage-how-to-create-file-share.md#create-a-file-share) .
 
 1. Depolama hesabı için hizmet uç noktalarını veya özel uç noktayı etkinleştirin.  
     * Özel uç nokta bağlantıları kullanıyorsanız, depolama hesabının `file` ve alt kaynaklar için özel bir uç noktası olması gerekir `blob` .  Dayanıklı İşlevler gibi belirli yetenekler kullanılıyorsa, Ayrıca, `queue` `table` özel bir uç nokta bağlantısı aracılığıyla da ihtiyacınız ve erişilebilir olur.

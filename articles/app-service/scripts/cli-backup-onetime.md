@@ -9,12 +9,12 @@ ms.date: 12/07/2017
 ms.author: msangapu
 ms.reviewer: cephalin
 ms.custom: mvc, seodec18, devx-track-azurecli
-ms.openlocfilehash: 4f87e610c1f3315b21a9c157f127e713ff5444f2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a5771882e85c69ae54212b2ea8eb1e9482f27821
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98747550"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782648"
 ---
 # <a name="back-up-an-app-using-cli"></a>CLı kullanarak bir uygulamayı yedekleme
 
@@ -38,14 +38,14 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [`az group create`](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [`az storage account create`](/cli/azure/storage/account#az-storage-account-create) | Bir depolama hesabı oluşturur. |
-| [`az storage container create`](/cli/azure/storage/container#az-storage-container-create) | Bir Azure depolama kapsayıcısı oluşturur. |
-| [`az storage container generate-sas`](/cli/azure/storage/container#az-storage-container-generate-sas) | Azure depolama kapsayıcısı için bir SAS belirteci oluşturur.  |
-| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | App Service planı oluşturur. |
-| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | App Service uygulaması oluşturur. |
-| [`az webapp config backup create`](/cli/azure/webapp/config/backup#az-webapp-config-backup-create) | App Service uygulaması için bir yedekleme oluşturur. |
-| [`az webapp config backup list`](/cli/azure/webapp/config/backup#az-webapp-config-backup-list) | App Service bir uygulama için yedeklemelerin listesini alır. |
+| [`az group create`](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [`az storage account create`](/cli/azure/storage/account#az_storage_account_create) | Bir depolama hesabı oluşturur. |
+| [`az storage container create`](/cli/azure/storage/container#az_storage_container_create) | Bir Azure depolama kapsayıcısı oluşturur. |
+| [`az storage container generate-sas`](/cli/azure/storage/container#az_storage_container_generate_sas) | Azure depolama kapsayıcısı için bir SAS belirteci oluşturur.  |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az_appservice_plan_create) | App Service planı oluşturur. |
+| [`az webapp create`](/cli/azure/webapp#az_webapp_create) | App Service uygulaması oluşturur. |
+| [`az webapp config backup create`](/cli/azure/webapp/config/backup#az_webapp_config_backup_create) | App Service uygulaması için bir yedekleme oluşturur. |
+| [`az webapp config backup list`](/cli/azure/webapp/config/backup#az_webapp_config_backup_list) | App Service bir uygulama için yedeklemelerin listesini alır. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

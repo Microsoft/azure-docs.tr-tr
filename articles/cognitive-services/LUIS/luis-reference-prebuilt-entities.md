@@ -8,13 +8,13 @@ ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
-ms.date: 07/20/2020
-ms.openlocfilehash: cb3c74a2176ee7fcac53afb5185e8c62e66f4dfb
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.date: 04/13/2021
+ms.openlocfilehash: 7155a829655645e13e0485ed7d51305ec50e5b0a
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104798808"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107502768"
 ---
 # <a name="entities-per-culture-in-your-luis-model"></a>LUSıS modelinizde kültür başına varlık
 
@@ -23,7 +23,7 @@ Language Understanding (LUSıS) önceden oluşturulmuş varlıklar sağlar.
 ## <a name="entity-resolution"></a>Varlık çözümleme
 Uygulamanıza önceden oluşturulmuş bir varlık dahil edildiğinde, Lud, uç nokta yanıtında karşılık gelen varlık çözünürlüğünü içerir. Tüm örnek söyleymalar da varlıkla etiketlidir.
 
-Önceden oluşturulmuş varlıkların davranışı değiştirilemez, ancak [önceden oluşturulmuş varlığı bir makine öğrenimi varlığına veya alt varlığa bir özellik olarak ekleyerek](luis-concept-entity-types.md#effective-prebuilt-entities)çözümü geliştirebilirsiniz.
+Önceden oluşturulmuş varlıkların davranışı değiştirilemez, ancak [önceden oluşturulmuş varlığı bir makine öğrenimi varlığına veya alt varlığa bir özellik olarak ekleyerek](luis-concept-entity-types.md#prebuilt-entity)çözümü geliştirebilirsiniz.
 
 ## <a name="availability"></a>Kullanılabilirlik
 Aksi belirtilmediği takdirde, önceden oluşturulmuş varlıklar tüm LUıN uygulama yerel ayarları 'nda (kültürler) kullanılabilir. Aşağıdaki tabloda her kültür için desteklenen önceden oluşturulmuş varlıklar gösterilmektedir.

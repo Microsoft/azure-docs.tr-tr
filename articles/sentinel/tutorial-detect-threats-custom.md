@@ -12,14 +12,14 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 02/10/2021
+ms.date: 04/21/2021
 ms.author: yelevin
-ms.openlocfilehash: 70b56e70ec0e6f511142c48cc89720c054807a5c
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 180a5edd00b6085ffd91568471ca763f5e4e9711
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105042807"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814865"
 ---
 # <a name="tutorial-create-custom-analytics-rules-to-detect-threats"></a>Öğretici: tehditleri algılamak için özel analiz kuralları oluşturma
 
@@ -75,7 +75,7 @@ Bu Öğreticiyi tamamladıktan sonra şunları yapabilirsiniz:
 
     > [!NOTE]
     > #### <a name="rule-query-best-practices"></a>Kural sorgusu en iyi yöntemleri
-    > - Sorgu uzunluğu 1 ile 10.000 karakter arasında olmalıdır ve " `search *` " veya "" karakterlerini içeremez `union *` .
+    > - Sorgu uzunluğu 1 ile 10.000 karakter arasında olmalıdır ve " `search *` " veya "" karakterlerini içeremez `union *` . Sorgu uzunluğu sınırlamasını aşmak için [Kullanıcı tanımlı işlevleri](/azure/data-explorer/kusto/query/functions/user-defined-functions) kullanabilirsiniz.
     >
     > - Log Analytics sorgu penceresinde Azure Veri Gezgini sorguları oluşturmak için ADX işlevlerinin kullanılması **desteklenmez**.
     >

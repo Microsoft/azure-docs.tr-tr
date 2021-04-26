@@ -9,10 +9,10 @@ ms.date: 03/15/2019
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: 4c232e1ce183c6935d625b5bc9987a4981865ae4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96010844"
 ---
 Kaynak Yöneticisi dağıtım modeliyle çalışıyorsanız, yeni ağ geçidi SKU 'Larına geçiş yapabilirsiniz. Eski bir ağ geçidi SKU 'sunda yeni bir SKU 'ya değişiklik yaptığınızda, mevcut VPN ağ geçidini silip yeni bir VPN ağ geçidi oluşturursunuz.

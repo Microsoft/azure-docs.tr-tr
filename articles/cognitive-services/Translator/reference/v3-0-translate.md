@@ -10,12 +10,12 @@ ms.subservice: translator-text
 ms.topic: reference
 ms.date: 08/06/2020
 ms.author: lajanuar
-ms.openlocfilehash: d46fef0159b983f2685be40e2a0ab5471b96883b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7c92fb7f5de5542af08d1335bea745557a330f0d
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98895450"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107506015"
 ---
 # <a name="translator-30-translate"></a>Translator 3,0: çeviri
 
@@ -54,7 +54,7 @@ Sorgu dizesine geçirilen istek parametreleri şunlardır:
   <th width="20%">Sorgu parametresi</th>
   <th>Açıklama</th>
   <tr>
-    <td>Kaynak</td>
+    <td> değerini</td>
     <td><em>Isteğe bağlı parametre</em>.<br/>Giriş metninin dilini belirtir. Kapsam kullanarak <a href="./v3-0-languages.md">desteklenen dilleri</a> arayarak hangi dillerin çevrilebileceği hakkında bilgi edinin <code>translation</code> . <code>from</code>Parametresi belirtilmemişse, kaynak dili saptamak için otomatik dil algılama uygulanır. <br/><br/><code>from</code> <a href="/azure/cognitive-services/translator/dynamic-dictionary">Dinamik sözlük</a> özelliğini kullanırken, parametresini, oto algılaması yerine kullanmanız gerekir.</td>
   </tr>  
   <tr>
@@ -104,7 +104,7 @@ Sorgu dizesine geçirilen istek parametreleri şunlardır:
 
 <table width="100%">
   <th width="20%">Üst Bilgiler</th>
-  <th>Description</th>
+  <th>Açıklama</th>
   <tr>
     <td>Kimlik doğrulama üst bilgisi</td>
     <td><em>Gerekli istek üst bilgisi</em>.<br/><a href="/azure/cognitive-services/translator/reference/v3-0-reference#authentication">Kimlik doğrulaması için kullanılabilen seçeneklere</a>bakın.</td>
@@ -182,7 +182,7 @@ Başarılı bir yanıt, Giriş dizisindeki her bir dize için bir sonuç içeren
 
 <table width="100%">
   <th width="20%">Üst Bilgiler</th>
-  <th>Description</th>
+  <th>Açıklama</th>
     <tr>
     <td>X-RequestId</td>
     <td>İsteği tanımlamak için hizmet tarafından oluşturulan değer. Sorun giderme amacıyla kullanılır.</td>
@@ -199,7 +199,7 @@ Bir isteğin döndürdüğü olası HTTP durum kodları aşağıda verilmiştir.
 
 <table width="100%">
   <th width="20%">Durum Kodu</th>
-  <th>Description</th>
+  <th>Açıklama</th>
   <tr>
     <td>200</td>
     <td>Başarılı.</td>
@@ -466,7 +466,7 @@ Diğer bir deyişle, iki nokta üst üste başlangıç ve bitiş dizinini ayır�
 Hizalama bilgilerini almak için `includeAlignment=true` sorgu dizesinde öğesini belirtin.
 
 ```curl
-curl -X POST "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=fr&includeAlignment=true" -H "Ocp-Apim-Subscription-Key: <client-secret>" -H "Content-Type: application/json; charset=UTF-8" -d "[{'Text':'The answer lies in machine translation.'}]"
+curl -X POST "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=fr&includeAlignment=true&quot; -H &quot;Ocp-Apim-Subscription-Key: <client-secret>&quot; -H &quot;Content-Type: application/json; charset=UTF-8&quot; -d &quot;[{'Text':'The answer lies in machine translation.'}]"
 ```
 
 Yanıt:

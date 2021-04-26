@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 12/11/2020
 ms.author: mohitku
 ms.reviewer: tyao
-ms.openlocfilehash: b2f551257fb6869d5dec47014be3a8522b61b9fa
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: c0879edc0e3fbd6cf6bcadc26dd862f95ecf4fd4
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102506642"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872362"
 ---
 # <a name="tuning-web-application-firewall-waf-for-azure-front-door"></a>Azure ön kapısının Web uygulaması güvenlik duvarını (WAF) ayarlama
  
@@ -144,7 +144,7 @@ Dışlama listesi kullanmanın bir avantajı, yalnızca dışlamak üzere seçti
  
 Dışlamaları genel bir ayar olduğunu göz önünde bulundurmanız önemlidir. Bu, yapılandırılan dışlamanın yalnızca belirli bir Web uygulaması veya URI değil WAF 'niz aracılığıyla geçen tüm trafiğe uygulanacağını gösterir. Örneğin, bu bir sorun olabilir, çünkü *1 = 1* belirli bir Web uygulamasının gövdesinde geçerli bir istek ise, ancak aynı WAF ilkesi altında diğerleri için değildir. Farklı uygulamalar için farklı dışlama listeleri kullanmak mantıklı olursa, her bir uygulama için farklı bir WAF ilkesi kullanmayı ve bunları her bir uygulamanın ön ucunda uygulamayı düşünün.
  
-Yönetilen kuralların dışlama listelerini yapılandırırken, bir kural kümesi içindeki tüm kuralları, bir kural grubundaki tüm kuralları veya tek bir kuralı hariç bırakmayı seçebilirsiniz. Dışlama listesi [PowerShell](/powershell/module/az.frontdoor/New-AzFrontDoorWafManagedRuleExclusionObject), [Azure CLı](/cli/azure/ext/front-door/network/front-door/waf-policy/managed-rules/exclusion#ext_front_door_az_network_front_door_waf_policy_managed_rules_exclusion_add), [REST API](/rest/api/frontdoorservice/webapplicationfirewall/policies/createorupdate)veya Azure Portal kullanılarak yapılandırılabilir.
+Yönetilen kuralların dışlama listelerini yapılandırırken, bir kural kümesi içindeki tüm kuralları, bir kural grubundaki tüm kuralları veya tek bir kuralı hariç bırakmayı seçebilirsiniz. Dışlama listesi [PowerShell](/powershell/module/az.frontdoor/New-AzFrontDoorWafManagedRuleExclusionObject), [Azure CLı](/cli/azure/network/front-door/waf-policy/managed-rules/exclusion#az_network_front_door_waf_policy_managed_rules_exclusion_add), [REST API](/rest/api/frontdoorservice/webapplicationfirewall/policies/createorupdate)veya Azure Portal kullanılarak yapılandırılabilir.
 
 * Kural düzeyinde dışlamaları
   * Kural düzeyinde dışlamaları uygulamak, belirtilen dışlamaların yalnızca bu kurala göre çözümlenmeyeceği anlamına gelir, ancak hala kural kümesindeki diğer tüm kurallara göre çözümlenmeyecektir. Bu, Dışlamalar için en ayrıntılı düzeydir ve bir olayda sorun giderirken WAF günlüklerinde bulduğunuz bilgilere göre yönetilen kural kümesini ince ayar yapmak için kullanılabilir.
@@ -201,7 +201,7 @@ Bir kuralı devre dışı bırakmak, belirli bir koşulu karşılayan tüm istek
  
 Ancak, bir kuralı devre dışı bırakmak WAF ilkesiyle ilişkili tüm ön uç konakları için geçerli olan genel bir ayardır. Bir kuralı devre dışı bırakmayı seçtiğinizde, WAF ilkesiyle ilişkili diğer ön uç konakları için koruma veya algılama olmadan açığa çıkan güvenlik açıklarını terk edebilirsiniz.
  
-Yönetilen bir kuralı devre dışı bırakmak için Azure PowerShell kullanmak istiyorsanız, [`PSAzureManagedRuleOverride`](/powershell/module/az.frontdoor/new-azfrontdoorwafmanagedruleoverrideobject) nesne belgelerine bakın. Azure CLı kullanmak istiyorsanız [`az network front-door waf-policy managed-rules override`](/cli/azure/ext/front-door/network/front-door/waf-policy/managed-rules/override) belgelere bakın.
+Yönetilen bir kuralı devre dışı bırakmak için Azure PowerShell kullanmak istiyorsanız, [`PSAzureManagedRuleOverride`](/powershell/module/az.frontdoor/new-azfrontdoorwafmanagedruleoverrideobject) nesne belgelerine bakın. Azure CLı kullanmak istiyorsanız [`az network front-door waf-policy managed-rules override`](/cli/azure/network/front-door/waf-policy/managed-rules/override) belgelere bakın.
 
 ![WAF kuralları](../media/waf-front-door-tuning/waf-rules.png)
 

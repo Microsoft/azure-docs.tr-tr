@@ -3,12 +3,12 @@ title: Azure Resource Manager şablonları için bıcep dili
 description: Azure Resource Manager şablonları aracılığıyla Azure 'a altyapı dağıtmak için Bıcep dilini açıklar.
 ms.topic: conceptual
 ms.date: 03/23/2021
-ms.openlocfilehash: 74028c682b48a492c2e8f13bef538d1694370cbd
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: af207e6ca88eab50fe6030883379c87c0ec05691
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104955916"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773756"
 ---
 # <a name="what-is-bicep-preview"></a>Bicep (Önizleme) nedir?
 
@@ -31,6 +31,17 @@ Araçları yükledikten sonra [Bıcep öğreticisini](./bicep-tutorial-create-fi
 Eşdeğer JSON ve Bıcep dosyalarını yan yana görüntülemek için, [Bıcep PLAYIN](https://aka.ms/bicepdemo)bölümüne bakın.
 
 Bıcep 'ye dönüştürmek istediğiniz mevcut bir ARM şablonunuz varsa, bkz. [JSON ve bıcep arasında ARM şablonlarını dönüştürme](bicep-decompile.md).
+
+## <a name="benefits-of-bicep-versus-other-tools"></a>Bicep ve diğer araçların avantajları
+
+Bıcep diğer seçeneklere aşağıdaki avantajları sağlar:
+
+* **Tüm kaynak türleri ve API sürümleri Için destek**: bıcep, Azure hizmetleri için tüm ÖNIZLEME ve GA sürümlerini hemen destekler. Kaynak sağlayıcısı yeni kaynak türleri ve API sürümleri sunarak, bunları Bıcep dosyanızda kullanabilirsiniz. Yeni hizmetleri kullanmadan önce araçların güncelleştirilmesini beklemeniz gerekmez.
+* **Yazma deneyimi**: Bıcep dosyalarınızı oluşturmak için vs Code kullandığınızda, birinci sınıf bir yazma deneyimi alırsınız. Düzenleyici zengin tür güvenliği, IntelliSense ve sözdizimi doğrulaması sağlar.
+* **Modülerlik**: [modülleri](bicep-modules.md)kullanarak bıcep kodunuzu yönetilebilir parçalara kesebilirsiniz. Modül bir dizi ilgili kaynağı dağıtır. Modüller kodu yeniden kullanmanıza ve geliştirmeyi basitleştirmenize imkan tanır. Bu kaynakları dağıtmanız gereken her zaman modülü bir Bıcep dosyasına ekleyin.
+* **Azure hizmetleriyle tümleştirme**: bıcep, Azure ilkesi, şablon özellikleri ve planlar gibi Azure hizmetleriyle tümleşiktir.
+* **Yönetilecek durum veya durum dosyası yok**: tüm durum Azure 'da depolanır. Kullanıcılar işbirliği yapabilir ve güncelleştirmelerin gerekli olduğu şekilde işlenmesini sağlayabilir. Şablonunuz dağıtılmadan önce değişiklikleri önizlemek için [ne yapılır işlemini](template-deploy-what-if.md) kullanın.
+* **Maliyet ve açık kaynak yok**: bıcep tamamen ücretsizdir. Premium yetenekler için ödeme yapmak zorunda değilsiniz. Microsoft desteği tarafından da desteklenir.
 
 ## <a name="bicep-improvements"></a>Bıcep geliştirmeleri
 
@@ -57,11 +68,7 @@ Sözdiziminin tam karşılaştırması için bkz. [Şablonlar IÇIN JSON ve Bıc
 
 Bıcep, kaynaklar arasındaki bağımlılıkları otomatik olarak yönetir. Bir `dependsOn` kaynağın sembolik adı başka bir kaynak bildiriminde kullanıldığında ayarından kaçınabilirsiniz.
 
-Bıcep ile projenizi birden çok modüle kesebilirsiniz.
-
 Bicep dosyasının yapısı, JSON şablonundan daha esnektir. Dosya içinde herhangi bir yerde parametreler, değişkenler ve çıktılar bildirebilirsiniz. JSON 'da, şablonun ilgili bölümlerinin içindeki tüm parametreleri, değişkenleri ve çıkışları bildirmeniz gerekir.
-
-Bicep için VS Code uzantısı, zengin doğrulama ve IntelliSense sağlar. Örneğin, bir kaynağın özelliklerini almak için uzantının IntelliSense 'i kullanabilirsiniz.
 
 ## <a name="known-limitations"></a>Bilinen sınırlamalar
 

@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 06/14/2019
 ms.topic: conceptual
-ms.openlocfilehash: f05c3247ecdd77fe4cf02db70c7ba4b2c534f959
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: c1632da35864fc6822b385adac06d7f124aea061
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99055357"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830421"
 ---
 # <a name="update-azure-powershell-modules"></a>Azure PowerShell modüllerini güncelleştirme
 

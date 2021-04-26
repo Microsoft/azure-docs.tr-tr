@@ -7,12 +7,12 @@ ms.service: postgresql
 ms.topic: how-to
 ms.date: 12/17/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 7e74a58a14bdcc2a6fe1e9f86305aae415c6abf7
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d13db238674cae62f528c3d730bf892a72b8f6c2
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97674523"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764702"
 ---
 # <a name="create-and-manage-read-replicas-from-the-azure-cli-rest-api"></a>Azure CLı 'dan okuma çoğaltmaları oluşturun ve yönetin REST API
 
@@ -31,7 +31,7 @@ Doğru günlük kaydını yapılandırmak için Azure çoğaltma desteği parame
 > [!NOTE]
 > Kalıcı ağır yazma yoğunluklu birincil iş yükleri için okuma çoğaltmaları dağıtıldığında, çoğaltma gecikmesi büyümeye devam edebilir ve hiçbir zaman birincil ile yakalayamayabilir. Bu durum, çoğaltma sırasında alınana kadar WAL dosyaları silinmediği için birincil sırada depolama kullanımını da artırabilir.
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 Azure CLı kullanarak okuma çoğaltmaları oluşturabilir ve yönetebilirsiniz.
 
 ### <a name="prerequisites"></a>Önkoşullar
@@ -62,7 +62,7 @@ Azure CLı kullanarak okuma çoğaltmaları oluşturabilir ve yönetebilirsiniz.
 
 ### <a name="create-a-read-replica"></a>Okuma amaçlı çoğaltma oluşturma
 
-[Az Postgres Server Replication Create](/cli/azure/postgres/server/replica#az-postgres-server-replica-create) komutu aşağıdaki parametreleri gerektirir:
+[Az Postgres Server Replication Create](/cli/azure/postgres/server/replica#az_postgres_server_replica_create) komutu aşağıdaki parametreleri gerektirir:
 
 | Ayar | Örnek değer | Description  |
 | --- | --- | --- |
@@ -93,14 +93,14 @@ az postgres server replica create --name mydemoserver-replica --source-server my
 > Birincil sunucu ayarı yeni bir değere güncellenmesinden önce, çoğaltma ayarını eşit veya daha büyük bir değere güncelleştirin. Bu eylem, çoğaltmanın ana üzerinde yapılan değişikliklerle devam etmesine yardımcı olur.
 
 ### <a name="list-replicas"></a>Çoğaltmaları Listele
-[Az Postgres Server Replication List](/cli/azure/postgres/server/replica#az-postgres-server-replica-list) komutunu kullanarak bir birincil sunucunun çoğaltmalarının listesini görüntüleyebilirsiniz.
+[Az Postgres Server Replication List](/cli/azure/postgres/server/replica#az_postgres_server_replica_list) komutunu kullanarak bir birincil sunucunun çoğaltmalarının listesini görüntüleyebilirsiniz.
 
 ```azurecli-interactive
 az postgres server replica list --server-name mydemoserver --resource-group myresourcegroup 
 ```
 
 ### <a name="stop-replication-to-a-replica-server"></a>Çoğaltma sunucusuna çoğaltmayı durdur
-[Az Postgres Server Replication stop](/cli/azure/postgres/server/replica#az-postgres-server-replica-stop) komutunu kullanarak birincil sunucu ile okuma çoğaltması arasında çoğaltmayı durdurabilirsiniz.
+[Az Postgres Server Replication stop](/cli/azure/postgres/server/replica#az_postgres_server_replica_stop) komutunu kullanarak birincil sunucu ile okuma çoğaltması arasında çoğaltmayı durdurabilirsiniz.
 
 Birincil sunucuya çoğaltmayı ve bir okuma çoğaltmasını durdurduktan sonra geri alınamaz. Okuma çoğaltması, hem okuma hem de yazma işlemlerini destekleyen tek başına bir sunucu haline gelir. Tek başına sunucu tekrar bir çoğaltmaya yapılamaz.
 
@@ -109,7 +109,7 @@ az postgres server replica stop --name mydemoserver-replica --resource-group myr
 ```
 
 ### <a name="delete-a-primary-or-replica-server"></a>Birincil veya çoğaltma sunucusunu silme
-Birincil veya çoğaltma sunucusunu silmek için [az Postgres Server DELETE](/cli/azure/postgres/server#az-postgres-server-delete) komutunu kullanın.
+Birincil veya çoğaltma sunucusunu silmek için [az Postgres Server DELETE](/cli/azure/postgres/server#az_postgres_server_delete) komutunu kullanın.
 
 Birincil sunucuyu sildiğinizde, tüm okuma çoğaltmalarına çoğaltma durdurulur. Okuma çoğaltmaları artık hem okuma hem de yazma işlemlerini destekleyen tek başına sunucular haline gelir.
 

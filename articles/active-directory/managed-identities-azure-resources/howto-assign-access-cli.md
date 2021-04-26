@@ -16,12 +16,12 @@ ms.date: 01/29/2021
 ms.author: barclayn
 ms.collection: M365-identity-device-management
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: e3b06ce76ae77aa62b20b707a736e8e20e5f6c45
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1e1fa22cc36df00b098274002b6bd444be4140ff
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99090053"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783296"
 ---
 # <a name="assign-a-managed-identity-access-to-a-resource-using-azure-cli"></a>Azure CLı kullanarak bir kaynağa yönetilen kimlik erişimi atama
 
@@ -41,7 +41,7 @@ Henüz bir Azure hesabınız yoksa, devam etmeden önce [ücretsiz bir hesaba ka
 
 Azure [sanal makinesi](qs-configure-cli-windows-vm.md) veya [Azure sanal makine ölçek kümesi](qs-configure-cli-windows-vmss.md)gibi bir Azure kaynağında yönetilen kimlik etkinleştirildikten sonra: 
 
-1. Bu örnekte, bir depolama hesabına Azure sanal makine erişimi veriyoruz. İlk olarak, myVM adlı sanal makine için hizmet sorumlusunu almak üzere [az Resource List](/cli/azure/resource/#az-resource-list) kullanıyoruz:
+1. Bu örnekte, bir depolama hesabına Azure sanal makine erişimi veriyoruz. İlk olarak, myVM adlı sanal makine için hizmet sorumlusunu almak üzere [az Resource List](/cli/azure/resource/#az_resource_list) kullanıyoruz:
 
    ```azurecli-interactive
    spID=$(az resource list -n myVM --query [*].identity.principalId --out tsv)
@@ -52,7 +52,7 @@ Azure [sanal makinesi](qs-configure-cli-windows-vm.md) veya [Azure sanal makine 
    spID=$(az resource list -n DevTestVMSS --query [*].identity.principalId --out tsv)
    ```
 
-1. Hizmet sorumlusu KIMLIĞI ' ne sahip olduktan sonra, sanal makine veya sanal makine ölçek kümesinin "okuyucu" ' ı "myStorageAcct" adlı bir depolama hesabına erişimini sağlamak için [az role atama oluştur](/cli/azure/role/assignment#az-role-assignment-create) komutunu kullanın:
+1. Hizmet sorumlusu KIMLIĞI ' ne sahip olduktan sonra, sanal makine veya sanal makine ölçek kümesinin "okuyucu" ' ı "myStorageAcct" adlı bir depolama hesabına erişimini sağlamak için [az role atama oluştur](/cli/azure/role/assignment#az_role_assignment_create) komutunu kullanın:
 
    ```azurecli-interactive
    az role assignment create --assignee $spID --role 'Reader' --scope /subscriptions/<mySubscriptionID>/resourceGroups/<myResourceGroup>/providers/Microsoft.Storage/storageAccounts/myStorageAcct

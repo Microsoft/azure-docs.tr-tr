@@ -8,12 +8,12 @@ ms.subservice: files
 ms.topic: conceptual
 ms.date: 3/19/2021
 ms.author: jeffpatt
-ms.openlocfilehash: 652d362a11e80a488c9278dfeff38e715acee784
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 381fe00e835f0e359a2347372cbc2544a2b211ca
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105641947"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107364235"
 ---
 # <a name="azure-files-and-azure-netapp-files-comparison"></a>Azure dosyaları ve Azure NetApp Files karşılaştırması
 
@@ -25,7 +25,7 @@ Bulut dosya depolaması gerektiren çoğu iş yükü, Azure dosyalarında veya A
 
 | Kategori | Azure Dosyaları | Azure NetApp Files |
 |---------|-------------------------|---------|
-| Description | [Azure dosyaları](https://azure.microsoft.com/services/storage/files/) , tam olarak yönetilen, yüksek oranda kullanılabilir bir hizmettir ve yerinde veri güncelleştirmeleriyle rastgele erişim iş yükleri için iyileştirilmiştir.<br><br> Azure dosyaları, Azure Blobları gibi diğer hizmetlerle aynı Azure depolama platformunda oluşturulmuştur. | [Azure NetApp Files](https://azure.microsoft.com/services/netapp/) , gelişmiş veri yönetimi özelliklerine ihtiyaç duyan en zorlu, yüksek performanslı ve düşük gecikme süreli iş yüklerini işleyebilen, tam olarak yönetilen, yüksek oranda kullanılabilir, kurumsal düzeyde bir NAS hizmetidir. Bu, olmadan "un-geçirilip geçirilemeyeceğini denetleyin" kabul edilen iş yüklerinin geçirilmesini mümkün kılar.<br><br>  ANF, tutarlı bir Azure deneyimi ve bir şirket içi performans gibi Azure veri merkezi 'nde çalışan ONTAP depolama işletim sistemi ile NetApp 'in çıplak sürümüyle oluşturulmuştur. |
+| Açıklama | [Azure dosyaları](https://azure.microsoft.com/services/storage/files/) , yerinde veri güncelleştirmeleriyle rastgele erişim iş yükleri için optimize edilmiş, tam olarak yönetilen, yüksek oranda kullanılabilir ve kurumsal düzeyde bir hizmettir.<br><br> Azure dosyaları, Azure Blobları gibi diğer hizmetlerle aynı Azure depolama platformunda oluşturulmuştur. | [Azure NetApp Files](https://azure.microsoft.com/services/netapp/) , gelişmiş veri yönetimi özelliklerine ihtiyaç duyan en zorlu, yüksek performanslı ve düşük gecikme süreli iş yüklerini işleyebilen, tam olarak yönetilen, yüksek oranda kullanılabilir, kurumsal düzeyde bir NAS hizmetidir. Bu, olmadan "un-geçirilip geçirilemeyeceğini denetleyin" kabul edilen iş yüklerinin geçirilmesini mümkün kılar.<br><br>  ANF, tutarlı bir Azure deneyimi ve bir şirket içi performans gibi Azure veri merkezi 'nde çalışan ONTAP depolama işletim sistemi ile NetApp 'in çıplak sürümüyle oluşturulmuştur. |
 | Protokoller | Premium<br><ul><li>SMB 2,1, 3,0</li><li>NFS 4,1 (Önizleme)</li><li>REST</li></ul><br>Standart<br><ul><li>SMB 2,1, 3,0</li><li>REST</li></ul><br> Daha fazla bilgi için bkz. [kullanılabilir dosya paylaşma protokolleri](https://docs.microsoft.com/azure/storage/files/storage-files-compare-protocols). | Tüm Katmanlar<br><ul><li>SMB 1, 2. x, 3. x</li><li>NFS 3,0, 4,1</li><li>Çift protokol erişimi (NFSv3/SMB)</li></ul><br> Daha fazla bilgi edinmek için bkz. [NFS](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-create-volumes), [SMB](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-create-volumes-smb)veya [çift protokol](https://docs.microsoft.com/azure/azure-netapp-files/create-volumes-dual-protocol) birimleri oluşturma. |
 | Bölge kullanılabilirliği | Premium<br><ul><li>30 + bölge</li></ul><br>Standart<br><ul><li>Tüm bölgeler</li></ul><br> Daha fazla bilgi edinmek için bkz. [Bölgeye göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/?products=storage). | Tüm Katmanlar<br><ul><li>25 + bölge</li></ul><br> Daha fazla bilgi edinmek için bkz. [Bölgeye göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/?products=storage). |
 | Yedeklilik | Premium<br><ul><li>LRS</li><li>ZRS</li></ul><br>Standart<br><ul><li>LRS</li><li>ZRS</li><li>GRS</li><li>GZRS</li></ul><br> Daha fazla bilgi için bkz. [Artıklık](https://docs.microsoft.com/azure/storage/files/storage-files-planning#redundancy). | Tüm Katmanlar<br><ul><li>Yerleşik yerel HA</li><li>[Bölgeler arası çoğaltma](https://docs.microsoft.com/azure/azure-netapp-files/cross-region-replication-introduction)</li></ul> |

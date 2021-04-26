@@ -7,12 +7,12 @@ ms.author: dademath
 ms.date: 03/10/2021
 ms.topic: quickstart
 ms.service: azure-communication-services
-ms.openlocfilehash: 093fcfd95d291d959ed49cc39a227a99f14a0383
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 798b898f6e2367e3096bcf985715fd48de3d394f
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103488253"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105930226"
 ---
 # <a name="quickstart-create-your-own-ui-framework-component"></a>Hızlı başlangıç: kendi UI çerçevesi bileşeninizi oluşturma
 
@@ -47,7 +47,7 @@ Bu işlemin sonunda klasörün içinde tam bir uygulamanız olması gerekir `my-
 
 ### <a name="install-the-package"></a>Paketi yükler
 
-`npm install`JavaScript için istemci kitaplığı 'Nı çağıran Azure Iletişim hizmetlerini yüklemek için komutunu kullanın. Belirtilen tarbol (özel Önizleme) ' i My-App dizinine taşıyın.
+`npm install`JavaScript için SDK 'Yı çağıran Azure Iletişim hizmetlerini yüklemek için komutunu kullanın. Belirtilen tarbol (özel Önizleme) ' i My-App dizinine taşıyın.
 
 ```console
 
@@ -71,7 +71,7 @@ npm run start
 
 ## <a name="object-model"></a>Nesne modeli
 
-Aşağıdaki sınıflar ve arabirimler, Azure Iletişim Hizmetleri Kullanıcı arabirimi istemci kitaplığının bazı önemli özelliklerini işler:
+Aşağıdaki sınıflar ve arabirimler, Azure Iletişim Hizmetleri Kullanıcı arabirimi SDK 'sının bazı önemli özelliklerini işler:
 
 | Ad                                  | Açıklama                                                  |
 | ------------------------------------- | ------------------------------------------------------------ |

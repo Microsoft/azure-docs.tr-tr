@@ -1,14 +1,14 @@
 ---
 title: IRS 1075 şema örnek denetimleri
 description: IRS 1075 şema örneğinin denetim eşlemesi. Her denetim, değerlendirmenize yardımcı olan bir veya daha fazla Azure Ilke tanımına eşlenir.
-ms.date: 01/08/2021
+ms.date: 04/02/2021
 ms.topic: sample
-ms.openlocfilehash: 08ce69d13f201e6f0bd1d649ebfe3bbf5c38f927
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6c3024b970762f7e295ad2d190e4f1cdec3ac5de
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98045232"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106386576"
 ---
 # <a name="control-mapping-of-the-irs-1075-blueprint-sample"></a>IRS 1075 şema örneğinin denetim eşlemesi
 

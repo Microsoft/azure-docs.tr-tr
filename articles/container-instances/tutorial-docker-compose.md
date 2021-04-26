@@ -4,12 +4,12 @@ description: Çok kapsayıcılı bir uygulama derlemek ve çalıştırmak için 
 ms.topic: tutorial
 ms.date: 10/28/2020
 ms.custom: ''
-ms.openlocfilehash: a71ff438feaef555a85c33d818c287c64621d40d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ef08b9f9e0f596f1d94c0e6edfd46f735fe78053
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92913849"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786929"
 ---
 # <a name="tutorial-deploy-a-multi-container-group-using-docker-compose"></a>Öğretici: Docker Compose kullanarak çok kapsayıcılı bir grup dağıtma 
 
@@ -166,7 +166,7 @@ docker-compose push
 
 Kayıt defterine gönderim birkaç dakika sürebilir.
 
-Görüntünün kayıt defterinizde depolandığını doğrulamak için [az ACR Repository Show](/cli/azure/acr/repository#az-acr-repository-show) komutunu çalıştırın:
+Görüntünün kayıt defterinizde depolandığını doğrulamak için [az ACR Repository Show](/cli/azure/acr/repository#az_acr_repository_show) komutunu çalıştırın:
 
 ```azurecli
 az acr repository show --name <acrName> --repository azure-vote-front

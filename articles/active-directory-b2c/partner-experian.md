@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 07/22/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 2058e5362a65b6cd5f3e5b7cb9c20ce32d020d30
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 84e6f76bcae55ed905e11c46df66478908529970
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96928707"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258036"
 ---
 # <a name="tutorial-for-configuring-experian-with-azure-active-directory-b2c"></a>Azure Active Directory B2C ile Experian yapılandırma öğreticisi
 
@@ -133,7 +133,7 @@ Belirtilen [özel ilkelerde](https://github.com/azure-ad-b2c/partner-integration
 
 ### <a name="part-6---configure-the-azure-ad-b2c-policy"></a>Bölüm 6-Azure AD B2C ilkesini yapılandırma
 
-Azure AD B2C kiracınızı ayarlama ve ilkeleri yapılandırma hakkında yönergeler için bu [belgeye](./custom-policy-get-started.md?tabs=applications#custom-policy-starter-pack) başvurun.
+Azure AD B2C kiracınızı ayarlama ve ilkeleri yapılandırma hakkında yönergeler için bu [belgeye](./tutorial-create-user-flows.md?pivots=b2c-custom-policy#custom-policy-starter-pack) başvurun.
 
 >[!NOTE]
 >Bu örnek ilke [yerel hesaplar başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts)temel alır.
@@ -169,4 +169,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

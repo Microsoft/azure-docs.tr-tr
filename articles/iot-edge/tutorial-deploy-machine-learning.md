@@ -9,18 +9,18 @@ ms.topic: tutorial
 ms.service: iot-edge
 services: iot-edge
 ms.custom: mvc
-ms.openlocfilehash: 292c82624103fc2eae46d8aecb5e85b2181e7938
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b3192c3ee8458623f3724da5f875cc09032a42bf
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103463060"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219425"
 ---
 # <a name="tutorial-deploy-azure-machine-learning-as-an-iot-edge-module-preview"></a>Öğretici: Azure Machine Learning'i bir IoT Edge modülü olarak dağıtma (önizleme)
 
 [!INCLUDE [iot-edge-version-all-supported](../../includes/iot-edge-version-all-supported.md)]
 
-Machine Learning modülünü geliştirmek ve Azure IoT Edge çalıştıran bir Linux cihazına dağıtmak için Azure Notebooks kullanın.
+Machine Learning modülünü geliştirmek ve Linux kapsayıcılarıyla Azure IoT Edge çalıştıran bir cihaza dağıtmak için Azure Notebooks kullanın.
 İş mantığınızı uygulayan kodu doğrudan IoT Edge cihazlarınıza dağıtmak için IoT Edge modüllerini kullanabilirsiniz. Bu öğreticide simülasyon makinesi sıcaklık verilerini temel alarak bir cihazın arızalanacağı zamanı tahmin eden bir Azure Machine Learning modülünü dağıtma adımları açıklanmaktadır. IoT Edge Azure Machine Learning hakkında daha fazla bilgi için bkz. [Azure Machine Learning belgeleri](../machine-learning/how-to-deploy-and-where.md).
 
 >[!NOTE]

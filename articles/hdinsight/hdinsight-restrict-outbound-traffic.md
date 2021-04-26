@@ -5,14 +5,14 @@ ms.service: hdinsight
 ms.topic: how-to
 ms.custom: seoapr2020
 ms.date: 04/17/2020
-ms.openlocfilehash: 297c1d4afca5a1d605a046d69b086a05a9322bc7
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 06990a5bd1d6619f07952e84870a01f5cd5068df
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104872090"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384434"
 ---
-# <a name="configure-outbound-network-traffic-for-azure-hdinsight-clusters-using-firewall"></a>Güvenlik duvarını kullanarak Azure HDInsight kümeleri için giden ağ trafiği yapılandırma
+# <a name="configure-outbound-network-traffic-for-azure-hdinsight-clusters-using-firewall"></a>Güvenlik Duvarı kullanarak Azure HDInsight kümeleri için giden trafiği yapılandırma
 
 Bu makalede, Azure Güvenlik Duvarı 'nı kullanarak HDInsight kümenizdeki giden trafiği güvenli hale getirmeye yönelik adımlar sağlanmaktadır. Aşağıdaki adımlarda, var olan bir küme için bir Azure Güvenlik Duvarı yapılandırdığınızı varsayalım. Bir güvenlik duvarının arkasında yeni bir küme dağıtıyorsanız, önce HDInsight kümenizi ve alt ağını oluşturun. Ardından bu kılavuzdaki adımları izleyin.
 
@@ -32,7 +32,7 @@ Azure Güvenlik Duvarı ile mevcut HDInsight 'ınızdan çıkış kilitleme adı
 
 1. Bir alt ağ oluşturun.
 1. Güvenlik duvarı oluşturun.
-1. Güvenlik duvarına uygulama kuralları ekleme
+1. Güvenlik duvarına uygulama kuralları ekleyin.
 1. Güvenlik duvarına ağ kuralları ekleyin.
 1. Yönlendirme tablosu oluşturun.
 
@@ -76,7 +76,7 @@ Kümenin önemli iletişimleri göndermesini ve almasını sağlayan bir uygulam
     | --- | --- | --- | --- | --- |
     | Rule_2 | * | https:443 | login.windows.net | Windows oturum açma etkinliğine izin verir |
     | Rule_3 | * | https:443 | login.microsoftonline.com | Windows oturum açma etkinliğine izin verir |
-    | Rule_4 | * | https: 443, http: 80 | storage_account_name. blob. Core. Windows. net | `storage_account_name`Gerçek depolama hesabı adınızla değiştirin. YALNıZCA HTTPS bağlantılarını kullanmak için depolama hesabında ["güvenli aktarım gerekli"](../storage/common/storage-require-secure-transfer.md) özelliğinin etkinleştirildiğinden emin olun. Depolama hesaplarına erişmek için özel uç nokta kullanıyorsanız, bu adım gerekli değildir ve depolama trafiği güvenlik duvarından iletilmez.|
+    | Rule_4 | * | https:443 | storage_account_name. blob. Core. Windows. net | `storage_account_name`Gerçek depolama hesabı adınızla değiştirin. Depolama hesabında ["güvenli aktarım gerekli"](../storage/common/storage-require-secure-transfer.md) özelliğinin etkinleştirildiğinden emin olun. Depolama hesaplarına erişmek için özel uç nokta kullanıyorsanız, bu adım gerekli değildir ve depolama trafiği güvenlik duvarından iletilmez.|
 
    :::image type="content" source="./media/hdinsight-restrict-outbound-traffic/hdinsight-restrict-outbound-traffic-add-app-rule-collection-details.png" alt-text="Başlık: uygulama kuralı koleksiyonu ayrıntılarını girin":::
 
@@ -84,7 +84,7 @@ Kümenin önemli iletişimleri göndermesini ve almasını sağlayan bir uygulam
 
 ### <a name="configure-the-firewall-with-network-rules"></a>Ağ kurallarıyla güvenlik duvarını yapılandırma
 
-HDInsight kümenizi doğru şekilde yapılandırmak için ağ kuralları oluşturun.
+HDInsight kümenizi doğru şekilde yapılandırmak için ağ kuralları oluşturun. 
 
 1. Önceki adımdan devam etmek için **ağ kuralı koleksiyonu**  >  **+ ağ kuralı koleksiyonu Ekle**' ye gidin.
 
@@ -102,14 +102,14 @@ HDInsight kümenizi doğru şekilde yapılandırmak için ağ kuralları oluştu
 
     | Name | Protokol | Kaynak Adresler | Hizmet Etiketleri | Hedef bağlantı noktaları | Notlar |
     | --- | --- | --- | --- | --- | --- |
-    | Rule_5 | TCP | * | SQL | 1433 | HDInsight tarafından sunulan varsayılan SQL sunucularını kullanıyorsanız SQL için SQL trafiğini günlüğe kaydederek ve denetim altına alacak olan hizmet etiketleri bölümünde bir ağ kuralı yapılandırın. HDInsight alt ağında SQL Server için hizmet uç noktaları yapılandırmadığınız takdirde, güvenlik duvarını atlayacak olur. Ambarı, Oozie, Ranger ve Hive meta depolar için özel SQL Server kullanıyorsanız yalnızca kendi özel SQL sunucularınız için trafiğe izin vermeniz gerekir.|
+    | Rule_5 | TCP | * | SQL | 1433, 11000-11999 | HDInsight tarafından sunulan varsayılan SQL sunucularını kullanıyorsanız SQL için SQL trafiğini günlüğe kaydederek ve denetim altına alacak olan hizmet etiketleri bölümünde bir ağ kuralı yapılandırın. HDInsight alt ağında SQL Server için hizmet uç noktaları yapılandırmadığınız takdirde, güvenlik duvarını atlayacak olur. Ambarı, Oozie, Ranger ve Hive meta depolar için özel SQL Server kullanıyorsanız yalnızca kendi özel SQL sunucularınız için trafiğe izin vermeniz gerekir. 1433 ' ye ek olarak 11000-11999 bağlantı noktası aralığının neden de gerekli olduğunu görmek için [Azure SQL veritabanı ve Azure SYNAPSE Analytics bağlantı mimarisi](../azure-sql/database/connectivity-architecture.md) ' ne bakın. |
     | Rule_6 | TCP | * | Azure İzleyici | * | seçim Otomatik ölçeklendirme özelliğini kullanmayı planlayan müşterilerin bu kuralı eklemesi gerekir. |
     
    :::image type="content" source="./media/hdinsight-restrict-outbound-traffic/hdinsight-restrict-outbound-traffic-add-network-rule-collection.png" alt-text="Başlık: uygulama kuralı koleksiyonu girin":::
 
 1. **Add (Ekle)** seçeneğini belirleyin.
 
-### <a name="create-and-configure-a-route-table"></a>Rota tablosu oluşturma ve yapılandırma
+### <a name="create-and-configure-a-route-table"></a>Rota tablosu oluşturma ve yapılandırma 
 
 Aşağıdaki girişlerle bir yol tablosu oluşturun:
 

@@ -8,14 +8,14 @@ ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 02/26/2021
+ms.date: 03/30/2021
 ms.author: justinha
-ms.openlocfilehash: 8eb1560887c08c3f64fa599c39e5577242d2a1e8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8bcd3ebef027ec72728be21b0fe1504236f553ba
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101689071"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106058179"
 ---
 # <a name="replica-sets-concepts-and-features-for-azure-active-directory-domain-services"></a>Çoğaltma, Azure Active Directory Domain Services için kavramları ve özellikleri ayarlar
 
@@ -54,7 +54,7 @@ Aşağıdaki örnek, esneklik sağlamak ve kimlik doğrulama hizmetlerinin kulla
 
 Yönetilen bir etki alanı için varsayılan SKU, birden çok çoğaltma kümesini destekleyen *Kurumsal* SKU 'dır. *Standart* SKU 'ya değiştirdiyseniz ek çoğaltma kümeleri oluşturmak için, [yönetilen etki alanını](change-sku.md) *Enterprise* veya *Premium*'a yükseltin.
 
-Yönetilen etki alanını oluştururken oluşturulan ilk çoğaltma dahil olmak üzere, desteklenen en fazla çoğaltma kümesi sayısı dördü.
+Yönetilen etki alanını oluştururken oluşturulan ilk çoğaltma dahil olmak üzere, desteklenen en fazla çoğaltma kümesi sayısı beş ' dir.
 
 Her bir çoğaltma kümesi için faturalandırma, etki alanı yapılandırma SKU 'sunu temel alır. Örneğin, *Kurumsal* SKU 'yu kullanan bir yönetilen etki alanınız varsa ve üç çoğaltma kümesi varsa, aboneliğiniz her üç çoğaltma kümesi için saat başına faturalandırılır.
 
@@ -66,7 +66,7 @@ Hayır. Çoğaltma kümelerinin, yönetilen etki alanıyla aynı abonelikte olma
 
 ### <a name="how-many-replica-sets-can-i-create"></a>Kaç tane çoğaltma kümesi oluşturabilirim?
 
-En fazla dört çoğaltma kümesi (yönetilen etki alanı için ilk çoğaltma kümesi ve üç ek çoğaltma kümesi) oluşturabilirsiniz.
+En fazla beş çoğaltma kümesi (yönetilen etki alanı için ilk çoğaltma kümesi, ayrıca dört ek çoğaltma kümesi) oluşturabilirsiniz.
 
 ### <a name="how-does-user-and-group-information-get-synchronized-to-my-replica-sets"></a>Kullanıcı ve grup bilgileri, çoğaltma kümelerim ile nasıl eşitlenir?
 

@@ -3,45 +3,57 @@ title: Operatör en iyi yöntemleri-Azure Kubernetes hizmetlerinde kapsayıcı g
 description: Azure Kubernetes Service (AKS) ' de kapsayıcı görüntülerini yönetme ve güvenli hale getirme için küme operatörü en iyi uygulamalarını öğrenin
 services: container-service
 ms.topic: conceptual
-ms.date: 12/06/2018
-ms.openlocfilehash: 1d2f5465356a94b9ad7014e75aa6fe1515411a81
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.date: 03/11/2021
+ms.openlocfilehash: 998d8602b6aa0e71a04f75aff1c29551ba09c8a3
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102564926"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105128"
 ---
 # <a name="best-practices-for-container-image-management-and-security-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içindeki kapsayıcı görüntüsü yönetimi ve güvenlik için en iyi uygulamalar
 
-Azure Kubernetes Service (AKS) içinde uygulama geliştirip çalıştırırken, kapsayıcılarınızın ve kapsayıcı görüntülerinin güvenliği önemli bir konudur. Güncel temel görüntüler veya düzeltme eki yüklenmemiş uygulama çalışma zamanları içeren kapsayıcılar, güvenlik riski ve olası saldırı vektörü sunar. Bu riskleri en aza indirmek için, derleme zamanında ve çalışma zamanının yanı sıra kapsayıcılarınızdaki sorunları taradığı ve düzeltebileceğiniz araçları tümleştirmelisiniz. Daha önce güvenlik açığı veya güncel olmayan temel görüntü yakalanmışsa, kümenin daha güvenli hale getirin. Bu makalede, *kapsayıcılar* her ikisi de bir kapsayıcı kayıt defterinde depolanan kapsayıcı görüntüleri ve çalışan kapsayıcılar anlamına gelir.
+Azure Kubernetes Service 'te (AKS) uygulama geliştirirken ve çalıştırırken, kapsayıcı ve kapsayıcı görüntüsü güvenliği önemli bir önceliktir. Güncel olmayan temel görüntülerle veya düzeltme eki yüklenmemiş uygulama çalışma zamanlarının bulunduğu kapsayıcılar bir güvenlik riski ve olası saldırı vektörü sağlar. 
+
+Derleme ve çalışma zamanında kapsayıcılarınızdaki tarama ve düzeltme araçlarını tümleştirerek ve çalıştırarak riskleri en aza indirin. Daha önce bu açığı veya eski temel görüntüyü yakalarsanız, kümenizin daha güvenli olmasını sağlayabilirsiniz. 
+
+Bu makalede, *"kapsayıcılar"* her ikisi de anlamına gelir:
+* Bir kapsayıcı kayıt defterinde depolanan kapsayıcı görüntüleri.
+* Çalışan kapsayıcılar.
 
 Bu makalede, AKS 'de kapsayıcılarınızın güvenliğini sağlama konusu ele alınmaktadır. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Görüntü için tarama ve düzeltme güvenlik açıkları
-> * Temel görüntü güncelleştirilirken kapsayıcı görüntülerini otomatik olarak tetikleme ve yeniden dağıtma
+> * Görüntü oluşturma güvenlik açıklarını tarayın ve düzeltin.
+> * Bir temel görüntü güncelleştirilirken kapsayıcı görüntülerini otomatik olarak tetikler ve yeniden dağıtın.
 
 [Küme güvenliği][best-practices-cluster-security] ve [Pod güvenliği][best-practices-pod-security]için en iyi yöntemleri de okuyabilirsiniz.
 
-Kapsayıcılarınızın güvenlik açıklarına karşı taranmasına yardımcı olması için [Güvenlik Merkezi 'Nde kapsayıcı güvenliği][security-center-containers] de kullanabilirsiniz.  Ayrıca, güvenlik merkezi ile, görüntülerinizi ve kayıt defterinizi güvenlik açıklarına karşı korumaya yardımcı olmak için [Azure Container Registry tümleştirme][security-center-acr] de vardır.
+Kapsayıcılarınızın güvenlik açıklarına karşı taranmasına yardımcı olması için [Güvenlik Merkezi 'Nde kapsayıcı güvenliği][security-center-containers] de kullanabilirsiniz. Güvenlik Merkezi ile [Azure Container Registry tümleştirme][security-center-acr] , yansımalarınızı ve kayıt defterinizi güvenlik açıklarına karşı korumanıza yardımcı olur.
 
 ## <a name="secure-the-images-and-run-time"></a>Görüntülerin ve çalışma zamanının güvenliğini sağlama
 
-**En iyi Yöntem Kılavuzu** -kapsayıcı görüntülerinizi güvenlik açıklarına karşı tarayın ve yalnızca doğrulamayı geçen görüntüleri dağıtın. Temel görüntüleri ve uygulama çalışma zamanını düzenli olarak güncelleştirin ve ardından AKS kümesindeki iş yüklerini yeniden dağıtın.
+> **En iyi yöntemler kılavuzu** 
+>
+> Güvenlik açıkları için kapsayıcı görüntülerinizi tarayın. Yalnızca doğrulanan görüntüleri dağıtın. Temel görüntüleri ve uygulama çalışma zamanını düzenli olarak güncelleştirin. AKS kümesindeki iş yüklerini yeniden dağıtın.
 
-Kapsayıcı tabanlı iş yüklerinin benimsenmesiyle ilgili bir sorun, kendi uygulamalarınızı oluşturmak için kullanılan görüntülerin ve çalışma zamanının güvenliğini doğrulamasıdır. Dağıtımlarınıza güvenlik açıklarına neden olmadığınızdan nasıl emin olabilirsiniz? Dağıtım iş akışınız, [twistlock][twistlock] veya [deniz mavisi][aqua]gibi araçları kullanarak kapsayıcı görüntülerini taramak için bir işlem içermelidir ve sonra yalnızca doğrulanmış görüntülerin dağıtılmasına izin verir.
+Kapsayıcı tabanlı iş yüklerini benimseme sırasında, kendi uygulamalarınızı oluşturmak için kullanılan görüntülerin ve çalışma zamanının güvenliğini doğrulamak isteyeceksiniz. Dağıtımlarınıza yönelik güvenlik açıklarına nasıl ulaşmaktan kaçının? 
+* [Twistlock][twistlock] veya [deniz mavisi][aqua]gibi araçları kullanarak kapsayıcı görüntülerini taramak için dağıtım iş akışınıza dahil edin.
+* Yalnızca doğrulanmış görüntülerin dağıtılmasına izin verin.
 
 ![Kapsayıcı görüntülerini tarayın ve düzeltin, doğrulayın ve dağıtın](media/operator-best-practices-container-security/scan-container-images-simplified.png)
 
-Gerçek dünyada bir örnekte, görüntü taramalarının, doğrulamanın ve dağıtımların otomatikleştirilmesi için sürekli tümleştirme ve sürekli dağıtım (CI/CD) işlem hattı kullanabilirsiniz. Azure Container Registry, bu güvenlik açıkları tarama özelliklerini içerir.
+Örneğin, sürekli tümleştirme ve sürekli dağıtım (CI/CD) işlem hattını kullanarak görüntü taramalarını, doğrulamayı ve dağıtımlarını otomatik hale getirebilirsiniz. Azure Container Registry, bu güvenlik açıkları tarama özelliklerini içerir.
 
 ## <a name="automatically-build-new-images-on-base-image-update"></a>Temel görüntü güncelleştirmesinde otomatik olarak yeni görüntüler oluşturma
 
-**En iyi Yöntem Kılavuzu** -uygulama görüntüleri için temel görüntüleri kullanırken, temel görüntü güncelleştirilirken yeni görüntüler oluşturmak için Otomasyon kullanın. Bu temel görüntüler genellikle güvenlik düzeltmelerini içerir, tüm aşağı akış uygulama kapsayıcısı görüntülerini güncelleştirin.
+> **En iyi yöntemler kılavuzu** 
+>
+> Uygulama görüntüleri için temel görüntüleri kullanırken, temel görüntü güncelleştirilirken yeni görüntüler oluşturmak için Otomasyon kullanın. Güncelleştirilmiş temel görüntüler genellikle güvenlik düzeltmelerini içerdiğinden, tüm aşağı akış uygulama kapsayıcısı görüntülerini güncelleştirin.
 
-Bir temel görüntü her güncelleştirildiği zaman, tüm aşağı akış kapsayıcı görüntüleri de güncellenir. Bu derleme işlemi, [Azure Pipelines][azure-pipelines] veya Jenkins gibi doğrulama ve dağıtım işlem hatları ile tümleştirilebilmelidir. Bu işlem hatları, uygulamalarınızın güncelleştirilmiş tabanlı görüntülerde çalışmaya devam etmesini sağlar. Uygulama kapsayıcısı görüntüleriniz doğrulandıktan sonra, AKS dağıtımları, en son güvenli görüntüleri çalıştıracak şekilde güncellenebilir.
+Bir temel görüntü her güncelleştirildiği zaman, herhangi bir aşağı akış kapsayıcı görüntüsünü de güncelleştirmeniz gerekir. Bu derleme işlemini [Azure Pipelines][azure-pipelines] veya Jenkins gibi doğrulama ve dağıtım işlem hatları ile tümleştirin. Bu işlem hatları, uygulamalarınızın güncelleştirilmiş tabanlı görüntülerde çalışmaya devam etmesini sağlar. Uygulama kapsayıcısı görüntüleriniz doğrulandıktan sonra, AKS dağıtımları, en son güvenli görüntüleri çalıştıracak şekilde güncellenebilir.
 
-Azure Container Registry görevler, temel görüntü güncelleştirilirken kapsayıcı görüntülerini da otomatik olarak güncelleştirebilir. Bu özellik, az sayıda temel görüntü oluşturmanıza ve bunları düzenli olarak hata ve güvenlik düzeltmeleriyle güncelleştirmelerini sağlar.
+Azure Container Registry görevler, temel görüntü güncelleştirilirken kapsayıcı görüntülerini da otomatik olarak güncelleştirebilir. Bu özellikle, birkaç temel görüntü oluşturup bunları hata ve güvenlik düzeltmeleriyle güncelleştirmiş olursunuz.
 
 Temel görüntü güncelleştirmeleri hakkında daha fazla bilgi için bkz. [Azure Container Registry görevlerle temel görüntü güncelleştirme üzerinde görüntü derlemelerini otomatikleştirme][acr-base-image-update].
 

@@ -4,10 +4,10 @@ description: Algılayıcı sürümlerini güncelleştirme, sistem ayarlarını s
 ms.date: 12/07/2020
 ms.topic: how-to
 ms.openlocfilehash: 4706fbcf58b8e5f5eed6532f9a08f65c7716e07e
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104781934"
 ---
 # <a name="manage-sensors-from-the-management-console"></a>Yönetim konsolundan algılayıcıları yönetme
@@ -140,7 +140,7 @@ Bağlantısı kesilen algılayıcılar hakkında bilgi içeren üçüncü tarafl
 
 Algılayıcılar, IoT motorları için beş Defender tarafından korunur. Bağlı sensörler için altyapıları etkinleştirebilir veya devre dışı bırakabilirsiniz.
 
-| Altyapı | Açıklama | Örnek senaryo |
+| Altyapı | Description | Örnek senaryo |
 |--|--|--|
 | Protokol ihlali altyapısı | Paket yapısı veya alan değerleri protokol belirtimine uymadığında protokol ihlali oluşur. | "Geçersiz MODBUS Işlemi (Işlev kodu sıfır)" uyarısı. Bu uyarı, birincil bir cihazın bir ikincil cihaza 0 işlev koduna sahip bir istek gönderdiğini gösterir. Bu, protokol belirtimine göre kullanılamaz ve ikincil cihaz girişi doğru şekilde işleyemeyebilir. |
 | İlke ihlali altyapısı | Öğrenilen veya yapılandırılan ilkede tanımlanan taban çizgisi davranışından sapmayla bir ilke ihlali meydana gelir. | "Yetkisiz HTTP Kullanıcı Aracısı" uyarısı. Bu uyarı, ilke tarafından öğrenilen veya onaylanan bir uygulamanın bir cihazda HTTP istemcisi olarak kullanıldığını belirtir. Bu, bu cihazdaki yeni bir Web tarayıcısı veya uygulama olabilir. |

@@ -1,18 +1,22 @@
 ---
-title: Bir Defender IoT mikro aracı modülü oluşturma ikizi (Önizleme)
-description: Yeni cihazlar için bireysel savunma, her bir savunma Aracısı modül TWINS oluşturmayı öğrenin.
+title: 'Hızlı başlangıç: Defender IoT mikro aracı modülü oluşturma ikizi (Önizleme)'
+description: Bu hızlı başlangıçta, yeni cihazlar için bireysel savunma, her bir savunma Aracısı modül TWINS oluşturmayı öğrenin.
 ms.date: 1/20/2021
 ms.topic: quickstart
-ms.openlocfilehash: 5036eefbd77a22d492f6ce7d3c7d15f50a081490
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: e1bcaa76e9bfbe417bfd0d4b539b8e0c7ff95c7b
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104781067"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384520"
 ---
-# <a name="create-a-defender-iot-micro-agent-module-twin-preview"></a>Bir Defender IoT mikro aracı modülü oluşturma ikizi (Önizleme)
+# <a name="quickstart-create-a-defender-iot-micro-agent-module-twin-preview"></a>Hızlı başlangıç: Defender IoT mikro aracı modülü oluşturma ikizi (Önizleme)
 
 Yeni cihazlar için bireysel **savunma Deriotmikro aracı** modülü TWINS oluşturabilirsiniz. Ayrıca, bir IoT Hub tüm cihazlar için modül TWINS 'i toplu olarak oluşturabilirsiniz. 
+
+## <a name="prerequisites"></a>Önkoşullar
+
+- Yok
 
 ## <a name="device-twins"></a>Cihaz ikikesi 
 
@@ -70,4 +74,5 @@ Bir Defender-IoT-Micro-Agent ikizi 'in belirli bir cihaz için mevcut olup olmad
 
 ## <a name="next-steps"></a>Sonraki adımlar 
 
-[Güvenlik önerilerini araştırmaya](quickstart-investigate-security-recommendations.md)yönelik bilgi edinmek için sonraki makaleye ilerleyin.
+> [!div class="nextstepaction"]
+> [Güvenlik önerilerini araştır](quickstart-investigate-security-recommendations.md)

@@ -15,12 +15,12 @@ ms.topic: conceptual
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 9a0e8a513023c093157a3f14a64de9f87de543ab
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: bd544b9eec0c1839ad94ede65e9d4ccde6df81dc
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103009462"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106063364"
 ---
 # <a name="use-playready-andor-widevine-dynamic-common-encryption"></a>PlayReady ve/veya Widevine dinamik ortak şifreleme kullanma
 
@@ -46,9 +46,9 @@ Daha fazla bilgi için bkz. [Axınom](media-services-axinom-integration.md) ve [
 
 Media Services, anahtar isteğinde bulunan kullanıcıları yetkilendirmenin birden çok yöntemini destekler. İçerik anahtarı yetkilendirme ilkesinin açık veya belirteç kısıtlaması şeklinde bir veya daha fazla yetkilendirme kısıtlaması olabilir. Belirteç kısıtlamalı ilkenin beraberinde bir güvenlik belirteci hizmeti (STS) tarafından verilmiş bir belirteç bulunmalıdır. Media Services, [basit web belirteci](/previous-versions/azure/azure-services/gg185950(v=azure.100)#BKMK_2) (SWT) ve [JSON Web Token](/previous-versions/azure/azure-services/gg185950(v=azure.100)#BKMK_3) (JWT) biçimlerindeki belirteçleri destekler. 
 
-Daha fazla bilgi edinmek için bkz. [İçerik anahtarının yetkilendirme ilkesini yapılandırma](media-services-protect-with-aes128.md#configure_key_auth_policy).
+Daha fazla bilgi edinmek için bkz. [İçerik anahtarının yetkilendirme ilkesini yapılandırma](media-services-portal-configure-content-key-auth-policy.md).
 
-Dinamik şifrelemeden yararlanmak için, bir grup çoklu bit hızlı MP4 dosyası ya da çoklu bit hızlı Kesintisiz Akış kaynak dosyası içeren bir varlığınızın olması gerekir. Aynı zamanda varlığın teslim ilkelerini de yapılandırmalısınız (bu konunun ilerideki bölümlerinde açıklanmaktadır). Ardından, akış URL'sinde belirtilen biçime bağlı olarak, isteğe bağlı akış sunucusu akışın seçtiğiniz protokolde teslim edilmesini sağlar. Sonuç olarak yalnızca tek bir depolama biçimindeki dosyaları depolar ve bunlar için ödeme yaparsınız. Media Services, bir istemciden alınan her bir isteğe göre uygun HTTP yanıtını oluşturur ve sunar.
+Dinamik şifrelemenin avantajlarından yararlanmak için, birden çok bit hızlı MP4 dosyası ya da çoklu bit hızlı Kesintisiz Akış kaynak dosyası içeren bir varlık oluşturun. Aynı zamanda varlığın teslim ilkelerini de yapılandırmalısınız (bu konunun ilerideki bölümlerinde açıklanmaktadır). Ardından, akış URL'sinde belirtilen biçime bağlı olarak, isteğe bağlı akış sunucusu akışın seçtiğiniz protokolde teslim edilmesini sağlar. Sonuç olarak yalnızca tek bir depolama biçimindeki dosyaları depolar ve bunlar için ödeme yaparsınız. Media Services, bir istemciden alınan her bir isteğe göre uygun HTTP yanıtını oluşturur ve sunar.
 
 Bu makale, PlayReady ve Widevine benzeri birden çok DRM ile korunan medya teslim eden uygulamalar üzerinde çalışan geliştiriciler için yararlıdır. Makalede, yalnızca yetkili istemcilerin PlayReady veya Widevine lisansları alabilmesini sağlamak üzere PlayReady lisans teslimat hizmetinin yetkilendirme ilkeleri ile nasıl yapılandırılacağı gösterilmektedir. Ayrıca, PlayReady veya Widevine DRM ile DASH üzerinde dinamik şifrelemenin nasıl kullanılacağı açıklanmaktadır.
 

@@ -3,12 +3,12 @@ title: Özel durumları ve bunları nasıl çözebilmek Azure Relay | Microsoft 
 description: Bunları çözmeye yardımcı olmak için uygulayabileceğiniz Azure Relay özel durumların ve önerilen eylemlerin listesi.
 ms.topic: article
 ms.date: 06/23/2020
-ms.openlocfilehash: 44eeba6eb7b8cfd4e81a923c2d9a3155f1709f2c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e3f9fe2e8aac826bd63d9842bd3380be10e1b87e
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98625157"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313955"
 ---
 # <a name="azure-relay-exceptions"></a>Azure Relay özel durumlar
 
@@ -80,7 +80,7 @@ Bu hatanın iki yaygın nedeni vardır:
     Zaman zaman, geçiş hizmeti istekleri işlerken gecikmeler yaşayabilir. Bu, örneğin, yüksek trafik dönemlerinde meydana gelebilir. Bu gerçekleşirse, işlem başarılı olana kadar işleminizi bir gecikmeden sonra yeniden deneyin. Aynı işlem birden çok denemeden sonra başarısız olmaya devam ederse, bilinen hizmet kesintileri olup olmadığını görmek için [Azure hizmet durumu sitesine](https://azure.microsoft.com/status/) bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Azure Relay SSS](relay-faq.md)
+* [Azure Relay SSS](relay-faq.yml)
 * [Geçiş ad alanı oluşturma](relay-create-namespace-portal.md)
 * [Azure Relay ve .NET ile çalışmaya başlama](relay-hybrid-connections-dotnet-get-started.md)
 * [Azure Relay ve Node ile çalışmaya başlama](relay-hybrid-connections-node-get-started.md)

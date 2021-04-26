@@ -7,12 +7,12 @@ ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: tutorial
 ms.date: 12/01/2020
-ms.openlocfilehash: 0ea6fcaff1ec699431da8b67adee68735a8611a8
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b240806b934cae54810cf9dfe1a6c1f369cede7e
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97696080"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107587519"
 ---
 # <a name="tutorial-create-and-import-glossary-terms-in-azure-purview-preview"></a>Öğretici: Azure purview 'da Sözlük terimleri oluşturma ve içeri aktarma (Önizleme)
 
@@ -97,6 +97,9 @@ Bu yordamda, sözlük koşullarını bir. csv dosyası aracılığıyla içeri a
 
    Bu dosya, verilerinize uygun olan önceden doldurulmuş terimlerin bir listesini içerir.
 
+ > [!Important]
+   > İçindeki ödüller ve uzmanlar için e-posta adresi. CSV dosyası, AAD grubundan kullanıcının birincil adresi olmalıdır. Alternatif e-posta, Kullanıcı asıl adı ve AAD olmayan e-postalar henüz desteklenmiyor. E-posta adreslerini, kuruluşunuzdaki AAD birincil adresi ile değiştirmeniz gerekir.
+
 1. İçeri aktarmaya başlamak için **Sözlük**' i seçin ve ardından **Koşulları içeri aktar**' ı seçin.
 
     :::image type="content" source="./media/tutorial-import-create-glossary-terms/import-glossary-terms-select.png" alt-text="Sözlük koşullarının nasıl içeri aktarılacağını gösteren ekran görüntüsü.":::
@@ -138,10 +141,10 @@ Yeni bir özel terim şablonu oluşturmak için aşağıdaki adımları uygulay�
 
    |Ayar|Önerilen değer|
    |---------|-----------|
-   |Öznitelik adı|hassas bilgiler|
-   |Alan türü|Listenin|Tek seçim|
-   |Gerekli olarak işaretle|Bu kutuyu işaretleyin.|
-   |+ Bir seçenek ekleyin| İki seçenek ekleyin. "Evet" ve "Hayır".|
+   |Öznitelik adı |hassas bilgiler|
+   |Alan türü | Tek seçim|
+   |Gerekli olarak işaretle | Bu kutuyu işaretleyin.|
+   |+ Bir seçenek ekleyin | İki seçenek ekleyin. "Evet" ve "Hayır".|
 
    :::image type="content" source="./media/tutorial-import-create-glossary-terms/add-new-attribute.png" alt-text="Yeni bir öznitelik ekleyin.":::
 

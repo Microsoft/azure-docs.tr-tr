@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 09/24/2019
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: c8a4b22966c3d4db268e212bb3f2d1bbb78fee74
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: 80a090abee45f9cb3ec6ee5406aad6abf1d73a59
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89400645"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725017"
 ---
 # <a name="connect-to-windows-virtual-desktop-with-the-web-client"></a>Web istemcisiyle Windows sanal masaüstüne bağlanma
 
@@ -48,25 +48,6 @@ Bir tarayıcıda, üzerinde Windows sanal masaüstü web istemcisinin Azure Reso
 >Windows sanal masaüstü için kullanmak istediğinden farklı bir Azure Active Directory hesabıyla oturum açtıysanız, oturumunuzu açmanız veya özel bir tarayıcı penceresi kullanmanız gerekir.
 
 Oturum açtıktan sonra, artık kaynakların bir listesini görmeniz gerekir. Kaynakları, **tüm kaynaklar** sekmesindeki normal bir uygulama gibi seçerek de başlatabilirsiniz.
-
-## <a name="using-an-input-method-editor"></a>Giriş Yöntemi Düzenleyicisi kullanma
-
-Web istemcisi, **1.0.21.16 veya üzeri** sürümlerde uzak oturumunda bir Giriş Yöntemi Düzenleyicisi 'NI (IME) kullanmayı destekler. Uzak oturumda kullanmak istediğiniz klavyeye ait dil paketinin konak sanal makinesine yüklenmesi gerekir. Uzak oturumda dil paketleri ayarlama hakkında daha fazla bilgi edinmek için [Windows 10 çoklu oturum görüntüsüne dil paketleri ekleme ' ye](language-packs.md)göz atın.
-
-Web istemcisini kullanarak IME girişini etkinleştirmek için:
-
-1. Uzak oturuma bağlanmadan önce Web istemcisi **ayarları** paneline gidin.
-
-2. **Giriş yöntemi düzenleyicisini etkinleştir** ayarını **Açık** olarak değiştirin.
-
-3. Açılan menüde, uzak oturumda kullanacağınız klavyeyi seçin.
-
-4. Uzak oturuma bağlanın.
-
-Uzak oturuma odaklandığınızda Web istemcisi yerel IME penceresini bastırır. Uzak oturuma zaten bağlandıktan sonra IME ayarlarını değiştirmek herhangi bir etkiye sahip olmayacaktır.
-
->[!NOTE]
->Dil paketi konak sanal makinesine yüklenmemişse, uzak oturum varsayılan olarak Ingilizce (Birleşik Devletler) klavyesine sahip olur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

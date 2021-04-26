@@ -7,15 +7,15 @@ author: tamram
 ms.service: storage
 ms.subservice: common
 ms.topic: conceptual
-ms.date: 09/22/2020
+ms.date: 03/30/2021
 ms.author: tamram
 ms.reviewer: ozgun
-ms.openlocfilehash: cdfc54b1eca3b07202148b7099884a04f35939ef
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e2f044ab267365885260b031638572846184bc83
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101698153"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106063194"
 ---
 # <a name="configure-azure-defender-for-storage"></a>Depolama için Azure Defender'ı yapılandırma
 
@@ -50,7 +50,7 @@ Azure Defender 'ı depolama için aşağıdaki bölümlerde açıklanan çeşitl
 
 ### <a name="azure-security-center"></a>[Azure Güvenlik Merkezi](#tab/azure-security-center)
 
-Azure Güvenlik Merkezi 'nde Standart katmana abone olduğunuzda, Azure Defender tüm depolama hesaplarınızda otomatik olarak ayarlanır. Belirli bir abonelik kapsamındaki depolama hesaplarınız için Azure Defender 'ı aşağıdaki gibi etkinleştirebilir veya devre dışı bırakabilirsiniz:
+Azure Defender, Azure Güvenlik Merkezi 'Nde yerleşik olarak bulunur. Azure Defender ' ı aboneliğinizde etkinleştirdiğinizde Azure Storage için Azure Defender, tüm depolama hesaplarınız için otomatik olarak etkinleştirilir. Belirli bir abonelik kapsamındaki depolama hesaplarınız için Azure Defender 'ı aşağıdaki gibi etkinleştirebilir veya devre dışı bırakabilirsiniz:
 
 1. Azure portal **Azure Güvenlik Merkezi 'ni** başlatın [](https://portal.azure.com).
 1. Ana menüden **Yönetim** altında, **fiyatlandırma & ayarları**' nı seçin.
@@ -94,20 +94,38 @@ Belirli bir abonelik veya kaynak grubu altındaki depolama hesapları genelinde 
 
     :::image type="content" source="media/azure-defender-storage-configure/storage-atp-policy1.png" alt-text="Depolama için Azure Defender 'ı etkinleştirmek üzere ilke atama":::
 
-### <a name="rest-api"></a>[REST API](#tab/rest-api)
-
-Belirli bir depolama hesabı için Azure Defender ayarını oluşturmak, güncelleştirmek veya almak üzere REST API komutlarını kullanın.
-
-- [Gelişmiş tehdit koruması-oluştur](/rest/api/securitycenter/advancedthreatprotection/create)
-- [Gelişmiş tehdit koruması-Get](/rest/api/securitycenter/advancedthreatprotection/get)
-
 ### <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
-Aşağıdaki PowerShell cmdlet 'lerini kullanın:
+PowerShell ile bir depolama hesabı için Azure Defender 'ı etkinleştirmek üzere öncelikle [az. Security](https://www.powershellgallery.com/packages/Az.Security) modülünü yüklediğinizden emin olun. Sonra, [Enable-AzSecurityAdvancedThreatProtection](/powershell/module/az.security/enable-azsecurityadvancedthreatprotection) komutunu çağırın. Açılı ayraçlar içindeki değerleri kendi değerlerinizle değiştirmeyi unutmayın:
 
-- [Gelişmiş tehdit korumasını etkinleştir](/powershell/module/az.security/enable-azsecurityadvancedthreatprotection)
-- [Gelişmiş tehdit koruması al](/powershell/module/az.security/get-azsecurityadvancedthreatprotection)
-- [Gelişmiş tehdit korumasını devre dışı bırak](/powershell/module/az.security/disable-azsecurityadvancedthreatprotection)
+```azurepowershell
+Enable-AzSecurityAdvancedThreatProtection -ResourceId "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<storage-account>/"
+```
+
+PowerShell ile bir depolama hesabı için Azure Defender ayarını kontrol etmek için [Get-AzSecurityAdvancedThreatProtection](/powershell/module/az.security/get-azsecurityadvancedthreatprotection) komutunu çağırın. Açılı ayraçlar içindeki değerleri kendi değerlerinizle değiştirmeyi unutmayın:
+
+```azurepowershell
+Get-AzSecurityAdvancedThreatProtection -ResourceId "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<storage-account>/"
+```
+
+### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+Azure CLı ile bir depolama hesabı için Azure Defender 'ı etkinleştirmek üzere [az Security ATP Storage Update](/cli/azure/security/atp/storage#az_security_atp_storage_update) komutunu çağırın. Açılı ayraçlar içindeki değerleri kendi değerlerinizle değiştirmeyi unutmayın:
+
+```azurecli
+az security atp storage update \
+    --resource-group <resource-group> \
+    --storage-account <storage-account> \
+    --is-enabled true
+```
+
+Azure CLı ile bir depolama hesabı için Azure Defender ayarını denetlemek için [az Security ATP Storage Show](/cli/azure/security/atp/storage#az_security_atp_storage_show) komutunu çağırın. Açılı ayraçlar içindeki değerleri kendi değerlerinizle değiştirmeyi unutmayın:
+
+```azurecli
+az security atp storage show \
+    --resource-group <resource-group> \
+    --storage-account <storage-account>
+```
 
 ---
 
@@ -137,5 +155,6 @@ Uyarılar, depolama hesaplarına erişmeye veya açıktan yararlanmaya yönelik 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure depolama hesaplarında Günlükler](/rest/api/storageservices/About-Storage-Analytics-Logging) hakkında daha fazla bilgi edinin
-- [Azure Güvenlik Merkezi](../../security-center/security-center-introduction.md) hakkında daha fazla bilgi edinin
+- [Depolama için Azure Defender'a giriş](../../security-center/defender-for-storage-introduction.md)
+- [Azure Güvenlik Merkezi](../../security-center/security-center-introduction.md)
+- [Azure depolama hesaplarında Günlükler](/rest/api/storageservices/About-Storage-Analytics-Logging)

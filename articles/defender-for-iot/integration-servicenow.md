@@ -4,10 +4,10 @@ description: ServiceNow için IoT ICS yönetim uygulaması için Defender, endü
 ms.date: 1/17/2021
 ms.topic: article
 ms.openlocfilehash: 6e39c3d018003983f6dc5b5e16a9791de84d6005
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104786014"
 ---
 # <a name="the-defender-for-iot-ics-management-application-for-servicenow"></a>ServiceNow için IoT ICS yönetim uygulaması Defender
@@ -324,7 +324,7 @@ Bu makalede ServiceNow 'a gönderilen cihaz uyarı bilgileri açıklanmaktadır.
 | Oluşturulan | Uyarının oluşturulduğu saat ve tarih. |
 | Altyapı | Olayı algılayan altyapı. |
 | Başlık | Uyarı başlığı. |
-| Açıklama | Uyarı açıklaması. |
+| Description | Uyarı açıklaması. |
 | Protokol | Trafikte algılanan protokol. |
 | Önem derecesi | IoT için Defender tarafından tanımlanan uyarı önem derecesi. |
 | Elektrikli | Trafiği algılayan algılayıcının adı. |
@@ -344,7 +344,7 @@ Uyarı bilgilerini bir formda görüntülemek için oluşturulan sütunda giriş
 
 Bu makalede, her altyapının tetiklediği uyarıların türü açıklanmaktadır.
 
-| Uyarı türü | Açıklama |
+| Uyarı türü | Description |
 |--|--|
 | İlke ihlali uyarıları | Ilke Ihlali altyapısı, daha önce öğrenilen trafikten sapma algıladığında tetiklenir. Örnek: <br /><br />-Yeni bir cihaz algılandı. <br /><br />-Bir cihazda yeni bir yapılandırma algılandı. <br /><br />-Programlama cihazı olarak tanımlanmayan bir cihaz, programlama değişikliğini yürütür. <br /><br />-Bir bellenim sürümü değişti. |
 | Protokol ihlali uyarıları | Protokol Ihlali altyapısı, protokol belirtimine uymayan bir paket yapıları veya alan değerleri algıladığında tetiklenir. |

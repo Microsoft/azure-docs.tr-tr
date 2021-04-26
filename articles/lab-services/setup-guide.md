@@ -4,10 +4,10 @@ description: Laboratuvar Oluşturucu kullanıyorsanız, bu kılavuz okulunuzda h
 ms.topic: article
 ms.date: 06/26/2020
 ms.openlocfilehash: 07f0d92ebd926616f1318b430bec2de32f753f7c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "95021751"
 ---
 # <a name="lab-setup-guide"></a>Laboratuvar Kurulum Kılavuzu

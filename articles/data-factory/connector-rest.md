@@ -6,12 +6,12 @@ ms.service: data-factory
 ms.topic: conceptual
 ms.date: 03/16/2021
 ms.author: jingwang
-ms.openlocfilehash: 6d9bb17e0e68c563c6d8cc18669d8c298d4f267b
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 779a8745688e6a1fb8a15bc9119c6fbc1803ca2c
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104951853"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078936"
 ---
 # <a name="copy-data-from-and-to-a-rest-endpoint-by-using-azure-data-factory"></a>Azure Data Factory kullanarak ve bir REST uç noktasına veri kopyalama
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -56,10 +56,10 @@ REST bağlı hizmeti için aşağıdaki özellikler desteklenir:
 |:--- |:--- |:--- |
 | tür | **Type** özelliği **RESTService** olarak ayarlanmalıdır. | Yes |
 | url | REST hizmetinin temel URL 'SI. | Yes |
-| enableServerCertificateValidation | Uç noktaya bağlanılırken sunucu tarafı TLS/SSL sertifikası doğrulanıp doğrulanmayacağı. | Hayır<br /> (varsayılan değer **true**'dur) |
+| enableServerCertificateValidation | Uç noktaya bağlanılırken sunucu tarafı TLS/SSL sertifikası doğrulanıp doğrulanmayacağı. | No<br /> (varsayılan değer **true**'dur) |
 | authenticationType | REST hizmetine bağlanmak için kullanılan kimlik doğrulaması türü. İzin verilen değerler **anonim**, **temel**, **Aadserviceprincipal** ve **managedserviceıdentity**. Kullanıcı tabanlı OAuth desteklenmez. Ayrıca, özelliğindeki kimlik doğrulama üstbilgilerini yapılandırabilirsiniz `authHeader` . Daha fazla özellik ve örnekte sırasıyla aşağıdaki ilgili bölümlere bakın.| Yes |
-| authHeaders | Kimlik doğrulaması için ek HTTP isteği üst bilgileri.<br/> Örneğin, API anahtarı kimlik doğrulamasını kullanmak için, kimlik doğrulama türü ' nü "anonim" olarak seçebilir ve üst bilgide API anahtarını belirtebilirsiniz. | Hayır |
-| connectVia | Veri deposuna bağlanmak için kullanılacak [Integration Runtime](concepts-integration-runtime.md) . [Önkoşullar](#prerequisites) bölümünden daha fazla bilgi edinin. Belirtilmemişse, bu özellik varsayılan Azure Integration Runtime kullanır. |Hayır |
+| authHeaders | Kimlik doğrulaması için ek HTTP isteği üst bilgileri.<br/> Örneğin, API anahtarı kimlik doğrulamasını kullanmak için, kimlik doğrulama türü ' nü "anonim" olarak seçebilir ve üst bilgide API anahtarını belirtebilirsiniz. | No |
+| connectVia | Veri deposuna bağlanmak için kullanılacak [Integration Runtime](concepts-integration-runtime.md) . [Önkoşullar](#prerequisites) bölümünden daha fazla bilgi edinin. Belirtilmemişse, bu özellik varsayılan Azure Integration Runtime kullanır. |No |
 
 ### <a name="use-basic-authentication"></a>Temel kimlik doğrulaması kullan
 
@@ -104,7 +104,7 @@ REST bağlı hizmeti için aşağıdaki özellikler desteklenir:
 | Servicesprincipalkey | Azure Active Directory uygulamasının anahtarını belirtin. Data Factory güvenli bir şekilde depolamak için bu alanı **SecureString** olarak işaretleyin veya [Azure Key Vault depolanan bir gizli dizi başvurusu](store-credentials-in-key-vault.md)yapın. | Yes |
 | Kiracı | Uygulamanızın altında bulunduğu kiracı bilgilerini (etki alanı adı veya kiracı KIMLIĞI) belirtin. Fareyi, Azure portal sağ üst köşesine getirerek alın. | Yes |
 | Aadresourceıd | Yetkilendirme için istediğiniz AAD kaynağını (örneğin,) belirtin `https://management.core.windows.net` .| Yes |
-| Azurecses türü | Hizmet sorumlusu kimlik doğrulaması için AAD uygulamanızın kaydedildiği Azure bulut ortamının türünü belirtin. <br/> İzin verilen değerler **Azucumhuriyeti**, **AzureChina**, **AzureUsGovernment** ve **AzureGermany**. Varsayılan olarak, Data Factory 'nin bulut ortamı kullanılır. | Hayır |
+| Azurecses türü | Hizmet sorumlusu kimlik doğrulaması için AAD uygulamanızın kaydedildiği Azure bulut ortamının türünü belirtin. <br/> İzin verilen değerler **Azucumhuriyeti**, **AzureChina**, **AzureUsGovernment** ve **AzureGermany**. Varsayılan olarak, Data Factory 'nin bulut ortamı kullanılır. | No |
 
 **Örnek**
 
@@ -200,7 +200,7 @@ REST 'ten veri kopyalamak için aşağıdaki özellikler desteklenir:
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
 | tür | DataSet 'in **Type** özelliği **restresource** olarak ayarlanmalıdır. | Yes |
-| relativeUrl 'Si | Verileri içeren kaynağın göreli URL 'SI. Bu özellik belirtilmediğinde, yalnızca bağlı hizmet tanımında belirtilen URL kullanılır. HTTP Bağlayıcısı Birleşik URL 'den verileri kopyalar: `[URL specified in linked service]/[relative URL specified in dataset]` . | Hayır |
+| relativeUrl 'Si | Verileri içeren kaynağın göreli URL 'SI. Bu özellik belirtilmediğinde, yalnızca bağlı hizmet tanımında belirtilen URL kullanılır. HTTP Bağlayıcısı Birleşik URL 'den verileri kopyalar: `[URL specified in linked service]/[relative URL specified in dataset]` . | No |
 
 ,, `requestMethod` `additionalHeaders` Ve veri kümesinde ayarlarsanız, ve ' de `requestBody` `paginationRules` olduğu gibi yeni modeli kullanmaya önermeniz durumunda olduğu gibi hala desteklenmektedir.
 
@@ -236,12 +236,12 @@ Aşağıdaki özellikler, etkinlik **kaynağını** kopyalama bölümünde deste
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
 | tür | Kopyalama etkinliği kaynağının **Type** özelliği **restsource** olarak ayarlanmalıdır. | Yes |
-| requestMethod | HTTP yöntemi. İzin verilen değerler **Al** (varsayılan) ve **Post**. | Hayır |
-| additionalHeaders | Ek HTTP istek üstbilgileri. | Hayır |
-| Istek gövdesi | HTTP isteğinin gövdesi. | Hayır |
-| Sayfaationrules | Sonraki sayfa isteklerini oluşturmak için sayfalandırma kuralları. Ayrıntılar için [sayfalandırma desteği](#pagination-support) bölümüne bakın. | Hayır |
-| httpRequestTimeout | HTTP isteğinin yanıt almak için zaman aşımı ( **TimeSpan** değeri). Bu değer, yanıt verilerinin okunması için zaman aşımı değil, yanıt almaya yönelik zaman aşımı değeridir. Varsayılan değer **00:01:40**' dir.  | Hayır |
-| Requestınterval | Sonraki sayfa için istek gönderilmeden önce beklenecek süre. Varsayılan değer **00:00:01** ' dir |  Hayır |
+| requestMethod | HTTP yöntemi. İzin verilen değerler **Al** (varsayılan) ve **Post**. | No |
+| additionalHeaders | Ek HTTP istek üstbilgileri. | No |
+| Istek gövdesi | HTTP isteğinin gövdesi. | No |
+| Sayfaationrules | Sonraki sayfa isteklerini oluşturmak için sayfalandırma kuralları. Ayrıntılar için [sayfalandırma desteği](#pagination-support) bölümüne bakın. | No |
+| httpRequestTimeout | HTTP isteğinin yanıt almak için zaman aşımı ( **TimeSpan** değeri). Bu değer, yanıt verilerinin okunması için zaman aşımı değil, yanıt almaya yönelik zaman aşımı değeridir. Varsayılan değer **00:01:40**' dir.  | No |
+| Requestınterval | Sonraki sayfa için istek gönderilmeden önce beklenecek süre. Varsayılan değer **00:00:01** ' dir |  No |
 
 >[!NOTE]
 >REST Bağlayıcısı içinde belirtilen "kabul etme" üst bilgisini yoksayar `additionalHeaders` . REST Bağlayıcısı yalnızca JSON 'daki yanıtı destekliyorsa, otomatik olarak bir üst bilgisi oluşturur `Accept: application/json` .
@@ -325,12 +325,12 @@ Aşağıdaki özellikler, kopyalama etkinliği **havuzu** bölümünde desteklen
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
 | tür | Kopyalama etkinliği havuzunun **Type** özelliği **restsink** olarak ayarlanmalıdır. | Yes |
-| requestMethod | HTTP yöntemi. İzin verilen değerler **gönderi** (varsayılan), **PUT** ve **Patch**. | Hayır |
-| additionalHeaders | Ek HTTP istek üstbilgileri. | Hayır |
-| httpRequestTimeout | HTTP isteğinin yanıt almak için zaman aşımı ( **TimeSpan** değeri). Bu değer, verileri yazmak için zaman aşımı değil, yanıt almak için zaman aşımı değeridir. Varsayılan değer **00:01:40**' dir.  | Hayır |
-| Requestınterval | Milisaniye cinsinden farklı istekler arasındaki Aralık süresi. İstek aralığı değeri [10, 60000] arasında bir sayı olmalıdır. |  Hayır |
-| httpCompressionType | En Iyi sıkıştırma düzeyiyle veri gönderilirken kullanılacak HTTP sıkıştırma türü. İzin verilen değerler **none** ve **gzip**'tur. | Hayır |
-| writeBatchSize | Yığın başına REST havuzuna yazılacak kayıt sayısı. Varsayılan değer 10000 ' dir. | Hayır |
+| requestMethod | HTTP yöntemi. İzin verilen değerler **gönderi** (varsayılan), **PUT** ve **Patch**. | No |
+| additionalHeaders | Ek HTTP istek üstbilgileri. | No |
+| httpRequestTimeout | HTTP isteğinin yanıt almak için zaman aşımı ( **TimeSpan** değeri). Bu değer, verileri yazmak için zaman aşımı değil, yanıt almak için zaman aşımı değeridir. Varsayılan değer **00:01:40**' dir.  | No |
+| Requestınterval | Milisaniye cinsinden farklı istekler arasındaki Aralık süresi. İstek aralığı değeri [10, 60000] arasında bir sayı olmalıdır. |  No |
+| httpCompressionType | En Iyi sıkıştırma düzeyiyle veri gönderilirken kullanılacak HTTP sıkıştırma türü. İzin verilen değerler **none** ve **gzip**'tur. | No |
+| writeBatchSize | Yığın başına REST havuzuna yazılacak kayıt sayısı. Varsayılan değer 10000 ' dir. | No |
 
 Havuz olarak REST Bağlayıcısı, JSON kabul eden REST API 'Leri ile birlikte çalışmaktadır. Veriler JSON 'da aşağıdaki Düzenle gönderilir. Gerektiğinde, kaynak verileri REST API beklenen yüküyle uyumlu olacak şekilde yeniden şekillendirmek için kopyalama etkinliği [şema eşlemesini](copy-activity-schema-and-type-mapping.md#schema-mapping) kullanabilirsiniz.
 
@@ -495,7 +495,7 @@ Bu bölümde, OAuth kullanarak JSON biçimindeki Azure Data Lake Storage veriler
 
     | Özellik | Açıklama |
     |:--- |:--- |
-    | URL |OAuth taşıyıcı belirtecini almak için URL 'yi belirtin. Örneğin, buradaki örnekte https://login.microsoftonline.com/microsoft.onmicrosoft.com/oauth2/token |. 
+    | URL |OAuth taşıyıcı belirtecini almak için URL 'yi belirtin. Örneğin, buradaki örnekte https://login.microsoftonline.com/microsoft.onmicrosoft.com/oauth2/token |
     | Yöntem | HTTP yöntemi. İzin verilen değerler **gönderi** ve **Get**. | 
     | Üst Bilgiler | Üst bilgi, HTTP isteğindeki bir üst bilgi adına başvuran Kullanıcı tanımlı ' dır. | 
     | Gövde | HTTP isteğinin gövdesi. | 

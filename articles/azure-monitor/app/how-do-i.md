@@ -4,10 +4,10 @@ description: Application Insights SSS.
 ms.topic: conceptual
 ms.date: 04/04/2017
 ms.openlocfilehash: 74a4d7ee65dccead132cfcebd9bf8c0de9b761a5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100584165"
 ---
 # <a name="how-do-i--in-application-insights"></a>Application Insights’ta nasıl ... yapabilirim?
@@ -65,7 +65,7 @@ Hem ölçüm hem de eşiğin altına gittiğinde e-posta alacaksınız.
 
 Dikkat edilmesi gereken bazı noktalar:
 
-* Bir uyarının iki durumu vardır ("uyarı" ve "sağlıklı"). Durum yalnızca bir ölçüm alındığında değerlendirilir.
+* Bir uyarının iki durumu vardır ("uyarı&quot; ve &quot;sağlıklı"). Durum yalnızca bir ölçüm alındığında değerlendirilir.
 * Yalnızca durum değiştiğinde bir e-posta gönderilir. Bu nedenle hem yüksek hem de düşük değerli ölçümleri göndermeniz gerekir.
 * Uyarıyı değerlendirmek için, önceki dönem içindeki alınan değerlerin ortalaması alınır. Bu, bir ölçüm her alındığında oluşur, böylece e-postalar ayarladığınız dönemden daha sık gönderilebilir.
 * E-postalar hem "uyarı" hem de "sağlıklı" olarak gönderildiğinden, tek kararlı olayınızı iki durumlu bir koşul olarak yeniden düşünmek isteyebilirsiniz. Örneğin, bir "iş tamamlandı" olayı yerine bir işin başlangıcında ve sonunda e-posta aldığınız "devam eden iş" koşulu vardır.

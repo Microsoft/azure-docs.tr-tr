@@ -5,14 +5,14 @@ services: route-server
 author: duongau
 ms.service: route-server
 ms.topic: article
-ms.date: 03/08/2021
+ms.date: 04/16/2021
 ms.author: duau
-ms.openlocfilehash: 6eed0ed3e936b0e9a534c82a3105c2ed37cab3d5
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 0bbe16fb63a4546b4b4745df16074f6a4b0cb26b
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102485428"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599545"
 ---
 # <a name="azure-route-server-preview-faq"></a>Azure rota sunucusu (Önizleme) SSS
 
@@ -29,21 +29,33 @@ Azure yol sunucusu, ağ sanal gereci (NVA) ve sanal ağınız arasında yönlend
 
 Hayır. Azure rota sunucusu, yüksek kullanılabilirliğe sahip bir hizmettir. [Kullanılabilirlik alanları](../availability-zones/az-overview.md)destekleyen bir Azure bölgesinde dağıtılmışsa, bölge düzeyinde yedeklilik olur.
 
+### <a name="how-many-route-servers-can-i-create-in-a-virtual-network"></a>Bir sanal ağda kaç tane yol sunucusu oluşturabilirim?
+
+VNet 'te yalnızca bir rota sunucusu oluşturabilirsiniz. *Routeserversubnet* adlı belirli bir alt ağda dağıtılması gerekir.
+
+### <a name="does-azure-route-server-support-vnet-peering"></a>Azure Route sunucusu VNet eşlemesini destekliyor mu?
+
+Evet. Azure yol sunucusunu barındıran bir sanal ağı başka bir sanal ağa eşleyebilir ve ikinci sanal ağda uzak ağ geçidini kullanabilirsiniz. Azure Route sunucusu, bu sanal ağın adres alanlarını öğrenip tüm Eşlenmekte olan NVA 'lar 'e gönderecektir. Ayrıca, NVA 'lar içindeki yolları eşlenen VNet 'teki VM 'lerin yönlendirme tablosuna programlayabilirsiniz. 
+
+
 ### <a name="what-routing-protocols-does-azure-route-server-support"></a><a name = "protocol"></a>Azure Route sunucusu hangi yönlendirme protokollerini destekler?
 
 Azure Route sunucusu yalnızca Sınır Ağ Geçidi Protokolü (BGP) destekler. Azure Route Server 'ı sanal ağınızdaki ayrılmış bir alt ağda dağıtmanız gerekeceğinden, NVA 'nın çok duraklı dış BGP 'yi desteklemesi gerekir. Seçtiğiniz [ASN](https://en.wikipedia.org/wiki/Autonomous_system_(Internet)) , NVA 'da BGP 'yi yapılandırırken kullandığınız Azure yol sunucusundan farklı olmalıdır.
 
 ### <a name="does-azure-route-server-route-data-traffic-between-my-nva-and-my-vms"></a>Azure Route sunucusu, NVA ve sanal makinelerim arasındaki veri trafiğini yönlendirebilir mi?
 
-Hayır. Azure Route sunucusu yalnızca NVA 'yla BGP yollarını değiş tokuş eder. Veri trafiği, doğrudan NVA 'dan seçilen VM 'ye ve doğrudan VM 'den NVA 'ya gider.
+Hayır. Azure Route sunucusu yalnızca NVA 'yla BGP yollarını değiş tokuş eder. Veri trafiği doğrudan NVA 'dan hedef VM 'ye ve doğrudan VM 'den NVA 'ya gider.
 
-### <a name="if-azure-route-server-receives-the-same-route-from-more-than-one-nva-will-it-program-all-copies-of-the-route-but-each-with-a-different-next-hop-to-the-vms-in-the-virtual-network"></a>Azure Route sunucusu birden fazla NVA 'dan aynı rotayı alırsa, yolun tüm kopyalarını (her biri farklı bir sonraki atlamada) sanal ağdaki VM 'lere yeniden programsın mı?
+### <a name="does-azure-route-server-store-customer-data"></a>Azure Route sunucusu müşteri verilerini depolar mı?
+Hayır. Azure yol sunucusu, yalnızca NVA ile BGP yollarını değiş tokuş eder ve ardından bunları sanal ağınıza yayar.
 
-Evet, yalnızca yol yol uzunluğu Ile aynı olduğunda. VM 'Ler bu yolun hedefine trafik gönderdiğinizde, VM Konakları Equal-Cost çoklu yol (ECMP) yönlendirmesi olur. Ancak, bir NVA yolu diğer NVA 'lar daha kısa bir yol uzunluğu ile gönderirse. Azure Route Server yalnızca bir sonraki atlamanın, sanal ağdaki VM 'lere bu NVA 'ya ayarlandığı yolu programlayacaktır.
+### <a name="if-azure-route-server-receives-the-same-route-from-more-than-one-nva-how-does-it-handle-them"></a>Azure Route sunucusu, birden fazla NVA 'dan aynı rotayı alırsa, bunları nasıl işler?
 
-### <a name="does-azure-route-server-support-vnet-peering"></a>Azure Route sunucusu VNet eşlemesini destekliyor mu?
+Yol, yol uzunluğu ile aynı ise, Azure yol sunucusu, her biri farklı bir sonraki atlamada yolun birden çok kopyasını sanal ağdaki VM 'lere programlayacaktır. VM 'Ler bu yolun hedefine trafik gönderdiğinizde, VM Konakları Equal-Cost çoklu yol (ECMP) yönlendirmesi olur. Ancak, bir NVA yolu diğer NVA 'lar daha kısa bir yol uzunluğu ile gönderirse Azure Route sunucusu yalnızca bir sonraki atlamanın, sanal ağdaki VM 'lere bu NVA 'ya ayarlanmış olan rotayı programlayacaktır.
 
-Evet. Azure yol sunucusunu barındıran bir sanal ağı başka bir sanal ağa eşleyebilir ve bu VNet üzerinde uzak ağ geçidini kullanabilirsiniz. Azure yol sunucusu, bu sanal ağın adres alanlarını öğrenip, tüm eşlenmiş NVA 'lar 'e gönderecektir.
+### <a name="does-azure-route-server-preserve-the-bgp-communities-of-the-route-it-receives"></a>Azure Route sunucusu, aldığı yolun BGP topluluklarıyla korunmasını ister misiniz?
+
+Evet, Azure Route sunucusu yolu BGP topluluklarıyla birlikte yayar.
 
 ### <a name="what-autonomous-system-numbers-asns-can-i-use"></a>Hangi otonom sistem numaralarını (ASNs) kullanabilirim?
 

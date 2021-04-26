@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 03/04/2020
 ms.author: jiajzhan
-ms.openlocfilehash: 580de0112c99eef4ba22ba946f6a2b81bc326001
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 8e5480b7412291c427c5eaea94a63343f12c62cf
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102432052"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077525"
 ---
 # <a name="speech-service-phonetic-sets"></a>Konuşma hizmeti fonetik kümeleri
 
@@ -234,30 +234,30 @@ Konuşma hizmeti telefon kümesi, devam eden harften sonra stres koyar; ancak `f
 
 | `sapi` | `ipa` | Örnek 1 | Örnek 2 | Örnek 3 |
 |--|--|--|--|--|
-| b | `b` | **B** ank |  | [<sup>1</sup>](#de-c-1) PU **b** |  |
+| b | `b` | **B** ank | | [<sup>1</sup>](#de-c-1) PU **b** | 
 | c | `ç` | **Ch** Emie | mögli **ch** St | [<sup>2</sup>](#de-c-2)ı **ch** |
-| d | `d` | **d** anken | [<sup>3</sup>](#de-c-3) Len **d** l | [<sup>4</sup>](#de-c-4) Clau **d** e |  |
+| d | `d` | **d** anken | [<sup>3</sup>](#de-c-3) Len **d** l | [<sup>4</sup>](#de-c-4) Clau **d** e | 
 | JH | `ʤ` | **J** eff | gemana **g** t | [<sup>5</sup>](#de-c-5) **G**/ç |
-| f | `f` | **F** ahrtdauer | Angri **FF** slustig | abbruchrei **f** |  |
-| g | `g` | **g**. |  | [<sup>6</sup>](#de-c-6) GRE **g** |  |
-| h | `h` | **H** ausanbau |  |  |  |
-| y | `j` | **J** od | Reakt | Hu **ı** |  |
-| k | `k` | **K** OMA | Aspe **k** t | Flec **k** |  |
-| l | `l` | **l** au | ähne **l** n | zugörüntüle **l** |  |
-| m | `m` | **M** UT | Bir **a** t | Tah **m** |  |
-| n | `n` | **n** kaldır | u **n** d | Kuh **n** |  |
-| denetimini | `ŋ` | [<sup>7</sup>](#de-c-7)**ng** Uygurca | Schwa **NK** | R **ing** |  |
-| p | `p` | **P** artner | abru **p** t | TI **p** |  |
-| PF | `pf` | **PF** erd | Dam **PF** t | **PF** 'ye |  |
-| r | `ʀ`, `r`, `ʁ` | **R** eIse | KNU **RR** t | Haa **r** |  |
-| s | `s` | [<sup>8</sup>](#de-c-8)**S** taccato | bı **s** t | MIE **s** |  |
-| dak | `ʃ` | **SCH** Ule | mı **SCH** t | Lappi **SCH** |  |
-| t | `t` | **T** oyum | S **t** raße | Mu **t** |  |
-| Talar | `ts` | **Z** UG | AR **z** t | WIT **z** |  |
-| ch | `tʃ` | **TSch** echien | aufgepu **TSch** t | bdesdeu **TSch** |  |
-| v | `v` | **w** Inken | Q **u** Alle | [<sup>9</sup>](#de-c-9) Gr **Oo** ve |  |
+| f | `f` | **F** ahrtdauer | Angri **FF** slustig | abbruchrei **f** |  
+| g | `g` | **g**. |  [<sup>6</sup>](#de-c-6) GRE **g** |  |
+| h | `h` | **H** ausanbau |  |  | 
+| y | `j` | **J** od | Reakt | Hu **ı** | 
+| k | `k` | **K** OMA | Aspe **k** t | Flec **k** | 
+| l | `l` | **l** au | ähne **l** n | zugörüntüle **l** | 
+| m | `m` | **M** UT | Bir **a** t | Tah **m** | 
+| n | `n` | **n** kaldır | u **n** d | Kuh **n** | 
+| denetimini | `ŋ` | [<sup>7</sup>](#de-c-7)**ng** Uygurca | Schwa **NK** | R **ing** | 
+| p | `p` | **P** artner | abru **p** t | TI **p** | 
+| PF | `pf` | **PF** erd | Dam **PF** t | **PF** 'ye |
+| r | `ʀ`, `r`, `ʁ` | **R** eIse | KNU **RR** t | Haa **r** | 
+| s | `s` | [<sup>8</sup>](#de-c-8)**S** taccato | bı **s** t | MIE **s** | 
+| dak | `ʃ` | **SCH** Ule | mı **SCH** t | Lappi **SCH** | 
+| t | `t` | **T** oyum | S **t** raße | Mu **t** | 
+| Talar | `ts` | **Z** UG | AR **z** t | WIT **z** | 
+| ch | `tʃ` | **TSch** echien | aufgepu **TSch** t | bdesdeu **TSch** | 
+| v | `v` | **w** Inken | Q **u** Alle | [<sup>9</sup>](#de-c-9) Gr **Oo** ve | 
 | x | [<sup>10</sup>](#de-c-10) `x` ,[<sup>11</sup>](#de-c-11)`ç` | [<sup>12</sup>](#de-c-12) Ba **ch** silinebilir | Ma **mögli****ch** St | Schma **ch** ' ı **ch** |
-| z | `z` | **s** UPA |  |  |  |
+| z | `z` | **s** UPA |  |  | 
 | zh | `ʒ` | **G** enre | B **Re** ezinski | Edvi **g** e |
 
 <a id="de-c-1"></a>

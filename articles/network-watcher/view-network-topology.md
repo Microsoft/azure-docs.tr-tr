@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/09/2018
 ms.author: damendo
-ms.openlocfilehash: c04da65af27ebd5ac654bc059ae004c157a20f33
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f20fa22dac3fba4d01cbc5e398bafa4113e94a96
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "84737538"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780308"
 ---
 # <a name="view-the-topology-of-an-azure-virtual-network"></a>Bir Azure sanal ağının topolojisini görüntüleme
 
@@ -61,7 +61,7 @@ Kullandığınız hesabın gerekli [izinlere](required-rbac-permissions.md)sahip
     az group create --name NetworkWatcherRG --location eastus
     ```
 
-2. [Az Network izleyici configure](/cli/azure/network/watcher#az-network-watcher-configure)ile bir ağ izleyicisi oluşturun. Aşağıdaki örnek *eastus* bölgesinde bir ağ izleyicisi oluşturur:
+2. [Az Network izleyici configure](/cli/azure/network/watcher#az_network_watcher_configure)ile bir ağ izleyicisi oluşturun. Aşağıdaki örnek *eastus* bölgesinde bir ağ izleyicisi oluşturur:
 
     ```azurecli-interactive
     az network watcher configure \
@@ -70,7 +70,7 @@ Kullandığınız hesabın gerekli [izinlere](required-rbac-permissions.md)sahip
       --enabled true
     ```
 
-3. Topolojiyi [az Network izleyici Show-Topology](/cli/azure/network/watcher#az-network-watcher-show-topology)ile görüntüleyin. Aşağıdaki örnek, *Myresourcegroup* adlı bir kaynak grubu için topolojiyi görüntüler:
+3. Topolojiyi [az Network izleyici Show-Topology](/cli/azure/network/watcher#az_network_watcher_show_topology)ile görüntüleyin. Aşağıdaki örnek, *Myresourcegroup* adlı bir kaynak grubu için topolojiyi görüntüler:
 
     ```azurecli-interactive
     az network watcher show-topology --resource-group MyResourceGroup

@@ -11,12 +11,12 @@ ms.subservice: msi
 manager: daveba
 ms.collection: M365-identity-device-management
 ms.custom: references_regions
-ms.openlocfilehash: 058873df989c444ebe06fc20a2f8a40fd2d3c594
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c4cd9140d03bba1f9d95ed64c3628da4fe32ecd9
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104594555"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107771488"
 ---
 # <a name="services-that-support-managed-identities-for-azure-resources"></a>Azure kaynakları için yönetilen kimlikleri destekleyen hizmetler
 
@@ -34,7 +34,7 @@ Aşağıdaki Azure hizmetleri Azure kaynakları için yönetilen kimlikleri dest
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
 | Kullanıcı tarafından atanan | Önizleme | Önizleme | Kullanılamaz | Önizleme |
 
 Azure API Management yönetilen kimliğini (varsa) yapılandırmak için aşağıdaki listeye bakın:
@@ -45,8 +45,8 @@ Azure API Management yönetilen kimliğini (varsa) yapılandırmak için aşağ�
 
 | Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check]  | Kullanılamaz  | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check]  | Kullanılamaz  | ![Kullanılabilir][check] |
 
 Azure Uygulama yapılandırması için yönetilen kimliği (varsa) yapılandırmak üzere aşağıdaki listeye bakın:
 
@@ -56,8 +56,8 @@ Azure Uygulama yapılandırması için yönetilen kimliği (varsa) yapılandırm
 
 | Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check]  | ![Kullanılabileceğini][check]  | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check]  | ![Kullanılabilir][check]  | ![Kullanılabilir][check] |
 
 Azure App Service yönetilen kimliği (varsa) yapılandırmak için aşağıdaki listeye bakın:
 
@@ -79,7 +79,7 @@ Azure Arc etkin Kubernetes Şu anda [sistem tarafından atanan kimliği destekle
 
 | Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |
 | Kullanıcı tarafından atanan | Kullanılamaz | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 Tüm Azure Arc etkin sunucularının sistem tarafından atanmış bir kimliği vardır. Azure Arc etkin bir sunucusunda sistem tarafından atanan kimliği devre dışı bırakıp değiştiremezsiniz. Azure Arc etkin sunucularında yönetilen kimliklerin nasıl kullanılacağı hakkında daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
@@ -101,8 +101,8 @@ Aboneliğinizi yeni bir kiracıya taşıdıysanız yönetilen bir kimliği yenid
 
 |Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |
 
 [Azure şemaları](../../governance/blueprints/overview.md)ile yönetilen bir kimlik kullanmak için aşağıdaki listeye bakın:
 
@@ -114,14 +114,14 @@ Aboneliğinizi yeni bir kiracıya taşıdıysanız yönetilen bir kimliği yenid
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
 | Kullanıcı tarafından atanan | Kullanılamaz | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 ### <a name="azure-cognitive-services"></a>Azure Bilişsel Hizmetler
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
 | Kullanıcı tarafından atanan | Kullanılamaz | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 
@@ -162,14 +162,14 @@ Azure Container Registry görevler için yönetilen kimliği yapılandırmak üz
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
 | Kullanıcı tarafından atanan | Kullanılamaz | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 ### <a name="azure-data-factory-v2"></a>Azure Data Factory V2
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
 | Kullanıcı tarafından atanan | Kullanılamaz | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 Azure Data Factory v2 için yönetilen kimliği yapılandırmak üzere aşağıdaki listeye bakın (varsa):
@@ -208,8 +208,8 @@ Yönetilen kimlik türü |Tüm genel kullanıma açık<br>Küresel Azure bölgel
 
 Yönetilen kimlik türü |Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check]  | ![Kullanılabileceğini][check]  | ![Kullanılabileceğini][check]  |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check]  | ![Kullanılabilir][check]  | ![Kullanılabilir][check]  |
 
 Azure Işlevleri için yönetilen kimliği (varsa) yapılandırmak üzere aşağıdaki listeye bakın:
 
@@ -222,7 +222,7 @@ Azure Işlevleri için yönetilen kimliği (varsa) yapılandırmak üzere aşağ
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
 | Kullanıcı tarafından atanan | Kullanılamaz | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 Azure IoT Hub yönetilen kimliğini (varsa) yapılandırmak için aşağıdaki listeye bakın:
@@ -240,7 +240,7 @@ Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölge
 
 | Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |
 | Kullanıcı tarafından atanan | Önizleme | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 
@@ -250,8 +250,8 @@ Daha fazla bilgi için bkz. [Azure Kubernetes hizmetinde Yönetilen kimlikler ku
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
 
 Daha fazla bilgi için bkz. [Azure izleyici 'de kimliğin nasıl çalıştığı](../../azure-monitor/logs/customer-managed-keys.md)
 
@@ -259,8 +259,8 @@ Daha fazla bilgi için bkz. [Azure izleyici 'de kimliğin nasıl çalıştığı
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | Kullanılamaz | ![Kullanılabilir][check] |
 
 
 Azure Logic Apps yönetilen kimliği (varsa) yapılandırmak için aşağıdaki listeye bakın:
@@ -281,16 +281,16 @@ Daha fazla bilgi için bkz. [Azure Machine Learning ile yönetilen kimlikler kul
 
 |Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] |
 | Kullanıcı tarafından atanan | Kullanılamaz | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 Azure Ilkesi için yönetilen kimliği (varsa) yapılandırmak üzere aşağıdaki listeye bakın:
 
 - [Azure portalı](../../governance/policy/tutorials/create-and-manage.md#assign-a-policy)
 - [PowerShell](../../governance/policy/how-to/remediate-resources.md#create-managed-identity-with-powershell)
-- [Azure CLI](/cli/azure/policy/assignment#az-policy-assignment-create)
+- [Azure CLI](/cli/azure/policy/assignment#az_policy_assignment_create)
 - [Azure Resource Manager şablonları](/azure/templates/microsoft.authorization/policyassignments)
-- [REST](/rest/api/resources/policyassignments/create)
+- [REST](/rest/api/policy/policyassignments/create)
 
 
 ### <a name="azure-service-fabric"></a>Azure Service Fabric
@@ -299,8 +299,8 @@ Azure Ilkesi için yönetilen kimliği (varsa) yapılandırmak üzere aşağıda
 
 Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | Kullanılamaz | Kullanılamaz | Kullanılamıyor |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | Kullanılamaz | Kullanılamaz |Kullanılamaz |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz | Kullanılamıyor |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz |Kullanılamaz |
 
 Tüm bölgelerde Azure Service Fabric uygulamaları için yönetilen kimliği yapılandırmak üzere aşağıdaki listeye bakın:
 
@@ -310,7 +310,7 @@ Tüm bölgelerde Azure Service Fabric uygulamaları için yönetilen kimliği ya
 
 | Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | Kullanılamaz | Kullanılamaz | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | Kullanılamaz | Kullanılamaz | ![Kullanılabilir][check] |
 | Kullanıcı tarafından atanan | Kullanılamaz | Kullanılamaz | Kullanılamaz | Kullanılamaz |
 
 
@@ -327,8 +327,8 @@ Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölge
 
 |Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] |
 
 Azure sanal makine ölçek kümeleri (varsa) için yönetilen kimliği yapılandırmak üzere aşağıdaki listeye bakın:
 
@@ -344,8 +344,8 @@ Azure sanal makine ölçek kümeleri (varsa) için yönetilen kimliği yapıland
 
 | Yönetilen kimlik türü | Tüm genel kullanıma açık<br>Küresel Azure bölgeleri | Azure Kamu | Azure Almanya | Azure China 21Vianet |
 | --- | :-: | :-: | :-: | :-: |
-| Sistem tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] |
-| Kullanıcı tarafından atanan | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] | ![Kullanılabileceğini][check] |
+| Sistem tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] |
+| Kullanıcı tarafından atanan | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] | ![Kullanılabilir][check] |
 
 Azure sanal makineleri için yönetilen kimliği yapılandırmak üzere aşağıdaki listeye bakın (kullanılabilir yerlerde):
 
@@ -402,25 +402,25 @@ Azure Resource Manager erişimi yapılandırmak için aşağıdaki listeye bakı
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://management.azure.com/`| ![Kullanılabileceğini][check] |
-| Azure Kamu | `https://management.usgovcloudapi.net/` | ![Kullanılabileceğini][check] |
-| Azure Almanya | `https://management.microsoftazure.de/` | ![Kullanılabileceğini][check] |
-| Azure China 21Vianet | `https://management.chinacloudapi.cn` | ![Kullanılabileceğini][check] |
+| Azure genel | `https://management.azure.com/`| ![Kullanılabilir][check] |
+| Azure Kamu | `https://management.usgovcloudapi.net/` | ![Kullanılabilir][check] |
+| Azure Almanya | `https://management.microsoftazure.de/` | ![Kullanılabilir][check] |
+| Azure China 21Vianet | `https://management.chinacloudapi.cn` | ![Kullanılabilir][check] |
 
 ### <a name="azure-key-vault"></a>Azure Key Vault
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://vault.azure.net`| ![Kullanılabileceğini][check] |
-| Azure Kamu | `https://vault.usgovcloudapi.net` | ![Kullanılabileceğini][check] |
-| Azure Almanya |  `https://vault.microsoftazure.de` | ![Kullanılabileceğini][check] |
-| Azure China 21Vianet | `https://vault.azure.cn` | ![Kullanılabileceğini][check] |
+| Azure genel | `https://vault.azure.net`| ![Kullanılabilir][check] |
+| Azure Kamu | `https://vault.usgovcloudapi.net` | ![Kullanılabilir][check] |
+| Azure Almanya |  `https://vault.microsoftazure.de` | ![Kullanılabilir][check] |
+| Azure China 21Vianet | `https://vault.azure.cn` | ![Kullanılabilir][check] |
 
 ### <a name="azure-data-lake"></a>Azure Data Lake
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://datalake.azure.net/` | ![Kullanılabileceğini][check] |
+| Azure genel | `https://datalake.azure.net/` | ![Kullanılabilir][check] |
 | Azure Kamu |  | Kullanılamaz |
 | Azure Almanya |   | Kullanılamaz |
 | Azure China 21Vianet |  | Kullanılamaz |
@@ -429,25 +429,25 @@ Azure Resource Manager erişimi yapılandırmak için aşağıdaki listeye bakı
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://database.windows.net/` | ![Kullanılabileceğini][check] |
-| Azure Kamu | `https://database.usgovcloudapi.net/` | ![Kullanılabileceğini][check] |
-| Azure Almanya | `https://database.cloudapi.de/` | ![Kullanılabileceğini][check] |
-| Azure China 21Vianet | `https://database.chinacloudapi.cn/` | ![Kullanılabileceğini][check] |
+| Azure genel | `https://database.windows.net/` | ![Kullanılabilir][check] |
+| Azure Kamu | `https://database.usgovcloudapi.net/` | ![Kullanılabilir][check] |
+| Azure Almanya | `https://database.cloudapi.de/` | ![Kullanılabilir][check] |
+| Azure China 21Vianet | `https://database.chinacloudapi.cn/` | ![Kullanılabilir][check] |
 
 ### <a name="azure-data-explorer"></a>Azure Veri Gezgini
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://<account>.<region>.kusto.windows.net` | ![Kullanılabileceğini][check] |
-| Azure Kamu | `https://<account>.<region>.kusto.usgovcloudapi.net` | ![Kullanılabileceğini][check] |
-| Azure Almanya | `https://<account>.<region>.kusto.cloudapi.de` | ![Kullanılabileceğini][check] |
-| Azure China 21Vianet | `https://<account>.<region>.kusto.chinacloudapi.cn` | ![Kullanılabileceğini][check] |
+| Azure genel | `https://<account>.<region>.kusto.windows.net` | ![Kullanılabilir][check] |
+| Azure Kamu | `https://<account>.<region>.kusto.usgovcloudapi.net` | ![Kullanılabilir][check] |
+| Azure Almanya | `https://<account>.<region>.kusto.cloudapi.de` | ![Kullanılabilir][check] |
+| Azure China 21Vianet | `https://<account>.<region>.kusto.chinacloudapi.cn` | ![Kullanılabilir][check] |
 
 ### <a name="azure-event-hubs"></a>Azure Event Hubs
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://eventhubs.azure.net` | ![Kullanılabileceğini][check] |
+| Azure genel | `https://eventhubs.azure.net` | ![Kullanılabilir][check] |
 | Azure Kamu |  | Kullanılamaz |
 | Azure Almanya |   | Kullanılamaz |
 | Azure China 21Vianet |  | Kullanılamaz |
@@ -456,8 +456,8 @@ Azure Resource Manager erişimi yapılandırmak için aşağıdaki listeye bakı
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://servicebus.azure.net`  | ![Kullanılabileceğini][check] |
-| Azure Kamu |  | ![Kullanılabileceğini][check] |
+| Azure genel | `https://servicebus.azure.net`  | ![Kullanılabilir][check] |
+| Azure Kamu |  | ![Kullanılabilir][check] |
 | Azure Almanya |   | Kullanılamaz |
 | Azure China 21Vianet |  | Kullanılamaz |
 
@@ -473,19 +473,19 @@ Azure Resource Manager erişimi yapılandırmak için aşağıdaki listeye bakı
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://storage.azure.com/` <br /><br />`https://<account>.blob.core.windows.net` <br /><br />`https://<account>.queue.core.windows.net` | ![Kullanılabileceğini][check] |
-| Azure Kamu | `https://storage.azure.com/`<br /><br />`https://<account>.blob.core.usgovcloudapi.net` <br /><br />`https://<account>.queue.core.usgovcloudapi.net` | ![Kullanılabileceğini][check] |
-| Azure Almanya | `https://storage.azure.com/`<br /><br />`https://<account>.blob.core.cloudapi.de` <br /><br />`https://<account>.queue.core.cloudapi.de` | ![Kullanılabileceğini][check] |
-| Azure China 21Vianet | `https://storage.azure.com/`<br /><br />`https://<account>.blob.core.chinacloudapi.cn` <br /><br />`https://<account>.queue.core.chinacloudapi.cn` | ![Kullanılabileceğini][check] |
+| Azure genel | `https://storage.azure.com/` <br /><br />`https://<account>.blob.core.windows.net` <br /><br />`https://<account>.queue.core.windows.net` | ![Kullanılabilir][check] |
+| Azure Kamu | `https://storage.azure.com/`<br /><br />`https://<account>.blob.core.usgovcloudapi.net` <br /><br />`https://<account>.queue.core.usgovcloudapi.net` | ![Kullanılabilir][check] |
+| Azure Almanya | `https://storage.azure.com/`<br /><br />`https://<account>.blob.core.cloudapi.de` <br /><br />`https://<account>.queue.core.cloudapi.de` | ![Kullanılabilir][check] |
+| Azure China 21Vianet | `https://storage.azure.com/`<br /><br />`https://<account>.blob.core.chinacloudapi.cn` <br /><br />`https://<account>.queue.core.chinacloudapi.cn` | ![Kullanılabilir][check] |
 
 ### <a name="azure-analysis-services"></a>Azure Analysis Services
 
 | Bulut | Kaynak kimliği | Durum |
 |--------|------------|:-:|
-| Azure genel | `https://*.asazure.windows.net` | ![Kullanılabileceğini][check] |
-| Azure Kamu | `https://*.asazure.usgovcloudapi.net` | ![Kullanılabileceğini][check] |
-| Azure Almanya | `https://*.asazure.cloudapi.de` | ![Kullanılabileceğini][check] |
-| Azure China 21Vianet | `https://*.asazure.chinacloudapi.cn` | ![Kullanılabileceğini][check] |
+| Azure genel | `https://*.asazure.windows.net` | ![Kullanılabilir][check] |
+| Azure Kamu | `https://*.asazure.usgovcloudapi.net` | ![Kullanılabilir][check] |
+| Azure Almanya | `https://*.asazure.cloudapi.de` | ![Kullanılabilir][check] |
+| Azure China 21Vianet | `https://*.asazure.chinacloudapi.cn` | ![Kullanılabilir][check] |
 
 > [!Note]
 > Microsoft Power BI, [yönetilen kimlikleri de destekler](../../stream-analytics/powerbi-output-managed-identity.md).

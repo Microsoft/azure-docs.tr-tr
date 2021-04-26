@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 10/29/2020
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 946ff043828034340ae3273fc0629e32de755540
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: faab8aa124ca2f290938cb6cff0a2f4d072caffd
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96026670"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106073246"
 ---
 ## <a name="create-a-self-signed-root-certificate"></a><a name="rootcert"></a>Otomatik olarak imzalanan kök sertifika oluşturma
 

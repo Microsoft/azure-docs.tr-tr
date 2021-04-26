@@ -11,16 +11,45 @@ ms.subservice: develop
 ms.topic: reference
 ms.workload: identity
 ms.author: marsma
-ms.openlocfilehash: 56e6d859293b91a56252372574f59c8dcc2cd80e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 68136cc259e0be4a2f9449aa9ec15f4a14a63890
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101687337"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106074990"
 ---
 # <a name="microsoft-identity-platform-docs-whats-new"></a>Microsoft Identity platform belgeleri: yenilikler
 
 Microsoft Identity platform belgelerindeki yenilikler 'e hoş geldiniz. Bu makalede, eklenen ve son üç ay içinde önemli güncelleştirmeleri olan yeni belgeler listelenir.
+
+## <a name="march-2021"></a>Mart 2021
+
+### <a name="new-articles"></a>Yeni makaleler
+
+- [Son silinen bir uygulamayı Microsoft Identity platformu ile geri yükleme veya kaldırma](quickstart-restore-app.md)
+
+### <a name="updated-articles"></a>Güncelleştirilmiş makaleler
+
+- [Microsoft Identity platformunda yönetici onayı](v2-admin-consent.md)
+- [MSAL.NET ile Xamarin Android için yapılandırma gereksinimleri ve sorun giderme ipuçları](msal-net-xamarin-android-considerations.md)
+- [Web API 'Lerini çağıran Daemon uygulaması-belirteç alma](scenario-daemon-acquire-token.md)
+- [Web API 'Lerini çağıran Daemon uygulaması-kod yapılandırması](scenario-daemon-app-configuration.md)
+- [Web API 'Lerini çağıran Daemon uygulaması-uygulamadan bir Web API 'SI çağırma](scenario-daemon-call-api.md)
+- [Web API 'Lerini çağıran Daemon uygulaması-üretime taşı](scenario-daemon-production.md)
+- [Web API 'Lerini çağıran masaüstü uygulaması: belirteç alma](scenario-desktop-acquire-token.md)
+- [Web API 'Lerini çağıran masaüstü uygulaması: kod yapılandırması](scenario-desktop-app-configuration.md)
+- [Web API 'Lerini çağıran masaüstü uygulaması: Web API 'SI çağırma](scenario-desktop-call-api.md)
+- [Nasıl yapılır: bir Kiracıdaki belirli bir uygulama için belirteçlerde yayılan talepleri özelleştirme (Önizleme)](active-directory-claims-mapping.md)
+- [Python için MSAL’de oturum açma](msal-logging-python.md)
+- [Apple cihazları için Microsoft Enterprise SSO eklentisi (Önizleme)](apple-sso-plugin.md)
+- [Hızlı başlangıç: ASP.NET Web uygulamasına Microsoft Identity platformu oturum açma ekleme](quickstart-v2-aspnet-webapp.md)
+- [Hızlı başlangıç: Microsoft 'a ASP.NET Core Web uygulamasına oturum açma ekleme](quickstart-v2-aspnet-core-webapp.md)
+- [Hızlı başlangıç: bir belirteç alın ve konsol uygulamasının kimliğini kullanarak Microsoft Graph API 'sini çağırın](quickstart-v2-netcore-daemon.md)
+- [Hızlı başlangıç: ASP.NET Core Web API 'sini Microsoft Identity platformu ile koruma](quickstart-v2-aspnet-core-web-api.md)
+- [Hızlı başlangıç: angular tek sayfalı uygulamada Kullanıcı oturumu açma ve erişim belirteci edinme](quickstart-v2-angular.md)
+- [Geliştiriciler için destek ve yardım seçenekleri](developer-support-help-options.md)
+- [Kullanıcılara oturum açan Web uygulaması: kod yapılandırması](scenario-web-app-sign-user-app-configuration.md)
+- [Kullanıcı oturumu açan Web uygulaması: oturum açma ve oturum kapatma](scenario-web-app-sign-user-sign-in.md)
 
 ## <a name="february-2021"></a>Şubat 2021
 
@@ -65,25 +94,3 @@ Microsoft Identity platform belgelerindeki yenilikler 'e hoş geldiniz. Bu makal
 - [Belirteç ömür ilkelerini yapılandırma (Önizleme)](configure-token-lifetimes.md)
 - [Microsoft Identity platform kimlik doğrulama kitaplıkları](reference-v2-libraries.md)
 - [Microsoft Identity platform ve OAuth 2,0 yetkilendirme kodu akışı](v2-oauth2-auth-code-flow.md)
-
-## <a name="december-2020"></a>Aralık 2020
-
-### <a name="new-articles"></a>Yeni makaleler
-
-- [Hızlı başlangıç: kullanıcılara kaydolan ve adına Microsoft Graph çağıran Web uygulaması ASP.NET Core](quickstart-v2-aspnet-core-webapp-calls-graph.md)
-- [MSAL.NET’te hataları ve özel durumları işleme](msal-error-handling-dotnet.md)
-- [iOS/macOS için MSAL.js’de hataları ve özel durumları işleme](msal-error-handling-ios.md)
-- [Java için MSAL.js’de hataları ve özel durumları işleme](msal-error-handling-java.md)
-- [MSAL.js’de hataları ve özel durumları işleme](msal-error-handling-js.md)
-- [Python için MSAL.js’de hataları ve özel durumları işleme](msal-error-handling-python.md)
-- [SAML ve OıDC/OAuth ile Microsoft Identity platform belirteci değişim senaryoları](scenario-token-exchange-saml-oauth.md)
-
-### <a name="updated-articles"></a>Güncelleştirilmiş makaleler
-
-- [Hızlı başlangıç: Microsoft 'a Java Web uygulamasına oturum açma ekleme](quickstart-v2-java-webapp.md)
-- [Öğretici: Microsoft Identity platformunu kullanan çok kiracılı bir Daemon oluşturma](tutorial-v2-aspnet-daemon-web-app.md)
-- [Kullanıcılarda oturum açan Web uygulaması: uygulama kaydı](scenario-web-app-sign-user-app-registration.md)
-- [Microsoft Identity platform ve örtük verme akışı](v2-oauth2-implicit-grant-flow.md)
-- [Microsoft Identity platform erişim belirteçleri](access-tokens.md)
-- [Web API 'Lerini çağıran bir Web API 'SI: uygulama için belirteç alma](scenario-web-api-call-api-acquire-token.md)
-

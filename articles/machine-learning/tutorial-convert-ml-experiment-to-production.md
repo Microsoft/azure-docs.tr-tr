@@ -9,12 +9,12 @@ ms.subservice: core
 ms.topic: tutorial
 ms.date: 04/30/2020
 ms.custom: devx-track-python
-ms.openlocfilehash: cdfeb2fdeefabb0d2d4af2fb63222adda5d023fb
-ms.sourcegitcommit: 1f1d29378424057338b246af1975643c2875e64d
+ms.openlocfilehash: 37778bc096c9089e3706907fcdd6b9c816cc5fbc
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99576033"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817495"
 ---
 # <a name="tutorial-convert-ml-experiments-to-production-python-code"></a>Öğretici: ML denemeleri 'yi üretim Python koduna dönüştürme
 
@@ -527,5 +527,5 @@ def test_train_model():
 Bir deneyden üretim koduna nasıl dönüştüreceğiniz artık daha fazla bilgi ve sonraki adımlar için aşağıdaki bağlantılara bakın:
 
 + [MLOpsPython](https://github.com/microsoft/MLOpsPython/blob/master/docs/custom_model.md): Azure Pipelines ve Azure Machine Learning kullanarak kendi modelinizi eğlendirmek, değerlendirmek ve dağıtmak IÇIN bir CI/CD işlem hattı oluşturun
-+ [Azure ML deneme çalıştırmaları ve ölçümlerini izleme](./how-to-track-experiments.md)
++ [Azure ML deneme çalıştırmaları ve ölçümlerini izleme](./how-to-log-view-metrics.md)
 + [ML web hizmet uç noktalarından verileri izleme ve toplama](./how-to-enable-app-insights.md)

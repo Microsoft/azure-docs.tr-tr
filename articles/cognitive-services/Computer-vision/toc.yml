@@ -7,23 +7,142 @@
       href: overview.md
     - name: Dil desteği
       href: language-support.md
-    - name: Fiyatlandırma ve limitler
+    - name: Fiyatlandırma
       href: 'https://azure.microsoft.com/pricing/details/cognitive-services/computer-vision'
     - name: Yenilikler
       href: whats-new.md
     - name: Görüntü İşleme SSS
       href: FAQ.md
-- name: Hızlı başlangıç Görüntü İşleme
-  href: quickstarts-sdk/client-library.md
-- name: Örnekler
+- name: Optik karakter tanıma (OCR)
   items:
-    - name: Görüntü işleme uygulamasını inceleme
-      href: Tutorials/CSharpTutorial.md
-    - name: Diğer Görüntü İşleme örnekleri
+    - name: OCR genel bakış
+      href: overview-ocr.md
+    - name: OCR hızlı başlangıç
+      href: quickstarts-sdk/client-library.md
+    - name: Örnekler
       href: /samples/browse/?products=azure&terms=computer-vision
-- name: Yapay zekanın sorumluluk sahibi bir biçimde kullanılması
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: Okuma API 'sini çağırma
+          href: Vision-API-How-to-Topics/call-read-api.md
+        - name: Okuma 2.x sürümünden Okuma 3.x sürümüne yükseltme
+          href: upgrade-api-versions.md
+        - name: Okuma kapsayıcısını kullanma
+          items:
+            - name: Kapsayıcıları yükleme ve çalıştırma
+              href: computer-vision-how-to-install-containers.md
+              displayName: 'docker, container, package, packaged app, swagger, open api, openapi, train, publish, az, acr, cli, tps, core, curl, try it now, import, pull, on-premises'
+            - name: Kapsayıcıları yapılandırma
+              href: computer-vision-resource-container-config.md
+            - name: Okuma OCR kapsayıcısının v3 sürümüne geçiş
+              href: read-container-migration-guide.md
+              displayName: 'docker, container, billing, apikey, pull, logging, on-premises'
+            - name: Kubernetes ve Helm ile kullanma
+              href: deploy-computer-vision-on-premises.md
+              displayName: 'kubectl, docker, helm, kubernetes, K8s, tiller, container, image, on-prem, on-premises'
+            - name: Kapsayıcı örnekleri kullanma
+              maintainContext: true
+              href: ../containers/azure-container-instance-recipe.md
+              displayName: 'container instances, container, containers, images'
+            - name: Tüm bilişsel hizmetler kapsayıcıları
+              href: /azure/cognitive-services/containers/index?context=/azure/cognitive-services/computer-vision/context/context
+    - name: Başvuru
+      items:
+        - name: OCR REST API v 3.2
+          href: 'https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005'
+        - name: OCR REST API v 3.1
+          href: 'https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/5d986960601faab4bf452005'
+        - name: OCR REST API v 2.1
+          href: 'https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e641'
+        - name: .NET
+          href: /dotnet/api/overview/azure/cognitiveservices/client/computervision?view=azure-dotnet
+        - name: Node.js
+          href: /javascript/api/@azure/cognitiveservices-computervision/?view=azure-node-latest
+        - name: Python
+          href: /python/api/overview/azure/cognitiveservices/computervision?view=azure-python
+        - name: Başlayın
+          href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision'
+        - name: Java
+          href: /java/api/overview/azure/cognitiveservices/client/computervision?view=azure-java-stable
+        - name: Azure CLI
+          href: /cli/azure/cognitiveservices?view=azure-cli-latest#az_cognitiveservices_list
+        - name: Azure PowerShell
+          href: /powershell/module/azurerm.cognitiveservices/
+- name: Görüntü Analizi
   items:
-    - name: Uzamsal Analiz
+    - name: Görüntü analizine genel bakış
+      href: overview-image-analysis.md
+    - name: Görüntü analizi hızlı başlangıç
+      href: quickstarts-sdk/image-analysis-client-library.md
+    - name: Örnekler
+      items:
+        - name: Görüntü işleme uygulamasını inceleme
+          href: Tutorials/CSharpTutorial.md
+        - name: Diğer örnekler
+          href: /samples/browse/?products=azure&terms=computer-vision
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: Görüntü analizi API 'sini çağırma
+          href: Vision-API-How-to-Topics/HowToCallVisionAPI.md
+        - name: Videoları gerçek zamanlı olarak analiz etme
+          href: Vision-API-How-to-Topics/HowtoAnalyzeVideo_Vision.md
+    - name: Kavramlar
+      items:
+        - name: Nesne algılama
+          href: concept-object-detection.md
+        - name: Marka algılama
+          href: concept-brand-detection.md
+        - name: İçerik etiketleri
+          href: concept-tagging-images.md
+        - name: Görüntü kategorilendirmesi
+          href: concept-categorizing-images.md
+        - name: Kategori sınıflandırma
+          href: Category-Taxonomy.md
+        - name: Görüntü açıklamaları
+          href: concept-describing-images.md
+        - name: Yüz algılama
+          href: concept-detecting-faces.md
+        - name: Görüntü türü algılama
+          href: concept-detecting-image-types.md
+        - name: Alana özgü içerik
+          href: concept-detecting-domain-content.md
+        - name: Renk düzeni algılama
+          href: concept-detecting-color-schemes.md
+        - name: Akıllı kırpılan küçük resimler
+          href: concept-generating-thumbnails.md
+        - name: Yetişkinlere yönelik içeriği algılama
+          href: concept-detecting-adult-content.md
+    - name: Öğreticiler
+      items:
+        - name: Resimler için meta verileri oluşturma
+          href: Tutorials/storage-lab-tutorial.md
+    - name: Başvuru
+      items:
+        - name: Görüntü analizi REST API v 3.2
+          href: 'https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/56f91f2e778daf14a499f21b'
+        - name: Görüntü analizi REST API v 3.1
+          href: 'https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/5d986960601faab4bf452005'
+        - name: Görüntü analizi REST API v 2.1
+          href: 'https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e641'
+        - name: .NET
+          href: /dotnet/api/overview/azure/cognitiveservices/client/computervision?view=azure-dotnet
+        - name: Node.js
+          href: /javascript/api/@azure/cognitiveservices-computervision/?view=azure-node-latest
+        - name: Python
+          href: /python/api/overview/azure/cognitiveservices/computervision?view=azure-python
+        - name: Başlayın
+          href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision'
+        - name: Java
+          href: /java/api/overview/azure/cognitiveservices/client/computervision?view=azure-java-stable
+        - name: Azure CLI
+          href: /cli/azure/cognitiveservices?view=azure-cli-latest#az_cognitiveservices_list
+        - name: Azure PowerShell
+          href: /powershell/module/azurerm.cognitiveservices/
+- name: Uzamsal Analiz
+  items:
+    - name: Uzamsal Analize genel bakış
+      href: intro-to-spatial-analysis-public-preview.md
+    - name: Yapay zekanın sorumluluk sahibi bir biçimde kullanılması
       items:
         - name: Saydamlık notları
           items:
@@ -41,124 +160,43 @@
               href: /legal/cognitive-services/computer-vision/research-insights?context=/azure/cognitive-services/computer-vision/context/context
         - name: 'Veriler, gizlilik ve güvenlik'
           href: /legal/cognitive-services/computer-vision/compliance-privacy-security-2?context=/azure/cognitive-services/computer-vision/context/context
+    - name: Nasıl yapılır kılavuzları
+      items:
+        - name: Uzamsal analiz kapsayıcısını kullanma
+          items:
+            - name: Konak makinesini ayarlama ve kapsayıcıyı çalıştırma
+              href: spatial-analysis-container.md
+            - name: İşlemleri yapılandırma
+              href: spatial-analysis-operations.md
+            - name: Kişi sayma web uygulaması dağıtma
+              href: Spatial-analysis-web-app.md
+            - name: Günlüğe kaydetme ve sorun giderme
+              href: spatial-analysis-logging.md
+            - name: Bölge ve satır yerleşimi
+              href: spatial-analysis-zone-line-placement.md
+            - name: Kamera yerleşimi
+              href: spatial-analysis-camera-placement.md
+            - name: Tüm bilişsel hizmetler kapsayıcıları
+              href: /azure/cognitive-services/containers/index?context=/azure/cognitive-services/computer-vision/context/context
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Görüntü İşleme API’sini çağırma
-      href: Vision-API-How-to-Topics/HowToCallVisionAPI.md
-    - name: Videoları gerçek zamanlı olarak analiz etme
-      href: Vision-API-How-to-Topics/HowtoAnalyzeVideo_Vision.md
-    - name: Sanal ağları yapılandırma
-      href: ../cognitive-services-virtual-networks.md?context=%2fazure%2fcognitive-services%2fcomputer-vision%2fcontext%2fcontext
-    - name: Okuma 2.x sürümünden Okuma 3.x sürümüne yükseltme
-      href: upgrade-api-versions.md
-    - name: AAD kimlik doğrulamasını yapılandırma
-      href: ../authentication.md?tabs=powershell%3fcontext%3d%2fazure%2fcognitive-services%2fcomputer-vision%2fcontext%2fcontext
-    - name: Müşteri tarafından yönetilen anahtarları kullanma
-      href: ../encryption/cognitive-services-encryption-keys-portal.md?context=%2fazure%2fcognitive-services%2fcomputer-vision%2fcontext%2fcontext
-    - name: Görüntü İşleme dağıt
+    - name: Kurumsal kullanıma hazır olma
       items:
-        - name: Kapsayıcılar
-          items:
-            - name: Bilişsel Hizmetler kapsayıcıları belgeleri
-              href: ../containers/index.yml
-            - name: API kapsayıcısını okuma
-              items:
-                - name: Kapsayıcıları yükleme ve çalıştırma
-                  href: computer-vision-how-to-install-containers.md
-                  displayName: 'docker, container, package, packaged app, swagger, open api, openapi, train, publish, az, acr, cli, tps, core, curl, try it now, import, pull, on-premises'
-                - name: Kapsayıcıları yapılandırma
-                  href: computer-vision-resource-container-config.md
-                - name: Okuma kapsayıcısının v3 sürümüne geçiş
-                  href: read-container-migration-guide.md
-                  displayName: 'docker, container, billing, apikey, pull, logging, on-premises'
-                - name: Kubernetes ve Helm ile kullanma
-                  href: deploy-computer-vision-on-premises.md
-                  displayName: 'kubectl, docker, helm, kubernetes, K8s, tiller, container, image, on-prem, on-premises'
-                - name: Kapsayıcı örnekleri kullanma
-                  maintainContext: true
-                  href: ../containers/azure-container-instance-recipe.md
-                  displayName: 'container instances, container, containers, images'
-            - name: Uzamsal Analiz kapsayıcısı
-              items:
-                - name: Uzamsal Analize genel bakış
-                  href: intro-to-spatial-analysis-public-preview.md
-                - name: Ana bilgisayarı kurma ve kapsayıcıyı çalıştırma
-                  href: spatial-analysis-container.md
-                - name: İşlemleri yapılandırma
-                  href: spatial-analysis-operations.md
-                - name: Kişi sayma web uygulaması dağıtma
-                  href: Spatial-analysis-web-app.md
-                - name: Günlüğe kaydetme ve sorun giderme
-                  href: spatial-analysis-logging.md
-                - name: Bölge ve satır yerleşimi
-                  href: spatial-analysis-zone-line-placement.md
-                - name: Kamera yerleşimi
-                  href: spatial-analysis-camera-placement.md
-- name: Kavramlar
-  items:
-    - name: Optik Karakter Tanıma (OCR)
-      href: concept-recognizing-text.md
-    - name: Nesne algılama
-      href: concept-object-detection.md
-    - name: Marka algılama
-      href: concept-brand-detection.md
-    - name: İçerik etiketleri
-      href: concept-tagging-images.md
-    - name: Görüntü kategorilendirmesi
-      href: concept-categorizing-images.md
-    - name: Kategori sınıflandırma
-      href: Category-Taxonomy.md
-    - name: Görüntü açıklamaları
-      href: concept-describing-images.md
-    - name: Yüz algılama
-      href: concept-detecting-faces.md
-    - name: Görüntü türü algılama
-      href: concept-detecting-image-types.md
-    - name: Alana özgü içerik
-      href: concept-detecting-domain-content.md
-    - name: Renk düzeni algılama
-      href: concept-detecting-color-schemes.md
-    - name: Akıllı kırpılan küçük resimler
-      href: concept-generating-thumbnails.md
-    - name: Yetişkinlere yönelik içeriği algılama
-      href: concept-detecting-adult-content.md
-- name: Öğreticiler
-  items:
-    - name: Resimler için meta verileri oluşturma
-      href: Tutorials/storage-lab-tutorial.md
-- name: Başvuru
-  items:
-    - name: Görüntü İşleme REST API v 3.2 Preview
-      href: 'https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-preview-3/operations/56f91f2e778daf14a499f21b'
-    - name: Görüntü İşleme REST API v 3.1
-      href: 'https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/5d986960601faab4bf452005'
-    - name: Görüntü İşleme REST API v 2.1
-      href: 'https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e641'
-    - name: Görüntü İşleme REST API v 1.0
-      href: 'https://westus.dev.cognitive.microsoft.com/docs/services/56f91f2d778daf23d8ec6739'
-    - name: .NET
-      href: /dotnet/api/overview/azure/cognitiveservices/client/computervision
-    - name: Node.js
-      href: /javascript/api/@azure/cognitiveservices-computervision/?view=azure-node-latest
-    - name: Python
-      href: /python/api/overview/azure/cognitiveservices/computervision?view=azure-python
-    - name: Başlayın
-      href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision'
-    - name: Java
-      href: /java/api/overview/azure/cognitiveservices/client/computervision?view=azure-java-stable
-    - name: Azure CLI
-      href: /cli/azure/cognitiveservices#az_cognitiveservices_list
-    - name: Azure PowerShell
-      href: /powershell/module/azurerm.cognitiveservices/
+        - name: Sanal ağları ayarlama
+          href: /azure/cognitive-services/cognitive-services-virtual-networks?context=/azure/cognitive-services/computer-vision/context/context
+        - name: Azure AD kimlik doğrulamasını kullanma
+          href: /azure/cognitive-services/authentication?tabs=powershell?context=/azure/cognitive-services/computer-vision/context/context
 - name: Kaynaklar
   items:
-    - name: Bölge desteği
-      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
-    - name: Modülleri öğrenın
-      href: /learn/paths/explore-computer-vision-microsoft-azure/
-    - name: Destek & yardım
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
+    - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/computer-vision/context/context
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
+    - name: Microsoft Learn modülleri
+      href: /learn/paths/explore-computer-vision-microsoft-azure/
     - name: Azure güncelleştirmeleri
       href: 'https://azure.microsoft.com/updates/?product=cognitive-services'

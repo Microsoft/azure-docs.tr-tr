@@ -1,17 +1,17 @@
 ---
 title: Azure Active Directory kullanın-PostgreSQL için Azure veritabanı-tek sunucu
 description: PostgreSQL için Azure veritabanı-tek sunucu ile kimlik doğrulaması için Azure Active Directory (AAD) ayarlama hakkında bilgi edinin
-author: lfittl
-ms.author: lufittl
+author: sunilagarwal
+ms.author: sunila
 ms.service: postgresql
 ms.topic: how-to
 ms.date: 07/23/2020
-ms.openlocfilehash: 178c339f6f47569160a9a748794678c610f35734
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 729879bb472786165b21a47a7baf058294a4db1f
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87171648"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105961532"
 ---
 # <a name="use-azure-active-directory-for-authentication-with-postgresql"></a>PostgreSQL ile kimlik doğrulaması için Azure Active Directory kullanma
 

@@ -9,12 +9,12 @@ ms.date: 07/30/2020
 ms.topic: tutorial
 ms.service: iot-edge
 ms.custom: mvc, devx-track-csharp
-ms.openlocfilehash: 01b30fed23b33719f08e93907075eee757343b1c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e24c04152911f976907e6bdc433c33e035ade639
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103461751"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874756"
 ---
 # <a name="tutorial-develop-a-c-iot-edge-module-using-linux-containers"></a>Öğretici: Linux kapsayıcıları kullanarak C# IoT Edge modülü geliştirme
 
@@ -52,7 +52,7 @@ Linux kapsayıcıları kullanarak C# modülleri geliştirme ve dağıtmaya yöne
 Bu öğreticiye başlamadan önce, bir önceki öğreticiden yararlanarak geliştirme ortamınızı ayarlamanız, [Linux kapsayıcıları kullanarak bir IoT Edge modülü geliştirmeniz](tutorial-develop-for-linux.md)gerekir. Bu Öğreticiyi tamamladıktan sonra, zaten aşağıdaki önkoşullara sahip olmanız gerekir:
 
 * Azure'da ücretsiz veya standart katman [IoT Hub'ı](../iot-hub/iot-hub-create-through-portal.md).
-* Azure IoT Edge çalıştıran bir cihaz. Hızlı başlangıçlarını bir [Linux cihazı](quickstart-linux.md) veya [Windows cihazı](quickstart.md)ayarlamak için kullanabilirsiniz.
+* Linux kapsayıcılarıyla Azure IoT Edge çalıştıran bir cihaz. Hızlı başlangıçlarını bir [Linux cihazı](quickstart-linux.md) veya [Windows cihazı](quickstart.md)ayarlamak için kullanabilirsiniz.
 * [Azure Container Registry](../container-registry/index.yml)gibi bir kapsayıcı kayıt defteri.
 * [Azure IoT araçlarıyla](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools)yapılandırılmış [Visual Studio Code](https://code.visualstudio.com/) .
 * Linux kapsayıcılarını çalıştırmak için yapılandırılmış [Docker CE](https://docs.docker.com/install/) .
@@ -60,7 +60,7 @@ Bu öğreticiye başlamadan önce, bir önceki öğreticiden yararlanarak geliş
 Bu öğreticileri tamamlayabilmeniz için geliştirme makinenizde aşağıdaki ek önkoşulları hazırlayın:
 
 * [Visual Studio Code için C# (OmniSharp tarafından desteklenen) uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).
-* [.NET Core 2.1 SDK'sı](https://www.microsoft.com/net/download).
+* [.NET Core 2.1 SDK'sı](https://dotnet.microsoft.com/download/dotnet/2.1).
 
 ## <a name="create-a-module-project"></a>Modül projesi oluşturma
 

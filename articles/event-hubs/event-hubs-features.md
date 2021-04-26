@@ -3,12 +3,12 @@ title: Özelliklere genel bakış-Azure Event Hubs | Microsoft Docs
 description: Bu makalede, Azure Event Hubs özellikleri ve terminolojisi hakkında ayrıntılar sağlanmaktadır.
 ms.topic: article
 ms.date: 03/15/2021
-ms.openlocfilehash: da59d62cb7060389ea94b3af5e6f66a4b6347d7d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8ec4b7cdd13c3407747261ef54cb6b1fc58fdb69
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104602630"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310093"
 ---
 # <a name="features-and-terminology-in-azure-event-hubs"></a>Azure Event Hubs'ın özellikleri ve terminolojisi
 
@@ -177,5 +177,5 @@ Event Hubs hakkında daha fazla bilgi için şu bağlantıları ziyaret edin:
     - [JavaScript](event-hubs-node-get-started-send.md)
 * [Event Hubs programlama kılavuzu](event-hubs-programming-guide.md)
 * [Event Hubs’da kullanılabilirlik ve tutarlılık](event-hubs-availability-and-consistency.md)
-* [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+* [Event Hubs ile ilgili SSS](event-hubs-faq.yml)
 * [Event Hubs örnekleri](event-hubs-samples.md)

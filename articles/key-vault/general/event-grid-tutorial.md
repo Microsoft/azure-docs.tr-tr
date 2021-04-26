@@ -3,19 +3,18 @@ title: Azure Event Grid ile Anahtar Kasası bildirimlerini alın ve yanıtlayın
 description: Key Vault Azure Event Grid ile tümleştirmeyi öğrenin.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: how-to
 ms.date: 10/25/2019
 ms.author: mbaldwin
-ms.openlocfilehash: d7bb697879f40b45c886cd90bbb1e34906d35f66
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e46161812d122a1d5647e8589c58f9528578b878
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96187383"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107749843"
 ---
 # <a name="receive-and-respond-to-key-vault-notifications-with-azure-event-grid"></a>Azure Event Grid ile Anahtar Kasası bildirimlerini alın ve yanıtlayın
 

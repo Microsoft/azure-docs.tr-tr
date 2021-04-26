@@ -5,13 +5,13 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: estfan, logicappspm, azla
 ms.topic: conceptual
-ms.date: 01/29/2021
-ms.openlocfilehash: 2b37308bcbcd489876c21dce56878de7e0daf545
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 03/24/2021
+ms.openlocfilehash: a3c20dd85c94c359259cf69e25bb9083d56857fc
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101699037"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777158"
 ---
 # <a name="pricing-and-billing-models-for-azure-logic-apps"></a>Azure Logic Apps için fiyatlandırma ve faturalandırma modelleri
 
@@ -27,9 +27,9 @@ Kullanım için ödeme tüketimi fiyatlandırma modeli, genel, "genel", çok kir
 
 | Öğeler | Description |
 |-------|-------------|
-| [Yerleşik](../connectors/apis-list.md#built-in) Tetikleyiciler ve eylemler | Logic Apps hizmetinde yerel olarak çalıştırın ve [ **eylem** fiyatı](https://azure.microsoft.com/pricing/details/logic-apps/)kullanılarak Ücretlendirilebilir. <p><p>Örneğin, HTTP tetikleyicisi ve Istek tetikleyicisi yerleşik tetiklerdir, ancak HTTP eylemi ve yanıt eylemi yerleşik eylemlerdir. Veri işlemleri, toplu işlemler, değişken işlemleri ve döngüler, koşullar, anahtar, paralel dallar vb. gibi [iş akışı denetim eylemleri](../connectors/apis-list.md#control-workflow)de yerleşik eylemlerdir. |
-| [Standart bağlayıcı](../connectors/apis-list.md#managed-connectors) Tetikleyicileri ve eylemleri <p><p>[Özel bağlayıcı](../connectors/apis-list.md#custom) Tetikleyicileri ve eylemleri | [Standart bağlayıcı fiyatı](https://azure.microsoft.com/pricing/details/logic-apps/)kullanılarak Ücretlendirilebilir. |
-| [Kurumsal bağlayıcı](../connectors/apis-list.md#managed-connectors) Tetikleyicileri ve eylemleri | [Kurumsal bağlayıcı fiyatı](https://azure.microsoft.com/pricing/details/logic-apps/)kullanılarak Ücretlendirilebilir. Ancak, genel önizleme sırasında kurumsal bağlayıcılar [ *Standart* bağlayıcı fiyatı](https://azure.microsoft.com/pricing/details/logic-apps/)kullanılarak ölçümdedir. |
+| [Yerleşik](../connectors/built-in.md) Tetikleyiciler ve eylemler | Logic Apps hizmetinde yerel olarak çalıştırın ve [ **eylem** fiyatı](https://azure.microsoft.com/pricing/details/logic-apps/)kullanılarak Ücretlendirilebilir. <p><p>Örneğin, HTTP tetikleyicisi ve Istek tetikleyicisi yerleşik tetiklerdir, ancak HTTP eylemi ve yanıt eylemi yerleşik eylemlerdir. Veri işlemleri, toplu işlemler, değişken işlemleri ve döngüler, koşullar, anahtar, paralel dallar vb. gibi [iş akışı denetim eylemleri](../connectors/built-in.md)de yerleşik eylemlerdir. |
+| [Standart bağlayıcı](../connectors/managed.md) Tetikleyicileri ve eylemleri <p><p>[Özel bağlayıcı](../connectors/apis-list.md#custom-apis-and-connectors) Tetikleyicileri ve eylemleri | [Standart bağlayıcı fiyatı](https://azure.microsoft.com/pricing/details/logic-apps/)kullanılarak Ücretlendirilebilir. |
+| [Kurumsal bağlayıcı](../connectors/managed.md) Tetikleyicileri ve eylemleri | [Kurumsal bağlayıcı fiyatı](https://azure.microsoft.com/pricing/details/logic-apps/)kullanılarak Ücretlendirilebilir. Ancak, genel önizleme sırasında kurumsal bağlayıcılar [ *Standart* bağlayıcı fiyatı](https://azure.microsoft.com/pricing/details/logic-apps/)kullanılarak ölçümdedir. |
 | [Döngüler](logic-apps-control-flow-loops.md) içindeki eylemler | Bir döngüde çalışan her eylem, çalıştıran her döngü döngüsü için ölçülme yapılır. <p><p>Örneğin, bir listeyi işleyen eylemleri içeren bir "for each" döngüsüne sahip olduğunuzu varsayalım. Logic Apps hizmeti, liste öğelerinin sayısını döngüdeki eylem sayısıyla çarparak bu döngüde çalışan her eylemi ölçümler ve döngüyü başlatan eylemi ekler. Bu nedenle, 10 öğe listesi için hesaplama, 11 işlem yürütmelerinin sonucu olan (10 * 1) + 1 ' dir. |
 | Yeniden deneme sayısı | En basit özel durumları ve hataları işlemek için, Tetikleyiciler ve eylemler üzerinde desteklenmiş bir [yeniden deneme ilkesi](logic-apps-exception-handling.md#retry-policies) ayarlayabilirsiniz. Özgün istek ile birlikte bu yeniden denemeler, tetikleyicinin veya eylemin yerleşik, standart ya da kurumsal türe sahip olup olmadığına bağlı olarak ücretlendirilir. Örneğin, 2 yeniden deneme ile yürütülen bir eylem 3 eylem yürütmeleri için ücretlendirilir. |
 | [Veri saklama ve depolama tüketimi](#data-retention) | Fiyatlandırma ayrıntıları tablosu altında [Logic Apps fiyatlandırma sayfasında](https://azure.microsoft.com/pricing/details/logic-apps/)bulabileceğiniz veri saklama fiyatı kullanılarak **Ücretlendirilebilir** . |
@@ -80,8 +80,8 @@ Sabit bir fiyatlandırma modeli, bir [ *tümleştirme hizmeti ortamında* (ISE)]
 
 | Öğeler | Description |
 |-------|-------------|
-| [Yerleşik](../connectors/apis-list.md#built-in) Tetikleyiciler ve eylemler | **Çekirdek** etiketi görüntüleyin ve Logic Apps ile aynı Ise 'de çalıştırın. |
-| [Standart bağlayıcılar](../connectors/apis-list.md#managed-connectors) <p><p>[Kurumsal bağlayıcılar](../connectors/apis-list.md#enterprise-connectors) | - **Ise** etiketini görüntüleyen yönetilen bağlayıcılar, şirket içi veri ağ geçidi olmadan çalışacak şekilde özel olarak tasarlanmıştır ve Logic Apps ile aynı çalışma alanında çalışır. ISE fiyatlandırması, istediğiniz kadar kurumsal bağlantı içerir. <p><p>-ISE etiketini görüntülememe dışı bağlayıcılar çok kiracılı Logic Apps hizmetinde çalışır. Ancak, ıSE fiyatlandırması bir ıSE 'de çalışan Logic Apps için bu yürütmeleri içerir. |
+| [Yerleşik](../connectors/built-in.md) Tetikleyiciler ve eylemler | **Çekirdek** etiketi görüntüleyin ve Logic Apps ile aynı Ise 'de çalıştırın. |
+| [Standart bağlayıcılar](../connectors/managed.md) <p><p>[Kurumsal bağlayıcılar](../connectors/managed.md#enterprise-connectors) | - **Ise** etiketini görüntüleyen yönetilen bağlayıcılar, şirket içi veri ağ geçidi olmadan çalışacak şekilde özel olarak tasarlanmıştır ve Logic Apps ile aynı çalışma alanında çalışır. ISE fiyatlandırması, istediğiniz kadar kurumsal bağlantı içerir. <p><p>-ISE etiketini görüntülememe dışı bağlayıcılar çok kiracılı Logic Apps hizmetinde çalışır. Ancak, ıSE fiyatlandırması bir ıSE 'de çalışan Logic Apps için bu yürütmeleri içerir. |
 | [Döngüler](logic-apps-control-flow-loops.md) içindeki eylemler | ISE fiyatlandırması, çalıştıran her döngü döngüsü için bir döngüde çalışan her eylemi içerir. <p><p>Örneğin, bir listeyi işleyen eylemleri içeren bir "for each" döngüsüne sahip olduğunuzu varsayalım. Toplam eylem yürütmelerinin sayısını almak için, liste öğelerinin sayısını döngüdeki eylem sayısıyla çarpın ve döngüyü başlatan eylemi ekleyin. Bu nedenle, 10 öğe listesi için hesaplama, 11 işlem yürütmelerinin sonucu olan (10 * 1) + 1 ' dir. |
 | Yeniden deneme sayısı | En basit özel durumları ve hataları işlemek için, Tetikleyiciler ve eylemler üzerinde desteklenmiş bir [yeniden deneme ilkesi](logic-apps-exception-handling.md#retry-policies) ayarlayabilirsiniz. ISE fiyatlandırması, özgün istekle birlikte yeniden denemeler içerir. |
 | [Veri saklama ve depolama tüketimi](#data-retention) | Bir ıSE 'de Logic Apps, bekletme ve depolama maliyetlerine tabi değildir. |

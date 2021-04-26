@@ -4,12 +4,12 @@ description: Azure Işlevleri için Dayanıklı İşlevler uzantısı 'nda dış
 ms.topic: conceptual
 ms.date: 07/13/2020
 ms.author: azfuncdf
-ms.openlocfilehash: c08306edcea02a9207ab5a15eb62b7fffc2ecb44
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a7625a6fcd1000595c2c582935c839ba6d26b20d
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99576338"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728496"
 ---
 # <a name="handling-external-events-in-durable-functions-azure-functions"></a>Dayanıklı İşlevler dış olayları işleme (Azure Işlevleri)
 
@@ -20,7 +20,7 @@ Orchestrator işlevlerinin dış olayları bekleme ve dinleme yeteneği vardır.
 
 ## <a name="wait-for-events"></a>Olayları bekle
 
-Orchestration tetikleyicisi bağlamasının [WaitForExternalEvent](/dotnet/api/microsoft.azure.webjobs.durableorchestrationcontextbase.waitforexternalevent?view=azure-dotnet-legacy) (.net), `waitForExternalEvent` (JavaScript) ve `wait_for_external_event` (Python) yöntemleri bir [](durable-functions-bindings.md#orchestration-trigger) Orchestrator işlevinin bir dış olayı zaman uyumsuz olarak bekleyip dinlemesine izin verir. Dinleme Orchestrator işlevi, olayın *adını* ve almayı beklediği *verilerin şeklini* bildirir.
+Orchestration tetikleyicisi bağlamasının [WaitForExternalEvent](/dotnet/api/microsoft.azure.webjobs.durableorchestrationcontextbase.waitforexternalevent?view=azure-dotnet-legacy&preserve-view=true) (.net), `waitForExternalEvent` (JavaScript) ve `wait_for_external_event` (Python) yöntemleri bir [](durable-functions-bindings.md#orchestration-trigger) Orchestrator işlevinin bir dış olayı zaman uyumsuz olarak bekleyip dinlemesine izin verir. Dinleme Orchestrator işlevi, olayın *adını* ve almayı beklediği *verilerin şeklini* bildirir.
 
 # <a name="c"></a>[C#](#tab/csharp)
 
@@ -230,7 +230,7 @@ main = df.Orchestrator.create(orchestrator_function)
 
 ## <a name="send-events"></a>Olayları gönderme
 
-[](/dotnet/api/microsoft.azure.webjobs.durableorchestrationclientbase.raiseeventasync?view=azure-dotnet-legacy) `raiseEventAsync` Bir Orchestration 'a dış olay göndermek için RaiseEventAsync (.net) veya (JavaScript) yöntemlerini kullanabilirsiniz. Bu yöntemler [Orchestration istemci](durable-functions-bindings.md#orchestration-client) bağlaması tarafından gösterilir. Ayrıca, bir Orchestration 'a dış olay göndermek için yerleşik oluşturma [OLAYı HTTP API](durable-functions-http-api.md#raise-event) 'sini de kullanabilirsiniz.
+[](/dotnet/api/microsoft.azure.webjobs.durableorchestrationclientbase.raiseeventasync?view=azure-dotnet-legacy&preserve-view=true) `raiseEventAsync` Bir Orchestration 'a dış olay göndermek için RaiseEventAsync (.net) veya (JavaScript) yöntemlerini kullanabilirsiniz. Bu yöntemler [Orchestration istemci](durable-functions-bindings.md#orchestration-client) bağlaması tarafından gösterilir. Ayrıca, bir Orchestration 'a dış olay göndermek için yerleşik oluşturma [OLAYı HTTP API](durable-functions-http-api.md#raise-event) 'sini de kullanabilirsiniz.
 
 Oluşturulan olay bir *örnek kimliği*, bir *EventName* ve *eventdata* parametrelerini içerir. Orchestrator işlevleri, `WaitForExternalEvent` (.net) veya `waitForExternalEvent` (JavaScript) API 'lerini kullanarak bu olayları işler. Olayın işlenebilmesi için, söz konusu hem gönderme hem de alma uçları *ile eşleşmelidir.* Olay verileri de JSON ile seri hale getirilebilir olmalıdır.
 

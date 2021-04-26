@@ -9,12 +9,12 @@ ms.topic: sample
 ms.date: 12/11/2017
 ms.author: msangapu
 ms.custom: mvc, seodec18, devx-track-azurecli
-ms.openlocfilehash: 9b909d041cf6acba0f3b12ad69018ebc371ff599
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0c2dbd7368cb8cc43c069b54d286e3e7f4f733c6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97005622"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787656"
 ---
 # <a name="scale-an-app-service-app-manually-using-azure-cli"></a>Azure CLı kullanarak bir App Service uygulamasını el ile ölçeklendirme
 
@@ -38,10 +38,10 @@ Bu betik bir kaynak grubu, App Service uygulaması ve tüm ilgili kaynakları ol
 
 | Komut | Notlar |
 |---|---|
-| [`az group create`](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | App Service planı oluşturur. |
-| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | App Service uygulaması oluşturur. |
-| [`az appservice plan update`](/cli/azure/appservice/plan#az-appservice-plan-update) | App Service planının özelliklerini güncelleştirir. |
+| [`az group create`](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az_appservice_plan_create) | App Service planı oluşturur. |
+| [`az webapp create`](/cli/azure/webapp#az_webapp_create) | App Service uygulaması oluşturur. |
+| [`az appservice plan update`](/cli/azure/appservice/plan#az_appservice_plan_update) | App Service planının özelliklerini güncelleştirir. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

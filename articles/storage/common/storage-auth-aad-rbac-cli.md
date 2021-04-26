@@ -11,12 +11,12 @@ ms.author: tamram
 ms.reviewer: ozgun
 ms.subservice: common
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: c42061520b73966f2cd516716039d78c2b9cbeb8
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 93d9a81ab75efe4ea38189a7280e041e545a2b7d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100375995"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785334"
 ---
 # <a name="use-azure-cli-to-assign-an-azure-role-for-access-to-blob-and-queue-data"></a>Blob ve kuyruk verilerine erişim için Azure rolü atamak üzere Azure CLı 'yi kullanma
 
@@ -36,7 +36,7 @@ Bu makalede, Azure CLı kullanarak Azure yerleşik rollerini listeleme ve kullan
 
 ## <a name="list-available-azure-roles"></a>Kullanılabilir Azure rollerini listeleme
 
-Azure CLı ile kullanılabilir Azure yerleşik rollerini listelemek için [az role Definition List](/cli/azure/role/definition#az-role-definition-list) komutunu kullanın:
+Azure CLı ile kullanılabilir Azure yerleşik rollerini listelemek için [az role Definition List](/cli/azure/role/definition#az_role_definition_list) komutunu kullanın:
 
 ```azurecli-interactive
 az role definition list --out table
@@ -56,7 +56,7 @@ Storage Queue Data Reader                 Allows for read access to Azure Storag
 
 ## <a name="assign-an-azure-role-to-a-security-principal"></a>Güvenlik sorumlusuna bir Azure rolü atama
 
-Bir güvenlik sorumlusuna Azure rolü atamak için [az role atama Create](/cli/azure/role/assignment#az-role-assignment-create) komutunu kullanın. Komutun biçimi atamanın kapsamına göre farklılık gösterebilir. Aşağıdaki örneklerde, bir kullanıcıya çeşitli kapsamlardaki bir rol atama gösterilmektedir, ancak herhangi bir güvenlik sorumlusuna rol atamak için aynı komutu kullanabilirsiniz.
+Bir güvenlik sorumlusuna Azure rolü atamak için [az role atama Create](/cli/azure/role/assignment#az_role_assignment_create) komutunu kullanın. Komutun biçimi atamanın kapsamına göre farklılık gösterebilir. Aşağıdaki örneklerde, bir kullanıcıya çeşitli kapsamlardaki bir rol atama gösterilmektedir, ancak herhangi bir güvenlik sorumlusuna rol atamak için aynı komutu kullanabilirsiniz.
 
 > [!IMPORTANT]
 > Bir Azure depolama hesabı oluşturduğunuzda, Azure AD aracılığıyla verilere erişim için otomatik olarak izinler atanmamıştır. Veri erişimi için kendinize doğrudan bir Azure RBAC rolü atamanız gerekir. Aboneliğiniz, kaynak grubunuz, depolama hesabınız veya Kapsayıcınız ya da kuyruğunuzun düzeyinde atayabilirsiniz.

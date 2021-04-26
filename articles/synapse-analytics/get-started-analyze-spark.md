@@ -10,12 +10,12 @@ ms.service: synapse-analytics
 ms.subservice: spark
 ms.topic: tutorial
 ms.date: 03/24/2021
-ms.openlocfilehash: 0becbbdb68f75072e10a51f5a2eae95291b9ed77
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: de48f906f4dc86bf6297cfb3b76f406df49feec3
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105108341"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107363861"
 ---
 # <a name="analyze-with-apache-spark"></a>Apache Spark ile Çözümle
 
@@ -32,20 +32,16 @@ Bu öğreticide, Azure SYNAPSE için Apache Spark verileri yüklemek ve analiz e
 
 ## <a name="understanding-serverless-apache-spark-pools"></a>Sunucusuz Apache Spark havuzlarını anlama
 
-Sunucusuz Spark havuzu, bir kullanıcının Spark ile nasıl çalışmak istediğini belirten bir yoldur. Bir havuzu kullanmaya başladığınızda, gerekirse Spark oturumu oluşturulur. Havuz, bu oturum tarafından kaç Spark kaynağı kullanılacağını ve oturumun otomatik olarak duraklamadan önce ne kadar süreceğine ilişkin bir denetim verir. Havuzun kendisi için değil, bu oturum sırasında kullanılan Spark kaynakları için ödeme yaparsınız. Bu şekilde, bir Spark havuzu, kümeleri yönetmek zorunda kalmadan Spark ile çalışmanıza olanak sağlar. Bu, sunucusuz SQL havuzunun çalışmasına benzer.
+Sunucusuz Spark havuzu, bir kullanıcının Spark ile nasıl çalışmak istediğini belirten bir yoldur. Bir havuzu kullanmaya başladığınızda, gerekirse Spark oturumu oluşturulur. Havuz, bu oturum tarafından kaç Spark kaynağı kullanılacağını ve oturumun otomatik olarak duraklamadan önce ne kadar süre önce olacağını denetler. Havuzun kendisi için değil, bu oturum sırasında kullanılan Spark kaynakları için ödeme yaparsınız. Bu şekilde, bir Spark havuzu, kümeleri yönetmek zorunda kalmadan Spark ile çalışmanıza olanak sağlar. Bu, sunucusuz SQL havuzunun çalışmasına benzer.
 
-## <a name="analyze-nyc-taxi-data-in-blob-storage-using-spark"></a>Spark kullanarak, blob depolamada NYC TAXI verilerini çözümleme
+## <a name="analyze-nyc-taxi-data-with-a-spark-pool"></a>NYC TAXI verilerini Spark havuzuyla çözümle
 
 1. SYNAPSE Studio 'da **geliştirme** merkezine gidin
-2. Varsayılan dili **Pyspark (Python)** olarak ayarlanmış yeni bir not defteri oluşturun.
+2. Yeni Not Defteri oluşturma
 3. Yeni bir kod hücresi oluşturun ve aşağıdaki kodu bu hücreye yapıştırın.
     ```py
     %%pyspark
-    from azureml.opendatasets import NycTlcYellow
-
-    data = NycTlcYellow()
-    df = data.to_spark_dataframe()
-    # Display 10 rows
+    df = spark.read.load('abfss://users@contosolake.dfs.core.windows.net/NYCTripSmall.parquet', format='parquet')
     display(df.limit(10))
     ```
 1. Not defterinde, **Ekle** menüsünde, daha önce oluşturduğumuz **Spark1** sunucusuz Spark havuzunu seçin.
@@ -53,22 +49,23 @@ Sunucusuz Spark havuzu, bir kullanıcının Spark ile nasıl çalışmak istedi�
 1. Yalnızca veri çerçevesinin şemasını görmek istiyorsanız aşağıdaki kodla bir hücre çalıştırın:
 
     ```py
+    %%pyspark
     df.printSchema()
     ```
 
 ## <a name="load-the-nyc-taxi-data-into-the-spark-nyctaxi-database"></a>NYC TAXI verilerini Spark nyctaxi veritabanına yükleme
 
-Veriler, **veri adlı veri** çerçevesi aracılığıyla kullanılabilir. **Nyctaxi** adlı bir Spark veritabanına yükleyin.
+Veriler **df** adlı veri çerçevesi aracılığıyla kullanılabilir. **Nyctaxi** adlı bir Spark veritabanına yükleyin.
 
-1. Not defterine yeni bir ekleyin ve ardından aşağıdaki kodu girin:
+1. Not defterine yeni bir kod hücresi ekleyin ve ardından aşağıdaki kodu girin:
 
     ```py
+    %%pyspark
     spark.sql("CREATE DATABASE IF NOT EXISTS nyctaxi")
     df.write.mode("overwrite").saveAsTable("nyctaxi.trip")
     ```
 ## <a name="analyze-the-nyc-taxi-data-using-spark-and-notebooks"></a>Spark ve not defterlerini kullanarak NYC TAXI verilerini çözümleme
 
-1. Not defterinize geri dönün.
 1. Yeni bir kod hücresi oluşturun ve aşağıdaki kodu girin. 
 
    ```py
@@ -84,10 +81,10 @@ Veriler, **veri adlı veri** çerçevesi aracılığıyla kullanılabilir. **Nyc
    %%pyspark
    df = spark.sql("""
       SELECT PassengerCount,
-          SUM(TripDistance) as SumTripDistance,
-          AVG(TripDistance) as AvgTripDistance
+          SUM(TripDistanceMiles) as SumTripDistance,
+          AVG(TripDistanceMiles) as AvgTripDistance
       FROM nyctaxi.trip
-      WHERE TripDistance > 0 AND PassengerCount > 0
+      WHERE TripDistanceMiles > 0 AND PassengerCount > 0
       GROUP BY PassengerCount
       ORDER BY PassengerCount
    """) 

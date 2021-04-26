@@ -11,10 +11,10 @@ ms.date: 11/03/2020
 ms.author: xiaoyul
 ms.reviewer: igorstan
 ms.openlocfilehash: 083077b2b29bc415e83d6f5a76941fa83fa853e3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101674151"
 ---
 # <a name="stored-procedures-using-synapse-sql-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te SYNAPSE SQL kullanan saklı yordamlar

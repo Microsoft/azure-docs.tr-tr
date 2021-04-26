@@ -2,28 +2,24 @@
 title: Bir uygulamaya onay gerçekleştirilirken beklenmeyen hata oluştu | Microsoft Docs
 description: Bir uygulamaya yönelik yarışmaya yönelik işlemler sırasında oluşabilecek ve bunlarla ilgili neler yapabileceğiniz hataları açıklar
 services: active-directory
-documentationcenter: ''
-author: kenwith
-manager: daveba
-ms.assetid: ''
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: troubleshooting
 ms.date: 07/11/2017
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9f829672f88ea848e4611000b54d9cc200bc166d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ad216d0062928fc16b0f2226daabb6258d09063c
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99259986"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378134"
 ---
-# <a name="unexpected-error-when-performing-consent-to-an-application"></a>Bir uygulamaya onay gerçekleştirilirken beklenmeyen hata oluştu
+# <a name="unexpected-error-when-performing-consent-to-an-application"></a>Uygulama için onay verirken beklenmedik bir hata
 
 Bu makalede, bir uygulamaya yarışmaya yönelik işlem sırasında oluşabilecek hatalar ele alınmaktadır. Hata iletileri içermeyen beklenmedik onay istemlerinde sorun yaşıyorsanız, bkz. [Azure AD Için kimlik doğrulama senaryoları](../develop/authentication-vs-authorization.md).
 

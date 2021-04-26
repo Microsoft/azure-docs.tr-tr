@@ -7,12 +7,12 @@ ms.date: 02/23/2020
 ms.author: rogarana
 ms.subservice: files
 ms.topic: conceptual
-ms.openlocfilehash: 81cabe8dea178b2988039640065cb0eabc3287af
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4d7123aa22d95e3e4c3850be775ddad96f28d280
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103470902"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785316"
 ---
 # <a name="frequently-asked-questions-faq-about-azure-files"></a>Azure Dosyalar hakkında sık sorulan sorular (SSS)
 [Azure dosyaları](storage-files-introduction.md) , bulutta endüstri standardı [sunucu ILETI bloğu (SMB) protokolü](/windows/win32/fileio/microsoft-smb-protocol-and-cifs-protocol-overview) ve [ağ dosya sistemi (NFS) protokolü](https://en.wikipedia.org/wiki/Network_File_System) (Önizleme) aracılığıyla erişilebilen tam olarak yönetilen dosya paylaşımları sunar. Azure dosya paylaşımlarını bulutta veya Windows, Linux ve macOS 'ın şirket içi dağıtımlarında eşzamanlı olarak bağlayabilirsiniz. Ayrıca, verilerin kullanıldığı yere hızlı erişim için Azure Dosya Eşitleme kullanarak Windows Server makinelerinde Azure dosya paylaşımlarını önbelleğe alabilirsiniz.
@@ -90,7 +90,7 @@ Bu makalede, Azure dosyaları ile Azure Dosya Eşitleme kullanımı dahil olmak 
 
 * <a id="afs-region-availability"></a>
   **Azure Dosya Eşitleme için hangi bölgeler desteklenir?**  
-    Kullanılabilir bölgelerin listesi, Azure Dosya Eşitleme planlama kılavuzunun [bölge kullanılabilirliği](storage-sync-files-planning.md#azure-file-sync-region-availability) bölümünde bulunabilir. Genel olmayan bölgeler dahil olmak üzere ek bölgeler için sürekli olarak destek ekleyeceğiz.
+    Kullanılabilir bölgelerin listesi, Azure Dosya Eşitleme planlama kılavuzunun [bölge kullanılabilirliği](../file-sync/file-sync-planning.md#azure-file-sync-region-availability) bölümünde bulunabilir. Genel olmayan bölgeler dahil olmak üzere ek bölgeler için sürekli olarak destek ekleyeceğiz.
 
 * <a id="cross-domain-sync"></a>
   **Aynı eşitleme grubunda etki alanına katılmış ve etki alanına katılmamış sunuculara sahip olabilir miyim?**  
@@ -119,28 +119,28 @@ Bu makalede, Azure dosyaları ile Azure Dosya Eşitleme kullanımı dahil olmak 
 
 * <a id="sizeondisk-versus-size"></a>
   **Azure Dosya Eşitleme, bir dosyanın *disk özelliği üzerindeki boyutu* neden bir dosya için *Boyut* özelliği ile eşleşmiyor?**  
-  Bkz. [bulut katmanlaması Azure dosya eşitleme anlama](storage-sync-cloud-tiering-overview.md#tiered-vs-locally-cached-file-behavior).
+  Bkz. [bulut katmanlaması Azure dosya eşitleme anlama](../file-sync/file-sync-cloud-tiering-overview.md#tiered-vs-locally-cached-file-behavior).
 
 * <a id="is-my-file-tiered"></a>
   **Bir dosyanın katmanlı olup olmadığını nasıl anlayabilirim?**  
-  Bkz. [Azure dosya eşitleme katmanlı dosyaları yönetme](storage-sync-how-to-manage-tiered-files.md#how-to-check-if-your-files-are-being-tiered).
+  Bkz. [bulut katmanlamayı anlama](../file-sync/file-sync-how-to-manage-tiered-files.md#how-to-check-if-your-files-are-being-tiered).
 
 * <a id="afs-recall-file"></a>**Kullanmak istediğim bir dosya katmanlı. Dosyayı yerel olarak kullanmak için diske nasıl geri çekirim?**  
-  Bkz. [Azure dosya eşitleme katmanlı dosyaları yönetme](storage-sync-how-to-manage-tiered-files.md#how-to-recall-a-tiered-file-to-disk).
+  Bkz. [bulut katmanlamayı anlama](../file-sync/file-sync-how-to-manage-tiered-files.md#how-to-recall-a-tiered-file-to-disk).
 
 * <a id="afs-force-tiering"></a>
   **Nasıl yaparım? bir dosyanın veya dizinin katmanlanmasını zorlıyor musunuz?**  
-  Bkz. [Azure dosya eşitleme katmanlı dosyaları yönetme](storage-sync-how-to-manage-tiered-files.md#how-to-force-a-file-or-directory-to-be-tiered).
+  Bkz. [bulut katmanlamayı anlama](../file-sync/file-sync-how-to-manage-tiered-files.md#how-to-force-a-file-or-directory-to-be-tiered).
 
 * <a id="afs-effective-vfs"></a>
   **Bir birimde birden çok sunucu uç noktası olduğunda *birim boş alanı* nasıl yorumlanır?**  
-  Bkz. [Azure dosya eşitleme bulut katmanlama Ilkeleri seçme](storage-sync-cloud-tiering-policy.md#multiple-server-endpoints-on-a-local-volume).
+  Bkz. [bulut katmanlamayı anlama](../file-sync/file-sync-cloud-tiering-policy.md#multiple-server-endpoints-on-a-local-volume).
   
 * <a id="afs-tiered-files-tiering-disabled"></a>
   **Bulut katmanlama devre dışı, neden sunucu uç noktası konumunda katmanlı dosyalar var?**  
     Katmanlı dosyaların sunucu uç noktası konumunda bulunabilmesinin iki nedeni vardır:
 
-    - Varolan bir eşitleme grubuna yeni bir sunucu uç noktası eklerken, ilk indirme modu için ad alanını geri çağır seçeneğini veya yalnızca ad alanını hatırla seçeneğini belirlerseniz, dosyalar yerel olarak indirilene kadar katmanlı olarak görünür. Bunu önlemek için, ilk indirme modu için katmanlı dosyaları önleyin seçeneğini belirleyin. Dosyaları el ile geri çekmek için [Invoke-StorageSyncFileRecall](storage-sync-how-to-manage-tiered-files.md#how-to-recall-a-tiered-file-to-disk) cmdlet 'ini kullanın.
+    - Varolan bir eşitleme grubuna yeni bir sunucu uç noktası eklerken, ilk indirme modu için ad alanını geri çağır seçeneğini veya yalnızca ad alanını hatırla seçeneğini belirlerseniz, dosyalar yerel olarak indirilene kadar katmanlı olarak görünür. Bunu önlemek için, ilk indirme modu için katmanlı dosyaları önleyin seçeneğini belirleyin. Dosyaları el ile geri çekmek için [Invoke-StorageSyncFileRecall](../file-sync/file-sync-how-to-manage-tiered-files.md#how-to-recall-a-tiered-file-to-disk) cmdlet 'ini kullanın.
 
     - Bulut katmanlaması sunucu uç noktasında etkinleştirildiyse ve devre dışı bırakılmışsa, dosyalar erişilene kadar katmanlı olarak kalır.
 
@@ -150,11 +150,11 @@ Bu makalede, Azure dosyaları ile Azure Dosya Eşitleme kullanımı dahil olmak 
 
     Bu davranış Azure Dosya Eşitleme özgü değildir, Windows Gezgini, çevrimdışı özniteliği ayarlanmış herhangi bir dosya için "gri X" görüntüler. SMB üzerinden dosyalara erişirken X simgesini görürsünüz. Bu davranışın ayrıntılı bir açıklaması için bkz. [https://blogs.msdn.microsoft.com/oldnewthing/20170503-00/?p=96105](https://blogs.msdn.microsoft.com/oldnewthing/20170503-00/?p=96105)
 
-    Katmanlı dosyaları yönetme hakkında sorularınız için lütfen bkz. [katmanlı dosyaları yönetme](storage-sync-how-to-manage-tiered-files.md).
+    Katmanlı dosyaları yönetme hakkında sorularınız için lütfen bkz. [katmanlı dosyaları yönetme](../file-sync/file-sync-how-to-manage-tiered-files.md).
 
 * <a id="afs-files-excluded"></a>
   **Hangi dosya veya klasörler Azure Dosya Eşitleme tarafından otomatik olarak dışlanır?**  
-  Bkz. [Atlanan dosyalar](storage-sync-files-planning.md#files-skipped).
+  Bkz. [Atlanan dosyalar](../file-sync/file-sync-planning.md#files-skipped).
 
 * <a id="afs-os-support"></a>
   **Windows Server 2008 R2, Linux veya ağ bağlantılı depolama (NAS) cihazından Azure Dosya Eşitleme kullanabilir miyim?**  
@@ -162,7 +162,7 @@ Bu makalede, Azure dosyaları ile Azure Dosya Eşitleme kullanımı dahil olmak 
 
 * <a id="afs-tiered-files-out-of-endpoint"></a>
   **Katmanlı dosyalar neden sunucu uç noktası ad alanı dışında var?**  
-    Azure Dosya Eşitleme Agent sürüm 3 ' ten önce, Azure Dosya Eşitleme katmanlı dosyaların sunucu uç noktası dışında, ancak sunucu uç noktasıyla aynı birimde taşınmasını engelledi. Kopyalama işlemleri, katmanlı olmayan dosyaların taşınması ve katmanlı diğer birimlere taşınması etkilenmemiştir. Bu davranışın nedeni, dosya Gezgini 'nin ve diğer Windows API 'Lerinin aynı birim üzerinde taşıma işlemlerinin (neredeyse) anlık yeniden adlandırma işlemlerinde olduğu örtük bir varsayımına sahiptir. Bu, taşınmaların dosya Gezgini veya diğer taşıma yöntemlerinin (komut satırı veya PowerShell gibi), verileri buluttan geri çekAzure Dosya Eşitleme irken yanıt vermemesine neden olacağı anlamına gelir. [Azure dosya eşitleme aracı sürümü 3.0.12.0](storage-files-release-notes.md#supported-versions)ile başlayarak, Azure dosya eşitleme, katmanlı bir dosyayı sunucu uç noktası dışına taşımanızı sağlayacak. Katmanlı dosyanın sunucu uç noktası dışında katmanlı bir dosya olarak var olmasına ve sonra dosyayı arka planda geri çekmesine izin vererek, daha önce bahsedilen negatif etkilerden kaçının. Bu, aynı birimdeki taşımanın anında olduğu ve taşıma tamamlandıktan sonra dosyayı diske geri çekmek için tüm işleri yaptığımız anlamına gelir. 
+    Azure Dosya Eşitleme Agent sürüm 3 ' ten önce, Azure Dosya Eşitleme katmanlı dosyaların sunucu uç noktası dışında, ancak sunucu uç noktasıyla aynı birimde taşınmasını engelledi. Kopyalama işlemleri, katmanlı olmayan dosyaların taşınması ve katmanlı diğer birimlere taşınması etkilenmemiştir. Bu davranışın nedeni, dosya Gezgini 'nin ve diğer Windows API 'Lerinin aynı birim üzerinde taşıma işlemlerinin (neredeyse) anlık yeniden adlandırma işlemlerinde olduğu örtük bir varsayımına sahiptir. Bu, taşınmaların dosya Gezgini veya diğer taşıma yöntemlerinin (komut satırı veya PowerShell gibi), verileri buluttan geri çekAzure Dosya Eşitleme irken yanıt vermemesine neden olacağı anlamına gelir. [Azure dosya eşitleme aracı sürümü 3.0.12.0](../file-sync/file-sync-release-notes.md#supported-versions)ile başlayarak, Azure dosya eşitleme, katmanlı bir dosyayı sunucu uç noktası dışına taşımanızı sağlayacak. Katmanlı dosyanın sunucu uç noktası dışında katmanlı bir dosya olarak var olmasına ve sonra dosyayı arka planda geri çekmesine izin vererek, daha önce bahsedilen negatif etkilerden kaçının. Bu, aynı birimdeki taşımanın anında olduğu ve taşıma tamamlandıktan sonra dosyayı diske geri çekmek için tüm işleri yaptığımız anlamına gelir. 
 
 * <a id="afs-do-not-delete-server-endpoint"></a>
   **Sunucum üzerinde Azure Dosya Eşitleme bir sorun yaşıyorum (eşitleme, bulut katmanlama vb.). Sunucu uç noktasını kaldırıp yeniden oluşturmanız gerekir mi?**  
@@ -170,7 +170,7 @@ Bu makalede, Azure dosyaları ile Azure Dosya Eşitleme kullanımı dahil olmak 
     
 * <a id="afs-resource-move"></a>
   **Depolama eşitleme hizmetini ve/veya depolama hesabını farklı bir kaynak grubuna, aboneliğe veya Azure AD kiracısına taşıyabilir miyim?**  
-   Evet, depolama eşitleme hizmeti ve/veya depolama hesabı farklı bir kaynak grubuna, aboneliğe veya Azure AD kiracısına taşınabilir. Depolama eşitleme hizmeti veya depolama hesabı taşındıktan sonra, Microsoft. Storagessync uygulamasına depolama hesabına erişim sağlamanız gerekir (bkz. [Azure dosya eşitleme depolama hesabına erişimi olduğundan emin olun](./storage-sync-files-troubleshoot.md?tabs=portal1%252cportal#troubleshoot-rbac)).
+   Evet, depolama eşitleme hizmeti ve/veya depolama hesabı farklı bir kaynak grubuna, aboneliğe veya Azure AD kiracısına taşınabilir. Depolama eşitleme hizmeti veya depolama hesabı taşındıktan sonra, Microsoft. Storagessync uygulamasına depolama hesabına erişim sağlamanız gerekir (bkz. [Azure dosya eşitleme depolama hesabına erişimi olduğundan emin olun](../file-sync/file-sync-troubleshoot.md?tabs=portal1%252cportal#troubleshoot-rbac)).
 
     > [!Note]  
     > Bulut uç noktası oluşturulurken, depolama eşitleme hizmeti ve depolama hesabı aynı Azure AD kiracısında olmalıdır. Bulut uç noktası oluşturulduktan sonra, depolama eşitleme hizmeti ve depolama hesabı farklı Azure AD kiracılarına taşınabilir.
@@ -183,6 +183,10 @@ Bu makalede, Azure dosyaları ile Azure Dosya Eşitleme kullanımı dahil olmak 
     Dosya eşitleme yönetilen dosya paylaşımlarınız üzerinde Azure Backup etkinleştirdiyseniz, dosya ACL 'Leri yedekleme geri yükleme iş akışının bir parçası olarak geri yüklemeye devam edebilir. Bu, tüm paylaşımın veya tek tek dosyalar/dizinler için geçerlidir.
 
     Dosya eşitleme tarafından yönetilen dosya paylaşımları için otomatik olarak yönetilen yedekleme çözümünün bir parçası olarak anlık görüntüler kullanıyorsanız, anlık görüntülerin 24 Şubat 2020 ' den önce alınması durumunda, ACL 'niz NTFS ACL 'Lerine düzgün şekilde geri yüklenemez. Bu durumda, Azure desteği 'ne başvurmayı göz önünde bulundurun.
+
+* <a id="afs-lastwritetime"></a>
+  **Dizinler için LastWriteTime Azure Dosya Eşitleme eşitler mi?**  
+    Hayır, Azure Dosya Eşitleme dizinlerin LastWriteTime değerini eşitlemez. Bu tasarım gereğidir.
     
 ## <a name="security-authentication-and-access-control"></a>Güvenlik, kimlik doğrulama ve erişim denetimi
 * <a id="ad-support"></a>
@@ -490,4 +494,4 @@ Bu makalede, Azure dosyaları ile Azure Dosya Eşitleme kullanımı dahil olmak 
 ## <a name="see-also"></a>Ayrıca bkz.
 * [Windows 'da Azure dosyaları sorunlarını giderme](storage-troubleshoot-windows-file-connection-problems.md)
 * [Linux 'ta Azure dosyaları sorunlarını giderme](storage-troubleshoot-linux-file-connection-problems.md)
-* [Azure Dosya Eşitleme'de sorun giderme](storage-sync-files-troubleshoot.md)
+* [Azure Dosya Eşitleme'de sorun giderme](../file-sync/file-sync-troubleshoot.md)

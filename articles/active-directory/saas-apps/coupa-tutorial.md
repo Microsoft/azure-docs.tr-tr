@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 02/05/2021
 ms.author: jeedes
 ms.openlocfilehash: d6a686b38c9b67ed8b1a7801c2a6ba95ef29558c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101653014"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-coupa"></a>Öğretici: bağa ile tümleştirme Azure Active Directory
@@ -104,7 +104,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
     ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user&quot;></a>Azure AD test kullanıcısı oluşturma
 
 Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
@@ -116,7 +116,7 @@ Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaks�
    1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
    1. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
+### <a name=&quot;assign-the-azure-ad-test-user&quot;></a>Azure AD test kullanıcısını atama
 
 Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak, kupona 'ya erişim vererek B. Simon 'u etkinleştireceksiniz.
 
@@ -125,16 +125,16 @@ Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak, kupona 'ya eri�
 1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
-1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, "varsayılan erişim" rolü seçili olduğunu görürsünüz.
+1. Kullanıcılara bir rolün atanmasını bekliyorsanız, **Rol Seç** açılır listesinden bunu seçebilirsiniz. Bu uygulama için ayarlanmış bir rol yoksa, &quot;varsayılan erişim&quot; rolü seçili olduğunu görürsünüz.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-## <a name="configure-coupa-sso"></a>Kupona SSO 'yu yapılandırma
+## <a name=&quot;configure-coupa-sso&quot;></a>Kupona SSO 'yu yapılandırma
 
 1. Bir yönetici olarak, bağa şirket sitenizde oturum açın.
 
 2. **Kurulum \> güvenlik denetimi**' ne gidin.
 
-    ![Güvenlik denetimleri](./media/coupa-tutorial/setup.png "Güvenlik Denetimleri")
+    ![Güvenlik denetimleri](./media/coupa-tutorial/setup.png &quot;Güvenlik Denetimleri")
 
 3. Bu **kimlik bilgilerini kullanarak oturum açın** bölümünde aşağıdaki adımları uygulayın:
 

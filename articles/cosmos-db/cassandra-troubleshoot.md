@@ -1,60 +1,81 @@
 ---
-title: Azure Cosmos DB Cassandra API genel hatalarda sorun giderme
-description: Bu belge, Azure Cosmos DB ile karşılaşılan yaygın sorunları gidermeye yönelik yolları ele almaktadır Cassandra API
+title: Azure Cosmos DB genel hatalarda sorun giderme Cassandra API
+description: Bu makalede, Azure Cosmos DB Cassandra API genel sorunlar ve bunların nasıl giderileceği açıklanmaktadır.
 author: TheovanKraay
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.topic: troubleshooting
 ms.date: 03/02/2021
 ms.author: thvankra
-ms.openlocfilehash: f9b6e586879b8697660ced7aa6f1e75083e3ee29
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e81ab2539527c9d5c5cf2c6bff77fd19887103cd
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101658580"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105967362"
 ---
-# <a name="troubleshoot-common-issues-in-azure-cosmos-db-cassandra-api"></a>Azure Cosmos DB Cassandra API genel sorunları giderme
+# <a name="troubleshoot-common-issues-in-the-azure-cosmos-db-cassandra-api"></a>Azure Cosmos DB genel sorunları giderme Cassandra API
+
 [!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
-Azure Cosmos DB Cassandra API, popüler açık kaynaklı Apache Cassandra veritabanı için [kablo protokol desteği](cassandra-support.md) sağlayan ve [Azure Cosmos DB](./introduction.md)tarafından desteklenen bir uyumluluk katmanıdır. Tam olarak yönetilen bir bulutta yerel hizmet olarak, Azure Cosmos DB Cassandra API [kullanılabilirlik, aktarım hızı ve tutarlılık hakkında garanti](https://azure.microsoft.com/support/legal/sla/cosmos-db/v1_3/) sağlar. Bu garanti, Apache Cassandra 'ın eski uygulamalarında mümkün değildir. Cassandra API ayrıca sıfır bakım platformu işlemlerini ve sıfır kapalı kalma süresi düzeltme ekini kolaylaştırır. Bu nedenle, arka uç işlemlerinin birçoğu Apache Cassandra 'dan farklı olduğundan, yaygın hatalardan kaçınmak için belirli ayarları ve yaklaşımları öneririz. 
+[Azure Cosmos DB](./introduction.md) Cassandra API, açık kaynaklı Apache Cassandra veritabanı için [kablo protokol desteği](cassandra-support.md) sağlayan bir uyumluluk katmanıdır.
 
-Bu makalede, Azure Cosmos DB Cassandra API kullanan uygulamalar için sık karşılaşılan hatalar ve çözümler açıklanmaktadır. Hata bilgileriniz aşağıda listelenmiyorsa ve [Cassandra API desteklenen bir işlemi](cassandra-support.md)yürütürken bir hata yaşıyorsanız, *Yerel Apache Cassandra kullanırken hatanın mevcut olmadığı* durumlarda [bir Azure destek isteği oluşturun](../azure-portal/supportability/how-to-create-azure-support-request.md).
+Bu makalede, Azure Cosmos DB Cassandra API kullanan uygulamalar için yaygın hatalar ve çözümler açıklanmaktadır. Hata listelenmiyorsa ve [Cassandra 'da desteklenen bir işlem](cassandra-support.md)yürüttüğünüzde hata yaşarsanız, ancak yerel Apache Cassandra kullanılırken hata mevcut değilse, [bir Azure destek isteği oluşturun](../azure-portal/supportability/how-to-create-azure-support-request.md).
+
+>[!NOTE]
+>Tam olarak yönetilen bir bulutta yerel hizmet olarak, Azure Cosmos DB Cassandra API [kullanılabilirlik, aktarım hızı ve tutarlılık hakkında garanti](https://azure.microsoft.com/support/legal/sla/cosmos-db/v1_3/) sağlar. Cassandra API ayrıca sıfır bakım platformu işlemlerini ve sıfır kapalı kalma süresi düzeltme ekini kolaylaştırır.
+>
+>Bu garantiler Apache Cassandra 'nin önceki uygulamalarında mümkün değildir, bu nedenle Cassandra API arka uç işlemlerinin birçoğu Apache Cassandra 'dan farklıdır. Yaygın hatalardan kaçınmaya yardımcı olmak için belirli ayarları ve yaklaşımları öneririz.
 
 ## <a name="nonodeavailableexception"></a>NoNodeAvailableException
-Bu, çok sayıda olası neden ve iç özel durum içeren üst düzey bir sarmalayıcı özel durumdur ve bunların birçoğu istemci ile ilgili olabilir. 
-### <a name="solution"></a>Çözüm
-Bazı popüler nedenler ve çözümler aşağıdaki gibidir: 
-- Azure LoadBalancers için boşta kalma zaman aşımı: Bu da olarak bildirimde bulunabilir `ClosedConnectionException` . Bunu çözmek için, etkin durumda tut ayarını sürücüde ( [aşağıya](#enable-keep-alive-for-java-driver)bakın) ayarlayın ve işletim sisteminde etkin tutma ayarlarını artırın veya [Azure Load Balancer boşta kalma zaman aşımını ayarlayın](../load-balancer/load-balancer-tcp-idle-timeout.md?tabs=tcp-reset-idle-portal). 
-- **İstemci uygulama kaynak tükenmesi:** istemci makinelerin isteği tamamlayacak yeterli kaynağı olduğundan emin olun. 
 
-## <a name="cannot-connect-to-host"></a>Konağa bağlanılamıyor
-Şu hatayı görebilirsiniz: `Cannot connect to any host, scheduling retry in 600000 milliseconds` . 
+Bu hata, çok sayıda olası neden ve iç özel durum içeren üst düzey bir sarmalayıcı özel durumdur ve bunların birçoğu istemci ile ilgili olabilir.
 
-### <a name="solution"></a>Çözüm
-Bu, istemci tarafında SNAT tükenmesi olabilir. Bu sorunu denemek için lütfen [giden bağlantılar Için SNAT](../load-balancer/load-balancer-outbound-connections.md) konumundaki adımları izleyin. Bu Ayrıca, Azure Yük dengeleyicinin varsayılan olarak 4 dakikalık boş zaman aşımı olduğu bir boşta kalma zaman aşımı sorunu olabilir. Bkz. [yük dengeleyici boşta zaman aşımı](../load-balancer/load-balancer-tcp-idle-timeout.md?tabs=tcp-reset-idle-portal). Sürücü ayarlarından ( [aşağıya](#enable-keep-alive-for-java-driver)bakın) TCP-canlı tutmayı etkinleştirin ve `keepAlive` işletim sistemindeki aralığı 4 dakikadan daha kısa bir süre ayarlayın.
+Yaygın nedenler ve çözümler:
 
- 
+- **Azure LoadBalancers Için boşta kalma zaman aşımı**: Bu sorun, olarak da bildirim alabilir `ClosedConnectionException` . Bu sorunu çözmek için, sürücüden canlı tut ayarını ayarlayın (bkz. [Java sürücüsü için etkin tutmayı etkinleştirme](#enable-keep-alive-for-the-java-driver)) ve işletim Sisteminizdeki etkin tutma ayarlarını artırma veya [Azure Load Balancer boşta kalma zaman aşımını ayarlama](../load-balancer/load-balancer-tcp-idle-timeout.md?tabs=tcp-reset-idle-portal).
+
+- **İstemci uygulama kaynak tükenmesi**: istemci makinelerin isteği tamamlayacak yeterli kaynağı olduğundan emin olun.
+
+## <a name="cant-connect-to-a-host"></a>Konağa bağlanılamıyor
+
+Şu hatayı görebilirsiniz: "hiçbir konağa bağlanılamıyor, 600000 milisaniye içinde yeniden deneme zamanlanıyor."
+
+Bu hata, istemci tarafındaki kaynak ağ adresi çevirisi (SNAT) tükenmesi nedeniyle oluşmuş olabilir. Bu sorunu kesmek için, [giden bağlantılar Için SNAT](../load-balancer/load-balancer-outbound-connections.md) konumundaki adımları izleyin.
+
+Hata ayrıca, Azure Yük dengeleyicinin varsayılan olarak dört dakikalık boş zaman aşımı olduğu bir boşta kalma zaman aşımı sorunu olabilir. Bkz. [yük dengeleyici boşta zaman aşımı](../load-balancer/load-balancer-tcp-idle-timeout.md?tabs=tcp-reset-idle-portal). [Java sürücüsü için canlı tutmayı etkinleştirin](#enable-keep-alive-for-the-java-driver) ve `keepAlive` işletim sisteminde zaman aralığını dört dakikadan kısa bir süre olarak ayarlayın.
 
 ## <a name="overloadedexception-java"></a>OverloadedException (Java)
-Tüketilen istek birimlerinin toplam sayısı, anahtar alanı veya tablo üzerinde sağlanan istek birimlerinden daha fazla. Bu nedenle istekler kısıtlanıyor.
-### <a name="solution"></a>Çözüm
-Azure Portal bir anahtar alanı veya tabloya atanan üretilen işi ölçeklendirmeyi düşünün (Cassandra API ölçeklendirme işlemleri için [buraya](manage-scale-cassandra.md) bakın) veya bir yeniden deneme ilkesi uygulayabilirsiniz. Java için bkz. [v3. x sürücüsü](https://github.com/Azure-Samples/azure-cosmos-cassandra-java-retry-sample) ve [v4. x sürücüsü](https://github.com/Azure-Samples/azure-cosmos-cassandra-java-retry-sample-v4)için yeniden deneme örnekleri. Ayrıca bkz. [Java Için Azure Cosmos Cassandra uzantıları](https://github.com/Azure/azure-cosmos-cassandra-extensions).
 
-### <a name="overloadedexception-even-with-sufficient-throughput"></a>Yeterli aktarım hızı ile bile OverloadedException 
-İstek hacmi ve/veya tüketilen istek birimi maliyeti için yeterli işleme sağlanmakta olmasına rağmen sistem azaltma istekleri gibi görünüyor. Beklenmeyen hız sınırlandırmasının iki olası nedeni vardır:
-- **Şema düzeyi işlemleri:** Cassandra API şema düzeyindeki işlemler (CREATE TABLE, ALTER TABLE, DROP TABLE) için sistem üretilen iş bütçesini uygular. Bu bütçe, bir üretim sistemindeki şema işlemleri için yeterince olmalıdır. Ancak, çok sayıda şema düzeyi işlem yaptıysanız, bu sınırı aşmanız mümkündür. Bu bütçe kullanıcı denetimli olmadığından, çalıştırılan şema işlemlerinin sayısını azaltmayı göz önünde bulundurmanız gerekir. Bu eylemi gerçekleştirmek sorunu çözmezse veya iş yükünüz için uygun değilse, [bir Azure destek isteği oluşturun](../azure-portal/supportability/how-to-create-azure-support-request.md).
-- **Veri eğriltme:** Cassandra API aktarım hızı sağlandığında fiziksel bölümler arasında eşit olarak bölünür ve her fiziksel bölümün üst sınırı vardır. Belirli bir bölümden eklenen veya sorgulanan yüksek miktarda veriniz varsa, bu tablo için büyük miktarda genel işleme (istek birimleri) sağlanmamasına karşın hız sınırlı olabilir. Veri modelinizi gözden geçirin ve etkin bölümlere neden olabilecek çok fazla eğme olmadığından emin olun. 
+Tüketilen istek birimlerinin toplam sayısı, anahtar alanı veya tablo üzerinde sağladığınız istek birimi sayısından daha yüksek olduğu için istekler kısıtlanıyor.
 
-## <a name="intermittent-connectivity-errors-java"></a>Aralıklı bağlantı hataları (Java) 
+Azure Portal bir anahtar alanı veya tabloya atanan aktarım hızını ölçeklendirin (bkz. [Esnek Azure Cosmos DB Cassandra API hesabını ölçeklendirme](manage-scale-cassandra.md)) veya yeniden deneme ilkesi uygulama.
+
+Java için bkz. [v3. x sürücüsü](https://github.com/Azure-Samples/azure-cosmos-cassandra-java-retry-sample) ve [v4. x sürücüsü](https://github.com/Azure-Samples/azure-cosmos-cassandra-java-retry-sample-v4)için yeniden deneme örnekleri. Ayrıca bkz. [Java Için Azure Cosmos Cassandra uzantıları](https://github.com/Azure/azure-cosmos-cassandra-extensions).
+
+### <a name="overloadedexception-despite-sufficient-throughput"></a>Yeterli aktarım hızına karşın OverloadedException
+
+İstek hacmi veya tüketilen istek birimi maliyeti için yeterli üretilen iş olsa bile sistem, istekleri daraltma gibi görünüyor. Olası iki nedeni vardır:
+
+- **Şema düzeyi işlemleri**: Cassandra API şema düzeyindeki işlemler (Create Table, alter table, Drop Table) için sistem üretilen iş bütçesini uygular. Bu bütçe, bir üretim sistemindeki şema işlemleri için yeterince olmalıdır. Ancak, çok sayıda şema düzeyi işlem yaptıysanız, bu sınırı aşabilirsiniz.
+
+  Bütçe kullanıcı denetimli olmadığından, çalıştırdığınız şema işlemlerinin sayısını azaltmayı göz önünde bulundurun. Bu eylem sorunu çözmezse veya iş yükünüz için uygun değilse, [bir Azure destek isteği oluşturun](../azure-portal/supportability/how-to-create-azure-support-request.md).
+
+- **Veri eğriltme**: Cassandra API aktarım hızı sağlandığında fiziksel bölümler arasında eşit olarak bölünür ve her fiziksel bölümün üst sınırı vardır. Belirli bir bölümden eklenen veya sorgulanan yüksek miktarda veriniz varsa, bu tablo için büyük miktarda genel üretilen iş (istek birimleri) temin etseniz bile bu hız sınırlı olabilir.
+
+  Veri modelinizi gözden geçirin ve etkin bölümlere neden olabilecek çok fazla eğme olmadığından emin olun.
+
+## <a name="intermittent-connectivity-errors-java"></a>Aralıklı bağlantı hataları (Java)
+
 Bağlantı beklenmedik bir şekilde bırakılır veya zaman aşımına uğrar.
 
-### <a name="solution"></a>Çözüm 
-Java için Apache Cassandra sürücüleri iki yerel yeniden bağlantı ilkesi sağlar: `ExponentialReconnectionPolicy` ve `ConstantReconnectionPolicy` . Varsayılan değer: `ExponentialReconnectionPolicy`. Ancak, Azure Cosmos DB Cassandra API için `ConstantReconnectionPolicy` 2 saniyelik bir gecikmeyle önerilir. Java v4. x sürücüsü için [sürücü belgelerine](https://docs.datastax.com/en/developer/java-driver/4.9/manual/core/reconnection/)  ve [burada](https://docs.datastax.com/en/developer/java-driver/3.7/manual/reconnection/) Java 3. x Kılavuzu için aşağıdaki [Java sürücü için yeniden bağlantı ilkesini yapılandırma](#configuring-reconnectionpolicy-for-java-driver) konusuna bakın.
+Java için Apache Cassandra sürücüleri iki yerel yeniden bağlantı ilkesi sağlar: `ExponentialReconnectionPolicy` ve `ConstantReconnectionPolicy` . Varsayılan değer: `ExponentialReconnectionPolicy`. Ancak, Azure Cosmos DB Cassandra API için `ConstantReconnectionPolicy` iki saniyelik bir gecikmeyle önerilir.
+
+Java [4. x sürücüsüne yönelik belgelere](https://docs.datastax.com/en/developer/java-driver/4.9/manual/core/reconnection/), [Java 3. x sürücüsüne yönelik belgelere](https://docs.datastax.com/en/developer/java-driver/3.7/manual/reconnection/)veya [Java sürücü örnekleri için reconnectionpolicy yapılandırmasına](#configure-reconnectionpolicy-for-the-java-driver) bakın.
 
 ## <a name="error-with-load-balancing-policy"></a>Yük Dengeleme ilkesiyle ilgili hata
 
-Java DataStax sürücüsünün v3. x bölümünde, aşağıdakine benzer kodla bir yük dengeleme ilkesi uyguladıysanız:
+Java DataStax sürücüsünün v3. x bölümünde şuna benzer kodla bir yük dengeleme ilkesi uygulamış olabilirsiniz:
 
 ```java
 cluster = Cluster.builder()
@@ -70,25 +91,25 @@ cluster = Cluster.builder()
         .build();
 ```
 
-İçin değeri, `withLocalDc()` iletişim noktası veri merkezi ile eşleşmiyorsa, zaman aralıklı bir hatayla karşılaşabilirsiniz: `com.datastax.driver.core.exceptions.NoHostAvailableException: All host(s) tried for query failed (no host was tried)` . 
+İçin değeri, `withLocalDc()` iletişim noktası veri merkezi ile eşleşmezse aralıklı bir hatayla karşılaşabilirsiniz: `com.datastax.driver.core.exceptions.NoHostAvailableException: All host(s) tried for query failed (no host was tried)` .
 
-### <a name="solution"></a>Çözüm 
-[CosmosLoadBalancingPolicy](https://github.com/Azure/azure-cosmos-cassandra-extensions/blob/master/package/src/main/java/com/microsoft/azure/cosmos/cassandra/CosmosLoadBalancingPolicy.java) uygulayın (iş yapmak için DataStax ikincil sürümünü yükseltmeniz gerekebilir):
+[CosmosLoadBalancingPolicy](https://github.com/Azure/azure-cosmos-cassandra-extensions/blob/master/package/src/main/java/com/microsoft/azure/cosmos/cassandra/CosmosLoadBalancingPolicy.java)uygulayın. Çalışmasını sağlamak için, aşağıdaki kodu kullanarak DataStax ' i yükseltmeniz gerekebilir:
 
 ```java
 LoadBalancingPolicy loadBalancingPolicy = new CosmosLoadBalancingPolicy.Builder().withWriteDC("West US").withReadDC("West US").build();
 ```
 
-## <a name="count-fails-on-large-table"></a>Büyük tabloda başarısız olan sayı
-`select count(*) from table`Çok sayıda satır çalıştırırken veya benzer olduğunda, sunucu zaman aşımına uğrar.
+## <a name="the-count-fails-on-a-large-table"></a>Büyük bir tabloda sayı başarısız oluyor
 
-### <a name="solution"></a>Çözüm 
-Yerel bir CSQLSH istemcisi kullanıyorsanız, `--connect-timeout` veya ayarlarını değiştirmeyi deneyebilirsiniz `--request-timeout` (daha fazla ayrıntıya bakın). [](https://cassandra.apache.org/doc/latest/tools/cqlsh.html) Bu yeterli değilse ve sayım hala zaman aşımına uğrarsa, Azure portal Azure Cosmos DB arka uç telemetrisinden bir dizi kayıt alabilir, ölçüm ' i seçip, `document count` ardından veritabanı veya koleksiyon için bir filtre ekleyebilirsiniz (Azure Cosmos DB). Daha sonra, zaman içinde kayıt sayısının sayımını yapmak istediğiniz zaman içinde ortaya çıkan grafiğin üzerine gelin.
+`select count(*) from table`Çok sayıda satır için çalıştırdığınız veya benzer olduğunda, sunucu zaman aşımına uğrar.
+
+Yerel bir CSQLSH istemcisi kullanıyorsanız, `--connect-timeout` veya `--request-timeout` ayarlarını değiştirin. Bkz. [csqlsh: CQL kabuğu](https://cassandra.apache.org/doc/latest/tools/cqlsh.html).
+
+Sayım hala zaman aşımına uğrarsa, Azure portal ölçüm sekmesine giderek, ölçümü seçerek `document count` ve ardından veritabanı ya da koleksiyon için bir filtre ekleyerek Azure Cosmos DB arka uç telemetrisinden bir kayıt sayısı alabilirsiniz (Azure Cosmos DB tablosunun analog ' u). Daha sonra, zaman içinde kayıt sayısının sayımını yapmak istediğiniz zaman içinde ortaya çıkan grafiğin üzerine gelin.
 
 :::image type="content" source="./media/cassandra-troubleshoot/metrics.png" alt-text="Ölçüm görünümü":::
 
-
-## <a name="configuring-reconnectionpolicy-for-java-driver"></a>Java sürücüsü için ReconnectionPolicy yapılandırma
+## <a name="configure-reconnectionpolicy-for-the-java-driver"></a>Java sürücüsü için ReconnectionPolicy yapılandırma
 
 ### <a name="version-3x"></a>Sürüm 3. x
 
@@ -119,11 +140,11 @@ datastax-java-driver {
 }
 ```
 
-## <a name="enable-keep-alive-for-java-driver"></a>Java sürücüsü için canlı tutmayı etkinleştir
+## <a name="enable-keep-alive-for-the-java-driver"></a>Java sürücüsü için canlı tutmayı etkinleştir
 
 ### <a name="version-3x"></a>Sürüm 3. x
 
-Java sürücüsünün 3. x. x için, bir küme nesnesi oluştururken etkin tut ' u ayarlayın ve [işletim sisteminde](https://knowledgebase.progress.com/articles/Article/configure-OS-TCP-KEEPALIVE-000080089)canlı tutma özelliğinin etkinleştirildiğinden emin olun:
+Java sürücüsünün 3. x. x için, bir küme nesnesi oluştururken canlı tut seçeneğini ayarlayın ve ardından etkin tut özelliğinin [işletim sisteminde etkinleştirildiğinden](https://knowledgebase.progress.com/articles/Article/configure-OS-TCP-KEEPALIVE-000080089)emin olun:
 
 ```java
 import java.net.SocketOptions;
@@ -138,7 +159,7 @@ cluster = Cluster.builder().addContactPoints(contactPoints).withPort(port)
 
 ### <a name="version-4x"></a>Sürüm 4. x
 
-Java sürücüsünün 4. x sürümü için, ' deki ayarları geçersiz kılarak canlı tut ' u ayarlayın `reference.conf` ve [işletim sisteminde etkin](https://knowledgebase.progress.com/articles/Article/configure-OS-TCP-KEEPALIVE-000080089)tut özelliğinin etkinleştirildiğinden emin olun:
+Java sürücüsünün 4. x sürümü için, ' deki ayarları geçersiz kılarak canlı tut ' u ayarlayın `reference.conf` ve ardından etkin tut ' un [işletim sisteminde etkinleştirildiğinden](https://knowledgebase.progress.com/articles/Article/configure-OS-TCP-KEEPALIVE-000080089)emin olun:
 
 ```xml
 datastax-java-driver {
@@ -152,4 +173,4 @@ datastax-java-driver {
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Azure Cosmos DB Cassandra API [desteklenen özellikler](cassandra-support.md) hakkında bilgi edinin.
-- [Yerel Apache Cassandra 'dan Azure Cosmos DB Cassandra API geçiş](cassandra-migrate-cosmos-db-databricks.md) yapmayı öğrenin
+- [Yerel Apache Cassandra 'dan Azure Cosmos DB Cassandra API geçiş](cassandra-migrate-cosmos-db-databricks.md)yapmayı öğrenin.

@@ -2,13 +2,13 @@
 title: Müşteri tarafından yönetilen anahtarları kullanarak yedekleme verilerini şifreleme
 description: Azure Backup, müşteri tarafından yönetilen anahtarları (CMK) kullanarak yedekleme verilerinizi şifrelemenize nasıl olanak sağladığını öğrenin.
 ms.topic: conceptual
-ms.date: 07/08/2020
-ms.openlocfilehash: 474f4238276f460abde3d600422e309171875a0c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/19/2021
+ms.openlocfilehash: bd51be06e707674f3e35b3478d7f99d096be912a
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101716746"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718782"
 ---
 # <a name="encryption-of-backup-data-using-customer-managed-keys"></a>Müşteri tarafından yönetilen anahtarları kullanarak yedekleme verilerini şifreleme
 
@@ -33,7 +33,7 @@ Bu makalede aşağıdakiler ele alınmaktadır:
 
 - Bu özellik [Azure disk şifrelemesi](../security/fundamentals/azure-disk-encryption-vms-vmss.md)ile ilgili değildir ve BitLocker (Windows için) ve DM-Crypt (Linux için) kullanarak bir VM disklerinin Konuk tabanlı şifrelemesini kullanır
 
-- Kurtarma Hizmetleri Kasası, yalnızca **aynı bölgede** bulunan bir Azure Key Vault depolanan anahtarlarla şifrelenebilir. Ayrıca anahtarlar yalnızca **RSA 2048 anahtar** olmalıdır ve **etkin** durumda olmalıdır.
+- Kurtarma Hizmetleri Kasası, yalnızca **aynı bölgede** bulunan bir Azure Key Vault depolanan anahtarlarla şifrelenebilir. Ayrıca anahtarlar yalnızca **RSA anahtarları** olmalıdır ve **etkin** durumda olmalıdır.
 
 - CMK şifreli kurtarma hizmetleri kasasını kaynak grupları ve abonelikler arasında taşıma Şu anda desteklenmemektedir.
 - Müşteri tarafından yönetilen anahtarlarla zaten şifrelenmiş bir kurtarma hizmetleri kasasını yeni bir kiracıya taşıdığınızda, kasasının yönetilen kimliğini ve CMK 'yi yeniden oluşturmak ve yeniden yapılandırmak için kurtarma hizmetleri kasasını güncelleştirmeniz gerekir (yeni kiracıda olması gerekir). Bu yapılmazsa, yedekleme ve geri yükleme işlemleri başarısız olur. Ayrıca, abonelik içinde ayarlanmış tüm rol tabanlı erişim denetimi (RBAC) izinlerinin yeniden yapılandırılması gerekir.
@@ -42,6 +42,9 @@ Bu makalede aşağıdakiler ele alınmaktadır:
 
     >[!NOTE]
     >Kurtarma Hizmetleri kasasındaki yedeklemeler için müşteri tarafından yönetilen anahtarları kullanmak için az Module 5.3.0 veya üstünü kullanın.
+    
+    >[!Warning]
+    >Yedekleme için şifreleme anahtarlarını yönetmek üzere PowerShell kullanıyorsanız, bu anahtarları portaldan güncelleştirmeyi önermiyoruz.<br>Anahtarı portaldan güncelleştirirseniz, yeni modeli desteklemek için bir PowerShell güncelleştirmesi kullanılabilir olduğunda, şifreleme anahtarını daha fazla güncelleştirmek için PowerShell 'i kullanamazsınız. Ancak, Azure portal anahtarı güncelleştirmeye devam edebilirsiniz.
 
 Kurtarma Hizmetleri kasanızı oluşturup yapılandırmadıysanız, [nasıl yapılacağını burada](backup-create-rs-vault.md)bulabilirsiniz.
 
@@ -59,22 +62,32 @@ Bu bölüm aşağıdaki adımları içerir:
 
 Bu adımların, istenen sonuçlara ulaşmak için yukarıda bahsedilen sırayla izlenmesi gerekir. Her adım aşağıda ayrıntılı olarak ele alınmıştır.
 
-### <a name="enable-managed-identity-for-your-recovery-services-vault"></a>Kurtarma Hizmetleri kasanızda yönetilen kimliği etkinleştirin
+## <a name="enable-managed-identity-for-your-recovery-services-vault"></a>Kurtarma Hizmetleri kasanızda yönetilen kimliği etkinleştirin
 
-Azure Backup, Azure Key Vault depolanan şifreleme anahtarlarına erişmek üzere Kurtarma Hizmetleri kasasının kimliğini doğrulamak için sistem tarafından atanan yönetilen kimliği kullanır. Kurtarma Hizmetleri kasanızda yönetilen kimliği etkinleştirmek için aşağıda bahsedilen adımları izleyin.
+Azure Backup, Azure Key Vault depolanan şifreleme anahtarlarına erişmek üzere Kurtarma Hizmetleri kasasının kimliğini doğrulamak için sistem tarafından atanan Yönetilen kimlikler ve Kullanıcı tarafından atanan Yönetilen kimlikler kullanır. Kurtarma Hizmetleri kasanızda yönetilen kimliği etkinleştirmek için aşağıda bahsedilen adımları izleyin.
 
 >[!NOTE]
 >Etkinleştirildikten sonra, yönetilen kimlik devre dışı **bırakılmamalıdır (** geçici olarak bile). Yönetilen kimliğin devre dışı bırakılması tutarsız davranışa yol açabilir.
+
+### <a name="enable-system-assigned-managed-identity-for-the-vault"></a>Kasa için sistem tarafından atanan yönetilen kimliği etkinleştirme
 
 **Portalda:**
 
 1. Kurtarma Hizmetleri kasasına gidin-> **kimliği**
 
-    ![Kimlik ayarları](./media/encryption-at-rest-with-cmk/managed-identity.png)
+    ![Kimlik ayarları](media/encryption-at-rest-with-cmk/enable-system-assigned-managed-identity-for-vault.png)
 
-1. **Durumu** **Açık** olarak değiştirin ve **Kaydet**' i seçin.
+1. **Sistem atandı** sekmesine gidin.
 
-1. Kasadaki sistem tarafından atanan yönetilen kimlik olan bir nesne KIMLIĞI oluşturulur.
+1. **Durumu** **Açık** olarak değiştirin.
+
+1. Kasa kimliğini etkinleştirmek için **Kaydet** ' e tıklayın.
+
+Kasadaki sistem tarafından atanan yönetilen kimlik olan bir nesne KIMLIĞI oluşturulur.
+
+>[!NOTE]
+>Etkinleştirildikten sonra, yönetilen kimlik devre dışı bırakılmamalıdır (geçici olarak bile). Yönetilen kimliğin devre dışı bırakılması tutarsız davranışa yol açabilir.
+
 
 **PowerShell ile:**
 
@@ -98,7 +111,28 @@ TenantId    : xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 Type        : SystemAssigned
 ```
 
-### <a name="assign-permissions-to-the-recovery-services-vault-to-access-the-encryption-key-in-the-azure-key-vault"></a>Azure Key Vault şifreleme anahtarına erişmek için kurtarma hizmetleri kasasına izinler atayın
+### <a name="assign-user-assigned-managed-identity-to-the-vault"></a>Kasaya Kullanıcı tarafından atanan yönetilen kimlik atama
+
+Kurtarma Hizmetleri kasanızın Kullanıcı tarafından atanan yönetilen kimliğini atamak için aşağıdaki adımları uygulayın:
+
+1.  Kurtarma Hizmetleri kasasına gidin-> **kimliği**
+
+    ![Kasaya Kullanıcı tarafından atanan yönetilen kimlik atama](media/encryption-at-rest-with-cmk/assign-user-assigned-managed-identity-to-vault.png)
+
+1.  **Kullanıcı atandı** sekmesine gidin.
+
+1.  Kullanıcı tarafından atanan yönetilen kimlik eklemek için **+ Ekle** ' ye tıklayın.
+
+1.  Açılan **Kullanıcı tarafından atanan yönetilen kimlik Ekle** dikey penceresinde, kimliğinize yönelik aboneliği seçin.
+
+1.  Listeden kimliği seçin. Ayrıca, kimliğin veya kaynak grubunun adına göre de filtre uygulayabilirsiniz.
+
+1.  İşiniz bittiğinde, kimlik atamaya son vermek için **Ekle** ' ye tıklayın.
+
+## <a name="assign-permissions-to-the-recovery-services-vault-to-access-the-encryption-key-in-the-azure-key-vault"></a>Azure Key Vault şifreleme anahtarına erişmek için kurtarma hizmetleri kasasına izinler atayın
+
+>[!Note]
+>Kullanıcı tarafından atanan kimlikler kullanıyorsanız, Kullanıcı tarafından atanan kimliğe aynı izinlerin atanması gerekir.
 
 Artık kurtarma hizmetleri kasasının şifreleme anahtarını içeren Azure Key Vault erişmesine izin vermeniz gerekir. Bu, kurtarma hizmetleri kasasının yönetilen kimliğinin Key Vault erişmesine izin verilerek yapılır.
 
@@ -120,7 +154,7 @@ Artık kurtarma hizmetleri kasasının şifreleme anahtarını içeren Azure Key
 
 1. Azure Key Vault erişim ilkesinde yapılan değişiklikleri kaydetmek için **Kaydet** ' i seçin.
 
-### <a name="enable-soft-delete-and-purge-protection-on-the-azure-key-vault"></a>Azure Key Vault geçici silme ve Temizleme korumasını etkinleştirme
+## <a name="enable-soft-delete-and-purge-protection-on-the-azure-key-vault"></a>Azure Key Vault geçici silme ve Temizleme korumasını etkinleştirme
 
 Şifreleme anahtarınızı depolayan Azure Key Vault **, geçici silme ve Temizleme korumasını etkinleştirmeniz** gerekir. Bunu aşağıda gösterildiği gibi Azure Key Vault kullanıcı arabiriminden yapabilirsiniz. (Alternatif olarak, Key Vault oluşturulurken bu özellikler ayarlanabilir). Bu [Key Vault özellikleri hakkında](../key-vault/general/soft-delete-overview.md)daha fazla bilgi edinin.
 
@@ -160,7 +194,7 @@ Aşağıdaki adımları kullanarak, PowerShell aracılığıyla geçici silme ve
     Set-AzResource -resourceid $resource.ResourceId -Properties $resource.Properties
     ```
 
-### <a name="assign-encryption-key-to-the-rs-vault"></a>RS kasasına şifreleme anahtarı atama
+## <a name="assign-encryption-key-to-the-rs-vault"></a>RS kasasına şifreleme anahtarı atama
 
 >[!NOTE]
 > Devam etmeden önce aşağıdakilerden emin olun:
@@ -172,7 +206,7 @@ Aşağıdaki adımları kullanarak, PowerShell aracılığıyla geçici silme ve
 
 Yukarıdaki bir kez başarılı olduktan sonra, kasanızın şifreleme anahtarını seçmeye devam edin.
 
-#### <a name="to-assign-the-key-in-the-portal"></a>Portala anahtar atamak için
+### <a name="to-assign-the-key-in-the-portal"></a>Portala anahtar atamak için
 
 1. Kurtarma Hizmetleri kasanıza gidin-> **özellikleri**
 
@@ -192,7 +226,7 @@ Yukarıdaki bir kez başarılı olduktan sonra, kasanızın şifreleme anahtarı
     1. Anahtar Seçicisi bölmesindeki Key Vault tuşuna gidip seçin.
 
         >[!NOTE]
-        >Anahtar Seçicisi bölmesini kullanarak şifreleme anahtarını belirtirken, anahtar için her yeni sürüm etkinleştirildiğinde anahtar otomatik olarak döndürülür.
+        >Anahtar Seçicisi bölmesini kullanarak şifreleme anahtarını belirtirken, anahtar için her yeni sürüm etkinleştirildiğinde anahtar otomatik olarak döndürülür. Şifreleme anahtarlarının otomatik döndürmesini etkinleştirme hakkında [daha fazla bilgi edinin](#enabling-auto-rotation-of-encryption-keys) .
 
         ![Anahtar kasasından anahtar seçin](./media/encryption-at-rest-with-cmk/key-vault.png)
 
@@ -206,7 +240,7 @@ Yukarıdaki bir kez başarılı olduktan sonra, kasanızın şifreleme anahtarı
 
     ![Etkinlik günlüğü](./media/encryption-at-rest-with-cmk/activity-log.png)
 
-#### <a name="to-assign-the-key-with-powershell"></a>Anahtarı PowerShell ile atamak için
+### <a name="to-assign-the-key-with-powershell"></a>Anahtarı PowerShell ile atamak için
 
 Müşteri tarafından yönetilen anahtarlar kullanılarak şifrelemeyi etkinleştirmek ve kullanılacak şifreleme anahtarını atamak veya güncelleştirmek için [set-AzRecoveryServicesVaultProperty](/powershell/module/az.recoveryservices/set-azrecoveryservicesvaultproperty) komutunu kullanın.
 
@@ -249,8 +283,8 @@ Korumayı yapılandırmaya devam etmeden önce aşağıdaki denetim listesinin �
 > Korumayı yapılandırmaya devam etmeden önce aşağıdaki adımları **başarıyla** tamamlamış olmanız gerekir:
 >
 >1. Yedekleme kasanızı oluşturma
->1. Yedekleme kasasının sistem tarafından atanan yönetilen kimliğini etkinleştirdi
->1. Key Vault şifreleme anahtarlarına erişmek için yedekleme kasanıza atanan izinler
+>1. Kurtarma Hizmetleri kasasının sisteme atanan yönetilen kimliği etkin veya kasaya Kullanıcı tarafından atanan bir yönetilen kimlik atandı
+>1. Key Vault şifreleme anahtarlarına erişmek için yedekleme kasanıza (veya Kullanıcı tarafından atanan yönetilen kimliğe) atanan izinler
 >1. Key Vault için geçici silme ve Temizleme koruması etkinleştirildi
 >1. Yedekleme kasanıza yönelik geçerli bir şifreleme anahtarı atandı
 >
@@ -311,6 +345,54 @@ Dosya geri yükleme gerçekleştirirken, geri yüklenen veriler hedef konumu şi
 ### <a name="restoring-sap-hanasql-databases-in-azure-vms"></a>Azure VM 'lerinde SAP HANA/SQL veritabanlarını geri yükleme
 
 Azure VM 'de çalışan yedeklenen SAP HANA/SQL veritabanından geri yükleme yaparken, geri yüklenen veriler, hedef depolama konumunda kullanılan şifreleme anahtarı kullanılarak şifrelenir. Bu, sanal makinenin disklerini şifrelemek için kullanılan, müşteri tarafından yönetilen bir anahtar veya platform tarafından yönetilen bir anahtar olabilir.
+
+## <a name="additional-topics"></a>Ek konu başlıkları
+
+### <a name="enable-encryption-using-customer-managed-keys-at-vault-creation-in-preview"></a>Kasa oluşturma sırasında müşteri tarafından yönetilen anahtarları kullanarak şifrelemeyi etkinleştirin (önizlemede)
+
+>[!NOTE]
+>Müşteri tarafından yönetilen anahtarları kullanarak kasadaki şifrelemeyi etkinleştirmek sınırlı genel önizlemeye sunuldu ve aboneliklerin listelenmesi için izin vermeniz gerekiyor. Önizlemeye kaydolmak için [formu](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0H3_nezt2RNkpBCUTbWEapURDNTVVhGOUxXSVBZMEwxUU5FNDkyQkU4Ny4u) doldurup bizimle yazın [AskAzureBackupTeam@microsoft.com](mailto:AskAzureBackupTeam@microsoft.com) .
+
+Aboneliğiniz izin verdiğinde, **yedekleme şifreleme** sekmesi görüntülenir. Bu, yeni bir kurtarma hizmetleri kasasının oluşturulması sırasında, müşteri tarafından yönetilen anahtarları kullanarak yedeklemede şifrelemeyi etkinleştirmenizi sağlar. Şifrelemeyi etkinleştirmek için aşağıdaki adımları uygulayın:
+
+1. **Temel bilgiler** sekmesinin yanındaki **Yedekleme Şifrelemesi** sekmesinde şifreleme anahtarını ve şifreleme için kullanılacak kimliği belirtin.
+
+   ![Kasa düzeyinde şifrelemeyi etkinleştir](media/encryption-at-rest-with-cmk/enable-encryption-using-cmk-at-vault.png)
+
+
+   >[!NOTE]
+   >Ayarlar yalnızca yedekleme için geçerlidir ve isteğe bağlıdır.
+
+1. Şifreleme türü olarak **müşteri tarafından yönetilen anahtarı kullan** ' ı seçin.
+
+1. Şifreleme için kullanılacak anahtarı belirtmek için uygun seçeneği belirleyin.
+
+   Şifreleme anahtarı için URI sağlayabilir veya anahtara gözatıp seçimi yapabilirsiniz. **Key Vault Seç** seçeneğini kullanarak anahtarı belirttiğinizde, şifreleme anahtarının otomatik dönüşü otomatik olarak etkinleştirilir. [Otomatik döndürme hakkında daha fazla bilgi edinin](#enabling-auto-rotation-of-encryption-keys). 
+
+1. Müşteri tarafından yönetilen anahtarlarla şifrelemeyi yönetmek için Kullanıcı tarafından atanan yönetilen kimliği belirtin. Gitmek için **Seç** ' e tıklayın ve gerekli kimliği seçin.
+
+1. İşiniz bittiğinde, etiketler ekleme (isteğe bağlı) ve kasayı oluşturmaya devam edin.
+
+### <a name="enabling-auto-rotation-of-encryption-keys"></a>Şifreleme anahtarlarının otomatik döndürmesini etkinleştirme
+
+Yedeklemeleri şifrelemek için kullanılması gereken müşteri tarafından yönetilen anahtarı belirttiğinizde, belirtmek için aşağıdaki yöntemleri kullanın:
+
+- Anahtar URI 'sini girin
+- Key Vault arasından seçim yapın
+
+**Key Vault Seç** seçeneğinin kullanılması seçili anahtar için Otomatik döndürmeyi etkinleştirmeye yardımcı olur. Bu, sonraki sürüme güncelleştirme için el ile çaba ortadan kaldırır. Ancak, bu seçeneği kullanarak:
+- Anahtar sürüm güncelleştirmesinin etkili olması bir saate kadar sürebilir.
+- Anahtarın yeni bir sürümü geçerli olduğunda, anahtar güncelleştirmesi geçerli olduktan sonra en az bir sonraki yedekleme işi için eski sürüm de kullanılabilir (etkin durumda).
+
+### <a name="using-azure-policies-for-auditing-and-enforcing-encryption-utilizing-customer-managed-keys-in-preview"></a>Müşteri tarafından yönetilen anahtarlar kullanılarak şifrelemeyi denetleme ve zorunlu tutma için Azure Ilkelerini kullanma (önizlemede)
+
+Azure Backup, kurtarma hizmetleri kasasındaki verilerin müşteri tarafından yönetilen anahtarlarını kullanarak şifrelemeyi denetlemek ve zorlamak için Azure Ilkeleri kullanmanıza olanak sağlar. Azure Ilkelerini kullanarak:
+
+- Denetim ilkesi, 04/01/2021 sonrasında etkinleştirilen müşteri tarafından yönetilen anahtarları kullanarak kasaların denetlenmesi için kullanılabilir. Bu tarihten önce CMK Şifrelemesi etkin olan kasaların, ilke uygulanamayacak veya hatalı negatif sonuçları gösterebilir (yani, **CMK şifrelemesi** etkin olsa da bu kasalar uyumsuz olarak bildirilebilir).
+- 04/01/2021 öncesinde **CMK şifrelemesi** etkin olan denetim kasalarına yönelik denetim ilkesini kullanmak için, bir şifreleme anahtarını güncelleştirmek üzere Azure Portal kullanın. Bu, yeni modele yükseltmeye yardımcı olur. Şifreleme anahtarını değiştirmek istemiyorsanız, anahtar URI 'SI veya anahtar seçim seçeneği ile aynı anahtarı yeniden sağlayın. 
+
+   >[!Warning]
+    >Yedekleme için şifreleme anahtarlarını yönetmek üzere PowerShell kullanıyorsanız, bu anahtarları portaldan güncelleştirmeyi önermiyoruz.<br>Anahtarı portaldan güncelleştirirseniz, yeni modeli desteklemek için bir PowerShell güncelleştirmesi kullanılabilir olduğunda, şifreleme anahtarını daha fazla güncelleştirmek için PowerShell 'i kullanamazsınız. Ancak, Azure portal anahtarı güncelleştirmeye devam edebilirsiniz.
 
 ## <a name="frequently-asked-questions"></a>Sık sorulan sorular
 

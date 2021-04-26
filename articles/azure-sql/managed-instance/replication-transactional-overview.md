@@ -12,12 +12,12 @@ author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: sstein
 ms.date: 04/20/2020
-ms.openlocfilehash: 3e4b4fc3d4a6c9529c7c0ac0daef8a28173e0bf3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e08fe67dece02b936aa3a22e9cac58d809f19f46
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99225352"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107285692"
 ---
 # <a name="transactional-replication-with-azure-sql-managed-instance-preview"></a>Azure SQL yönetilen örneği (Önizleme) ile işlemsel çoğaltma
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -154,7 +154,7 @@ Bu yapılandırmada, Azure SQL veritabanı veya Azure SQL yönetilen örneği i�
 
 [Etkin coğrafi çoğaltma](../database/active-geo-replication-overview.md) , işlemsel çoğaltma kullanılarak SQL yönetilen örneği ile desteklenmez. Etkin coğrafi çoğaltma yerine, [otomatik yük devretme grupları](../database/auto-failover-group-overview.md)kullanın, ancak yayının, birincil yönetilen örnekten [el ile silinmesini](transact-sql-tsql-differences-sql-server.md#replication) ve yük DEVRETMEDEN sonra ikincil SQL yönetilen örneği üzerinde yeniden oluşturulmasını unutmayın.
 
-Bir [Yük devretme grubundaki](../database/auto-failover-group-overview.md)bir **Yayımcı** veya **dağıtıcı** SQL yönetilen ÖRNEĞI üzerinde coğrafi çoğaltma etkinse, SQL yönetilen örnek yöneticisinin eski birincil üzerindeki tüm yayınları temizlemesi ve yük devretme gerçekleştikten sonra yeni birincil üzerinde yeniden yapılandırması gerekir. Bu senaryoda aşağıdaki etkinlikler gereklidir:
+Bir **Yayımcı** veya **dağıtıcı** SQL yönetilen örneği bir [Yük devretme grubunda](../database/auto-failover-group-overview.md)ise, SQL yönetilen örnek yöneticisinin eski birincil üzerindeki tüm yayınları temizlemesi ve yük devretme gerçekleştikten sonra yeni birincil üzerinde yeniden yapılandırması gerekir. Bu senaryoda aşağıdaki etkinlikler gereklidir:
 
 1. Varsa, veritabanında çalışan tüm çoğaltma işlerini durdurun.
 1. Yayımcı veritabanında aşağıdaki betiği çalıştırarak, yayımcıdan abonelik meta verilerini bırakın:

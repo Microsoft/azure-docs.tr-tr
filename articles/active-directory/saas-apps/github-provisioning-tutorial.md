@@ -10,16 +10,19 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 10/21/2020
 ms.author: Zhchia
-ms.openlocfilehash: f1600dfc5705ca97f16e8966a796b54fc556d216
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9d9699c564476e116654f700c32dd47b7f6d5b81
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94359271"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504575"
 ---
 # <a name="tutorial-configure-github-for-automatic-user-provisioning"></a>Öğretici: otomatik Kullanıcı sağlaması için GitHub 'ı yapılandırma
 
 Bu öğreticinin amacı, Azure AD 'den GitHub ' dan Kullanıcı hesaplarını otomatik olarak sağlamak ve devre dışı bırakmak için GitHub ve Azure AD 'de gerçekleştirmeniz gereken adımları gösteriyoruz.
+
+> [!NOTE]
+> Azure AD sağlama tümleştirmesi, GitHub Enterprise [faturalandırma planındaki](https://help.github.com/articles/github-s-billing-plans/#billing-plans-for-organizations)GitHub [Kurumsal bulut](https://help.github.com/articles/github-s-products/#github-enterprise) müşterileri tarafından KULLANıLABILEN [GitHub SCIM API](https://developer.github.com/v3/scim/)'sini kullanır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -33,7 +36,7 @@ Bu öğreticide anlatılan senaryoda aşağıdakilere sahip olduğunuz kabul edi
 * Tek bir kuruluşa SCıM sağlama yalnızca, kuruluş düzeyinde SSO etkinleştirildiğinde desteklenir
 
 > [!NOTE]
-> Azure AD sağlama tümleştirmesi, GitHub Enterprise [faturalandırma planındaki](https://help.github.com/articles/github-s-billing-plans/#billing-plans-for-organizations)GitHub [Kurumsal bulut](https://help.github.com/articles/github-s-products/#github-enterprise) müşterileri tarafından KULLANıLABILEN [GitHub SCIM API](https://developer.github.com/v3/scim/)'sini kullanır.
+> Bu tümleştirme Ayrıca Azure AD ABD kamu bulut ortamından kullanılabilir. Bu uygulamayı Azure AD ABD kamu bulutu uygulama galerisinde bulabilir ve bunu ortak buluttan yaptığınız şekilde yapılandırabilirsiniz.
 
 ## <a name="assigning-users-to-github"></a>GitHub 'a Kullanıcı atama
 

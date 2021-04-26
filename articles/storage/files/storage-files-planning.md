@@ -8,12 +8,12 @@ ms.date: 03/23/2021
 ms.author: rogarana
 ms.subservice: files
 ms.custom: references_regions
-ms.openlocfilehash: 267b68fbdae6d894acc3222a8d74a8e15e865dbc
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: be7e5b1f9721cc65c2f9b371becf8b4c82fb37b4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105023529"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107759778"
 ---
 # <a name="planning-for-an-azure-files-deployment"></a>Azure Dosyaları dağıtımı planlama
 [Azure dosyaları](storage-files-introduction.md) , iki ana şekilde dağıtılabilir: doğrudan sunucusuz Azure dosya paylaşımlarını bağlayarak veya Azure dosya eşitleme kullanarak şirket içi Azure dosya paylaşımlarını önbelleğe alarak. Seçtiğiniz dağıtım seçeneği, dağıtımınız için planlarken göz önünde bulundurmanız gereken şeyleri değiştirir. 
@@ -22,7 +22,7 @@ ms.locfileid: "105023529"
 
 - **Şirket Içi Azure dosya paylaşımını Azure dosya eşitleme Ile önbelleğe alma**: Azure dosya eşitleme, kuruluşunuzun dosya paylaşımlarını Azure dosyalarında merkezileştirirken şirket içi bir dosya sunucusunun esnekliğini, performansını ve uyumluluğunu mümkün tutmaya olanak sağlar. Azure Dosya Eşitleme, şirket içi (veya bulut) Windows Server 'ı Azure SMB dosya paylaşımınızın hızlı önbelleğine dönüştürür. 
 
-Bu makalede öncelikle bir Azure dosya paylaşımının dağıtımı, şirket içi veya bulut istemcisi tarafından doğrudan bağlanması için dağıtım konuları ele alınmaktadır. Azure Dosya Eşitleme dağıtımı planlamak için, bkz. [Azure dosya eşitleme dağıtımı planlama](storage-sync-files-planning.md).
+Bu makalede öncelikle bir Azure dosya paylaşımının dağıtımı, şirket içi veya bulut istemcisi tarafından doğrudan bağlanması için dağıtım konuları ele alınmaktadır. Azure Dosya Eşitleme dağıtımı planlamak için, bkz. [Azure dosya eşitleme dağıtımı planlama](../file-sync/file-sync-planning.md).
 
 ## <a name="available-protocols"></a>Kullanılabilir protokoller
 
@@ -116,7 +116,8 @@ Daha fazla bilgi için bkz. [depolama Için Azure Defender 'A giriş](../../secu
 [!INCLUDE [storage-files-tiers-overview](../../../includes/storage-files-tiers-overview.md)]
 
 ### <a name="enable-standard-file-shares-to-span-up-to-100-tib"></a>Standart dosya paylaşımlarının 100 TiB 'ye kadar yayılmasını sağlar
-[!INCLUDE [storage-files-tiers-enable-large-shares](../../../includes/storage-files-tiers-enable-large-shares.md)]
+Varsayılan olarak, standart dosya paylaşımları yalnızca 5 TiB 'ye yayılabilir, ancak paylaşım limitini 100 TiB olarak artırabilirsiniz. Paylaşım sınırınızı nasıl artıracağınızı öğrenmek için bkz. [büyük dosya paylaşımlarını etkinleştirme ve oluşturma](storage-files-how-to-create-large-file-share.md).
+
 
 #### <a name="limitations"></a>Sınırlamalar
 [!INCLUDE [storage-files-tiers-large-file-share-availability](../../../includes/storage-files-tiers-large-file-share-availability.md)]
@@ -130,7 +131,7 @@ Daha fazla bilgi için bkz. [depolama Için Azure Defender 'A giriş](../../secu
 [Geçişe genel bakış makalesi](storage-files-migration-overview.md) , temel bilgileri kısaca kapsar ve senaryonuzu kapsayan geçiş kılavuzlarını size yönlendiren bir tablo içerir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Azure Dosya Eşitleme dağıtımı için planlama yapma](storage-sync-files-planning.md)
+* [Azure Dosya Eşitleme dağıtımı için planlama yapma](../file-sync/file-sync-planning.md)
 * [Azure dosyalarını dağıtma](./storage-how-to-create-file-share.md)
-* [Azure Dosya Eşitleme dağıtma](storage-sync-files-deployment-guide.md)
+* [Azure Dosya Eşitleme dağıtma](../file-sync/file-sync-deployment-guide.md)
 * [Senaryonuza yönelik geçiş kılavuzunu bulmak için geçişe genel bakış makalesine göz atın](storage-files-migration-overview.md)

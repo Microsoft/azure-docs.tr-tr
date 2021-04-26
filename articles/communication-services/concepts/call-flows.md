@@ -9,16 +9,16 @@ ms.author: mikben
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: 8f7bfd63d858fb409286268c318c9f66474e3d53
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 7651142d1c2b24da64d9f72dd2300dc0c3807e93
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105110925"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105937884"
 ---
 # <a name="call-flow-basics"></a>Çağrı akışı temelleri
 
-[!INCLUDE [Public Preview Notice](../includes/public-preview-include.md)]
+[!INCLUDE [Public Preview Notice](../includes/public-preview-include-phone-numbers.md)]
 
 Aşağıdaki bölümde, Azure Iletişim hizmetlerindeki çağrı akışlarına ilişkin bir genel bakış sunulmaktadır. Sinyal ve medya akışları kullanıcılarınızın yapmakta olduğu çağrı türlerine bağlıdır. Çağrı türlerine örnek olarak, VoIP ve PSTN bağlantılı katılımcılar bileşimini içeren tek-bir VoIP, bire bir PSTN ve grup çağrısı vardır. [Çağrı türlerini](./voice-video-calling/about-call-types.md)gözden geçirin.
 

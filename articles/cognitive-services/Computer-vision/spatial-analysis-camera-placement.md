@@ -10,12 +10,12 @@ ms.subservice: computer-vision
 ms.topic: conceptual
 ms.date: 01/12/2021
 ms.author: aahi
-ms.openlocfilehash: 4c2d1cd1c73b377d85501fd31d0f5a1893df5183
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: d58e4303078733eb1014171271d27907ff7a95b0
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102487432"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106286275"
 ---
 # <a name="camera-placement-guide"></a>Kamera Yerleştirme Kılavuzu
 

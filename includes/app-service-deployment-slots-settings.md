@@ -4,12 +4,12 @@ ms.service: app-service
 ms.topic: include
 ms.date: 09/18/2019
 ms.author: cephalin
-ms.openlocfilehash: 922a34bd1a147d407041d2945b14df18a18d7287
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: ed53cb60f6fb3bca93900941a8a6a53bed99d779
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104761098"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107073684"
 ---
 Yapılandırmayı başka bir dağıtım yuvasından kopyaladığınızda, kopyalanmış yapılandırma düzenlenebilir olur. Bazı yapılandırma öğeleri bir takas (yuvaya özgü değil) içindeki içeriği izler, ancak diğer yapılandırma öğeleri bir değiştirme sonrasında aynı yuvada kalır (yuvaya özgü). Aşağıdaki listeler, yuvaları takas yaparken değişen ayarları gösterir.
 
@@ -40,6 +40,7 @@ Yıldız işareti (*) ile işaretlenen özellikler, takas edilmemiş olarak plan
 * Çıkış noktaları arası kaynak paylaşımı (CORS)
 * Sanal ağ tümleştirmesi
 * Yol eşlemeleri
+* Sonek ile biten ayarlar _EXTENSION_VERSION
 
 > [!NOTE]
 > Bu ayarları değiştirilebilir yapmak için uygulamanın her yuvasında uygulama ayarını ekleyin `WEBSITE_OVERRIDE_PRESERVE_DEFAULT_STICKY_SLOT_SETTINGS` ve değerini veya olarak ayarlayın `0` `false` . Bu ayarlar tamamen değiştirilebilir veya hiç yok. Başkalarının değil, yalnızca bazı ayarları deitirilebilir hale getirebilirsiniz.

@@ -14,12 +14,12 @@ ms.author: ryanwi
 ms.reviewer: jmprieur
 ms.custom: aaddev
 ROBOTS: NOINDEX
-ms.openlocfilehash: 662a0f53a5d5e8e02ef3b29640009fd07bf4f1d0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 4d2b1a60856877c24d61379a688ea630e506a848
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97652153"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106075245"
 ---
 # <a name="azure-active-directory-code-samples-v10-endpoint"></a>Azure Active Directory kodu örnekleri (v 1.0 uç noktası)
 
@@ -63,8 +63,8 @@ Aşağıdaki örneklerde, kullanıcıları imzalayan Web uygulamaları gösteril
 
 Aşağıdaki örnekler rol tabanlı erişim denetiminin (RBAC) nasıl uygulanacağını gösterir. RBAC, bir Web uygulamasındaki belirli özelliklerin izinlerini belirli kullanıcılara kısıtlamak için kullanılır. Kullanıcılar bir **Azure AD grubuna** ait olup olmadığınıza veya belirli bir uygulama **rolüne** sahip olmasına bağlı olarak yetkilendirilir.
 
-| Platform | Örnek |
-|--|--|
+| Platform | Örnek | Açıklama |
+|--|--|--|
 | ![Bu görüntüde ASP.NET Framework logosu gösterilmektedir](media/sample-v2-code/logo-netframework.png)</p> ASP.NET 4.5 | [DotNet-WebApp-groupclaim](https://github.com/Azure-Samples/active-directory-dotnet-webapp-groupclaims) </p>  [DotNet-WebApp-roleclaim](https://github.com/Azure-Samples/active-directory-dotnet-webapp-roleclaims) | Yetkilendirme için Azure AD **rolleri** kullanan bir .NET 4,5 MVC web uygulaması |
 
 ## <a name="desktop-and-mobile-public-client-applications-calling-microsoft-graph-or-a-web-api"></a>Microsoft Graph veya bir Web API 'sini çağıran masaüstü ve mobil ortak istemci uygulamaları

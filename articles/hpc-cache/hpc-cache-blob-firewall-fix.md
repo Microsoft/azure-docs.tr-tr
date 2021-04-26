@@ -6,18 +6,18 @@ ms.service: hpc-cache
 ms.topic: troubleshooting
 ms.date: 03/18/2021
 ms.author: v-erkel
-ms.openlocfilehash: 10d68ce679fe42f5deeaae364bc46adb23436a27
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 45a7169330b11e98a8618b08205217212414ca5d
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104587160"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258937"
 ---
 # <a name="work-around-blob-storage-account-firewall-settings"></a>Blob depolama hesabı güvenlik duvarı ayarları geçici çözümü
 
 Depolama hesabı güvenlik duvarları içinde kullanılan belirli bir ayar, BLOB depolama hedefi oluşturmanın başarısız olmasına neden olabilir. Azure HPC önbellek ekibi, bu soruna yönelik bir yazılım düzeltmesinin üzerinde çalışıyor, ancak bu makaledeki yönergeleri izleyerek bu sorunu geçici olarak çözebilirsiniz.
 
-Yalnızca "seçili ağlardan" erişime izin veren güvenlik duvarı ayarı, önbelleğin bir BLOB depolama hedefi oluşturmasını veya değiştirilmesini engelleyebilir. Bu yapılandırma, depolama hesabının **güvenlik duvarları ve sanal ağlar** ayarları sayfalarnda bulunur.
+Yalnızca "seçili ağlardan" erişime izin veren güvenlik duvarı ayarı, önbelleğin bir BLOB depolama hedefi oluşturmasını veya değiştirilmesini engelleyebilir. Bu yapılandırma, depolama hesabının **güvenlik duvarları ve sanal ağlar** ayarları sayfalarnda bulunur. (Bu sorun ADLS-NFS depolama hedefleri için de geçerlidir.)
 
 Bu sorun, önbellek hizmetinin müşteri ortamlarından ayrı bir gizli hizmet sanal ağı kullanmadır. Bu ağa, depolama hesabınıza erişmek için açıkça yetki vermek mümkün değildir.
 

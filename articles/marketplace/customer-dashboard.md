@@ -7,12 +7,12 @@ ms.topic: article
 ms.date: 11/09/2020
 author: sayantanroy83
 ms.author: sroy
-ms.openlocfilehash: c5c50787ef3e287d164e051ece26da4e83199d47
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 3a26f7c63b639f9aeb6a8f526e77dacb37fb4d87
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102555644"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106068073"
 ---
 # <a name="customers-dashboard-in-commercial-marketplace-analytics"></a>Ticari Market Analytics 'te müşteriler panosu
 
@@ -163,6 +163,7 @@ _**Tablo 1: veri koşullarının sözlüğü**_
 | Ticari sertifika kimliği müşterisi | Ticaret kök müşterisi | Bir faturalandırma hesabı KIMLIĞI, birden fazla müşteri kimliğiyle ilişkilendirilebilir.<br>Bir faturalandırma hesabı KIMLIĞI ve müşteri KIMLIĞI birleşimi, birden çok ticari Market abonelikleriyle ilişkilendirilebilir.<br>Commerce root müşterisi, abonelik müşterisinin adını belirtir. | Ticari sertifika kimliği müşterisi |
 | Müşteri Kimliği | Müşteri Kimliği | Müşteriye atanan benzersiz tanımlayıcı. Müşterinin sıfır veya daha fazla Azure Market aboneliği olabilir. | CustomerId |
 | Faturalandırma hesabı KIMLIĞI | Faturalandırma hesabı KIMLIĞI | Faturalandırma 'nin oluşturulduğu hesabın tanımlayıcısı. Ödeme Işlem raporunuzu müşteri, sipariş ve kullanım raporlarıyla bağlamak için **faturalandırma HESABı kimliğini** **MüşteriNo** olarak eşleyin. | Billingaccountıd |
+| Müşteri Türü | Müşteri Türü | Bu alanın değeri, müşterinin türünü belirtir. Olası değerler şunlardır:<ul><li>ye</li> <li>Kuruluşunuzun</li></ul> | CustomerType |
 |||||
 
 ### <a name="customers-page-filters"></a>Müşteriler sayfa filtreleri

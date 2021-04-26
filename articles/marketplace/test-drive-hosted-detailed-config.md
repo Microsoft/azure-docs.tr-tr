@@ -6,13 +6,13 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 author: trkeya
 ms.author: trkeya
-ms.date: 11/06/2020
-ms.openlocfilehash: 88779f67a2fa9b18f0177a1459b32c672343bb57
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/20/2021
+ms.openlocfilehash: f11f1d5601a61bbd9b8729b478c278db8d3e73dc
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96462949"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812434"
 ---
 # <a name="detailed-configuration-for-hosted-test-drives"></a>Barındırılan test sürücüleri için ayrıntılı yapılandırma
 

@@ -4,7 +4,6 @@ description: Bu öğreticide, Azure portalını kullanarak sanal ağ eşlemesi i
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
-Customer intent: I want to connect two virtual networks so that virtual machines in one virtual network can communicate with virtual machines in the other virtual network.
 ms.service: virtual-network
 ms.devlang: azurecli
 ms.topic: tutorial
@@ -13,12 +12,12 @@ ms.workload: infrastructure
 ms.date: 01/22/2020
 ms.author: kumud
 ms.custom: ''
-ms.openlocfilehash: e95441aab6c8ce7de37ba5f6b08d5f7d54e13347
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b7fcf7f60b18d0d44ded67cb5b22bcdcdcd56a77
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96017925"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106059335"
 ---
 # <a name="tutorial-connect-virtual-networks-with-virtual-network-peering-using-the-azure-portal"></a>Öğretici: Azure portalını kullanarak sanal ağ eşlemesi ile sanal ağları bağlama
 
@@ -32,7 +31,9 @@ Sanal ağ eşlemesi ile sanal ağları birbirine bağlayabilirsiniz. Bu sanal a�
 
 Tercih ederseniz, [Azure CLI](tutorial-connect-virtual-networks-cli.md) veya [Azure PowerShell](tutorial-connect-virtual-networks-powershell.md) kullanarak bu öğreticiyi tamamlayabilirsiniz.
 
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
+## <a name="prerequisites"></a>Önkoşullar
+
+Başlamadan önce, etkin aboneliği olan bir Azure hesabı gerekir. Bir hesabınız yoksa, [ücretsiz olarak bir hesap oluşturabilirsiniz](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 
 ## <a name="log-in-to-azure"></a>Azure'da oturum açma
 
@@ -171,6 +172,7 @@ Artık gerekli olmadığında kaynak grubunu ve içerdiği tüm kaynakları sili
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, sanal ağ eşlemesi ile aynı Azure bölgesindeki iki ağın nasıl bağlanacağını öğrendiniz. Farklı [desteklenen bölgelerde](virtual-network-manage-peering.md#cross-region) ve [farklı Azure aboneliklerinde](create-peering-different-subscriptions.md#portal) sanal ağları eşleyebilir ve eşleme ile [hub ve bağlı bileşen ağ tasarımları](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke#virtual-network-peering) oluşturabilirsiniz. Sanal ağ eşlemesi hakkında daha fazla bilgi için bkz. [Sanal ağ eşlemesine genel bakış](virtual-network-peering-overview.md) ve [Sanal ağ eşlemelerini yönetme](virtual-network-manage-peering.md).
+> [!div class="nextstepaction"]
+> [Sanal ağ eşlemesi hakkında daha fazla bilgi edinin](virtual-network-peering-overview.md)
 
-Kendi bilgisayarınızı VPN üzerinden bir sanal ağa bağlamak ve bir sanal ağdaki veya eşlenmiş sanal ağlardaki kaynaklarla etkileşim kurmak için bkz. [Bilgisayarınızı sanal ağa bağlama](../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+

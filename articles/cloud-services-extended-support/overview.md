@@ -8,20 +8,16 @@ ms.author: gachandw
 ms.reviewer: mimckitt
 ms.date: 10/13/2020
 ms.custom: ''
-ms.openlocfilehash: ecf115b7ce902fcd8b50f0eca32ffda6ef47e068
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: d61314dc89d341e376de7d3904568825ad3cfb04
+ms.sourcegitcommit: af6eba1485e6fd99eed39e507896472fa930df4d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102618483"
+ms.lasthandoff: 04/04/2021
+ms.locfileid: "106293881"
 ---
 # <a name="about-azure-cloud-services-extended-support"></a>Azure Cloud Services hakkında (genişletilmiş destek)
 
-> [!IMPORTANT]
-> Cloud Services (genişletilmiş destek) Şu anda genel önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-Cloud Services (genişletilmiş destek), [Azure Cloud Services](https://azure.microsoft.com/services/cloud-services/) ürüne yönelik yeni bir [Azure Resource Manager](../azure-resource-manager/management/overview.md) tabanlı dağıtım modelidir ve şu anda genel önizlemededir. Cloud Services (genişletilmiş destek), Azure Service Manager kullanılarak dağıtılan Azure Cloud Services ile özellik eşliği ile birlikte bölge esnekliği sağlamanın birincil avantajına sahiptir. Ayrıca rol tabanlı erişim ve denetim (RBAC), Etiketler, ilke ve dağıtım şablonlarını destekler gibi bazı ARM özellikleri de sağlar.  
+Cloud Services (genişletilmiş destek), [Azure Cloud Services](https://azure.microsoft.com/services/cloud-services/) ürüne yönelik yeni bir [Azure Resource Manager](../azure-resource-manager/management/overview.md) tabanlı dağıtım modelidir ve genel kullanıma sunulmuştur. Cloud Services (genişletilmiş destek), Azure Service Manager kullanılarak dağıtılan Azure Cloud Services ile özellik eşliği ile birlikte bölge esnekliği sağlamanın birincil avantajına sahiptir. Ayrıca rol tabanlı erişim ve denetim (RBAC), Etiketler, ilke ve dağıtım şablonlarını destekler gibi bazı ARM özellikleri de sunar.  
 
 Bu değişiklik ile, Cloud Services için Azure Service Manager tabanlı dağıtım modeli [Cloud Services (klasik)](../cloud-services/cloud-services-choose-me.md)olarak yeniden adlandırılacaktır. Web ve bulut uygulamalarınızı ve hizmetlerinizi oluşturma ve hızla dağıtma imkanını koruyabilirsiniz. Bulut hizmetleri altyapınızı geçerli talebe göre ölçeklendirebilir ve uygulamalarınızın performansının aynı anda maliyetleri azaltırken devam edebilmesini sağlayabilirsiniz.  
 
@@ -48,12 +44,9 @@ Dağıtıma göre Cloud Services (klasik) ve Cloud Services (genişletilmiş des
 - [Azure Resource Manager](../azure-resource-manager/templates/overview.md) aracılığıyla dağıtılan tüm kaynaklar bir sanal ağ içinde olmalıdır. Sanal ağlar ve alt ağlar, mevcut Azure Resource Manager API 'Leri kullanılarak Azure Resource Manager oluşturulur ve Cloud Services dağıtımında. cscfg öğesinin NetworkConfiguration bölümünde başvurulmalıdır (genişletilmiş destek).   
 
 - Her bulut hizmeti (genişletilmiş destek), tek bir bağımsız dağıtımdır. Cloud Services (genişletilmiş destek), tek bir bulut hizmeti içinde birden çok yuvası desteklemez.  
-    - VIP takas <sup>*</sup> özelliği, iki bulut hizmeti arasında takas için kullanılabilir (genişletilmiş destek). Bir bulut hizmetinin yeni bir sürümünü test etmek ve hazırlamak için bir bulut hizmeti dağıtın (genişletilmiş destek) ve başka bir bulut hizmeti ile VIP swapolarak etiketleyin (genişletilmiş destek)  
+    - VIP takas özelliği, iki bulut hizmeti arasında takas için kullanılabilir (genişletilmiş destek). Bir bulut hizmetinin yeni bir sürümünü test etmek ve hazırlamak için bir bulut hizmeti dağıtın (genişletilmiş destek) ve başka bir bulut hizmeti ile VIP swapolarak etiketleyin (genişletilmiş destek)  
 
 - Etki alanı adı hizmeti (DNS) etiketi bir bulut hizmeti (genişletilmiş destek) için isteğe bağlıdır. Azure Resource Manager, DNS etiketi, bulut hizmetiyle ilişkili genel IP kaynağının bir özelliğidir. 
-
-
-<sup>*</sup> Cloud Services için VIP takas (genişletilmiş destek) genel önizleme sırasında kullanılamaz.  
 
 ## <a name="migration-to-azure-resource-manager"></a>Azure Resource Manager geçiş
 

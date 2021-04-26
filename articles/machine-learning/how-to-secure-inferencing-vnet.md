@@ -11,12 +11,12 @@ ms.author: peterlu
 author: peterclu
 ms.date: 10/23/2020
 ms.custom: contperf-fy20q4, tracking-python, contperf-fy21q1, devx-track-azurecli
-ms.openlocfilehash: 1a1a9158c06a12caaeb5702f2fdf7da3c801c143
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 610ab82bfc4665fbb30aa3d3bc0448fa9338689c
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103573447"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872560"
 ---
 # <a name="secure-an-azure-machine-learning-inferencing-environment-with-virtual-networks"></a>Sanal ağlarla Azure Machine Learning ınvenli bir ortamın güvenliğini sağlama
 
@@ -221,7 +221,7 @@ az ml computetarget create aks -n myaks --load-balancer-type InternalLoadBalance
 > [!IMPORTANT]
 > CLı kullanarak yalnızca iç yük dengeleyiciye sahip bir AKS kümesi oluşturabilirsiniz. Mevcut bir kümeyi iç yük dengeleyiciyi kullanacak şekilde yükseltmek için az ml komutu yoktur.
 
-Daha fazla bilgi için, [az ml computetarget Create aks](/cli/azure/ext/azure-cli-ml/ml/computetarget/create#ext-azure-cli-ml-az-ml-computetarget-create-aks) Reference bölümüne bakın.
+Daha fazla bilgi için, [az ml computetarget Create aks](/cli/azure/ml/computetarget/create#az_ml_computetarget_create_aks) Reference bölümüne bakın.
 
 ---
 

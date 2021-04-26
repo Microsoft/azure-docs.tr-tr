@@ -11,12 +11,12 @@ ms.date: 04/17/2018
 ms.author: anvang
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: ffffeb38aeb9d1f01f376d58a52323bb7b84b306
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3c105fe217834dc9e0e652a42ebf3b526972b228
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98676332"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105961379"
 ---
 # <a name="quickstart-scale-compute-for-dedicated-sql-pool-formerly-sql-dw-in-azure-synapse-analytics-using-t-sql"></a>Hızlı başlangıç: T-SQL kullanarak Azure SYNAPSE Analytics 'te adanmış SQL Havuzu (eski adıyla SQL DW) için işlem ölçekleme
 
@@ -99,12 +99,12 @@ Veri ambarı birimlerini değiştirmek için:
 
 ## <a name="monitor-scale-change-request"></a>Ölçek değişikliği isteğini izleme
 
-Önceki değişiklik isteğinin ilerlemesini görmek için sys.dm_operation_status dinamik yönetim görünümünü (DMV) yoklamak üzere `WAITFORDELAY` T-SQL söz dizimini kullanabilirsiniz.
+Önceki değişiklik isteğinin ilerlemesini görmek için `WAITFORDELAY` T-SQL söz dizimini kullanarak [sys.dm_operation_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database?view=azure-sqldw-latest&preserve-view=true) dinamik yönetim görünümünü (DMV) yoklayın.
 
 Hizmet nesnesi değişiklik durumunu yoklamak için:
 
 1. **master** seçeneğine sağ tıklayıp **Yeni Sorgu**’yu seçin.
-2. sys.dm_operation_status DMV’sini yoklamak için aşağıdaki sorguyu çalıştırın.
+2. [Sys.dm_operation_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database?view=azure-sqldw-latest&preserve-view=true) DMV ' i yoklamak için aşağıdaki sorguyu çalıştırın.
 
     ```sql
     WHILE

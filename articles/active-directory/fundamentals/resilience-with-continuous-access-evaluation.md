@@ -13,12 +13,12 @@ ms.author: baselden
 ms.reviewer: ajburnle
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1a12cc3299fbb5916afba48d2608024f28999634
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 2d792c1eb0a85f2a898d1dc5c63047a4553f13b0
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98724636"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106106781"
 ---
 # <a name="build-resilience-by-using-continuous-access-evaluation"></a>Sürekli erişim değerlendirmesi kullanarak esnekliği derleme
 
@@ -47,6 +47,8 @@ CAE 'yi kullanmak için hem hizmet hem de istemci CAE özellikli olmalıdır. Ex
 Microsoft, üçüncü taraf uygulamaların bu özelliği kullanmasına imkan tanıyan [standartlar](https://openid.net/wg/sse/) oluşturmak için sektörle çalışmaktadır. Ayrıca, CAE özellikli uygulamalar da geliştirebilirsiniz. Daha fazla bilgi için bkz. uygulamanızda esnekliği oluşturma.
 
 ## <a name="how-do-i-implement-cae"></a>CAE uygulama Nasıl yaparım??
+
+* [Kodunuzu, CAE özellikli API 'leri kullanacak şekilde güncelleştirin](../develop/app-resilience-continuous-access-evaluation.md).
 
 * Azure AD güvenlik yapılandırması 'nda [CAE 'Yi etkinleştirin](../conditional-access/concept-continuous-access-evaluation.md) .
 

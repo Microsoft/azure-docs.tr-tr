@@ -1,5 +1,5 @@
 ---
-title: Read v3. x OCR kapsayıcılarına geçme
+title: Read v3. x kapsayıcılarına geçme
 titleSuffix: Azure Cognitive Services
 description: V3 okuma OCR kapsayıcılarına geçiş yapmayı öğrenin
 services: cognitive-services
@@ -10,12 +10,12 @@ ms.subservice: computer-vision
 ms.topic: overview
 ms.date: 01/29/2021
 ms.author: aahi
-ms.openlocfilehash: baa91e21979022064aaf13aca6079f8d092d673e
-ms.sourcegitcommit: 54e1d4cdff28c2fd88eca949c2190da1b09dca91
+ms.openlocfilehash: 1cc17306265e6e8ba2e7fb3f570d0017b006b84f
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/31/2021
-ms.locfileid: "99221162"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106284694"
 ---
 # <a name="migrate-to-the-read-v3x-ocr-containers"></a>Read v3. x OCR kapsayıcılarına geçiş
 
@@ -24,7 +24,7 @@ Görüntü İşleme okuma OCR kapsayıcısının 2. sürümünü kullanıyorsan�
 
 ## <a name="configuration-changes"></a>Yapılandırma değişiklikleri
 
-* `ReadEngineConfig:ResultExpirationPeriod` artık desteklenmiyor. Okuma kapsayıcısının, 48 saat sonra bir istekle ilişkili sonuçları ve meta verileri kaldıran yerleşik bir cron işi vardır.
+* `ReadEngineConfig:ResultExpirationPeriod` artık desteklenmiyor. Okuma OCR kapsayıcısının, 48 saat sonra bir istekle ilişkili sonuçları ve meta verileri kaldıran yerleşik bir cron işi vardır.
 * `Cache:Redis:Configuration` artık desteklenmiyor. Önbellek v3. x kapsayıcılarında kullanılmaz, bu yüzden ayarlamanız gerekmez.
 
 ## <a name="api-changes"></a>API değişiklikleri
@@ -39,7 +39,7 @@ Uygulamalarınızı bulut tabanlı okuma API 'sinin sürüm 3 ' ü kullanacak ş
 
 ## <a name="memory-requirements"></a>Bellek gereksinimleri
 
-Gereksinimler ve öneriler, 29 satır ve toplam 803 karakter içeren taranmış bir iş harfinin 8 MB 'lik bir görüntüsünü kullanarak saniyede tek bir istek ile kıyaslamayı temel alır. Aşağıdaki tabloda, her bir okuma kapsayıcısı için kaynakların en düşük ve önerilen ayırması açıklanmaktadır.
+Gereksinimler ve öneriler, 29 satır ve toplam 803 karakter içeren taranmış bir iş harfinin 8 MB 'lik bir görüntüsünü kullanarak saniyede tek bir istek ile kıyaslamayı temel alır. Aşağıdaki tabloda her bir okuma OCR kapsayıcısı için kaynakların en düşük ve önerilen ayırması açıklanmaktadır.
 
 |Kapsayıcı  |Minimum | Önerilen  |
 |---------|---------|------|
@@ -81,7 +81,7 @@ Zamanlayıcıyı, `Queue:Azure:QueueVisibilityTimeoutInMilliseconds` başka bir 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * Yapılandırma ayarları için [kapsayıcıları](computer-vision-resource-container-config.md) yapılandırmayı gözden geçir
-* Basılan ve el yazısı metni tanıma hakkında daha fazla bilgi edinmek için [görüntü işleme genel bakışı](overview.md) inceleyin
-* Kapsayıcı tarafından desteklenen yöntemler hakkındaki ayrıntılar için [görüntü işleme API'si](//westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa) başvurun.
+* [OCR genel bakışını](overview-ocr.md) inceleyerek yazdırılmış ve el yazısı metin tanıma hakkında daha fazla bilgi edinin
+* Kapsayıcı tarafından desteklenen yöntemler hakkındaki ayrıntılar için [okuma API](//westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa) 'sine bakın.
 * Görüntü İşleme işlevlerle ilgili sorunları çözmek için [sık sorulan sorular (SSS)](FAQ.md) bölümüne bakın.
 * Daha fazla bilişsel [Hizmetler kapsayıcısı](../cognitive-services-container-support.md) kullanın

@@ -13,12 +13,12 @@ ms.date: 10/03/2018
 ms.author: ryanwi
 ms.reviewer: jlu, annaba, hirsin
 ROBOTS: NOINDEX
-ms.openlocfilehash: d68cfb91445e2055cb3c3feb88bf925987ea9852
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: bf50db4c463f5161adcc88d69eb2ae8970526103
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101687405"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515626"
 ---
 # <a name="how-to-migrate-from-the-azure-access-control-service"></a>Nasıl yapılır: Azure Access Control Service geçirme
 
@@ -135,7 +135,7 @@ Access Control tarafından verilen belirteçleri kabul eden her bir Microsoft bu
 | Azure DataMarket | [Bilişsel Hizmetler API'si geçirin](https://azure.microsoft.com/services/cognitive-services/) |
 | BizTalk Services | [Azure App Service Logic Apps özelliğine geçiş yapın](https://azure.microsoft.com/services/cognitive-services/) |
 | Azure Media Services | [Azure AD kimlik doğrulamasına geçiş](https://azure.microsoft.com/blog/azure-media-service-aad-auth-and-acs-deprecation/) |
-| Azure Backup | [Azure Backup aracısını yükseltme](../../backup/backup-azure-file-folder-backup-faq.md) |
+| Azure Backup | [Azure Backup aracısını yükseltme](../../backup/backup-azure-file-folder-backup-faq.yml) |
 
 <!-- Dynamics CRM: Migrate to new SDK, Dynamics team handling privately -->
 <!-- Azure RemoteApp deprecated in favor of Citrix: https://www.zdnet.com/article/microsoft-to-drop-azure-remoteapp-in-favor-of-citrix-remoting-technologies/ -->

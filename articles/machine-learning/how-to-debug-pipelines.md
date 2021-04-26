@@ -10,12 +10,12 @@ ms.author: laobri
 ms.date: 10/22/2020
 ms.topic: troubleshooting
 ms.custom: troubleshooting, devx-track-python, contperf-fy21q2
-ms.openlocfilehash: 195942d1787cdef51ee480fa5c5595db99bc7c78
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 3a85566f395e97bbe88d52a8b306c7e0aa15669d
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102522096"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817350"
 ---
 # <a name="troubleshooting-machine-learning-pipelines"></a>Makine öğrenimi ardışık düzenleri sorunlarını giderme
 
@@ -27,8 +27,8 @@ Aşağıdaki tabloda, potansiyel çözümlerle birlikte işlem hattı geliştirm
 
 | Sorun | Olası çözüm |
 |--|--|
-| Verileri dizine geçiremedi `PipelineData` | Komut dosyasında, işlem hattının adım çıkış verilerini beklediği yere karşılık gelen bir dizin oluşturduğunuzdan emin olun. Çoğu durumda, bir giriş bağımsız değişkeni çıkış dizinini tanımlar ve ardından dizini açıkça oluşturursunuz. `os.makedirs(args.output_dir, exist_ok=True)`Çıkış dizinini oluşturmak için kullanın. Bu tasarım modelini gösteren bir Puanlama betiği örneği için [öğreticiye](tutorial-pipeline-batch-scoring-classification.md#write-a-scoring-script) bakın. |
-| Bağımlılık hataları | Yerel olarak test edilirken gerçekleşmeyen uzak işlem hattınızda bağımlılık hataları görürseniz, uzak ortam bağımlılıklarınızın ve sürümlerinin test ortamınızdaki olanlarla eşleştiğinden emin olun. (Bkz. [ortam oluşturma, önbelleğe alma ve yeniden kullanma](./concept-environments.md#environment-building-caching-and-reuse)|
+| Verileri dizine geçiremedi `PipelineData` | Betikte işlem hattınızın adım çıkış verilerini beklediği konuma karşılık gelen bir dizin oluşturduğunuzdan emin olun. Çoğu durumda bir giriş bağımsız değişkeni çıkış dizinini tanımlar ve ardından dizini açıkça oluşturursunuz. Çıkış dizinini oluşturmak için `os.makedirs(args.output_dir, exist_ok=True)` kullanın. Bu tasarım modelini gösteren bir Puanlama betiği örneği için [öğreticiye](tutorial-pipeline-batch-scoring-classification.md#write-a-scoring-script) bakın. |
+| Bağımlılık hataları | Uzak işlem hattınızda yerel testlerde oluşmayan bağımlılık hataları görüyorsanız, uzak ortam bağımlılıklarınızın ve sürümlerinizin test ortamınızdakilerle eşleştiğini onaylayın. (Bkz. [ortam oluşturma, önbelleğe alma ve yeniden kullanma](./concept-environments.md#environment-building-caching-and-reuse)|
 | İşlem hedefleri ile belirsiz hatalar | İşlem hedeflerini silmeyi ve yeniden oluşturmayı deneyin. İşlem hedeflerini yeniden oluşturmak hızlı bir şekilde yapılır ve bazı geçici sorunları çözebilir. |
 | İşlem hattı adımları yeniden kullanma | Adım yeniden kullanım varsayılan olarak etkindir, ancak işlem hattı adımında devre dışı bırakılmadığınızdan emin olun. Yeniden kullanım devre dışıysa, `allow_reuse` adımdaki parametre olarak ayarlanır `False` . |
 | İşlem hattı gereksiz yere yeniden çalıştırılıyor | Adımların yalnızca temel alınan verileri veya betikleri değiştiğinde yeniden çalıştığından emin olmak için, her adımın kaynak kodu dizinlerinizi ayırın. Birden çok adım için aynı kaynak dizinini kullanırsanız, gereksiz yeniden çalıştırma işlemleri yaşayabilirsiniz. İşlem `source_directory` hattı adımı nesnesi üzerinde parametresini kullanarak bu adım için yalıtılmış dizininizi işaret edin ve `source_directory` birden çok adım için aynı yolu kullanmadığınız emin olun. |
@@ -192,8 +192,8 @@ Aşağıdaki tabloda, işlem hatları için farklı hata ayıklama seçenekleri 
 
 | Kitaplık                    | Tür   | Örnek                                                          | Hedef                                  | Kaynaklar                                                                                                                                                                                                                                                                                                                    |
 |----------------------------|--------|------------------------------------------------------------------|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Azure Machine Learning SDK’sı | Metric | `run.log(name, val)`                                             | Azure Machine Learning Portal Kullanıcı arabirimi             | [Denemeleri izleme](how-to-track-experiments.md)<br>[azureml. Core. Run sınıfı](/python/api/azureml-core/azureml.core.run%28class%29)                                                                                                                                                 |
-| Python yazdırma/günlüğe kaydetme    | Günlük    | `print(val)`<br>`logging.info(message)`                          | Sürücü günlükleri, Azure Machine Learning Tasarımcısı | [Denemeleri izleme](how-to-track-experiments.md)<br><br>[Python günlüğü](https://docs.python.org/2/library/logging.html)                                                                                                                                                                       |
+| Azure Machine Learning SDK’sı | Metric | `run.log(name, val)`                                             | Azure Machine Learning Portal Kullanıcı arabirimi             | [Denemeleri izleme](how-to-log-view-metrics.md)<br>[azureml. Core. Run sınıfı](/python/api/azureml-core/azureml.core.run%28class%29)                                                                                                                                                 |
+| Python yazdırma/günlüğe kaydetme    | Günlük    | `print(val)`<br>`logging.info(message)`                          | Sürücü günlükleri, Azure Machine Learning Tasarımcısı | [Denemeleri izleme](how-to-log-view-metrics.md)<br><br>[Python günlüğü](https://docs.python.org/2/library/logging.html)                                                                                                                                                                       |
 | OpenCensus Python          | Günlük    | `logger.addHandler(AzureLogHandler())`<br>`logging.log(message)` | Application Insights-izlemeler                | [Application Insights’ta işlem hatlarında hata ayıklama](./how-to-log-pipelines-application-insights.md)<br><br>[OpenCensus Azure İzleyici Dışarı Aktarıcıları](https://github.com/census-instrumentation/opencensus-python/tree/master/contrib/opencensus-ext-azure)<br>[Python günlüğü tanıtım rehberi](https://docs.python.org/3/howto/logging-cookbook.html) |
 
 #### <a name="logging-options-example"></a>Günlüğe kaydetme seçenekleri örneği

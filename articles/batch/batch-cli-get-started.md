@@ -4,12 +4,12 @@ description: Azure Batch hizmet kaynaklarını yönetmek üzere Azure CLI’daki
 ms.topic: how-to
 ms.date: 07/24/2018
 ms.custom: H1Hack27Feb2017, devx-track-azurecli
-ms.openlocfilehash: bee25d9b8985f1627a5cfc05bfb336b83be60f74
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: befe2f6fe67ce7c2c4bb61153344103ee2aa70cb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92144757"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107768442"
 ---
 # <a name="manage-batch-resources-with-azure-cli"></a>Batch kaynaklarını Azure CLI ile yönetme
 
@@ -54,7 +54,7 @@ Azure'da oturum açmanın birkaç farklı yolu vardır ve hepsi [Azure CLI ile o
 1. [Etkileşimli olarak oturum açma](/cli/azure/authenticate-azure-cli). Azure CLI komutlarını komut satırından çalıştırmak için etkileşimli olarak oturum açın.
 2. [Hizmet sorumlusu Ile oturum açın](/cli/azure/authenticate-azure-cli). Azure CLI komutlarını bir betikten veya uygulamadan çalıştırdığınızda hizmet sorumlusuyla oturum açın.
 
-Bu makalede Azure'da etkileşimli oturum açmayı göstereceğiz. Komut satırına [az login](/cli/azure/reference-index#az-login) yazın:
+Bu makalede Azure'da etkileşimli oturum açmayı göstereceğiz. Komut satırına [az login](/cli/azure/reference-index#az_login) yazın:
 
 ```azurecli
 # Log in to Azure and authenticate interactively.
@@ -69,7 +69,7 @@ az login
 
 ### <a name="log-in-to-your-batch-account"></a>Batch hesabınızda oturum açma
 
-Havuzlar, işler ve görevler gibi Batch kaynaklarını yönetmek üzere Azure CLI kullanmak için Batch hesabınızda oturum açıp kimlik doğrulamasından geçmeniz gerekir. Batch hizmetinde oturum açmak için [az batch account login](/cli/azure/batch/account#az-batch-account-login) komutunu kullanın. 
+Havuzlar, işler ve görevler gibi Batch kaynaklarını yönetmek üzere Azure CLI kullanmak için Batch hesabınızda oturum açıp kimlik doğrulamasından geçmeniz gerekir. Batch hizmetinde oturum açmak için [az batch account login](/cli/azure/batch/account#az_batch_account_login) komutunu kullanın. 
 
 Batch hesabınızla kimlik doğrulamasından geçmek için kullanabileceğiniz iki seçenek vardır:
 
@@ -81,7 +81,7 @@ Batch hesabınızla kimlik doğrulamasından geçmek için kullanabileceğiniz i
 
     Azure AD 'nin bir avantajı, Azure rol tabanlı erişim denetimi (Azure RBAC) sunuyor. Azure RBAC ile kullanıcının erişimi, hesap anahtarlarına sahip olup olmamaları değil, kendilerine atanan rolüne bağlıdır. Hesap anahtarlarını yönetmek yerine Azure rollerini yönetebilir ve Azure AD 'nin erişim ve kimlik doğrulamasına izin verebilirsiniz.  
 
-     Azure AD ile Batch hesabınızda oturum açmak için [az batch account login](/cli/azure/batch/account#az-batch-account-login) komutunu çağırın: 
+     Azure AD ile Batch hesabınızda oturum açmak için [az batch account login](/cli/azure/batch/account#az_batch_account_login) komutunu çağırın: 
 
     ```azurecli
     az batch account login -g myresource group -n mybatchaccount

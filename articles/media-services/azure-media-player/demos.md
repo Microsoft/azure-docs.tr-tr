@@ -5,13 +5,13 @@ author: IngridAtMicrosoft
 ms.author: inhenkel
 ms.service: media-services
 ms.topic: article
-ms.date: 04/24/2020
-ms.openlocfilehash: 584748b23f526e6f03b543b8298927e3f202f743
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/05/2021
+ms.openlocfilehash: b67edd55906385f1eddeb576b5f4c97b18e10153
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "82139309"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448500"
 ---
 # <a name="azure-media-player-demos"></a>Azure Media Player tanıtımları
 
@@ -19,7 +19,7 @@ Azure Media Player gösterileri için bağlantıların listesi aşağıda verilm
 
 ## <a name="demo-listing"></a>Tanıtım listesi
 
-| Örnek adı | JavaScript aracılığıyla programlama | HTML5 video öğesi aracılığıyla statik | Description |
+| Örnek adı | JavaScript aracılığıyla programlama | HTML5 video öğesi aracılığıyla statik | Açıklama |
 | ------------|----------------------------|-------------------------------------|--------------|
 | Temel |
 | Kaynağı ayarla | [Dinamik](https://amp.azure.net/libs/amp/latest/samples/dynamic_setsource.html) | [Static](https://amp.azure.net/libs/amp/latest/samples/videotag_setsource.html) |Korumasız içeriği kayıttan yürütme.|

@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: troubleshooting
 ms.date: 03/30/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 8c6d26de62364b6aca671d1e4283a01c1b78c397
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+manager: femila
+ms.openlocfilehash: 12be4611f0583c6da630b9e5a0e4b5a82ebfa650
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95014841"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106444284"
 ---
 # <a name="tenant-and-host-pool-creation-in-windows-virtual-desktop-classic"></a>Windows sanal masaüstünde kiracı ve konak havuzu oluşturma (klasik)
 
@@ -31,11 +31,11 @@ Windows 10 Enterprise çoklu oturum görüntüsünü kullanmak için Azure Marke
 > [!div class="mx-imgBorder"]
 > ![Sanal masaüstleri için Windows 10 Enterprise, sürüm 1809 ' ı seçme ekran görüntüsü.](../media/AzureMarketPlace.png)
 
-## <a name="creating-windows-virtual-desktop-tenant"></a>Windows sanal masaüstü kiracısı oluşturuluyor
+## <a name="creating-windows-virtual-desktop-tenant&quot;></a>Windows sanal masaüstü kiracısı oluşturuluyor
 
 Bu bölümde, Windows sanal masaüstü kiracısı oluşturulurken olası sorunlar ele alınmaktadır.
 
-### <a name="error-aadsts650052-the-app-needs-access-to-a-service"></a>Hata: AADSTS650052 uygulamanın bir hizmete erişmesi gerekiyor.
+### <a name=&quot;error-aadsts650052-the-app-needs-access-to-a-service&quot;></a>Hata: AADSTS650052 uygulamanın bir hizmete erişmesi gerekiyor.
 
 Ham hata örneği:
 
@@ -406,7 +406,7 @@ GitHub Azure Resource Manager şablonu çalıştırıyorsanız, Windows sanal ma
 
 ### <a name="error-vmsubnet-not-available-when-configuring-virtual-networks"></a>Hata: sanal ağları yapılandırırken vmSubnet kullanılamaz
 
-**Neden:** WVD Market şablonunda, Kullanıcı arabirimi yalnızca şablonda belirtilen toplam VM sayısı kadar en az sayıda IP adresi bulunan alt ağları görüntüler. Alt ağdaki kullanılabilir IP adreslerinin gerçek sayısının yalnızca dağıtılan yeni VM sayısına eşit olması gerekir, ancak bu geçerli kullanıcı arabirimi tarafından hesaplanamaz.
+**Neden:** Windows sanal masaüstü marketi şablonunda, Kullanıcı arabirimi yalnızca şablonda belirtilen toplam VM sayısı kadar en az sayıda IP adresi bulunan alt ağları görüntüler. Alt ağdaki kullanılabilir IP adreslerinin gerçek sayısının yalnızca dağıtılan yeni VM sayısına eşit olması gerekir, ancak bu geçerli kullanıcı arabirimi tarafından hesaplanamaz.
 
 **Çözüm:** Market Kullanıcı arabirimi kullanılarak eklenmekte olan VM sayısı kadar en az sayıda IP adresi bulunan bir alt ağ belirtebilirsiniz; Bu, [mevcut bir dağıtımı](expand-existing-host-pool-2019.md#redeploy-from-azure) yeniden [dağıtırken veya GitHub 'DAN temel alınan ARM şablonunu kullanarak dağıttığınızda](create-host-pools-arm-template.md#run-the-azure-resource-manager-template-for-provisioning-a-new-host-pool), "**existingsubnetname**" parametresindeki alt ağ adı belirtilerek yapılabilir.
 

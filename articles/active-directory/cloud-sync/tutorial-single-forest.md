@@ -11,12 +11,12 @@ ms.date: 12/05/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a93ce1c4274f63a863880e932b247726639e5cd9
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a3bc9378539e6a7f98e34d0a149848d0e892c224
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98614686"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306101"
 ---
 # <a name="tutorial-integrate-a-single-forest-with-a-single-azure-ad-tenant"></a>Öğretici: tek bir Azure AD kiracısı ile tek bir ormanı tümleştirme
 
@@ -51,7 +51,7 @@ Bu öğreticide oluşturduğunuz ortamı test için veya bulut eşitlemesine dah
    - Sertifika doğrulaması için şu URL 'Leri engellemeyi kaldırın: **mscrl.Microsoft.com:80**, **CRL.Microsoft.com:80**, **OCSP.msocsp.com:80** ve **www \. Microsoft.com:80**. Bu URL 'Ler diğer Microsoft ürünleriyle sertifika doğrulaması için kullanıldığından, bu URL 'Lerin engeli kaldırılmış olabilir.
 
 ## <a name="install-the-azure-ad-connect-provisioning-agent"></a>Azure AD Connect sağlama aracısını yükler
-1. Etki alanına katılmış sunucuda oturum açın.  [Temel ad ve Azure ortamı](tutorial-basic-ad-azure.md) ÖĞRETICISINI kullanıyorsanız DC1 olur.
+1. Etki alanına katılmış sunucuda oturum açın.  [Temel bir D ve Azure ortamı](tutorial-basic-ad-azure.md) ÖĞRETICISINI kullanıyorsanız DC1 olur.
 2. Yalnızca bulutta bulunan genel yönetici kimlik bilgilerini kullanarak Azure portal oturum açın.
 3. Sol tarafta **Azure Active Directory**' ı seçin, **Azure AD Connect**' a tıklayın ve ortadaki **bulut eşitlemesini Yönet**' i seçin.
 
@@ -88,7 +88,7 @@ Aracının Azure tarafından görüldüğünü doğrulamak için şu adımları 
 ![Azure portalda](media/how-to-install/install-6.png)</br>
 
 3.  **Azure AD Connect bulut eşitleme** ekranında **tüm aracıları gözden geçir**' e tıklayın.
-![Azure AD sağlama](media/how-to-install/install-7.png)</br>
+![Azure A D sağlama](media/how-to-install/install-7.png)</br>
  
 4. **Şirket içi sağlama aracıları ekranında** , yüklediğiniz aracıları görürsünüz.  Söz konusu aracının orada olduğunu ve **etkin** olarak işaretlendiğinden emin olun.
 ![Aracıları sağlama](media/how-to-install/verify-1.png)</br>
@@ -110,28 +110,28 @@ Aracının çalıştığını doğrulamak için şu adımları izleyin:
 4.   
  ![ "Bulut eşitlemesini Yönet" bağlantısını gösteren bulut eşitlemesini Yönet ekran görüntüsünü seçin.](media/how-to-configure/manage-1.png)
 5.   
- ![ "Yeni yapılandırma" bağlantısı vurgulanmış şekilde Azure AD Connect bulut eşitleme ekranının yeni yapılandırma ekran görüntüsü ' ne tıklayın.](media/tutorial-single-forest/configure-1.png)
+ ![ "Yeni yapılandırma" bağlantısı vurgulanmış şekilde, Azure A 'nın bulut eşitleme ekranının yeni yapılandırma ekran görüntüsü ' ne tıklayın.](media/tutorial-single-forest/configure-1.png)
 7.  Yapılandırma ekranında bir **bildirim e-postası** girin, seçiciyi **etkinleştirmek** için taşıyın ve **Kaydet**' e tıklayın.
 ![Bildirim e-postasına sahip ekranı Yapılandır ekranının ekran görüntüsü doldurulmuş ve seçili şekilde etkin.](media/how-to-configure/configure-2.png)
 1.  Yapılandırma durumu artık **sağlıklı** olmalıdır.
-![Sağlıklı durumu gösteren Azure AD Connect bulut eşitleme ekranının ekran görüntüsü.](media/how-to-configure/manage-4.png)
+![Sağlıklı durumu gösteren Azure A Connect bulut eşitleme ekranının ekran görüntüsü.](media/how-to-configure/manage-4.png)
 
 ## <a name="verify-users-are-created-and-synchronization-is-occurring"></a>Kullanıcıların oluşturulduğunu ve eşitlemenin gerçekleştiğini doğrula
-Artık şirket içi dizinimizde bulunan kullanıcıların Azure AD kiracımızda bulunduğundan emin olursunuz.  Bu işlem işleminin tamamlanması birkaç saat sürebilir.  Kullanıcıların eşitlendiğinden emin olmak için aşağıdakileri yapın.
+Artık şirket içi dizininizde bulunan kullanıcıların eşitlenmiş olduğunu ve artık Azure AD kiracınızda mevcut olduğunu doğrulayacaksınız.  Bu işlem işleminin tamamlanması birkaç saat sürebilir.  Kullanıcıların eşitlendiğinden emin olmak için aşağıdakileri yapın.
 
 
 1. [Azure portalına](https://portal.azure.com) gidip Azure aboneliği olan bir hesapla oturum açın.
 2. Sol tarafta **Azure Active Directory** ' yi seçin.
 3. **Yönet** bölümünde **Kullanıcılar**'ı seçin.
-4. Kiracımızda yeni kullanıcıları gördiğinizi doğrulayın</br>
+4. Kiracınızdaki yeni kullanıcıları gördiğinizi doğrulayın</br>
 
-## <a name="test-signing-in-with-one-of-our-users"></a>Kullanıcılarımızdan biriyle oturum açma testi
+## <a name="test-signing-in-with-one-of-your-users"></a>Kullanıcılarınızla oturum açma testi yapın
 
 1. [https://myapps.microsoft.com](https://myapps.microsoft.com) adresine gidin
-2. Yeni kiracımızda oluşturulmuş bir kullanıcı hesabıyla oturum açın.  Şu biçimi kullanarak oturum açmanız gerekir: ( user@domain.onmicrosoft.com ). Kullanıcının şirket içinde oturum açması için kullandığı parolayı kullanın.</br>
+2. Kiracınızda oluşturulmuş bir kullanıcı hesabıyla oturum açın.  Şu biçimi kullanarak oturum açmanız gerekir: ( user@domain.onmicrosoft.com ). Kullanıcının şirket içinde oturum açması için kullandığı parolayı kullanın.</br>
    ![Doğrulama](media/tutorial-single-forest/verify-1.png)</br>
 
-Artık Azure 'un sunabileceği bir karma kimlik ortamını test etmek ve tanımak için kullanabileceğiniz bir karma kimlik ortamı oluşturdunuz.
+Azure AD Connect bulut eşitlemesini kullanarak bir karma kimlik ortamını başarıyla yapılandırdınız.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar 

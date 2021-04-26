@@ -5,14 +5,14 @@ author: yashesvi
 ms.service: cost-management-billing
 ms.subservice: reservations
 ms.topic: how-to
-ms.date: 02/10/2021
+ms.date: 03/10/2021
 ms.author: banders
-ms.openlocfilehash: 4fb15a7e677d566454d5d487c1cf69767d7f3a30
-ms.sourcegitcommit: d4734bc680ea221ea80fdea67859d6d32241aefc
+ms.openlocfilehash: 4059318e6b8052f3b0221c87e8a357cfc8679e44
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/14/2021
-ms.locfileid: "100368753"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532757"
 ---
 # <a name="charge-back-azure-reservation-costs"></a>Azure Rezervasyon maliyetlerini geri ödeme
 
@@ -22,8 +22,8 @@ Tek aboneliğe sahip kullanıcılar, itfa edilmiş maliyet verilerini kullanım 
 
 ## <a name="see-reservation-usage-data-for-show-back-and-charge-back"></a>Geri göstermek ve geri ücret için ayırma kullanım verilerine bakın
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. **Maliyet yönetimi + faturalandırma** sayfasına gidin 
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. **Maliyet Yönetimi + Faturalama**’ya gidin 
 3. Sol gezinmede **maliyet analizini** seçin 
 4. **Gerçek Maliyet** bölümünde **İtfa Edilen Maliyet** ölçümünü seçin.
 5. Rezervasyon tarafından kullanılan kaynakları görmek için **Rezervasyon**’a bir filtre uygulayın ve sonra rezervasyonları seçin.
@@ -33,13 +33,13 @@ Tek aboneliğe sahip kullanıcılar, itfa edilmiş maliyet verilerini kullanım 
 
 [![Geri ödeme için kullanabileceğiniz rezervasyon kaynağı maliyetlerini gösteren örnek](./media/charge-back-usage/amortized-reservation-costs.png)](./media/charge-back-usage/amortized-reservation-costs.png#lightbox)
 
-Azure portalında rezervasyon kullanım maliyetlerini nasıl görüntüleyeceğinizi gösteren bir videoyu aşağıda bulabilirsiniz:
+İşte, Azure portal abonelik, kaynak grubu ve kaynak düzeyinde rezervasyon kullanım maliyetlerinin nasıl görüntüleneceğini gösteren bir video.
 
  > [!VIDEO https://www.microsoft.com/videoplayer/embed/RE4sQOw] 
 
 ## <a name="get-the-data-for-show-back-and-charge-back"></a>Geri göstermek ve geri ücret almak için verileri alın
 1. [Azure portalında](https://portal.azure.com) oturum açın.
-2. **Maliyet yönetimi + faturalandırma** sayfasına gidin 
+2. **Maliyet Yönetimi + Faturalama**’ya gidin 
 3. Sol gezinmede **dışarı aktar** 'ı seçin 
 4. **Ekle** düğmesine tıklayın
 5. Ölçüm düğmesi olarak Itfası maliyeti ' ni seçin ve dışa aktarma dosyanızı ayarlayın

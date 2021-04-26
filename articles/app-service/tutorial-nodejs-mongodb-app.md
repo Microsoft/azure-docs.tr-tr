@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.date: 06/16/2020
 ms.custom: mvc, cli-validate, seodec18, devx-track-js, devx-track-azurecli
 zone_pivot_groups: app-service-platform-windows-linux
-ms.openlocfilehash: b3d88c99ab0e9e204eb4d7dd78dc319f889a5e7d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b1dcd413f301f25460cb29f1bb20e67a37ac6ebb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97347668"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767333"
 ---
 # <a name="tutorial-build-a-nodejs-and-mongodb-app-in-azure"></a>Öğretici: Azure 'da Node.js ve MongoDB uygulaması oluşturma
 
@@ -163,7 +163,7 @@ Bu adımda, MEAN.js örnek uygulamanızı, MongoDB bağlantı dizesi kullanarak 
 
 ### <a name="retrieve-the-database-key"></a>Veritabanı anahtarını alma
 
-Cosmos DB veritabanına bağlanmak için veritabanı anahtarı gerekir. Cloud Shell, [`az cosmosdb list-keys`](/cli/azure/cosmosdb#az-cosmosdb-list-keys) birincil anahtarı almak için komutunu kullanın.
+Cosmos DB veritabanına bağlanmak için veritabanı anahtarı gerekir. Cloud Shell, [`az cosmosdb list-keys`](/cli/azure/cosmosdb#az_cosmosdb_list_keys) birincil anahtarı almak için komutunu kullanın.
 
 ```azurecli-interactive
 az cosmosdb list-keys --name <cosmosdb-name> --resource-group myResourceGroup
@@ -276,7 +276,7 @@ Bu adımda, MongoDB’ye bağlı Node.js uygulamanızı Azure App Service’e da
 
 Varsayılan olarak, MEAN.js projesi _config/env/local-production.js_ öğesini Git deposu dışında tutar. Bu nedenle, Azure uygulamanız için MongoDB Bağlantı dizenizi tanımlamak üzere uygulama ayarlarını kullanırsınız.
 
-Uygulama ayarlarını ayarlamak için [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) Cloud Shell komutunu kullanın. 
+Uygulama ayarlarını ayarlamak için [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) Cloud Shell komutunu kullanın. 
 
 Aşağıdaki örnek, `MONGODB_URI` Azure uygulamanızda bir uygulama ayarı yapılandırır. *\<app-name>*, *\<cosmosdb-name>* Ve *\<primary-master-key>* yer tutucularını değiştirin.
 
@@ -482,7 +482,7 @@ Tamamlandıktan sonra `git push` Azure uygulamanıza gidin ve yeni işlevleri de
 
 Node.js uygulamanız Azure App Service'te çalışırken, terminalinize yönlendirilen konsol günlüklerini alabilirsiniz. Böylece, uygulama hatalarını ayıklamanıza yardımcı olan tanılama iletilerinin aynısını alabilirsiniz.
 
-Günlük akışını başlatmak için [`az webapp log tail`](/cli/azure/webapp/log#az-webapp-log-tail) Cloud Shell komutunu kullanın.
+Günlük akışını başlatmak için [`az webapp log tail`](/cli/azure/webapp/log#az_webapp_log_tail) Cloud Shell komutunu kullanın.
 
 ```azurecli-interactive
 az webapp log tail --name <app-name> --resource-group myResourceGroup

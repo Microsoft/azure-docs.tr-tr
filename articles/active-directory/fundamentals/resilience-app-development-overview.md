@@ -12,10 +12,10 @@ ms.author: nichola
 manager: martinco
 ms.date: 11/23/2020
 ms.openlocfilehash: d06e851390537bf94b59e656f84bf58fe7216410
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96317361"
 ---
 # <a name="increase-resilience-of-authentication-and-authorization-applications-you-develop"></a>Geliştirdiğiniz kimlik doğrulama ve yetkilendirme uygulamalarının esnekliği artırma

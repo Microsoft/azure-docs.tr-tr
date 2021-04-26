@@ -3,18 +3,20 @@ title: Hızlı başlangıç-Red Hat Enterprise Linux (RHEL) üzerinde Jpatron ku
 description: Azure RHEL VM 'lerinde ve sanal makine ölçek kümelerinde Red Hat Jpatron EAP kullanarak kurumsal Java uygulamaları dağıtma.
 author: theresa-nguyen
 ms.author: bicnguy
+ms.date: 10/30/2020
+ms.assetid: 8a4df7bf-be49-4198-800e-db381cda98f5
 ms.topic: quickstart
 ms.service: virtual-machines
 ms.subservice: redhat
+ms.custom:
+- mode-api
 ms.collection: linux
-ms.assetid: 8a4df7bf-be49-4198-800e-db381cda98f5
-ms.date: 10/30/2020
-ms.openlocfilehash: 4027e9c336d938c3877e56b0eb59edea6ac1d992
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 18cf093adad858f50b2b1fa1c97e38821bd1c949
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101671967"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538677"
 ---
 # <a name="deploy-enterprise-java-applications-to-azure-with-jboss-eap-on-red-hat-enterprise-linux"></a>Red Hat Enterprise Linux’da JBoss EAP ile Azure’a kurumsal Java uygulamalarını dağıtma
 

@@ -4,12 +4,12 @@ description: Bu makale, GitHub 'da bulunan Azure Event Hubs örneklerinin bir li
 ms.topic: article
 ms.date: 06/23/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 2e0f8026683302f6b54924625b132e79cb194bad
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0b7cd4a1ca08f359a2328d7a92239516c39d7e62
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87499429"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311609"
 ---
 # <a name="git-repositories-with-samples-for-azure-event-hubs"></a>Azure Event Hubs için örnek içeren Git depoları 
 [GitHub](https://github.com/Azure/azure-event-hubs/tree/master/samples)üzerinde Event Hubs örnekleri bulabilirsiniz. Bu örnekler [Azure Event Hubs](./index.yml)'daki temel özellikleri gösterir. Bu makale, her birinin bağlantılarıyla birlikte kullanılabilir örnekleri kategorilere ayırır ve açıklar.
@@ -60,4 +60,4 @@ Aşağıdaki makalelerde Event Hubs hakkında daha fazla bilgi edinebilirsiniz:
 
 - [Event Hubs genel bakış](./event-hubs-about.md)
 - [Event Hubs özellikleri](event-hubs-features.md)
-- [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+- [Event Hubs ile ilgili SSS](event-hubs-faq.yml)

@@ -12,10 +12,10 @@ ms.author: danil
 ms.reviewer: wiassaf, sstein
 ms.date: 1/14/2021
 ms.openlocfilehash: db24f280f66e567572821297cfc9bb9b1e19743b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98222352"
 ---
 # <a name="query-performance-insight-for-azure-sql-database"></a>Azure SQL veritabanı için Sorgu Performansı İçgörüleri
@@ -186,7 +186,7 @@ Uzun süre çalışan sorguları belirlemek için:
    > Sorgu performans grafiğine göre karşılaştırmak için özel DTU grafiğini kullanmanızı öneririz.
    >
 
-## <a name="review-top-queries-per-execution-count"></a>Yürütme sayısı başına en popüler sorguları gözden geçirin
+## <a name="review-top-queries-per-execution-count&quot;></a>Yürütme sayısı başına en popüler sorguları gözden geçirin
 
 Veritabanını kullanan bir kullanıcı uygulaması, yüksek sayıda yürütme veritabanının kendisini etkilemese ve kaynakların kullanımı düşük olsa bile yavaş olabilir.
 
@@ -194,7 +194,7 @@ Bazı durumlarda, yüksek bir yürütme sayısı daha fazla ağ gidiş dönüşl
 
 Örneğin, çok sayıda veri tabanlı Web sitesi, her kullanıcı isteği için veritabanına yoğun bir şekilde erişir. Bağlantı havuzu size yardımcı olmakla birlikte, sunucuda artan ağ trafiği ve işleme yükü performansı düşürebilir. Genel olarak, gidiş dönüş ' ı en düşük tutmaya devam edin.
 
-Sık yürütülen ("geveze") sorgularını belirlemek için:
+Sık yürütülen (&quot;geveze") sorgularını belirlemek için:
 
 1. Seçili veritabanı için Sorgu Performansı İçgörüleri **özel** sekmesini açın.
 2. Ölçümleri **yürütme sayısı** olarak değiştirin.

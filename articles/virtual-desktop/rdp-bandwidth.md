@@ -6,18 +6,19 @@ author: gundarev
 ms.topic: conceptual
 ms.date: 11/16/2020
 ms.author: denisgun
-ms.openlocfilehash: c9ef72241ac62efd8555de59bb52949321364035
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6fe12c985f5d9a519380d1d9b5a7d6c2820630c6
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96325188"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105932344"
 ---
 # <a name="remote-desktop-protocol-rdp-bandwidth-requirements"></a>Uzak Masaüstü Protokolü (RDP) bant genişliği gereksinimleri
 
 Uzak Masaüstü Protokolü (RDP), sunucunun uzak grafik teslimini istemci cihazına kusursuz bir şekilde kullanmak için çeşitli teknikler kullanan gelişmiş bir teknolojidir. Kullanım örneğine, bilgi işlem kaynaklarının kullanılabilirliğine ve ağ bant genişliğine bağlı olarak, RDP en iyi kullanıcı deneyimini sunmak için çeşitli parametreleri dinamik olarak ayarlar.
 
-Birden çok dinamik sanal kanalın (DVCs) farklı ağ aktarımları üzerinden gönderilen tek bir veri kanalına çoğullanıyor Uzak Masaüstü Protokolü. Uzak grafikler, giriş, cihaz yeniden yönlendirme, yazdırma ve diğerleri için ayrı bir DVCs vardır. WVD Iş ortakları, DVC arabirimlerini kullanan uzantılarını da uygulayabilir.
+Birden çok dinamik sanal kanalın (DVCs) farklı ağ aktarımları üzerinden gönderilen tek bir veri kanalına çoğullanıyor Uzak Masaüstü Protokolü. Uzak grafikler, giriş, cihaz yeniden yönlendirme, yazdırma ve daha fazlası için ayrı bir DVCs vardır. Windows sanal masaüstü ortakları, DVC arabirimlerini kullanan uzantılarını da kullanabilir.
+
 RDP üzerinden gönderilen verilerin miktarı Kullanıcı etkinliğine göre değişir. Örneğin, bir Kullanıcı, oturumun büyük bir yanındaki temel metin içeriğiyle çalışabilir ve en az bant genişliği tüketebilir, sonra da yerel yazıcıda 200 sayfalı bir belgenin çıktısını oluşturabilir. Bu yazdırma işi, önemli miktarda ağ bant genişliği kullanır.
 
 Bir uzak oturum kullanırken, ağınızın kullanılabilir bant genişliği, deneyiminizin kalitesini önemli ölçüde etkiler. Farklı uygulamalar ve görüntü çözünürlükleri farklı ağ yapılandırmaları gerektirir, bu nedenle ağ yapılandırmanızın gereksinimlerinizi karşıladığından emin olmak önemlidir.

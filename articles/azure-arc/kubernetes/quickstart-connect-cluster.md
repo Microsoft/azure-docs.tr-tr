@@ -6,14 +6,14 @@ ms.author: magoedte
 ms.service: azure-arc
 ms.topic: quickstart
 ms.date: 03/03/2021
-ms.custom: template-quickstart
+ms.custom: template-quickstart, references_regions, devx-track-azurecli
 keywords: Kubernetes, yay, Azure, küme
-ms.openlocfilehash: 3fc522c4bdda9eb1047d5258bcc431d0268990b9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 21ec5000ed7ef9df1805fa6ec43e20efc0f82182
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102121652"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481268"
 ---
 # <a name="quickstart-connect-an-existing-kubernetes-cluster-to-azure-arc"></a>Hızlı başlangıç: mevcut bir Kubernetes kümesini Azure yaya bağlama 
 
@@ -23,36 +23,35 @@ Bu hızlı başlangıçta, Azure Arc 'ın, Kubernetes 'in avantajlarından yarar
 
 [!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-* Şunları doğrulayın:
-    * Çalışır duruma bir Kubernetes kümesi.
-    * `kubeconfig`Azure yaya bağlamak istediğiniz kümeye işaret eden bir dosya.
-    * Kullanıcı veya hizmet sorumlusu için ' Read ' ve ' Write ' izinleri, Azure Arc etkin Kubernetes kaynak türü ( `Microsoft.Kubernetes/connectedClusters` ) oluşturuluyor.
+* Çalışır duruma bir Kubernetes kümesi. Bir tane yoksa, aşağıdaki seçeneklerden birini kullanarak bir küme oluşturabilirsiniz:
+    * [Docker 'da Kubernetes (tür)](https://kind.sigs.k8s.io/)
+    * [Mac](https://docs.docker.com/docker-for-mac/#kubernetes) veya [Windows](https://docs.docker.com/docker-for-windows/#kubernetes) için Docker kullanarak bir Kubernetes kümesi oluşturma
+    * [Küme API 'sini](https://cluster-api.sigs.k8s.io/user/quick-start.html) kullanarak kendi kendine yönetilen Kubernetes kümesi
+
+    >[!NOTE]
+    > Kümenin en az bir işletim sistemi ve mimari türü düğümü olması gerekir `linux/amd64` . Yalnızca düğümleri olan kümeler `linux/arm64` henüz desteklenmiyor.
+    
+* `kubeconfig`Kümenize işaret eden bir dosya ve bağlam.
+* Azure Arc etkin Kubernetes kaynak türü () üzerinde ' Read ' ve ' Write ' izinleri `Microsoft.Kubernetes/connectedClusters` .
+
 * [Held 3 ' ün en son sürümünü](https://helm.sh/docs/intro/install)yükler.
-* Aşağıdaki Azure Arc etkin Kubernetes CLı uzantılarını yükler >= 1.0.0:
+
+- [Azure CLI 'yı sürüme yüklemek veya yükseltmek](https://docs.microsoft.com/cli/azure/install-azure-cli) >= 2.16.0
+* `connectedk8s`Sürüm >= 1.0.0 Azure CLI uzantısını yükler:
   
   ```azurecli
   az extension add --name connectedk8s
-  az extension add --name k8s-configuration
-  ```
-  * Bu uzantıları en son sürüme güncelleştirmek için aşağıdaki komutları çalıştırın:
-  
-  ```azurecli
-  az extension update --name connectedk8s
-  az extension update --name k8s-configuration
   ```
 
+>[!TIP]
+> `connectedk8s`Uzantı zaten yüklüyse, aşağıdaki komutu kullanarak en son sürüme güncelleştirin.`az extension update --name connectedk8s`
+
+
 >[!NOTE]
->**Desteklenen bölgeler:**
->* Doğu ABD
->* West Europe
->* Orta Batı ABD
->* Orta Güney ABD
->* Güneydoğu Asya
->* Güney Birleşik Krallık
->* Batı ABD 2
->* Doğu Avustralya
->* Doğu ABD 2
->* Kuzey Avrupa
+>Azure Arc etkin Kubernetes tarafından desteklenen bölgelerin listesi [burada](https://azure.microsoft.com/global-infrastructure/services/?products=azure-arc)bulunabilir.
+
+>[!NOTE]
+> Küme üzerinde özel konumlar kullanmak istiyorsanız, kümenizin yalnızca bu bölgelerde özel konumlar olarak bağlanması için Doğu ABD veya Batı Avrupa bölgelerini kullanın. Tüm diğer Azure Arc etkin Kubernetes özellikleri, yukarıda listelenen tüm bölgelerde kullanılabilir.
 
 ## <a name="meet-network-requirements"></a>Ağ gereksinimlerini karşılayın
 
@@ -61,10 +60,10 @@ Bu hızlı başlangıçta, Azure Arc 'ın, Kubernetes 'in avantajlarından yarar
 >* 443 numaralı bağlantı noktasında TCP: `https://:443`
 >* 9418 numaralı bağlantı noktasında TCP: `git://:9418`
   
-| Uç nokta (DNS) | Description |  
+| Uç nokta (DNS) | Açıklama |  
 | ----------------- | ------------- |  
 | `https://management.azure.com`                                                                                 | Aracının Azure 'a bağlanması ve kümeyi kaydetmesi için gereklidir.                                                        |  
-| `https://eastus.dp.kubernetesconfiguration.azure.com`, `https://westeurope.dp.kubernetesconfiguration.azure.com`, `https://westcentralus.dp.kubernetesconfiguration.azure.com`, `https://southcentralus.dp.kubernetesconfiguration.azure.com`, `https://southeastasia.dp.kubernetesconfiguration.azure.com`, `https://uksouth.dp.kubernetesconfiguration.azure.com`, `https://westus2.dp.kubernetesconfiguration.azure.com`, `https://australiaeast.dp.kubernetesconfiguration.azure.com`, `https://eastus2.dp.kubernetesconfiguration.azure.com`, `https://northeurope.dp.kubernetesconfiguration.azure.com` | Aracının durumu iletme ve yapılandırma bilgilerini getirme işlemi için veri düzlemi uç noktası.                                      |  
+| `https://<region>.dp.kubernetesconfiguration.azure.com` | Aracının durumu iletme ve yapılandırma bilgilerini getirme işlemi için veri düzlemi uç noktası.                                      |  
 | `https://login.microsoftonline.com`                                                                            | Azure Resource Manager belirteçleri getirmek ve güncelleştirmek için gereklidir.                                                                                    |  
 | `https://mcr.microsoft.com`                                                                            | Azure Arc aracıları için kapsayıcı görüntülerini çekmek için gereklidir.                                                                  |  
 | `https://eus.his.arc.azure.com`, `https://weu.his.arc.azure.com`, `https://wcus.his.arc.azure.com`, `https://scus.his.arc.azure.com`, `https://sea.his.arc.azure.com`, `https://uks.his.arc.azure.com`, `https://wus2.his.arc.azure.com`, `https://ae.his.arc.azure.com`, `https://eus2.his.arc.azure.com`, `https://ne.his.arc.azure.com` |  Sistem tarafından atanan Yönetilen Hizmet Kimliği (MSI) sertifikalarını çekmek için gereklidir.                                                                  |
@@ -75,11 +74,13 @@ Bu hızlı başlangıçta, Azure Arc 'ın, Kubernetes 'in avantajlarından yarar
     ```azurecli
     az provider register --namespace Microsoft.Kubernetes
     az provider register --namespace Microsoft.KubernetesConfiguration
+    az provider register --namespace Microsoft.ExtendedLocation
     ```
 2. Kayıt işlemini izleyin. Kayıt, en fazla 10 dakika sürebilir.
     ```azurecli
     az provider show -n Microsoft.Kubernetes -o table
-    az provider show -n Microsoft.KubernetesConfiguration -o table    
+    az provider show -n Microsoft.KubernetesConfiguration -o table
+    az provider show -n Microsoft.ExtendedLocation -o table
     ```
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma

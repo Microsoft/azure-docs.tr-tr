@@ -8,15 +8,15 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 08/17/2020
+ms.date: 04/08/2021
 ms.author: juergent
 ms.custom: H1Hack27Feb2017, devx-track-azurecli
-ms.openlocfilehash: 8bc289e90470ae9bc8b1996ac08c3144ea78de35
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 67ef0bf7a8c3906122468c895325a77de555c196
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102504721"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258801"
 ---
 # <a name="azure-virtual-machines-planning-and-implementation-for-sap-netweaver"></a>SAP NetWeaver için Azure sanal makineleri planlama ve uygulama
 
@@ -588,7 +588,11 @@ Bir Azure sanal ağı içindeki VM 'lere sabit veya ayrılmış IP adresleri ata
 > [!NOTE]
 > Ayrı sanal NIC 'ler için Azure aracılığıyla statik IP adresleri atamanız gerekir. Konuk işletim sistemi içinde bir vNIC 'e statik IP adresleri atamamalısınız. Azure Backup hizmeti gibi bazı Azure Hizmetleri, en azından birincil vNIC 'nin statik IP adreslerine değil, DHCP olarak ayarlandığı gerçeğini temel alır. Ayrıca bkz. belge [Azure sanal makine yedeklemesi sorunlarını giderme](../../../backup/backup-azure-vms-troubleshoot.md#networking).
 >
->
+
+
+##### <a name="secondary-ip-addresses-for-sap-hostname-virtualization"></a>SAP konak adı Sanallaştırması için ikincil IP adresleri
+Her bir Azure sanal makinesinin ağ arabirimi kartına atanmış birden fazla IP adresi olabilir. bu ikincil IP, gerekirse bir DNS A/PTR kaydıyla eşlenen SAP sanal ana bilgisayar adları için kullanılabilir. İkincil IP adresleri, [Bu makaleye](../../../virtual-network/virtual-network-multiple-ip-addresses-portal.md) göre Azure VNıC IP Config 'e atanmalıdır ve aynı zamanda Ikincil IP 'ler olarak DHCP üzerinden atanmamıştır. Her ikincil IP, vNIC 'nin bağlandığı alt ağdan olmalıdır. Azure Load Balancer kayan IP 'nin kullanımı, pacemaker kümeleri gibi ikincil IP yapılandırmalarına yönelik olarak desteklenmez; bu durumda, Load Balancer IP 'si SAP sanal ana bilgisayar adına izin [vermez]( https://docs.microsoft.com/azure/load-balancer/load-balancer-multivip-overview#limitations) . Ayrıca bkz. SAP 'nin notuna sanal ana bilgisayar adlarını kullanarak genel rehberlik [#962955](https://launchpad.support.sap.com/#/notes/962955) .
+
 
 ##### <a name="multiple-nics-per-vm"></a>VM başına birden çok NIC
 
@@ -616,7 +620,7 @@ Siteden siteye bağlantı oluşturmak için (Azure veri merkezi 'ne şirket içi
 
 Yukarıdaki şekilde iki Azure aboneliği, Azure 'daki sanal ağlarda kullanılmak üzere ayrılmış IP adresi alt aralıklarının olduğunu gösterir. Şirket içi ağdan Azure 'a bağlantı VPN aracılığıyla oluşturulur.
 
-#### <a name="point-to-site-vpn"></a>Noktadan siteye VPN
+#### <a name="point-to-site-vpn"></a>Noktadan Siteye VPN
 
 Noktadan siteye VPN, her istemci makinenin Azure 'a kendi VPN ile bağlanmasını gerektirir. SAP senaryolarında, Noktadan siteye bağlantı, pratik değildir. Bu nedenle, Noktadan siteye VPN bağlantısına başka bir başvuru verilmez.
 
@@ -965,7 +969,7 @@ Hizmet olarak Azure altyapısı, yalnızca VHD 'leri ve SAP sistemlerini karşı
 
   Save-AzVhd cmdlet 'i hakkında daha fazla bilgi için buraya bakın <https://docs.microsoft.com/powershell/module/az.compute/save-Azvhd> .
 
-#### <a name="azure-cli"></a>Azure CLI’si
+#### <a name="azure-cli"></a>Azure CLI
 * Yönetilen disk indiriliyor, önce yönetilen diskin temel blobuna erişmeniz gerekir. Ardından, temel alınan blobu yeni bir depolama hesabına kopyalayabilir ve blobu bu depolama hesabından indirebilirsiniz.
 
   ```azurecli
@@ -1005,7 +1009,7 @@ $config = New-AzDiskConfig -CreateOption Copy -SourceUri "/subscriptions/<subscr
 New-AzDisk -ResourceGroupName <resource group name> -DiskName <disk name> -Disk $config
 ```
 
-##### <a name="azure-cli"></a>Azure CLI’si
+##### <a name="azure-cli"></a>Azure CLI
 
 Bir VHD 'YI kopyalamak için Azure CLı kullanabilirsiniz. Yeni bir yönetilen disk oluşturmak için aşağıdaki örnekte gösterildiği gibi *az disk Create* kullanın.
 
@@ -1094,7 +1098,7 @@ Get-AzStorageBlobCopyState -Blob <target blob name> -Container <target container
 
 Örnekler için [Bu makaleye][storage-powershell-guide-full-copy-vhd]bakın.
 
-##### <a name="azure-cli"></a>Azure CLI’si
+##### <a name="azure-cli"></a>Azure CLI
 * Kopyayı ile Başlat
 
 ```azurecli
@@ -1163,7 +1167,7 @@ Son iki yıl içinde SAP dağıtımları deneyimi, şu şekilde özetlenebilir b
 > ![Linux logosu.][Logo_Linux] Linux
 >
 > * [Linux 'ta yazılım RAID yapılandırma][virtual-machines-linux-configure-raid]
-> * [Azure 'da bir Linux VM 'de LVM 'yi yapılandırma][virtual-machines-linux-configure-lvm]
+> * [Azure’da bir a Linux VM üzerinde LVM’yi yapılandırma][virtual-machines-linux-configure-lvm]
 >
 >
 
@@ -1236,7 +1240,7 @@ Azure coğrafi çoğaltma, bir VM 'deki her VHD üzerinde yerel olarak çalışa
 ---
 ### <a name="final-deployment"></a>Son dağıtım
 
-Son dağıtım ve özellikle SAP için Azure uzantısının dağıtımına ilişkin tam adımlar için [dağıtım kılavuzuna][deployment-guide]bakın.
+Son dağıtım ve tam adımlar için, özellikle SAP için Azure uzantısının dağıtımı, [dağıtım kılavuzuna][deployment-guide]bakın.
 
 ## <a name="accessing-sap-systems-running-within-azure-vms"></a>Azure VM 'Leri içinde çalışan SAP sistemlerine erişme
 
@@ -1657,7 +1661,7 @@ SAP değişikliği ve taşıma sisteminin (TMS), yatay içindeki sistemler aras�
 
 ##### <a name="configuring-the-transport-domain"></a>Taşıma etki alanını yapılandırma
 
-Aktarım etki alanı denetleyicisini [yapılandırma](https://help.sap.com/erp2005_ehp_04/helpdata/en/44/b4a0b47acc11d1899e0000e829fbbd/content.htm)bölümünde açıklandığı gibi, aktarım etki alanı denetleyicisi olarak atadığınız sistemde taşıma etki alanınızı yapılandırın. Bir sistem kullanıcısı TMSADM oluşturulur ve gerekli RFC hedefi oluşturulur. İşlem SM59 kullanarak bu RFC bağlantılarını kontrol edebilirsiniz. Ana bilgisayar adı çözümlemesi, aktarım etki alanınız genelinde etkinleştirilmelidir.
+Aktarım etki alanı denetleyicisini [yapılandırma](https://help.sap.com/viewer/4a368c163b08418890a406d413933ba7/202009.001/en-US/44b4a0b47acc11d1899e0000e829fbbd.html?q=Configuring%20the%20Transport%20Domain%20Controller)bölümünde açıklandığı gibi, aktarım etki alanı denetleyicisi olarak atadığınız sistemde taşıma etki alanınızı yapılandırın. Bir sistem kullanıcısı TMSADM oluşturulur ve gerekli RFC hedefi oluşturulur. İşlem SM59 kullanarak bu RFC bağlantılarını kontrol edebilirsiniz. Ana bilgisayar adı çözümlemesi, aktarım etki alanınız genelinde etkinleştirilmelidir.
 
 Nasıl yapılır:
 
@@ -1670,12 +1674,12 @@ Nasıl yapılır:
 
 Bir aktarım etki alanında SAP sisteminin dahil edilmesi sırası şu şekilde görünür:
 
-* Azure 'daki GELIŞTIRME sisteminde, aktarım sistemine (Istemci 000) gidin ve işlem STMS ' ı çağırın. İletişim kutusundan diğer yapılandırma ' yı seçin ve Içerme sistemiyle birlikte etki alanına devam edin. Etki alanı denetleyicisini hedef konak olarak belirtin ([Aktarım etki ALANıNDAKI SAP sistemleri dahil](https://help.sap.com/erp2005_ehp_04/helpdata/en/44/b4a0c17acc11d1899e0000e829fbbd/content.htm?frameset=/en/44/b4a0b47acc11d1899e0000e829fbbd/frameset.htm)). Sistem artık aktarım etki alanına dahil edilmesini bekliyor.
+* Azure 'daki GELIŞTIRME sisteminde, aktarım sistemine (Istemci 000) gidin ve işlem STMS ' ı çağırın. İletişim kutusundan diğer yapılandırma ' yı seçin ve Içerme sistemiyle birlikte etki alanına devam edin. Etki alanı denetleyicisini hedef konak olarak belirtin ([Aktarım etki ALANıNDAKI SAP sistemleri dahil](https://help.sap.com/viewer/4a368c163b08418890a406d413933ba7/202009.001/en-US/44b4a0c17acc11d1899e0000e829fbbd.html?q=Including%20SAP%20Systems%20in%20the%20Transport%20Domain)). Sistem artık aktarım etki alanına dahil edilmesini bekliyor.
 * Güvenlik nedenleriyle isteğinizi onaylamak için etki alanı denetleyicisine geri gitmeniz gerekir. Sisteme genel bakış ve bekleyen sistemi Onayla ' yı seçin. Sonra istemi onaylayın ve yapılandırma dağıtılır.
 
 Bu SAP sistemi artık aktarım etki alanındaki tüm diğer SAP sistemleri hakkında gerekli bilgileri içermektedir. Aynı zamanda, yeni SAP sisteminin adres verileri diğer tüm SAP sistemlerine gönderilir ve SAP sistemi aktarım denetimi programının aktarım profiline girilir. Etki alanının aktarım dizinine yönelik RFC 'Lerin ve erişimin çalışıp çalışmadığını denetleyin.
 
-Belge [değişikliği ve taşıma sisteminde](https://help.sap.com/saphelp_nw70ehp3/helpdata/en/48/c4300fca5d581ce10000000a42189c/content.htm?frameset=/en/44/b4a0b47acc11d1899e0000e829fbbd/frameset.htm)açıklandığı gibi, aktarım sisteminizin yapılandırmasına devam edin.
+Belge [değişikliği ve taşıma sisteminde](https://help.sap.com/viewer/4a368c163b08418890a406d413933ba7/202009.001/en-US/3bdfba3692dc635ce10000009b38f839.html)açıklandığı gibi, aktarım sisteminizin yapılandırmasına devam edin.
 
 Nasıl yapılır:
 
@@ -1687,13 +1691,13 @@ Nasıl yapılır:
 
 Siteden siteye bağlı çapraz şirket senaryolarında, şirket içi ve Azure arasındaki gecikme hala önemli olabilir. Geliştirme ve test sistemleri aracılığıyla veya farklı sistemlere taşıma ya da destek paketleri uygulama hakkında bilgi almak için nesneleri taşıma sırasını izliyoruz, merkezi aktarım dizininin konumuna bağlı olduğunu fark edersiniz. Bu durumda, bazı sistemler merkezi aktarım dizinindeki yüksek gecikme süresine veya veri yazmaya neden olur. Bu durum, farklı sistemlerin veri merkezleri arasında önemli mesafe ile farklı veri merkezlerinde yayıldığı SAP yatay yapılandırmalarına benzer.
 
-Bu gecikme süresini aşmak ve sistemin aktarım dizininden okuma ya da yazma sırasında hızla çalışmasını sağlamak için, iki STMS taşıma etki alanı (bir tane şirket içi ve biri Azure 'daki sistemlerle bir tane) ayarlayabilir ve aktarım etki alanlarını bağlayabilirsiniz. SAP TMS 'de bu kavramın arkasındaki ilkeleri açıklayan bu belgeleri denetleyin: <https://help.sap.com/saphelp_me60/helpdata/en/c4/6045377b52253de10000009b38f889/content.htm?frameset=/en/57/38dd924eb711d182bf0000e829fbfe/frameset.htm> .
+Bu gecikme süresini aşmak ve sistemin aktarım dizininden okuma ya da yazma sırasında hızla çalışmasını sağlamak için, iki STMS taşıma etki alanı (bir tane şirket içi ve biri Azure 'daki sistemlerle bir tane) ayarlayabilir ve aktarım etki alanlarını bağlayabilirsiniz. Bu https://help.sap.com/saphelp_me60/helpdata/en/c4/6045377b52253de10000009b38f889/content.htm?frameset=/en/57/38dd924eb711d182bf0000e829fbfe/frameset.htm) kavram arkasındaki ILKELERI SAP TMS 'de açıklayan bu [belge] (<.
+
 
 Nasıl yapılır:
 
-* İşlem STMS kullanarak her konumda (Şirket içi ve Azure) bir taşıma etki alanı ayarlama <https://help.sap.com/saphelp_nw70ehp3/helpdata/en/44/b4a0b47acc11d1899e0000e829fbbd/content.htm>
-* Etki alanlarını bir etki alanı bağlantısıyla bağlayın ve iki etki alanı arasındaki bağlantıyı onaylayın.
-  <https://help.sap.com/saphelp_nw73ehp1/helpdata/en/a3/139838280c4f18e10000009b38f8cf/content.htm>
+* [Bir aktarım etki alanı ayarlama] ( https://help.sap.com/viewer/4a368c163b08418890a406d413933ba7/202009.001/en-US/44b4a0b47acc11d1899e0000e829fbbd.html?q=Set%20up%20a%20transport%20domain) Her konumdaki (Şirket içi ve Azure) işlem STMS kullanarak <
+* [Etki alanlarını bir etki alanı bağlantısıyla bağlayın](https://help.sap.com/viewer/4a368c163b08418890a406d413933ba7/202009.001/en-US/14c795388d62e450e10000009b38f889.html?q=Link%20the%20domains%20with%20a%20domain%20link) ve iki etki alanı arasındaki bağlantıyı onaylayın.
 * Yapılandırmayı bağlantılı sisteme dağıtın.
 
 #### <a name="rfc-traffic-between-sap-instances-located-in-azure-and-on-premises-cross-premises"></a>Azure 'da ve şirket içinde bulunan SAP örnekleri arasında RFC trafiği (Şirket Içi)

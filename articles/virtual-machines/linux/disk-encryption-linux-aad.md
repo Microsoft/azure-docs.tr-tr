@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.author: mbaldwin
 ms.date: 03/15/2019
 ms.custom: seodec18, devx-track-azurecli
-ms.openlocfilehash: cec391ba998165af4dd9339b719a3b73cb330c16
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 94440b71eee1ff9dcc4a86733582e3e5f57f6a00
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104601799"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764630"
 ---
 # <a name="enable-azure-disk-encryption-with-azure-ad-on-linux-vms-previous-release"></a>Linux sanal makinelerinde Azure AD ile Azure disk şifrelemesini etkinleştirme (önceki sürüm)
 
@@ -32,7 +32,7 @@ Diskleri şifrelemeden önce bir [anlık görüntü](snapshot-copy-managed-disk.
  > - Bu VM 'yi şifrelemek için [Azure AD uygulaması Ile Azure disk şifrelemesi](disk-encryption-overview-aad.md) 'ni daha önce kullandıysanız, sanal makineyi şifrelemek için bu seçeneği kullanmaya devam etmeniz gerekir. Bu şifrelenmiş sanal makinede [Azure disk şifrelemesi](disk-encryption-overview.md) 'ni kullanamazsınız çünkü bu desteklenen bir senaryo olmadığından, bu şifrelenmiş VM IÇIN Azure AD uygulamasından geçiş henüz desteklenmez.
  > - Şifreleme gizli dizileri arasında bölge dizileri olmadığından emin olmak için, Azure disk şifrelemesi, anahtar kasasının ve VM 'Lerin aynı bölgede birlikte bulunması gerekir. Şifrelenecek VM ile aynı bölgede olan bir Anahtar Kasası oluşturun ve kullanın.
  > - Linux işletim sistemi birimlerini şifrelerken, işlem birkaç saat sürebilir. Linux işletim sistemi birimlerinin şifrelenmesi için veri birimlerinden daha uzun sürme normaldir.
-> - Linux işletim sistemi birimlerini şifrelerken, sanal makinenin kullanılamaz kabul edilmesi gerekir. Şifreleme işlemi sırasında erişilmesi gereken açık dosyaları engellemeyi önlemek için şifreleme sürerken SSH oturumlarını önlemenize kesinlikle tavsiye ederiz. İlerlemeyi denetlemek için [Get-AzVMDiskEncryptionStatus](/powershell/module/az.compute/get-azvmdiskencryptionstatus) veya [VM Encryption Show](/cli/azure/vm/encryption#az-vm-encryption-show) komutlarını kullanın. Bu işlemin 30 GB 'lık bir işletim sistemi birimi için birkaç saat, ayrıca veri birimlerini şifrelemek için de ek süre bekleniyor. Veri birimi şifreleme süresi, **şifreleme biçimi tümünü şifreleyin** seçeneği kullanılmadığı takdirde veri birimlerinin boyut ve miktarıyla orantılıdır. 
+> - Linux işletim sistemi birimlerini şifrelerken, sanal makinenin kullanılamaz kabul edilmesi gerekir. Şifreleme işlemi sırasında erişilmesi gereken açık dosyaları engellemeyi önlemek için şifreleme sürerken SSH oturumlarını önlemenize kesinlikle tavsiye ederiz. İlerlemeyi denetlemek için [Get-AzVMDiskEncryptionStatus](/powershell/module/az.compute/get-azvmdiskencryptionstatus) veya [VM Encryption Show](/cli/azure/vm/encryption#az_vm_encryption_show) komutlarını kullanın. Bu işlemin 30 GB 'lık bir işletim sistemi birimi için birkaç saat, ayrıca veri birimlerini şifrelemek için de ek süre bekleniyor. Veri birimi şifreleme süresi, **şifreleme biçimi tümünü şifreleyin** seçeneği kullanılmadığı takdirde veri birimlerinin boyut ve miktarıyla orantılıdır. 
  > - Linux VM 'lerinde şifrelemeyi devre dışı bırakmak yalnızca veri birimlerinde desteklenir. İşletim sistemi birimi şifrelendiyse veri veya işletim sistemi birimlerinde desteklenmez. 
 
  
@@ -50,7 +50,7 @@ Bu senaryoda, Azure Resource Manager şablonu, PowerShell cmdlet 'leri veya Azur
 ### <a name="enable-encryption-on-an-existing-or-running-linux-vm-by-using-the-azure-cli"></a><a name="bkmk_RunningLinuxCLI"> </a>Azure CLI kullanarak mevcut veya çalışan BIR Linux VM 'de şifrelemeyi etkinleştirme 
 [Azure clı 2,0](/cli/azure) komut satırı aracını yükleyip kullanarak şifrelenmiş VHD 'niz üzerinde disk şifrelemeyi etkinleştirebilirsiniz. [Azure Cloud Shell](../../cloud-shell/overview.md) ile tarayıcınızda kullanabilir veya yerel makinenize yükleyip herhangi bir PowerShell oturumunda kullanabilirsiniz. Azure 'da var olan veya çalışan IaaS Linux VM 'lerinde şifrelemeyi etkinleştirmek için aşağıdaki CLı komutlarını kullanın:
 
-Azure 'da çalışan bir IaaS sanal makinesinde şifrelemeyi etkinleştirmek için [az VM Encryption Enable](/cli/azure/vm/encryption#az-vm-encryption-enable) komutunu kullanın.
+Azure 'da çalışan bir IaaS sanal makinesinde şifrelemeyi etkinleştirmek için [az VM Encryption Enable](/cli/azure/vm/encryption#az_vm_encryption_enable) komutunu kullanın.
 
 -  **Çalışan bir VM 'yi bir istemci parolası kullanarak şifreleyin:**
     
@@ -67,13 +67,13 @@ Azure 'da çalışan bir IaaS sanal makinesinde şifrelemeyi etkinleştirmek iç
    >[!NOTE]
    > Disk-Encryption-keykasası parametresinin değeri için sözdizimi tam tanımlayıcı dizesidir:/Subscriptions/[Subscription-ID-GUID]/resourceGroups/[resource-Group-Name]/providers/Microsoft.KeyVault/vaults/[keykasaadı].</br> </br> Anahtar şifreleme-anahtar parametresinin değeri için sözdizimi, KEK: https://[keykasa-adı]. kasa. Azure. net/Keys/[kekadı]/[kek-Unique-ID] gibi tam URI 'dir.
 
-- **Disklerin şifrelendiğini doğrulayın:** IaaS VM 'sinin şifreleme durumunu denetlemek için [az VM Encryption Show](/cli/azure/vm/encryption#az-vm-encryption-show) komutunu kullanın. 
+- **Disklerin şifrelendiğini doğrulayın:** IaaS VM 'sinin şifreleme durumunu denetlemek için [az VM Encryption Show](/cli/azure/vm/encryption#az_vm_encryption_show) komutunu kullanın. 
 
      ```azurecli-interactive
          az vm encryption show --name "MySecureVM" --resource-group "MyVirtualMachineResourceGroup"
      ```
 
-- **Şifrelemeyi devre dışı bırak:** Şifrelemeyi devre dışı bırakmak için [az VM ENCRYPTION Disable](/cli/azure/vm/encryption#az-vm-encryption-disable) komutunu kullanın. Şifrelemeyi devre dışı bırakmak yalnızca Linux sanal makineleri için veri birimlerinde kullanılabilir.
+- **Şifrelemeyi devre dışı bırak:** Şifrelemeyi devre dışı bırakmak için [az VM ENCRYPTION Disable](/cli/azure/vm/encryption#az_vm_encryption_disable) komutunu kullanın. Şifrelemeyi devre dışı bırakmak yalnızca Linux sanal makineleri için veri birimlerinde kullanılabilir.
     
      ```azurecli-interactive
          az vm encryption disable --name "MySecureVM" --resource-group "MyVirtualMachineResourceGroup" --volume-type DATA
@@ -337,7 +337,7 @@ Azure PowerShell, Azure CLı veya Kaynak Yöneticisi şablonunu kullanarak şifr
          Disable-AzVMDiskEncryption -ResourceGroupName 'MyVirtualMachineResourceGroup' -VMName 'MySecureVM' [--volume-type {ALL, DATA, OS}]
      ```
 
-- **Azure CLI ile şifrelemeyi devre dışı bırakın:** Şifrelemeyi devre dışı bırakmak için [az VM ENCRYPTION Disable](/cli/azure/vm/encryption#az-vm-encryption-disable) komutunu kullanın. 
+- **Azure CLI ile şifrelemeyi devre dışı bırakın:** Şifrelemeyi devre dışı bırakmak için [az VM ENCRYPTION Disable](/cli/azure/vm/encryption#az_vm_encryption_disable) komutunu kullanın. 
      ```azurecli-interactive
          az vm encryption disable --name "MySecureVM" --resource-group "MyVirtualMachineResourceGroup" --volume-type [ALL, DATA, OS]
      ```

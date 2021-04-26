@@ -1,14 +1,14 @@
 ---
 title: 'Model: bir ilke tanımındaki parametreler'
-description: Bu Azure Ilke düzeni bir ilke tanımında dize ve dizi parametrelerinin nasıl kullanılacağına ve etkisinin nasıl parametreleştirilemez hakkında bir örnek sağlar.
-ms.date: 08/17/2020
+description: Bu Azure Ilke düzeni bir ilke tanımında dize ve dizi parametrelerinin nasıl kullanılacağına ve efektin nasıl parametreleştirilemez hakkında bir örnek sağlar.
+ms.date: 03/31/2021
 ms.topic: sample
-ms.openlocfilehash: 7bb991c43a1deee39dd047aa7d814c124712fe69
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b742aaaf950e2b5670edbaa1f0134da144e675b6
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "89649939"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106092781"
 ---
 # <a name="azure-policy-pattern-parameters"></a>Azure Ilke stili: parametreler
 
@@ -16,7 +16,7 @@ Bir ilke tanımı, [parametreleri](../concepts/definition-structure.md#parameter
 
 ## <a name="sample-1-string-parameters"></a>Örnek 1: dize parametreleri
 
-Bu ilke tanımı, ilke atamasının kaynaklar üzerinde ne kadar arama yaptığını ayarlamak için iki parametre, **TagName** ve **tagvalue** kullanır. Bu biçim, ilke tanımının herhangi bir sayıda etiket adı ve etiket değeri bileşimi için kullanılmasına izin verir, ancak yalnızca tek bir ilke tanımını korur.
+Bu ilke tanımı, ilke atamasının kaynaklar üzerinde ne olduğunu belirlemek için iki parametre, **TagName** ve **tagvalue** kullanır. Bu biçim, ilke tanımının herhangi bir sayıda etiket adı ve etiket değeri bileşimi için kullanılmasına izin verir, ancak yalnızca tek bir ilke tanımını korur.
 
 > [!NOTE]
 > **Modu** _Tümünü_ kullanan ve bir kaynak grubuyla birlikte çalıştırılan bir etiket örneği için bkz. [model: Etiketler-örnek #1](./pattern-tags.md#sample-1-parameterize-tags).

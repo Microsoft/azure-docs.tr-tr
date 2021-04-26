@@ -7,12 +7,13 @@ ms.service: attestation
 ms.topic: overview
 ms.date: 08/31/2020
 ms.author: mbaldwin
-ms.openlocfilehash: cbc415411e05d6fdecee1acf2fbc02b3c170b9d6
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: eca74ffe7b62cc5071d8ebaeefab52e5e59409d4
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102501133"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832239"
 ---
 # <a name="quickstart-set-up-azure-attestation-with-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell ile Azure kanıtlama ayarlama
 
@@ -120,6 +121,10 @@ $attestationResourceGroup = "<attestation provider resource group name>"
 New-AzResourceGroup -Name $attestationResourceGroup -Location $location 
 ```
 
+ > [!NOTE]
+   > Bu kaynak grubunda bir kanıtlama sağlayıcısı oluşturulduktan sonra, bir Azure AD kullanıcısının ilke yapılandırma/ilke imzalayan sertifika yönetimi gibi işlemleri gerçekleştirmek için sağlayıcı üzerinde **kanıtlama katılımcısı** rolüne sahip olması gerekir. Bu izinler, abonelik/kaynak grubundaki **sahip** (joker karakter izinleri)/ **katkıda bulunan** (joker karakter izinleri) gibi rollerle de devralınabilir.  
+
+
 ## <a name="create-and-manage-an-attestation-provider"></a>Kanıtlama sağlayıcısı oluşturma ve yönetme
 
 New-AzAttestation bir kanıtlama sağlayıcısı oluşturur.
@@ -170,12 +175,12 @@ Remove-AzAttestation -Name $attestationProvider -ResourceGroupName $attestationR
 - Microsoft. kanıtlama/attestationProviders/kanıtlama/yazma
 - Microsoft. kanıtlama/attestationProviders/kanıtlama/silme
 
-Bu izinler, "Owner" (joker izinleri), "katkıda bulunan" (joker karakter izinleri) veya "kanıtlama katılımcısı" (yalnızca Azure kanıtlama için özel izinler) gibi bir rol aracılığıyla bir AD kullanıcısına atanabilir.  
+ Bu eylemleri gerçekleştirmek için bir Azure AD kullanıcısının kanıtlama sağlayıcısında **kanıtlama katılımcısı** rolü olmalıdır. Bu izinler, abonelik/kaynak grubundaki **sahip** (joker karakter izinleri)/ **katkıda bulunan** (joker karakter izinleri) gibi rollerle de devralınabilir.  
 
 İlkeleri okumak için, bir Azure AD kullanıcısı "eylemler" için aşağıdaki izinleri gerektirir:
 - Microsoft. kanıtlama/attestationProviders/kanıtlama/okuma
 
-Bu izin, "okuyucu" (joker karakter izinleri) veya "kanıtlama okuyucusu" gibi bir rol aracılığıyla bir AD kullanıcısına atanabilir (yalnızca Azure kanıtlama için özel izinler).
+ Bu eylemi gerçekleştirmek için bir Azure AD kullanıcısının kanıtlama sağlayıcısında **kanıtlama okuyucusu** rolü olmalıdır. Okuma izni Ayrıca, abonelik/kaynak grubundaki **okuyucu** (joker karakter izinleri) gibi rollerle devralınabilir.  
 
 Aşağıdaki PowerShell cmdlet 'leri bir kanıtlama sağlayıcısı için ilke yönetimi sağlar (bir seferde bir t).
 

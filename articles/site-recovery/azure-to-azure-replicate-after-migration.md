@@ -2,18 +2,15 @@
 title: Azure Site Recovery ile Azure 'a geçişten sonra olağanüstü durum kurtarmayı ayarlama
 description: Bu makalede, Azure Site Recovery kullanarak Azure 'a geçişten sonra Azure bölgeleri arasında olağanüstü durum kurtarmayı ayarlamak için makinelerin nasıl hazırlanacağı açıklanır.
 services: site-recovery
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: article
 ms.date: 11/14/2019
-ms.author: raynew
-ms.openlocfilehash: a71e476a214c44514c7d57c54a09a38218ad6d2a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 41fa4f5d042b5c284a58b0fd87486e2309b03053
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "86135667"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581741"
 ---
 # <a name="set-up-disaster-recovery-for-azure-vms-after-migration-to-azure"></a>Azure'a geçişten sonra Azure VM'leri için olağanüstü durumdan kurtarmayı ayarlama 
 

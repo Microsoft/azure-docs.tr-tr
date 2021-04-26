@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 06/29/2018
 ms.author: pepogors
 ms.custom: devx-track-js
-ms.openlocfilehash: a655199d854462285ca98a2d8f454c483c061f99
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 7d54b4b048632324a58708f893a4778a56137916
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92316665"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107876088"
 ---
 # <a name="service-fabric-for-visual-studio-code"></a>Visual Studio Code için Service Fabric
 
@@ -48,7 +48,7 @@ Java geliştirmesi için aşağıdaki önkoşulların yüklü olması gerekir:
 
 .NET Core/C# geliştirmesi için aşağıdaki önkoşulların yüklü olması gerekir:
 
-* [.NET Core](https://www.microsoft.com/net/learn/get-started) (sürüm 2.0.0 veya üzeri)
+* [.NET Core](https://dotnet.microsoft.com/download) (sürüm 2.0.0 veya üzeri)
 * [Visual Studio Code Için C# (Omnisharp tarafından desteklenir) vs Code uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) C# hizmetlerinde hata ayıklamak için gereklidir. VS Code ve uzantıyı arayarak ya da VS Code marketinden, **etkinlik çubuğundaki** uzantılar simgesine tıklayarak yükleyebilirsiniz.
 
 ## <a name="setup"></a>Kurulum

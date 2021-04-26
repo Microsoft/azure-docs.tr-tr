@@ -4,13 +4,13 @@ description: Azure Kubernetes hizmetinde bir hiper muhasebe doku Consortium ağ�
 ms.date: 03/01/2021
 ms.topic: how-to
 ms.reviewer: ravastra
-ms.custom: contperf-fy21q3
-ms.openlocfilehash: 42d16adbc5e6396c8d5d38176ac7681c712f4555
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: contperf-fy21q3, devx-track-azurecli
+ms.openlocfilehash: 03f19d1922c011c1b5304b66488e9fa8de703bf9
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102101112"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107478327"
 ---
 # <a name="deploy-hyperledger-fabric-consortium-on-azure-kubernetes-service"></a>Azure Kubernetes hizmetinde hiper muhasebe doku Consortium dağıtma
 
@@ -113,7 +113,7 @@ Sıralama hizmeti ve eş düğümleri dağıttıktan sonra blok zinciri Konsorsi
 > Betik yalnızca tanıtım, geliştirme ve test senaryolarıyla ilgili yardım için sağlanır. Bu betiğin oluşturduğu kanal ve konsorsiyumun demo, dev ve test senaryolarını basitleştirecek temel hiper muhasebe doku ilkeleri vardır. Üretim Kurulumu için, yerel hiper muhasebe doku API 'Lerini kullanarak, kuruluşunuzun uyumluluk ihtiyaçlarına göre kanal/konsorsiyum hiper muhasebe doku ilkelerinin güncelleştirilmesini öneririz.
 
 
-Azure hiper muhasebe doku betiğini çalıştırmaya yönelik tüm komutlar Azure Bash komut satırı arabirimi (CLı) aracılığıyla yürütülebilir. ![ ](./media/hyperledger-fabric-consortium-azure-kubernetes-service/arrow.png) Azure Portal ' ın sağ üst köşesindeki Azure Kubernetes hizmet şablonu seçeneğinde hiper muhasebe dokusunda Azure Cloud Shell ' da oturum açabilirsiniz. Komut istemine yazın `bash` ve Enter tuşunu seçerek Bash CLI 'ya geçin veya Cloud Shell araç çubuğundan **Bash** ' i seçin.
+Azure hiper muhasebe doku betiğini çalıştırmaya yönelik tüm komutlar Azure Bash komut satırı arabirimi (CLı) aracılığıyla yürütülebilir. ![ ](./media/hyperledger-fabric-consortium-azure-kubernetes-service/arrow.png) Azure Portal ' ın sağ üst köşesindeki Azure Kubernetes hizmet şablonu seçeneğinde Azure Cloud Shell throughÂ € ̄The Hyperledger dokusunda oturum açabilirsiniz. Komut istemine yazın `bash` ve Enter tuşunu seçerek Bash CLI 'ya geçin veya Cloud Shell araç çubuğundan **Bash** ' i seçin.
 
 Daha fazla bilgi için bkz. [Azure Cloud Shell](../../cloud-shell/overview.md) .
 
@@ -124,7 +124,7 @@ Aşağıdaki görüntüde, bir orderer organizasyonu ve bir eş kuruluş arasın
 
 ![Bir konsorsiyum oluşturma işleminin diyagramı.](./media/hyperledger-fabric-consortium-azure-kubernetes-service/process-to-build-consortium-flow-chart.png)
 
-İlk kurulumu tamamladıktan sonra, aşağıdaki işlemleri gerçekleştirmek için istemci uygulamasını kullanın:  
+İlk kurulumu tamamladıktan sonra, aşağıdaki işlemleri gerçekleştirmek için istemci uygulamasını kullanın: â € ̄
 
 - Kanal yönetimi
 - Konsorsiyum yönetimi
@@ -293,15 +293,15 @@ Eş kuruluşun istemcisinden, belirtilen kanaldaki eş kuruluşa ait bağlantı 
 # Peer organization name where the chaincode operation will be performed
 ORGNAME=<PeerOrgName>
 USER_IDENTITY="admin.$ORGNAME"  
-# If you are using chaincode_example02 then set CC_NAME=“chaincode_example02”
+# If you are using chaincode_example02 then set CC_NAME=â€œchaincode_example02â€
 CC_NAME=<chaincodeName>  
-# If you are using chaincode_example02 then set CC_VERSION=“1” for validation
+# If you are using chaincode_example02 then set CC_VERSION=â€œ1â€ for validation
 CC_VERSION=<chaincodeVersion>
 # Language in which chaincode is written. Supported languages are 'node', 'golang', and 'java'  
 # Default value is 'golang'  
 CC_LANG=<chaincodeLanguage>  
 # CC_PATH contains the path where your chaincode is placed. This is the absolute path to the chaincode project root directory.
-# If you are using chaincode_example02 to validate then CC_PATH=“/home/<username>/azhlfTool/samples/chaincode/src/chaincode_example02/go”
+# If you are using chaincode_example02 to validate then CC_PATH=â€œ/home/<username>/azhlfTool/samples/chaincode/src/chaincode_example02/goâ€
 CC_PATH=<chaincodePath>  
 # Channel on which chaincode will be instantiated/invoked/queried  
 CHANNEL_NAME=<channelName>  
@@ -355,7 +355,7 @@ Eş kuruluşun istemcisinden, chaincode işlevini çağırmak için aşağıdaki
 ./azhlf chaincode invoke -o $ORGNAME -u $USER_IDENTITY -n $CC_NAME -c $CHANNEL_NAME -f <invokeFunc> -a <invokeFuncArgs>  
 ```
 
-Çağırma işlevi adı ve bağımsız değişkenlerin boşluk listesini,  `<invokeFunction>`   ve  `<invokeFuncArgs>`   sırasıyla geçirin. Chaincode_example02. go chaincode örneğine devam etmek için, çağırma işlemini gerçekleştirmek için ve olarak ayarlayın  `<invokeFunction>`    `invoke`    `<invokeFuncArgs>`   `"a" "b" "10"` .  
+Çağırma işlevi adı ve boşluk ayrımı bağımsız değişkenlerinin InÂ € ̄ `<invokeFunction>` â € ̄andÂ € ̄ `<invokeFuncArgs>` â € ̄respectively bir listesini geçirin. Chaincode_example02. go chaincode örneğine devam etmek için, Invoke işlemini gerçekleştirmek için setâ € ̄ `<invokeFunction>` â € ̄toÂ € ̄ `invoke` â € ̄andÂ € ̄ `<invokeFuncArgs>` â € ̄to `"a" "b" "10"` .  
 
 >[!NOTE]
 > Kanalda herhangi bir eş kuruluştan komutu bir kez çalıştırın. İşlem, sipariş 'e başarıyla gönderildikten sonra, sipariş bu işlemi kanaldaki tüm eş kuruluşlara dağıtır. Daha sonra bu durum, kanaldaki tüm eş kuruluşların tüm eşdüzey düğümlerinde güncelleştirilir.  
@@ -372,7 +372,7 @@ Bunları onaylama, chaincode 'un yüklendiği ve işlemlerin yürütülmesi içi
 
 Chaincode 'u yüklemek için *Azhlftool* kullanıyorsanız, herhangi bir eş düğüm adını, onaylama eşi bağımsız değişkenine bir değer olarak geçirin. Chaincode, o kuruluşun her eşdüzey düğümüne yüklenir. 
 
-Sorgu işlevi adı ve bağımsız değişkenlerin boşluk listesini,  `<queryFunction>`   ve  `<queryFuncArgs>`   sırasıyla geçirin. Chaincode_example02. bir başvuru olarak "a" değerini sorgulamak için, "a" değerini bir başvuru olarak sorgulayın, ve olarak ayarlayın  `<queryFunction>`    `query`  `<queryArgs>` `"a"` .  
+Sorgu işlev adı ve boşluk ayrımı bağımsız değişkenlerinin InÂ € ̄ `<queryFunction>` â € ̄andÂ € ̄ `<queryFuncArgs>` â € ̄respectively bir listesini geçirin. Bir başvuru olarak chaincode_example02. goâ € ̄chaincode, Birinci durumda "a" değerini sorgulamak, setâ € ̄ `<queryFunction>` â € ̄toÂ € ̄ `query` andÂ € ̄ `<queryArgs>` to `"a"` .  
 
 ## <a name="troubleshoot"></a>Sorun giderme
 

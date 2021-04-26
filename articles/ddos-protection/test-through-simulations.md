@@ -3,7 +3,7 @@ title: Azure DDoS koruması simülasyonu testi
 description: Benzetimler üzerinden test etme hakkında bilgi edinin
 services: ddos-protection
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 ms.service: ddos-protection
 ms.devlang: na
 ms.topic: article
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/08/2020
 ms.author: yitoh
-ms.openlocfilehash: 3be8682b3a12f06aa83db1791cb0ed125bbcee7e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4e6c6b441684d3877a8b85f40b650b257a5159da
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101719245"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107106080"
 ---
 # <a name="test-through-simulations"></a>Simülasyonlar aracılığıyla test etme
 

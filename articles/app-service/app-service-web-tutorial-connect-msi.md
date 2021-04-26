@@ -5,12 +5,12 @@ ms.devlang: dotnet
 ms.topic: tutorial
 ms.date: 04/27/2020
 ms.custom: devx-track-csharp, mvc, cli-validate, devx-track-azurecli
-ms.openlocfilehash: 2c19ee2b8e7ec3c695b2c76c46402c118c559b40
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0012c3d208998786ef5aa34320f3bccc4e51ebe6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98736246"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782792"
 ---
 # <a name="tutorial-secure-azure-sql-database-connection-from-app-service-using-a-managed-identity"></a>Öğretici: Yönetilen kimlik kullanarak App Service’tan Azure SQL Veritabanı bağlantısını güvenli hale getirme
 
@@ -57,7 +57,7 @@ Ortamınızı Azure CLı için hazırlayın.
 
 Azure AD kiracınızda henüz bir kullanıcı yoksa, [Azure Active Directory kullanarak Kullanıcı ekleme veya silme](../active-directory/fundamentals/add-users-azure-active-directory.md)adımlarını izleyerek bir tane oluşturun.
 
-Ve yerini kullanarak Azure AD kullanıcısının nesne KIMLIĞINI bulun [`az ad user list`](/cli/azure/ad/user#az-ad-user-list) *\<user-principal-name>* . Sonuç bir değişkene kaydedilir.
+Ve yerini kullanarak Azure AD kullanıcısının nesne KIMLIĞINI bulun [`az ad user list`](/cli/azure/ad/user#az_ad_user_list) *\<user-principal-name>* . Sonuç bir değişkene kaydedilir.
 
 ```azurecli-interactive
 azureaduser=$(az ad user list --filter "userPrincipalName eq '<user-principal-name>'" --query [].objectId --output tsv)
@@ -66,7 +66,7 @@ azureaduser=$(az ad user list --filter "userPrincipalName eq '<user-principal-na
 > Azure AD 'deki tüm Kullanıcı asıl adlarının listesini görmek için, öğesini çalıştırın `az ad user list --query [].userPrincipalName` .
 >
 
-Bu Azure AD kullanıcısını Cloud Shell komut kullanarak Active Directory yönetici olarak ekleyin [`az sql server ad-admin create`](/cli/azure/sql/server/ad-admin#az-sql-server-ad-admin-create) . Aşağıdaki komutta, yerine *\<server-name>* sunucu adı (sonek olmadan) ile değiştirin `.database.windows.net` .
+Bu Azure AD kullanıcısını Cloud Shell komut kullanarak Active Directory yönetici olarak ekleyin [`az sql server ad-admin create`](/cli/azure/sql/server/ad-admin#az_sql_server_ad_admin_create) . Aşağıdaki komutta, yerine *\<server-name>* sunucu adı (sonek olmadan) ile değiştirin `.database.windows.net` .
 
 ```azurecli-interactive
 az sql server ad-admin create --resource-group myResourceGroup --server-name <server-name> --display-name ADMIN --object-id $azureaduser
@@ -176,13 +176,13 @@ Daha sonra, App Service uygulamanızı, sistem tarafından atanan yönetilen kim
 
 ### <a name="enable-managed-identity-on-app"></a>Uygulamada yönetilen kimliği etkinleştir
 
-Azure uygulamanızda bir yönetilen kimlik etkinleştirmek için Cloud Shell’de [az webapp identity assign](/cli/azure/webapp/identity#az-webapp-identity-assign) komutunu kullanın. Aşağıdaki komutta, öğesini değiştirin *\<app-name>* .
+Azure uygulamanızda bir yönetilen kimlik etkinleştirmek için Cloud Shell’de [az webapp identity assign](/cli/azure/webapp/identity#az_webapp_identity_assign) komutunu kullanın. Aşağıdaki komutta, öğesini değiştirin *\<app-name>* .
 
 ```azurecli-interactive
 az webapp identity assign --resource-group myResourceGroup --name <app-name>
 ```
 
-Çıktının bir örneği aşağıda verilmiştir:
+Çıkış örneği:
 
 <pre>
 {

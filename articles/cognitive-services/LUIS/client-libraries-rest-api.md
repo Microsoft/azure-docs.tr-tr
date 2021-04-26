@@ -2,7 +2,7 @@
 title: 'Hızlı başlangıç: Language Understanding (LUSıS) SDK istemci kitaplıkları ve REST API'
 description: LUSıS SDK istemci kitaplıkları ve REST API ile bir LUO uygulaması oluşturun ve sorgulayın.
 ms.topic: quickstart
-ms.date: 12/09/2020
+ms.date: 03/29/2021
 ms.service: cognitive-services
 ms.author: aahi
 manager: nitinme
@@ -11,12 +11,12 @@ author: aahill
 keywords: Azure, yapay zeka, AI, doğal dil işleme, NLP, LUO, Azure lusıs, doğal dil anlama, AI sohbet botu, sohbet botu Maker, doğal dili anlama
 ms.custom: devx-track-python, devx-track-js, devx-track-csharp, cog-serv-seo-aug-2020
 zone_pivot_groups: programming-languages-set-luis
-ms.openlocfilehash: 7ff5844cf9f1bce45df438fc00e24da28c438b05
-ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
+ms.openlocfilehash: ca45266ce4b8ca784c3d54aafb80a66efaf2a1da
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/09/2020
-ms.locfileid: "96939225"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106278924"
 ---
 # <a name="quickstart-language-understanding-luis-client-libraries-and-rest-api"></a>Hızlı başlangıç: Language Understanding (LUSıS) istemci kitaplıkları ve REST API
 
@@ -61,9 +61,5 @@ Diğer hatalar: Yukarıdaki listede kapsanmayan bir hata alırsanız, bu sayfan�
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Language Understanding (LUSıS) API nedir?](what-is-luis.md)
-* [Yenilikler nelerdir?](whats-new.md)
-* [Amaçlar](luis-concept-intent.md), [varlıklar](luis-concept-entity-types.md)ve [örnek](luis-concept-utterance.md)bildirimler ve [önceden oluşturulmuş varlıklar](luis-reference-prebuilt-entities.md)
-* Bu örneğe ilişkin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-quickstart-code)' da bulunabilir.
-* Doğal dili anlama: [doğal dil anlama (NLU) ve doğal dil işleme (NLP)](artificial-intelligence.md)
-* Botlar: [AI chatbots](luis-csharp-tutorial-bf-v4.md "sohbet botu Oluşturucusu öğreticisi")
+> [!div class="nextstepaction"]
+> [LUSıS için yinelemeli uygulama geliştirme](./luis-concept-app-iteration.md)

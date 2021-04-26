@@ -3,14 +3,15 @@ title: Azure Otomasyonu 'nda Linux karma runbook çalışanı dağıtma
 description: Bu makalede, yerel veri merkezinizdeki veya bulut ortamınızdaki Linux tabanlı makinelerde runbook 'ları çalıştırmak için bir Azure Otomasyonu karma Runbook Worker nasıl yükleneceği açıklanır.
 services: automation
 ms.subservice: process-automation
-ms.date: 02/26/2021
+ms.date: 04/06/2021
 ms.topic: conceptual
-ms.openlocfilehash: d4d9bcd16e36e76808f19f7fbd43dd0d3e7550c3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 24dc0d2b243eb6c13e5670a1438876132c5e429e
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102182341"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833661"
 ---
 # <a name="deploy-a-linux-hybrid-runbook-worker"></a>Linux karma runbook çalışanı dağıtma
 
@@ -106,6 +107,31 @@ Linux hibrit runbook çalışanları, Azure Otomasyonu 'nda sınırlı sayıda r
 Karma Runbook Worker ağ gereksinimleri için bkz. [ağınızı yapılandırma](automation-hybrid-runbook-worker.md#network-planning).
 
 ## <a name="install-a-linux-hybrid-runbook-worker"></a>Linux karma Runbook Worker 'ı yükler
+
+Karma Runbook Worker dağıtmak için iki yöntem vardır. Azure portal runbook galerisinden runbook 'u içeri aktarıp çalıştırabilirsiniz veya aynı görevi gerçekleştirmek için bir dizi PowerShell komutunu el ile çalıştırabilirsiniz.
+
+### <a name="importing-a-runbook-from-the-runbook-gallery"></a>Runbook galerisinden runbook içeri aktarma
+
+İçeri aktarma yordamı, [Azure Portal GitHub 'dan runbook 'Ları Içeri aktarma](automation-runbook-gallery.md#import-runbooks-from-github-with-the-azure-portal)bölümünde ayrıntılı olarak açıklanmıştır. İçeri aktarılacak runbook 'un adı **Automation Linux HybridWorker oluştur**.
+
+Runbook aşağıdaki parametreleri kullanır.
+
+| Parametre | Durum | Açıklama |
+| ------- | ----- | ----------- |
+| `Location` | Zorunlu | Log Analytics çalışma alanının konumu. |
+| `ResourceGroupName` | Zorunlu | Otomasyon hesabınızın kaynak grubu. |
+| `AccountName` | Zorunlu | Karma çalıştırma çalışanının kaydedileceği Otomasyon hesabı adı. |
+| `CreateLA` | Zorunlu | True ise, `WorkspaceName` bir Log Analytics çalışma alanı oluşturmak için değerini kullanır. False ise, değeri `WorkspaceName` var olan bir çalışma alanına başvurmalıdır. |
+| `LAlocation` | İsteğe Bağlı | Log Analytics çalışma alanının oluşturulacağı konum veya zaten var. |
+| `WorkspaceName` | İsteğe Bağlı | Oluşturulacak veya kullanılacak Log Analytics çalışma alanının adı. |
+| `CreateVM` | Zorunlu | True ise, `VMName` Yeni BIR VM 'nin adı olarak değerini kullanın. Yanlışsa, `VMName` mevcut VM 'yi bulmak ve kaydetmek için kullanın. |
+| `VMName` | İsteğe Bağlı | Değerine bağlı olarak, oluşturulan veya kaydedilen sanal makinenin adı `CreateVM` . |
+| `VMImage` | İsteğe Bağlı | Oluşturulacak VM görüntüsünün adı. |
+| `VMlocation` | İsteğe Bağlı | Oluşturulan veya kaydedilen sanal makinenin konumu. Bu konum belirtilmemişse, değeri `LAlocation` kullanılır. |
+| `RegisterHW` | Zorunlu | Doğru ise, VM 'yi karma çalışan olarak kaydedin. |
+| `WorkerGroupName` | Zorunlu | Karma çalışanı grubunun adı. |
+
+### <a name="manually-run-powershell-commands"></a>PowerShell komutlarını el ile Çalıştır
 
 Bir Linux karma runbook çalışanı yüklemek ve yapılandırmak için aşağıdaki adımları gerçekleştirin.
 

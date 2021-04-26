@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.reviewer: veyalla
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 0b7013979199eefa873a651d99e87dc8b2c47856
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a5a31e15c88cef588c93f44c8fe5303d930b5b2c
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103201592"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107479381"
 ---
 # <a name="monitor-module-twins"></a>Modül ikizlerini izleme
 
@@ -215,7 +215,7 @@ Değişiklik yaparsanız, IoT Hub 'ınıza değişiklikleri kaydetmek için düz
 
 IoT Edge çalışıp çalışmadığını görmek için [az IoT Hub Invoke-Module-metodunu](how-to-edgeagent-direct-method.md#ping) kullanarak IoT Edge aracısına ping gönderin.
 
-[Az IoT Hub Module-ikizi](/cli/azure/ext/azure-iot/iot/hub/module-twin) yapısı şu komutları sağlar:
+[Az IoT Hub Module-ikizi](/cli/azure/iot/hub/module-twin) yapısı şu komutları sağlar:
 
 * **az IoT Hub Module-ikizi Show** -Module ikizi tanımını göster.
 * **az IoT Hub Module-ikizi Update** -Module ikizi tanımını güncelleştirin.

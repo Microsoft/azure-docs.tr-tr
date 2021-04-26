@@ -3,12 +3,12 @@ title: Kişisel veriler
 description: Azure Resource Manager işlemleriyle ilişkili kişisel verileri yönetmeyi öğrenin.
 ms.topic: conceptual
 ms.date: 05/14/2018
-ms.openlocfilehash: 1e531f7cd9992536bcc191637111761c5bbdefa2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9087d3e46f38aab3de7774ea341ebd9cbc2d7d1f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97693696"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785964"
 ---
 # <a name="manage-personal-data-associated-with-azure-resource-manager"></a>Azure Resource Manager ilişkili kişisel verileri yönetme
 
@@ -42,13 +42,13 @@ Kaynak grubunun adı, kaynak grubunu silene kadar devam ettirir. Adlarında kiş
 
 * [Liste](/rest/api/resources/resourcegroups/list)
 * [Get-AzResourceGroup](/powershell/module/az.resources/Get-AzResourceGroup)
-* [az Group List](/cli/azure/group#az-group-list)
+* [az Group List](/cli/azure/group#az_group_list)
 
 **Kaynak gruplarını** silmek için şunu kullanın:
 
 * [Silme](/rest/api/resources/resourcegroups/delete)
 * [Remove-AzResourceGroup](/powershell/module/az.resources/Remove-AzResourceGroup)
-* [az group delete](/cli/azure/group#az-group-delete)
+* [az group delete](/cli/azure/group#az_group_delete)
 
 ## <a name="delete-personal-data-in-tags"></a>Etiketlerin içindeki kişisel verileri silme
 
@@ -58,13 +58,13 @@ Etiket adları ve değerleri, etiketi silene veya değiştirene kadar kalır. Et
 
 * [Liste](/rest/api/resources/tags/list)
 * [Get-AzTag](/powershell/module/az.resources/Get-AzTag)
-* [az Tag List](/cli/azure/tag#az-tag-list)
+* [az Tag List](/cli/azure/tag#az_tag_list)
 
 **Etiketleri** silmek için şunu kullanın:
 
 * [Silme](/rest/api/resources/tags/delete)
 * [Remove-AzTag](/powershell/module/az.resources/Remove-AzTag)
-* [az Tag Delete](/cli/azure/tag#az-tag-delete)
+* [az Tag Delete](/cli/azure/tag#az_tag_delete)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 * Azure Resource Manager genel bir bakış için bkz. [Kaynak Yöneticisi nedir?](overview.md)

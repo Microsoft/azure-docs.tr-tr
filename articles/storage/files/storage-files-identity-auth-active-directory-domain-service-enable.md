@@ -8,12 +8,12 @@ ms.date: 01/03/2021
 ms.author: rogarana
 ms.subservice: files
 ms.custom: contperf-fy21q1, devx-track-azurecli
-ms.openlocfilehash: 3abca397186572cabb4f7ae99edae8688ea4d9a6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e82ac4e1fdb8e5f88c9d83924da50b1ff5c659cc
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102499518"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777932"
 ---
 # <a name="enable-azure-active-directory-domain-services-authentication-on-azure-files"></a>Azure dosyalarında Azure Active Directory Domain Services kimlik doğrulamasını etkinleştirme
 
@@ -93,7 +93,7 @@ Azure AD DS kimlik doğrulamasını yalnızca Azure AD DS Azure AD kiracınıza 
 
 Aşağıdaki görüntüde, depolama hesabınız için SMB üzerinden Azure AD DS kimlik doğrulamasının nasıl etkinleştirileceği gösterilmektedir.
 
-![Azure AD DS kimlik doğrulamasını Azure portal SMB üzerinden etkinleştirin](media/storage-files-active-directory-enable/portal-enable-active-directory-over-smb.png)
+:::image type="content" source="media/storage-files-active-directory-enable/portal-enable-active-directory-over-smb.png" alt-text="Depolama hesabınızdaki yapılandırma dikey penceresinin ekran görüntüsü, Azure Active Directory etki alanı Hizmetleri etkindir." lightbox="media/storage-files-active-directory-enable/portal-enable-active-directory-over-smb.png":::
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -125,7 +125,7 @@ Set-AzStorageAccount -ResourceGroupName "<resource-group-name>" `
 
 Azure CLı ile SMB üzerinden Azure AD kimlik doğrulamasını etkinleştirmek için en son CLı sürümünü (sürüm 2.0.70 veya üzeri) yüklemelisiniz. Azure CLı yükleme hakkında daha fazla bilgi için bkz. [Azure CLI 'Yı yükleme](/cli/azure/install-azure-cli).
 
-Yeni bir depolama hesabı oluşturmak için [az Storage Account Create](/cli/azure/storage/account#az-storage-account-create)çağırın ve `--enable-files-aadds` özelliği **true** olarak ayarlayın. Aşağıdaki örnekte, yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın. (Önceki önizleme modülünü kullanıyorsanız, özellik etkinleştirme parametresi **Dosya-AAD**' dir.)
+Yeni bir depolama hesabı oluşturmak için [az Storage Account Create](/cli/azure/storage/account#az_storage_account_create)çağırın ve `--enable-files-aadds` özelliği **true** olarak ayarlayın. Aşağıdaki örnekte, yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın. (Önceki önizleme modülünü kullanıyorsanız, özellik etkinleştirme parametresi **Dosya-AAD**' dir.)
 
 ```azurecli-interactive
 # Create a new storage account

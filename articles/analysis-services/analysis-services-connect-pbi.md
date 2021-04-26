@@ -4,22 +4,22 @@ description: Power BI kullanarak bir Azure Analysis Services sunucusuna nasıl b
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 12/01/2020
+ms.date: 4/20/2021
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: ed0f3d379ca961c610958c073c27c6fc9583252b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c5a430c5bb24032a2665ad078311dcb5137d2bb9
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96500929"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816052"
 ---
 # <a name="connect-with-power-bi"></a>Power BI ile bağlanma
 
 Azure 'da bir sunucu oluşturup buna bir tablosal Model dağıttıktan sonra, kuruluşunuzdaki kullanıcılar bağlanmaya ve verileri keşfetmeye başlamaya hazırsınız. 
 
-> [!TIP]
-> [Power BI Desktop](https://powerbi.microsoft.com/desktop/)en son sürümünü kullandığınızdan emin olun.
+> [!NOTE]
+> Power BI hizmeti bir Power BI Desktop modeli yayımlıyorsa, Azure Analysis Services sunucusunda Case-Sensitive harmanlama sunucusu özelliğinin seçili olmadığından emin olun (varsayılan). Case-Sensitive Server özelliği SQL Server Management Studio kullanılarak ayarlanabilir.
 > 
 > 
   

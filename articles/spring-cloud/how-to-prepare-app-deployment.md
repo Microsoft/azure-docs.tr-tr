@@ -8,12 +8,12 @@ ms.date: 09/08/2020
 ms.author: brendm
 ms.custom: devx-track-java
 zone_pivot_groups: programming-languages-spring-cloud
-ms.openlocfilehash: a90d4c2a8649e270365af9b11fa408b865945f92
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: cabc4784dfb19f569212f4d0cb93e6838473e559
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878778"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714497"
 ---
 # <a name="prepare-an-application-for-deployment-in-azure-spring-cloud"></a>Azure Spring Cloud 'da bir uygulamayı dağıtıma hazırlama
 
@@ -142,7 +142,7 @@ Azure yay bulutu hem Java 8 hem de Java 11 ' i destekler. Barındırma ortamı, 
 
 Mevcut bir Spring Boot uygulamasını Azure yay bulutu 'na dağıtmak üzere hazırlamak için, aşağıdaki bölümlerde gösterildiği gibi, Application Pod dosyasına Spring Boot ve Spring Cloud bağımlılıklarını ekleyin.
 
-Azure yay bulutu, Spring Boot sürüm 2,1 veya sürüm 2,2 ' nin yalnızca Spring Boot uygulamalarını destekler. Aşağıdaki tabloda desteklenen Spring Boot ve Spring Cloud kombinasyonlarını listelenmektedir:
+Azure yay bulutu, Spring Boot sürüm 2,2, 2,3, 2,4 ' i destekler. Aşağıdaki tabloda desteklenen Spring Boot ve Spring Cloud kombinasyonlarını listelenmektedir:
 
 Spring Boot sürümü | Yay bulutu sürümü
 ---|---

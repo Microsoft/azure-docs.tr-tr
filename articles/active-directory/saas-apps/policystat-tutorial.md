@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 03/28/2019
 ms.author: jeedes
-ms.openlocfilehash: 4d6274f3e1356a8ff8a997e830f0ebee43f50cff
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5c2520c8e209ab8319cbc5a369b70d247a52232c
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92893165"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107601007"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-policystat"></a>Öğretici: PolicyStat ile tümleştirme Azure Active Directory
 
@@ -110,7 +110,7 @@ PolicyStat ile Azure AD çoklu oturum açmayı yapılandırmak için aşağıdak
     b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<companyname>.policystat.com/saml2/metadata/`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için [PolicyStat istemci destek ekibine](http://www.policystat.com/support/) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için [PolicyStat istemci destek ekibine](https://rldatix.com/services-support/support) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
 4. **SAML Ile tek Sign-On ayarlama** sayfasında, **SAML imza sertifikası** bölümünde, **Federasyon meta veri XML** 'sini gereksiniminize göre belirtilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
@@ -154,13 +154,13 @@ PolicyStat ile Azure AD çoklu oturum açmayı yapılandırmak için aşağıdak
 
     c. Oturum kapatma URL 'SI
 
-### <a name="configure-policystat-single-sign-on"></a>PolicyStat tek Sign-On yapılandırma
+### <a name="configure-policystat-single-sign-on&quot;></a>PolicyStat tek Sign-On yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, PolicyStat şirket sitenizde yönetici olarak oturum açın.
 
 2. **Yönetici** sekmesine tıklayın ve ardından sol gezinti bölmesinde **tek Sign-On yapılandırması** ' na tıklayın.
    
-    ![Yönetici Menüsü](./media/policystat-tutorial/ic808633.png "Yönetici Menüsü")
+    ![Yönetici Menüsü](./media/policystat-tutorial/ic808633.png &quot;Yönetici Menüsü")
 
 3. **IDP meta verilerinize** tıklayın ve sonra **IDP meta verileri** bölümünde aşağıdaki adımları uygulayın:
    

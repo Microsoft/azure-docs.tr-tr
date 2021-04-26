@@ -5,13 +5,13 @@ author: anirudhcavale
 ms.author: ancav
 services: azure-monitor
 ms.topic: conceptual
-ms.date: 01/25/2021
-ms.openlocfilehash: c6e946d5aedb06899a44851b79581dbc518f41b0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/13/2021
+ms.openlocfilehash: bd7f19df5eed87f2fb02af4b5f2577340bcbfd60
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102052322"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812111"
 ---
 # <a name="custom-metrics-in-azure-monitor-preview"></a>Azure Izleyici 'de özel ölçümler (Önizleme)
 
@@ -213,6 +213,30 @@ Azure Izleyici, özel ölçümler üzerinde aşağıdaki kullanım sınırların
 |Ölçüm ad alanları, ölçüm adları, Boyut anahtarları ve boyut değerleri için dize uzunluğu|256 karakter|
 
 Etkin bir zaman serisi, son 12 saat içinde yayımlanmış ölçüm değerleri olan ölçüm, boyut anahtarı veya boyut değerinin herhangi bir benzersiz birleşimi olarak tanımlanır.
+
+50.000 zaman serisi sınırını anlamak için aşağıdaki ölçümü göz önünde bulundurun:
+
+Boyutlarla *sunucu yanıt süresi* : *bölge*, *bölüm*, *CustomerID*
+
+Bu ölçümle, 10 bölgeiniz varsa, 20 departman ve 100 müşteri, size 10 x 20 x 100 = 2000 zaman serisi sağlar. 
+
+100 bölgeiniz varsa, 200 departmanlar ve 2000 müşteriler 100 x 200 x 2000 = 40.000.000 zaman serisi, bu da yalnızca bu ölçüm için sınırın üzerinde. 
+
+Bu sınır, tek bir ölçüm için değildir. Bu, bir abonelik ve bölge genelinde tüm ölçümlerin toplamına yöneliktir.  
+
+## <a name="design-limitations-and-considerations"></a>Tasarım sınırlamaları ve konuları
+
+**Denetim amacıyla Application Insights kullanmayın** – Application Insights telemetri işlem hattı, performans etkisini en aza indirmek ve ağ trafiğini uygulamanızı izlemeden sınırlamak için iyileştirilmiştir. Bu nedenle, ilk veri kümesi çok büyük hale gelirse, bir veya örneklerinizi kısıtlar (yalnızca telemetrinizin yüzdesini alır ve REST 'yi yoksayar). Bu davranış nedeniyle, bazı kayıtların bırakılmakta olma olasılığı olduğu için bunu denetim amacıyla kullanamazsınız. 
+
+**Adda bir değişken bulunan ölçümler** – ölçüm adının bir parçası olarak bir değişken kullanmayın, bunun yerine bir sabit kullanın. Değişken, her değeri değiştirdiğinde, Azure Izleyici yeni bir ölçüm oluşturur ve ölçüm sayısı limitlerine hızlıca ulaşacaktır. Genellikle, geliştiriciler ölçüm adına bir değişken eklemek istediklerinde, gerçekten bir ölçüm içinde birden çok zaman serisi 'i izlemek ve değişken ölçüm adları yerine boyutları kullanması gerekir. 
+
+**Yüksek kardinalite ölçüm boyutları** -bir boyutta ("yüksek kardinalite") çok sayıda geçerli değere sahip ölçümler 50.000 sınırına ulaşmaya çok daha fazladır. Genel olarak, asla bir boyut veya ölçüm adında sürekli değişen bir değer kullanmamalısınız. Örneğin, zaman damgası hiçbir zaman bir boyut olmamalıdır. Sunucu, müşteri veya ProductID, ancak bu türden her biri daha az sayıda varsa kullanılabilir. Bir test olarak, bu verileri bir grafikte grafik üzerinde barındırmanız durumunda kendinize sorun.  10 veya belki de 100 sunucularınız varsa, bunları karşılaştırma için bir grafikte görmek faydalı olabilir. Ancak, 1000 varsa, bu durum okunmadığında ortaya çıkan grafik büyük olasılıkla zor olabilir. En iyi yöntem, 100 geçerli değerler için daha az bir değer olmasını sağlar. 300 kadar gri bir alandır.  Bu miktarın üzerine gitmeniz gerekiyorsa Azure Izleyici özel günlüklerini kullanın.   
+
+Ad veya yüksek kardinalite boyutunda bir değişkeniniz varsa, şunlar meydana gelebilir:
+- Kısıtlama nedeniyle ölçümler güvenilir hale getirilir
+- Ölçüm Gezgini çalışmıyor
+- Uyarı ve bildirimler öngörülemeyen hale gelir
+- Maliyetler unexpectedably artırabilir-boyutlara sahip özel ölçümler genel önizlemede olduğundan, Microsoft bu şekilde ücretlendirmez. Ancak, daha sonra ücretler başladıktan sonra beklenmeyen ücretler uygulanır. Plan, izlenen zaman serisi sayısına ve yapılan API çağrılarının sayısına göre ölçüm tüketimine göre ücretlendirilir.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Farklı hizmetlerden özel ölçümler kullanın: 

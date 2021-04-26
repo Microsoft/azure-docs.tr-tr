@@ -8,10 +8,10 @@ author: trkeya
 ms.author: trkeya
 ms.date: 09/11/2020
 ms.openlocfilehash: 584e1e943f215aa4a69368fb71cb3053b1444a01
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "94660228"
 ---
 # <a name="common-questions-about-the-microsoft-commercial-marketplace"></a>Microsoft ticari Market hakkında sık sorulan sorular
@@ -166,7 +166,7 @@ Ticari Market, satıcılar için kenar boşluğu belirtme veya doğrudan ve otom
 
 Tekliflerinizin ve planlarınızın kullanılabilirliği müşterilerin faturalandırma konumları tarafından tanımlanır. Satıcılar önce satmakta oldukları müşterileri seçin ve sonra teklifinizi seçin. Bir müşteri desteklenmeyen bir konumdaysa, teklifiniz bu şekilde kullanılamaz.
 
-## <a name="billing-capabilities"></a>Faturalandırma olanakları
+## <a name="billing-capabilities"></a>Faturalama özellikleri
 
 ### <a name="whats-the-difference-between-transaction-and-monetization"></a>İşlem ve para kullanımı arasındaki fark nedir?
 

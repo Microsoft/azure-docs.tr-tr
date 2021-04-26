@@ -4,15 +4,15 @@ description: Bu hızlı başlangıçta, MySQL için Azure veritabanı-esnek sunu
 author: mksuni
 ms.author: sumuth
 ms.service: mysql
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.topic: quickstart
 ms.date: 03/01/2021
-ms.openlocfilehash: b28c4457129985a1d5c47d251873eaa52a253f72
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: e0fd5969a3c4f84b6e8f98e99335bf120179e7af
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102607977"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481098"
 ---
 # <a name="quickstart-connect-and-query-with-azure-cli--with-azure-database-for-mysql---flexible-server"></a>Hızlı başlangıç: MySQL için Azure veritabanı ile Azure CLı ile bağlanma ve sorgulama-esnek sunucu
 
@@ -157,5 +157,6 @@ Your preference of  are now saved to local context. To learn more, type in `az l
 ## <a name="next-steps"></a>Sonraki Adımlar
 
 > [!div class="nextstepaction"]
-> [Sunucuyu yönetme](./how-to-manage-server-cli.md)
+* [Şifrelenmiş bağlantılarla, MySQL için Azure veritabanı 'na bağlanma-esnek sunucu](how-to-connect-tls-ssl.md)
+* [Sunucuyu yönetme](./how-to-manage-server-cli.md)
 

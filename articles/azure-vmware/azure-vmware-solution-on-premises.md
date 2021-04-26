@@ -2,22 +2,20 @@
 title: Azure VMware çözümünü şirket içi ortamınıza bağlama
 description: Azure VMware çözümünü şirket içi ortamınıza bağlamayı öğrenin.
 ms.topic: tutorial
-ms.date: 03/13/2021
-ms.openlocfilehash: 0b26dc4756cb37544c2b2f8c5a75df0ac1a9d629
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/19/2021
+ms.openlocfilehash: 392d82a9aca9b60b394a5d5f4a7e6b0111438e59
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103491801"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725629"
 ---
 # <a name="connect-azure-vmware-solution-to-your-on-premises-environment"></a>Azure VMware çözümünü şirket içi ortamınıza bağlama
 
 Bu makalede, Azure VMware çözümünü şirket içi ortamınıza bağlamayı [planlama sırasında toplanan bilgileri](production-ready-deployment-steps.md) kullanmaya devam edersiniz.
 
-Başlamadan önce, Azure VMware çözümünü şirket içi ortamınıza bağlamak için iki önkoşul vardır:
+Başlamadan önce, şirket içi ortamınızdan Azure 'a bir ExpressRoute devresine sahip olmanız gerekir.
 
-- Şirket içi ortamınızdan Azure 'a bir ExpressRoute devresi.
-- [Planlama aşamasının](production-ready-deployment-steps.md)bir parçası olarak tanımladığınız expressroute Global Reach eşleme için çakışmayan bir/29 çakışmayan CIDR ağ adresi bloğu.
 
 >[!NOTE]
 > VPN üzerinden bağlanabilirsiniz, ancak bu hızlı başlangıç belgesi için kapsam dışında olabilir.

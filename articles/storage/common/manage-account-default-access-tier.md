@@ -1,19 +1,19 @@
 ---
 title: Azure depolama hesabının varsayılan erişim katmanını yönetme
 description: GPv2 veya blob depolama hesabının varsayılan erişim katmanını değiştirme hakkında bilgi edinin
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 01/11/2021
 ms.service: storage
 ms.subservice: common
 ms.topic: how-to
 ms.reviewer: klaasl
-ms.openlocfilehash: 637f748882b3ac84127c8b71761a06629e1e0957
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 026ab6be1fd4ef79f818f796c4725f6613a9bc6d
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100653841"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277394"
 ---
 # <a name="manage-the-default-access-tier-of-an-azure-storage-account"></a>Azure depolama hesabının varsayılan erişim katmanını yönetme
 

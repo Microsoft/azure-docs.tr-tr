@@ -8,12 +8,12 @@ ms.topic: quickstart
 ms.custom: devx-track-csharp
 ms.date: 09/28/2020
 ms.author: zhshang
-ms.openlocfilehash: 3cfcf57f455a5c3b17b794acf2ded66ed2285eff
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9099a8620f6e4d87ec38c10226d94b1b3cd3462f
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94873514"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865990"
 ---
 # <a name="quickstart-create-a-chat-room-by-using-signalr-service"></a>Hızlı başlangıç: SignalR hizmetini kullanarak sohbet odası oluşturma
 
@@ -29,7 +29,7 @@ Bu öğreticinin kodu [AzureSignalR-samples GitHub deposundan](https://github.co
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [.NET Core SDK](https://www.microsoft.com/net/download/windows)'i yükler.
+* [.NET Core SDK](https://dotnet.microsoft.com/download)'i yükler.
 * [AzureSignalR-Sample](https://github.com/aspnet/AzureSignalR-samples) GitHub deposunu indirin veya kopyalayın. 
 
 Sorun mu yaşıyorsunuz? [Sorun giderme kılavuzunu](signalr-howto-troubleshoot-guide.md) deneyin veya [bize bilgi verin](https://aka.ms/asrs/qsnetcore).

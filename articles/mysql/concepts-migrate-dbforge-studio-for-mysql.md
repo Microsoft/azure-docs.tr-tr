@@ -6,12 +6,12 @@ ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 03/03/2021
-ms.openlocfilehash: d5d694820c2ffd09868d81693d4f98f839a139d7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 942651aadf4113c1aca32e4e1d2c558b0d764421
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104591886"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377234"
 ---
 # <a name="connect-to-azure-database-for-mysql-using-dbforge-studio-for-mysql"></a>MySQL için dbForge Studio 'Yu kullanarak MySQL için Azure veritabanı 'na bağlanma
 
@@ -78,9 +78,7 @@ Veritabanı geçiş çabalarımızın bir sonucu olarak, *world_x* veritabanı A
 MySQL için dbForge Studio, MySQL veritabanları, MySQL şemaları ve \veya verilerini Azure 'a geçirmeye izin veren birkaç araç içerir. İşlevsellik seçimi, gereksinimlerinize ve projenizin gereksinimlerine bağlıdır. Bir veritabanını seçmeli olarak taşımanız gerekiyorsa, diğer bir deyişle, belirli MySQL tablolarını Azure 'a geçirirseniz, şema ve veri karşılaştırma işlevlerini kullanmak en iyisidir.
 Bu örnekte, MySQL sunucusunda bulunan *Dünya* veritabanını MySQL Için Azure veritabanı 'na geçiririz. MySQL için dbForge Studio 'nun şema ve veri karşılaştırma işlevini kullanarak geçiş işleminin arkasındaki mantık, MySQL için Azure veritabanı 'nda boş bir veritabanı oluşturmaktır, şema karşılaştırma aracını ve ardından veri karşılaştırma aracı 'nı kullanarak önce gerekli MySQL veritabanıyla eşitler. Bu şekilde, MySQL şemaları ve verileri doğru şekilde Azure 'a taşınır.
 
-### <a name="connect-to-azure-database-for-mysql-and-create-an-empty-database"></a>MySQL için Azure veritabanı 'na bağlanma ve boş bir veritabanı oluşturma
-
-MySQL için Azure veritabanı 'na bağlanın ve boş bir veritabanı oluşturun.
+### <a name="step-1-connect-to-azure-database-for-mysql-and-create-an-empty-database"></a>Adım 1. MySQL için Azure veritabanı 'na bağlanma ve boş bir veritabanı oluşturma
 
 ### <a name="step-2-schema-synchronization"></a>Adım 2. Şema eşitleme
 
@@ -95,7 +93,7 @@ Yeni şema karşılaştırma Sihirbazı görüntülenir.
 
     :::image type="content" source="media/concepts-migrate-dbforge-studio-for-mysql/schema-sync-wizard.png" alt-text="Şema eşitleme Sihirbazı":::
 
-### <a name="data-comparison"></a>Veri karşılaştırması
+### <a name="step-3-data-comparison"></a>3. Adım Veri karşılaştırması
 
 1. Karşılaştırma menüsünde Yeni veri karşılaştırması ' ni seçin. Yeni veri karşılaştırma Sihirbazı görüntülenir.
 

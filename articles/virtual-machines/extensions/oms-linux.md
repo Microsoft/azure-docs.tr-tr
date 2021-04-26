@@ -9,10 +9,10 @@ ms.author: amjads
 ms.collection: linux
 ms.date: 02/18/2020
 ms.openlocfilehash: 3ac6937d83bd2d21fefc09878408a54aa0eb41f1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102559095"
 ---
 # <a name="log-analytics-virtual-machine-extension-for-linux"></a>Linux için Log Analytics sanal makine uzantısı

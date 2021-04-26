@@ -7,7 +7,6 @@ author: KumudD
 manager: mtillman
 editor: ''
 tags: azure-resource-manager
-Customer intent: I want to route traffic from one subnet, to a different subnet, through a network virtual appliance.
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: azurecli
@@ -17,12 +16,12 @@ ms.workload: infrastructure
 ms.date: 03/13/2018
 ms.author: kumud
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 043d450a1b968174ad263579d39de06a296a98e4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2ff643c39820fa529c8678c7a36881dd25da354c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94741494"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762506"
 ---
 # <a name="route-network-traffic-with-a-route-table-using-the-azure-cli"></a>Azure CLı kullanarak bir yönlendirme tablosu ile ağ trafiğini yönlendirme
 
@@ -53,7 +52,7 @@ az group create \
   --location eastus
 ```
 
-[Az Network Route-Table Create](/cli/azure/network/route-table#az-network-route-table-create)komutuyla bir yol tablosu oluşturun. Aşağıdaki örnek *Myroutetablepublic* adlı bir yol tablosu oluşturur. 
+[Az Network Route-Table Create](/cli/azure/network/route-table#az_network_route_table_create)komutuyla bir yol tablosu oluşturun. Aşağıdaki örnek *Myroutetablepublic* adlı bir yol tablosu oluşturur. 
 
 ```azurecli-interactive
 # Create a route table
@@ -64,7 +63,7 @@ az network route-table create \
 
 ## <a name="create-a-route"></a>Yönlendirme oluşturma
 
-Rota tablosunda [az Network Route-Table Route Create](/cli/azure/network/route-table/route#az-network-route-table-route-create)komutuyla bir yol oluşturun. 
+Rota tablosunda [az Network Route-Table Route Create](/cli/azure/network/route-table/route#az_network_route_table_route_create)komutuyla bir yol oluşturun. 
 
 ```azurecli-interactive
 az network route-table route create \

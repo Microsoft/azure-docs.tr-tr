@@ -4,10 +4,10 @@ description: IoT hizmeti için Defender kullanırken kullanılabilecek farklı k
 ms.topic: conceptual
 ms.date: 01/24/2021
 ms.openlocfilehash: bd4d89d8664dae2421ff7f268b3710b5a906427b
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104784620"
 ---
 # <a name="security-agent-authentication-methods"></a>Güvenlik Aracısı kimlik doğrulama yöntemleri
@@ -44,7 +44,7 @@ Güvenlik aracısının mevcut bir cihaz kimlik doğrulama yöntemini (otomatik 
 [Bir güvenlik Aracısı dağıtıldığında](how-to-deploy-agent.md), kimlik doğrulaması ayrıntıları bağımsız değişken olarak sağlanmalıdır.
 Bu bağımsız değişkenler aşağıdaki tabloda belgelenmiştir.
 
-|Linux parametre adı | Windows parametre adı | Toplu parametre |Açıklama|Seçenekler|
+|Linux parametre adı | Windows parametre adı | Toplu parametre |Description|Seçenekler|
 |---------------------|---------------|---------|---------------|---------------|
 |kimlik doğrulama-kimlik|Authenticationıdentity|AUI|Kimlik doğrulama kimliği| **Securitymodule** veya **cihaz**|
 |Authentication-yöntemi|AuthenticationMethod|AUD|Kimlik doğrulama yöntemi|**SymmetricKey** veya **Selfsignedcertificate**|

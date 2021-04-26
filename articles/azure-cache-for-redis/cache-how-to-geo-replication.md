@@ -6,12 +6,12 @@ ms.service: cache
 ms.topic: conceptual
 ms.date: 02/08/2021
 ms.author: yegu
-ms.openlocfilehash: 8701f7bcb2e7ff705e4f1d1b401f4eb3e680f28b
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 0be2bb59b46dc827001d89f8e0f1be23f35a714d
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102501048"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107536101"
 ---
 # <a name="configure-geo-replication-for-premium-azure-cache-for-redis-instances"></a>Redsıs örnekleri için Premium Azure önbelleği için Coğrafi çoğaltmayı yapılandırma
 
@@ -42,7 +42,7 @@ Bazı özellikler coğrafi çoğaltma ile desteklenmez:
 
 Coğrafi Çoğaltma yapılandırıldıktan sonra, aşağıdaki kısıtlamalar bağlı önbellek çiftiniz için geçerlidir:
 
-- İkincil bağlantılı önbellek salt okunurdur; buradan okuyabilirsiniz, ancak buraya veri yazılamaz. 
+- İkincil bağlantılı önbellek salt okunurdur; buradan okuyabilirsiniz, ancak buraya veri yazılamaz. Geo-Secondary örneğinden okumayı seçerseniz, Geo-Primary ile Geo-Secondary arasında tam bir veri eşitlemesi gerçekleşdiğinde (Geo-Primary ya da Geo-Secondary güncelleştirildiğinde ve bazı yeniden başlatma senaryolarında), Geo-Secondary örnek, Geo-Primary ve Geo-Secondary arasında tam veri eşitlemesi tamamlanana kadar tüm redin işlemleri üzerinde her bir redin işlemi için bir tam veri eşitlemenin devam ettiğini belirten bir. Geo-Seocndary okuyan uygulamalar, Geo-Seocndary bu hatalar her yapıldığında Geo-Primary geri dönecek şekilde oluşturulmalıdır. 
 - Bağlantı eklenmeden önce ikincil bağlantılı önbellekte bulunan tüm veriler kaldırılır. Coğrafi çoğaltma daha sonra kaldırılırsa, çoğaltılan veriler ikincil bağlantılı önbellekte kalır.
 - Önbellekler bağlıyken her iki önbelleği [ölçeklendirebilirsiniz](cache-how-to-scale.md) .
 - Önbellekte kümeleme etkinse [, parça sayısını değiştiremezsiniz](cache-how-to-premium-clustering.md) .

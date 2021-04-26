@@ -2,21 +2,21 @@
 title: Uygulama yönetimi sertifikaları hakkında sık sorulan sorular Azure Active Directory
 description: Kimlik sağlayıcısı (IDP) olarak Azure Active Directory kullanarak uygulamalar için sertifikaları yönetme hakkında sık sorulan soruların (SSS) yanıtlarını öğrenin.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: reference
 ms.date: 03/19/2021
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: secherka, mifarca, shchaur, shravank, sureshja
-ms.openlocfilehash: 928bf02e2d628379738483b40631e36f0f929176
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 0868c942a023662a1a6d3053477d85b0245fef4b
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104803804"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376248"
 ---
 # <a name="azure-active-directory-azure-ad-application-management-certificates-frequently-asked-questions"></a>Azure Active Directory (Azure AD) uygulama yönetimi sertifikaları hakkında sık sorulan sorular
 

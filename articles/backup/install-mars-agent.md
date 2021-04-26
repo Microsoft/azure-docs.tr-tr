@@ -3,12 +3,12 @@ title: Microsoft Azure Kurtarma Hizmetleri (MARS) aracısını yükler
 description: Windows makinelerini yedeklemek için Microsoft Azure Kurtarma Hizmetleri (MARS) aracısını yüklemeyi öğrenin.
 ms.topic: conceptual
 ms.date: 03/03/2020
-ms.openlocfilehash: acf38fdf338fcdd0cd7902d4295f0f03310543a8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3ea48aaa6aad4a51463c4c028ead22f31163f810
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98986879"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519230"
 ---
 # <a name="install-the-azure-backup-mars-agent"></a>Azure Backup MARS aracısını yükler
 
@@ -158,7 +158,7 @@ Aracıyı herhangi bir makineye zaten yüklediyseniz aracının en son sürümü
 
     ![Sunucu kaydetme Sihirbazı 'Nı kullanarak kasa kimlik bilgileri ekleme](./media/backup-configure-vault/register1.png)
 
-1. **Şifreleme ayarı** sayfasında, makinenin yedeklemelerini şifrelemek ve şifresini çözmek için kullanılacak bir parola belirtin. İzin verilen parola karakterleri hakkında daha fazla bilgi için [buraya bakın](backup-azure-file-folder-backup-faq.md#what-characters-are-allowed-for-the-passphrase) .
+1. **Şifreleme ayarı** sayfasında, makinenin yedeklemelerini şifrelemek ve şifresini çözmek için kullanılacak bir parola belirtin. İzin verilen parola karakterleri hakkında daha fazla bilgi için [buraya bakın](backup-azure-file-folder-backup-faq.yml#what-characters-are-allowed-for-the-passphrase-) .
 
     * Parolayı güvenli bir konuma kaydedin. Bir yedeklemeyi geri yüklemeniz gerekir.
     * Parolayı kaybeder veya unutursanız, Microsoft, yedekleme verilerini kurtarmanıza yardımcı olamaz.

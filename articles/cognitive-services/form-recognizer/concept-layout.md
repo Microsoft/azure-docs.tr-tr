@@ -10,16 +10,16 @@ ms.subservice: forms-recognizer
 ms.topic: conceptual
 ms.date: 03/15/2021
 ms.author: lajanuar
-ms.openlocfilehash: 73bef21f430bde1c6c2c95d7c3f685cccbbd9179
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: cc19d5652f416657cbcd339de61379265587b4e7
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103467026"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505391"
 ---
 # <a name="form-recognizer-layout-service"></a>Form tanıyıcı düzen hizmeti
 
-Azure form tanıyıcı, düzen hizmetini kullanarak belgelerden metin, tablo, seçim işareti ve yapı bilgilerini ayıklayabilir. Düzen API 'SI, müşterilerin belgeleri çeşitli biçimlerde almasını ve belgelerin yapılandırılmış veri gösterimlerini döndürmesini sağlar. Metin, tablo, seçim işaretleri ve belge yapısını ayıklamak için derin öğrenme modelleriyle güçlü [optik karakter tanıma (OCR)](../computer-vision/concept-recognizing-text.md) olanaklarımızı birleştirir. 
+Azure form tanıyıcı, düzen hizmetini kullanarak belgelerden metin, tablo, seçim işareti ve yapı bilgilerini ayıklayabilir. Düzen API 'SI, müşterilerin belgeleri çeşitli biçimlerde almasını ve belgelerin yapılandırılmış veri gösterimlerini döndürmesini sağlar. Metin, tablo, seçim işaretleri ve belge yapısını ayıklamak için derin öğrenme modelleriyle güçlü [optik karakter tanıma (OCR)](../computer-vision/overview-ocr.md) olanaklarımızı birleştirir. 
 
 ## <a name="what-does-the-layout-service-do"></a>Düzen hizmeti ne yapar?
 
@@ -32,7 +32,7 @@ Düzen API 'SI, önemli doğruluk içeren belgelerden metin, tablo, seçim işar
 Form tanıyıcı düzen hizmetini denemek için çevrimiçi örnek UI aracına gidin:
 
 > [!div class="nextstepaction"]
-> [Form OCR test aracı (FOTT)](https://fott-preview.azurewebsites.net)
+> [Form tanıyıcıyı deneyin](https://fott-preview.azurewebsites.net)
 
 Form tanıyıcı düzeni API 'sini denemek için bir Azure aboneliğine ([ücretsiz olarak bir tane oluşturun](https://azure.microsoft.com/free/cognitive-services)) ve bir [form tanıyıcı kaynak](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesFormRecognizer) uç noktası ve anahtarına ihtiyacınız olacaktır. 
 
@@ -48,7 +48,7 @@ Form tanıyıcı düzeni API 'sini denemek için bir Azure aboneliğine ([ücret
 
 |Yanıt üst bilgisi| Sonuç URL 'SI |
 |:-----|:----|
-|Operation-Location | `https://cognitiveservice/formrecognizer/v2.1-preview.3/prebuilt/layout/analyzeResults/44a436324-fc4b-4387-aa06-090cfbf0064f` |
+|Operation-Location | `https://cognitiveservice/formrecognizer/v2.1-preview.3/layout/analyzeResults/44a436324-fc4b-4387-aa06-090cfbf0064f` |
 
 ### <a name="natural-reading-order-output-latin-only"></a>Doğal okuma sırası çıkışı (yalnızca Latin)
 

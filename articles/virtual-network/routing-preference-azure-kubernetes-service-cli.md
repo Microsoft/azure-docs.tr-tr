@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2021
 ms.author: mnayak
-ms.openlocfilehash: ac70f48a3c484f8865c54e09c59662a14a259e74
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9eaad12e254150109498be0fac2f285f33a5965c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101680340"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776618"
 ---
 # <a name="configure-routing-preference-for-a-kubernetes-cluster-using-azure-cli"></a>Azure CLı kullanarak bir Kubernetes kümesi için yönlendirme tercihini yapılandırma
 
@@ -31,14 +31,14 @@ Bu makalede, Azure CLı kullanarak bir Kubernetes kümesi için ISS ağı (**Int
 - Bu makale, Azure CLı 'nin sürüm 2.0.49 veya üstünü gerektirir. Azure Cloud Shell kullanılıyorsa, en son sürüm zaten yüklüdür.
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
-[az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek, **Doğu ABD** Azure bölgesinde bir kaynak grubu oluşturur:
+[az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. Aşağıdaki örnek, **Doğu ABD** Azure bölgesinde bir kaynak grubu oluşturur:
 
 ```azurecli
   az group create --name myResourceGroup --location eastus
 ```
 ## <a name="create-a-public-ip-address"></a>Genel IP adresi oluşturma
 
-[Az Network public-IP Create](/cli/azure/network/public-ip#az-network-public-ip-create)komutunu kullanarak **Internet** türü yönlendirme tercıhı Ile genel bir IP adresi oluşturun.
+[Az Network public-IP Create](/cli/azure/network/public-ip#az_network_public_ip_create)komutunu kullanarak **Internet** türü yönlendirme tercıhı Ile genel bir IP adresi oluşturun.
 
 Aşağıdaki komut, **Doğu ABD** Azure bölgesinde **Internet** yönlendirme tercihi Ile yeni bir genel IP oluşturur.
 
@@ -87,4 +87,3 @@ Doğrulamak için Azure portal önceki adımda oluşturulan genel IP 'yi arayın
 
 - [Genel IP adreslerinde yönlendirme tercihi](routing-preference-overview.md)hakkında daha fazla bilgi edinin. 
 - [Azure CLI kullanarak BIR VM için yönlendirme tercihini yapılandırın](configure-routing-preference-virtual-machine-cli.md).
-

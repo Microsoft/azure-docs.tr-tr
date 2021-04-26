@@ -93,6 +93,9 @@
             - name: Başlayın
               href: connect-go.md
               displayName: connect with go
+            - name: Rust
+              href: connect-rust.md
+              displayName: connect with rust
     - name: Öğreticiler
       items:
         - name: Veritabanı tasarlama
@@ -100,7 +103,7 @@
             - name: Azure portal
               href: tutorial-design-database-using-azure-portal.md
               displayName: design database
-            - name: Azure CLI’si
+            - name: Azure CLI
               href: tutorial-design-database-using-azure-cli.md
             - name: Azure PowerShell
               href: tutorial-design-database-using-powershell.md
@@ -212,6 +215,8 @@
             - name: Performans önerileri
               href: concepts-performance-recommendations.md
               displayName: 'query store, performance, optimize, recommendations'
+            - name: Azure Advisor önerileri
+              href: concepts-azure-advisor-recommendations.md
         - name: Uygulama Geliştirme
           items:
             - name: En iyi uygulamalar
@@ -244,7 +249,7 @@
           items:
             - name: Azure portal
               href: howto-restart-server-portal.md
-            - name: Azure CLI’si
+            - name: Azure CLI
               href: howto-restart-server-cli.md
             - name: Azure PowerShell
               href: howto-restart-server-powershell.md
@@ -264,7 +269,7 @@
             - name: Azure portal
               href: howto-restore-server-portal.md
               displayName: 'restore, georestore, geo-restore, outage'
-            - name: Azure CLI’si
+            - name: Azure CLI
               href: howto-restore-server-cli.md
               displayName: 'restore, georestore, geo-restore, outage'
             - name: Azure PowerShell
@@ -308,7 +313,7 @@
             - name: Azure portal
               href: howto-configure-server-parameters-using-portal.md
               displayName: 'application development, server parameters'
-            - name: Azure CLI’si
+            - name: Azure CLI
               href: howto-configure-server-parameters-using-cli.md
               displayName: 'application development, server parameters'
             - name: Azure PowerShell
@@ -319,7 +324,7 @@
             - name: Azure portal
               href: howto-auto-grow-storage-portal.md
               displayName: 'business continuity, scale , storage'
-            - name: Azure CLI’si
+            - name: Azure CLI
               href: howto-auto-grow-storage-cli.md
               displayName: 'business continuity, scale , storage'
             - name: Azure PowerShell
@@ -426,7 +431,7 @@
               href: flexible-server/quickstart-create-server-arm-template.md
         - name: Bağlanma ve sorgulama
           items:
-            - name: Azure CLI’si
+            - name: Azure CLI
               href: flexible-server/connect-azure-cli.md
             - name: Python
               href: flexible-server/connect-python.md
@@ -481,6 +486,16 @@
               displayName: 'monitor, server logs'
             - name: Denetim günlükleri
               href: flexible-server/concepts-audit.md
+            - name: Akıllı performans
+              items:
+                - name: Sorgu deposuna genel bakış
+                  href: flexible-server/concepts-query-store.md
+                  displayName: 'performance, optimize, query store'
+                - name: Sorgu Deposu kullanım senaryoları
+                  href: flexible-server/concepts-query-store-scenarios.md
+                  displayName: 'query store, performance, optimize'
+                - name: Sorgu Deposu en iyi yöntemleri
+                  href: flexible-server/concepts-query-store-best-practices.md
         - name: Çoğaltma
           href: flexible-server/concepts-logical.md
           displayName: logical decoding
@@ -558,11 +573,15 @@
       items:
         - name: Hiper Ölçek (Citus) nedir?
           href: hyperscale-overview.md
+        - name: Önizlemedeki özellikler
+          href: hyperscale-preview-features.md
     - name: Hızlı Başlangıç
       items:
         - name: Sunucu grubu oluşturma
           items:
-            - name: Azure portal
+            - name: Temel katman (Önizleme)
+              href: quickstart-create-hyperscale-basic-tier.md
+            - name: Standart katmanı
               href: quickstart-create-hyperscale-portal.md
               displayName: 'portal, create hyperscale'
     - name: Öğreticiler
@@ -581,6 +600,8 @@
           displayName: 'hyperscale, tutorial, real-time'
     - name: Kavramlar
       items:
+        - name: Temel katman
+          href: concepts-hyperscale-tiers.md
         - name: Dağıtılmış veriler
           items:
             - name: Düğümler ve tablolar
@@ -611,26 +632,26 @@
               displayName: 'backup, restore, outage, hyperscale'
             - name: Yüksek kullanılabilirlik
               href: concepts-hyperscale-high-availability.md
+        - name: Çoğaltma
+          href: concepts-hyperscale-read-replicas.md
         - name: İzleme ve ayarlama
           items:
             - name: İzleme ve ayarlama
               href: concepts-hyperscale-monitoring.md
             - name: Denetim günlükleri
               href: concepts-hyperscale-audit.md
+        - name: Sütunlu depolama
+          href: concepts-hyperscale-columnar.md
         - name: Yapılandırma seçenekleri
           href: concepts-hyperscale-configuration-options.md
+        - name: Sınırlar ve sınırlamalar
+          href: concepts-hyperscale-limits.md
         - name: Ayrılmış kapasite için ön ödeme yapma
           href: concepts-hyperscale-reserved-pricing.md
+        - name: PostgreSQL sürümleri
+          href: concepts-hyperscale-versions.md
         - name: PostgreSQL uzantıları
           href: concepts-hyperscale-extensions.md
-    - name: API Başvurusu
-      items:
-        - name: SQL API işlevleri
-          href: reference-hyperscale-functions.md
-        - name: Sunucu parametreleri
-          href: reference-hyperscale-parameters.md
-        - name: Sistem tabloları
-          href: reference-hyperscale-metadata.md
     - name: Nasıl yapılır kılavuzları
       items:
         - name: Sunucu grubu boyutu
@@ -656,6 +677,15 @@
               href: howto-hyperscale-modify-distributed-tables.md
         - name: Yüksek kullanılabilirlik
           href: howto-hyperscale-high-availability.md
+        - name: Çoğaltma
+          items:
+            - name: Azure portal
+              href: howto-hyperscale-read-replicas-portal.md
+              displayName: 'replication, read replica'
+        - name: Zamanlanan bakım
+          items:
+            - name: Azure portal
+              href: howto-hyperscale-maintenance.md
         - name: İzleme
           items:
             - name: Ölçümler üzerinde uyarı oluşturma
@@ -664,6 +694,12 @@
             - name: Veritabanı günlüklerine erişme
               href: howto-hyperscale-logging.md
               displayName: 'log, hyperscale'
+        - name: Sunucu grubunu geri yükle
+          items:
+            - name: Azure portal
+              href: howto-hyperscale-restore-portal.md
+        - name: Ana sürüm yükseltmeleri
+          href: howto-hyperscale-upgrade.md
         - name: Sorun giderme
           items:
             - name: Bağlantı hatalarını giderme
@@ -671,9 +707,17 @@
               displayName: 'connection errors, hyperscale'
             - name: Yararlı tanılama sorguları
               href: howto-hyperscale-useful-diagnostic-queries.md
+    - name: API Başvurusu
+      items:
+        - name: SQL API işlevleri
+          href: reference-hyperscale-functions.md
+        - name: Sunucu parametreleri
+          href: reference-hyperscale-parameters.md
+        - name: Sistem tabloları
+          href: reference-hyperscale-metadata.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
+    - name: Azure CLI
       href: /cli/azure/postgres
     - name: REST API
       href: /rest/api/postgresql

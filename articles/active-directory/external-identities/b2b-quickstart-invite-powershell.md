@@ -2,22 +2,25 @@
 title: 'Hızlı başlangıç: PowerShell ile Konuk Kullanıcı ekleme-Azure AD'
 description: Bu hızlı başlangıçta, şirket dışından bir Azure AD B2B işbirliği kullanıcısına davet göndermek için PowerShell’in nasıl kullanılacağını öğreneceksiniz.
 services: active-directory
-ms.service: active-directory
-ms.subservice: B2B
-ms.topic: quickstart
-ms.date: 08/28/2018
-ms.author: mimart
 author: msmimart
+ms.author: mimart
 manager: celestedg
 ms.reviewer: mal
-ms.custom: it-pro, seo-update-azuread-jan
+ms.date: 08/28/2018
+ms.topic: quickstart
+ms.service: active-directory
+ms.subservice: B2B
+ms.custom:
+- it-pro
+- seo-update-azuread-jan
+- mode-api
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b0faaf0394bddc2e443afc194bbd0ecef72625f9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 765d8ea99167512e553cef9cc6f7fed583eff469
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87906135"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107529818"
 ---
 # <a name="quickstart-add-a-guest-user-with-powershell"></a>Hızlı Başlangıç: PowerShell ile konuk kullanıcı ekleme
 

@@ -2,10 +2,8 @@
   items:
     - name: Azure Media Player'a genel bakış
       href: azure-media-player-overview.md
-    - name: Sürüm notları
-      href: azure-media-player-release-notes.md
     - name: Değişiklik günlüğü
-      href: azure-media-player-changelog.md
+      href: 'https://amp.azure.net/libs/amp/latest/docs/changelog.html'
 - name: Hızlı Başlangıçlar
   items:
     - name: Azure Media Player hızlı başlangıcı
@@ -41,7 +39,7 @@
 - name: Başvuru
   items:
     - name: API
-      href: /javascript/api/azuremediaplayer/
+      href: 'https://amp.azure.net/libs/amp/latest/docs/index.html'
     - name: API yöntemleri
       href: azure-media-player-api-methods.md
     - name: Seçenekler

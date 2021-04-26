@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: yossi-y
 ms.author: yossiy
 ms.date: 01/10/2021
-ms.openlocfilehash: 9fdaf42f18c320bf841e710b7066451fca24eaae
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4033421095ead47e2bd1e97c4f2f42672644d7df
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102030996"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107364864"
 ---
 # <a name="azure-monitor-customer-managed-key"></a>Azure İzleyici müşteri tarafından yönetilen anahtar 
 
@@ -59,7 +59,7 @@ Aşağıdaki kurallar geçerlidir:
 - Log Analytics küme depolama hesapları, AEK olarak bilinen her depolama hesabı için benzersiz şifreleme anahtarı oluşturur.
 - AEK, diske yazılan her veri bloğunu şifrelemek için kullanılan anahtarlar olan DEKs 'leri türetmek için kullanılır.
 - Key Vault ' de anahtarınızı yapılandırıp kümede buna başvurduğunuzda, Azure depolama, veri şifreleme ve şifre çözme işlemleri gerçekleştirmek için AEK 'i sarmalamak ve sarmalamak üzere Azure Key Vault istekleri gönderir.
-- KEK, Key Vault hiçbir durumda kalmayacak ve HSM anahtarı durumunda donanımdan ayrılmayacaktır.
+- KEK 'niz Key Vault hiçbir şekilde ayrılmayacaktır.
 - Azure depolama, Azure Active Directory üzerinden Azure Key Vault kimlik doğrulaması yapmak ve erişmek için *küme* kaynağıyla ilişkili yönetilen kimliği kullanır.
 
 ### <a name="customer-managed-key-provisioning-steps"></a>Customer-Managed anahtar sağlama adımları
@@ -136,7 +136,7 @@ Kümeler iki [yönetilen kimlik türünü](../../active-directory/managed-identi
   "identity": {
   "type": "UserAssigned",
     "userAssignedIdentities": {
-      "subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/Microsoft. ManagedIdentity/UserAssignedIdentities/<cluster-assigned-managed-identity>"
+      "subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/Microsoft.ManagedIdentity/UserAssignedIdentities/<cluster-assigned-managed-identity>"
       }
   }
   ```
@@ -168,6 +168,9 @@ Anahtar tanımlayıcı ayrıntılarını almak için Azure Key Vault ' de anahta
 ![Key Vault izinleri verme](media/customer-managed-keys/key-identifier-8bit.png)
 
 Anahtar tanımlayıcı ayrıntıları ile kümedeki KeyVaultProperties 'i güncelleştirin.
+
+>[!NOTE]
+>Anahtar döndürme iki modu destekler: otomatik döndürme veya açık anahtar sürümü güncelleştirme, size en uygun yaklaşımı öğrenmek için bkz. [anahtar döndürme](#key-rotation) .
 
 İşlem zaman uyumsuzdur ve tamamlanması biraz zaman alabilir.
 
@@ -266,7 +269,9 @@ Küme depolama, şifreleme anahtarını sarmalamadan ve erişildikten sonra, ver
 
 ## <a name="key-rotation"></a>Anahtar döndürme
 
-Müşteri tarafından yönetilen anahtar döndürme, Azure Key Vault yeni anahtar sürümü ile kümeye açık bir güncelleştirme yapılmasını gerektirir. [Anahtar tanımlayıcı ayrıntıları ile kümeyi güncelleştirin](#update-cluster-with-key-identifier-details). Kümedeki yeni anahtar sürümünü güncelleştirmemeniz durumunda Log Analytics küme depolaması şifreleme için önceki anahtarınızı kullanmaya devam edecektir. Kümedeki yeni anahtarı güncelleştirmeden önce eski anahtarınızı devre dışı bırakır veya silerseniz, [anahtar iptal](#key-revocation) durumuna sahip olursunuz.
+Anahtar döndürme iki moda sahiptir: 
+- Otomatik döndürme-kümenizi güncelleştirdiğinizde ```"keyVaultProperties"``` ancak özelliği atladığınızda ```"keyVersion"``` ya da olarak ayarlarsanız ```""``` , depolama en son sürümleri otomatik olarak kullanır.
+- Açık anahtar sürüm güncelleştirmesi-kümenizi güncelleştirdiğinizde ve özellikte anahtar sürümü sağladığınızda ```"keyVersion"``` , yeni anahtar sürümlerinin kümede açık bir güncelleştirme olması gerekir ```"keyVaultProperties"``` , bkz. [anahtarı anahtar tanımlayıcı ayrıntıları ile güncelleştirme](#update-cluster-with-key-identifier-details). Key Vault ' de yeni anahtar sürümü oluşturursanız ancak kümede güncelleştirmezseniz, Log Analytics küme depolaması önceki anahtarınızı kullanmaya devam eder. Kümedeki yeni anahtarı güncelleştirmeden önce eski anahtarınızı devre dışı bırakır veya silerseniz, [anahtar iptal](#key-revocation) durumuna sahip olursunuz.
 
 Verilerin her zaman Key Vault ' de yeni anahtar şifreleme anahtarı (KEK) ile şifrelenmesi sırasında, veriler her zaman hesap şifreleme anahtarıyla (AEK) şifrelendiğinden, tüm verileriniz anahtar döndürme işleminden sonra erişilebilir durumda kalır.
 

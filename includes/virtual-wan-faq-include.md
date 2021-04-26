@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/05/2021
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: b7f79bebce5a086b268f4fc1080c33517555fb39
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2c1cf6e1d47f9bb78349e0846f624e1d6a484669
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102431554"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107386612"
 ---
 ### <a name="is-azure-virtual-wan-in-ga"></a>Azure sanal WAN, GA 'de mi?
 
@@ -276,6 +276,10 @@ Geçerli davranış, VNet-VNet bağlantısı için hub-hub üzerinden ExpressRou
 ### <a name="can-hubs-be-created-in-different-resource-group-in-virtual-wan"></a>Hub 'lar sanal WAN 'da farklı bir kaynak grubunda oluşturulabilir mi?
 
 Evet. Bu seçenek şu anda yalnızca PowerShell aracılığıyla kullanılabilir. Sanal WAN portalı, hub 'ların sanal WAN kaynağı ile aynı kaynak grubunda olmasını gerektirir.
+
+### <a name="what-is-the-recommended-hub-address-space-during-hub-creation"></a>Merkez oluşturma sırasında önerilen hub adres alanı nedir?
+
+Önerilen sanal WAN hub 'ı adres alanı/23 ' dir. Sanal WAN hub 'ı çeşitli ağ geçitlerine (ExpressRoute, siteden siteye VPN, Noktadan siteye VPN, Azure Güvenlik Duvarı, sanal hub yönlendiricisi) alt ağlar atar. NVA 'lar 'in bir sanal hub içinde dağıtıldığı senaryolarda, genellikle NVA örnekleri için bir/28 kullanılır. Ancak, Kullanıcı birden çok NVA 'lar sağladıysanız bir/27 alt ağı atanabilir. Bu nedenle gelecekteki bir mimarinin aklınızda tutulması, sanal WAN hub 'ları en az/24 boyutuyla dağıtıldığında, Kullanıcı girişi için oluşturulma zamanında önerilen hub adres alanı/23 olur.
 
 ### <a name="is-there-support-for-ipv6-in-virtual-wan"></a>Sanal WAN 'da IPv6 desteği var mı?
 

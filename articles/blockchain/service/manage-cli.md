@@ -1,17 +1,17 @@
 ---
-title: Azure CLı kullanarak Azure blok zinciri hizmetini yönetme
+title: Azure CLI kullanarak Azure Blok Zinciri Hizmeti’ni yönetme
 description: Azure CLı ile Azure blok zinciri hizmetini yönetme
 ms.date: 07/23/2020
 ms.topic: how-to
 ms.reviewer: ravastra
-ms.openlocfilehash: 36b012c486c0c7d3303a81998e88f1605999c899
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 55df56274aa5baa946b60c27cf49723d59c928a1
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87170862"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865936"
 ---
-# <a name="manage-azure-blockchain-service-using-azure-cli"></a>Azure CLı kullanarak Azure blok zinciri hizmetini yönetme
+# <a name="manage-azure-blockchain-service-using-azure-cli"></a>Azure CLI kullanarak Azure Blok Zinciri Hizmeti’ni yönetme
 
 Azure portal ek olarak Azure CLı 'yi kullanarak Azure blok zinciri hizmetinize yönelik blok zinciri üyelerini ve işlem düğümlerini yönetebilirsiniz.
 
@@ -27,7 +27,7 @@ CLı 'yi yerel olarak yükleyip kullanmayı tercih ediyorsanız bkz. [Azure CLI 
 
 1. Oturum açın.
 
-    CLI’nın yerel yüklemesini kullanıyorsanız [az login](/cli/azure/reference-index#az-login) komutunu kullanarak oturum açın.
+    CLI’nın yerel yüklemesini kullanıyorsanız [az login](/cli/azure/reference-index#az_login) komutunu kullanarak oturum açın.
 
     ```azurecli
     az login
@@ -39,7 +39,7 @@ CLı 'yi yerel olarak yükleyip kullanmayı tercih ediyorsanız bkz. [Azure CLI 
 
     Azure CLI için uzantı başvurularıyla çalışırken önce uzantıyı yüklemeniz gerekir.  Azure CLI uzantıları, henüz temel CLI’nın parçası olarak gönderilmeyen deneysel ve ön sürüm komutlarına erişmenize olanak sağlar.  Güncelleştirme ve kaldırma da dahil olmak üzere uzantılar hakkında daha fazla bilgi edinmek için bkz. [Azure CLI ile uzantıları kullanma](/cli/azure/azure-cli-extensions-overview).
 
-    Aşağıdaki komutu çalıştırarak [Azure blok zinciri hizmeti uzantısını](/cli/azure/ext/blockchain/blockchain) yükler:
+    Aşağıdaki komutu çalıştırarak [Azure blok zinciri hizmeti uzantısını](/cli/azure/blockchain) yükler:
 
     ```azurecli-interactive
     az extension add --name blockchain
@@ -47,7 +47,7 @@ CLı 'yi yerel olarak yükleyip kullanmayı tercih ediyorsanız bkz. [Azure CLI 
 
 ## <a name="create-blockchain-member"></a>Blok zinciri üyesi oluştur
 
-Örnek, Azure blok zinciri hizmetinde yeni bir konsorsiyumun çekirdek defter protokolünü çalıştıran [bir blok zinciri üyesi oluşturur](/cli/azure/ext/blockchain/blockchain/member#ext-blockchain-az-blockchain-member-create) .
+Örnek, Azure blok zinciri hizmetinde yeni bir konsorsiyumun çekirdek defter protokolünü çalıştıran [bir blok zinciri üyesi oluşturur](/cli/azure/blockchain/member#az_blockchain_member_create) .
 
 ```azurecli
 az blockchain member create \
@@ -74,7 +74,7 @@ az blockchain member create \
 
 ## <a name="change-blockchain-member-passwords-or-firewall-rules"></a>Blok zinciri üye parolalarını veya güvenlik duvarı kurallarını değiştirme
 
-Örnek [bir blok zinciri üyesinin](/cli/azure/ext/blockchain/blockchain/member#ext-blockchain-az-blockchain-member-update)parolasını, konsorsiyum yönetim parolasını ve güvenlik duvarı kuralını güncelleştirir.
+Örnek [bir blok zinciri üyesinin](/cli/azure/blockchain/member#az_blockchain_member_update)parolasını, konsorsiyum yönetim parolasını ve güvenlik duvarı kuralını güncelleştirir.
 
 ```azurecli
 az blockchain member update \
@@ -95,7 +95,7 @@ az blockchain member update \
 
 ## <a name="create-transaction-node"></a>İşlem düğümü oluştur
 
-Varolan bir blok zinciri üyesinin içinde [bir işlem düğümü oluşturun](/cli/azure/ext/blockchain/blockchain/transaction-node#ext-blockchain-az-blockchain-transaction-node-create) . İşlem düğümleri ekleyerek güvenlik yalıtımını artırabilir ve yükü dağıtabilirsiniz. Örneğin, farklı istemci uygulamaları için bir işlem düğümü uç noktasına sahip olabilirsiniz.
+Varolan bir blok zinciri üyesinin içinde [bir işlem düğümü oluşturun](/cli/azure/blockchain/transaction-node#az_blockchain_transaction_node_create) . İşlem düğümleri ekleyerek güvenlik yalıtımını artırabilir ve yükü dağıtabilirsiniz. Örneğin, farklı istemci uygulamaları için bir işlem düğümü uç noktasına sahip olabilirsiniz.
 
 ```azurecli
 az blockchain transaction-node create \
@@ -115,7 +115,7 @@ az blockchain transaction-node create \
 
 ## <a name="change-transaction-node-password"></a>İşlem düğümü parolasını değiştir
 
-Örnek, [işlem düğümü parolasını güncelleştirir](/cli/azure/ext/blockchain/blockchain/transaction-node#ext-blockchain-az-blockchain-transaction-node-update) .
+Örnek, [işlem düğümü parolasını güncelleştirir](/cli/azure/blockchain/transaction-node#az_blockchain_transaction_node_update) .
 
 ```azurecli
 az blockchain transaction-node update \
@@ -134,7 +134,7 @@ az blockchain transaction-node update \
 
 ## <a name="list-api-keys"></a>API anahtarlarını Listele
 
-API anahtarları, Kullanıcı adı ve parolaya benzer düğüm erişimi için kullanılabilir. Anahtar döndürmeyi desteklemek için iki API anahtarı vardır. [API anahtarlarınızı listelemek](/cli/azure/ext/blockchain/blockchain/member#ext-blockchain-az-blockchain-transaction-node-list-api-key)için aşağıdaki komutu kullanın.
+API anahtarları, Kullanıcı adı ve parolaya benzer düğüm erişimi için kullanılabilir. Anahtar döndürmeyi desteklemek için iki API anahtarı vardır. [API anahtarlarınızı listelemek](/cli/azure/blockchain/member#az_blockchain_transaction_node_list-api-key)için aşağıdaki komutu kullanın.
 
 ```azurecli
 az blockchain member list-api-key \
@@ -149,7 +149,7 @@ az blockchain member list-api-key \
 
 ## <a name="regenerate-api-keys"></a>API anahtarlarını yeniden oluştur
 
-[API anahtarlarınızı yeniden oluşturmak](/cli/azure/ext/blockchain/blockchain/member#ext-blockchain-az-blockchain-transaction-node-regenerate-api-key)için aşağıdaki komutu kullanın.
+[API anahtarlarınızı yeniden oluşturmak](/cli/azure/blockchain/member#az_blockchain_transaction_node_regenerate-api-key)için aşağıdaki komutu kullanın.
 
 ```azurecli
 az blockchain member regenerate-api-key \
@@ -166,7 +166,7 @@ az blockchain member regenerate-api-key \
 
 ## <a name="delete-a-transaction-node"></a>İşlem düğümünü silme
 
-Örnek, [blok zinciri üye işlem düğümünü siler](/cli/azure/ext/blockchain/blockchain/transaction-node#ext-blockchain-az-blockchain-transaction-node-delete).
+Örnek, [blok zinciri üye işlem düğümünü siler](/cli/azure/blockchain/transaction-node#az_blockchain_transaction_node_delete).
 
 ```azurecli
 az blockchain transaction-node delete \
@@ -183,7 +183,7 @@ az blockchain transaction-node delete \
 
 ## <a name="delete-a-blockchain-member"></a>Blok zinciri üyesini silme
 
-Örnek, [blok zinciri üyesini siler](/cli/azure/ext/blockchain/blockchain/member#ext-blockchain-az-blockchain-member-delete).
+Örnek, [blok zinciri üyesini siler](/cli/azure/blockchain/member#az_blockchain_member_delete).
 
 ```azurecli
 az blockchain member delete \

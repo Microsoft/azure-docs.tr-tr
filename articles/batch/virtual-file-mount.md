@@ -4,12 +4,12 @@ description: Bir Batch havuzunda sanal dosya sistemi bağlama hakkında bilgi ed
 ms.topic: how-to
 ms.custom: devx-track-csharp
 ms.date: 03/26/2021
-ms.openlocfilehash: dc5fbdf9ca0df8362a8999856c3f7163dd5e59b9
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: dcd56a12d8728b83cdcb7cea4c16c4aedd4251a7
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105626036"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105757"
 ---
 # <a name="mount-a-virtual-file-system-on-a-batch-pool"></a>Bir Batch havuzunda sanal dosya sistemi bağlama
 
@@ -53,7 +53,7 @@ Aşağıdaki kod örnekleri, çeşitli dosya paylaşımlarının işlem düğüm
 
 ### <a name="azure-files-share"></a>Azure dosya paylaşma
 
-Azure dosyaları, standart Azure bulut dosya sistemi sunumudur. Bağlama yapılandırma kodu örneğindeki parametrelerden herhangi birini alma hakkında daha fazla bilgi edinmek için bkz. [Azure dosyaları paylaşma kullanma](../storage/files/storage-how-to-use-files-windows.md).
+Azure dosyaları, standart Azure bulut dosya sistemi sunumudur. Bağlama yapılandırma kodu örneğindeki parametrelerden herhangi birini alma hakkında daha fazla bilgi edinmek için bkz. [Azure dosyaları paylaşma-SMB kullanma](../storage/files/storage-how-to-use-files-windows.md) veya [Azure dosyaları paylaşma Ile-NFS kullanma](../storage/files/storage-files-how-to-create-nfs-shares.md).
 
 ```csharp
 new PoolAddParameter

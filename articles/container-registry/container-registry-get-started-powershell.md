@@ -1,15 +1,18 @@
 ---
 title: Hızlı başlangıç-kayıt defteri oluşturma-PowerShell
 description: PowerShell ile Azure Container Registry 'de özel bir Docker kayıt defteri oluşturmayı hızlı bir şekilde öğrenin
-ms.topic: quickstart
 ms.date: 01/22/2019
-ms.custom: seodec18, mvc, devx-track-azurepowershell
-ms.openlocfilehash: 91d4209ccf558bf7c8038d8a753ec038428bc484
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.topic: quickstart
+ms.custom:
+- mvc
+- devx-track-azurepowershell
+- mode-api
+ms.openlocfilehash: bd9b93e22081c43dfa3fd934f13da3713120aadb
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96020033"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537393"
 ---
 # <a name="quickstart-create-a-private-container-registry-using-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell kullanarak özel kapsayıcı kayıt defteri oluşturma
 
@@ -55,7 +58,7 @@ Bu hızlı başlangıçta, Azure Container Registry hakkında bilgi edinmek içi
 
 ## <a name="log-in-to-registry"></a>Kayıt defterinde oturum açma
 
-Kapsayıcı görüntülerini gönderip çekmeden önce kayıt defterinizde oturum açmalısınız. Üretim senaryolarında, kapsayıcı kayıt defteri erişimi için tek bir kimlik veya hizmet sorumlusu kullanmanız gerekir, ancak bu hızlı başlangıcı kısa tutmak için, [Get-AzContainerRegistryCredential][Get-AzContainerRegistryCredential] komutuyla kayıt defterinizde yönetici kullanıcıyı etkinleştirin:
+Kapsayıcı görüntülerini gönderip çekmeden önce kayıt defterinizde oturum açmalısınız. Bu hızlı başlangıcı kısa tutmak için, [Get-AzContainerRegistryCredential][Get-AzContainerRegistryCredential] komutuyla kayıt defterinizde yönetici kullanıcıyı etkinleştirin. Üretim senaryolarında, hizmet sorumlusu gibi kayıt defteri erişimi için alternatif bir [kimlik doğrulama yöntemi](container-registry-authentication.md) kullanmanız gerekir. 
 
 ```powershell
 $creds = Get-AzContainerRegistryCredential -Registry $registry
@@ -68,6 +71,10 @@ $creds.Password | docker login $registry.LoginServer -u $creds.Username --passwo
 ```
 
 Bu komut tamamlandığında `Login Succeeded` döndürülür.
+
+> [!TIP]
+> Azure CLı, `az acr login` Docker kimlik bilgilerini geçirmeden [tek tek kimliğinizi](container-registry-authentication.md#individual-login-with-azure-ad)kullanarak bir kapsayıcı kayıt defterinde oturum açmak için uygun bir yol sağlar.
+
 
 [!INCLUDE [container-registry-quickstart-docker-push](../../includes/container-registry-quickstart-docker-push.md)]
 

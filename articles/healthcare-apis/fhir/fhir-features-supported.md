@@ -6,14 +6,14 @@ author: caitlinv39
 ms.service: healthcare-apis
 ms.subservice: fhir
 ms.topic: reference
-ms.date: 1/30/2021
+ms.date: 4/15/2021
 ms.author: cavoeg
-ms.openlocfilehash: 9bd61d65d6d64dac6081d3491deb8a15efc4a45b
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 56e3ba46ffb43aec907d729a2e74cdf6f7a62c32
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105048428"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530634"
 ---
 # <a name="features"></a>Özellikler
 
@@ -41,8 +41,8 @@ Desteklenen en son sürüm: `4.0.1`
 | oluşturmaya                         | Yes       | Yes       | Yes       | Her iki GÖNDERI/PUT desteği                               |
 | oluştur (koşullu)           | Yes       | Yes       | Yes       | Sorun [#1382](https://github.com/microsoft/fhir-server/issues/1382) |
 | search                         | Kısmi   | Kısmi   | Kısmi   | Aşağıdaki arama bölümüne bakın.                           |
-| zincirleme arama                 | Yes       | Yes       | Kısmi   | Aşağıdaki 2. nota bakın.                                   |
-| ters zincirleme arama         | Yes       | Yes       | Kısmi   | Aşağıdaki 2. nota bakın.                                   |
+| zincirleme arama                 | Kısmi       | Yes       | Kısmi   | Aşağıdaki 2. nota bakın.                                   |
+| ters zincirleme arama         | Kısmi       | Yes       | Kısmi   | Aşağıdaki 2. nota bakın.                                   |
 | özellikler                   | Yes       | Yes       | Yes       |                                                     |
 | toplu iş                          | Yes       | Yes       | Yes       |                                                     |
 | işlem                    | Hayır        | Yes       | Hayır        |                                                     |
@@ -146,7 +146,7 @@ FHıR sunucusu, Access Control için [Azure Active Directory](https://azure.micr
 
 ## <a name="service-limits"></a>Hizmet sınırlamaları
 
-* [**Istek birimleri (ru)**](../../cosmos-db/concepts-limits.md) -Azure API için Portal 'da fhır için en fazla 10.000 ru yapılandırabilirsiniz. En az 400 RUs veya 10 ru/GB olmak üzere, hangisi daha büyükse gereklidir. 10.000 ' den fazla ru 'ya ihtiyacınız varsa, bu artış için bir destek bileti koyabilirsiniz. Kullanılabilir en yüksek değer 1.000.000 ' dir.
+* [**Istek birimleri (ru)**](../../cosmos-db/concepts-limits.md) -Azure API için Portal 'da fhır için en fazla 10.000 ru yapılandırabilirsiniz. Hangisi daha büyükse, en az 400 ru veya 40 ru/GB gerekecektir. 10.000 ' den fazla ru 'ya ihtiyacınız varsa, bu artış için bir destek bileti koyabilirsiniz. Kullanılabilir en yüksek değer 1.000.000 ' dir.
 
 * **Eşzamanlı bağlantılar** ve **örnekler** -varsayılan olarak, kümedeki iki örnek üzerinde beş eş zamanlı bağlantınız vardır (Toplam 10 eşzamanlı istek için). Daha fazla eşzamanlı istek gerektiğini düşünüyorsanız, gereksinimlerinize ilişkin ayrıntılarla bir destek bileti açın.
 
@@ -160,12 +160,12 @@ Sistemin performansı, RUs sayısına, eşzamanlı bağlantılara ve gerçekleş
 
 | RUs | Kaynak/sn |    En fazla depolama alanı (GB) *    |
 |----------|---------------|--------|                 
-| 400      | 5-10          |     40   |
-| 1.000    | 100-150       |      100  |
-| 10,000   | 225-400       |      1.000  |
-| 100.000  | 2500-4000   |      10,000  |
+| 400      | 5-10          |     10   |
+| 1.000    | 100-150       |      25  |
+| 10,000   | 225-400       |      250  |
+| 100.000  | 2500-4000   |      2,500  |
 
-Note: Cosmos DB gereksinimi başına, GB depolama alanı başına en az 10 RU/sn 'lik verimlilik gereksinimi vardır. Daha fazla bilgi için [Cosmos DB hizmet kotaları](../../cosmos-db/concepts-limits.md)' na göz atın.
+Note: Cosmos DB gereksinimi başına, GB depolama alanı başına en az 40 RU/sn 'lik verimlilik gereksinimi vardır. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -10,10 +10,10 @@ ms.topic: article
 ms.date: 02/03/2021
 tags: connectors
 ms.openlocfilehash: 7873076618125241d9bdf4f225c194572553d060
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "99573441"
 ---
 # <a name="integrate-3270-screen-driven-apps-on-ibm-mainframes-with-azure-by-using-azure-logic-apps-and-ibm-3270-connector"></a>Azure Logic Apps ve IBM 3270 bağlayıcısını kullanarak Azure ile IBM ana bilgisayarları 'nda 3270 ekran odaklı uygulamayı tümleştirin

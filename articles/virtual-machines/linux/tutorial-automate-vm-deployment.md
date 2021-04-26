@@ -1,22 +1,20 @@
 ---
 title: Öğretici-Azure 'da Cloud-init ile Linux VM Özelleştirme
 description: Bu öğreticide, Cloud-init ve Key Vault kullanarak Azure 'da ilk kez önyükleme yaparken Linux VM 'lerini nasıl özelleştireceğinizi öğreneceksiniz.
-services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: cynthn
 ms.service: virtual-machines
 ms.collection: linux
 ms.topic: tutorial
-ms.workload: infrastructure
 ms.date: 09/12/2019
 ms.author: cynthn
 ms.custom: mvc, devx-track-js, devx-track-azurecli
-ms.openlocfilehash: 6dd10039ba5c71d3a787761914b111e7828c47d3
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 461a52bca90040279ceaf2bab0bb1361336f355e
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102552618"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816323"
 ---
 # <a name="tutorial---how-to-use-cloud-init-to-customize-a-linux-virtual-machine-in-azure-on-first-boot"></a>Öğretici - Azure’da ilk önyüklemede bir Linux sanal makinesini özelleştirmek için cloud-init kullanma
 
@@ -89,13 +87,13 @@ runcmd:
 cloud-init yapılandırma seçenekleri hakkında daha fazla bilgi için bkz. [cloud-init config örnekleri](https://cloudinit.readthedocs.io/en/latest/topics/examples.html).
 
 ## <a name="create-virtual-machine"></a>Sanal makine oluşturma
-VM oluşturabilmek için önce [az group create](/cli/azure/group#az-group-create) ile bir kaynak grubu oluşturun. Aşağıdaki örnek, *eastus* konumunda *myResourceGroupAutomate* adlı bir kaynak grubu oluşturur:
+VM oluşturabilmek için önce [az group create](/cli/azure/group#az_group_create) ile bir kaynak grubu oluşturun. Aşağıdaki örnek, *eastus* konumunda *myResourceGroupAutomate* adlı bir kaynak grubu oluşturur:
 
 ```azurecli-interactive
 az group create --name myResourceGroupAutomate --location eastus
 ```
 
-Şimdi [az vm create](/cli/azure/vm#az-vm-create) ile bir VM oluşturun. `--custom-data` parametresini kullanarak cloud-init yapılandırma dosyanızı geçirin. Dosyayı mevcut çalışma dizininizin dışına kaydettiyseniz *cloud-init.txt* yapılandırmasının tam yolunu belirtin. Aşağıdaki örnek *myVM* adlı bir VM oluşturur:
+Şimdi [az vm create](/cli/azure/vm#az_vm_create) ile bir VM oluşturun. `--custom-data` parametresini kullanarak cloud-init yapılandırma dosyanızı geçirin. Dosyayı mevcut çalışma dizininizin dışına kaydettiyseniz *cloud-init.txt* yapılandırmasının tam yolunu belirtin. Aşağıdaki örnek *myVM* adlı bir VM oluşturur:
 
 ```azurecli-interactive
 az vm create \
@@ -109,7 +107,7 @@ az vm create \
 
 VM’nin oluşturulması, paketlerin yüklenmesi ve uygulamanın başlatılması birkaç dakika sürebilir. Azure CLI sizi isteme geri döndürdükten sonra çalışmaya devam eden arka plan görevleri vardır. Uygulamaya erişmeniz birkaç dakika sürebilir. VM oluşturulduktan sonra, Azure CLI tarafından görüntülenen `publicIpAddress` değerini not edin. Bu adres, web tarayıcısı aracılığıyla Node.js uygulamasına erişmek için kullanılır.
 
-Web trafiğinin VM’nize erişmesine izin vermek için, [az vm open-port](/cli/azure/vm#az-vm-open-port) komutuyla İnternet’te 80 numaralı bağlantı noktasını açın:
+Web trafiğinin VM’nize erişmesine izin vermek için, [az vm open-port](/cli/azure/vm#az_vm_open_port) komutuyla İnternet’te 80 numaralı bağlantı noktasını açın:
 
 ```azurecli-interactive
 az vm open-port --port 80 --resource-group myResourceGroupAutomate --name myAutomatedVM
@@ -134,7 +132,7 @@ Aşağıdaki adımlar şunları nasıl yapabileceğinizi gösterir:
 - VM oluşturma ve sertifika ekleme
 
 ### <a name="create-an-azure-key-vault"></a>Azure Key Vault oluşturma
-İlk olarak [az keyvault create](/cli/azure/keyvault#az-keyvault-create) ile bir Key Vault oluşturun ve bu anahtarın VM dağıtırken kullanılmasını etkinleştirin. Her Key Vault benzersiz bir ad gerektirir ve küçük harflerle yazılmalıdır. Aşağıdaki örnekte yer alan `mykeyvault` değerini, kendi benzersiz Key Vault adınızla değiştirin:
+İlk olarak [az keyvault create](/cli/azure/keyvault#az_keyvault_create) ile bir Key Vault oluşturun ve bu anahtarın VM dağıtırken kullanılmasını etkinleştirin. Her Key Vault benzersiz bir ad gerektirir ve küçük harflerle yazılmalıdır. Aşağıdaki örnekte yer alan `mykeyvault` değerini, kendi benzersiz Key Vault adınızla değiştirin:
 
 ```azurecli-interactive
 keyvault_name=mykeyvault
@@ -145,7 +143,7 @@ az keyvault create \
 ```
 
 ### <a name="generate-certificate-and-store-in-key-vault"></a>Sertifika oluşturma ve sertifikayı Key Vault’ta depolama
-Üretim sırasında kullanım için, [az keyvault certificate import](/cli/azure/keyvault/certificate#az-keyvault-certificate-import) komutunu kullanarak güvenilen bir sağlayıcı tarafından imzalanan geçerli bir sertifikayı içeri aktarmalısınız. Bu öğreticide, aşağıdaki örnekte varsayılan sertifika ilkesini kullanan [az keyvault certificate create](/cli/azure/keyvault/certificate#az-keyvault-certificate-create) ile nasıl otomatik olarak imzalanan sertifika oluşturabileceğiniz gösterilmektedir:
+Üretim sırasında kullanım için, [az keyvault certificate import](/cli/azure/keyvault/certificate#az_keyvault_certificate_import) komutunu kullanarak güvenilen bir sağlayıcı tarafından imzalanan geçerli bir sertifikayı içeri aktarmalısınız. Bu öğreticide, aşağıdaki örnekte varsayılan sertifika ilkesini kullanan [az keyvault certificate create](/cli/azure/keyvault/certificate#az_keyvault_certificate_create) ile nasıl otomatik olarak imzalanan sertifika oluşturabileceğiniz gösterilmektedir:
 
 ```azurecli-interactive
 az keyvault certificate create \
@@ -156,7 +154,7 @@ az keyvault certificate create \
 
 
 ### <a name="prepare-certificate-for-use-with-vm"></a>Sertifikayı VM ile kullanım için hazırlama
-VM oluşturma sürecinde sertifikayı kullanmak için, [az keyvault secret list-versions](/cli/azure/keyvault/secret#az-keyvault-secret-list-versions) komutuyla sertifikanızın kimliğini alın. VM, sertifikanın önyüklemede eklenmesi için belirli bir biçimde olmasını gerektirir, bu nedenle [az vm secret format](/cli/azure/vm) komutu ile sertifikayı dönüştürün. Aşağıdaki örnekte, sonraki adımlarda kullanım kolaylığı sağlamak için bu komutların çıkışı değişkenlere atanmaktadır:
+VM oluşturma sürecinde sertifikayı kullanmak için, [az keyvault secret list-versions](/cli/azure/keyvault/secret#az_keyvault_secret_list_versions) komutuyla sertifikanızın kimliğini alın. VM, sertifikanın önyüklemede eklenmesi için belirli bir biçimde olmasını gerektirir, bu nedenle [az vm secret format](/cli/azure/vm) komutu ile sertifikayı dönüştürün. Aşağıdaki örnekte, sonraki adımlarda kullanım kolaylığı sağlamak için bu komutların çıkışı değişkenlere atanmaktadır:
 
 ```azurecli-interactive
 secret=$(az keyvault secret list-versions \
@@ -222,7 +220,7 @@ runcmd:
 ```
 
 ### <a name="create-secure-vm"></a>Güvenli VM oluşturma
-Şimdi [az vm create](/cli/azure/vm#az-vm-create) ile bir VM oluşturun. Bu sertifika verileri, `--secrets` parametresiyle Key Vault’tan eklenir. Önceki örnekte olduğu gibi `--custom-data` parametresi ile de cloud-init yapılandırmasını geçirirsiniz:
+Şimdi [az vm create](/cli/azure/vm#az_vm_create) ile bir VM oluşturun. Bu sertifika verileri, `--secrets` parametresiyle Key Vault’tan eklenir. Önceki örnekte olduğu gibi `--custom-data` parametresi ile de cloud-init yapılandırmasını geçirirsiniz:
 
 ```azurecli-interactive
 az vm create \
@@ -237,7 +235,7 @@ az vm create \
 
 VM’nin oluşturulması, paketlerin yüklenmesi ve uygulamanın başlatılması birkaç dakika sürebilir. Azure CLI sizi isteme geri döndürdükten sonra çalışmaya devam eden arka plan görevleri vardır. Uygulamaya erişmeniz birkaç dakika sürebilir. VM oluşturulduktan sonra, Azure CLI tarafından görüntülenen `publicIpAddress` değerini not edin. Bu adres, web tarayıcısı aracılığıyla Node.js uygulamasına erişmek için kullanılır.
 
-Güvenli web trafiğinin VM’nize erişmesine izin vermek için, [az vm open-port](/cli/azure/vm#az-vm-open-port) komutuyla internette 443 numaralı bağlantı noktasını açın:
+Güvenli web trafiğinin VM’nize erişmesine izin vermek için, [az vm open-port](/cli/azure/vm#az_vm_open_port) komutuyla internette 443 numaralı bağlantı noktasını açın:
 
 ```azurecli-interactive
 az vm open-port \

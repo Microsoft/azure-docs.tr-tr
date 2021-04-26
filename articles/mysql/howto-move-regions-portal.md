@@ -7,12 +7,12 @@ ms.service: mysql
 ms.topic: how-to
 ms.custom: subject-moving-resources
 ms.date: 06/26/2020
-ms.openlocfilehash: 279526d31adf25d1f4cd5a6d9b15519679bd88b9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 87c44e5d56e59b0bf003e8e7d25f3351f58a8984
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94540238"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106065489"
 ---
 # <a name="move-an-azure-database-for-mysql-server-to-another-region-by-using-the-azure-portal"></a>Azure portal kullanarak MySQL için Azure veritabanı sunucusunu başka bir bölgeye taşıma
 

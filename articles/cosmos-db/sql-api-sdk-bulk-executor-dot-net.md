@@ -6,14 +6,14 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
 ms.topic: reference
-ms.date: 08/12/2020
+ms.date: 04/06/2021
 ms.author: anfeldma
-ms.openlocfilehash: 23c0787b45a6e3f52dae58c24a33e00437f1e09c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 99b6e06b817f98e64968615b5e652b707268fe78
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104577198"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107364507"
 ---
 # <a name="net-bulk-executor-library-download-information"></a>.NET toplu yürütücü kitaplığı: Indirme bilgileri 
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -29,7 +29,8 @@ ms.locfileid: "104577198"
 > * [Zaman uyumlu Java SDK v2](sql-api-sdk-java.md)
 > * [Spring Verileri v2](sql-api-sdk-java-spring-v2.md)
 > * [Spring Verileri v3](sql-api-sdk-java-spring-v3.md)
-> * [Spark Bağlayıcısı](sql-api-sdk-java-spark.md)
+> * [Spark 3 OLTP Bağlayıcısı](sql-api-sdk-java-spark-v3.md)
+> * [Spark 2 OLTP Bağlayıcısı](sql-api-sdk-java-spark.md)
 > * [Python](sql-api-sdk-python.md)
 > * [REST](/rest/api/cosmos-db/)
 > * [REST kaynak sağlayıcısı](/rest/api/cosmos-db-resource-provider/)

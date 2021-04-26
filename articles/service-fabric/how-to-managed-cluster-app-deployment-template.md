@@ -3,12 +3,12 @@ title: ARM şablonunu kullanarak Service Fabric yönetilen küme (Önizleme) uyg
 description: Bir uygulamayı Azure Service Fabric yönetilen kümesine (Önizleme) Azure Resource Manager şablonu kullanarak dağıtın.
 ms.topic: how-to
 ms.date: 02/15/2021
-ms.openlocfilehash: b2d73180de61f44850b9c52a7ac24b0c23c36db2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e860c77d77e3aabb70f70defdaa25de14e77e0e1
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100642576"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728020"
 ---
 # <a name="deploy-a-service-fabric-managed-cluster-preview-application-using-arm-template"></a>ARM şablonunu kullanarak Service Fabric yönetilen küme (Önizleme) uygulaması dağıtma
 
@@ -94,7 +94,7 @@ Artık uygulama hazırlanmıştır ve uygulamayı dağıtmak için Kaynak Yönet
 | ---------------------- | ------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | clusterName            | Dağıtım yaptığınız kümenin adı | SF-cluster123                                                |                                                              |
 | uygulama            | Uygulamanın adı                 | Oylama                                                       |
-| sürüm    | Uygulamanın kaynak KIMLIĞI, uygulama türü ve sürümü.       | /providers/Microsoft.ServiceFabric/managedClusters/sf-cluster-123/applicationTypes/VotingType/versions/1.0.0                                               | ApplicationManifest.xml eşleşmelidir                 |              |
+| sürüm    | Uygulamanın kaynak KIMLIĞI, uygulama türü ve sürümü.       | /providers/Microsoft.ServiceFabric/managedClusters/sf-cluster-123/applicationTypes/VotingType/versions/1.0.0                                               | ApplicationManifest.xml eşleşmelidir                 |
 | HizmetAdı            | Hizmetin adı         | VotingWeb                                             | ServiceType biçiminde olmalıdır            |
 | serviceTypeName        | Hizmetin tür adı                | VotingWebType                                                    | ServiceManifest.xml eşleşmelidir                 |
 | appPackageUrl 'Si          | Uygulamanın BLOB depolama URL 'SI     | https: \/ /servicefabricapps.blob.Core.Windows.net/Apps/Voting.sfpkg | Blob depolamada uygulama paketinin URL 'SI (URL 'YI ayarlama yordamı, makalenin ilerleyen kısımlarında açıklanmıştır) |

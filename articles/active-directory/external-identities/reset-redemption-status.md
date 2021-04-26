@@ -5,19 +5,19 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: B2B
 ms.topic: how-to
-ms.date: 02/03/2021
+ms.date: 04/06/2021
 ms.author: mimart
 author: msmimart
 manager: celestedg
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2998c3ea0d65bd3c96bd1ac5bdfa8ff148c6c4cc
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: f5bfce7ef2621cbe3bbbfdd95bf9a75e427c8cbd
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104780438"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531880"
 ---
-# <a name="reset-redemption-status-for-a-guest-user"></a>Konuk Kullanıcı için kullanım durumunu sıfırlama
+# <a name="reset-redemption-status-for-a-guest-user-preview"></a>Konuk Kullanıcı için kullanım durumunu sıfırlama (Önizleme)
 
 Bir Konuk Kullanıcı, B2B işbirliği davetinizi tamamladıktan sonra, oturum açma bilgilerini güncelleştirmeniz gereken zamanlar olabilir, örneğin:
 
@@ -37,7 +37,9 @@ Kullanıcı farklı bir e-posta kullanarak oturum açmak isterse:
 3. Kullanıcının kullanım durumunu sıfırlamak için aşağıdaki yöntemlerden birini kullanın.
 
 > [!NOTE]
->Genel Önizleme sırasında, kullanıcının e-posta adresini sıfırlarken, `mail` özelliği yeni e-posta adresine ayarlamayı öneririz. Bu şekilde Kullanıcı, davetteki kullanım bağlantısını kullanmaya ek olarak dizininizde oturum açarak daveti kullanabilir.
+>Genel Önizleme sırasında iki önerimiz vardır:
+>- Kullanıcının e-posta adresini yeni bir adrese sıfırlarken, özelliği ayarlamayı öneririz `mail` . Bu şekilde Kullanıcı, davetteki kullanım bağlantısını kullanmaya ek olarak dizininizde oturum açarak daveti kullanabilir.
+>- Bir B2B Konuk kullanıcısının durumunu sıfırlarken, bunu Kullanıcı bağlamı altında gerçekleştirdiğinizden emin olun. Yalnızca uygulama çağrıları şu anda desteklenmiyor.
 >
 ## <a name="use-powershell-to-reset-redemption-status"></a>Kullanım durumunu sıfırlamak için PowerShell 'i kullanma
 
@@ -54,7 +56,7 @@ New-AzureADMSInvitation -InvitedUserEmailAddress <<external email>> -SendInvitat
 
 ## <a name="use-microsoft-graph-api-to-reset-redemption-status"></a>Kullanım durumunu sıfırlamak için Microsoft Graph API kullanma
 
-[Microsoft Graph davet API](/graph/api/resources/invitation?view=graph-rest-1.0)'sini kullanarak `resetRedemption` özelliğini olarak ayarlayın `true` ve özelliğindeki yeni e-posta adresini belirtin `invitedUserEmailAddress` .
+[Microsoft Graph davet API](/graph/api/resources/invitation?view=graph-rest-beta&preserve-view=true)'sini kullanarak `resetRedemption` özelliğini olarak ayarlayın `true` ve özelliğindeki yeni e-posta adresini belirtin `invitedUserEmailAddress` .
 
 ```json
 POST https://graph.microsoft.com/beta/invitations  

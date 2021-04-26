@@ -14,12 +14,12 @@ ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 801d810a82e4e484ca1ab30c5c6d510860dbab6b
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: fe42b98813f1687c78827b355a707b0147d6d2a4
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105566039"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106067291"
 ---
 # <a name="azure-media-services-release-notes"></a>Azure Media Services sürüm notları
 
@@ -252,7 +252,7 @@ Azure SDK ekibi, Media Services için güncelleştirmeler ve yeni özellikler i�
 Daha fazla bilgi için bkz.
 
 * Aşağıdaki [kod örnekleri](https://github.com/Azure/azure-sdk-for-php/tree/master/examples/MediaServices) hızlı bir şekilde başlamanıza yardımcı olur:
-  * **vodworkflow_aes. php**: Bu php dosyası, aes-128 dinamik şifrelemesini ve anahtar teslim hizmetini nasıl kullanacağınızı gösterir. Bu, [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-protect-with-aes128.md)bölümünde açıklanan .net örneğine dayalıdır.
+  * **vodworkflow_aes. php**: Bu php dosyası, aes-128 dinamik şifrelemesini ve anahtar teslim hizmetini nasıl kullanacağınızı gösterir. Bu, [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-playready-license-template-overview.md)bölümünde açıklanan .net örneğine dayalıdır.
   * **vodworkflow_aes. php**: Bu php dosyası, PlayReady dinamik şifrelemesini ve lisans teslimi hizmetini nasıl kullanacağınızı gösterir. Bu, [PlayReady ve/veya Widevine dinamik ortak şifrelemeyi kullanma](media-services-protect-with-playready-widevine.md)bölümünde açıklanan .net örneğine dayalıdır.
   * **scale_encoding_units. php**: Bu php dosyası, kodlama ayrılmış birimlerinin nasıl Ölçeklendirilecek olduğunu gösterir.
 

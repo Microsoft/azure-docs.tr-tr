@@ -7,10 +7,10 @@ ms.service: cache
 ms.topic: conceptual
 ms.date: 02/08/2021
 ms.openlocfilehash: 9d11d17f90dcd6335fcaf6bd48a44037777a087e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104601394"
 ---
 # <a name="configure-data-persistence-for-a-premium-azure-cache-for-redis-instance"></a>Redsıs örneği için Premium bir Azure önbelleği için veri kalıcılığını yapılandırma
@@ -63,7 +63,7 @@ Kalıcılık, Redsıs verilerini sahip olduğunuz ve yönettiğiniz bir Azure de
    | Ayar      | Önerilen değer  | Açıklama |
    | ------------ |  ------- | -------------------------------------------------- |
    | **Yedekleme sıklığı** | Açılır ve bir yedekleme aralığı seçin, **15 dakika**, **30 dakika**, **60 dakika**, **6 saat**, **12 saat** ve **24 saat** arasında seçim yapın. | Önceki yedekleme işlemi başarıyla tamamlandıktan sonra ve yeni bir yedekleme tamamlandığında bu Aralık sona erdiğinde, bu Aralık başlatılır. | 
-   | **Depolama Hesabı** | Açılır ve depolama hesabınızı seçin. | Önbellek ile aynı bölgede ve abonelikte bir depolama hesabı seçmeniz gerekir ve Premium depolamada daha yüksek aktarım hızı bulunduğundan **Premium Depolama** hesabı önerilir.  | 
+   | **Depolama hesabı** | Açılır ve depolama hesabınızı seçin. | Önbellek ile aynı bölgede ve abonelikte bir depolama hesabı seçmeniz gerekir ve Premium depolamada daha yüksek aktarım hızı bulunduğundan **Premium Depolama** hesabı önerilir.  | 
    | **Depolama anahtarı** | Açılan ve kullanılacak **birincil anahtarı** ya da **İkincil anahtarı** seçin. | Kalıcılık hesabınız için depolama anahtarı yeniden oluşturulursa, istenen anahtarı **depolama anahtarı** açılır listesinden yeniden yapılandırmanız gerekir. | 
 
     Yedekleme sıklığı aralığı geçtiğinde ilk yedekleme başlatılır.

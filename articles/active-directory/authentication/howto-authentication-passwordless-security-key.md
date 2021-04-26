@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
-ms.date: 02/22/2021
+ms.date: 04/21/2021
 ms.author: justinha
 author: justinha
 manager: daveba
 ms.reviewer: librown, aakapo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 71a29a2a7e379e253b52813eb7a76f669abbf668
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 436a972693aafd220d277d7411c0da12636e9cc6
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101653839"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829809"
 ---
 # <a name="enable-passwordless-security-key-sign-in"></a>Passwordless güvenlik anahtarı oturum açmayı etkinleştir 
 
@@ -32,6 +32,7 @@ Bu belge güvenlik anahtarı tabanlı passwordless kimlik doğrulamasını etkin
 - WebAuthN, Windows 10 sürüm 1903 veya üstünü gerektirir * *
 
 Web Apps ve hizmetlerinde oturum açmak için güvenlik anahtarlarını kullanmak üzere, WebAuthN protokolünü destekleyen bir tarayıcıya sahip olmanız gerekir. Bunlara Microsoft Edge, Chrome, Firefox ve Safari dahildir.
+
 
 ## <a name="prepare-devices"></a>Cihazları hazırlama
 
@@ -89,6 +90,10 @@ Geri bildirim paylaşmak veya bu özellikle ilgili sorunlarla karşılaşırsan�
 ### <a name="security-key-provisioning"></a>Güvenlik anahtarı sağlama
 
 Yönetici sağlama ve güvenlik anahtarlarının ön sağlamasını kaldırma kullanılamıyor.
+
+### <a name="cached-logon-on-hybrid-azure-ad-joined-devices"></a>Karma Azure AD 'ye katılmış cihazlarda önbelleğe alınan oturum açma
+
+FIDO2 anahtarlarla önbelleğe alınmış oturum açma, Windows 10, sürüm 20H2 ' de karma Azure AD 'ye katılmış cihazlarda başarısız olur. Sonuç olarak, şirket içi etki alanı denetleyicisine görüş alanı kullanılamadığında kullanıcılar oturum açamaz. Bu, şu anda araştırma aşamasındadır.
 
 ### <a name="upn-changes"></a>UPN değişiklikleri
 

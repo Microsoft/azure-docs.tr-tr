@@ -7,12 +7,12 @@ ms.topic: sample
 ms.date: 10/25/2017
 ms.author: tomfitz
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: a9912f5134c3596740ef53f23531d57fe9467682
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 3ea2baa897efb5c1a01b32e92e76a69c9d1f231c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87497877"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775520"
 ---
 # <a name="deploy-a-managed-application-for-service-catalog-with-azure-cli"></a>Azure CLI ile hizmet kataloğu için bir yönetilen uygulamayı dağıtma
 
@@ -34,7 +34,7 @@ Bu betik, yönetilen uygulamayı dağıtmak için aşağıdaki komutu kullanır.
 
 | Komut | Notlar |
 |---|---|
-| [az managedapp create](/cli/azure/managedapp#az-managedapp-create) | Yönetilen uygulama oluşturur. Şablonun tanım kimliğini ve parametrelerini sağlar. |
+| [az managedapp create](/cli/azure/managedapp#az_managedapp_create) | Yönetilen uygulama oluşturur. Şablonun tanım kimliğini ve parametrelerini sağlar. |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

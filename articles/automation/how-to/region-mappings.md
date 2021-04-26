@@ -1,16 +1,16 @@
 ---
 title: Bağlı Log Analytics çalışma alanı için desteklenen bölgeler
 description: Bu makalede, bir Otomasyon hesabı ile Log Analytics çalışma alanı arasındaki desteklenen bölge eşlemeleri, Azure Otomasyonu 'nun belirli özellikleriyle ilişkili olarak açıklanmaktadır.
-ms.date: 02/17/2021
+ms.date: 04/01/2021
 services: automation
 ms.topic: conceptual
 ms.custom: references_regions
-ms.openlocfilehash: 0599dcb57b46d1e48b4035acac8b64edbbe06912
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4ac2a575c9fe551d5b1b396ab06b2735a749f9da
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101720180"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106221883"
 ---
 # <a name="supported-regions-for-linked-log-analytics-workspace"></a>Bağlı Log Analytics çalışma alanı için desteklenen bölgeler
 
@@ -38,30 +38,44 @@ Aşağıdaki tabloda desteklenen eşlemeler gösterilmektedir:
 |EastUS2<sup>2</sup>|EastUS|
 |WestUS|WestUS|
 |WestUS2|WestUS2|
+|Kuzeydoğu ABD|Kuzeydoğu ABD|
 |CentralUS|CentralUS|
 |Güneydoğu ABD|Güneydoğu ABD|
 |WestCentralUS|WestCentralUS|
+|**Brezilya**||
+|BrazilSouth|BrazilSouth|
 |**Kanada**||
 |Canadaorta|Canadaorta|
+|**Çin**||
+|ChinaEast2<sup>3</sup>|ChinaEast2|
 |**Asya Pasifik**||
-|AustraliaEast|AustraliaEast|
-|AustraliaSoutheast|AustraliaSoutheast|
 |Eastaya|Eastaya|
 |Güneydoğu|Güneydoğu|
+|**Hindistan**||
 |Merkezileştirme Hindistan|Merkezileştirme Hindistan|
-|ChinaEast2<sup>3</sup>|ChinaEast2|
+|**Japonya**||
 |JapanEast|JapanEast|
+|**Avustralya**||
+|AustraliaEast|AustraliaEast|
+|AustraliaSoutheast|AustraliaSoutheast|
+|**Güney Kore**||
+|KoreaCentral|KoreaCentral|
+|**Norveç**||
+|Norwaydoğu|Norwaydoğu|
 |**Avrupa**||
 |NorthEurope|NorthEurope|
-|Francecna al|Francecna al|
-|UKSouth|UKSouth|
 |WestEurope|WestEurope|
+|**Fransa**||
+|Francecna al|Francecna al|
+|**Birleşik Krallık**
+|UKSouth|UKSouth|
+|**İsviçre**||
 |Geçiş|Geçiş|
+|**Birleşik Arap Emirlikleri**||
+|UAENorth|UAENorth|
 |**US Gov**||
 |USGovVirginia|USGovVirginia|
 |USGovArizona<sup>3</sup>|USGovArizona|
-
-
 
 Log Analytics çalışma alanları için <sup>1</sup> EastUS eşlemesi, Otomasyon hesaplarında tam bir bölgeden bölgeye eşleme değildir, ancak doğru eşleme olur.
 

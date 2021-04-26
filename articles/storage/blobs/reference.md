@@ -1,19 +1,19 @@
 ---
 title: Azure Blob depolama başvurusu
 description: Azure Blob depolama API başvurusunu, Benioku dosyalarını ve istemci kitaplığı paketlerini bulun.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 09/10/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: conceptual
 ms.reviewer: ripohane
-ms.openlocfilehash: e6cd816858efb3487fad5ca03959abfb24e7dbe4
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 0f5faa22e18f22ac5324885c404b98e7116e4e32
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102505503"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277173"
 ---
 # <a name="azure-blob-storage-reference"></a>Azure Blob depolama başvurusu
 

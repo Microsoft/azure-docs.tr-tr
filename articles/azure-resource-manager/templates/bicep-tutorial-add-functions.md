@@ -2,20 +2,20 @@
 title: Öğretici-Azure Resource Manager bicep dosyalarına işlev ekleme
 description: Değerleri oluşturmak için Bıcep dosyalarınıza işlevler ekleyin.
 author: mumian
-ms.date: 03/10/2021
+ms.date: 04/20/2021
 ms.topic: tutorial
 ms.author: jgao
 ms.custom: references_regions
-ms.openlocfilehash: b909beb0cce9ad04ba00068ee25247520dcff47d
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 43dec6ceb21a6604bc0034b3f14b79ffd2cbe263
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102633164"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773810"
 ---
 # <a name="tutorial-add-functions-to-azure-resource-manager-bicep-file"></a>Öğretici: Azure Resource Manager bicep dosyasına işlev ekleme
 
-Bu öğreticide, Bıcep dosyanıza [Şablon işlevleri](template-functions.md) eklemeyi öğreneceksiniz. Değerleri dinamik olarak oluşturmak için işlevlerini kullanırsınız. Sistem tarafından sağlanmış bu şablon işlevlerine ek olarak, [Kullanıcı tanımlı işlevler](./template-user-defined-functions.md)de oluşturabilirsiniz. Bu öğreticinin tamamlana **7 dakika** sürer.
+Bu öğreticide, Bıcep dosyanıza [Şablon işlevleri](template-functions.md) eklemeyi öğreneceksiniz. Değerleri dinamik olarak oluşturmak için işlevlerini kullanırsınız. Şu anda Bıcep Kullanıcı tanımlı işlevleri desteklemez. Bu öğreticinin tamamlana **7 dakika** sürer.
 
 [!INCLUDE [Bicep preview](../../../includes/resource-manager-bicep-preview.md)]
 

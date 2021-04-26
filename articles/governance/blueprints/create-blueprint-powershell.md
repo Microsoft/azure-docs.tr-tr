@@ -3,12 +3,14 @@ title: 'Hızlı başlangıç: PowerShell ile bir şema oluşturma'
 description: Bu hızlı başlangıçta, PowerShell kullanarak yapıtlar oluşturmak, tanımlamak ve dağıtmak için Azure şemaları kullanırsınız.
 ms.date: 01/27/2021
 ms.topic: quickstart
-ms.openlocfilehash: 002ba6fcf20b10bcc44fb486a85bc24bfdd12ae3
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.custom:
+- mode-api
+ms.openlocfilehash: 29c43da0c1467c74ddc85a447a0cf9addb574c7e
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105559052"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538898"
 ---
 # <a name="quickstart-define-and-assign-an-azure-blueprint-with-powershell"></a>Hızlı başlangıç: PowerShell ile Azure Blueprint tanımlama ve atama
 

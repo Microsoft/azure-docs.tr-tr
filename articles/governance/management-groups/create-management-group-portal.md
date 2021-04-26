@@ -3,12 +3,14 @@ title: 'Hızlı başlangıç: Portal ile bir yönetim grubu oluşturma'
 description: Bu hızlı başlangıçta, kaynaklarınızı bir kaynak hiyerarşisinde düzenlemek üzere bir yönetim grubu oluşturmak için Azure portal kullanırsınız.
 ms.date: 02/05/2021
 ms.topic: quickstart
-ms.openlocfilehash: 2fa9b667079104fe9728ab41ecd87685c35de1b7
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.custom:
+- mode-portal
+ms.openlocfilehash: 1b0f7b0d98b2cde1343325d5e4a2979e3e663b68
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105024733"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535906"
 ---
 # <a name="quickstart-create-a-management-group"></a>Hızlı başlangıç: yönetim grubu oluşturma
 

@@ -2,7 +2,7 @@
 title: Azure Time Series Insights veri başvurusunu izleme | Microsoft Docs
 description: İzleme Azure Time Series Insights için başvuru belgeleri.
 author: deepakpalled
-ms.author: lyhughes
+ms.author: dpalled
 manager: diviso
 ms.workload: big-data
 ms.service: time-series-insights
@@ -10,12 +10,12 @@ services: time-series-insights
 ms.topic: conceptual
 ms.date: 12/10/2020
 ms.custom: lyrana
-ms.openlocfilehash: bfd0d04313f0b519b4013a43e29d88400c73ea31
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 20d376ee501edf16711617847c685dfd531f2c80
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100591382"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504592"
 ---
 # <a name="monitoring-azure-time-series-insights-data-reference"></a>Azure Time Series Insights veri başvurusunu izleme
 
@@ -23,12 +23,13 @@ Azure Time Series Insights ortamınızdan Azure Izleyici tarafından toplanan ve
 
 ## <a name="metrics"></a>Ölçümler
 
-Bu bölümde, Azure Time Series Insights için toplanan otomatik olarak toplanan tüm platform ölçümleri listelenmektedir. Tüm Azure Izleyici desteği ölçümlerinin bir listesi (Azure Time Series Insights dahil) için bkz. [Azure izleyici desteklenen ölçümler](../azure-monitor/essentials/metrics-supported.md). Bu ölçümler için kaynak sağlayıcısı [Microsoft. Timeseriesınsights/ortamlar/EventSources](../azure-monitor/essentials/metrics-supported.md#microsofttimeseriesinsightsenvironmentseventsources) ve [Microsoft. timeseriesınsights/ortamlarıdır](../azure-monitor/essentials/metrics-supported.md#microsofttimeseriesinsightsenvironments).
+Bu bölümde, Azure Time Series Insights için toplanan otomatik olarak toplanan tüm platform ölçümleri listelenmektedir. Tüm Azure Izleyici desteği ölçümlerinin bir listesi (Azure Time Series Insights dahil) için bkz. [Azure izleyici desteklenen ölçümler](../azure-monitor/essentials/metrics-supported.md).
+Bu ölçümler için kaynak sağlayıcısı [Microsoft. Timeseriesınsights/ortamlar/EventSources](../azure-monitor/essentials/metrics-supported.md#microsofttimeseriesinsightsenvironmentseventsources) ve [Microsoft. timeseriesınsights/ortamlarıdır](../azure-monitor/essentials/metrics-supported.md#microsofttimeseriesinsightsenvironments).
 
 
 ### <a name="ingress"></a>Giriş
- 
-|Metric|Ölçüm görünen adı|Birim|Toplama Türü|Description|
+
+|Metric|Ölçüm görünen adı|Birim|Toplama Türü|Açıklama|
 |---|---|---|---|---|
 |Alınan baytlar|Alınan bayt sayısı|Bayt|Toplam|Olay kaynağından okunan bayt sayısı|
 |Inressreceiveınvalidmessages|Giriş geçersiz Iletiler aldı|Count|Toplam|Olay kaynağından okunan geçersiz ileti sayısı|
@@ -40,7 +41,7 @@ Bu bölümde, Azure Time Series Insights için toplanan otomatik olarak toplanan
 
 ### <a name="storage"></a>Depolama
 
-|Metric|Ölçüm görünen adı|Birim|Toplama Türü|Description|
+|Metric|Ölçüm görünen adı|Birim|Toplama Türü|Açıklama|
 |---|---|---|---|---|
 |WarmStorageMaxProperties|Isınma depolama en yüksek özellikleri|Count|Maksimum|S1/S2 SKU 'SU için ortam tarafından izin verilen en fazla özellik sayısı ve PAYG SKU 'SU için ısınma tarafından izin verilen en fazla özellik sayısı|
 |WarmStorageUsedProperties|Sıcak depolama kullanılan özellikler |Count|Maksimum|S1/S2 SKU 'SU için ortam tarafından kullanılan özellik sayısı ve PAYG SKU 'SU için sıcak mağaza tarafından kullanılan özellik sayısı|

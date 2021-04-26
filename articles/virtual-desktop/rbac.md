@@ -7,13 +7,13 @@ ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 12/15/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 1120db685c54ff062f03aca9002bf77af549bc26
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: a1094004bc523a59c3fcf7eb77c6f11bc4554080
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104582128"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445865"
 ---
 # <a name="built-in-roles-for-windows-virtual-desktop"></a>Windows sanal masaüstü için yerleşik roller
 

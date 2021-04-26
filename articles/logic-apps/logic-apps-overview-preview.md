@@ -5,13 +5,13 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: estfan, logicappspm, az-logic-apps-dev
 ms.topic: conceptual
-ms.date: 03/10/2021
-ms.openlocfilehash: 7120b6ff17657232c0e614f49b75bb24263712b7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/24/2021
+ms.openlocfilehash: 27889e8309c0efaf1e2869fc39d099f38f64f7c4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102636344"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764828"
 ---
 # <a name="overview-azure-logic-apps-preview"></a>Genel Bakış: Azure Logic Apps Önizleme
 
@@ -80,7 +80,7 @@ Tek kiracılı mantıksal uygulama türü ile, bu iş akışı türlerini aynı 
   Daha kolay hata ayıklama için, performans üzerinde bir etkisi olan, durum bilgisiz iş akışı için çalıştırma geçmişini etkinleştirebilir ve sonra işiniz bittiğinde çalıştırma geçmişini devre dışı bırakabilirsiniz. Daha fazla bilgi için, bkz. [Visual Studio Code durum bilgisiz ve durum bilgisi olmayan iş akışları oluşturma](create-stateful-stateless-workflows-visual-studio-code.md#enable-run-history-stateless) veya [Azure Portal durum bilgisiz ve durum](create-stateful-stateless-workflows-visual-studio-code.md#enable-run-history-stateless)bilgisi
 
   > [!NOTE]
-  > Durum bilgisiz iş akışları Şu anda yalnızca Azure 'da dağıtılan ve tetikleyici olmayan [yönetilen bağlayıcılar](../connectors/apis-list.md#managed-api-connectors)için *eylemleri* desteklemektedir. İş akışınızı başlatmak için [yerleşik istek, Event Hubs veya Service Bus tetikleyicisi](../connectors/apis-list.md#built-ins)' ni seçin. Bu Tetikleyiciler Azure Logic Apps Preview çalışma zamanında yerel olarak çalışır. Sınırlı, kullanılamayan veya desteklenmeyen Tetikleyiciler, Eylemler ve bağlayıcılar hakkında daha fazla bilgi için bkz. [değiştirilen, sınırlı, kullanılamayan veya desteklenmeyen yetenekler](#limited-unavailable-unsupported).
+  > Durum bilgisiz iş akışları Şu anda yalnızca Azure 'da dağıtılan ve tetikleyici olmayan [yönetilen bağlayıcılar](../connectors/managed.md)için *eylemleri* desteklemektedir. İş akışınızı başlatmak için [yerleşik istek, Event Hubs veya Service Bus tetikleyicisi](../connectors/built-in.md)' ni seçin. Bu Tetikleyiciler Azure Logic Apps Preview çalışma zamanında yerel olarak çalışır. Sınırlı, kullanılamayan veya desteklenmeyen Tetikleyiciler, Eylemler ve bağlayıcılar hakkında daha fazla bilgi için bkz. [değiştirilen, sınırlı, kullanılamayan veya desteklenmeyen yetenekler](#limited-unavailable-unsupported).
 
 <a name="nested-behavior"></a>
 
@@ -194,13 +194,13 @@ Azure Logic Apps önizlemede, bu yetenekler değiştirilmiştir veya şu anda s�
   > [!NOTE]
   > Visual Studio Code yerel olarak çalıştırmak için, Web kancası tabanlı tetikleyiciler ve eylemler ek kurulum gerektirir. Daha fazla bilgi için, bkz. [Visual Studio Code durum bilgisi olan ve durumsuz iş akışları oluşturma](create-stateful-stateless-workflows-visual-studio-code.md#webhook-setup).
 
-  * *Durum bilgisi olmayan iş akışlarında*, [tetiklemeleri değil yalnızca yönetilen bağlayıcı *eylemlerini*](../connectors/apis-list.md#managed-api-connectors)seçebileceğiniz için bir tetikleyiciyi seçtiğinizde **Azure** sekmesi görünmez. Durum bilgisiz iş akışları için Azure tarafından dağıtılan yönetilen bağlayıcıları etkinleştirebilseniz de tasarımcı, eklemeniz için herhangi bir yönetilen bağlayıcı tetikleyicisi göstermez.
+  * *Durum bilgisi olmayan iş akışlarında*, [tetiklemeleri değil yalnızca yönetilen bağlayıcı *eylemlerini*](../connectors/managed.md)seçebileceğiniz için bir tetikleyiciyi seçtiğinizde **Azure** sekmesi görünmez. Durum bilgisiz iş akışları için Azure tarafından dağıtılan yönetilen bağlayıcıları etkinleştirebilseniz de tasarımcı, eklemeniz için herhangi bir yönetilen bağlayıcı tetikleyicisi göstermez.
 
-  * Aşağıda kullanılamaz olarak listelenen Tetikleyiciler ve eylemler dışında *durum bilgisi olan iş akışları* için hem [yönetilen bağlayıcı Tetikleyicileri hem de Eylemler](../connectors/apis-list.md#managed-api-connectors) kullanabileceğiniz şekilde kullanılabilir.
+  * Aşağıda kullanılamaz olarak listelenen Tetikleyiciler ve eylemler dışında *durum bilgisi olan iş akışları* için hem [yönetilen bağlayıcı Tetikleyicileri hem de Eylemler](../connectors/managed.md) kullanabileceğiniz şekilde kullanılabilir.
 
   * Bu Tetikleyiciler ve eylemler değişmiştir ya da şu anda sınırlı, desteklenmiyor ya da kullanılamıyor:
 
-    * [Şirket içi veri ağ geçidi *Tetikleyicileri*](../connectors/apis-list.md#on-premises-connectors) kullanılamaz, ancak ağ *geçidi eylemleri kullanılabilir* .
+    * [Şirket içi veri ağ geçidi *Tetikleyicileri*](../connectors/managed.md#on-premises-connectors) kullanılamaz, ancak ağ *geçidi eylemleri kullanılabilir* .
 
     * Yerleşik eylem, [Azure işlevleri-bir Azure Işlevi seçin](logic-apps-azure-functions.md) artık **Azure işlev Işlemleri-bir Azure işlevi çağırır**. Bu eylem şu anda yalnızca **http tetikleyici** şablonundan oluşturulan işlevler için geçerlidir.
 
@@ -221,7 +221,7 @@ Azure Logic Apps önizlemede, bu yetenekler değiştirilmiştir veya şu anda s�
 
       * **Satır Içi kod işlemleri** eylemlerinin [sınırlamaları güncelleştirildi](logic-apps-overview-preview.md#inline-code-limits).
 
-    * [Tümleştirme hesapları için bazı YERLEŞIK B2B Tetikleyicileri ve eylemleri](../connectors/apis-list.md#integration-account-connectors) kullanılamaz, örneğin, **düz dosya** kodlama ve kod çözme eylemleri.
+    * [Tümleştirme hesapları için bazı YERLEŞIK B2B Tetikleyicileri ve eylemleri](../connectors/managed.md#integration-account-connectors) kullanılamaz, örneğin, **düz dosya** kodlama ve kod çözme eylemleri.
 
     * Yerleşik eylem, [Azure Logic Apps-bir mantıksal uygulama iş akışı](logic-apps-http-endpoint.md) artık **iş akışı işlemleri-bu iş akışı uygulamasında bir iş akışı çağırır**.
 

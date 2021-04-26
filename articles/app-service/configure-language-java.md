@@ -11,12 +11,12 @@ ms.reviewer: cephalin
 ms.custom: seodec18, devx-track-java, devx-track-azurecli
 zone_pivot_groups: app-service-platform-windows-linux
 adobe-target: true
-ms.openlocfilehash: cc532c5ac6babb8378860ac5049e931cc7657932
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 134ac04c4f6fb5f0e38a868adc735fc816fbc875
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629266"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829521"
 ---
 # <a name="configure-a-java-app-for-azure-app-service"></a>Azure App Service için bir Java uygulaması yapılandırma
 
@@ -32,7 +32,10 @@ Aksi takdirde, dağıtım yönteminiz arşiv türüne bağlı olacaktır:
 
 ### <a name="java-se"></a>Java SE
 
-. Jar dosyalarını Java mak 'a dağıtmak için `/api/zipdeploy/` kudu sitesinin uç noktasını kullanın. Bu API hakkında daha fazla bilgi için lütfen [Bu belgelere](./deploy-zip.md#rest)bakın.
+. Jar dosyalarını Java mak 'a dağıtmak için `/api/zipdeploy/` kudu sitesinin uç noktasını kullanın. Bu API hakkında daha fazla bilgi için lütfen [Bu belgelere](./deploy-zip.md#rest)bakın. 
+
+> [!NOTE]
+>  `app.jar`Uygulamanızı tanımlamak ve çalıştırmak için,. jar uygulamanızın adı App Service olmalıdır. Maven eklentisi (yukarıda bahsedilen), dağıtım sırasında uygulamanızı sizin için otomatik olarak yeniden adlandıracaktır. JAR 'nizi *app. jar*'e yeniden adlandırmak istemiyorsanız,. jar uygulamanızı çalıştırmak için komutuyla bir kabuk betiği yükleyebilirsiniz. Bu betiğin mutlak yolunu portalın yapılandırma bölümündeki [başlangıç dosyası](faq-app-service-linux.md#built-in-images) metin kutusuna yapıştırın. Başlatma dizesi içine yerleştirildiği dizinden çalıştırılmaz. Bu nedenle başlatma dizenizde her zaman başvuru dosyalarının mutlak yollarını kullanın (örneğin: `java -jar /home/myapp/myapp.jar`).
 
 ### <a name="tomcat"></a>Tomcat
 
@@ -141,12 +144,12 @@ JFR dosyanızı yerel makinenize indirmek için [FTPS](deploy-ftp.md) 'yi kullan
 
 ::: zone pivot="platform-windows"
 
-Uygulamanızın standart konsol çıkışını ve standart konsol hatası akışlarını yerel dosya sistemine veya Azure Blob depolama alanına yazmak üzere App Service yapılandırmak için Azure portal veya [Azure CLI](/cli/azure/webapp/log#az-webapp-log-config) aracılığıyla [Uygulama günlüğünü](troubleshoot-diagnostic-logs.md#enable-application-logging-windows) etkinleştirin. Yerel App Service dosya sistemi örneğine günlük kaydı, yapılandırıldıktan sonra 12 saat devre dışı bırakılır. Daha uzun süre bekletmeye ihtiyacınız varsa, uygulamayı bir BLOB depolama kapsayıcısına çıktı yazacak şekilde yapılandırın. Java ve Tomcat uygulama günlüklerinizi */Home/LogFiles/Application/* dizininde bulabilirsiniz.
+Uygulamanızın standart konsol çıkışını ve standart konsol hatası akışlarını yerel dosya sistemine veya Azure Blob depolama alanına yazmak üzere App Service yapılandırmak için Azure portal veya [Azure CLI](/cli/azure/webapp/log#az_webapp_log_config) aracılığıyla [Uygulama günlüğünü](troubleshoot-diagnostic-logs.md#enable-application-logging-windows) etkinleştirin. Yerel App Service dosya sistemi örneğine günlük kaydı, yapılandırıldıktan sonra 12 saat devre dışı bırakılır. Daha uzun süre bekletmeye ihtiyacınız varsa, uygulamayı bir BLOB depolama kapsayıcısına çıktı yazacak şekilde yapılandırın. Java ve Tomcat uygulama günlüklerinizi */Home/LogFiles/Application/* dizininde bulabilirsiniz.
 
 ::: zone-end
 ::: zone pivot="platform-linux"
 
-Uygulamanızın standart konsol çıkışını ve standart konsol hatası akışlarını yerel dosya sistemine veya Azure Blob depolama alanına yazmak üzere App Service yapılandırmak için Azure portal veya [Azure CLI](/cli/azure/webapp/log#az-webapp-log-config) aracılığıyla [Uygulama günlüğünü](troubleshoot-diagnostic-logs.md#enable-application-logging-linuxcontainer) etkinleştirin. Daha uzun süre bekletmeye ihtiyacınız varsa, uygulamayı bir BLOB depolama kapsayıcısına çıktı yazacak şekilde yapılandırın. Java ve Tomcat uygulama günlüklerinizi */Home/LogFiles/Application/* dizininde bulabilirsiniz.
+Uygulamanızın standart konsol çıkışını ve standart konsol hatası akışlarını yerel dosya sistemine veya Azure Blob depolama alanına yazmak üzere App Service yapılandırmak için Azure portal veya [Azure CLI](/cli/azure/webapp/log#az_webapp_log_config) aracılığıyla [Uygulama günlüğünü](troubleshoot-diagnostic-logs.md#enable-application-logging-linuxcontainer) etkinleştirin. Daha uzun süre bekletmeye ihtiyacınız varsa, uygulamayı bir BLOB depolama kapsayıcısına çıktı yazacak şekilde yapılandırın. Java ve Tomcat uygulama günlüklerinizi */Home/LogFiles/Application/* dizininde bulabilirsiniz.
 
 Linux tabanlı uygulama hizmetleri için Azure Blob depolama günlüğü, yalnızca [Azure izleyici (Önizleme)](./troubleshoot-diagnostic-logs.md#send-logs-to-azure-monitor-preview) kullanılarak yapılandırılabilir 
 
@@ -461,6 +464,232 @@ Daha sonra, veri kaynağının bir uygulama için mi yoksa Tomcat servlet üzeri
         <resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
     </resource-env-ref>
     ```
+
+#### <a name="shared-server-level-resources"></a>Paylaşılan sunucu düzeyi kaynakları
+
+Windows üzerinde App Service Tomcat yüklemeleri App Service planında paylaşılan alanda bulunuyor. Sunucu genelinde yapılandırma için Tomcat yüklemesini doğrudan değiştiremezsiniz. Tomcat yüklemenizde sunucu düzeyinde yapılandırma değişiklikleri yapmak için, Tomcat 'i yerel bir klasöre kopyalamanız gerekir. Bu, Tomcat 'in yapılandırmasını değiştirebilirsiniz. 
+
+##### <a name="automate-creating-custom-tomcat-on-app-start"></a>Uygulama başlatma sırasında özel Tomcat oluşturmayı otomatikleştirin
+
+Bir Web uygulaması başlamadan önce eylemleri gerçekleştirmek için bir başlangıç betiği kullanabilirsiniz. Tomcat 'i özelleştirmeye yönelik başlatma komut dosyasının aşağıdaki adımları tamamlaması gerekir:
+
+1. Tomcat 'in zaten kopyalanıp kopyalanmadığını ve yerel olarak yapılandırılıp yapılandırılmadığını denetleyin. Varsa, başlangıç betiği buradan sona bitebilirler.
+2. Tomcat 'i yerel olarak kopyalayın.
+3. Gerekli yapılandırma değişikliklerini yapın.
+4. Yapılandırmanın başarıyla tamamlandığını belirtin.
+
+Aşağıdaki adımları tamamlayan bir PowerShell betiği aşağıda verilmiştir:
+
+```powershell
+    # Check for marker file indicating that config has already been done
+    if(Test-Path "$LOCAL_EXPANDED\tomcat\config_done_marker"){
+        return 0
+    }
+
+    # Delete previous Tomcat directory if it exists
+    # In case previous config could not be completed or a new config should be forcefully installed
+    if(Test-Path "$LOCAL_EXPANDED\tomcat"){
+        Remove-Item "$LOCAL_EXPANDED\tomcat" --recurse
+    }
+
+    # Copy Tomcat to local
+    # Using the environment variable $AZURE_TOMCAT90_HOME uses the 'default' version of Tomcat
+    Copy-Item -Path "$AZURE_TOMCAT90_HOME\*" -Destination "$LOCAL_EXPANDED\tomcat" -Recurse
+
+    # Perform the required customization of Tomcat
+    {... customization ...}
+
+    # Mark that the operation was a success
+    New-Item -Path "$LOCAL_EXPANDED\tomcat\config_done_marker" -ItemType File
+```
+
+##### <a name="transforms"></a>Dönüştürmeler
+
+Tomcat sürümünü özelleştirmenin yaygın kullanım durumu `server.xml` ,, `context.xml` ya da `web.xml` Tomcat yapılandırma dosyalarını değiştirmektir. App Service, platform özellikleri sağlamak için bu dosyaları zaten değiştiriyor. Bu özellikleri kullanmaya devam etmek için, bunlarda değişiklikler yaptığınızda bu dosyaların içeriğinin korunması önemlidir. Bunu gerçekleştirmek için bir [XSL dönüşümü (XSLT)](https://www.w3schools.com/xml/xsl_intro.asp)kullanmanızı öneririz. Dosyanın özgün içeriğini korurken XML dosyalarında değişiklik yapmak için bir XSL dönüşümü kullanın.
+
+###### <a name="example-xslt-file"></a>Örnek XSLT dosyası
+
+Bu örnek Transform öğesine yeni bir bağlayıcı düğümü ekler `server.xml` . Dosyanın özgün içeriğini koruyan *kimlik dönüşümünü* aklınızda edin.
+
+```xml
+    <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" indent="yes"/>
+  
+    <!-- Identity transform: this ensures that the original contents of the file are included in the new file -->
+    <!-- Ensure that your transform files include this block -->
+    <xsl:template match="@* | node()" name="Copy">
+      <xsl:copy>
+        <xsl:apply-templates select="@* | node()"/>
+      </xsl:copy>
+    </xsl:template>
+  
+    <xsl:template match="@* | node()" mode="insertConnector">
+      <xsl:call-template name="Copy" />
+    </xsl:template>
+  
+    <xsl:template match="comment()[not(../Connector[@scheme = 'https']) and
+                                   contains(., '&lt;Connector') and
+                                   (contains(., 'scheme=&quot;https&quot;') or
+                                    contains(., &quot;scheme='https'&quot;))]">
+      <xsl:value-of select="." disable-output-escaping="yes" />
+    </xsl:template>
+  
+    <xsl:template match="Service[not(Connector[@scheme = 'https'] or
+                                     comment()[contains(., '&lt;Connector') and
+                                               (contains(., 'scheme=&quot;https&quot;') or
+                                                contains(., &quot;scheme='https'&quot;))]
+                                    )]
+                        ">
+      <xsl:copy>
+        <xsl:apply-templates select="@* | node()" mode="insertConnector" />
+      </xsl:copy>
+    </xsl:template>
+  
+    <!-- Add the new connector after the last existing Connnector if there is one -->
+    <xsl:template match="Connector[last()]" mode="insertConnector">
+      <xsl:call-template name="Copy" />
+  
+      <xsl:call-template name="AddConnector" />
+    </xsl:template>
+  
+    <!-- ... or before the first Engine if there is no existing Connector -->
+    <xsl:template match="Engine[1][not(preceding-sibling::Connector)]"
+                  mode="insertConnector">
+      <xsl:call-template name="AddConnector" />
+  
+      <xsl:call-template name="Copy" />
+    </xsl:template>
+  
+    <xsl:template name="AddConnector">
+      <!-- Add new line -->
+      <xsl:text>&#xa;</xsl:text>
+      <!-- This is the new connector -->
+      <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true" 
+                 maxThreads="150" scheme="https" secure="true" 
+                 keystroreFile="${{user.home}}/.keystore" keystorePass="changeit"
+                 clientAuth="false" sslProtocol="TLS" />
+    </xsl:template>
+
+</xsl:stylesheet>
+```
+
+###### <a name="function-for-xsl-transform"></a>XSL dönüşümü işlevi
+
+PowerShell, XML dosyalarını XSL dönüştürmeleri kullanarak dönüştürmek için yerleşik araçlara sahiptir. Aşağıdaki betik, dönüşümü gerçekleştirmek için ' de kullanabileceğiniz örnek bir işlevdir `startup.ps1` :
+
+```powershell
+    function TransformXML{
+        param ($xml, $xsl, $output)
+
+        if (-not $xml -or -not $xsl -or -not $output)
+        {
+            return 0
+        }
+
+        Try
+        {
+            $xslt_settings = New-Object System.Xml.Xsl.XsltSettings;
+            $XmlUrlResolver = New-Object System.Xml.XmlUrlResolver;
+            $xslt_settings.EnableScript = 1;
+
+            $xslt = New-Object System.Xml.Xsl.XslCompiledTransform;
+            $xslt.Load($xsl,$xslt_settings,$XmlUrlResolver);
+            $xslt.Transform($xml, $output);
+
+        }
+
+        Catch
+        {
+            $ErrorMessage = $_.Exception.Message
+            $FailedItem = $_.Exception.ItemName
+            Write-Host  'Error'$ErrorMessage':'$FailedItem':' $_.Exception;
+            return 0
+        }
+        return 1
+    }
+```
+
+##### <a name="app-settings"></a>Uygulama ayarları
+
+Platformun, Tomcat 'in özel sürümünün yüklü olduğu yeri de bilmeleri gerekir. Uygulamanın ayarında yükleme konumunu ayarlayabilirsiniz `CATALINA_BASE` .
+
+Bu ayarı değiştirmek için Azure CLı 'yi kullanabilirsiniz:
+
+```powershell
+    az webapp config appsettings set -g $MyResourceGroup -n $MyUniqueApp --settings CATALINA_BASE="%LOCAL_EXPANDED%\tomcat"
+```
+
+Ya da Azure portal ayarı el ile değiştirebilirsiniz:
+
+1. **Ayarlar**  >  **yapılandırma**  >  **uygulaması ayarları**' na gidin.
+1. **Yeni uygulama ayarı** seçin.
+1. Ayarı oluşturmak için bu değerleri kullanın:
+   1. **Ad**: `CATALINA_BASE`
+   1. **Değer**: `"%LOCAL_EXPANDED%\tomcat"`
+
+##### <a name="example-startupps1"></a>Örnek startup.ps1
+
+Aşağıdaki örnek betik özel bir Tomcat 'i yerel bir klasöre kopyalar, bir XSL dönüşümü gerçekleştirir ve dönüştürmenin başarılı olduğunu gösterir:
+
+```powershell
+    # Locations of xml and xsl files
+    $target_xml="$LOCAL_EXPANDED\tomcat\conf\server.xml"
+    $target_xsl="$HOME\site\server.xsl"
+
+    # Define the transform function
+    # Useful if transforming multiple files
+    function TransformXML{
+        param ($xml, $xsl, $output)
+
+        if (-not $xml -or -not $xsl -or -not $output)
+        {
+            return 0
+        }
+
+        Try
+        {
+            $xslt_settings = New-Object System.Xml.Xsl.XsltSettings;
+            $XmlUrlResolver = New-Object System.Xml.XmlUrlResolver;
+            $xslt_settings.EnableScript = 1;
+
+            $xslt = New-Object System.Xml.Xsl.XslCompiledTransform;
+            $xslt.Load($xsl,$xslt_settings,$XmlUrlResolver);
+            $xslt.Transform($xml, $output);
+        }
+
+        Catch
+        {
+            $ErrorMessage = $_.Exception.Message
+            $FailedItem = $_.Exception.ItemName
+            Write-Host  'Error'$ErrorMessage':'$FailedItem':' $_.Exception;
+            return 0
+        }
+        return 1
+    }
+
+    # Check for marker file indicating that config has already been done
+    if(Test-Path "$LOCAL_EXPANDED\tomcat\config_done_marker"){
+        return 0
+    }
+
+    # Delete previous Tomcat directory if it exists
+    # In case previous config could not be completed or a new config should be forcefully installed
+    if(Test-Path "$LOCAL_EXPANDED\tomcat"){
+        Remove-Item "$LOCAL_EXPANDED\tomcat" --recurse
+    }
+
+    # Copy Tomcat to local
+    # Using the environment variable $AZURE_TOMCAT90_HOME uses the 'default' version of Tomcat
+    Copy-Item -Path "$AZURE_TOMCAT90_HOME\*" -Destination "$LOCAL_EXPANDED\tomcat" -Recurse
+
+    # Perform the required customization of Tomcat
+    $success = TransformXML -xml $target_xml -xsl $target_xsl -output $target_xml
+
+    # Mark that the operation was a success if successful
+    if($success){
+        New-Item -Path "$LOCAL_EXPANDED\tomcat\config_done_marker" -ItemType File
+    }
+```
 
 #### <a name="finalize-configuration"></a>Yapılandırmayı Sonlandır
 

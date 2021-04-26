@@ -5,13 +5,13 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: logicappspm
 ms.topic: conceptual
-ms.date: 02/19/2021
-ms.openlocfilehash: 8180fe8554e5fff83e4caef8c245839518649ca1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/05/2021
+ms.openlocfilehash: 0a98f9e4b108d2498fa19bc0b041f9d52272c7d2
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101719058"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774945"
 ---
 # <a name="manage-azure-resources-and-monitor-costs-by-creating-automation-tasks-preview"></a>Otomasyon görevleri (Önizleme) oluşturarak Azure kaynaklarını yönetme ve maliyetleri izleme
 
@@ -150,7 +150,7 @@ Görevin çalışma geçmişini, durumları, girişleri, çıkışları ve diğe
 
    **Mantıksal uygulama çalıştırma** bölmesi açılır ve çalıştıran temel alınan iş akışını gösterir.
 
-   * Bir iş akışı her zaman bir [*tetikleyici*](../connectors/apis-list.md#triggers-actions)ile başlar. Bu görev için, iş akışı [ **yinelenme** tetikleyicisiyle](../connectors/connectors-native-recurrence.md)başlar.
+   * Bir iş akışı her zaman bir [*tetikleyici*](../connectors/apis-list.md#triggers)ile başlar. Bu görev için, iş akışı [ **yinelenme** tetikleyicisiyle](../connectors/connectors-native-recurrence.md)başlar.
 
    * Her adım durumunu ve çalıştırma süresini gösterir. 0 saniyelik süreleri olan adımların çalıştırılması 1 saniyeden daha az sürdü.
 

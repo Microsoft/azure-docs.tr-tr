@@ -5,19 +5,19 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: B2B
 ms.topic: how-to
-ms.date: 03/02/2021
+ms.date: 04/06/2021
 ms.author: mimart
 author: msmimart
 manager: celestedg
 ms.reviewer: mal
 ms.custom: it-pro, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d2e9acda136654a0dd654eded7b4c17e560fc0aa
-ms.sourcegitcommit: dae6b628a8d57540263a1f2f1cdb10721ed1470d
+ms.openlocfilehash: 0cb3b3fd2010bf4ad1288b767d62d3d76f7b37e3
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105709710"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550974"
 ---
 # <a name="add-google-as-an-identity-provider-for-b2b-guest-users"></a>B2B Konuk kullanıcıları için bir kimlik sağlayıcısı olarak Google ekleme
 
@@ -150,7 +150,7 @@ Bu değişiklik etkilenmez:
    > "Adım 1: Google Geliştirici projesi yapılandırma" bölümünde oluşturduğunuz uygulamadan istemci KIMLIĞINI ve istemci gizli anahtarını kullanın. Daha fazla bilgi için, bkz. [New-AzureADMSIdentityProvider](/powershell/module/azuread/new-azureadmsidentityprovider?view=azureadps-2.0-preview&preserve-view=true). 
  
 ## <a name="how-do-i-remove-google-federation"></a>Google Federasyonu Nasıl yaparım? kaldırılsın mı?
-Google Federation kurulumunuzu silebilirsiniz. Bunu yaparsanız, davetini zaten kullanan Google Konuk kullanıcılar oturum açamaz. Ancak onları dizinden silerek ve yeniden davet ederek kaynaklarınıza erişim izni verebilirsiniz. 
+Google Federation kurulumunuzu silebilirsiniz. Bunu yaparsanız, davetini zaten kullanan Google Konuk kullanıcılar oturum açamaz. Ancak, kullanım [durumlarını sıfırlayarak](reset-redemption-status.md)bu kullanıcılara kaynaklarınızın erişimini sağlayabilirsiniz.
  
 **Azure AD portalında Google Federasyonu 'ni silmek için**
 1. [Azure Portal](https://portal.azure.com) gidin. Sol bölmede **Azure Active Directory**' yi seçin. 

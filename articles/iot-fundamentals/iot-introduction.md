@@ -10,12 +10,12 @@ ms.author: dobett
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: d2afd88500801f1e2b1e4da5a1e267bddfa69fc7
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f1053062302c9a00cf49cee1cd8de5ca6652b745
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96453029"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167711"
 ---
 # <a name="what-is-azure-internet-of-things-iot"></a>Azure Nesnelerin İnterneti (IoT) nedir?
 
@@ -30,7 +30,7 @@ IoT cihazı genellikle internet 'e bağlanmak için WiFi kullanan sensörlerin e
 * Asansör bir hızlandırma.
 * Bir odada bulunan varlık algılayıcıları.
 
-Çözümünüzü derlemek için farklı üreticilerin sunduğu çok sayıda cihaz mevcuttur. Azure IoT Hub ile çalışmak üzere sertifikalı cihazların listesi için bkz. [IoT Için Azure Sertifikalı cihaz kataloğu](https://catalog.azureiotsolutions.com/alldevices). Prototip oluşturma için, bir [Mxyonga IoT DevKit](https://microsoft.github.io/azure-iot-developer-kit/) veya bir [Raspberry PI](https://www.raspberrypi.org/)gibi cihazları kullanabilirsiniz. Devkit, sıcaklık, basınç, nem ve bir jroscope, ivometer ve manyetik tometer için yerleşik sensörlerden sahiptir. Raspberry PI, birçok farklı algılayıcı türü eklemenize olanak sağlar. 
+Çözümünüzü derlemek için farklı üreticilerin sunduğu çok sayıda cihaz mevcuttur. Azure IoT Hub ile çalışmak üzere sertifikalı cihazların listesi için bkz. [IoT Için Azure Sertifikalı cihaz kataloğu](https://devicecatalog.azure.com). Prototip oluşturma için, bir [Mxyonga IoT DevKit](https://microsoft.github.io/azure-iot-developer-kit/) veya bir [Raspberry PI](https://www.raspberrypi.org/)gibi cihazları kullanabilirsiniz. Devkit, sıcaklık, basınç, nem ve bir jroscope, ivometer ve manyetik tometer için yerleşik sensörlerden sahiptir. Raspberry PI, birçok farklı algılayıcı türü eklemenize olanak sağlar. 
 
 Microsoft, cihazlarınızda çalışan uygulamaları oluşturmak için kullanabileceğiniz açık kaynaklı [cihaz SDK 'ları](../iot-hub/iot-hub-devguide-sdks.md) sağlar. Bu SDK 'lar IoT çözümlerinizin geliştirilmesini [basitleştirir ve hızlandırır](https://azure.microsoft.com/blog/benefits-of-using-the-azure-iot-sdks-in-your-azure-iot-solution/) .
 

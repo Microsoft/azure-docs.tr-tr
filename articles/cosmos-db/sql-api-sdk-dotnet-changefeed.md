@@ -6,14 +6,14 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
 ms.topic: reference
-ms.date: 08/12/2020
+ms.date: 04/06/2021
 ms.author: anfeldma
-ms.openlocfilehash: b1f2efa887fb56d555f354c6d0a3262a7f178e29
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8f38ed175241bdb9235795d7a999a82d0799d46d
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104577147"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107876589"
 ---
 # <a name="net-change-feed-processor-sdk-download-and-release-notes"></a>.NET Değişiklik Akışı İşlemci SDK'sı: İndirme ve sürüm notları
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -30,7 +30,8 @@ ms.locfileid: "104577147"
 > * [Zaman uyumlu Java SDK v2](sql-api-sdk-java.md)
 > * [Spring Verileri v2](sql-api-sdk-java-spring-v2.md)
 > * [Spring Verileri v3](sql-api-sdk-java-spring-v3.md)
-> * [Spark Bağlayıcısı](sql-api-sdk-java-spark.md)
+> * [Spark 3 OLTP Bağlayıcısı](sql-api-sdk-java-spark-v3.md)
+> * [Spark 2 OLTP Bağlayıcısı](sql-api-sdk-java-spark.md)
 > * [Python](sql-api-sdk-python.md)
 > * [REST](/rest/api
 > * [REST Kaynak Sağlayıcısı](/rest/api
@@ -43,7 +44,7 @@ ms.locfileid: "104577147"
 |**SDK indirmesi**|[NuGet](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB.ChangeFeedProcessor/)|
 |**API belgeleri**|[Değişiklik Akışı İşlemcisi kitaplığı API başvurusu belgeleri](/dotnet/api/microsoft.azure.documents.changefeedprocessor)|
 |**Kullanmaya başlama**|[Değişiklik Akışı İşlemcisi .NET SDK'sını kullanmaya başlama](change-feed.md)|
-|**Şu anda desteklenen çerçeve**| [Microsoft .NET Framework 4.5](https://www.microsoft.com/download/details.aspx?id=30653)</br> [Microsoft .NET Core](https://www.microsoft.com/net/download/core) |
+|**Şu anda desteklenen çerçeve**| [Microsoft .NET Framework 4.5](https://www.microsoft.com/download/details.aspx?id=30653)</br> [Microsoft .NET Core](https://dotnet.microsoft.com/download) |
 
 > [!NOTE]
 > Değişiklik akışı işlemcisini kullanıyorsanız, değişiklik akışının SDK'da yerleşik olarak bulunduğu [.NET SDK'sının](change-feed-processor.md) en yeni sürümü 3.x'e bakın. 

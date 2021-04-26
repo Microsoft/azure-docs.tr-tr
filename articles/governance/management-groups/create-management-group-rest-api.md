@@ -3,12 +3,12 @@ title: 'Hızlı başlangıç: REST API bir yönetim grubu oluşturma'
 description: Bu hızlı başlangıçta, kaynaklarınızı bir kaynak hiyerarşisinde düzenlemek üzere bir yönetim grubu oluşturmak için REST API kullanırsınız.
 ms.date: 02/05/2021
 ms.topic: quickstart
-ms.openlocfilehash: ff1487bf25945c733402ddb74d1e102bea80b4b1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 26a1c0a8025a00155bcf0498e6dfa89a8a73d983
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99592509"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107259141"
 ---
 # <a name="quickstart-create-a-management-group-with-rest-api"></a>Hızlı başlangıç: REST API bir yönetim grubu oluşturma
 
@@ -28,7 +28,7 @@ Dizinde oluşturulan ilk yönetim grubunun tamamlanması 15 dakika sürebilir. D
 
 ### <a name="create-in-rest-api"></a>REST API oluşturma
 
-REST API için [Yönetim grupları-oluştur veya Güncelleştir](/rest/api/resources/managementgroups/createorupdate) uç noktasını kullanarak yeni bir yönetim grubu oluşturun. Bu örnekte, yönetim grubu **GroupID** _contoso_' dır.
+REST API için [Yönetim grupları-oluştur veya Güncelleştir](/rest/api/managementgroups/managementgroups/createorupdate) uç noktasını kullanarak yeni bir yönetim grubu oluşturun. Bu örnekte, yönetim grubu **GroupID** _contoso_' dır.
 
 - REST API URI'si
 
@@ -81,7 +81,7 @@ Yukarıdaki örneklerde, yeni yönetim grubu kök yönetim grubu altında oluşt
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Yukarıda oluşturulan yönetim grubunu kaldırmak için [Yönetim grupları silme](/rest/api/resources/managementgroups/delete) uç noktasını kullanın:
+Yukarıda oluşturulan yönetim grubunu kaldırmak için [Yönetim grupları silme](/rest/api/managementgroups/managementgroups/delete) uç noktasını kullanın:
 
 - REST API URI'si
 

@@ -5,12 +5,12 @@ ms.service: hdinsight
 ms.topic: how-to
 ms.custom: hdinsightactive, devx-track-azurecli
 ms.date: 02/03/2020
-ms.openlocfilehash: 9028d85346611341afec0d0598f27a77e4f37fdf
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9c19eb58e32fec66e5fe698c82133c8583f67b8b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101715505"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775142"
 ---
 # <a name="create-hdinsight-clusters-using-the-azure-cli"></a>Azure CLı kullanarak HDInsight kümeleri oluşturma
 
@@ -35,7 +35,7 @@ Bu belgedeki adımlar, Azure CLı kullanarak HDInsight 3,6 kümesi oluşturma ko
     # az account set --subscription "SUBSCRIPTIONID"
     ```
 
-2. Ortam değişkenlerini ayarlayın. Bu makaledeki değişkenlerin kullanımı Bash 'i temel alır. Diğer ortamlar için hafif Çeşitlemeler gerekecektir. Küme oluşturma için olası parametrelerin tam bir listesi için bkz. [az-HDInsight-Create](/cli/azure/hdinsight#az-hdinsight-create) .
+2. Ortam değişkenlerini ayarlayın. Bu makaledeki değişkenlerin kullanımı Bash 'i temel alır. Diğer ortamlar için hafif Çeşitlemeler gerekecektir. Küme oluşturma için olası parametrelerin tam bir listesi için bkz. [az-HDInsight-Create](/cli/azure/hdinsight#az_hdinsight_create) .
 
     |Parametre | Açıklama |
     |---|---|
@@ -61,7 +61,7 @@ Bu belgedeki adımlar, Azure CLı kullanarak HDInsight 3,6 kümesi oluşturma ko
     export componentVersion=Hadoop=2.7
     ```
 
-3. Aşağıdaki komutu girerek [kaynak grubunu oluşturun](/cli/azure/group#az-group-create) :
+3. Aşağıdaki komutu girerek [kaynak grubunu oluşturun](/cli/azure/group#az_group_create) :
 
     ```azurecli-interactive
     az group create \
@@ -71,7 +71,7 @@ Bu belgedeki adımlar, Azure CLı kullanarak HDInsight 3,6 kümesi oluşturma ko
 
     Geçerli konumların bir listesi için `az account list-locations` komutunu kullanın ve sonra değerden birini kullanın `name` .
 
-4. Aşağıdaki komutu girerek [bir Azure depolama hesabı oluşturun](/cli/azure/storage/account#az-storage-account-create) :
+4. Aşağıdaki komutu girerek [bir Azure depolama hesabı oluşturun](/cli/azure/storage/account#az_storage_account_create) :
 
     ```azurecli-interactive
     # Note: kind BlobStorage is not available as the default storage account.
@@ -84,7 +84,7 @@ Bu belgedeki adımlar, Azure CLı kullanarak HDInsight 3,6 kümesi oluşturma ko
         --sku Standard_LRS
     ```
 
-5. [Azure Storage hesabından birincil anahtarı ayıklayın](/cli/azure/storage/account/keys#az-storage-account-keys-list) ve aşağıdaki komutu girerek bir değişkende saklayın:
+5. [Azure Storage hesabından birincil anahtarı ayıklayın](/cli/azure/storage/account/keys#az_storage_account_keys_list) ve aşağıdaki komutu girerek bir değişkende saklayın:
 
     ```azurecli-interactive
     export AZURE_STORAGE_KEY=$(az storage account keys list \
@@ -93,7 +93,7 @@ Bu belgedeki adımlar, Azure CLı kullanarak HDInsight 3,6 kümesi oluşturma ko
         --query [0].value -o tsv)
     ```
 
-6. Aşağıdaki komutu girerek [bir Azure depolama kapsayıcısı oluşturun](/cli/azure/storage/container#az-storage-container-create) :
+6. Aşağıdaki komutu girerek [bir Azure depolama kapsayıcısı oluşturun](/cli/azure/storage/container#az_storage_container_create) :
 
     ```azurecli-interactive
     az storage container create \
@@ -102,7 +102,7 @@ Bu belgedeki adımlar, Azure CLı kullanarak HDInsight 3,6 kümesi oluşturma ko
         --account-name $AZURE_STORAGE_ACCOUNT
     ```
 
-7. Aşağıdaki komutu girerek [HDInsight kümesini oluşturun](/cli/azure/hdinsight#az-hdinsight-create) :
+7. Aşağıdaki komutu girerek [HDInsight kümesini oluşturun](/cli/azure/hdinsight#az_hdinsight_create) :
 
     ```azurecli-interactive
     az hdinsight create \

@@ -3,12 +3,12 @@ title: 'Hızlı başlangıç: go-Azure Event Hubs kullanarak olay gönderme ve a
 description: 'Hızlı başlangıç: Bu makale, Azure Event Hubs olayları gönderen bir go uygulaması oluşturmaya yönelik bir yol sağlar.'
 ms.topic: quickstart
 ms.date: 06/23/2020
-ms.openlocfilehash: 59cd0d757108e7579ce389d216b0ee4d569e12fd
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: ededd042dadd6059bd7b2d689cff78fe1bd6af0b
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87002463"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311099"
 ---
 # <a name="quickstart-send-events-to-or-receive-events-from-event-hubs-using-go"></a>Hızlı başlangıç: go kullanarak Event Hubs olay gönderme veya olayları alma
 Azure Event Hubs saniyede milyonlarca olay alıp işleme kapasitesine sahip olan bir Büyük Veri akış platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Olay Hub’larının ayrıntılı genel bakışı için bkz. [Olay Hub’larına genel bakış](event-hubs-about.md) ve [Olay Hub’ları özellikleri](event-hubs-features.md).
@@ -279,7 +279,7 @@ Aşağıdaki makaleleri okuyun:
 
 - [EventProcessorHost](event-hubs-event-processor-host.md)
 - [Azure Event Hubs'ın özellikleri ve terminolojisi](event-hubs-features.md)
-- [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+- [Event Hubs ile ilgili SSS](event-hubs-faq.yml)
 
 
 <!-- Links -->

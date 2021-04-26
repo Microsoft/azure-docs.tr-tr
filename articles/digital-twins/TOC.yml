@@ -8,7 +8,7 @@
   expanded: true
   items:
     - name: Örnek bir senaryoyu inceleme
-      href: quickstart-adt-explorer.md
+      href: quickstart-azure-digital-twins-explorer.md
 - name: Öğreticiler
   items:
     - name: Bir istemci uygulaması kodlama
@@ -43,6 +43,8 @@
       href: concepts-query-units.md
     - name: Diğer hizmetlerle tümleştirme
       href: concepts-integration.md
+    - name: Olay bildirimleri
+      href: concepts-event-notifications.md
     - name: Olay yolları
       href: concepts-route-events.md
     - name: Azure Digital Twins çözümleri için güvenlik
@@ -91,8 +93,6 @@
           href: how-to-manage-twin.md
         - name: İlişkileri olan ikiz grafiğini yönetme
           href: how-to-manage-graph.md
-        - name: Olay verilerini yorumlama
-          href: how-to-interpret-event-data.md
         - name: Veri işleme için bir Azure işlevi ayarlama
           href: how-to-create-azure-function.md
         - name: İkiz grafiğini sorgulama
@@ -149,6 +149,10 @@
           items:
             - name: 403 (Yasak)
               href: troubleshoot-error-403.md
+            - name: 404 Sub-Domain bulunamadı
+              href: troubleshoot-error-404.md
+            - name: Azure dijital TWINS Explorer kimlik doğrulaması
+              href: troubleshoot-error-azure-digital-twins-explorer-authentication.md
 - name: Başvuru
   items:
     - name: REST API başvurusu
@@ -172,7 +176,7 @@
             - name: Python SDK'sı
               href: /python/api/azure-digitaltwins-core/azure.digitaltwins.core
     - name: Digital Twins CLI
-      href: /cli/azure/ext/azure-iot/dt
+      href: /cli/azure/dt
     - name: DTDL v2 belirtimi
       href: 'https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md'
 - name: Kaynaklar

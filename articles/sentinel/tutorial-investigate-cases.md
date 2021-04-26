@@ -12,14 +12,14 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 01/25/2021
+ms.date: 04/08/2021
 ms.author: yelevin
-ms.openlocfilehash: 8853f3774bb35361746c8b706f38bc54079d74f7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8980a8920b4f41f5a8e6afe106415032eef2055b
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98790995"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107375853"
 ---
 # <a name="tutorial-investigate-incidents-with-azure-sentinel"></a>Öğretici: Azure Sentinel ile olayları araştırın
 
@@ -51,9 +51,15 @@ Bir olay birden çok uyarı içerebilir. Bu, belirli bir araştırma için ilgil
 
 1. Bir araştırmaya başlamak için belirli bir olay seçin. Sağ tarafta, olay için önem derecesi, dahil edilen varlıkların sayısının Özeti, bu olayı tetikleyen ham olaylar ve olayın benzersiz KIMLIĞI gibi ayrıntılı bilgileri görebilirsiniz.
 
-1. Olaydaki uyarılar ve varlıklar hakkında daha fazla ayrıntı görüntülemek için olay sayfasında **tam ayrıntıları görüntüle** ' yi seçin ve olay bilgilerini özetleyen ilgili sekmeleri gözden geçirin. **Uyarılar** sekmesinde, uyarının kendisini gözden geçirin. Uyarı ile ilgili tüm bilgileri, uyarıyı tetikleyen sorguyu, sorgu başına döndürülen sonuç sayısını ve uyarılar üzerinde PlayBook 'ları çalıştırma özelliğini görebilirsiniz. Olay içinde daha fazla ayrıntıya geçmek için **olay** sayısını seçin. Bu, sonuçları oluşturan sorguyu ve Log Analytics uyarıyı tetikleyen olayları açar. **Varlıklar** sekmesinde, uyarı kuralı tanımının bir parçası olarak eşleştirmekte olduğunuz tüm varlıkları görebilirsiniz.
+1. Olaydaki uyarılar ve varlıklar hakkında daha fazla ayrıntı görüntülemek için olay sayfasında **tam ayrıntıları görüntüle** ' yi seçin ve olay bilgilerini özetleyen ilgili sekmeleri gözden geçirin. 
 
-    ![Uyarı ayrıntılarını görüntüle](media/tutorial-investigate-cases/alert-details.png)
+    ![Uyarı ayrıntılarını görüntüle](media/tutorial-investigate-cases/incident-timeline.png)
+
+    Örnek:
+
+    - **Zaman çizelgesi** sekmesinde, olaydaki uyarı ve yer işaretlerinin zaman çizelgesini gözden geçirin ve bu, saldırgan etkinliğinin zaman çizelgesini yeniden oluşturmanıza yardımcı olabilir.
+    - **Uyarılar** sekmesinde, uyarının kendisini gözden geçirin. Uyarı ile ilgili tüm bilgileri, uyarıyı tetikleyen sorguyu, sorgu başına döndürülen sonuç sayısını ve uyarılar üzerinde PlayBook 'ları çalıştırma özelliğini görebilirsiniz. Olay içinde daha fazla ayrıntıya geçmek için **olay** sayısını seçin. Bu, sonuçları oluşturan sorguyu ve Log Analytics uyarıyı tetikleyen olayları açar. 
+    - **Varlıklar** sekmesinde, uyarı kuralı tanımının bir parçası olarak eşleştirmekte olduğunuz tüm varlıkları görebilirsiniz.
 
 1. Bir olayı etkin bir şekilde araştırıyorsanız, siz kapatıncaya kadar olayın durumunu **devam ediyor** olarak ayarlamanız iyi bir fikirdir.
 

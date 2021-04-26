@@ -3,12 +3,12 @@ title: Çalışan kapsayıcı örneğinde komutları yürütme
 description: Azure Container Instances ' de çalışmakta olan bir kapsayıcıda bir komutu nasıl yürütebileceğinizi öğrenin
 ms.topic: article
 ms.date: 03/30/2018
-ms.openlocfilehash: de48e6ac246e2b0751561b4c60bb63d88b599bdf
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 42832910efff67f111c669793798d9ff0e413536
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "79247208"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790788"
 ---
 # <a name="execute-a-command-in-a-running-azure-container-instance"></a>Çalışan bir Azure Container Instance 'da bir komut yürütün
 
@@ -89,6 +89,6 @@ Azure Container Instances Şu anda [az Container exec][az-container-exec]ile tek
 [Azure Container Instances 'de kapsayıcı ve dağıtım sorunlarını gidermeye yönelik](container-instances-troubleshooting.md)diğer sorun giderme araçları ve yaygın dağıtım sorunları hakkında bilgi edinin.
 
 <!-- LINKS - internal -->
-[az-container-create]: /cli/azure/container#az-container-create
-[az-container-exec]: /cli/azure/container#az-container-exec
+[az-container-create]: /cli/azure/container#az_container_create
+[az-container-exec]: /cli/azure/container#az_container_exec
 [azure-cli]: /cli/azure

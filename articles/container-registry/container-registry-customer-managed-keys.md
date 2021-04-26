@@ -4,12 +4,12 @@ description: Azure Container Registry 'nizin geri kalanı hakkında bilgi edinin
 ms.topic: article
 ms.date: 03/03/2021
 ms.custom: ''
-ms.openlocfilehash: aad9419fdb139ff615bfe07075be78a2ca4ee4ac
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9ec32e32d187a3db07f023c78efbd301ef578cbc
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102489081"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817044"
 ---
 # <a name="encrypt-registry-using-a-customer-managed-key"></a>Müşteri tarafından yönetilen anahtar kullanarak kayıt defterini şifreleme
 
@@ -127,7 +127,7 @@ az keyvault set-policy \
   --key-permissions get unwrapKey wrapKey
 ```
 
-Alternatif olarak, anahtar kasasına erişmek için kimliğe izinler atamak üzere [Key Vault Için Azure RBAC](../key-vault/general/rbac-guide.md) kullanın. Örneğin, [az role atama Create](/cli/azure/role/assignment#az-role-assignment-create) komutunu kullanarak Key Vault şifreleme hizmeti şifreleme rolünü kimliğe atayın:
+Alternatif olarak, anahtar kasasına erişmek için kimliğe izinler atamak üzere [Key Vault Için Azure RBAC](../key-vault/general/rbac-guide.md) kullanın. Örneğin, [az role atama Create](/cli/azure/role/assignment#az_role_assignment_create) komutunu kullanarak Key Vault şifreleme hizmeti şifreleme rolünü kimliğe atayın:
 
 ```azurecli 
 az role assignment create --assignee $identityPrincipalID \
@@ -454,7 +454,7 @@ Bir anahtar döndürürken, genellikle kayıt defteri oluştururken kullanılan 
 
 Yaygın bir senaryo, müşteri tarafından yönetilen anahtar olarak kullanılan anahtarın sürümünü güncelleştirmedir. Kayıt defteri şifrelemesinin nasıl yapılandırıldığına bağlı olarak, Azure Container Registry içindeki müşteri tarafından yönetilen anahtar otomatik olarak güncelleştirilir veya el ile güncelleştirilmeleri gerekir.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 Anahtar Kasası Anahtarlarınızı oluşturmak veya yönetmek için [az keykasakey][az-keyvault-key] komutları kullanın. Yeni bir anahtar sürümü oluşturmak için [az keykasa Key Create][az-keyvault-key-create] komutunu çalıştırın:
 
@@ -601,26 +601,26 @@ Bu sorun sistem tarafından atanan bir kimlikle oluşursa, kimlik geri yükleme 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Azure 'da bekleyen şifreleme](../security/fundamentals/encryption-atrest.md)hakkında daha fazla bilgi edinin.
-* Erişim ilkeleri hakkında daha fazla bilgi edinin ve [bir anahtar kasasına erişimi güvenli hale](../key-vault/general/secure-your-key-vault.md)getirin.
+* Erişim ilkeleri hakkında daha fazla bilgi edinin ve [bir anahtar kasasına erişimi güvenli hale](../key-vault/general/security-features.md)getirin.
 
 
 <!-- LINKS - external -->
 
 <!-- LINKS - internal -->
 
-[az-feature-register]: /cli/azure/feature#az-feature-register
-[az-feature-show]: /cli/azure/feature#az-feature-show
-[az-group-create]: /cli/azure/group#az-group-create
-[az-identity-create]: /cli/azure/identity#az-identity-create
-[az-feature-register]: /cli/azure/feature#az-feature-register
-[az-deployment-group-create]: /cli/azure/deployment/group#az-deployment-group-create
-[az-keyvault-create]: /cli/azure/keyvault#az-keyvault-create
-[az-keyvault-key-create]: /cli/azure/keyvault/key#az-keyvault-key-create
+[az-feature-register]: /cli/azure/feature#az_feature_register
+[az-feature-show]: /cli/azure/feature#az_feature_show
+[az-group-create]: /cli/azure/group#az_group_create
+[az-identity-create]: /cli/azure/identity#az_identity_create
+[az-feature-register]: /cli/azure/feature#az_feature_register
+[az-deployment-group-create]: /cli/azure/deployment/group#az_deployment_group_create
+[az-keyvault-create]: /cli/azure/keyvault#az_keyvault_create
+[az-keyvault-key-create]: /cli/azure/keyvault/key#az_keyvault_key_create
 [az-keyvault-key]: /cli/azure/keyvault/key
-[az-keyvault-set-policy]: /cli/azure/keyvault#az-keyvault-set-policy
-[az-keyvault-delete-policy]: /cli/azure/keyvault#az-keyvault-delete-policy
-[az-resource-show]: /cli/azure/resource#az-resource-show
-[az-acr-create]: /cli/azure/acr#az-acr-create
-[az-acr-show]: /cli/azure/acr#az-acr-show
-[az-acr-encryption-rotate-key]: /cli/azure/acr/encryption#az-acr-encryption-rotate-key
-[az-acr-encryption-show]: /cli/azure/acr/encryption#az-acr-encryption-show
+[az-keyvault-set-policy]: /cli/azure/keyvault#az_keyvault_set_policy
+[az-keyvault-delete-policy]: /cli/azure/keyvault#az_keyvault_delete_policy
+[az-resource-show]: /cli/azure/resource#az_resource_show
+[az-acr-create]: /cli/azure/acr#az_acr_create
+[az-acr-show]: /cli/azure/acr#az_acr_show
+[az-acr-encryption-rotate-key]: /cli/azure/acr/encryption#az_acr_encryption_rotate_key
+[az-acr-encryption-show]: /cli/azure/acr/encryption#az_acr_encryption_show

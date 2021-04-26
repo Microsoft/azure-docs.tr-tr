@@ -2,13 +2,13 @@
 title: MPı uygulamalarını çalıştırmak için çok örnekli görevleri kullanma
 description: Ileti geçirme arabirimi (MPı) uygulamalarını Azure Batch ' deki çok örnekli görev türünü kullanarak yürütmeyi öğrenin.
 ms.topic: how-to
-ms.date: 03/25/2021
-ms.openlocfilehash: 51fc580e0bb31e0e975c53b44887a5889a784eea
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.date: 04/13/2021
+ms.openlocfilehash: e96cfb89b186d69f6ad969949b8df609956114d2
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105605680"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389409"
 ---
 # <a name="use-multi-instance-tasks-to-run-message-passing-interface-mpi-applications-in-batch"></a>Batch 'de Ileti geçirme arabirimi (MPı) uygulamalarını çalıştırmak için çok örnekli görevleri kullanma
 
@@ -21,7 +21,7 @@ ms.locfileid: "105605680"
 
 Batch 'de, her görev normalde tek bir işlem düğümünde yürütülür. bir işe birden çok görev gönderirseniz ve Batch hizmeti her görevi bir düğümde yürütmeye göre zamanlar. Ancak, bir görevin **Çoklu örnek ayarlarını** yapılandırarak, toplu olarak tek bir birincil görev ve daha sonra birden çok düğümde yürütülen birkaç alt görev oluşturmayı öğreneceksiniz.
 
-:::image type="content" source="media/batch-mpi/batch_mpi_01.png" alt-text="Çok örnekli ayarların genel bakışını gösteren diyagram.":::
+:::image type="content" source="media/batch-mpi/batch-mpi-01.png" alt-text="Çok örnekli ayarların genel bakışını gösteren diyagram.":::
 
 Bir iş için çok örnekli ayarlarla bir görev gönderdiğinizde toplu Işlem, çok örnekli görevlere özgü birkaç adımı gerçekleştirir:
 
@@ -49,7 +49,13 @@ CloudPool myCloudPool =
         poolId: "MultiInstanceSamplePool",
         targetDedicatedComputeNodes: 3
         virtualMachineSize: "standard_d1_v2",
-        cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "5"));
+        VirtualMachineConfiguration: new VirtualMachineConfiguration(
+        imageReference: new ImageReference(
+                        publisher: "MicrosoftWindowsServer",
+                        offer: "WindowsServer",
+                        sku: "2019-datacenter-core",
+                        version: "latest"),
+        nodeAgentSkuId: "batch.node.windows amd64");
 
 // Multi-instance tasks require inter-node communication, and those nodes
 // must run only one task at a time.

@@ -7,12 +7,12 @@ ms.service: resource-move
 ms.topic: how-to
 ms.date: 02/22/2020
 ms.author: raynew
-ms.openlocfilehash: 25311e93e1081b3c7638c275c39153b2c357048d
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 067aa245223bce0e8fa009b88af760a26f7ce3dc
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102559142"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739035"
 ---
 # <a name="manage-move-collections-and-resource-groups"></a>Taşıma koleksiyonlarını ve kaynak gruplarını yönetme
 
@@ -124,6 +124,7 @@ What happens when you remove a VM resource from a move collection depends on the
 **Discard failed** | We recommend that you discard the moves so that the target resources are deleted first.<br/><br/> After that, the resource goes back to the **Initiate move pending** state, and you can continue from there. | We recommend that you discard the moves so that the target resources are deleted first.<br/><br/> After that, the resource goes back to the **Initiate move pending** state, and you can continue from there.
 **Delete source pending** | Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target region.  | Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target region.
 **Delete source failed** | Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target region. | Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target region.
+**Move completed** | Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target or source region. |  Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target or source region.
 
 ## SQL resource state after removing
 
@@ -143,6 +144,7 @@ What happens when you remove an Azure SQL resource from a move collection depend
 **Discard failed** | We recommend that you discard the moves so that the target resources are deleted first.<br/><br/> After that, the resource goes back to the **Initiate move pending** state, and you can continue from there. 
 **Delete source pending** | Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target region. 
 **Delete source failed** | Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target region. 
+**Move completed** | Deleted from the move collection.<br/><br/> It doesn't delete anything created in the target or source region.
 
 ## Next steps
 

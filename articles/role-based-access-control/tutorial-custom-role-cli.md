@@ -14,12 +14,12 @@ ms.workload: identity
 ms.date: 02/20/2019
 ms.author: rolyon
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 319bca74c8e781e5dc5022e9fb901b2edca24a80
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e3743697d58d0f5b167b123df59bc5638aa60489
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87485652"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107771686"
 ---
 # <a name="tutorial-create-an-azure-custom-role-using-azure-cli"></a>Öğretici: Azure CLı kullanarak Azure özel rolü oluşturma
 
@@ -86,7 +86,7 @@ Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
     "Microsoft.Support/*"
     ```
 
-1. [az account list](/cli/azure/account#az-account-list) komutunu kullanarak aboneliğinizin kimliğini alın.
+1. [az account list](/cli/azure/account#az_account_list) komutunu kullanarak aboneliğinizin kimliğini alın.
 
     ```azurecli
     az account list --output table
@@ -118,7 +118,7 @@ Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
     }
     ```
     
-1. Yeni özel rolü oluşturmak için [az role definition create](/cli/azure/role/definition#az-role-definition-create) komutunu kullanın ve JSON rol tanımı dosyasını belirtin.
+1. Yeni özel rolü oluşturmak için [az role definition create](/cli/azure/role/definition#az_role_definition_create) komutunu kullanın ve JSON rol tanımı dosyasını belirtin.
 
     ```azurecli
     az role definition create --role-definition "~/CustomRoles/ReaderSupportRole.json"
@@ -155,7 +155,7 @@ Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
 
 ## <a name="list-custom-roles"></a>Özel rolleri listeleme
 
-- Özel rollerinizin tümünü listelemek için [az role definition list](/cli/azure/role/definition#az-role-definition-list) komutunu `--custom-role-only` parametresiyle birlikte kullanın.
+- Özel rollerinizin tümünü listelemek için [az role definition list](/cli/azure/role/definition#az_role_definition_list) komutunu `--custom-role-only` parametresiyle birlikte kullanın.
 
     ```azurecli
     az role definition list --custom-role-only true
@@ -225,7 +225,7 @@ Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
     }
     ```
         
-1. Özel rolü güncelleştirmek için [az role definition update](/cli/azure/role/definition#az-role-definition-update) komutunu kullanarak güncelleştirilmiş JSON dosyasını belirtin.
+1. Özel rolü güncelleştirmek için [az role definition update](/cli/azure/role/definition#az_role_definition_update) komutunu kullanarak güncelleştirilmiş JSON dosyasını belirtin.
 
     ```azurecli
     az role definition update --role-definition "~/CustomRoles/ReaderSupportRole.json"
@@ -261,7 +261,7 @@ Bu öğreticiyi tamamlamak için aşağıdakiler gerekir:
     
 ## <a name="delete-a-custom-role"></a>Özel rolü silme
 
-- Özel rolü silmek için [az role definition delete](/cli/azure/role/definition#az-role-definition-delete) komutunu kullanın ve rol adını veya rol kimliğini belirtin.
+- Özel rolü silmek için [az role definition delete](/cli/azure/role/definition#az_role_definition_delete) komutunu kullanın ve rol adını veya rol kimliğini belirtin.
 
     ```azurecli
     az role definition delete --name "Reader Support Tickets"

@@ -6,14 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: article
-ms.date: 03/02/2020
+ms.date: 04/12/2021
 ms.author: alkohli
-ms.openlocfilehash: 8b36bb34f4c9081d807998cb8287797443625a6b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 91bb558d47e56ebbcbdf25b0276c2a247ec81b47
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96460296"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312646"
 ---
 # <a name="azure-stack-edge-pro-technical-specifications"></a>Azure Stack Edge Pro Teknik özellikleri
 
@@ -23,16 +23,21 @@ Microsoft Azure Stack Edge Pro cihazınızın donanım bileşenleri, bu makalede
 
 Azure Stack Edge Pro cihazı, işlem ve bellek için aşağıdaki belirtimlere sahiptir:
 
-| Belirtim           | Değer                  |
-|-------------------------|----------------------------|
-| CPU    | 2 X 10 çekirdek CPU Intel Xeon gümüş 4114 2.2 G                    |
-| Bellek              | 128 GB RAM (8X 16GB RDıMM)                 |
+| Belirtim           | Değer                             |
+|-------------------------|-----------------------------------|
+| CPU türü                | Çift Intel Xeon gümüş 4114 2,2 G |
+| CPU: ham                | 20 toplam çekirdek, 40 toplam vCPU    |
+| CPU: kullanılabilir             | 32 vCPU                          |
+| Bellek türü             | 8 x 16 GB RDıMM                   |
+| Bellek: ham             | 128 GB RAM (8 x 16 GB)           |
+| Bellek: kullanılabilir          | 102 GB RAM                        |
+
 
 ## <a name="fpga-specifications"></a>FPGA belirtimleri
 
 Bir alan programlanabilir kapı dizisi (FPGA), Machine Learning (ML) senaryolarına izin veren her Azure Stack Edge Pro cihazına dahildir.
 
-| Belirtim           | Değer                  |
+| Belirtim           | Değer                      |
 |-------------------------|----------------------------|
 | FPGA   | Intel vara 10 <br> Kullanılabilir derin sinir ağı (DNN) modelleri, [bulut FPGA örnekleri tarafından desteklenenlerle](../machine-learning/how-to-deploy-fpga-web-service.md#fpga-support-in-azure)aynıdır.|
 
@@ -42,7 +47,7 @@ Azure Stack Edge Pro cihazının yüksek performanslı fanlarla iki 100-240 V g�
 
 | Belirtim           | 750 W PSU                  |
 |-------------------------|----------------------------|
-| Maksimum çıkış gücü    | 750 W                     |
+| Maksimum çıkış gücü    | 750 W                      |
 | Sıklık               | 50/60 Hz                   |
 | Voltaj aralığı seçimi | Otomatik olarak değişen: 100-240 V AC |
 | Etkin takılabilir           | Yes                        |
@@ -60,13 +65,13 @@ The following table lists the typical power consumption data (actual values may 
 
 Azure Stack Edge Pro cihazınız 6 ağ arabirimine sahiptir, PORT1-PORT6.
 
-| Belirtim           | Description                 |
+| Belirtim           | Açıklama                 |
 |-------------------------|----------------------------|
 |  Ağ arabirimleri    | 2 X 1 GbE arabirimleri – 1 yönetim için, kullanıcı tarafından yapılandırılamaz, ilk kurulumda kullanılır. Diğer arabirim Kullanıcı tarafından yapılandırılabilir, veri aktarımı için kullanılabilir ve varsayılan olarak DHCP 'dir. <br>2 X 25 GbE arabirimleri – Bunlar 10 GbE arabirimleri olarak da çalıştırılabilir. Bu veri arabirimleri kullanıcı tarafından DHCP (varsayılan) veya statik olarak yapılandırılabilir. <br> 2 X 25 GbE arabirimleri - Bu veri arabirimleri kullanıcı tarafından DHCP (varsayılan) veya statik olarak yapılandırılabilir.                  |
 
-Kullanılan ağ bağdaştırıcıları şunlardır: 
+Kullanılan ağ bağdaştırıcıları şunlardır:
 
-| Belirtim           | Description                 |
+| Belirtim           | Açıklama                 |
 |-------------------------|----------------------------|
 |Ağ yardımcı kartı (rNDC) |QLogic FastLinQ 41264 çift bağlantı noktası 25GbE SFP +, Çift bağlantı noktası 1GbE, rNDC|
 |PCI ağ bağdaştırıcısı |QLogic Fastlınq 41262 Zwei Ports 25Gbit/s SFP28 bağdaştırıcısı|
@@ -82,7 +87,7 @@ Azure Stack Edge Pro cihazlarında 9 X 2,5 "NVMe SSDs, her biri 1,6 TB kapasitey
 |    Katı hal sürücüleri (SSD 'Ler) sayısı     |    8                  |
 |    Tek SSD kapasitesi                     |    1,6 TB             |
 |    Toplam kapasite                          |    12,8 TB            |
-|    Toplam kullanılabilir kapasite *                  |    ~ 12,5 TB            |
+|    Toplam kullanılabilir kapasite *                  |    ~ 12,5 TB          |
 
 **Bazı boşluklar iç kullanım için ayrılmıştır.*
 
@@ -94,19 +99,19 @@ Aşağıdaki tablolarda, Boyutlar ve ağırlığa yönelik çeşitli muhafaza be
 
 Aşağıdaki tabloda, milimetre ve inç 'teki kutunun boyutları listelenmiştir.
 
-|     Kutu     |     Milimetre     |     Cm     |
-|-------------------|---------------------|----------------|
-|    Height         |    44,45            |    1,75 "          |
-|    Width          |    434,1           |    17,09 "          |
-|    Uzunluk          |    740,4           |    29,15 "          |
+|     Kutu     |     Milimetre    |     Cm     |
+|-------------------|--------------------|----------------|
+|    Height         |    44,45           |    1,75 "       |
+|    Width          |    434,1           |    17,09 "      |
+|    Uzunluk         |    740,4           |    29,15 "      |
 
 Aşağıdaki tabloda, nakliye paketinin boyutları milimetre ve inç olarak listelenmektedir.
 
-|     Paket     |     Milimetre     |     Cm     |
+|     Paket       |     Milimetre     |     Cm     |
 |-------------------|---------------------|----------------|
-|    Height         |    311,2            |    12,25 "          |
-|    Width          |    642,8          |    25,31 "          |
-|    Uzunluk          |   1.051,1          |    41,38 "          |
+|    Height         |    311,2            |    12,25 "      |
+|    Width          |    642,8            |    25,31 "      |
+|    Uzunluk         |   1.051,1           |    41,38 "      |
 
 ### <a name="enclosure-weight"></a>Kasa ağırlığı
 

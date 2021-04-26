@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: devices
 ms.topic: tutorial
-ms.date: 05/14/2019
+ms.date: 04/16/2021
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 28cc8a858d1779e17c893d64eda5f907bb4c808e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1aafcd8ace846d7da65d95d4148872d5a6eddeee
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104577997"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107587859"
 ---
 # <a name="tutorial-configure-hybrid-azure-active-directory-joined-devices-manually"></a>Öğretici: Hibrit Azure Active Directory'ye katılmış cihazları elle yapılandırma
 
@@ -145,7 +145,7 @@ Aşağıdaki betikte, cmdlet kullanımına ilişkin bir örnek gösterilmektedir
 
 `Initialize-ADSyncDomainJoinedComputerSync` cmdlet:
 
-* Active Directory PowerShell modülünü ve Azure Active Directory Domain Services (Azure AD DS) araçlarını kullanır. Bu araçlar, bir etki alanı denetleyicisinde çalışan Active Directory Web hizmetlerini kullanır. Active Directory Web Hizmetleri Windows Server 2008 R2 ve sonraki sürümleri çalıştıran etki alanı denetleyicilerinde desteklenir.
+* Active Directory PowerShell modülünü ve Active Directory Domain Services (AD DS) araçlarını kullanır. Bu araçlar, bir etki alanı denetleyicisinde çalışan Active Directory Web hizmetlerini kullanır. Active Directory Web Hizmetleri Windows Server 2008 R2 ve sonraki sürümleri çalıştıran etki alanı denetleyicilerinde desteklenir.
 * Yalnızca MSOnline PowerShell modülü sürüm 1.1.166.0 ile desteklenir. Bu modülü indirmek için [Bu bağlantıyı](https://www.powershellgallery.com/packages/MSOnline/1.1.166.0)kullanın.
 * AD DS Araçları yüklü değilse `Initialize-ADSyncDomainJoinedComputerSync` başarısız olur. AD DS araçlarını, **Özellikler**  >  **uzak sunucu yönetim araçları**  >  **rol yönetim araçları** altında Sunucu Yöneticisi aracılığıyla yükleyebilirsiniz.
 

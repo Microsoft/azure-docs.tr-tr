@@ -11,12 +11,12 @@ ms.workload: na
 ms.topic: article
 ms.date: 03/17/2021
 ms.author: inhenkel
-ms.openlocfilehash: 9fe49f44e157708c3083e2c73757988877fbfcb5
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 796abf8506a832c4053b505e903bb24ef9d09004
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563472"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106279043"
 ---
 # <a name="azure-media-services-v3-release-notes"></a>Azure Media Services v3 sürüm notları
 
@@ -54,7 +54,7 @@ Video dökümü ve alt yazı için ek diller artık AudioAnalyzer ön ayarı 'nd
 * Tay dili, ' th '
 * Türkçe, ' tr-TR '
 
-[Video ve ses dosyalarını çözümleme kavramı makalesindeki](analyzing-video-audio-files-concept.md) kullanılabilir en son dillere bakın.
+[Video ve ses dosyalarını çözümleme kavramı makalesindeki](analyze-video-audio-files-concept.md) kullanılabilir en son dillere bakın.
 
 ## <a name="february-2021"></a>Şubat 2021
 
@@ -134,7 +134,7 @@ Node.js örnekleri en son isomorphic SDK 'sını kullanacak şekilde güncelleş
 
 Canlı olaylar artık "Stand" için daha düşük maliyetli faturalandırma modunu desteklemektedir. Bu, müşterilerin "etkin havuzlar" oluşturmak için daha düşük bir maliyetle canlı olayları önceden ayırmasını sağlar. Müşteriler daha sonra, oluşturma sırasında soğuk 'ten başlayarak çalışır duruma geçiş yapmak için tek başına canlı olayları kullanabilir.  Bu, kanalın önemli ölçüde başlatılması için geçen süreyi azaltır ve daha düşük bir fiyat modunda çalışan makinelerin hızlı etkin havuz ayırması için izin verir.
 En son [fiyatlandırma ayrıntılarına bakın](https://azure.microsoft.com/pricing/details/media-services).
-Bekleme durumu hakkında daha fazla bilgi ve canlı olaylardaki diğer durumlar hakkında daha fazla bilgi için bkz [. canlı olay durumları ve faturalama makalesi.](./live-event-states-billing.md)
+Bekleme durumu hakkında daha fazla bilgi ve canlı olaylardaki diğer durumlar hakkında daha fazla bilgi için bkz [. canlı olay durumları ve faturalama makalesi.](./live-event-states-billing-concept.md)
 
 ## <a name="december-2020"></a>Aralık 2020
 
@@ -146,17 +146,17 @@ Azure Media Services artık Azure portal Norveç Doğu bölgesinde kullanılabil
 
 ### <a name="basic-audio-analysis"></a>Temel ses analizi
 
-Ses analizi önceden ayarı artık temel mod fiyatlandırma katmanını içerir. Yeni temel ses Çözümleyicisi modu, konuşma dökümünü ayıklamak ve çıkış başlıklarını ve alt yazıları biçimlendirmek için düşük maliyetli bir seçenek sağlar. Bu mod, bir VTT alt başlık/resim yazısı dosyası için konuşmayı metne dönüştürme ve oluşturma işlemi gerçekleştirir. Bu modun çıktısı yalnızca anahtar sözcükler, döküm ve zamanlama bilgileri dahil olmak üzere bir Öngörüler JSON dosyası içerir. Bu modda otomatik dil algılama ve konuşmacı seçme dahil değildir. [Desteklenen dillerin](analyzing-video-audio-files-concept.md#built-in-presets) listesine bakın.
+Ses analizi önceden ayarı artık temel mod fiyatlandırma katmanını içerir. Yeni temel ses Çözümleyicisi modu, konuşma dökümünü ayıklamak ve çıkış başlıklarını ve alt yazıları biçimlendirmek için düşük maliyetli bir seçenek sağlar. Bu mod, bir VTT alt başlık/resim yazısı dosyası için konuşmayı metne dönüştürme ve oluşturma işlemi gerçekleştirir. Bu modun çıktısı yalnızca anahtar sözcükler, döküm ve zamanlama bilgileri dahil olmak üzere bir Öngörüler JSON dosyası içerir. Bu modda otomatik dil algılama ve konuşmacı seçme dahil değildir. [Desteklenen dillerin](analyze-video-audio-files-concept.md#built-in-presets) listesine bakın.
 
 Dizin Oluşturucu v1 ve Dizin Oluşturucu v2 kullanan müşteriler temel ses analizi hazır ayarı 'na geçiş yapılmalıdır.
 
-Temel ses Çözümleyicisi modu hakkında daha fazla bilgi için bkz. [video ve ses dosyalarını çözümleme](analyzing-video-audio-files-concept.md).  Temel ses çözümleyici modunu REST API kullanmayı öğrenmek için bkz. [temel ses dönüşümü oluşturma](how-to-create-basic-audio-transform.md).
+Temel ses Çözümleyicisi modu hakkında daha fazla bilgi için bkz. [video ve ses dosyalarını çözümleme](analyze-video-audio-files-concept.md).  Temel ses çözümleyici modunu REST API kullanmayı öğrenmek için bkz. [temel ses dönüşümü oluşturma](transform-create-basic-audio-how-to.md).
 
 ### <a name="live-events"></a>Canlı Etkinlikler
 
 Canlı olaylar durdurulduğunda çoğu özelliğe yönelik güncelleştirmelere artık izin verilir. Ayrıca, kullanıcıların canlı etkinliğin giriş ve önizleme URL 'Leri için statik ana bilgisayar adı için bir önek belirtmesinin izni vardır. VanityUrl artık `useStaticHostName` özelliğin amacını daha iyi yansıtacak şekilde çağırılır.
 
-Canlı olaylar artık bekleme durumuna sahiptir.  [Media Services 'Da canlı olaylara ve canlı çıkışlara](./live-events-outputs-concept.md)bakın.
+Canlı olaylar artık bekleme durumuna sahiptir.  [Media Services 'Da canlı olaylara ve canlı çıkışlara](./live-event-outputs-concept.md)bakın.
 
 Canlı bir olay, çeşitli giriş en boy oranlarını almayı destekler. Esnetme modu, müşterilerin çıkış için uzatma davranışını belirlemesine izin verir.
 
@@ -173,7 +173,7 @@ Canlı kodlama artık 0,5 ile 20 saniye arasında sabit anahtar kare aralığı 
 
 Eski PlayReady korumalı birlikte çalışabilen dosya biçimi (pff 1,1) şifrelemesi için destek artık dinamik Paketçde kullanılabilir. Bu, Microsoft tarafından yayımlanan Common Encryption standardının (CENC) erken taslaklarını uygulayan Samsung ve LG 'den eski akıllı TV kümelerine yönelik destek sağlar.  PFF 1,1 biçimi, daha önce Silverlight istemci kitaplığı tarafından desteklenen şifreleme biçimi olarak da bilinir. Bugün, bu şifreleme biçimi için yalnızca kullanım örneği senaryosu, yalnızca pff 1,1 şifrelemesiyle Kesintisiz Akış destekleyen bazı bölgelerde çok sayıda akıllı TV 'nin kaldığı eski akıllı TV pazarını hedeflemelidir.
 
-Yeni pff 1,1 şifreleme desteğini kullanmak için, akış bulucunun URL yolundaki şifreleme değerini ' pff ' olarak değiştirin. Daha fazla ayrıntı için [Content Protection genel bakış](content-protection-overview.md) bölümüne bakın.
+Yeni pff 1,1 şifreleme desteğini kullanmak için, akış bulucunun URL yolundaki şifreleme değerini ' pff ' olarak değiştirin. Daha fazla ayrıntı için [Content Protection genel bakış](drm-content-protection-concept.md) bölümüne bakın.
 Örneğin: `https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(encryption=piff)`|
 
 > [!NOTE]
@@ -187,11 +187,11 @@ Canlı döküm artık 19 dili ve 8 bölgeyi destekliyor.
 
 ### <a name="protecting-your-content-with-media-services-and-azure-ad"></a>Media Services ve Azure AD ile içeriğinizi koruma
 
-[Azure ad kullanarak uçtan uca içerik koruması](./azure-ad-content-protection.md)adlı bir öğretici yayımladık.
+[Azure ad kullanarak uçtan uca içerik koruması](./architecture-azure-ad-content-protection.md)adlı bir öğretici yayımladık.
 
 ### <a name="high-availability"></a>Yüksek kullanılabilirlik
 
-Media Services ve Isteğe bağlı video (VOD) hakkında [genel bakış](./media-services-high-availability-encoding.md) ve [örnek](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/master/HighAvailabilityEncodingStreaming)ile yüksek kullanılabilirlik yayımladık.
+Media Services ve Isteğe bağlı video (VOD) hakkında [genel bakış](./architecture-high-availability-encoding-concept.md) ve [örnek](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/master/HighAvailabilityEncodingStreaming)ile yüksek kullanılabilirlik yayımladık.
 
 ## <a name="june-2020"></a>Haziran 2020
 
@@ -243,7 +243,7 @@ Canlı ve video isteğe bağlı akış için *kaynak yardımı önceden getirme*
 
 Canlı döküm artık genel önizlemeye sunuldu ve Batı ABD 2 bölgesinde kullanıma sunulmuştur.
 
-Canlı döküm, canlı olaylarla birlikte eklenti özelliği olarak çalışmak üzere tasarlanmıştır.  Doğrudan geçiş ve standart ya da Premium kodlama canlı olaylarında desteklenir.  Bu özellik etkinleştirildiğinde, hizmet bilişsel hizmetler 'in [konuşmadan metne](../../cognitive-services/speech-service/speech-to-text.md) özelliğini kullanarak gelen seslerdeki konuşulan kelimeleri metne dönüştürür. Bu metin daha sonra MPEG-DASH ve HLS protokollerinde video ve ses ile birlikte teslim için kullanılabilir hale getirilir. Faturalandırma, "çalışıyor" durumundayken canlı etkinliğin ek maliyeti olan yeni bir eklenti ölçmesini temel alır.  Canlı döküm ve faturalandırma hakkında daha fazla bilgi için bkz. [canlı](live-transcription.md) döküm
+Canlı döküm, canlı olaylarla birlikte eklenti özelliği olarak çalışmak üzere tasarlanmıştır.  Doğrudan geçiş ve standart ya da Premium kodlama canlı olaylarında desteklenir.  Bu özellik etkinleştirildiğinde, hizmet bilişsel hizmetler 'in [konuşmadan metne](../../cognitive-services/speech-service/speech-to-text.md) özelliğini kullanarak gelen seslerdeki konuşulan kelimeleri metne dönüştürür. Bu metin daha sonra MPEG-DASH ve HLS protokollerinde video ve ses ile birlikte teslim için kullanılabilir hale getirilir. Faturalandırma, "çalışıyor" durumundayken canlı etkinliğin ek maliyeti olan yeni bir eklenti ölçmesini temel alır.  Canlı döküm ve faturalandırma hakkında daha fazla bilgi için bkz. [canlı](live-event-live-transcription-how-to.md) döküm
 
 > [!NOTE]
 > Şu anda, canlı döküm yalnızca Batı ABD 2 bölgesinde önizleme özelliği olarak kullanılabilir. Konuşulan sözcüklerin yalnızca şu anda Ingilizce (en-US) olarak dökümünü destekler.
@@ -251,7 +251,7 @@ Canlı döküm, canlı olaylarla birlikte eklenti özelliği olarak çalışmak 
 ### <a name="content-protection"></a>İçerik koruma
 
 Eylül ayının sınırlı bölgelerinde yayınlanan *belirteç yeniden yürütme engellemesi* özelliği artık tüm bölgelerde kullanılabilir.
-Media Services müşteriler artık, bir anahtar veya lisans istemek için aynı belirtecin kaç kez kullanılabileceği konusunda bir sınır ayarlayabilirler. Daha fazla bilgi için bkz. [belirteç yeniden yürütme engellemesi](content-protection-overview.md#token-replay-prevention).
+Media Services müşteriler artık, bir anahtar veya lisans istemek için aynı belirtecin kaç kez kullanılabileceği konusunda bir sınır ayarlayabilirler. Daha fazla bilgi için bkz. [belirteç yeniden yürütme engellemesi](drm-content-protection-concept.md#token-replay-prevention).
 
 ### <a name="new-recommended-live-encoder-partners"></a>Yeni önerilen canlı kodlayıcı iş ortakları
 
@@ -310,7 +310,7 @@ Ayrıntılar için bkz. [WAME 'i Media Encoder Standard geçirin](../previous/mi
 
 ### <a name="content-protection"></a>İçerik koruma
 
-Belirteç kısıtlamasıyla korunan içerik akışı yaparken, son kullanıcılar anahtar teslim isteğinin bir parçası olarak gönderilen bir belirteç elde etmeniz gerekir. *Belirteç yeniden yürütme engellemesi* özelliği, Media Services müşterilerin aynı belirtecin bir anahtar veya lisans istemek için kaç kez kullanılabileceği konusunda bir sınır ayarlamasına olanak tanır. Daha fazla bilgi için bkz. [belirteç yeniden yürütme engellemesi](content-protection-overview.md#token-replay-prevention).
+Belirteç kısıtlamasıyla korunan içerik akışı yaparken, son kullanıcılar anahtar teslim isteğinin bir parçası olarak gönderilen bir belirteç elde etmeniz gerekir. *Belirteç yeniden yürütme engellemesi* özelliği, Media Services müşterilerin aynı belirtecin bir anahtar veya lisans istemek için kaç kez kullanılabileceği konusunda bir sınır ayarlamasına olanak tanır. Daha fazla bilgi için bkz. [belirteç yeniden yürütme engellemesi](drm-content-protection-concept.md#token-replay-prevention).
 
 Haziran itibariyle önizleme özelliği yalnızca ABD Orta ve ABD Orta Batı kullanılabilir.
 
@@ -324,8 +324,8 @@ Bu işlev, [Builtınstandardencoderönayar](/rest/api/media/transforms/createoru
 
 Örneklere bakın:
 
-* [.NET ile videoyu alt kırpın](subclip-video-dotnet-howto.md)
-* [REST ile videoyu alt kırpın](subclip-video-rest-howto.md)
+* [.NET ile videoyu alt kırpın](transform-subclip-video-dotnet-how-to.md)
+* [REST ile videoyu alt kırpın](transform-subclip-video-rest-how-to.md)
 
 ## <a name="may-2019"></a>Mayıs 2019
 
@@ -334,13 +334,13 @@ Bu işlev, [Builtınstandardencoderönayar](/rest/api/media/transforms/createoru
 Artık Media Services tarafından yayılan telemetri verilerini görüntülemek için Azure Izleyici 'yi kullanabilirsiniz.
 
 * Media Services anahtar teslim uç noktası tarafından gönderilen istekleri izlemek için Azure Izleyici tanılama günlüklerini kullanın. 
-* Media Services [akış uç noktaları](streaming-endpoint-concept.md)tarafından yayılan ölçümleri izleyin.   
+* Media Services [akış uç noktaları](stream-streaming-endpoint-concept.md)tarafından yayılan ölçümleri izleyin.   
 
 Ayrıntılar için bkz. [Media Services ölçümleri ve tanılama günlüklerini izleme](monitoring/monitor-media-services-data-reference.md).
 
 ### <a name="multi-audio-tracks-support-in-dynamic-packaging"></a>Dinamik paketlemeyle çoklu ses izleme desteği 
 
-Birden çok codec ve dilde birden çok ses izi bulunan varlıklar akışı yaparken, [dinamik paketleme](dynamic-packaging-overview.md) artık HLS çıkışı (sürüm 4 veya üzeri) için birden çok ses parçasını desteklemektedir.
+Birden çok codec ve dilde birden çok ses izi bulunan varlıklar akışı yaparken, [dinamik paketleme](encode-dynamic-packaging-concept.md) artık HLS çıkışı (sürüm 4 veya üzeri) için birden çok ses parçasını desteklemektedir.
 
 ### <a name="korea-regional-pair-is-open-for-media-services"></a>Kore bölgesel çifti Media Services için açık 
 
@@ -352,7 +352,7 @@ Daha fazla bilgi için bkz. [Media Services v3 'nin bulunduğu bulutlar ve bölg
 
 Media Services performans iyileştirmeleri içeren güncelleştirmeler eklendi.
 
-* İşleme için desteklenen en büyük dosya boyutu güncelleştirildi. Bkz., [Kotalar ve sınırlar](limits-quotas-constraints.md).
+* İşleme için desteklenen en büyük dosya boyutu güncelleştirildi. Bkz., [Kotalar ve sınırlar](limits-quotas-constraints-reference.md).
 * [Kodlama hızı iyileştirmeleri](concept-media-reserved-units.md).
 
 ## <a name="april-2019"></a>Nisan 2019
@@ -360,11 +360,11 @@ Media Services performans iyileştirmeleri içeren güncelleştirmeler eklendi.
 ### <a name="new-presets"></a>Yeni Önayarlar
 
 * [Facedetectorönayar](/rest/api/media/transforms/createorupdate#facedetectorpreset) yerleşik çözümleyici önayarlarına eklendi.
-* [ContentAwareEncodingExperimental](/rest/api/media/transforms/createorupdate#encodernamedpreset) , yerleşik kodlayıcı önayarlarına eklendi. Daha fazla bilgi için bkz. [içeriğe duyarlı kodlama](content-aware-encoding.md). 
+* [ContentAwareEncodingExperimental](/rest/api/media/transforms/createorupdate#encodernamedpreset) , yerleşik kodlayıcı önayarlarına eklendi. Daha fazla bilgi için bkz. [içeriğe duyarlı kodlama](encode-content-aware-concept.md). 
 
 ## <a name="march-2019"></a>Mart 2019
 
-Dinamik paketleme artık Dolby Atmos 'ı destekliyor. Daha fazla bilgi için bkz. [dinamik paketleme tarafından desteklenen ses codec bileşenleri](dynamic-packaging-overview.md#audio-codecs-supported-by-dynamic-packaging).
+Dinamik paketleme artık Dolby Atmos 'ı destekliyor. Daha fazla bilgi için bkz. [dinamik paketleme tarafından desteklenen ses codec bileşenleri](encode-dynamic-packaging-concept.md#audio-codecs-supported-by-dynamic-packaging).
 
 Artık akış bulucusu için uygulanacak varlık veya hesap filtrelerinin bir listesini belirtebilirsiniz. Daha fazla bilgi için bkz. [akış bulucu ile filtreleri ilişkilendirme](filters-concept.md#associating-filters-with-streaming-locator).
 
@@ -378,7 +378,7 @@ Media Services için Azure Event Grid şemalarına [Microsoft. Media. Joi Putpro
 
 ### <a name="media-encoder-standard-and-mpi-files"></a>Media Encoder Standard ve MPı dosyaları 
 
-MP4 dosyaları üretmek için Media Encoder Standard ile kodlarken, yeni bir. MPI dosyası oluşturulur ve çıkış varlığına eklenir. Bu MPı dosyası, [dinamik paketleme](dynamic-packaging-overview.md) ve akış senaryoları için performansı iyileştirmeye yöneliktir.
+MP4 dosyaları üretmek için Media Encoder Standard ile kodlarken, yeni bir. MPI dosyası oluşturulur ve çıkış varlığına eklenir. Bu MPı dosyası, [dinamik paketleme](encode-dynamic-packaging-concept.md) ve akış senaryoları için performansı iyileştirmeye yöneliktir.
 
 MPı dosyasını değiştirmemelisiniz veya kaldırmamalıdır ya da bu tür bir dosyanın var olan (veya olmayan) hizmetinize herhangi bir bağımlılığı almalısınız.
 
@@ -518,7 +518,7 @@ Media Services v3 CLı veya API 'Leri ile 09/28 ve 10/12 arasında varlıklar ve
 
 .NET SDK 'da aşağıdaki özellikler mevcuttur:
 
-* Medya içeriğini kodlamak veya çözümlemek için **dönüşümler** ve **işler** . Örnekler için bkz. [akış dosyaları](stream-files-tutorial-with-api.md) ve [Çözümleme](analyze-videos-tutorial-with-api.md).
+* Medya içeriğini kodlamak veya çözümlemek için **dönüşümler** ve **işler** . Örnekler için bkz. [akış dosyaları](stream-files-tutorial-with-api.md) ve [Çözümleme](analyze-videos-tutorial.md).
 * Son Kullanıcı cihazlarındaki yayımlama ve akış içeriği için **akış Konumlandırıcı**
 * İçerik teslim edilirken anahtar teslimi ve içerik korumayı (DRM) yapılandırmak için **akış ilkeleri** ve **içerik anahtarı ilkeleri** .
 * Canlı akış içeriğini alma ve arşivlemeyi yapılandırmak için **canlı olaylar** ve **canlı çıktılar** .

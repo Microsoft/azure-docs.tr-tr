@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 03/16/2018
 ms.topic: conceptual
-ms.openlocfilehash: 6ee4a09df0f95cb809db0e5c0e63d195ee5cfdff
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: c929781772b510639e1e5e47eed19927f408d16a
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98896944"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830511"
 ---
 # <a name="migrate-from-orchestrator-to-azure-automation-beta"></a>Orchestrator’dan Azure Otomasyonu’na (Beta) geçiş
 

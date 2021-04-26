@@ -10,12 +10,12 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 01/14/2020
 ms.author: kumud
-ms.openlocfilehash: 09366dea1a0d77052b6f99e9f5ab52c270e341b4
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: dced3cde1aae082bd64d785212b40e100013e0bf
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87047007"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312901"
 ---
 # <a name="customize-a-person-model-with-the-video-indexer-api"></a>Video Indexer API ile bir kişi modelini özelleştirme
 
@@ -35,7 +35,7 @@ Her hesabın 50 kişi modeli sınırlaması vardır. Birden çok kişi modeli de
 
 ## <a name="create-a-new-person-model"></a>Yeni bir kişi modeli oluşturun
 
-Belirtilen hesapta yeni bir kişi modeli oluşturmak için [kişi modeli oluşturma](https://api-portal.videoindexer.ai/docs/services/operations/operations/Create-Person-Model?) API 'sini kullanın.
+Belirtilen hesapta yeni bir kişi modeli oluşturmak için [kişi modeli oluşturma](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Create-Person-Model) API 'sini kullanın.
 
 Yanıt, aşağıdaki örnek biçimini izleyerek yeni oluşturduğunuz kişi modelinin adı ve oluşturulan model KIMLIĞINI sağlar.
 
@@ -46,11 +46,11 @@ Yanıt, aşağıdaki örnek biçimini izleyerek yeni oluşturduğunuz kişi mode
 }
 ```
 
-Daha sonra, bir videoyu dizine veya [yeniden dizinlemeyi](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-index-video?)bir videoyu [karşıya yüklerken](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) **personmodelıd** parametresinin **kimlik** değerini kullanırsınız.
+Daha sonra, bir videoyu dizine veya [yeniden dizinlemeyi](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Re-Index-Video)bir videoyu [karşıya yüklerken](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Upload-Video) **personmodelıd** parametresinin **kimlik** değerini kullanırsınız.
 
 ## <a name="delete-a-person-model"></a>Kişi modelini silme
 
-Belirtilen hesaptan özel bir kişi modelini silmek için [kişi modeli silme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Delete-Person-Model?) API 'sini kullanın.
+Belirtilen hesaptan özel bir kişi modelini silmek için [kişi modeli silme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Delete-Person-Model) API 'sini kullanın.
 
 Kişi modeli başarıyla silindikten sonra, silinen modeli kullanan geçerli videolarınızın dizini yeniden dizinleyene kadar değişmeden kalır. Yeniden dizin oluşturma sırasında, silinen modelde adı geçen yüzler, geçerli videolarınızdaki Video Indexer tarafından tanınmayacak, ancak yüz algılanacaktır. Silinen model kullanılarak dizini oluşturulmuş geçerli videolarınız artık hesabınızın varsayılan kişi modelini kullanacaktır. Silinen modeldeki yüzler aynı zamanda hesabınızın varsayılan modelinde da adlandırılmışsa, bu yüzlerin videolarda tanınabilmesi devam edecektir.
 
@@ -58,7 +58,7 @@ Kişi modeli başarıyla silindiğinde döndürülen içerik yok.
 
 ## <a name="get-all-person-models"></a>Tüm kişi modellerini al
 
-Belirtilen hesaptaki tüm kişi modellerini almak için [kişi modeli al](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Person-Models?) API 'sini kullanın.
+Belirtilen hesaptaki tüm kişi modellerini almak için [kişi modeli al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Person-Models) API 'sini kullanın.
 
 Yanıt, hesabınızdaki tüm kişi modellerinin (belirtilen hesaptaki varsayılan kişi modeli dahil) ve adlarının ve kimliklerinin her birinin aşağıdaki örnekte yer aldığı bir listesini sağlar.
 
@@ -75,7 +75,7 @@ Yanıt, hesabınızdaki tüm kişi modellerinin (belirtilen hesaptaki varsayıla
 ]
 ```
 
-Bir videoyu `id` `personModelId` dizine veya [yeniden dizinlemeyi oluşturmaya](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-index-video?) [yönelik bir video yüklerken](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?) parametre için kişi modelinin değerini kullanarak, bir video için kullanmak istediğiniz modeli seçebilirsiniz.
+Bir videoyu `id` `personModelId` dizine veya [yeniden dizinlemeyi oluşturmaya](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Re-Index-Video) [yönelik bir video yüklerken](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Upload-Video) parametre için kişi modelinin değerini kullanarak, bir video için kullanmak istediğiniz modeli seçebilirsiniz.
 
 ## <a name="update-a-face"></a>Yüz güncelleştirme
 
@@ -85,7 +85,7 @@ Daha sonra sistem, aynı yüzün aynı yüzü aynı kişi modelini paylaşan di�
 
 Ünlüklik olarak tanınan Video Indexer bir yüzü yeni bir adla güncelleştirebilirsiniz. Verdiğiniz yeni ad, yerleşik ünlüğünün tanınmasına göre öncelikli olacaktır.
 
-Yüzü güncelleştirmek için, [video yüz güncelleştirme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Video-Face?) API 'sini kullanın.
+Yüzü güncelleştirmek için, [video yüz güncelleştirme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Video-Face) API 'sini kullanın.
 
 Adlar kişi modelleri için benzersizdir, bu nedenle aynı kişi modelinde aynı parametre değerini iki farklı yüz verirseniz `name` , video Indexer yüzeyleri aynı kişi olarak görüntüler ve videonuzu yeniden atadıktan sonra bu kullanıcılara dönüştürüledirler.
 

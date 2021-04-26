@@ -1,19 +1,19 @@
 ---
 title: Azure depolama hesabındaki bir Blobun erişim katmanını yönetme
 description: GPv2 veya blob depolama hesabındaki bir Blobun katmanını değiştirmeyi öğrenin
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 01/11/2021
 ms.service: storage
 ms.subservice: blobs
 ms.topic: how-to
 ms.reviewer: klaasl
-ms.openlocfilehash: 183593022c934eaf52ffe18649c23e8deced34d8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: cd46f5b5a8847150bd56c1daeaac470f9afd2d19
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98166529"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106278550"
 ---
 # <a name="manage-the-access-tier-of-a-blob-in-an-azure-storage-account"></a>Azure depolama hesabındaki bir Blobun erişim katmanını yönetme
 

@@ -4,10 +4,10 @@ description: Bildirimler, bu etkinliği işlemeye yönelik önerilerle birlikte 
 ms.date: 12/12/2020
 ms.topic: how-to
 ms.openlocfilehash: c0c2fc5a4c01a8a31512cd43c340bf3fadc259b1
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104781339"
 ---
 # <a name="work-with-device-notifications"></a>Cihaz bildirimleri ile çalışma
@@ -40,7 +40,7 @@ Bildirimleri görüntülemek için:
 
 İlgilendiğiniz bildirimleri göstermek için arama filtrelerini kullanın.
 
-| Filtreleme ölçütü | Açıklama |
+| Filtreleme ölçütü | Description |
 |--|--|
 | Türe göre filtrele | İlgilendiğiniz belirli bir alanı kapsayan bildirimleri görüntüleyin. Örneğin, yalnızca etkin olmayan cihazlara ilişkin bildirimleri görüntüleyin. |
 | Tarih aralığına göre filtrele | Belirli bir zaman aralığını kapsayan bildirimleri görüntüler. Örneğin, yalnızca geçen hafta boyunca gönderilen bildirimleri görüntüleyin. |
@@ -50,7 +50,7 @@ Bildirimleri görüntülemek için:
 
 Aşağıdaki tabloda, aldığınız bildirim olay türleri ve bunları işleme seçenekleriyle birlikte açıklanmaktadır. Cihaz bilgilerini önerilen bir değerle güncelleştirebilir veya bildirimi kapatabilirsiniz. Bir bildirimi kapattığınızda, cihaz bilgileri önerilen bilgilerle güncellenmez. Trafik tekrar algılanırsa, bildirim yeniden gönderilir.
 
-| Bildirim olayı türleri | Açıklama | Yanıtlar |
+| Bildirim olayı türleri | Description | Yanıtlar |
 |--|--|--|
 | Yeni IP algılandı | Yeni bir IP adresi cihazla ilişkili. Beş senaryo algılanmayabilir: <br /><br /> Bir cihazla ek bir IP adresi ilişkilendirildi. Bu cihaz, var olan bir MAC adresiyle de ilişkilendirilir.<br /><br /> Var olan bir MAC adresini kullanan bir cihaz için yeni bir IP adresi algılandı. Şu anda cihaz bir IP adresi kullanarak iletişim kurmamaktadır.<br /> <br /> NetBIOS adı kullanan bir cihaz için yeni bir IP adresi algılandı. <br /><br /> Bir MAC adresiyle ilişkili bir cihaz için yönetim arabirimi olarak bir IP adresi algılandı. <br /><br /> Sanal IP adresi kullanan bir cihaz için yeni bir IP adresi algılandı. | **Cihaza ek IP ayarlama** (cihazları birleştirme) <br /> <br />**Mevcut IP 'yi Değiştir** <br /> <br /> **At**<br /> Bildirimi kaldırın. |
 | Etkin olmayan cihazlar | Cihazda 60 günden daha uzun bir süre için trafik algılanmadı. | **Silme** <br /> Bu cihaz ağınızın bir parçası değilse, kaldırın. <br /><br />**At** <br /> Cihaz ağınızın bir parçasıysa bildirimi kaldırın. Cihaz etkin değilse (örneğin, ağdan yanlışlıkla bağlantısı kesildiğinde), bildirimi kapatın ve cihazı yeniden bağlayın. |

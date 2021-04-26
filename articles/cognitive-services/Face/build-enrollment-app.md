@@ -1,7 +1,7 @@
 ---
-title: Tepki vererek Android için bir kayıt uygulaması oluşturun
+title: Yüz hizmetine Kullanıcı eklemek için tepki verme uygulaması oluşturma
 titleSuffix: Azure Cognitive Services
-description: Geliştirme ortamınızı ayarlamayı ve müşterilerden onay almak için bir yüz kayıt uygulaması dağıtmayı öğrenin.
+description: Geliştirme ortamınızı ayarlamayı ve müşterilerden onay almak için bir yüz uygulaması dağıtmayı öğrenin.
 author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
@@ -9,20 +9,20 @@ ms.subservice: face-api
 ms.topic: conceptual
 ms.date: 11/17/2020
 ms.author: pafarley
-ms.openlocfilehash: 218579176b807bbdae85646f27eaa7f301d4b9a6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 39a74c7f3d5fb8f8b60a66947fcce9837ed6ee13
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102428278"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107505114"
 ---
-# <a name="build-an-enrollment-app-for-android-with-react"></a>Tepki vererek Android için bir kayıt uygulaması oluşturun
+# <a name="build-a-react-app-to-add-users-to-a-face-service"></a>Yüz hizmetine Kullanıcı eklemek için tepki verme uygulaması oluşturma
 
-Bu kılavuzda, örnek yüz kaydı uygulamasını kullanmaya nasıl başlacağınız gösterilmektedir. Uygulama, kullanıcıların bir yüz tanıma hizmetine kaydolmasını ve yüksek doğruluk tabanlı yüz verileri elde etmek için anlamlı bir izin almak üzere en iyi yöntemleri gösterir. Tümleşik bir sistem, touchless Access Control, kimlik doğrulama, katılımcı izleme, kişiselleştirme bilgi noktası veya kimlik doğrulaması sağlamak için bu gibi bir kayıt uygulamasını kullanarak yüz verilerine göre kullanabilir.
+Bu kılavuzda, örnek yüz kaydı uygulamasını kullanmaya nasıl başlacağınız gösterilmektedir. Uygulama, bir yüz tanıma hizmetine Kullanıcı ekleme ve yüksek doğruluk tabanlı yüz verileri alma konusunda anlamlı bir izin almak için en iyi uygulamaları gösterir. Tümleşik bir sistem bunun gibi bir uygulama kullanarak, yüz verilerine göre Touchless erişim denetimi, kimlik doğrulama, katılımcı izleme, kişiselleştirme bilgi noktası veya kimlik doğrulaması sağlar.
 
 Başlatıldığında, uygulama kullanıcılara ayrıntılı bir onay ekranı gösterir. Kullanıcı onay veriyorsa, uygulama bir Kullanıcı adı ve parola sorar ve sonra cihazın kamerasını kullanarak yüksek kaliteli bir yüz görüntüsünü yakalar.
 
-Örnek kayıt uygulaması JavaScript ve tepki verme yerel çerçevesi kullanılarak yazılır. Bu, şu anda Android cihazlarda dağıtılabilir; daha sonra daha fazla dağıtım seçeneği geliyor.
+Örnek uygulama, JavaScript ve tepki verme yerel çerçevesi kullanılarak yazılır. Bu, şu anda Android cihazlarda dağıtılabilir; daha sonra daha fazla dağıtım seçeneği geliyor.
 
 ## <a name="prerequisites"></a>Önkoşullar 
 
@@ -36,22 +36,22 @@ Başlatıldığında, uygulama kullanıcılara ayrıntılı bir onay ekranı gö
 
 ## <a name="set-up-the-development-environment"></a>Geliştirme ortamını ayarlama
 
-1. [Örnek kayıt uygulaması](https://github.com/azure-samples/cognitive-services-FaceAPIEnrollmentSample)için Git deposunu kopyalayın.
+1. [Örnek uygulama](https://github.com/azure-samples/cognitive-services-FaceAPIEnrollmentSample)için Git deposunu kopyalayın.
 1. Geliştirme ortamınızı ayarlamak için, doğal <a href="https://reactnative.dev/docs/environment-setup"  title=" Yerel belgelere tepki verme doğal belgelerini izleyin "  target="_blank"> </a> . Geliştirme işletim sistemi olarak **Yerel CLI hızlı** başlangıcı ' nı seçin ve hedef işletim sistemi olarak **Android** ' i seçin. Bağımlılıklar ve **Android geliştirme ortamı** **yükleme** bölümlerini doldurun.
 1. [Visual Studio Code](https://code.visualstudio.com/)gibi tercih ettiğiniz metin düzenleyicisinde env.jsdosyası açın ve uç nokta ve anahtarınızı ekleyin. Bitiş noktanıza ve anahtarınıza, kaynağınızın **genel bakış** sekmesi altına Azure Portal ulaşabilirsiniz. Bu adım yalnızca yerel test amaçlıdır &mdash; Yüz Tanıma API'si anahtarınızı uzak deponuza iade etmeyin.
 1. Android Studio veya kendi Android cihazınızdan Android sanal cihaz öykünücüsünü kullanarak uygulamayı çalıştırın. Uygulamanızı fiziksel bir cihazda test etmek için ilgili yanıt verme <a href="https://reactnative.dev/docs/running-on-device"  title=" Yerel belgelerini Izleyin "  target="_blank"> Yerel belgelere tepki verin </a> .  
 
 
-## <a name="create-an-enrollment-experience"></a>Kayıt deneyimi oluşturma  
+## <a name="create-a-user-add-experience"></a>Kullanıcı ekleme deneyimi oluşturma  
 
-Örnek kayıt uygulamasını ayarladığınıza göre, bunu kendi kayıt deneyimi gereksinimlerinize uyarlayabilirsiniz.
+Örnek uygulamayı ayarladığınıza göre, bunu kendi gereksinimlerinize uyarlayabilirsiniz.
 
 Örneğin, izin sayfanıza durumunuza özgü bilgileri eklemek isteyebilirsiniz:
 
 > [!div class="mx-imgBorder"]
 > ![uygulama onay sayfası](./media/enrollment-app/1-consent-1.jpg)
 
-Hizmet, görüntünün müşteriyi kaydetmek veya yüz tanıma denemesi yapmak için yeterli kalite olup olmadığı konusunda seçim yapmanıza yardımcı olacak görüntü kalitesi denetimleri sağlar. Bu uygulama, cihazın kamerasından çerçevelere erişme, en yüksek kaliteli çerçeveleri seçme ve algılanan yüzü Yüz Tanıma API'si hizmetine kaydetme işlemlerinin nasıl yapılacağını gösterir. 
+Hizmet, görüntünün müşteriyi eklemek veya yüz tanıma tanımayı denemek için yeterli kalite olup olmadığı konusunda seçim yapmanıza yardımcı olacak görüntü kalitesi denetimleri sağlar. Bu uygulama, cihazın kamerasından çerçevelere erişme, en yüksek kaliteli çerçeveleri seçme ve algılanan yüzü Yüz Tanıma API'si hizmetine ekleme işlemlerinin nasıl yapılacağını gösterir. 
 
 Birçok yüz tanıma sorunu, düşük kaliteli başvuru görüntülerinin oluşmasına neden olmuştur. Model performansını düşürebilen bazı faktörler şunlardır:
 * Yüz boyutu (kameradan uzak yüzler)
@@ -63,14 +63,14 @@ Birçok yüz tanıma sorunu, düşük kaliteli başvuru görüntülerinin oluşm
 > [!div class="mx-imgBorder"]
 > ![Uygulama görüntüsü yakalama yönerge sayfası](./media/enrollment-app/4-instruction.jpg)
 
-Uygulamanın, kullanıcının kaydını silme ve yeniden kaydetme seçeneği için de işlevsellik sunduğunu unutmayın.
+Uygulamanın Ayrıca Kullanıcı bilgilerini silme ve yeniden ekleme seçeneği sunan işlevleri de içerdiğine dikkat edin.
 
 > [!div class="mx-imgBorder"]
 > ![Profil Yönetimi sayfası](./media/enrollment-app/10-manage-2.jpg)
 
-Uygulamanın işlevselliğini tam kayıt deneyimini kapsayacak şekilde genişletmek için, uygulamak üzere ek özellikler ve en iyi uygulamalar için [genel bakışı](enrollment-overview.md) okuyun.
+Uygulamanın işlevselliğini tam deneyimi kapsayacak şekilde genişletmek için, uygulanacak ek özellikler ve en iyi uygulamalar için [genel bakışı](enrollment-overview.md) okuyun.
 
-## <a name="deploy-the-enrollment-app"></a>Kayıt uygulamasını dağıtma
+## <a name="deploy-the-app"></a>Uygulamayı dağıtma
 
 ### <a name="android"></a>Android
 
@@ -84,4 +84,4 @@ Uygulamanızı üretime bırakmaya hazırsanız, Android uygulamaları için pak
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 
-Bu kılavuzda, geliştirme ortamınızı ayarlamayı ve örnek kayıt uygulamasını kullanmaya başlamanızı öğrendiniz. Yerel olarak tepki verme konusunda yeni başladıysanız, daha fazla arka plan bilgisi edinmek için Başlarken [belgelerini](https://reactnative.dev/docs/getting-started) okuyabilirsiniz. Ayrıca, [Yüz Tanıma API'si](Overview.md)konusunda kendinizi tanımak faydalı olabilir. Geliştirmeye başlamadan önce, kayıt uygulaması belgelerindeki diğer bölümleri okuyun.
+Bu kılavuzda, geliştirme ortamınızı ayarlamayı ve örnek uygulamayı kullanmaya başlamanızı öğrendiniz. Yerel olarak tepki verme konusunda yeni başladıysanız, daha fazla arka plan bilgisi edinmek için Başlarken [belgelerini](https://reactnative.dev/docs/getting-started) okuyabilirsiniz. Ayrıca, [Yüz Tanıma API'si](Overview.md)konusunda kendinizi tanımak faydalı olabilir. Geliştirmeye başlamadan önce Kullanıcı ekleme hakkındaki diğer bölümleri okuyun.

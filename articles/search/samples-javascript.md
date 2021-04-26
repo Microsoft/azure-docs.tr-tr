@@ -9,10 +9,10 @@ ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 01/27/2021
 ms.openlocfilehash: 85a4d6390087100d8d9521f6ac20dbace3a711eb
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104955950"
 ---
 # <a name="javascript-code-samples-for-azure-cognitive-search"></a>Azure Bilişsel Arama için JavaScript kod örnekleri
@@ -32,7 +32,7 @@ Azure SDK geliştirme ekibinin kod örnekleri API kullanımını gösterir. Bu �
 
 ### <a name="javascript-sdk-samples"></a>JavaScript SDK örnekleri
 
-| Örnekler | Açıklama |
+| Örnekler | Description |
 |---------|-------------|
 | [dizinlerde](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search-documents/samples/javascript/src/indexes) | [Arama dizinlerini](search-what-is-an-index.md)oluşturma, güncelleştirme, alma, listeleme ve silme işlemlerinin nasıl yapılacağını gösterir. Bu örnek kategori Ayrıca bir hizmet istatistiği örneği içerir. |
 | [dataSourceConnections (Dizin oluşturucular için)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search-documents/samples/javascript/src/dataSourceConnections) | [Desteklenen Azure veri kaynaklarının](search-indexer-overview.md#supported-data-sources)Dizin Oluşturucu tabanlı dizin oluşturma için gerekli olan Dizin Oluşturucu veri kaynaklarını oluşturma, güncelleştirme, alma, listeleme ve silme işlemlerinin nasıl yapılacağını gösterir. |
@@ -42,7 +42,7 @@ Azure SDK geliştirme ekibinin kod örnekleri API kullanımını gösterir. Bu �
 
 ### <a name="typescript-samples"></a>TypeScript örnekleri
 
-| Örnekler | Açıklama |
+| Örnekler | Description |
 |---------|-------------|
 | [dizinlerde](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search-documents/samples/typescript/src/indexes) | [Arama dizinlerini](search-what-is-an-index.md)oluşturma, güncelleştirme, alma, listeleme ve silme işlemlerinin nasıl yapılacağını gösterir. Bu örnek kategori Ayrıca bir hizmet istatistiği örneği içerir. |
 | [dataSourceConnections (Dizin oluşturucular için)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search-documents/samples/typescript/src/dataSourceConnections) | [Desteklenen Azure veri kaynaklarının](search-indexer-overview.md#supported-data-sources)Dizin Oluşturucu tabanlı dizin oluşturma için gerekli olan Dizin Oluşturucu veri kaynaklarını oluşturma, güncelleştirme, alma, listeleme ve silme işlemlerinin nasıl yapılacağını gösterir. |
@@ -65,6 +65,6 @@ Bilişsel Arama ekibinin kod örnekleri, özellikleri ve iş akışlarını gös
 
 Aşağıdaki örnekler de Bilişsel Arama ekibi tarafından yayımlanır, Ancak belgelerde başvurulmaz. İlişkili Benioku dosyaları Kullanım yönergeleri sağlar.
 
-| Örnekler | Açıklama |
+| Örnekler | Description |
 |---------|-------------|
 | [Azure-Arama-tepki-şablon](https://github.com/dereklegenzoff/azure-search-react-template) | Azure Bilişsel Arama için tepki şablonu (github.com) |

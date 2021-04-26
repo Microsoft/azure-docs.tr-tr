@@ -2,20 +2,20 @@
 title: Azure Active Directory'de SAML tabanlı çoklu oturum açma sorunlarını giderme
 description: SAML tabanlı çoklu oturum açma için yapılandırılmış bir Azure AD uygulamasıyla ilgili sorunları giderin.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: troubleshooting
 ms.date: 07/11/2017
-ms.author: kenwith
-ms.openlocfilehash: b169616042892c379196dd1d38c2343704aa1030
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.author: iangithinji
+ms.openlocfilehash: c4a4f7bfad4254e7c3fa5851e62532ed427ced8b
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99257535"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376435"
 ---
 # <a name="troubleshoot-saml-based-single-sign-on-in-azure-active-directory"></a>Azure Active Directory'de SAML tabanlı çoklu oturum açma sorunlarını giderme
 Bir uygulamayı yapılandırırken sorunla karşılaşırsanız. Uygulamanın öğreticisindeki tüm adımları izlemediğinizi doğrulayın. Uygulamanın yapılandırmasında, uygulamanın nasıl yapılandırılacağı üzerine satır içi belgeleriniz vardır. Ayrıca, ayrıntılı adım adım yönergeler için [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğretici listesine](../saas-apps/tutorial-list.md) erişebilirsiniz.

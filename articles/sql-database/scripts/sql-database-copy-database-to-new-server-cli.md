@@ -11,12 +11,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: carlrab
 ms.date: 03/12/2019
-ms.openlocfilehash: e22d28215c06de96d31faec71f4fb595bb74a4a6
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 88032183825443aa3a3945530e2203e5500248a6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87495276"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791328"
 ---
 # <a name="use-cli-to-copy-a-database-in-azure-sql-database-to-a-new-server"></a>Azure SQL veritabanındaki bir veritabanını yeni bir sunucuya kopyalamak için CLı kullanma
 
@@ -55,7 +55,7 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Açıklama |
 |---|---|
-| [az SQL DB Copy](/cli/azure/sql/db#az-sql-db-copy) | Şu anda anlık görüntüyü kullanan bir veritabanının kopyasını oluşturur. |
+| [az SQL DB Copy](/cli/azure/sql/db#az_sql_db_copy) | Şu anda anlık görüntüyü kullanan bir veritabanının kopyasını oluşturur. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

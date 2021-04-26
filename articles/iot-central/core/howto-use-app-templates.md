@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 manager: philmea
-ms.openlocfilehash: aec72644f708d6363a80da28c5e571d0165fcdfa
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 15daaa7d64bb6719807d2930691ff9e9a4ca3902
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91651845"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106061477"
 ---
 # <a name="export-your-application"></a>Uygulamanızı dışarı aktarma
 

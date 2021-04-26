@@ -7,7 +7,6 @@ documentationcenter: network-watcher
 author: damendo
 editor: ''
 tags: azure-resource-manager
-Customer intent: I need to diagnose virtual machine (VM) network routing problem that prevents communication to different destinations.
 ms.assetid: ''
 ms.service: network-watcher
 ms.devlang: na
@@ -17,12 +16,12 @@ ms.workload: infrastructure
 ms.date: 01/07/2021
 ms.author: damendo
 ms.custom: ''
-ms.openlocfilehash: 5dac16e5cc1e88d833bf6d3c2660570fcf8b8e9e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2ca7a3b25b1355e21782c1d9f736d20a14cbd4ac
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102216964"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785460"
 ---
 # <a name="diagnose-a-virtual-machine-network-routing-problem---azure-cli"></a>Bir sanal makine ağ yönlendirme sorununu tanılama-Azure CLı
 
@@ -38,13 +37,13 @@ Bu makalede bir sanal makineyi (VM) dağıtırsınız ve ardından bir IP adresi
 
 ## <a name="create-a-vm"></a>VM oluşturma
 
-Bir sanal makine oluşturabilmeniz için sanal makineyi içerecek bir kaynak grubu oluşturmanız gerekir. [az group create](/cli/azure/group#az-group-create) ile bir kaynak grubu oluşturun. Aşağıdaki örnek *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu oluşturur:
+Bir sanal makine oluşturabilmeniz için sanal makineyi içerecek bir kaynak grubu oluşturmanız gerekir. [az group create](/cli/azure/group#az_group_create) ile bir kaynak grubu oluşturun. Aşağıdaki örnek *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu oluşturur:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus
 ```
 
-[az vm create](/cli/azure/vm#az-vm-create) ile bir VM oluşturun. SSH anahtarları, varsayılan anahtar konumunda zaten mevcut değilse komut bunları oluşturur. Belirli bir anahtar kümesini kullanmak için `--ssh-key-value` seçeneğini kullanın. Aşağıdaki örnek, *myvm* adlı bir sanal makine oluşturur:
+[az vm create](/cli/azure/vm#az_vm_create) ile bir VM oluşturun. SSH anahtarları, varsayılan anahtar konumunda zaten mevcut değilse komut bunları oluşturur. Belirli bir anahtar kümesini kullanmak için `--ssh-key-value` seçeneğini kullanın. Aşağıdaki örnek, *myvm* adlı bir sanal makine oluşturur:
 
 ```azurecli-interactive
 az vm create \
@@ -62,7 +61,7 @@ Ağ iletişimini ağ Izleyicisi ile test etmek için, önce test etmek istediği
 
 ### <a name="enable-network-watcher"></a>Ağ izleyicisini etkinleştirme
 
-Doğu ABD bölgesinde zaten etkinleştirilmiş bir ağ izleyicisi varsa, [sonraki atlamayı kullan](#use-next-hop)' a atlayın. Doğu ABD bölgesinde bir Ağ İzleyicisi oluşturmak için [az Network izleyici configure](/cli/azure/network/watcher#az-network-watcher-configure) komutunu kullanın:
+Doğu ABD bölgesinde zaten etkinleştirilmiş bir ağ izleyicisi varsa, [sonraki atlamayı kullan](#use-next-hop)' a atlayın. Doğu ABD bölgesinde bir Ağ İzleyicisi oluşturmak için [az Network izleyici configure](/cli/azure/network/watcher#az_network_watcher_configure) komutunu kullanın:
 
 ```azurecli-interactive
 az network watcher configure \
@@ -73,7 +72,7 @@ az network watcher configure \
 
 ### <a name="use-next-hop"></a>Sonraki atlamayı kullanma
 
-Azure, varsayılan hedeflerin yollarını otomatik olarak oluşturur. Varsayılan yolları geçersiz kılmak için özel yollar oluşturabilirsiniz. Bazı durumlarda, özel yollar iletişimin başarısız olmasına neden olabilir. Bir VM 'den yönlendirmeyi test etmek için [az Network izleyici Show-Next-Hop](/cli/azure/network/watcher#az-network-watcher-show-next-hop) ' i kullanarak trafik belirli bir adrese yönlendirilse sonraki yönlendirme atağını saptayın.
+Azure, varsayılan hedeflerin yollarını otomatik olarak oluşturur. Varsayılan yolları geçersiz kılmak için özel yollar oluşturabilirsiniz. Bazı durumlarda, özel yollar iletişimin başarısız olmasına neden olabilir. Bir VM 'den yönlendirmeyi test etmek için [az Network izleyici Show-Next-Hop](/cli/azure/network/watcher#az_network_watcher_show_next_hop) ' i kullanarak trafik belirli bir adrese yönlendirilse sonraki yönlendirme atağını saptayın.
 
 Sanal makineden, www.bing.com adresinin IP adreslerinden birine giden iletişimi test etme:
 
@@ -105,7 +104,7 @@ Döndürülen çıktı, **hiçbir** bir **nexthoptype** olmadığı ve **Routeta
 
 ## <a name="view-details-of-a-route"></a>Bir yolun ayrıntılarını görüntüleme
 
-Yönlendirmeyi daha fazla analiz etmek için [az Network Nic Show-etkin-Route-Table](/cli/azure/network/nic#az-network-nic-show-effective-route-table) komutunu kullanarak ağ arabirimine yönelik geçerli yolları gözden geçirin:
+Yönlendirmeyi daha fazla analiz etmek için [az Network Nic Show-etkin-Route-Table](/cli/azure/network/nic#az_network_nic_show_effective_route_table) komutunu kullanarak ağ arabirimine yönelik geçerli yolları gözden geçirin:
 
 ```azurecli-interactive
 az network nic show-effective-route-table \
@@ -155,7 +154,7 @@ Komutun çıktısında görebileceğiniz gibi `az network watcher nic show-effec
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse, [az group delete](/cli/azure/group#az-group-delete) komutunu kullanarak kaynak grubunu ve içerdiği tüm kaynakları kaldırabilirsiniz:
+Artık gerekli değilse, [az group delete](/cli/azure/group#az_group_delete) komutunu kullanarak kaynak grubunu ve içerdiği tüm kaynakları kaldırabilirsiniz:
 
 ```azurecli-interactive
 az group delete --name myResourceGroup --yes

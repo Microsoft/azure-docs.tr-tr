@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: iot-central
 services: iot-central
 ms.custom: device-developer
-ms.openlocfilehash: 04c2330ffee396f5fc30b85640e992df77c08263
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2396768d87b93c4df16b6de78d03faf1d8d1cc2b
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97795437"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106492010"
 ---
 # <a name="what-are-device-templates"></a>Cihaz şablonları nedir?
 
@@ -39,70 +39,122 @@ Bir cihaz modeli, bir cihazın IoT Central uygulamanızla nasıl etkileşime gir
 
 Bir çözüm geliştiricisi, cihaz modelini içeren bir JSON dosyasını da dışa aktarabilir. Bir cihaz geliştiricisi, cihazın IoT Central uygulamayla nasıl iletişim kuracağını anlamak için bu JSON belgesini kullanabilir.
 
-Cihaz modelini tanımlayan JSON dosyası [Digital Ikizi tanım dili (DTDL) v2](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md)kullanır. IoT Central, JSON dosyasının ayrı dosyalar yerine satır içi tanımlanmış arabirimlere sahip cihaz modelini içermesini bekler.
+Cihaz modelini tanımlayan JSON dosyası [Digital Ikizi tanım dili (DTDL) v2](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md)kullanır. IoT Central, JSON dosyasının ayrı dosyalar yerine satır içi tanımlanmış arabirimlere sahip cihaz modelini içermesini bekler. Daha fazla bilgi için bkz. [ıot Tak ve kullan modelleme Kılavuzu](../../iot-pnp/concepts-modeling-guide.md).
 
 Tipik bir IoT cihazı şu şekilde yapılır:
 
 - Özel parçalar, cihazınızın benzersiz hale getirme işlemleri.
 - Tüm cihazlarda ortak olan standart parçalar.
 
-Bu bölümler bir cihaz modelinde _arabirimler_ olarak adlandırılır. Arabirimler, cihazınızın uyguladığı her bir bölümün ayrıntılarını tanımlar. Arabirimler cihaz modelleri arasında yeniden kullanılabilir. DTDL 'de bir bileşen, ayrı bir DTDL dosyasında tanımlanan bir arabirime başvurur.
+Bu bölümler bir cihaz modelinde _arabirimler_ olarak adlandırılır. Arabirimler, cihazınızın uyguladığı her bir bölümün ayrıntılarını tanımlar. Arabirimler cihaz modelleri arasında yeniden kullanılabilir. DTDL 'de bir bileşen, ayrı bir DTDL dosyasında ya da dosyanın ayrı bir bölümünde tanımlanabilir olan başka bir arabirime başvurur.
 
-Aşağıdaki örnek, bir sıcaklık denetleyicisi cihazının cihaz modelinin ana hattını gösterir. Varsayılan bileşen,, ve için tanımlar içerir `workingSet` `serialNumber` `reboot` . Cihaz modeli `thermostat` ve arabirimlerini de içerir `deviceInformation` :
+Aşağıdaki örnek, bir [sıcaklık denetleyicisi cihazının](https://github.com/Azure/iot-plugandplay-models/blob/main/dtmi/com/example/temperaturecontroller-2.json)cihaz modelinin ana hattını gösterir. Varsayılan bileşen,, ve için tanımlar içerir `workingSet` `serialNumber` `reboot` . Cihaz modeli Ayrıca iki bileşeni `thermostat` ve bir bileşeni içerir `deviceInformation` . Üç bileşenin içeriği, breçekimi 'nin sake 'ı için kaldırılmıştır:
 
 ```json
-{
-  "@context": "dtmi:dtdl:context;2",
-  "@id": "dtmi:com:example:TemperatureController;1",
-  "@type": "Interface",
-  "displayName": "Temperature Controller",
-  "description": "Device with two thermostats and remote reboot.",
-  "contents": [
-    {
-      "@type": [
-        "Telemetry", "DataSize"
-      ],
-      "name": "workingSet",
-      "displayName": "Working Set",
-      "description": "Current working set of the device memory in KiB.",
-      "schema": "double",
-      "unit" : "kibibyte"
-    },
-    {
-      "@type": "Property",
-      "name": "serialNumber",
-      "displayName": "Serial Number",
-      "description": "Serial number of the device.",
-      "schema": "string"
-    },
-    {
-      "@type": "Command",
-      "name": "reboot",
-      "displayName": "Reboot",
-      "description": "Reboots the device after waiting the number of seconds specified.",
-      "request": {
-        "name": "delay",
-        "displayName": "Delay",
-        "description": "Number of seconds to wait before rebooting the device.",
-        "schema": "integer"
+[
+  {
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "@id": "dtmi:com:example:TemperatureController;2",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "DataSize"
+        ],
+        "description": {
+          "en": "Current working set of the device memory in KiB."
+        },
+        "displayName": {
+          "en": "Working Set"
+        },
+        "name": "workingSet",
+        "schema": "double",
+        "unit": "kibibit"
+      },
+      {
+        "@type": "Property",
+        "displayName": {
+          "en": "Serial Number"
+        },
+        "name": "serialNumber",
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": "Command",
+        "commandType": "synchronous",
+        "description": {
+          "en": "Reboots the device after waiting the number of seconds specified."
+        },
+        "displayName": {
+          "en": "Reboot"
+        },
+        "name": "reboot",
+        "request": {
+          "@type": "CommandPayload",
+          "description": {
+            "en": "Number of seconds to wait before rebooting the device."
+          },
+          "displayName": {
+            "en": "Delay"
+          },
+          "name": "delay",
+          "schema": "integer"
+        }
+      },
+      {
+        "@type": "Component",
+        "displayName": {
+          "en": "thermostat1"
+        },
+        "name": "thermostat1",
+        "schema": "dtmi:com:example:Thermostat;2"
+      },
+      {
+        "@type": "Component",
+        "displayName": {
+          "en": "thermostat2"
+        },
+        "name": "thermostat2",
+        "schema": "dtmi:com:example:Thermostat;2"
+      },
+      {
+        "@type": "Component",
+        "displayName": {
+          "en": "DeviceInfo"
+        },
+        "name": "deviceInformation",
+        "schema": "dtmi:azure:DeviceManagement:DeviceInformation;1"
       }
-    },
-    {
-      "@type" : "Component",
-      "schema": "dtmi:com:example:Thermostat;1",
-      "name": "thermostat",
-      "displayName": "Thermostat",
-      "description": "Thermostat One."
-    },
-    {
-      "@type": "Component",
-      "schema": "dtmi:azure:DeviceManagement:DeviceInformation;1",
-      "name": "deviceInformation",
-      "displayName": "Device Information interface",
-      "description": "Optional interface with basic device hardware information."
+    ],
+    "displayName": {
+      "en": "Temperature Controller"
     }
-  ]
-}
+  },
+  {
+    "@context": "dtmi:dtdl:context;2",
+    "@id": "dtmi:com:example:Thermostat;2",
+    "@type": "Interface",
+    "displayName": "Thermostat",
+    "description": "Reports current temperature and provides desired temperature control.",
+    "contents": [
+      ...
+    ]
+  },
+  {
+    "@context": "dtmi:dtdl:context;2",
+    "@id": "dtmi:azure:DeviceManagement:DeviceInformation;1",
+    "@type": "Interface",
+    "displayName": "Device Information",
+    "contents": [
+      ...
+    ]
+  }
+]
 ```
 
 Bir arabirimin bazı gerekli alanları vardır:
@@ -132,7 +184,7 @@ Aşağıdaki örnekte, termostat arabirim tanımı gösterilmektedir:
 ```json
 {
   "@context": "dtmi:dtdl:context;2",
-  "@id": "dtmi:com:example:Thermostat;1",
+  "@id": "dtmi:com:example:Thermostat;2",
   "@type": "Interface",
   "displayName": "Thermostat",
   "description": "Reports current temperature and provides desired temperature control.",
@@ -143,8 +195,8 @@ Aşağıdaki örnekte, termostat arabirim tanımı gösterilmektedir:
         "Temperature"
       ],
       "name": "temperature",
-      "displayName" : "Temperature",
-      "description" : "Temperature in degrees Celsius.",
+      "displayName": "Temperature",
+      "description": "Temperature in degrees Celsius.",
       "schema": "double",
       "unit": "degreeCelsius"
     },
@@ -157,7 +209,7 @@ Aşağıdaki örnekte, termostat arabirim tanımı gösterilmektedir:
       "schema": "double",
       "displayName": "Target Temperature",
       "description": "Allows to remotely specify the desired target temperature.",
-      "unit" : "degreeCelsius",
+      "unit": "degreeCelsius",
       "writable": true
     },
     {
@@ -167,7 +219,7 @@ Aşağıdaki örnekte, termostat arabirim tanımı gösterilmektedir:
       ],
       "name": "maxTempSinceLastReboot",
       "schema": "double",
-      "unit" : "degreeCelsius",
+      "unit": "degreeCelsius",
       "displayName": "Max temperature since last reboot.",
       "description": "Returns the max temperature since last device reboot."
     },
@@ -183,7 +235,7 @@ Aşağıdaki örnekte, termostat arabirim tanımı gösterilmektedir:
         "schema": "dateTime"
       },
       "response": {
-        "name" : "tempReport",
+        "name": "tempReport",
         "displayName": "Temperature Report",
         "schema": {
           "@type": "Object",
@@ -199,17 +251,17 @@ Aşağıdaki örnekte, termostat arabirim tanımı gösterilmektedir:
               "schema": "double"
             },
             {
-              "name" : "avgTemp",
+              "name": "avgTemp",
               "displayName": "Average Temperature",
               "schema": "double"
             },
             {
-              "name" : "startTime",
+              "name": "startTime",
               "displayName": "Start Time",
               "schema": "dateTime"
             },
             {
-              "name" : "endTime",
+              "name": "endTime",
               "displayName": "End Time",
               "schema": "dateTime"
             }
@@ -233,7 +285,7 @@ Görünen ad ve açıklama gibi isteğe bağlı alanlar, arabirime ve yetenekler
 
 Varsayılan olarak, özellikler salt okunurdur. Salt okuma özellikleri, cihazın IoT Central uygulamanızdaki Özellik değeri güncelleştirmelerini bildirdiği anlamına gelir. IoT Central uygulamanız salt okunurdur bir özelliğin değerini ayarlayamıyorum.
 
-Ayrıca, bir özelliği bir arabirim üzerinde yazılabilir olarak işaretleyebilirsiniz. Bir cihaz, IoT Central uygulamanızdan yazılabilir bir özelliğe güncelleştirme alabilir ve uygulamanıza rapor özellik değeri güncellemeleri verebilir.
+Ayrıca, bir özelliği bir arabirimde yazılabilir olarak işaretleyebilirsiniz. Bir cihaz, IoT Central uygulamanızdan yazılabilir bir özelliğe güncelleştirme alabilir ve uygulamanıza yönelik rapor özellik değeri güncelleştirmelerini de alabilir.
 
 Özellik değerlerini ayarlamak için cihazların bağlı olması gerekmez. Güncelleştirilmiş değerler cihaz bir sonraki uygulamaya bağlandıktan sonra aktarılır. Bu davranış hem salt okunurdur hem de yazılabilir özellikler için geçerlidir.
 

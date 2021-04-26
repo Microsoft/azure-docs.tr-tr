@@ -4,12 +4,12 @@ description: Azure 'da zaman uyumsuz işlemlerin nasıl izleneceğini açıklar.
 ms.topic: conceptual
 ms.date: 08/21/2020
 ms.custom: seodec18
-ms.openlocfilehash: e2c5ba137d5277466cf1b382d2b0b1bc02259f00
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f5823bc8f6c0d5b334a638d4ad350eb2f9ef2b28
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88723461"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105932752"
 ---
 # <a name="track-asynchronous-azure-operations"></a>Zaman uyumsuz Azure işlemlerini izleme
 
@@ -123,7 +123,7 @@ Yanıt gövdesi işlemin durumunu içerir:
 
 ### <a name="deploy-resources-201-with-azure-asyncoperation"></a>Kaynakları dağıtma (Azure ile zaman uyumsuz coperation ile 201)
 
-Bu örnekte, Azure 'a [kaynak dağıtmaya yönelik dağıtımlar işleminin](/rest/api/resources/deployments/createorupdate) durumunun nasıl belirleneceği gösterilmektedir. İlk istek aşağıdaki biçimdedir:
+Bu örnekte, Azure 'a [kaynak dağıtmaya yönelik dağıtımlar işleminin](/rest/api/resources/resources/deployments/createorupdate) durumunun nasıl belirleneceği gösterilmektedir. İlk istek aşağıdaki biçimdedir:
 
 ```HTTP
 PUT

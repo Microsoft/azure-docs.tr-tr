@@ -8,10 +8,10 @@ ms.topic: conceptual
 ms.date: 06/29/2020
 ms.author: cherylmc
 ms.openlocfilehash: 29fff3a6a430e3bc1a0b3a13876b55d22f7cb545
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "94566478"
 ---
 # <a name="automation-guidelines-for-virtual-wan-partners"></a>Sanal WAN iş ortakları için otomasyon yönergeleri

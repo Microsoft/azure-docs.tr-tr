@@ -126,6 +126,8 @@
       items:
         - name: Uyumluluk
           href: compliance.md
+        - name: Veri yerleşimi
+          href: data-residency.md
     - name: Otomatik öneriler
       href: automated-recommendations.md
 - name: SQL/Core API
@@ -150,6 +152,8 @@
               href: create-sql-api-java.md
             - name: Spring Data uygulaması
               href: create-sql-api-spring-data.md
+            - name: Spark v3 uygulaması
+              href: create-sql-api-spark.md
             - name: Node.js uygulaması
               href: create-sql-api-nodejs.md
             - name: Python uygulaması
@@ -755,6 +759,8 @@
                   href: troubleshoot-unauthorized.md
                 - name: Sorun giderme yasak
                   href: troubleshoot-forbidden.md
+                - name: Hatalı istek sorunlarını giderme
+                  href: troubleshoot-bad-request.md
                 - name: Çok bölgeli ortamlarda kullanılabilirlik sorunları
                   href: troubleshoot-sdk-availability.md
             - name: .NET
@@ -831,7 +837,7 @@
               href: visualize-qlik-sense.md
         - name: Apache Spark ile yerleşik analiz
           items:
-            - name: Azure Databricks Spark bağlayıcısı
+            - name: Azure Databricks Spark 2 OLTP Bağlayıcısı
               href: spark-connector.md
             - name: Apache Kafka ve Cosmos DB ile akış
               href: ../hdinsight/apache-kafka-spark-structured-streaming-cosmosdb.md?toc=/azure/cosmos-db/toc.json&bc=/azure/cosmos-db/breadcrumb/toc.json
@@ -911,10 +917,14 @@
               href: sql-api-sdk-java-spring-v2.md
             - name: Spring Veri Bağlayıcısı v3
               href: sql-api-sdk-java-spring-v3.md
-            - name: Spark Bağlayıcısı
+            - name: Spark 3 OLTP Bağlayıcısı (Önizleme)
+              href: sql-api-sdk-java-spark-v3.md
+            - name: Spark 2 OLTP Bağlayıcısı
               href: sql-api-sdk-java-spark.md
             - name: Java toplu yürütücü kitaplığı v2
               href: sql-api-sdk-bulk-executor-java.md
+        - name: Azure CLI
+          href: /cli/azure/cosmosdb
         - name: Node.js
           href: sql-api-sdk-node.md
         - name: Python
@@ -1411,6 +1421,8 @@
           href: how-to-restrict-user-data.md
         - name: Müşteri tarafından yönetilen anahtarları yapılandırma
           href: how-to-setup-cmk.md
+        - name: Yönetilen kimlik kullanma
+          href: how-to-setup-managed-identity.md
     - name: Kurumsal kullanıma hazır olma
       items:
         - name: Kota artışı isteme

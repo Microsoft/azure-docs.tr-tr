@@ -9,12 +9,12 @@ ms.date: 07/24/2020
 ms.author: normesta
 ms.subservice: common
 ms.reviewer: zezha-msft
-ms.openlocfilehash: b36ea25180c31fef199aaacb10e46b3caa20f807
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ebf04531f29e18f9d120ca2efa17244c4282084c
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98878384"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107503278"
 ---
 # <a name="azcopy-load-clfs"></a>azcopy load clfs
 
@@ -47,7 +47,6 @@ azcopy load clfs [local dir] [container URL] [flags]
 - [AzCopy’yi kullanmaya başlama](storage-use-azcopy-v10.md)
 - [AzCopy ve BLOB Storage ile veri aktarma](./storage-use-azcopy-v10.md#transfer-data)
 - [AzCopy ve dosya depolama ile verileri aktarma](storage-use-azcopy-files.md)
-- [AzCopy 'i yapılandırma, iyileştirme ve sorun giderme](storage-use-azcopy-configure.md)
 
 ## <a name="examples"></a>Örnekler
 

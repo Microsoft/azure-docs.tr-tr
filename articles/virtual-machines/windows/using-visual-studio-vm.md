@@ -1,21 +1,21 @@
 ---
 title: Azure sanal makinesinde Visual Studio 'Yu kullanma
 description: Azure sanal makinesinde Visual Studio 'Yu kullanma.
-author: cathysull
-manager: cathys
+author: andysterland
+manager: andster
 ms.service: virtual-machines
 ms.custom: vs-azure
 ms.workload: azure-vs
 ms.topic: conceptual
 ms.date: 11/17/2020
-ms.author: cathys
+ms.author: andster
 keywords: visualstudio
-ms.openlocfilehash: a6acf27743f17941e14adc3f6deea903f4f5ca87
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f26bec64012e0b0909b7df5422c57ff2cb1c347e
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102562087"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107478565"
 ---
 # <a name="visual-studio-images-on-azure"></a>Azure 'da Visual Studio görüntüleri
 Visual Studio 'Yu önceden yapılandırılmış bir Azure sanal makinesinde (VM) kullanmak, herhangi bir şey için bir şeyi çalışır duruma getirmenin bir geliştirme ortamına hızlı ve kolay bir yoludur. Farklı Visual Studio yapılandırmalarına sahip sistem görüntüleri [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps/category/compute?filters=virtual-machine-images%3Bmicrosoft%3Bwindows&page=1&subcategories=application-infrastructure)'nde kullanılabilir.
@@ -44,7 +44,7 @@ Daha fazla bilgi için bkz. [Visual Studio bakım ilkesi](https://www.visualstud
 ## <a name="what-features-are-installed"></a>Hangi özellikler yüklendi?
 Her görüntü, bu Visual Studio sürümü için önerilen özellik kümesini içerir. Genellikle, yükleme şunları içerir:
 
-* Her iş yükünün önerilen isteğe bağlı bileşenleri dahil tüm kullanılabilir iş yükleri
+* Her iş yükünün önerilen isteğe bağlı bileşenleri dahil olmak üzere tüm kullanılabilir iş yükleri. Visual Studio 'da bulunan iş yükleri, bileşenler ve SDK 'lar hakkında daha fazla ayrıntı [Visual Studio belgelerinde](https://docs.microsoft.com/visualstudio/install/workload-and-component-ids) bulunabilir
 * .NET 4.6.2 ve .NET 4,7 SDK 'Ları, hedeflenen paketleri ve Geliştirici Araçları
 * Visual F#
 * Visual Studio için GitHub Uzantısı

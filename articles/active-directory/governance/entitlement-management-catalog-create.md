@@ -16,12 +16,12 @@ ms.date: 12/23/2020
 ms.author: ajburnle
 ms.reviewer: hanki
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d21783f0ef32289aad4b7d136dc8200d61fc0852
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b8cea26bcb0926cd3af360a6489377767d681079
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104592940"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532565"
 ---
 # <a name="create-and-manage-a-catalog-of-resources-in-azure-ad-entitlement-management"></a>Azure AD Yetkilendirme Yönetimi 'nde kaynakların kataloğunu oluşturma ve yönetme
 
@@ -53,7 +53,7 @@ Katalog, kaynak ve erişim paketlerinin bir kapsayıcısıdır. İlgili kaynakla
 
 ### <a name="creating-a-catalog-programmatically"></a>Program aracılığıyla Katalog oluşturma
 
-Ayrıca, Microsoft Graph kullanarak da bir katalog oluşturabilirsiniz.  Temsilci izni olan bir uygulamayla uygun bir roldeki kullanıcı, `EntitlementManagement.ReadWrite.All` [bir accessPackageCatalog oluşturmak](/graph/api/accesspackagecatalog-post?view=graph-rest-beta)için API 'yi çağırabilir.
+Ayrıca, Microsoft Graph kullanarak da bir katalog oluşturabilirsiniz.  Temsilci izni olan bir uygulamayla uygun bir roldeki kullanıcı, `EntitlementManagement.ReadWrite.All` [bir accessPackageCatalog oluşturmak](/graph/api/accesspackagecatalog-post?view=graph-rest-beta&preserve-view=true)için API 'yi çağırabilir.
 
 ## <a name="add-resources-to-a-catalog"></a>Kataloğa kaynak ekleme
 
@@ -81,7 +81,7 @@ Kaynakları bir erişim paketine dahil etmek için, kaynakların bir katalogda m
 
     Bu kaynaklar artık kataloğun içindeki erişim paketlerine dahil edilebilir.
 
-### <a name="add-a-multi-geo-sharepoint-site"></a>Çok coğrafi coğrafi SharePoint sitesi ekleme
+### <a name="add-a-multi-geo-sharepoint-site-preview"></a>Çok coğrafi coğrafi SharePoint sitesi ekleme (Önizleme)
 
 1. SharePoint için [Çoklu coğrafi bölge](/microsoft-365/enterprise/multi-geo-capabilities-in-onedrive-and-sharepoint-online-in-microsoft-365) özelliği etkinleştirilmişse, siteleri seçmek istediğiniz ortamı seçin.
     
@@ -91,7 +91,7 @@ Kaynakları bir erişim paketine dahil etmek için, kaynakların bir katalogda m
 
 ### <a name="adding-a-resource-to-a-catalog-programmatically"></a>Bir kataloğa program aracılığıyla kaynak ekleme
 
-Ayrıca, Microsoft Graph kullanarak bir kataloğa kaynak ekleyebilirsiniz.  Uygun bir roldeki bir kullanıcı veya bir katalog ve kaynak sahibi, temsilci izni olan bir uygulamayla bir `EntitlementManagement.ReadWrite.All` [accessPackageResourceRequest oluşturmak](/graph/api/accesspackageresourcerequest-post?view=graph-rest-beta)için API 'yi çağırabilir.
+Ayrıca, Microsoft Graph kullanarak bir kataloğa kaynak ekleyebilirsiniz.  Uygun bir roldeki bir kullanıcı veya bir katalog ve kaynak sahibi, temsilci izni olan bir uygulamayla bir `EntitlementManagement.ReadWrite.All` [accessPackageResourceRequest oluşturmak](/graph/api/accesspackageresourcerequest-post?view=graph-rest-beta&preserve-view=true)için API 'yi çağırabilir.
 
 ## <a name="remove-resources-from-a-catalog"></a>Katalogdan kaynakları kaldırma
 
@@ -164,7 +164,7 @@ Bir kataloğu yalnızca herhangi bir erişim paketi yoksa silebilirsiniz.
 
 ### <a name="deleting-a-catalog-programmatically"></a>Bir kataloğu programlama yoluyla silme
 
-Ayrıca, Microsoft Graph kullanarak da bir kataloğu silebilirsiniz.  Temsilci izni olan bir uygulamayla uygun bir roldeki kullanıcı `EntitlementManagement.ReadWrite.All` , [bir accessPackageCatalog 'u silmek](/graph/api/accesspackagecatalog-delete?view=graph-rest-beta)için API 'yi çağırabilir.
+Ayrıca, Microsoft Graph kullanarak da bir kataloğu silebilirsiniz.  Temsilci izni olan bir uygulamayla uygun bir roldeki kullanıcı `EntitlementManagement.ReadWrite.All` , [bir accessPackageCatalog 'u silmek](/graph/api/accesspackagecatalog-delete?view=graph-rest-beta&preserve-view=true)için API 'yi çağırabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

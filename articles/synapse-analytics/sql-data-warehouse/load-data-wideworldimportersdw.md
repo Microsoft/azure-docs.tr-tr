@@ -2,21 +2,21 @@
 title: 'Öğretici: Azure portal & SSMS kullanarak veri yükleme'
 description: Öğretici Azure portal ve SQL Server Management Studio kullanarak genel bir Azure blobundan bir Azure SYNAPSE Analytics SQL havuzuna WideWorldImportersDW veri ambarını yükler.
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql-dw
 ms.date: 01/12/2021
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019, synapse-analytics
-ms.openlocfilehash: f41d7359b8273d685d0ab3c962697ca45ff7d18f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fa2d720d995fdaa76a9aa98659edf4060ea6509b
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104598040"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565976"
 ---
 # <a name="tutorial-load-data-to--azure-synapse-analytics-sql-pool"></a>Öğretici: Azure SYNAPSE Analytics SQL havuzuna veri yükleme
 

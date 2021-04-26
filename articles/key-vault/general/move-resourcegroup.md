@@ -2,21 +2,19 @@
 title: Kasayı farklı bir kaynak grubuna taşımak Azure Key Vault | Microsoft Docs
 description: Anahtar kasasını farklı bir kaynak grubuna taşıma Kılavuzu.
 services: key-vault
-author: ShaneBala-keyvault
-manager: ravijan
+author: msmbaldwin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: how-to
-ms.date: 04/29/2020
-ms.author: sudbalas
-Customer intent: As a key vault administrator, I want to move my vault to another resource group.
-ms.openlocfilehash: ea152e1d78ab1ea610eee5420394c89524673993
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/31/2021
+ms.author: mbaldwin
+ms.openlocfilehash: 14ecbcaa35153438601a3dabb70f5b38006ded1b
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92042391"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107749573"
 ---
 # <a name="moving-an-azure-key-vault-across-resource-groups"></a>Azure Key Vault'u kaynak grupları arasında taşıma
 

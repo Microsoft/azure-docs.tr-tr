@@ -5,12 +5,12 @@ author: VidyaKukke
 ms.topic: conceptual
 ms.date: 07/07/2020
 ms.author: vkukke
-ms.openlocfilehash: 10c9b165041f0a4a1f09511f17bef3629353c3b2
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d58e8b5ce9fb444fa501f897cca722613d9c51fe
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94917537"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105967583"
 ---
 # <a name="network-security-for-azure-event-grid-resources"></a>Azure Event Grid kaynakları için ağ güvenliği
 Bu makalede, Azure Event Grid ile aşağıdaki güvenlik özelliklerinin nasıl kullanılacağı açıklanmaktadır: 
@@ -33,7 +33,7 @@ Hizmet etiketi, belirli bir Azure hizmetinden bir IP adresi önekleri grubunu te
 ## <a name="ip-firewall"></a>IP güvenlik duvarı 
 Azure Event Grid konularda ve etki alanlarında yayımlama için IP tabanlı erişim denetimlerini destekler. IP tabanlı denetimlerle, yayımcıları bir konu veya etki alanıyla yalnızca onaylanmış bir makine ve bulut hizmetleri kümesiyle sınırlayabilirsiniz. Bu özellik Event Grid tarafından desteklenen [kimlik doğrulama mekanizmalarını](security-authentication.md) tamamlar.
 
-Varsayılan olarak, konu ve etki alanına, istek geçerli kimlik doğrulaması ve yetkilendirmeyle geldiği sürece internet 'ten erişilebilir. IP güvenlik duvarı ile, [CIDR (sınıfsız Inter-Domain yönlendirme)](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) gösteriminde yalnızca bir IP adresı veya IP adresi aralığı kümesiyle daha fazla sınırlandırabilirsiniz. Başka herhangi bir IP adresinden kaynaklanan yayımcılar reddedilir ve 403 (yasak) yanıtı alacaktır.
+Varsayılan olarak, konu ve etki alanına, istek geçerli kimlik doğrulama ve yetkilendirme ile geldiği sürece internet 'ten erişilebilir. IP güvenlik duvarı ile, [CIDR (sınıfsız Inter-Domain yönlendirme)](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) gösteriminde yalnızca bir IP adresı veya IP adresi aralığı kümesiyle daha fazla sınırlandırabilirsiniz. Başka herhangi bir IP adresinden kaynaklanan yayımcılar reddedilir ve 403 (yasak) yanıtı alacaktır.
 
 Konular ve etki alanları için IP güvenlik duvarını yapılandırmaya yönelik adım adım yönergeler için bkz. [IP güvenlik duvarını yapılandırma](configure-firewall.md).
 
@@ -44,7 +44,7 @@ Konular ve etki alanları için IP güvenlik duvarını yapılandırmaya yöneli
 
 Event Grid kaynağınız için özel uç noktalar kullanmak şunları yapmanıza olanak sağlar:
 
-- Genel internet 'in aksine Microsoft omurga ağı üzerinden bir VNet 'ten konuya veya etki alanına güvenli erişim.
+- Genel internet yerine Microsoft omurga ağı üzerinden bir VNet 'ten konu veya etki alanına güvenli erişim.
 - VPN veya Express yollarını özel eşleme ile kullanarak VNet 'e bağlanan şirket içi ağlardan güvenli bir şekilde bağlanın.
 
 VNet 'iniz içindeki bir konu veya etki alanı için özel bir uç nokta oluşturduğunuzda, kaynak sahibine onay için bir izin isteği gönderilir. Özel uç noktanın oluşturulmasını isteyen kullanıcı aynı zamanda kaynağın sahibiyseniz, bu onay isteği otomatik olarak onaylanır. Aksi takdirde, bağlantı onaylanana kadar **bekleme** durumunda olur. VNet 'teki uygulamalar, başka şekilde kullandıkları aynı bağlantı dizelerini ve yetkilendirme mekanizmalarını kullanarak, Özel uç nokta üzerinden Event Grid hizmetine sorunsuz bir şekilde bağlanabilir. Kaynak sahipleri, Azure portal kaynağın **Özel uç noktaları** sekmesinden izin isteklerini ve özel uç noktaları yönetebilir.

@@ -2,14 +2,14 @@
 title: Azure Arc etkin sunucularına genel bakış
 description: Azure 'un dışında barındırılan sunucuları Azure kaynağı gibi yönetmek için Azure Arc etkin sunucularını nasıl kullanacağınızı öğrenin.
 keywords: Azure Otomasyonu, DSC, PowerShell, istenen durum yapılandırması, güncelleştirme yönetimi, değişiklik izleme, envanter, runbook 'lar, Python, grafik, karma
-ms.date: 02/18/2021
+ms.date: 04/21/2021
 ms.topic: overview
-ms.openlocfilehash: 863cab073018c5a592cba6e94451a9af038ebd52
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 324f6cc29bd9e4eca1a20413032c213c2618a11e
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105023342"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832005"
 ---
 # <a name="what-is-azure-arc-enabled-servers"></a>Azure Arc özellikli sunucular nedir?
 
@@ -25,9 +25,9 @@ Makinenizi Azure Arc etkin sunucularına bağladığınızda, aşağıdaki yapı
 
 - Azure Otomasyonu [değişiklik izleme ve envanter](../../automation/change-tracking/overview.md) ve [Azure Güvenlik Merkezi dosya bütünlüğü izlemeyi](../../security-center/security-center-file-integrity-monitoring.md)kullanarak, [sunucular için Azure Defender](../../security-center/defender-for-servers-introduction.md)ile etkinleştirilen sunucular için yüklü yazılımlar, Microsoft Hizmetleri, Windows kayıt defteri ve dosyalar ve Linux Daemon 'ları hakkındaki yapılandırma değişikliklerini bildirin.
 
-- Bağlı makine konuk işletim sistemi performansınızı izleyin ve uygulamanın [VM'ler için Azure izleyici](../../azure-monitor/vm/vminsights-overview.md)kullanarak iletişim kurduğu diğer kaynaklarla işlem ve bağımlılıklarını izlemek için uygulama bileşenlerini bulun.
+- Bağlı makine konuk işletim sistemi performansınızı izleyin ve uygulama bileşenlerini, uygulamanın [VM öngörülerini](../../azure-monitor/vm/vminsights-overview.md)kullanarak iletişim kurduğu diğer kaynaklarla işlem ve bağımlılıklarını izlemeye yönelik şekilde bulun.
 
-- Azure Otomasyonu [Durum Yapılandırması](../../automation/automation-dsc-overview.md) ve azure izleyici Log Analytics çalışma alanı gibi diğer Azure hizmetleriyle dağıtımı, Azure olmayan Windows veya Linux makineniz Için desteklenen [Azure VM uzantılarını](manage-vm-extensions.md) kullanarak kolaylaştırın. Bu, dağıtım sonrası yapılandırma veya özel Betik uzantısı kullanılarak yazılım yükleme işlemlerini içerir.
+- Azure Otomasyonu [Durum Yapılandırması](../../automation/automation-dsc-overview.md) ve azure izleyici Log Analytics çalışma alanı gibi diğer Azure hizmetlerini kullanarak dağıtımı, Azure olmayan Windows veya Linux makineniz Için desteklenen [Azure VM uzantılarını](manage-vm-extensions.md) kullanarak kolaylaştırın. Bu, dağıtım sonrası yapılandırma veya özel Betik uzantısı kullanılarak yazılım yükleme işlemlerini içerir.
 
 - Windows ve Linux sunucularınız için işletim sistemi güncelleştirmelerini yönetmek üzere Azure Otomasyonu 'nda [güncelleştirme yönetimi](../../automation/update-management/overview.md) kullanın
 

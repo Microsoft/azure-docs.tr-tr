@@ -9,12 +9,12 @@ ms.date: 03/03/2021
 ms.author: alkohli
 ms.subservice: common
 ms.custom: devx-track-azurepowershell, devx-track-azurecli, contperf-fy21q3
-ms.openlocfilehash: e878be5351362923e163c0a6f617b96ab72a36d8
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2d4885f23e775f84a412d176568d992ebe01166b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102177587"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107875710"
 ---
 # <a name="use-the-azure-importexport-service-to-export-data-from-azure-blob-storage"></a>Azure Blob depolamadan verileri dışarı aktarmak için Azure İçeri/Dışarı Aktarma hizmetini kullanma
 
@@ -190,19 +190,19 @@ Azure portal bir dışarı aktarma işi oluşturmak için aşağıdaki adımlar�
 
 ### <a name="create-a-job"></a>Bir iş oluşturma
 
-1. [Az Import-Export](/cli/azure/ext/import-export/import-export) uzantısını eklemek için [az Extension Add](/cli/azure/extension#az_extension_add) komutunu kullanın:
+1. [Az Import-Export](/cli/azure/import-export) uzantısını eklemek için [az Extension Add](/cli/azure/extension#az_extension_add) komutunu kullanın:
 
     ```azurecli
     az extension add --name import-export
     ```
 
-1. Diskleri alabileceğiniz konumların bir listesini almak için [az Import-Export location List](/cli/azure/ext/import-export/import-export/location#ext_import_export_az_import_export_location_list) komutunu kullanın:
+1. Diskleri alabileceğiniz konumların bir listesini almak için [az Import-Export location List](/cli/azure/import-export/location#az_import_export_location_list) komutunu kullanın:
 
     ```azurecli
     az import-export location list
     ```
 
-1. Mevcut depolama hesabınızı kullanan bir dışarı aktarma işi oluşturmak için aşağıdaki [az Import-Export Create](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_create) komutunu çalıştırın:
+1. Mevcut depolama hesabınızı kullanan bir dışarı aktarma işi oluşturmak için aşağıdaki [az Import-Export Create](/cli/azure/import-export#az_import_export_create) komutunu çalıştırın:
 
     ```azurecli
     az import-export create \
@@ -245,13 +245,13 @@ Azure portal bir dışarı aktarma işi oluşturmak için aşağıdaki adımlar�
    > [!NOTE]
    > Dışarı aktarılacak blob veri kopyalama sırasında kullanılıyorsa, Azure Içeri/dışarı aktarma hizmeti Blobun anlık görüntüsünü alır ve anlık görüntüyü kopyalar.
 
-1. Kaynak grubu myierg için tüm işleri görmek üzere [az Import-Export List](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_list) komutunu kullanın:
+1. Kaynak grubu myierg için tüm işleri görmek üzere [az Import-Export List](/cli/azure/import-export#az_import_export_list) komutunu kullanın:
 
     ```azurecli
     az import-export list --resource-group myierg
     ```
 
-1. İşinizi güncelleştirmek veya işinizi iptal etmek için [az Import-Export Update](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_update) komutunu çalıştırın:
+1. İşinizi güncelleştirmek veya işinizi iptal etmek için [az Import-Export Update](/cli/azure/import-export#az_import_export_update) komutunu çalıştırın:
 
     ```azurecli
     az import-export update --resource-group myierg --name MyIEjob1 --cancel-requested true

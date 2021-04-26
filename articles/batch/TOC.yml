@@ -232,11 +232,11 @@
           displayName: command line
           href: batch-cli-get-started.md
         - name: Batch CLI şablonlarını kullanma
-          diplayName: extension
+          displayName: extension
           href: batch-cli-templates.md
-    - name: Batch Node.js SDK’sını kullanma
+    - name: Batch JavaScript SDK 'sını kullanma
       displayName: json
-      href: batch-nodejs-get-started.md
+      href: batch-js-get-started.md
     - name: İş yükleri çalıştırma
       items:
         - name: MPı
@@ -266,7 +266,7 @@
           href: ../data-factory/transform-data-using-dotnet-custom-activity.md?toc=%2fazure%2fbatch%2ftoc.json
 - name: Başvuru
   items:
-    - name: Azure CLI
+    - name: Azure CLI’si
       href: /cli/azure/batch
     - name: Azure PowerShell
       href: /powershell/module/az.batch
@@ -274,7 +274,7 @@
       href: /dotnet/api/overview/azure/batch
     - name: Java
       href: /java/api/overview/azure/batch
-    - name: Node.js
+    - name: JavaScript
       href: /javascript/api/overview/azure/batch
     - name: Python
       href: /python/api/overview/azure/batch

@@ -3,7 +3,6 @@ title: Öğretici-Key Vault 'de sertifika otomatik döndürme sıklığı günce
 description: Azure Key Vault Azure portal kullanarak bir sertifikanın otomatik döndürme sıklığını güncelleştirmeyi gösteren öğretici
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: certificates
@@ -11,12 +10,12 @@ ms.topic: tutorial
 ms.custom: mvc
 ms.date: 04/16/2020
 ms.author: sebansal
-ms.openlocfilehash: 78cdc0b59fd178049e755cca5e1e909ac24483f2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ec88dfc7ded7ecb1d640eb4d73ef4c8045e549cf
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102204057"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791994"
 ---
 # <a name="tutorial-configure-certificate-auto-rotation-in-key-vault"></a>Öğretici: Key Vault içinde sertifika otomatik döndürmeyi yapılandırma
 
@@ -51,7 +50,7 @@ Bir sertifika oluşturun veya bir sertifikayı anahtar kasasına aktarın (bkz. 
 
 ## <a name="update-certificate-lifecycle-attributes"></a>Sertifika yaşam döngüsü özniteliklerini güncelleştirme
 
-Azure Key Vault, sertifikanın yaşam döngüsü özniteliklerini, sertifika oluşturma zamanından önce ve sonra güncelleştirebilirsiniz.
+Azure Key Vault, sertifikaların yaşam döngüsü özniteliklerini her ikisi de sertifika oluşturma sırasında veya sonrasında güncelleştirebilirsiniz.
 
 Key Vault oluşturulan bir sertifika şu olabilir:
 
@@ -80,9 +79,11 @@ Key Vault CAs ile belirlenen ortaklıklar aracılığıyla sertifikaları otomat
    - **Geçerlilik süresi**: değeri girin (ay). Kısa süreli sertifikaların oluşturulması önerilen bir güvenlik uygulamasıdır. Varsayılan olarak, yeni oluşturulan sertifikanın geçerlilik değeri 12 aydan oluşur.
    - **Ömür eylemi türü**: sertifikanın otomatik yenileme ve uyarı eylemini seçin ve ardından **yüzde ömrü** veya **süre sonu öncesindeki gün sayısını** güncelleştirin. Varsayılan olarak, bir sertifikanın otomatik yenilenmesi, yaşam süresinin yüzde 80 ' sinden belirlenir. Aşağı açılan menüden, aşağıdaki seçeneklerden birini seçin.
 
-        |  Belirli bir zamanda otomatik olarak Yenile| Belirli bir zamanda tüm kişileri e-postayla gönder |
-        |-----------|------|
-        |Bu seçeneğin belirlenmesi, oto dönüşü *etkinleştirebilir* . | Bu seçeneğin *belirlenmesi otomatik olarak döndürülmez, ancak* yalnızca ilgili kişileri uyarır.|
+      |  Belirli bir zamanda otomatik olarak Yenile| Belirli bir zamanda tüm kişileri e-postayla gönder |
+      |-----------|------|
+      |Bu seçeneğin belirlenmesi, oto dönüşü *etkinleştirebilir* . | Bu seçeneğin *belirlenmesi otomatik olarak döndürülmez, ancak* yalnızca ilgili kişileri uyarır.|
+      
+      [Buraya e-posta kişisi ayarlama](https://docs.microsoft.com/azure/key-vault/certificates/overview-renew-certificate#get-notified-about-certificate-expiration) hakkında bilgi edinebilirsiniz
 
 1. **Oluştur**’u seçin.
 
@@ -134,7 +135,7 @@ Set-AzureKeyVaultCertificatePolicy -VaultName $vaultName
 > }
 >  ```
 > 
-Parametreler hakkında daha fazla bilgi edinmek için bkz. [az keykasa Certificate](/cli/azure/keyvault/certificate#az-keyvault-certificate-set-attributes).
+Parametreler hakkında daha fazla bilgi edinmek için bkz. [az keykasa Certificate](/cli/azure/keyvault/certificate#az_keyvault_certificate_set_attributes).
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 

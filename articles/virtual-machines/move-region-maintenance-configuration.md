@@ -7,12 +7,12 @@ ms.topic: how-to
 ms.tgt_pltfrm: vm
 ms.date: 03/04/2020
 ms.author: shants
-ms.openlocfilehash: 91a6adecc9cf0db56fa4c433f388b05aa1bdef6a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f833f3eb9e3d94da6178a0a9a9cf4f95ec0682e7
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98202921"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865378"
 ---
 # <a name="move-a-maintenance-control-configuration-to-another-region"></a>Bakım denetim yapılandırmasını başka bir bölgeye taşıma
 
@@ -38,7 +38,7 @@ Bir bakım denetim yapılandırmasını taşımaya başlamadan önce:
 
 ## <a name="prepare-and-move"></a>Hazırlama ve taşıma 
 
-1. Her abonelikteki tüm bakım yapılandırmasını alın. Bunu yapmak için CLı [az Maintenance Configuration List](/cli/azure/ext/maintenance/maintenance/configuration#ext-maintenance-az-maintenance-configuration-list) komutunu çalıştırın ve $SUBID abonelik Kimliğinizle değiştirin.
+1. Her abonelikteki tüm bakım yapılandırmasını alın. Bunu yapmak için CLı [az Maintenance Configuration List](/cli/azure/maintenance/configuration#az_maintenance_configuration_list) komutunu çalıştırın ve $SUBID abonelik Kimliğinizle değiştirin.
 
     ```
     az maintenance configuration list --subscription $subId --query "[*].{Name:name, Location:location, ResGroup:resourceGroup}" --output table

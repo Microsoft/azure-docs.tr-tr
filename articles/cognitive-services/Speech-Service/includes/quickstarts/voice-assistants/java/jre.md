@@ -4,14 +4,14 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/04/2020
 ms.author: travisw
-ms.openlocfilehash: 8ee14b94977b3152e0aab853fa3919a739d0dfdd
-ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
+ms.openlocfilehash: 536b0f2554bc5a360b9e1a7e14fa7b5383aa5365
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/26/2020
-ms.locfileid: "96187755"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106271501"
 ---
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Başlamadan önce şunları yaptığınızdan emin olun:
 
@@ -53,7 +53,7 @@ Ayrıca, günlüğü etkinleştirmek için _pom.xml_ dosyasını aşağıdaki ba
 
    import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
    import com.microsoft.cognitiveservices.speech.audio.PullAudioOutputStream;
-   import com.microsoft.cognitiveservices.speech.dialog.DialogServiceConfig;
+   import com.microsoft.cognitiveservices.speech.dialog.BotFrameworkConfig;
    import com.microsoft.cognitiveservices.speech.dialog.DialogServiceConnector;
    import org.slf4j.Logger;
    import org.slf4j.LoggerFactory;
@@ -434,7 +434,7 @@ Ayrıca, günlüğü etkinleştirmek için _pom.xml_ dosyasını aşağıdaki ba
 
 ## <a name="build-and-run-the-app"></a>Uygulamayı derleyin ve çalıştırın
 
-F11 ' i seçin veya **Run**  >  **hata ayıklamayı** Çalıştır ' ı seçin.
+F11 ' i seçin veya   >  **hata ayıklamayı** Çalıştır ' ı seçin.
 Konsol "bir şeyi söyleyin" iletisini görüntüler.
 Bu noktada, bot 'ın anlayabilmesi için Ingilizce bir tümcecik veya cümle konuşun. Konuşmanızı, bot 'unuza göre tanınıp işlendiği doğrudan hat konuşma kanalı aracılığıyla sizin bot 'a iletilir. Yanıt bir etkinlik olarak döndürülür. Bot 'niz bir yanıt olarak konuşma döndürürse, ses, sınıfı kullanılarak geri yürütülür `AudioPlayer` .
 

@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: app-provisioning
 ms.workload: identity
 ms.topic: reference
-ms.date: 08/05/2020
+ms.date: 04/07/2021
 ms.author: kenwith
 ms.reviewer: arvinh
-ms.openlocfilehash: d13629b4cb05995b9652e862f769a0ffcae30a8c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 268931715500631ac2d10feacebff1d5c65931bf
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99256907"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107028800"
 ---
 # <a name="known-issues-and-resolutions-with-scim-20-protocol-compliance-of-the-azure-ad-user-provisioning-service"></a>Azure AD Kullanıcı sağlama hizmeti 'nin SCıM 2,0 protokol uyumluluğuyla ilgili bilinen sorunlar ve çözümleri
 
@@ -51,7 +51,7 @@ Varsayılan SCıM istemci davranışını değiştirmek için uygulamanızın ki
 :::image type="content" source="media/application-provisioning-config-problem-scim-compatibility/scim-flags.jpg" alt-text="Daha sonraki davranışa yönelik SCıM bayrakları.":::
 
 * Düzeltme Eki davranışlarını güncelleştirmek ve SCıM uyumluluğunu sağlamak için aşağıdaki URL 'YI kullanın (örneğin, Boolean olarak etkin ve uygun Grup üyeliği kaldırma işlemleri). Bu davranış Şu anda yalnızca bayrak kullanılırken kullanılabilir, ancak önümüzdeki birkaç ay içinde varsayılan davranış olur. Not Bu önizleme bayrağının Şu anda isteğe bağlı sağlama ile çalışmadığına bakın. 
-  * **URL (SCıM uyumlu):** AzureAdScimPatch062020
+  * **URL (SCıM uyumlu):** aadOptscim062020
   * **SCıM RFC başvuruları:** 
     * https://tools.ietf.org/html/rfc7644#section-3.5.2
   * **Durum**

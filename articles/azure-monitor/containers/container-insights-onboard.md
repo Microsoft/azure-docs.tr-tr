@@ -3,12 +3,12 @@ title: Kapsayıcı öngörülerini etkinleştir | Microsoft Docs
 description: Bu makalede, kapsayıcının nasıl çalıştığını ve performansla ilgili sorunların tanımlandığını anlayabilmeniz için kapsayıcı öngörülerinin nasıl etkinleştirileceği ve yapılandırılacağı açıklanır.
 ms.topic: conceptual
 ms.date: 06/30/2020
-ms.openlocfilehash: 01246a728f204ed9cb43eee392c637b495208aaf
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: e0544232f40e93cce0705fff6814d29697a96218
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105109361"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782126"
 ---
 # <a name="enable-container-insights"></a>Kapsayıcı öngörülerini etkinleştir
 
@@ -124,7 +124,7 @@ Kapsayıcı öngörülerini etkinleştirmek için aşağıdaki tabloda açıklan
 | Yeni Kubernetes kümesi | [Azure CLı kullanarak AKS kümesi oluşturma](../../aks/kubernetes-walkthrough.md#create-aks-cluster)| Azure CLı kullanarak oluşturduğunuz yeni bir AKS kümesi için izlemeyi etkinleştirebilirsiniz. |
 | | [Terrayform kullanarak AKS kümesi oluşturma](container-insights-enable-new-cluster.md#enable-using-terraform)| Açık kaynak aracı Tertuform kullanarak oluşturduğunuz yeni bir AKS kümesi için izlemeyi etkinleştirebilirsiniz. |
 | | [Azure Resource Manager şablonu kullanarak bir OpenShift kümesi oluşturma](container-insights-azure-redhat-setup.md#enable-for-a-new-cluster-using-an-azure-resource-manager-template) | Önceden yapılandırılmış bir Azure Resource Manager şablonu kullanarak oluşturduğunuz yeni bir OpenShift kümesi için izlemeyi etkinleştirebilirsiniz. |
-| | [Azure CLı kullanarak bir OpenShift kümesi oluşturma](/cli/azure/openshift#az-openshift-create) | Azure CLı kullanarak yeni bir OpenShift kümesi dağıtırken izlemeyi etkinleştirebilirsiniz. |
+| | [Azure CLı kullanarak bir OpenShift kümesi oluşturma](/cli/azure/openshift#az_openshift_create) | Azure CLı kullanarak yeni bir OpenShift kümesi dağıtırken izlemeyi etkinleştirebilirsiniz. |
 | Mevcut Kubernetes kümesi | [Azure CLı kullanarak bir AKS kümesinin izlenmesini etkinleştirme](container-insights-enable-existing-clusters.md#enable-using-azure-cli) | Azure CLı kullanılarak zaten dağıtılmış bir AKS kümesi için izlemeyi etkinleştirebilirsiniz. |
 | |[Tertuform kullanarak AKS kümesi için etkinleştirme](container-insights-enable-existing-clusters.md#enable-using-terraform) | Açık kaynak aracı Tertuform kullanılarak zaten dağıtılmış olan bir AKS kümesi için izlemeyi etkinleştirebilirsiniz. |
 | | [Azure Izleyici 'den AKS kümesi için etkinleştirme](container-insights-enable-existing-clusters.md#enable-from-azure-monitor-in-the-portal)| Azure Izleyici 'de çok küme sayfasından zaten dağıtılmış olan bir veya daha fazla AKS kümesi için izlemeyi etkinleştirebilirsiniz. |

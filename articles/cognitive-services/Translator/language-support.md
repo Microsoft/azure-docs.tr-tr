@@ -10,12 +10,12 @@ ms.subservice: translator-text
 ms.topic: reference
 ms.date: 06/10/2020
 ms.author: lajanuar
-ms.openlocfilehash: b114c4f3e6646f68e7a1068be8dd52778a26fb58
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a195567117378a118b9bea8d15a7cb0a661d284a
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101738149"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107303534"
 ---
 # <a name="language-and-region-support-for-text-and-speech-translation"></a>Metin ve konuşma çevirisi için dil ve bölge desteği
 
@@ -52,8 +52,8 @@ Translator metin çevirisi için aşağıdaki dilleri destekler.
 | Geleneksel Çince | `zh-Hant` |
 | Hırvatça | `hr` |
 | Çekçe | `cs` |
-| Dili | `prs` |
 | Danca | `da` |
+| Dili | `prs` |
 | Felemenkçe | `nl` |
 | İngilizce | `en` |
 | Estonya Dili | `et` |
@@ -340,6 +340,7 @@ Aşağıdaki diller, [özel çevirici](https://aka.ms/CustomTranslator)kullanıl
 | Macarca      | `hu`          |
 | İzlandaca | `is` |
 | Endonezce|   `id`    |
+| Dili|    `iu`    |
 | İrlandaca | `ga`  |
 | İtalyanca      | `it`          |
 | Japonca      | `ja`          |

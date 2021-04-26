@@ -12,10 +12,10 @@ ms.date: 11/30/2020
 ms.author: kenwith
 ms.reviewer: japere
 ms.openlocfilehash: 5e5d5370057449d1877c31b249d3fe47fd60bf2a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101687677"
 ---
 # <a name="publish-remote-desktop-with-azure-ad-application-proxy"></a>Azure Active Directory Uygulama Ara Sunucusu ile Uzak Masaüstünü yayımlama
@@ -91,7 +91,7 @@ RDS dağıtımına yönetici olarak bağlanın ve dağıtım için RD Ağ Geçid
    Set-RDSessionCollectionConfiguration -CollectionName "<yourcollectionname>" -CustomRdpProperty "pre-authentication server address:s:<proxyfrontendurl>`nrequire pre-authentication:i:1"
    ```
 
-   **Örneğin:**
+   **Örnek:**
    ```
    Set-RDSessionCollectionConfiguration -CollectionName "QuickSessionCollection" -CustomRdpProperty "pre-authentication server address:s:https://remotedesktoptest-aadapdemo.msappproxy.net/`nrequire pre-authentication:i:1"
    ```

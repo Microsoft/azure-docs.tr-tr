@@ -3,12 +3,12 @@ title: Azure Işlevleri için depolama konuları
 description: Azure Işlevlerinin depolama gereksinimlerini ve depolanan verileri şifreleme hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 07/27/2020
-ms.openlocfilehash: c4ffb622482585e35337caf8e43b69e0f3b0385c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5faa85a4fac9fc0b8639f33c475283f4f043c627
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100517272"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107779264"
 ---
 # <a name="storage-considerations-for-azure-functions"></a>Azure Işlevleri için depolama konuları
 
@@ -71,7 +71,7 @@ Diğer platform tarafından yönetilen müşteri verileri yalnızca iç yük den
 
 _Bu işlevsellik yalnızca Linux üzerinde çalışırken geçerlidir._ 
 
-Mevcut Azure dosya paylaşımlarını Linux işlev uygulamalarınıza bağlayabilirsiniz. Linux işlev uygulamanıza bir paylaşma bağlayarak, işlevlerinizde mevcut makine öğrenimi modellerini veya diğer verileri kullanabilirsiniz. [`az webapp config storage-account add`](/cli/azure/webapp/config/storage-account#az-webapp-config-storage-account-add)Komutunu, mevcut bir paylaşımın Linux işlev uygulamanıza bağlamak için kullanabilirsiniz. 
+Mevcut Azure dosya paylaşımlarını Linux işlev uygulamalarınıza bağlayabilirsiniz. Linux işlev uygulamanıza bir paylaşma bağlayarak, işlevlerinizde mevcut makine öğrenimi modellerini veya diğer verileri kullanabilirsiniz. [`az webapp config storage-account add`](/cli/azure/webapp/config/storage-account#az_webapp_config_storage_account_add)Komutunu, mevcut bir paylaşımın Linux işlev uygulamanıza bağlamak için kullanabilirsiniz. 
 
 Bu komutta, `share-name` var olan Azure dosya paylaşımının adıdır ve `custom-id` işlev uygulamasına bağlandığında, bu paylaşımın benzersiz bir şekilde tanımlayan herhangi bir dize olabilir. Ayrıca, `mount-path` işlev uygulamanızda paylaşıma erişildiği yoldur. `mount-path` biçiminde olmalıdır `/dir-name` ve ile başlayamaz `/home` .
 

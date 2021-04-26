@@ -4,10 +4,10 @@ description: Azure monitörünüzü Application Insights klasik kaynağınızı 
 ms.topic: conceptual
 ms.date: 09/23/2020
 ms.openlocfilehash: 5791abe33dee2e62aadb00ae1024338e1e44a900
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100584255"
 ---
 # <a name="migrate-to-workspace-based-application-insights-resources"></a>Çalışma alanı tabanlı Application Insights kaynaklarına geçirin

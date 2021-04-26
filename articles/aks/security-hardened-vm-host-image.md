@@ -4,35 +4,38 @@ description: AKS VM konak işletim sistemindeki güvenlik sağlamlaştırma hakk
 services: container-service
 author: mlearned
 ms.topic: article
-ms.date: 09/11/2019
+ms.date: 03/29/2021
 ms.author: mlearned
 ms.custom: mvc
-ms.openlocfilehash: 84b826ce33b5395db5bd38e883b3a0fb3425725b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b0866905d0228d2304ebf5c8ef930a629979d2da
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "86244047"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107012102"
 ---
 # <a name="security-hardening-for-aks-agent-node-host-os"></a>AKS aracı düğümü konak işletim sistemi için güvenlik sağlamlaştırma
 
-Azure Kubernetes Service (AKS), SOC, ISO, PCI DSS ve HIPAA standartları ile uyumlu bir güvenli hizmettir. Bu makalede, AKS sanal makine konaklarına uygulanan güvenlik sağlamlaştırma ele alınmaktadır. AKS güvenliği hakkında daha fazla bilgi için bkz. [Azure Kubernetes Service (aks) içindeki uygulamalar ve kümeler Için güvenlik kavramları](./concepts-security.md).
+Güvenli bir hizmet olarak, Azure Kubernetes hizmeti (AKS), SOC, ISO, PCI DSS ve HIPAA standartlarıyla uyumludur. Bu makalede, AKS sanal makinesi (VM) konaklarına uygulanan güvenlik sağlamlaştırma ele alınmaktadır. AKS güvenliği hakkında daha fazla bilgi için bkz. [Azure Kubernetes Service (aks) içindeki uygulamalar ve kümeler Için güvenlik kavramları](./concepts-security.md).
 
 > [!Note]
 > Bu belge yalnızca AKS 'deki Linux aracılarının kapsamına alınır.
 
-AKS kümeleri, AKS üzerinde çalışan kapsayıcılar için kullanılan güvenlik için iyileştirilmiş bir işletim sistemi çalıştıran konak sanal makinelerinde dağıtılır. Bu konak işletim sistemi, ek güvenlik sağlamlaştırma ve iyileştirmeler uygulanmış bir **Ubuntu 16.04. LTS** görüntüsünü temel alır (bkz. güvenlik sağlamlaştırma ayrıntıları).
+AKS kümeleri, AKS üzerinde çalışan kapsayıcılar için kullanılan güvenliğe iyileştirilmiş bir işletim sistemi çalıştıran ana bilgisayar VM 'lerinde dağıtılır. Bu konak işletim sistemi, daha fazla [güvenlik sağlamlaştırma](#security-hardening-features) ve iyileştirmeler uygulanmış bir **Ubuntu 16.04. LTS** görüntüsünü temel alır.
 
 Güvenlik sıkı ana bilgisayar işletim sisteminin hedefi, saldırının yüzey alanını azaltmaktır ve kapsayıcıların güvenli bir şekilde dağıtılması için iyileştirmektir.
 
 > [!Important]
-> Güvenliği sağlamlaştırılmış işletim sistemi, CIS sınama olarak işaretlendi. CIS kıyaslamalarıyla örtüşmelere karşın, amaç CIS ile uyumlu değildir. Ana bilgisayar işletim sistemi sağlamlaştırma için hedef, Microsoft 'un kendi iç ana bilgisayar güvenlik standartları ile tutarlı bir güvenlik düzeyine yakınsamaktır.
+> Güvenliği sağlamlaştırılmış işletim sistemi **, CIS sınama olarak işaretlendi** . CIS kıyaslamalarıyla örtüşirken, amaç CIS ile uyumlu değildir. Ana bilgisayar işletim sistemi sağlamlaştırma için hedef, Microsoft 'un kendi iç ana bilgisayar güvenlik standartları ile tutarlı bir güvenlik düzeyine yakınsamaktır.
 
 ## <a name="security-hardening-features"></a>Güvenlik sağlamlaştırma özellikleri
 
-* AKS, varsayılan olarak güvenlik açısından iyileştirilmiş bir konak işletim sistemi sağlar. Alternatif bir işletim sistemi seçme seçeneği yoktur.
+* AKS, varsayılan olarak güvenlik açısından iyileştirilmiş bir konak IŞLETIM sistemi sağlar, ancak alternatif bir işletim sistemi seçme seçeneği yoktur.
 
-* Azure, AKS sanal makine konaklarına günlük düzeltme ekleri (güvenlik düzeltme ekleri dahil) uygular. Bu düzeltme eklerinin bazılarının yeniden başlatılması gerekir, diğerleri bu şekilde çalışmaz. Gerektiğinde AKS VM konağının yeniden başlatmaları zamanlamaktan siz sorumlusunuz. AKS düzeltme eki uygulama hakkında yönergeler için bkz. [aks düğümlerine düzeltme eki uygulama](./node-updates-kured.md).
+* Azure, AKS sanal makine konaklarına günlük düzeltme ekleri (güvenlik düzeltme ekleri dahil) uygular. 
+    * Bu düzeltme eklerinin bazılarının yeniden başlatılması gerekir, ancak diğerleri bu şekilde olmayacaktır. 
+    * Gerektiğinde AKS VM konağını yeniden başlatmaları planlıyoruz. 
+    * AKS düzeltme eki uygulama hakkında yönergeler için bkz. [aks düğümlerine düzeltme eki uygulama](./node-updates-kured.md).
 
 ## <a name="what-is-configured"></a>Ne yapılandırıldı
 
@@ -79,14 +82,12 @@ Güvenlik sıkı ana bilgisayar işletim sisteminin hedefi, saldırının yüzey
  
 * Saldırı yüzeyi alanını daha fazla azaltmak için, işletim sisteminde gereksiz bazı çekirdek modülü sürücüleri devre dışı bırakılmıştır.
 
-* Güvenliği sağlamlaştırılmış işletim sistemi, AKS için özel olarak oluşturulup sürdürülür ve AKS platformunun dışında desteklenmez.
+* Güvenliği sağlamlaştırılmış işletim sistemi, AKS için özel olarak oluşturulup sürdürülür ve AKS platformunun **dışında desteklenmez.**
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 
 AKS güvenliği hakkında daha fazla bilgi için aşağıdaki makalelere bakın: 
 
-[Azure Kubernetes Service (AKS)](./intro-kubernetes.md)
-
-[AKS güvenlik konuları ](./concepts-security.md)
-
-[AKS en iyi uygulamaları ](./best-practices.md)
+* [Azure Kubernetes Service (AKS)](./intro-kubernetes.md)
+* [AKS güvenlik konuları](./concepts-security.md)
+* [AKS en iyi uygulamaları](./best-practices.md)

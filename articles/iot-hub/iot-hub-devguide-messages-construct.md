@@ -11,12 +11,12 @@ ms.author: asrastog
 ms.custom:
 - 'Role: Cloud Development'
 - 'Role: IoT Device'
-ms.openlocfilehash: 6d6b7122963b51619f26b8d02a8be4ad39261afb
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 21f22f9aa31210b1690d0be562643d94901ce58a
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92147703"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106079055"
 ---
 # <a name="create-and-read-iot-hub-messages"></a>IoT Hub iletilerini oluşturma ve okuma
 
@@ -71,7 +71,7 @@ Farklı protokoller kullanılarak gönderilen iletilerin kodlanması ve kodunun 
 | ileti kimliği |İstek-yanıt desenleri için kullanılan ileti için Kullanıcı tarafından ayarlanabilir bir tanımlayıcı. Biçim: büyük/küçük harfe duyarlı bir dize (en fazla 128 karakter uzunluğunda) ASCII 7 bit alfasayısal karakter + `{'-', ':', '.', '+', '%', '_', '#', '*', '?', '!', '(', ')', ',', '=', '@', ';', '$', '''}` .  |Yes|
 | sıra numarası |Her buluttan cihaza ileti için IoT Hub tarafından atanan bir sayı (cihaz kuyruğu başına benzersiz). |No|
 | kullanıcısı |[Buluttan cihaza](iot-hub-devguide-c2d-guidance.md) iletilerde belirtilen hedef. |No|
-| mutlak-süre sonu |İleti süresinin dolma tarihi ve saati. |No|   |
+| mutlak-süre sonu |İleti süresinin dolma tarihi ve saati. |No| 
 | correlation-id |İstek-yanıt desenlerinde, genellikle isteğin MessageID ' i içeren bir yanıt iletisindeki dize özelliği. |Yes|
 | user-id |İletilerin kaynağını belirtmek için kullanılan bir KIMLIK. İletiler IoT Hub tarafından oluşturulduğunda, olarak ayarlanır `{iot hub name}` . |Yes|
 | ıothub-ACK |Geri bildirim iletisi Oluşturucu. Bu özellik, cihaz tarafından ileti tüketimine yol açacak şekilde geri bildirim iletileri oluşturmak için IoT Hub istemek üzere buluttan cihaza iletimekte kullanılır. Olası değerler: **hiçbiri** (varsayılan): hiçbir geri bildirim iletisi oluşturulmaz, **pozitif**: ileti tamamlandığında bir geri bildirim iletisi alın (veya en fazla teslim sayısına ulaşıldığında), ya da **tam** **olarak pozitif** ve negatif olur. |Yes|
@@ -80,7 +80,7 @@ Farklı protokoller kullanılarak gönderilen iletilerin kodlanması ve kodunun 
 
 Sistem özelliği adları, iletilerin yönlendirildiği uç noktaya göre farklılık gösterir. Lütfen bu adlarla ilgili ayrıntılar için aşağıdaki tabloya bakın.
 
-|Sistem özelliği adı|Event Hubs|Azure Storage|Service Bus|Event Grid|
+|Sistem özelliği adı|Event Hubs|Azure Depolama|Service Bus|Event Grid|
 |--------------------|----------|-------------|-----------|----------|
 |İleti KIMLIĞI|ileti kimliği|Ileti|Ileti|ileti kimliği|
 |Kullanıcı kimliği|user-id|userId|UserId|user-id|

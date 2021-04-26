@@ -9,19 +9,19 @@ ms.date: 02/23/2021
 ms.author: normesta
 ms.reviewer: yzheng
 ms.custom: references_regions
-ms.openlocfilehash: 28fb5ffc0ce9c554294eaca9e460694856cb95a0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: de511fa30caa608c2dc87b6c0ba166ed56ff9499
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104589880"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106490191"
 ---
 # <a name="network-file-system-nfs-30-performance-considerations-in-azure-blob-storage-preview"></a>Ağ dosya sistemi (NFS) 3,0 performans konuları Azure Blob depolama (Önizleme)
 
 Blob Storage artık ağ dosya sistemi (NFS) 3,0 protokolünü desteklemektedir. Bu makale, depolama isteklerinizin performansını iyileştirmenize yardımcı olan öneriler içerir. Azure Blob depolamada NFS 3,0 desteği hakkında daha fazla bilgi edinmek için bkz. [Azure Blob Storage 'da (Önizleme) ağ dosya sistemi (NFS) 3,0 protokol desteği](network-file-system-protocol-support.md).
 
 > [!NOTE]
-> Azure Blob depolamada NFS 3,0 protokol desteği genel önizlemeye sunuldu. Şu bölgelerde Standart katman performansına sahip GPV2 Storage hesaplarını destekler: Avustralya Doğu, Kore Orta ve Orta Güney ABD. Önizleme Ayrıca tüm genel bölgelerde Premium performans katmanıyla Blok Blobu destekler.
+> Azure Blob depolamada NFS 3,0 protokol desteği genel önizlemeye sunuldu. Şu bölgelerde Standart katman performansına sahip GPV2 Storage hesaplarını destekler: Avustralya Doğu, Kore Orta, Doğu ABD ve Orta Güney ABD. Önizleme Ayrıca tüm genel bölgelerde Premium performans katmanıyla Blok Blobu destekler.
 
 ## <a name="add-clients-to-increase-throughput"></a>Aktarım hızını artırmak için istemciler ekleyin 
 

@@ -7,10 +7,10 @@ ms.manager: abhemraj
 ms.topic: how-to
 ms.date: 03/23/2021
 ms.openlocfilehash: 2de60880b511e43ffb2949a15fec2cf2a94f62fa
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105567161"
 ---
 # <a name="discover-sql-server-instances-in-an-existing-project"></a>Var olan bir projede SQL Server örnekleri bulma 

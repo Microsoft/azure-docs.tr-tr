@@ -6,13 +6,13 @@ ms.author: makromer
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019; seo-dt-2019
-ms.date: 01/08/2020
-ms.openlocfilehash: a11dbfbd6d6510b5c421e54cd2547c3aedb1bfb6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/16/2021
+ms.openlocfilehash: f9f2bf2e2204e6b74bb8a31ac856dbe276a6e983
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100378205"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588760"
 ---
 # <a name="creating-a-new-branch-in-mapping-data-flow"></a>Eşleme veri akışı 'nda yeni bir dal oluşturma
 
@@ -27,3 +27,10 @@ Dönüştürme listesinden diğer dönüştürmelere benzer yeni bir dal ekleneb
 Aşağıdaki örnekte veri akışı, TAXI seyahat verilerini okuyor. Hem gün hem de satıcı tarafından toplanan çıkış gereklidir. Aynı kaynaktan okunan iki ayrı veri akışı oluşturmak yerine yeni bir dal eklenebilir. Bu şekilde, her iki toplamaları de aynı veri akışının bir parçası olarak yürütülebilir. 
 
 ![Ekran görüntüsü, kaynaktan iki Dalla veri akışını gösterir.](media/data-flow/new-branch.png "Yeni dal ekleme")
+
+> [!NOTE]
+> Grafiğinize dönüşümler eklemek için artı (+) simgesine tıkladığınızda yalnızca sonraki dönüştürme blokları olduğunda yeni dal seçeneğini görürsünüz. Bunun nedeni, yeni dalın mevcut akışa bir başvuru oluşturduğuna ve üzerinde çalışması için daha fazla yukarı akış işlemenin yapılmasını gerektirir. Yeni dal seçeneğini görmüyorsanız, önce bir türetilmiş sütun veya diğer dönüşüm ekleyin, sonra önceki bloğa geri dönün ve yeni dalı bir seçenek olarak görürsünüz.
+
+## <a name="next-steps"></a>Sonraki adımlar
+
+Dallandırdıktan sonra [veri akışı dönüşümlerini](data-flow-transformation-overview.md) kullanmak isteyebilirsiniz

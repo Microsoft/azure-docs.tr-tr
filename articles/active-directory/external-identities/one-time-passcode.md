@@ -5,19 +5,19 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: B2B
 ms.topic: how-to
-ms.date: 03/02/2021
+ms.date: 04/06/2021
 ms.author: mimart
 author: msmimart
 manager: CelesteDG
 ms.reviewer: mal
 ms.custom: it-pro, seo-update-azuread-jan, seoapril2019
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7961997c6a6736c154b6217ee3f21682d0c4c3fc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3b4089559b341dd268928b1f150b6fc173869ead
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101688476"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107529920"
 ---
 # <a name="email-one-time-passcode-authentication"></a>E-posta bir kerelik geçiş kodu kimlik doğrulaması
 
@@ -64,19 +64,19 @@ Kullanıcının ayrıntılarında **kaynak** özelliğini görüntüleyerek bir 
 ![Kaynak değeri OTP olan bir kerelik geçiş kodu kullanıcısını gösteren ekran görüntüsü](media/one-time-passcode/guest-user-properties.png)
 
 > [!NOTE]
-> Bir Kullanıcı bir kerelik geçiş kodunu ve daha sonra bir MSA, Azure AD hesabını ya da başka bir Federasyon hesabını aldığında, bir kerelik geçiş kodu kullanarak kimlik doğrulamasından devam eder. Kimlik doğrulama yöntemini güncelleştirmek istiyorsanız, Konuk Kullanıcı hesabını silip yeniden davet edebilirsiniz.
+> Bir Kullanıcı bir kerelik geçiş kodunu ve daha sonra bir MSA, Azure AD hesabını ya da başka bir Federasyon hesabını aldığında, bir kerelik geçiş kodu kullanarak kimlik doğrulamasından devam eder. Kullanıcının kimlik doğrulama yöntemini güncelleştirmek istiyorsanız, kullanım [durumlarını sıfırlayabilirsiniz](reset-redemption-status.md).
 
-### <a name="example"></a>Örnek
+### <a name="example&quot;></a>Örnek
 
 Konuk Kullanıcı teri@gmail.com , Google Federasyonu ayarlanmamış olan Fabrikam 'a davet edilir. Teri Microsoft hesabı yok. Kimlik doğrulaması için bir kerelik geçiş kodu alırlar.
 
-## <a name="disable-email-one-time-passcode"></a>E-posta bir kerelik geçiş kodunu devre dışı bırak
+## <a name=&quot;disable-email-one-time-passcode&quot;></a>E-posta bir kerelik geçiş kodunu devre dışı bırak
 
-2021 Ekim 'e başlayarak, tüm mevcut kiracılar için e-posta bir kerelik geçiş kodu özelliği açık olur ve yeni kiracılar için varsayılan olarak etkinleştirilir. Bu sırada, Microsoft, B2B işbirliği senaryolarında yönetilmeyen ("viral" veya "tam zamanında") Azure AD hesapları ve kiracılar oluşturarak davetlerin kullanımını desteklememektedir. Konuk kullanıcılarınız için sorunsuz bir geri dönüş kimlik doğrulama yöntemi sağladığından e-posta bir kerelik geçiş kodu özelliğini etkinleştiriyoruz. Ancak, bu özelliği kullanmayı tercih ederseniz bu özelliği devre dışı bırakma seçeneğiniz vardır.
+2021 Ekim 'e başlayarak, tüm mevcut kiracılar için e-posta bir kerelik geçiş kodu özelliği açık olur ve yeni kiracılar için varsayılan olarak etkinleştirilir. Bu sırada, Microsoft, B2B işbirliği senaryolarında yönetilmeyen (&quot;viral&quot; veya &quot;tam zamanında") Azure AD hesapları ve kiracılar oluşturarak davetlerin kullanımını desteklememektedir. Konuk kullanıcılarınız için sorunsuz bir geri dönüş kimlik doğrulama yöntemi sağladığından e-posta bir kerelik geçiş kodu özelliğini etkinleştiriyoruz. Ancak, bu özelliği kullanmayı tercih ederseniz bu özelliği devre dışı bırakma seçeneğiniz vardır.
 
 > [!NOTE]
 >
-> Kiracınızda e-posta geçiş kodu özelliği etkinleştirilmişse ve devre dışı bırakırsanız, bir kerelik geçiş kodu kullanan Konuk kullanıcılar oturum açamaz. Konuk kullanıcıyı silebilir ve başka bir kimlik doğrulama yöntemi kullanarak tekrar oturum açabilmeniz için yeniden davet edebilirsiniz.
+> Kiracınızda e-posta geçiş kodu özelliği etkinleştirilmişse ve devre dışı bırakırsanız, bir kerelik geçiş kodu kullanan Konuk kullanıcılar oturum açamaz. Başka bir kimlik doğrulama yöntemi kullanarak yeniden oturum açabilmeniz için kullanım [durumlarını sıfırlayabilirsiniz](reset-redemption-status.md) .
 
 ### <a name="to-disable-the-email-one-time-passcode-feature"></a>E-posta bir kerelik geçiş kodu özelliğini devre dışı bırakmak için
 
@@ -114,7 +114,7 @@ Ancak, özelliği devre dışı bırakmayı tercih ediyorsanız ve BT 'nin 2021 
 
 ## <a name="note-for-azure-us-government-customers"></a>Azure ABD kamu müşterileri için göz önünde bulunun
 
-E-posta bir kerelik geçiş kodu özelliği, Azure ABD kamu bulutunda varsayılan olarak devre dışıdır.  
+E-posta bir kerelik geçiş kodu özelliği, Azure ABD kamu bulutunda varsayılan olarak devre dışıdır. Bu özellik etkinleştirilmediği takdirde, iş ortaklarınız oturum açamıyor. Azure genel bulutundan farklı olarak, Azure ABD kamu bulutu, self servis Azure Active Directory hesaplarıyla davetleri benimseme desteğini desteklemez.
 
  ![E-posta bir kerelik geçiş kodu devre dışı](media/one-time-passcode/enable-email-otp-disabled.png)
 
@@ -122,7 +122,7 @@ Azure ABD kamu bulutunda e-posta bir kerelik geçiş kodu özelliğini etkinleş
 
 1. [Azure Portal](https://portal.azure.com) Azure AD Genel Yöneticisi olarak oturum açın.
 2. Gezinti bölmesinde **Azure Active Directory**' yi seçin.
-3. **Kurumsal ilişki** ayarları ' nı seçin   >  ****.
+3. **Kuruluş ilişkileri**   >  **tüm kimlik sağlayıcıları**' nı seçin.
 
    > [!NOTE]
    > - **Kuruluş ilişkilerini** görmüyorsanız, üstteki arama çubuğunda "dış kimlikler" araması yapın.

@@ -10,12 +10,12 @@ ms.topic: conceptual
 ms.date: 01/20/2021
 ms.author: kgremban
 monikerRange: =iotedge-2018-06
-ms.openlocfilehash: 330eaf5c12372347917e9f3a4aeafb6a2088c592
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 3c7fd6c842d465dd5af5257628044666f10f2ece
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103492583"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538194"
 ---
 # <a name="what-is-azure-iot-edge-for-linux-on-windows-preview"></a>Windows üzerinde Linux için Azure IoT Edge nedir (Önizleme)?
 
@@ -48,7 +48,7 @@ Windows süreci ile Linux sanal makinesi arasındaki çift yönlü iletişim, Wi
 
 Windows üzerinde Linux için IoT Edge, Linux ve Windows bileşenleri arasında birlikte çalışabilirliği vurgular.
 
-Windows Uygulamaları ve IoT Edge modülleri arasındaki iletişimi gösteren örnekler için bkz. [Windows 10 IoT örnekleri](https://github.com/microsoft/Windows-IoT-Samples).
+Windows Uygulamaları ve IoT Edge modülleri arasındaki iletişimi gösteren örnekler için bkz. [eFlow & Windows 10 IoT örnekleri](https://aka.ms/AzEFLOW-Samples).
 
 ## <a name="public-preview"></a>Genel Önizleme
 
@@ -58,7 +58,7 @@ Windows üzerinde Linux için IoT Edge Şu anda [genel önizlemededir](https://a
 
 Windows 'da Linux için IoT Edge hakkında yardım almak için destek ve geri bildirim kanallarını IoT Edge kullanın.
 
-**Hataları raporlama** – hata IoT Edge açık kaynaklı projenin [sorunlar sayfasında](https://github.com/azure/iotedge/issues) hatalar bildirilebilir. Windows üzerinde Linux için Azure IoT Edge ilgili hatalar, [ıotedge-eFlow sorunları sayfasında](https://github.com/azure/iotedge-eflow/issues)bildirilebilir.
+**Hataları raporlama** – hata IoT Edge açık kaynaklı projenin [sorunlar sayfasında](https://github.com/azure/iotedge/issues) hatalar bildirilebilir. Windows üzerinde Linux için Azure IoT Edge ilgili hatalar, [ıotedge-eFlow sorunları sayfasında](https://aka.ms/AzEFLOW-Issues)bildirilebilir.
 
 **Microsoft müşteri destek ekibi** – [Destek planına](https://azure.microsoft.com/support/plans/) sahip olan kullanıcılar, doğrudan [Azure Portal](https://ms.portal.azure.com/signin/index/?feature.settingsportalinstance=mpac)bir destek bileti oluşturarak Microsoft müşteri destek ekibine geçebilir.
 

@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/13/2020
 ms.author: kumud
-ms.openlocfilehash: 5de909d0d57ae212fa562eb31551e2271d307d47
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 82f23c1fea29e2a88dd2a67ec9c89c7bf05bfff7
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101694266"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783512"
 ---
 # <a name="create-change-or-delete-a-network-security-group"></a>Ağ güvenlik grubu oluşturma, değiştirme veya silme
 
@@ -67,7 +67,7 @@ Her bir Azure konumu ve aboneliği için kaç ağ güvenlik grubunun oluşturabi
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az network nsg create](/cli/azure/network/nsg#az-network-nsg-create) |
+| Azure CLI | [az network nsg create](/cli/azure/network/nsg#az_network_nsg_create) |
 | PowerShell | [New-AzNetworkSecurityGroup](/powershell/module/az.network/new-aznetworksecuritygroup) |
 
 ### <a name="view-all-network-security-groups"></a>Tüm ağ güvenlik gruplarını görüntüle
@@ -78,7 +78,7 @@ Ağ güvenlik gruplarınızı görüntülemek için [Azure Portal](https://porta
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network NSG List](/cli/azure/network/nsg#az-network-nsg-list) |
+| Azure CLI | [az Network NSG List](/cli/azure/network/nsg#az_network_nsg_list) |
 | PowerShell | [Get-AzNetworkSecurityGroup](/powershell/module/az.network/get-aznetworksecuritygroup) |
 
 ### <a name="view-details-of-a-network-security-group"></a>Bir ağ güvenlik grubunun ayrıntılarını görüntüleme
@@ -103,7 +103,7 @@ Listelenen ortak Azure ayarları hakkında daha fazla bilgi edinmek için aşağ
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network NSG Show](/cli/azure/network/nsg#az-network-nsg-show) |
+| Azure CLI | [az Network NSG Show](/cli/azure/network/nsg#az_network_nsg_show) |
 | PowerShell | [Get-AzNetworkSecurityGroup](/powershell/module/az.network/get-aznetworksecuritygroup) |
 
 ### <a name="change-a-network-security-group"></a>Ağ güvenlik grubunu değiştirme
@@ -118,7 +118,7 @@ En yaygın değişiklikler, [bir güvenlik kuralı eklemek](#create-a-security-r
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network NSG Update](/cli/azure/network/nsg#az-network-nsg-update) |
+| Azure CLI | [az Network NSG Update](/cli/azure/network/nsg#az_network_nsg_update) |
 | PowerShell | [Set-AzNetworkSecurityGroup](/powershell/module/az.network/set-aznetworksecuritygroup) |
 
 ### <a name="associate-or-dissociate-a-network-security-group-to-or-from-a-subnet-or-network-interface"></a>Bir ağ güvenlik grubunu bir alt ağ veya ağ arabiriminden ilişkilendir veya ilişkisini kaldır
@@ -139,7 +139,7 @@ Bir ağ güvenlik grubu, herhangi bir alt ağ veya ağ arabirimi ile ilişkilend
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network NSG Delete](/cli/azure/network/nsg#az-network-nsg-delete) |
+| Azure CLI | [az Network NSG Delete](/cli/azure/network/nsg#az_network_nsg_delete) |
 | PowerShell | [Remove-AzNetworkSecurityGroup](/powershell/module/az.network/remove-aznetworksecuritygroup) |
 
 ## <a name="work-with-security-rules"></a>Güvenlik kuralları ile çalışma
@@ -182,7 +182,7 @@ Her bir Azure konumu ve aboneliği için ağ güvenlik grubu başına kaç kural
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az network nsg rule create](/cli/azure/network/nsg/rule#az-network-nsg-rule-create) |
+| Azure CLI | [az network nsg rule create](/cli/azure/network/nsg/rule#az_network_nsg_rule_create) |
 | PowerShell | [New-AzNetworkSecurityRuleConfig](/powershell/module/az.network/new-aznetworksecurityruleconfig) |
 
 ### <a name="view-all-security-rules"></a>Tüm güvenlik kurallarını görüntüle
@@ -201,7 +201,7 @@ Liste, oluşturduğunuz kuralları ve ağ güvenlik grubunun [varsayılan güven
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az network nsg rule list](/cli/azure/network/nsg/rule#az-network-nsg-rule-list) |
+| Azure CLI | [az network nsg rule list](/cli/azure/network/nsg/rule#az_network_nsg_rule_list) |
 | PowerShell | [Get-AzNetworkSecurityRuleConfig](/powershell/module/az.network/get-aznetworksecurityruleconfig) |
 
 ### <a name="view-details-of-a-security-rule"></a>Bir güvenlik kuralının ayrıntılarını görüntüleme
@@ -221,7 +221,7 @@ Liste, oluşturduğunuz kuralları ve ağ güvenlik grubunun [varsayılan güven
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network NSG Rule Show](/cli/azure/network/nsg/rule#az-network-nsg-rule-show) |
+| Azure CLI | [az Network NSG Rule Show](/cli/azure/network/nsg/rule#az_network_nsg_rule_show) |
 | PowerShell | [Get-AzNetworkSecurityRuleConfig](/powershell/module/az.network/get-aznetworksecurityruleconfig) |
 
 ### <a name="change-a-security-rule"></a>Bir güvenlik kuralını değiştirme
@@ -237,7 +237,7 @@ Liste, oluşturduğunuz kuralları ve ağ güvenlik grubunun [varsayılan güven
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az network nsg rule update](/cli/azure/network/nsg/rule#az-network-nsg-rule-update) |
+| Azure CLI | [az network nsg rule update](/cli/azure/network/nsg/rule#az_network_nsg_rule_update) |
 | PowerShell | [Set-AzNetworkSecurityRuleConfig](/powershell/module/az.network/set-aznetworksecurityruleconfig) |
 
 ### <a name="delete-a-security-rule"></a>Bir güvenlik kuralını Sil
@@ -253,7 +253,7 @@ Liste, oluşturduğunuz kuralları ve ağ güvenlik grubunun [varsayılan güven
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network NSG Rule Delete](/cli/azure/network/nsg/rule#az-network-nsg-rule-delete) |
+| Azure CLI | [az Network NSG Rule Delete](/cli/azure/network/nsg/rule#az_network_nsg_rule_delete) |
 | PowerShell | [Remove-AzNetworkSecurityRuleConfig](/powershell/module/az.network/remove-aznetworksecurityruleconfig) |
 
 ## <a name="work-with-application-security-groups"></a>Uygulama güvenlik gruplarıyla çalışma
@@ -285,7 +285,7 @@ Bir uygulama güvenlik grubu sıfır veya daha fazla ağ arabirimi içerir. Daha
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network ASG Create](/cli/azure/network/asg#az-network-asg-create) |
+| Azure CLI | [az Network ASG Create](/cli/azure/network/asg#az_network_asg_create) |
 | PowerShell | [New-AzApplicationSecurityGroup](/powershell/module/az.network/new-azapplicationsecuritygroup) |
 
 ### <a name="view-all-application-security-groups"></a>Tüm uygulama güvenlik gruplarını görüntüle
@@ -296,7 +296,7 @@ Uygulama güvenlik gruplarınızı görüntülemek için [Azure Portal](https://
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network ASG List](/cli/azure/network/asg#az-network-asg-list) |
+| Azure CLI | [az Network ASG List](/cli/azure/network/asg#az_network_asg_list) |
 | PowerShell | [Get-AzApplicationSecurityGroup](/powershell/module/az.network/get-azapplicationsecuritygroup) |
 
 ### <a name="view-details-of-a-specific-application-security-group"></a>Belirli bir uygulama güvenlik grubunun ayrıntılarını görüntüleme
@@ -309,7 +309,7 @@ Uygulama güvenlik gruplarınızı görüntülemek için [Azure Portal](https://
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network ASG Show](/cli/azure/network/asg#az-network-asg-show) |
+| Azure CLI | [az Network ASG Show](/cli/azure/network/asg#az_network_asg_show) |
 | PowerShell | [Get-AzApplicationSecurityGroup](/powershell/module/az.network/get-azapplicationsecuritygroup) |
 
 ### <a name="change-an-application-security-group"></a>Uygulama güvenlik grubunu değiştirme
@@ -329,7 +329,7 @@ Uygulama güvenlik gruplarınızı görüntülemek için [Azure Portal](https://
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network ASG Update](/cli/azure/network/asg#az-network-asg-update) |
+| Azure CLI | [az Network ASG Update](/cli/azure/network/asg#az_network_asg_update) |
 | PowerShell | PowerShell cmdlet 'i yok |
 
 ### <a name="delete-an-application-security-group"></a>Uygulama güvenlik grubunu silme
@@ -346,7 +346,7 @@ Herhangi bir ağ arabirimi içeriyorsa, bir uygulama güvenlik grubunu silemezsi
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network ASG Delete](/cli/azure/network/asg#az-network-asg-delete) |
+| Azure CLI | [az Network ASG Delete](/cli/azure/network/asg#az_network_asg_delete) |
 | PowerShell | [Remove-AzApplicationSecurityGroup](/powershell/module/az.network/remove-azapplicationsecuritygroup) |
 
 ## <a name="permissions"></a>İzinler

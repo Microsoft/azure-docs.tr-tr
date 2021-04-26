@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 3/18/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: ef04e2b4c820c14ea7df6c35ecb0189ef31ef7dc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 87ff75a07bd1b91121d614e0f41c0ecf216e1b41
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98665047"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791724"
 ---
 # <a name="create-and-manage-azure-database-for-mariadb-firewall-rules-by-using-the-azure-cli"></a>Azure CLı kullanarak MariaDB güvenlik duvarı kuralları için Azure veritabanı oluşturma ve yönetme
 Sunucu düzeyinde güvenlik duvarı kuralları, belirli bir IP adresinden veya bir IP adresi aralığından MariaDB sunucusu için Azure veritabanı 'na erişimi yönetmek için kullanılabilir. Uygun Azure CLı komutlarını kullanarak sunucunuzu yönetmek için güvenlik duvarı kuralları oluşturabilir, güncelleştirebilir, silebilir, listeleyebilir ve gösterebilirsiniz. MariaDB güvenlik duvarları için Azure veritabanı 'na genel bakış için bkz. [MariaDB sunucusu Için Azure veritabanı güvenlik duvarı kuralları](./concepts-firewall-rules.md).
@@ -47,25 +47,25 @@ Komut
 
 3. Sorulduğunda, Azure kimlik bilgilerinizi kullanarak oturum açın.
 
-4. Oturum açma yetkilendirildikten sonra, konsolda aboneliklerin listesi yazdırılır. Geçerli aboneliği kullanmak üzere ayarlamak için istenen aboneliğin KIMLIĞINI kopyalayın. [Az Account set](/cli/azure/account#az-account-set) komutunu kullanın.
+4. Oturum açma yetkilendirildikten sonra, konsolda aboneliklerin listesi yazdırılır. Geçerli aboneliği kullanmak üzere ayarlamak için istenen aboneliğin KIMLIĞINI kopyalayın. [Az Account set](/cli/azure/account#az_account_set) komutunu kullanın.
    ```azurecli-interactive
    az account set --subscription <your subscription id>
    ```
 
-5. Adlarından emin değilseniz, aboneliğiniz ve kaynak grubunuz için Azure veritabanı sunucularını listeleyin. [Az MariaDB sunucu listesi](/cli/azure/mariadb/server#az-mariadb-server-list) komutunu kullanın.
+5. Adlarından emin değilseniz, aboneliğiniz ve kaynak grubunuz için Azure veritabanı sunucularını listeleyin. [Az MariaDB sunucu listesi](/cli/azure/mariadb/server#az_mariadb_server_list) komutunu kullanın.
 
    ```azurecli-interactive
    az mariadb server list --resource-group myresourcegroup
    ```
 
-   Üzerinde çalışmak üzere MariaDB sunucusunu belirtmeniz gereken, listede ad özniteliğini aklınızda bulabilirsiniz. Gerekirse, bu sunucunun ayrıntılarını onaylayın ve ad özniteliğini kullanarak doğru olduğundan emin olun. [Az MariaDB Server Show](/cli/azure/mariadb/server#az-mariadb-server-show) komutunu kullanın.
+   Üzerinde çalışmak üzere MariaDB sunucusunu belirtmeniz gereken, listede ad özniteliğini aklınızda bulabilirsiniz. Gerekirse, bu sunucunun ayrıntılarını onaylayın ve ad özniteliğini kullanarak doğru olduğundan emin olun. [Az MariaDB Server Show](/cli/azure/mariadb/server#az_mariadb_server_show) komutunu kullanın.
 
    ```azurecli-interactive
    az mariadb server show --resource-group myresourcegroup --name mydemoserver
    ```
 
 ## <a name="list-firewall-rules-on-azure-database-for-mariadb-server"></a>MariaDB sunucusu için Azure veritabanı 'nda güvenlik duvarı kuralları listeleme 
-Sunucu adını ve kaynak grubu adını kullanarak, sunucuda var olan sunucu güvenlik duvarı kurallarını listeleyin. [Az MariaDB Server Firewall List](/cli/azure/mariadb/server/firewall-rule#az-mariadb-server-firewall-rule-list) komutunu kullanın.  Sunucu adı özniteliğinin-- **Name** anahtarında değil, **--Server** anahtarında belirtildiğine dikkat edin. 
+Sunucu adını ve kaynak grubu adını kullanarak, sunucuda var olan sunucu güvenlik duvarı kurallarını listeleyin. [Az MariaDB Server Firewall List](/cli/azure/mariadb/server/firewall-rule#az_mariadb_server_firewall_rule_list) komutunu kullanın.  Sunucu adı özniteliğinin-- **Name** anahtarında değil, **--Server** anahtarında belirtildiğine dikkat edin. 
 ```azurecli-interactive
 az mariadb server firewall-rule list --resource-group myresourcegroup --server-name mydemoserver
 ```
@@ -74,7 +74,7 @@ az mariadb server firewall-rule list --resource-group myresourcegroup --server-n
 az mariadb server firewall-rule list --resource-group myresourcegroup --server-name mydemoserver --output table
 ```
 ## <a name="create-a-firewall-rule-on-azure-database-for-mariadb-server"></a>MariaDB sunucusu için Azure veritabanı 'nda bir güvenlik duvarı kuralı oluşturma
-Azure MariaDB sunucu adını ve kaynak grubu adını kullanarak sunucuda yeni bir güvenlik duvarı kuralı oluşturun. [Az MariaDB Server Firewall Create](/cli/azure/mariadb/server/firewall-rule#az-mariadb-server-firewall-rule-create) komutunu kullanın. Kural için bir ad, başlangıç IP 'si ve bitiş IP 'si (bir IP adresi aralığına erişim sağlamak için) belirtin.
+Azure MariaDB sunucu adını ve kaynak grubu adını kullanarak sunucuda yeni bir güvenlik duvarı kuralı oluşturun. [Az MariaDB Server Firewall Create](/cli/azure/mariadb/server/firewall-rule#az_mariadb_server_firewall_rule_create) komutunu kullanın. Kural için bir ad, başlangıç IP 'si ve bitiş IP 'si (bir IP adresi aralığına erişim sağlamak için) belirtin.
 ```azurecli-interactive
 az mariadb server firewall-rule create --resource-group myresourcegroup --server-name mydemoserver --name FirewallRule1 --start-ip-address 13.83.152.0 --end-ip-address 13.83.152.15
 ```
@@ -96,7 +96,7 @@ az mariadb server firewall-rule create --resource-group myresourcegroup --server
 Başarılı olduğunda, her bir komut çıkışı oluşturma, oluşturduğunuz güvenlik duvarı kuralının (varsayılan olarak) JSON biçiminde ayrıntılarını listeler. Bir hata oluşursa, çıkış bunun yerine hata iletisi metnini gösterir.
 
 ## <a name="update-a-firewall-rule-on-azure-database-for-mariadb-server"></a>MariaDB sunucusu için Azure veritabanı 'nda bir güvenlik duvarı kuralı güncelleştirme 
-Azure MariaDB sunucu adını ve kaynak grubu adını kullanarak, sunucuda var olan bir güvenlik duvarı kuralını güncelleştirin. [Az MariaDB Server Firewall Update](/cli/azure/mariadb/server/firewall-rule#az-mariadb-server-firewall-rule-update) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını girdi olarak ve güncelleştirilecek başlangıç IP ve bitiş IP özniteliklerini belirtin.
+Azure MariaDB sunucu adını ve kaynak grubu adını kullanarak, sunucuda var olan bir güvenlik duvarı kuralını güncelleştirin. [Az MariaDB Server Firewall Update](/cli/azure/mariadb/server/firewall-rule#az_mariadb_server_firewall_rule_update) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını girdi olarak ve güncelleştirilecek başlangıç IP ve bitiş IP özniteliklerini belirtin.
 ```azurecli-interactive
 az mariadb server firewall-rule update --resource-group myresourcegroup --server-name mydemoserver --name FirewallRule1 --start-ip-address 13.83.152.0 --end-ip-address 13.83.152.1
 ```
@@ -106,14 +106,14 @@ Başarılı olduğunda, komut çıktısı güncelleştirdiğiniz güvenlik duvar
 > Güvenlik duvarı kuralı yoksa, kural Update komutu tarafından oluşturulur.
 
 ## <a name="show-firewall-rule-details-on-azure-database-for-mariadb-server"></a>MariaDB sunucusu için Azure veritabanı 'nda güvenlik duvarı kuralı ayrıntılarını göster
-Azure MariaDB sunucu adını ve kaynak grubu adını kullanarak, sunucudan mevcut güvenlik duvarı kuralı ayrıntılarını gösterin. [Az MariaDB Server Firewall Show](/cli/azure/mariadb/server/firewall-rule#az-mariadb-server-firewall-rule-show) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını girdi olarak belirtin.
+Azure MariaDB sunucu adını ve kaynak grubu adını kullanarak, sunucudan mevcut güvenlik duvarı kuralı ayrıntılarını gösterin. [Az MariaDB Server Firewall Show](/cli/azure/mariadb/server/firewall-rule#az_mariadb_server_firewall_rule_show) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını girdi olarak belirtin.
 ```azurecli-interactive
 az mariadb server firewall-rule show --resource-group myresourcegroup --server-name mydemoserver --name FirewallRule1
 ```
 Başarılı olduğunda komut çıktısı, belirttiğiniz güvenlik duvarı kuralının, JSON biçiminde (varsayılan olarak) ayrıntılarını listeler. Bir hata oluşursa, çıkış bunun yerine hata iletisi metnini gösterir.
 
 ## <a name="delete-a-firewall-rule-on-azure-database-for-mariadb-server"></a>MariaDB sunucusu için Azure veritabanı 'nda bir güvenlik duvarı kuralı silme
-Azure MariaDB sunucu adını ve kaynak grubu adını kullanarak, var olan bir güvenlik duvarı kuralını sunucudan kaldırın. [Az MariaDB Server Firewall Delete](/cli/azure/mariadb/server/firewall-rule#az-mariadb-server-firewall-rule-delete) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını belirtin.
+Azure MariaDB sunucu adını ve kaynak grubu adını kullanarak, var olan bir güvenlik duvarı kuralını sunucudan kaldırın. [Az MariaDB Server Firewall Delete](/cli/azure/mariadb/server/firewall-rule#az_mariadb_server_firewall_rule_delete) komutunu kullanın. Mevcut güvenlik duvarı kuralının adını belirtin.
 ```azurecli-interactive
 az mariadb server firewall-rule delete --resource-group myresourcegroup --server-name mydemoserver --name FirewallRule1
 ```

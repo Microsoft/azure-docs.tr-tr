@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 283d7d1c83dc4a68901c17c36b548e00e1044e34
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: e62aed02a0ad5f26ec8fd0a79de5e91269386095
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629396"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106450385"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -41,12 +41,12 @@ except Exception as ex:
 Hala uygulama dizininde, komutunu kullanarak Python paketi için Azure Communication Services yönetim istemcisi kitaplığı ' nı da yükleyebilirsiniz `pip install` .
 
 ```console
-pip install azure-communication-phone-numbers
+pip install azure-communication-phonenumbers
 ```
 
 ## <a name="authenticate-the-phone-numbers-client"></a>Telefon numaraları Istemcisinin kimliğini doğrulama
 
-`PhoneNumbersClient`Azure Active Directory kimlik doğrulaması kullanmak için etkinleştirilir. Nesnesini kullanmak `DefaultAzureCredential` Azure Active Directory kullanmaya başlamak için en kolay yoldur ve komutunu kullanarak yükleyebilirsiniz `pip install` . 
+`PhoneNumbersClient`Azure Active Directory kimlik doğrulaması kullanmak için etkinleştirilir. Nesnesini kullanmak `DefaultAzureCredential` Azure Active Directory kullanmaya başlamak için en kolay yoldur ve komutunu kullanarak yükleyebilirsiniz `pip install` .
 
 ```console
 pip install azure-identity
@@ -61,7 +61,7 @@ import os
 from azure.communication.phonenumbers import PhoneNumbersClient
 from azure.identity import DefaultAzureCredential
 
-# You can find your endpoint from your resource in the Azure Portal
+# You can find your endpoint from your resource in the Azure portal
 endpoint = 'https://<RESOURCE_NAME>.communication.azure.com'
 try:
     print('Azure Communication Services - Phone Numbers Quickstart')
@@ -72,13 +72,13 @@ except Exception as ex:
     print(ex)
 ```
 
-Alternatif olarak, kimlik doğrulaması yapmak için iletişim kaynağından bitiş noktası ve erişim anahtarı kullanmak da daha fazla erişilebilir.
+Alternatif olarak, kimlik doğrulaması için iletişim kaynağından uç nokta ve erişim anahtarı kullanmak da mümkündür.
 
 ```python
 import os
 from azure.communication.phonenumbers import PhoneNumbersClient
 
-# You can find your connection string from your resource in the Azure Portal
+# You can find your connection string from your resource in the Azure portal
 connection_string = 'https://<RESOURCE_NAME>.communication.azure.com/;accesskey=<YOUR_ACCESS_KEY>'
 try:
     print('Azure Communication Services - Phone Numbers Quickstart')
@@ -101,7 +101,7 @@ import os
 from azure.communication.phonenumbers import PhoneNumbersClient, PhoneNumberCapabilityType, PhoneNumberAssignmentType, PhoneNumberType, PhoneNumberCapabilities
 from azure.identity import DefaultAzureCredential
 
-# You can find your endpoint from your resource in the Azure Portal
+# You can find your endpoint from your resource in the Azure portal
 endpoint = 'https://<RESOURCE_NAME>.communication.azure.com'
 try:
     print('Azure Communication Services - Phone Numbers Quickstart')
@@ -137,15 +137,15 @@ Telefon numarası arama sonucu bir `PhoneNumberSearchResult` . Bu, `searchId` ar
 ```python
 import os
 from azure.communication.phonenumbers import (
-    PhoneNumbersClient, 
-    PhoneNumberCapabilityType, 
-    PhoneNumberAssignmentType, 
-    PhoneNumberType, 
+    PhoneNumbersClient,
+    PhoneNumberCapabilityType,
+    PhoneNumberAssignmentType,
+    PhoneNumberType,
     PhoneNumberCapabilities
 )
 from azure.identity import DefaultAzureCredential
 
-# You can find your endpoint from your resource in the Azure Portal
+# You can find your endpoint from your resource in the Azure portal
 endpoint = 'https://<RESOURCE_NAME>.communication.azure.com'
 try:
     print('Azure Communication Services - Phone Numbers Quickstart')
@@ -180,7 +180,7 @@ except Exception as ex:
 
 ### <a name="get-purchased-phone-numbers"></a>Satın alınan telefon numaralarını al
 
-Bir satın alma numarasından sonra, istemciden alabilirsiniz. 
+Bir satın alma numarasından sonra, istemciden alabilirsiniz.
 
 ```python
 purchased_phone_number_information = phone_numbers_client.get_purchased_phone_number("+18001234567")

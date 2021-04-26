@@ -13,12 +13,12 @@ ms.workload: infrastructure
 ms.date: 07/04/2019
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: f77c16f16ddac01329a8315893021767a4120295
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 97c07f010fad6c12424b1684d4ff5e12c7cac3ce
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102179247"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553252"
 ---
 # <a name="operating-system-upgrade"></a>İşletim sistemi yükseltme
 Bu belgede, HANA büyük örneklerinde işletim sistemi yükseltmeleriyle ilgili ayrıntılar açıklanmaktadır.
@@ -60,10 +60,12 @@ Düzeltme eki uygulama, sistem yükseltmeleri ve müşteriler tarafından yapıl
   |---------------|-------------------------|--------------------|--------------|--------------|
   |   SuSE        |  SLES 12 SP2            |   3.1.3 h           |  2.3.0.40    |   1.6.0.34   |
   |   SuSE        |  SLES 12 SP3            |   3.1.3 h           |  2.3.0.44    |   1.6.0.36   |
-  |   SuSE        |  SLES 12 SP4            |   3.2.3 ı           |  4.0.0.6     |   2.0.0.60   |
   |   SuSE        |  SLES 12 SP2            |   3.2.3 ı           |  2.3.0.45    |   1.6.0.37   |
   |   SuSE        |  SLES 12 SP3            |   3.2.3 ı           |  2.3.0.43    |   1.6.0.36   |
-  |   SuSE        |  SLES 12 SP5            |   3.2.3 ı           |  4.0.0.8     |   2.0.0.60   |
+  |   SuSE        |  SLES 12 SP4            |   3.2.3 ı           |  4.0.0.6     |   2.0.0.60   |
+  |   SuSE        |  SLES 12 SP5            |   4.1.1 b           |  4.0.0.6     |   2.0.0.59   |
+  |   SuSE        |  SLES 15 SP1            |   4.1.1 b           |  4.0.0.8     |   2.0.0.60   |
+  |   SuSE        |  SLES 15 SP1            |   4.1.1 b           |  4.0.0.8     |   2.0.0.60   |
   |   Red Hat     |  RHEL 7,2               |   3.1.3 h           |  2.3.0.39    |   1.6.0.34   |
   |   Red Hat     |  RHEL 7,6               |   3.2.3 ı           |  3.1.137.5   |   2.0.0.50   |
   |   Red Hat     |  RHEL 7,6               |   4.1.1 b           |  4.0.0.8     |   2.0.0.60   |

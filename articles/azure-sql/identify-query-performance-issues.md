@@ -11,12 +11,12 @@ author: jovanpop-msft
 ms.author: jovanpop
 ms.reviewer: wiassaf, sstein
 ms.date: 1/14/2021
-ms.openlocfilehash: 4d0f5404a64eae99ced0dd797954ba042b50060f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 039332a8728e5d7e5b605f51f4bb53e6dcbb6381
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98217235"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109178"
 ---
 # <a name="detectable-types-of-query-performance-bottlenecks-in-azure-sql-database"></a>Azure SQL Veritabanı'nda algılanabilir sorgu performansı sorunu türleri
 [!INCLUDE[appliesto-sqldb-sqlmi](includes/appliesto-sqldb-sqlmi.md)]
@@ -139,7 +139,7 @@ Yeniden derleme (veya önbellek çıkarılması sonrasında yeni derleme), oriji
 
 - **Değiştirilen fiziksel tasarım**: Örneğin, yeni oluşturulan dizinler bir sorgunun gereksinimlerini daha etkin bir şekilde kapsar. Sorgu iyileştiricisi, yeni bir derlemede kullanılabilir ve bu yeni dizin kullanılarak sorgu yürütmenin ilk sürümü için başlangıçta seçilmiş olan veri yapısını kullanmaktan daha iyi bir hale gelebilir. Başvurulan nesnelerde yapılan tüm fiziksel değişiklikler, derleme zamanında yeni bir plan seçimine neden olabilirler.
 
-- **Sunucu kaynak farkları**: bir sistemdeki bir plan başka bir sistemdeki plandan farklıysa, kullanılabilir işlemcilerin sayısı gibi kaynak kullanılabilirliği, hangi planın oluşturulduğunu etkileyebilir. Örneğin, bir sistemin daha fazla işlemcisi varsa, paralel bir plan seçilebilir.
+- **Sunucu kaynak farkları**: bir sistemdeki bir plan başka bir sistemdeki plandan farklıysa, kullanılabilir işlemcilerin sayısı gibi kaynak kullanılabilirliği, hangi planın oluşturulduğunu etkileyebilir. Örneğin, bir sistemin daha fazla işlemcisi varsa, paralel bir plan seçilebilir. Azure SQL veritabanı 'nda paralellik hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı 'nda en yüksek paralellik derecesi (MAXDOP) yapılandırma](database/configure-max-degree-of-parallelism.md).
 
 - **Farklı istatistikler**: başvurulan nesnelerle ilişkili istatistikler değişmiş olabilir veya özgün sistemin istatistikleriyle, bu durum önemli ölçüde farklı olabilir. İstatistik değişikliği ve yeniden derleme gerçekleştiğinde, sorgu iyileştiricisi değiştiği sırada başlangıç istatistiklerini kullanır. Düzeltilen istatistiklerin veri dağıtımları ve frekansları, özgün derlemeden farklı bir farklılık gösterebilir. Bu değişiklikler, kardinalite tahminleri oluşturmak için kullanılır. (*Kardinalite tahminleri* , mantıksal sorgu ağacı üzerinden akışı beklenen satır sayısıdır.) Kardinalite tahminlerinde yapılan değişiklikler, farklı fiziksel işleçler ve ilişkili işlem siparişleri seçmenize yol açabilir. İstatistikte küçük değişiklikler bile değiştirilen bir sorgu yürütme planına yol açabilir.
 
@@ -181,6 +181,8 @@ Bir CPU sorunu sunan iş yükü birimi değişikliğini belirlemek her zaman kol
 
 [İş yükü artışsını](database/intelligent-insights-troubleshoot-performance.md#workload-increase) ve [gerileme planını](database/intelligent-insights-troubleshoot-performance.md#plan-regression)algılamak için akıllı içgörüler kullanın.
 
+- **Paralellik**: aşırı paralellik, diğer CPU ve çalışan iş parçacığı kaynakları sorgularını gerçekleştirerek diğer eşzamanlı iş yükü performansına neden olabilir. Azure SQL veritabanı 'nda paralellik hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı 'nda en yüksek paralellik derecesi (MAXDOP) yapılandırma](database/configure-max-degree-of-parallelism.md).
+
 ## <a name="waiting-related-problems"></a>Bekleme ile ilgili sorunlar
 
 Bir alt plan planını ve yürütme sorunlarıyla ilgili *bekleme* sorunlarını ortadan kaldırdıktan sonra, performans sorunu genellikle sorgular büyük olasılıkla bazı kaynakları bekliyor. Bekleme ile ilgili sorunlar şunlar olabilir:
@@ -220,6 +222,11 @@ Dmv sorgu deposunu ve bekleme istatistiklerini izleyen yalnızca başarıyla tam
 > - [TigerToolbox bekler ve Cadılar](https://github.com/Microsoft/tigertoolbox/tree/master/Waits-and-Latches)
 > - [TigerToolbox usp_whatsup](https://github.com/Microsoft/tigertoolbox/tree/master/usp_WhatsUp)
 
+## <a name="see-also"></a>Ayrıca bkz.
+
+* [Azure SQL veritabanı 'nda maksimum paralellik derecesi (MAXDOP) yapılandırma](database/configure-max-degree-of-parallelism.md)
+* [Azure SQL veritabanı 'nda Azure SQL veritabanı engelleme sorunlarını anlama ve çözme](database/understand-resolve-blocking.md)
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[SQL veritabanı izleme ve ayarlamaya genel bakış](database/monitor-tune-overview.md)
+* [SQL veritabanı izleme ve ayarlamaya genel bakış](database/monitor-tune-overview.md)

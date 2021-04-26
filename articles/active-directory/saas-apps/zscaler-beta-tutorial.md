@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 12/18/2020
 ms.author: jeedes
 ms.openlocfilehash: 4e8dce970c9e7cfb2aa7887cf1fb3ed6ef9030a1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98735616"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-zscaler-beta"></a>Öğretici: Zscaler Beta ile tümleştirme Azure Active Directory
@@ -190,14 +190,14 @@ Bu bölümde, Zscaler Beta sürümüne erişim vererek Azure çoklu oturum açma
 
     b. **Etkinleştir**' i seçin.
 
-## <a name="configure-proxy-settings"></a>Ara sunucu ayarlarını yapılandırma
+## <a name="configure-proxy-settings&quot;></a>Ara sunucu ayarlarını yapılandırma
 Internet Explorer 'da proxy ayarlarını yapılandırmak için aşağıdaki adımları izleyin.
 
 1. **Internet Explorer 'ı** başlatın.
 
 2. **Internet seçenekleri** iletişim kutusunu açmak için **Araçlar** menüsünde **Internet seçenekleri** ' ni seçin. 
     
-     ![Internet Seçenekleri iletişim kutusu](./media/zscaler-beta-tutorial/ic769492.png "Internet seçenekleri")
+     ![Internet Seçenekleri iletişim kutusu](./media/zscaler-beta-tutorial/ic769492.png &quot;Internet seçenekleri")
 
 3. **Bağlantılar** sekmesini seçin. 
   

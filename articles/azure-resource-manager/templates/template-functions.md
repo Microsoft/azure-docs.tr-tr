@@ -3,12 +3,12 @@ title: Şablon işlevleri
 description: Değerleri almak, dizeler ve sayı ile çalışmak ve dağıtım bilgilerini almak için bir Azure Resource Manager şablonunda (ARM şablonunda) kullanılacak işlevleri açıklar.
 ms.topic: conceptual
 ms.date: 10/12/2020
-ms.openlocfilehash: dbda5c635a5189158424363c341b269d331a5fdc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a9ea21a57404f7de832fb307bdabeb47f8cf3f58
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101707328"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220190"
 ---
 # <a name="arm-template-functions"></a>ARM şablon işlevleri
 
@@ -176,7 +176,6 @@ Kaynak Yöneticisi, kaynak değerlerini almak için aşağıdaki işlevleri sağ
 * [Listgizlilikler](template-functions-resource.md#list)
 * [Listele](template-functions-resource.md#list)
 * [pickZones](template-functions-resource.md#pickzones)
-* [sağlayıcılarla](template-functions-resource.md#providers)
 * [başvurunun](template-functions-resource.md#reference)
 * [resourceGroup](template-functions-resource.md#resourcegroup) -yalnızca bir kaynak grubuna yapılan dağıtımlarda kullanılabilir.
 * [RESOURCEID](template-functions-resource.md#resourceid) -herhangi bir kapsamda kullanılabilir, ancak geçerli parametreler kapsama göre değişir.

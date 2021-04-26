@@ -62,6 +62,8 @@
           href: hana-concept-preparation.md
         - name: Olağanüstü durum kurtarma yük devretme yordamı
           href: hana-failover-procedure.md
+        - name: RHEL üzerinde SAP için büyük örnekler HA
+          href: large-instance-high-availability-rhel.md
     - name: Sorun giderme ve izleme
       items:
         - name: HLI'yi izleme
@@ -74,6 +76,8 @@
           href: hana-li-portal.md
         - name: STONITH ile HA Kurulumu
           href: ha-setup-with-stonith.md
+        - name: Azure büyük örnekler RHEL 'de SAP için yüksek kullanılabilirlik
+          href: large-instance-high-availability-rhel.md
         - name: Type II SKU'ları için İşletim Sistemi Yedeklemesi
           href: os-backup-type-ii-skus.md
         - name: HANA Büyük Örnekleri için Kdump’ı etkinleştirme
@@ -112,6 +116,8 @@
           href: sap-hana-high-availability-rhel.md
         - name: RHEL üzerinde ANF ile SAP HANA Sistem Çoğaltması ayarlama
           href: sap-hana-high-availability-netapp-files-red-hat.md
+        - name: SLES 'de Paceyapıcısı ile genişleme HSR SAP HANA
+          href: sap-hana-high-availability-scale-out-hsr-suse.md
         - name: SLES üzerinde SAP HANA ölçek genişletme ve Pacemaker sorunlarını giderme
           href: hana-vm-troubleshoot-scale-out-ha-on-sles.md
         - name: RHEL üzerinde Pacemaker ile SAP HANA ölçeği genişletme HSR’si
@@ -120,11 +126,25 @@
           href: sap-hana-scale-out-standby-netapp-files-suse.md
         - name: RHEL üzerinde Azure NetApp Files ile bekleme düğümüyle SAP HANA ölçeğini genişletme
           href: sap-hana-scale-out-standby-netapp-files-rhel.md
-    - name: SAP HANA yedeklemesine genel bakış
-      href: sap-hana-backup-guide.md
-    - name: SAP HANA dosya düzeyi yedeklemesi
-      href: sap-hana-backup-file-level.md
-- name: Azure Sanal Makineler üzerinde SAP NetWeaver ve Business One
+    - name: Azure Backup ile veritabanı yedeklemesini SAP HANA
+      items:
+        - name: Azure VM 'lerinde veritabanı yedeklemesini SAP HANA
+          href: ../../../backup/sap-hana-db-about.md
+        - name: Azure VM’lerindeki SAP HANA veritabanlarını yedekleme
+          href: ../../../backup/backup-azure-sap-hana-database.md
+        - name: Azure VM 'lerinde SAP HANA veritabanlarını geri yükleme
+          href: ../../../backup/sap-hana-db-restore.md
+        - name: Yönetme ve izleme
+          href: ../../../backup/sap-hana-db-manage.md
+        - name: SAP HANA veritabanlarının yedeklenmesi için destek matrisi
+          href: ../../../backup/sap-hana-backup-support-matrix.md
+        - name: 'SSS: Azure VM ''lerinde SAP HANA veritabanlarını yedekleme'
+          href: ../../../backup/sap-hana-faq-backup-azure-vm.yml
+        - name: Azure 'da SAP HANA veritabanlarının yedeklenmesi sorunlarını giderme
+          href: ../../../backup/backup-azure-sap-hana-database-troubleshoot.md
+        - name: Öğretici-Azure VM 'de SAP HANA veritabanlarını yedekleme
+          href: ../../../backup/tutorial-backup-sap-hana-db.md
+- name: 'Azure sanal makineler ''de SAP NetWeaver, S/4HANA ve Business One'
   items:
     - name: SAP iş yükü planlama ve dağıtımı denetim listesi
       href: sap-deployment-checklist.md
@@ -197,8 +217,6 @@
               href: high-availability-guide-rhel.md
             - name: Azure NetApp Files ile (A)SCS Örneği için Red Hat Enterprise Linux üzerinde HA
               href: high-availability-guide-rhel-netapp-files.md
-            - name: RHEL üzerinde SAP için büyük örnekler HA
-              href: large-instance-high-availability-rhel.md
         - name: Azure Altyapı Hazırlığı
           items:
             - name: (A)SCS Örneği için Paylaşılan Diskle Windows
@@ -314,7 +332,7 @@
 - name: Başvuru
   items:
     - name: Azure CLI
-      href: /cli/azure/ext/sap-hana/hanainstance
+      href: /cli/azure/hanainstance
     - name: Azure PowerShell
       href: /powershell/module/az.hanaonazure/#sap-hana-on-azure
 - name: Kaynaklar

@@ -356,6 +356,8 @@
               href: service-fabric-cluster-resource-manager-movement-cost.md
             - name: Hizmetleri otomatik ölçeklendirme
               href: service-fabric-cluster-resource-manager-autoscaling.md
+            - name: Düğüm etiketleme
+              href: service-fabric-cluster-resource-manager-node-tagging.md
     - name: İzleme ve tanılama
       items:
         - name: İzlemeye genel bakış
@@ -502,7 +504,7 @@
                   href: service-fabric-how-to-remove-node-type.md
             - name: Yükseltme
               items:
-                - name: Service Fabric sürümünü yükseltme
+                - name: Service Fabric kümesi yükseltmelerini yönetme
                   href: service-fabric-cluster-upgrade-version-azure.md
                 - name: Küme yapılandırmasını yükseltme
                   href: service-fabric-cluster-config-upgrade-azure.md

@@ -6,10 +6,10 @@ ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 11/29/2019
 ms.openlocfilehash: 19dd5bf94b524ff3eb6eb601c77b503a0040bd75
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104867653"
 ---
 # <a name="install-custom-apache-hadoop-applications-on-azure-hdinsight"></a>Azure HDInsight 'ta özel Apache Hadoop uygulamaları yüklemeyi
@@ -80,7 +80,7 @@ Uygulama yüklemesini doğrulamak için Azure portalında uygulama durumunu dene
 1. Özellikleri görüntülemek için listeden **ton** ' ı seçin.  
 1. Web sitesini doğrulamak için Web sayfası bağlantısını seçin.
 
-### <a name="azure-cli"></a>Azure CLI
+### <a name="azure-cli"></a>Azure CLI’si
 
 `CLUSTERNAME`Ve `RESOURCEGROUP` değerlerini ilgili değerlerle değiştirin ve ardından aşağıdaki komutları girin:
 
@@ -128,7 +128,7 @@ Uygulama yüklemesi başarısız olursa, üç konumdan hata iletilerini ve hata 
 1. Kaldırmak istediğiniz uygulamaya sağ tıklayın ve ardından **Sil**' i seçin.
 1. Onaylamak için **Evet**’i seçin.
 
-### <a name="azure-cli"></a>Azure CLI
+### <a name="azure-cli"></a>Azure CLI’si
 
 `NAME`, `CLUSTERNAME` Ve `RESOURCEGROUP` değerlerini ilgili değerlerle değiştirin ve aşağıdaki komutu girin:
 

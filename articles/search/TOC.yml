@@ -13,8 +13,6 @@
   items:
     - name: Portal
       items:
-        - name: Hizmet oluşturma
-          href: search-create-service-portal.md
         - name: Dizin oluşturma
           href: search-get-started-portal.md
         - name: Tanıtım uygulaması oluşturma
@@ -138,20 +136,30 @@
           href: security-baseline.md
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Planlama
+    - name: Yönetim
       items:
         - name: Katman seçme
           href: search-sku-tier.md
-        - name: Kapasiteyi tahmin etme ve yönetme
+        - name: Kapasiteyi planlama
           href: search-capacity-planning.md
-        - name: Maliyetleri tahmin etme
-          href: search-sku-manage-costs.md
+        - name: Hizmet oluşturma
+          href: search-create-service-portal.md
         - name: Hizmet sınırlamaları
           href: search-limits-quotas-capacity.md
-        - name: Performansı ölçeklendirme
+        - name: Maliyetleri yönetme
+          href: search-sku-manage-costs.md
+        - name: Kullanılabilirlik ve kurtarma
           href: search-performance-optimization.md
-        - name: Çok kiracılı mimari
+        - name: Çoklu kiracı
           href: search-modeling-multitenant-saas-applications.md
+        - name: Portalda yönetme
+          href: search-manage.md
+        - name: PowerShell ile Yönetme
+          href: search-manage-powershell.md
+        - name: Azure CLI ile yönetme
+          href: search-manage-azure-cli.md
+        - name: Hizmeti bölgeler arasında taşıma
+          href: search-howto-move-across-regions.md
     - name: Geliştirme
       items:
         - name: API sürümleri
@@ -276,6 +284,10 @@
           href: search-howto-connecting-azure-sql-mi-to-azure-search-using-indexers.md
         - name: Azure SQL Server VM’leri
           href: search-howto-connecting-azure-sql-iaas-to-azure-search-using-indexers.md
+        - name: Dizin Oluşturucu sorunlarını giderme
+          href: search-indexer-troubleshooting.md
+        - name: Dizin Oluşturucu hataları ve uyarıları sorunlarını giderme
+          href: cognitive-search-common-errors-warnings.md
     - name: Beceri kümeleri
       items:
         - name: Bilişsel Hizmetler kaynağı iliştirme
@@ -376,8 +388,30 @@
           href: semantic-ranking.md
         - name: Puanlama modelleri
           href: index-add-scoring-profiles.md
+    - name: Performans ve izleme
+      items:
+        - name: Performans Analizi
+          href: search-performance-analysis.md
+        - name: Performans karşılaştırmaları
+          href: performance-benchmarks.md
+        - name: Daha iyi performans ipuçları
+          href: search-performance-tips.md
+        - name: Tanılama günlüğüne kaydetme
+          href: search-monitor-logs.md
+        - name: Tanılama günlüklerini görselleştirme
+          href: search-monitor-logs-powerbi.md
+        - name: İzlemeye genel bakış
+          href: search-monitor-usage.md
+        - name: Sorguları izleme
+          href: search-monitor-queries.md
+        - name: Dizin Oluşturucu tabanlı dizin oluşturmayı izleme
+          href: search-howto-monitor-indexers.md
+        - name: İstemci tarafı etkileşimlerini izleme
+          href: search-traffic-analytics.md
     - name: Güvenlik
       items:
+        - name: Yönetici hakları
+          href: search-security-rbac.md
         - name: Veri şifrelemesi
           items:
             - name: Müşteri tarafından yönetilen anahtarlar
@@ -386,7 +420,7 @@
               href: search-security-get-encryption-keys.md
         - name: Gelen güvenlik
           items:
-            - name: API erişim anahtarları
+            - name: API anahtarı kimlik doğrulaması
               href: search-security-api-keys.md
             - name: IP güvenlik duvarını yapılandırma
               href: service-configure-firewall.md
@@ -406,41 +440,9 @@
               href: search-security-trimming-for-azure-search.md
             - name: Kullanıcı kimlikleri üzerinde filtreleme
               href: search-security-trimming-for-azure-search-with-aad.md
-    - name: Yönetme
-      items:
-        - name: Portal
-          href: search-manage.md
-        - name: PowerShell
-          href: search-manage-powershell.md
-        - name: Azure CLI
-          href: search-manage-azure-cli.md
-        - name: Hizmeti bölgeler arasında taşıma
-          href: search-howto-move-across-regions.md
-        - name: Rol tabanlı yönetici erişimi
-          href: search-security-rbac.md
-    - name: İzleme
-      items:
-        - name: Genel Bakış
-          href: search-monitor-usage.md
-        - name: Tanılama günlüğüne kaydetme
-          href: search-monitor-logs.md
-        - name: Tanılama günlüklerini görselleştirme
-          href: search-monitor-logs-powerbi.md
-        - name: Sorgu etkinliğini izleme
-          href: search-monitor-queries.md
-        - name: Dizin oluşturucuları izleme
-          href: search-howto-monitor-indexers.md
-        - name: Arama trafiği analizi
-          href: search-traffic-analytics.md
-    - name: Sorun giderme
-      items:
-        - name: Dizin oluşturucu sorunları
-          href: search-indexer-troubleshooting.md
-        - name: Dizin oluşturucu hataları ve uyarıları
-          href: cognitive-search-common-errors-warnings.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
+    - name: Azure CLI
       href: /cli/azure/search
     - name: Azure PowerShell
       href: /powershell/module/az.search

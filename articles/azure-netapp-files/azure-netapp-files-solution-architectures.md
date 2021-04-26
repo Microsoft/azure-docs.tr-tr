@@ -12,14 +12,14 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 03/25/2021
+ms.date: 04/06/2021
 ms.author: b-juche
-ms.openlocfilehash: 03a29e121d3838404519045601d484a1875db9ce
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: d5ff0f2444aac153116e8e33a6ed2af74c93f057
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105557250"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553524"
 ---
 # <a name="solution-architectures-using-azure-netapp-files"></a>Azure NetApp Files kullanan çözüm mimarileri
 Bu makalede, Azure NetApp Files kullanmaya yönelik çözüm mimarilerini anlamanıza yardımcı olabilecek en iyi yöntemlere başvurular sağlanmaktadır.  
@@ -54,10 +54,11 @@ Bu bölüm, Windows Uygulamaları ve SQL Server çözümleri için başvurular s
 
 ### <a name="sql-server"></a>SQL Server
 
+* [Azure dağıtım kılavuzu 'nda Azure NetApp Files kullanarak SQL Server](https://www.netapp.com/pdf.html?item=/media/27154-tr-4888.pdf)
+* [SQL Server dağıtımı için Azure NetApp Files kullanmanın avantajları](solutions-benefits-azure-netapp-files-sql-server.md)
 * [Azure NetApp Files SMB üzerinden SQL Server dağıtma](https://www.youtube.com/watch?v=x7udfcYbibs)
 * [Azure NetApp Files ile SMB üzerinden SQL Server Always-On yük devretme kümesi dağıtma](https://www.youtube.com/watch?v=zuNJ5E07e8Q) 
 * [Azure NetApp Files ile Always-On kullanılabilirlik grupları dağıtma](https://www.youtube.com/watch?v=y3VQmzzeyvc) 
-* [SQL Server dağıtımı için Azure NetApp Files kullanmanın avantajları](solutions-benefits-azure-netapp-files-sql-server.md)
 
 ## <a name="sap-on-azure-solutions"></a>Azure çözümlerinde SAP
 
@@ -101,6 +102,7 @@ Bu bölümde, Azure çözümlerinde SAP başvuruları sağlanmaktadır.
 * [HANA N + d Scale-Out mimarideki ANF yatırımınızı en üst düzeye çıkarmak için mimari kararlar-1. Bölüm](https://techcommunity.microsoft.com/t5/running-sap-applications-on-the/architectural-decisions-to-maximize-anf-investment-in-hana-n-m/ba-p/2078737)
 * [HANA N + d Scale-Out mimarideki ANF yatırımınızı en üst düzeye çıkarmak için mimari kararlar-2. Bölüm](https://techcommunity.microsoft.com/t5/running-sap-applications-on-the/architectural-decisions-to-maximize-anf-investment-in-hana-n-m/ba-p/2117130)
 * [HANA N + d Scale-Out mimarideki ANF yatırımınızı en üst düzeye çıkarmak için mimari kararlar-Bölüm 3](https://techcommunity.microsoft.com/t5/running-sap-applications-on-the/architectural-decisions-to-maximize-anf-investment-in-hana-n-m/ba-p/2215948)
+* [Azure NetApp Files ile SAP yatay boyutlandırma ve birim birleştirme](https://techcommunity.microsoft.com/t5/sap-on-microsoft/sap-landscape-sizing-and-volume-consolidation-with-anf/m-p/2145572/highlight/true#M14)
 
 ## <a name="azure-vmware-solutions"></a>Azure VMware çözümleri
 

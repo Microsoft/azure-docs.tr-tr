@@ -3,19 +3,18 @@ title: Key Vault .NET 2. x API sürüm notları | Microsoft Docs
 description: Azure Key Vault önceki sürümleri için yazılmış uygulamaları C# ve .NET Azure Key Vault kitaplığının 2,0 sürümüyle çalışacak şekilde güncelleştirmeyi öğrenin.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 editor: bryanla
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
 ms.date: 05/02/2017
 ms.author: mbaldwin
-ms.openlocfilehash: 018570019b306dced76760fefa4441ee7d86ad2a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b923cc289dc0229f18eba144b09ceb34e0edea4e
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96013964"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751895"
 ---
 # <a name="azure-key-vault-net-20---release-notes-and-migration-guide"></a>Azure Key Vault .NET 2,0-sürüm notları ve geçiş kılavuzu
 Aşağıdaki bilgiler C# ve .NET için Azure Key Vault kitaplığının 2,0 sürümüne geçirmeye yardımcı olur.  Önceki sürümler için yazılan uygulamaların, en son sürümü destekleyecek şekilde güncelleştirilmesi gerekir.  Bu değişiklikler, **Key Vault sertifikaları** gibi yeni ve geliştirilmiş özellikleri tam olarak desteklemek için gereklidir.

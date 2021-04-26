@@ -2,15 +2,15 @@
 author: DCtheGeek
 ms.service: azure-policy
 ms.topic: include
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.author: dacoulte
 ms.custom: generated
-ms.openlocfilehash: 4be5cbeaa1654eb09a32624e482092b1c7a2015c
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 42b3757d6080de1a91b5337c67fd1613569b4a2e
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105037656"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877507"
 ---
 |Name<br /><sub>(Azure portal)</sub> |Description |Efekt (ler) |Sürüm<br /><sub>GitHub</sub> |
 |---|---|---|---|
@@ -85,4 +85,4 @@ ms.locfileid: "105037656"
 |[Windows makineleri ' Windows bileşenleri ' için gereksinimleri karşılamalıdır](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F8537fe96-8cbe-43de-b0ef-131bc72bc22a) |Windows makineleri temel kimlik doğrulaması, şifrelenmemiş trafik, Microsoft hesapları, telemetri, Cortana ve diğer Windows davranışları için ' Windows bileşenleri ' kategorisinde belirtilen grup ilkesi ayarlara sahip olmalıdır. Bu ilke, Konuk yapılandırma ön koşullarının ilke atama kapsamına dağıtılmasını gerektirir. Ayrıntılar için, adresini ziyaret edin [https://aka.ms/gcpol](https://aka.ms/gcpol) . |Auditınotexists, devre dışı |[2.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Guest%20Configuration/GuestConfiguration_WindowsComponents_AINE.json) |
 |[Windows makineleri ' Windows Güvenlik Duvarı Özellikleri ' için gereksinimleri karşılamalıdır](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F35d9882c-993d-44e6-87d2-db66ce21b636) |Windows makineleri, güvenlik duvarı durumu, bağlantılar, kural yönetimi ve bildirimler için ' Windows Güvenlik Duvarı Özellikleri ' kategorisinde belirtilen grup ilkesi ayarlara sahip olmalıdır. Bu ilke, Konuk yapılandırma ön koşullarının ilke atama kapsamına dağıtılmasını gerektirir. Ayrıntılar için, adresini ziyaret edin [https://aka.ms/gcpol](https://aka.ms/gcpol) . |Auditınotexists, devre dışı |[2.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Guest%20Configuration/GuestConfiguration_WindowsFirewallProperties_AINE.json) |
 |[Windows makineleri, Azure Güvenlik Merkezi temeli gereksinimlerini karşılamalıdır](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F72650e9f-97bc-4b2a-ab5f-9781a9fcecbc) |Önkoşulların ilke atama kapsamına dağıtılmasını gerektirir. Ayrıntılar için, adresini ziyaret edin [https://aka.ms/gcpol](https://aka.ms/gcpol) . Makine, Azure Güvenlik Merkezi temelindeki önerilerden biri için doğru yapılandırılmamışsa, makineler uyumlu değildir. |Auditınotexists, devre dışı |[1.0.0-Önizleme](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Guest%20Configuration/GuestConfiguration_AzureWindowsBaseline_AINE.json) |
-|[Windows Web sunucularının güvenli iletişim protokollerini kullanacak şekilde yapılandırılması gerekir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F5752e6d6-1206-46d8-8ab1-ecc2f71a8112) |Internet üzerinden iletilen bilgilerin gizliliğini korumak için web sunucularınız, sektör standardı şifreleme protokolü 'nün en son sürümünü (Aktarım Katmanı Güvenliği (TLS) kullanmalıdır. TLS, makineler arasında bir bağlantıyı şifrelemek için güvenlik sertifikalarını kullanarak bir ağ üzerinden iletişimin güvenliğini sağlar. TLS 1,3, önceki sürümlerden daha hızlı ve daha güvenlidir: TLS 1.0-1.2 ve SSL 2-3, tüm eski protokoller kabul edilir. |Auditınotexists, devre dışı |[2.0.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Guest%20Configuration/GuestConfiguration_SecureWebProtocol_AINE.json) |
+|[Windows Web sunucularının güvenli iletişim protokollerini kullanacak şekilde yapılandırılması gerekir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F5752e6d6-1206-46d8-8ab1-ecc2f71a8112) |Internet üzerinden iletilen bilgilerin gizliliğini korumak için web sunucularınız, sektör standardı şifreleme protokolü 'nün en son sürümünü (Aktarım Katmanı Güvenliği (TLS) kullanmalıdır. TLS, makineler arasında bir bağlantıyı şifrelemek için güvenlik sertifikalarını kullanarak bir ağ üzerinden iletişimin güvenliğini sağlar. |Auditınotexists, devre dışı |[2.1.0](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Guest%20Configuration/GuestConfiguration_SecureWebProtocol_AINE.json) |

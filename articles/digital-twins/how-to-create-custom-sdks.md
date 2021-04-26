@@ -10,12 +10,12 @@ ms.service: digital-twins
 ms.custom:
 - devx-track-js
 - contperf-fy21q3
-ms.openlocfilehash: 35cf54199f8f2c187ad397c21fb941111f07c4a3
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 4e91bf5acc5290229afa8dc7a849e8953257bcfd
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102561849"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751121"
 ---
 # <a name="create-custom-language-sdks-for-azure-digital-twins-using-autorest"></a>Oto Rest kullanarak Azure dijital TWINS için özel dil SDK 'Ları oluşturma
 
@@ -66,12 +66,12 @@ Adımlar aşağıdaki gibidir:
 
 1. Sınıf kitaplığı için yeni bir Visual Studio çözümü oluşturma
 2. Proje adı olarak *Digitaltwınsapı* kullanın
-3. Çözüm Gezgini ' nde, oluşturulan çözümün *Digitaltwınsapı* projesini sağ seçin ve *> varolan öğe Ekle ' yi seçin...*
+3. Çözüm Gezgini, oluşturulan çözümün *Digitaltwınsapı* projesini sağ seçin ve *> var olan öğeyi Ekle...* seçeneğini belirleyin.
 4. SDK 'Yı oluşturduğunuz klasörü bulun ve kök düzeyindeki dosyaları seçin
 5. "Tamam" düğmesine basın
 6. Projeye bir klasör ekleyin (Çözüm Gezgini içinde projeyi sağ seçin ve *> yeni klasör ekle*' yi seçin.
 7. Klasör *modellerini* adlandırın
-8. Çözüm Gezgini ' nde *modeller* klasörünü sağ seçin ve *> var olan öğeyi Ekle ' yi seçin...*
+8. Çözüm Gezgini *modeller* klasörünü sağ seçin ve *> var olan öğeyi Ekle...* seçeneğini belirleyin.
 9. Oluşturulan SDK 'nın *modeller* klasöründeki dosyaları seçin ve "Tamam" düğmesine basın
 
 SDK 'Yı başarılı bir şekilde derlemek için, projenizin bu başvurulara ihtiyacı olacak:

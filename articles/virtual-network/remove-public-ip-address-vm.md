@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 12/04/2019
 ms.author: allensu
-ms.openlocfilehash: 0665cbd7aa21575337999fb5c59478955c764048
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e9bfadd3e2453f0241dc2f7b8bfa5c964333bcf5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98934197"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776549"
 ---
 # <a name="dissociate-a-public-ip-address-from-an-azure-vm"></a>Bir Azure VM 'den genel IP adresinin ilişkilendirmesini kaldırma 
 
@@ -40,12 +40,12 @@ Bir VM 'den ortak IP adresinin ilişkilendirmesini kaldırmak için [Azure Porta
 
 5. **Genel IP adresi** ilişkisini kaldırma bölümünde **Evet**' i seçin.
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 [Azure CLI](/cli/azure/install-azure-cli?toc=%2fazure%2fvirtual-network%2ftoc.json)'yi veya Azure Cloud Shell kullanın. Azure Cloud Shell doğrudan Azure portalının içinde çalıştırabileceğiniz ücretsiz bir Bash kabuğudur. Azure CLI, kabuğa önceden yüklenmiştir ve kabuk, hesabınızla birlikte kullanılacak şekilde yapılandırılmıştır. Aşağıdaki CLı komutlarında **deneyin** düğmesini seçin. **Dene** ' nin seçilmesi, ile Azure hesabınızda oturum açmak için kullanabileceğiniz bir Cloud Shell çağırır.
 
 1. CLı 'yi Bash içinde yerel olarak kullanıyorsanız, ile Azure 'da oturum açın `az login` .
-2. Genel IP adresi, bir VM 'ye bağlı bir ağ arabiriminin IP yapılandırmasıyla ilişkilendirilir. Genel IP adresinin bir IP yapılandırmasından ilişkilendirmesini kaldırmak için [az Network Nic-ip-config Update](/cli/azure/network/nic/ip-config#az-network-nic-ip-config-update) komutunu kullanın. Aşağıdaki örnek, *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı bir VM 'ye bağlı olan *myvmvmnıc* adlı mevcut bir ağ arabiriminin *ıpconfigmyvm* adlı bir IP yapılandırmasından *myVMPublicIP* adlı genel IP adresini ilişkilendirmesini geri ayırır.
+2. Genel IP adresi, bir VM 'ye bağlı bir ağ arabiriminin IP yapılandırmasıyla ilişkilendirilir. Genel IP adresinin bir IP yapılandırmasından ilişkilendirmesini kaldırmak için [az Network Nic-ip-config Update](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_update) komutunu kullanın. Aşağıdaki örnek, *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı bir VM 'ye bağlı olan *myvmvmnıc* adlı mevcut bir ağ arabiriminin *ıpconfigmyvm* adlı bir IP yapılandırmasından *myVMPublicIP* adlı genel IP adresini ilişkilendirmesini geri ayırır.
   
    ```azurecli-interactive
     az network nic ip-config update \
@@ -55,7 +55,7 @@ Bir VM 'den ortak IP adresinin ilişkilendirmesini kaldırmak için [Azure Porta
     --remove PublicIpAddress
    ```
 
-   Sanal makinenize bağlı bir ağ arabiriminin adını bilmiyorsanız, görüntülemek için [az VM Nic List](/cli/azure/vm/nic#az-vm-nic-list) komutunu kullanın. Örneğin aşağıdaki komut, *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı bir VM 'ye bağlı ağ arabirimlerinin adlarını listeler:
+   Sanal makinenize bağlı bir ağ arabiriminin adını bilmiyorsanız, görüntülemek için [az VM Nic List](/cli/azure/vm/nic#az_vm_nic_list) komutunu kullanın. Örneğin aşağıdaki komut, *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı bir VM 'ye bağlı ağ arabirimlerinin adlarını listeler:
 
      ```azurecli-interactive
      az vm nic list --vm-name myVM --resource-group myResourceGroup
@@ -69,13 +69,13 @@ Bir VM 'den ortak IP adresinin ilişkilendirmesini kaldırmak için [Azure Porta
 
      Önceki örnekte, *Myvmvmnıc* , ağ arabiriminin adıdır.
 
-   - Bir ağ arabirimi için bir IP yapılandırmasının adını bilmiyorsanız, bunları almak için [az Network Nic IP-Config List](/cli/azure/network/nic/ip-config#az-network-nic-ip-config-list) komutunu kullanın. Örneğin, aşağıdaki komut, *Myresourcegroup* adlı bir kaynak grubunda *Myvmvmnıc* adlı bir ağ arabirimi için genel IP yapılandırmalarının adlarını listeler:
+   - Bir ağ arabirimi için bir IP yapılandırmasının adını bilmiyorsanız, bunları almak için [az Network Nic IP-Config List](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_list) komutunu kullanın. Örneğin, aşağıdaki komut, *Myresourcegroup* adlı bir kaynak grubunda *Myvmvmnıc* adlı bir ağ arabirimi için genel IP yapılandırmalarının adlarını listeler:
 
      ```azurecli-interactive
      az network nic ip-config list --nic-name myVMVMNic --resource-group myResourceGroup --out table
      ```
 
-   - Bir ağ arabirimi için genel IP yapılandırmasının adını bilmiyorsanız, [az Network Nic IP-Config Show](/cli/azure/network/nic/ip-config#az-network-nic-ip-config-show) komutunu kullanarak bunları alın. Örneğin, aşağıdaki komut, *Myresourcegroup* adlı bir kaynak grubunda *Myvmvmnıc* adlı bir ağ arabirimi için genel IP yapılandırmalarının adlarını listeler:
+   - Bir ağ arabirimi için genel IP yapılandırmasının adını bilmiyorsanız, [az Network Nic IP-Config Show](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_show) komutunu kullanarak bunları alın. Örneğin, aşağıdaki komut, *Myresourcegroup* adlı bir kaynak grubunda *Myvmvmnıc* adlı bir ağ arabirimi için genel IP yapılandırmalarının adlarını listeler:
 
      ```azurecli-interactive
      az network nic ip-config show --name ipconfigmyVM --nic-name myVMVMNic --resource-group myResourceGroup --query publicIPAddress.id

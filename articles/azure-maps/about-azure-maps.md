@@ -9,12 +9,12 @@ ms.service: azure-maps
 services: azure-maps
 manager: philmea
 ms.custom: mvc, references_regions
-ms.openlocfilehash: b53af0fda8bb24bf03d0e02f61ce7d195ae69503
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 55955f883425651749809da951832484f098aeaf
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97680819"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256132"
 ---
 # <a name="what-is-azure-maps"></a>Azure Haritalar nedir?
 
@@ -169,11 +169,11 @@ Trafik hizmeti, geliştiricilerin trafik bilgileri gerektiren Web uygulamaları 
 
 Daha fazla bilgi için bkz. [trafik hizmeti belgeleri](/rest/api/maps/traffic).
 
-### <a name="weather-services-preview"></a>Hava durumu Hizmetleri (Önizleme) 
+### <a name="weather-services"></a>Hava durumu hizmetleri
 
 Hava durumu Hizmetleri, geliştiricilerin belirli bir konum için hava durumu bilgilerini almak üzere kullanabileceği API 'Ler sunar. Bilgiler, gözlem tarihi ve saati, hava durumu koşullarının kısa açıklaması, hava durumu simgesi, yağış gösterge bayrakları, sıcaklık ve rüzgar hızı bilgilerinin ayrıntılarını içerir. ™ Sıcaklık ve UV dizini gibi ek ayrıntılar da döndürülür.
 
-Geliştiriciler, belirli bir rota hakkında hava durumu bilgilerini almak için [Hava durumu ve rota API](/rest/api/maps/weather/getweatheralongroutepreview) 'sini kullanabilir. Ayrıca hizmet, bir veya daha ağır yağmur gibi hava durumu riskleri tarafından etkilenen waypoints için hava durumu bildirimleri oluşturmayı destekler.
+Geliştiriciler, belirli bir rota hakkında hava durumu bilgilerini almak için [Hava durumu ve rota API](/rest/api/maps/weather/getweatheralongroute) 'sini kullanabilir. Ayrıca hizmet, bir veya daha ağır yağmur gibi hava durumu riskleri tarafından etkilenen waypoints için hava durumu bildirimleri oluşturmayı destekler.
 
 [Get Map kutucuğu v2 API 'si](/rest/api/maps/renderv2/getmaptilepreview) , geçmiş, güncel ve gelecekteki radar ve uydu kutucukları isteyebilmeniz için izin verir.
 

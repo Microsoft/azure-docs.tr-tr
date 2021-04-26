@@ -8,10 +8,10 @@ ms.topic: how-to
 ms.date: 02/17/2021
 ms.author: victorh
 ms.openlocfilehash: a02879c5322add16f89f77e2da39daec7d2b5f31
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100633657"
 ---
 # <a name="azure-firewall-policy-dns-settings"></a>Azure Güvenlik duvarı ilkesi DNS ayarları

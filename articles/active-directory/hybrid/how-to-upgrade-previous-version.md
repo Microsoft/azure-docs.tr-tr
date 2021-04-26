@@ -17,10 +17,10 @@ ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
 ms.openlocfilehash: 36b7fce2e2ccb6f331e42e8052ef4fb75d35e831
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98729999"
 ---
 # <a name="azure-ad-connect-upgrade-from-a-previous-version-to-the-latest"></a>Azure AD Connect: Önceki bir sürümden en son sürüme yükseltme
@@ -57,7 +57,7 @@ Kullanıma hazır eşitleme kurallarında değişiklik yaptıysanız, bu kuralla
 
 Yerinde yükseltme sırasında, yükseltme tamamlandıktan sonra yürütülmesi gereken belirli eşitleme etkinliklerini (tam Içeri aktarma adımı ve tam eşitleme adımı dahil) gerektiren değişiklikler olabilir. Bu tür etkinlikleri ertelemek için, [yükseltmeden sonra tam eşitlemeyi erteleme](#how-to-defer-full-synchronization-after-upgrade)bölümüne bakın.
 
-Standart olmayan bağlayıcıyla Azure AD Connect kullanıyorsanız (örneğin, genel LDAP Bağlayıcısı ve genel SQL Bağlayıcısı), yerinde yükseltmeden sonra [Synchronization Service Manager](./how-to-connect-sync-service-manager-ui-connectors.md) ilgili bağlayıcı yapılandırmasını yenilemeniz gerekir. Bağlayıcı yapılandırmasını yenileme hakkında daha fazla bilgi için, bkz. makale bölümü [bağlayıcı sürümü yayın geçmişi-sorun giderme](/microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-version-history#troubleshooting). Yapılandırmayı yenilemeyin, içeri ve dışarı aktarma çalıştırma adımları bağlayıcı için doğru çalışmaz. Uygulama olay günlüğünde, *"AAD bağlayıcı yapılandırmasındaki derleme sürümü (" x. x. xxx. x ")," C:\Program Files\Microsoft Azure AD Sync\Extensions\Microsoft.IAM.Connector.GenericLdap.dll "öğesinin gerçek sürümünden (" x. x. xxx. x ") daha önceki bir* hata iletisiyle karşılaşırsınız.
+Standart olmayan bağlayıcıyla Azure AD Connect kullanıyorsanız (örneğin, genel LDAP Bağlayıcısı ve genel SQL Bağlayıcısı), yerinde yükseltmeden sonra [Synchronization Service Manager](./how-to-connect-sync-service-manager-ui-connectors.md) ilgili bağlayıcı yapılandırmasını yenilemeniz gerekir. Bağlayıcı yapılandırmasını yenileme hakkında daha fazla bilgi için, bkz. makale bölümü [bağlayıcı sürümü yayın geçmişi-sorun giderme](/microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-version-history#troubleshooting). Yapılandırmayı yenilemeyin, içeri ve dışarı aktarma çalıştırma adımları bağlayıcı için doğru çalışmaz. Uygulama olay günlüğünde, *"AAD bağlayıcı yapılandırmasındaki derleme sürümü (&quot; x. x. xxx. x ")," C:\Program Files\Microsoft Azure AD Sync\Extensions\Microsoft.IAM.Connector.GenericLdap.dll "öğesinin gerçek sürümünden (" x. x. xxx. x ") daha önceki bir* hata iletisiyle karşılaşırsınız.
 
 ## <a name="swing-migration"></a>Swing geçişi
 Karmaşık bir dağıtımınız veya çok sayıda nesneniz varsa, canlı sistemde yerinde yükseltme yapmak pratik olabilir. Bazı müşteriler için, bu işlem birden çok gün alabilir ve bu süre boyunca hiçbir Delta değişikliği işlenmez. Bu yöntemi Ayrıca, yapılandırmanızda önemli değişiklikler yapmayı planladığınızda ve buluta gönderilmeden önce onları denemek istediğinizde de kullanabilirsiniz.

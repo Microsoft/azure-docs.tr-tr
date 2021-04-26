@@ -1,18 +1,15 @@
 ---
 title: Azure Site Recovery 'de Azure 'a yük devretme testi (olağanüstü durum kurtarma detayına) çalıştırın
 description: Azure Site Recovery hizmetini kullanarak şirket içinden Azure 'a yük devretme testi çalıştırma hakkında bilgi edinin.
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/14/2019
-ms.author: raynew
-ms.openlocfilehash: 815a35c167bbcd3ac03dfdaaf6d699e58a791f33
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 840243bd5a67bc97bdc1903908c4e25adad93062
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92369395"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579306"
 ---
 # <a name="run-a-test-failover-disaster-recovery-drill-to-azure"></a>Azure 'a yük devretme testi (olağanüstü durum kurtarma detayına) çalıştırma 
 

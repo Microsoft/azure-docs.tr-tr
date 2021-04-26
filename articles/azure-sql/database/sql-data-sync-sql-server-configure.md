@@ -11,12 +11,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 01/14/2019
-ms.openlocfilehash: d6b5bab1c1b6c8db4821fdf84728eb66eb55b899
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 77073d21f982e82e567e517b7d9eca061cb91859
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98882238"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812962"
 ---
 # <a name="tutorial-set-up-sql-data-sync-between-databases-in-azure-sql-database-and-sql-server"></a>Öğretici: Azure SQL veritabanı ve SQL Server veritabanları arasında SQL Data Sync ayarlama
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -49,9 +49,9 @@ SQL Data Sync nasıl yapılandırılacağı hakkında PowerShell örnekleri içi
 
     :::image type="content" source="./media/sql-data-sync-sql-server-configure/sync-to-other-databases.png" alt-text = "Sync to other databases, Microsoft Azure portal":::
 
-1. **Diğer veritabanlarına Eşitle** sayfasında, **Yeni eşitleme grubu**' nu seçin. **Yeni eşitleme grubu** sayfası, **eşitleme grubu oluştur (1. adım)** ile açılır.
+1. **Diğer veritabanlarına Eşitle** sayfasında, **Yeni eşitleme grubu**' nu seçin. **Yeni eşitleme grubu** sayfası, **eşitleme grubu oluştur** ile açılır.
 
-   :::image type="content" source="./media/sql-data-sync-sql-server-configure/new-sync-group-private-link.png" alt-text = "Set up new sync group with private link":::
+   :::image type="content" source="./media/sql-data-sync-sql-server-configure/create-sync-group.png" alt-text = "Set up new sync group with private link":::
 
    **Veri eşitleme grubu oluştur** sayfasında, aşağıdaki ayarları değiştirin:
 
@@ -64,25 +64,29 @@ SQL Data Sync nasıl yapılandırılacağı hakkında PowerShell örnekleri içi
    | **Özel bağlantı kullan** | Eşitleme hizmeti ve hub veritabanı arasında güvenli bir bağlantı kurmak için hizmet tarafından yönetilen özel uç nokta seçin. |
 
    > [!NOTE]
-   > Microsoft, **eşitleme meta verileri veritabanı** olarak kullanılmak üzere yeni, boş bir veritabanı oluşturmayı önerir. Veri eşitleme, bu veritabanında tabloları oluşturur ve sık sık iş yükü çalıştırır. Bu veritabanı, seçilen bir bölgedeki ve abonelikteki tüm eşitleme grupları için **eşitleme meta verileri veritabanı** olarak paylaşılır. Bölgedeki tüm eşitleme gruplarını ve eşitleme aracılarını kaldırmadan veritabanını veya adını değiştiremezsiniz.
+   > Microsoft, **eşitleme meta verileri veritabanı** olarak kullanılmak üzere yeni, boş bir veritabanı oluşturmayı önerir. Veri eşitleme, bu veritabanında tabloları oluşturur ve sık sık iş yükü çalıştırır. Bu veritabanı, seçilen bir bölgedeki ve abonelikteki tüm eşitleme grupları için **eşitleme meta verileri veritabanı** olarak paylaşılır. Bölgedeki tüm eşitleme gruplarını ve eşitleme aracılarını kaldırmadan veritabanını veya adını değiştiremezsiniz. Ayrıca, esnek bir işler veritabanı SQL Data Sync meta veri veritabanı olarak kullanılamaz ve tam tersi de geçerlidir.  
 
    **Tamam** ' ı seçin ve eşitleme grubunun oluşturulmasını ve dağıtılmasını bekleyin.
    
 1. **Yeni eşitleme grubu** sayfasında **özel bağlantı kullan**' ı seçtiyseniz, Özel uç nokta bağlantısını onaylamanız gerekir. Bilgi iletisindeki bağlantı sizi, bağlantıyı onaylayabileceğiniz özel uç nokta bağlantıları deneyimine götürür. 
 
-   :::image type="content" source="./media/sql-data-sync-sql-server-configure/approve-private-link.png" alt-text = "Approve private link":::
+   :::image type="content" source="./media/sql-data-sync-sql-server-configure/approve-private-link-update.png" alt-text = "Approve private link":::
+   
+   > [!NOTE]
+   > Eşitleniyor, onaylandı ve devre dışı bırakmak için Syng grubu ve eşitleme üyeleri için özel bağlantılar. 
 
 ## <a name="add-sync-members"></a>Eşitleme üyeleri Ekle
 
-Yeni eşitleme grubu oluşturulup dağıtıldıktan sonra, **eşitleme üyeleri Ekle (2. adım)** , **Yeni eşitleme grubu** sayfasında vurgulanır.
+Yeni eşitleme grubu oluşturulup dağıtıldıktan sonra, eşitleme grubunu açın ve **veritabanlarını** Eşitle sayfasına erişin.
 
-**Merkez veritabanı** bölümünde, hub veritabanının bulunduğu sunucu için mevcut kimlik bilgilerini girin. Bu bölüme *Yeni* kimlik bilgileri girmeyin.
-
-   :::image type="content" source="./media/sql-data-sync-sql-server-configure/steptwo.png" alt-text = "Enter existing credentials for the hub database server":::
+   :::image type="content" source="./media/sql-data-sync-sql-server-configure/add-sync-members.png" alt-text = "Select sync members":::
+   
+   > [!NOTE]
+   > Hub veritabanınıza Kullanıcı adını ve parolayı güncelleştirmek veya eklemek için, **eşitleme üyelerini seçin** sayfasında **merkez veritabanı** bölümüne gidin. 
 
 ### <a name="to-add-a-database-in-azure-sql-database"></a>Azure SQL veritabanı 'na bir veritabanı eklemek için
 
-**Üye veritabanı** bölümünde, Azure SQL veritabanı **Ekle**' yi seçerek isteğe bağlı olarak, Azure SQL veritabanı 'nda bir veritabanını eşitleme grubuna ekleyin. **Azure SQL veritabanını Yapılandır** sayfası açılır.
+**Eşitleme üyelerini Seç** bölümünde, **Azure veritabanı Ekle**' yi seçerek isteğe bağlı olarak, Azure SQL veritabanı 'nda bir veritabanını eşitleme grubuna ekleyin. **Azure veritabanını Yapılandır** sayfası açılır.
   
    :::image type="content" source="./media/sql-data-sync-sql-server-configure/step-two-configure.png" alt-text = "Add a database to the sync group":::
    
@@ -163,11 +167,11 @@ Yeni eşitleme grubu oluşturulup dağıtıldıktan sonra, **eşitleme üyeleri 
 
 ## <a name="configure-sync-group"></a>Eşitleme grubunu yapılandır
 
-Yeni eşitleme grubu üyeleri oluşturulup dağıtıldıktan sonra, **eşitleme grubunu yapılandırın (3. adım)** , **Yeni eşitleme grubu** sayfasında vurgulanır.
+Yeni eşitleme grubu üyeleri oluşturulup dağıtıldıktan sonra **veritabanı eşitleme grubu** sayfasındaki **Tablolar** bölümüne gidin.
 
-![Adım 3 ayarları](./media/sql-data-sync-sql-server-configure/stepthree.png)
+![Adım 3 ayarları](./media/sql-data-sync-sql-server-configure/configure-sync-group.png)
 
-1. **Tablolar** sayfasında, eşitleme grubu üyeleri listesinden bir veritabanı seçin ve **şemayı Yenile**' yi seçin.
+1. **Tablolar** sayfasında, eşitleme grubu üyeleri listesinden bir veritabanı seçin ve **şemayı Yenile**' yi seçin. Lütfen yenileme şemasında birkaç dakika gecikme süresi beklediğinden, özel bağlantı kullanılıyorsa gecikme birkaç dakika daha uzun olabilir.
 
 1. Listeden eşitlemek istediğiniz tabloları seçin. Varsayılan olarak, tüm sütunlar seçilidir, bu nedenle eşitlemek istemediğiniz sütunlar için onay kutusunu devre dışı bırakın. Birincil anahtar sütununu seçili bırakmayı unutmayın.
 
@@ -233,9 +237,14 @@ Bir veritabanını bir *. bacpac* dosyası olarak dışa aktarıp bir veritaban�
 
 İstemci Aracısı hakkında sık sorulan sorular için bkz. [Aracı SSS](sql-data-sync-agent-overview.md#agent-faq).
 
-**Kullanmaya başlayabilmeniz için özel bağlantıyı el ile onaylamanız gerekiyor mu?**
+**Bağlantıyı kullanmaya başlayabilmeniz için bağlantıyı el ile onaylamanız gerekiyor mu?**
 
 Evet, eşitleme grubu dağıtımı sırasında veya PowerShell kullanarak, Azure portal özel uç nokta bağlantıları sayfasında, hizmet yönetilen özel uç noktasını el ile onaylamanız gerekir.
+
+**Eşitleme işi Azure veritabanımı sağlanırken neden bir güvenlik duvarı hatası alıyorum?**
+
+Bu durum, Azure kaynaklarının sunucunuza erişmesine izin verilmediği için meydana gelebilir. Azure veritabanında güvenlik duvarının "Azure hizmetleri ve kaynaklarına bu sunucuya erişmesine Izin ver" ayarı "Evet" olarak ayarlanmış olduğundan emin olun.
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

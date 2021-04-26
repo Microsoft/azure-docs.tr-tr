@@ -4,15 +4,15 @@ description: Bu makalede bir Azure Analysis Services sunucusu için kaynak ve ne
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 05/19/2020
+ms.date: 03/29/2021
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: c2caab4e449f4299d00fff14b697887ec00f35e6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: beb4ca31b65d5de0b81030cdf3222418cb968060
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "83697501"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105732015"
 ---
 # <a name="analysis-services-resource-and-object-limits"></a>Kaynak ve nesne sınırlarını Analysis Services
 

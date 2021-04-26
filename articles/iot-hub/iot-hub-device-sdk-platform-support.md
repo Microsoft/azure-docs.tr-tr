@@ -7,12 +7,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 10/08/2019
 ms.author: robinsh
-ms.openlocfilehash: c47e67375e093ff6e9a5cf7193c76eeeb5228e29
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: ab450c6ec6ae32cafcf07e88940736f209973d8d
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105045663"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168051"
 ---
 # <a name="azure-iot-device-sdks-platform-support"></a>Azure IoT cihaz SDK 'Ları platform desteği
 
@@ -22,7 +22,7 @@ Microsoft, cihaz SDK 'larının yanı sıra müşterilerin ve geliştiricilerin 
 
 * Microsoft, donanım platformları için Azure IoT C SDK 'Sı temel alınarak geliştirme setleri yayımlamasına yardımcı olmak üzere birkaç iş ortağı şirketi ile işbirliği yapar.
 
-* Microsoft, Azure IoT için sınanmış ve sertifikalı bir sürekli genişleyen cihaz kümesi sağlamak üzere Microsoft güvenilir iş ortaklarıyla birlikte çalışır. Bu cihazların geçerli bir listesi için bkz. [IoT Için Azure Sertifikalı cihaz kataloğu](https://catalog.azureiotsolutions.com/).
+* Microsoft, Azure IoT için sınanmış ve sertifikalı bir sürekli genişleyen cihaz kümesi sağlamak üzere Microsoft güvenilir iş ortaklarıyla birlikte çalışır. Bu cihazların geçerli bir listesi için bkz. [IoT Için Azure Sertifikalı cihaz kataloğu](https://devicecatalog.azure.com/).
 
 * Microsoft, geliştiricilerin SDK 'ya kolayca SDK 'nın bağlantı noktası oluşturmasını sağlayan Azure IoT Hub Device C SDK 'sında bir platform soyutlama katmanı (PAL) sağlar. Daha fazla bilgi edinmek için bkz. [C SDK taşıma Kılavuzu](https://github.com/Azure/azure-c-shared-utility/blob/master/devdoc/porting_guide.md).
 
@@ -114,9 +114,9 @@ Cihaz platformunuz önceki bölümlerden biri kapsamında değilse, Azure IoT C 
 
 Microsoft, Azure IoT test ve sertifikalı cihazlarla Azure IoT Universe 'ı sürekli bir şekilde genişletmek için çok sayıda iş ortaklarıyla çalışır.
 
-* Azure IoT Sertifikalı cihazlara gitmek için bkz. [cihaz kataloğu IoT için Microsoft Azure Sertifikalı](https://catalog.azureiotsolutions.com/).
+* Azure IoT Sertifikalı cihazlara gitmek için bkz. [cihaz kataloğu IoT için Microsoft Azure Sertifikalı](https://devicecatalog.azure.com/).
 
-* IoT ekosistemi için Azure Sertifikalı hakkında daha fazla bilgi edinmek için bkz. [IoT ekosistemi Için sertifikalı ekleme](https://catalog.azureiotsolutions.com/register).
+* IoT ekosistemi için Azure Sertifikalı hakkında daha fazla bilgi edinmek için bkz. [IoT ekosistemi Için sertifikalı ekleme](../certification/overview.md).
 
 ## <a name="connecting-to-iot-hub-without-an-sdk"></a>SDK olmadan IoT Hub bağlanma
 

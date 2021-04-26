@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 09/02/2020
 ms.openlocfilehash: f55364fe0eabae4bb1698bd655cde8d3e01b127a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "97590469"
 ---
 # <a name="managing-the-mapping-data-flow-graph"></a>Eşleme veri akışı grafiğini yönetme
@@ -25,11 +25,11 @@ Eşleme veri akışları, veri akışı grafiği olarak bilinen bir tasarım yü
 
 Veri akışlarınız daha karmaşık olduğu için, veri akışı grafiğine etkin bir şekilde gezinmek ve bunları yönetmek için aşağıdaki mekanizmalardan yararlanın. 
 
-## <a name="moving-transformations"></a>Dönüşümleri taşıma
+## <a name="moving-transformations&quot;></a>Dönüşümleri taşıma
 
 Veri akışlarını eşleme bölümünde, bir bağlı dönüştürme mantığı kümesi **akış** olarak bilinir. **Gelen akış** alanı, geçerli dönüştürmeyi hangi veri akışının beslemeyi belirler. Her bir dönüşüme, işlevine bağlı olarak bir veya iki gelen akış vardır ve bir çıkış akışı temsil eder. Gelen akışların çıkış şeması, geçerli dönüşüm tarafından hangi sütun meta verilerine başvuramayacağını belirler.
 
-![Düğümü taşı](media/data-flow/move-nodes.png "düğümü taşı")
+![Düğümü taşı](media/data-flow/move-nodes.png &quot;düğümü taşı")
 
 Ardışık düzen tuvalinin aksine, veri akışı dönüştürmeleri bir sürükle ve bırak modeli kullanılarak düzenlenmez. Bir dönüşümün gelen akışını veya "taşıma" dönüşümünü değiştirmek için **gelen akış** açılan listesinden farklı bir değer seçin. Bunu yaptığınızda, tüm aşağı akış dönüştürmeleri düzenlenmiş dönüşüme göre hareket eder. Grafik, yeni mantıksal akışı göstermek için otomatik olarak güncelleştirilecek. Gelen akışı zaten aşağı akış dönüşümünü içeren bir dönüşüme değiştirirseniz yeni bir dal veya paralel veri akışı oluşturulur. [Eşleme veri akışı 'nda yeni dallar](data-flow-new-branch.md)hakkında daha fazla bilgi edinin.
 

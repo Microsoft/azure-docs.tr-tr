@@ -3,16 +3,18 @@ title: Hızlı başlangıç-Azure PowerShell kullanarak bir Azure özel DNS böl
 description: Bu hızlı başlangıçta, Azure PowerShell kullanarak ilk özel DNS bölgenizi ve kaydınızı oluşturmayı ve yönetmeyi öğreneceksiniz.
 services: dns
 author: rohinkoul
-ms.service: dns
-ms.topic: quickstart
-ms.date: 10/20/2020
 ms.author: rohink
-ms.openlocfilehash: ee6dde6b34cccd415f9bf2052f65dcbe940715c1
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 10/20/2020
+ms.topic: quickstart
+ms.service: dns
+ms.custom:
+- mode-api
+ms.openlocfilehash: 321cd9c9f85b7f1dc2540992d9db0aaefa1b9b62
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92424387"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535488"
 ---
 # <a name="quickstart-create-an-azure-private-dns-zone-using-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell kullanarak Azure özel DNS bölgesi oluşturma
 

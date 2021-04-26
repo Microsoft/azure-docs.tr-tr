@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 6/08/2020
 ms.author: robinsh
-ms.openlocfilehash: 82caf13618fe8483ab8d3a622c6c0d51ab05a206
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0b099f4ce91fd24e8d7baec054bcfc5a6cf0b032
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102177343"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567120"
 ---
 # <a name="visualize-real-time-sensor-data-from-azure-iot-hub-using-power-bi"></a>Azure IoT Hub Power BI kullanarak gerçek zamanlı algılayıcı verilerini görselleştirin
 
@@ -22,24 +22,14 @@ ms.locfileid: "102177343"
 
 [!INCLUDE [iot-hub-get-started-note](../../includes/iot-hub-get-started-note.md)]
 
-## <a name="what-you-learn"></a>Öğrenecekleriniz
+Bu makalede, Azure IoT Hub 'ınızın Power BI kullanarak aldığı gerçek zamanlı algılayıcı verilerini görselleştirmeyi öğreneceksiniz. IoT Hub 'ınızdaki verileri bir Web uygulamasıyla görselleştirmeyi denemek istiyorsanız bkz. [Azure IoT Hub gerçek zamanlı algılayıcı verilerini görselleştirmek için Web uygulaması kullanma](iot-hub-live-data-visualization-in-web-apps.md).
 
-Power BI kullanarak Azure IoT Hub 'ınızın aldığı gerçek zamanlı algılayıcı verilerini görselleştirmeyi öğreneceksiniz. IoT Hub 'ınızdaki verileri bir Web uygulamasıyla görselleştirmeyi denemek istiyorsanız bkz. [Azure IoT Hub gerçek zamanlı algılayıcı verilerini görselleştirmek için Web uygulaması kullanma](iot-hub-live-data-visualization-in-web-apps.md).
+## <a name="prerequisites"></a>Önkoşullar
 
-## <a name="what-you-do"></a>Yapabilecekleriniz
-
-* Bir tüketici grubu ekleyerek IoT Hub 'ınızı veri erişimi için hazırlayın.
-
-* IoT Hub 'ınızdan Power BI hesabınıza veri aktarımı için Stream Analytics işi oluşturun, yapılandırın ve çalıştırın.
-
-* Verileri görselleştirmek için bir Power BI raporu oluşturun ve yayımlayın.
-
-## <a name="what-you-need"></a>Gerekenler
-
-* [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun; Örneğin, [node.jsRaspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md). Bu makaleler aşağıdaki gereksinimleri kapsar:
+* [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun. Örneğin, [node.jsIle Raspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md) 'ye gidebilir veya [Telemetriyi gönder](quickstart-send-telemetry-dotnet.md) hızlı başlangıçlarından birine gidebilirsiniz. Bu makaleler aşağıdaki gereksinimleri kapsar:
   
   * Etkin bir Azure aboneliği.
-  * Aboneliğiniz kapsamındaki bir Azure IoT Hub 'ı.
+  * Aboneliğinizdeki bir Azure IoT Hub 'ı.
   * Azure IoT Hub 'ınıza ileti gönderen bir istemci uygulaması.
 
 * Power BI hesabı. ([Power BI ücretsiz deneyin](https://powerbi.microsoft.com/))

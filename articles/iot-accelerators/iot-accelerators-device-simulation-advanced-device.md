@@ -13,12 +13,12 @@ ms.custom:
 - amqp
 - mqtt
 - devx-track-js
-ms.openlocfilehash: 58891bdb4601744129c97454f43202d3ba07b709
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: dc2eac4e784d4224581078348f12b231befe1f35
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96852566"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714119"
 ---
 # <a name="create-an-advanced-device-model"></a>Gelişmiş bir cihaz modeli oluşturma
 
@@ -30,11 +30,11 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 Bu nasıl yapılır kılavuzundaki adımları izlemek için, Azure aboneliğinizde bir cihaz benzetiminin dağıtılmış örneğine ihtiyacınız vardır.
 
-Henüz cihaz benzetimi dağıtmadıysanız, GitHub 'da [cihaz benzetimi dağıtımı](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md) ' na bakın.
+Henüz cihaz benzetimi dağıtmadıysanız, GitHub 'da [cihaz benzetimi dağıtımı](https://github.com/Azure/azure-iot-pcs-device-simulation/blob/master/README.md) ' na bakın.
 
 ### <a name="open-device-simulation"></a>Cihaz Benzetimini açma
 
-Henüz cihaz benzetimi dağıtmadıysanız, GitHub 'da [cihaz benzetimi dağıtımı](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md) ' na bakın.
+Henüz cihaz benzetimi dağıtmadıysanız, GitHub 'da [cihaz benzetimi dağıtımı](https://github.com/Azure/azure-iot-pcs-device-simulation/blob/master/README.md) ' na bakın.
 
 ## <a name="device-models"></a>Cihaz modelleri
 

@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/21/2020
 ms.author: yelevin
-ms.openlocfilehash: 6d1314b79f09f1bed2de5d6964b0a6224b5962ca
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: b146e228de13109975a76b0e4c6c9fd183fd362d
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100096880"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600413"
 ---
 # <a name="connect-your-alcide-kaudit-to-azure-sentinel"></a>Alcide Kaudıt 'nizi Azure Sentinel 'e bağlama
 
@@ -46,7 +46,7 @@ Alcide Kaudıt, günlükleri doğrudan Azure Sentinel 'e aktarabilir.
 
 1. Galeriden **Alcide Kaudıt** ' i seçin ve ardından **bağlayıcı sayfasını aç** düğmesine tıklayın.
 
-1. [Alcide Kaudıt yükleme kılavuzunda](https://get.alcide.io/hubfs/Azure%20Sentinel%20Integration%20with%20kAudit.pdf)sunulan adım adım yönergeleri izleyin.
+1. [Alcide Kaudıt yükleme kılavuzunda](https://awesomeopensource.com/project/alcideio/kaudit?categoryPage=29#before-installing-alcide-kaudit)sunulan adım adım yönergeleri izleyin.
 
 1. Çalışma alanı KIMLIĞI ve birincil anahtar sorulduğunda, bunları Alcide Kaudıt veri bağlayıcı sayfasından kopyalayabilirsiniz.
 

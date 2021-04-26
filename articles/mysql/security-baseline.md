@@ -4,27 +4,25 @@ description: MySQL için Azure veritabanı güvenlik temeli, Azure Güvenlik kı
 author: msmbaldwin
 ms.service: mysql
 ms.topic: conceptual
-ms.date: 09/02/2020
+ms.date: 03/29/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: c05abc6b761b9839df83f3170ce295d4480ca96a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 62501d6174b9ef8806de0bbdae0dfedfe70da03a
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100577907"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105968093"
 ---
 # <a name="azure-security-baseline-for-azure-database-for-mysql"></a>MySQL için Azure veritabanı için Azure Güvenlik temeli
 
-MySQL için Azure veritabanı Azure Güvenlik temeli, dağıtımınızın güvenlik duruşunu artırmanıza yardımcı olacak öneriler içerir.
+Bu güvenlik temeli, [Azure Güvenlik kıyaslama sürüm 1,0](../security/benchmarks/overview-v1.md) ' den MySQL Için Azure veritabanı 'na kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve MySQL Için Azure veritabanı 'na uygulanan ilgili kılavuza göre gruplandırılır. **Denetimler** , MySQL Için Azure veritabanı 'na veya sorumluluğun Microsoft 'un ne olduğu konusunda geçerli değildir.
 
-Bu hizmetin taban çizgisi, Azure [güvenlik kıyaslama sürümü 1,0](../security/benchmarks/overview.md)' dan çizilir ve bu, en iyi yöntemler kılavuzumuzdan Azure 'da bulut çözümlerinizi nasıl güvence altına almak için öneriler sağlar.
+MySQL için Azure veritabanı 'nın Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için, [MySQL Için Azure veritabanı güvenlik temeli eşleme dosyasına](https://github.com/MicrosoftDocs/SecurityBenchmarks/tree/master/Azure%20Offer%20Security%20Baselines)bakın.
 
-Daha fazla bilgi için bkz. [Azure güvenlik temelleri 'ne genel bakış](../security/benchmarks/security-baselines-overview.md).
+## <a name="network-security"></a>Ağ Güvenliği
 
-## <a name="network-security"></a>Ağ güvenliği
-
-*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: ağ güvenliği](../security/benchmarks/security-control-network-security.md).*
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Ağ Güvenliği](../security/benchmarks/security-control-network-security.md).*
 
 ### <a name="11-protect-azure-resources-within-virtual-networks"></a>1,1: sanal ağlar içindeki Azure kaynaklarını koruma
 
@@ -36,13 +34,17 @@ Ayrıca, MySQL için Azure veritabanı sunucunuzu güvenlik duvarı kurallarıyl
 
 - [MySQL için Azure veritabanı için özel bağlantı yapılandırma](howto-configure-privatelink-portal.md)
 
-- [MySQL için Azure veritabanı 'nda VNet hizmet uç noktaları ve VNet kuralları oluşturma ve yönetme](../azure-sql/database/vnet-service-endpoint-rule-overview.md)
+- [MySQL için Azure veritabanı 'nda VNet hizmet uç noktaları ve VNet kuralları oluşturma ve yönetme](/azure/sql-database/sql-database-vnet-service-endpoint-rule-overview)
 
 - [MySQL için Azure veritabanı güvenlik duvarı kurallarını yapılandırma](howto-manage-firewall-using-portal.md)
 
-**Azure Güvenlik Merkezi izleme**: kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. DBforMySQL**:
+
+[!INCLUDE [Resource Policy for Microsoft.DBforMySQL 1.1](../../includes/policy/standards/asb/rp-controls/microsoft.dbformysql-1-1.md)]
 
 ### <a name="12-monitor-and-log-the-configuration-and-traffic-of-virtual-networks-subnets-and-network-interfaces"></a>1,2: sanal ağların, alt ağların ve ağ arabirimlerinin yapılandırma ve trafiğini izleme ve günlüğe kaydetme
 
@@ -54,17 +56,9 @@ Ayrıca, MySQL için Azure veritabanı sunucunuzu güvenlik duvarı kurallarıyl
 
 - [Trafik Analizi etkinleştirme ve kullanma](../network-watcher/traffic-analytics.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
 
-### <a name="13-protect-critical-web-applications"></a>1,3: kritik Web uygulamalarını koruma
-
-**Rehberlik**: uygulanamaz; Bu öneri, Azure App Service veya işlem kaynaklarında çalışan Web uygulamalarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="14-deny-communications-with-known-malicious-ip-addresses"></a>1,4: bilinen kötü amaçlı IP adresleriyle iletişimleri reddetme
 
@@ -76,9 +70,9 @@ DDoS saldırılarına karşı koruma sağlamak için MySQL için Azure veritaban
 
 - [DDoS korumasını yapılandırma](../ddos-protection/manage-ddos-protection.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="15-record-network-packets"></a>1,5: ağ paketlerini kaydetme
 
@@ -88,9 +82,9 @@ DDoS saldırılarına karşı koruma sağlamak için MySQL için Azure veritaban
 
 - [Trafik Analizi etkinleştirme ve kullanma](../network-watcher/traffic-analytics.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="16-deploy-network-based-intrusion-detectionintrusion-prevention-systems-idsips"></a>1,6: ağ tabanlı yetkisiz giriş algılama/yetkisiz erişim önleme sistemleri (KIMLIKLER/IP 'ler) dağıtma
 
@@ -98,17 +92,9 @@ DDoS saldırılarına karşı koruma sağlamak için MySQL için Azure veritaban
 
 - [MySQL için Azure veritabanı için Gelişmiş tehdit koruması yapılandırma](howto-database-threat-protection-portal.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
 
-### <a name="17-manage-traffic-to-web-applications"></a>1,7: Web uygulamalarına trafiği yönetme
-
-**Rehberlik**: uygulanamaz; Bu öneri, Azure App Service veya işlem kaynaklarında çalışan Web uygulamalarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="18-minimize-complexity-and-administrative-overhead-of-network-security-rules"></a>1,8: ağ güvenlik kurallarının karmaşıklığını ve yönetim yükünü en aza indirme
 
@@ -118,11 +104,11 @@ Note: MySQL için Azure veritabanı "Microsoft. SQL" hizmet etiketlerini kullan�
 
 - [Hizmet etiketlerini kullanma hakkında daha fazla bilgi için](../virtual-network/service-tags-overview.md)
 
-- [MySQL için Azure veritabanı 'nın hizmet etiketi kullanımını anlama](concepts-data-access-and-security-vnet.md#terminology-and-description)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [MySQL için Azure veritabanı 'nın hizmet etiketi kullanımını anlama](https://docs.microsoft.com/azure/mysql/concepts-data-access-and-security-vnet#terminology-and-description)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="19-maintain-standard-security-configurations-for-network-devices"></a>1,9: ağ cihazları için standart güvenlik yapılandırmalarının bakımını yapma
 
@@ -132,15 +118,17 @@ Note: MySQL için Azure veritabanı "Microsoft. SQL" hizmet etiketlerini kullan�
 
 - MySQL veritabanı sunucuları için SSL bağlantısını zorla etkinleştirilmelidir
 
+Daha fazla bilgi için aşağıdaki başvuruları inceleyin:
+
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Ağ için Azure Ilke örnekleri](../governance/policy/samples/index.md)
+- [Ağ için Azure Ilke örnekleri](/azure/governance/policy/samples/)
 
 - [Azure Blueprint oluşturma](../governance/blueprints/create-blueprint-portal.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="110-document-traffic-configuration-rules"></a>1,10: belge trafiği yapılandırma kuralları
 
@@ -148,55 +136,47 @@ Note: MySQL için Azure veritabanı "Microsoft. SQL" hizmet etiketlerini kullan�
 
 Etiketler ile tüm kaynakların oluşturulduğundan ve var olan etiketlenmemiş kaynakları bilgilendirmek için **etiket ve değer iste** gibi etiketlemeyle Ilgili yerleşik Azure ilke tanımlarından herhangi birini kullanın.
 
-Azure PowerShell veya Azure CLı kullanarak, etiketlerine göre kaynaklar üzerinde arama yapabilir veya eylemler gerçekleştirebilirsiniz.
+Azure PowerShell veya Azure CLı kullanarak, etiketlerine göre kaynakları arayabilir veya bunlarla ilgili eylemler gerçekleştirebilirsiniz.
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="111-use-automated-tools-to-monitor-network-resource-configurations-and-detect-changes"></a>1,11: ağ kaynağı yapılandırmasını izlemek ve değişiklikleri algılamak için otomatikleştirilmiş araçları kullanın
 
 **Kılavuz**: Azure etkinlik günlüğü 'nü kullanarak ağ kaynak yapılandırmasını Izleyin ve MySQL Için Azure veritabanı örnekleri ile ilgili ağ kaynaklarına yönelik değişiklikleri tespit edin. Kritik ağ kaynaklarında yapılan değişiklikler yürürlüğe girdiğinde tetiklenecek Azure Izleyici içinde uyarılar oluşturun.
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](../azure-monitor/essentials/activity-log.md#view-the-activity-log)
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](https://docs.microsoft.com/azure/azure-monitor/essentials/activity-log#view-the-activity-log)
 
 - [Azure Izleyici 'de uyarı oluşturma](../azure-monitor/alerts/alerts-activity-log.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="logging-and-monitoring"></a>Günlüğe kaydetme ve izleme
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="logging-and-monitoring"></a>Günlüğe Kaydetme ve İzleme
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: günlüğe kaydetme ve izleme](../security/benchmarks/security-control-logging-monitoring.md).*
-
-### <a name="21-use-approved-time-synchronization-sources"></a>2,1: onaylanan zaman eşitleme kaynaklarını kullanın
-
-**Rehberlik**: Microsoft, günlüklerde zaman damgalarına yönelik MySQL Için Azure veritabanı gibi Azure kaynakları için kullanılan saat kaynağını korur.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: Microsoft
 
 ### <a name="22-configure-central-security-log-management"></a>2,2: Merkezi güvenlik günlüğü yönetimini yapılandırma
 
 **Rehberlik**: MySQL Için Azure veritabanı örnekleri tarafından oluşturulan güvenlik verilerini toplamak Için tanılama ayarlarını ve sunucu günlüklerini ve alma günlüklerini etkinleştirin. Azure Izleyici 'de, Log Analytics çalışma alanı (ler) kullanarak Analizi sorgulayın ve gerçekleştirin ve uzun süreli/arşiv depolama için Azure depolama hesaplarını kullanın. Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri etkinleştirebilir ve bu verileri ayarlayabilirsiniz.
 
-- [MySQL için Azure veritabanı 'nda sunucu günlüklerini anlama](concepts-monitoring.md#server-logs)
+- [MySQL için Azure veritabanı 'nda sunucu günlüklerini anlama](https://docs.microsoft.com/azure/mysql/concepts-monitoring#server-logs)
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izleme**: kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="23-enable-audit-logging-for-azure-resources"></a>2,3: Azure kaynakları için denetim günlüğünü etkinleştirme
 
 **Rehberlik**: denetim, yavaş sorgu ve MySQL ölçüm günlüklerine erişmek için MySQL Için Azure veritabanınızda tanılama ayarlarını etkinleştirin. MySQL denetim günlüğünü özellikle etkinleştirdiğinizden emin olun. Otomatik olarak kullanılabilen etkinlik günlükleri Olay kaynağını, tarihi, kullanıcıyı, zaman damgasını, kaynak adreslerini, hedef adreslerini ve diğer yararlı öğeleri içerir. Ayrıca, Azure etkinlik günlüğü tanılama ayarlarını da etkinleştirebilir ve günlükleri aynı Log Analytics çalışma alanına veya depolama hesabına gönderebilirsiniz.
 
-- [MySQL için Azure veritabanı 'nda sunucu günlüklerini anlama](concepts-monitoring.md#server-logs)
+- [MySQL için Azure veritabanı 'nda sunucu günlüklerini anlama](https://docs.microsoft.com/azure/mysql/concepts-monitoring#server-logs)
 
 - [MySQL için Azure veritabanı için yavaş sorgu günlüklerini yapılandırma ve erişme](howto-configure-server-logs-in-portal.md)
 
@@ -204,33 +184,25 @@ Azure PowerShell veya Azure CLı kullanarak, etiketlerine göre kaynaklar üzeri
 
 - [Azure etkinlik günlüğü için tanılama ayarlarını yapılandırma](../azure-monitor/essentials/activity-log.md)
 
-**Azure Güvenlik Merkezi izleme**: kullanılamıyor
-
 **Sorumluluk**: Müşteri
 
-### <a name="24-collect-security-logs-from-operating-systems"></a>2,4: işletim sistemlerinden güvenlik günlüklerini toplama
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="25-configure-security-log-storage-retention"></a>2,5: güvenlik günlüğü depolama bekletmesini yapılandırma
 
 **Kılavuz**: Azure izleyici 'de, MySQL Için Azure veritabanı günlüklerini tutmak üzere kullanılan Log Analytics çalışma alanı için, saklama süresini kuruluşunuzun uyumluluk düzenlemelerine göre ayarlayın. Uzun süreli/arşiv depolama için Azure depolama hesaplarını kullanın.
 
-- [Log Analytics çalışma alanları için günlük saklama parametrelerini ayarlama](../azure-monitor/logs/manage-cost-storage.md#change-the-data-retention-period)
+- [Log Analytics çalışma alanları için günlük saklama parametrelerini ayarlama](https://docs.microsoft.com/azure/azure-monitor/logs/manage-cost-storage#change-the-data-retention-period)
 
-- [Kaynak günlüklerini bir Azure depolama hesabında depolama](../azure-monitor/essentials/resource-logs.md#send-to-azure-storage)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Kaynak günlüklerini bir Azure depolama hesabında depolama](https://docs.microsoft.com/azure/azure-monitor/essentials/resource-logs#send-to-azure-storage)
 
 **Sorumluluk**: Müşteri
 
+**Azure Güvenlik Merkezi izleme**: yok
+
 ### <a name="26-monitor-and-review-logs"></a>2,6: günlükleri izleme ve gözden geçirme
 
-**Rehberlik**: anormal davranışlar için MySQL Için Azure veritabanınızdaki günlükleri çözümleyin ve izleyin. Günlükleri gözden geçirmek ve günlük verilerinde sorgular gerçekleştirmek için Azure Izleyici Log Analytics kullanın. Alternatif olarak, Azure Sentinel 'e veya üçüncü taraf SıEM 'ye yönelik verileri etkinleştirebilir.
+**Rehberlik**: anormal davranışlar için MySQL Için Azure veritabanınızdaki günlükleri çözümleyin ve izleyin. Günlükleri gözden geçirmek ve günlük verilerinde sorgular gerçekleştirmek için Azure Izleyici Log Analytics kullanın. Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri etkinleştirebilir ve bu verileri ayarlayabilirsiniz.
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
@@ -238,9 +210,9 @@ Azure PowerShell veya Azure CLı kullanarak, etiketlerine göre kaynaklar üzeri
 
 - [Azure Izleyici 'de özel sorgular gerçekleştirme](../azure-monitor/logs/get-started-queries.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="27-enable-alerts-for-anomalous-activities"></a>2,7: anormal etkinlikler için uyarıları etkinleştir
 
@@ -250,7 +222,7 @@ Ayrıca, MySQL için sunucu günlüklerini ve tanılama ayarlarını etkinleşti
 
 - [MySQL için Azure veritabanı (Önizleme) için Gelişmiş tehdit korumasını etkinleştirme](howto-database-threat-protection-portal.md)
 
-- [MySQL için Azure veritabanı 'nda sunucu günlüklerini anlama](concepts-monitoring.md#server-logs)
+- [MySQL için Azure veritabanı 'nda sunucu günlüklerini anlama](https://docs.microsoft.com/azure/mysql/concepts-monitoring#server-logs)
 
 - [MySQL için Azure veritabanı için yavaş sorgu günlüklerini yapılandırma ve erişme](howto-configure-server-logs-in-portal.md)
 
@@ -260,37 +232,13 @@ Ayrıca, MySQL için sunucu günlüklerini ve tanılama ayarlarını etkinleşti
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
 
-### <a name="28-centralize-anti-malware-logging"></a>2,8: kötü amaçlı yazılımdan koruma 'yı merkezileştirme
+**Azure Güvenlik Merkezi izleme**: yok
 
-**Rehberlik**: uygulanamaz; MySQL için Azure veritabanı, kötü amaçlı yazılımdan koruma ile ilgili günlükleri işlemez veya oluşturmuyor.
+## <a name="identity-and-access-control"></a>Kimlik ve Erişim Denetimi
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-### <a name="29-enable-dns-query-logging"></a>2,9: DNS sorgu günlüğünü etkinleştir
-
-**Rehberlik**: geçerli değil; MySQL için Azure veritabanı, DNS ile ilgili günlükleri işlemez veya oluşturmuyor.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-### <a name="210-enable-command-line-audit-logging"></a>2,10: komut satırı denetim günlüğünü etkinleştir
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-## <a name="identity-and-access-control"></a>Kimlik ve erişim denetimi
-
-*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: kimlik ve erişim denetimi](../security/benchmarks/security-control-identity-access-control.md).*
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: kimlik ve Access Control](../security/benchmarks/security-control-identity-access-control.md).*
 
 ### <a name="31-maintain-an-inventory-of-administrative-accounts"></a>3,1: yönetim hesaplarının envanterini tutma
 
@@ -300,27 +248,27 @@ MySQL için Azure veritabanı, yerleşik rol tabanlı erişim denetimini destekl
 
 - [Azure aboneliği için özel rolleri anlama](../role-based-access-control/custom-roles.md) 
 
-- [MySQL için Azure veritabanı kaynak sağlayıcısı işlemlerini anlama](../role-based-access-control/resource-provider-operations.md#microsoftdbformysql)
+- [MySQL için Azure veritabanı kaynak sağlayıcısı işlemlerini anlama](https://docs.microsoft.com/azure/role-based-access-control/resource-provider-operations#microsoftdbformysql)
 
-- [MySQL için Azure veritabanı erişim yönetimini anlama](concepts-security.md#access-management)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [MySQL için Azure veritabanı erişim yönetimini anlama](https://docs.microsoft.com/azure/mysql/concepts-security#access-management)
 
 **Sorumluluk**: Müşteri
 
+**Azure Güvenlik Merkezi izleme**: yok
+
 ### <a name="32-change-default-passwords-where-applicable"></a>3,2: uygun yerlerde varsayılan parolaları değiştirme
 
-**Kılavuz**: Azure AD varsayılan parola kavramına sahip değildir.
+**Rehberlik**: Azure Active Directory (Azure AD) varsayılan parola kavramına sahip değil.
 
 Azure, MySQL için Azure veritabanı kaynağı oluşturulduktan sonra güçlü bir parola ile yönetici kullanıcı oluşturmaya zorlar. Ancak, MySQL örneği oluşturulduktan sonra ek kullanıcı oluşturmak ve bunlara yönetici erişimi vermek için oluşturduğunuz ilk sunucu yönetici hesabını kullanabilirsiniz. Bu hesapları oluştururken, her hesap için farklı ve güçlü bir parola yapılandırmadiğinizden emin olun.
 
 - [MySQL için Azure veritabanı için ek hesaplar oluşturma](howto-create-users.md)
 
-- [Yönetici parolasını güncelleştirme](howto-create-manage-server-portal.md#update-admin-password)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Yönetici parolasını güncelleştirme](https://docs.microsoft.com/azure/mysql/howto-create-manage-server-portal#update-admin-password)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="33-use-dedicated-administrative-accounts"></a>3,3: adanmış yönetim hesapları kullanın
 
@@ -330,57 +278,57 @@ Azure, MySQL için Azure veritabanı kaynağı oluşturulduktan sonra güçlü b
 
 - [MySQL için Azure veritabanı 'nda yönetici kullanıcılar oluşturmayı anlayın](howto-create-users.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="34-use-azure-active-directory-single-sign-on-sso"></a>3,4: Azure Active Directory çoklu oturum açma kullan (SSO)
 
-**Rehberlik**: MySQL Için Azure veritabanı 'nda oturum açma, hem veritabanında doğrudan yapılandırılan Kullanıcı adı/parola hem de bir Azure ACTIVE DIRECTORY (ad) kimliği kullanılarak ve bağlanmak Için BIR Azure AD belirtecinin kullanılmasıyla desteklenir. Bir Azure AD belirteci kullanırken, bir Azure AD kullanıcısı, bir Azure AD grubu veya veritabanına bağlanan bir Azure AD uygulaması gibi farklı yöntemler desteklenir.
+**Rehberlik**: MySQL Için Azure veritabanı 'nda oturum açma, hem veritabanında doğrudan yapılandırılan Kullanıcı adı/parola hem de bir Azure Active Directory (Azure AD) kimliği kullanılarak ve bağlanmak Için BIR Azure AD belirtecinin kullanılmasıyla desteklenir. Bir Azure AD belirteci kullanırken, bir Azure AD kullanıcısı, bir Azure AD grubu veya veritabanına bağlanan bir Azure AD uygulaması gibi farklı yöntemler desteklenir.
 
-Ayrıca, MySQL için denetim düzlemi erişimi, REST API aracılığıyla kullanılabilir ve SSO 'yu destekler. Kimlik doğrulaması yapmak için isteklerinizin yetkilendirme üst bilgisini Azure Active Directory aldığınız JSON Web Token ayarlayın.
+Ayrıca, MySQL için denetim düzlemi erişimi, REST API aracılığıyla kullanılabilir ve SSO 'yu destekler. Kimlik doğrulaması yapmak için isteklerinizin yetkilendirme üst bilgisini Azure AD 'den aldığınız bir JSON Web Token ayarlayın.
 
-- [MySQL için Azure veritabanı 'nda kimlik doğrulaması için Azure Active Directory kullanma](howto-configure-sign-in-azure-ad-authentication.md)
+- [MySQL için Azure veritabanı 'nda kimlik doğrulaması için Azure AD kullanma](howto-configure-sign-in-azure-ad-authentication.md)
 
 - [MySQL için Azure veritabanı REST API anlayın](/rest/api/mysql/)
 
 - [Azure AD ile SSO 'yu anlama](../active-directory/manage-apps/what-is-single-sign-on.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="35-use-multi-factor-authentication-for-all-azure-active-directory-based-access"></a>3,5: tüm Azure Active Directory tabanlı erişim için Multi-Factor Authentication kullanın
 
-**Rehberlik**: Azure Active Directory MULTI-Factor AUTHENTICATION (MFA) etkinleştirin ve Azure Güvenlik Merkezi kimlik ve erişim yönetimi önerilerini izleyin. Veritabanınızda oturum açmak için Azure AD belirteçlerini kullanırken, veritabanı oturum açma işlemleri için çok faktörlü kimlik doğrulaması gerektirmesini sağlar.
+**Rehberlik**: Azure Active Directory (Azure AD) çok faktörlü kimlik doğrulamasını etkinleştirin ve Azure Güvenlik Merkezi kimlik ve erişim yönetimi önerilerini izleyin. Veritabanınızda oturum açmak için Azure AD belirteçlerini kullanırken, veritabanı oturum açma işlemleri için çok faktörlü kimlik doğrulaması gerektirmesini sağlar.
 
-- [Azure'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
+- [Azure 'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
 
-- [MySQL için Azure veritabanı 'nda kimlik doğrulaması için Azure Active Directory kullanma](howto-configure-sign-in-azure-ad-authentication.md)
+- [MySQL için Azure veritabanı 'nda kimlik doğrulaması için Azure AD kullanma](howto-configure-sign-in-azure-ad-authentication.md)
 
 - [Azure Güvenlik Merkezi 'nde kimliği ve erişimi izleme](../security-center/security-center-identity-access.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="36-use-secure-azure-managed-workstations-for-administrative-tasks"></a>3,6: yönetim görevleri için güvenli, Azure tarafından yönetilen iş istasyonları kullanın
 
-**Kılavuz**: Azure kaynaklarını açmak ve yapılandırmak için yapılandırılmış MULTI-Factor AUTHENTICATION (MFA) ile ayrıcalıklı erişim iş Istasyonları (Paw) kullanın.
+**Kılavuz**: Azure kaynaklarını açmak ve yapılandırmak için yapılandırılmış çok faktörlü kimlik doğrulaması ile ayrıcalıklı erişim iş Istasyonları (Paw) kullanın.
 
 - [Ayrıcalıklı erişim Iş Istasyonları hakkında bilgi edinin](https://4sysops.com/archives/understand-the-microsoft-privileged-access-workstation-paw-security-model/)
 
-- [Azure'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure 'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="37-log-and-alert-on-suspicious-activities-from-administrative-accounts"></a>3,7: yönetim hesaplarından şüpheli etkinliklerle ilgili günlüğe kaydet ve uyar
 
 **Rehberlik**: MySQL Için Azure veritabanı 'nda, şüpheli etkinlik uyarıları oluşturmak Için Gelişmiş tehdit koruması 'nı etkinleştirin.
 
-Ayrıca, ortamda şüpheli veya güvenli olmayan bir etkinlik olduğunda Günlükler ve uyarılar oluşturmak için Azure AD Privileged Identity Management (PıM) kullanabilirsiniz.
+Ayrıca, ortamda şüpheli veya güvenli olmayan bir etkinlik olduğunda Günlükler ve uyarılar oluşturmak için Azure Active Directory (Azure AD) Privileged Identity Management (PıM) kullanabilirsiniz.
 
 Riskli Kullanıcı davranışında uyarıları ve raporları görüntülemek için Azure AD risk algılamalarını kullanın.
 
@@ -390,9 +338,9 @@ Riskli Kullanıcı davranışında uyarıları ve raporları görüntülemek iç
 
 - [Azure AD risk algılamalarını anlama](../active-directory/identity-protection/overview-identity-protection.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="38-manage-azure-resources-from-only-approved-locations"></a>3,8: Azure kaynaklarını yalnızca onaylanan konumlardan yönetme
 
@@ -400,55 +348,55 @@ Riskli Kullanıcı davranışında uyarıları ve raporları görüntülemek iç
 
 - [Azure 'da adlandırılmış konumları yapılandırma](../active-directory/reports-monitoring/quickstart-configure-named-locations.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="39-use-azure-active-directory"></a>3,9: Azure Active Directory kullanın
 
-**Rehberlik**: merkezi kimlik doğrulama ve yetkilendirme sistemi olarak Azure ACTIVE DIRECTORY (ad) kullanın. Azure AD, bekleyen ve aktarım sırasında veriler için güçlü şifrelemeyi kullanarak verileri korur. Azure AD Ayrıca, karma ve Kullanıcı kimlik bilgilerini güvenli bir şekilde depolar.
+**Rehberlik**: merkezi kimlik doğrulama ve yetkilendirme sistemi olarak Azure Active Directory (Azure AD) kullanın. Azure AD, bekleyen ve aktarım sırasında veriler için güçlü şifrelemeyi kullanarak verileri korur. Azure AD Ayrıca, karma ve Kullanıcı kimlik bilgilerini güvenli bir şekilde depolar.
 
 MySQL için Azure veritabanı 'nda oturum açmak için Azure AD kullanılması ve bağlanmak üzere bir Azure AD belirteci kullanmanız önerilir. Bir Azure AD belirteci kullanırken, bir Azure AD kullanıcısı, bir Azure AD grubu veya veritabanına bağlanan bir Azure AD uygulaması gibi farklı yöntemler desteklenir.
 
 Azure AD kimlik bilgileri, MySQL yönetici hesaplarını denetlemek için yönetim düzlemi düzeyinde (ör. Azure portal) yönetim için de kullanılabilir.
 
-- [MySQL için Azure veritabanı 'nda kimlik doğrulaması için Azure Active Directory kullanma](howto-configure-sign-in-azure-ad-authentication.md)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [MySQL için Azure veritabanı 'nda kimlik doğrulaması için Azure AD kullanma](howto-configure-sign-in-azure-ad-authentication.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="310-regularly-review-and-reconcile-user-access"></a>3,10: Kullanıcı erişimini düzenli olarak gözden geçirin ve karşılaştırın
 
-**Rehberlik**: MySQL Için Azure veritabanı yönetici rollerine sahip olabilecek eski hesapların keşfedilmesine yardımcı olmak için Azure Active Directory günlüklerini gözden geçirin. Ayrıca, grup üyeliklerini etkin bir şekilde yönetmek için Azure kimlik erişimi Incelemelerini kullanın, MySQL için Azure veritabanı 'na erişmek üzere kullanılabilecek kurumsal uygulamalara erişin ve rol atamaları vardır. Yalnızca doğru kullanıcıların erişmeye devam ettiğinden emin olmak için, Kullanıcı erişiminin her 90 gün gibi düzenli aralıklarla gözden geçirilmesi gerekir.
+**Rehberlik**: MySQL Için Azure veritabanı yönetici rollerine sahip olabilecek eski hesapları bulmaya yardımcı olması için Azure Active Directory (Azure AD) günlüklerini gözden geçirin. Ayrıca, grup üyeliklerini etkin bir şekilde yönetmek için Azure kimlik erişimi Incelemelerini kullanın, MySQL için Azure veritabanı 'na erişmek üzere kullanılabilecek kurumsal uygulamalara erişin ve rol atamaları vardır. Yalnızca doğru kullanıcıların erişmeye devam ettiğinden emin olmak için, Kullanıcı erişiminin her 90 gün gibi düzenli aralıklarla gözden geçirilmesi gerekir.
 
-- [Azure AD raporlamayı anlama](../active-directory/reports-monitoring/index.yml)
+- [Azure AD raporlamayı anlama](/azure/active-directory/reports-monitoring/)
 
 - [Azure kimlik erişimi Incelemelerini kullanma](../active-directory/governance/access-reviews-overview.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="311-monitor-attempts-to-access-deactivated-credentials"></a>3,11: devre dışı bırakılmış kimlik bilgilerine erişme girişimlerini izleme
 
-**Rehberlik**: MySQL Için Azure veritabanı ve Azure Active Directory Için tanılama ayarlarını etkinleştirin ve tüm günlükleri bir Log Analytics çalışma alanına gönderir. Log Analytics içinde istenen uyarıları (başarısız kimlik doğrulama girişimleri gibi) yapılandırın.
+**Rehberlik**: MySQL Için Azure veritabanı ve Azure Active Directory (Azure AD) Için tanılama ayarlarını etkinleştirin ve tüm günlükleri bir Log Analytics çalışma alanına gönderir. Log Analytics içinde istenen uyarıları (başarısız kimlik doğrulama girişimleri gibi) yapılandırın.
 
-- [MySQL için Azure veritabanı için yavaş sorgu günlüklerini yapılandırma ve erişme](./howto-configure-server-logs-in-portal.md)
+- [MySQL için Azure veritabanı için yavaş sorgu günlüklerini yapılandırma ve erişme](/Azure/mysql/howto-configure-server-logs-in-portal)
 
-- [MySQL için Azure veritabanı 'na yönelik denetim günlüklerini yapılandırma ve erişme](./howto-configure-audit-logs-portal.md)
+- [MySQL için Azure veritabanı 'na yönelik denetim günlüklerini yapılandırma ve erişme](/Azure/mysql/howto-configure-audit-logs-portal)
 
-- [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](../active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics.md)
-
-**Azure Güvenlik Merkezi izleme**: kullanılamıyor
+- [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](/azure/active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="312-alert-on-account-sign-in-behavior-deviation"></a>3,12: hesap oturum açma davranışı sapması üzerinde uyarı
 
 **Rehberlik**: MySQL Için Azure veritabanı 'nda, şüpheli etkinlik uyarıları oluşturmak Için Gelişmiş tehdit koruması 'nı etkinleştirin.
 
-Algılanan şüpheli eylemlere yönelik otomatik yanıtları yapılandırmak için Azure Active Directory kimlik koruması ve risk algılama özelliklerini kullanın. Kuruluşunuzun güvenlik yanıtlarını uygulamak için Azure Sentinel aracılığıyla otomatikleştirilmiş yanıtları etkinleştirebilirsiniz.
+Algılanan şüpheli eylemlere yönelik otomatik yanıtları yapılandırmak için Azure Active Directory (Azure AD) kimlik koruması ve risk algılama özelliklerini kullanın. Kuruluşunuzun güvenlik yanıtlarını uygulamak için Azure Sentinel aracılığıyla otomatikleştirilmiş yanıtları etkinleştirebilirsiniz.
 
 Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilirsiniz.
 
@@ -460,23 +408,13 @@ Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilir
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izleme**: kullanılamıyor
-
 **Sorumluluk**: Müşteri
 
-### <a name="313-provide-microsoft-with-access-to-relevant-customer-data-during-support-scenarios"></a>3,13: destek senaryoları sırasında Microsoft 'un ilgili müşteri verilerine erişimini sağlama
+**Azure Güvenlik Merkezi izleme**: yok
 
-**Rehberlik**: uygulanamaz; Müşteri Kasası henüz MySQL için Azure veritabanı için desteklenmiyor.
+## <a name="data-protection"></a>Veri Koruma
 
-- [Desteklenen Müşteri Kasası hizmetleri listesi](../security/fundamentals/customer-lockbox-overview.md#supported-services-and-scenarios-in-general-availability)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-## <a name="data-protection"></a>Veri koruma
-
-*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: veri koruma](../security/benchmarks/security-control-data-protection.md).*
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Veri Koruma](../security/benchmarks/security-control-data-protection.md).*
 
 ### <a name="41-maintain-an-inventory-of-sensitive-information"></a>4,1: hassas bilgilerin envanterini tutma
 
@@ -484,9 +422,9 @@ Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilir
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="42-isolate-systems-storing-or-processing-sensitive-information"></a>4,2: hassas bilgileri depolayan veya işleyen sistemleri yalıtma
 
@@ -494,17 +432,17 @@ Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilir
 
 - [Ek Azure abonelikleri oluşturma](../cost-management-billing/manage/create-subscription.md)
 
-- [Yönetim Grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
+- [Yönetim grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
 
 - [MySQL için Azure veritabanı için özel bağlantı yapılandırma](concepts-data-access-security-private-link.md)
 
-- [MySQL için Azure veritabanı 'nda VNet hizmet uç noktaları ve VNet kuralları oluşturma ve yönetme](../azure-sql/database/vnet-service-endpoint-rule-overview.md)
+- [MySQL için Azure veritabanı 'nda VNet hizmet uç noktaları ve VNet kuralları oluşturma ve yönetme](/azure/sql-database/sql-database-vnet-service-endpoint-rule-overview)
 
 - [MySQL için Azure veritabanı güvenlik duvarı kurallarını yapılandırma](concepts-firewall-rules.md)
 
-**Azure Güvenlik Merkezi izleme**: kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="43-monitor-and-block-unauthorized-transfer-of-sensitive-information"></a>4,3: hassas bilgilerin yetkisiz aktarımını izleme ve engelleme
 
@@ -512,25 +450,29 @@ Ayrıca, daha fazla araştırma için günlükleri Azure Sentinel 'e aktarabilir
 
 Microsoft, MySQL için Azure veritabanı 'nın temel altyapısını yönetir ve müşteri verilerinin kaybını veya açıklanmasını engellemek için katı denetimler uygulamıştır.
 
-- [MySQL için Azure veritabanı 'na veri alımını azaltma](concepts-data-access-security-private-link.md#data-exfiltration-prevention)
+- [MySQL için Azure veritabanı 'na veri alımını azaltma](https://docs.microsoft.com/azure/mysql/concepts-data-access-security-private-link#data-exfiltration-prevention)
 
 - [Azure’da müşteri verilerinin korunmasını anlama](../security/fundamentals/protection-customer-data.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="44-encrypt-all-sensitive-information-in-transit"></a>4,4: yoldaki tüm hassas bilgileri şifreleyin
 
 **Rehberlik**: MySQL Için Azure veritabanı, mysql sunucunuzu GÜVENLI yuva KATMANı (SSL) kullanarak istemci uygulamalarına bağlamayı destekler. Veritabanı sunucunuzla istemci uygulamalarınız arasında SSL bağlantılarının zorunlu tutulması, sunucuya uygulamanız arasındaki veri akışını şifreleyerek "bağlantıyı izinsiz izleme" saldırılarına karşı korumaya yardımcı olur. Azure portal, varsayılan olarak tüm MySQL için Azure veritabanı örnekleri için "SSL bağlantısını zorla" özelliğinin etkinleştirildiğinden emin olun.
 
-Şu anda MySQL için Azure veritabanı 'nda desteklenen TLS sürümü TLS 1,0, TLS 1,1, TLS 1,2.
+Şu anda MySQL için Azure veritabanı 'nda desteklenen TLS sürümleri TLS 1,0, TLS 1,1, TLS 1,2.
 
 - [MySQL için Azure veritabanı için iletim sırasında şifrelemeyi yapılandırma](concepts-ssl-connection-security.md)
 
-**Azure Güvenlik Merkezi izleme**: kullanılamıyor
-
 **Sorumluluk**: Paylaşılan
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. DBforMySQL**:
+
+[!INCLUDE [Resource Policy for Microsoft.DBforMySQL 4.4](../../includes/policy/standards/asb/rp-controls/microsoft.dbformysql-4-4.md)]
 
 ### <a name="45-use-an-active-discovery-tool-to-identify-sensitive-data"></a>4,5: hassas verileri belirlemek için etkin bir keşif aracı kullanın
 
@@ -540,11 +482,11 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 - [Azure’da müşteri verilerinin korunmasını anlama](../security/fundamentals/protection-customer-data.md)
 
-**Azure Güvenlik Merkezi izleme**: kullanılamıyor
-
 **Sorumluluk**: Paylaşılan
 
-### <a name="46-use-azure-rbac-to-control-access-to-resources"></a>4,6: kaynaklara erişimi denetlemek için Azure RBAC kullanma
+**Azure Güvenlik Merkezi izleme**: yok
+
+### <a name="46-use-azure-rbac-to-control-access-to-resources"></a>4,6: kaynaklara erişimi denetlemek için Azure RBAC kullanma 
 
 **Rehberlik**: MySQL Için Azure veritabanı denetim düzlemi (ör. Azure Portal) erişimini denetlemek için Azure rol tabanlı erişim denetimi (Azure RBAC) kullanın. Veri düzlemi erişimi için (veritabanının kendisi içinde), SQL sorgularını kullanarak kullanıcı oluşturun ve Kullanıcı izinlerini yapılandırın. Azure RBAC, veritabanı içindeki kullanıcı izinlerini etkilemez.
 
@@ -552,37 +494,9 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 - [MySQL için Azure veritabanı için SQL ile Kullanıcı erişimini yapılandırma](howto-create-users.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-### <a name="47-use-host-based-data-loss-prevention-to-enforce-access-control"></a>4,7: erişim denetimini zorlamak için ana bilgisayar tabanlı veri kaybı önleme kullanın
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-Microsoft, MySQL için Azure veritabanı 'nın temel altyapısını yönetir ve müşteri verilerinin kaybını veya açıklanmasını engellemek için katı denetimler uygulamıştır.
-
-- [Azure’da müşteri verilerinin korunmasını anlama](../security/fundamentals/protection-customer-data.md)
-
-**Azure Güvenlik Merkezi izlemesi**: Uygulanamaz
-
-**Sorumluluk**: Microsoft
-
-### <a name="48-encrypt-sensitive-information-at-rest"></a>4,8: hassas bilgileri Rest 'te şifreleyin
-
-**Rehberlik**: MySQL Için Azure veritabanı hizmeti, bekleyen verilerin depolama ŞIFRELEMESI için FIPS 140-2 tarafından doğrulanan şifreleme modülünü kullanır. Yedeklemeler de dahil olmak üzere veriler, sorgular çalıştırılırken oluşturulan geçici dosyalar hariç olmak üzere diskte şifrelenir. Hizmet, Azure depolama şifrelemesi 'ne dahil olan AES 256 bitlik şifrelemeyi kullanır ve anahtarlar sistem tarafından yönetilir. Depolama şifrelemesi her zaman açıktır ve devre dışı bırakılamaz.
-
-MySQL için Azure Veritabanı'nda verilerin müşteri tarafından yönetilen anahtarlarla şifrelenmesini sağlayarak bekleyen veriler için kendi anahtarını getir (KAG) yaklaşımından faydalanabilirsiniz. Şu anda bu özelliği kullanmak için erişim istemeniz gerekir. Bunu yapmak için şu bağlantıya başvurun:
-
-AskAzureDBforMySQL@service.microsoft.com
-
-- [MySQL için Azure veritabanı 'nda bekleyen şifrelemeyi anlama](concepts-security.md)
-
-- [MySQL için Azure veritabanı 'nda müşteri tarafından yönetilen anahtarları yapılandırma](concepts-data-encryption-mysql.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: Microsoft
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="49-log-and-alert-on-changes-to-critical-azure-resources"></a>4,9: kritik Azure kaynaklarında yapılan değişikliklerle ilgili günlük ve uyarı
 
@@ -590,11 +504,11 @@ AskAzureDBforMySQL@service.microsoft.com
 
 - [Azure etkinlik günlüğü olayları için uyarı oluşturma](../azure-monitor/alerts/alerts-activity-log.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="vulnerability-management"></a>Güvenlik açığı yönetimi
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="vulnerability-management"></a>Güvenlik Açığı Yönetimi
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: güvenlik açığı yönetimi](../security/benchmarks/security-control-vulnerability-management.md).*
 
@@ -608,43 +522,11 @@ Microsoft, MySQL için Azure veritabanı 'nı destekleyen temel sistemler üzeri
 
 - [Azure Güvenlik Merkezi 'nde Azure PaaS hizmetleri için özellik kapsamı](../security-center/features-paas.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Paylaşılan
 
-### <a name="52-deploy-automated-operating-system-patch-management-solution"></a>5,2: otomatik işletim sistemi düzeltme eki yönetimi çözümünü dağıtma
+**Azure Güvenlik Merkezi izleme**: yok
 
-**Rehberlik**: uygulanamaz; Bu kılavuz işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-### <a name="53-deploy-automated-patch-management-solution-for-third-party-software-titles"></a>5,3: üçüncü taraf yazılım başlıkları için otomatik düzeltme eki yönetimi çözümünü dağıtma
-
-**Rehberlik**: uygulanamaz; Bu kılavuz işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-### <a name="54-compare-back-to-back-vulnerability-scans"></a>5,4: geri dönüş güvenlik açığı taramalarını karşılaştırın
-
-**Rehberlik**: uygulanamaz; Bu kılavuz işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-### <a name="55-use-a-risk-rating-process-to-prioritize-the-remediation-of-discovered-vulnerabilities"></a>5,5: bulunan güvenlik açıklarının düzeltilmesine öncelik vermek için risk derecelendirme işlemi kullanın
-
-**Rehberlik**: Microsoft, MySQL Için Azure veritabanı 'nı destekleyen temel sistemler üzerinde güvenlik açığı yönetimi gerçekleştirir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: Microsoft
-
-## <a name="inventory-and-asset-management"></a>Envanter ve varlık yönetimi
+## <a name="inventory-and-asset-management"></a>Envanter ve Varlık Yönetimi
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: envanter ve varlık yönetimi](../security/benchmarks/security-control-inventory-asset-management.md).*
 
@@ -652,15 +534,15 @@ Microsoft, MySQL için Azure veritabanı 'nı destekleyen temel sistemler üzeri
 
 **Rehberlik**: abonelikleriniz dahilinde tüm kaynakları (MySQL Için Azure veritabanı örnekleri dahil) sorgulamak ve saptamak Için Azure Kaynak grafiğini kullanın. Kiracınızda uygun (okuma) izinleriniz olduğundan ve aboneliklerinizdeki kaynakların yanı sıra tüm Azure aboneliklerinin listesini belirleyebildiğinizden emin olun.
 
-- [Azure Graph ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
+- [Azure Kaynak Graf ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
 
 - [Azure aboneliklerinizi görüntüleme](/powershell/module/az.accounts/get-azsubscription)
 
 - [Azure RBAC 'yi anlama](../role-based-access-control/overview.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="62-maintain-asset-metadata"></a>6,2: varlık meta verilerini koruma
 
@@ -668,9 +550,9 @@ Microsoft, MySQL için Azure veritabanı 'nı destekleyen temel sistemler üzeri
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="63-delete-unauthorized-azure-resources"></a>6,3: yetkisiz Azure kaynaklarını silme
 
@@ -678,21 +560,21 @@ Microsoft, MySQL için Azure veritabanı 'nı destekleyen temel sistemler üzeri
 
 - [Ek Azure abonelikleri oluşturma](../cost-management-billing/manage/create-subscription.md)
 
-- [Yönetim Grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
+- [Yönetim grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="64-define-and-maintain-inventory-of-approved-azure-resources"></a>6,4: onaylanan Azure kaynaklarının envanterini tanımlayın ve saklayın
 
 **Rehberlik**: uygulanamaz; Bu öneri, bir bütün olarak işlem kaynaklarına ve Azure 'a yöneliktir.
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="65-monitor-for-unapproved-azure-resources"></a>6,5: onaylanmamış Azure kaynakları için izleyici
 
@@ -708,57 +590,25 @@ Ayrıca, aboneliklerdeki kaynakları sorgulamak ve saptamak için Azure Kaynak g
 
 - [Azure Kaynak Graf ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-### <a name="66-monitor-for-unapproved-software-applications-within-compute-resources"></a>6,6: işlem kaynakları içindeki onaylanmamış yazılım uygulamaları için izleyici
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-### <a name="67-remove-unapproved-azure-resources-and-software-applications"></a>6,7: onaylanmamış Azure kaynaklarını ve yazılım uygulamalarını kaldırma
-
-**Rehberlik**: uygulanamaz; Bu öneri, bir bütün olarak işlem kaynaklarına ve Azure 'a yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-### <a name="68-use-only-approved-applications"></a>6,8: yalnızca onaylanan uygulamaları kullan
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="69-use-only-approved-azure-services"></a>6,9: yalnızca onaylanan Azure hizmetlerini kullanın
 
 **Rehberlik**: aşağıdaki yerleşik ilke tanımlarını kullanarak müşteri aboneliklerinde oluşturulabilen kaynak türlerine kısıtlamalar koymak Için Azure ilkesini kullanın:
-
 - İzin verilmeyen kaynak türleri
-
 - İzin verilen kaynak türleri
+
+Daha fazla bilgi için aşağıdaki başvuruları inceleyin:
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](../governance/policy/samples/index.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](/azure/governance/policy/samples/index)
 
 **Sorumluluk**: Müşteri
 
-### <a name="610-maintain-an-inventory-of-approved-software-titles"></a>6,10: onaylanan yazılım başlıkları envanterini koruyun
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="611-limit-users-ability-to-interact-with-azure-resource-manager"></a>6,11: kullanıcıların Azure Resource Manager etkileşime geçme yeteneğini sınırlayın
 
@@ -766,27 +616,11 @@ Ayrıca, aboneliklerdeki kaynakları sorgulamak ve saptamak için Azure Kaynak g
 
 - [Azure Resource Manager erişimi engellemek için koşullu erişimi yapılandırma](../role-based-access-control/conditional-access-azure-management.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-### <a name="612-limit-users-ability-to-execute-scripts-within-compute-resources"></a>6,12: kullanıcıların işlem kaynakları içinde betikleri yürütme yeteneğini sınırlayın
+**Azure Güvenlik Merkezi izleme**: yok
 
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-### <a name="613-physically-or-logically-segregate-high-risk-applications"></a>6,13: yüksek riskli uygulamaları fiziksel olarak veya mantıksal olarak ayırt edin
-
-**Rehberlik**: uygulanamaz; Bu öneri, Azure App Service veya işlem kaynaklarında çalışan Web uygulamalarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-## <a name="secure-configuration"></a>Güvenli yapılandırma
+## <a name="secure-configuration"></a>Güvenli Yapılandırma
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: güvenli yapılandırma](../security/benchmarks/security-control-secure-configuration.md).*
 
@@ -800,17 +634,9 @@ MySQL veritabanı sunucuları için SSL bağlantısını zorla etkinleştirilmel
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-### <a name="72-establish-secure-operating-system-configurations"></a>7,2: güvenli işletim sistemi yapılandırması oluşturma
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="73-maintain-secure-azure-resource-configurations"></a>7,3: güvenli Azure Kaynak yapılandırmalarının bakımını yapma
 
@@ -820,37 +646,21 @@ MySQL veritabanı sunucuları için SSL bağlantısını zorla etkinleştirilmel
 
 - [Azure Ilke efektlerini anlama](../governance/policy/concepts/effects.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-### <a name="74-maintain-secure-operating-system-configurations"></a>7,4: güvenli işletim sistemi yapılandırmalarının bakımını yapma
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="75-securely-store-configuration-of-azure-resources"></a>7,5: Azure kaynaklarının yapılandırmasını güvenli bir şekilde depolayın
 
 **Kılavuz**: MySQL Için Azure veritabanı örnekleri ve ilgili kaynaklar Için özel Azure ilke tanımları kullanıyorsanız, kodunuzu güvenli bir şekilde depolamak ve yönetmek için Azure Repos kullanın.
 
-- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?view=azure-devops&preserve-view=true)
+- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow)
 
-- [Azure Repos belgeleri](/azure/devops/repos/index?view=azure-devops&preserve-view=true)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure Repos belgeleri](/azure/devops/repos/)
 
 **Sorumluluk**: Müşteri
 
-### <a name="76-securely-store-custom-operating-system-images"></a>7,6: özel işletim sistemi görüntülerini güvenli bir şekilde depolayın
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="77-deploy-configuration-management-tools-for-azure-resources"></a>7,7: Azure kaynakları için yapılandırma yönetimi araçları dağıtma
 
@@ -858,17 +668,9 @@ MySQL veritabanı sunucuları için SSL bağlantısını zorla etkinleştirilmel
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-### <a name="78-deploy-configuration-management-tools-for-operating-systems"></a>7,8: işletim sistemleri için yapılandırma yönetimi araçları dağıtma
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="79-implement-automated-configuration-monitoring-for-azure-resources"></a>7,9: Azure kaynakları için otomatik yapılandırma izlemeyi uygulama
 
@@ -876,17 +678,9 @@ MySQL veritabanı sunucuları için SSL bağlantısını zorla etkinleştirilmel
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-### <a name="710-implement-automated-configuration-monitoring-for-operating-systems"></a>7,10: işletim sistemleri için otomatik yapılandırma izlemeyi Uygula
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="711-manage-azure-secrets-securely"></a>7,11: Azure gizli dizilerini güvenli bir şekilde yönetin
 
@@ -898,25 +692,25 @@ MySQL veritabanı sunucuları için SSL bağlantısını zorla etkinleştirilmel
 
 - [Yönetilen kimlik ile Key Vault kimlik doğrulaması sağlama](../key-vault/general/assign-access-policy-portal.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="712-manage-identities-securely-and-automatically"></a>7,12: kimlikleri güvenli ve otomatik olarak yönetme
 
-**Rehberlik**: MySQL Için Azure veritabanı örneği, veritabanlarına erişmek için Azure Active Directory kimlik doğrulamasını destekler.  MySQL için Azure veritabanı örneği oluşturulurken, yönetici kullanıcı için kimlik bilgilerini sağlarsınız. Bu yönetici, ek veritabanı kullanıcıları oluşturmak için kullanılabilir.  
+**Rehberlik**: MySQL Için Azure veritabanı örneği, veritabanlarına erişmek için Azure Active Directory (Azure AD) kimlik doğrulamasını destekler. MySQL için Azure veritabanı örneği oluşturulurken, yönetici kullanıcı için kimlik bilgilerini sağlarsınız. Bu yönetici, ek veritabanı kullanıcıları oluşturmak için kullanılabilir.
 
 MySQL için Azure veritabanı örneklerine erişmek üzere kullanılan Azure App Service üzerinde çalışan Azure sanal makineleri veya Web uygulamaları için, MySQL için Azure veritabanı örneği için kimlik bilgilerini depolamak ve almak üzere Azure Key Vault ile birlikte Yönetilen Hizmet Kimliği kullanın. Key Vault geçici silmenin etkinleştirildiğinden emin olun.
 
-Azure Active Directory (AD) içinde otomatik olarak yönetilen bir kimlik ile Azure hizmetleri sağlamak için Yönetilen kimlikler kullanın. Yönetilen kimlikler, kodunuzda kimlik bilgileri olmadan Key Vault dahil olmak üzere Azure AD kimlik doğrulamasını destekleyen herhangi bir hizmette kimlik doğrulaması yapmanıza olanak sağlar.
+Azure AD 'de otomatik olarak yönetilen bir kimlik ile Azure hizmetleri sağlamak için Yönetilen kimlikler kullanın. Yönetilen kimlikler, kodunuzda kimlik bilgileri olmadan Key Vault dahil olmak üzere Azure AD kimlik doğrulamasını destekleyen herhangi bir hizmette kimlik doğrulaması yapmanıza olanak sağlar.
 
 - [Yönetilen kimlikleri yapılandırma](../active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm.md)
 
 - [Azure yönetilen kimliklerle tümleştirme](../azure-app-configuration/howto-integrate-azure-managed-service-identity.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="713-eliminate-unintended-credential-exposure"></a>7,13: istenmeyen kimlik bilgisi pozlamasını ortadan kaldırın
 
@@ -924,23 +718,13 @@ Azure Active Directory (AD) içinde otomatik olarak yönetilen bir kimlik ile Az
 
 - [Kimlik bilgisi tarayıcısı kurulumu](https://secdevtools.azurewebsites.net/helpcredscan.html)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="malware-defense"></a>Kötü amaçlı yazılımdan koruma
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="malware-defense"></a>Kötü Amaçlı Yazılımdan Koruma
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: kötü amaçlı yazılımdan koruma](../security/benchmarks/security-control-malware-defense.md).*
-
-### <a name="81-use-centrally-managed-anti-malware-software"></a>8,1: merkezi olarak yönetilen kötü amaçlı yazılımdan koruma yazılımı kullanın
-
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-Microsoft 'un kötü amaçlı yazılımdan koruma özelliği, Azure hizmetlerini destekleyen temel ana bilgisayar üzerinde etkinleştirilmiştir (örneğin, SQL için Azure veritabanı), ancak müşteri içeriği üzerinde çalışmaz.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
 
 ### <a name="82-pre-scan-files-to-be-uploaded-to-non-compute-azure-resources"></a>8,2: işlem dışı Azure kaynaklarına yüklenecek dosyaları önceden Tara
 
@@ -948,21 +732,11 @@ Microsoft 'un kötü amaçlı yazılımdan koruma özelliği, Azure hizmetlerini
 
 App Service, Data Lake Storage, BLOB depolama, MySQL için Azure veritabanı vb. gibi işlem dışı Azure kaynaklarına yüklenen tüm içerikleri önceden tarayın. Microsoft bu örneklerdeki verilerinize erişemez.
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Paylaşılan
 
-### <a name="83-ensure-anti-malware-software-and-signatures-are-updated"></a>8,3: kötü amaçlı yazılımdan koruma yazılımlarının ve imzaların güncelleştirildiğinden emin olun
+**Azure Güvenlik Merkezi izleme**: yok
 
-**Rehberlik**: uygulanamaz; Bu öneri, işlem kaynaklarına yöneliktir.
-
-Microsoft 'un kötü amaçlı yazılımdan koruma özelliği, Azure hizmetlerini destekleyen temel ana bilgisayarda (örneğin, MySQL için Azure veritabanı) etkinleştirilir, ancak müşteri içeriklerde çalıştırılmaz.
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
-**Sorumluluk**: yok
-
-## <a name="data-recovery"></a>Veri kurtarma
+## <a name="data-recovery"></a>Veri Kurtarma
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: veri kurtarma](../security/benchmarks/security-control-data-recovery.md).*
 
@@ -974,9 +748,13 @@ Microsoft 'un kötü amaçlı yazılımdan koruma özelliği, Azure hizmetlerini
 
 - [MySQL için Azure veritabanı başlangıç yapılandırması 'nı anlama](tutorial-design-database-using-portal.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Paylaşılan
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. DBforMySQL**:
+
+[!INCLUDE [Resource Policy for Microsoft.DBforMySQL 9.1](../../includes/policy/standards/asb/rp-controls/microsoft.dbformysql-9-1.md)]
 
 ### <a name="92-perform-complete-system-backups-and-backup-any-customer-managed-keys"></a>9,2: tam sistem yedeklemeleri gerçekleştirin ve müşterinin yönettiği tüm anahtarları yedekleyin
 
@@ -988,9 +766,13 @@ MySQL için Azure veritabanı örnekleri için kimlik bilgilerini depolamak üze
 
 - [Key Vault anahtarlarını yedekleme](/powershell/module/azurerm.keyvault/backup-azurekeyvaultkey)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Paylaşılan
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. DBforMySQL**:
+
+[!INCLUDE [Resource Policy for Microsoft.DBforMySQL 9.2](../../includes/policy/standards/asb/rp-controls/microsoft.dbformysql-9-2.md)]
 
 ### <a name="93-validate-all-backups-including-customer-managed-keys"></a>9,3: müşteri tarafından yönetilen anahtarlar dahil tüm yedeklemeleri doğrulama
 
@@ -1002,9 +784,9 @@ MySQL için Azure veritabanı örneklerini düzenli aralıklarla test edin.
 
 - [MySQL için Azure veritabanı 'nda yedeklemeyi ve geri yüklemeyi anlama](concepts-backup.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="94-ensure-protection-of-backups-and-customer-managed-keys"></a>9,4: yedeklemelerin ve müşteri tarafından yönetilen anahtarların korunmasını sağlayın
 
@@ -1012,13 +794,13 @@ MySQL için Azure veritabanı örneklerini düzenli aralıklarla test edin.
 
 - [MySQL için Azure veritabanı 'nda yedeklemeyi ve geri yüklemeyi anlama](concepts-backup.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
 
-## <a name="incident-response"></a>Olay yanıtı
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: olay yanıtı](../security/benchmarks/security-control-incident-response.md).*
+## <a name="incident-response"></a>Olay Yanıtı
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Olay Yanıtı](../security/benchmarks/security-control-incident-response.md).*
 
 ### <a name="101-create-an-incident-response-guide"></a>10,1: olay yanıtı kılavuzu oluşturma
 
@@ -1032,19 +814,19 @@ MySQL için Azure veritabanı örneklerini düzenli aralıklarla test edin.
 
 - [Müşteri, kendi olay yanıt planının oluşturulmasına yardımcı olması için NıST 'nin bilgisayar güvenliği olay Işleme kılavuzunu da kullanabilir](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="102-create-an-incident-scoring-and-prioritization-procedure"></a>10,2: olay Puanlama ve öncelik belirlemesi prosedürü oluşturma
 
-**Rehberlik**: Güvenlik Merkezi, ilk olarak hangi uyarıların araştırılması gerektiğini önceliklendirmenize yardımcı olmak için her bir uyarıya önem derecesi atar. Önem derecesi, uyarı veren etkinliğin arkasında kötü amaçlı bir amaç olduğunu ve uyarıyı vermek için kullanılan analitik düzeyini, ne kadar güvenli bir güvenlik merkezinin olduğunu temel alır.
+**Rehberlik**: Güvenlik Merkezi, ilk olarak hangi uyarıların araştırılması gerektiğini önceliklendirmenize yardımcı olmak için her bir uyarıya önem derecesi atar. Önem derecesi, güvenlik merkezi 'nin uyarıyı vermek için kullanılan bulma veya analizte ne kadar önemli olduğunu ve uyarıya yönelik etkinliğin arkasında kötü amaçlı bir amaç olduğunu bilmenin yanı sıra güven düzeyini temel alır.
 
 Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve Azure kaynaklarını net bir şekilde tanımlamak ve kategorilere ayırmak için bir adlandırma sistemi oluşturun.
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="103-test-security-response-procedures"></a>10,3: test Güvenliği Yanıt yordamları
 
@@ -1052,9 +834,9 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [NıST 'nin yayını: BT planları ve özellikleri için test, eğitim ve alıştırma programlarını inceleyin](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-84.pdf)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="104-provide-security-incident-contact-details-and-configure-alert-notifications-for-security-incidents"></a>10,4: güvenlik olaylarına ilişkin iletişim ayrıntılarını sağlayın ve güvenlik olayları için uyarı bildirimleri yapılandırın
 
@@ -1062,9 +844,9 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [Azure Güvenlik Merkezi güvenlik Ilgili kişisini ayarlama](../security-center/security-center-provide-security-contact-details.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="105-incorporate-security-alerts-into-your-incident-response-system"></a>10,5: güvenlik uyarılarını olay yanıt sisteminizle birleştirme
 
@@ -1074,9 +856,9 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [Uyarıların Azure Sentinel’e akışını yapma](../sentinel/connect-azure-security-center.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="106-automate-the-response-to-security-alerts"></a>10,6: güvenlik uyarılarına yanıtı otomatikleştirme
 
@@ -1084,25 +866,27 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 - [Iş akışı otomasyonu ve Logic Apps yapılandırma](../security-center/workflow-automation.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="penetration-tests-and-red-team-exercises"></a>Sızma testleri ve red team alıştırmaları
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="penetration-tests-and-red-team-exercises"></a>Sızma Testleri ve Red Team Alıştırmaları
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: Penetme testleri ve Red ekibi alıştırmaları](../security/benchmarks/security-control-penetration-tests-red-team-exercises.md).*
 
 ### <a name="111-conduct-regular-penetration-testing-of-your-azure-resources-and-ensure-remediation-of-all-critical-security-findings"></a>11,1: Azure kaynaklarınızın düzenli olarak sızma testini gerçekleştirin ve tüm kritik güvenlik bulgularını düzeltmeye dikkat edin
 
-**Rehberlik**: Penettim testlerinizin Microsoft ilkelerini ihlal etmediğinden emin olmak Için Microsoft katılım kurallarını izleyin: https://www.microsoft.com/msrc/pentest-rules-of-engagement?rtc=1
+**Rehberlik**: Penettim testlerinizin Microsoft ilkelerini ihlal etmediğinden emin olmak Için Microsoft bulut Penme test kurallarını izleyin. Microsoft tarafından yönetilen bulut altyapısına, hizmetlere ve uygulamalara yönelik kırmızı takım ve canlı site sızma testi gerçekleştirmek için Microsoft'un stratejisini ve yürütme sürecini kullanın.
 
-- [Microsoft 'un, Microsoft tarafından yönetilen bulut altyapısına, hizmetlerine ve uygulamalarına göre kırmızı ekip oluşturma ve canlı site sızma testini yürütme hakkında daha fazla bilgi edinebilirsiniz.](https://gallery.technet.microsoft.com/Cloud-Red-Teaming-b837392e)
+- [Sızma Testi Etkileşim Kuralları](https://www.microsoft.com/msrc/pentest-rules-of-engagement?rtc=1)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Microsoft Bulut ile Kırmızı Takım Oluşturma](https://gallery.technet.microsoft.com/Cloud-Red-Teaming-b837392e)
 
 **Sorumluluk**: Paylaşılan
 
+**Azure Güvenlik Merkezi izleme**: yok
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz. [Azure Güvenlik kıyaslaması](../security/benchmarks/overview.md)
-- [Azure güvenlik temelleri](../security/benchmarks/security-baselines-overview.md) hakkında daha fazla bilgi edinin
+- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](/azure/security/benchmarks/overview)
+- [Azure güvenlik temelleri](/azure/security/benchmarks/security-baselines-overview) hakkında daha fazla bilgi edinin

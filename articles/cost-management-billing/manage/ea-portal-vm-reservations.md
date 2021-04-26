@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: cost-management-billing
 ms.subservice: enterprise
 ms.reviewer: boalcsva
-ms.openlocfilehash: 072377f98939d996547cb6ee9f9a535b4b32a3dc
-ms.sourcegitcommit: fc401c220eaa40f6b3c8344db84b801aa9ff7185
-ms.translationtype: HT
+ms.openlocfilehash: 6303a94cec9efc01815b6dc6c697abdfe0f84227
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/20/2021
-ms.locfileid: "98597957"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220909"
 ---
 # <a name="azure-ea-vm-reserved-instances"></a>Azure EA VM ayrılmış örnekleri
 
@@ -96,7 +96,7 @@ Azure EA müşterilerinin Azure Ön Ödemesini tükettiği durumlarda da ayrılm
 
 ### <a name="reserved-instance-expiration"></a>Ayrılmış örnek süre sonu
 
-Ayırma süresinin bitimine 30 gün kala ve son gün e-posta bildirimi gönderilir. Ayırma süresi sona erdiğinde, dağıtılan VM’ler çalışmaya devam eder ve kullandıkça öde ücreti üzerinden faturalandırılır. Daha fazla bilgi için bkz. [Ayrılmış Sanal Makine Örnekleri teklifi](https://azure.microsoft.com/pricing/reserved-vm-instances/).
+Rezervasyon süre sonu ve diğeri süre sonu öncesinde ilk 1 30 gün önce bir e-posta bildirimi alacaksınız. Ayırma süresi sona erdiğinde, dağıtılan VM’ler çalışmaya devam eder ve kullandıkça öde ücreti üzerinden faturalandırılır. Daha fazla bilgi için bkz. [Ayrılmış Sanal Makine Örnekleri teklifi](https://azure.microsoft.com/pricing/reserved-vm-instances/).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

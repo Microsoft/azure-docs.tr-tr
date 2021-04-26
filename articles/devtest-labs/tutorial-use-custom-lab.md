@@ -4,12 +4,12 @@ description: Bu öğreticide, Azure DevTest Labs kullanılarak oluşturulan labo
 ms.topic: tutorial
 ms.date: 06/26/2020
 ms.author: spelluru
-ms.openlocfilehash: b4477e0b98ef534b8170ee297edf88ac6fa62dd7
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 96d41b74b3c143feb64fc9c602de68182787c08b
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "85476453"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107379477"
 ---
 # <a name="tutorial-access-a-lab-in-azure-devtest-labs"></a>Öğretici: Azure DevTest Labs’de bir laboratuvara erişme
 Bu öğreticide, [Öğretici: Azure DevTest Labs’de laboratuvar oluşturma](tutorial-create-custom-lab.md) başlıklı öğreticide oluşturulan laboratuvarı kullanırsınız.
@@ -46,7 +46,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 1. Listeden sanal makinenizi seçin. Sanal makineniz için **Sanal Makine sayfasını** görürsünüz. Araç çubuğunda **Bağlan**’ı seçin.
 
     ![Sanal makineye bağlanma](./media/tutorial-use-custom-lab/connect-button.png)
-2. İndirilen **RDP** dosyasını sabit diskinize kaydedin ve sanal makineye bağlanmak için bunu kullanın. Önceki bölümde sanal makine oluşturulurken belirttiğiniz kullanıcı adını ve parolayı belirtin. 
+2. İndirilen **RDP** dosyasını sabit diskinize kaydedin ve sanal makineye bağlanmak için kullanın. Önceki bölümde sanal makine oluşturulurken belirttiğiniz kullanıcı adını ve parolayı belirtin. 
 
     Bir Linux VM'ye bağlanmak için VM’nin SSH ve/veya RDP erişiminin etkinleştirilmesi gerekir. RDP üzerinden Linux VM’ye bağlanma adımları için bkz. [Azure’da Linux VM’ye bağlanmak için Uzak Masaüstü’nü yükleme ve yapılandırma](../virtual-machines/linux/use-remote-desktop.md). 
 

@@ -3,7 +3,6 @@ title: "Azure Hızlı Başlangıç: Azure portalı kullanarak Key Vault'tan gizl
 description: Azure portalı kullanarak Azure Key Vault'tan gizli dizi ayarlamayı ve almayı gösteren hızlı başlangıç
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: secrets
@@ -11,12 +10,12 @@ ms.topic: quickstart
 ms.custom: mvc
 ms.date: 09/03/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 904c00c26171854a32234d7b6ba5cac81ac43e5c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0c1a3362c4f1dfd3396ccd4704933d06d2611414
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97936677"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814127"
 ---
 # <a name="quickstart-set-and-retrieve-a-secret-from-azure-key-vault-using-the-azure-portal"></a>Hızlı başlangıç: Azure portalı kullanarak Azure Key Vault'tan gizli dizi ayarlama ve alma
 
@@ -82,8 +81,8 @@ Artık gerek kalmadığında kaynak grubunu silin; bunu yaptığınızda Key Vau
 Bu hızlı başlangıçta bir Key Vault oluşturdunuz ve içinde gizli dizi depolıdınız. Key Vault ve uygulamalarınızla tümleştirme hakkında daha fazla bilgi edinmek için aşağıdaki makalelere ilerleyin.
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
-- [Key Vault güvenli erişimi](../general/secure-your-key-vault.md) okuma
+- [Key Vault güvenli erişimi](../general/security-features.md) okuma
 - Bkz. [App Service Web uygulamasıyla Key Vault kullanma](../general/tutorial-net-create-vault-azure-web-app.md)
 - Bkz. [VM 'ye dağıtılan uygulama ile Key Vault kullanma](../general/tutorial-net-virtual-machine.md)
 - [Azure Key Vault geliştirici kılavuzuna](../general/developers-guide.md) bakın
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu gözden geçirin
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu gözden geçirin

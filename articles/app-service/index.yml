@@ -7,12 +7,12 @@ metadata:
   ms.topic: landing-page
   ms.service: app-service
   ms.date: 08/06/2020
-  ms.openlocfilehash: 60e96d9d7f930a733f107f4fee2d1d7ca0348223
-  ms.sourcegitcommit: dac05f662ac353c1c7c5294399fca2a99b4f89c8
+  ms.openlocfilehash: d385cfd0d6b83fb1c6f41751849c4bd79c09f7fe
+  ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/04/2021
-  ms.locfileid: "102122247"
+  ms.lasthandoff: 04/07/2021
+  ms.locfileid: "106579867"
 landingContent:
 - title: App Service hakkında
   linkLists:
@@ -32,10 +32,8 @@ landingContent:
   linkLists:
   - linkListType: quickstart
     links:
-    - text: İlk ASP.NET Core uygulaması
+    - text: İlk ASP.NET Web uygulaması
       url: quickstart-dotnetcore.md
-    - text: İlk ASP.NET uygulaması (yalnızca Windows)
-      url: quickstart-dotnet-framework.md
     - text: İlk Node.js uygulaması
       url: quickstart-nodejs.md
     - text: İlk PHP uygulaması
@@ -82,6 +80,8 @@ landingContent:
       url: deploy-ci-cd-custom-container.md
     - text: Kapsayıcıyı Depolama Dosyalarına bağlama
       url: configure-connect-to-azure-storage.md
+    - text: GitHub Eylemleriyle dağıtma
+      url: deploy-container-github-action.md
 - title: Veritabanıyla CRUD uygulaması
   linkLists:
   - linkListType: tutorial

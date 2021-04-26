@@ -3,16 +3,18 @@ title: 'Hızlı başlangıç: sunucu oluşturma-Azure portal-MariaDB için Azure
 description: Bu makalede, Azure portalı kullanarak yaklaşık 5 dakikada hızlıca örnek bir MariaDB için Azure Veritabanı sunucusu oluşturma adımları gösterilmektedir.
 author: savjani
 ms.author: pariks
-ms.service: mariadb
-ms.custom: mvc
-ms.topic: quickstart
 ms.date: 3/19/2020
-ms.openlocfilehash: 7b27bff50b4e2cfa57e41919552086ba1d31f217
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.topic: quickstart
+ms.service: mariadb
+ms.custom:
+- mvc
+- mode-portal
+ms.openlocfilehash: bcb8091bad6190648f35d8acdcb457f8b153ed63
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98662118"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531344"
 ---
 # <a name="quickstart-create-an-azure-database-for-mariadb-server-by-using-the-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak MariaDB sunucusu için Azure veritabanı oluşturma
 

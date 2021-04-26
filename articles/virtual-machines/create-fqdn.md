@@ -6,15 +6,15 @@ ms.service: virtual-machines
 ms.subservice: networking
 ms.topic: how-to
 ms.workload: infrastructure-services
-ms.date: 1/12/2020
+ms.date: 04/01/2021
 ms.author: cynthn
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: aadf4000da4ab88a3c3b4dee37d2179eb49d39d7
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b010070b7a45c24037c6de4648574c01b017d759
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98132073"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107406"
 ---
 # <a name="create-a-fully-qualified-domain-name-in-the-azure-portal-for-a-linux-vm"></a>Linux VM için Azure portal tam etki alanı adı oluşturma
 
@@ -25,11 +25,12 @@ Bu makalede, zaten bir VM oluşturmuş olduğunuz varsayılmaktadır. Gerekirse,
 
 
 1. Portalda VM 'nizi seçin. 
-1. Sol menüde **yapılandırma** ' yı seçin.
-1. **DNS adı etiketi** altında kullanmak istediğiniz ön eki girin.
-1. Sayfanın üst kısmındaki **Kaydet** ' i seçin.
-1. Sol menüdeki **genel bakış** ' ı seçerek VM 'ye genel bakış dikey penceresine dönün. 
-1. *DNS adının* doğru göründüğünü doğrulayın. 
+1. Sol taraftaki menüden **Özellikler** ' i seçin.
+1. **Genel IP Adresi\ DNS adı etiketi** altında IP adresinizi seçin.
+2. **DNS adı etiketi** altında kullanmak istediğiniz ön eki girin.
+3. Sayfanın üst kısmındaki **Kaydet** ' i seçin.
+4. Sol taraftaki menüden **genel bakış** ' ı seçerek VM 'ye genel bakış dikey penceresine dönün.
+5. **DNS adının** doğru göründüğünü doğrulayın. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

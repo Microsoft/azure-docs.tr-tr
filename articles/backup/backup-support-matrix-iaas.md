@@ -4,12 +4,12 @@ description: Azure Backup hizmeti ile Azure VM 'lerini yedeklerken destek ayarla
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.custom: references_regions
-ms.openlocfilehash: 82de73944bd833ec5f921e07a29960ac6d175f8d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1f63d0c3ad448a8ab9b91764d4c369fefddea25d
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102609796"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107516731"
 ---
 # <a name="support-matrix-for-azure-vm-backup"></a>Azure VM yedekleme için destek matrisi
 
@@ -25,10 +25,10 @@ Diğer destek matrisleri:
 
 Azure Backup hizmeti ile Azure VM 'lerini yedekleme ve geri yükleme işlemlerinin nasıl yapılacağını aşağıda bulabilirsiniz.
 
-**Senaryo** | **Backup** | **Aracısı** |**Geri yükleme**
+**Senaryo** | **Backup** | **Aracı** |**Geri yükleme**
 --- | --- | --- | ---
 Azure VM 'lerinin doğrudan yedeklemesi  | Tüm VM 'yi yedekleyin.  | Azure VM 'de ek bir aracı gerekmez. Azure Backup, VM üzerinde çalışan [Azure VM aracısına](../virtual-machines/extensions/agent-windows.md) bir uzantı yükleyip kullanır. | Aşağıdaki şekilde geri yükleyin:<br/><br/> - **Temel BIR VM oluşturun**. Bu, VM 'nin birden çok IP adresi gibi özel bir yapılandırması yoksa yararlıdır.<br/><br/> - **VM diskini geri yükleyin**. Diski geri yükleyin. Daha sonra mevcut bir VM 'ye bağlayın veya PowerShell 'i kullanarak diskten yeni bir VM oluşturun.<br/><br/> - **VM diskini değiştirin**. Bir VM varsa ve yönetilen diskler (şifrelenmemiş) kullanıyorsa, bir diski geri yükleyebilir ve sanal makinede var olan bir diski değiştirmek için kullanabilirsiniz.<br/><br/> - **Belirli dosyaları/klasörleri geri yükleyin**. Dosyaları/klasörleri VM 'nin tamamı yerine bir VM 'den geri yükleyebilirsiniz.
-Azure VM 'lerinin doğrudan yedeklemesi (yalnızca Windows)  | Belirli dosyaları/klasörleri/birimleri yedekleyin. | [Azure kurtarma hizmetleri Aracısı](backup-azure-file-folder-backup-faq.md)'nı yükler.<br/><br/> VM 'yi dosya/klasör düzeyinde yedeklemek için, Azure VM aracısının yedekleme uzantısı ile birlikte MARS aracısını çalıştırabilirsiniz. | Belirli klasörleri/dosyaları geri yükleyin.
+Azure VM 'lerinin doğrudan yedeklemesi (yalnızca Windows)  | Belirli dosyaları/klasörleri/birimleri yedekleyin. | [Azure kurtarma hizmetleri Aracısı](backup-azure-file-folder-backup-faq.yml)'nı yükler.<br/><br/> VM 'yi dosya/klasör düzeyinde yedeklemek için, Azure VM aracısının yedekleme uzantısı ile birlikte MARS aracısını çalıştırabilirsiniz. | Belirli klasörleri/dosyaları geri yükleyin.
 Azure VM 'yi yedekleme sunucusuna yedekleme  | Dosya/klasör/birim yedekleme; sistem durumu/çıplak dosyalar; uygulama verilerini System Center DPM 'ye veya Microsoft Azure Backup sunucusuna (MABS).<br/><br/> DPM/MABS daha sonra yedekleme kasasına yedekler. | DPM/MABS koruma aracısını VM 'ye yükler. MARS Aracısı DPM/MABS üzerine yüklenir.| Dosyaları/klasörleri/birimleri geri yükleme sistem durumu/çıplak dosyalar; uygulama verileri.
 
 [Yedekleme sunucusu](backup-architecture.md#architecture-back-up-to-dpmmabs) ve [destek gereksinimleri](backup-support-matrix-mabs-dpm.md)hakkında daha fazla bilgi edinin.
@@ -151,8 +151,9 @@ Bölge ile sabitlenmiş VM 'Leri geri yükleme | Desteklenir (Ocak 2019 ' den so
 Gen2 VM 'Leri | Desteklenir <br> Azure Backup, [Gen2 VM](https://azure.microsoft.com/updates/generation-2-virtual-machines-in-azure-public-preview/)'lerinin yedeklenmesini ve geri yüklenmesini destekler. Bu VM 'Ler kurtarma noktasından geri yüklendiğinde, [Gen2 VM](https://azure.microsoft.com/updates/generation-2-virtual-machines-in-azure-public-preview/)olarak geri yüklenir.
 Kilitleri olan Azure VM 'lerinin yedeklenmesi | Yönetilmeyen VM 'Ler için desteklenmez. <br><br> Yönetilen VM 'Ler için desteklenir.
 [Spot VM'ler](../virtual-machines/spot-vms.md) | Desteklenmez. Azure Backup, normal Azure VM 'Leri olarak spot VM 'Leri geri yükler.
-[Azure adanmış ana bilgisayar](../virtual-machines/dedicated-hosts.md) | Desteklenir
+[Azure Ayrılmış Konak](../virtual-machines/dedicated-hosts.md) | Desteklenir
 Tek başına Azure VM 'lerinin Windows depolama alanları yapılandırması | Desteklenir
+[Azure VM Ölçek Kümeleri](../virtual-machine-scale-sets/virtual-machine-scale-sets-orchestration-modes.md#scale-sets-with-flexible-orchestration) | Tek bir Azure VM 'yi yedeklemek ve geri yüklemek için hem Tekdüzen hem de esnek düzenleme modelleri için desteklenir.
 
 ## <a name="vm-storage-support"></a>VM depolama desteği
 

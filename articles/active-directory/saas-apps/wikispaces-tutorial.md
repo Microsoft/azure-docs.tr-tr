@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 03/28/2019
 ms.author: jeedes
 ms.openlocfilehash: 877f589c19663503b9bb0b1627f1dffe0eba1a23
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96302736"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-wikispaces"></a>Öğretici: Wkispaces ile tümleştirme Azure Active Directory
@@ -176,17 +176,17 @@ Bu bölümde, Weripaces 'e erişim vererek Azure çoklu oturum açma özelliğin
 
 7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-wikispaces-test-user"></a>Wkispaces test kullanıcısı oluşturma
+### <a name="create-wikispaces-test-user&quot;></a>Wkispaces test kullanıcısı oluşturma
 
 Azure AD kullanıcılarının we Paces 'de oturum açmasını sağlamak için bunların w, Wes 'de sağlanması gerekir. Wun WIN olması durumunda, sağlama el ile gerçekleştirilen bir görevdir.
 
-### <a name="to-provision-a-user-accounts-perform-the-following-steps"></a>Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:
+### <a name=&quot;to-provision-a-user-accounts-perform-the-following-steps&quot;></a>Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:
 
 1. **Wempaces** şirket sitenizde yönetici olarak oturum açın.
 
 2. **Üyelere** git.
    
-    ![Üyeler](./media/wikispaces-tutorial/ic787193.png "Üyeler")
+    ![Üyeler](./media/wikispaces-tutorial/ic787193.png &quot;Üyeler")
 
 3. **Kişileri davet et**' e tıklayın.
    

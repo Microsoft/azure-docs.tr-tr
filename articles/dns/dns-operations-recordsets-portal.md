@@ -8,10 +8,10 @@ ms.topic: how-to
 ms.date: 10/6/2018
 ms.author: rohink
 ms.openlocfilehash: 22ceba69ecf865d906021068a39a9d273b842ca2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "94965740"
 ---
 # <a name="manage-dns-records-and-record-sets-by-using-the-azure-portal"></a>Azure portal kullanarak DNS kayıtlarını ve kayıt kümelerini yönetme
@@ -87,13 +87,13 @@ Kayıt kümesinden kayıtları kaldırmak için Azure portal kullanabilirsiniz. 
 3. Adın, silmek istediğiniz kayıt kümesiyle eşleştiğinden emin olun ve ardından **Evet**' e tıklayın.
 4. **DNS bölgesi** dikey penceresinde, kayıt kümesinin artık görünür olmadığını doğrulayın.
 
-## <a name="work-with-ns-and-soa-records"></a>NS ve SOA kayıtlarıyla çalışma
+## <a name="work-with-ns-and-soa-records&quot;></a>NS ve SOA kayıtlarıyla çalışma
 
 Otomatik olarak oluşturulan NS ve SOA kayıtları, diğer kayıt türlerinden farklı şekilde yönetilir.
 
-### <a name="modify-soa-records"></a>SOA kayıtlarını değiştirme
+### <a name=&quot;modify-soa-records&quot;></a>SOA kayıtlarını değiştirme
 
-Tepesinde (Name = "") bölgesinde otomatik olarak oluşturulan SOA kayıt kümesine kayıt ekleyemez veya buradan kayıt kaldıramazsınız \@ . Bununla birlikte, SOA kaydındaki parametrelerden herhangi birini ("ana bilgisayar" hariç) ve kayıt kümesi TTL 'sini de değiştirebilirsiniz.
+Tepesinde (Name = &quot;") bölgesinde otomatik olarak oluşturulan SOA kayıt kümesine kayıt ekleyemez veya buradan kayıt kaldıramazsınız \@ . Bununla birlikte, SOA kaydındaki parametrelerden herhangi birini ("ana bilgisayar" hariç) ve kayıt kümesi TTL 'sini de değiştirebilirsiniz.
 
 ### <a name="modify-ns-records-at-the-zone-apex"></a>Tepesinde bölgesinde NS kayıtlarını değiştirme
 

@@ -6,15 +6,15 @@ ms.service: iot-hub
 services: iot-hub
 ms.devlang: csharp
 ms.topic: quickstart
-ms.custom: references_regions
+ms.custom: references_regions, devx-track-azurecli
 ms.date: 03/14/2019
 ms.author: robinsh
-ms.openlocfilehash: 12e26818f86fc4abdc1873d031182fd994c04687
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5bd33a2da6b2f1ae775f088950f14ac4df465fbf
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98624380"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107863956"
 ---
 # <a name="quickstart-enable-ssh-and-rdp-over-an-iot-hub-device-stream-by-using-a-c-proxy-application-preview"></a>Hızlı başlangıç: bir C# proxy uygulaması (Önizleme) kullanarak IoT Hub cihaz akışı üzerinden SSH ve RDP 'yi etkinleştirme
 
@@ -37,7 +37,7 @@ Bu makalede ilk olarak SSH kurulumu (bağlantı noktası 22 kullanılarak) açı
 
 * Bu hızlı başlangıçta çalıştırdığınız iki örnek uygulama C# dilinde yazılmıştır. Geliştirme makinenizde .NET Core SDK 2.1.0 veya üzeri bir sürüm gerekir.
 
-    [.NET Core SDK .net 'ten birden çok platform için](https://www.microsoft.com/net/download/all)indirebilirsiniz.
+    [.NET Core SDK .net 'ten birden çok platform için](https://dotnet.microsoft.com/download)indirebilirsiniz.
 
     Aşağıdaki komutu kullanarak geliştirme makinenizde geçerli C# sürümünü doğrulayın:
 

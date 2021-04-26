@@ -5,14 +5,14 @@ author: yashesvi
 ms.service: cost-management-billing
 ms.subservice: reservations
 ms.topic: how-to
-ms.date: 03/16/2021
+ms.date: 04/14/2021
 ms.author: banders
-ms.openlocfilehash: bd16bbbe33876a3c44b20c5d1756b83814f9b17d
-ms.sourcegitcommit: 27cd3e515fee7821807c03e64ce8ac2dd2dd82d2
+ms.openlocfilehash: 3e8f50efd04364483c32ecb8ef5020bdd053e55b
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/16/2021
-ms.locfileid: "103601959"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515490"
 ---
 # <a name="self-service-exchanges-and-refunds-for-azure-reservations"></a>Azure Rezervasyonları için self servis değişimler ve para iadeleri
 
@@ -27,8 +27,6 @@ Bir rezervasyon alışverişi yaptığınızda, döneminizin bir yıldan üç y�
 Ayrıca rezervasyonlar için para iadesi de alabilirsiniz ama faturalama kapsamınızdaki (EA; Microsoft Müşteri Sözleşmesi ve Microsoft İş Ortağı Sözleşmesi gibi) tüm iptal edilen rezervasyon taahhütlerinin toplamı son 12 aylık hareketli zaman penceresinde 50.000 ABD Dolarını aşamaz.
 
 Azure Databricks ayrılmış kapasitesi, CloudSimple Azure VMware çözümü rezervasyonu, Azure Red Hat Açık Vardiya rezervasyonu, Red Hat planları ve SUSE Linux planları para iadesine uygun değildir.
-
-Self servis değişim ve iptal özelliği US Government Kurumsal Anlaşma müşterileri tarafından kullanılamaz. Kullandıkça Öde ve Bulut Çözümü Sağlayıcısı (CSP) da dahil olmak üzere diğer US Government abonelik türleri desteklenir.
 
 > [!NOTE]
 > - **Mevcut rezervasyonu değiştirmek veya para iadesi almak için Rezervasyon Siparişi üzerinde sahip erişiminiz olmalıdır**. [Rezervasyonu yönetebilecek kullanıcıları ekleyebilir veya değiştirebilirsiniz](./manage-reserved-vm-instance.md#who-can-manage-a-reservation-by-default).

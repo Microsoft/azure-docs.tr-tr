@@ -7,10 +7,10 @@ ms.date: 1/11/2021
 ms.topic: conceptual
 ms.service: iot-hub-device-update
 ms.openlocfilehash: 0512308fbaa0a725c6ecca573c70c90d8c04e247
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105558389"
 ---
 # <a name="ports-used-with-device-update-for-iot-hub"></a>IoT Hub için cihaz güncelleştirmesiyle kullanılan bağlantı noktaları

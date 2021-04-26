@@ -5,12 +5,12 @@ ms.assetid: 5b63649c-ec7f-4564-b168-e0a74cb7e0f3
 ms.topic: conceptual
 ms.date: 08/17/2020
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 490fa46deabc822e416705fe9bf9c5cdb58f8cd6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 079ac41f8b138bccbe4d435a79836d3acee71b7d
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97936774"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728632"
 ---
 # <a name="azure-functions-hosting-options"></a>Azure Işlevleri barındırma seçenekleri
 
@@ -28,7 +28,7 @@ Bu makalede, Kubernetes tabanlı barındırma ile birlikte çeşitli barındırm
 
 Aşağıda, Işlevleri için üç ana barındırma planının avantajlarından oluşan bir Özet verilmiştir:
 
-| | |
+| Planlama | Avantajlar |
 | --- | --- |  
 |**[Tüketim planı](consumption-plan.md)**| Otomatik olarak ölçeklendirin ve işlevleriniz çalışırken yalnızca işlem kaynakları için ödeme yapın.<br/><br/>Tüketim planında, Işlevler ana bilgisayarının örnekleri, gelen olayların sayısına göre dinamik olarak eklenir ve kaldırılır.<br/><br/> ✔ Varsayılan barındırma planı.<br/>✔ Yalnızca işlevleriniz çalışırken ödeyin.<br/>✔, Yüksek yük dönemlerinde bile otomatik olarak ölçeklendirilir.|  
 |**[Premium planı](functions-premium-plan.md)**|, Boşta kaldıktan sonra gecikme olmadan uygulamaları çalıştıran, daha güçlü örneklerde çalışan ve sanal ağlara bağlanan, önceden çarpımış çalışanları kullanarak isteğe bağlı olarak otomatik olarak ölçeklendirin. <br/><br/>Aşağıdaki durumlarda Azure Işlevleri Premium planını göz önünde bulundurun: <br/><br/>İşlev uygulamalarınızın sürekli veya neredeyse sürekli çalışmasını ✔.<br/>✔ Yüksek sayıda küçük yürütmeler ve yüksek bir yürütme faturanız, ancak tüketim planında düşük GB saniyedir.<br/>✔ Tüketim planı tarafından sağlandıkından daha fazla CPU veya bellek seçeneği gerekir.<br/>Kodunuzun, tüketim planında izin verilen en uzun yürütme süresinden daha uzun süre çalışmasını ✔.<br/>✔, Sanal ağ bağlantısı gibi tüketim planında kullanılamayan özellikler gerektirir.|  
@@ -36,7 +36,7 @@ Aşağıda, Işlevleri için üç ana barındırma planının avantajlarından o
 
 Bu makaledeki karşılaştırma tabloları, işlev uygulamalarınızın çalıştırılacağı en yüksek denetim ve yalıtım miktarını sağlayan aşağıdaki barındırma seçeneklerini de içerir.  
 
-| | |
+| Barındırma seçeneği | Ayrıntılar |
 | --- | --- |  
 |**[ASE](dedicated-plan.md)** | App Service Ortamı (ASE), yüksek ölçekte App Service uygulamaları güvenli bir şekilde çalıştırmak için tam olarak yalıtılmış ve ayrılmış bir ortam sağlayan bir App Service özelliğidir.<br/><br/>ASEs, gereken uygulama iş yükleri için uygundur: <br/><br/>Çok yüksek ölçekli ✔.<br/>Tam işlem yalıtımı ve güvenli ağ erişimi ✔.<br/>✔ Yüksek bellek kullanımı.|  
 | **[Kubernetes](functions-kubernetes-keda.md)** | Kubernetes, Kubernetes platformunun üstünde çalışan tam yalıtılmış ve ayrılmış bir ortam sağlar.<br/><br/> Kubernetes şunları gerektiren uygulama iş yükleri için uygundur: <br/>Özel donanım gereksinimlerini ✔.<br/>Yalıtım ve güvenli ağ erişimi ✔.<br/>Karma veya çok bulut ortamında çalıştırmak ✔.<br/>✔, Mevcut Kubernetes uygulamaları ve hizmetleriyle birlikte çalışır.|  
@@ -65,7 +65,7 @@ Aşağıdaki tabloda barındırma planları için desteklenen işletim sistemi v
 
 Aşağıdaki tabloda, çeşitli barındırma planlarının ölçeklendirme davranışları karşılaştırılmaktadır.
 
-| | Ölçeği genişletme | En fazla # örnek |
+| Planlama | Ölçeği genişletme | En fazla # örnek |
 | --- | --- | --- |
 | **[Tüketim planı](consumption-plan.md)** | [Olay odaklı](event-driven-scaling.md). Yüksek yük dönemlerinde bile otomatik olarak ölçeklendirin. Azure Işlevleri altyapısı, gelen tetikleyici olaylarının sayısına bağlı olarak Işlevler ana bilgisayarının ek örneklerini ekleyerek CPU ve bellek kaynaklarını ölçeklendirir. | 200 |
 | **[Premium planı](functions-premium-plan.md)** | [Olay odaklı](event-driven-scaling.md). Yüksek yük dönemlerinde bile otomatik olarak ölçeklendirin. Azure Işlevleri altyapısı, işlevlerinin tetiklendiği olay sayısına göre Işlevler ana bilgisayarının ek örneklerini ekleyerek CPU ve bellek kaynaklarını ölçeklendirir. |100|
@@ -77,7 +77,7 @@ Aşağıdaki tabloda, çeşitli barındırma planlarının ölçeklendirme davra
 
 ## <a name="cold-start-behavior"></a>Soğuk başlangıç davranışı
 
-|    |    | 
+| Planlama | Ayrıntılar | 
 | -- | -- |
 | **[Tüketim &nbsp; planı](consumption-plan.md)** | Boşta kaldığında uygulamalar sıfıra ölçeklendirebilir, ancak bazı isteklerin başlangıçta ek gecikmesi olabilir.  Tüketim planı, işlev Konağı ve dil işlemlerini çalıştıran önceden çarpımış yer tutucu işlevlerden çekme dahil olmak üzere soğuk başlangıç süresini azaltmanıza yardımcı olmak için bazı iyileştirmeler içerir. |
 | **[Premium planı](functions-premium-plan.md)** | Tüm soğuk başlarını önlemek için sıcak örnekler adet sürekli. |
@@ -95,7 +95,7 @@ Aşağıdaki tabloda, çeşitli barındırma planlarının ölçeklendirme davra
 
 ## <a name="billing"></a>Faturalandırma
 
-| | | 
+| Planlama | Ayrıntılar |
 | --- | --- |
 | **[Tüketim planı](consumption-plan.md)** | Yalnızca işlevlerinizin çalıştığı süre için ödeme yapın. Fatura oluşturulurken yürütme sayısı, yürütme süresi ve kullanılan bellek temel alınır. |
 | **[Premium planı](functions-premium-plan.md)** | Premium plan, gerekli ve önceden çarpımış örnekler genelinde kullanılan çekirdek saniye ve bellek sayısını temel alır. Plan başına en az bir örnek her zaman sıcak tutulmalıdır. Bu plan, en öngörülebilir fiyatlandırmayı sağlar. |

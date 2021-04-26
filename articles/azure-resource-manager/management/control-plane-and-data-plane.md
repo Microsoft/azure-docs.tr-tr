@@ -4,10 +4,10 @@ description: Denetim düzlemi ve veri düzlemi işlemleri arasındaki farkı aç
 ms.topic: conceptual
 ms.date: 09/10/2020
 ms.openlocfilehash: 76304c81a1af1eef87d12cfd4130867851a61d28
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105544103"
 ---
 # <a name="azure-control-plane-and-data-plane"></a>Azure denetim düzlemi ve veri düzlemi

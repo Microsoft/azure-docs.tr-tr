@@ -6,14 +6,14 @@ ms.author: bagol
 ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: how-to
-ms.date: 03/21/2021
+ms.date: 04/21/2021
 ms.custom: references_regions
-ms.openlocfilehash: f77bd69f8266d9461481cd0a12a7b70107622de5
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 75a7cba1e47509e3186ab519d0d8ca82dd315373
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104773462"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815531"
 ---
 # <a name="azure-purview-connector-for-amazon-s3"></a>Amazon için Azure purview Bağlayıcısı S3
 
@@ -38,6 +38,7 @@ Daha fazla bilgi için şu adreste belgelenen takip görünümü sınırlarına 
 
 - [Azure purview ile kaynaklar için kotaları yönetme ve artırma](how-to-manage-quotas.md)
 - [Azure purview 'da desteklenen veri kaynakları ve dosya türleri](sources-and-scans.md)
+- [Purview hesabınız için özel uç noktaları kullanın](catalog-private-link.md)
 ### <a name="storage-and-scanning-regions"></a>Depolama ve Tarama bölgeleri
 
 Aşağıdaki tabloda, verileri Azure purview tarafından taranacak bölgede depoladığınız bölgeler eşlenir.
@@ -49,23 +50,23 @@ Aşağıdaki tabloda, verileri Azure purview tarafından taranacak bölgede depo
 | Depolama bölgesi | Tarama bölgesi |
 | ------------------------------- | ------------------------------------- |
 | ABD Doğu (Ohio)                  | ABD Doğu (Ohio)                        |
-| ABD Doğu (N. Virginia           | ABD Doğu (Ohio) veya ABD Doğu (N. Virginia                       |
+| ABD Doğu (N. Virginia           | ABD Doğu (N. Virginia                       |
 | ABD Batı (N. For         | ABD Doğu (Ohio)                        |
 | ABD Batı (Oregon)                | ABD Doğu (Ohio)                        |
 | Afrika (Cabo Town)              | Avrupa (Frankfurt)                    |
-| Asya Pasifik (Hong Kong)        | Avrupa (Frankfurt) veya Asya Pasifik (Sidney)                   |
-| Asya Pasifik (Mumbai)           | Avrupa (Frankfurt) veya Asya Pasifik (Sidney)                   |
-| Asya Pasifik (Osaka-yerel)      | Avrupa (Frankfurt) veya Asya Pasifik (Sidney)                   |
-| Asya Pasifik (Seoul)            | Avrupa (Frankfurt) veya Asya Pasifik (Sidney)                   |
-| Asya Pasifik (Singapur)        | Avrupa (Frankfurt) veya Asya Pasifik (Sidney)                   |
-| Asya Pasifik (Sidney)           | Avrupa (Frankfurt) veya Asya Pasifik (Sidney)                  |
-| Asya Pasifik (Tokyo)            | Avrupa (Frankfurt) veya Asya Pasifik (Sidney)                 |
+| Asya Pasifik (Hong Kong)        | Asya Pasifik (Sidney)                   |
+| Asya Pasifik (Mumbai)           | Asya Pasifik (Sidney)                   |
+| Asya Pasifik (Osaka-yerel)      | Asya Pasifik (Sidney)                   |
+| Asya Pasifik (Seoul)            | Asya Pasifik (Sidney)                   |
+| Asya Pasifik (Singapur)        | Asya Pasifik (Sidney)                   |
+| Asya Pasifik (Sidney)           | Asya Pasifik (Sidney)                  |
+| Asya Pasifik (Tokyo)            | Asya Pasifik (Sidney)                 |
 | Kanada (orta)                | ABD Doğu (Ohio)                        |
 | Çin (Pekin)                 | Desteklenmez                    |
 | Çin (Ningxia)                 | Desteklenmez                   |
 | Avrupa (Frankfurt)              | Avrupa (Frankfurt)                    |
-| Avrupa (Irlanda)                | Avrupa (Frankfurt) veya Avrupa (Irlanda)                   |
-| Avrupa (Londra)                 | Avrupa (Frankfurt) veya Avrupa (Irlanda)                   |
+| Avrupa (Irlanda)                | Avrupa (Irlanda)                   |
+| Avrupa (Londra)                 | Avrupa (Irlanda)                   |
 | Avrupa (MILAN)                  | Avrupa (Frankfurt)                    |
 | Avrupa (Paris)                  | Avrupa (Frankfurt)                    |
 | Avrupa (Stockholm)              | Avrupa (Frankfurt)                    |
@@ -77,9 +78,13 @@ Aşağıdaki tabloda, verileri Azure purview tarafından taranacak bölgede depo
 
 Amazon S3 demetlerinizi eklemek ve S3 verilerinizi taramak için aşağıdaki önkoşulları gerçekleştirdiğinizden emin olun.
 
-- Azure purview veri kaynağı Yöneticisi olmanız gerekir.
-
-- Demetlerinizi takip eden kaynak olarak eklerken [AWS ARN](#retrieve-your-new-role-arn), [demet adınızın](#retrieve-your-amazon-s3-bucket-name)ve bazen [AWS hesap kimliğiniz](#locate-your-aws-account-id)değerlerinin olması gerekir.
+> [!div class="checklist"]
+> * Azure purview veri kaynağı Yöneticisi olmanız gerekir.
+> * Henüz bir [hesabınız yoksa bir takip hesabı oluşturun](#create-a-purview-account)
+> * [AWS demet tarıyorsanız için bir takip bilgisi oluşturun](#create-a-purview-credential-for-your-aws-bucket-scan)
+> * [Purview ile kullanmak için yeni bir AWS rolü oluşturma](#create-a-new-aws-role-for-purview)
+> * Uygunsa, [şifrelenmiş Amazon S3 demetlerini taramayı yapılandırma](#configure-scanning-for-encrypted-amazon-s3-buckets)
+> * Demetlerinizi takip eden kaynak olarak eklerken [AWS ARN](#retrieve-your-new-role-arn), [demet adınızın](#retrieve-your-amazon-s3-bucket-name)ve bazen [AWS hesap kimliğiniz](#locate-your-aws-account-id)değerlerinin olması gerekir.
 
 ### <a name="create-a-purview-account"></a>Bir purview hesabı oluşturun
 
@@ -92,7 +97,7 @@ Amazon S3 demetlerinizi eklemek ve S3 verilerinizi taramak için aşağıdaki ö
 Bu yordamda, AWS demetlerinizi tararken kullanılacak yeni bir purview kimlik bilgisinin nasıl oluşturulacağı açıklanmaktadır.
 
 > [!TIP]
-> Ayrıca, [taramanızı yapılandırırken](#create-a-scan-for-your-amazon-s3-bucket)işlemin ortasında yeni bir kimlik bilgisi oluşturabilirsiniz. Bu durumda, **kimlik bilgileri** alanında **Yeni**' yi seçin.
+> Ayrıca, [taramanızı yapılandırırken](#create-a-scan-for-one-or-more-amazon-s3-buckets)işlemin ortasında yeni bir kimlik bilgisi oluşturabilirsiniz. Bu durumda, **kimlik bilgileri** alanında **Yeni**' yi seçin.
 >
 
 1. Purview **yönetim merkezine** gidin ve **güvenlik ve erişim** altında **kimlik bilgileri**' ni seçin.
@@ -111,9 +116,30 @@ Bu yordamda, AWS demetlerinizi tararken kullanılacak yeni bir purview kimlik bi
 
     Kimlik bilgisini oluşturmayı bitirmeyi bitirdiğinizde **Oluştur** ' u seçin.
 
-Purview kimlik bilgileri hakkında daha fazla bilgi için bkz. [Azure purview genel önizleme belgeleri](manage-credentials.md).
+1. Henüz yapmadıysanız, bir sonraki adımınız olan [purview için yeni BIR AWS rolü oluştururken](#create-a-new-aws-role-for-purview)kullanmak üzere **Microsoft hesabı KIMLIĞI** ve **dış kimlik** değerlerini kopyalayıp yapıştırın.
+
+Purview kimlik bilgileri hakkında daha fazla bilgi için bkz. [Azure purview 'da kaynak kimlik doğrulaması Için kimlik bilgileri](manage-credentials.md).
 
 ### <a name="create-a-new-aws-role-for-purview"></a>Purview için yeni bir AWS rolü oluşturma
+
+Bu yordam, AWS rolünüzü oluştururken Azure hesap KIMLIĞINIZ ve dış KIMLIĞINIZ için değerleri girmenizi gerektirir.
+
+Bu değerlere sahip değilseniz, bunları önce [purview kimlik bilgilerinizin](#create-a-purview-credential-for-your-aws-bucket-scan)içinde bulun.
+
+**Microsoft HESABı kimliğinizi ve dış kimliğinizi bulmak için**:
+
+1. Purview 'da **Yönetim Merkezi**  >  **güvenlik ve erişim**  >  **kimlik bilgilerine** gidin.
+
+1. [AWS demet taramanızı için oluşturduğunuz](#create-a-purview-credential-for-your-aws-bucket-scan)kimlik bilgisini seçin ve ardından araç çubuğunda **Düzenle**' yi seçin.
+
+1. Sağ tarafta görünen **kimlik bilgisini düzenle** BÖLMESINDE **Microsoft hesabı KIMLIĞI** ve **dış kimlik** değerlerini ayrı bir dosyaya kopyalayın ya da AWS 'deki ilgili alana yapıştırma için yararlı olmasını isteyin.
+
+    Örnek:
+
+    [![MICROSOFT HESABı kimliğinizi ve dış kimlik değerlerini bulun. ](./media/register-scan-amazon-s3/locate-account-id-external-id.png)](./media/register-scan-amazon-s3/locate-account-id-external-id.png#lightbox)
+
+
+**Takip görünümü için AWS rolünüzü oluşturmak için**:
 
 1.  **Amazon Web Services** konsolunuzu açın ve **güvenlik, kimlik ve uyumluluk** altında **IAM**' i seçin.
 
@@ -124,12 +150,8 @@ Purview kimlik bilgileri hakkında daha fazla bilgi için bkz. [Azure purview ge
     |Alan  |Açıklama  |
     |---------|---------|
     |**Hesap Kimliği**     |    Microsoft hesabı KIMLIĞINIZI girin. Örnek: `615019938638`     |
-    |**Dış KIMLIK**     |   Seçenekler altında **dış kimlik iste...**' yi seçin ve ardından, atanan alana dış kimliğinizi girin. <br>Örnek: `e7e2b8a3-0a9f-414f-a065-afaf4ac6d994`    <br><br>Bu dış KIMLIĞI sizin için bulabilirsiniz.  |
+    |**Dış KIMLIK**     |   Seçenekler altında **dış kimlik iste...**' yi seçin ve ardından, atanan alana dış kimliğinizi girin. <br>Örnek: `e7e2b8a3-0a9f-414f-a065-afaf4ac6d994`     |
     | | |
-
-    > [!NOTE]
-    > Hem **Microsoft hesap kimliği** hem de **Harici kimliğin** değerlerini, purview kimlik bilgilerinizi oluşturduğunuz purview **Yönetim Merkezi**  >  **kimlik bilgileri** alanında bulabilirsiniz. [](#create-a-purview-credential-for-your-aws-bucket-scan)
-    >
 
     Örnek:
 
@@ -138,6 +160,13 @@ Purview kimlik bilgileri hakkında daha fazla bilgi için bkz. [Azure purview ge
 1. **Rol oluştur > izin Ilkeleri Ekle** alanında, **S3**' e görünen izinleri filtreleyin. **AmazonS3ReadOnlyAccess** öğesini seçin ve ardından **İleri: Etiketler**' i seçin.
 
     ![Yeni Amazon S3 tarama rolü için ReadOnlyAccess ilkesini seçin.](./media/register-scan-amazon-s3/aws-permission-role-amazon-s3.png)
+
+    > [!IMPORTANT]
+    > **AmazonS3ReadOnlyAccess** Ilkesi, S3 demetlerinizi taramak için gereken en düşük izinleri sağlar ve diğer izinleri de içerebilir.
+    >
+    >Yalnızca demetlerinizi taramak için gereken en düşük izinleri uygulamak için, [AWS Ilkenizin en düşük izinlerinde](#minimum-permissions-for-your-aws-policy)listelenen izinlerle, tek bir demet veya hesabınızdaki tüm demetleri taramak isteyip istemediğinize bağlı olarak yeni bir ilke oluşturun. 
+    >
+    >Yeni ilkenizi AmazonS3ReadOnlyAccess yerine role uygulayın **.**
 
 1. **Etiketler Ekle (isteğe bağlı)** alanında, isteğe bağlı olarak bu yeni rol için anlamlı bir etiket oluşturmayı seçebilirsiniz. Faydalı Etiketler, oluşturduğunuz her bir rol için erişimi düzenlemenizi, izlemenizi ve denetlemenize olanak tanır.
 
@@ -219,7 +248,7 @@ AWS demetleri birden çok şifreleme türünü destekler. **AWS-KMS** şifreleme
 
 ### <a name="retrieve-your-new-role-arn"></a>Yeni rolünüzü alma ARN
 
-[Amazon S3 demet için bir tarama oluştururken](#create-a-scan-for-your-amazon-s3-bucket)AWS ROLÜNÜZÜ ARN olarak kaydetmeniz ve bunu takip edilecek şekilde kopyalamanız gerekir.
+[Amazon S3 demet için bir tarama oluştururken](#create-a-scan-for-one-or-more-amazon-s3-buckets)AWS ROLÜNÜZÜ ARN olarak kaydetmeniz ve bunu takip edilecek şekilde kopyalamanız gerekir.
 
 **Rolünüzü almak için:**
 
@@ -229,11 +258,11 @@ AWS demetleri birden çok şifreleme türünü destekler. **AWS-KMS** şifreleme
 
     ![Rol ARN değerini panoya kopyalayın.](./media/register-scan-amazon-s3/aws-copy-role-purview.png)
 
-1. Bu değeri güvenli bir konuma yapıştırın ve bu, [Amazon S3 demet için bir tarama oluştururken](#create-a-scan-for-your-amazon-s3-bucket)kullanmaya hazırlanın.
+1. Bu değeri güvenli bir konuma yapıştırın ve bu, [Amazon S3 demet için bir tarama oluştururken](#create-a-scan-for-one-or-more-amazon-s3-buckets)kullanmaya hazırlanın.
 
 ### <a name="retrieve-your-amazon-s3-bucket-name"></a>Amazon S3 demet adınızı alın
 
-Amazon S3 [demet için bir tarama oluştururken](#create-a-scan-for-your-amazon-s3-bucket) bu dosyayı takip etmek Için Amazon S3 demet adınızın adı gerekir
+Amazon S3 [demet için bir tarama oluştururken](#create-a-scan-for-one-or-more-amazon-s3-buckets) bu dosyayı takip etmek Için Amazon S3 demet adınızın adı gerekir
 
 **Demet adınızı almak için:**
 
@@ -270,6 +299,8 @@ AWS hesap KIMLIĞINIZ AWS konsolunda oturum açmak için kullandığınız KIMLI
 
 Bu yordamı, yalnızca bir veri kaynağı olarak takip etmek istediğiniz tek bir S3 demetini varsa veya AWS hesabınızda birden fazla demet varsa, ancak bunların tümünü purview 'a kaydetmek istemiyorsanız bu yordamı kullanın.
 
+**Demetini eklemek için**: 
+
 1. Amazon S3 URL için adanmış purview bağlayıcısını kullanarak purview portalını başlatın. Bu URL, Amazon S3 purview Connector ürün yönetimi ekibi tarafından size sağlandı.
 
     ![Purview portalını başlatın.](./media/register-scan-amazon-s3/purview-portal-amazon-s3.png)
@@ -293,12 +324,15 @@ Bu yordamı, yalnızca bir veri kaynağı olarak takip etmek istediğiniz tek bi
 
     İşiniz bittiğinde kayıt işleminin tamamlanması için **son** ' u seçin.
 
-[Amazon S3 demet için tarama oluşturma](#create-a-scan-for-your-amazon-s3-bucket)ile devam edin.
+Bir [veya daha fazla Amazon S3 demetleri için tarama oluşturma](#create-a-scan-for-one-or-more-amazon-s3-buckets)ile devam edin.
 
-## <a name="add-all-of-your-amazon-s3-buckets-as-purview-resources"></a>Tüm Amazon S3 demetlerinizi purview kaynakları olarak ekleyin
+## <a name="add-an-amazon-account-as-a-purview-resource"></a>Bir Amazon hesabını bir purview kaynağı olarak ekleme
 
-Amazon hesabınızda birden çok S3 demeti varsa ve tüm purview veri kaynaklarını kaydetmek istiyorsanız bu yordamı kullanın.
+Amazon hesabınızda birden çok S3 demeti varsa ve bunların tümünü purview veri kaynakları olarak kaydetmek istiyorsanız bu yordamı kullanın.
 
+[Taramanızı yapılandırırken](#create-a-scan-for-one-or-more-amazon-s3-buckets), bunların tümünü birlikte taramak istemiyorsanız taramak istediğiniz belirli demetleri seçebileceksiniz.
+
+**Amazon hesabınızı eklemek için**:
 1. Amazon S3 URL için adanmış purview bağlayıcısını kullanarak purview portalını başlatın. Bu URL, Amazon S3 purview Connector ürün yönetimi ekibi tarafından size sağlandı.
 
     ![Amazon için başlatma Bağlayıcısı S3 adanmış takip görünümü portalı](./media/register-scan-amazon-s3/purview-portal-amazon-s3.png)
@@ -322,9 +356,9 @@ Amazon hesabınızda birden çok S3 demeti varsa ve tüm purview veri kaynaklar�
 
     İşiniz bittiğinde kayıt işleminin tamamlanması için **son** ' u seçin.
 
-[Amazon S3 demet için tarama oluşturma](#create-a-scan-for-your-amazon-s3-bucket)ile devam edin.
+Bir [veya daha fazla Amazon S3 demetleri için tarama oluşturma](#create-a-scan-for-one-or-more-amazon-s3-buckets)ile devam edin.
 
-## <a name="create-a-scan-for-your-amazon-s3-bucket"></a>Amazon S3 demet için bir tarama oluşturun
+## <a name="create-a-scan-for-one-or-more-amazon-s3-buckets"></a>Bir veya daha fazla Amazon S3 demetleri için tarama oluşturma
 
 Demetlerinizi takip etme veri kaynakları olarak ekledikten sonra, bir taramayı zamanlanmış aralıklarla veya anında çalışacak şekilde yapılandırabilirsiniz.
 
@@ -340,9 +374,10 @@ Demetlerinizi takip etme veri kaynakları olarak ekledikten sonra, bir taramayı
     |**Ad**     |  Tarama için anlamlı bir ad girin veya varsayılanı kullanın.       |
     |**Tür** |Yalnızca AWS hesabınızı eklediyseniz, tüm demetlerin dahil edildiğini görürsünüz. <br><br>Geçerli seçenekler yalnızca **Tüm**  >  **Amazon S3**' i içerir. Takip görünümü 'nin destek matrisi genişledikçe seçilecek daha fazla seçenek için ayarlanmış kalın. |
     |**Kimlik Bilgisi**     |  Rolünüzün adıyla bir takip eden kimlik bilgisi seçin. <br><br>**İpucu**: Şu anda yeni bir kimlik bilgisi oluşturmak istiyorsanız **Yeni**' yi seçin. Daha fazla bilgi için bkz. [AWS demeti taramanıza yönelik bir takip kimlik bilgisi oluşturma](#create-a-purview-credential-for-your-aws-bucket-scan).     |
-    |     |         |
+    | **Amazon S3**    |   Yalnızca AWS hesabınızı eklediyseniz, tüm demetlerin dahil edildiğini görürsünüz. <br><br>Taranacak bir veya daha fazla demet seçin ya da hesabınızdaki tüm demetleri taramak için tümü ' nü **seçin** .      |
+    | | |
 
-    Takip otomatik olarak, ARN rolünün geçerli olduğunu ve demet içindeki demet ve nesnenin erişilebilir olduğunu denetler ve bağlantı başarılı olursa devam eder.
+    Purview, ARN 'ın geçerli olduğunu ve demetlerin içindeki demetlerin ve nesnelerin erişilebilir olduğunu denetler ve bağlantı başarılı olursa devam eder.
 
     > [!TIP]
     > Devam etmeden önce farklı değerler girmek ve bağlantıyı kendinize test etmek için **devam**' ı seçmeden önce sağ alt kısımdaki **Bağlantıyı Sına** ' yı seçin.
@@ -352,7 +387,7 @@ Demetlerinizi takip etme veri kaynakları olarak ekledikten sonra, bir taramayı
 
     Yeni bir özel tarama kuralı kümesi oluşturmayı seçerseniz, aşağıdaki ayarları tanımlamak için Sihirbazı kullanın:
 
-    |Bölme  |Açıklama  |
+    |Bölme  |Description  |
     |---------|---------|
     |**Yeni tarama kuralı kümesi** /<br>**Tarama kuralı açıklaması**    |   Kural kümesi için anlamlı bir ad ve isteğe bağlı bir açıklama girin      |
     |**Dosya türlerini seçin**     | Taramaya dahil etmek istediğiniz tüm dosya türlerini seçin ve ardından **devam**' ı seçin.<br><br>Yeni dosya türü eklemek için **yeni dosya türü**' nü seçin ve aşağıdakileri tanımlayın: <br>-Eklemek istediğiniz dosya uzantısı <br>-İsteğe bağlı bir açıklama  <br>-Dosya içeriğinin özel bir sınırlayıcısı olup olmadığı veya bir sistem dosyası türü olup olmadığı. Ardından, özel sınırlayıcıyı girin veya sistem dosya türünü seçin. <br><br>Özel dosya türünü oluşturmak için **Oluştur** ' u seçin.     |
@@ -396,6 +431,90 @@ Amazon S3 demetleri dahil olmak üzere, verilerinizde bulunan içerikle ilgili a
     Tüm purview Insight Reports, Azure veri kaynaklarınızdaki sonuçların geri kalanında birlikte, Amazon S3 tarama sonuçlarını içerir. İlgili olduğunda, rapor filtreleme seçeneklerine ek bir **Amazon S3** varlık türü eklenmiştir.
 
     Daha fazla bilgi için bkz. [Azure purview 'Ta öngörüleri anlama](concept-insights.md).
+
+## <a name="minimum-permissions-for-your-aws-policy"></a>AWS ilkeniz için en düşük izinler
+
+S3 demetlerinizi tararken kullanılacak [BIR AWS rolü oluşturmak](#create-a-new-aws-role-for-purview) için varsayılan yordam, **AmazonS3ReadOnlyAccess** ilkesini kullanır.
+
+**AmazonS3ReadOnlyAccess** Ilkesi, S3 demetlerinizi taramak için gereken en düşük izinleri sağlar ve diğer izinleri de içerebilir.
+
+Yalnızca demetlerinizi taramak için gereken en düşük izinleri uygulamak için, aşağıdaki bölümlerde listelenen izinlere sahip yeni bir ilke oluşturun ve bu durumda, hesabınızdaki tek bir demet veya tüm demetleri taramak isteyip istemediğiniz bir ilke oluşturun.
+
+Yeni ilkenizi AmazonS3ReadOnlyAccess yerine role uygulayın **.**
+
+### <a name="individual-buckets"></a>Bireysel demetler
+
+Tek bir S3 demetleri taranırken, en düşük AWS izinleri şunları içerir:
+
+- `GetBucketLocation`
+- `GetBucketPublicAccessBlock`
+- `GetObject`
+- `ListBucket`
+
+Kaynağı belirli bir demet adıyla tanımlamadığınızdan emin olun. Örnek:
+
+```json
+{
+"Version": "2012-10-17",
+"Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:GetBucketPublicAccessBlock",
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": "arn:aws:s3:::<bucketname>"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3::: <bucketname>/*"
+        }
+    ]
+}
+```
+
+### <a name="all-buckets-in-your-account"></a>Hesabınızdaki tüm demetler
+
+AWS hesabınızdaki tüm demetler taranırken, en düşük AWS izinleri şunları içerir:
+
+- `GetBucketLocation`
+- `GetBucketPublicAccessBlock`
+- `GetObject`
+- `ListAllMyBuckets`
+- `ListBucket`.
+
+Kaynağınızı bir joker karakterle tanımlamadığınızdan emin olun. Örnek:
+
+```json
+{
+"Version": "2012-10-17",
+"Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:GetBucketPublicAccessBlock",
+                "s3:GetObject",
+                "s3:ListAllMyBuckets",
+                "s3:ListBucket"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.date: 03/10/2021
 ms.author: jbeauregardb
 ms.reviewer: mikben
-ms.openlocfilehash: 2ef5a3b162d62fa79ed01a156345070ee12b4862
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: a5ee7e8de85a1a53359f651a74e2f9f5e51edb70
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105110687"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107030789"
 ---
 # <a name="authorize-access-with-managed-identity-to-your-communication-resource-in-your-development-environment"></a>Geliştirme ortamınızdaki iletişim kaynağınız ile yönetilen kimlik erişimi yetkisi verin
 
@@ -78,6 +78,8 @@ Azure Identity SDK, uygulamanın kimliğini doğrulamak için çalışma zamanı
 
 > [!IMPORTANT]
 > Ortam değişkenlerini ayarladıktan sonra konsol pencerenizi kapatıp yeniden açın. Visual Studio veya başka bir geliştirme ortamı kullanıyorsanız, yeni ortam değişkenlerini kaydedebilmesi için yeniden başlatmanız gerekebilir.
+
+Bu değişkenler ayarlandıktan sonra, seçtiğiniz hizmet istemcisinde kimlik doğrulaması yapmak için kodunuzda DefaultAzureCredential nesnesini kullanabilmeniz gerekir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

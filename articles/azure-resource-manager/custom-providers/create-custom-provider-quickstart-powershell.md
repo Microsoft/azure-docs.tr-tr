@@ -3,16 +3,18 @@ title: Azure PowerShell ile bir Azure özel kaynak sağlayıcısı oluşturma
 description: Azure PowerShell ile bir Azure özel kaynak sağlayıcısı oluşturmayı açıklar
 author: MSEvanhi
 ms.author: evanhi
+ms.date: 09/22/2020
 ms.topic: quickstart
 ms.devlang: azurepowershell
-ms.date: 09/22/2020
-ms.custom: devx-track-azurepowershell
-ms.openlocfilehash: 6912f7f6fdc88c5d611bfbfd78f15e5f7a949f70
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom:
+- devx-track-azurepowershell
+- mode-api
+ms.openlocfilehash: 9c19eb41210b6fba1935a0d158c8240375f4f8f5
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91951851"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533924"
 ---
 # <a name="quickstart-create-an-azure-custom-resource-provider-with-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell bir Azure özel kaynak sağlayıcısı oluşturma
 

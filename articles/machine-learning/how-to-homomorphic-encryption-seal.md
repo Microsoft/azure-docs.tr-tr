@@ -10,12 +10,12 @@ ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
 ms.custom: how-to, devx-track-python, deploy, responsible-ml
-ms.openlocfilehash: a2c8b765f109408b8cb08f78a4b3ad2283f35eb9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 625ca217374fdb7558bf50faafb62c773cbc68b9
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98223593"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106059488"
 ---
 # <a name="how-to-deploy-an-encrypted-inferencing-web-service-preview"></a>Şifrelenmiş bir ınlebilme Web hizmeti dağıtma (Önizleme)
 

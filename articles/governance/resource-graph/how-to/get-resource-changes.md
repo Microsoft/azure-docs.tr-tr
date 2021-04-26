@@ -1,14 +1,14 @@
 ---
 title: Kaynak değişikliklerini alma
 description: Bir kaynağın ne zaman değiştiğini öğrenin, değiştirilen özelliklerin bir listesini alın ve diffs 'yi değerlendirin.
-ms.date: 01/27/2021
+ms.date: 03/31/2021
 ms.topic: how-to
-ms.openlocfilehash: 5ad86ec2598cd7f24b8e0cd2208889bb7a088568
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 500a2d58c5fc9e1b63a544978c4b583eba60a63e
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100594655"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219085"
 ---
 # <a name="get-resource-changes"></a>Kaynak değişikliklerini alma
 
@@ -145,6 +145,10 @@ Yanıt aşağıdaki örneğe benzer şekilde görünür:
 - **Beforesnapshot** -bir değişiklik algılanmadan önce alınan kaynak anlık görüntüsünün **anlık görüntü kimliğini** ve **zaman damgasını** içerir.
 - **Aftersnapshot** -bir değişiklik algılandıktan sonra gerçekleştirilen kaynak anlık görüntüsünün **anlık görüntü kimliğini** ve **zaman damgasını** içerir.
 - **ChangeType** - **Beforesnapshot** ve **aftersnapshot** arasındaki değişiklik kaydının tamamı için algılanan değişikliğin türünü açıklar. Değerler şunlardır: _Oluştur_, _Güncelleştir_ ve _Sil_. **PropertyChanges** Özellik dizisi yalnızca **ChangeType** _güncelleştirme_ olduğunda dahil edilir.
+
+  > [!IMPORTANT]
+  > _Oluşturma_ yalnızca, son 14 gün içinde önceden var olan ve silinen kaynaklarda kullanılabilir.
+
 - **PropertyChanges** -bu özellik dizisi, **Beforesnapshot** ve **aftersnapshot** arasında güncelleştirilmiş kaynak özelliklerinin tümünü ayrıntılardır:
   - **PropertyName** -değiştirilen kaynak özelliğinin adı.
   - **Changecategory** -değişikliğin ne yaptığını açıklar. Değerler şunlardır: _sistem_ ve _Kullanıcı_.

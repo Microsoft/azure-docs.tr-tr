@@ -221,6 +221,8 @@
               href: blob-inventory.md
         - name: Veri geçişi
           items:
+            - name: Depolama geçişine genel bakış
+              href: ../common/storage-migration-overview.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: Veri aktarımı çözümlerini karşılaştırma
               href: ../common/storage-choose-data-transfer-solution.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
               items:
@@ -264,11 +266,9 @@
       items:
         - name: Depolama hesapları oluşturma ve yönetme
           items:
-            - name: Genel amaçlı depolama hesabı oluşturma
+            - name: Depolama hesabı oluşturma
               displayName: 'Resource Manager, Resource Manager template, template, ARM'
               href: ../common/storage-account-create.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-            - name: Blok blobu depolama hesabı oluşturma
-              href: storage-blob-create-account-block-blob.md
             - name: Depolama hesabını yükseltme
               href: ../common/storage-account-upgrade.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: Silinmiş bir depolama hesabını kurtarma
@@ -411,8 +411,12 @@
               href: soft-delete-container-enable.md
             - name: Blob sürümü oluşturmayı etkinleştirme
               href: versioning-enable.md
-            - name: Bloblar için geçici silmeyi etkinleştirme
-              href: soft-delete-blob-enable.md
+            - name: Blob 'lar için geçici silmeyi etkinleştirme ve yönetme
+              items:
+                - name: Blob geçici silmeyi etkinleştir
+                  href: soft-delete-blob-enable.md
+                - name: Geçici olarak silinen Blobları yönetme ve geri yükleme
+                  href: soft-delete-blob-manage.md
             - name: Belirli bir noktaya geri yüklemeyi etkinleştirme
               href: point-in-time-restore-manage.md
             - name: Anlık görüntüler oluşturma (.NET)
@@ -439,6 +443,8 @@
           items:
             - name: Azurite açık kaynaklı öykünücüsünü kullanma
               href: ../common/storage-use-azurite.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+            - name: Otomatikleştirilmiş testleri çalıştırmak için Azurite kullanın
+              href: use-azurite-to-run-automated-tests.md
             - name: Azure Depolama öykünücüsü kullanma
               href: ../common/storage-use-emulator.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
         - name: Statik web sitesi barındırma
@@ -461,20 +467,22 @@
                   href: ../common/storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: Azure AD ile yetkilendir
                   href: ../common/storage-use-azcopy-authorize-azure-active-directory.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+                - name: Performansı iyileştirme
+                  href: ../common/storage-use-azcopy-optimize.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+                - name: Hataları bulmak ve işleri yeniden başlatmak için günlükleri kullanma
+                  href: ../common/storage-use-azcopy-configure.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Karşıya Yükle'
                   href: ../common/storage-use-azcopy-blobs-upload.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Karşıdan Yükle'
                   href: ../common/storage-use-azcopy-blobs-download.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-                - name: 'Örnekler: Eşitle'
-                  href: ../common/storage-use-azcopy-blobs-synchronize.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Hesaplar arasında kopyala'
                   href: ../common/storage-use-azcopy-blobs-copy.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+                - name: 'Örnekler: Eşitle'
+                  href: ../common/storage-use-azcopy-blobs-synchronize.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Amazon S3 demetleri'
                   href: ../common/storage-use-azcopy-s3.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Google Cloud Storage demetleri'
                   href: ../common/storage-use-azcopy-google-cloud.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-                - name: 'Yapılandırma, iyileştirme, sorun giderme'
-                  href: ../common/storage-use-azcopy-configure.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: Azure Data Factory
               href: ../../data-factory/connector-azure-blob-storage.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: NFS kullanarak depolama alanı bağlama
@@ -511,6 +519,8 @@
           href: ../blobs/reference.md
         - name: AzCopy v10
           items:
+            - name: Yapılandırma ayarları
+              href: ../common/storage-ref-azcopy-configuration-settings.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: azcopy
               href: ../common/storage-ref-azcopy.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: azcopy ortamı
@@ -567,12 +577,16 @@
               href: 'https://azure.microsoft.com/features/storage-explorer/'
             - name: Depolama Gezgini ile çalışmaya başlama
               href: ../../vs-azure-tools-storage-manage-with-storage-explorer.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+            - name: Depolama Gezgini oturum açın
+              href: ../common/storage-explorer-sign-in.md
             - name: Depolama Gezgini sürüm notları
               href: 'https://github.com/microsoft/AzureStorageExplorer/releases'
             - name: Depolama Gezgini sorunu giderme
               href: ../common/storage-explorer-troubleshooting.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: Komut satırı seçeneklerini Depolama Gezgini
               href: ../common/storage-explorer-command-line-options.md
+            - name: Doğrudan bağlantı Depolama Gezgini
+              href: ../common/storage-explorer-direct-link.md
             - name: Depolama Gezgini güvenliği
               href: ../common/storage-explorer-security.md
             - name: Depolama Gezgini blob sürümü oluşturma
@@ -731,18 +745,24 @@
               items:
                 - name: başlarken
                   href: ../common/storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+                - name: Azure AD ile yetkilendir
+                  href: ../common/storage-use-azcopy-authorize-azure-active-directory.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+                - name: Performansı iyileştirme
+                  href: ../common/storage-use-azcopy-optimize.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+                - name: Hataları bulmak ve işleri yeniden başlatmak için günlükleri kullanma
+                  href: ../common/storage-use-azcopy-configure.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Karşıya Yükle'
                   href: ../common/storage-use-azcopy-blobs-upload.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Karşıdan Yükle'
                   href: ../common/storage-use-azcopy-blobs-download.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-                - name: 'Örnekler: Eşitle'
-                  href: ../common/storage-use-azcopy-blobs-synchronize.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Hesaplar arasında kopyala'
                   href: ../common/storage-use-azcopy-blobs-copy.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+                - name: 'Örnekler: Eşitle'
+                  href: ../common/storage-use-azcopy-blobs-synchronize.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
                 - name: 'Örnekler: Amazon S3 demetleri'
                   href: ../common/storage-use-azcopy-s3.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-                - name: 'Yapılandırma, iyileştirme ve sorun giderme'
-                  href: ../common/storage-use-azcopy-configure.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+                - name: 'Örnekler: Google Cloud Storage demetleri'
+                  href: ../common/storage-use-azcopy-google-cloud.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: Azure Data Factory
               href: ../../data-factory/connector-azure-data-lake-storage.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
             - name: DistCp aracıyla veri aktarma
@@ -811,6 +831,8 @@
           href: 'https://www.npmjs.com/package/@azure/storage-file-datalake/v/12.0.0-preview.6'
         - name: REST
           href: /rest/api/storageservices/data-lake-storage-gen2
+        - name: Azure CLI
+          href: /cli/azure/dls
         - name: Sorgu hızlandırma başvurusu
           href: query-acceleration-sql-reference.md
         - name: AzCopy v10

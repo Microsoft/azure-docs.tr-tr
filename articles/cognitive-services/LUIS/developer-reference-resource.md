@@ -6,12 +6,12 @@ ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 01/12/2021
 ms.custom: devx-track-js, devx-track-csharp
-ms.openlocfilehash: 08a1965aadf8f50625e54d7c5e3b3f6a44c0bbd4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 04c7d4a7e725d99c7dba94779d365312f8b960af
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98946182"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787116"
 ---
 # <a name="sdk-rest-and-cli-developer-resources-for-language-understanding-luis"></a>Language Understanding için SDK, REST ve CLı geliştirici kaynakları (LUSıS)
 
@@ -23,7 +23,7 @@ Language Understanding veya bilişsel hizmet kaynağını oluşturmak, düzenlem
 
 Araca göre başvuru belgelerini bulun:
 
-* [Azure CLI](/cli/azure/cognitiveservices#az-cognitiveservices-list)
+* [Azure CLI](/cli/azure/cognitiveservices#az_cognitiveservices_list)
 
 * [Azure RM PowerShell](/powershell/module/azurerm.cognitiveservices/#cognitive_services)
 
@@ -89,7 +89,7 @@ Aşağıdaki tabloda, önceki tabloda küme ayraçları ile belirtilen parametre
 |Dil |Başvuru belgeleri|Paket|Hızlı Başlangıçlar|
 |--|--|--|--|
 |C#|[Yazma](/dotnet/api/microsoft.azure.cognitiveservices.language.luis.authoring)</br>[Hızlı](/dotnet/api/microsoft.azure.cognitiveservices.language.luis.runtime)|[NuGet yazma](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring/)<br>[NuGet tahmini](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime/)|[Yazma](./client-libraries-rest-api.md?pivots=rest-api)<br>[Sorgu tahmini](./client-libraries-rest-api.md?pivots=rest-api)|
-|Go|[Yazma ve tahmin](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/luis)|[SDK](https://github.com/Azure/azure-sdk-for-go/tree/master/services/cognitiveservices/v2.0/luis)||
+|Go|[Yazma ve tahmin](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.0/luis)|['SıNıN](https://github.com/Azure/azure-sdk-for-go/tree/master/services/cognitiveservices/v2.0/luis)||
 |Java|[Yazma ve tahmin](/java/api/overview/azure/cognitiveservices/client/languageunderstanding)|[Maven yazma](https://search.maven.org/artifact/com.microsoft.azure.cognitiveservices/azure-cognitiveservices-luis-authoring)<br>[Maven tahmini](https://search.maven.org/artifact/com.microsoft.azure.cognitiveservices/azure-cognitiveservices-luis-runtime)|
 |JavaScript|[Yazma](/javascript/api/@azure/cognitiveservices-luis-authoring/)<br>[Hızlı](/javascript/api/@azure/cognitiveservices-luis-runtime/)|[NPM yazma](https://www.npmjs.com/package/@azure/cognitiveservices-luis-authoring)<br>[NPM tahmini](https://www.npmjs.com/package/@azure/cognitiveservices-luis-runtime)|[Yazma](./client-libraries-rest-api.md?pivots=rest-api)<br>[Hızlı](./client-libraries-rest-api.md?pivots=rest-api)|
 |Python|[Yazma ve tahmin](./client-libraries-rest-api.md?pivots=rest-api)|[Pip](https://pypi.org/project/azure-cognitiveservices-language-luis/)|[Yazma](./client-libraries-rest-api.md?pivots=rest-api)<br>[Hızlı](./client-libraries-rest-api.md?pivots=rest-api)|

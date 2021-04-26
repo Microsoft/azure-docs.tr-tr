@@ -3,17 +3,18 @@ title: Windows PowerShell 'de Azure bulut hizmetini (klasik) ölçeklendirme | M
 description: Klasik Azure 'da bir Web rolünü veya çalışan rolünü ölçeklendirmek için PowerShell 'in nasıl kullanılacağını öğrenin.
 ms.topic: article
 ms.service: cloud-services
+ms.subservice: autoscale
 ms.date: 10/14/2020
 ms.author: tagore
 author: tanmaygore
 ms.reviewer: mimckitt
 ms.custom: ''
-ms.openlocfilehash: a090da1933b0fcd6edb5b2415c773f9efcb27387
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0b0a9cc8032cfd849f053e2d45e05f85e4216a23
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98743313"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105936623"
 ---
 # <a name="how-to-scale-an-azure-cloud-service-classic-in-powershell"></a>PowerShell 'de Azure bulut hizmetini (klasik) ölçeklendirme
 

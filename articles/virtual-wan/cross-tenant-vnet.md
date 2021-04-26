@@ -9,10 +9,10 @@ ms.topic: how-to
 ms.date: 09/28/2020
 ms.author: wellee
 ms.openlocfilehash: 82a5e90221a77b891df78984c7fddfd63b6532aa
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104585426"
 ---
 # <a name="connect-cross-tenant-vnets-to-a-virtual-wan-hub"></a>Platformlar arası VNET 'leri bir sanal WAN hub 'ına bağlama
@@ -98,7 +98,7 @@ Aşağıdaki adımlarda, sanal ağı sanal hub 'a bağladığınızda iki abonel
    * **PowerShell:** Bağlantı başarıyla biçimlendirilmişse, yeni oluşturulmuş bağlantının meta verileri PowerShell konsolunda görünür.
    * **Azure Portal:** Sanal hub, **bağlantı > sanal ağ bağlantılarına** gidin. Bağlantı işaretçisini görüntüleyebilirsiniz. Gerçek kaynağı görmek için uygun izinlere ihtiyacınız olacak.
    
-## <a name="troubleshooting"></a><a name="troubleshoot"></a>Sorunu
+## <a name="troubleshooting"></a><a name="troubleshoot"></a>Sorun giderme
 
 * $Remote (Yukarıdaki [bölümden](#connect)) içindeki meta verilerin Azure Portal bilgilerle eşleştiğini doğrulayın.
 * Uzak kiracı kaynak grubunun ıAM ayarlarını kullanarak veya Azure PowerShell komutlarını (Get-AzSubscription) kullanarak izinleri doğrulayabilirsiniz.

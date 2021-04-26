@@ -5,12 +5,12 @@ ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 06/04/2020
-ms.openlocfilehash: 41423ce34a62dfdbd5b9a60f683a2366a94d1bfd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1f917087eb15d8c77356995299e27dfc1657cb5d
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97976801"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107497209"
 ---
 # <a name="limits-for-your-luis-model-and-keys"></a>LUSıS modeliniz ve anahtarlarınız için sınırlar
 LUO 'NUN birkaç sınır alanı vardır. Birincisi, LUSıS 'deki amaçları, varlıkları ve özellikleri denetleyen [model limiti](#model-limits)olur. İkinci alan, anahtar türüne göre [Kota sınırlamalarıdır](#key-limits) . Limitlerin üçüncü alanı, LUSıS Web sitesini denetlemeye yönelik [klavye birleşimidir](#keyboard-controls) . Bir dördüncü alan, LUıS Authoring Web sitesi ve LUıS [uç nokta](luis-glossary.md#endpoint) API 'leri arasındaki [Dünya bölgesi eşlemesidir](luis-reference-regions.md) .
@@ -30,7 +30,7 @@ Uygulamanız LUSıS model sınırlarını aşarsa, bir [lusıs dağıtım](luis-
 | Dış varlıklar | sınırsız |
 | [Hedefler][intents]|Uygulama başına 500:499 özel amaçlar ve gerekli _hiçbiri_ amacı.<br>[Dağıtım tabanlı](https://aka.ms/dispatch-tool) uygulama karşılık gelen 500 dağıtım kaynaklarına sahiptir.|
 | [Liste varlıkları](./luis-concept-entity-types.md) | Üst: 50, alt: 20.000 öğeleri. Kurallı ad, en fazla * varsayılan karakter maks. Eş anlamlı değerlerde uzunluk kısıtlaması yok. |
-| [makine öğrenimi varlıkları + roller](./luis-concept-entity-types.md):<br> bileşik<br>MPLE<br>varlık rolü|İlk olarak Kullanıcı isabetlerinin sınırlarını sınırlayan 100 üst varlık veya 330 varlıklarının bir sınırı. Rol, bu sınırın amacı için bir varlık olarak sayılır. Örnek, bir basit varlık olan, 2 rol içeren bir Composite örnektir: 1 bileşik + 1 basit + 2 rol = 4 varlıkların 330.<br>Alt varlıklar, düzey başına en fazla 10 alt öğe içeren 5 düzeye kadar iç içe olabilir.|
+| [makine öğrenimi varlıkları + roller](./luis-concept-entity-types.md):<br> bileşik<br>MPLE<br>varlık rolü|İlk olarak Kullanıcı isabetlerinin sınırlarını sınırlayan 100 üst varlık veya 330 varlıklarının bir sınırı. Rol, bu sınırın amacı için bir varlık olarak sayılır. Örnek, bir basit varlık olan, 2 rol içeren bir Composite örnektir: 1 bileşik + 1 basit + 2 rol = 4 varlıkların 330.<br>Alt varlıklar, düzey başına en fazla 20 alt öğe içeren 5 düzeye kadar iç içe olabilir.|
 |Özellik olarak model oluşturma| Belirli bir modelde 10 model olması için bir özellik olarak kullanılabilecek maksimum model sayısı. Belirli bir modelin 10 ifade listesi olması için bir özellik olarak kullanılan en fazla tümcecik listesi sayısı.|
 | [Önizleme-dinamik liste varlıkları](./luis-migration-api-v3.md)|sorgu tahmin uç noktası isteği başına 2 adet ~ 1k liste|
 | [Desenler](luis-concept-patterns.md)|Uygulama başına 500 desen.<br>Maksimum model uzunluğu 400 karakterdir.<br>3 model. her model için tüm varlıklar<br>Düzende en fazla 2 iç içe isteğe bağlı metin|
@@ -108,7 +108,7 @@ Yaklaşım bilgilerini sağlayan yaklaşım [Analizi tümleştirmesi](luis-how-t
 
 ## <a name="keyboard-controls"></a>Klavye denetimleri
 
-|Klavye girişi | Description |
+|Klavye girişi | Açıklama |
 |--|--|
 |Denetim + E|utterslar listesindeki belirteçler ve varlıklar arasında geçiş yapar|
 

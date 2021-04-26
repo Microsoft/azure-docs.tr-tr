@@ -3,12 +3,12 @@ title: IoT Edge cihazında canlı video analizi dağıtma-Azure
 description: Bu makalede, IoT Edge cihazınızda canlı video analizlerini dağıtmanıza yardımcı olacak adımlar listelenmektedir. Örneğin, yerel bir Linux makinesine erişiminiz varsa ve/veya daha önce bir Azure Media Services hesabı oluşturduysanız, bunu yapabilirsiniz.
 ms.topic: how-to
 ms.date: 09/09/2020
-ms.openlocfilehash: 01b98c7a1f4073adcd8dea7cbfbfc57abc3787c1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 466cc236c1482b2ae6a31b40b6f3461a2c2fbfc1
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101718939"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280301"
 ---
 # <a name="deploy-live-video-analytics-on-an-iot-edge-device"></a>IoT Edge cihazda canlı video analizi dağıtma
 
@@ -25,7 +25,7 @@ Bu makalede, IoT Edge cihazınızda canlı video analizlerini dağıtmanıza yar
 * [Oluşturma ve kurulum IoT Hub](../../iot-hub/iot-hub-create-through-portal.md)
 * [IoT Edge cihazı kaydetme](../../iot-edge/how-to-register-device.md)
 * [Debian tabanlı Linux sistemlerine Azure IoT Edge çalışma zamanını yükleme](../../iot-edge/how-to-install-iot-edge.md)
-* [Azure Media Services hesabı oluşturma](../latest/create-account-howto.md)
+* [Azure Media Services hesabı oluşturma](../latest/account-create-how-to.md)
 
     * Şu bölgelerden birini kullanın: Doğu ABD 2, Doğu ABD, Orta ABD, Orta Kuzey ABD, Japonya Doğu, Batı ABD, Batı ABD 2, Orta Batı ABD, Kanada Doğu, UK Güney, Fransa orta, Fransa Güney, İsviçre Kuzey, İsviçre Batı ve Japonya Batı.
     * Genel amaçlı v2 (GPv2) depolama hesapları kullanmanız önerilir
@@ -38,7 +38,7 @@ Bkz. [özel Azure Resource Manager rolü oluşturma](create-custom-azure-resourc
 
 ### <a name="set-up-a-premium-streaming-endpoint"></a>Premium akış uç noktası ayarlama
 
-Videoyu buluta sürekli kaydetmek için canlı video analizi kullanmayı ve sonra yeniden oynamadan önce [sorgu API 'lerini](playback-recordings-how-to.md#query-api) kullanmayı düşünüyorsanız, medya hizmetinizi bir [Premium akış uç noktası](../latest/streaming-endpoint-concept.md#types)kullanacak şekilde güncelleştirmenizi öneririz.  
+Videoyu buluta sürekli kaydetmek için canlı video analizi kullanmayı ve sonra yeniden oynamadan önce [sorgu API 'lerini](playback-recordings-how-to.md#query-api) kullanmayı düşünüyorsanız, medya hizmetinizi bir [Premium akış uç noktası](../latest/stream-streaming-endpoint-concept.md#types)kullanacak şekilde güncelleştirmenizi öneririz.  
 
 Bu isteğe bağlı bir adımdır. Bunu yapmak için bu Azure CLı komutunu kullanabilirsiniz:
 

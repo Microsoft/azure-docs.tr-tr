@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/13/2020
 ms.author: kumud
-ms.openlocfilehash: 43d3da49688a7daeb3ea4e0c1c3dba505dcd3b59
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 847f8dbd2d8f4064f12333348a4f03e5c5fcc611
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102508342"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774278"
 ---
 # <a name="add-network-interfaces-to-or-remove-network-interfaces-from-virtual-machines"></a>Sanal makinelerde ağ arabirimi ekleme veya kaldırma işlemlerini gerçekleştirme
 
@@ -52,7 +52,7 @@ VM oluşturmadan önce [bir ağ arabirimi oluşturun](virtual-network-network-in
 
 |Araç|Komut|
 |---|---|
-|CLI|[az network nic create](/cli/azure/network/nic?toc=%2fazure%2fvirtual-network%2ftoc.json#az-network-nic-create)|
+|CLI|[az network nic create](/cli/azure/network/nic?toc=%2fazure%2fvirtual-network%2ftoc.json#az_network_nic_create)|
 |PowerShell|[New-Aznetworkınterface](/powershell/module/az.network/new-aznetworkinterface?toc=%2fazure%2fvirtual-network%2ftoc.json)|
 
 ## <a name="add-a-network-interface-to-an-existing-vm"></a>Mevcut bir VM 'ye ağ arabirimi ekleme
@@ -80,7 +80,7 @@ Artık, sanal makine işletim sistemini birden çok ağ arabirimini düzgün şe
 
 |Araç|Komut|
 |---|---|
-|CLI|[az VM NIC Add](/cli/azure/vm/nic?toc=%2fazure%2fvirtual-network%2ftoc.json#az-vm-nic-add) (başvuru); [ayrıntılı adımlar](../virtual-machines/linux/multiple-nics.md?toc=%2fazure%2fvirtual-network%2ftoc.json#add-a-nic-to-a-vm)|
+|CLI|[az VM NIC Add](/cli/azure/vm/nic?toc=%2fazure%2fvirtual-network%2ftoc.json#az_vm_nic_add) (başvuru); [ayrıntılı adımlar](../virtual-machines/linux/multiple-nics.md?toc=%2fazure%2fvirtual-network%2ftoc.json#add-a-nic-to-a-vm)|
 |PowerShell|[Add-Azvmnetworkınterface](/powershell/module/az.compute/add-azvmnetworkinterface?toc=%2fazure%2fvirtual-network%2ftoc.json) (başvuru); [ayrıntılı adımlar](../virtual-machines/windows/multiple-nics.md?toc=%2fazure%2fvirtual-network%2ftoc.json#add-a-nic-to-an-existing-vm)|
 
 ## <a name="view-network-interfaces-for-a-vm"></a>Bir VM için ağ arabirimlerini görüntüleme
@@ -102,7 +102,7 @@ Ağ arabirimi ayarları ve bunların nasıl değiştirileceği hakkında bilgi e
 
 |Araç|Komut|
 |---|---|
-|CLI|[az VM NIC List](/cli/azure/vm/nic?toc=%2fazure%2fvirtual-network%2ftoc.json#az-vm-nic-list)|
+|CLI|[az VM NIC List](/cli/azure/vm/nic?toc=%2fazure%2fvirtual-network%2ftoc.json#az_vm_nic_list)|
 |PowerShell|[Get-AzVM](/powershell/module/az.compute/get-azvm?toc=%2fazure%2fvirtual-network%2ftoc.json)|
 
 ## <a name="remove-a-network-interface-from-a-vm"></a>Bir VM 'den ağ arabirimini kaldırma
@@ -126,7 +126,7 @@ Ağ arabirimi ayarları ve bunların nasıl değiştirileceği hakkında bilgi e
 
 |Araç|Komut|
 |---|---|
-|CLI|[az VM NIC Remove](/cli/azure/vm/nic?toc=%2fazure%2fvirtual-network%2ftoc.json#az-vm-nic-remove) (başvuru); [ayrıntılı adımlar](../virtual-machines/linux/multiple-nics.md?toc=%2fazure%2fvirtual-network%2ftoc.json#remove-a-nic-from-a-vm)|
+|CLI|[az VM NIC Remove](/cli/azure/vm/nic?toc=%2fazure%2fvirtual-network%2ftoc.json#az_vm_nic_remove) (başvuru); [ayrıntılı adımlar](../virtual-machines/linux/multiple-nics.md?toc=%2fazure%2fvirtual-network%2ftoc.json#remove-a-nic-from-a-vm)|
 |PowerShell|[Remove-Azvmnetworkınterface](/powershell/module/az.compute/remove-azvmnetworkinterface?toc=%2fazure%2fvirtual-network%2ftoc.json) (başvuru); [ayrıntılı adımlar](../virtual-machines/windows/multiple-nics.md?toc=%2fazure%2fvirtual-network%2ftoc.json#remove-a-nic-from-an-existing-vm)|
 
 ## <a name="constraints"></a>Kısıtlamalar
@@ -152,6 +152,8 @@ Ağ arabirimi ayarları ve bunların nasıl değiştirileceği hakkında bilgi e
 - Bir VM 'nin silinmesi, kendisine bağlı olan ağ arabirimlerini silmez. Bir VM 'yi sildiğinizde, ağ arabirimleri VM 'den ayrılır. Bu ağ arabirimlerini farklı VM 'lere ekleyebilir veya silebilirsiniz.
 
 - En iyi performansı elde etmek için hızlandırılmış ağ gerekir. Bazı durumlarda, [Windows](create-vm-accelerated-networking-powershell.md) veya [Linux](create-vm-accelerated-networking-cli.md) sanal makineleri için hızlandırılmış ağı açıkça etkinleştirmeniz gerekir.
+
+[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

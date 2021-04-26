@@ -14,10 +14,10 @@ author: jaredmoo
 ms.reviewer: sstein
 ms.date: 02/01/2021
 ms.openlocfilehash: 11b94ba5bcedf56f0115b8730dc58f808aff5c58
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100371609"
 ---
 # <a name="use-transact-sql-t-sql-to-create-and-manage-elastic-database-jobs-preview"></a>Transact-SQL (T-SQL) kullanarak elastik veritabanı Işleri oluşturma ve yönetme (Önizleme)

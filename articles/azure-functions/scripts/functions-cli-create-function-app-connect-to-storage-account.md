@@ -4,12 +4,12 @@ description: Azure CLI Betiği Örneği - Azure Depolama’ya bağlanan bir Azur
 ms.topic: sample
 ms.date: 04/20/2017
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 13120ad4478febf9281ff423a3a7a8f8f3b25845
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 539c3a7dd95045b2e569dbb339be0e5a0c845902
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97934416"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786300"
 ---
 # <a name="create-a-function-app-with-a-named-storage-account-connection"></a>Adlandırılmış depolama hesabı bağlantısı ile bir işlev uygulaması oluşturma 
 
@@ -35,11 +35,11 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Konum ile bir kaynak grubu oluşturun. |
-| [az storage account create](/cli/azure/storage/account#az-storage-account-create) | Depolama hesabı oluşturma. |
-| [az functionapp create](/cli/azure/functionapp#az-functionapp-create) | Sunucusuz [Tüketim planında](../consumption-plan.md)bir işlev uygulaması oluşturur. |
-| [az Storage Account Show-Connection-String](/cli/azure/storage/account#az-storage-account-show-connection-string) | Hesap için bağlantı dizesini alır. |
-| [az functionapp config appSettings kümesi](/cli/azure/functionapp/config/appsettings#az-functionapp-config-appsettings-set) | İşlev uygulamasındaki uygulama ayarı olarak bağlantı dizesini ayarlar. |
+| [az group create](/cli/azure/group#az_group_create) | Konum ile bir kaynak grubu oluşturun. |
+| [az storage account create](/cli/azure/storage/account#az_storage_account_create) | Depolama hesabı oluşturma. |
+| [az functionapp create](/cli/azure/functionapp#az_functionapp_create) | Sunucusuz [Tüketim planında](../consumption-plan.md)bir işlev uygulaması oluşturur. |
+| [az Storage Account Show-Connection-String](/cli/azure/storage/account#az_storage_account_show_connection_string) | Hesap için bağlantı dizesini alır. |
+| [az functionapp config appSettings kümesi](/cli/azure/functionapp/config/appsettings#az_functionapp_config_appsettings_set) | İşlev uygulamasındaki uygulama ayarı olarak bağlantı dizesini ayarlar. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

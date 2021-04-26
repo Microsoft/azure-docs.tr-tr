@@ -8,12 +8,12 @@ author: vamahtan
 ms.author: vamahtan
 ms.reviewer: stmummer
 ms.date: 3/17/2021
-ms.openlocfilehash: e67219e0b029ce401ffc05c009a5cc4a96680a9f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 28fdd8b10c7106380c296c8131ade909ee88d0f8
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104593399"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107100"
 ---
 # <a name="co-sell-requirements"></a>Ortak satış gereksinimleri
 
@@ -35,7 +35,7 @@ Ortak satış için hazırlık durumuna ulaşmak üzere bir teklif için aşağ�
 
 **Tüm iş ortakları**:
 
-- [Iş Ortağı Merkezi 'nde](./partner-center-portal/create-account.md)MPN kimliği ve etkin bir ticari Market hesabınız olmalıdır.
+- [Iş Ortağı Merkezi 'nde](create-account.md)MPN kimliği ve etkin bir ticari Market hesabınız olmalıdır.
 - İş Ortağı Merkezi 'nde, bir [iş profilinizin](/partner-center/create-a-marketing-profile) tamamen bulunduğundan emin olun. Nitelikli bir Microsoft iş ortağı olarak iş profiliniz, işletmenizin gereksinimlerini karşılamak üzere benzersiz çözümlerinizi ve uzmanlığınızı arayan müşterilere ve bunlarla [ilgili olarak iş](/partner-center/referrals)ihtiyaçlarını karşılayacak şekilde sergilemenize yardımcı olur.
 - **Ortak satışı Microsoft** sekmesini doldurun ve teklifi ticari Market 'e yayımlayın.
 - Her ortak satış için uygun Coğrafya ve gerekli ürün reçeteleri için bir satış kişisi sağlayın.
@@ -59,7 +59,7 @@ Bu belgeleri oluşturmanıza yardımcı olacak şablonlar sunuyoruz. Microsoft i
 
 ### <a name="publish-your-offer-live"></a>Teklifinizi canlı yayımlayın
 
-Ortak satış için hazırlık durumuna uygun hale getirmek için teklifiniz veya çözümünüz, ticari Market çevrimiçi mağazalarından en az birine canlı olarak yayımlanmalıdır: Azure Marketi veya Microsoft AppSource. Ticari Market 'e sunulan teklifleri yayımlama hakkında daha fazla bilgi için bkz. [sunulan Kılavuzu teklif türüne göre yayımlama](publisher-guide-by-offer-type.md). Daha önce ticari Market 'te bir teklif yayımlamadıysanız, [ticari bir market hesabınız](./partner-center-portal/create-account.md)olduğundan emin olun.
+Ortak satış için hazırlık durumuna uygun hale getirmek için teklifiniz veya çözümünüz, ticari Market çevrimiçi mağazalarından en az birine canlı olarak yayımlanmalıdır: Azure Marketi veya Microsoft AppSource. Ticari Market 'e sunulan teklifleri yayımlama hakkında daha fazla bilgi için bkz. [sunulan Kılavuzu teklif türüne göre yayımlama](publisher-guide-by-offer-type.md). Daha önce ticari Market 'te bir teklif yayımlamadıysanız, [ticari bir market hesabınız](create-account.md)olduğundan emin olun.
 
 ## <a name="requirements-for-azure-ip-co-sell-incentivized-status"></a>Azure IP ortak satış incentivized durumu gereksinimleri
 

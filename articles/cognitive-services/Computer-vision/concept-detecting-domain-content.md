@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 02/08/2019
 ms.author: pafarley
 ms.custom: seodec18
-ms.openlocfilehash: 5cd872d66088e165bfc8356ab6d96a0a6135a0e0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 530ca81cedad06c949323889cc02d2a233dd0c02
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94538317"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778832"
 ---
 # <a name="detect-domain-specific-content"></a>Etki alanına özgü içeriği algılama
 
@@ -26,7 +26,7 @@ Etki alanına özgü modelleri kullanmanın iki yolu vardır: kendilerine (kapsa
 
 ### <a name="scoped-analysis"></a>Kapsamlı analiz
 
-[Modelleri/ \<model\> /Analyze](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/56f91f2e778daf14a499f21b) API 'sini çağırarak yalnızca seçili alana özgü modeli kullanarak bir görüntüyü çözümleyebilirsiniz.
+[Modelleri/ \<model\> /Analyze](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-ga/operations/56f91f2e778daf14a499f21b) API 'sini çağırarak yalnızca seçili alana özgü modeli kullanarak bir görüntüyü çözümleyebilirsiniz.
 
 Aşağıda, belirtilen görüntü için **Modeller/Ünlüler/çözümle** API 'si tarafından döndürülen örnek bir JSON yanıtı verilmiştir:
 
@@ -57,7 +57,7 @@ Aşağıda, belirtilen görüntü için **Modeller/Ünlüler/çözümle** API 's
 
 ### <a name="enhanced-categorization-analysis"></a>Gelişmiş kategori Analizi
 
-Genel görüntü analizine ek olarak, etki alanına özgü modeller de kullanabilirsiniz. Bunu, [Çözümle](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/56f91f2e778daf14a499f21b) API çağrısının *Ayrıntılar* parametresinde alana özgü modeller belirterek, [üst düzey kategori](concept-categorizing-images.md) parçası olarak yapabilirsiniz.
+Genel görüntü analizine ek olarak, etki alanına özgü modeller de kullanabilirsiniz. Bunu, [Çözümle](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-ga/operations/56f91f2e778daf14a499f21b) API çağrısının *Ayrıntılar* parametresinde alana özgü modeller belirterek, [üst düzey kategori](concept-categorizing-images.md) parçası olarak yapabilirsiniz.
 
 Bu durumda, ilk olarak 86 kategori taksonomi Sınıflandırıcısı çağırılır. Algılanan kategorilerden herhangi birinde eşleşen bir etki alanına özgü model varsa, görüntü bu modelden de geçirilir ve sonuçlar eklenir.
 
@@ -105,7 +105,7 @@ Aşağıdaki JSON yanıtı, etki alanına özgü çözümlemenin `detail` daha g
 | ünlüleri | Bu şekilde, kategoride sınıflandırılan görüntüler için desteklenen ünlülik tanıma `people_` |
 | sakal | Yer işareti tanıma, `outdoor_` veya kategorilerinde sınıflandırılan görüntüler için `building_` desteklenir |
 
-[Modeller](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/56f91f2e778daf14a499f20e) API 'sini çağırmak, bu bilgileri her modelin uygulayabileceği kategorilerle birlikte döndürür:
+[Modeller](https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-ga/operations/56f91f2e778daf14a499f20e) API 'sini çağırmak, bu bilgileri her modelin uygulayabileceği kategorilerle birlikte döndürür:
 
 ```json
 {

@@ -6,15 +6,15 @@ metadata:
   description: Azure Backup hizmeti, Microsoft Azure bulutundaki verilerinizi yedekleyip kurtarmaya yönelik basit, güvenli ve uygun maliyetli çözümler sunar.
   ms.service: backup
   ms.topic: landing-page
-  author: dcurwin
-  ms.author: dacurwin
+  author: v-amallick
+  ms.author: v-amallick
   ms.date: 12/01/2019
-  ms.openlocfilehash: f6a601aa1b180aa10df3b1486c1e47a3c6269490
-  ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+  ms.openlocfilehash: bb23dc8b692bfbbad6d44fb0dc78929da4485b63
+  ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/27/2021
-  ms.locfileid: "105629096"
+  ms.lasthandoff: 04/15/2021
+  ms.locfileid: "107518996"
 landingContent:
 - title: Azure Backup hakkında bilgi edinin
   linkLists:
@@ -95,7 +95,7 @@ landingContent:
     - text: Azure yönetilen disklerini yedekleme
       url: backup-managed-disks.md
     - text: SSS-Azure yönetilen diskler
-      url: disk-backup-faq.md
+      url: disk-backup-faq.yml
     - text: Azure yönetilen diskler yedeklemesi sorunlarını giderme
       url: disk-backup-troubleshoot.md
 - title: Azure VM’leri üzerinde SQL Server’ı yedekleme
@@ -105,7 +105,7 @@ landingContent:
     - text: Azure VM’lerinde SQL Server’ı yedekleme hakkında
       url: backup-azure-sql-database.md
     - text: SSS - Azure VM’lerinde SQL Server’ı yedekleme
-      url: faq-backup-sql-server.md
+      url: faq-backup-sql-server.yml
     - text: Azure VM’lerinde SQL Server veritabanlarını yedekleme
       url: backup-sql-server-database-azure-vms.md
     - text: Yedeklenmiş SQL Server veritabanlarını yönetme ve izleme
@@ -119,7 +119,7 @@ landingContent:
     - text: Yedeklenen SAP HANA veritabanlarını yönetme ve izleme
       url: sap-hana-db-manage.md
     - text: SSS - Azure VM’lerindeki SAP HANA veritabanlarını yedekleme
-      url: sap-hana-faq-backup-azure-vm.md
+      url: sap-hana-faq-backup-azure-vm.yml
     - text: Azure VM’leri üzerinde SAP HANA veritabanlarının yedeklerine yönelik destek matrisi
       url: sap-hana-backup-support-matrix.md
 - title: Azure Dosyalar paylaşımlarını yedekleme
@@ -129,7 +129,7 @@ landingContent:
     - text: Azure dosya paylaşımlarını yedekleme ve geri yükleme
       url: backup-afs.md
     - text: SSS - Azure Dosyalar’ı yedekleme
-      url: backup-azure-files-faq.md
+      url: backup-azure-files-faq.yml
 - title: Microsoft Azure Kurtarma Hizmetleri (MARS) aracısı ile yedekleme
   linkLists:
   - linkListType: concept
@@ -141,7 +141,7 @@ landingContent:
     - text: MARS aracısı destek matrisi
       url: backup-support-matrix-mars-agent.md
     - text: SSS - MARS aracısı
-      url: backup-azure-file-folder-backup-faq.md
+      url: backup-azure-file-folder-backup-faq.yml
 - title: Microsoft Azure Backup Sunucusu (MABS) ve DPM ile yedekleme
   linkLists:
   - linkListType: concept
@@ -151,7 +151,7 @@ landingContent:
     - text: MABS / DPM destek matrisi
       url: backup-support-matrix-mabs-dpm.md
     - text: SSS - MABS ve DPM
-      url: backup-azure-dpm-azure-server-faq.md
+      url: backup-azure-dpm-azure-server-faq.yml
     - text: MABS’yi yükleme ve yükseltme
       url: backup-azure-microsoft-azure-backup.md
 - title: Uygun ölçekte yönetme

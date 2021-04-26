@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 02/17/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: 1bc1df4582c83b093b6ed25d03cc73aef9a81483
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 5423c26b15c5ba9fa84e5d823f75f3c82a8cb8b4
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563948"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105968127"
 ---
 # <a name="azure-security-baseline-for-event-grid"></a>Event Grid için Azure Güvenlik temeli
 
@@ -48,9 +48,7 @@ Azure Event Grid Ayrıca, konulara ve etki alanlarına yayımlama için genel IP
 
 ### <a name="12-monitor-and-log-the-configuration-and-traffic-of-virtual-networks-subnets-and-nics"></a>1,2: sanal ağların, alt ağların ve NIC 'lerin yapılandırmasını ve trafiğini izleyin ve günlüğe kaydedin
 
-**Rehberlik**: Azure Güvenlik Merkezi 'ni kullanın ve azure 'daki Event Grid kaynaklarınızın güvenliğini sağlamaya yardımcı olmak için ağ koruma önerilerini izleyin. Kullanıyorsanız
-
-Azure sanal makineler Event Grid kaynaklarınıza erişmek için ağ güvenlik grubu (NSG) akış günlüklerini etkinleştirin ve trafik denetimi için günlükleri bir depolama hesabına gönderin.
+**Rehberlik**: Azure Güvenlik Merkezi 'ni kullanın ve azure 'daki Event Grid kaynaklarınızın güvenliğini sağlamaya yardımcı olmak için ağ koruma önerilerini izleyin. Event Grid kaynaklarınıza erişmek için Azure sanal makineleri kullanıyorsanız, ağ güvenlik grubu (NSG) akış günlüklerini etkinleştirin ve trafik denetimi için günlükleri bir depolama hesabına gönderin.
 
 - [NSG akış günlüklerini etkinleştirme](../network-watcher/network-watcher-nsg-flow-logging-portal.md)
 

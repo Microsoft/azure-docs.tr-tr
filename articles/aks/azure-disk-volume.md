@@ -4,14 +4,14 @@ description: Azure Kubernetes hizmetinde (AKS) bir pod ile kullanım için Azure
 services: container-service
 ms.topic: article
 ms.date: 03/01/2019
-ms.openlocfilehash: 7d8a038926fc6bf3234b43a82c0259ba633df11e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 617ad75eda766963a91fe3d41b1dbfefae62b41b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102506659"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776222"
 ---
-# <a name="manually-create-and-use-a-volume-with-azure-disks-in-azure-kubernetes-service-aks"></a>Azure Kubernetes hizmetinde (AKS) Azure diskleriyle bir birimi el ile oluşturma ve kullanma
+# <a name="manually-create-and-use-a-volume-with-azure-disks-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service'te (AKS) Azure diskleriyle el ile birim oluşturma ve kullanma
 
 Kapsayıcı tabanlı uygulamalar genellikle dış veri hacminde verileri erişmesi ve kalıcı hale getirmeniz gerekir. Tek bir pod 'ın depolamaya erişmesi gerekiyorsa, uygulama kullanımı için yerel bir birim sunmak üzere Azure disklerini kullanabilirsiniz. Bu makalede, bir Azure diskini el ile oluşturma ve AKS 'te Pod 'a iliştirme gösterilmektedir.
 
@@ -133,13 +133,13 @@ AKS kümeleri hakkında daha fazla bilgi için Azure diskleri [Için Kubernetes 
 [managed-disk-pricing-performance]: https://azure.microsoft.com/pricing/details/managed-disks/
 
 <!-- LINKS - internal -->
-[az-disk-list]: /cli/azure/disk#az-disk-list
-[az-disk-create]: /cli/azure/disk#az-disk-create
-[az-group-list]: /cli/azure/group#az-group-list
-[az-resource-show]: /cli/azure/resource#az-resource-show
+[az-disk-list]: /cli/azure/disk#az_disk_list
+[az-disk-create]: /cli/azure/disk#az_disk_create
+[az-group-list]: /cli/azure/group#az_group_list
+[az-resource-show]: /cli/azure/resource#az_resource_show
 [aks-quickstart-cli]: kubernetes-walkthrough.md
 [aks-quickstart-portal]: kubernetes-walkthrough-portal.md
-[az-aks-show]: /cli/azure/aks#az-aks-show
+[az-aks-show]: /cli/azure/aks#az_aks_show
 [install-azure-cli]: /cli/azure/install-azure-cli
 [azure-files-volume]: azure-files-volume.md
 [operator-best-practices-storage]: operator-best-practices-storage.md

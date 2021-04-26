@@ -9,20 +9,51 @@ ms.service: azure-arc
 ms.subservice: azure-arc-data
 ms.date: 03/02/2021
 ms.topic: conceptual
-ms.openlocfilehash: 8100d9e12f107e0c4598876c46453b46c6ee4d0e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ee652047a33d73ece2d7648905fa590d90b1fb2f
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102122009"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107029514"
 ---
 # <a name="known-issues---azure-arc-enabled-data-services-preview"></a>Bilinen sorunlar-Azure Arc etkin veri Hizmetleri (Önizleme)
 
 [!INCLUDE [azure-arc-data-preview](../../../includes/azure-arc-data-preview.md)]
 
+## <a name="march-2021"></a>Mart 2021
+
+### <a name="data-controller"></a>Veri denetleyicisi
+
+- Azure portal ile doğrudan bağlanma modunda bir veri denetleyicisi oluşturabilirsiniz. Diğer Azure Arc etkin veri Hizmetleri araçlarıyla dağıtım desteklenmez. Özellikle, bu yayın sırasında aşağıdaki araçlardan herhangi biriyle doğrudan bağlanma modunda bir veri denetleyicisi dağıtamazsınız.
+   - Azure Data Studio
+   - Azure Data CLı ( `azdata` )
+   - Kubernetes yerel araçları
+
+   [Azure Arc Data Controller 'ı dağıtma | Doğrudan bağlanma modu](deploy-data-controller-direct-mode.md) , portalda veri denetleyicisinin nasıl oluşturulacağını açıklar. 
+
+### <a name="azure-arc-enabled-postgresql-hyperscale"></a>Azure Arc etkin PostgreSQL hiper ölçeği
+
+- Doğrudan bağlanma modu için etkinleştirilen bir yay veri denetleyicisinde Azure Arc etkin bir Postgres hiper ölçek sunucu grubu dağıtmak desteklenmez.
+- `--extensions`Ek uzantıları etkinleştirmek üzere bir sunucu grubu yapılandırması düzenlenirken parametreye geçersiz bir değer geçirilme, etkinleştirilmiş uzantıların listesini sunucu grubunun oluşturma zamanında yanlış olarak sıfırlar ve kullanıcının ek uzantı oluşturmasını engeller. Bu durumda, tek yapmanız gereken tek geçici çözüm, sunucu grubunu silip yeniden dağıtmanıza olanak sağlar.
+
 ## <a name="february-2021"></a>Şubat 2021
 
-- Bağlı küme modu devre dışı
+### <a name="data-controller"></a>Veri denetleyicisi
+
+- Doğrudan bağlantı kümesi modu devre dışı
+
+### <a name="azure-arc-enabled-postgresql-hyperscale"></a>Azure Arc etkin PostgreSQL hiper ölçeği
+
+- Zaman içinde bir noktaya geri yükleme, şu anda NFS depolamada desteklenmez.
+- Pg_cron uzantısını aynı anda etkinleştirip yapılandırmak mümkün değildir. Bunun için iki komut kullanmanız gerekir. Bunu etkinleştirmek için bir komut ve onu yapılandırmak için bir komut. 
+
+   Örnek:
+   ```console
+   § azdata arc postgres server edit -n myservergroup --extensions pg_cron 
+   § azdata arc postgres server edit -n myservergroup --engine-settings cron.database_name='postgres'
+   ```
+
+   İlk komut, sunucu grubunun yeniden başlatılmasını gerektirir. Bu nedenle, ikinci komutu yürütmeden önce, sunucu grubunun durumunun güncelleştirmeden başlamaya geçirildiğinden emin olun. Yeniden başlatma tamamlanmadan önce ikinci komutu çalıştırırsanız, başarısız olur. Böyle bir durum söz konusu olduğunda birkaç dakika bekleyip ikinci komutu yeniden yürütün.
 
 ## <a name="introduced-prior-to-february-2021"></a>Şubat 2021 ' den önce sunulmuştur
 
@@ -43,12 +74,6 @@ ms.locfileid: "102122009"
 
    :::image type="content" source="media/release-notes/aks-zone-selector.png" alt-text="Hiçbirini belirtmek için her bir bölgenin onay kutularını temizleyin.":::
 
-### <a name="postgresql"></a>PostgreSQL
-
-- Azure Arc etkin PostgreSQL hiper ölçek, belirttiğiniz zaman göreli noktaya geri yükleme yaparken yanlış bir hata iletisi döndürüyor. Örneğin, geri yükleme için yedeklemelerinizin sahip olduğu sürümden daha eski bir nokta belirlediyseniz geri yükleme şu şekilde bir hata iletisiyle başarısız olur: `ERROR: (404). Reason: Not found. HTTP response body: {"code":404, "internalStatus":"NOT_FOUND", "reason":"Failed to restore backup for server...}`
-Bu durumda, yedeklemeleriniz olan tarih aralığı içinde bir zaman noktası olduğunu belirterek komutu yeniden başlatın. Bu aralığı, yedeklemelerinizi listeleyerek ve bunların alındığı tarihlere bakarak belirlersiniz.
-- Zaman içindeki bir noktaya geri yükleme yalnızca sunucu grupları arasında desteklenir. Zaman içinde bir noktaya geri yükleme işleminin hedef sunucusu, yedeklemeyi aldığınız sunucu olamaz. Farklı bir sunucu grubu olmalıdır. Ancak, tam geri yükleme aynı sunucu grubu için desteklenir.
-- Tam geri yükleme yapılırken bir yedekleme kimliği gereklidir. Varsayılan olarak, bir yedekleme kimliği belirtmezseniz, en son yedekleme kullanılacaktır. Bu sürümde çalışmaz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

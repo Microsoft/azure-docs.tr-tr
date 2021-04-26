@@ -4,10 +4,10 @@ description: IoT için Defender kullanırken güvenlik uyarısına ve öneri ver
 ms.topic: conceptual
 ms.date: 09/04/2020
 ms.openlocfilehash: 160f7c014c890f5d8c4dd6366d3acca70f21ad11
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104781696"
 ---
 # <a name="access-your-security-data"></a>Güvenlik verilerinize erişin
@@ -54,7 +54,7 @@ SecurityAlert
 | take 3
 ```
 
-| TimeGenerated           | Iothubıd                                                                                                       | DeviceId      | AlertSeverity | DisplayName                           | Açıklama                                             | ExtendedProperties                                                                                                                                                             |
+| TimeGenerated           | Iothubıd                                                                                                       | DeviceId      | AlertSeverity | DisplayName                           | Description                                             | ExtendedProperties                                                                                                                                                             |
 |-------------------------|----------------------------------------------------------------------------------------------------------------|---------------|---------------|---------------------------------------|---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 2018-11-18T18:10:29.000 | /Subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Devices/IotHubs/<iot_hub> | <device_name> | Yüksek          | Deneme yanılma saldırısı başarılı           | Cihaza yönelik bir deneme yanılma saldırısı başarılı oldu        |    {"Tam kaynak adresi": "[ \" 10.165.12.18: \" ]", "Kullanıcı adları": "[ \" \" ]", "DeviceID": "IoT-Device-Linux"}                                                                       |
 | 2018-11-19T12:40:31.000 | /Subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Devices/IotHubs/<iot_hub> | <device_name> | Yüksek          | Cihazda başarılı yerel oturum açma      | Cihazda başarılı bir yerel oturum açma algılandı     | {"Uzak adres": "?", "uzak bağlantı noktası": "", "yerel bağlantı noktası": "", "oturum açma kabuğu": "/bin/su", "oturum açma Işlemi kimliği": "28207", "Kullanıcı adı": "saldırgan", "DeviceID": "IoT-Device-Linux"} |
@@ -134,7 +134,7 @@ SecurityRecommendation
 | take 2
 ```
 
-| TimeGenerated | Iothubıd | DeviceId | RecommendationSeverity | RecommendationState | RecommendationDisplayName | Açıklama | RecommendationAdditionalData |
+| TimeGenerated | Iothubıd | DeviceId | RecommendationSeverity | RecommendationState | RecommendationDisplayName | Description | RecommendationAdditionalData |
 |---------------|----------|----------|------------------------|---------------------|---------------------------|-------------|------------------------------|
 | 2019-03-22T10:21:06.060 |    /Subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Devices/IotHubs/<iot_hub> | <device_name> | Orta | Etkin | Giriş zincirindeki izin veren güvenlik duvarı kuralı bulundu | Çok sayıda IP adresi veya bağlantı noktası aralığı için izin veren bir model içeren güvenlik duvarındaki bir kural bulundu | {"Rules": "[{ \" sourceAddress \" : \" \" , \" sourceport \" : \" \" , \" DestinationAddress \" : \" \" , \" destinationport \" : \" 1337 \" }]"} |
 | 2019-03-22T10:50:27.237 | /Subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Devices/IotHubs/<iot_hub> | <device_name> | Orta | Etkin | Giriş zincirindeki izin veren güvenlik duvarı kuralı bulundu | Çok sayıda IP adresi veya bağlantı noktası aralığı için izin veren bir model içeren güvenlik duvarındaki bir kural bulundu | {"Rules": "[{ \" sourceAddress \" : \" \" , \" sourceport \" : \" \" , \" DestinationAddress \" : \" \" , \" destinationport \" : \" 1337 \" }]"} |

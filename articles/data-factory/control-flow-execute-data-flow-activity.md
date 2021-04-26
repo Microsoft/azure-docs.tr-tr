@@ -5,13 +5,13 @@ author: kromerm
 ms.service: data-factory
 ms.topic: conceptual
 ms.author: makromer
-ms.date: 01/03/2021
-ms.openlocfilehash: 0663690318773ccad3bddfaaa03e456c2f58895e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/16/2021
+ms.openlocfilehash: da8d193d140d96d9742666429ebc85672c71ad4e
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100383390"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567273"
 ---
 # <a name="data-flow-activity-in-azure-data-factory"></a>Azure Data Factory 'de veri akışı etkinliği
 
@@ -76,9 +76,9 @@ traceLevel | Veri akışı etkinlik yürütmesinin günlüğe kaydetme düzeyini
 
 ### <a name="data-flow-integration-runtime"></a>Veri akışı tümleştirme çalışma zamanı
 
-Veri akışı etkinliği yürütmesinde kullanılacak Integration Runtime seçin. Data Factory, varsayılan olarak, Azure tümleştirme çalışma zamanını dört çalışan çekirdekle ve canlı kalma süresi (TTL) ile otomatik çözümle 'yi kullanacaktır. Bu IR genel amaçlı bir işlem türüne sahiptir ve fabrikanızın bulunduğu bölgede çalışır. Veri akışı etkinlik yürütmenizi için belirli bölgeleri, işlem türünü, çekirdek sayılarını ve TTL 'yi tanımlayan kendi Azure tümleştirme çalışma zamanlarını oluşturabilirsiniz.
+Veri akışı etkinliği yürütmesinde kullanılacak Integration Runtime seçin. Data Factory, varsayılan olarak Azure tümleştirme çalışma zamanını dört çalışan çekirdeklerle Otomatik Çözümle ' yi kullanır. Bu IR genel amaçlı bir işlem türüne sahiptir ve fabrikanızın bulunduğu bölgede çalışır. Yürütülen işlem hatları için, veri akışı etkinlik yürütmenize yönelik belirli bölgeleri, işlem türünü, çekirdek sayılarını ve TTL 'yi tanımlayan kendi Azure tümleştirme çalışma zamanlarını oluşturmanız önemle tavsiye edilir.
 
-İşlem hattı yürütmeleri için küme, yürütme başlamadan önce birkaç dakika süren bir iş kümesidir. TTL belirtilmemişse, bu başlangıç saati her işlem hattı çalıştırmasında gereklidir. Bir TTL belirtirseniz, son yürütmeden sonra belirtilen süre için bir sıcak küme havuzu etkin kalır ve daha kısa başlangıç süreleri elde edilir. Örneğin, 60 dakikalık bir TTL 'SI varsa ve bir veri akışını saatte bir kez çalıştırırsanız, küme havuzu etkin kalır. Daha fazla bilgi için bkz. [Azure tümleştirme çalışma zamanı](concepts-integration-runtime.md).
+En az bir Genel Amaçlı işlem türü (büyük iş yükleri için işlem iyileştirildi) 8 + 8 (16 Toplam v-çekirdek) yapılandırmasıyla ve 10 dakikalık en düşük düzeyde üretim iş yükleri için en düşük öneriden oluşur. Küçük bir TTL ayarlayarak Azure IR, soğuk bir küme için birkaç dakikalık başlangıç zamanı olmayacak bir sıcak küme tutabilir. Azure IR veri akışı yapılandırmalarında "hızlı yeniden kullan" seçeneğini belirleyerek, veri akışlarınızın yürütülmesini daha da hızlandırabilirsiniz. Daha fazla bilgi için bkz. [Azure tümleştirme çalışma zamanı](concepts-integration-runtime.md).
 
 ![Azure Integration Runtime](media/data-flow/ir-new.png "Azure Integration Runtime")
 
@@ -125,7 +125,7 @@ Azure Integration Runtime 'ı otomatik çözümle ve COMPUTE. coreCount ve COMPU
 
 Bir veri akışı etkinliğiyle bir hata ayıklama işlem hattı çalıştırması yürütmek için, üst çubuktaki **veri akışı hata ayıklama** kaydırıcısının üzerinden veri akışı hata ayıklama moduna geçmeniz gerekir. Hata ayıklama modu, veri akışını etkin bir Spark kümesine karşı çalıştırmanızı sağlar. Daha fazla bilgi için bkz. [hata ayıklama modu](concepts-data-flow-debug-mode.md).
 
-![Hata ayıklama düğmesi](media/data-flow/debugbutton.png "Hata ayıklama düğmesi")
+![Hata ayıklama düğmesinin nerede olduğunu gösteren ekran görüntüsü](media/data-flow/debug-button-3.png)
 
 Hata ayıklama ardışık düzeni, veri akışı etkinlik ayarlarında belirtilen tümleştirme çalışma zamanı ortamı değil, etkin hata ayıklama kümesine karşı çalışır. Hata ayıklama modunu başlatırken işlem ortamını hata ayıkla seçeneğini belirleyebilirsiniz.
 

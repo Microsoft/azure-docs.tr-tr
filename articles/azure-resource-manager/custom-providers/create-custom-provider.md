@@ -5,12 +5,12 @@ author: MSEvanhi
 ms.topic: tutorial
 ms.date: 06/24/2020
 ms.author: evanhi
-ms.openlocfilehash: 23ae69f49d37a210dd9fa1bfeedeca6c1b461e20
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 915856e3f9875c0a3318bc19138eaae8742bf72f
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94888870"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107871750"
 ---
 # <a name="quickstart-create-a-custom-provider-and-deploy-custom-resources"></a>Hızlı başlangıç: özel bir sağlayıcı oluşturma ve özel kaynaklar dağıtma
 
@@ -27,7 +27,7 @@ Ortamınızı Azure CLı için hazırlayın.
 
 [!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-Azure CLı örnekleri, `az rest` istekler için kullanır `REST` . Daha fazla bilgi için bkz. [az Rest](/cli/azure/reference-index#az-rest).
+Azure CLı örnekleri, `az rest` istekler için kullanır `REST` . Daha fazla bilgi için bkz. [az Rest](/cli/azure/reference-index#az_rest).
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -52,7 +52,7 @@ Azure CLı örnekleri, `az rest` istekler için kullanır `REST` . Daha fazla bi
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Bu örnek, bir kaynak grubu, konum ve sağlayıcının işlev uygulaması adını girmenizi ister. Adlar, diğer komutlarda kullanılan değişkenlerde depolanır. [Az Group Create](/cli/azure/group#az-group-create) ve [az Deployment Group Create](/cli/azure/deployment/group#az-deployment-group-create) komutları kaynakları dağıtır.
+Bu örnek, bir kaynak grubu, konum ve sağlayıcının işlev uygulaması adını girmenizi ister. Adlar, diğer komutlarda kullanılan değişkenlerde depolanır. [Az Group Create](/cli/azure/group#az_group_create) ve [az Deployment Group Create](/cli/azure/deployment/group#az_deployment_group_create) komutları kaynakları dağıtır.
 
 ```azurecli-interactive
 read -p "Enter a resource group name:" rgName &&
@@ -265,7 +265,7 @@ Yanıtı alırsınız:
 
 ## <a name="custom-resource-provider-commands"></a>Özel kaynak sağlayıcısı komutları
 
-Özel kaynak sağlayıcınızda çalışmak için [özel sağlayıcılar](/cli/azure/ext/custom-providers/custom-providers/resource-provider) komutlarını kullanın.
+Özel kaynak sağlayıcınızda çalışmak için [özel sağlayıcılar](/cli/azure/custom-providers/resource-provider) komutlarını kullanın.
 
 ### <a name="list-custom-resource-providers"></a>Özel kaynak sağlayıcıları listeleme
 

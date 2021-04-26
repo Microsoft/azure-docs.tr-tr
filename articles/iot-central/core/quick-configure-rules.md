@@ -8,16 +8,14 @@ ms.topic: quickstart
 ms.service: iot-central
 services: iot-central
 ms.custom: mvc
-ms.openlocfilehash: 90fc1385afb2ef921828465ba030674281e96ebf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f65614de97e8ff6eed732e624ae30c3f2b70bd60
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99833856"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107589015"
 ---
 # <a name="quickstart-configure-rules-and-actions-for-your-device-in-azure-iot-central"></a>Hızlı Başlangıç: Azure IoT Central’da cihazınız için kurallar ve eylemler yapılandırma
-
-*Bu makale, işleçler, oluşturucular ve yöneticiler için geçerlidir.*
 
 Bu hızlı başlangıçta, bir cihaz algılayıcısı tarafından bildirilen nem %55 ' ü aştığında bir e-posta gönderen bir kural oluşturacaksınız.
 
@@ -70,10 +68,6 @@ Kural kaydedildikten kısa bir süre sonra dinamik olur. Kuralda tanımlanan ko�
 
 > [!NOTE]
 > Testiniz tamamlandıktan sonra, gelen kutunuzda uyarı almayı durdurmak için kuralı kapatın.
-
-## <a name="clean-up-resources"></a>Kaynakları temizleme
-
-[!INCLUDE [iot-central-clean-up-resources](../../../includes/iot-central-clean-up-resources.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

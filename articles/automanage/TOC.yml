@@ -15,6 +15,8 @@
       items:
         - name: Yeni sanal makineler için hotpatch
           href: automanage-hotpatch.md
+    - name: Hesabı oto Yönet
+      href: automanage-account.md
 - name: Nasıl yapılır
   expanded: true
   items:
@@ -22,6 +24,8 @@
       href: virtual-machines-custom-preferences.md
     - name: Azure İlkesi aracılığıyla VM’lerde etkinleştirme
       href: virtual-machines-policy-enable.md
+    - name: ARM şablonu aracılığıyla VM 'lerde etkinleştirme
+      href: arm-deploy.md
     - name: Ekleme hatalarını giderme
       href: common-errors.md
     - name: Bozuk bir Automanage hesabını onarma

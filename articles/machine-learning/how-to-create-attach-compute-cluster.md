@@ -11,12 +11,12 @@ ms.author: sgilley
 author: sdgilley
 ms.reviewer: sgilley
 ms.date: 10/02/2020
-ms.openlocfilehash: c11176f0c7760e76b755406bda96b72b302f8857
-ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
+ms.openlocfilehash: f61936e622a539b29c6788f631df5de42bb2f242
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102506948"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861256"
 ---
 # <a name="create-an-azure-machine-learning-compute-cluster"></a>Azure Machine Learning işlem kümesi oluşturma
 
@@ -36,6 +36,14 @@ Bu makalede şunları yapmayı öğreneceksiniz:
 
 * [Machine Learning hizmeti Için Azure CLI uzantısı](reference-azure-machine-learning-cli.md), [Azure Machine Learning Python SDK](/python/api/overview/azure/ml/intro)veya [Azure Machine Learning Visual Studio Code uzantısı](tutorial-setup-vscode-extension.md).
 
+* Python SDK kullanıyorsanız, [geliştirme ortamınızı bir çalışma alanıyla ayarlayın](how-to-configure-environment.md).  Ortamınız kurulduktan sonra Python betiğinizdeki çalışma alanına ekleyin:
+
+    ```python
+    from azureml.core import Workspace
+    
+    ws = Workspace.from_config() 
+    ```
+
 ## <a name="what-is-a-compute-cluster"></a>İşlem kümesi nedir?
 
 Azure Machine Learning işlem kümesi, kolayca tek veya çok düğümlü bir işlem oluşturmanıza olanak sağlayan bir yönetilen işlem altyapısıdır. İşlem, çalışma alanınızdaki diğer kullanıcılarla paylaşılabilecek bir kaynak olarak çalışma alanı bölgeniz içinde oluşturulur. İşlem, bir iş gönderildiğinde otomatik olarak ölçeklendirilir ve bir Azure sanal ağına yerleştirilebilir. İşlem kapsayıcılı bir ortamda yürütülür ve model bağımlılıklarınızı bir [Docker kapsayıcısında](https://www.docker.com/why-docker)paketleyebilir.
@@ -44,18 +52,16 @@ Azure Machine Learning işlem kümesi, kolayca tek veya çok düğümlü bir iş
 
 ## <a name="limitations"></a>Sınırlamalar
 
-* Çalışma alanınızdan **aynı işlem için birden çok, eşzamanlı ek oluşturmayın** . Örneğin, iki farklı ad kullanarak bir çalışma alanına bir işlem kümesi ekleme. Her yeni ek önceki mevcut ekleri keser.
-
-    Bir işlem hedefini yeniden iliştirmek istiyorsanız (örneğin, küme yapılandırma ayarlarını değiştirmek için), önce var olan eki kaldırmanız gerekir.
-
 * Bu belgede listelenen senaryolardan bazıları __Önizleme__ olarak işaretlendi. Önizleme işlevselliği, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+
+* Şu anda ARM şablonları [] aracılığıyla kümelerin oluşturma (ve güncelleştirme değil) ' i destekliyoruz https://docs.microsoft.com/azure/templates/microsoft.machinelearningservices/workspaces/computes?tabs=json . İşlem güncelleştirme için, şimdilik SDK, CLı veya UX kullanmanızı öneririz.
 
 * Azure Machine Learning Işlem, ayrılabilen çekirdek sayısı gibi varsayılan sınırlara sahiptir. Daha fazla bilgi için bkz. [Azure kaynakları için kotaları yönetme ve isteme](how-to-manage-quotas.md).
 
 * Azure, kaynakları, silinememesi veya salt okunurdur.  __Kaynak kilitlerini, çalışma alanınızı içeren kaynak grubuna uygulamayın__. Çalışma alanınızı içeren kaynak grubuna bir kilit uygulandığında, Azure ML işlem kümelerinin ölçeklendirme işlemleri engellenir. Kaynakları kilitleme hakkında daha fazla bilgi için, bkz. [beklenmeyen değişiklikleri engellemek için kaynakları kilitleme](../azure-resource-manager/management/lock-resources.md).
 
 > [!TIP]
-> Gereken çekirdek sayısı için yeterli kotanın olması koşuluyla, kümeler genellikle 100 düğüme kadar ölçeklendirebilir. Varsayılan olarak kümeler, MPı işlerini desteklemek üzere küme düğümleri arasında etkinleştirilen düğümler arası iletişim ile ayarlanır. Ancak, [bir destek bileti](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)oluşturarak ve abonelik veya çalışma alanınızı ya da düğümler arası iletişimi devre dışı bırakmaya yönelik belirli bir kümeyi listelemek istiyorsanız kümelerinizi 1000 ' e ölçeklendirebilirsiniz. 
+> Gereken çekirdek sayısı için yeterli kotanın olması koşuluyla, kümeler genellikle 100 düğüme kadar ölçeklendirebilir. Varsayılan olarak kümeler, MPı işlerini desteklemek üzere küme düğümleri arasında etkinleştirilen düğümler arası iletişim ile ayarlanır. Ancak, [bir destek bileti](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)oluşturarak ve abonelik veya çalışma alanınızı ya da düğümler arası iletişimi devre dışı bırakmaya yönelik belirli bir kümeyi listelemek istiyorsanız kümelerinizi 1000 ' e ölçeklendirebilirsiniz.
 
 
 ## <a name="create"></a>Oluştur
@@ -72,11 +78,11 @@ VM ailesi kotası başına bölge başına adanmış çekirdekler ve hesaplama k
     
 # <a name="python"></a>[Python](#tab/python)
 
-Python 'da kalıcı bir Azure Machine Learning Işlem kaynağı oluşturmak için **vm_size** ve **max_nodes** özelliklerini belirtin. Azure Machine Learning daha sonra diğer özellikler için akıllı Varsayılanları kullanır. 
+
+Python 'da kalıcı bir Azure Machine Learning Işlem kaynağı oluşturmak için **vm_size** ve **max_nodes** özelliklerini belirtin. Azure Machine Learning daha sonra diğer özellikler için akıllı Varsayılanları kullanır.
     
 * **vm_size**: Azure Machine Learning işlem tarafından oluşturulan düğümlerin VM ailesi.
 * **max_nodes**: Azure Machine Learning işlem sırasında bir işi çalıştırdığınızda otomatik olarak en fazla düğüm sayısı.
-
 
 [!code-python[](~/aml-sdk-samples/ignore/doc-qa/how-to-set-up-training-targets/amlcompute2.py?name=cpu_cluster)]
 
@@ -90,7 +96,7 @@ Ayrıca, Azure Machine Learning Işlem oluştururken birçok gelişmiş özelli�
 az ml computetarget create amlcompute -n cpu --min-nodes 1 --max-nodes 1 -s STANDARD_D3_V2
 ```
 
-Daha fazla bilgi için bkz. [az ml computetarget Create amlcompute](/cli/azure/ext/azure-cli-ml/ml/computetarget/create#ext-azure-cli-ml-az-ml-computetarget-create-amlcompute).
+Daha fazla bilgi için bkz. [az ml computetarget Create amlcompute](/cli/azure/ml/computetarget/create#az_ml_computetarget_create_amlcompute).
 
 # <a name="studio"></a>[Studio](#tab/azure-studio)
 
@@ -134,16 +140,18 @@ Studio 'da, bir VM oluştururken **düşük öncelik** ' i seçin.
 
 * Yönetilen kimliği, sağlama yapılandırmanızda yapılandırın:  
 
-    * Sistem tarafından atanan yönetilen kimlik:
+    * Sistem tarafından atanan yönetilen kimlik adlı bir çalışma alanında oluşturuldu `ws`
         ```python
         # configure cluster with a system-assigned managed identity
         compute_config = AmlCompute.provisioning_configuration(vm_size='STANDARD_D2_V2',
                                                                 max_nodes=5,
                                                                 identity_type="SystemAssigned",
                                                                 )
+        cpu_cluster_name = "cpu-cluster"
+        cpu_cluster = ComputeTarget.create(ws, cpu_cluster_name, compute_config)
         ```
     
-    * Kullanıcı tarafından atanan yönetilen kimlik:
+    * Adlı bir çalışma alanında oluşturulan kullanıcı tarafından atanan yönetilen kimlik `ws`
     
         ```python
         # configure cluster with a user-assigned managed identity
@@ -156,7 +164,7 @@ Studio 'da, bir VM oluştururken **düşük öncelik** ' i seçin.
         cpu_cluster = ComputeTarget.create(ws, cpu_cluster_name, compute_config)
         ```
 
-* Mevcut bir işlem kümesine yönetilen kimlik Ekle 
+* Şu adlı mevcut bir işlem kümesine yönetilen kimlik Ekle `cpu_cluster`
     
     * Sistem tarafından atanan yönetilen kimlik:
     

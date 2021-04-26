@@ -8,17 +8,14 @@ ms.date: 03/10/2021
 ms.topic: quickstart
 ms.service: azure-communication-services
 zone_pivot_groups: acs-plat-web-ios-android
-ms.openlocfilehash: eca80f6353240755a0670fcfa4ca9875107b0d47
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 5a506d84f338b2eab1c32caa4d94bd03a33e637d
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105108318"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728343"
 ---
 # <a name="quickstart-add-voice-calling-to-your-app"></a>Hızlı başlangıç: uygulamanıza sesli çağrı ekleme
-
-[!INCLUDE [Public Preview Notice](../../includes/public-preview-include.md)]
-
 
 Uygulamanıza ses ve video çağrısı eklemek için SDK 'Yı çağıran Iletişim hizmetlerini kullanarak Azure Iletişim Hizmetleri ile çalışmaya başlayın.
 

@@ -4,13 +4,13 @@ description: Bu Azure Kubernetes Service (AKS) öğreticisinde var olan bir AKS 
 services: container-service
 ms.topic: tutorial
 ms.date: 01/12/2021
-ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 8efb381562a5c55fa2c29b8379312dc41ef6a046
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: mvc
+ms.openlocfilehash: 68aedbe90d5f08a4b6b67d134c0460caa11c542b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98251344"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786378"
 ---
 # <a name="tutorial-upgrade-kubernetes-in-azure-kubernetes-service-aks"></a>Öğretici: Azure Kubernetes Hizmeti’nde (AKS) Kubernetes’i yükseltme
 
@@ -151,10 +151,10 @@ AKS hakkında daha fazla bilgi için bkz. [aks genel bakış][aks-intro]. AKS il
 <!-- LINKS - internal -->
 [aks-intro]: ./intro-kubernetes.md
 [aks-tutorial-prepare-app]: ./tutorial-kubernetes-prepare-app.md
-[az aks show]: /cli/azure/aks#az-aks-show
-[az aks get-upgrades]: /cli/azure/aks#az-aks-get-upgrades
-[az aks upgrade]: /cli/azure/aks#az-aks-upgrade
+[az aks show]: /cli/azure/aks#az_aks_show
+[az aks get-upgrades]: /cli/azure/aks#az_aks_get_upgrades
+[az aks upgrade]: /cli/azure/aks#az_aks_upgrade
 [azure-cli-install]: /cli/azure/install-azure-cli
-[az-group-delete]: /cli/azure/group#az-group-delete
+[az-group-delete]: /cli/azure/group#az_group_delete
 [sp-delete]: kubernetes-service-principal.md#additional-considerations
 [aks-solution-guidance]: /azure/architecture/reference-architectures/containers/aks-start-here?WT.mc_id=AKSDOCSPAGE

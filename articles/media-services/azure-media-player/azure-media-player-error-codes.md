@@ -5,13 +5,13 @@ author: IngridAtMicrosoft
 ms.author: inhenkel
 ms.service: media-services
 ms.topic: error-reference
-ms.date: 04/20/2020
-ms.openlocfilehash: 89f063ab50cfd880552e80a77ba798e4d06de5b3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/05/2021
+ms.openlocfilehash: 77bd59782d12d7d73e6e882e929ae9a4c95250a7
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101709589"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449894"
 ---
 # <a name="error-codes"></a>Hata kodları #
 
@@ -44,7 +44,7 @@ Hatanın alanını açıkla.
 Hatanın ayrıntılarını açıklama, BITS 27-20 yüksek düzeyde sağlama, BITS 19-0 varsa daha fazla ayrıntı sağlar.
 
 
-| amp. errorCode. ada | Kodlar, bitler [27-0] (28 bit) | Description |
+| amp. errorCode. ada | Kodlar, bitler [27-0] (28 bit) | Açıklama |
 |---|---:|---|
 | **MEDIA_ERR_ABORTED hata aralığı (0x0100000-0x01FFFFF)** | | |
 | abortedErrUnknown | 0x0100000 | Genel iptal hatası |

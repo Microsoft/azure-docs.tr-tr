@@ -6,12 +6,12 @@ author: vineetvikram
 ms.author: vivikram
 ms.manager: abhemraj
 ms.date: 03/18/2021
-ms.openlocfilehash: c78778f9152fd4c07fb9e550e562cfef858333c8
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: ff05a01ad8173923ff614657d0231f743f38ba1c
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104786745"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714767"
 ---
 # <a name="set-up-an-appliance-with-a-script"></a>Komut dosyası ile gereç ayarlama
 
@@ -34,7 +34,7 @@ Senaryo | Gereksinimler
 VMware | Windows Server 2016, 32 GB bellek, sekiz vCPU, yaklaşık 80 GB disk depolaması
 Hyper-V | 16 GB bellek, 8 GB disk depolaması 80 etrafında sekiz vCPU ile Windows Server 2016
 
-- Sunucuda Ayrıca bir dış sanal anahtar gerekir. Statik veya dinamik bir IP adresi ve internet erişimi gerektirir.
+- Sunucuda Ayrıca bir dış sanal anahtar gerekir. Statik veya dinamik bir IP adresi gerektirir. 
 - Gereci dağıtmadan önce, [Hyper-V üzerinde](migrate-appliance.md#appliance---hyper-v) [VMware 'deki sunucular](migrate-appliance.md#appliance---vmware)için ayrıntılı gereç gereksinimlerini gözden geçirin.
 - Betiği mevcut bir Azure geçiş gereci üzerinde çalıştırmayın.
 

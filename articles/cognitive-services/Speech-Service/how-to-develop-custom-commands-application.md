@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 12/15/2020
 ms.author: trbye
-ms.openlocfilehash: 1a002b6efbe2603ae254c19f9e3cc7377198cea2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ddf36530e52703ab1033b8e2e787b42b6dc60332
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97935827"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553286"
 ---
 # <a name="develop-custom-commands-applications"></a>Özel komut uygulamaları geliştirme
 
@@ -212,7 +212,7 @@ Bu bölümde, komutlarınıza nasıl parametre ekleneceğini öğrenirsiniz. Kom
     | **Geneldir**          | Değilken             |
     | **Gerekli**           | Seçili               |
     | **Gerekli parametre için yanıt**     | **Basit düzenleyici** > `Which device do you want to control?`    | 
-    | **Tür**               | **Dize**                |          |
+    | **Tür**               | **Dize**                |     
     | **Yapılandırma**      | **Önceden tanımlanmış giriş değerlerini bir iç katalogdan kabul etme** | 
     | **Önceden tanımlanmış giriş değerleri** | `tv`, `fan`               |
     | **Diğer adlar** ( `tv` )      | `television`, `telly`     |
@@ -633,7 +633,7 @@ Aşağıdaki giriş ve çıktıyı kullanarak uygulamanızı eğitme ve test etm
 > ![Örnek cümleleri ve parametreleri gösteren ekran görüntüsü.](media/custom-commands/select-custom-voice.png)
 
 > [!NOTE]
-> Genel sesler için sinir türleri yalnızca belirli bölgelerde kullanılabilir. Daha fazla bilgi için bkz. [konuşma hizmeti desteklenen bölgeler](./regions.md#standard-and-neural-voices).
+> Genel sesler için sinir türleri yalnızca belirli bölgelerde kullanılabilir. Daha fazla bilgi için bkz. [konuşma hizmeti desteklenen bölgeler](./regions.md#neural-and-standard-voices).
 >
 > **Özel ses** projesi sayfasında özel sesler oluşturabilirsiniz. Daha fazla bilgi için bkz. [özel sesle çalışmaya başlama](./how-to-custom-voice.md).
 

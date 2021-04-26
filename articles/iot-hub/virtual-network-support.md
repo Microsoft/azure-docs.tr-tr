@@ -7,12 +7,12 @@ ms.service: iot-fundamentals
 ms.topic: conceptual
 ms.date: 12/18/2020
 ms.author: jlian
-ms.openlocfilehash: 1e28c7767868904fb20ae6d27c6aea9e7077eb62
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: df38f9b3482847ea0415af5cb47540e244b0510b
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98630302"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739899"
 ---
 # <a name="iot-hub-support-for-virtual-networks-with-private-link-and-managed-identity"></a>Özel bağlantı ve yönetilen kimlik ile sanal ağlar için IoT Hub desteği
 
@@ -174,7 +174,7 @@ Güvenilen Microsoft ilk taraf hizmetleri özel durum özelliği ücretsizdir. S
 
 ### <a name="egress-connectivity-to-storage-account-endpoints-for-routing"></a>Yönlendirme için depolama hesabı uç noktalarına giden çıkış bağlantısı
 
-IoT Hub, iletileri müşteriye ait bir depolama hesabına yönlendirebilir. Güvenlik duvarı kısıtlamaları olduğunda yönlendirme işlevselliğinin bir depolama hesabına erişmesine izin vermek için, IoT Hub [yönetilen bir kimliğe](#turn-on-managed-identity-for-iot-hub)sahip olması gerekir. Yönetilen bir kimlik sağlandıktan sonra, depolama hesabınıza erişmek için hub 'ın kaynak kimliğine Azure RBAC izni vermek üzere aşağıdaki adımları izleyin.
+IoT Hub, iletileri müşteriye ait bir depolama hesabına yönlendirebilir. Güvenlik duvarı kısıtlamaları varken yönlendirme işlevselliğinin bir depolama hesabına erişmesine izin vermek için, hub 'ınızın depolama hesabına erişmek için yönetilen bir kimlik kullanması gerekir. İlk hub 'ınız [yönetilen bir kimliğe](#turn-on-managed-identity-for-iot-hub)sahip olacak. Yönetilen bir kimlik sağlandıktan sonra, depolama hesabınıza erişmek için hub 'ın kaynak kimliğine Azure RBAC izni vermek üzere aşağıdaki adımları izleyin.
 
 1. Azure portal, depolama hesabınızın **erişim denetimi (IAM)** sekmesine gidin ve **rol ataması Ekle** bölümünde **Ekle** ' ye tıklayın.
 
@@ -192,7 +192,7 @@ Artık özel depolama uç noktanız, hub 'ın sistem tarafından atanan kimliği
 
 ### <a name="egress-connectivity-to-event-hubs-endpoints-for-routing"></a>Yönlendirme için Olay Hub 'ları uç noktalarına giden bağlantı
 
-IoT Hub, iletileri müşteriye ait bir olay hub 'ı ad alanına yönlendirmek üzere yapılandırılabilir. Güvenlik duvarı kısıtlamaları yerinde yönlendirme işlevselliğinin bir olay hub 'ı kaynağına erişmesine izin vermek için, IoT Hub yönetilen bir kimliğe sahip olmalıdır. Yönetilen bir kimlik oluşturulduktan sonra, Olay Hub 'larınız için Azure RBAC iznini hub 'ın kaynak kimliğine sağlamak üzere aşağıdaki adımları izleyin.
+IoT Hub, iletileri müşteriye ait bir olay hub 'ı ad alanına yönlendirmek üzere yapılandırılabilir. Güvenlik duvarı kısıtlamaları varken yönlendirme işlevselliğinin bir olay hub 'ı kaynağına erişmesine izin vermek için, IoT Hub, Olay Hub 'ları kaynağına erişmek üzere yönetilen bir kimlik kullanmanız gerekir. İlk hub 'ınız yönetilen bir kimliğe sahip olacak. Yönetilen bir kimlik oluşturulduktan sonra, Olay Hub 'larınız için Azure RBAC iznini hub 'ın kaynak kimliğine sağlamak üzere aşağıdaki adımları izleyin.
 
 1. Azure portal, Olay Hub 'ları **erişim denetimi (IAM)** sekmesine gidin ve **rol ataması Ekle** bölümünde **Ekle** ' ye tıklayın.
 
@@ -210,7 +210,7 @@ Artık özel olay hub 'larınız, hub 'ın sistem tarafından atanan kimliğini 
 
 ### <a name="egress-connectivity-to-service-bus-endpoints-for-routing"></a>Yönlendirme için Service Bus uç noktalarına çıkış bağlantısı
 
-IoT Hub, iletileri müşteriye ait Service Bus ad alanına yönlendirmek üzere yapılandırılabilir. Güvenlik duvarı kısıtlamaları varken yönlendirme işlevselliğinin bir hizmet veri yolu kaynağına erişmesine izin vermek için, IoT Hub yönetilen bir kimliğe sahip olması gerekir. Yönetilen bir kimlik sağlandıktan sonra, hizmet veri yoluna erişmek için hub 'ın kaynak kimliğine Azure RBAC izni vermek üzere aşağıdaki adımları izleyin.
+IoT Hub, iletileri müşteriye ait Service Bus ad alanına yönlendirmek üzere yapılandırılabilir. Güvenlik duvarı kısıtlamaları varken yönlendirme işlevselliğinin bir Service Bus kaynağına erişmesine izin vermek için, IoT Hub Service Bus kaynağına erişmek için yönetilen bir kimlik kullanmanız gerekir. İlk hub 'ınız yönetilen bir kimliğe sahip olacak. Yönetilen bir kimlik sağlandıktan sonra, hizmet veri yoluna erişmek için hub 'ın kaynak kimliğine Azure RBAC izni vermek üzere aşağıdaki adımları izleyin.
 
 1. Azure portal, hizmet veri yolu **erişim denetimi (IAM)** sekmesine gidin ve **rol ataması Ekle** bölümünde **Ekle** ' ye tıklayın.
 

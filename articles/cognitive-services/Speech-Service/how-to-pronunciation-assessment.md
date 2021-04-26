@@ -12,12 +12,12 @@ ms.date: 01/12/2021
 ms.author: yulili
 ms.custom: references_regions
 zone_pivot_groups: programming-languages-speech-services-nomore-variant
-ms.openlocfilehash: dc1ab8bd1a851f7fafd5c001ac73e66973e1b64c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2d1b5e490b7c8212e6103e3d169c1b5491d01dde
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102051897"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167439"
 ---
 # <a name="pronunciation-assessment"></a>Telaffuz değerlendirmesi
 
@@ -28,7 +28,7 @@ Eğitimciler, birden çok konuşmacıdaki söylenişi gerçek zamanlı olarak de
 Bu makalede, `PronunciationAssessmentConfig` `PronunciationAssessmentResult` konuşma SDK 'sını kullanarak ayarlamayı ve almayı öğreneceksiniz.
 
 > [!NOTE]
-> Telaffuz değerlendirmesi özelliği şu anda yalnızca dili destekler `en-US` .
+> Telaffuz değerlendirmesi özelliği şu anda `en-US` tüm [konuşmadan metin bölgelerinde](regions.md#speech-to-text-text-to-speech-and-translation)kullanılabilen dili desteklemektedir. Ve dillerini destekler, ve `en-GB` `zh-CN` bölgelerinde bulunan önizleme aşamasındadır `westus` `eastasia` `centralindia` .
 
 ## <a name="pronunciation-assessment-with-the-speech-sdk"></a>Konuşma SDK 'Sı ile telaffuz değerlendirmesi
 
@@ -194,9 +194,63 @@ Bu tablo, Söyleniş değerlendirmesinin sonuç parametrelerini listeler.
 | `PronunciationScore` | Verilen konuşmayı gösteren telaffuz kalitesini belirten genel puan. Bu `AccuracyScore` , `FluencyScore` ve `CompletenessScore` ağırlığıyla toplanır. |
 | `ErrorType` | Bu değer, ile karşılaştırıldığında bir sözcüğün atlanıp atlanmadığını, ekleneceğini veya hatalı bir şekilde olduğunu gösterir `ReferenceText` . Olası değerler şunlardır `None` (Yani bu sözcükte hata yok), `Omission` `Insertion` ve `Mispronunciation` . |
 
+### <a name="sample-responses"></a>Örnek yanıtlar
+
+JSON ile tipik bir telaffuz değerlendirmesi sonucu:
+
+```json
+{
+  "RecognitionStatus": "Success",
+  "Offset": "400000",
+  "Duration": "11000000",
+  "NBest": [
+      {
+        "Confidence" : "0.87",
+        "Lexical" : "good morning",
+        "ITN" : "good morning",
+        "MaskedITN" : "good morning",
+        "Display" : "Good morning.",
+        "PronunciationAssessment":
+        {
+            "PronScore" : 84.4,
+            "AccuracyScore" : 100.0,
+            "FluencyScore" : 74.0,
+            "CompletenessScore" : 100.0,
+        },
+        "Words": [
+            {
+              "Word" : "Good",
+              "Offset" : 500000,
+              "Duration" : 2700000,
+              "PronunciationAssessment":
+              {
+                "AccuracyScore" : 100.0,
+                "ErrorType" : "None"
+              }
+            },
+            {
+              "Word" : "morning",
+              "Offset" : 5300000,
+              "Duration" : 900000,
+              "PronunciationAssessment":
+              {
+                "AccuracyScore" : 100.0,
+                "ErrorType" : "None"
+              }
+            }
+        ]
+      }
+  ]
+}
+```
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
 <!-- TODO: update JavaScript sample links after release -->
+
+* Telaffuz değerlendirmesi ve video [tanıtımı](https://www.youtube.com/watch?v=cBE8CUHOFHQ) [öğreticisini](https://www.youtube.com/watch?v=zFlwm7N4Awc) izleyin
+
+* [Telaffuz değerlendirmesi gösterisini](https://github.com/Azure-Samples/Cognitive-Speech-TTS/tree/master/PronunciationAssessment/BrowserJS) deneyin
 
 ::: zone pivot="programming-language-csharp"
 * Söyleniş değerlendirmesi için GitHub 'daki [örnek koda](https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/master/samples/csharp/sharedcontent/console/speech_recognition_samples.cs#L949) bakın.
@@ -219,3 +273,5 @@ Bu tablo, Söyleniş değerlendirmesinin sonuç parametrelerini listeler.
 ::: zone-end
 
 * [Konuşma SDK başvuru belgeleri](speech-sdk.md)
+
+* [Ücretsiz bir Azure hesabı oluşturma](https://azure.microsoft.com/free/cognitive-services/)

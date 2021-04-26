@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: b84b7387411e7df8e092a2e810591697319f9554
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 37f0b48190bcbad7ab190da1d690a1a0485501a1
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104774686"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107259328"
 ---
 # <a name="advanced-data-exploration-and-modeling-with-spark"></a>Spark ile gelişmiş veri keşfi ve modelleme
 
@@ -37,7 +37,8 @@ Kullandığımız modeller şunlardır: lojistik ve doğrusal regresyon, rastgel
 
 * [SGD Ile doğrusal regresyon](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.mllib.regression.LinearRegressionWithSGD.html#pyspark.mllib.regression.LinearRegressionWithSGD
 ) , bir Stochastik gradyan (SGD) yöntemi kullanan ve en iyi duruma getirme ve özellik ölçekleme için, ücretli ipucu tutarlarını tahmin eden bir doğrusal regresyon modelidir. 
-* [LBFGS](https://spark.apache.org/docs/latest/api/python/pyspark.mllib.html#pyspark.mllib.classification.LogisticRegressionWithLBFGS) veya "logıt" regresyon ile lojistik regresyon, bağımlı değişken veri sınıflandırması yapmak için kategorik olduğunda kullanılabilecek bir gerileme modelidir. LBFGS, sınırlı miktarda bilgisayar belleği kullanarak ve makine öğreniminde yaygın olarak kullanılan, Brohden – Fletma – Goldfarb – shanno (BFGS) algoritmasını yaklaştırın, bir dörde ve çok büyük bir en iyi duruma getirme algoritmasıdır.
+* [LBFGS](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.mllib.classification.LogisticRegressionWithLBFGS.html
+) veya "logıt" regresyon ile lojistik regresyon, bağımlı değişken veri sınıflandırması yapmak için kategorik olduğunda kullanılabilecek bir gerileme modelidir. LBFGS, sınırlı miktarda bilgisayar belleği kullanarak ve makine öğreniminde yaygın olarak kullanılan, Brohden – Fletma – Goldfarb – shanno (BFGS) algoritmasını yaklaştırın, bir dörde ve çok büyük bir en iyi duruma getirme algoritmasıdır.
 * [Rastgele ormanlar](https://spark.apache.org/docs/latest/mllib-ensembles.html#Random-Forests) karar ağaçlarının Kümelemeler.  Çok sayıda karar ağacının, fazla ekleme riskini azaltmak için bunları birleştirirler. Rastgele ormanlar gerileme ve sınıflandırma için kullanılır ve kategorik özellikleri işleyebilir ve çok Lass sınıflandırma ayarına genişletilebilir. Bunlar, özellik Ölçeklendirmesi gerektirmez ve doğrmalsuz ve özellik etkileşimlerini yakalayabilir. Rastgele ormanlar, sınıflandırma ve gerileme için en başarılı makine öğrenimi modellerinden biridir.
 * [Degrade artırılmış ağaçlar](https://spark.apache.org/docs/latest/ml-classification-regression.html#gradient-boosted-trees-gbts) (GBTS), karar ağaçları Kümelemeler. GBTS, bir kayıp işlevini en aza indirmek için karar ağaçlarını tekrarlayarak eğitme. GBTS, gerileme ve sınıflandırma için kullanılır ve kategorik özellikleri işleyebilir, özellik ölçeklendirmesini gerektirmez ve bu, özyinelemesiz ve özellik etkileşimlerini yakalayabilir. Ayrıca, birden çok Lass sınıflandırma ayarında de kullanılabilirler.
 
@@ -504,7 +505,8 @@ print "Time taken to execute above cell: " + str(timedelta) + " seconds";
 Hücrenin yürütülmesi için geçen süre: 0,31 saniye
 
 ### <a name="feature-scaling"></a>Özellik ölçeklendirme
-Veri normalleştirmesi olarak da bilinen özellik ölçeklendirme, yöntem, yaygın olarak kullanılan değerlere sahip özellikler, amaç işlevinde aşırı ağırlık olarak verilmez. Özellik ölçeklendirme kodu, özellikleri birim varyansı ölçeklendirmek için [Standardscaler](https://spark.apache.org/docs/latest/api/python/pyspark.mllib.html#pyspark.mllib.feature.StandardScaler) kullanır. Bu, Stochastic gradyan (SGD) ile doğrusal regresyonda kullanılmak üzere MLlib tarafından sağlanır. SGD, regularized gerilemeler veya destek vektör makineleri (SVM) gibi çok çeşitli makine öğrenimi modellerini eğitmek için popüler bir algoritmadır.   
+Veri normalleştirmesi olarak da bilinen özellik ölçeklendirme, yöntem, yaygın olarak kullanılan değerlere sahip özellikler, amaç işlevinde aşırı ağırlık olarak verilmez. Özellik ölçeklendirme kodu, özellikleri birim varyansı ölçeklendirmek için [Standardscaler](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.mllib.regression.LinearRegressionWithSGD.html
+) kullanır. Bu, Stochastic gradyan (SGD) ile doğrusal regresyonda kullanılmak üzere MLlib tarafından sağlanır. SGD, regularized gerilemeler veya destek vektör makineleri (SVM) gibi çok çeşitli makine öğrenimi modellerini eğitmek için popüler bir algoritmadır.   
 
 > [!TIP]
 > Özellik ölçeklendirilmesine duyarlı olmak için, bir Doğritsionwithsgd algoritmasını bulduk.   

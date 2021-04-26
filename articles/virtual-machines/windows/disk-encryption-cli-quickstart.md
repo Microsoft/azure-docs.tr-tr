@@ -9,12 +9,12 @@ ms.collection: windows
 ms.topic: quickstart
 ms.date: 05/17/2019
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: bffa155a51c4897cd1e2cc07a6d4aea9a8e080ba
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e81d29922bee53ba9021c9c26816258f7922a59c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102562767"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107759748"
 ---
 # <a name="quickstart-create-and-encrypt-a-windows-vm-with-the-azure-cli"></a>Hızlı başlangıç: Azure CLı ile Windows VM oluşturma ve şifreleme
 
@@ -28,7 +28,7 @@ Azure CLI, komut satırından veya betik içindeki Azure kaynaklarını oluştur
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-[az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu oluşturur:
+[az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu oluşturur:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus
@@ -36,7 +36,7 @@ az group create --name myResourceGroup --location eastus
 
 ## <a name="create-a-virtual-machine"></a>Sanal makine oluşturma
 
-[az vm create](/cli/azure/vm#az-vm-create) ile bir VM oluşturun. Aşağıdaki örnek, *myvm* ADLı bir VM oluşturur. Bu örnekte yönetici kullanıcı için *azureuser* kullanıcı adı ve *myPassword12* parolası kullanılır.
+[az vm create](/cli/azure/vm#az_vm_create) ile bir VM oluşturun. Aşağıdaki örnek, *myvm* ADLı bir VM oluşturur. Bu örnekte yönetici kullanıcı için *azureuser* kullanıcı adı ve *myPassword12* parolası kullanılır.
 
 ```azurecli-interactive
 az vm create \
@@ -64,7 +64,7 @@ VM’yi ve destekleyici kaynakları oluşturmak birkaç dakika sürer. Aşağıd
 
 ## <a name="create-a-key-vault-configured-for-encryption-keys"></a>Şifreleme anahtarları için yapılandırılmış bir Key Vault oluşturma
 
-Azure disk şifrelemesi, şifreleme anahtarını bir Azure Key Vault depolar. [Az keykasacreate](/cli/azure/keyvault#az-keyvault-create)ile bir Key Vault oluşturun. Şifreleme anahtarlarını depolamak için Key Vault etkinleştirmek üzere--Enabled-for-disk-ENCRYPTION parametresini kullanın.
+Azure disk şifrelemesi, şifreleme anahtarını bir Azure Key Vault depolar. [Az keykasacreate](/cli/azure/keyvault#az_keyvault_create)ile bir Key Vault oluşturun. Şifreleme anahtarlarını depolamak için Key Vault etkinleştirmek üzere--Enabled-for-disk-ENCRYPTION parametresini kullanın.
 > [!Important]
 > Her Key Vault benzersiz bir adı olmalıdır. Aşağıdaki örnek *Mykv* adlı bir Key Vault oluşturur, ancak sizinkilerle farklı bir ad vermelisiniz.
 
@@ -80,7 +80,7 @@ VM 'nizi [az VM Encryption](/cli/azure/vm/encryption)ile şifreleyin ve bu,--dis
 az vm encryption enable -g MyResourceGroup --name MyVM --disk-encryption-keyvault myKV
 ```
 
-[Az VM Show](/cli/azure/vm/encryption#az-vm-encryption-show) komutuyla VM 'niz üzerinde şifrelemenin etkin olduğunu doğrulayabilirsiniz
+[Az VM Show](/cli/azure/vm/encryption#az_vm_encryption_show) komutuyla VM 'niz üzerinde şifrelemenin etkin olduğunu doğrulayabilirsiniz
 
 ```azurecli-interactive
 az vm encryption show --name MyVM -g MyResourceGroup

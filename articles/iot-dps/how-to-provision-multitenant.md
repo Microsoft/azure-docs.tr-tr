@@ -7,12 +7,12 @@ ms.date: 04/10/2019
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-ms.openlocfilehash: eebcfb98d4e155ca965b9e4c68a862afa08a46ca
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0b88923ff6447785a4ef5a7c80e1ff44d1a2b9cb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101727456"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777392"
 ---
 # <a name="how-to-provision-for-multitenancy"></a>Çok kiracı için sağlama 
 
@@ -26,11 +26,12 @@ Bu iki senaryoyu birleştirmek yaygındır. Örneğin, çok kiracılı bir IoT �
 
 Bu makalede, bölgeler arasında çok kiracılı bir senaryoda cihazların nasıl sağlanacağını göstermek için [Azure IoT C SDK](https://github.com/Azure/azure-iot-sdk-c) 'sından sanal bir cihaz örneği kullanılmaktadır. Bu makalede aşağıdaki adımları gerçekleştirirsiniz:
 
-* İki bölgesel IoT Hub 'ı (**Batı ABD** ve **Doğu ABD**) oluşturmak için Azure CLI 'yi kullanma
-* Çok kiracılı bir kayıt oluştur
-* Aynı bölgelerde (**Batı ABD** ve **Doğu ABD**) cihaz olarak davranacak iki bölgesel Linux VM oluşturmak için Azure CLI 'yi kullanın
-* Her iki Linux sanal makinesi üzerinde Azure IoT C SDK 'Sı için geliştirme ortamını ayarlama
-* En yakın bölgede aynı kiracı için sağlandığını görmek için cihazların benzetimini yapın.
+> [!div class="checklist"]
+> * İki bölgesel IoT Hub 'ı (**Batı ABD** ve **Doğu ABD**) oluşturmak için Azure CLI 'yi kullanma
+> * Çok kiracılı bir kayıt oluştur
+> * Aynı bölgelerde (**Batı ABD** ve **Doğu ABD**) cihaz olarak davranacak iki bölgesel Linux VM oluşturmak için Azure CLI 'yi kullanın
+> * Her iki Linux sanal makinesi üzerinde Azure IoT C SDK 'Sı için geliştirme ortamını ayarlama
+> * En yakın bölgede aynı kiracı için sağlandığını görmek için cihazların benzetimini yapın.
 
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
@@ -46,7 +47,7 @@ Bu makalede, bölgeler arasında çok kiracılı bir senaryoda cihazların nası
 Bu bölümde, bir kiracının **Batı ABD** ve **Doğu ABD** bölgelerinde iki yeni bölgesel IoT hub 'ı oluşturmak için Azure Cloud Shell kullanacaksınız.
 
 
-1. [Az Group Create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturmak için Azure Cloud Shell kullanın. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
+1. [Az Group Create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturmak için Azure Cloud Shell kullanın. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
 
     Aşağıdaki örnek, *eastus* bölgesinde *contoso-US-Resource-Group* adlı bir kaynak grubu oluşturur. Bu makalede oluşturulan tüm kaynaklar için bu grubu kullanmanız önerilir. Bu işlem tamamlandıktan sonra Temizleme işlemi daha kolay hale getirir.
 
@@ -54,7 +55,7 @@ Bu bölümde, bir kiracının **Batı ABD** ve **Doğu ABD** bölgelerinde iki y
     az group create --name contoso-us-resource-group --location eastus
     ```
 
-2. [Az IoT Hub Create](/cli/azure/iot/hub#az-iot-hub-create) komutuyla **Eastus** bölgesinde bir IoT hub 'ı oluşturmak için Azure Cloud Shell kullanın. IoT Hub 'ı *contoso-US-Resource-Group*'a eklenecektir.
+2. [Az IoT Hub Create](/cli/azure/iot/hub#az_iot_hub_create) komutuyla **Eastus** bölgesinde bir IoT hub 'ı oluşturmak için Azure Cloud Shell kullanın. IoT Hub 'ı *contoso-US-Resource-Group*'a eklenecektir.
 
     Aşağıdaki örnek *eastus* konumunda *contoso-Doğu-hub* adlı bir IoT Hub 'ı oluşturur. **Contoso-Doğu-hub** yerine kendi benzersiz hub 'ınızın adını kullanmanız gerekir.
 
@@ -64,7 +65,7 @@ Bu bölümde, bir kiracının **Batı ABD** ve **Doğu ABD** bölgelerinde iki y
     
     Bu komutun tamamlanması birkaç dakika sürebilir.
 
-3. [Az IoT Hub Create](/cli/azure/iot/hub#az-iot-hub-create) komutuyla **Westus** bölgesinde bir IoT hub 'ı oluşturmak için Azure Cloud Shell kullanın. Bu IoT Hub 'ı de *contoso-US-Resource-Group*' a eklenecektir.
+3. [Az IoT Hub Create](/cli/azure/iot/hub#az_iot_hub_create) komutuyla **Westus** bölgesinde bir IoT hub 'ı oluşturmak için Azure Cloud Shell kullanın. Bu IoT Hub 'ı de *contoso-US-Resource-Group*' a eklenecektir.
 
     Aşağıdaki örnek *westus* konumunda *contoso-Batı-hub* adlı bir IoT Hub 'ı oluşturur. **Contoso-Batı-hub** yerine kendi benzersiz hub 'ınızın adını kullanmanız gerekir.
 
@@ -417,8 +418,11 @@ Kaynak grubunu ada göre silmek için:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-> [!div class="nextstepaction"]
-> Yeniden sağlama hakkında daha fazla bilgi için bkz. [cihaz yeniden sağlama kavramlarını IoT Hub](concepts-device-reprovision.md)
+* Yeniden sağlama hakkında daha fazla bilgi için bkz.
 
 > [!div class="nextstepaction"]
-> Sağlamayı kaldırma hakkında daha fazla bilgi edinmek için bkz. [daha önce otomatik olarak sağlanan cihazların sağlamasını kaldırma](how-to-unprovision-devices.md)
+> [Cihaz yeniden sağlama kavramlarını IoT Hub](concepts-device-reprovision.md)
+
+* Sağlamayı kaldırma hakkında daha fazla bilgi için bkz.
+> [!div class="nextstepaction"]
+> [Daha önce otomatik olarak sağlanan cihazların sağlamasını kaldırma](how-to-unprovision-devices.md)

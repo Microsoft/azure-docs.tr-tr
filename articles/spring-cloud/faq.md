@@ -8,12 +8,12 @@ ms.date: 09/08/2020
 ms.author: brendm
 ms.custom: devx-track-java
 zone_pivot_groups: programming-languages-spring-cloud
-ms.openlocfilehash: cee71557e60be9fdd94099453d9b8617c4b3b5ba
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: f28ddfc272e6f95106595958cacfe732b2bfc3cc
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878795"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258699"
 ---
 # <a name="azure-spring-cloud-faq"></a>Azure Spring Cloud hakkında SSS
 
@@ -37,7 +37,7 @@ Güvenlik ve gizlilik, Azure ve Azure Spring bulut müşterileri için en öneml
 
 ### <a name="in-which-regions-is-azure-spring-cloud-available"></a>Azure yay bulutu hangi bölgelerde kullanılabilir?
 
-Doğu ABD, Doğu ABD 2, Orta ABD, Orta Güney ABD, Orta Kuzey ABD, Batı ABD, Batı ABD 2, Batı Avrupa, Kuzey Avrupa, UK Güney, Güneydoğu Asya, Avustralya Doğu, Kanada Orta, BAE Kuzey, Orta Hindistan, Kore Orta, Doğu Asya ve Çin Doğu 2 (ay pasta). [Daha Fazla Bilgi](https://azure.microsoft.com/global-infrastructure/services/?products=spring-cloud)
+Doğu ABD, Doğu ABD 2, Orta ABD, Orta Güney ABD, Orta Kuzey ABD, Batı ABD, Batı ABD 2, Batı Avrupa, Kuzey Avrupa, UK Güney, Güneydoğu Asya, Avustralya Doğu, Kanada Orta, BAE Kuzey, Orta Hindistan, Kore Orta, Doğu Asya, Japonya Doğu, Güney Afrika Kuzey ve Çin Doğu 2 (bir pasta). [Daha Fazla Bilgi](https://azure.microsoft.com/global-infrastructure/services/?products=spring-cloud)
 
 ### <a name="is-any-customer-data-stored-outside-of-the-specified-region"></a>Belirtilen bölgenin dışında depolanan müşteri verileri mi?
 

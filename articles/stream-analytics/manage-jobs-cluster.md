@@ -6,13 +6,13 @@ ms.author: sidram
 ms.service: stream-analytics
 ms.topic: overview
 ms.custom: mvc
-ms.date: 09/22/2020
-ms.openlocfilehash: 09a67d11ac4daf3e87a50ee2171f1ca49060c5bf
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/16/2021
+ms.openlocfilehash: 4a6334d33dea959bdd3704f848e7bc8250b6e7c6
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98018131"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600732"
 ---
 # <a name="add-and-remove-jobs-in-an-azure-stream-analytics-cluster"></a>Azure Stream Analytics kümesinde iş ekleme ve kaldırma
 

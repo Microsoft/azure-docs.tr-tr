@@ -8,18 +8,16 @@ ms.topic: quickstart
 ms.service: iot-central
 services: iot-central
 ms.custom: mvc
-ms.openlocfilehash: 488de7114d80e6a88cc619ba3b42f867c985ea11
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2eb0e3ce2ac20c89d9c0176ca3e7b33dc839c923
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99833924"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718836"
 ---
 # <a name="quickstart-add-a-simulated-device-to-your-iot-central-application"></a>Hızlı başlangıç: IoT Central uygulamanıza sanal cihaz ekleme
 
-*Bu makale, işleçler, oluşturucular ve yöneticiler için geçerlidir.*
-
-Bir cihaz şablonu, IoT Central uygulamanıza bağlanan bir cihazın yeteneklerini tanımlar. Özellikler cihaz gönderme, cihaz özellikleri ve bir cihazın yanıt verdiği komutları içerir. Bir cihaz şablonundan, bir Oluşturucu veya operatör bir uygulamaya hem gerçek hem de sanal cihaz ekleyebilir. Sanal cihazlar, gerçek cihazları bağlanmadan önce IoT Central uygulamanızın davranışını test etmek için kullanışlıdır.
+Bir cihaz şablonu, IoT Central uygulamanıza bağlanan bir cihazın yeteneklerini tanımlar. Özellikler cihaz gönderme, cihaz özellikleri ve bir cihazın yanıt verdiği komutları içerir. Bir cihaz şablonu kullanarak, bir uygulamaya hem gerçek hem de sanal cihaz ekleyebilirsiniz. Sanal cihazlar, gerçek cihazları bağlanmadan önce IoT Central uygulamanızın davranışını test etmek için kullanışlıdır.
 
 Bu hızlı başlangıçta, bir ESP32-Azure IoT kit geliştirme panosu için bir cihaz şablonu ekler ve sanal bir cihaz oluşturursunuz. Bu hızlı başlangıcı tamamlayabilmeniz için gerçek bir cihaza ihtiyacınız yoktur, cihazın simülasyonu ile çalışırsınız. Bir ESP32 cihazı:
 
@@ -33,8 +31,6 @@ Bu hızlı başlangıçta, bir ESP32-Azure IoT kit geliştirme panosu için bir 
 Özel uygulama **> özel uygulama** şablonunu kullanarak bir IoT Central uygulaması oluşturmak için [Azure IoT Central uygulaması oluşturma](./quick-deploy-iot-central.md) hızlı başlangıcı ' nı doldurun.
 
 ## <a name="create-a-device-template"></a>Cihaz şablonu oluşturma
-
-Bir Oluşturucu olarak, IoT Central uygulamanızda cihaz şablonları oluşturabilir ve düzenleyebilirsiniz. Bir cihaz şablonu yayımladıktan sonra, cihaz şablonundan sanal cihaz oluşturabilir veya gerçek cihazları bağlayabilirsiniz. Sanal cihazlar, gerçek bir cihazı bağlanmadan önce uygulamanızın davranışını test etmenize olanak sağlar.
 
 Uygulamanıza yeni bir cihaz şablonu eklemek için sol bölmedeki **cihaz şablonları** sekmesini seçin.
 
@@ -85,7 +81,7 @@ Bir cihaz şablonu, bulut özellikleri içerebilir. Bulut özellikleri yalnızca
 
 ## <a name="views"></a>Görünümler
 
-Bir Oluşturucu olarak, uygulamayı bir işlece cihazla ilgili bilgileri görüntüleyecek şekilde özelleştirebilirsiniz. Özelleştirmeleriniz, uygulamaya bağlı cihazları yönetmek için işlecini etkinleştirir. Cihazlarla etkileşim kurmak için kullanılacak bir operatör için iki tür görünüm oluşturabilirsiniz:
+Uygulamayı, cihazla ilgili bilgileri görüntüleyecek şekilde özelleştirebilirsiniz. Özelleştirmeler, uygulamaya bağlı cihazların yönetilmesini sağlar. Cihazlarla etkileşim kurmak için iki tür görünüm oluşturabilirsiniz:
 
 * Cihaz ve bulut özelliklerini görüntüleme ve düzenleme için formlar.
 * Aygıtları, gönderdikleri telemetri dahil olmak üzere görselleştirmeye yönelik panolar.
@@ -94,13 +90,13 @@ Bir Oluşturucu olarak, uygulamayı bir işlece cihazla ilgili bilgileri görün
 
 Varsayılan görünümler, önemli cihaz bilgilerinizin görselleştirilmesi ile çalışmaya başlamanız için hızlı bir yoldur. Cihaz şablonunuz için en fazla üç varsayılan görünüm oluşturmuş olabilirsiniz:
 
-* **Komutlar** görünümü, operatörünüzün komutlarınıza erişmenizi sağlar.
+* **Komutlar** görünümü cihazınıza komut almanızı sağlar.
 * **Genel bakış** görünümü cihaz telemetrisini görüntülemek için grafikleri ve ölçümleri kullanır.
 * **Hakkında** görünümü cihaz özelliklerini görüntüler.
 
-Cihaz şablonundaki **Görünümler** düğümünü seçin. IoT Central, şablonu eklediğinizde bir **genel bakış** ve **hakkında** bir görünüm üretdiğine bakabilirsiniz.
+Cihaz şablonundaki **Görünümler** düğümünü seçin. IoT Central, şablonu eklediğinizde, sizin için **genel bakış**, **hakkında** ve **ham veri** görünümlerini üretdiğine bakabilirsiniz.
 
-Bir işlecin cihazı yönetmek için kullanabileceği yeni bir **Cihaz yönet** formu eklemek için:
+Cihazı yönetmek için yeni bir form eklemek için:
 
 1. **Görünümler** düğümünü seçin ve ardından yeni bir görünüm eklemek için **cihazı ve bulut verilerini Düzenle** kutucuğunu seçin.
 
@@ -120,25 +116,23 @@ Bir cihaz şablonunu yayımlamak için:
 
 1. **Cihaz şablonları** sayfasından **algılayıcı denetleyicisi** cihaz şablonunuza gidin.
 
-1. **Yayımla**' yı seçin:
+1. Sayfanın üst kısmındaki komut çubuğundan **Yayımla** ' yı seçin.
 
-    :::image type="content" source="media/quick-create-simulated-device/published-model.png" alt-text="Yayımla simgesinin konumunu gösteren ekran görüntüsü":::
+1. Görüntülenen iletişim kutusunda **Yayımla**' yı seçin.
 
-1. **Bu cihaz şablonunu uygulama** iletişim **kutusunda Yayımla ' yı seçin.**
-
-Bir cihaz şablonunu yayımladıktan sonra, **cihazlar** sayfasında görünür. Yayımlanmış bir cihaz şablonunda, yeni bir sürüm oluşturmadan bir cihaz modelini düzenleyemezsiniz. Ancak, yayımlanmış bir cihaz şablonundaki bulut özelliklerini, özelleştirmeleri ve görünümleri sürüm oluşturma olmadan değiştirebilirsiniz. Herhangi bir değişiklik yaptıktan sonra, bu değişiklikleri işletmenizin dışına göndermek için **Yayımla**  ' yı seçin.
+Bir cihaz şablonunu yayımladıktan sonra, **cihazlar** sayfasında görünür. Yayımlanmış bir cihaz şablonunda, yeni bir sürüm oluşturmadan bir cihaz modelini düzenleyemezsiniz. Ancak, yayımlanmış bir cihaz şablonundaki bulut özelliklerini, özelleştirmeleri ve görünümleri sürüm oluşturma olmadan değiştirebilirsiniz. Herhangi bir değişiklik yaptıktan sonra, bu değişiklikleri gerçek ve sanal cihazlarda kullanmak üzere göndermek için **Yayımla**  ' yı seçin.
 
 ## <a name="add-a-simulated-device"></a>Sanal cihaz ekleme
 
 Uygulamanıza sanal bir cihaz eklemek için, oluşturduğunuz **ESP32** cihaz şablonunu kullanırsınız.
 
-1. Yeni bir cihazı operatör olarak eklemek için sol bölmedeki **cihazlar** ' ı seçin. **Cihazlar** SEKMESI, ESP32 cihazının **Tüm cihazlarını** ve **algılayıcı denetleyicisi** cihaz şablonunu gösterir. **Algılayıcı denetleyicisi**' ni seçin.
+1. Yeni bir cihaz eklemek için sol bölmedeki **cihazlar** ' ı seçin. **Cihazlar** SEKMESI, ESP32 cihazının **Tüm cihazlarını** ve **algılayıcı denetleyicisi** cihaz şablonunu gösterir. **Algılayıcı denetleyicisi**' ni seçin.
 
 1. Sanal bir DevKit cihazı eklemek için **+ Yeni**' yi seçin. Önerilen **CIHAZ kimliğini** kullanın veya kendi kodunuzu girin. Bir cihaz KIMLIĞI harfler, rakamlar ve `-` karakteri içerebilir. Ayrıca, yeni cihazınız için bir ad girebilirsiniz. **Bu cihazın benzetimini yap** ' ın **Evet** olarak ayarlandığından emin olun ve ardından **Oluştur**' u seçin.
 
     :::image type="content" source="media/quick-create-simulated-device/simulated-device.png" alt-text="Sanal algılayıcı denetleyicisi cihazını gösteren ekran görüntüsü":::
 
-Artık, benzetimli verileri kullanarak cihaz şablonu için Oluşturucu tarafından oluşturulan görünümlerle etkileşime geçebilirsiniz:
+Artık, daha önce benzetimli verileri kullanarak oluşturulan görünümlerle etkileşim kurabilirsiniz:
 
 1. **Cihazlar** sayfasında sanal cihazınızı seçin
 
@@ -150,25 +144,9 @@ Artık, benzetimli verileri kullanarak cihaz şablonu için Oluşturucu tarafın
 
     * **Komutlar** görünümü cihazda **yeniden başlatma** gibi komutları çalıştırmanıza olanak sağlar.
 
-    * **Cihazları yönet** görünümü, cihazı yönetmek için işleci için oluşturduğunuz formdur.
+    * **Cihazları yönet** görünümü, cihazı yönetmek için oluşturduğunuz formdur.
 
     * **Ham veri** görünümü, cihaz tarafından gönderilen ham telemetri ve özellik değerlerini görüntülemenize olanak sağlar. Bu görünüm cihazlarda hata ayıklama için yararlıdır.
-
-## <a name="use-a-simulated-device-to-improve-views"></a>Görünümleri geliştirmek için sanal cihaz kullanma
-
-Yeni bir sanal cihaz oluşturduktan sonra, Oluşturucu bu cihazı kullanarak cihaz şablonunun görünümlerini iyileştirmeye ve oluşturmaya devam edebilir.
-
-1. Sol bölmedeki **cihaz şablonları** ' nı seçin ve **algılayıcı denetleyicisi** şablonunu seçin.
-
-1. **Genel bakış** gibi düzenlemek istediğiniz görünümlerden birini seçin veya yeni bir görünüm oluşturun. **Önizleme cihazını Yapılandır**' ı seçin ve ardından **çalışan bir cihazdan öğesini seçin**. Burada, bir önizleme cihazı, test için yapılandırılmış gerçek bir cihaz ya da IoT Central eklemiş olduğunuz mevcut bir cihaz yok seçeneklerinden birini belirleyebilirsiniz.
-
-1. Listeden sanal cihazınızı seçin. Sonra **Uygula**'yı seçin. Artık cihaz şablonu görünümlerini oluşturma deneyiminizdeki aynı sanal cihazı görebilirsiniz. Bu görünüm, grafikler ve diğer görselleştirmeler için kullanışlıdır.
-
-    :::image type="content" source="media/quick-create-simulated-device/configure-preview.png" alt-text="Yapılandırılmış bir önizleme cihazını gösteren ekran görüntüsü":::
-
-## <a name="clean-up-resources"></a>Kaynakları temizleme
-
-[!INCLUDE [iot-central-clean-up-resources](../../../includes/iot-central-clean-up-resources.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

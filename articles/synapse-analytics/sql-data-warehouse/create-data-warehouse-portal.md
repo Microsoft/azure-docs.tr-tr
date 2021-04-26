@@ -3,20 +3,23 @@ title: 'Hızlı başlangıç: adanmış bir SQL havuzu oluşturma ve sorgulama (
 description: Azure portal kullanarak adanmış bir SQL Havuzu (eski adıyla SQL DW) oluşturun ve sorgulayın
 services: synapse-analytics
 author: pimorano
-manager: craigg
-ms.service: synapse-analytics
-ms.topic: quickstart
-ms.subservice: sql-dw
-ms.date: 05/28/2019
 ms.author: pimorano
+manager: craigg
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: dd9d66683d5f2349807915651c50bf9eedd285c1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 05/28/2019
+ms.topic: quickstart
+ms.service: synapse-analytics
+ms.subservice: sql-dw
+ms.custom:
+- seo-lt-2019
+- azure-synapse
+- mode-portal
+ms.openlocfilehash: 99530b1949f03867a5b755208191341556ba8083
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104602239"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535834"
 ---
 # <a name="quickstart-create-and-query-a-dedicated-sql-pool-formerly-sql-dw-in-azure-synapse-analytics-using-the-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak Azure SYNAPSE Analytics 'te adanmış bir SQL Havuzu (eski adıyla SQL DW) oluşturun ve sorgulayın
 

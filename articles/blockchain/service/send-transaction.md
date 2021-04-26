@@ -5,10 +5,10 @@ ms.date: 11/30/2020
 ms.topic: tutorial
 ms.reviewer: caleteet
 ms.openlocfilehash: 4c2df952480d2c30de10838c3d0f7714fc7e6126
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105628654"
 ---
 # <a name="tutorial-create-build-and-deploy-smart-contracts-on-azure-blockchain-service"></a>Öğretici: Azure blok zinciri hizmetinde akıllı sözleşmeler oluşturma, derleme ve dağıtma
@@ -81,13 +81,13 @@ Azure blok zinciri geliştirme seti, sözleşmeleri blok zincirine dağıtmak ü
 
 ![Sözleşme başarıyla dağıtıldı](./media/send-transaction/deploy-contract.png)
 
-## <a name="call-a-contract-function"></a>Sözleşme işlevini çağırma
+## <a name="call-a-contract-function&quot;></a>Sözleşme işlevini çağırma
 **Helloblockzincirleri** sözleşmesinin **SendRequest** işlevi **RequestMessage** durum değişkenini değiştirir. Bir blok zinciri ağının durumunun değiştirilmesi bir işlem aracılığıyla yapılır. **SendRequest** işlevini bir işlem aracılığıyla yürütmek için bir komut dosyası oluşturabilirsiniz.
 
 1. Truffle projenizin kökünde yeni bir dosya oluşturun ve bunu adlandırın `sendrequest.js` . Aşağıdaki Web3 JavaScript kodunu dosyaya ekleyin.
 
     ```javascript
-    var HelloBlockchain = artifacts.require("HelloBlockchain");
+    var HelloBlockchain = artifacts.require(&quot;HelloBlockchain");
         
     module.exports = function(done) {
       console.log("Getting the deployed version of the HelloBlockchain smart contract")

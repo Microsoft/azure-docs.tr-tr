@@ -2,17 +2,17 @@
 title: Azure Service Bus ileti sıralaması ve zaman damgaları | Microsoft Docs
 description: Bu makalede, Azure Service Bus iletilerinin sıralama ve sıralamayı (zaman damgalarına) nasıl koruyabileceğiniz açıklanır.
 ms.topic: article
-ms.date: 06/23/2020
-ms.openlocfilehash: fdb18802e576ad114fd3f783d5efd7bb826a5f94
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/14/2021
+ms.openlocfilehash: 3d5300568232afae1238445113d60eda8cdb2f1b
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "85341171"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107497107"
 ---
 # <a name="message-sequencing-and-timestamps"></a>İleti sıralama ve zaman damgaları
 
-Sıralama ve zaman damgalama, tüm Service Bus varlıklarda her zaman etkin olan ve alınan veya taranan iletilerin [SequenceNumber](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.sequencenumber) ve [Enqueuedtimeutc](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.enqueuedtimeutc) özellikleri aracılığıyla yüzey olan iki özellikten oluşur.
+Sıralama ve zaman damgalama, tüm Service Bus varlıklarda her zaman etkin olan ve `SequenceNumber` `EnqueuedTimeUtc` alınan veya taranan iletilerin özellikleri aracılığıyla yüzey olan iki özellikten oluşur.
 
 İletilerin mutlak sırasının önemli olduğu ve/veya bir tüketicinin iletiler için güvenilir benzersiz bir tanımlayıcıya ihtiyacı olan bu durumlar için, aracı, bir boşluk içermeyen iletileri damgalarına ve sıra veya konuya göre artan sıra numarasına sahip olur. Bölümlenmiş varlıklar için sıra numarası bölüme göre verilir.
 
@@ -30,7 +30,11 @@ Bir kuyruğa veya konu başlığına daha sonra işlenmek; örneğin belirli bir
 
 Zamanlanan iletiler, tanımlanan sıraya alma zamanına kadar sırada bir şekilde çalışmaz. Bu süreden önce zamanlanan iletiler iptal edilebilir. İptal etme iletiyi siler.
 
-Sıradan gönderme yoluyla bir ileti gönderirken ya da [Schedulemessageasync](/dotnet/api/microsoft.azure.servicebus.queueclient.schedulemessageasync#Microsoft_Azure_ServiceBus_QueueClient_ScheduleMessageAsync_Microsoft_Azure_ServiceBus_Message_System_DateTimeOffset_) API ile açık olarak [Scheduledenqueuetimeutc](/dotnet/api/microsoft.azure.servicebus.message.scheduledenqueuetimeutc) özelliğini ayarlayarak iletileri zamanlayabilirsiniz. İkinci olarak, daha sonra gerekirse zamanlanmış iletiyi iptal etmek için kullanabileceğiniz zamanlanmış iletinin **SequenceNumber** döndürür. Zamanlanan iletiler ve sıra numaraları [ileti tarama](message-browsing.md)kullanılarak da bulunabilir.
+İstemcilerimizden herhangi birini kullanarak, iki şekilde ileti zamanlayabilirsiniz:
+- Normal gönderme API 'sini kullanın, ancak `ScheduledEnqueueTimeUtc` göndermeden önce iletideki özelliği ayarlayın.
+- İleti zamanlama API 'sini kullanın, hem normal iletiyi hem de zamanlanan saati geçirin. Bu işlem, daha sonra gerekirse zamanlanmış iletiyi iptal etmek için kullanabileceğiniz zamanlanan ileti **SequenceNumber** döndürür. 
+
+Zamanlanan iletiler ve sıra numaraları [ileti tarama](message-browsing.md)kullanılarak da bulunabilir.
 
 Zamanlanmış bir ileti için **SequenceNumber** yalnızca ileti bu durumda olduğunda geçerlidir. İleti etkin duruma geçiş yaparken, ileti geçerli anında sıraya alınmış gibi sıraya eklenir, bu da yeni bir **SequenceNumber** atamayı içerir.
 

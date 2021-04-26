@@ -9,12 +9,12 @@ ms.date: 10/02/2020
 ms.author: rogarana
 ms.subservice: files
 ms.custom: devx-track-csharp
-ms.openlocfilehash: e112060db4a44884d3094a939b03ff106ba72e65
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 2c00f001ae3cba9420a137a42f9f696619584d50
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96492208"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817386"
 ---
 # <a name="develop-for-azure-files-with-net"></a>.NET ile Azure Dosyaları için geliştirme
 
@@ -60,7 +60,7 @@ Bu makaledeki tüm kod örneklerini `Program` *program. cs* dosyasındaki sını
 
 Projenizdeki bu paketlere başvurun:
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 - [.Net Için Azure çekirdek kitaplığı](https://www.nuget.org/packages/Azure.Core/): Bu paket, Azure istemci işlem hattının uygulamasıdır.
 - [.NET için Azure Depolama Blobu istemci kitaplığı](https://www.nuget.org/packages/Azure.Storage.Blobs/): Bu paket, Depolama hesabınızdaki blob kaynaklarına programlı erişim sağlar.
@@ -80,7 +80,7 @@ Paketleri edinmek için NuGet kullanabilirsiniz. Şu adımları izleyin:
    - **Azure. Storage. Files. paylaşımlar**
    - **System.Configuration.ConfigurationManager**
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 - [.NET için Microsoft Azure depolama ortak kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.Storage.Common/): Bu paket, Depolama hesabınızdaki ortak kaynaklara programlı erişim sağlar.
 - [.NET için Microsoft Azure depolama blob kitaplığı](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/): Bu paket, Depolama hesabınızdaki blob kaynaklarına programlı erişim sağlar.
@@ -105,13 +105,13 @@ Paketleri edinmek için NuGet kullanabilirsiniz. Şu adımları izleyin:
 
 Ardından, kimlik bilgilerinizi projenizin *App.config* dosyasına kaydedin. **Çözüm Gezgini**, `App.config` dosyayı aşağıdaki örneğe benzer olacak şekilde çift tıklayın ve düzenleyin.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 `myaccount`Depolama hesabı adınızla ve `mykey` depolama hesabı anahtarınızla değiştirin.
 
 :::code language="xml" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/app.config" highlight="5,6,7":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 `myaccount`Depolama hesabı adınızla ve `StorageAccountKeyEndingIn==` depolama hesabı anahtarınızla değiştirin.
 
@@ -137,11 +137,11 @@ Ardından, kimlik bilgilerinizi projenizin *App.config* dosyasına kaydedin. **�
 
 **Çözüm Gezgini**, *program. cs* dosyasını açın ve aşağıdaki using yönergelerini dosyanın en üstüne ekleyin.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_UsingStatements":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 using Microsoft.Azure; // Namespace for Azure Configuration Manager
@@ -158,13 +158,13 @@ using Microsoft.Azure.Storage.File; // Namespace for Azure Files
 
 *Program. cs* dosyasında dosya paylaşımında program aracılığıyla erişmek için aşağıdaki kodu ekleyin.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 Aşağıdaki yöntem, zaten yoksa bir dosya paylaşma oluşturur. Yöntemi bir bağlantı dizesinden bir [parça eClient](/dotnet/api/azure.storage.files.shares.shareclient) nesnesi oluşturarak başlar. Örnek daha sonra daha önce oluşturduğumuz bir dosyayı indirmeye çalışır. Bu yöntemi kaynağından çağırın `Main()` .
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_CreateShare":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 Sonra, `Main()` bağlantı dizesini almak için yukarıda gösterilen koddan sonra yöntemine aşağıdaki içeriği ekleyin. Bu kod, daha önce oluşturduğumuz dosyaya bir başvuru alır ve içeriğini çıkarır.
 
@@ -212,11 +212,11 @@ Bir paylaşımın kotasının ayarlanması, paylaşımda depolanan dosyaların t
 
 Aşağıdaki örnekte, paylaşımdaki mevcut kullanımını nasıl kontrol edileceği veya paylaşım için nasıl kota ayarlanacağı gösterilmiştir.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_SetMaxShareSize":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 // Parse the connection string for the storage account.
@@ -254,13 +254,13 @@ if (share.Exists())
 
 Azure dosyaları istemci kitaplığı 'nın 5. x sürümünden başlayarak, bir dosya paylaşımında veya tek bir dosya için paylaşılan erişim imzası (SAS) oluşturabilirsiniz.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 Aşağıdaki örnek yöntemi belirtilen paylaşımdaki bir dosya üzerinde bir SAS döndürür.
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_GetFileSasUri":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 Paylaşılan erişim imzalarını yönetmek için, bir dosya paylaşımında depolanan erişim ilkesi de oluşturabilirsiniz. Güvenlik açığı varsa SAS 'yi iptal etmenizi sağladığından, depolanan bir erişim ilkesi oluşturmanızı öneririz. Aşağıdaki örnek, bir paylaşımda depolanan erişim ilkesi oluşturur. Örnek, paylaşımdaki bir dosyadaki bir SAS için kısıtlamalar sağlamak üzere bu ilkeyi kullanır.
 
@@ -325,11 +325,11 @@ AzCopy komutunu Ayrıca bir dosyayı başka bir dosyaya kopyalamak veya bir blob
 
 Aşağıdaki örnekte, bir dosya aynı paylaşımdaki başka bir dosyaya kopyalanır. Bu işlem dosyaları aynı depolama hesabında kopyalayacağından kopyayı yapmak için [paylaşılan anahtar kimlik doğrulamasını](/rest/api/storageservices/authorize-with-shared-key) kullanabilirsiniz.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_CopyFile":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 // Parse the connection string for the storage account.
@@ -379,11 +379,11 @@ if (share.Exists())
 
 Aşağıdaki örnekte, bir dosya oluşturulur ve aynı depolama hesabındaki bir bloba kopyalanır. Örnekte, kaynak dosya için hizmetin kopyalama sırasında kaynak dosyaya erişimi yetkilendirmek üzere kullandığı bir SAS oluşturulur.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_CopyFileToBlob":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 // Parse the connection string for the storage account.
@@ -441,11 +441,11 @@ Azure dosyaları istemci kitaplığı sürüm 8,5 ' den başlayarak bir paylaşm
 
 Aşağıdaki örnekte dosya paylaşım anlık görüntüsü oluşturulmaktadır.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_CreateShareSnapshot":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 storageAccount = CloudStorageAccount.Parse(ConnectionString); 
@@ -462,11 +462,11 @@ var snapshotShare = myShare.Snapshot();
 
 Aşağıdaki örnek, bir paylaşımdaki anlık görüntüleri listeler.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_ListShareSnapshots":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 var shares = fClient.ListShares(baseShareName, ShareListingDetails.All);
@@ -478,11 +478,11 @@ var shares = fClient.ListShares(baseShareName, ShareListingDetails.All);
 
 Aşağıdaki örnek, paylaşılan anlık görüntüler içindeki dosyalara ve dizinlere göz atar.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_ListSnapshotContents":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 CloudFileShare mySnapshot = fClient.GetShareReference(baseShareName, snapshotTime); 
@@ -498,11 +498,11 @@ Bir dosya paylaşımının anlık görüntüsünü almak, tek tek dosyaları vey
 
 Bir dosya paylaşımının paylaşım anlık görüntülerini sorgulayarak bir dosya paylaşım anlık görüntüsündeki dosyayı geri yükleyebilirsiniz. Ardından, belirli bir paylaşılan anlık görüntüye ait olan bir dosyayı alabilirsiniz. Dosyayı doğrudan okumak veya geri yüklemek için bu sürümü kullanın.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_RestoreFileFromSnapshot":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 CloudFileShare liveShare = fClient.GetShareReference(baseShareName);
@@ -533,11 +533,11 @@ fileInliveShare.StartCopyAsync(new Uri(sourceUri));
 
 Aşağıdaki örnekte dosya paylaşım anlık görüntüsü silinmektedir.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_DeleteSnapshot":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 ```csharp
 CloudFileShare mySnapshot = fClient.GetShareReference(baseShareName, snapshotTime); mySnapshot.Delete(null, null, null);
@@ -553,11 +553,11 @@ Azure Depolama Analizi, Azure dosyaları için ölçümleri destekler. Ölçüm 
 
 Aşağıdaki kod örneği, Azure dosyaları için ölçümleri etkinleştirmek üzere .NET istemci kitaplığı 'nın nasıl kullanılacağını göstermektedir.
 
-# <a name="net-v12"></a>[\.NET V12](#tab/dotnet)
+# <a name="azure-net-sdk-v12"></a>[Azure \. NET SDK V12](#tab/dotnet)
 
 :::code language="csharp" source="~/azure-storage-snippets/files/howto/dotnet/dotnet-v12/FileShare.cs" id="snippet_UseMetrics":::
 
-# <a name="net-v11"></a>[\.NET v11](#tab/dotnetv11)
+# <a name="azure-net-sdk-v11"></a>[Azure \. NET SDK v11](#tab/dotnetv11)
 
 İlk olarak, aşağıdaki `using` yönergeleri, yukarıdaki eklendikleriyle birlikte *program. cs* dosyanıza ekleyin:
 

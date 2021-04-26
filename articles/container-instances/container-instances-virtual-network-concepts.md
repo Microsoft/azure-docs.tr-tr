@@ -3,12 +3,12 @@ title: Sanal ağ kullanma senaryoları
 description: Azure sanal ağına kapsayıcı grupları dağıtmaya yönelik senaryolar, kaynaklar ve sınırlamalar.
 ms.topic: article
 ms.date: 08/11/2020
-ms.openlocfilehash: 20c2b4fe2f19402d6647f398a9696b7e16550d8e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6de99c68c3f05e4734dd46a579d28a6f1a3b824e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104606897"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107763784"
 ---
 # <a name="virtual-network-scenarios-and-resources"></a>Sanal ağ senaryoları ve kaynakları
 
@@ -85,5 +85,5 @@ Aşağıdaki diyagramda, Azure Container Instances için temsilci atanmış bir 
 [aci-vnet-01]: ./media/container-instances-virtual-network-concepts/aci-vnet-01.png
 
 <!-- LINKS - Internal -->
-[az-container-create]: /cli/azure/container#az-container-create
-[az-network-profile-list]: /cli/azure/network/profile#az-network-profile-list
+[az-container-create]: /cli/azure/container#az_container_create
+[az-network-profile-list]: /cli/azure/network/profile#az_network_profile_list

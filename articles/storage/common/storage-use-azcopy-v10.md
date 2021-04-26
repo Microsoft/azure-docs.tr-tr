@@ -4,16 +4,16 @@ description: AzCopy, depolama hesaplarına veri kopyalamak için kullanabileceğ
 author: normesta
 ms.service: storage
 ms.topic: how-to
-ms.date: 12/08/2020
+ms.date: 04/02/2021
 ms.author: normesta
 ms.subservice: common
 ms.custom: contperf-fy21q2
-ms.openlocfilehash: 826effb152d3f069e0a7c5b8e169f7083117ed22
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 34d3bd45d2c0bf0260a4f8524cff6f8ac03b746c
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103494504"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107501731"
 ---
 # <a name="get-started-with-azcopy"></a>AzCopy’yi kullanmaya başlama
 
@@ -40,25 +40,13 @@ Bu dosyalar bir ZIP dosyası (Windows ve Mac) veya bir tar dosyası (Linux) olar
 > [!NOTE]
 > [Azure Tablo depolama](../tables/table-storage-overview.md) hizmetinize veri kopyalamak Istiyorsanız, [azcopy sürüm 7,3](https://aka.ms/downloadazcopynet)' yi de yükleyebilirsiniz.
 
-
 ## <a name="run-azcopy"></a>AzCopy programını çalıştırma
 
 Kolaylık sağlamak için AzCopy yürütülebilir dosyanızın bulunduğu dizini sistem yolunuza ekleyebilirsiniz. Bu şekilde, `azcopy` sisteminizdeki herhangi bir dizinden yazabilirsiniz.
 
 Yolunuza AzCopy dizinini eklememayı seçerseniz, dizinleri AzCopy yürütülebilir dosyanızın konumuyla değiştirmeniz ve `azcopy` `.\azcopy` Windows PowerShell komut istemleri ' nde yazmanız gerekir.
 
-Komutların listesini görmek için yazın `azcopy -h` ve ENTER tuşuna basın.
-
-Belirli bir komut hakkında bilgi edinmek için, yalnızca komutun adını ekleyin (örneğin: `azcopy list -h` ).
-
-> [!div class="mx-imgBorder"]
-> ![Satır içi yardım](media/storage-use-azcopy-v10/azcopy-inline-help.png)
-
-
-Her komut ve komut parametresine ilişkin ayrıntılı başvuru belgelerini bulmak için bkz. [AzCopy](storage-ref-azcopy.md)
-
-> [!NOTE] 
-> Azure depolama hesabınızın sahibi olarak, verilere erişim için otomatik olarak izinler atanmamıştır. AzCopy ile anlamlı bir işlem yapabilmeniz için, depolama hizmetine yetkilendirme kimlik bilgilerini nasıl sağlayacağınıza karar vermeniz gerekir. 
+Azure depolama hesabınızın sahibi olarak, verilere erişim için otomatik olarak izinler atanmamıştır. AzCopy ile anlamlı bir işlem yapabilmeniz için, depolama hizmetine yetkilendirme kimlik bilgilerini nasıl sağlayacağınıza karar vermeniz gerekir. 
 
 <a id="choose-how-youll-provide-authorization-credentials"></a>
 
@@ -95,24 +83,61 @@ azcopy copy "C:\local\path" "https://account.blob.core.windows.net/mycontainer1/
 
 SAS belirteçleri ve nasıl elde edileceği hakkında daha fazla bilgi edinmek için bkz. [paylaşılan erişim Imzalarını kullanma (SAS)](./storage-sas-overview.md).
 
+> [!NOTE]
+> Depolama hesabının [Güvenli aktarım gerekli](storage-require-secure-transfer.md) ayarı, bir depolama hesabı bağlantısının aktarım katmanı GÜVENLIĞI (TLS) ile güvenli olup olmadığını belirler. Bu ayar varsayılan olarak etkindir.   
+
 <a id="transfer-data"></a>
 
 ## <a name="transfer-data"></a>Veri aktarma
 
 Kimliğinizi yetkilendirdikten veya bir SAS belirteci elde ettikten sonra, veri aktarmaya başlayabilirsiniz.
 
-> [!NOTE]
-> Depolama hesabının [Güvenli aktarım gerekli](storage-require-secure-transfer.md) ayarı, bir depolama hesabı bağlantısının aktarım katmanı GÜVENLIĞI (TLS) ile güvenli olup olmadığını belirler. Bu ayar varsayılan olarak etkindir.   
-
 Örnek komutları bulmak için Bu makalelerden birine bakın.
 
 | Hizmet | Makale |
 |--------|-----------|
-|Azure Blob Depolama |[Azure Blob depolama alanına dosya yükleme](storage-use-azcopy-blobs-upload.md)<br><br>[Blob 'ları Azure Blob depolamadan indirin](storage-use-azcopy-blobs-download.md)<br><br>[Blob 'ları Azure depolama hesapları arasında kopyalama](storage-use-azcopy-blobs-copy.md)<br><br>[Azure Blob depolama ile eşitlemeyi](storage-use-azcopy-blobs-synchronize.md)|
+|Azure Blob Depolama|[Azure Blob depolama alanına dosya yükleme](storage-use-azcopy-blobs-upload.md) |
+|Azure Blob Depolama|[Blob 'ları Azure Blob depolamadan indirin](storage-use-azcopy-blobs-download.md)|
+|Azure Blob Depolama|[Blob 'ları Azure depolama hesapları arasında kopyalama](storage-use-azcopy-blobs-copy.md)|
+|Azure Blob Depolama|[Azure Blob depolama ile eşitlemeyi](storage-use-azcopy-blobs-synchronize.md)|
 |Azure Dosyaları |[AzCopy ve dosya depolama ile verileri aktarma](storage-use-azcopy-files.md)|
 |Amazon S3|[Amazon S3 'ten Azure Storage 'a veri kopyalama](storage-use-azcopy-s3.md)|
 |Google Cloud Storage|[Google Cloud Storage 'daki verileri Azure depolama 'ya kopyalama (Önizleme)](storage-use-azcopy-google-cloud.md)|
 |Azure Stack depolama|[AzCopy ve Azure Stack Storage ile veri aktarımı](/azure-stack/user/azure-stack-storage-transfer#azcopy)|
+
+## <a name="get-command-help"></a>Komut yardımını al
+
+Komutların listesini görmek için yazın `azcopy -h` ve ENTER tuşuna basın.
+
+Belirli bir komut hakkında bilgi edinmek için, yalnızca komutun adını ekleyin (örneğin: `azcopy list -h` ).
+
+> [!div class="mx-imgBorder"]
+> ![Satır içi yardım](media/storage-use-azcopy-v10/azcopy-inline-help.png)
+
+### <a name="list-of-commands"></a>Komutların listesi
+
+Aşağıdaki tabloda tüm AzCopy ile v10 arasındaki komutları listelenmektedir. Her komut bir başvuru makalesine bağlanır. 
+
+|Komut|Açıklama|
+|---|---|
+|[azcopy ortamı](storage-ref-azcopy-bench.md?toc=/azure/storage/blobs/toc.json)|Belirli bir konumdan veya belirtilen bir konumdan test verilerini karşıya yükleyerek ya da indirerek bir performans kıyaslaması çalıştırır.|
+|[azcopy kopya](storage-ref-azcopy-copy.md?toc=/azure/storage/blobs/toc.json)|Kaynak verileri bir hedef konumuna kopyalar|
+|[azcopy belge](storage-ref-azcopy-doc.md?toc=/azure/storage/blobs/toc.json)|Markın biçimindeki araç için belgeler oluşturur.|
+|[azcopy ortamı](storage-ref-azcopy-env.md?toc=/azure/storage/blobs/toc.json)|AzCopy 'in davranışını yapılandırabileceği ortam değişkenlerini gösterir.|
+|[azcopy işleri](storage-ref-azcopy-jobs.md?toc=/azure/storage/blobs/toc.json)|İşlerin yönetimiyle ilgili alt komutlar.|
+|[azcopy işleri temizleme](storage-ref-azcopy-jobs-clean.md?toc=/azure/storage/blobs/toc.json)|Tüm işler için tüm günlük ve plan dosyalarını kaldırın.|
+|[azcopy iş listesi](storage-ref-azcopy-jobs-list.md?toc=/azure/storage/blobs/toc.json)|Tüm işlere ilişkin bilgileri görüntüler.|
+|[azcopy işleri kaldırma](storage-ref-azcopy-jobs-remove.md?toc=/azure/storage/blobs/toc.json)|Verilen iş KIMLIĞIYLE ilişkili tüm dosyaları kaldırın.|
+|[azcopy işleri sürdürme](storage-ref-azcopy-jobs-resume.md?toc=/azure/storage/blobs/toc.json)|Verilen iş KIMLIĞI ile mevcut işi sürdürür.|
+|[azcopy işleri gösterme](storage-ref-azcopy-jobs-show.md?toc=/azure/storage/blobs/toc.json)|Verilen iş KIMLIĞI için ayrıntılı bilgileri gösterir.|
+|[azcopy load](storage-ref-azcopy-load.md)|Belirli biçimlerdeki verileri aktarmaya ilişkin alt komutlar.|
+|[azcopy load clfs](storage-ref-azcopy-load-avere-cloud-file-system.md?toc=/azure/storage/blobs/toc.json)|Yerel verileri bir kapsayıcıya aktarır ve Microsoft 'un avere Cloud FileSystem (CLFS) biçiminde depolar.|
+|[azcopy listesi](storage-ref-azcopy-list.md?toc=/azure/storage/blobs/toc.json)|Belirli bir kaynaktaki varlıkları listeler.|
+|[azcopy oturum açma](storage-ref-azcopy-login.md?toc=/azure/storage/blobs/toc.json)|Azure depolama kaynaklarına erişmek için Azure Active Directory 'de oturum açar.|
+|[azcopy oturumu kapatma](storage-ref-azcopy-logout.md?toc=/azure/storage/blobs/toc.json)|Kullanıcıyı günlüğe kaydeder ve Azure depolama kaynaklarına erişimi sonlandırır.|
+|[azcopy oluşturma](storage-ref-azcopy-make.md?toc=/azure/storage/blobs/toc.json)|Bir kapsayıcı veya dosya paylaşma oluşturur.|
+|[azcopy kaldırma](storage-ref-azcopy-remove.md?toc=/azure/storage/blobs/toc.json)|Blob 'ları veya dosyaları bir Azure Storage hesabından silin.|
+|[azcopy eşitleme](storage-ref-azcopy-sync.md?toc=/azure/storage/blobs/toc.json)|Kaynak konumunu hedef konuma çoğaltır.|
 
 ## <a name="use-in-a-script"></a>Betikte kullanma
 
@@ -161,7 +186,13 @@ Depolama Gezgini, işlemleri gerçekleştirmek için hesap anahtarınızı kulla
 
 ## <a name="configure-optimize-and-fix"></a>Yapılandırma, iyileştirme ve çözme
 
-Bkz. [AzCopy 'ı yapılandırma, iyileştirme ve sorun giderme](storage-use-azcopy-configure.md)
+Aşağıdaki kaynaklardan herhangi birine bakın:
+
+- [AzCopy yapılandırma ayarları](storage-ref-azcopy-configuration-settings.md)
+
+- [AzCopy performansını iyileştirin](storage-use-azcopy-optimize.md)
+
+- [Günlük dosyalarını kullanarak Azure Storage 'da AzCopy Ile v10 arasındaki sorunlarını giderme](storage-use-azcopy-configure.md)
 
 ## <a name="use-a-previous-version"></a>Önceki bir sürümü kullan
 

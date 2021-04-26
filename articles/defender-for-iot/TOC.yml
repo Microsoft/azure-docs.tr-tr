@@ -5,11 +5,12 @@
   href: overview.md
   items:
     - name: Yenilikler
+      displayName: 'version, versions, servicing, information, timeline, support, support date, dates, versioning, policy'
       href: release-notes.md
-    - name: Aracısız çözüm mimarisi
+    - name: Aracısız çözüm mimarisi nedir?
       displayName: 'deployment, where to deploy'
       href: architecture.md
-    - name: Aracı tabanlı çözüm mimarisi
+    - name: Aracı tabanlı çözüm mimarisi nedir?
       href: architecture-agent-based.md
 - name: Hızlı Başlangıçlar
   expanded: true
@@ -20,7 +21,7 @@
           displayName: 'firewall, proxy, open ports'
           href: quickstart-system-prerequisites.md
         - name: IoT için Azure Defender’ı kullanmaya başlama
-          displayName: 'getting started, registration, onboarding'
+          displayName: 'getting started, registration, onboarding, activation, threat intelligence'
           href: getting-started.md
     - name: Cihaz oluşturucular için aracı tabanlı çözüm
       items:
@@ -122,19 +123,30 @@
         - name: Algılayıcılarınızı hazırlama
           items:
             - name: Algılayıcı ekleme
-              displayName: 'onboard, cloud, register, activate, offboard, subscription, subscriptions'
+              displayName: 'onboard, cloud, register, version, activate, offboard, subscription, threat intelligence, packages, connected'
               href: how-to-manage-sensors-on-the-cloud.md
             - name: Algılayıcınızı etkinleştirme ve ayarlama
               displayName: 'deployment, onboard, register, activation, SSL, TLS, certificate, cloud connected, sign in, login, setup, learning mode, initial'
               href: how-to-activate-and-set-up-your-sensor.md
         - name: Şirket içi yönetim konsolunuzu hazırlama
           items:
+            - name: Abonelikleri yönetme
+              displayName: 'onboard, offboard, subscription, billing, pricing, payment'
+              href: how-to-manage-subscriptions.md
             - name: Şirket içi yönetim konsolunuzu etkinleştirme ve ayarlama
               displayName: 'deployment, activate, certificate, sign in, SSL, TLS, login, setup, initial, committed activation file'
               href: how-to-activate-and-set-up-your-on-premises-management-console.md
             - name: Yüksek kullanılabilirliği ayarlama
               displayName: 'primary, secondary, failover, failback fail, recovery'
               href: how-to-set-up-high-availability.md
+        - name: Algılayıcılarınızı hazırlama
+          items:
+            - name: Algılayıcı ekleme
+              displayName: 'onboard, cloud, register, activate, offboard, subscription, subscriptions'
+              href: how-to-manage-sensors-on-the-cloud.md
+            - name: Algılayıcınızı etkinleştirme ve ayarlama
+              displayName: 'deployment, onboard, register, activation, SSL, TLS, certificate, cloud connected, sign in, login, setup, learning mode, initial'
+              href: how-to-activate-and-set-up-your-sensor.md
         - name: Kullanıcıları ve kullanıcı erişimini yönetme
           items:
             - name: Kullanıcıları oluşturma ve yönetme
@@ -144,7 +156,7 @@
               href: how-to-define-global-user-access-control.md
               displayName: 'business unit, site, region, user'
         - name: Hangi trafiğin izleneceğini denetleme
-          displayName: 'Windows, Learning, Smart IT Learning, DNS, DHCP, engines, subnets'
+          displayName: 'Windows, Learning, Smart IT Learning, DNS, DHCP, engines, subnets,  WMI, active, probing, scanning, switch'
           href: how-to-control-what-traffic-is-monitored.md
         - name: Algılayıcıları şirket içi yönetim konsolundan yönetme
           displayName: 'disconnect, connect, activation file, sensor backup'
@@ -159,6 +171,7 @@
           displayName: 'mail, SMTP, activation, certificate, software update, backup, restore, proxy, password recovery'
         - name: Tehdit analizi paketleriyle çalışma
           href: how-to-work-with-threat-intelligence-packages.md
+          displayName: 'packages, automatic, intelligence, push, threat'
         - name: Cihaz envanter bilgileriyle çalışma
           items:
             - name: Bir cihaz envanterinde tüm kurumsal algılayıcı algılamalarını araştırma
@@ -342,23 +355,21 @@
           href: edge-security-module-deprecation.md
 - name: Kaynak
   items:
+    - name: Microsoft Learn ile güvenlik becerilerinizi geliştirme
+      href: /learn/browse/?term=securityS&terms=securityS
+    - name: Azure Güvenlik Merkezi belgeleri
+      href: ../security-center/
+    - name: Azure güvenlik belgeleri
+      href: ../security/index.yml
+    - name: 'Azure IoT Güvenlik, Gizlilik ve Uyumluluk blogu'
+      href: 'https://techcommunity.microsoft.com/t5/iot-security/bd-p/IoTSecurity'
+    - name: Bölgesel kullanılabilirlik
+      href: 'https://azure.microsoft.com/regions/services/'
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/azure-defender/'
+    - name: Videolar
+      href: 'https://azure.microsoft.com/resources/videos/index/?services=security-center&service=internet-of-things&page=1&sort=newest'
     - name: Cihaz Oluşturucular için aracı tabanlı çözüm
       items:
-        - name: Microsoft Learn ile güvenlik becerilerinizi geliştirme
-          href: /learn/browse/?term=securityS&terms=securityS
-        - name: Azure Güvenlik Merkezi belgeleri
-          href: ../security-center/
-        - name: Azure güvenlik belgeleri
-          href: ../security/index.yml
         - name: Azure RTOS Defender-IoT-Micro-Agent Stack Overflow
           href: 'https://stackoverflow.com/questions/tagged/azure-rtos+azure-iot-security-module'
-        - name: 'Azure IoT Güvenlik, Gizlilik ve Uyumluluk blogu'
-          href: 'https://techcommunity.microsoft.com/t5/iot-security/bd-p/IoTSecurity'
-        - name: Bölgesel kullanılabilirlik
-          href: 'https://azure.microsoft.com/regions/services/'
-        - name: Fiyatlandırma
-          href: 'https://azure.microsoft.com/pricing/details/azure-defender/'
-        - name: IoT için Azure Defender destek ilkeleri
-          href: support-policies.md
-        - name: Videolar
-          href: 'https://azure.microsoft.com/resources/videos/index/?services=security-center&service=internet-of-things&page=1&sort=newest'

@@ -16,6 +16,8 @@
       href: multi-factor-authentication-end-user-app-passwords.md
     - name: Oturum açma
       href: user-help-sign-in.md?toc=./toc.json
+    - name: İş veya okul hesabı oturum açma
+      href: multi-factor-authentication-end-user-signin.md
     - name: Yardım alın
       href: multi-factor-authentication-end-user-troubleshoot.md
 - name: Parola sıfırlama yardımı

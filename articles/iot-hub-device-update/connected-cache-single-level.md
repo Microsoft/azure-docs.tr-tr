@@ -7,12 +7,12 @@ ms.author: andyriv
 ms.date: 2/16/2021
 ms.topic: tutorial
 ms.service: iot-hub-device-update
-ms.openlocfilehash: ae07926d7d8c768170e945e916367bee41999571
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c116bbf5ea9f5fc6e58962e02c93c630fc747d9e
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101665032"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107811733"
 ---
 # <a name="microsoft-connected-cache-preview-deployment-scenario-samples"></a>Microsoft bağlı önbellek önizleme dağıtım senaryosu örnekleri
 
@@ -22,23 +22,23 @@ Aşağıdaki diyagramda, CDN kaynaklarına doğrudan erişimi olan bir Azure IoT
 
   :::image type="content" source="media/connected-cache-overview/disconnected-device-update.png" alt-text="Microsoft bağlı önbellek bağlantısı kesildi cihaz güncelleştirmesi" lightbox="media/connected-cache-overview/disconnected-device-update.png":::
 
-1. Microsoft bağlı önbellek modülünü Azure IoT Hub Azure IoT Edge Gateway cihaz dağıtımınıza ekleyin ( `MCC concepts` modülün nasıl alınacağı hakkında daha fazla bilgi için bkz.).
+1. Microsoft bağlı önbellek modülünü Azure IoT Hub 'de Azure IoT Edge Gateway cihaz dağıtımınıza ekleyin (modülün nasıl alınacağı hakkında daha fazla bilgi için, bkz. [bağlantı kesilen cihazlar Için destek](connected-cache-disconnected-device-update.md) ).
 2. Dağıtım için ortam değişkenlerini ekleyin. Aşağıda ortam değişkenlerinin bir örneği verilmiştir.
 
     **Ortam değişkenleri**
     
-    | Name                 | Değer                                       |
-    | ----------------------------- | --------------------------------------------| 
-    | CACHE_NODE_ID                 | Yukarıdaki ortam değişkeni açıklamasına bakın. |
-    | CUSTOMER_ID                   | Yukarıdaki ortam değişkeni açıklamasına bakın. |
-    | CUSTOMER_KEY                  | Yukarıdaki ortam değişkeni açıklamasına bakın. |
-    | STORAGE_ *N* _SIZE_GB           | N = 5                                       |
+    | Name                          | Değer                                                                 |
+    | ----------------------------- | ----------------------------------------------------------------------| 
+    | CACHE_NODE_ID                 | Bkz. [ortam değişkeni](connected-cache-configure.md) açıklamaları |
+    | CUSTOMER_ID                   | Bkz. [ortam değişkeni](connected-cache-configure.md) açıklamaları |
+    | CUSTOMER_KEY                  | Bkz. [ortam değişkeni](connected-cache-configure.md) açıklamaları |
+    | STORAGE_1_SIZE_GB             | 10                                                                    |
 
 3. Dağıtım için kapsayıcı oluşturma seçeneklerini ekleyin. Kapsayıcı oluşturma seçeneklerine bir örnek aşağıda verilmiştir.
 
 ### <a name="container-create-options"></a>Kapsayıcı oluşturma seçenekleri
 
-```markdown
+```json
 {
     "HostConfig": {
         "Binds": [
@@ -57,12 +57,13 @@ Aşağıdaki diyagramda, CDN kaynaklarına doğrudan erişimi olan bir Azure IoT
             ]
         }
     }
+}
 ```
 
-Microsoft bağlı önbelleğinin düzgün şekilde çalıştığını doğrulamak için, modülü barındıran IoT Edge cihazın terminalinde aşağıdaki komutu yürütün veya ağdaki herhangi bir cihazı çalıştırın.
+Microsoft bağlı önbelleğinin düzgün şekilde çalıştığını doğrulamak için, modülü barındıran IoT Edge cihazın terminalinde aşağıdaki komutu yürütün veya ağdaki herhangi bir cihazı çalıştırın. \<Azure IoT Edge Gateway IP\>IoT Edge ağ geçidinizin IP adresi veya ana bilgisayar adı ile değiştirin. (Bu raporun görünürlüğü hakkında bilgi için ortam değişkeni ayrıntılarına bakın).
 
 ```bash
-    wget "http://<IOT Edge Gateway IP>/mscomtest/wuidt.gif?cacheHostOrigin=au.download.windowsupdate.com
+    wget http://<IoT Edge Gateway IP>/mscomtest/wuidt.gif?cacheHostOrigin=au.download.windowsupdate.com
 ```
 
 ## <a name="single-level-azure-iot-edge-gateway-with-outbound-unauthenticated-proxy"></a>Giden kimliği doğrulanmamış ara sunucu ile Tek düzey Azure IoT Edge Ağ Geçidi
@@ -76,16 +77,16 @@ Bu senaryoda, giden kimliği doğrulanmamış bir ara sunucu aracılığıyla CD
 
     **Ortam değişkenleri**
 
-    | Name                 | Değer                                       |
-    | ----------------------------- | --------------------------------------------| 
-    | CACHE_NODE_ID                 | Yukarıdaki ortam değişkeni açıklamasına bakın. |
-    | CUSTOMER_ID                   | Yukarıdaki ortam değişkeni açıklamasına bakın. |
-    | CUSTOMER_KEY                  | Yukarıdaki ortam değişkeni açıklamasına bakın. |
-    | STORAGE_ *N* _SIZE_GB           | N = 5                                       |
-    | CACHEABLE_CUSTOM_1_HOST       | Packagerepo.com:80                          |
-    | CACHEABLE_CUSTOM_1_CANONICAL  | Packagerepo.com                             |
-    | IS_SUMMARY_ACCESS_UNRESTRICTED| true                                        |
-    | UPSTREAM_PROXY                | Proxy sunucusu IP veya FQDN                     |
+    | Name                          | Değer                                                                 |
+    | ----------------------------- | ----------------------------------------------------------------------| 
+    | CACHE_NODE_ID                 | Bkz. [ortam değişkeni](connected-cache-configure.md) açıklamaları |
+    | CUSTOMER_ID                   | Bkz. [ortam değişkeni](connected-cache-configure.md) açıklamaları |
+    | CUSTOMER_KEY                  | Bkz. [ortam değişkeni](connected-cache-configure.md) açıklamaları |
+    | STORAGE_1_SIZE_GB             | 10                                                                    |
+    | CACHEABLE_CUSTOM_1_HOST       | Packagerepo.com:80                                                    |
+    | CACHEABLE_CUSTOM_1_CANONICAL  | Packagerepo.com                                                       |
+    | IS_SUMMARY_ACCESS_UNRESTRICTED| true                                                                  |
+    | UPSTREAM_PROXY                | Proxy sunucunuz IP 'niz veya FQDN                                          |
 
 3. Dağıtım için kapsayıcı oluşturma seçeneklerini ekleyin. Yukarıdaki örnekteki MCC kapsayıcısı oluşturma seçeneklerinde fark yoktur. Kapsayıcı oluşturma seçeneklerine bir örnek aşağıda verilmiştir.
 
@@ -110,10 +111,11 @@ Bu senaryoda, giden kimliği doğrulanmamış bir ara sunucu aracılığıyla CD
             ]
         }
     }
+}
 ```
 
-Microsoft bağlı önbelleğinin düzgün şekilde çalıştığını doğrulamak için, modülü barındıran Azure IoT Edge cihazın terminalinde aşağıdaki komutu yürütün veya ağdaki herhangi bir cihazı çalıştırın.
+Microsoft bağlı önbelleğinin düzgün şekilde çalıştığını doğrulamak için, modülü barındıran Azure IoT Edge cihazın terminalinde aşağıdaki komutu yürütün veya ağdaki herhangi bir cihazı çalıştırın. \<Azure IoT Edge Gateway IP\>IoT Edge ağ geçidinizin IP adresi veya ana bilgisayar adı ile değiştirin. (Bu raporun görünürlüğü hakkında bilgi için ortam değişkeni ayrıntılarına bakın).
 
 ```bash
-    wget "http://<Azure IOT Edge Gateway IP>/mscomtest/wuidt.gif?cacheHostOrigin=au.download.windowsupdate.com
+    wget http://<Azure IoT Edge Gateway IP>/mscomtest/wuidt.gif?cacheHostOrigin=au.download.windowsupdate.com 
 ```

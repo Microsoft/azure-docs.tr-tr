@@ -11,26 +11,31 @@ ms.date: 12/04/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6c84636ea86b3b640aef365c1c5d8e634b9a1f48
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8fe220cf7b5cb8b67e5ab7ded221494e89a28aa5
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99593172"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107530257"
 ---
 # <a name="how-to-programmatically-configure-cloud-sync-using-ms-graph-api"></a>MS Graph API kullanarak bulut eşitlemesini programlı olarak yapılandırma
 
 Aşağıdaki belge, yalnızca MSGraph API 'Leri kullanarak bir eşitleme profilinin sıfırdan nasıl çoğaltılacağını açıklamaktadır.  
 Bunun nasıl yapılacağını gösteren yapı aşağıdaki adımlardan oluşur.  Bunlar:
 
-- [Temel kurulum](#basic-setup)
-- [Hizmet sorumluları oluşturma](#create-service-principals)
-- [Eşitleme Işi oluştur](#create-sync-job)
-- [Hedeflenen etki alanını güncelleştir](#update-targeted-domain)
-- [Eşitleme parolası karmalarını etkinleştir](#enable-sync-password-hashes-on-configuration-blade)
-- [Yanlışlıkla silme](#accidental-deletes)
-- [Eşitleme işini Başlat](#start-sync-job)
-- [İnceleme durumu](#review-status)
+- [MS Graph API kullanarak bulut eşitlemesini programlı olarak yapılandırma](#how-to-programmatically-configure-cloud-sync-using-ms-graph-api)
+  - [Temel kurulum](#basic-setup)
+    - [Kiracı bayraklarını etkinleştir](#enable-tenant-flags)
+  - [Hizmet sorumlusu oluşturma](#create-service-principals)
+  - [Eşitleme işi oluştur](#create-sync-job)
+  - [Hedeflenen etki alanını güncelleştir](#update-targeted-domain)
+  - [Yapılandırma dikey penceresinde eşitleme parolası karmalarını etkinleştir](#enable-sync-password-hashes-on-configuration-blade)
+  - [Yanlışlıkla silme](#accidental-deletes)
+    - [Eşiği etkinleştirme ve ayarlama](#enabling-and-setting-the-threshold)
+    - [Silmeleri izin verme](#allowing-deletes)
+  - [Eşitleme işini Başlat](#start-sync-job)
+  - [İnceleme durumu](#review-status)
+  - [Sonraki adımlar](#next-steps)
 
 Bu [Windows PowerShell için Microsoft Azure Active Directory modülü](/powershell/module/msonline/) komutlarını, bu kiracı Için Yönetim Web hizmetini çağırabilmek üzere bir üretim kiracısı için eşitlemeyi etkinleştirmek üzere kullanın.
 
@@ -45,7 +50,7 @@ Bu [Windows PowerShell için Microsoft Azure Active Directory modülü](/powersh
 Bu iki komutun ilki Azure Active Directory kimlik bilgilerini gerektirir. Bu commandde kiracıyı örtülü olarak tanımlayıp eşitleme için etkinleştirebilmenizi sağlar.
 
 ## <a name="create-service-principals"></a>Hizmet sorumlusu oluşturma
-Sonra, [AD2AAD uygulaması/hizmet sorumlusunu](/graph/api/applicationtemplate-instantiate?view=graph-rest-beta&tabs=http) oluşturuyoruz
+Sonra, [AD2AAD uygulaması/hizmet sorumlusunu](/graph/api/applicationtemplate-instantiate?view=graph-rest-beta&tabs=http&preserve-view=true) oluşturuyoruz
 
 Bu uygulama KIMLIĞI 1a4721b3-e57f-4451-ae87-ef078703ec94 kullanmanız gerekir. DisplayName, portalda kullanılıyorsa (örneğin, contoso.com) AD etki alanı URL 'sidir, ancak başka bir şey adlandırılmış olabilir.
 
@@ -61,7 +66,7 @@ Bu uygulama KIMLIĞI 1a4721b3-e57f-4451-ae87-ef078703ec94 kullanmanız gerekir. 
 ## <a name="create-sync-job"></a>Eşitleme işi oluştur
 Yukarıdaki komutun çıktısı, oluşturulan hizmet sorumlusunun ObjectID değerini döndürür. Bu örnekte, ObjectID 614ac0e9-a59b-481f-bd8f-79a73d167e1c olur.  Bu hizmet sorumlusuna bir synchronizationJob eklemek için Microsoft Graph kullanın.  
 
-Eşitleme işi oluşturmaya yönelik belgeler [burada](/graph/api/synchronization-synchronizationjob-post?tabs=http&view=graph-rest-beta)bulunabilir.
+Eşitleme işi oluşturmaya yönelik belgeler [burada](/graph/api/synchronization-synchronizationjob-post?tabs=http&view=graph-rest-beta&preserve-view=true)bulunabilir.
 
 Yukarıdaki KIMLIĞI kaydetmediyseniz, aşağıdaki MS Graf çağrısını çalıştırarak hizmet sorumlusunu bulabilirsiniz. Dizin. Read. bu çağrıyı yapmak için tüm izinlere sahip olmanız gerekir:
  
@@ -282,11 +287,11 @@ Request Body:
 
  `GET https://graph.microsoft.com/beta/servicePrincipals/[SERVICE_PRINCIPAL_ID]/synchronization/jobs/ ` 
 
-İşlerin alınmasına ilişkin belgeler [burada](/graph/api/synchronization-synchronizationjob-list?tabs=http&view=graph-rest-beta)bulunabilir. 
+İşlerin alınmasına ilişkin belgeler [burada](/graph/api/synchronization-synchronizationjob-list?tabs=http&view=graph-rest-beta&preserve-view=true)bulunabilir. 
  
 İşi başlatmak için, ilk adımda oluşturulan hizmet sorumlusu ObjectID 'yi ve işi oluşturan istekten döndürülen iş tanımlayıcısını kullanarak bu isteği verin.
 
-Bir işi başlatmaya ilişkin belgeler [burada](/graph/api/synchronization-synchronizationjob-start?tabs=http&view=graph-rest-beta)bulunabilir. 
+Bir işi başlatmaya ilişkin belgeler [burada](/graph/api/synchronization-synchronizationjob-start?tabs=http&view=graph-rest-beta&preserve-view=true)bulunabilir. 
 
  ```
  POST  https://graph.microsoft.com/beta/servicePrincipals/8895955e-2e6c-4d79-8943-4d72ca36878f/synchronization/jobs/AD2AADProvisioning.fc96887f36da47508c935c28a0c0b6da/start
@@ -294,7 +299,7 @@ Bir işi başlatmaya ilişkin belgeler [burada](/graph/api/synchronization-synch
 
 Beklenen yanıt... HTTP 204/içerik yok.
 
-İşi denetlemeye yönelik diğer komutlar [burada](/graph/api/resources/synchronization-synchronizationjob?view=graph-rest-beta)belgelenmiştir.
+İşi denetlemeye yönelik diğer komutlar [burada](/graph/api/resources/synchronization-synchronizationjob?view=graph-rest-beta&preserve-view=true)belgelenmiştir.
  
 Bir işi yeniden başlatmak için, bunlardan biri kullanılır...
 
@@ -320,4 +325,4 @@ Bir işi yeniden başlatmak için, bunlardan biri kullanılır...
 
 - [Azure AD Connect bulut eşitlemesi nedir?](what-is-cloud-sync.md)
 - [Dönüşümler](how-to-transformation.md)
-- [Azure AD eşitleme API 'SI](/graph/api/resources/synchronization-overview?view=graph-rest-beta)
+- [Azure AD eşitleme API 'SI](/graph/api/resources/synchronization-overview?view=graph-rest-beta&preserve-view=true)

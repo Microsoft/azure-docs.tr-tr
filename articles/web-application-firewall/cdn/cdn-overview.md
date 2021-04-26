@@ -8,10 +8,10 @@ ms.topic: conceptual
 ms.date: 08/31/2020
 ms.author: victorh
 ms.openlocfilehash: cd1f21f150094094a6bf856b04a64a02963f35a8
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102521722"
 ---
 # <a name="azure-web-application-firewall-on-azure-content-delivery-network-from-microsoft"></a>Microsoft 'tan Azure Content Delivery Network Azure Web uygulaması güvenlik duvarı

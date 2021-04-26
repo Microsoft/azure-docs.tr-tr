@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 3/27/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: ee06eed1b8f54877d01a8b316c015938038879cf
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 8c8b0f37729ea20a62838d736dbed59f05c584c6
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94535410"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780434"
 ---
 # <a name="how-to-back-up-and-restore-a-server-in-azure-database-for-mysql-using-the-azure-cli"></a>Azure CLı kullanarak MySQL için Azure veritabanı 'nda bir sunucuyu yedekleme ve geri yükleme
 
@@ -56,7 +56,7 @@ Yedekleme bekletme süresi, kullanılabilir yedeklemeler temel aldığı için z
 ## <a name="server-point-in-time-restore"></a>Sunucu zaman içinde geri yükleme
 Sunucuyu zaman içinde önceki bir noktaya geri yükleyebilirsiniz. Geri yüklenen veriler yeni bir sunucuya kopyalanır ve var olan sunucu olduğu gibi bırakılır. Örneğin, bir tablo yanlışlıkla öğleden sonra bırakılırsa, gece ' e kadar olan saate geri yükleyebilirsiniz. Daha sonra, eksik tablo ve verileri, sunucunun geri yüklenen kopyasından elde edebilirsiniz. 
 
-Sunucuyu geri yüklemek için Azure CLı [az MySQL Server restore](/cli/azure/mysql/server#az-mysql-server-restore) komutunu kullanın.
+Sunucuyu geri yüklemek için Azure CLı [az MySQL Server restore](/cli/azure/mysql/server#az_mysql_server_restore) komutunu kullanın.
 
 ### <a name="run-the-restore-command"></a>Restore komutunu çalıştırın
 

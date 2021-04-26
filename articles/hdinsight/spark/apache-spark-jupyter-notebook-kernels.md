@@ -6,10 +6,10 @@ ms.topic: how-to
 ms.custom: hdinsightactive,hdiseo17may2017,seoapr2020
 ms.date: 04/24/2020
 ms.openlocfilehash: ef2bc5e00779200e5447c8829a437824657a2227
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104865987"
 ---
 # <a name="kernels-for-jupyter-notebook-on-apache-spark-clusters-in-azure-hdinsight"></a>Azure HDInsight 'ta Apache Spark kümelerinde Jupyter Notebook kernels
@@ -67,7 +67,7 @@ Spark HDInsight kümelerinde Jupyter Notebook yeni çekirdekler kullanmanın baz
 
     Aşağıdaki tabloda kernels aracılığıyla kullanılabilen farklı mıknatıler listelenmiştir.
 
-   | Magic | Örnek | Açıklama |
+   | Magic | Örnek | Description |
    | --- | --- | --- |
    | Yardım |`%%help` |Örnek ve açıklama ile tüm kullanılabilir mıknatıc 'nin bir tablosunu oluşturur |
    | bilgiler |`%%info` |Geçerli Livy uç noktası için oturum bilgilerini çıkışlar |
@@ -87,7 +87,7 @@ Spark HDInsight kümelerinde Jupyter Notebook yeni çekirdekler kullanmanın baz
 
 `%%sql`Magic, sorguları çalıştırdığınızda aldığınız çıkışın türünü denetlemek için kullanabileceğiniz farklı parametreleri destekler. Aşağıdaki tabloda çıkış listelenmiştir.
 
-| Parametre | Örnek | Açıklama |
+| Parametre | Örnek | Description |
 | --- | --- | --- |
 | -o |`-o <VARIABLE NAME>` |Sorgunun sonucunu%% yerel Python bağlamında [Pandas](https://pandas.pydata.org/) dataframe olarak kalıcı hale getirmek için bu parametreyi kullanın. Dataframe değişkeninin adı belirttiğiniz değişken adıdır. |
 | -q |`-q` |Hücrenin görselleştirmeleri devre dışı bırakmak için bu parametreyi kullanın. Bir hücrenin içeriğini görselleştirmeyi ve yalnızca bir veri çerçevesi olarak yakalamak istemiyorsanız, öğesini kullanın `-q -o <VARIABLE>` . Sonuçları yakalamadan görselleştirmeleri devre dışı bırakmak istiyorsanız (örneğin, bir SQL sorgusunu bir ifade gibi çalıştırmak için `CREATE TABLE` ), `-q` bir `-o` bağımsız değişken belirtmeden kullanın. |

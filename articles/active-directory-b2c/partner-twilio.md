@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 06/08/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 953653a758577ed3d48ca2d81403b4cb363ea294
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9a7f22b05238fb495422a02edd6ca382b4df041a
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95994052"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257815"
 ---
 # <a name="integrating-twilio-verify-app-with-azure-active-directory-b2c"></a>Twilio Verify uygulamasını Azure Active Directory B2C ile tümleştirme
 
@@ -124,4 +124,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [AAD B2C özel ilkeler](custom-policy-overview.md)
 
-- [AAD B2C özel ilkeleri kullanmaya başlama](custom-policy-get-started.md?tabs=applications)
+- [AAD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

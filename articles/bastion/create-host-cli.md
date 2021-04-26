@@ -7,12 +7,12 @@ ms.service: bastion
 ms.topic: how-to
 ms.date: 10/14/2020
 ms.author: cherylmc
-ms.openlocfilehash: e4f0a3ea85fa479826fe9e666df2b18f8dba7ce3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8654b557de8242910c665596ca8bfd29fe86d1ff
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92079131"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106578834"
 ---
 # <a name="create-an-azure-bastion-host-using-azure-cli"></a>Azure CLI’yi kullanarak bir Azure Bastion konağı oluşturma
 
@@ -25,6 +25,10 @@ Bu makalede, Azure CLı kullanarak Azure savunma ana bilgisayarı oluşturma iş
 Azure aboneliğiniz olduğunu doğrulayın. Henüz Azure aboneliğiniz yoksa [MSDN abonelik avantajlarınızı](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details) etkinleştirebilir veya [ücretsiz bir hesap](https://azure.microsoft.com/pricing/free-trial) için kaydolabilirsiniz.
 
 [!INCLUDE [Cloud Shell CLI](../../includes/vpn-gateway-cloud-shell-cli.md)]
+
+ >[!NOTE]
+ >Azure Özel DNS bölgeleriyle Azure savunma kullanımı Şu anda desteklenmiyor. Başlamadan önce lütfen savunma kaynağınızı dağıtmayı planladığınız sanal ağın özel bir DNS bölgesine bağlı olmadığından emin olun.
+ >
 
 ## <a name="create-a-bastion-host"></a><a name="createhost"></a>Savunma Konağı oluşturma
 

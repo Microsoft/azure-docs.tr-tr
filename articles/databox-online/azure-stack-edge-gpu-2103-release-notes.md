@@ -8,12 +8,12 @@ ms.subservice: edge
 ms.topic: article
 ms.date: 03/23/2021
 ms.author: alkohli
-ms.openlocfilehash: 846d4a259f0fcd204bcad6c898efc999c3765fd3
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 4d2a345ed49fae2e1d77b3c5da44b305d069874e
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104962739"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105729465"
 ---
 # <a name="azure-stack-edge-2103-release-notes"></a>Azure Stack Edge 2103 sürüm notları
 
@@ -98,7 +98,7 @@ Aşağıdaki tabloda, önceki sürümlerden gerçekleştirilen bilinen sorunlar�
 |**renkli.**|Kubernetes + güncelleştirme |2008 yayınları gibi eski yazılım sürümlerinin, bu güncelleştirme ClusterConnectionException ile başarısız olmasına neden olan bir yarış durumu güncelleştirme sorunu vardır. |Yeni derlemelerin kullanılması bu sorundan kaçınmak için yardımcı olmalıdır. Bu sorunu hala görüyorsanız, geçici çözüm yükseltmeyi yeniden denemeli ve çalışır.|
 |**2.0**|Internet Explorer|Gelişmiş güvenlik özellikleri etkinse, yerel Web UI sayfalarına erişemeyebilirsiniz. | Gelişmiş güvenliği devre dışı bırakın ve tarayıcınızı yeniden başlatın.|
 |**21.**|Kubernetes panosu | SSL sertifikası ile Kubernetes panosu için *https* uç noktası desteklenmiyor. | |
-|**#c16.**|Kubernetes |Kubernetes, .NET uygulamaları tarafından kullanılan ortam değişkeni adlarında ":" öğesini desteklemez. Bu ayrıca Event Grid IoT Edge modülünün Azure Stack Edge cihazında ve diğer uygulamalarda çalışması için de gereklidir. Daha fazla bilgi için bkz. [ASP.NET Core documentation](/aspnet/core/fundamentals/configuration/?tabs=basicconfiguration&view=aspnetcore-3.1&preserve-view=true#environment-variables).|":" Öğesini çift alt çizgi ile değiştirin. Daha fazla bilgi için bkz. [Kubernetes sorunu](https://github.com/kubernetes/kubernetes/issues/53201)|
+|**#c16.**|Kubernetes |Kubernetes, .NET uygulamaları tarafından kullanılan ortam değişkeni adlarında ":" öğesini desteklemez. Bu ayrıca Event Grid IoT Edge modülünün Azure Stack Edge cihazında ve diğer uygulamalarda çalışması için de gereklidir. Daha fazla bilgi için bkz. [ASP.NET Core documentation](/aspnet/core/fundamentals/configuration/?tabs=basicconfiguration#environment-variables).|":" Öğesini çift alt çizgi ile değiştirin. Daha fazla bilgi için bkz. [Kubernetes sorunu](https://github.com/kubernetes/kubernetes/issues/53201)|
 |**2008.** |Azure Arc + Kubernetes kümesi |Varsayılan olarak, `yamls` Git deposundan kaynak silindiğinde, ilgili kaynaklar Kubernetes kümesinden silinmez.  |Git deposundan silindiklerinde kaynakların silinmesine izin vermek için `--sync-garbage-collection` yay OperatorParams ' de ayarlayın. Daha fazla bilgi için bkz. [yapılandırmayı silme](../azure-arc/kubernetes/use-gitops-connected-cluster.md#additional-parameters). |
 |**24.**|NFS |NFS kullanan uygulamalar, verileri yazmak için cihazınızda paylaşılan takar ve özel yazma kullanmalıdır. Bu sayede yazma işlemleri diske yazılır.| |
 |**250.**|İşlem yapılandırması |İşlem yapılandırması, ağ geçitlerinde ağ geçitleri veya anahtarların veya yönlendiricilerin ağda bulunmayan sistemler için Adres Çözümleme Protokolü (ARP) isteklerine yanıt verdiği ağ yapılandırmalarında başarısız olur.| |

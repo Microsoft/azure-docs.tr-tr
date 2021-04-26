@@ -10,14 +10,14 @@ author: gvashishtha
 ms.reviewer: larryfr
 ms.date: 03/25/2021
 ms.topic: conceptual
-ms.custom: how-to, devx-track-python, deploy, devx-track-azurecli
+ms.custom: how-to, devx-track-python, deploy, devx-track-azurecli, contperf-fy21q2
 adobe-target: true
-ms.openlocfilehash: 4d2aa4d43fbc8cf9040702afb1877e0271b2eab2
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: f2128949090ce0ec2aa4ed66eb476384d662953a
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105568299"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872650"
 ---
 # <a name="deploy-machine-learning-models-to-azure"></a>Makine öğrenimi modellerini Azure 'a dağıtma
 
@@ -112,7 +112,7 @@ az ml model register -n onnx_mnist -p mnist/model.onnx
 
 Model kaydına birden çok dosya eklemek için, `-p` dosyaları içeren bir klasörün yoluna ayarlayın.
 
-Hakkında daha fazla bilgi için `az ml model register` [başvuru belgelerine](/cli/azure/ext/azure-cli-ml/ml/model)bakın.
+Hakkında daha fazla bilgi için `az ml model register` [başvuru belgelerine](/cli/azure/ml/model)bakın.
 
 # <a name="python"></a>[Python](#tab/python)
 
@@ -321,7 +321,7 @@ Artık modelinizi dağıtmaya hazırsınız.
 Modelinize Azure Machine Learning çalışma alanınızda kaydolduysanız, "MyModel: 1" değerini modelinizin adı ve sürüm numarası ile değiştirin.
 
 ```azurecli-interactive
-az ml model deploy -m mymodel:1 --ic inferenceconfig.json --dc deploymentconfig.json
+az ml model deploy -n tutorial -m mymodel:1 --ic inferenceconfig.json --dc deploymentconfig.json
 ```
 
 ### <a name="using-a-local-model"></a>Yerel model kullanma
@@ -390,7 +390,7 @@ Dağıtılan bir Web hizmetini silmek için kullanın `az ml service <name of we
 
 Çalışma alanınızdan kayıtlı bir modeli silmek için şunu kullanın `az ml model delete <model id>`
 
-[Bir Web hizmetini silme](/cli/azure/ext/azure-cli-ml/ml/service#ext-azure-cli-ml-az-ml-service-delete) ve [bir modeli silme](/cli/azure/ext/azure-cli-ml/ml/model#ext-azure-cli-ml-az-ml-model-delete)hakkında daha fazla bilgi edinin.
+[Bir Web hizmetini silme](/cli/azure/ml/service#az_ml_service_delete) ve [bir modeli silme](/cli/azure/ml/model#az_ml_model_delete)hakkında daha fazla bilgi edinin.
 
 # <a name="python"></a>[Python](#tab/python)
 

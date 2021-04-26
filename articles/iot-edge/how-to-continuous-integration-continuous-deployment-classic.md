@@ -8,12 +8,12 @@ ms.date: 08/26/2020
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 218c0f345e4ea453a2300b3de85ac8856a09c6ee
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: f7c28ecbaa58731c528a9ecb5f869eba2bc0c99f
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103199285"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484430"
 ---
 # <a name="continuous-integration-and-continuous-deployment-to-azure-iot-edge-devices-classic-editor"></a>Azure IoT Edge cihazlara sürekli tümleştirme ve sürekli dağıtım (klasik düzenleyici)
 
@@ -162,7 +162,7 @@ Bu işlem hattı, artık yeni kodu depoya gönderdiğinizde otomatik olarak çal
 >[!NOTE]
 >İşlem hattınızda **katmanlı dağıtımlar** kullanmak istiyorsanız, katmanlı dağıtımlar henüz Azure devops 'daki Azure IoT Edge görevlerinde desteklenmez.
 >
->Ancak, [Azure DevOps 'da bir Azure CLI görevi](/azure/devops/pipelines/tasks/deploy/azure-cli) kullanarak dağıtımınızı katmanlı bir dağıtım olarak oluşturabilirsiniz. **Satır Içi betik** değeri için [az IoT Edge Deployment Create komutunu](/cli/azure/ext/azure-iot/iot/edge/deployment)kullanabilirsiniz:
+>Ancak, [Azure DevOps 'da bir Azure CLI görevi](/azure/devops/pipelines/tasks/deploy/azure-cli) kullanarak dağıtımınızı katmanlı bir dağıtım olarak oluşturabilirsiniz. **Satır Içi betik** değeri için [az IoT Edge Deployment Create komutunu](/cli/azure/iot/edge/deployment)kullanabilirsiniz:
 >
 >   ```azurecli-interactive
 >   az iot edge deployment create -d {deployment_name} -n {hub_name} --content modules_content.json --layered true

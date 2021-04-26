@@ -12,12 +12,12 @@ ms.author: datrigan
 ms.reviewer: vanto
 ms.date: 01/25/2021
 tags: azure-synpase
-ms.openlocfilehash: b10b00e724324779eb753bfefccce77a5eb2a39d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ccc648f06cad46b490ac73fe777066c9de2ff2b9
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98918120"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106551654"
 ---
 # <a name="dynamic-data-masking"></a>Dinamik veri maskeleme 
 [!INCLUDE[appliesto-sqldb-sqlmi-asa](../includes/appliesto-sqldb-sqlmi-asa.md)]
@@ -72,13 +72,13 @@ Veri maskeleme ilkesini ve kurallarını programlı bir şekilde yönetmek için
 
 ### <a name="data-masking-policies"></a>Veri maskeleme ilkeleri
 
-- [Oluştur veya Güncelleştir](/rest/api/sql/datamaskingpolicies/createorupdate): veritabanı veri maskeleme ilkesi oluşturur veya güncelleştirir.
-- [Get](/rest/api/sql/datamaskingpolicies/get): bir veritabanı veri maskeleme ilkesi alır. 
+- [Oluştur veya Güncelleştir](/rest/api/sql/2014-04-01/datamaskingpolicies/createorupdate): veritabanı veri maskeleme ilkesi oluşturur veya güncelleştirir.
+- [Get](/rest/api/sql/2014-04-01/datamaskingpolicies/get): bir veritabanı veri maskeleme ilkesi alır. 
 
 ### <a name="data-masking-rules"></a>Veri maskeleme kuralları
 
-- [Oluştur veya Güncelleştir](/rest/api/sql/datamaskingrules/createorupdate): bir veritabanı veri maskeleme kuralı oluşturur veya güncelleştirir.
-- [Veritabanına göre Listele](/rest/api/sql/datamaskingrules/listbydatabase): veritabanı veri maskeleme kurallarının bir listesini alır.
+- [Oluştur veya Güncelleştir](/rest/api/sql/2014-04-01/datamaskingrules/createorupdate): bir veritabanı veri maskeleme kuralı oluşturur veya güncelleştirir.
+- [Veritabanına göre Listele](/rest/api/sql/2014-04-01/datamaskingrules/listbydatabase): veritabanı veri maskeleme kurallarının bir listesini alır.
 
 ## <a name="permissions"></a>İzinler
 
@@ -86,4 +86,4 @@ Dinamik veri maskeleme, Azure SQL veritabanı yöneticisi, Sunucu Yöneticisi ve
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Dinamik Veri Maskeleme](/sql/relational-databases/security/dynamic-data-masking)
+[Dinamik veri maskeleme](/sql/relational-databases/security/dynamic-data-masking)

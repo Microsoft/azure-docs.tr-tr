@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.date: 03/22/2021
 ms.author: cynthn
 ms.reviewer: jagaveer
-ms.openlocfilehash: 90ad35757834c14abdffb017ff31b3296074ca24
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 8e8bdaa7a812d8c7accfea59b58b75a58d50e21e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104802446"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107789618"
 ---
 # <a name="deploy-azure-spot-virtual-machines-using-the-azure-cli"></a>Azure CLı kullanarak Azure spot sanal makineleri dağıtma
 
@@ -31,7 +31,7 @@ Azure CLı kullanarak Azure spot sanal makinesi oluşturma işlemi [hızlı baş
 
 Azure spot sanal makineleri oluşturmak için Azure CLı sürüm 2.0.74 veya üstünü çalıştırıyor olmanız gerekir. Sürümü bulmak için **az--Version** ' i çalıştırın. Yükleme veya yükseltme yapmanız gerekirse bkz. [Azure CLI’yı yükleme](/cli/azure/install-azure-cli). 
 
-[Az Login](/cli/azure/reference-index#az-login)kullanarak Azure 'da oturum açın.
+[Az Login](/cli/azure/reference-index#az_login)kullanarak Azure 'da oturum açın.
 
 ```azurecli-interactive
 az login

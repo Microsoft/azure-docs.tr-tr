@@ -7,12 +7,12 @@ services: iot-fundamentals
 ms.topic: conceptual
 ms.date: 01/15/2020
 ms.author: dobett
-ms.openlocfilehash: 0cd98705d2d6947ff766f528e4e92f1e51bcc42d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 311f8164803dd12664aa193f08c8a1095ee07e31
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96852821"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168714"
 ---
 # <a name="what-azure-technologies-and-services-can-you-use-to-create-iot-solutions"></a>IoT çözümleri oluşturmak için hangi Azure teknolojilerini ve hizmetlerini kullanabilirsiniz?
 
@@ -29,7 +29,7 @@ Azure IoT teknolojileri ve Hizmetleri, kuruluşunuz için dijital dönüştürme
 
 Azure IoT Central, özel IoT çözümleri oluşturmak için kullanabileceğiniz tam olarak yönetilen bir uygulama platformudur. IoT Central çözümler oluşturmak için uygulama şablonlarını kullanır. Genel çözümler ve enerji, sağlık, devlet ve perakende gibi belirli sektörlerde şablonlar vardır. IoT Central uygulama şablonları, daha sonra Temalar, panolar ve görünümlerle özelleştirebileceğiniz bir IoT Central uygulamasını dakikalar içinde dağıtmanıza olanak tanır.
 
-Çözümünüze hızlı bir şekilde bağlanmak için [IoT Için Azure Sertifikalı cihaz kataloğu](https://catalog.azureiotsolutions.com) ' ndan cihazları seçin. Cihazınızı izlemek ve yönetmek için IoT Central Web Kullanıcı arabirimini kullanarak cihazları sağlıklı ve bağlı tutmaya devam edin. IoT Central uygulamanızı diğer iş uygulamalarıyla tümleştirmek için bağlayıcılar ve API 'Leri kullanın.
+Çözümünüze hızlı bir şekilde bağlanmak için [IoT Için Azure Sertifikalı cihaz kataloğu](https://devicecatalog.azure.com) ' ndan cihazları seçin. Cihazınızı izlemek ve yönetmek için IoT Central Web Kullanıcı arabirimini kullanarak cihazları sağlıklı ve bağlı tutmaya devam edin. IoT Central uygulamanızı diğer iş uygulamalarıyla tümleştirmek için bağlayıcılar ve API 'Leri kullanın.
 
 Tam olarak yönetilen bir uygulama platformu olarak, IoT Central basit ve öngörülebilir bir fiyatlandırma modeline sahiptir.
 
@@ -52,7 +52,7 @@ Sıfırdan bir IoT çözümü oluşturmak veya IoT Central veya çözüm Hızlan
 
 ### <a name="devices"></a>Cihazlar
 
-[Azure IoT başlangıç setlerinden](https://catalog.azureiotsolutions.com/kits) birini kullanarak IoT cihazlarınızı geliştirin veya [IoT cihaz kataloğu için Azure Sertifikalı](https://catalog.azureiotsolutions.com)bir cihaz seçin. Açık kaynak [cihaz SDK](../iot-hub/iot-hub-devguide-sdks.md)'larını kullanarak katıştırılmış kodunuzu uygulayın. Cihaz SDK 'Ları, Linux, Windows ve gerçek zamanlı işletim sistemleri gibi birden çok işletim sistemini destekler. [C](https://github.com/Azure/azure-iot-sdk-c), [Node.js](https://github.com/Azure/azure-iot-sdk-node), [Java](https://github.com/Azure/azure-iot-sdk-java), [.net](https://github.com/Azure/azure-iot-sdk-csharp)ve [Python](https://github.com/Azure/azure-iot-sdk-python)gibi birden çok programlama dili için SDK 'lar vardır.
+[Azure IoT başlangıç setlerinden](https://devicecatalog.azure.com/kits) birini kullanarak IoT cihazlarınızı geliştirin veya [IoT cihaz kataloğu için Azure Sertifikalı](https://devicecatalog.azure.com)bir cihaz seçin. Açık kaynak [cihaz SDK](../iot-hub/iot-hub-devguide-sdks.md)'larını kullanarak katıştırılmış kodunuzu uygulayın. Cihaz SDK 'Ları, Linux, Windows ve gerçek zamanlı işletim sistemleri gibi birden çok işletim sistemini destekler. [C](https://github.com/Azure/azure-iot-sdk-c), [Node.js](https://github.com/Azure/azure-iot-sdk-node), [Java](https://github.com/Azure/azure-iot-sdk-java), [.net](https://github.com/Azure/azure-iot-sdk-csharp)ve [Python](https://github.com/Azure/azure-iot-sdk-python)gibi birden çok programlama dili için SDK 'lar vardır.
 
 [Iot Tak ve kullan](../iot-pnp/overview-iot-plug-and-play.md) hizmetini kullanarak cihazlarınız için katıştırılmış kodu nasıl oluşturacağınız hakkında daha fazla basitleşebilir. IoT Tak ve Kullan, çözüm geliştiricilerinin, ekli kod yazmadan cihazları çözümlerle tümleştirmelerini sağlar. IoT Tak ve Kullan 'nin çekirdeğinden, cihaz yeteneklerini tanımlayan bir _cihaz yetenek modeli_ şemadır. Katıştırılmış cihaz kodunuzu oluşturmak ve IoT Central uygulaması gibi bulut tabanlı bir çözümü yapılandırmak için cihaz yetenek modelini kullanın.
 

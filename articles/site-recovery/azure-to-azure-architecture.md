@@ -2,18 +2,15 @@
 title: Azure 'dan Azure 'a olağanüstü durum kurtarma mimarisi Azure Site Recovery
 description: Azure Site Recovery hizmetini kullanarak Azure VM 'Leri için Azure bölgeleri arasında olağanüstü durum kurtarmayı ayarlarken kullanılan mimariye genel bakış.
 services: site-recovery
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 3/13/2020
-ms.author: raynew
-ms.openlocfilehash: 64d1084fd7025c74676977f065062e5e94dabf1d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 38bf9d41f81a76c4263952a94b5526984db0705f
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97652254"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106580934"
 ---
 # <a name="azure-to-azure-disaster-recovery-architecture"></a>Azure'dan Azure'a olağanüstü durum kurtarma mimarisi
 

@@ -7,14 +7,14 @@ ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 03/04/2021
+ms.date: 03/23/2021
 ms.author: justinha
-ms.openlocfilehash: fec2695c9e196a652a4166161bf012b22b0d00e6
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 928b1a6dcff7ad186bf5fe9ce07d1a886d429867
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104579561"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105933347"
 ---
 # <a name="tutorial-configure-secure-ldap-for-an-azure-active-directory-domain-services-managed-domain"></a>Öğretici: Azure Active Directory Domain Services yönetilen bir etki alanı için Güvenli LDAP yapılandırma
 
@@ -298,6 +298,21 @@ Bu öğreticinin bağlantısını test etmek için bilgisayarınızın yerel Hos
 1. Yerel makinenizde, yönetici olarak *Not defteri* 'ni açın
 1. *C:\Windows\system32\drivers\etc\hosts* dosyasına göz atın ve dosyayı açın
 1. Eklediğiniz kaydın satırını silin, örneğin `168.62.205.103    ldaps.aaddscontoso.com`
+
+## <a name="troubleshooting"></a>Sorun giderme
+
+LDAP.exe bağlanamadiğini belirten bir hata görürseniz, bağlantıyı alma ile ilgili farklı yönleri kullanarak çalışmayı deneyin: 
+
+1. Etki alanı denetleyicisini yapılandırma
+1. İstemciyi yapılandırma
+1. Ağ
+1. TLS oturumu oluşturma
+
+Sertifika konu adı eşleşmesi için, DC sertifika deposunda sertifika aramak için Azure, etki alanı adı (Azure AD etki alanı adı değil) ekleme ' yi kullanır. Örneğin, DC 'nin doğru sertifikayı seçmesini engellemek gibi yazım hataları. 
+
+İstemci, girdiğiniz adı kullanarak TLS bağlantısı kurmayı dener. Trafiğin her şekilde tüm şekilde alınması gerekir. DC, sunucu kimlik doğrulama sertifikası ortak anahtarını gönderir. Sertifikanın sertifikada doğru kullanımı gerekir, bu ad, istemcinin bağlanmakta olduğunuz DNS adı olduğunu (yani, bir joker karakter, yazım hatası olmadan çalışır) ve istemcinin verenle güvenmesi gereken DNS adı olduğunu güvenmesi için uyumlu olmalıdır. Olay Görüntüleyicisi sistem günlüğünde bu zincirde herhangi bir sorunu denetleyebilir ve kaynak eşittir SChannel ' ın olaylarını filtreleyebilirsiniz. Bu parçalar hazır olduktan sonra bir oturum anahtarı oluşturur.  
+
+Daha fazla bilgi için bkz. [TLS el sıkışması](https://docs.microsoft.com/windows/win32/secauthn/tls-handshake-protocol).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

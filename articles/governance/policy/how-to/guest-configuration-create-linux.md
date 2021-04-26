@@ -1,15 +1,15 @@
 ---
 title: Linux için Konuk Yapılandırma ilkelerini oluşturma
 description: Linux için Azure Ilkesi Konuk yapılandırma ilkesi oluşturmayı öğrenin.
-ms.date: 08/17/2020
+ms.date: 03/31/2021
 ms.topic: how-to
 ms.custom: devx-track-azurepowershell
-ms.openlocfilehash: 352c8b1936c38c9b5f706ac88bd4fd06e008b892
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d356960987ecfe9a1e1858a28b93060dbf4aa634
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99525356"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106096572"
 ---
 # <a name="how-to-create-guest-configuration-policies-for-linux"></a>Linux için Konuk Yapılandırma ilkelerini oluşturma
 
@@ -90,9 +90,7 @@ DSC, InSpec 'in nasıl yürütüldüğünü, parametrelerin nasıl sağlandığ�
 
 Özel yapılandırmanın adı her yerde tutarlı olmalıdır. İçerik paketi için. zip dosyasının adı, MOF dosyasındaki yapılandırma adı ve Azure Resource Manager şablonundaki (ARM şablonu) Konuk atama adı aynı olmalıdır.
 
-PowerShell cmdlet 'leri, paketi oluşturmaya yardımcı olur.
-Kök düzey klasörü veya sürüm klasörü gerekli değil.
-Paket biçimi bir. zip dosyası olmalıdır. ve sıkıştırılmamış olarak toplam 100 MB 'ın boyutunu aşamaz.
+PowerShell cmdlet 'leri, paketi oluşturmaya yardımcı olur. Kök düzey klasörü veya sürüm klasörü gerekli değil. Paket biçimi bir. zip dosyası olmalıdır. ve sıkıştırılmamış olarak 100 MB 'lık toplam boyutu aşamaz.
 
 ### <a name="custom-guest-configuration-configuration-on-linux"></a>Linux üzerinde özel konuk yapılandırma yapılandırması
 
@@ -211,7 +209,7 @@ Sonraki adım, dosyayı Azure Blob depolama alanına yayımlamaktır. Komut `Pub
 - **Yol**: yayımlanacak paketin konumu
 - **Resourcegroupname**: depolama hesabının bulunduğu kaynak grubunun adı
 - **StorageAccountName**: paketin yayımlanması gereken depolama hesabının adı
-- **Storagecontainername**: (varsayılan: *guestconfiguration*) depolama hesabındaki depolama kapsayıcısının adı
+- **Storagecontainername**: (varsayılan: _guestconfiguration_) depolama hesabındaki depolama kapsayıcısının adı
 - **Zorla**: aynı ada sahip depolama hesabındaki mevcut paketin üzerine yaz
 
 Aşağıdaki örnek, paketi ' guestconfiguration ' depolama kapsayıcısı adına yayımlar.
@@ -277,7 +275,7 @@ Azure 'da oluşturulan ilkeyle, son adım tanımlamayı atayacaktır. Bkz. tanı
 
 ### <a name="using-parameters-in-custom-guest-configuration-policies"></a>Özel Konuk yapılandırma ilkelerinde parametreleri kullanma
 
-Konuk yapılandırması, çalışma zamanında bir yapılandırmanın özelliklerini geçersiz kılmayı destekler. Bu özellik, paketteki MOF dosyasındaki değerlerin statik olarak değerlendirilmesi gerekmediği anlamına gelir. Geçersiz kılma değerleri Azure Ilkesi aracılığıyla sağlanır ve yapılandırmaların nasıl yazıldığı veya derlendiğini etkilemez.
+Konuk yapılandırması, çalışma zamanında bir yapılandırmanın özelliklerini geçersiz kılmayı destekler. Bu özellik, paketteki MOF dosyasındaki değerlerin statik olarak değerlendirilmesi gerekmediği anlamına gelir. Geçersiz kılma değerleri Azure Ilkesi aracılığıyla sağlanır ve yapılandırmaların nasıl yazıldığı veya derlendiğini değiştirmez.
 
 InSpec ile parametreler tipik olarak çalışma zamanında ya da öznitelikler kullanılarak kod olarak işlenir. Konuk yapılandırması bu işlemi, ilke atandığında giriş sağlanabileceği şekilde gizleme. Makine içinde bir öznitelik dosyası otomatik olarak oluşturulur. Projenizde bir dosya oluşturmanız ve eklemeniz gerekmez. Linux Denetim projenize parametre eklemenin iki adımı vardır.
 
@@ -350,8 +348,7 @@ New-GuestConfigurationPolicy -ContentUri $uri `
 > [!NOTE]
 > `version`Konuk yapılandırma atamasının özelliği yalnızca Microsoft tarafından barındırılan etkiler. Özel içerik sürümü oluşturma için en iyi yöntem, dosyanın dosya adına dahil edileceğini içerir.
 
-İlk olarak, çalışırken `New-GuestConfigurationPackage` , paket için önceki sürümlerden benzersiz olan bir ad belirtin. Adında bir sürüm numarası dahil edebilirsiniz `PackageName_1.0.0` .
-Bu örnekteki sayı yalnızca paketin benzersiz olması için kullanılır, paketin diğer paketlerden daha yeni veya daha eski olarak değerlendirilmesi gerektiğini belirtmemelidir.
+İlk olarak, çalışırken `New-GuestConfigurationPackage` , paket için önceki sürümlerden benzersiz olan bir ad belirtin. Adında bir sürüm numarası dahil edebilirsiniz `PackageName_1.0.0` . Bu örnekteki sayı yalnızca paketin benzersiz olması için kullanılır, paketin diğer paketlerden daha yeni veya daha eski olarak değerlendirilmesi gerektiğini belirtmemelidir.
 
 İkinci olarak, `New-GuestConfigurationPolicy` aşağıdaki açıklamaları izleyerek cmdlet ile birlikte kullanılan parametreleri güncelleştirin.
 

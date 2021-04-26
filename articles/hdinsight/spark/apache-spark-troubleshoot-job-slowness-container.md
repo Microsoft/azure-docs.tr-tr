@@ -4,12 +4,12 @@ description: Azure depolama kapsayıcısı Azure HDInsight 'ta çok sayıda dosy
 ms.service: hdinsight
 ms.topic: troubleshooting
 ms.date: 08/21/2019
-ms.openlocfilehash: c26baec66248ca00ef212acf3d773c2566b3aea9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d256292956b42c65722ea5f9c87d6835297d1d40
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98946363"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219102"
 ---
 # <a name="apache-spark-job-run-slowly-when-the-azure-storage-container-contains-many-files-in-azure-hdinsight"></a>Azure HDInsight’ta Azure depolama kapsayıcısı birçok dosya içerdiğinde Apache Spark işleri yavaş çalışıyor
 
@@ -28,6 +28,8 @@ Bölümleri izlemek için Spark 'ın `FileStatusCache` Dizin yapısı hakkında 
 Spark 2,1 ' de, her yazma işleminden sonra önbelleği güncelleştirmemiz gerekirken, Spark var olan bir bölüm sütununun geçerli yazma isteğinde önerilen ile eşleşip eşleşmediğini kontrol eder, bu nedenle, her yazma işlemi sırasında listeleme işlemlerine da yol açabilir.
 
 Spark 2,2 ' de, ekleme moduyla veri yazarken bu performans sorunu düzeltilmelidir.
+
+Spark 2,3 ' de Spark 2,2 ile aynı davranış beklenmektedir.
 
 ## <a name="resolution"></a>Çözüm
 

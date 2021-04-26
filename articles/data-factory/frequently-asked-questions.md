@@ -6,12 +6,12 @@ ms.author: weetok
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 02/10/2020
-ms.openlocfilehash: d0fd62c0173bec17c217ece5560119749d1a4fc6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 2027e3555a7eb616ad024ec00bf6b0f8f452167c
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101739343"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258529"
 ---
 # <a name="azure-data-factory-faq"></a>Azure Data Factory Hakkında SSS
 
@@ -226,86 +226,11 @@ Diğer bağlayıcılardan herhangi birinden veri hazırlamak için kopyalama etk
 
 ### <a name="is-the-self-hosted-integration-runtime-available-for-data-flows"></a>Şirket içinde barındırılan tümleştirme çalışma zamanı veri akışları için kullanılabilir mi?
 
-Şirket içinde barındırılan IR, şirket içi veya VM tabanlı veri kaynaklarına ve havuza veri almak veya buradan veri aktarmak için kopyalama etkinliğiyle birlikte kullanabileceğiniz bir ADF işlem hattı yapısıdır. Verileri bir kopyalama ile önce, ardından dönüştürme için veri akışı ve ardından bu dönüştürülmüş verileri şirket içi depoya geri taşımanız gerekiyorsa sonraki bir kopya.
+Şirket içinde barındırılan IR, şirket içi veya VM tabanlı veri kaynaklarına ve havuza veri almak veya buradan veri aktarmak için kopyalama etkinliğiyle birlikte kullanabileceğiniz bir ADF işlem hattı yapısıdır. Şirket içinde barındırılan bir IR için kullandığınız sanal makineler, ADF 'den bu veri depolarına erişim için korunan veri depolarınız ile aynı VNET 'in içine de yerleştirilebilir. Veri akışları ile, bunun yerine yönetilen VNET ile Azure IR ile aynı son sonuçları elde edersiniz.
 
 ### <a name="does-the-data-flow-compute-engine-serve-multiple-tenants"></a>Veri akışı işlem altyapısı birden çok kiracıya sahip mi?
 
 Kümeler hiçbir şekilde paylaşılmaz. Üretim çalıştırmalarından her bir iş çalıştırması için yalıtım garantisi veriyoruz. Hata ayıklama senaryosunda bir kişi bir küme alır ve tüm hata ayıklayıcı bu kullanıcı tarafından başlatılan bu kümeye gider.
-
-## <a name="wrangling-data-flows"></a>Wrangling veri akışları
-
-### <a name="what-are-the-supported-regions-for-wrangling-data-flow"></a>Denetimi veri akışı için desteklenen bölgeler nelerdir?
-
-Wrangling veri akışı şu anda şu bölgelerde oluşturulan veri fabrikaları 'nda destekleniyor:
-
-* Doğu Avustralya
-* Orta Kanada
-* Orta Hindistan
-* Doğu ABD
-* Doğu ABD 2
-* Doğu Japonya
-* Kuzey Avrupa
-* Güneydoğu Asya
-* Orta Güney ABD
-* Güney Birleşik Krallık
-* Orta Batı ABD
-* West Europe
-* Batı ABD
-* Batı ABD 2
-
-### <a name="what-are-the-limitations-and-constraints-with-wrangling-data-flow"></a>Denetimi veri akışı ile ilgili sınırlamalar ve kısıtlamalar nelerdir?
-
-Veri kümesi adları yalnızca alfa sayısal karakterler içerebilir. Aşağıdaki veri depoları desteklenir:
-
-* Hesap anahtarı kimlik doğrulamasını kullanarak Azure Blob depolama 'daki DelimitedText veri kümesi
-* Hesap anahtarını veya hizmet sorumlusu kimlik doğrulamasını kullanarak Azure Data Lake Storage Gen2 içindeki DelimitedText veri kümesi
-* Hizmet sorumlusu kimlik doğrulamasını kullanarak Azure Data Lake Storage Gen1 içindeki DelimitedText veri kümesi
-* SQL kimlik doğrulaması kullanarak Azure SQL veritabanı ve veri ambarı. Aşağıdaki desteklenen SQL türlerini inceleyin. Veri ambarı için PolyBase veya hazırlama desteği yoktur.
-
-Şu anda, bağlı Service Key Vault tümleştirme, denetimi veri akışlarında desteklenmez.
-
-### <a name="what-is-the-difference-between-mapping-and-wrangling-data-flows"></a>Eşleme ve denetimi veri akışları arasındaki fark nedir?
-
-Veri akışlarını eşleme, herhangi bir kodlama gerekmeden verileri ölçekteki dönüştürmek için bir yol sağlar. Bir dizi dönüştürme oluşturarak veri akışı tuvalinde bir veri dönüştürme işi tasarlayabilirsiniz. Herhangi bir sayıdaki kaynak dönüşümle başlayın ve ardından veri dönüştürme adımları. Sonuçlarınızı bir hedefe eklemek için veri akışınızı bir havuz ile doldurun. Veri akışı eşleme, veri ve kaynaklardaki bilinen ve bilinmeyen şemalar ile verileri eşlemede ve dönüştürmenin harika bir yoludur.
-
-Wrangling veri akışları, Spark yürütmesi aracılığıyla ölçekte Power Query çevrimiçi karma düzenleyici 'yi kullanarak çevik veri hazırlama ve araştırma yapmanıza olanak sağlar. Verilerin yükseliğiyle birlikte, bazı durumlarda yalnızca bir veri kümesini keşfetmeniz veya Gölü bir veri kümesi oluşturmanız gerekir. Bilinen bir hedefle eşlememeniz yok. Wrangling veri akışları, daha az resmi ve model tabanlı analiz senaryoları için kullanılır.
-
-### <a name="what-is-the-difference-between-power-platform-dataflows-and-wrangling-data-flows"></a>Power platform veri akışları ile denetimi veri akışları arasındaki fark nedir?
-
-Power platform veri akışları, kullanıcıların çok çeşitli veri kaynaklarından veri içeri aktarıp Common Data Service ve Azure Data Lake PowerApps uygulamaları, Power BI raporları veya akış öngörülerini oluşturmasına olanak tanır. Power platform veri akışları, Power BI ve Excel 'e benzer şekilde, kurulu Power Query veri hazırlama deneyimlerini kullanır. Power platform veri akışları bir kuruluş içinde kolayca yeniden kullanım sağlar ve düzenlemeyi otomatik olarak işler (örn. önceki biri yenilendiğinde başka bir veri akışına bağlı olan veri akışlarını otomatik olarak yenileme).
-
-Azure Data Factory (ADF), veri mühendislerinin ve vatandaşlık veri tümleştirmesinin karmaşık karma Ayıkla-Dönüştür-yükle (ETL) ve Ayıkla-yükle-Dönüştür (ELT) iş akışları oluşturmalarına olanak tanıyan bir yönetilen veri tümleştirme hizmetidir. ADF 'de wrangling veri akışı, kullanıcılara bulutta veri hazırlanmasını kolaylaştıran ve altyapı yönetimi gerektirmeyen herhangi bir veri boyutuna ölçeklendirebilen, kod içermeyen, sunucusuz bir ortama sahip olan kullanıcıları güçler. Verileri hazırlamak ve şekillendirmek için Power Query veri hazırlama teknolojisini (ayrıca Power platform veri akışları, Excel, Power BI) kullanır. Büyük veri tümleştirmesinin tüm karmaşıklıklarını ve ölçeklendirme güçlüklerine yönelik olarak tasarlanan, denetimi veri akışları, kullanıcıların Spark yürütme yoluyla verileri hızla kolayca hazırlamasına olanak sağlar. Kullanıcılar tarayıcı tabanlı arabirimimiz ile erişilebilir bir görsel ortamda dayanıklı veri işlem hatları oluşturabilir ve ADF 'nin Spark yürütmesinin karmaşıklıklarını işlemesini sağlar. İşlem hatlarınız için zamanlamalar oluşturun ve veri akışı yürütmelerini ADF izleme portalından izleyin. Veri kullanılabilirliği SLA 'larını ADF 'nin zengin kullanılabilirlik izleme ve uyarılarla kolayca yönetin ve akışlarınızı yönetilen bir ortamda kaydetmek ve yönetmek için yerleşik sürekli tümleştirme ve dağıtım özelliklerinden yararlanın. Veri akışlarınızı ayarlamanıza kadar mantığınızın planlandığını doğrulamak için uyarılar oluşturun ve yürütme planlarını görüntüleyin.
-
-### <a name="supported-sql-types"></a>Desteklenen SQL türleri
-
-Wrangling veri akışı, SQL 'de aşağıdaki veri türlerini destekler. Desteklenmeyen bir veri türü kullanmaya yönelik bir doğrulama hatası alacaksınız.
-
-* short
-* double
-* real
-* float
-* char
-* nchar
-* varchar
-* nvarchar
-* tamsayı
-* int
-* bit
-* boolean
-* smallint
-* tinyint
-* bigint
-* long
-* metin
-* date
-* datetime
-* datetime2
-* girişin
-* timestamp
-* uniqueidentifier
-* xml
-
-Diğer veri türleri gelecekte desteklenecektir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

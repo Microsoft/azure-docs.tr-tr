@@ -12,12 +12,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 09/15/2020
-ms.openlocfilehash: cba248d3f254c9bb97c66ff7a3d39275b4b912c4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 75f9080b43333168802a72e60751eec2a765c6d4
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102616086"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106580809"
 ---
 # <a name="copy-activity-performance-and-scalability-guide"></a>Kopyalama etkinliği performans ve ölçeklenebilirlik kılavuzu
 
@@ -62,7 +62,10 @@ Bu tam kullanım, aşağıdaki kaynaklarla kullanılabilen minimum aktarım hız
 * Hedef veri deposu
 * Kaynak ve hedef veri depoları arasında ağ bant genişliği
 
-Aşağıdaki tabloda kopyalama süresi hesaplanır. Süre, ortamınız için veri boyutuna ve ağ/veri deposu bant genişliği sınırına göre belirlenir.
+Aşağıdaki tabloda, veri taşıma süresinin hesaplanması gösterilmektedir. Her hücredeki süre, belirli bir ağ ve veri deposu bant genişliği ve belirli bir veri yükü boyutu temel alınarak hesaplanır.
+
+> [!NOTE]
+> Aşağıda belirtilen süre, bir veya daha fazla eşzamanlı kopyalama etkinliğini bölümlemek için ForEach kullanma dahil olmak üzere, bir veya daha fazla eşzamanlı veri tümleştirme [çözümünde, ADF](#copy-performance-optimization-features)kullanılarak uygulanan bir veya daha fazla performans iyileştirmesi için ulaşılabilir performansını temsil etmek üzere tasarlanmıştır. Belirli veri kümeniz ve sistem yapılandırmanız için kopyalama performansını iyileştirmek üzere [performans ayarlama adımlarında](#performance-tuning-steps) oluşan adımları izlemeniz önerilir. Üretim dağıtım planlaması, kapasite planlama ve faturalandırma projeksiyonu için performans ayarlama testlerinizde elde edilen numaraları kullanmanız gerekir.
 
 &nbsp;
 

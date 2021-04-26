@@ -1,19 +1,19 @@
 ---
 title: SYNAPSE çalışma alanı için sürekli tümleştirme ve teslim
 description: Çalışma alanındaki değişiklikleri bir ortamdan (geliştirme, test, üretim) diğerine dağıtmak için sürekli tümleştirme ve teslimi nasıl kullanacağınızı öğrenin.
-services: synapse-analytics
-author: liud
+author: liudan66
 ms.service: synapse-analytics
+ms.subservice: ''
 ms.topic: conceptual
 ms.date: 11/20/2020
 ms.author: liud
 ms.reviewer: pimorano
-ms.openlocfilehash: de3738573bb9bb6f045a45d290c74ba9e6902a5e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 833478d956560c981bd6cc3ba03b48bb602f563c
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103561966"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739683"
 ---
 # <a name="continuous-integration-and-delivery-for-azure-synapse-workspace"></a>Azure SYNAPSE çalışma alanı için sürekli tümleştirme ve teslim
 
@@ -21,16 +21,61 @@ ms.locfileid: "103561966"
 
 Sürekli tümleştirme (CI), bir takım üyesinin sürüm denetimine değişiklik yaptığı her seferinde kodun derlemesini ve test edilmesini otomatikleştirme işlemidir. Sürekli dağıtım (CD), üretim ortamına birden çok test veya hazırlık ortamından derleme, test etme, yapılandırma ve dağıtma işlemidir.
 
-Azure SYNAPSE çalışma alanı için, sürekli tümleştirme ve teslim (CI/CD) tüm varlıkları bir ortamdan (geliştirme, test, üretim) diğerine taşır. Çalışma alanınızı başka bir çalışma alanına yükseltmek için iki bölüm vardır: çalışma alanı kaynakları oluşturmak veya güncelleştirmek için [Azure Resource Manager şablonları](../../azure-resource-manager/templates/overview.md) kullanın (havuzlar ve çalışma alanı); yapıtları (SQL betikleri, Not defteri, Spark iş tanımı, işlem hatları, veri kümeleri, veri akışları vb.) Azure DevOps 'daki SYNAPSE CI/CD araçlarıyla geçirin. 
+Azure SYNAPSE Analytics çalışma alanında sürekli tümleştirme ve teslim (CI/CD), tüm varlıkları bir ortamdan (geliştirme, test, üretim) başka bir ortama taşıdır. Çalışma alanınızı başka bir çalışma alanına yükseltmek için iki bölüm vardır. İlk olarak, çalışma alanı kaynaklarını (havuzlar ve çalışma alanı) oluşturmak veya güncelleştirmek için bir [Azure Resource Manager şablonu (ARM şablonu)](../../azure-resource-manager/templates/overview.md) kullanın. Ardından, yapıtları (SQL betikleri, Not defteri, Spark iş tanımı, işlem hatları, veri kümeleri, veri akışları vb.) Azure DevOps 'daki Azure SYNAPSE Analytics CI/CD araçlarıyla geçirin. 
 
-Bu makale, bir Synapse çalışma alanının birden çok ortama dağıtımını otomatik hale getirmek için Azure sürüm ardışık düzeni kullanılarak ana hatlarıyla sunulacaktır.
+Bu makalede, Azure SYNAPSE çalışma alanının birden çok ortama dağıtımını otomatikleştirmek için bir Azure DevOps sürüm işlem hattının nasıl kullanılacağı özetlenmektedir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
--   Geliştirme için kullanılan çalışma alanı Studio 'daki bir git deposu ile yapılandırılmış, bkz. [SYNAPSE Studio 'Da kaynak denetimi](source-control.md).
--   Bir Azure DevOps projesi, yayın işlem hattını çalıştırmak için hazırlandı.
+Azure SYNAPSE çalışma alanının birden çok ortama dağıtımını otomatikleştirmek için bu ön koşullar ve yapılandırmaların yerinde olması gerekir.
 
-## <a name="set-up-a-release-pipelines"></a>Yayın işlem hatlarını ayarlama
+### <a name="azure-devops"></a>Azure DevOps
+
+- Yayın işlem hattını çalıştırmaya yönelik bir Azure DevOps projesi hazırlandı.
+- [Kuruluş düzeyinde kod "temel" erişimini iade edecek tüm kullanıcılara](/azure/devops/organizations/accounts/add-organization-users?view=azure-devops&tabs=preview-page), depoyu görebilmesi Için izin verin.
+- Azure SYNAPSE depoya sahip hakları verin.
+- Şirket içinde barındırılan bir Azure DevOps VM Aracısı oluşturmuş olduğunuzdan emin olun veya bir Azure DevOps barındırılan Aracısı kullanın.
+- [Kaynak grubu için Azure Resource Manager hizmet bağlantısı oluşturma](/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml)izinleri.
+- Azure Active Directory (Azure AD) yöneticisinin Azure DevOps [SYNAPSE çalışma alanı Deployment Agent uzantısını Azure DevOps kuruluşunda yüklemesi](/azure/devops/marketplace/install-extension)gerekir.
+- İşlem hattının çalışması için mevcut bir hizmet hesabı oluşturun veya aday yapın. Bir hizmet hesabı yerine kişisel erişim belirteci kullanabilirsiniz, ancak kullanıcı hesabı silindikten sonra işlem hatlarınız çalışmaz.
+
+### <a name="azure-active-directory"></a>Azure Active Directory
+
+- Azure AD 'de, dağıtım için kullanılacak bir hizmet sorumlusu oluşturun. SYNAPSE çalışma alanı Dağıtım görevi, bir yönetilen kimliği 1 * ve daha önceki bir sürümde kullanmayı desteklemez.
+- Bu eylem için Azure AD yönetici hakları gereklidir.
+
+### <a name="azure-synapse-analytics"></a>Azure Synapse Analytics
+
+> [!NOTE]
+> Aynı işlem hattını, ARM şablonunu veya Azure CLı 'yı kullanarak bu önkoşulları otomatikleştirebilir ve dağıtabilirsiniz, ancak işlem bu makalede açıklanmamaktadır.
+
+- Geliştirme için kullanılan "kaynak" çalışma alanının, SYNAPSE Studio 'daki bir git deposu ile yapılandırılması gerekir. Daha fazla bilgi için bkz. [SYNAPSE Studio 'Da kaynak denetimi](source-control.md#configuration-method-2-manage-hub).
+
+- Dağıtılacak boş bir çalışma alanı. Boş çalışma alanını ayarlamak için:
+
+  1. Yeni bir Azure SYNAPSE Analytics çalışma alanı oluşturun.
+  1. Yeni çalışma alanının barındırıldığı kaynak grubuna VM aracısına ve hizmet sorumlusu katkıda bulunan haklarına izin verin.
+  1. Yeni çalışma alanında git deposu bağlantısını yapılandırmayın.
+  1. Azure portal, yeni Azure SYNAPSE Analytics çalışma alanını bulun ve kendinize ve Azure DevOps işlem hattı Azure SYNAPSE Analytics çalışma alanı sahibi haklarını çalıştırın. 
+  1. Azure DevOps VM aracısını ve hizmet sorumlusunu çalışma alanı için katkıda bulunan rolüne ekleyin (Bu devralınmalıdır, ancak olduğunu doğrulayın).
+  1. Azure SYNAPSE Analytics çalışma alanında, **Studio**  >  **Yönet**  >  **IAM** bölümüne gidin. Azure DevOps VM aracısını ve hizmet sorumlusunu çalışma alanı yöneticileri grubuna ekleyin.
+  1. Çalışma alanı için kullanılan depolama hesabını açın. IAM 'de, VM aracısını ve hizmet sorumlusunu, Depolama Blobu veri katılımcısı rolüne ekleyin.
+  1. Destek aboneliğinde bir Anahtar Kasası oluşturun ve hem var olan çalışma alanının hem de yeni çalışma alanının kasada en azından GET ve LIST izinlerine sahip olduğundan emin olun.
+  1. Otomatik dağıtımın çalışması için, bağlı hizmetlerinize belirtilen bağlantı dizelerinin anahtar kasasında olduğundan emin olun.
+
+### <a name="additional-prerequisites"></a>Ek önkoşullar
+ 
+ - Spark havuzları ve şirket içinde barındırılan tümleştirme çalışma zamanları bir ardışık düzende oluşturulmaz. Şirket içinde barındırılan tümleştirme çalışma zamanı kullanan bağlı bir hizmetiniz varsa, bunu yeni çalışma alanında el ile oluşturun.
+ - Not defterleri geliştirmekte ve bunları bir Spark havuzuna bağladıysanız, Spark havuzunu çalışma alanında yeniden oluşturun.
+ - Bir ortamda mevcut olmayan bir Spark havuzuna bağlı olan Not defterleri dağıtılır.
+ - Spark havuzu adları her iki çalışma alanında da aynı olmalıdır.
+ - Tüm veritabanları, SQL havuzları ve diğer kaynakları her iki çalışma alanında da adlandırın.
+ - Dağıtmaya çalıştığınızda sağlanan SQL havuzlarınız duraklatıldıysa, dağıtım başarısız olabilir.
+
+Daha fazla bilgi için bkz. [Azure SYNAPSE Analytics Bölüm 4 ' te CI CD-yayın Işlem hattı](https://techcommunity.microsoft.com/t5/data-architecture-blog/ci-cd-in-azure-synapse-analytics-part-4-the-release-pipeline/ba-p/2034434). 
+
+
+## <a name="set-up-a-release-pipeline"></a>Yayın işlem hattı ayarlama
 
 1.  [Azure DevOps](https://dev.azure.com/)'da, yayın için oluşturulan projeyi açın.
 
@@ -58,9 +103,9 @@ Bu makale, bir Synapse çalışma alanının birden çok ortama dağıtımını 
 
     ![Yapıt ekleme](media/release-creation-publish-branch.png)
 
-## <a name="set-up-a-stage-task-for-arm-resource-create-and-update"></a>ARM kaynağı oluşturma ve güncelleştirme için bir aşama görevi ayarlama 
+## <a name="set-up-a-stage-task-for-an-arm-template-to-create-and-update-resource"></a>Kaynak oluşturmak ve güncelleştirmek için ARM şablonu için bir aşama görevi ayarlama 
 
-Çalışma alanı ve havuzlar dahil olmak üzere kaynakları oluşturmak veya güncelleştirmek için bir Azure Resource Manager Dağıtım görevi ekleyin:
+Bir Azure SYNAPSE çalışma alanı, Spark ve SQL havuzları veya bir anahtar kasası gibi bir kaynağı dağıtmaya yönelik ARM şablonunuz varsa, bu kaynakları oluşturmak veya güncelleştirmek için bir Azure Resource Manager Dağıtım görevi ekleyin:
 
 1. Aşama görünümünde, **aşama görevlerini görüntüle**' yi seçin.
 
@@ -89,7 +134,7 @@ Bu makale, bir Synapse çalışma alanının birden çok ortama dağıtımını 
  > [!WARNING]
 > Tüm dağıtım modunda, kaynak grubunda bulunan ancak yeni Kaynak Yöneticisi şablonunda belirtilmeyen kaynaklar **silinir**. Daha fazla bilgi için lütfen [Azure Resource Manager dağıtım modlarına](../../azure-resource-manager/templates/deployment-modes.md) başvurun
 
-## <a name="set-up-a-stage-task-for-artifacts-deployment"></a>Yapıt dağıtımı için bir aşama görevi ayarlama 
+## <a name="set-up-a-stage-task-for-synapse-artifacts-deployment"></a>SYNAPSE yapıtlar dağıtımı için bir aşama görevi ayarlama 
 
 SYNAPSE çalışma alanı, SQL betiği, Not defteri, Spark iş tanımı, dataflow, işlem hattı, bağlantılı hizmet, kimlik bilgileri ve IR (Integration Runtime) gibi diğer öğeleri dağıtmak için [SYNAPSE çalışma alanı dağıtım](https://marketplace.visualstudio.com/items?itemName=AzureSynapseWorkspace.synapsecicd-deploy) uzantısı ' nı kullanın.  
 
@@ -113,7 +158,7 @@ SYNAPSE çalışma alanı, SQL betiği, Not defteri, Spark iş tanımı, dataflo
 
 1. Hedef çalışma alanının bağlantısını, kaynak grubunu ve adını seçin. 
 
-1. Seç **...** **şablon parametrelerini geçersiz kıl** kutusunun yanında, hedef çalışma alanı için istenen parametre değerlerini girin. 
+1. Seç **...** **şablon parametrelerini geçersiz kıl** kutusunun yanında, bağlantı dizeleri ve bağlı hizmetleriniz için kullanılan hesap anahtarları dahil olmak üzere hedef çalışma alanı için istenen parametre değerlerini girin. [Daha fazla bilgi için buraya tıklayın] (https://techcommunity.microsoft.com/t5/data-architecture-blog/ci-cd-in-azure-synapse-analytics-part-4-the-release-pipeline/ba-p/2034434)
 
     ![SYNAPSE çalışma alanı dağıtma](media/create-release-artifacts-deployment.png)
 
@@ -225,13 +270,14 @@ Aşağıda bir parametre şablonu tanımının neye benzediklerine bir örnek ve
     }
 }
 ```
+
 Yukarıdaki şablonun nasıl oluşturulduğu ve kaynak türüne göre nasıl bölündüğü hakkında bir açıklama aşağıda verilmiştir.
 
 #### <a name="notebooks"></a>Notebooks 
 
 * Yoldaki herhangi bir özellik `properties/bigDataPool/referenceName` varsayılan değeri ile parametrelenir. Her bir not defteri dosyası için ekli Spark havuzunu parametreleştirebilirsiniz. 
 
-#### <a name="sql-scripts"></a>SQL betikleri 
+#### <a name="sql-scripts"></a>SQL Betikleri 
 
 * Yoldaki Özellikler (poolName ve databaseName), `properties/content/currentConnection` şablondaki varsayılan değerler olmadan dize olarak parametrelenir. 
 
@@ -262,19 +308,19 @@ Yukarıdaki şablonun nasıl oluşturulduğu ve kaynak türüne göre nasıl bö
 
 ## <a name="best-practices-for-cicd"></a>CI/CD için en iyi yöntemler
 
-SYNAPSE çalışma alanınız ile git tümleştirmesi kullanıyorsanız ve değişikliklerinizi geliştirmeden test ve daha sonra üretime taşıyan bir CI/CD işlem hattına sahipseniz, bu en iyi yöntemleri öneririz:
+Azure SYNAPSE çalışma alanınız ile git tümleştirmesi kullanıyorsanız ve değişikliklerinizi geliştirmeden test ve daha sonra üretime taşıyan bir CI/CD işlem hattına sahipseniz, bu en iyi yöntemleri öneririz:
 
--   **Git tümleştirmesi**. Git tümleştirmesiyle yalnızca geliştirme SYNAPSE çalışma alanınızı yapılandırın. Test ve üretim çalışma alanlarındaki değişiklikler CI/CD aracılığıyla dağıtılır ve git tümleştirmesi gerekmez.
+-   **Git tümleştirmesi**. Git tümleştirmesi ile yalnızca geliştirme Azure SYNAPSE çalışma alanınızı yapılandırın. Test ve üretim çalışma alanlarındaki değişiklikler CI/CD aracılığıyla dağıtılır ve git tümleştirmesi gerekmez.
 -   **Yapıları yapıtları geçişten önce hazırlayın**. Geliştirme çalışma alanındaki havuzlara eklenmiş SQL betiği veya Not defteriniz varsa, farklı ortamlardaki havuzların adı da beklenmektedir. 
 -   **Kod olarak altyapı (IAC)**. Bir açıklayıcı modelde altyapının (ağlar, sanal makineler, yük dengeleyiciler ve bağlantı topolojisi) yönetimi, DevOps ekibinin kaynak kodu için kullandığı sürüm oluşturma 'yı kullanır. 
 -   **Diğerleri**. Bkz. [ADF yapıtları için en iyi uygulamalar](../../data-factory/continuous-integration-deployment.md#best-practices-for-cicd)
 
 ## <a name="troubleshooting-artifacts-deployment"></a>Yapıt dağıtımı sorunlarını giderme 
 
-### <a name="use-the-synapse-workspace-deployment-task"></a>SYNAPSE çalışma alanı dağıtım görevini kullanın
+### <a name="use-the-azure-synapse-analytics-workspace-deployment-task"></a>Azure SYNAPSE Analytics çalışma alanı dağıtım görevini kullanma
 
-SYNAPSE ' de ARM kaynakları olmayan bir dizi yapıtlar vardır. Bu Azure Data Factory farklıdır. ARM şablonu Dağıtım görevi SYNAPSE yapıtları dağıtmak için düzgün çalışmayacak
+Azure SYNAPSE Analytics 'te ARM kaynakları olmayan bir dizi yapıt vardır. Bu Azure Data Factory farklıdır. ARM şablonu Dağıtım görevi Azure SYNAPSE Analytics yapıtları dağıtmak için düzgün çalışmaz.
  
 ### <a name="unexpected-token-error-in-release"></a>Yayında beklenmeyen belirteç hatası
 
-Parametre dosyanızda, kaçış olmayan parametre değerleri varsa, yayın işlem hattı dosyayı ayrıştırmaz ve "beklenmeyen belirteç" hatasını üretir. Parametre değerlerini almak için, parametreleri geçersiz kılmayı veya Azure Anahtar Kasası 'nı kullanmanızı öneririz. Geçici çözüm olarak çift kaçış karakterleri de kullanabilirsiniz.
+Parametre dosyanızda, kaçış olmayan parametre değerleri varsa, yayın işlem hattı dosyayı ayrıştırmaz ve "beklenmeyen belirteç" hatasını üretir. Parametre değerlerini almak için, parametreleri geçersiz kılmayı veya Azure Key Vault kullanmanızı öneririz. Geçici çözüm olarak çift kaçış karakterleri de kullanabilirsiniz.

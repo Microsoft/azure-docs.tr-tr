@@ -8,16 +8,16 @@ ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 03/26/2021
-ms.openlocfilehash: 7d421cf20aa054fb3e1e4877ee610a284eeff7c9
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 6f08fa0b2126112fa17fd61be6f44bb5cc6d5396
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105627068"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552164"
 ---
 # <a name="how-to-plan-a-saas-offer-for-the-commercial-marketplace"></a>Ticari Market için SaaS teklifi planlaması
 
-Bu makalede, Microsoft Commercial Market 'e hizmet olarak yazılım (SaaS) teklifi yayımlamaya yönelik farklı seçenekler ve gereksinimler açıklanmaktadır. SaaS teklifleri, çevrimiçi abonelikler aracılığıyla müşterilerinize yazılım çözümleri sunmanıza ve lisanslamasına olanak sağlar. SaaS yayımcısı olarak, müşterilerinizin teklifinizin kullanımını desteklemek için gereken altyapıyı yönetip ödeyin. Bu makale, Iş Ortağı Merkezi ile ticari Market 'te yayımlama teklifinizi hazırlamanıza yardımcı olur.
+Bu makalede, Microsoft Commercial Market 'e hizmet olarak yazılım (SaaS) teklifi yayımlamaya yönelik farklı seçenekler ve gereksinimler açıklanmaktadır. Çevrimiçi abonelikler aracılığıyla müşterilerinize yazılım çözümlerini sunmanıza ve lisanslayabilmeniz için SaaS teklifleri. SaaS yayımcısı olarak, müşterilerinizin teklifinizin kullanımını desteklemek için gereken altyapıyı yönetip ödeyin. Bu makale, Iş Ortağı Merkezi ile ticari Market 'te yayımlama teklifinizi hazırlamanıza yardımcı olur.
 
 ## <a name="listing-options"></a>Listeleme seçenekleri
 
@@ -134,6 +134,28 @@ Standart sözleşmeyi kullanmayı seçerseniz, standart sözleşmeye genel deği
 > [!NOTE]
 > Ticari Market için standart sözleşmeyi kullanarak bir teklifi yayımladıktan sonra, kendi özel hüküm ve koşullarınızı kullanamazsınız. Bu bir "veya" senaryosudur. Çözümünüzü standart sözleşme kapsamında ya da kendi hüküm ve koşullarınız için sunun. Standart sözleşmenin şartlarını değiştirmek istiyorsanız, standart sözleşme değişiklikleri aracılığıyla bunu yapabilirsiniz.
 
+
+## <a name="microsoft-365-integration"></a>Microsoft 365 tümleştirmesi
+
+Microsoft 365 tümleştirme, SaaS teklifinizin takımlar uygulamaları, Office eklentileri ve SharePoint Framework çözümleri gibi ilgili ücretsiz eklentiler aracılığıyla birden çok Microsoft 365 uygulama yüzeylerine bağlı deneyim sağlamasına olanak tanır. Müşterilerinizin, E2E çözümünüzün tüm modellerini (Web hizmeti + ilgili eklentiler) kolayca bulmasına ve aşağıdaki bilgileri sağlayarak bir işlem içinde dağıtmanıza yardımcı olabilirsiniz. 
+  - SaaS teklifiniz Microsoft Graph ile tümleşiyorsa, SaaS teklifiniz tarafından tümleştirme için kullanılan Azure Active Directory (AAD) uygulama KIMLIĞINI belirtin. Yöneticiler, SaaS teklifinizin uygun bir şekilde çalışması için gerekli olan erişim izinlerini gözden geçirebilir ve dağıtım zamanında gelişmiş yönetici izni gerekliyse erişim izni verebilir. 
+    
+     Teklifinizi Microsoft aracılığıyla satmayı seçerseniz, bu, giriş sayfanızda kullanmak üzere kaydettiğiniz aynı AAD uygulama KIMLIĞI olup, müşteri aboneliği etkinleştirmesini tamamlamaya yönelik temel Kullanıcı bilgilerini almak için gereklidir. Ayrıntılı kılavuz için bkz. [ticari Market 'te transactable SaaS teklifinizin giriş sayfasını oluşturma](azure-ad-transactable-saas-landing-page.md). 
+    
+   -    Bağlamak istediğiniz SaaS teklifinizle birlikte çalışan ilgili eklentilerin bir listesini sağlayın. Müşteriler AppSource 'ta E2E çözümünüzü bulabilir ve Yöneticiler, Microsoft 365 Yönetim Merkezi aracılığıyla aynı işleme bağladığınız SaaS ve ilgili eklentilerin her ikisini de dağıtabilir.
+    
+        İlgili eklentileri bağlamak için, eklentinin AppSource bağlantısını sağlamanız gerekir, bu, eklentinin AppSource 'a ilk kez yayımlanması anlamına gelir. Bağlantı için kullanabileceğiniz desteklenen eklenti türleri şunlardır: takımlar uygulamalar, Office eklentileri ve SharePoint Framework (SPFx) çözümleri. Her bağlantılı eklenti SaaS teklifi için benzersiz olmalıdır. 
+
+Bağlantılı ürünler için, AppSource 'ta arama, hem SaaS hem de tüm bağlantılı eklentileri içeren bir sonuçla döndürülür. Müşteri, SaaS teklifinin ve bağlı eklentilerin ürün ayrıntı sayfaları arasında gezingeçebilir. BT yöneticileri, Microsoft 365 Yönetim Merkezi 'nde tümleşik ve bağlı bir deneyim aracılığıyla hem SaaS hem de bağlantılı eklentileri aynı süreç içinde inceleyebilir ve dağıtabilir. Daha fazla bilgi için bkz. [uygulamaları Microsoft 365 test etme ve dağıtma-Microsoft 365 Yöneticisi](/microsoft-365/admin/manage/test-and-deploy-microsoft-365-apps).
+
+### <a name="microsoft-365-integration-support-limitations"></a>Microsoft 365 tümleştirme desteği sınırlamaları
+Tek bir E2E çözümü olarak bulma işlemi tüm durumlarda AppSource 'ta desteklenir, ancak, Microsoft 365 yukarıda açıklandığı gibi E2E çözümünün Basitleştirilmiş dağıtımı, aşağıdaki senaryolarda desteklenmez:
+
+   - Aynı eklenti birden fazla SaaS teklifine bağlı.
+   - SaaS teklifi eklentilere bağlanır, ancak Microsoft Graph ile tümleştirilemez ve AAD uygulama KIMLIĞI sağlanmaz.
+  - SaaS teklifi, eklentilere bağlanır, ancak Microsoft Graph tümleştirme için belirtilen AAD uygulama KIMLIĞI birden çok SaaS teklifinde paylaşılır.
+
+ 
 ## <a name="offer-listing-details"></a>Teklif listeleme ayrıntıları
 
 Iş Ortağı Merkezi 'nde [Yeni bir SaaS teklifi oluşturduğunuzda](create-new-saas-offer.md) , **teklif listesi** sayfasına metin, görüntü, isteğe bağlı videolar ve diğer ayrıntıları girersiniz. Bu, aşağıdaki örnekte gösterildiği gibi, müşterilerin, ticari Market 'te teklif listelerinizi bulduklarında göreceği bilgiler.
@@ -150,7 +172,7 @@ Iş Ortağı Merkezi 'nde [Yeni bir SaaS teklifi oluşturduğunuzda](create-new-
 6. Gizlilik ilkesi
 7. Teklif adı
 8. Özet
-9. Description
+9. Açıklama
 10. Ekran görüntüleri/videolar
 11. Belgeler
 

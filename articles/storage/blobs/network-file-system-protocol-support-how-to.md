@@ -9,12 +9,12 @@ ms.date: 08/04/2020
 ms.author: normesta
 ms.reviewer: yzheng
 ms.custom: references_regions
-ms.openlocfilehash: 8ed63a508447104f9073c986debfae73ba7de89f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: bf6b06ba7cc7f547f752ffa7877fca186ba4465e
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102428652"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107713795"
 ---
 # <a name="mount-blob-storage-by-using-the-network-file-system-nfs-30-protocol-preview"></a>Ağ dosya sistemi (NFS) 3,0 protokolünü (Önizleme) kullanarak blob depolamayı bağlama
 
@@ -68,21 +68,21 @@ Depolama hesabınız bir sanal ağ içinde yer almalıdır. VNet, istemcilerin d
 
 ## <a name="step-4-configure-network-security"></a>4. Adım: ağ güvenliğini yapılandırma
 
-Hesabınızdaki verileri güvenli hale getirmenin tek yolu, VNet ve diğer ağ güvenlik ayarlarını kullanmaktır. Hesap anahtarı yetkilendirme, Azure Active Directory (AD) güvenliği ve erişim denetim listeleri (ACL 'Ler) dahil olmak üzere verilerin güvenliğini sağlamak için kullanılan diğer herhangi bir araç, NFS 3,0 protokol desteği etkinleştirilmiş hesaplarda henüz desteklenmemektedir. 
+Hesabınızdaki verileri güvenli hale getirmenin tek yolu, VNet ve diğer ağ güvenlik ayarlarını kullanmaktır. Hesap anahtarı yetkilendirme, Azure Active Directory (AD) güvenliği ve erişim denetim listeleri (ACL 'Ler) dahil olmak üzere verilerin güvenliğini sağlamak için kullanılan diğer herhangi bir araç, NFS 3,0 protokol desteği etkinleştirilmiş hesaplarda henüz desteklenmemektedir.
 
 Hesabınızdaki verilerin güvenliğini sağlamak için şu önerilere bakın: [BLOB depolama Için ağ güvenlik önerileri](security-recommendations.md#networking).
 
 ## <a name="step-5-create-and-configure-a-storage-account"></a>5. Adım: depolama hesabı oluşturma ve yapılandırma
 
-NFS 3,0 kullanarak bir kapsayıcı bağlamak için, özelliği aboneliğiniz ile **kaydettikten sonra** bir depolama hesabı oluşturmanız gerekir. Özelliği kaydetmeden önce var olan hesapları etkinleştiremezsiniz. 
+NFS 3,0 kullanarak bir kapsayıcı bağlamak için, özelliği aboneliğiniz ile **kaydettikten sonra** bir depolama hesabı oluşturmanız gerekir. Özelliği kaydetmeden önce var olan hesapları etkinleştiremezsiniz.
 
-Bu özelliğin önizleme sürümünde, NFS 3,0 protokolü [Blockblobstorage](../blobs/storage-blob-create-account-block-blob.md) ve [genel amaçlı v2](../common/storage-account-overview.md#general-purpose-v2-accounts) hesaplarında desteklenir.
+Bu özelliğin önizleme sürümünde, NFS 3,0 protokolü standart genel amaçlı v2 depolama hesapları ve Premium Blok Blob depolama hesapları için desteklenir. Bu depolama hesabı türleri hakkında daha fazla bilgi için bkz. [depolama hesabına genel bakış](../common/storage-account-overview.md).
 
 Hesabı yapılandırırken şu değerleri seçin:
 
 |Ayar | Premium performans | Standart performans  
 |----|---|---|
-|Konum|Tüm kullanılabilir bölgeler |Şu bölgelerden biri: Avustralya Doğu, Kore Orta ve Orta Güney ABD   
+|Konum|Tüm kullanılabilir bölgeler |Şu bölgelerden biri: Avustralya Doğu, Kore Orta, Doğu ABD ve Orta Güney ABD   
 |Performans|Premium| Standart
 |Hesap türü|BlockBlobStorage| Genel amaçlı v2
 |Çoğaltma|Yerel olarak yedekli depolama (LRS)| Yerel olarak yedekli depolama (LRS)

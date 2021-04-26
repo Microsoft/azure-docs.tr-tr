@@ -2,21 +2,21 @@
 title: Azure Active Directory 'de uygulama yönetimi nedir?
 description: Bulut ve şirket içi uygulamalarınız için kimlik ve erişim yönetimi (ıAM) sistemi olarak Azure Active Directory (AD) kullanılmasına genel bakış.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: overview
 ms.workload: identity
 ms.date: 01/22/2021
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: ''
-ms.openlocfilehash: 247e824997fd95434246e49c78bf167f36e146c0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8bdb8eb9cf176f8e190769e38c81d02ad2985196
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99258600"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376401"
 ---
 # <a name="what-is-application-management"></a>Uygulama yönetimi nedir?
 

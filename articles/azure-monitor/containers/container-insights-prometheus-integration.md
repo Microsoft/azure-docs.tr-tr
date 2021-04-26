@@ -4,10 +4,10 @@ description: Bu makalede, Kubernetes kümenizle birlikte Prometheus 'tan kapsay�
 ms.topic: conceptual
 ms.date: 04/22/2020
 ms.openlocfilehash: 149cdc8613d5034989c7660608a29309353cdabe
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105109650"
 ---
 # <a name="configure-scraping-of-prometheus-metrics-with-container-insights"></a>Kapsayıcı öngörüleri ile Prometheus ölçümlerinin korumasını yapılandırın

@@ -7,10 +7,10 @@ ms.service: industrial-iot
 ms.topic: tutorial
 ms.date: 3/22/2021
 ms.openlocfilehash: 4c344dc09ad6c8aa4b2aa431952fc271d946b60d
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104787772"
 ---
 # <a name="tutorial-pull-azure-industrial-iot-data-into-adx"></a>Öğretici: Azure endüstriyel IoT verilerini ADX 'e çekme
@@ -108,7 +108,7 @@ Yukarıdaki sorgu yürütüldüğü anda, veriler akışa başlar ve ' iiot_pars
 
 ![Ayrıştırılmış tablo](media/tutorial-iiot-data-adx/industrial-iot-in-azure-data-explorer-pic-4.png)
 
-12. Önceki adımda yaptığımız analizler nasıl yineliyoruz? konusunda bize bakalım. belirli bir zaman noktasında (min_t tarafından tanımlanan) bu yana alınan tüm kayıtlarda, "DisplayName" ("PositiveTrendData") tarafından tanımlanan telemetri ortalamasını hesaplamak için 10 dakikalık zaman pencereleri Artık bir Double veri türü sütununda depolanan ' PositveTrendData ' etiketinin değerlerine sahip olduğumuz için sorgu performansında bir geliştirme beklenir.
+12. Önceki adımda yaptığımız analizler nasıl yineliyoruz? konusunda bize bakalım. belirli bir zaman noktasında (min_t tarafından tanımlanan) bu yana alınan tüm kayıtlarda, "DisplayName&quot; (&quot;PositiveTrendData") tarafından tanımlanan telemetri ortalamasını hesaplamak için 10 dakikalık zaman pencereleri Artık bir Double veri türü sütununda depolanan ' PositveTrendData ' etiketinin değerlerine sahip olduğumuz için sorgu performansında bir geliştirme beklenir.
 
 ![Analizi Yinele](media/tutorial-iiot-data-adx/industrial-iot-in-azure-data-explorer-pic-5.png)
 

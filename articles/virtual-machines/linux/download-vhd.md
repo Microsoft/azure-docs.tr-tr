@@ -8,12 +8,12 @@ ms.collection: linux
 ms.topic: how-to
 ms.date: 08/03/2020
 ms.author: cynthn
-ms.openlocfilehash: b3435d1dabf604cf7a1394c14ee62d65b923714b
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 8def06990b72d6e08127e8c4f16e0dfd87905d4f
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102565946"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565194"
 ---
 # <a name="download-a-linux-vhd-from-azure"></a>Azure 'dan bir Linux VHD indirin
 
@@ -21,7 +21,9 @@ Bu makalede, Azure 'dan Azure portal kullanarak bir Linux sanal sabit disk (VHD)
 
 ## <a name="stop-the-vm"></a>VM’yi durdurma
 
-Bir VHD, çalışan bir VM 'ye eklenmişse Azure 'dan indirilemiyor. VHD 'YI indirmek için VM 'yi durdurmanız gerekir. 
+Bir VHD, çalışan bir VM 'ye eklenmişse Azure 'dan indirilemiyor. VM 'yi çalışır durumda tutmak istiyorsanız anlık [görüntü oluşturabilir ve ardından anlık görüntüyü indirebilirsiniz](#alternative-snapshot-the-vm-disk).
+
+VM 'yi durdurmak için:
 
 1.  [Azure portalında](https://portal.azure.com/) oturum açın.
 2.  Sol taraftaki menüden **sanal makineler**' i seçin.
@@ -29,6 +31,24 @@ Bir VHD, çalışan bir VM 'ye eklenmişse Azure 'dan indirilemiyor. VHD 'YI ind
 4.  VM 'nin sayfasında **Durdur**' u seçin.
 
     :::image type="content" source="./media/download-vhd/export-stop.PNG" alt-text="VM 'yi durdurmak için menü düğmesini gösterir.":::
+
+### <a name="alternative-snapshot-the-vm-disk"></a>Alternatif: VM diskinin anlık görüntüsü
+
+İndirmek için diskin anlık görüntüsünü alın.
+
+1. [Portalda](https://portal.azure.com)VM 'yi seçin.
+2. Sol taraftaki menüden **diskler** ' i seçin ve ardından anlık görüntü eklemek istediğiniz diski seçin. Diskin ayrıntıları görüntülenir.  
+3. Sayfanın üst kısmındaki menüden **anlık görüntü oluştur** ' u seçin. **Anlık görüntü oluştur** sayfası açılır.
+4. **Ad** alanına anlık görüntü için bir ad yazın. 
+5. **Anlık görüntü türü** için **tam** veya **artımlı** seçeneğini belirleyin.
+6. İşiniz bittiğinde, **gözden geçir + oluştur**' u seçin.
+
+Anlık görüntü kısa bir süre içinde oluşturulacaktır ve daha sonra ' den başka bir VM 'yi indirmek veya oluşturmak için kullanılabilir.
+
+> [!NOTE]
+> Önce VM 'yi durdurmazsanız, anlık görüntü temizolmaz. Anlık görüntü, sanal makinenin güç olarak açılıp kilitlenmiş olması ile aynı durumda olacaktır.  Genellikle güvenli olsa da, bir süre çalışan çalışan uygulamalar kilitlenme dayanıklı değilse sorun oluşmasına neden olabilir.
+>  
+> Bu yöntem yalnızca tek bir işletim sistemi diski olan VM 'Ler için önerilir. Bir veya daha fazla veri diskine sahip VM 'Ler indirilmadan önce veya işletim sistemi diski ve her veri diski için bir anlık görüntü oluşturulmadan önce durdurulmalıdır.
 
 ## <a name="generate-sas-url"></a>SAS URL 'SI oluştur
 

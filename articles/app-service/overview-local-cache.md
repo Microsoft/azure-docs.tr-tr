@@ -6,17 +6,17 @@ ms.assetid: e34d405e-c5d4-46ad-9b26-2a1eda86ce80
 ms.topic: article
 ms.date: 03/04/2016
 ms.custom: seodec18
-ms.openlocfilehash: 81782f63199a9fe8f43f56aeefcd1c68951d57a4
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 462f37730d61a674edd463e57a98a1228c8ed611
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96852261"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105967090"
 ---
 # <a name="azure-app-service-local-cache-overview"></a>Azure App Service yerel önbelleğe genel bakış
 
 > [!NOTE]
-> Yerel önbellek, [Windows kapsayıcıları](quickstart-custom-container.md?pivots=container-windows) veya [Linux üzerinde App Service](overview.md#app-service-on-linux)gibi işlev uygulamalarında veya Kapsayıcılı App Service uygulamalarda desteklenmez.
+> Yerel önbellek, [Windows kapsayıcıları](quickstart-custom-container.md?pivots=container-windows) veya [Linux üzerinde App Service](overview.md#app-service-on-linux)gibi işlev uygulamalarında veya Kapsayıcılı App Service uygulamalarda desteklenmez. Bu uygulama türleri için kullanılabilen bir yerel önbellek sürümü [uygulama önbelleğidir](https://github.com/Azure-App-Service/KuduLite/wiki/App-Cache).
 
 
 Azure App Service içerik Azure Storage 'da depolanır ve içerik paylaşımında dayanıklı bir şekilde ortaya çıkmış olur. Bu tasarımın çeşitli uygulamalarla çalışması amaçlanmıştır ve aşağıdaki özniteliklere sahiptir:  

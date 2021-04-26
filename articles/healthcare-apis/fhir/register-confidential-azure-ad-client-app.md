@@ -6,76 +6,86 @@ author: matjazl
 ms.service: healthcare-apis
 ms.subservice: fhir
 ms.topic: conceptual
-ms.date: 02/07/2019
+ms.date: 04/08/2021
 ms.author: matjazl
-ms.openlocfilehash: 8021fb3fa9f11ef895569f48a2ae21b3f7adcd36
-ms.sourcegitcommit: 225e4b45844e845bc41d5c043587a61e6b6ce5ae
+ms.openlocfilehash: c10b27d375e2bfb8c64130eceb416a633241cf68
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103020132"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107284448"
 ---
 # <a name="register-a-confidential-client-application-in-azure-active-directory"></a>Gizli bir istemci uygulamasını Azure Active Directory kaydetme
 
-Bu öğreticide, Azure Active Directory bir gizli istemci uygulamasını nasıl kaydedeceğinizi öğreneceksiniz. 
+Bu öğreticide, Azure Active Directory (Azure AD) bir gizli istemci uygulamasını nasıl kaydedeceğinizi öğreneceksiniz.  
 
-İstemci uygulama kaydı, bir kullanıcı adına kimlik doğrulaması yapmak ve [kaynak uygulamalarına](register-resource-azure-ad-client-app.md)erişim istemek için kullanılabilecek bir uygulamanın Azure Active Directory gösterimidir. Gizli bir istemci uygulaması, gizli dizi tutmak ve erişim belirteçleri istenirken gizli anahtar sağlamak için güvenilir bir uygulamadır. Gizli uygulama örnekleri, sunucu tarafı uygulamalardır.
+İstemci uygulama kaydı, bir uygulamanın kullanıcı adına kimlik doğrulaması yapmak ve [kaynak uygulamalarına](register-resource-azure-ad-client-app.md)erişim istemek için kullanılabilecek BIR Azure AD gösterimidir. Gizli bir istemci uygulaması, gizli dizi tutmak ve erişim belirteçleri istenirken gizli anahtar sağlamak için güvenilir bir uygulamadır. Gizli uygulama örnekleri, sunucu tarafı uygulamalardır. 
 
-Portalda yeni bir gizli uygulama kaydetmek için aşağıdaki adımları izleyin.
+Yeni bir gizli istemci uygulamasını kaydetmek için aşağıdaki adımlara bakın. 
 
 ## <a name="register-a-new-application"></a>Yeni uygulama kaydetme
 
-1. [Azure portal](https://portal.azure.com) **Azure Active Directory** gidin.
+1. [Azure portalda](https://portal.azure.com)**Azure Active Directory**'yi seçin.
 
-1. **Uygulama kayıtları**’nı seçin.
+1. **Uygulama kayıtları**’nı seçin. 
 
-    ![Azure portal. Yeni uygulama kaydı.](media/how-to-aad/portal-aad-new-app-registration.png)
+    :::image type="content" source="media/how-to-aad/portal-aad-new-app-registration.png" alt-text="Azure portal. Yeni uygulama kaydı.":::
 
 1. **Yeni kayıt** seçeneğini belirleyin.
 
-1. Uygulamaya bir görünen ad verin.
+1. Uygulamaya kullanıcıya dönük bir ekran adı verin.
 
-1. Yanıt URL 'SI girin. Bu ayrıntılar daha sonra değiştirilebilir, ancak uygulamanızın yanıt URL 'sini biliyorsanız, şimdi girin.
+1. **Desteklenen hesap türleri** için, uygulamayı kullanabilecek kişileri SEÇIN veya API 'ye erişim sağlayabilirsiniz.
 
-    ![Yeni gizli Istemci uygulaması kaydı.](media/how-to-aad/portal-aad-register-new-app-registration-CONF-CLIENT.png)
+1. Seçim **Yeniden yönlendirme URI 'si** sağlayın. Bu ayrıntılar daha sonra değiştirilebilir, ancak uygulamanızın yanıt URL 'sini biliyorsanız, şimdi girin.
+
+    :::image type="content" source="media/how-to-aad/portal-aad-register-new-app-registration-CONF-CLIENT.png" alt-text="Yeni gizli Istemci uygulaması kaydı.":::
+
 1. **Kaydet**’i seçin.
 
 ## <a name="api-permissions"></a>API izinleri
 
-Uygulamanızı kaydettirdiğiniz için, bu uygulamanın kullanıcı adına isteyebilmesi gereken API izinlerini seçmeniz gerekir:
+Uygulamanızı kaydettirdiğiniz artık, bu uygulamanın kullanıcı adına hangi API izinlerini isteyeceğini seçmeniz gerekir.
 
 1. **API izinleri**' ni seçin.
 
-    ![Gizli istemci. API İzinleri](media/how-to-aad/portal-aad-register-new-app-registration-CONF-CLIENT-API-Permissions.png)
+    :::image type="content" source="media/how-to-aad/portal-aad-register-new-app-registration-CONF-CLIENT-API-Permissions.png" alt-text="Gizli istemci. API Izinleri.":::
 
 1. **Izin Ekle**' yi seçin.
 
-    FHıR için Azure API kullanıyorsanız, **Kuruluşumun kullandığı API**'Ler altında **Azure sağlık API 'Lerini** arayarak Azure sağlık API 'lerine bir izin ekleyeceksiniz. Bunu yalnızca [FHıR Için Azure API 'sini zaten dağıttıysanız](fhir-paas-powershell-quickstart.md)bulabilirsiniz.
+    FHıR için Azure API kullanıyorsanız, **Kuruluşumun kullandığı API 'ler** altında **Azure sağlık API 'Sini** arayarak Azure sağlık API 'lerine bir izin ekleyeceksiniz. Azure sağlık API 'sine yönelik arama sonucu yalnızca, [FHıR Için Azure API](fhir-paas-powershell-quickstart.md)'sini zaten dağıttıysanız döndürülür.
 
-    Farklı bir kaynak uygulamasına başvuruyorsam, daha önce **API 'Lerim** altında oluşturduğunuz [FHıR API kaynak uygulaması kaydınızı](register-resource-azure-ad-client-app.md) seçin.
+    Farklı bir kaynak uygulamasına başvuruyorsanız, daha önce **API 'Lerim** altında oluşturduğunuz [FHıR API kaynak uygulaması kaydınızı](register-resource-azure-ad-client-app.md) seçin.
 
 
     :::image type="content" source="media/conf-client-app/confidential-client-org-api.png" alt-text="Gizli istemci. Org API 'lerim" lightbox="media/conf-client-app/confidential-app-org-api-expanded.png":::
     
 
-3. Gizli uygulamanın bir kullanıcı adına sorabilebilmesi gereken kapsamları (izinler) seçin:
+1. Gizli istemci uygulamasının Kullanıcı adına isteyeceğiz kapsamları (izinler) seçin. **User_impersonation**' yi seçin ve ardından **izin Ekle**' yi seçin.
 
     :::image type="content" source="media/conf-client-app/confidential-client-add-permission.png" alt-text="Gizli istemci. Temsilci Izinleri":::
 
+
 ## <a name="application-secret"></a>Uygulama gizli dizisi
 
-1. **Sertifikalar & parolaları**' nı seçin.
-1. **Yeni istemci gizli dizisi**’ni seçin. 
+1. **Sertifikalar & sertifikalar**' ı seçin ve ardından **yeni istemci parolası**' nı seçin. 
 
-    ![Gizli istemci. Uygulama gizli anahtarı](media/how-to-aad/portal-aad-register-new-app-registration-CONF-CLIENT-SECRET.png)
+    :::image type="content" source="media/how-to-aad/portal-aad-register-new-app-registration-CONF-CLIENT-SECRET.png" alt-text="Gizli istemci. Uygulama gizli anahtarı.":::
 
-2. Gizli dizi açıklaması ve süresi (1 yıl, 2 yıl veya hiç) sağlayın.
+1. İstemci parolası için bir **Açıklama** girin. Süre sonu **açılan menüsünü seçerek sona erme** saati çerçevesini seçin ve ardından **Ekle**' ye tıklayın.
 
-3. Oluşturulduktan sonra portalda yalnızca bir kez görüntülenir. Bunu bir yere göz önünde saklayın ve güvenli bir şekilde depolayın.
+   :::image type="content" source="media/how-to-aad/add-a-client-secret.png" alt-text="İstemci parolasını ekleyin.":::
 
+1. İstemci gizli dizesi oluşturulduktan sonra, **değerini** ve **kimliğini** kopyalayın ve tercih ettiğiniz güvenli bir yerde depolayın.
+
+   :::image type="content" source="media/how-to-aad/client-secret-string-password.png" alt-text="İstemci gizli dizesi."::: 
+
+> [!NOTE]
+>İstemci gizli dizesi Azure portal yalnızca bir kez görünür. Sertifikalar & gizli dizi Web sayfasından uzaklaştığınızda ve sonra geri döndüğünüzde, değer dizesi maskelenmiş hale gelir. İstemci gizli dizesini oluşturulduktan hemen sonra kopyalamak önemlidir. İstemci gizlilikinizin yedek kopyası yoksa, yeniden oluşturmak için yukarıdaki adımları tekrarlamanız gerekir.
+ 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, Azure Active Directory bir gizli istemci uygulamasının nasıl kaydedileceği hakkında bilgi edindiniz. Daha sonra, Postman kullanarak FHıR sunucunuza erişebilirsiniz
+Bu makalede, bir gizli istemci uygulamasını Azure AD 'ye kaydetme adımlarında size yol gösterilecektir. Ayrıca, Azure sağlık API 'sine API izinleri ekleme adımlarında de gezinirsiniz. Son olarak, uygulama gizli dizisi oluşturma hakkında gösterildi. Ayrıca, Postman kullanarak FHıR sunucunuza nasıl erişebileceğinizi de öğrenebilirsiniz.
  
 >[!div class="nextstepaction"]
 >[Postman ile FHıR için Azure API 'sine erişme](access-fhir-postman-tutorial.md)

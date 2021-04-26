@@ -1,7 +1,7 @@
 ---
 title: 'Öğretici: Isteğe bağlı tahmin & oto'
 titleSuffix: Azure Machine Learning
-description: Azure Machine Learning Studio 'da otomatik makine öğrenimi ile talep tahmini modeli eğitme ve dağıtmayı öğrenin.
+description: Azure Machine Learning otomatik makine öğrenimi (otomatik ML) arabirimini kullanarak bir istek tahmin modelini kod yazmadan eğitme ve dağıtma.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -11,21 +11,18 @@ ms.reviewer: nibaccam
 author: cartacioS
 ms.date: 12/21/2020
 ms.custom: automl
-ms.openlocfilehash: 2653161b5828d89858234a9ca98fe432e0eacb5c
-ms.sourcegitcommit: aaa65bd769eb2e234e42cfb07d7d459a2cc273ab
+ms.openlocfilehash: a5f7c0cf95d62df2d06c91abd99a1827524d5d6b
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/27/2021
-ms.locfileid: "98879368"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107210559"
 ---
 # <a name="tutorial-forecast-demand-with-automated-machine-learning"></a>Öğretici: otomatik makine öğrenimi ile talep tahmini
 
+Azure Machine Learning Studio 'da otomatik makine öğrenimi kullanarak tek bir kod satırı yazmadan [zaman serisi tahmin modeli](concept-automated-ml.md#time-series-forecasting) oluşturmayı öğrenin. Bu model, bir bisiklet paylaşma hizmeti için Kiralama taleplerini tahmin edecektir.  
 
-Bu öğreticide, bir bisiklet paylaşma hizmeti için Kiralama taleplerini tahmin etmek üzere bir zaman serisi tahmin modeli oluşturmak için Azure Machine Learning Studio 'da otomatik makine öğrenimi veya otomatik ML 'yi kullanırsınız.
-
-Bir sınıflandırma modeli örneği için bkz. [öğretici: Azure Machine Learning OTOMATIK ml ile sınıflandırma modeli oluşturma](tutorial-first-experiment-automated-ml.md).
-
-Bu öğreticide, aşağıdaki görevleri nasıl gerçekleştireceğinizi öğreneceksiniz:
+Bu öğreticide herhangi bir kod yazmayacaksınız, eğitim gerçekleştirmek için Studio arabirimini kullanacaksınız.  Aşağıdaki görevleri nasıl gerçekleştireceğinizi öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir veri kümesi oluşturun ve yükleyin.
@@ -34,13 +31,18 @@ Bu öğreticide, aşağıdaki görevleri nasıl gerçekleştireceğinizi öğren
 > * Deneme sonuçlarını keşfet.
 > * En iyi modeli dağıtın.
 
+Ayrıca, bu diğer model türleri için otomatik makine öğrenimini deneyin:
+
+* Sınıflandırma modelinin kod içermeyen bir örneği için bkz. [öğretici: Azure Machine Learning OTOMATIK ml ile sınıflandırma modeli oluşturma](tutorial-first-experiment-automated-ml.md).
+* Regresyon modelinin kod örneği için bkz. [öğreticiye bakın: taksi Fares 'yi tahmin etmek için otomatik makine öğrenimi kullanma](tutorial-auto-train-models.md).
+
 ## <a name="prerequisites"></a>Önkoşullar
 
 * Azure Machine Learning çalışma alanı. Bkz. [Azure Machine Learning çalışma alanı oluşturma](how-to-manage-workspace.md). 
 
 * [bike-no.csv](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/automated-machine-learning/forecasting-bike-share/bike-no.csv) veri dosyasını indirin
 
-## <a name="get-started-in-azure-machine-learning-studio"></a>Azure Machine Learning Studio 'da çalışmaya başlama
+## <a name="sign-in-to-the-studio"></a>Studio 'da oturum açın
 
 Bu öğreticide, tüm beceri seviyeleri için veri bilimi senaryoları gerçekleştirmek üzere Machine Learning araçları 'nı içeren birleştirilmiş bir Web arabirimi olan Azure Machine Learning Studio 'da otomatik ML denemelerinizi oluşturacaksınız. Studio, Internet Explorer tarayıcılarında desteklenmez.
 

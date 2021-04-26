@@ -6,12 +6,12 @@ author: TimothyMothra
 ms.author: tilee
 ms.date: 01/22/2021
 ms.custom: devx-track-azurepowershell
-ms.openlocfilehash: 21184e1623fd47e8367d4c5dfbc2c85debe93124
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d24e67eac54b3ce4eadfc6a4bde47410d59fae8b
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100587389"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581101"
 ---
 # <a name="get-started-with-azure-monitor-application-insights-agent-for-on-premises-servers"></a>Şirket içi sunucular için Azure Izleyici Application Insights Aracısı 'nı kullanmaya başlama
 
@@ -26,6 +26,8 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 ## <a name="download-and-install-via-powershell-gallery"></a>PowerShell Galerisi aracılığıyla indirme ve yükleme
 
 ### <a name="install-prerequisites"></a>Ön koşulları yükleme
+
+- İzlemeyi etkinleştirmek için bir bağlantı dizesi gerekir. Bir bağlantı dizesi, Application Insights kaynağınızın genel bakış dikey penceresinde görüntülenir. Daha fazla bilgi için bkz. sayfa [bağlantı dizeleri](https://docs.microsoft.com/azure/azure-monitor/app/sdk-connection-string?tabs=net#finding-my-connection-string).
 
 > [!NOTE]
 > 2020 Nisan itibariyle PowerShell Galerisi, TLS 1,1 ve 1,0 kullanım dışıdır.
@@ -50,9 +52,10 @@ Install-Module -Name Az.ApplicationMonitor -AllowPrerelease -AcceptLicense
 ``` 
 
 ### <a name="enable-monitoring"></a>İzlemeyi etkinleştirme
+
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
-Enable-ApplicationInsightsMonitoring -ConnectionString xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Enable-ApplicationInsightsMonitoring -ConnectionString 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 ```
     
         
@@ -69,9 +72,11 @@ $pathInstalledModule = "$Env:ProgramFiles\WindowsPowerShell\Modules\Az.Applicati
 Expand-Archive -LiteralPath $pathToZip -DestinationPath $pathInstalledModule
 ```
 ### <a name="enable-monitoring"></a>İzlemeyi etkinleştirme
+
 ```powershell
-Enable-ApplicationInsightsMonitoring -ConnectionString xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Enable-ApplicationInsightsMonitoring -ConnectionString 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
 ```
+
 
 
 

@@ -3,28 +3,29 @@ title: 'Hızlı başlangıç: uygulamalar için bir profil oluşturma-Azure CLı
 description: Bu hızlı başlangıç makalesinde, Azure CLı kullanarak yüksek düzeyde kullanılabilir bir Web uygulaması oluşturmak için bir Traffic Manager profilinin nasıl oluşturulacağı açıklanır.
 services: traffic-manager
 author: duongau
-mnager: kumud
-Customer intent: As an IT admin, I want to direct user traffic to ensure high availability of web applications.
+manager: kumud
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/09/2020
+ms.date: 04/19/2021
 ms.author: duau
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 9a19e9c66967f36c3bdc4124fb9e60f7b7d2b36d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e4be2e887876f85e75df254fd6c6a19003ca8a07
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102213445"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792498"
 ---
 # <a name="quickstart-create-a-traffic-manager-profile-for-a-highly-available-web-application-using-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak yüksek oranda kullanılabilir bir Web uygulaması için Traffic Manager profili oluşturma
 
 Bu hızlı başlangıçta, Web uygulamanız için yüksek kullanılabilirlik sunan bir Traffic Manager profilinin nasıl oluşturulacağı açıklanmaktadır.
 
 Bu hızlı başlangıçta, bir Web uygulamasının iki örneğini oluşturacaksınız. Bunların her biri farklı bir Azure bölgesinde çalışmaktadır. [Uç nokta önceliğine](traffic-manager-routing-methods.md#priority-traffic-routing-method)göre bir Traffic Manager profili oluşturacaksınız. Profil, Kullanıcı trafiğini Web uygulamasını çalıştıran birincil siteye yönlendirir. Traffic Manager Web uygulamasını sürekli izler. Birincil site kullanılamıyorsa, yedekleme sitesine otomatik yük devretme sağlar.
+
+:::image type="content" source="./media/quickstart-create-traffic-manager-profile/environment-diagram.png" alt-text="CLı kullanarak Traffic Manager dağıtım ortamının diyagramı." border="false":::
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
@@ -47,7 +48,7 @@ Aşağıdaki örnek *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu 
 
 ## <a name="create-a-traffic-manager-profile"></a>Traffic Manager profili oluşturma
 
-Kullanıcı trafiğini uç nokta önceliğine göre yönlendiren [az Network Traffic-Manager profili oluşturma](/cli/azure/network/traffic-manager/profile#az-network-traffic-manager-profile-create) ' yı kullanarak bir Traffic Manager profili oluşturun.
+Kullanıcı trafiğini uç nokta önceliğine göre yönlendiren [az Network Traffic-Manager profili oluşturma](/cli/azure/network/traffic-manager/profile#az_network_traffic_manager_profile_create) ' yı kullanarak bir Traffic Manager profili oluşturun.
 
 Aşağıdaki örnekte, **<profile_name>** benzersiz bir Traffic Manager profili adıyla değiştirin.
 
@@ -70,7 +71,7 @@ az network traffic-manager profile create \
 Bu hızlı başlangıçta iki farklı Azure bölgesinde (*Doğu ABD* ve *Batı Avrupa*) dağıtılan bir Web uygulamasının iki örneğine ihtiyacınız olacaktır. Her biri, Traffic Manager için birincil ve yük devretme uç noktaları olarak görev yapar.
 
 ### <a name="create-web-app-service-plans"></a>Web App Service planları oluşturma
-İki farklı Azure bölgesinde dağıtacağınız Web uygulamasının iki örneği için [az appservice plan Create](/cli/azure/appservice/plan#az-appservice-plan-create) komutunu kullanarak Web App Service planları oluşturun.
+İki farklı Azure bölgesinde dağıtacağınız Web uygulamasının iki örneği için [az appservice plan Create](/cli/azure/appservice/plan#az_appservice_plan_create) komutunu kullanarak Web App Service planları oluşturun.
 
 Aşağıdaki örnekte, **<appspname_eastus>** ve **<appspname_westeurope>** benzersiz bir App Service plan adıyla değiştirin
 
@@ -91,7 +92,7 @@ az appservice plan create \
 ```
 
 ### <a name="create-a-web-app-in-the-app-service-plan"></a>App Service planında bir Web uygulaması oluşturma
-*Doğu ABD* ve Azure bölgelerindeki *Batı Avrupa* App Service planlarında [az WebApp Create](/cli/azure/webapp#az-webapp-create) kullanarak Web uygulaması için iki örnek oluşturun.
+*Doğu ABD* ve Azure bölgelerindeki *Batı Avrupa* App Service planlarında [az WebApp Create](/cli/azure/webapp#az_webapp_create) kullanarak Web uygulaması için iki örnek oluşturun.
 
 Aşağıdaki örnekte, **<app1name_eastus>** ve **<app2name_westeurope**>benzersiz bir uygulama adıyla değiştirin ve **<** appspname_eastus>ve **<** appspname_westeurope>, önceki bölümde App Service planlarını oluşturmak için kullanılan adla değiştirin.
 
@@ -110,7 +111,7 @@ az webapp create \
 ```
 
 ## <a name="add-traffic-manager-endpoints"></a>Traffic Manager uç noktalarını ekleme
-Aşağıdaki şekilde, [az Network Traffic-Manager uç noktası oluştur ' a](/cli/azure/network/traffic-manager/endpoint#az-network-traffic-manager-endpoint-create) Traffic Manager profile kullanarak iki Web Apps uç nokta Traffic Manager olarak ekleyin:
+Aşağıdaki şekilde, [az Network Traffic-Manager uç noktası oluştur ' a](/cli/azure/network/traffic-manager/endpoint#az_network_traffic_manager_endpoint_create) Traffic Manager profile kullanarak iki Web Apps uç nokta Traffic Manager olarak ekleyin:
 
 - Web uygulaması KIMLIĞINI belirleme ve *Doğu ABD* Azure bölgesinde bulunan Web uygulamasını, tüm Kullanıcı trafiğini yönlendirmek için birincil uç nokta olarak ekleyin. 
 - Web uygulaması KIMLIĞINI belirleme ve *Batı Avrupa* Azure bölgesinde bulunan Web uygulamasını yük devretme uç noktası olarak ekleme. 
@@ -178,7 +179,7 @@ Aşağıdaki örnekte, **<app1name_eastus>** ve **<app2name_westeurope>** öncek
 
 ### <a name="determine-the-dns-name"></a>DNS adını belirleme
 
-[Az Network Traffic-Manager profile Show](/cli/azure/network/traffic-manager/profile#az-network-traffic-manager-profile-show)kullanılarak TRAFFIC Manager profilinin DNS adını saptayın.
+[Az Network Traffic-Manager profile Show](/cli/azure/network/traffic-manager/profile#az_network_traffic_manager_profile_show)kullanılarak TRAFFIC Manager profilinin DNS adını saptayın.
 
 ```azurecli-interactive
 
@@ -196,7 +197,7 @@ az network traffic-manager profile show \
 
     > [!NOTE]
     > Bu hızlı başlangıç senaryosunda, tüm istekler birincil uç noktaya yönlendirir. **Öncelik 1** olarak ayarlanır.
-2. Traffic Manager yük devretmeyi eylemde görüntülemek için [az Network Traffic-Manager Endpoint Update](/cli/azure/network/traffic-manager/endpoint#az-network-traffic-manager-endpoint-update)kullanarak birincil sitenizi devre dışı bırakın.
+2. Traffic Manager yük devretmeyi eylemde görüntülemek için [az Network Traffic-Manager Endpoint Update](/cli/azure/network/traffic-manager/endpoint#az_network_traffic_manager_endpoint_update)kullanarak birincil sitenizi devre dışı bırakın.
 
    ```azurecli-interactive
 
@@ -214,7 +215,7 @@ az network traffic-manager profile show \
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-İşiniz bittiğinde, [az Group Delete](/cli/azure/group#az-group-delete)kullanarak kaynak gruplarını, Web uygulamalarını ve tüm ilgili kaynakları silin.
+İşiniz bittiğinde, [az Group Delete](/cli/azure/group#az_group_delete)kullanarak kaynak gruplarını, Web uygulamalarını ve tüm ilgili kaynakları silin.
 
 ```azurecli-interactive
 

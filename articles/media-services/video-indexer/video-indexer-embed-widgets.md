@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/25/2021
 ms.author: juliako
 ms.custom: devx-track-js
-ms.openlocfilehash: b13086e11e1181bba91a3255e68e9f8a32e78450
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 822d50bca6bc1139e9b5f0554bcf9a56a8fcbd74
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98797782"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532884"
 ---
 # <a name="embed-video-indexer-widgets-in-your-apps"></a>Video Indexer pencere öğelerini uygulamalarınıza ekleyin
 
@@ -34,7 +34,7 @@ Bilişsel İçgörüler pencere öğeleri, video dizini oluşturma işleminizden
 |---|---|---|
 |`widgets` | Virgülle ayrılmış dizeler | , İşlemek istediğiniz öngörüleri denetlemenize olanak tanır.<br/>Örnek: `https://www.videoindexer.ai/embed/insights/<accountId>/<videoId>/?widgets=people,keywords` yalnızca kişiler ve anahtar sözcükler UI öngörülerini işler.<br/>Kullanılabilir seçenekler: kişiler, animatedCharacters, anahtar sözcükler, Etiketler, yaklaşım, konu başlıkları, konular, ana kareler, döküm, OCR, hoparlörler, sahneler ve namedEntities.|
 |`controls`|Virgülle ayrılmış dizeler|İşlemek istediğiniz denetimleri denetlemenizi sağlar.<br/>Örnek: `https://www.videoindexer.ai/embed/insights/<accountId>/<videoId>/?controls=search,download` yalnızca arama seçeneğini işler ve İndir düğmesi.<br/>Kullanılabilir seçenekler: arama, indirme, Önayarlar, dil.|
-|`language`|Kısa bir dil kodu (dil adı)|Öngörüler dilini denetler.<br/>Örnek: `https://www.videoindexer.ai/embed/insights/<accountId>/<videoId>/?language=es-es` <br/>veya `https://www.videoindexer.ai/embed/insights/<accountId>/<videoId>/?language=spanish`|
+|`language`|Kısa bir dil kodu (dil adı)|Öngörüler dilini denetler.<br/>Örnek: `https://www.videoindexer.ai/embed/insights/<accountId>/<videoId>/?language=es-es` <br/> veya `https://www.videoindexer.ai/embed/insights/<accountId>/<videoId>/?language=spanish`|
 |`locale` | Kısa bir dil kodu | Kullanıcı arabiriminin dilini denetler. `en` varsayılan değerdir. <br/>Örnek: `locale=de`.|
 |`tab` | Varsayılan seçili sekme | Varsayılan olarak işlenen **Öngörüler** sekmesini denetler. <br/>Örnek: `tab=timeline` görüş **zaman çizelgesi** sekmesi seçiliyken öngörüleri işler.|
 |`location` ||`location`Parametrenin gömülü bağlantılara dahil olması gerekir, bkz. [bölgenizin adını alma](regions.md). Hesabınız önizlemededir, `trial` konum değeri için kullanılmalıdır. `trial` , parametresi için varsayılan değerdir `location` .| 
@@ -66,16 +66,15 @@ Yeni projeler oluşturmak ve bir videonun öngörülerini yönetmek için düzen
 
 <sup>*</sup>Sahibin dikkatli sağlaması gerekir `accessToken` .
 
-## <a name="embedding-videos"></a>Videoları katıştırma
+## <a name="embed-videos"></a>Videoları ekleme
 
-Bu bölümde ortak ve özel içerik uygulamalara katıştırılması ele alınmaktadır.
+Bu bölümde [, portalı kullanarak](#the-portal-experience) veya [URL 'yi uygulamalara el ile](#assemble-the-url-manually) bağlayarak video ekleme ele alınmaktadır. 
 
 `location`Parametrenin gömülü bağlantılara dahil olması gerekir, bkz. [bölgenizin adını alma](regions.md). Hesabınız önizlemededir, `trial` konum değeri için kullanılmalıdır. `trial` , parametresi için varsayılan değerdir `location` . Örneğin: `https://www.videoindexer.ai/accounts/00000000-0000-0000-0000-000000000000/videos/b2b2c74b8e/?location=trial`.
 
-> [!IMPORTANT]
-> **Oynatıcı** veya **Öngörüler** pencere öğesi için bir bağlantının paylaşılması, erişim belirtecini içerir ve hesabınıza salt okuma izinleri verir.
+### <a name="the-portal-experience"></a>Portal deneyimi
 
-### <a name="public-content"></a>Ortak içerik
+Video eklemek için, portalı aşağıda açıklandığı gibi kullanın:
 
 1. [Video Indexer](https://www.videoindexer.ai/) Web sitesinde oturum açın.
 1. Birlikte çalışmak istediğiniz videoyu seçip **oynat**' a basın.
@@ -84,18 +83,27 @@ Bu bölümde ortak ve özel içerik uygulamalara katıştırılması ele alınma
 5. Ekleme kodunu kopyalayın ( **Katıştırılmış kodu** **paylaşma & Ekle** iletişim kutusunda görünür).
 6. Uygulamanıza kodu ekleyin.
 
-### <a name="private-content"></a>Özel içerik
+> [!NOTE]
+> **Oynatıcı** veya **Öngörüler** pencere öğesi için bir bağlantının paylaşılması, erişim belirtecini içerir ve hesabınıza salt okuma izinleri verir.
 
-Özel bir video eklemek için iframe 'nin özniteliğinde bir erişim belirteci geçirmeniz gerekir `src` :
+### <a name="assemble-the-url-manually"></a>URL 'YI el ile birleştirin
+
+#### <a name="public-videos"></a>Genel videolar
+
+URL 'YI şu şekilde derleyerek genel videoları ekleyebilirsiniz:
+
+`https://www.videoindexer.ai/embed/[insights | player]/<accountId>/<videoId>`
+  
+  
+#### <a name="private-videos"></a>Özel videolar
+
+Özel bir video eklemek için bir erişim belirteci geçirmeniz gerekir (IFRAME özniteliğinde [video erişim belirtecini al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Access-Token) ' ı kullanın) `src` .
 
 `https://www.videoindexer.ai/embed/[insights | player]/<accountId>/<videoId>/?accessToken=<accessToken>`
-    
-Bilişsel Öngörüler pencere öğesi içeriğini almak için aşağıdaki yöntemlerden birini kullanın:
+  
+### <a name="provide-editing-insights-capabilities"></a>Öngörüleri Düzenle özelliklerini sağlama
 
-- [Öngörüler al pencere öğesi](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Video-Insights-Widget?&pattern=widget) API 'si.<br/>
-- [Video erişim belirteci al](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Access-Token?). URL 'ye bir sorgu parametresi olarak ekleyin. `src`Daha önce gösterildiği gibi bu URL 'yi iframe için değer olarak belirtin.
-
-Katıştırılmış pencere öğesinde içgörüler özelliklerini düzenlemenizi sağlamak için, Düzenle izinlerini içeren bir erişim belirteci geçirmeniz gerekir. [Öngörüler al pencere öğesini](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Video-Insights-Widget?&pattern=widget) kullanın veya Ile [Görüntülü erişim belirteci alın](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Video-Access-Token?) `&allowEdit=true` .
+Katıştırılmış pencere öğesinde içgörüler özelliklerini düzenlemenizi sağlamak için, Düzenle izinlerini içeren bir erişim belirteci geçirmeniz gerekir. İle [Görüntülü erişim belirteci al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Access-Token) ' i kullanın `&allowEdit=true` .
 
 ## <a name="widgets-interaction"></a>Pencere öğeleri etkileşimi
 
@@ -291,7 +299,7 @@ Oynatıcı, varsayılan olarak videoyu oynatmaya başlayacaktır. önceki ekleme
 
 Video Indexer API 'SI ve pencere öğeleri için örnekler içeren [kod örnekleri](https://github.com/Azure-Samples/media-services-video-indexer/tree/master/Embedding%20widgets) deposuna bakın:
 
-| Dosya/klasör                       | Description                                |
+| Dosya/klasör                       | Açıklama                                |
 |-----------------------------------|--------------------------------------------|
 | `azure-media-player`              | Video Indexer videosunu özel bir Azure Media Player yükleyin.                        |
 | `azure-media-player-vi-insights`  | Özel bir Azure Media Player VI öngörüleri ekleyin.                             |

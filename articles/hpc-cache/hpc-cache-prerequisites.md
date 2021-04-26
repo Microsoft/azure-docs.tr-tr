@@ -4,14 +4,14 @@ description: Azure HPC önbelleğini kullanma önkoşulları
 author: ekpgh
 ms.service: hpc-cache
 ms.topic: how-to
-ms.date: 03/15/2021
+ms.date: 04/14/2021
 ms.author: v-erkel
-ms.openlocfilehash: 7d40dcf80d9ec566146bbe46bc2cb3c558584fcd
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 3cddbba3dca64561d7e2b7b27715152a26a8c9e9
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104775774"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717594"
 ---
 # <a name="prerequisites-for-azure-hpc-cache"></a>Azure HPC önbelleği önkoşulları
 
@@ -59,7 +59,7 @@ En iyi yöntem, her önbellek için yeni bir alt ağ oluşturmaktır. Önbellek 
 Önbelleğin, sanal ağının dışındaki kaynaklara erişmesi için DNS ihtiyacı vardır. Kullandığınız kaynaklara bağlı olarak, özelleştirilmiş bir DNS sunucusu ayarlamanız ve bu sunucu ile Azure DNS sunucuları arasında iletmeyi yapılandırmanız gerekebilir:
 
 * Azure Blob depolama uç noktalarına ve diğer iç kaynaklara erişmek için, Azure tabanlı DNS sunucusuna ihtiyacınız vardır.
-* Şirket içi depolamaya erişmek için, depolama ana bilgisayar adlarını çözümleyebilecek özel bir DNS sunucusu yapılandırmanız gerekir. Önbelleği oluşturmadan **önce** bunu yapmanız gerekir.
+* Şirket içi depolamaya erişmek için, depolama ana bilgisayar adlarını çözümleyebilecek özel bir DNS sunucusu yapılandırmanız gerekir. Önbelleği oluşturmadan önce bunu yapmanız gerekir.
 
 Yalnızca blob Storage kullanıyorsanız, önbelleğiniz için Azure tarafından sağlanmış varsayılan DNS sunucusunu kullanabilirsiniz. Ancak, Azure dışındaki depolama veya diğer kaynaklara erişmeniz gerekiyorsa, özel bir DNS sunucusu oluşturmanız ve Azure 'a özgü tüm çözümleme isteklerini Azure DNS sunucusuna iletecek şekilde yapılandırmanız gerekir.
 
@@ -72,8 +72,8 @@ Yalnızca blob Storage kullanıyorsanız, önbelleğiniz için Azure tarafından
   DNS sunucusunu Azure portal sanal ağa eklemek için aşağıdaki adımları izleyin:
 
   1. Azure portal sanal ağı açın.
-  1. Kenar çubuğu 'ndaki **Ayarlar** menüsünden **DNS sunucuları** ' nı seçin.
-  1. **Özel** ' i seçin
+  1. Kenar çubuğu 'ndaki ayarlar menüsünden DNS sunucuları ' nı seçin.
+  1. Özel ' i seçin
   1. Alana DNS sunucusunun IP adresini girin.
 
 Basit bir DNS sunucusu, istemci bağlantılarının tüm kullanılabilir önbellek bağlama noktaları arasında yükünü dengelemek için de kullanılabilir.
@@ -106,14 +106,16 @@ Her depolama türünün belirli önkoşulları vardır.
 
 Depolama hedefi eklemeyi denemeden önce hesabı oluşturun. Hedefi eklediğinizde yeni bir kapsayıcı oluşturabilirsiniz.
 
-Uyumlu bir depolama hesabı oluşturmak için şu ayarları kullanın:
+Uyumlu bir depolama hesabı oluşturmak için şu birleşimlerden birini kullanın:
 
-* Performans: **Standart**
-* Hesap türü: **StorageV2 (genel amaçlı v2)**
-* Çoğaltma: **yerel olarak yedekli depolama (LRS)**
-* Erişim katmanı (varsayılan): **sık** erişimli
+| Performans | Tür | Çoğaltma | Erişim katmanı |
+|--|--|--|--|
+| Standart | StorageV2 (genel amaçlı v2)| Yerel olarak yedekli depolama (LRS) veya bölge yedekli depolama (ZRS) | Sık Erişimli |
+| Premium | Blok blobları | Yerel olarak yedekli depolama (LRS) | Sık Erişimli |
 
-Önbelleğiniz ile aynı konumda bir depolama hesabı kullanmak iyi bir uygulamadır.
+Depolama hesabına önbelleğinizin özel alt ağından erişilebilir olması gerekir. Hesabınız özel bir uç nokta veya belirli sanal ağlarla kısıtlanmış ortak bir uç nokta kullanıyorsa, önbelleğin alt ağından erişimi etkinleştirdiğinizden emin olun. (Açık bir genel uç nokta önerilmez.)
+
+Önbelleğiniz ile aynı Azure bölgesindeki bir depolama hesabı kullanmak iyi bir uygulamadır.
 
 Ayrıca, yukarıdaki [izinlerle](#permissions)belirtilen şekilde, önbellek uygulamasına Azure depolama hesabınıza erişim izni vermeniz gerekir. Önbelleğe gerekli erişim rollerini sağlamak için [depolama hedefleri ekleme](hpc-cache-add-storage.md#add-the-access-control-roles-to-your-account) bölümündeki yordamı izleyin. Depolama hesabı sahibi değilseniz, sahibi bu adımı izleyin.
 
@@ -127,9 +129,9 @@ Bir NFS depolama sistemi (örneğin, şirket içi donanım NAS sistemi) kullanı
 
 Daha fazla bilgi için [bkz. NAS yapılandırması ve NFS depolama hedefi sorunları sorunlarını giderme](troubleshoot-nas.md).
 
-* **Ağ bağlantısı:** Azure HPC önbelleğinin önbellek alt ağı ile NFS sisteminin veri merkezi arasında yüksek bant genişliğine sahip ağ erişimi olması gerekir. [ExpressRoute](../expressroute/index.yml) veya benzer erişim önerilir. VPN kullanıyorsanız, büyük paketlerin engellenmediğinden emin olmak için bunu 1350 adresindeki Clamp TCP yönetim paketleri için yapılandırmanız gerekebilir. VPN ayarları sorunlarını gidermeye yönelik ek yardım için [VPN paket boyutu kısıtlamalarını](troubleshoot-nas.md#adjust-vpn-packet-size-restrictions) okuyun.
+* Ağ bağlantısı: Azure HPC önbelleğinin önbellek alt ağı ile NFS sisteminin veri merkezi arasında yüksek bant genişliğine sahip ağ erişimi olması gerekir. [ExpressRoute](../expressroute/index.yml) veya benzer erişim önerilir. VPN kullanıyorsanız, büyük paketlerin engellenmediğinden emin olmak için bunu 1350 adresindeki Clamp TCP yönetim paketleri için yapılandırmanız gerekebilir. VPN ayarları sorunlarını gidermeye yönelik ek yardım için [VPN paket boyutu kısıtlamalarını](troubleshoot-nas.md#adjust-vpn-packet-size-restrictions) okuyun.
 
-* **Bağlantı noktası erişimi:** Önbelleğin depolama sisteminizdeki belirli TCP/UDP bağlantı noktalarına erişmesi gerekir. Farklı depolama türlerinin farklı bağlantı noktası gereksinimleri vardır.
+* Bağlantı noktası erişimi: önbelleğin depolama sisteminizdeki belirli TCP/UDP bağlantı noktalarına erişmesi gerekir. Farklı depolama türlerinin farklı bağlantı noktası gereksinimleri vardır.
 
   Depolama sisteminizin ayarlarını denetlemek için bu yordamı izleyin.
 
@@ -157,7 +159,7 @@ Daha fazla bilgi için [bkz. NAS yapılandırması ve NFS depolama hedefi sorunl
 
   * Bu gerekli bağlantı noktalarının tümünde trafiğe izin verdiklerinden emin olmak için güvenlik duvarı ayarlarını kontrol edin. Azure 'da kullanılan güvenlik duvarlarını, veri merkezinizdeki şirket içi güvenlik duvarlarını da denetlediğinizden emin olun.
 
-* **Kök erişimi** (okuma/yazma): önbellek arka uç SISTEMINE Kullanıcı kimliği 0 olarak bağlanır. Depolama sisteminizde bu ayarları kontrol edin:
+* Kök erişimi (okuma/yazma): önbellek arka uç sistemine Kullanıcı KIMLIĞI 0 olarak bağlanır. Depolama sisteminizde bu ayarları kontrol edin:
   
   * Etkinleştirin `no_root_squash` . Bu seçenek, uzak kök kullanıcının köke ait dosyalara erişebilmesini sağlar.
 
@@ -190,13 +192,15 @@ Bu, adımlara genel bir bakış. Bu adımlar değişebilir, bu nedenle geçerli 
 
    * Standart BLOB depolama hesabı için depolama hesabı ayarlarını kullanmak yerine, [nasıl yapılır belgesindeki](../storage/blobs/network-file-system-protocol-support-how-to.md)yönergeleri izleyin. Desteklenen depolama hesabı türü, Azure bölgesine göre farklılık gösterebilir.
 
-   * **Ağ** bölümünde, oluşturduğunuz güvenli sanal ağda özel bir uç nokta seçin (önerilir) veya güvenli VNET 'ten kısıtlı erişimi olan bir genel uç nokta seçin.
+   * Ağ bölümünde, oluşturduğunuz güvenli sanal ağda özel bir uç nokta seçin (önerilir) veya güvenli VNet 'ten kısıtlı erişimi olan bir genel uç nokta seçin.
 
-   * NFS erişimini etkinleştirdiğiniz **Gelişmiş** bölümünü tamamlamayı unutmayın.
+   * NFS erişimini etkinleştirdiğiniz Gelişmiş bölümünü tamamlamayı unutmayın.
 
    * Yukarıdaki [izinlerle](#permissions)belirtilen şekilde, önbellek uygulamasına Azure depolama hesabınıza erişim izni verin. Bunu ilk kez bir depolama hedefi oluşturduğunuzda yapabilirsiniz. Önbelleğe gerekli erişim rollerini sağlamak için [depolama hedefleri ekleme](hpc-cache-add-storage.md#add-the-access-control-roles-to-your-account) bölümündeki yordamı izleyin.
 
      Depolama hesabı sahibi değilseniz, sahibi bu adımı izleyin.
+
+Azure HPC cache [ile](nfs-blob-considerations.md)Azure HPC Cache Ile ADLS-NFS depolama hedeflerini kullanma hakkında daha fazla bilgi edinin.
 
 ## <a name="set-up-azure-cli-access-optional"></a>Azure CLı erişimi ayarlama (isteğe bağlı)
 

@@ -5,17 +5,17 @@ services: storage
 author: roygara
 ms.service: storage
 ms.topic: include
-ms.date: 5/11/2020
+ms.date: 04/15/2021
 ms.author: rogarana
 ms.custom: include file
-ms.openlocfilehash: 09723030f0da0252120f66f36347cad2e3a3546a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 958c40ed311ebe8b2a83ce0d4d394d00f48d1afa
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93375972"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107732495"
 ---
-Özel bir uç nokta oluşturmak istediğiniz depolama hesabına gidin. Depolama hesabının içindekiler tablosunda **Özel uç nokta bağlantıları**' nı ve ardından **+ Özel uç noktasını** seçerek yeni bir özel uç nokta oluşturun. 
+Özel bir uç nokta oluşturmak istediğiniz depolama hesabına gidin. Depolama hesabının içindekiler tablosunda **ağ**, **Özel uç nokta bağlantıları**' nı ve ardından yeni bir özel uç nokta oluşturmak için **Özel uç nokta** ' ı seçin. 
 
 [![Depolama hesabı İçindekiler tablosundaki özel uç nokta bağlantıları öğesinin ekran görüntüsü](media/storage-files-networking-endpoints-private-portal/create-private-endpoint-0.png)](media/storage-files-networking-endpoints-private-portal/create-private-endpoint-0.png#lightbox)
 

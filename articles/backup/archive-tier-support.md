@@ -3,12 +3,12 @@ title: Arşiv katmanı desteği (Önizleme)
 description: Azure Backup için Arşiv katmanı desteği hakkında bilgi edinin
 ms.topic: conceptual
 ms.date: 02/18/2021
-ms.openlocfilehash: 322bc9d7e2160cc9156c793859b9fda833b3df09
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 7a42b8702cfdda14a18aa3cdd4e084ed78767b0a
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563982"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107012157"
 ---
 # <a name="archive-tier-support-preview"></a>Arşiv katmanı desteği (Önizleme)
 
@@ -40,6 +40,8 @@ Desteklenen istemciler:
 
 ## <a name="get-started-with-powershell"></a>PowerShell ile çalışmaya başlayın
 
+1. [En son](https://github.com/PowerShell/PowerShell/releases) PowerShell sürümünü GitHub 'dan indirin.
+
 1. PowerShell'de aşağıdaki komutu çalıştırın:
   
     ```azurepowershell
@@ -57,7 +59,13 @@ Desteklenen istemciler:
 
 1. Yedekleme öğelerinin listesini al:
 
-    `$BackupItemList = Get-AzRecoveryServicesBackupItem -vaultId $vault.ID -BackupManagementType "AzureVM/AzureWorkload" -WorkloadType "AzureVM/MSSQL"`
+    - Azure sanal makineleri için:
+
+        `$BackupItemList = Get-AzRecoveryServicesBackupItem -vaultId $vault.ID -BackupManagementType "AzureVM" -WorkloadType "AzureVM"`
+
+    - Azure sanal makineler 'de SQL Server için:
+
+        `$BackupItemList = Get-AzRecoveryServicesBackupItem -vaultId $vault.ID -BackupManagementType "AzureWorkload" -WorkloadType "MSSQL"`
 
 1. Yedekleme öğesini al.
 

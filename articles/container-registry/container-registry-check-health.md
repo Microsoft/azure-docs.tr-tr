@@ -3,12 +3,12 @@ title: Kayıt defteri sistem durumunu denetle
 description: Yerel Docker yapılandırması ve kayıt defteri bağlantısı dahil olmak üzere bir Azure Container Registry kullanırken sık karşılaşılan sorunları belirlemek için hızlı tanılama komutunu çalıştırmayı öğrenin
 ms.topic: article
 ms.date: 07/02/2019
-ms.openlocfilehash: f27a99818260553cbd7ba26158db0064c145a21f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: fec05efe67f5c502f36ee90eec57ba283b15a4a0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88245392"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107761754"
 ---
 # <a name="check-the-health-of-an-azure-container-registry"></a>Azure Container Registry 'nin sistem durumunu denetleme
 
@@ -89,4 +89,4 @@ Sık sorulan sorular ve Azure Container Registry ilgili diğer bilinen sorunlar 
 
 <!-- LINKS - internal -->
 [azure-cli]: /cli/azure/install-azure-cli
-[az-acr-check-health]: /cli/azure/acr#az-acr-check-health
+[az-acr-check-health]: /cli/azure/acr#az_acr_check_health

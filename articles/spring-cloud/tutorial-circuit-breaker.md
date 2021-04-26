@@ -7,12 +7,12 @@ ms.service: spring-cloud
 ms.topic: tutorial
 ms.date: 04/06/2020
 ms.custom: devx-track-java, devx-track-azurecli
-ms.openlocfilehash: 9fbd137f8fa36a7b0526b25d664fceac795ecd81
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 09acdc0c4ea2dbe90c0b7b037b6aec501cc1dd55
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104879210"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106223039"
 ---
 # <a name="tutorial-use-circuit-breaker-dashboard-with-azure-spring-cloud"></a>Öğretici: Azure Spring Cloud ile devre kesici panosu kullanma
 
@@ -20,7 +20,7 @@ ms.locfileid: "104879210"
 
 Yay [bulutu Netflix Turbin](https://github.com/Netflix/Turbine) , birden çok [hyte x](https://github.com/Netflix/Hystrix) ölçüm akışını toplamak için yaygın olarak kullanılır. böylece, akışlar hyçabax Panosu kullanılarak tek bir görünümde izlenebilir. Bu öğreticide, Azure Spring Cloud 'da nasıl kullanılacağı gösterilmektedir.
 > [!NOTE]
-> Netflix Hyçabax birçok mevcut yay bulutu uygulamasında yaygın olarak kullanılır, ancak artık etkin bir geliştirme aşamasındadır. Yeni proje geliştiriyorsanız, bunun yerine [resilience4j](https://github.com/resilience4j/resilience4j)gibi Spring Cloud devre kesici uygulamalarını kullanın. Bu öğreticide gösterilen türbin 'ten farklı olarak, yeni yay bulutu devre kesici çerçevesi, ölçüm verileri işlem hattının tüm uygulamalarını mikro ölçüm olarak birleştirir. Azure Spring Cloud 'da mikro ölçüm 'i desteklemeye devam ediyoruz, bu nedenle bu öğretici bu öğreticide ele alınmayacak.
+> Netflix Hyçabax birçok mevcut yay bulutu uygulamasında yaygın olarak kullanılır, ancak artık etkin bir geliştirme aşamasındadır. Yeni proje geliştiriyorsanız, bunun yerine [resilience4j](https://github.com/resilience4j/resilience4j)gibi Spring Cloud devre kesici uygulamalarını kullanın. Bu öğreticide gösterilen türbin 'ten farklı olarak, yeni yay bulutu devre kesici çatısı, ölçüm veri işlem hattının tüm uygulamalarını Azure Spring Cloud tarafından da desteklenen mikro ölçüm olarak birleştirir. [Daha Fazla Bilgi Edinin](https://docs.microsoft.com/azure/spring-cloud/how-to-circuit-breaker-metrics).
 
 ## <a name="prepare-your-sample-applications"></a>Örnek uygulamalarınızı hazırlama
 Örnek, bu [depodan](https://github.com/StackAbuse/spring-cloud/tree/master/spring-turbine)ele geçirildi.

@@ -10,10 +10,10 @@ ms.topic: conceptual
 ms.date: 03/02/2021
 ms.custom: devx-track-csharp
 ms.openlocfilehash: ba538f4753c2365406bd88286b6d54cff1a9e9ea
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104800831"
 ---
 # <a name="filters-in-azure-cognitive-search"></a>Azure Bilişsel Arama filtreler 
@@ -157,7 +157,7 @@ Metin dizeleri büyük/küçük harfe duyarlıdır. Büyük küçük harf olmaya
 
 ### <a name="approaches-for-filtering-on-text"></a>Metinde filtreleme yaklaşımları
 
-| Yaklaşım | Açıklama | Kullanılması gereken durumlar |
+| Yaklaşım | Description | Kullanılması gereken durumlar |
 |----------|-------------|-------------|
 | [`search.in`](search-query-odata-search-in-function.md) | Ayrılmış bir dize listesine karşı bir alanla eşleşen bir işlev. | Birçok ham metin değerinin bir dize alanı ile eşleştirilmesi gereken, [Güvenlik filtreleri](search-security-trimming-for-azure-search.md) ve tüm filtreler için önerilir. **Search.in** işlevi hız için tasarlanmıştır ve ve kullanarak alanı her bir dizeye göre açıkça karşılaştırmadan çok daha hızlıdır `eq` `or` . | 
 | [`search.ismatch`](search-query-odata-full-text-search-functions.md) | Aynı filtre ifadesinde tam metin arama işlemlerini kesin olarak Boolean filtre işlemleriyle karıştırabilmeniz için bir işlev. | Tek bir istekte birden çok arama filtresi kombinasyonu istediğinizde **Search. IsMatch** (veya Puanlama eşdeğerini, **arama. ısmatchpuanlama**) kullanın. Ayrıca, daha büyük bir dizedeki kısmi bir dizeyi filtrelemek için bir *Contains* filtresi için de kullanabilirsiniz. |

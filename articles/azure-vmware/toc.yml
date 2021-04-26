@@ -64,10 +64,6 @@
       href: manage-dhcp.md
     - name: NSX ağ bileşenlerini yapılandırma
       href: configure-nsx-network-components-azure-portal.md
-    - name: VM'ler için olağanüstü durum kurtarmayı dağıtma
-      href: disaster-recovery-for-virtual-machines.md
-    - name: İçerik kitaplığı aracılığıyla VM dağıtma
-      href: ./deploy-vm-content-library.md
     - name: GitHub Enterprise Server’ı ayarlama
       href: github-enterprise-server.md
     - name: Genel IP kullanımı
@@ -78,6 +74,26 @@
       href: windows-server-failover-cluster.md
     - name: VSphere kimlik bilgilerini Sıfırla
       href: reset-vsphere-credentials.md
+    - name: Olağanüstü durum kurtarma
+      items:
+        - name: VM'ler için olağanüstü durum kurtarmayı dağıtma
+          href: disaster-recovery-for-virtual-machines.md
+        - name: Azure 'da olağanüstü durum kurtarma
+          items:
+            - name: Azure’u hazırlama
+              href: /azure/site-recovery/avs-tutorial-prepare-azure?context=/azure/azure-vmware/context/context
+            - name: Azure VMware Çözümü hazırlama
+              href: /azure/site-recovery/avs-tutorial-prepare-avs?context=/azure/azure-vmware/context/context
+            - name: Çoğaltmayı ayarlama
+              href: /azure/site-recovery/avs-tutorial-replication?context=/azure/azure-vmware/context/context
+            - name: Olağanüstü durum kurtarma tatbikatı çalıştırma
+              href: /azure/site-recovery/avs-tutorial-dr-drill-azure?context=/azure/azure-vmware/context/context
+            - name: Azure'a yük devretme
+              href: /azure/site-recovery/avs-tutorial-failover?context=/azure/azure-vmware/context/context
+            - name: Sanal makineleri yeniden koruma
+              href: /azure/site-recovery/avs-tutorial-reprotect?context=/azure/azure-vmware/context/context
+            - name: Azure’dan yeniden çalışma
+              href: /azure/site-recovery/avs-tutorial-failback?context=/azure/azure-vmware/context/context
     - name: Azure’da yerel tümleştirme
       items:
         - name: API Management
@@ -100,12 +116,16 @@
           href: protect-azure-vmware-solution-with-application-gateway.md
         - name: Traffic Manager
           href: deploy-traffic-manager-balance-workloads.md
+        - name: Uyarıları yapılandırma ve ölçümler ile çalışma
+          href: configure-alerts-for-azure-vmware-solution.md
     - name: VMware çözümleri
       items:
         - name: vRealize İşlemlerini ayarlama
           href: vrealize-operations-for-azure-vmware-solution.md
         - name: VMware Horizon dağıtma
           href: azure-vmware-solution-horizon.md
+        - name: İçerik kitaplığından VM 'Leri dağıtma
+          href: deploy-vm-content-library.md
     - name: VMware ekosistemi
       items:
         - name: VM’ler için yedekleme çözümleri
@@ -118,8 +138,30 @@
       items:
         - name: Dağıtım hataları için destek isteği açma
           href: fix-deployment-provisioning-failures.md
+        - name: VMware araçları Vix hata kodu = 21009
+          href: 'https://kb.vmware.com/s/article/2129927'
     - name: SSS
-      href: faq.yml
+      items:
+        - name: Genel
+          href: /azure/azure-vmware/faq#general
+        - name: Müşteri iletişimi
+          href: /azure/azure-vmware/faq#customer-communication
+        - name: Yapılandırma ve kurulum
+          href: /azure/azure-vmware/faq#configuration-and-setup
+        - name: VMware yazılımı
+          href: /azure/azure-vmware/faq#vmware-software
+        - name: 'İşlem, yedekleme ve olağanüstü durum kurtarma'
+          href: '/azure/azure-vmware/faq#compute,-backup,-and-disaster-recovery'
+        - name: Ağ ve karşılıklı bağlantı
+          href: /azure/azure-vmware/faq#networking-and-interconnectivity
+        - name: Depolama
+          href: /azure/azure-vmware/faq#storage
+        - name: 'Konaklar, kümeler ve özel bulutlar'
+          href: '/azure/azure-vmware/faq#hosts,-clusters,-and-private-clouds'
+        - name: Kimlik yönetimi
+          href: /azure/azure-vmware/faq#identity-management
+        - name: Faturalandırma ve destek
+          href: /azure/azure-vmware/faq#billing-and-support
     - name: Videolar
       items:
         - name: Ekler
@@ -130,12 +172,14 @@
           href: 'https://youtu.be/BoQYvqzb6Y8'
         - name: Geçiş ve kapasite planlaması
           href: 'https://youtu.be/NoNG-hkksrA'
+        - name: Azure Logic App kullanarak vCenter & NSX-T parolalarını döndürme
+          href: 'https://youtu.be/cK1qY3knj88'
 - name: Başvuru
   items:
-    - name: Azure CLI’si
-      href: /cli/azure/ext/vmware/vmware
-    - name: Azure CLı veri deposu
-      href: /cli/azure/ext/vmware/vmware/datastore
+    - name: REST API
+      href: /rest/api/avs
+    - name: Azure CLI
+      href: /cli/azure/vmware
     - name: Azure PowerShell
       href: /powershell/module/az.vmware/
     - name: Terrampaform Azure sağlayıcısı

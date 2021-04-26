@@ -10,12 +10,12 @@ ms.workload: infrastructure
 ms.date: 07/06/2020
 ms.author: danis
 ms.reviewer: cynthn
-ms.openlocfilehash: 7c797957c292b9859ca41951b15f58c3d0be40b2
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: c70b02bdc554c723f53ad5f8c0d36c5eca87811e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102561084"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774377"
 ---
 # <a name="disable-or-remove-the-linux-agent-from-vms-and-images"></a>Linux aracısını VM 'lerden ve görüntülerden devre dışı bırakma veya kaldırma
 
@@ -32,7 +32,7 @@ Azure platformu, VM yapılandırması, izleme, güvenlik ve yardımcı program u
 
 ## <a name="disabling-extension-processing"></a>Uzantı işleme devre dışı bırakılıyor
 
-Gereksinimlerinize bağlı olarak uzantı işlemeyi devre dışı bırakmak için birkaç yol vardır, ancak devam etmeden önce, sanal makineye dağıtılan tüm uzantıları kaldırmanız **gerekir** (örneğin, Azure CLI 'yi kullanarak) ve bunları [listeleyebilir](/cli/azure/vm/extension#az-vm-extension-list) ve [silebilirsiniz](/cli/azure/vm/extension#az-vm-extension-delete):
+Gereksinimlerinize bağlı olarak uzantı işlemeyi devre dışı bırakmak için birkaç yol vardır, ancak devam etmeden önce, sanal makineye dağıtılan tüm uzantıları kaldırmanız **gerekir** (örneğin, Azure CLI 'yi kullanarak) ve bunları [listeleyebilir](/cli/azure/vm/extension#az_vm_extension_list) ve [silebilirsiniz](/cli/azure/vm/extension#az_vm_extension_delete):
 
 ```azurecli
 az vm extension delete -g MyResourceGroup --vm-name MyVm -n extension_name
@@ -156,7 +156,7 @@ Linux Aracısı içermeyen görüntüden sanal makineyi oluşturduğunuzda, VM d
 > 
 > Yukarıdaki işlem yapmazsanız, Platform, uzantı yapılandırmasını ve zaman aşımını 40min sonra göndermeye çalışır.
 
-VM 'yi uzantılar ile dağıtmak için, [--Enable-Agent](/cli/azure/vm#az-vm-create)Ile Azure CLI kullanabilirsiniz.
+VM 'yi uzantılar ile dağıtmak için, [--Enable-Agent](/cli/azure/vm#az_vm_create)Ile Azure CLI kullanabilirsiniz.
 
 ```azurecli
 az vm create \

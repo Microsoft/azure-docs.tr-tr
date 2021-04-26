@@ -8,13 +8,12 @@ ms.subservice: edge
 ms.topic: tutorial
 ms.date: 02/23/2021
 ms.author: alkohli
-Customer intent: As an IT admin, I need to understand how to activate Azure Stack Edge Pro R device so I can use it to transfer data to Azure.
-ms.openlocfilehash: 9ef9cf65b49ab578b08c3df26b98a8382403280a
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 2908f9c3cb39debed4f5a1bea38d15ccf6a22822
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105565291"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106059964"
 ---
 # <a name="tutorial-activate-azure-stack-edge-pro-r-device"></a>Öğretici: Azure Stack Edge Pro R cihazını etkinleştirin
 

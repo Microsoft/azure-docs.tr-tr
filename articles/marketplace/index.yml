@@ -10,19 +10,19 @@ metadata:
   author: mingshen-ms
   ms.author: mingshen
   ms.date: 09/02/2020
-  ms.openlocfilehash: 95903c1068d64545ae025fb5899a80014b8f26f2
-  ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
-  ms.translationtype: HT
+  ms.openlocfilehash: bacdc2a21502b44c5c2cb33c05a2c8b904b51f94
+  ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
+  ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 12/06/2020
-  ms.locfileid: "96746395"
+  ms.lasthandoff: 04/21/2021
+  ms.locfileid: "107817278"
 landingContent:
 - title: Ticari markette çalışma
   linkLists:
   - linkListType: get-started
     links:
     - text: Yeni hesap oluşturma
-      url: ./partner-center-portal/create-account.md
+      url: create-account.md
     - text: Yayımlama seçeneğinizi belirleme
       url: ./determine-your-listing-type.md
     - text: İlkeler ve koşullar
@@ -77,17 +77,17 @@ landingContent:
   linkLists:
   - linkListType: how-to-guide
     links:
-    - text: SaaS teklifleri
+    - text: SaaS
       url: plan-saas-offer.md
-    - text: Sanal makine teklifleri
+    - text: Sanal makineler
       url: ./marketplace-virtual-machines.md
-    - text: Azure uygulama teklifleri
+    - text: Azure uygulamaları
       url: ./create-new-azure-apps-offer.md
-    - text: Dynamics 365 for Customer Engagement ve PowerApps teklifleri
-      url: ./partner-center-portal/create-new-customer-engagement-offer.md
-    - text: Dynamics 365 Business Central teklifleri
+    - text: Power Apps & müşteri katılımı için Dynamics 365
+      url: dynamics-365-customer-engage-offer-setup.md
+    - text: Dynamics 365 Business Central
       url: ./partner-center-portal/create-new-business-central-offer.md
-    - text: Dynamics 365 for Operations teklifleri
+    - text: Dynamics 365 for Operations
       url: ./partner-center-portal/create-new-operations-offer.md
     - text: Daha fazla teklif türü
       url: ./publisher-guide-by-offer-type.md

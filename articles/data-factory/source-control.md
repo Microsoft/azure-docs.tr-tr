@@ -7,12 +7,12 @@ ms.author: weetok
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 02/26/2021
-ms.openlocfilehash: 7691c285bcc1c490878f5055468b0a57b6248679
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e5cb9090025fe541ad3f70cdac876aca0552f154
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101719410"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553167"
 ---
 # <a name="source-control-in-azure-data-factory"></a>Azure Data Factory kaynak denetimi
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
@@ -26,7 +26,7 @@ Varsayılan olarak, Azure Data Factory Kullanıcı arabirimi deneyimi (UX) yazar
 Daha iyi bir yazma deneyimi sağlamak için Azure Data Factory, bir Git deposunu Azure Repos veya GitHub ile yapılandırmanıza olanak tanır. Git değişiklik izlemeyi ve işbirliğini kolaylaştıran bir sürüm denetimi sistemidir. Bu makale, en iyi yöntemler ve sorun giderme kılavuzu ile birlikte bir git deposunda yapılandırma ve çalışmayı özetler.
 
 > [!NOTE]
-> Azure Kamu Bulutu için yalnızca GitHub Enterprise kullanılabilir.
+> Azure Kamu Bulutu için yalnızca *GitHub Enterprise Server* kullanılabilir.
 
 Azure Data Factory git ile tümleştirilme hakkında daha fazla bilgi edinmek için aşağıdaki 15 dakikalık öğretici videosunu görüntüleyin:
 

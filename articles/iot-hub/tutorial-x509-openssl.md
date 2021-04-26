@@ -12,13 +12,12 @@ ms.custom:
 - mvc
 - 'Role: Cloud Development'
 - 'Role: Data Analytics'
-- devx-track-azurecli
-ms.openlocfilehash: 0d083d856138d7895a6e03f4d290ef3c4ddebd05
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 0843e5d3a5e91cb4acdf18ad6bdf6f4f0c214f72
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105630778"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378304"
 ---
 # <a name="tutorial-using-openssl-to-create-test-certificates"></a>Öğretici: test sertifikaları oluşturmak için OpenSSL kullanma
 
@@ -101,6 +100,13 @@ authorityKeyIdentifier   = keyid:always
 basicConstraints         = critical,CA:true,pathlen:0
 extendedKeyUsage         = clientAuth,serverAuth
 keyUsage                 = critical,keyCertSign,cRLSign
+subjectKeyIdentifier     = hash
+
+[client_ext]
+authorityKeyIdentifier   = keyid:always
+basicConstraints         = critical,CA:false
+extendedKeyUsage         = clientAuth
+keyUsage                 = critical,digitalSignature
 subjectKeyIdentifier     = hash
 
 ```
@@ -244,13 +250,19 @@ Artık bir kök CA sertifikasına ve bir alt CA sertifikasına sahip olursunuz. 
 
 1. **Doğrulama kodu oluştur**' u seçin. Daha fazla bilgi için bkz. [CA sertifikasını kanıtlayın](tutorial-x509-prove-possession.md).
 
-1. Doğrulama kodunu panoya kopyalayın. Doğrulama kodunu sertifika konusu olarak ayarlamanız gerekir. Örneğin, doğrulama kodu BB0C656E69AF75E3FB3C8D922C1760C58C1DA5B05AAA9D0A ise, bir sonraki adımda gösterildiği gibi, bunu sertifikanızın konusu olarak ekleyin.
+1. Doğrulama kodunu panoya kopyalayın. Doğrulama kodunu sertifika konusu olarak ayarlamanız gerekir. Örneğin, doğrulama kodu BB0C656E69AF75E3FB3C8D922C1760C58C1DA5B05AAA9D0A ise, bunu adım 9 ' da gösterildiği gibi sertifika konusu olarak ekleyin.
 
 1. Özel anahtar oluşturun.
 
   ```bash
-    $ openssl req -new -key pop.key -out pop.csr
+    $ openssl genpkey -out pop.key -algorithm RSA -pkeyopt rsa_keygen_bits:2048
+  ```
 
+9. Özel anahtardan bir sertifika imzalama isteği (CSR) oluşturun. Doğrulama kodunu sertifikanızın konusu olarak ekleyin.
+
+  ```bash
+  openssl req -new -key pop.key -out pop.csr
+  
     -----
     Country Name (2 letter code) [XX]:.
     State or Province Name (full name) []:.
@@ -267,16 +279,16 @@ Artık bir kök CA sertifikasına ve bir alt CA sertifikasına sahip olursunuz. 
  
   ```
 
-9. Kök CA Yapılandırma dosyasını ve CSR 'yi kullanarak bir sertifika oluşturun.
+10. Kök CA Yapılandırma dosyasını ve sertifika kanıtı için CSR 'yi kullanarak bir sertifika oluşturun.
 
   ```bash
     openssl ca -config rootca.conf -in pop.csr -out pop.crt -extensions client_ext
 
   ```
 
-10. **Sertifika ayrıntıları** görünümündeki yeni sertifikayı seçin
+11. **Sertifika ayrıntıları** görünümündeki yeni sertifikayı seçin. PED dosyasını bulmak için, Sertifikalar klasörüne gidin.
 
-11. Sertifika karşıya yüklendikten sonra **Doğrula**' yı seçin. CA sertifikası durumunun **doğrulandı** olarak değiştirilmesi gerekir.
+12. Sertifika karşıya yüklendikten sonra **Doğrula**' yı seçin. CA sertifikası durumunun **doğrulandı** olarak değiştirilmesi gerekir.
 
 ## <a name="step-8---create-a-device-in-your-iot-hub"></a>8. adım-IoT Hub cihaz oluşturma
 

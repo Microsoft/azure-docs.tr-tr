@@ -1,14 +1,14 @@
 ---
-title: Algılayıcı uyarıları hakkında
+title: Algılayıcı uyarılarını anlama
 description: Ağınızın güvenliğini ve çalışmasını geliştirmenize yardımcı olması için uyarılarla çalışın.
-ms.date: 11/30/2020
+ms.date: 3/29/2021
 ms.topic: how-to
-ms.openlocfilehash: 178d3aedb44c29f53aab481894defeb4b9355d39
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: a34871342e9a868ba593ae894fdd91b5e99c5a44
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104781356"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105729431"
 ---
 # <a name="about-sensor-alerts"></a>Algılayıcı uyarıları hakkında
 
@@ -44,7 +44,7 @@ Uyarı araştırmasını geliştirmenize ve hızlandırmanıza yardımcı olan e
 
 Algılayıcı motorları ağ trafiğinden ve ilgilenmeniz gereken davranıştaki değişiklikleri tespit edildiğinde uyarılar tetiklenir. Bu makalede, her altyapının tetiklediği Uyarı türleri açıklanmaktadır.
 
-| Uyarı türü | Açıklama |
+| Uyarı türü | Description |
 |-|-|
 | İlke ihlali uyarıları | Ilke Ihlali altyapısı, daha önce öğrenilen trafikten sapma algıladığında tetiklenir. Örnek: <br /> -Yeni bir cihaz algılandı.  <br /> -Bir cihazda yeni bir yapılandırma algılandı. <br /> -Programlama cihazı olarak tanımlanmayan bir cihaz, programlama değişikliğini yürütür. <br /> -Bir bellenim sürümü değişti. |
 | Protokol ihlali uyarıları | Protokol Ihlali altyapısı, protokol belirtimine uymayan paket yapılarını veya alan değerlerini algıladığında tetiklenir. | 
@@ -64,9 +64,10 @@ Uyarılara yansıtılan etkinlik, veri araştırma, risk değerlendirmesi ve sal
 
   - Ağ cihazlarında algılanan kötü amaçlı yazılım olayları, risk değerlendirmesi raporlarında raporlanır. Kötü amaçlı yazılım olayları hakkında uyarı *kapatıldığında*, etkilenen cihazlar risk değerlendirmesi raporunda hesaplanmaz.
 
-## <a name="see-also"></a>Ayrıca bkz.
+## <a name="next-steps"></a>Sonraki adımlar
 
-- [Öğrenme ve akıllı BT öğrenme modları](how-to-control-what-traffic-is-monitored.md#learning-and-smart-it-learning-modes)
-- [Uyarlarda verilen bilgileri görüntüleme](how-to-view-information-provided-in-alerts.md)
-- [Uyarı olayını yönetme](how-to-manage-the-alert-event.md)
-- [Uyarı iş akışlarını hızlandırma](how-to-accelerate-alert-incident-response.md)
+[Öğrenme ve akıllı BT öğrenme modları](how-to-control-what-traffic-is-monitored.md#learning-and-smart-it-learning-modes) 
+ Uyarılarda belirtilen bilgileri [görüntüle](how-to-view-information-provided-in-alerts.md) 
+ [Uyarı olayını yönetme](how-to-manage-the-alert-event.md) 
+ [Uyarı iş akışlarını hızlandırma](how-to-accelerate-alert-incident-response.md) 
+ [Uyarı türleri ve açıklamaları](alert-engine-messages.md)

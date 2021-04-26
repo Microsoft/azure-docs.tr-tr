@@ -6,10 +6,10 @@ ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 02/17/2020
 ms.openlocfilehash: 74db121c33864ee72ad984b49c8fa43afa0f598c
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104870526"
 ---
 # <a name="analyze-logs-for-apache-kafka-on-hdinsight"></a>HDInsight üzerinde Apache Kafka için günlükleri çözümleme
@@ -22,7 +22,7 @@ HDInsight üzerinde Apache Kafka tarafından oluşturulan günlükleri çözüml
 
 Kümedeki Apache Kafka Günlükler konumunda bulunur `/var/log/kafka` . Yönetilen diskler kullanılıyorsa, Kafka günlükleri küme yaşam döngüleri arasında kaydedilmez veya kalıcı olmaz. Aşağıdaki tabloda kullanılabilir Günlükler gösterilmektedir.
 
-|Günlük |Açıklama |
+|Günlük |Description |
 |---|---|
 |Kafka. Out|Kafka işleminin stdout ve stderr 'i. Bu dosyada Kafka başlangıç ve kapalı günlükleri bulacaksınız.|
 |Server. log|Ana Kafka sunucu günlüğü. Tüm Kafka Aracısı günlükleri burada sona erdir.|
@@ -91,7 +91,7 @@ HDInsight için Azure Izleyici günlüklerini etkinleştirme adımları tüm HDI
 
     `*`Günlüğe kaydedilen tüm türleri aramak için de girebilirsiniz. Şu anda sorgularda aşağıdaki Günlükler mevcuttur:
 
-    | Günlük türü | Açıklama |
+    | Günlük türü | Description |
     | ---- | ---- |
     | log \_ kafkaserver \_ CL | Kafka Broker Server. log |
     | log \_ kafkacontroller \_ CL | Kafka Broker Controller. log |

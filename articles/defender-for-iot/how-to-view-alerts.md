@@ -7,10 +7,10 @@ ms.author: shhazam
 ms.date: 3/22/2021
 ms.topic: how-to
 ms.openlocfilehash: 391d1872124c7332bdaa6008a244490b47df4bf7
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104781594"
 ---
 # <a name="filter-and-manage-alerts-from-the-alerts-page"></a>Uyarılar sayfasından uyarıları filtreleme ve yönetme 
@@ -31,7 +31,7 @@ Uyarıları görüntülemek için:
 
 Uyarıları **Uyarı** ana görünümündeki çeşitli kategorilere göre görüntüleyebilirsiniz. Ayrıntıları gözden geçirmek ve olayı yönetmek için bir uyarı seçin.
 
-| Türe göre sırala | Açıklama |
+| Türe göre sırala | Description |
 |--|--|
 | **Önemli uyarılar** | Uyarılar önem derecesine göre sıralanır. |
 | **Sabitlenmiş uyarılar** | Kullanıcının daha fazla araştırma için sabitlendiğini uyarır. Sabitlenmiş uyarılar arşivlenmez ve sabitlenmiş klasörde 14 gün boyunca depolanır. |

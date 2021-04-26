@@ -6,12 +6,12 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
 ms.date: 04/30/2020
-ms.openlocfilehash: 77190b85da08d09cf05a02dcc5787f0c24229948
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9d4aac17ca823f4eaa0f52ab260b1daca3f52f94
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100624638"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109756"
 ---
 # <a name="programmatically-manage-workbooks"></a>Program aracılığıyla çalışma kitaplarını yönetme
 
@@ -99,19 +99,19 @@ Programlı olarak yönetilebilecek iki tür çalışma kitabı kaynağı vardır
 
 ### <a name="galleries"></a>Galeriler
 
-| Galeri                                        | Kaynak türü                                      | Çalışma kitabı türü |
-| :--------------------------------------------- |:---------------------------------------------------|:--------------|
-| Azure Izleyici 'de çalışma kitapları                     | `Azure Monitor`                                    | `workbook`    |
-| Azure Izleyici 'de VM öngörüleri                   | `Azure Monitor`                                    | `vm-insights` |
-| Log Analytics çalışma alanındaki çalışma kitapları           | `microsoft.operationalinsights/workspaces`         | `workbook`    |
-| Application Insights çalışma kitapları              | `microsoft.insights/component`                     | `workbook`    |
-| Application Insights 'de sorun giderme kılavuzu | `microsoft.insights/component`                     | `tsg`         |
-| Application Insights kullanımı                  | `microsoft.insights/component`                     | `usage`       |
-| Kubernetes hizmetindeki çalışma kitapları                | `Microsoft.ContainerService/managedClusters`       | `workbook`    |
-| Kaynak gruplarındaki çalışma kitapları                   | `microsoft.resources/subscriptions/resourcegroups` | `workbook`    |
-| Azure Active Directory çalışma kitapları            | `microsoft.aadiam/tenant`                          | `workbook`    |
-| Sanal makinelerde VM öngörüleri                | `microsoft.compute/virtualmachines`                | `insights`    |
-| Sanal makine ölçek kümelerinde VM öngörüleri      | `microsoft.compute/virtualmachinescalesets`        | `insights`    |
+| Galeri                                        | Kaynak türü                                       | Çalışma kitabı türü |
+|:-----------------------------------------------|:----------------------------------------------------|:--------------|
+| Azure Izleyici 'de çalışma kitapları                     | `Azure Monitor`                                     | `workbook`    |
+| Azure Izleyici 'de VM öngörüleri                   | `Azure Monitor`                                     | `vm-insights` |
+| Log Analytics çalışma alanındaki çalışma kitapları           | `microsoft.operationalinsights/workspaces`          | `workbook`    |
+| Application Insights çalışma kitapları              | `microsoft.insights/components`                     | `workbook`    |
+| Application Insights 'de sorun giderme kılavuzu | `microsoft.insights/components`                     | `tsg`         |
+| Application Insights kullanımı                  | `microsoft.insights/components`                     | `usage`       |
+| Kubernetes hizmetindeki çalışma kitapları                | `Microsoft.ContainerService/managedClusters`        | `workbook`    |
+| Kaynak gruplarındaki çalışma kitapları                   | `microsoft.resources/subscriptions/resourcegroups`  | `workbook`    |
+| Azure Active Directory çalışma kitapları            | `microsoft.aadiam/tenant`                           | `workbook`    |
+| Sanal makinelerde VM öngörüleri                | `microsoft.compute/virtualmachines`                 | `insights`    |
+| Sanal makine ölçek kümelerinde VM öngörüleri      | `microsoft.compute/virtualmachinescalesets`         | `insights`    |
 
 ## <a name="azure-resource-manager-template-for-deploying-a-workbook-instance"></a>Çalışma kitabı örneği dağıtmak için Azure Resource Manager şablonu
 

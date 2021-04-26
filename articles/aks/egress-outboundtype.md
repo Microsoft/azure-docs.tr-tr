@@ -4,12 +4,12 @@ description: Azure Kubernetes Service (AKS) içinde özel çıkış yolu tanıml
 services: container-service
 ms.topic: article
 ms.date: 06/29/2020
-ms.openlocfilehash: 72ba90510afb00ee001c97612e88f452039f53a4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e9433978c8ee855ec66901c7692e4d2b59261fd3
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102182137"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773054"
 ---
 # <a name="customize-cluster-egress-with-a-user-defined-route"></a>Küme çıkışı 'nı bir User-Defined rotası ile özelleştirme
 
@@ -81,5 +81,5 @@ Bkz. [Azure ağ UDR 'ye genel bakış](../virtual-network/virtual-networks-udr-o
 Bkz. [yol tablosu oluşturma, değiştirme veya silme](../virtual-network/manage-route-table.md).
 
 <!-- LINKS - internal -->
-[az-aks-get-credentials]: /cli/azure/aks#az-aks-get-credentials
+[az-aks-get-credentials]: /cli/azure/aks#az_aks_get_credentials
 [byo-route-table]: configure-kubenet.md#bring-your-own-subnet-and-route-table-with-kubenet

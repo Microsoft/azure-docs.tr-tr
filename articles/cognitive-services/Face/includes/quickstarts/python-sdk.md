@@ -9,12 +9,12 @@ ms.subservice: face-api
 ms.topic: include
 ms.date: 11/10/2020
 ms.author: pafarley
-ms.openlocfilehash: 7fc1822c219c6c881e3d788f6b0e56675cecc466
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0939216e1d96e898d7c45b9e7a3ec72453b263d6
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102445538"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105958040"
 ---
 Python için yüz istemci kitaplığını kullanarak yüz tanıma ile çalışmaya başlayın. Paketi yüklemek için bu adımları izleyin ve temel görevler için örnek kodu deneyin. Yüz tanıma hizmeti, görüntülerdeki insan yüzlerini algılayıp tanımayı sağlayan gelişmiş algoritmalara erişmenizi sağlar.
 
@@ -22,7 +22,7 @@ Python için yüz istemci kitaplığını kullanarak şunları yapın:
 
 * [Bir görüntüdeki yüzleri algılama](#detect-faces-in-an-image)
 * [Benzer yüzeyleri bulun](#find-similar-faces)
-* [Kişi grubu oluşturma ve eğitme](#create-and-train-a-person-group)
+* [Bir PersonGroup oluşturma ve eğitme](#create-and-train-a-persongroup)
 * [Yüz tanıma](#identify-a-face)
 * [Yüzeyleri doğrula](#verify-faces)
 
@@ -86,7 +86,7 @@ Bu kod parçacıkları, Python için yüz istemci kitaplığıyla aşağıdaki g
 * [İstemcinin kimliğini doğrulama](#authenticate-the-client)
 * [Bir görüntüdeki yüzleri algılama](#detect-faces-in-an-image)
 * [Benzer yüzeyleri bulun](#find-similar-faces)
-* [Kişi grubu oluşturma ve eğitme](#create-and-train-a-person-group)
+* [Bir PersonGroup oluşturma ve eğitme](#create-and-train-a-persongroup)
 * [Yüz tanıma](#identify-a-face)
 * [Yüzeyleri doğrula](#verify-faces)
 
@@ -133,7 +133,7 @@ Eşleştirme ayrıntılarını konsola yazdırmak için aşağıdaki kodu kullan
 
 [!code-python[](~/cognitive-services-quickstart-code/python/Face/FaceQuickstart.py?name=snippet_findsimilar_print)]
 
-## <a name="create-and-train-a-person-group"></a>Kişi grubu oluşturma ve eğitme
+## <a name="create-and-train-a-persongroup"></a>Bir PersonGroup oluşturma ve eğitme
 
 Aşağıdaki kod, üç farklı **kişi** nesnesi Ile bir **persongroup** oluşturur. Her **kişiyi** örnek bir görüntü kümesiyle ilişkilendirir ve sonra her kişiyi tanıyabilecek. 
 
@@ -174,7 +174,7 @@ Yüzleri atadıktan sonra, **kişi** nesnelerinin her biriyle ilişkili görsel 
 Tanımlama işlemi, bir kişinin (veya birden çok kişinin) bir görüntüsünü alır ve görüntüdeki her bir yüzün kimliğini bulmak için (yüz tanıma arama) arar. Algılanan her yüzü, yüz özellikleri bilinen farklı **kişi** nesnelerinin bir veritabanı olan bir **persongroup** ile karşılaştırır.
 
 > [!IMPORTANT]
-> Bu örneği çalıştırmak için, önce [bir kişi grubu oluştur ve eğitme](#create-and-train-a-person-group)bölümünde kodu çalıştırmanız gerekir.
+> Bu örneği çalıştırmak için, önce [bir PersonGroup oluşturma ve eğitme](#create-and-train-a-persongroup)içinde kodu çalıştırmanız gerekir.
 
 ### <a name="get-a-test-image"></a>Test görüntüsü al
 

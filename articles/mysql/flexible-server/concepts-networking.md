@@ -6,12 +6,12 @@ ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 9/23/2020
-ms.openlocfilehash: ec835073a1fe447490f6965fe41478319a47f503
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: c83f36216e7488df94c372234d0541a4ee9f99b5
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105106845"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106492231"
 ---
 # <a name="connectivity-and-networking-concepts-for-azure-database-for-mysql---flexible-server-preview"></a>MySQL için Azure veritabanı 'nın bağlantı ve ağ kavramları-esnek sunucu (Önizleme)
 
@@ -118,7 +118,7 @@ Azure hizmetiniz için sabit bir giden IP adresi yoksa, tüm Azure veri merkezi 
 ### <a name="troubleshooting-public-access-issues"></a>Genel erişim sorunlarını giderme
 MySQL Server hizmetine yönelik Microsoft Azure veritabanına erişim beklendiği gibi davranmıyorsa aşağıdaki noktaları göz önünde bulundurun:
 
-* **İzin verilenler listesindeki değişiklikler henüz uygulanmadı:** MySQL Server Güvenlik Duvarı yapılandırmasının etkili olması için Azure veritabanı 'nda yapılan değişiklikler için beş dakikalık bir gecikme olabilir.
+* **İzin üzerinde yapılan değişiklikler henüz geçerli değil:** MySQL Server Güvenlik Duvarı yapılandırmasının etkili olması için Azure veritabanı 'nda yapılan değişiklikler için beş dakikalık bir gecikme olabilir.
 
 * **Kimlik doğrulama başarısız oldu:** Bir kullanıcının MySQL için Azure veritabanı sunucusunda izinleri yoksa veya kullanılan parola yanlışsa, MySQL için Azure veritabanı sunucusu bağlantısı reddedilir. Bir güvenlik duvarı ayarı oluşturmak, istemcilere yalnızca sunucunuza bağlanmayı denemek için bir fırsat sağlar. Her istemci yine de gerekli güvenlik kimlik bilgilerini sağlamalıdır.
 
@@ -139,9 +139,23 @@ Seçtiğiniz ağ seçeneğinden bağımsız olarak, esnek sunucunuza bağlanırk
 
 
 ## <a name="tls-and-ssl"></a>TLS ve SSL
-MySQL için Azure veritabanı esnek sunucu, Aktarım Katmanı Güvenliği (TLS) kullanarak istemci uygulamalarınızı MySQL hizmetine bağlamayı destekler. TLS, veritabanı sunucunuz ile istemci uygulamalarınız arasında şifrelenmiş ağ bağlantıları sağlayan bir endüstri standardı protokolüdür. TLS, Güvenli Yuva Katmanı (SSL) güncelleştirilmiş bir protokolüdür.
+MySQL için Azure veritabanı esnek sunucu, Aktarım Katmanı Güvenliği (TLS) şifrelemesi ile Güvenli Yuva Katmanı (SSL) kullanarak istemci uygulamalarınızın MySQL sunucusuna bağlanmasını destekler. TLS, veritabanı sunucunuz ile istemci uygulamalarınız arasında şifrelenmiş ağ bağlantıları sağlayan ve uyumluluk gereksinimlerine bağlı olmanızı sağlayan bir endüstri standardı protokolüdür.
 
-MySQL için Azure veritabanı esnek sunucusu yalnızca Aktarım Katmanı Güvenliği (TLS 1,2) kullanılarak şifrelenmiş bağlantıları destekler. TLS 1.0 ve TLS 1.1 ile gelen tüm bağlantılar reddedilir. MySQL esnek sunucusu için Azure veritabanı 'na bağlanmak üzere TLS sürümünü devre dışı bırakabilir veya değiştiremezsiniz. Daha fazla bilgi edinmek için [SSL/TLS kullanarak nasıl bağlanacağınızı](how-to-connect-tls-ssl.md) inceleyin. 
+MySQL için Azure veritabanı esnek sunucu, varsayılan olarak Aktarım Katmanı Güvenliği (TLS 1,2) kullanılarak şifrelenmiş bağlantıları destekler ve TLS 1,0 ve TLS 1,1 tüm gelen bağlantıları varsayılan olarak reddedilir. Esnek sunucunuzdaki şifreli bağlantı zorlaması veya TLS sürüm yapılandırması yapılandırılabilir ve değiştirilebilir. 
+
+Esnek sunucunuz için kullanabileceğiniz SSL ve TLS ayarlarının farklı yapılandırmalarının aşağıda verilmiştir:
+
+| Senaryo   | Sunucu parametresi ayarları      | Açıklama                                    |
+|------------|--------------------------------|------------------------------------------------|
+|SSL 'yi devre dışı bırak (şifreli bağlantılar) | require_secure_transport = kapalı |Eski uygulamanız MySQL sunucusuna şifreli bağlantıları desteklemiyorsa, require_secure_transport = kapalı ayarını yaparak esnek sunucunuza şifreli bağlantıların uygulanmasını devre dışı bırakabilirsiniz.|
+|TLS sürümü < SSL 'yi zorunlu kıl 1,2 | require_secure_transport = ON ve tls_version = TLSV1 veya TLSV 1.1| Eski uygulamanız şifreli bağlantıları destekliyorsa, ancak TLS sürümü 1,2 < gerektiriyorsa, şifrelenmiş bağlantıları etkinleştirebilir ancak esnek sunucunuzu uygulamanızın desteklediği TLS sürümü (v 1.0 veya v 1.1) ile bağlantılara izin verecek şekilde yapılandırabilirsiniz|
+|TLS sürümü = 1.2 ile SSL 'yi zorunlu kıl (varsayılan yapılandırma)|require_secure_transport = ON ve tls_version = TLSV 1.2| Bu, esnek sunucu için önerilen ve varsayılan yapılandırmadır.|
+|TLS sürümü = 1.3 ile SSL 'yi zorunlu kıl (MySQL v 8.0 ve üstü ile desteklenir)| require_secure_transport = ON ve tls_version = TLSV 1.3| Bu, yeni uygulamaların geliştirilmesi için yararlıdır ve önerilir|
+
+> [!Note]
+> Esnek sunucuda SSL şifrede yapılan değişiklikler desteklenmez. FIPS şifre paketleri tls_version TLS sürüm 1,2 ' e ayarlandığında varsayılan olarak zorlanır. Sürüm 1,2 dışındaki TLS sürümleri için SSL şifresi, MySQL Community yüklemesiyle birlikte sunulan varsayılan ayarlara ayarlanır.
+
+Daha fazla bilgi edinmek için [SSL/TLS kullanarak nasıl bağlanacağınızı](how-to-connect-tls-ssl.md) inceleyin. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

@@ -7,10 +7,10 @@ ms.topic: include
 ms.date: 03/12/2021
 ms.author: mblythe
 ms.openlocfilehash: 6361c0bcbc9e0aeae71eaf841dea9cb45e7d41eb
-ms.sourcegitcommit: 18a91f7fe1432ee09efafd5bd29a181e038cee05
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/16/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104613253"
 ---
 Sanal makineyle ilgili verileri Azure portal panosu içinden görebildiğinizi doğrulayın.

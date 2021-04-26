@@ -3,17 +3,17 @@ title: Azure EA portalı erişim sorunlarını giderme
 description: Bu makalede, Azure EA portalında Azure Kurumsal Anlaşma (EA) ile ilişkili olarak oluşabilen bazı sorunlar açıklanır.
 author: bandersmsft
 ms.author: banders
-ms.date: 08/20/2020
+ms.date: 03/26/2021
 ms.topic: troubleshooting
 ms.service: cost-management-billing
 ms.subservice: enterprise
 ms.reviewer: boalcsva
-ms.openlocfilehash: 5402ee3283e5ae11f43884b4002486e8bdefae2c
-ms.sourcegitcommit: 58d3b3314df4ba3cabd4d4a6016b22fa5264f05a
-ms.translationtype: HT
+ms.openlocfilehash: 852fb85607318772870a8b6826c934997b84ff6d
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89294416"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107726475"
 ---
 # <a name="troubleshoot-azure-ea-portal-access"></a>Azure EA portalı erişim sorunlarını giderme
 
@@ -65,105 +65,7 @@ Azure EA portalında oturum açmaya çalışırken hata iletisi alıyorsanız a�
   - Birincil diğer adı denetlemeniz gerekiyorsa [https://account.live.com](https://account.live.com) adresine gidin. Ardından **Bilgileriniz**'e ve **Microsoft'ta oturum açma şeklinizi yönetin**'e tıklayın. Alternatif bir e-posta adresini doğrulamak ve hassas bilgilere erişim kodunu almak için yönergeleri izleyin. Güvenlik kodunu girin. İki öğeli kimlik doğrulaması ayarlamak istemiyorsanız **Daha sonra ayarla**’yı seçin.
   - Hesap diğer adlarınızı görüntüleyebileceğiniz **Microsoft'ta oturum açma şeklinizi yönetin** sayfasını görürsünüz. Azure EA portalında oturum açmak için kullandığınız diğer adın birincil diğer ad olduğundan emin olun. Değilse, bunu birincil diğer adınız olarak ayarlayabilirsiniz. Öte yandan bunun yerine Azure EA portalı için olan birincil adı da kullanabilirsiniz.
 
-## <a name="azure-ea-activation-faq"></a>Azure EA Etkinleştirme hakkında SSS
-
-Makalenin bu bölümünde Azure EA Etkinleştirme işlemleriyle ilgili yaygın sorunların çözümlerine yer verilmiştir.
-
-### <a name="i-didnt-receive-an-activation-email"></a>Etkinleştirme e-postası almadım
-
-Azure EA portalından gelen etkinleştirme e-postası *waep@microsoft.com* adresinden gönderilir. Etkinleştirme e-postasını almadıysanız istenmeyen veya gereksiz posta klasörünüzü gözden geçirin. Bu e-posta _Microsoft Azure service_subject Görüntüleme/Yönetme Daveti_ ile gönderilir. Yeni eklenen tüm EA yöneticilerine gönderilir.
-
-EA yöneticisi olarak ayarladığınızdan eminseniz, Azure EA portalında oturum açmak için etkinleştirme e-postasını beklemeniz gerekmez. Bunun yerine https://ea.azure.com adresine giderek e-posta adresinizle (iş, okul veya Microsoft hesabı) ve parolanızla oturum açabilirsiniz.
-
-### <a name="i-would-like-to-add-a-new-ea-administrator-to-my-enrollment"></a>Kaydıma yeni bir EA yöneticisi eklemek istiyorum
-
-Yeni bir kuruluş yöneticisi ancak mevcut kuruluş yöneticileri tarafından eklenebilir. EA yöneticisiyseniz lütfen EA Portal'da oturum açın, **Yönet**'e ve ardından sağ üst köşedeki **+ Yönetici Ekle**'ye tıklayıp yeni EA yöneticisi ekleyin. Kullanıcıları eklemek için lütfen e-posta adreslerine ve iş veya okul hesabı ya da Microsoft Live ID gibi tercih edilen oturum açma bilgilerine sahip olduğunuzdan emin olun.
-
-EA yöneticisi değilseniz lütfen şirketinizdeki EA yöneticilerine ulaşarak sizi kayda eklemelerini isteyin. Sizi kayda eklediklerinde bir etkinleştirme postası alacaksınız.
-
-Ancak EA yöneticilerinin size yardımcı olamadığı durumlarda aşağıdaki bilgileri iletmeniz halinde sizi onların adına kayda ekleyebiliriz:
-- Kayıt numarası.
-- Eklenecek e-posta adresi ve kimlik doğrulama türü (iş/okul/MS).
-- EA yöneticisinden gelen onay e-postası.
-
-Gerekli tüm bilgilere sahip olduktan sonra lütfen [https://aka.ms/AzureEntSupport](https://aka.ms/AzureEntSupport) adresinden istek gönderin.
-
-### <a name="i-would-like-to-update-the-first-ea-admin-on-the-enrollment"></a>Kayıttaki ilk EA yöneticisini güncelleştirmek istiyorum
-
-İlk EA yöneticisini güncelleştirmek için toplu lisanslama hizmet merkezinde bildirim ilgili kişisini ve çevrimiçi yöneticiyi güncelleştirmeniz gerekir. Değişikliklerin EA portalına uygulanması yaklaşık 24 saat sürer. Güncelleştirme tamamlandıktan sonra yeni EA yöneticisine bir etkinleştirme e-postası gönderilir.
-
-VLSC portalına erişiminiz yoksa veya ilk EA yöneticiniz artık kaydı yönetemiyorsa ve EA portalına erişimi yoksa güncelleştirme isteğinde bulunmak için lütfen [https://aka.ms/AzureEntSupport](https://aka.ms/AzureEntSupport) üzerinden bir istek gönderin ve şu bilgileri dahil edin:
-- Kayıt numarası
-- Eklenecek e-posta adresi ve kimlik doğrulama türü (iş/okul/MS)
-- İlk EA yöneticisini değiştirme nedeni
-- İlk EA yöneticisinden gelen onay e-postası
-
-### <a name="my-current-ea-admin-is-no-longer-with-the-company"></a>Geçerli EA yöneticim şirketten ayrıldı
-
-Bir EA kaydında birden fazla EA yöneticisi olabilir ve başka bir EA yöneticisine ulaşarak yeni EA yöneticisi/hesap sahibi/bölüm yöneticisi eklemesini isteyebilirsiniz. Ancak şirketinizdeki EA yöneticisinin kim olduğunu bilmiyorsanız veya kayıtta başka bir EA yöneticisi yoksa lütfen aşağıdaki bilgilerle birlikte bize ulaşın:
-- Kayıt numarası
-- Eklenecek e-posta adresi ve kimlik doğrulama türü (iş/okul/MS)
-- Geçerli EA yöneticisinin şirketten ayrıldığına dair destekleyici bilgiler
-
-Kayıtta başka EA yöneticileri varsa kayıtta gerçekleştirilecek yönetim değişiklikleriyle ilgili olarak mevcut EA yöneticilerine ulaşacağımızı lütfen unutmayın.
-
-### <a name="my-enrollment-is-showing-in-pending-status-how-do-i-activate-my-enrollment"></a>Kaydım bekleme durumunda görünüyor. Kaydımı nasıl etkinleştirebilirim?
-
-İlk EA yöneticisi henüz oturum açmadıysa kayıt bekleme durumunda görünür. EA yöneticisi sizdeniz lütfen Azure EA Portal'da oturum açın. Tüm kayıt numaralarının yer aldığı giriş sayfasında bekleyen kaydınızı göremeyebilirsiniz. Lütfen EA Portal'ın sağ üst köşesinde yer alan "etkin" kutusunun işaretini kaldırın. Bunu yaptığınızda bekleme durumundaki kayıtlar da görüntülenir. Ayrıntılı bilgilere ulaşmak için lütfen kayda tıklayın. Kaydın "Yönet" sayfasına ulaştığınızda "Beklemede" olan durum, "Etkin" olarak güncelleştirilir.
-
-### <a name="why-is-my-account-stuck-in-pending-status"></a>Hesabım neden bekleme durumunda takılı kaldı?
-
-Kayda ilk kez eklenen yeni Hesap Sahiplerinin (AO) durumu her zaman "beklemede" olarak görünür. Hesap sahibi etkinleştirme karşılama e-postasını aldıktan sonra oturum açarak hesabını etkinleştirebilir. Oturum açıldığında "beklemede" olan hesap durumu "etkin" olarak değişir.
-
-### <a name="i-received-an-error-when-signing-in-to-azure-ea-portal"></a>Azure EA Portal'da oturum açarken bir hatayla karşılaştım
-
-Oturum açma sırasında Azure EA Portal'da hatayla karşılaşmanızın birkaç nedeni olabilir. Lütfen şu sorun giderme adımlarını izleyin:
-
- 1. Lütfen doğru EA Portal URL'si olan [https://ea.azure.com](https://ea.azure.com) adresini kullandığınızdan emin olun.
- 1. Azure EA Portal'a erişiminizin iş veya okul hesabı olarak mı yoksa Microsoft Live ID olarak mı eklendiğini belirleyin. İş hesabınızı kullanıyorsanız lütfen iş e-postanızı ve parolanızı girin. Microsoft Live ID kullanıyorsanız lütfen Live ID e-postanızı ve Microsoft Live ID parolanızı girin. Microsoft Live ID parolanızı unuttuysanız lütfen [https://account.live.com/password/reset](https://account.live.com/password/reset) adresinden sıfırlayın.
- 1. Önceki/mevcut oturumların tanımlama bilgilerinin veya önbellek verilerinin tutulmaması için gizli tarayıcı penceresinden oturum açmanız önerilir. Önbelleği temizleyin ve [https://ea.azure.com](https://ea.azure.com) adresini özel göz atma modundan/gizli pencereden açın.
- 1. Microsoft hesabı kullanıyor ve Geçersiz Kullanıcı hatası alıyorsanız birden fazla Microsoft hesabınız olabilir ve oturum açmak için kullandığınız hesap, birincil diğer ad olmayabilir. Birincil diğer adı denetlemek için account.live.com adresine gidin:
-    - "Bilgileriniz" > "Oturum açma e-posta adresinizi veya telefon numaranızı yönetin" yolunu izleyin.
-    - Alternatif bir e-posta adresini doğrulamak ve hassas bilgilere erişim kodunu almak için ekrandaki yönergeleri izleyin.
-    - Güvenlik kodunu girin.
-    - İki adımlı kimlik doğrulamayı daha sonra ayarlamak istiyorsanız "Daha sonra ayarla"yı seçin.
-    - Sahip olduğunuz hesap diğer adlarının yer aldığı "Hesap diğer adlarınızı yönetin" sayfası açılır. Azure EA Portal'da oturum açmak için kullandığınız diğer adın birincil diğer ad olduğundan emin olun. Değilse, bunu birincil diğer adınız yapabilir veya bunun yerine EA Portal'daki birincil diğer adı kullanabilirsiniz.
-
-Yukarıdaki sorun giderme adımları başarısız olduysa lütfen [https://aka.ms/AzureEntSupport](https://aka.ms/AzureEntSupport) adresinden aşağıdaki bilgilerle birlikte bir istek gönderin:
-- Kullanılan tarayıcılar ve sürüm.
-- Hata iletisinin ekran görüntüsü.
-- Hata veren sayfanın URL'si.  
-- Hatanın gerçekleştiği tarih, saat ve saat dilimi.
-- Ayrıca günlük dosyasına ulaşabilirseniz faydalı olacaktır. Aşağıdaki adımları izleyerek ağ izlemesi yakalayabilirsiniz:
-  1. Internet Explorer'ı açın.
-  1. F12 tuşuna basın; IE'nin en altında bir kutu açılır.
-  1. **Ağ** sekmesini seçin.
-  1. **Yakalamaya Başla**'ya tıklayın.
-  1. Hataya neden olan eylemi gerçekleştirin.
-  1. Hatayı aldıktan sonra **Yakalamayı Durdur**'a tıklayın.
-  1. Dosyayı kaydedin ve destek isteğine gerekli bilgileri ekleyin.
-  1. Destek isteğine kayıt numaranızı ve e-posta adresinizi yazmayı unutmayın.
-
-### <a name="what-is-the-difference-between-a-workschool-account-and-microsoft-account"></a>İş veya okul hesabı ile Microsoft hesabı arasındaki fark nedir?
-
-**Microsoft hesabı:** [https://signup.live.com](https://signup.live.com) adresindeki Live ID ile ilişkilendirilmiş hesaplardır.
-
-**İş veya okul hesabı:** Yalnızca Buluta Federasyon ile Active Directory ayarlamış olan ve tüm hesapları tek bir kiracıda bulunan şirketler tarafından kullanılabilir. Şirketin iç Active Directory hizmeti ile bulut arasında federasyon varsa kullanıcılar iş veya okul kimlik doğrulamasıyla eklenebilir.
-
-  Microsoft, Eylül 2016'dan itibaren iş veya okul e-posta adreslerinin Microsoft hesabı olarak kaydedilmesine izin vermemektedir. Daha fazla ayrıntı için şu belgelere başvurun: [https://blogs.technet.microsoft.com/enterprisemobility/2016/09/15/cleaning-up-the-azure-ad-and-microsoft-account-overlap/](https://blogs.technet.microsoft.com/enterprisemobility/2016/09/15/cleaning-up-the-azure-ad-and-microsoft-account-overlap/).
-
-  Kuruluşunuzla bulut arasında federasyon yoksa iş veya okul e-posta adresinizi kullanamazsınız. Bunun yerine lütfen yeni bir e-posta adresi kaydedin veya oluşturun ve bunu Microsoft hesabı olarak kaydedin.
-
-### <a name="i-forgot-my-password-to-azure-ea-portal"></a>Azure EA Portal parolamı unuttum
-
-Microsoft Live ID parolanızı unuttuysanız lütfen [https://account.live.com/password/reset](https://account.live.com/password/reset) adresinden sıfırlayın.
-
-Çalışma parolanızı unuttuysanız lütfen şirketinizin BT yöneticisine başvurun.
-
-### <a name="i-have-a-valid-work-or-school-account-but-i-cant-add-it-to-the-ea-portal"></a>Geçerli bir iş veya okul hesabım var ancak EA Portal'a ekleyemiyorum
-
-Farklı bir kiracıda iş veya okul hesabınız varsa lütfen kayıt ayrıntıları sayfasındaki yetkilendirme düzeyini "Kiracılar Arası İş veya Okul Hesabı" olarak değiştirin. Bu ayarı yaptıktan sonra hesabı ekleyebilirsiniz.
-
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Azure EA portalı yöneticilerinin yaygın yönetim görevleri hakkında bilgi edinmek için [Azure EA portalı yönetimi](ea-portal-administration.md) makalesini okumaları gerekir.
+- Azure EA etkinleştirmesine yönelik yaygın sorunlar hakkında sorular ve yanıtlar için [maliyet yönetimi + FATURALANDıRMA SSS](../cost-management-billing-faq.yml) makalesini okuyun.

@@ -57,4 +57,4 @@ Media Services hesabının bağlı depolama hesaplarına erişim sahibi olmamas�
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Media Services hesabınıza bir depolama hesabı eklemeyi öğrenmek için bkz. [Hesap oluşturma](./create-account-howto.md).
+Media Services hesabınıza bir depolama hesabı eklemeyi öğrenmek için bkz. [Hesap oluşturma](./account-create-how-to.md).

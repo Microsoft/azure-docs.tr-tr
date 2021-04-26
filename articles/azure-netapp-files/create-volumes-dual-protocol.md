@@ -12,19 +12,20 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: how-to
-ms.date: 01/28/2020
+ms.date: 04/19/2021
 ms.author: b-juche
-ms.openlocfilehash: 0079c123f908a38cc1e4923790439f18352bf3ce
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: c702c41228512eceebeaf45ccae709db38a85a51
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100574635"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107725693"
 ---
 # <a name="create-a-dual-protocol-nfsv3-and-smb-volume-for-azure-netapp-files"></a>Azure NetApp Files için bir çift protokol (NFSv3 ve SMB) birimi oluşturun
 
-Azure NetApp Files, NFS (NFSv3 ve NFSv 4.1), SMB3 veya Dual Protocol kullanarak birim oluşturmayı destekler. Bu makalede, LDAP kullanıcı eşlemesi desteğiyle NFSv3 ve SMB 'nin ikili protokolünü kullanan bir birimin nasıl oluşturulacağı gösterilmektedir.  
+Azure NetApp Files, NFS (NFSv3 ve NFSv 4.1), SMB3 veya Dual Protocol kullanarak birim oluşturmayı destekler. Bu makalede, LDAP kullanıcı eşlemesi desteğiyle NFSv3 ve SMB 'nin ikili protokolünü kullanan bir birimin nasıl oluşturulacağı gösterilmektedir. 
 
+NFS birimleri oluşturmak için bkz. [NFS birimi oluşturma](azure-netapp-files-create-volumes.md). SMB birimleri oluşturmak için bkz. [SMB birimi oluşturma](azure-netapp-files-create-volumes-smb.md). 
 
 ## <a name="before-you-begin"></a>Başlamadan önce 
 
@@ -39,7 +40,7 @@ Azure NetApp Files, NFS (NFSv3 ve NFSv 4.1), SMB3 veya Dual Protocol kullanarak 
 * DNS sunucusunda bir geriye doğru arama bölgesi oluşturun ve ardından bu geriye doğru arama bölgesine AD ana makinesi için bir işaretçi (PTR) kaydı ekleyin. Aksi halde, çift protokol birimi oluşturma işlemi başarısız olur.
 * NFS istemcisinin güncel olduğundan ve işletim sistemi için en son güncelleştirmeleri çalıştırdığından emin olun.
 * AD üzerinde Active Directory (AD) LDAP sunucusunun açık ve çalışıyor olduğundan emin olun. Bunu, AD makinesine [Active Directory Basit Dizin Hizmetleri (AD LDS)](/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/hh831593(v=ws.11)) rolünü yükleyip yapılandırarak yapabilirsiniz.
-* Çift protokol birimleri Şu anda Azure Active Directory Domain Services desteklemez (AEKLEMELERI).  
+* Çift protokol birimleri Şu anda Azure Active Directory Domain Services desteklemez (AEKLEMELERI). AEKLEMELERI kullanıyorsanız TLS üzerinden LDAP etkinleştirilmemelidir.
 * Bir çift protokol birimi tarafından kullanılan NFS sürümü NFSv3 ' dir. Bu nedenle, aşağıdaki önemli noktalar geçerlidir:
     * İkili protokol, NFS istemcilerinden gelen Windows ACL genişletilmiş özniteliklerini desteklemez `set/get` .
     * NFS istemcileri NTFS güvenlik stili için izinleri değiştiremezler ve Windows istemcileri UNIX stili çift protokol birimlerinin izinlerini değiştiremezler.   
@@ -72,7 +73,7 @@ Azure NetApp Files, NFS (NFSv3 ve NFSv 4.1), SMB3 veya Dual Protocol kullanarak 
     * **Kapasite havuzu**  
         Birimin oluşturulmasını istediğiniz kapasite havuzunu belirtin.
 
-    * **Kota**  
+    * **Kotasının**  
         Birime ayrılmış mantıksal depolama miktarını belirtin.  
 
         **Kullanılabilir kota** alanı, yeni birimi oluştururken kullanabildiğiniz, seçilen kapasite havuzundaki kullanılmamış alan miktarını gösterir. Yeni birimin boyutu kullanılabilir kotayı aşamaz.  
@@ -111,6 +112,27 @@ Azure NetApp Files, NFS (NFSv3 ve NFSv 4.1), SMB3 veya Dual Protocol kullanarak 
 
     * Kullanılacak **güvenlik stilini** BELIRTIN: NTFS (varsayılan) veya UNIX.
 
+    * Çift protokol birimi için SMB3 protokol şifrelemesini etkinleştirmek istiyorsanız, **SMB3 protokol şifrelemesini etkinleştir**' i seçin.   
+
+        Bu özellik yalnızca uçuş SMB3 verilerinde şifrelemeyi mümkün bir şekilde sunar. NFSv3-uçuş verilerini şifrelemez. SMB3 şifrelemesi kullanmayan SMB istemcileri bu birime erişemeyecektir. Bekleyen veriler, bu ayardan bağımsız olarak şifrelenir. Ek bilgi için bkz. [SMB şifreleme SSS](azure-netapp-files-faqs.md#smb-encryption-faqs) . 
+
+        **SMB3 Protokolü şifreleme** özelliği şu anda önizlemededir. Bu özelliği ilk kez kullanıyorsanız, özelliği kullanmadan önce kaydedin: 
+
+        ```azurepowershell-interactive
+        Register-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFSMBEncryption
+        ```
+
+        Özellik kaydının durumunu denetleyin: 
+
+        > [!NOTE]
+        > **Registrationstate** , ' a `Registering` değiştirilmeden önce 60 dakikaya kadar bir durumda olabilir `Registered` . Devam etmeden önce durum olana kadar bekleyin `Registered` .
+
+        ```azurepowershell-interactive
+        Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFSMBEncryption
+        ```
+        
+        Ayrıca, [Azure CLI komutlarını](/cli/azure/feature?preserve-view=true&view=azure-cli-latest) kullanarak `az feature register` `az feature show` özelliği kaydedebilir ve kayıt durumunu görüntüleyebilirsiniz.  
+
     * İsteğe bağlı olarak, [birim için dışa aktarma ilkesi yapılandırın](azure-netapp-files-configure-export-policy.md).
 
     ![Çift protokol belirtin](../media/azure-netapp-files/create-volume-protocol-dual.png)
@@ -121,6 +143,17 @@ Azure NetApp Files, NFS (NFSv3 ve NFSv 4.1), SMB3 veya Dual Protocol kullanarak 
  
     Birim, kapasite havuzundan aboneliği, kaynak grubunu ve konum özniteliklerini devralır. Birimin dağıtım durumunu izlemek için Bildirimler sekmesini kullanabilirsiniz.
 
+## <a name="allow-local-nfs-users-with-ldap-to-access-a-dual-protocol-volume"></a>Yerel NFS kullanıcılarının LDAP ile çift protokol birimine erişmesine izin ver 
+
+Genişletilmiş grupları etkinleştirilmiş LDAP içeren bir çift protokol birimine erişmek için Windows LDAP sunucusunda mevcut olmayan yerel NFS istemci kullanıcılarını etkinleştirebilirsiniz. Bunu yapmak için, **Yerel NFS KULLANıCıLARıNA LDAP Ile Izin ver** seçeneğini şu şekilde etkinleştirin:
+
+1. **Active Directory bağlantılar**' a tıklayın.  Var olan bir Active Directory bağlantısında bağlam menüsüne (üç nokta `…` ) tıklayın ve **Düzenle**' yi seçin.  
+
+2. Görüntülenen **Active Directory Ayarları Düzenle** penceresinde, **Yerel NFS kullanıcılarına LDAP ile izin ver** seçeneğini belirleyin.  
+
+    ![Yerel NFS kullanıcılarına LDAP ile Izin ver seçeneğini gösteren ekran görüntüsü](../media/azure-netapp-files/allow-local-nfs-users-with-ldap.png)  
+
+
 ## <a name="manage-ldap-posix-attributes"></a>LDAP POSIX özniteliklerini yönetme
 
 UID, Ana Dizin ve diğer değerler gibi POSIX özniteliklerini, Active Directory Kullanıcıları ve bilgisayarları MMC ek bileşenini kullanarak yönetebilirsiniz.  Aşağıdaki örnek Active Directory öznitelik düzenleyicisini gösterir:  
@@ -129,9 +162,9 @@ UID, Ana Dizin ve diğer değerler gibi POSIX özniteliklerini, Active Directory
 
 LDAP Kullanıcıları ve LDAP grupları için aşağıdaki öznitelikleri ayarlamanız gerekir: 
 * LDAP kullanıcıları için gerekli öznitelikler:   
-    `uid`: Çiğdem, `uidNumber` : 139, `gidNumber` : 555, `objectClass` : posixAccount
+    `uid: Alice`, `uidNumber: 139`, `gidNumber: 555`, `objectClass: posixAccount`
 * LDAP grupları için gerekli öznitelikler:   
-    `objectClass`: "posixGroup", `gidNumber` : 555
+    `objectClass: posixGroup`, `gidNumber: 555`
 
 ## <a name="configure-the-nfs-client"></a>NFS istemcisini yapılandırma 
 
@@ -141,3 +174,4 @@ NFS istemcisini yapılandırmak için [Azure NetApp FILES NFS Istemcisi yapılan
 
 * [Azure NetApp Files için NFS istemcisini yapılandırma](configure-nfs-clients.md)
 * [SMB veya çift protokol birimlerinde sorun giderme](troubleshoot-dual-protocol-volumes.md)
+* [LDAP birimi sorunlarını giderme](troubleshoot-ldap-volumes.md)

@@ -8,10 +8,10 @@ ms.topic: conceptual
 ms.date: 11/19/2020
 tags: connectors
 ms.openlocfilehash: 765bb66b572f0c046222cfb617fe4caa80925256
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "94967411"
 ---
 # <a name="access-and-manage-ibm-db2-resources-by-using-azure-logic-apps"></a>Azure Logic Apps kullanarak IBM DB2 kaynaklarına erişin ve yönetin
@@ -74,17 +74,17 @@ Bu makaledeki örneklerde **yineleme** tetikleyicisi kullanılır.
 
 1. [Bulut veritabanları](#cloud-connection) veya [Şirket içi veritabanları](#on-premises-connection)için bağlantı oluşturma adımlarını izleyin.
 
-<a name="cloud-connection"></a>
+<a name="cloud-connection&quot;></a>
 
-## <a name="connect-to-cloud-db2"></a>Cloud DB2 'ye bağlanma
+## <a name=&quot;connect-to-cloud-db2&quot;></a>Cloud DB2 'ye bağlanma
 
 Bağlantınızı ayarlamak için, istendiğinde bu bağlantı ayrıntılarını sağlayın, **Oluştur**' u seçin ve ardından mantıksal uygulamanızı kaydedin:
 
 | Özellik | Gerekli | Açıklama |
 |----------|----------|-------------|
 | **Şirket içi ağ geçidi üzerinden Bağlan** | No | Yalnızca şirket içi bağlantılar için geçerlidir. |
-| **Bağlantı adı** | Yes | Bağlantınızın adı, örneğin "MyLogicApp-DB2-Connection" |
-| **Sunucu** | Yes | DB2 sunucunuzun adresi veya diğer adı iki nokta üst üste bağlantı noktası numarası (örneğin, "myDB2server.cloudapp.net:50000") <p><p>**Note**: Bu değer, bir TCP/IP adresini veya diğer adı IPv4 veya IPv6 biçiminde, ardından iki nokta üst üste ve bir TCP/IP bağlantı noktası numarasına göre temsil eden bir dizedir. |
+| **Bağlantı adı** | Yes | Bağlantınızın adı, örneğin &quot;MyLogicApp-DB2-Connection&quot; |
+| **Sunucu** | Yes | DB2 sunucunuzun adresi veya diğer adı iki nokta üst üste bağlantı noktası numarası (örneğin, &quot;myDB2server.cloudapp.net:50000") <p><p>**Note**: Bu değer, bir TCP/IP adresini veya diğer adı IPv4 veya IPv6 biçiminde, ardından iki nokta üst üste ve bir TCP/IP bağlantı noktası numarasına göre temsil eden bir dizedir. |
 | **Veritabanı** | Yes | Veritabanınızın adı <p><p>**Note**: Bu değer, bir DRDA Ilişkisel veritabanı adını (RDBNAM) temsil eden bir dizedir: <p>-DB2 for z/OS, veritabanının "z/ç için IBM DB2" konumu olarak bilinen bir 16 baytlık dizeyi kabul eder. <br>-DB2, veritabanının "ı için IBM DB2" ilişkisel veritabanı olarak bilinen bir 18 baytlık dizeyi kabul eder. <br>-LUW için-DB2 8 baytlık bir dizeyi kabul eder. |
 | **Kullanıcı adı** | Yes | Veritabanı için Kullanıcı adınız <p><p>**Note**: Bu değer, uzunluğu belirli veritabanına göre olan bir dizedir: <p><p>-Z/ç için-DB2 8 baytlık bir dizeyi kabul eder. <br>-DB2, 10 baytlık bir dizeyi kabul eder. <br>-Linux veya UNIX için DB2, 8 baytlık bir dizeyi kabul eder. <br>-Windows için-DB2, 30 baytlık bir dizeyi kabul eder. |
 | **Parola** | Yes | Veritabanı için parolanız |

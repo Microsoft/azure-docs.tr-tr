@@ -11,12 +11,12 @@ ms.date: 07/13/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d67460c654c854c5a855560dde1d67732fa818c7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0e2bdaa2c7a7648124fbe0be60e5a0af2f83238f
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98681964"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226570"
 ---
 # <a name="import-and-export-azure-ad-connect-configuration-settings"></a>Azure AD Connect yapılandırma ayarlarını içeri ve dışarı aktarma 
 
@@ -42,7 +42,7 @@ Daha önce dışarı aktarılan ayarları içeri aktarmak için:
 1. **Eşitleme ayarlarını Içeri aktar**' ı seçin. Daha önce aktarılmış JSON ayarları dosyasına gözatamazsınız.
 1. **Yükle**'yi seçin.
 
-   ![Gerekli bileşenleri yüklemeyi göster ekranını gösteren ekran görüntüsü](media/how-to-connect-import-export-config/import1.png)
+   ![Gerekli bileşenleri yüklemeyi göster ekranını gösteren ekran görüntüsü](media/how-to-connect-import-export-config/import-1.png)
 
 > [!NOTE]
 > Bu sayfadaki ayarları LocalDB yerine SQL Server kullanımı veya varsayılan bir VSA yerine var olan bir hizmet hesabının kullanımı gibi geçersiz kılın. Bu ayarlar yapılandırma ayarları dosyasından içeri aktarılmaz. Bunlar, bilgi ve karşılaştırma amaçlarıyla mevcuttur.
@@ -57,7 +57,7 @@ Yükleme deneyimi sırasında yapılabilecek tek değişiklikler aşağıda veri
 - **Şirket içi dizin kimlik bilgileri**: eşitleme ayarlarınıza eklenen her şirket içi dizin için, eşitleme hesabı oluşturmak veya önceden oluşturulmuş bir özel eşitleme hesabı sağlamak üzere kimlik bilgilerini sağlamanız gerekir. Bu yordam, Dizin ekleyemez veya kaldıramıyorum özel durum ile temiz yüklemeye eşdeğerdir.
 - **Yapılandırma seçenekleri**: temiz yüklemede olduğu gibi, otomatik eşitlemenin başlatılıp başlatılmayacağını veya hazırlama modunun etkinleştirilmesi için başlangıç ayarlarını yapılandırmayı tercih edebilirsiniz. Temel fark, hazırlama modunun, sonuçları Azure 'a etkin bir şekilde dışarı aktarmadan önce yapılandırma ve eşitleme sonuçlarının karşılaştırmasına izin vermek için, varsayılan olarak kasıtlı olarak etkinleştirilmiştir.
 
-![Dizinlerinizin bağlantısını gösteren ekran görüntüsü](media/how-to-connect-import-export-config/import2.png)
+![Dizinlerinizin bağlantısını gösteren ekran görüntüsü](media/how-to-connect-import-export-config/import-2.png)
 
 > [!NOTE]
 > Birincil rolde yalnızca bir eşitleme sunucusu olabilir ve yapılandırma değişiklikleri Azure 'a etkin bir şekilde dışarı aktarabilirsiniz. Diğer tüm sunucuların hazırlama modunda yerleştirilmesi gerekir.
@@ -71,21 +71,27 @@ Geçiş için, Yeni yüklemede kullanılmak üzere var olan ayarları çıkaran 
 ### <a name="migration-process"></a>Geçiş süreci 
 Ayarları geçirmek için:
 
-1. Yeni hazırlama sunucusunda **AzureADConnect.msi** başlatın ve Azure AD Connect **hoş geldiniz** sayfasından durun.
+ 1. Yeni hazırlama sunucusunda **AzureADConnect.msi** başlatın ve Azure AD Connect **hoş geldiniz** sayfasından durun.
 
-1. Microsoft Azure AD Connect\Tools dizininden **MigrateSettings.ps1** var olan sunucudaki bir konuma kopyalayın. Örneğin, kurulumun mevcut sunucuda oluşturulmuş bir dizin olduğu C:\setup örneğidir.
+ 2. Microsoft Azure AD Connect\Tools dizininden **MigrateSettings.ps1** var olan sunucudaki bir konuma kopyalayın. Örneğin, kurulumun mevcut sunucuda oluşturulmuş bir dizin olduğu C:\setup örneğidir.</br>
+     ![Azure AD Connect dizinleri gösteren ekran görüntüsü.](media/how-to-connect-import-export-config/migrate-1.png)
 
-   ![Azure AD Connect dizinleri gösteren ekran görüntüsü.](media/how-to-connect-import-export-config/migrate1.png)
+     >[!NOTE]
+     > Bir ileti görürseniz: " **true** bağımsız değişkenini kabul eden bir Konumsal parametre bulunamıyor.", aşağıdaki gibi:
+     >
+     >
+     >![Hata ekran görüntüsü ](media/how-to-connect-import-export-config/migrate-5.png) sonra MigrateSettings.ps1 dosyasını düzenleyin ve **$true** kaldırın ve betiği çalıştırın: ![ yapılandırmayı düzenlemek için ekran görüntüsü](media/how-to-connect-import-export-config/migrate-6.png)
+ 
 
-1. Betiği burada gösterildiği gibi çalıştırın ve tüm alt düzey sunucu yapılandırma dizinini kaydedin. Bu dizini yeni hazırlama sunucusuna kopyalayın. Tüm **aktarılmış-ServerConfiguration-*** klasörünü yeni sunucuya kopyalamanız gerekir.
 
-   ![Windows PowerShell 'de betiği gösteren ekran görüntüsü. ](media/how-to-connect-import-export-config/migrate2.png)
-    ![ Aktarılmış-ServerConfiguration-* klasörünün kopyalanmasını gösteren ekran görüntüsü.](media/how-to-connect-import-export-config/migrate3.png)
 
-1. Masaüstündeki simgeye çift tıklayarak **Azure AD Connect** başlatın. Microsoft yazılımı lisans koşulları 'nı kabul edin ve sonraki sayfada **Özelleştir**' i seçin.
-1. **Eşitleme ayarlarını Içeri aktar** onay kutusunu seçin. Kopyalanabilir olan-ServerConfiguration-* klasörüne gitmek için **Araştır** ' ı seçin. Geçirilen ayarları içeri aktarmak için MigratedPolicy.jsseçin.
+ 3. Betiği burada gösterildiği gibi çalıştırın ve tüm alt düzey sunucu yapılandırma dizinini kaydedin. Bu dizini yeni hazırlama sunucusuna kopyalayın. Tüm **aktarılmış-ServerConfiguration-*** klasörünü yeni sunucuya kopyalamanız gerekir.
+     ![Windows PowerShell 'de betiği gösteren ekran görüntüsü. ](media/how-to-connect-import-export-config/migrate-2.png)![ Aktarılmış-ServerConfiguration-* klasörünün kopyalanmasını gösteren ekran görüntüsü.](media/how-to-connect-import-export-config/migrate-3.png)
 
-   ![Eşitleme ayarlarını Içeri aktarma seçeneğini gösteren ekran görüntüsü.](media/how-to-connect-import-export-config/migrate4.png)
+ 4. Masaüstündeki simgeye çift tıklayarak **Azure AD Connect** başlatın. Microsoft yazılımı lisans koşulları 'nı kabul edin ve sonraki sayfada **Özelleştir**' i seçin.
+ 5. **Eşitleme ayarlarını Içeri aktar** onay kutusunu seçin. Kopyalanabilir olan-ServerConfiguration-* klasörüne gitmek için **Araştır** ' ı seçin. Geçirilen ayarları içeri aktarmak için MigratedPolicy.jsseçin.
+
+     ![Eşitleme ayarlarını Içeri aktarma seçeneğini gösteren ekran görüntüsü.](media/how-to-connect-import-export-config/migrate-4.png)
 
 ## <a name="post-installation-verification"></a>Yükleme sonrası doğrulama 
 

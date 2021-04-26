@@ -9,12 +9,12 @@ ms.subservice: text-analytics
 ms.topic: include
 ms.date: 03/11/2021
 ms.author: aahi
-ms.openlocfilehash: 352b81bf2dfeca1d7413e7cac131264d06c7b92e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a74c0cad971389168d643c9504f5bb809438a1ea
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104599343"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106097305"
 ---
 ### <a name="financial-account-identification"></a>Finansal hesap kimliği
 
@@ -34,7 +34,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        American banker Association (ABA) transit yönlendirme numaraları.
+        American banker Association (ABA) transit yönlendirme numaraları. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `ABARoutingNumber` `pii-categories` . `ABARoutingNumber` , algılanırsa API yanıtında de döndürülür.
       
@@ -62,7 +62,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        Ödeme yönergesi bilgileri için SWIFT kodları.
+        Ödeme yönergesi bilgileri için SWIFT kodları. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `SWIFTCode` `pii-categories` . `SWIFTCode` algılanırsa API yanıtında döndürülür.
       
@@ -89,7 +89,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        Kredi kartı numaraları. 
+        Kredi kartı numaraları. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `CreditCardNumber` `pii-categories` . `CreditCardNumber` algılanırsa API yanıtında döndürülür.
 
@@ -116,7 +116,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        Ödeme yönergesi bilgileri için ıBAN kodları.
+        Ödeme yönergesi bilgileri için ıBAN kodları. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `InternationlBankingAccountNumber` `pii-categories` . `InternationlBankingAccountNumber` algılanırsa API yanıtında döndürülür.
       
@@ -144,12 +144,12 @@ Aşağıdaki varlıklar, ülkeye göre gruplandırılır ve listelenir:
     :::column span="":::
         **Varlık**
 
-        Arjantin Ulusal kimlik (DNı) numarası
+        Arjantin Ulusal kimlik (DNı) numarası 
 
     :::column-end:::
     :::column span="2":::
-        **Ayrıntılar**
-
+        **Ayrıntılar** İle de döndürülür `domain=phi` .
+        
         Bu varlık kategorisini almak için parametresine ekleyin `ARNationalIdentityNumber` `pii-categories` . `ARNationalIdentityNumber` algılanırsa API yanıtında döndürülür.
       
     :::column-end:::

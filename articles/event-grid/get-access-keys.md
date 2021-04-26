@@ -3,12 +3,12 @@ title: Event Grid kaynağı için erişim anahtarı al
 description: Bu makalede bir Event Grid konusu veya etki alanı için erişim anahtarı alma açıklanmaktadır
 ms.topic: how-to
 ms.date: 07/07/2020
-ms.openlocfilehash: a642affbac79766684dc75a37dae0373450d20e8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: cd60777b2e28b82d72f8f2bf93fe0be301e9e280
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98632538"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775232"
 ---
 # <a name="get-access-keys-for-event-grid-resources-topics-or-domains"></a>Event Grid kaynaklar için erişim anahtarları alın (konular veya etki alanları)
 Erişim tuşları, Azure Event Grid kaynaklara (konular ve etki alanları) yönelik bir uygulama yayımlama olaylarının kimliğini doğrulamak için kullanılır. Anahtarlarınızı düzenli olarak yeniden oluşturup güvenli bir şekilde depolamanızı öneririz. Diğer iki erişim anahtarı ile birlikte sunulur. böylece, diğer bir anahtarı kullanarak bağlantıları koruyabilirsiniz.
@@ -33,14 +33,14 @@ Etki alanları için erişim anahtarları almak için [Get-AzEventGridDomainKey]
 Get-AzEventGridDomainKey -ResourceGroup <RESOURCE GROUP NAME> -Name <DOMAIN NAME>
 ```
 
-## <a name="azure-cli"></a>Azure CLI’si
-Konu başlıkları için erişim anahtarları almak için [az eventgrid konu anahtar listesini](/cli/azure/eventgrid/topic/key#az-eventgrid-topic-key-list) kullanın. 
+## <a name="azure-cli"></a>Azure CLI
+Konu başlıkları için erişim anahtarları almak için [az eventgrid konu anahtar listesini](/cli/azure/eventgrid/topic/key#az_eventgrid_topic_key_list) kullanın. 
 
 ```azurecli-interactive
 az eventgrid topic key list --resource-group <RESOURCE GROUP NAME> --name <TOPIC NAME>
 ```
 
-Etki alanları için erişim anahtarları almak için [az eventgrid etki alanı anahtar listesini](/cli/azure/eventgrid/domain/key#az-eventgrid-domain-key-list) kullanın. 
+Etki alanları için erişim anahtarları almak için [az eventgrid etki alanı anahtar listesini](/cli/azure/eventgrid/domain/key#az_eventgrid_domain_key_list) kullanın. 
 
 ```azurecli-interactive
 az eventgrid domain key list --resource-group <RESOURCE GROUP NAME> --name <DOMAIN NAME>

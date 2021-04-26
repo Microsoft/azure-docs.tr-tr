@@ -7,18 +7,18 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 01/04/2019
 ms.author: junhan
-ms.openlocfilehash: d85e0e967dd802a77ccbc11b884d7a9f2891524d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b48def283ea27fdd0eaa3230a2eb9a8327461ff1
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "81688091"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567022"
 ---
 # <a name="use-azure-iot-tools-for-visual-studio-code-for-azure-iot-hub-device-management"></a>Azure IoT Hub cihaz yönetimi için Visual Studio Code Azure IoT araçları 'nı kullanma
 
 ![Uçtan uca diyagram](media/iot-hub-get-started-e2e-diagram/2.png)
 
-[Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools) , IoT Hub yönetimi ve IoT uygulaması geliştirmeyi kolaylaştıran yararlı bir Visual Studio Code uzantısıdır. Bu, çeşitli görevleri gerçekleştirmek için kullanabileceğiniz yönetim seçenekleriyle birlikte gelir.
+Bu makalede, geliştirme makinenizde çeşitli yönetim seçenekleriyle Visual Studio Code için Azure IoT araçları 'nı nasıl kullanacağınızı öğreneceksiniz. [Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools) , IoT Hub yönetimi ve IoT uygulaması geliştirmeyi kolaylaştıran yararlı bir Visual Studio Code uzantısıdır. Bu, çeşitli görevleri gerçekleştirmek için kullanabileceğiniz yönetim seçenekleriyle birlikte gelir.
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
@@ -35,15 +35,7 @@ Cihaz çiftleri, cihaz durumu bilgilerini (meta veriler, yapılandırmalar ve ko
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="what-you-learn"></a>Öğrenecekleriniz
-
-Geliştirme makinenizde çeşitli yönetim seçenekleriyle Visual Studio Code için Azure IoT araçlarını kullanmayı öğreneceksiniz.
-
-## <a name="what-you-do"></a>Yapabilecekleriniz
-
-Çeşitli yönetim seçenekleriyle Visual Studio Code için Azure IoT araçları 'nı çalıştırın.
-
-## <a name="what-you-need"></a>Gerekenler
+## <a name="prerequisites"></a>Önkoşullar
 
 * Etkin bir Azure aboneliği.
 * Aboneliğiniz kapsamındaki bir Azure IoT Hub 'ı.

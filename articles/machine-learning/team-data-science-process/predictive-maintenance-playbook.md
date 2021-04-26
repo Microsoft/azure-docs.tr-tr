@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: previous-author=fboylu, previous-ms.author=fboylu
-ms.openlocfilehash: 1e939b86eeadfee276378488cfcb40c07f28684d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9b6cf2abfa797965d75bacd0b9c5e2eaf02b57a4
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98880667"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308583"
 ---
 # <a name="azure-ai-guide-for-predictive-maintenance-solutions"></a>Tahmine dayalı bakım çözümleri için Azure AI Kılavuzu
 
@@ -439,15 +439,16 @@ Microsoft Azure, genel AI kavramlarıyla ilgili içerik ve eğitimlere ek olarak
 
 | Eğitim kaynağı  | Kullanılabilirlik |
 |:-------------------|--------------|
-| [Ağaçlar ve rastgele orman kullanarak PdM için öğrenme yolu](https://aischool.microsoft.com/learning-paths/1H5vH5wAYcAy88CoQWQcA8) | Genel | 
-| [Derin öğrenme kullanarak PdM için öğrenme yolu](https://aischool.microsoft.com/learning-paths/FSIXxYkOGcauo0eUO8qAS) | Genel |
-| [Azure 'da AI geliştiricisi](https://azure.microsoft.com/training/learning-paths/azure-ai-developer) | Genel |
-| [Microsoft AI okul](https://aischool.microsoft.com/learning-paths) | Genel |
-| [GitHub 'dan Azure AI öğrenimi](https://github.com/Azure/connectthedots/blob/master/readme.md) | Genel |
+| [Microsoft Docs: veri bilimcisi rolü](https://docs.microsoft.com/learn/roles/data-scientist) | Genel |
+| [Microsoft Docs: AI mühendisi rolü](https://docs.microsoft.com/learn/roles/ai-engineer) | Genel |
+| [Microsoft Docs: veri mühendisi rolü](https://docs.microsoft.com/learn/roles/data-engineer) | Genel |
+| [Microsoft AI okul](https://www.microsoft.com/ai/ai-school) | Genel |
 | [LinkedIn Learning](https://www.linkedin.com/learning) | Genel |
-| [Microsoft AI YouTube web seminerleri](https://www.youtube.com/watch?v=NvrH7_KKzoM&t=4s) | Genel |
+| [Microsoft: yapay zeka ve analiz için YouTube 'daki çalma listeleri](https://www.youtube.com/c/MicrosoftAzure/playlists?view=50&sort=dd&shelf_id=7) | Genel |
 | [Microsoft AI göster](https://channel9.msdn.com/Shows/AI-Show) | Genel |
-| [LearnAI@MS](https://learnanalytics.microsoft.com) | İş Ortakları |
+| [AI platformuna genel bakış](https://azure.microsoft.com/overview/ai-platform/) | Genel |
+| [AI Laboratuvarı](https://www.microsoft.com/ai/ai-lab) | Genel |
+| [Microsoft AI](https://www.microsoft.com/AI) | Genel |
 | [Microsoft İş Ortağı Ağı](https://partner.microsoft.com/training/training-center) | İş Ortakları |
 
 Ayrıca, AI üzerindeki ücretsiz MOOCS (büyük ölçüde açık çevrimiçi kurslar), Stanford ve MıT gibi akademik kurumlar ve diğer eğitim şirketleri tarafından çevrimiçi olarak sunulur.

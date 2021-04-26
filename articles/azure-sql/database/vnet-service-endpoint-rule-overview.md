@@ -11,12 +11,12 @@ author: rohitnayakmsft
 ms.author: rohitna
 ms.reviewer: vanto, genemi
 ms.date: 11/14/2019
-ms.openlocfilehash: 0dcffe6731c177d1d45c569361fcb200f23af86c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 67e807e948caf1fec014457814c1b7f105630f9f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99095367"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784434"
 ---
 # <a name="use-virtual-network-service-endpoints-and-rules-for-servers-in-azure-sql-database"></a>Azure SQL Veritabanı'nda sunucular için sanal ağ hizmet uç noktalarını ve kuralları kullanma
 
@@ -225,7 +225,7 @@ Bu bölümde, SQL veritabanı 'nda veritabanınızda bir *sanal ağ kuralı* olu
 
 ## <a name="powershell-alternative"></a>PowerShell alternatifi
 
-Bir betik, **New-AzSqlServerVirtualNetworkRule** veya [az Network VNET Create](/cli/azure/network/vnet#az-network-vnet-create)PowerShell cmdlet 'ini kullanarak sanal ağ kuralları da oluşturabilir. İlgileniyorsanız, [SQL veritabanı için sanal ağ hizmeti uç noktası ve kuralı oluşturmak üzere PowerShell][sql-db-vnet-service-endpoint-rule-powershell-md-52d]bölümüne bakın.
+Bir betik, **New-AzSqlServerVirtualNetworkRule** veya [az Network VNET Create](/cli/azure/network/vnet#az_network_vnet_create)PowerShell cmdlet 'ini kullanarak sanal ağ kuralları da oluşturabilir. İlgileniyorsanız, [SQL veritabanı için sanal ağ hizmeti uç noktası ve kuralı oluşturmak üzere PowerShell][sql-db-vnet-service-endpoint-rule-powershell-md-52d]bölümüne bakın.
 
 ## <a name="rest-api-alternative"></a>REST API alternatifi
 

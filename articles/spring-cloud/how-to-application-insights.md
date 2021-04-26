@@ -6,13 +6,13 @@ ms.author: brendm
 ms.service: spring-cloud
 ms.topic: how-to
 ms.date: 12/04/2020
-ms.custom: devx-track-java
-ms.openlocfilehash: f6f1ed1a3e09397a720dfd4d842b79cd88aa738d
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.custom: devx-track-java, devx-track-azurecli
+ms.openlocfilehash: b704d2cf8e2cc8e6cf5d8049290379dd45e26737
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878793"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870346"
 ---
 # <a name="application-insights-java-in-process-agent-in-azure-spring-cloud-preview"></a>Azure yay bulutu 'nda Application Insights Java In-Process Aracısı (Önizleme)
 
@@ -126,17 +126,17 @@ CLı komutuyla ARM şablonu uygulayın:
 * Mevcut bir Azure yay bulutu örneği için:
 
 ```azurecli
-az spring-cloud app-insights update [--app-insights/--app-insights-key] "assignedName" [--sampling-rate] "samplingRate" –name "assignedName" –resource-group "resourceGroupName"
+az spring-cloud app-insights update [--app-insights/--app-insights-key] "assignedName" [--sampling-rate] "samplingRate" â€“name "assignedName" â€“resource-group "resourceGroupName"
 ```
 * Yeni oluşturulan bir Azure yay bulutu örneği için:
 
 ```azurecli
-az spring-cloud create/update [--app-insights]/[--app-insights-key] "assignedName" --disable-app-insights false --enable-java-agent true --name "assignedName" –resource-group "resourceGroupName"
+az spring-cloud create/update [--app-insights]/[--app-insights-key] "assignedName" --disable-app-insights false --enable-java-agent true --name "assignedName" â€“resource-group "resourceGroupName"
 ```
 * Uygulama öngörülerini devre dışı bırakmak için:
 
 ```azurecli
-az spring-cloud app-insights update --disable –name "assignedName" –resource-group "resourceGroupName"
+az spring-cloud app-insights update --disable â€“name "assignedName" â€“resource-group "resourceGroupName"
 
 ```
 

@@ -6,12 +6,12 @@ ms.author: valls
 ms.date: 2/11/2021
 ms.topic: tutorial
 ms.service: iot-hub-device-update
-ms.openlocfilehash: 8cbc101ec9b5608574b93ea17022a3b0ef02ce4b
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 90e72bd12d9115e5ff95213428ae4ac37979dcf3
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105644418"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106120104"
 ---
 # <a name="device-update-for-azure-iot-hub-tutorial-using-the-ubuntu-1804-x64-simulator-reference-agent"></a>Ubuntu (18,04 x64) simülatörü başvuru Aracısı 'nı kullanarak Azure IoT Hub öğreticisi için cihaz güncelleştirmesi
 
@@ -147,9 +147,9 @@ Agent running. [main]
 
 1. [Azure Portal](https://portal.azure.com) açın ve IoT Hub gidin.
 
-2. Sol gezinti bölmesindeki ' IoT cihazları ' veya ' IoT Edge ' içinden IoT cihazınızı bulun ve cihaz Ikizi gidin.
+2. Sol gezinti bölmesindeki ' IoT cihazları ' veya ' IoT Edge ' içinden IoT cihazınızı bulun ve cihaz Ikizi veya modül Ikizi ' a gidin.
 
-3. Cihaz Ikizi, var olan tüm cihaz güncelleştirme etiketi değerlerini null olarak ayarlayarak silin.
+3. Cihaz Güncelleştirme Aracısı modülünün Ikizi modülünde, var olan tüm cihaz güncelleştirme etiketi değerlerini null olarak ayarlayarak silin. Cihaz kimliği ile cihaz güncelleştirme aracısı kullanıyorsanız, bu değişiklikleri cihaz Ikizi üzerinde yapın.
 
 4. Aşağıda gösterildiği gibi yeni bir cihaz güncelleştirme etiketi değeri ekleyin.
 

@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 04/17/2019
 ms.author: kefre
 ms.custom: seodec18
-ms.openlocfilehash: e8ab205a43e5cb1e8e2b96dbd9600e1fceb29403
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 7aac3a38b82b86edc47f48e50d26b5b269486701
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "68564595"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107375245"
 ---
 # <a name="computer-vision-api-frequently-asked-questions"></a>Görüntü İşleme API'si sık sorulan sorular
 
@@ -31,44 +31,16 @@ ms.locfileid: "68564595"
 
 ---
 
-**Soru**: *İnternet bağlantısı olmadan yerel olarak görüntü işleme kullanılabilir mi?*
 
-**Cevap**: Şu anda şirket içi veya yerel bir çözüm sunmuyoruz.
+**Soru**: *Şirket Içi OCR (okuma) özelliğini dağıtabilir miyim?*
+
+**Cevap**: Evet, OCR (okuma) bulut API 'si, şirket içi dağıtım Için bir Docker kapsayıcısı olarak da kullanılabilir. [OCR kapsayıcılarını dağıtmayı](/computer-vision-how-to-install-containers)öğrenin.
 
 ---
 
 **Soru**: *Lisans levhalarını okumak için görüntü işleme kullanılabilir mi?*
 
-**Cevap**: Vision API 'SI, OCR ile iyi metin algılama olanağı sunar, ancak şu anda lisans levhaları için iyileştirilmez. Hizmetlerimizi sürekli olarak iyileştirmeye çalışıyoruz ve özellik istekleri listemize otomatik lisans levha tanıma için OCR ekledik.
+**Cevap**: Vision API 'si, en son okuma özelliğine sahip derin öğrenme destekli OCR özelliklerini içerir. Tüm senaryolarda çalışmak için hizmetlerimizi sürekli olarak iyileştirmeye çalışıyoruz.
 
 ---
 
-**Soru**: *el yazısı tanıma için hangi tür yazma yüzeyleri desteklenir?*
-
-**Cevap**: teknoloji, beyaz tahta, Teknik İnceleme ve sarı yapışkan notlar gibi farklı türlerde yüzeyler ile birlikte kullanılır.
-
----
-
-**Soru**: *el yazısı tanıma işlemi ne kadar sürer?*
-
-**Cevap**: aldığı sürenin miktarı metnin uzunluğuna bağlıdır. Uzun metinler için birkaç saniye sürebilir. Bu nedenle, El Ile yazılmış metin işlemi tamamlandıktan sonra, el yazısı metin Işlem sonucunu Al işlemini kullanarak sonuçları alabilmek için beklemeniz gerekebilir.
-
----
-
-**Soru**: *el yazısı tanıma teknolojisi, bir satır ortasında bir giriş işareti kullanılarak eklenen metni nasıl işler?*
-
-**Cevap**: Bu tür metinler, el yazısı tanıma işlemi tarafından ayrı bir satır olarak döndürülür.
-
----
-
-**Soru**: *el yazısı tanıma teknolojisi, çapraz veya satırları nasıl işler?*
-
-**Cevap**: sözcüklerin tanınabilmesi için birden çok satır varsa, el yazısı tanıma işlemi bunları kullanıma almaz. Ancak, sözcükler tek bir çizgi kullanılarak ele alınalıyorsa, bu geçiş gürültü olarak kabul edilir ve kelimeler yine de el yazısı tanıma işlemi tarafından alınır.
-
----
-
-**Soru**: *el yazısı tanıma teknolojisi için hangi metin yönleri desteklenir?*
-
-**Cevap**: en fazla 30 derece 40 dereceye kadar olan metin yönelimli metinler, el yazısı tanıma işlemi tarafından alınmayabilir.
-
----

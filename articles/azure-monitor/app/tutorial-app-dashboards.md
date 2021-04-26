@@ -1,18 +1,17 @@
 ---
 title: Azure Application Insights’ta özel panolar oluşturma | Microsoft Docs
 description: Azure Application Insights’ı kullanarak özel KPI panoları oluşturma öğreticisi.
-ms.subservice: application-insights
 ms.topic: tutorial
 author: lgayhardt
 ms.author: lagayhar
 ms.date: 09/30/2020
 ms.custom: mvc, contperf-fy21q1
-ms.openlocfilehash: 701480300101b019830c57d9aa000534fa63bb6a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7bad0b17bb2fed9d9f54cdd44042ec88708f35fd
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100628133"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103734"
 ---
 # <a name="create-custom-kpi-dashboards-using-azure-application-insights"></a>Azure Application Insights’ı kullanarak özel KPI panoları oluşturma
 
@@ -60,7 +59,7 @@ Tek bir pano çeşitli uygulamalardan, kaynak gruplarından ve aboneliklerden ge
 5. **Markdown** kutucuğunu bulun ve panonuza sürükleyin.  Bu kutucuk, panonuza açıklayıcı metin eklemek için ideal olan markaşağı içinde biçimlendirilen metin eklemenize olanak tanır. Daha fazla bilgi için bkz. [özel içerik göstermek Için Azure panolarında markaşağı kutucuk kullanma](../../azure-portal/azure-portal-markdown-tile.md).
 6. Metni kutucuğun özelliklerine ekleyin ve pano tuvalinizde yeniden boyutlandırın.
 
-    [![Markdown kutucuğunu düzenleme](media/tutorial-app-dashboards/markdown.png)](media/tutorial-app-dashboards/dashboard-edit-mode.png#lightbox)
+    [![Markdown kutucuğunu düzenleme](media/tutorial-app-dashboards/markdown.png)](media/tutorial-app-dashboards/markdown.png#lightbox)
 
 7. Kutucuk özelleştirme modundan çıkmak için ekranın üst kısmındaki **özelleştirmeyi bitti** ' yi seçin.
 

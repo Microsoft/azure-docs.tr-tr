@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/07/2021
 ms.author: vinigam
-ms.openlocfilehash: d4ab5361d245ad1ee10d43184cc0a2d65fed2054
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: fc5bcc7f0cd11160b33bb6501526fce9f29d710b
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101730040"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107366394"
 ---
 # <a name="migrate-to-connection-monitor-from-connection-monitor-classic"></a>Bağlantı izleyiciden bağlantı Izleyicisine geçiş (klasik)
 
@@ -39,7 +39,10 @@ Geçiş, aşağıdaki sonuçları üretmenize yardımcı olur:
     
 ## <a name="prerequisites"></a>Önkoşullar
 
-Özel bir çalışma alanı kullanıyorsanız, aboneliğinizde ve Log Analytics çalışma alanınızın bölgesinde ağ Izleyicisi 'nin etkinleştirildiğinden emin olun. 
+1. Özel bir çalışma alanı kullanıyorsanız, aboneliğinizde ve Log Analytics çalışma alanınızın bölgesinde ağ Izleyicisi 'nin etkinleştirildiğinden emin olun. "Geçiş yapmayı denemeden önce" bir hata görürsünüz, lütfen seçim aboneliğinde ağ izleyicisi uzantısını etkinleştirin ve LA çalışma alanının konumunu seçili yapın. "
+1. Bağlantı izleyicisinde (klasik) kaynak olarak kullanılan sanal makinelerin artık ağ Izleyicisi uzantısı etkinleştirilmemişse, "bir veya daha fazla Azure sanal makinesi ağ izleyicisi uzantısı yüklü olmadığı için aşağıdaki testlerin bulunduğu bağlantı izleyicilerinin içeri aktarılmadığını belirten bir hata iletisi görürsünüz. Ağ izleyicisi uzantısını yükleyip içeri aktarmak için Yenile 'ye tıklayın. "
+
+
 
 ## <a name="migrate-the-connection-monitors"></a>Bağlantı izleyicilerini geçirme
 

@@ -10,22 +10,29 @@ ms.service: active-directory
 ms.topic: how-to
 ms.workload: identity
 ms.subservice: pim
-ms.date: 3/16/2021
+ms.date: 4/05/2021
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 310122177d4bd1603f5f498aa2a51620eeda4a20
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2aba8d9de5e068cd98675f67cb26b0eac8d1ad6d
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104592857"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552840"
 ---
 # <a name="create-an-access-review-of-azure-ad-roles-in-privileged-identity-management"></a>Privileged Identity Management Azure AD rolleri için erişim gözden geçirmesi oluşturma
 
 Eski rol atamalarıyla ilişkili riski azaltmak için, erişimi düzenli olarak gözden geçirmeniz gerekir. Ayrıcalıklı Azure AD rolleri için erişim gözden geçirmeleri oluşturmak üzere Azure AD Privileged Identity Management (PıM) kullanabilirsiniz. Ayrıca, otomatik olarak gerçekleşen yinelenen erişim incelemelerini yapılandırabilirsiniz.
 
 Bu makalede, ayrıcalıklı Azure AD rolleri için bir veya daha fazla erişim incelemesi oluşturma açıklanır.
+
+## <a name="prerequisite-license"></a>Önkoşul lisansı
+
+[!INCLUDE [Azure AD Premium P2 license](../../../includes/active-directory-p2-license.md)]. PıM lisansları hakkında daha fazla bilgi için [Privileged Identity Management kullanmak üzere lisans gereksinimlerine](subscription-requirements.md)bakın.
+
+> [!Note]
+>  Şu anda, kiracınızda etkin bir Azure Active Directory Premium P2 sürümü ile Azure AD ve Azure Kaynak rolleri 'ne (Önizleme) erişimi olan hizmet sorumlularına yönelik bir erişim incelemesi tanımlayabilirsiniz. Hizmet sorumluları için lisanslama modeli, bu özelliğin genel kullanıma sunulmasıyla sonlandırılır ve ek lisanslar gerekebilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -35,9 +42,11 @@ Bu makalede, ayrıcalıklı Azure AD rolleri için bir veya daha fazla erişim i
 
 1. Ayrıcalıklı rol yöneticisi rolünün üyesi olan bir kullanıcıyla [Azure Portal](https://portal.azure.com/) oturum açın.
 
-1. **Azure AD Privileged Identity Management** açın.
-
-1. **Azure AD rolleri**' ni seçin.
+1. **Identity idare** seçin
+ 
+1. **Azure AD Privileged Identity Management** altında **Azure AD rolleri** ' ni seçin.
+ 
+1. **Yönet** altında **Azure AD rolleri** ' ni yeniden seçin.
 
 1. Yönet altında, **erişim gözden geçirmeleri**' nı seçin ve ardından **Yeni**' yi seçin.
 
@@ -57,9 +66,11 @@ Yeni erişim gözden geçirmesi oluşturmak için **Yeni** ' ye tıklayın.
 
 1. Yinelenen erişim gözden geçirme serisinin nasıl sonlandıralınacağını belirtmek için **bitiş** ayarını kullanın. Seriler üç şekilde bitemez: sürekli olarak gözden geçirmeler başlatacak şekilde, belirli bir tarihe kadar veya tanımlanan sayıda oluşumdan sonra sürekli olarak çalışır. Siz, başka bir Kullanıcı Yöneticisi veya başka bir genel yönetici, **ayarları**, bu tarihte sona erecek şekilde değiştirerek, oluşturulduktan sonra seriyi durdurabilir.
 
-1. **Kullanıcılar** bölümünde, üyeliğini gözden geçirmek istediğiniz bir veya daha fazla rol seçin.
+1. **Kullanıcılar kapsamı** bölümünde, gözden geçirme kapsamını seçin. Azure AD rolüne erişimi olan Kullanıcı ve grupları gözden geçirmek için **Kullanıcılar ve gruplar**' ı seçin ya da Azure AD rolüne erişimi olan makine hesaplarını gözden geçirmek Için **hizmet sorumlularını seçin (Önizleme)** .
 
     ![Rol üyeliğini gözden geçirmek için kullanıcılara kapsam](./media/pim-how-to-start-security-review/users.png)
+
+1. **Rol üyeliğini gözden geçir** altında, gözden geçirilecek AYRıCALıKLı Azure AD rollerini seçin. 
 
     > [!NOTE]
     > - Burada seçilen roller hem [kalıcı hem de uygun rolleri](../privileged-identity-management/pim-how-to-add-role-to-user.md)içerir.
@@ -77,9 +88,9 @@ Yeni erişim gözden geçirmesi oluşturmak için **Yeni** ' ye tıklayın.
 
     ![Seçili kullanıcıların veya üyelerin gözden geçirenler listesi (self)](./media/pim-how-to-start-security-review/reviewers.png)
 
-    - **Seçili kullanıcılar** -kimlerin erişimi olduğunu bilmiyorsanız bu seçeneği kullanın. Bu seçenekle, tamamlanacak bir kaynak sahibine veya grup yöneticisine incelemeyi atayabilirsiniz.
-    - **Üyeler (self)** -bu seçeneği, kullanıcıların kendi rol atamalarını gözden geçirmesini sağlamak için kullanın. Role atanan gruplar, bu seçenek belirlendiğinde, gözden geçirme bir parçası olmayacaktır.
-    - **Yönetici** – Kullanıcı yöneticisinin rol atamasını gözden geçirmesini sağlamak için bu seçeneği kullanın. Yönetici ' yi seçtikten sonra, bir geri dönüş gözden geçireni belirtme seçeneğine de sahip olursunuz. Kullanıcı, dizinde hiçbir yönetici belirtilmediğinde, geri dönüş gözden geçiricilerin Kullanıcı tarafından incelenmesi istenir. Role atanan gruplar, bir seçilirse, geri dönüş gözden geçireni tarafından incelenmeyecektir. 
+    - **Seçili kullanıcılar** -bu seçeneği, gözden geçirmeyi tamamlayacak belirli bir kullanıcıyı belirlemek için kullanın. Bu seçenek, gözden geçirme kapsamlarından bağımsız olarak kullanılabilir ve seçili gözden geçirenler Kullanıcı, Grup ve hizmet sorumlularını gözden geçirebilir. 
+    - **Üyeler (self)** -bu seçeneği, kullanıcıların kendi rol atamalarını gözden geçirmesini sağlamak için kullanın. Role atanan gruplar, bu seçenek belirlendiğinde, gözden geçirme bir parçası olmayacaktır. Bu seçenek yalnızca İnceleme, **Kullanıcılar ve gruplar** kapsamalıyorsa kullanılabilir.
+    - **Yönetici** – Kullanıcı yöneticisinin rol atamasını gözden geçirmesini sağlamak için bu seçeneği kullanın. Bu seçenek yalnızca İnceleme, **Kullanıcılar ve gruplar** kapsamalıyorsa kullanılabilir. Yönetici ' yi seçtikten sonra, bir geri dönüş gözden geçireni belirtme seçeneğine de sahip olursunuz. Kullanıcı, dizinde hiçbir yönetici belirtilmediğinde, geri dönüş gözden geçiricilerin Kullanıcı tarafından incelenmesi istenir. Role atanan gruplar, bir seçilirse, geri dönüş gözden geçireni tarafından incelenmeyecektir. 
 
 ### <a name="upon-completion-settings"></a>Tamamlama ayarlarından sonra
 

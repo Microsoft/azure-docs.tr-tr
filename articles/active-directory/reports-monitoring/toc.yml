@@ -107,8 +107,6 @@
       href: reference-reports-data-retention.md
     - name: Raporlama gecikmeleri
       href: reference-reports-latencies.md
-    - name: Oturum açma hata kodları
-      href: reference-sign-ins-error-codes.md
     - name: Sık sorulan sorular
       href: reports-faq.md
     - name: Denetim günlüğü şeması

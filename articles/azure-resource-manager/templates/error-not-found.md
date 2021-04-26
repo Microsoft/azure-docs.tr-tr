@@ -3,12 +3,12 @@ title: Kaynak bulunamadı hataları
 description: Bir kaynak bulunamadığında hataların nasıl çözümleneceğini açıklar. Bir Azure Resource Manager şablonu dağıtıldığında veya yönetim eylemleri yapılırken hata oluşabilir.
 ms.topic: troubleshooting
 ms.date: 03/23/2021
-ms.openlocfilehash: b80c32683190167d5c0d6e0a7f75acce8bbdb833
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 5e3a72eaad99721cec9500956179a3ae9d9cf8d2
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104950884"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762146"
 ---
 # <a name="resolve-resource-not-found-errors"></a>Kaynak bulunamadı hatalarını çözümle
 
@@ -43,7 +43,7 @@ Bir yönetim görevi gerçekleştirirken bu hatayı aldığınızda, kaynak içi
 * Kaynak grubu adı
 * Abonelik
 
-PowerShell veya Azure CLı kullanıyorsanız, komutunu kaynağı içeren abonelikte çalıştırıp çalıştırmadığını kontrol edin. Aboneliği [set-AzContext](/powershell/module/Az.Accounts/Set-AzContext) veya [az Account set](/cli/azure/account#az-account-set)ile değiştirebilirsiniz. Birçok komut, geçerli bağlamdan farklı bir abonelik belirtmenize imkan tanıyan bir abonelik parametresi de sağlar.
+PowerShell veya Azure CLı kullanıyorsanız, komutunu kaynağı içeren abonelikte çalıştırıp çalıştırmadığını kontrol edin. Aboneliği [set-AzContext](/powershell/module/Az.Accounts/Set-AzContext) veya [az Account set](/cli/azure/account#az_account_set)ile değiştirebilirsiniz. Birçok komut, geçerli bağlamdan farklı bir abonelik belirtmenize imkan tanıyan bir abonelik parametresi de sağlar.
 
 Özellikleri doğrularken sorun yaşıyorsanız [portalda](https://portal.azure.com)oturum açın. Kullanmaya çalıştığınız kaynağı bulun ve kaynak adı, kaynak grubu ve aboneliği inceleyin.
 

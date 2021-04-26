@@ -2,21 +2,21 @@
 title: Azure Active Directory 'de bağlantılı oturum açmayı anlayın
 description: Azure Active Directory 'de bağlantılı oturum açmayı anlayın.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: conceptual
 ms.workload: identity
 ms.date: 07/30/2020
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: arvinh,luleon
-ms.openlocfilehash: 3e2d3ab6a23ce588c3aa393e5096ac75e88a5365
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6ed6f6b69326157573ea043457dbc8d8a3079146
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99255295"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374588"
 ---
 # <a name="understand-linked-sign-on"></a>Bağlantılı oturum açmayı anlama
 

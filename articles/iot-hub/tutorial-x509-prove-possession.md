@@ -12,13 +12,12 @@ ms.custom:
 - mvc
 - 'Role: Cloud Development'
 - 'Role: Data Analytics'
-- devx-track-azurecli
-ms.openlocfilehash: 0eb91754c3c70a7b477d456158454f707a874207
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: b7740fa1f6a54dcfcc1181dddedcdd5fdb50402c
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105630775"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378236"
 ---
 # <a name="tutorial-proving-possession-of-a-ca-certificate"></a>Öğretici: CA sertifikasını yerine döndürme
 
@@ -46,9 +45,11 @@ Kök sertifika yetkilisi (CA) sertifikanızı veya alt CA sertifikanızı IoT Hu
 
     * Microsoft tarafından sağlanan Bash betiğini kullanıyorsanız `./certGen.sh create_verification_certificate "75B86466DA34D2B04C0C4C9557A119687ADAE7D4732BDDB3"` adlı bir sertifika oluşturmak için öğesini çalıştırın `verification-code.cert.pem` . Daha fazla bilgi için bkz. [Microsoft tarafından sağlanan betikleri kullanma](tutorial-x509-scripts.md).
 
-    * Sertifikalarınızı oluşturmak için OpenSSL kullanıyorsanız, öncelikle bir özel anahtar ve bir sertifika imzalama isteği (CSR) oluşturmanız gerekir:
+    * Sertifikalarınızı oluşturmak için OpenSSL kullanıyorsanız, öncelikle bir özel anahtar ve ardından bir sertifika imzalama isteği (CSR) oluşturmanız gerekir:
 
       ```bash
+      $ openssl genpkey -out pop.key -algorithm RSA -pkeyopt rsa_keygen_bits:2048
+
       $ openssl req -new -key pop.key -out pop.csr
 
       -----

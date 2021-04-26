@@ -1,5 +1,5 @@
 ---
-Başlık: içerme dosya açıklaması: içerme dosya hizmetleri: Olay-Hub yazarı: spelluru MS. Service: Event-hub MS. Topic: MS. Date: 02/01/2021 MS. Author: spelluru MS. Custom: "içerme dosyası", "FastTrack-Edit", "IoT", "Event-Hub"
+Başlık: içerme dosya açıklaması: içerme dosya hizmetleri: Olay-Hub yazarı: spelluru MS. Service: Event-hub MS. Topic: MS. Date: 03/31/2021 MS. Author: spelluru MS. Custom: "içerme dosyası", "FastTrack-Edit", "IoT", "Event-Hub"
 
 ---
 
@@ -13,13 +13,12 @@ Aşağıdaki sınırlar tüm katmanlarda ortaktır.
 | Abonelik başına Event Hubs ad alanı sayısı |- |100 |
 | Ad alanı başına Olay Hub 'ları sayısı | Yeni bir olay hub 'ı oluşturmaya yönelik sonraki istekler reddedilir. |10 |
 | Bir olay hub 'ı adının boyutu |- | 256 karakter |
-| Tüketici grubu adının boyutu |- | 256 karakter |
+| Tüketici grubu adının boyutu | Kafka protokolü bir tüketici grubu oluşturulmasını gerektirmez. | <p>Kafka: 256 karakter</p><p>AMQP: 50 karakter |
 | Tüketici grubu başına dönem olmayan alıcıların sayısı |- |5 |
 | Ad alanı başına yetkilendirme kuralı sayısı | Yetkilendirme kuralı oluşturma için sonraki istekler reddedilir.|12 |
 | GetRuntimeInformation metoduna yapılan çağrıların sayısı |  - | saniyede 50 | 
 | Sanal ağ sayısı (VNet) | - | 128 | 
 | IP yapılandırma kuralları sayısı | - | 128 | 
-
 
 ### <a name="basic-vs-standard-tiers"></a>Temel ve Standart katmanlar
 Aşağıdaki tabloda, temel ve Standart katmanlar için farklı olabilecek sınırlar gösterilmektedir. 
@@ -46,7 +45,7 @@ Azure portal kullanarak adanmış Event Hubs kümesi oluşturma hakkında bu [be
 | Özellik | Standart | Ayrılmış |
 | --- |:---|:---|
 | Bant genişliği | 20 s (40 'e kadar) | 20 cu düzeyinde kapsanır |
-| Ad alanları |  1 | CU başına 50 |
+| Ad alanları |  Abonelik başına 100 | CU başına 50 (abonelik başına 100) |
 | Event Hubs |  ad alanı başına 10 | ad alanı başına 1000 |
 | Giriş olayları | Milyon olay başına ödeme | Dahil |
 | İleti boyutu | 1.000.000 bayt | 1.000.000 bayt |

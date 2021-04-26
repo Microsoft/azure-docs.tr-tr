@@ -1,14 +1,14 @@
 ---
 title: Windows için grup ilkesi taban çizgisinden Konuk yapılandırma ilkesi tanımları oluşturma
 description: Windows Server 2019 güvenlik taban çizgisinden grup ilkesi bir ilke tanımına nasıl dönüştüreceğiniz hakkında bilgi edinin.
-ms.date: 08/17/2020
+ms.date: 03/31/2021
 ms.topic: how-to
-ms.openlocfilehash: 7f7e2af70efa6771d94d7ceaa14d1408175b1d12
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a49c8044914c8c23b4f99cad7838652eb94c4b92
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93348653"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106096589"
 ---
 # <a name="how-to-create-guest-configuration-policy-definitions-from-group-policy-baseline-for-windows"></a>Windows için grup ilkesi taban çizgisinden Konuk yapılandırma ilkesi tanımları oluşturma
 
@@ -96,13 +96,13 @@ Ardından, indirilen sunucu 2019 taban çizgisini Konuk yapılandırma ve temel 
 1. Konuk yapılandırması özel ilke paketi oluşturulduktan ve karşıya yüklendikten sonra, Konuk yapılandırma ilkesi tanımını oluşturun. `New-GuestConfigurationPolicy`Konuk yapılandırmasını oluşturmak için cmdlet 'ini kullanın.
 
    ```azurepowershell-interactive
-    $NewGuestConfigurationPolicySplat = @{
+   $NewGuestConfigurationPolicySplat = @{
         ContentUri = $Uri 
         DisplayName = 'Server 2019 Configuration Baseline' 
         Description 'Validation of using a completely custom baseline configuration for Windows VMs' 
         Path = 'C:\git\policyfiles\policy'  
         Platform = Windows 
-        }
+   }
    New-GuestConfigurationPolicy @NewGuestConfigurationPolicySplat
    ```
     

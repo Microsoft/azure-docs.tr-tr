@@ -3,12 +3,12 @@ title: IoT Edge-Azure 'da canlı video Analizte doğrudan Yöntemler kullanma
 description: IoT Edge canlı video analizi, çeşitli doğrudan yöntemler sunar. Doğrudan Yöntemler, bu konuda açıklanan kuralları temel alır.
 ms.topic: conceptual
 ms.date: 04/27/2020
-ms.openlocfilehash: 8b5c16dc72beed4ec757e48461a2fc194c113f8d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 56fbf565af45a9b3877ff8d6c48a56713ddc3da6
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97656249"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076998"
 ---
 # <a name="direct-methods"></a>Doğrudan yöntemler
 
@@ -381,7 +381,7 @@ Anahtar yönleri:
 | Grafik doğrulama hataları | 400 | GraphValidationError |
 | Modül doğrulama hataları | 400 | ModuleValidationError |
 | Kaynak doğrulama hataları | 409 | ResourceValidationError |
-| Genel sunucu hataları | 500 aralığı |  |  |
+| Genel sunucu hataları | 500 aralığı |  | 
 
 ### <a name="graphinstancedelete"></a>Graphınstancedelete
 

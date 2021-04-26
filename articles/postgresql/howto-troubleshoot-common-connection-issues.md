@@ -2,21 +2,22 @@
 title: Bağlantı sorunlarını giderme-PostgreSQL için Azure veritabanı-tek sunucu
 description: PostgreSQL için Azure veritabanı-tek sunucu ile bağlantı sorunlarını giderme hakkında bilgi edinin.
 keywords: PostgreSQL bağlantısı, bağlantı dizesi, bağlantı sorunları, geçici hata, bağlantı hatası
-author: niklarin
-ms.author: nlarin
+author: sunilagarwal
+ms.author: sunila
+ms.reviewer: ''
 ms.service: postgresql
 ms.topic: how-to
 ms.date: 5/6/2019
-ms.openlocfilehash: bff930153dc8941fbfe561edf963d5b1c1e7811f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7fe8c4b751be174a91a0e2e94991bc63b4b1e5c7
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96014627"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504252"
 ---
 # <a name="troubleshoot-connection-issues-to-azure-database-for-postgresql---single-server"></a>PostgreSQL için Azure veritabanı ile ilgili bağlantı sorunlarını giderme-tek sunucu
 
-Bağlantı sorunlarına aşağıdakiler de dahil olmak üzere çeşitli öğeler neden olmuş olabilir:
+Bağlantı sorunlarına aşağıdakiler dahil çeşitli şeyler neden olmuş olabilir:
 
 * Güvenlik duvarı ayarları
 * Bağlantı zaman aşımı
@@ -47,10 +48,10 @@ Bakım gerçekleştirildiğinde geçici hatalar meydana gelir, sistem donanım v
 Uygulama, PostgreSQL için Azure veritabanı 'na kalıcı olarak bağlanamazsa, genellikle aşağıdakilerden biriyle ilgili bir sorun olduğunu gösterir:
 
 * Sunucu güvenlik duvarı yapılandırması: PostgreSQL için Azure veritabanı sunucu güvenlik duvarının, proxy sunucuları ve ağ geçitleri dahil olmak üzere istemcinizden gelen bağlantılara izin verecek şekilde yapılandırıldığından emin olun.
-* İstemci güvenlik duvarı yapılandırması: istemcinizdeki güvenlik duvarı, veritabanı sunucunuza yönelik bağlantılara izin vermelidir. Bazı güvenlik duvarlarındaki PostgreSQL gibi uygulama adlarının yanı sıra, izin verilmeyen sunucunun IP adreslerine ve bağlantı noktalarına izin verilmesi gerekir.
+* İstemci güvenlik duvarı yapılandırması: istemcinizdeki güvenlik duvarı, veritabanı sunucunuza yönelik bağlantılara izin vermelidir. Bağlanamadaki sunucunun IP adreslerine ve bağlantı noktalarına, bazı güvenlik duvarlarındaki PostgreSQL gibi uygulama adlarına izin verilmelidir.
 * Kullanıcı hatası: bağlantı dizesindeki sunucu adı veya Kullanıcı adında eksik *\@ ServerName* son eki gibi yanlış bağlantı parametreleri olabilir.
-* Hata _sunucusunun IPv6 bağlantılarına izin verecek şekilde yapılandırılmadığını_ görürseniz, temel katmanın VNET hizmet uç noktalarını desteklemediğini unutmayın. Temel sunucuya bağlanmaya çalışan alt ağdan Microsoft. SQL uç noktasını kaldırmanız gerekir.
-* _SSL desteği hatada derlenmediği zaman "* * *"_ bağlantı hatasını görürseniz, PostgreSQL istemciniz SSL 'yi desteklemez demektir. Büyük olasılıkla, istemci tarafı libpq "--with-OpenSSL" bayrağıyla derlenmedi. Lütfen SSL desteği olan bir PostgreSQL istemcisiyle bağlanmayı deneyin. 
+* _Sunucu, IPv6 bağlantılarına izin verecek şekilde yapılandırılmadığını_ görürseniz, temel katmanın sanal ağ hizmet uç noktalarını desteklemediğini unutmayın. Temel sunucuya bağlanmaya çalışan alt ağdan Microsoft. SQL uç noktasını kaldırmanız gerekir.
+* _SSL desteği hatada derlenmediği zaman "* * *"_ bağlantı hatasını görürseniz, bu, PostgreSQL istemciniz SSL 'yi desteklemediğinden anlamına gelir. Büyük olasılıkla, istemci tarafı libpq "--with-OpenSSL" bayrağıyla derlenmemiştir. SSL desteği olan bir PostgreSQL istemcisiyle bağlanmayı deneyin. 
 
 ### <a name="steps-to-resolve-persistent-connectivity-issues"></a>Kalıcı bağlantı sorunlarını giderme adımları
 

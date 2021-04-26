@@ -1,25 +1,25 @@
 ---
-title: Azure Bilişsel Arama günlüklerini ve ölçümlerini Power BI ile görselleştirin
-description: Azure Bilişsel Arama günlüklerini ve ölçümlerini Power BI ile görselleştirin
-manager: eladz
+title: Power BI ile günlükleri ve ölçümleri görselleştirin
+description: Power BI ile Azure Bilişsel Arama günlüklerini ve ölçümlerini görselleştirin.
 author: MarkHeff
 ms.author: maheff
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 09/25/2020
-ms.openlocfilehash: 4056e892855c06ce6c412ec4a592ebcd97fc11a6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/07/2021
+ms.openlocfilehash: fbbeb861e50abfd393b416ddc46ff147fffb7b8e
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96325392"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581631"
 ---
 # <a name="visualize-azure-cognitive-search-logs-and-metrics-with-power-bi"></a>Azure Bilişsel Arama günlüklerini ve ölçümlerini Power BI ile görselleştirin
-[Azure bilişsel arama](./search-what-is-azure-search.md) , arama hizmetinize ilişkin işlem günlüklerini ve hizmet ölçümlerini bir Azure depolama hesabında depolamanıza olanak tanır. Bu sayfa, bu bilgileri bir Power BI şablonu uygulaması aracılığıyla görselleştirmenize ilişkin yönergeler sağlar. Uygulama arama, dizin oluşturma, Işlemler ve hizmet ölçümleri hakkında bilgiler de dahil olmak üzere arama hizmetiniz hakkında ayrıntılı öngörüler sağlar.
+
+[Azure bilişsel arama](./search-what-is-azure-search.md) , işlem günlüklerini ve hizmet ölçümlerini, daha sonra Power BI görselleştirebileceğiniz bir Azure depolama hesabına gönderebilir. Bu makalede, adımlar ve verileri görselleştirmek için Power BI şablon uygulamasının nasıl kullanılacağı açıklanmaktadır. Şablon sorgular, dizin oluşturma, işlemler ve hizmet ölçümleri hakkında bilgiler de dahil olmak üzere arama hizmetiniz hakkında ayrıntılı Öngörüler elde etmenize yardımcı olabilir.
 
 Azure Bilişsel Arama Power BI şablon uygulamasını bulabilirsiniz: [Power BI Apps marketi](https://appsource.microsoft.com/marketplace/apps)'nde **günlükleri ve ölçümleri analiz edin** .
 
-## <a name="how-to-get-started-with-the-app"></a>Uygulama ile çalışmaya başlama
+## <a name="set-up-the-app"></a>Uygulamayı ayarlama
 
 1. Arama hizmetiniz için ölçüm ve kaynak günlüğünü etkinleştirme:
 
@@ -67,7 +67,8 @@ Azure Bilişsel Arama Power BI şablon uygulamasını bulabilirsiniz: [Power BI 
 
     :::image type="content" source="media/search-monitor-logs-powerbi/powerbi-search.png" alt-text="Azure Bilişsel Arama Power BI raporunun ekran görüntüsü.":::
 
-## <a name="how-to-change-the-app-parameters"></a>Uygulama parametrelerini değiştirme
+## <a name="modify-app-parameters"></a>Uygulama parametrelerini değiştir
+
 Farklı bir depolama hesabındaki verileri görselleştirmek veya verilerin sorgulanme gün sayısını değiştirmek isterseniz, **gün** ve **storageaccount** parametrelerini değiştirmek için aşağıdaki adımları izleyin.
 
 1. Power BI uygulamalarınıza giderek Azure Bilişsel Arama uygulamanızı bulun ve **uygulamayı Düzenle** düğmesini seçerek çalışma alanını görüntüleyin.
@@ -86,7 +87,8 @@ Farklı bir depolama hesabındaki verileri görselleştirmek veya verilerin sorg
 
 1. Güncelleştirilmiş verileri görüntülemek için raporu açın. Ayrıca, en son verileri görüntülemek için raporu yenilemeniz gerekebilir.
 
-## <a name="troubleshooting"></a>Sorun giderme
+## <a name="troubleshooting-report-issues"></a>Sorun giderme raporu sorunları
+
 Verilerinizi göremiyorsanız, bu sorun giderme adımlarını izleyin:
 
 1. Raporu açın ve en son verileri görüntülediğinizden emin olmak için sayfayı yenileyin. Raporda verileri yenilemek için bir seçenek vardır. En son verileri almak için bunu seçin.
@@ -98,8 +100,7 @@ Verilerinizi göremiyorsanız, bu sorun giderme adımlarını izleyin:
 1. Veri kümesinin yenileme işlemi devam ettiğinden emin olun. Yenileme durumu göstergesi yukarıdaki 8. adımda gösterilmiştir. Yenileme işlemi devam ediyorsa, raporu açmak ve yenilemek için yenileme tamamlanana kadar bekleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Azure Bilişsel Arama hakkında daha fazla bilgi](./index.yml)
 
-[Power BI nedir?](/power-bi/fundamentals/power-bi-overview)
-
-[Power BI hizmetinde tasarımcılara yönelik temel kavramlar](/power-bi/service-basic-concepts)
++ [Arama işlemlerini ve etkinliğini izleme](search-monitor-usage.md)
++ [Power BI nedir?](/power-bi/fundamentals/power-bi-overview)
++ [Power BI hizmetinde tasarımcılara yönelik temel kavramlar](/power-bi/service-basic-concepts)

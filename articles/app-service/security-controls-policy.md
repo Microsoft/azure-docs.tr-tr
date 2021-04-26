@@ -1,16 +1,16 @@
 ---
 title: Azure App Service için Azure Ilke mevzuat uyumluluk denetimleri
 description: Azure App Service için kullanılabilen Azure Ilke mevzuat uyumluluk denetimlerini listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızın uyumluluğunu yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: sample
 ms.service: app-service
 ms.custom: subject-policy-compliancecontrols
-ms.openlocfilehash: 64785a660b7cab1db6bc61a665560c556f2bfc58
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 53b936f29ebbece20c7f0fa39c8e115356380c2d
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105033814"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107863775"
 ---
 # <a name="azure-policy-regulatory-compliance-controls-for-azure-app-service"></a>Azure App Service için Azure Ilke mevzuat uyumluluk denetimleri
 

@@ -12,10 +12,10 @@ ms.author: danil
 ms.reviewer: sstein
 ms.date: 1/29/2021
 ms.openlocfilehash: d356cad1b4754875574e19be732fdf6481c61e22
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101691221"
 ---
 # <a name="quickstart-create-an-azure-sql-managed-instance"></a>Hızlı başlangıç: Azure SQL yönetilen örneği oluşturma

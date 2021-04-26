@@ -16,10 +16,10 @@ ms.topic: reference
 ms.date: 02/10/2021
 ms.author: yelevin
 ms.openlocfilehash: 17a4df3037f9922d92fca924de0d246458cfa08e
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "102456343"
 ---
 # <a name="azure-sentinel-entity-types-reference"></a>Azure Sentinel varlık türleri başvurusu
@@ -70,7 +70,7 @@ Aşağıda, her bir varlık türünün tam şemalarına daha ayrıntılı bir ba
 | ----- | ---- | ----------- |
 | Tür | Dize | hesabı |
 | Name | Dize | Hesabın adı. Bu alan, kendisine eklenen herhangi bir etki alanı olmadan yalnızca adı tutmalıdır. |
-| *FullName* | *Yok* | *Şemanın parçası değil, varlık eşlemesinin eski sürümü ile geriye dönük uyumluluk için dahil edilmiştir.*
+| *FullName* | *yok* | *Şemanın parçası değil, varlık eşlemesinin eski sürümü ile geriye dönük uyumluluk için dahil edilmiştir.*
 | NT etki alanı | Dize | NetBIOS etki alanı adı uyarı biçiminde göründüğü gibi – etkialanı \ KullanıcıAdı Örnekler: finans, NT YETKILISI |
 | DnsDomain | Dize | Tam etki alanı DNS adı. Örnekler: finance.contoso.com |
 | UPNSuffix | Dize | Hesap için Kullanıcı asıl adı soneki. Bazı durumlarda, bu da etki alanı adıdır. Örnekler: contoso.com |
@@ -108,7 +108,7 @@ Bir hesap varlığının zayıf tanımlayıcıları:
 | DnsDomain | Dize | Bu konağın ait olduğu DNS etki alanı. Biliniyorsa, etki alanı için tüm DNS son ekini içermelidir. |
 | NT etki alanı | Dize | Bu konağın ait olduğu NT etki alanı. |
 | HostName | Dize | Etki alanı soneki olmayan ana bilgisayar adı. |
-| *FullName* | *Yok* | *Şemanın parçası değil, varlık eşlemesinin eski sürümü ile geriye dönük uyumluluk için dahil edilmiştir.*
+| *FullName* | *yok* | *Şemanın parçası değil, varlık eşlemesinin eski sürümü ile geriye dönük uyumluluk için dahil edilmiştir.*
 | NetBiosName | Dize | Ana bilgisayar adı (Windows 2000 öncesi). |
 | Iotdevice | Varlık | IoT cihaz varlığı (bu konak bir IoT cihazını temsil ediyorsa). |
 | AzureID | Dize | Biliniyorsa VM 'nin Azure Kaynak KIMLIĞI. |

@@ -7,12 +7,12 @@ ms.service: spring-cloud
 ms.topic: conceptual
 ms.date: 04/23/2020
 ms.custom: devx-track-java
-ms.openlocfilehash: 62a0bd19f6b10bbe6561f5587ed85d4d1e5880b3
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 1447e7eec9909c8af33005aab00c267e1a251720
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878804"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105966835"
 ---
 # <a name="security-controls-for-azure-spring-cloud-service"></a>Azure Spring Cloud Hizmeti için güvenlik denetimleri
 
@@ -34,7 +34,7 @@ Güvenlik denetimi, hizmetin güvenlik açıklarını önleme, algılama ve yan�
 
 | Güvenlik denetimi | Evet/Hayır | Notlar | Belgeler |
 |:-------------|:-------|:-------------------------------|:----------------------|
-| Hizmet etiketi | Yes | Azure Spring Cloud uygulamalarına giden trafiğe izin vermek için [ağ güvenlik gruplarında](../virtual-network/network-security-groups-overview.md#security-rules) veya [Azure Güvenlik duvarında](../firewall/service-tags.md)giden ağ erişim denetimleri tanımlamak üzere **azurespringcloud** Service etiketini kullanın.<br><br>*Note:* Şu anda yalnızca yeni Azure yay bulut hizmeti örneği, 2020/07/14 sonrasında **Azurespringcloud** Service etiketi destekleniyor. | [Hizmet etiketleri](../virtual-network/service-tags-overview.md) |
+| Hizmet etiketi | Yes | Azure Spring Cloud uygulamalarına giden trafiğe izin vermek için [ağ güvenlik gruplarında](../virtual-network/network-security-groups-overview.md#security-rules) veya [Azure Güvenlik duvarında](../firewall/service-tags.md)giden ağ erişim denetimleri tanımlamak üzere **azurespringcloud** Service etiketini kullanın. | [Hizmet etiketleri](../virtual-network/service-tags-overview.md) |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

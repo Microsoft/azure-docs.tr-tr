@@ -14,12 +14,12 @@ ms.workload: identity
 ms.date: 06/10/2019
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: 92046b3a944a747ce76d2426855eec7b6bc2cd70
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1e644d81c2a47ec07833010ae93f4dbb0c57474b
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "84790255"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077848"
 ---
 # <a name="list-azure-deny-assignments-using-the-azure-portal"></a>Azure portal kullanarak Azure reddetme atamalarını listeleyin
 
@@ -54,7 +54,7 @@ Abonelik veya yönetim grubu kapsamındaki atamaları Reddet ' i listelemek içi
 
     ![Atamaları Reddet-sütunlar](./media/deny-assignments-portal/deny-assignments-columns.png)
 
-    |  |  |
+    | Sütun | Açıklama  |
     | --- | --- |
     | **Ad** | Reddetme atamasının adı. |
     | **Sorumlu türü** | Kullanıcı, Grup, sistem tanımlı grup veya hizmet sorumlusu. |
@@ -79,7 +79,7 @@ Reddetme atama hakkında ek ayrıntıları listelemek için aşağıdaki adımla
 
     **Kullanıcılar** dikey penceresi aşağıdaki iki bölümü içerir.
 
-    |  |  |
+    | Reddetme ayarı  | Description |
     | --- | --- |
     | **Reddetme ataması için geçerlidir**  | Reddetme atamasının geçerli olduğu güvenlik sorumluları. |
     | **Atama dışladığı reddetme** | Reddetme atamasından dışlanan güvenlik sorumluları. |
@@ -90,7 +90,7 @@ Reddetme atama hakkında ek ayrıntıları listelemek için aşağıdaki adımla
 
     ![Atama reddi Izinlerini Reddet](./media/deny-assignments-portal/deny-assignment-denied-permissions.png)
 
-    | Eylem türü | Açıklama |
+    | Eylem türü | Description |
     | --- | --- |
     | **Eylemler**  | Yönetim işlemleri reddedildi. |
     | **NotActions** | Yönetim işlemleri Reddedilenler yönetim işleminden dışlandı. |

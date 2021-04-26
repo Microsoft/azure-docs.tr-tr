@@ -4,12 +4,12 @@ description: Uygulama Performansı Yönetimi ve canlı web uygulamanızın kulla
 ms.topic: overview
 ms.date: 06/03/2019
 ms.custom: mvc
-ms.openlocfilehash: ac6b6f2b47df0bce9ae164c83df54adfdf00b184
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f25a53cb227d6894aaabaf82033178f15f61c173
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100575708"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076216"
 ---
 # <a name="what-is-application-insights"></a>Application Insights nedir?
 [Azure izleyici](../overview.md)'nin bir özelliği olan Application Insights, geliştiriciler ve DevOps uzmanları için genişletilebilir bir uygulama performans YÖNETIMI (APM) hizmetidir. Canlı uygulamalarınızı izlemek için bu uygulamayı kullanın. Performans sorunlarını otomatik olarak algılar ve sorunları tanılamanıza ve hangi kullanıcıların uygulamanızla gerçekten ne yaptığını anlamanıza yardımcı olacak güçlü analiz araçları içerir.  Performansı ve kullanılabilirliği sürekli geliştirmenize yardımcı olmak amacıyla tasarlanmıştır. Şirket içi, hibrit veya herhangi bir genel bulut üzerinde barındırılan .NET, Node.js, Java ve Python gibi çok çeşitli platformlarda uygulamalar için geçerlidir. DevOps işleminizle tümleştirilir ve çeşitli geliştirme araçlarıyla bağlantı noktaları vardır. Visual Studio App Center ile tümleştirerek mobil uygulamalardan telemetriyi izleyebilir ve çözümleyebilir.
@@ -47,7 +47,7 @@ Geliştirme takımına yönelik olan Application Insights, uygulamanızın perfo
 
 Verilerinizi keşfetmenin birçok yolu vardır. Aşağıdaki makaleleri inceleyin:
 
-|  |  |
+| Makale açıklaması   | Görüntü |
 | --- | --- |
 | [**Akıllı algılama ve el ile uyarılar**](./proactive-diagnostics.md)<br/>Uygulamanızın normal telemetri desenlerine uyarlanabilen otomatik uyarıları ayarlayın ve normal desen dışında bir şey olduğunda tetikleyin. Belirli özel veya standart ölçüm düzeylerinde de [uyarılar](../alerts/alerts-log.md) ayarlayabilirsiniz. |![Uyarı örneği](./media/app-insights-overview/alerts-tn.png) |
 | [**Uygulama eşlemesi**](./app-map.md)<br/>Ana ölçümler ve uyarılarla uygulamanızın bileşenlerini araştırma. |![Uygulama haritası](./media/app-insights-overview/appmap-tn.png)  |

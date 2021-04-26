@@ -6,15 +6,15 @@ author: laujan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 08/17/2020
+ms.date: 04/19/2021
 ms.author: lajanuar
 ms.topic: conceptual
-ms.openlocfilehash: 0c33d766bfd3dff47ddb151e8ce4ea7b25c37548
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 43268afccbe66a21d2ce78709ba372a8a6682444
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "98897960"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727159"
 ---
 # <a name="sentence-pairing-and-alignment-in-parallel-documents"></a>Paralel belgelerde tümce eşleştirme ve hizalama
 
@@ -22,7 +22,7 @@ Belgeler karşıya yüklendikten sonra, paralel belgelerde bulunan cümleler eş
 
 ## <a name="pairing-and-alignment-process"></a>Eşleştirme ve hizalama işlemi
 
-Özel çevirici, her seferinde bir cümleden oluşan Tümcelerin çevirilerini öğrenir. Kaynak metinden bir cümleyi ve sonra bu tümcenin hedef metinden çevirisini okur. Ardından, bu iki tümce içindeki kelimeleri ve tümceleri birbirlerine hizalar. Bu işlem, bir tümcedeki sözcüklerin ve deyimlerin, cümlesinin çevirisi içindeki eşdeğer sözcüklere ve tümceciklere bir harita oluşturmasını sağlar. Hizalama, sistemin birbirleriyle çevirileri olan cümleler üzerinde hareket etmeye çalışır.
+Özel çevirici, her seferinde bir cümleden oluşan Tümcelerin çevirilerini öğrenir. Kaynak metinden bir cümleyi ve sonra bu tümcenin hedef metinden çevirisini okur. Ardından, bu iki tümce içindeki kelimeleri ve tümceleri birbirlerine hizalar. Bu işlem, bir tümcedeki sözcüklerin ve deyimlerin, tümcenin çevirisi içindeki eşdeğer sözcüklere ve tümceciklere bir harita oluşturmasını sağlar. Hizalama, sistemin birbirleriyle çevirileri olan cümleler üzerinde hareket etmeye çalışır.
 
 ## <a name="pre-aligned-documents"></a>Önceden hizalanmış belgeler
 
@@ -39,12 +39,14 @@ Bir eğitimin başarılı olması için, aşağıdaki tabloda her belge türünd
 | Eğitim   | 10,000                                     | Üst sınır yok                 |
 | Ayarlama     | 500                                      | 2,500       |
 | Test Etme    | 500                                      | 2,500  |
-| Sözlük | 0                                          | Üst sınır yok                 |
+| Sözlük | 0                                          | 250.000                 |
 
 > [!NOTE]
-> - Eğitim başlatılmaz ve eğitim için en az 10.000 cümle sayısı karşılanmazsa başarısız olur. 
-> - Ayarlama ve test isteğe bağlıdır. Bunları sağlamazsanız, sistem, doğrulama ve test için kullanılan eğitimin uygun bir yüzdesini kaldırır. 
+>
+> - Eğitim başlatılmaz ve eğitim için en az 10.000 cümle sayısı karşılanmazsa başarısız olur.
+> - Ayarlama ve test isteğe bağlıdır. Bunları sağlamazsanız, sistem, doğrulama ve test için kullanılan eğitimin uygun bir yüzdesini kaldırır.
 > - Yalnızca Sözlük verilerini kullanarak bir modeli eğitebilirsiniz. Lütfen [sözlüğe](./what-is-dictionary.md)bakın.
+> - Sözlüğünüz 250.000 taneden fazla cümle içeriyorsa, **[belge çevirmeni](https://docs.microsoft.com/azure/cognitive-services/translator/document-translation/overview)** büyük olasılıkla daha iyi bir seçimdir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

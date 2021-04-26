@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: iot-central
 services: iot-central
 ms.custom: device-developer
-ms.openlocfilehash: f027b2d41f63b5aa7ea3df87e06224abd629799b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 995f4670b17d55fe04d5c30a834ea4be576a8348
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100535323"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106489987"
 ---
 # <a name="telemetry-property-and-command-payloads"></a>Telemetri, özellik ve komut yükleri
 
@@ -51,6 +51,10 @@ IoT Central, bir cihazın bir uygulamaya gönderdiği ham verileri görüntülem
     Bu görünümde, görüntülenecek sütunları seçebilir ve görüntülenecek zaman aralığını ayarlayabilirsiniz. **Modellenmemiş veriler** sütunu, cihazdaki herhangi bir özellik veya telemetri tanımından hiçbiriyle eşleşmeyen verileri gösterir.
 
 ## <a name="telemetry"></a>Telemetri
+
+### <a name="telemetry-in-components"></a>Bileşenlerdeki telemetri
+
+Telemetri bir bileşende tanımlanmışsa, `$.sub` cihaz modelinde tanımlandığı şekilde bileşenin adıyla adlı bir özel ileti özelliği ekleyin. Daha fazla bilgi edinmek için bkz. [öğretici: Azure IoT Central uygulamanıza istemci uygulaması oluşturma ve bağlama](tutorial-connect-device.md).
 
 ### <a name="primitive-types"></a>İlkel türler
 
@@ -437,6 +441,21 @@ Bir cihaz istemcisi, durumu aşağıdaki örnekte gösterildiği gibi JSON olara
 > [!NOTE]
 > Özellikler için yük biçimleri 07/14/2020 tarihinde veya sonrasında oluşturulan uygulamalar için geçerlidir.
 
+### <a name="properties-in-components"></a>Bileşenlerdeki Özellikler
+
+Özellik bir bileşende tanımlanmışsa, özelliği bileşen adı ' nda sarın. Aşağıdaki örnek, `maxTempSinceLastReboot` bileşeninde ' i ayarlar `thermostat2` . İşaretleyici, `__t` Bu bileşenin şu şekilde olduğunu gösterir:
+
+```json
+{
+  "thermostat2" : {  
+    "__t" : "c",  
+    "maxTempSinceLastReboot" : 38.7
+    } 
+}
+```
+
+Daha fazla bilgi edinmek için bkz. [öğretici: Azure IoT Central uygulamanıza istemci uygulaması oluşturma ve bağlama](tutorial-connect-device.md).
+
 ### <a name="primitive-types"></a>İlkel türler
 
 Bu bölümde, bir cihazın IoT Central uygulamasına gönderdiği temel özellik türlerinin örnekleri gösterilmektedir.
@@ -715,15 +734,31 @@ Bir cihaz istemcisi, cihaz ikizi bildirilen bir özellik gibi aşağıdaki örne
 }
 ```
 
-### <a name="writeable-property-types"></a>Yazılabilir Özellik türleri
+### <a name="writable-property-types"></a>Yazılabilir Özellik türleri
 
 Bu bölümde, bir cihazın IoT Central uygulamasından aldığı yazılabilir Özellik türlerinin örnekleri gösterilmektedir.
+
+Yazılabilir özelliği bir bileşende tanımlanmışsa, istenen özellik iletisi bileşen adını içerir. Aşağıdaki örnek, cihazdaki öğesini güncelleştirmek için cihazı isteyen iletiyi gösterir `targetTemperature` `thermostat2` . İşaretleyici, `__t` Bu bileşenin şu şekilde olduğunu gösterir:
+
+```json
+{
+  "thermostat2": {
+    "targetTemperature": {
+      "value": 57
+    },
+    "__t": "c"
+  },
+  "$version": 3
+}
+```
+
+Daha fazla bilgi edinmek için bkz. [öğretici: Azure IoT Central uygulamanıza istemci uygulaması oluşturma ve bağlama](tutorial-connect-device.md).
 
 IoT Central cihazdan yazılabilir Özellik güncelleştirmelerine yanıt bekliyor. Yanıt iletisi `ac` ve `av` alanlarını içermelidir. `ad` alanı isteğe bağlıdır. Örnekler için aşağıdaki kod parçacıklarına bakın.
 
 `ac` , aşağıdaki tablodaki değerleri kullanan sayısal bir alandır:
 
-| Değer | Etiketle | Description |
+| Değer | Etiketle | Açıklama |
 | ----- | ----- | ----------- |
 | `'ac': 200` | Tamamlandı | Özellik değiştirme işlemi başarıyla tamamlandı. |
 | `'ac': 202`  veya `'ac': 201` | Beklemede | Özellik değiştirme işlemi bekliyor veya devam ediyor |
@@ -834,6 +869,8 @@ Cihaz, güncelleştirmeyi tamamladıktan sonra IoT Central aşağıdaki JSON yü
 ```
 
 ## <a name="commands"></a>Komutlar
+
+Komut bir bileşende tanımlanmışsa, cihazın aldığı komutun adı bileşen adını içerir. Örneğin, komut çağrılırsa `getMaxMinReport` ve bileşen çağrılırsa `thermostat2` , cihaz adlı bir komutu yürütmek için bir istek alır `thermostat2*getMaxMinReport` .
 
 Bir cihaz modelinden aşağıdaki kod parçacığında, parametresi olmayan ve cihazın herhangi bir şeyi döndürmesini beklemediği bir komutun tanımı gösterilmektedir:
 

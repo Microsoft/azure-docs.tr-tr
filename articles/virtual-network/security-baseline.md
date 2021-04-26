@@ -4,25 +4,26 @@ description: Sanal ağ güvenlik temeli, Azure Güvenlik kıyaslaması 'nda beli
 author: msmbaldwin
 ms.service: virtual-network
 ms.topic: conceptual
-ms.date: 10/01/2020
+ms.date: 04/08/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: 420cd4a5b39f7c5864cf9802d02643e23c8ad24e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 433f20de4d150aadb48ead685e981c60579f2730
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101666564"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107285539"
 ---
 # <a name="azure-security-baseline-for-virtual-network"></a>Sanal ağ için Azure Güvenlik temeli
 
-Bu güvenlik temeli [Azure Güvenlik kıyaslama sürümü 1,0](../security/benchmarks/overview-v1.md) ' dan Azure sanal ağı 'na kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve Azure sanal ağı için geçerli olan ilgili kılavuza göre gruplandırılır. Azure sanal ağı için geçerli olmayan **denetimler** dışlandı.
+Bu güvenlik temeli [Azure Güvenlik kıyaslama sürümü 1,0](../security/benchmarks/overview-v1.md) ' dan Azure sanal ağı 'na kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve Azure sanal ağı için geçerli olan ilgili kılavuza göre gruplandırılır. 
 
-Azure sanal ağının Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için, [tam Azure sanal ağ güvenlik temeli eşleme dosyasına](https://github.com/MicrosoftDocs/SecurityBenchmarks/tree/master/Azure%20Offer%20Security%20Baselines)bakın.
+> [!NOTE]
+> **Denetimler** , sanal ağ için geçerli değildir veya Microsoft 'un sorumluluğunu Microsoft 'un dışında tutulur. Sanal ağın Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için, **[tam sanal ağ güvenlik temeli eşleme dosyasına](https://github.com/MicrosoftDocs/SecurityBenchmarks/raw/master/Azure%20Offer%20Security%20Baselines/1.1/virtual-network-security-baseline-v1.1.xlsx)** bakın.
 
-## <a name="network-security"></a>Ağ güvenliği
+## <a name="network-security"></a>Ağ Güvenliği
 
-*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: ağ güvenliği](../security/benchmarks/security-control-network-security.md).*
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Ağ Güvenliği](../security/benchmarks/security-control-network-security.md).*
 
 ### <a name="12-monitor-and-log-the-configuration-and-traffic-of-virtual-networks-subnets-and-network-interfaces"></a>1,2: sanal ağların, alt ağların ve ağ arabirimlerinin yapılandırma ve trafiğini izleme ve günlüğe kaydetme
 
@@ -40,9 +41,13 @@ Azure depolama hesabına veya bir olay hub 'ına göndermek için kaynak günlü
 
 - [Güvenlik Merkezi tarafından sunulan ağ güvenliğini anlama](../security-center/security-center-network-recommendations.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. Network**:
+
+[!INCLUDE [Resource Policy for Microsoft.Network 1.2](../../includes/policy/standards/asb/rp-controls/microsoft.network-1-2.md)]
 
 ### <a name="14-deny-communications-with-known-malicious-ip-addresses"></a>1,4: bilinen kötü amaçlı IP adresleriyle iletişimleri reddetme
 
@@ -62,9 +67,13 @@ Bağlantı noktalarını ve kaynak IP 'Leri gerçek trafik ve tehdit zeka göre 
 
 - [Azure Güvenlik Merkezi 'nde Uyarlamalı ağ sağlamlaştırma](../security-center/security-center-adaptive-network-hardening.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. Network**:
+
+[!INCLUDE [Resource Policy for Microsoft.Network 1.4](../../includes/policy/standards/asb/rp-controls/microsoft.network-1-4.md)]
 
 ### <a name="15-record-network-packets"></a>1,5: ağ paketlerini kaydetme
 
@@ -76,9 +85,13 @@ Ayrıca, Azure Marketi tekliflerinizde bulunan paket Aracısı iş ortakları ar
 
 - [Ağ sanal gereç Iş ortağı](https://azure.microsoft.com/solutions/network-appliances)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: [Azure Güvenlik kıyaslaması](/azure/governance/policy/samples/azure-security-benchmark) , Güvenlik Merkezi için varsayılan Ilke girişimidir ve [Güvenlik Merkezi 'nin önerilerine](/azure/security-center/security-center-recommendations)yöneliktir. Bu denetimle ilgili Azure Ilke tanımları, Güvenlik Merkezi tarafından otomatik olarak etkinleştirilir. Bu denetimle ilgili uyarılar, ilgili hizmetler için bir [Azure Defender](/azure/security-center/azure-defender) planı gerektirebilir.
+
+**Azure ilkesi yerleşik tanımları-Microsoft. Network**:
+
+[!INCLUDE [Resource Policy for Microsoft.Network 1.5](../../includes/policy/standards/asb/rp-controls/microsoft.network-1-5.md)]
 
 ### <a name="16-deploy-network-based-intrusion-detectionintrusion-prevention-systems-idsips"></a>1,6: ağ tabanlı yetkisiz giriş algılama/yetkisiz erişim önleme sistemleri (KIMLIKLER/IP 'ler) dağıtma
 
@@ -94,9 +107,9 @@ Kötü amaçlı trafiği algılamak ve/veya reddetmek için kuruluşunuzun ağ s
 
 - [Azure Market](https://azuremarketplace.microsoft.com/marketplace/?term=Firewall)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="18-minimize-complexity-and-administrative-overhead-of-network-security-rules"></a>1,8: ağ güvenlik kurallarının karmaşıklığını ve yönetim yükünü en aza indirme
 
@@ -106,11 +119,11 @@ Karmaşık güvenlik yapılandırmasını basitleştirmeye yardımcı olması i�
 
 - [Hizmet etiketlerini anlama ve kullanma](service-tags-overview.md)
 
-- [Uygulama güvenlik gruplarını anlama ve kullanma](./network-security-groups-overview.md#application-security-groups)
-
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
+- [Uygulama güvenlik gruplarını anlama ve kullanma](https://docs.microsoft.com/azure/virtual-network/network-security-groups-overview#application-security-groups)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="19-maintain-standard-security-configurations-for-network-devices"></a>1,9: ağ cihazları için standart güvenlik yapılandırmalarının bakımını yapma
 
@@ -118,19 +131,19 @@ Karmaşık güvenlik yapılandırmasını basitleştirmeye yardımcı olması i�
 
 Sanal ağlarınızla ilgili kullanılabilir güvenlik önerilerini içeren Güvenlik Merkezi için varsayılan ilkeye bakın.
 
-Tek bir şema tanımında Azure Resource Manager şablonları, Azure rol tabanlı erişim denetimi (Azure RBAC) atamaları ve ilkeleri gibi temel ortam yapıtlarını paketleyerek büyük ölçekli Azure dağıtımlarını basitleştirmek için Azure şemaları 'nı kullanın. Azure Blueprint, sürüm oluşturma aracılığıyla ince ayar yapılan denetim ve yönetim için yeni aboneliklere uygulanabilir. 
+Tek bir şema tanımında Azure Resource Manager şablonları, rol tabanlı erişim denetimi (Azure RBAC) atamaları ve ilkeleri gibi anahtar ortam yapıtlarını paketleyerek büyük ölçekli Azure dağıtımlarını basitleştirmek için Azure şemaları 'nı kullanın. Azure Blueprint, sürüm oluşturma aracılığıyla ince ayar yapılan denetim ve yönetim için yeni aboneliklere uygulanabilir. 
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Ağ için Azure Ilke örnekleri](../governance/policy/samples/built-in-policies.md#network) 
+- [Ağ için Azure Ilke örnekleri](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#network) 
 
 - [Azure Blueprint oluşturma](../governance/blueprints/create-blueprint-portal.md)
 
 - [Azure Güvenlik Merkezi 'nde izlemeyi etkinleştirme](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policySetDefinitions/Security%20Center/AzureSecurityCenter.json)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="110-document-traffic-configuration-rules"></a>1,10: belge trafiği yapılandırma kuralları
 
@@ -145,23 +158,23 @@ Azure PowerShell veya Azure CLı ' yi seçerek etiketlere göre kaynakları aray
 
 - [Güvenlik Yapılandırması ile NSG oluşturma](tutorial-filter-network-traffic.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="111-use-automated-tools-to-monitor-network-resource-configurations-and-detect-changes"></a>1,11: ağ kaynağı yapılandırmasını izlemek ve değişiklikleri algılamak için otomatikleştirilmiş araçları kullanın
 
 **Rehberlik**: kaynak yapılandırmasını izlemek ve sanal ağınızdaki değişiklikleri algılamak Için Azure etkinlik günlüğü 'nü kullanın. Kritik kaynaklardaki değişiklikler gerçekleşirken tetiklenecek Azure Izleyici içinde uyarılar oluşturun.
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](../azure-monitor/essentials/activity-log.md#view-the-activity-log)
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](https://docs.microsoft.com/azure/azure-monitor/essentials/activity-log#view-the-activity-log)
 
 - [Azure Izleyici 'de uyarı oluşturma](../azure-monitor/alerts/alerts-activity-log.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
 
-## <a name="logging-and-monitoring"></a>Günlüğe kaydetme ve izleme
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="logging-and-monitoring"></a>Günlüğe Kaydetme ve İzleme
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: günlüğe kaydetme ve izleme](../security/benchmarks/security-control-logging-monitoring.md).*
 
@@ -172,39 +185,39 @@ Azure PowerShell veya Azure CLı ' yi seçerek etiketlere göre kaynakları aray
 Azure Izleyici 'de analiz sorgulamak ve gerçekleştirmek için Log Analytics çalışma alanlarını kullanın ve uzun süreli/arşiv depolama için Azure depolama hesaplarını kullanın.
 Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri etkinleştirebilir ve bu verileri ayarlayabilirsiniz. 
 
-- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](../azure-monitor/essentials/diagnostic-settings.md) 
+- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](../azure-monitor/essentials/diagnostic-settings.md)
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](../azure-monitor/essentials/activity-log.md#view-the-activity-log)
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](https://docs.microsoft.com/azure/azure-monitor/essentials/activity-log#view-the-activity-log)
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="23-enable-audit-logging-for-azure-resources"></a>2,3: Azure kaynakları için denetim günlüğünü etkinleştirme
 
 **Rehberlik**: olay kaynağı, tarih, Kullanıcı, zaman damgası, kaynak adresleri, hedef adresler ve diğer yararlı öğeleri içeren denetim ve etkinlik günlüklerinize erişim Için Azure izleyicisini etkinleştirin.
 
-- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](../azure-monitor/essentials/diagnostic-settings.md) 
+- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](../azure-monitor/essentials/diagnostic-settings.md)
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](../azure-monitor/essentials/activity-log.md#view-the-activity-log)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](https://docs.microsoft.com/azure/azure-monitor/essentials/activity-log#view-the-activity-log)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="25-configure-security-log-storage-retention"></a>2,5: güvenlik günlüğü depolama bekletmesini yapılandırma
 
 **Kılavuz**: Azure izleyici 'de, Log Analytics çalışma alanı saklama dönemini kuruluşunuzun uyumluluk düzenlemelerine göre ayarlayın. Azure depolama hesaplarını, güvenlik günlüğü depolama saklama 'nin uzun süreli/arşiv depolaması için kullanın.
 
-- [Log Analytics veri saklama süresini değiştirme](../azure-monitor/logs/manage-cost-storage.md#change-the-data-retention-period)
+- [Log Analytics veri saklama süresini değiştirme](https://docs.microsoft.com/azure/azure-monitor/logs/manage-cost-storage#change-the-data-retention-period)
 
-- [Azure depolama hesabı günlükleri için bekletme ilkesini yapılandırma](../storage/common/manage-storage-analytics-logs.md#configure-logging)
-
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
+- [Azure depolama hesabı günlükleri için bekletme ilkesini yapılandırma](https://docs.microsoft.com/azure/storage/common/manage-storage-analytics-logs#configure-logging)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="26-monitor-and-review-logs"></a>2,6: günlükleri izleme ve gözden geçirme
 
@@ -220,9 +233,9 @@ Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri et
 
 - [Azure Izleyici ve üçüncü taraf SıEM tümleştirmesi ile çalışmaya başlama](https://azure.microsoft.com/blog/use-azure-monitor-to-integrate-with-siem-tools/)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="27-enable-alerts-for-anomalous-activities"></a>2,7: anormal etkinlikler için uyarıları etkinleştir
 
@@ -236,83 +249,83 @@ Alternatif olarak, uyarı için Azure Sentinel 'e veya bir üçüncü taraf SıE
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="29-enable-dns-query-logging"></a>2,9: DNS sorgu günlüğünü etkinleştir
 
 **Rehberlik**: Kurumsal gereksiniminizden bağımsız olarak, DNS günlüğü çözümü Için Azure Marketi 'nden bir üçüncü taraf çözümü uygulayın.
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
 
-## <a name="identity-and-access-control"></a>Kimlik ve erişim denetimi
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: kimlik ve erişim denetimi](../security/benchmarks/security-control-identity-access-control.md).*
+## <a name="identity-and-access-control"></a>Kimlik ve Erişim Denetimi
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: kimlik ve Access Control](../security/benchmarks/security-control-identity-access-control.md).*
 
 ### <a name="31-maintain-an-inventory-of-administrative-accounts"></a>3,1: yönetim hesaplarının envanterini tutma
 
-**Rehberlik**: Azure Active Directory (Azure AD), açıkça atanabilen ve sorgulanabilir olan yerleşik yönetici rollerini kullanın. 
+**Rehberlik**: Azure Active Directory (Azure AD), açıkça atanabilen ve sorgulanabilir olan yerleşik yönetici rollerini kullanın.
 
 Yönetim gruplarının üyesi olan hesapları bulmaya yönelik geçici sorgular gerçekleştirmek için Azure AD PowerShell modülünü kullanın.
 
-- [Azure AD 'de PowerShell ile dizin rolü alma](/powershell/module/azuread/get-azureaddirectoryrole?view=azureadps-2.0)
+- [Azure AD 'de PowerShell ile dizin rolü alma](https://docs.microsoft.com/powershell/module/azuread/get-azureaddirectoryrole?view=azureadps-2.0&amp;preserve-view=true)
 
-- [Azure AD 'de PowerShell ile bir dizin rolünün üyelerini alma](/powershell/module/azuread/get-azureaddirectoryrolemember?view=azureadps-2.0)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [Azure AD 'de PowerShell ile bir dizin rolünün üyelerini alma](https://docs.microsoft.com/powershell/module/azuread/get-azureaddirectoryrolemember?view=azureadps-2.0&amp;preserve-view=true)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="33-use-dedicated-administrative-accounts"></a>3,3: adanmış yönetim hesapları kullanın
 
 **Rehberlik**: adanmış yönetim hesaplarının kullanımı etrafında standart işletim yordamları oluşturun. Yönetim hesaplarının sayısını izlemek için Güvenlik Merkezi 'nin kimlik ve erişim yönetimi ' ni kullanın.
 
-Microsoft Hizmetleri ve Azure Resource Manager için Azure AD Privileged Identity Management ayrıcalıklı rolleri kullanarak tam zamanında/tam erişimi etkinleştirin. 
+Microsoft Hizmetleri ve Azure Resource Manager için ayrıcalıklı rolleri Privileged Identity Management Azure Active Directory (Azure AD) kullanarak tam zamanında/tam erişimi etkinleştirin.
 
-- [Privileged Identity Management hakkında daha fazla bilgi edinin](../active-directory/privileged-identity-management/index.yml)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [Privileged Identity Management hakkında daha fazla bilgi edinin](/azure/active-directory/privileged-identity-management/)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="34-use-azure-active-directory-single-sign-on-sso"></a>3,4: Azure Active Directory çoklu oturum açma kullan (SSO)
 
 **Rehberlik**: tek başına bağımsız kimlik bilgilerini hizmet başına yapılandırmak yerine Azure Active Directory (Azure AD) ile SSO kullanın. Güvenlik Merkezi 'nin kimlik ve erişim yönetimi önerilerini kullanın.
 
-- [Azure Active Directory uygulamalarda çoklu oturum açma](../active-directory/manage-apps/what-is-single-sign-on.md) 
+- [Azure AD 'de uygulamalarda çoklu oturum açma](../active-directory/manage-apps/what-is-single-sign-on.md)
 
 - [Azure Güvenlik Merkezi 'nde kimliği ve erişimi izleme](../security-center/security-center-identity-access.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="35-use-multi-factor-authentication-for-all-azure-active-directory-based-access"></a>3,5: tüm Azure Active Directory tabanlı erişim için Multi-Factor Authentication kullanın
 
-**Rehberlik**: Azure Active Directory (Azure AD) MULTI-Factor AUTHENTICATION (MFA) etkinleştirin ve Güvenlik Merkezi 'nin kimlik ve erişim yönetimi önerilerini izleyin.
+**Rehberlik**: Azure Active Directory (Azure AD) çok faktörlü kimlik doğrulamasını etkinleştirin ve Güvenlik Merkezi 'nin kimlik ve erişim yönetimi önerilerini izleyin.
 
-- [Azure'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md) 
+- [Azure 'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md) 
 
 - [Azure Güvenlik Merkezi 'nde kimliği ve erişimi izleme](../security-center/security-center-identity-access.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="36-use-secure-azure-managed-workstations-for-administrative-tasks"></a>3,6: yönetim görevleri için güvenli, Azure tarafından yönetilen iş istasyonları kullanın
 
-**Kılavuz**: Azure ağ kaynaklarına oturum açmak ve bu kaynaklara erişmek için yapılandırılmış MULTI-Factor AUTHENTICATION (MFA) Ile ayrıcalıklı erişim iş istasyonları (Paw) kullanın.
+**Rehberlik**: çok faktörlü kimlik doğrulaması ile oturum açmak ve Azure ağ kaynaklarına erişmek Için yapılandırılmış ayrıcalıklı erişim iş istasyonları (Paw) kullanın. 
 
-- [Ayrıcalıklı erişim Iş Istasyonları hakkında bilgi edinin](https://4sysops.com/archives/understand-the-microsoft-privileged-access-workstation-paw-security-model/) 
+- [Ayrıcalıklı erişim Iş Istasyonları hakkında bilgi edinin](https://4sysops.com/archives/understand-the-microsoft-privileged-access-workstation-paw-security-model/)
 
-- [Azure'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure 'da çok faktörlü kimlik doğrulamasını etkinleştirme](../active-directory/authentication/howto-mfa-getstarted.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="37-log-and-alert-on-suspicious-activities-from-administrative-accounts"></a>3,7: yönetim hesaplarından şüpheli etkinliklerle ilgili günlüğe kaydet ve uyar
 
@@ -320,15 +333,15 @@ Microsoft Hizmetleri ve Azure Resource Manager için Azure AD Privileged Identit
 
 Güvenlik Merkezi risk algılama, Azure Izleyici 'ye uyarı verebilir ve eylem gruplarını kullanarak özel uyarı/bildirim yapılandırır.
 
-- [Güvenlik Merkezi risk algılamalarını anlama (şüpheli etkinlik)](../active-directory/identity-protection/overview-identity-protection.md) 
+- [Güvenlik Merkezi risk algılamalarını anlama (şüpheli etkinlik)](../active-directory/identity-protection/overview-identity-protection.md)
 
 - [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](../active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics.md) 
 
 - [Özel uyarı ve bildirim için eylem gruplarını yapılandırma](../azure-monitor/alerts/action-groups.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="38-manage-azure-resources-from-only-approved-locations"></a>3,8: Azure kaynaklarını yalnızca onaylanan konumlardan yönetme
 
@@ -336,9 +349,9 @@ Güvenlik Merkezi risk algılama, Azure Izleyici 'ye uyarı verebilir ve eylem g
 
 - [Azure 'da adlandırılmış konumları yapılandırma](../active-directory/reports-monitoring/quickstart-configure-named-locations.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="39-use-azure-active-directory"></a>3,9: Azure Active Directory kullanın
 
@@ -346,9 +359,9 @@ Güvenlik Merkezi risk algılama, Azure Izleyici 'ye uyarı verebilir ve eylem g
 
 - [Azure AD örneği oluşturma ve yapılandırma](../active-directory-domain-services/tutorial-create-instance.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="310-regularly-review-and-reconcile-user-access"></a>3,10: Kullanıcı erişimini düzenli olarak gözden geçirin ve karşılaştırın
 
@@ -356,29 +369,29 @@ Güvenlik Merkezi risk algılama, Azure Izleyici 'ye uyarı verebilir ve eylem g
 
 Azure kimlik erişimi Incelemeleri, grup üyeliklerini verimli bir şekilde yönetmek, kurumsal uygulamalara erişmek ve rol atamaları için gerçekleştirilebilir. Yalnızca etkin kullanıcıların erişmeye devam ettiğinden emin olmak için Kullanıcı erişiminin düzenli olarak gözden geçirilmesi gerekir.
 
-- [Azure AD raporlamayı anlama](../active-directory/reports-monitoring/index.yml)
+- [Azure AD raporlamayı anlama](/azure/active-directory/reports-monitoring/)
 
 - [Azure kimlik erişimi Incelemelerini kullanma](../active-directory/governance/access-reviews-overview.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="311-monitor-attempts-to-access-deactivated-credentials"></a>3,11: devre dışı bırakılmış kimlik bilgilerine erişme girişimlerini izleme
 
-**Rehberlik**: Azure Active Directory (Azure AD) oturum açma etkinliğini tümleştirin, erişiminizle ilgili herhangi bir SIEM veya izleme aracıyla, olay günlüğü kaynaklarını denetleyebilir ve risk altında bulabilirsiniz. 
+**Rehberlik**: Azure Active Directory (Azure AD) oturum açma etkinliğini tümleştirin, erişiminizle ilgili herhangi bir SIEM veya izleme aracıyla, olay günlüğü kaynaklarını denetleyebilir ve risk altında bulabilirsiniz.
 
-Azure Active Directory Kullanıcı hesapları için Tanılama ayarları oluşturup Log Analytics çalışma alanına denetim günlüklerini ve oturum açma günlüklerini göndererek bu işlemi kolaylaştırın. İstenen tüm uyarılar, Log Analytics çalışma alanı içinde yapılandırılabilir.
+Azure AD Kullanıcı hesapları için Tanılama ayarları oluşturup Log Analytics çalışma alanına denetim günlüklerini ve oturum açma günlüklerini göndererek bu işlemi kolaylaştırın. İstenen tüm uyarılar, Log Analytics çalışma alanı içinde yapılandırılabilir.
 
 - [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](../active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="312-alert-on-account-sign-in-behavior-deviation"></a>3,12: hesap oturum açma davranışı sapması üzerinde uyarı
 
-**Rehberlik**:, sanal ağınızın Kullanıcı kimlikleriyle ilgili şüpheli eylemler için otomatik yanıtlar yapılandırmak üzere Azure Active Directory (Azure AD) riskini ve kimlik koruması özelliklerini kullanın. Daha fazla araştırma için Azure Sentinel 'e veri alma.
+**Rehberlik**: otomatik yanıtları, sanal ağınızın Kullanıcı kimlikleriyle ilgili şüpheli eylemler için yapılandırmak üzere Azure Active Directory (Azure AD) risk ve kimlik koruması özelliklerini kullanın. Daha fazla araştırma için Azure Sentinel 'e veri alma.
 
 - [Azure AD riskli oturum açma işlemlerini görüntüleme](../active-directory/identity-protection/overview-identity-protection.md)
 
@@ -386,13 +399,13 @@ Azure Active Directory Kullanıcı hesapları için Tanılama ayarları oluştur
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
 
-## <a name="data-protection"></a>Veri koruma
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: veri koruma](../security/benchmarks/security-control-data-protection.md).*
+## <a name="data-protection"></a>Veri Koruma
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Veri Koruma](../security/benchmarks/security-control-data-protection.md).*
 
 ### <a name="44-encrypt-all-sensitive-information-in-transit"></a>4,4: yoldaki tüm hassas bilgileri şifreleyin
 
@@ -402,11 +415,11 @@ Microsoft, müşteriler tarafından Azure ağı dahilinde ve dışarıdan son ku
 
 Ayrıca, MACsec (veri bağlantı katmanında bir IEEE standardı) kullanılarak "varsayılan olarak şifreleme" özelliği, müşteri verilerinin gizliliğini ve bütünlüğünü sağlamak için Azure veri merkezleri arasında seyahat eden tüm Azure trafiği için etkinleştirilir.
 
-- [Azure ile iletim sırasında şifrelemeyi anlama](../security/fundamentals/encryption-overview.md#encryption-of-data-in-transit)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [Azure ile iletim sırasında şifrelemeyi anlama](https://docs.microsoft.com/azure/security/fundamentals/encryption-overview#encryption-of-data-in-transit)
 
 **Sorumluluk**: Paylaşılan
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="46-use-azure-rbac-to-manage-access-to-resources"></a>4,6: kaynaklara erişimi yönetmek için Azure RBAC kullanma 
 
@@ -416,13 +429,13 @@ Sahip, katkıda bulunan veya ağ katılımcısı gibi yerleşik roller ' i seçi
 
 - [Azure RBAC 'yi yapılandırma](../role-based-access-control/role-assignments-portal.md)
 
-- [Sanal ağları planlama](virtual-network-vnet-plan-design-arm.md#permissions)
+- [Sanal ağları planlama](https://docs.microsoft.com/azure/virtual-network/virtual-network-vnet-plan-design-arm#permissions)
 
-- [Azure yerleşik rollerini gözden geçirin](../role-based-access-control/built-in-roles.md#networking)
-
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
+- [Azure yerleşik rollerini gözden geçirin](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#networking)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="49-log-and-alert-on-changes-to-critical-azure-resources"></a>4,9: kritik Azure kaynaklarında yapılan değişikliklerle ilgili günlük ve uyarı
 
@@ -432,11 +445,11 @@ Sahip, katkıda bulunan veya ağ katılımcısı gibi yerleşik roller ' i seçi
 
 - [Azure etkinlik günlüğü olayları için uyarı oluşturma](../azure-monitor/alerts/alerts-activity-log.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
 
-## <a name="inventory-and-asset-management"></a>Envanter ve varlık yönetimi
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="inventory-and-asset-management"></a>Envanter ve Varlık Yönetimi
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: envanter ve varlık yönetimi](../security/benchmarks/security-control-inventory-asset-management.md).*
 
@@ -444,15 +457,15 @@ Sahip, katkıda bulunan veya ağ katılımcısı gibi yerleşik roller ' i seçi
 
 **Kılavuz**: Azure Kaynak Grafiği 'Ni kullanarak sanal ağlar ve aboneliklerinizde bulunan alt ağlar gibi tüm ağ kaynaklarını sorgulayın ve bulun. Kiracınızda uygun (okuma) izinleriniz olduğundan ve aboneliklerinizdeki kaynakların yanı sıra tüm Azure aboneliklerinin listesini belirleyebildiğinizden emin olun.
 
-- [Azure Graph ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md) 
+- [Azure Graph ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
 
-- [Azure aboneliklerinizi görüntüleme](/powershell/module/az.accounts/get-azsubscription?view=azps-3.0.0) 
+- [Azure aboneliklerinizi görüntüleme](https://docs.microsoft.com/powershell/module/az.accounts/get-azsubscription?view=azps-4.8.0&amp;preserve-view=true)
 
 - [Azure RBAC 'yi anlama](../role-based-access-control/overview.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="62-maintain-asset-metadata"></a>6,2: varlık meta verilerini koruma
 
@@ -460,35 +473,36 @@ Sahip, katkıda bulunan veya ağ katılımcısı gibi yerleşik roller ' i seçi
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="63-delete-unauthorized-azure-resources"></a>6,3: yetkisiz Azure kaynaklarını silme
 
 **Rehberlik**: sanal ağı ve ilgili kaynakları düzenlemek ve izlemek için uygun yerlerde etiketleme, yönetim grupları ve ayrı abonelikler kullanın. Envanterin düzenli olarak mutabakatını yapın ve yetkisiz kaynakların aboneliğin zamanında silindiğinden emin olun.
 
-- [Ek Azure abonelikleri oluşturma](../cost-management-billing/manage/create-subscription.md) 
+- [Ek Azure abonelikleri oluşturma](../cost-management-billing/manage/create-subscription.md)
 
-- [Yönetim Grupları oluşturma](../governance/management-groups/create-management-group-portal.md) 
+- [Yönetim Grupları oluşturma](../governance/management-groups/create-management-group-portal.md)
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="64-define-and-maintain-inventory-of-approved-azure-resources"></a>6,4: onaylanan Azure kaynaklarının envanterini tanımlayın ve saklayın
 
 **Rehberlik**: Kurumsal gereksinimleriniz uyarınca, işlem kaynakları Için onaylanan Azure kaynakları ve onaylanan yazılım envanterini oluşturmanız gerekir.
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="65-monitor-for-unapproved-azure-resources"></a>6,5: onaylanmamış Azure kaynakları için izleyici
 
 **Rehberlik**: aşağıdaki yerleşik ilke tanımlarını kullanarak müşteri aboneliklerinde oluşturulabilen kaynak türlerine kısıtlamalar koymak Için Azure ilkesini kullanın:
+
 - İzin verilmeyen kaynak türleri 
 
 - İzin verilen kaynak türleri 
@@ -499,11 +513,11 @@ Azure depolama hesaplarıyla ilgili olanlar gibi yüksek güvenlik tabanlı orta
 
 - [Azure Graph ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
 
-- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](./policy-reference.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](policy-reference.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="67-remove-unapproved-azure-resources-and-software-applications"></a>6,7: onaylanmamış Azure kaynaklarını ve yazılım uygulamalarını kaldırma
 
@@ -511,26 +525,25 @@ Azure depolama hesaplarıyla ilgili olanlar gibi yüksek güvenlik tabanlı orta
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="69-use-only-approved-azure-services"></a>6,9: yalnızca onaylanan Azure hizmetlerini kullanın
 
 **Rehberlik**: aşağıdaki yerleşik ilke tanımlarını kullanarak müşteri aboneliklerinde oluşturulabilen kaynak türlerine kısıtlamalar koymak Için Azure ilkesini kullanın:
-- İzin verilmeyen kaynak türleri 
+- İzin verilmeyen kaynak türleri
+- İzin verilen kaynak türleri
 
-- İzin verilen kaynak türleri 
+- [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md) 
+- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#general)
 
-- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](../governance/policy/samples/index.md)
-
-- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](./policy-reference.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](policy-reference.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="611-limit-users-ability-to-interact-with-azure-resource-manager"></a>6,11: kullanıcıların Azure Resource Manager etkileşime geçme yeteneğini sınırlayın
 
@@ -538,11 +551,11 @@ Azure depolama hesaplarıyla ilgili olanlar gibi yüksek güvenlik tabanlı orta
 
 - [Azure Resource Manager erişimi engellemek için koşullu erişimi yapılandırma](../role-based-access-control/conditional-access-azure-management.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
 
-## <a name="secure-configuration"></a>Güvenli yapılandırma
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="secure-configuration"></a>Güvenli Yapılandırma
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: güvenli yapılandırma](../security/benchmarks/security-control-secure-configuration.md).*
 
@@ -554,19 +567,19 @@ Yapılandırma şablonlarınızın herhangi birini JavaScript Nesne Gösterimi (
 
 Azure kaynaklarınız için güvenli bir yapılandırma temeli olarak güvenlik merkezi 'nden öneriler uygulayın.
 
-- [Kullanılabilir Azure Ilkesi diğer adlarını görüntüleme](/powershell/module/az.resources/get-azpolicyalias?view=azps-3.3.0)
+- [Kullanılabilir Azure Ilkesi diğer adlarını görüntüleme](https://docs.microsoft.com/powershell/module/az.resources/get-azpolicyalias?view=azps-4.8.0&amp;preserve-view=true)
 
 - [Öğretici: uyumluluğu zorlamak için ilke oluşturma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](./policy-reference.md)
+- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](policy-reference.md)
 
 - [Azure portal bir şablona tek ve çoklu kaynak verme](../azure-resource-manager/templates/export-template-portal.md)
 
 - [Güvenlik önerileri - başvuru kılavuzu](../security-center/recommendations-reference.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="73-maintain-secure-azure-resource-configurations"></a>7,3: güvenli Azure Kaynak yapılandırmalarının bakımını yapma
 
@@ -582,11 +595,11 @@ Azure kaynaklarınızın tamamında güvenli ayarları zorlamak için Azure Ilke
 
 - [Sanal ağ için Azure Resource Manager şablonu örnekleri](template-samples.md)
 
-- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](./policy-reference.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](policy-reference.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="75-securely-store-configuration-of-azure-resources"></a>7,5: Azure kaynaklarının yapılandırmasını güvenli bir şekilde depolayın
 
@@ -594,13 +607,13 @@ Azure kaynaklarınızın tamamında güvenli ayarları zorlamak için Azure Ilke
 
 Azure DevOps 'da, kodunuzun, derlemelerinizin ve iş izlemenin gibi yönetmek istediğiniz kaynaklara erişmek için izinleriniz olmalıdır. Birçok izin yerleşik güvenlik grupları aracılığıyla verilir. Azure DevOps ile tümleşikse veya Team Foundation Server ile tümleşikse Active Directory belirli kullanıcılara, yerleşik güvenlik gruplarına veya Azure Active Directory (Azure AD) tanımlanmış gruplara izin verebilir veya vermeyebilirsiniz.
 
-- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?view=azure-devops) 
+- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?view=azure-devops&amp;preserve-view=true)
 
 - [Azure DevOps 'da izinler ve gruplar hakkında](/azure/devops/organizations/security/about-permissions)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="77-deploy-configuration-management-tools-for-azure-resources"></a>7,7: Azure kaynakları için yapılandırma yönetimi araçları dağıtma
 
@@ -608,13 +621,13 @@ Azure DevOps 'da, kodunuzun, derlemelerinizin ve iş izlemenin gibi yönetmek is
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Diğer adları kullanma](../governance/policy/concepts/definition-structure.md#aliases)
+- [Diğer adları kullanma](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#aliases)
 
-- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](./policy-reference.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](policy-reference.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="79-implement-automated-configuration-monitoring-for-azure-resources"></a>7,9: Azure kaynakları için otomatik yapılandırma izlemeyi uygulama
 
@@ -624,11 +637,11 @@ Azure DevOps 'da, kodunuzun, derlemelerinizin ve iş izlemenin gibi yönetmek is
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](./policy-reference.md)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Sanal ağ için Azure ilke örneği yerleşik bileşenleri](policy-reference.md)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="711-manage-azure-secrets-securely"></a>7,11: Azure gizli dizilerini güvenli bir şekilde yönetin
 
@@ -640,9 +653,9 @@ Azure DevOps 'da, kodunuzun, derlemelerinizin ve iş izlemenin gibi yönetmek is
 
 - [Yönetilen kimlik ile Key Vault kimlik doğrulaması sağlama](../key-vault/general/assign-access-policy-portal.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="713-eliminate-unintended-credential-exposure"></a>7,13: istenmeyen kimlik bilgisi pozlamasını ortadan kaldırın
 
@@ -650,11 +663,11 @@ Azure DevOps 'da, kodunuzun, derlemelerinizin ve iş izlemenin gibi yönetmek is
 
 - [Kimlik bilgisi tarayıcısı kurulumu](https://secdevtools.azurewebsites.net/helpcredscan.html)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
 
-## <a name="data-recovery"></a>Veri kurtarma
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="data-recovery"></a>Veri Kurtarma
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: veri kurtarma](../security/benchmarks/security-control-data-recovery.md).*
 
@@ -672,9 +685,9 @@ Azure DevOps 'da, kodunuzun, derlemelerinizin ve iş izlemenin gibi yönetmek is
 
 - [Azure Otomasyonu 'na giriş](../automation/automation-intro.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Şu anda kullanılamıyor
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="92-perform-complete-system-backups-and-backup-any-customer-managed-keys"></a>9,2: tam sistem yedeklemeleri gerçekleştirin ve müşterinin yönettiği tüm anahtarları yedekleyin
 
@@ -690,11 +703,11 @@ Azure DevOps 'da, kodunuzun, derlemelerinizin ve iş izlemenin gibi yönetmek is
 
 - [Azure Otomasyonu 'na giriş](../automation/automation-intro.md)
 
-- [Azure 'da Anahtar Kasası anahtarlarını yedekleme](/powershell/module/azurerm.keyvault/backup-azurekeyvaultkey?view=azurermps-6.13.0)
-
-**Azure Güvenlik Merkezi izlemesi**: Yes
+- [Azure 'da Anahtar Kasası anahtarlarını yedekleme](https://docs.microsoft.com/powershell/module/az.keyvault/backup-azkeyvaultkey?view=azps-4.8.0&amp;preserve-view=true)
 
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="93-validate-all-backups-including-customer-managed-keys"></a>9,3: müşteri tarafından yönetilen anahtarlar dahil tüm yedeklemeleri doğrulama
 
@@ -702,35 +715,35 @@ Azure DevOps 'da, kodunuzun, derlemelerinizin ve iş izlemenin gibi yönetmek is
 
 - [ARM şablonları ve Azure portal kaynak dağıtma](../azure-resource-manager/templates/deploy-portal.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="94-ensure-protection-of-backups-and-customer-managed-keys"></a>9,4: yedeklemelerin ve müşteri tarafından yönetilen anahtarların korunmasını sağlayın
 
-**Kılavuz**: özel Azure ilke tanımları ve Azure Resource Manager şablonları gibi kodunuzu güvenli bir şekilde depolamak ve yönetmek Için Azure DevOps kullanın. 
+**Kılavuz**: özel Azure ilke tanımları ve Azure Resource Manager şablonları gibi kodunuzu güvenli bir şekilde depolamak ve yönetmek Için Azure DevOps kullanın.
 
-Azure DevOps ile tümleşikse veya Team Foundation Server ile tümleşikse Active Directory belirli kullanıcılara, yerleşik güvenlik gruplarına veya Azure Active Directory (Azure AD) tanımlanmış gruplara izin verin veya reddedin.  
+Azure DevOps ile tümleşikse veya Team Foundation Server ile tümleşikse Active Directory belirli kullanıcılara, yerleşik güvenlik gruplarına veya Azure Active Directory (Azure AD) tanımlanmış gruplara izin verin veya reddedin.
 
-Müşteri tarafından yönetilen anahtarları korumak için Azure rol tabanlı erişim denetimi 'ni (Azure RBAC) kullanın.   
+Müşteri tarafından yönetilen anahtarları korumak için Azure rol tabanlı erişim denetimi 'ni (Azure RBAC) kullanın. 
 
-Anahtarları yanlışlıkla veya kötü amaçlı silmeye karşı korumak için Key Vault Soft-Delete ve Temizleme korumasını etkinleştirin.  
+Anahtarları yanlışlıkla veya kötü amaçlı silmeye karşı korumak için Key Vault Soft-Delete ve Temizleme korumasını etkinleştirin.
 
-- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?view=azure-devops)
+- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow)
 
 - [Azure DevOps 'da izinler ve gruplar hakkında](/azure/devops/organizations/security/about-permissions)
 
-- [Key Vault 'de Soft-Delete ve Temizleme korumasını etkinleştirme](../storage/blobs/soft-delete-blob-overview.md?tabs=azure-portal) 
+- [Key Vault 'de Soft-Delete ve Temizleme korumasını etkinleştirme](../storage/blobs/soft-delete-blob-overview.md)
 
-- [Azure Depolama blobları için geçici silme](../storage/blobs/soft-delete-blob-overview.md?tabs=azure-portal)
-
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
+- [Azure Depolama blobları için geçici silme](../storage/blobs/soft-delete-blob-overview.md)
 
 **Sorumluluk**: Müşteri
 
-## <a name="incident-response"></a>Olay yanıtı
+**Azure Güvenlik Merkezi izleme**: yok
 
-*Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: olay yanıtı](../security/benchmarks/security-control-incident-response.md).*
+## <a name="incident-response"></a>Olay Yanıtı
+
+*Daha fazla bilgi için bkz. [Azure Güvenlik Karşılaştırması: Olay Yanıtı](../security/benchmarks/security-control-incident-response.md).*
 
 ### <a name="101-create-an-incident-response-guide"></a>10,1: olay yanıtı kılavuzu oluşturma
 
@@ -742,13 +755,13 @@ Anahtarları yanlışlıkla veya kötü amaçlı silmeye karşı korumak için K
 
 - [Kendi olay yanıtı planınızı oluşturmaya yardımcı olmak için NıST 'nin bilgisayar güvenliği olay Işleme kılavuzuyla yararlanın](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="102-create-an-incident-scoring-and-prioritization-procedure"></a>10,2: olay Puanlama ve öncelik belirlemesi prosedürü oluşturma
 
-**Rehberlik**: Güvenlik Merkezi, ilk olarak hangi uyarıların araştırılması gerektiğini önceliklendirmenize yardımcı olmak için her bir uyarıya önem derecesi atar. Önem derecesi, uyarı veren etkinliğin arkasında kötü amaçlı bir amaç olduğunu ve uyarıyı vermek için kullanılan analitik düzeyini, ne kadar güvenli bir güvenlik merkezinin olduğunu temel alır.
+**Rehberlik**: Güvenlik Merkezi, ilk olarak hangi uyarıların araştırılması gerektiğini önceliklendirmenize yardımcı olmak için her bir uyarıya önem derecesi atar. Önem derecesi, güvenlik merkezi 'nin uyarıyı vermek için kullanılan bulma veya analizte ne kadar önemli olduğunu ve uyarıya yönelik etkinliğin arkasında kötü amaçlı bir amaç olduğunu bilmenin yanı sıra güven düzeyini temel alır.
 
 Etiketleri kullanarak abonelikleri (örneğin, üretim veya üretim dışı) açık bir şekilde işaretleyin ve Azure kaynaklarını net bir şekilde tanımlamak ve kategorilere ayırmak için özellikle de hassas verileri işleyen bir adlandırma sistemi oluşturun.  Azure kaynaklarının önem düzeyine ve olayın oluştuğu ortama bağlı olarak uyarıların çözümünde önceliği belirlemek sizin sorumluluğunuzdadır.
 
@@ -756,9 +769,9 @@ Etiketleri kullanarak abonelikleri (örneğin, üretim veya üretim dışı) aç
 
 - [Azure kaynaklarınızı düzenlemek için etiketleri kullanma](../azure-resource-manager/management/tag-resources.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="103-test-security-response-procedures"></a>10,3: test Güvenliği Yanıt yordamları
 
@@ -766,9 +779,9 @@ Etiketleri kullanarak abonelikleri (örneğin, üretim veya üretim dışı) aç
 
 - [NıST 'nin Yayımlama Kılavuzu, BT planları ve becerileri için programları test etme, eğitim ve alıştırma Kılavuzu](https://csrc.nist.gov/publications/detail/sp/800-84/final)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="104-provide-security-incident-contact-details-and-configure-alert-notifications-for-security-incidents"></a>10,4: güvenlik olaylarına ilişkin iletişim ayrıntılarını sağlayın ve güvenlik olayları için uyarı bildirimleri yapılandırın
 
@@ -776,9 +789,9 @@ Etiketleri kullanarak abonelikleri (örneğin, üretim veya üretim dışı) aç
 
 - [Güvenlik Merkezi güvenlik Ilgili kişisini ayarlama](../security-center/security-center-provide-security-contact-details.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="105-incorporate-security-alerts-into-your-incident-response-system"></a>10,5: güvenlik uyarılarını olay yanıt sisteminizle birleştirme
 
@@ -790,9 +803,9 @@ Uyarıları Azure Sentinel 'e göndermek için Güvenlik Merkezi veri bağlayıc
 
 - [Uyarıların Azure Sentinel’e akışını yapma](../sentinel/connect-azure-security-center.md)
 
-**Azure Güvenlik Merkezi izlemesi**: Yes
-
 **Sorumluluk**: Müşteri
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ### <a name="106-automate-the-response-to-security-alerts"></a>10,6: güvenlik uyarılarına yanıtı otomatikleştirme
 
@@ -800,11 +813,11 @@ Uyarıları Azure Sentinel 'e göndermek için Güvenlik Merkezi veri bağlayıc
 
 - [Iş akışı otomasyonu ve Logic Apps yapılandırma](../security-center/workflow-automation.md)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Müşteri
 
-## <a name="penetration-tests-and-red-team-exercises"></a>Sızma testleri ve red team alıştırmaları
+**Azure Güvenlik Merkezi izleme**: yok
+
+## <a name="penetration-tests-and-red-team-exercises"></a>Sızma Testleri ve Red Team Alıştırmaları
 
 *Daha fazla bilgi için bkz. [Azure Güvenlik kıyaslaması: Penetme testleri ve Red ekibi alıştırmaları](../security/benchmarks/security-control-penetration-tests-red-team-exercises.md).*
 
@@ -816,11 +829,11 @@ Uyarıları Azure Sentinel 'e göndermek için Güvenlik Merkezi veri bağlayıc
 
 - [Microsoft Bulut ile Kırmızı Takım Oluşturma](https://gallery.technet.microsoft.com/Cloud-Red-Teaming-b837392e)
 
-**Azure Güvenlik Merkezi ile izleme**: Uygulanamaz
-
 **Sorumluluk**: Paylaşılan
+
+**Azure Güvenlik Merkezi izleme**: yok
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz. [Azure Güvenlik kıyaslaması](../security/benchmarks/overview.md)
-- [Azure güvenlik temelleri](../security/benchmarks/security-baselines-overview.md) hakkında daha fazla bilgi edinin
+- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](/azure/security/benchmarks/overview)
+- [Azure güvenlik temelleri](/azure/security/benchmarks/security-baselines-overview) hakkında daha fazla bilgi edinin

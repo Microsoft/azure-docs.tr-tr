@@ -3,12 +3,12 @@ title: Özel bağlantı hizmetini kullanarak olay sunma
 description: Bu makalede, özel bağlantı hizmeti kullanılarak olayları teslim edemeyecek sınırlamanın nasıl giderileceği açıklanmaktadır.
 ms.topic: how-to
 ms.date: 02/12/2021
-ms.openlocfilehash: 9df78e1cc7734ba9e455ed686286658006f9445e
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 75ae8ff2c341048c39156e43da3615788e9d0f0a
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629300"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309440"
 ---
 # <a name="deliver-events-using-private-link-service"></a>Özel bağlantı hizmetini kullanarak olay sunma
 Şu anda [Özel uç noktalar](../private-link/private-endpoint-overview.md)kullanarak olay teslim etmek mümkün değildir. Diğer bir deyişle, teslim edilen olaylarınızın trafiğinden özel IP alanının olmaması gereken katı ağ yalıtımı gereksinimleriniz varsa destek yoktur. 
@@ -36,7 +36,7 @@ Yönetilen kimlik kullanarak Event Hubs ad alanındaki Olay Hub 'larına olaylar
 Yönetilen kimlik kullanarak Service Bus ad uzayındaki Service Bus kuyruklara veya konulara olay göndermek için şu adımları izleyin:
 
 1. Sistem tarafından atanan kimliği etkinleştir: [sistem konuları](enable-identity-system-topics.md), [özel konular ve etki alanları](enable-identity-custom-topics-domains.md). 
-1. Kimliği Service Bus ad alanındaki [ **Azure Service Bus Data sender** rolüne ekleyin](/service-bus-messaging/service-bus-managed-service-identity#azure-built-in-roles-for-azure-service-bus)
+1. Kimliği Service Bus ad alanındaki [ **Azure Service Bus Data sender** rolüne ekleyin](../service-bus-messaging/service-bus-managed-service-identity.md#azure-built-in-roles-for-azure-service-bus)
 1. [Service Bus ad alanındaki **Güvenilen Microsoft hizmetlerinin bu güvenlik duvarını atlamasına izin ver** ayarını etkinleştirin](../service-bus-messaging/service-bus-service-endpoints.md#trusted-microsoft-services). 
 1. Bir Service Bus kuyruğu veya konuyu kullanan [olay aboneliğini,](managed-service-identity.md) sistem tarafından atanan kimliği kullanmak için uç nokta olarak yapılandırın.
 

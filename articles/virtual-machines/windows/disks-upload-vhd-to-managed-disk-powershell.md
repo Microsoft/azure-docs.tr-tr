@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: virtual-machines
 ms.tgt_pltfrm: linux
 ms.subservice: disks
-ms.openlocfilehash: c766c78705a1c1e40a9385360d35ac06a3db3a5d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 675e99797a507cdcf96ad33ab13c4f386f6f372c
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99252253"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106169037"
 ---
 # <a name="upload-a-vhd-to-azure-or-copy-a-managed-disk-to-another-region---azure-powershell"></a>Bir VHD 'yi Azure 'a yükleme veya yönetilen bir diski başka bir bölgeye kopyalama-Azure PowerShell
 
@@ -34,7 +34,7 @@ VHD 'nizi Azure 'a yüklemek için, bu karşıya yükleme işlemi için yapılan
 
 Bu tür yönetilen disklerin iki benzersiz durumu vardır:
 
-- ReadToUpload, diskin karşıya yüklemeyi almaya çalıştığı ancak [güvenli erişim imzası](../../storage/common/storage-sas-overview.md) (SAS) üretilmediği anlamına gelir.
+- ReadyToUpload, diskin karşıya yükleme almaya hazır olduğu ancak [güvenli erişim imzası](../../storage/common/storage-sas-overview.md) (SAS) üretilmediği anlamına gelir.
 - ActiveUpload, bu, diskin karşıya yükleme almaya ve SAS üretilmeye hazırlanmasıdır.
 
 > [!NOTE]

@@ -10,14 +10,14 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 03/16/2021
+ms.date: 04/12/2021
 ms.author: radeltch
-ms.openlocfilehash: 42a4c4a41f6c8bdf9d4a8e78f634893722c8f389
-ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
+ms.openlocfilehash: ea1296fd4e31c2deaed79e980ab764c523a2bfd7
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104576415"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107364371"
 ---
 # <a name="high-availability-of-sap-hana-on-azure-vms-on-suse-linux-enterprise-server"></a>SUSE Linux Enterprise Server üzerinde Azure VM 'lerinde SAP HANA yüksek kullanılabilirliği
 
@@ -172,7 +172,6 @@ GitHub üzerinde olan hızlı başlangıç şablonlarından birini, gerekli tüm
       1. Yeni yük dengeleyici kuralının adını girin (örneğin, **Hana-lb**).
       1. Ön uç IP adresini, arka uç havuzunu ve daha önce oluşturduğunuz sistem durumu araştırmasını (örneğin, **Hana-ön uç**, **Hana-arka uç** ve **Hana-HP**) seçin.
       1. **Ha bağlantı noktalarını** seçin.
-      1. **Boşta kalma zaman aşımını** 30 dakikaya yükseltin.
       1. **Kayan IP**'yi etkinleştirdiğinizden emin olun.
       1. **Tamam**’ı seçin.
 
@@ -499,6 +498,71 @@ Bu bölümdeki adımlarda aşağıdaki ön ekler kullanılır:
    hdbnsutil -sr_register --remoteHost=<b>hn1-db-0</b> --remoteInstance=<b>03</b> --replicationMode=sync --name=<b>SITE2</b> 
    </code></pre>
 
+## <a name="implement-the-python-system-replication-hook-saphanasr"></a>Python sistem çoğaltma kancasını uygulama
+
+Bu, kümeyle tümleştirmeyi iyileştirmek ve bir küme yük devretmesi gerektiğinde algılamayı iyileştirmek için önemli bir adımdır. SAPHanaSR Python kancasını yapılandırmak kesinlikle önerilir.    
+
+1. **[A]** Hana "sistem çoğaltma kancasını" yükler. Kanca 'nin hem HANA DB düğümlerine yüklenmesi gerekir.           
+
+   > [!TIP]
+   > Saphanasr 'nin SAPHanaSR Python kanca işlevini kullanabilmesi için en az 0,153 sürümüne sahip olduğunu doğrulayın.       
+   > Python kancası yalnızca HANA 2,0 için uygulanabilir.        
+
+   1. Kancasını olarak hazırlayın `root` .  
+
+    ```bash
+     mkdir -p /hana/shared/myHooks
+     cp /usr/share/SAPHanaSR/SAPHanaSR.py /hana/shared/myHooks
+     chown -R hn1adm:sapsys /hana/shared/myHooks
+    ```
+
+   2. Her iki düğümde de HANA 'yı durdurun. <SID adm olarak Çalıştır \> :  
+   
+    ```bash
+    sapcontrol -nr 03 -function StopSystem
+    ```
+
+   3. `global.ini`Her küme düğümünde ayarlayın.  
+ 
+    ```bash
+    # add to global.ini
+    [ha_dr_provider_SAPHanaSR]
+    provider = SAPHanaSR
+    path = /hana/shared/myHooks
+    execution_order = 1
+    
+    [trace]
+    ha_dr_saphanasr = info
+    ```
+
+2. **[A]** küme, <SID adm için her küme düğümünde susers yapılandırması gerektirir \> . Bu örnekte, yeni bir dosya oluşturularak elde edilen. Komutları olarak yürütün `root` .    
+    ```bash
+    cat << EOF > /etc/sudoers.d/20-saphana
+    # Needed for SAPHanaSR python hook
+    hn1adm ALL=(ALL) NOPASSWD: /usr/sbin/crm_attribute -n hana_hn1_site_srHook_*
+    EOF
+    ```
+SAP HANA sistem çoğaltma kancasını uygulamayla ilgili daha fazla bilgi için bkz. [Hana ha/Dr sağlayıcılarını ayarlama](https://documentation.suse.com/sbp/all/html/SLES4SAP-hana-sr-guide-PerfOpt-12/index.html#_set_up_sap_hana_hadr_providers).  
+
+3. **[A]** her iki düğümde de SAP HANA başlatın. <SID adm olarak yürütün \> .  
+
+    ```bash
+    sapcontrol -nr 03 -function StartSystem 
+    ```
+
+4. **[1]** kanca yüklemesini doğrulayın. \>ETKIN Hana sistem çoğaltma sitesinde <SID adm olarak yürütün.   
+
+    ```bash
+     cdtrace
+     awk '/ha_dr_SAPHanaSR.*crm_attribute/ \
+     { printf "%s %s %s %s\n",$2,$3,$5,$16 }' nameserver_*
+     # Example output
+     # 2021-04-08 22:18:15.877583 ha_dr_SAPHanaSR SFAIL
+     # 2021-04-08 22:18:46.531564 ha_dr_SAPHanaSR SFAIL
+     # 2021-04-08 22:21:26.816573 ha_dr_SAPHanaSR SOK
+
+    ```
+
 ## <a name="create-sap-hana-cluster-resources"></a>SAP HANA kümesi kaynakları oluşturma
 
 İlk olarak, HANA topolojisini oluşturun. Aşağıdaki komutları Paceyapıcısı küme düğümlerinden birinde çalıştırın:
@@ -711,6 +775,9 @@ Bu bölüm, kurulumunuzu nasıl test kullanabileceğinizi açıklar. Her test, k
 Teste başlamadan önce, pacemaker 'ın başarısız bir eyleme sahip olmadığından emin olun (crm_mon-r aracılığıyla), beklenmeyen bir konum kısıtlaması olmadığından (örneğin, bir geçiş testinin kalan kısmını) ve HANA 'nın eşitleme durumu olduğundan, örneğin SAPHanaSR-showAttr:
 
 <pre><code>hn1-db-0:~ # SAPHanaSR-showAttr
+Sites    srHook
+----------------
+SITE2    SOK
 
 Global cib-time
 --------------------------------
@@ -724,7 +791,7 @@ hn1-db-1 DEMOTED     30          online     logreplay nws-hana-vm-0 4:S:master1:
 
 Aşağıdaki komutu yürüterek SAP HANA ana düğümünü geçirebilirsiniz:
 
-<pre><code>crm resource migrate msl_SAPHana_<b>HN1</b>_HDB<b>03</b> <b>hn1-db-1</b>
+<pre><code>crm resource move msl_SAPHana_<b>HN1</b>_HDB<b>03</b> <b>hn1-db-1</b> force
 </code></pre>
 
 Ayarlarsanız `AUTOMATED_REGISTER="false"` , bu komut dizisi SAP HANA ana düğümünü ve sanal IP adresini içeren grubu hn1-DB-1 ' e geçirmelidir.
@@ -763,7 +830,7 @@ Geçiş, yeniden silinmesi gereken konum kısıtlamalarını oluşturur:
 
 <pre><code># Switch back to root and clean up the failed state
 exit
-hn1-db-0:~ # crm resource unmigrate msl_SAPHana_<b>HN1</b>_HDB<b>03</b>
+hn1-db-0:~ # crm resource clear msl_SAPHana_<b>HN1</b>_HDB<b>03</b>
 </code></pre>
 
 İkincil düğüm kaynağının durumunu da temizlemeniz gerekir:

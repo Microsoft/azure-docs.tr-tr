@@ -17,12 +17,12 @@ ms.date: 1/29/2021
 ms.author: markvi
 ms.reviewer: arvinh
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7d8c4876faf9ebc2619309aa0095a8ffe1e9e93d
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 468e885bab6aab4becb5aaaec7b4d52ce5ef5e07
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102500555"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535986"
 ---
 # <a name="overview-of-provisioning-logs-in-the-azure-portal-preview"></a>Azure portal sağlama günlüklerine genel bakış (Önizleme)
 
@@ -61,7 +61,7 @@ Müşteriler, sağlama günlükleriyle dört şekilde etkileşim kurabilir:
 
 - Sonraki bölümde açıklandığı gibi Azure portal günlüklere erişim.
 - Sağlama günlüklerinin [Azure izleyici](../app-provisioning/application-provisioning-log-analytics.md)'ye akışı. Bu yöntem, genişletilmiş veri saklama ve özel panolar, uyarılar ve sorgular oluşturmak için izin verir.
-- Sağlama günlükleri için [MICROSOFT Graph API](/graph/api/resources/provisioningobjectsummary?view=graph-rest-beta) sorgulanıyor.
+- Sağlama günlükleri için [MICROSOFT Graph API](/graph/api/resources/provisioningobjectsummary) sorgulanıyor.
 - Sağlama günlükleri bir CSV veya JSON dosyası olarak indiriliyor.
 
 ## <a name="access-the-logs-from-the-azure-portal"></a>Azure portal günlüklere erişin
@@ -131,7 +131,7 @@ Nesnenin adına veya KIMLIğINE göre arama yapabilirsiniz. KIMLIK senaryoya gö
 
 - **Tümü**
 - **Başarılı**
-- **Hataları**
+- **Hata**
 - **Atlandı**
 
 **Eylem** filtresi, bu eylemleri filtrelemenizi sağlar:
@@ -243,7 +243,7 @@ Raporları sağlamaya yönelik bazı ipuçları ve konular aşağıda verilmişt
 
 Sağlama günlüklerinde bulduğunuz hataların nasıl çözümleneceğini daha iyi anlamak için aşağıdaki tabloyu kullanın. Eksik olan herhangi bir hata kodu için, bu sayfanın en altındaki bağlantıyı kullanarak geri bildirim sağlayın. 
 
-|Hata kodu|Description|
+|Hata kodu|Açıklama|
 |---|---|
 |Çakışma, EntryConflict|Çakışan öznitelik değerlerini Azure AD 'de veya uygulamada düzeltin. Ya da çakışan Kullanıcı hesabının eşleştirilmek ve üzerinde alınması gerekiyorsa, eşleşen öznitelik yapılandırmanızı gözden geçirin. Eşleşen öznitelikleri yapılandırma hakkında daha fazla bilgi için [belgeleri](../app-provisioning/customize-application-attributes.md) gözden geçirin.|
 |TooManyRequests|Hedef uygulama, aşırı yüklenmiş ve çok fazla istek aldığından kullanıcıyı güncelleştirme girişimini reddetti. Yapılacak bir şey yok. Bu deneme otomatik olarak kullanımdan kaldırılacak. Microsoft bu sorunla aynı zamanda bilgilendirildi.|
@@ -251,7 +251,7 @@ Sağlama günlüklerinde bulduğunuz hataların nasıl çözümleneceğini daha 
 |InsufficientRights, MethodNotAllowed, NotAllowed, yetkisiz| Azure AD, hedef uygulamayla doğrulandı, ancak güncelleştirmeyi gerçekleştirme yetkisi yoktu. Hedef uygulamanın sunduğu tüm yönergeleri, ilgili uygulama [öğreticisiyle](../saas-apps/tutorial-list.md)birlikte gözden geçirin.|
 |UnprocessableEntity|Hedef uygulama beklenmeyen bir yanıt döndürdü. Hedef uygulamanın yapılandırması doğru olmayabilir veya hedef uygulamayla bir hizmet sorunu bunun çalışmasını engelleyebilir.|
 |WebExceptionProtocolError |Hedef uygulamaya bağlanılırken bir HTTP protokol hatası oluştu. Yapılacak bir şey yok. Bu deneme, 40 dakika içinde otomatik olarak kullanımdan kaldırılacaktır.|
-|Invalidanchor|Sağlama hizmeti tarafından daha önce oluşturulmuş veya eşleştirilmiş bir Kullanıcı artık yok. Kullanıcının var olduğundan emin olun. Tüm kullanıcılarla yeni bir eşleştirmeye zorlamak için Microsoft Graph API 'sini kullanarak [işi yeniden başlatın](/graph/api/synchronization-synchronizationjob-restart?tabs=http&view=graph-rest-beta). <br><br>Sağlama işleminin yeniden başlatılması, tamamlanması zaman alabilir ve bir başlangıç döngüsünü tetikler. Sağlama yeniden başlatıldığında sağlama hizmeti 'nin çalışmak için kullandığı önbellek de silinir. Diğer bir deyişle, Kiracıdaki tüm kullanıcılar ve grupların yeniden değerlendirilmesi ve belirli sağlama olaylarının bırakılması gerekir.|
+|Invalidanchor|Sağlama hizmeti tarafından daha önce oluşturulmuş veya eşleştirilmiş bir Kullanıcı artık yok. Kullanıcının var olduğundan emin olun. Tüm kullanıcılarla yeni bir eşleştirmeye zorlamak için Microsoft Graph API 'sini kullanarak [işi yeniden başlatın](/graph/api/synchronization-synchronizationjob-restart?tabs=http&view=graph-rest-beta&preserve-view=true). <br><br>Sağlama işleminin yeniden başlatılması, tamamlanması zaman alabilir ve bir başlangıç döngüsünü tetikler. Sağlama yeniden başlatıldığında sağlama hizmeti 'nin çalışmak için kullandığı önbellek de silinir. Diğer bir deyişle, Kiracıdaki tüm kullanıcılar ve grupların yeniden değerlendirilmesi ve belirli sağlama olaylarının bırakılması gerekir.|
 |NotImplemented | Hedef uygulama beklenmeyen bir yanıt döndürdü. Uygulamanın yapılandırması doğru olmayabilir veya hedef uygulamayla bir hizmet sorunu bunun çalışmasını engelleyebilir. Hedef uygulamanın sunduğu tüm yönergeleri, ilgili uygulama [öğreticisiyle](../saas-apps/tutorial-list.md)birlikte gözden geçirin. |
 |MandatoryFieldsMissing, MissingValues |Gerekli değerler eksik olduğundan kullanıcı oluşturulamadı. Kaynak kayıttaki eksik öznitelik değerlerini düzeltin veya gerekli alanların atlanmadığından emin olmak için eşleşen öznitelik yapılandırmanızı gözden geçirin. Eşleşen öznitelikleri yapılandırma hakkında [daha fazla bilgi edinin](../app-provisioning/customize-application-attributes.md) .|
 |SchemaAttributeNotFound |Hedef uygulamada mevcut olmayan bir öznitelik belirtildiğinden işlem gerçekleştirilemedi. Öznitelik özelleştirme hakkındaki [belgelere](../app-provisioning/customize-application-attributes.md) bakın ve yapılandırmanızın doğru olduğundan emin olun.|
@@ -269,4 +269,4 @@ Sağlama günlüklerinde bulduğunuz hataların nasıl çözümleneceğini daha 
 
 * [Kullanıcı hazırlama durumunu denetleme](../app-provisioning/application-provisioning-when-will-provisioning-finish-specific-user.md)
 * [Azure AD Galeri uygulamasına kullanıcı sağlamayı yapılandırma sorunu](../app-provisioning/application-provisioning-config-problem.md)
-* [Sağlama günlükleri için Graph API](/graph/api/resources/provisioningobjectsummary?view=graph-rest-beta)
+* [Sağlama günlükleri için Graph API](/graph/api/resources/provisioningobjectsummary)

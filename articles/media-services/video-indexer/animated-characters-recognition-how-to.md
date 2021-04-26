@@ -11,12 +11,12 @@ ms.custom: references_regions
 ms.topic: how-to
 ms.date: 12/07/2020
 ms.author: juliako
-ms.openlocfilehash: 29dbdb896d1a6063fec277afa33327c84cb2f0cd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e80699a043d4c18a1bc7ba75ce58c6972fae0fad
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98880936"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531548"
 ---
 # <a name="use-the-animated-character-detection-preview-with-portal-and-api"></a>Portal ve API ile animasyonlu karakter algılamayı (Önizleme) kullanma 
 
@@ -59,7 +59,7 @@ Model eğitiminin, Özel Görüntü İşleme Web sitesi aracılığıyla değil,
 1. **Özel görüntü işleme hesabı Bağlan ' ı (Önizleme)** seçin ve **dene**' ye tıklayın.
 1. Gerekli alanların yanı sıra erişim belirtecini de girin ve **Gönder**' e tıklayın. 
 
-    Video Indexer erişim belirtecini alma hakkında daha fazla bilgi için [Geliştirici portalına](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Account-Access-Token?)gidin ve [ilgili belgelere](video-indexer-use-apis.md#obtain-access-token-using-the-authorization-api)bakın.  
+    Video Indexer erişim belirtecini alma hakkında daha fazla bilgi için [Geliştirici portalına](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Account-Access-Token)gidin ve [ilgili belgelere](video-indexer-use-apis.md#obtain-access-token-using-the-authorization-api)bakın.  
 1. Çağrı 200 Tamam yanıtı döndürtikten sonra hesabınız bağlanır.
 1. Bağlantınızı doğrulamak için [video Indexer](https://vi.microsoft.com/)) portalına gidin:
 1. Sağ üst köşedeki **içerik modeli özelleştirmesi** düğmesine tıklayın.
@@ -154,16 +154,16 @@ Dizin Oluşturucu ve model, Özel Görüntü İşleme Web sitesinde modeli eğme
     Video Indexer ücretli bir hesabınız varsa, önce bir Özel Görüntü İşleme hesabı bağlamanız gerekir. <br/>
     Zaten bir Özel Görüntü İşleme hesabınız yoksa lütfen bir tane oluşturun. Daha fazla bilgi için bkz. [özel görüntü işleme](../../cognitive-services/custom-vision-service/overview.md).
 
-    [API kullanarak özel görüntü işleme hesabınızı bağlayın](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Connect-Custom-Vision-Account?tags=&pattern=&groupBy=tag).
+    [API kullanarak özel görüntü işleme hesabınızı bağlayın](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Connect-Custom-Vision-Account).
 1. Bir animasyonlu karakter modeli oluşturun.
 
-    [Animasyon modeli oluşturma](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Create-Animation-Model?&groupBy=tag) API 'sini kullanın.
+    [Animasyon modeli oluşturma](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Create-Animation-Model) API 'sini kullanın.
 1. Videoyu dizine koyun veya yeniden dizine koyun.
 
-    [Yeniden dizin oluşturma](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-Index-Video?) API 'sini kullanın. 
+    [Yeniden dizin oluşturma](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Re-Index-Video) API 'sini kullanın. 
 1. Animasyonlu karakterler modellerini özelleştirin.
 
-    [Eğitme animasyon modeli](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Train-Animation-Model?&groupBy=tag) API 'sini kullanın.
+    [Eğitme animasyon modeli](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Train-Animation-Model) API 'sini kullanın.
 
 ### <a name="view-the-output"></a>Çıktıyı görüntüleme
 

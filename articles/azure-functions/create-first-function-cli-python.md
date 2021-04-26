@@ -6,16 +6,17 @@ ms.topic: quickstart
 ms.custom:
 - devx-track-python
 - devx-track-azurecli
+- devx-track-azurepowershell
 adobe-target: true
 adobe-target-activity: DocsExp–386541–A/B–Enhanced-Readability-Quickstarts–2.19.2021
 adobe-target-experience: Experience B
 adobe-target-content: ./create-first-function-cli-python-uiex
-ms.openlocfilehash: 1b6805434f8c697c1ea13925ee681fdc7b5f1a29
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b006f006c9fb45c9a7d80e815f95bec812e5ec3f
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101704761"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831843"
 ---
 # <a name="quickstart-create-a-python-function-in-azure-from-the-command-line"></a>Hızlı başlangıç: Azure 'da komut satırından bir Python işlevi oluşturma
 
@@ -180,7 +181,7 @@ Bu öğeleri oluşturmak için aşağıdaki komutları kullanın. Hem Azure CLı
     az login
     ```
 
-    [Az Login](/cli/azure/reference-index#az-login) komutu sizi Azure hesabınızda oturum açar.
+    [Az Login](/cli/azure/reference-index#az_login) komutu sizi Azure hesabınızda oturum açar.
 
     # <a name="azure-powershell"></a>[Azure PowerShell](#tab/azure-powershell) 
     ```azurepowershell
@@ -199,7 +200,7 @@ Bu öğeleri oluşturmak için aşağıdaki komutları kullanın. Hem Azure CLı
     az group create --name AzureFunctionsQuickstart-rg --location westeurope
     ```
  
-    [Az Group Create](/cli/azure/group#az-group-create) komutu bir kaynak grubu oluşturur. Genellikle kaynak grubunuzu ve kaynaklarınızı, komuttan döndürülen kullanılabilir bir bölgeyi kullanarak size yakın bir bölgede oluşturursunuz `az account list-locations` .
+    [Az Group Create](/cli/azure/group#az_group_create) komutu bir kaynak grubu oluşturur. Genellikle kaynak grubunuzu ve kaynaklarınızı, komuttan döndürülen kullanılabilir bir bölgeyi kullanarak size yakın bir bölgede oluşturursunuz `az account list-locations` .
 
     # <a name="azure-powershell"></a>[Azure PowerShell](#tab/azure-powershell)
 
@@ -222,7 +223,7 @@ Bu öğeleri oluşturmak için aşağıdaki komutları kullanın. Hem Azure CLı
     az storage account create --name <STORAGE_NAME> --location westeurope --resource-group AzureFunctionsQuickstart-rg --sku Standard_LRS
     ```
 
-    [Az Storage Account Create](/cli/azure/storage/account#az-storage-account-create) komutu depolama hesabı oluşturur. 
+    [Az Storage Account Create](/cli/azure/storage/account#az_storage_account_create) komutu depolama hesabı oluşturur. 
 
     # <a name="azure-powershell"></a>[Azure PowerShell](#tab/azure-powershell)
 

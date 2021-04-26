@@ -2,21 +2,21 @@
 title: AD FS uygulama kimlik doğrulamasını Azure Active Directory olarak taşıma
 description: Active Directory Federasyon Hizmetleri (AD FS) (AD FS) değiştirmek için Azure Active Directory kullanarak kullanıcılara tüm uygulamalarına çoklu oturum açma olanağı verme hakkında bilgi edinin.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: how-to
 ms.workload: identity
 ms.date: 03/01/2021
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: baselden
-ms.openlocfilehash: ee1d863ccb974b30213179a1aba9e27d5a3a2bda
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b0fd3dae2ff9c6de39462d19dc41a32ba51171e0
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103418464"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107534863"
 ---
 # <a name="moving-application-authentication-from-active-directory-federation-services-to-azure-active-directory"></a>Uygulama kimlik doğrulamasını Active Directory Federasyon Hizmetleri’nden Azure Active Directory’ye taşıma
 
@@ -177,7 +177,7 @@ Aşağıdaki protokol özelliklerini gerektiren uygulamalar bugün geçirilemez:
 
 Belirteç özellikleri 'nde aşağıdaki talepler gerektiren uygulamalar bugün geçirilemez.
 
-* Azure ad dizini dışındaki öznitelik depolarından gelen talepler, verilerin Azure AD ile eşitlenmediği durumlar değildir. Daha fazla bilgi için bkz. [Azure AD eşitleme API 'sine genel bakış](/graph/api/resources/synchronization-overview?view=graph-rest-beta).
+* Azure ad dizini dışındaki öznitelik depolarından gelen talepler, verilerin Azure AD ile eşitlenmediği durumlar değildir. Daha fazla bilgi için bkz. [Azure AD eşitleme API 'sine genel bakış](/graph/api/resources/synchronization-overview).
 * Dizin çoklu değer özniteliklerinin verilmesi. Örneğin, şu anda proxy adresleri için çok değerli bir talep yayınlıyoruz.
 
 ## <a name="map-app-settings-from-ad-fs-to-azure-ad"></a>AD FS uygulama ayarlarını Azure AD 'ye eşleyin

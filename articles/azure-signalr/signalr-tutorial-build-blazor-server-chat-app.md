@@ -6,12 +6,12 @@ ms.service: signalr
 ms.topic: tutorial
 ms.date: 09/09/2020
 ms.author: jixin
-ms.openlocfilehash: b0059e986b9a6ba8152a1a61f8d696f1caa4646a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a1423e8aaf4b50db94cda0b935a7b1658249893e
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97755914"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105726354"
 ---
 # <a name="tutorial-build-a-blazor-server-chat-app"></a>Öğretici: Blazor Server sohbet uygulaması oluşturma
 
@@ -361,7 +361,7 @@ Visual Studio 2019 sürüm 16.2.0 'den Azure SignalR hizmeti, derleme Web uygula
 
 ## <a name="publish-to-azure"></a>Azure’da Yayımlama
 
-   Şimdiye kadar, Blazor uygulaması yerel bir SignalR üzerinde çalışıyor ve Azure App Service 'e dağıtırken, bir Blazor Server uygulamasını çok sayıda eşzamanlı SignalR bağlantısına ölçeklendirmeye olanak tanıyan [Azure SignalR hizmetini](/aspnet/core/signalr/scale?view=aspnetcore-3.1#azure-signalr-service) kullanmanız önerilir. Ayrıca, SignalR hizmetinin küresel erişim ve yüksek performanslı veri merkezleri Coğrafya nedeniyle gecikme süresini azaltmaya önemli ölçüde yardımcı olur.
+   Şimdiye kadar, Blazor uygulaması yerel bir SignalR üzerinde çalışıyor ve Azure App Service 'e dağıtırken, bir Blazor Server uygulamasını çok sayıda eşzamanlı SignalR bağlantısına ölçeklendirmeye olanak tanıyan [Azure SignalR hizmetini](/aspnet/core/signalr/scale#azure-signalr-service) kullanmanız önerilir. Ayrıca, SignalR hizmetinin küresel erişim ve yüksek performanslı veri merkezleri Coğrafya nedeniyle gecikme süresini azaltmaya önemli ölçüde yardımcı olur.
 
 > [!IMPORTANT]
 > Blazor Server uygulamasında, Kullanıcı arabirimi durumları sunucu tarafında tutulur ve bu durumda sunucu yapışkan 'nin gerekli olduğu anlamına gelir. Tek bir App Server varsa, Server Sticky, tasarım tarafından yapılır. Ancak, birden çok uygulama sunucusu varsa, istemci anlaşması ve bağlantısının farklı sunuculara gidebilme ve Blazor uygulamasındaki UI hatalarına neden olabileceği bir şansınız vardır. Bu nedenle, aşağıdaki gibi sunucu Sticky Server 'ı etkinleştirmeniz gerekir `appsettings.json` :
@@ -385,7 +385,7 @@ Visual Studio 2019 sürüm 16.2.0 'den Azure SignalR hizmeti, derleme Web uygula
 
    Azure 'da, uygulamanızı otomatik olarak Azure SignalR hizmetine geçiş yapmak için hizmet bağımlılığı aşağıdaki işlemleri yapar.
 
-   * [`HostingStartupAssembly`](/aspnet/core/fundamentals/host/platform-specific-configuration?view=aspnetcore-3.1)Azure SignalR hizmetini kullanmak için güncelleştirin.
+   * [`HostingStartupAssembly`](/aspnet/core/fundamentals/host/platform-specific-configuration)Azure SignalR hizmetini kullanmak için güncelleştirin.
    * Azure SignalR hizmeti NuGet paketi başvurusunu ekleyin.
    * Bağımlılık ayarlarını kaydetmek için profil özelliklerini güncelleştirin.
    * Gizli dizileri Yapılandır deposu, seçtiğiniz seçeneğe bağlıdır.
@@ -423,10 +423,10 @@ Visual Studio 2019 sürüm 16.2.0 'den Azure SignalR hizmeti, derleme Web uygula
    }
    ```
 
-1. Azure SignalR hizmetini `ConnectionString` `appsetting.json` [gizli yönetici](/aspnet/core/security/app-secrets?tabs=visual-studio&view=aspnetcore-3.1#secret-manager) aracında veya içinde yapılandırma
+1. Azure SignalR hizmetini `ConnectionString` `appsetting.json` [gizli yönetici](/aspnet/core/security/app-secrets?tabs=visual-studio#secret-manager) aracında veya içinde yapılandırma
 
 > [!NOTE]
-> 2. adım, [`HostingStartupAssembly`](/aspnet/core/fundamentals/host/platform-specific-configuration?view=aspnetcore-3.1) SignalR SDK için kullanılarak değiştirilebilir.
+> 2. adım, [`HostingStartupAssembly`](/aspnet/core/fundamentals/host/platform-specific-configuration) SignalR SDK için kullanılarak değiştirilebilir.
 > 
 > 1. İçinde Azure SignalR hizmetini açmak için yapılandırma Ekle `appsetting.json`
 >    ```js

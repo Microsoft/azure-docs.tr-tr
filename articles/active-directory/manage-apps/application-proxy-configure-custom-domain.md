@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 10/24/2019
 ms.author: kenwith
 ms.reviewer: japere
-ms.openlocfilehash: 49edab5ed20749cb705d160e5cdc46a16bdee951
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: dadb23b9a8d00d484a9c42db9007d8c5b94b4c78
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99258040"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306798"
 ---
 # <a name="configure-custom-domains-with-azure-ad-application-proxy"></a>Azure AD Uygulama Ara Sunucusu ile özel etki alanlarını yapılandırma
 
@@ -90,7 +90,7 @@ Uygulamanızı özel bir etki alanı ile uygulama proxy 'Si aracılığıyla yay
    
    ![Sertifikayı karşıya yüklemek için tıklayın](./media/application-proxy-configure-custom-domain/certificate.png)
    
-7. **SSL sertifikası** SAYFASıNDA, PFX Sertifika dosyanıza gidin ve seçin. Sertifika için parola girin ve **sertifikayı karşıya yükle**' yi seçin. Sertifikalar hakkında daha fazla bilgi için bkz. [özel etki alanları Için sertifikalar](#certificates-for-custom-domains) bölümü. Sertifika geçerli değilse veya parolayla ilgili bir sorun varsa, bir hata iletisi görürsünüz. [Uygulama proxy 'SI SSS](application-proxy-faq.md#application-configuration) , deneyebileceğiniz bazı sorun giderme adımları içerir.
+7. **SSL sertifikası** SAYFASıNDA, PFX Sertifika dosyanıza gidin ve seçin. Sertifika için parola girin ve **sertifikayı karşıya yükle**' yi seçin. Sertifikalar hakkında daha fazla bilgi için bkz. [özel etki alanları Için sertifikalar](#certificates-for-custom-domains) bölümü. Sertifika geçerli değilse veya parolayla ilgili bir sorun varsa, bir hata iletisi görürsünüz. [Uygulama proxy 'SI SSS](application-proxy-faq.yml#application-configuration) , deneyebileceğiniz bazı sorun giderme adımları içerir.
    
    ![Sertifikayı karşıya yükle](./media/application-proxy-configure-custom-domain/ssl-certificate.png)
    

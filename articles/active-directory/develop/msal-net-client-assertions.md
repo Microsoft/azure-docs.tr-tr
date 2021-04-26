@@ -13,12 +13,12 @@ ms.date: 03/18/2021
 ms.author: jmprieur
 ms.reviewer: saeeda
 ms.custom: devx-track-csharp, aaddev
-ms.openlocfilehash: 8fb4ecb8fa8d6938e9afbc77064380b7b213029a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 000aeffa982c59f1efbb6ecae73f6b48e95f981e
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104578745"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105967328"
 ---
 # <a name="confidential-client-assertions"></a>Gizli istemci onayları
 
@@ -130,11 +130,11 @@ string GetSignedClientAssertion()
     var header = new Dictionary<string, string>()
          {
               { "alg", "RS256"},
-              { "kid", Encode(Certificate.GetCertHash()) }
+              { "kid", Encode(certificate.GetCertHash()) }
          };
 
     //Please see the previous code snippet on how to craft claims for the GetClaims() method
-    string token = Encode(Encoding.UTF8.GetBytes(JObject.FromObject(header).ToString())) + "." + Encode(Encoding.UTF8.GetBytes(JObject.FromObject(GetClaims())));
+    string token = Encode(Encoding.UTF8.GetBytes(JObject.FromObject(header).ToString())) + "." + Encode(Encoding.UTF8.GetBytes(JObject.FromObject(GetClaims()).ToString()));
 
     string signature = Encode(rsa.SignData(Encoding.UTF8.GetBytes(token), new SHA256Cng()));
     string signedClientAssertion = string.Concat(token, ".", signature);

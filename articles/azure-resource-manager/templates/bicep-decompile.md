@@ -4,10 +4,10 @@ description: Bıcep 'den JSON 'a ve JSON 'dan Bıcep 'ye Azure Resource Manager 
 ms.topic: conceptual
 ms.date: 03/12/2021
 ms.openlocfilehash: 6d242f5846996cd0f5b9510a1a2b9f2bf063a0c7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103422226"
 ---
 # <a name="converting-arm-templates-between-json-and-bicep"></a>JSON ile Bıcep arasında ARM şablonlarını dönüştürme

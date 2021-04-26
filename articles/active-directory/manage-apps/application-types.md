@@ -2,20 +2,20 @@
 title: Kimlik yönetimi için Azure Active Directory kiracınızı kullanarak uygulamaları görüntüleme
 description: Kimlik yönetimi için Azure Active Directory kiracınızı kullanarak tüm uygulamaları görüntülemeyi öğrenin.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: reference
 ms.date: 01/07/2021
-ms.author: kenwith
-ms.openlocfilehash: 443e8c83ec29f9f0478e3881b9e6d6a8eb0bf403
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.author: iangithinji
+ms.openlocfilehash: b11f2dab97b3c45502c6050e06f0f39312f8c3c0
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99259795"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378083"
 ---
 # <a name="viewing-apps-using-your-azure-ad-tenant-for-identity-management"></a>Kimlik yönetimi için Azure AD kiracınızı kullanarak uygulamaları görüntüleme
 [Uygulama yönetiminde hızlı başlangıç serisi](view-applications-portal.md) size temel bilgileri gösterir. Bu durumda, kimlik yönetimi için Azure AD kiracınızı kullanarak tüm uygulamaları görüntülemeyi öğreneceksiniz. Bu makale, bulacağınız uygulama türlerinin biraz daha ayrıntılı bir şekilde bir bölümünü ele alır.

@@ -8,13 +8,12 @@ ms.subservice: edge
 ms.topic: tutorial
 ms.date: 03/16/2021
 ms.author: alkohli
-Customer intent: As an IT admin, I need to understand how to prepare the portal to deploy Azure Stack Edge Pro so I can use it to transfer data to Azure.
-ms.openlocfilehash: 9ceba84cb3bbe52dc5ba51d0f4945f5bad0a5034
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0e0d7808e449a6e4f3e341cd40acdc220e65c0ba
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103574005"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106068226"
 ---
 # <a name="tutorial-prepare-to-deploy-azure-stack-edge-pro"></a>Öğretici: Azure Stack Edge Pro 'Yu dağıtmaya hazırlanma  
 

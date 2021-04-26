@@ -5,19 +5,19 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: B2B
 ms.topic: conceptual
-ms.date: 10/20/2020
+ms.date: 04/12/2021
 ms.author: mimart
 author: msmimart
 manager: celestedg
 ms.reviewer: mal
 ms.custom: it-pro, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: bb134a2fb784e02f5e00c9e88ab0df1794489e0c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fc80c208b5a48a45b8c47d640dc381f5559c3d4d
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96860601"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304775"
 ---
 # <a name="the-elements-of-the-b2b-collaboration-invitation-email---azure-active-directory"></a>B2B işbirliği davetiyesi e-postası öğeleri-Azure Active Directory
 
@@ -38,6 +38,9 @@ E-postanın konusu bu düzene uyar:
 ### <a name="from-address"></a>Kimden adresi
 
 Kimden adresi için LinkedIn benzeri bir model kullanıyoruz. Bu düzen, e-postanın kaynağından geldiğinden invites@microsoft.com , davetin başka bir kuruluştan geldiğinden emin olmak için bunu temizlemelidir. Biçim: Microsoft davetleri  <invites@microsoft.com> veya Microsoft davetleri, &lt; TenantName adına &gt;  <invites@microsoft.com> . 
+
+> [!NOTE]
+> Çin 'de 21Vianet tarafından işletilen Azure hizmeti için gönderici adresi olur Invites@oe.21vianet.com .
 
 ### <a name="reply-to"></a>Yanıtla
 

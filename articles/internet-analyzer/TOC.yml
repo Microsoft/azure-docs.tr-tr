@@ -25,7 +25,7 @@
     - name: Internet Analyzer sorunlarını giderme
       href: troubleshoot.md
     - name: Internet Analyzer CLI başvurusu
-      href: /cli/azure/ext/internet-analyzer/internet-analyzer
+      href: /cli/azure/internet-analyzer
     - name: Azure Yol Haritası
       href: 'https://azure.microsoft.com/roadmap/?category=networking'
     - name: Blog

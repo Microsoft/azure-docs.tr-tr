@@ -1,5 +1,5 @@
 ---
-title: Azure API Management ile gelişmiş istek kısıtlama
+title: Azure API Management Gelişmiş istek azaltma
 description: Azure API Management ile esnek kota ve hız sınırlaması ilkeleri oluşturmayı ve uygulamayı öğrenin.
 services: api-management
 documentationcenter: ''
@@ -15,14 +15,14 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/03/2018
 ms.author: apimpm
-ms.openlocfilehash: 36b21196207f65975dae950f43ec0c7094991dad
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 3f91ed2238a7a23b967cd3e3556c8ade88af0044
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100362038"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449741"
 ---
-# <a name="advanced-request-throttling-with-azure-api-management"></a>Azure API Management ile gelişmiş istek kısıtlama
+# <a name="advanced-request-throttling-with-azure-api-management"></a>Azure API Management Gelişmiş istek azaltma
 Gelen istekleri kısıtlayamaz, Azure API Management 'nin önemli bir rolü bulunur. İsteklerin oranını veya aktarılan toplam istek/veri sayısını denetleyerek API Management, API sağlayıcılarının API 'Lerini uygunsuz bir şekilde korumasına ve farklı API ürün katmanları için değer oluşturmasına izin verir.
 
 ## <a name="rate-limits-and-quotas"></a>Oran limitleri ve kotaları
@@ -91,7 +91,7 @@ Daraltma anahtarı bir [ilke ifadesi](./api-management-policy-expressions.md)kul
 Bu, geliştiricinin istemci uygulamasının hız sınırlaması anahtarını nasıl oluşturmak istediğini seçmesini sağlar. İstemci geliştiricileri kullanıcılara anahtar kümeleri ayırarak ve anahtar kullanımını döndürerek kendi hız katmanlarını oluşturabilir.
 
 ## <a name="summary"></a>Özet
-Azure API Management hem koruma hem de API hizmetinize değer ekleme için fiyat ve teklif azaltma sağlar. Özel kapsam kuralları olan yeni kısıtlama ilkeleri, müşterilerinizin daha iyi uygulamalar oluşturmasını sağlamak için bu ilkeler üzerinde daha ayrıntılı denetim imkanı sağlar. Bu makaledeki örneklerde, istemci IP adresleri, Kullanıcı kimliği ve istemci tarafından oluşturulan değerler ile anahtarları sınırlandırma ile ayırarak bu yeni ilkelerin kullanımı gösterilmektedir. Ancak, iletinin Kullanıcı Aracısı, URL yol parçaları, ileti boyutu gibi kullanılabilecek birçok farklı bölümü vardır.
+Azure API Management, API hizmetinize hem koruma hem de değer ekleme için ücret ve kota azaltma sağlar. Özel kapsam kuralları olan yeni kısıtlama ilkeleri, müşterilerinizin daha iyi uygulamalar oluşturmasını sağlamak için bu ilkeler üzerinde daha ayrıntılı denetim imkanı sağlar. Bu makaledeki örneklerde, istemci IP adresleri, Kullanıcı kimliği ve istemci tarafından oluşturulan değerler ile anahtarları sınırlandırma ile ayırarak bu yeni ilkelerin kullanımı gösterilmektedir. Ancak, iletinin Kullanıcı Aracısı, URL yol parçaları, ileti boyutu gibi kullanılabilecek birçok farklı bölümü vardır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Lütfen bu konuda bir GitHub sorunu olarak bize geri bildirimde bulunun. Senaryolarınızda mantıklı bir seçenek olan diğer olası anahtar değerlerini öğrenmek harika olacaktır.

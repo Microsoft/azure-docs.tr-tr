@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/30/2016
 ms.author: allensu
-ms.openlocfilehash: a0dab64aac8bc5fa68a53fad6cd8e6f6bb4bac03
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 050d3ac23562e7822d186a16675d03c1b9dc670b
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98217150"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739215"
 ---
 # <a name="assign-multiple-ip-addresses-to-virtual-machines-using-the-azure-portal"></a>Azure portal kullanarak sanal makinelere birden çok IP adresi atama
 
@@ -102,6 +102,9 @@ Genel IP adresi, genel IP adresi kaynağı için bir ayardır. IP yapılandırma
 5. **Kaydet** ' e tıklayın ve bölmeler kapanır. Mevcut bir genel IP adresiniz yoksa, bu makalenin [genel IP adresi kaynağı oluşturma](#create-public-ip) bölümündeki adımları tamamlayarak bir tane oluşturabilirsiniz.
 3. Yeni IP yapılandırmasını gözden geçirin.
 4. Ek IP yapılandırması eklemek için **Ekle** ' ye TıKLAYABILIR veya IP adresleri ekleme işleminin tamamlanabilmesi için tüm açık kanları kapatabilirsiniz. Genel IP adresini işletim sistemine eklemeyin.
+
+> [!NOTE]
+> IP adresi yapılandırmasını değiştirdikten sonra değişikliklerin VM 'de etkili olması için VM 'yi yeniden başlatmanız gerekir.
 
 
 [!INCLUDE [virtual-network-multiple-ip-addresses-os-config.md](../../includes/virtual-network-multiple-ip-addresses-os-config.md)]

@@ -6,15 +6,15 @@ author: msmbaldwin
 ms.service: key-vault
 ms.subservice: general
 ms.topic: tutorial
-ms.date: 07/20/2020
+ms.date: 03/17/2021
 ms.author: mbaldwin
-ms.custom: mvc, devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: a56c08e5bf6054d24af3ade571ec625969286a77
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.custom: mvc, devx-track-csharp, devx-track-azurepowershell
+ms.openlocfilehash: ba299ff52ccdf811d739efdb1d379889444a02b8
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102455653"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868402"
 ---
 # <a name="tutorial-use-azure-key-vault-with-a-virtual-machine-in-net"></a>Öğretici: .NET 'teki bir sanal makine ile Azure Key Vault kullanma
 
@@ -42,7 +42,7 @@ Azure aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free
 Windows, Mac ve Linux için:
   * [Git](https://git-scm.com/downloads)
   * [.NET Core 3,1 SDK veya üzeri](https://dotnet.microsoft.com/download/dotnet-core/3.1).
-  * [Azure CLI](/cli/azure/install-azure-cli).
+  * [Azure CLI](/cli/azure/install-azure-cli) veya [Azure PowerShell](/powershell/azure/install-az-ps)
 
 ## <a name="create-resources-and-assign-permissions"></a>Kaynak oluşturma ve izin atama
 
@@ -50,11 +50,18 @@ Kodlamaya başlamadan önce bazı kaynaklar oluşturmanız, anahtar kasanıza bi
 
 ### <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
-Azure CLı kullanarak Azure 'da oturum açmak için şunu girin:
+Aşağıdaki komutu kullanarak Azure 'da oturum açmak için:
 
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az login
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Connect-AzAccount
+```
+---
 
 ## <a name="create-a-resource-group-and-key-vault"></a>Kaynak grubu ve Anahtar Kasası oluşturma
 
@@ -74,13 +81,14 @@ Aşağıdaki yöntemlerden birini kullanarak bir Windows veya Linux sanal makine
 | [Azure portalı](../../virtual-machines/windows/quick-create-portal.md) | [Azure portalı](../../virtual-machines/linux/quick-create-portal.md) |
 
 ## <a name="assign-an-identity-to-the-vm"></a>VM 'ye bir kimlik atama
-[Az VM Identity Assign](/cli/azure/vm/identity#az-vm-identity-assign) komutuyla sanal makine için sistem tarafından atanan bir kimlik oluşturun:
+Aşağıdaki örneğe sahip sanal makine için sistem tarafından atanan bir kimlik oluşturun:
 
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az vm identity assign --name <NameOfYourVirtualMachine> --resource-group <YourResourceGroupName>
 ```
 
-Aşağıdaki kodda görüntülenen sistem tarafından atanan kimliği unutmayın. Yukarıdaki komutun çıkışı şöyle olacaktır: 
+Aşağıdaki kodda görüntülenen sistem tarafından atanan kimliği unutmayın. Yukarıdaki komutun çıkışı şöyle olacaktır:
 
 ```output
 {
@@ -89,12 +97,36 @@ Aşağıdaki kodda görüntülenen sistem tarafından atanan kimliği unutmayın
 }
 ```
 
-## <a name="assign-permissions-to-the-vm-identity"></a>VM kimliğine izin atama
-[Az keykasası Set-Policy](/cli/azure/keyvault#az-keyvault-set-policy) komutuyla anahtar kasanıza önceden oluşturulmuş kimlik izinlerini atayın:
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
 
-```azurecli
-az keyvault set-policy --name '<your-unique-key-vault-name>' --object-id <VMSystemAssignedIdentity> --secret-permissions get list
+```azurepowershell
+$vm = Get-AzVM -Name <NameOfYourVirtualMachine>
+Update-AzVM -ResourceGroupName <YourResourceGroupName> -VM $vm -IdentityType SystemAssigned
 ```
+
+Aşağıdaki kodda görüntülenen PrincipalId ' i unutmayın. Yukarıdaki komutun çıkışı şöyle olacaktır: 
+
+
+```output
+PrincipalId          TenantId             Type             UserAssignedIdentities
+-----------          --------             ----             ----------------------
+xxxxxxxx-xx-xxxxxx   xxxxxxxx-xxxx-xxxx   SystemAssigned
+```
+---
+
+## <a name="assign-permissions-to-the-vm-identity"></a>VM kimliğine izin atama
+[Az keykasası Set-Policy](/cli/azure/keyvault#az_keyvault_set_policy) komutuyla anahtar kasanıza önceden oluşturulmuş kimlik izinlerini atayın:
+
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+```azurecli
+az keyvault set-policy --name '<your-unique-key-vault-name>' --object-id <VMSystemAssignedIdentity> --secret-permissions  get list set delete
+```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+Set-AzKeyVaultAccessPolicy -ResourceGroupName <YourResourceGroupName> -VaultName '<your-unique-key-vault-name>' -ObjectId '<VMSystemAssignedIdentity>' -PermissionsToSecrets  get,list,set,delete
+```
+---
 
 ## <a name="sign-in-to-the-virtual-machine"></a>Sanal makinede oturum açın
 
@@ -106,7 +138,7 @@ Bir konsol uygulaması oluşturun ve komutunu kullanarak gerekli paketleri yükl
 
 ### <a name="install-net-core"></a>.NET Core'u yükleyin
 
-.NET Core 'u yüklemek için [.net İndirmeleri](https://www.microsoft.com/net/download) sayfasına gidin.
+.NET Core 'u yüklemek için [.net İndirmeleri](https://dotnet.microsoft.com/download) sayfasına gidin.
 
 ### <a name="create-and-run-a-sample-net-app"></a>Örnek bir .NET uygulaması oluşturma ve çalıştırma
 
@@ -153,7 +185,7 @@ Bu satırları ekleyin ve URI 'yi `vaultUri` anahtar kasanızın sayısını yan
         static void Main(string[] args)
         {
             string secretName = "mySecret";
-
+            string keyVaultName = "<your-key-vault-name>";
             var kvUri = "https://<your-key-vault-name>.vault.azure.net";
             SecretClientOptions options = new SecretClientOptions()
             {

@@ -8,12 +8,12 @@ ms.date: 01/04/2019
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 517bcdab375db819b0942306df82e7285b9473b1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1070a5ddf298ad88100e7803635e970f9a314e52
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103487709"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869590"
 ---
 # <a name="prepare-your-development-and-test-environment-for-iot-edge"></a>Geliştirme ve test ortamınızı IoT Edge için hazırlama
 
@@ -57,9 +57,9 @@ Bazı diller ve hizmetlerde modül şablonlarının, Visual Studio Code ile geli
 
 | Modül şablonu | Önkoşul |
 | --------------- | ------------ |
-| Azure İşlevleri | [.NET Core 2,1 SDK](https://www.microsoft.com/net/download) |
+| Azure İşlevleri | [.NET Core 2,1 SDK](https://dotnet.microsoft.com/download/dotnet/2.1) |
 | C | [Git](https://git-scm.com/) |
-| C# | [.NET Core 2,1 SDK](https://www.microsoft.com/net/download) |
+| C# | [.NET Core 2,1 SDK](https://dotnet.microsoft.com/download/dotnet/2.1) |
 | Java | <ul><li>[Java SE Development Kit 10](/azure/developer/java/fundamentals/java-jdk-long-term-support) <li> [JAVA_HOME ortam değişkenini ayarlama](https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/) <li> [Maven](https://maven.apache.org/)</ul> |
 | Node.js | <ul><li>[Node.js](https://nodejs.org/) <li> [Yeoman](https://www.npmjs.com/package/yo) <li> [Azure IoT Edge Node.js modül Oluşturucusu](https://www.npmjs.com/package/generator-azure-iot-edge-module)</ul> |
 | Python |<ul><li> [Python](https://www.python.org/downloads/) <li> [Pip](https://pip.pypa.io/en/stable/installing/#installation) <li> [Git](https://git-scm.com/) </ul> |
@@ -123,5 +123,4 @@ Daha fazla bilgi, kılavuz ve örnekler için aşağıdaki sayfalara bakın:
 
 * [Azure IoT Edge için sürekli tümleştirme ve sürekli dağıtım](how-to-continuous-integration-continuous-deployment.md)
 * [Azure DevOps Starter ile IoT Edge için bir CI/CD işlem hattı oluşturma](how-to-devops-starter.md)
-* [Jenkins eklentisi Azure IoT Edge](https://plugins.jenkins.io/azure-iot-edge)
 * [IoT Edge DevOps GitHub deposu](https://github.com/toolboc/IoTEdge-DevOps)

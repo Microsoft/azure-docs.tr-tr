@@ -3,12 +3,12 @@ title: Azure Dayanıklı İşlevler birim testi
 description: Birim testi Dayanıklı İşlevler nasıl yapılacağını öğrenin.
 ms.topic: conceptual
 ms.date: 11/03/2019
-ms.openlocfilehash: 89b6419e95b3971b0d272490e19354f300204e1e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fe5a25e0296eb183ef2426e12f7bdee35633ec78
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103491053"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076641"
 ---
 # <a name="durable-functions-unit-testing"></a>Dayanıklı İşlevler birim testi
 
@@ -33,13 +33,13 @@ Bu makaledeki örneklerde aşağıdaki kavramlar ve çerçeveler hakkında bilgi
 
 Mocking aşağıdaki arabirim aracılığıyla desteklenir:
 
-* [Idurableorchestrationclient](/dotnet/api/microsoft.azure.webjobs.IDurableOrchestrationClient), [ıdurableentityclient](/dotnet/api/microsoft.azure.webjobs.IDurableEntityClient) ve [ıdurableclient](/dotnet/api/microsoft.azure.webjobs.IDurableClient)
+* [Idurableorchestrationclient](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableorchestrationclient), [ıdurableentityclient](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableentityclient) ve [ıdurableclient](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableclient)
 
-* [Idurableorchestrationcontext](/dotnet/api/microsoft.azure.webjobs.IDurableOrchestrationContext)
+* [Idurableorchestrationcontext](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableorchestrationcontext)
 
-* [Idurableactivitycontext](/dotnet/api/microsoft.azure.webjobs.IDurableActivityContext)
+* [Idurableactivitycontext](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableactivitycontext)
   
-* [Idurableentitycontext](/dotnet/api/microsoft.azure.webjobs.IDurableEntityContext)
+* [Idurableentitycontext](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableentitycontext)
 
 Bu arabirimler, Dayanıklı İşlevler tarafından desteklenen çeşitli tetikleyici ve bağlamalarla birlikte kullanılabilir. Azure Işlevlerinizi yürütürken, işlevler çalışma zamanı, işlev kodunuzu bu arabirimlerin somut bir uygulamasıyla çalıştırır. Birim testi için, iş mantığınızı test etmek üzere bu arabirimlerin bir moclenmiş sürümünü geçirebilirsiniz.
 

@@ -7,14 +7,14 @@ manager: mtillman
 ms.service: role-based-access-control
 ms.topic: how-to
 ms.workload: identity
-ms.date: 02/15/2021
+ms.date: 04/14/2021
 ms.author: rolyon
-ms.openlocfilehash: 081335779ffc4b3a6ddf09e56b773c6d34b210be
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 40a17da6383fb1f368c74a82fefa71991cdc1b19
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100556046"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107517683"
 ---
 # <a name="steps-to-assign-an-azure-role"></a>Azure rolü atama adımları
 
@@ -78,6 +78,8 @@ Rolleri atamak için, rol atamaya çalıştığınız kapsamda [sahip](built-in-
 - `Microsoft.Authorization/roleAssignments/delete`
 
 Kullanıcı hesabınızın aboneliğiniz dahilinde rol atama izni yoksa, hesabınızın "Microsoft. Authorization/Roleatamaları/Write ' işlemini gerçekleştirmek için yetkilendirmeye sahip olmadığını belirten bir hata iletisi görürsünüz. Bu durumda, sizin adınıza izinleri atayabilecekleri için aboneliğinizin yöneticilerine başvurun.
+
+Rol atamak için bir hizmet sorumlusu kullanıyorsanız, "işlemi tamamlamaya yönelik ayrıcalıklar yetersiz" hatasını alabilirsiniz. Bu hata, Azure 'un Azure Active Directory (Azure AD) ' de atanan kimliğe bakmaya çalışıyor olması ve hizmet sorumlusu varsayılan olarak Azure AD 'yi okuyamadığından kaynaklanıyor olabilir. Bu durumda, dizindeki verileri okumak için hizmet sorumlusu izinleri vermeniz gerekir. Alternatif olarak, Azure CLı kullanıyorsanız, Azure AD aramasını atlamak için atane nesne KIMLIĞINI kullanarak rol atamasını oluşturabilirsiniz. Daha fazla bilgi için bkz. [Azure RBAC sorunlarını giderme](troubleshooting.md).
 
 ## <a name="step-5-assign-role"></a>5. Adım. Rol atama
 

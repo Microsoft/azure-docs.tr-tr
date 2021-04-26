@@ -1,16 +1,16 @@
 ---
-title: Aracı tabanlı çözüm mimarisi
+title: Aracı tabanlı çözüm mimarisi nedir?
 description: IoT Aracısı tabanlı mimari ve bilgi akışı için Azure Defender hakkında bilgi edinin.
 ms.topic: overview
 ms.date: 1/25/2021
-ms.openlocfilehash: b04e8fa6225aef9f3c228a44631f117fedffccff
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: e08c3f151c3d3bc4fe08e61d960874b07f5b63e8
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104784892"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106383533"
 ---
-# <a name="agent-based-solution-for-device-builders"></a>Cihaz oluşturucular için aracı tabanlı çözüm
+# <a name="what-is-agent-based-solution-for-device-builders"></a>Cihaz oluşturucular için aracı tabanlı çözüm nedir?
 
 Bu makalede, IoT Aracısı tabanlı çözüm için Defender 'ın işlevsel sistem mimarisi açıklanmaktadır. IoT için Azure Defender, ortamınızın ihtiyaçlarını, kuruluşların aracısız çözümünü ve cihaz oluşturucuları için aracı tabanlı çözümü sunan iki özellik kümesi sunar.
 
@@ -34,7 +34,7 @@ Her müşterinin Log Analytics çalışma alanına IoT önerileri ve uyarıları
 
 :::image type="content" source="media/architecture/micro-agent-architecture.png" alt-text="Mikro aracı mimarisi.":::
 
-## <a name="see-also"></a>Ayrıca bkz.
+## <a name="next-steps"></a>Sonraki adımlar
 
 [IoT için Defender SSS](resources-frequently-asked-questions.md)
 

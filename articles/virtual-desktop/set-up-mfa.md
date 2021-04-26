@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 12/10/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 00aba5d169a05eab25dcc63ca813955e71d09598
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+manager: femila
+ms.openlocfilehash: 7ebf38226ff725865104707a3f28e7ce51a86c31
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97092389"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445661"
 ---
 # <a name="enable-azure-multifactor-authentication-for-windows-virtual-desktop"></a>Windows sanal masaüstü için Azure çok faktörlü kimlik doğrulamasını etkinleştirme
 

@@ -13,12 +13,12 @@ ms.custom:
 - mqtt
 - 'Role: Cloud Development'
 - 'Role: System Architecture'
-ms.openlocfilehash: a58e141c6232db08b125b265e3d4ad74c784ba24
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: d2b9ea2e075ddcf20860ccb9ab1f2eff654993ad
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92152186"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107499385"
 ---
 # <a name="reference---iot-hub-endpoints"></a>Başvuru IoT Hub uç noktaları
 
@@ -76,7 +76,7 @@ Tüm IoT Hub uç noktaları [TLS](https://tools.ietf.org/html/rfc5246) protokol�
 
 ## <a name="custom-endpoints"></a>Özel uç noktalar
 
-İleti yönlendirme için uç noktalar olarak davranacak şekilde, aboneliğinizdeki mevcut Azure hizmetlerini IoT Hub 'ınıza bağlayabilirsiniz. Bu uç noktalar hizmet uç noktaları gibi davranır ve ileti yollarının havuzları olarak kullanılır. Cihazlar, ek uç noktalara doğrudan yazamaz. [İleti yönlendirme](../iot-hub/iot-hub-devguide-messages-d2c.md)hakkında daha fazla bilgi edinin.
+İleti yönlendirme için uç noktalar olarak davranacak Azure aboneliklerinizde mevcut Azure hizmetlerini IoT Hub 'ınıza bağlayabilirsiniz. Bu uç noktalar hizmet uç noktaları gibi davranır ve ileti yollarının havuzları olarak kullanılır. Cihazlar, ek uç noktalara doğrudan yazamaz. [İleti yönlendirme](../iot-hub/iot-hub-devguide-messages-d2c.md)hakkında daha fazla bilgi edinin.
 
 IoT Hub Şu anda ek uç noktalar olarak aşağıdaki Azure hizmetlerini desteklemektedir:
 

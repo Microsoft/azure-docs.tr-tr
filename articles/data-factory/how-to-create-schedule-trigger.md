@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.date: 10/30/2020
 ms.custom: devx-track-python
 ms.openlocfilehash: 4bf5e9e1e890b2f91377075c4c8b7c8ff6c50fa0
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104779860"
 ---
 # <a name="create-a-trigger-that-runs-a-pipeline-on-a-schedule"></a>Zamanlamaya göre işlem hattı çalıştıran bir tetikleyici oluşturma
@@ -350,7 +350,7 @@ Aşağıdaki JSON tanımı, zamanlama ve yinelenme ile bir zamanlama tetikleyici
 
 Aşağıdaki tabloda bir tetikleyicinin yinelenmesi ve zamanlanmasıyla ilgili ana şema öğelerinin genel bir özeti verilmiştir:
 
-| JSON özelliği | Açıklama |
+| JSON özelliği | Description |
 |:--- |:--- |
 | **startTime** | Bir Tarih-Saat değeri. Basit zamanlamalar için **startTime** özelliğinin değeri ilk oluşum için geçerli olur. Karmaşık zamanlamalar için tetikleyici belirtilen **startTime** değerinden önce başlamaz. <br> UTC saat dilimi için biçim, `'yyyy-MM-ddTHH:mm:ssZ'` diğer saat dilimi için biçimindedir `'yyyy-MM-ddTHH:mm:ss'` . |
 | **endTime** | Tetikleyicinin bitiş tarihi ve saati. Tetikleyici belirtilen bitiş tarihi ve saatinden sonra yürütülmez. Bu özelliğin değeri geçmişte olamaz. Bu özellik isteğe bağlıdır.  <br> UTC saat dilimi için biçim, `'yyyy-MM-ddTHH:mm:ssZ'` diğer saat dilimi için biçimindedir `'yyyy-MM-ddTHH:mm:ss'` . |
@@ -372,9 +372,9 @@ Aşağıdaki tabloda bir tetikleyicinin yinelenmesi ve zamanlanmasıyla ilgili a
 | **startTime** | Dize | Yes | Yok | ISO-8601 Tarih-Saatleri | UTC saat dilimi için `"startTime" : "2013-01-09T09:30:00-08:00Z"` <br> diğer saat dilimi için `"2013-01-09T09:30:00-08:00"` |
 | **TI** | Dize | Yes | Yok | [Saat dilimi değerleri](#time-zone-option)  | `"UTC"` |
 | **yinelemeyi** | Nesne | Yes | Yok | Yinelenme nesnesi | `"recurrence" : { "frequency" : "monthly", "interval" : 1 }` |
-| **aralığında** | Sayı | Hayır | 1 | 1-1.000 | `"interval":10` |
+| **aralığında** | Sayı | No | 1 | 1-1.000 | `"interval":10` |
 | **endTime** | Dize | Yes | Yok | Gelecekteki bir zamanı temsil eden Tarih-Saat değeri. | UTC saat dilimi için `"endTime" : "2013-02-09T09:30:00-08:00Z"` <br> diğer saat dilimi için `"endTime" : "2013-02-09T09:30:00-08:00"`|
-| **çizelgesini** | Nesne | Hayır | Yok | Zamanlama nesnesi | `"schedule" : { "minute" : [30], "hour" : [8,17] }` |
+| **çizelgesini** | Nesne | No | Yok | Zamanlama nesnesi | `"schedule" : { "minute" : [30], "hour" : [8,17] }` |
 
 ### <a name="time-zone-option"></a>Saat dilimi seçeneği
 
@@ -382,14 +382,14 @@ Zamanlama Tetikleyicileri için desteklenen bazı saat dilimleri aşağıda veri
 
 | Saat Dilimi | UTC kayması (yaz dışı kaydetme) | Saat dilimi değeri | Yaz 'ın kaydedilmesini gözlemleyin | Zaman damgası biçimi |
 | :--- | :--- | :--- | :--- | :--- |
-| Eşgüdümlü Evrensel Saat | 0 | `UTC` | Hayır | `'yyyy-MM-ddTHH:mm:ssZ'`|
+| Eşgüdümlü Evrensel Saat | 0 | `UTC` | No | `'yyyy-MM-ddTHH:mm:ssZ'`|
 | Pasifik saati (PT) | -8 | `Pacific Standard Time` | Yes | `'yyyy-MM-ddTHH:mm:ss'` |
 | Orta saat (CT) | -6 | `Central Standard Time` | Yes | `'yyyy-MM-ddTHH:mm:ss'` |
 | Doğu saati (ET) | -5 | `Eastern Standard Time` | Yes | `'yyyy-MM-ddTHH:mm:ss'` |
 | Greenwich saati (GMT) | 0 | `GMT Standard Time` | Yes | `'yyyy-MM-ddTHH:mm:ss'` |
 | Orta Avrupa standart saati | +1 | `W. Europe Standard Time` | Yes | `'yyyy-MM-ddTHH:mm:ss'` |
-| Hindistan Standart Saati (IST) | + 5:30 | `India Standard Time` | Hayır | `'yyyy-MM-ddTHH:mm:ss'` |
-| Çin standart saati | + 8 | `China Standard Time` | Hayır | `'yyyy-MM-ddTHH:mm:ss'` |
+| Hindistan Standart Saati (IST) | + 5:30 | `India Standard Time` | No | `'yyyy-MM-ddTHH:mm:ss'` |
+| Çin standart saati | + 8 | `China Standard Time` | No | `'yyyy-MM-ddTHH:mm:ss'` |
 
 Bu liste eksik. Saat dilimi seçeneklerinin tüm listesi için Data Factory Portal [tetikleyicisi oluşturma sayfasında](#data-factory-ui) araştırma yapın
 
@@ -419,7 +419,7 @@ Birden fazla **schedule** öğesi belirtilmişse değerlendirme sırası en büy
 
 Aşağıdaki tabloda **schedule** öğeleri ayrıntılı bir şekilde açıklanmıştır:
 
-| JSON öğesi | Açıklama | Geçerli değerler |
+| JSON öğesi | Description | Geçerli değerler |
 |:--- |:--- |:--- |
 | **dakika** | Tetikleyicinin çalıştığı dakika değeri. | <ul><li>Tamsayı</li><li>Tamsayı dizisi</li></ul>
 | **saatlerinin** | Tetikleyicinin çalıştığı saat değeri. | <ul><li>Tamsayı</li><li>Tamsayı dizisi</li></ul> |
@@ -433,7 +433,7 @@ Bu bölümde yinelenme zamanlaması örnekleri sağlanmış ve **schedule** nesn
 
 Örneklerde **interval** değerinin 1 olduğu ve zamanlama tanımına göre **frequency** değerinin doğru olduğu varsayılmıştır. Örneğin, **Sıklık** değeri "Day" ve ayrıca **Schedule** nesnesinde bir "monthdays" değişikliği olamaz. Bu gibi kısıtlamalar önceki bölümde yer alan tabloda belirtilmiştir.
 
-| Örnek | Açıklama |
+| Örnek | Description |
 |:--- |:--- |
 | `{"hours":[5]}` | Her gün 05.00'te çalıştır. |
 | `{"minutes":[15], "hours":[5]}` | Her gün 05.15'te çalıştır. |

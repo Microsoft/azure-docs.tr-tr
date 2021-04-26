@@ -14,24 +14,24 @@ ms.topic: how-to
 ms.date: 03/17/2021
 ms.author: inhenkel
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 0719fede4147943e76ddfea1c5e77388c7c5cc9f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 290b68b90deb669f70fa708e6c3bda83cb7187c0
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104610073"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107227798"
 ---
 # <a name="monitor-media-services-diagnostic-logs"></a>Tanılama günlüklerini izleme Media Services
 
 [!INCLUDE [media services api v3 logo](../includes/v3-hr.md)]
 
-[Azure izleyici](https://docs.microsoft.com/azure/azure-monitor/overview.md) , uygulamalarınızın nasıl çalıştığını anlamanıza yardımcı olan ölçümleri ve tanılama günlüklerini izlemenize olanak sağlar. Bu özelliğin ayrıntılı açıklaması ve Azure Media Services ölçümleri ve tanılama günlüklerini nasıl kullanmak istediğinizi görmek için bkz. [izleme Media Services ölçümleri ve tanılama günlükleri](monitor-media-services.md).
+[Azure izleyici](/azure/azure-monitor/overview) , uygulamalarınızın nasıl çalıştığını anlamanıza yardımcı olan ölçümleri ve tanılama günlüklerini izlemenize olanak sağlar. Bu özelliğin ayrıntılı açıklaması ve Azure Media Services ölçümleri ve tanılama günlüklerini nasıl kullanmak istediğinizi görmek için bkz. [izleme Media Services ölçümleri ve tanılama günlükleri](monitor-media-services.md).
 
 Bu makalede, verileri depolama hesabına yönlendirme ve sonra verileri görüntüleme işlemlerinin nasıl yapılacağı gösterilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- [Media Services hesabı oluşturun](../create-account-howto.md).
+- [Media Services hesabı oluşturun](../account-create-how-to.md).
 - [İzleyici Media Services](monitor-media-services.md)gözden geçirin.
 
 ## <a name="route-data-to-the-storage-account-using-the-portal"></a>Portalı kullanarak verileri depolama hesabına yönlendirme
@@ -183,9 +183,9 @@ Olayın depolama hesabında görünmesi için beş dakikaya kadar beklemeniz ger
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-* [Azure İzleyici Ölçümleri](https://docs.microsoft.com/azure/azure-monitor/data-platform.md)
-* [Azure Izleyici tanılama günlükleri](https://docs.microsoft.com/azure/azure-monitor/essentials/platform-logs-overview.md)
-* [Azure kaynaklarınızdan günlük verilerini toplama ve kullanma](https://docs.microsoft.com/azure/azure-monitor/essentials/platform-logs-overview.md)
+* [Azure İzleyici Ölçümleri](/azure/azure-monitor/data-platform)
+* [Azure Izleyici tanılama günlükleri](/azure/azure-monitor/essentials/platform-logs-overview)
+* [Azure kaynaklarınızdan günlük verilerini toplama ve kullanma](/azure/azure-monitor/essentials/platform-logs-overview)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

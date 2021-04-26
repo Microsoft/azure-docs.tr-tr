@@ -12,12 +12,12 @@ ms.workload: data-services
 ms.custom: seo-lt-2019
 ms.topic: tutorial
 ms.date: 01/03/2021
-ms.openlocfilehash: 9c3fa0d8ac4540495e8580fd208507a2c1aaa7ce
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0330ea419b92d4e2e85c01e2770ec0d92987c4d2
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102180793"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107107117"
 ---
 # <a name="tutorial-migrate-sql-server-to-azure-sql-database-using-dms"></a>Öğretici: DMS kullanarak Azure SQL veritabanı 'na SQL Server geçirme
 
@@ -68,6 +68,79 @@ Bu öğreticiyi tamamlamak için aşağıdakileri yapmanız gerekir:
 - Azure veritabanı geçiş hizmeti 'nin hedef veritabanlarına erişmesine izin vermek için, Azure SQL veritabanı için sunucu düzeyinde bir IP [güvenlik duvarı kuralı](../azure-sql/database/firewall-configure.md) oluşturun. Azure veritabanı geçiş hizmeti için kullanılan sanal ağın alt ağ aralığını belirtin.
 - SQL Server örneğine bağlanmak için kullanılan kimlik bilgilerinin [CONTROL SERVER](/sql/t-sql/statements/grant-server-permissions-transact-sql) izinlerine sahip olduğundan emin olun.
 - Azure SQL veritabanı örneğine bağlanmak için kullanılan kimlik bilgilerinin hedef veritabanlarında [DENETIM veritabanı](/sql/t-sql/statements/grant-database-permissions-transact-sql) iznine sahip olduğundan emin olun.
+
+    > [!IMPORTANT]
+    > Azure veritabanı geçiş hizmeti 'nin bir örneğini oluşturmak, normalde aynı kaynak grubu içinde olmayan sanal ağ ayarlarına erişim gerektirir. Sonuç olarak, DMS 'nin bir örneğini oluşturan kullanıcı abonelik düzeyinde izin gerektirir. Gerektiği şekilde atayabileceğiniz gerekli rolleri oluşturmak için aşağıdaki betiği çalıştırın:
+    >
+    > ```
+    >
+    > $readerActions = `
+    > "Microsoft.Network/networkInterfaces/ipConfigurations/read", `
+    > "Microsoft.DataMigration/*/read", `
+    > "Microsoft.Resources/subscriptions/resourceGroups/read"
+    >
+    > $writerActions = `
+    > "Microsoft.DataMigration/services/*/write", `
+    > "Microsoft.DataMigration/services/*/delete", `
+    > "Microsoft.DataMigration/services/*/action", `
+    > "Microsoft.Network/virtualNetworks/subnets/join/action", `
+    > "Microsoft.Network/virtualNetworks/write", `
+    > "Microsoft.Network/virtualNetworks/read", `
+    > "Microsoft.Resources/deployments/validate/action", `
+    > "Microsoft.Resources/deployments/*/read", `
+    > "Microsoft.Resources/deployments/*/write"
+    >
+    > $writerActions += $readerActions
+    >
+    > # TODO: replace with actual subscription IDs
+    > $subScopes = ,"/subscriptions/00000000-0000-0000-0000-000000000000/","/subscriptions/11111111-1111-1111-1111-111111111111/"
+    >
+    > function New-DmsReaderRole() {
+    > $aRole = [Microsoft.Azure.Commands.Resources.Models.Authorization.PSRoleDefinition]::new()
+    > $aRole.Name = "Azure Database Migration Reader"
+    > $aRole.Description = "Lets you perform read only actions on DMS service/project/tasks."
+    > $aRole.IsCustom = $true
+    > $aRole.Actions = $readerActions
+    > $aRole.NotActions = @()
+    >
+    > $aRole.AssignableScopes = $subScopes
+    > #Create the role
+    > New-AzRoleDefinition -Role $aRole
+    > }
+    >
+    > function New-DmsContributorRole() {
+    > $aRole = [Microsoft.Azure.Commands.Resources.Models.Authorization.PSRoleDefinition]::new()
+    > $aRole.Name = "Azure Database Migration Contributor"
+    > $aRole.Description = "Lets you perform CRUD actions on DMS service/project/tasks."
+    > $aRole.IsCustom = $true
+    > $aRole.Actions = $writerActions
+    > $aRole.NotActions = @()
+    >
+    >   $aRole.AssignableScopes = $subScopes
+    > #Create the role
+    > New-AzRoleDefinition -Role $aRole
+    > }
+    > 
+    > function Update-DmsReaderRole() {
+    > $aRole = Get-AzRoleDefinition "Azure Database Migration Reader"
+    > $aRole.Actions = $readerActions
+    > $aRole.NotActions = @()
+    > Set-AzRoleDefinition -Role $aRole
+    > }
+    >
+    > function Update-DmsConributorRole() {
+    > $aRole = Get-AzRoleDefinition "Azure Database Migration Contributor"
+    > $aRole.Actions = $writerActions
+    > $aRole.NotActions = @()
+    > Set-AzRoleDefinition -Role $aRole
+    > }
+    >
+    > # Invoke above functions
+    > New-DmsReaderRole
+    > New-DmsContributorRole
+    > Update-DmsReaderRole
+    > Update-DmsConributorRole
+    > ```
 
 ## <a name="assess-your-on-premises-database"></a>Şirket içi veritabanınızı değerlendirme
 
@@ -245,6 +318,9 @@ Azure SQL veritabanı 'na geçirmek istediğiniz tüm veritabanlarını veya bel
 1. **Hedef Seç** ekranında, Azure SQL veritabanınıza kimlik doğrulama ayarları sağlayın. 
 
    ![Hedef seçin](media/tutorial-sql-server-to-azure-sql/select-target.png)
+   
+   > [!NOTE]
+   > Şu anda, SQL kimlik doğrulaması desteklenen tek kimlik doğrulama türüdür.
 
 1. Ileri ' yi seçin **: hedef veritabanlarına eşle** ekranı, kaynak ve hedef veritabanını geçiş için eşleyin.
 

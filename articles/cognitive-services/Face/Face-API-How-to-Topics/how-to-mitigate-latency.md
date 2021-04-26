@@ -3,18 +3,16 @@ title: Yüz hizmeti kullanılırken gecikme süresini azaltma
 titleSuffix: Azure Cognitive Services
 description: Yüz hizmetini kullanırken gecikme süresini nasıl azaltacağınızı öğrenin.
 services: cognitive-services
-author: v-jaswel
 manager: chrhoder
 ms.service: cognitive-services
 ms.topic: conceptual
 ms.date: 1/5/2021
-ms.author: v-jawe
-ms.openlocfilehash: 2c771509de5ac246bac0d8e006a5d0b884a410b0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a306883573387a2a5c20a53c7015c6dbd3eddf65
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101706818"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107878677"
 ---
 # <a name="how-to-mitigate-latency-when-using-the-face-service"></a>Nasıl yapılır: yüz hizmetini kullanırken gecikme süresini azaltma
 
@@ -86,6 +84,7 @@ Bilgisayarınızın yüz hizmetine yavaş bağlantısı varsa, hizmet yöntemler
 Karşı
 - Yüz aboneliğinizi oluştururken, uygulamanızın barındırıldığı konuma en yakın bölgeyi seçtiğinizden emin olun.
 - Birden çok hizmet yöntemini çağırmanız gerekiyorsa, uygulama tasarımınız için izin veriyorsa bunları paralel olarak çağırmayı göz önünde bulundurun. Bir örnek için önceki bölüme bakın.
+- Kullanıcı deneyimini daha uzun süre gecikmediğinde, API çağrısını yeniden denemeden önce bir zaman aşımı eşiği (örn. en fazla 5s) seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -11,12 +11,12 @@ ms.tgt_pltfrm: multiple
 ms.workload: media
 ms.date: 03/25/2021
 ms.author: inhenkel
-ms.openlocfilehash: 322a599d5ad02ddcf19c61261d968d098b6c9871
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: d021267c38f0043d2361b1a6392fbacd0634a164
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563136"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106279706"
 ---
 # <a name="live-streaming-scenario-based-migration-guidance"></a>Canlı akış senaryosu tabanlı geçiş kılavuzu
 
@@ -35,12 +35,12 @@ Azure portal artık canlı olay ayarlama ve yönetimini desteklemektedir.  V2 'y
 
 İçeriğinizi v2 'den v3 'ye taşımadan önce Media Services canlı olaylar sunmanın yeni yolunu test edin. İşte çalışmak ve geçiş için göz önünde bulundurmanız gereken v3 özellikleri aşağıda verilmiştir.
 
-- Kodlama için yeni bir v3 [Live olayı](live-events-outputs-concept.md#live-events) oluşturun. [1080p ve 720p kodlama ön ayarlarını](live-event-types-comparison.md#system-presets)etkinleştirebilirsiniz.
-- Programlar yerine [canlı çıkış](live-events-outputs-concept.md#live-outputs) varlığını kullanın
-- [Akış Konumlandırıcı](streaming-locators-concept.md)oluştur.
-- [HLS ve Dash](dynamic-packaging-overview.md) canlı akış ihtiyacını göz önünde bulundurun.
-- Canlı olaylar için hızlı başlangıç yapmanız gerekiyorsa, yeni [Bekleme modu](live-events-outputs-concept.md#standby-mode) özelliklerini gözden geçirebilirsiniz.
-- Canlı olaylarınızı çalışırken eklemek istiyorsanız, yeni [canlı](live-transcription.md) döküm özelliğini bulun.
+- Kodlama için yeni bir v3 [Live olayı](live-event-outputs-concept.md#live-events) oluşturun. [1080p ve 720p kodlama ön ayarlarını](live-event-types-comparison-reference.md#system-presets)etkinleştirebilirsiniz.
+- Programlar yerine [canlı çıkış](live-event-outputs-concept.md#live-outputs) varlığını kullanın
+- [Akış Konumlandırıcı](stream-streaming-locators-concept.md)oluştur.
+- [HLS ve Dash](encode-dynamic-packaging-concept.md) canlı akış ihtiyacını göz önünde bulundurun.
+- Canlı olaylar için hızlı başlangıç yapmanız gerekiyorsa, yeni [Bekleme modu](live-event-outputs-concept.md#standby-mode) özelliklerini gözden geçirebilirsiniz.
+- Canlı olaylarınızı çalışırken eklemek istiyorsanız, yeni [canlı](live-event-live-transcription-how-to.md) döküm özelliğini bulun.
 - Daha uzun bir akış süresine ihtiyacınız varsa, v3 'de 24x7x365 canlı olay oluşturun.
 - Canlı olaylarınızı izlemek için [Event Grid](monitoring/monitor-events-portal-how-to.md) kullanın.
 
@@ -50,22 +50,22 @@ Belirli adımlar için bkz. canlı etkinlik kavramları, öğreticiler ve aşağ
 
 ### <a name="concepts"></a>Kavramlar
 
-- [Azure Media Services v3 ile canlı akış](live-streaming-overview.md)
-- [Canlı etkinlikler ve canlı çıktılar Media Services](live-events-outputs-concept.md)
-- [Doğrulanan şirket içi canlı akış kodlayıcıları](recommended-on-premises-live-encoders.md)
-- [İsteğe bağlı video oynatma oluşturmak için zaman değiştirme ve canlı çıktıları kullanma](live-event-cloud-dvr.md)
-- [Canlı döküm (Önizleme)](live-transcription.md)
-- [Canlı olay türleri karşılaştırması](live-event-types-comparison.md)
-- [Canlı olay durumları ve faturalandırma](live-event-states-billing.md)
-- [Canlı olay düşük gecikme süresi ayarları](live-event-latency.md)
-- [Media Services canlı olay hata kodları](live-event-error-codes.md)
+- [Azure Media Services v3 ile canlı akış](stream-live-streaming-concept.md)
+- [Canlı etkinlikler ve canlı çıktılar Media Services](live-event-outputs-concept.md)
+- [Doğrulanan şirket içi canlı akış kodlayıcıları](encode-recommended-on-premises-live-encoders.md)
+- [İsteğe bağlı video oynatma oluşturmak için zaman değiştirme ve canlı çıktıları kullanma](live-event-cloud-dvr-time-how-to.md)
+- [Live-event-Live-Transcription-nasıl yapılır (Önizleme)](live-event-live-transcription-how-to.md)
+- [Canlı olay türleri karşılaştırması](live-event-types-comparison-reference.md)
+- [Canlı olay durumları ve faturalandırma](live-event-states-billing-concept.md)
+- [Canlı olay düşük gecikme süresi ayarları](live-event-latency-reference.md)
+- [Media Services canlı olay hata kodları](live-event-error-codes-reference.md)
 
 ### <a name="tutorials-and-quickstarts"></a>Öğreticiler ve hızlı başlangıç
 
 - [Öğretici: Media Services ile canlı akış](stream-live-tutorial-with-api.md)
-- [OBS ile Azure Media Services canlı akış oluşturma](live-events-obs-quickstart.md)
-- [Hızlı başlangıç: portala karşıya içerik yükleme, kodlama ve akışla](manage-assets-quickstart.md)
-- [Hızlı başlangıç: kablolu atama ile Azure Media Services canlı akış oluşturma](live-events-wirecast-quickstart.md)
+- [OBS ile Azure Media Services canlı akış oluşturma](live-event-obs-quickstart.md)
+- [Hızlı başlangıç: portala karşıya içerik yükleme, kodlama ve akışla](asset-create-asset-upload-portal-quickstart.md)
+- [Hızlı başlangıç: kablolu atama ile Azure Media Services canlı akış oluşturma](live-event-wirecast-quickstart.md)
 
 ## <a name="samples"></a>Örnekler
 

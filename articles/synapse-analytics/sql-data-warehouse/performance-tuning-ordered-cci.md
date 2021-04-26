@@ -7,16 +7,16 @@ manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql-dw
-ms.date: 09/05/2019
+ms.date: 04/13/2021
 ms.author: xiaoyul
 ms.reviewer: nibruno; jrasnick
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: afb6efcee2ad4f5cf25a411eed353ff2fc27d75c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ab94a83a64ca9770f0c216ddf42145b262629c6d
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96460798"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107599001"
 ---
 # <a name="performance-tuning-with-ordered-clustered-columnstore-index"></a>Sıralı kümelenmiş columnstore dizini ile performans ayarlama  
 
@@ -44,7 +44,7 @@ FROM sys.pdw_nodes_partitions AS pnp
    JOIN sys.pdw_nodes_column_store_segments AS cls ON pnp.partition_id = cls.partition_id AND pnp.distribution_id  = cls.distribution_id
 JOIN sys.columns as cols ON o.object_id = cols.object_id AND cls.column_id = cols.column_id
 WHERE o.name = '<Table Name>' and cols.name = '<Column Name>'  and TMap.physical_name  not like '%HdTable%'
-ORDER BY o.name, pnp.distribution_id, cls.min_data_id 
+ORDER BY o.name, pnp.distribution_id, cls.min_data_id;
 
 
 ```
@@ -66,7 +66,7 @@ Bu örnekte, T1 tablosunun Col_C, Col_B ve Col_A dizisinde sıralanmış bir kü
 ```sql
 
 CREATE CLUSTERED COLUMNSTORE INDEX MyOrderedCCI ON  T1
-ORDER (Col_C, Col_B, Col_A)
+ORDER (Col_C, Col_B, Col_A);
 
 ```
 
@@ -134,6 +134,13 @@ Sıralı bir CCı oluşturma, çevrimdışı bir işlemdir.  Bölüm içermeyen 
 5.    Table_A içindeki her bölüm için 3. ve 4. adımı yineleyin.
 6.    Tüm bölümler Table_A Table_B, yeniden oluşturulduktan sonra Table_A bırakın ve Table_A Table_B yeniden adlandırın. 
 
+>[!TIP]
+> Sıralı bir CCı içeren adanmış bir SQL havuzu tablosu için ALTER INDEX REBUıLD, verileri tempdb kullanarak yeniden sıralayacak. Derleme işlemleri sırasında tempdb 'yi izleyin. Daha fazla tempdb alanına ihtiyacınız varsa havuzun ölçeğini ölçeklendirin. Dizin yeniden oluşturma işlemi tamamlandıktan sonra ölçeği yeniden küçültün.
+>
+> Sıralı bir CCı içeren adanmış bir SQL havuzu tablosu için ALTER INDEX REINDEX, verileri yeniden sıralamaz. Daha fazla veri için ALTER INDEX REBUıLD kullanın.
+>
+> Sıralı CCı bakımı hakkında daha fazla bilgi için bkz. [kümelenmiş columnstore dizinlerini iyileştirme](sql-data-warehouse-tables-index.md#optimizing-clustered-columnstore-indexes).
+
 ## <a name="examples"></a>Örnekler
 
 **A. Sıralı sütunları ve sıra sıra sayısını denetlemek için:**
@@ -142,15 +149,15 @@ Sıralı bir CCı oluşturma, çevrimdışı bir işlemdir.  Bölüm içermeyen 
 SELECT object_name(c.object_id) table_name, c.name column_name, i.column_store_order_ordinal 
 FROM sys.index_columns i 
 JOIN sys.columns c ON i.object_id = c.object_id AND c.column_id = i.column_id
-WHERE column_store_order_ordinal <>0
+WHERE column_store_order_ordinal <>0;
 ```
 
 **Kenarı. Sütun sırasını değiştirmek için, sipariş listesinden sütun ekleyin veya kaldırın ya da CCı 'dan sıralı CCı 'ya geçiş yapın:**
 
 ```sql
-CREATE CLUSTERED COLUMNSTORE INDEX InternetSales ON  InternetSales
+CREATE CLUSTERED COLUMNSTORE INDEX InternetSales ON dbo.InternetSales
 ORDER (ProductKey, SalesAmount)
-WITH (DROP_EXISTING = ON)
+WITH (DROP_EXISTING = ON);
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar

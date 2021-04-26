@@ -2,207 +2,152 @@
 title: Azure statik Web Apps için yerel geliştirmeyi ayarlama
 description: Azure statik Web Apps için yerel geliştirme ortamınızı ayarlamayı öğrenin
 services: static-web-apps
-author: burkeholland
+author: craigshoemaker
 ms.service: static-web-apps
 ms.topic: how-to
-ms.date: 05/08/2020
-ms.author: buhollan
+ms.date: 04/02/2021
+ms.author: cshoe
 ms.custom: devx-track-js
-ms.openlocfilehash: 4d6dae8a4f4ed83af3103e95e711bacdb62cf522
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e19d39a32d48ec55473bb957595d47ec5148e74b
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91326176"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588794"
 ---
 # <a name="set-up-local-development-for-azure-static-web-apps-preview"></a>Azure statik Web Apps önizlemesi için yerel geliştirmeyi ayarlama
 
-Azure statik Web Apps örneği, iki farklı türde uygulamalardan oluşur. Birincisi, statik içeriğiniz için bir Web uygulamasıdır. Web Apps genellikle ön uç çerçeveleri ve kitaplıkları ile veya statik site oluşturucuları ile oluşturulur. İkinci boyut, zengin bir arka uç geliştirme ortamı sağlayan bir Azure Işlevleri uygulaması olan API 'dir.
+Buluta yayımlandığında, bir Azure statik Web Apps sitesinin aynı uygulama gibi birlikte çalışan çok sayıda hizmeti vardır. Bu hizmetler arasında şunlar bulunur:
 
-Azure statik Web Apps, bulutta çalışırken, istekleri `api` Web uygulamasından Azure işlevleri uygulamasına, CORS yapılandırmasına gerek kalmadan sorunsuz bir şekilde eşler. Yerel olarak, uygulamanızı bu davranışı taklit etmek için yapılandırmanız gerekir.
+- Statik Web uygulaması
+- Azure Işlevleri API 'SI
+- Kimlik doğrulama ve yetkilendirme hizmetleri
+- Yönlendirme ve Yapılandırma Hizmetleri
 
-Bu makalede, aşağıdaki kavramlar dahil olmak üzere yerel geliştirme için önerilen en iyi uygulamalar gösterilmektedir:
+Bu hizmetlerin birbirleriyle iletişim kurması gerekir ve Azure statik Web Apps Bu tümleştirmeyi bulutta sizin için işler.
 
-- Web uygulamasını statik içerik için ayarlama
-- Uygulamanızın API 'SI için Azure Işlevleri uygulamasını yapılandırma
-- Hata ayıklama ve uygulamayı çalıştırma
-- Uygulamanızın dosya ve klasör yapısına yönelik en iyi uygulamalar
+Ancak yerel olarak çalıştırıldığında, bu hizmetler otomatik olarak birlikte birbirlerine bağlı değildir.
+
+Azure 'da aldığınız gibi benzer bir deneyim sağlamak için, [Azure statik Web Apps CLI](https://github.com/Azure/static-web-apps-cli) aşağıdaki hizmetleri sağlar:
+
+- Yerel bir statik site sunucusu
+- Ön uç Framework geliştirme sunucusuna bir proxy
+- API uç noktalarınıza bir ara sunucu-Azure Functions Core Tools aracılığıyla kullanılabilir
+- Bir sahte kimlik doğrulama ve yetkilendirme sunucusu
+- Yerel yollar ve yapılandırma ayarları zorlaması
+
+## <a name="how-it-works"></a>Nasıl çalışır?
+
+Aşağıdaki grafikte isteklerin yerel olarak nasıl işlendiği gösterilmektedir.
+
+:::image type="content" source="media/local-development/cli-conceptual.png" alt-text="Azure statik Web uygulaması CLı isteği ve yanıt akışı":::
+
+> [!IMPORTANT]
+> `http://localhost:4280`CLI tarafından sunulan uygulamaya erişmek için öğesine gidin.
+
+-  Bağlantı noktasına yapılan istekler `4280` , istek türüne bağlı olarak uygun sunucuya iletilir.
+
+- HTML veya CSS gibi **statik içerik** istekleri, iç CLI statik içerik sunucusu veya hata ayıklama için ön uç çerçeve sunucusu tarafından işlenir.
+
+- **Kimlik doğrulama ve yetkilendirme** istekleri, uygulamanıza sahte bir kimlik profili sağlayan bir öykünücü tarafından işlenir.
+
+- **Işlevler çekirdek Araçları çalışma zamanı** , ISTEKLERI sitenin API 'sine işler.
+
+- Tüm hizmetlerden gelen **yanıtlar** , tek bir uygulama gibi, tarayıcıya döndürülür.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- [Visual Studio Code](https://code.visualstudio.com/)
-- Visual Studio Code için [Azure işlevleri uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
-- Visual Studio Code için [canlı sunucu uzantısı](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-  - Yalnızca ön uç JavaScript çerçevesi veya statik site oluşturucunun CLı kullanmıyorsanız gereklidir
+- **Mevcut Azure statik Web Apps sitesi**: bir hesabınız yoksa [Vanilla-API](https://github.com/staticwebdev/vanilla-api/generate?return_to=/staticwebdev/vanilla-api/generate) başlangıç uygulamasıyla başlayın.
+- **NPM ile [Node.js](https://nodejs.org)**: [npm](https://www.npmjs.com/)'e erişim içeren [Node.js LTS](https://nodejs.org) sürümünü çalıştırın.
+- **[Visual Studio Code](https://code.visualstudio.com/)**: API uygulamasında hata ayıklamak için kullanılır, ancak CLI için gerekli değildir.
 
-## <a name="run-projects-locally"></a>Projeleri yerel olarak çalıştır
+## <a name="get-started"></a>başlarken
 
-Azure statik Web uygulamasını yerel olarak çalıştırmak, projenizin bir API içerip içermediğini bağlı olarak üç işlem içerir.
+Mevcut Azure statik Web Apps sitenizin kök klasörüne bir Terminal açın.
 
-- Yerel bir Web sunucusu çalıştırma
-- API 'YI çalıştırma
-- Web projesini API 'ye bağlama
+1. CLı 'yı yükler.
 
-Bir Web sitesinin nasıl oluşturulduğuna bağlı olarak, uygulamayı tarayıcıda çalıştırmak için yerel bir Web sunucusu gerekli olmayabilir veya olmayabilir. Ön uç JavaScript çerçeveleri ve statik site oluşturucuları kullanılırken, bu işlev ilgili uçlarında (komut satırı arabirimleri) yerleşik olarak bulunur. Aşağıdaki bağlantılar, bir çerçeve, kitaplık ve üreteçilerin seçimi için CLı başvurusunu işaret noktasıdır.
+    `npm install -g @azure/static-web-apps-cli`
 
-### <a name="javascript-frameworks-and-libraries"></a>JavaScript çerçeveleri ve kitaplıkları
+1. Uygulamanız için gerekliyse uygulamanızı oluşturun.
 
-- [Angular CLI](https://angular.io/cli)
-- [Vue CLı](https://cli.vuejs.org/guide/creating-a-project.html)
-- [CLı 'ye tepki verme](https://create-react-app.dev/)
+    `npm run build`Veya projeniz için eşdeğer komutunu çalıştırın.
 
-### <a name="static-site-generators"></a>Statik site oluşturucuları
+1. Uygulamanızın çıkış dizinine geçin. Çıkış klasörleri genellikle _derleme_ veya benzer bir şekilde adlandırılır.
 
-- [CLı tarafından Gatsby](https://www.gatsbyjs.org/docs/gatsby-cli/)
-- [Hugo](https://gohugo.io/getting-started/quick-start/)
-- [Jekyll](https://jekyllrb.com/docs/usage/)
+1. CLı 'yı başlatın.
 
-Sitenize hizmeti sağlamak için bir CLı aracı kullanıyorsanız, [API 'Yi çalıştıran](#run-api-locally) bölüme atlayabilirsiniz.
+    `swa start`
 
-### <a name="running-a-local-web-server-with-live-server"></a>Canlı sunucu ile yerel bir Web sunucusu çalıştırma
+1. http://localhost:4280Uygulamayı tarayıcıda görüntülemek için bölümüne gidin.
 
-Visual Studio Code için canlı sunucu uzantısı, statik içerik sunan yerel bir geliştirme Web sunucusu sağlar.
+### <a name="other-ways-to-start-the-cli"></a>CLı 'yi başlatmak için diğer yollar
 
-#### <a name="create-a-repository"></a>Depo oluşturma
+| Description | Komut |
+|--- | --- |
+| Belirli bir klasörü sunar | `swa start ./output-folder` |
+| Çalışan bir Framework geliştirme sunucusu kullanma | `swa start http://localhost:3000` |
+| Bir klasörde Işlevler uygulaması başlatma | `swa start ./output-folder --api ./api` |
+| Çalışan Işlevler uygulaması kullanma | `swa start ./output-folder --api http://localhost:7071` |
 
-1. GitHub 'da oturum açtığınızdan emin olun ve [https://github.com/staticwebdev/vanilla-api/generate](https://github.com/staticwebdev/vanilla-api/generate) Bu şablonu kullanarak **Vanilla-API** adlı yeni bir GitHub projesi oluşturun ve ' a gidin.
+## <a name="authorization-and-authentication-emulation"></a>Yetkilendirme ve kimlik doğrulama öykünmesi
 
-    :::image type="content" source="media/local-development/vanilla-api.png" alt-text="GitHub yeni depo penceresi":::
+Statik Web Apps CLı, Azure 'da uygulanan [güvenlik akışına](./authentication-authorization.md) öykünür. Bir Kullanıcı oturum açtığında, uygulamaya döndürülen sahte kimlik profilini tanımlayabilirsiniz.
 
-1. Visual Studio Code’u açın.
+Örneğin, ' a gitmeye çalıştığınızda `/.auth/login/github` bir kimlik profili tanımlamanızı sağlayan bir sayfa döndürülür.
 
-1. Komut Paletini açmak için **F1** tuşuna basın.
+> [!NOTE]
+> Öykünücü yalnızca GitHub değil, herhangi bir güvenlik sağlayıcısıyla birlikte çalışmaktadır.
 
-1. Arama kutusuna **kopya** yazın ve **Git: Kopyala**' yı seçin.
+:::image type="content" source="media/local-development/auth-emulator.png" alt-text="Yerel kimlik doğrulama ve yetkilendirme öykünücüsü":::
 
-    :::image type="content" source="media/local-development/command-palette-git-clone.png" alt-text="Visual Studio Code git kopyalama seçeneği":::
+Öykünücü, aşağıdaki [istemci sorumlusu](./user-information.md#client-principal-data) değerlerini sağlamanıza olanak tanıyan bir sayfa sağlar:
 
-1. **Depo URL 'si** için aşağıdaki değeri girin.
+| Değer | Açıklama |
+| --- | --- |
+| **Kullanıcı adı** | Güvenlik sağlayıcısıyla ilişkili hesap adı. Bu değer, `userDetails` istemci sorumlusu içinde özellik olarak görünür ve bir değer sağlamazsanız otomatik olarak oluşturulur. |
+| **Kullanıcı Kimliği** | CLı tarafından otomatik olarak oluşturulan değer.  |
+| **Roller** | Her adın yeni bir satırda bulunduğu rol adlarının listesi.  |
 
-   ```http
-   git@github.com:<YOUR_GITHUB_ACCOUNT>/vanilla-api.git
-   ```
+Oturum açıldıktan sonra:
 
-1. Yeni proje için bir klasör konumu seçin.
+- `/.auth/me`Kullanıcının [istemci sorumlusunu](./user-information.md)almak için uç noktasını veya bir işlev uç noktasını kullanabilirsiniz.
 
-1. Klonlanan depoyu açmanız istendiğinde **Aç**’ı seçin.
+- Gezinme `./auth/logout` , istemci sorumlusunu temizler ve sahte kullanıcıyı günlüğe kaydeder.
 
-    :::image type="content" source="media/local-development/open-new-window.png" alt-text="Yeni pencerede aç":::
+## <a name="debugging"></a>Hata Ayıklama
 
-Visual Studio Code klonlanan projeyi düzenleyicide açar.
+Statik bir Web uygulamasında iki hata ayıklama bağlamı vardır. Birincisi, statik içerik sitesi içindir ve ikincisi API işlevleri içindir. Statik Web Apps CLı 'nın bu bağlamların bir veya her ikisi için geliştirme sunucularını kullanmasına izin vererek yerel hata ayıklama mümkündür.
 
-### <a name="run-the-website-locally-with-live-server"></a>Web sitesini Live Server ile yerel olarak çalıştırın
+Aşağıdaki adımlarda, her iki hata ayıklama bağlamı için geliştirme sunucularını kullanan ortak bir senaryo gösterilmektedir.
 
-1. Komut Paletini açmak için **F1** tuşuna basın.
+1. Statik site geliştirme sunucusunu başlatın. Bu komut, kullanmakta olduğunuz ön uç çerçevesine özgüdür, ancak genellikle, veya gibi komutlar biçiminde gelir `npm run build` `npm start` `npm run dev` .
 
-1. Arama kutusuna **canlı sunucu** yazın ve **canlı sunucu: Live Server ile aç** ' ı seçin
+1. Visual Studio Code ' de API uygulama klasörünü açın ve bir hata ayıklama oturumu başlatın.
 
-    Uygulamayı göstermek için bir tarayıcı sekmesi açılır.
+1. Statik sunucu ve API sunucusu adreslerini `swa start` sırayla listeleyerek komuta geçirin.
 
-    :::image type="content" source="media/local-development/vanilla-api-site.png" alt-text="Tarayıcıda çalışan basit statik site":::
+    `swa start http://localhost:<DEV-SERVER-PORT-NUMBER> --api=http://localhost:7071`
 
-    Bu uygulama uç noktaya bir HTTP isteği oluşturur `api/message` . Şu anda, bu uygulamanın API bölümünün başlatılması gerektiğinden bu istek başarısız oluyor.
+Aşağıdaki ekran görüntülerinde tipik bir hata ayıklama senaryosu için terminaller gösterilmektedir:
 
-### <a name="run-api-locally"></a>API 'YI yerel olarak çalıştır
+Statik içerik sitesi aracılığıyla çalışmaktadır `npm run dev` .
 
-Azure statik Web Apps API 'Leri Azure Işlevleri tarafından desteklenmektedir. Azure statik Web Apps projesine API ekleme ile ilgili ayrıntılar için bkz. Azure [işlevleri Ile Azure statik Web Apps API ekleme](add-api.md) .
+:::image type="content" source="media/local-development/run-dev-static-server.png" alt-text="Statik site geliştirme sunucusu":::
 
-API oluşturma sürecinin bir parçası olarak Visual Studio Code için bir başlatma yapılandırması oluşturulur. Bu yapılandırma _. vscode_ klasöründe bulunur. Bu klasör, API 'YI yerel olarak oluşturmak ve çalıştırmak için gerekli tüm ayarları içerir.
+Azure Işlevleri API uygulaması, Visual Studio Code bir hata ayıklama oturumu çalıştırıyor.
 
-1. Visual Studio Code içinde, API 'yi başlatmak için **F5** ' e basın.
+:::image type="content" source="media/local-development/visual-studio-code-debugging.png" alt-text="Visual Studio Code API hata ayıklaması":::
 
-1. API derleme işlemindeki çıktıyı gösteren yeni bir Terminal örneği açılır.
+Statik Web Apps CLı her iki geliştirme sunucusu kullanılarak başlatılır.
 
-    :::image type="content" source="media/local-development/terminal-api-debug.png" alt-text="Visual Studio Code terminalde çalışan API":::
+:::image type="content" source="media/local-development/static-web-apps-cli-terminal.png" alt-text="Azure statik Web Apps CLı terminali":::
 
-   Visual Studio Code durum çubuğu artık turuncu. Bu renk, API 'nin artık çalıştığını ve hata ayıklayıcının ekli olduğunu gösterir.
+Şimdi bağlantı noktası üzerinden gelen istekler, `4280` statik içerik geliştirme sunucusuna ya da API hata ayıklama oturumuna yönlendirilir.
 
-1. Ardından, **Ctrl/Cmd** tuşlarına basın ve, API 'yi çağıran bir tarayıcı penceresi açmak için TERMINALDEKI URL 'ye tıklayın.
-
-    :::image type="content" source="media/local-development/hello-from-api-endpoint.png" alt-text="Tarayıcı API çağrısının sonucunu görüntüleme":::
-
-### <a name="debugging-the-api"></a>API 'de hata ayıklama
-
-1. _API/GetMessage/index.js_ dosyasını Visual Studio Code açın.
-
-1. Kesme noktası ayarlamak için 2. satırdaki sol kenar boşluğuna tıklayın. Kesme noktasının ayarlandığını belirten kırmızı bir nokta görünür.
-
-    :::image type="content" source="media/local-development/breakpoint-set.png" alt-text="Visual Studio Code kesme noktası":::
-
-1. Tarayıcıda, konumundaki çalıştıran sayfayı yenileyin <http://127.0.0.1:7071/api/message> .
-
-1. Kesme noktası Visual Studio Code, program yürütme duraklatıldı.
-
-   :::image type="content" source="media/local-development/breakpoint-hit.png" alt-text="Kesme noktası isabet Visual Studio Code":::
-
-   API 'niz için [Visual Studio Code, tüm hata ayıklama deneyimi mevcuttur](https://code.visualstudio.com/Docs/editor/debugging) .
-
-1. Yürütmeye devam etmek için hata ayıklama çubuğundaki **devam** düğmesine basın.
-
-    :::image type="content" source="media/local-development/continue-button.png" alt-text="Visual Studio Code 'de devam düğmesi":::
-
-### <a name="calling-the-api-from-the-application"></a>Uygulamadan API çağırma
-
-Dağıtıldığında, Azure statik Web Apps, bu istekleri _API_ klasöründeki uç noktalarla otomatik olarak eşler. Bu eşleme, uygulamadan API 'ye yapılan isteklerin aşağıdaki örneğe benzer şekilde görünmesini sağlar.
-
-```javascript
-let response = await fetch("/api/message");
-```
-
-Uygulamanızın JavaScript Framework CLı ile oluşturulmuş olmasına bağlı olarak, `api` uygulamanızı yerel olarak çalıştırırken yolun yolunu yapılandırmanın iki yolu vardır.
-
-- Ortam yapılandırma dosyaları (JavaScript çerçeveleri ve kitaplıkları için önerilir)
-- Yerel ara sunucu
-
-### <a name="environment-configuration-files"></a>Ortam yapılandırma dosyaları
-
-Uygulamanızı CLı içeren ön uç çerçeveleri ile oluşturuyorsanız, ortam yapılandırma dosyalarını kullanmanız gerekir. Her çerçeve veya kitaplık, bu ortam yapılandırma dosyalarını işlemek için farklı bir yönteme sahiptir. Uygulamanız yerel olarak çalışırken kullanılan geliştirme için bir yapılandırma dosyası ve uygulamanız üretimde çalışırken kullanılan üretime yönelik bir yapılandırma dosyası olması yaygındır. Kullandığınız JavaScript çerçevesi veya statik site Oluşturucu CLı, uygulamanız Azure statik Web Apps tarafından oluşturulduğunda, geliştirme dosyasını yerel olarak ve üretim dosyasını kullanacak şekilde otomatik olarak bilir.
-
-Geliştirme yapılandırma dosyasında, API 'nin yolunu belirtebilirsiniz. Bu, `http:127.0.0.1:7071` sitenizin API 'sinin yerel olarak çalıştığı yerel konumunu işaret eder.
-
-```
-API=http:127.0.0.1:7071/api
-```
-
-Üretim yapılandırma dosyasında, API 'nin yolunu belirtin `api` . Bu şekilde, uygulamanız üretimde çalışırken "yoursite.com/api" aracılığıyla API 'yi çağıracaktır.
-
-```
-API=api
-```
-
-Bu yapılandırma değerlerine, Web uygulamasının JavaScript 'teki düğüm ortam değişkenleri olarak başvurulabilir.
-
-```js
-let response = await fetch(`${process.env.API}/message`);
-```
-
-CLı, sitenizi geliştirme modunda çalıştırmak veya üretim için siteyi oluşturmak üzere kullanıldığında, `process.env.API` değer uygun yapılandırma dosyasındaki değerle değiştirilmiştir.
-
-Ön uç JavaScript çerçeveleri ve kitaplıkları için ortam dosyalarını yapılandırma hakkında daha fazla bilgi için şu makalelere bakın:
-
-- [Angular ortam değişkenleri](https://angular.io/guide/build#configuring-application-environments)
-- [Tepki verme-özel ortam değişkenleri ekleme](https://create-react-app.dev/docs/adding-custom-environment-variables/)
-- [Vue-modlar ve ortam değişkenleri](https://cli.vuejs.org/guide/mode-and-env.html)
-
-[!INCLUDE [static-web-apps-local-proxy](../../includes/static-web-apps-local-proxy.md)]
-
-##### <a name="restart-live-server"></a>Canlı sunucuyu yeniden Başlat
-
-1. Visual Studio Code içinde komut paletini açmak için **F1** tuşuna basın.
-
-1. **Canlı sunucu** yazın ve **canlı sunucu: canlı sunucuyu durdur**' u seçin.
-
-    :::image type="content" source="media/local-development/stop-live-server.png" alt-text="Visual Studio komut paletinde canlı sunucu komutunu durdur":::
-
-1. Komut Paletini açmak için **F1** tuşuna basın.
-
-1. **Canlı** sunucu yazın ve canlı sunucu **: açık canlı sunucu**' yı seçin.
-
-1. Üzerinde çalışan uygulamayı yenileyin `http://locahost:3000` . Tarayıcı artık API 'den döndürülen iletiyi görüntüler.
-
-    :::image type="content" source="media/local-development/hello-from-api.png" alt-text="Tarayıcıda görünen API 'den Merhaba":::
+Farklı hata ayıklama senaryoları hakkında daha fazla bilgi için, bağlantı noktalarını ve sunucu adreslerini özelleştirmeye ilişkin yönergeler içeren [Azure Static Web Apps CLI deposuna](https://github.com/Azure/static-web-apps-cli)bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Uygulama ayarlarını yapılandırma](application-settings.md)
+> [Uygulamanızı yapılandırma](configuration.md)

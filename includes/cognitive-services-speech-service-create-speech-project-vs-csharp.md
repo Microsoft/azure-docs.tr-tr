@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 08/30/2019
 ms.author: wolfma
 ms.openlocfilehash: c7332177795a45331749225e0f3dc3856e28a6a2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "96001124"
 ---
 Windows geliştirme için bir Visual Studio projesi oluşturmak için, projeyi oluşturmanız, .NET masaüstü geliştirme için Visual Studio 'yu ayarlamanız, konuşma SDK 'sını yüklemeniz ve hedef mimariyi seçmeniz gerekir.

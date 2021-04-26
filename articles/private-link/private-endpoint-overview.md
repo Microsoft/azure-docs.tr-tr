@@ -7,12 +7,12 @@ ms.service: private-link
 ms.topic: conceptual
 ms.date: 06/18/2020
 ms.author: allensu
-ms.openlocfilehash: 79d21549e7234e4ee342776466f8d3d8ced5f08c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f18d9cb2a1bf76986a5c77477085f2f12ab728ae
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102508818"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107771812"
 ---
 # <a name="what-is-azure-private-endpoint"></a>Azure Özel Uç Nokta nedir?
 
@@ -39,7 +39,7 @@ Azure Özel Uç Noktası sizi Azure Özel Bağlantı ile desteklenen bir hizmete
 
 - Özel bir uç nokta oluştururken, kaynağın yaşam döngüsü için salt okunurdur bir ağ arabirimi de oluşturulur. Arabirimine, özel bağlantı kaynağıyla eşleşen alt ağdan dinamik olarak özel IP adresleri atanır. Özel IP adresinin değeri, Özel uç noktanın tüm yaşam döngüsünün değişmeden kalır.
  
-- Özel uç noktanın sanal ağla aynı bölgede dağıtılması gerekir. 
+- Özel uç noktanın, sanal ağ ile aynı bölgede ve abonelikte dağıtılması gerekir. 
  
 - Özel bağlantı kaynağı, sanal ağ ve özel uç noktadan farklı bir bölgede dağıtılabilir.
  
@@ -57,8 +57,8 @@ Azure Özel Uç Noktası sizi Azure Özel Bağlantı ile desteklenen bir hizmete
 |---------|---------|---------|
 |**Özel bağlantı hizmeti** (kendi hizmetiniz)   |  Microsoft. Network/privateLinkServices       | empty |
 |**Azure Otomasyonu** |  Microsoft. Automation/automationAccounts | Web kancası, Dscandhyıbridworker |
-|**Azure SQL Veritabanı** | Microsoft. SQL/sunucuları    |  SQL Server (sqlServer)        |
-|**Azure Synapse Analytics** | Microsoft. SQL/sunucuları    |  SQL Server (sqlServer)        | 
+|**Azure SQL Veritabanı** | Microsoft.Sql/servers    |  SQL Server (sqlServer)        |
+|**Azure Synapse Analytics** | Microsoft.Sql/servers    |  SQL Server (sqlServer)        | 
 |**Azure Depolama**  | Microsoft. Storage/storageAccounts    |  Blob (blob, blob_secondary)<BR> Tablo (tablo, table_secondary)<BR> Kuyruk (kuyruk, queue_secondary)<BR> Dosya (dosya, file_secondary)<BR> Web (Web, web_secondary)        |
 |**Azure Data Lake Storage 2. Nesil**  | Microsoft. Storage/storageAccounts    |  Blob (blob, blob_secondary)<BR> Data Lake dosya sistemi Gen2 (DFS, dfs_secondary)       |
 |**Azure Cosmos DB** | Microsoft. Azu, Smosdb/databaseAccounts    | SQL, MongoDB, Cassandra, Gremlin, tablo|
@@ -78,6 +78,7 @@ Azure Özel Uç Noktası sizi Azure Özel Bağlantı ile desteklenen bir hizmete
 |**Azure Event Grid** | Microsoft. EventGrid/konuları    | konu başlığı |
 |**Azure Event Grid** | Microsoft. EventGrid/Domains    | etki alanı |
 |**Azure App Service** | Microsoft. Web/siteler    | Siteler |
+|**Azure App Service Yuvaları** | Microsoft. Web/siteler    | barındıra`<slot name>` |
 |**Azure Machine Learning** | Microsoft. MachineLearningServices/çalışma alanları    | amlworkspace |
 |**SignalR** | Microsoft. SignalRService/SignalR    | signalR |
 |**Azure İzleyici** | Microsoft. Insights/privateLinkScopes    | azuremonitor |
@@ -110,7 +111,7 @@ Aşağıdaki bağlantı onay yöntemlerini kullanarak bir özel bağlantı kayna
 > Yalnızca onaylanan bir durumdaki özel uç nokta, belirli bir özel bağlantı kaynağına trafik gönderebilir. 
 
 ### <a name="connecting-using-alias"></a>Takma ad kullanarak bağlanma
-Diğer ad, hizmet sahibi bir standart yük dengeleyicinin arkasında özel bağlantı hizmeti oluşturduğunda oluşturulan benzersiz bir addır. Hizmet sahibi, bu diğer adı tüketicileriyle çevrimdışı olarak paylaşabilir. Tüketiciler, kaynak URI 'sini veya diğer adı kullanarak özel bağlantı hizmetine bağlantı isteğinde bulunabilir. Diğer adı kullanarak bağlanmak istiyorsanız, el ile bağlantı onay yöntemi kullanarak özel uç nokta oluşturmanız gerekir. El ile bağlantı onay yöntemi kullanmak için, Özel uç nokta oluşturma akışı sırasında el ile istek parametresini true olarak ayarlayın. Ayrıntılar için [New-AzPrivateEndpoint](/powershell/module/az.network/new-azprivateendpoint) ve [az Network Private-Endpoint Create](/cli/azure/network/private-endpoint#az-network-private-endpoint-create) bölümüne bakın. 
+Diğer ad, hizmet sahibi bir standart yük dengeleyicinin arkasında özel bağlantı hizmeti oluşturduğunda oluşturulan benzersiz bir addır. Hizmet sahibi, bu diğer adı tüketicileriyle çevrimdışı olarak paylaşabilir. Tüketiciler, kaynak URI 'sini veya diğer adı kullanarak özel bağlantı hizmetine bağlantı isteğinde bulunabilir. Diğer adı kullanarak bağlanmak istiyorsanız, el ile bağlantı onay yöntemi kullanarak özel uç nokta oluşturmanız gerekir. El ile bağlantı onay yöntemi kullanmak için, Özel uç nokta oluşturma akışı sırasında el ile istek parametresini true olarak ayarlayın. Ayrıntılar için [New-AzPrivateEndpoint](/powershell/module/az.network/new-azprivateendpoint) ve [az Network Private-Endpoint Create](/cli/azure/network/private-endpoint#az_network_private_endpoint_create) bölümüne bakın. 
 
 ## <a name="dns-configuration"></a>DNS yapılandırması 
 Bağlantı dizesinin bir parçası olarak tam etki alanı adı (FQDN) kullanarak bir özel bağlantı kaynağına bağlanırken, DNS ayarlarınızı ayrılmış özel IP adresine çözümlemek üzere doğru şekilde yapılandırmak önemlidir. Mevcut Azure hizmetlerinde ortak bir uç nokta üzerinden bağlanılırken kullanılacak bir DNS yapılandırması zaten olabilir. Özel uç noktanız kullanılarak bağlanmak için bunun geçersiz kılınması gerekir. 

@@ -7,14 +7,14 @@ ms.subservice: azure-arc-data
 author: twright-msft
 ms.author: twright
 ms.reviewer: mikeray
-ms.date: 03/02/2021
+ms.date: 04/07/2021
 ms.topic: how-to
-ms.openlocfilehash: facb7db73bf7a709b9ed07e460d8653d79f1ed2f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f7bc90f2748d230ad50868cff5d7a8f7b69d850a
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101687604"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107029548"
 ---
 # <a name="create-azure-arc-data-controller-using-the-azure-data-cli-azdata"></a>Azure Arc veri denetleyicisi 'ni kullanarak oluşturma [!INCLUDE [azure-data-cli-azdata](../../../includes/azure-data-cli-azdata.md)]
 
@@ -57,131 +57,6 @@ kubectl get namespace
 kubectl config current-context
 ```
 
-### <a name="connectivity-modes"></a>Bağlantı modları
-
-[Bağlantı modlarında ve gereksinimlerde](./connectivity.md)açıklandığı gibi, Azure Arc veri denetleyicisi ya da bağlantı modu ile dağıtılabilir `direct` `indirect` . `direct`Bağlantı modu ile kullanım verileri otomatik olarak ve sürekli olarak Azure 'a gönderilir. Bu makalelerde, örnekler `direct` bağlantı modunu aşağıda gösterildiği gibi belirtir:
-
-   ```console
-   --connectivity-mode direct
-   ```
-
-   Denetleyiciyi bağlantı moduyla oluşturmak için `indirect` örnekteki betikleri aşağıda belirtildiği gibi güncelleştirin:
-
-   ```console
-   --connectivity-mode indirect
-   ```
-
-#### <a name="create-service-principal"></a>Hizmet sorumlusu oluşturma
-
-Azure Arc veri denetleyicisi `direct` 'ni bağlantı modu ile dağıtıyorsanız, Azure bağlantısı Için hizmet sorumlusu kimlik bilgileri gereklidir. Hizmet sorumlusu, kullanım ve ölçüm verilerini karşıya yüklemek için kullanılır. 
-
-Ölçüm karşıya yükleme hizmeti sorumlusunu oluşturmak için şu komutları izleyin:
-
-> [!NOTE]
-> Hizmet sorumlusu oluşturmak için [Azure 'da belirli izinler](../../active-directory/develop/howto-create-service-principal-portal.md#permissions-required-for-registering-an-app)gerekir.
-
-Hizmet sorumlusu oluşturmak için aşağıdaki örneği güncelleştirin. `<ServicePrincipalName>`Hizmet sorumlunuzu adıyla değiştirin ve komutunu çalıştırın:
-
-```azurecli
-az ad sp create-for-rbac --name <ServicePrincipalName>
-``` 
-
-Daha önce hizmet sorumlusu oluşturduysanız ve yalnızca geçerli kimlik bilgilerini almanız gerekiyorsa, kimlik bilgisini sıfırlamak için aşağıdaki komutu çalıştırın.
-
-```azurecli
-az ad sp credential reset --name <ServicePrincipalName>
-```
-
-Örneğin, adlı bir hizmet sorumlusu oluşturmak için `azure-arc-metrics` aşağıdaki komutu çalıştırın
-
-```console
-az ad sp create-for-rbac --name azure-arc-metrics
-```
-
-Örnek çıktı:
-
-```output
-"appId": "2e72adbf-de57-4c25-b90d-2f73f126e123",
-"displayName": "azure-arc-metrics",
-"name": "http://azure-arc-metrics",
-"password": "5039d676-23f9-416c-9534-3bd6afc78123",
-"tenant": "72f988bf-85f1-41af-91ab-2d7cd01ad1234"
-```
-
-`appId` `password` `tenant` Daha sonra kullanmak üzere bir ortam değişkeninde, ve değerlerini kaydedin. 
-
-#### <a name="save-environment-variables-in-windows"></a>Windows 'da ortam değişkenlerini kaydetme
-
-```console
-SET SPN_CLIENT_ID=<appId>
-SET SPN_CLIENT_SECRET=<password>
-SET SPN_TENANT_ID=<tenant>
-SET SPN_AUTHORITY=https://login.microsoftonline.com
-```
-
-#### <a name="save-environment-variables-in-linux-or-macos"></a>Linux veya macOS 'ta ortam değişkenlerini kaydetme
-
-```console
-export SPN_CLIENT_ID='<appId>'
-export SPN_CLIENT_SECRET='<password>'
-export SPN_TENANT_ID='<tenant>'
-export SPN_AUTHORITY='https://login.microsoftonline.com'
-```
-
-#### <a name="save-environment-variables-in-powershell"></a>PowerShell 'de ortam değişkenlerini kaydetme
-
-```console
-$Env:SPN_CLIENT_ID="<appId>"
-$Env:SPN_CLIENT_SECRET="<password>"
-$Env:SPN_TENANT_ID="<tenant>"
-$Env:SPN_AUTHORITY="https://login.microsoftonline.com"
-```
-
-Hizmet sorumlusunu oluşturduktan sonra, hizmet sorumlusunu uygun role atayın. 
-
-### <a name="assign-roles-to-the-service-principal"></a>Hizmet sorumlusuna roller atama
-
-Hizmet sorumlusunu, `Monitoring Metrics Publisher` veritabanı örneği kaynaklarınızın bulunduğu abonelikte role atamak için bu komutu çalıştırın:
-
-#### <a name="run-the-command-on-windows"></a>Komutu Windows üzerinde çalıştırın
-
-> [!NOTE]
-> Windows ortamından çalışırken rol adları için çift tırnak kullanmanız gerekir.
-
-```azurecli
-az role assignment create --assignee <appId> --role "Monitoring Metrics Publisher" --scope subscriptions/<Subscription ID>
-az role assignment create --assignee <appId> --role "Contributor" --scope subscriptions/<Subscription ID>
-```
-
-#### <a name="run-the-command-on-linux-or-macos"></a>Linux veya macOS üzerinde komutunu çalıştırın
-
-```azurecli
-az role assignment create --assignee <appId> --role 'Monitoring Metrics Publisher' --scope subscriptions/<Subscription ID>
-az role assignment create --assignee <appId> --role 'Contributor' --scope subscriptions/<Subscription ID>
-```
-
-#### <a name="run-the-command-in-powershell"></a>Komutu PowerShell 'de çalıştırın
-
-```powershell
-az role assignment create --assignee <appId> --role 'Monitoring Metrics Publisher' --scope subscriptions/<Subscription ID>
-az role assignment create --assignee <appId> --role 'Contributor' --scope subscriptions/<Subscription ID>
-```
-
-```output
-{
-  "canDelegate": null,
-  "id": "/subscriptions/<Subscription ID>/providers/Microsoft.Authorization/roleAssignments/f82b7dc6-17bd-4e78-93a1-3fb733b912d",
-  "name": "f82b7dc6-17bd-4e78-93a1-3fb733b9d123",
-  "principalId": "5901025f-0353-4e33-aeb1-d814dbc5d123",
-  "principalType": "ServicePrincipal",
-  "roleDefinitionId": "/subscriptions/<Subscription ID>/providers/Microsoft.Authorization/roleDefinitions/3913510d-42f4-4e42-8a64-420c39005123",
-  "scope": "/subscriptions/<Subscription ID>",
-  "type": "Microsoft.Authorization/roleAssignments"
-}
-```
-
-Uygun role ve ortam değişkenleri ayarlanmış hizmet sorumlusu ile veri denetleyicisini oluşturmaya devam edebilirsiniz 
-
 ## <a name="create-the-azure-arc-data-controller"></a>Azure Arc veri denetleyicisi oluşturma
 
 > [!NOTE]
@@ -203,10 +78,10 @@ Varsayılan olarak, AKS dağıtım profili `managed-premium` depolama sınıfın
 `managed-premium`Depolama sınıfınız olarak kullanacaksanız, veri denetleyicisi oluşturmak için aşağıdaki komutu çalıştırabilirsiniz. Komutta yer tutucuları, kaynak grubu adı, abonelik KIMLIĞI ve Azure konumuyla değiştirin.
 
 ```console
-azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Hangi depolama sınıfının kullanılacağı konusunda emin değilseniz, `default` KULLANDıĞıNıZ VM türünden bağımsız olarak desteklenen depolama sınıfını kullanmanız gerekir. Yalnızca en hızlı performansı sağlamaz.
@@ -214,10 +89,10 @@ Hangi depolama sınıfının kullanılacağı konusunda emin değilseniz, `defau
 `default`Depolama sınıfını kullanmak istiyorsanız şu komutu çalıştırabilirsiniz:
 
 ```console
-azdata arc dc create --profile-name azure-arc-aks-default-storage --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --profile-name azure-arc-aks-default-storage --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --profile-name azure-arc-aks-default-storage --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --profile-name azure-arc-aks-default-storage --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Komutu çalıştırdığınızda, [oluşturma durumunu izlemek](#monitoring-the-creation-status)için devam edin.
@@ -229,10 +104,10 @@ Varsayılan olarak, dağıtım profili `managed-premium` depolama sınıfını k
 Yönetilen-Premium Depolama sınıfını kullanarak veri denetleyicisi oluşturmak için aşağıdaki komutu çalıştırabilirsiniz:
 
 ```console
-azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Hangi depolama sınıfının kullanılacağı konusunda emin değilseniz, `default` KULLANDıĞıNıZ VM türünden bağımsız olarak desteklenen depolama sınıfını kullanmanız gerekir. Azure Stack hub 'ında, Premium diskler ve Standart diskler aynı depolama altyapısı tarafından desteklenir. Bu nedenle, aynı genel performansı, ancak farklı ıOPS limitleriyle sağlaması beklenir.
@@ -240,10 +115,10 @@ Hangi depolama sınıfının kullanılacağı konusunda emin değilseniz, `defau
 `default`Depolama sınıfını kullanmak istiyorsanız, bu komutu çalıştırabilirsiniz.
 
 ```console
-azdata arc dc create --profile-name azure-arc-aks-default-storage --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --profile-name azure-arc-aks-default-storage --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --profile-name azure-arc-aks-premium-storage --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --profile-name azure-arc-aks-default-storage --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Komutu çalıştırdığınızda, [oluşturma durumunu izlemek](#monitoring-the-creation-status)için devam edin.
@@ -255,10 +130,10 @@ Varsayılan olarak, dağıtım profili, adlı bir depolama sınıfı `default` v
 `default`Depolama sınıfı ve hizmet türünü kullanarak veri denetleyicisi oluşturmak için aşağıdaki komutu çalıştırabilirsiniz `LoadBalancer` .
 
 ```console
-azdata arc dc create --profile-name azure-arc-aks-hci --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --profile-name azure-arc-aks-hci --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --profile-name azure-arc-aks-hci --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --profile-name azure-arc-aks-hci --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Komutu çalıştırdığınızda, [oluşturma durumunu izlemek](#monitoring-the-creation-status)için devam edin.
@@ -290,10 +165,10 @@ Veri denetleyicisini oluşturmak için aşağıdaki komutu çalıştırabilirsin
 > Burada ve yukarıdaki komutlarda aynı ad alanını kullanın `oc adm policy add-scc-to-user` . Örnek `arc` .
 
 ```console
-azdata arc dc create --profile-name azure-arc-azure-openshift --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --profile-name azure-arc-azure-openshift --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example
-#azdata arc dc create --profile-name azure-arc-azure-openshift --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --profile-name azure-arc-azure-openshift --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Komutu çalıştırdığınızda, [oluşturma durumunu izlemek](#monitoring-the-creation-status)için devam edin.
@@ -381,10 +256,10 @@ Artık aşağıdaki komutu kullanarak veri denetleyicisi oluşturmaya hazırsın
 
 
 ```console
-azdata arc dc create --path ./custom --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --path ./custom --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --path ./custom --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --path ./custom --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Komutu çalıştırdığınızda, [oluşturma durumunu izlemek](#monitoring-the-creation-status)için devam edin.
@@ -425,10 +300,10 @@ azdata arc dc config replace --path ./custom/control.json --json-values "$.spec.
 Artık aşağıdaki komutu kullanarak veri denetleyicisi oluşturmaya hazırsınız.
 
 ```console
-azdata arc dc create --path ./custom --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --path ./custom --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --path ./custom --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --path ./custom --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Komutu çalıştırdığınızda, [oluşturma durumunu izlemek](#monitoring-the-creation-status)için devam edin.
@@ -440,10 +315,10 @@ Varsayılan olarak, EKS depolama sınıfı `gp2` ve hizmet türüdür `LoadBalan
 Veri denetleyicisini, belirtilen EKS dağıtım profilini kullanarak oluşturmak için aşağıdaki komutu çalıştırın.
 
 ```console
-azdata arc dc create --profile-name azure-arc-eks --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --profile-name azure-arc-eks --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --profile-name azure-arc-eks --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --profile-name azure-arc-eks --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Komutu çalıştırdığınızda, [oluşturma durumunu izlemek](#monitoring-the-creation-status)için devam edin.
@@ -455,10 +330,10 @@ Varsayılan olarak, GKE depolama sınıfı `standard` ve hizmet türüdür `Load
 Veri denetleyicisini, belirtilen GKE dağıtım profilini kullanarak oluşturmak için aşağıdaki komutu çalıştırın.
 
 ```console
-azdata arc dc create --profile-name azure-arc-gke --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode direct
+azdata arc dc create --profile-name azure-arc-gke --namespace arc --name arc --subscription <subscription id> --resource-group <resource group name> --location <location> --connectivity-mode indirect
 
 #Example:
-#azdata arc dc create --profile-name azure-arc-gke --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode direct
+#azdata arc dc create --profile-name azure-arc-gke --namespace arc --name arc --subscription 1e5ff510-76cf-44cc-9820-82f2d9b51951 --resource-group my-resource-group --location eastus --connectivity-mode indirect
 ```
 
 Komutu çalıştırdığınızda, [oluşturma durumunu izlemek](#monitoring-the-creation-status)için devam edin.

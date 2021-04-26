@@ -3,12 +3,12 @@ title: Azure Izleyici 'de ölçümler-Azure Event Hubs | Microsoft Docs
 description: Bu makalede Azure Event Hubs izlemek için Azure Izleme 'nin nasıl kullanılacağı hakkında bilgi verilmektedir.
 ms.topic: article
 ms.date: 02/25/2021
-ms.openlocfilehash: 52ab66fe264b85be117eb8e2e21cb89f38d0fcae
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9b31ed9e8bea67367533813f20265761b77ae371
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101715590"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107307359"
 ---
 # <a name="azure-event-hubs-metrics-in-azure-monitor"></a>Azure İzleyici'deki Azure Event Hubs ölçümleri
 
@@ -77,7 +77,7 @@ Event Hubs hakkında daha fazla bilgi için şu bağlantıları ziyaret edin:
     - [Java](event-hubs-java-get-started-send.md)
     - [Python](event-hubs-python-get-started-send.md)
     - [JavaScript](event-hubs-node-get-started-send.md)
-* [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+* [Event Hubs ile ilgili SSS](event-hubs-faq.yml)
 * [Event Hubs kullanan örnek uygulamalar](https://github.com/Azure/azure-event-hubs/tree/master/samples)
 
 [1]: ./media/event-hubs-metrics-azure-monitor/event-hubs-monitor1.png

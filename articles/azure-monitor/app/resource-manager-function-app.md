@@ -1,17 +1,16 @@
 ---
 title: Azure İşlev Uygulaması + Application Insights kaynakları için Kaynak Yöneticisi şablonu örnekleri
 description: Bir Application Insights kaynağıyla Azure İşlev Uygulaması dağıtmak için örnek Azure Resource Manager şablonları.
-ms.subservice: application-insights
 ms.topic: sample
 author: lgayhardt
 ms.author: lagayhar
 ms.date: 08/06/2020
-ms.openlocfilehash: 85829052f2e9179b0a721efce720763f82d6402c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 783ab811c91ae52b51a8be516ad2ddd9f73d4410
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100628367"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106383347"
 ---
 # <a name="resource-manager-template-sample-for-creating-azure-function-apps-with-application-insights-monitoring"></a>Application Insights izleme ile Azure Işlev uygulamaları oluşturmaya yönelik Kaynak Yöneticisi Şablon örneği
 

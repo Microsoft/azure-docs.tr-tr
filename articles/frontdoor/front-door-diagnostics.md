@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/23/2020
 ms.author: yuajia
-ms.openlocfilehash: 58db217ca173acbe0356596de916216c4ab7f241
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a972123604cafbfc4c6753c1fe3ad21147b53b2d
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101715556"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550668"
 ---
 # <a name="monitoring-metrics-and-logs-in-azure-front-door"></a>Azure ön kapılarında ölçümleri ve günlükleri izleme
 
@@ -29,7 +29,7 @@ Azure ön kapısını kullanarak kaynakları aşağıdaki yollarla izleyebilirsi
 
 Ölçümler, portalda performans sayaçlarını görüntülemenize olanak tanıyan belirli Azure kaynaklarına yönelik bir özelliktir. Aşağıda kullanılabilir ön kapı ölçümleri verilmiştir:
 
-| Metric | Ölçüm görünen adı | Birim | Boyutlar | Description |
+| Metric | Ölçüm görünen adı | Birim | Boyutlar | Açıklama |
 | --- | --- | --- | --- | --- |
 | Istek sayısı | İstek Sayısı | Count | Http durumu</br>HttpStatusGroup</br>ClientRegion</br>ClientCountry | Ön kapı tarafından sunulan istemci isteklerinin sayısı.  |
 | RequestSize | İstek boyutu | Bayt | Http durumu</br>HttpStatusGroup</br>ClientRegion</br>ClientCountry | İstemcilerden ön kapıya istek olarak gönderilen bayt sayısı. |
@@ -71,7 +71,7 @@ Etkinlik günlükleri, Azure kaynakları üzerinde gerçekleştirilen işlemlere
 
 3. **Tanılamayı aç '** ı seçin. Tanılama günlüklerini bir depolama hesabı ölçümleriyle birlikte arşivleyin, bunları bir olay hub 'ına akıtır veya Azure Izleyici günlüklerine gönderin.
 
-Ön kapı şu anda tanılama günlükleri sağlıyor (toplu saatlik). Tanılama günlükleri, her giriş için aşağıdaki şemaya sahip tek API istekleri sağlar:
+Ön kapı şu anda tanılama günlükleri sağlıyor. Tanılama günlükleri, her giriş için aşağıdaki şemaya sahip tek API istekleri sağlar:
 
 | Özellik  | Açıklama |
 | ------------- | ------------- |

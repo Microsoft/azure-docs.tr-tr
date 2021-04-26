@@ -16,12 +16,12 @@ ms.date: 12/23/2020
 ms.author: barclayn
 ms.reviewer: markwahl-msft
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4122e645b76751e8944704a6405cf5dee09129f1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3af783d7ff8be36c63af871ab4f2d214ca9f9405
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97932444"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532583"
 ---
 # <a name="planning-azure-active-directory-access-reviews-deployment"></a>Azure Active Directory erişim gözden geçirmeleri dağıtımını planlama
 
@@ -193,7 +193,7 @@ Erişim Incelemesi oluşturmak, yönetmek veya okumak için gereken yönetim rol
 | Kaynak türü| Erişim Incelemeleri oluşturma ve yönetme (oluşturucular)| Okuma erişimi gözden geçirme sonuçları |
 | - | - | -|
 | Grup veya uygulama| Genel Yönetici <p>Kullanıcı Yöneticisi| Oluşturucular ve Güvenlik Yöneticisi |
-| Azure AD 'de ayrıcalıklı roller| Genel Yönetici <p>Ayrıcalıklı rol yöneticisi| Oluşturucular <p>Güvenlik Okuyucusu<p>Güvenlik Yöneticisi |
+| Azure AD 'de ayrıcalıklı roller| Genel Yönetici <p>Ayrıcalıklı rol yöneticisi| Oluşturucular <p>Güvenlik okuyucusu<p>Güvenlik Yöneticisi |
 | Azure 'da ayrıcalıklı roller (kaynaklar)| Genel Yönetici<p>Kullanıcı Yöneticisi<p>Kaynak sahibi| Oluşturucular |
 | Erişim paketi| Genel Yönetici<p>Erişim paketi Oluşturucusu| Yalnızca genel yönetici |
 
@@ -419,7 +419,7 @@ Bir strateji ve Azure AD ile tümleştirilmiş kaynaklara erişimi gözden geçi
 
 Yöneticiler, eski erişim riskini azaltmak için bir erişim paketine etkin atamaları olan kullanıcıların düzenli olarak incelemelerine olanak sağlayabilir. Aşağıdaki bağlantıdaki yönergeleri izleyin:
 
-| Nasıl yapılır makaleleri| Description |
+| Nasıl yapılır makaleleri| Açıklama |
 | - | - |
 | [Erişim Incelemeleri oluşturma](entitlement-management-access-reviews-create.md)| Erişim paketi incelemelerini etkinleştirin. |
 | [Erişim gözden geçirmeleri gerçekleştirin](entitlement-management-access-reviews-review-access.md)| Erişim paketine atanan diğer kullanıcılar için erişim gözden geçirmeleri gerçekleştirin. |
@@ -433,7 +433,7 @@ Yöneticiler, eski erişim riskini azaltmak için bir erişim paketine etkin ata
 
 Çalışanlar ve konuklar için gruplara ve uygulamalara erişim ihtiyacı büyük olasılıkla zaman içinde değişir. Yöneticiler, eski erişim atamalarıyla ilişkili riski azaltmak için Grup üyeleri veya uygulama erişimi için erişim İncelemeleri oluşturabilir. Aşağıdaki bağlantıdaki yönergeleri izleyin:
 
-| Nasıl yapılır makaleleri| Description |
+| Nasıl yapılır makaleleri| Açıklama |
 | - | - |
 | [Erişim Incelemeleri oluşturma](create-access-review.md)| Grup üyeleri veya uygulama erişimi için bir veya daha fazla erişim incelemesi oluşturun. |
 | [Erişim gözden geçirmeleri gerçekleştirin](perform-access-review.md)| Bir grubun veya bir uygulamaya erişimi olan kullanıcıların üyeleri için erişim gözden geçirmesi gerçekleştirin. |
@@ -450,7 +450,7 @@ Eski rol atamalarıyla ilişkili riski azaltmak için, ayrıcalıklı Azure AD r
 
 Aşağıdaki bağlantılarda yer alan yönergeleri izleyin:
 
-| Nasıl yapılır makaleleri | Description |
+| Nasıl yapılır makaleleri | Açıklama |
 | - | - |
  [Erişim Incelemeleri oluşturma](../privileged-identity-management/pim-how-to-start-security-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json)| PıM 'de ayrıcalıklı Azure AD rolleri için erişim incelemeleri oluşturma |
 | [Erişiminizi kendi kendinize gözden geçirin](../privileged-identity-management/pim-how-to-perform-security-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json)| Bir Yönetim rolüne atandıysanız, rolünüze erişimi onaylayın veya reddedin |
@@ -465,7 +465,7 @@ Eski rol atamalarıyla ilişkili riski azaltmak için, ayrıcalıklı Azure Kayn
 
 Aşağıdaki bağlantılarda yer alan yönergeleri izleyin:
 
-| Nasıl yapılır makaleleri| Description |
+| Nasıl yapılır makaleleri| Açıklama |
 | - | -|
 | [Erişim Incelemeleri oluşturma](../privileged-identity-management/pim-resource-roles-start-access-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json)| PıM 'de ayrıcalıklı Azure Kaynak rolleri için erişim gözden geçirmeleri oluşturma |
 | [Erişiminizi kendi kendinize gözden geçirin](../privileged-identity-management/pim-resource-roles-perform-access-review.md?toc=%2fazure%2factive-directory%2fgovernance%2ftoc.json)| Bir Yönetim rolüne atandıysanız, rolünüze erişimi onaylayın veya reddedin |
@@ -474,7 +474,7 @@ Aşağıdaki bağlantılarda yer alan yönergeleri izleyin:
 
 ## <a name="use-the-access-reviews-api"></a>Erişim gözden geçirmeleri API 'sini kullanma
 
-Yeniden görüntülenebilen kaynaklarla etkileşim kurmak ve bunları yönetmek için bkz. [Graph API yöntemleri](/graph/api/resources/accessreviews-root?view=graph-rest-beta) ve [rol ve uygulama izni yetkilendirme denetimleri](/graph/api/resources/accessreviews-root?view=graph-rest-beta) . Microsoft Graph API 'sindeki erişim gözden geçirmeleri yöntemleri hem uygulama hem de Kullanıcı bağlamları için kullanılabilir. Uygulama bağlamında betikleri çalıştırırken, API 'yi (hizmet ilkesi) çalıştırmak için kullanılan hesaba, erişim gözden geçirmeleri bilgilerini sorgulamak için "AccessReview. Read. All" izninin verilmesi gerekir.
+Yeniden görüntülenebilen kaynaklarla etkileşim kurmak ve bunları yönetmek için bkz. [Graph API yöntemleri](/graph/api/resources/accessreviewsv2-root?view=graph-rest-beta&preserve-view=true) ve [rol ve uygulama izni yetkilendirme denetimleri](/graph/api/resources/accessreviewsv2-root?view=graph-rest-beta&preserve-view=true) . Microsoft Graph API 'sindeki erişim gözden geçirmeleri yöntemleri hem uygulama hem de Kullanıcı bağlamları için kullanılabilir. Uygulama bağlamında betikleri çalıştırırken, API 'yi (hizmet ilkesi) çalıştırmak için kullanılan hesaba, erişim gözden geçirmeleri bilgilerini sorgulamak için "AccessReview. Read. All" izninin verilmesi gerekir.
 
 Erişim gözden geçirmeleri için Graph API kullanarak otomatikleştirilmesi için popüler erişim gözden geçirmeleri görevleri şunlardır:
 

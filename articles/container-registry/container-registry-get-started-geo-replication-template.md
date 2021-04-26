@@ -3,17 +3,19 @@ title: Hızlı başlangıç-coğrafi olarak çoğaltılan kayıt defteri Azure R
 description: Azure Resource Manager şablonu kullanarak coğrafi olarak çoğaltılan bir Azure Container Registry oluşturmayı öğrenin.
 services: azure-resource-manager
 author: dlepow
-ms.service: azure-resource-manager
-ms.topic: quickstart
-ms.custom: subject-armqs
 ms.author: danlep
 ms.date: 10/06/2020
-ms.openlocfilehash: 97b556e0329644b973def8333ddb5e70e370b0bc
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.topic: quickstart
+ms.service: azure-resource-manager
+ms.custom:
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: c59c7897054b2ad65a76353e6d886af46cac91e0
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91826976"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537442"
 ---
 # <a name="quickstart-create-a-geo-replicated-container-registry-by-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak coğrafi olarak çoğaltılan kapsayıcı kayıt defteri oluşturma
 

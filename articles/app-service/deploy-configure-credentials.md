@@ -4,13 +4,13 @@ description: Azure App Service dağıtım kimlik bilgileri türlerini ve bunlar�
 ms.topic: article
 ms.date: 02/11/2021
 ms.reviewer: byvinyal
-ms.custom: seodec18
-ms.openlocfilehash: c7d3c7c8b5da40a4e9ccd9085af5a850b9ebc3dd
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: seodec18, devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 008bfa58c117fc1b43227ba73902d921cec25795
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102052356"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830584"
 ---
 # <a name="configure-deployment-credentials-for-azure-app-service"></a>Azure App Service için dağıtım kimlik bilgilerini yapılandırma
 Yerel bir bilgisayardan uygulama dağıtımını güvenli hale getirmek için [Azure App Service](./overview.md) , [Yerel git dağıtımı](deploy-local-git.md) ve [FTP/S dağıtımı](deploy-ftp.md)için iki tür kimlik bilgilerini destekler. Bu kimlik bilgileri, Azure aboneliğiniz kimlik bilgilerinizle aynı değildir.
@@ -24,7 +24,7 @@ Yerel bir bilgisayardan uygulama dağıtımını güvenli hale getirmek için [A
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/cli)
 
-[Az WebApp Deployment User set](/cli/azure/webapp/deployment/user#az-webapp-deployment-user-set) komutunu çalıştırın. \<username>Ve öğesini \<password> bir dağıtım kullanıcısı Kullanıcı adı ve parolasıyla değiştirin. 
+[Az WebApp Deployment User set](/cli/azure/webapp/deployment/user#az_webapp_deployment_user_set) komutunu çalıştırın. \<username>Ve öğesini \<password> bir dağıtım kullanıcısı Kullanıcı adı ve parolasıyla değiştirin. 
 
 - Kullanıcı adı Azure içinde benzersiz olmalıdır ve yerel git gönderimleri için ' @ ' sembolünü içermemelidir. 
 - Parola en az sekiz karakter uzunluğunda olmalıdır ve şu üç öğeden ikisi vardır: harfler, rakamlar ve semboller. 

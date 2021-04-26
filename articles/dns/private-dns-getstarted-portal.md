@@ -3,16 +3,18 @@ title: Hızlı başlangıç-Azure portal kullanarak bir Azure özel DNS bölgesi
 description: Bu hızlı başlangıçta, Azure DNS bir özel DNS bölgesi ve kaydı oluşturup test edersiniz. Bu, Azure portal kullanarak ilk özel DNS bölgenizi ve kaydınızı oluşturup yönetmek için adım adım kılavuzudur.
 services: dns
 author: rohinkoul
-ms.service: dns
-ms.topic: quickstart
-ms.date: 10/20/2020
 ms.author: rohink
-ms.openlocfilehash: d298dfd5f3ad0beb56a511c124bab056ca25fd27
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 10/20/2020
+ms.topic: quickstart
+ms.service: dns
+ms.custom:
+- mode-portal
+ms.openlocfilehash: 2115062db8615ca782cb987903e5ebfc83400cd2
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92310061"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535455"
 ---
 # <a name="quickstart-create-an-azure-private-dns-zone-using-the-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak bir Azure özel DNS bölgesi oluşturma
 
@@ -181,4 +183,3 @@ Artık gerekli değilse, bu hızlı başlangıçta oluşturulan kaynakları silm
 
 > [!div class="nextstepaction"]
 > [Azure DNS Özel Bölgeleri senaryoları](private-dns-scenarios.md)
-

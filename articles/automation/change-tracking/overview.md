@@ -5,12 +5,12 @@ services: automation
 ms.subservice: change-inventory-management
 ms.date: 01/22/2021
 ms.topic: conceptual
-ms.openlocfilehash: e2371f3de8ed73250bca6639e6c749811c5559ad
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ed29def305bfa33a0a947a331775de89275e5f7f
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100572619"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220875"
 ---
 # <a name="change-tracking-and-inventory-overview"></a>Değişiklik İzleme ve envantere genel bakış
 
@@ -40,6 +40,8 @@ Log Analytics çalışma alanına bağlı makineler, yüklü yazılımlar, Micro
 
 > [!NOTE]
 > Değişiklik İzleme ve envanter, Otomasyon hesabınıza bir Log Analytics çalışma alanı bağlamayı gerektirir. Desteklenen bölgelerin kesin listesi için bkz. [Azure çalışma alanı eşlemeleri](../how-to/region-mappings.md). Bölge eşlemeleri, Otomasyon hesabınızdan ayrı bir bölgedeki VM 'Leri yönetme özelliğini etkilemez.
+
+Hizmet sağlayıcı olarak, [Azure açık Thouse](../../lighthouse/overview.md)için birden fazla müşteri kiracısından eklendi olabilirsiniz. Azure Mathouse, her seferinde çok sayıda Azure Active Directory (Azure AD) kiracıda işlem gerçekleştirmenize olanak tanır. bu sayede, Değişiklik İzleme ve envanter gibi yönetim görevleri, sorumlu olduğunuz kiracılar arasında daha verimli hale getirirsiniz. Değişiklik İzleme ve envanter, aynı Kiracıdaki birden çok abonelikteki makineleri veya [Azure tarafından atanan kaynak yönetimini](../../lighthouse/concepts/azure-delegated-resource-management.md)kullanarak kiracılar genelinde yönetebilir.
 
 ## <a name="current-limitations"></a>Geçerli sınırlamalar
 

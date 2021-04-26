@@ -4,12 +4,12 @@ description: Kullanımı izlemek ve sorunları tanılamak için cihazınıza vey
 ms.topic: conceptual
 ms.date: 05/11/2020
 ms.custom: devx-track-js, devx-track-csharp
-ms.openlocfilehash: d658d7e64f720a3fb700d157cd5194ff50a48c33
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8e866dc30d83f1b1f080a1be385026dcfbc77320
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103471627"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106122110"
 ---
 # <a name="application-insights-api-for-custom-events-and-metrics"></a>Özel olaylar ve ölçümler için Application Insights API
 
@@ -702,6 +702,9 @@ appInsights.setAuthenticatedUserContext(validatedId, accountId);
 [Ölçüm Gezgini](../essentials/metrics-charts.md), **kullanıcıları, kimliği doğrulanmış** ve **Kullanıcı hesaplarını** sayan bir grafik oluşturabilirsiniz.
 
 Ayrıca, belirli kullanıcı adları ve hesapları ile istemci veri noktalarını [arayabilirsiniz](./diagnostic-search.md) .
+
+> [!NOTE]
+> .NET Core SDK [Applicationınsightsserviceoptions sınıfındaki Enableauthenticationtrackingjavascript özelliği](https://github.com/microsoft/ApplicationInsights-dotnet/blob/develop/NETCORE/src/Shared/Extensions/ApplicationInsightsServiceOptions.cs) , Kullanıcı adını, Application Insights JavaScript SDK 'sı tarafından gönderilen her bir Izlemeye yönelik kimlik doğrulama kimliği olarak eklemek Için gereken JavaScript yapılandırmasını basitleştirir. Bu özellik true olarak ayarlandığında, ASP.NET Core kullanıcının Kullanıcı adı [istemci tarafı telemetrisiyle](asp-net-core.md#enable-client-side-telemetry-for-web-applications)birlikte yazdırılır, `appInsights.setAuthenticatedUserContext` Bu nedenle ASP.NET Core için SDK tarafından zaten eklenmiş olduğundan el ile gerekli olmaz. Kimlik doğrulama kimliği, .NET Core 'daki SDK 'nın onu tanımlayacağı sunucuya da gönderilir ve [JAVASCRIPT API başvurusunda](https://github.com/microsoft/ApplicationInsights-JS/blob/master/API-reference.md#setauthenticatedusercontext)açıklandığı gibi herhangi bir sunucu tarafı telemetri için kullanacaktır. Ancak, ASP.NET Core MVC ile aynı şekilde çalışmayan JavaScript uygulamaları (örneğin, SPA Web Apps) için yine de `appInsights.setAuthenticatedUserContext` el ile eklemeniz gerekir.
 
 ## <a name="filtering-searching-and-segmenting-your-data-by-using-properties"></a><a name="properties"></a>Özellikleri kullanarak verilerinizi filtreleme, arama ve parçalara ayırma
 

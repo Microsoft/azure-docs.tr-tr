@@ -11,12 +11,12 @@ ms.workload: big-data
 ms.topic: conceptual
 ms.date: 09/29/2020
 ms.custom: seodec18
-ms.openlocfilehash: 4f236679d0662df852581a6a8408ed6bc0d4e3fe
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 26363031aea37c53cce098e2b6cbc2b4d93b918f
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91535698"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107307087"
 ---
 # <a name="understand-data-retention-in-azure-time-series-insights-gen1"></a>Azure Time Series Insights Gen1 'da veri bekletmeyi anlama
 
@@ -85,7 +85,7 @@ Bu sırada, giriş devam etmeden veya **çalışmaya devam** edene kadar ortam a
 Giriş devam ettiğinde:
 
 - Veri akışları olay kaynağı tarafından alındığı sırada
-- Olay kaynağınızda bekletme ilkelerini aşmadığınız takdirde olaylar, zaman damgalarına göre dizinlenir. Olay kaynağı saklama yapılandırması hakkında daha fazla bilgi için [Event HUBS SSS](../event-hubs/event-hubs-faq.md)
+- Olay kaynağınızda bekletme ilkelerini aşmadığınız takdirde olaylar, zaman damgalarına göre dizinlenir. Olay kaynağı saklama yapılandırması hakkında daha fazla bilgi için [Event HUBS SSS](../event-hubs/event-hubs-faq.yml)
 
 > [!IMPORTANT]
 > Giriş duraklamasını önlemeye yardımcı olmak için uyarılar ayarlamanız gerekir. Varsayılan saklama, Azure olay kaynakları için 1 gün olduğundan veri kaybı mümkündür. Bu nedenle, giriş duraklatıldıktan sonra ek eylem gerçekleşmediğiniz takdirde büyük olasılıkla en son verileri kaybedersiniz. Veri kaybını önlemek için kapasiteyi artırmanız veya **eski verileri temizlemek** için davranış geçişi yapmanız gerekir.

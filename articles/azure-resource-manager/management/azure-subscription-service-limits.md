@@ -2,13 +2,13 @@
 title: Azure abonelik limitleri ve kotaları
 description: Ortak Azure aboneliği ve hizmet sınırları, Kotalar ve kısıtlamaların bir listesini sağlar. Bu makale, limitlerin en yüksek değerleriyle birlikte nasıl artabileceğine ilişkin bilgiler içerir.
 ms.topic: conceptual
-ms.date: 03/15/2021
-ms.openlocfilehash: 4dd62c926cce765ebc2b21378308650e313716ff
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/07/2021
+ms.openlocfilehash: 3ef3e6f3b67e8c92e0137f36e19c62cba79e1c14
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103471020"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107030836"
 ---
 # <a name="azure-subscription-and-service-limits-quotas-and-constraints"></a>Azure aboneliği ve hizmet limitleri, Kotalar ve kısıtlamalar
 
@@ -34,9 +34,9 @@ Azure fiyatlandırması hakkında daha fazla bilgi edinmek için bkz. [Azure fiy
 
 Bazı sınırlar, bölgesel düzeyde yönetilir.
 
-Örnek olarak vCPU kotaları kullanalım. VCPU desteğiyle bir kota artışı istemek için, hangi bölgelerde kaç vCPU kullanmak istediğinize karar vermelisiniz. Daha sonra istediğiniz miktarlar ve bölgeler için Azure Kaynak grubu vCPU kotaları için özel bir istek yaparsınız. Uygulamanızı orada çalıştırmak için Batı Avrupa 'de 30 vCPU kullanmanız gerekiyorsa, Batı Avrupa özellikle 30 vCPU isteğinde bulunur. VCPU kotanızı başka hiçbir bölgede artmıyor; yalnızca Batı Avrupa 30-vCPU kotasına sahiptir.
+Örnek olarak vCPU kotaları kullanalım. VCPU desteğiyle bir kota artışı istemek için, hangi bölgelerde kaç vCPU kullanmak istediğinize karar vermelisiniz. Daha sonra, istediğiniz miktarlar ve bölgeler için vCPU kotalarında artış isteğinde bulabilirsiniz. Uygulamanızı orada çalıştırmak için Batı Avrupa 'de 30 vCPU kullanmanız gerekiyorsa, Batı Avrupa özellikle 30 vCPU isteğinde bulunur. VCPU kotanızı başka hiçbir bölgede artmıyor; yalnızca Batı Avrupa 30-vCPU kotasına sahiptir.
 
-Sonuç olarak, Azure Kaynak grubu Kotalarınızın herhangi bir bölgede iş yükünüz için ne olması gerektiğine karar verin. Ardından, dağıtmak istediğiniz her bölgede bu miktarı isteyin. Belirli bölgeler için geçerli kotalarınızı belirleme konusunda yardım için bkz. [kaynak kotaları hatalarını giderme](../templates/error-resource-quota.md).
+Sonuç olarak, Kotalarınızın herhangi bir bölgede iş yükünüz için ne olması gerektiğine karar verin. Ardından, dağıtmak istediğiniz her bölgede bu miktarı isteyin. Belirli bölgeler için geçerli kotalarınızı belirleme konusunda yardım için bkz. [kaynak kotaları hatalarını giderme](../templates/error-resource-quota.md).
 
 ## <a name="general-limits"></a>Genel sınırlar
 

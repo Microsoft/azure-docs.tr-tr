@@ -9,12 +9,12 @@ ms.topic: sample
 ms.date: 12/11/2017
 ms.author: msangapu
 ms.custom: mvc, seodec18, devx-track-azurecli
-ms.openlocfilehash: 9881a5f37c32849fc4f10acda8346510977e6b7b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3d8442179ecec72d47e770d823bbfd5795f5c4dc
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97005798"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787710"
 ---
 # <a name="monitor-an-app-service-app-with-web-server-logs-using-azure-cli"></a>Azure CLı kullanarak Web sunucusu günlükleri ile bir App Service uygulamasını izleme
 
@@ -38,11 +38,11 @@ Bu betik bir kaynak grubu, App Service uygulaması ve tüm ilgili kaynakları ol
 
 | Komut | Notlar |
 |---|---|
-| [`az group create`](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | App Service planı oluşturur. |
-| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | App Service uygulaması oluşturur. |
-| [`az webapp log config`](/cli/azure/webapp/log#az-webapp-log-config) | App Service bir uygulamanın hangi günlük olarak devam etmediğini yapılandırır. |
-| [`az webapp log download`](/cli/azure/webapp/log#az-webapp-log-download) | App Service uygulamasının günlüklerini yerel makinenize indirir. |
+| [`az group create`](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az_appservice_plan_create) | App Service planı oluşturur. |
+| [`az webapp create`](/cli/azure/webapp#az_webapp_create) | App Service uygulaması oluşturur. |
+| [`az webapp log config`](/cli/azure/webapp/log#az_webapp_log_config) | App Service bir uygulamanın hangi günlük olarak devam etmediğini yapılandırır. |
+| [`az webapp log download`](/cli/azure/webapp/log#az_webapp_log_download) | App Service uygulamasının günlüklerini yerel makinenize indirir. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

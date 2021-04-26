@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 10/26/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 337275cef0f2159cb5fac40ac0435408baf3bbef
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9fee7965e7834f0e05dba91f8652a0e155087b14
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96170931"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257883"
 ---
 # <a name="tutorial-for-configuring-theaccesshub-admin-tool-with-azure-active-directory-b2c"></a>Azure Active Directory B2C ile Accesshub yönetici aracını yapılandırma öğreticisi
 
@@ -44,7 +44,7 @@ Başlamak için şunlar gerekir:
 
 - Seçim Müşteri verilerini geçirmek istediğiniz veritabanları veya Basit Dizin erişim protokolleri (LDAPs) için bağlantı ve kimlik bilgileri.
 
-- Seçim [Özel ilkeleri](./custom-policy-get-started.md)kullanmak için Azure AD B2C ortamı, bu ilkeyi kaydolma ilkesi akışınızla bütünleştirmek istiyorsanız kullanın.
+- Seçim [Özel ilkeleri](./tutorial-create-user-flows.md?pivots=b2c-custom-policy)kullanmak için Azure AD B2C ortamı, bu ilkeyi kaydolma ilkesi akışınızla bütünleştirmek istiyorsanız kullanın.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
@@ -358,7 +358,7 @@ Azure AD B2C verileri ' den Accesshub yönetim aracı ile eşzamanlı hale getir
 
 ## <a name="configure-azure-ad-b2c-policies"></a>Azure AD B2C ilkelerini yapılandırma
 
-Bazen Accesshub yönetim aracının eşitlenmesi, Azure AD B2C ile durumunu güncel tutabilme özelliği ile sınırlıdır. Accesshub yönetim aracının API ve Azure AD B2C ilkelerinden yararlanarak, bu değişiklikleri yaptığı gibi, erişen tarafından yapılan değişiklikleri bilgilendirebiliriz. Bu çözüm, [özel ilkeler Azure AD B2C](./custom-policy-get-started.md)için teknik bilgi gerektirir. Bir sonraki bölümde, yeni hesapların Sign-Up özel ilkeleriniz içindeki Accesshub yönetim aracına bildirimde bulunan bir örnek ilke adımları ve güvenli bir sertifika sunacağız.
+Bazen Accesshub yönetim aracının eşitlenmesi, Azure AD B2C ile durumunu güncel tutabilme özelliği ile sınırlıdır. Accesshub yönetim aracının API ve Azure AD B2C ilkelerinden yararlanarak, bu değişiklikleri yaptığı gibi, erişen tarafından yapılan değişiklikleri bilgilendirebiliriz. Bu çözüm, [özel ilkeler Azure AD B2C](./user-flow-overview.md)için teknik bilgi gerektirir. Bir sonraki bölümde, yeni hesapların Sign-Up özel ilkeleriniz içindeki Accesshub yönetim aracına bildirimde bulunan bir örnek ilke adımları ve güvenli bir sertifika sunacağız.
 
 ### <a name="create-a-secure-credential-to-invoke-theaccesshub-admin-tools-api"></a>The Accesshub yönetim aracının API 'sini çağırmak için güvenli bir kimlik bilgisi oluşturun
 
@@ -386,7 +386,7 @@ Bazen Accesshub yönetim aracının eşitlenmesi, Azure AD B2C ile durumunu gün
 
 5. Müşterilerin kaydolup oturum açması için kullanıcıları, Accesshub yönetim aracına ekleyen temel ilkelerle bir ZIP dosyası almak için **İndir** ' i seçin.
 
-6. Azure AD B2C ' de özel ilke tasarlamaya başlamak için bu [öğreticiyi](./custom-policy-get-started.md) izleyin.
+6. Azure AD B2C ' de özel ilke tasarlamaya başlamak için bu [öğreticiyi](./tutorial-create-user-flows.md?pivots=b2c-custom-policy) izleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -394,4 +394,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

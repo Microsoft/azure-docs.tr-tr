@@ -10,12 +10,12 @@ author: lobrien
 ms.date: 02/26/2021
 ms.topic: conceptual
 ms.custom: how-to, contperf-fy20q4, devx-track-python, data4ml
-ms.openlocfilehash: 0c4f1fbc0ed27dbf3b7347e0e4c12f1926ac1377
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 3f6071813a8189605d632231a5f9b8942068a48a
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105566260"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106067444"
 ---
 # <a name="moving-data-into-and-between-ml-pipeline-steps-python"></a>ML işlem hattı adımlarına ve adımlar arasında veri taşıma (Python)
 
@@ -28,7 +28,7 @@ Bu makalede nasıl yapılacağı gösterilmektedir:
 - `Dataset`Verileri, eğitim ve doğrulama alt kümeleri gibi alt kümelere bölme
 - `OutputFileDatasetConfig`Sonraki işlem hattı adımına veri aktarmak için nesne oluşturma
 - İşlem `OutputFileDatasetConfig` hattı adımlarına girdi olarak nesneleri kullanma
-- `Dataset` `OutputFileDatasetConfig` Wisƒh devam etmek için size yeni nesneler oluşturma
+- `Dataset`Kalıcı hale getirmek istediğiniz yeni nesneler oluşturun `OutputFileDatasetConfig`
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -126,7 +126,7 @@ train_step = PythonScriptStep(
     name="train_data",
     script_name="train.py",
     compute_target=cluster,
-    arguments=['--training-folder', train.as_named_input('train').as_download()]
+    arguments=['--training-folder', train.as_named_input('train').as_download()],
     inputs=[test.as_named_input('test').as_download()]
 )
 

@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
 ms.custom: mqtt
-ms.openlocfilehash: ffe2f2b7f94d546cdfe393170da2fd2ca6ac0149
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6c54f935ed05451df5922ff1a3d564c775703700
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103491002"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107029361"
 ---
 # <a name="understand-how-azure-iot-edge-uses-certificates"></a>Azure IoT Edge sertifikaları nasıl kullandığını anlayın
 
@@ -25,7 +25,7 @@ IoT Edge sertifikalar, modüller ve aşağı akış IoT cihazları tarafından, 
 >[!NOTE]
 >Bu makalede, bir IoT Edge cihazdaki farklı bileşenler arasında veya IoT Edge bir cihaz ile herhangi bir yaprak cihaz arasında bağlantıları güvenli hale getirmek için kullanılan sertifikalar hakkında bilgi sağlanır. Ayrıca, IoT Hub için IoT Edge cihazınızı doğrulamak üzere sertifikaları da kullanabilirsiniz. Bu kimlik doğrulama sertifikaları farklıdır ve bu makalede ele alınmamalıdır. Cihazınızı Sertifikalarla kimlik doğrulama hakkında daha fazla bilgi için bkz. [X. 509.440 sertifikalarını kullanarak bir IoT Edge cihazı oluşturma ve sağlama](how-to-auto-provision-x509-certs.md).
 
-Bu makalede, IoT Edge sertifikalarının üretim, geliştirme ve test senaryolarında nasıl çalıştığı açıklanmaktadır. Betikler farklı olsa da (PowerShell ile bash), kavramlar Linux ve Windows arasında aynıdır.
+Bu makalede, IoT Edge sertifikalarının üretim, geliştirme ve test senaryolarında nasıl çalıştığı açıklanmaktadır.
 
 ## <a name="iot-edge-certificates"></a>IoT Edge sertifikaları
 

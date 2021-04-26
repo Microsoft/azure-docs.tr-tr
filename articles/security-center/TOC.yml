@@ -43,10 +43,10 @@
           displayName: 'azure stack, ash, windows, linux, hybrid, arc'
           href: quickstart-onboard-machines.md
         - name: AWS hesaplarını bağlama
-          displayName: 'hybrid, multicloud, amazon, arc'
+          displayName: 'hybrid, multicloud, multi-cloud, amazon, arc'
           href: quickstart-onboard-aws.md
         - name: GCP hesaplarını bağlama
-          displayName: 'hybrid, multicloud, google'
+          displayName: 'hybrid, multicloud, multi-cloud, google'
           href: quickstart-onboard-gcp.md
     - name: 6. Uyarılara otomatik yanıtlar oluşturma
       displayName: 'Resource Manager, ARM'
@@ -198,6 +198,9 @@
         - name: Görüntülerde belirli güvenlik açığı bulgularını devre dışı bırakma
           displayName: 'ACR, registry, images, qualys'
           href: defender-for-container-registries-usage.md#disable-specific-findings-preview
+        - name: Azure yay etkin Kubernetes kümelerini koruma
+          displayName: 'k8s, containers, aks, hybrid, arc, azure arc, multicloud'
+          href: defender-for-kubernetes-azure-arc.md
         - name: Kubernetes iş yüklerinizi koruma
           displayName: 'k8s, containers, aks'
           href: kubernetes-workload-protections.md
@@ -312,6 +315,8 @@
       href: 'https://azure.microsoft.com/updates/?product=security-center'
     - name: Uç nokta koruma değerlendirmesi ve önerileri
       href: security-center-endpoint-protection.md
+    - name: Azure CLI
+      href: /cli/azure/security
 - name: Kaynaklar
   items:
     - name: Microsoft Learn ile becerilerinizi geliştirin

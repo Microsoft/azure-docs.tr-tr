@@ -6,13 +6,13 @@ ms.service: cache
 ms.topic: conceptual
 ms.date: 02/17/2021
 ms.author: mbaldwin
-ms.custom: subject-security-benchmark
-ms.openlocfilehash: f07eece54bfe456e173e664b19777cfc98b71368
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.custom: subject-security-benchmark, devx-track-azurepowershell
+ms.openlocfilehash: 0397f53c54f488f6840e35212de3e51624f360d7
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105566872"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830007"
 ---
 # <a name="azure-security-baseline-for-azure-cache-for-redis"></a>Redsıs için Azure önbelleği için Azure Güvenlik temeli
 

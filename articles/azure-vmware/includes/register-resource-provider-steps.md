@@ -4,10 +4,10 @@ description: Azure VMware Çözüm kaynak sağlayıcısını kaydetme adımları
 ms.topic: include
 ms.date: 02/17/2021
 ms.openlocfilehash: d2363ca2672f7f668d8f9b3816447f316d8b7347
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103555960"
 ---
 <!-- Used in deploy-azure-vmware-solution.md and tutorial-create-private-cloud.md -->

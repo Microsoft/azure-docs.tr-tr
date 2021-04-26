@@ -4,13 +4,13 @@ description: HDInsight 'ta Hadoop ile Hive sorguları çalıştırmak için Apac
 ms.service: hdinsight
 ms.topic: how-to
 ms.custom: contperf-fy21q1
-ms.date: 05/27/2020
-ms.openlocfilehash: ab5dedf6718dad4f16fde59d905e2e59be5c495f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/07/2021
+ms.openlocfilehash: 5dcb6168a263be11410126ff08bd8b015da5af46
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98944462"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103445"
 ---
 # <a name="connect-to-apache-beeline-on-hdinsight-or-install-it-locally"></a>HDInsight 'ta Apache Beeline bağlanma veya yerel olarak yüklemeyi
 
@@ -77,7 +77,9 @@ Apache Spark, bazı durumlarda Spark Thrift sunucusu olarak da adlandırılan ke
 
 #### <a name="through-public-or-private-endpoints"></a>Ortak veya özel uç noktalar aracılığıyla
 
-Kullanılan bağlantı dizesi biraz farklı. Yerine `httpPath=/hive2` kullanır `httpPath/sparkhive2` . `clustername` değerini HDInsight kümenizin adıyla değiştirin. `admin`Kümenizin küme oturum açma hesabı ile değiştirin. ESP kümeleri için tam UPN 'yi kullanın (örneğin, user@domain.com ). `password`Küme oturum açma hesabının parolasıyla değiştirin.
+Kullanılan bağlantı dizesi biraz farklı. Yerine `httpPath=/hive2` kullanır `httpPath/sparkhive2` . `clustername` değerini HDInsight kümenizin adıyla değiştirin. `admin`Kümenizin küme oturum açma hesabı ile değiştirin. `password`Küme oturum açma hesabının parolasıyla değiştirin.
+> [!NOTE]
+> ESP kümeleri için, `admin` tam UPN ile değiştirin (örneğin, user@domain.com ). 
 
 ```bash
 beeline -u 'jdbc:hive2://clustername.azurehdinsight.net:443/;ssl=true;transportMode=http;httpPath=/sparkhive2' -n admin -p 'password'

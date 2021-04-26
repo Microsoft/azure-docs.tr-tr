@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: reference
 ms.workload: identity
-ms.date: 01/29/2021
+ms.date: 03/30/2021
 ms.author: marsma
 ms.reviewer: jmprieur, saeeda
 ms.custom: aaddev
-ms.openlocfilehash: 590e57d587c8e6e254811892b5c5e740b511c302
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 321a5c473df30dd6f00bbcd1294d48ce8da34009
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104690662"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106060389"
 ---
 # <a name="microsoft-identity-platform-authentication-libraries"></a>Microsoft Identity platform kimlik doğrulama kitaplıkları
 
@@ -29,7 +29,7 @@ Microsoft Identity platformu, OpenID Foundation tarafından [sertifikalı bir Op
 
 ## <a name="single-page-application-spa"></a>Tek sayfalı uygulama (SPA)
 
-Tek sayfalı bir uygulama tamamen tarayıcı yüzeyine çalışır ve sayfa verilerini (HTML, CSS ve JavaScript) dinamik olarak veya uygulama yükleme zamanında getirir. Arka uç veri kaynaklarıyla etkileşim kurmak için Web API 'Lerini çağırabilir.
+Tek sayfalı bir uygulama tamamen tarayıcıda çalışır ve sayfa verilerini (HTML, CSS ve JavaScript) dinamik olarak veya uygulama yükleme zamanında getirir. Arka uç veri kaynaklarıyla etkileşim kurmak için Web API 'Lerini çağırabilir.
 
 SPA 'nın kodu tamamen tarayıcıda çalıştığından, gizli dizileri güvenli bir şekilde depolayamadığı *ortak bir istemci* olarak kabul edilir.
 
@@ -45,7 +45,7 @@ Bir Web uygulamasının kodu Web sunucusunda çalıştığı için gizli diziler
 
 ## <a name="desktop-application"></a>Masaüstü uygulaması
 
-Masaüstü uygulaması, genellikle bir kullanıcı arabirimini sunan ve kullanıcının masaüstünde çalışması amaçlanan ikili (derlenmiş) koddur.
+Bir masaüstü uygulaması, genellikle bir kullanıcı arabirimini görüntüleyen ve kullanıcının masaüstünde çalışması amaçlanan ikili (derlenmiş) koddur.
 
 Bir masaüstü uygulaması kullanıcının masaüstünde çalıştığından, gizli dizileri güvenli bir şekilde depolayamadığı *ortak bir istemci* olarak kabul edilir.
 
@@ -53,7 +53,7 @@ Bir masaüstü uygulaması kullanıcının masaüstünde çalıştığından, gi
 
 ## <a name="mobile-application"></a>Mobil uygulama
 
-Bir mobil uygulama, genellikle bir kullanıcı arabirimini sunan ve kullanıcının mobil cihazında çalıştırılması amaçlanan ikili (derlenmiş) koddur.
+Bir mobil uygulama, genellikle bir kullanıcı arabirimini görüntüleyen ve kullanıcının mobil cihazında çalışmak üzere tasarlanan ikili (derlenmiş) koddur.
 
 Bir mobil uygulama kullanıcının mobil cihazında çalıştığından, gizli dizileri güvenli bir şekilde depolayamadığı *ortak bir istemci* olarak kabul edilir.
 

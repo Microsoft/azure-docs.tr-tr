@@ -71,6 +71,8 @@
           href: scenario-route-through-nvas-custom.md
         - name: Azure Güvenlik Duvarı - özel
           href: scenario-route-between-vnets-firewall.md
+        - name: Application Gateway ve arka uç havuzları
+          href: scenario-secured-hub-app-gateway.md
     - name: İzleme
       items:
         - name: Sanal WAN için Azure İzleyici İçgörüleri hakkında
@@ -115,6 +117,8 @@
           href: virtual-wan-site-to-site-portal.md
         - name: Sanal ağ geçidini Sanal WAN'a bağlama
           href: connect-virtual-network-gateway-vwan.md
+        - name: Paket yakalama gerçekleştirme
+          href: virtual-wan-site-to-site-packet-capture.md
         - name: Özel IPsec ilkesini yapılandırma
           href: virtual-wan-custom-ipsec-portal.md
         - name: NAT kurallarını yapılandırma
@@ -186,7 +190,7 @@
     - name: REST
       href: /rest/api/azure
     - name: Azure CLI
-      href: /cli/azure/ext/virtual-wan
+      href: /cli/azure/
     - name: Python SDK'sı
       href: 'https://azuresdkdocs.blob.core.windows.net/$web/python/azure-mgmt-network/10.0.0/azure.mgmt.network.v2019_02_01.operations.html#azure.mgmt.network.v2019_02_01.operations.VirtualWansOperations'
 - name: Kaynaklar

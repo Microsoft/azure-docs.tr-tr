@@ -5,19 +5,19 @@ description: Otomatik yük devretme grupları, bir sunucudaki bir veritabanı gr
 services: sql-database
 ms.service: sql-db-mi
 ms.subservice: high-availability
-ms.custom: sqldbrb=2, devx-track-azurecli
+ms.custom: sqldbrb=2
 ms.devlang: ''
 ms.topic: conceptual
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mathoma, sstein
-ms.date: 12/26/2020
-ms.openlocfilehash: e0b9eea7be97b9b67e75c314c4a1d9e69322e5b5
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/26/2021
+ms.openlocfilehash: f3bc1dfcfeeb6dda110f71ed7a1c53909153cf00
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104594266"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762164"
 ---
 # <a name="use-auto-failover-groups-to-enable-transparent-and-coordinated-failover-of-multiple-databases"></a>Birden çok veritabanının saydam ve koordine edilmiş yük devretmesini etkinleştirmek için otomatik yük devretme gruplarını kullanın
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -178,6 +178,12 @@ OLTP işlemlerini gerçekleştirirken `<fog-name>.database.windows.net` sunucu U
 
 Verilerin belirli bir şekilde kullanılması için dayanıklı bir mantıksal olarak yalıtılmış salt okunurdur, uygulamadaki ikincil veritabanını kullanabilirsiniz. Salt okuma oturumları için `<fog-name>.secondary.database.windows.net` sunucu URL 'si olarak kullanın ve bağlantı otomatik olarak ikinciye yönlendirilir. Ayrıca, kullanarak bağlantı dizesinde oku hedefini belirtmeniz önerilir `ApplicationIntent=ReadOnly` .
 
+> [!NOTE]
+> Premium, İş Açısından Kritik ve hiper ölçekli hizmet katmanlarında SQL veritabanı, bağlantı dizesindeki parametresini kullanarak salt okuma sorgu iş yüklerini boşaltmak için [salt okuma çoğaltmalarının](read-scale-out.md) kullanımını destekler `ApplicationIntent=ReadOnly` . Coğrafi olarak çoğaltılan ikincil örneği yapılandırdığınızda bu özelliği kullanarak birincil konumdaki veya coğrafi olarak çoğaltılan konumdaki bir salt okuma çoğaltmasına bağlanabilirsiniz.
+>
+> - Birincil konumdaki bir salt okuma çoğaltmasına bağlanmak için `ApplicationIntent=ReadOnly` ve kullanın `<fog-name>.database.windows.net` .
+> - İkincil konumdaki bir salt okuma çoğaltmasına bağlanmak için `ApplicationIntent=ReadOnly` ve kullanın `<fog-name>.secondary.database.windows.net` .
+
 ### <a name="preparing-for-performance-degradation"></a>Performans düşüşü için hazırlanma
 
 Tipik bir Azure uygulaması birden çok Azure hizmeti kullanır ve birden çok bileşenden oluşur. Yük devretme grubunun otomatik yük devretmesi, Azure SQL bileşenleri yalnızca durum temelinde tetiklenir. Birincil bölgedeki diğer Azure hizmetleri kesinti tarafından etkilenmeyebilir ve bileşenleri bu bölgede kullanılabilir olmaya devam edebilir. Birincil veritabanları DR bölgesine geçiş yaptıktan sonra, bağımlı bileşenler arasındaki gecikme artabilir. Uygulamanın performansına yönelik daha yüksek gecikme süresini önlemek için tüm uygulama bileşenlerinin DR bölgesindeki yedekliliği olduğundan emin olun ve bu [ağ güvenlik yönergelerini](#failover-groups-and-network-security)izleyin.
@@ -267,7 +273,7 @@ OLTP işlemlerini gerçekleştirirken `<fog-name>.zone_id.database.windows.net` 
 Verilerin belirli bir şekilde kullanılması için dayanıklı bir mantıksal olarak yalıtılmış salt okunurdur, uygulamadaki ikincil veritabanını kullanabilirsiniz. Coğrafi olarak çoğaltılan ikinciye doğrudan bağlanmak için `<fog-name>.secondary.<zone_id>.database.windows.net` sunucu URL 'si olarak kullanın ve bağlantı doğrudan coğrafi çoğaltılan ikincil öğesine yapılır.
 
 > [!NOTE]
-> Premium, İş Açısından Kritik ve hiper ölçekli hizmet katmanlarında SQL veritabanı, bağlantı dizesindeki parametresini kullanarak salt okunurdur ve salt okunurdur bir veya daha fazla çoğaltmanın kapasitesini kullanarak salt okuma yapılan sorgu iş yüklerini çalıştırmak için [salt okunurdur](read-scale-out.md) `ApplicationIntent=ReadOnly` . Coğrafi olarak çoğaltılan ikincil örneği yapılandırdığınızda bu özelliği kullanarak birincil konumdaki veya coğrafi olarak çoğaltılan konumdaki bir salt okuma çoğaltmasına bağlanabilirsiniz.
+> İş Açısından Kritik katmanında, SQL yönetilen örneği, bağlantı dizesindeki parametresini kullanarak salt okuma sorgusu iş yüklerini boşaltmak için [salt okuma çoğaltmalarının](read-scale-out.md) kullanımını destekler `ApplicationIntent=ReadOnly` . Coğrafi olarak çoğaltılan ikincil örneği yapılandırdığınızda bu özelliği kullanarak birincil konumdaki veya coğrafi olarak çoğaltılan konumdaki bir salt okuma çoğaltmasına bağlanabilirsiniz.
 >
 > - Birincil konumdaki bir salt okuma çoğaltmasına bağlanmak için `ApplicationIntent=ReadOnly` ve kullanın `<fog-name>.<zone_id>.database.windows.net` .
 > - İkincil konumdaki bir salt okuma çoğaltmasına bağlanmak için `ApplicationIntent=ReadOnly` ve kullanın `<fog-name>.secondary.<zone_id>.database.windows.net` .
@@ -362,10 +368,10 @@ Yukarıdaki yapılandırma, otomatik yük devretmenin ön uç bileşenlerinden g
 - SQL yönetilen örneğinin iki örneğinin farklı Azure bölgelerinde olması gerekir.
 - SQL yönetilen örneğinin iki örneğinin aynı hizmet katmanı olması ve aynı depolama boyutuna sahip olması gerekir.
 - SQL yönetilen örneğinin ikincil örneğinizin boş olması gerekir (Kullanıcı veritabanı yok).
-- SQL yönetilen örneği örnekleri tarafından kullanılan sanal ağların bir [VPN Gateway](../../vpn-gateway/vpn-gateway-about-vpngateways.md) veya [Express rotası](../../expressroute/expressroute-howto-circuit-portal-resource-manager.md)aracılığıyla bağlanması gerekir. İki sanal ağ şirket içi ağı üzerinden bağlandığında 5022 ve 11000-11999 numaralı bağlantı noktalarını engelleyen bir güvenlik duvarı kuralı olmadığından emin olun. Küresel VNet eşlemesi, aşağıdaki notta açıklanan kısıtlamayla desteklenir.
+- SQL yönetilen örneği örnekleri tarafından kullanılan sanal ağların bir [VPN Gateway](../../vpn-gateway/vpn-gateway-about-vpngateways.md) veya [Express rotası](../../expressroute/expressroute-howto-circuit-portal-resource-manager.md)aracılığıyla bağlanması gerekir. İki sanal ağ şirket içi ağı üzerinden bağlandığında 5022 ve 11000-11999 numaralı bağlantı noktalarını engelleyen bir güvenlik duvarı kuralı olmadığından emin olun. Genel VNet Eşlemesi aşağıdaki notta açıklanan sınırlamayla desteklenir.
 
    > [!IMPORTANT]
-   > [9/22/2020 tarihinde yeni oluşturulan sanal kümeler için genel sanal ağ eşlemesi duyuruldu](https://azure.microsoft.com/en-us/updates/global-virtual-network-peering-support-for-azure-sql-managed-instance-now-available/). Diğer bir deyişle, duyuru tarihinden sonra boş alt ağlarda oluşturulan SQL yönetilen örnekleri ve bu alt ağlarda oluşturulan tüm sonraki yönetilen örnekler için genel sanal ağ eşlemesi desteklenir. Diğer tüm SQL yönetilen örnekler için eşleme desteği, [Genel sanal ağ eşlemesi kısıtlamalarından](../../virtual-network/virtual-network-manage-peering.md#requirements-and-constraints)dolayı aynı bölgedeki ağlarla sınırlıdır. Daha fazla bilgi için bkz. [Azure sanal ağlar sık sorulan sorular](../../virtual-network/virtual-networks-faq.md#what-are-the-constraints-related-to-global-vnet-peering-and-load-balancers) makalesinin ilgili bölümü. 
+   > [22/9/2020’de yeni oluşturulan sanal kümeler için genel sanal ağ eşlemesinin duyurusunu yaptık](https://azure.microsoft.com/en-us/updates/global-virtual-network-peering-support-for-azure-sql-managed-instance-now-available/). Bu, hem duyuru tarihinden sonra boş alt ağlarda oluşturulan SQL Yönetilen Örnekleri için hem de söz konusu alt ağlarda daha sonra oluşturulan yönetilen örnekler için genel sanal ağ eşlemesinin desteklendiği anlamına geliyor. Diğer tüm SQL yönetilen örnekler için eşleme desteği, [Genel sanal ağ eşlemesi kısıtlamalarından](../../virtual-network/virtual-network-manage-peering.md#requirements-and-constraints)dolayı aynı bölgedeki ağlarla sınırlıdır. Daha fazla bilgi için bkz. [Azure sanal ağlar sık sorulan sorular](../../virtual-network/virtual-networks-faq.md#what-are-the-constraints-related-to-global-vnet-peering-and-load-balancers) makalesinin ilgili bölümü. 
 
 - İki SQL yönetilen örnek sanal ağı, çakışan IP adreslerine sahip olamaz.
 - Ağ Güvenlik Gruplarınızı (NSG), 5022 numaralı ve 11000~12000 aralığındaki bağlantı noktalarının diğer yönetilen örneğin alt ağından gelen ve giden bağlantılara açık olmasını sağlayacak şekilde ayarlamalısınız. Bunun amacı örnekler arasında çoğaltma trafiğine olanak tanımaktır.
@@ -428,11 +434,11 @@ Daha önce anlatıldığı gibi otomatik yük devretme grupları ve etkin coğra
 
 | Komut | Açıklama |
 | --- | --- |
-| [az SQL yük devretme-Grup oluşturma](/cli/azure/sql/failover-group#az-sql-failover-group-create) |Bu komut bir yük devretme grubu oluşturur ve hem birincil hem de ikincil sunuculara kaydeder|
-| [az SQL yük devretme-Grup silme](/cli/azure/sql/failover-group#az-sql-failover-group-delete) | Yük devretme grubunu sunucudan kaldırır |
-| [az SQL yük devretme-grup göster](/cli/azure/sql/failover-group#az-sql-failover-group-show) | Yük devretme grubu yapılandırmasını alır |
-| [az SQL Failover-Group Update](/cli/azure/sql/failover-group#az-sql-failover-group-update) |Bir yük devretme grubunun yapılandırmasını değiştirir ve/veya bir yük devretme grubuna bir veya daha fazla veritabanı ekler|
-| [az SQL yük devretme-grup kümesi-birincil](/cli/azure/sql/failover-group#az-sql-failover-group-set-primary) | İkincil sunucuya bir yük devretme grubunun yük devretmesini tetikler |
+| [az SQL yük devretme-Grup oluşturma](/cli/azure/sql/failover-group#az_sql_failover_group_create) |Bu komut bir yük devretme grubu oluşturur ve hem birincil hem de ikincil sunuculara kaydeder|
+| [az SQL yük devretme-Grup silme](/cli/azure/sql/failover-group#az_sql_failover_group_delete) | Yük devretme grubunu sunucudan kaldırır |
+| [az SQL yük devretme-grup göster](/cli/azure/sql/failover-group#az_sql_failover_group_show) | Yük devretme grubu yapılandırmasını alır |
+| [az SQL Failover-Group Update](/cli/azure/sql/failover-group#az_sql_failover_group_update) |Bir yük devretme grubunun yapılandırmasını değiştirir ve/veya bir yük devretme grubuna bir veya daha fazla veritabanı ekler|
+| [az SQL yük devretme-grup kümesi-birincil](/cli/azure/sql/failover-group#az_sql_failover_group_set_primary) | İkincil sunucuya bir yük devretme grubunun yük devretmesini tetikler |
 
 # <a name="rest-api"></a>[REST API 'SI](#tab/rest-api)
 
@@ -466,11 +472,11 @@ Daha önce anlatıldığı gibi otomatik yük devretme grupları ve etkin coğra
 
 | Komut | Açıklama |
 | --- | --- |
-| [az SQL yük devretme-Grup oluşturma](/cli/azure/sql/failover-group#az-sql-failover-group-create) |Bu komut bir yük devretme grubu oluşturur ve hem birincil hem de ikincil sunuculara kaydeder|
-| [az SQL yük devretme-Grup silme](/cli/azure/sql/failover-group#az-sql-failover-group-delete) | Yük devretme grubunu sunucudan kaldırır |
-| [az SQL yük devretme-grup göster](/cli/azure/sql/failover-group#az-sql-failover-group-show) | Yük devretme grubu yapılandırmasını alır |
-| [az SQL Failover-Group Update](/cli/azure/sql/failover-group#az-sql-failover-group-update) |Bir yük devretme grubunun yapılandırmasını değiştirir ve/veya bir yük devretme grubuna bir veya daha fazla veritabanı ekler|
-| [az SQL yük devretme-grup kümesi-birincil](/cli/azure/sql/failover-group#az-sql-failover-group-set-primary) | İkincil sunucuya bir yük devretme grubunun yük devretmesini tetikler |
+| [az SQL yük devretme-Grup oluşturma](/cli/azure/sql/failover-group#az_sql_failover_group_create) |Bu komut bir yük devretme grubu oluşturur ve hem birincil hem de ikincil sunuculara kaydeder|
+| [az SQL yük devretme-Grup silme](/cli/azure/sql/failover-group#az_sql_failover_group_delete) | Yük devretme grubunu sunucudan kaldırır |
+| [az SQL yük devretme-grup göster](/cli/azure/sql/failover-group#az_sql_failover_group_show) | Yük devretme grubu yapılandırmasını alır |
+| [az SQL Failover-Group Update](/cli/azure/sql/failover-group#az_sql_failover_group_update) |Bir yük devretme grubunun yapılandırmasını değiştirir ve/veya bir yük devretme grubuna bir veya daha fazla veritabanı ekler|
+| [az SQL yük devretme-grup kümesi-birincil](/cli/azure/sql/failover-group#az_sql_failover_group_set_primary) | İkincil sunucuya bir yük devretme grubunun yük devretmesini tetikler |
 
 # <a name="rest-api"></a>[REST API 'SI](#tab/rest-api)
 

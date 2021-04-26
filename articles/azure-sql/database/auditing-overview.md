@@ -10,12 +10,12 @@ ms.author: datrigan
 ms.reviewer: vanto
 ms.date: 03/17/2021
 ms.custom: azure-synapse, sqldbrb=1
-ms.openlocfilehash: 8513127f4a79c9c94323140462ad2d2648a0130d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: bc7ac6b97d10e5941e46b8be3e12baff32bded4a
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104577765"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107483070"
 ---
 # <a name="auditing-for-azure-sql-database-and-azure-synapse-analytics"></a>Azure SQL veritabanı ve Azure SYNAPSE Analytics için denetim
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -60,7 +60,7 @@ Bir denetim ilkesi, belirli bir veritabanı için veya Azure 'da varsayılan [su
 
 - Denetim ilkesi veritabanı düzeyinde bir Log Analytics çalışma alanına veya bir olay hub hedefine tanımlandığında, aşağıdaki işlemler kaynak veritabanı düzeyinde denetim ilkesini tutamaz:
     - [Veritabanı kopyalama](database-copy.md)
-    - [Zaman içindeki bir noktaya geri yükleme](recovery-using-backups.md)
+    - [Belirli bir noktaya geri yükleme](recovery-using-backups.md)
     - [Coğrafi çoğaltma](active-geo-replication-overview.md) (ikincil veritabanı, veritabanı düzeyinde denetime sahip olmaz)
 
 - Veritabanında etkinleştirmenin yanı sıra sunucu üzerinde denetimi etkinleştirmek, sunucu denetiminin ayarlarından *hiçbirini geçersiz kılmaz veya değiştirmez.* Her iki denetim de yan yana bulunur. Diğer bir deyişle, veritabanı paralel olarak iki kez denetlenir; sunucu ilkesi tarafından bir kez ve veritabanı ilkesi tarafından bir kez.
@@ -100,7 +100,7 @@ Aşağıdaki bölümde Azure portal kullanılarak denetim yapılandırması aç�
 
   > [!NOTE]
   > - Duraklatılmış bir adanmış SQL havuzunda denetim etkinleştirilmesi mümkün değildir. Denetimi etkinleştirmek için adanmış SQL havuzunun duraklamasını kaldırın. [ADANMıŞ SQL havuzu](../..//synapse-analytics/sql/best-practices-dedicated-sql-pool.md)hakkında daha fazla bilgi edinin.
-  > - Denetim, Azure portal veya PowerShell cmdlet 'i aracılığıyla bir Log Analytics çalışma alanına veya hatta bir hub hedefine yapılandırıldığında, "SQLSecurityAuditEvents" kategorisi etkin bir [Tanılama ayarı](../../azure-monitor/essentials/diagnostic-settings.md) oluşturulur.
+  > - Denetim, Azure portal veya PowerShell cmdlet 'i aracılığıyla bir Log Analytics çalışma alanına ya da bir olay hub hedefine yapılandırıldığında, "SQLSecurityAuditEvents" kategorisi etkin bir [Tanılama ayarı](../../azure-monitor/essentials/diagnostic-settings.md) oluşturulur.
 
 1. [Azure Portal](https://portal.azure.com) gidin.
 2. **SQL veritabanınızda** veya **SQL Server** bölmesindeki güvenlik başlığı altında bulunan **denetime** gidin.

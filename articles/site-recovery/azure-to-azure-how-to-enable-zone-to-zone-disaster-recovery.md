@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: article
 ms.date: 04/28/2020
 ms.author: sideeksh
-ms.openlocfilehash: beba8e1d8126818f142e4873d551ed077af869d2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 786d877328b1ab3d0f03a75604b7345dba14aa9d
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102035246"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107713417"
 ---
 # <a name="enable-azure-vm-disaster-recovery-between-availability-zones"></a>Kullanılabilirlik alanları arasında Azure VM olağanüstü durum kurtarmayı etkinleştirme
 
@@ -20,7 +20,7 @@ Bu makalede, Azure sanal makinelerini aynı Azure bölgesindeki bir kullanılabi
 
 >[!NOTE]
 >
->- Bölge olağanüstü durum kurtarma için olan destek şu bölgelerle sınırlıdır: Güneydoğu Asya, Japonya Doğu, Avustralya Doğu, UK Güney, Batı Avrupa, Kuzey Avrupa, Orta ABD, Doğu ABD, Doğu ABD 2 ve Batı ABD 2.  
+>- Bölge olağanüstü durum kurtarma için olan destek şu bölgelerle sınırlıdır: Güneydoğu Asya, Japonya Doğu, Avustralya Doğu, JIO Hindistan Batı, UK Güney, Batı Avrupa, Kuzey Avrupa, Orta ABD, Doğu ABD, Doğu ABD 2 ve Batı ABD 2.  
 >- Site Recovery, müşteri verileri, sistem olağanüstü durum kurtarma için bölge kullanırken dağıtıldığı bölgenin dışına taşımaz veya depolamaz. Müşteriler, bir kurtarma hizmetleri kasasını tercih ettikleri farklı bir bölgeden seçebilirler. Kurtarma Hizmetleri Kasası meta veriler içeriyor ancak gerçek müşteri verisi yok.
 
 Site Recovery hizmeti, planlı ve plansız kesintiler sırasında iş uygulamalarınızı çalışır durumda tutarak iş sürekliliği ve olağanüstü durum kurtarma stratejinize katkıda bulunur. Bölgesel kesintiler varsa uygulamalarınızın çalışır durumda tutulması için önerilen olağanüstü durum kurtarma seçeneğidir.

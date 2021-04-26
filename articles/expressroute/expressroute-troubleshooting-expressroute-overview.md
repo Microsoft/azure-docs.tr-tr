@@ -8,12 +8,12 @@ ms.topic: troubleshooting
 ms.date: 10/31/2019
 ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: af4ef156cccded6afe2db09628446a6ffe1ad53a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6213e17f1232bd505ba1edf185a851bf669b9809
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92204648"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553439"
 ---
 # <a name="verifying-expressroute-connectivity"></a>ExpressRoute bağlantısını doğrulama
 Bu makale, ExpressRoute bağlantısını doğrulamanıza ve sorunlarını gidermenize yardımcı olur. ExpressRoute, bir bağlantı sağlayıcısı tarafından yaygın olarak kullanılan özel bir bağlantı üzerinden şirket içi bir ağı Microsoft bulutuna genişletir. ExpressRoute bağlantısı, geleneksel olarak üç farklı ağ bölgesi içerir ve aşağıdaki gibi:
@@ -88,7 +88,7 @@ ExpressRoute Essentials 'da, *devre durumu* Microsoft tarafında devre 'nın dur
 Bir ExpressRoute bağlantı hattının işlemsel olması için *devre durumunun* *etkinleştirilmesi* ve *sağlayıcı durumunun* *sağlanması* gerekir.
 
 > [!NOTE]
-> Bir ExpressRoute devresini yapılandırdıktan sonra, *devre durumu* etkin değil durumunda olduğunda [Microsoft desteği][Support]başvurun. Öte yandan, *sağlayıcının durumu* sağlanmamış durumunda değilse hizmet sağlayıcınıza başvurun.
+> Bir ExpressRoute devresini yapılandırdıktan sonra, *devre durumu* etkin değil durumunda takıldığında [Microsoft desteği][Support]başvurun. Öte yandan, *sağlayıcının durumu* sağlanmamış durumunda değilse, hizmet sağlayıcınıza başvurun.
 >
 >
 
@@ -145,7 +145,7 @@ ServiceProviderProvisioningState : Provisioned
 ```
 
 > [!NOTE]
-> Bir ExpressRoute devresini yapılandırdıktan sonra, *devre durumu* etkin değil durumunda olduğunda [Microsoft desteği][Support]başvurun. Öte yandan, *sağlayıcının durumu* sağlanmamış durumunda değilse hizmet sağlayıcınıza başvurun.
+> Bir ExpressRoute devresini yapılandırdıktan sonra, *devre durumu* etkin değil durumunda takıldığında [Microsoft desteği][Support]başvurun. Öte yandan, *sağlayıcının durumu* sağlanmamış durumunda değilse, hizmet sağlayıcınıza başvurun.
 >
 >
 

@@ -2,19 +2,19 @@
 title: Arşiv katmanından blob verilerini yeniden doldurma
 description: Blob verilerine erişebilmek için bloblarınızı arşiv depolamadan yeniden doldurma. Arşivlenmiş bir blobu çevrimiçi katmana kopyalayın.
 services: storage
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 03/11/2021
 ms.service: storage
 ms.subservice: blobs
 ms.topic: conceptual
 ms.reviewer: hux
-ms.openlocfilehash: 2f0ddca9cbd7d85909b1d86e68b92fa1d847476d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: aaea21dca5304a7a75b24bd7f974712db38d1815
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103225090"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106276782"
 ---
 # <a name="rehydrate-blob-data-from-the-archive-tier"></a>Arşiv katmanından blob verilerini yeniden doldurma
 

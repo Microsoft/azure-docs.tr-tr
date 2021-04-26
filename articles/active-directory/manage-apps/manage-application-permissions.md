@@ -2,22 +2,22 @@
 title: Kullanıcı ve yönetici izinlerini yönetme-Azure Active Directory | Microsoft Docs
 description: Azure AD 'de uygulama için izinleri incelemeyi ve yönetmeyi öğrenin. Örneğin, bir uygulamaya verilen tüm izinleri iptal edin.
 services: active-directory
-author: msmimart
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: conceptual
 ms.date: 7/10/2020
-ms.author: mimart
+ms.author: iangithinji
 ms.reviewer: luleonpla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: cbd2bc7b9ccc9efe0c6fdf8de02665160667cb8f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: bcd137030e4e1f3e88f47ec5ba78b3bde08fe068
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99256941"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107373989"
 ---
 # <a name="take-action-on-overprivileged-or-suspicious-applications-in-azure-active-directory"></a>Azure Active Directory fazla ayrıcalıklı veya şüpheli uygulamalarda işlem yapın
 

@@ -5,13 +5,13 @@ author: jifems
 ms.author: jife
 ms.service: data-share
 ms.topic: how-to
-ms.date: 02/23/2021
-ms.openlocfilehash: c94d6f7d4d06d7dbaa6a2ad54f94575a6cc85d33
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.date: 04/20/2021
+ms.openlocfilehash: 59c1ca67c9e93b62890512cda647ffcdf7712f9a
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105644657"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107819277"
 ---
 # <a name="share-and-receive-data-from-azure-blob-storage-and-azure-data-lake-storage"></a>Azure Blob Depolama ve Azure Data Lake Storage'dan verileri paylaşma ve alma
 
@@ -19,7 +19,7 @@ ms.locfileid: "105644657"
 
 Azure veri paylaşımı, bir depolama hesabından anlık görüntü tabanlı paylaşımı destekler. Bu makalede, Azure Blob depolama, Azure Data Lake Storage 1. ve Azure Data Lake Storage 2. nasıl paylaşılacağını ve verilerin alınacağını açıklamaktadır.
 
-Azure veri paylaşımı, Azure Data Lake gen1 ve Azure Data Lake Gen2 ' den dosya, klasör ve dosya sistemlerinin paylaşılmasını destekler. Ayrıca, Azure Blob depolamadan blob, klasör ve kapsayıcı paylaşımını da destekler. Şu anda yalnızca blok Blobları destekleniyor. Bu kaynaklardan paylaşılan veriler Azure Data Lake Gen2 veya Azure Blob depolama alanı tarafından alınabilir.
+Azure veri paylaşımı, Azure Data Lake gen1 ve Azure Data Lake Gen2 ' den dosya, klasör ve dosya sistemlerinin paylaşılmasını destekler. Ayrıca, Azure Blob depolamadan blob, klasör ve kapsayıcı paylaşımını da destekler. Blok, ekleme veya sayfa bloblarını paylaşabilir ve blok Blobları olarak alınır. Bu kaynaklardan paylaşılan veriler Azure Data Lake Gen2 veya Azure Blob depolama alanı tarafından alınabilir.
 
 Dosya sistemleri, kapsayıcılar veya klasörler anlık görüntü tabanlı paylaşımda paylaşıldığında, veri tüketicileri, paylaşım verilerinin tam bir kopyasını yapmayı seçebilirler. Ya da yalnızca yeni veya güncelleştirilmiş dosyaları kopyalamak için Artımlı anlık görüntü özelliğini kullanabilirler. Artımlı anlık görüntü özelliği, dosyaların son değiştirilme zamanına göre belirlenir. 
 
@@ -201,7 +201,7 @@ Depolama anlık görüntüsü performansı, dosya sayısına ve paylaşılan ver
 
 * Kaynak ve hedef veri depolarına eşzamanlı erişim.  
 * Kaynak ve hedef veri depolarının konumu. 
-* Artımlı anlık görüntü için, paylaşılan veri kümesindeki dosya sayısı, son başarılı anlık görüntüden sonraki son değiştirilme zamanına sahip dosyaların listesini bulmak için geçen süreyi etkileyebilir. 
+* Artımlı anlık görüntü için, paylaşılan veri kümesindeki dosya sayısı, son başarılı anlık görüntüden sonraki son değiştirilme zamanına sahip dosyaların listesini bulmak için gereken süreyi etkileyebilir. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

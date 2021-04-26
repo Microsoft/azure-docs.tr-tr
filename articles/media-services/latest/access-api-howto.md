@@ -11,14 +11,14 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: how-to
-ms.date: 03/17/2021
+ms.date: 03/31/2021
 ms.author: inhenkel
-ms.openlocfilehash: 6b59276cc340f133c0f270e8ab95051b3c392e1c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e45a0eefff3a6a7f7dd37bde3ee3bffaedd93dcd
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104581295"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166624"
 ---
 # <a name="get-credentials-to-access-media-services-api"></a>Media Services API 'sine erişim için kimlik bilgilerini alın
 
@@ -38,7 +38,7 @@ Bu makalede Media Services API 'sine erişmek için kimlik bilgilerini alma adı
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Azure hesabı. Hesabınız yoksa [Azure Ücretsiz deneme sürümü](https://azure.microsoft.com/pricing/free-trial/)ile başlayın.
-- Bir Media Services hesabı. Daha fazla bilgi için [Azure Portal kullanarak Azure Media Services hesabı oluşturma](create-account-howto.md)konusuna bakın.
+- Bir Media Services hesabı. Daha fazla bilgi için [Azure Portal kullanarak Azure Media Services hesabı oluşturma](account-create-how-to.md)konusuna bakın.
 
 ## <a name="portal"></a>[Portal](#tab/portal/)
 

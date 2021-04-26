@@ -7,16 +7,16 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: face-api
 ms.topic: overview
-ms.date: 11/23/2020
+ms.date: 04/19/2021
 ms.author: pafarley
 ms.custom: cog-serv-seo-aug-2020
 keywords: yüz tanıma, yüz tanıma yazılımı, yüz analizi, yüz eşleştirme, yüz tanıma uygulaması, görüntüye göre arama, yüz tanıma arama
-ms.openlocfilehash: 600ca48cc19ee8723b423e484ec96736a55ae7fc
-ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
+ms.openlocfilehash: 30707dd844769f730f135a451cd5306ca7e402cb
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/24/2020
-ms.locfileid: "95532265"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107726997"
 ---
 # <a name="what-is-the-azure-face-service"></a>Azure yüz hizmeti nedir?
 
@@ -29,12 +29,18 @@ Azure yüz hizmeti, görüntülerdeki insan yüzlerini algılayan, tanıyan ve �
 
 Yüz tanıma hizmeti, her biri aşağıdaki bölümlerde özetlenen birkaç farklı yüz Analizi işlevi sağlar.
 
+Bu belge aşağıdaki makale türlerini içerir:
+* [Hızlı başlangıç](./Quickstarts/client-libraries.md) , hizmete çağrı yapmanızı ve sonuçların kısa bir süre içinde elde etmenize olanak tanıyan adım adım yönergelerdir. 
+* [Nasıl yapılır kılavuzlarında](./Face-API-How-to-Topics/HowtoDetectFacesinImage.md) , hizmeti daha belirli veya özelleştirilmiş yollarla kullanmaya yönelik yönergeler bulunur.
+* [Kavramsal makaleler](./concepts/face-detection.md) , hizmetin işlevselliği ve özellikleri hakkında ayrıntılı açıklamalar sağlar.
+* [Öğreticiler](./enrollment-overview.md) daha fazla iş çözümlerinde bu hizmeti bir bileşen olarak nasıl kullanacağınızı gösteren kılavuzlardır.
+
 ## <a name="face-detection"></a>Yüz algılama
 
-Yüz hizmeti bir görüntüdeki insan yüzlerini algılar ve konumlarına ait dikdörtgen koordinatlarını döndürür. İsteğe bağlı olarak, yüz algılama, baş poz, cinsiyet, yaş, duygu, yüz artı ve gözlük gibi bir dizi yüz bağlantılı öznitelik ayıklayabilir.
+Algılama API 'SI görüntüdeki insan yüzlerini algılar ve konumlarına ait dikdörtgen koordinatlarını döndürür. İsteğe bağlı olarak, yüz algılama, baş poz, cinsiyet, yaş, duygu, yüz artı ve gözlük gibi bir dizi yüz bağlantılı öznitelik ayıklayabilir. Bu öznitelikler, gerçek sınıflandırmalar değil genel tahminlerdir. 
 
 > [!NOTE]
-> Yüz algılama özelliği [görüntü işleme hizmeti](../computer-vision/overview.md)aracılığıyla da kullanılabilir. Ancak, yüz verileriyle daha fazla işlem yapmak istiyorsanız, bunun yerine bu hizmeti kullanmanız gerekir.
+> Yüz algılama özelliği [görüntü işleme hizmeti](../computer-vision/overview.md)aracılığıyla da kullanılabilir. Ancak, bunun yerine bu yüz hizmetini tanımlamak, doğrulamak, benzer bul veya Gruplandır gibi ek yüz işlemleri yapmak istiyorsanız bu yüz hizmetini kullanmanız gerekir.
 
 ![Kadın ve adam, yüz ve yaş ve cinsiyetlerinin etrafında çizilmiş dikdörtgenler](./Images/Face.detection.jpg)
 
@@ -42,11 +48,23 @@ Yüz algılama hakkında daha fazla bilgi için [yüz algılama](concepts/face-d
 
 ## <a name="face-verification"></a>Yüz doğrulama
 
-Verify API 'SI algılanan iki yüzde veya algılanan bir yüzden bir kişi nesnesine karşı bir kimlik doğrulaması yapar. Pratikte, iki yüzün aynı kişiye ait olup olmadığını değerlendirir. Bu özellik güvenlik senaryolarında faydalı olabilir. Daha fazla bilgi için, [yüz tanıma](concepts/face-recognition.md) kavramları Kılavuzu veya API başvurusunu [Doğrula](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a) belgelerine bakın.
+API 'yi algılama üzerinde derleme ve "Bu iki görüntü aynı kişi mi?" sorusunu ele alır. Araştırma görüntüsü yalnızca bir adet kayıtlı şablonla karşılaştırıldığından, doğrulama "bire bir" eşleştirme olarak da adlandırılır. Kimlik doğrulama veya erişim denetimi senaryolarında doğrulama, bir resmin daha önce yakalanan bir görüntüyle (örneğin, kamu verilen KIMLIK kartından bir fotoğraftan) eşleştiğini doğrulamak için kullanılabilir. Daha fazla bilgi için, [yüz tanıma](concepts/face-recognition.md) kavramları Kılavuzu veya API başvurusunu [Doğrula](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a) belgelerine bakın.
+
+## <a name="face-identification"></a>Yüz belirleme
+
+Belirleme API 'SI de algılama ile başlar ve soruyu yanıtlar, "Bu algılanan yüz bir veritabanında kayıtlı olan bir yüz ile eşleşiyor mu?" Yüz tanıma araması gibi olduğundan, "bire çok" eşleştirme da denir. Aday eşleşmeleri, algılanan yüzle yapılan araştırma şablonunun her bir kayıtlı şablonla ne kadar yakından eşleştiğini temel alarak döndürülür.
+
+Aşağıdaki görüntüde adlı bir veritabanı örneği gösterilmektedir `"myfriends"` . Her grup, en fazla 1.000.000 farklı kişi nesnesi içerebilir. Her kişi nesnesinde en fazla 248 kayıtlı yüz olabilir.
+
+![Her biri üç yüz görüntüsü içeren farklı kişiler için üç sütunlu bir kılavuz](./Images/person.group.clare.jpg)
+
+Bir veritabanını oluşturup eğitdikten sonra, yeni bir algılanan yüz ile gruba göre kimlik tanımlayabilirsiniz. Yüz, grupta bir kişi olarak belirlenirse kişi nesnesi döndürülür.
+
+Kişi kimliği hakkında daha fazla bilgi için, [yüz tanıma](concepts/face-recognition.md) kavramları Kılavuzu veya API başvurusunu [Tanımla](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239) belgelerine bakın.
 
 ## <a name="find-similar-faces"></a>Benzer yüzleri bulma
 
-Benzer API 'yi bul, hedef yüzü ve aday yüzey kümesi arasında eşleşen bir yüzey kümesi, hedef yüztekine benzer daha küçük bir yüzey kümesi buluyor. Bu, görüntüye göre yüz arama yapmak için yararlıdır. 
+Benzer API 'yi bul, hedef yüzü ve aday yüzey kümesi arasında eşleşen bir yüzey kümesi, hedef yüztekine benzer daha küçük bir yüzey kümesi buluyor. Bu işlem, görüntüye göre yüz arama yapmak için yararlıdır. 
 
 İki çalışma modu, **Matchperson** ve **matchface** desteklenir. **Matchperson** modu, [Verify API](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a)'sini kullanarak aynı kişi için filtreledikten sonra benzer yüzler döndürür. **Matchface** modu aynı kişi filtresini yoksayar. Aynı kişiye ait olan veya olmayan benzer aday yüzlerin bir listesini döndürür.
 
@@ -64,21 +82,6 @@ Benzer dört yüzü bulmak için, **matchperson** modu, hedef yüzü ile aynı k
 
 Gruplama API'si, bilinmeyen bir dizi yüzü benzerlik temelinde birkaç gruba ayırır. Her grup, özgün yüz kümesinin kopuk bir alt kümesidir. Bir gruptaki tüm yüzler aynı kişiye ait olabilir. Tek bir kişi için birkaç farklı grup olabilir. Gruplar, örneğin ifadesi gibi başka bir faktörle farklılaştırılabilir. Daha fazla bilgi için, [yüz tanıma](concepts/face-recognition.md) kavramları Kılavuzu veya [Grup API](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395238) başvurusu belgelerine bakın.
 
-## <a name="person-identification"></a>Kişileri tanıma
-
-Tanıma API 'SI, bir kişi veritabanında algılanan bir yüzeyi belirlemek için kullanılır (yüz tanıma arama). Bu özellik, fotoğraf yönetimi yazılımında otomatik görüntü etiketleme için yararlı olabilir. Veritabanını önceden oluşturun ve zaman içinde düzenleyebilirsiniz.
-
-Aşağıdaki görüntüde adlı bir veritabanı örneği gösterilmektedir `"myfriends"` . Her grup, en fazla 1.000.000 farklı kişi nesnesi içerebilir. Her kişi nesnesinde en fazla 248 kayıtlı yüz olabilir.
-
-![Her biri üç yüz görüntüsü içeren farklı kişiler için üç sütunlu bir kılavuz](./Images/person.group.clare.jpg)
-
-Bir veritabanını oluşturup eğitdikten sonra, yeni bir algılanan yüz ile gruba göre kimlik tanımlayabilirsiniz. Yüz, grupta bir kişi olarak belirlenirse kişi nesnesi döndürülür.
-
-Kişi kimliği hakkında daha fazla bilgi için, [yüz tanıma](concepts/face-recognition.md) kavramları Kılavuzu veya API başvurusunu [Tanımla](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239) belgelerine bakın.
-
-## <a name="deploy-on-premises-using-docker-containers"></a>Docker kapsayıcılarını kullanarak şirket içinde dağıtma
-
-Şirket içinde API özelliklerini dağıtmak için [yüz kapsayıcısını (Önizleme) kullanın](face-how-to-install-containers.md) . Bu Docker kapsayıcısı, uyumluluk, güvenlik veya diğer işletimsel nedenlerle hizmeti verilerinize yaklaştırmanızı sağlar.
 
 ## <a name="sample-apps"></a>Örnek uygulamalar
 

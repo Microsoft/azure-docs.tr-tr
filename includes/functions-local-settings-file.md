@@ -4,12 +4,12 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 04/14/2019
 ms.author: glenga
-ms.openlocfilehash: d944d1d3e9c72471fab2435430a7d13e1770e807
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 190524251d139e1421c1aac93d5a4dd523068a7a
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96010523"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105958085"
 ---
 ## <a name="local-settings-file"></a>Yerel ayarlar dosyası
 
@@ -43,7 +43,7 @@ Projeleri yerel olarak çalıştırdığınızda bu ayarlar desteklenir:
 | **`IsEncrypted`** | Bu ayar olarak ayarlandığında `true` , tüm değerler yerel makine anahtarıyla şifrelenir. Komutlarıyla birlikte kullanılır `func settings` . Varsayılan değer `false` olarak belirlenmiştir. Yerel bilgisayarınızdaki local.settings.js, hizmet bağlantı dizeleri gibi gizli dizileri içerdiğinde şifrelemek isteyebilirsiniz. Ana bilgisayar, çalışırken ayarların şifresini otomatik olarak çözer. `func settings decrypt`Yerel olarak şifrelenen ayarları okumayı denemeden önce komutunu kullanın. |
 | **`Values`** | Bir proje yerel olarak çalışırken kullanılan uygulama ayarları ve bağlantı dizeleri dizisi. Bu anahtar-değer (dize-dize) çiftleri, gibi Azure 'daki işlev uygulamanızda uygulama ayarlarına karşılık gelir [`AzureWebJobsStorage`] . Birçok tetikleyici ve bağlamanın, `Connection` [BLOB depolama tetikleyicisi](../articles/azure-functions/functions-bindings-storage-blob-trigger.md#configuration)gibi bir bağlantı dizesi uygulama ayarına başvuran bir özelliği vardır. Bu özellikler için dizide tanımlanmış bir uygulama ayarı gereklidir `Values` . Yaygın olarak kullanılan ayarların listesi için sonraki tabloya bakın. <br/>Değerler dize olmalıdır ve JSON nesneleri veya dizileri olmamalıdır. Ayar adları iki nokta ( `:` ) veya çift alt çizgi () içeremez `__` . Çift alt çizgi karakterleri çalışma zamanı tarafından ayrılmıştır ve iki nokta üst üste [bağımlılık ekleme](../articles/azure-functions/functions-dotnet-dependency-injection.md#working-with-options-and-settings)desteği için ayrılmıştır. |
 | **`Host`** | Bu bölümdeki ayarlar, projeleri yerel olarak çalıştırdığınızda Işlevler ana bilgisayar işlemini özelleştirir. Bu ayarlar, Azure 'da projeleri çalıştırdığınızda da uygulanan ayarları host.jsfarklıdır. |
-| **`LocalHttpPort`** | Yerel Işlevler Konağı (ve) çalıştırılırken kullanılan varsayılan bağlantı noktasını ayarlar `func host start` `func run` . `--port`Komut satırı seçeneği bu ayarın üzerine gelir. |
+| **`LocalHttpPort`** | Yerel Işlevler Konağı (ve) çalıştırılırken kullanılan varsayılan bağlantı noktasını ayarlar `func host start` `func run` . `--port`Komut satırı seçeneği bu ayarın üzerine gelir. Örneğin, Visual Studio IDE 'de çalışırken, "Project Properties-> Debug" penceresine giderek ve `host start --port <your-port-number>` "uygulama bağımsız değişkenleri" alanında sağlanabilecek bir komutta bağlantı noktası numarasını açıkça belirterek bağlantı noktası numarasını değiştirebilirsiniz. |
 | **`CORS`** | , [Çıkış noktaları arası kaynak paylaşımı (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)için izin verilen kaynakları tanımlar. Kaynaklar, boşluk olmadan virgülle ayrılmış bir liste olarak sağlanır. () Joker değeri \* desteklenir ve bu, herhangi bir kaynaktan gelen isteklere izin verir. |
 | **`CORSCredentials`** |  Olarak ayarlandığında `true` , isteklere izin verir `withCredentials` . |
 | **`ConnectionStrings`** | Bir koleksiyon. İşlev bağlamalarınız tarafından kullanılan bağlantı dizeleri için bu koleksiyonu kullanmayın. Bu koleksiyon, genellikle `ConnectionStrings` [Entity Framework](/ef/ef6/)gibi bir yapılandırma dosyasının bölümünden bağlantı dizelerini alan çerçeveler tarafından kullanılır. Bu nesnedeki bağlantı dizeleri [System. Data. SqlClient](/dotnet/api/system.data.sqlclient)sağlayıcı türüyle ortama eklenir. Bu koleksiyondaki öğeler, diğer uygulama ayarlarıyla Azure 'da yayımlanmaz. Bu değerleri, `Connection strings` işlev uygulaması ayarlarınızın koleksiyonuna açıkça eklemeniz gerekir. [`SqlConnection`](/dotnet/api/system.data.sqlclient.sqlconnection)İşlev kodunuzda bir oluşturuyorsanız, bağlantı dizesi değerini portaldaki **uygulama ayarları** ' nda diğer bağlantılarınız ile depolamanız gerekir. |

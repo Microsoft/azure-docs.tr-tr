@@ -4,10 +4,10 @@ description: Azure VM yedeklemesinden dosya ve klasörleri kurtarırken karşıl
 ms.topic: troubleshooting
 ms.date: 07/12/2020
 ms.openlocfilehash: 0ee856b10c6a5fbea6f6f76b2082949ab9c1e0db
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101700312"
 ---
 # <a name="troubleshoot-issues-in-file-recovery-of-an-azure-vm-backup"></a>Azure VM yedeklemesinin dosya kurtarma sorunlarını giderme

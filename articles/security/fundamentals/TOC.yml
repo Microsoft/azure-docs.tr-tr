@@ -4,6 +4,8 @@
   items:
     - name: Azure güvenliğe giriş
       href: overview.md
+    - name: Uçtan uca güvenlik
+      href: end-to-end.md
     - name: Bulutta paylaşılan sorumluluk
       href: shared-responsibility.md
 - name: Azure’da iş yüklerinin güvenliğini sağlama
@@ -62,7 +64,9 @@
     - name: Güvenlik denetim listesi
       href: steps-secure-identity.md
     - name: Parolasız işlevini seçme
-      href: ../../active-directory/authentication/concept-authentication-passwordless.md
+      href: ../../active-directory/authentication/concept-authentication-passwordless.md?toc=/azure/security/fundamentals/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - name: Kimlik Doğrulaması
+      href: /azure/architecture/framework/security/design-identity-authentication?toc=/azure/security/fundamentals/toc.json&bc=/azure/security/breadcrumb/toc.json
 - name: Ağ güvenliği
   items:
     - name: Güvenliğe genel bakış
@@ -76,7 +80,7 @@
     - name: Sarkan DNS ve alt etki alanı adı ele geçirme
       href: subdomain-takeover.md
     - name: Güvenli karma ağ mimarisi
-      href: /azure/architecture/reference-architectures/dmz/secure-vnet-hybrid?bc=%2fazure%2fsecurity%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsecurity%2ftoc.json
+      href: /azure/architecture/reference-architectures/dmz/secure-vnet-hybrid?toc=/azure/security/fundamentals/toc.json&bc=/azure/security/breadcrumb/toc.json
 - name: IaaS güvenliği
   items:
     - name: Microsoft Kötü Amaçlı Yazılımdan Korunma
@@ -116,7 +120,7 @@
         - name: Güvenlik denetim listesi
           href: database-security-checklist.md
     - name: Depolama güvenliği kılavuzu
-      href: ../../storage/blobs/security-recommendations.md?bc=%2fazure%2fsecurity%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fsecurity%2ftoc.json
+      href: ../../storage/blobs/security-recommendations.md?toc=/azure/security/fundamentals/toc.json&bc=/azure/security/breadcrumb/toc.json
     - name: Müşteri Kasası
       href: customer-lockbox-overview.md
     - name: Müşteri Kasası güvenlik temeli

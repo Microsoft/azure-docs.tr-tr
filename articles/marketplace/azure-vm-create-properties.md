@@ -7,16 +7,16 @@ ms.topic: how-to
 author: emuench
 ms.author: mingshen
 ms.date: 10/19/2020
-ms.openlocfilehash: 281553782774c31ec8cfaf614542fd739c4d3dd9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 5942368ba1709127b815a35676b716955c1bee8f
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94629538"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107819097"
 ---
-# <a name="how-to-configure-virtual-machine-offer-properties"></a>Sanal Makine teklifi özelliklerini yapılandırma
+# <a name="configure-virtual-machine-offer-properties"></a>Sanal Makine teklifi özelliklerini yapılandırma
 
-**Özellikler** sayfasında (Iş Ortağı Merkezi ' nde sol gezinti menüsünden seçin), sanal makıne (VM) teklifinizi Azure Marketi 'nde, uygulamanızın sürümüne ve teklifinizi destekleyen yasal sözleşmeleri gruplamak için kullanılan kategorileri tanımlarsınız.
+**Özellikler** sayfasında (sol gezinti menüsünden seçim yapın), Azure Marketi 'nde sanal makıne (VM) teklifinizi, uygulama sürümünüzü ve teklifinizi destekleyen yasal sözleşmeleri gruplamak için kullanılan kategorileri tanımlarsınız.
 
 ## <a name="select-a-category"></a>Kategori seçin
 
@@ -75,7 +75,7 @@ Müşteriler için satın alma sürecini basitleştirmek ve yazılım satıcıla
 
 ### <a name="use-your-own-terms-and-conditions"></a>Kendi hüküm ve koşullarınızı kullanın
 
-Standart sözleşme yerine kendi hüküm ve koşullarınızı sağlamayı tercih edebilirsiniz. Müşterilerinizin teklifinizi deneyebilmeleri için önce bu koşulları kabul etmesi gerekir.
+Standart sözleşmeyi kullanmak yerine kendi hüküm ve koşullarınızı sağlayabilirsiniz. Müşterilerinizin teklifinizi deneyebilmeleri için önce bu koşulları kabul etmesi gerekir.
 
 1. **Yasal**' ın altında, **Microsoft 'un ticari Market Için standart sözleşmeyi kullan** onay kutusunu temizleyin.
 1. **Hüküm ve koşullar** kutusunda en fazla 10.000 karakter girin.

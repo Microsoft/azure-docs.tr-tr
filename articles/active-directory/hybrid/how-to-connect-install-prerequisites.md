@@ -16,12 +16,12 @@ ms.date: 02/16/2021
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e758933b80efbf36dc263b7bd7d2d3c45a59a9f8
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 108f81be678eb666b6f79ebbecc93f7bc88dc1d6
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102426799"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106107920"
 ---
 # <a name="prerequisites-for-azure-ad-connect"></a>Azure AD Connect Önkoşulları
 Bu makalede Azure Active Directory (Azure AD) Connect için Önkoşullar ve donanım gereksinimleri açıklanmaktadır.
@@ -37,7 +37,7 @@ Azure AD Connect yüklemeden önce, ihtiyacınız olan birkaç şey vardır.
 * Bir Azure AD kiracısı, varsayılan olarak 50.000 nesnelerine izin verir. Etki alanınızı doğruladıktan sonra sınır 300.000 nesne artar. Azure AD 'de daha fazla nesne gerekiyorsa, sınırın daha da arttığı bir destek talebi açın. 500.000 ' den fazla nesneye ihtiyacınız varsa, Microsoft 365, Azure AD Premium veya Enterprise Mobility + Security gibi bir lisansa sahip olmanız gerekir.
 
 ### <a name="prepare-your-on-premises-data"></a>Şirket içi verilerinizi hazırlama
-* Azure AD ve Microsoft 365 eşitlemeden önce dizininizde yinelenen öğeler ve biçimlendirme sorunları gibi hataları belirlemek için [ıddüzeltmesini](https://support.office.com/article/Install-and-run-the-Office-365-IdFix-tool-f4bd2439-3e41-4169-99f6-3fabdfa326ac) kullanın.
+* [Azure AD ve Microsoft 365 eşitlemeden](https://support.office.com/article/Install-and-run-the-Office-365-IdFix-tool-f4bd2439-3e41-4169-99f6-3fabdfa326ac)önce dizininizde yinelenen öğeler ve biçimlendirme sorunları gibi hataları belirlemek Için [ıddüzeltmesini](https://github.com/Microsoft/idfix) kullanın.
 * [Azure AD 'de etkinleştirebileceğiniz isteğe bağlı eşitleme özelliklerini](how-to-connect-syncservice-features.md)gözden geçirin ve hangi özellikleri etkinleştirmeniz gerektiğini değerlendirin.
 
 ### <a name="on-premises-active-directory"></a>Şirket içi Active Directory

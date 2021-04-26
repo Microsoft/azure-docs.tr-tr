@@ -8,13 +8,13 @@ ms.topic: tutorial
 ms.reviewer: dseven
 ms.author: matjazl
 author: matjazl
-ms.date: 03/16/2021
-ms.openlocfilehash: e9031dc77054a2bbac8015bbbdd7b9ed2a35e84f
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.date: 03/26/2021
+ms.openlocfilehash: 59847f745037acec47415489cdf61d119a7807af
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105043351"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105936283"
 ---
 # <a name="access-azure-api-for-fhir-with-postman"></a>Postman ile FHıR için Azure API 'sine erişme
 
@@ -24,12 +24,13 @@ ms.locfileid: "105043351"
 
 - Azure 'da bir FHıR uç noktası. 
 
-   FHIR (yönetilen hizmet) için Azure API 'yi dağıtmak üzere [Azure Portal](fhir-paas-portal-quickstart.md), [POWERSHELL](fhir-paas-powershell-quickstart.md)veya [Azure CLI](fhir-paas-cli-quickstart.md)kullanabilirsiniz.
+  FHIR (yönetilen hizmet) için Azure API 'yi dağıtmak üzere [Azure Portal](fhir-paas-portal-quickstart.md), [POWERSHELL](fhir-paas-powershell-quickstart.md)veya [Azure CLI](fhir-paas-cli-quickstart.md)kullanabilirsiniz.
+
 - FHıR hizmetine erişmek için kayıtlı bir [Gizli istemci uygulaması](register-confidential-azure-ad-client-app.md) .
 - Gizli istemci uygulamasına izin vermiş olursunuz, örneğin, FHıR hizmetine erişmek için "FHıR veri katılımcısı". Daha fazla bilgi için bkz. [FHıR Için Azure RBAC yapılandırma](./configure-azure-rbac.md).
 - Postman yüklendi. 
     
-    Postman hakkında daha fazla bilgi için bkz. [Postman](https://www.getpostman.com)'ı kullanmaya başlama.
+  Postman hakkında daha fazla bilgi için bkz. [Postman](https://www.getpostman.com)'ı kullanmaya başlama.
 
 ## <a name="fhir-server-and-authentication-details"></a>FHıR sunucusu ve kimlik doğrulaması ayrıntıları
 
@@ -62,6 +63,8 @@ Kısıtlanmış kaynaklara erişmeyi denerseniz, "kimlik doğrulama başarısız
 ![Kimlik doğrulama başarısız](media/tutorial-postman/postman-authentication-failed.png)
 
 ## <a name="obtaining-an-access-token"></a>Erişim belirteci alma
+**Yeni Erişim Belirteci Al**’a tıklayın.
+
 Geçerli bir erişim belirteci almak için, **Yetkilendirme** ' yi seçin ve **tür** açılan menüsünden **OAuth 2,0** ' ı seçin.
 
 ![OAuth 2,0 ayarla](media/tutorial-postman/postman-select-oauth2.png)
@@ -76,13 +79,13 @@ Geçerli bir erişim belirteci almak için, **Yetkilendirme** ' yi seçin ve **t
 |-----------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------|
 | Belirteç Adı            | MYTOKEN                                                                                                         | Seçtiğiniz bir ad          |
 | Veriliş Türü            | Yetkilendirme kodu                                                                                              |                            |
-| Geri Çağırma URL’si          | `https://www.getpostman.com/oauth2/callback`                                                                      |                            |
+| Geri Çağırma URL’si          | `https://www.getpostman.com/oauth2/callback`                                                                    |                            |
 | Kimlik Doğrulama URL’si              | `https://login.microsoftonline.com/{TENANT-ID}/oauth2/authorize?resource=<audience>` | `audience``https://MYACCOUNT.azurehealthcareapis.com`fhır Için Azure API 'si içindir |
-| Erişim Belirteci URL’si      | `https://login.microsoftonline.com/{TENANT ID}/oauth2/token`                                                      |                            |
-| İstemci Kimliği             | `XXXXXXXX-XXX-XXXX-XXXX-XXXXXXXXXXXX`                                                                            | Uygulama Kimliği             |
-| İstemci Gizli Anahtarı         | `XXXXXXXX`                                                                                                        | Gizli anahtar istemci anahtarı          |
-| Kapsam | `<Leave Blank>` |
-| Durum                |  `1234`                                                                                                           |                            |
+| Erişim Belirteci URL’si      | `https://login.microsoftonline.com/{TENANT ID}/oauth2/token`                                                    |                            |
+| İstemci Kimliği             | `XXXXXXXX-XXX-XXXX-XXXX-XXXXXXXXXXXX`                                                                           | Uygulama Kimliği             |
+| İstemci Gizli Anahtarı         | `XXXXXXXX`                                                                                                      | Gizli anahtar istemci anahtarı          |
+| Kapsam | `<Leave Blank>` | Kapsam kullanılmıyor; Bu nedenle, boş bırakılabilir.  
+| Durum                 | `1234`     | [Durum](https://learning.postman.com/docs/sending-requests/authorization/) , siteler arası istek sahteciliği engellemek için donuk bir değerdir. İsteğe bağlıdır ve ' 1234 ' gibi rastgele bir değer alabilir.                           |
 | İstemci Kimlik Doğrulaması | İstemci kimlik bilgilerini gövdesinde gönder                                                                                 |                 
 
 Azure Active Directory kimlik doğrulama akışı üzerinden kılavuzluk edecek **Istek belirtecini** seçin ve Postman 'ya bir belirteç döndürülür. Bir kimlik doğrulama hatası oluşursa, daha fazla ayrıntı için Postman konsoluna bakın. **Note**: şeritte **Görünüm**' ü ve ardından **Postman konsolunu göster**' i seçin. Postman konsolunun klavye kısayolu **alt-CTRL + C**' dir.
@@ -133,7 +136,7 @@ Hasta 'in başarıyla oluşturulduğunu belirlemek için **Gönder** ' i seçin.
 
 ![Hasta 'in başarıyla oluşturulduğunu gösteren ekran görüntüsü.](media/tutorial-postman/postman-patient-created.png)
 
-Hasta aramasını yinelediğiniz takdirde hasta kaydını görmeniz gerekir:
+Hasta aramasını yinelediğiniz takdirde hasta kaydını görmeniz gerekir.
 
 ![Hasta oluşturuldu](media/tutorial-postman/postman-patient-found.png)
 

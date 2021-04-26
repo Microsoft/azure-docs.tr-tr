@@ -6,13 +6,13 @@ ms.author: sunila
 ms.custom: mvc
 ms.service: postgresql
 ms.topic: overview
-ms.date: 03/17/2021
-ms.openlocfilehash: 8e5c204709f0eadb6c1a4b6f479d4833f335b264
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/05/2021
+ms.openlocfilehash: 090d38a92da126cd4fd8423231f856d22ea9a64c
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104594895"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107106845"
 ---
 # <a name="azure-database-for-postgresql---flexible-server"></a>PostgreSQL için Azure veritabanı-esnek sunucu
 
@@ -90,7 +90,7 @@ Esnek sunucu hizmeti yerleşik performans izleme ve uyarı özellikleriyle donat
 
 Azure 'da iş yükünüzü çalıştırmanın avantajlarından biri küresel erişime sahip. Esnek sunucu şu Azure bölgelerinde sunulmaktadır:
 
-| Region | Kullanılabilirlik | Bölge yedekli HA | 
+| Bölge | Kullanılabilirlik | Bölge yedekli HA | 
 | --- | --- | --- |
 | West Europe | :heavy_check_mark: | :heavy_check_mark: |
 | Kuzey Avrupa | :heavy_check_mark: | :heavy_check_mark: |
@@ -103,6 +103,7 @@ Azure 'da iş yükünüzü çalıştırmanın avantajlarından biri küresel eri
 | Doğu Japonya | :heavy_check_mark: | :heavy_check_mark: | 
 | Doğu Avustralya | :heavy_check_mark: | :heavy_check_mark: | 
 | Orta Kanada | :heavy_check_mark: | :heavy_check_mark: | 
+| Orta Fransa | :heavy_check_mark: | :heavy_check_mark: | 
 
 Esnek sunucu için daha fazla bölge eklemeye devam ediyoruz.
 

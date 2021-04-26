@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 11/05/2020
 ms.author: risverma
 ms.custom: include file
-ms.openlocfilehash: fc61c111291f9862f71f9a81828fa0fa828ab2ad
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 83a19dea56693a1caff2c982b9f772543fe1cf2e
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102510748"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107073443"
 ---
 Azure Işlem, belirli bir donanım türüne yalıtılmış ve tek bir müşteriye adanmış sanal makine boyutları sunar. Yalıtılmış boyutlar canlı ve belirli donanım nesli üzerinde çalışır ve donanım oluşturma kullanımdan kaldırıldığında kullanım dışı kalır.
 
@@ -31,6 +31,7 @@ Geçerli yalıtılmış sanal makine teklifleri şunları içerir:
 * Standard_M128ms
 * Standard_GS5
 * Standard_G5
+* Standard_DC8_v2
 
 
 > [!NOTE]
@@ -48,6 +49,7 @@ Yalıtılmış VM boyutları bir donanım sınırlı ömrü vardır. Azure, boyu
 | Standard_GS5  | 15 Şubat 2022 |
 | Standard_E64i_v3  | 15 Şubat 2022 |
 | Standard_E64is_v3  | 15 Şubat 2022 |
+| Standard_DC8_v2 | 15 Şubat 2022 |
 
 
 ## <a name="faq"></a>SSS
@@ -82,7 +84,7 @@ Y:
 | Tarih | Eylem |
 |---|---|
 | 15 Şub, 2021<sup>1</sup> | G5/GS5/E64i_v3/E64is_v3 yalıtımı kullanımdan kaldırma duyurusu |
-| 15 Şubat 2022 | G5/GS5/E64i_v3/E64is_v3 yalıtım garantisi kaldırıldı |
+| 28 Şubat 2022 | G5/GS5/E64i_v3/E64is_v3 yalıtım garantisi kaldırıldı |
 
 <sup>1</sup> bu boyutları kullanan mevcut müşteri, sonraki adımlarda ayrıntılı yönergeler içeren bir duyuru e-postası alacaktır.  
 

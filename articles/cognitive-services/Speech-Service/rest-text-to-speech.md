@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 01/08/2021
 ms.author: trbye
 ms.custom: references_regions
-ms.openlocfilehash: 9da83746cdaf693922b88841cd9c0fac432611c9
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 0065b6f4a7039e2883bca6acd5cf659be7b71069
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104870849"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717684"
 ---
 # <a name="text-to-speech-rest-api"></a>Metin okuma REST API'si
 
@@ -76,7 +76,7 @@ Bu API 'yi kullanmadan önce şunları anlayın:
 
 Bu tabloda, metinden konuşmaya istekleri için gerekli ve isteğe bağlı üstbilgiler listelenmektedir.
 
-| Üst bilgi | Açıklama | Gerekli/Isteğe bağlı |
+| Üst bilgi | Description | Gerekli/Isteğe bağlı |
 |--------|-------------|---------------------|
 | `Ocp-Apim-Subscription-Key` | Konuşma hizmeti abonelik anahtarınız. | Bu üst bilgi ya da `Authorization` gerekli. |
 | `Authorization` | Bir yetkilendirme belirteci öncesinde kelimedir `Bearer` . Daha fazla bilgi için bkz. [Kimlik doğrulaması](#authentication). | Bu üst bilgi ya da `Ocp-Apim-Subscription-Key` gerekli. |
@@ -213,7 +213,7 @@ Bu bölgeler REST API kullanarak metinden konuşmaya için desteklenir. Abonelik
 
 Bu tabloda, metinden konuşmaya istekleri için gerekli ve isteğe bağlı üstbilgiler listelenmektedir.
 
-| Üst bilgi | Açıklama | Gerekli/Isteğe bağlı |
+| Üst bilgi | Description | Gerekli/Isteğe bağlı |
 |--------|-------------|---------------------|
 | `Authorization` | Bir yetkilendirme belirteci öncesinde kelimedir `Bearer` . Daha fazla bilgi için bkz. [Kimlik doğrulaması](#authentication). | Gerekli |
 | `Content-Type` | Belirtilen metin için içerik türünü belirtir. Kabul edilen değer: `application/ssml+xml` . | Gerekli |
@@ -225,16 +225,19 @@ Bu tabloda, metinden konuşmaya istekleri için gerekli ve isteğe bağlı üstb
 Bu, her istekte üst bilgi olarak gönderilen desteklenen ses biçimlerinin bir listesidir `X-Microsoft-OutputFormat` . Her biri bit hızı ve kodlama türü içerir. Konuşma hizmeti, 24 kHz, 16 kHz ve 8 kHz ses çıkışını destekler.
 
 ```output
-raw-16khz-16bit-mono-pcm            raw-8khz-8bit-mono-mulaw
-riff-8khz-8bit-mono-alaw            riff-8khz-8bit-mono-mulaw
-riff-16khz-16bit-mono-pcm           audio-16khz-128kbitrate-mono-mp3
-audio-16khz-64kbitrate-mono-mp3     audio-16khz-32kbitrate-mono-mp3
+raw-16khz-16bit-mono-pcm            riff-16khz-16bit-mono-pcm
 raw-24khz-16bit-mono-pcm            riff-24khz-16bit-mono-pcm
-audio-24khz-160kbitrate-mono-mp3    audio-24khz-96kbitrate-mono-mp3
-audio-24khz-48kbitrate-mono-mp3     ogg-24khz-16bit-mono-opus
 raw-48khz-16bit-mono-pcm            riff-48khz-16bit-mono-pcm
+raw-8khz-8bit-mono-mulaw            riff-8khz-8bit-mono-mulaw
+raw-8khz-8bit-mono-alaw             riff-8khz-8bit-mono-alaw
+audio-16khz-32kbitrate-mono-mp3     audio-16khz-64kbitrate-mono-mp3
+audio-16khz-128kbitrate-mono-mp3    audio-24khz-48kbitrate-mono-mp3
+audio-24khz-96kbitrate-mono-mp3     audio-24khz-160kbitrate-mono-mp3
 audio-48khz-96kbitrate-mono-mp3     audio-48khz-192kbitrate-mono-mp3
+raw-16khz-16bit-mono-truesilk       raw-24khz-16bit-mono-truesilk
 webm-16khz-16bit-mono-opus          webm-24khz-16bit-mono-opus
+ogg-16khz-16bit-mono-opus           ogg-24khz-16bit-mono-opus
+ogg-48khz-16bit-mono-opus
 ```
 
 > [!NOTE]

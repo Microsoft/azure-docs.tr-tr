@@ -3,18 +3,18 @@ title: Azure RBAC kullanarak Azure anahtar kasasına erişmek için uygulamalara
 description: Azure rol tabanlı erişim denetimi kullanarak anahtarlar, gizlilikler ve sertifikalara erişim sağlamayı öğrenin.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 ms.service: key-vault
 ms.subservice: general
 ms.topic: how-to
-ms.date: 8/30/2020
+ms.date: 04/15/2021
 ms.author: mbaldwin
-ms.openlocfilehash: 886b87adeabdc0aadde04c189b78739435aabede
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: devx-track-azurepowershell, devx-track-azurecli
+ms.openlocfilehash: 9806327c7393c3ba1fdab09acfb5545d6026e5cf
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100527073"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818471"
 ---
 # <a name="provide-access-to-key-vault-keys-certificates-and-secrets-with-an-azure-role-based-access-control"></a>Azure rol tabanlı erişim denetimi ile Key Vault anahtarlarına, sertifikalara ve gizli anahtarlara erişim sağlama
 
@@ -41,7 +41,7 @@ Tek tek anahtarlar, gizli diziler ve sertifikalar izinleri yalnızca belirli sen
 
 Azure Key Vault yönetim yönergeleri hakkında daha fazla bilgi için bkz.:
 
-- [Azure Key Vault güvenliğe genel bakış](security-overview.md)
+- [Azure Key Vault güvenlik özellikleri](security-features.md)
 - [Hizmet sınırlarını Azure Key Vault](service-limits.md)
 
 ## <a name="azure-built-in-roles-for-key-vault-data-plane-operations"></a>Key Vault veri düzlemi işlemleri için Azure yerleşik rolleri
@@ -93,11 +93,22 @@ Rol atamaları eklemek için şunları yapmanız gerekir:
 > [!Note]
 > Betiklerdeki rol adı yerine benzersiz rol KIMLIĞI kullanılması önerilir. Bu nedenle, bir rol yeniden adlandırılırsa, komut dosyalarınız çalışmaya devam eder. Bu belge rolü adı yalnızca okunabilirlik için kullanılır.
 
-Rol ataması oluşturmak için Azure CLı komutu:
+Rol ataması oluşturmak için aşağıdaki komutu çalıştırın:
 
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az role assignment create --role <role_name_or_id> --assignee <assignee> --scope <scope>
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+#Assign by User Principal Name
+New-AzRoleAssignment -RoleDefinitionName <role_name> -SignInName <assignee_upn> -Scope <scope>
+
+#Assign by Service Principal ApplicationId
+New-AzRoleAssignment -RoleDefinitionName Reader -ApplicationId <applicationId> -Scope <scope>
+```
+---
 
 Azure portal, Azure rol atamaları ekranı, erişim denetimi (ıAM) sekmesindeki tüm kaynaklar için kullanılabilir.
 
@@ -114,10 +125,20 @@ Azure portal, Azure rol atamaları ekranı, erişim denetimi (ıAM) sekmesindeki
 
     ![Rol Ekle-kaynak grubu](../media/rbac/image-5.png)
 
-Azure CLı:
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az role assignment create --role "Key Vault Reader" --assignee {i.e user@microsoft.com} --scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+#Assign by User Principal Name
+New-AzRoleAssignment -RoleDefinitionName 'Key Vault Reader' -SignInName {i.e user@microsoft.com} -Scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}
+
+#Assign by Service Principal ApplicationId
+New-AzRoleAssignment -RoleDefinitionName 'Key Vault Reader' -ApplicationId {i.e 8ee5237a-816b-4a72-b605-446970e5f156} -Scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}
+```
+---
 
 Yukarıdaki rol ataması, Anahtar Kasası 'nda Anahtar Kasası nesnelerini listeleyebilme olanağı sağlar.
 
@@ -131,11 +152,20 @@ Yukarıdaki rol ataması, Anahtar Kasası 'nda Anahtar Kasası nesnelerini liste
 
     ![Rol ataması-Anahtar Kasası](../media/rbac/image-6.png)
 
- Azure CLı:
-
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az role assignment create --role "Key Vault Secrets Officer" --assignee {i.e jalichwa@microsoft.com} --scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}/providers/Microsoft.KeyVault/vaults/{key-vault-name}
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+#Assign by User Principal Name
+New-AzRoleAssignment -RoleDefinitionName 'Key Vault Secrets Officer' -SignInName {i.e user@microsoft.com} -Scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}/providers/Microsoft.KeyVault/vaults/{key-vault-name}
+
+#Assign by Service Principal ApplicationId
+New-AzRoleAssignment -RoleDefinitionName 'Key Vault Secrets Officer' -ApplicationId {i.e 8ee5237a-816b-4a72-b605-446970e5f156} -Scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}/providers/Microsoft.KeyVault/vaults/{key-vault-name}
+```
+---
 
 Yukarıdaki rol atamasını oluşturduktan sonra, gizli dizileri oluşturabilir/güncelleştirebilir/silebilirsiniz.
 
@@ -153,11 +183,20 @@ Yukarıdaki rol atamasını oluşturduktan sonra, gizli dizileri oluşturabilir/
 
 3. Geçerli Kullanıcı için "Key Vault gizli müdür" adlı anahtar gizli bilgileri, Key Vault için yukarıda yapıldığından aynı şekilde oluşturun.
 
-Azure CLı:
-
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az role assignment create --role "Key Vault Secrets Officer" --assignee {i.e user@microsoft.com} --scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}/providers/Microsoft.KeyVault/vaults/{key-vault-name}/secrets/RBACSecret
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+#Assign by User Principal Name
+New-AzRoleAssignment -RoleDefinitionName 'Key Vault Secrets Officer' -SignInName {i.e user@microsoft.com} -Scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}/providers/Microsoft.KeyVault/vaults/{key-vault-name}/secrets/RBACSecret
+
+#Assign by Service Principal ApplicationId
+New-AzRoleAssignment -RoleDefinitionName 'Key Vault Secrets Officer' -ApplicationId {i.e 8ee5237a-816b-4a72-b605-446970e5f156} -Scope /subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}/providers/Microsoft.KeyVault/vaults/{key-vault-name}/secrets/RBACSecret
+```
+---
 
 ### <a name="test-and-verify"></a>Test ve doğrulama
 
@@ -197,9 +236,9 @@ Yeni gizli dizi oluştur (gizlilikler \> + Generate/Import) aşağıdaki hatayı
 
 ### <a name="creating-custom-roles"></a>Özel roller oluşturma 
 
-[az role Definition Create komutu](/cli/azure/role/definition#az-role-definition-create)
+[az role Definition Create komutu](/cli/azure/role/definition#az_role_definition_create)
 
-**(CLı Bash betiği)</br>**
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 ```azurecli
 az role definition create --role-definition '{ \
    "Name": "Backup Keys Operator", \
@@ -216,6 +255,31 @@ az role definition create --role-definition '{ \
     "AssignableScopes": ["/subscriptions/{subscriptionId}"] \
 }'
 ```
+# <a name="azure-powershell"></a>[Azure PowerShell](#tab/azurepowershell)
+
+```azurepowershell
+$roleDefinition = @"
+{ 
+   "Name": "Backup Keys Operator", 
+   "Description": "Perform key backup/restore operations", 
+    "Actions": [ 
+    ], 
+    "DataActions": [ 
+        "Microsoft.KeyVault/vaults/keys/read ", 
+        "Microsoft.KeyVault/vaults/keys/backup/action", 
+         "Microsoft.KeyVault/vaults/keys/restore/action" 
+    ], 
+    "NotDataActions": [ 
+   ], 
+    "AssignableScopes": ["/subscriptions/{subscriptionId}"] 
+}
+"@
+
+$roleDefinition | Out-File role.json
+
+New-AzRoleDefinition -InputFile role.json
+```
+---
 
 Özel roller oluşturma hakkında daha fazla bilgi için bkz.:
 

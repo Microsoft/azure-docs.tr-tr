@@ -62,9 +62,9 @@
           href: how-to-view-telemetry.md
     - name: Azure Percept DK ile konuşma çözümü geliştirme
       items:
-        - name: Azure Percept Studio 'da sesli yardımcınızı yapılandırma
-          href: how-to-configure-voice-assistant.md
         - name: IoT Hub 'de sesli yardımcınızı yapılandırın
+          href: how-to-configure-voice-assistant.md
+        - name: Azure Percept Studio 'da sesli yardımcınızı yapılandırma
           href: how-to-manage-voice-assistant.md
     - name: Azure Percept cihazlarınızı güncelleştirme
       items:
@@ -82,7 +82,7 @@
           href: how-to-connect-to-percept-dk-over-serial.md
     - name: Araçlar
       items:
-        - name: Devtools paketi yükleyicisi
+        - name: Geliştirme araçları paketi yükleyicisi
           href: dev-tools-installer.md
     - name: Sorun giderme
       items:

@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 02/23/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 4b34fb0d3bb2d49255007b9722a0a636c1441b8c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: b2cab56fb99bda7da361cc2068396e53e794501d
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101746284"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106448347"
 ---
 # <a name="using-the-msixmgr-tool"></a>MSıXMGR aracını kullanma
 

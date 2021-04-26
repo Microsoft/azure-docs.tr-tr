@@ -1,192 +1,135 @@
-### YamlMime:Landing
+### YamlMime:Hub
 title: Görüntü İşleme belgeleri
-summary: Bulut tabanlı Görüntü İşleme API’si, geliştiriciler için görüntüleri işlemeye ve bilgileri döndürmeye yönelik gelişmiş algoritmalara erişim sağlar. Microsoft Görüntü İşleme algoritmaları bir görüntüyü karşıya yükleyerek veya bir görüntü URL’si belirterek girdilere ve kullanıcı seçimlerine göre görsel içerikleri farklı şekillerde analiz edebilir. Hızlı başlangıç kılavuzları, öğreticiler ve örneklerle görsel içeriği farklı şekillerde analiz etmeyi öğrenin.
+summary: 'Bulut tabanlı Görüntü İşleme API’si, geliştiriciler için görüntüleri işlemeye ve bilgileri döndürmeye yönelik gelişmiş algoritmalara erişim sağlar. Microsoft Görüntü İşleme algoritmaları bir görüntüyü karşıya yükleyerek veya bir görüntü URL’si belirterek girdilere ve kullanıcı seçimlerine göre görsel içerikleri farklı şekillerde analiz edebilir. Hızlı başlangıç kılavuzları, öğreticiler ve örneklerle görsel içeriği farklı şekillerde analiz etmeyi öğrenin.'
 metadata:
-  title: Görüntü İşleme belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvuruları - Azure Bilişsel Hizmetler | Microsoft Docs
-  description: Bulut tabanlı Görüntü İşleme API’si, geliştiriciler için görüntüleri işlemeye ve bilgileri döndürmeye yönelik gelişmiş algoritmalara erişim sağlar. Microsoft Görüntü İşleme algoritmaları bir görüntüyü karşıya yükleyerek veya bir görüntü URL’si belirterek girdilere ve kullanıcı seçimlerine göre görsel içerikleri farklı şekillerde analiz edebilir. Hızlı başlangıç kılavuzları, öğreticiler ve örneklerle görsel içeriği farklı şekillerde analiz etmeyi öğrenin.
+  title: 'Görüntü İşleme belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvuruları - Azure Bilişsel Hizmetler | Microsoft Docs'
+  description: 'Bulut tabanlı Görüntü İşleme API’si, geliştiriciler için görüntüleri işlemeye ve bilgileri döndürmeye yönelik gelişmiş algoritmalara erişim sağlar. Microsoft Görüntü İşleme algoritmaları bir görüntüyü karşıya yükleyerek veya bir görüntü URL’si belirterek girdilere ve kullanıcı seçimlerine göre görsel içerikleri farklı şekillerde analiz edebilir. Hızlı başlangıç kılavuzları, öğreticiler ve örneklerle görsel içeriği farklı şekillerde analiz etmeyi öğrenin.'
   services: cognitive-services
   ms.service: cognitive-services
   ms.subservice: computer-vision
-  ms.topic: landing-page
+  ms.topic: hub-page
   author: PatrickFarley
   ms.author: pafarley
-  ms.date: 09/22/2020
-  ms.openlocfilehash: 940a34cfbf4281649737f0cf3fed7b490a9938a7
-  ms.sourcegitcommit: 15d27661c1c03bf84d3974a675c7bd11a0e086e6
-  ms.translationtype: MT
-  ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/09/2021
-  ms.locfileid: "102508903"
-landingContent:
-- title: Görüntü İşleme hakkında
-  linkLists:
-  - linkListType: overview
-    links:
-    - text: Görüntü İşleme nedir?
+  ms.date: 03/31/2021
+highlightedContent:
+  items:
+    - title: Görüntü İşleme hakkında
+      itemType: overview
       url: overview.md
-  - linkListType: whats-new
-    links:
-    - text: Yenilikler
+    - title: Görüntü İşleme yenilikler nelerdir?
+      itemType: whats-new
       url: whats-new.md
-  - linkListType: video
-    links:
-    - text: Görüntü İşleme API'leri ile uygulamalarınıza zeka katın
-      url: https://azure.microsoft.com/resources/videos/connect-2017-microsoft-cognitive-services-put-intelligence-into-your-business-apps/
-- title: Optik Karakter Tanıma (OCR)
-  linkLists:
-  - linkListType: concept
-    links:
-    - text: Optik Karakter Tanıma (OCR)
-      url: concept-recognizing-text.md
-  - linkListType: quickstart
-    links:
-    - text: .NET SDK’sini kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-csharp
-    - text: Python SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-python
-    - text: Java SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-java
-    - text: Düğüm SDK'sını kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-javascript
-    - text: Go SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-go
-    - text: REST API’yi kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-rest-api
-- title: Resimlerdeki nesneleri algılama
-  linkLists:
-  - linkListType: concept
-    links:
-    - text: Nesne algılama
-      url: concept-object-detection.md
-  - linkListType: quickstart
-    links:
-    - text: .NET SDK’sini kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-csharp
-    - text: Python SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-python
-    - text: Java SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-java
-    - text: Düğüm SDK'sını kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-javascript
-    - text: Go SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-go
-    - text: REST API’yi kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-rest-api
-- title: Resimlere içerik etiketleri uygulama
-  linkLists:
-  - linkListType: concept
-    links:
-    - text: İçerik etiketleri
-      url: concept-tagging-images.md
-  - linkListType: quickstart
-    links:
-    - text: .NET SDK’sini kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-csharp
-    - text: Python SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-python
-    - text: Java SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-java
-    - text: Düğüm SDK'sını kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-javascript
-    - text: Go SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-go
-    - text: REST API’yi kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-rest-api
-- title: Okuma kapsayıcısını kullanma
-  linkLists:
-  - linkListType: get-started
-    links:
-    - text: Kapsayıcıyı yükleme ve çalıştırma
-      url: computer-vision-how-to-install-containers.md
-  - linkListType: how-to-guide
-    links:
-    - text: Kapsayıcıları yapılandırma
-      url: computer-vision-resource-container-config.md
-  - linkListType: deploy
-    links:
-    - text: Kapsayıcı örnekleri kullanma
-      url: ../containers/azure-container-instance-recipe.md
-    - text: Kubernetes ve Helm ile kullanma
-      url: deploy-computer-vision-on-premises.md
-- title: Uzamsal analiz kapsayıcısını kullanma
-  linkLists:
-  - linkListType: get-started
-    links:
-    - text: Uzamsal Analize genel bakış
-      url: intro-to-spatial-analysis-public-preview.md
-    - text: Kapsayıcıyı yükleme ve çalıştırma
-      url: spatial-analysis-container.md
-    - text: İşlemleri yapılandırma
-      url: spatial-analysis-operations.md
-  - linkListType: deploy
-    links:
-    - text: Kişi sayma uygulaması dağıtma
-      url: spatial-analysis-web-app.md
-  - linkListType: concept
-    links:
-    - text: Bölge ve satır yerleşimi
-      url: spatial-analysis-zone-line-placement.md
-    - text: Kamera yerleşimi
-      url: spatial-analysis-camera-placement.md
-    - text: Günlüğe kaydetme ve sorun giderme
-      url: spatial-analysis-logging.md
-- title: Resimlerdeki yüzleri algılama
-  linkLists:
-  - linkListType: concept
-    links:
-    - text: Yüz algılama
-      url: concept-detecting-faces.md
-  - linkListType: quickstart
-    links:
-    - text: .NET SDK’sini kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-csharp
-    - text: Python SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-python
-    - text: Java SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-java
-    - text: Düğüm SDK'sını kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-javascript
-    - text: Go SDK'yı kullanma
-      url: quickstarts-sdk/client-library.md?pivots=programming-language-go
-- title: Yapay zekanın sorumluluk sahibi bir biçimde kullanılması
-  linkLists:
-  - linkListType: overview
-    links:
-    - text: Uzamsal analize yönelik saydamlık notunun
-      url: /legal/cognitive-services/computer-vision/transparency-note-spatial-analysis?context=%2fazure%2fcognitive-services%2fComputer-vision%2fcontext%2fcontext
-  - linkListType: concept
-    links:
-    - text: Yapay zeka dağıtımında sorumlu kullanım
-      url: /legal/cognitive-services/computer-vision/responsible-use-deployment?context=%2fazure%2fcognitive-services%2fComputer-vision%2fcontext%2fcontext
-    - text: Veriler, gizlilik ve güvenlik
-      url: /legal/cognitive-services/computer-vision/compliance-privacy-security-2?context=%2fazure%2fcognitive-services%2fComputer-vision%2fcontext%2fcontext
-- title: Başvuru
-  linkLists:
-  - linkListType: reference
-    links:
-    - text: Görüntü İşleme API’si v3.2 önizleme
-      url: https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-preview-3/operations/56f91f2e778daf14a499f21b
-    - text: Görüntü İşleme API'si v3.1
-      url: https://westcentralus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-1-ga/operations/5d986960601faab4bf452005
-    - text: Görüntü İşleme API’si v2.1
-      url: https://westus.dev.cognitive.microsoft.com/docs/services/5cd27ec07268f6c679a3e641/operations/56f91f2e778daf14a499f21b
-    - text: .NET SDK
-      url: /dotnet/api/overview/azure/cognitiveservices/client/computervision
-    - text: Python SDK'sı
-      url: /python/api/overview/azure/cognitiveservices/computervision
-    - text: Java SDK
-      url: /java/api/overview/azure/cognitiveservices/client/computervision
-    - text: Node.js SDK'sı
-      url: /javascript/api/@azure/cognitiveservices-computervision/
-    - text: Go SDK'sı
-      url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision
-    - text: Azure PowerShell
-      url: /powershell/module/az.cognitiveservices/#cognitive_services
-    - text: Azure Komut Satırı Arabirimi (CLI)
-      url: /cli/azure/cognitiveservices#az-cognitiveservices-list
-- title: Yardım ve geri bildirim
-  linkLists:
-  - linkListType: reference
-    links:
-    - text: Destek ve yardım seçenekleri
-      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/computer-vision/context/context
+    - title: Dil desteği
+      itemType: reference
+      url: language-support.md
+conceptualContent:
+  items:
+    - title: Optik karakter tanıma
+      links:
+        - itemType: overview
+          text: OCR hakkında
+          url: overview-ocr.md
+        - itemType: quickstart
+          text: OCR ile çalışmaya başlama
+          url: quickstarts-sdk/client-library.md
+        - itemType: how-to-guide
+          text: Okuma API 'sini çağırma
+          url: Vision-API-How-to-Topics/call-read-api.md
+        - itemType: deploy
+          text: Okuma OCR kapsayıcısını kullanma
+          url: computer-vision-how-to-install-containers.md
+        - itemType: reference
+          text: OCR API 'SI başvurusu
+          url: 'https://centraluseuap.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2/operations/5d986960601faab4bf452005'
+      footerLink:
+        text: Daha fazla
+        url: index-ocr.yml
+    - title: Görüntü Analizi
+      links:
+        - itemType: overview
+          text: Görüntü analizi hakkında
+          url: overview-image-analysis.md
+        - itemType: quickstart
+          text: Görüntü analizini kullanmaya başlama
+          url: quickstarts-sdk/image-analysis-client-library.md
+        - itemType: concept
+          text: İçerik etiketleri
+          url: concept-tagging-images.md
+        - itemType: concept
+          text: Görüntü açıklamaları
+          url: concept-describing-images.md
+        - itemType: concept
+          text: Yüz algılama
+          url: concept-detecting-faces.md
+        - itemType: tutorial
+          text: Resimler için meta verileri oluşturma
+          url: Tutorials/storage-lab-tutorial.md
+        - itemType: reference
+          text: Görüntü analizi API 'SI başvurusu
+          url: 'https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-preview-3/operations/56f91f2e778daf14a499f21b'
+      footerLink:
+        text: Daha fazla
+        url: index-image-analysis.yml
+    - title: Uzamsal Analiz
+      links:
+        - itemType: overview
+          text: Uzamsal analiz hakkında
+          url: intro-to-spatial-analysis-public-preview.md
+        - itemType: quickstart
+          text: Uzamsal analiz ile çalışmaya başlama
+          url: spatial-analysis-container.md
+        - itemType: how-to-guide
+          text: Uzamsal analiz işlemlerini yapılandırma
+          url: spatial-analysis-operations.md
+        - itemType: concept
+          text: Bölge ve satır yerleşimi
+          url: spatial-analysis-zone-line-placement.md
+        - itemType: concept
+          text: Kamera yerleşimi
+          url: spatial-analysis-camera-placement.md
+        - itemType: concept
+          text: Günlüğe kaydetme ve sorun giderme
+          url: spatial-analysis-logging.md
+      footerLink:
+        text: Daha fazla
+        url: index-spatial-analysis.yml
+tools:
+  title: Yazılım geliştirme setleri (SDK’lar)
+  summary: En sevdiğiniz programlama dilinde Görüntü İşleme SDK ile çalışmaya başlayın.
+  items:
+    - title: C#
+      imageSrc: media/index/logo_Csharp.svg
+      url: /dotnet/api/overview/azure/cognitiveservices/client/computervision?view=azure-dotnet
+    - title: Node.js
+      imageSrc: media/index/logo_nodejs.svg
+      url: /javascript/api/@azure/cognitiveservices-computervision/?view=azure-node-latest
+    - title: Python
+      imageSrc: media/index/logo_python.svg
+      url: /python/api/overview/azure/cognitiveservices/computervision?view=azure-python
+    - title: Başlayın
+      imageSrc: media/index/logo_go.svg
+      url: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision'
+    - title: Java
+      imageSrc: 'https://docs.microsoft.com/media/logos/logo_java.svg'
+      url: /java/api/com.microsoft.cognitiveservices.speech
+additionalContent:
+  sections:
+    - items:
+        - title: REST API'leri
+          links:
+            - text: Optik karakter tanıma (OCR)
+              url: 'https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-preview-3/operations/5d986960601faab4bf452005'
+            - text: Görüntü Analizi
+              url: 'https://westus.dev.cognitive.microsoft.com/docs/services/computer-vision-v3-2-preview-3/operations/56f91f2e778daf14a499f21b'
+        - title: Kaynaklar
+          links:
+            - text: Fiyatlandırma
+              url: 'https://azure.microsoft.com/pricing/details/cognitive-services/computer-vision'
+            - text: Bölgeler
+              url: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+            - text: Öğrenin
+              url: /learn/paths/explore-computer-vision-microsoft-azure/
+        - title: Destek
+          links:
+            - text: Destek ve yardım seçenekleri
+              url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/computer-vision/context/context

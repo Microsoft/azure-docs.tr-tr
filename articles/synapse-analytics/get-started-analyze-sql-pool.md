@@ -10,12 +10,12 @@ ms.service: synapse-analytics
 ms.subservice: sql
 ms.topic: tutorial
 ms.date: 03/24/2021
-ms.openlocfilehash: a1f15330a912c8a8a93fe1f74e88ef8d117441c2
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 0def1f957842417c3936e3f1c7bb5bc023109818
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105047907"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107536332"
 ---
 # <a name="analyze-data-with-dedicated-sql-pools"></a>Adanmış SQL havuzları ile verileri analiz etme
 
@@ -43,49 +43,55 @@ Adanmış bir SQL havuzu, etkin olduğu sürece faturalanabilir kaynakları kull
 1. Betiğin üzerindeki ' Bağlan ' açılan listesinde ' SQLPOOL1 ' havuzunu (Bu öğreticinin [1. adımında](./get-started-create-workspace.md) oluşturulan havuz) seçin.
 1. Aşağıdaki kodu girin:
     ```
-    CREATE TABLE [dbo].[Trip]
-    (
-        [DateID] int NOT NULL,
-        [MedallionID] int NOT NULL,
-        [HackneyLicenseID] int NOT NULL,
-        [PickupTimeID] int NOT NULL,
-        [DropoffTimeID] int NOT NULL,
-        [PickupGeographyID] int NULL,
-        [DropoffGeographyID] int NULL,
-        [PickupLatitude] float NULL,
-        [PickupLongitude] float NULL,
-        [PickupLatLong] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-        [DropoffLatitude] float NULL,
-        [DropoffLongitude] float NULL,
-        [DropoffLatLong] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-        [PassengerCount] int NULL,
-        [TripDurationSeconds] int NULL,
-        [TripDistanceMiles] float NULL,
-        [PaymentType] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-        [FareAmount] money NULL,
-        [SurchargeAmount] money NULL,
-        [TaxAmount] money NULL,
-        [TipAmount] money NULL,
-        [TollsAmount] money NULL,
-        [TotalAmount] money NULL
-    )
+    IF NOT EXISTS (SELECT * FROM sys.objects O JOIN sys.schemas S ON O.schema_id = S.schema_id WHERE O.NAME = 'NYCTaxiTripSmall' AND O.TYPE = 'U' AND S.NAME = 'dbo')
+    CREATE TABLE dbo.NYCTaxiTripSmall
+        (
+         [DateID] int,
+         [MedallionID] int,
+         [HackneyLicenseID] int,
+         [PickupTimeID] int,
+         [DropoffTimeID] int,
+         [PickupGeographyID] int,
+         [DropoffGeographyID] int,
+         [PickupLatitude] float,
+         [PickupLongitude] float,
+         [PickupLatLong] nvarchar(4000),
+         [DropoffLatitude] float,
+         [DropoffLongitude] float,
+         [DropoffLatLong] nvarchar(4000),
+         [PassengerCount] int,
+         [TripDurationSeconds] int,
+         [TripDistanceMiles] float,
+         [PaymentType] nvarchar(4000),
+         [FareAmount] numeric(19,4),
+         [SurchargeAmount] numeric(19,4),
+         [TaxAmount] numeric(19,4),
+         [TipAmount] numeric(19,4),
+         [TollsAmount] numeric(19,4),
+         [TotalAmount] numeric(19,4)
+        )
     WITH
-    (
+        (
         DISTRIBUTION = ROUND_ROBIN,
-        CLUSTERED COLUMNSTORE INDEX
-    );
+         CLUSTERED COLUMNSTORE INDEX
+         -- HEAP
+        )
+    GO
 
-    COPY INTO [dbo].[Trip]
-    FROM 'https://nytaxiblob.blob.core.windows.net/2013/Trip2013/QID6392_20171107_05910_0.txt.gz'
+    COPY INTO dbo.NYCTaxiTripSmall
+    (DateID 1, MedallionID 2, HackneyLicenseID 3, PickupTimeID 4, DropoffTimeID 5,
+    PickupGeographyID 6, DropoffGeographyID 7, PickupLatitude 8, PickupLongitude 9, 
+    PickupLatLong 10, DropoffLatitude 11, DropoffLongitude 12, DropoffLatLong 13, 
+    PassengerCount 14, TripDurationSeconds 15, TripDistanceMiles 16, PaymentType 17, 
+    FareAmount 18, SurchargeAmount 19, TaxAmount 20, TipAmount 21, TollsAmount 22, 
+    TotalAmount 23)
+    FROM 'https://contosolake.dfs.core.windows.net/users/NYCTripSmall.parquet'
     WITH
     (
-        FILE_TYPE = 'CSV',
-        FIELDTERMINATOR = '|',
-        FIELDQUOTE = '',
-        ROWTERMINATOR='0X0A',
-        COMPRESSION = 'GZIP'
+        FILE_TYPE = 'PARQUET'
+        ,MAXERRORS = 0
+        ,IDENTITY_INSERT = 'OFF'
     )
-    OPTION (LABEL = 'COPY : Load [dbo].[Trip] - Taxi dataset');
     ```
 1. Betiği yürütmek için Çalıştır düğmesine tıklayın.
 1. Bu betik 60 saniyeden daha az bir süre içinde sona acaktır. NYC TAXI verilerinin 2.000.000 satırlarını dbo adlı bir tabloya yükler **. Seyahat**.
@@ -94,7 +100,7 @@ Adanmış bir SQL havuzu, etkin olduğu sürece faturalanabilir kaynakları kull
 
 1. SYNAPSE Studio 'da **veri** merkezine gidin.
 1. **SQLPOOL1**  >  **Tables** bölümüne gidin. 
-3. Dbo öğesine sağ tıklayın **. Seyahat** tablosu ve **Yeni SQL betiği** Seç  >  **ilk 100 satır seçin**.
+3. Dbo öğesine sağ tıklayın **. NYCTaxiTripSmall** tablosu ve **Yeni SQL betiği** Seç  >  **ilk 100 satır seçin**.
 4. Yeni bir SQL betiği oluşturulup çalışırken bekleyin.
 5. SQL **komut dosyasının en üstünde,** **SQLPOOL1** adlı SQL havuzuna otomatik olarak ayarlandığını unutmayın.
 6. SQL komut dosyasının metnini bu kodla değiştirin ve çalıştırın.
@@ -103,7 +109,7 @@ Adanmış bir SQL havuzu, etkin olduğu sürece faturalanabilir kaynakları kull
     SELECT PassengerCount,
           SUM(TripDistanceMiles) as SumTripDistance,
           AVG(TripDistanceMiles) as AvgTripDistance
-    FROM  dbo.Trip
+    FROM  dbo.NYCTaxiTripSmall
     WHERE TripDistanceMiles > 0 AND PassengerCount > 0
     GROUP BY PassengerCount
     ORDER BY PassengerCount;

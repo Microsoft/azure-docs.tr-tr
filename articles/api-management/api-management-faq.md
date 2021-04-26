@@ -13,12 +13,13 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/19/2017
 ms.author: apimpm
-ms.openlocfilehash: eea3c8525d31a3ca551e9cbc7d21d7dde163b5cc
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 1b6a138317d0cc2e10e893d1969f9d5452064d8f
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94698011"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813749"
 ---
 # <a name="azure-api-management-faqs"></a>Azure API Management SSS
 Azure API Management için sık sorulan soruların, desenlerin ve en iyi yöntemlerin yanıtlarını alın.

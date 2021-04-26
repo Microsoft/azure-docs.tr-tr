@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/07/2020
 ms.author: allensu
-ms.openlocfilehash: ee264a22de5ce094e8a4c1335ace77cbbba49270
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a96e6b567c04f2e0561a0a754e854a0e2b1ad6b0
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94695002"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076267"
 ---
 # <a name="outbound-only-load-balancer-configuration"></a>Yalnızca giden yük dengeleyici yapılandırması
 
@@ -278,7 +278,7 @@ Oluşturulan VM 'nizi her birinin arka uç havuzuna ekleyin.  Daha sonra yalnız
     | Ön uç IP adresi | **Loadbalancerön uç** öğesini seçin.|
     | Boşta kalma zaman aşımı (dakika) | Kaydırıcıyı **15 dakikaya** taşıyın.|
     | TCP sıfırlaması | **Etkin**'i seçin.|
-    | Arka uç havuzu | **Mypublicbackendpool** öğesini seçin.| |
+    | Arka uç havuzu | **Mypublicbackendpool** öğesini seçin.|
     | Bağlantı noktası ayırma-> bağlantı noktası ayırma | **Varsayılan giden bağlantı noktası sayısını kullan** ' ı seçin |
 
 4. **Add (Ekle)** seçeneğini belirleyin.

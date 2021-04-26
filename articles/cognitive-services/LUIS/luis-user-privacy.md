@@ -8,13 +8,13 @@ ms.custom: seodec18, references_regions
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
-ms.date: 12/10/2020
-ms.openlocfilehash: 0a2d0ce683261ca3460c7aeaa0d7a42152b81a1e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/08/2020
+ms.openlocfilehash: a7a7bbb8b911f86b81cdeafe3fe57e1fdf820681
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98680201"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107228291"
 ---
 # <a name="export-and-delete-your-customer-data-in-language-understanding-luis-in-cognitive-services"></a>Bilişsel hizmetler 'de müşteri verilerinizi Language Understanding (LUSıS) olarak dışa ve silme
 
@@ -37,8 +37,8 @@ LUıS kullanıcıları, LUıS Web portalı ya da LUıS yazma (programlı olarak 
 
 | | **Kullanıcı Hesabı** | **Uygulama** | **Örnek söyleyler** | **Son Kullanıcı sorguları** |
 | --- | --- | --- | --- | --- |
-| **Portal** | [Bağlantı](luis-concept-data-storage.md#delete-an-account) | [Bağlantı](luis-how-to-start-new-app.md#delete-app) | [Bağlantı](luis-concept-data-storage.md#utterances-in-an-intent) | [Etkin öğrenimi](luis-how-to-review-endpoint-utterances.md#disable-active-learning)<br>[Günlüğe kaydedilen Utterslar](luis-concept-data-storage.md#disable-logging-utterances) |
-| **API'ler** | [Bağlantı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c4c) | [Bağlantı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c39) | [Bağlantı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c0b) | [Bağlantı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/58b6f32139e2bb139ce823c9) |
+| **Portal** | [Bağlantısının](luis-concept-data-storage.md#delete-an-account) | [Bağlantısının](luis-how-to-start-new-app.md#delete-app) | [Bağlantısının](luis-concept-data-storage.md#utterances-in-an-intent) | [Etkin öğrenimi](luis-how-to-review-endpoint-utterances.md#disable-active-learning)<br>[Günlüğe kaydedilen Utterslar](luis-concept-data-storage.md#disable-logging-utterances) |
+| **API'ler** | [Bağlantısının](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c4c) | [Bağlantısının](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c39) | [Bağlantısının](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c0b) | [Bağlantısının](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/58b6f32139e2bb139ce823c9) |
 
 
 ## <a name="exporting-customer-data"></a>Müşteri verilerini dışa aktarma
@@ -46,7 +46,7 @@ LUıS kullanıcıları portalda verileri görüntülemek için tam denetime sahi
 
 | | **Kullanıcı Hesabı** | **Uygulama** | **Utterance (s)** | **Son Kullanıcı sorguları** |
 | --- | --- | --- | --- | --- |
-| **API'ler** | [Bağlantı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c48) | [Bağlantı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c40) | [Bağlantı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c0a) | [Bağlantı](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c36) |
+| **API'ler** | [Bağlantısının](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c48) | [Bağlantısının](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c40) | [Bağlantısının](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c0a) | [Bağlantısının](https://westus.dev.cognitive.microsoft.com/docs/services/5890b47c39e2bb17b84a55ff/operations/5890b47c39e2bb052c5b9c36) |
 
 ## <a name="location-of-active-learning"></a>Etkin öğrenimi konumu
 
@@ -85,7 +85,15 @@ Birleşik Devletler yazma (programlama API 'Leri olarak da bilinir) kaynakları 
 
 * Avrupa veya Avustralya yazma bölgeleri tarafından desteklenmeyen Azure coğrafi bölgeler
 
-Bu Azure coğrafi noktalara dağıtım yaparken, uygulamanızın son kullanıcılarından gelen uç nokta tarafından alınan araslar, etkin öğrenme için Azure Birleşik Devletler Coğrafya 'da depolanır. 
+Bu Azure coğrafi noktalara dağıtım yaparken, uygulamanızın son kullanıcılarından gelen uç nokta tarafından alınan araslar, etkin öğrenme için Azure Birleşik Devletler Coğrafya 'da depolanır.
+
+### <a name="switzerland-north"></a>İsviçre Kuzey
+
+İsviçre Kuzey yazma (programlama API 'Leri olarak da bilinir) kaynakları, Azure 'un Isviçre coğrafi konumunda barındırılır ve uç noktaların aşağıdaki Azure coğrafi bölgelerde dağıtımını destekler:
+
+* İsviçre 
+
+Bu Azure coğrafi noktalara dağıtım yaparken, uygulamanızın son kullanıcılarından gelen uç nokta tarafından alınan söyleyler, etkin öğrenme için Azure 'un Isviçre Coğrafya 'da depolanır.
 
 ## <a name="disable-active-learning"></a>Etkin öğrenmeyi devre dışı bırak
 

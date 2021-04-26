@@ -1,37 +1,28 @@
 ---
-title: Windows sanal masaüstü MALTı uygulama iliştirme Portal önizlemesi-Azure
+title: Windows sanal masaüstü MALTı uygulama iliştirme portalı-Azure
 description: Azure portal kullanarak Windows sanal masaüstü için MSIX uygulama iliştirme 'yi ayarlama.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 02/11/2021
+ms.date: 04/13/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: c775d81b88c891d6d8ea0a4597b4fa4fee29c86a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: 21dbab6c8d4fb12fe79434a6994dd7f5b8a49190
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101737554"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107502717"
 ---
 # <a name="set-up-msix-app-attach-with-the-azure-portal"></a>Azure portalla MSIX uygulama iliştirmeyi ayarlama
 
-> [!IMPORTANT]
-> MSIX uygulama iliştirme Şu anda genel önizlemededir.
-> Bu önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve bunu üretim iş yükleri için kullanmanızı önermiyoruz. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-Bu makalede, bir Windows sanal masaüstü ortamında MSIX uygulama iliştirme 'yi (Önizleme) ayarlama işleminde size kılavuzluk edilir.
+Bu makalede, bir Windows sanal masaüstü ortamında MSIX uygulama iliştirme 'yi ayarlama işleminde size yol gösterilir.
 
 ## <a name="requirements"></a>Gereksinimler
-
->[!IMPORTANT]
->Başlamadan önce, aboneliğinizde MSIX uygulama iliştirmeyi etkinleştirmek için [Bu formu](https://aka.ms/enablemsixappattach) doldurup gönderdiğinizden emin olun. Onaylanmış bir isteğiniz yoksa, MSIX uygulama iliştirme çalışmaz. İsteklerin onaylanması, iş günleri sırasında 24 saate kadar sürebilir. İsteğiniz kabul edildiğinde ve tamamlandığında bir e-posta alacaksınız.
 
 İşte MALTı uygulama eklemeyi yapılandırmak için gerekenler şunlardır:
 
 - Çalışan bir Windows sanal masaüstü dağıtımı. Windows sanal masaüstü 'Nü (klasik) dağıtmayı öğrenmek için bkz. [Windows sanal masaüstü 'nde kiracı oluşturma](./virtual-desktop-fall-2019/tenant-setup-azure-active-directory.md). Windows sanal masaüstü Azure Resource Manager tümleştirme ile nasıl dağıtılacağını öğrenmek için, bkz. [Azure Portal bir konak havuzu oluşturma](./create-host-pools-azure-marketplace.md).
 - En az bir etkin oturum ana bilgisayarı olan bir Windows sanal masaüstü konak Havuzu.
-- Bu konak havuzunun doğrulama ortamında olması gerekir. 
 - MSIX paketleme aracı.
 - Bir dosya paylaşımında karşıya yüklenen bir MSIX görüntüde genişletilen, MSIX paketlenmiş bir uygulama.
 - Windows sanal masaüstü dağıtımınızda MSIX paketinin depolanacağı bir dosya paylaşımıdır.

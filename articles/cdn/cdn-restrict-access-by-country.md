@@ -9,10 +9,10 @@ ms.topic: how-to
 ms.date: 01/16/2021
 ms.author: allensu
 ms.openlocfilehash: 8901dffb752409acd7fb08a2025bed9a4cc70132
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98539516"
 ---
 # <a name="restrict-azure-cdn-content-by-countryregion"></a>Azure CDN içeriğini ülkeye/bölgeye göre kısıtla

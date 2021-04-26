@@ -1,14 +1,14 @@
 ---
 title: DoD Etki Düzeyi 5 şema örneğine genel bakış
 description: DoD Etki Düzeyi 5 örneğine genel bakış. Bu şema örneği, müşterilerin belirli DoD Etki Düzeyi 5 denetimlerini değerlendirmesine yardımcı olur.
-ms.date: 01/08/2021
+ms.date: 04/02/2021
 ms.topic: sample
-ms.openlocfilehash: 5b2d018cf6c986c38cbe5a1a8ea18bf4a290a4df
-ms.sourcegitcommit: c4c554db636f829d7abe70e2c433d27281b35183
-ms.translationtype: HT
+ms.openlocfilehash: 93b9dcbafbeeb0dc2a0ea9792d616a74cb3b81a5
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98035079"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106386820"
 ---
 # <a name="overview-of-the-dod-impact-level-5-blueprint-sample"></a>DoD Etki Düzeyi 5 şema örneğine genel bakış
 

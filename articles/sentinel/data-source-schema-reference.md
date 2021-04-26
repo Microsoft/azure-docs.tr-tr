@@ -10,12 +10,12 @@ ms.subservice: azure-sentinel
 ms.topic: reference
 ms.custom: ''
 ms.date: 01/14/2021
-ms.openlocfilehash: 84d5f1e4035fb730d33b7bc8dd375273610f0bfb
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 4601f2d6eddbbe8809dfd46a7e0cc5aa3c40c722
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104771949"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107209579"
 ---
 # <a name="data-source-schema-reference"></a>Veri kaynağı şema başvurusu
 
@@ -51,7 +51,7 @@ Aşağıdaki tabloda, desteklenen üçüncü taraf satıcıları ve bunların Sy
 | **Ağ** | Fortigate   | ALL   | CommonSecurityLog | [Günlük şeması yapısı](https://docs.fortinet.com/document/fortigate/6.2.3/fortios-log-message-reference/738142/log-schema-structure)         |
 | **Ağ** | Barracuda | Web Uygulaması Güvenlik Duvarı |  CommonSecurityLog   | [Syslog ve diğer günlükleri yapılandırma](https://campus.barracuda.com/product/webapplicationfirewall/doc/4259935/how-to-configure-syslog-and-other-logs/)  |
 | **Ağ** | Cisco | ASA | CommonSecurityLog | [Cisco ASA serisi Syslog Iletileri](https://www.cisco.com/c/en/us/td/docs/security/asa/syslog/b_syslog/about.html)    |
-| **Ağ** | Cisco | Firepower   | CommonSecurityLog | [Cisco Fireuzman tehdit savunma Syslog Iletileri](https://www.cisco.com/c/en/us/td/docs/security/firepower/Syslogs/b_fptd_syslog_guide.pdf)    |
+| **Ağ** | Cisco | Firepower   | CommonSecurityLog | [Cisco Fireuzman tehdit savunma Syslog Iletileri](https://www.cisco.com/c/en/us/td/docs/security/firepower/Syslogs/b_fptd_syslog_guide.html)    |
 | **Ağ** | Cisco   | Şemsiye  | Özel Günlükler tablosu  | [Günlük biçimleri ve sürüm oluşturma](https://docs.umbrella.com/deployment-umbrella/docs/log-formats-and-versioning)   |
 | **Ağ**   | Cisco | Meraki    | CommonSecurityLog |   [Syslog olay türleri ve günlük örnekleri](https://documentation.meraki.com/zGeneral_Administration/Monitoring_and_Reporting/Syslog_Event_Types_and_Log_Samples)    |
 | **Ağ**   | Zscaler | Nano akış hizmeti (NSS)|   CommonSecurityLog | [NSS akışlarını biçimlendirme](https://help.zscaler.com/zia/documentation-knowledgebase/analytics/nss/nss-feeds/formatting-nss-feeds) (yalnızca Web, güvenlik DUVARı, DNS ve tünel günlükleri) |

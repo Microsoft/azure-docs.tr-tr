@@ -4,12 +4,12 @@ description: Python ile işlev geliştirmeyi anlama
 ms.topic: article
 ms.date: 11/4/2020
 ms.custom: devx-track-python
-ms.openlocfilehash: 3eb3b3b015f401e872a879c46ec6f8c69df5f87f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0c87be334847974627299f8e21109fe201675f0c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102455425"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762182"
 ---
 # <a name="azure-functions-python-developer-guide"></a>Azure Işlevleri Python Geliştirici Kılavuzu
 
@@ -374,7 +374,7 @@ Azure Işlevleri aşağıdaki Python sürümlerini destekler:
 
 <sup>*</sup>Resmi Cpyıthon dağıtımları
 
-Azure 'da işlev uygulamanızı oluştururken belirli bir Python sürümü istemek için `--runtime-version` komutunun seçeneğini kullanın [`az functionapp create`](/cli/azure/functionapp#az-functionapp-create) . Işlevler çalışma zamanı sürümü seçeneği tarafından ayarlanır `--functions-version` . İşlev uygulaması oluşturulduğunda ve değiştirilemezler, Python sürümü ayarlanır.
+Azure 'da işlev uygulamanızı oluştururken belirli bir Python sürümü istemek için `--runtime-version` komutunun seçeneğini kullanın [`az functionapp create`](/cli/azure/functionapp#az_functionapp_create) . Işlevler çalışma zamanı sürümü seçeneği tarafından ayarlanır `--functions-version` . İşlev uygulaması oluşturulduğunda ve değiştirilemezler, Python sürümü ayarlanır.
 
 Yerel olarak çalıştırılırken, çalışma zamanı kullanılabilir Python sürümünü kullanır.
 

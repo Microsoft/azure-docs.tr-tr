@@ -6,14 +6,14 @@ services: cognitive-services
 author: erindormier
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 05/28/2020
+ms.date: 04/07/2021
 ms.author: egeaney
-ms.openlocfilehash: 88a723abc606a527232b7c1949f35c1fedfdba50
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7c7476a3ab885e9c127cbd571ad723864bf0d898
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101706852"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107534556"
 ---
 # <a name="configure-customer-managed-keys-with-azure-key-vault-for-cognitive-services"></a>Bilişsel hizmetler için Azure Key Vault müşteri tarafından yönetilen anahtarları yapılandırın
 
@@ -31,10 +31,15 @@ Bilişsel hizmetler için Azure Key Vault Customer-Managed anahtarları etkinle�
 * [Bekleyen verilerin şifrelenmesi Soru-Cevap Oluşturma](../QnAMaker/encrypt-data-at-rest.md)
 * [Bekleyen verilerin Translator şifrelemesi](../translator/encrypt-data-at-rest.md)
 
+## <a name="speech"></a>Konuşma
+
+* [Bekleyen verilerin konuşma şifrelemesi](../speech-service/speech-encryption-of-data-at-rest.md)
+
 ## <a name="decision"></a>Karar
 
 * [Bekleyen verilerin şifrelenmesi Content Moderator](../Content-Moderator/encrypt-data-at-rest.md)
 * [Bekleyen verilerin kişiselleştirici şifrelemesi](../personalizer/encrypt-data-at-rest.md)
+* [Bekleyen verilerin ölçüm Danışmanı şifrelemesi](../metrics-advisor/encryption.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

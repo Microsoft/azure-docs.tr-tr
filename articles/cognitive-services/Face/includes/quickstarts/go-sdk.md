@@ -9,12 +9,12 @@ ms.subservice: face-api
 ms.topic: include
 ms.date: 10/26/2020
 ms.author: pafarley
-ms.openlocfilehash: 2c693c9e972cdfc66cce0d52323c113b6006bd97
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ab3fdd24446448e9c21a1e4867c26c960f814c7a
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102445223"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105958287"
 ---
 Go için yüz istemci kitaplığını kullanarak yüz tanıma ile çalışmaya başlayın. Paketi yüklemek için bu adımları izleyin ve temel görevler için örnek kodu deneyin. Yüz tanıma hizmeti, görüntülerdeki insan yüzlerini algılayıp tanımayı sağlayan gelişmiş algoritmalara erişmenizi sağlar.
 
@@ -22,7 +22,7 @@ Git için yüz hizmeti istemci kitaplığını kullan:
 
 * [Bir görüntüdeki yüzleri algılama](#detect-faces-in-an-image)
 * [Benzer yüzeyleri bulun](#find-similar-faces)
-* [Kişi grubu oluşturma ve eğitme](#create-and-train-a-person-group)
+* [Bir PersonGroup oluşturma ve eğitme](#create-and-train-a-persongroup)
 * [Yüz tanıma](#identify-a-face)
 
 [Başvuru belgeleri](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/face)  |  [Kitaplık kaynak kodu](https://github.com/Azure/azure-sdk-for-go/tree/master/services/cognitiveservices/v1.0/face)  |  [SDK indirmesi](https://github.com/Azure/azure-sdk-for-go)
@@ -106,7 +106,7 @@ Bu kod örnekleri, Go için yüz hizmeti istemci kitaplığını kullanarak teme
 * [İstemcinin kimliğini doğrulama](#authenticate-the-client)
 * [Bir görüntüdeki yüzleri algılama](#detect-faces-in-an-image)
 * [Benzer yüzeyleri bulun](#find-similar-faces)
-* [Kişi grubu oluşturma ve eğitme](#create-and-train-a-person-group)
+* [Bir PersonGroup oluşturma ve eğitme](#create-and-train-a-persongroup)
 * [Yüz tanıma](#identify-a-face)
 
 ## <a name="authenticate-the-client"></a>İstemcinin kimliğini doğrulama
@@ -161,7 +161,7 @@ Aşağıdaki kod, eşleşme ayrıntılarını konsola yazdırır.
 [!code-go[](~/cognitive-services-quickstart-code/go/Face/FaceQuickstart.go?name=snippet_similar_print)]
 
 
-## <a name="create-and-train-a-person-group"></a>Kişi grubu oluşturma ve eğitme
+## <a name="create-and-train-a-persongroup"></a>Bir PersonGroup oluşturma ve eğitme
 
 Bu senaryoda ilerlemek için aşağıdaki görüntüleri projenizin kök dizinine kaydetmeniz gerekir: https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images .
 
@@ -202,11 +202,11 @@ Yüzleri atadıktan sonra, kişi nesnelerinden her biriyle ilişkili görsel öz
 Tanımlama işlemi, bir kişinin (veya birden çok kişinin) bir görüntüsünü alır ve görüntüdeki her bir yüzün kimliğini bulmak için (yüz tanıma arama) arar. Algılanan her yüzü, yüz özellikleri bilinen farklı **kişi** nesnelerinin bir veritabanı olan bir **persongroup** ile karşılaştırır.
 
 > [!IMPORTANT]
-> Bu örneği çalıştırmak için, önce [bir kişi grubu oluştur ve eğitme](#create-and-train-a-person-group)bölümünde kodu çalıştırmanız gerekir.
+> Bu örneği çalıştırmak için, önce [bir PersonGroup oluşturma ve eğitme](#create-and-train-a-persongroup)içinde kodu çalıştırmanız gerekir.
 
 ### <a name="get-a-test-image"></a>Test görüntüsü al
 
-Aşağıdaki kod, bir görüntü _test-image-person-group.jpg_ projenizin köküne bakar ve program belleğine yükler. Bu görüntüyü, [bir kişi grubu oluşturma ve eğitme](#create-and-train-a-person-group)bölümünde kullanılan görüntülerle aynı depoda bulabilirsiniz: https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images .
+Aşağıdaki kod, bir görüntü _test-image-person-group.jpg_ projenizin köküne bakar ve program belleğine yükler. Bu görüntüyü, [bir PersonGroup oluşturma ve eğitme](#create-and-train-a-persongroup)bölümünde kullanılan görüntülerle aynı depoya bulabilirsiniz: https://github.com/Azure-Samples/cognitive-services-sample-data-files/tree/master/Face/images .
 
 [!code-go[](~/cognitive-services-quickstart-code/go/Face/FaceQuickstart.go?name=snippet_id_source_get)]
 

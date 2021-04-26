@@ -20,6 +20,8 @@
       href: walkthrough-exchange-all.md
     - name: Eşleme Hizmeti iş ortağı kılavuzu
       href: walkthrough-peering-service-all.md
+    - name: İletişim hizmetleri iş ortağı Kılavuzu
+      href: walkthrough-communications-services-partner.md
     - name: Eşdüzey ASN’yi Azure aboneliğiyle ilişkilendir
       items:
         - name: Portal
@@ -62,7 +64,7 @@
           href: how-to-exchange-route-server-portal.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
+    - name: Azure CLI
       href: /cli/azure/network
     - name: Azure PowerShell
       href: /powershell/module/az.network

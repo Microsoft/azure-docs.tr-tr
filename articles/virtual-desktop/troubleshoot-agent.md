@@ -6,12 +6,12 @@ ms.topic: troubleshooting
 ms.date: 12/16/2020
 ms.author: sefriend
 manager: clarkn
-ms.openlocfilehash: 86296385a0e657246e415f326261ce401e3cdeaf
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2f321413a275676d0abb1a075ba958885ffcd821
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104604194"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505034"
 ---
 # <a name="troubleshoot-common-windows-virtual-desktop-agent-issues"></a>Yaygın Windows sanal masaüstü Aracısı sorunlarını giderme
 
@@ -106,7 +106,7 @@ Bu sorunu çözmek için, BrokerURI ve BrokerURIGlobal öğesine ulaşabilseniz 
    > ![Başarısız yüklü aracı genel erişiminin ekran görüntüsü](media/unsuccessful-broker-global.png)
 
 8. Ağ Bu URL 'Leri engelliyorsa, gerekli URL 'Lerin engellemesini kaldırmanız gerekecektir. Daha fazla bilgi için bkz. [gereklı URL listesi](safe-url-list.md).
-9. Bu sorunu çözmezse, şifrelemeleri olan ve aracının aracı bağlantısını engelleyecek bir grup ilkesi olmadığından emin olun. Windows sanal masaüstü, [Azure ön kapısının](../frontdoor/front-door-faq.MD#what-are-the-current-cipher-suites-supported-by-azure-front-door)kullandığı TLS 1,2 şifrelemeleri kullanır. Daha fazla bilgi için bkz. [bağlantı güvenliği](network-connectivity.md#connection-security).
+9. Bu sorunu çözmezse, şifrelemeleri olan ve aracının aracı bağlantısını engelleyecek bir grup ilkesi olmadığından emin olun. Windows sanal masaüstü, [Azure ön kapısının](../frontdoor/front-door-faq.yml#what-are-the-current-cipher-suites-supported-by-azure-front-door-)kullandığı TLS 1,2 şifrelemeleri kullanır. Daha fazla bilgi için bkz. [bağlantı güvenliği](network-connectivity.md#connection-security).
 
 ## <a name="error-3703"></a>Hata: 3703
 
@@ -216,7 +216,7 @@ Bu sorunu çözmek için:
 
 ## <a name="error-heartbeat-issue-where-users-keep-getting-disconnected-from-session-hosts"></a>Hata: kullanıcıların oturum konaklarından bağlantısı kesilme tutmasına neden olan sinyal sorunu
 
-Sunucunuz Windows sanal masaüstü hizmetinden bir sinyal çekmezse sinyal eşiğini değiştirmeniz gerekir. Aşağıdaki senaryolardan biri veya daha fazlası size uygunsa, bu bölümdeki yönergeleri izleyin:
+Sunucunuz Windows sanal masaüstü hizmetinden bir sinyal çekmezse sinyal eşiğini değiştirmeniz gerekir. Bu işlem, sorun belirtilerini geçici olarak azaltır, ancak temel ağ sorununu çözmeyecektir. Aşağıdaki senaryolardan biri veya daha fazlası size uygunsa, bu bölümdeki yönergeleri izleyin:
 
 - Bir **CheckSessionHostDomainIsReachableAsync** hatası alıyorsunuz
 - Bir **ConnectionBrokenMissedHeartbeatThresholdExceeded** hatası alıyorsunuz
@@ -316,7 +316,7 @@ Bu sorunu çözmek için:
 
 Sorununuzu Bu makalede bulamazsanız veya yönergeler size yardımcı olmadıysa, Windows sanal masaüstü aracısını kaldırmanızı, yeniden yüklemenizi ve yeniden kaydetmenizi öneririz. Bu bölümdeki yönergeler, tüm aracı, önyükleme yükleyicisi ve yığın bileşenlerini kaldırarak, konak havuzundan oturum konağını kaldırarak, sanal makine için yeni bir kayıt anahtarı oluşturarak ve aracıyı ve önyükleme yükleyicisini yeniden yükleyerek VM 'nizi Windows sanal masaüstü hizmetine nasıl yeniden kaydetmeniz gerektiğini gösterir. Aşağıdaki senaryolardan biri veya daha fazlası sizin için geçerlidir, şu yönergeleri izleyin:
 - VM 'niz **yükseltme** veya **kullanılamaz duruma** takılmış
-- Yığın dinleyiciniz çalışmıyor ve Windows 10 1809, 1903 veya 1904 üzerinde çalışıyor
+- Yığın dinleyiciniz çalışmıyor ve Windows 10 1809, 1903 veya 1909 üzerinde çalışıyor
 - **EXPIRED_REGISTRATION_TOKEN** hatası alıyorsunuz
 - Sanal makinelerinizin oturum Konakları listesinde görünür olduğunu görmüyorsunuz
 - Hizmetler penceresinde **Uzak Masaüstü Aracısı yükleyicisini** görmezsiniz

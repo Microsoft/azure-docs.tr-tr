@@ -8,10 +8,10 @@ ms.topic: how-to
 ms.date: 02/18/2021
 ms.author: yuajia
 ms.openlocfilehash: 6863c492059ccee152ecf3d03a09e61793576bcb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101715607"
 ---
 # <a name="configure-a-rule-set-with-azure-front-door-standardpremium-preview"></a>Azure ön kapı standardı/Premium ile bir kural kümesi yapılandırma (Önizleme)

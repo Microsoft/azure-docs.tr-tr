@@ -11,12 +11,12 @@ ms.subservice: core
 ms.date: 03/03/2021
 ms.topic: conceptual
 ms.custom: how-to
-ms.openlocfilehash: 710a860b1ed87f176b6f42b4963dad17acb323b1
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 7445de8349d025679b1560e065ed15d9eec3b08f
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104954063"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872020"
 ---
 # <a name="upgrade-compute-instance-and-compute-cluster-host-os"></a>İşlem örneğini ve işlem kümesi konak işletim sistemini yükselt
 
@@ -41,7 +41,7 @@ __15 mart 2021 '__ den önce oluşturulan işlem kümeleriniz veya işlem örnek
     * Küme __Min Nodes = 0__ ile yapılandırıldıysa, tüm işler tamamlandığında otomatik olarak yükseltilir ve sıfır düğüm olarak azaltılır.
     * Minimum __düğümler 0 >__, geçici olarak en düşük düğümleri sıfıra değiştirin ve kümenin sıfır düğüme azalmasına izin verin.
 
-    En düşük düğümleri değiştirme hakkında daha fazla bilgi için, [az ml computetarget Update amlcompute](https://docs.microsoft.com/cli/azure/ext/azure-cli-ml/ml/computetarget/update#ext_azure_cli_ml_az_ml_computetarget_update_amlcompute) Azure CLI komutuna veya [amlcompute. Update ()](https://docs.microsoft.com/python/api/azureml-core/azureml.core.compute.amlcompute.amlcompute#update-min-nodes-none--max-nodes-none--idle-seconds-before-scaledown-none-) SDK başvurusuna bakın.
+    En düşük düğümleri değiştirme hakkında daha fazla bilgi için, [az ml computetarget Update amlcompute](https://docs.microsoft.com/cli/azure/ml/computetarget/update#az_ml_computetarget_update_amlcompute) Azure CLI komutuna veya [amlcompute. Update ()](https://docs.microsoft.com/python/api/azureml-core/azureml.core.compute.amlcompute.amlcompute#update-min-nodes-none--max-nodes-none--idle-seconds-before-scaledown-none-) SDK başvurusuna bakın.
 
 * __Azure Machine Learning işlem örneği__: yeni bir işlem örneği oluşturun (Ubuntu 18,04 ' i kullanacak) ve eski örneği silmez.
 

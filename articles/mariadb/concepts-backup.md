@@ -6,12 +6,12 @@ ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
 ms.date: 8/13/2020
-ms.openlocfilehash: 68605a22dd0d0b2b716b148399c8406a1ea8d89e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 08e75f9eb5ea111cc977d02f66b945de4eae5126
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98659946"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306186"
 ---
 # <a name="backup-and-restore-in-azure-database-for-mariadb"></a>MariaDB için Azure veritabanı 'nda yedekleme ve geri yükleme
 
@@ -19,33 +19,47 @@ MariaDB için Azure veritabanı otomatik olarak sunucu yedeklemeleri oluşturur 
 
 ## <a name="backups"></a>Yedeklemeler
 
-MariaDB için Azure veritabanı, tam, fark ve işlem günlüğü yedeklemeleri alır. Bu yedeklemeler, yapılandırılmış yedekleme saklama döneminizin içindeki herhangi bir zamanda bir sunucuyu geri yüklemenize olanak tanır. Varsayılan yedekleme saklama süresi yedi gündür. İsteğe bağlı olarak 35 güne kadar yapılandırma yapabilirsiniz. Tüm yedeklemeler AES 256 bit şifreleme kullanılarak şifrelenir.
+MariaDB için Azure veritabanı, veri dosyalarının ve işlem günlüğünün yedeklerini alır. Bu yedeklemeler, yapılandırılmış yedekleme saklama döneminizin içindeki herhangi bir zamanda bir sunucuyu geri yüklemenize olanak tanır. Varsayılan yedekleme saklama süresi yedi gündür. [İsteğe bağlı olarak](howto-restore-server-portal.md#set-backup-configuration) 35 güne kadar yapılandırma yapabilirsiniz. Tüm yedeklemeler AES 256 bit şifreleme kullanılarak şifrelenir.
 
-Bu yedekleme dosyaları kullanıcılar kullanımına sunulmaz ve dışarı aktarılamaz. Bu yedeklemeler yalnızca, MariaDB için Azure veritabanı 'nda geri yükleme işlemleri için kullanılabilir. Bir veritabanını kopyalamak için [mysqldump](howto-migrate-dump-restore.md) kullanabilirsiniz.
+Bu yedekleme dosyaları kullanıcılar kullanımına sunulmaz ve dışarı aktarılamaz. Bu yedeklemeler, yalnızca MySQL için Azure veritabanı 'nda geri yükleme işlemleri için kullanılabilir. Bir veritabanını kopyalamak için [mysqldump](howto-migrate-dump-restore.md) kullanabilirsiniz.
 
-### <a name="backup-frequency"></a>Yedekleme sıklığı
+Yedekleme türü ve sıklığı, sunucular için arka uç depolamaya bağlıdır.
 
-#### <a name="servers-with-up-to-4-tb-storage"></a>4 TB 'a kadar depolama alanı olan sunucular
+### <a name="backup-type-and-frequency"></a>Yedekleme türü ve sıklığı
 
-En fazla 4 TB depolama alanı destekleyen sunucular için, tam yedeklemeler her hafta bir kez gerçekleşir. Değişiklik yedeklemeleri günde iki kez gerçekleşir. İşlem günlüğü yedeklemeleri her beş dakikada bir gerçekleşir.
+#### <a name="basic-storage-servers"></a>Temel depolama sunucuları
 
-#### <a name="servers-with-up-to-16-tb-storage"></a>16 TB 'a kadar depolama alanı olan sunucular
-[Azure bölgelerinin](concepts-pricing-tiers.md#storage)bir alt kümesinde, tüm yeni sağlanan sunucular 16 TB 'a kadar depolamayı destekleyebilir. Bu büyük depolama sunucularındaki yedeklemeler anlık görüntü tabanlıdır. İlk tam anlık görüntü yedeklemesi, sunucu oluşturulduktan hemen sonraya zamanlanır. Bu ilk tam anlık görüntü yedeklemesi sunucunun temel yedeklemesi olarak tutulur. Sonraki anlık görüntü yedeklemeleri yalnızca değişiklik yedeğidir. 
+Temel depolama, [temel katman sunucularını](concepts-pricing-tiers.md)destekleyen arka uç deposıdır. Temel depolama sunucularındaki yedeklemeler anlık görüntü tabanlıdır. Tam bir veritabanı anlık görüntüsü günlük olarak gerçekleştirilir. Temel depolama sunucuları için gerçekleştirilen fark yedeklemesi yoktur ve tüm anlık görüntü yedeklemeleri yalnızca tam veritabanı yedeklemelerdir.
 
-Anlık görüntü değişiklik yedekleri günde en az bir kez gerçekleştirilir. Anlık görüntü değişiklik yedekleri belirli bir plana göre gerçekleştirilmez. Hareket günlüğü (MariaDB), son fark yedeklemesinden bu yana 50 GB aşmadığı takdirde, fark anlık görüntü yedeklemeleri 24 saatte bir gerçekleşir. Bir gün içinde en fazla altı anlık görüntü değişiklik yedeği alınabilir. 
+İşlem günlüğü yedeklemeleri her beş dakikada bir gerçekleşir.
 
-İşlem günlüğü yedeklemeleri her beş dakikada bir gerçekleşir. 
+#### <a name="general-purpose-storage-servers-with-up-to-4-tb-storage"></a>4 TB 'a kadar depolama alanı içeren genel amaçlı depolama sunucuları
+
+Genel amaçlı depolama, [genel amaçlı](concepts-pricing-tiers.md) ve [bellek için iyileştirilmiş katman](concepts-pricing-tiers.md) sunucusunu destekleyen arka uç deposıdır. 4 TB 'a kadar genel amaçlı depolamaya sahip sunucular için her hafta bir kez tam yedeklemeler gerçekleşir. Değişiklik yedeklemeleri günde iki kez gerçekleşir. İşlem günlüğü yedeklemeleri her beş dakikada bir gerçekleşir. 4 TB 'lık depolamaya kadar genel amaçlı depolama üzerindeki yedeklemeler anlık görüntü tabanlıdır ve yedekleme sırasında GÇ bant genişliği tüketir. 4 TB depolama alanı üzerinde büyük veritabanları (> 1 TB) için, şunları göz önünde bulundurmanız önerilir
+
+- Yedekleme IOs için hesaba daha fazla IOPS sağlama veya
+- Alternatif olarak, temel alınan depolama altyapısı tercih ettiğiniz [Azure Bölgelerinizdeki](./concepts-pricing-tiers.md#storage)kullanılabilir ise, 16 TB 'a kadar depolamayı destekleyen genel amaçlı depolamaya geçiş yapın. Genel amaçlı depolama için 16 TB 'a kadar depolamayı destekleyen ek bir ücret yoktur. 16 TB depolamaya geçiş konusunda yardım için lütfen Azure portal bir destek bileti açın.
+
+#### <a name="general-purpose-storage-servers-with-up-to-16-tb-storage"></a>16 TB 'a kadar depolama alanı içeren genel amaçlı depolama sunucuları
+
+[Azure bölgelerinin](./concepts-pricing-tiers.md#storage)bir alt kümesinde, tüm yeni sağlanan sunucular, 16 TB 'a kadar genel amaçlı depolama alanını destekleyebilir. Diğer bir deyişle, 16 TB 'a kadar depolama alanı, desteklendiği tüm [bölgeler](concepts-pricing-tiers.md#storage) için varsayılan genel amaçlı depolama alanı olur. Bu 16 TB depolama sunucularındaki yedeklemeler anlık görüntü tabanlıdır. İlk tam anlık görüntü yedeklemesi, sunucu oluşturulduktan hemen sonraya zamanlanır. Bu ilk tam anlık görüntü yedeklemesi sunucunun temel yedeklemesi olarak tutulur. Sonraki anlık görüntü yedeklemeleri yalnızca değişiklik yedeğidir.
+
+Anlık görüntü değişiklik yedekleri günde en az bir kez gerçekleştirilir. Anlık görüntü değişiklik yedekleri belirli bir plana göre gerçekleştirilmez. Hareket günlüğü (MariaDB), son fark yedeklemesinden bu yana 50 GB 'yi aşmadığı takdirde, fark anlık görüntü yedeklemeleri 24 saatte bir gerçekleşir. Bir gün içinde en fazla altı anlık görüntü değişiklik yedeği alınabilir.
+
+İşlem günlüğü yedeklemeleri her beş dakikada bir gerçekleşir.
+ 
 
 ### <a name="backup-retention"></a>Yedekleme dosyası saklama
 
 Yedeklemeler, sunucusundaki yedekleme bekletme süresi ayarına göre tutulur. 35 gün günlük bir saklama süresi seçebilirsiniz. Varsayılan saklama süresi 7 gündür. [Azure Portal](howto-restore-server-portal.md#set-backup-configuration) veya [Azure CLI](howto-restore-server-cli.md#set-backup-configuration)kullanarak yedekleme yapılandırmasını güncelleştirerek sunucu oluşturma sırasında veya daha sonra saklama süresini ayarlayabilirsiniz. 
 
 Yedekleme bekletme süresi, kullanılabilir yedeklemeler temel aldığı için zaman içinde bir nokta geri yüklemesi alma süresinin ne kadar geri alınacağını yönetir. Yedekleme bekletme süresi Ayrıca bir geri yükleme perspektifinden kurtarma penceresi olarak da ele alınabilir. Yedekleme saklama süresi içinde bir zaman içindeki bir anlık geri yükleme gerçekleştirmek için gereken tüm yedeklemeler, yedekleme depolama alanında tutulur. Örneğin, yedekleme Bekletme dönemi 7 gün olarak ayarlandıysa, kurtarma penceresi son 7 gün olarak değerlendirilir. Bu senaryoda, son 7 gün içinde sunucuyu geri yüklemek için gereken tüm yedeklemeler korunur. Yedi günlük bir yedekleme bekletme penceresi ile:
+
 - 4 TB 'a kadar depolama alanı olan sunucular en fazla 2 tam veritabanı yedeklemesi, tüm değişiklik yedeklemeleri ve en erken tam veritabanı yedeklemesinden bu yana gerçekleştirilen işlem günlüğü yedeklemelerini korur.
 -   16 TB 'a kadar depolamaya sahip sunucular, son 8 gündeki tüm fark anlık görüntülerini ve işlem günlüğü yedeklemelerini tam veritabanı anlık görüntüsünü tutar.
 
-#### <a name="long-term-retention-of-backups"></a>Yedeklemeler için uzun süreli saklama
-35 günden daha büyük olan yedeklemeler için uzun süreli saklama, henüz hizmet tarafından yerel olarak desteklenmiyor. Yedeklemeleri almak ve uzun süreli saklama için depolamak üzere mysqldump kullanma seçeneğiniz vardır. Destek ekibimiz, BT 'nin nasıl elde edilebileceği hakkında bir [adım adım makalede](https://techcommunity.microsoft.com/t5/azure-database-for-mysql/automate-backups-of-your-azure-database-for-mysql-server-to/ba-p/1791157) oturum açtı. 
+#### <a name="long-term-retention-of-backups"></a>Yedeklemeleri uzun süreli saklama
+35 günden daha büyük olan yedeklemelerin uzun süreli tutulması henüz hizmet tarafından yerel olarak desteklenmiyor. Yedeklemeleri almak ve uzun süreli saklama için depolamak üzere mysqldump kullanma seçeneğiniz vardır. Destek ekibimiz, BT 'nin nasıl elde edilebileceği hakkında bir [adım adım makalede](https://techcommunity.microsoft.com/t5/azure-database-for-mysql/automate-backups-of-your-azure-database-for-mysql-server-to/ba-p/1791157) oturum açtı. 
 
 ### <a name="backup-redundancy-options"></a>Yedekleme artıklığı seçenekleri
 
@@ -74,7 +88,7 @@ MariaDB için Azure veritabanı 'nda geri yükleme gerçekleştirmek, özgün su
 Tahmini kurtarma süresi, veritabanı boyutları, işlem günlüğü boyutu, ağ bant genişliği ve aynı bölgedeki aynı bölgede Kurtarılan toplam veritabanı sayısı gibi çeşitli faktörlere bağlıdır. Kurtarma zamanı genellikle 12 saatten düşüktür.
 
 > [!IMPORTANT]
-> Silinen sunucular **geri yüklenemez.** Sunucuyu silerseniz, sunucuya ait olan tüm veritabanları da silinir ve kurtarılamaz. Sunucu kaynaklarını korumak için dağıtım sonrası, yanlışlıkla silme veya beklenmeyen değişikliklerden, Yöneticiler [Yönetim kilitlerinin](../azure-resource-manager/management/lock-resources.md)faydalanabilir.
+> Silinen sunucular yalnızca, yedeklemelerin silinmesinden sonra **beş gün** içinde geri yüklenebilir. Veritabanı yedeklemesine yalnızca sunucuyu barındıran Azure aboneliğinden erişilebilir ve geri yüklenebilir. Bırakılan bir sunucuyu geri yüklemek için [belgelenen adımlara](howto-restore-dropped-server.md)bakın. Sunucu kaynaklarını korumak için dağıtım sonrası, yanlışlıkla silme veya beklenmeyen değişikliklerden, Yöneticiler [Yönetim kilitlerinin](../azure-resource-manager/management/lock-resources.md)faydalanabilir.
 
 ### <a name="point-in-time-restore"></a>Belirli bir noktaya geri yükleme
 

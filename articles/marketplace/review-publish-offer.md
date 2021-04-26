@@ -9,10 +9,10 @@ author: mingshen-ms
 ms.author: mingshen
 ms.date: 03/10/2021
 ms.openlocfilehash: f8ddcbef6d2ce4a9cba625374db9908335954424
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102630903"
 ---
 # <a name="how-to-review-and-publish-an-offer-to-the-commercial-marketplace"></a>Ticari Market 'e yönelik bir teklifi İnceleme ve yayımlama
@@ -49,7 +49,7 @@ Tüm sayfalar tamamlandıktan ve ilgili test notlarını girdikten sonra, doğru
 | Aşama | Ne olur? |
 | ------------ | ------------- | ------------- |
 | [Otomatik doğrulama](#automated-validation-phase) | Otomatik doğrulama kümesini işliyoruz. |
-| [Sertifika](#certification-phase) | El ile doğrulama yaptık. |
+| [Sertifikasyon](#certification-phase) | El ile doğrulama yaptık. |
 | [Önizleme oluşturma](#preview-creation-phase) | Teklif önizlemeniz için liste sayfası önizleme bağlantısına sahip olan herkes tarafından kullanılabilir. Teklifiniz Microsoft (transactable) üzerinden satılıyorsa, yalnızca teklifinizin **ön izleme İzleyicisi** sayfasında belirttiğiniz hedef kitle, test için teklif satın alabilir ve bu teklifi erişebilir. |
 | [Yayımcı oturumu kapatma](#publisher-sign-off-phase) | Teklifinizi önizlemenizi ve onaylamanıza yönelik bir istek içeren bir e-posta göndereceğiz. |
 | [Yayımla](#publish-phase) | Önizleme teklifinin ticari Market 'e canlı olarak yayımlandığını doğrulamak için bir dizi adımı çalıştırdık. |

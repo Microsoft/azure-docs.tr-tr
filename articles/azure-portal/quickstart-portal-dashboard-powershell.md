@@ -5,10 +5,10 @@ ms.topic: quickstart
 ms.custom: devx-track-azurepowershell
 ms.date: 03/25/2021
 ms.openlocfilehash: cd001a8259c54f1d86aab5983da1413c8163008c
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105557454"
 ---
 # <a name="quickstart-create-an-azure-portal-dashboard-with-powershell"></a>Hızlı başlangıç: PowerShell ile Azure portal panosu oluşturma

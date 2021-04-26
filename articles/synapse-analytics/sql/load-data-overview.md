@@ -2,20 +2,20 @@
 title: Adanmış SQL havuzu için PolyBase veri yükleme stratejisi tasarlama
 description: ETL yerine, adanmış SQL ile veri yüklemek için bir ayıklama, yükleme ve dönüştürme (ELT) işlemi tasarlayın.
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql
 ms.date: 04/15/2020
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: igorstan
-ms.openlocfilehash: 850c03d5cbda8fb11bbc804f2cd2c848a5a2411f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 518843e688da7f940b36e77aee2667b4984ea5a3
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104589509"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567372"
 ---
 # <a name="design-a-polybase-data-loading-strategy-for-dedicated-sql-pool-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te adanmış SQL havuzu için PolyBase veri yükleme stratejisi tasarlama
 

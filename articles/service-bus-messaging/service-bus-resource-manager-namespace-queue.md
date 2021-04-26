@@ -3,17 +3,19 @@ title: Azure şablonu kullanarak Azure Service Bus ad alanı ve kuyruk oluşturm
 description: 'Hızlı başlangıç: Azure Resource Manager şablonu kullanarak Service Bus ad alanı ve kuyruk oluşturma'
 documentationcenter: .net
 author: spelluru
-ms.topic: quickstart
-ms.custom: subject-armqs
-ms.tgt_pltfrm: dotnet
-ms.date: 06/23/2020
 ms.author: spelluru
-ms.openlocfilehash: 69cffb6000df9d8b058d92231c130ea8a601e6d2
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 06/23/2020
+ms.topic: quickstart
+ms.tgt_pltfrm: dotnet
+ms.custom:
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: 6577abf1900a166087ff63c331d7c0390fab1342
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88660640"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535023"
 ---
 # <a name="quickstart-create-a-service-bus-namespace-and-a-queue-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak Service Bus ad alanı ve kuyruk oluşturma
 

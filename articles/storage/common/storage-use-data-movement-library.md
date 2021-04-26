@@ -11,12 +11,12 @@ ms.date: 06/16/2020
 ms.author: tamram
 ms.subservice: common
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 8ec35a651d4d3ef9e0877463329a654bc7491f4c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f87379f48f82757916aef0fa0d358835f48cb9a5
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96023423"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107875944"
 ---
 # <a name="transfer-data-with-the-data-movement-library"></a>Veri Taşıma kitaplığıyla veri aktarma
 
@@ -40,7 +40,7 @@ Bu belgede, Windows, Linux ve macOS 'ta çalışan bir .NET Core konsol uygulama
 
 ## <a name="setup"></a>Kurulum
 
-1. .NET Core yüklemek için [.NET Core yükleme kılavuzunu](https://www.microsoft.com/net/core) ziyaret edin. Ortamınızı seçerken komut satırı seçeneğini belirleyin.
+1. .NET Core SDK yüklemek için [.NET Core yükleme kılavuzunu](https://dotnet.microsoft.com/download) ziyaret edin. Ortamınızı seçerken komut satırı seçeneğini belirleyin.
 2. Komut satırından projeniz için bir dizin oluşturun. Bu dizine gidip `dotnet new console -o <sample-project-name>` bir C# konsol projesi oluşturmak için yazın.
 3. Bu dizini Visual Studio Code açın. Bu adım, Windows 'a yazarak komut satırı aracılığıyla hızlı bir şekilde yapılabilir `code .` .
 4. Visual Studio Code marketi 'nden [C# uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) yükler. Visual Studio Code yeniden başlatın.

@@ -3,12 +3,12 @@ title: Azure Container Registry içindeki depoların izinleri
 description: Bir Premium kayıt defterindeki belirli depolara kapsamlı, görüntü çekmek veya göndermek veya başka eylemler gerçekleştirmek için izinler içeren bir belirteç oluşturun
 ms.topic: article
 ms.date: 02/04/2021
-ms.openlocfilehash: ceec69d746f77ea7a23bc70d029c8b3736e7f292
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0ac479b696a377509cee6459efd8bbb9de940d2a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99988267"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781406"
 ---
 # <a name="create-a-token-with-repository-scoped-permissions"></a>Depo kapsamlı izinlerle belirteç oluşturma
 
@@ -433,21 +433,21 @@ Portalda **belirteçler (Önizleme)** ekranındaki belirteci seçin ve **at**' �
 [terms-of-use]: https://azure.microsoft.com/support/legal/preview-supplemental-terms/
 
 <!-- LINKS - Internal -->
-[az-acr-login]: /cli/azure/acr#az-acr-login
+[az-acr-login]: /cli/azure/acr#az_acr_login
 [az-acr-repository]: /cli/azure/acr/repository/
-[az-acr-repository-show-tags]: /cli/azure/acr/repository/#az-acr-repository-show-tags
-[az-acr-repository-show-manifests]: /cli/azure/acr/repository/#az-acr-repository-show-manifests
-[az-acr-repository-delete]: /cli/azure/acr/repository/#az-acr-repository-delete
+[az-acr-repository-show-tags]: /cli/azure/acr/repository/#az_acr_repository_show_tags
+[az-acr-repository-show-manifests]: /cli/azure/acr/repository/#az_acr_repository_show_manifests
+[az-acr-repository-delete]: /cli/azure/acr/repository/#az_acr_repository_delete
 [az-acr-scope-map]: /cli/azure/acr/scope-map/
-[az-acr-scope-map-create]: /cli/azure/acr/scope-map/#az-acr-scope-map-create
-[az-acr-scope-map-list]: /cli/azure/acr/scope-map/#az-acr-scope-map-show
-[az-acr-scope-map-show]: /cli/azure/acr/scope-map/#az-acr-scope-map-list
-[az-acr-scope-map-update]: /cli/azure/acr/scope-map/#az-acr-scope-map-update
-[az-acr-scope-map-list]: /cli/azure/acr/scope-map/#az-acr-scope-map-list
+[az-acr-scope-map-create]: /cli/azure/acr/scope-map/#az_acr_scope_map_create
+[az-acr-scope-map-list]: /cli/azure/acr/scope-map/#az_acr_scope_map_show
+[az-acr-scope-map-show]: /cli/azure/acr/scope-map/#az_acr_scope_map_list
+[az-acr-scope-map-update]: /cli/azure/acr/scope-map/#az_acr_scope_map_update
+[az-acr-scope-map-list]: /cli/azure/acr/scope-map/#az_acr_scope_map_list
 [az-acr-token]: /cli/azure/acr/token/
-[az-acr-token-show]: /cli/azure/acr/token/#az-acr-token-show
-[az-acr-token-list]: /cli/azure/acr/token/#az-acr-token-list
-[az-acr-token-delete]: /cli/azure/acr/token/#az-acr-token-delete
-[az-acr-token-create]: /cli/azure/acr/token/#az-acr-token-create
-[az-acr-token-update]: /cli/azure/acr/token/#az-acr-token-update
-[az-acr-token-credential-generate]: /cli/azure/acr/token/credential/#az-acr-token-credential-generate
+[az-acr-token-show]: /cli/azure/acr/token/#az_acr_token_show
+[az-acr-token-list]: /cli/azure/acr/token/#az_acr_token_list
+[az-acr-token-delete]: /cli/azure/acr/token/#az_acr_token_delete
+[az-acr-token-create]: /cli/azure/acr/token/#az_acr_token_create
+[az-acr-token-update]: /cli/azure/acr/token/#az_acr_token_update
+[az-acr-token-credential-generate]: /cli/azure/acr/token/credential/#az_acr_token_credential_generate

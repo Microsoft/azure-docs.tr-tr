@@ -5,14 +5,14 @@ services: static-web-apps
 author: craigshoemaker
 ms.service: static-web-apps
 ms.topic: conceptual
-ms.date: 05/08/2020
+ms.date: 04/09/2021
 ms.author: cshoe
-ms.openlocfilehash: ab41a336c32a1827c23f4c4619f47dc294a4d2ea
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 29821733b73717634aa8f0ab72270f058ffd3ddc
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103419295"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309399"
 ---
 # <a name="authentication-and-authorization-for-azure-static-web-apps-preview"></a>Azure Static Web Apps Önizlemesi için kimlik doğrulaması ve yetkilendirme
 
@@ -24,7 +24,7 @@ Azure statik Web Apps, kimlik doğrulamasını aşağıdaki sağlayıcılarla y�
 - Google<sup>1</sup>
 - Twitter
 
-Sağlayıcıya özgü [davetler](#invitations) kullanıcıları rollerle ilişkilendirir ve yetkili kullanıcılara, _routes.js_ dosyasında tanımlanan kurallara göre [yollara](routes.md) erişim verilir.
+Sağlayıcıya özgü [davetler](#invitations) kullanıcıları rollerle ilişkilendirir ve yetkili kullanıcılara, _staticwebapp.config.js_ dosyasında tanımlanan kurallara göre [yollara](routes.md) erişim verilir.
 
 Tüm kimlik doğrulama sağlayıcıları varsayılan olarak etkindir. Bir kimlik doğrulama sağlayıcısını kısıtlamak için özel bir yol kuralıyla [erişimi engelleyin](#block-an-authorization-provider) .
 
@@ -32,18 +32,18 @@ Kimlik doğrulama ve yetkilendirme konuları, yönlendirme kavramlarıyla öneml
 
 ## <a name="roles"></a>Roller
 
-Statik bir Web uygulamasına erişen her Kullanıcı bir veya daha fazla role aittir.  Kullanıcıların ait olduğu iki yerleşik rol vardır:
+Statik bir Web uygulamasına erişen her Kullanıcı bir veya daha fazla role aittir. Kullanıcıların ait olduğu iki yerleşik rol vardır:
 
 - **anonim**: tüm kullanıcılar _anonim_ role otomatik olarak aittir.
 - **kimliği doğrulanan**: oturum açan tüm kullanıcılar _kimliği doğrulanmış_ role aittir.
 
-Yerleşik rollerin ötesinde, yeni roller oluşturabilir, bunları davet aracılığıyla kullanıcılara atayabilir ve dosyadaki _routes.js_ bunlara başvurabilirsiniz.
+Yerleşik rollerin ötesinde, yeni roller oluşturabilir, bunları davet aracılığıyla kullanıcılara atayabilir ve dosyadaki _staticwebapp.config.js_ bunlara başvurabilirsiniz.
 
 ## <a name="role-management"></a>Rol yönetimi
 
 ### <a name="add-a-user-to-a-role"></a>Bir role Kullanıcı ekleme
 
-Web sitenize Kullanıcı eklemek için, kullanıcıları belirli rollerle ilişkilendirmenizi sağlayan davetler oluşturursunuz. Roller dosyada _routes.js_ tanımlanır ve saklanır.
+Web sitenize Kullanıcı eklemek için, kullanıcıları belirli rollerle ilişkilendirmenizi sağlayan davetler oluşturursunuz. Roller dosyada _staticwebapp.config.js_ tanımlanır ve saklanır.
 
 <a name="invitations" id="invitations"></a>
 
@@ -53,25 +53,25 @@ Davetler, bireysel yetkilendirme sağlayıcılarına özgüdür, bu nedenle dest
 
 <a name="provider-user-details" id="provider-user-details"></a>
 
-| Yetkilendirme sağlayıcısı | Bir kullanıcının  |
-| ---------------------- | ----------------- |
-| Azure Active Directory | e-posta adresi     |
-| Facebook               | e-posta adresi     |
-| GitHub                 | username          |
-| Google<sup>1</sup>     | e-posta adresi     |
-| Twitter                | username          |
+| Yetkilendirme sağlayıcısı | Bir kullanıcının |
+| ---------------------- | ---------------- |
+| Azure Active Directory | e-posta adresi    |
+| Facebook               | e-posta adresi    |
+| GitHub                 | username         |
+| Google<sup>1</sup>     | e-posta adresi    |
+| Twitter                | username         |
 
 1. [Azure Portal](https://portal.azure.com)bir statik Web Apps kaynağına gidin.
 1. _Ayarlar_ altında **rol yönetimi**' ne tıklayın.
 1. **Davet et** düğmesine tıklayın.
 1. Seçenekler listesinden bir _Yetkilendirme sağlayıcısı_ seçin.
 1. _Davetli Ayrıntılar_ kutusuna alıcının Kullanıcı adı veya e-posta adresini ekleyin.
-    - GitHub ve Twitter için Kullanıcı adını girersiniz. Tüm diğerleri için alıcının e-posta adresini girin.
+   - GitHub ve Twitter için Kullanıcı adını girersiniz. Tüm diğerleri için alıcının e-posta adresini girin.
 1. _Etki alanı_ açılır listesinden statik sitenizin etki alanını seçin.
-    - Seçtiğiniz etki alanı, davette görüntülenen etki alanıdır. Siteniz ile ilişkili özel bir etki alanınız varsa, muhtemelen özel etki alanını seçmek isteyeceksiniz.
+   - Seçtiğiniz etki alanı, davette görüntülenen etki alanıdır. Siteniz ile ilişkili özel bir etki alanınız varsa, muhtemelen özel etki alanını seçmek isteyeceksiniz.
 1. _Rol_ kutusuna rol adlarının virgülle ayrılmış bir listesini ekleyin.
 1. Davetin geçerli kalmasını istediğiniz en fazla saat sayısını girin.
-    - Olası en yüksek sınır 168 saattir. Bu değer 7 gündür.
+   - Olası en yüksek sınır 168 saattir. Bu değer 7 gündür.
 1. **Oluştur** düğmesine tıklayın.
 1. Bağlantıyı _davet et bağlantı_ kutusundan kopyalayın.
 1. Uygulamanıza erişim verdiğiniz kişiye davet bağlantısını e-posta ile gönderin.
@@ -156,7 +156,13 @@ Varsayılan bir sağlayıcıyı _/login_ gibi kolay bir yola eşlemek için bir 
 
 ### <a name="post-login-redirect"></a>Oturum açma sonrası yeniden yönlendirme
 
-Bir kullanıcının oturum açtıktan sonra belirli bir sayfaya dönmesini istiyorsanız `post_login_redirect_uri` sorgu dizesi parametresinde BIR URL sağlayın.
+Bir kullanıcının oturum açtıktan sonra belirli bir sayfaya dönmesini istiyorsanız sorgu dizesi parametresinde tam nitelikli bir URL sağlayın `post_login_redirect_uri` .
+
+Örnek:
+
+```html
+<a href="/.auth/login/github?post_login_redirect_uri=https://zealous-water.azurestaticapps.net/success">Login</a>
+```
 
 ## <a name="logout"></a>Oturumu Kapat
 

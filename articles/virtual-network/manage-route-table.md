@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/19/2020
 ms.author: kumud
-ms.openlocfilehash: 642a9a9f798492d85ee2a9784a1fe5ad4f854d58
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: cdf702abb10b7330a4ca0f5478751df4bce3d7f3
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100574128"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783386"
 ---
 # <a name="create-change-or-delete-a-route-table"></a>Rota tablosunu oluşturma, değiştirme veya silme
 
@@ -61,7 +61,7 @@ Azure konumu ve aboneliği başına oluşturabileceğiniz yol tablolarının say
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az network route-table create](/cli/azure/network/route-table#az-network-route-table-create) |
+| Azure CLI | [az network route-table create](/cli/azure/network/route-table#az_network_route_table_create) |
 | PowerShell | [New-AzRouteTable](/powershell/module/az.network/new-azroutetable) |
 
 ## <a name="view-route-tables"></a>Rota tablolarını görüntüleme
@@ -72,7 +72,7 @@ Sanal ağınızı yönetmek için [Azure Portal](https://portal.azure.com) gidin
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Route-Table List](/cli/azure/network/route-table#az-network-route-table-list) |
+| Azure CLI | [az Network Route-Table List](/cli/azure/network/route-table#az_network_route_table_list) |
 | PowerShell | [Get-AzRouteTable](/powershell/module/az.network/get-azroutetable) |
 
 ## <a name="view-details-of-a-route-table"></a>Rota tablosunun ayrıntılarını görüntüleme
@@ -95,7 +95,7 @@ Ortak Azure ayarları hakkında daha fazla bilgi edinmek için aşağıdaki bilg
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Route-Table Show](/cli/azure/network/route-table#az-network-route-table-show) |
+| Azure CLI | [az Network Route-Table Show](/cli/azure/network/route-table#az_network_route_table_show) |
 | PowerShell | [Get-AzRouteTable](/powershell/module/az.network/get-azroutetable) |
 
 ## <a name="change-a-route-table"></a>Yol tablosunu değiştirme
@@ -110,7 +110,7 @@ En yaygın değişiklikler, rotalar [eklemek](#create-a-route) , yönlendirmeler
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Route-Table Update](/cli/azure/network/route-table#az-network-route-table-update) |
+| Azure CLI | [az Network Route-Table Update](/cli/azure/network/route-table#az_network_route_table_update) |
 | PowerShell | [Set-AzRouteTable](/powershell/module/az.network/set-azroutetable) |
 
 ## <a name="associate-a-route-table-to-a-subnet"></a>Yönlendirme tablosunu bir alt ağ ile ilişkilendirme
@@ -135,7 +135,7 @@ Sanal ağınız bir Azure VPN Gateway 'e bağlıysa, bir yol tablosunu *0.0.0.0/
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) |
+| Azure CLI | [az network vnet subnet update](/cli/azure/network/vnet/subnet#az_network_vnet_subnet_update) |
 | PowerShell | [Set-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/set-azvirtualnetworksubnetconfig) |
 
 ## <a name="dissociate-a-route-table-from-a-subnet"></a>Bir alt ağdan yol tablosunun ilişkilendirmesini kaldırma
@@ -158,7 +158,7 @@ Bir alt ağdan yol tablosunun ilişkilendirmesini kaldırdığınızda, Azure tr
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) |
+| Azure CLI | [az network vnet subnet update](/cli/azure/network/vnet/subnet#az_network_vnet_subnet_update) |
 | PowerShell | [Set-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/set-azvirtualnetworksubnetconfig) |
 
 ## <a name="delete-a-route-table"></a>Yol tablosunu silme
@@ -175,7 +175,7 @@ Herhangi bir alt ağ ile ilişkili bir yol tablosunu silemezsiniz. Bir yol tablo
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Route-Table Delete](/cli/azure/network/route-table#az-network-route-table-delete) |
+| Azure CLI | [az Network Route-Table Delete](/cli/azure/network/route-table#az_network_route_table_delete) |
 | PowerShell | [Remove-AzRouteTable](/powershell/module/az.network/remove-azroutetable) |
 
 ## <a name="create-a-route"></a>Yönlendirme oluşturma
@@ -202,7 +202,7 @@ Yol tablosu başına her bir Azure konumu ve aboneliği için kaç yol oluştura
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az network route-table route create](/cli/azure/network/route-table/route#az-network-route-table-route-create) |
+| Azure CLI | [az network route-table route create](/cli/azure/network/route-table/route#az_network_route_table_route_create) |
 | PowerShell | [New-AzRouteConfig](/powershell/module/az.network/new-azrouteconfig) |
 
 ## <a name="view-routes"></a>Rotaları görüntüle
@@ -219,7 +219,7 @@ Bir yol tablosu sıfır veya daha fazla yol içeriyor. Yolları görüntülerken
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Route-Table Route List](/cli/azure/network/route-table/route#az-network-route-table-route-list) |
+| Azure CLI | [az Network Route-Table Route List](/cli/azure/network/route-table/route#az_network_route_table_route_list) |
 | PowerShell | [Get-AzRouteConfig](/powershell/module/az.network/get-azrouteconfig) |
 
 ## <a name="view-details-of-a-route"></a>Bir yolun ayrıntılarını görüntüleme
@@ -236,7 +236,7 @@ Bir yol tablosu sıfır veya daha fazla yol içeriyor. Yolları görüntülerken
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Route-Table Route Show](/cli/azure/network/route-table/route#az-network-route-table-route-show) |
+| Azure CLI | [az Network Route-Table Route Show](/cli/azure/network/route-table/route#az_network_route_table_route_show) |
 | PowerShell | [Get-AzRouteConfig](/powershell/module/az.network/get-azrouteconfig) |
 
 ## <a name="change-a-route"></a>Rota değiştirme
@@ -255,7 +255,7 @@ Bir yol tablosu sıfır veya daha fazla yol içeriyor. Yolları görüntülerken
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Route-Table Route Update](/cli/azure/network/route-table/route#az-network-route-table-route-update) |
+| Azure CLI | [az Network Route-Table Route Update](/cli/azure/network/route-table/route#az_network_route_table_route_update) |
 | PowerShell | [Set-AzRouteConfig](/powershell/module/az.network/set-azrouteconfig) |
 
 ## <a name="delete-a-route"></a>Bir yolu silme
@@ -274,7 +274,7 @@ Bir yol tablosu sıfır veya daha fazla yol içeriyor. Yolları görüntülerken
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Route-Table Route Delete](/cli/azure/network/route-table/route#az-network-route-table-route-delete) |
+| Azure CLI | [az Network Route-Table Route Delete](/cli/azure/network/route-table/route#az_network_route_table_route_delete) |
 | PowerShell | [Remove-AzRouteConfig](/powershell/module/az.network/remove-azrouteconfig) |
 
 ## <a name="view-effective-routes"></a>Geçerli yolları görüntüle
@@ -297,7 +297,7 @@ VM 'ye bağlı her ağ arabirimine yönelik etkili rotalar, oluşturduğunuz yol
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network Nic Show-geçerli-Route-Table](/cli/azure/network/nic#az-network-nic-show-effective-route-table) |
+| Azure CLI | [az Network Nic Show-geçerli-Route-Table](/cli/azure/network/nic#az_network_nic_show_effective_route_table) |
 | PowerShell | [Get-AzEffectiveRouteTable](/powershell/module/az.network/get-azeffectiveroutetable) |
 
 ## <a name="validate-routing-between-two-endpoints"></a>İki uç nokta arasındaki yönlendirmeyi doğrula
@@ -326,7 +326,7 @@ Kısa bir bekleme sonrasında Azure, sonraki atlama türünü ve trafiği yönle
 
 | Araç | Komut |
 | ---- | ------- |
-| Azure CLI’si | [az Network izleyici Show-Next-Hop](/cli/azure/network/watcher#az-network-watcher-show-next-hop) |
+| Azure CLI | [az Network izleyici Show-Next-Hop](/cli/azure/network/watcher#az_network_watcher_show_next_hop) |
 | PowerShell | [Get-AzNetworkWatcherNextHop](/powershell/module/az.network/get-aznetworkwatchernexthop) |
 
 ## <a name="permissions"></a>İzinler

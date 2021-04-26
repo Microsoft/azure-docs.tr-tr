@@ -4,10 +4,10 @@ description: Azure portal Azure yönetilen disklerini nasıl yedekleyeceğinizi 
 ms.topic: conceptual
 ms.date: 01/07/2021
 ms.openlocfilehash: e234495eb483d6d0cc6ca556ca418138c61a99f5
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105110636"
 ---
 # <a name="back-up-azure-managed-disks"></a>Azure yönetilen disklerini yedekleme

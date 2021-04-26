@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: how-to
-ms.date: 09/25/2020
+ms.date: 04/14/2021
 ms.author: victorh
-ms.openlocfilehash: 3b8fbc47b46f8be6e4ad7636a1d7552445501f0f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e14a8afe27fc9dd9ca40730dd7e681c3093e0b50
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94653173"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107505913"
 ---
 # <a name="integrate-azure-firewall-with-azure-standard-load-balancer"></a>Azure Güvenlik Duvarı’nı Azure Standart Load Balancer ile tümleştirme
 
@@ -65,8 +65,7 @@ Bu senaryoyla ilgili bir asimetrik yönlendirme sorunu yok. Gelen paketler, güv
 
 Dolayısıyla, bu senaryoyu ortak yük dengeleyici senaryosuna benzer ancak güvenlik duvarı genel IP adresi ana bilgisayar yoluna gerek kalmadan dağıtabilirsiniz.
 
->[!NOTE]
->Arka uç havuzundaki sanal makinelerin, bu yapılandırmayla giden internet bağlantısı olmayacaktır. </br> Giden bağlantı sağlama hakkında daha fazla bilgi için bkz.: </br> **[Azure’da giden bağlantılar](../load-balancer/load-balancer-outbound-connections.md)**</br> Bağlantı sağlamaya yönelik seçenekler: </br> **[Yalnızca giden yük dengeleyici yapılandırması](../load-balancer/egress-only.md)** </br> [**Sanal ağ NAT nedir?**](../virtual-network/nat-overview.md)
+Arka uç havuzundaki sanal makinelerin, Azure Güvenlik Duvarı aracılığıyla giden Internet bağlantısı olabilir. Bir sonraki atlama olarak güvenlik duvarıyla sanal makine alt ağında Kullanıcı tanımlı bir yol yapılandırın.
 
 
 ## <a name="additional-security"></a>Ek güvenlik

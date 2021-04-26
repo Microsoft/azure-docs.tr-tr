@@ -12,15 +12,15 @@ ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 12/15/2020
+ms.date: 04/12/2021
 ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 377bbb9ce111f3cf2daf8426e128186711c30e5f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4e948b96022972dcf702ac5a4d8be85c9afe16e7
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97587460"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107365986"
 ---
 # <a name="configure-managed-identities-for-azure-resources-on-an-azure-virtual-machine-scale-using-a-template"></a>Bir şablon kullanarak bir Azure sanal makine ölçeğinde Azure kaynakları için Yönetilen kimlikler yapılandırma
 
@@ -29,6 +29,7 @@ ms.locfileid: "97587460"
 Azure kaynakları için Yönetilen kimlikler, Azure Active Directory ' de otomatik olarak yönetilen kimlik ile Azure hizmetleri sağlar. Bu kimliği, kodunuzda kimlik bilgileri olmadan Azure AD kimlik doğrulamasını destekleyen herhangi bir hizmette kimlik doğrulaması yapmak için kullanabilirsiniz.
 
 Bu makalede, Azure Resource Manager dağıtım şablonu kullanarak Azure sanal makine ölçek kümesindeki Azure kaynakları işlemleri için aşağıdaki yönetilen kimliklerin nasıl gerçekleştirileceğini öğreneceksiniz:
+
 - Azure sanal makine ölçek kümesi üzerinde sistem tarafından atanan yönetilen kimliği etkinleştirme ve devre dışı bırakma
 - Azure sanal makine ölçek kümesine Kullanıcı tarafından atanan yönetilen kimlik ekleme ve kaldırma
 
@@ -60,7 +61,7 @@ Seçtiğiniz seçenekten bağımsız olarak, şablon söz dizimi ilk dağıtım 
 
 Bu bölümde, sistem tarafından atanan yönetilen kimliği bir Azure Resource Manager şablonu kullanarak etkinleştirip devre dışı bırakacaksınız.
 
-### <a name="enable-system-assigned-managed-identity-during-creation-the-creation-of-a-virtual-machines-scale-set-or-an-existing-virtual-machine-scale-set"></a>Bir sanal makine ölçek kümesi veya var olan bir sanal makine ölçek kümesi oluşturma sırasında sistem tarafından atanan yönetilen kimliği etkinleştirin
+### <a name="enable-system-assigned-managed-identity-during-the-creation-of-a-virtual-machines-scale-set-or-an-existing-virtual-machine-scale-set"></a>Bir sanal makine ölçek kümesi veya var olan bir sanal makine ölçek kümesi oluşturulurken sistem tarafından atanan yönetilen kimliği etkinleştirin
 
 1. Azure 'da yerel olarak veya Azure portal aracılığıyla oturum açıp etmeksizin, sanal makine ölçek kümesini içeren Azure aboneliğiyle ilişkili bir hesabı kullanın.
 2. Sistem tarafından atanan yönetilen kimliği etkinleştirmek için, şablonu bir düzenleyiciye yükleyin, `Microsoft.Compute/virtualMachinesScaleSets` Kaynaklar bölümünde ilgilendiğiniz kaynağı bulun ve özelliği ile `identity` aynı düzeye ekleyin `"type": "Microsoft.Compute/virtualMachinesScaleSets"` . Aşağıdaki sözdizimini kullanın:
@@ -70,10 +71,6 @@ Bu bölümde, sistem tarafından atanan yönetilen kimliği bir Azure Resource M
        "type": "SystemAssigned"
    }
    ```
-
-> [!NOTE]
-> İsteğe bağlı olarak, Azure kaynakları sanal makine ölçek kümesi uzantısının yönetilen kimliklerini `extensionProfile` şablonun öğesinde belirterek sağlayabilirsiniz. Bu adım, belirteçleri de almak için Azure Instance Metadata Service (IMDS) kimlik uç noktasını kullanabileceğiniz için isteğe bağlıdır.  Daha fazla bilgi için bkz. [kimlik doğrulaması IÇIN VM uzantısından Azure IMDS 'ye geçiş](howto-migrate-vm-extension.md).
-
 
 4. İşiniz bittiğinde, şablonunuzun kaynak bölümüne aşağıdaki bölümler eklenmelidir ve şuna benzemelidir:
 
@@ -92,23 +89,7 @@ Bu bölümde, sistem tarafından atanan yönetilen kimliği bir Azure Resource M
                 //other resource provider properties...
                 "virtualMachineProfile": {
                     //other virtual machine profile properties...
-                    //The following appears only if you provisioned the optional virtual machine scale set extension (to be deprecated)
-                    "extensionProfile": {
-                        "extensions": [
-                            {
-                                "name": "ManagedIdentityWindowsExtension",
-                                "properties": {
-                                  "publisher": "Microsoft.ManagedIdentity",
-                                  "type": "ManagedIdentityExtensionForWindows",
-                                  "typeHandlerVersion": "1.0",
-                                  "autoUpgradeMinorVersion": true,
-                                  "settings": {
-                                      "port": 50342
-                                  }
-                                }
-                            }
-                        ]
-                    }
+        
                 }
             }
         }
@@ -194,13 +175,10 @@ Bu bölümde, Azure Resource Manager şablonu kullanarak bir sanal makine ölçe
        }
 
    }
-   ```
-> [!NOTE]
-> İsteğe bağlı olarak, Azure kaynakları sanal makine ölçek kümesi uzantısının yönetilen kimliklerini `extensionProfile` şablonun öğesinde belirterek sağlayabilirsiniz. Bu adım, belirteçleri de almak için Azure Instance Metadata Service (IMDS) kimlik uç noktasını kullanabileceğiniz için isteğe bağlıdır.  Daha fazla bilgi için bkz. [kimlik doğrulaması IÇIN VM uzantısından Azure IMDS 'ye geçiş](howto-migrate-vm-extension.md).
 
-3. İşiniz bittiğinde, şablonunuz şuna benzer görünmelidir:
+3. When you are done, your template should look similar to the following:
 
-   **Microsoft. COMPUTE/virtualMachineScaleSets API sürüm 2018-06-01**   
+   **Microsoft.Compute/virtualMachineScaleSets API version 2018-06-01**   
 
    ```json
    "resources": [
@@ -220,23 +198,6 @@ Bu bölümde, Azure Resource Manager şablonu kullanarak bir sanal makine ölçe
                 //other virtual machine properties...
                 "virtualMachineProfile": {
                     //other virtual machine profile properties...
-                    //The following appears only if you provisioned the optional virtual machine scale set extension (to be deprecated)
-                    "extensionProfile": {
-                        "extensions": [
-                            {
-                                "name": "ManagedIdentityWindowsExtension",
-                                "properties": {
-                                  "publisher": "Microsoft.ManagedIdentity",
-                                  "type": "ManagedIdentityExtensionForWindows",
-                                  "typeHandlerVersion": "1.0",
-                                  "autoUpgradeMinorVersion": true,
-                                  "settings": {
-                                      "port": 50342
-                                  }
-                                }
-                            }
-                        ]
-                    }
                 }
             }
         }
@@ -263,29 +224,12 @@ Bu bölümde, Azure Resource Manager şablonu kullanarak bir sanal makine ölçe
                 //other virtual machine properties...
                 "virtualMachineProfile": {
                     //other virtual machine profile properties...
-                    //The following appears only if you provisioned the optional virtual machine scale set extension (to be deprecated)    
-                    "extensionProfile": {
-                        "extensions": [
-                            {
-                                "name": "ManagedIdentityWindowsExtension",
-                                "properties": {
-                                  "publisher": "Microsoft.ManagedIdentity",
-                                  "type": "ManagedIdentityExtensionForWindows",
-                                  "typeHandlerVersion": "1.0",
-                                  "autoUpgradeMinorVersion": true,
-                                  "settings": {
-                                      "port": 50342
-                                  }
-                                }
-                            }
-                        ]
-                    }
                 }
             }
         }
     ]
    ```
-   ### <a name="remove-user-assigned-managed-identity-from-an-azure-virtual-machine-scale-set"></a>Kullanıcı tarafından atanan yönetilen kimliği bir Azure sanal makine ölçek kümesinden kaldır
+### <a name="remove-user-assigned-managed-identity-from-an-azure-virtual-machine-scale-set"></a>Kullanıcı tarafından atanan yönetilen kimliği bir Azure sanal makine ölçek kümesinden kaldır
 
 Artık Kullanıcı tarafından atanan yönetilen kimliğe ihtiyacı olmayan bir sanal makine ölçek kümesine sahipseniz:
 

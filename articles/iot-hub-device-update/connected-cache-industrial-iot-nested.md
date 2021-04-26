@@ -6,12 +6,12 @@ ms.author: andyriv
 ms.date: 2/16/2021
 ms.topic: tutorial
 ms.service: iot-hub-device-update
-ms.openlocfilehash: 0d70ed8b906c171c001c5bda81a79ca9b65febac
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 083c7bf6edc7da1fd617487e91b0a3848fb401fe
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101665033"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107811842"
 ---
 # <a name="microsoft-connected-cache-preview-deployment-scenario-sample-microsoft-connected-cache-within-an-azure-iot-edge-for-industrial-iot-configuration"></a>Microsoft bağlı önbellek önizleme dağıtım senaryosu örneği: Endüstriyel IoT yapılandırması için bir Azure IoT Edge içindeki Microsoft bağlı önbelleği
 
@@ -33,10 +33,10 @@ Microsoft bağlı önbellek dağıtımlarını bir ISA 95 uyumlu ağ içinde yap
    * UPSTREAM_HOST-L3 Microsoft bağlı önbelleğinin içerik isteyeceğini belirten, L4 IoT Edge ağ geçidinin IP/FQDN 'si.
    * UPSTREAM_PROXY-IP/FQDN: OT proxy sunucusunun bağlantı noktası.
 
-3. OT proxy 'si, izin verilenler listesine L4 MCC FQDN/IP adresini eklemesi gerekir.
+3. OT proxy 'si, allowlist öğesine L4 MCC FQDN/IP adresini eklemesi gerekir.
 
-Microsoft bağlı önbelleğinin düzgün çalıştığını doğrulamak için, IoT Edge cihazın terminalinde aşağıdaki komutu yürütün, modülü veya ağdaki herhangi bir cihazı barındırın.
+Microsoft bağlı önbelleğinin düzgün çalıştığını doğrulamak için, IoT Edge cihazın terminalinde aşağıdaki komutu yürütün, modülü veya ağdaki herhangi bir cihazı barındırın. \<Azure IoT Edge Gateway IP\>IoT Edge ağ geçidinizin IP adresi veya ana bilgisayar adı ile değiştirin. (Bu raporun görünürlüğü hakkında bilgi için ortam değişkeni ayrıntılarına bakın).
 
 ```bash
-    wget "http://<L3 IoT Edge Gateway IP>/mscomtest/wuidt.gif?cacheHostOrigin=au.download.windowsupdate.com
+    wget http://<L3 IoT Edge Gateway IP>/mscomtest/wuidt.gif?cacheHostOrigin=au.download.windowsupdate.com
 ```

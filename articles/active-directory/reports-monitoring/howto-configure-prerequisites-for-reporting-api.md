@@ -17,12 +17,12 @@ ms.date: 03/04/2020
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4ca618dc234ff4383083ff5eb21299fb1e3e7128
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 00c519ef06637c5193b347f0bbc906c6232a7ca8
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96348747"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532533"
 ---
 # <a name="prerequisites-to-access-the-azure-active-directory-reporting-api"></a>Azure Active Directory Raporlama API 'sine erişim önkoşulları
 
@@ -42,7 +42,7 @@ Raporlama API 'sine erişiminizi hazırlamak için şunları yapmanız gerekir:
 
 API aracılığıyla raporlama verilerine erişim sağlamak için, aşağıdaki rollerden birine atanmış olması gerekir:
 
-- Güvenlik Okuyucusu
+- Güvenlik okuyucusu
 
 - Güvenlik Yöneticisi
 
@@ -224,5 +224,5 @@ Uygulamanızın doğru izin kümesiyle çalıştığından emin olmak için [Azu
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Sertifikalarla Azure Active Directory raporlama API’sini kullanarak veri alma](tutorial-access-api-with-certificates.md)
-* [API başvurusunu denetle](/graph/api/resources/directoryaudit?view=graph-rest-beta) 
-* [Oturum açma Etkinliği raporu API başvurusu](/graph/api/resources/signin?view=graph-rest-beta)
+* [API başvurusunu denetle](/graph/api/resources/directoryaudit) 
+* [Oturum açma Etkinliği raporu API başvurusu](/graph/api/resources/signin)

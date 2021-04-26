@@ -5,12 +5,12 @@ ms.service: data-lake-analytics
 ms.reviewer: jasonh
 ms.topic: how-to
 ms.date: 02/09/2018
-ms.openlocfilehash: 40e3ce17e036312e7c3fdee95fcb42d06f5845e9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e1d74795fd25019e205f4b7b1d2bac1b67107e2d
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96751368"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107878587"
 ---
 # <a name="use-azure-data-lake-tools-for-visual-studio-code"></a>Visual Studio Code için Azure Data Lake Araçları’nı kullanma
 
@@ -26,7 +26,7 @@ VS Code için Azure Data Lake araçları, Windows, Linux ve macOS 'u destekler. 
 
 MacOS ve Linux için:
 
-- [.NET Core SDK 2,0](https://www.microsoft.com/net/download/core)
+- [.NET 5,0 SDK](https://dotnet.microsoft.com/download)
 - [Mono 5.2. x](https://www.mono-project.com/download/)
 
 ## <a name="install-azure-data-lake-tools"></a>Azure Data Lake araçları 'nı yükler

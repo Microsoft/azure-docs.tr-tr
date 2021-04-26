@@ -1,22 +1,22 @@
 ---
 title: Azure IoT Central uygulama şablonları nelerdir | Microsoft Docs
 description: Azure IoT Central uygulama şablonları, IoT çözüm geliştirmeye atlamanızı sağlar.
-author: philmea
-ms.author: philmea
+author: ankitscribbles
+ms.author: ankitgup
 ms.date: 12/19/2020
 ms.topic: conceptual
 ms.service: iot-central
 services: iot-central
-ms.openlocfilehash: 27f054cb085e5064ffed0e75b77d53a1406b566e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8309a567436d1526c1341f3d7db774acf4879dc2
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97797137"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600628"
 ---
 # <a name="what-are-application-templates"></a>Uygulama şablonları nedir?
 
-Azure IoT Central 'daki uygulama şablonları, çözüm oluşturucularının IoT çözüm geliştirmesini başlatmasını sağlamaya yardımcı olan bir araçtır. Uygulama şablonlarını, ne kadar uygun olduğunu hissetmekten, tam olarak özelleştirmeye ve uygulamanızı müşterilerinize yeniden satımak üzere kullanabilirsiniz.
+Azure IoT Central 'daki uygulama şablonları, çözüm oluşturucularının IoT çözüm geliştirmesini başlatmasını sağlamaya yardımcı olan bir araçtır. Uygulamanızı, müşterilerinize yeniden satmak üzere tamamen özelleştirmek için, mümkün olan her şey için uygulama şablonlarını kullanabilirsiniz.
 
 Uygulama şablonları şunlardan oluşur:
 
@@ -30,7 +30,7 @@ Uygulamanızı oluştururken uygulama şablonunu seçersiniz. Uygulama oluşturu
 
 ## <a name="custom-templates"></a>Özel şablonlar
 
-Uygulamanızı sıfırdan oluşturmak istiyorsanız **özel uygulama** şablonundan birini seçin.
+Uygulamanızı sıfırdan oluşturmak istiyorsanız **özel uygulama** şablonlarından birini seçin.
 
 ## <a name="industry-focused-templates"></a>Sektör odaklı Şablonlar
 
@@ -52,10 +52,6 @@ Azure IoT Central, sektörde bağımsız bir uygulama platformudur. Uygulama şa
   - Su kalitesi izleme
 - [Sağlık](../healthcare/overview-iot-central-healthcare.md).
   - Sürekli hasta izleme
-
-## <a name="application-versions"></a>Uygulama sürümleri
-
-Şablonlar, belirli IoT Central uygulama sürümleriyle ilişkilendirilir. Uygulamanın sürümünü, **Yardım** bağlantısından [uygulamanızın hakkında](./howto-get-app-info.md) sayfasında bulabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

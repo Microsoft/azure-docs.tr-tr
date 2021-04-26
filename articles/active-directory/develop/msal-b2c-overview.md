@@ -13,12 +13,12 @@ ms.date: 06/05/2020
 ms.author: negoe
 ms.reviewer: nacanuma
 ms.custom: aaddev devx-track-js
-ms.openlocfilehash: 53294a30b38bed7ab7516443277cac24e4fef4c1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5168dfb531c40a3efeef978abf65473ee59d2921
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98063731"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107255605"
 ---
 # <a name="use-the-microsoft-authentication-library-for-javascript-to-work-with-azure-ad-b2c"></a>Azure AD B2C çalışmak için JavaScript için Microsoft kimlik doğrulama kitaplığı 'nı kullanın
 
@@ -215,6 +215,6 @@ Kullanıcı **parolayı unutma** seçeneğini belirlediğinde, uygulamanız kodu
 
 Bu Azure AD B2C kavramları hakkında daha fazla bilgi edinin:
 
-- [Kullanıcı akışları](../../active-directory-b2c/tutorial-create-user-flows.md)
-- [Özel ilkeler](../../active-directory-b2c/custom-policy-get-started.md)
+- [Kullanıcı akışları](../../active-directory-b2c/tutorial-create-user-flows.md?pivots=b2c-user-flow)
+- [Özel ilkeler](../../active-directory-b2c/tutorial-create-user-flows.md?pivots=b2c-custom-policy)
 - [UX özelleştirme](../../active-directory-b2c/configure-user-input.md)

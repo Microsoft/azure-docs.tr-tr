@@ -15,12 +15,12 @@ ms.date: 11/07/2020
 ms.author: mathoma
 ms.reviewer: jroth
 ms.custom: devx-track-azurecli, devx-track-azurepowershell, contperf-fy21q2
-ms.openlocfilehash: 983cdab0c5f5b856537c661c7427a83099f30ed4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e34876c76259b8274e0b0ef9059659802eb55cf1
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102181440"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765458"
 ---
 # <a name="register-sql-server-vm-with-sql-iaas-agent-extension"></a>SQL IaaS Aracısı Uzantısı ile SQL Server VM kaydetme
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
@@ -36,7 +36,7 @@ Bu makale, SQL IaaS Aracısı Uzantısı ile tek bir SQL Server VM kaydetmenizi 
 
 Azure portal üzerinden SQL Server VM Azure Marketi görüntüsünün dağıtımı, SQL Server VM Uzantısı ile otomatik olarak kaydeder. Ancak, bir Azure sanal makinesine SQL Server kendi kendine yüklemeyi veya özel bir VHD 'den bir Azure sanal makinesini sağlamayı seçerseniz, tam özellik avantajları ve yönetilebilirliği açmak için SQL Server VM SQL IaaS Aracısı Uzantısı ile kaydetmeniz gerekir. 
 
-SQL IaaS Aracısı uzantısını kullanmak için öncelikle [aboneliğinizi **Microsoft. SqlVirtualMachine** sağlayıcısıyla kaydetmeniz](#register-subscription-with-rp)gerekır, bu da SQL IaaS uzantısına bu belirli abonelikte kaynak oluşturma yeteneği verir.
+SQL IaaS Aracısı uzantısını kullanmak için öncelikle [aboneliğinizi **Microsoft. SqlVirtualMachine** sağlayıcısıyla kaydetmeniz](#register-subscription-with-resource-provider)gerekır, bu da SQL IaaS uzantısına bu belirli abonelikte kaynak oluşturma yeteneği verir.
 
 > [!IMPORTANT]
 > SQL IaaS Aracısı uzantısı, Azure sanal makineler 'de SQL Server kullanırken müşterilere isteğe bağlı avantajlar vermek için veri toplar. Microsoft, bu verileri müşterinin öncelikli onayı olmadan lisanslama denetimleri için kullanmaz. Daha fazla bilgi için [SQL Server Gizlilik Eki](/sql/sql-server/sql-server-privacy#non-personal-data) ' ne bakın.
@@ -50,9 +50,9 @@ SQL Server VM uzantıya kaydetmek için şunlar gerekir:
 - [Azure CLI](/cli/azure/install-azure-cli) veya Azure PowerShell 'nin en son sürümü [(5,0 en az)](/powershell/azure/install-az-ps). 
 
 
-## <a name="register-subscription-with-rp"></a>Aboneliği RP ile kaydetme
+## <a name="register-subscription-with-resource-provider"></a>Aboneliği kaynak sağlayıcısına Kaydet
 
-SQL Server VM SQL IaaS Aracısı Uzantısı ile kaydetmek için öncelikle aboneliğinizi **Microsoft. SqlVirtualMachine** sağlayıcısıyla kaydetmeniz gerekir. Bu, SQL IaaS Aracısı uzantısının aboneliğinizdeki kaynakları oluşturma yeteneğini sağlar.  Azure portal, Azure CLı veya Azure PowerShell kullanarak bunu yapabilirsiniz.
+SQL Server VM SQL IaaS Aracısı uzantısına kaydetmek için öncelikle aboneliğinizi **Microsoft. SqlVirtualMachine** kaynak sağlayıcısı ile kaydetmeniz gerekir. Bu, SQL IaaS Aracısı uzantısının aboneliğinizdeki kaynakları oluşturma yeteneğini sağlar.  Azure portal, Azure CLı veya Azure PowerShell kullanarak bunu yapabilirsiniz.
 
 ### <a name="azure-portal"></a>Azure portalı
 
@@ -304,7 +304,7 @@ Azure portal kullanarak SQL Server VM uzantıdan kaydını silmek için şu adı
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Uzantınızın Azure CLı ile SQL Server VM kaydını silmek için [az SQL VM Delete](/cli/azure/sql/vm#az-sql-vm-delete) komutunu kullanın. Bu işlem SQL Server VM *kaynağını* kaldırır ancak sanal makineyi silmez. 
+Uzantınızın Azure CLı ile SQL Server VM kaydını silmek için [az SQL VM Delete](/cli/azure/sql/vm#az_sql_vm_delete) komutunu kullanın. Bu işlem SQL Server VM *kaynağını* kaldırır ancak sanal makineyi silmez. 
 
 
 ```azurecli-interactive

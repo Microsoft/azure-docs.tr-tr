@@ -8,12 +8,12 @@ ms.subservice: edge
 ms.topic: conceptual
 ms.date: 02/12/2021
 ms.author: alkohli
-ms.openlocfilehash: dacc9ecc28ffa482b60d1e48735fe3620b5b7558
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 7b3589349feed2e20711aa756d8be8ebc433ac0b
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100363075"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077610"
 ---
 # <a name="azure-stack-edge-pro-r-safety-instructions"></a>Azure Stack Edge Pro R güvenlik yönergeleri
 
@@ -37,7 +37,8 @@ Azure Stack Edge Pro R Edge cihazınızı ayarlarken ve çalıştırırken aşa�
 | Simge | Description |
 |:--- |:--- |
 | ![Önce tüm yönergeleri okuyun](./media/azure-stack-edge-pro-r-safety/icon-safety-read-all-instructions.png) | Önce tüm yönergeleri okuyun |
-| ![Bildirim simgesi ](./media/azure-stack-edge-mini-r-safety/icon-safety-notice.png) **bildirimi:** | Önemli kabul edilen, ancak tehlike ile ilgili olmayan bilgileri gösterir. || ![Hasar simgesi](./media/azure-stack-edge-pro-r-safety/icon-safety-warning.png) | Hasar simgesi |
+| ![Bildirim simgesi ](./media/azure-stack-edge-mini-r-safety/icon-safety-notice.png) **bildirimi:** | Önemli kabul edilen, ancak tehlike ile ilgili olmayan bilgileri gösterir. |
+| ![Hasar simgesi](./media/azure-stack-edge-pro-r-safety/icon-safety-warning.png) | Hasar simgesi |
 | ![İpucu rastlantı simgesi](./media/azure-stack-edge-pro-r-safety/icon-safety-tip-hazard.png)  | İpucu hasar|
 | ![Ağır ağırlık simgesi](./media/azure-stack-edge-pro-r-safety/icon-safety-heavy-weight.png)  | Ağır rastlantı|
 | ![Elektrik sarsıntı simgesi](./media/azure-stack-edge-pro-r-safety/icon-safety-electric-shock.png) | Elektrik şok hasar |
@@ -45,7 +46,7 @@ Azure Stack Edge Pro R Edge cihazınızı ayarlarken ve çalıştırırken aşa�
 | ![Birden çok güç kaynağı simgesi](./media/azure-stack-edge-pro-r-safety/icon-safety-disconnect-all-power.png)  | Birden çok güç kaynağı. Tüm güç kimliklerinin, ekipmandaki tüm gücü kaldırmak için bağlantısını kesin. |
 | ![Noktaları yeniden getiriliyor simgesi](./media/azure-stack-edge-pro-r-safety/icon-pinching-points.png)  | Sıkıştırılmış noktaları var. |
 | ![Sık kullanılan bileşenler veya yüzeyler simgesi](./media/azure-stack-edge-pro-r-safety/icon-hot-component-surface.png)  | Sık kullanılan bileşenleri veya yüzeyleri gösterir. |
-|
+
 
 ## <a name="handling-precautions-and-site-selection"></a>Önlemler ve site seçimini işleme
 

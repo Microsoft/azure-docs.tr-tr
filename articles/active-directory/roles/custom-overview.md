@@ -13,12 +13,12 @@ ms.author: rolyon
 ms.reviewer: vincesm
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3fad2c683890776908afbfbf15ee91d46d564783
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0bddb03094b73dbd6d3b8d44c76ab242caa515dc
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103466771"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727867"
 ---
 # <a name="overview-of-role-based-access-control-in-azure-active-directory"></a>Azure Active Directory içindeki rol tabanlı erişim denetimine genel bakış
 
@@ -30,15 +30,13 @@ Bu makalede Azure Active Directory (Azure AD) rol tabanlı erişim denetiminin n
 Her iki sistem de benzer şekilde kullanılan rol tanımlarını ve rol atamalarını içerir. Ancak Azure AD rol izinleri Azure özel rollerinde kullanılamaz ve tam tersi de geçerlidir.
 
 ## <a name="understand-azure-ad-role-based-access-control"></a>Azure AD rol tabanlı erişim denetimini anlama
-Azure AD, 2 tür rol tanımını destekler. 
+Azure AD, rol tanımlarının 2 türünü destekler:
 * [Yerleşik roller](./permissions-reference.md)
 * [Özel roller](./custom-create.md)
 
 Yerleşik roller, sabit bir izin kümesine sahip olan kutu dışı rollerdir. Bu rol tanımları değiştirilemez. Azure AD 'nin desteklediği birçok [yerleşik rol](./permissions-reference.md) vardır ve liste büyüyordur. Azure AD, kenarları yuvarlamak ve gelişmiş gereksinimlerinizi karşılamak için [özel rolleri](./custom-create.md)de destekler. Özel Azure AD rolleri kullanarak izin verilmesi, özel bir rol tanımı oluşturmayı ve ardından rol ataması kullanarak atamayı kapsayan iki adımlı bir işlemdir. Özel bir rol tanımı, önceden ayarlanmış bir listeden eklediğiniz izinlerin koleksiyonudur. Bu izinler, yerleşik rollerde kullanılan izinlerdir.  
 
 Özel rol tanımınızı oluşturduktan sonra (veya yerleşik bir rol kullanarak) bir rol ataması oluşturarak bunu bir kullanıcıya atayabilirsiniz. Rol ataması, kullanıcıya belirtilen kapsamdaki bir rol tanımında izinleri verir. Bu iki adımlı işlem, tek bir rol tanımı oluşturmanızı ve farklı kapsamlarda birçok kez atamanızı sağlar. Kapsam, rol üyesinin erişimi olan Azure AD kaynakları kümesini tanımlar. En yaygın kapsam, kuruluş genelinde (kuruluş genelinde) kapsamındadır. Özel bir rol kuruluş genelinde bir kapsamda atanabilir, Yani rol üyesi kuruluştaki tüm kaynaklar üzerinde rol izinlerine sahiptir. Özel bir rol, bir nesne kapsamına da atanabilir. Bir nesne kapsamına bir örnek, tek bir uygulama olabilir. Aynı rol, kuruluştaki tüm uygulamalarda bir kullanıcıya ve sonra yalnızca contoso gider raporları uygulamasının kapsamına sahip başka bir kullanıcıya atanabilir.  
-
-Azure AD yerleşik ve özel rolleri, [Azure rol tabanlı erişim denetimi (Azure RBAC)](../develop/access-tokens.md#payload-claims)ile benzer kavramlar üzerinde çalışır. [Bu iki rol tabanlı erişim denetimi sistemi arasındaki fark](../../role-based-access-control/rbac-and-directory-admin-roles.md) , Azure RBAC 'Nin Azure Kaynak Yönetimi 'ni kullanarak sanal makineler veya depolama gibi Azure kaynaklarına erişimi denetlemesini ve Azure AD özel rollerinin Graph API kullanarak Azure AD kaynaklarına erişimini denetlerleridir. Her iki sistem de rol tanımları ve rol atamaları kavramından faydalanır. Azure AD RBAC izinleri Azure rollerine dahil edilemez ve tam tersi de geçerlidir.
 
 ### <a name="how-azure-ad-determines-if-a-user-has-access-to-a-resource"></a>Azure AD 'nin bir kullanıcının kaynağa erişip erişemeyeceğini belirleme
 

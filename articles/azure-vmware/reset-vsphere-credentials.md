@@ -2,17 +2,19 @@
 title: Azure VMware çözümü için vSphere kimlik bilgilerini sıfırlama
 description: Azure VMware çözümünüz özel bulutunuz için vSphere kimlik bilgilerini sıfırlamayı ve HCX bağlayıcısının en son vSphere kimlik bilgilerine sahip olduğundan emin olun.
 ms.topic: how-to
-ms.date: 03/16/2021
-ms.openlocfilehash: 1376b6322250da506d32b8ced0a62ddbf60ba9f1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/31/2021
+ms.openlocfilehash: 793b79e42a0adbca54804d1b66102736aff22d7a
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104587636"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109110"
 ---
 # <a name="reset-vsphere-credentials-for-azure-vmware-solution"></a>Azure VMware çözümü için vSphere kimlik bilgilerini sıfırlama
 
 Bu makalede, Azure VMware çözümünüz özel bulutunuz için vCenter Server ve NSX-T Yöneticisi kimlik bilgilerini sıfırlamaya yönelik adımları adım adım inceleyeceğiz. Bu, HCX bağlayıcısının en son vCenter Server kimlik bilgilerine sahip olduğundan emin olmanızı sağlar.
+
+Bu nasıl yapılır bilgisine ek olarak, [vCenter CloudAdmin & NSX-T yönetici parolasını sıfırlamaya](https://youtu.be/cK1qY3knj88)yönelik videoyu da görüntüleyebilirsiniz.
 
 ## <a name="reset-your-azure-vmware-solution-credentials"></a>Azure VMware Çözüm kimlik bilgilerinizi sıfırlayın
 

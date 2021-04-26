@@ -3,23 +3,22 @@ title: Azure Anahtar Kasası nedir? | Microsoft Belgeleri
 description: Bulut uygulamalarının ve hizmetlerinin kullandığı şifreleme anahtarlarını ve gizli dizileri Azure Key Vault nasıl korutuını öğrenin.
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
 ms.date: 01/18/2019
 ms.author: mbaldwin
-ms.openlocfilehash: cc00a4f1c1551932b4a30a8ef9b27cb1d4082667
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 863f98e643a7978856c03f5efe95736e6787f977
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99071605"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814415"
 ---
 # <a name="azure-key-vault-basic-concepts"></a>Azure Key Vault temel kavramlar
 
-Azure Key Vault, gizli dizileri güvenli bir şekilde depolamak ve bunlara erişmek için bir bulut hizmetidir. Gizli dizi, API anahtarları, parolalar, sertifikalar veya şifreleme anahtarları gibi erişimi sıkı şekilde denetlemek istediğiniz her şeydir. Key Vault hizmet iki tür kapsayıcıyı destekler: kasa ve yönetilen HSM havuzları. Kasalar, yazılım ve HSM destekli anahtarları, parolaları ve sertifikaları depolamayı destekler. Yönetilen HSM havuzları yalnızca HSM destekli anahtarları destekler. Tüm ayrıntılar için [Azure Key Vault REST API genel bakış](about-keys-secrets-certificates.md) bölümüne bakın.
+Azure Key Vault, gizli dizileri güvenli bir şekilde depolamak ve bunlara erişmek için bir bulut hizmetidir. Gizli dizi, API anahtarları, parolalar, sertifikalar veya şifreleme anahtarları gibi erişimi sıkı şekilde denetlemek istediğiniz her şeydir. Key Vault hizmet iki tür kapsayıcıyı destekler: kasa ve yönetilen donanım güvenlik modülü (HSM) havuzları. Kasalar, yazılım ve HSM destekli anahtarları, parolaları ve sertifikaları depolamayı destekler. Yönetilen HSM havuzları yalnızca HSM destekli anahtarları destekler. Tüm ayrıntılar için [Azure Key Vault REST API genel bakış](about-keys-secrets-certificates.md) bölümüne bakın.
 
 Diğer önemli terimler şunlardır:
 
@@ -81,7 +80,7 @@ Geliştiriciler ayrıca anahtarları doğrudan API'lerini kullanarak yönetebili
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Kasalarınızın güvenliğini](secure-your-key-vault.md)nasıl sağlayacağınızı öğrenin.
+- [Azure Key Vault güvenlik özellikleri](security-features.md)hakkında bilgi edinin.
 - [YÖNETILEN HSM havuzlarınızı güvenli hale getirme](../managed-hsm/access-control.md) hakkında bilgi edinin
 
 <!--Image references-->

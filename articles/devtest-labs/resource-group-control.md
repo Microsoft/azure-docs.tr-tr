@@ -3,12 +3,12 @@ title: Azure DevTest Labs 'de VM 'Ler için kaynak grubu belirtin | Microsoft Do
 description: Azure DevTest Labs bir laboratuvardaki VM 'Ler için kaynak grubu belirtmeyi öğrenin.
 ms.topic: article
 ms.date: 06/26/2020
-ms.openlocfilehash: 7b72048405d3025ca21b324b6ad3168dd0c9ac95
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c6f576a20fc8fada9dd515e8ba2a266761a3e586
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "85483372"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377497"
 ---
 # <a name="specify-a-resource-group-for-lab-virtual-machines-in-azure-devtest-labs"></a>Laboratuvar sanal makineleri için Azure DevTest Labs bir kaynak grubu belirtin
 
@@ -76,7 +76,7 @@ Laboratuvar oluşturmak için bir Azure Resource Manager şablonu kullanıyorsan
         {
             "type": "microsoft.devtestlab/labs",
             "name": "[parameters('lab_name')]",
-            "apiVersion": "2018_10_15_preview",
+            "apiVersion": "2018-10-15-preview",
             "location": "eastus",
             "tags": {},
             "scale": null,
@@ -103,7 +103,7 @@ Bu API 'YI kullanırken laboratuvar sahibi olarak aşağıdaki seçeneklere sahi
 Bu ayar, laboratuvarda oluşturulan yeni sanal makineler için geçerlidir. Laboratuvarınızda kendi kaynak gruplarında oluşturulan eski VM 'Ler etkilenmemiştir. Laboratuvarınızda oluşturulan ortamlar kendi kaynak gruplarında kalmaya devam eder.
 
 Bu API 'yi kullanma:
-- API sürümü **2018_10_15_preview** kullanın.
+- API sürüm **2018-10-15-önizleme** kullanın.
 - Yeni bir kaynak grubu belirtirseniz, aboneliğinizdeki **kaynak gruplarında yazma izinlerine** sahip olduğunuzdan emin olun. Yazma izinlerinizin olmaması durumunda, belirtilen kaynak grubunda yeni sanal makineler oluşturmak başarısız olur.
 - API kullanırken, **tam kaynak grubu kimliğini** geçirin. Örneğin: `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroupName>`. Kaynak grubunun laboratuvara aynı abonelikte olduğundan emin olun. 
 

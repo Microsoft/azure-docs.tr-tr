@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.date: 01/29/2021
 ms.author: tamram
 ms.subservice: blobs
-ms.openlocfilehash: b62e341d35a4ff7fd5a7ddd6d9f19b138aaf0aa9
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e8c926c2fbc5b19f67fb78d321ee3293c73be939
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99071656"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869356"
 ---
 # <a name="perform-a-point-in-time-restore-on-block-blob-data"></a>Blok Blobu verilerinde bir zaman içinde geri yükleme gerçekleştirin
 
@@ -86,7 +86,7 @@ Get-AzStorageBlobServiceProperty -ResourceGroupName $rgName `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı ile zaman içinde nokta geri yüklemeyi yapılandırmak için önce Azure CLı sürüm 2.2.0 veya üstünü yükleyin. Ardından, depolama hesabı için bir süre sonra geri yüklemeyi ve diğer gerekli veri koruma ayarlarını etkinleştirmek üzere [az Storage Account blob-Service-Properties Update](/cli/azure/ext/storage-blob-preview/storage/account/blob-service-properties#ext_storage_blob_preview_az_storage_account_blob_service_properties_update) komutunu çağırın.
+Azure CLı ile zaman içinde nokta geri yüklemeyi yapılandırmak için önce Azure CLı sürüm 2.2.0 veya üstünü yükleyin. Ardından, depolama hesabı için bir süre sonra geri yüklemeyi ve diğer gerekli veri koruma ayarlarını etkinleştirmek üzere [az Storage Account blob-Service-Properties Update](/cli/azure/storage/account/blob-service-properties#az_storage_account_blob_service_properties_update) komutunu çağırın.
 
 Aşağıdaki örnek, geçici silme işlemi yapmanızı sağlar ve geçici silme bekletme dönemini 14 gün olarak ayarlar, akış ve sürüm oluşturmayı değiştirebilir ve bir geri yükleme süresi olan 7 günlük bir geri yükleme süresi sağlar. Örneği çalıştırırken, açılı ayraçlar içindeki değerleri kendi değerlerinizle değiştirmeyi unutmayın:
 

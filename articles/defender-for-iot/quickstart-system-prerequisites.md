@@ -1,17 +1,22 @@
 ---
-title: Sistem önkoşulları
-description: IoT için Azure Defender 'ı çalıştırmak için gereken sistem önkoşullarını alın.
+title: 'Hızlı başlangıç: Sistem önkoşulları'
+description: Bu hızlı başlangıçta IoT için Azure Defender 'ı çalıştırmak için gereken sistem önkoşullarını alın.
 ms.date: 11/30/2020
 ms.topic: quickstart
-ms.openlocfilehash: 78d5948554ae531c4b2f77d67bb916d5290db943
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 2aae849b6ee772c2aa29c680f3b107af3ed600b0
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104780948"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106382955"
 ---
-# <a name="system-prerequisites"></a>Sistem önkoşulları
+# <a name="quickstart-system-prerequisites"></a>Hızlı başlangıç: Sistem önkoşulları
+
 Bu makalede IoT için Azure Defender çalıştırmaya yönelik sistem önkoşulları listelenmektedir.
+
+## <a name="prerequisites"></a>Önkoşullar
+
+- Yok
 
 ## <a name="minimum-requirements"></a>Minimum gereksinimler
 
@@ -27,7 +32,7 @@ IoT için Defender tüm Avrupa bölgelerinden gelen tüm trafiği Batı Avrupa b
 
 Daha fazla bilgi için bkz. [Desteklenen bölgeler IoT Hub](https://azure.microsoft.com/global-infrastructure/services/?products=iot-hub).
 
-## <a name="see-also"></a>Ayrıca bkz.
+## <a name="next-steps"></a>Sonraki adımlar
 
-- [Gerekli gereçlerini tanımlama](how-to-identify-required-appliances.md)
-- [IoT Ağ kurulumu için Azure Defender hakkında](how-to-set-up-your-network.md)
+> [!div class="nextstepaction"]
+> [Gerekli gereçlerini tanımlama](how-to-identify-required-appliances.md)

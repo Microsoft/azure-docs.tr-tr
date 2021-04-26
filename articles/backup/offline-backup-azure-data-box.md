@@ -3,12 +3,12 @@ title: Azure Data Box kullanarak çevrimdışı yedekleme
 description: MARS aracısından bir kurtarma hizmetleri kasasına çevrimdışı olan büyük ilk yedekleme verilerini temel alarak Azure Data Box nasıl kullanabileceğinizi öğrenin.
 ms.topic: conceptual
 ms.date: 1/27/2020
-ms.openlocfilehash: e789b6c9f4ff2e8cd168e6b5c138d423911d4743
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 78adc479ce5733e208d2334d30d7b88e4edf8d6b
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96752592"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107576100"
 ---
 # <a name="azure-backup-offline-backup-by-using-azure-data-box"></a>Azure Data Box kullanarak çevrimdışı yedekleme Azure Backup
 
@@ -292,7 +292,7 @@ Başka hiçbir sunucuda, çevrimdışı dengeli dağıtım yapılandırılmamı�
 
 Çevrimdışı yedekleme için yapılandırmayı denediğiniz sunucudan aşağıdaki eylemleri gerçekleştirin.
 
-1. **Bilgisayar sertifikasını Yönet uygulama**  >  **Kişisel** sekmesine gidin ve adı olan sertifikayı arayın `CB_AzureADCertforOfflineSeeding_<ResourceId>` .
+1. **Bilgisayar sertifikasını Yönet uygulama**  >  **Kişisel** sekmesine gidin ve adı olan sertifikayı arayın `CB_AzureADCertforOfflineSeeding_<Timestamp>` .
 
 2. Sertifikayı seçin, **Tüm görevler**' e sağ tıklayın ve. cer biçiminde özel anahtar olmadan **dışarı aktar** ' ı seçin.
 

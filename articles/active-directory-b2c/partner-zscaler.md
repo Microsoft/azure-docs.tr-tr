@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 12/09/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: dbeb3cd4fccf80f434e6c7ac08c658632f64b135
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9cd193eb6ff2858440f1cd9a62bdd53d58d6047d
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102096862"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256302"
 ---
 # <a name="tutorial-configure-zscaler-private-access-with-azure-active-directory-b2c"></a>Öğretici: Azure Active Directory B2C ile Zscaler özel erişimini yapılandırma
 
@@ -96,7 +96,7 @@ Azure AD B2C yapılandırdıktan sonra, IDP yapılandırmasının geri kalanı d
 >[!Note]
 >Bu adım yalnızca özel ilkeleri henüz yapılandırmadıysanız gereklidir. Zaten bir veya daha fazla özel ilkeleriniz varsa, bu adımı atlayabilirsiniz.
 
-Azure AD B2C kiracınızda özel ilkeleri yapılandırmak için, bkz. [Azure Active Directory B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md).
+Azure AD B2C kiracınızda özel ilkeleri yapılandırmak için, bkz. [Azure Active Directory B2C özel ilkeleri kullanmaya başlama](./tutorial-create-user-flows.md?pivots=b2c-custom-policy).
 
 ### <a name="step-3-register-zpa-as-a-saml-application-in-azure-ad-b2c"></a>3. Adım: ZPA 'yi bir SAML uygulaması olarak kaydetme Azure AD B2C
 
@@ -149,7 +149,7 @@ Bir ZPA Kullanıcı portalına veya tarayıcı erişimi uygulamasına gidin ve k
 
 Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](./tutorial-create-user-flows.md?pivots=b2c-custom-policy)
 - [Azure AD B2C bir SAML uygulaması kaydetme](./saml-service-provider.md)
 - [ZPA için adım adım yapılandırma kılavuzu](https://help.zscaler.com/zpa/step-step-configuration-guide-zpa)
 - [Bir IDP 'yi çoklu oturum açma için yapılandırma](https://help.zscaler.com/zpa/configuring-idp-single-sign)

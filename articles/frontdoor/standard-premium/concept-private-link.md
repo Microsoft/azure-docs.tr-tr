@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.date: 02/18/2021
 ms.author: tyao
 ms.custom: references_regions
-ms.openlocfilehash: 88c000c96e632f970db075fafb13ea5eb4bbddfc
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: c927682231bab1fc92f198c56a2f6aeff2f4c516
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104799944"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553541"
 ---
 # <a name="secure-your-origin-with-private-link-in-azure-front-door-standardpremium-preview"></a>Azure ön kapı Standart/Premium 'daki özel bağlantıyla başlangıç sürecinizi güvenli hale getirme (Önizleme)
 
@@ -43,7 +43,7 @@ Azure ön kapısı Premium yapılandırmasında özel bağlantı noktasını etk
 
 ## <a name="limitations"></a>Sınırlamalar
 
-Azure ön kapı özel uç noktaları, genel önizleme sırasında şu bölgelerde kullanılabilir: Doğu ABD, Batı 2 ABD ve Orta Güney ABD.
+Azure ön kapı özel uç noktaları, genel önizleme sırasında şu bölgelerde kullanılabilir: Doğu ABD, Batı 2 ABD, Orta Güney ABD ve UK Güney.
 
 En iyi gecikme süresi boyunca, ön kapı özel bağlantı uç noktasını etkinleştirmeyi seçerken, her zaman başlangıç noktanıza en yakın bir Azure bölgesi seçmeniz gerekir.
 

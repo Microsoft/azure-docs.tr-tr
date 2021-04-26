@@ -10,12 +10,12 @@ ms.author: moslake
 ms.reviewer: sstein
 ms.date: 03/12/2019
 ms.custom: seoapril2019 sqldbrb=1, devx-track-azurecli
-ms.openlocfilehash: 9c9af6e3bc3dfd798f4b3f0cad9319aa573c425d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 555b18a7edbc3cc00cd7dcaf7f4897a4608d52e7
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96456004"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787224"
 ---
 # <a name="manage-elastic-pools-in-azure-sql-database"></a>Azure SQL veritabanı 'nda elastik havuzları yönetme
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -63,7 +63,7 @@ SQL veritabanı elastik havuzları ve havuza alınmış veritabanlarını Azure 
 > [!TIP]
 > Elastik havuzda birçok veritabanının oluşturulması, her seferinde yalnızca tek bir veritabanı oluşturan portal veya PowerShell cmdlet 'leri kullanılarak yapıldığında zaman alabilir. Bir elastik havuzda oluşturma işlemini otomatik hale getirmek için bkz. [Createorupdateelahapoolandpopulate](https://gist.github.com/billgib/d80c7687b17355d3c2ec8042323819ae).
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 [Azure CLI](/cli/azure)Ile SQL veritabanı elastik havuzları oluşturup yönetmek Için AŞAĞıDAKI [Azure CLI SQL veritabanı](/cli/azure/sql/db) komutlarını kullanın. CLI’yi tarayıcınızda çalıştırmak için [Cloud Shell](../../cloud-shell/overview.md) kullanın veya macOS, Linux ya da Windows’da [yükleyin](/cli/azure/install-azure-cli).
 
@@ -73,12 +73,12 @@ SQL veritabanı elastik havuzları ve havuza alınmış veritabanlarını Azure 
 
 | Cmdlet | Açıklama |
 | --- | --- |
-|[az SQL elastik havuz oluşturma](/cli/azure/sql/elastic-pool#az-sql-elastic-pool-create)|Elastik havuz oluşturur.|
-|[az SQL elastik havuz listesi](/cli/azure/sql/elastic-pool#az-sql-elastic-pool-list)|Bir sunucudaki elastik havuzların listesini döndürür.|
-|[az SQL elastik havuz listesi-DBS](/cli/azure/sql/elastic-pool#az-sql-elastic-pool-list-dbs)|Elastik havuzdaki veritabanlarının listesini döndürür.|
-|[az SQL elastik havuz listesi-sürümleri](/cli/azure/sql/elastic-pool#az-sql-elastic-pool-list-editions)|Ayrıca kullanılabilir havuz DTU ayarlarını, depolama sınırlarını ve veritabanı başına ayarları içerir. Ayrıntı düzeyini azaltmak için, ek depolama sınırları ve veritabanı başına ayarlar varsayılan olarak gizlidir.|
-|[az SQL elastik havuz güncelleştirmesi](/cli/azure/sql/elastic-pool#az-sql-elastic-pool-update)|Elastik havuzu güncelleştirir.|
-|[az SQL elastik havuz silme](/cli/azure/sql/elastic-pool#az-sql-elastic-pool-delete)|Elastik havuzu siler.|
+|[az SQL elastik havuz oluşturma](/cli/azure/sql/elastic-pool#az_sql_elastic_pool_create)|Elastik havuz oluşturur.|
+|[az SQL elastik havuz listesi](/cli/azure/sql/elastic-pool#az_sql_elastic_pool_list)|Bir sunucudaki elastik havuzların listesini döndürür.|
+|[az SQL elastik havuz listesi-DBS](/cli/azure/sql/elastic-pool#az_sql_elastic_pool_list_dbs)|Elastik havuzdaki veritabanlarının listesini döndürür.|
+|[az SQL elastik havuz listesi-sürümleri](/cli/azure/sql/elastic-pool#az_sql_elastic_pool_list_editions)|Ayrıca kullanılabilir havuz DTU ayarlarını, depolama sınırlarını ve veritabanı başına ayarları içerir. Ayrıntı düzeyini azaltmak için, ek depolama sınırları ve veritabanı başına ayarlar varsayılan olarak gizlidir.|
+|[az SQL elastik havuz güncelleştirmesi](/cli/azure/sql/elastic-pool#az_sql_elastic_pool_update)|Elastik havuzu güncelleştirir.|
+|[az SQL elastik havuz silme](/cli/azure/sql/elastic-pool#az_sql_elastic_pool_delete)|Elastik havuzu siler.|
 
 ## <a name="transact-sql-t-sql"></a>Transact-SQL (T-SQL)
 
@@ -106,7 +106,7 @@ SQL veritabanı elastik havuzları ve havuza alınmış veritabanları oluşturu
 |[Elastik havuzlar-Sil](/rest/api/sql/elasticpools/delete)|Elastik havuzu siler.|
 |[Elastik havuzlar-al](/rest/api/sql/elasticpools/get)|Elastik havuz alır.|
 |[Elastik havuzlar-sunucuya göre Listele](/rest/api/sql/elasticpools/listbyserver)|Bir sunucudaki elastik havuzların listesini döndürür.|
-|[Elastik havuzlar-Güncelleştir](/rest/api/sql/elasticpools/listbyserver)|Mevcut bir elastik havuzu güncelleştirir.|
+|[Elastik havuzlar-Güncelleştir](/rest/api/sql/2020-11-01-preview/elasticpools/update)|Mevcut bir elastik havuzu güncelleştirir.|
 |[Elastik havuz etkinlikleri](/rest/api/sql/elasticpoolactivities)|Elastik havuz etkinliklerini döndürür.|
 |[Elastik havuz veritabanı etkinlikleri](/rest/api/sql/elasticpooldatabaseactivities)|Elastik havuzun içindeki veritabanları üzerinde etkinlik döndürür.|
 |[Veritabanları-oluştur veya güncelleştir](/rest/api/sql/databases/createorupdate)|Yeni bir veritabanı oluşturur veya var olan bir veritabanını güncelleştirir.|

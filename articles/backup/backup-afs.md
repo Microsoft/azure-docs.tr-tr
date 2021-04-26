@@ -3,12 +3,12 @@ title: Azure portal Azure dosya paylaşımlarını yedekleme
 description: Kurtarma Hizmetleri kasasındaki Azure dosya paylaşımlarını yedeklemek için Azure portal nasıl kullanacağınızı öğrenin
 ms.topic: conceptual
 ms.date: 01/20/2020
-ms.openlocfilehash: ca49f1ad48ab0534b27b91ad6a5a50b393cda782
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e7f44a71388468be432bdfcb0eb2bf67c0fcc8ef
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88890357"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519944"
 ---
 # <a name="back-up-azure-file-shares"></a>Azure dosya paylaşımlarını yedekleme
 
@@ -132,7 +132,7 @@ Aşağıdaki adımlarda, ilgili dosya paylaşımı bölmesinden ayrı dosya payl
        ![Yeni kasa oluştur](./media/backup-afs/create-new-vault.png)
 
       >[!IMPORTANT]
-      >Depolama hesabı bir kasayla kayıtlıysa veya korumaya çalıştığınız dosya paylaşımını barındıran depolama hesabı içinde birkaç korumalı paylaşım varsa, kurtarma hizmetleri kasasının adı önceden doldurulur ve [daha fazla bilgi edinin](backup-azure-files-faq.md#why-cant-i-change-the-vault-to-configure-backup-for-the-file-share).
+      >Depolama hesabı bir kasayla kayıtlıysa veya korumaya çalıştığınız dosya paylaşımını barındıran depolama hesabı içinde birkaç korumalı paylaşım varsa, kurtarma hizmetleri kasasının adı önceden doldurulur ve [daha fazla bilgi edinin](backup-azure-files-faq.yml#why-can-t-i-change-the-vault-to-configure-backup-for-the-file-share-).
 
 1. **Yedekleme ilkesi** seçimi için aşağıdakilerden birini yapın:
 

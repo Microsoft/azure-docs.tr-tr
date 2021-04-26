@@ -1,20 +1,20 @@
 ---
 title: JSON düzleştirme ve kaçış kuralları-Azure Time Series Insights Gen2 | Microsoft Docs
 description: Azure Time Series Insights Gen2 ' de JSON düzleştirme, kaçış ve dizi işleme hakkında bilgi edinin.
-author: lyrana
-ms.author: lyhughes
-manager: deepakpalled
+author: deepakpalled
+ms.author: dpalled
+manager: diviso
 ms.workload: big-data
 ms.service: time-series-insights
 services: time-series-insights
 ms.topic: conceptual
 ms.date: 01/21/2021
-ms.openlocfilehash: 9f768982e69f785c146f026040a91f7a63eef64c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b0ce3d2bdcb79fec4c032f44171ef6c91de47b9e
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98673460"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505442"
 ---
 # <a name="json-flattening-escaping-and-array-handling"></a>JSON Düzleştirme, Kaçış ve Dizi İşleme
 
@@ -151,7 +151,7 @@ Yukarıdaki yapılandırma ve yük, dört sütun ve altı olay üretecektir
 | `2020-01-22T16:38:09Z` |`9336971` | ``100231-A-A1`` | 20,560796 |
 | `2020-01-22T16:38:09Z` | `9336971` | ``100231-A-A9`` | 177 |
 | `2020-01-22T16:38:09Z` | `9336971` | ``100231-A-A8`` | 420 |
-| `2020-01-22T16:42:14Z` | `9336971` | ``100231-A-A7`` | -30,9918 |  
+| `2020-01-22T16:42:14Z` | `9336971` | ``100231-A-A7`` | -30,9918 |
 | `2020-01-22T16:42:14Z` | `9336971` | ``100231-A-A4`` | 19,960796 |
 
 ### <a name="example-c"></a>Örnek C
@@ -178,7 +178,7 @@ Zaman serisi KIMLIĞI ve zaman damgası nesne kökünde \
 **Parquet dosyasının sonucu:**\
 Yukarıdaki yapılandırma ve yük, üç sütun ve bir olay oluşturacak
 
-| timestamp  | id_string | datapoints_dynamic  
+| timestamp  | id_string | datapoints_dynamic
 | ---- | ---- | ---- |
 | `2020-11-01T10:00:00.000Z` | `800500054755`| ``[{"value": 120},{"value":124}]`` |
 

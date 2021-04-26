@@ -3,17 +3,16 @@ title: Veri akışlarını eşleme
 description: Azure Data Factory veri akışlarını eşleştirmeye genel bakış
 author: kromerm
 ms.author: makromer
-ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: references_regions
-ms.date: 12/10/2020
-ms.openlocfilehash: 1529d2d546227880fee71d1823482e040d2e57c1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/14/2021
+ms.openlocfilehash: 826183e09f2aa7f3f22ace8b5ce3e16767d49863
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103564329"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515670"
 ---
 # <a name="mapping-data-flows-in-azure-data-factory"></a>Azure Data Factory veri akışlarını eşleme
 
@@ -33,11 +32,11 @@ Veri akışları, işlem hatları ve veri kümeleri gibi fabrika kaynakları bö
 
 Bu eylem sizi, dönüşüm mantığınızı oluşturabileceğiniz veri akışı tuvaline götürür. Kaynak dönüştürmeyi yapılandırmaya başlamak için **Kaynak Ekle** ' yi seçin. Daha fazla bilgi için bkz. [kaynak dönüştürme](data-flow-source.md).
 
-## <a name="authoring-data-flows"></a>Veri akışları yazma
+## <a name="authoring-data-flows&quot;></a>Veri akışları yazma
 
 Eşleme veri akışı, dönüştürme mantığını kolayca oluşturmak için tasarlanan benzersiz bir yazma tuvaline sahiptir. Veri akışı tuvali üç parçaya ayrılmıştır: üst çubuk, grafik ve yapılandırma paneli. 
 
-![Ekran görüntüsünde, etiketli üst çubuk, grafik ve yapılandırma paneli ile veri akışı tuvali gösterilmektedir.](media/data-flow/canvas-1.png "Tuval")
+![Ekran görüntüsünde, etiketli üst çubuk, grafik ve yapılandırma paneli ile veri akışı tuvali gösterilmektedir.](media/data-flow/canvas-1.png &quot;Tuval")
 
 ### <a name="graph"></a>Graf
 
@@ -63,11 +62,11 @@ Her bir dönüşümün yapılandırma bölmesindeki ilk sekme, bu dönüştürme
 
 ![Ekran görüntüsü, Bölüm seçeneği, bölüm türü ve bölüm sayısı dahil en Iyileştirme sekmesini gösterir.](media/data-flow/optimize.png)
 
-#### <a name="inspect"></a>Bilgiyi
+#### <a name="inspect&quot;></a>Bilgiyi
 
 **İnceleme** sekmesi, dönüştürmakta olduğunuz veri akışının meta verilerine bir görünüm sağlar. Sütun sayılarını, değişen sütunları, eklenen sütunları, veri türlerini, sütun sırasını ve sütun başvurularını görebilirsiniz. **İnceleme** , meta verilerinizin salt okunurdur görünümüdür. **İnceleme** bölmesinde meta verileri görmek için hata ayıklama modunun etkin olması gerekmez.
 
-![Bilgiyi](media/data-flow/inspect1.png "Bilgiyi")
+![Bilgiyi](media/data-flow/inspect1.png &quot;Bilgiyi")
 
 Dönüşümlerinizi kullanarak verilerinizin şeklini değiştirirken, **İnceleme** bölmesinde meta veri değişiklikleri akışını görürsünüz. Kaynak dönüşümünüze tanımlı bir şema yoksa, veriler **İnceleme** bölmesinde görünmez. Şema DRFT senaryolarında meta verilerin bulunmaması yaygındır.
 
@@ -83,6 +82,10 @@ Hata ayıklama modu açık ise, **veri önizleme** sekmesi her dönüşümde ver
 
 Kullanılabilir dönüşümlerinin bir listesini almak için [eşleme veri akışı dönüşümüne genel bakış ' ı](data-flow-transformation-overview.md) görüntüleyin.
 
+## <a name="data-flow-data-types"></a>Veri akışı veri türleri
+
+dizi ikili Boolean karmaşık ondalık Tarih kayan tamsayı Long Map kısa dize zaman damgası
+
 ## <a name="data-flow-activity"></a>Veri akışı etkinliği
 
 Veri [akışı etkinliğini](control-flow-execute-data-flow-activity.md)kullanan ADF işlem hatları içinde veri akışlarını eşleme işlemleri yapılır. Tüm kullanıcılar yapması gereken tümleştirme çalışma zamanının parametre değerlerini ne şekilde kullanacağınızı ve geçisyonunu belirtir. Daha fazla bilgi için [Azure tümleştirme çalışma zamanı](concepts-integration-runtime.md#azure-integration-runtime)hakkında bilgi edinin.
@@ -97,13 +100,14 @@ Eşleme veri akışı, mevcut Azure Data Factory izleme özellikleri ile tümle�
 
 Azure Data Factory ekibi, iş mantığınızı oluşturduktan sonra veri akışlarınızın yürütme süresini iyileştirmenize yardımcı olmak için bir [performans ayarlama Kılavuzu](concepts-data-flow-performance.md) oluşturdu.
 
+
 ## <a name="available-regions"></a>Kullanılabilir bölgeler
 
-= = = = = = = Eşleme veri akışları, ADF içinde aşağıdaki bölgelerde kullanılabilir:
+Veri akışlarını eşleme, ADF içinde aşağıdaki bölgelerde kullanılabilir:
 
 | Azure bölgesi | ADF 'de veri akışları |
 | ------------ | ----------------- |
-|  Orta Avustralya | |
+| Orta Avustralya | |
 | Orta Avustralya 2 | |
 | Doğu Avustralya | ✓ |
 | Güneydoğu Avustralya   | ✓ |
@@ -114,8 +118,8 @@ Azure Data Factory ekibi, iş mantığınızı oluşturduktan sonra veri akışl
 | Doğu Çin |      |
 | Çin Doğu 2  |   |
 | Çin bölgesel olmayan | |
-| Kuzey Çin |     |
-| Çin Kuzey 2 | |
+| Kuzey Çin | ✓ |
+| Çin Kuzey 2 | ✓ |
 | Doğu Asya | ✓ |
 | Doğu ABD   | ✓ |
 | Doğu ABD 2 | ✓ |
@@ -132,7 +136,7 @@ Azure Data Factory ekibi, iş mantığınızı oluşturduktan sonra veri akışl
 | Güney Kore - Güney | |
 | Orta Kuzey ABD  | ✓ |
 | Kuzey Avrupa  | ✓ |
-| Norveç Doğu | |
+| Norveç Doğu | ✓ |
 | Norveç Batı | |
 | Güney Afrika - Kuzey    | ✓ |
 | Güney Afrika - Batı |  |
@@ -142,15 +146,15 @@ Azure Data Factory ekibi, iş mantığınızı oluşturduktan sonra veri akışl
 | İsviçre Kuzey |   |
 | İsviçre Batı | |
 | BAE Orta | |
-| BAE Kuzey |  |
+| BAE Kuzey | ✓ |
 | Güney Birleşik Krallık  | ✓ |
 | Batı Birleşik Krallık |     |
 | Orta US DoD | |
 | Doğu US DoD | |
-| US Gov Arizona |      |
+| US Gov Arizona | ✓ |
 | US Gov Bölgesel Olmayan | |
 | US Gov Texas | |
-| US Gov Virginia |     |
+| US Gov Virginia | ✓ |
 | Orta Batı ABD |     |
 | West Europe   | ✓ |
 | Batı Hindistan | |

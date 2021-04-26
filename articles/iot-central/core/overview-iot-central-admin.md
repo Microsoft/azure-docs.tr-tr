@@ -1,19 +1,19 @@
 ---
 title: Azure IoT Central Yönetici Kılavuzu
 description: Azure IoT Central, IoT çözümlerinin oluşturulmasını kolaylaştıran bir IoT uygulama platformudur. Bu makale IoT Central içindeki yönetici rolüne genel bir bakış sağlar.
-author: TheJasonAndrew
-ms.author: v-anjaso
+author: philmea
+ms.author: philmea
 ms.date: 03/25/2021
 ms.topic: conceptual
 ms.service: iot-central
 services: iot-central
 ms.custom: mvc
-ms.openlocfilehash: 16a8aecae70d73399acb3878d7088e5086c053a1
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 658ebe027565a3acaf427a7b3dbf3963701069d8
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105110500"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868654"
 ---
 # <a name="iot-central-administrator-guide"></a>IoT Central Yönetici Kılavuzu
 

@@ -8,13 +8,14 @@ author: mgoedtel
 ms.author: magoedte
 ms.date: 08/01/2018
 ms.topic: conceptual
+ms.custom: devx-track-azurepowershell
 manager: carmonm
-ms.openlocfilehash: 8d6b786ffaf309e147de27e8cd8be314a3d8a5fb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 296d45fae4d59553b54a1b68923c91be4168d3a5
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98896995"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829395"
 ---
 # <a name="edit-textual-runbooks-in-azure-automation"></a>Azure Automation 'da metin runbook 'larını düzenleme
 

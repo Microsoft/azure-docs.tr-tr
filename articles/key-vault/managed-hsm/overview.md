@@ -7,19 +7,19 @@ ms.service: key-vault
 ms.subservice: managed-hsm
 ms.topic: overview
 ms.custom: mvc
-ms.date: 09/15/2020
+ms.date: 04/01/2021
 ms.author: mbaldwin
 author: msmbaldwin
-ms.openlocfilehash: 95feeebf009cae22cf3952df80596c12e75cbe4b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a9df83535bf0ee7a6c484a7682392d2ad0ef59f7
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94357581"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815333"
 ---
-# <a name="what-is-azure-key-vault-managed-hsm-preview"></a>Azure Key Vault Managed HSM (Önizleme) nedir?
+# <a name="what-is-azure-key-vault-managed-hsm"></a>Azure Key Vault Yönetilen HSM nedir?
 
-Azure Key Vault yönetilen HSM, **fıps 140-2 düzey 3** tarafından doğrulanan HSM 'leri kullanarak bulut uygulamalarınızın şifreleme anahtarlarını korumanıza olanak sağlayan, tam olarak yönetilen, yüksek oranda kullanılabilir, tek kiracılı ve standartlara uygun bir bulut hizmetidir.  
+Azure Key Vault yönetilen HSM, **fıps 140-2 düzey 3** tarafından doğrulanan HSM 'leri kullanarak bulut uygulamalarınızın şifreleme anahtarlarını korumanıza olanak sağlayan, tam olarak yönetilen, yüksek oranda kullanılabilir, tek kiracılı ve standartlara uygun bir bulut hizmetidir. Fiyatlandırma bilgileri için lütfen [Azure Key Vault fiyatlandırma sayfasında](https://azure.microsoft.com/pricing/details/key-vault/)yönetilen HSM havuzları bölümüne bakın. 
 
 ## <a name="why-use-managed-hsm"></a>Neden yönetilen HSM kullanmalıyım?
 
@@ -36,6 +36,7 @@ Azure Key Vault yönetilen HSM, **fıps 140-2 düzey 3** tarafından doğrulanan
 - **Yalıtılmış erişim denetimi**: yönetilen HSM "yerel RBAC" erişim denetimi modeli, belirlenen HSM küme yöneticilerinin, yönetim grubu, abonelik veya kaynak grubu yöneticilerinin geçersiz kılınamamasına karşın, hsms üzerinde tamamen denetime sahip olmasını sağlar.
 - **Fıps 140-2 düzey 3 doğrulanan HSM**'ler: FIPS ((Federal Information Protection standart)) 140-2 düzey 3 tarafından doğrulanan HSM 'lerle verilerinizi koruyun ve uyumluluk gereksinimlerini karşılayın. Yönetilen HSM 'ler, Marvell LiquidSecurity HSM bağdaştırıcılarını kullanır.
 - **İzleme ve denetim**: Azure izleyici ile tam olarak tümleşik. Tüm etkinliklerin Azure Izleyici aracılığıyla tüm günlüklerini alın. Analiz ve uyarılar için Azure Log Analytics kullanın.
+- **Veri** yerleşimi: yönetilen HSM, müşteri VERILERINI müşterinin HSM örneğini dağıttığı bölge dışında depolamaz/işlemez.
 
 ### <a name="integrated-with-azure-and-microsoft-paassaas-services"></a>Azure ve Microsoft PaaS/SaaS hizmetleriyle tümleşik 
 

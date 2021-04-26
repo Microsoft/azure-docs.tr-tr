@@ -10,15 +10,12 @@ ms.service: security
 ms.subservice: security-develop
 services: azure
 ms.assetid: 521180dc-2cc9-43f1-ae87-2701de7ca6b8
-ms.devlang: na
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.openlocfilehash: 743412b7602e5781911cdf190e41a5ee15bfddd4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 9e5246edd2d6490e823bacbdfff0f60ef553878b
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96487686"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105729142"
 ---
 # <a name="design-secure-applications-on-azure"></a>Azure 'da güvenli uygulamalar tasarlama
 Bu makalede, bulut için uygulama tasarlarken göz önünde bulundurmanız gereken güvenlik etkinlikleri ve denetimler sunuyoruz. Microsoft [güvenlik geliştirme yaşam döngüsü (SDL)](/previous-versions/windows/desktop/cc307891(v=msdn.10)) gereksinimleri ve tasarım aşamaları sırasında göz önünde bulundurmanız gereken güvenlik sorularıyla ve kavramların yanı sıra eğitim kaynakları da ele alınmıştır. Amaç, daha güvenli bir uygulama tasarlamak için kullanabileceğiniz etkinlikleri ve Azure hizmetlerini tanımlamanıza yardımcı olmaktır.
@@ -153,7 +150,7 @@ Uygulama tasarımını modelleme ve [ilerleme](https://docs.google.com/viewer?a=
 
 | Tehdit | Güvenlik özelliği | Olası Azure platformu risk azaltma |
 | ---------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Spoofing (Kimlik Sahtekarlığı)               | Kimlik Doğrulaması        | [HTTPS bağlantıları gerektir](/aspnet/core/security/enforcing-ssl?tabs=visual-studio&view=aspnetcore-2.1). |
+| Spoofing (Kimlik Sahtekarlığı)               | Kimlik Doğrulaması        | [HTTPS bağlantıları gerektir](/aspnet/core/security/enforcing-ssl?tabs=visual-studio). |
 | Tampering (Kurcalama)              | Bütünlük             | SSL/TLS sertifikalarını doğrulayın. SSL/TLS kullanan uygulamaların, bağlandıkları varlıkların X. 509.440 sertifikalarını tam olarak doğrulaması gerekir. [X509 sertifikalarınızı yönetmek](../../key-vault/general/about-keys-secrets-certificates.md)için Azure Key Vault sertifikaları kullanın. |
 | Repudiation (İnkar)            | İnkar edilemez       | Azure [izleme ve tanılama 'yı](/azure/architecture/best-practices/monitoring)etkinleştirin.|
 | Information Disclosure (Bilgilerin Açığa Çıkması) | Gizlilik       | REST ve iletim [sırasında](../fundamentals/encryption-atrest.md) hassas verileri [](../fundamentals/data-encryption-best-practices.md#protect-data-in-transit)şifreleyin. |
@@ -233,7 +230,7 @@ Ayrıcalıkların etkilenme süresini daha da azaltmak için *tam zamanında* (J
 
 ### <a name="require-re-authentication-for-important-transactions"></a>Önemli işlemler için yeniden kimlik doğrulaması gerektir
 
-[Siteler arası istek sahteciliği](/aspnet/core/security/anti-request-forgery?view=aspnetcore-2.1) ( *XSRF* veya *CSRF* olarak da bilinir), kötü amaçlı bir Web uygulamasının, bir istemci tarayıcısı ile bu tarayıcıya güvenen bir Web uygulaması arasındaki etkileşimi etkilediği Web 'de barındırılan uygulamalara karşı bir saldırıya karşı bir saldırıdır. Web tarayıcıları her bir Web sitesi isteğiyle otomatik olarak bazı tür kimlik doğrulama belirteçleri göndertiğinden, siteler arası istek sahteciliği saldırıları mümkündür.
+[Siteler arası istek sahteciliği](/aspnet/core/security/anti-request-forgery) ( *XSRF* veya *CSRF* olarak da bilinir), kötü amaçlı bir Web uygulamasının, bir istemci tarayıcısı ile bu tarayıcıya güvenen bir Web uygulaması arasındaki etkileşimi etkilediği Web 'de barındırılan uygulamalara karşı bir saldırıya karşı bir saldırıdır. Web tarayıcıları her bir Web sitesi isteğiyle otomatik olarak bazı tür kimlik doğrulama belirteçleri göndertiğinden, siteler arası istek sahteciliği saldırıları mümkündür.
 Bu kullanım biçimi, *tek tıklamayla saldırı* veya *oturum* , saldırı Kullanıcı tarafından daha önce kimliği doğrulanan oturumdan yararlandığından, bir tıklama olarak da bilinir.
 
 Bu tür bir saldırıya karşı savunmanız gereken en iyi yol, kullanıcıdan satın alma, hesap devre dışı bırakma veya parola değişikliği gibi her önemli işlemden önce yalnızca kullanıcının sağlayabileceği bir şeyi ister. Kullanıcıdan parolasını yeniden girmesi, CAPTCHA 'yı tamamlaması veya yalnızca kullanıcının sahip olacağı bir gizli belirteç gönderebilmesini isteyebilirsiniz. En yaygın yaklaşım, gizli belirteçtir.
@@ -303,7 +300,7 @@ Aşağıdakileri doğrulayın:
 
 ### <a name="use-logging-and-alerting"></a>Günlüğe kaydetme ve uyarı kullanma
 
-Güvenlik araştırmalarınızın güvenlik sorunlarını [günlüğe kaydedin](/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1) ve kişilerin sorunları zamanında bilmesini sağlamak için sorunlar hakkında uyarı tetikleyin. Tüm bileşenlerde denetim ve günlüğe kaydetmeyi etkinleştirin. Denetim günlükleri kullanıcı bağlamını yakalayıp tüm önemli olayları tanımlamalıdır.
+Güvenlik araştırmalarınızın güvenlik sorunlarını [günlüğe kaydedin](/aspnet/core/fundamentals/logging/) ve kişilerin sorunları zamanında bilmesini sağlamak için sorunlar hakkında uyarı tetikleyin. Tüm bileşenlerde denetim ve günlüğe kaydetmeyi etkinleştirin. Denetim günlükleri kullanıcı bağlamını yakalayıp tüm önemli olayları tanımlamalıdır.
 
 Kullanıcının sitenize gönderdiği gizli verileri günlüğe kaydetme izniniz olup olmadığını denetleyin. Hassas verilere örnek olarak şunlar verilebilir:
 

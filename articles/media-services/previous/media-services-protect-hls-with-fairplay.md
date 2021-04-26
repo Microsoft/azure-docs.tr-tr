@@ -14,12 +14,12 @@ ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 15aab28b7dfbaf305412f1080346b54cc6827437
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 870b567d5917c405a3eef70a27b1a19c021d7a80
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103009649"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106055153"
 ---
 # <a name="protect-your-hls-content-with-apple-fairplay-or-microsoft-playready"></a>Apple FairPlay veya Microsoft PlayReady ile HLS içeriğinizi koruma
 
@@ -33,7 +33,7 @@ Azure Media Services, aşağıdaki biçimleri kullanarak HTTP Canlı Akışı (H
 
 * **AES-128 zarfı şifresiz anahtar**
 
-    Tüm öbek, **AES-128 CBC** modu kullanılarak şifrelenir. Akışın şifresinin çözülmesi iOS ve OS X Player tarafından yerel olarak desteklenir. Daha fazla bilgi için bkz. [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-protect-with-aes128.md).
+    Tüm öbek, **AES-128 CBC** modu kullanılarak şifrelenir. Akışın şifresinin çözülmesi iOS ve OS X Player tarafından yerel olarak desteklenir. Daha fazla bilgi için bkz. [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-playready-license-template-overview.md).
 * **Apple FairPlay**
 
     Tek tek video ve ses örnekleri **AES-128 CBC** modu kullanılarak şifrelenir. **Fairplay streaming** (fps), IOS ve Apple TV 'de yerel destek ile cihaz işletim sistemleriyle tümleşiktir. OS X üzerinde Safari, şifreli Medya Uzantıları (EME) arabirimi desteğini kullanarak FPS 'yi sunar.

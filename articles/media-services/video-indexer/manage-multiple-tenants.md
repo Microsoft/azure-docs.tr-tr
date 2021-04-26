@@ -13,12 +13,12 @@ ms.topic: article
 ms.custom: ''
 ms.date: 05/15/2019
 ms.author: ikbarmen
-ms.openlocfilehash: 18f2cf3daa281400151ba223e1735e7138d97e8e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 7596aa4cef6c4bc601c15018e8ede4265f395eb7
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "76990513"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312867"
 ---
 # <a name="manage-multiple-tenants"></a>Birden çok kiracıyı yönetme
 
@@ -45,7 +45,7 @@ Bu mimariyi kullanırken her kiracı için bir Video Indexer hesabı oluşturulu
 * Kiracı başına birden çok Video Indexer (ve ilişkili Media Services) hesabı nedeniyle yönetimi daha zordur.
 
 > [!TIP]
-> [Video Indexer Geliştirici Portalında](https://api-portal.videoindexer.ai/) sisteminiz için yönetici kullanıcı oluşturun ve kiracılar ilgili [hesap erişim belirtecini](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Account-Access-Token)sağlamak için yetkilendirme API 'sini kullanın.
+> [Video Indexer Geliştirici Portalında](https://api-portal.videoindexer.ai/) sisteminiz için yönetici kullanıcı oluşturun ve kiracılar ilgili [hesap erişim belirtecini](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Account-Access-Token)sağlamak için yetkilendirme API 'sini kullanın.
 
 ## <a name="single-video-indexer-account-for-all-users"></a>Tüm kullanıcılar için tek Video Indexer hesabı
 
@@ -55,7 +55,7 @@ Bu mimari kullanılırken, müşteri kiracılar yalıtımıyla sorumludur. Tüm 
 
 Bu seçenekle, modelleri kiracıya göre filtreleyerek, özelleştirme modelleri (kişi, dil ve markalar) kiracılar arasında paylaşılabilir veya yalıtılabilir.
 
-[Videoları karşıya yüklerken](https://api-portal.videoindexer.ai/docs/services/operations/operations/Upload-video?), her kiracı için farklı bir bölüm özniteliği belirtebilirsiniz. Bu, [Arama API](https://api-portal.videoindexer.ai/docs/services/operations/operations/Search-videos?)'sinde yalıtımına izin verir. Arama API 'sindeki bölüm özniteliğini belirterek yalnızca belirtilen bölümün sonuçlarını elde edersiniz. 
+[Videoları karşıya yüklerken](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Upload-Video), her kiracı için farklı bir bölüm özniteliği belirtebilirsiniz. Bu, [Arama API](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Search-Videos)'sinde yalıtımına izin verir. Arama API 'sindeki bölüm özniteliğini belirterek yalnızca belirtilen bölümün sonuçlarını elde edersiniz. 
 
 ### <a name="considerations"></a>Dikkat edilmesi gerekenler
 

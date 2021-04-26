@@ -109,7 +109,7 @@
                 - name: SharePoint Online’a
                   href: /sharepointmigration/how-to-migrate-file-share-content-to-spo-using-azuredatabox?context=%2fazure%2fdatabox%2fcontext%2fcontext
                 - name: Azure Dosya Eşitleme’ye
-                  href: ../storage/files/storage-sync-offline-data-transfer.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
+                  href: ../storage/file-sync/file-sync-offline-data-transfer.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
                 - name: HDFS Mağazası’ndan
                   href: ../storage/blobs/data-lake-storage-migrate-on-premises-hdfs-cluster.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
                 - name: Azure Backup’a
@@ -232,13 +232,13 @@
                 - name: SharePoint Online’a
                   href: data-box-heavy-migrate-spo.md
                 - name: Azure Dosya Eşitleme’ye
-                  href: ../storage/files/storage-sync-offline-data-transfer.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
+                  href: ../storage/file-sync/file-sync-offline-data-transfer.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
                 - name: HDFS Mağazası’ndan
                   href: ../storage/blobs/data-lake-storage-migrate-on-premises-hdfs-cluster.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
     - name: Başvuru
       items:
-        - name: Azure CLI’si
-          href: /cli/azure/ext/databox/databox
+        - name: Azure CLI
+          href: /cli/azure/databox
         - name: Azure PowerShell
           href: /powershell/module/az.databox
         - name: .NET API'ları

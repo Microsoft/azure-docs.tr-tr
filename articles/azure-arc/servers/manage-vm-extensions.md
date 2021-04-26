@@ -1,14 +1,14 @@
 ---
 title: Azure Arc etkin sunucularıyla VM Uzantısı yönetimi
 description: Azure Arc etkin sunucuları, Azure olmayan VM 'lerle dağıtım sonrası yapılandırma ve otomasyon görevleri sağlayan sanal makine uzantılarının dağıtımını yönetebilir.
-ms.date: 03/22/2021
+ms.date: 04/13/2021
 ms.topic: conceptual
-ms.openlocfilehash: 9af2700f036352188e646188485285482ee70c69
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: e28cd7753fc85f2e40385c65392fea73502aa05b
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104799590"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832851"
 ---
 # <a name="virtual-machine-extension-management-with-azure-arc-enabled-servers"></a>Azure Arc özellikli sunucularla sanal makine uzantısı yönetimi
 
@@ -21,13 +21,16 @@ Azure yay özellikli sunucular, Azure VM uzantılarını Azure olmayan Windows v
 - [Azure PowerShell](manage-vm-extensions-powershell.md)
 - Azure [Kaynak Yöneticisi şablonları](manage-vm-extensions-template.md)
 
+> [!NOTE]
+> Azure yay özellikli sunucular, VM uzantılarının Azure sanal makinelerine dağıtılmasını ve yönetilmesini desteklemez. Azure VM 'Leri için aşağıdaki [VM uzantısına genel bakış](../../virtual-machines/extensions/overview.md) makalesine bakın.
+
 ## <a name="key-benefits"></a>Önemli avantajlar
 
 Azure Arc etkin sunucuları VM uzantısı desteği aşağıdaki önemli avantajları sağlar:
 
 - Log Analytics Aracısı VM uzantısını etkinleştirerek [Azure izleyici 'de Günlükler](../../azure-monitor/logs/data-platform-logs.md) ile analizler için günlük verileri toplayın. Bu, farklı türdeki kaynaklardaki veriler arasında karmaşık analizler yapmak için yararlıdır.
 
-- [VM'ler için Azure izleyici](../../azure-monitor/vm/vminsights-overview.md), Windows ve Linux sanal makinelerinizin performansını analiz eder ve diğer kaynaklardaki ve dış süreçlerdeki işlem ve bağımlılıklarını izler. Bu, hem Log Analytics Aracısı hem de bağımlılık Aracısı VM uzantılarını etkinleştirerek elde edilir.
+- [VM öngörüleri](../../azure-monitor/vm/vminsights-overview.md)sayesinde, Windows ve Linux sanal makinelerinizin performansını analiz eder ve diğer kaynaklardaki ve dış süreçlerdeki işlemleri ve bağımlılıklarını izler. Bu, hem Log Analytics Aracısı hem de bağımlılık Aracısı VM uzantılarını etkinleştirerek elde edilir.
 
 - Özel Betik uzantısını kullanarak karma bağlantılı makinelerde komut dosyalarını indirip yürütün. Bu uzantı, dağıtım sonrası yapılandırma, yazılım yükleme veya başka herhangi bir yapılandırma ya da yönetim görevi için yararlıdır.
 

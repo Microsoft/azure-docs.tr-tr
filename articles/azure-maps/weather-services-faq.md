@@ -1,6 +1,6 @@
 ---
-title: Microsoft Azure Maps Hava durumu Hizmetleri (Önizleme) sık sorulan sorular (SSS)
-description: Azure Maps Hava durumu Hizmetleri (Önizleme) verileri ve özellikleri hakkında sık sorulan soruların yanıtını bulun.
+title: Microsoft Azure Maps Hava durumu Hizmetleri sık sorulan sorular (SSS)
+description: Azure haritalar hava hizmeti verileri ve özellikleri hakkında sık sorulan soruların yanıtını bulun.
 author: anastasia-ms
 ms.author: v-stharr
 ms.date: 12/07/2020
@@ -8,18 +8,14 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 9c8e971b4fda313ffede58455dd6d057d6848ce4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 440ff94f4d5f3514d97d3e76299b60e462cebff3
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98678138"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257560"
 ---
-# <a name="azure-maps-weather-services-preview-frequently-asked-questions-faq"></a>Azure haritalar Hava durumu Hizmetleri (Önizleme) sık sorulan sorular (SSS)
-
-> [!IMPORTANT]
-> Azure haritalar Hava durumu Hizmetleri şu anda genel önizlemededir.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+# <a name="azure-maps-weather-services-frequently-asked-questions-faq"></a>Azure haritalar Hava durumu Hizmetleri sık sorulan sorular (SSS)
 
 Bu makalede, Azure Maps [Hava durumu Hizmetleri](/rest/api/maps/weather) veri ve özellikleriyle ilgili yaygın soruların yanıtları yer almamaktadır. Aşağıdaki konular ele alınmıştır:
 
@@ -55,7 +51,7 @@ Bu veri kümeleri, her zaman en son verileri dahil etmek ve bu sayede sürekli d
 
 Genel tahminleri formülleştirmek için çok sayıda hava durumu tahmin Kılavuzu sistemi kullanılır. 150 ' den fazla sayısal tahmin modeli, her gün hem dış hem de iç veri kümelerinde kullanılır. Bu, Avrupa Centre ECMWF ve ABD küresel tahmin sistemi (GFS) gibi kamu modellerini içerir. Ayrıca, Accuhava durumu, tahminleri daha fazla doğrulukla tahmin etmek için belirli konumlara ve stratejik bölgesel etki alanlarına yönelik tahminleri ölçekleyen özel yüksek çözünürlüklü modeller içerir. Accuhava durumu 'nın benzersiz karıştırma ve ağırlık algoritmaları, son birkaç Decades üzerinde geliştirilmiştir. Bu algoritmalar, yüksek oranda doğru tahminler sağlamak için çok sayıda tahmin girişi en iyi şekilde yararlanır.
 
-## <a name="weather-services-preview-coverage-and-availability"></a>Hava durumu Hizmetleri (Önizleme) kapsamı ve kullanılabilirliği
+## <a name="weather-services-coverage-and-availability"></a>Hava durumu Hizmetleri kapsamı ve kullanılabilirliği
 
 **Farklı ülkeler/bölgeler için ne tür bir kapsama bekleyebilir?**
 
@@ -77,11 +73,11 @@ Azure haritalar tahmin API 'Leri, 30 dakikaya kadar önbelleğe alınır. Önbel
 
 ## <a name="developing-with-azure-maps-sdks"></a>Azure Haritalar SDK 'Ları ile geliştirme
 
-**Azure Haritalar Web SDK 'Sı, hava durumu Hizmetleri (Önizleme) tümleştirmesini yerel olarak destekliyor mu?**
+**Azure Haritalar Web SDK 'Sı, hava durumu Hizmetleri tümleştirmesini yerel olarak destekliyor mu?**
 
 Azure Haritalar Web SDK 'Sı bir hizmet modülü sağlar. Hizmetler modülü, Web veya Node.js uygulamalarında Azure Maps REST hizmetlerini kullanmayı kolaylaştıran bir yardımcı kitaplıktır. JavaScript veya TypeScript kullanarak. Başlamak için [belgelerimizi](./how-to-use-services-module.md)inceleyin.
 
-**Azure Maps, doğal olarak, hava durumu Hizmetleri (Önizleme) tümleştirmesini Android SDK.**
+**Azure haritalar, hava durumu Hizmetleri tümleştirmesini yerel olarak destekliyor Android SDK?**
 
 Azure Haritalar Android SDK 'Ları, x/y/zoom gösterimi, dörtlü anahtar gösterimi veya EPSG 3857 sınırlayıcı kutusu gösterimine sahip olabilen Mercator kutucuk katmanlarını destekler.
 
@@ -103,7 +99,7 @@ Evet. Gerçek zamanlı radar ve uydu kutucuklarına ek olarak, Azure Maps müşt
 
 **Farklı hava durumu koşullarına yönelik simgeler sunuyoruz misiniz?**
 
-Evet. Simgeleri ve ilgili kodlarını [burada](./weather-services-concepts.md#weather-icons)bulabilirsiniz. [Geçerli koşulları Al API 'si](/rest/api/maps/weather/getcurrentconditionspreview)gibi bazı hava durumu hizmeti (Önizleme) API 'lerinin, yanıtta *ICODE* 'u döndürtiğine dikkat edin. Daha fazla bilgi için bkz. geçerli dalgalı koşullar açık kaynak [kodu örneği](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Get%20current%20weather%20at%20a%20location).
+Evet. Simgeleri ve ilgili kodlarını [burada](./weather-services-concepts.md#weather-icons)bulabilirsiniz. [Geçerli koşulları Al API 'si](/rest/api/maps/weather/getcurrentconditions)gibi bazı hava durumu hizmeti (Önizleme) API 'lerinin, yanıtta *ICODE* 'u döndürtiğine dikkat edin. Daha fazla bilgi için bkz. geçerli dalgalı koşullar açık kaynak [kodu örneği](https://azuremapscodesamples.azurewebsites.net/index.html?sample=Get%20current%20weather%20at%20a%20location).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -114,15 +110,15 @@ Bu SSS sorunuzu yanıtmazsa, aşağıdaki kanallarda (yürüyen sırada) bizimle
 * Microsoft Desteği. Yeni bir destek isteği oluşturmak için, [Azure Portal](https://portal.azure.com/)yardım sekmesinde **Yardım +** destek düğmesini seçin ve ardından **Yeni destek isteği**' ni seçin.
 * Azure, özellik isteklerini gönderecek şekilde [UserVoice haritaları](https://feedback.azure.com/forums/909172-azure-maps) .
 
-Azure haritalar Hava durumu Hizmetleri 'ni (Önizleme) kullanarak gerçek zamanlı ve tahmini hava durumu verileri isteme hakkında bilgi edinin:
+Azure haritalar Hava durumu hizmetlerini kullanarak gerçek zamanlı ve tahmini hava durumu verileri isteme hakkında bilgi edinin:
 > [!div class="nextstepaction"]
 > [Gerçek zamanlı hava durumu verileri iste ](how-to-request-weather-data.md)
 
-Azure haritalar Hava durumu Hizmetleri (Önizleme) kavramları makalesi:
+Azure haritalar Hava durumu Hizmetleri kavramları makalesi:
 > [!div class="nextstepaction"]
 > [Hava durumu hizmetleriyle ilgili kavramlar](weather-coverage.md)
 
-Azure Maps Hava durumu Hizmetleri (Önizleme) API belgelerini inceleyin:
+Azure haritalar Hava durumu Hizmetleri API 'SI belgelerini inceleyin:
 
 > [!div class="nextstepaction"]
 > [Azure Haritalar Hava durumu hizmetleri](/rest/api/maps/weather)

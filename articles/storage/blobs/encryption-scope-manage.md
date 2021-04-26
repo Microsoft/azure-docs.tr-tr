@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.author: tamram
 ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: c29282637f6854248c98dff59f8fae46ad1a9d39
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 656443b0bc9d0e45f43634b1b4c21145de7a5bb5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640539"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792552"
 ---
 # <a name="create-and-manage-encryption-scopes"></a>Şifreleme kapsamları oluşturma ve yönetme
 
@@ -111,7 +111,7 @@ Azure CLı ile bir şifreleme kapsamı oluşturmak için önce Azure CLı sürü
 
 ### <a name="create-an-encryption-scope-protected-by-microsoft-managed-keys"></a>Microsoft tarafından yönetilen anahtarlarla korunan bir şifreleme kapsamı oluşturun
 
-Microsoft tarafından yönetilen anahtarlarla korunan yeni bir şifreleme kapsamı oluşturmak için, parametresini olarak belirterek [az Storage Account ENCRYPTION Create](/cli/azure/storage/account/encryption-scope#az-storage-account-encryption-scope-create) komutunu çağırın `--key-source` `Microsoft.Storage` . Yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
+Microsoft tarafından yönetilen anahtarlarla korunan yeni bir şifreleme kapsamı oluşturmak için, parametresini olarak belirterek [az Storage Account ENCRYPTION Create](/cli/azure/storage/account/encryption-scope#az_storage_account_encryption_scope_create) komutunu çağırın `--key-source` `Microsoft.Storage` . Yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 
 ```azurecli-interactive
 az storage account encryption-scope create \
@@ -123,7 +123,7 @@ az storage account encryption-scope create \
 
 ### <a name="create-an-encryption-scope-protected-by-customer-managed-keys"></a>Müşteri tarafından yönetilen anahtarlarla korunan bir şifreleme kapsamı oluşturun
 
-Microsoft tarafından yönetilen anahtarlarla korunan yeni bir şifreleme kapsamı oluşturmak için, parametresini olarak belirterek [az Storage Account ENCRYPTION Create](/cli/azure/storage/account/encryption-scope#az-storage-account-encryption-scope-create) komutunu çağırın `--key-source` `Microsoft.Storage` . Yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
+Microsoft tarafından yönetilen anahtarlarla korunan yeni bir şifreleme kapsamı oluşturmak için, parametresini olarak belirterek [az Storage Account ENCRYPTION Create](/cli/azure/storage/account/encryption-scope#az_storage_account_encryption_scope_create) komutunu çağırın `--key-source` `Microsoft.Storage` . Yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 
 Bir anahtar kasasında veya yönetilen HSM 'de müşteri tarafından yönetilen anahtarlarla korunan yeni bir şifreleme kapsamı oluşturmak için önce depolama hesabı için müşteri tarafından yönetilen anahtarları yapılandırın. Depolama hesabına yönetilen bir kimlik atamanız ve ardından, depolama hesabının bu hesaba erişim izinleri olması için Anahtar Kasası için erişim ilkesini yapılandırmak üzere yönetilen kimliği kullanmanız gerekir. Daha fazla bilgi için bkz. [Azure depolama şifrelemesi Için müşteri tarafından yönetilen anahtarlar](../common/customer-managed-keys-overview.md).
 
@@ -202,7 +202,7 @@ Get-AzStorageAccount -ResourceGroupName $rgName | Get-AzStorageEncryptionScope
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/cli)
 
-Azure CLı ile bir depolama hesabı için kullanılabilen şifreleme kapsamlarını listelemek için [az Storage Account ENCRYPTION List](/cli/azure/storage/account/encryption-scope#az-storage-account-encryption-scope-list) komutunu çağırın. Örnekteki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
+Azure CLı ile bir depolama hesabı için kullanılabilen şifreleme kapsamlarını listelemek için [az Storage Account ENCRYPTION List](/cli/azure/storage/account/encryption-scope#az_storage_account_encryption_scope_list) komutunu çağırın. Örnekteki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 
 ```azurecli-interactive
 az storage account encryption-scope list \
@@ -246,7 +246,7 @@ New-AzStorageContainer -Name $containerName1 `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/cli)
 
-Azure CLı ile varsayılan şifreleme kapsamıyla bir kapsayıcı oluşturmak için, parametresinin kapsamını belirterek [az Storage Container Create](/cli/azure/storage/container#az-storage-container-create) komutunu çağırın `--default-encryption-scope` . Bir kapsayıcıdaki tüm Blobları kapsayıcının varsayılan kapsamını kullanacak şekilde zorlamak için `--prevent-encryption-scope-override` parametresini olarak ayarlayın `true` .
+Azure CLı ile varsayılan şifreleme kapsamıyla bir kapsayıcı oluşturmak için, parametresinin kapsamını belirterek [az Storage Container Create](/cli/azure/storage/container#az_storage_container_create) komutunu çağırın `--default-encryption-scope` . Bir kapsayıcıdaki tüm Blobları kapsayıcının varsayılan kapsamını kullanacak şekilde zorlamak için `--prevent-encryption-scope-override` parametresini olarak ayarlayın `true` .
 
 Aşağıdaki örnek, kapsayıcıyı oluşturma işlemini yetkilendirmek için Azure AD hesabınızı kullanır. Hesap erişim anahtarını da kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure CLI ile blob veya kuyruk verilerine erişim yetkisi verme](./authorize-data-operations-cli.md).
 
@@ -303,7 +303,7 @@ Set-AzStorageBlobContent -Context $ctx `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/cli)
 
-Azure CLı aracılığıyla bir şifreleme kapsamına sahip bir blobu karşıya yüklemek için [az Storage blob upload](/cli/azure/storage/blob#az-storage-blob-upload) komutunu çağırın ve BLOB için şifreleme kapsamını belirtin.
+Azure CLı aracılığıyla bir şifreleme kapsamına sahip bir blobu karşıya yüklemek için [az Storage blob upload](/cli/azure/storage/blob#az_storage_blob_upload) komutunu çağırın ve BLOB için şifreleme kapsamını belirtin.
 
 Azure Cloud Shell kullanıyorsanız, kök dizinde bir dosya oluşturmak için [blobu karşıya yükleme](storage-quickstart-blobs-cli.md#upload-a-blob) bölümünde açıklanan adımları izleyin. Ardından, aşağıdaki örneği kullanarak bu dosyayı bir bloba yükleyebilirsiniz.
 
@@ -354,7 +354,7 @@ Update-AzStorageEncryptionScope -ResourceGroupName $rgName `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/cli)
 
-Bir şifreleme kapsamını müşteri tarafından yönetilen anahtardan Microsoft tarafından yönetilen bir anahtara Azure CLı ile koruyan anahtarı değiştirmek için [az Storage Account ENCRYPTION-Scope Update](/cli/azure/storage/account/encryption-scope#az-storage-account-encryption-scope-update) komutunu çağırın ve `--key-source` parametreyi şu değerle geçirin `Microsoft.Storage` :
+Bir şifreleme kapsamını müşteri tarafından yönetilen anahtardan Microsoft tarafından yönetilen bir anahtara Azure CLı ile koruyan anahtarı değiştirmek için [az Storage Account ENCRYPTION-Scope Update](/cli/azure/storage/account/encryption-scope#az_storage_account_encryption_scope_update) komutunu çağırın ve `--key-source` parametreyi şu değerle geçirin `Microsoft.Storage` :
 
 ```azurecli-interactive
 az storage account encryption-scope update \
@@ -398,7 +398,7 @@ Update-AzStorageEncryptionScope -ResourceGroupName $rgName `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/cli)
 
-Bir şifreleme kapsamını Azure CLı ile devre dışı bırakmak için, [az Storage Account ENCRYPTION-Scope Update](/cli/azure/storage/account/encryption-scope#az-storage-account-encryption-scope-update) komutunu çağırın ve `--state` `Disabled` Aşağıdaki örnekte gösterildiği gibi, değerini içeren parametresini ekleyin. Bir şifreleme kapsamını yeniden etkinleştirmek için, parametresiyle aynı komutu çağırın `--state` `Enabled` . Örnekteki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
+Bir şifreleme kapsamını Azure CLı ile devre dışı bırakmak için, [az Storage Account ENCRYPTION-Scope Update](/cli/azure/storage/account/encryption-scope#az_storage_account_encryption_scope_update) komutunu çağırın ve `--state` `Disabled` Aşağıdaki örnekte gösterildiği gibi, değerini içeren parametresini ekleyin. Bir şifreleme kapsamını yeniden etkinleştirmek için, parametresiyle aynı komutu çağırın `--state` `Enabled` . Örnekteki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 
 ```azurecli-interactive
 az storage account encryption-scope update \

@@ -1,0 +1,272 @@
+- name: Azure Dosya Eşitleme belgeleri
+  href: index.yml
+- name: Genel Bakış
+  expanded: true
+  items:
+    - name: Azure Dosya Eşitleme nedir?
+      href: file-sync-introduction.md
+- name: Öğreticiler
+  items:
+    - name: Windows dosya sunucularını Azure Dosya Eşitleme ile genişletme
+      href: file-sync-extend-servers.md
+- name: Kavramlar
+  items:
+    - name: Azure Dosya Eşitleme dağıtımı planlama
+      href: file-sync-planning.md
+    - name: Karma erişim için ağ konusunda dikkat edilmesi gerekenler
+      href: file-sync-networking-overview.md
+    - name: Bulut katmanlaması
+      items:
+        - name: Bulut katmanlaması genel bakış
+          href: file-sync-cloud-tiering-overview.md
+        - name: Bulut katmanlama ilkelerine genel bakış
+          href: file-sync-cloud-tiering-policy.md
+        - name: Bulut katmanlama ilkelerini seçin
+          href: file-sync-choose-cloud-tiering-policies.md
+        - name: Bulut katmanlaması izleme
+          href: file-sync-monitor-cloud-tiering.md
+    - name: Ölçeklenebilirlik ve performans hedefleri
+      href: ../files/storage-files-scale-targets.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Yanlışlıkla veri silinmesini engelleme
+      href: ../files/storage-files-prevent-file-share-deletion.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Dosya paylaşımlarını yedekleme
+      href: ../../backup/azure-file-share-backup-overview.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Faturalandırmayı anlama
+      href: ../files/understanding-billing.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Şifreleme
+      items:
+        - name: Bekleme sırasında şifreleme
+          href: ../common/storage-service-encryption.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Müşteri tarafından yönetilen anahtarlarla bekleyen verileri şifreleme
+          href: ../common/customer-managed-keys-overview.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Uyumluluk teklifleri
+      href: ../common/storage-compliance-offerings.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: SSS
+      href: ../files/storage-files-faq.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Dağıtma
+      items:
+        - name: SMB dosya paylaşımı oluşturma
+          href: ../files/storage-how-to-create-file-share.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Azure Dosya Eşitleme’yi dağıtma
+          href: file-sync-deployment-guide.md
+        - name: Azure dosyaları ile DFS-N kullanma
+          href: ../files/files-manage-namespaces.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Depolama ayırmaları satın alma
+          href: ../files/files-reserve-capacity.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Ağ
+      items:
+        - name: Azure Dosya Eşitleme ağının uç noktalarını yapılandırma
+          href: file-sync-networking-endpoints.md
+        - name: Dosya Eşitleme ara sunucu ve güvenli duvarı ayarlarını yapılandırma
+          href: file-sync-firewall-and-proxy.md
+        - name: Siteden Siteye VPN’yi yapılandırma
+          href: ../files/storage-files-configure-s2s-vpn.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Windows’da Noktadan Siteye VPN’yi yapılandırma
+          href: ../files/storage-files-configure-p2s-vpn-windows.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Yönetme
+      items:
+        - name: Azure Dosya Eşitleme ile bir sunucuyu kaydetme
+          href: file-sync-server-registration.md
+        - name: Azure Dosya Eşitleme Sunucusu uç noktası ekleme
+          href: file-sync-server-endpoint.md
+        - name: Azure bağımsız bulutlarında depolamayı yönetme
+          href: ../common/storage-powershell-independent-clouds.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Hesap yük devretmesi başlatma
+          href: ../common/storage-initiate-account-failover.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Katmanlı dosyaları yönetme
+          href: file-sync-how-to-manage-tiered-files.md
+        - name: 'Kaynakları diğer kaynak gruplarına, aboneliklerine ve AAD kiracılarına taşıma'
+          href: file-sync-resource-move.md
+    - name: Veri koruma
+      items:
+        - name: Geçici silmeyi etkinleştirme
+          href: ../files/storage-files-enable-soft-delete.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Verilerin nasıl çoğaltıldığını değiştirme
+          href: ../common/redundancy-migration.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Veri yedekliğini yönetme
+          items:
+            - name: Verilerin nasıl çoğaltıldığını değiştirme
+              href: ../common/redundancy-migration.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: Üst düzeyde kullanılabilir uygulamalar tasarlama
+              href: ../common/geo-redundant-design.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Olağanüstü durum kurtarmayı yönetme
+          items:
+            - name: Son Eşitleme Zamanı özelliğini denetleme
+              href: ../common/last-sync-time-get.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: Hesap yük devretmesini başlatma
+              href: ../common/storage-initiate-account-failover.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Dosya paylaşımlarını yedekleme
+          items:
+            - name: Portal
+              href: ../../backup/backup-afs.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: CLI
+              href: ../../backup/backup-afs-cli.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: PowerShell
+              href: ../../backup/backup-azure-afs-automation.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: REST API
+              href: ../../backup/backup-azure-file-share-rest-api.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Dosya paylaşımlarını geri yükleme
+          items:
+            - name: Portal
+              href: ../../backup/restore-afs.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: CLI
+              href: ../../backup/restore-afs-cli.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: PowerShell
+              href: ../../backup/restore-afs-powershell.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: REST API
+              href: ../../backup/restore-azure-file-share-rest-api.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Dosya paylaşımlarını yönetme
+          items:
+            - name: Portal
+              href: ../../backup/manage-afs-backup.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: CLI
+              href: ../../backup/manage-afs-backup-cli.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: PowerShell
+              href: ../../backup/manage-afs-powershell.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: REST API
+              href: ../../backup/manage-azure-file-share-rest-api.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: İzleme
+      items:
+        - name: Azure Dosyalar’ı izleme
+          href: ../files/storage-files-monitoring.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Azure Dosya Eşitleme’yi izleme
+          href: file-sync-monitoring.md
+    - name: Geçiş
+      items:
+        - name: Azure dosya paylaşımlarına geçirme
+          href: ../files/storage-files-migration-overview.md?toc=%2fazure%2fstorage%2ffiles%2ftoc.json
+        - name: Karma dağıtımı hedefleme
+          items:
+            - name: Azure Data Box ile verileri Azure Dosya Eşitleme’ye toplu olarak geçirme
+              href: file-sync-offline-data-transfer.md
+            - name: Azure Dosya Eşitleme ile Linux’tan hibrit dosya sunucusuna geçirme
+              href: ../files/storage-files-migration-linux-hybrid.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: Azure Dosya Eşitleme ile şirket içi NAS’den karma dosya sunucusuna geçirme
+              href: ../files/storage-files-migration-nas-hybrid.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: DataBox ile şirket içi bir NAS 'dan karma dosya sunucusuna geçiş yapma
+              href: ../files/storage-files-migration-nas-hybrid-databox.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: StorSimple’dan
+          items:
+            - name: StorSimple 8100 ve 8600 geçiş kılavuzu
+              href: ../files/storage-files-migration-storsimple-8000.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: StorSimple 1200 geçiş kılavuzu
+              href: ../files/storage-files-migration-storsimple-1200.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Büyük dosya paylaşımına olanak tanıma
+      href: ../files/storage-files-how-to-create-large-file-share.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Güvenlik
+      items:
+        - name: Depolama hesabı için şifreleme anahtarlarını yönetme
+          items:
+            - name: Hesap için şifreleme anahtarı modelini denetleme
+              href: ../common/storage-encryption-key-model-get.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: Müşteri tarafından yönetilen anahtarlarla şifrelemeyi yapılandırma
+              items:
+                - name: Müşteri tarafından yönetilen anahtarları bir anahtar kasasında depolama
+                  href: ../common/customer-managed-keys-configure-key-vault.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+                - name: Müşteri tarafından yönetilen anahtarları bir yönetilen HSM’de depolama
+                  href: ../common/customer-managed-keys-configure-key-vault-hsm.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Hesap için altyapı şifrelemesini etkinleştirme
+          href: ../common/infrastructure-encryption-enable.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Azure Defender’ı tehdit koruması için yapılandırma
+          href: ../common/azure-defender-storage-configure.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Güvenlik duvarlarını ve sanal ağları yapılandırma
+          href: ../common/storage-network-security.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Güvenli aktarım gerektir
+          href: ../common/storage-require-secure-transfer.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Aktarım Katmanı Güvenliği’ni (TLS) yönetme
+          items:
+            - name: Gelen istekler için en düşük TLS sürümünü zorlama
+              href: ../common/transport-layer-security-configure-minimum-version.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+            - name: İstemci uygulaması için TLS sürümünü yapılandırma
+              href: ../common/transport-layer-security-configure-client-version.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Sorun giderme
+      items:
+        - name: Windows’da Azure Dosyalar sorunlarını giderme (SMB)
+          href: ../files/storage-troubleshoot-windows-file-connection-problems.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Azure dosya paylaşımı performansıyla ilgili sorunları giderme
+          href: ../files/storage-troubleshooting-files-performance.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Azure Dosya Eşitleme ile ilgili sorunları giderme
+          href: file-sync-troubleshoot.md
+        - name: Azure dosya paylaşımlarını silme sorunlarını giderme
+          href: ../files/storage-troubleshoot-cannot-delete-files-azure-file-share.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+        - name: Dosya paylaşımlarını yedekleme sorunlarını giderme
+          href: ../../backup/troubleshoot-azure-files.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+- name: Başvuru
+  items:
+    - name: Azure Dosyalar başvurusu
+      href: ../files/reference.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Azure Dosyalar’ı izleme başvurusu
+      href: ../files/storage-files-monitoring-reference.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+    - name: Resource Manager şablonu
+      displayName: arm
+      href: /azure/templates/microsoft.storage/allversions
+    - name: Örnekler
+      href: 'https://azure.microsoft.com/documentation/samples/?service=storage&term=file'
+    - name: Azure dosyaları ve Azure NetApp Files karşılaştırması
+      href: ../files/storage-files-netapp-comparison.md?toc=%2fazure%2fstorage%2ffile-sync%2ftoc.json
+- name: Kaynaklar
+  items:
+    - name: Azure güncelleştirmeleri
+      href: 'https://azure.microsoft.com/updates/?category=storage'
+    - name: Azure Dosya Eşitleme yayın notları
+      href: file-sync-release-notes.md
+    - name: Microsoft Q&A üzerinde Azure Dosyalar
+      href: /answers/topics/azure-files.html
+    - name: Stack Overflow üzerinde Azure Dosyalar
+      href: 'https://stackoverflow.com/questions/tagged/azure-files'
+    - name: Azure Dosyalar fiyatlandırması
+      href: 'https://azure.microsoft.com/pricing/details/storage/files/'
+    - name: Azure fiyatlandırma hesaplayıcısı
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: Videolar
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=storage'
+    - name: NuGet paketleri (.NET)
+      items:
+        - name: Microsoft.Azure.Storage.Common (sürüm 11.x)
+          href: 'https://www.nuget.org/packages/Microsoft.Azure.Storage.Common/'
+        - name: Azure.Storage.Common (sürüm 12.x - önizleme)
+          href: 'https://www.nuget.org/packages/Azure.Storage.Common/'
+        - name: Microsoft.Azure.Storage.File (sürüm 11.x)
+          href: 'https://www.nuget.org/packages/Microsoft.Azure.Storage.File/'
+        - name: Azure.Storage.File (sürüm 12.x - önizleme)
+          href: 'https://www.nuget.org/packages/Azure.Storage.Files/'
+        - name: Azure Configuration Manager
+          href: 'https://www.nuget.org/packages/Microsoft.Azure.ConfigurationManager/'
+        - name: Azure Depolama Veri Taşıma kitaplığı
+          href: 'https://www.nuget.org/packages/Microsoft.Azure.Storage.DataMovement/'
+        - name: Depolama Kaynak Sağlayıcısı kitaplığı
+          href: 'https://www.nuget.org/packages/Microsoft.Azure.Management.Storage/'
+    - name: Kaynak kod
+      items:
+        - name: .NET
+          items:
+            - name: Azure Depolama istemci kitaplığı
+              items:
+                - name: Sürüm 12.x (önizleme)
+                  href: 'https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage'
+                - name: Sürüm 11.x ve öncesi
+                  href: 'https://github.com/Azure/azure-storage-net'
+            - name: Veri Taşıma kitaplığı
+              href: 'https://github.com/Azure/azure-storage-net-data-movement'
+            - name: Depolama Kaynak Sağlayıcısı kitaplığı
+              href: 'https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Microsoft.Azure.Management.Storage'
+        - name: Java
+          items:
+            - name: Azure Depolama istemci kitaplığı sürüm 12.x (önizleme)
+              href: 'https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/storage'
+            - name: Azure Depolama istemci kitaplığı sürüm 8.x ve öncesi
+              href: 'https://github.com/Azure/azure-storage-java'
+        - name: Node.js
+          items:
+            - name: Azure Depolama istemci kitaplığı sürüm 12.x (önizleme)
+              href: 'https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage'
+            - name: Azure Depolama istemci kitaplığı sürüm 10.x
+              href: 'https://github.com/Azure/azure-storage-node'
+        - name: Python
+          items:
+            - name: Azure Depolama istemci kitaplığı sürüm 12.x (önizleme)
+              href: 'https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/storage'
+            - name: Azure Depolama istemci kitaplığı sürüm 2.1
+              href: 'https://github.com/Azure/azure-storage-python'

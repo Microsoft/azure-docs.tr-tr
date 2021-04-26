@@ -2,14 +2,14 @@
 title: Değişiklikleri engellemek için kaynakları kilitle
 description: Kullanıcıların tüm kullanıcılar ve roller için bir kilit uygulayarak Azure kaynaklarını güncelleştirmesini ve silmesini engelleyin.
 ms.topic: conceptual
-ms.date: 03/09/2021
+ms.date: 04/07/2021
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 28c31681b8fbe981cd51db294c91276dfd65d71f
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 71637318a60e66bf5000de2f564d740cc101cc60
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102619180"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107768732"
 ---
 # <a name="lock-resources-to-prevent-unexpected-changes"></a>Beklenmeyen değişiklikleri önlemek için kaynakları kilitleme
 
@@ -36,9 +36,11 @@ Kilitleri uygulamak, kaynağı değiştirmeyen bazı işlemler gerçekten kilit 
 
 * Bir **depolama hesabındaki** bir Delete kilidi, bu hesabın içindeki verilerin silinmesini veya değiştirilmesini engellemez. Bu tür kilit yalnızca depolama hesabının silinmesini önler ve bu depolama hesabı içindeki blob, kuyruk, tablo veya dosya verilerini korumaz. 
 
-* Bir **depolama hesabındaki** salt okunurdur bir kilit, söz konusu hesabın içindeki verilerin silinmesini veya değiştirilmesini engellemez. Bu tür kilit yalnızca depolama hesabının silinmesini veya değiştirilmesini önler ve bu depolama hesabı içindeki blob, kuyruk, tablo veya dosya verilerini korumaz. 
+* Bir **depolama hesabındaki** salt okuma kilidi, söz konusu hesabın içindeki verilerin silinmesini veya değiştirilmesini engellemez. Bu tür kilit yalnızca depolama hesabının silinmesini veya değiştirilmesini önler ve bu depolama hesabı içindeki blob, kuyruk, tablo veya dosya verilerini korumaz. 
 
 * Bir **App Service** kaynağı üzerinde salt okunurdur bir kilit, bu etkileşim yazma erişimi gerektirdiğinden Visual Studio Sunucu Gezgini kaynak için dosya görüntülemesini engeller.
+
+* Bir **App Service planı** içeren bir **kaynak grubundaki** salt okunurdur bir kilit [, planı ölçeklendirmeden veya bir şekilde ölçeklendirmanıza](../../app-service/manage-scale-up.md)engel olur.
 
 * Bir **sanal makine** içeren bir **kaynak grubundaki** salt okunurdur bir kilit, tüm kullanıcıların sanal makineyi başlatmasını veya yeniden başlatmasını önler. Bu işlemler bir POST isteği gerektirir.
 
@@ -274,9 +276,9 @@ $lockId = (Get-AzResourceLock -ResourceGroupName exampleresourcegroup).LockId
 Remove-AzResourceLock -LockId $lockId
 ```
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
-Dağıtılan kaynakları, [az Lock Create](/cli/azure/lock#az-lock-create) komutunu kullanarak Azure CLI ile kilitlersiniz.
+Dağıtılan kaynakları, [az Lock Create](/cli/azure/lock#az_lock_create) komutunu kullanarak Azure CLI ile kilitlersiniz.
 
 Bir kaynağı kilitlemek için kaynağın adını, kaynak türünü ve kaynak grubu adını belirtin.
 
@@ -290,7 +292,7 @@ Bir kaynak grubunu kilitlemek için kaynak grubunun adını sağlayın.
 az lock create --name LockGroup --lock-type CanNotDelete --resource-group exampleresourcegroup
 ```
 
-Bir kilit hakkında bilgi almak için [az Lock List](/cli/azure/lock#az-lock-list)kullanın. Aboneliğinizdeki tüm kilitleri almak için şunu kullanın:
+Bir kilit hakkında bilgi almak için [az Lock List](/cli/azure/lock#az_lock_list)kullanın. Aboneliğinizdeki tüm kilitleri almak için şunu kullanın:
 
 ```azurecli
 az lock list

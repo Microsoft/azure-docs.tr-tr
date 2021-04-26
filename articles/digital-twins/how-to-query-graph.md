@@ -8,12 +8,12 @@ ms.date: 11/19/2020
 ms.topic: how-to
 ms.service: digital-twins
 ms.custom: contperf-fy21q2
-ms.openlocfilehash: 3fd504ec36abae3f00cd2a7eb4e1f7b639be0cea
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6d15e2b8bfcddfd1f554ab2a27083fe5256e9e2b
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103462686"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226337"
 ---
 # <a name="query-the-azure-digital-twins-twin-graph"></a>Azure Digital TWINS ikizi grafiğini sorgulama
 
@@ -94,19 +94,14 @@ Aşağıda, üç parametre için bir değer belirten bir sorgu örneği verilmi�
 
 Dijital TWINS ' **ilişkilerine** göre sorgulama yaparken Azure Digital TWINS sorgu dilinin özel bir sözdizimi vardır.
 
-İlişkiler, `FROM` yan tümcesinde sorgu kapsamına çekilir. "Klasik" SQL-Type dillerinden önemli bir ayrım, bu `FROM` yan tümcedeki her bir ifadenin bir tablo olmaması değildir; Bunun yerine `FROM` yan tümce bir çapraz varlık ilişki geçişini ifade eder ve Azure Digital TWINS sürümü ile yazılır `JOIN` .
+İlişkiler, `FROM` yan tümcesinde sorgu kapsamına çekilir. "Klasik" SQL türü dillerden farklı olarak, bu `FROM` yan tümcesindeki her bir ifade bir tablo değildir; Bunun yerine `FROM` yan tümce bir çapraz varlık ilişki geçişini ifade eder. Azure Digital TWINS, ilişkilerde çapraz geçiş yapmak için özel bir sürümünü kullanır `JOIN` .
 
-Azure dijital TWINS [modeli](concepts-models.md) özellikleri ile, ilişkilerin, TWINS 'den bağımsız olarak mevcut olmadığını geri çekin. Dolayısıyla Azure Digital Twins sorgu dilinin `JOIN` işleci, genel SQL `JOIN` işlecinden biraz farklıdır. Burada ilişkiler bağımsız olarak sorgulanamaz, bir ikize bağlı olmaları gerekir.
-Bu farklı karşılamak için `RELATED` anahtar sözcüğü `JOIN` yan tümcesinde kullanılarak ikizin ilişki kümesine başvuru yapılır.
+Azure dijital TWINS [modeli](concepts-models.md) özellikleri ile, ilişkilerin, TWINS 'den bağımsız olarak mevcut olmadığını geri çekin. Bu, buradaki ilişkilerin bağımsız olarak sorgulanamadığından ve bir ikizi bağlı olması gerektiği anlamına gelir.
+Bunu işlemek için anahtar sözcüğü, `RELATED` `JOIN` ikizi koleksiyonundan gelen belirli bir ilişki türünün kümesini çekmek için yan tümcesinde kullanılır. Sorgu daha sonra `WHERE` ilişki sorgusunda (TWINS ' değerlerini kullanarak) kullanılacak belirli ikizi (ler) in yan tümcesini filtrelemeniz gerekir `$dtId` .
 
-Aşağıdaki bölümde bunun nasıl göründüğü hakkında birkaç örnek verilmiştir.
+Aşağıdaki bölümlerde bunun nasıl göründüğü hakkında örnekler verilmektedir.
 
-> [!TIP]
-> Kavramsal olarak, bu özellik, CosmosDB 'nin belge merkezli işlevselliğini taklit eder ve burada `JOIN` bir belge içindeki alt nesneler üzerinde gerçekleştirilebilir. CosmosDB, `IN` `JOIN` geçerli bağlam belgesi içindeki dizi öğelerini yinelemek için tasarlanan anahtar sözcüğünü kullanır.
-
-### <a name="relationship-based-query-examples"></a>İlişki tabanlı sorgu örnekleri
-
-İlişkiler içeren bir veri kümesini almak için, bir deyimi ve `FROM` ardından N deyimlerini kullanın `JOIN` , burada `JOIN` deyimler bir Previous veya deyimin sonucu üzerinde ilişki alır `FROM` `JOIN` .
+### <a name="basic-relationship-query"></a>Temel ilişki sorgusu
 
 Örnek bir ilişki tabanlı sorgu aşağıda verilmiştir. Bu kod parçacığı, ' ABC ' öğesinin *ID* özelliğine sahip tüm dijital TWINS 'leri ve bu dijital TWINS ile ilgili tüm dijital TWINS 'leri, bir *içerir* ilişki aracılığıyla seçer.
 
@@ -114,6 +109,18 @@ Aşağıdaki bölümde bunun nasıl göründüğü hakkında birkaç örnek veri
 
 > [!NOTE]
 > Geliştiricinin `JOIN` yan tümcesindeki anahtar değeriyle ilişkilendirilmesi gerekmez `WHERE` (veya tanımıyla birlikte satır içi bir anahtar değeri belirtebilirsiniz `JOIN` ). İlişki özellikleri hedef varlığı tanımladığından bu bağıntı sistem tarafından otomatik olarak hesaplanır.
+
+### <a name="query-by-the-source-or-target-of-a-relationship"></a>Bir ilişkinin kaynağına veya hedefine göre sorgulama
+
+İlişki sorgusu yapısını, bir ilişkinin kaynağı veya hedefi olan dijital bir ikizi tanımlamak için kullanabilirsiniz.
+
+Örneğin, kaynak ikizi ile başlayabilir ve ilişkilerin hedef TWINS 'sini bulmak için ilişkilerini takip edebilirsiniz. İşte ikizi *Source-ikizi* öğesinden gelen *akışlar* ilişkilerinin hedef TWINS 'sini bulan bir sorgu örneği aşağıda verilmiştir.
+
+:::code language="sql" source="~/digital-twins-docs-samples/queries/queries.sql" id="QueryByRelationshipSource":::
+
+Ayrıca, ilişkinin hedefi ile başlayabilir ve kaynak ikizi bulmak için ilişkiyi geri izleyebilirsiniz. İşte ikizi *target-ikizi* ile bir *akışlar* ilişkisinin kaynak ikizi bulduğu bir sorgu örneği.
+
+:::code language="sql" source="~/digital-twins-docs-samples/queries/queries.sql" id="QueryByRelationshipTarget":::
 
 ### <a name="query-the-properties-of-a-relationship"></a>Bir ilişkinin özelliklerini sorgulama
 
@@ -128,7 +135,9 @@ Yukarıdaki örnekte, *Reportedcondition* 'ın *servicedBy* ilişkisinin kendisi
 
 ### <a name="query-with-multiple-joins"></a>Birden çok birleştirme içeren sorgu
 
-Tek bir sorguda en fazla beş adet `JOIN` desteklenir. Bu, aynı anda birden çok ilişki seviyelerine çapraz geçiş yapmanıza olanak sağlar.
+Tek bir sorguda en fazla beş adet `JOIN` desteklenir. Bu, aynı anda birden çok ilişki seviyelerine çapraz geçiş yapmanıza olanak sağlar. 
+
+Birden çok ilişki düzeyinde sorgulama yapmak için tek bir deyim kullanın `FROM` `JOIN` , burada N deyimlerini kullanın, burada `JOIN` deyimler bir Previous veya deyimin sonucu üzerinde ilişki alır `FROM` `JOIN` .
 
 Burada, Oda 1 ve 2 ' deki açık panellerde bulunan tüm hafif bultların yer aldığı çok sayıda JOIN sorgusuna bir örnek verilmiştir.
 

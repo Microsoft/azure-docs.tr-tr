@@ -10,12 +10,12 @@ ms.topic: quickstart
 ms.date: 01/27/2021
 ms.author: mbaldwin
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 4141e60370b397e799664b7d42384bbeb096bd05
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f5281c02f68598b1cf121a6ab8a574f0694f5ea2
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99071197"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813461"
 ---
 # <a name="quickstart-set-and-retrieve-a-key-from-azure-key-vault-using-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak Azure Key Vault bir anahtar ayarlama ve alma
 
@@ -66,4 +66,4 @@ Bu hızlı başlangıçta bir Key Vault oluşturdunuz ve içinde bir anahtar dep
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
 - Azure CLı için başvuruya bakın [az keykasa komutları](/cli/azure/keyvault)
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu gözden geçirin
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu gözden geçirin

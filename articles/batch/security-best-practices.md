@@ -4,10 +4,10 @@ description: Azure Batch çözümlerinizle güvenliği geliştirmek için en iyi
 ms.date: 12/18/2020
 ms.topic: conceptual
 ms.openlocfilehash: 6ec4a1d89ebaa9318986fc0d51e832652ba51683
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98723821"
 ---
 # <a name="batch-security-and-compliance-best-practices"></a>Toplu güvenlik ve uyumluluk en iyi uygulamaları

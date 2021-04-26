@@ -8,12 +8,12 @@ ms.subservice: confidential-computing
 ms.topic: conceptual
 ms.date: 09/22/2020
 ms.author: JenCook
-ms.openlocfilehash: 0ba6ee92111da66a2118ba4c490b94e5bc9449e0
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 571c1a4ce545976db09f46a07d963d5344c02c29
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102551394"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791022"
 ---
 # <a name="application-development-on-intel-sgx"></a>Intel SGX üzerinde uygulama geliştirme 
 
@@ -23,6 +23,7 @@ Gizli bilgi işlem altyapısı, belirli araçlar ve yazılımlar gerektirir. Bu 
 Şifreleme ve yalıtılmış ortamların gücünden yararlanmak için, gizli bilgi işlem desteği olan araçları kullanmanız gerekir. Şifreleme uygulaması geliştirmeyi destekleyen çeşitli araçlar vardır. Örneğin, bu açık kaynaklı çerçeveleri kullanabilirsiniz: 
 
 - [Açık şifreleme yazılım geliştirme seti (OE SDK)](#oe-sdk)
+- [EGo yazılım geliştirme seti](#ego)
 - [Gizli konsorsiyum çatısı (CCF)](#ccf)
 
 ## <a name="overview"></a>Genel Bakış
@@ -48,6 +49,10 @@ Uygulama tasarımı sırasında, uygulamanın hangi bölümünün kuşkuta çal�
 Bir kuşın içinde çalışan bir kod yazmak istiyorsanız, sağlayıcınız tarafından desteklenen bir kitaplık veya çerçeveyi kullanın. [Open Enclave SDK](https://github.com/openenclave/openenclave) (OE SDK), farklı gizli bilgi işlem özellikli donanımlar üzerinde soyutlama sağlayan açık KAYNAKLı bir SDK 'dir. 
 
 OE SDK 'Sı, herhangi bir CSP üzerinde herhangi bir donanım üzerinde tek bir soyutlama katmanı olacak şekilde oluşturulmuştur. OE SDK 'Sı, Azure gizli bilgi işlem sanal makinelerinin en üstünde, en üstte uygulamalar oluşturmak ve çalıştırmak için kullanılabilir.
+
+## <a name="ego-software-development-kit"></a>EGo yazılım geliştirme seti <a id="ego"></a>
+
+[Ego](https://ego.dev/) , go programlama dilinde yazılmış uygulamaları şifreleme içinde çalıştırmanızı sağlayan açık KAYNAKLı bir SDK 'dir. EGo, OE SDK 'nın en üstünde oluşturulur ve kanıtlama ve mühürleme için bir yerleşik ve bir go kitaplığı ile birlikte sunulur. Birçok mevcut Go uygulaması, değişiklikler olmadan EGo üzerinde çalışır.  
 
 ## <a name="confidential-consortium-framework-ccf"></a>Gizli konsorsiyum çerçevesi (CCF) <a id="ccf"></a>
 

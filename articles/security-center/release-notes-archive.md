@@ -5,14 +5,14 @@ author: memildin
 manager: rkarlin
 ms.service: security-center
 ms.topic: reference
-ms.date: 03/04/2021
+ms.date: 04/04/2021
 ms.author: memildin
-ms.openlocfilehash: a00c11924d2c0f6860c297ab7e58da21da5e1975
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 9d376a374d1934f55b6a6fb15f1642c81b30b2fc
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102634711"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718674"
 ---
 # <a name="archive-for-whats-new-in-azure-security-center"></a>Azure Güvenlik Merkezi 'ndeki yenilikler için Arşiv mi var?
 
@@ -24,6 +24,157 @@ Bu sayfa hakkında bilgi sağlar:
 - Hata düzeltmeleri
 - Kullanım dışı işlevsellik
 
+
+## <a name="october-2020"></a>Ekim 2020
+
+Ekim 'deki güncelleştirmeler şunlardır:
+- [Şirket içi ve çoklu bulut makinelerinde güvenlik açığı değerlendirmesi (Önizleme)](#vulnerability-assessment-for-on-premise-and-multi-cloud-machines-preview)
+- [Azure Güvenlik Duvarı önerisi eklendi (Önizleme)](#azure-firewall-recommendation-added-preview)
+- [Yetkili IP aralıklarının, hızlı düzeltmeyle güncelleştirilmiş Kubernetes Hizmetleri önerisi üzerinde tanımlanması gerekir](#authorized-ip-ranges-should-be-defined-on-kubernetes-services-recommendation-updated-with-quick-fix)
+- [Mevzuat uyumluluk panosu artık standartları kaldırma seçeneğini içermektedir](#regulatory-compliance-dashboard-now-includes-option-to-remove-standards)
+- [Microsoft. Security/Securitydurumlarının tablosu Azure Kaynak grafiğinden kaldırıldı (ARG)](#microsoftsecuritysecuritystatuses-table-removed-from-azure-resource-graph-arg)
+
+### <a name="vulnerability-assessment-for-on-premise-and-multi-cloud-machines-preview"></a>Şirket içi ve çoklu bulut makinelerinde güvenlik açığı değerlendirmesi (Önizleme)
+
+[Sunucular Için Azure Defender 'ın](defender-for-servers-introduction.md)tümleşik güvenlik açığı değerlendirmesi tarayıcısı (Qualys tarafından desteklenir) artık Azure Arc etkin sunucularını tarar.
+
+Azure dışı makinelerinizde Azure yayı 'yi etkinleştirdiyseniz, Güvenlik Merkezi, tümleşik güvenlik açığı tarayıcısını bunlara el ile ve ölçekli olarak dağıtmayı sağlar.
+
+Bu güncelleştirmeyle, Azure Defender 'ın tüm Azure ve Azure dışı varlıklarınızda güvenlik açığı yönetimi programınızı birleştirmek için **Azure Defender** 'ın gücünü açığa çıkarın.
+
+Ana yetenekler:
+
+- Azure Arc makinelerinde VA (güvenlik açığı değerlendirmesi) tarayıcı sağlama durumunu izleme
+- Tümleşik VA aracısını korumasız Windows ve Linux Azure yay makinelerine sağlama (el ile ve ölçekli)
+- Dağıtılan aracılardan algılanan güvenlik açıklarını alma ve çözümleme (el ile ve ölçekli)
+- Azure sanal makineleri ve Azure yay makineleri için Birleşik deneyim
+
+[Tümleşik güvenlik açığı tarayıcısını karma makinelerinize dağıtma hakkında daha fazla bilgi edinin](deploy-vulnerability-assessment-vm.md#deploy-the-integrated-scanner-to-your-azure-and-hybrid-machines).
+
+[Azure Arc etkin sunucuları hakkında daha fazla bilgi edinin](../azure-arc/servers/index.yml).
+
+
+### <a name="azure-firewall-recommendation-added-preview"></a>Azure Güvenlik Duvarı önerisi eklendi (Önizleme)
+
+Tüm sanal ağlarınızı Azure Güvenlik Duvarı ile korumak için yeni bir öneri eklenmiştir.
+
+Bu öneri, **sanal ağların Azure Güvenlik Duvarı tarafından korunması gerekir** ve Azure Güvenlik Duvarı 'nı kullanarak sanal ağlarınıza erişimi kısıtlayıp olası tehditleri önlemenizi önerir.
+
+[Azure Güvenlik Duvarı](https://azure.microsoft.com/services/azure-firewall/)hakkında daha fazla bilgi edinin.
+
+
+### <a name="authorized-ip-ranges-should-be-defined-on-kubernetes-services-recommendation-updated-with-quick-fix"></a>Yetkili IP aralıklarının, hızlı düzeltmeyle güncelleştirilmiş Kubernetes Hizmetleri önerisi üzerinde tanımlanması gerekir
+
+Öneri **yetkılı IP aralıklarının artık, Kubernetes hizmetlerinde tanımlanması gerekir** . Şimdi hızlı bir çözüm seçeneği vardır.
+
+Bu öneri ve diğer tüm güvenlik merkezi önerileri hakkında daha fazla bilgi için bkz. [güvenlik önerileri-bir başvuru kılavuzu](recommendations-reference.md).
+
+:::image type="content" source="./media/release-notes/authorized-ip-ranges-recommendation.png" alt-text="Yetkili IP aralıkları hızlı düzelme seçeneği ile Kubernetes Hizmetleri önerisi üzerinde tanımlanmalıdır":::
+
+
+### <a name="regulatory-compliance-dashboard-now-includes-option-to-remove-standards"></a>Mevzuat uyumluluk panosu artık standartları kaldırma seçeneğini içermektedir
+
+Güvenlik Merkezi 'nin yasal uyumluluk panosu, uyumlu uyumluluk denetimleri ve gereksinimlerini nasıl karşıladığınızı temel alarak uyumlulukla ilgili öngörüler sağlar.
+
+Pano, varsayılan bir mevzuat standartları kümesi içerir. Sağlanan standartlardan herhangi biri kuruluşunuzla ilgili değilse, bir abonelik için kullanıcı arabiriminden kaldırma işlemi artık basit bir işlemdir. Standartlar yalnızca *abonelik* düzeyinde kaldırılabilir; Yönetim grubu kapsamı değil.
+
+[Panodan bir standart kaldırma](update-regulatory-compliance-packages.md#remove-a-standard-from-your-dashboard)hakkında daha fazla bilgi edinin.
+
+
+### <a name="microsoftsecuritysecuritystatuses-table-removed-from-azure-resource-graph-arg"></a>Microsoft. Security/Securitydurumlarının tablosu Azure Kaynak grafiğinden kaldırıldı (ARG)
+
+Azure Kaynak Grafiği, ortamınızı etkili bir şekilde yönetebilmeniz için belirli bir abonelik kümesi genelinde ölçeği sorgulama özelliği ile verimli kaynak araştırması sağlamak üzere tasarlanan Azure hizmetidir. 
+
+Azure Güvenlik Merkezi için bağımsız değişken ve [kusto sorgu dili (KQL)](/azure/data-explorer/kusto/query/) kullanarak çok çeşitli güvenlik sonrası verileri sorgulayabilirsiniz. Örnek:
+
+- Varlık envanteri kullanır (bağımsız değişken)
+- [Multi-Factor Authentication (MFA) etkin olmayan hesapların nasıl tanımlanacağına](security-center-identity-access.md#identify-accounts-without-multi-factor-authentication-mfa-enabled) yönelik örnek bir bağımsız değişken sorgusu belgeliyoruz
+
+Bağımsız değişken içinde, sorgularda kullanabileceğiniz veri tabloları vardır.
+
+:::image type="content" source="./media/release-notes/azure-resource-graph-tables.png" alt-text="Azure Kaynak Grafiği Gezgini ve kullanılabilir tablolar":::
+
+> [!TIP]
+> ARG belgesi, [Azure Kaynak Grafiği tablosu ve kaynak türü başvurusu](../governance/resource-graph/reference/supported-tables-resources.md)'ndaki tüm kullanılabilir tabloları listeler.
+
+Bu güncelleştirmeden, **Microsoft. Security/Securitydurumlarının** tablosu kaldırılmıştır. Securitydurumlarının API 'SI hala kullanılabilir.
+
+Veri değiştirme, Microsoft. Security/değerlendirmeleri tablosu tarafından kullanılabilir.
+
+Microsoft. Security/Securitydurumlardan ve Microsoft. Security/değerlendirmeleri arasındaki önemli fark, ilki değerlendirmelerin toplanmasının, saniyenin her biri için tek bir kayıt tuttuğunda olduğu sürece.
+
+Örneğin, Microsoft. Security/Securitydurumlar, iki Polimanlar dizisiyle bir sonuç döndürür:
+
+```
+{
+id: "/subscriptions/449bcidd-3470-4804-ab56-2752595 felab/resourceGroups/mico-rg/providers/Microsoft.Network/virtualNetworks/mico-rg-vnet/providers/Microsoft.Security/securityStatuses/mico-rg-vnet",
+name: "mico-rg-vnet",
+type: "Microsoft.Security/securityStatuses",
+properties:  {
+    policyAssessments: [
+        {assessmentKey: "e3deicce-f4dd-3b34-e496-8b5381bazd7e", category: "Networking", policyName: "Azure DDOS Protection Standard should be enabled",...},
+        {assessmentKey: "sefac66a-1ec5-b063-a824-eb28671dc527", category: "Compute", policyName: "",...}
+    ],
+    securitystateByCategory: [{category: "Networking", securityState: "None" }, {category: "Compute",...],
+    name: "GenericResourceHealthProperties",
+    type: "VirtualNetwork",
+    securitystate: "High"
+}
+```
+Ancak, Microsoft. Security/değerlendirmeleri, bu tür bir ilke değerlendirmesi için aşağıdaki gibi bir kayıt tutacaktır:
+
+```
+{
+type: "Microsoft.Security/assessments",
+id:  "/subscriptions/449bc1dd-3470-4804-ab56-2752595f01ab/resourceGroups/mico-rg/providers/Microsoft. Network/virtualNetworks/mico-rg-vnet/providers/Microsoft.Security/assessments/e3delcce-f4dd-3b34-e496-8b5381ba2d70",
+name: "e3deicce-f4dd-3b34-e496-8b5381ba2d70",
+properties:  {
+    resourceDetails: {Source: "Azure", Id: "/subscriptions/449bc1dd-3470-4804-ab56-2752595f01ab/resourceGroups/mico-rg/providers/Microsoft.Network/virtualNetworks/mico-rg-vnet"...},
+    displayName: "Azure DDOS Protection Standard should be enabled",
+    status: (code: "NotApplicable", cause: "VnetHasNOAppGateways", description: "There are no Application Gateway resources attached to this Virtual Network"...}
+}
+
+{
+type: "Microsoft.Security/assessments",
+id:  "/subscriptions/449bc1dd-3470-4804-ab56-2752595f01ab/resourcegroups/mico-rg/providers/microsoft.network/virtualnetworks/mico-rg-vnet/providers/Microsoft.Security/assessments/80fac66a-1ec5-be63-a824-eb28671dc527",
+name: "8efac66a-1ec5-be63-a824-eb28671dc527",
+properties: {
+    resourceDetails: (Source: "Azure", Id: "/subscriptions/449bc1dd-3470-4804-ab56-2752595f01ab/resourcegroups/mico-rg/providers/microsoft.network/virtualnetworks/mico-rg-vnet"...),
+    displayName: "Audit diagnostic setting",
+    status:  {code: "Unhealthy"}
+}
+```
+
+**Artık değerlendirme tablosunu kullanmak için Securitydurumlar kullanarak var olan bir bağımsız değişken sorgusunun dönüştürülmesiyle bir örnek:**
+
+Securitydurumlarının başvurduğu sorgu:
+
+```kusto
+SecurityResources 
+| where type == 'microsoft.security/securitystatuses' and properties.type == 'virtualMachine'
+| where name in ({vmnames}) 
+| project name, resourceGroup, policyAssesments = properties.policyAssessments, resourceRegion = location, id, resourceDetails = properties.resourceDetails
+```
+
+Değerlendirme tablosu için değiştirme sorgusu:
+
+```kusto
+securityresources
+| where type == "microsoft.security/assessments" and id contains "virtualMachine"
+| extend resourceName = extract(@"(?i)/([^/]*)/providers/Microsoft.Security/assessments", 1, id)
+| extend source = tostring(properties.resourceDetails.Source)
+| extend resourceId = trim(" ", tolower(tostring(case(source =~ "azure", properties.resourceDetails.Id,
+source =~ "aws", properties.additionalData.AzureResourceId,
+source =~ "gcp", properties.additionalData.AzureResourceId,
+extract("^(.+)/providers/Microsoft.Security/assessments/.+$",1,id)))))
+| extend resourceGroup = tolower(tostring(split(resourceId, "/")[4]))
+| where resourceName in ({vmnames}) 
+| project resourceName, resourceGroup, resourceRegion = location, id, resourceDetails = properties.additionalData
+```
+
+Aşağıdaki bağlantılardan daha fazla bilgi edinin:
+- [Azure Kaynak Grafı Gezgini ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
+- [Kusto Sorgu Dili (KQL)](/azure/data-explorer/kusto/query/)
 
 
 ## <a name="september-2020"></a>Eylül 2020
@@ -298,8 +449,8 @@ Kullandıkları tarayıcı türünden bağımsız olarak tüm kullanıcılar iç
 
 |Birleşik öneri|Açıklamayı Değiştir|
 |----|:----|
-|**Sanal makinelerinizde bir güvenlik açığı değerlendirme çözümünün etkinleştirilmesi gerekir**|Aşağıdaki iki öneriyi değiştirir:<br> **•** Sanal makinelerde yerleşik güvenlik açığı değerlendirme çözümünü etkinleştirin (Qualys (artık kullanım dışı) ile desteklenir (Standart katmana dahildir)<br> **•** Güvenlik açığı değerlendirme çözümünün sanal makinelerinizde yüklü olması gerekir (artık kullanım dışı) (Standart ve ücretsiz Katmanlar)|
-|**Sanal makinelerinizdeki güvenlik açıkları düzeltilmelidir**|Aşağıdaki iki öneriyi değiştirir:<br>**•** Sanal makinelerinizde bulunan güvenlik açıklarını düzeltin (Qualys tarafından desteklenir) (artık kullanım dışı)<br>**•** Güvenlik açıkları bir güvenlik açığı değerlendirme çözümü tarafından düzeltilmelidir (artık kullanım dışı)|
+|**Sanal makinelerinizde bir güvenlik açığı değerlendirme çözümünün etkinleştirilmesi gerekir**|Aşağıdaki iki öneriyi değiştirir:<br> Sanal makinelerde yerleşik güvenlik açığı değerlendirme çözümünü etkinleştirin (Qualys (artık kullanım dışı) ile desteklenir (Standart katmana dahildir)<br> Güvenlik açığı değerlendirme çözümünün sanal makinelerinizde yüklü olması gerekir (artık kullanım dışı) (Standart ve ücretsiz Katmanlar)|
+|**Sanal makinelerinizdeki güvenlik açıkları düzeltilmelidir**|Aşağıdaki iki öneriyi değiştirir:<br>Sanal makinelerinizde bulunan güvenlik açıklarını düzeltin (Qualys tarafından desteklenir) (artık kullanım dışı)<br>Güvenlik açıkları bir güvenlik açığı değerlendirme çözümü tarafından düzeltilmelidir (artık kullanım dışı)|
 |||
 
 Artık güvenlik merkezi 'nin güvenlik açığı değerlendirmesi uzantısını veya özel olarak lisanslı bir çözümü ("KLG") Qualys veya Rapid7 gibi bir ortaktan dağıtmak için aynı öneriyi kullanacaksınız.
@@ -312,20 +463,20 @@ Ayrıca, güvenlik açıkları bulunduğunda ve Güvenlik Merkezi 'ne bildirildi
 
 ##### <a name="before-august-2020"></a>Ağustos 2020 öncesi
 
-|Öneri|Kapsam|
+| Öneri|Kapsam|
 |----|:----|
 |**Sanal makinelerde yerleşik güvenlik açığı değerlendirme çözümünü etkinleştirin (Qualys tarafından desteklenir)**<br>Anahtar: 550e890b-e652-4d22-8274-60b3bdb24c63|Yerleşik|
 |**Sanal makinelerinizde bulunan güvenlik açıklarını düzeltin (Qualys tarafından desteklenir)**<br>Anahtar: 1195aff-c881-495E-9bc5-1486211ae03f|Yerleşik|
 |**Güvenlik açığı değerlendirme çözümünün sanal makinelerinizde yüklü olması gerekir**<br>Anahtar: 01b1ed4c-B733-4FEE-b145-f23236e70cf3|KLG|
 |**Güvenlik açıkları bir güvenlik açığı değerlendirme çözümü tarafından düzeltilmelidir**<br>Anahtar: 71992a2a-d168-42e0-b10e-6b45fa2ecddb|KLG|
-||||
+|||
 
 
 |İlke|Kapsam|
 |----|:----|
 |**Güvenlik açığı değerlendirmesi sanal makinelerde etkinleştirilmelidir**<br>İlke KIMLIĞI: 501541f7-f7e7-4cd6-868C-4190fdad3ac9|Yerleşik|
 |**Güvenlik açıkları bir güvenlik açığı değerlendirme çözümü tarafından düzeltilmelidir**<br>İlke KIMLIĞI: 760a85ff-6162-42b3-8d70-698e268f648c|KLG|
-||||
+|||
 
 
 ##### <a name="from-august-2020"></a>Ağustos 2020 ' den
@@ -334,12 +485,12 @@ Ayrıca, güvenlik açıkları bulunduğunda ve Güvenlik Merkezi 'ne bildirildi
 |----|:----|
 |**Sanal makinelerinizde bir güvenlik açığı değerlendirme çözümünün etkinleştirilmesi gerekir**<br>Anahtar: ffff0522-1e88-47fc-8382-2a80ba848f5d|Yerleşik + KLG|
 |**Sanal makinelerinizdeki güvenlik açıkları düzeltilmelidir**<br>Anahtar: 1195aff-c881-495E-9bc5-1486211ae03f|Yerleşik + KLG|
-||||
+|||
 
 |İlke|Kapsam|
 |----|:----|
 |[**Güvenlik açığı değerlendirmesi sanal makinelerde etkinleştirilmelidir**](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2fproviders%2fMicrosoft.Authorization%2fpolicyDefinitions%2f501541f7-f7e7-4cd6-868c-4190fdad3ac9)<br>İlke KIMLIĞI: 501541f7-f7e7-4cd6-868C-4190fdad3ac9 |Yerleşik + KLG|
-||||
+|||
 
 
 ### <a name="new-aks-security-policies-added-to-asc_default-initiative--for-use-by-private-preview-customers-only"></a>ASC_default Initiative 'e eklenen yeni AKS güvenlik ilkeleri – yalnızca özel önizleme müşterileri tarafından kullanılmak üzere
@@ -740,7 +891,7 @@ Dinamik uyumluluk paketleri, Güvenlik Merkezi güvenlik ilkesi sayfasından abo
 - **Kanada Federal PBMM**
 - **Azure CIS 1.1.0 (yeni)** (Azure CIS 1.1.0 'ın daha kapsamlı bir gösterimi)
 
-Ayrıca, Azure **güvenlik kıyaslaması**' nı son zamanlarda, genel uyumluluk çerçevelerine göre güvenlik ve uyum en iyi uygulamaları için Microsoft tarafından yazılan Azure 'a özgü yönergeleri ekledik. Panoda kullanılabilir hale geldiğinde ek standartlar desteklenecektir.  
+Ayrıca, Azure [güvenlik kıyaslaması](https://docs.microsoft.com/security/benchmark/azure/introduction)' nı son zamanlarda, genel uyumluluk çerçevelerine göre güvenlik ve uyum en iyi uygulamaları için Microsoft tarafından yazılan Azure 'a özgü yönergeleri ekledik. Panoda kullanılabilir hale geldiğinde ek standartlar desteklenecektir.  
  
 [Yasal uyumluluk panonuzda standartlar kümesini özelleştirme](update-regulatory-compliance-packages.md)hakkında daha fazla bilgi edinin.
 
@@ -899,7 +1050,7 @@ Azure depolama için tehdit koruması, Microsoft Threat Intelligence tarafından
 
 Merkezi olarak yönetilen güvenlik ve BT/işlem kuruluşları, ortamlarında tutarsızlıklar bulunduğunda kuruluştaki gerekli eylemi gerçekleştirmek için iç iş akışı süreçlerini uygular. Çoğu durumda, bu iş akışları tekrarlanabilir süreçler ve otomasyon, kuruluştaki süreçler büyük ölçüde kolaylaştırabilir.
 
-Günümüzde, güvenlik merkezi 'nde müşterilerin Azure Logic Apps kullanarak Otomasyon yapılandırması oluşturmalarına ve öneriler veya uyarılar gibi belirli ASC 'leri temel alarak otomatik olarak tetiklenecek ilkeler oluşturmalarına olanak tanıyan yeni bir özellik sunuyoruz. Azure Logic App, çok sayıda Logic App Bağlayıcısı tarafından desteklenen özel bir eylem yapmak veya bir e-posta gönderme ya da ServiceNow™ bileti açma gibi güvenlik merkezi tarafından sunulan şablonlardan birini kullanmak üzere yapılandırılabilir.
+Günümüzde, güvenlik merkezi 'nde müşterilerin Azure Logic Apps kullanarak Otomasyon yapılandırması oluşturmalarına ve öneriler veya uyarılar gibi belirli ASC 'leri temel alarak otomatik olarak tetiklenecek ilkeler oluşturmalarına olanak tanıyan yeni bir özellik sunuyoruz. Azure Logic App, çok sayıda Logic App Bağlayıcısı tarafından desteklenen özel bir eylem yapmak veya bir e-posta gönderme ya da ServiceNow bileti açma gibi güvenlik merkezi tarafından sunulan şablonlardan birini kullanmak üzere yapılandırılabilir &trade; .
 
 İş akışlarınızı çalıştırmaya yönelik otomatik ve el ile güvenlik merkezi özellikleri hakkında daha fazla bilgi için bkz. [iş akışı Otomasyonu](workflow-automation.md).
 

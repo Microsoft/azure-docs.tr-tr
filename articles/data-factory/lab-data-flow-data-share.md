@@ -6,13 +6,13 @@ ms.author: weetok
 ms.service: data-factory
 ms.topic: tutorial
 ms.custom: seo-lt-2019
-ms.date: 12/09/2020
-ms.openlocfilehash: fa424f7e1f5e1f885dd433b8abc8aae1dc1bc206
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 04/16/2021
+ms.openlocfilehash: 392b1a1650ab40951704d003f2a5e5337cf3c0f5
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97006206"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566717"
 ---
 # <a name="data-integration-using-azure-data-factory-and-azure-data-share"></a>Azure Data Factory ve Azure veri paylaşma kullanarak veri tümleştirme
 
@@ -64,12 +64,9 @@ Azure Data Factory bağlı hizmetler, dış kaynaklara yönelik bağlantı bilgi
 
 ### <a name="create-an-azure-sql-database-linked-service"></a>Azure SQL Veritabanı bağlı hizmeti oluşturma
 
-1. Yazma sayfası, işlem hatları, veri kümeleri, veri akışları, Tetikleyiciler ve bağlı hizmetler gibi veri fabrikası kaynaklarını oluşturduğunuz yerdir. Bağlı bir hizmet oluşturmak için sağ alt köşedeki **Bağlantılar** düğmesine tıklayın.
+1. Bağlı bir hizmet oluşturmak için, sol taraftaki çubukta hub 'ı **Yönet** ' i seçin, **Bağlantılar** bölmesinde **bağlı hizmetler** ' i seçin ve **ardından yeni ' yi seçerek yeni** bir bağlı hizmet ekleyin.
 
     ![Portal yapılandırma 2](media/lab-data-flow-data-share/configure2.png)
-1. Bağlantılar sekmesinde **Yeni** ' ye tıklayarak yeni bir bağlı hizmet ekleyin.
-
-    ![Portal yapılandırma 3](media/lab-data-flow-data-share/configure3.png)
 1. Yapılandıracağınız ilk bağlantılı hizmet bir Azure SQL DB 'dir. Veri deposu listesini filtrelemek için arama çubuğunu kullanabilirsiniz. **Azure SQL veritabanı** kutucuğuna tıklayın ve devam ' a tıklayın.
 
     ![Portal yapılandırma 4](media/lab-data-flow-data-share/configure-4.png)
@@ -99,9 +96,11 @@ Azure Data Factory bağlı hizmetler, dış kaynaklara yönelik bağlantı bilgi
 
 Veri *akışı eşleme kullanarak verileri dönüştürme* bölümünde, eşleme veri akışları oluşturacağız. Eşleme veri akışlarını oluşturmadan önce en iyi yöntem, etkin bir Spark kümesinde dönüştürme mantığını Saniyeler içinde test etmenizi sağlayan hata ayıklama modunu kullanmaktır.
 
-Hata ayıklamayı açmak için, fabrika üst çubuğunda **veri akışı hata ayıklama** kaydırıcısını tıklatın. Onay iletişim kutusu açılır pencereleri sırasında Tamam ' ı tıklatın. Kümenin başlaması yaklaşık 5-7 dakika sürer. *Azure SQL DB 'den, başlatılırken kopyalama etkinliğini kullanarak ADLS 2. verileri* almak için devam edin.
+Hata ayıklamayı açmak **için veri akışı aktivitenleriniz** olduğunda veri akışı tuvalinin veya işlem hattı tuvalinin üst çubuğundaki **veri akışı hata ayıklama** kaydırıcısını tıklatın. Onay iletişim kutusu açılır pencereleri sırasında Tamam ' ı tıklatın. Kümenin başlaması yaklaşık 5-7 dakika sürer. *Azure SQL DB 'den, başlatılırken kopyalama etkinliğini kullanarak ADLS 2. verileri* almak için devam edin.
 
 ![Portal 10 yapılandırma](media/lab-data-flow-data-share/configure10.png)
+
+![Veri akışı hata ayıklama kaydırıcısının nerede olduğunu gösteren ekran görüntüsü.](media/lab-data-flow-data-share/configure-11.png)
 
 ## <a name="ingest-data-using-the-copy-activity"></a>Kopyalama etkinliğini kullanarak verileri alma
 

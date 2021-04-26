@@ -6,12 +6,12 @@ ms.author: vivikram
 ms.manager: abhemraj
 ms.topic: how-to
 ms.date: 11/23/2020
-ms.openlocfilehash: cb0ac41d469ad9a7670ce4b1bae23b315a17dc38
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 0c9102f8ca724e431bb478945c5f4ba0369643d6
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104871102"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714856"
 ---
 # <a name="create-and-manage-projects"></a>Projeleri oluşturma ve yönetme
 
@@ -46,9 +46,13 @@ Azure aboneliğinde yeni bir proje ayarlayın.
 5. **Proje oluştur**' da Azure aboneliğini ve kaynak grubunu seçin. Yoksa, bir kaynak grubu oluşturun.
 6. **Proje ayrıntıları**' nda projeyi oluşturmak istediğiniz proje adını ve coğrafi konumu belirtin.
     - Coğrafya yalnızca şirket içi sunuculardan toplanan meta verileri depolamak için kullanılır. Geçiş için herhangi bir hedef bölge seçebilirsiniz. 
-    - [Kamu](migrate-support-matrix.md#supported-geographies-public-cloud) ve [kamu bulutları](migrate-support-matrix.md#supported-geographies-azure-government)için desteklenen coğrafi lıkları gözden geçirin.
+    - [Kamu](migrate-support-matrix.md#supported-geographies-public-cloud) ve [kamu bulutları](migrate-support-matrix.md#supported-geographies-azure-government)için desteklenen coğrafi lıkları gözden geçirin. 
 
-8. **Oluştur**’u seçin.
+
+    > [!Note]
+    > Özel uç nokta bağlantısına sahip bir Azure geçişi projesi oluşturmak için **Gelişmiş** yapılandırma bölümünü kullanın. [Daha fazla bilgi edinin](how-to-use-azure-migrate-with-private-endpoints.md#create-a-project-with-private-endpoint-connectivity) 
+
+7. **Oluştur**’u seçin.
 
      :::image type="content" source="./media/create-manage-projects/project-details.png" alt-text="Proje ayarlarının giriş sayfası":::
 

@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: allensu
-ms.openlocfilehash: a226682c2580a871e1b2fc4db71f369f3bcc3abb
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7a4688c196551f3ab6b5713d8939f53af161d1e3
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96010172"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505017"
 ---
 # <a name="how-caching-works"></a>Önbelleğe alma nasıl işler?
 
@@ -75,6 +75,7 @@ Azure CDN, önbellek süresini ve önbellek paylaşımını tanımlayan aşağı
 - İstemciden CDN POP 'a bir HTTP isteğinde kullanıldığında, `Cache-Control` Varsayılan olarak tüm Azure CDN profilleri tarafından yok sayılır.
 - İstemciden CDN POP 'a bir HTTP yanıtında kullanıldığında:
      - Verizon **Azure CDN ve Microsoft** desteği tüm yönergelerden standart **/Premium Azure CDN** `Cache-Control` .
+     - Verizon ve Microsoft 'tan **Standart/Premium Azure CDN** , [RFC 7234-Hypertext Transfer Protocol (http/1.1): Caching (ietf.org)](https://tools.ietf.org/html/rfc7234#section-5.2.2.8)içindeki Cache-Control yönergeler için önbelleğe alma davranışlarından **Azure CDN** .
      - **Akamai from Azure CDN Standart** yalnızca aşağıdaki yönergeleri destekler `Cache-Control` ; diğerleri yok sayılır:
          - `max-age`: Bir önbellek, belirtilen saniye sayısı için içeriği depolayabilirler. Örneğin, `Cache-Control: max-age=5`. Bu yönerge, içeriğin yeni olarak kabul edildiği en uzun süreyi belirtir.
          - `no-cache`: İçeriği önbelleğe alma, ancak önbellekten teslim etmeden önce her seferinde içerik doğrulama. İle eşdeğerdir `Cache-Control: max-age=0` .

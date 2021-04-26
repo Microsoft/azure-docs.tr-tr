@@ -5,23 +5,23 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
 ms.topic: conceptual
-ms.date: 05/13/2020
+ms.date: 04/20/2021
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: rogoya
 ms.collection: M365-identity-device-management
 ms.custom: contperf-fy20q4
-ms.openlocfilehash: efaf6060c0b09e071546038d9e30f2c8065059e7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: efa88e1be5c5df5dd09cb5a97c8ece352496ccdb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98600135"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769706"
 ---
 # <a name="what-are-security-defaults"></a>Güvenlik Varsayılanları nelerdir?
 
-Parola spreyi, yeniden oynama ve kimlik avı gibi yaygın kimlikle ilgili saldırılara karşı güvenliği yönetmek, daha fazla ve daha popüler hale geliyor olabilir. Güvenlik Varsayılanları, kuruluşunuzun önceden yapılandırılmış güvenlik ayarlarıyla bu saldırılara karşı korunmasına yardımcı olmaya daha kolay hale getirir:
+Parola spreyi, yeniden oynama ve kimlik avı gibi yaygın kimlikle ilgili saldırılara karşı güvenliğin yönetilmesi zor olabilir. Güvenlik Varsayılanları, kuruluşunuzun önceden yapılandırılmış güvenlik ayarlarıyla bu saldırılara karşı korunmasına yardımcı olmaya daha kolay hale getirir:
 
 - Tüm kullanıcıların Azure AD Multi-Factor Authentication için kaydolmasına gerek vardır.
 - Yöneticilerin Multi-Factor Authentication gerçekleştirmesini gerektirme.
@@ -46,7 +46,7 @@ Microsoft, güvenlik varsayılanlarını herkes için kullanılabilir hale yapı
 
 - Şu anda sinyalleri bir araya getirmek için koşullu erişim ilkelerini kullanan bir kuruluşunuzda, kararlar almak ve kuruluş ilkelerini zorlamak için, güvenlik Varsayılanları muhtemelen sizin için doğru değildir. 
 - Azure Active Directory Premium lisansları olan bir kuruluşunuzda, güvenlik Varsayılanları muhtemelen sizin için doğru değildir.
-- Kuruluşunuzun karmaşık güvenlik gereksinimleri varsa, koşullu erişimi dikkate almanız gerekir.
+- Kuruluşunuzun karmaşık güvenlik gereksinimleri varsa, koşullu erişimi dikkate almalısınız.
 
 ## <a name="policies-enforced"></a>Zorlanan ilkeler
 
@@ -70,6 +70,9 @@ Azure AD Multi-Factor Authentication kaydı tamamlandıktan sonra, her oturum a�
 - Kullanıcı yöneticisi
 - Kimlik doğrulama Yöneticisi
 
+> [!WARNING]
+> Dizininizde, genel yönetici ayrıcalıklarına sahip en az iki hesap atanmış olduğundan emin olun. Bu, bir genel yöneticinin kilitlenme olasılığına karşı yardımcı olur. Daha ayrıntılı bilgi için [Azure AD 'de acil durum erişim hesaplarını yönetme](../roles/security-emergency-access.md)makalesine bakın.
+
 ### <a name="protecting-all-users"></a>Tüm kullanıcıları koruma
 
 Yönetici hesaplarının, çok fazla kimlik doğrulama katmanı gerektiren tek hesaplar olduğunu düşündük. Yöneticiler hassas bilgilere geniş erişime sahiptir ve abonelik genelindeki ayarlarda değişiklik yapabilir. Ancak saldırganlar son kullanıcıları sıklıkla hedefleyebilir. 
@@ -80,12 +83,12 @@ Tüm kullanıcılar için korumayı geliştirmenin yaygın bir yöntemi, herkes 
 
 ### <a name="blocking-legacy-authentication"></a>Eski kimlik doğrulaması engelleniyor
 
-Kullanıcılarınıza bulut uygulamalarınıza kolay erişim sağlamak için Azure AD, eski kimlik doğrulaması dahil olmak üzere çeşitli kimlik doğrulama protokollerini destekler. *Eski kimlik doğrulaması* , tarafından yapılan bir kimlik doğrulama isteğine başvuran bir terimdir:
+Kullanıcılarınıza bulut uygulamalarınıza kolay erişim sağlamak için Azure AD, eski kimlik doğrulama dahil olmak üzere çeşitli kimlik doğrulama protokollerini destekler. *Eski kimlik doğrulaması* , tarafından yapılan bir kimlik doğrulama isteğine başvuran bir terimdir:
 
 - Modern kimlik doğrulaması kullanmayan istemciler (örneğin, bir Office 2010 istemcisi).
 - IMAP, SMTP veya POP3 gibi eski posta protokollerini kullanan tüm istemciler.
 
-Günümüzde, oturum açma girişimlerinin çoğu eski kimlik doğrulamasından geliyor. Eski kimlik doğrulama Multi-Factor Authentication desteklemez. Dizininizde etkinleştirilmiş bir Multi-Factor Authentication ilkeniz olsa da, bir saldırgan eski bir protokolü kullanarak kimlik doğrulaması yapabilir ve Multi-Factor Authentication atlayabilirsiniz. 
+Günümüzde, en çok güvenliği ihlal eden oturum açma girişimleri eski kimlik doğrulamasından geliyor. Eski kimlik doğrulama Multi-Factor Authentication desteklemez. Dizininizde etkinleştirilmiş bir Multi-Factor Authentication ilkeniz olsa da, bir saldırgan eski bir protokolü kullanarak kimlik doğrulaması yapabilir ve Multi-Factor Authentication atlayabilirsiniz. 
 
 Kiracınızda güvenlik Varsayılanları etkinleştirildikten sonra, eski bir protokol tarafından yapılan tüm kimlik doğrulama istekleri engellenir. Güvenlik Varsayılanları Exchange Active Sync temel kimlik doğrulamasını engeller.
 
@@ -96,7 +99,7 @@ Kiracınızda güvenlik Varsayılanları etkinleştirildikten sonra, eski bir pr
 
 ### <a name="protecting-privileged-actions"></a>Ayrıcalıklı eylemleri koruma
 
-Kuruluşlar, aşağıdakiler dahil olmak üzere Azure Resource Manager API 'SI aracılığıyla yönetilen çeşitli Azure hizmetleri kullanır:
+Kuruluşlar, Azure Resource Manager API ile yönetilen çeşitli Azure hizmetlerini kullanarak aşağıdakiler de dahildir:
 
 - Azure portalı 
 - Azure PowerShell 

@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.date: 03/01/2021
 ms.author: alkohli
 ms.openlocfilehash: 67110a2a2bd7f34c735edd126cfc655f45247fc2
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105560242"
 ---
 # <a name="kubernetes-workload-management-on-your-azure-stack-edge-pro-device"></a>Azure Stack Edge Pro cihazınızda Kubernetes iş yükü yönetimi

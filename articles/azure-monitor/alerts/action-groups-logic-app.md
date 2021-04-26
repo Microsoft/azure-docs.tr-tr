@@ -5,12 +5,12 @@ author: dkamstra
 ms.author: dukek
 ms.topic: conceptual
 ms.date: 02/19/2021
-ms.openlocfilehash: a1371e00a6d4c5db609466e25c9d94aad5e73398
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f1e81dca6926ae9f57e428eb1cef761c588a78b6
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102045726"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107029854"
 ---
 # <a name="how-to-trigger-complex-actions-with-azure-monitor-alerts"></a>Azure Izleyici uyarıları ile karmaşık eylemleri tetikleme
 
@@ -34,66 +34,66 @@ Mantıksal uygulamanın farklı bir eylem gerçekleştirmesini istiyorsanız iş
 
 ## <a name="create-an-activity-log-alert-administrative"></a>Etkinlik günlüğü uyarısı oluştur: Yönetim
 
-1. [Mantıksal uygulama oluşturma](~/articles/logic-apps/quickstart-create-first-logic-app-workflow.md)
+1. [Mantıksal uygulama oluşturun](~/articles/logic-apps/quickstart-create-first-logic-app-workflow.md).
 
-2.  Tetikleyiciyi seçin: **BIR http isteği alındığında**.
+1.  Tetikleyiciyi seçin: **BIR http isteği alındığında**.
 
 1. **Http isteğinin alındığı zaman** iletişim kutusunda, **şema oluşturmak Için örnek yük kullan**' ı seçin.
 
-    ![Bir g/ç isteği oluştur iletişim kutusu ve seçilen şema için örnek yükü Kullan seçili olan ekran görüntüsü. ](~/articles/app-service/media/tutorial-send-email/generate-schema-with-payload.png)
+    ![Bir g/ç isteği oluştur iletişim kutusu ve şema oluşturmak için örnek yük kullan seçeneğinin seçili olduğunu gösteren ekran görüntüsü. ](~/articles/app-service/media/tutorial-send-email/generate-schema-with-payload.png)
 
-3.  Aşağıdaki örnek yükü kopyalayıp iletişim kutusuna yapıştırın:
+1.  Aşağıdaki örnek yükü kopyalayıp iletişim kutusuna yapıştırın:
 
     ```json
         {
-            "schemaId": "Microsoft.Insights/activityLogs",
-            "data": {
-                "status": "Activated",
-                "context": {
-                "activityLog": {
-                    "authorization": {
-                    "action": "microsoft.insights/activityLogAlerts/write",
-                    "scope": "/subscriptions/…"
+            "schemaId&quot;: &quot;Microsoft.Insights/activityLogs&quot;,
+            &quot;data&quot;: {
+                &quot;status&quot;: &quot;Activated&quot;,
+                &quot;context&quot;: {
+                &quot;activityLog&quot;: {
+                    &quot;authorization&quot;: {
+                    &quot;action&quot;: &quot;microsoft.insights/activityLogAlerts/write&quot;,
+                    &quot;scope&quot;: &quot;/subscriptions/…&quot;
                     },
-                    "channels": "Operation",
-                    "claims": "…",
-                    "caller": "logicappdemo@contoso.com",
-                    "correlationId": "91ad2bac-1afa-4932-a2ce-2f8efd6765a3",
-                    "description": "",
-                    "eventSource": "Administrative",
-                    "eventTimestamp": "2018-04-03T22:33:11.762469+00:00",
-                    "eventDataId": "ec74c4a2-d7ae-48c3-a4d0-2684a1611ca0",
-                    "level": "Informational",
-                    "operationName": "microsoft.insights/activityLogAlerts/write",
-                    "operationId": "61f59fc8-1442-4c74-9f5f-937392a9723c",
-                    "resourceId": "/subscriptions/…",
-                    "resourceGroupName": "LOGICAPP-DEMO",
-                    "resourceProviderName": "microsoft.insights",
-                    "status": "Succeeded",
-                    "subStatus": "",
-                    "subscriptionId": "…",
-                    "submissionTimestamp": "2018-04-03T22:33:36.1068742+00:00",
-                    "resourceType": "microsoft.insights/activityLogAlerts"
+                    &quot;channels&quot;: &quot;Operation&quot;,
+                    &quot;claims&quot;: &quot;…&quot;,
+                    &quot;caller&quot;: &quot;logicappdemo@contoso.com&quot;,
+                    &quot;correlationId&quot;: &quot;91ad2bac-1afa-4932-a2ce-2f8efd6765a3&quot;,
+                    &quot;description&quot;: &quot;&quot;,
+                    &quot;eventSource&quot;: &quot;Administrative&quot;,
+                    &quot;eventTimestamp&quot;: &quot;2018-04-03T22:33:11.762469+00:00&quot;,
+                    &quot;eventDataId&quot;: &quot;ec74c4a2-d7ae-48c3-a4d0-2684a1611ca0&quot;,
+                    &quot;level&quot;: &quot;Informational&quot;,
+                    &quot;operationName&quot;: &quot;microsoft.insights/activityLogAlerts/write&quot;,
+                    &quot;operationId&quot;: &quot;61f59fc8-1442-4c74-9f5f-937392a9723c&quot;,
+                    &quot;resourceId&quot;: &quot;/subscriptions/…&quot;,
+                    &quot;resourceGroupName&quot;: &quot;LOGICAPP-DEMO&quot;,
+                    &quot;resourceProviderName&quot;: &quot;microsoft.insights&quot;,
+                    &quot;status&quot;: &quot;Succeeded&quot;,
+                    &quot;subStatus&quot;: &quot;&quot;,
+                    &quot;subscriptionId&quot;: &quot;…&quot;,
+                    &quot;submissionTimestamp&quot;: &quot;2018-04-03T22:33:36.1068742+00:00&quot;,
+                    &quot;resourceType&quot;: &quot;microsoft.insights/activityLogAlerts&quot;
                 }
                 },
-                "properties": {}
+                &quot;properties&quot;: {}
             }
         }
     ```
 
-9. **Logic App Designer** , mantıksal uygulamaya gönderilen isteğin **Content-Type** üst bilgisini **Application/JSON** olarak ayarlaması gerektiğini hatırlatmak için bir açılır pencere görüntüler. Açılır pencereyi kapatın. Azure Izleyici uyarısı üstbilgiyi ayarlar.
+1. **Logic Apps tasarımcısında** , mantıksal uygulamaya gönderilen isteğin **Content-Type** üst bilgisini **Application/JSON** olarak ayarlaması gerektiğini hatırlatmak için bir açılır pencere görüntülenir. Açılır pencereyi kapatın. Azure Izleyici uyarısı üstbilgiyi ayarlar.
 
-    ![Content-Type üst bilgisini ayarlama](media/action-groups-logic-app/content-type-header.png "Content-Type üst bilgisini ayarlama")
+    ![Content-Type üst bilgisini ayarlama](media/action-groups-logic-app/content-type-header.png &quot;Content-Type üst bilgisini ayarlama")
 
-10. **+** **Yeni adım** ' ı ve ardından **Eylem Ekle**' yi seçin.
+1. **+** **Yeni adım** ' ı ve ardından **Eylem Ekle**' yi seçin.
 
     ![Eylem ekleme](media/action-groups-logic-app/add-action.png "Eylem ekleme")
 
-11. Microsoft ekipleri bağlayıcısını arayın ve seçin. **Microsoft ekipleri-Iletiyi gönder** eylemini seçin.
+1. Microsoft ekipleri bağlayıcısını arayın ve seçin. **Microsoft ekipleri-Iletiyi gönder** eylemini seçin.
 
     ![Microsoft ekipleri eylemleri](media/action-groups-logic-app/microsoft-teams-actions.png "Microsoft ekipleri eylemleri")
 
-12. Microsoft ekipleri eylemini yapılandırın. **Logic Apps tasarımcı** , iş veya okul hesabınızda kimlik doğrulaması belirtmenizi ister. İletinin gönderileceği **EKIP kimliğini** ve **Kanal kimliğini** seçin.
+1. Microsoft ekipleri eylemini yapılandırın. **Logic Apps tasarımcı** , iş veya okul hesabınızda kimlik doğrulaması belirtmenizi ister. İletinin gönderileceği **EKIP kimliğini** ve **Kanal kimliğini** seçin.
 
 13. Statik metin birleşimini ve dinamik içerikte öğesine başvuruları kullanarak iletiyi yapılandırın \<fields\> . Aşağıdaki metni kopyalayıp **ileti** alanına yapıştırın:
 
@@ -111,9 +111,9 @@ Mantıksal uygulamanın farklı bir eylem gerçekleştirmesini istiyorsanız iş
 
     ![Microsoft ekipleri eylemi: ileti gönderin](media/action-groups-logic-app/teams-action-post-message.png "Microsoft ekipleri eylemi: ileti gönderin")
 
-14. **Logic Apps tasarımcısının** en üstünde, mantıksal uygulamanızı kaydetmek için **Kaydet** ' i seçin.
+1. **Logic Apps tasarımcısının** en üstünde, mantıksal uygulamanızı kaydetmek için **Kaydet** ' i seçin.
 
-15. Mevcut eylem grubunuzu açın ve mantıksal uygulamaya başvurmak için bir eylem ekleyin. Mevcut bir eylem grubunuz yoksa, bir tane oluşturmak için [Azure Portal eylem grupları oluşturma ve yönetme](./action-groups.md) bölümüne bakın. Değişikliklerinizi kaydetmeyi unutmayın.
+1. Mevcut eylem grubunuzu açın ve mantıksal uygulamaya başvurmak için bir eylem ekleyin. Mevcut bir eylem grubunuz yoksa, bir tane oluşturmak için [Azure Portal eylem grupları oluşturma ve yönetme](./action-groups.md) bölümüne bakın. Değişikliklerinizi kaydetmeyi unutmayın.
 
     ![Eylem grubunu güncelleştirme](media/action-groups-logic-app/update-action-group.png "Eylem grubunu güncelleştirme")
 

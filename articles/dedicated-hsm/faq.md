@@ -13,12 +13,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/25/2021
 ms.author: keithp
-ms.openlocfilehash: f6705b5f72aaa8f990aaf3b1daa33697b690d1f1
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 8768acc8d4720a750c4c7f7e0f40340aeeff279d
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105608893"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449061"
 ---
 # <a name="frequently-asked-questions-faq"></a>Sık sorulan sorular (SSS)
 
@@ -309,7 +309,7 @@ Kullanılan [Thales Luna 7 HSM modeli A790](https://cpl.thalesgroup.com/encrypti
 
 ### <a name="q-how-many-keys-can-be-supported-in-dedicated-hsm"></a>S: adanmış HSM 'de kaç anahtar desteklenebilir?
 
-Maksimum anahtar sayısı, kullanılabilir belleğin bir işlevidir. A790 'in kullanımdaki SafeNet Luna 7 modeli, 32 MB belleğe sahiptir. Asimetrik anahtarlar kullanılıyorsa, aşağıdaki sayılar da anahtar çiftlerine uygulanabilir.
+Maksimum anahtar sayısı, kullanılabilir belleğin bir işlevidir. Kullanılmakta olan Thales Luna 7 modeli, 32 MB belleğe sahiptir. Asimetrik anahtarlar kullanılıyorsa, aşağıdaki sayılar da anahtar çiftlerine uygulanabilir.
 
 * RSA-2048-19.000
 * ECC-P256-91.000

@@ -2,15 +2,15 @@
 title: Bicep dosyaları oluşturma-Visual Studio Code
 description: Azure kaynaklarını dağıtmak için Bıcep dosyalarına Visual Studio Code ve bicep uzantısı kullanın
 author: mumian
-ms.date: 03/26/2021
+ms.date: 04/12/2021
 ms.topic: quickstart
 ms.author: jgao
-ms.openlocfilehash: 4d1064351ddfacdebfa67fd9b2f517f592de3a7c
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: e82f047f553290c9121d91060c347c5b242c7ec2
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105612900"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306475"
 ---
 # <a name="quickstart-create-bicep-files-with-visual-studio-code"></a>Hızlı başlangıç: Visual Studio Code bicep dosyaları oluşturma
 
@@ -51,6 +51,10 @@ Kaynak bildiriminde dört bileşen vardır:
 - **simgesel ad** (STG): sembolik ad, bıcep dosyanız boyunca kaynağa başvurmak için bir tanıtıcıdır. Bu, kaynağın adı dağıtıldığında ne olur? Kaynağın adı, **Name** özelliği tarafından tanımlanır.  Bu listedeki dördüncü bileşene bakın.
 - **kaynak türü** ( Microsoft.Storage/storageAccounts@2019-06-01 ): kaynak sağlayıcıdan (Microsoft. Storage), kaynak türünden (Storageaccounts) ve apiversion 'dan (2019-06-01) oluşur. Her kaynak sağlayıcı kendi API sürümlerini yayımlar, bu nedenle bu değer türüne özeldir. [ARM şablon başvurusundan](/azure/templates/)çeşitli Azure kaynakları için daha fazla tür ve apiVersions bulabilirsiniz.
 - **Özellikler** (= {...} içindeki her şey): kaynak türü Için özellikleri belirtin. Her kaynağın bir `name` özelliği vardır. Kaynakların çoğu ayrıca `location` , kaynağın dağıtıldığı bölgeyi ayarlayan bir özelliğine sahiptir. Diğer özellikler kaynak türüne ve API sürümüne göre farklılık gösterir.
+
+Daha fazla bilgi için bkz. [Bıcep yapısı](./bicep-file.md).
+
+Name özelliği için bir açıklama vardır.  `//`Tek satır açıklamaları veya `/* ... */` çok satırlı açıklamalar için kullanın
 
 ## <a name="completion-and-validation"></a>Tamamlama ve doğrulama
 

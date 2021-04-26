@@ -10,12 +10,12 @@ author: rohitnayakmsft
 ms.author: rohitna
 ms.reviewer: vanto
 ms.date: 07/01/2019
-ms.openlocfilehash: 588c6548afb07fb8ee3de5152c240ddd9ea2293b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 07611a3620a2fd8efe0da075b03b55a5be3a5be9
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102430199"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107505386"
 ---
 # <a name="azure-sql-database-traffic-migration-to-newer-gateways"></a>Azure SQL veritabanı trafiğini daha yeni ağ geçitlerine geçirme
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -29,8 +29,19 @@ En güncel bilgiler [Azure SQL veritabanı ağ GEÇIDI IP adresleri](connectivit
 ## <a name="status-updates"></a>Durum güncelleştirmeleri
 
 # <a name="in-progress"></a>[Sürüyor](#tab/in-progress-ip)
+## <a name="may-2021"></a>Mayıs 2021
+Yeni SQL ağ geçitleri aşağıdaki bölgelere ekleniyor:
+- UK Güney: 51.140.144.36, 51.105.72.32  
+- Orta Batı ABD: 13.71.193.32, 13.71.193.33 
+
+Bu SQL ağ geçidi, 17 Mayıs 2021 ' de müşteri trafiğini kabul etmeye başlayacaktır.
 
 ## <a name="april-2021"></a>2021 Nisan
+Yeni SQL ağ geçitleri aşağıdaki bölgelere ekleniyor:
+- Doğu ABD 2:40.70.144.193
+
+Bu SQL ağ geçidi, 30 Nisan 2021 tarihinde müşteri trafiğini kabul etmeye başlayacaktır.
+
 Yeni SQL ağ geçitleri aşağıdaki bölgelere ekleniyor:
 - Norveç Doğu: 51.120.96.33
 - Güney Doğu Asya: 13.67.16.193
@@ -43,7 +54,6 @@ Bu SQL ağ geçitleri, 5 Nisan 2021 tarihinde müşteri trafiğini kabul etmeye 
 
 ## <a name="march-2021"></a>Mart 2021
 Birden çok bölgedeki aşağıdaki SQL ağ geçitleri devre dışı bırakılıyor sürecinde:
-
 - Brezilya Güney: 104.41.11.5
 - Doğu Asya: 191.234.2.139
 - Doğu ABD: 191.238.6.43
@@ -56,6 +66,9 @@ Birden çok bölgedeki aşağıdaki SQL ağ geçitleri devre dışı bırakılı
 - Batı ABD: 23.99.34.75
 
 Bu ağ geçitleri (eski donanımlar üzerinde çalışan) hiçbir müşteri trafiğini yönlendirmediğinden hiçbir müşteri etkisi önerilmez. Bu ağ geçitlerinin IP adresleri 15 Mart 2021 ' de devre dışı bırakılır.
+
+# <a name="completed"></a>[Tamamlandı](#tab/completed-ip)
+Aşağıdaki ağ geçidi geçişleri tamamlanmıştır: 
 
 ## <a name="february-2021"></a>Şubat 2021
 Yeni SQL ağ geçitleri aşağıdaki bölgelere ekleniyor:
@@ -80,8 +93,7 @@ Yeni SQL ağ geçitleri aşağıdaki bölgelere ekleniyor:
 
 Bu SQL ağ geçitleri, 31 Ocak 2021 tarihinde müşteri trafiğini kabul etmeye başlar.
 
-# <a name="completed"></a>[Tamamlandı](#tab/completed-ip)
-Aşağıdaki ağ geçidi geçişleri tamamlanmıştır: 
+
 
 ### <a name="october-2020"></a>Ekim 2020
 

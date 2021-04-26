@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: deshriva
 ms.author: deshriva
 ms.date: 02/08/2021
-ms.openlocfilehash: 0180f94109d01443390da363d9e09c5ad0b26d18
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 32b287c3d7b1974db5a079d1ee84aaafad3faed7
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103496125"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727697"
 ---
 # <a name="hdinsight-36-component-versions"></a>HDInsight 3,6 bileşen sürümleri
 
@@ -19,20 +19,22 @@ Bu makalede, Azure HDInsight 3,6 ' deki Apache Hadoop ortamı bileşenleri ve s�
 
 ## <a name="support-for-hdinsight-36"></a>HDInsight 3,6 için destek
 
+1 Temmuz 2021 ' den itibaren, Microsoft belirli HDI 3,6 küme türleri için Temel destek sunacaktır.
 Aşağıdaki tabloda, HDInsight 3,6 küme türleri için destek zaman çerçevesi listelenmektedir.
 
-| Küme Türü                    | Framework sürümü | Geçerli destek süre sonu        | Yeni destek sona erme tarihi |
-|---------------------------------|-------------------|-----------------------------------|-----------------------------|
-| HDInsight 3,6 Hadoop            | 2.7.3             | 31 Aralık 2020                      | 30 Haziran 2021               |
-| HDInsight 3,6 Spark             | 2.3               | 31 Aralık 2020                      | 30 Haziran 2021               |
-| HDInsight 3,6 Spark             | 2,2               | 30 Haziran 2020 tarihinde kullanımdan kaldırıldı          |                             |
-| HDInsight 3,6 Spark             | 2.1               | 30 Haziran 2020 tarihinde kullanımdan kaldırıldı          |                             |
-| HDInsight 3,6 Kafka             | 1.1               | 31 Aralık 2020                      | 30 Haziran 2021               |
-| HDInsight 3,6 Kafka             | 1.0               | 30 Haziran 2020 tarihinde kullanımdan kaldırıldı.         |                             |
-| HDInsight 3,6 HBase             | 1.1               | 31 Aralık 2020                      | 30 Haziran 2021               |
-| HDInsight 3,6 etkileşimli sorgu | 2.1               | 31 Aralık 2020                      | 30 Haziran 2021               |
-| HDInsight 3,6 fırtınası             | 1.1               | 31 Aralık 2020                      | 30 Haziran 2021               |
-| HDInsight 3,6 ML Hizmetleri      | 9.3               | 31 Aralık 2020                      | 31 Aralık 2020                |
+| Küme Türü                    | Framework sürümü | Standart destek süre sonu       | Temel destek sona erme tarihi | Emeklilik tarihi |
+|---------------------------------|-------------------|-----------------------------------|------------------------------|-----------------|
+| HDInsight 3,6 Hadoop            | 2.7.3             | 30 Haziran 2021                     | 3 Nisan 2022                | 4 Nisan 2022 |
+| HDInsight 3,6 Spark             | 2.3               | 30 Haziran 2021                     | 3 Nisan 2022                | 4 Nisan 2022 |
+| HDInsight 3,6 Kafka             | 1.1               | 30 Haziran 2021                     | 3 Nisan 2022                | 4 Nisan 2022 |
+| HDInsight 3,6 HBase             | 1.1               | 30 Haziran 2021                     | 3 Nisan 2022                | 4 Nisan 2022 |
+| HDInsight 3,6 etkileşimli sorgu | 2.1               | 30 Haziran 2021                     | 3 Nisan 2022                | 4 Nisan 2022 |
+| HDInsight 3,6 fırtınası             | 1.1               | 30 Haziran 2021                     | 3 Nisan 2022                | 4 Nisan 2022 |
+| HDInsight 3,6 ML Hizmetleri      | 9.3               | -                                 | -                            | 31 Aralık 2020 |
+| HDInsight 3,6 Spark             | 2,2               | -                                 | -                            | 30 Haziran 2020 |
+| HDInsight 3,6 Spark             | 2.1               | -                                 | -                            | 30 Haziran 2020 |
+| HDInsight 3,6 Kafka             | 1.0               | -                                 | -                            | 30 Haziran 2020 |
+
 ## <a name="apache-components-available-with-hdinsight-version-36"></a>HDInsight sürüm 3,6 ile kullanılabilen Apache bileşenleri
 
 HDInsight 3,6 ile ilişkili OSS bileşen sürümleri aşağıdaki tabloda listelenmiştir.

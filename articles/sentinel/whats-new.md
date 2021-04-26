@@ -7,13 +7,13 @@ ms.author: bagol
 ms.service: azure-sentinel
 ms.subservice: azure-sentinel
 ms.topic: conceptual
-ms.date: 03/11/2021
-ms.openlocfilehash: 31ba96e0f8772877d7b4881c6bab0561cbe7956e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/08/2021
+ms.openlocfilehash: 7f9a8cb54458999d8f20a258bc36241dfdbd0de8
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104604262"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376044"
 ---
 # <a name="whats-new-in-azure-sentinel"></a>Azure Sentinel 'deki yenilikler
 
@@ -25,20 +25,76 @@ Belirtilen özellikler Şu anda ÖNIZLEME aşamasındadır. [Azure önizleme ek 
 
 
 > [!TIP]
-> Microsoft 'un, takımlarınızın uyarlayabilmesi ve kullanabileceği belirli bir arama [sorguları](https://github.com/Azure/Azure-Sentinel) dahil olmak üzere [Azure Sentinel Community](https://github.com/Azure/Azure-Sentinel)'ye yönelik Microsoft 'a yönelik sorguları, PlayBook 'ları, çalışma kitaplarını ve not defterlerini ele alan tehdit. 
+> Microsoft 'un, takımlarınızın uyarlayabilmesi ve kullanabileceği belirli bir arama [sorguları](https://github.com/Azure/Azure-Sentinel) dahil olmak üzere [Azure Sentinel Community](https://github.com/Azure/Azure-Sentinel)'ye yönelik Microsoft 'a yönelik sorguları, PlayBook 'ları, çalışma kitaplarını ve not defterlerini ele alan tehdit.
 >
 > Ayrıca katkıda bulunabilirsiniz! [Azure Sentinel tehdit arayıcılar GitHub Community](https://github.com/Azure/Azure-Sentinel/wiki)' de bize katılarak.
-> 
+>
+
+## <a name="april-2021"></a>2021 Nisan
+
+- [Olay zaman çizelgesi (Genel Önizleme)](#incident-timeline-public-preview)
+
+### <a name="incident-timeline-public-preview"></a>Olay zaman çizelgesi (Genel Önizleme)
+
+Olay Ayrıntıları sayfasındaki ilk sekme artık, olaydaki uyarı ve yer işaretlerinin zaman çizelgesini gösteren **zaman çizelgesi**' dir. Bir olayın zaman çizelgesi olayı daha iyi anlamanıza ve ilgili uyarılar ve yer işaretleri genelinde saldırgan etkinliğinin zaman çizelgesini yeniden oluşturmanıza yardımcı olabilir.
+
+- Olay bağlamından çıkmadan ayrıntılarını görmek için zaman çizelgesinde bir öğe seçin
+- Zaman çizelgesi içeriğini yalnızca uyarıları veya yer imlerini veya belirli bir önem derecesi ya da MITRE 'nın öğelerini göstermek için filtreleyin.
+- **Günlükler** alanında ilgili olayları görmek için kaydın tamamını veya **Olaylar** bağlantısını görüntülemek için **Sistem Uyarısı kimliği** bağlantısını seçebilirsiniz.
+
+Örnek:
+
+:::image type="content" source="media/tutorial-investigate-cases/incident-timeline.png" alt-text="Olay zaman çizelgesi sekmesi":::
+
+Daha fazla bilgi için bkz. [öğretici: Azure Sentinel ile olayları araştırma](tutorial-investigate-cases.md).
 
 ## <a name="march-2021"></a>Mart 2021
 
+- [Çalışma kitaplarını görünüm modundayken otomatik olarak yenilenecek şekilde ayarla](#set-workbooks-to-automatically-refresh-while-in-view-mode)
+- [Azure Güvenlik Duvarı için yeni algılamalar](#new-detections-for-azure-firewall)
 - [Otomasyon kuralları ve olay tarafından tetiklenen PlayBook 'ları](#automation-rules-and-incident-triggered-playbooks) (tüm yeni PlayBook belgeleri dahil)
 - [Yeni uyarı zenginleştirme: geliştirilmiş varlık eşlemesi ve özel ayrıntılar](#new-alert-enrichments-enhanced-entity-mapping-and-custom-details)
 - [Azure Sentinel çalışma kitaplarınızı yazdırma veya PDF olarak kaydetme](#print-your-azure-sentinel-workbooks-or-save-as-pdf)
 - [Olay filtreleri ve sıralama tercihleri artık oturumunuza kaydedilir (Genel Önizleme)](#incident-filters-and-sort-preferences-now-saved-in-your-session-public-preview)
 - [Microsoft 365 Defender olay tümleştirmesi (Genel Önizleme)](#microsoft-365-defender-incident-integration-public-preview)
 - [Azure Ilkesi kullanarak yeni Microsoft hizmet bağlayıcıları](#new-microsoft-service-connectors-using-azure-policy)
- 
+
+### <a name="set-workbooks-to-automatically-refresh-while-in-view-mode"></a>Çalışma kitaplarını görünüm modundayken otomatik olarak yenilenecek şekilde ayarla
+
+Azure Sentinel kullanıcıları artık, bir görüntüleme oturumu sırasında çalışma kitabı verilerini otomatik olarak yenilemek için yeni [Azure izleyici özelliğini](https://techcommunity.microsoft.com/t5/azure-monitor/azure-workbooks-set-it-to-auto-refresh/ba-p/2228555) kullanabilir.
+
+Her çalışma kitabında veya çalışma kitabı şablonunda, :::image type="icon" source="media/whats-new/auto-refresh-workbook.png" border="false"::: Aralık seçeneklerinizi göstermek için **Otomatik Yenile** ' yi seçin. Geçerli görünüm oturumu için kullanmak istediğiniz seçeneği seçin ve **Uygula**' yı seçin.
+
+- Desteklenen yenileme aralıkları **5 dakikadan** **1 güne** kadar değişir.
+- Varsayılan olarak, otomatik yenileme kapalıdır. Performansı iyileştirmek için, bir çalışma kitabını her kapattığınızda otomatik yenileme de kapatılır ve arka planda çalıştırılmaz. Çalışma kitabını bir sonraki açışınızda gerektiğinde otomatik yenilemeyi yeniden açın.
+- Bir çalışma kitabını düzenlerken otomatik yenileme duraklatılır ve düzenleme modundan görüntüleme moduna geçtiğinizde otomatik yenileme aralıkları yeniden başlatılır.
+
+    Yenile düğmesini seçerek çalışma kitabını el ile yenilediğinizde aralıklar da yeniden başlatılır :::image type="icon" source="media/whats-new/manual-refresh-button.png" border="false":::  .
+
+Daha fazla bilgi için bkz. Öğretici: verilerinizi ve [Azure izleyici belgelerini](../azure-monitor/visualize/workbooks-overview.md) [görselleştirin ve izleyin](tutorial-monitor-your-data.md) .
+
+### <a name="new-detections-for-azure-firewall"></a>Azure Güvenlik Duvarı için yeni algılamalar
+
+Azure Güvenlik Duvarı 'nın çeşitli kullanıma hazır algılamaları Azure Sentinel 'teki [analiz](import-threat-intelligence.md#analytics-puts-your-threat-indicators-to-work-detecting-potential-threats) alanına eklenmiştir. Bu yeni algılamalar, iç ağdaki makineler, algılama kuralı sorgusunda tanımlandığı şekilde, bilinen ıocs ile ilişkili İnternet etki alanı adlarını veya IP adreslerini sorgulamaya veya bunlara bağlanmayı denediklerinde, güvenlik ekiplerinin uyarı almasını sağlar.
+
+Yeni algılamalar şunları içerir:
+
+- [Solorigate ağ Işareti](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/Solorigate-Network-Beacon.yaml)
+- [Bilinen GALLıUM etki alanları ve karmaları](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/GalliumIOCs.yaml)
+- [Bilinen ıRIDUM IP 'si](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/IridiumIOCs.yaml)
+- [Bilinen Phosphorus grup etki alanları/IP](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/PHOSPHORUSMarch2019IOCs.yaml)
+- [DCU ÖZETI 'ne dahil edilen THALUM etki alanları](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/ThalliumIOCs.yaml)
+- [Bilinen ZıNC ile ilgili maldoc karması](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/ZincJan272021IOCs.yaml)
+- [Bilinen STRONTIUM Group etki alanları](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/STRONTIUMJuly2019IOCs.yaml)
+- [NOINANıLMAZ um-etki alanı ve IP ıocs-Mart 2021](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/NOBELIUM_DomainIOCsMarch2021.yaml)
+
+
+Azure Güvenlik duvarları için algılama, yerleşik şablon galerisine sürekli olarak eklenir. Azure Güvenlik Duvarı 'nın en son algılamalarını almak için, **kural şablonları**' nın altında, **veri kaynaklarını** **Azure Güvenlik Duvarı** ile filtreleyin:
+
+:::image type="content" source="media/whats-new/new-detections-analytics-efficiency-workbook.jpg" alt-text="Analiz verimlilik çalışma kitabındaki yeni algılamalar":::
+
+Daha fazla bilgi için bkz. [Azure 'Da Azure Güvenlik Duvarı Için yeni algılamalar](https://techcommunity.microsoft.com/t5/azure-network-security/new-detections-for-azure-firewall-in-azure-sentinel/ba-p/2244958).
+
 ### <a name="automation-rules-and-incident-triggered-playbooks"></a>Otomasyon kuralları ve olay tarafından tetiklenen PlayBook 'ları 'lar
 
 Otomasyon kuralları Azure Sentinel 'de yeni bir kavramdır ve olay işleme otomasyonunu merkezi olarak yönetmenize olanak tanır. Otomasyon kuralları, bir seferde birden fazla analiz kuralına yönelik yanıtları otomatik hale getirmenize, el ile etiketleme, atayabilir veya kapatabilir ve bu da yürütülen eylemlerin sırasını kontrol etmenizi sağlar ve bunları çalıştırabilirsiniz. Otomasyon kuralları, Azure Sentinel 'de Otomasyon kullanımını kolaylaştırır ve olay düzenleme işlemleriniz için karmaşık iş akışlarını basitleştirmenize imkan sağlar.
@@ -47,7 +103,7 @@ Otomasyon kuralları Azure Sentinel 'de yeni bir kavramdır ve olay işleme otom
 
 Yukarıda belirtildiği gibi, PlayBook 'lar artık uyarı tetikleyicisine ek olarak olay tetikleyicisi ile etkinleştirilebilir. Olay tetikleyicisi, PlayBook 'ları ile birlikte çalışmak için daha büyük bir giriş kümesi sağlar (olay, tüm uyarı ve varlık verilerini de içerdiğinden), yanıt iş akışlarınızda daha da fazla güç ve esneklik sağlar. Olay ile tetiklenen PlayBook 'lar Otomasyon kurallarından çağrılarak etkinleştirilir.
 
-[PlayBook 'ları ' geliştirilmiş özelliklere](automate-responses-with-playbooks.md)hakkında daha fazla bilgi edinin ve [bir yanıt iş akışını, bir](tutorial-respond-threats-playbook.md) Otomasyon kurallarıyla birlikte PlayBook 'ları kullanarak nasıl oluşturabileceğinizi öğrenin.
+[PlayBook 'ları 'ın gelişmiş özellikleri](automate-responses-with-playbooks.md)hakkında daha fazla bilgi edinin ve [bir yanıt iş akışını, bir](tutorial-respond-threats-playbook.md) Otomasyon kurallarıyla birlikte PlayBook 'ları kullanarak nasıl oluşturabileceğinizi öğrenin.
 
 ### <a name="new-alert-enrichments-enhanced-entity-mapping-and-custom-details"></a>Yeni uyarı zenginleştirme: geliştirilmiş varlık eşlemesi ve özel ayrıntılar
 
@@ -167,7 +223,7 @@ Azure Sentinel varlık ayrıntıları sayfaları, varlığa ilişkin davranış 
 
 [Ueba etkinse](ueba-enrichments.md)ve en az dört gün bir zaman dilimi seçtiyseniz bu Öngörüler bölmesi artık, ueba öngörüleri için aşağıdaki yeni bölümleri de içerir:
 
-|Section  |Description  |
+|Section  |Açıklama  |
 |---------|---------|
 |**UEBA öngörüleri**     | Anormal Kullanıcı etkinliklerini özetler: <br>-Coğrafi konumlar, cihazlar ve ortamlar arasında<br>-Kullanıcının kendi geçmişiyle karşılaştırıldığında zaman ve sıklık Horizons <br>-Eşler davranışına kıyasla <br>-Kuruluşun davranışına kıyasla     |
 |**Güvenlik grubu üyeliğine göre Kullanıcı eşleri**     |   Azure AD güvenlik grupları üyeliğine göre kullanıcının eşlerini listeler ve güvenlik işlemleri ekiplerine benzer izinleri paylaşan diğer kullanıcıların listesini sağlar.  |
@@ -294,7 +350,7 @@ Azure Sentinel için bu güncelleştirme, MITRE ATT&CK çerçevesi matrisinde ka
 - **Etki**
 - **İlk erişim**
 - **Kalıcılığı**
-- **Ayrıcalık yükseltme**
+- **Ayrıcalık Yükseltme**
 
 Eklenen arama sorguları, ortamınızda şüpheli etkinlik bulmanıza yardımcı olmak için tasarlanmıştır. Meşru etkinlikler ve potansiyel olarak kötü amaçlı etkinlikler döndürebilirler, ancak bu kişiler, avınız tahmin etmek için yararlı olabilir. 
 

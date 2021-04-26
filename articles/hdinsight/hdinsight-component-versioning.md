@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: deshriva
 ms.author: deshriva
 ms.date: 02/08/2021
-ms.openlocfilehash: 53ca2ac73fdec9d3b39ffc04cbb24aca707a72eb
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: dbd5b507fd4a7b2434158dbdc80584a7fd348732
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103490458"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105726592"
 ---
 # <a name="azure-hdinsight-versions"></a>Azure HDInsight sürümleri
 
@@ -21,12 +21,12 @@ HDInsight, ortam bileşenlerini ve HDInsight platformunu bir kümeye dağıtıla
 
 Bu tabloda, Azure portal ve PowerShell, CLı ve .NET SDK gibi diğer dağıtım yöntemlerinde bulunan HDInsight sürümleri listelenir.
 
-| HDInsight sürümü | VM İŞLETİM SİSTEMİ | Sürüm tarihi | Destek sona erme tarihi | Emeklilik tarihi | Yüksek kullanılabilirlik |
-| --- | --- | --- | --- | --- | --- |
-| [HDInsight 4.0](hdinsight-40-component-versioning.md) |Ubuntu 16.0.4 LTS |Eylül 24, 2018 | | |Yes |
-| [HDInsight 3,6](hdinsight-36-component-versioning.md) |Ubuntu 16.0.4 LTS |4 Nisan 2017      | * 30 Haziran 2021 |30 Haziran 2021 |Yes |
+| HDInsight sürümü | VM İŞLETİM SİSTEMİ | Sürüm tarihi| Destek türü | Destek sona erme tarihi | Emeklilik tarihi | Yüksek kullanılabilirlik |
+| --- | --- | --- | --- | --- | --- | ---|
+| [HDInsight 4.0](hdinsight-40-component-versioning.md) |Ubuntu 16.0.4 LTS |Eylül 24, 2018 | [Standart](hdinsight-component-versioning.md#support-options-for-hdinsight-versions) | | |Yes |
+| [HDInsight 3,6](hdinsight-36-component-versioning.md) |Ubuntu 16.0.4 LTS |4 Nisan 2017      | [Temel](hdinsight-component-versioning.md#support-options-for-hdinsight-versions) | Standart destek süre sonu-30 Haziran 2021 <br> Temel destek süre sonu-3 Nisan 2022 |4 Nisan 2022 |Yes |
 
-* Belirli HDInsight 3,6 küme türleri için destek zaman çerçevesini genişlettik. Bkz. [hdınsight 3,6 bileşen sürümleri](hdinsight-36-component-versioning.md).
+* 1 Temmuz 2021 tarihinden itibaren, Microsoft belirli HDI 3,6 küme türleri için Temel destek sunacaktır. Bkz. [hdınsight 3,6 bileşen sürümleri](hdinsight-36-component-versioning.md).
 
 ## <a name="release-notes"></a>Sürüm notları
 
@@ -34,9 +34,13 @@ HDInsight 'ın en son sürümlerinde ek sürüm notları için bkz. [HDInsight s
 
 ## <a name="support-options-for-hdinsight-versions"></a>HDInsight sürümleri için destek seçenekleri
 
-HDInsight, HDInsight sürümünün Microsoft Müşteri Hizmetleri ve desteği tarafından desteklendiği bir zaman dilimi olarak tanımlanan standart destek sunmaktadır.
+Destek, HDInsight sürümünün Microsoft Müşteri Hizmetleri ve desteği tarafından desteklendiği bir zaman dilimi olarak tanımlanır. HDInsight iki tür destek sunar: 
+- **Standart destek** , Microsoft 'un HDInsight kümelerinde güncelleştirmeler ve destek sağladığı bir zaman dönedir.  
+    En son tamamen desteklenen sürümü kullanarak çözüm oluşturmanızı öneririz. 
+- **Temel destek** , Microsoft 'un HDInsight kaynak sağlayıcısı 'na sınırlı bakım sağlayabileceği bir zaman dönecektir. HDInsight görüntüleri ve açık kaynak yazılım (OSS) bileşenlerine bakım uygulanmaz.   HDInsight kümelerinde yalnızca kritik güvenlik düzeltmeleri düzeltme eki uygulanır.  
+  Microsoft, yeni kümeler oluşturmayı veya bir sürüm Temel destek olduğunda hiçbir yeni çözüm oluşturmayı teşvik etmez. Mevcut kümelerin en son tam olarak desteklenen sürüme geçirilmesini öneririz. 
 
-**Destek sona erme tarihi** , Microsoft 'un belirli HDInsight sürümü için destek sunmayacağı anlamına gelir. Artık küme oluşturma için Azure portal aracılığıyla kullanılamaz.
+**Destek sona erme tarihi** , Microsoft 'un belirli HDInsight sürümü için destek sunmayacağı anlamına gelir. Ayrıca, küme oluşturma için Azure portal ile artık kullanılamaz.
 
 **Kullanımdan** kaldırma, HDInsight sürümünün mevcut kümelerinin olduğu gibi çalışmaya devam etmesi anlamına gelir. Bu sürümdeki yeni kümeler CLı ve SDK 'Ları içeren herhangi bir yöntemle oluşturulamaz. El ile ölçekleme ve otomatik ölçeklendirme gibi diğer denetim düzlemi özelliklerinin, kullanımdan kaldırma tarihinden sonra çalışmasına garanti edilmez. Kullanımdan kaldırılan sürümler için destek kullanılamaz.
 

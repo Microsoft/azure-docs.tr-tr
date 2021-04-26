@@ -12,16 +12,19 @@ ms.workload: data-services
 ms.custom: seo-lt-2019
 ms.topic: tutorial
 ms.date: 01/08/2020
-ms.openlocfilehash: e9f8d4797907cfdc4e7184580e31ac3cb3975b66
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 754d8cc9e79bc100e87f56c6fc33102963e53e8d
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101739891"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818197"
 ---
 # <a name="tutorial-migrate-mysql-to-azure-database-for-mysql-online-using-dms"></a>Öğretici: DMS hizmetini kullanarak çevrimiçi ortamda MySQL'i MySQL için Azure Veritabanı'na geçirme
 
 Azure veritabanı geçiş hizmeti 'ni kullanarak veritabanlarını şirket içi bir MySQL örneğinden, en az kapalı kalma süresiyle [MySQL Için Azure veritabanı](../mysql/index.yml) 'na geçirebilirsiniz. Diğer bir deyişle, geçiş işlemi, uygulamada minimum çalışmama süresi ile gerçekleştirilebilir. Bu öğreticide, Azure veritabanı geçiş hizmeti 'nde çevrimiçi geçiş etkinliği kullanarak MySQL 5,7 ' in şirket içi bir örneğinden **çalışanlar** örnek veritabanını MySQL Için Azure veritabanı 'na geçireceğiniz.
+
+> [!IMPORTANT]
+> "MySQL için Azure veritabanı" çevrimiçi geçiş senaryosu, 1 Haziran 2021 ' de bulunan paralel ve yüksek performanslı bir çevrimdışı geçiş senaryosu ile değiştiriliyor. Çevrimiçi geçişler için, bu yeni teklifi, [veri ile çoğaltma](https://docs.microsoft.com/azure/mysql/concepts-data-in-replication)ile birlikte kullanabilirsiniz. Alternatif olarak, çevrimiçi geçişler için veri-çoğaltma ile [Mydumper/MyLoader](https://centminmod.com/mydumper.html) gibi açık kaynaklı araçları kullanın. 
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > [!div class="checklist"]
@@ -50,7 +53,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 Bu öğreticiyi tamamlamak için aşağıdakileri yapmanız gerekir:
 
 * [MySQL Community Edition](https://dev.mysql.com/downloads/mysql/) 5.6 veya 5.7'yi indirme ve yükleme. Şirket içi MySQL sürümü ile MySQL için Azure Veritabanı sürümü eşleşmelidir. Örneğin, MySQL 5.6 yalnızca MySQL için Azure Veritabanı 5.6'ya geçirilebilir; 5.7 sürümüne yükseltilemez. MySQL 8,0 veya 'tan geçiş desteklenmez.
-* [MySQL için Azure Veritabanı örneği oluşturma](../mysql/quickstart-create-mysql-server-database-using-azure-portal.md). Azure portal'ı kullanarak veritabanı oluşturma ve veritabanlarına bağlanma ile ilgili ayrıntılar için [MySQL Workbench kullanarak bağlanma ve veri sorgulama](../mysql/connect-workbench.md) başlıklı makaleye bakın.  
+* [MySQL için Azure Veritabanı örneği oluşturma](../mysql/quickstart-create-mysql-server-database-using-azure-portal.md). Çalışma ekranı uygulamasını kullanarak bir veritabanını bağlama ve oluşturma hakkındaki ayrıntıları öğrenmek için [MySQL çalışma ekranı kullanma makalesine başvurun ve verileri sorgulayın](../mysql/connect-workbench.md) .  
 * [ExpressRoute](../expressroute/expressroute-introduction.md) veya [VPN](../vpn-gateway/vpn-gateway-about-vpngateways.md)kullanarak şirket içi kaynak sunucularınıza siteden siteye bağlantı sağlayan Azure Resource Manager dağıtım modelini kullanarak Azure veritabanı geçiş hizmeti için bir Microsoft Azure sanal ağ oluşturun. Sanal ağ oluşturma hakkında daha fazla bilgi için [sanal ağ belgelerine](../virtual-network/index.yml)ve özellikle adım adım ayrıntılarla birlikte hızlı başlangıç makalelerine bakın.
 
     > [!NOTE]
@@ -148,120 +151,136 @@ Yabancı anahtarı bırakmak için sorgu sonucunda DROP yabancı anahtarını (i
 > [!IMPORTANT]
 > Bir yedekleme kullanarak veri içeri aktardıysanız, bir mysqldump gerçekleştirirken CREATE DEFINER komutlarını manuel olarak veya--Skip-definer komutunu kullanarak kaldırın. DEFINER, MySQL için Azure veritabanı 'nda oluşturulacak ve kısıtlanmış bir süper ayrıcalık gerektirir.
 
-Veride (ekleme veya güncelleştirme tetikleyicisi) bir Tetikleyiciniz varsa, çoğaltılan verilerin önünde kaynak üzerinde veri bütünlüğünü zorlayacaktır. Geçiş sırasında tüm tablolardaki tetikleyicileri devre dışı bırakmanız ve geçişin tamamlanmasının ardından etkinleştirmeniz önerilir.
+Veritabanında Tetikleyiciniz varsa, kaynaktan tam veri geçişinin önüne veri bütünlüğünü zorlayacaktır. Bu öneri, geçiş sırasında hedefteki tüm tablolardaki Tetikleyicileri devre dışı bırakıp, geçiş yapıldıktan sonra Tetikleyicileri etkinleştirir.
 
-Hedef veritabanındaki Tetikleyicileri devre dışı bırakmak için aşağıdaki komutu kullanın:
+Bırakma tetikleyicisi betiğini ayıklamak ve tetikleyici betiği eklemek için hedef veritabanındaki MySQL çalışma sayfasında aşağıdaki betiği yürütün.
 
+```sql
+SELECT
+    SchemaName,
+    GROUP_CONCAT(DropQuery SEPARATOR ';\n') as DropQuery,
+    Concat('DELIMITER $$ \n\n', GROUP_CONCAT(AddQuery SEPARATOR '$$\n'), '$$\n\nDELIMITER ;') as AddQuery
+FROM
+(
+SELECT 
+    TRIGGER_SCHEMA as SchemaName,
+    Concat('DROP TRIGGER `', TRIGGER_NAME, "`") as DropQuery,
+    Concat('CREATE TRIGGER `', TRIGGER_NAME, '` ', ACTION_TIMING, ' ', EVENT_MANIPULATION, 
+            '\nON `', EVENT_OBJECT_TABLE, '`\n' , 'FOR EACH ', ACTION_ORIENTATION, ' ',
+            ACTION_STATEMENT) as AddQuery
+FROM  
+    INFORMATION_SCHEMA.TRIGGERS
+ORDER BY EVENT_OBJECT_SCHEMA, EVENT_OBJECT_TABLE, ACTION_TIMING, EVENT_MANIPULATION, ACTION_ORDER ASC
+) AS Queries
+GROUP BY SchemaName
 ```
-SELECT Concat('DROP TRIGGER ', Trigger_Name, ';') FROM  information_schema.TRIGGERS WHERE TRIGGER_SCHEMA = 'your_schema';
-```
+
+Tetikleyicileri hedef veritabanında bırakmak için sonuç içinde oluşturulan bırakma tetikleyicisi sorgusunu (DropQuery sütunu) çalıştırın. Ekleme tetikleyicisi sorgusu, veri geçişi sonrası işleminin tamamlanmasını kullanılmak üzere kaydedilebilir.
 
 ## <a name="register-the-microsoftdatamigration-resource-provider"></a>Microsoft.DataMigration kaynak sağlayıcısını kaydetme
 
 1. Azure portal'da oturum açın, **Tüm hizmetler**'i ve ardından **Abonelikler**'i seçin.
 
-   ![Portal aboneliklerini gösterme](media/tutorial-mysql-to-azure-mysql-online/portal-select-subscriptions.png)
+   ![Portal aboneliklerini gösterme](media/tutorial-mysql-to-azure-mysql-online/01-portal-select-subscriptions.png)
 
 2. Azure veritabanı geçiş hizmeti örneğini oluşturmak istediğiniz aboneliği seçin ve ardından **kaynak sağlayıcıları**' nı seçin.
 
-    ![Kaynak sağlayıcılarını gösterme](media/tutorial-mysql-to-azure-mysql-online/portal-select-resource-provider.png)
+    ![Kaynak sağlayıcılarını gösterme](media/tutorial-mysql-to-azure-mysql-online/02-01-portal-select-resource-provider.png)
 
 3. "migration" araması yapın ve **Microsoft.DataMigration** öğesinin sağ tarafındaki **Kaydet**'i seçin.
 
-    ![Kaynak sağlayıcısını kaydetme](media/tutorial-mysql-to-azure-mysql-online/portal-register-resource-provider.png)
+    ![Kaynak sağlayıcısını kaydetme](media/tutorial-mysql-to-azure-mysql-online/02-02-portal-register-resource-provider.png)
 
-## <a name="create-a-dms-instance"></a>DMS örneği oluşturma
+## <a name="create-a-database-migration-service-instance"></a>Veritabanı geçiş hizmeti örneği oluşturma
 
 1. Azure portal + **kaynak oluştur**' u seçin, Azure veritabanı geçiş hizmeti ' ni arayın ve ardından açılan listeden **Azure veritabanı geçiş hizmeti** ' ni seçin.
 
-    ![Azure Market](media/tutorial-mysql-to-azure-mysql-online/portal-marketplace.png)
+    ![Azure Market](media/tutorial-mysql-to-azure-mysql-online/03-dms-portal-marketplace.png)
 
 2. **Azure Veritabanı Geçiş Hizmeti** ekranında **Oluştur**'u seçin.
 
-    ![Azure Veritabanı Geçiş Hizmeti örneğini oluşturma](media/tutorial-mysql-to-azure-mysql-online/dms-create1.png)
+    ![Azure Veritabanı Geçiş Hizmeti örneğini oluşturma](media/tutorial-mysql-to-azure-mysql-online/04-dms-portal-marketplace-create.png)
   
 3. **Geçiş Hizmeti oluşturun** ekranında hizmet için bir ad belirtin, aboneliği ve yeni ya da var olan bir kaynak grubunu seçin.
 
-4. Var olan bir sanal ağı seçin veya yeni bir ağ oluşturun.
-
-    Sanal ağ, kaynak SQL Server ve hedef Azure SQL veritabanı örneğine erişimi olan Azure veritabanı geçiş hizmeti sağlar.
-
-    Azure portal sanal ağ oluşturma hakkında daha fazla bilgi için [Azure Portal kullanarak sanal ağ oluşturma](../virtual-network/quick-create-portal.md)makalesine bakın.
-
-5. Fiyatlandırma katmanını seçin.
+4. Bir fiyatlandırma katmanı seçin ve ağ ekranına geçiş yapın. Çevrimdışı geçiş özelliği, hem standart hem de Premium fiyatlandırma katmanında kullanılabilir.
 
     Maliyetler ve fiyatlandırma katmanları hakkında daha fazla bilgi için [fiyatlandırma sayfasına](https://aka.ms/dms-pricing) bakın.
 
-    ![Azure Veritabanı Geçiş Hizmeti örneği ayarlarını yapılandırma](media/tutorial-mysql-to-azure-mysql-online/dms-settings3.png)
+    ![Azure veritabanı geçiş hizmeti temel ayarlarını yapılandırma](media/tutorial-mysql-to-azure-mysql-online/05-dms-portal-create-basic.png)
 
-6. Hizmeti oluşturmak için **Oluştur**’u seçin.
+5. Listeden var olan bir sanal ağı seçin veya oluşturulacak yeni sanal ağın adını belirtin. Gözden geçir + oluştur ekranına geçin. İsteğe bağlı olarak, Etiketler ekranını kullanarak hizmete Etiketler ekleyebilirsiniz.
+
+    Sanal ağ, kaynak SQL Server ve hedef Azure SQL veritabanı örneğine erişimi olan Azure veritabanı geçiş hizmeti sağlar.
+
+    ![Azure veritabanı geçiş hizmeti ağ ayarlarını yapılandırma](media/tutorial-mysql-to-azure-mysql-online/06-dms-portal-create-networking.png)
+
+    Azure portal sanal ağ oluşturma hakkında daha fazla bilgi için [Azure Portal kullanarak sanal ağ oluşturma](../virtual-network/quick-create-portal.md)makalesine bakın.
+
+6. Yapılandırmayı gözden geçirin ve **Oluştur** ' u seçerek hizmeti oluşturun.
+    
+    ![Azure veritabanı geçiş hizmeti oluşturma](media/tutorial-mysql-to-azure-mysql-online/07-dms-portal-create-submit.png)
 
 ## <a name="create-a-migration-project"></a>Geçiş projesi oluşturma
 
-Hizmet oluşturulduktan sonra Azure portaldan bulun, açın ve yeni bir geçiş projesi oluşturun.
+Hizmet oluşturulduktan sonra Azure portaldan bulun, açın ve yeni bir geçiş projesi oluşturun.  
 
 1. Azure portalda **Tüm hizmetler**'i seçin, Azure Veritabanı Geçiş Hizmeti araması yapın ve **Azure Veritabanı Geçiş Hizmeti**'ni seçin.
 
-      ![Azure veritabanı geçiş hizmeti 'nin tüm örneklerini bulun](media/tutorial-mysql-to-azure-mysql-online/dms-search.png)
+    ![Azure veritabanı geçiş hizmeti 'nin tüm örneklerini bulun](media/tutorial-mysql-to-azure-mysql-online/08-01-dms-portal-search-service.png)
 
-2. **Azure veritabanı geçiş Hizmetleri** ekranında, oluşturduğunuz Azure veritabanı geçiş hizmeti örneğinin adını arayın ve ardından örneği seçin.
+2. Arama sonuçlarından geçiş hizmeti örneğinizi seçin ve + **yeni geçiş projesi ' ni** seçin.
+    
+    ![Yeni bir geçiş projesi oluşturma](media/tutorial-mysql-to-azure-mysql-online/08-02-dms-portal-new-project.png)
 
-     ![Azure veritabanı geçiş hizmeti örneğinizi bulun](media/tutorial-mysql-to-azure-mysql-online/dms-instance-search.png)
+3. **Yeni geçiş projesi** ekranında, proje için bir ad belirtin, **kaynak sunucu türü** seçimi kutusunda **MySQL**' i seçin, **hedef sunucu türü** seçimi kutusunda MySQL **için Azure veritabanı** ' nı seçin ve **geçiş etkinlik türü** seçimi kutusunda **çevrimiçi veri geçişi**' ni seçin. **Etkinlik oluştur ve çalıştır** seçeneğini belirleyin.
 
-3. +**Yeni Geçiş Projesi**'ni seçin.
-4. **Yeni geçiş projesi** ekranında proje için bir ad belirtin, **Kaynak sunucu türü** metin kutusunda **MySQL**, **Hedef sunucu türü** metin kutusunda ise **AzureDbForMySQL** seçeneğini belirleyin.
-5. **Etkinlik türünü seçin** bölümünde, **Çevrimiçi veri geçişi** seçeneğini belirleyin
-
-    ![Veritabanı Geçiş Hizmeti Projesi Oluşturma](media/tutorial-mysql-to-azure-mysql-online/dms-create-project4.png)
+    ![Veritabanı Geçiş Hizmeti Projesi Oluşturma](media/tutorial-mysql-to-azure-mysql-online/09-dms-portal-project-mysql-create.png)
 
     > [!NOTE]
     > Alternatif olarak, şimdi **proje oluştur** ' u seçerek geçiş projesini hemen oluşturabilir ve geçişi daha sonra yürütebilirsiniz.
 
-6. **Kaydet**'i seçin, verileri geçirmek üzere DMS hizmetini başarıyla kullanmaya yönelik gereksinimlere dikkat edin ve **Etkinlik oluştur ve çalıştır** seçeneğini belirleyin.
+## <a name="configure-migration-project"></a>Geçiş projesini yapılandırma
 
-## <a name="specify-source-details"></a>Kaynak ayrıntılarını belirtme
+1. **Kaynak Seç** ekranında, kaynak MySQL örneği için bağlantı ayrıntılarını belirtin ve ileri ' yi seçin **: hedef>>seçin**
 
-1. **Kaynak Ayrıntıları Ekleyin** ekranında, kaynak MySQL örneği için bağlantı ayrıntılarını belirtin.
+    ![Kaynak ayrıntıları ekleme ekranı](media/tutorial-mysql-to-azure-mysql-online/10-dms-portal-project-mysql-source.png)
 
-    ![Kaynak Ayrıntıları Ekleyin ekranı](media/tutorial-mysql-to-azure-mysql-online/dms-add-source-details.png)
+2. **Hedef Seç** ekranında, MySQL Için Azure veritabanı örneği için bağlantı ayrıntılarını belirtin ve ileri ' yi seçin **>>veritabanları** ' nı seçin.
 
-## <a name="specify-target-details"></a>Hedef ayrıntılarını belirtme
+    ![Hedef ayrıntıları ekleme ekranı](media/tutorial-mysql-to-azure-mysql-online/11-dms-portal-project-mysql-target.png)
 
-1. **Kaydet**'i seçip **Hedef ayrıntıları** ekranında, **Employees** şemasının mysqldump kullanılarak dağıtıldığı MySQL için Azure Veritabanı'nın önceden sağlanmış örneği olan hedef MySQL için Azure Veritabanı sunucusuna ilişkin bağlantı ayrıntılarını belirtin.
-
-    ![Hedef ayrıntıları ekranı](media/tutorial-mysql-to-azure-mysql-online/dms-add-target-details.png)
-
-2. **Kaydet**'i seçin ve **Hedef veritabanlarıyla eşleyin** ekranında geçiş yapılacak kaynak ve hedef veritabanlarını eşleyin.
-
+3. **Veritabanları seçin** ekranında, kaynak ve hedef veritabanını geçiş için eşleyin ve ileri ' yi seçin **: geçiş ayarlarını yapılandırma>>**. Kaynağı salt okunur hale getirmek için **kaynak sunucuyu ReadOnly yap** seçeneğini belirleyebilirsiniz, ancak bunun bir sunucu düzeyi ayarı olduğundan emin olmanız gerekir. Seçilirse, yalnızca seçili veritabanlarını değil, tüm sunucuyu salt okunurdur.
+    
     Hedef veritabanı, kaynak veritabanıyla aynı veritabanı adını içeriyorsa, Azure veritabanı geçiş hizmeti varsayılan olarak hedef veritabanını seçer.
-
-    ![Hedef veritabanlarıyla eşleyin](media/tutorial-mysql-to-azure-mysql-online/dms-map-target-details.png)
-   > [!NOTE] 
+    ![Veritabanı ayrıntıları ekranını Seç](media/tutorial-mysql-to-azure-mysql-online/12-dms-portal-project-mysql-select-db.png)
+    
+    > [!NOTE] 
    > Bu adımda birden çok veritabanı seçebilirsiniz, ancak her bir Azure veritabanı geçiş hizmeti örneği, eşzamanlı geçiş için en fazla 4 veritabanını destekler. Ayrıca, her bölge için abonelik başına Azure veritabanı geçiş hizmeti 'nin 10 örnek sınırı vardır. Örneğin, geçirilecek 80 veritabanlarına sahipseniz, aynı bölgeye 40 ' i aynı bölgeye geçirebilirsiniz, ancak yalnızca Azure veritabanı geçiş hizmeti 'nin 10 örneğini oluşturduysanız.
 
-3. **Kaydet**'i seçin, **Geçiş özeti** ekranındaki **Etkinlik adı** metin kutusunda geçiş etkinliği için bir ad belirtin ve ardından, kaynak ve hedef ayrıntılarının önceden belirttiğiniz ayrıntılarla eşleştiğinden emin olmak üzere özeti gözden geçirin.
+4. **Geçiş ayarlarını yapılandır** ekranında, geçişin parçası olacak tabloları seçin ve **İleri ' yi seçin: Özet>>**. Hedef tablolarda herhangi bir veri varsa, bunlar varsayılan olarak seçilmeyecektir, ancak bunları açık bir şekilde seçebilirsiniz ve Geçişe başlamadan önce bu dosyalar kesilir.
 
-    ![Geçiş Özeti](media/tutorial-mysql-to-azure-mysql-online/dms-migration-summary.png)
+    ![Tablo seçme ekranı](media/tutorial-mysql-to-azure-mysql-online/13-dms-portal-project-mysql-select-tbl.png)
 
-## <a name="run-the-migration"></a>Geçişi çalıştırma
+5. **Özet** ekranında, **etkinlik adı** metin kutusunda, geçiş etkinliği için bir ad belirtin ve kaynak ve hedef ayrıntılarının daha önce belirtdikleriniz ile eşleştiğinden emin olmak için Özeti gözden geçirin.
 
-* **Geçişi çalıştır**'ı seçin.
+    ![Geçiş projesi özeti](media/tutorial-mysql-to-azure-mysql-online/14-dms-portal-project-mysql-activity-summary.png)
 
-    Geçiş etkinliği penceresi açılır ve etkinliğin **Durum** bilgisi **Başlatılıyor** olarak değişir.
+6. **Geçişi Başlat**' ı seçin. Geçiş etkinliği penceresi görünür ve etkinliğin **durumu** **başlatılıyor**. Tablo  geçişleri başlatıldığında durum **çalışıyor** olarak değişir.
 
 ## <a name="monitor-the-migration"></a>Geçişi izleme
 
 1. Geçiş etkinliği ekranında **Yenile**'yi seçerek, gösterilen verileri, geçişin **Durum** bilgisi **Tamamlandı** olana kadar güncelleştirebilirsiniz.
 
-     ![Etkinlik Durumu - tamamlandı](media/tutorial-mysql-to-azure-mysql-online/dms-activity-completed.png)
+     ![Etkinlik Durumu - tamamlandı](media/tutorial-mysql-to-azure-mysql-online/15-dms-activity-completed.png)
 
 2. **Veritabanı Adı** bölümünde, **Tam veri yüklemesi** ve **Artımlı veri eşitleme** işlemleri için geçiş durumunu almak üzere belirli bir veritabanı seçin.
 
     Tam veri yüklemesi ilk yük geçiş durumunu, Artımlı veri eşitleme ise değişiklik verilerini yakalama (CDC) durumunu gösterir.
 
-     ![Etkinlik Durumu - Tam yük tamamlandı](media/tutorial-mysql-to-azure-mysql-online/dms-activity-full-load-completed.png)
+     ![Etkinlik Durumu - Tam yük tamamlandı](media/tutorial-mysql-to-azure-mysql-online/16-dms-activity-full-load-completed.png)
 
-     ![Etkinlik Durumu - Artımlı veri eşitleme](media/tutorial-mysql-to-azure-mysql-online/dms-activity-incremental-data-sync.png)
+     ![Etkinlik Durumu - Artımlı veri eşitleme](media/tutorial-mysql-to-azure-mysql-online/17-dms-activity-incremental-data-sync.png)
 
 ## <a name="perform-migration-cutover"></a>Tam geçiş gerçekleştirme
 
@@ -269,7 +288,7 @@ Hizmet oluşturulduktan sonra Azure portaldan bulun, açın ve yeni bir geçiş 
 
 1. Veritabanı geçişini tamamlamaya hazır olduğunuzda **Tam Geçişi Başlat** seçeneğini belirleyin.
 
-    ![Tam geçişi başlat](media/tutorial-mysql-to-azure-mysql-online/dms-start-cutover.png)
+    ![Tam geçişi başlat](media/tutorial-mysql-to-azure-mysql-online/18-dms-start-cutover.png)
 
 2. **Bekleyen değişiklikler** sayacı **0** değerini gösterene kadar bekleyerek kaynak veritabanına gelen tüm işlemleri durdurduğunuzdan emin olun.
 3. **Onayla**'yı ve ardından, **Uygula**'yı seçin.

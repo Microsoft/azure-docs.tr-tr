@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: cfea22c10d98adf3b8c89491c248bf7a934ba1ed
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 6c1d78094effe6919587f24c2262612e4fab347d
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104798893"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575386"
 ---
 # <a name="device-identity-and-desktop-virtualization"></a>Cihaz kimliği ve Masaüstü Sanallaştırması
 
@@ -52,12 +52,12 @@ VDı ortamınız için Azure AD 'de cihaz kimliklerini yapılandırmadan önce, 
 |   |   | Windows geçerli | Kalıcı olmayan | Evet<sup>5</sup> |
 |   |   | Windows alt düzey | Kalıcı olmayan | Evet<sup>6</sup> |
 |   | Yönetilen<sup>4</sup> | Windows geçerli ve Windows alt düzeyi | Kalıcı | Yes |
-|   |   | Windows geçerli | Kalıcı olmayan | Hayır |
+|   |   | Windows geçerli | Kalıcı olmayan | No |
 |   |   | Windows alt düzey | Kalıcı olmayan | Evet<sup>6</sup> |
-| Azure AD'ye katılanlar | Federe | Windows geçerli | Kalıcı | Hayır |
-|   |   |   | Kalıcı olmayan | Hayır |
-|   | Yönetilen | Windows geçerli | Kalıcı | Hayır |
-|   |   |   | Kalıcı olmayan | Hayır |
+| Azure AD'ye katılanlar | Federe | Windows geçerli | Kalıcı | No |
+|   |   |   | Kalıcı olmayan | No |
+|   | Yönetilen | Windows geçerli | Kalıcı | No |
+|   |   |   | Kalıcı olmayan | No |
 | Azure AD kayıtlı | Federasyon/yönetilen | Windows geçerli/Windows alt düzeyi | Kalıcı/kalıcı olmayan | Geçerli değil |
 
 <sup>1</sup> Windows **geçerli** cihaz Windows 10, Windows Server 2016 V1803 veya üzeri ve Windows Server 2019 ' i temsil eder.
@@ -89,11 +89,28 @@ Kalıcı olmayan VDı dağıtımı yaparken, Microsoft BT yöneticilerinin aşa�
 - Windows alt düzeyi için:
    - Logoff komut dosyasının bir parçası olarak, **oto workplacejoın/Leave** komutunu uygulayın. Bu komut kullanıcı bağlamında tetiklenmelidir ve Kullanıcı tamamen oturumu kapatmadan ve hala ağ bağlantısı varken yürütülmesi gerekir.
 - Federasyon ortamında Windows için geçerli (ör. AD FS):
-   - **Dsregcmd/JOIN** ' i VM önyükleme sırasının bir parçası olarak uygulayın.
+   - **Dsregcmd/JOIN** ' i VM önyükleme sırasının/sırasının bir parçası olarak ve Kullanıcı oturum açmadan önce uygulayın.
    - VM kapatılırken/yeniden başlatma işleminin bir parçası olarak dsregcmd/Leave **yürütme.**
 - [Eski cihazları yönetmek](manage-stale-devices.md)için işlem tanımlayın ve uygulayın.
    - Kalıcı olmayan karma Azure AD 'ye katılmış cihazlarınızı (ör. bilgisayar görünen adı önekini kullanarak) belirleme stratejiniz varsa, dizininizin çok sayıda eski cihaz ile tüketilmemesini sağlamak için bu cihazların temizlenmesi üzerinde daha Agresif olmanız gerekir.
    - Windows geçerli ve alt düzeyde kalıcı olmayan VDı dağıtımları için, 15 günden daha eski olan **yaklaşık bir Telastlogontimestamp** olan cihazları silmelisiniz.
+
+> [!NOTE]
+> Kalıcı olmayan VDı kullanılırken, bir cihazın JOIN durumunu engellemek istiyorsanız aşağıdaki kayıt defteri anahtarının ayarlanmış olduğundan emin olun:  
+> `HKLM\SOFTWARE\Policies\Microsoft\Windows\WorkplaceJoin: "BlockAADWorkplaceJoin"=dword:00000001`    
+>
+> Windows 10, sürüm 1803 veya üstünü kullandığınızdan emin olun.  
+>
+> Yol altındaki tüm veriler `%localappdata%` desteklenmez. İçeriği aşağı taşımayı seçerseniz `%localappdata%` , aşağıdaki klasörlerin ve kayıt defteri anahtarlarının içeriğinin herhangi bir koşul altında **hiçbir şekilde ayrılmayın** olduğundan emin olun. Örneğin: profil geçiş araçları aşağıdaki klasörleri ve anahtarları atmalıdır:
+>
+> * `%localappdata%\Packages\Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy`
+> * `%localappdata%\Packages\Microsoft.Windows.CloudExperienceHost_cw5n1h2txyewy`
+> * `%localappdata%\Packages\<any app package>\AC\TokenBroker`
+> * `%localappdata%\Microsoft\TokenBroker`
+> * `HKEY_CURRENT_USER\SOFTWARE\Microsoft\IdentityCRL`
+> * `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\AAD`
+>
+
 
 ### <a name="persistent-vdi"></a>Kalıcı VDı
 

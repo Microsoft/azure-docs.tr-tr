@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 03/20/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 876564934b1ccbffa19c318a2d2c8393e5dca54e
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+manager: femila
+ms.openlocfilehash: 9dce264b7f2c88aed11f5b82a61f83cbac6c9697
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105023988"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785118"
 ---
 # <a name="configure-a-kerberos-key-distribution-center-proxy-preview"></a>Kerberos Anahtar Dağıtım Merkezi ara sunucusunu yapılandırma (Önizleme)
 
@@ -29,14 +29,14 @@ Windows sanal masaüstü hizmeti 'nin kimlik doğrulamasının doğrulanması ge
 - Windows sanal masaüstü istemcisindeki, kullanıcılara erişimleri olan kullanılabilir masaüstleri veya uygulamalar listesi veren akış. Bu kimlik doğrulama işlemi Azure Active Directory olur. Bu, bu bileşenin bu makalenin konusu olmadığı anlamına gelir.
 - Bir kullanıcının mevcut kaynaklarından birini seçmesini sağlayan RDP oturumu. Bu bileşen Kerberos kimlik doğrulamasını kullanır ve uzak kullanıcılar için bir KDC ara sunucusu gerektirir.
 
-Bu makalede, Azure portal Windows sanal masaüstü istemcisinde akışın nasıl yapılandırılacağı gösterilir. RD Ağ Geçidi rolünü yapılandırmayı öğrenmek istiyorsanız, bkz. [RD Ağ geçidi rolünü dağıtma](/windows-server/remote/rd-gateway-role).
+Bu makalede, Azure portal Windows sanal masaüstü istemcisinde akışın nasıl yapılandırılacağı gösterilir. RD Ağ Geçidi rolünü yapılandırmayı öğrenmek istiyorsanız, bkz. [RD Ağ geçidi rolünü dağıtma](/azure/virtual-desktop/rd-gateway-role).
 
 ## <a name="requirements"></a>Gereksinimler
 
 Bir Windows sanal masaüstü oturumu konağını bir KDC proxy ile yapılandırmak için aşağıdaki işlemleri yapmanız gerekir:
 
 - Azure portal ve bir Azure yönetici hesabına erişin.
-- Uzak istemci makineler Windows 10 veya Windows 7 çalıştırıyor olmalı ve [Windows Masaüstü istemcisinin](/windows-server/remote/remote-desktop-services/clients/windowsdesktop) yüklü olması gerekir.
+- Uzak istemci makineler Windows 10 veya Windows 7 çalıştırıyor olmalı ve [Windows Masaüstü istemcisinin](/windows-server/remote/remote-desktop-services/clients/windowsdesktop) yüklü olması gerekir. Şu anda Web istemcisi desteklenmiyor.
 - Makinenizde zaten yüklü bir KDC ara sunucusu olmalıdır. Bunun nasıl yapılacağını öğrenmek için bkz. [Windows sanal masaüstü için RD Ağ geçidi rolünü ayarlama](rd-gateway-role.md).
 - Makinenin işletim sistemi Windows Server 2016 veya sonraki bir sürümü olmalıdır.
 

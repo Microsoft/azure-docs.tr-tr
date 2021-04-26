@@ -1,10 +1,10 @@
 ---
-ms.openlocfilehash: 07a8d792bbb17df1401b5892b09fb7ff2f5f8e52
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 0bfb23977f6553568da24df614621bdf1eb9d06d
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629423"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106112782"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -38,16 +38,16 @@ dotnet build
 Hala uygulama dizininde, komutunu kullanarak .NET için Azure Iletişim PhoneNumbers istemci Kitaplığı ' nı yükleyebilirsiniz `dotnet add package` .
 
 ```console
-dotnet add package Azure.Communication.PhoneNumbers --version 1.0.0-beta.5
+dotnet add package Azure.Communication.PhoneNumbers --version 1.0.0-beta.6
 ```
 
 `using`Ad alanlarını dahil etmek Için **program. cs** ' nin üstüne bir yönerge ekleyin.
 
 ```csharp
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Azure.Communication.PhoneNumbers;
-using Azure.Communication.PhoneNumbers.Models;
 ```
 
 `Main`İşlev imzasını zaman uyumsuz olacak şekilde güncelleştirin.
@@ -61,7 +61,7 @@ static async Task Main(string[] args)
 
 ## <a name="authenticate-the-client"></a>İstemcinin kimliğini doğrulama
 
-Telefon numarası istemcilerinin kimliği, [Azure portalındaki] [azure_portal] içindeki bir Azure Iletişim kaynaklarından alınan bağlantı dizesi kullanılarak doğrulanabilir.
+Telefon numarası istemcilerinin kimliği [Azure portal] [azure_portal] içindeki bir Azure Iletişim kaynaklarından alınan bağlantı dizesi kullanılarak doğrulanabilir.
 
 ```csharp
 // Get a connection string to our Azure Communication resource.
@@ -98,20 +98,20 @@ Telefon numarası arama sonucu bir `PhoneNumberSearchResult` . Bu, `SearchId` ar
 
 ```csharp
 var purchaseOperation = await client.StartPurchasePhoneNumbersAsync(searchOperation.Value.SearchId);
-await purchaseOperation.WaitForCompletionAsync();
+await purchaseOperation.WaitForCompletionResponseAsync();
 ```
 
 ### <a name="get-phone-numbers"></a>Telefon numaralarını al
 
 Bir satın alma numarasından sonra, istemciden alabilirsiniz.
 ```csharp
-var getPhoneNumberResponse = await client.GetPhoneNumberAsync("+14255550123");
+var getPhoneNumberResponse = await client.GetPurchasedPhoneNumberAsync("+14255550123");
 Console.WriteLine($"Phone number: {getPhoneNumberResponse.Value.PhoneNumber}, country code: {getPhoneNumberResponse.Value.CountryCode}");
 ```
 
 Satın alınan tüm telefon numaralarını da alabilirsiniz.
 ``` csharp
-var purchasedPhoneNumbers = client.GetPhoneNumbersAsync();
+var purchasedPhoneNumbers = client.GetPurchasedPhoneNumbersAsync();
 await foreach (var purchasedPhoneNumber in purchasedPhoneNumbers)
 {
     Console.WriteLine($"Phone number: {purchasedPhoneNumber.PhoneNumber}, country code: {purchasedPhoneNumber.CountryCode}");
@@ -134,7 +134,7 @@ Satın alınan bir telefon numarasını serbest bırakabilirsiniz.
 
 ````csharp
 var releaseOperation = await client.StartReleasePhoneNumberAsync("+14255550123");
-await releaseOperation.WaitForCompletionAsync();
+await releaseOperation.WaitForCompletionResponseAsync();
 ````
 
 ## <a name="run-the-code"></a>Kodu çalıştırma

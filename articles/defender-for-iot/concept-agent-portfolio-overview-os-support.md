@@ -2,13 +2,13 @@
 title: Aracı portföyüne genel bakış ve işletim sistemi desteği (Önizleme)
 description: IoT için Azure Defender, cihaz türüne göre büyük bir aracı portföyü sağlar.
 ms.date: 1/20/2021
-ms.topic: quickstart
-ms.openlocfilehash: 6c65ad33439002bd651c4c926b6452868f6137ba
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.topic: conceptual
+ms.openlocfilehash: d2e463051d0897afe52981ea2d50ddd1f06bb54d
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104784773"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106383431"
 ---
 # <a name="agent-portfolio-overview-and-os-support-preview"></a>Aracı portföyüne genel bakış ve işletim sistemi desteği (Önizleme)
 

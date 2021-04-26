@@ -7,19 +7,19 @@ ms.topic: how-to
 ms.date: 10/19/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 6253deb53229172cd499a6aa14b8d8f19bc07b63
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: de342267292c6a93c4a1ba2eae232403ccaf9514
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94629266"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107785280"
 ---
 # <a name="configure-a-point-to-site-p2s-vpn-on-windows-for-use-with-azure-files"></a>Azure dosyaları ile kullanmak üzere Windows üzerinde Noktadan siteye (P2S) VPN yapılandırma
 Azure dosya paylaşımlarınızı, 445 numaralı bağlantı noktasını açmadan Azure dışından SMB 'ye bağlamak için Noktadan siteye (P2S) VPN bağlantısı kullanabilirsiniz. Noktadan siteye VPN bağlantısı, Azure ile tek bir istemci arasındaki VPN bağlantısıdır. Azure dosyaları ile P2S VPN bağlantısı kullanmak için, bağlanmak isteyen her istemci için bir P2S VPN bağlantısının yapılandırılması gerekir. Şirket içi ağınızdan Azure dosya paylaşımlarınızın bağlanması gereken çok sayıda istemciniz varsa, her istemci için Noktadan siteye bağlantı yerine siteden siteye (S2S) VPN bağlantısı kullanabilirsiniz. Daha fazla bilgi için bkz. [Azure dosyaları ile kullanmak Için siteden sıteye VPN yapılandırma](storage-files-configure-s2s-vpn.md).
 
 Azure dosyaları için kullanılabilir ağ seçenekleri hakkında ayrıntılı bir tartışmaya devam etmeden önce, bu nasıl yapılır makalesine geçmeden önce [doğrudan Azure dosya paylaşımının erişimine yönelik ağ konularını](storage-files-networking-overview.md) okumanızı öneririz.
 
-Makalede, Windows 'da (Windows istemcisi ve Windows Server) Noktadan siteye VPN 'yi yapılandırmaya yönelik adımlar, Azure dosya paylaşımlarını doğrudan şirket içine bağlamak için ayrıntılı olarak açıklanır. VPN üzerinden Azure Dosya Eşitleme trafiği yönlendirmek istiyorsanız lütfen bkz. [Azure dosya eşitleme proxy ve güvenlik duvarı ayarlarını yapılandırma](storage-sync-files-firewall-and-proxy.md).
+Makalede, Windows 'da (Windows istemcisi ve Windows Server) Noktadan siteye VPN 'yi yapılandırmaya yönelik adımlar, Azure dosya paylaşımlarını doğrudan şirket içine bağlamak için ayrıntılı olarak açıklanır. VPN üzerinden Azure Dosya Eşitleme trafiği yönlendirmek istiyorsanız lütfen bkz. [Azure dosya eşitleme proxy ve güvenlik duvarı ayarlarını yapılandırma](../file-sync/file-sync-firewall-and-proxy.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 - Azure PowerShell modülünün en son sürümü. Azure PowerShell nasıl yükleneceğine ilişkin daha fazla bilgi için, bkz. [Azure PowerShell modülünü yüklemek](/powershell/azure/install-az-ps) ve işletim sisteminizi seçmek. Windows 'da Azure CLı 'yı kullanmayı tercih ediyorsanız, aşağıdaki yönergeler Azure PowerShell için sunulmuştur.

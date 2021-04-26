@@ -5,15 +5,15 @@ author: vermagit
 ms.service: virtual-machines
 ms.subservice: hpc
 ms.topic: article
-ms.date: 03/18/2021
+ms.date: 04/16/2021
 ms.author: amverma
 ms.reviewer: cynthn
-ms.openlocfilehash: 66de34c43ab1b3a6b4245f77196793bf9ad8530c
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: f43fc94174ebdcfdf447d3635a696193959849fa
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105606649"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600304"
 ---
 # <a name="set-up-message-passing-interface-for-hpc"></a>HPC için Ileti geçirme arabirimini ayarlama
 
@@ -30,6 +30,13 @@ Buradaki örnekler RHEL/CentOS için de olsa da, adımlar genel ve Ubuntu (16,04
 
 > [!NOTE]
 > Aşağıdaki kod parçacıkları örnektir. Paketlerin en son kararlı sürümlerini kullanmanızı veya [azhpc-Images](https://github.com/Azure/azhpc-images/blob/master/ubuntu/ubuntu-18.x/ubuntu-18.04-hpc/install_mpis.sh)deposuna başvurmalarını öneririz.
+
+## <a name="choosing-mpi-library"></a>MPı kitaplığı seçme
+HPC uygulaması belirli bir MPı kitaplığı öner, bu sürümü önce deneyin. Hangi MPı 'nin seçebileceği konusunda esneklik varsa ve en iyi performansı istiyorsanız, HPC-X ' i deneyin. Genel olarak, HPC-X MPı, InfiniBand arabirimi için UCX çerçevesini kullanarak en iyi şekilde çalışır ve tüm Mellanox InfiniBand donanım ve yazılım yeteneklerinin avantajlarından yararlanır. Ayrıca, HPC-X ve OpenMPI ABı uyumlu olduğundan, OpenMPI ile oluşturulmuş HPC-X ile bir HPC uygulamasını dinamik olarak çalıştırabilirsiniz. Benzer şekilde, Intel MPI, MVAPICH ve MPICH ABı uyumludur.
+
+Aşağıdaki şekilde popüler MPı kitaplıkları için mimari gösterilmektedir.
+
+![Popüler MPı kitaplıkları için mimari](./media/mpi-architecture.png)
 
 ## <a name="ucx"></a>UCX
 
@@ -59,8 +66,22 @@ mv hpcx-${HPCX_VERSION}-gcc-MLNX_OFED_LINUX-5.0-1.0.0.0-redhat7.7-x86_64 ${INSTA
 HPCX_PATH=${INSTALL_PREFIX}/hpcx-${HPCX_VERSION}-gcc-MLNX_OFED_LINUX-5.0-1.0.0.0-redhat7.7-x86_64
 ```
 
-HPC-X Çalıştır
+Aşağıdaki komut, HPC-X ve OpenMPI için önerilen bazı mpırun bağımsız değişkenlerini gösterir.
+```bash
+mpirun -n $NPROCS --hostfile $HOSTFILE --map-by ppr:$NUMBER_PROCESSES_PER_NUMA:numa:pe=$NUMBER_THREADS_PER_PROCESS -report-bindings $MPI_EXECUTABLE
+```
+burada:
 
+|Parametre|Açıklama                                        |
+|---------|---------------------------------------------------|
+|`NPROCS`   |MPı işlemlerinin sayısını belirtir. Örneğin: `-n 16`.|
+|`$HOSTFILE`|MPı işlemlerinin çalışacağı konumu belirtmek için, ana bilgisayar adı veya IP adresini içeren bir dosyayı belirtir. Örneğin: `--hostfile hosts`.|
+|`$NUMBER_PROCESSES_PER_NUMA`   |Her NUMA etki alanında çalıştırılacak MPı işlemlerinin sayısını belirtir. Örneğin, NUMA başına dört MPı işlemi belirtmek için kullanırsınız `--map-by ppr:4:numa:pe=1` .|
+|`$NUMBER_THREADS_PER_PROCESS`  |MPı işlemi başına iş parçacığı sayısını belirtir. Örneğin, bir MPı işlemi ve NUMA başına dört iş parçacığı belirtmek için kullanırsınız `--map-by ppr:1:numa:pe=4` .|
+|`-report-bindings` |MPI işlem sabitlemenin doğru olduğunu doğrulamak için kullanışlı olan çekirdekler ile eşleşen MPı işlemleri yazdırır.|
+|`$MPI_EXECUTABLE`  |MPI kitaplıklarında oluşturulan MPı yürütülebilirini belirtir. MPı derleyici sarmalayıcıları bunu otomatik olarak yapın. Örneğin: `mpicc` veya `mpif90` .|
+
+OSU gecikme mikro kıyaslama süresini çalıştırmaya örnek olarak aşağıdaki gibidir:
 ```bash
 ${HPCX_PATH}mpirun -np 2 --map-by ppr:2:node -x UCX_TLS=rc ${HPCX_PATH}/ompi/tests/osu-micro-benchmarks-5.3.2/osu_latency
 ```
@@ -68,6 +89,11 @@ ${HPCX_PATH}mpirun -np 2 --map-by ppr:2:node -x UCX_TLS=rc ${HPCX_PATH}/ompi/tes
 ### <a name="optimizing-mpi-collectives"></a>MPı collectları iyileştirme
 
 MPı toplu iletişim temelleri, Grup iletişim işlemlerini uygulamak için esnek ve taşınabilir bir yöntem sunar. Bunlar, çeşitli bilimsel paralel uygulamalar genelinde yaygın olarak kullanılır ve genel uygulama performansı üzerinde önemli bir etkiye sahiptir. Toplu iletişim için HPC-X ve HCOLL kitaplığı kullanılarak toplu iletişim performansını iyileştirmek üzere yapılandırma parametreleriyle ilgili ayrıntılar için [Techcommunity makalesine](https://techcommunity.microsoft.com/t5/azure-compute/optimizing-mpi-collective-communication-using-hpc-x-on-azurehpc/ba-p/1356740) başvurun.
+
+Örnek olarak, sıkı şekilde bağlanmış MPı uygulamanızın aşırı miktarda toplu iletişim yaptığına karşı kuşkulanıyorsanız, hiyerarşik toplanabilir (HCOLL) etkinleştirmeyi deneyebilirsiniz. Bu özellikleri etkinleştirmek için aşağıdaki parametreleri kullanın.
+```bash
+-mca coll_hcoll_enable 1 -x HCOLL_MAIN_IB=<MLX device>:<Port>
+```
 
 > [!NOTE] 
 > HPC-X 2.7.4 + ile, MOFED üzerindeki UCX sürümü, HPC-X ' de farklıysa LD_LIBRARY_PATH açıkça geçirmek gerekebilir.
@@ -93,7 +119,7 @@ cd openmpi-${OMPI_VERSION}
 ./configure --prefix=${INSTALL_PREFIX}/openmpi-${OMPI_VERSION} --with-ucx=${UCX_PATH} --with-hcoll=${HCOLL_PATH} --enable-mpirun-prefix-by-default --with-platform=contrib/platform/mellanox/optimized && make -j$(nproc) && make install
 ```
 
-En iyi performans için, ve ile OpenMPI ' yi çalıştırın `ucx` `hcoll` .
+En iyi performans için, ve ile OpenMPI ' yi çalıştırın `ucx` `hcoll` . Ayrıca [HPC-X](#hpc-x)ile örneğe bakın.
 
 ```bash
 ${INSTALL_PREFIX}/bin/mpirun -np 2 --map-by node --hostfile ~/hostfile -mca pml ucx --mca btl ^vader,tcp,openib -x UCX_NET_DEVICES=mlx5_0:1  -x UCX_IB_PKEY=0x0003  ./osu_latency
@@ -103,12 +129,38 @@ Yukarıdaki bölümde belirtilen bölüm anahtarınızı denetleyin.
 
 ## <a name="intel-mpi"></a>Intel MPı
 
-[Intel MPI](https://software.intel.com/mpi-library/choose-download)'nin seçtiğiniz sürümünü indirin. Sürüme bağlı olarak I_MPI_FABRICS ortam değişkenini değiştirin.
+[Intel MPI](https://software.intel.com/mpi-library/choose-download)'nin seçtiğiniz sürümünü indirin. Intel MPı 2019 sürümü Open Fabric Alliance (OFA) çerçevesinden açık yapılar arabirimleri (OFı) çerçevesine geçti ve şu anda libfabric 'i destekliyor. InfiniBand desteği için iki sağlayıcı vardır: MLX ve fiiller.
+Sürüme bağlı olarak I_MPI_FABRICS ortam değişkenini değiştirin.
 - Intel MPı 2019 ve 2021: kullanın `I_MPI_FABRICS=shm:ofi` , `I_MPI_OFI_PROVIDER=mlx` . `mlx`Sağlayıcı UCX kullanır. Fiillerin kullanım kararlı ve daha az performans olduğunu belirledi. Daha fazla bilgi için bkz. [Techcommunity makalesi](https://techcommunity.microsoft.com/t5/azure-compute/intelmpi-2019-on-azure-hpc-clusters/ba-p/1403149) .
 - Intel MPı 2018: kullanma `I_MPI_FABRICS=shm:ofa`
 - Intel MPı 2016: kullanma `I_MPI_DAPL_PROVIDER=ofa-v2-ib0`
 
+Intel MPı 2019 güncelleştirme 5 + için önerilen bazı mpırun bağımsız değişkenleri aşağıda verilmiştir.
+```bash
+export FI_PROVIDER=mlx
+export I_MPI_DEBUG=5
+export I_MPI_PIN_DOMAIN=numa
+
+mpirun -n $NPROCS -f $HOSTFILE $MPI_EXECUTABLE
+```
+burada:
+
+|Parametre|Açıklama                                        |
+|---------|---------------------------------------------------|
+|`FI_PROVIDER`  |Kullanılacak olan libfabric sağlayıcısını belirtir; bu işlem API, protokol ve kullanılan ağı etkiler. fiiller başka bir seçenektir, ancak genellikle MLX size daha iyi performans sağlar.|
+|`I_MPI_DEBUG`|İşlemin nerede sabitlendiği ve hangi protokol ve ağın kullanıldığı hakkında ayrıntı sağlayabilen ek hata ayıklama çıkışının düzeyini belirtir.|
+|`I_MPI_PIN_DOMAIN` |İşlemlerinizi nasıl sabitlemek istediğinizi belirtir. Örneğin, çekirdekler, yuvalar veya NUMA etki alanlarına sabitleyebilir. Bu örnekte, bu ortam değişkenini NUMA olarak ayarlarsınız, bu da işlemlerin NUMA düğümü etki alanlarına sabitlenebileceği anlamına gelir.|
+
+### <a name="optimizing-mpi-collectives"></a>MPı collectları iyileştirme
+
+Özellikle de toplu işlemler önemli bir süre kullanıyorsa, deneyebileceğiniz bazı diğer seçenekler vardır. Intel MPı 2019 güncelleştirme 5 +, MLX sağlamasını destekler ve InfiniBand ile iletişim kurmak için UCX çerçevesini kullanır. Ayrıca, HCOLL 'yi destekler.
+```bash
+export FI_PROVIDER=mlx
+export I_MPI_COLL_EXTERNAL=1
+```
+
 ### <a name="non-sr-iov-vms"></a>SR-ıOV olmayan VM 'Ler
+
 SR-ıOV olmayan VM 'Ler için, 5. x çalışma zamanı [ücretsiz değerlendirme sürümünü](https://registrationcenter.intel.com/en/forms/?productid=1740) karşıdan yüklemeyle ilgili bir örnek aşağıdaki gibidir:
 ```bash
 wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/9278/l_mpi_p_5.1.3.223.tgz
@@ -125,10 +177,9 @@ SUSE Linux Enterprise Server VM görüntü sürümleri-HPC için SLES 12 SP3, HP
 sudo rpm -v -i --nodeps /opt/intelMPI/intel_mpi_packages/*.rpm
 ```
 
-## <a name="mvapich2"></a>MVAPICH2
+## <a name="mvapich"></a>MVAPICH
 
-Derleme MVAPICH2.
-
+Aşağıda MVAPICH2 oluşturma örneği verilmiştir. Daha yeni sürümler aşağıda kullanılandan daha fazla kullanılabilir olabilir.
 ```bash
 wget http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/mvapich2-2.3.tar.gz
 tar -xv mvapich2-2.3.tar.gz
@@ -137,11 +188,28 @@ cd mvapich2-2.3
 make -j 8 && make install
 ```
 
-MVAPICH2 çalıştırılıyor.
-
+OSU gecikme mikro kıyaslama süresini çalıştırmaya örnek olarak aşağıdaki gibidir:
 ```bash
 ${INSTALL_PREFIX}/bin/mpirun_rsh -np 2 -hostfile ~/hostfile MV2_CPU_MAPPING=48 ./osu_latency
 ```
+
+Aşağıdaki listede birkaç önerilen `mpirun` bağımsız değişken bulunmaktadır.
+```bash
+export MV2_CPU_BINDING_POLICY=scatter
+export MV2_CPU_BINDING_LEVEL=numanode
+export MV2_SHOW_CPU_BINDING=1
+export MV2_SHOW_HCA_BINDING=1
+
+mpirun -n $NPROCS -f $HOSTFILE $MPI_EXECUTABLE
+```
+burada:
+
+|Parametre|Açıklama                                        |
+|---------|---------------------------------------------------|
+|`MV2_CPU_BINDING_POLICY`   |Hangi bağlama ilkesinin kullanılacağını belirtir; Bu, işlemlerin temel kimliklere nasıl sabitlendiğini etkiler. Bu durumda dağılım belirtirsiniz, böylece işlem NUMA etki alanları arasında eşit olarak dağılmış olur.|
+|`MV2_CPU_BINDING_LEVEL`|İşlemlerin nerede sabitlenebileceği belirtir. Bu durumda, bunu NumaNode olarak ayarlarsınız, bu da işlemlerin NUMA etki alanı birimlerine sabitlendiği anlamına gelir.|
+|`MV2_SHOW_CPU_BINDING` |İşlemlerin nerede sabitlendiği hakkında hata ayıklama bilgileri almak istediğinizi belirtir.|
+|`MV2_SHOW_HCA_BINDING` |Her bir işlemin hangi konak Kanal bağdaştırıcısı tarafından kullanıldığı hakkında hata ayıklama bilgileri almak istediğinizi belirtir.|
 
 ## <a name="platform-mpi"></a>Platform MPı
 

@@ -9,10 +9,10 @@ ms.topic: article
 ms.date: 03/12/2021
 ms.author: apimpm
 ms.openlocfilehash: 1a835d26b4c41c92b9849856a2f31b3550947bd8
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104801902"
 ---
 # <a name="api-management-policies-to-validate-requests-and-responses"></a>İstekleri ve yanıtları doğrulamak için ilkeleri API Management
@@ -88,7 +88,7 @@ Aşağıdaki örnekte, isteklerde ve yanıtlarındaki JSON yükü algılama modu
 | Ad         | Açıklama                                                                                                                                   | Gerekli |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | Validate-içerik | Kök öğe.                                                                                                                               | Yes      |
-| içerik | İstek veya yanıtta içerik türünü doğrulamak için bu öğelerden bir veya daha fazlasını ekleyin ve belirtilen eylemi gerçekleştirin.  | Hayır |
+| içerik | İstek veya yanıtta içerik türünü doğrulamak için bu öğelerden bir veya daha fazlasını ekleyin ve belirtilen eylemi gerçekleştirin.  | No |
 
 ### <a name="attributes"></a>Öznitelikler
 
@@ -98,7 +98,7 @@ Aşağıdaki örnekte, isteklerde ve yanıtlarındaki JSON yükü algılama modu
 | en büyük boyut | Üst bilgiye göre denetlenen istek veya Yanıt gövdesinin bayt olarak en fazla uzunluğu `Content-Length` . İstek gövdesi veya yanıt gövdesi sıkıştırılmışsa, bu değer sıkıştırması açılmış uzunluktadır. İzin verilen maksimum değer: 102.400 bayt (100 KB).  | Yes       | Yok   |
 | Boyut aşıldı-eylem | Gövdesi ' de belirtilen boyutu aşan istekler veya yanıtlar için gerçekleştirilecek [eylem](#actions) `max-size` . |  Yes     | Yok   |
 | hatalar-değişken adı | `context.Variables`Doğrulama hatalarını günlüğe kaydetmek için içindeki değişkenin adı.  |   Yes    | Yok   |
-| tür | Üst bilgiye karşı denetlenen, için gövde doğrulamasını yürütmek için içerik türü `Content-Type` . Bu değer büyük/küçük harfe duyarlıdır. Boşsa, API şemasında belirtilen her içerik türü için geçerlidir. |   Hayır    |  Yok  |
+| tür | Üst bilgiye karşı denetlenen, için gövde doğrulamasını yürütmek için içerik türü `Content-Type` . Bu değer büyük/küçük harfe duyarlıdır. Boşsa, API şemasında belirtilen her içerik türü için geçerlidir. |   No    |  Yok  |
 | farklı doğrula | Eşleşen bir içerik türüne sahip bir istek veya Yanıt gövdesinin doğrulanması için kullanılacak doğrulama altyapısı. Şu anda yalnızca "JSON" değeri desteklenir.   |  Yes     |  Yok  |
 | eylem | Gövdesi belirtilen içerik türüyle eşleşmeyen istekler veya yanıtlar için gerçekleştirilecek [eylem](#actions) .  |  Yes      | Yok   |
 
@@ -154,10 +154,10 @@ Bu örnekte, tüm sorgu ve yol parametreleri engelleme modunda ve algılama modu
 | Ad         | Açıklama                                                                                                                                   | Gerekli |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | Validate parametreleri | Kök öğe. İsteklerde tüm parametrelerin varsayılan doğrulama eylemlerini belirtir.                                                                                                                              | Yes      |
-| bilgisinde | İsteklerdeki üst bilgi parametrelerine yönelik varsayılan doğrulama eylemlerini geçersiz kılmak için bu öğeyi ekleyin.   | Hayır |
-| sorgu | İsteklerdeki sorgu parametreleri için varsayılan doğrulama eylemlerini geçersiz kılmak için bu öğeyi ekleyin.  | Hayır |
-| path | İsteklerde URL yolu parametreleri için varsayılan doğrulama eylemlerini geçersiz kılmak için bu öğeyi ekleyin.  | Hayır |
-| parametre | Doğrulama eylemlerinin daha üst düzey yapılandırmasını geçersiz kılmak için adlandırılmış parametreler için bir veya daha fazla öğe ekleyin. | Hayır |
+| bilgisinde | İsteklerdeki üst bilgi parametrelerine yönelik varsayılan doğrulama eylemlerini geçersiz kılmak için bu öğeyi ekleyin.   | No |
+| sorgu | İsteklerdeki sorgu parametreleri için varsayılan doğrulama eylemlerini geçersiz kılmak için bu öğeyi ekleyin.  | No |
+| path | İsteklerde URL yolu parametreleri için varsayılan doğrulama eylemlerini geçersiz kılmak için bu öğeyi ekleyin.  | No |
+| parametre | Doğrulama eylemlerinin daha üst düzey yapılandırmasını geçersiz kılmak için adlandırılmış parametreler için bir veya daha fazla öğe ekleyin. | No |
 
 ### <a name="attributes"></a>Öznitelikler
 
@@ -202,7 +202,7 @@ Bu ilke, aşağıdaki ilke [bölümlerinde](./api-management-howto-policies.md#s
 | Ad         | Açıklama                                                                                                                                   | Gerekli |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | üstbilgileri doğrula | Kök öğe. Yanıtlarındaki tüm üst bilgiler için varsayılan doğrulama eylemlerini belirtir.                                                                                                                              | Yes      |
-| üst bilgi | Yanıtlarındaki üst bilgiler için varsayılan doğrulama eylemlerini geçersiz kılmak üzere adlandırılmış üst bilgiler için bir veya daha fazla öğe ekleyin. | Hayır |
+| üst bilgi | Yanıtlarındaki üst bilgiler için varsayılan doğrulama eylemlerini geçersiz kılmak üzere adlandırılmış üst bilgiler için bir veya daha fazla öğe ekleyin. | No |
 
 ### <a name="attributes"></a>Öznitelikler
 
@@ -245,7 +245,7 @@ Bu ilke, aşağıdaki ilke [bölümlerinde](./api-management-howto-policies.md#s
 | Ad         | Açıklama                                                                                                                                   | Gerekli |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | doğrulama-durum kodu | Kök öğe.                                                                                                | Yes      |
-| durum kodu | Yanıtlarındaki durum kodları için varsayılan doğrulama eylemini geçersiz kılmak üzere HTTP durum kodları için bir veya daha fazla öğe ekleyin. | Hayır |
+| durum kodu | Yanıtlarındaki durum kodları için varsayılan doğrulama eylemini geçersiz kılmak üzere HTTP durum kodları için bir veya daha fazla öğe ekleyin. | No |
 
 ### <a name="attributes"></a>Öznitelikler
 

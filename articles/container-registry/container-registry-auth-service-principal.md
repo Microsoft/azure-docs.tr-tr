@@ -2,17 +2,17 @@
 title: Hizmet sorumlusuyla kimlik doğrulama
 description: Azure Active Directory hizmet sorumlusu kullanarak özel kapsayıcı kayıt defterinizde görüntülere erişim sağlayın.
 ms.topic: article
-ms.date: 10/04/2019
-ms.openlocfilehash: 8d49628576a1c337efaea3e5286fef00e39def17
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 03/15/2021
+ms.openlocfilehash: a32538e5fc5354427bafc5098634becdcedd1239
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "86259149"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106285544"
 ---
 # <a name="azure-container-registry-authentication-with-service-principals"></a>Hizmet sorumluları ile kimlik doğrulamasını Azure Container Registry
 
-Kapsayıcı görüntü `docker push` ve `pull` kapsayıcı Kayıt defterinize erişim sağlamak için bir Azure Active Directory (Azure AD) hizmet sorumlusu kullanabilirsiniz. Hizmet sorumlusu kullanarak, "gözetimsiz" hizmetlere ve uygulamalarına erişim sağlayabilirsiniz.
+Kapsayıcı Kayıt defterinize anında iletme, çekme veya başka erişim sağlamak için bir Azure Active Directory (Azure AD) hizmet sorumlusu kullanabilirsiniz. Hizmet sorumlusu kullanarak, "gözetimsiz" hizmetlere ve uygulamalarına erişim sağlayabilirsiniz.
 
 ## <a name="what-is-a-service-principal"></a>Hizmet sorumlusu nedir?
 
@@ -52,7 +52,7 @@ Kapsayıcı Kayıt defterinize erişim verdiğiniz bir hizmet sorumlusu olduktan
 * **Kullanıcı adı** -hizmet sorumlusu uygulama kimliği ( *istemci kimliği* olarak da bilinir)
 * **Parola** -hizmet sorumlusu parolası ( *istemci gizli anahtarı* da denir)
 
-Her değer, formun bir GUID 'sidir `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` . 
+Her değerin biçimi vardır `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` . 
 
 > [!TIP]
 > [Az ad SP Reset-Credentials](/cli/azure/ad/sp/credential#az-ad-sp-credential-reset) komutunu çalıştırarak bir hizmet sorumlusunun parolasını yeniden oluşturabilirsiniz.
@@ -66,7 +66,7 @@ Azure Container Registry ile kimlik doğrulaması yapan herhangi bir Azure hizme
 
 ### <a name="use-with-docker-login"></a>Docker oturum açma ile kullanma
 
-`docker login`Hizmet sorumlusu kullanarak çalıştırabilirsiniz. Aşağıdaki örnekte, hizmet sorumlusu uygulama KIMLIĞI, ortam değişkenine `$SP_APP_ID` ve değişkendeki parolaya geçirilir `$SP_PASSWD` . Docker kimlik bilgilerini yönetmek için en iyi uygulamalar için [Docker Login](https://docs.docker.com/engine/reference/commandline/login/) komut başvurusuna bakın.
+`docker login`Hizmet sorumlusu kullanarak çalıştırabilirsiniz. Aşağıdaki örnekte, hizmet sorumlusu uygulama KIMLIĞI, ortam değişkenine `$SP_APP_ID` ve değişkendeki parolaya geçirilir `$SP_PASSWD` . Docker kimlik bilgilerini yönetmek için önerilen uygulamalar için [Docker Login](https://docs.docker.com/engine/reference/commandline/login/) komut başvurusuna bakın.
 
 ```bash
 # Log in to Docker with service principal credentials

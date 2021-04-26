@@ -9,12 +9,12 @@ ms.subservice: general
 ms.topic: quickstart
 ms.date: 01/27/2021
 ms.author: mbaldwin
-ms.openlocfilehash: f7f6f5d82c5fda7101e80ddcb8b17dc6bdef6532
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 588bee2922ee44f3f89b5d252b5b4a6991d26b82
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99070292"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815135"
 ---
 # <a name="quickstart-create-a-key-vault-using-the-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak bir Anahtar Kasası oluşturma
 
@@ -43,6 +43,6 @@ Azure Key Vault [anahtarlar](../keys/index.yml), [gizli](../secrets/index.yml)di
 Bu hızlı başlangıçta bir Key Vault oluşturup silmiş olursunuz. Key Vault ve uygulamalarınızla tümleştirme hakkında daha fazla bilgi edinmek için aşağıdaki makalelere ilerleyin.
 
 - [Azure Key Vault genel bakışını](overview.md) okuyun
-- [Azure Key Vault güvenliğine genel bakış](security-overview.md) konusunu gözden geçirin
+- [Azure Key Vault güvenliğine genel bakış](security-features.md) konusunu gözden geçirin
 - Azure CLı için başvuruya bakın [az keykasa komutları](/cli/azure/keyvault)
 

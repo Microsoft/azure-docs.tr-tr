@@ -8,14 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: article
-ms.date: 12/17/2020
+ms.date: 03/29/2021
 ms.author: aahi
-ms.openlocfilehash: 91e10c25d2c3bef9c1ca20e3e5737a326d45997c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fdf24fdc56d39d93fed0009e2fadbafd7f97db6c
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97654787"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280505"
 ---
 # <a name="example-how-to-extract-key-phrases-using-text-analytics"></a>Örnek: Metin Analizi kullanarak anahtar tümceleri ayıklama
 
@@ -121,7 +121,7 @@ Belge boyutu belge başına 5.120 veya daha az karakter olmalıdır ve koleksiyo
 
 ## <a name="step-2-post-the-request"></a>2. Adım: İsteği gönderme
 
-İstek alındığında analiz gerçekleştirilir. Dakikada veya saniye başına göndereceğiniz isteklerin boyutu ve sayısı hakkında daha fazla bilgi için genel bakış konusunun [veri sınırları](../overview.md#data-limits) bölümüne bakın.
+İstek alındığında analiz gerçekleştirilir. Dakikada veya saniyede gönderebilmeniz için istek boyutu ve sayısı hakkında daha fazla bilgi için, [veri sınırları](../concepts/data-limits.md) makalesine bakın.
 
 Hizmetin durum bilgisi olmadığını unutmayın. Hesabınızda bir veri depolanmaz. Sonuçlar hemen yanıtta döndürülür.
 

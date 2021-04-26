@@ -12,12 +12,12 @@ ms.workload: identity
 ms.date: 01/06/2021
 ms.author: jmprieur
 ms.custom: aaddev, devx-track-python
-ms.openlocfilehash: c63ee686ae218a696069465bb8d2d1d7413a998e
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: d45c40bb6878da80f68fff9642b55da68706743a
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104799097"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107305846"
 ---
 # <a name="desktop-app-that-calls-web-apis-acquire-a-token"></a>Web API 'Lerini çağıran masaüstü uygulaması: belirteç alma
 
@@ -257,7 +257,7 @@ WithParentActivityOrWindow(IWin32Window window)
 // Mac
 WithParentActivityOrWindow(NSWindow window)
 
-// .Net Standard (this will be on all platforms at runtime, but only on NetStandard at build time)
+// .NET Standard (this will be on all platforms at runtime, but only on NetStandard at build time)
 WithParentActivityOrWindow(object parent).
 ```
 
@@ -277,15 +277,26 @@ Açıklamalarının
 
 `WithPrompt()` bir istem belirterek kullanıcıyla etkileşimi denetlemek için kullanılır.
 
-![Istem yapısındaki alanları gösteren resim. Bu sabit değerler, WithPrompt () yöntemi tarafından gösterilecek istem türünü tanımlayarak kullanıcıyla etkileşimi denetler.](https://user-images.githubusercontent.com/13203188/53438042-3fb85700-39ff-11e9-9a9e-1ff9874197b3.png)
+![Istem yapısındaki alanları gösteren resim. Bu sabit değerler, WithPrompt () yöntemi tarafından gösterilecek istem türünü tanımlayarak kullanıcıyla etkileşimi denetler.](https://user-images.githubusercontent.com/34331512/112267137-3f1c3a00-8c32-11eb-97fb-33604311329a.png)
 
 Sınıfı aşağıdaki sabitleri tanımlar:
 
 - ``SelectAccount`` STS 'yi, kullanıcının oturumu olan hesapları içeren hesap seçimi iletişim kutusunu sunacak şekilde zorlar. Bu seçenek, uygulama geliştiricileri kullanıcıların farklı kimlikler arasında seçim yapmasına izin vermek istediğinizde yararlıdır. Bu seçenek, MSAL 'in ``prompt=select_account`` kimlik sağlayıcısına gönderilmesini sağlar. Bu seçenek varsayılandır. Hesap ve Kullanıcı için bir oturumun varlığı gibi kullanılabilir bilgileri temel alan mümkün olan en iyi deneyimi sağlamanın iyi bir işi vardır. Bunu yapmak için iyi bir nedeniniz olmadığı müddetçe değiştirmeyin.
 - ``Consent`` daha önce izin verilse bile, uygulama geliştiricisinin kullanıcıyı izin sorulmasını zorunlu hale getirir. Bu durumda, MSAL `prompt=consent` kimlik sağlayıcısına gönderilir. Bu seçenek, kuruluşun idare ettiği bazı güvenlik odaklı uygulamalarda, uygulamanın her kullanıldığı her seferinde kullanıcının izin iletişim kutusuyla sunulmasını talep ettiği durumlarda kullanılabilir.
 - ``ForceLogin`` uygulama geliştiricisinin, bu kullanıcı istemi gerekli olmasa bile, kullanıcıya hizmet tarafından kimlik bilgileri istenmesini sağlar. Bu seçenek, bir belirteci almak başarısız olursa kullanıcının yeniden oturum açmasını sağlamak için yararlı olabilir. Bu durumda, MSAL `prompt=login` kimlik sağlayıcısına gönderilir. Bazen, kuruluşun idare ettiği güvenlik odaklı uygulamalarda, uygulamanın belirli bölümlerine her erişirken kullanıcının yeniden kaydolmasını talep ettiği durumlarda kullanılır.
+- ``Create`` , kimlik sağlayıcısına göndererek dış kimlikler için kullanılan bir kaydolma deneyimini tetikler `prompt=create` . Bu istem Azure AD B2C uygulamalar için gönderilmemelidir. Daha fazla bilgi için bkz. [bir uygulamaya self servis kaydolma Kullanıcı akışı ekleme](https://aka.ms/msal-net-prompt-create).
 - ``Never`` (yalnızca .NET 4,5 ve WinRT için) kullanıcıya sormaz, bunun yerine gizli katıştırılmış Web görünümünde depolanan tanımlama bilgisini kullanmayı dener. Daha fazla bilgi için bkz. MSAL.NET içindeki Web views. Bu seçeneğin kullanılması başarısız olabilir. Bu durumda, `AcquireTokenInteractive` BIR UI etkileşiminin gerekli olduğunu bildirmek için bir özel durum oluşturur. Başka bir parametre kullanmanız gerekir `Prompt` .
 - ``NoPrompt`` kimlik sağlayıcısına hiçbir istem göndermez. Bu seçenek yalnızca Azure Active Directory (Azure AD) B2C düzenleme profili ilkeleri için yararlıdır. Daha fazla bilgi için bkz. [Azure AD B2C özellikleri](https://aka.ms/msal-net-b2c-specificities).
+
+#### <a name="withuseembeddedwebview"></a>WithUseEmbeddedWebView
+
+Bu yöntem, ekli bir Web görünümü veya sistem Web görünümü kullanımını zorlamak istediğinizi belirtmenize olanak sağlar (varsa). Daha fazla bilgi için bkz. [Web tarayıcıları kullanımı](msal-net-web-browsers.md).
+
+ ```csharp
+ var result = await app.AcquireTokenInteractive(scopes)
+                   .WithUseEmbeddedWebView(true)
+                   .ExecuteAsync();
+  ```
 
 #### <a name="withextrascopetoconsent"></a>Withextrascopetoonay
 
@@ -1001,7 +1012,7 @@ Bu akış, macOS için MSAL üzerinde desteklenmez.
 
 # <a name="nodejs"></a>[Node.js](#tab/nodejs)
 
-Bu ayıklama [msal node dev örneklerinden](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/samples/msal-node-samples/standalone-samples/username-password). Aşağıdaki kod parçacığında Kullanıcı adı ve parola yalnızca çizim amaçlıdır. Bu, üretimde kaçınılmalıdır. Bunun yerine, kullanıcıdan Kullanıcı adını/parolasını girmesini isteyen temel bir kullanıcı arabirimi önerilir. 
+Bu ayıklama [msal node dev örneklerinden](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/samples/msal-node-samples/username-password). Aşağıdaki kod parçacığında Kullanıcı adı ve parola yalnızca çizim amaçlıdır. Bu, üretimde kaçınılmalıdır. Bunun yerine, kullanıcıdan Kullanıcı adını/parolasını girmesini isteyen temel bir kullanıcı arabirimi önerilir. 
 
 ```JavaScript
 const msal = require("@azure/msal-node");
@@ -1244,7 +1255,7 @@ Bu akış macOS için geçerlidir.
 
 # <a name="nodejs"></a>[Node.js](#tab/nodejs)
 
-Bu ayıklama [msal node dev örneklerinden](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/samples/msal-node-samples/standalone-samples/device-code).
+Bu ayıklama [msal node dev örneklerinden](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/samples/msal-node-samples/device-code).
 
 ```JavaScript
 const msal = require('@azure/msal-node');

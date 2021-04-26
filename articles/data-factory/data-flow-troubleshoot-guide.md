@@ -6,13 +6,13 @@ author: kromerm
 ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: troubleshooting
-ms.date: 03/18/2021
-ms.openlocfilehash: 7678d0fde21cefc950e0ac64a58563425c606298
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.date: 03/25/2021
+ms.openlocfilehash: 72ab685b58f7d940fe4d682cacba6212fe80ced8
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105640226"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105933092"
 ---
 # <a name="troubleshoot-mapping-data-flows-in-azure-data-factory"></a>Azure Data Factory veri akışlarını eşleme sorunlarını giderme
 
@@ -341,6 +341,110 @@ Bu makalede, Azure Data Factory veri akışlarını eşlemek için ortak sorun g
 1. Veri kümesi bağlantılarınızın durumunu denetleyin. Her kaynak ve havuz dönüşümünde, kullanmakta olduğunuz her veri kümesi için bağlı hizmete gidin ve bağlantıları test edin.
 2. Veri akışı tasarımcısında dosya ve tablo bağlantılarınızın durumunu denetleyin. Verilerinize erişebildiğinizden emin olmak için, hata ayıklama modunda kaynak dönüşümlerinizin **veri önizlemesi** ' ni seçin.
 3. Her şey veri önizlemede doğru görünüyorsa, işlem hattı tasarımcısına gidin ve veri akışınızı bir işlem hattı etkinliğine yerleştirin. Uçtan uca bir test için işlem hattının hatalarını ayıklayın.
+
+### <a name="improvement-on-csvcdm-format-in-data-flow"></a>Veri akışında CSV/CDM biçiminde geliştirme 
+
+**Azure Data Factory v2 'de veri akışını eşlemek Için sınırlandırılmış metin veya CDM biçimlendirmesi** kullanırsanız, **1 Mayıs 2021**' den başlayarak veri akışında sınırlandırılmış metin/CDM 'nin geliştirmesi nedeniyle, davranış varolan işlem hatlarınız üzerinde değişir. 
+
+İyileştirmadan önce aşağıdaki sorunlarla karşılaşabilirsiniz, ancak geliştirme sonrasında sorunlar düzeltildi. Bu iyileştirmesinin sizi etkileyip etkilemediğini anlamak için aşağıdaki içeriği okuyun. 
+
+#### <a name="scenario-1-encounter-the-unexpected-row-delimiter-issue"></a>Senaryo 1: beklenmeyen satır sınırlayıcısı sorunuyla karşılaşıyorsunuz
+
+ Aşağıdaki koşullarda siz etkilenmezsiniz:
+ - Çok satırlı ayarı doğru veya kaynak olarak CDM olarak ayarlanan ayrılmış metni kullanma.
+ - İlk satırda 128 karakterden fazlası vardır. 
+ - Veri dosyalarındaki satır sınırlayıcısı değil `\n` .
+
+ İyileştirmesinden önce, varsayılan satır sınırlayıcısı `\n` sınırlandırılmış metin dosyalarını ayrıştırmak için beklenmedik şekilde kullanılamıyor, çünkü çok satırlı ayar true olarak ayarlandığında, satır sınırlayıcı ayarını geçersiz kılar ve satır sınırlayıcısı ilk 128 karaktere göre otomatik olarak algılanır. Gerçek satır sınırlayıcısını algılayamazsa, öğesine geri dönecek `\n` .  
+
+ Geliştirme sonrasında, üç satır sınırlayıcıdan herhangi biri: `\r` , `\n` , `\r\n` çalışması gerekir.
+ 
+ Aşağıdaki örnek, geliştirme sonrasında bir işlem hattı davranışı değişikliğini gösterir:
+
+ **Örnek**:<br/>
+   Aşağıdaki sütun için:<br/>
+    `C1, C2, {long first row}, C128\r\n `<br/>
+    `V1, V2, {values………………….}, V128\r\n `<br/>
+ 
+   İyileştirmadan önce `\r` sütun değerinde tutulur. Ayrıştırılmış sütun sonucu:<br/>
+   `C1 C2 {long first row} C128`**`\r`**<br/>
+   `V1 V2 {values………………….} V128`**`\r`**<br/> 
+
+   İyileştirmelerden sonra, ayrıştırılmış sütun sonucu şu olmalıdır:<br/>
+   `C1 C2 {long first row} C128`<br/>
+   `V1 V2 {values………………….} V128`<br/>
+  
+#### <a name="scenario-2-encounter-an-issue-of-incorrectly-reading-column-values-containing-rn"></a>Senaryo 2: ' \r\n ' içeren sütun değerlerini yanlış okuma sorunuyla karşılaşıyorsunuz
+
+ Aşağıdaki koşullarda siz etkilenmezsiniz:
+ - Çok satırlı ayarı doğru veya kaynak olarak CDM olarak ayarlanan ayrılmış metni kullanma. 
+ - Satır sınırlayıcısı `\r\n` .
+
+ İyileştirmadan önce, sütun değerini okurken, `\r\n` içindeki içinde hatalı olarak değiştirilmiş olabilir `\n` . 
+
+ Gelişmelerden sonra, `\r\n` sütun değerindeki değeri ile değiştirilmez `\n` .
+
+ Aşağıdaki örnek, geliştirme sonrasında bir işlem hattı davranışı değişikliğini gösterir:
+ 
+ **Örnek**:<br/>
+  
+ Aşağıdaki sütun için:<br/>
+  **`"A\r\n"`**`, B, C\r\n`<br/>
+
+ İyileştirmadan önce, ayrıştırılmış sütun sonucu:<br/>
+  **`A\n`**` B C`<br/>
+
+ İyileştirmelerden sonra, ayrıştırılmış sütun sonucu şu olmalıdır:<br/>
+  **`A\r\n`**` B C`<br/>  
+
+#### <a name="scenario-3-encounter-an-issue-of-incorrectly-writing-column-values-containing-n"></a>Senaryo 3: ' \n ' içeren sütun değerlerini yanlış yazma sorunuyla karşılaşıyorsunuz
+
+ Aşağıdaki koşullarda siz etkilenmezsiniz:
+ - Ayrılmış metni havuz olarak kullanma.
+ - Sütun değeri içerir `\n` .
+ - Satır sınırlayıcısı olarak ayarlanır `\r\n` .
+ 
+ İyileştirmadan önce, sütun değerini yazarken, `\n` içindeki içinde hatalı olarak değiştirilmiş olabilir `\r\n` . 
+
+ Gelişmelerden sonra, `\n` sütun değerindeki değeri ile değiştirilmez `\r\n` .
+ 
+ Aşağıdaki örnek, geliştirme sonrasında bir işlem hattı davranışı değişikliğini gösterir:
+
+ **Örnek**:<br/>
+
+ Aşağıdaki sütun için:<br/>
+ **`A\n`**` B C`<br/>
+
+ Geliştirme öncesinde CSV havuzu şu şekilde olur:<br/>
+  **`"A\r\n"`**`, B, C\r\n` <br/>
+
+ Geliştirme sonrasında CSV havuzunun olması gerekir:<br/>
+  **`"A\n"`**`, B, C\r\n`<br/>
+
+#### <a name="scenario-4-encounter-an-issue-of-incorrectly-reading-empty-string-as-null"></a>Senaryo 4: boş dizeyi NULL olarak okumada bir sorunla karşılaşıyorsunuz
+ 
+ Aşağıdaki koşullarda siz etkilenmezsiniz:
+ - Ayrılmış metni kaynak olarak kullanma. 
+ - NULL değeri boş olmayan bir değer olarak ayarlanmış. 
+ - Sütun değeri boş bir dizedir ve tırnak içine alınmış. 
+ 
+ İyileştirmadan önce, tırnak işaretsiz boş dizenin sütun değeri NULL olarak okunurdur. 
+
+ Geliştirme sonrasında boş dize NULL değer olarak ayrıştırılmaz. 
+ 
+ Aşağıdaki örnek, geliştirme sonrasında bir işlem hattı davranışı değişikliğini gösterir:
+
+ **Örnek**:<br/>
+
+ Aşağıdaki sütun için:<br/>
+  `A, ,B, `<br/>
+
+ İyileştirmadan önce, ayrıştırılmış sütun sonucu:<br/>
+  `A null B null`<br/>
+
+ İyileştirmelerden sonra, ayrıştırılmış sütun sonucu şu olmalıdır:<br/>
+  `A "" (empty string) B "" (empty string)`<br/>
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

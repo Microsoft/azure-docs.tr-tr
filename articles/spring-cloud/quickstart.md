@@ -8,12 +8,12 @@ ms.date: 10/23/2020
 ms.author: brendm
 ms.custom: devx-track-java, devx-track-azurecli
 zone_pivot_groups: programming-languages-spring-cloud
-ms.openlocfilehash: 520a36a0896cc2b4b14366350f66d365ea04a557
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: 6ae56e4e1586a875d4d3d75d41580f375df0eebf
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105612810"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105962858"
 ---
 # <a name="quickstart-deploy-your-first-azure-spring-cloud-application"></a>Hızlı başlangıç: ilk Azure Spring Cloud uygulamanızı dağıtın
 
@@ -345,7 +345,7 @@ Bu hızlı başlangıcı tamamlamak için:
 
 ## <a name="generate-a-spring-cloud-project"></a>Yay bulutu projesi oluşturma
 
-Azure Spring Cloud için önerilen bağımlılıklara sahip bir örnek proje oluşturmak üzere [Spring ınitialku](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=hellospring&name=hellospring&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.hellospring&dependencies=web,cloud-eureka,actuator,cloud-starter-sleuth,cloud-starter-zipkin,cloud-config-client) ile başlayın. Aşağıdaki görüntüde, bu örnek proje için ayarlanan ınitialr gösterilmektedir.
+Azure Spring Cloud için önerilen bağımlılıklara sahip bir örnek proje oluşturmak üzere [Spring ınitialku](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.3.9.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=hellospring&name=hellospring&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.hellospring&dependencies=web,cloud-eureka,actuator,cloud-starter-sleuth,cloud-starter-zipkin,cloud-config-client) ile başlayın. Aşağıdaki görüntüde, bu örnek proje için ayarlanan ınitialr gösterilmektedir.
 ```url
 https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.3.4.RELEASE&packaging=jar&jvmVersion=1.8&groupId=com.example&artifactId=hellospring&name=hellospring&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.hellospring&dependencies=web,cloud-eureka,actuator,cloud-starter-sleuth,cloud-starter-zipkin,cloud-config-client
 ```

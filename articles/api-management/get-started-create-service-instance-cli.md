@@ -7,12 +7,12 @@ ms.topic: quickstart
 ms.custom: ''
 ms.date: 09/10/2020
 ms.author: apimpm
-ms.openlocfilehash: 72d1faac02a21f23d46eb992af1d501bca89e71f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 19fc2e1629e7f67063e3cc3eec8cb3707b6dd2e4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101688085"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775879"
 ---
 # <a name="quickstart-create-a-new-azure-api-management-service-instance-by-using-the-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak yeni bir Azure API Management hizmet örneği oluşturma
 
@@ -30,7 +30,7 @@ Bu hızlı başlangıçta, Azure CLI 'de [az APIM](/cli/azure/apim) komutların�
 
 Tüm Azure kaynakları gibi Azure API Management örnekleri bir kaynak grubuna dağıtılmalıdır. Kaynak grupları, ilgili Azure kaynaklarını düzenlemenizi ve yönetmenizi sağlar.
 
-İlk olarak, aşağıdaki [az Group Create](/cli/azure/group#az-group-create) komutuyla Orta ABD konumunda *myresourcegroup* adlı bir kaynak grubu oluşturun:
+İlk olarak, aşağıdaki [az Group Create](/cli/azure/group#az_group_create) komutuyla Orta ABD konumunda *myresourcegroup* adlı bir kaynak grubu oluşturun:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location centralus
@@ -38,7 +38,7 @@ az group create --name myResourceGroup --location centralus
 
 ## <a name="create-a-new-service"></a>Yeni hizmet oluşturma
 
-Artık bir kaynak grubunuz olduğuna göre, bir API Management hizmet örneği oluşturabilirsiniz. [Az APIM Create](/cli/azure/apim#az-apim-create) komutunu kullanarak bir tane oluşturun ve bir hizmet adı ve Yayımcı Ayrıntıları sağlayın. Hizmet adı Azure içinde benzersiz olmalıdır. 
+Artık bir kaynak grubunuz olduğuna göre, bir API Management hizmet örneği oluşturabilirsiniz. [Az APIM Create](/cli/azure/apim#az_apim_create) komutunu kullanarak bir tane oluşturun ve bir hizmet adı ve Yayımcı Ayrıntıları sağlayın. Hizmet adı Azure içinde benzersiz olmalıdır. 
 
 Aşağıdaki örnekte, hizmet adı için *uygulamaım* kullanılır. Adı benzersiz bir değer olarak güncelleştirin. Ayrıca API yayımcısının kuruluşunun adını ve bildirimleri alacak e-posta adresini güncelleştirin. 
 
@@ -53,7 +53,7 @@ Varsayılan olarak, komut, Azure API Management değerlendirmek için ekonomik b
 > [!TIP]
 > Bu katmanda bir API Management hizmeti oluşturmak ve etkinleştirmek için 30 ila 40 dakika sürebilir. Önceki komut, `--no-wait` hizmet oluşturulduğunda komutun hemen döndürdüğü şekilde seçeneğini kullanır.
 
-[Az APIM Show](/cli/azure/apim#az-apim-show) komutunu çalıştırarak dağıtım durumunu denetleyin:
+[Az APIM Show](/cli/azure/apim#az_apim_show) komutunu çalıştırarak dağıtım durumunu denetleyin:
 
 ```azurecli-interactive
 az apim show --name myapim --resource-group myResourceGroup --output table
@@ -79,7 +79,7 @@ API Management hizmet örneğiniz çevrimiçi olduğunda, bunu kullanmaya hazır
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse, [az Group Delete](/cli/azure/group#az-group-delete) komutunu kullanarak kaynak grubunu ve API Management hizmet örneğini kaldırabilirsiniz.
+Artık gerekli değilse, [az Group Delete](/cli/azure/group#az_group_delete) komutunu kullanarak kaynak grubunu ve API Management hizmet örneğini kaldırabilirsiniz.
 
 ```azurecli-interactive
 az group delete --name myResourceGroup

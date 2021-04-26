@@ -7,14 +7,14 @@ tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: conceptual
-ms.date: 08/20/2020
+ms.date: 04/08/2021
 ms.author: banders
-ms.openlocfilehash: 996c974473c53833dd26abae2fb61585999f33b4
-ms.sourcegitcommit: f3ec73fb5f8de72fe483995bd4bbad9b74a9cc9f
+ms.openlocfilehash: ff53131f3078b33b7e7d853c1fca891b0b86d792
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/04/2021
-ms.locfileid: "102050452"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484613"
 ---
 # <a name="terms-in-your-microsoft-customer-agreement-invoice"></a>Microsoft Müşteri Sözleşmesi faturanızdaki koşullar
 
@@ -29,6 +29,18 @@ Faturanızla ilgili bilgi edinmek ve bu faturadaki ücretleri çözümlemek içi
 ## <a name="billing-period"></a>Faturalama dönemi
 
 Aylık olarak faturalandırılırsınız. [Azure portalında](https://portal.azure.com/) faturalama profili özellikleri bölümünde *fatura tarihi* bilgisini kontrol ederek faturaları ayın hangi günü alacağınızı öğrenebilirsiniz. Faturalama döneminin sonu ile fatura tarihi arasında gerçekleşen ücretler, sonraki faturalama döneminde yer aldığından sonraki ayın faturasına dahil edilir. Her bir fatura için faturalama dönemi başlangıç ve bitiş tarihleri, faturanın PDF dosyasında **Faturalama Özeti** bölümünün yukarısında listelenir.
+
+Bir EA 'dan Microsoft Müşteri sözleşmesine geçiş yapıyorsanız, geçiş tarihine kadar EA 'niz için faturalar almaya devam edersiniz. Microsoft Müşteri anlaşmanız için yeni fatura, geçiş işleminden sonraki ayın beşinci gününde oluşturulur. İlk faturada geçiş tarihinden itibaren kısmi bir ücret gösterilir. Sonraki faturalar her ay oluşturulur ve her ayın tüm ücretlerini gösterir.
+
+### <a name="changes-for-pay-as-you-go-subscriptions"></a>Kullandıkça Öde aboneliklerine yönelik değişiklikler
+
+Bir abonelik geçirilir, aktarıldığında veya iptal edildiğinde, oluşturulan son faturada önceki fatura dönemine ve yeni tamamlanmamış fatura döngüsüne yönelik ücretler bulunur.
+
+Örnek:
+
+Kullandıkça Öde aboneliğiniz fatura döngünüzün her ayın 8 ile 7 güne kadar olduğunu varsayalım. Abonelik, 16 Kasım 'da bir Microsoft Müşteri sözleşmesine aktarıldı. Son Kullandıkça Öde faturanızda, 8 Ekim 2020 ' de 7 Kasım 2020 ' ye kadar ücret alınır. Ayrıca, 8 Kasım 2020 ' den 16 Kasım 2020 ' ye kadar Microsoft Müşteri Sözleşmesi için yeni kısmi faturalandırma döngüsünün ücretlendirisini de içerir. Burada bir örnek resim verilmiştir.
+
+:::image type="content" source="./media/mca-understand-your-invoice/last-invoice-billing-cycle.png" alt-text="Son fatura döngüsünü gösteren bir faturanın örnek resmi." lightbox="./media/mca-understand-your-invoice/last-invoice-billing-cycle.png" :::
 
 ## <a name="invoice-terms-and-descriptions"></a>Fatura terimleri ve açıklamaları
 

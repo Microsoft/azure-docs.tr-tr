@@ -3,14 +3,14 @@ author: baanders
 description: Azure dijital TWINS sınırları için dosya ekleme
 ms.service: digital-twins
 ms.topic: include
-ms.date: 6/9/2020
+ms.date: 4/8/2021
 ms.author: baanders
-ms.openlocfilehash: 4a69b2ff15fc4857e9fb292d2f753aa68ed875d4
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 34fec713c3764987f07bc7fb89ecb0a0d770a840
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "100370128"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728033"
 ---
 ### <a name="functional-limits"></a>İşlevsel sınırlar
 
@@ -46,7 +46,8 @@ Aşağıdaki tablo, farklı API 'lerin hız sınırlarını yansıtır.
 | API | Özellik | Varsayılan limit | Ayarlanabilir? |
 | --- | --- | --- | --- |
 | Modeller API 'SI | Saniye başına istek sayısı | 100 | Yes |
-| Dijital TWINS API 'SI | Saniye başına istek sayısı | 2.000 | Yes |
+| Dijital TWINS API 'SI | Saniye başına okuma isteği sayısı | 1.000 | Yes |
+| Dijital TWINS API 'SI | Saniyedeki düzeltme isteği sayısı | 1.000 | Yes |
 | Dijital TWINS API 'SI | **Tüm TWINS ve ilişkiler** genelinde saniye başına oluşturma/silme işlemi sayısı | 50 | Yes |
 | Dijital TWINS API 'SI | **Tek bir ikizi** veya onun ilişkilerinde saniye başına oluşturma/güncelleştirme/silme işlemi sayısı | 10 | No |
 | Sorgu API'si | Saniye başına istek sayısı | 500 | Yes |

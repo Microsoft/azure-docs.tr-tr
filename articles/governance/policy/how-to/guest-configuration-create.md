@@ -1,14 +1,14 @@
 ---
 title: Windows için Konuk Yapılandırma ilkeleri oluşturma
 description: Windows için Azure Ilke Konuk yapılandırma ilkesi oluşturmayı öğrenin.
-ms.date: 08/17/2020
+ms.date: 03/31/2021
 ms.topic: how-to
-ms.openlocfilehash: 72772743eba23ea7c2a93f5037ac84b671256a66
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.openlocfilehash: 6eaefdbc28b8efc53dc7c4d46eb5d8a56d5be141
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104887708"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106096606"
 ---
 # <a name="how-to-create-guest-configuration-policies-for-windows"></a>Windows için Konuk Yapılandırma ilkeleri oluşturma
 
@@ -25,8 +25,7 @@ Bir Azure veya Azure dışı makinenin durumunu doğrulamak üzere kendi yapıla
 > [!IMPORTANT]
 > Azure Kamu ve Azure Çin ortamlarında Konuk yapılandırması olan özel ilke tanımları bir önizleme özelliğidir.
 >
-> Konuk Yapılandırma uzantısı Azure sanal makinelerinde denetim gerçekleştirmek için gereklidir.
-> Uzantıyı tüm Windows makineleri genelinde ölçekli olarak dağıtmak için aşağıdaki ilke tanımlarını atayın: `Deploy prerequisites to enable Guest Configuration Policy on Windows VMs`
+> Konuk Yapılandırma uzantısı Azure sanal makinelerinde denetim gerçekleştirmek için gereklidir. Uzantıyı tüm Windows makineleri genelinde ölçekli olarak dağıtmak için aşağıdaki ilke tanımlarını atayın: `Deploy prerequisites to enable Guest Configuration Policy on Windows VMs`
 > 
 > Özel içerik paketlerinde gizli dizileri veya gizli bilgileri kullanmayın.
 
@@ -138,7 +137,7 @@ class ResourceName : OMI_BaseResource
 };
 ```
 
-Kaynak gerekli özelliklere sahipse, bu, ayrıca `Get-TargetResource` sınıfıyla paralel olarak gelmelidir `reasons` . `reasons`Dahil edilmemişse, hizmet, girdi değerlerini ve tarafından döndürülen değerleri karşılaştıran bir "catch-all" davranışı içerir `Get-TargetResource` `Get-TargetResource` ve olarak ayrıntılı bir karşılaştırma sağlar `reasons` .
+Kaynak gerekli özelliklere sahipse, bu özelliklerin de `Get-TargetResource` sınıfıyla paralel olarak döndürülmesi gerekir `reasons` . `reasons`Dahil edilmemişse, hizmet, girdi değerlerini ve tarafından döndürülen değerleri karşılaştıran bir "catch-all" davranışı içerir `Get-TargetResource` `Get-TargetResource` ve olarak ayrıntılı bir karşılaştırma sağlar `reasons` .
 
 ### <a name="configuration-requirements"></a>Yapılandırma gereksinimleri
 
@@ -181,9 +180,7 @@ Tamamlanmış paket, Azure Ilke tanımlarını oluşturmak için konuk yapıland
   - Dscnativeresonakl modülü
   - Pencerelerin MOF için gereken DSC kaynak modülleri
 
-PowerShell cmdlet 'leri, paketi oluşturmaya yardımcı olur.
-Kök düzey klasörü veya sürüm klasörü gerekli değil.
-Paket biçimi bir. zip dosyası olmalıdır ve sıkıştırılmamış olarak toplam 100 MB boyutunda bir boyut aşamaz.
+PowerShell cmdlet 'leri, paketi oluşturmaya yardımcı olur. Kök düzey klasörü veya sürüm klasörü gerekli değil. Paket biçimi bir. zip dosyası olmalıdır ve sıkıştırılmamış olarak 100 MB 'lık toplam boyutu aşamaz.
 
 ### <a name="storing-guest-configuration-artifacts"></a>Konuk yapılandırma yapıtları depolanıyor
 
@@ -217,8 +214,7 @@ Configuration AuditBitLocker
 AuditBitLocker
 ```
 
-Bu betiği bir PowerShell terminalinde çalıştırın veya bu dosyayı `config.ps1` Proje klasörüne adıyla kaydedin.
-Terminalde yürüterek PowerShell 'de çalıştırın `./config.ps1` . Yeni bir MOF dosyası oluşturulur.
+Bu betiği bir PowerShell terminalinde çalıştırın veya bu dosyayı `config.ps1` Proje klasörüne adıyla kaydedin. Terminalde yürüterek PowerShell 'de çalıştırın `./config.ps1` . Yeni bir MOF dosyası oluşturulur.
 
 `Node AuditBitlocker`Komut Teknik olarak gerekli değildir `AuditBitlocker.mof` , ancak varsayılan olarak değil adlı bir dosya oluşturur `localhost.mof` . . Mof dosya adının yapılandırılması, ölçeklendirmeye çalışırken birçok dosyayı düzenlemeyi kolaylaştırır.
 
@@ -274,7 +270,7 @@ New-AzStorageAccount -ResourceGroupName myResourceGroupName -Name myStorageAccou
 - **Yol**: yayımlanacak paketin konumu
 - **Resourcegroupname**: depolama hesabının bulunduğu kaynak grubunun adı
 - **StorageAccountName**: paketin yayımlanması gereken depolama hesabının adı
-- **Storagecontainername**: (varsayılan: *guestconfiguration*) depolama hesabındaki depolama kapsayıcısının adı
+- **Storagecontainername**: (varsayılan: _guestconfiguration_) depolama hesabındaki depolama kapsayıcısının adı
 - **Zorla**: aynı ada sahip depolama hesabındaki mevcut paketin üzerine yaz
 
 Aşağıdaki örnek, paketi ' guestconfiguration ' depolama kapsayıcısı adına yayımlar.
@@ -367,7 +363,7 @@ Aşağıdaki etiketlere filtre uygulayan bir ilke tanımının örnek parçacı�
 
 ### <a name="using-parameters-in-custom-guest-configuration-policy-definitions"></a>Özel Konuk yapılandırma ilkesi tanımlarında parametreleri kullanma
 
-Konuk yapılandırması, çalışma zamanında bir yapılandırmanın özelliklerini geçersiz kılmayı destekler. Bu özellik, paketteki MOF dosyasındaki değerlerin statik olarak değerlendirilmesi gerekmediği anlamına gelir. Geçersiz kılma değerleri Azure Ilkesi aracılığıyla sağlanır ve yapılandırmaların nasıl yazıldığı veya derlendiğini etkilemez.
+Konuk yapılandırması, çalışma zamanında bir yapılandırmanın özelliklerini geçersiz kılmayı destekler. Bu özellik, paketteki MOF dosyasındaki değerlerin statik olarak değerlendirilmesi gerekmediği anlamına gelir. Geçersiz kılma değerleri Azure Ilkesi aracılığıyla sağlanır ve yapılandırmaların nasıl yazıldığı veya derlendiğini değiştirmez.
 
 Cmdlet 'ler `New-GuestConfigurationPolicy` ve `Test-GuestConfigurationPolicyPackage` **parametresi** adlı bir parametre ekleyin. Bu parametre, her parametre hakkında tüm ayrıntılar dahil olmak üzere bir Hashtable tanımı alır ve Azure Ilke tanımı için kullanılan her bir dosyanın gerekli bölümlerini oluşturur.
 
@@ -389,7 +385,7 @@ $PolicyParameterInfo = @(
         DisplayName = 'windows service name.'                           # Policy parameter display name (mandatory)
         Description = "Name of the windows service to be audited."      # Policy parameter description (optional)
         ResourceType = "Service"                                        # DSC configuration resource type (mandatory)
-        ResourceId = 'UserSelectedNameExample'                                   # DSC configuration resource id (mandatory)
+        ResourceId = 'UserSelectedNameExample'                          # DSC configuration resource id (mandatory)
         ResourcePropertyName = "Name"                                   # DSC configuration resource property name (mandatory)
         DefaultValue = 'winrm'                                          # Policy parameter default value (optional)
         AllowedValues = @('BDESVC','TermService','wuauserv','winrm')    # Policy parameter allowed values (optional)
@@ -431,8 +427,7 @@ Geliştirme ortamında DSC kaynağı yüklendikten sonra,  `New-GuestConfigurati
 > [!NOTE]
 > `version`Konuk yapılandırma atamasının özelliği yalnızca Microsoft tarafından barındırılan etkiler. Özel içerik sürümü oluşturma için en iyi yöntem, dosyanın dosya adına dahil edileceğini içerir.
 
-İlk olarak, çalışırken `New-GuestConfigurationPackage` , paket için önceki sürümlerden benzersiz olan bir ad belirtin. Adında bir sürüm numarası dahil edebilirsiniz `PackageName_1.0.0` .
-Bu örnekteki sayı yalnızca paketin benzersiz olması için kullanılır, paketin diğer paketlerden daha yeni veya daha eski olarak değerlendirilmesi gerektiğini belirtmemelidir.
+İlk olarak, çalışırken `New-GuestConfigurationPackage` , paket için önceki sürümlerden benzersiz olan bir ad belirtin. Adında bir sürüm numarası dahil edebilirsiniz `PackageName_1.0.0` . Bu örnekteki sayı yalnızca paketin benzersiz olması için kullanılır, paketin diğer paketlerden daha yeni veya daha eski olarak değerlendirilmesi gerektiğini belirtmemelidir.
 
 İkinci olarak, `New-GuestConfigurationPolicy` aşağıdaki açıklamaları izleyerek cmdlet ile birlikte kullanılan parametreleri güncelleştirin.
 

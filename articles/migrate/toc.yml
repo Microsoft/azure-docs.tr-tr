@@ -130,6 +130,8 @@
   items:
     - name: Azure Geçişi projelerini oluşturma ve yönetme
       href: create-manage-projects.md
+    - name: Azure geçişi 'ni özel bağlantıyla kullanma
+      href: how-to-use-azure-migrate-with-private-endpoints.md
     - name: ISV araçlarıyla çalışmaya hazırlanma/Movere
       href: prepare-isv-movere.md
     - name: Bulma
@@ -234,6 +236,8 @@
           href: troubleshoot-changed-block-tracking-replication.md
 - name: Başvuru
   items:
+    - name: Azure CLI
+      href: /cli/azure/offazure
     - name: Azure PowerShell
       href: /powershell/module/az.migrate/
     - name: Azure İlkesi yerleşik ilkeler

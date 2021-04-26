@@ -3,24 +3,27 @@ title: Azure Kubernetes hizmeti (AKS) düğümlerini otomatik olarak onarma
 description: Düğüm otomatik onarma işlevselliği ve AKS 'in kopuk çalışan düğümlerini düzeltme hakkında bilgi edinin.
 services: container-service
 ms.topic: conceptual
-ms.date: 08/24/2020
-ms.openlocfilehash: 781a1ffebb40b0cce9f18699d308db90633e8626
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.date: 03/11/2021
+ms.openlocfilehash: 341aef394a3784edbc0acd91dad396c9794da3d0
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89490114"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105213"
 ---
 # <a name="azure-kubernetes-service-aks-node-auto-repair"></a>Azure Kubernetes hizmeti (AKS) düğümü otomatik onarma
 
-AKS, çalışan düğümlerinin sistem durumunu sürekli olarak denetler ve sağlıksız hale gelirse düğümlerin otomatik olarak onarımını gerçekleştirir. Bu belgede, otomatik düğüm onarma işlevinin hem Windows hem de Linux düğümlerinde nasıl davrandığı hakkında operatörler bildirilir. Azure VM platformu, AKS onarımına ek olarak, sorunlar yaşayan [sanal makinelerde de bakım gerçekleştirir][vm-updates] . AKS ve Azure VM 'Leri, kümelerdeki hizmet kesintilerini en aza indirmek için birlikte çalışır.
+AKS, çalışan düğümlerinin sistem durumunu sürekli olarak izler ve sağlıksız hale gelirse otomatik düğüm onarımı gerçekleştirir. Azure sanal makinesi (VM) platformu, sorunlar yaşayan [VM 'lerde bakım gerçekleştirir][vm-updates] . 
+
+AKS ve Azure VM 'Leri, kümelerdeki hizmet kesintilerini en aza indirmek için birlikte çalışır.
+
+Bu belgede, otomatik düğüm onarma işlevinin hem Windows hem de Linux düğümleri için nasıl davranacağını öğreneceksiniz. 
 
 ## <a name="how-aks-checks-for-unhealthy-nodes"></a>AKS, sağlıksız düğümleri denetler
 
-AKS, bir düğümün sağlıksız olup olmadığını ve onarımı gerekip gerekmediğini belirleme kurallarını kullanır. AKS, otomatik onarımın gerekip gerekmediğini anlamak için aşağıdaki kuralları kullanır.
-
-* Düğüm, 10 dakikalık bir zaman dilimi içinde ardışık denetimlerin durumunu **NotReady** olarak bildiriyor
-* Düğüm, 10 dakika içinde bir durum raporlamaz
+AKS, bir düğümün kötü durumda olup olmadığını ve onarılması gerekip gerekmediğini anlamak için aşağıdaki kuralları kullanır: 
+* Düğüm, 10 dakikalık bir zaman çerçevesi içinde ardışık denetimler üzerinde **NotReady** durumunu raporlar.
+* Düğüm, 10 dakika içinde herhangi bir durum raporlamaz.
 
 Kubectl ile düğümlerinizin sistem durumunu el ile kontrol edebilirsiniz.
 
@@ -33,13 +36,15 @@ kubectl get nodes
 > [!Note]
 > AKS, Kullanıcı hesabı **aks-düzeltici** ile onarım işlemlerini başlatır.
 
-Bir düğüm yukarıdaki kurallara göre uygun değilse ve 10 ardışık dakika boyunca sağlıksız kalırsa, aşağıdaki eylemler alınır.
+AKS, 10 dakika boyunca sağlıksız bir durumda kalan sağlıksız bir düğümü tanımlarsa AKS aşağıdaki eylemleri gerçekleştirir:
 
-1. Düğümü yeniden başlatın
-1. Yeniden başlatma başarısız olursa, düğümü yeniden görüntü oluştur
-1. Yeniden görüntü başarısız olursa yeni bir düğüm oluşturup yeniden görüntü oluşturun
+1. Düğümü yeniden başlatın.
+1. Yeniden başlatma başarısız olursa, düğümü yeniden görüntü yapın.
+1. Yeniden görüntü başarısız olursa yeni bir düğüm oluşturup yeniden görüntü oluşturun.
 
-Eylemlerden hiçbiri başarılı olmazsa, ek düzeltmeler AKS mühendislerine göre araştırılır. Bir sistem durumu denetimi sırasında birden çok düğüm sağlıksız ise, başka bir onarım başlamadan önce her düğüm tek tek onarılır.
+Alternatif düzeltmeler, otomatik onarma başarısız olursa AKS mühendisleri tarafından araştırılır. 
+
+AKS bir sistem durumu denetimi sırasında birden çok sağlıksız düğüm bulursa, başka bir onarım başlamadan önce her düğüm tek tek onarılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -5,13 +5,13 @@ author: IngridAtMicrosoft
 ms.author: inhenkel
 ms.service: media-services
 ms.topic: overview
-ms.date: 04/20/2020
-ms.openlocfilehash: 9b99e24e47da69aa0f081e056230f4b0c1aa6bb1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/05/2021
+ms.openlocfilehash: ec36f6bd19728d47b73a0186fb1fb192ba57f4cf
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93321733"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449826"
 ---
 # <a name="azure-media-player-overview"></a>Azure Media Player'a genel bakış #
 

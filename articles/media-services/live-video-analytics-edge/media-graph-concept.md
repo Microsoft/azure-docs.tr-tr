@@ -4,10 +4,10 @@ description: Medya grafiği, medyanın nerede yakalanabileceğini, nasıl işlen
 ms.topic: conceptual
 ms.date: 05/01/2020
 ms.openlocfilehash: ad23acbbbdd0c15e92e471ee22a229470a8a3a75
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105557675"
 ---
 # <a name="media-graph"></a>Medya grafiği

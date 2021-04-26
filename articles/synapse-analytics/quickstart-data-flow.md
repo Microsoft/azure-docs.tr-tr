@@ -4,16 +4,17 @@ description: Bu öğretici, veri akışı eşleme ile verileri dönüştürmek i
 author: djpmsft
 ms.author: daperlov
 ms.reviewer: makromer
-ms.service: data-factory
+ms.service: synapse-analytics
+ms.subservice: pipeline
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 11/03/2020
-ms.openlocfilehash: cb0fd5464f7025d71dd384c56233aefa6a6cd364
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 37696d2f4054e46125b39f3d5efa794ce54f94b5
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98218731"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567732"
 ---
 # <a name="quickstart-transform-data-using-mapping-data-flows"></a>Hızlı başlangıç: veri akışlarını eşleme kullanarak verileri dönüştürme
 

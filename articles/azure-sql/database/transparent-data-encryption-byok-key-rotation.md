@@ -8,16 +8,16 @@ ms.subservice: security
 ms.custom: seo-lt-2019 sqldbrb=1, devx-track-azurecli
 ms.devlang: ''
 ms.topic: how-to
-author: jaszymas
-ms.author: jaszymas
+author: shohamMSFT
+ms.author: shohamd
 ms.reviewer: vanto
 ms.date: 03/12/2019
-ms.openlocfilehash: 37931aee24e2dbcab03bca400d58f236601c87e5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 67bcd8597314530f26481ef840644ffbc056b033
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93321424"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777572"
 ---
 # <a name="rotate-the-transparent-data-encryption-tde-protector"></a>Saydam Veri Şifrelemesi (TDE) koruyucusunu döndürme
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
@@ -77,7 +77,7 @@ Set-AzSqlServerTransparentDataEncryptionProtector -Type AzureKeyVault -KeyId <ke
 
 # <a name="the-azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-[Az keykasa anahtarı oluşturma](/cli/azure/keyvault/key#az-keyvault-key-create), [az SQL Server Key Create](/cli/azure/sql/server/key#az-sql-server-key-create)ve [az SQL Server TDE anahtar kümesi](/cli/azure/sql/server/tde-key#az-sql-server-tde-key-set) komutları kullanın.
+[Az keykasa anahtarı oluşturma](/cli/azure/keyvault/key#az_keyvault_key_create), [az SQL Server Key Create](/cli/azure/sql/server/key#az_sql_server_key_create)ve [az SQL Server TDE anahtar kümesi](/cli/azure/sql/server/tde-key#az_sql_server_tde_key_set) komutları kullanın.
 
 ```azurecli
 # add a new key to Key Vault

@@ -5,42 +5,24 @@ services: app-service
 author: cephalin
 ms.service: app-service
 ms.topic: include
-ms.date: 12/20/2019
+ms.date: 02/02/2018
 ms.author: cephalin
 ms.custom: include file
-ms.openlocfilehash: f3d558736751d3c50e3c007e3aebb369093ef856
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: cc44780bd9b42e00ecfb3d140486fec87c767a76
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "102244563"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765765"
 ---
-Cloud Shell, komutuyla kaynak grubunda bir App Service planı oluşturun [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) .
+[!INCLUDE [resource group intro text](resource-group.md)]
 
-<!-- [!INCLUDE [app-service-plan](app-service-plan-linux.md)] -->
-
-Aşağıdaki örnek, `myAppServicePlan` **ücretsiz** fiyatlandırma katmanında ( `--sku F1` ) ve bir Linux kapsayıcısında () adlı bir App Service planı oluşturur `--is-linux` .
+Cloud Shell, komutuyla bir kaynak grubu oluşturun [`az group create`](/cli/azure/group#az_group_create) . Aşağıdaki örnek *Batı Avrupa* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur. **Temel** katmanda Linux üzerinde App Service için desteklenen tüm konumları görüntülemek için [`az appservice list-locations --sku B1 --linux-workers-enabled`](/cli/azure/appservice#az_appservice_list_locations) komutunu çalıştırın.
 
 ```azurecli-interactive
-az appservice plan create --name myAppServicePlan --resource-group myResourceGroup --sku F1 --is-linux
+az group create --name myResourceGroup --location "West Europe"
 ```
 
-App Service planı oluşturulduğunda Azure CLI, aşağıdaki örneğe benzer bilgiler gösterir:
+Genellikle kaynak grubunuzu ve kaynakları kendinize yakın bir bölgede oluşturursunuz. 
 
-```json
-{ 
-  "adminSiteName": null,
-  "appServicePlanName": "myAppServicePlan",
-  "geoRegion": "West Europe",
-  "hostingEnvironmentProfile": null,
-  "id": "/subscriptions/0000-0000/resourceGroups/myResourceGroup/providers/Microsoft.Web/serverfarms/myAppServicePlan",
-  "kind": "linux",
-  "location": "West Europe",
-  "maximumNumberOfWorkers": 1,
-  "name": "myAppServicePlan",
-  <JSON data removed for brevity.>
-  "targetWorkerSizeId": 0,
-  "type": "Microsoft.Web/serverfarms",
-  "workerTierName": null
-} 
-```
+Komut tamamlandığında, bir JSON çıkışı size kaynak grubu özelliklerini gösterir.

@@ -5,12 +5,12 @@ ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: how-to
 ms.date: 05/14/2018
-ms.openlocfilehash: 73d291fd76d9adbe2a095406b56bd879d497d3b5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d432d20660cd1b7ee59c9ef72f9db04bc0009481
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98942660"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306594"
 ---
 # <a name="publish-an-hdinsight-application-in-the-azure-marketplace"></a>Azure Marketi 'nde HDInsight uygulaması yayımlama
 Bir Azure HDInsight uygulamasını Linux tabanlı HDInsight kümesine yükleyebilirsiniz. Bu makalede, Azure Marketi 'nde bir HDInsight uygulaması yayımlamayı öğrenin. Azure Marketi 'nde yayımlama hakkında genel bilgi için bkz. [Azure Marketi 'nde teklif yayımlama](../marketplace/overview.md).
@@ -83,7 +83,8 @@ HDInsight uygulamanızı yüklemek için gereken tüm dosyaları içeren bir. zi
 ## <a name="publish-the-application"></a>Uygulamayı yayımlama
 HDInsight uygulaması yayımlamak için:
 
-1. [Azure yayımlaması](https://publish.windowsazure.com/)' nda oturum açın.
+1. Azure yayımlaması ' nda oturum açın.
+
 2. Sol taraftaki menüden **Çözüm şablonları**' nı seçin.
 3. Bir başlık girin ve ardından **yeni çözüm şablonu oluştur**' u seçin.
 4. Kuruluşunuzda henüz kaydolmadıysanız **Geliştirme Merkezi hesabı oluştur ' u seçin ve Azure programına katın**.  Daha fazla bilgi için bkz. [Microsoft Geliştirici hesabı oluşturma](../marketplace/overview.md).

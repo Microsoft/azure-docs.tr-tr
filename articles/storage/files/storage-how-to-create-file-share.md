@@ -5,16 +5,16 @@ description: Azure portal, PowerShell veya Azure CLı kullanarak Azure dosya pay
 author: roygara
 ms.service: storage
 ms.topic: how-to
-ms.date: 1/20/2021
+ms.date: 04/05/2021
 ms.author: rogarana
 ms.subservice: files
 ms.custom: devx-track-azurecli, references_regions
-ms.openlocfilehash: 24bee926d84c7a5be3f19c39d39285c2cd486824
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9caabb8dc7f09e4ef3852d9269d178c086744779
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102211031"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107789816"
 ---
 # <a name="create-an-azure-file-share"></a>Azure dosya paylaşımı oluşturma
 Bir Azure dosya paylaşımının oluşturulması için, nasıl kullanacağınız hakkında üç soruyu yanıtlamanız gerekir:
@@ -54,11 +54,11 @@ Azure portal aracılığıyla bir depolama hesabı oluşturmak için panodan **+
 #### <a name="basics"></a>Temel Bilgiler
 Bir depolama hesabı oluşturmak için tamamlanacak ilk bölüm **temel bilgiler** olarak etiketlenir. Bu, depolama hesabı oluşturmak için gerekli tüm alanları içerir. GPv2 depolama hesabı oluşturmak için, **performans** radyo düğmesinin *Standart* olarak ayarlandığından ve **Hesap türü** açılan listesinin *StorageV2 (genel amaçlı v2)* olarak seçildiğinden emin olun.
 
-![Standart seçili ve hesap türü StorageV2 seçiliyken performans radyo düğmesinin ekran görüntüsü](media/storage-how-to-create-file-share/create-storage-account-1.png)
+:::image type="content" source="media/storage-how-to-create-file-share/files-create-smb-share-performance-standard.png" alt-text="Standart seçili ve hesap türü storagev2 seçiliyken performans radyo düğmesinin ekran görüntüsü.":::
 
-Bir dosya depolama depolama hesabı oluşturmak için, **performans** radyo düğmesinin *Premium* olarak ayarlandığından ve *dosya depolama* için **Hesap türü** açılır listesinin seçildiğinden emin olun.
+Bir FileStorage depolama hesabı oluşturmak için **performans** radyo düğmesinin *Premium* olarak ayarlandığından ve **Premium hesap türü** aşağı açılan listesinde **dosya paylaşımları** seçildiğinden emin olun.
 
-![Premium seçiliyken ve dosya depolama seçiliyken hesap türüyle performans radyo düğmesinin ekran görüntüsü](media/storage-how-to-create-file-share/create-storage-account-2.png)
+:::image type="content" source="media/storage-how-to-create-file-share/files-create-smb-share-performance-premium.png" alt-text="Premium seçiliyken ve dosya depolama seçiliyken hesap türüyle performans radyo düğmesinin ekran görüntüsü.":::
 
 Diğer temelleri alanları, depolama hesabı seçiminizden bağımsızdır:
 - **Depolama hesabı adı**: oluşturulacak depolama hesabı kaynağının adı. Bu ad genel olarak benzersiz olmalıdır, aksi takdirde istediğiniz ad olabilir. SMB aracılığıyla bir Azure dosya paylaşımının bağladığınızda, depolama hesabı adı sunucu adı olarak kullanılır.
@@ -75,9 +75,12 @@ Veri koruma bölümü, Depolama hesabınızdaki Azure dosya paylaşımları içi
 Gelişmiş bölüm, Azure dosya paylaşımları için çeşitli önemli ayarlar içerir:
 
 - **Güvenli aktarım gerekli**: Bu alan, depolama hesabının depolama hesabıyla iletişim için şifreleme gerektirip gerektirmediğini belirtir. SMB 2,1 desteğine ihtiyacınız varsa, bunu devre dışı bırakmanız gerekir.
+
+    :::image type="content" source="media/storage-how-to-create-file-share/files-create-smb-share-secure-transfer.png" alt-text="Depolama hesabı için Gelişmiş ayarlarda etkin olan güvenli aktarım ekran görüntüsü.":::
+
 - **Büyük dosya paylaşımları**: Bu alan, 100 TİB 'ye yayılan dosya paylaşımları için depolama hesabı sağlar. Bu özelliği etkinleştirmek, depolama hesabınızı yalnızca yerel olarak yedekli ve bölgesel olarak yedekli depolama seçenekleriyle sınırlandırır. Büyük dosya paylaşımları için GPv2 depolama hesabı etkinleştirildikten sonra, büyük dosya paylaşımı özelliğini devre dışı bırakayükleyemezsiniz. Tüm Premium dosya paylaşımları 100 TiB 'ye kadar ölçeklenebileceğinden, FileStorage depolama hesapları (Premium dosya paylaşımları için depolama hesapları) bu seçeneğe sahip değildir. 
 
-![Azure dosyaları için uygulanan önemli gelişmiş ayarların ekran görüntüsü](media/storage-how-to-create-file-share/create-storage-account-3.png)
+    :::image type="content" source="media/storage-how-to-create-file-share/files-create-smb-share-large-file-shares.png" alt-text="Depolama hesabının gelişmiş dikey penceresindeki büyük dosya paylaşma ayarının ekran görüntüsü.":::
 
 Gelişmiş sekmesinde bulunan diğer ayarlar (Azure Data Lake Storage Gen 2 için hiyerarşik ad alanı, varsayılan blob katmanı, NFSv3 for blob Storage vb.) Azure dosyaları için uygulanmaz.
 
@@ -160,7 +163,7 @@ az storage account create \
 
 ---
 
-## <a name="create-file-share"></a>Dosya paylaşımı oluşturma
+## <a name="create-a-file-share"></a>Dosya paylaşımı oluşturma
 Depolama hesabınızı oluşturduktan sonra, dosya paylaşımınızın oluşturulması gerekir. Bu işlem, genellikle bir Premium dosya paylaşımının veya standart dosya paylaşımının kullanılıp kullanılmadığından bağımsız olarak aynıdır. Aşağıdaki farklılıkları göz önünde bulundurmanız gerekir.
 
 Standart dosya paylaşımları standart katmanlardan birine dağıtılabilir: işlem için iyileştirilmiş (varsayılan), sık veya seyrek. Bu, depolama hesabının **BLOB erişim katmanından** etkilenmemiş bir dosya paylaşma katmanıdır (Bu özellik yalnızca Azure Blob depolama ile Ilgilidir; Azure dosyalarıyla ilişkili değildir). Dağıtım katmanını dağıtıldıktan sonra istediğiniz zaman değiştirebilirsiniz. Premium dosya paylaşımları doğrudan herhangi bir Standart katmana dönüştürülemez.
@@ -175,9 +178,7 @@ Standart dosya paylaşımları standart katmanlardan birine dağıtılabilir: i�
 - Premium dosya paylaşımları için kota **sağlanan boyut** anlamına gelir. Sağlanan boyut, fiili kullanımdan bağımsız olarak faturalandırılacaksınız. Premium dosya paylaşımının nasıl planlanacağı hakkında daha fazla bilgi için bkz. [Premium dosya paylaşımlarını sağlama](understanding-billing.md#provisioned-model).
 
 # <a name="portal"></a>[Portal](#tab/azure-portal)
-Depolama hesabınızı yeni oluşturduysanız, **Kaynağa Git**' i seçerek dağıtım ekranından bu sayfaya gidebilirsiniz. Depolama hesabında bir kez, **dosya paylaşımları** etiketli kutucuğu seçin (depolama hesabı için içindekiler tablosu aracılığıyla **dosya paylaşımlarına** da gidebilirsiniz).
-
-![Dosya paylaşımları kutucuğunun ekran görüntüsü](media/storage-how-to-create-file-share/create-file-share-1.png)
+Depolama hesabınızı yeni oluşturduysanız, **Kaynağa Git**' i seçerek dağıtım ekranından bu sayfaya gidebilirsiniz. Depolama hesabında bir kez, depolama hesabı için içerik tablosundaki **dosya paylaşımlarını** seçin.
 
 Dosya paylaşımı listesinde, bu depolama hesabında daha önce oluşturduğunuz herhangi bir dosya paylaşımını görmeniz gerekir; henüz bir dosya paylaşımı oluşturulmadıysa boş bir tablo. Yeni bir dosya paylaşma oluşturmak için **+ dosya paylaşma** ' yı seçin.
 
@@ -235,13 +236,13 @@ az storage share-rm create \
 > [!Note]  
 > Dosya paylaşımınızın adı küçük harflerden oluşmalıdır. Dosya paylaşımlarının ve dosyaların adlandırılması hakkında tüm ayrıntılara ulaşmak için bkz. [Paylaşım, dizin, dosya ve meta verileri adlandırma ve bunlara başvuruda bulunma](/rest/api/storageservices/Naming-and-Referencing-Shares--Directories--Files--and-Metadata).
 
-### <a name="changing-the-tier-of-an-azure-file-share"></a>Azure dosya paylaşımının katmanını değiştirme
+### <a name="change-the-tier-of-an-azure-file-share"></a>Azure dosya paylaşımının katmanını değiştirme
 **Genel amaçlı v2 (GPv2) depolama hesabında** dağıtılan dosya paylaşımları, işlem için iyileştirilmiş, sık erişimli veya Cool katmanlarında olabilir. Azure dosya paylaşımının katmanını, yukarıda açıklanan işlem maliyetlerine bağlı olarak dilediğiniz zaman değiştirebilirsiniz.
 
 # <a name="portal"></a>[Portal](#tab/azure-portal)
 Ana depolama hesabı sayfasında **dosya paylaşımları**  ' nı seçin **dosya paylaşımları** etiketli kutucuğu seçin (depolama hesabı Için içindekiler tablosu aracılığıyla **dosya paylaşımlarına** da gidebilirsiniz).
 
-![Dosya paylaşımları kutucuğunun ekran görüntüsü](media/storage-how-to-create-file-share/create-file-share-1.png)
+:::image type="content" source="media/storage-files-quick-create-use-windows/click-files.png" alt-text="Depolama hesabı dikey penceresinin ekran görüntüsü, dosya paylaşımları seçildi.":::
 
 Dosya paylaşımlarının Tablo listesinde, katmanını değiştirmek istediğiniz dosya paylaşımını seçin. Dosya paylaşımının Genel Bakış sayfasında, menüden **Katmanı Değiştir** ' i seçin.
 
@@ -276,6 +277,6 @@ az storage share-rm update \
 ---
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [Azure dosyaları dağıtımını planlayın](storage-files-planning.md) veya [Azure dosya eşitleme dağıtımını planlayın](storage-sync-files-planning.md). 
+- [Azure dosyaları dağıtımını planlayın](storage-files-planning.md) veya [Azure dosya eşitleme dağıtımını planlayın](../file-sync/file-sync-planning.md). 
 - [Ağa genel bakış](storage-files-networking-overview.md).
 - [Windows](storage-how-to-use-files-windows.md), [MacOS](storage-how-to-use-files-mac.md)ve [Linux](storage-how-to-use-files-linux.md)'ta bir dosya paylaşımının bağlantısını yapın ve bağlayın.

@@ -1,27 +1,24 @@
 ---
 title: Azure'da bir geliştirme sanal makinesi üzerinde ElasticSearch dağıtma
-description: Öğretici - Azure’da bir geliştirme Linux VM'si üzerine Elastik Yığın yükleme
+description: Azure 'da bir geliştirme Linux sanal makinesine elastik Stack 'i (ELK) yükler
 services: virtual-machines
-documentationcenter: virtual-machines
 author: rloutlaw
 manager: justhe
-tags: azure-resource-manager
 ms.service: virtual-machines
 ms.collection: linux
 ms.workload: infrastructure-services
-ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
-ms.topic: tutorial
+ms.topic: how-to
 ms.date: 10/11/2017
 ms.author: routlaw
-ms.openlocfilehash: b3213d7de9aee88486fa1db1388c51948fbde430
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3ce28efa30b04a2a762c39f47dac739633eac209
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102557820"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818485"
 ---
-# <a name="install-the-elastic-stack-on-an-azure-vm"></a>Azure VM üzerine Elastik Yığın yükleme
+# <a name="install-the-elastic-stack-elk-on-an-azure-vm"></a>Azure VM 'ye elastik yığın (ELK) yüklemesi
 
 Bu makale, Azure’da bir Ubuntu VM üzerinde nasıl [Elasticsearch](https://www.elastic.co/products/elasticsearch), [Logstash](https://www.elastic.co/products/logstash) ve [Kibana](https://www.elastic.co/products/kibana) dağıtılacağını gösterir. Elastik Yığını uygulamaya konulurken görmek için, isteğe bağlı olarak Kibana’ya bağlanabilir ve birkaç örnek günlük verisiyle çalışabilirsiniz. 
 
@@ -165,7 +162,7 @@ Logstash’in düzgün çalıştığından emin olmak için etkileşimli modda t
 sudo /usr/share/logstash/bin/logstash -e 'input { stdin { } } output { stdout {} }'
 ```
 
-Bu, standart girişi standart çıktıya yansıtan temel bir logstash [işlem hattı](https://www.elastic.co/guide/en/logstash/5.6/pipeline.html)’dır. 
+Bu, Standart çıktıyı standart çıktıya yankı [eden temel](https://www.elastic.co/guide/en/logstash/5.6/pipeline.html) bir Logstash işlem hattsıdır. 
 
 ```output
 The stdin plugin is now waiting for input:

@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.topic: tutorial
 ms.date: 03/02/2021
 ms.author: caya
-ms.openlocfilehash: c37168c5165f5402dd4f57c8557bc2b7b3603533
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: aad57c75481230db16a63aec7fb04fc5987ae8f0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101720197"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772845"
 ---
 # <a name="tutorial-enable-the-ingress-controller-add-on-for-a-new-aks-cluster-with-a-new-application-gateway-instance"></a>Öğretici: yeni bir Application Gateway örneğiyle yeni bir AKS kümesi için giriş denetleyicisi eklentisini etkinleştirin
 
@@ -36,7 +36,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-Azure 'da, ilgili kaynakları bir kaynak grubuna ayırabilirsiniz. [Az Group Create](/cli/azure/group#az-group-create)kullanarak bir kaynak grubu oluşturun. Aşağıdaki örnek, *canadamerkezi* konumunda (bölge) *myresourcegroup* adlı bir kaynak grubu oluşturur: 
+Azure 'da, ilgili kaynakları bir kaynak grubuna ayırabilirsiniz. [Az Group Create](/cli/azure/group#az_group_create)kullanarak bir kaynak grubu oluşturun. Aşağıdaki örnek, *canadamerkezi* konumunda (bölge) *myresourcegroup* adlı bir kaynak grubu oluşturur: 
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location canadacentral
@@ -60,7 +60,7 @@ Yeni bir AKS kümesini, mevcut bir Application Gateway örneği belirtilmeden et
 az aks create -n myCluster -g myResourceGroup --network-plugin azure --enable-managed-identity -a ingress-appgw --appgw-name myApplicationGateway --appgw-subnet-cidr "10.2.0.0/16" --generate-ssh-keys
 ```
 
-Komuta ek parametreler yapılandırmak için `az aks create` , [Bu başvurulara](/cli/azure/aks#az-aks-create)bakın. 
+Komuta ek parametreler yapılandırmak için `az aks create` , [Bu başvurulara](/cli/azure/aks#az_aks_create)bakın. 
 
 > [!NOTE]
 > Oluşturduğunuz AKS kümesi, *Myresourcegroup adlı* kaynak grubunda görüntülenir. Ancak, otomatik olarak oluşturulan Application Gateway örneği, aracı havuzlarının olduğu düğüm kaynak grubunda olur. Tarafından düğüm kaynak grubu, varsayılan olarak *MC_resource-Group-name_cluster-name_location* olarak adlandırılır, ancak değiştirilebilir. 

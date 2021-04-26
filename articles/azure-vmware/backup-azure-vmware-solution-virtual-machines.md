@@ -3,12 +3,12 @@ title: Azure Backup Sunucusu ile Azure VMware Çözüm VM 'lerini yedekleme
 description: Azure VMware Çözüm ortamınızı, Azure Backup Sunucusu kullanarak sanal makineleri yedekleyecek şekilde yapılandırın.
 ms.topic: how-to
 ms.date: 02/04/2021
-ms.openlocfilehash: 163065556b7dbc979d68613744ea827c209d9fda
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 92affbf883215f0d051115fb64e9e7bf7a1430b3
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102618925"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107871786"
 ---
 # <a name="back-up-azure-vmware-solution-vms-with-azure-backup-server"></a>Azure Backup Sunucusu ile Azure VMware Çözüm VM 'lerini yedekleme
 
@@ -358,5 +358,5 @@ Korunan bir VM kurtarma noktasından tek tek dosyaları geri yükleyebilirsiniz.
 
 Azure VMware Çözüm VM 'lerinizi Azure Backup Sunucusu yedeklemeyi artık kapsadığınıza göre şunları öğrenmek isteyebilirsiniz: 
 
-- [Azure Backup sunucusu yedeklemeler ayarlanırken sorun giderme](../backup/backup-azure-mabs-troubleshoot.md).
-- [Azure VMware Çözüm VM 'Lerinin yaşam döngüsü yönetimi](lifecycle-management-of-azure-vmware-solution-vms.md).
+- [Azure Backup Sunucusu yedeklemeler ayarlanırken sorun giderme](../backup/backup-azure-mabs-troubleshoot.md)
+- [Azure VMware Çözüm VM 'lerinin yaşam döngüsü yönetimi](lifecycle-management-of-azure-vmware-solution-vms.md)

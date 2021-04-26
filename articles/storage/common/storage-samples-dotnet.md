@@ -1,18 +1,18 @@
 ---
 title: .NET kullanarak Azure Storage örnekleri | Microsoft Docs
 description: Azure depolama için örnek kod ve uygulamaları görüntüleyin, indirin ve çalıştırın. .NET depolama istemci kitaplıklarını kullanarak blob, kuyruk, tablo ve dosya kullanmaya başlama örneklerini bulun.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.date: 10/01/2020
 ms.service: storage
 ms.subservice: common
 ms.topic: sample
-ms.openlocfilehash: 760fedd94ef682b183eede1215186de973e9a216
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c140234ce93ff9146ef3b1a5a135258ad707c807
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92359790"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106275711"
 ---
 # <a name="azure-storage-samples-using-v12-net-client-libraries"></a>V12 .NET istemci kitaplıklarını kullanan Azure depolama örnekleri
 

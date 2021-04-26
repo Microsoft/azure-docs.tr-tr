@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 04/26/2017
 ms.author: damendo
-ms.openlocfilehash: 6e330d2595487366ff7b8979490cb8a897f89520
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 54f1ef8f135c16b841df55094327c6bc5be521be
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "102503156"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778615"
 ---
 # <a name="introduction-to-effective-security-rules-view-in-azure-network-watcher"></a>Azure ağ Izleyicisi 'nde etkin güvenlik kuralları görünümüne giriş
 
@@ -37,7 +37,7 @@ Kurallar seçilebilir ve ağ güvenlik grubunu ve kaynak ve hedef öneklerini g�
 *Geçerli güvenlik grupları* özelliğini aşağıda listelenen diğer yöntemlerle de kullanabilirsiniz:
 * [REST API](/rest/api/virtualnetwork/NetworkInterfaces/ListEffectiveNetworkSecurityGroups)
 * [PowerShell](/powershell/module/az.network/get-azeffectivenetworksecuritygroup)
-* [Azure CLI](/cli/azure/network/nic#az-network-nic-list-effective-nsg)
+* [Azure CLI](/cli/azure/network/nic#az_network_nic_list_effective_nsg)
 
 [PowerShell Ile ağ güvenlik grubu ayarlarını denetleyin](network-watcher-nsg-auditing-powershell.md) ' i ziyaret ederek ağ güvenlik grubu ayarlarınızı nasıl denetleyeceğinizi öğrenin
 

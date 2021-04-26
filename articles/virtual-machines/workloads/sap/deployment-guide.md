@@ -16,10 +16,10 @@ ms.workload: infrastructure-services
 ms.date: 07/16/2020
 ms.author: sedusch
 ms.openlocfilehash: 5d6ea75936383388a57a7822f054e0ea7297471e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101695524"
 ---
 # <a name="azure-virtual-machines-deployment-for-sap-netweaver"></a>SAP NetWeaver için Azure sanal makineler dağıtımı
@@ -828,7 +828,7 @@ Azure Marketi 'nden bir VM dağıtırsanız, bu adım gerekli değildir. Azure M
 
 Azure VM aracısını güncelleştirmek için Kullanıcı etkileşimi gerekmez. VM Aracısı otomatik olarak güncelleştirilir ve VM 'nin yeniden başlatılmasını gerektirmez.
 
-#### <a name="linux"></a><a name="6889ff12-eaaf-4f3c-97e1-7c9edc7f7542"></a>'Un
+#### <a name="linux"></a><a name="6889ff12-eaaf-4f3c-97e1-7c9edc7f7542"></a>Linux
 
 Linux için VM aracısını yüklemek üzere aşağıdaki komutları kullanın:
 

@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 03/09/2021
 ms.author: tomfitz
-ms.openlocfilehash: 3f35f00e5fcd26c7aa4bb685dc80f48eabb88b6d
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 7e300f896bb11ed7c77738836f894cff41cc8bf3
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102547943"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781838"
 ---
 # <a name="arm-template-deployment-what-if-operation"></a>ARM şablonu dağıtımı what-if işlemi
 
@@ -32,7 +32,7 @@ Modül yükleme hakkında daha fazla bilgi için bkz. [yükleme Azure PowerShell
 
 ## <a name="install-azure-cli-module"></a>Azure CLı modülünü yükler
 
-Azure CLI'de what-if komutunu kullanmak için Azure CLI'nin en az 2.5.0 sürümüne sahip olmanız gerekir. Gerekirse [Azure CLI'nin en son sürümünü yükleyin](/cli/azure/install-azure-cli).
+Azure CLı 'de ne olduğunu kullanmak için Azure CLı 2.14.0 veya sonraki bir sürüme sahip olmanız gerekir. Gerekirse [Azure CLI'nin en son sürümünü yükleyin](/cli/azure/install-azure-cli).
 
 ## <a name="see-results"></a>Sonuçlara bakın
 
@@ -91,21 +91,21 @@ Yukarıdaki komutlar el ile inceleyebilmeniz için bir metin Özeti döndürür.
 * `$results = Get-AzResourceGroupDeploymentWhatIfResult` kaynak grubu dağıtımları için
 * `$results = Get-AzSubscriptionDeploymentWhatIfResult``$results = Get-AzDeploymentWhatIfResult`abonelik düzeyi dağıtımlar için veya
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 Bir şablonu dağıtımdan önce değişiklikleri önizlemek için şunu kullanın:
 
-* [az dağıtım grubu](/cli/azure/deployment/group#az-deployment-group-what-if) kaynak grubu dağıtımları için ne yapılır?
-* abonelik düzeyi dağıtımlar için [az Deployment Sub](/cli/azure/deployment/sub#az-deployment-sub-what-if)
-* Yönetim grubu dağıtımları için [az Deployment mg ne-if](/cli/azure/deployment/mg#az-deployment-mg-what-if)
-* [az dağıtım kiracısı](/cli/azure/deployment/tenant#az-deployment-tenant-what-if) kiracı dağıtımları için ne yapılır?
+* [az dağıtım grubu](/cli/azure/deployment/group#az_deployment_group_what_if) kaynak grubu dağıtımları için ne yapılır?
+* abonelik düzeyi dağıtımlar için [az Deployment Sub](/cli/azure/deployment/sub#az_deployment_sub_what_if)
+* Yönetim grubu dağıtımları için [az Deployment mg ne-if](/cli/azure/deployment/mg#az_deployment_mg_what_if)
+* [az dağıtım kiracısı](/cli/azure/deployment/tenant#az_deployment_tenant_what_if) kiracı dağıtımları için ne yapılır?
 
 `--confirm-with-what-if` `-c` Değişiklikleri önizlemek ve dağıtıma devam etmek isteyip istemediğiniz sorulduğunda anahtarı (veya kısa biçimini) kullanabilirsiniz. Bu anahtarı şu şekilde ekleyin:
 
-* [az dağıtım grubu oluştur](/cli/azure/deployment/group#az-deployment-group-create)
-* [az Deployment Sub Create](/cli/azure/deployment/sub#az-deployment-sub-create).
-* [az Deployment mg Create](/cli/azure/deployment/mg#az-deployment-mg-create)
-* [az Deployment Tenant Create](/cli/azure/deployment/tenant#az-deployment-tenant-create)
+* [az dağıtım grubu oluştur](/cli/azure/deployment/group#az_deployment_group_create)
+* [az Deployment Sub Create](/cli/azure/deployment/sub#az_deployment_sub_create).
+* [az Deployment mg Create](/cli/azure/deployment/mg#az_deployment_mg_create)
+* [az Deployment Tenant Create](/cli/azure/deployment/tenant#az_deployment_tenant_create)
 
 Örneğin, `az deployment group create --confirm-with-what-if` `-c` kaynak grubu dağıtımları için veya kullanın.
 
@@ -364,17 +364,17 @@ Scope: /subscriptions/./resourceGroups/ExampleGroup
 
       id:
 "/subscriptions/./resourceGroups/ExampleGroup/providers/Microsoft.Network/virtualNet
-works/vnet-001"
-      location:        "centralus"
-      name:            "vnet-001"
-      tags.CostCenter: "12345"
-      tags.Owner:      "Team A"
-      type:            "Microsoft.Network/virtualNetworks"
+works/vnet-001&quot;
+      location:        &quot;centralus&quot;
+      name:            &quot;vnet-001&quot;
+      tags.CostCenter: &quot;12345&quot;
+      tags.Owner:      &quot;Team A&quot;
+      type:            &quot;Microsoft.Network/virtualNetworks&quot;
 
 Resource changes: 1 to delete.
 
 Are you sure you want to execute the deployment?
-[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is &quot;Y"):
 ```
 
 Beklenen değişiklikleri görürsünüz ve dağıtımın çalıştırılmasını istediğinizi doğrulayabilirsiniz.

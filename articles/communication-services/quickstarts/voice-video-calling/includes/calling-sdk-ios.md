@@ -4,30 +4,31 @@ ms.service: azure-communication-services
 ms.topic: include
 ms.date: 03/10/2021
 ms.author: mikben
-ms.openlocfilehash: d36bf92a1b1bdef4e45b22b934728b3e8c46c3da
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 479aa522462d14f295177e6b2d2fcc4707657760
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107768"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106498802"
 ---
+[!INCLUDE [Public Preview Notice](../../../includes/public-preview-include-android-ios.md)]
+
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Etkin aboneliği olan bir Azure hesabı. [Ücretsiz hesap oluşturun](https://azure.microsoft.com/free/?WT.mc_id=A261C142F). 
-- Dağıtılan bir Iletişim Hizmetleri kaynağı. [Iletişim Hizmetleri kaynağı oluşturun](../../create-communication-resource.md).
-- Bir `User Access Token` çağrı istemcisini etkinleştirmek için. [Nasıl yapılır `User Access Token` ](../../access-tokens.md) hakkında daha fazla bilgi edinmek için
-- İsteğe bağlı: [uygulamanıza çağrı ekleme ile çalışmaya](../getting-started-with-calling.md) başlama için hızlı başlangıcı doldurun
+- Dağıtılmış bir Azure Iletişim Hizmetleri kaynağı. [Iletişim Hizmetleri kaynağı oluşturun](../../create-communication-resource.md).
+- Arama istemcisini etkinleştirmek için bir Kullanıcı erişim belirteci. [Bir Kullanıcı erişim belirteci alın](../../access-tokens.md).
+- İsteğe bağlı: [uygulamanıza yönelik sesli çağrı ekleme](../getting-started-with-calling.md) hızlı başlangıç ' i doldurun.
 
-## <a name="setting-up"></a>Ayarlanıyor
+## <a name="set-up-your-system"></a>Sisteminizi ayarlama
 
-### <a name="creating-the-xcode-project"></a>Xcode projesi oluşturma
+### <a name="create-the-xcode-project"></a>Xcode projesi oluşturma
 
-> [!NOTE]
-> Bu belge, çağıran SDK 'nın 1.0.0-Beta. 8 sürümünü kullanır.
+Xcode 'da yeni bir iOS projesi oluşturun ve **tek görünüm uygulama** şablonunu seçin. Bu hızlı başlangıç, [swiftuı çerçevesini](https://developer.apple.com/xcode/swiftui/)kullanır, bu nedenle **dili** **Swift** ve **Kullanıcı arabirimine** **swiftuı** olarak ayarlamanız gerekir. 
 
-Xcode 'da yeni bir iOS projesi oluşturun ve **tek görünüm uygulama** şablonunu seçin. Bu hızlı başlangıç, [swiftuı çerçevesini](https://developer.apple.com/xcode/swiftui/)kullanır, bu nedenle **dili** **Swift** ve **Kullanıcı arabirimine** **swiftuı** olarak ayarlamanız gerekir. Bu hızlı başlangıç sırasında birim testleri veya UI testleri oluşturuyoruz. **Birim testlerini dahil etme** işaretini kaldırın ve ayrıca **UI testlerini Ekle** seçeneğinin işaretini kaldırın.
+Bu hızlı başlangıç sırasında birim testleri veya UI testleri oluşturuyoruz. **Birim testlerini dahil et** ve **UI testlerini dahil et** metin kutularını temizleyebilirsiniz.
 
-:::image type="content" source="../media/ios/xcode-new-ios-project.png" alt-text="Xcode 'da yeni yeni proje oluştur penceresini gösteren ekran görüntüsü.":::
+:::image type="content" source="../media/ios/xcode-new-ios-project.png" alt-text="Xcode içinde proje oluşturmak için pencereyi gösteren ekran görüntüsü.":::
 
 ### <a name="install-the-package-and-dependencies-with-cocoapods"></a>CocoaPods ile paketi ve bağımlılıkları yükler
 
@@ -44,13 +45,13 @@ Xcode 'da yeni bir iOS projesi oluşturun ve **tek görünüm uygulama** şablon
    ```
 
 2. `pod install` öğesini çalıştırın.
-3. Öğesini `.xcworkspace` XCode ile açın.
+3. `.xcworkspace`Xcode ile açın.
 
 ### <a name="request-access-to-the-microphone"></a>Mikrofona erişim isteyin
 
-Cihazın mikrofonuna erişmek için uygulamanızın bilgi Özellik listesini bir ile güncelleştirmeniz gerekir `NSMicrophoneUsageDescription` . İlişkili değeri, `string` sistemin kullanıcıdan istek erişimi istemek için kullandığı iletişim kutusuna dahil edilecek bir öğesine ayarlarsınız.
+Cihazın mikrofonuna erişmek için uygulamanızın bilgi Özellik listesini ile güncelleştirmeniz gerekir `NSMicrophoneUsageDescription` . İlişkili değeri, `string` sistemin kullanıcıdan erişim istemek için kullandığı iletişim kutusunda yer alacak şekilde ayarlarsınız.
 
-`Info.plist`Proje ağacının girişine sağ tıklayın ve kaynak kodu **olarak aç**' ı seçin  >  . Aşağıdaki satırları en üst düzey bölümüne ekleyin `<dict>` ve dosyayı kaydedin.
+`Info.plist`Proje ağacının girişine sağ tıklayın ve kaynak kodu **olarak aç**' ı seçin  >  . Üst düzey bölümüne aşağıdaki satırları ekleyin `<dict>` ve dosyayı kaydedin.
 
 ```xml
 <key>NSMicrophoneUsageDescription</key>
@@ -59,33 +60,36 @@ Cihazın mikrofonuna erişmek için uygulamanızın bilgi Özellik listesini bir
 
 ### <a name="set-up-the-app-framework"></a>Uygulama çerçevesini ayarlama
 
-Projenizin **ContentView. Swift** dosyasını açın ve `import` dosyanın en üstüne içeri aktarmak için bir bildirim ekleyin `AzureCommunicationCalling library` . Buna ek olarak, `AVFoundation` Bu kodda ses izni isteği için bu gerekir.
+Projenizin *ContentView. Swift* dosyasını açın ve `import` Kitaplığı İçeri aktarmak için dosyanın en üstüne bir bildirim ekleyin `AzureCommunicationCalling` . Buna ek olarak içeri aktarın `AVFoundation` . Bu, koddaki ses izin istekleri için gerekir.
 
 ```swift
 import AzureCommunicationCalling
 import AVFoundation
 ```
 
-## <a name="object-model"></a>Nesne modeli
+## <a name="learn-the-object-model"></a>Nesne modelini öğrenme
 
 Aşağıdaki sınıflar ve arabirimler, iOS için SDK 'Yı çağıran Azure Iletişim Hizmetleri 'nin bazı önemli özelliklerinden bazılarını işler.
+
+> [!NOTE]
+> Bu hızlı başlangıç, çağıran SDK 'nın 1.0.0-Beta. 8 sürümünü kullanır.
 
 
 | Ad                                  | Açıklama                                                  |
 | ------------------------------------- | ------------------------------------------------------------ |
-| CallClient | CallClient, çağıran SDK 'ya ana giriş noktasıdır.|
-| CallAgent | CallAgent, çağrıları başlatmak ve yönetmek için kullanılır. |
-| CommunicationTokenCredential | CommunicationTokenCredential, CallAgent örneğini oluşturmak için belirteç kimlik bilgileri olarak kullanılır.| 
-| Communicationıdentifier | Communicationıdentifier, aşağıdakilerin biri olabilecek Kullanıcı kimliğini göstermek için kullanılır: Communicationuserıdentifier/Phonenumberıdentifier/CallingApplication. |
+| `CallClient` | `CallClient` , çağıran SDK 'ya ana giriş noktasıdır.|
+| `CallAgent` | `CallAgent` çağrıları başlatmak ve yönetmek için kullanılır. |
+| `CommunicationTokenCredential` | `CommunicationTokenCredential` , örneklendirilecek belirteç kimlik bilgileri olarak kullanılır `CallAgent` .| 
+| `CommunicationIdentifier` | `CommunicationIdentifier` , kullanıcının kimliğini temsil etmek için kullanılır. Kimlik, veya olabilir `CommunicationUserIdentifier` `PhoneNumberIdentifier` `CallingApplication` . |
 
 > [!NOTE]
-> Olay temsilcileri uygularken, uygulamanın olay abonelikleri gerektiren nesnelere güçlü bir başvuru tutması gerekir. Örneğin, `RemoteParticipant` yöntemi çağrılırken bir nesne döndürüldüğünde `call.addParticipant` ve uygulama, dinlemek üzere temsilciyi ayarlarsa `RemoteParticipantDelegate` , uygulamanın nesnesine bir güçlü başvuru tutması gerekir `RemoteParticipant` . Aksi takdirde, bu nesne toplanırsa, çağıran SDK nesneyi çağırmayı denediğinde temsilci önemli bir özel durum oluşturur.
+> Uygulama olay temsilcileri uygularsa, olay abonelikleri gerektiren nesnelere güçlü bir başvuru tutması gerekir. Örneğin, `RemoteParticipant` yöntemi çağrılırken bir nesne döndürüldüğünde `call.addParticipant` ve uygulama, dinlemek üzere temsilciyi ayarlarsa `RemoteParticipantDelegate` , uygulamanın nesnesine bir güçlü başvuru tutması gerekir `RemoteParticipant` . Aksi takdirde, bu nesne toplanırsa, çağıran SDK nesneyi çağırmayı denediğinde temsilci önemli bir özel durum oluşturur.
 
-## <a name="initialize-the-callagent"></a>CallAgent 'ı başlatma
+## <a name="initialize-callagent"></a>CallAgent 'ı Başlat
 
-`CallAgent`Öğesinden bir örnek oluşturmak için `CallClient` , `callClient.createCallAgent` başlatıldıktan sonra bir nesneyi zaman uyumsuz olarak döndüren yöntemi kullanmanız gerekir `CallAgent`
+`CallAgent`Öğesinden bir örnek oluşturmak için `CallClient` , başlatıldıktan sonra bir `callClient.createCallAgent` nesneyi zaman uyumsuz olarak döndüren bir yöntemi kullanmanız gerekir `CallAgent` .
 
-Çağrı istemcisi oluşturmak için bir nesneyi geçirmeniz gerekir `CommunicationTokenCredential` .
+Bir çağrı istemcisi oluşturmak için bir nesnesi geçirmeniz gerekir `CommunicationTokenCredential` .
 
 ```swift
 
@@ -102,14 +106,14 @@ var userCredential: CommunicationTokenCredential?
        return
 }
 
-// tokenProvider needs to be implemented by contoso which fetches new token
+// tokenProvider needs to be implemented by Contoso, which fetches a new token
 public func fetchTokenSync(then onCompletion: TokenRefreshOnCompletion) {
     let newToken = self.tokenProvider!.fetchNewToken()
     onCompletion(newToken, nil)
 }
 ```
 
-`CommunicationTokenCredential`Yukarıda oluşturulan nesneyi öğesine geçirin `CallClient` ve görünen adı ayarlayın.
+`CommunicationTokenCredential`Oluşturduğunuz nesneyi geçirin `CallClient` ve görünen adı ayarlayın.
 
 ```swift
 
@@ -145,7 +149,8 @@ let oneToOneCall = self.callAgent.call(participants: callees, options: StartCall
 ```
 
 ### <a name="place-a-1n-call-with-users-and-pstn"></a>Kullanıcılar ve PSTN ile 1: n çağrısı yerleştir
-Çağrıyı PSTN 'e yerleştirmek için, Iletişim hizmetleriyle alınan telefon numarasını belirtmeniz gerekir.
+Çağrıyı PSTN 'e yerleştirmek için, Iletişim hizmetleriyle elde edilen bir telefon numarası belirtmeniz gerekir.
+
 ```swift
 
 let pstnCallee = PhoneNumberIdentifier(phoneNumber: '+1999999999')
@@ -154,8 +159,8 @@ let groupCall = self.callAgent.call(participants: [pstnCallee, callee], options:
 
 ```
 
-### <a name="place-a-11-call-with-with-video"></a>Görüntülü bir 1:1 çağrısı yerleştirin
-Bir cihaz yöneticisi örneği almak için lütfen [buraya](#device-management) başvurun
+### <a name="place-a-11-call-with-video"></a>Video ile 1:1 çağrısı yerleştirme
+Bir cihaz yöneticisi örneğini almak için [cihazları yönetme](#manage-devices)hakkında bölümüne bakın.
 
 ```swift
 
@@ -172,7 +177,7 @@ let call = self.callAgent?.call(participants: [callee], options: startCallOption
 ```
 
 ### <a name="join-a-group-call"></a>Grup çağrısına katılır
-Bir çağrıya katmak için, *Callagent* 'da API 'lerden birini çağırmanız gerekir
+Bir çağrıya katmak için, üzerindeki API 'lerden birini çağırmanız gerekir `CallAgent` .
 
 ```swift
 
@@ -181,8 +186,8 @@ let call = self.callAgent?.join(with: groupCallLocator, joinCallOptions: JoinCal
 
 ```
 
-### <a name="subscribe-for-incoming-call"></a>Gelen çağrıya abone ol
-Gelen çağrı olayına abone olma
+### <a name="subscribe-to-an-incoming-call"></a>Gelen bir çağrıya abone olma
+Gelen çağrı olayına abone olma.
 
 ```
 final class IncomingCallHandler: NSObject, CallAgentDelegate, IncomingCallDelegate
@@ -202,8 +207,8 @@ final class IncomingCallHandler: NSObject, CallAgentDelegate, IncomingCallDelega
 ```
 
 ### <a name="accept-an-incoming-call"></a>Gelen çağrıyı kabul et
-Bir çağrıyı kabul etmek için, çağırma nesnesinde ' Accept ' metodunu çağırın.
-CallAgent 'a bir temsilci ayarlayın 
+Bir çağrıyı kabul etmek için `accept` bir çağrı nesnesi üzerinde yöntemini çağırın. İçin bir temsilci ayarlayın `CallAgent` .
+
 ```swift
 final class CallHandler: NSObject, CallAgentDelegate
 {
@@ -233,23 +238,23 @@ if let incomingCall = CallHandler().incomingCall {
 }
 ```
 
-## <a name="push-notification"></a>Anında iletme bildirimi
+## <a name="set-up-push-notifications"></a>Anında iletme bildirimlerini ayarlama
 
-Mobil anında iletme bildirimi, mobil cihazda aldığınız açılır bildirimdir. Çağırmak için VoIP (Internet Protokolü üzerinden ses) anında iletme bildirimleri üzerine odaklanacağız. Anında iletme bildirimine kaydolma, anında iletme bildirimini işleme ve anında iletme bildiriminin kaydını silme özelliklerini sunacağız.
+Mobil anında iletme bildirimi, mobil cihazda aldığınız açılır bildirimdir. Çağırmak için VoIP (Internet Protokolü üzerinden ses) anında iletme bildirimleri üzerine odaklanacağız. 
 
-### <a name="prerequisite"></a>Önkoşul
+Aşağıdaki bölümlerde, anında iletme bildirimlerinin nasıl kaydedileceği, işleneceği ve silinkaydedileceği açıklanır. Bu görevleri başlatmaya başlamadan önce, şu önkoşulları doldurun:
 
-- 1. Adım: Xcode-> Imzalama & özellikleri-> özellik ekleme-> "anında Iletme bildirimleri"
-- 2. Adım: Xcode-> Imzalama & özellikleri-> özellik ekleme-> "arka plan modları"
-- 3. Adım: "arka plan modları"-> "IP üzerinden ses" ve "uzak bildirimler" seçeneğini belirleyin
+1. Xcode 'da **imzalama & özellikleri**' ne gidin. **+ Capability**' yi seçip **anında iletme bildirimleri**' ni seçerek bir yetenek ekleyin.
+2. **+ Capability**' yi seçerek başka bir yetenek ekleyin ve ardından **arka plan modlarını** seçin.
+3. **Arka plan modları** altında, **IP üzerinden ses** ve **uzak bildirimler** onay kutularını seçin.
 
 :::image type="content" source="../media/ios/xcode-push-notification.png" alt-text="Xcode 'da nasıl özellik ekleneceğini gösteren ekran görüntüsü." lightbox="../media/ios/xcode-push-notification.png":::
 
-#### <a name="register-for-push-notifications"></a>Anında Iletme bildirimleri için kaydolun
+### <a name="register-for-push-notifications"></a>Anında iletme bildirimleri için kaydolun
 
-Anında iletme bildirimine kaydolmak için bir cihaz kayıt belirtecine sahip bir *Callagent* örneğine registerPushNotification () çağırın.
+Anında iletme bildirimlerine kaydolmak için bir `registerPushNotification()` `CallAgent` cihaz kayıt belirtecine sahip bir örneği çağırın.
 
-Başarılı başlatma işleminden sonra anında iletme bildiriminin çağrılması gerekir. `callAgent`Nesne yok edildiğinde, `logout` anında iletme bildirimlerinin kaydını otomatik olarak silecektir.
+Başarılı başlatmadan sonra anında iletme bildirimlerinin kaydının gerçekleşmesi gerekir. `callAgent`Nesne yok edildiğinde, bu, `logout` anında iletme bildirimlerinin kaydını otomatik olarak siler.
 
 
 ```swift
@@ -265,8 +270,8 @@ callAgent.registerPushNotifications(deviceToken: deviceToken) { (error) in
 
 ```
 
-#### <a name="push-notification-handling"></a>Anında iletme bildirimi Işleme
-Gelen çağrıları anında iletme bildirimlerini almak için, bir *Callagent* örneği üzerinde bir sözlük yüküne *handlepushnotification ()* çağırın.
+### <a name="handle-push-notifications"></a>Anında iletme bildirimlerini işle
+Gelen çağrılar için anında iletme bildirimleri almak için, `handlePushNotification()` `CallAgent` Sözlük yüküne sahip bir örneği çağırın.
 
 ```swift
 
@@ -281,11 +286,12 @@ callAgent.handlePush(notification: callNotification) { (error) in
 }
 
 ```
-#### <a name="unregister-push-notification"></a>Anında Iletme bildiriminin kaydını sil
+### <a name="unregister-push-notifications"></a>Anında iletme bildirimlerinin kaydını sil
 
-Uygulamalar, anında iletme bildiriminin kaydını dilediğiniz zaman açabilir. Yalnızca `unregisterPushNotification` *Callagent* üzerinde yöntemi çağırın.
+Uygulamalar, anında iletme bildiriminin kaydını dilediğiniz zaman açabilir. Yalnızca metodunu çağırın `unregisterPushNotification` `CallAgent` .
+
 > [!NOTE]
-> Uygulamalar, oturum kapatma sırasında anında iletme bildiriminden otomatik olarak silinir.
+> Uygulamalar, oturum kapatma sırasında anında iletme bildirimlerinin kaydını otomatik olarak içermez.
 
 ```swift
 
@@ -299,13 +305,13 @@ callAgent.unregisterPushNotifications { (error) in
 
 ```
 
-## <a name="mid-call-operations"></a>Orta çağrı işlemleri
+## <a name="perform-mid-call-operations"></a>Orta çağrı işlemleri gerçekleştirin
 
 Video ve ses ile ilgili ayarları yönetmek için bir çağrı sırasında çeşitli işlemler gerçekleştirebilirsiniz.
 
 ### <a name="mute-and-unmute"></a>Sessiz ve aç
 
-Yerel uç noktanın sesini kapatmak veya sesini açmak için `mute` ve `unmute` zaman uyumsuz API 'leri kullanabilirsiniz:
+Yerel uç noktanın sesini kapatmak veya sesini açmak için `mute` ve `unmute` zaman uyumsuz API 'leri kullanabilirsiniz.
 
 ```swift
 call!.mute { (error) in
@@ -318,7 +324,7 @@ call!.mute { (error) in
 
 ```
 
-En Yerel aç
+Yerel uç noktayı zaman uyumsuz olarak açmak için aşağıdaki kodu kullanın.
 
 ```swift
 call!.unmute { (error) in
@@ -332,7 +338,7 @@ call!.unmute { (error) in
 
 ### <a name="start-and-stop-sending-local-video"></a>Yerel video göndermeyi başlatma ve durdurma
 
-Çağrıdan diğer katılımcılara yerel video göndermeye başlamak için API 'yi kullanın `startVideo` ve ile geçiş yapın `localVideoStream``camera`
+Bir çağrıda bulunan diğer katılımcılara yerel video göndermeye başlamak için API 'yi kullanın `startVideo` ve ile geçiş yapın `localVideoStream` `camera` .
 
 ```swift
 
@@ -349,7 +355,7 @@ call!.startVideo(stream: localVideoStream) { (error) in
 
 ```
 
-Video göndermeye başladıktan sonra `LocalVideoStream` örnek, `localVideoStreams` koleksiyon bir çağrı örneğine eklenir:
+Video göndermeye başladıktan sonra `LocalVideoStream` örnek, `localVideoStreams` koleksiyon bir çağrı örneğine eklenir.
 
 ```swift
 
@@ -357,7 +363,7 @@ call.localVideoStreams[0]
 
 ```
 
-En Yerel videoyu durdurmak için, `localVideoStream` şunu çağrısından geçirin `call.startVideo` :
+Yerel videoyu durdurmak için, `localVideoStream` çağrısından döndürülen örneği geçirin `call.startVideo` . Bu, zaman uyumsuz bir eylemdir.
 
 ```swift
 
@@ -371,9 +377,9 @@ call!.stopVideo(stream: localVideoStream) { (error) in
 
 ```
 
-## <a name="remote-participants-management"></a>Uzak katılımcılar yönetimi
+## <a name="manage-remote-participants"></a>Uzak katılımcıları yönetme
 
-Tüm uzak katılımcılar tür tarafından temsil edilir `RemoteParticipant` ve `remoteParticipants` bir çağrı örneğindeki koleksiyon aracılığıyla kullanılabilir:
+Tüm uzak katılımcılar tür tarafından temsil edilir `RemoteParticipant` ve `remoteParticipants` bir çağrı örneğindeki koleksiyon aracılığıyla kullanılabilir.
 
 ### <a name="list-participants-in-a-call"></a>Bir çağrıda katılımcıları listeleme
 
@@ -383,14 +389,14 @@ call.remoteParticipants
 
 ```
 
-### <a name="remote-participant-properties"></a>Uzak katılımcı özellikleri
+### <a name="get-remote-participant-properties"></a>Uzak katılımcı özelliklerini al
 
 ```swift
 
 // [RemoteParticipantDelegate] delegate - an object you provide to receive events from this RemoteParticipant instance
 var remoteParticipantDelegate = remoteParticipant.delegate
 
-// [CommunicationIdentifier] identity - same as the one used to provision token for another user
+// [CommunicationIdentifier] identity - same as the one used to provision a token for another user
 var identity = remoteParticipant.identity
 
 // ParticipantStateIdle = 0, ParticipantStateEarlyMedia = 1, ParticipantStateConnecting = 2, ParticipantStateConnected = 3, ParticipantStateOnHold = 4, ParticipantStateInLobby = 5, ParticipantStateDisconnected = 6
@@ -412,7 +418,7 @@ var videoStreams = remoteParticipant.videoStreams // [RemoteVideoStream, RemoteV
 
 ### <a name="add-a-participant-to-a-call"></a>Çağrıya katılımcı ekleme
 
-Çağrıya (bir kullanıcı veya telefon numarası) bir katılımcı eklemek için, çağırabilirsiniz `addParticipant` . Bu, zaman uyumlu olarak uzak bir katılımcı örneği döndürür.
+Bir çağrıya (Kullanıcı veya telefon numarası) bir katılımcı eklemek için komutunu çağırabilirsiniz `addParticipant` . Bu komut, zaman uyumlu olarak uzak bir katılımcı örneğini döndürür.
 
 ```swift
 
@@ -421,7 +427,7 @@ let remoteParticipantAdded: RemoteParticipant = call.add(participant: Communicat
 ```
 
 ### <a name="remove-a-participant-from-a-call"></a>Bir katılımcıyı çağrıdan kaldırma
-Bir katılımcıyı bir çağrıdan (Kullanıcı veya telefon numarası) kaldırmak için API 'yi çağırabilirsiniz  `removeParticipant` . Bu işlem zaman uyumsuz olarak çözümlenir.
+Bir katılımcıyı bir çağrıdan (Kullanıcı veya telefon numarası) kaldırmak için API 'yi çağırabilirsiniz `removeParticipant` . Bu işlem zaman uyumsuz olarak çözümlenir.
 
 ```swift
 
@@ -439,9 +445,9 @@ call!.remove(participant: remoteParticipantAdded) { (error) in
 
 Uzak katılımcılar, bir çağrı sırasında video veya ekran paylaşımı başlatabilir.
 
-### <a name="handle-remote-participant-videoscreen-sharing-streams"></a>Uzak katılımcı video/ekran paylaşım akışlarını işle
+### <a name="handle-video-sharing-or-screen-sharing-streams-of-remote-participants"></a>Uzaktan katılımcıların video paylaşma veya ekran paylaşma akışlarını işleme
 
-Uzak katılımcıların akışlarını listelemek için, `videoStreams` koleksiyonları inceleyin:
+Uzak katılımcıların akışlarını listelemek için, `videoStreams` koleksiyonları inceleyin.
 
 ```swift
 
@@ -449,7 +455,7 @@ var remoteParticipantVideoStream = call.remoteParticipants[0].videoStreams[0]
 
 ```
 
-### <a name="remote-video-stream-properties"></a>Uzak video akışı özellikleri
+### <a name="get-remote-video-stream-properties"></a>Uzak video akışı özelliklerini al
 
 ```swift
 
@@ -461,9 +467,9 @@ var id: Int = remoteParticipantVideoStream.id // id of remoteParticipantStream
 
 ```
 
-### <a name="render-remote-participant-stream"></a>Uzak katılımcı akışını işle
+### <a name="render-remote-participant-streams"></a>Uzak katılımcı akışlarını işle
 
-Uzak katılımcı akışlarını işlemeye başlamak için:
+Uzak katılımcı akışlarını işlemeye başlamak için aşağıdaki kodu kullanın.
 
 ```swift
 
@@ -474,16 +480,16 @@ targetRemoteParticipantView.update(scalingMode: ScalingMode.fit)
 
 ```
 
-### <a name="remote-video-renderer-methods-and-properties"></a>Uzak video Oluşturucu yöntemleri ve özellikleri
+### <a name="get-remote-video-renderer-methods-and-properties"></a>Uzak video Oluşturucu yöntemlerini ve özelliklerini al
 
 ```swift
 // [Synchronous] dispose() - dispose renderer and all `RendererView` associated with this renderer. To be called when you have removed all associated views from the UI.
 remoteVideoRenderer.dispose()
 ```
 
-## <a name="device-management"></a>Cihaz yönetimi
+## <a name="manage-devices"></a>Cihazları yönetme
 
-`DeviceManager` ses/video akışlarını aktarmak için bir çağrıda kullanılabilecek yerel cihazları listelemenizi sağlar. Ayrıca, kullanıcıdan mikrofona/kameraya erişmek için izin isteme olanağı da sağlar. `deviceManager` `callClient` Nesnesine erişebilirsiniz:
+`DeviceManager` ses veya video akışlarını aktarmak için bir çağrıda kullanılabilecek yerel cihazları listelemenizi sağlar. Ayrıca, kullanıcıdan bir mikrofona veya kameraya erişmek için izin isteme olanağı da sağlar. `deviceManager` `callClient` Nesnesine erişebilirsiniz.
 
 ```swift
 
@@ -499,7 +505,7 @@ self.callClient!.getDeviceManager { (deviceManager, error) in
 
 ### <a name="enumerate-local-devices"></a>Yerel cihazları listeleme
 
-Yerel cihazlara erişmek için Device Manager numaralandırma yöntemlerini kullanabilirsiniz. Sabit listesi, zaman uyumlu bir işlemdir.
+Yerel cihazlara erişmek için, Cihaz Yöneticisi 'nde listeleme yöntemlerini kullanabilirsiniz. Sabit listesi, zaman uyumlu bir işlemdir.
 
 ```swift
 // enumerate local cameras
@@ -510,9 +516,9 @@ var localMicrophones = deviceManager.microphones! // [AudioDeviceInfo, AudioDevi
 var localSpeakers = deviceManager.speakers! // [AudioDeviceInfo, AudioDeviceInfo...]
 ``` 
 
-### <a name="set-default-microphonespeaker"></a>Varsayılan mikrofonu/konuşmacıyı ayarla
+### <a name="set-the-default-microphone-or-speaker"></a>Varsayılan mikrofonu veya konuşmacıyı ayarlama
 
-Aygıt Yöneticisi, bir çağrı başlatılırken kullanılacak varsayılan bir cihaz ayarlamanıza olanak sağlar. Yığın Varsayılanları ayarlanmamışsa, Iletişim Hizmetleri işletim sistemi varsayılanlarına geri döner.
+Bir arama başlatıldığında kullanılacak varsayılan bir cihaz ayarlamak için Cihaz Yöneticisi ' ni kullanabilirsiniz. Yığın Varsayılanları ayarlanmamışsa, Iletişim Hizmetleri işletim sistemi varsayılanlarına geri döner.
 
 ```swift
 // get first microphone
@@ -525,9 +531,9 @@ var firstSpeaker = self.deviceManager!.speakers!
 deviceManager.setSpeaker(speakerDevice: firstSpeaker)
 ```
 
-### <a name="local-camera-preview"></a>Yerel kamera önizlemesi
+### <a name="get-a-local-camera-preview"></a>Yerel kamera önizlemesi al
 
-`Renderer`Yerel kameranızdan bir akış işlemeye başlamak için ' i kullanabilirsiniz. Bu akış diğer katılımcılara gönderilemez; Bu, yerel bir önizleme akışımıza sahiptir. Bu, zaman uyumsuz bir eylemdir.
+`Renderer`Yerel kameranızdan bir akış işlemeye başlamak için ' i kullanabilirsiniz. Bu akış diğer katılımcılara gönderilmez; Bu, yerel bir önizleme akışımıza sahiptir. Bu, zaman uyumsuz bir eylemdir.
 
 ```swift
 
@@ -538,9 +544,9 @@ self.view = try renderer!.createView()
 
 ```
 
-### <a name="local-camera-preview-properties"></a>Yerel kamera önizleme özellikleri
+### <a name="get-local-camera-preview-properties"></a>Yerel kamera önizleme özelliklerini al
 
-İşleyici, işleme denetlemenizi sağlayan özellikler ve Yöntemler kümesine sahiptir:
+İşleyici, işleme denetlemenizi sağlayan özellikler ve Yöntemler kümesine sahip.
 
 ```swift
 
@@ -565,16 +571,16 @@ localRenderer.dispose()
 
 ```
 
-## <a name="eventing-model"></a>Olay modeli
+## <a name="subscribe-to-notifications"></a>Bildirimlere abone olun
 
 Değerler değiştiğinde bildirilmesi için özelliklerin ve koleksiyonların çoğuna abone olabilirsiniz.
 
 ### <a name="properties"></a>Özellikler
-Olaylara abone olmak için `property changed` :
+Olaylara abone olmak için `property changed` aşağıdaki kodu kullanın.
 
 ```swift
 call.delegate = self
-// Get the property of the call state by doing get on the call's state member
+// Get the property of the call state by getting on the call's state member
 public func onCallStateChanged(_ call: Call!,
                                args: PropertyChangedEventArgs!)
 {
@@ -587,7 +593,7 @@ public func onCallStateChanged(_ call: Call!,
 ```
 
 ### <a name="collections"></a>Koleksiyonlar
-Olaylara abone olmak için `collection updated` :
+Olaylara abone olmak için `collection updated` aşağıdaki kodu kullanın.
 
 ```swift
 call.delegate = self

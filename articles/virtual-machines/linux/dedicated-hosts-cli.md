@@ -7,12 +7,12 @@ ms.subservice: dedicated-hosts
 ms.topic: how-to
 ms.date: 11/12/2020
 ms.author: cynthn
-ms.openlocfilehash: 9d4117cafd665556fb60278aa4dc60dc14a27ada
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: adc09bf2572be563ff52cf9fa3d0dea51263d032
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101670520"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774422"
 ---
 # <a name="deploy-to-dedicated-hosts-using-the-azure-cli"></a>Azure CLı kullanarak adanmış konaklara dağıtma
  
@@ -54,7 +54,7 @@ Her iki durumda da, konak grubunuz için hata etki alanı sayısını sağlaman�
 Hem kullanılabilirlik bölgelerini hem de hata etki alanlarını kullanmaya karar verebilirsiniz. 
 
 
-Bu örnekte, kullanılabilirlik bölgelerini ve hata etki alanlarını kullanarak bir konak grubu oluşturmak için [az VM konak grubu oluştur](/cli/azure/vm/host/group#az-vm-host-group-create) ' u kullanacağız. 
+Bu örnekte, kullanılabilirlik bölgelerini ve hata etki alanlarını kullanarak bir konak grubu oluşturmak için [az VM konak grubu oluştur](/cli/azure/vm/host/group#az_vm_host_group_create) ' u kullanacağız. 
 
 ```azurecli-interactive
 az vm host group create \
@@ -69,7 +69,7 @@ az vm host group create \
 
 ### <a name="other-examples"></a>Diğer örnekler
 
-Kullanılabilirlik bölge 1 ' de (hata etki alanları olmadan) bir konak grubu oluşturmak için [az VM konak grubu oluştur](/cli/azure/vm/host/group#az-vm-host-group-create) ' u de kullanabilirsiniz.
+Kullanılabilirlik bölge 1 ' de (hata etki alanları olmadan) bir konak grubu oluşturmak için [az VM konak grubu oluştur](/cli/azure/vm/host/group#az_vm_host_group_create) ' u de kullanabilirsiniz.
 
 ```azurecli-interactive
 az vm host group create \
@@ -79,7 +79,7 @@ az vm host group create \
    --platform-fault-domain-count 1 
 ```
  
-Aşağıdaki, yalnızca hata etki alanlarını kullanarak bir konak grubu oluşturmak için [az VM konak grubu oluştur](/cli/azure/vm/host/group#az-vm-host-group-create) ' u kullanır (kullanılabilirlik bölgelerinin desteklenmediği bölgelerde kullanılmak üzere). 
+Aşağıdaki, yalnızca hata etki alanlarını kullanarak bir konak grubu oluşturmak için [az VM konak grubu oluştur](/cli/azure/vm/host/group#az_vm_host_group_create) ' u kullanır (kullanılabilirlik bölgelerinin desteklenmediği bölgelerde kullanılmak üzere). 
 
 ```azurecli-interactive
 az vm host group create \
@@ -94,7 +94,7 @@ az vm host group create \
 
 Konak SKU 'Ları ve fiyatlandırma hakkında daha fazla bilgi için bkz. [Azure ayrılmış ana bilgisayar fiyatlandırması](https://aka.ms/ADHPricing).
 
-Konak oluşturmak için [az VM Host Create](/cli/azure/vm/host#az-vm-host-create) kullanın. Konak grubunuz için bir hata etki alanı sayısı ayarlarsanız, ana bilgisayarınız için hata etki alanını belirtmeniz istenir.  
+Konak oluşturmak için [az VM Host Create](/cli/azure/vm/host#az_vm_host_create) kullanın. Konak grubunuz için bir hata etki alanı sayısı ayarlarsanız, ana bilgisayarınız için hata etki alanını belirtmeniz istenir.  
 
 ```azurecli-interactive
 az vm host create \
@@ -108,7 +108,7 @@ az vm host create \
 
  
 ## <a name="create-a-virtual-machine"></a>Sanal makine oluşturma 
-[Az VM Create](/cli/azure/vm#az-vm-create)kullanarak adanmış bir ana bilgisayar içinde bir sanal makine oluşturun. Konak grubunuzu oluştururken bir kullanılabilirlik alanı belirttiyseniz, sanal makineyi oluştururken aynı bölgeyi kullanmanız gerekir.
+[Az VM Create](/cli/azure/vm#az_vm_create)kullanarak adanmış bir ana bilgisayar içinde bir sanal makine oluşturun. Konak grubunuzu oluştururken bir kullanılabilirlik alanı belirttiyseniz, sanal makineyi oluştururken aynı bölgeyi kullanmanız gerekir.
 
 ```azurecli-interactive
 az vm create \
@@ -149,7 +149,7 @@ az vmss create \
 
 ## <a name="check-the-status-of-the-host"></a>Konağın durumunu denetleme
 
-Ana bilgisayar sistem durumunu ve [az VM Host Get-Instance-View](/cli/azure/vm/host#az-vm-host-get-instance-view)kullanarak konağa ne kadar sanal makine dağıtacağınızı kontrol edebilirsiniz.
+Ana bilgisayar sistem durumunu ve [az VM Host Get-Instance-View](/cli/azure/vm/host#az_vm_host_get_instance_view)kullanarak konağa ne kadar sanal makine dağıtacağınızı kontrol edebilirsiniz.
 
 ```azurecli-interactive
 az vm host get-instance-view \
@@ -256,7 +256,7 @@ az vm host get-instance-view \
 ```
  
 ## <a name="export-as-a-template"></a>Şablon olarak dışarı aktar 
-Artık aynı parametrelerle veya bununla eşleşen bir üretim ortamıyla ek bir geliştirme ortamı oluşturmak istiyorsanız bir şablonu dışarı aktarabilirsiniz. Kaynak Yöneticisi, ortamınız için tüm parametreleri tanımlayan JSON şablonları kullanır. Bu JSON şablonuna başvurarak tüm ortamları oluşturursunuz. JSON şablonlarını el ile oluşturabilir veya var olan bir ortamı, sizin için JSON şablonu oluşturmak üzere dışarı aktarabilirsiniz. Kaynak grubunuzu dışarı aktarmak için [az Group Export](/cli/azure/group#az-group-export) kullanın.
+Artık aynı parametrelerle veya bununla eşleşen bir üretim ortamıyla ek bir geliştirme ortamı oluşturmak istiyorsanız bir şablonu dışarı aktarabilirsiniz. Kaynak Yöneticisi, ortamınız için tüm parametreleri tanımlayan JSON şablonları kullanır. Bu JSON şablonuna başvurarak tüm ortamları oluşturursunuz. JSON şablonlarını el ile oluşturabilir veya var olan bir ortamı, sizin için JSON şablonu oluşturmak üzere dışarı aktarabilirsiniz. Kaynak grubunuzu dışarı aktarmak için [az Group Export](/cli/azure/group#az_group_export) kullanın.
 
 ```azurecli-interactive
 az group export --name myDHResourceGroup > myDHResourceGroup.json 
@@ -277,19 +277,19 @@ az deployment group create \
 
 Hiçbir sanal makine dağıtılmamışsa bile adanmış ana bilgisayarlar için ücret ödersiniz. Maliyetleri kaydetmek için şu anda kullanmadığınız tüm Konakları silmelisiniz.  
 
-Bir konağı yalnızca, onu kullanan daha fazla sanal makine olmadığında silebilirsiniz. [Az VM Delete](/cli/azure/vm#az-vm-delete)kullanarak VM 'leri silin.
+Bir konağı yalnızca, onu kullanan daha fazla sanal makine olmadığında silebilirsiniz. [Az VM Delete](/cli/azure/vm#az_vm_delete)kullanarak VM 'leri silin.
 
 ```azurecli-interactive
 az vm delete -n myVM -g myDHResourceGroup
 ```
 
-VM 'Leri sildikten sonra [az VM Host Delete](/cli/azure/vm/host#az-vm-host-delete)kullanarak Konağı silebilirsiniz.
+VM 'Leri sildikten sonra [az VM Host Delete](/cli/azure/vm/host#az_vm_host_delete)kullanarak Konağı silebilirsiniz.
 
 ```azurecli-interactive
 az vm host delete -g myDHResourceGroup --host-group myHostGroup --name myHost 
 ```
  
-Tüm konaklarınızı sildikten sonra [az VM konak grubu Sil](/cli/azure/vm/host/group#az-vm-host-group-delete)' i kullanarak konak grubunu silebilirsiniz.  
+Tüm konaklarınızı sildikten sonra [az VM konak grubu Sil](/cli/azure/vm/host/group#az_vm_host_group_delete)' i kullanarak konak grubunu silebilirsiniz.  
  
 ```azurecli-interactive
 az vm host group delete -g myDHResourceGroup --host-group myHostGroup  

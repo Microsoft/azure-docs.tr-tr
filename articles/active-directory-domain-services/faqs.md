@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: how-to
 ms.date: 02/09/2021
 ms.author: justinha
-ms.openlocfilehash: 3d0f2b44f37cb318be2117b5dc5d8b42b418ff19
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 32dcf2b387231d50796de0036388b53cab83bf72
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100090998"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107749339"
 ---
 # <a name="frequently-asked-questions-faqs-about-azure-active-directory-ad-domain-services"></a>Azure Active Directory (AD) etki alanı Hizmetleri hakkında sık sorulan sorular (SSS)
 
@@ -36,6 +36,7 @@ Bu sayfa Azure Active Directory Domain Services hakkında sık sorulan soruları
 * [Azure AD Domain Services yönetilen bir etki alanına etki alanı denetleyicileri ekleyebilir miyim?](#can-i-add-domain-controllers-to-an-azure-ad-domain-services-managed-domain)
 * [Konuk kullanıcılar Azure AD Domain Services dizinime davet edilebilir mi?](#can-guest-users-be-invited-to-my-directory-use-azure-ad-domain-services)
 * [Mevcut bir Azure AD Domain Services yönetilen etki alanını farklı bir aboneliğe, kaynak grubuna, bölgeye veya sanal ağa taşıyabilir miyim?](#can-i-move-an-existing-azure-ad-domain-services-managed-domain-to-a-different-subscription-resource-group-region-or-virtual-network)
+* [Var olan bir Azure AD Domain Services etki alanı adını yeniden adlandırabilir miyim?](#can-i-rename-an-existing-azure-ad-domain-services-domain-name)
 * [Yüksek kullanılabilirlik seçenekleri dahil Azure AD Domain Services mi?](#does-azure-ad-domain-services-include-high-availability-options)
 
 ### <a name="can-i-create-multiple-managed-domains-for-a-single-azure-ad-directory"></a>Tek bir Azure AD dizini için birden çok yönetilen etki alanı oluşturabilir miyim?
@@ -77,6 +78,9 @@ Hayır. Azure [AD B2B](../active-directory/external-identities/what-is-b2b.md) d
 
 ### <a name="can-i-move-an-existing-azure-ad-domain-services-managed-domain-to-a-different-subscription-resource-group-region-or-virtual-network"></a>Mevcut bir Azure AD Domain Services yönetilen etki alanını farklı bir aboneliğe, kaynak grubuna, bölgeye veya sanal ağa taşıyabilir miyim?
 Hayır. Azure AD Domain Services yönetilen bir etki alanı oluşturduktan sonra, yönetilen etki alanını farklı bir kaynak grubuna, sanal ağa, aboneliğe vb. taşıyamazsınız. Yönetilen etki alanını dağıtırken en uygun aboneliği, kaynak grubunu, bölgeyi ve sanal ağı seçin.
+
+### <a name="can-i-rename-an-existing-azure-ad-domain-services-domain-name"></a>Var olan bir Azure AD Domain Services etki alanı adını yeniden adlandırabilir miyim?
+Hayır. Azure AD Domain Services yönetilen bir etki alanı oluşturduktan sonra DNS etki alanı adını değiştiremezsiniz. Yönetilen etki alanını oluştururken dikkatle DNS etki alanı adını seçin. DNS etki alanı adını seçerken dikkate alınması gereken [Azure AD Domain Services yönetilen bir etki alanı oluşturma ve yapılandırma hakkında bilgi için öğreticiye](tutorial-create-instance.md#create-a-managed-domain)bakın.
 
 ### <a name="does-azure-ad-domain-services-include-high-availability-options"></a>Yüksek kullanılabilirlik seçenekleri dahil Azure AD Domain Services mi?
 

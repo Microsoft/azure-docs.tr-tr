@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: a0d2bd6a07cfc9e5ebe205322550c9e898022846
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: 4014de262490259ed2e61eb17c80b40679e62773
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "88008449"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445219"
 ---
 # <a name="connect-to-windows-virtual-desktop-classic-with-the-macos-client"></a>MacOS istemcisiyle Windows sanal masaüstüne (klasik) bağlanma
 

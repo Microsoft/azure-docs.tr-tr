@@ -4,13 +4,13 @@ ms.service: time-series-insights
 author: deepakpalled
 ms.author: dpalled
 manager: diviso
-ms.date: 07/09/2020
-ms.openlocfilehash: f25c335c568c112c05f81df51d69e83aeff423e2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/01/2021
+ms.openlocfilehash: 6529aa49d06e64947deb5ae54db0c39ad2575569
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96026084"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106288612"
 ---
 ## <a name="business-disaster-recovery"></a>İş olağanüstü durum kurtarma
 
@@ -24,7 +24,7 @@ Azure (ve ayrıca tüm Azure Time Series Insights örnekleri için de kullanıla
 
 - **Yük devretme**: Azure, [coğrafi çoğaltma ve yük dengeleme](/azure/architecture/resiliency/recovery-loss-azure-region)sağlar.
 - **Veri geri yükleme** ve **depolama kurtarma**: Azure, [verileri korumak ve kurtarmak için çeşitli seçenekler](/azure/architecture/resiliency/recovery-data-corruption)sunar.
-- **Azure Site Recovery**: Azure [Azure Site Recovery](../articles/site-recovery/index.yml)aracılığıyla Site Recovery özellikleri sağlar.
+- **Azure Site Recovery**: Azure, [Azure Site Recovery](../articles/site-recovery/index.yml)üzerinden kurtarma özellikleri sağlar.
 - **Azure Backup**: [Azure Backup](../articles/backup/backup-architecture.md) hem şirket Içi hem de Azure VM 'lerinin bulut yedeklemesini destekler.
 
 Cihazlarınız ve kullanıcılarınız için küresel ve çapraz bölge yüksek kullanılabilirlik sağlamak üzere ilgili Azure özelliklerini etkinleştirdiğinizden emin olun.
@@ -44,7 +44,7 @@ Diğer hizmetlerle Azure Time Series Insights tümleştirme, ek olağanüstü du
 
 ### <a name="azure-time-series-insights"></a>Azure Time Series Insights
 
-Azure Time Series Insights verilerinizi, uygulamalarınızı ve hizmetlerinizi, kesintiye uğrasa bile çalışır durumda tutmanın birkaç yolu vardır. 
+Azure Time Series Insights verilerinizi, uygulamalarınızı ve hizmetlerinizi, kesintiye uğrasa bile çalışır durumda tutmanın birkaç yolu vardır.
 
 Ancak, aşağıdaki amaçlar için Azure zaman serisi ortamınızın tamamen bir yedek kopyasının de gerekli olduğunu belirleyebilirsiniz:
 
@@ -63,12 +63,13 @@ Yinelenen bir ortam oluşturmak için:
 Bir olay oluşursa:
 
 1. Birincil bölgeniz bir olağanüstü durum olayı sırasında etkileniyorsa, işlemleri yedekleme Azure Time Series Insights ortamına yeniden yönlendir.
+1. Hub sıra numaraları, yük devretmeden sonra 0 ' dan yeniden başlatıldığında, yinelenen olaylar gibi görünbilecekleri şeyleri oluşturmaktan kaçınmak için olay kaynağını farklı tüketici gruplarıyla her iki bölgede/ortamda yeniden oluşturun.
 1. Tüm Azure Time Series Insights telemetri ve sorgu verilerini yedeklemek ve kurtarmak için ikinci bölgenizi kullanın.
 
 > [!IMPORTANT]
 > Yük devretme gerçekleşirse:
-> 
-> * Bir gecikme da oluşabilir.
-> * İşlemler tekrar yönlendirilmesiyle ileti işleme içindeki bir kopan ani meydana gelebilir.
-> 
+>
+> - Bir gecikme da oluşabilir.
+> - İşlemler tekrar yönlendirilmesiyle ileti işleme içindeki bir kopan ani meydana gelebilir.
+>
 > Daha fazla bilgi için [Azure Time Series Insights gecikme süresini azaltır](../articles/time-series-insights/time-series-insights-environment-mitigate-latency.md).

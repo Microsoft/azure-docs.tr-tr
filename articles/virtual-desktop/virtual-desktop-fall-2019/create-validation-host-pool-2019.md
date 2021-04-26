@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: tutorial
 ms.date: 05/27/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 291f1e8b8870257c233dc32894ff49b26c0a3501
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+manager: femila
+ms.openlocfilehash: ad79ad31678f698c0f034b39bab1e3a19a48d3f2
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91323538"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106444981"
 ---
 # <a name="tutorial-create-a-host-pool-to-validate-service-updates-in-windows-virtual-desktop-classic"></a>Öğretici: Windows sanal masaüstündeki (klasik) hizmet güncelleştirmelerini doğrulamak için bir konak havuzu oluşturma
 

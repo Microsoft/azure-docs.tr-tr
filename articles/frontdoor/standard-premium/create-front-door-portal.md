@@ -4,20 +4,19 @@ description: Bu hızlı başlangıçta, Azure portal kullanarak yüksek oranda k
 services: frontdoor
 author: duongau
 manager: KumudD
-Customer intent: As an IT admin, I want to direct user traffic to ensure high availability of web applications.
 ms.service: frontdoor
 ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/18/2021
+ms.date: 04/16/2021
 ms.author: duau
-ms.openlocfilehash: 175fb82a5fdf300915f89c3d8cdc238638a742e1
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 8c6fe355621b4f096814268dea8fd2fc8e1166a7
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105565138"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552878"
 ---
 # <a name="quickstart-create-an-azure-front-door-standardpremium-profile---azure-portal"></a>Hızlı başlangıç: Azure ön kapısı Standart/Premium profili oluşturma-Azure portal
 
@@ -148,7 +147,7 @@ Dağıtımınız tamamlandıktan sonra ikinci bir Web uygulaması oluşturun. A�
     
     :::image type="content" source="../media/create-front-door-portal/front-door-custom-create-add-endpoint.png" alt-text="Uç nokta Ekle ekran görüntüsü.":::
 
-1. Sonra, iki Web uygulaması içeren bir kaynak grubu ekleyin.  **+ Ekle**' yi seçerek    **kaynak grubu Ekle** sayfasını açın. Ad için *Myormengrubu* girin ve **+ Kaynak Ekle**' yi seçin.
+1. Sonra, iki Web uygulaması içeren bir kaynak grubu ekleyin.  **+ Ekle**' yi seçerek    **kaynak grubu Ekle** sayfasını açın. Ad için *Myorigingroup* girin ve **+ Kaynak Ekle**' yi seçin.
  
      :::image type="content" source="../media/create-front-door-portal/front-door-custom-create-add-origin-group.png" alt-text="Kaynak grubu ekleme ekranının ekran görüntüsü.":::
 

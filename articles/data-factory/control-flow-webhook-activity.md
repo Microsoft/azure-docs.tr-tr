@@ -8,10 +8,10 @@ ms.service: data-factory
 ms.topic: conceptual
 ms.date: 03/25/2019
 ms.openlocfilehash: 4c3ff5d7139f4167769f78aa858c7d7a693539a3
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104785946"
 ---
 # <a name="webhook-activity-in-azure-data-factory"></a>Azure Data Factory Web kancası etkinliği
@@ -61,9 +61,9 @@ Web kancası etkinliği, özel kodunuzla işlem hattı yürütülmesini denetley
 **'deki** | Hedef uç nokta ve yol. | Bir dizenin **ResultType** değeri olan bir dize veya ifade. | Yes |
 **bilgisinde** | İsteğe gönderilen üst bilgiler. İşte bir istek üzerinde dili ve türü ayarlayan bir örnek: `"headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }` . | Bir dizenin **ResultType** değeri olan bir dize veya ifade. | Evet. `Content-Type`Gibi bir üst bilgi `"headers":{ "Content-Type":"application/json"}` gereklidir. |
 **bölümü** | Uç noktaya gönderilen yükü temsil eder. | JSON **değeri JSON** olan geçerli JSON veya bir ifade. İstek yükünün şeması için bkz. [istek yük şeması](./control-flow-web-activity.md#request-payload-schema) . | Yes |
-**yetkilendirmesi** | Uç noktayı çağırmak için kullanılan kimlik doğrulama yöntemi. Desteklenen türler şunlardır "temel" ve "ClientCertificate". Daha fazla bilgi için bkz. [Kimlik doğrulaması](./control-flow-web-activity.md#authentication). Kimlik doğrulaması gerekmiyorsa, bu özelliği dışlayın. | Bir dizenin **ResultType** değeri olan bir dize veya ifade. | Hayır |
-**timeout** | Etkinliğin **Callbackuri** tarafından çağrılması için belirtilen geri çağırma için bekleyeceği süre. Varsayılan değer 10 dakikadır ("00:10:00"). Değerler, *d* TimeSpan biçimine sahiptir. *SS*:*dd*:*SS*. | Dize | Hayır |
-**Geri aramada durum bildir** | Bir kullanıcının Web kancası etkinliğinin başarısız durumunu rapormasına olanak sağlar. | Boole | Hayır |
+**yetkilendirmesi** | Uç noktayı çağırmak için kullanılan kimlik doğrulama yöntemi. Desteklenen türler şunlardır "temel" ve "ClientCertificate". Daha fazla bilgi için bkz. [Kimlik doğrulaması](./control-flow-web-activity.md#authentication). Kimlik doğrulaması gerekmiyorsa, bu özelliği dışlayın. | Bir dizenin **ResultType** değeri olan bir dize veya ifade. | No |
+**timeout** | Etkinliğin **Callbackuri** tarafından çağrılması için belirtilen geri çağırma için bekleyeceği süre. Varsayılan değer 10 dakikadır ("00:10:00"). Değerler, *d* TimeSpan biçimine sahiptir. *SS*:*dd*:*SS*. | Dize | No |
+**Geri aramada durum bildir** | Bir kullanıcının Web kancası etkinliğinin başarısız durumunu rapormasına olanak sağlar. | Boole | No |
 
 ## <a name="authentication"></a>Kimlik Doğrulaması
 

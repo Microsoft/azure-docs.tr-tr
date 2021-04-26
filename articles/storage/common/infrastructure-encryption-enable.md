@@ -11,12 +11,12 @@ ms.author: tamram
 ms.reviewer: ozgun
 ms.subservice: common
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 612ba18ba71a22ad6c346b26008e688195c1d1e4
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 23b3ca919be030490cca06f31dac623d7f80be44
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92746575"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790392"
 ---
 # <a name="create-a-storage-account-with-infrastructure-encryption-enabled-for-double-encryption-of-data"></a>Verilerin çift şifrelenmesi için altyapı şifrelemesi etkinleştirilmiş bir depolama hesabı oluşturma
 
@@ -58,21 +58,21 @@ Register-AzResourceProvider -ProviderNamespace 'Microsoft.Storage'
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı ile kaydolmak için [az Feature Register](/cli/azure/feature#az-feature-register) komutunu çağırın.
+Azure CLı ile kaydolmak için [az Feature Register](/cli/azure/feature#az_feature_register) komutunu çağırın.
 
 ```azurecli
 az feature register --namespace Microsoft.Storage \
     --name AllowRequireInfraStructureEncryption
 ```
 
-Azure CLı ile kaydlarınızın durumunu denetlemek için [az Feature](/cli/azure/feature#az-feature-show) komutunu çağırın.
+Azure CLı ile kaydlarınızın durumunu denetlemek için [az Feature](/cli/azure/feature#az_feature_show) komutunu çağırın.
 
 ```azurecli
 az feature show --namespace Microsoft.Storage \
     --name AllowRequireInfraStructureEncryption
 ```
 
-Kaydınız onaylandıktan sonra Azure depolama kaynak sağlayıcısı 'nı yeniden kaydetmeniz gerekir. Kaynak sağlayıcısını Azure CLı ile yeniden kaydetmek için [az Provider Register](/cli/azure/provider#az-provider-register) komutunu çağırın.
+Kaydınız onaylandıktan sonra Azure depolama kaynak sağlayıcısı 'nı yeniden kaydetmeniz gerekir. Kaynak sağlayıcısını Azure CLı ile yeniden kaydetmek için [az Provider Register](/cli/azure/provider#az_provider_register) komutunu çağırın.
 
 ```azurecli
 az provider register --namespace 'Microsoft.Storage'
@@ -122,7 +122,7 @@ New-AzStorageAccount -ResourceGroupName <resource_group> `
 
 Altyapı Şifrelemesi etkin olan bir depolama hesabı oluşturmak için Azure CLı 'yi kullanmak için Azure CLı sürüm 2.8.0 veya üstünü yüklediğinizden emin olun. Daha fazla bilgi için bkz. [Azure CLI 'Yı yüklerken](/cli/azure/install-azure-cli).
 
-Ardından, [az Storage Account Create](/cli/azure/storage/account#az-storage-account-create) komutunu çağırarak ve `--require-infrastructure-encryption option` altyapı şifrelemesini etkinleştirmek için ' yi dahil ederek genel amaçlı v2 depolama hesabı oluşturun.
+Ardından, [az Storage Account Create](/cli/azure/storage/account#az_storage_account_create) komutunu çağırarak ve `--require-infrastructure-encryption option` altyapı şifrelemesini etkinleştirmek için ' yi dahil ederek genel amaçlı v2 depolama hesabı oluşturun.
 
 Aşağıdaki örnek, Okuma Erişimli Coğrafi olarak yedekli depolama (RA-GRS) için yapılandırılmış bir genel amaçlı v2 depolama hesabı oluşturmayı ve verilerin çift şifrelenmesi için altyapı Şifrelemesi etkin olduğunu gösterir. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 
@@ -197,7 +197,7 @@ $account.Encryption.RequireInfrastructureEncryption
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı ile bir depolama hesabı için altyapı şifrelemesinin etkinleştirildiğini doğrulamak üzere [az Storage Account Show](/cli/azure/storage/account#az-storage-account-show) komutunu çağırın. Bu komut, bir depolama hesabı özellikleri kümesi ve değerlerini döndürür. `requireInfrastructureEncryption`Özelliğin içindeki alanı bulun `encryption` ve olarak ayarlandığını doğrulayın `true` .
+Azure CLı ile bir depolama hesabı için altyapı şifrelemesinin etkinleştirildiğini doğrulamak üzere [az Storage Account Show](/cli/azure/storage/account#az_storage_account_show) komutunu çağırın. Bu komut, bir depolama hesabı özellikleri kümesi ve değerlerini döndürür. `requireInfrastructureEncryption`Özelliğin içindeki alanı bulun `encryption` ve olarak ayarlandığını doğrulayın `true` .
 
 Aşağıdaki örnek, özelliğinin değerini alır `requireInfrastructureEncryption` . Açılı ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 

@@ -10,13 +10,13 @@ ms.devlang: csharp
 ms.workload: big-data
 ms.topic: conceptual
 ms.date: 02/23/2021
-ms.custom: seodec18, has-adal-ref
-ms.openlocfilehash: 88fd575d40cc31f12f052158bda0aed9a5335555
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: seodec18, has-adal-ref, devx-track-azurecli
+ms.openlocfilehash: 8e50b650eaffe3d0ec8d3d2cd1841bd139d33750
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103009275"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107867521"
 ---
 # <a name="authentication-and-authorization-for-azure-time-series-insights-api"></a>Azure Time Series Insights API’si için kimlik doğrulaması ve yetkilendirme
 
@@ -79,7 +79,7 @@ Azure Time Series Insights ortamınız bir istek aldığında, ilk olarak arayan
 
 - [Azure Portal](https://portal.azure.com/) Kullanıcı arabirimi aracılığıyla erişim vermek için, [bir ortamda veri erişimi verme](concepts-access-policies.md) makalesinde listelenen yönergeleri izleyin. Kullanıcıyı seçerken, yönetilen kimliği veya uygulama kaydını adına veya KIMLIğINE göre arayabilirsiniz.
 
-- Azure CLı kullanarak erişim vermek için aşağıdaki komutu çalıştırın. Erişimi yönetmek için kullanılabilecek komutların tam listesi için [buradaki](/cli/azure/ext/timeseriesinsights/tsi/access-policy) belgeleri gözden geçirin.
+- Azure CLı kullanarak erişim vermek için aşağıdaki komutu çalıştırın. Erişimi yönetmek için kullanılabilecek komutların tam listesi için [buradaki](/cli/azure/tsi/access-policy) belgeleri gözden geçirin.
 
    ```azurecli-interactive
    az tsi access-policy create --name "ap1" --environment-name "env1" --description "some description" --principal-object-id "aGuid" --roles Reader Contributor --resource-group "rg1"

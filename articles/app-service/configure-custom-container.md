@@ -3,13 +3,14 @@ title: Özel kapsayıcı yapılandırma
 description: Azure App Service bir özel kapsayıcıyı yapılandırmayı öğrenin. Bu makalede en yaygın yapılandırma görevlerine yer verilmiştir.
 ms.topic: article
 ms.date: 02/23/2021
+ms.custom: devx-track-azurepowershell
 zone_pivot_groups: app-service-containers-windows-linux
-ms.openlocfilehash: 1d1a1292bc7583e4934ac176c34d2768700d11c5
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 48d2eeec1bdb1b9b4a393b4116092f043716077c
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105036773"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832042"
 ---
 # <a name="configure-a-custom-container-for-azure-app-service"></a>Azure App Service için özel kapsayıcıyı yapılandırma
 
@@ -358,7 +359,7 @@ SSH, kapsayıcı ile istemci arasında güvenli iletişime olanak tanır. Özel 
 
 WordPress gibi çok Kapsayıcılı uygulamalarda kalıcı depolamanın düzgün çalışması gerekir. Bunu etkinleştirmek için, Docker Compose yapılandırmanızın kapsayıcının *dışında* bir depolama konumunu göstermesi gerekir. Kapsayıcının içindeki depolama konumları değişiklikleri uygulamanın yeniden başlatmalarıyla kalıcı tutmaz.
 
-`WEBSITES_ENABLE_APP_SERVICE_STORAGE` [Cloud Shell](https://shell.azure.com)' deki [az WebApp config appSettings set](/cli/azure/webapp/config/appsettings#az-webapp-config-appsettings-set) komutunu kullanarak uygulama ayarını ayarlayarak kalıcı depolamayı etkinleştirin.
+`WEBSITES_ENABLE_APP_SERVICE_STORAGE` [Cloud Shell](https://shell.azure.com)' deki [az WebApp config appSettings set](/cli/azure/webapp/config/appsettings#az_webapp_config_appsettings_set) komutunu kullanarak uygulama ayarını ayarlayarak kalıcı depolamayı etkinleştirin.
 
 ```azurecli-interactive
 az webapp config appsettings set --resource-group <group-name> --name <app-name> --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE

@@ -4,12 +4,13 @@ description: Azure Kubernetes Service (AKS) kümesinde konak tabanlı şifreleme
 services: container-service
 ms.topic: article
 ms.date: 03/03/2021
-ms.openlocfilehash: f4e599ae7aa81c15f86d0e8b1c934824010ea45b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 7eb3215aeb1f7c6508092d18fbebd90f852efe63
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102430165"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772928"
 ---
 # <a name="host-based-encryption-on-azure-kubernetes-service-aks-preview"></a>Azure Kubernetes hizmeti (AKS) üzerinde ana bilgisayar tabanlı şifreleme (Önizleme)
 
@@ -28,11 +29,18 @@ Bu özellik yalnızca küme oluşturma veya düğüm havuzu oluşturma zamanınd
 - `aks-preview`CLI uzantısının v 0.4.73 veya üzeri sürümünün yüklü olduğundan emin olun.
 - `EnableEncryptionAtHostPreview`Özellik bayrağının etkin ' in altında olduğundan emin olun `Microsoft.ContainerService` .
 
-VM 'niz veya sanal makine ölçek kümeleriniz için konakta şifrelemeyi kullanabilmeniz için, özelliği aboneliğinizde etkinleştirilmiş olarak almanız gerekir. **encryptionAtHost@microsoft.com** Abonelikleriniz için etkinleştirilen özelliği almak için abonelik kimliklerinizle e-posta gönderin. 
+Azure Kubernetes hizmet kümeniz için EncryptionAtHost özelliğini kullanmadan önce aboneliğiniz için özelliği etkinleştirmeniz gerekir. Aboneliğiniz için özelliği etkinleştirmek üzere lütfen aşağıdaki adımları izleyin:
 
-> [!IMPORTANT]
-> **encryptionAtHost@microsoft.com** İşlem kaynakları için özelliği etkinleştirmek üzere abonelik kimlikleriniz ile e-posta almalısınız. İşlem kaynakları için kendiniz etkinleştiremezsiniz.
+1. Aboneliğinizi için özelliği kaydetmek üzere aşağıdaki komutu yürütün
 
+```azurecli-interactive
+Register-AzProviderFeature -FeatureName "EncryptionAtHost" -ProviderNamespace "Microsoft.Compute"
+```
+2. Özelliği denemeden önce aşağıdaki komutu kullanarak kayıt durumunun kayıtlı olduğundan (birkaç dakika sürer) emin olun.
+
+```azurecli-interactive
+Get-AzProviderFeature -FeatureName "EncryptionAtHost" -ProviderNamespace "Microsoft.Compute"
+```
 
 ### <a name="install-aks-preview-cli-extension"></a>aks-preview CLI uzantısını yükleme
 
@@ -80,12 +88,12 @@ Konak tabanlı şifreleme özelliği olmadan yeni düğüm havuzları oluşturma
 <!-- LINKS - external -->
 
 <!-- LINKS - internal -->
-[az-extension-add]: /cli/azure/extension#az-extension-add
-[az-extension-update]: /cli/azure/extension#az-extension-update
+[az-extension-add]: /cli/azure/extension#az_extension_add
+[az-extension-update]: /cli/azure/extension#az_extension_update
 [best-practices-security]: ./operator-best-practices-cluster-security.md
 [supported-regions]: ../virtual-machines/disk-encryption.md#supported-regions
 [supported-sizes]: ../virtual-machines/disk-encryption.md#supported-vm-sizes
 [azure-cli-install]: /cli/azure/install-azure-cli
-[az-feature-register]: /cli/azure/feature#az-feature-register
-[az-feature-list]: /cli/azure/feature#az-feature-list
-[az-provider-register]: /cli/azure/provider#az-provider-register
+[az-feature-register]: /cli/azure/feature#az_feature_register
+[az-feature-list]: /cli/azure/feature#az_feature_list
+[az-provider-register]: /cli/azure/provider#az_provider_register

@@ -6,12 +6,12 @@ ms.author: timlt
 ms.service: iot-develop
 ms.topic: conceptual
 ms.date: 02/11/2021
-ms.openlocfilehash: 6bbd7d37418af68065daa194d4ff4bd80f6fd09c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8669919192b1e6394043842d7d23f8829ec7c71e
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100654563"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107589559"
 ---
 # <a name="overview-connection-options-for-azure-iot-device-developers"></a>Genel Bakış: Azure IoT cihaz geliştiricileri için bağlantı seçenekleri
 Cihazlarla çalışan bir geliştirici olarak, Azure IoT cihazlarını bağlamak ve yönetmek için çeşitli seçenekleriniz vardır. Bu makalede, cihazları bağlamanıza ve yönetmenize yardımcı olmak için en yaygın kullanılan seçenekler ve araçlar açıklanır.
@@ -35,10 +35,10 @@ IoT uygulamanızı barındırmak için IoT Hub veya IoT Central ' yı seçtikten
 |---------|---------|---------|---------|
 |Merkezi Web Kullanıcı arabirimi     | Orta | [Merkezi hızlı başlangıç](../iot-central/core/quick-deploy-iot-central.md) | IoT Central için tarayıcı tabanlı portal. |
 |Azure portalı     | Merkez, orta      | [Azure Portal olan bir IoT Hub 'ı oluşturma](../iot-hub/iot-hub-create-through-portal.md), [Azure Portal IoT Central yönetme](../iot-central/core/howto-manage-iot-central-from-portal.md)| IoT Hub ve cihazlar için tarayıcı tabanlı portal. Ayrıca, IoT Central dahil diğer Azure kaynaklarıyla de birlikte kullanılabilir. |
-|Azure CLI’si     | Merkez, orta          | [CLI Ile IoT Hub 'ı oluşturma](../iot-hub/iot-hub-create-using-cli.md), [Azure CLI 'dan IoT Central yönetme](../iot-central/core/howto-manage-iot-central-from-cli.md) | IoT uygulamaları oluşturmak ve yönetmek için komut satırı arabirimi. |
+|Azure IoT Gezgini     | Hub | [Azure IoT Gezgini](https://github.com/Azure/azure-iot-explorer#azure-iot-explorer-preview) | IoT Hub 'ları oluşturulamıyor. Cihazları yönetmek için mevcut bir IoT Hub 'ına bağlanır. Genellikle CLı veya Portal ile kullanılır.|
+|Azure CLI     | Merkez, orta          | [CLI Ile IoT Hub 'ı oluşturma](../iot-hub/iot-hub-create-using-cli.md), [Azure CLI 'dan IoT Central yönetme](../iot-central/core/howto-manage-iot-central-from-cli.md) | IoT uygulamaları oluşturmak ve yönetmek için komut satırı arabirimi. |
 |Azure PowerShell     | Merkez, orta   | [PowerShell ile bir IoT Hub 'ı oluşturma](../iot-hub/iot-hub-create-using-powershell.md), [Azure PowerShell IoT Central yönetme](../iot-central/core/howto-manage-iot-central-from-powershell.md) | IoT uygulamaları oluşturmak ve yönetmek için PowerShell arabirimi |
 |VS Code için Azure IoT Araçları  | Hub | [VS Code araçlarla IoT Hub 'ı oluşturma](../iot-hub/iot-hub-create-use-iot-toolkit.md) | IoT Hub uygulamalar için VS Code uzantısı. |
-|Azure IoT Gezgini     | Hub | [Azure IoT Gezgini](https://github.com/Azure/azure-iot-explorer) | IoT Hub 'ları oluşturulamıyor. Cihazları yönetmek için mevcut bir IoT Hub 'ına bağlanır. Genellikle CLı veya Portal ile kullanılır.|
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Cihazları Azure IoT 'ye bağlama seçenekleriniz hakkında daha fazla bilgi edinmek için aşağıdaki hızlı başlangıç yöntemlerini inceleyin:

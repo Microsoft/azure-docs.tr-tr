@@ -7,12 +7,12 @@ ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 11/17/2020
 ms.author: sandeo
-ms.openlocfilehash: 44dfd07a5b749d88552bb1dcac2ee4b4e5ce65e4
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 654d47102685c04d6440d7c155e4d6eb931abcae
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102565249"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788124"
 ---
 # <a name="preview-log-in-to-a-linux-virtual-machine-in-azure-using-azure-active-directory-authentication"></a>Önizleme: Azure Active Directory kimlik doğrulaması kullanarak Azure 'da Linux sanal makinesinde oturum açma
 
@@ -79,7 +79,7 @@ Azure 'da Linux sanal makinelerinize yönelik Azure AD kimlik doğrulamasını e
 
 ## <a name="create-a-linux-virtual-machine"></a>Linux sanal makinesi oluşturma
 
-[Az Group Create](/cli/azure/group#az-group-create)ile bir kaynak grubu oluşturun ve ardından desteklenen bir ve desteklenen bir bölgede [az VM Create](/cli/azure/vm#az-vm-create) ile bir VM oluşturun. Aşağıdaki örnek, *Ubuntu 16,04 LTS* kullanan *myvm* adlı bir VM 'yi *Güneydoğu bir ABD* bölgesindeki *myresourcegroup* adlı bir kaynak grubuna dağıtır. Aşağıdaki örneklerde, gerektiğinde kendi kaynak grubunuzu ve sanal makine adlarınızı sağlayabilirsiniz.
+[Az Group Create](/cli/azure/group#az_group_create)ile bir kaynak grubu oluşturun ve ardından desteklenen bir ve desteklenen bir bölgede [az VM Create](/cli/azure/vm#az_vm_create) ile bir VM oluşturun. Aşağıdaki örnek, *Ubuntu 16,04 LTS* kullanan *myvm* adlı bir VM 'yi *Güneydoğu bir ABD* bölgesindeki *myresourcegroup* adlı bir kaynak grubuna dağıtır. Aşağıdaki örneklerde, gerektiğinde kendi kaynak grubunuzu ve sanal makine adlarınızı sağlayabilirsiniz.
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location southcentralus
@@ -99,7 +99,7 @@ VM’yi ve destekleyici kaynakları oluşturmak birkaç dakika sürer.
 > [!NOTE]
 > Bu uzantıyı daha önce oluşturulmuş bir VM 'ye dağıtırsanız, makinenin en az 1 GB belleğe sahip olduğundan emin olun, aksi takdirde uzantının yüklemesi başarısız olur
 
-Azure AD kimlik bilgileriyle bir Linux VM 'de oturum açmak için Azure Active Directory oturum açma VM uzantısını yükler. VM uzantıları, Azure sanal makinelerinde dağıtım sonrası yapılandırma ve otomasyon görevleri sağlayan küçük uygulamalardır. *Aadloginforlinux* uzantısını *myresourcegroup* kaynak GRUBUNDAKI *myvm* adlı VM 'ye yüklemek için [az VM Extension set](/cli/azure/vm/extension#az-vm-extension-set) komutunu kullanın:
+Azure AD kimlik bilgileriyle bir Linux VM 'de oturum açmak için Azure Active Directory oturum açma VM uzantısını yükler. VM uzantıları, Azure sanal makinelerinde dağıtım sonrası yapılandırma ve otomasyon görevleri sağlayan küçük uygulamalardır. *Aadloginforlinux* uzantısını *myresourcegroup* kaynak GRUBUNDAKI *myvm* adlı VM 'ye yüklemek için [az VM Extension set](/cli/azure/vm/extension#az_vm_extension_set) komutunu kullanın:
 
 ```azurecli-interactive
 az vm extension set \
@@ -121,7 +121,7 @@ Azure rol tabanlı erişim denetimi (Azure RBAC) ilkesi, VM 'de kimlerin oturum 
 > [!NOTE]
 > Bir kullanıcının SSH üzerinden VM 'de oturum açmasına izin vermek için, *Sanal Makine Yöneticisi oturum açma* veya *sanal makine Kullanıcı oturum açma* rolünü atamanız gerekir. Sanal Makine Yöneticisi oturum açma ve sanal makine Kullanıcı oturum açma rolleri dataActions kullanır ve bu nedenle yönetim grubu kapsamında atanamaz. Şu anda bu roller yalnızca abonelikte, kaynak grubunda veya kaynak kapsamında atanabilir. Bir VM için atanan *sahip* veya *katkıda* bulunan rollerinin bulunduğu bir Azure KULLANıCıSıNıN, sanal makinede SSH üzerinden oturum açma ayrıcalıkları otomatik olarak yoktur. 
 
-Aşağıdaki örnek, geçerli Azure kullanıcılarınız için *Sanal Makine Yöneticisi oturum açma* rolünü VM 'ye atamak için [az role atama Create](/cli/azure/role/assignment#az-role-assignment-create) ' i kullanır. Etkin Azure hesabınızın Kullanıcı adı [az Account Show](/cli/azure/account#az-account-show)komutuyla alınır ve *kapsam* , [az VM Show](/cli/azure/vm#az-vm-show)ile önceki bir adımda oluşturulan VM 'ye ayarlanır. Kapsam Ayrıca bir kaynak grubuna veya abonelik düzeyine atanabilir ve normal Azure RBAC devralma izinleri geçerlidir. Daha fazla bilgi için bkz. [Azure RBAC](../../role-based-access-control/overview.md)
+Aşağıdaki örnek, geçerli Azure kullanıcılarınız için *Sanal Makine Yöneticisi oturum açma* rolünü VM 'ye atamak için [az role atama Create](/cli/azure/role/assignment#az_role_assignment_create) ' i kullanır. Etkin Azure hesabınızın Kullanıcı adı [az Account Show](/cli/azure/account#az_account_show)komutuyla alınır ve *kapsam* , [az VM Show](/cli/azure/vm#az_vm_show)ile önceki bir adımda oluşturulan VM 'ye ayarlanır. Kapsam Ayrıca bir kaynak grubuna veya abonelik düzeyine atanabilir ve normal Azure RBAC devralma izinleri geçerlidir. Daha fazla bilgi için bkz. [Azure RBAC](../../role-based-access-control/overview.md)
 
 ```azurecli-interactive
 username=$(az account show --query user.name --output tsv)
@@ -134,20 +134,20 @@ az role assignment create \
 ```
 
 > [!NOTE]
-> AAD etki alanı ve oturum açma Kullanıcı adı etki alanınız eşleşmiyorsa,--atane *-nesnesi-kimliği* ile Kullanıcı HESABıNıZıN nesne kimliğini belirtmeniz *gerekir.* Kullanıcı hesabınızın nesne KIMLIĞINI [az ad kullanıcı listesi](/cli/azure/ad/user#az-ad-user-list)ile elde edebilirsiniz.
+> AAD etki alanı ve oturum açma Kullanıcı adı etki alanınız eşleşmiyorsa,--atane *-nesnesi-kimliği* ile Kullanıcı HESABıNıZıN nesne kimliğini belirtmeniz *gerekir.* Kullanıcı hesabınızın nesne KIMLIĞINI [az ad kullanıcı listesi](/cli/azure/ad/user#az_ad_user_list)ile elde edebilirsiniz.
 
 Azure RBAC kaynaklarına erişimi yönetmek için Azure RBAC kullanma hakkında daha fazla bilgi için bkz. [Azure CLI](../../role-based-access-control/role-assignments-cli.md), [Azure Portal](../../role-based-access-control/role-assignments-portal.md)veya [Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md)kullanma.
 
 ## <a name="using-conditional-access"></a>Koşullu erişim kullanma
 
-Azure AD oturum açma özelliği ile etkinleştirilen Azure 'da Linux VM 'lerine erişimi yetkilendirmeden önce Multi-Factor Authentication veya Kullanıcı oturum açma riski denetimi gibi koşullu erişim ilkelerini uygulayabilirsiniz. Koşullu erişim ilkesini uygulamak için, bulut uygulamaları veya eylemler atama seçeneğinden "Azure Linux VM oturum açma" uygulamasını seçmeniz ve ardından, bir koşul olarak oturum açma riskini ve/veya çok faktörlü kimlik doğrulamasının izin verme erişim denetimi olarak kullanılmasını sağlamanız gerekir. 
+Azure AD oturum açma özelliği ile etkinleştirilen Azure 'da Linux VM 'lerine erişimi yetkilendirmeden önce Multi-Factor Authentication veya Kullanıcı oturum açma riski denetimi gibi koşullu erişim ilkelerini uygulayabilirsiniz. Koşullu erişim ilkesini uygulamak için, bulut uygulamaları veya eylemler atama seçeneğinden Microsoft Azure "Linux sanal makinesi oturum açma" uygulamasını seçmeniz ve ardından bir koşul olarak oturum açma riskini ve/veya çok faktörlü kimlik doğrulamasının izin verme erişim denetimi olarak kullanılmasını sağlamanız gerekir. 
 
 > [!WARNING]
 > Kullanıcı başına etkin/Zorlanmış Azure AD Multi-Factor Authentication, VM 'de oturum açma için desteklenmez.
 
 ## <a name="log-in-to-the-linux-virtual-machine"></a>Linux sanal makinesinde oturum açma
 
-İlk olarak, [az VM Show](/cli/azure/vm#az-vm-show)komutuyla sanal MAKINENIZIN genel IP adresini görüntüleyin:
+İlk olarak, [az VM Show](/cli/azure/vm#az_vm_show)komutuyla sanal MAKINENIZIN genel IP adresini görüntüleyin:
 
 ```azurecli-interactive
 az vm show --resource-group myResourceGroup --name myVM -d --query publicIps -o tsv

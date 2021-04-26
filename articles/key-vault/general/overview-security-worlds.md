@@ -1,45 +1,39 @@
 ---
 title: Azure Key Vault Security dünyaları | Microsoft Docs
-description: Azure Key Vault, çok kiracılı bir hizmettir. Her Azure konumunda bir HSM havuzu kullanır. Coğrafi bölgedeki tüm konumlar şifreleme sınırını paylaşır.
+description: Azure Key Vault, çok kiracılı bir hizmettir. Her Azure bölgesinde bir HSM havuzu kullanır. Coğrafi bölgedeki tüm bölgeler şifreleme sınırını paylaşır.
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
 author: msmbaldwin
 ms.author: mbaldwin
-manager: rkarlin
 ms.date: 07/03/2017
-ms.openlocfilehash: d21deea13aac3d40c452a183c340d3108a1a01f4
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0d82a3cb4c08d47b6827072378b9827037d32412
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97936337"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751823"
 ---
 # <a name="azure-key-vault-security-worlds-and-geographic-boundaries"></a>Azure Key Vault güvenlik ve coğrafi sınırlar
 
-Azure Key Vault, çok kiracılı bir hizmettir ve her bir Azure konumunda donanım güvenlik modülleri (HSM 'ler) havuzu kullanır. 
+Azure ürünleri, bir veya daha fazla bölge içeren her bir Azure coğrafya ile birçok [Azure coğrafi](https://azure.microsoft.com/en-us/global-infrastructure/geographies/)bölümünde bulunabilir. Örneğin, Avrupa coğrafya iki bölge içerir--Kuzey Avrupa ve Batı Avrupa--Brezilya Coğrafya 'daki tek bölge Brezilya Güney.
 
-Aynı coğrafi bölgedeki Azure konumlarında bulunan tüm HSM 'ler aynı şifreleme sınırını (Thales güvenlik dünyası) paylaşır. Örneğin, Doğu ABD ve Batı ABD ABD coğrafi konumuna ait olduklarından aynı güvenlik dünyasını paylaşır. Benzer şekilde, Japonya 'daki tüm Azure konumları aynı güvenlik dünyasını ve Avustralya, Hindistan ve benzeri tüm Azure konumlarını paylaşır. 
+Azure Key Vault, donanım güvenlik modülleri (HSM 'ler) havuzunu kullanan çok kiracılı bir hizmettir. Bir Coğrafya 'daki tüm HSM 'ler, "güvenlik dünyası" olarak adlandırılan aynı şifreleme sınırını paylaşır. Her Coğrafya tek bir güvenlik dünyasına karşılık gelir ve tam tersi de geçerlidir.
+
+Doğu ABD ve Batı ABD Coğrafya (Birleşik Devletler) ait olduklarından aynı güvenlik dünyasını paylaşır. Benzer şekilde, Japonya 'daki tüm Azure bölgeleri, Avustralya 'daki tüm Azure bölgeleri gibi aynı güvenlik dünyasını paylaşır ve bu şekilde devam eder.
+
+>[!NOTE]
+> Bir özel durum, US DOD Doğu ve ABD DOD CENTRAL 'ın kendi güvenlik dünyalarına sahip olduğu durumdur.
 
 ## <a name="backup-and-restore-behavior"></a>Yedekleme ve geri yükleme davranışı
 
-Bu koşulların her ikisi de doğru olduğu sürece, bir Azure konumundaki anahtar kasasından bir anahtarın bir yedeğini almak başka bir Azure konumundaki anahtar kasasına geri yüklenebilir:
+Bu koşulların her ikisi de doğru olduğu sürece, bir Azure bölgesindeki anahtar kasasından bir anahtarın bir yedeğini almak başka bir Azure bölgesindeki anahtar kasasına geri yüklenebilir:
 
-- Azure konumlarından her ikisi de aynı coğrafi konuma aittir
-- Her iki anahtar kasası da aynı Azure aboneliğine ait
+- Azure bölgelerinin her ikisi de aynı coğrafi bölgeye aittir.
+- Her iki anahtar kasası da aynı Azure aboneliğine aittir.
 
-Örneğin, Batı Hindistan bir anahtar kasasındaki bir anahtarın belirli bir aboneliği tarafından alınan bir yedekleme, yalnızca aynı abonelikte ve coğrafi konumda bulunan başka bir anahtar kasasının içine geri yüklenebilir; Batı Hindistan, Orta Hindistan veya Güney Hindistan.
+Örneğin, bir Batı Hindistan anahtar kasasındaki bir anahtarın bir yedeklemesi, Hindistan Coğrafya (Batı Hindistan, Orta Hindistan ve Güney Hindistan bölgeleri) içindeki aynı abonelikte yer aldığı başka bir anahtar kasasına geri yüklenebilir.
 
-## <a name="regions-and-products"></a>Bölgeler ve ürünler
+## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure bölgeleri](https://azure.microsoft.com/regions/)
-- [Bölgeye göre Microsoft ürünleri](https://azure.microsoft.com/regions/services/)
-
-Bölgeler, tablolardaki ana başlıklar olarak gösterilen güvenlik dünyalarını eşleştirmekte:
-
-Ürünlere göre ürünler makalesinde, örneğin, **Kuzey** SEKMESI Doğu ABD, Orta ABD, Batı ABD Kuzey bölgesine eşlenir. 
-
->[!NOTE]
->Bir özel durum, US DOD Doğu ve ABD DOD CENTRAL 'ın kendi güvenlik dünyalarına sahip olduğu durumdur. 
-
-Benzer şekilde, **Avrupa** SEKMESINDE Kuzey Avrupa ve Batı Avrupa, her Ikisi de Avrupa bölgesi ile eşlenir. Aynı zamanda **Asya Pasifik** sekmesinde de geçerlidir.
+- [Bölgeye göre Microsoft ürünlerine](https://azure.microsoft.com/regions/services/) bakın

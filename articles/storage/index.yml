@@ -1,149 +1,145 @@
 ### YamlMime:Hub
 title: Azure Depolama belgeleri
-summary: Azure Depolama, nesne, dosya, disk, kuyruk ve tablo depolamayı içerir. Ayrıca karma depolama çözümlerine yönelik hizmetler ve verileri aktarma, paylaşma ve yedekleme hizmetleri de vardır.
+summary: 'Azure Depolama, nesne, dosya, disk, kuyruk ve tablo depolamayı içerir. Ayrıca karma depolama çözümlerine yönelik hizmetler ve verileri aktarma, paylaşma ve yedekleme hizmetleri de vardır.'
 brand: azure
 metadata:
   title: Azure Depolama belgeleri
-  description: Azure Depolama belgeleri merkez sayfası. Bulut ve hibrit depolama çözümlerine yönelik hizmetlere ve verileri aktarma, paylaşma ve yedekleme hizmetlerine işaret eder.
+  description: 'Azure Depolama belgeleri merkez sayfası. Bulut ve hibrit depolama çözümlerine yönelik hizmetlere ve verileri aktarma, paylaşma ve yedekleme hizmetlerine işaret eder.'
   ms.service: storage
   ms.topic: hub-page
   author: twooley
   ms.author: twooley
-  ms.date: 05/01/2020
-  ms.openlocfilehash: 886f61206bdc87dc5283a46e50ff438041be1a2f
-  ms.sourcegitcommit: aaa65bd769eb2e234e42cfb07d7d459a2cc273ab
-  ms.translationtype: MT
-  ms.contentlocale: tr-TR
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "98878485"
+  ms.date: 04/14/2021
 highlightedContent:
   items:
-  - title: Çekirdek depolama hizmetlerine giriş
-    itemType: concept
-    url: ./common/storage-introduction.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-  - title: Depolama hesabı türleri hakkında daha fazla bilgi edinin
-    itemType: concept
-    url: ./common/storage-account-overview.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-  - title: Depolama hesabı oluşturma
-    itemType: how-to-guide
-    url: ./common/storage-account-create.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-  - title: Veri yedekliliği hakkında bilgi edinin
-    itemType: concept
-    url: ./common/storage-redundancy.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-  - title: Verileri Azure’a aktarma
-    itemType: concept
-    url: ./common/storage-choose-data-transfer-solution.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - title: Çekirdek depolama hizmetlerine giriş
+      itemType: concept
+      url: ./common/storage-introduction.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - title: Depolama hesabı türleri hakkında daha fazla bilgi edinin
+      itemType: concept
+      url: ./common/storage-account-overview.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - title: Depolama hesabı oluşturma
+      itemType: how-to-guide
+      url: ./common/storage-account-create.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - title: Veri yedekliliği hakkında bilgi edinin
+      itemType: concept
+      url: ./common/storage-redundancy.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - title: Verileri Azure depolama 'ya geçirme
+      itemType: concept
+      url: ./common/storage-migration-overview.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
 additionalContent:
   sections:
-  - title: Bulut depolama çözümleri
-    items:
-    - title: Uygulamalarınız için nesne depolama
-      links:
-      - url: ./blobs/storage-blobs-introduction.md
-        text: Yapılandırılmamış veriler için depolama hakkında bilgi edinin (Blob depolama)
-      - url: /rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
-        text: Blok, ekleme ve sayfa bloblarını anlama
-      - url: ./blobs/index.yml
-        text: Daha fazla göster >
-    - title: Büyük veri analizi için depolama
-      links:
-      - url: ./blobs/data-lake-storage-introduction.md
-        text: Kurumsal veri gölleri için depolama hakkında bilgi edinin (Data Lake Storage)
-      - url: ./blobs/data-lake-storage-data-scenarios.md
-        text: Büyük verileri işlemeye yönelik seçenekleri ve araçları anlama
-    - title: Bulutta barındırılan dosya paylaşımları
-      links:
-      - url: ./files/storage-files-introduction.md
-        text: Çekirdek Azure Depolama platformu (Azure Dosyalar) tarafından sunulan dosya paylaşımlarını kullanma
-      - url: ../azure-netapp-files/azure-netapp-files-introduction.md
-        text: NetApp ONTAP tarafından sunulan birimleri kullanma (Azure NetApp Files)
-    - title: IaaS iş yükleri için disk depolama
-      links:
-      - url: ../virtual-machines/managed-disks-overview.md
-        text: Azure VM’ler için blok düzeyinde depolama birimleri hakkında bilgi edinin
-      - url: ../virtual-machines/disks-types.md
-        text: Kullanılabilir disk türlerini anlayın
-      - url: ../virtual-machines/windows/attach-managed-disk-portal.md
-        text: VM’ye yeni bir disk ekleme - Windows
-      - url: ../virtual-machines/linux/attach-disk-portal.md
-        text: VM’ye veri diski bağlama - Linux
-    - title: Zaman uyumsuz ileti sıraya alma için depolama
-      links:
-      - url: ./queues/storage-queues-introduction.md
-        text: Kuyruklar için Azure Depolama çözümü (Kuyruk depolama) hakkında bilgi edinin
-      - url: ../service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted.md
-        text: Kuyruk depolamayı ve Service Bus kuyruklarını karşılaştırma
-      - url: ./queues/index.yml
-        text: Daha fazla göster >
-    - title: Yapılandırılmış NoSQL verileri için depolama
-      links:
-      - url: ./tables/table-storage-overview.md
-        text: Yapılandırılmış NoSQL verilerini bulutta depolama (Tablo depolama ve Cosmos DB)
-      - url: ../cosmos-db/table-support.md
-        text: Tablo depolama ve Cosmos DB Tablo API’sini karşılaştırma
-      - url: ./tables/index.yml
-        text: Daha fazla göster >
-  - title: Karma depolama çözümleri
-    items:
-    - title: Şirket içi dosya paylaşımını buluta genişletme
-      links:
-      - url: ./files/storage-sync-files-planning.md
-        text: Azure dosya paylaşımlarını Windows dosya sunucusu ile eşitleme (Azure FileSync)
-      - url: ./files/storage-sync-files-deployment-guide.md
-        text: Azure Dosya Eşitleme’yi dağıtma
-      - url: ./files/index.yml
-        text: Daha fazla göster >
-    - title: Çevrimiçi veri aktarımı (şirket içinden Azure’a)
-      links:
-      - url: ../databox-gateway/data-box-gateway-overview.md
-        text: Verileri Azure’a sorunsuzca aktarma (Data Box Gateway)
-      - url: ../databox-online/azure-stack-edge-overview.md
-        text: Azure’a aktarmadan önce verileri yerel olarak işleme (Azure Stack Edge)
-      - url: ../databox-online/index.yml
-        text: Daha fazla göster >
-    - title: Yüksek performanslı bilgi işlem (HPC) iş yükleri için dosya önbelleğe alma
-      links:
-      - url: ../hpc-cache/hpc-cache-overview.md
-        text: Tam olarak yönetilen bir dosya önbelleğe alma hizmeti kullanma (Azure HPC Önbelleği)
-      - url: ../avere-vfxt/avere-vfxt-overview.md
-        text: Azure’da şirket içi NAS’yi önbelleğe alma (Azure için Avere vFXT)
-      - url: ../fxt-edge-filer/fxt-overview.md
-        text: Şirket içi önbelleğe alma gereci dağıtma (Azure FXT Edge Filer)
-  - title: Veri işlemleri
-    items:
-    - title: Azure’a çevrimdışı toplu aktarım
-      links:
-      - url: ../databox/data-box-disk-overview.md
-        text: < 40 TB veri aktarımı (Data Box Disk)
-      - url: ../databox/data-box-overview.md
-        text: 40-500 TB veri aktarımı (Data Box)
-      - url: ../databox/data-box-heavy-overview.md
-        text: '> 500 TB veri aktarımı (Data Box Heavy)'
-      - url: ../databox/index.yml
-        text: Daha fazla göster >
-    - title: Küçük veri kümelerini aktarma (çevrimiçi)
-      links:
-      - url: ./common/storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
-        text: AzCopy komut satırı aracını kullanma
-      - url: ./blobs/storage-quickstart-blobs-storage-explorer.md
-        text: Azure Depolama Gezgini GUI tabanlı aracı kullanma
-    - title: Maliyetleri denetleme
-      links:
-      - url: ./blobs/storage-blob-storage-tiers.md
-        text: Uygun maliyetli bir şekilde blob verilerini katmanlama (sık erişimli, seyrek erişimli, arşiv)
-    - title: Verilerinizi paylaşma
-      links:
-      - url: ../data-share/index.yml
-        text: Müşteriler ve iş ortakları ile veri paylaşma (Azure Veri Paylaşımı)
-      - url: ../data-share/supported-data-stores.md
-        text: Paylaşım için desteklenen veri depoları
-      - url: ../data-share/index.yml
-        text: Daha fazla göster >
-    - title: Verileri yedekleme
-      links:
-      - url: ../backup/quick-backup-vm-portal.md
-        text: VM’leri yedekleme (Azure Backup)
-      - url: ../backup/backup-afs.md
-        text: Azure dosya paylaşımlarını yedekleme
-      - url: ../backup/index.yml
-        text: Daha fazla göster >
+    - title: Bulut depolama çözümleri
+      items:
+        - title: Uygulamalarınız için nesne depolama
+          links:
+            - url: ./blobs/storage-blobs-introduction.md
+              text: Yapılandırılmamış veriler için depolama hakkında bilgi edinin (Blob depolama)
+            - url: /rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
+              text: 'Blok, ekleme ve sayfa bloblarını anlama'
+            - url: ./blobs/index.yml
+              text: Daha fazla göster >
+        - title: Büyük veri analizi için depolama
+          links:
+            - url: ./blobs/data-lake-storage-introduction.md
+              text: Kurumsal veri gölleri için depolama hakkında bilgi edinin (Data Lake Storage)
+            - url: ./blobs/data-lake-storage-data-scenarios.md
+              text: Büyük verileri işlemeye yönelik seçenekleri ve araçları anlama
+        - title: Bulutta barındırılan dosya paylaşımları
+          links:
+            - url: ./files/storage-files-introduction.md
+              text: Çekirdek Azure Depolama platformu (Azure Dosyalar) tarafından sunulan dosya paylaşımlarını kullanma
+            - url: ../azure-netapp-files/azure-netapp-files-introduction.md
+              text: NetApp ONTAP tarafından sunulan birimleri kullanma (Azure NetApp Files)
+        - title: IaaS iş yükleri için disk depolama
+          links:
+            - url: ../virtual-machines/managed-disks-overview.md
+              text: Azure VM’ler için blok düzeyinde depolama birimleri hakkında bilgi edinin
+            - url: ../virtual-machines/disks-types.md
+              text: Kullanılabilir disk türlerini anlayın
+            - url: ../virtual-machines/windows/attach-managed-disk-portal.md
+              text: VM’ye yeni bir disk ekleme - Windows
+            - url: ../virtual-machines/linux/attach-disk-portal.md
+              text: VM’ye veri diski bağlama - Linux
+        - title: Zaman uyumsuz ileti sıraya alma için depolama
+          links:
+            - url: ./queues/storage-queues-introduction.md
+              text: Kuyruklar için Azure Depolama çözümü (Kuyruk depolama) hakkında bilgi edinin
+            - url: ../service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted.md
+              text: Kuyruk depolamayı ve Service Bus kuyruklarını karşılaştırma
+            - url: ./queues/index.yml
+              text: Daha fazla göster >
+        - title: Yapılandırılmış NoSQL verileri için depolama
+          links:
+            - url: ./tables/table-storage-overview.md
+              text: Yapılandırılmış NoSQL verilerini bulutta depolama (Tablo depolama ve Cosmos DB)
+            - url: ../cosmos-db/table-support.md
+              text: Tablo depolama ve Cosmos DB Tablo API’sini karşılaştırma
+            - url: ./tables/index.yml
+              text: Daha fazla göster >
+    - title: Karma depolama çözümleri
+      items:
+        - title: Şirket içi dosya paylaşımını buluta genişletme
+          links:
+            - url: ./file-sync/file-sync-introduction.md
+              text: Azure Dosya Eşitleme hakkında bilgi edinin
+            - url: ./file-sync/file-sync-planning.md
+              text: Azure dosya paylaşımlarını Windows dosya sunucusu ile eşitleme (Azure FileSync)
+            - url: ./file-sync/file-sync-deployment-guide.md
+              text: Azure Dosya Eşitleme’yi dağıtma
+            - url: ./file-sync/index.yml
+              text: Daha fazla göster >
+        - title: Çevrimiçi veri aktarımı (şirket içinden Azure’a)
+          links:
+            - url: ../databox-gateway/data-box-gateway-overview.md
+              text: Verileri Azure’a sorunsuzca aktarma (Data Box Gateway)
+            - url: ../databox-online/azure-stack-edge-overview.md
+              text: Azure’a aktarmadan önce verileri yerel olarak işleme (Azure Stack Edge)
+            - url: ../databox-online/index.yml
+              text: Daha fazla göster >
+        - title: Yüksek performanslı bilgi işlem (HPC) iş yükleri için dosya önbelleğe alma
+          links:
+            - url: ../hpc-cache/hpc-cache-overview.md
+              text: Tam olarak yönetilen bir dosya önbelleğe alma hizmeti kullanma (Azure HPC Önbelleği)
+            - url: ../avere-vfxt/avere-vfxt-overview.md
+              text: Azure’da şirket içi NAS’yi önbelleğe alma (Azure için Avere vFXT)
+            - url: ../fxt-edge-filer/fxt-overview.md
+              text: Şirket içi önbelleğe alma gereci dağıtma (Azure FXT Edge Filer)
+    - title: Veri işlemleri
+      items:
+        - title: Azure’a çevrimdışı toplu aktarım
+          links:
+            - url: ../databox/data-box-disk-overview.md
+              text: < 40 TB veri aktarımı (Data Box Disk)
+            - url: ../databox/data-box-overview.md
+              text: 40-500 TB veri aktarımı (Data Box)
+            - url: ../databox/data-box-heavy-overview.md
+              text: '> 500 TB veri aktarımı (Data Box Heavy)'
+            - url: ../databox/index.yml
+              text: Daha fazla göster >
+        - title: Küçük veri kümelerini aktarma (çevrimiçi)
+          links:
+            - url: ./common/storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+              text: AzCopy komut satırı aracını kullanma
+            - url: ./blobs/storage-quickstart-blobs-storage-explorer.md
+              text: Azure Depolama Gezgini GUI tabanlı aracı kullanma
+        - title: Maliyetleri denetleme
+          links:
+            - url: ./blobs/storage-blob-storage-tiers.md
+              text: 'Uygun maliyetli bir şekilde blob verilerini katmanlama (sık erişimli, seyrek erişimli, arşiv)'
+        - title: Verilerinizi paylaşma
+          links:
+            - url: ../data-share/index.yml
+              text: Müşteriler ve iş ortakları ile veri paylaşma (Azure Veri Paylaşımı)
+            - url: ../data-share/supported-data-stores.md
+              text: Paylaşım için desteklenen veri depoları
+            - url: ../data-share/index.yml
+              text: Daha fazla göster >
+        - title: Verileri yedekleme
+          links:
+            - url: ../backup/quick-backup-vm-portal.md
+              text: VM’leri yedekleme (Azure Backup)
+            - url: ../backup/backup-afs.md
+              text: Azure dosya paylaşımlarını yedekleme
+            - url: ../backup/index.yml
+              text: Daha fazla göster >

@@ -10,18 +10,18 @@ ms.topic: quickstart
 ms.service: azure-communication-services
 ms.custom: references_regions
 zone_pivot_groups: acs-azp-java-net-python-csharp-js
-ms.openlocfilehash: e28b8581342824032921ad75e0297b3604fc0bb4
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 19bb79f9a4deaebfacc75918c46a5516d2d398be
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629395"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107498208"
 ---
 # <a name="quickstart-manage-phone-numbers"></a>Hızlı başlangıç: telefon numaralarını yönetme
 
 [!INCLUDE [Regional Availability Notice](../../includes/regional-availability-include.md)]
 
-Telefon numaralarını yönetmek için Azure portal veya Iletişim Hizmetleri telefon numaraları Istemci kitaplığını kullanarak Azure Iletişim Hizmetleri ile çalışmaya başlayın.
+[!INCLUDE [Bulk Acquisition Instructions](../../includes/phone-number-special-order.md)]
 
 ::: zone pivot="platform-azp"
 [!INCLUDE [Azure portal](./includes/phone-numbers-portal.md)]

@@ -7,14 +7,14 @@ author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.topic: reference
-ms.date: 11/17/2020
+ms.date: 04/12/2021
 ms.author: aahi
-ms.openlocfilehash: 2ac8633e48c98b9e1d778ac1d07835683e00e1c0
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: aeb5ba4145409db5b2884102d7e886222a37de7a
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102424487"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107388372"
 ---
 # <a name="azure-cognitive-services-container-image-tags-and-release-notes"></a>Azure bilişsel hizmetler kapsayıcı görüntü etiketleri ve sürüm notları
 
@@ -52,18 +52,24 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 
 # <a name="latest-version"></a>[En son sürüm](#tab/current)
 
+İçin sürüm notları `3.2` :
+
+* OCR kapsayıcısını oku artık genel kullanıma sunulmuştur.
+
+| Resim etiketleri                    | Notlar |
+|-------------------------------|:------|
+| `3.2`                     |       |
+
+# <a name="previous-versions"></a>[Önceki sürümler](#tab/previous)
+
+
 İçin sürüm notları `3.2-preview.2` :
+
 * Daha az yayın
 * JSON yanıtında metin satırı sırası arasında seçim yapmak için ReadingOrder parametresi
 * Gelişmiş günlük kaydı
 * CJK modeline düzeltmeler
-
-| Resim etiketleri                    | Notlar |
-|-------------------------------|:------|
-|3.2.2.014850001-49e0eac6-AMD64-Önizleme                     |       |
-
-# <a name="previous-versions"></a>[Önceki sürümler](#tab/previous)
-
+* 
 İçin sürüm notları `v2.0.013250001-amd64-preview` :
 
 * Kapsayıcı için bellek kullanımını daha da azaltın.
@@ -93,6 +99,7 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 
 | Resim etiketleri                    | Notlar |
 |-------------------------------|:------|
+| `3.2.2.014850001-49e0eac6-amd64-preview` |       |
 | `2.0.013250001-amd64-preview` |       |
 | `1.1.013050001-amd64-preview` |       |
 | `1.1.011580001-amd64-preview` |       |
@@ -154,20 +161,24 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 
 # <a name="latest-version"></a>[En son sürüm](#tab/current)
 
-İçin sürüm notunun `2.10.0-amd64` :
+İçin sürüm notunun `2.11.0-amd64` :
 
-**Özellik**
-* En son modellere yükseltin.
+**Düzeltilen**
+* Kullanıcının girdilerini büyük/küçük harfe duyarlı tutun.
 
-Dahil edilen tümcecik listeleri nedeniyle bu kapsayıcı görüntüsünün boyutunun arttığı unutulmamalıdır.
+Tümcecik listeleri özelliği nedeniyle bu kapsayıcı görüntüsünün boyutunun arttığı unutulmamalıdır.
 
 | Resim etiketleri                    | Notlar | Bilgisi                                                                   |
 |-------------------------------|:------|:-------------------------------------------------------------------------|
-| `latest`                      |       | `sha256:944f051e3b90aa8eb8a37a4d4a18d4e13dbb49f9fe6d5ced61a0f99b3b3e312c`|
-| `2.10.0-amd64`                |       | `sha256:944f051e3b90aa8eb8a37a4d4a18d4e13dbb49f9fe6d5ced61a0f99b3b3e312c`|
+| `latest`                      |       | `sha256:bbf23ded55bf61421f673bffa7d97aca5724f782328a80efe43020c9979cd069`|
+| `2.11.0-amd64`                |       | `sha256:bbf23ded55bf61421f673bffa7d97aca5724f782328a80efe43020c9979cd069`|
 
 
 # <a name="previous-version"></a>[Önceki sürüm](#tab/previous)
+
+İçin sürüm notunun `2.10.0-amd64` :
+
+Normal aylık yayın
 
 İçin sürüm notunun `2.9.0-amd64` :
 
@@ -214,6 +225,7 @@ Dahil edilen tümcecik listeleri nedeniyle bu kapsayıcı görüntüsünün boyu
 
 | Resim etiketleri                    | Notlar               |
 |-------------------------------|:--------------------|
+| `2.10.0-amd64`                |                     |
 | `2.9.0-amd64`                 |                     |
 | `2.7.0-amd64`                 |                     |
 | `2.6.0-amd64`                 |                     |
@@ -228,18 +240,22 @@ Dahil edilen tümcecik listeleri nedeniyle bu kapsayıcı görüntüsünün boyu
 
 # <a name="latest-version"></a>[En son sürüm](#tab/current)
 
-İçin sürüm notunun `1.12.0-amd64` :
+İçin sürüm notunun `1.13.0-amd64` :
 
-**Özellik**
-* En son modellere yükseltin.
+**Düzeltilen**
+* Kullanıcının girdilerini büyük/küçük harfe duyarlı tutun.
 
 | Resim etiketleri                    | Notlar | Bilgisi                                                                   |
 |-------------------------------|:------|:-------------------------------------------------------------------------|
-| `latest`                      |       | `sha256:82806245b8ccce808523c4276d8f447c8429db8b04ff26bdbc4d36ba6a704db4` |
-| `1.12.0-amd64`                |       | `sha256:82806245b8ccce808523c4276d8f447c8429db8b04ff26bdbc4d36ba6a704db4` |
+| `latest`                      |       | `sha256:390ff9e4981c798058058e7825cd1e6d173d9d54d66d8fdc450d157cf393aaec` |
+| `1.13.0-amd64`                |       | `sha256:390ff9e4981c798058058e7825cd1e6d173d9d54d66d8fdc450d157cf393aaec` |
 
 
 # <a name="previous-version"></a>[Önceki sürüm](#tab/previous)
+
+İçin sürüm notunun `1.12.0-amd64` :
+
+Normal aylık yayın
 
 İçin sürüm notunun `1.11.0-amd64` :
 
@@ -262,6 +278,7 @@ Normal aylık yayın
 
 | Resim etiketleri                    | Notlar               |
 |-------------------------------|:--------------------|
+| `1.12.0-amd64`                |                     |
 | `1.11.0-amd64`                |                     |
 | `1.9.0-amd64`                 |                     |
 | `1.8.0-amd64`                 |                     |
@@ -277,17 +294,182 @@ Konuşmadan metne v 2.5.0 bu yana, *ABD devlet Virginia* bölgesinde görüntül
 
 # <a name="latest-version"></a>[En son sürüm](#tab/current)
 
+İçin sürüm notunun `2.11.0-amd64-<locale>` :
+
+**Özellik**
+* En son modellere yükseltin.
+
+**Düzeltilen**
+* Kullanıcının girdilerini büyük/küçük harfe duyarlı tutun.
+
+Tümcecik listeleri özelliği nedeniyle bu kapsayıcı görüntüsünün boyutunun arttığı unutulmamalıdır. 
+
+| Resim etiketleri                    | Notlar                                                                                                |
+|-------------------------------|:-----------------------------------------------------------------------------------------------------|
+| `latest`                      | Yerel ayara sahip kapsayıcı görüntüsü `en-US` .                                                             |
+| `2.11.0-amd64-<locale>`       | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.11.0-amd64-en-us`.|
+
+Bu kapsayıcıda aşağıdaki yerel ayarlar var.
+
+| V 2.11.0 için yerel ayar          | Notlar                                    | Bilgisi                                                                    |
+|-----------------------------|:-----------------------------------------|:--------------------------------------------------------------------------|
+| `ar-ae`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-AE` . | `sha256:32c26ed8370d1f30098811fda382e68aceccabc671570365f15ead37c3d84304` |
+| `ar-bh`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-BH` . | `sha256:a6af48cdaf9f7562bfaced449016106dbde5c678fdd4c69985d166959a38b146` |
+| `ar-eg`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-EG` . | `sha256:43cec166dcde9dc7cd535228440d11d396518fcfb14d9fa617e6e26f5156dc84` |
+| `ar-iq`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-IQ` . | `sha256:b55095b27e8eef60dfe9657735a425b9ca1fe3c29ce4ff1f3d67bf7b2ac77bb1` |
+| `ar-jo`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-JO` . | `sha256:7cc4ad997a76844414a982982251653525f27dc396db44f23b7f012d20f53677` |
+| `ar-kw`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-KW` . | `sha256:32c26ed8370d1f30098811fda382e68aceccabc671570365f15ead37c3d84304` |
+| `ar-lb`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-LB` . | `sha256:5d3b402f41f616ee792a5e7e3f41b4ec5638dc8ad60a3c133ec588e07b09d581` |
+| `ar-om`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-OM` . | `sha256:c4f88fdaec73ebe241d6c94695b20eb2c792a9fd77dbb51f24fc7807dfd0dc61` |
+| `ar-qa`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-QA` . | `sha256:32c26ed8370d1f30098811fda382e68aceccabc671570365f15ead37c3d84304` |
+| `ar-sa`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-SA` . | `sha256:32c26ed8370d1f30098811fda382e68aceccabc671570365f15ead37c3d84304` |
+| `ar-sy`                     | Yerel ayara sahip kapsayıcı görüntüsü `ar-SY` . | `sha256:a42b6f63a16313f280088bd47978e177bc2f1bf2d392a070cf5c6a06d9f7a62c` |
+| `bg-bg`                     | Yerel ayara sahip kapsayıcı görüntüsü `bg-BG` . | `sha256:21425557e62d71326e9eb614c535878f981a914bf66d9dd883221656ca891858` |
+| `ca-es`                     | Yerel ayara sahip kapsayıcı görüntüsü `ca-ES` . | `sha256:682e8a8ad5f2582f25a18b0518f9fba9b3849b72eb5dab5454586724272c52de` |
+| `cs-cz`                     | Yerel ayara sahip kapsayıcı görüntüsü `cs-CZ` . | `sha256:1d0661ae5920f82e607c72ae7d6eee917c190d80c3d13403d770947c67a4294e` |
+| `da-dk`                     | Yerel ayara sahip kapsayıcı görüntüsü `da-DK` . | `sha256:8d5257d6c326e4d96ba395faa0c717f48c4d437866f8dc1e1252c5e983b3008f` |
+| `de-de`                     | Yerel ayara sahip kapsayıcı görüntüsü `de-DE` . | `sha256:086a4e33f746868fc1865322f1d7dfb5c1c3af64bdbd369804155f18710ad96e` |
+| `el-gr`                     | Yerel ayara sahip kapsayıcı görüntüsü `el-GR` . | `sha256:0e2c7d5337f953d45fc7594317e6eab5eecec44a1c15fba51a128fc510519c3f` |
+| `en-au`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-AU` . | `sha256:dcfe3fc95b895d0205a7b72368595e98dfdcb4b6398522e7daa2fbbe2b087ef6` |
+| `en-ca`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-CA` . | `sha256:f04cedb6b50560f0584cb3634cbfee5e9c147d60fc044cbd0df10fc28f04ed98` |
+| `en-gb`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-GB` . | `sha256:9692c45c6b5b8716f99852a2ddf4b7fd1e2c00ea29f9a20da68e899cf3064fa1` |
+| `en-hk`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-HK` . | `sha256:97106aa991b4ef5b0f1859ae7a7df3c6e22dd009123281a7458d336a78ebd854` |
+| `en-ie`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-IE` . | `sha256:da2bc14cd86f200a439b3ce708c6643d507d482daabae87c351bee4c10efa60b` |
+| `en-in`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-IN` . | `sha256:f8fc43e5d20afe8108b6f35c3e09d403557f150413672d45322421be1fddff20` |
+| `en-nz`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-NZ` . | `sha256:abb8ca669c806a71af88d3643694252e1833ca99aacbd739a3962ec00c3cdb61` |
+| `en-ph`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-PH` . | `sha256:13bc7717dd73f4323956a3f7441b24dd2f86c13d41adc709e3f6f26266cacd91` |
+| `en-sg`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-SG` . | `sha256:b7f44d7cf4bbe4d89729207a38e91726c321ea03a66c5e5624b27ae9913fdafa` |
+| `en-us`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-US` . | `sha256:d81ee15821646607aec9fa46223c9197f74675a89070912ca892ad5adfcab6f9` |
+| `en-za`                     | Yerel ayara sahip kapsayıcı görüntüsü `en-ZA` . | `sha256:2e2f9102c9f6fba0736fb01d745d35b677bf92750eed5cad245ee089998f66f2` |
+| `es-ar`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-AR` . | `sha256:dd962ec3f32b8fdeb15f7ab18ea9d19e7c93baf4c801fac59d44f5cf845e9935` |
+| `es-bo`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-BO` . | `sha256:f89c0e513f43800e1d19177384b815c1a04f5b07ccba8fd9c80aa5ebf5c71648` |
+| `es-cl`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-CL` . | `sha256:3ebc64dceb1b7fbef716de3736a020b23e8fb4e9aceb183524863681e0b278fe` |
+| `es-co`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-CO` . | `sha256:ba05465c312acf6b9a1a1866c81c795027470e8bda8389dd0fcb641c9f1af592` |
+| `es-cr`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-CR` . | `sha256:51d49d90f600ae971019974a6a38c71b3bf01a84301ee6e8604c3f424bc6773f` |
+| `es-cu`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-CU` . | `sha256:a19f0ab805d0268c06a0e83aad2dcab458638e8c2f7869f5b2315695ae2ea4d8` |
+| `es-do`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-DO` . | `sha256:a9539f091ec3feef34511ce9d337436151980eda69c7f8c8f2493e8d1be81e66` |
+| `es-ec`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-EC` . | `sha256:a0f5c19a683b92566747db79e30ac7ad09cde07bcb15451166b5257d036a86bc` |
+| `es-es`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-ES` . | `sha256:2aa5e82c726a8771c706a2de38bed09ca9c8298bb166c49fa227b8966011efa4` |
+| `es-gt`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-GT` . | `sha256:60361c1a305d0fef3deb0e4886c4044aebcf41878a748bc0615b94fcf9489cf9` |
+| `es-hn`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-HN` . | `sha256:d628b894966988880bb11f1ec1380702077bd45c2a83b912ae3e7451d8fd90cb` |
+| `es-mx`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-MX` . | `sha256:2bd901c320237e041ecca1ea34c359cf847cf8dacecfcb0e1ed8fd1794463fe5` |
+| `es-ni`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-NI` . | `sha256:099d21e5e5816d5d7e0965cda5878bfe78f5447e4994957dcc45ae40223b14b1` |
+| `es-pa`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-PA` . | `sha256:af6c258b7e984ee17d32b9dfc49969cfc1d7ee33aa2485017fab191d8d574e92` |
+| `es-pe`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-PE` . | `sha256:7d0e03c7f44f61b4632b730c2cf8e3d7c584a869bb5d53b9e5021549d1d500a8` |
+| `es-pr`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-PR` . | `sha256:ad580c1ac73d919434387869803d9fabec24e19afd6b4cc5aa7e809fb93dc908` |
+| `es-py`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-PY` . | `sha256:2e85df2af0003c0a41752c6e989ed8b724a22958e7ed3cbf67e54ca621bb5975` |
+| `es-sv`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-SV` . | `sha256:bae49ae543878096c1dd0c77a8f83a30ba1416605efa58dad59ca3577f7006ea` |
+| `es-us`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-US` . | `sha256:fd9deebe4e5a4466af439a8e40a1a39261a7b0228a4ed979b8086e1c65c60e26` |
+| `es-uy`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-UY` . | `sha256:0e69fc4689dafad97e00bed7c4eb7ca44b94e3a3d9357d6d36bed8135963e9e4` |
+| `es-ve`                     | Yerel ayara sahip kapsayıcı görüntüsü `es-VE` . | `sha256:37ebac38fac4306668858140736d83e008ae0756f8e1fe5ed6386780bc9796ba` |
+| `et-ee`                     | Yerel ayara sahip kapsayıcı görüntüsü `et-EE` . | `sha256:223d494cf64cdceaabe6e9bae82d378d7ea53eb8c01d58bdbd2e1ed360aaa34b` |
+| `fi-fi`                     | Yerel ayara sahip kapsayıcı görüntüsü `fi-FI` . | `sha256:378e5735198e38d6bed8c87a59ed69f8c3bd57ac8a462332d74dd8495cb07ed2` |
+| `fr-ca`                     | Yerel ayara sahip kapsayıcı görüntüsü `fr-CA` . | `sha256:d92f672c2a61a67db43d9884bc2692c304b3c2c5446bed2d315892876270366b` |
+| `fr-fr`                     | Yerel ayara sahip kapsayıcı görüntüsü `fr-FR` . | `sha256:11dc172c7ae91b6cba7fb4ab1a61e48b27b193bf434a68827eb197c0ba05d6fb` |
+| `ga-ie`                     | Yerel ayara sahip kapsayıcı görüntüsü `ga-IE` . | `sha256:3057eaaf8e0403690c0223c0db3a392b05f2ec45e53511327b8447912e32b8b4` |
+| `gu-in`                     | Yerel ayara sahip kapsayıcı görüntüsü `gu-IN` . | `sha256:37062edf6805dce30309e4615c2947dded730b5b5be7e3bcd85bb93e38b08f31` |
+| `hi-in`                     | Yerel ayara sahip kapsayıcı görüntüsü `hi-IN` . | `sha256:9f1bf1901a6b0e2caf4c9ff30e0b6bb3f1f4f814ad86fc62a471d4fe1fe4c101` |
+| `hr-hr`                     | Yerel ayara sahip kapsayıcı görüntüsü `hr-HR` . | `sha256:095b40ad1afeebd932c299410a4732fd64da2251230aa044ca2c43b4d0bb6791` |
+| `hu-hu`                     | Yerel ayara sahip kapsayıcı görüntüsü `hu-HU` . | `sha256:60e9257735cee7dc6cde1b5725588b1c1ea84f852220f1f4f3e873177a24fc5c` |
+| `it-it`                     | Yerel ayara sahip kapsayıcı görüntüsü `it-IT` . | `sha256:71c5e3a9196155678a6ad9cd62b812386579521ac410b40e3526dee153d749e1` |
+| `ja-jp`                     | Yerel ayara sahip kapsayıcı görüntüsü `ja-JP` . | `sha256:fce7d215575d2a94cdb4818bb1525f6448f5f881fc3e7f04274c64978bd6aaa7` |
+| `ko-kr`                     | Yerel ayara sahip kapsayıcı görüntüsü `ko-KR` . | `sha256:d71d8e1e3692bb0781e98b984dea79950a8009a6fa03e729325c338ca5c09a98` |
+| `lt-lt`                     | Yerel ayara sahip kapsayıcı görüntüsü `lt-LT` . | `sha256:dc2e35e158c09fd793b180050a0100df4a3716da4d0a7a528dc3ea65b6ecf21b` |
+| `lv-lv`                     | Yerel ayara sahip kapsayıcı görüntüsü `lv-LV` . | `sha256:e6ab373eb9477d90d44175fffb646298d403405633e0a61ccf20f9e7381243b8` |
+| `mr-in`                     | Yerel ayara sahip kapsayıcı görüntüsü `mr-IN` . | `sha256:0ce15c2d14bba49639adea30c91df1ac47e7b2a7796be551276bad8ec8312ed4` |
+| `mt-mt`                     | Yerel ayara sahip kapsayıcı görüntüsü `mt-MT` . | `sha256:bbe958ff9c7c51efc6521866173b26ac2cfe682d114ce3ed6b1f6b8e9b3a7327` |
+| `nb-no`                     | Yerel ayara sahip kapsayıcı görüntüsü `nb-NO` . | `sha256:4e4d890605e09717ef88982f586611c605342465a8ef81f2280f665ad1378522` |
+| `nl-nl`                     | Yerel ayara sahip kapsayıcı görüntüsü `nl-NL` . | `sha256:60bd2d1f817019e6626876b15f5697be07c3b2b368e4cc7e3c3871c3e9181052` |
+| `pl-pl`                     | Yerel ayara sahip kapsayıcı görüntüsü `pl-PL` . | `sha256:c8520e7155ef176fb9fea48c541acae995a6a80ba6913ac4289786ee55062ce6` |
+| `pt-br`                     | Yerel ayara sahip kapsayıcı görüntüsü `pt-BR` . | `sha256:c8440308a5cb77791f33ae458c49abc084a1be8c418df9feeda9a4aa917a59bc` |
+| `pt-pt`                     | Yerel ayara sahip kapsayıcı görüntüsü `pt-PT` . | `sha256:a66739b36a410c181ccd2205c59fee2726b3905d1c5ba4531909be96cf85a55c` |
+| `ro-ro`                     | Yerel ayara sahip kapsayıcı görüntüsü `ro-RO` . | `sha256:c4ba7ff5c11d4243a3e128aca1f8110e62df82d956706c97c237016a94cb485f` |
+| `ru-ru`                     | Yerel ayara sahip kapsayıcı görüntüsü `ru-RU` . | `sha256:c3fc4117598c0dcea0fd5e6f19adf7763e42732e32e3ac93ff74795fdc167e67` |
+| `sk-sk`                     | Yerel ayara sahip kapsayıcı görüntüsü `sk-SK` . | `sha256:78bcfa610f645c113134cc24c8af8dd3c630065c1b009fb5e36dfab4999c16fb` |
+| `sl-si`                     | Yerel ayara sahip kapsayıcı görüntüsü `sl-SI` . | `sha256:134eb68c900787bae3a98a2bdf192f2a5460fb96b92590d65765d982245a7ccf` |
+| `sv-se`                     | Yerel ayara sahip kapsayıcı görüntüsü `sv-SE` . | `sha256:d194aaefe82a5f91df9e01beec271ad9565c4d36cb0539421e947b5c8e67228d` |
+| `ta-in`                     | Yerel ayara sahip kapsayıcı görüntüsü `ta-IN` . | `sha256:cf272b112b10587c034f00f7df2bfcdefbf542859fa089c15581040db99ed383` |
+| `te-in`                     | Yerel ayara sahip kapsayıcı görüntüsü `te-IN` . | `sha256:7364a1068f9940e9bb6ea5476b0a007a37d42b899dc4ba56be833e4d2b8d359d` |
+| `th-th`                     | Yerel ayara sahip kapsayıcı görüntüsü `th-TH` . | `sha256:21ce33714fa37bfede60560a7a24c17c88566c767b76c58c877a48c51811c9ac` |
+| `tr-tr`                     | Yerel ayara sahip kapsayıcı görüntüsü `tr-TR` . | `sha256:b97035a4f0334f890ff3630a2de249b72a879de3c7d4fcc849c3d76aa97f4d2e` |
+| `zh-cn`                     | Yerel ayara sahip kapsayıcı görüntüsü `zh-CN` . | `sha256:ae4a89a26768c978d91ed797e9ecb8035fdb61f12c1b1124c86939c79ddcb38e` |
+| `zh-hk`                     | Yerel ayara sahip kapsayıcı görüntüsü `zh-HK` . | `sha256:41bc980abe79cd69034a8ade2be203478b531a00f5e74b1f7b8f9c5267700261` |
+| `zh-tw`                     | Yerel ayara sahip kapsayıcı görüntüsü `zh-TW` . | `sha256:51a50a7fcd5a9db6422235a2df0e8fba360efcd3cefee9abe44ab2cdce62088f` |
+
+
+# <a name="previous-version"></a>[Önceki sürüm](#tab/previous)
+
 İçin sürüm notunun `2.10.0-amd64-<locale>` :
 
 **Özellik**
 * En son modellere yükseltin.
 
+İçin sürüm notunun `2.9.0-amd64-<locale>` :
+
+**Özellik**
+* KIMLIĞE göre özel modeller getirilirken oluşan sorunlar için daha fazla hata ayrıntısı.
+* Varsayım, konuşma sonuçlarında varsayılan olarak desteklenir.
+
+İçin sürüm notunun `2.7.0-amd64-<locale>` :
+
+**Özellikler**
+* Aşağıdaki yeni yerel ayarlar için destek:
+    * AR-BH, AR-IQ, AR-Jo, AR-lb, AR-OM, AR-Sy
+    * bg-bg
+    * el-gr
+    * En-HK, en-ie, en-pH, en-SG, en-za
+    * es-ar, es-Bo, es-CL, es-Co, es-k, es-CL, es-i, es-u, es-cu, es-do, es-EC, es-gt, es-pa, es-PE, es-PR
+    * et-ee
+    * ga-IE
+    * hr-hr
+    * hu-hu
+    * lt-lt
+    * lv-lv
+    * MT-MT
+    * ro-ro
+    * sk-sk
+    * SL-SL
+* Noktalama işaretleri varsayılan olarak etkindir.
+
 Dahil edilen tümcecik listeleri nedeniyle bu kapsayıcı görüntüsünün boyutunun arttığı unutulmamalıdır. 
 
-| Resim etiketleri                    | Notlar                                                                                                |
-|-------------------------------|:-----------------------------------------------------------------------------------------------------|
-| `latest`                      | Yerel ayara sahip kapsayıcı görüntüsü `en-US` .                                                             |
-| `2.10.0-amd64-<locale>`       | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.10.0-amd64-en-us`.|
+İçin sürüm notunun `2.6.0-amd64-<locale>` :
+
+**Özellikler**
+* En son modellere yükseltildi ve tamamen .NET 3,1 'e geçirildi
+* PhraseList v2 desteği
+* Tümcecik listeleri aşağıdaki yerel ayarlarda desteklenir:
+    * En-au
+    * en-CA
+    * en-GB
+    * En-ın
+    * tr-tr
+    * zh-cn
+* Yeni yerel ayar desteği `cs-CZ` 
+    * Büyük harfler ve noktalama işaretleri Şu anda desteklenmiyor.
+
+**Düzeltilen**
+* Güven puanlarının her zaman bir artırma modunda 1 olduğu bir sorunu düzeltir
+* Geçirilmiş TextAnalytics 3,0 API 'sini kullanın
+
+Dahil edilen tümcecik listeleri nedeniyle bu kapsayıcı görüntüsünün boyutunun arttığı unutulmamalıdır. 
+
+İçin sürüm notunun `2.5.0-amd64-<locale>` :
+
+**Özellikler**
+* Azure US kamu bulutu desteği
+
+**Düzeltilen**
+* Kök olmayan kullanıcı olarak çalışırken bir sorunu düzeltme modunda düzeltir
+
+| Resim etiketleri                  | Notlar                                    |
+|-----------------------------|:-----------------------------------------|
+| `2.10.0-amd64-<locale>`     | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.10.0-amd64-en-us`.|
+| `2.9.0-amd64-<locale>`      | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.9.0-amd64-en-us`. |
+| `2.7.0-amd64-<locale>`      | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.7.0-amd64-en-us`. |
+| `2.6.0-amd64-<locale>`      | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.6.0-amd64-en-us`. |
+| `2.5.0-amd64-<locale>`      | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.5.0-amd64-en-us`. |
+
 
 Bu kapsayıcıda aşağıdaki yerel ayarlar var.
 
@@ -375,77 +557,6 @@ Bu kapsayıcıda aşağıdaki yerel ayarlar var.
 | `zh-cn`                     | Yerel ayara sahip kapsayıcı görüntüsü `zh-CN` . | `sha256:9087a08cc455772515f5775a788cdde35d7f5bbe3aa3ba34ae99573fd87b29a1` |
 | `zh-hk`                     | Yerel ayara sahip kapsayıcı görüntüsü `zh-HK` . | `sha256:372e1c256520e9ee84c4c400eae935c1d6b1d59adb2be4c4dbc56439db069ba0` |
 | `zh-tw`                     | Yerel ayara sahip kapsayıcı görüntüsü `zh-TW` . | `sha256:8406a3be34530c7d654d1dfa1c593dd51b8946b480fe80a100e599e86385dc2b` |
-
-
-# <a name="previous-version"></a>[Önceki sürüm](#tab/previous)
-
-İçin sürüm notunun `2.9.0-amd64-<locale>` :
-
-**Özellik**
-* KIMLIĞE göre özel modeller getirilirken oluşan sorunlar için daha fazla hata ayrıntısı.
-* Varsayım, konuşma sonuçlarında varsayılan olarak desteklenir.
-
-İçin sürüm notunun `2.7.0-amd64-<locale>` :
-
-**Özellikler**
-* Aşağıdaki yeni yerel ayarlar için destek:
-    * AR-BH, AR-IQ, AR-Jo, AR-lb, AR-OM, AR-Sy
-    * bg-bg
-    * el-gr
-    * En-HK, en-ie, en-pH, en-SG, en-za
-    * es-ar, es-Bo, es-CL, es-Co, es-k, es-CL, es-i, es-u, es-cu, es-do, es-EC, es-gt, es-pa, es-PE, es-PR
-    * et-ee
-    * ga-IE
-    * hr-hr
-    * hu-hu
-    * lt-lt
-    * lv-lv
-    * MT-MT
-    * ro-ro
-    * sk-sk
-    * SL-SL
-* Noktalama işaretleri varsayılan olarak etkindir.
-
-Dahil edilen tümcecik listeleri nedeniyle bu kapsayıcı görüntüsünün boyutunun arttığı unutulmamalıdır. 
-
-İçin sürüm notunun `2.6.0-amd64-<locale>` :
-
-**Özellikler**
-* En son modellere yükseltildi ve tamamen .NET 3,1 'e geçirildi
-* PhraseList v2 desteği
-* Tümcecik listeleri aşağıdaki yerel ayarlarda desteklenir:
-    * En-au
-    * en-CA
-    * en-GB
-    * En-ın
-    * tr-tr
-    * zh-cn
-* Yeni yerel ayar desteği `cs-CZ` 
-    * Büyük harfler ve noktalama işaretleri Şu anda desteklenmiyor.
-
-**Düzeltilen**
-* Güven puanlarının her zaman bir artırma modunda 1 olduğu bir sorunu düzeltir
-* Geçirilmiş TextAnalytics 3,0 API 'sini kullanın
-
-Dahil edilen tümcecik listeleri nedeniyle bu kapsayıcı görüntüsünün boyutunun arttığı unutulmamalıdır. 
-
-İçin sürüm notunun `2.5.0-amd64-<locale>` :
-
-**Özellikler**
-* Azure US kamu bulutu desteği
-
-**Düzeltilen**
-* Kök olmayan kullanıcı olarak çalışırken bir sorunu düzeltme modunda düzeltir
-
-| Resim etiketleri                  | Notlar                                    |
-|-----------------------------|:-----------------------------------------|
-| `2.9.0-amd64-<locale>`      | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.9.0-amd64-en-us`. |
-| `2.7.0-amd64-<locale>`      | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.7.0-amd64-en-us`. |
-| `2.6.0-amd64-<locale>`      | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.6.0-amd64-en-us`. |
-| `2.5.0-amd64-<locale>`      | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `2.5.0-amd64-en-us`. |
-
-
-Bu kapsayıcıda aşağıdaki yerel ayarlar var.
 
 | V 2.9.0 için yerel ayar           | Notlar                                    | Bilgisi                                                                    |
 |-----------------------------|:-----------------------------------------|:--------------------------------------------------------------------------|
@@ -713,7 +824,7 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 
 # <a name="latest-version"></a>[En son sürüm](#tab/current)
 
-İçin sürüm notunun `1.12.0-amd64-<locale-and-voice>` :
+İçin sürüm notunun `1.13.0-amd64-<locale-and-voice>` :
 
 **Özellik**
 * En son modellere yükseltin.
@@ -721,7 +832,128 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 | Resim etiketleri                                  | Notlar                                                                                                         |
 |---------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
 | `latest`                                    | `en-US`Yerel ayar ve `en-US-AriaRUS` sesle kapsayıcı görüntüsü.                                            | 
+| `1.13.0-amd64-<locale-and-voice>`           | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.13.0-amd64-en-us-ariarus`. |
+
+| V 1.13.0 için yerel ayarlar                         | Notlar                                                                      | Bilgisi                         |
+|---------------------------------------------|:---------------------------------------------------------------------------|:-------------------------------|
+| `ar-eg-hoda`                                | `ar-EG`Yerel ayar ve `ar-EG-Hoda` sesle kapsayıcı görüntüsü.            | `sha256:8ff6360ba584d81b987582ce1c2cb6bb624cf68e4d71544805b9afc0401542dd` |
+| `ar-sa-naayf`                               | `ar-SA`Yerel ayar ve `ar-SA-Naayf` sesle kapsayıcı görüntüsü.           | `sha256:da5037de95c00362cb1871374735778c3eb68640ae4cb6a260659e7e0a67c37e` |
+| `bg-bg-ivan`                                | `bg-BG`Yerel ayar ve `bg-BG-Ivan` sesle kapsayıcı görüntüsü.            | `sha256:871140e57c126ac79c92c69572b86587150d1f14447c91152de3d4b10b3ef9f6` |
+| `ca-es-herenarus`                           | `ca-ES`Yerel ayar ve `ca-ES-HerenaRUS` sesle kapsayıcı görüntüsü.       | `sha256:7291ca9c579b1967cca941ce11321daa06ed6a9a1f0922d425d39f70a4aa8acd` |
+| `cs-cz-jakub`                               | `cs-CZ`Yerel ayar ve `cs-CZ-Jakub` sesle kapsayıcı görüntüsü.           | `sha256:c8f34c3a7fc5af5141da5439b520614e039d133b6180e8157f12ec7279e9163a` |
+| `da-dk-hellerus`                            | `da-DK`Yerel ayar ve `da-DK-HelleRUS` sesle kapsayıcı görüntüsü.        | `sha256:694eb294595700266355f8d57530ec3cccd4e04aa74dd630b96558bf2b481e71` |
+| `de-at-michael`                             | `de-AT`Yerel ayar ve `de-AT-Michael` sesle kapsayıcı görüntüsü.         | `sha256:f875435d8fadb56df2123d5aa1ceca34990d00f4c75678eb2526b83058972717` |
+| `de-ch-karsten`                             | `de-CH`Yerel ayar ve `de-CH-Karsten` sesle kapsayıcı görüntüsü.         | `sha256:c58359bd6e6676e23dda181a86caee1771366b0329a44fae0f363bbd381058ad` |
+| `de-de-heddarus`                            | `de-DE`Yerel ayar ve `de-DE-Hedda` sesle kapsayıcı görüntüsü.           | `sha256:c8e615d40c6e96216b90e329bf7185060de646db1e92fd1fdcd344a52bd86b55` |
+| `de-de-hedda`                               | `de-DE`Yerel ayar ve `de-DE-Hedda` sesle kapsayıcı görüntüsü.           | `sha256:c8e615d40c6e96216b90e329bf7185060de646db1e92fd1fdcd344a52bd86b55` |
+| `de-de-stefan-apollo`                       | `de-DE`Yerel ayar ve `de-DE-Stefan-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:e8e3f04f0ee74d4247ffb7c69e54559f0cc6db66a121406e06ceb9dcdc3c4379` |
+| `el-gr-stefanos`                            | `el-GR`Yerel ayar ve `el-GR-Stefanos` sesle kapsayıcı görüntüsü.        | `sha256:15112a55bc7ccb6c29ee0a1de464fa6352a0e9953399032e5c8a0d29ec064af0` |
+| `en-au-catherine`                           | `en-AU`Yerel ayar ve `en-AU-Catherine` sesle kapsayıcı görüntüsü.       | `sha256:9a77bb5451889f62b8a146bfcc4a412c1cef95fd2102650528ccee84a08b25b8` |
+| `en-au-hayleyrus`                           | `en-AU`Yerel ayar ve `en-AU-HayleyRUS` sesle kapsayıcı görüntüsü.       | `sha256:90ee1094fbb8e739788545b3b9f4fabad5b4dffb5b7087cfd01c3b21ba1b2473` |
+| `en-ca-heatherrus`                          | `en-CA`Yerel ayar ve `en-CA-HeatherRUS` sesle kapsayıcı görüntüsü.      | `sha256:43b7d3c87162129253fd5c150307a5d9dc6ea28b8fa19776b66f4aa7a546f43b` |
+| `en-ca-linda`                               | `en-CA`Yerel ayar ve `en-CA-Linda` sesle kapsayıcı görüntüsü.           | `sha256:75a4423d5b24136efdc5de28a7a5b50a3a09b65b3824f86dd50a95eefea7ead6` |
+| `en-gb-george-apollo`                       | `en-GB`Yerel ayar ve `en-GB-George-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:87e926f7db4a27870c735c80ad801bc5480fb2665594727ae760c8c287677088` |
+| `en-gb-hazelrus`                            | `en-GB`Yerel ayar ve `en-GB-HazelRUS` sesle kapsayıcı görüntüsü.        | `sha256:3fbd6a824831f158762036aa41c0397f7c1148150a4dc045db5f19ba840e74b6` |
+| `en-gb-susan-apollo`                        | `en-GB`Yerel ayar ve `en-GB-Susan-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:646810c4129f8919ff56d91701b488e229bd12b3dd9c89a1635868f9340e00b8` |
+| `en-ie-sean`                                | `en-IE`Yerel ayar ve `en-IE-Sean` sesle kapsayıcı görüntüsü.            | `sha256:641abfa96380f142d4b2f9145cd02886d44f01bce68614094b48c1e01b50ed59` |
+| `en-in-heera-apollo`                        | `en-IN`Yerel ayar ve `en-IN-Heera-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:c0acfffceae9c1ff5ad305d8b98929d9c65eca25f49ddcb8999d7de6118392d2` |
+| `en-in-priyarus`                            | `en-IN`Yerel ayar ve `en-IN-PriyaRUS` sesle kapsayıcı görüntüsü.        | `sha256:fbdc9ef0b4308ffce87d6ff6854814804b3cafacad6c4dc5cdac6a47c6de7975` |
+| `en-in-ravi-apollo`                         | `en-IN`Yerel ayar ve `en-IN-Ravi-Apollo` sesle kapsayıcı görüntüsü.     | `sha256:f31c40c9db2f1e826686649e748d0b2be0c00abcac62c2aae5b8981b0d8c681d` |
+| `en-us-aria24krus`                          | `en-US`Yerel ayar ve `en-US-Aria24kRUS` sesle kapsayıcı görüntüsü.      | `sha256:1232b798aae3ce68d1e555a5b35142bde5b4c871488f8c82c3d7c0767925afd8` |
+| `en-us-ariarus`                             | `en-US`Yerel ayar ve `en-US-AriaRUS` sesle kapsayıcı görüntüsü.         | `sha256:1232b798aae3ce68d1e555a5b35142bde5b4c871488f8c82c3d7c0767925afd8` |
+| `en-us-benjaminrus`                         | `en-US`Yerel ayar ve `en-US-BenjaminRUS` sesle kapsayıcı görüntüsü.     | `sha256:5fd7e9fbcc84ab467d04e95b18f5411579ce2d9a153b7f6e396f2412d08898dc` |
+| `en-us-guy24krus`                           | `en-US`Yerel ayar ve `en-US-Guy24kRUS` sesle kapsayıcı görüntüsü.       | `sha256:5fbbd16ab58b7f2440778b258bb0cd966286de0dbb3ce7f5e54d0f244f63dd3f` |
+| `en-us-zirarus`                             | `en-US`Yerel ayar ve `en-US-ZiraRUS` sesle kapsayıcı görüntüsü.         | `sha256:806b92916b2fe1e7855023a009742033a48cb7eddde84ddf7c93be93b9621026` |
+| `es-es-helenarus`                           | `es-ES`Yerel ayar ve `es-ES-HelenaRUS` sesle kapsayıcı görüntüsü.       | `sha256:507d9f40dcb846a5d1511a5e9e1cf94b360b1d9922f4b1143c3146d1b3bc69a2` |
+| `es-es-laura-apollo`                        | `es-ES`Yerel ayar ve `es-ES-Laura-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:594add691d03d02fa5925f817e6a25c091fac1a924e0ea4b626e0fce858a78cb` |
+| `es-es-pablo-apollo`                        | `es-ES`Yerel ayar ve `es-ES-Pablo-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:09d288b58fea080689471618227d1cb3ccc467f2edc9477eaaffffb09b3d6d8b` |
+| `es-mx-hildarus`                            | `es-MX`Yerel ayar ve `es-MX-HildaRUS` sesle kapsayıcı görüntüsü.        | `sha256:7019c80c88444a60bf1016eb66284745dc8184b051685df4a1b3c40d32c8ad7f` |
+| `es-mx-raul-apollo`                         | `es-MX`Yerel ayar ve `es-MX-Raul-Apollo` sesle kapsayıcı görüntüsü.     | `sha256:eed46588733b884c330fff1ff7f4e3e3fd6416cb340ebd80e44c4b3d1e085e55` |
+| `fi-fi-heidirus`                            | `fi-FI`Yerel ayar ve `fi-FI-HeidiRUS` sesle kapsayıcı görüntüsü.        | `sha256:00f7a854c4a01bdbef88e0b138c97f732f1c6008a8b2c1722fc8da3a91fa79a4` |
+| `fr-ca-caroline`                            | `fr-CA`Yerel ayar ve `fr-CA-Caroline` sesle kapsayıcı görüntüsü.        | `sha256:5f32e838a0925c560d2961a42487b99dd7e79e04661a7711f905d36c55973fd6` |
+| `fr-ca-harmonierus`                         | `fr-CA`Yerel ayar ve `fr-CA-HarmonieRUS` sesle kapsayıcı görüntüsü.     | `sha256:6f3d3237c990f8f04d4c8f488746f74fa94edd2c5f1def758af90b2be251900e` |
+| `fr-ch-guillaume`                           | `fr-CH`Yerel ayar ve `fr-CH-Guillaume` sesle kapsayıcı görüntüsü.       | `sha256:282e2e48c1147b74d927e801534be52b1301a081ff881994e85bb9d85b6e85fb` |
+| `fr-fr-hortenserus`                         | `fr-FR`Yerel ayar ve `fr-FR-HortenseRUS` sesle kapsayıcı görüntüsü.     | `sha256:16370c22530c93fc6c5ebeaf10663de7c3d45db58eccc716abd5274b5bee56d3` |
+| `fr-fr-julie-apollo`                        | `fr-FR`Yerel ayar ve `fr-FR-Julie-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:e6541e82b8555f748f1feb5eef1c0ebf884245c5448f0ced46e6f25dabb925a2` |
+| `fr-fr-paul-apollo`                         | `fr-FR`Yerel ayar ve `fr-FR-Paul-Apollo` sesle kapsayıcı görüntüsü.     | `sha256:a4cf0bab208a31da3e796bf353969dfd98184b30e0cf713df49cb4fb07ff568b` |
+| `he-il-asaf`                                | `he-IL`Yerel ayar ve `he-IL-Asaf` sesle kapsayıcı görüntüsü.            | `sha256:4417d0a14098b564eb4ba91772eb7ad5976ac52b0b59ae484fc3a88017e0776b` |
+| `hi-in-hemant`                              | `hi-IN`Yerel ayar ve `hi-IN-Hemant` sesle kapsayıcı görüntüsü.          | `sha256:da086a3e2bc3e17f4e44165055fc61679e9356688d3735ee8cfd81e6265b8622` |
+| `hi-in-kalpana-apollo`                      | `hi-IN`Yerel ayar ve `hi-IN-Kalpana-Apollo` sesle kapsayıcı görüntüsü.  | `sha256:0c9915bf34e3045e39aa245c597aa7223fbf6100d7e20cbcc1bf131f89ee785e` |
+| `hi-in-kalpana`                             | `hi-IN`Yerel ayar ve `hi-IN-Kalpana` sesle kapsayıcı görüntüsü.         | `sha256:0c9915bf34e3045e39aa245c597aa7223fbf6100d7e20cbcc1bf131f89ee785e` |
+| `hr-hr-matej`                               | `hr-HR`Yerel ayar ve `hr-HR-Matej` sesle kapsayıcı görüntüsü.           | `sha256:fc08c968efe882ed11ad0ee0755a9d43eff88b96da8ec19e7a5c071810c84d8c` |
+| `hu-hu-szabolcs`                            | `hu-HU`Yerel ayar ve `hu-HU-Szabolcs` sesle kapsayıcı görüntüsü.        | `sha256:b6ad73f07efd1576e166b4d7e54a4ff419bfedc513a175fbb968389eb289a4ee` |
+| `id-id-andika`                              | `id-ID`Yerel ayar ve `id-ID-Andika` sesle kapsayıcı görüntüsü.          | `sha256:3aad5ccf0c155593934c29a3e50502bc80b0370fa29626e67cda141d4bf5ac89` |
+| `it-it-cosimo-apollo`                       | `it-IT`Yerel ayar ve `it-IT-Cosimo-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:01502f274bad378e6e99bed5f80fdb476880ce04e8775ca56d338de2f2d43e8c` |
+| `it-it-luciarus`                            | `it-IT`Yerel ayar ve `it-IT-LuciaRUS` sesle kapsayıcı görüntüsü.        | `sha256:fdc20724194612d99e8339d25c72c7fe937ad741abe46d86def6c62880913c2a` |
+| `ja-jp-ayumi-apollo`                        | `ja-JP`Yerel ayar ve `ja-JP-Ayumi-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:abf0e442ec972e25743a8af55da49a6fd5bf2ffd6ca09619d68e4dc9f9db779a` |
+| `ja-jp-harukarus`                           | `ja-JP`Yerel ayar ve `ja-JP-HarukaRUS` sesle kapsayıcı görüntüsü.       | `sha256:9eff152cd4bea6f9de3b101c0704f37c8a061e060287e3f9f8fc2eb28d7dcec7` |
+| `ja-jp-ichiro-apollo`                       | `ja-JP`Yerel ayar ve `ja-JP-Ichiro-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:83aa3c569f7598843d4957f075915ac2635d3aaf577ac1158c12a1238dd7e148` |
+| `ko-kr-heamirus`                            | `ko-KR`Yerel ayar ve `ko-KR-HeamiRUS` sesle kapsayıcı görüntüsü.        | `sha256:ea404c7857f9df0a23cbf3fac12ae00f11c32a6822d91078a321302f09f01082` |
+| `ms-my-rizwan`                              | `ms-MY`Yerel ayar ve `ms-MY-Rizwan` sesle kapsayıcı görüntüsü.          | `sha256:d4c15f7da8e03650395489b6cb6975d59322b1bbd2c59957617f0c0a297409ee` |
+| `nb-no-huldarus`                            | `nb-NO`Yerel ayar ve `nb-NO-HuldaRUS` sesle kapsayıcı görüntüsü.        | `sha256:cb2c0fb57513c66e00bd6b8cbb44882d5bb7d483c19784d2b1e09511d58842bc` |
+| `nl-nl-hannarus`                            | `nl-NL`Yerel ayar ve `nl-NL-HannaRUS` sesle kapsayıcı görüntüsü.        | `sha256:7b9a92ab8a9856f422e65b428b845571a059c0923dc1c348134f271ed7a4abe0` |
+| `pl-pl-paulinarus`                          | `pl-PL`Yerel ayar ve `pl-PL-PaulinaRUS` sesle kapsayıcı görüntüsü.      | `sha256:cface74973368a78d75a2a079214aa748574c5f037b0c4189888269b6016f230` |
+| `pt-br-daniel-apollo`                       | `pt-BR`Yerel ayar ve `pt-BR-Daniel-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:cc3e74228002b8d4e7dc487ff6f930316ac5d7a93f97937942a23f41b484ba8c` |
+| `pt-br-heloisarus`                          | `pt-BR`Yerel ayar ve `pt-BR-HeloisaRUS` sesle kapsayıcı görüntüsü.      | `sha256:dca613867e2f559d9485f9ba553ecea3de6d4b2779d4eed0ce1e53e7f7939773` |
+| `pt-pt-heliarus`                            | `pt-PT`Yerel ayar ve `pt-PT-HeliaRUS` sesle kapsayıcı görüntüsü.        | `sha256:791ac2b3100725f909cfeceb17fc0d5fd1022242db45ba455d7ea088d76ac033` |
+| `ro-ro-andrei`                              | `ro-RO`Yerel ayar ve `ro-RO-Andrei` sesle kapsayıcı görüntüsü.          | `sha256:3b93df188bcbdf9416d203a7e30ade8908728316666cd3451a5f0320cdf219a9` |
+| `ru-ru-ekaterinarus`                        | `ru-RU`Yerel ayar ve `ru-RU-EkaterinaRUS` sesle kapsayıcı görüntüsü.    | `sha256:d2f636e35e67be196a4ad79f168e4df74d2f00d5b5c6123bd61f9aec72bfd1a7` |
+| `ru-ru-irina-apollo`                        | `ru-RU`Yerel ayar ve `ru-RU-Irina-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:247a4c6025faced1be1738d816c1bb74b23bbc5d49458f9afe95dc32ab3ea71c` |
+| `ru-ru-pavel-apollo`                        | `ru-RU`Yerel ayar ve `ru-RU-Pavel-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:355c3a0f64f003d0a041a757b8ddcdea8130b6a56a7c4003a68ba0412400c446` |
+| `sk-sk-filip`                               | `sk-SK`Yerel ayar ve `sk-SK-Filip` sesle kapsayıcı görüntüsü.           | `sha256:55fff1cde012a7791c756104ba68a360e609a765bd776024a9f5f00199f568e5` |
+| `sl-si-lado`                                | `sl-SI`Yerel ayar ve `sl-SI-Lado` sesle kapsayıcı görüntüsü.            | `sha256:7f80965dde85e3a5aae9f69561c296d073289f0b6aa37e95ff0aa5192a5b7f90` |
+| `sv-se-hedvigrus`                           | `sv-SE`Yerel ayar ve `sv-SE-HedvigRUS` sesle kapsayıcı görüntüsü.       | `sha256:1bd43f513a5b2752c44a107e1898459cdda5d7267ec21f379679d411700e5189` |
+| `ta-in-valluvar`                            | `ta-IN`Yerel ayar ve `ta-IN-Valluvar` sesle kapsayıcı görüntüsü.        | `sha256:8062e2479a6a3dc17b8342c07a94a39dd1e1f788c1def0a1ab55a885b491bbab` |
+| `te-in-chitra`                              | `te-IN`Yerel ayar ve `te-IN-Chitra` sesle kapsayıcı görüntüsü.          | `sha256:6ce345df654bd1db213c16c866b608037dcefb1d056fc14727db3b9e21437762` |
+| `th-th-pattara`                             | `th-TH`Yerel ayar ve `th-TH-Pattara` sesle kapsayıcı görüntüsü.         | `sha256:9b9c8ad7f8621f887f3e9fda26f43995855dba76831fdf2598ef383cf3d20f39` |
+| `tr-tr-sedarus`                             | `tr-TR`Yerel ayar ve `tr-TR-SedaRUS` sesle kapsayıcı görüntüsü.         | `sha256:2e45f019df702d8788c1d9c20ff75cfd94aecaaf6facb9f41b642ef1bfe7d318` |
+| `vi-vn-an`                                  | `vi-VN`Yerel ayar ve `vi-VN-An` sesle kapsayıcı görüntüsü.              | `sha256:3b142a414ff9f30ebef144e22bf979589600f226442d2f882384695795739178` |
+| `zh-cn-huihuirus`                           | `zh-CN`Yerel ayar ve `zh-CN-HuihuiRUS` sesle kapsayıcı görüntüsü.       | `sha256:23b76501492c9b60e8888eda2f6b0258859f68ed6ff7fb49bacbb18cd5f542ed` |
+| `zh-cn-kangkang-apollo`                     | `zh-CN`Yerel ayar ve `zh-CN-Kangkang-Apollo` sesle kapsayıcı görüntüsü. | `sha256:e9acc58168f6800d9dd11cbc569c9d279ecf28f3d17c702528d25f67edd447c9` |
+| `zh-cn-yaoyao-apollo`                       | `zh-CN`Yerel ayar ve `zh-CN-Yaoyao-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:85e7d7ae77d41195de5102b772621ef34564d40fad224a0ed21a8fe8daf98b0f` |
+| `zh-hk-danny-apollo`                        | `zh-HK`Yerel ayar ve `zh-HK-Danny-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:1fcba05138c0e5bf36447530311800e2d4044824b5d893439a12f3ebc6380135` |
+| `zh-hk-tracy-apollo`                        | `zh-HK`Yerel ayar ve `zh-HK-Tracy-Apollo` sesle kapsayıcı görüntüsü.    | `sha256:d02bd8759e085abbc95725aa4f70f124c4505aa0856a17696a1555b2cf64512e` |
+| `zh-hk-tracyrus`                            | `zh-HK`Yerel ayar ve `zh-HK-TracyRUS` sesle kapsayıcı görüntüsü.        | `sha256:d02bd8759e085abbc95725aa4f70f124c4505aa0856a17696a1555b2cf64512e` |
+| `zh-tw-hanhanrus`                           | `zh-TW`Yerel ayar ve `zh-TW-HanHanRUS` sesle kapsayıcı görüntüsü.       | `sha256:a3f68538088b5b07f4dc27239fa3a6308d949c2643638634c74f3ee132bca911` |
+| `zh-tw-yating-apollo`                       | `zh-TW`Yerel ayar ve `zh-TW-Yating-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:bb0696685f3a90fe6898ff1487cb0c5957e02f3c63cdb7d02394b5c061339bf3` |
+| `zh-tw-zhiwei-apollo`                       | `zh-TW`Yerel ayar ve `zh-TW-Zhiwei-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:1772b3bc8b166f429356b00d07ca438202c75d578b6d1655351b9c1e06ae1424` |
+
+
+# <a name="previous-version"></a>[Önceki sürüm](#tab/previous)
+
+İçin sürüm notunun `1.12.0-amd64-<locale-and-voice>` :
+
+**Özellik**
+* En son modellere yükseltin.
+
+İçin sürüm notunun `1.11.0-amd64-<locale-and-voice>` :
+
+**Özellik**
+* KIMLIĞE göre özel modeller getirilirken oluşan sorunlar için daha fazla hata ayrıntısı.
+
+İçin sürüm notunun `1.9.0-amd64-<locale-and-voice>` :
+
+* Normal aylık yayın
+
+İçin sürüm notunun `1.8.0-amd64-<locale-and-voice>` :
+
+**Özellik**
+
+* .NET 3,1 'ye tam olarak geçirildi
+
+İçin sürüm notunun `1.7.0-amd64-<locale-and-voice>` :
+
+**Özellik**
+
+* Bileşenler .NET 3,1 'ye yükseltildi
+
+| Resim etiketleri                                  | Notlar                                                                                                         |
+|---------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
 | `1.12.0-amd64-<locale-and-voice>`           | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.12.0-amd64-en-us-ariarus`. |
+| `1.11.0-amd64-<locale-and-voice>`           | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.11.0-amd64-en-us-ariarus`. |
+| `1.9.0-amd64-<locale-and-voice>`            | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.9.0-amd64-en-us-ariarus`.  |
+| `1.8.0-amd64-<locale-and-voice>`            | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.8.0-amd64-en-us-ariarus`.  |
+| `1.7.0-amd64-<locale-and-voice>`            | 1. GA sürümü. `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.7.0-amd64-en-us-ariarus`.  |
 
 | V 1.12.0 için yerel ayarlar                         | Notlar                                                                      | Bilgisi                         |
 |---------------------------------------------|:---------------------------------------------------------------------------|:-------------------------------|
@@ -806,37 +1038,6 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 | `zh-tw-hanhanrus`                           | `zh-TW`Yerel ayar ve `zh-TW-HanHanRUS` sesle kapsayıcı görüntüsü.       | `sha256:9802fc4a9656063cb9f215ca757db5289960d323244272ce280db0395ddd46ac` |
 | `zh-tw-yating-apollo`                       | `zh-TW`Yerel ayar ve `zh-TW-Yating-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:05f50dffbeb17e4215a5a53cc0791d825b63bc1e2b007b00797e5d0e1b1d6d1e` |
 | `zh-tw-zhiwei-apollo`                       | `zh-TW`Yerel ayar ve `zh-TW-Zhiwei-Apollo` sesle kapsayıcı görüntüsü.   | `sha256:e96f4aecba6e3c0741218f3e1aec35e53147b12543be9fdcd76ff98d4c34cf84` |
-
-
-# <a name="previous-version"></a>[Önceki sürüm](#tab/previous)
-
-İçin sürüm notunun `1.11.0-amd64-<locale-and-voice>` :
-
-**Özellik**
-* KIMLIĞE göre özel modeller getirilirken oluşan sorunlar için daha fazla hata ayrıntısı.
-
-İçin sürüm notunun `1.9.0-amd64-<locale-and-voice>` :
-
-* Normal aylık yayın
-
-İçin sürüm notunun `1.8.0-amd64-<locale-and-voice>` :
-
-**Özellik**
-
-* .NET 3,1 'ye tam olarak geçirildi
-
-İçin sürüm notunun `1.7.0-amd64-<locale-and-voice>` :
-
-**Özellik**
-
-* Bileşenler .NET 3,1 'ye yükseltildi
-
-| Resim etiketleri                                  | Notlar                                                                                                         |
-|---------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
-| `1.11.0-amd64-<locale-and-voice>`           | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.11.0-amd64-en-us-ariarus`. |
-| `1.9.0-amd64-<locale-and-voice>`            | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.9.0-amd64-en-us-ariarus`.  |
-| `1.8.0-amd64-<locale-and-voice>`            | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.8.0-amd64-en-us-ariarus`.  |
-| `1.7.0-amd64-<locale-and-voice>`            | 1. GA sürümü. `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.7.0-amd64-en-us-ariarus`.  |
 
 | V 1.11.0 için yerel ayarlar                         | Notlar                                                                      | Bilgisi                         |
 |---------------------------------------------|:---------------------------------------------------------------------------|:-------------------------------|
@@ -1185,16 +1386,72 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 
 # <a name="latest-version"></a>[En son sürüm](#tab/current)
 
+İçin sürüm notları `v1.5.0` :
+* Kalite geliştirmeleri ve hata düzeltmeleri ile en son modellere yükseltin
+* En fazla 38 sinir sesi destekler
+
+| Resim etiketleri                                  | Notlar                                                                      |
+|---------------------------------------------|:---------------------------------------------------------------------------|
+| `latest`                                    | `en-US`Yerel ayar ve `en-US-AriaNeural` sesle kapsayıcı görüntüsü.      |
+| `1.5.0-amd64-<locale-and-voice>`            | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.5.0-amd64-en-us-arianeural`. |
+
+
+| v 1.5.0 yerel ayarları ve sesler           | Notlar                                                                      |
+|-------------------------------------|:---------------------------------------------------------------------------|
+| `de-de-conradneural`                | `de-DE`Yerel ayar ve `de-DE-ConradNeural` sesle kapsayıcı görüntüsü.    |
+| `de-de-katjaneural`                 | `de-DE`Yerel ayar ve `de-DE-KatjaNeural` sesle kapsayıcı görüntüsü.     |
+| `en-au-natashaneural`               | `en-AU`Yerel ayar ve `en-AU-NatashaNeural` sesle kapsayıcı görüntüsü.   |
+| `en-au-williamneural`               | `en-AU`Yerel ayar ve `en-AU-WilliamNeural` sesle kapsayıcı görüntüsü.   |
+| `en-ca-claraneural`                 | `en-CA`Yerel ayar ve `en-CA-ClaraNeural` sesle kapsayıcı görüntüsü.     |
+| `en-ca-liamneural`                  | `en-CA`Yerel ayar ve `en-CA-LiamNeural` sesle kapsayıcı görüntüsü.      |
+| `en-gb-libbyneural`                 | `en-GB`Yerel ayar ve `en-GB-LibbyNeural` sesle kapsayıcı görüntüsü.     |
+| `en-gb-mianeural`                   | `en-GB`Yerel ayar ve `en-GB-MiaNeural` sesle kapsayıcı görüntüsü.       |
+| `en-gb-ryanneural`                  | `en-GB`Yerel ayar ve `en-GB-RyanNeural` sesle kapsayıcı görüntüsü.      |
+| `en-us-arianeural`                  | `en-US`Yerel ayar ve `en-US-AriaNeural` sesle kapsayıcı görüntüsü.      |
+| `en-us-guyneural`                   | `en-US`Yerel ayar ve `en-US-GuyNeural` sesle kapsayıcı görüntüsü.       |
+| `en-us-jennyneural`                 | `en-US`Yerel ayar ve `en-US-JennyNeural` sesle kapsayıcı görüntüsü.     |
+| `es-es-alvaroneural`                | `es-ES`Yerel ayar ve `es-ES-AlvaroNeural` sesle kapsayıcı görüntüsü.    |
+| `es-es-elviraneural`                | `es-ES`Yerel ayar ve `es-ES-ElviraNeural` sesle kapsayıcı görüntüsü.    |
+| `es-mx-dalianeural`                 | `es-MX`Yerel ayar ve `es-MX-DaliaNeural` sesle kapsayıcı görüntüsü.     |
+| `es-mx-jorgeneural`                 | `es-MX`Yerel ayar ve `es-MX-JorgeNeural` sesle kapsayıcı görüntüsü.     |
+| `fr-ca-antoineneural`               | `fr-CA`Yerel ayar ve `fr-CA-AntoineNeural` sesle kapsayıcı görüntüsü.   |
+| `fr-ca-jeanneural`                  | `fr-CA`Yerel ayar ve `fr-CA-JeanNeural` sesle kapsayıcı görüntüsü.      |
+| `fr-ca-sylvieneural`                | `fr-CA`Yerel ayar ve `fr-CA-SylvieNeural` sesle kapsayıcı görüntüsü.    |
+| `fr-fr-deniseneural`                | `fr-FR`Yerel ayar ve `fr-FR-DeniseNeural` sesle kapsayıcı görüntüsü.    |
+| `fr-fr-henrineural`                 | `fr-FR`Yerel ayar ve `fr-FR-HenriNeural` sesle kapsayıcı görüntüsü.     |
+| `hi-in-madhurneural`                | `hi-IN`Yerel ayar ve `hi-IN-MadhurNeural` sesle kapsayıcı görüntüsü.    |
+| `hi-in-swaraneural`                 | `hi-IN`Yerel ayar ve `hi-IN-Swaraneural` sesle kapsayıcı görüntüsü.     |
+| `it-it-diegoneural`                 | `it-IT`Yerel ayar ve `it-IT-DiegoNeural` sesle kapsayıcı görüntüsü.     |
+| `it-it-elsaneural`                  | `it-IT`Yerel ayar ve `it-IT-ElsaNeural` sesle kapsayıcı görüntüsü.      |
+| `it-it-isabellaneural`              | `it-IT`Yerel ayar ve `it-IT-IsabellaNeural` sesle kapsayıcı görüntüsü.  |
+| `ja-jp-keitaneural`                 | `ja-JP`Yerel ayar ve `ja-JP-KeitaNeural` sesle kapsayıcı görüntüsü.     |
+| `ja-jp-nanamineural`                | `ja-JP`Yerel ayar ve `ja-JP-NanamiNeural` sesle kapsayıcı görüntüsü.    |
+| `ko-kr-injoonneural`                | `ko-KR`Yerel ayar ve `ko-KR-InJoonNeural` sesle kapsayıcı görüntüsü.    |
+| `ko-kr-sunhineural`                 | `ko-KR`Yerel ayar ve `ko-KR-SunHiNeural` sesle kapsayıcı görüntüsü.     |
+| `pt-br-antonioneural`               | `pt-BR`Yerel ayar ve `pt-BR-AntonioNeural` sesle kapsayıcı görüntüsü.   |
+| `pt-br-franciscaneural`             | `pt-BR`Yerel ayar ve `pt-BR-FranciscaNeural` sesle kapsayıcı görüntüsü. |
+| `tr-tr-ahmetneural`                 | `tr-TR`Yerel ayar ve `tr-TR-AhmetNeural` sesle kapsayıcı görüntüsü.     |
+| `tr-tr-emelneural`                  | `tr-TR`Yerel ayar ve `tr-TR-EmelNeural` sesle kapsayıcı görüntüsü.      |
+| `zh-cn-xiaoxiaoneural`              | `zh-CN`Yerel ayar ve `zh-CN-XiaoxiaoNeural` sesle kapsayıcı görüntüsü.  |
+| `zh-cn-xiaoyouneural`               | `zh-CN`Yerel ayar ve `zh-CN-XiaoYouNeural` sesle kapsayıcı görüntüsü.   |
+| `zh-cn-yunyangneural`               | `zh-CN`Yerel ayar ve `zh-CN-YunYangNeural` sesle kapsayıcı görüntüsü.   |
+| `zh-cn-yunyeneural`                 | `zh-CN`Yerel ayar ve `zh-CN-YunYeNeural` sesle kapsayıcı görüntüsü.     |
+
+# <a name="previous-version"></a>[Önceki sürüm](#tab/previous)
+
 İçin sürüm notları `v1.4.0` :
 * En son modellere yükseltin. 
 * CPU maliyeti ve gecikme süresi düşürüldü.
 * SSML etiketiyle Prosody ayarlamayı daha iyi destekler (örneğin, uzaklık dağılımı).
 
+İçin sürüm notları `v1.3.0` :
+* Sinir metin okuma kapsayıcısı artık genel kullanıma sunulmuştur. 
+
 | Resim etiketleri                                  | Notlar                                                                      |
 |---------------------------------------------|:---------------------------------------------------------------------------|
-| `latest`                                    | `en-US`Yerel ayar ve `en-US-AriaNeural` sesle kapsayıcı görüntüsü.      |
-| `1.4.0-amd64-<locale-and-voice>`    | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.4.0-amd64-en-us-arianeural`. |
-
+| `1.4.0-amd64-<locale-and-voice>`            | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.4.0-amd64-en-us-arianeural`. |
+| `1.3.0-amd64-<locale-and-voice>-preview`    | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.3.0-amd64-en-us-arianeural-preview`. |
+| `1.2.0-amd64-<locale-and-voice>-preview`    | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.2.0-amd64-en-us-arianeural-preview`. |
 
 | v 1.4.0 yerel ayarları ve sesler           | Notlar                                                                      |
 |-------------------------------------|:---------------------------------------------------------------------------|
@@ -1210,7 +1467,7 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 | `es-mx-dalianeural`                 | `es-MX`Yerel ayar ve `es-MX-DaliaNeural` sesle kapsayıcı görüntüsü.     |
 | `fr-ca-sylvieneural`                | `fr-CA`Yerel ayar ve `fr-CA-SylvieNeural` sesle kapsayıcı görüntüsü.    |
 | `fr-fr-deniseneural`                | `fr-FR`Yerel ayar ve `fr-FR-DeniseNeural` sesle kapsayıcı görüntüsü.    |
-| `hi-in-swaracpuneural`              | `hi-IN`Yerel ayar ve `hi-IN-Swaraneural` sesle kapsayıcı görüntüsü.     |
+| `hi-in-swaraneural`                 | `hi-IN`Yerel ayar ve `hi-IN-Swaraneural` sesle kapsayıcı görüntüsü.     |
 | `it-it-elsaneural`                  | `it-IT`Yerel ayar ve `it-IT-ElsaNeural` sesle kapsayıcı görüntüsü.      |
 | `ja-jp-nanamineural`                | `ja-JP`Yerel ayar ve `ja-JP-NanamiNeural` sesle kapsayıcı görüntüsü.    |
 | `ko-kr-sunhineural`                 | `ko-KR`Yerel ayar ve `ko-KR-SunHiNeural` sesle kapsayıcı görüntüsü.     |
@@ -1219,17 +1476,6 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 | `zh-cn-xiaoyouneural`               | `zh-CN`Yerel ayar ve `zh-CN-XiaoYouNeural` sesle kapsayıcı görüntüsü.   |
 | `zh-cn-yunyangneural`               | `zh-CN`Yerel ayar ve `zh-CN-YunYangNeural` sesle kapsayıcı görüntüsü.   |
 | `zh-cn-yunyeneural`                 | `zh-CN`Yerel ayar ve `zh-CN-YunYeNeural` sesle kapsayıcı görüntüsü.     |
-
-# <a name="previous-version"></a>[Önceki sürüm](#tab/previous)
-
-İçin sürüm notları `v1.3.0` :
-* Sinir metin okuma kapsayıcısı artık genel kullanıma sunulmuştur. 
-
-| Resim etiketleri                                  | Notlar                                                                      |
-|---------------------------------------------|:---------------------------------------------------------------------------|
-| `latest`                                    | `en-US`Yerel ayar ve `en-US-AriaNeural` sesle kapsayıcı görüntüsü.      |
-| `1.3.0-amd64-<locale-and-voice>-preview`    | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.3.0-amd64-en-us-arianeural-preview`. |
-| `1.2.0-amd64-<locale-and-voice>-preview`    | `<locale>`Aşağıda listelenen kullanılabilir yerel ayarlardan biriyle değiştirin. Örneğin, `1.2.0-amd64-en-us-arianeural-preview`. |
 
 | v 1.3.0 yerel ayarları ve sesler           | Notlar                                                                      |
 |-------------------------------------|:---------------------------------------------------------------------------|
@@ -1245,7 +1491,7 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 | `es-mx-dalianeural`                 | `es-MX`Yerel ayar ve `es-MX-DaliaNeural` sesle kapsayıcı görüntüsü.     |
 | `fr-ca-sylvieneural`                | `fr-CA`Yerel ayar ve `fr-CA-SylvieNeural` sesle kapsayıcı görüntüsü.    |
 | `fr-fr-deniseneural`                | `fr-FR`Yerel ayar ve `fr-FR-DeniseNeural` sesle kapsayıcı görüntüsü.    |
-| `hi-in/swaracpuneural`              | `hi-IN`Yerel ayar ve `hi-IN-Swaraneural` sesle kapsayıcı görüntüsü.     |
+| `hi-in-swaraneural`                 | `hi-IN`Yerel ayar ve `hi-IN-Swaraneural` sesle kapsayıcı görüntüsü.     |
 | `it-it-elsaneural`                  | `it-IT`Yerel ayar ve `it-IT-ElsaNeural` sesle kapsayıcı görüntüsü.      |
 | `ja-jp-nanamineural`                | `ja-JP`Yerel ayar ve `ja-JP-NanamiNeural` sesle kapsayıcı görüntüsü.    |
 | `ko-kr-sunhineural`                 | `ko-KR`Yerel ayar ve `ko-KR-SunHiNeural` sesle kapsayıcı görüntüsü.     |
@@ -1355,6 +1601,24 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 | `3.0-nl`   | Yaklaşım Analizi v3 (Felemenkçe)                 |
 | `2.1`    | Yaklaşım Analizi v2      |
 
+
+## <a name="text-analytics-for-health"></a>Sistem durumu için Metin Analizi
+
+[Sistem durumu kapsayıcısı görüntüsü için metin analizi][ta-he] `mcr.microsoft.com` kapsayıcı kayıt defteri genel konumunda bulunabilir. Depo içinde bulunur `azure-cognitive-services/textanalytics/` ve olarak adlandırılır `healthcare` . Tam kapsayıcı görüntü adı `mcr.microsoft.com/azure-cognitive-services/textanalytics/healthcare`
+
+Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca [, MCR üzerinde etiketlerin](https://mcr.microsoft.com/v2/azure-cognitive-services/textanalytics/healthcare/tags/list)tam listesini de bulabilirsiniz.
+
+
+İçin sürüm notları `3.0.015490002-onprem-amd64` :
+
+* yeni model sürümü `2021-03-01`
+* Bir kapsayıcı MCR 'ye yayınlandı.
+
+| Resim etiketleri | Notlar                                         |
+|------------|:----------------------------------------------|
+| `latest`   |                                               |
+| `3.0.015490002-onprem-amd64`   |               |
+
 [ad-containers]: ../anomaly-Detector/anomaly-detector-container-howto.md
 [cv-containers]: ../computer-vision/computer-vision-how-to-install-containers.md
 [fa-containers]: ../face/face-how-to-install-containers.md
@@ -1369,3 +1633,4 @@ Bu kapsayıcı görüntüsünde aşağıdaki Etiketler kullanılabilir. Ayrıca 
 [ta-kp]: ../text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=keyphrase
 [ta-la]: ../text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=language
 [ta-se]: ../text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=sentiment
+[ta-he]: ../text-analytics/how-tos/text-analytics-how-to-install-containers.md?tabs=healthcare

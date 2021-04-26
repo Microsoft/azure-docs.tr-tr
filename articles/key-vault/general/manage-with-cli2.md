@@ -3,19 +3,18 @@ title: CLı-Azure Key Vault kullanarak Azure Key Vault yönetme | Microsoft Docs
 description: Azure CLı kullanarak Key Vault ortak görevleri otomatikleştirmek için bu makaleyi kullanın
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 ms.service: key-vault
 ms.subservice: general
 ms.topic: tutorial
 ms.date: 08/12/2019
 ms.author: mbaldwin
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: c084df60fa2293a614726be44669a1465b399d2c
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: d4037e66e653bc6e958020a5ef8722f2febb53d0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105557216"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772190"
 ---
 # <a name="manage-key-vault-using-the-azure-cli"></a>Azure CLı kullanarak Key Vault yönetme 
 
@@ -221,7 +220,7 @@ az keyvault set-policy --name "ContosoKeyVault" --spn 8f8c4bbd-485b-45fd-98f7-ec
 
 ## <a name="setting-key-vault-advanced-access-policies"></a><a name="bkmk_KVperCLI"></a> Anahtar Kasası Gelişmiş erişim ilkelerini ayarlama
 
-Anahtar Kasası için gelişmiş ilkeleri etkinleştirmek üzere [az keykasa Update](/cli/azure/keyvault#az-keyvault-update) kullanın.
+Anahtar Kasası için gelişmiş ilkeleri etkinleştirmek üzere [az keykasa Update](/cli/azure/keyvault#az_keyvault_update) kullanın.
 
  Dağıtım için Key Vault etkinleştir: sanal makinelerin kasadan gizli dizi olarak depolanan sertifikaları almasına Izin verir.
 

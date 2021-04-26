@@ -5,17 +5,21 @@ services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: include
-ms.date: 02/04/2021
+ms.date: 04/01/2021
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: f64bb0dd0841e89d05a4399db4373a9eaaec48a2
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c9568c51fe3a59dba83a66fc35c8d9112ade167f
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101750916"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106178494"
 ---
 Microsoft Intune kullanarak, Azure VPN istemcileri (Windows 10) için profilleri dağıtabilirsiniz. Bu makale, özel ayarları kullanarak bir Intune profili oluşturmanıza yardımcı olur.
+
+> [!NOTE]
+>* Bu makale, yalnızca kimlik doğrulaması için Azure Active Directory kullanan profilleri dağıtmak için geçerlidir.
+
 
 ## <a name="prerequisites"></a>Önkoşullar
 

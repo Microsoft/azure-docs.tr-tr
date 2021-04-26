@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: f96365bcdf64d19dc0b894f2f1230233b3137bc7
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+manager: femila
+ms.openlocfilehash: 1d562c483b340bee5f1c1aa5f63c068de6f54e42
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94842660"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106444403"
 ---
 # <a name="deploy-a-windows-virtual-desktop-classic-management-tool-with-an-azure-resource-manager-template"></a>Bir Azure Resource Manager şablonuyla Windows sanal masaüstü (klasik) Yönetim Aracı dağıtma
 

@@ -5,12 +5,12 @@ author: peterpogorski
 ms.topic: conceptual
 ms.date: 06/16/2020
 ms.custom: sfrev, devx-track-azurepowershell
-ms.openlocfilehash: 4568b791db07eaa7a513c42066b22df04b24cb6d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 5d73c02b7fd5e40f3cc23f5b0eba1945cf3c8a40
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103010312"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107258444"
 ---
 # <a name="prepare-your-development-environment-on-windows"></a>Windows üzerinde geliştirme ortamınızı hazırlama
 
@@ -62,8 +62,8 @@ Yalnızca SDK'yı yüklemeniz gerekiyorsa bu paketi yükleyebilirsiniz:
 
 Geçerli sürümler şunlardır:
 
-* Service Fabric SDK ve araçlar 4.2.477
-* Service Fabric Runtime 7.2.477
+* Service Fabric SDK ve araçlar 5.0.514
+* Service Fabric Runtime 8.0.514
 
 Desteklenen sürümlerin listesi için bkz. [Service Fabric sürümleri](service-fabric-versions.md)
 

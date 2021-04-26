@@ -5,12 +5,13 @@ services: automation
 ms.subservice: shared-capabilities
 ms.date: 02/01/2021
 ms.topic: conceptual
-ms.openlocfilehash: 57dfc388dcba926706a695c93d2afa1956432be8
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: eaff96907b48ddc0fc92296a015ceb063149e6ec
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104953944"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832761"
 ---
 # <a name="manage-modules-in-azure-automation"></a>Azure Otomasyonu’nda modülleri yönetme
 
@@ -224,7 +225,7 @@ Modülünüzün her cmdlet için bir özeti, açıklama ve yardım URI 'SI ekley
 
   switch ($PSCmdlet.ParameterSetName) {
      "UserAccount" {
-        $cred = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $UserName, $Password
+        $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $UserName, $Password
         Connect-Contoso -Credential $cred
      }
      "ConnectionObject" {
@@ -249,7 +250,7 @@ Aşağıdaki runbook örneği, `ContosoConnection` contoso kaynaklarına erişme
   ```powershell
   $contosoConnection = Get-AutomationConnection -Name 'ContosoConnection'
 
-  $cred = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $contosoConnection.UserName, $contosoConnection.Password
+  $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $contosoConnection.UserName, $contosoConnection.Password
   Connect-Contoso -Credential $cred
   }
   ```

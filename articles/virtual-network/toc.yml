@@ -33,7 +33,7 @@
       href: tutorial-nat-gateway-load-balancer-internal-portal.md
 - name: Örnekler
   items:
-    - name: Azure CLI’si
+    - name: Azure CLI
       href: cli-samples.md
     - name: Azure PowerShell
       href: powershell-samples.md
@@ -452,8 +452,8 @@
       href: /previous-versions/azure/virtual-network/create-virtual-network-classic
 - name: Başvuru
   items:
-    - name: Azure CLI’si
-      href: /cli/azure/network
+    - name: Azure CLI
+      href: /cli/azure/azure-cli-reference-for-network
     - name: Azure PowerShell
       href: /powershell/module/az.network
     - name: .NET

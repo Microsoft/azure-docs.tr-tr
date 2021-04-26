@@ -1,19 +1,16 @@
 ---
 title: Azure Site Recovery Hyper-V olağanüstü durum kurtarma için kapasite planlayın
 description: Azure Site Recovery hizmeti ile olağanüstü durum kurtarma ayarlanırken kapasiteyi tahmin etmek için bu makaleyi kullanın.
-author: rayne-wiselman
-manager: carmonm
 services: site-recovery
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/12/2019
-ms.author: raynew
-ms.openlocfilehash: aa96845a2bd2f4659da1155c4f75281268dce76d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0bdc66b46e83a1592d1ea74c1080d6f8080f4635
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101737724"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106580660"
 ---
 # <a name="plan-capacity-for-hyper-v-vm-disaster-recovery"></a>Hyper-V VM olağanüstü durum kurtarma işlemi için kapasiteyi planlama 
 

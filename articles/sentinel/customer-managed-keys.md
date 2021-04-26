@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/12/2020
 ms.author: yelevin
-ms.openlocfilehash: a1c2754fcae5768c6b87d6280fc882acd46d9a0a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f7c4905f3122bf5abd2dc955170113cac3039a5d
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100585343"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219051"
 ---
 # <a name="set-up-azure-sentinel-customer-managed-key"></a>Azure Sentinel müşteri tarafından yönetilen anahtarı ayarlama
 
@@ -81,7 +81,7 @@ Azure aboneliğinizin Azure Cosmos DB kaynak sağlayıcısını [kaydetmek](../c
 
 ### <a name="step-4-add-an-access-policy-to-your-azure-key-vault-instance"></a>4. Adım: Azure Key Vault örneğine bir erişim ilkesi ekleme
 
-Cosmos DB Azure Key Vault örneğinize erişim eklediğinizden emin olun. Azure Cosmos DB sorumlusu ile [Azure Key Vault örneğinize bir erişim ilkesi eklemek](../cosmos-db/how-to-setup-cmk.md#add-an-access-policy-to-your-azure-key-vault-instance) için Cosmos DB yönergesini izleyin.
+Cosmos DB Azure Key Vault örneğinize erişim eklediğinizden emin olun. Azure Cosmos DB sorumlusu ile [Azure Key Vault örneğinize bir erişim ilkesi eklemek](../cosmos-db/how-to-setup-cmk.md#add-access-policy) için Cosmos DB yönergesini izleyin.
 
 ### <a name="step-5-enable-cmk-in-azure-sentinel"></a>5. Adım: Azure Sentinel 'de CMK 'yi etkinleştirme
 

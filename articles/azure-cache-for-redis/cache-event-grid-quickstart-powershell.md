@@ -6,12 +6,13 @@ author: curib
 ms.author: cauribeg
 ms.topic: quickstart
 ms.service: cache
-ms.openlocfilehash: 6c3b433a8e433f39b723a7155bb6de116857efca
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: fa1ae9a7a2200944bd5da0211be88ba4955e3d03
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102508172"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833895"
 ---
 # <a name="quickstart-route-azure-cache-for-redis-events-to-web-endpoint-with-powershell"></a>Hızlı başlangıç: PowerShell ile Redsıs olayları için Azure önbelleğini Web uç noktasına yönlendirme
 

@@ -10,12 +10,12 @@ ms.workload: big-data
 ms.topic: overview
 ms.date: 12/16/2020
 ms.custom: seodec18
-ms.openlocfilehash: ae5887657e7657e60348217c21aa0ed17f9f4b07
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 4ff26289962aa06f9638644e28da23b646554281
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97606309"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865324"
 ---
 # <a name="what-is-azure-time-series-insights-gen2"></a>Azure Time Series Insights 2. Nesil nedir?
 
@@ -86,6 +86,21 @@ Bu temel Endüstriyel IoT özelliklerine giriş ile Azure Time Series Insights G
 | Neredeyse gerçek zamanlı veri araştırması | [Azure Time Series Insights Gen2 Explorer](./concepts-ux-panels.md) Kullanıcı deneyimi, alma işlem hattı aracılığıyla tüm veri akışı için görselleştirme sağlar. Bir olay kaynağını bağlandıktan sonra olay verilerini görüntüleyebilir, keşfedebilir ve sorgulayabilirsiniz. Bu şekilde, bir cihazın verileri beklendiği gibi yayıp yaymadığını doğrulayabilirsiniz. Ayrıca, bir IoT varlığını sistem durumu, üretkenlik ve genel verimlilik için izleyebilirsiniz. |
 | Genişletilebilirlik ve Tümleştirme | Power BI Bağlayıcısı tümleştirmesi, **dışa aktarma** seçeneği aracılığıyla doğrudan zaman serisi Gezgin Kullanıcı deneyiminde kullanılabilir ve müşterilerin kendi Kullanıcı deneyimimizde oluşturdukları zaman serisi sorgularını doğrudan Power BI masaüstüne dışarı aktarıp zaman serisi GRAFIKLERINI diğer bı analizlerinin yanı sıra görüntülemesini sağlar. Bu, IoT zaman serisi dahil çeşitli veri kaynaklarından analizler üzerinde tek bir cam bölmesi sunarak Power BI yatırım yapan endüstriyel IoT kuruluşları için bir yeni senaryolar sınıfına açar. |
 | Azure Time Series Insights Gen2 platformunda oluşturulan özel uygulamalar | Azure Time Series Insights Gen2, [JavaScript SDK 'sını](https://github.com/microsoft/tsiclient/blob/master/docs/API.md)destekler. SDK, sorgulara zengin denetimler ve Basitleştirilmiş erişim sağlar. İş ihtiyaçlarınıza uygun Azure Time Series Insights Gen2 en üstünde özel IoT uygulamaları oluşturmak için SDK 'Yı kullanın. Ayrıca, verileri özel IoT uygulamalarına yönlendirmek için doğrudan Azure Time Series Insights Gen2 [sorgu API 'lerini](./concepts-query-overview.md) de kullanabilirsiniz. |
+
+## <a name="region-availability"></a>Bölge kullanılabilirliği
+
+Azure Time Series Insights kullanılabilir olduğunu öğrenmek için [bölgeye göre Azure küresel altyapı ürünleri](https://azure.microsoft.com/global-infrastructure/services/?products=time-series-insights) sayfasını ziyaret edin.
+
+Azure Time Series Insights tek bir bölgede bulunur. Bununla birlikte, verilerin bölge dışında çoğaltılabileceği aşağıdaki bölgeler dışında, müşteri verilerini müşterinin hizmet örneğini dağıttığı bölge dışında depolar/işler.
+
+* Doğu Asya
+* Güneydoğu Asya
+*   Güneydoğu Avustralya
+*   West Europe
+*   Güney Birleşik Krallık
+*   Batı ABD
+*   Orta Fransa
+*   Orta Kanada
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

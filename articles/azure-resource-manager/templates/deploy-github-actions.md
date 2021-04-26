@@ -4,12 +4,12 @@ description: GitHub eylemleri kullanılarak Azure Resource Manager şablonların
 ms.topic: conceptual
 ms.date: 10/13/2020
 ms.custom: github-actions-azure, devx-track-azurecli
-ms.openlocfilehash: 564a21d565fb80eba605eece95562a809a93246f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ec29ae019555c54ccdcef9dd743706f8d6401bbd
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103471923"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781982"
 ---
 # <a name="deploy-arm-templates-by-using-github-actions"></a>GitHub eylemlerini kullanarak ARM şablonları dağıtma
 
@@ -38,7 +38,7 @@ Dosya iki bölümden oluşur:
 ## <a name="generate-deployment-credentials"></a>Dağıtım kimlik bilgileri oluştur
 
 
-[Azure CLI](/cli/azure/)'de [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az-ad-sp-create-for-rbac) komutuyla bir [hizmet sorumlusu](../../active-directory/develop/app-objects-and-service-principals.md#service-principal-object) oluşturabilirsiniz. Bu komutu Azure portal [Azure Cloud Shell](https://shell.azure.com/) veya **deneyin** düğmesini seçerek çalıştırın.
+[Azure CLI](/cli/azure/)'de [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az_ad_sp_create_for_rbac) komutuyla bir [hizmet sorumlusu](../../active-directory/develop/app-objects-and-service-principals.md#service-principal-object) oluşturabilirsiniz. Bu komutu Azure portal [Azure Cloud Shell](https://shell.azure.com/) veya **deneyin** düğmesini seçerek çalıştırın.
 
 Henüz bir tane yoksa bir kaynak grubu oluşturun.
 

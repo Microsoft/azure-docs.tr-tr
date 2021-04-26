@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 03/09/2021
+ms.date: 04/02/2021
 ms.author: jeedes
-ms.openlocfilehash: f7167df523ca6f84eacd92fc7af1011e8b3b00b6
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: ba6eb0a1b607fc05c4d0c660dd3d7016f81ef4b3
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104950392"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449554"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-cornerstone-single-sign-on"></a>Öğretici: tek Sign-On köşeli oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -123,49 +123,11 @@ Bu bölümde, Azure çoklu oturum açma 'yı kullanarak, köşeli çift yönlü 
 
 ## <a name="configure-cornerstone-single-sign-on-sso"></a>Tek Sign-On SSO 'yu yapılandırma
 
-1. Sign-On bir yönetici olarak tek bir köşeli kenar Stone üzerinde oturum açın.
-
-1. **Yönetici-> araçlarına** gidin.
-
-    ![Yönetici sayfası için anlık görüntü.](./media/cornerstone-ondemand-tutorial/admin.png)
-
-1. Yapılandırma Araçları **kenar** bölmesini seçin .
-
-    ![EDGE paneli için anlık görüntü.](./media/cornerstone-ondemand-tutorial/edge-panel.png)
-
-1. **Tümleştirin** bölümünde tek Sign-On ' yi seçin.
-
-    ![Tek Sign-On seçeneği için anlık görüntü.](./media/cornerstone-ondemand-tutorial/single-sign-on.png)
-
-1. **SSO Ekle** düğmesine tıklayın. Aşağıda gösterilen açılan pencerede **gelen SAML** ' yi seçin ve ardından **Ekle**' ye tıklayın.
-
-    ![Gelen SAML için anlık görüntü.](./media/cornerstone-ondemand-tutorial/inbound.png)
-
-1. Aşağıdaki adımları aşağıdaki sayfada gerçekleştirin:
-
-    ![alt taş için yapılandırma bölümünün anlık görüntüsü.](./media/cornerstone-ondemand-tutorial/configuration.png)
-
-    a. **Genel Özellikler**' de, Azure Portal indirdiğiniz **sertifika (base64)** dosyasını karşıya yüklemek için **dosyayı karşıya yükle** ' ye tıklayın.
-
-    b. **Etkinleştir** onay kutusunu seçin ve **IDP URL** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
-
-    c. **Kaydet**’e tıklayın.
+Yan **taş çoklu oturum açma** tarafında çoklu oturum açma 'yı yapılandırmak için, indirilen **sertifikayı (Base64)** ve Azure Portal ' dan temel alınan url 'leri, [tek Sign-On destek ekibine](mailto:moreinfo@csod.com) ve lütfen iş ortağınızla iletişime geçerek göndermeniz gerekir. Bu ayar, SAML SSO bağlantısının her iki tarafında da düzgün bir şekilde ayarlanmasını sağlamak üzere ayarlanmıştır.
 
 ### <a name="create-cornerstone-single-sign-on-test-user"></a>Temel Stone oluşturma tek Sign-On test kullanıcısı
 
 Bu bölümün amacı, alt kenar Stone çoklu oturum açma bölümünde B. Simon adlı bir Kullanıcı oluşturmaktır. Yan taş tek Sign-On, varsayılan olarak etkinleştirilen Otomatik Kullanıcı sağlamayı destekler. Otomatik Kullanıcı sağlamayı yapılandırma hakkında daha [fazla ayrıntı bulabilirsiniz](./cornerstone-ondemand-provisioning-tutorial.md) .
-
-**Kullanıcı el ile oluşturmanız gerekiyorsa aşağıdaki adımları gerçekleştirin:**
-
-1. Sign-On bir yönetici olarak tek bir köşeli kenar Stone üzerinde oturum açın.
-
-1. **Yönetici-> kullanıcılara** gidin ve sayfanın altındaki **Kullanıcı Ekle** ' ye tıklayın.
-
-    ![test kullanıcısı için temel alınan Kullanıcı oluşturma görüntüsü.](./media/cornerstone-ondemand-tutorial/user-1.png)
-
-1. **Yeni Kullanıcı Ekle** sayfasında gerekli alanları doldurup **Kaydet**' e tıklayın.
-
-    ![gerekli alanlarla test kullanıcısı oluşturmak için anlık görüntü.](./media/cornerstone-ondemand-tutorial/user-2.png)
 
 ## <a name="test-sso"></a>Test SSO 'SU 
 

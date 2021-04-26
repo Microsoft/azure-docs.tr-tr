@@ -8,12 +8,12 @@ author: shashankbarsin
 ms.author: shasb
 description: Azure Arc etkin Kubernetes için Denetim Aracısı yükseltmeleri
 keywords: Kubernetes, yay, Azure, K8s, kapsayıcılar, aracı, yükseltme
-ms.openlocfilehash: d81a00ed4f30f446aeed96d59a455935c652b7d5
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 29df9973ead167e7774924cc3a0c685606092d28
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104954556"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106442533"
 ---
 # <a name="upgrading-azure-arc-enabled-kubernetes-agents"></a>Azure Arc etkin Kubernetes aracılarını yükseltme
 
@@ -53,7 +53,7 @@ az connectedk8s update --name AzureArcTest1 --resource-group AzureArcTest --auto
 Aracılar için otomatik yükseltmeyi devre dışı bırakırsanız, `az connectedk8s upgrade` aşağıda gösterildiği gibi komutunu kullanarak bu aracıların yükseltmelerini el ile başlatabilirsiniz:
 
 ```console
-az connectedk8s upgrade -g AzureArcTest1 -n AzureArcTest --agent-version 1.0.1
+az connectedk8s upgrade -g AzureArcTest1 -n AzureArcTest --agent-version 1.1.0
 ```
 
 Azure Arc etkin Kubernetes, aracılarını sürüm oluşturma için standart [anlam sürümü oluşturma şemasını](https://semver.org/) izler `MAJOR.MINOR.PATCH` . 

@@ -10,17 +10,17 @@ author: mokabiru
 ms.author: mokabiru
 ms.reviewer: MashaMSFT
 ms.date: 03/19/2021
-ms.openlocfilehash: e2de694a153276dcace1070d35af44dec1056e03
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 6ce7de649876ed8ccff1254f25a7213b407dacae
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105564934"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107284094"
 ---
 # <a name="migration-guide-sql-server-to-azure-sql-database"></a>Geçiş Kılavuzu: Azure SQL veritabanı 'na SQL Server
 [!INCLUDE[appliesto--sqldb](../../includes/appliesto-sqldb.md)]
 
-Bu kılavuz, SQL Server örneğinizi Azure SQL veritabanı 'na geçirmenize yardımcı olur. 
+Bu kılavuzda, SQL Server örneğinizi Azure SQL veritabanı 'na [geçirmeyi](https://azure.microsoft.com/migration/migration-journey) öğreneceksiniz. 
 
 Şirket içinde veya üzerinde çalışan SQL Server geçirebilirsiniz: 
 
@@ -36,7 +36,7 @@ Daha fazla geçiş bilgisi için [geçişe genel bakış](sql-server-to-sql-data
 
 ## <a name="prerequisites"></a>Önkoşullar 
 
-SQL Server Azure SQL veritabanı 'na geçirmek için aşağıdaki önkoşullara sahip olduğunuzdan emin olun: 
+Azure SQL veritabanı 'na [SQL Server geçişiniz](https://azure.microsoft.com/en-us/migration/sql-server/) için aşağıdaki önkoşullara sahip olduğunuzdan emin olun: 
 
 - Seçilen bir [geçiş yöntemi](sql-server-to-sql-database-overview.md#compare-migration-options) ve ilgili araçlar.
 - [Data Migration Yardımcısı (DMA)](https://www.microsoft.com/download/details.aspx?id=53595) , kaynak SQL Server bağlanabilecek bir makineye yüklendi.
@@ -47,7 +47,7 @@ SQL Server Azure SQL veritabanı 'na geçirmek için aşağıdaki önkoşullara 
 
 ## <a name="pre-migration"></a>Geçiş öncesi
 
-Kaynak ortamınızın desteklendiğini doğruladıktan sonra, geçiş öncesi aşamasına başlayın. Var olan tüm veri kaynaklarını bulun, geçiş durumunu değerlendirin ve geçişinizi engelleyebilen engelleyici sorunları tespit edin. 
+Kaynak ortamınızın desteklendiğini doğruladıktan sonra, geçiş öncesi aşamasına başlayın. Var olan tüm veri kaynaklarını bulun, geçiş durumunu değerlendirin ve [Azure bulut geçişinizi](https://azure.microsoft.com/migration)engelleyebilen tüm engelleyici sorunları bulun.
 
 ### <a name="discover"></a>Bulma
 
@@ -200,6 +200,10 @@ Daha fazla bilgi için bkz. [geçişten sonra Azure SQL veritabanı 'nı yönetm
 
 - Çeşitli veritabanı ve veri geçişi senaryolarında ve özel görevlerin yanı sıra size yardımcı olmak için sunulan Microsoft ve üçüncü taraf hizmet ve araçların bir matrisi için bkz. [veri geçişi Için hizmet ve araçlar](../../../dms/dms-tools-matrix.md).
 
+
+- [Azure geçişi](https://azure.microsoft.com/services/azure-migrate) hakkında daha fazla bilgi için bkz.
+   - [Azure Geçişi](../../../migrate/migrate-services-overview.md)
+
 - SQL veritabanı hakkında daha fazla bilgi için bkz.
     - [Azure SQL veritabanı 'Na genel bakış](../../database/sql-database-paas-overview.md)
    - [Azure toplam sahiplik Hesaplayıcı maliyeti](https://azure.microsoft.com/pricing/tco/calculator/) 
@@ -207,7 +211,8 @@ Daha fazla bilgi için bkz. [geçişten sonra Azure SQL veritabanı 'nı yönetm
 
 - Bulut geçişleri için çerçeve ve benimseme çevrimi hakkında daha fazla bilgi edinmek için bkz.
    -  [Azure için Bulut Benimseme Çerçevesi](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
-   -  [İş yüklerini maliyetlendirme ve boyutlandırma için en iyi yöntemler Azure 'a geçiş](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs) 
+   -  [Azure 'a geçiş için iş yüklerini maliyetlendirme ve boyutlandırma için en iyi yöntemler](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs) 
+   -  [Buluta Geçiş kaynakları](https://azure.microsoft.com/migration/resources)
 
 - Uygulama erişim katmanını değerlendirmek için bkz. [veri erişimi geçiş araç seti (Önizleme)](https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit)
 - Veri erişim katmanını bir/B testi gerçekleştirme hakkında daha fazla bilgi için bkz. [veritabanı yükseltme deneyimi Yardımcısı](/sql/dea/database-experimentation-assistant-overview).

@@ -9,12 +9,12 @@ ms.subservice: extensions
 ms.date: 01/30/2019
 ms.reviewer: mimckitt
 ms.custom: mimckitt
-ms.openlocfilehash: 3271041b9f4db100cd05588129c7d714d4478f10
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1b5aea1f0f0101231408dc9ad7b57a30f2c86256
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "83121040"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788166"
 ---
 # <a name="sequence-extension-provisioning-in-virtual-machine-scale-sets"></a>Sanal makine ölçek kümelerinde dizi uzantısı sağlama
 Azure sanal makine uzantıları, dağıtım sonrası yapılandırma ve yönetim, izleme, güvenlik ve daha fazlası gibi yetenekler sağlar. Üretim dağıtımları genellikle, istenen sonuçlara ulaşmak için VM örnekleri için yapılandırılmış birden çok uzantı birleşimini kullanır.
@@ -223,7 +223,7 @@ Update-AzVmss -ResourceGroupName $vmScaleSetResourceGroup `
 ```
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
-Ölçek kümesi model tanımına uygulama durumu uzantısı eklemek için [az VMSS Extension set](/cli/azure/vmss/extension#az-vmss-extension-set) komutunu kullanın. Uzantı sıralaması için Azure CLı 2.0.55 veya üzeri kullanılması gerekir.
+Ölçek kümesi model tanımına uygulama durumu uzantısı eklemek için [az VMSS Extension set](/cli/azure/vmss/extension#az_vmss_extension_set) komutunu kullanın. Uzantı sıralaması için Azure CLı 2.0.55 veya üzeri kullanılması gerekir.
 
 Aşağıdaki örnek, [uygulama sistem durumu uzantısını](virtual-machine-scale-sets-health-extension.md) Windows tabanlı ölçek kümesinin ölçek kümesi modeline ekler. Uygulama sistem durumu uzantısı, zaten ölçek kümesinde tanımlanmış olan [Özel Betik uzantısı](../virtual-machines/extensions/custom-script-windows.md)sağlandıktan sonra sağlanır.
 

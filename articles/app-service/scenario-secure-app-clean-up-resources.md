@@ -7,16 +7,16 @@ manager: CelesteDG
 ms.service: app-service-web
 ms.topic: tutorial
 ms.workload: identity
-ms.date: 10/27/2020
+ms.date: 04/02/2021
 ms.author: ryanwi
 ms.reviewer: stsoneff
 ms.custom: azureday1
-ms.openlocfilehash: bf03fe9d920298d49e79a9a0febf7e09e94eb6ff
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: cfb42b82943f03c3633ff69662ab841bf587ede4
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96905528"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106221866"
 ---
 # <a name="tutorial-clean-up-resources"></a>Öğretici: Kaynakları Temizleme
 

@@ -9,12 +9,12 @@ ms.custom:
 - seo-lt-2019
 - references_regions
 ms.date: 07/15/2020
-ms.openlocfilehash: b6000d8ff3eb35d678a94adc021efcadf8a77f81
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1213d5f7421cc71255f29d013fa47878559110ee
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101699661"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481591"
 ---
 # <a name="azure-data-factory-managed-virtual-network-preview"></a>Azure Data Factory yönetilen sanal ağ (Önizleme)
 
@@ -74,12 +74,56 @@ Etkileşimli yazma özellikleri, test bağlantısı, klasör listesi ve tablo li
 
 ![Etkileşimli yazma](./media/managed-vnet/interactive-authoring.png)
 
+## <a name="create-managed-virtual-network-via-azure-powershell"></a>Azure PowerShell aracılığıyla yönetilen sanal ağ oluşturma
+```powershell
+$subscriptionId = ""
+$resourceGroupName = ""
+$factoryName = ""
+$managedPrivateEndpointName = ""
+$integrationRuntimeName = ""
+$apiVersion = "2018-06-01"
+$privateLinkResourceId = ""
+
+$vnetResourceId = "subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.DataFactory/factories/${factoryName}/managedVirtualNetworks/default"
+$privateEndpointResourceId = "subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.DataFactory/factories/${factoryName}/managedVirtualNetworks/default/managedprivateendpoints/${managedPrivateEndpointName}"
+$integrationRuntimeResourceId = "subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.DataFactory/factories/${factoryName}/integrationRuntimes/${integrationRuntimeName}"
+
+# Create managed Virtual Network resource
+New-AzResource -ApiVersion "${apiVersion}" -ResourceId "${vnetResourceId}"
+
+# Create managed private endpoint resource
+New-AzResource -ApiVersion "${apiVersion}" -ResourceId "${privateEndpointResourceId}" -Properties @{
+        privateLinkResourceId = "${privateLinkResourceId}"
+        groupId = "blob"
+    }
+
+# Create integration runtime resource enabled with VNET
+New-AzResource -ApiVersion "${apiVersion}" -ResourceId "${integrationRuntimeResourceId}" -Properties @{
+        type = "Managed"
+        typeProperties = @{
+            computeProperties = @{
+                location = "AutoResolve"
+                dataFlowProperties = @{
+                    computeType = "General"
+                    coreCount = 8
+                    timeToLive = 0
+                }
+            }
+        }
+        managedVirtualNetwork = @{
+            type = "ManagedVirtualNetworkReference"
+            referenceName = "default"
+        }
+    }
+
+```
+
 ## <a name="limitations-and-known-issues"></a>Sınırlamalar ve bilinen sorunlar
 ### <a name="supported-data-sources"></a>Desteklenen Veri Kaynakları
 ADF tarafından yönetilen sanal ağdan özel bağlantı üzerinden bağlanmak için aşağıdaki veri kaynaklarının altında desteklenir.
-- Azure Blob Depolama
-- Azure Tablo Depolama
-- Azure Dosyaları
+- Azure Blob depolama (depolama hesabı v1 dahil değil)
+- Azure Tablo Depolama (depolama hesabı v1 dahil değil)
+- Azure dosyaları (depolama hesabı v1 dahil değil)
 - Azure Data Lake Gen2
 - Azure SQL veritabanı (Azure SQL yönetilen örneği dahil değil)
 - Azure Synapse Analytics
@@ -105,6 +149,16 @@ ADF tarafından yönetilen sanal ağdan özel bağlantı üzerinden bağlanmak i
 - Güneydoğu Asya
 - Doğu Avustralya
 - Güneydoğu Avustralya
+- Norveç Doğu
+- Doğu Japonya
+- Batı Japonya
+- Güney Kore - Orta
+- Güney Brezilya
+- Orta Fransa
+- İsviçre Kuzey
+- Batı Birleşik Krallık
+- Doğu Kanada
+- Orta Kanada
 
 ### <a name="outbound-communications-through-public-endpoint-from-adf-managed-virtual-network"></a>ADF tarafından yönetilen sanal ağdan gelen genel uç nokta aracılığıyla giden iletişimler
 - Giden iletişimler için yalnızca bağlantı noktası 443 açılır.

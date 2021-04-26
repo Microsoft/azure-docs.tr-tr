@@ -7,12 +7,12 @@ ms.date: 11/22/2019
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: c748034145781f639da244b16e3df7053da3d5d2
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: c9412e2adeb9b43b4c61437fb41e68bc96b86afd
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "103489974"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481846"
 ---
 # <a name="understand-extended-offline-capabilities-for-iot-edge-devices-modules-and-child-devices"></a>IoT Edge cihazları, modülleri ve alt cihazları için genişletilmiş çevrimdışı özellikleri anlayın
 
@@ -70,7 +70,7 @@ Yeni bir cihaz oluştururken üst-alt ilişkisi bildirebilirsiniz. Ya da var ola
 
 #### <a name="option-2-use-the-az-command-line-tool"></a>2. seçenek: `az` komut satırı aracını kullanma
 
-[Azure komut satırı arabirimini](/cli/azure/) [IoT uzantısı](https://github.com/azure/azure-iot-cli-extension) (v 0.7.0 veya üzeri) ile birlikte kullanarak, üst alt ilişkilerini [cihaz kimliği](/cli/azure/ext/azure-iot/iot/hub/device-identity) alt komutları ile yönetebilirsiniz. Aşağıdaki örnekte, hub 'daki tüm IoT Edge olmayan cihazları bir IoT Edge cihazının alt cihazları olacak şekilde atamak için bir sorgu kullanılır.
+[Azure komut satırı arabirimini](/cli/azure/) [IoT uzantısı](https://github.com/azure/azure-iot-cli-extension) (v 0.7.0 veya üzeri) ile birlikte kullanarak, üst alt ilişkilerini [cihaz kimliği](/cli/azure/iot/hub/device-identity/) alt komutları ile yönetebilirsiniz. Aşağıdaki örnekte, hub 'daki tüm IoT Edge olmayan cihazları bir IoT Edge cihazının alt cihazları olacak şekilde atamak için bir sorgu kullanılır.
 
 ```azurecli
 # Set IoT Edge parent device

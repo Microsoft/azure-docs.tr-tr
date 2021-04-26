@@ -5,13 +5,13 @@ author: kromerm
 ms.author: makromer
 ms.service: data-factory
 ms.topic: conceptual
-ms.date: 01/19/2021
-ms.openlocfilehash: 659f6527d43e1b45a11fddf774050ca6d42bfe12
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/16/2021
+ms.openlocfilehash: f7a4041d87e00fa01ae5ae4dff0cade3b9755d31
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98896672"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600949"
 ---
 # <a name="transformation-functions-in-power-query-for-data-wrangling"></a>Veri denetimi için Power Query dönüştürme işlevleri
 
@@ -99,6 +99,23 @@ Bağımsız tut ve çıkar, aralığı tut (karşılık gelen k işlevleri, yaln
 | Satır düzeyi hata işleme | Satır düzeyi hata işleme Şu anda desteklenmiyor. Örneğin, bir sütundan sayısal olmayan değerleri filtrelemek için, bir yaklaşım metin sütununu bir sayıya dönüştürmelidir. Dönüştürülemezse her hücre bir hata durumunda olur ve filtrelenebilir. Bu senaryo, ölçeği ölçeklendirilerek mümkün değildir. |
 | Table.Transpose | Desteklenmez |
 | Table.Pivot | Desteklenmez |
+| Table.SplitColumn | Kısmen destekleniyor |
+
+## <a name="m-script-workarounds"></a>Betiğe ilişkin geçici çözümler
+
+### <a name="for-splitcolumn-there-is-an-alternate-for-split-by-length-and-by-position"></a>İçin ```SplitColumn``` , uzunluğa göre ve konuma göre bölünmüş bir alternatif vardır
+
+* Table. AddColumn (kaynak, "Ilk karakter", her metin. Başlangıç ([e-posta], 7), tür metni)
+* Table. AddColumn (# "ilk karakter ekledi", "metin aralığı", her metin. Orta ([e-posta], 4, 9), tür metni)
+
+Bu seçeneğe Şeritteki Ayıkla seçeneğinden erişilebilir
+
+![Power Query sütun Ekle](media/wrangling-data-flow/pq-split.png)
+
+### <a name="for-tablecombinecolumns"></a>Bekleniyor ```Table.CombineColumns```
+
+* Table. AddColumn (RemoveEmailColumn, "ad", her [FirstName] & "" & [LastName])
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

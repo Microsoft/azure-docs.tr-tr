@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 3/18/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 43d1b7700395bd06960737eae4f318d61aa03717
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8eaf87865fb2fc70251e1e417361333cfd750d6e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98665098"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107783674"
 ---
 # <a name="create-and-manage-azure-database-for-mariadb-vnet-service-endpoints-using-azure-cli"></a>Azure CLı kullanarak MariaDB VNet hizmet uç noktaları için Azure veritabanı oluşturma ve yönetme
 
@@ -34,7 +34,7 @@ Sanal Ağ (VNet) hizmetleri uç noktaları ve kuralları, bir Sanal Ağın özel
 
 [Az Network VNET](/cli/azure/network/vnet) komutları, sanal ağları yapılandırmak için kullanılır.
 
-Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. [az account set](/cli/azure/account#az-account-set) komutunu kullanarak hesabınız altındaki belirli bir abonelik kimliğini seçin. Aboneliğinizin **az login** çıktısındaki **id** özelliğini abonelik kimliği yer tutucusuyla değiştirin.
+Birden fazla aboneliğiniz varsa kaynağın faturalanacağı uygun aboneliği seçin. [az account set](/cli/azure/account#az_account_set) komutunu kullanarak hesabınız altındaki belirli bir abonelik kimliğini seçin. Aboneliğinizin **az login** çıktısındaki **id** özelliğini abonelik kimliği yer tutucusuyla değiştirin.
 
 - Hesap, sanal ağ ve hizmet uç noktası oluşturma izinlerine sahip olmalıdır.
 

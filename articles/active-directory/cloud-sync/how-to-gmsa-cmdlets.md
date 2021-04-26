@@ -11,12 +11,12 @@ ms.date: 11/16/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 411a8e46151a762bcd270fb676f78a91f760ac4f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 46b5c94c84bdbd0e5bb0d7b08ba9296ebfcd1838
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101653805"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107306067"
 ---
 # <a name="azure-ad-connect-cloud-provisioning-agent-gmsa-powershell-cmdlets"></a>Azure AD Connect Cloud sağlama Aracısı gMSA PowerShell cmdlet 'leri
 
@@ -26,7 +26,7 @@ Bu belge aşağıdaki cmdlet 'leri kapsar: 
 
 `Set-AADCloudSyncRestrictedPermissions`
 
-`Ste-AADCloudSyncPermissions` 
+`Set-AADCloudSyncPermissions` 
 
 ## <a name="how-to-use-the-cmdlets"></a>Cmdlet 'leri kullanma:  
 
@@ -61,7 +61,7 @@ Bu cmdlet 'leri kullanmak için aşağıdaki Önkoşullar gereklidir.
 ## <a name="using-set-aadcloudsyncpermissions"></a>Set-AADCloudSyncPermissions kullanma 
 `Set-AADCloudSyncPermissions` , Azure AD Connect tarafından kullanılan izinlerle aynı olan aşağıdaki izin türlerini destekler. Aşağıdaki izin türleri desteklenir: 
 
-|İzin türü|Description|
+|İzin türü|Açıklama|
 |-----|-----|
 |BasicRead| Azure AD Connect için [Basicread](../../active-directory/hybrid/how-to-connect-configure-ad-ds-connector-account.md#configure-basic-read-only-permissions) izinlerine bakın|
 |PasswordHashSync|Azure AD Connect için [Passwordhashsync](../../active-directory/hybrid/how-to-connect-configure-ad-ds-connector-account.md#permissions-for-password-hash-synchronization) izinlerine bakın|

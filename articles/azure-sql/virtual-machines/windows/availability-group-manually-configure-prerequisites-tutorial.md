@@ -15,12 +15,12 @@ ms.workload: iaas-sql-server
 ms.date: 03/29/2018
 ms.author: mathoma
 ms.custom: seo-lt-2019
-ms.openlocfilehash: f5739604537ccc67e2cf57310269369909038d67
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 4c64a4e06ed452c895c1bc2cf20adc2d9c0060c3
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102508767"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219272"
 ---
 # <a name="tutorial-prerequisites-for-creating-availability-groups-on-sql-server-on-azure-virtual-machines"></a>Öğretici: Azure sanal makinelerinde SQL Server üzerinde kullanılabilirlik grupları oluşturmaya yönelik önkoşullar
 
@@ -69,11 +69,11 @@ Bir Azure hesabınız olmalıdır. [Ücretsiz bir Azure hesabı açabilir](https
 
 Azure kaynak grubunu oluşturur ve portalda kaynak grubuna bir kısayol sabitlemelerini sağlar.
 
-## <a name="create-the-network-and-subnets"></a>Ağ ve alt ağları oluşturma
+## <a name="create-the-network-and-subnet"></a>Ağ ve alt ağ oluşturma
 
-Sonraki adım, Azure Kaynak grubundaki ağları ve alt ağları oluşturmaktır.
+Sonraki adım, Azure Kaynak grubu 'nda ağları ve alt ağı oluşturmaktır.
 
-Çözüm iki alt ağa sahip bir sanal ağ kullanır. [Sanal ağa genel bakış](../../../virtual-network/virtual-networks-overview.md) , Azure 'da ağlar hakkında daha fazla bilgi sağlar.
+Çözüm bir sanal ağ ve bir alt ağ kullanır. [Sanal ağa genel bakış](../../../virtual-network/virtual-networks-overview.md) , Azure 'da ağlar hakkında daha fazla bilgi sağlar.
 
 Azure portal sanal ağı oluşturmak için:
 
@@ -100,48 +100,13 @@ Azure portal sanal ağı oluşturmak için:
 
    Adres alanınız ve alt ağ adres aralığınız tablodan farklı olabilir. Aboneliğinize bağlı olarak, Portal kullanılabilir bir adres alanı ve karşılık gelen alt ağ adres aralığını önerir. Kullanılabilir yeterli adres alanı yoksa, farklı bir abonelik kullanın.
 
-   Örnek, **yönetici** alt ağ adı ' nı kullanır. Bu alt ağ etki alanı denetleyicileri içindir.
+   Örnek, **yönetici** alt ağ adı ' nı kullanır. Bu alt ağ, etki alanı denetleyicileri ve SQL Server VM 'Ler içindir.
 
 5. **Oluştur**’u seçin.
 
    ![Sanal ağı yapılandırma](./media/availability-group-manually-configure-prerequisites-tutorial-/06-configurevirtualnetwork.png)
 
 Azure sizi Portal panosuna döndürür ve yeni ağ oluşturulduğunda size bildirir.
-
-### <a name="create-a-second-subnet"></a>İkinci bir alt ağ oluşturun
-
-Yeni sanal ağın, **admin** adlı bir alt ağı vardır. Etki alanı denetleyicileri bu alt ağı kullanır. SQL Server VM 'Ler **SQL** adlı ikinci bir alt ağ kullanır. Bu alt ağı yapılandırmak için:
-
-1. Panonuzda, **SQL-ha-RG** oluşturduğunuz kaynak grubunu seçin. **Kaynaklar** altındaki kaynak grubunda ağı bulun.
-
-    **SQL-ha-RG** görünmüyorsa, **kaynak grupları** seçerek ve kaynak grubu adına göre filtreleyerek bulun.
-
-2. Kaynak listesinde **autoHAVNET** öğesini seçin. 
-3. **AutoHAVNET** sanal ağında, **Ayarlar** altında **alt ağlar**' ı seçin.
-
-    Zaten oluşturduğunuz alt ağı unutmayın.
-
-   ![Zaten oluşturduğunuz alt ağa göz önünde](./media/availability-group-manually-configure-prerequisites-tutorial-/07-addsubnet.png)
-
-5. İkinci bir alt ağ oluşturmak için **+ alt ağ**' ı seçin.
-6. **Alt ağ ekle** sayfasında, **ad** altında **sqlsubnet** yazarak alt ağı yapılandırın. Azure otomatik olarak geçerli bir **adres aralığı** belirtir. Bu adres aralığının en az 10 adresi olduğunu doğrulayın. Bir üretim ortamında, daha fazla adres gerekebilir.
-7. **Tamam**’ı seçin.
-
-    ![Alt ağı yapılandırma](./media/availability-group-manually-configure-prerequisites-tutorial-/08-configuresubnet.png)
-
-Aşağıdaki tabloda ağ yapılandırma ayarları özetlenmektedir:
-
-| **Alan** | Değer |
-| --- | --- |
-| **Ad** |**autoHAVNET** |
-| **Adres alanı** |Bu değer, aboneliğinizdeki kullanılabilir adres alanlarına bağlıdır. Tipik bir değer 10.0.0.0/16 ' dır. |
-| **Alt ağ adı** |**yönetici** |
-| **Alt ağ adres aralığı** |Bu değer, aboneliğinizdeki kullanılabilir adres aralıklarına bağlıdır. Tipik bir değer 10.0.0.0/24 ' dir. |
-| **Alt ağ adı** |**sqlsubnet** |
-| **Alt ağ adres aralığı** |Bu değer, aboneliğinizdeki kullanılabilir adres aralıklarına bağlıdır. Tipik bir değer 10.0.1.0/24 ' dir. |
-| **Abonelik** |Kullanmayı düşündüğünüz aboneliği belirtin. |
-| **Kaynak Grubu** |**SQL-HA-RG** |
-| **Konum** |Kaynak grubu için seçtiğiniz konumu belirtin. |
 
 ## <a name="create-availability-sets"></a>Kullanılabilirlik kümeleri oluşturma
 
@@ -164,7 +129,7 @@ Kullanılabilirlik kümelerini oluşturduktan sonra, Azure portal kaynak grubuna
 
 ## <a name="create-domain-controllers"></a>Etki alanı denetleyicileri oluşturma
 
-Ağı, alt ağları ve kullanılabilirlik kümelerini oluşturduktan sonra, etki alanı denetleyicileri için sanal makineleri oluşturmaya hazırsınız demektir.
+Ağ, alt ağ ve kullanılabilirlik kümelerini oluşturduktan sonra, etki alanı denetleyicileri için sanal makineleri oluşturmaya hazırsınız demektir.
 
 ### <a name="create-virtual-machines-for-the-domain-controllers"></a>Etki alanı denetleyicileri için sanal makineler oluşturma
 

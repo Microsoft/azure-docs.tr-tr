@@ -4,12 +4,12 @@ description: Bu makalede, Azure Event Hubs eski Azure-eventhubs paketini kullana
 ms.topic: quickstart
 ms.date: 06/23/2020
 ms.custom: devx-track-java
-ms.openlocfilehash: e86ca76f3eb661e1407a02b58e60b62b391f5702
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: b9bbd5d4290261ec96755f02a6179a7cde267d82
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97607992"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309416"
 ---
 # <a name="use-java-to-send-events-to-or-receive-events-from-azure-event-hubs-azure-eventhubs"></a>Azure Event Hubs (Azure-eventhubs) olay göndermek veya olayları almak için Java 'Yı kullanma
 
@@ -421,4 +421,4 @@ Aşağıdaki makaleleri okuyun:
 
 - [EventProcessorHost](event-hubs-event-processor-host.md)
 - [Azure Event Hubs'ın özellikleri ve terminolojisi](event-hubs-features.md)
-- [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+- [Event Hubs ile ilgili SSS](event-hubs-faq.yml)

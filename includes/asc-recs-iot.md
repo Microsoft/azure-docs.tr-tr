@@ -6,15 +6,15 @@ ms.date: 03/22/2021
 ms.author: memildin
 ms.custom: generated
 ms.openlocfilehash: 388798b9f1ada6921fb79363678ecd17a3041227
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104801494"
 ---
 Bu kategoride **12** öneri vardır.
 
-|Öneri |Açıklama |Önem derecesi |
+|Öneri |Description |Önem derecesi |
 |---|---|---|
 |Varsayılan IP filtresi Ilkesi reddetme olmalıdır |IP filtresi yapılandırması, izin verilen trafik için tanımlı kurallara sahip olmalıdır ve varsayılan olarak tüm diğer trafiği reddetmelidir<br />(İlgili ilke yok) |Orta |
 |IoT Hub tanılama günlükleri etkinleştirilmelidir |Günlükleri etkinleştirin ve bir yıla kadar saklayın. Bu, bir güvenlik olayı gerçekleştiğinde veya ağınızın güvenliği tehlikeye atılırsa araştırma amaçlarıyla etkinlik izlerini yeniden oluşturmayı sağlar.<br />(İlgili ilke: [IoT Hub Içindeki tanılama günlükleri etkinleştirilmelidir](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2fproviders%2fMicrosoft.Authorization%2fpolicyDefinitions%2f383856f8-de7f-44a2-81fc-e5135b5c2aa4)) |Düşük |

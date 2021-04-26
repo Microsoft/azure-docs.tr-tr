@@ -1,24 +1,24 @@
 ---
-title: Azure için Azure Izleyici Veri Gezgini (Önizleme) | Microsoft Docs
-description: Bu makalede Azure Veri Gezgini kümeleri için Azure Monitor Insights açıklanır.
+title: Azure Veri Gezgini Öngörüler (ADX Öngörüler önizlemesi) | Microsoft Docs
+description: Bu makalede Azure Veri Gezgini Insights (ADX öngörüleri) açıklanmaktadır
 services: azure-monitor
 ms.topic: conceptual
 ms.date: 01/05/2021
 author: lgayhardt
 ms.author: lagayhar
-ms.openlocfilehash: dcfe12b30e336863c8e112d9ad675a2f57fe48f4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a8aae2dc03ba87e9782cdf3952be1bfc4a1aae75
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102179145"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767050"
 ---
-# <a name="azure-monitor-for-azure-data-explorer-preview"></a>Azure Veri Gezgini için Azure Izleyici (Önizleme)
+# <a name="azure-data-explorer-insights-preview"></a>Azure Veri Gezgini öngörüleri (Önizleme)
 
-Azure Veri Gezgini için Azure Izleyici (Önizleme), küme Performanslarınızın, işlemlerinin, kullanımınızın ve hatalarının birleştirilmiş bir görünümünü sunarak kümelerinizin kapsamlı bir şekilde izlenmesini sağlar.
-Bu makale, Azure Veri Gezgini (Önizleme) için Azure Izleyici 'yi ekleme ve kullanmayı anlamanıza yardımcı olur.
+Azure Veri Gezgini Insights (Önizleme), küme performanlarınızın, işlemlerinin, kullanımınızın ve hatalarının birleştirilmiş bir görünümünü sunarak kümelerinizin kapsamlı bir şekilde izlenmesini sağlar.
+Bu makale, Azure Veri Gezgini öngörülerini (Önizleme) nasıl ekleneceğini ve kullanacağınızı anlamanıza yardımcı olur.
 
-## <a name="introduction-to-azure-monitor-for-azure-data-explorer-preview"></a>Azure için Azure Izleyici 'ye giriş Veri Gezgini (Önizleme)
+## <a name="introduction-to-azure-data-explorer-insights-preview"></a>Azure Veri Gezgini öngörülerine giriş (Önizleme)
 
 Deneyimle karşılaşmadan önce, bilgileri nasıl sunduklarını ve görselleştirir.
 -    Sorgu, giriş ve dışarı aktarma işlemlerinin performansını kolayca izlemek için kümelerinizin birincil ölçümlerinin anlık görüntü görünümünü gösteren **Ölçek perspektifinde** .
@@ -73,7 +73,7 @@ Bu sekme, sürekli dışa aktarma işlemlerine yönelik dışarı aktarılmış 
 
 ## <a name="view-from-an-azure-data-explorer-cluster-resource-drill-down-analysis"></a>Azure Veri Gezgini kümesi kaynağından görüntüleme (detaya gitme Analizi)
 
-Azure Veri Gezgini kümelerini Azure Izleyici 'ye doğrudan bir Azure Veri Gezgini kümesinden erişmek için:
+Azure Veri Gezgini öngörülerini doğrudan bir Azure Veri Gezgini kümesinden erişmek için:
 
 1. Azure portal **Azure Veri Gezgini kümeleri**' ni seçin.
 
@@ -81,7 +81,7 @@ Azure Veri Gezgini kümelerini Azure Izleyici 'ye doğrudan bir Azure Veri Gezgi
 
 Bu görünümlere Ayrıca Azure Monitor Insights görünümündeki Azure Veri Gezgini kümesinin kaynak adı seçilerek de erişilebilir.
 
-Azure Veri Gezgini için Azure Izleyici, genel bir izleme çözümü sağlamak için hem günlükleri hem de ölçümleri birleştirir. Günlük tabanlı görselleştirmelerin dahil edilmesi, kullanıcıların [Azure Veri Gezgini kümesinin tanılama günlüğünü etkinleştirmesini ve bir Log Analytics çalışma alanına göndermesini gerektirir.](/azure/data-explorer/using-diagnostic-logs?tabs=commands-and-queries#enable-diagnostic-logs) Etkinleştirilmesi gereken tanılama günlükleri şunlardır: **komut**, **sorgu**, **Tabloayrıntıları** ve **tableusagestatistik**.
+Azure Veri Gezgini öngörüleri, genel bir izleme çözümü sağlamak için hem günlükleri hem de ölçümleri birleştirir. Günlük tabanlı görselleştirmelerin dahil edilmesi, kullanıcıların [Azure Veri Gezgini kümesinin tanılama günlüğünü etkinleştirmesini ve bir Log Analytics çalışma alanına göndermesini gerektirir.](/azure/data-explorer/using-diagnostic-logs?tabs=commands-and-queries#enable-diagnostic-logs) Etkinleştirilmesi gereken tanılama günlükleri şunlardır: **komut**, **sorgu**, **Tabloayrıntıları** ve **tableusagestatistik**.
 
 !["Izleme için günlükleri etkinleştir" metnini görüntüleyen mavi düğme ekran görüntüsü](./media/data-explorer/enable-logs.png)
 
@@ -118,13 +118,18 @@ Azure Veri Gezgini için Azure Izleyici, genel bir izleme çözümü sağlamak i
 
 [![Önbellek ayrıntılarının ekran görüntüsü](./media/data-explorer/cache-tab.png)](./media/data-explorer/cache-tab.png#lightbox)
 
+**Küme sınırları** sekmesi, kullanımınıza göre küme sınırlarını görüntüler. Bu sekmede CPU, alım ve önbellek kullanımını inceleyebilirsiniz. Bu ölçümler "düşük", "Orta" veya "yüksek" olarak puanlanır. Bu ölçümler ve puanlar, kümenizin en iyi SKU ve örnek sayısına karar verirken önemlidir ve Azure Advisor SKU/boyut önerisi ' nde hesaba götürülürsünüz. Bu sekmede, eğilimini ve Puanının nasıl karar sağladığını anlamak için bir ölçüm kutucuğu ve derin bir seçim yapabilirsiniz. Ayrıca, kümeniz için Azure Advisor SKU 'SU/boyut önerisini görüntüleyebilirsiniz. Örneğin, aşağıdaki görüntüde tüm ölçümlerin "düşük" olarak puanlandığına ve bu nedenle kümenin bir maliyet önerisi aldığından ve maliyeti değiştirmesine/azalmasına ve maliyeti kaydetmesine izin vermiş olursunuz.
+
+> [!div class="mx-imgBorder"]
+> [![Küme sınırları ekran görüntüsü.](./media/data-explorer/cluster-boundaries.png)](./media/data-explorer/cluster-boundaries.png#lightbox)
+
 ## <a name="pin-to-azure-dashboard"></a>Azure panosuna sabitle
 
 Bölümün sağ üst köşesindeki raptiye simgesini seçerek ölçüm bölümlerinin herhangi birini ("ölçekli" perspektifinden) bir Azure panosuna sabitleyebilirsiniz.
 
 ![PIN simgesinin seçili ekran görüntüsü](./media/data-explorer/pin.png)
 
-## <a name="customize-azure-monitor-for-azure-data-explorer-cluster"></a>Azure Veri Gezgini kümesi için Azure Izleyicisini özelleştirme
+## <a name="customize-azure-data-explorer-insights"></a>Azure Veri Gezgini öngörülerini özelleştirme
 
 Bu bölümde, veri analizi ihtiyaçlarınızı desteklemeye yönelik olarak özelleştirmek üzere çalışma kitabını düzenlemeyle ilgili yaygın senaryolar vurgulanmıştır:
 * Çalışma kitabını her zaman belirli bir abonelik veya Azure Veri Gezgini kümesi seçmek üzere kapsama
@@ -143,7 +148,7 @@ En üstteki araç çubuğundan **Özelleştir** düğmesini seçerek düzenleme 
 
 Genel sorun giderme kılavuzu için, adanmış çalışma kitabı tabanlı Öngörüler [sorun giderme makalesine](troubleshoot-workbooks.md)bakın.
 
-Bu bölüm, Azure Veri Gezgini kümesi (Önizleme) için Azure Izleyicisi 'ni kullanırken karşılaşabileceğiniz bazı yaygın sorunların tanılanması ve sorun gidermede size yardımcı olur. Belirli sorununuzla ilgili bilgileri bulmak için aşağıdaki listeyi kullanın.
+Bu bölüm, Azure Veri Gezgini öngörüleri (Önizleme) kullanırken karşılaşabileceğiniz bazı yaygın sorunların tanılanması ve sorun gidermede size yardımcı olur. Belirli sorununuzla ilgili bilgileri bulmak için aşağıdaki listeyi kullanın.
 
 ### <a name="why-dont-i-see-all-my-subscriptions-in-the-subscription-picker"></a>Abonelik seçicideki tüm aboneliklerimi neden görmüyorum?
 

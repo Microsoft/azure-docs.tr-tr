@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 02/05/2021
 ms.author: mahender
 ms.custom: seodec18
-ms.openlocfilehash: 69fc0d6f3c4e18b34555a099f4e28e278ca3bdad
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1e6f46b205790d81a3e76d2aafbcf7e13dbb5afd
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "100635396"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107815225"
 ---
 # <a name="use-key-vault-references-for-app-service-and-azure-functions"></a>App Service ve Azure Işlevleri için Key Vault başvurularını kullanma
 
@@ -28,10 +28,21 @@ Key Vault parolaları okumak için bir kasasının oluşturulmuş olması ve uyg
    > [!NOTE] 
    > Key Vault başvurular Şu anda yalnızca sistem tarafından atanan yönetilen kimlikleri destekler. Kullanıcı tarafından atanan kimlikler kullanılamaz.
 
-1. Daha önce oluşturduğunuz uygulama kimliği için [Key Vault bir erişim ilkesi](../key-vault/general/secure-your-key-vault.md#key-vault-access-policies) oluşturun. Bu ilkede "Get" gizli anahtarını etkinleştirin. "Yetkilendirilmiş uygulama" veya `applicationId` ayarları, yönetilen bir kimlikle uyumlu olmadığından yapılandırmayın.
+1. Daha önce oluşturduğunuz uygulama kimliği için [Key Vault bir erişim ilkesi](../key-vault/general/security-features.md#privileged-access) oluşturun. Bu ilkede "Get" gizli anahtarını etkinleştirin. "Yetkilendirilmiş uygulama" veya `applicationId` ayarları, yönetilen bir kimlikle uyumlu olmadığından yapılandırmayın.
 
-   > [!IMPORTANT]
-   > Key Vault başvurular, uygulama bir [App Service ortamı](./environment/intro.md)barındırımadığı takdirde, [ağ kısıtlamalarına](../key-vault/general/overview-vnet-service-endpoints.md) sahip bir anahtar kasasında depolanan gizli dizileri çözemeyebilir.
+### <a name="access-network-restricted-vaults"></a>Ağ kısıtlamalı kasaları erişim
+
+> [!NOTE]
+> Uygulama bir [App Service ortamı](./environment/intro.md)barındırıdıkça, Linux tabanlı uygulamalar şu anda ağ kısıtlı anahtar kasasından gizli dizileri çözemeyebilir.
+
+Kasanızda [ağ kısıtlamalarına](../key-vault/general/overview-vnet-service-endpoints.md)göre yapılandırıldıysa, uygulamanın ağ erişimi olduğundan da emin olmanız gerekir.
+
+1. [App Service ağ özellikleri](./networking-features.md) ve [Azure işlevleri ağ seçenekleri](../azure-functions/functions-networking-options.md)' nde açıklandığı gibi, uygulamanın yapılandırılmış giden ağ özelliklerine sahip olduğundan emin olun.
+
+2. Kasasının, uygulamanızın erişebileceği ağ veya alt ağ için yapılandırma hesaplarının olduğundan emin olun.
+
+> [!IMPORTANT]
+> Sanal ağ tümleştirmesiyle bir kasaya erişim, [belirtilen sürüm olmadan gizli anahtar güncelleştirmeleri için](#rotation)Şu anda uyumsuz.
 
 ## <a name="reference-syntax"></a>Başvuru sözdizimi
 
@@ -56,6 +67,9 @@ Alternatif olarak:
 ```
 
 ## <a name="rotation"></a>Döndürme
+
+> [!IMPORTANT]
+> [Sanal ağ tümleştirmesiyle bir kasaya erişim](#access-network-restricted-vaults) , belirtilen sürüm olmadan gizli anahtar güncelleştirmeleri için şu anda uyumsuz.
 
 Başvuru içinde bir sürüm belirtilmemişse, uygulama Key Vault mevcut olan en son sürümü kullanır. Bir döndürme olayı gibi daha yeni sürümler kullanılabilir olduğunda, uygulama otomatik olarak güncelleştirilecek ve bir gün içinde en son sürümü kullanmaya başlayacaktır. Uygulamada yapılan tüm yapılandırma değişiklikleri, tüm başvurulan parolaların en son sürümlerine anında güncelleştirme yapılmasına neden olur.
 

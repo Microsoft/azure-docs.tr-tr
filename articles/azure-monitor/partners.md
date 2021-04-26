@@ -1,14 +1,16 @@
 ---
 title: Azure Izleyici ile tümleştirilen iş ortakları
 description: Azure Izleyici iş ortakları ve bunlarla tümleştirme için belgelere nasıl erişebileceğiniz hakkında bilgi edinin.
+author: rboucher
+ms.author: robb
 ms.topic: conceptual
-ms.date: 02/19/2021
-ms.openlocfilehash: ca58023510eb9329bc8ddf1339df4d8c27aae5e6
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/14/2021
+ms.openlocfilehash: d449f660fa97af8b5c24542258029834a964b3f2
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102101027"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751625"
 ---
 # <a name="azure-monitor-partner-integrations"></a>Azure İzleyici iş ortağı tümleştirmeleri
 
@@ -111,7 +113,7 @@ Azure ile yeni Dataköpek tümleştirmesinin [genel önizlemesine](https://forms
 
 DynaTrace OneAgent, Azure uzantı mekanizması aracılığıyla Azure VM 'Leri ve App Services ile tümleşir. Bu şekilde, dynaTrace OneAgent Konakları, ağ ve hizmetlerle ilgili performans ölçümleri toplayabilirler. Yalnızca ölçümleri görüntülemenin yanı sıra, dynaTrace ortamları uçtan uca görselleştirir. İstemci tarafındaki işlemleri veritabanı katmanına gösterir. DynaTrace, kod ve veritabanına yönelik Yöntem düzeyi öngörüleri sağlamak için, sorunların AI tabanlı ve tamamen tümleşik kök-neden analizi sağlar. Bu öngörü, sorun giderme ve performans iyileştirmeleri çok daha kolay hale getirir.
 
-[Dynatrack belgeleri](https://help.dynatrace.com/infrastructure-monitoring/paas/how-do-i-monitor-microsoft-azure-web-apps/)
+[DynaTrace belgeleri](https://www.dynatrace.com/support/help/technology-support/cloud-platforms/microsoft-azure-services/)
 
 
 ## <a name="elastic"></a>Tik
@@ -296,6 +298,14 @@ Site24x7 Azure Izleme ile şunları yapabilirsiniz:
 ## <a name="solarwinds"></a>SolarWinds
 
 [SolarWinds belgeleri](https://www.solarwinds.com/topics/azure-monitoring)
+
+## <a name="speartip"></a>SpearTip
+
+![SpearTip logosu](./media/partners/speartip.png)
+
+Speartıp 24/7 güvenlik işlemleri Merkezi, siber tehditleri için Azure ortamlarını sürekli olarak izler. Azure Izleyici ile ShadowSpear tümleştirmesinin kullanılmasıyla, gelişmiş tehditler için güvenlik olayları toplanır ve analiz edilir; Speartıp mühendisleri, kendi izlemelerinde tehdit aktörlerini araştırıp yanıt verir. Tümleştirme sorunsuz ve tümleştirme dağıtıldıktan sonra anında değer sağlar.
+
+[Speartıp belgeleri](https://www.speartip.com/identify/)
 
 ## <a name="splunk"></a>Splunk
 

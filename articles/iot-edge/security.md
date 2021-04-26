@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
 ms.openlocfilehash: 9ff154eee6c6174a8f1a3aa7bea37ef62273bb1a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103489511"
 ---
 # <a name="security-standards-for-azure-iot-edge"></a>Azure IoT Edge için güvenlik standartları
@@ -74,7 +74,7 @@ Akıllı uç sistemleri de dahil tüm sağlıklı sistemler, düzeltme eki ve y�
 
 Birçok akıllı sınır aygıtı için, özellikle potansiyel kötü amaçlı aktörler tarafından fiziksel olarak erişilebilen cihazlara donanım güvenliği, koruma için son savunma ' tır. Bu tür dağıtımlar için, yetkisiz dayanıklı donanım çok önemlidir. Azure IoT Edge, güvenli Silicon Hardware satıcıları, çeşitli risk profillerine ve dağıtım senaryolarına uyum sağlamak amacıyla, farklı donanım güvenine sahip farklı özellikleri sunacak şekilde teşvik eder. Donanım güveni, Güvenilir Platform Modülü (ISO/ıEC 11889) ve Trusted Computing Group cihaz tanımlayıcısı bileşim altyapısı (zar) gibi yaygın güvenlik protokolü standartlarından gelebilir. TrustZones ve Software Guard uzantıları (SGX) gibi güvenli şifreleme teknolojileri de donanım güveni sağlar.
 
-## <a name="certification"></a>Sertifika
+## <a name="certification"></a>Sertifikasyon
 
 Cihazlara Azure IoT Edge cihazları oluştururken müşterilerin bilinçli kararlar almasına yardımcı olmak için IoT Edge Framework 'ün sertifika gereksinimleri vardır. Bu gereksinimlere ek olarak, güvenlik uygulamalarının doğrulanması ile ilgili güvenlik talepleri ve sertifikaların sertifikalamaları vardır. Örneğin, bir güvenlik talebi sertifikası, IoT Edge cihazın önyükleme saldırılarına karşı bilinen güvenli donanımı kullandığı anlamına gelir. Doğrulama sertifikası, güvenli donanımın cihazda bu değeri sunmak üzere düzgün şekilde uygulandığı anlamına gelir. Basitlik ilkesiyle birlikte, Framework en düşük sertifika yükünü tutmaya çalışır.
 

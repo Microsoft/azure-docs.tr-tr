@@ -4,10 +4,10 @@ description: Bir hizmeti Service Fabric Windows bağımsız kümesinde Active Di
 ms.topic: conceptual
 ms.date: 03/29/2018
 ms.openlocfilehash: d4a7afc2ddb0f39014a7cf0fd006d7fe23673a95
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "91840736"
 ---
 # <a name="run-a-service-as-an-active-directory-user-or-group"></a>Bir hizmeti Active Directory Kullanıcı veya grup olarak çalıştırma

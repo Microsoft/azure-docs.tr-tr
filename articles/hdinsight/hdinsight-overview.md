@@ -6,10 +6,10 @@ ms.topic: overview
 ms.custom: contperf-fy21q1
 ms.date: 08/21/2020
 ms.openlocfilehash: cbaa84c73a5e332dca60286bc35200761e546dd3
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104864236"
 ---
 # <a name="what-is-azure-hdinsight"></a>Azure HDInsight nedir?
@@ -76,7 +76,7 @@ Bulutun gelişmiş analiz özelliklerinden yararlanmak üzere mevcut şirket iç
 
 HDInsight belirli küme türlerinin yanı sıra bileşen, yardımcı program ve dil ekleme olanağı gibi küme özelleştirme özelliklerini de içerir. HDInsight şu küme türlerini sunar:
 
-|Küme Türü | Açıklama |
+|Küme Türü | Description |
 |---|---|
 |[Apache Hadoop](./hadoop/apache-hadoop-introduction.md)|İşlem verilerini paralel olarak işlemek ve analiz etmek için, ", YARN kaynak yönetimini ve basit bir MapReduce programlama modelini kullanan bir çerçeve.|
 |[Apache Spark](./spark/apache-spark-overview.md)|Büyük veri analizi uygulamalarının performansını artırmak üzere bellek içi işlemeyi destekleyen açık kaynaklı bir paralel işleme çerçevesidir. Bkz. [HDInsight’ta Apache Spark nedir?](./spark/apache-spark-overview.md)|

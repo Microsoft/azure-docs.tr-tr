@@ -4,10 +4,10 @@ description: Bu makalede, Azure sanal WAN 'da genel IP işlevlerinin nasıl kull
 ms.topic: how-to
 ms.date: 02/04/2021
 ms.openlocfilehash: 794e24e531d464adf58d5a06b5a411ada18c4a60
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105023665"
 ---
 # <a name="how-to-use-the-public-ip-functionality-in-azure-vmware-solution"></a>Azure VMware çözümünde genel IP işlevselliğini kullanma

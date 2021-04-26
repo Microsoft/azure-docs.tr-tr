@@ -4,13 +4,13 @@ description: Uygulamanızı bir ZIP dosyası (veya Java geliştiricileri için b
 ms.topic: article
 ms.date: 08/12/2019
 ms.reviewer: sisirap
-ms.custom: seodec18, devx-track-azurecli
-ms.openlocfilehash: 150f6b57f1dec0b6d925ef53b4a7001ae9f23607
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.custom: seodec18, devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 9f59576ea66b72a492e1e6c665a51258861842dd
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97007917"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833031"
 ---
 # <a name="deploy-your-app-to-azure-app-service-with-a-zip-or-war-file"></a>Bir ZIP veya WAR dosyası ile Azure App Service uygulamanızı dağıtma
 
@@ -44,7 +44,7 @@ Yukarıdaki uç nokta Linux uygulama hizmetleri için şu anda çalışmıyor. B
 
 ## <a name="deploy-zip-file-with-azure-cli"></a>Azure CLı ile ZIP dosyası dağıtma
 
-[Az WebApp Deployment Source config-ZIP](/cli/azure/webapp/deployment/source#az-webapp-deployment-source-config-zip) komutunu kullanarak KARŞıYA yüklenen ZIP dosyasını Web uygulamanıza dağıtın.  
+[Az WebApp Deployment Source config-ZIP](/cli/azure/webapp/deployment/source#az_webapp_deployment_source_config_zip) komutunu kullanarak KARŞıYA yüklenen ZIP dosyasını Web uygulamanıza dağıtın.  
 
 Aşağıdaki örnek, karşıya yüklediğiniz ZIP dosyasını dağıtır. Yerel bir Azure CLı yüklemesi kullanırken, için yerel ZIP dosyanızın yolunu belirtin `--src` .
 

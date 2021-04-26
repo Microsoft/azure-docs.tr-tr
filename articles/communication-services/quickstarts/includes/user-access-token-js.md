@@ -10,12 +10,12 @@ ms.date: 03/10/2021
 ms.topic: include
 ms.custom: include file
 ms.author: tchladek
-ms.openlocfilehash: 398b4b6f1f1e1d812e4782bfb6c96870d68e0cec
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 68b5fc7c958f611c43ba3f38bf30ceb63608886a
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107166"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106113170"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -80,7 +80,7 @@ main().catch((error) => {
 
 ## <a name="authenticate-the-client"></a>İstemcinin kimliğini doğrulama
 
-`CommunicationIdentityClient`Bağlantı dizeniz ile bir örneğini oluşturun. Aşağıdaki kod, adlı bir ortam değişkeninden kaynak için bağlantı dizesini alır `COMMUNICATION_SERVICES_CONNECTION_STRING` . [Kaynak bağlantı dizesini yönetme](../create-communication-resource.md#store-your-connection-string)hakkında bilgi edinin.
+`CommunicationIdentityClient`Bağlantı dizeniz ile bir örneğini oluşturun. Aşağıdaki kod, adlı bir ortam değişkeninden kaynak için bağlantı dizesini alır `COMMUNICATION_SERVICES_CONNECTION_STRING` . [Kaynağınızın bağlantı dizesini yönetme](../create-communication-resource.md#store-your-connection-string)hakkında bilgi edinin.
 
 `main` yöntemine aşağıdaki kodu ekleyin:
 
@@ -108,7 +108,7 @@ Yönetilen kimlik ayarladıysanız, bkz. [Yönetilen kimlikler kullanma](../mana
 ```javascript
 const endpoint = process.env["COMMUNICATION_SERVICES_ENDPOINT"];
 const tokenCredential = new DefaultAzureCredential();
-var client = new CommunicationIdentityClient(endpoint, tokenCredential);
+const identityClient = new CommunicationIdentityClient(endpoint, tokenCredential);
 ```
 
 ## <a name="create-an-identity"></a>Kimlik oluşturma
@@ -140,7 +140,7 @@ Erişim belirteçleri yeniden verilmesini gerektiren kısa ömürlü kimlik bilg
 
 ```javascript
 // Issue an identity and an access token with the "voip" scope for the new identity
-let identityTokenResponse = await this.client.createUserAndToken(["voip"]);
+let identityTokenResponse = await identityClient.createUserAndToken(["voip"]);
 const { token, expiresOn, user } = identityTokenResponse;
 console.log(`\nCreated an identity with ID: ${user.communicationUserId}`);
 console.log(`\nIssued an access token with 'voip' scope that expires at ${expiresOn}:`);

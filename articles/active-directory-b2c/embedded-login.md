@@ -13,12 +13,12 @@ ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: ccad323c1834894367cca0ef0d3f98eb1b1b1ec3
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: dc4450fb1e21211b43bc178d94cf4bdfe6da58e1
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105639925"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256795"
 ---
 # <a name="embedded-sign-in-experience"></a>Ekli oturum açma deneyimi
 
@@ -49,7 +49,7 @@ Daha basit bir oturum açma deneyimi için, kullanıcıların ayrı bir oturum a
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Active Directory B2C içindeki özel ilkeleri kullanmaya başlama](custom-policy-get-started.md)adımlarını izleyin.
+* [Active Directory B2C içindeki özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)adımlarını izleyin.
 * İlkeleriniz için [özel etki alanlarını etkinleştirin](custom-domain.md) .
 
 ## <a name="configure-your-policy"></a>İlkenizi yapılandırma

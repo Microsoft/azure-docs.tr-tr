@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 01/11/2021
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 5e0125f14570e917b228c5f713e636335755581d
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: b555c8651c6e1608193a6ae06c39b20f633e4ea9
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105024277"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813677"
 ---
 # <a name="azure-active-directory-b2c-isv-partners"></a>Azure Active Directory B2C ISV iş ortakları
 
@@ -61,23 +61,32 @@ Rol tabanlı erişim denetimi için aşağıdaki ISV 'Ler ile Microsoft iş orta
 | ![N8identity logosunun ekran görüntüsü](./media/partner-gallery/n8identity-logo.png) | [N8Identity](./partner-n8identity.md) , Microsoft Azure üzerinde çalışan müşteri hesapları geçişi ve müşteri hizmet ISTEKLERI (CSR) yönetimine yönelik çözüm sağlayan bir hizmet olarak kimlik idare platformudur. |
 | ![Saviynt logosunun ekran görüntüsü](./media/partner-gallery/saviynt-logo.png) | [Saviynt](./partner-Saviynt.md) Cloud-Native platform akıllı analizler aracılığıyla daha iyi güvenlik, uyumluluk ve Idare ve BT modernleştirmeyi kolaylaştırmak için Uygulama tümleştirmesini yükseltir. |
 
-## <a name="security"></a>Güvenlik
+## <a name="secure-hybrid-access-to-on-premises-application"></a>Şirket içi uygulamaya güvenli karma erişim
 
-Güvenlik için aşağıdaki ISV 'Ler ile Microsoft iş ortakları.
+Microsoft, şirket içi uygulamaya güvenli karma erişim sağlamak için aşağıdaki ISV 'Lere sahip iş ortakları. 
+
+| ISV iş ortağı | Açıklama ve tümleştirme izlenecek yolları |
+|:-------------------------|:--------------|
+| ![Ping logosunun ekran görüntüsü](./media/partner-gallery/ping-logo.png) | [Ping kimliği](./partner-ping-identity.md) , birden çok bulutta şirket içi eski uygulamalara güvenli karma erişim sağlar. |
+| ![Bir konuşmasıyla Strata logosunun ekran görüntüsü](./media/partner-gallery/strata-logo.png) | [Strata](./partner-strata.md) , tutarlı erişim ilkeleri zorunlu kılarak, kimlikleri eşitlenmiş halde tutarak ve eski kimlik sistemlerinden uygulamaları Azure AD B2C tarafından sağlanan erişim denetimine geçirmeye basit hale getirerek şirket içi uygulamalara güvenli karma erişim sağlar. |
+| ![Zscaler logosunun ekran görüntüsü](./media/partner-gallery/zscaler-logo.png) | [Zscaler](./partner-zscaler.md) , bir VPN 'nin maliyet, sorun veya güvenlik riskleri olmadan özel uygulamalara ve varlıklara ilke tabanlı, güvenli erişim sağlar. |
+
+## <a name="fraud-protection"></a>Sahtekarlık koruması
+
+Microsoft iş ortakları, sahtekarlık algılama ve önleme için aşağıdaki ISV 'Lere sahiptir. 
 
 | ISV iş ortağı | Açıklama ve tümleştirme izlenecek yolları |
 |:-------------------------|:--------------|
 | ![Bir Arkoo Lab logosunun ekran görüntüsü](./media/partner-gallery/arkose-logo.png) | [Arkoo Labs](./partner-arkose-labs.md) , kuruluşların bot saldırılarına karşı korunmasına yardımcı olan bir sahtekarlık önleme çözümü sağlayıcısıdır, hesap, saldırıları ve sahte hesap açılışlarına karşı koruma sağlar. |
+| ![BioCatch logosunun ekran görüntüsü](./media/partner-gallery/biocatch-logo.png) | [Biocatch](./partner-biocatch.md) , meşru müşteriler ve siber dolandırıcılıkları birbirinden ayırt eden Öngörüler oluşturmak için bir kullanıcının fiziksel ve bilişsel dijital davranışlarını çözümleyen bir sahtekarlık engellemesi çözüm sağlayıcısıdır. |
 | ![Microsoft Dynamics 365 logosunun ekran görüntüsü](./media/partner-gallery/microsoft-dynamics365-logo.png) | [Microsoft Dynamics 365 sahtekarlık koruması](./partner-dynamics-365-fraud-protection.md) , kuruluşların cihaz parmak izi aracılığıyla sahte hesap açılışlarına karşı korunmasına yardımcı olan bir çözümdür. |
-| ![Ping logosunun ekran görüntüsü](./media/partner-gallery/ping-logo.png) | [Ping kimliği](./partner-ping-identity.md) , birden çok bulutta şirket içi eski uygulamalara güvenli karma erişim sağlar. |
-| ![Bir konuşmasıyla Strata logosunun ekran görüntüsü](./media/partner-gallery/strata-logo.png) | [Strata](./partner-strata.md) , tutarlı erişim ilkeleri zorunlu kılarak, kimlikleri eşitlenmiş halde tutarak ve eski kimlik sistemlerinden uygulamaları Azure AD B2C tarafından sağlanan erişim denetimine geçirmeye basit hale getirerek şirket içi uygulamalara güvenli karma erişim sağlar. |
-| ![Zscaler logosunun ekran görüntüsü](./media/partner-gallery/zscaler-logo.png) | [Zscaler](./partner-zscaler.md) , bir VPN 'nin maliyet, sorun veya güvenlik riskleri olmadan özel uygulamalara ve varlıklara ilke tabanlı, güvenli erişim sağlar. |
+
 
 ## <a name="additional-information"></a>Ek bilgiler
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

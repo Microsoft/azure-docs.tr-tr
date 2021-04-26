@@ -8,12 +8,12 @@ ms.subservice: edge
 ms.topic: troubleshooting
 ms.date: 02/22/2021
 ms.author: alkohli
-ms.openlocfilehash: c6f7182fe058bacb1236ff10dfc1553d23a7e1f2
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 87e75d771c2cc269eaae81c2433f445eb65a17a9
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105645247"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107314159"
 ---
 # <a name="troubleshoot-issues-on-your-azure-stack-edge-pro-gpu-device"></a>Azure Stack Edge Pro GPU cihazındaki sorunları giderme 
 
@@ -146,7 +146,7 @@ Cihazınıza erişmek için Azure Resource Manager yapılandırması sırasında
 |Add-AzureRmEnvironment: istek gönderilirken bir hata oluştu.<br>Şu satırda: 1 char: 1<br>+ Add-AzureRmEnvironment-adı Az3-Ermenistan " https://management.dbe ...|Bu hata, Azure Stack Edge Pro cihazınızın ulaşılamaz veya düzgün şekilde yapılandırılmadığı anlamına gelir. Sınır cihazının ve istemcisinin doğru şekilde yapılandırıldığını doğrulayın. Rehberlik için, bu tablodaki **genel sorunlar** satırına bakın.|
 |Hizmet hata döndürdü. Daha fazla ayrıntı için InnerException öğesine bakın: temel alınan bağlantı kapatıldı: SSL/TLS güvenli kanalı için güven ilişkisi kurulamadı. |   Bu hata, büyük olasılıkla kendi sertifika adımlarınızı bir veya daha fazla getirme işlemi yanlış gerçekleştirdi. Kılavuza [buradan](./azure-stack-edge-gpu-connect-resource-manager.md#step-2-create-and-install-certificates)ulaşabilirsiniz. |
 |İşlem geçersiz bir durum kodu döndürdü ' ServiceUnavailable ' <br> Yanıt durum kodu başarılı olduğunu göstermiyor: 503 (hizmet kullanılamıyor). | Bu hata, bu koşullardan herhangi birinin sonucu olabilir.<li>ArmStsPool durdurulmuş durumda.</li><li>Azure Resource Manager/güvenlik belirteci Hizmetleri Web sitelerinden biri çalışmıyor.</li><li>Azure Resource Manager küme kaynağı çalışmıyor.</li><br><strong>Note:</strong> Gereci yeniden başlatmak sorunu çözebilir, ancak daha fazla hata ayıklayabilmeniz için destek paketini toplamanız gerekir.|
-|AADSTS50126: Geçersiz Kullanıcı adı veya parola.<br>İzleme KIMLIĞI: 29317dav9-52fc-4ba0-9778-446ae5625e5a<br>Bağıntı KIMLIĞI: 1b9752c4-8cbf-4304-a714-8a16527410f4<br>Zaman damgası: 2019-11-15 09:21:57Z: uzak sunucu bir hata döndürdü: (400) hatalı Istek.<br>Şu satırda: 1 char: 1 |Bu hata, bu koşullardan herhangi birinin sonucu olabilir.<li>Geçersiz Kullanıcı adı ve parola için, [buradaki](/azure/azure-stack-edge-gpu-set-azure-resource-manager-password) adımları izleyerek ve ardından doğru parolayı kullanarak müşterinin Azure Portal parolayı değiştirdiğini doğrulayın.<li>Geçersiz bir kiracı KIMLIĞI için kiracı KIMLIĞI sabit bir GUID 'dir ve şu şekilde ayarlanmalıdır `c0257de7-538f-415c-993a-1b87a031879d`</li>|
+|AADSTS50126: Geçersiz Kullanıcı adı veya parola.<br>İzleme KIMLIĞI: 29317dav9-52fc-4ba0-9778-446ae5625e5a<br>Bağıntı KIMLIĞI: 1b9752c4-8cbf-4304-a714-8a16527410f4<br>Zaman damgası: 2019-11-15 09:21:57Z: uzak sunucu bir hata döndürdü: (400) hatalı Istek.<br>Şu satırda: 1 char: 1 |Bu hata, bu koşullardan herhangi birinin sonucu olabilir.<li>Geçersiz Kullanıcı adı ve parola için, [buradaki](/azure/databox-online/azure-stack-edge-gpu-set-azure-resource-manager-password) adımları izleyerek ve ardından doğru parolayı kullanarak müşterinin Azure Portal parolayı değiştirdiğini doğrulayın.<li>Geçersiz bir kiracı KIMLIĞI için kiracı KIMLIĞI sabit bir GUID 'dir ve şu şekilde ayarlanmalıdır `c0257de7-538f-415c-993a-1b87a031879d`</li>|
 |Connect-AzureRmAccount: AADSTS90056: kaynak devre dışı veya yok. Erişmeye çalıştığınız kaynağın tam kaynak URL 'sini belirttiğinizden emin olmak için uygulamanızın kodunu kontrol edin.<br>İzleme KIMLIĞI: e19bdbc9-5dc8-4a74-85c3-ac6abdfda115<br>Bağıntı KIMLIĞI: 75c8ef5a-830e-48B5-b039-595a96488ff9 zaman damgası: 2019-11-18 07:00:51Z: uzak sunucu bir hata döndürdü: (400) kötü |Komutta kullanılan kaynak uç noktaları `Add-AzureRmEnvironment` yanlış.|
 |Buluttan uç noktalar alınamıyor.<br>Lütfen ağ bağlantınız olduğundan emin olun. Hata ayrıntısı: HTTPSConnectionPool (Konak = ' Management. dbg-of4k6suvm.microsoftdatabox.com ', bağlantı noktası = 30005): en fazla yeniden deneme URL:/Metadata/endpoints ile aşıldı? api-Version = 2015-01-01 (SSLError ("Hatalı el sıkışma: hata ([(' SSL yordamları ', ' tls_process_server_certificate ', ' sertifika doğrulaması başarısız ')],)",),) |Bu hata çoğunlukla bir Mac/Linux ortamında görünür ve aşağıdaki sorunlardan kaynaklanır:<li>Python sertifika deposuna bir pek biçim sertifikası eklenmedi.</li> |
 

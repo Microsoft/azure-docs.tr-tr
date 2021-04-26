@@ -2,13 +2,13 @@
 title: Azure Arc etkin sunucular aracısındaki yenilikler
 description: Bu makalede, Azure Arc etkin sunucular aracısına yönelik sürüm notları bulunur. Özetlenen birçok sorun için daha fazla ayrıntı bağlantısı vardır.
 ms.topic: conceptual
-ms.date: 03/15/2021
-ms.openlocfilehash: acf606ed1ad0f54c983b14a0141d0dc11e2c45d9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/31/2021
+ms.openlocfilehash: ecff23225f4d482cc1e9a4f7b7724c8ffe0a1d73
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103470515"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106109076"
 ---
 # <a name="whats-new-with-azure-arc-enabled-servers-agent"></a>Azure Arc etkin sunucular aracısındaki yenilikler
 
@@ -24,9 +24,9 @@ Sürüm 1,4
 
 ## <a name="new-feature"></a>Yeni Özellik
 
-- Özel uç noktalar için destek eklendi.
+- Şu anda sınırlı Önizlemedeki özel uç noktalar için destek eklendi.
 - Azcmagent çıkış kodlarının genişletilmiş listesi.
-- Aracı yapılandırma parametreleri artık--config parametresi ile bir dosyadan okunabilir.
+- Aracı yapılandırma parametreleri artık parametresi olan bir dosyadan okunabilir `--config` .
 
 ## <a name="fixed"></a>Sabit
 

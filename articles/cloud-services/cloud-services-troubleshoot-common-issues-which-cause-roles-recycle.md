@@ -9,10 +9,10 @@ author: tanmaygore
 ms.reviewer: mimckitt
 ms.custom: ''
 ms.openlocfilehash: 9610b32207f8367b9415c0881e49b54e24c49ad7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98741171"
 ---
 # <a name="common-issues-that-cause-azure-cloud-service-classic-roles-to-recycle"></a>Azure bulut hizmeti (klasik) rollerinin geri dönüştürülmesine neden olan yaygın sorunlar

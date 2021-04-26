@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 05/18/2020
 ms.author: pafarley
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 4f98eac4305333ec7225c90da2777b7e02f050a0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: dff3bbaf7584b161dec5b9c6eaeb7da1bf6de170
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96853541"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106055612"
 ---
 # <a name="analyze-video-content-for-objectionable-material-in-c"></a>C 'de sakıncalı malzeme için video içeriğini analiz etme #
 

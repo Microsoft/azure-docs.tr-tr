@@ -12,12 +12,12 @@ ms.custom:
 - amqp
 - mqtt
 monikerRange: '>=iotedge-2020-11'
-ms.openlocfilehash: 1070a4c8daecfedae513f2fd8738c27abfb33078
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: f55c3a1f699f8a087eb97eaba347a3f21c124cc9
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200576"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107307325"
 ---
 # <a name="configure-the-api-proxy-module-for-your-gateway-hierarchy-scenario-preview"></a>Ağ Geçidi hiyerarşi senaryonuz için API proxy modülünü yapılandırma (Önizleme)
 
@@ -34,7 +34,7 @@ API proxy modülü, alt katman cihazların kapsayıcı görüntülerini çekmesi
 
 ## <a name="deploy-the-proxy-module"></a>Proxy modülünü dağıtma
 
-API proxy modülü Microsoft Container Registry (MCR) tarafından kullanılabilir: `mcr.microsoft.com/azureiotedge-api-proxy:latest` .
+API proxy modülü Microsoft Container Registry (MCR) tarafından kullanılabilir: `mcr.microsoft.com/azureiotedge-api-proxy:1.0` .
 
 API proxy modülünü doğrudan Azure Marketi 'nden de dağıtabilirsiniz: [IoT Edge API proxy 'si](https://azuremarketplace.microsoft.com/marketplace/apps/azure-iot.azureiotedge-api-proxy?tab=Overview).
 
@@ -52,7 +52,7 @@ API proxy modülü, yaygın senaryoları destekleyen ve özelleştirmeye izin ve
 
 Şu anda varsayılan ortam değişkenleri şunlardır:
 
-| Ortam değişkeni | Description |
+| Ortam değişkeni | Açıklama |
 | -------------------- | ----------- |
 | `PROXY_CONFIG_ENV_VAR_LIST` | Güncelleştirmek istediğiniz tüm değişkenleri virgülle ayrılmış bir listede listeleyin. Bu adım yanlışlıkla yanlış yapılandırma ayarlarını değiştirmeyi engeller.
 | `NGINX_DEFAULT_PORT` | NGINX proxy 'sinin dinlediği bağlantı noktasını değiştirir. Bu ortam değişkenini güncelleştirirseniz, seçtiğiniz bağlantı noktasının de modül dockerfile modülünde açık olduğundan ve dağıtım bildiriminde bir bağlantı noktası bağlaması olarak bildiriminin bulunduğundan emin olun.<br><br>Varsayılan değer 443 ' dir.<br><br>Azure Marketi 'nden dağıtıldığında, edgeHub modülüyle çakışmaları engellemek için varsayılan bağlantı noktası 8000 olarak güncelleştirilir. Daha fazla bilgi için bkz. [açık bağlantı noktalarını küçültün](#minimize-open-ports). |

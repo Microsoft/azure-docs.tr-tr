@@ -6,12 +6,12 @@ ms.topic: reference
 ms.date: 02/14/2020
 ms.author: cshoe
 ms.custom: devx-track-csharp, fasttrack-edit, devx-track-python
-ms.openlocfilehash: 886db905008af94b66a902cc551e4d55b36572a8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 17968f2c137eef51eecdb6c7098c7056944dc970
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98250137"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782198"
 ---
 # <a name="azure-event-grid-trigger-for-azure-functions"></a>Azure Işlevleri için Azure Event Grid tetikleyicisi
 
@@ -339,7 +339,7 @@ Aşağıdaki tabloda, dosyasında *function.js* ayarladığınız bağlama yapı
 |function.jsözelliği |Description|
 |---------|---------|
 | **türüyle** | Gerekli-olarak ayarlanmalıdır `eventGridTrigger` . |
-| **Görünüm** | Gerekli-olarak ayarlanmalıdır `in` . |
+| **yön** | Gerekli-olarak ayarlanmalıdır `in` . |
 | **ada** | Gerekli-olay verilerini alan parametre için işlev kodunda kullanılan değişken adı. |
 
 ## <a name="usage"></a>Kullanım
@@ -444,9 +444,9 @@ Bu bağlantıyı seçtiğinizde, portal geçerli tetikleyici uç noktası zaten 
 
 Azure portal kullanarak abonelikler oluşturma hakkında daha fazla bilgi için Event Grid belgelerinde [özel olay oluşturma-Azure Portal](../event-grid/custom-event-quickstart-portal.md) konusuna bakın.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
-[Azure CLI](/cli/azure/get-started-with-azure-cli)kullanarak bir abonelik oluşturmak için [az eventgrid olay-abonelik oluştur](/cli/azure/eventgrid/event-subscription#az-eventgrid-event-subscription-create) komutunu kullanın.
+[Azure CLI](/cli/azure/get-started-with-azure-cli)kullanarak bir abonelik oluşturmak için [az eventgrid olay-abonelik oluştur](/cli/azure/eventgrid/event-subscription#az_eventgrid_event_subscription_create) komutunu kullanın.
 
 Komut, işlevi çağıran uç nokta URL 'sini gerektirir. Aşağıdaki örnekte, sürüme özgü URL kalıbı gösterilmektedir:
 
@@ -571,7 +571,7 @@ Event Grid bir tetikleyiciyi yerel olarak test etmek için, buluttaki kaynağın
 1. [Bir Istek oluşturun](#generate-a-request) ve Görüntüleyici uygulamasından istek gövdesini kopyalayın.
 1. İsteği Event Grid tetikleyici işlevinizin localhost URL 'sine [el ile gönderin](#manually-post-the-request) .
 
-Testi tamamladıktan sonra, uç noktayı güncelleştirerek üretim için aynı aboneliği kullanabilirsiniz. [Az eventgrid olay-abonelik güncelleştirme](/cli/azure/eventgrid/event-subscription#az-eventgrid-event-subscription-update) Azure CLI komutunu kullanın.
+Testi tamamladıktan sonra, uç noktayı güncelleştirerek üretim için aynı aboneliği kullanabilirsiniz. [Az eventgrid olay-abonelik güncelleştirme](/cli/azure/eventgrid/event-subscription#az_eventgrid_event_subscription_update) Azure CLI komutunu kullanın.
 
 ### <a name="create-a-viewer-web-app"></a>Görüntüleyiciye Web uygulaması oluşturma
 

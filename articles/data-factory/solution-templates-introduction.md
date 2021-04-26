@@ -3,16 +3,16 @@ title: Şablonlara genel bakış
 description: Azure Data Factory ile hızlı bir şekilde başlamak için önceden tanımlanmış bir şablon kullanmayı öğrenin.
 ms.service: data-factory
 ms.topic: conceptual
-ms.author: daperlov
-author: djpmsft
+ms.author: weetok
+author: dcstwh
 ms.custom: seo-lt-2019
 ms.date: 01/04/2019
-ms.openlocfilehash: 8c0e4db2bc686fff2bd718f45c63a0fc26f6cd55
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 511c8851a39d283bd69215216f5ec4a4e77653d1
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100375400"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219816"
 ---
 # <a name="templates"></a>Şablonlar
 

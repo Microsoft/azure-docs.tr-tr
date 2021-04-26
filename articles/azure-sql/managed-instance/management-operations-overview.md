@@ -12,12 +12,12 @@ author: urosmil
 ms.author: urmilano
 ms.reviewer: sstein, MashaMSFT
 ms.date: 07/10/2020
-ms.openlocfilehash: 2da7311e61aa39be69a6a0a29eff686baaad7ebf
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: bd66c10bb1d6316bbe90e7ba4092d79c6a43a75d
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91323201"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107285303"
 ---
 # <a name="overview-of-azure-sql-managed-instance-management-operations"></a>Azure SQL Yönetilen Örneği yönetim işlemlerine genel bakış
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -70,12 +70,14 @@ Aşağıdaki tablolar, işlem kategorisine göre işlemleri ve genel toplam sür
 |İşlem  |Uzun süre çalışan segment  |Tahmini süre  |
 |---------|---------|---------|
 |Örnek özelliği değişikliği (yönetici parolası, Azure AD oturum açma, Azure Hibrit Avantajı bayrağı)|Yok|En fazla 1 dakika.|
-|Örnek depolama ölçeği artırma/azaltma (Genel Amaçlı hizmet katmanı)|Veritabanı dosyalarını iliştirme|İşlem %90, 5 dakika içinde tamamlanır.|
+|Örnek depolama ölçeği artırma/azaltma (Genel Amaçlı hizmet katmanı)|Uzun süre çalışan segment<sup>1</sup>|işlem %99, 5 dakika içinde tamamlanır.|
 |Örnek depolama ölçeği artırma/azaltma (İş Açısından Kritik hizmet katmanı)|-Sanal küme yeniden boyutlandırma<br>-Always on kullanılabilirlik grubu dengeli dağıtımı|işlemlerin %90 ' i, tüm veritabanlarının (220 GB/saat) temel aldığı 2,5 saat ile sona ermesini sağlar.|
 |Örnek işlem (Vçekirdekler) ölçeği artırma ve azaltma (Genel Amaçlı)|-Sanal küme yeniden boyutlandırma<br>-Veritabanı dosyaları iliştirme|işlemin %90 ' i 2,5 saat içinde tamamlanır.|
 |Örnek işlem (Vçekirdekler) ölçeği artırma ve azaltma (İş Açısından Kritik)|-Sanal küme yeniden boyutlandırma<br>-Always on kullanılabilirlik grubu dengeli dağıtımı|işlemlerin %90 ' i, tüm veritabanlarının (220 GB/saat) temel aldığı 2,5 saat ile sona ermesini sağlar.|
 |Örnek hizmeti katmanı değişikliği (İş Açısından Kritik Genel Amaçlı ve tam tersi)|-Sanal küme yeniden boyutlandırma<br>-Always on kullanılabilirlik grubu dengeli dağıtımı|işlemlerin %90 ' i, tüm veritabanlarının (220 GB/saat) temel aldığı 2,5 saat ile sona ermesini sağlar.|
 | | | 
+
+<sup>1</sup> ölçeklendirme genel amaçlı yönetilen örnek depolama, işlem sonunda yük devretmeye neden olmayacak. Bu durumda işlem, gönderilen istek için meta verileri güncelleştirme ve yanıtı yayma işleminden oluşur.
 
 **Kategori: Sil**
 
@@ -90,6 +92,9 @@ geçerli yapılandırma <sup>1</sup>12 saat, ancak gelecekte değiştirilebilir.
 ## <a name="instance-availability"></a>Örnek kullanılabilirliği
 
 Güncelleştirme **işlemleri SıRASıNDA** SQL yönetilen örneği, güncelleştirmenin sonunda gerçekleşen yük devretmenin neden olduğu kısa bir kesinti haricinde kullanılabilir. Genellikle, uzun süreli işlemler kesintiye uğratıldığında, [hızlandırılmış veritabanı kurtarması](../accelerated-database-recovery.md)sayesinde 10 saniyeye kadar sürer.
+
+> [!NOTE]
+> Yönetilen örnek depolamanın ölçeklendirilmesi Genel Amaçlı güncelleştirme sonunda yük devretmeye neden olmayacaktır.
 
 SQL yönetilen örneği, dağıtım ve silme işlemleri sırasında istemci uygulamaları için kullanılamaz.
 

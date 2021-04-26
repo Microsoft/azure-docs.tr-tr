@@ -44,7 +44,7 @@
     - name: Digital Twins
       href: concepts-digital-twin.md
     - name: Cihaz sertifikasyonu
-      href: concepts-certification-program.md
+      href: ../certification/program-requirements-pnp.md
     - name: Model deposu
       href: concepts-model-repository.md
     - name: Çözümde modelleri kullanma
@@ -61,8 +61,6 @@
       href: howto-use-embedded-c.md
     - name: Dijital ikizleri yönetme
       href: howto-manage-digital-twin.md
-    - name: Cihazı sertifikalama
-      href: howto-certify-device.md
     - name: IoT Tak ve Kullan köprüsü örneğine bağlama
       href: howto-use-iot-pnp-bridge.md
     - name: IoT Tak ve Kullan köprüsü oluşturma ve dağıtma

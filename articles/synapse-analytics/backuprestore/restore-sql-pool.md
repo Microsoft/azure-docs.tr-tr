@@ -1,7 +1,6 @@
 ---
 title: Mevcut ayrılmış bir SQL havuzunu geri yükleme
 description: Mevcut ayrılmış bir SQL havuzunu geri yüklemek için nasıl yapılır Kılavuzu.
-services: synapse-analytics
 author: joannapea
 manager: igorstan
 ms.service: synapse-analytics
@@ -11,12 +10,12 @@ ms.date: 10/29/2020
 ms.author: joanpo
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019
-ms.openlocfilehash: 86150107273b247bef2c74e5b8c5272d7148587e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f2fb6f809794781559683907a806e6d30ca9bed6
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94332155"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567987"
 ---
 # <a name="restore-an-existing-dedicated-sql-pool"></a>Mevcut ayrılmış bir SQL havuzunu geri yükleme
 

@@ -4,14 +4,14 @@ description: Güncelleştirme 1,3 çalıştıran Azure StorSimple Sanal dizisine
 ms.service: storsimple
 author: v-dalc
 ms.topic: article
-ms.date: 03/17/2021
+ms.date: 04/13/2021
 ms.author: alkohli
-ms.openlocfilehash: b2c2af4267140370c2aa9421a67cb3a6f413165f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 498e3d11d8188850a918c67a9a88643d15c134c5
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104657561"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389528"
 ---
 # <a name="storsimple-virtual-array-update-13-release-notes"></a>StorSimple Sanal dizisi güncelleştirme 1,3 sürüm notları
 
@@ -45,12 +45,12 @@ Bu güncelleştirme aşağıdaki geliştirmeleri içerir: KB4540725
 
 ## <a name="download-update-13"></a>Güncelleştirme 1,3 ' yı İndirin
 
-Bu güncelleştirmeyi indirmek için [Microsoft Update Katalog](https://www.catalog.update.microsoft.com/Home.aspx) sunucusuna gıdın ve KB4575898 paketini indirin. Bu paket aşağıdaki paketleri içerir:
+Bu güncelleştirmeyi indirmek için [Microsoft Update Katalog](https://www.catalog.update.microsoft.com/Home.aspx) sunucusuna gıdın ve KB4575898 paketini indirin. Bu paket aşağıdaki paketleri içerir. Paketleri şu sırayla yükler:
 
-- **KB4540725**, 2020 Mart ' e kadar 2012 R2 Için toplu Windows güncelleştirmeleri içerir. Bu toplamada nelerin dahil olduğu hakkında daha fazla bilgi için [Mart aylık güvenlik toplaması](https://support.microsoft.com/help/4540725)' na gidin.
-- 2020 Temmuz 2012 R2 için toplu Windows güncelleştirmelerini içeren **KB4565541**. Bu toplamada nelerin dahil olduğu hakkında daha fazla bilgi için [Şubat aylık güvenlik toplaması](https://support.microsoft.com/help/4565541)' na gidin.
-- 2020 Temmuz ' ye kadar olan cumulative.NET Framework güncelleştirmelerini içeren **KB4565622**. Bu toplamada nelerin dahil olduğu hakkında daha fazla bilgi için [Şubat aylık güvenlik toplaması](https://support.microsoft.com/help/4565622)' na gidin.
-- Cihaz yazılım güncelleştirmelerini içeren **KB3011067**.
+1. **KB4540725**, 2020 Mart ' e kadar 2012 R2 Için toplu Windows güncelleştirmeleri içerir. Bu toplamada nelerin dahil olduğu hakkında daha fazla bilgi için [Mart aylık güvenlik toplaması](https://support.microsoft.com/help/4540725)' na gidin.
+1. 2020 Temmuz 2012 R2 için toplu Windows güncelleştirmelerini içeren **KB4565541**. Bu toplamada nelerin dahil olduğu hakkında daha fazla bilgi için, [aylık güvenlik toplaması](https://support.microsoft.com/help/4565541)' na gidin.
+1. 2020 Temmuz ' ye kadar olan cumulative.NET Framework güncelleştirmelerini içeren **KB4565622**. Bu toplamada nelerin dahil olduğu hakkında daha fazla bilgi için [KB4565622](https://support.microsoft.com/help/4565622)adresine gidin.<!--The Help link opens the KB. I can't find a monthly rollup. I updated the link text to accurately describe what opens.-->
+1. Cihaz yazılım güncelleştirmelerini içeren **KB3011067**.
 
 KB4575898 indirin ve [Yerel Web Kullanıcı arabirimi aracılığıyla güncelleştirmeyi uygulamak](./storsimple-virtual-array-install-update-11.md#use-the-local-web-ui)için bu yönergeleri izleyin.
 

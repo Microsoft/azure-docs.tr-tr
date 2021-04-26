@@ -6,16 +6,16 @@ ms.author: harelbr
 ms.topic: how-to
 ms.custom: subject-moving-resources
 ms.date: 02/14/2021
-ms.openlocfilehash: eb6dbb74fe0d345a157049e79f7a3642499d7cfa
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d21ee7a60d11a154737c5380ec20d3e9c4490962
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102037991"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786072"
 ---
 # <a name="how-to-update-alert-rules-or-action-rules-when-their-target-resource-moves-to-a-different-azure-region"></a>Hedef kaynakları farklı bir Azure bölgesine hareket ettirildiğinde uyarı kurallarını veya eylem kurallarını güncelleştirme
 
-Bu makalede, diğer Azure kaynaklarını bölgeler arasında taşıdığınızda mevcut [uyarı kurallarının](./alerts-overview.md) ve [eylem kurallarının](./alerts-action-rules.md) neden etkilenmiş olabileceği ve bu sorunları nasıl tanımlayacağınız ve giderecağınız açıklanır. Kaynak taşıma hakkında daha fazla bilgi için ana [kaynak taşıma belgelerini](../../azure-resource-manager/management/move-region.md) kontrol edin ve bir taşıma işlemi tasarlama denetim listesi
+Bu makalede, diğer Azure kaynaklarını bölgeler arasında taşıdığınızda mevcut [uyarı kurallarının](./alerts-overview.md) ve [eylem kurallarının](./alerts-action-rules.md) neden etkilenmiş olabileceği ve bu sorunları nasıl tanımlayacağınız ve giderecağınız açıklanır. Kaynak taşıma hakkında daha fazla bilgi için ana [kaynak taşıma belgelerini](../../azure-resource-manager/management/move-resources-overview.md) kontrol edin ve bir taşıma işlemi tasarlama denetim listesi
 
 ## <a name="why-the-problem-exists"></a>Sorun neden var?
 
@@ -82,7 +82,7 @@ Kapsamdaki kaynakların **yalnızca bir kısmı** taşınırsa, taşınan kaynak
 
 ### <a name="change-the-scope-of-a-rule-using-azure-resource-manager-templates"></a>Azure Resource Manager şablonları kullanarak bir kuralın kapsamını değiştirme
 
-1. Kuralın Azure Resource Manager şablonunu alın.  Azure portal bir kuralın şablonunu dışarı aktarmak için:
+1. Kuralın Azure Resource Manager şablonunu alın.   Azure portal bir kuralın şablonunu dışarı aktarmak için:
    1. Portalın kaynak grupları bölümüne gidin ve kuralı içeren kaynak grubunu açın.
    2. Genel bakış bölümünde **gizli türü göster** onay kutusunu işaretleyin ve kuralın ilgili türüne göre filtreleyin.
    3. Ayrıntılarını görüntülemek için ilgili kuralı seçin.
@@ -104,8 +104,8 @@ Kapsamdaki kaynakların **yalnızca bir kısmı** taşınırsa, taşınan kaynak
 
 ### <a name="change-the-scope-of-a-rule-using-azure-cli"></a>Azure CLı kullanarak bir kuralın kapsamını değiştirme
 
-1.  Mevcut kuralı al ([ölçüm uyarıları](/cli/azure/monitor/metrics/alert#az-monitor-metrics-alert-show), [etkinlik günlüğü uyarıları](/cli/azure/monitor/activity-log/alert#az-monitor-activity-log-alert-list)).
-2.  Kural kapsamını doğrudan güncelleştirme ([ölçüm uyarıları](/cli/azure/monitor/metrics/alert#az-monitor-metrics-alert-update), [etkinlik günlüğü uyarıları](/cli/azure/monitor/activity-log/alert/scope))
+1.  Mevcut kuralı al ([ölçüm uyarıları](/cli/azure/monitor/metrics/alert#az_monitor_metrics_alert_show), [etkinlik günlüğü uyarıları](/cli/azure/monitor/activity-log/alert#az_monitor_activity_log-alert_list)).
+2.  Kural kapsamını doğrudan güncelleştirme ([ölçüm uyarıları](/cli/azure/monitor/metrics/alert#az_monitor_metrics_alert_update), [etkinlik günlüğü uyarıları](/cli/azure/monitor/activity-log/alert/scope))
 3.  Gerekirse, iki kurala ayırın (yukarıda belirtilen bazı ölçüm uyarıları durumları için geçerlidir).
 
 ## <a name="next-steps"></a>Sonraki adımlar

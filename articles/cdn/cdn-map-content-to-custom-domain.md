@@ -3,19 +3,19 @@ title: 'Öğretici: uç noktanıza özel etki alanı ekleme'
 titleSuffix: Azure Content Delivery Network
 description: Etki alanı adınızın URL 'niz görünür olması için Azure Content Delivery Network uç noktasına özel bir etki alanı eklemek için bu öğreticiyi kullanın.
 services: cdn
-author: asudbring
+author: jessie-jyy
 manager: KumudD
 ms.service: azure-cdn
 ms.topic: tutorial
-ms.date: 02/04/2020
-ms.author: allensu
+ms.date: 04/12/2021
+ms.author: yuajia
 ms.custom: mvc
-ms.openlocfilehash: b0e8f2b14d506eb408660b939a7c925a33215cca
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 63ca8cc981f7a192c35f7d1889187ae84773ba08
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99537754"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308005"
 ---
 # <a name="tutorial-add-a-custom-domain-to-your-endpoint"></a>Öğretici: uç noktanıza özel etki alanı ekleme
 
@@ -245,9 +245,14 @@ Azure, girdiğiniz özel etki alanı adı için CNAME kaydının bulunduğunu do
 
 Uç noktanızı artık özel bir etki alanıyla ilişkilendirmek istemiyorsanız, aşağıdaki adımları uygulayarak özel etki alanını kaldırın:
  
-1. CDN profilinizde kaldırmak istediğiniz özel etki alanını içeren uç noktayı seçin.
+1. DNS sağlayıcınıza gidin, özel etki alanı için CNAME kaydını silin veya özel etki alanı için CNAME kaydını Azure CDN olmayan bir uç noktaya güncelleştirin.
 
-2. **Uç nokta** sayfasındaki Özel etki alanları altında, kaldırmak istediğiniz özel etki alanına sağ tıklayın ve sonra açılır menüden **Sil**’i seçin. **Evet**’i seçin.
+    > [!Important]
+    > DNS girişlerinin ve oluşturdukları güvenlik risklerini engellemek için, 2021 9 Nisan 'dan itibaren Azure CDN, kaynakların silinebilmesi için önce Azure CDN uç noktalara kaldırılması gerekir. Kaynaklar Azure CDN özel etki alanları, Azure CDN profiller/uç noktaları veya Azure CDN özel etki alanlarına sahip Azure Kaynak grupları içerir.
+
+2. CDN profilinizde kaldırmak istediğiniz özel etki alanını içeren uç noktayı seçin.
+
+3. **Uç nokta** sayfasındaki Özel etki alanları altında, kaldırmak istediğiniz özel etki alanına sağ tıklayın ve sonra açılır menüden **Sil**’i seçin. **Evet**’i seçin.
 
    Özel etki alanının uç noktanızla ilişkisi silinir.
 
@@ -255,25 +260,29 @@ Uç noktanızı artık özel bir etki alanıyla ilişkilendirmek istemiyorsanız
 
 Uç noktanızı artık özel bir etki alanıyla ilişkilendirmek istemiyorsanız, aşağıdaki adımları uygulayarak özel etki alanını kaldırın:
 
-1. Özel etki alanını uç noktadan kaldırmak için [Remove-AzCdnCustomDomain](/powershell/module/az.cdn/remove-azcdncustomdomain) komutunu kullanın:
+1. DNS sağlayıcınıza gidin, özel etki alanı için CNAME kaydını silin veya özel etki alanı için CNAME kaydını Azure CDN olmayan bir uç noktaya güncelleştirin.
+
+    > [!Important]
+    > DNS girişlerinin ve oluşturdukları güvenlik risklerini engellemek için, 2021 9 Nisan 'dan itibaren Azure CDN, kaynakların silinebilmesi için önce Azure CDN uç noktalara kaldırılması gerekir. Kaynaklar Azure CDN özel etki alanları, Azure CDN profiller/uç noktaları veya Azure CDN özel etki alanlarına sahip Azure Kaynak grupları içerir.
+
+2. Özel etki alanını uç noktadan kaldırmak için [Remove-AzCdnCustomDomain](/powershell/module/az.cdn/remove-azcdncustomdomain) komutunu kullanın:
 
     * **Myendpoint8675** değerini CDN uç nokta adınızla değiştirin.
     * **Www.contoso.com** değerini özel etki alanı adınızla değiştirin.
     * **Mycdn** 'yi CDN profil adınızla değiştirin.
     * **Myresourcegroupcdn** değerini kaynak grubu adınızla değiştirin.
 
-
-```azurepowershell-interactive
-    $parameters = @{
-        CustomDomainName = 'www.contoso.com'
-        EndPointName = 'myendpoint8675'
-        ProfileName = 'myCDN'
-        ResourceGroupName = 'myResourceGroupCDN'
-    }
-    Remove-AzCdnCustomDomain @parameters
-```
-
+    ```azurepowershell-interactive
+        $parameters = @{
+            CustomDomainName = 'www.contoso.com'
+            EndPointName = 'myendpoint8675'
+            ProfileName = 'myCDN'
+            ResourceGroupName = 'myResourceGroupCDN'
+        }
+        Remove-AzCdnCustomDomain @parameters
+    ```
 ---
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:

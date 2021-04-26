@@ -9,12 +9,12 @@ ms.subservice: managed-hsm
 ms.topic: conceptual
 ms.date: 09/17/2020
 ms.author: ambapat
-ms.openlocfilehash: 7a30a7ab6689b602bc9ad4f696a6fe54c80f2151
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9ef3b19e5064c8a88bf80eebf57539be72747fe4
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "90998067"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107482526"
 ---
 # <a name="best-practices-when-using-managed-hsm"></a>Yönetilen HSM kullanırken en iyi uygulamalar
 
@@ -23,8 +23,10 @@ ms.locfileid: "90998067"
 Yönetilen HSM, şifreleme anahtarlarını koruyan bir bulut hizmetidir. Bu anahtarlar hassas ve iş açısından kritik olduğundan, yalnızca yetkili uygulamalara ve kullanıcılara izin vererek yönetilen HSM 'lere erişimin güvenli hale geldiğinden emin olun. Bu [makalede](access-control.md) erişim modeline genel bakış sunulmaktadır. Kimlik doğrulama ve yetkilendirme ve rol tabanlı erişim denetimi açıklanmaktadır.
 - HSM yöneticileri için bir [Azure Active Directory güvenlik grubu](../../active-directory/fundamentals/active-directory-manage-groups.md) oluşturun (kişilere yönetici rolü atamak yerine). Bu, bireysel hesap silme durumunda "Yönetim kilidi 'ni" engeller.
 - Yönetim gruplarınız, abonelikleriniz, kaynak gruplarınız ve yönetilen HSM 'lere erişimi kilitleme-yönetim gruplarınızı, aboneliklerinizi ve Kaynak gruplarınızı erişimi denetlemek için Azure RBAC kullanın
-- [YÖNETILEN HSM yerel RBAC](access-control.md#data-plane-and-managed-hsm-local-rbac) kullanarak anahtar başına rol atamaları oluşturma
-- Rol atamak için en az ayrıcalık erişim sorumlusunu kullanın
+- [YÖNETILEN HSM yerel RBAC](access-control.md#data-plane-and-managed-hsm-local-rbac)kullanarak her anahtar rol ataması oluşturun.
+- Görevlerin ayrılmasını sağlamak için, aynı sorumluya birden çok rol atamaktan kaçının. 
+- Rol atamak için en az ayrıcalık erişim sorumlusunu kullanın.
+- Kesin izin kümesiyle özel rol tanımı oluşturun.
 
 ## <a name="choose-regions-that-support-availability-zones"></a>Kullanılabilirlik alanlarını destekleyen bölgeleri seçin
 

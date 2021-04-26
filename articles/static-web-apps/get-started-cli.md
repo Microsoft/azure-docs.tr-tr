@@ -7,12 +7,12 @@ ms.service: static-web-apps
 ms.topic: quickstart
 ms.date: 08/13/2020
 ms.author: cshoe
-ms.openlocfilehash: f3ac1c8076650a4075c33aeaa9128133b5b90296
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: a95e1658c3633f4ae8d09b71e9d3b0c82446754a
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105046088"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727595"
 ---
 # <a name="quickstart-building-your-first-static-site-using-the-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak ilk statik sitenizi oluşturma
 
@@ -110,7 +110,7 @@ Artık depo oluşturulduktan sonra, Azure CLı 'den statik bir Web uygulaması o
 
     - `<RESOURCE_GROUP_NAME>`: Bu değeri mevcut bir [Azure Kaynak grubu adıyla](../azure-resource-manager/management/manage-resources-cli.md)değiştirin.
 
-      - Kaynak gruplarını listeleme hakkında daha fazla bilgi için, [az Group](/cli/azure/group?view=azure-cli-latest#az_group_list) belgelerine bakın.
+      - Kaynak gruplarını listeleme hakkında daha fazla bilgi için, [az Group](/cli/azure/group#az_group_list) belgelerine bakın.
 
     - `<YOUR_GITHUB_ACCOUNT_NAME>`: Bu değeri GitHub Kullanıcı adınızla değiştirin.
 

@@ -2,21 +2,20 @@
 title: Azure Izleyici 'de Get-Metric Application Insights
 description: Azure Izleyici ile .NET ve .NET Core uygulamaları için önceden toplanmış yerel ölçümleri yakalamak üzere GetMetric () çağrısını etkin bir şekilde nasıl kullanacağınızı öğrenin Application Insights
 ms.service: azure-monitor
-ms.subservice: application-insights
 ms.topic: conceptual
 ms.date: 04/28/2020
-ms.openlocfilehash: 0ce2651d5cfcb1578d78982af109a004aaac11f4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 22baa1ae9554601a72ffdb848b87d99281067967
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101719789"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384298"
 ---
 # <a name="custom-metric-collection-in-net-and-net-core"></a>.NET ve .NET Core 'da özel ölçüm koleksiyonu
 
 .NET ve .NET Core SDK 'larının Azure Izleyici Application Insights, ve özel ölçümleri toplamaya yönelik iki farklı yöntem vardır `TrackMetric()` `GetMetric()` . Bu iki yöntem arasındaki önemli fark yerel toplamadır. `TrackMetric()` ön toplamadır, ön toplama `GetMetric()` işlemi yoktur. Bu nedenle önerilen yaklaşım, toplamayı kullanmak için `TrackMetric()` artık özel ölçümleri toplamanın tercih edilen yöntemi değildir. Bu makale, GetMetric () yöntemini ve bu yöntemin nasıl çalıştığına ilişkin bir kısmını kullanarak size kılavuzluk eder.
 
-## <a name="trackmetric-versus-getmetric"></a>TrackMetric ve GetMetric karşılaştırması
+## <a name="pre-aggregating-vs-non-pre-aggregating-api"></a>Ön toplama ve toplanmayan API karşılaştırması
 
 `TrackMetric()` bir ölçümü belirten ham telemetri gönderir. Her bir değer için tek bir telemetri öğesi gönderilmesi verimsiz bir öğedir. `TrackMetric()` , `TrackMetric(item)` telemetri başlatıcılarının ve işlemcilerin tam SDK ardışık düzeninde gezindiğinden performans açısından da verimsiz olur. Farklı olarak `TrackMetric()` , `GetMetric()` yerel ön toplamasını sizin için işler ve sonra yalnızca bir dakikalık sabit bir aralıkta toplanmış bir özet ölçümü gönderir. Bu nedenle, bazı özel metrikleri ikinci veya hatta milisaniyelik düzeyde yakından izlemeniz gerekiyorsa, bunu yalnızca her dakika izlemenin yalnızca depolama ve ağ trafiği maliyetlerini alırken yapabilirsiniz. Bu Ayrıca, toplanan bir ölçüm için gönderilmesi gereken toplam telemetri öğesi sayısının büyük ölçüde azaltılmasından dolayı, kısıtlama riskini önemli ölçüde azaltır.
 
@@ -204,13 +203,13 @@ Ve her bir _FormFactor_ boyutu için ölçüm toplamaların görünümünü gör
 
 ![Form faktörleri](./media/get-metric/formfactor.png)
 
-### <a name="how-to-use-metricidentifier-when-there-are-more-than-three-dimensions"></a>Üçten fazla boyut olduğunda Metricıdentifier kullanma
+### <a name="how-to-use-metricidentifier-when-there-are-more-than-three-dimensions&quot;></a>Üçten fazla boyut olduğunda Metricıdentifier kullanma
 
 Şu anda 10 boyut desteklenir, ancak üç boyuttan büyük bir kullanım gerektirir `MetricIdentifier` :
 
 ```csharp
-// Add "using Microsoft.ApplicationInsights.Metrics;" to use MetricIdentifier
-// MetricIdentifier id = new MetricIdentifier("[metricNamespace]","[metricId],"[dim1]","[dim2]","[dim3]","[dim4]","[dim5]");
+// Add &quot;using Microsoft.ApplicationInsights.Metrics;&quot; to use MetricIdentifier
+// MetricIdentifier id = new MetricIdentifier(&quot;[metricNamespace]&quot;,&quot;[metricId],&quot;[dim1]&quot;,&quot;[dim2]&quot;,&quot;[dim3]&quot;,&quot;[dim4]&quot;,&quot;[dim5]");
 MetricIdentifier id = new MetricIdentifier("CustomMetricNamespace","ComputerSold", "FormFactor", "GraphicsCard", "MemorySpeed", "BatteryCapacity", "StorageCapacity");
 Metric computersSold  = _telemetryClient.GetMetric(id);
 computersSold.TrackValue(110,"Laptop", "Nvidia", "DDR4", "39Wh", "1TB");
@@ -286,7 +285,7 @@ computersSold.TrackValue(100, "Dim1Value1", "Dim2Value3");
 // The above call does not track the metric, and returns false.
 ```
 
-* `seriesCountLimit` bir ölçümün içerebileceği maksimum veri süresi serisi sayısıdır. Bu sınıra ulaşıldığında, çağrısı `TrackValue()` izlenmeyecektir.
+* `seriesCountLimit` bir ölçümün içerebileceği maksimum veri süresi serisi sayısıdır. Bu sınıra ulaşıldığında, bu, `TrackValue()` normal olarak yeni bir serinin sonucunu döndürür.
 * `valuesPerDimensionLimit` Boyut başına farklı değer sayısını benzer şekilde sınırlandırır.
 * `restrictToUInt32Values` Yalnızca negatif olmayan tamsayı değerlerinin izlenmesi gerekip gerekmediğini belirler.
 

@@ -3,12 +3,12 @@ title: Bıcep geliştirme ve dağıtım ortamlarını ayarlama
 description: Bıcep geliştirme ve dağıtım ortamlarını yapılandırma
 ms.topic: conceptual
 ms.date: 03/26/2021
-ms.openlocfilehash: 0e62e6a4633bee09fcbe8b783118cc95ccd5702e
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 2c905a3885fcfc5c9eb9d9db4004126882798611
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105626110"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313564"
 ---
 # <a name="install-bicep-preview"></a>Bıcep 'yi (Önizleme) yükler
 
@@ -96,7 +96,7 @@ az bicep upgrade
 Belirli bir sürümü yüklemek için:
 
 ```bash
-az bicep install --version v0.3.126
+az bicep install --version v0.3.255
 ```
 
 > [!IMPORTANT]
@@ -158,10 +158,10 @@ bicep --help
 
 ```sh
 # Add the tap for bicep
-brew tap azure/bicep https://github.com/azure/bicep
+brew tap azure/bicep
 
 # Install the tool
-brew install azure/bicep/bicep
+brew install bicep
 ```
 
 ##### <a name="macos-manual-install"></a>macOS el ile yüklemesi

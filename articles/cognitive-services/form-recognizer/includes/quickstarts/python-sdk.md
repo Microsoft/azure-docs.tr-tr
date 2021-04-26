@@ -7,22 +7,21 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: forms-recognizer
 ms.topic: include
-ms.date: 03/19/2021
+ms.date: 04/09/2021
 ms.author: lajanuar
-ms.openlocfilehash: f28fba451a5fbad9efe76e0d6bd39488beebb103
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 606755333856f6dd97ab6c5158ac67f122a1237d
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104761237"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107516469"
 ---
-<!-- markdownlint-disable MD001 -->
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD033 -->
 <!-- markdownlint-disable MD034 -->
 > [!IMPORTANT]
 >
-> * Bu makaledeki kod, basitlik nedenlerle zaman uyumlu Yöntemler ve güvenli olmayan kimlik bilgileri depolaması kullanır. Aşağıdaki başvuru belgelerine bakın. 
+> * Bu makaledeki kod, basitlik nedenlerle zaman uyumlu Yöntemler ve güvenli olmayan kimlik bilgileri depolaması kullanır. Aşağıdaki başvuru belgelerine bakın.
 
 [Başvuru belgeleri](/python/api/azure-ai-formrecognizer)  |  [Kitaplık kaynak kodu](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/azure/ai/formrecognizer)  |  [Paket (Pypı)](https://pypi.org/project/azure-ai-formrecognizer/)  |  [Örnekler](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples)
 
@@ -49,7 +48,7 @@ pip install azure-ai-formrecognizer --pre
 ```
 
 > [!NOTE]
-> Bu form tanıyıcı 3.1.0 SDK, _API sürüm 2,1 Preview. 2_' i yansıtır. Lütfen _API sürüm 2,1 Preview_ için [**REST API**](../../quickstarts/client-library.md) kullanın. 3.
+> 3.1.0 B4 form tanıyıcı, en son SDK önizleme sürümüdür ve _API sürüm 2,1 Preview. 3 ' ü_ yansıtır.
 
 #### <a name="v20"></a>[v2.0](#tab/ga)
 
@@ -71,13 +70,13 @@ Tercih ettiğiniz düzenleyicide veya IDE 'de yeni bir Python uygulaması oluşt
 > [!TIP]
 > Tüm hızlı başlangıç kodu dosyasını aynı anda görüntülemek mi istiyorsunuz? Bu hızlı başlangıçta kod örneklerini içeren [GitHub](https://github.com/Azure-Samples/cognitive-services-quickstart-code/blob/master/python/FormRecognizer/FormRecognizerQuickstart.py)'da bulabilirsiniz.
 
-Kaynağınızın Azure uç noktası ve anahtarı için değişkenler oluşturun. 
+Kaynağınızın Azure uç noktası ve anahtarı için değişkenler oluşturun.
 
 [!code-python[](~/cognitive-services-quickstart-code/python/FormRecognizer/FormRecognizerQuickstart.py?name=snippet_creds)]
 
 ## <a name="object-model"></a>Nesne modeli
 
-Form tanıyıcı ile iki farklı istemci türü oluşturabilirsiniz. Birincisi, `form_recognizer_client` hizmeti tanınan form alanları ve içerikleri için sorgulamak üzere kullanılır. İkincisi, `form_training_client` tanımayı geliştirmek için kullanabileceğiniz özel modeller oluşturmak ve yönetmek için kullanılır. 
+Form tanıyıcı ile iki farklı istemci türü oluşturabilirsiniz. İlki, `form_recognizer_client` hizmeti form alanlarını ve içeriğini tanımak üzere sorgulamak için kullanılır. İkincisi, `form_training_client` tanımayı geliştirmek için kullanabileceğiniz özel modeller oluşturmak ve yönetmek için kullanılır. 
 
 ### <a name="formrecognizerclient"></a>FormRecognizerClient
 
@@ -111,8 +110,9 @@ Bu kod parçacıkları, Python için form tanıyıcı istemci kitaplığı ile a
 * [Alındıları analiz etme](#analyze-receipts)
 * [İş kartlarını çözümle](#analyze-business-cards)
 * [Faturaları analiz etme](#analyze-invoices)
-* [Özel bir modeli eğitme](#train-a-custom-model)
+* [Kimlik belgelerini analiz etme](#analyze-identity-documents)
 * [Formları özel bir model ile analiz etme](#analyze-forms-with-a-custom-model)
+* [Özel bir modeli eğitme](#train-a-custom-model)
 * [Özel modellerinizi yönetin](#manage-your-custom-models)
 
 #### <a name="v20"></a>[v2.0](#tab/ga)
@@ -137,9 +137,10 @@ Burada, yukarıda tanımladığınız abonelik değişkenlerini kullanarak iki i
 Eğitim ve test verileriniz için URL 'lere başvuru eklemeniz gerekir.
 
 * [!INCLUDE [get SAS URL](../../includes/sas-instructions.md)]
-  
+
    :::image type="content" source="../../media/quickstarts/get-sas-url.png" alt-text="SAS URL 'SI alımı":::
-* Aşağıdaki örneklerde bulunan ( [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples/sample_forms) ' da de mevcuttur) ve giriş görüntülerini kullanarak, blob depolamada tek BIR BELGENIN SAS URL 'sini almak için yukarıdaki adımları kullanabilirsiniz. 
+
+* Aşağıdaki örneklere dahil edilen örnek form ve alış görüntülerini kullanın ( [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples/sample_forms) 'da da kullanılabilir) ve BLOB depolamada tek BIR BELGENIN SAS URL 'sini almak için yukarıdaki adımları kullanabilirsiniz. 
 
 > [!NOTE]
 > Bu kılavuzdaki kod parçacıkları, URL 'Ler tarafından erişilen uzak formları kullanır. Bunun yerine yerel form belgelerini işlemek istiyorsanız, [başvuru belgelerindeki](/python/api/azure-ai-formrecognizer) ilgili yöntemlere ve [örneklere](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples)bakın.
@@ -178,16 +179,89 @@ Confidence score: 1.0
 
 ```
 
+## <a name="analyze-receipts"></a>Alındıları analiz etme
+
+Bu bölümde, önceden eğitilen bir makbuz modeli kullanılarak ABD makbuzlarından ortak alanların nasıl analiz edileceği ve ayıklanacağı gösterilmektedir. Makbuz analizi hakkında daha fazla bilgi için bkz. [alındılar kavramsal Kılavuzu](../../concept-receipts.md). Bir URL 'den alındıları çözümlemek için `begin_recognize_receipts_from_url` yöntemini kullanın.
+
+[!code-python[](~/cognitive-services-quickstart-code/python/FormRecognizer/FormRecognizerQuickstart.py?name=snippet_receipts)]
+
+> [!TIP]
+> Ayrıca, yerel alındı görüntülerini analiz edebilirsiniz. Gibi [Formrecognizerclient](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer.formrecognizerclient) yöntemlerine bakın `begin_recognize_receipts` . Ya da, yerel görüntüleri içeren senaryolar için [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples) 'daki örnek koda bakın.
+
+### <a name="output"></a>Çıktı
+
+```console
+ReceiptType: Itemized has confidence 0.659
+MerchantName: Contoso Contoso has confidence 0.516
+MerchantAddress: 123 Main Street Redmond, WA 98052 has confidence 0.986
+MerchantPhoneNumber: None has confidence 0.99
+TransactionDate: 2019-06-10 has confidence 0.985
+TransactionTime: 13:59:00 has confidence 0.968
+Receipt Items:
+...Item #1
+......Name: 8GB RAM (Black) has confidence 0.916
+......TotalPrice: 999.0 has confidence 0.559
+...Item #2
+......Quantity: None has confidence 0.858
+......Name: SurfacePen has confidence 0.858
+......TotalPrice: 99.99 has confidence 0.386
+Subtotal: 1098.99 has confidence 0.964
+Tax: 104.4 has confidence 0.713
+Total: 1203.39 has confidence 0.774
+```
+
+## <a name="analyze-business-cards"></a>İş kartlarını çözümle
+
+#### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/preview)
+
+Bu bölümde, önceden eğitilen bir model kullanarak Ingilizce iş kartlarından ortak alanların nasıl analiz edileceği ve ayıklanacağı gösterilmektedir. İş kartı analizi hakkında daha fazla bilgi için bkz. [iş kartları kavramsal Kılavuzu](../../concept-business-cards.md). 
+
+Bir URL 'den iş kartlarını çözümlemek için `begin_recognize_business_cards_from_url` yöntemini kullanın.
+
+[!code-python[](~/cognitive-services-quickstart-code/python/FormRecognizer/FormRecognizerQuickstart-preview.py?name=snippet_bc)]
+
+> [!TIP]
+> Ayrıca, yerel iş kartı görüntülerini çözümleyebilirsiniz. Gibi [Formrecognizerclient](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer.formrecognizerclient) yöntemlerine bakın `begin_recognize_business_cards` . Ya da, yerel görüntüleri içeren senaryolar için [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples) 'daki örnek koda bakın.
+
+#### <a name="v20"></a>[v2.0](#tab/ga)
+
+> [!IMPORTANT]
+> Bu özellik seçili API sürümünde kullanılamaz.
+
+---
+
 ## <a name="analyze-invoices"></a>Faturaları analiz etme
 
 #### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/preview)
 
-Bu bölümde, önceden eğitilen bir model kullanılarak satış faturalarından ortak alanların nasıl analiz edileceği ve ayıklanacağı gösterilmektedir. Fatura analizi hakkında daha fazla bilgi için bkz. [Fatura kavramsal Kılavuzu](../../concept-invoices.md). Bir URL 'den faturaları çözümlemek için `begin_recognize_invoices_from_url` yöntemini kullanın. 
+Bu bölümde, önceden eğitilen bir model kullanılarak satış faturalarından ortak alanların nasıl analiz edileceği ve ayıklanacağı gösterilmektedir. Fatura analizi hakkında daha fazla bilgi için bkz. [Fatura kavramsal Kılavuzu](../../concept-invoices.md). 
+
+Bir URL 'den faturaları çözümlemek için `begin_recognize_invoices_from_url` yöntemini kullanın.
 
 [!code-python[](~/cognitive-services-quickstart-code/python/FormRecognizer/FormRecognizerQuickstart-preview.py?name=snippet_invoice)]
 
 > [!TIP]
 > Yerel fatura görüntülerini da analiz edebilirsiniz. Gibi [Formrecognizerclient](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer.formrecognizerclient) yöntemlerine bakın `begin_recognize_invoices` . Ya da, yerel görüntüleri içeren senaryolar için [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples) 'daki örnek koda bakın.
+
+#### <a name="v20"></a>[v2.0](#tab/ga)
+
+> [!IMPORTANT]
+> Bu özellik seçili API sürümünde kullanılamaz.
+
+---
+
+## <a name="analyze-identity-documents"></a>Kimlik belgelerini analiz etme
+
+#### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/preview)
+
+Bu bölümde, form tanıyıcı önceden oluşturulmuş KIMLIK modelini kullanarak devlet tarafından verilen tanımlama belgelerinden önemli bilgilerin nasıl analiz edileceği ve ayıklanacağı gösterilmektedir. Fatura analizi hakkında daha fazla bilgi için bkz. [önceden oluşturulmuş kimlik modelimiz kavramsal Kılavuzu](../../concept-identification-cards.md).
+
+Bir URL 'den kimlik belgelerini çözümlemek için yöntemini kullanın `begin_recognize_id_documents_from_url` .
+
+:::code language="python" source="~/cognitive-services-quickstart-code/python/FormRecognizer/FormRecognizerQuickstart-preview.py" id="snippet_id":::
+
+> [!TIP]
+> Ayrıca, kimlik belge görüntülerini çözümleyebilirsiniz. Gibi [Formrecognizerclient](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer.formrecognizerclient?view=azure-python&preserve-view=true#methods) yöntemlerine _bakın_ `begin_recognize_id_documents` . _Ayrıca_ yerel görüntüleri içeren senaryolar için [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples) 'daki örnek koda bakın.
 
 #### <a name="v20"></a>[v2.0](#tab/ga)
 
@@ -210,7 +284,6 @@ Eğitim belgelerini el ile etiketlemeden özel formlarınızda bulunan tüm alan
 Aşağıdaki kod, `begin_training` belirli bir belge kümesi üzerinde bir modeli eğitme işleviyle birlikte eğitim istemcisini kullanır. Döndürülen `CustomFormModel` nesne, modelin çözümleyebileceğiniz form türleri ve her form türünden ayıklayabileceğiniz alanlar hakkındaki bilgileri içerir. Aşağıdaki kod bloğu bu bilgileri konsola yazdırır.
 
 [!code-python[](~/cognitive-services-quickstart-code/python/FormRecognizer/FormRecognizerQuickstart.py?name=snippet_train)]
-
 
 ### <a name="output"></a>Çıktı
 
@@ -304,7 +377,6 @@ Bu bölümde, kendi formlarınız ile eğitilen modeller kullanılarak özel for
 > [!TIP]
 > Yerel görüntüleri de analiz edebilirsiniz. Gibi [Formrecognizerclient](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer.formrecognizerclient) yöntemlerine bakın `begin_recognize_custom_forms` . Ya da, yerel görüntüleri içeren senaryolar için [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples) 'daki örnek koda bakın.
 
-
 ### <a name="output"></a>Çıktı
 
 Önceki örnekteki modeli kullanarak aşağıdaki çıktı sağlanır.
@@ -328,58 +400,10 @@ Field 'Tax' has label 'Tax' with value 'None' and a confidence score of None
 Field 'Total' has label 'Total' with value 'None' and a confidence score of None
 ```
 
-## <a name="analyze-receipts"></a>Alındıları analiz etme
-
-Bu bölümde, önceden eğitilen bir makbuz modeli kullanılarak ABD makbuzlarından ortak alanların nasıl analiz edileceği ve ayıklanacağı gösterilmektedir. Makbuz analizi hakkında daha fazla bilgi için bkz. [alındılar kavramsal Kılavuzu](../../concept-receipts.md). Bir URL 'den alındıları çözümlemek için `begin_recognize_receipts_from_url` yöntemini kullanın. 
-
-[!code-python[](~/cognitive-services-quickstart-code/python/FormRecognizer/FormRecognizerQuickstart.py?name=snippet_receipts)]
-
-> [!TIP]
-> Ayrıca, yerel alındı görüntülerini analiz edebilirsiniz. Gibi [Formrecognizerclient](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer.formrecognizerclient) yöntemlerine bakın `begin_recognize_receipts` . Ya da, yerel görüntüleri içeren senaryolar için [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples) 'daki örnek koda bakın.
-
-### <a name="output"></a>Çıktı
-
-```console
-ReceiptType: Itemized has confidence 0.659
-MerchantName: Contoso Contoso has confidence 0.516
-MerchantAddress: 123 Main Street Redmond, WA 98052 has confidence 0.986
-MerchantPhoneNumber: None has confidence 0.99
-TransactionDate: 2019-06-10 has confidence 0.985
-TransactionTime: 13:59:00 has confidence 0.968
-Receipt Items:
-...Item #1
-......Name: 8GB RAM (Black) has confidence 0.916
-......TotalPrice: 999.0 has confidence 0.559
-...Item #2
-......Quantity: None has confidence 0.858
-......Name: SurfacePen has confidence 0.858
-......TotalPrice: 99.99 has confidence 0.386
-Subtotal: 1098.99 has confidence 0.964
-Tax: 104.4 has confidence 0.713
-Total: 1203.39 has confidence 0.774
-```
-
-## <a name="analyze-business-cards"></a>İş kartlarını çözümle
-
-#### <a name="v21-preview"></a>[v 2.1 Önizleme](#tab/preview)
-
-Bu bölümde, önceden eğitilen bir model kullanarak Ingilizce iş kartlarından ortak alanların nasıl analiz edileceği ve ayıklanacağı gösterilmektedir. İş kartı analizi hakkında daha fazla bilgi için bkz. [iş kartları kavramsal Kılavuzu](../../concept-business-cards.md). Bir URL 'den iş kartlarını çözümlemek için `begin_recognize_business_cards_from_url` yöntemini kullanın. 
-
-[!code-python[](~/cognitive-services-quickstart-code/python/FormRecognizer/FormRecognizerQuickstart-preview.py?name=snippet_bc)]
-
-> [!TIP]
-> Ayrıca, yerel iş kartı görüntülerini çözümleyebilirsiniz. Gibi [Formrecognizerclient](/python/api/azure-ai-formrecognizer/azure.ai.formrecognizer.formrecognizerclient) yöntemlerine bakın `begin_recognize_business_cards` . Ya da, yerel görüntüleri içeren senaryolar için [GitHub](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/formrecognizer/azure-ai-formrecognizer/samples) 'daki örnek koda bakın.
-
-#### <a name="v20"></a>[v2.0](#tab/ga)
-
-> [!IMPORTANT]
-> Bu özellik seçili API sürümünde kullanılamaz.
-
----
 
 ## <a name="manage-your-custom-models"></a>Özel modellerinizi yönetin
 
-Bu bölümde, hesabınızda depolanan özel modellerin nasıl yönetileceği gösterilmektedir. 
+Bu bölümde, hesabınızda depolanan özel modellerin nasıl yönetileceği gösterilmektedir.
 
 ### <a name="check-the-number-of-models-in-the-formrecognizer-resource-account"></a>Formtanıyıcı kaynak hesabındaki modellerin sayısını denetleyin
 

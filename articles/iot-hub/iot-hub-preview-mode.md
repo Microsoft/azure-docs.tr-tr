@@ -8,10 +8,10 @@ ms.topic: conceptual
 ms.date: 11/24/2020
 ms.author: jlian
 ms.openlocfilehash: 864870c4392b12477c321c86afd9da848120490c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96621714"
 ---
 # <a name="turn-on-preview-mode-for-iot-hub-to-try-select-new-features"></a>Yeni özellikleri seçmeyi denemek için IoT Hub Önizleme modunu açın

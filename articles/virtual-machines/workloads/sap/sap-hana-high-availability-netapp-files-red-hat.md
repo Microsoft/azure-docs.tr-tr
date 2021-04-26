@@ -10,14 +10,14 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 03/17/2021
+ms.date: 04/12/2021
 ms.author: radeltch
-ms.openlocfilehash: c5f94329920f8c850c0a47dd607ade8e83658b29
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 774344c4215088482b110de91f8951bae4a41d25
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104599927"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107365833"
 ---
 # <a name="high-availability-of-sap-hana-scale-up-with-azure-netapp-files-on-red-hat-enterprise-linux"></a>Red Hat Enterprise Linux Azure NetApp Files ile SAP HANA ölçeği yüksek kullanılabilirliği
 
@@ -259,7 +259,6 @@ Birim kotasının 1 TiB başına [Azure NetApp Files verimlilik limitleri](../..
         1.  Yeni yük dengeleyici kuralının adını girin (örneğin, **Hana-lb**).
         1.  Ön uç IP adresini, arka uç havuzunu ve daha önce oluşturduğunuz sistem durumu araştırmasını (örneğin, **Hana-ön uç**, **Hana-arka uç** ve **Hana-HP**) seçin.
         1.  **Ha bağlantı noktalarını** seçin.
-        1.  **Boşta kalma zaman aşımını** 30 dakikaya yükseltin.
         1.  **Kayan IP**'yi etkinleştirdiğinizden emin olun.
         1.  **Tamam**’ı seçin.
 
@@ -472,6 +471,71 @@ Bu bölümde, Azure NetApp Files kullanılarak NFS paylaşımlarına SAP HANA y�
 ### <a name="create-a-pacemaker-cluster"></a>Paceoluşturucu kümesi oluşturma
 
 Bu HANA sunucusu için temel bir Paceoluşturucu kümesi oluşturmak üzere Azure 'daki [Red Hat Enterprise Linux Paceyapıcısı ayarlama](./high-availability-guide-rhel-pacemaker.md) bölümündeki adımları izleyin.
+
+### <a name="implement-the-python-system-replication-hook-saphanasr"></a>Python sistem çoğaltma kancasını uygulama
+
+Bu, kümeyle tümleştirmeyi iyileştirmek ve bir küme yük devretmesi gerektiğinde algılamayı iyileştirmek için önemli bir adımdır. SAPHanaSR Python kancasını yapılandırmak kesinlikle önerilir.    
+
+1. **[A]** Hana "sistem çoğaltma kancasını" yükler. Kanca 'nin hem HANA DB düğümlerine yüklenmesi gerekir.           
+
+   > [!TIP]
+   > Python kancası yalnızca HANA 2,0 için uygulanabilir.        
+
+   1. Kancasını olarak hazırlayın `root` .  
+
+    ```bash
+     mkdir -p /hana/shared/myHooks
+     cp /usr/share/SAPHanaSR/srHook/SAPHanaSR.py /hana/shared/myHooks
+     chown -R hn1adm:sapsys /hana/shared/myHooks
+    ```
+
+   2. Her iki düğümde de HANA 'yı durdurun. <SID adm olarak Çalıştır \> :  
+   
+    ```bash
+    sapcontrol -nr 03 -function StopSystem
+    ```
+
+   3. `global.ini`Her küme düğümünde ayarlayın.  
+ 
+    ```bash
+    # add to global.ini
+    [ha_dr_provider_SAPHanaSR]
+    provider = SAPHanaSR
+    path = /hana/shared/myHooks
+    execution_order = 1
+    
+    [trace]
+    ha_dr_saphanasr = info
+    ```
+
+2. **[A]** küme, <SID adm için her küme düğümünde susers yapılandırması gerektirir \> . Bu örnekte, yeni bir dosya oluşturularak elde edilen. Komutları olarak yürütün `root` .    
+    ```bash
+    cat << EOF > /etc/sudoers.d/20-saphana
+    # Needed for SAPHanaSR python hook
+    hn1adm ALL=(ALL) NOPASSWD: /usr/sbin/crm_attribute -n hana_hn1_site_srHook_*
+    EOF
+    ```
+
+3. **[A]** her iki düğümde de SAP HANA başlatın. <SID adm olarak yürütün \> .  
+
+    ```bash
+    sapcontrol -nr 03 -function StartSystem 
+    ```
+
+4. **[1]** kanca yüklemesini doğrulayın. \>ETKIN Hana sistem çoğaltma sitesinde <SID adm olarak yürütün.   
+
+    ```bash
+     cdtrace
+     awk '/ha_dr_SAPHanaSR.*crm_attribute/ \
+     { printf "%s %s %s %s\n",$2,$3,$5,$16 }' nameserver_*
+     # Example output
+     # 2021-04-12 21:36:16.911343 ha_dr_SAPHanaSR SFAIL
+     # 2021-04-12 21:36:29.147808 ha_dr_SAPHanaSR SFAIL
+     # 2021-04-12 21:37:04.898680 ha_dr_SAPHanaSR SOK
+
+    ```
+
+SAP HANA sistem çoğaltma kancasını uygulamayla ilgili daha fazla bilgi için bkz. [SAP ha/Dr sağlayıcı kancasını etkinleştirme](https://access.redhat.com/articles/3004101#enable-srhook).  
 
 ### <a name="configure-filesystem-resources"></a>Dosya sistemi kaynaklarını yapılandırma
 

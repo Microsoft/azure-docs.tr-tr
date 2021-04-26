@@ -12,13 +12,12 @@ ms.custom:
 - mvc
 - 'Role: Cloud Development'
 - 'Role: Data Analytics'
-- devx-track-azurecli
-ms.openlocfilehash: 82ef2e39d5d04914e1086e0b25ccbc8e5c7c762e
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 982e402946cbd71d946bc1e316cef99621c536a3
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105630771"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378202"
 ---
 # <a name="tutorial-using-openssl-to-create-self-signed-certificates"></a>Öğretici: otomatik olarak imzalanan sertifikalar oluşturmak için OpenSSL kullanma
 

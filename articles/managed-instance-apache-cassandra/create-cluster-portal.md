@@ -6,13 +6,13 @@ ms.author: thvankra
 ms.service: managed-instance-apache-cassandra
 ms.topic: quickstart
 ms.date: 03/02/2021
-ms.custom: references_regions
-ms.openlocfilehash: cb555eefb19b5db7ed7eb0792a813c295a4bf38b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.custom: references_regions, devx-track-azurecli
+ms.openlocfilehash: 315b505e9de853fbe4663eacdfe929149dbaa458
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104588622"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107873154"
 ---
 # <a name="quickstart-create-an-azure-managed-instance-for-apache-cassandra-cluster-from-the-azure-portal-preview"></a>Hızlı başlangıç: Azure portal (Önizleme) Apache Cassandra kümesi için Azure yönetilen örneği oluşturma
  
@@ -63,10 +63,19 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
    :::image type="content" source="./media/create-cluster-portal/networking.png" alt-text="Ağ ayrıntılarını yapılandırın." lightbox="./media/create-cluster-portal/networking.png" border="true":::
 
-1. Son adımda yeni bir VNet oluşturduysanız, adım 8 ' e atlayın. Mevcut bir VNet seçtiyseniz, kümenizi oluşturmadan önce, sanal ağa ve alt ağa bazı özel izinler uygulamanız gerekir. Bunu yapmak için,,,, `az role assignment create` `<subscription ID>` `<resource group name>` `<VNet name>` ve `<subnet name>` değerlerini uygun değerlerle değiştirin:
+    > [!NOTE]
+    > Apache Cassandra için Azure yönetilen örneğinin dağıtımı, internet erişimi gerektirir. İnternet erişiminin kısıtlandığı ortamlarda dağıtım başarısız olur. VNet 'iniz içindeki erişimi, yönetilen Cassandra 'nin düzgün çalışması için gerekli olan aşağıdaki önemli Azure hizmetlerine engellemediğinizden emin olun:
+    > - Azure Storage
+    > - Azure KeyVault
+    > - Azure Sanal Makine Ölçek Kümeleri
+    > - Azure İzleme
+    > - Azure Active Directory
+    > - Azure Güvenlik
+
+1. Son adımda yeni bir VNet oluşturduysanız, adım 8 ' e atlayın. Mevcut bir VNet seçtiyseniz, kümenizi oluşturmadan önce, sanal ağa ve alt ağa bazı özel izinler uygulamanız gerekir. Bunu yapmak için,, `az role assignment create` `<subscription ID>` `<resource group name>` ve yerine uygun değerleri kullanarak komutunu kullanın `<VNet name>` :
 
    ```azurecli-interactive
-   az role assignment create --assignee e5007d2c-4b13-4a74-9b6a-605d99f03501 --role 4d97b98b-1d4f-4787-a291-c67834d212e7 --scope /subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.Network/virtualNetworks/<VNet name>/subnets/<subnet name>
+   az role assignment create --assignee a232010e-820c-4083-83bb-3ace5fc29d0b --role 4d97b98b-1d4f-4787-a291-c67834d212e7 --scope /subscriptions/<subscription ID>/resourceGroups/<resource group name>/providers/Microsoft.Network/virtualNetworks/<VNet name>
    ```
 
    > [!NOTE]

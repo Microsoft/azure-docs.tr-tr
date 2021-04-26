@@ -1,6 +1,6 @@
 ---
 title: Azure CLı kullanarak bir kullanılabilirlik kümesindeki VM 'Leri dağıtma
-description: Bu öğreticide, Kullanılabilirlik Kümelerinde yüksek oranda kullanılabilir sanal makineler dağıtmak için Azure CLI kullanmayı öğreneceksiniz
+description: Kullanılabilirlik kümelerinde yüksek oranda kullanılabilir sanal makineleri dağıtmak için Azure CLı 'yı nasıl kullanacağınızı öğrenin
 documentationcenter: ''
 services: virtual-machines
 author: mimckitt
@@ -10,12 +10,12 @@ ms.date: 3/8/2021
 ms.author: mimckitt
 ms.reviewer: mimckitt
 ms.custom: ''
-ms.openlocfilehash: 6a54e0d808ef734a26a0fa309bd7367e73316856
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 21f7d3e6f624c3a8e550a33293b46284bf5c5815
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102507074"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816305"
 ---
 # <a name="create-and-deploy-virtual-machines-in-an-availability-set-using-azure-cli"></a>Azure CLı kullanarak bir kullanılabilirlik kümesinde sanal makine oluşturma ve dağıtma
 
@@ -36,7 +36,7 @@ CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu öğretici için A
 
 [az vm availability-set create](/cli/azure/vm/availability-set) komutunu kullanarak bir kullanılabilirlik kümesi oluşturabilirsiniz. Bu örnekte, *myResourceGroupAvailability* kaynak grubundaki *myAvailabilitySet* adlı kullanılabilirlik kümesi için güncelleştirme ve hata etki alanları sayısı *2* olarak ayarlanmıştır.
 
-İlk olarak, [az group create](/cli/azure/group#az-group-create) ile bir kaynak grubu oluşturun ve sonra kullanılabilirlik kümesini oluşturun:
+İlk olarak, [az group create](/cli/azure/group#az_group_create) ile bir kaynak grubu oluşturun ve sonra kullanılabilirlik kümesini oluşturun:
 
 ```azurecli-interactive
 az group create --name myResourceGroupAvailability --location eastus
@@ -80,7 +80,7 @@ Kullanılabilirlik kümesi dağıtımı, Kaynak Grupları > myResourceGroupAvail
 
 ## <a name="check-for-available-vm-sizes"></a>Kullanılabilir sanal makine boyutlarını denetleme
 
-Ek VM’ler sonradan VM boyutlarının donanımda bulunduğu kullanılabilirlik kümesine eklenebilir. Kullanılabilirlik kümesi için donanım kümesindeki tüm kullanılabilir boyutları listelemek için [az vm availability-set list-sizes](/cli/azure/vm/availability-set#az-vm-availability-set-list-sizes) komutunu kullanın:
+Ek VM’ler sonradan VM boyutlarının donanımda bulunduğu kullanılabilirlik kümesine eklenebilir. Kullanılabilirlik kümesi için donanım kümesindeki tüm kullanılabilir boyutları listelemek için [az vm availability-set list-sizes](/cli/azure/vm/availability-set#az_vm_availability_set_list_sizes) komutunu kullanın:
 
 ```azurecli-interactive
 az vm availability-set list-sizes \

@@ -10,12 +10,12 @@ ms.date: 02/09/2021
 ms.author: tamram
 ms.subservice: blobs
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 5b6bd16eacf4b1bbb7b93f5500813e7fa9dc7eef
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f6a1d315342ea98ccaf1382630eccca876ada3f1
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "100095856"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870202"
 ---
 # <a name="enable-and-manage-blob-versioning"></a>Blob sürüm oluşturmayı etkinleştirme ve yönetme
 
@@ -54,7 +54,7 @@ Update-AzStorageBlobServiceProperty -ResourceGroupName $rgName `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı ile bir depolama hesabı için blob sürüm oluşturmayı etkinleştirmek üzere önce Azure CLı sürüm 2.2.0 veya üstünü yüklemeniz gerekir. Ardından, aşağıdaki örnekte gösterildiği gibi, sürüm oluşturmayı etkinleştirmek için [az Storage Account blob-Service-Properties Update](/cli/azure/ext/storage-blob-preview/storage/account/blob-service-properties#ext_storage_blob_preview_az_storage_account_blob_service_properties_update) komutunu çağırın. Açılı ayraçlar içindeki değerleri kendi değerlerinizle değiştirmeyi unutmayın:
+Azure CLı ile bir depolama hesabı için blob sürüm oluşturmayı etkinleştirmek üzere önce Azure CLı sürüm 2.2.0 veya üstünü yüklemeniz gerekir. Ardından, aşağıdaki örnekte gösterildiği gibi, sürüm oluşturmayı etkinleştirmek için [az Storage Account blob-Service-Properties Update](/cli/azure/storage/account/blob-service-properties#az_storage_account_blob_service_properties_update) komutunu çağırın. Açılı ayraçlar içindeki değerleri kendi değerlerinizle değiştirmeyi unutmayın:
 
 ```azurecli
 az storage account blob-service-properties update \

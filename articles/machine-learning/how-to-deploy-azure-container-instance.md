@@ -11,12 +11,12 @@ ms.author: jordane
 author: jpe316
 ms.reviewer: larryfr
 ms.date: 06/12/2020
-ms.openlocfilehash: 5bf3c92f07cc33b35a070a3479e0063a63c9e43a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 845a146d9e3f920f3313a80f1bb8c845cb781f37
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102522028"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107875548"
 ---
 # <a name="deploy-a-model-to-azure-container-instances"></a>Modeli Azure Container Instances’a dağıtma
 
@@ -84,7 +84,7 @@ Bu örnekte kullanılan sınıflar, Yöntemler ve parametreler hakkında daha fa
 * [Model. deploy](/python/api/azureml-core/azureml.core.model.model#deploy-workspace--name--models--inference-config-none--deployment-config-none--deployment-target-none--overwrite-false-)
 * [Webservice.wait_for_deployment](/python/api/azureml-core/azureml.core.webservice%28class%29#wait-for-deployment-show-output-false-)
 
-### <a name="using-the-cli"></a>CLı 'yi kullanma
+### <a name="using-the-azure-cli"></a>Azure CLI'yı kullanma
 
 CLı kullanarak dağıtmak için aşağıdaki komutu kullanın. `mymodel:1`Kayıt, kayıtlı modelin adı ve sürümü ile değiştirin. `myservice`Bu hizmete verilecek adla değiştirin:
 
@@ -94,7 +94,7 @@ az ml model deploy -m mymodel:1 -n myservice -ic inferenceconfig.json -dc deploy
 
 [!INCLUDE [deploymentconfig](../../includes/machine-learning-service-aci-deploy-config.md)]
 
-Daha fazla bilgi için, [az ml model dağıtım](/cli/azure/ext/azure-cli-ml/ml/model#ext-azure-cli-ml-az-ml-model-deploy) başvurusuna bakın. 
+Daha fazla bilgi için, [az ml model dağıtım](/cli/azure/ml/model#az_ml_model_deploy) başvurusuna bakın. 
 
 ## <a name="using-vs-code"></a>VS Code'u kullanma
 

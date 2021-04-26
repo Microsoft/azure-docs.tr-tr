@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 10/05/2020
 ms.author: depadia
-ms.openlocfilehash: b94e1f82409da3329eb6d978fa2ae0222928cd97
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b16a2d9f779232e59eb883f6a254be22990f5c78
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102505945"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107520029"
 ---
 # <a name="sap-businessobjects-bi-platform-deployment-guide-for-linux-on-azure"></a>Azure’da Linux için SAP BusinessObjects İş Zekası platformu dağıtım kılavuzu
 
@@ -36,7 +36,7 @@ Bu örnekte, ürün sürümü ve dosya sistemi düzeninin altında kullanılır
 - MySQL için Azure veritabanı (sürüm: 8.0.15)
 - MySQL C API Bağlayıcısı-libmysqlclient (sürüm: 6.1.11)
 
-| Dosya Sistemi        | Description                                                                                                               | Boyut (GB)             | Sahip  | Grup  | Depolama                    |
+| Dosya Sistemi        | Açıklama                                                                                                               | Boyut (GB)             | Sahip  | Grup  | Depolama                    |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------|-----------------------|--------|--------|----------------------------|
 | /usr/SAP           | SAP BOBI örneği, varsayılan Tomcat Web uygulaması ve veritabanı sürücüleri (gerekliyse) yüklemek için dosya sistemi | SAP boyutlandırma yönergeleri | bl1adm | sapsys | Yönetilen Premium disk-SSD |
 | /usr/SAP/frsinput  | Bağlama dizini, giriş dosyası deposu dizini olarak kullanılacak tüm BOBI konaklarındaki paylaşılan dosyalara yöneliktir  | İşletme gereksinimi         | bl1adm | sapsys | Azure NetApp Files         |
@@ -560,7 +560,7 @@ Yedekleme işleminin bir parçası olarak, anlık görüntü alınır ve veriler
 
 **Azure NetApp Files** için, anlık görüntü ilkeleri kullanarak isteğe bağlı anlık görüntüler oluşturabilir ve otomatik anlık görüntü zamanlayabilirsiniz. Anlık görüntü kopyaları, ANF biriminizin bir zaman içinde kopyasını sağlar. Daha fazla bilgi için bkz. [Azure NetApp Files kullanarak anlık görüntüleri yönetme](../../../azure-netapp-files/azure-netapp-files-manage-snapshots.md).
 
-**Azure dosya** yedeklemesi, VM yedeklemesinden birlikte yedekleme ve geri yükleme işlevini merkezileştiren ve işlem çalışmasını kolaylaştıran yerel [Azure Backup](../../../backup/backup-overview.md) hizmetiyle tümleşiktir. Daha fazla bilgi için bkz. [Azure dosya paylaşma yedekleme](../../../backup/azure-file-share-backup-overview.md) ve [SSS-Azure dosyalarını yedekleme](../../../backup/backup-azure-files-faq.md).
+**Azure dosya** yedeklemesi, VM yedeklemesinden birlikte yedekleme ve geri yükleme işlevini merkezileştiren ve işlem çalışmasını kolaylaştıran yerel [Azure Backup](../../../backup/backup-overview.md) hizmetiyle tümleşiktir. Daha fazla bilgi için bkz. [Azure dosya paylaşma yedekleme](../../../backup/azure-file-share-backup-overview.md) ve [SSS-Azure dosyalarını yedekleme](../../../backup/backup-azure-files-faq.yml).
 
 #### <a name="backup--restore-for-cms-database"></a>CMS veritabanı için yedekleme & geri yükleme
 

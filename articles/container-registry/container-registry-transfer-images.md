@@ -4,12 +4,12 @@ description: Azure depolama hesaplarını kullanarak bir aktarım işlem hattı 
 ms.topic: article
 ms.date: 10/07/2020
 ms.custom: ''
-ms.openlocfilehash: 4fe36366011fb790d25419ac46a54c4bf5ad94bf
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: c966600b0ca9d65cf533c3c2f0aca211c84917bd
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104785827"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780784"
 ---
 # <a name="transfer-artifacts-to-another-registry"></a>Yapıtları başka bir kayıt defterine aktar
 
@@ -416,13 +416,19 @@ az resource delete \
 * **Hata veya hata Şablon dağıtımı**
   * Bir işlem hattı çalıştırması başarısız olursa, `pipelineRunErrorMessage` çalışma kaynağı özelliğine bakın.
   * Ortak şablon dağıtım hataları için bkz. [ARM şablon dağıtımları sorunlarını giderme](../azure-resource-manager/templates/template-tutorial-troubleshoot.md)
+* **Depolamaya erişme sorunları**<a name="problems-accessing-storage"></a>
+  * `403 Forbidden`Depolama alanından bir hata görürseniz, büyük OLASıLıKLA SAS belirtecinizle ilgili bir sorununuz olabilir.
+  * SAS belirteci Şu anda geçerli olmayabilir. SAS belirteci oluşturulduktan sonra SAS belirtecinin geçerliliği bitmiş olabilir veya depolama hesabı anahtarları değişmiş olabilir. Depolama hesabı kapsayıcısına erişim için kimlik doğrulaması yapmak üzere SAS belirtecini kullanmayı deneyerek SAS belirtecinin geçerli olduğunu doğrulayın. Örneğin, var olan bir blob uç noktasını, ardından yeni bir Microsoft Edge InPrivate penceresinin Adres çubuğundaki SAS belirtecini yerleştirin veya kullanarak SAS belirtecine bir blob yükleyin `az storage blob upload` .
+  * SAS belirteci, Izin verilen yeterli kaynak türüne sahip olmayabilir. SAS belirtecine Izin verilen kaynak türleri altındaki hizmet, kapsayıcı ve nesne izinleri verildiğini doğrulayın ( `srt=sco` SAS belirtecinde).
+  * SAS belirteci yeterli izinlere sahip olmayabilir. Dışa aktarma işlem hatları için, gerekli SAS belirteç izinleri okuma, yazma, listeleme ve ekleme. İçeri aktarma işlem hatları için, gerekli SAS belirteç izinleri okuma, silme ve Listetir. (Silme izni yalnızca, içeri aktarma işlem hattının `DeleteSourceBlobOnSuccess` seçeneği etkinse gereklidir.)
+  * SAS belirteci yalnızca HTTPS ile çalışacak şekilde yapılandırılmamış olabilir. SAS belirtecinin yalnızca HTTPS ile çalışacak şekilde yapılandırıldığını doğrulayın ( `spr=https` SAS belirtecinde).
 * **Depolama bloblarını dışa aktarma veya içeri aktarma sorunları**
-  * SAS belirtecinin geçerliliği, belirtilen dışarı aktarma veya içeri aktarma çalıştırması için yeterli izinlere sahip olmayabilir.
+  * SAS belirteci geçersiz olabilir veya belirtilen dışarı aktarma veya içeri aktarma çalıştırması için yeterli izinlere sahip olmayabilir. Bkz. [depolama erişimi sorunları](#problems-accessing-storage).
   * Birden çok dışa aktarma çalıştırması sırasında kaynak depolama hesabındaki mevcut depolama Blobun üzerine yazılamaz. Dışarı aktarma çalıştırmasında OverwriteBlob seçeneğinin ayarlandığını ve SAS belirtecinin yeterli izinlere sahip olduğunu doğrulayın.
   * Hedef depolama hesabındaki Depolama Blobu, başarılı bir içeri aktarma çalıştırdıktan sonra silinmeyebilir. DeleteBlobOnSuccess seçeneğinin içeri aktarma çalıştırmasında ayarlandığını ve SAS belirtecinin yeterli izinlere sahip olduğunu doğrulayın.
   * Depolama Blobu oluşturulmadı veya silinmedi. Dışarı aktarma veya içeri aktarma çalıştırmasında belirtilen kapsayıcının bulunduğunu veya el ile içeri aktarma çalıştırması için belirtilen Depolama Blobu olduğunu onaylayın. 
 * **AzCopy sorunları**
-  * Bkz. [AzCopy sorunlarını giderme](../storage/common/storage-use-azcopy-configure.md#troubleshoot-issues).  
+  * Bkz. [AzCopy sorunlarını giderme](../storage/common/storage-use-azcopy-configure.md).  
 * **Yapıt aktarma sorunları**
   * Tüm yapıtlar veya hiçbiri aktarılmaz. Dışarı aktarma çalıştırmasında yapıtların yazımını ve dışarı aktarma ve içeri aktarma çalıştırmalarının blob adını onaylayın. En fazla 50 Yapıt aktaraldığınızı onaylayın.
   * İşlem hattı çalıştırması tamamlanmamış olabilir. Bir dışarı aktarma veya içeri aktarma çalıştırması biraz zaman alabilir. 
@@ -441,15 +447,15 @@ Tek kapsayıcı görüntülerini ortak bir kayıt defterine veya başka bir öze
 
 <!-- LINKS - Internal -->
 [azure-cli]: /cli/azure/install-azure-cli
-[az-login]: /cli/azure/reference-index#az-login
-[az-keyvault-secret-set]: /cli/azure/keyvault/secret#az-keyvault-secret-set
-[az-keyvault-secret-show]: /cli/azure/keyvault/secret#az-keyvault-secret-show
-[az-keyvault-set-policy]: /cli/azure/keyvault#az-keyvault-set-policy
-[az-storage-container-generate-sas]: /cli/azure/storage/container#az-storage-container-generate-sas
-[az-storage-blob-list]: /cli/azure/storage/blob#az-storage-blob-list
-[az-deployment-group-create]: /cli/azure/deployment/group#az-deployment-group-create
-[az-deployment-group-delete]: /cli/azure/deployment/group#az-deployment-group-delete
-[az-deployment-group-show]: /cli/azure/deployment/group#az-deployment-group-show
-[az-acr-repository-list]: /cli/azure/acr/repository#az-acr-repository-list
-[az-acr-import]: /cli/azure/acr#az-acr-import
-[az-resource-delete]: /cli/azure/resource#az-resource-delete
+[az-login]: /cli/azure/reference-index#az_login
+[az-keyvault-secret-set]: /cli/azure/keyvault/secret#az_keyvault_secret_set
+[az-keyvault-secret-show]: /cli/azure/keyvault/secret#az_keyvault_secret_show
+[az-keyvault-set-policy]: /cli/azure/keyvault#az_keyvault_set_policy
+[az-storage-container-generate-sas]: /cli/azure/storage/container#az_storage_container_generate_sas
+[az-storage-blob-list]: /cli/azure/storage/blob#az_storage-blob-list
+[az-deployment-group-create]: /cli/azure/deployment/group#az_deployment_group_create
+[az-deployment-group-delete]: /cli/azure/deployment/group#az_deployment_group_delete
+[az-deployment-group-show]: /cli/azure/deployment/group#az_deployment_group_show
+[az-acr-repository-list]: /cli/azure/acr/repository#az_acr_repository_list
+[az-acr-import]: /cli/azure/acr#az_acr_import
+[az-resource-delete]: /cli/azure/resource#az_resource_delete

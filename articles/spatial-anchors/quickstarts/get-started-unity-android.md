@@ -8,12 +8,12 @@ ms.author: parkerra
 ms.date: 03/18/2021
 ms.topic: quickstart
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: e1554b1728b120145a06124e4703065a98a4e466
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4f4bfdb5d09da6a9967b53ca56bb2491976592a1
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104670112"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107105893"
 ---
 # <a name="quickstart-create-a-unity-android-app-with-azure-spatial-anchors"></a>Hızlı başlangıç: Azure uzamsal bağlayıcılarla Unity Android uygulaması oluşturma
 
@@ -45,6 +45,8 @@ Bu hızlı başlangıcı tamamlamak için aşağıdakileri yaptığınızdan emi
 ## <a name="download-and-open-the-unity-sample-project"></a>Unity örnek projesini indir ve aç
 
 [!INCLUDE [Clone Sample Repo](../../../includes/spatial-anchors-clone-sample-repository.md)]
+
+Android platformu için gereken ASA SDK paketlerini indirmek ve içeri aktarmak için [buradaki](../how-tos/setup-unity-project.md#download-asa-packages) yönergeleri izleyin.
 
 [!INCLUDE [Open Unity Project](../../../includes/spatial-anchors-open-unity-project.md)]
 

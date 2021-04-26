@@ -5,13 +5,13 @@ ms.service: data-share
 author: jifems
 ms.author: jife
 ms.topic: conceptual
-ms.date: 12/16/2020
-ms.openlocfilehash: 852c44f5edc5c0b0f5f655f63ab040927bd9bc7b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/20/2021
+ms.openlocfilehash: def73d137f3cc2c79ae8417995ec6bdf6c519b7d
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97963688"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107812633"
 ---
 # <a name="supported-data-stores-in-azure-data-share"></a>Azure Veri Paylaşımı'nda desteklenen veri depoları
 
@@ -50,7 +50,7 @@ Aşağıdaki tabloda, veri tüketicilerinin bir veri paylaşımının kabul etme
 | Veri Gezgini ||||||| ✓ |
 
 ## <a name="share-from-a-storage-account"></a>Depolama hesabından paylaşma
-Azure veri paylaşımı, Azure Data Lake Storage 1. ve Azure Data Lake Storage 2. dosya, klasör ve dosya sistemlerinin paylaşılmasını destekler. Ayrıca, Azure Blob depolamadan blob, klasör ve kapsayıcı paylaşımını da destekler. Şu anda yalnızca blok Blobları destekleniyor. 
+Azure veri paylaşımı, Azure Data Lake Storage 1. ve Azure Data Lake Storage 2. dosya, klasör ve dosya sistemlerinin paylaşılmasını destekler. Ayrıca, Azure Blob depolamadan blob, klasör ve kapsayıcı paylaşımını da destekler. Blok, ekleme veya sayfa bloblarını paylaşabilir ve blok Blobları olarak alınır.
 
 Dosya sistemleri, kapsayıcılar veya klasörler anlık görüntü tabanlı paylaşımda paylaşıldığında, veri tüketicileri, paylaşılan verilerin tam bir kopyasını oluşturmak için seçim yapabilir. Ya da yalnızca yeni dosyaları veya güncelleştirilmiş dosyaları kopyalamak için Artımlı anlık görüntü özelliğini kullanabilirler. 
 

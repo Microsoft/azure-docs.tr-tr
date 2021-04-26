@@ -1,32 +1,63 @@
 ---
 title: Azure Service Fabric yayınları
 description: Azure Service Fabric için sürüm notları. Service Fabric 'teki en son özellikler ve iyileştirmeler hakkında bilgi içerir.
-ms.date: 06/10/2019
+ms.date: 04/13/2021
 ms.topic: conceptual
 hide_comments: true
 hideEdit: true
-ms.openlocfilehash: 7f99c37cd9f029c7478d4102bd17c952ffd52f8c
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 2a035f531e03dc42e8be4f3dab403406eb7c8f14
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105044286"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107518635"
 ---
 # <a name="service-fabric-releases"></a>Service Fabric yayınları
 
+Bu makalede, Service Fabric çalışma zamanına ve SDK 'lara yönelik en son yayınlar ve güncelleştirmeler hakkında daha fazla bilgi sağlanmaktadır.
+
+Aşağıdaki kaynaklar da kullanılabilir:
 - <a href="https://github.com/Azure/Service-Fabric-Troubleshooting-Guides" target="blank">Sorun giderme kılavuzu</a> 
 - <a href="https://github.com/Azure/service-fabric-issues" target="blank">Sorun Izleme</a> 
 - <a href="/azure/service-fabric/service-fabric-support" target="blank">Destek Seçenekleri</a> 
 - <a href="/azure/service-fabric/service-fabric-versions" target="blank">Desteklenen sürümler</a> 
 - <a href="https://azure.microsoft.com/resources/samples/?service=service-fabric&sort=0" target="blank">Kod Örnekleri</a>
 
-Bu makalede, Service Fabric çalışma zamanına ve SDK 'lara yönelik en son yayınlar ve güncelleştirmeler hakkında daha fazla bilgi sağlanmaktadır.
 
-## <a name="service-fabric-72"></a>Service Fabric 7,2
+## <a name="service-fabric-80"></a>Service Fabric 8,0
 
-Service Fabric çalışma zamanının 7,2 sürümünün araç ve SDK güncelleştirmeleriyle birlikte çeşitli Azure bölgelerine kullanıma sunulduğunu duyurmaktan mutluluk duyuyoruz. .NET SDK, Java SDK ve Service Fabric çalışma zamanına yönelik güncelleştirmeler Web Platformu Yükleyicisi, NuGet paketleri ve Maven depoları aracılığıyla kullanılabilir.
+Service Fabric çalışma zamanının 8,0 sürümünün araç ve SDK güncelleştirmeleriyle birlikte çeşitli Azure bölgelerine kullanıma sunulduğunu duyurmaktan mutluluk duyuyoruz. .NET SDK, Java SDK ve Service Fabric çalışma zamanına yönelik güncelleştirmeler Web Platformu Yükleyicisi, NuGet paketleri ve Maven depoları aracılığıyla kullanılabilir.
 
 ### <a name="key-announcements"></a>Anahtar Duyurular
+
+- Windows için .NET 5 desteğinin **genel kullanılabilirliği**
+- [Durum bilgisi olmayan NodeTypes](https://docs.microsoft.com/azure/service-fabric/service-fabric-stateless-node-types) **genel kullanılabilirliği**
+- Durum bilgisi olmayan hizmet örneklerini taşıma yeteneği
+- Uygulama bildiriminde parametreli DefaultLoad ekleme özelliği
+- Tek çoğaltma yükseltmeleri için-bir uygulama düzeyinde bazı küme düzeyi ayarları tanımlanmasına olanak tanır
+- Düğüm etiketlerine dayalı akıllı yerleştirme özelliği
+- Küme durumunu etkileyen sağlıksız düğümlerin yüzde eşiğini tanımlama yeteneği
+- Yüklenen en fazla Hizmetleri sorgulama özelliği
+- Yeni hata kodları için yeni bir Aralık ekleme olanağı
+- Hizmet örneğini tamamlandı olarak işaretleme özelliği
+- Otomatik yükseltmeler için dalga tabanlı dağıtım modeli desteği
+- Kapsayıcılı uygulamalar için hazırlık araştırması eklendi
+- UseSeparateSecondaryMoveCost varsayılan olarak true olarak etkinleştir
+- Yayın için güvenli olan en kısa sürede başvuruyu yayınlamak için StateManager düzeltildi
+- Kullanıcı gizli dizilerini depolarken merkezi gizli hizmet kaldırmayı engelle
+
+
+### <a name="service-fabric-80-releases"></a>Service Fabric 8,0 yayınları
+| Sürüm tarihi | Yayınla | Daha fazla bilgi |
+|---|---|---|
+| 08 Nisan 2021 | [Azure Service Fabric 8,0](https://techcommunity.microsoft.com/t5/azure-service-fabric/azure-service-fabric-8-0-release/ba-p/2260016)  | [Sürüm notları](https://github.com/microsoft/service-fabric/blob/master/release_notes/Service_Fabric_ReleaseNotes_80.md)|
+
+
+## <a name="previous-versions"></a>Önceki sürümler
+
+### <a name="service-fabric-72"></a>Service Fabric 7,2
+
+#### <a name="key-announcements"></a>Anahtar Duyurular
 
 - **Önizleme**: [**Service Fabric yönetilen kümeler**](https://techcommunity.microsoft.com/t5/azure-service-fabric/azure-service-fabric-managed-clusters-are-now-in-public-preview/ba-p/1721572) artık genel önizlemede. Service Fabric yönetilen kümeler, bir Service Fabric kümesini tek bir ARM kaynağına oluşturan temel kaynakları kapsülleyerek küme dağıtımını ve yönetimini basitleştirmeye yönelik olarak hedeflenir. Daha ayrıntılı bilgi için bkz. [Service Fabric yönetilen kümeye genel bakış](./overview-managed-cluster.md).
 - **Önizleme**: [**düğüm sayısından daha fazla sayıda örnek içeren, durum bilgisi olmayan hizmetleri destekleme**](./service-fabric-cluster-resource-manager-advanced-placement-rules-placement-policies.md) artık genel önizlemeye sunuldu. Yerleştirme ilkesi, bir düğümde bir bölümün birden çok durum bilgisi olmayan örneğinin oluşturulmasına izin vermez.
@@ -40,7 +71,7 @@ Service Fabric çalışma zamanının 7,2 sürümünün araç ve SDK güncelleş
 - **Runtocompletion**: Service Fabric, Konuk yürütülebilir dosyaları için çalıştırmanın tamamlanması kavramını destekler. Çoğaltma tamamlandığında bu güncelleştirme ile, bu çoğaltmaya ayrılan küme kaynakları serbest bırakılır.
 - [**Kaynak idare desteği geliştirildi**](./service-fabric-resource-governance.md): CPU ve bellek kaynakları için isteklere ve sınırlara izin verme.
 
-### <a name="service-fabric-72-releases"></a>Service Fabric 7,2 yayınları
+#### <a name="service-fabric-72-releases"></a>Service Fabric 7,2 yayınları
 | Sürüm tarihi | Yayınla | Daha fazla bilgi |
 |---|---|---|
 | 21 Ekim 2020 | [Azure Service Fabric 7,2](https://techcommunity.microsoft.com/t5/azure-service-fabric/azure-service-fabric-7-2-release/ba-p/1805653)  | [Sürüm notları](https://github.com/microsoft/service-fabric/blob/master/release_notes/Service-Fabric-72-releasenotes.md)|
@@ -51,16 +82,15 @@ Service Fabric çalışma zamanının 7,2 sürümünün araç ve SDK güncelleş
 | 17 Şubat 2021 | [Azure Service Fabric 7,2 altıncı yenileme sürümü](https://techcommunity.microsoft.com/t5/azure-service-fabric/azure-service-fabric-sixth-refresh-release/ba-p/2144685) | [Sürüm notları](https://github.com/microsoft/service-fabric/blob/master/release_notes/Service-Fabric-72CU6-ReleaseNotes.md)
 | 10 Mart 2021 | [Azure Service Fabric 7,2 yedinci yenileme sürümü](https://techcommunity.microsoft.com/t5/azure-service-fabric/azure-service-fabric-seventh-refresh-release/ba-p/2201100) | [Sürüm notları](https://github.com/microsoft/service-fabric/blob/master/release_notes/Service-Fabric-72CU7-releasenotes.md)
 
-## <a name="previous-versions"></a>Önceki sürümler
 
 ### <a name="service-fabric-71"></a>Service Fabric 7,1
 
 Geçerli COVı-19 çapraz olduğu ve müşterilerimizin karşılaştığı zorluk göz önünde bulundurarak 7,1 kullanılabilir hale getirdik, ancak Otomatik yükseltmeleri alacak şekilde kümeleri otomatik olarak yükseltmeyecektir. Müşterilerin, bu kullanıcılara en uygun olan yükseltmeleri uygulayabilmesi için, beklenmeyen kesintilere engel olmak üzere Otomatik yükseltmeleri durakladık.
 
-[Azure Portal](./service-fabric-cluster-upgrade-version-azure.md#upgrading-to-a-new-version-on-a-cluster-that-is-set-to-manual-mode-via-portal) aracılığıyla veya bir [Azure Resource Manager dağıtımı](./service-fabric-cluster-upgrade-version-azure.md#set-the-upgrade-mode-using-a-resource-manager-template)aracılığıyla 7,1 ' e güncelleştirebilirsiniz.
+[Azure Portal](./service-fabric-cluster-upgrade-version-azure.md#manual-upgrades-with-azure-portal) aracılığıyla veya bir [Azure Resource Manager dağıtımı](./service-fabric-cluster-upgrade-version-azure.md#resource-manager-template)aracılığıyla 7,1 ' e güncelleştirebilirsiniz.
 
 Otomatik yükseltmelere sahip Service Fabric kümeleri, standart dağıtım yordamını sürdürtikten sonra otomatik olarak 7,1 güncelleştirmesini almaya başlayacaktır. Standart dağıtım [Service Fabric Tech Community sitesinde](https://techcommunity.microsoft.com/t5/azure-service-fabric/bg-p/Service-Fabric)başlamadan önce başka bir duyuru sağlayacağız.
-Ayrıca, 7,1 6,5 ' den başlayan önemli yayınlar için destek tarihinin sonunda güncelleştirme yayımladık [.](./service-fabric-versions.md#supported-versions) 
+Ayrıca, 7,1 6,5 ' den başlayan önemli yayınlar için destek tarihinin sonunda güncelleştirme yayımladık [.](./service-fabric-versions.md) 
 
 #### <a name="key-announcements"></a>Anahtar Duyurular
 

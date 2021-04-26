@@ -8,12 +8,12 @@ ms.subservice: general
 ms.topic: how-to
 ms.date: 10/05/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 550084ccbb1df24fe0cbc0a4630efe19e6685e5c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 08ac1ae09741b63648aec2b51b6a774a46b9af7c
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101709912"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818449"
 ---
 # <a name="azure-key-vault-developers-guide"></a>Azure Key Vault Geliştirici Kılavuzu
 
@@ -45,7 +45,7 @@ Yönetim katmanına erişim, [Azure rol tabanlı erişim denetimi](../../role-ba
 
 Bkz. yükleme paketleri ve kaynak kodu için [Istemci kitaplıkları](client-libraries.md) .
 
-Key Vault yönetim düzlemi hakkında daha fazla bilgi için bkz. [Key Vault yönetim düzlemi](./secure-your-key-vault.md#management-plane-and-azure-rbac)
+Key Vault yönetim düzlemi hakkında daha fazla bilgi için bkz. [Azure Key Vault güvenlik özellikleri](security-features.md)
 
 ## <a name="authenticate-to-key-vault-in-code"></a>Kodda Key Vault kimlik doğrulaması
 
@@ -83,7 +83,7 @@ Uygulamalarda Key Vault kimlik doğrulaması hakkında öğreticiler için bkz.:
 
 ## <a name="manage-keys-certificates-and-secrets"></a>Anahtarları, sertifikaları ve gizli dizileri yönetme
 
-Anahtarlar, gizlilikler ve sertifikalara erişim veri düzlemine göre denetlenir. Veri düzlemi erişim denetimi, yerel kasa erişim ilkeleri veya Azure RBAC (Önizleme) kullanılarak yapılabilir.
+Anahtarlar, gizlilikler ve sertifikalara erişim veri düzlemine göre denetlenir. Veri düzlemi erişim denetimi, yerel kasa erişim ilkeleri veya Azure RBAC kullanılarak yapılabilir.
 
 **Anahtarlar API 'leri ve SDK 'Ları**
 
@@ -105,7 +105,7 @@ Anahtarlar, gizlilikler ve sertifikalara erişim veri düzlemine göre denetleni
 
 Bkz. yükleme paketleri ve kaynak kodu için [Istemci kitaplıkları](client-libraries.md) .
 
-Veri düzlemi güvenliği Key Vault hakkında daha fazla bilgi için bkz. [Key Vault veri düzlemi ve erişim ilkeleri](./secure-your-key-vault.md#data-plane-and-access-policies) ve [Key Vault veri DÜZLEMI ve Azure RBAC (Önizleme)](./secure-your-key-vault.md#data-plane-and-azure-rbac-preview)
+Key Vault veri düzlemi güvenliği hakkında daha fazla bilgi için bkz. [Azure Key Vault güvenlik özellikleri](security-features.md).
 
 ### <a name="code-examples"></a>Kod örnekleri
 

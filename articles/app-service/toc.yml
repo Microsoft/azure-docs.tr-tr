@@ -11,10 +11,8 @@
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
-    - name: ASP.NET Çekirdeği
-      href: quickstart-dotnetcore.md
     - name: ASP.NET
-      href: quickstart-dotnet-framework.md
+      href: quickstart-dotnetcore.md
     - name: Node.js
       href: quickstart-nodejs.md
     - name: PHP
@@ -90,7 +88,7 @@
       href: tutorial-troubleshoot-monitor.md
 - name: Örnekler
   items:
-    - name: Azure CLI’si
+    - name: Azure CLI
       href: samples-cli.md
     - name: Azure PowerShell
       href: samples-powershell.md
@@ -187,6 +185,10 @@
               href: deploy-ci-cd-custom-container.md
             - name: Yerel Git’ten dağıtım
               href: deploy-local-git.md
+            - name: GitHub Actions
+              href: deploy-github-actions.md
+            - name: Kapsayıcılar için GitHub eylemleri
+              href: deploy-container-github-action.md
             - name: Şablon ile dağıtım
               href: deploy-complex-application-predictably.md
         - name: Dağıtım kimlik bilgilerini ayarlama
@@ -215,8 +217,6 @@
               href: configure-authentication-provider-facebook.md
             - name: Google ile kimlik doğrulaması
               href: configure-authentication-provider-google.md
-            - name: Microsoft hesabıyla kimlik doğrulaması
-              href: configure-authentication-provider-microsoft.md
             - name: Twitter ile kimlik doğrulaması
               href: configure-authentication-provider-twitter.md
             - name: OpenID Connect sağlayıcısıyla kimlik doğrulaması (Önizleme)
@@ -293,7 +293,7 @@
           href: webjobs-sdk-how-to.md
 - name: Başvuru
   items:
-    - name: Azure CLI’si
+    - name: Azure CLI
       href: /cli/azure/appservice
     - name: Azure PowerShell
       href: /powershell/module/az.websites/#app_service
@@ -320,8 +320,8 @@
       href: 'https://azure.microsoft.com/updates/?product=app-service'
     - name: Kudu hizmeti
       href: resources-kudu.md
-    - name: Geçiş Yardımcısı kılavuzları
-      href: 'https://github.com/Azure/App-Service-Migration-Assistant/tree/master/MigrationDocs'
+    - name: Geçiş Yardımcısı
+      href: app-service-migration-assistant.md
     - name: En iyi uygulamalar
       href: app-service-best-practices.md
     - name: Örnekler

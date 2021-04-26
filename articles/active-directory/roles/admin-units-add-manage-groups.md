@@ -14,12 +14,12 @@ ms.author: rolyon
 ms.reviewer: anandy
 ms.custom: oldportal;it-pro;
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f88a0818d93c33b6265cc8c695479d2a42678ada
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 2ad8cce8375ecd670a481541a091e36aacb41240
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103011043"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107505301"
 ---
 # <a name="add-and-manage-groups-in-an-administrative-unit-in-azure-active-directory"></a>Azure Active Directory bir yönetim biriminde gruplar ekleme ve yönetme
 
@@ -68,7 +68,7 @@ Aşağıdaki örnekte, `Add-AzureADMSAdministrativeUnitMember` grubunu yönetim 
 ```powershell
 $adminUnitObj = Get-AzureADMSAdministrativeUnit -Filter "displayname eq 'Test administrative unit 2'"
 $GroupObj = Get-AzureADGroup -Filter "displayname eq 'TestGroup'"
-Add-AzureADMSAdministrativeUnitMember -ObjectId $adminUnitObj.ObjectId -RefObjectId $GroupObj.ObjectId
+Add-AzureADMSAdministrativeUnitMember -Id $adminUnitObj.Id -RefObjectId $GroupObj.ObjectId
 ```
 
 ### <a name="use-microsoft-graph"></a>Microsoft Graph kullan
@@ -115,13 +115,13 @@ Yönetim biriminin tüm üyelerinin listesini göstermek için aşağıdaki komu
 
 ```powershell
 $adminUnitObj = Get-AzureADMSAdministrativeUnit -Filter "displayname eq 'Test administrative unit 2'"
-Get-AzureADMSAdministrativeUnitMember -ObjectId $adminUnitObj.ObjectId
+Get-AzureADMSAdministrativeUnitMember -Id $adminUnitObj.Id
 ```
 
 Yönetim biriminin üyesi olan tüm grupları göstermek için aşağıdaki kod parçacığını kullanın:
 
 ```powershell
-foreach ($member in (Get-AzureADMSAdministrativeUnitMember -ObjectId $adminUnitObj.ObjectId)) 
+foreach ($member in (Get-AzureADMSAdministrativeUnitMember -Id $adminUnitObj.Id)) 
 {
 if($member.ObjectType -eq "Group")
 {

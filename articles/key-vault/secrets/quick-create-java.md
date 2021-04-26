@@ -2,18 +2,18 @@
 title: Hızlı başlangıç-Java için gizli Azure Key Vault istemci kitaplığı
 description: Java için Azure Key Vault gizli istemci kitaplığı için hızlı başlangıç sağlar.
 author: msmbaldwin
-ms.custom: devx-track-java, devx-track-azurecli
+ms.custom: devx-track-java
 ms.author: mbaldwin
 ms.date: 10/20/2019
 ms.service: key-vault
 ms.subservice: secrets
 ms.topic: quickstart
-ms.openlocfilehash: 95323ec513f1a3d00347da022f7c808b029bd44f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c52ac859f72c440e2cebd59555606c7b3986a314
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97934807"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814883"
 ---
 # <a name="quickstart-azure-key-vault-secret-client-library-for-java"></a>Hızlı başlangıç: Java için Azure Key Vault gizli istemci kitaplığı
 Java için Azure Key Vault gizli istemci kitaplığı ile çalışmaya başlayın. Paketi yüklemek ve temel görevler için örnek kodu denemek üzere aşağıdaki adımları izleyin.
@@ -175,7 +175,7 @@ Uygulamanızın kimliği doğrulandığına göre, yöntemi kullanarak anahtar k
 secretClient.setSecret(new KeyVaultSecret(secretName, secretValue));
 ```
 
-Parolanın [az keykasası Secret Show](/cli/azure/keyvault/secret?#az-keyvault-secret-show) komutuyla ayarlandığını doğrulayabilirsiniz:
+Parolanın [az keykasası Secret Show](/cli/azure/keyvault/secret?#az_keyvault_secret_show) komutuyla ayarlandığını doğrulayabilirsiniz:
 
 ```azurecli
 az keyvault secret show --vault-name <your-unique-key-vault-name> --name mySecret
@@ -200,7 +200,7 @@ SyncPoller<DeletedSecret, Void> deletionPoller = secretClient.beginDeleteSecret(
 deletionPoller.waitForCompletion();
 ```
 
-Parolanın [az keykasası Secret Show](/cli/azure/keyvault/secret?#az-keyvault-secret-show) komutuyla silindiğini doğrulayabilirsiniz:
+Parolanın [az keykasası Secret Show](/cli/azure/keyvault/secret?#az_keyvault_secret_show) komutuyla silindiğini doğrulayabilirsiniz:
 
 ```azurecli
 az keyvault secret show --vault-name <your-unique-key-vault-name> --name mySecret
@@ -281,4 +281,4 @@ Bu hızlı başlangıçta bir Anahtar Kasası oluşturdunuz, bir gizli dizi depo
 
 - [Azure Key Vault genel bakışını](../general/overview.md) okuyun
 - [Azure Key Vault geliştirici kılavuzuna](../general/developers-guide.md) bakın
-- [Anahtar kasasına erişimi güvenli hale getirme](../general/secure-your-key-vault.md)
+- [Anahtar kasasına erişimi güvenli hale getirme](../general/security-features.md)

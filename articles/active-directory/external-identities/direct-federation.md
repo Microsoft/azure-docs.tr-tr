@@ -5,19 +5,19 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: B2B
 ms.topic: how-to
-ms.date: 03/02/2021
+ms.date: 04/06/2021
 ms.author: mimart
 author: msmimart
 manager: celestedg
 ms.reviewer: mal
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 598cbf303c8a87675833b8d87f05055771e46f55
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 830119a5b3a7781e8b12e3d4df870f539a2cd63a
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101687252"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107364915"
 ---
 # <a name="direct-federation-with-ad-fs-and-third-party-providers-for-guest-users-preview"></a>Konuk kullanıcılar için AD FS ve üçüncü taraf sağlayıcılarla doğrudan Federasyon (Önizleme)
 
@@ -33,12 +33,12 @@ Bir kuruluşla doğrudan Federasyonu ayarladıktan sonra, davet ettiğiniz tüm 
  - Bir iş ortağı organizasyonu ile doğrudan Federasyon ayarlayıp Konuk kullanıcıları davet ederseniz ve sonra iş ortağı kuruluşu daha sonra Azure AD 'ye geçerse, zaten davetiye kullanan Konuk kullanıcılar, kiracınızdaki doğrudan Federasyon ilkesi mevcut olduğu sürece doğrudan Federasyonu kullanmaya devam eder.
  - Doğrudan Federasyonu bir iş ortağı kuruluşla silerseniz, şu anda doğrudan Federasyon kullanan tüm konuk kullanıcılar oturum açamıyor.
 
-Bu senaryoların hiçbirinde, Konuk Kullanıcı hesabını dizininizden silip yeniden davet ederek bir Konuk kullanıcının kimlik doğrulama yöntemini güncelleştirebilirsiniz.
+Bu senaryoların hiçbirinde, bir Konuk kullanıcının kimlik doğrulama yöntemini, kullanım [durumlarını sıfırlayarak](reset-redemption-status.md)güncelleştirebilirsiniz.
 
 Doğrudan Federasyon, contoso.com ve fabrikam.com gibi etki alanı ad alanlarına bağlıdır. AD FS veya bir üçüncü taraf IDP ile doğrudan Federasyon yapılandırması kurarken, kuruluşlar bir veya daha fazla etki alanı ad alanını bu IDPs ile ilişkilendirir. 
 
 ## <a name="end-user-experience"></a>Son kullanıcı deneyimi 
-Doğrudan Federasyon sayesinde, Konuk kullanıcılar kendi kurumsal hesaplarını kullanarak Azure AD kiracınızda oturum açabilirler. Paylaşılan kaynaklara erişirken ve oturum açma isteminde bulunulduklarında, doğrudan Federasyon kullanıcıları IDP 'ye yeniden yönlendirilir. Başarılı oturum açma işleminden sonra, kaynaklara erişmek için Azure AD 'ye döndürülür. Doğrudan federasyon kullanıcılarının yenileme belirteçleri, Azure AD 'de [geçiş yenileme belirteci için varsayılan uzunluk](../develop/active-directory-configurable-token-lifetimes.md#exceptions) olan 12 saat için geçerlidir. Federal IDP SSO etkin ise, Kullanıcı SSO ile karşılaşacaktır ve ilk kimlik doğrulamasından sonra herhangi bir oturum açma istemi görmeyecektir.
+Doğrudan Federasyon sayesinde, Konuk kullanıcılar kendi kurumsal hesaplarını kullanarak Azure AD kiracınızda oturum açabilirler. Paylaşılan kaynaklara erişirken ve oturum açma isteminde bulunulduklarında, doğrudan Federasyon kullanıcıları IDP 'ye yeniden yönlendirilir. Başarılı oturum açma işleminden sonra, kaynaklara erişmek için Azure AD 'ye döndürülür. Doğrudan federasyon kullanıcılarının yenileme belirteçleri, Azure AD 'de [geçiş yenileme belirteci için varsayılan uzunluk](../develop/active-directory-configurable-token-lifetimes.md#configurable-token-lifetime-properties) olan 12 saat için geçerlidir. Federal IDP SSO etkin ise, Kullanıcı SSO ile karşılaşacaktır ve ilk kimlik doğrulamasından sonra herhangi bir oturum açma istemi görmeyecektir.
 
 ## <a name="sign-in-endpoints"></a>Oturum açma uç noktaları
 
@@ -89,7 +89,7 @@ Bir iş ortağı organizasyonu ile doğrudan Federasyon oluşturulduğunda, bu k
 ### <a name="does-direct-federation-address-sign-in-issues-due-to-a-partially-synced-tenancy"></a>Kısmen eşitlenen bir kiracı nedeniyle doğrudan Federasyon adresi oturum açma sorunları mı var?
 Hayır, [e-posta bir kerelik geçiş kodu](one-time-passcode.md) özelliğinin bu senaryoda kullanılması gerekir. "Kısmen eşitlenen bir kiracı", şirket içi kullanıcı kimliklerinin bulutla tam olarak eşitlenmediği bir iş ortağı Azure AD kiracısını ifade eder. Kimliği henüz bulutta mevcut olmayan ancak B2B davetinizi kullanmaya çalışan bir konuk, oturum açamaz. Tek seferlik geçiş kodu özelliği, bu konuğun oturum açmasını sağlar. Doğrudan Federasyon özelliği, konuğun kendi IDP tarafından yönetilen kuruluş hesabına sahip olduğu, ancak kuruluşun hiçbir Azure AD varlığı olmadığı senaryolara yöneliktir.
 ### <a name="once-direct-federation-is-configured-with-an-organization-does-each-guest-need-to-be-sent-and-redeem-an-individual-invitation"></a>Doğrudan Federasyon bir kuruluşla yapılandırıldıktan sonra, her konuğun gönderilmesi ve tek bir daveti kullanmanız gerekir mi?
-Doğrudan federasyonın kurulması, sizi bir davetiyeyi zaten kullanan Konuk kullanıcılar için kimlik doğrulama yöntemini değiştirmez. Konuk Kullanıcı hesabını dizininizden silip yeniden davet ederek, Konuk kullanıcının kimlik doğrulama yöntemini güncelleştirebilirsiniz.
+Doğrudan federasyonın kurulması, sizi bir davetiyeyi zaten kullanan Konuk kullanıcılar için kimlik doğrulama yöntemini değiştirmez. Bir Konuk kullanıcının kimlik doğrulama yöntemini, kullanım [durumlarını sıfırlayarak](reset-redemption-status.md)güncelleştirebilirsiniz.
 ## <a name="step-1-configure-the-partner-organizations-identity-provider"></a>1. Adım: iş ortağı kuruluşun kimlik sağlayıcısını yapılandırma
 İlk olarak, iş ortağı kuruluşunuzun kimlik sağlayıcısını gerekli talepler ve bağlı olan taraf güvenleri ile yapılandırması gerekir. 
 
@@ -212,7 +212,7 @@ Daha sonra, Azure AD 'de adım 1 ' de yapılandırılan kimlik sağlayıcısıyl
 
 
 ## <a name="how-do-i-remove-direct-federation"></a>Doğrudan Federasyonu kaldırmak Nasıl yaparım? mı?
-Doğrudan Federasyon kurulumunuzu kaldırabilirsiniz. Bunu yaparsanız, doğrudan davetlerini daha önce kullanan Federasyon Konuk kullanıcıları oturum açamaz. Ancak onları dizinden silerek ve yeniden davet ederek kaynaklarınıza erişim izni verebilirsiniz. Azure AD portalındaki bir kimlik sağlayıcısıyla doğrudan Federasyonu kaldırmak için:
+Doğrudan Federasyon kurulumunuzu kaldırabilirsiniz. Bunu yaparsanız, doğrudan davetlerini daha önce kullanan Federasyon Konuk kullanıcıları oturum açamaz. Ancak, kullanım [durumlarını sıfırlayarak](reset-redemption-status.md)bu kullanıcılara kaynaklarınızın erişimini sağlayabilirsiniz. Azure AD portalındaki bir kimlik sağlayıcısıyla doğrudan Federasyonu kaldırmak için:
 
 1. [Azure Portal](https://portal.azure.com/) gidin. Sol bölmede **Azure Active Directory**’yi seçin. 
 2. **Dış kimlikler**' i seçin.

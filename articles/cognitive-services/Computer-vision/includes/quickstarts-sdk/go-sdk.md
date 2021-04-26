@@ -1,7 +1,7 @@
 ---
-title: 'Hızlı başlangıç: go için istemci kitaplığı Görüntü İşleme'
+title: 'Hızlı başlangıç: go için optik karakter tanıma istemci kitaplığı'
 titleSuffix: Azure Cognitive Services
-description: Bu hızlı başlangıç ile Go için Görüntü İşleme istemci kitaplığı ile çalışmaya başlayın.
+description: Bu hızlı başlangıç ile Go için optik karakter tanıma istemci kitaplığı ile çalışmaya başlayın.
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
@@ -10,19 +10,16 @@ ms.subservice: computer-vision
 ms.topic: include
 ms.date: 12/15/2020
 ms.author: pafarley
-ms.openlocfilehash: 9cb46a57792ecdd650a8a9f5025a5055257057ec
-ms.sourcegitcommit: 18a91f7fe1432ee09efafd5bd29a181e038cee05
+ms.openlocfilehash: 0ae059054c68da662e05342525987f6925184906
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/16/2021
-ms.locfileid: "103621951"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107073730"
 ---
 <a name="HOLTop"></a>
 
-Görüntü İşleme istemci kitaplığını kullanarak şunları yapın:
-
-* Etiketler, metin açıklaması, yüzeyler, yetişkinlere yönelik içerik ve daha fazlası için bir görüntüyü çözümleyin.
-* Okuma API 'SI ile yazdırılmış ve el yazısı metin okuyun.
+Görüntülerden yazdırılmış ve el yazısı metinleri okumak için OCR istemci kitaplığını kullanın.
 
 [Başvuru belgeleri](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision)  |  [Kitaplık kaynak kodu](https://github.com/Azure/azure-sdk-for-go/tree/master/services/cognitiveservices/v2.1/computervision)  |  [Paket](https://github.com/Azure/azure-sdk-for-go)
 
@@ -33,7 +30,6 @@ Görüntü İşleme istemci kitaplığını kullanarak şunları yapın:
 * Azure aboneliğiniz olduktan sonra, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesComputerVision"  title=" "  target="_blank"> </a> anahtarınızı ve uç noktanızı almak için Azure Portal bir Görüntü İşleme kaynağı oluşturun görüntü işleme bir kaynak oluşturun. Dağıtıldıktan sonra **Kaynağa Git ' e** tıklayın.
     * Uygulamanızı Görüntü İşleme hizmetine bağlamak için oluşturduğunuz kaynaktaki anahtar ve uç nokta gerekir. Anahtarınızı ve uç noktanızı daha sonra hızlı başlangıçta aşağıdaki koda yapıştırabilirsiniz.
     * `F0`Hizmeti denemek ve daha sonra üretime yönelik ücretli bir katmana yükseltmek için ücretsiz fiyatlandırma katmanını () kullanabilirsiniz.
-* Sırasıyla ve olarak adlandırılan anahtar ve uç nokta URL 'SI için [ortam değişkenleri oluşturun](../../../cognitive-services-apis-create-account.md#configure-an-environment-variable-for-authentication) `COMPUTER_VISION_SUBSCRIPTION_KEY` `COMPUTER_VISION_ENDPOINT` .
 
 ## <a name="setting-up"></a>Ayarlanıyor
 
@@ -96,28 +92,25 @@ Görüntü İşleme abonelik anahtarınız ve uç noktanız için değişkenler 
 > [!IMPORTANT]
 > İşiniz bittiğinde kodunuzda abonelik anahtarını kaldırmayı unutmayın ve hiçbir zaman herkese açık bir şekilde nakletmeyin. Üretim için, kimlik bilgilerinizi depolamak ve bunlara erişmek için güvenli bir yol kullanmayı düşünün. Örneğin, [Azure Anahtar Kasası](../../../../key-vault/general/overview.md).
 
-Daha sonra, farklı Görüntü İşleme işlemleri gerçekleştirmek için kod eklemeye başlayacaksınız.
+Daha sonra, farklı OCR işlemlerini gerçekleştirmek için kod eklemeye başlayacaksınız.
 
 > [!div class="nextstepaction"]
 > [Bir sorunla karşılaşdığım](https://microsoft.qualtrics.com/jfe/form/SV_0Cl5zkG3CnDjq6O?PLanguage=Go&Section=set-up-client) [istemciyi ayarladım](?success=set-up-client#object-model)
 
 ## <a name="object-model"></a>Nesne modeli
 
-Aşağıdaki sınıflar ve arabirimler Görüntü İşleme go SDK 'sının bazı önemli özelliklerini işler.
+Aşağıdaki sınıflar ve arabirimler, OCR git SDK 'sının bazı önemli özelliklerini işler.
 
 |Ad|Açıklama|
 |---|---|
 | [BaseClient](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision#BaseClient) | Bu sınıf, görüntü analizi ve metin okuma gibi tüm Görüntü İşleme işlevleri için gereklidir. Bunu Abonelik bilgileriniz ile birlikte başlatır ve birçok görüntü işlemini yapmak için kullanırsınız.|
-|[Imageanalysis](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision#ImageAnalysis)| Bu tür, bir **analiz Zeımage** işlev çağrısının sonuçlarını içerir. Kategoriye özgü işlevlerin her biri için benzer türler vardır.|
 |[ReadOperationResult](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision#ReadOperationResult)| Bu tür, toplu okuma işleminin sonuçlarını içerir. |
-|[VisualFeatureTypes](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision#VisualFeatureTypes)| Bu tür, standart bir çözümle işleminde yapılabilecek farklı görüntü analizi türlerini tanımlar. İhtiyaçlarınıza bağlı olarak bir VisualFeatureTypes değeri kümesi belirtirsiniz. |
 
 ## <a name="code-examples"></a>Kod örnekleri
 
-Bu kod parçacıkları, Go için Görüntü İşleme istemci kitaplığı ile aşağıdaki görevlerin nasıl yapılacağını gösterir:
+Bu kod parçacıkları, Go için OCR istemci kitaplığı ile aşağıdaki görevlerin nasıl yapılacağını gösterir:
 
 * [İstemcinin kimliğini doğrulama](#authenticate-the-client)
-* [Resim çözümleme](#analyze-an-image)
 * [Yazdırılmış ve el yazısı metin oku](#read-printed-and-handwritten-text)
 
 ## <a name="authenticate-the-client"></a>İstemcinin kimliğini doğrulama
@@ -130,105 +123,13 @@ Bir `main` işlev oluşturun ve uç noktanıza ve anahtarınıza sahip bir istem
 [!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_client)]
 
 > [!div class="nextstepaction"]
-> [Bir sorunla karşılaşdığım](https://microsoft.qualtrics.com/jfe/form/SV_0Cl5zkG3CnDjq6O?PLanguage=Go&Section=authenticate-client) [istemciyi doğrulıyorum](?success=authenticate-client#analyze-an-image)
+> [Bir sorunla karşılaşdığım](https://microsoft.qualtrics.com/jfe/form/SV_0Cl5zkG3CnDjq6O?PLanguage=Go&Section=authenticate-client) [istemciyi doğrulıyorum](?success=authenticate-client#read-printed-and-handwritten-text)
 
-## <a name="analyze-an-image"></a>Resim çözümleme
 
-Aşağıdaki kod, uzak bir görüntüyü çözümlemek ve sonuçları konsola yazdırmak için istemci nesnesini kullanır. Metin açıklaması, kategori, etiket listesi, algılanan nesneler, algılanan markalar, algılanan yüzeyler, yetişkinlere yönelik içerik bayrakları, ana renkler ve görüntü türü alabilirsiniz.
-
-### <a name="set-up-test-image"></a>Test görüntüsünü ayarla
-
-Önce, çözümlemek istediğiniz görüntünün URL 'sine bir başvuru kaydedin. Bunu `main` işlevinizin içine koyun.
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_analyze_url)]
-
-> [!TIP]
-> Yerel bir görüntüyü de analiz edebilirsiniz. **DescribeImageInStream** gibi [baseclient](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision#BaseClient) yöntemlerine bakın. Ya da, yerel görüntüleri içeren senaryolar için [GitHub](https://github.com/Azure-Samples/cognitive-services-quickstart-code/blob/master/go/ComputerVision/ComputerVisionQuickstart.go) 'daki örnek koda bakın.
-
-### <a name="specify-visual-features"></a>Görsel özellikleri belirtin
-
-Aşağıdaki işlev, örnek görüntüden farklı görsel özellikleri ayıklamayı çağırır. Aşağıdaki bölümlerde bu işlevleri tanımlayacaksınız.
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_analyze)]
-
-### <a name="get-image-description"></a>Görüntü açıklamasını al
-
-Aşağıdaki işlev, görüntü için oluşturulan açıklamalı alt yazıların listesini alır. Görüntü açıklaması hakkında daha fazla bilgi için bkz. [görüntüleri](../../concept-describing-images.md)açıklama.
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_analyze_describe)]
-
-### <a name="get-image-category"></a>Görüntü kategorisini al
-
-Aşağıdaki işlev görüntünün algılanan kategorisini alır. Daha fazla bilgi için bkz. [görüntüleri kategorilere ayırma](../../concept-categorizing-images.md).
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_analyze_categorize)]
-
-### <a name="get-image-tags"></a>Görüntü etiketlerini al
-
-Aşağıdaki işlev görüntüde algılanan etiketlerin kümesini alır. Daha fazla bilgi için bkz. [içerik etiketleri](../../concept-tagging-images.md).
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_tags)]
-
-### <a name="detect-objects"></a>Nesneleri Algıla
-
-Aşağıdaki işlev görüntüdeki ortak nesneleri algılar ve konsola yazdırır. Daha fazla bilgi için bkz. [nesne algılama](../../concept-object-detection.md).
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_objects)]
-
-### <a name="detect-brands"></a>Markalar Algıla
-
-Aşağıdaki kod görüntüde kurumsal markaların ve logoları algılar ve bunları konsola yazdırır. Daha fazla bilgi için [marka algılama](../../concept-brand-detection.md).
-
-İlk olarak, işlevinizin içindeki yeni bir görüntüye bir başvuru bildirin `main` .
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_brand_url)]
-
-Aşağıdaki kod, marka algılama işlevini tanımlar.
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_brands)]
-
-### <a name="detect-faces"></a>Yüz algılama
-
-Aşağıdaki işlev, görüntüde dikdörtgen koordinatlarını ve belirli yüz özniteliklerini içeren algılanan yüzeyleri döndürür. Daha fazla bilgi için bkz. [yüz algılama](../../concept-detecting-faces.md).
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_faces)]
-
-### <a name="detect-adult-racy-or-gory-content"></a>Yetişkin, kcy veya Gori içeriğini algılama
-
-Aşağıdaki işlev görüntüde yetişkinlere yönelik içeriğin algılanan varlığını yazdırır. Daha fazla bilgi için bkz. [yetişkin, korcy, Gori içeriği](../../concept-detecting-adult-content.md).
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_adult)]
-
-### <a name="get-image-color-scheme"></a>Görüntü renk düzenini al
-
-Aşağıdaki işlev görüntüde, baskın renkler ve vurgu rengi gibi algılanan renk özniteliklerini yazdırır. Daha fazla bilgi için bkz. [renk şemaları](../../concept-detecting-color-schemes.md).
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_color)]
-
-### <a name="get-domain-specific-content"></a>Etki alanına özgü içerik al
-
-Görüntü İşleme, görüntülerde daha fazla analiz yapmak için özel modeller kullanabilir. Daha fazla bilgi için bkz. [etki alanına özgü içerik](../../concept-detecting-domain-content.md). 
-
-Aşağıdaki kod görüntüde algılanan ünlüler hakkında verileri ayrıştırır.
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_celebs)]
-
-Aşağıdaki kod görüntüde algılanan yer işaretleriyle ilgili verileri ayrıştırır.
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_landmarks)]
-
-### <a name="get-the-image-type"></a>Görüntü türünü al
-
-Aşağıdaki işlev, &mdash; küçük resim veya çizgi çizimi gibi görüntü türü hakkında bilgi yazdırır.
-
-[!code-go[](~/cognitive-services-quickstart-code/go/ComputerVision/ComputerVisionQuickstart.go?name=snippet_type)]
-
-> [!div class="nextstepaction"]
-> [Bir sorunla karşılaşdığım](https://microsoft.qualtrics.com/jfe/form/SV_0Cl5zkG3CnDjq6O?PLanguage=Go&Section=analyze-image) [bir görüntüyü çözümleytim](?success=analyze-image#read-printed-and-handwritten-text)
 
 ## <a name="read-printed-and-handwritten-text"></a>Yazdırılmış ve el yazısı metin oku
 
-Görüntü İşleme görüntüdeki görünür metni okuyabilir ve bunu bir karakter akışına dönüştürebilir. Bu bölümdeki kod, `RecognizeTextReadAPIRemoteImage` görüntüde yazdırılmış veya el yazısı metinleri algılamak ve ayıklamak için istemci nesnesini kullanan bir işlevi tanımlar.
+OCR hizmeti görüntüdeki görünür metni okuyabilir ve bunu bir karakter akışına dönüştürebilir. Bu bölümdeki kod, `RecognizeTextReadAPIRemoteImage` görüntüde yazdırılmış veya el yazısı metinleri algılamak ve ayıklamak için istemci nesnesini kullanan bir işlevi tanımlar.
 
 İşlevinizdeki örnek resim başvurusunu ve işlev çağrısını ekleyin `main` .
 
@@ -281,9 +182,10 @@ Bilişsel hizmetler aboneliğini temizlemek ve kaldırmak istiyorsanız, kaynağ
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
+Bu hızlı başlangıçta, OCR istemci kitaplığını yüklemeyi ve okuma API 'sini kullanmayı öğrendiniz. Ardından, okuma API 'SI özellikleri hakkında daha fazla bilgi edinin.
+
 > [!div class="nextstepaction"]
-> [Görüntü İşleme API'si Başvurusu (git)](https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/computervision)
+>[Okuma API 'sini çağırma](../../Vision-API-How-to-Topics/call-read-api.md)
 
-
-* [Görüntü İşleme nedir?](../../overview.md)
+* [OCR genel bakış](../../overview-ocr.md)
 * Bu örneğe ilişkin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-quickstart-code/blob/master/go/ComputerVision/ComputerVisionQuickstart.go)' da bulunabilir.

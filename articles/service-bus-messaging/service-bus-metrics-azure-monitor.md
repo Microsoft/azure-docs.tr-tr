@@ -4,10 +4,10 @@ description: Bu makalede, Azure Izleyici 'nin Service Bus varlıkları (kuyrukla
 ms.topic: article
 ms.date: 02/12/2021
 ms.openlocfilehash: 1e57def2ee7409ae62cdbe065c36e8a53a140e18
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100570564"
 ---
 # <a name="azure-service-bus-metrics-in-azure-monitor"></a>Azure Izleyici 'de Azure Service Bus ölçümleri
@@ -79,7 +79,7 @@ Aşağıdaki iki tür hata, Kullanıcı hataları olarak sınıflandırılmaktad
 | İletiler| Kuyruktaki/konudaki iletilerin sayısı. <br/><br/> Birim: sayım <br/> Toplama türü: Ortalama <br/> Boyut: varlık adı |
 | Etkin Iletiler| Bir kuyruktaki/konudaki etkin ileti sayısı. <br/><br/> Birim: sayım <br/> Toplama türü: Ortalama <br/> Boyut: varlık adı |
 | Kullanılmayan iletiler| Bir kuyruktaki/konudaki kullanılmayan iletilerin sayısı. <br/><br/> Birim: sayım <br/> Toplama türü: Ortalama <br/>Boyut: varlık adı |
-| Zamanlanan iletiler| Bir kuyruktaki/konudaki zamanlanan ileti sayısı. <br/><br/> Birim: sayım <br/> Toplama türü: Ortalama  <br/> Boyut: varlık adı |
+| Zamanlanmış iletiler| Bir kuyruktaki/konudaki zamanlanan ileti sayısı. <br/><br/> Birim: sayım <br/> Toplama türü: Ortalama  <br/> Boyut: varlık adı |
 | Tamamlanan Iletiler| Bir kuyruktaki/konudaki tamamlanan iletilerin sayısı. <br/><br/> Birim: sayım <br/> Toplama türü: Ortalama <br/> Boyut: varlık adı |
 | Bırakılan Iletiler| Bir kuyrukta/konuda bırakılan ileti sayısı. <br/><br/> Birim: sayım <br/> Toplama türü: Ortalama <br/> Boyut: varlık adı |
 | Boyut | Bir varlığın (kuyruk veya konu) bayt cinsinden boyutu. <br/><br/>Birim: sayım <br/>Toplama türü: Ortalama <br/>Boyut: varlık adı | 

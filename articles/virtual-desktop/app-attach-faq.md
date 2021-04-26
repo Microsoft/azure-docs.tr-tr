@@ -7,13 +7,13 @@ ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 08/17/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 395c274630131c2ae5f451443913e1e69c7c422a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+manager: femila
+ms.openlocfilehash: 6057f4a76f274e34b036ea352a3691b34d24b3a1
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101738710"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107835371"
 ---
 # <a name="msix-app-attach-faq"></a>MSIX uygulama iliştirme SSS
 
@@ -71,6 +71,16 @@ Evet. Zaten restaged olan uygulamaları daha sonra hatalara neden olmaz.
 
 Evet. Otomatik olarak imzalanan sertifikayı barındırmak için MSIX uygulama eklemenin kullanıldığı tüm oturum ana bilgisayar VM 'lerine otomatik olarak imzalanan sertifikayı yüklemeniz gerekir.
 
+## <a name="what-applications-can-i-repackage-to-msix"></a>Hangi uygulamaları MALTıYA yeniden paketleyebilir?
+
+Her uygulama, işletim sistemi, programlama dili ve çerçeveler için farklı özellikler kullanır. Uygulamanızı yeniden paketlemek için, [mevcut yükleyiclerinizi maltıya taşıma](/windows/msix/packaging-tool/create-an-msix-overview#how-to-move-your-existing-installers-to-msix)bölümündeki yönergeleri izleyin. Bir uygulamayı, [bir masaüstü uygulamasını paketlemek üzere hazırlama](/windows/msix/desktop/desktop-to-uwp-prepare)sırasında yeniden paketlemek için ihtiyacınız olan işlerin bir listesini bulabilirsiniz. 
+
+Bazı uygulamalar Application katmanlı olamaz, bu da bir MSIX dosyasına yeniden paketlenemeyeceği anlamına gelir. Yeniden paketlenemeyecek uygulamaların listesi aşağıdadır:
+
+- Sürücüler 
+- Active-X veya Silverlight
+- VPN istemcileri
+- Virüsten koruma programları
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

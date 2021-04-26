@@ -10,13 +10,13 @@ author: gvashishtha
 ms.date: 02/16/2020
 ms.topic: conceptual
 ms.reviewer: larryfr
-ms.custom: deploy
-ms.openlocfilehash: 0bb17ded6822c477fe2107c66711af5e2dc384d3
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.custom: deploy, devx-track-azurecli
+ms.openlocfilehash: 9b7b8fe9c05d0de64dcd0cf7c6c324e0d03cb1ac
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107848"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107874162"
 ---
 # <a name="high-performance-serving-with-triton-inference-server-preview"></a>Triton çıkarım sunucusuyla yüksek performanslı hizmet (Önizleme) 
 
@@ -116,12 +116,12 @@ models
 az ml model register -n my_triton_model -p models --model-framework=Multi
 ```
 
-Hakkında daha fazla bilgi için `az ml model register` [başvuru belgelerine](/cli/azure/ext/azure-cli-ml/ml/model)bakın.
+Hakkında daha fazla bilgi için `az ml model register` [başvuru belgelerine](/cli/azure/ml/model)bakın.
 
 Model Azure Machine Learning ' de kaydedilirken, parametrenin değeri, `--model-path  -p` üç aylık dönemin üst klasörünün adı olmalıdır.  
 Yukarıdaki örnekte,  `--model-path` ' modeller '.
 
-`--name  -n`Örnekteki ' my_triton_model ' parametresinin değeri, Azure Machine Learning çalışma alanı bilinen model adı olacaktır. 
+`--name  -n`Örnekte, â € ̃ my_triton_modelâ €™ parametresinin değeri, Azure Machine Learning çalışma alanı bilinen model adı olacaktır. 
 
 # <a name="python"></a>[Python](#tab/python)
 
@@ -339,7 +339,7 @@ print(local_service.scoring_uri)
 
 ---
 
-Dağıtım tamamlandıktan sonra Puanlama URI 'SI görüntülenir. Bu yerel dağıtım için, olacaktır `http://localhost:6789/score` . Buluta dağıtırsanız, Puanlama URI 'sini almak için [az ml Service CLI göster](/cli/azure/ext/azure-cli-ml/ml/service#ext_azure_cli_ml_az_ml_service_show) komutunu kullanabilirsiniz.
+Dağıtım tamamlandıktan sonra Puanlama URI 'SI görüntülenir. Bu yerel dağıtım için, olacaktır `http://localhost:6789/score` . Buluta dağıtırsanız, Puanlama URI 'sini almak için [az ml Service CLI göster](/cli/azure/ml/service#az_ml_service_show) komutunu kullanabilirsiniz.
 
 Puanlama URI 'sine çıkarım istekleri gönderen bir istemci oluşturma hakkında daha fazla bilgi için bkz. [Web hizmeti olarak dağıtılan bir modeli](how-to-consume-web-service.md)kullanma.
 
@@ -376,7 +376,7 @@ local_service.delete()
 
 * [Başarısız bir dağıtımda sorun](how-to-troubleshoot-deployment.md)giderme, bir modeli dağıttığınızda karşılaşabileceğiniz sık karşılaşılan hataları giderme ve çözme veya geçici çözüm yapma hakkında bilgi edinin.
 
-* Dağıtım günlükleri söz konusu **Tritonserver 'ın başlayamadığından**, lütfen [NVIDIA 'nın açık kaynak belgelerine bakın.](https://github.com/triton-inference-server/server)
+* Dağıtım günlükleri söz konusu **Tritonserver 'ın başlayamadığından**, lütfen [Nvidiaâ €™ s açık kaynak belgelerine bakın.](https://github.com/triton-inference-server/server)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

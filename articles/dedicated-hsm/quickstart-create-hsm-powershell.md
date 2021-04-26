@@ -4,17 +4,19 @@ description: Azure PowerShell ile Azure Ayrılmış HSM oluşturma
 services: dedicated-hsm
 author: msmbaldwin
 ms.author: mbaldwin
+ms.date: 11/13/2020
 ms.topic: quickstart
 ms.service: key-vault
 ms.devlang: azurepowershell
-ms.date: 11/13/2020
-ms.custom: devx-track-azurepowershell
-ms.openlocfilehash: eebfb257d0324cf2771bd3af979ddbebb8429fb7
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom:
+- devx-track-azurepowershell
+- mode-api
+ms.openlocfilehash: d5b6d0399ceb98caf9bdd7bbd725e6d92af0eaa3
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94905633"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107537787"
 ---
 # <a name="quickstart-create-an-azure-dedicated-hsm-with-azure-powershell"></a>Hızlı başlangıç: Azure PowerShell Azure ayrılmış HSM oluşturma
 

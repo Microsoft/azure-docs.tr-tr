@@ -11,12 +11,12 @@ ms.date: 2/19/2020
 ms.author: martinle
 ms.reviewer: igorstan
 ms.custom: azure-synapse
-ms.openlocfilehash: d778844fee8cad9359532ffa23e177bf7b13c4b8
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9bdc4b2fed40817c7173468180e34de1ed0506fb
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98117699"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105962688"
 ---
 # <a name="capacity-limits-for-dedicated-sql-pool-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te adanmış SQL havuzu için kapasite sınırları
 
@@ -84,17 +84,17 @@ Azure SYNAPSE Analytics 'te adanmış SQL havuzunun çeşitli bileşenleri için
 
 ## <a name="metadata"></a>Meta veri
 
+Özel bir SQL havuzu duraklatıldığında veya ölçeklendirilildiğinde DMV 'nin sıfırlanması gerekir.
+
 | Sistem görünümü | En fazla satır |
 |:--- |:--- |
-| sys.dm_pdw_component_health_alerts |10,000 |
-| sys.dm_pdw_dms_cores |100 |
-| sys.dm_pdw_dms_workers |En son 1000 SQL isteği için DMS çalışanlarının toplam sayısı. |
-| sys.dm_pdw_errors |10,000 |
-| sys.dm_pdw_exec_requests |10,000 |
-| sys.dm_pdw_exec_sessions |10,000 |
-| sys.dm_pdw_request_steps |Sys.dm_pdw_exec_requests depolanan en son 1000 SQL isteği için adımların toplam sayısı. |
-| sys.dm_pdw_os_event_logs |10,000 |
-| sys.dm_pdw_sql_requests |Sys.dm_pdw_exec_requests depolanan en son 1000 SQL isteği. |
+| [sys.dm_pdw_dms_cores](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-dms-cores-transact-sql?view=azure-sqldw-latest&preserve-view=true) |100 |
+| [sys.dm_pdw_dms_workers](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-dms-workers-transact-sql?view=azure-sqldw-latest&preserve-view=true) |En son 1000 SQL isteği için DMS çalışanlarının toplam sayısı. |
+| [sys.dm_pdw_errors](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-errors-transact-sql?view=azure-sqldw-latest&preserve-view=true) |10,000 |
+| [sys.dm_pdw_exec_requests](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql?view=azure-sqldw-latest&preserve-view=true) |10,000 |
+| [sys.dm_pdw_exec_sessions](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-sessions-transact-sql?view=azure-sqldw-latest&preserve-view=true) |10,000 |
+| [sys.dm_pdw_request_steps](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-request-steps-transact-sql?view=azure-sqldw-latest&preserve-view=true) |Sys.dm_pdw_exec_requests depolanan en son 1000 SQL isteği için adımların toplam sayısı. |
+| [sys.dm_pdw_sql_requests](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-sql-requests-transact-sql?view=azure-sqldw-latest&preserve-view=true) |Sys.dm_pdw_exec_requests depolanan en son 1000 SQL isteği. |
 |||
 
 ## <a name="next-steps"></a>Sonraki adımlar

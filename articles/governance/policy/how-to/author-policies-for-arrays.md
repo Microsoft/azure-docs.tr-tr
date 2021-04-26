@@ -1,14 +1,14 @@
 ---
 title: Kaynaklardaki dizi özellikleri için yazma ilkeleri
 description: Dizi parametreleri ve dizi dili ifadeleriyle çalışmayı öğrenin, [*] diğer adını değerlendirin ve Azure Ilke tanımı kuralları ile öğeleri ekleyin.
-ms.date: 10/22/2020
+ms.date: 03/31/2021
 ms.topic: how-to
-ms.openlocfilehash: 75f4fcfb88bd4cb1ac0c8bfeac236b452479b8c6
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 18afbee0ca8b1c488e3bd3ce50dacc726bd2ef25
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104721622"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107305200"
 ---
 # <a name="author-policies-for-array-properties-on-azure-resources"></a>Azure kaynaklarında dizi özellikleri için yazma ilkeleri
 
@@ -95,11 +95,11 @@ Bu dizeyi her SDK ile kullanmak için aşağıdaki komutları kullanın:
 
 - Azure CLı: komut [az Policy atama Create](/cli/azure/policy/assignment#az_policy_assignment_create) parametresini parametre **params**
 - Azure PowerShell: cmdlet [New-AzPolicyAssignment](/powershell/module/az.resources/New-Azpolicyassignment) with Parameter **PolicyParameter**
-- REST API: _PUT_ [oluşturma](/rest/api/resources/policyassignments/create) işleminde, **Properties. Parameters** özelliğinin değeri olarak istek gövdesinin bir parçası olarak
+- REST API: _PUT_ [oluşturma](/rest/api/policy/policyassignments/create) işleminde, **Properties. Parameters** özelliğinin değeri olarak istek gövdesinin bir parçası olarak
 
 ## <a name="using-arrays-in-conditions"></a>Koşullarda dizileri kullanma
 
-### <a name="in-and-notin"></a>`In` ve `notIn`
+### <a name="in-and-notin"></a>Ve Notın
 
 `in`Ve `notIn` Koşulları yalnızca dizi değerleriyle çalışır. Bir dizideki değerin varlığını kontrol ederler. Dizi, sabit bir JSON dizisi ya da bir dizi parametresine başvuru olabilir. Örnek:
 
@@ -135,7 +135,7 @@ Bu dizeyi her SDK ile kullanmak için aşağıdaki komutları kullanın:
 }
 ```
 
-İfadeyi değerlendirmek için Azure Ilkesi, `where` her üye için bir kez koşulu 3 kez değerlendirir `[ "test*", "dev*", "prod*" ]` ve kaç kez değerlendirildiğini Sayın `true` . Her yinelemede, geçerli dizi üyesinin değeri `pattern` tarafından tanımlanan dizin adıyla eşleştirilmiş `count.name` . Bu değere daha sonra, `where` özel bir şablon işlevi çağırarak koşulun içinde başvurulabilir: `current('pattern')` .
+İfadeyi değerlendirmek için Azure Ilkesi, `where` her üye için bir kez koşulu üç kez değerlendirir, `[ "test*", "dev*", "prod*" ]` kaç kez değerlendirildiğini Sayın `true` . Her yinelemede, geçerli dizi üyesinin değeri `pattern` tarafından tanımlanan dizin adıyla eşleştirilmiş `count.name` . Bu değere daha sonra, `where` özel bir şablon işlevi çağırarak koşulun içinde başvurulabilir: `current('pattern')` .
 
 | Yineleme | `current('pattern')` döndürülen değer |
 |:---|:---|
@@ -243,7 +243,7 @@ Dizi kaynağı özellikleri genellikle iki farklı diğer ad türü tarafından 
 
 #### <a name="referencing-the-array"></a>Diziye başvurma
 
-İlk diğer ad, istek içeriğinden özelliğin değerini tek bir değer temsil eder `stringArray` . Bu özelliğin değeri bir dizi olduğundan, ilke koşullarında çok yararlı değildir. Örnek:
+İlk diğer ad, istek içeriğinden özelliğin değerini tek bir değer temsil eder `stringArray` . Bu özelliğin değeri bir dizi olduğundan, ilke koşullarında yararlı değildir. Örnek:
 
 ```json
 {
@@ -290,9 +290,9 @@ Dizi nesneler içeriyorsa, `[*]` her bir dizi üyesinden belirli bir özelliğin
 }
 ```
 
-`property`İçindeki tüm özelliklerin değerleri değerine eşitse bu koşul doğrudur `objectArray` `"value"` . Daha fazla örnek için bkz. diğer [ \[ \* \] diğer ad örnekleri](#appendix--additional--alias-examples).
+`property`İçindeki tüm özelliklerin değerleri değerine eşitse bu koşul doğrudur `objectArray` `"value"` . Daha fazla örnek için bkz. diğer [ \[ \* \] diğer ad örnekleri](#additional--alias-examples).
 
-`field()`Bir dizi diğer adına başvurmak için işlevini kullanırken, döndürülen değer seçilen tüm değerlerin bir dizisidir. Bu davranış, işlevin ortak kullanım durumunun `field()` , kaynak özelliği değerlerine şablon işlevleri uygulayabilme özelliğinin çok sınırlı olduğunu gösterir. Bu durumda kullanılabilen tek şablon işlevleri, dizi bağımsız değişkenlerini kabul eden bir durumdur. Örneğin, ile dizi uzunluğunu almak mümkündür `[length(field('Microsoft.Test/resourceType/objectArray[*].property'))]` . Ancak, her dizi üyesine şablon işlevi uygulamak ve bunu istenen değerle karşılaştırmak gibi daha karmaşık senaryolar yalnızca ifade kullanılırken mümkündür `count` . Daha fazla bilgi için bkz. [alan sayısı ifadesi](#field-count-expressions).
+`field()`Bir dizi diğer adına başvurmak için işlevini kullanırken, döndürülen değer seçilen tüm değerlerin bir dizisidir. Bu davranış, işlevin ortak kullanım durumunun `field()` , kaynak özelliği değerlerine şablon işlevleri uygulama yeteneğinin sınırlı olduğu anlamına gelir. Bu durumda kullanılabilen tek şablon işlevleri, dizi bağımsız değişkenlerini kabul eden bir durumdur. Örneğin, ile dizi uzunluğunu almak mümkündür `[length(field('Microsoft.Test/resourceType/objectArray[*].property'))]` . Ancak, her bir dizi üyesine şablon işlevi uygulamak ve bunu istenen değerle karşılaştırmak gibi daha karmaşık senaryolar yalnızca ifade kullanılırken mümkündür `count` . Daha fazla bilgi için bkz. [alan sayısı ifadesi](#field-count-expressions).
 
 Özetlemek gerekirse, aşağıdaki örnek kaynak içeriğine ve çeşitli diğer adlarla döndürülen seçili değerlere bakın:
 
@@ -371,7 +371,7 @@ Koşul olmadan kullanıldığında `where` , `count` yalnızca bir dizinin uzunl
 }
 ```
 
-Bu davranış, iç içe diziler ile de kullanılabilir. Örneğin, `count` `true` dizilerde dört dizi üyesi olduğundan, aşağıdaki ifade olarak değerlendirilir `nestedArray` :
+Bu davranış, iç içe diziler ile de kullanılabilir. Örneğin, `count` `true` dizilerde dört dizi üyesi bulunduğundan aşağıdaki ifade olarak değerlendirilir `nestedArray` :
 
 ```json
 {
@@ -382,7 +382,7 @@ Bu davranış, iç içe diziler ile de kullanılabilir. Örneğin, `count` `true
 }
 ```
 
-Öğesinin gücü `count` `where` koşulnda. Belirtildiğinde, Azure Ilkesi dizi üyelerini numaralandırır ve her bir koşula göre değerlendirilen dizi üyelerinin sayısını sayarak değerlendirir `true` . Özellikle, koşul değerlendirmesinin her yinelemesinde `where` , Azure ilkesi tek bir dizi üyesi ***i** _ seçer ve kaynak içeriğini * `where` i array_ 'nin tek üyesi * _*_i_*_ . Her yinelemede yalnızca bir dizi üyesinin kullanılabilir olması, her bir dizi üyesine karmaşık koşullar uygulamak için bir yol sağlar.
+Öğesinin gücü `count` `where` koşulnda. Belirtildiğinde, Azure Ilkesi dizi üyelerini numaralandırır ve her biri koşula göre değerlendirilen dizi üyelerinin sayısını sayarak değerlendirir `true` . Özellikle, koşul değerlendirmesinin her yinelemesinde `where` , Azure ilkesi tek bir dizi üyesi ***i** _ seçer ve kaynak içeriğini * `where` i array_ 'nin tek üyesi * _**i**_ . Her yinelemede yalnızca bir dizi üyesinin kullanılabilir olması, her bir dizi üyesine karmaşık koşullar uygulamak için bir yol sağlar.
 
 Örnek:
 
@@ -398,7 +398,9 @@ Bu davranış, iç içe diziler ile de kullanılabilir. Örneğin, `count` `true
   "equals": 1
 }
 ```
-İfadeyi değerlendirmek için `count` Azure ilkesi, `where` her üye için bir kez koşulu 3 kez değerlendirir `stringArray` ve kaç kez değerlendirildiğini Sayın `true` . `where`Koşul `Microsoft.Test/resourceType/stringArray[*]` dizi üyelerine başvurduğunda, tüm üyelerini seçmek yerine `stringArray` yalnızca tek bir dizi üyesini her seferinde seçer:
+
+İfadeyi değerlendirmek için `count` Azure ilkesi, `where` her üye için bir kez koşulu üç kez değerlendirir, `stringArray` kaç kez değerlendirildiğini Sayın `true` .
+`where`Koşul `Microsoft.Test/resourceType/stringArray[*]` dizi üyelerine başvurduğunda, tüm üyelerini seçmek yerine `stringArray` yalnızca tek bir dizi üyesini her seferinde seçer:
 
 | Yineleme | Seçili `Microsoft.Test/resourceType/stringArray[*]` değerler | `where` Değerlendirme sonucu |
 |:---|:---|:---|
@@ -406,7 +408,7 @@ Bu davranış, iç içe diziler ile de kullanılabilir. Örneğin, `count` `true
 | 2 | `"b"` | `false` |
 | 3 | `"c"` | `false` |
 
-Ve bu nedenle `count` döndürülür `1` .
+, `count` Döndürür `1` .
 
 Daha karmaşık bir ifade aşağıda verilmiştir:
 
@@ -436,7 +438,7 @@ Daha karmaşık bir ifade aşağıda verilmiştir:
 | 1 | `Microsoft.Test/resourceType/objectArray[*].property` => `"value1"` </br> `Microsoft.Test/resourceType/objectArray[*].nestedArray[*]` => `1`, `2` | `false` |
 | 2 | `Microsoft.Test/resourceType/objectArray[*].property` => `"value2"` </br> `Microsoft.Test/resourceType/objectArray[*].nestedArray[*]` => `3`, `4`| `true` |
 
-Ve bu nedenle `count` döndürülür `1` .
+, `count` Döndürür `1` .
 
 `where`İfadenin **Tüm** istek içeriğine karşı değerlendirilme (yalnızca şu anda numaralandırılmakta olan dizi üyesine yapılan değişikliklerle), `where` koşulun dizi dışındaki alanlara de başvurabileceği anlamına gelir:
 
@@ -458,7 +460,7 @@ Ve bu nedenle `count` döndürülür `1` .
 | 1 | `tags.env` => `"prod"` | `true` |
 | 2 | `tags.env` => `"prod"` | `true` |
 
-İç içe geçmiş dizi alanlarına koşul uygulamak için iç içe geçmiş sayı ifadeleri kullanılabilir. Örneğin, aşağıdaki koşul `objectArray[*]` dizide `nestedArray[*]` 1 veya daha fazla üye içeren tam 2 üye olduğunu denetler:
+İç içe geçmiş dizi alanlarına koşul uygulamak için iç içe geçmiş sayı ifadeleri kullanılabilir. Örneğin, aşağıdaki koşul, `objectArray[*]` dizinin `nestedArray[*]` bir veya daha fazla üye içeren tam olarak iki üyeye sahip olduğunu denetler:
 
 ```json
 {
@@ -480,9 +482,9 @@ Ve bu nedenle `count` döndürülür `1` .
 | 1 | `Microsoft.Test/resourceType/objectArray[*].nestedArray[*]` => `1`, `2` | `nestedArray[*]` 2 üye içeriyor => `true` |
 | 2 | `Microsoft.Test/resourceType/objectArray[*].nestedArray[*]` => `3`, `4` | `nestedArray[*]` 2 üye içeriyor => `true` |
 
-Her iki üyenin de `objectArray[*]` 2 üye içeren bir alt dizisi olduğundan `nestedArray[*]` , dış sayı ifadesi döndürür `2` .
+Her iki üyesinin `objectArray[*]` iki üye içeren bir alt dizisi olduğundan `nestedArray[*]` , dış sayı ifadesi döndürür `2` .
 
-Daha karmaşık örnek: `objectArray[*]` dizide, `nestedArray[*]` veya değerine eşit olan tüm Üyeler ile tam 2 üye olup olmadığını `2` denetleyin `3` :
+Daha karmaşık örnek: `objectArray[*]` dizide, `nestedArray[*]` veya değerine eşit olan tüm Üyeler ile tam olarak iki üye olup olmadığını denetleyin `2` `3` :
 
 ```json
 {
@@ -538,13 +540,13 @@ Her iki üyesinin `objectArray[*]` veya ya da içeren bir alt dizisi olduğundan
 
 #### <a name="the-field-function-inside-where-conditions"></a>Koşul içinde alan işlevi
 
-Bu `field()` işlev, **sayı** ifadesi bir **varlık koşulunun** içinde olmadığı sürece geçerli dizi üyesinin değerine erişmek için de kullanılabilir ( `field()` işlev her zaman koşulda değerlendirilen kaynağı ifade eder). 
-`field()`Değerlendirilen diziye başvuru yaparken, aşağıdaki kavramlara göre belirlenir:
+Bu `field()` işlev, **sayı** ifadesi bir **varlık koşulunun** içinde olmadığı sürece geçerli dizi üyesinin değerine erişmek için de kullanılabilir ( `field()` işlev her zaman koşulda değerlendirilen kaynağa başvurur).  `field()`Değerlendirilen diziye başvuru yaparken, aşağıdaki kavramlara göre belirlenir:
+
 1. Dizi diğer adları, tüm dizi üyelerinden seçilen bir değer koleksiyonuna çözümlenir.
 1. `field()` dizi diğer adlarına başvuran işlevler, seçili değerlere sahip bir dizi döndürür.
 1. Koşul içinde sayılan dizi diğer adına başvurmak, `where` geçerli yinelemede değerlendirilen dizi üyesinden tek bir değer seçilmiş bir koleksiyon döndürür.
 
-Bu davranış, koşul içindeki bir işlevle sayılan dizi üyesine başvurulduğunda `field()` `where` , **tek bir üyeye sahip bir dizi döndürdüğünü** gösterir. Bu sezgisel olmayabilir, dizi diğer adlarının her zaman seçili özelliklerin bir koleksiyonunu döndürdüğü fikrle tutarlıdır. Aşağıda bir örnek verilmiştir:
+Bu davranış, koşul içindeki bir işlevle sayılan dizi üyesine başvurulduğunda `field()` `where` , **tek bir üyeye sahip bir dizi döndürdüğünü** gösterir. Bu davranış sezgisel olmasa da, dizi diğer adlarının her zaman seçili özelliklerin bir koleksiyonunu döndürdüğü fikrle tutarlıdır. Aşağıda bir örnek verilmiştir:
 
 ```json
 {
@@ -589,7 +591,7 @@ Faydalı örnekler için bkz. [alan sayısı örnekleri](../concepts/definition-
 
 ## <a name="modifying-arrays"></a>Dizileri değiştirme
 
-Oluşturma veya güncelleştirme sırasında bir kaynaktaki [değiştirme ve](../concepts/effects.md#append) [değiştirme](../concepts/effects.md#modify) özellikleri. Dizi özellikleriyle çalışırken, bu etkilerin davranışı işlemin diğer adı değiştirmeye çalışıp çalışmadığına göre değişir  **\[\*\]** .
+Oluşturma veya güncelleştirme sırasında bir kaynaktaki [değiştirme ve](../concepts/effects.md#append) [değiştirme](../concepts/effects.md#modify) özellikleri. Dizi özellikleriyle çalışırken, bu etkilerin davranışı işlemin diğer adı değiştirmeye çalışıp çalışmadığına göre değişir **\[\*\]** .
 
 > [!NOTE]
 > `modify`Diğer adlarla efektin kullanılması şu anda **önizlemededir**.
@@ -608,9 +610,9 @@ Oluşturma veya güncelleştirme sırasında bir kaynaktaki [değiştirme ve](..
 
 Daha fazla bilgi için bkz. [append örnekleri](../concepts/effects.md#append-examples).
 
-## <a name="appendix--additional--alias-examples"></a>Ek-ek [*] diğer ad örnekleri
+## <a name="additional--alias-examples"></a>Ek [*] diğer ad örnekleri
 
-İstek içeriğindeki bir dizinin üyelerinin ' All ' veya ' any ' öğesinin bir koşula uyup uymadığını denetlemek için [alan sayısı ifadelerinin](#field-count-expressions) kullanılması önerilir. Ancak bazı basit koşullarda, bir alan erişimcisi ile bir dizi diğer adı ( [dizi üyeleri koleksiyonuna başvurma](#referencing-the-array-members-collection)bölümünde açıklandığı gibi) kullanılarak aynı sonuca ulaşmak mümkündür. Bu, izin verilen **sayı** ifadesi sınırını aşan ilke kurallarında yararlı olabilir. Yaygın kullanım örnekleri için örnekler aşağıda verilmiştir:
+İstek içeriğindeki bir dizinin üyelerinin ' All ' veya ' any ' öğesinin bir koşula uyup uymadığını denetlemek için [alan sayısı ifadelerinin](#field-count-expressions) kullanılması önerilir. Ancak bazı basit koşullarda, [dizi üyeleri koleksiyonuna başvurma](#referencing-the-array-members-collection)bölümünde açıklandığı gibi bir dizi diğer adına sahip bir alan erişimcisi kullanarak aynı sonuca ulaşmak mümkündür. Bu model, izin verilen **sayı** ifadesi sınırını aşan ilke kurallarında yararlı olabilir. Yaygın kullanım örnekleri için örnekler aşağıda verilmiştir:
 
 Aşağıdaki senaryo tablosu için örnek ilke kuralı:
 

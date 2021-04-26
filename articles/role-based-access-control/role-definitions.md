@@ -12,10 +12,10 @@ ms.date: 03/22/2021
 ms.author: rolyon
 ms.custom: ''
 ms.openlocfilehash: 5b2ec3289d187997763ee0d9280a777d4fa1f396
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104801766"
 ---
 # <a name="understand-azure-role-definitions"></a>Azure rol tanımlarını anlama
@@ -76,7 +76,7 @@ Aşağıdaki tabloda rol özelliklerinin anlamı açıklanmaktadır.
 
 Bir `{action}` işlem dizesinin bölümü, bir kaynak türü üzerinde gerçekleştirebileceğiniz işlem türünü belirtir. Örneğin, içinde aşağıdaki alt dizeleri görürsünüz `{action}` :
 
-| Eylem alt dizesi    | Açıklama         |
+| Eylem alt dizesi    | Description         |
 | ------------------- | ------------------- |
 | `*` | Joker karakter karakteri dize ile eşleşen tüm işlemlere erişim verir. |
 | `read` | Okuma işlemlerini (GET) etkinleştirilir. |
@@ -277,7 +277,7 @@ REST API veri işlemlerini görüntülemek ve kullanmak için, **API sürümü**
 `Actions`İzin, rolün gerçekleştirilmesine izin verdiği yönetim işlemlerini belirler. Azure Kaynak sağlayıcılarının güvenli kılınabilir işlemlerini tanımlayan bir işlem dizeleri koleksiyonudur. Burada, ' de kullanılabilen yönetim işlemlerine ilişkin bazı örnekler verilmiştir `Actions` .
 
 > [!div class="mx-tableFixed"]
-> | İşlem dizesi    | Açıklama         |
+> | İşlem dizesi    | Description         |
 > | ------------------- | ------------------- |
 > | `*/read` | Tüm Azure Kaynak sağlayıcılarının tüm kaynak türleri için okuma işlemlerine erişim izni verir.|
 > | `Microsoft.Compute/*` | Microsoft. COMPUTE kaynak sağlayıcısındaki tüm kaynak türleri için tüm işlemlere erişim verir.|
@@ -314,7 +314,7 @@ Bir rol ataması erişimine izin veriyorsa, atamaları Reddet, kullanıcıların
 `DataActions`İzin, rolün bu nesne içindeki verilerinize yapılmasına izin verdiği veri işlemlerini belirler. Örneğin, bir kullanıcının depolama hesabına yönelik blob veri okuma erişimi varsa, bu depolama hesabındaki Blobları okuyabilirler. İşte kullanılabilecek veri işlemlerine ilişkin bazı örnekler aşağıda verilmiştir `DataActions` .
 
 > [!div class="mx-tableFixed"]
-> | İşlem dizesi    | Açıklama         |
+> | İşlem dizesi    | Description         |
 > | ------------------- | ------------------- |
 > | `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read` | Blob veya Blobların listesini döndürür. |
 > | `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write` | Blob yazma sonucunu döndürür. |

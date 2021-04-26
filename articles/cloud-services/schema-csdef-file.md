@@ -3,17 +3,18 @@ title: Azure Cloud Services (klasik) Tanım Şeması (. csdef dosyası) | Micros
 description: Hizmet tanımı (. csdef) dosyası, hizmet için kullanılabilir rolleri, uç noktaları ve yapılandırma değerlerini içeren bir uygulama için bir hizmet modeli tanımlar.
 ms.topic: article
 ms.service: cloud-services
+ms.subservice: deployment-files
 ms.date: 10/14/2020
 ms.author: tagore
 author: tanmaygore
 ms.reviewer: mimckitt
 ms.custom: ''
-ms.openlocfilehash: b98534b049698ea95c6738ce3404dd5ef8ff7a28
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: f201bc05795fa6aece256f3d3b4bd650385fef48
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102502273"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105934147"
 ---
 # <a name="azure-cloud-services-classic-definition-schema-csdef-file"></a>Azure Cloud Services (klasik) Tanım Şeması (. csdef dosyası)
 

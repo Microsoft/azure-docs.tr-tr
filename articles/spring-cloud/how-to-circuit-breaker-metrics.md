@@ -1,22 +1,22 @@
 ---
-title: Yay bulutu Resilience4J devre kesici ölçümlerini toplayın
-description: Spring Cloud Resilience4J devre kesici ölçümlerini nasıl toplayacağınızı öğrenin.
+title: Mikro ölçüm ile yay bulutu Resilience4J devre kesici ölçümlerini toplayın
+description: Azure Spring Cloud 'da mikro ölçüm ile Spring Cloud Resilience4J devre kesici ölçümlerini toplama.
 author: MikeDodaro
 ms.author: brendm
 ms.service: spring-cloud
 ms.topic: how-to
 ms.date: 12/15/2020
-ms.custom: devx-track-java
-ms.openlocfilehash: 9fc8ccc5ba21f02885b2002d5040051baac92068
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.custom: devx-track-java, devx-track-azurecli
+ms.openlocfilehash: fedebd9182c168b9b7c455d5f6726e66720e0a8b
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104878758"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107479169"
 ---
-# <a name="collect-spring-cloud-resilience4j-circuit-breaker-metrics-preview"></a>Yay bulutu Resilience4J devre kesici ölçümlerini toplayın (Önizleme)
+# <a name="collect-spring-cloud-resilience4j-circuit-breaker-metrics-with-micrometer-preview"></a>Mikro ölçüm (Önizleme) ile yay bulutu Resilience4J devre kesici ölçümlerini toplayın
 
-Bu belgede, Application Insights Java-Process Agent ile Spring Cloud Resilience4j devre kesici ölçümlerinin nasıl toplanacağı açıklanmaktadır.  Bu özellik ile Application Insights resilience4j devre kesici ölçümlerini izleyebilirsiniz.
+Bu belgede, Application Insights Java-Process Agent ile Spring Cloud Resilience4j devre kesici ölçümlerinin nasıl toplanacağı açıklanmaktadır. Bu özellikle, mikro ölçüm ile Application Insights resilience4j devre kesici ölçümlerini izleyebilirsiniz.
 
 Nasıl çalıştığını göstermek için [yay-bulut-devre kesici-demo](https://github.com/spring-cloud-samples/spring-cloud-circuitbreaker-demo) ' i kullanıyoruz.
 

@@ -4,15 +4,15 @@ description: Azure portal Azure dosya paylaşımlarını oluşturma ve yönetme 
 author: roygara
 ms.service: storage
 ms.topic: quickstart
-ms.date: 10/18/2018
+ms.date: 04/15/2021
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 6a88124397812f7599ce54b46b23d22e626cf520
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d7867a4bd60bb179c18fff49691072d683660f7e
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94629827"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717879"
 ---
 # <a name="quickstart-create-and-manage-azure-file-shares-with-the-azure-portal"></a>Hızlı Başlangıç: Azure portal ile Azure dosya paylaşımları oluşturma ve yönetme 
 [Azure Dosyaları](storage-files-introduction.md), Microsoft’un kullanımı kolay bulut dosya sistemidir. Azure dosya paylaşımları, Windows, Linux ve macOS platformlarına bağlanabilir. Bu kılavuzda, [Azure portalını](https://portal.azure.com/) kullanarak Azure dosya paylaşımlarıyla çalışmanın temel bilgileri gösterilmektedir.
@@ -26,12 +26,13 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 Azure dosya paylaşımı oluşturmak için:
 
 1. Panonuzdan depolama hesabını seçin.
-2. Depolama hesabı sayfasında, **Hizmetler** bölümünden **Dosyalar**’ı seçin.
-    ![Depolama hesabının hizmetler bölümünün anlık görüntüsü; Dosyalar hizmetini seçin](media/storage-how-to-use-files-portal/create-file-share-1.png)
+1. Depolama hesabı sayfasında, **Hizmetler** bölümünden **Dosyalar**’ı seçin.
+    
+    ![Depolama hesabının veri depolama bölümünün ekran görüntüsü; dosya paylaşımları ' nı seçin.](media/storage-how-to-use-files-portal/create-file-share-1.png)
 
-3. **Dosya hizmeti** sayfasının en üstündeki menüde **dosya paylaşma**' ya tıklayın. **Yeni dosya paylaşımı** sayfası aşağı doğru açılır.
-4. **Ad** alanına *myshare* yazın.
-5. **Tamam**’a tıklayarak Azure dosya paylaşımını oluşturun.
+1. **Dosya hizmeti** sayfasının en üstündeki menüde **dosya paylaşma**' ya tıklayın. **Yeni dosya paylaşımı** sayfası aşağı doğru açılır.
+1. **Ad** türü *myshare*' da, bir alıntı girin ve **Katmanlar** için **işlem için iyileştirilmiş** ' ı seçili bırakın.
+1. Azure dosya paylaşımından oluşturmak için **Oluştur** ' u seçin.
 
 Paylaşım adları tümüyle küçük harf, sayı ve tek kısa çizgilerden oluşmalı ve kısa çizgiyle başlamamalıdır. Dosya paylaşımlarını ve dosyaları adlandırma hakkında tüm ayrıntılar için bkz. [adlandırma ve başvuru paylaşımları, dizinler, dosyalar ve meta veriler](/rest/api/storageservices/Naming-and-Referencing-Shares--Directories--Files--and-Metadata).
 
@@ -60,20 +61,21 @@ Artık Azure dosya paylaşımını oluşturduğunuza göre, [Windows](storage-ho
 Azure dosya paylaşımınızın kökünde *myDirectory* adlı yeni bir dizin oluşturmak için:
 
 1. **Dosya Hizmeti** sayfasında **myshare** dosya paylaşımını seçin. Dosya paylaşımınızın sayfası açılır.
-2. Sayfanın en üstündeki menüden **+ Dizin ekle**’yi seçin. **Yeni dizin** sayfası aşağı doğru açılır.
-3. *myDirectory* yazın ve **Tamam**’a tıklayın.
+1. Sayfanın en üstündeki menüden **+ Dizin ekle**’yi seçin. **Yeni dizin** sayfası aşağı doğru açılır.
+1. *myDirectory* yazın ve **Tamam**’a tıklayın.
 
 #### <a name="upload-a-file"></a>Dosyayı karşıya yükleme 
 Bir dosyayı karşıya yüklemeyi göstermek için önce karşıya yüklenecek bir dosya oluşturmanız veya seçmeniz gerekir. Uygun gördüğünüz herhangi bir yolla bunu yapabilirsiniz. Karşıya yüklemek istediğiniz dosyayı seçtikten sonra:
 
 1. **myDirectory** dizinine tıklayın. **myDirectory** paneli açılır.
-2. En üstteki menüde **Karşıya Yükle**’ye tıklayın. **Dosyaları karşıya yükleme** paneli açılır.  
+1. En üstteki menüde **Karşıya Yükle**'yi seçin. **Dosyaları karşıya yükleme** paneli açılır.  
+    
     ![Dosyaları karşıya yükleme panelinin ekran görüntüsü](media/storage-how-to-use-files-portal/upload-file-1.png)
 
-3. Yerel dosyalarınıza göz atmak amacıyla bir pencereyi açmak için klasör simgesine tıklayın. 
-4. Bir dosya seçin ve **Aç**’a tıklayın. 
-5. **Dosyaları karşıya yükleme** sayfasında, dosya adını doğrulayın ve **Karşıya Yükle**’ye tıklayın.
-6. Tamamlandığında, dosyanın **myDirectory** sayfasındaki listede gösterilmesi gerekir.
+1. Yerel dosyalarınıza göz atmak amacıyla bir pencereyi açmak için klasör simgesine tıklayın. 
+1. Bir dosya seçin ve **Aç**’a tıklayın. 
+1. **Dosyaları karşıya yükleme** sayfasında, dosya adını doğrulayın ve **Karşıya Yükle**’ye tıklayın.
+1. Tamamlandığında, dosyanın **myDirectory** sayfasındaki listede gösterilmesi gerekir.
 
 #### <a name="download-a-file"></a>Dosya indirme
 Dosyaya sağ tıklayarak, karşıya yüklediğiniz dosyanın bir kopyasını indirebilirsiniz. İndir düğmesine tıklandıktan sonra olacak işlemler, kullandığınız işletim sistemine ve tarayıcıya bağlıdır.

@@ -10,12 +10,12 @@ ms.workload: identity
 ms.topic: conceptual
 ms.date: 12/31/2020
 ms.author: kenwith
-ms.openlocfilehash: 6da003612d98d107390c9f20a5172786c30665a6
-ms.sourcegitcommit: dae6b628a8d57540263a1f2f1cdb10721ed1470d
+ms.openlocfilehash: b0a3653d2cc840d745b1bb5788406b8d374c76d0
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105709761"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533774"
 ---
 # <a name="plan-an-azure-ad-application-proxy-deployment"></a>Azure AD Uygulama Ara Sunucusu dağıtımı planlama
 
@@ -292,7 +292,7 @@ Azure AD, kuruluşunuzun uygulama kullanımı ve [Denetim günlükleri ve raporl
 
 #### <a name="application-audit-logs"></a>Uygulama denetim günlükleri
 
-Bu Günlükler, uygulama proxy 'Si ve cihazla ve uygulamaya erişen kullanıcı ile yapılandırılan uygulamalara yönelik oturumlar hakkında ayrıntılı bilgi sağlar. [Denetim günlükleri](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context) , Azure Portal ve dışarı aktarma IÇIN [Denetim API](/graph/api/resources/directoryaudit?view=graph-rest-beta) 'sinde bulunur. Ayrıca, [kullanım ve öngörü raporları](../reports-monitoring/concept-usage-insights-report.md?context=azure/active-directory/manage-apps/context/manage-apps-context) uygulamanız için de kullanılabilir.
+Bu Günlükler, uygulama proxy 'Si ve cihazla ve uygulamaya erişen kullanıcı ile yapılandırılan uygulamalara yönelik oturumlar hakkında ayrıntılı bilgi sağlar. [Denetim günlükleri](../reports-monitoring/concept-provisioning-logs.md?context=azure/active-directory/manage-apps/context/manage-apps-context) , Azure Portal ve dışarı aktarma IÇIN [Denetim API](/graph/api/resources/directoryaudit) 'sinde bulunur. Ayrıca, [kullanım ve öngörü raporları](../reports-monitoring/concept-usage-insights-report.md?context=azure/active-directory/manage-apps/context/manage-apps-context) uygulamanız için de kullanılabilir.
 
 #### <a name="application-proxy-connector-monitoring"></a>Uygulama proxy Bağlayıcısı izleme
 

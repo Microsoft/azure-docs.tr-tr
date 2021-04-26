@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 11/03/2020
 ms.topic: conceptual
-ms.openlocfilehash: beed3ec50d0c7990168ee75976c732796cdbe246
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 033900ddd0bd19332b4a9a996c68b3b187d631c4
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93324431"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833571"
 ---
 # <a name="configure-runbook-output-and-message-streams"></a>Runbook çıkışı ve ileti akışlarını yapılandırma
 
@@ -37,7 +38,7 @@ Runbook 'larınızın [yazma çıkışı](/powershell/module/microsoft.powershel
 
 ```powershell
 #The following lines both write an object to the output stream.
-Write-Output –InputObject $object
+Write-Output -InputObject $object
 $object
 ```
 
@@ -139,8 +140,8 @@ Varsayılan olarak, bir runbook bir uyarı veya hatadan sonra yürütülmeye dev
 #The following lines create a warning message and then an error message that will suspend the runbook.
 
 $ErrorActionPreference = "Stop"
-Write-Warning –Message "This is a warning message."
-Write-Error –Message "This is an error message that will stop the runbook because of the preference variable."
+Write-Warning -Message "This is a warning message."
+Write-Error -Message "This is an error message that will stop the runbook because of the preference variable."
 ```
 
 ### <a name="write-output-to-debug-stream"></a>Hata ayıklama akışına çıkış yaz
@@ -198,7 +199,7 @@ Aşağıdaki kod, [Write-Verbose](/powershell/module/microsoft.powershell.utilit
 ```powershell
 #The following line creates a verbose message.
 
-Write-Verbose –Message "This is a verbose message."
+Write-Verbose -Message "This is a verbose message."
 ```
 
 ## <a name="handle-progress-records"></a>İlerleme kayıtlarını işle
@@ -242,22 +243,22 @@ Aşağıdaki örnek, örnek bir runbook başlatır ve tamamlanmasını bekler. R
 
 ```powershell
 $job = Start-AzAutomationRunbook -ResourceGroupName "ResourceGroup01" `
-  –AutomationAccountName "MyAutomationAccount" –Name "Test-Runbook"
+  -AutomationAccountName "MyAutomationAccount" -Name "Test-Runbook"
 
 $doLoop = $true
 While ($doLoop) {
   $job = Get-AzAutomationJob -ResourceGroupName "ResourceGroup01" `
-    –AutomationAccountName "MyAutomationAccount" -Id $job.JobId
+    -AutomationAccountName "MyAutomationAccount" -Id $job.JobId
   $status = $job.Status
   $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped"))
 }
 
 Get-AzAutomationJobOutput -ResourceGroupName "ResourceGroup01" `
-  –AutomationAccountName "MyAutomationAccount" -Id $job.JobId –Stream Output
+  -AutomationAccountName "MyAutomationAccount" -Id $job.JobId -Stream Output
 
 # For more detailed job output, pipe the output of Get-AzAutomationJobOutput to Get-AzAutomationJobOutputRecord
 Get-AzAutomationJobOutput -ResourceGroupName "ResourceGroup01" `
-  –AutomationAccountName "MyAutomationAccount" -Id $job.JobId –Stream Any | Get-AzAutomationJobOutputRecord
+  -AutomationAccountName "MyAutomationAccount" -Id $job.JobId -Stream Any | Get-AzAutomationJobOutputRecord
 ```
 
 ### <a name="retrieve-runbook-output-and-messages-in-graphical-runbooks"></a>Grafik runbook 'larında Runbook çıkışı ve iletileri alma

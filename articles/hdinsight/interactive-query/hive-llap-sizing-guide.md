@@ -8,10 +8,10 @@ ms.author: aadnaik
 ms.reviewer: HDI HiveLLAP Team
 ms.date: 05/05/2020
 ms.openlocfilehash: ca3ba61de13e0e451b43dc9c8ea40db33fed859a
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104869676"
 ---
 # <a name="azure-hdinsight-interactive-query-cluster-hive-llap-sizing-guide"></a>Azure HDInsight etkileşimli sorgu kümesi (Hive LLAP) boyutlandırma Kılavuzu
@@ -29,7 +29,7 @@ Bu belge, makul bir performansa ulaşmak için tipik bir iş yükü için HDInsi
 ***Note: tüm önerilen yapılandırma değerleri D14 v2 türü çalışan düğümüne dayalıdır***  
 
 ### <a name="configuration"></a>**Yapılandırmada**    
-| Yapılandırma Anahtarı      | Önerilen değer  | Açıklama |
+| Yapılandırma Anahtarı      | Önerilen değer  | Description |
 | :---        |    :----:   | :---     |
 | Yarn. NodeManager. Resource. Memory-MB | 102400 (MB) | Bir düğümdeki tüm YARN kapsayıcıları için, MB olarak verilen toplam bellek | 
 | Yarn. Scheduler. maksimum ayırma-MB | 102400 (MB) | RM 'de, MB cinsinden her kapsayıcı isteği için en yüksek ayırma. Bu değerden daha yüksek bellek istekleri uygulanmayacak |
@@ -222,7 +222,7 @@ Lütfen unutmayın:
 İş yükü yönetimi sıra kapasitesinde 20 GB ile bir kaynak planı `QUERY_PARALLELISM` beş olarak değer belirtebilir, bu da iş yükü yönetiminin her biri 4 GB kapsayıcı boyutuyla beş tez AMs başlatabileceği anlamına gelir. `QUERY_PARALLELISM`Kapasiteden yüksekse, bazı tez AMs durma yanıt verme `ACCEPTED` durumunu görebilirsiniz. Hiveserver2 Interactive, durum içinde olmayan tez AMs 'ye sorgu parçaları gönderemiyor `RUNNING` .
 
 
-#### <a name="next-steps"></a>**Sonraki Adımlar**
+#### <a name="next-steps"></a>**Sonraki adımlar**
 Bu değerleri ayarlamak sorununuzu gidermezse, aşağıdakilerden birini ziyaret edin...
 
 * Azure [topluluk desteği](https://azure.microsoft.com/support/community/)aracılığıyla Azure uzmanlarından yanıt alın.

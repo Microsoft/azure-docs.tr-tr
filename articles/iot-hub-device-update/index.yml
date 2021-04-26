@@ -11,12 +11,12 @@ metadata:
   ms.author: philmea
   manager: philmea
   ms.date: 2/17/2021
-  ms.openlocfilehash: 76678a5695fdffd5325543a28398e867ab3ab6f5
-  ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+  ms.openlocfilehash: 13ada7214e8e4b1eb5a0ad0ca38840e25c53be95
+  ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "105560395"
+  ms.lasthandoff: 04/20/2021
+  ms.locfileid: "107739071"
 landingContent:
 - title: Cihaz güncelleştirme hakkında
   linkLists:
@@ -30,7 +30,9 @@ landingContent:
     links:
     - text: Cihaz güncelleştirme hesabı oluştur
       url: create-device-update-account.md
-    - text: Bir güncelleştirmeyi içeri aktar
+    - text: Cihaz güncelleştirme aracısını sağlama
+      url: device-update-agent-provisioning.md
+    - text: Güncelleştirme Ekle
       url: import-update.md
     - text: Güncelleştirme grubu oluşturma
       url: create-update-group.md
@@ -52,8 +54,8 @@ landingContent:
   linkLists:
   - linkListType: how-to-guide
     links:
-    - text: Cihaz Güncelleştirme Aracısı oluşturma, çalıştırma ve değiştirme
-      url: device-update-agent-provisioning.md
+    - text: Cihaz güncelleştirme aracısını derleme ve çalıştırma
+      url: device-update-agent-provisioning.md#how-to-build-and-run-device-update-agent
 - title: başlarken
   linkLists:
   - linkListType: tutorial
@@ -64,3 +66,23 @@ landingContent:
       url: device-update-raspberry-pi.md
     - text: Ubuntu Server 18,04 x64 paket aracısında cihaz güncelleştirmesi
       url: device-update-ubuntu-agent.md
+- title: API ve SDK başvurusu
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: REST API
+      url: https://docs.microsoft.com/rest/api/deviceupdate/
+  - linkListType: reference
+    links:
+    - text: Denetim düzlemi-.NET
+      url: https://docs.microsoft.com/dotnet/api/overview/azure/iot/management?view=azure-dotnet
+    - text: Denetim düzlemi-Python
+      url: https://docs.microsoft.com/python/api/azure-mgmt-deviceupdate/?view=azure-python
+  - linkListType: reference
+    links:
+    - text: Veri düzlemi-JavaScript
+      url: https://docs.microsoft.com/javascript/api/@azure/iot-device-update/?view=azure-node-preview
+    - text: Veri düzlemi-Java
+      url: https://docs.microsoft.com/java/api/com.azure.iot.deviceupdate?view=azure-java-preview
+    - text: Veri düzlemi-Python
+      url: https://docs.microsoft.com/python/api/azure-mgmt-deviceupdate/azure.mgmt.deviceupdate?view=azure-python-preview

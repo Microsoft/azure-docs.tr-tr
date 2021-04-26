@@ -10,12 +10,12 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 09/16/2020
 ms.author: robinsh
-ms.openlocfilehash: ab9e122ba0b2b50203a2d66ae14f03f3b6300f96
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 455d78ed21403952046448dd4447b5ec54f77c00
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96452336"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566988"
 ---
 # <a name="weather-forecast-using-the-sensor-data-from-your-iot-hub-in-azure-machine-learning-studio-classic"></a>Azure Machine Learning Studio (klasik) IoT Hub 'ınızdaki algılayıcı verilerini kullanarak hava durumu tahmini
 
@@ -23,25 +23,11 @@ ms.locfileid: "96452336"
 
 [!INCLUDE [iot-hub-get-started-note](../../includes/iot-hub-get-started-note.md)]
 
-Makine öğrenimi, bilgisayarların, gelecekteki davranışları, sonuçları ve eğilimleri tahmin etmek için mevcut verilerden öğrenmesini sağlayan bir veri bilimi tekniğidir. Azure Machine Learning Studio (klasik), tahmine dayalı modelleri analiz çözümleri olarak hızlı bir şekilde oluşturmayı ve dağıtmayı mümkün kılan bir bulut tahmine dayalı analiz hizmetidir.
+Makine öğrenimi, bilgisayarların, gelecekteki davranışları, sonuçları ve eğilimleri tahmin etmek için mevcut verilerden öğrenmesini sağlayan bir veri bilimi tekniğidir. Azure Machine Learning Studio (klasik), tahmine dayalı modelleri analiz çözümleri olarak hızlı bir şekilde oluşturmayı ve dağıtmayı mümkün kılan bir bulut tahmine dayalı analiz hizmetidir. Bu makalede, Azure IoT Hub 'ınızdan sıcaklık ve nem verilerini kullanarak hava durumu tahmini (yağmur şansı) için Azure Machine Learning Studio (klasik) kullanmayı öğreneceksiniz. Yağmur, hazırlanan Hava durumu tahmin modelinin çıktıdır. Model, sıcaklık ve nem oranına göre yağmur olasılığını tahmin etmek için geçmiş veriler üzerine kurulmuştur.
 
-## <a name="what-you-learn"></a>Öğrenecekleriniz
+## <a name="prerequisites"></a>Önkoşullar
 
-Azure IoT Hub 'ınızdaki sıcaklık ve nem verilerini kullanarak hava durumu tahmini (yağmur şansı) için Azure Machine Learning Studio (klasik) kullanmayı öğreneceksiniz. Yağmur, hazırlanan Hava durumu tahmin modelinin çıktıdır. Model, sıcaklık ve nem oranına göre yağmur olasılığını tahmin etmek için geçmiş veriler üzerine kurulmuştur.
-
-## <a name="what-you-do"></a>Yapabilecekleriniz
-
-- Hava durumu tahmin modelini bir Web hizmeti olarak dağıtın.
-- Bir tüketici grubu ekleyerek IoT Hub 'ınızı veri erişimi için hazırlayın.
-- Stream Analytics işi oluşturun ve işi şu şekilde yapılandırın:
-  - IoT Hub 'ınızdaki sıcaklık ve nem verilerini okuyun.
-  - Web hizmetini arayarak yağmur şansı elde edin.
-  - Sonucu bir Azure Blob depolama alanına kaydedin.
-- Hava durumu tahminini görüntülemek için Microsoft Azure Depolama Gezgini kullanın.
-
-## <a name="what-you-need"></a>Gerekenler
-
-- [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun; Örneğin, [node.jsRaspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md). Bu, aşağıdaki gereksinimleri kapsar:
+- [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun. Örneğin, [node.jsIle Raspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md) 'ye gidebilir veya [Telemetriyi gönder](quickstart-send-telemetry-dotnet.md) hızlı başlangıçlarından birine gidebilirsiniz. Bu makaleler aşağıdaki gereksinimleri kapsar:
   - Etkin bir Azure aboneliği.
   - Aboneliğiniz kapsamındaki bir Azure IoT Hub 'ı.
   - Azure IoT Hub 'ınıza ileti gönderen bir istemci uygulaması.

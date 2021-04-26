@@ -1,14 +1,14 @@
 ---
 title: Azure Arc etkin sunucularını planlamak ve dağıtmak
 description: Azure 'da önemli güvenlik, yönetim ve izleme özellikleri yapılandırmasını basitleştirmek için Azure Arc etkin sunucularına çok sayıda makinenin nasıl etkinleştirileceğini öğrenin.
-ms.date: 03/18/2021
+ms.date: 04/21/2021
 ms.topic: conceptual
-ms.openlocfilehash: 5aa7022dba943fa3de247404522408f4660e80e3
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: e3f8fe410da56f627ceab5f17c980f2daa1a262c
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105023291"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831987"
 ---
 # <a name="plan-and-deploy-arc-enabled-servers"></a>Yay özellikli sunucuları planlayın ve dağıtın
 
@@ -83,7 +83,7 @@ Daha sonra, yay etkin sunucular bağlı makine aracısına hazırlık ve dağıt
 |-----|-------|---------|
 |Kaynak Durumu Uyarısı oluşturma |Bir sunucu, 15 dakikadan daha uzun bir süre boyunca Azure 'a sinyal göndermeyi sonlandırmışsa, bu, çevrimdışı olduğu, ağ bağlantısının engellendiği veya aracının çalışmadığı anlamına gelebilir. Bu olayları nasıl yanıtlayacağınızı ve araştırıp [kaynak durumu uyarıları](../..//service-health/resource-health-alert-monitor-guide.md) kullanarak, ne zaman başladığınızı öğrenmek için bir plan geliştirin.<br><br> Uyarıyı yapılandırırken şunları belirtin:<br> **Kaynak türü**  =  **Azure Arc etkin sunucular**<br> **Geçerli kaynak durumu**  =  **Kullanılamıyor**<br> **Önceki kaynak durumu**  =  **Kullanılabilir** | Bir saat |
 |Azure Advisor uyarısı oluşturma | En iyi deneyim ve en son güvenlik ve hata düzeltmeleri için, Azure Arc etkin sunucu aracısını güncel tutmanız önerilir. Güncel olmayan aracılar bir [Azure Advisor uyarısıyla](../../advisor/advisor-alerts-portal.md)tanımlanacaktır.<br><br> Uyarıyı yapılandırırken şunları belirtin:<br> **Öneri türü**  =  **Azure bağlı makine aracısının en son sürümüne yükseltin** | Bir saat |
-|Aboneliğinize veya kaynak grubu kapsamınızda [Azure Ilkeleri atama](../../governance/policy/assign-policy-portal.md) |**Etkinleştirme VM'ler için Azure izleyici** [ilkesini](../../azure-monitor/vm/vminsights-enable-policy.md) (ve gereksinimlerinizi karşılayan diğerlerini) abonelik veya kaynak grubu kapsamına atayın. Azure Ilkesi, ortamınız genelinde VM'ler için Azure İzleyici için gereken aracıları yükleyen ilke tanımlarını atamanıza olanak tanır.| Değişir |
+|Aboneliğinize veya kaynak grubu kapsamınızda [Azure Ilkeleri atama](../../governance/policy/assign-policy-portal.md) |**Etkinleştirme VM'ler için Azure izleyici** [ilkesini](../../azure-monitor/vm/vminsights-enable-policy.md) (ve gereksinimlerinizi karşılayan diğerlerini) abonelik veya kaynak grubu kapsamına atayın. Azure Ilkesi, ortamınızda VM öngörüleri için gereken aracıları yükleyen ilke tanımlarını atamanıza olanak tanır.| Değişir |
 |[Yay özellikli sunucularınız için Güncelleştirme Yönetimi etkinleştirme](../../automation/update-management/enable-from-automation-account.md) |Windows ve Linux sanal makineleriniz için, Arc etkin sunucularla kayıtlı işletim sistemi güncelleştirmelerini yönetmek üzere Azure Otomasyonu 'nda Güncelleştirme Yönetimi yapılandırın. | 15 dakika |
 
 ## <a name="next-steps"></a>Sonraki adımlar

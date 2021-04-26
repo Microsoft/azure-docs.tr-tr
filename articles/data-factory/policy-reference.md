@@ -8,13 +8,13 @@ ms.topic: conceptual
 ms.custom:
 - seo-lt-2019
 - references_regions
-ms.date: 03/24/2021
-ms.openlocfilehash: cc063a66ed073ea6cd7b7d9c2e7cb030926683fe
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.date: 04/21/2021
+ms.openlocfilehash: a8a644feb0e7a1c94f0c74ea863a79515d061167
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105038065"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107871569"
 ---
 # <a name="azure-policy-built-in-definitions-for-data-factory-preview"></a>Data Factory için Azure Ilkesi yerleşik tanımları (Önizleme)
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]

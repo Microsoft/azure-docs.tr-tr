@@ -7,10 +7,10 @@ ms.topic: tutorial
 ms.date: 02/09/2021
 ms.author: apimpm
 ms.openlocfilehash: d0420b92fc94e0a1a9c8a4057f419a57a9909223
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100545165"
 ---
 # <a name="tutorial-create-and-publish-a-product"></a>Öğretici: ürün oluşturma ve yayımlama  
@@ -45,7 +45,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
     | Ad                     | Açıklama                                                                                                                                                                                                                                                                                                             |
     |--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
     | Görünen ad             | [Geliştirici Portalında](api-management-howto-developer-portal.md)görünmesini istediğiniz ad.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-    | Açıklama              | Ürün hakkında, amacı, erişimi sağladığı API 'Ler ve diğer ayrıntılar gibi bilgiler sağlayın.                                                                                                                                               |
+    | Description              | Ürün hakkında, amacı, erişimi sağladığı API 'Ler ve diğer ayrıntılar gibi bilgiler sağlayın.                                                                                                                                               |
     | Durum                    | Ürünü yayımlamak istiyorsanız **yayımlandı** ' i seçin. Bir üründeki API'lerin çağrılabilmesi için önce ürünün yayımlanması gerekir. Varsayılan olarak, yeni ürünler yayımdan kaldırılır ve yalnızca  **Yöneticiler** grubu tarafından görülebilir.                                                                                      |
     | Abonelik gerektirir    | Ürünü kullanmak için bir kullanıcının abone olması gerekiyorsa seçin.                                                                                                                                                                                                                                   |
     | Onay gerekiyor        | Yöneticinin bu ürüne yönelik abonelik denemelerini gözden geçirmesini ve kabul etmesini ya da reddetmesini istiyorsanız seçin. Seçilmezse, abonelik girişimleri otomatik olarak onaylanır.                                                                                                                         |

@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/04/2021
 ms.author: albecker1
 ms.custom: include file
-ms.openlocfilehash: 3035b5d2803ff91e84bc6b47a99963185f9195d3
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 4162fe12ff54f16cd5f982f6a576905227c9a107
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102623209"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107821054"
 ---
 ## <a name="disk-level-bursting"></a>Disk düzeyinde burdıya
 
@@ -58,6 +58,9 @@ Disk yapılandırması: Premium SSD – 1 TB (P30), disk patlaması etkin.
 Veri bloğu işlemi, ıOPS 'den veya MB/sn 'ye kadar olan en fazla işlem sayısı olarak hesaba katılmaz. 00:00:01 – 00:00:05 ' den, birikmiş patlama işlemi Max ((10.000 – 5.000), (300-200) * 1024/256)) * 5 = 25.000 işlemleri. 00:00:06 – 00:00:10 ' den, birikmiş patlama işlemi Max ((6.000 – 5.000), (600-200) * 1024/256)) * 5 = 8.000 işlemleri. Bunun üzerine, isteğe bağlı tabanlı disk patlaması sağlamak için toplam maliyeti almak üzere veri bloğu etkinleştirme düz ücretini dahil edersiniz. 
 
 Fiyatlandırma hakkında ayrıntılı bilgi edinmek için [yönetilen diskler fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/managed-disks/) başvurabilirsiniz ve iş yükünüz için değerlendirme yapmak üzere [Azure Fiyatlandırma Hesaplayıcı](https://azure.microsoft.com/pricing/calculator/?service=storage) ' yı kullanabilirsiniz. 
+
+
+İsteğe bağlı tekrar açma özelliğini etkinleştirmek için bkz. [isteğe](../articles/virtual-machines/disks-enable-bursting.md)bağlı patlaması etkinleştirme.
 
 ### <a name="credit-based-bursting"></a>Kredi tabanlı patlama
 

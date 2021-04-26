@@ -5,12 +5,13 @@ services: automation
 ms.subservice: shared-capabilities
 ms.date: 12/22/2020
 ms.topic: conceptual
-ms.openlocfilehash: 9b9e42d55a982aeb55d7c9e26f7b1a6cbca32e0a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 6220a44e952aa4d9856ac5fc2077d254103d4a2c
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99052813"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107834291"
 ---
 # <a name="manage-credentials-in-azure-automation"></a>Azure Otomasyonu'nda kimlik bilgilerini yönetme
 

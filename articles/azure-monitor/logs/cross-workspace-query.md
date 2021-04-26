@@ -4,13 +4,13 @@ description: Bu makalede, aboneliğinizdeki birden çok çalışma alanı ve App
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 09/22/2020
-ms.openlocfilehash: 57ed43b25c9031138a91f0870d316e1ae7a07a5b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/11/2021
+ms.openlocfilehash: 19cc85751fc5e4a165b646ac89d9d6b6e90c4408
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102030977"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107379562"
 ---
 # <a name="perform-log-query-in-azure-monitor-that-span-across-workspaces-and-apps"></a>Azure Izleyici 'de çalışma alanları ve uygulamalar arasında yayılan günlük sorgusu gerçekleştirme
 
@@ -27,7 +27,7 @@ Birden çok çalışma alanında ve uygulamalarda depolanan verileri sorgulamak 
 ## <a name="cross-resource-query-limits"></a>Çapraz kaynak sorgu limitleri 
 
 * Tek bir sorguya dahil edebilirsiniz Application Insights kaynak ve Log Analytics çalışma alanlarının sayısı 100 ile sınırlıdır.
-* Görünüm tasarımcısında çapraz kaynak sorgusu desteklenmez. Log Analytics bir sorgu yazabilir ve [günlük sorgusunu görselleştirmek](../visualize/tutorial-logs-dashboards.md)için Azure panosuna sabitleyebilirsiniz. 
+* Görünüm tasarımcısında çapraz kaynak sorgusu desteklenmez. Log Analytics bir sorgu yazabilir ve [bir günlük sorgusunu görselleştirmek](../visualize/tutorial-logs-dashboards.md) veya [çalışma kitaplarına](../visualize/workbooks-overview.md)eklemek için Azure panosuna sabitleyebilirsiniz.
 * Günlük uyarılarındaki çapraz kaynak sorguları yalnızca geçerli [Scheduledqueryrules API](/rest/api/monitor/scheduledqueryrules)'sinde desteklenir. Eski Log Analytics Uyarıları API 'sini kullanıyorsanız [GEÇERLI API 'ye geçmeniz](../alerts/alerts-log-api-switch.md)gerekir.
 
 
@@ -41,6 +41,9 @@ Bir çalışma alanının tanımlanması çeşitli yollarla gerçekleştirilebil
 
 * Kaynak adı-çalışma alanının, bazen *bileşen adı* olarak adlandırılan okunabilir bir adıdır. 
 
+    >[!IMPORTANT]
+    >Uygulama ve çalışma alanı adları benzersiz olmadığından, bu tanımlayıcı belirsiz olabilir. Başvurunun nitelenmiş ad, çalışma alanı KIMLIĞI veya Azure Kaynak KIMLIĞI tarafından olması önerilir.
+
     `workspace("contosoretail-it").Update | count`
 
 * Nitelenmiş ad-Şu biçimdeki abonelik adı, kaynak grubu ve Bileşen adından oluşan, çalışma alanının "tam adı" dır: *subscriptionName/resourceGroup/ComponentName*. 
@@ -48,8 +51,7 @@ Bir çalışma alanının tanımlanması çeşitli yollarla gerçekleştirilebil
     `workspace('contoso/contosoretail/contosoretail-it').Update | count`
 
     >[!NOTE]
-    >Azure abonelik adları benzersiz olmadığından, bu tanımlayıcı belirsiz olabilir. 
-    >
+    >Azure abonelik adları benzersiz olmadığından, bu tanımlayıcı belirsiz olabilir.
 
 * Çalışma alanı KIMLIĞI-bir çalışma alanı KIMLIĞI, bir genel benzersiz tanımlayıcı (GUID) olarak temsil edilen her çalışma alanına atanan benzersiz, sabit bir tanıtıcıdır.
 

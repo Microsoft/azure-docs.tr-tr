@@ -8,16 +8,16 @@ ms.author: heidist
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 06/30/2020
-ms.openlocfilehash: 3c8dd5cd9da2fd1e741635a6471c0662066d147e
-ms.sourcegitcommit: dae6b628a8d57540263a1f2f1cdb10721ed1470d
+ms.openlocfilehash: f0d85f056cfaaa58fcc72eb9c2182b3e1a78affb
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "105709948"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581617"
 ---
 # <a name="collect-and-analyze-log-data-for-azure-cognitive-search"></a>Azure Bilişsel Arama günlük verilerini toplayın ve çözümleyin
 
-Tanılama veya işletimsel Günlükler Azure Bilişsel Arama ayrıntılı işlemlerine ilişkin öngörüler sağlar ve hizmet ve iş yükü işlemlerini izlemek için yararlıdır. Microsoft, bir destek bileti verirseniz araştırma ve analize yönelik olarak, sistem bilgilerini kısa bir süre (yaklaşık 30 gün) için arka uca korur. Ancak, işletimsel veriler üzerinde sahiplik istiyorsanız, günlüğe kaydetme bilgilerinin nerede toplandığını belirtmek için bir tanılama ayarı yapılandırmanız gerekir.
+Tanılama veya işletimsel Günlükler, Azure Bilişsel Arama ayrıntılı işlemlerine ilişkin öngörüler sağlar ve hizmet durumu ve işlemlerini izlemek için yararlıdır. Microsoft, bir destek bileti verirseniz araştırma ve analize yönelik olarak, sistem bilgilerini kısa bir süre (yaklaşık 30 gün) için arka uca korur. Ancak, işletimsel veriler üzerinde sahiplik istiyorsanız, günlüğe kaydetme bilgilerinin nerede toplandığını belirtmek için bir tanılama ayarı yapılandırmanız gerekir.
 
 Tanılama günlüğü, [Azure izleyici](../azure-monitor/index.yml)ile tümleştirme aracılığıyla etkinleştirilir. 
 
@@ -120,7 +120,7 @@ AzureDiagnostics
 
 Azure Izleyici tarafından yakalanan günlüğe kaydedilen olaylar, dizin oluşturma ve sorgularla ilgili olanları içerir. Log Analytics içindeki **AzureDiagnostics** tablosu sorgular ve dizin oluşturma ile ilgili işletimsel verileri toplar.
 
-| OperationName | Description |
+| OperationName | Açıklama |
 |---------------|-------------|
 | ServiceStats | Bu işlem, bir portala genel bakış sayfası yüklendiğinde veya yenilendiğinde, doğrudan veya örtük olarak çağrılan [hizmet Istatistiklerini almak](/rest/api/searchservice/get-service-statistics)için bir yordam çağrıdır. |
 | Query. Search |  Bir dizinde yapılan sorgu istekleri bkz. günlüğe kaydedilen sorgular hakkında bilgi için [izleyici sorguları](search-monitor-queries.md) .|

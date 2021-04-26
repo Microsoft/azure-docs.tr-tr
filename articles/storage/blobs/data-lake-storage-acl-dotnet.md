@@ -10,10 +10,10 @@ ms.subservice: data-lake-storage-gen2
 ms.reviewer: prishet
 ms.custom: devx-track-csharp
 ms.openlocfilehash: 626e89d8d758d5fe31ef6c913076a9154274bb61
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100654480"
 ---
 # <a name="use-net-to-manage-acls-in-azure-data-lake-storage-gen2"></a>Azure Data Lake Storage 2. ACL 'Leri yönetmek için .NET kullanın
@@ -234,6 +234,6 @@ Toplu iş boyutu belirterek ACL 'Leri yinelemeli olarak toplu olarak ayarlayan b
 - [Örnekler](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Files.DataLake)
 - [Gen1 to Gen2 Mapping](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Files.DataLake/GEN1_GEN2_MAPPING.md)
 - [Bilinen sorunlar](data-lake-storage-known-issues.md#api-scope-data-lake-client-library)
-- [Görüş Bildirin](https://github.com/Azure/azure-sdk-for-net/issues)
+- [Geri bildirimde bulunun](https://github.com/Azure/azure-sdk-for-net/issues)
 - [Azure Data Lake Storage 2. 'de erişim denetimi modeli](data-lake-storage-access-control.md)
 - [Azure Data Lake Storage 2. 'de erişim denetim listeleri (ACL 'Ler)](data-lake-storage-access-control.md)

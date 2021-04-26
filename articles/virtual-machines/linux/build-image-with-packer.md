@@ -9,12 +9,12 @@ ms.workload: infrastructure
 ms.date: 05/07/2019
 ms.author: cynthn
 ms.collection: linux
-ms.openlocfilehash: 4d85106cb78b5f4799a78d18463d83594f54dbac
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 1b40646109265b803945b43d7cc855688c5b47c5
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102556749"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107764666"
 ---
 # <a name="how-to-use-packer-to-create-linux-virtual-machine-images-in-azure"></a>Azure 'da Linux sanal makine görüntüleri oluşturmak için Packer kullanma
 Azure 'daki her sanal makine (VM), Linux dağıtımını ve işletim sistemi sürümünü tanımlayan bir görüntüden oluşturulur. Görüntüler, önceden yüklenmiş uygulamaları ve konfigürasyonları içerebilir. Azure Marketi, en yaygın dağıtımlar ve uygulama ortamları için birçok birinci ve üçüncü taraf görüntü sağlar veya gereksinimlerinize uygun kendi özel görüntülerinizi oluşturabilirsiniz. Bu makalede, Azure 'da özel görüntüler tanımlamak ve derlemek için açık kaynak aracı [Packer](https://www.packer.io/) 'ın nasıl kullanılacağı açıklanır.
@@ -209,7 +209,7 @@ az vm create \
     --generate-ssh-keys
 ```
 
-Sanal makineleri, Packer görüntüsünden farklı bir kaynak grubunda veya bölgede oluşturmak istiyorsanız, görüntü adı yerine görüntü KIMLIĞINI belirtin. Görüntü KIMLIĞINI [az Image Show](/cli/azure/image#az-image-show)ile elde edebilirsiniz.
+Sanal makineleri, Packer görüntüsünden farklı bir kaynak grubunda veya bölgede oluşturmak istiyorsanız, görüntü adı yerine görüntü KIMLIĞINI belirtin. Görüntü KIMLIĞINI [az Image Show](/cli/azure/image#az_image_show)ile elde edebilirsiniz.
 
 VM 'nin oluşturulması birkaç dakika sürer. VM oluşturulduktan sonra, `publicIpAddress` Azure CLI tarafından görüntülenmiş olarak bir göz atın. Bu adres, NGıNX sitesine bir Web tarayıcısı aracılığıyla erişmek için kullanılır.
 

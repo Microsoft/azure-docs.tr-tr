@@ -7,12 +7,12 @@ ms.service: mysql
 ms.custom: mvc
 ms.topic: quickstart
 ms.date: 10/22/2020
-ms.openlocfilehash: 074b799a4f0e83c47aac0b2b3fca5386bd45429f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 53878384f4eb056f0cb23ec9005043ac26c8fad2
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100521977"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106492631"
 ---
 # <a name="quickstart-use-the-azure-portal-to-create-an-azure-database-for-mysql-flexible-server"></a>Hızlı başlangıç: MySQL için Azure veritabanı esnek sunucusu oluşturmak için Azure portal kullanma
 
@@ -51,11 +51,14 @@ Esnek sunucu oluşturmak için aşağıdaki adımları uygulayın:
     Abonelik|Aboneliğinizin adı|Sunucunuz için kullanmak istediğiniz Azure aboneliği. Birden çok aboneliğiniz varsa, kaynak için faturalandırılması istediğiniz aboneliği seçin.|
     Kaynak grubu|**myresourcegroup**| Yeni bir kaynak grubu adı veya aboneliğinizde var olan bir kaynak grubu.|
     Sunucu adı |**mydemoserver**|Esnek sunucunuzu tanımlayan benzersiz bir ad. Etki alanı adı, `mysql.database.azure.com` sağladığınız sunucu adına eklenir. Sunucu adı yalnızca küçük harf, sayı ve kısa çizgi (-) karakterini içerebilir. 3 ile 63 arasında karakter içermelidir.|
+    Bölge|Kullanıcılarınıza en yakın bölge| Kullanıcılarınız için en yakın olan konum.|
+    İş yükü türü| Geliştirme | Üretim iş yükü için [max_connections](concepts-server-parameters.md#max_connections) gereksinimlerine bağlı olarak küçük/orta boyutlu veya büyük boyutlu boyut seçebilirsiniz|
+    Kullanılabilirlik alanı| Tercih yok | Azure VM 'lerinde, sanal makine ölçek kümeleri veya AKS örneği belirli bir kullanılabilirlik alanında sağlanmışsa, bölgeler arasında ağ gecikmesini izleyerek performansı artırmak üzere uygulamayı ve veritabanını birlikte bulmak için esnek sunucunuzu aynı Kullanılabilirlik bölgesinde belirtebilirsiniz.|
+    Yüksek Kullanılabilirlik| Varsayılan | Üretim sunucuları için, bölge arızalarına karşı iş sürekliliği ve koruma için, bölgesel olarak yedekli yüksek kullanılabilirliği (HA) etkinleştirmek son derece önerilir|
+    MySQL sürümü|**5.7**| MySQL ana sürümü.|
     Yönetici kullanıcı adı |**mydemouser**| Sunucuya bağlanırken kullanılacak kendi oturum açma hesabınız. Yönetici Kullanıcı adı **azure_superuser**, **yönetici**, **yönetici**, **kök**, **Konuk** veya **ortak** olamaz.|
     Parola |Parolanız| Sunucu yönetici hesabı için yeni bir parola. 8 ile 128 arasında karakter içermelidir. Ayrıca, şu kategorilerden üçünden karakterler içermelidir: Ingilizce büyük harfler, Ingilizce küçük harfler, sayılar (0-9) ve alfasayısal olmayan karakterler (!, $, #,%, vb.).|
-    Region|Kullanıcılarınıza en yakın bölge| Kullanıcılarınız için en yakın olan konum.|
-    Sürüm|**5.7**| MySQL ana sürümü.|
-    İşlem + depolama | **Burstable**, **Standard_B1ms**, **10 GiB**, **7 gün** | Yeni sunucunuz için işlem, depolama ve yedekleme yapılandırmaları. **Sunucuyu Yapılandır**' ı seçin. **Burstable**, **Standard_B1ms**, **10 GiB** ve **7 gün** , **işlem katmanı**, **işlem boyutu**, **depolama boyutu** ve yedekleme **saklama süresi** için varsayılan değerlerdir. Bu değerleri olduğu gibi bırakabilir veya düzenleyebilirsiniz. İşlem ve depolama seçimini kaydetmek için, yapılandırmaya devam etmek için **Kaydet** ' i seçin. Aşağıdaki ekran görüntüsünde işlem ve depolama seçenekleri gösterilmektedir.|
+    İşlem + depolama | **Burstable**, **Standard_B1ms**, **10 GiB**, **100 IOPS**, **7 gün** | Yeni sunucunuzun işlem, depolama, ıOPS ve yedekleme yapılandırması. **Sunucuyu Yapılandır**' ı seçin. **Burstable**, **Standard_B1ms**, **10 GiB**, **100 IOPS** ve **7 gün** , **işlem katmanı**, **işlem boyutu**, **depolama boyutu**, **IOPS** ve yedekleme **saklama süresi** için varsayılan değerlerdir. Bu değerleri olduğu gibi bırakabilir veya düzenleyebilirsiniz. Geçiş sırasında daha hızlı veri yükleri için ıOPS 'yi işlem boyutu tarafından desteklenen en büyük boyuta artırmanız ve daha sonra maliyeti kaydetmek için yeniden ölçeklendirmeniz önerilir. İşlem ve depolama seçimini kaydetmek için, yapılandırmaya devam etmek için **Kaydet** ' i seçin. Aşağıdaki ekran görüntüsünde işlem ve depolama seçenekleri gösterilmektedir.|
     
     > :::image type="content" source="./media/quickstart-create-server-portal/compute-storage.png" alt-text="İşlem ve depolama seçeneklerini gösteren ekran görüntüsü.":::
 
@@ -89,16 +92,21 @@ Esnek sunucunuzu özel erişim (VNet tümleştirmesi) kullanarak oluşturduysan�
 
 Ortak erişim (izin verilen IP adresleri) kullanarak esnek sunucunuzu oluşturduysanız, yerel IP adresinizi sunucunuzdaki güvenlik duvarı kuralları listesine ekleyebilirsiniz. Adım adım yönergeler için [güvenlik duvarı kuralları oluşturma veya yönetme belgelerini](how-to-manage-firewall-portal.md) inceleyin.
 
-Yerel ortamınızdan sunucusuna bağlanmak için [mysql.exe](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) ya da [MySQL çalışma ekranı](./connect-workbench.md) kullanabilirsiniz. 
+Yerel ortamınızdan sunucusuna bağlanmak için [mysql.exe](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) ya da [MySQL çalışma ekranı](./connect-workbench.md) kullanabilirsiniz. MySQL için Azure veritabanı esnek sunucu, istemci uygulamalarınızı, daha önce Güvenli Yuva Katmanı (SSL) olarak bilinen Aktarım Katmanı Güvenliği (TLS) kullanarak MySQL hizmetine bağlamayı destekler. TLS, veritabanı sunucunuz ile istemci uygulamalarınız arasında şifrelenmiş ağ bağlantıları sağlayan ve uyumluluk gereksinimlerine bağlı olmanızı sağlayan bir endüstri standardı protokolüdür. MySQL esnek sunucunuza bağlanmak için, sertifika yetkilisi doğrulaması için [genel SSL sertifikasını](https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem) indirmeniz gerekir.
+
+Aşağıdaki örnek, MySQL komut satırı arabirimini kullanarak esnek sunucunuza nasıl bağlanılacağını gösterir. Önce bir daha yüklenmemişse MySQL komut satırını yükleyeceksiniz. SSL bağlantıları için gereken Digiccertglobalrootca sertifikasını indirirsiniz. TLS/SSL sertifika doğrulamasını zorlamak için--SSL-Mode = REQUIRED bağlantı dizesi ayarını kullanın. Yerel sertifika dosyası yolunu--SSL-CA parametresine geçirin. Değerleri gerçek sunucu adı ve parolasıyla değiştirin.
 
 ```bash
+sudo apt-get install mysql-client
 wget --no-check-certificate https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem
-mysql -h mydemoserver.mysql.database.azure.com -u mydemouser -p --ssl=true --ssl-ca=DigiCertGlobalRootCA.crt.pem
+mysql -h mydemoserver.mysql.database.azure.com -u mydemouser -p --ssl-mode=REQUIRED --ssl-ca=DigiCertGlobalRootCA.crt.pem
 ```
 
 Esnek sunucunuzu **ortak erişim** kullanarak sağladıysanız, aşağıda gösterildiği gibi önceden yüklenmiş MySQL istemcisini kullanarak esnek sunucunuza bağlanmak için [Azure Cloud Shell](https://shell.azure.com/bash) de kullanabilirsiniz:
 
-Esnek sunucunuza bağlanmak için Azure Cloud Shell kullanabilmeniz için, Azure Cloud Shell ağ üzerinden esnek sunucunuza erişim izni vermeniz gerekir. Bunu başarmak için, MySQL esnek sunucunuz için Azure portal **ağ** dikey penceresine gidebilir ve **güvenlik duvarı** bölümünde "Azure 'daki herhangi bir Azure hizmetinden bu sunucuya genel erişime izin ver" diyen ve ayarı sürdürmek için Kaydet ' e tıklayabilirsiniz.
+Esnek sunucunuza bağlanmak için Azure Cloud Shell kullanabilmeniz için, Azure Cloud Shell ağ üzerinden esnek sunucunuza erişim izni vermeniz gerekir. Bunu başarmak için, MySQL esnek sunucunuz için Azure portal **ağ** dikey penceresine gidebilir ve **güvenlik duvarı** bölümündeki kutuyu, aşağıdaki ekran görüntüsünde gösterildiği gibi, "Azure 'daki herhangi bir Azure hizmetinden bu sunucuya genel erişime izin ver" diyen ve ayarı sürdürmek için Kaydet ' e tıklayabilirsiniz.
+
+ > :::image type="content" source="./media/quickstart-create-server-portal/allow-access-to-any-azure-service.png" alt-text="Ortak erişim ağı yapılandırması için MySQL esnek sunucusuna Azure Cloud Shell erişimine izin vermeyi gösteren ekran görüntüsü.":::
 
 > [!NOTE]
 > **Azure 'daki herhangi bir Azure hizmetinden bu sunucuya genel erişime Izin ver** ' in yalnızca geliştirme veya test için kullanılması gerekir. Güvenlik duvarını, diğer müşterilerin aboneliklerinden gelen bağlantılar da dahil olmak üzere herhangi bir Azure hizmetine veya varlığına ayrılan IP adreslerinden gelen bağlantılara izin verecek şekilde yapılandırır.
@@ -109,6 +117,9 @@ Azure Cloud Shell başlatmak için **dene** ' ye tıklayın ve esnek sunucunuza 
 wget --no-check-certificate https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem
 mysql -h mydemoserver.mysql.database.azure.com -u mydemouser -p --ssl=true --ssl-ca=DigiCertGlobalRootCA.crt.pem
 ```
+> [!IMPORTANT]
+> Azure Cloud Shell kullanarak esnek sunucunuza bağlanırken--SSL = true parametresini kullanmanız gerekir;--SSL-Mode = gereklı değil.
+> Birincil neden Azure Cloud Shell,--SSL parametresi gerektiren MariaDB dağılımda önceden yüklenmiş mysql.exe istemcisi ile birlikte gelir.
 
 Daha önce komutu takip eden esnek sunucunuza bağlanırken aşağıdaki hata iletisini görürseniz, daha önce bahsedilen "Azure 'daki herhangi bir Azure hizmetinden ortak erişime Izin ver" seçeneğini kullanarak güvenlik duvarı kuralını ayarlamayı kaçırdınız veya seçenek kaydedilmez. Lütfen güvenlik duvarını ayarlamayı yeniden deneyin ve tekrar deneyin.
 

@@ -10,10 +10,10 @@ ms.date: 07/15/2019
 ms.author: akjosh
 ms.reviewer: cynthn
 ms.openlocfilehash: e78cb29551bf7eb3f713edb755464eb7696106e8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102556137"
 ---
 # <a name="share-gallery-vm-images-across-azure-tenants-using-powershell"></a>PowerShell kullanarak Azure kiracılar genelinde Galeri VM görüntülerini paylaşma

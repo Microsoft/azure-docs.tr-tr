@@ -4,15 +4,15 @@ description: Azure portal kullanarak geri yükleme noktasını belirlemeyi ve s�
 author: kanshiG
 ms.service: cosmos-db
 ms.topic: how-to
-ms.date: 02/01/2021
+ms.date: 04/05/2021
 ms.author: govindk
 ms.reviewer: sngun
-ms.openlocfilehash: ee6eedbc078e1b9c07ed00922ce1c37b38410128
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 707ef9f60891c1da7c13638e233ee74e78fc20dd
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100381877"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106283946"
 ---
 # <a name="configure-and-manage-continuous-backup-and-point-in-time-restore-preview---using-azure-portal"></a>Sürekli yedekleme ve zaman noktası geri yükleme (Önizleme) ile yapılandırma ve yönetme-Azure portal kullanma
 [!INCLUDE[appliesto-sql-mongodb-api](includes/appliesto-sql-mongodb-api.md)]
@@ -32,6 +32,10 @@ Yeni bir Azure Cosmos DB hesabı oluştururken, **yedekleme ilkesi** seçeneği 
 
 :::image type="content" source="./media/continuous-backup-restore-portal/configure-continuous-backup-portal.png" alt-text="Sürekli yedekleme yapılandırması ile Azure Cosmos DB bir hesap sağlayın." border="true":::
 
+## <a name="backup-storage-redundancy"></a>Yedekleme depolama yedekliliği
+
+Azure Cosmos DB, varsayılan olarak, sürekli modda yedek verileri yerel olarak yedekli depolama Blobları 'nda depolar. Bölge artıklığı yapılandırılmış bölgelerde, yedekleme, bölgesel olarak yedekli depolama Blobları 'nda depolanır. Bu modda yedekleme depolama yedekliliği güncelleştiremezsiniz.
+
 ## <a name="restore-a-live-account-from-accidental-modification"></a><a id="restore-live-account"></a>Canlı bir hesabı yanlışlıkla değişiklikten geri yükleme
 
 Canlı bir hesabı veya seçili veritabanlarını ve kapsayıcıları geri yüklemek için Azure portal kullanabilirsiniz. Verilerinizi geri yüklemek için aşağıdaki adımları kullanın:
@@ -46,7 +50,7 @@ Canlı bir hesabı veya seçili veritabanlarını ve kapsayıcıları geri yükl
 
    * **Geri yükleme noktası (UTC)** : son 30 gün içinde zaman damgası. Hesabın bu zaman damgasında mevcut olması gerekir. Geri yükleme noktasını UTC olarak belirtebilirsiniz. Geri yüklemek istediğiniz zaman ikincisine yakın olabilir. [Geri yükleme noktasını tanımlama](#event-feed)hakkında yardım almak Için **burayı tıklatın** bağlantısını seçin.
 
-   * **Konum** : hesabın geri yüklendiği hedef bölge. Hesap, belirtilen zaman damgasında bu bölgede bulunmalıdır (örn. Batı ABD veya Doğu ABD). Bir hesap yalnızca kaynak hesabın varolduğu bölgelere geri yüklenebilir.
+   * **Konum** : hesabın geri yüklendiği hedef bölge. Hesabın belirtilen zaman damgasında bu bölgede mevcut olması gerekir (örneğin, Batı ABD veya Doğu ABD). Bir hesap yalnızca kaynak hesabın varolduğu bölgelere geri yüklenebilir.
 
    * **Kaynağı geri yükle** – geri yüklemek için **Tüm hesap** veya **Seçili bir veritabanı/kapsayıcı** seçebilirsiniz. Veritabanları ve kapsayıcılar verilen zaman damgasında bulunmalıdır. Seçilen geri yükleme noktası ve konuma göre, geri yükleme kaynakları doldurulur, bu da kullanıcının geri yüklenmesi gereken belirli veritabanlarını veya kapsayıcıları seçmesine olanak sağlar.
 

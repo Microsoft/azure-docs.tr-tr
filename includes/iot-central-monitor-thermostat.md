@@ -8,44 +8,63 @@ ms.topic: include
 ms.date: 03/12/2020
 ms.author: dobett
 ms.custom: include file
-ms.openlocfilehash: 28f676892967abbd0da63d7a75ea3d164b87ce97
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 77fdaf297fff0e145b1dd53908887bc14f9d3f14
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96017513"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106491131"
 ---
+<!-- All needs updating -->
 Azure IoT Central uygulamanızda bir operatör olarak şunları yapabilirsiniz:
 
-* **Genel bakış** sayfasında cihaz tarafından gönderilen Telemetriyi görüntüleyin:
+* **Genel bakış** sayfasında iki termostat bileşeni tarafından gönderilen Telemetriyi görüntüleyin:
 
     :::image type="content" source="media/iot-central-monitor-thermostat/view-telemetry.png" alt-text="Cihaz telemetrisini görüntüleme":::
 
-* **Hakkında** sayfasında cihaz özelliklerini görüntüleyin:
+* **Hakkında** sayfasında cihaz özelliklerini görüntüleyin. Bu sayfada cihaz bilgileri bileşeni ve iki termostat bileşeni özellikleri gösterilir:
 
     :::image type="content" source="media/iot-central-monitor-thermostat/about-properties.png" alt-text="Cihaz özelliklerini görüntüle":::
 
 ## <a name="customize-the-device-template"></a>Cihaz şablonunu özelleştirme
 
-Çözüm geliştiricisi olarak, termostat cihazı bağlandığında IoT Central otomatik olarak oluşturulan cihaz şablonunu özelleştirebilirsiniz.
+Bir çözüm geliştiricisi olarak, sıcaklık denetleyicisi cihazı bağlandığında IoT Central otomatik olarak oluşturulan cihaz şablonunu özelleştirebilirsiniz.
 
 Cihazla ilişkili müşteri adını depolamak üzere bir bulut özelliği eklemek için:
 
-1. IoT Central uygulamanızda, **cihaz şablonları** sayfasında **termostat** cihaz şablonuna gidin.
+1. IoT Central uygulamanızda, **cihaz şablonları** sayfasında **sıcaklık denetleyicisi** cihaz şablonuna gidin.
 
-1. **Termostat** cihaz şablonunda, **bulut özellikleri**' ni seçin.
+1. **Isı denetleyicisi** cihaz şablonunda, **bulut özellikleri**' ni seçin.
 
 1. **Bulut özelliği Ekle**' yi seçin. **Görünen ad** olarak *müşteri adı* ' nı girin ve **şema** olarak **dize** ' yi seçin. Sonra **Kaydet**'i seçin.
 
-**Max-Min raporu alma** komutunun IoT Central uygulamanızda nasıl görüntüleneceğini özelleştirmek için, cihaz şablonunda **Özelleştir** ' i seçin. **Max-Min al raporunu değiştirin.** *durumunu Al raporuyla*. Sonra **Kaydet**'i seçin.
+**Get Max-Min rapor** komutlarının IoT Central uygulamanızda nasıl görüntüleneceğini özelleştirmek için:
 
-**Termostat** modeli **hedef sıcaklık** yazılabilir özelliğini Içerir, cihaz şablonu **müşteri adı** bulutu özelliğini içerir. Bir işlecin bu özellikleri düzenlemek için kullanabileceği bir görünüm oluşturun:
+1. Cihaz şablonunda **Özelleştir** ' i seçin.
+
+1. **Getmaxminreport (thermostat1)** için *Get Max-Min raporunu değiştirin.* *Get thermostat1 durum raporuyla*.
+
+1. **Getmaxminreport (thermostat2)** için *Get Max-Min raporunu değiştirin.* *Get thermostat2 durum raporuyla*.
+
+1. **Kaydet**’i seçin.
+
+**Hedef sıcaklık** yazılabilir özelliklerinin IoT Central uygulamanızda nasıl görüntüleneceğini özelleştirmek için:
+
+1. Cihaz şablonunda **Özelleştir** ' i seçin.
+
+1. **Targetsıcaklık (thermostat1)** için hedef sıcaklığını *hedef sıcaklık (1)* *ile değiştirin* .
+
+1. **Targetsıcaklık (thermostat2)** için *hedef sıcaklığını* *hedef sıcaklık (2)* ile değiştirin.
+
+1. **Kaydet**’i seçin.
+
+**Sıcaklık denetleyicisi** modelindeki termostat bileşenleri, **hedef sıcaklık** yazılabilir özelliğini içerir, cihaz şablonu, **müşteri adı** bulutu özelliğini içerir. Bir işlecin bu özellikleri düzenlemek için kullanabileceği bir görünüm oluşturun:
 
 1. **Görünümler** ' i seçin ve ardından **cihazı ve bulut verilerini Düzenle** kutucuğunu seçin.
 
 1. _Özellikleri_ form adı olarak girin.
 
-1. **Hedef sıcaklık** ve **müşteri adı** özelliklerini seçin. Ardından **Bölüm Ekle**' yi seçin.
+1. **Hedef sıcaklığın (1)**, **hedef sıcaklığın (2)** ve **müşteri adı** özelliklerinin seçin. Ardından **Bölüm Ekle**' yi seçin.
 
 1. Yaptığınız değişiklikleri kaydedin.
 
@@ -57,7 +76,7 @@ Bir işlecin yaptığınız özelleştirmeleri görüp kullanabilmesi için önc
 
 **Termostat** cihaz şablonundan **Yayımla**' yı seçin. **Bu cihaz şablonunu uygulama panelinde Yayımla** ' da, **Yayımla**' yı seçin.
 
-Bir işleç artık özellik değerlerini güncelleştirmek için **Özellikler** görünümünü kullanabilir ve cihaz komutları sayfasında **durum raporu al** adlı bir komut çağırabilir:
+Bir operatör artık özellik değerlerini güncelleştirmek için **Özellikler** görünümünü kullanabilir ve cihaz komutları sayfasında **Get thermostat1 durum Report** ve **Get thermostat2 Status Report** adlı komutları çağırabilir:
 
 * **Özellikler** sayfasında yazılabilir özellik değerlerini güncelleştir:
 

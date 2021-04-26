@@ -6,12 +6,12 @@ keywords: DSC, PowerShell, Azure, uzantı
 services: automation
 ms.subservice: dsc
 ms.topic: conceptual
-ms.openlocfilehash: e51bce6e015ef7367625b010b74e5d2422b35051
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b272993cdb1b89e63190d2c8c9ef80db2327ccc1
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100651811"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167524"
 ---
 # <a name="work-with-azure-desired-state-configuration-extension-version-history"></a>Azure Istenen durum yapılandırma uzantısı sürüm geçmişi ile çalışma
 
@@ -274,7 +274,7 @@ Bu makalede, Azure DSC VM uzantısının her sürümü, desteklediği ortamlar v
 - **Ortam:** Mavisi
 - **Açıklamalar:** Bu sürüm, Windows Server 2016 Technical Preview 'a dahil edilen DSC kullanır; diğer Windows OSs için [Windows Management Framework 5,0 RTM](https://devblogs.microsoft.com/powershell/windows-management-framework-wmf-5-0-rtm-is-now-available-via-the-microsoft-update-catalog/) 'YI (WMF yüklemesi için yeniden başlatma gerekir) yüklenir.
 - **Yeni Özellikler:**
-  - Uzantı sürümü 2,14 ' de, WMF RTM 'yi yüklemek için değişiklikler eklenmiştir. 2.13.2.0 uzantısından 2.14.0.0 sürümüne yükseltirken bazı DSC cmdlet 'lerinin başarısız olduğunu veya yapılandırmanızın bir hata vererek başarısız olduğunu fark edebilirsiniz: ' verilen özellik değerlerine sahip bir örnek bulunamadı '. Daha fazla bilgi için bkz. [DSC sürüm notları](/powershell/scripting/wmf/known-issues/known-issues-dsc). Bu sorunlara yönelik geçici çözümler 2,15 sürümüne eklenmiştir. 
+  - Uzantı sürümü 2,14 ' de, WMF RTM 'yi yüklemek için değişiklikler eklenmiştir. 2.13.2.0 uzantısından 2.14.0.0 sürümüne yükseltirken bazı DSC cmdlet 'lerinin başarısız olduğunu veya yapılandırmanızın bir hata ile başarısız olduğunu fark edebilirsiniz-' verilen özellik değerlerine sahip bir örnek bulunamadı '. Daha fazla bilgi için bkz. [DSC sürüm notları](/powershell/scripting/wmf/known-issues/known-issues-dsc). Bu sorunlara yönelik geçici çözümler 2,15 sürümüne eklenmiştir. 
   - Sürüm 2,14 ' ü zaten yüklediyseniz ve yukarıdaki iki sorunlardan birinde çalıştırıyorsanız, bu adımları el ile gerçekleştirmeniz gerekir. Yükseltilmiş bir PowerShell oturumunda aşağıdaki komutları çalıştırın:
     - `Remove-Item -Path $env:SystemRoot\system32\Configuration\DSCEngineCache.mof`
     - `mofcomp $env:windir\system32\wbem\DscCoreConfProv.mof`

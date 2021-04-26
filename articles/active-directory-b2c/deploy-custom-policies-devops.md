@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 02/14/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 13f5f8da0bd58cef0974e8ea8f5f3c5172daa0ba
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 913f21b90043209cae1ec9963619389bcb452781
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96928741"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107529437"
 ---
 # <a name="deploy-custom-policies-with-azure-pipelines"></a>Azure Pipelines ile özel ilkeler dağıtma
 
@@ -29,12 +29,12 @@ Azure AD B2C içindeki özel ilkeleri yönetmek için Azure Pipelines etkinleşt
 1. Azure işlem hattı yapılandırma
 
 > [!IMPORTANT]
-> Azure işlem hattı ile Azure AD B2C özel ilkeleri yönetmek Şu anda Microsoft Graph API uç noktasında kullanılabilen **Önizleme** işlemlerini kullanıyor `/beta` . Üretim uygulamalarında bu API 'lerin kullanılması desteklenmez. Daha fazla bilgi için [Microsoft Graph REST API Beta uç nokta başvurusuna](/graph/api/overview?toc=.%2fref%2ftoc.json&view=graph-rest-beta)bakın.
+> Azure işlem hattı ile Azure AD B2C özel ilkeleri yönetmek Şu anda Microsoft Graph API uç noktasında kullanılabilen **Önizleme** işlemlerini kullanıyor `/beta` . Üretim uygulamalarında bu API 'lerin kullanılması desteklenmez. Daha fazla bilgi için [Microsoft Graph REST API Beta uç nokta başvurusuna](/graph/api/overview?toc=.%2fref%2ftoc.json&view=graph-rest-beta&preserve-view=true)bakın.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 * [B2C ıEF Ilke Yöneticisi](../active-directory/roles/permissions-reference.md#b2c-ief-policy-administrator) rolüyle dizindeki bir kullanıcı için [Azure AD B2C kiracı](tutorial-create-tenant.md)ve kimlik bilgileri
-* Kiracınıza yüklenen [özel ilkeler](custom-policy-get-started.md)
+* Kiracınıza yüklenen [özel ilkeler](tutorial-create-user-flows.md?pivots=b2c-custom-policy)
 * [Yönetim uygulaması](microsoft-graph-get-started.md) kiracınızda Microsoft Graph API izin *ilkesi. ReadWrite. TrustFramework* ile kaydedildi
 * [Azure Işlem hattı](https://azure.microsoft.com/services/devops/pipelines/)ve bir [Azure DevOps Services projesine][devops-create-project] erişim
 

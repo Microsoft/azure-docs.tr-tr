@@ -9,12 +9,12 @@ ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 03/24/2021
 ms.custom: devx-track-js, devx-track-csharp
-ms.openlocfilehash: 6bc45bb6eec9dbf46e039dd1e2c32197820bb09d
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: b260793cc3c0b5ac3ffce8fac909e2db8991c713
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105626716"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107307818"
 ---
 # <a name="add-autocomplete-and-suggestions-to-client-apps-using-azure-cognitive-search"></a>Azure Bilişsel Arama kullanarak istemci uygulamalarına otomatik tamamlama ve öneriler ekleme
 
@@ -67,7 +67,7 @@ Yanıtlar istekteki parametrelere göre şekillendirilir:
 
 + Otomatik tamamlama için, bir veya iki terim üzerinde metin tamamlanmasının yapılıp yapılmayacağını anlamak için [autocompleteMode](/rest/api/searchservice/autocomplete#query-parameters) ayarlayın. 
 
-+ Öneriler için [$Select](/rest/api/searchservice/suggestionse#query-parameters) , adlar ve açıklama gibi benzersiz veya farklılaştırıcı değerler içeren alanları döndürecek şekilde ayarlayın. Yinelenen değerler içeren alanlardan kaçının (örneğin, kategori veya şehir).
++ Öneriler için [$Select](/rest/api/searchservice/suggestions#query-parameters) , adlar ve açıklama gibi benzersiz veya farklılaştırıcı değerler içeren alanları döndürecek şekilde ayarlayın. Yinelenen değerler içeren alanlardan kaçının (örneğin, kategori veya şehir).
 
 Aşağıdaki ek parametreler hem otomatik tamamlama hem de öneriler için geçerlidir, ancak özellikle de bir öneri aracı birden çok alan içerdiğinde öneriler için daha fazla gerekli olabilir.
 

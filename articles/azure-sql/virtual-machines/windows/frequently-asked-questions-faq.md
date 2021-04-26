@@ -13,12 +13,12 @@ ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 08/05/2019
 ms.author: mathoma
-ms.openlocfilehash: 014bbe4421bf00f35b2d80505cea288e75f8ca94
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 02bb1f539369cf72a5d5b6503a3584069589b19e
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103224682"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727357"
 ---
 # <a name="frequently-asked-questions-for-sql-server-on-azure-vms"></a>Azure VM 'lerinde SQL Server için sık sorulan sorular
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
@@ -193,6 +193,7 @@ Bu makalede, [Windows Azure sanal makinelerinde (VM) SQL Server](https://azure.m
    1. SQL IaaS uzantısı da dahil olmak üzere SQL Server tamamen kaldırın (varsa).
    1. Ücretsiz [SQL Express sürümünü](https://www.microsoft.com/sql-server/sql-server-downloads)yükleyin.
    1. SQL IaaS Aracısı uzantısına [hafif modda](sql-agent-extension-manually-register-single-vm.md)kaydolun.
+   1. [Azure portal](https://portal.azure.com) [SQL Server sürümünü,](change-sql-server-edition.md#change-edition-in-portal) faturalandırmayı durdurmak için Express olarak değiştirin.  
    1. seçim Hizmet başlangıcını devre dışı bırakarak Express SQL Server hizmetini devre dışı bırakın. 
 
 1. **Aynı VM'de birden çok örneği yönetmek için Azure portalını kullanabilir miyim?**

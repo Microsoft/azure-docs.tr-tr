@@ -12,14 +12,14 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 10/16/2020
+ms.date: 04/12/2021
 ms.author: radeltch
-ms.openlocfilehash: 993baa521530ffa6a702f8324a1691850687c366
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a08d82103986435593cd73a0728e7426f205a90d
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101668699"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107307546"
 ---
 # <a name="high-availability-for-nfs-on-azure-vms-on-suse-linux-enterprise-server"></a>SUSE Linux Enterprise Server üzerinde Azure VM 'lerinde NFS için yüksek kullanılabilirlik
 
@@ -171,7 +171,6 @@ Tüm gerekli kaynakları dağıtmak için GitHub 'daki hızlı başlangıç şab
          1. Yeni yük dengeleyici kuralının adını girin (örneğin, **NW1-lb**)
          1. Daha önce oluşturduğunuz ön uç IP adresini, arka uç havuzunu ve sistem durumu araştırmasını seçin (örneğin, **NW1-ön uç**. **NW-arka uç** ve **NW1-HP**)
          1. **Ha bağlantı noktalarını** seçin.
-         1. Boşta kalma zaman aşımını 30 dakikaya yükselt
          1. **Kayan IP 'yi etkinleştirdiğinizden emin olun**
          1. Tamam 'a tıklayın
          * NW2 için Yük Dengeleme kuralı oluşturmak için yukarıdaki adımları yineleyin

@@ -3,12 +3,12 @@ title: Eğitim-şirket içi ortamlarından özel bir buluta
 description: Azure VMware çözümünde özel buluta ExpressRoute Global Reach eşlemesi oluşturmayı öğrenin.
 ms.topic: tutorial
 ms.date: 03/17/2021
-ms.openlocfilehash: 59ddc2dd4aed850328807a4543d2fabd6f5a99f1
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 798b822989127ccbb00e971de2cc4147ac234259
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105564509"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449571"
 ---
 # <a name="tutorial-peer-on-premises-environments-to-a-private-cloud"></a>Öğretici: şirket içi ortamlar için özel bir buluta
 
@@ -55,7 +55,7 @@ ExpressRoute Global Reach kullanarak iki ExpressRoute bağlantı hattı arasınd
 1. Şirket içi bulut bağlantısı oluşturun. Aşağıdakilerden birini yapın ve ardından **Oluştur**' u seçin:
 
    - Listeden **ExpressRoute devresini** seçin veya
-   - Devre KIMLIĞINIZ varsa, alana yapıştırın ve yetkilendirme anahtarını sağlayın.
+   - Devre KIMLIĞINIZ varsa, alana yapıştırın ve yeni oluşturduğunuz yetkilendirme anahtarını sağlayın.
 
    :::image type="content" source="./media/expressroute-global-reach/on-premises-cloud-connections.png" alt-text="ExpressRoute KIMLIĞI ve yetkilendirme anahtarını girip oluştur ' u seçin.":::   
    

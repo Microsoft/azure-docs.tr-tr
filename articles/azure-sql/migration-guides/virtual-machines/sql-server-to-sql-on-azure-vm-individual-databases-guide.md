@@ -1,6 +1,6 @@
 ---
-title: "Azure VM 'lerinde SQL Server SQL Server: geçiş kılavuzu"
-description: Bu kılavuz, bireysel SQL Server veritabanlarınızı Azure VM 'lerine SQL Server geçirmeye öğretir.
+title: "Azure sanal makineler 'de SQL Server SQL Server: geçiş kılavuzu"
+description: Bu kılavuzda, bireysel SQL Server veritabanlarınızı Azure sanal makinelerinde SQL Server nasıl geçirebileceğinizi öğreneceksiniz.
 ms.custom: ''
 ms.service: virtual-machines-sql
 ms.subservice: migration-guide
@@ -10,223 +10,208 @@ author: markjones-msft
 ms.author: markjon
 ms.reviewer: mathoma
 ms.date: 03/19/2021
-ms.openlocfilehash: 7ef942404158768f4249b5bcd0640632b6475f63
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: e7fc4bacd73cec0fdab3117ada190fb7964b4282
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105023716"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550906"
 ---
-# <a name="migration-guide-sql-server-to-sql-server-on-azure-vms"></a>Geçiş Kılavuzu: Azure VM 'lerinde SQL Server SQL Server 
+# <a name="migration-guide-sql-server-to-sql-server-on-azure-virtual-machines"></a>Geçiş Kılavuzu: Azure sanal makinelerinde SQL Server SQL Server
+
 [!INCLUDE[appliesto--sqlmi](../../includes/appliesto-sqlvm.md)]
 
-Bu geçiş kılavuzunda, değerlendirme için [veritabanı geçiş Yardımcısı (DMA)](/sql/dma/dma-overview) kullanarak yedekleme ve geri yükleme ve günlük aktarma aracılığıyla SQL Server Kullanıcı veritabanlarınızı Azure sanal makinelerinde (vm) SQL Server bir örneğine bulmanıza, **değerlendirmenize** ve **geçireceğinizi** **öğreder**. 
+Bu *kılavuzda, değerlendirme* için [Data Migration Yardımcısı](/sql/dma/dma-overview) kullanan yedekleme ve geri yükleme ve günlük aktarma kullanarak Kullanıcı veritabanlarınızı SQL Server Azure sanal makinelerinde SQL Server örneğine *bulmayı*, değerlendirmeyi ve *geçirmeyi* öğreneceksiniz.
 
 Şirket içinde veya üzerinde çalışan SQL Server geçirebilirsiniz:
 
-- Sanal Makinelerde SQL Server  
-- Amazon Web Services (AWS) EC2 
-- Amazon Ilişkisel veritabanı hizmeti (AWS RDS) 
-- İşlem altyapısı (Google Cloud Platform-GCP)
+- Sanal makinelerde (VM) SQL Server.
+- Amazon Web Services (AWS) EC2.
+- Amazon Ilişkisel veritabanı hizmeti (AWS RDS).
+- İşlem altyapısı (Google Cloud Platform [GCP]).
 
-Ek geçiş stratejileri hakkında daha fazla bilgi için [SQL Server VM geçişe genel bakış](sql-server-to-sql-on-azure-vm-migration-overview.md)bölümüne bakın. Diğer geçiş kılavuzlarında, bkz. [Veritabanı geçişi](https://docs.microsoft.com/data-migration). 
+Ek geçiş stratejileri hakkında daha fazla bilgi için [SQL Server VM geçişe genel bakış](sql-server-to-sql-on-azure-vm-migration-overview.md)bölümüne bakın. Diğer geçiş kılavuzlarında bkz. [Azure veritabanı geçiş kılavuzu](https://docs.microsoft.com/data-migration).
 
-:::image type="content" source="media/sql-server-to-sql-on-azure-vm-migration-overview/migration-process-flow-small.png" alt-text="Geçiş işlem akışı":::
+:::image type="content" source="media/sql-server-to-sql-on-azure-vm-migration-overview/migration-process-flow-small.png" alt-text="Geçiş işlem akışını gösteren diyagram.":::
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure VM 'lerinde SQL Server 'e geçiş yapmak için şunlar gerekir: 
+SQL Server Azure sanal makinelerinde geçiş yapmak için aşağıdaki kaynaklar gereklidir:
 
-- [Veritabanı geçiş Yardımcısı (DMA)](https://www.microsoft.com/download/details.aspx?id=53595).
+- [Data Migration Yardımcısı](https://www.microsoft.com/download/details.aspx?id=53595).
 - Bir [Azure geçişi projesi](../../../migrate/create-manage-projects.md).
-- Kaynak SQL Server aynı veya daha fazla sürümü olan [Azure VM 'de](../../virtual-machines/windows/create-sql-vm-portal.md) hazırlanan bir hedef SQL Server.
+- SQL Server kaynağından aynı veya daha fazla sürümü olan [Azure sanal makineler](../../virtual-machines/windows/create-sql-vm-portal.md) örneğinde hazırlanan bir hedef SQL Server.
 - [Azure ile şirket içi arasında bağlantı](/azure/architecture/reference-architectures/hybrid-networking).
 - [Uygun bir geçiş stratejisi seçme](sql-server-to-sql-on-azure-vm-migration-overview.md#migrate).
 
 ## <a name="pre-migration"></a>Geçiş öncesi
 
-Geçişinize başlamadan önce, SQL ortamınızın topolojisini bulun ve hedeflediğiniz geçişinizin uygunluğunu değerlendirin. 
+Geçişinize başlamadan önce, SQL ortamınızın topolojisini bulmanız ve hedeflediğiniz geçişinizin uygunluğunu değerlendirmeniz gerekir.
 
 ### <a name="discover"></a>Bulma
 
-Şirket içi bilgisayarlardan Azure geçişi değerlendirir geçiş uygunluğu, performans tabanlı boyutlandırma gerçekleştirir ve şirket içinde çalışmaya yönelik maliyet tahminleri sağlar. Geçişi planlamak için, [mevcut veri kaynaklarını ve SQL Server örneklerinizin kullanıldığı özelliklerle ilgili ayrıntıları belirlemek](../../../migrate/concepts-assessment-calculation.md) Için Azure geçişi ' ni kullanın. Bu işlem, kullanımdaki sürüm ve özelliklerle kuruluşunuzdaki tüm SQL Server örneklerinizi belirlemek üzere ağı taramayı içerir. 
+Şirket içi bilgisayarlardan Azure geçişi değerlendirir geçiş uygunluğu, performans tabanlı boyutlandırma gerçekleştirir ve şirket içinde çalışmaya yönelik maliyet tahminleri sağlar. Geçişi planlamak için, [mevcut veri kaynaklarını ve SQL Server örneklerinizin kullanıldığı özelliklerle ilgili ayrıntıları belirlemek](../../../migrate/concepts-assessment-calculation.md) Için Azure geçişi ' ni kullanın. Bu işlem, kullanımdaki sürüm ve özelliklerle kuruluşunuzdaki tüm SQL Server örneklerinizi belirlemek üzere ağı taramayı içerir.
 
 > [!IMPORTANT]
-> SQL Server Örneğiniz için bir hedef Azure sanal makinesi seçerken, [Azure VM 'lerinde SQL Server Için performans kılavuzunu](../../virtual-machines/windows/performance-guidelines-best-practices.md)göz önünde bulundurduğunuzdan emin olun.
+> SQL Server Örneğiniz için bir hedef Azure sanal makinesi seçtiğinizde, [Azure sanal makinelerinde SQL Server Için performans kılavuzunu](../../virtual-machines/windows/performance-guidelines-best-practices.md)göz önünde bulundurduğunuzdan emin olun.
 
-Ek keşif araçları için bkz. veri geçiş senaryoları için kullanılabilen [Hizmetler ve araçlar](../../../dms/dms-tools-matrix.md#business-justification-phase) .
-
+Daha fazla bulma aracı için bkz. veri geçiş senaryoları için kullanılabilen [Hizmetler ve araçlar](../../../dms/dms-tools-matrix.md#business-justification-phase) .
 
 ### <a name="assess"></a>Değerlendirme
 
 [!INCLUDE [assess-estate-with-azure-migrate](../../../../includes/azure-migrate-to-assess-sql-data-estate.md)]
 
-Tüm veri kaynaklarını bulduktan sonra, kaynak ve hedef örnekler arasındaki boşlukları anlamak üzere Azure VM 'de bir SQL Server örneğine geçişi SQL Server değerlendirmek için [Data Migration Yardımcısı (DMA)](/sql/dma/dma-overview) kullanın. 
-
+Tüm veri kaynaklarını bulduktan sonra, kaynak ve hedef örnekler arasındaki boşlukları anlamak üzere Azure sanal makinelerinde bir SQL Server örneğine geçiş yapan şirket içi SQL Server örneklerini değerlendirmek için [Data Migration Yardımcısı](/sql/dma/dma-overview) kullanın.
 
 > [!NOTE]
-> SQL Server sürümünü _yükseltmiyorsanız_ , bu adımı atlayın ve [geçiş](#migrate) bölümüne geçin. 
+> SQL Server sürümünü _yükseltmiyorsanız_ , bu adımı atlayın ve [geçiş](#migrate) bölümüne geçin.
 
+#### <a name="assess-user-databases"></a>Kullanıcı veritabanlarını değerlendirme
 
-#### <a name="assess-user-databases"></a>Kullanıcı veritabanlarını değerlendirme 
+Data Migration Yardımcısı, yeni SQL Server sürümünüzde veritabanı işlevselliğini etkileyebilecek uyumluluk sorunlarını algılayarak modern bir veri platformuna geçişinize yardımcı olur. Data Migration Yardımcısı, hedef ortamınız için performans ve güvenilirlik iyileştirmeleri önerir ve ayrıca, şema, veri ve oturum açma nesnelerinizi kaynak sunucunuzdaki hedef sunucunuza taşımanızı sağlar.
 
-Data Migration Yardımcısı (DMA), yeni SQL Server sürümünüzde veritabanı işlevselliğini etkileyebilecek uyumluluk sorunlarını algılayarak modern bir veri platformuna geçişinize yardımcı olur. DMA, hedef ortamınız için performans ve güvenilirlik iyileştirmeleri önerir ve ayrıca, şema, veri ve oturum açma nesnelerinizi kaynak sunucunuzdaki hedef sunucunuza taşımanızı sağlar.
-
-Daha fazla bilgi için bkz. [değerlendirme](/sql/dma/dma-migrateonpremsql) . 
-
+Daha fazla bilgi için bkz. [değerlendirme](/sql/dma/dma-migrateonpremsql).
 
 > [!IMPORTANT]
->Değerlendirme türüne göre, kaynak SQL Server gereken izinler farklı olabilir. 
-   > - **Özellik eşlik** Danışmanı için, kaynak SQL Server veritabanına bağlanmak için girilen kimlik bilgileri *sysadmin* sunucu rolünün bir üyesi olmalıdır.
-   > - Uyumluluk sorunları Danışmanı için, belirtilen kimlik bilgileri en az `CONNECT SQL` ve izinlerine sahip olmalıdır `VIEW SERVER STATE` `VIEW ANY DEFINITION` .
-   > - DMA, değerlendirmeyi çalıştırmadan önce, seçilen Advisor için gereken izinleri vurgulayacaktır.
+>Değerlendirme türüne göre, kaynak SQL Server gereken izinler farklı olabilir:
+   > - *Özellik eşlik* Danışmanı için, kaynak SQL Server veritabanına bağlanmak için girilen kimlik bilgileri *sysadmin* sunucu rolünün bir üyesi olmalıdır.
+   > - *Uyumluluk sorunları* Danışmanı için, belirtilen kimlik bilgilerinin en az `CONNECT SQL` , `VIEW SERVER STATE` ve izinlerine sahip olması gerekir `VIEW ANY DEFINITION` .
+   > - Data Migration Yardımcısı, değerlendirmeyi çalıştırmadan önce, seçilen Advisor için gereken izinleri vurgulayacaktır.
 
+#### <a name="assess-the-applications"></a>Uygulamaları değerlendirme
 
-#### <a name="assess-applications"></a>Uygulamaları değerlendirme
+Genellikle bir uygulama katmanı, verileri kalıcı hale getirmek ve değiştirmek için Kullanıcı veritabanlarına erişir. Data Migration Yardımcısı, bir uygulamanın veri erişim katmanını iki şekilde değerlendirebilirler:
 
-Genellikle bir uygulama katmanı, verileri kalıcı hale getirmek ve değiştirmek için Kullanıcı veritabanlarına erişir.  DMA, bir uygulamanın veri erişim katmanını iki şekilde değerlendirebilirler: 
+- Yakalanan [Genişletilmiş olayları](/sql/relational-databases/extended-events/extended-events) veya Kullanıcı veritabanlarınızın [SQL Server Profiler izlemelerini](/sql/tools/sql-server-profiler/create-a-trace-sql-server-profiler) kullanarak. Ayrıca, A/B testi için de kullanılabilecek bir izleme günlüğü oluşturmak için [veritabanı yükseltme deneyimi Yardımcısı](/sql/dea/database-experimentation-assistant-capture-trace) de kullanabilirsiniz.
+- Kod içinde SQL sorgularının bulunmasını ve değerlendirmesini sağlayan [veri erişimi geçiş araç seti 'ni (Önizleme)](https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit)kullanarak, uygulama kaynak kodunu bir veritabanı platformundan diğerine geçirmek için kullanılır. Bu araç C#, Java, XML ve düz metin gibi popüler dosya türlerini destekler. Veri erişimi geçiş araç seti değerlendirmesi gerçekleştirme hakkında bir kılavuz için [Data Migration Yardımcısı](https://techcommunity.microsoft.com/t5/microsoft-data-migration/using-data-migration-assistant-to-assess-an-application-s-data/ba-p/990430) blog gönderisine bakın.
 
-- Yakalanan [Genişletilmiş olayları](/sql/relational-databases/extended-events/extended-events) veya Kullanıcı veritabanlarınızın [SQL Server Profiler izlemelerini ](/sql/tools/sql-server-profiler/create-a-trace-sql-server-profiler) kullanma. Ayrıca, A/B testi için de kullanılabilecek bir izleme günlüğü oluşturmak için [veritabanı yükseltme deneyimi Yardımcısı](/sql/dea/database-experimentation-assistant-capture-trace) de kullanabilirsiniz.
+Kullanıcı veritabanlarının değerlendirmesi sırasında, yakalanan izleme dosyalarını veya veri erişimi geçiş araç seti dosyalarını [içeri aktarmak](/sql/dma/dma-assesssqlonprem#add-databases-and-extended-events-trace-to-assess) için Data Migration Yardımcısı kullanın.
 
-- Kod içinde SQL sorgularının bulunmasını ve değerlendirmesini sağlayan [veri erişimi geçiş araç seti 'ni (Önizleme)](https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit) (ZMT) kullanarak uygulama kaynak kodunu bir veritabanı platformundan diğerine geçirmek için kullanılır. Bu araç C# ve Java, XML ve Plaınt metinler dahil olmak üzere çeşitli popüler dosya türlerini destekler. Bir DAVMT değerlendirmesi gerçekleştirmeye yönelik bir kılavuz için bkz. [dvade blog kullanma](https://techcommunity.microsoft.com/t5/microsoft-data-migration/using-data-migration-assistant-to-assess-an-application-s-data/ba-p/990430) .
+#### <a name="assessments-at-scale"></a>Ölçekte değerlendirmeler
 
-Kullanıcı veritabanlarının değerlendirmesi sırasında yakalanan izleme dosyalarını veya DAVMT dosyalarını [içeri aktarmak](/sql/dma/dma-assesssqlonprem#add-databases-and-extended-events-trace-to-assess) için DMA 'yı kullanın. 
+Data Migration Yardımcısı değerlendirmesi gerektiren birden çok sunucunuz varsa, [komut satırı arabirimini](/sql/dma/dma-commandline)kullanarak işlemi otomatikleştirebilirsiniz. Arabirimini kullanarak, geçirme kapsamındaki her bir SQL Server örneği için değerlendirme komutlarını önceden hazırlayabilirsiniz.
 
+Büyük Estates genelinde Özet raporlama için Data Migration Yardımcısı değerlendirmeleri artık [Azure geçişi](/sql/dma/dma-assess-sql-data-estate-to-sqldb)'nde birleştirilebilir.
 
-#### <a name="scale-assessments"></a>Ölçek değerlendirmeleri
+#### <a name="refactor-databases-with-data-migration-assistant"></a>Data Migration Yardımcısı ile veritabanlarını yeniden düzenleme
 
-DMA değerlendirmesi gerektiren birden çok sunucunuz varsa, [komut satırı arabirimi](/sql/dma/dma-commandline)aracılığıyla işlemi otomatikleştirebilirsiniz. Arabirimini kullanarak, geçirme kapsamındaki her bir SQL Server örneği için değerlendirme komutlarını önceden hazırlayabilirsiniz. 
+Data Migration Yardımcısı değerlendirme sonuçlarına göre, Kullanıcı veritabanlarınızı geçişten sonra doğru şekilde gerçekleştirmesini ve çalışmasını sağlamak için bir dizi öneriniz olabilir. Data Migration Yardımcısı, etkilenen nesneler ve her bir sorunun nasıl çözüleceği hakkında ayrıntılı bilgi sağlar. Üretim geçiş işlemine başlamadan önce tüm kırılmaya karşı değişiklikleri ve davranış değişikliklerini çözdiğinizden emin olun.
 
-Büyük Estates üzerinde Özet raporlama için Data Migration Yardımcısı (DMA) değerlendirmeleri artık [Azure geçişi](/sql/dma/dma-assess-sql-data-estate-to-sqldb)ile birleştirilebilir.
+Kullanım dışı bırakılan özellikler için, bu değişiklikleri yapmaktan kaçınmak ve geçişi hızlandırmak istiyorsanız, Kullanıcı veritabanlarınızı orijinal [Uyumluluk](/sql/t-sql/statements/alter-database-transact-sql-compatibility-level) modunda çalıştırmayı seçebilirsiniz. Bu eylem, kullanım dışı bırakılan öğeler çözümlenene kadar [veritabanı uyumluluğuna yükseltmeyi](/sql/database-engine/install-windows/compatibility-certification#compatibility-levels-and-database-engine-upgrades) engeller.
 
-#### <a name="refactor-databases-with-dma"></a>DMA ile veritabanlarını yeniden düzenleme
-
-DMA değerlendirmesi sonuçlarına bağlı olarak, Kullanıcı veritabanınızın geçişten sonra doğru şekilde çalışmasını sağlamak için bir dizi öneriniz olabilir. DMA, etkilenen nesneler ve her bir sorunu çözme kaynakları hakkında ayrıntılar sağlar. Tüm son değişiklikler ve davranış değişikliklerinin üretim geçişinden önce çözümlenmesi önerilir.
-
-Kullanım dışı bırakılan özellikler için, bu değişiklikleri yapmaktan kaçınmak ve geçişi hızlandırmak istiyorsanız Kullanıcı veritabanınızı özgün [Uyumluluk](/sql/t-sql/statements/alter-database-transact-sql-compatibility-level) modunda çalıştırmayı tercih edebilirsiniz. Ancak, bu, kullanım dışı bırakılan öğeler çözümlenene kadar [veritabanı uyumluluğuna yükseltme](/sql/database-engine/install-windows/compatibility-certification#compatibility-levels-and-database-engine-upgrades) yapılmasını engeller.
-
-Tüm DMA düzeltmelerinin, [geçiş sonrası](#post-migration)için komut dosyası ve hedef SQL Server veritabanına uygulanması önemle önerilir.
+Tüm Data Migration Yardımcısı düzeltmelerini betikten sonra [geçiş sonrası](#post-migration) aşamasında hedef SQL Server veritabanına uygulamanız gerekir.
 
 > [!CAUTION]
-> Tüm SQL Server sürümleri tüm uyumluluk modlarını desteklemez. [Hedef SQL Server sürümünüzün](/sql/t-sql/statements/alter-database-transact-sql-compatibility-level) seçtiğiniz veritabanı uyumluluğunu desteklediğinden emin olun. Örneğin, SQL Server 2019, düzey 90 uyumluluğu olan veritabanlarını desteklemez (SQL Server 2005). Bu veritabanları, en azından uyumluluk düzeyi 100 ' e yükseltme yapılmasını gerektirir.
+> Tüm SQL Server sürümleri tüm uyumluluk modlarını desteklemez. [Hedef SQL Server sürümünüzün](/sql/t-sql/statements/alter-database-transact-sql-compatibility-level) seçtiğiniz veritabanı uyumluluğunu desteklediğinden emin olun. Örneğin SQL Server 2019, düzey 90 uyumluluğu olan veritabanlarını desteklemez (SQL Server 2005). Bu veritabanları, en azından uyumluluk düzeyi 100 ' e yükseltme yapılmasını gerektirir.
 >
 
 ## <a name="migrate"></a>Geçiş
 
-Geçiş öncesi adımları tamamladıktan sonra, Kullanıcı veritabanlarını ve bileşenlerini geçirmeye hazırlanın. Tercih ettiğiniz [geçiş yönteminizi](sql-server-to-sql-on-azure-vm-migration-overview.md#migrate)kullanarak veritabanlarınızı geçirin.  
+Geçiş öncesi adımları tamamladıktan sonra, Kullanıcı veritabanlarını ve bileşenlerini geçirmeye hazırsınız demektir. Tercih ettiğiniz [geçiş yönteminizi](sql-server-to-sql-on-azure-vm-migration-overview.md#migrate)kullanarak veritabanlarınızı geçirin.
 
-Aşağıdakiler, yedekleme ve geri yükleme kullanarak bir geçiş gerçekleştirmeye ya da yedekleme ve geri yükleme ile günlük aktarımına kadar en az kesinti süresi geçişine yönelik adımlar sağlar. 
+Aşağıdaki bölümlerde yedekleme ve geri yükleme kullanarak bir geçiş gerçekleştirme adımları ya da yedekleme ve geri yükleme kullanarak günlük aktarma ile birlikte en az kesinti süresi geçişi sağlanmaktadır.
 
 ### <a name="backup-and-restore"></a>Yedekleme ve geri yükleme
 
-Yedekleme ve geri yükleme kullanarak standart bir geçiş gerçekleştirmek için aşağıdaki adımları izleyin: 
+Yedekleme ve geri yükleme kullanarak standart bir geçiş gerçekleştirmek için:
 
-1. Gereksinimlerinize göre Azure VM 'de hedef SQL Server bağlantı kurun. Bkz. [Azure 'da SQL Server sanal makinesine bağlanma (Kaynak Yöneticisi)](../../virtual-machines/windows/ways-to-connect-to-sql.md).
-1. Geçiş için tasarlanan veritabanlarını kullanan tüm uygulamaları duraklatın/durdurun. 
-1. Kullanıcı veritabanlarının [Tek Kullanıcı modu](/sql/relational-databases/databases/set-a-database-to-single-user-mode)kullanılarak etkin olmadığından emin olun. 
+1. Gereksinimlerinize göre Azure sanal makinelerinde SQL Server bağlantı kurun. Daha fazla bilgi için bkz. [Azure 'da SQL Server sanal makinesine bağlanma (Kaynak Yöneticisi)](../../virtual-machines/windows/ways-to-connect-to-sql.md).
+1. Geçiş için tasarlanan veritabanlarını kullanan tüm uygulamaları duraklatın veya durdurun.
+1. [Tek Kullanıcı modu](/sql/relational-databases/databases/set-a-database-to-single-user-mode)kullanılarak kullanıcı veritabanlarının etkin olmadığından emin olun.
 1. Şirket içi bir konumda tam bir veritabanı yedeklemesi gerçekleştirin.
-1. Şirket içi yedekleme dosyanızı Uzak Masaüstü, [Azure Veri Gezgini](/azure/data-explorer/data-explorer-overview)veya [AzCopy komut satırı YARDıMCı programını](../../../storage/common/storage-use-azcopy-v10.md) kullanarak sanal makinenize kopyalayın (> 2 TB 'lık yedeklemeler önerilir).
-1. Tam veritabanı yedeklerini Azure VM 'de SQL Server geri yükleyin.
+1. Şirket içi Yedekleme dosyalarınızı, Uzak Masaüstü, [Azure Veri Gezgini](/azure/data-explorer/data-explorer-overview)veya [AzCopy komut satırı YARDıMCı programını](../../../storage/common/storage-use-azcopy-v10.md)kullanarak sanal makinenize kopyalayın. (2 TB 'den büyük yedeklemeler önerilir.)
+1. Tam veritabanı yedeklemelerini Azure sanal makinelerinde SQL Server geri yükleyin.
 
-### <a name="log-shipping--minimize-downtime"></a>Günlük aktarma (kapalı kalma süresini en aza indir)
+### <a name="log-shipping-minimize-downtime"></a>Günlük aktarma (kapalı kalma süresini en aza indir)
 
-Yedekleme, geri yükleme ve günlük dağıtımını kullanarak en az bir kesinti süresi geçişi gerçekleştirmek için şu adımları izleyin: 
+Yedekleme ve geri yükleme ve günlük aktarma kullanarak en az bir kesinti süresi geçişi gerçekleştirmek için:
 
-1. Gereksinimlerinize göre Azure VM 'de hedef SQL Server bağlantı kurun. Bkz. [Azure 'da SQL Server sanal makinesine bağlanma (Kaynak Yöneticisi)](../../virtual-machines/windows/ways-to-connect-to-sql.md).
+1. Gereksinimlerinize göre Azure sanal makinelerinde SQL Server bağlantı kurun. Daha fazla bilgi için bkz. [Azure 'da SQL Server sanal makinesine bağlanma (Kaynak Yöneticisi)](../../virtual-machines/windows/ways-to-connect-to-sql.md).
 1. Geçirilecek şirket içi kullanıcı veritabanlarının tam veya toplu olarak günlüğe kaydedilmiş kurtarma modelinde olduğundan emin olun.
-1. Şirket içi bir konumda tam bir veritabanı yedeklemesi gerçekleştirin ve günlük zincirini korumak için [copy_only](/sql/relational-databases/backup-restore/copy-only-backups-sql-server) anahtar sözcüğünü kullanmak üzere mevcut tüm veritabanı yedeklemeleri işlerini değiştirin.
-1. Şirket içi yedekleme dosyanızı Uzak Masaüstü, [Azure Veri Gezgini](/azure/data-explorer/data-explorer-overview)veya [AzCopy komut satırı YARDıMCı programını](../../../storage/common/storage-use-azcopy-v10.md) kullanarak sanal makinenize kopyalayın (>1-TB yedeklemeleri önerilir).
-1. Azure VM 'de SQL Server tam veritabanı yedeklerini geri yükleyin.
-1. Azure VM 'de şirket içi veritabanı ve hedef SQL Server arasındaki [günlük dağıtımını](/sql/database-engine/log-shipping/configure-log-shipping-sql-server) ayarlayın. Önceki adımlarda zaten tamamlanmış olduğundan, veritabanlarını yeniden denetlediğinizden emin olun.
-1. Hedef sunucuya **kesin** . 
-   1. Geçirilecek veritabanlarını kullanarak uygulamaları duraklatın/durdurun. 
-   1. Kullanıcı veritabanlarının [Tek Kullanıcı modu](/sql/relational-databases/databases/set-a-database-to-single-user-mode)kullanılarak etkin olmadığından emin olun. 
-   1. Hazırlık sırasında, Azure VM 'de SQL Server hedeflemek için şirket içi veritabanlarının [yükünü devretmek](/sql/database-engine/log-shipping/fail-over-to-a-log-shipping-secondary-sql-server) için bir günlük aktarma işlemi gerçekleştirin.
+1. Şirket içi bir konumda tam bir veritabanı yedeklemesi gerçekleştirin ve var olan tüm veritabanı yedeklemeleri işlerini, günlük zincirini korumak için [copy_only](/sql/relational-databases/backup-restore/copy-only-backups-sql-server) anahtar sözcüğünü kullanacak şekilde değiştirin.
+1. Şirket içi Yedekleme dosyalarınızı, Uzak Masaüstü, [Azure Veri Gezgini](/azure/data-explorer/data-explorer-overview)veya [AzCopy komut satırı YARDıMCı programını](../../../storage/common/storage-use-azcopy-v10.md)kullanarak sanal makinenize kopyalayın. (1 TB 'den büyük yedeklemeler önerilir.)
+1. Azure sanal makinelerinde SQL Server tam veritabanı yedeklerini geri yükleyin.
+1. Azure sanal makinelerinde şirket içi veritabanı ve SQL Server [günlük dağıtımını](/sql/database-engine/log-shipping/configure-log-shipping-sql-server) ayarlayın. Bu görev önceki adımlarda zaten tamamlanmış olduğundan, veritabanlarını yeniden başlatmanız gerektiğinden emin olun.
+1. Hedef sunucuya kesin.
+   1. Geçirilecek veritabanlarını kullanarak uygulamaları duraklatın veya durdurun.
+   1. [Tek Kullanıcı modu](/sql/relational-databases/databases/set-a-database-to-single-user-mode)kullanılarak kullanıcı veritabanlarının etkin olmadığından emin olun.
+   1. Hazırsanız, Azure sanal makinelerinde SQL Server için şirket içi veritabanlarının bir günlük gönderimi [denetimli yük devretmesini](/sql/database-engine/log-shipping/fail-over-to-a-log-shipping-secondary-sql-server) gerçekleştirin.
 
+### <a name="migrate-objects-outside-user-databases"></a>Nesneleri kullanıcı veritabanlarının dışına geçirme
 
+Kullanıcı veritabanlarınızın kesintisiz çalışması için daha fazla SQL Server nesne gerekli olabilir.
 
-### <a name="migrating-objects-outside-user-databases"></a>Nesneleri kullanıcı veritabanlarının dışına geçirme
-
-Kullanıcı veritabanlarınızın sorunsuz çalışması için gerekli olan ek SQL Server nesneleri geçiş sonrası olabilir. 
-
-Aşağıdaki tabloda, Kullanıcı veritabanlarınızı geçişten önce veya sonra tamamlanmakta olan bir liste bileşeni ve önerilen geçiş yöntemleri verilmiştir: 
-
+Aşağıdaki tabloda, Kullanıcı veritabanlarınızın geçişten önce veya sonra tamamlanabilmesi için bileşenlerin ve önerilen geçiş yöntemlerinin bir listesi verilmiştir.
 
 | **Özellik** | **Bileşen** | **Geçiş yöntemleri** |
 | --- | --- | --- |
-| **Veritabanları** | Modelleme  | SQL Server Management Studio betiği |
-|| 'Nin | TempDB 'yi en iyi performans için [Azure VM geçici diskine (SSD](../../virtual-machines/windows/performance-guidelines-best-practices.md#temporary-disk)) taşımayı planlayın. TempDB 'nize uyum sağlamak için yeterli yerel SSD 'ye sahip bir VM boyutu seçtiğinizden emin olun. |
-|| FILESTREAM ile kullanıcı veritabanları |  Geçiş için [yedekleme ve geri yükleme](../../virtual-machines/windows/migrate-to-vm-from-sql-server.md#back-up-and-restore) yöntemlerini kullanın. DMA, FILESTREAM ile veritabanlarını desteklemez. |
-| **Güvenlik** | SQL Server ve Windows oturumu açma | [Kullanıcı oturumlarını geçirmek](/sql/dma/dma-migrateserverlogins)için DMA 'yı kullanın. |
-|| SQL Server rolleri | SQL Server Management Studio betiği |
-|| Şifreleme sağlayıcıları | [Azure Key Vault hizmeti kullanmak için dönüştürmeyi](../../virtual-machines/windows/azure-key-vault-integration-configure.md)öneririz. Bu yordam, [SQL VM kaynak sağlayıcısını](../../virtual-machines/windows/sql-agent-extension-manually-register-single-vm.md)kullanır. |
-| **Sunucu nesneleri** | Yedekleme cihazları | [Azure Backup hizmetini](../../../backup/backup-sql-server-database-azure-vms.md) kullanarak veritabanı yedekleme ile değiştirin veya yedeklemeleri [Azure Storage](../../virtual-machines/windows/azure-storage-sql-server-backup-restore-use.md) 'a YAZıN (SQL Server 2012 SP1 CU2 uygulamazsanız +). Bu yordam, [SQL VM kaynak sağlayıcısını](../../virtual-machines/windows/sql-agent-extension-manually-register-single-vm.md)kullanır.|
-|| Bağlantılı Sunucular | SQL Server Management Studio betiği. |
+| **Veritabanları** | Modelleme | SQL Server Management Studio betiği. |
+|| 'Nin | En iyi performansı elde etmek için tempDB 'yi [Azure VM geçici diskine (SSD)](../../virtual-machines/windows/performance-guidelines-best-practices.md#temporary-disk)taşımayı planlayın. TempDB 'nize uyum sağlamak için yeterli yerel SSD 'ye sahip bir VM boyutu seçtiğinizden emin olun. |
+|| FILESTREAM ile kullanıcı veritabanları | Geçiş için [yedekleme ve geri yükleme](../../virtual-machines/windows/migrate-to-vm-from-sql-server.md#back-up-and-restore) yöntemlerini kullanın. Data Migration Yardımcısı FILESTREAM ile veritabanlarını desteklemez. |
+| **Güvenlik** | SQL Server ve Windows oturumu açma | [Kullanıcı oturumlarını geçirmek](/sql/dma/dma-migrateserverlogins)için Data Migration Yardımcısı kullanın. |
+|| SQL Server rolleri | SQL Server Management Studio betiği. |
+|| Şifreleme sağlayıcıları | [Azure Key Vault kullanmak için dönüştürmeyi](../../virtual-machines/windows/azure-key-vault-integration-configure.md)öneririz. Bu yordam, [SQL VM kaynak sağlayıcısını](../../virtual-machines/windows/sql-agent-extension-manually-register-single-vm.md)kullanır. |
+| **Sunucu nesneleri** | Yedekleme cihazları | [Azure Backup](../../../backup/backup-sql-server-database-azure-vms.md)kullanarak veritabanı yedeğiyle değiştirin veya [Azure Storage](../../virtual-machines/windows/azure-storage-sql-server-backup-restore-use.md) 'a yedeklemeler YAZıN (SQL Server 2012 SP1 CU2 uygulamazsanız +). Bu yordam, [SQL VM kaynak sağlayıcısını](../../virtual-machines/windows/sql-agent-extension-manually-register-single-vm.md)kullanır.|
+|| Bağlı sunucular | SQL Server Management Studio betiği. |
 || Sunucu Tetikleyicileri | SQL Server Management Studio betiği. |
 | **Çoğaltma** | Yerel yayınlar | SQL Server Management Studio betiği. |
 || Yerel aboneler | SQL Server Management Studio betiği. |
-| **Polybase** | Polybase | SQL Server Management Studio betiği. |
-| **Yönetim** | Veritabanı Postası | SQL Server Management Studio betiği. |
+| **PolyBase** | PolyBase | SQL Server Management Studio betiği. |
+| **Yönetim** | Veritabanı posta | SQL Server Management Studio betiği. |
 | **SQL Server Agent** | İşler | SQL Server Management Studio betiği. |
 || Uyarılar | SQL Server Management Studio betiği. |
 || İşleçler | SQL Server Management Studio betiği. |
 || Kullanıldığı | SQL Server Management Studio betiği. |
-| **İşletim Sistemi** | Dosyalar, dosya paylaşımları | SQL sunucularınız tarafından kullanılan ve Azure VM hedefinde çoğaltılan ek dosya veya dosya paylaşımlarını bir yere unutmayın. |
-
+| **İşletim sistemi** | Dosyalar, dosya paylaşımları | SQL sunucularınız tarafından kullanılan ve Azure sanal makineler hedefinde çoğaltılan diğer dosya veya dosya paylaşımlarını da unutmayın. |
 
 ## <a name="post-migration"></a>Geçiş sonrası
 
-Geçiş aşamasını başarıyla tamamladıktan sonra, her şeyin mümkün olduğunca sorunsuz ve etkili bir şekilde çalıştığından emin olmak için bir dizi geçiş sonrası görevi izleyin.
+Geçiş aşamasını başarılı bir şekilde tamamladıktan sonra, her şeyin olabildiğince sorunsuz ve etkili bir şekilde çalıştığından emin olmak için bir dizi geçiş sonrası görevi gerçekleştirmeniz gerekir.
 
 ### <a name="remediate-applications"></a>Uygulamaları düzelt
 
-Veriler hedef ortama geçirildikten sonra, daha önce kaynağı tüketen tüm uygulamaların hedefi tüketmeye başlaması gerekir. Bu işlem, bazı durumlarda uygulamalarda değişiklik yapılmasını gerektirebilir.
+Veriler hedef ortama geçirildikten sonra, daha önce kaynağı tüketen tüm uygulamaların hedefi tüketmeye başlaması gerekir. Bu görevi yerine getirmeye yönelik bazı durumlarda uygulamalarda değişiklik yapılması gerekebilir.
 
-Herhangi bir veritabanını önerilen düzeltmeleri Geçiş Yardımcısı Kullanıcı veritabanına uygulayın. Bunların tutarlılığını sağlamak ve otomasyon için izin vermek üzere komut dosyası kullanılması önerilir.
+Kullanıcı veritabanlarına Data Migration Yardımcısı tarafından önerilen düzeltmeleri uygulayın. Tutarlılık sağlamak ve otomasyon için izin vermek üzere bu düzeltmeleri betikten sonra yapmanız gerekir.
 
 ### <a name="perform-tests"></a>Testleri gerçekleştirme
 
-Veritabanı geçişi için test yaklaşımı aşağıdaki etkinlikleri gerçekleştirmekten oluşur:
+Veritabanı geçişine test yaklaşımı aşağıdaki etkinliklerden oluşur:
 
-1. **Doğrulama testlerini geliştirin.**  Veritabanı geçişlerini test etmek için SQL sorguları kullanın. Hem kaynak hem de hedef veritabanlarında çalıştırılacak doğrulama sorguları oluşturun. Doğrulama sorgularınız tanımladığınız kapsamı kapsamalıdır.
-2. **Test ortamını ayarlayın.**  Test ortamı, kaynak veritabanının ve hedef veritabanının bir kopyasını içermelidir. Test ortamını yalıtdığınızdan emin olun.
-3. **Doğrulama testlerini çalıştırın.**  Doğrulama testlerini kaynak ve hedefe göre çalıştırın ve sonra sonuçları çözümleyin.
-4. **Performans testlerini çalıştırın.**  Kaynak ve hedefte performans testi çalıştırın ve ardından sonuçları çözümleyip karşılaştırın.
+1. **Doğrulama testleri geliştirme**: veritabanı geçişini test etmek için SQL sorguları kullanmanız gerekir. Hem kaynak hem de hedef veritabanlarında çalıştırılacak doğrulama sorguları oluşturun. Doğrulama sorgularınız tanımladığınız kapsamı kapsamalıdır.
+1. **Test ortamı ayarlama**: test ortamı, kaynak veritabanının ve hedef veritabanının bir kopyasını içermelidir. Test ortamını yalıtdığınızdan emin olun.
+1. **Doğrulama testlerini Çalıştır**: doğrulama testlerini kaynak ve hedefe göre çalıştırın ve sonra sonuçları çözümleyin.
+1. **Performans testlerini çalıştırın**: kaynak ve hedefte performans testlerini çalıştırın ve ardından sonuçları çözümleyip karşılaştırın.
 
 > [!TIP]
-> Hedef SQL Server performansını değerlendirmeye yardımcı olması için [veritabanı yükseltme deneyimi Yardımcısı (DEA)](/sql/dea/database-experimentation-assistant-overview) kullanın.
-
+> Hedef SQL Server performansını değerlendirmeye yardımcı olması için [veritabanı yükseltme deneyimi Yardımcısı](/sql/dea/database-experimentation-assistant-overview) kullanın.
 
 ### <a name="optimize"></a>İyileştirme
 
-Geçiş sonrası aşaması, veri doğruluğu ve bütünlüğü ile ilgili sorunları gidermek için ve iş yüküyle ilgili olası performans sorunlarını ele almak için önemlidir.
+Geçiş sonrası aşaması, tüm veri doğruluğu sorunlarını mutabık kılma, performansı doğrulamak ve iş yüküyle ilgili olası performans sorunlarını ele almak için önemlidir.
 
-Bu sorunlar ve bu sorunları hafifletmek için özel adımlar hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
+Bu sorunlar ve bunları azaltmaya yönelik adımlar hakkında daha fazla bilgi için, bkz.:
 
-- [Geçiş sonrası doğrulama ve Iyileştirme Kılavuzu.](/sql/relational-databases/post-migration-validation-and-optimization-guide)
-- [Azure SQL sanal makinelerinde performansı ayarlama](../../virtual-machines/windows/performance-guidelines-best-practices.md).
-- [Azure maliyet iyileştirme merkezi](https://azure.microsoft.com/overview/cost-optimization/).
+- [Geçiş sonrası doğrulama ve iyileştirme Kılavuzu](/sql/relational-databases/post-migration-validation-and-optimization-guide)
+- [Azure SQL sanal makinelerinde performansı ayarlama](../../virtual-machines/windows/performance-guidelines-best-practices.md)
+- [Azure maliyet iyileştirme Merkezi](https://azure.microsoft.com/overview/cost-optimization/)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- SQL Server geçerli hizmetlerin kullanılabilirliğini denetlemek için bkz. [Azure küresel altyapı merkezi](https://azure.microsoft.com/global-infrastructure/services/?regions=all&amp;products=synapse-analytics,virtual-machines,sql-database)
-
-- Çeşitli veritabanı ve veri geçişi senaryolarında ve özel görevlerin yanı sıra size yardımcı olmak için kullanabileceğiniz Microsoft ve üçüncü taraf hizmet ve araçların bir matrisi için, [veri geçişi Için hizmet ve araçlar](../../../dms/dms-tools-matrix.md) makalesine bakın.
-
+- SQL Server için uygulanan hizmetlerin kullanılabilirliğini denetlemek için bkz. [Azure genel altyapı merkezi](https://azure.microsoft.com/global-infrastructure/services/?regions=all&amp;products=synapse-analytics,virtual-machines,sql-database).
+- Çeşitli veritabanı ve veri geçişi senaryolarında ve özel görevlerde size yardımcı olabilecek Microsoft ve üçüncü taraf hizmet ve araçların bir matrisi için bkz. [veri geçişi Için hizmetler ve araçlar](../../../dms/dms-tools-matrix.md).
 - Azure SQL hakkında daha fazla bilgi için bkz.
    - [Dağıtım seçenekleri](../../azure-sql-iaas-vs-paas-what-is-overview.md)
-   - [Azure VM’lerinde SQL Server](../../virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview.md)
-   - [Azure toplam sahiplik Hesaplayıcı maliyeti](https://azure.microsoft.com/pricing/tco/calculator/) 
+   - [Azure Sanal Makineler'de SQL Server](../../virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview.md)
+   - [Azure toplam sahip olma maliyeti (TCO) Hesaplayıcı](https://azure.microsoft.com/pricing/tco/calculator/)
 
+- Bulut geçişleri için çerçeve ve benimseme çevrimi hakkında daha fazla bilgi edinmek için bkz.:
+   - [Azure için Bulut Benimseme Çerçevesi](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
+   - [Azure 'a geçiş için iş yüklerini maliyetlendirme ve boyutlandırma için en iyi yöntemler](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)
 
-- Bulut geçişleri için çerçeve ve benimseme çevrimi hakkında daha fazla bilgi edinmek için bkz.
-   -  [Azure için Bulut Benimseme Çerçevesi](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
-   -  [İş yüklerini maliyetlendirme ve boyutlandırma için en iyi yöntemler Azure 'a geçiş](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs) 
-
-- Lisanslama hakkında daha fazla bilgi için bkz.
+- Lisanslama hakkında daha fazla bilgi için bkz.:
    - [Azure Hibrit Avantajı kendi lisansınızı getirin](../../virtual-machines/windows/licensing-model-azure-hybrid-benefit-ahb-change.md)
    - [SQL Server 2008 ve SQL Server 2008 R2 için ücretsiz genişletilmiş destek alın](../../virtual-machines/windows/sql-server-2008-extend-end-of-support.md)
 
-
-- Uygulama erişim katmanını değerlendirmek için bkz. [veri erişimi geçiş araç seti (Önizleme)](https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit)
-- Veri erişim katmanını bir/B testi gerçekleştirme hakkında daha fazla bilgi için bkz. [veritabanı yükseltme deneyimi Yardımcısı](/sql/dea/database-experimentation-assistant-overview).
+- Uygulama erişim katmanını değerlendirmek için bkz. [veri erişimi geçiş araç seti (Önizleme)](https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit).
+- Veri erişim katmanı için A/B testi gerçekleştirme hakkında daha fazla bilgi için bkz. [veritabanı yükseltme deneyimi Yardımcısı genel bakış](/sql/dea/database-experimentation-assistant-overview).

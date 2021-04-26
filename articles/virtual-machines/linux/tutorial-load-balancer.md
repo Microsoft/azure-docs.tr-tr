@@ -1,47 +1,42 @@
 ---
-title: Öğretici-Azure 'da Linux sanal makinelerinin yükünü dengeleyin
+title: Öğretici-yüksek kullanılabilirlik için VM 'Lerin yükünü dengeleyin
 description: Bu öğreticide, üç Linux sanal makinesi arasında yüksek kullanılabilirliğe sahip ve güvenli uygulama için bir yük dengeleyici oluşturmak üzere Azure CLI kullanmayı öğreneceksiniz
-services: virtual-machines
-documentationcenter: virtual-machines
 author: cynthn
-manager: gwallace
-tags: azure-resource-manager
 ms.subservice: networking
-ms.assetid: ''
 ms.service: virtual-machines
 ms.collection: linux
 ms.devlang: azurecli
 ms.topic: tutorial
-ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 11/13/2017
+ms.date: 04/20/2021
 ms.author: cynthn
 ms.custom: mvc, devx-track-js, devx-track-azurecli
-ms.openlocfilehash: 433bbd51618cfb5624c8ed2c549e1793488f0e81
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 191eb1338533cf1a5f81f4d04c5dfc6fd5cc569c
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102553774"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818755"
 ---
-# <a name="tutorial-load-balance-linux-virtual-machines-in-azure-to-create-a-highly-available-application-with-the-azure-cli"></a>Öğretici: Azure CLI ile yüksek oranda kullanılabilir bir uygulama oluşturmak için Azure’da Linux sanal makinelerinde yük dengeleme
+# <a name="tutorial-load-balance-vms-for-high-availability"></a>Öğretici: yüksek kullanılabilirlik için VM 'Lerin yükünü dengeleme
 
 Yük dengeleme, gelen istekleri birden çok sanal makineye dağıtarak yüksek düzeyde kullanılabilirlik sunar. Bu öğreticide, Azure yük dengeleyicisinin trafiği dağıtan ve yüksek kullanılabilirlik sağlayan farklı bileşenleri hakkında bilgi edinebilirsiniz. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Azure yük dengeleyici oluşturma
-> * Yük dengeleyici durum yoklaması oluşturma
-> * Yük dengeleyici trafik kuralları oluşturma
-> * Basit bir Node.js uygulaması oluşturmak için cloud-init kullanma
-> * Sanal makineler oluşturma ve yük dengeleyici oluşturma
-> * Çalışan yük dengeleyiciyi görüntüleme
-> * VM’leri yük dengeleyiciye ekleme ve kaldırma
+> * Yük dengeleyici oluşturma
+> * Durum araştırması oluşturma
+> * Trafik kuralları oluşturma
+> * Temel bir Node.js uygulamasını yüklemek için Cloud-init kullanma
+> * Sanal makineler oluşturma ve bunları yük dengeleyiciye iliştirme
+> * Yük dengeleyiciyi eylemde görüntüleme
+> * Yük dengeleyiciden VM ekleme ve kaldırma
 
 Bu öğretici, en son sürüme sürekli olarak güncellenen [Azure Cloud Shell](../../cloud-shell/overview.md)içindeki CLI 'yi kullanır. Cloud Shell açmak için herhangi bir kod bloğunun en üstünden **deneyin** ' i seçin.
 
 CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu öğretici için Azure CLI 2.0.30 veya sonraki bir sürümünü çalıştırmanız gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme]( /cli/azure/install-azure-cli).
 
 ## <a name="azure-load-balancer-overview"></a>Azure yük dengeleyiciye genel bakışı
+
 Azure yük dengeleyici, gelen trafiği iyi durumdaki VM'ler arasında dağıtmak için yüksek kullanılabilirlik sağlayan bir 4. Katman (TCP, UDP) yük dengeleyicidir. Yük dengeleyici durum araştırması, her VM'deki belirli bir bağlantı noktasını izler ve trafiği yalnızca çalışır durumdaki VM'lere yönlendirir.
 
 Bir veya daha fazla genel IP adresi içeren bir ön uç IP yapılandırması tanımlayın. Bu ön uç IP yapılandırması yük dengeleyicinize ve uygulamalarınıza İnternet üzerinden erişilmesine izin verir. 

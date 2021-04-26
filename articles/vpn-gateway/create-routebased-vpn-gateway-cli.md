@@ -7,12 +7,12 @@ ms.service: vpn-gateway
 ms.topic: how-to
 ms.date: 09/02/2020
 ms.author: cherylmc
-ms.openlocfilehash: 2bbd7e39ee65ba304ec62697b6fcc77bea133b41
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 87e3490711990944e017d2d463090f3c8697956c
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94737295"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484243"
 ---
 # <a name="create-a-route-based-vpn-gateway-using-cli"></a>CLı kullanarak rota temelli VPN ağ geçidi oluşturma
 
@@ -74,7 +74,7 @@ az network public-ip create \
 
 ## <a name="create-the-vpn-gateway"></a><a name="CreateGateway"></a>VPN ağ geçidini oluşturma
 
-[az network vnet-gateway create](/cli/azure/group) komutunu kullanarak VPN ağ geçidini oluşturun.
+[az network vnet-gateway create](/cli/azure/network/vnet-gateway) komutunu kullanarak VPN ağ geçidini oluşturun.
 
 Bu komutu parametresini kullanarak çalıştırırsanız `--no-wait` , hiçbir geri bildirim veya çıkış görmezsiniz. `--no-wait`Parametresi, ağ geçidinin arka planda oluşturulmasına olanak tanır. VPN ağ geçidinin hemen oluşturulduğu anlamına gelmez.
 

@@ -3,12 +3,14 @@ title: 'Hızlı başlangıç: portalda bir şema oluşturma'
 description: Bu hızlı başlangıçta, Azure portal aracılığıyla yapıtlar oluşturmak, tanımlamak ve dağıtmak için Azure şemaları kullanırsınız.
 ms.date: 01/27/2021
 ms.topic: quickstart
-ms.openlocfilehash: 75a4e9deca4859ac8b9f302fcb62ecc1d12dd8c9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom:
+- mode-portal
+ms.openlocfilehash: 94555b1b73fdac7368c9ac96fa682fb09afc83eb
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98918339"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538967"
 ---
 # <a name="quickstart-define-and-assign-a-blueprint-in-the-portal"></a>Hızlı başlangıç: portalda bir şema tanımlama ve atama
 

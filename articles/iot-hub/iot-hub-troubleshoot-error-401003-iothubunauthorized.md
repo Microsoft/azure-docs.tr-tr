@@ -11,12 +11,12 @@ ms.author: jlian
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: 8fb891d5a47203c9905a7def9d04199d24327f70
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: c6ad0e2dd5ce5f223f4e6033ace09c31e58c85a3
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94357258"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106061358"
 ---
 # <a name="401003-iothubunauthorized"></a>401003 IoTHubUnauthorized
 

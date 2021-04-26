@@ -1,23 +1,23 @@
 ---
-title: Son kullanıcıların Azure AD 'yi kullanarak uygulamalara nasıl izin vermesini yapılandırın
+title: Azure AD kullanarak son kullanıcıların uygulamalara onay verme şeklini yapılandırma
 description: Kullanıcıların kuruluşunuzun verilerine erişimi olacak uygulamaları nasıl ve ne zaman kabul edebilir.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: how-to
 ms.date: 06/01/2020
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: arvindh, luleon, phsignor
 ms.custom: contperf-fy21q2
-ms.openlocfilehash: 68bb846ebb0199691161bc501441df908eb8ad87
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 95a651f6201c9f60500c9191821edb7eb76b8535
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101643618"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374446"
 ---
 # <a name="configure-how-end-users-consent-to-applications"></a>Son kullanıcıların uygulamalara onay verme şeklini yapılandırma
 
@@ -81,7 +81,7 @@ Kullanıcı onaylamasına izin vermek için, uygulamalara izin vermek üzere kul
 
 `{consent-policy-id}`Uygulamak istediğiniz ILKENIN kimliğiyle değiştirin. Oluşturduğunuz [özel bir uygulama onay ilkesini](manage-app-consent-policies.md#create-a-custom-app-consent-policy) seçebilir veya aşağıdaki yerleşik ilkelerden seçebilirsiniz:
 
-| ID | Description |
+| ID | Açıklama |
 |:---|:------------|
 | Microsoft-Kullanıcı-varsayılan-düşük | **Seçili izinler için doğrulanan yayımcıların uygulamalara yönelik Kullanıcı onaylamasına izin ver**<br /> Yalnızca, kiracınızda kayıtlı Yayımcılar ve uygulamalar için sınırlı kullanıcı onayı ve yalnızca "düşük etki" olarak sınıflandırdığınız izinler için izin verin. (Kullanıcıların izin verdiği izinleri seçmek için [izinleri sınıflandırmaya](configure-permission-classifications.md) unutmayın.) |
 | Microsoft-Kullanıcı-varsayılan-eski | **Uygulamalar için Kullanıcı onaylamasına izin ver**<br /> Bu seçenek, tüm kullanıcıların herhangi bir uygulama için yönetici onayı gerektirmeyen tüm izinlere izin vermesini sağlar |
@@ -145,7 +145,7 @@ Microsoft 'un riski algıladığı veya daha önce devre dışı bırakılmışs
 
 1. Ayarlar değerini anlayın:
 
-    | Ayar       | Tür         | Description  |
+    | Ayar       | Tür         | Açıklama  |
     | ------------- | ------------ | ------------ |
     | _BlockUserConsentForRiskyApps_   | Boole |  Riskli bir istek algılandığında Kullanıcı izninin engellenip engellenmediğini belirten bayrak. |
 

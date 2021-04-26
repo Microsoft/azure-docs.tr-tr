@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 03/12/2021
 ms.reviewer: dariac
 ms.custom: seodec18
-ms.openlocfilehash: 52f0db739cff9614dc4e9f5ef71d582e926fc65a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 633d62fc69c516b482d5749a07052337dc71f567
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103470277"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107789492"
 ---
 # <a name="continuous-deployment-to-azure-app-service"></a>Azure App Service için sürekli dağıtım
 
@@ -119,7 +119,7 @@ GitHub eylemleri derleme sağlayıcısını aşağıdaki yollarla özelleştireb
 
 Bu isteğe bağlı yapılandırma, varsayılan kimlik doğrulamanın oluşturulan iş akışı dosyasındaki yayımlama profilleriyle yerini alır.
 
-1. [Azure CLI](/cli/azure/)'de [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az-ad-sp-create-for-rbac) komutuyla bir hizmet sorumlusu oluşturun. Aşağıdaki örnekte, *\<subscription-id>* *\<group-name>* ve *\<app-name>* değerlerini kendi değerlerinizle değiştirin:
+1. [Azure CLI](/cli/azure/)'de [az ad SP Create-for-RBAC](/cli/azure/ad/sp#az_ad_sp_create_for_rbac) komutuyla bir hizmet sorumlusu oluşturun. Aşağıdaki örnekte, *\<subscription-id>* *\<group-name>* ve *\<app-name>* değerlerini kendi değerlerinizle değiştirin:
 
     ```azurecli-interactive
     az ad sp create-for-rbac --name "myAppDeployAuth" --role contributor \

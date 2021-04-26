@@ -9,12 +9,12 @@ ms.subservice: face-api
 ms.topic: include
 ms.date: 11/05/2020
 ms.author: v-jawe
-ms.openlocfilehash: 590ad577f3648ea9214ec4dcb6b6cab59dd5a3f1
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 8f968572a357bb3c98d9c3133a7ec0a0a94dbf93
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105105655"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105957997"
 ---
 ## <a name="quickstart-face-client-library-for-javascript"></a>Hızlı başlangıç: JavaScript için yüz istemci kitaplığı
 
@@ -24,7 +24,7 @@ JavaScript için yüz istemci kitaplığını kullanarak şunları yapın:
 
 * [Bir görüntüdeki yüzleri algılama](#detect-faces-in-an-image)
 * [Benzer yüzeyleri bulun](#find-similar-faces)
-* [Kişi grubu oluştur](#create-a-person-group)
+* [Bir PersonGroup oluşturma](#create-a-persongroup)
 * [Yüz tanıma](#identify-a-face)
 
 [Başvuru belgeleri](/javascript/api/@azure/cognitiveservices-face/)  |  [Kitaplık kaynak kodu](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/cognitiveservices/cognitiveservices-face)  |  [Paket (NPM)](https://www.npmjs.com/package/@azure/cognitiveservices-face)  |  [Örnekler](/samples/browse/?products=azure&term=face&languages=javascript)
@@ -106,7 +106,7 @@ Aşağıdaki kod parçacıkları, .NET için yüz istemci kitaplığı ile aşa�
 * [İstemcinin kimliğini doğrulama](#authenticate-the-client)
 * [Bir görüntüdeki yüzleri algılama](#detect-faces-in-an-image)
 * [Benzer yüzeyleri bulun](#find-similar-faces)
-* [Kişi grubu oluştur](#create-a-person-group)
+* [Bir PersonGroup oluşturma](#create-a-persongroup)
 * [Yüz tanıma](#identify-a-face)
 
 > [!TIP]
@@ -163,27 +163,27 @@ Aşağıdaki yöntem, bir hedef görüntüler kümesindeki yüzeyleri ve tek bir
 
 [Tanımlama](/javascript/api/@azure/cognitiveservices-face/face#identify_string____FaceIdentifyOptionalParams__ServiceCallback_IdentifyResult____) işlemi, bir kişinin (veya birden çok kişinin) bir görüntüsünü alır ve görüntüdeki her bir yüzün kimliğini bulmak için (yüz tanıma arama) arar. Algılanan her yüzü, yüz özellikleri bilinen farklı [kişi](/javascript/api/@azure/cognitiveservices-face/person) nesnelerinin bir veritabanı olan bir [persongroup](/javascript/api/@azure/cognitiveservices-face/persongroup)ile karşılaştırır. Bu işlemi tanımlamak için önce bir [Persongroup](/javascript/api/@azure/cognitiveservices-face/persongroup)oluşturmanız ve eğitmeniz gerekir.
 
-### <a name="add-faces-to-person-group"></a>Kişi grubuna yüz ekleme
+### <a name="add-faces-to-persongroup"></a>Kişilik grubuna yüz ekleme
 
 [Persongroup](/javascript/api/@azure/cognitiveservices-face/persongroup)'a yüzler eklemek için aşağıdaki işlevi oluşturun.
 
 :::code language="js" source="~/cognitive-services-quickstart-code/javascript/Face/sdk_quickstart.js" id="add_faces":::
 
-### <a name="wait-for-training-of-person-group"></a>Kişi grubu eğitimi için bekle
+### <a name="wait-for-training-of-persongroup"></a>PersonGroup eğitimi için bekleyin
 
-Kişi grubunun eğitimi tamamlamasını beklemek için aşağıdaki yardımcı işlevi oluşturun.
+**Persongroup** 'un eğitime son vermesini beklemek için aşağıdaki yardımcı işlevi oluşturun.
 
 :::code language="js" source="~/cognitive-services-quickstart-code/javascript/Face/sdk_quickstart.js" id="wait_for_training":::
 
-### <a name="create-a-person-group"></a>Kişi grubu oluştur
+### <a name="create-a-persongroup"></a>Bir PersonGroup oluşturma
 
 Aşağıdaki kod:
-- Bir [Persongroup](/javascript/api/@azure/cognitiveservices-face/persongroup) oluşturur
-- `AddFacesToPersonGroup`Daha önce tanımladığınız ' ı çağırarak kişi grubuna yüz ekler.
-- Kişi grubunu TRAIN.
-- Kişi grubundaki yüzleri tanımlar.
+- Bir [Persongroup](https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-face/persongroup) oluşturur
+-  `AddFacesToPersonGroup` Daha önce tanımladığınız ' ı çağırarak personbuna yüz ekler.
+- **Persono grubunu** TRAIN.
+- **Persongroup**'taki yüzeyleri tanımlar.
 
-Bu **kişi** grubu ve ilişkili **kişi** nesneleri artık doğrulama, tanımla veya grupla işlemlerinde kullanılmak üzere hazırdır.
+Bu **Persongroup** ve ilişkili **kişi** nesneleri artık Verify, tanımla veya Gruplandır işlemlerinde kullanılmak üzere hazırdır.
 
 :::code language="js" source="~/cognitive-services-quickstart-code/javascript/Face/sdk_quickstart.js" id="identify":::
 

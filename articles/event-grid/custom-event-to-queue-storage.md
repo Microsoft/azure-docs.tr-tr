@@ -4,12 +4,12 @@ description: 'Hızlı başlangıç: bir konu yayımlamak ve bu olaya abone olmak
 ms.date: 02/02/2021
 ms.topic: quickstart
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 00808e7eca13824833673ef820d39b70bf618dd2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: bb7712fbc5a0498695a8737d627f407eb6dfa575
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99493283"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107766834"
 ---
 # <a name="quickstart-route-custom-events-to-azure-queue-storage-with-azure-cli-and-event-grid"></a>Hızlı başlangıç: Azure CLı ve Event Grid ile Azure kuyruk depolama 'ya özel olayları yönlendirme
 
@@ -29,7 +29,7 @@ Bu makale, Azure CLı kullanmaya yönelik komutlar sağlar.
 
 Event Grid konuları Azure kaynaklarıdır ve bir Azure kaynak grubuna yerleştirilmelidir. Kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal koleksiyondur.
 
-[az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. 
+[az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. 
 
 Aşağıdaki örnek *westus2* konumunda *gridResourceGroup* adlı bir kaynak grubu oluşturur.
 

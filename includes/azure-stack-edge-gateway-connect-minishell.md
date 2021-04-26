@@ -2,14 +2,14 @@
 author: alkohli
 ms.service: databox
 ms.topic: include
-ms.date: 03/08/2021
+ms.date: 03/30/2021
 ms.author: alkohli
-ms.openlocfilehash: 0ad760caedffa97599548b8dd1b59a887b5690af
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 89e648099a5ac6d905f475319cc108dd0d05a6e9
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105105482"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106081014"
 ---
 İstemci işletim sistemine bağlı olarak, cihaza uzaktan bağlanma yordamları farklıdır.
 
@@ -58,8 +58,15 @@ Bir Windows istemcisinden uzaktan bağlanmak için aşağıdaki adımları izley
 
     Güven ilişkisiyle ilgili bir hata görürseniz, cihazınıza yüklenen düğüm sertifikasının imzalama zincirinin cihazınıza erişen istemciye de yüklenip yüklenmediğini kontrol edin.
 
+    Sertifikaları kullanmıyorsanız (sertifikaları kullanmanız önerilir!), oturum seçeneklerini kullanarak bu denetimi atlayabilirsiniz: `-SkipCACheck -SkipCNCheck -SkipRevocationCheck` .
+
+    ```powershell
+    $sessOptions = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck 
+    Enter-PSSession -ComputerName $ip -Credential $ip\EdgeUser -ConfigurationName Minishell -UseSSL -SessionOption $sessOptions    
+    ```
+
     > [!NOTE] 
-    > `-UseSSL`Seçeneğini kullandığınızda, *https* üzerinden PowerShell aracılığıyla uzaktan iletişim oluşturursunuz. PowerShell aracılığıyla uzaktan bağlanmak için her zaman *https* kullanmanızı öneririz. Bir *http* oturumu en güvenli bağlantı yöntemi olmasa da, güvenilir ağlarda kabul edilebilir.
+    > `-UseSSL`Seçeneğini kullandığınızda, *https* üzerinden PowerShell aracılığıyla uzaktan iletişim oluşturursunuz. PowerShell aracılığıyla uzaktan bağlanmak için her zaman *https* kullanmanızı öneririz. 
 
 6. İstendiğinde parolayı girin. Yerel Web Kullanıcı arabiriminde oturum açmak için kullanılan parolayı kullanın. Varsayılan yerel Web UI parolası *Parola1*'dır. Uzak PowerShell kullanarak cihaza başarıyla bağlandığınızda aşağıdaki örnek çıktıyı görürsünüz:  
 
@@ -77,27 +84,30 @@ Bir Windows istemcisinden uzaktan bağlanmak için aşağıdaki adımları izley
     [10.100.10.10]: PS>
     ```
 
-### <a name="remotely-connect-from-a-linux-client"></a>Linux istemcisinden uzaktan bağlanma
+> [!IMPORTANT]
+> Geçerli sürümde, yalnızca bir Windows istemcisi aracılığıyla cihazın PowerShell arabirimine bağlanabilirsiniz. Bu `-UseSSL` seçenek, Linux istemcileriyle birlikte çalışmaz.
 
-Bağlanmak için kullanacağınız Linux istemcisinde:
+<!--### Remotely connect from a Linux client-->
 
-- SSH uzaktan iletişim özelliğini almak için GitHub 'dan [Linux için en son PowerShell Core 'U yükler](/powershell/scripting/install/installing-powershell-core-on-linux) . 
-- [Yalnızca `gss-ntlmssp` NTLM modülünden paketi yükler](https://github.com/Microsoft/omi/blob/master/Unix/doc/setup-ntlm-omi.md). Ubuntu istemcileri için aşağıdaki komutu kullanın:
+<!--On the Linux client that you'll use to connect:
+
+- [Install the latest PowerShell Core for Linux](/powershell/scripting/install/installing-powershell-core-on-linux) from GitHub to get the SSH remoting feature. 
+- [Install only the `gss-ntlmssp` package from the NTLM module](https://github.com/Microsoft/omi/blob/master/Unix/doc/setup-ntlm-omi.md). For Ubuntu clients, use the following command:
     - `sudo apt-get install gss-ntlmssp`
 
-Daha fazla bilgi için [SSH üzerinden PowerShell uzaktan iletişimi](/powershell/scripting/learn/remoting/ssh-remoting-in-powershell-core)konusuna gidin.
+For more information, go to [PowerShell remoting over SSH](/powershell/scripting/learn/remoting/ssh-remoting-in-powershell-core).
 
-NFS istemcisinden uzaktan bağlanmak için aşağıdaki adımları izleyin.
+Follow these steps to remotely connect from an NFS client.
 
-1. PowerShell oturumunu açmak için şunu yazın:
+1. To open PowerShell session, type:
 
     `pwsh`
  
-2. Uzak istemciyi kullanarak bağlanmak için şunu yazın:
+2. For connecting using the remote client, type:
 
     `Enter-PSSession -ComputerName $ip -Authentication Negotiate -ConfigurationName Minishell -Credential ~\EdgeUser`
 
-    İstendiğinde, cihazınızda oturum açmak için kullanılan parolayı belirtin.
+    When prompted, provide the password used to sign into your device.
  
 > [!NOTE]
-> Bu yordam Mac OS üzerinde çalışmaz.
+> This procedure does not work on Mac OS.-->

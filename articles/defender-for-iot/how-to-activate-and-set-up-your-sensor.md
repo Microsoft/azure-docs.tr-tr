@@ -3,12 +3,12 @@ title: Algılayıcınızı etkinleştirme ve ayarlama
 description: Bu makalede, bir algılayıcı konsolunun nasıl oturum açılacağını ve etkinleştirileceği açıklanır.
 ms.date: 1/12/2021
 ms.topic: how-to
-ms.openlocfilehash: 2fdfa0dd7048bf39ae5b53a729aef578054b30ac
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: b040a87c2eae36e6049b4e1d0cf51ecb2cfde108
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104779197"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106385127"
 ---
 # <a name="activate-and-set-up-your-sensor"></a>Algılayıcınızı etkinleştirme ve ayarlama
 

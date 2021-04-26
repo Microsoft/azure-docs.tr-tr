@@ -4,10 +4,10 @@ description: Bu makalede, Windows Yönetim Merkezi 'nden Azure Arc etkin sunucul
 ms.date: 10/12/2020
 ms.topic: conceptual
 ms.openlocfilehash: 5fa7a61b1e3b22503377cbcbe308a82be89dac72
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100584772"
 ---
 # <a name="connect-hybrid-machines-to-azure-from-windows-admin-center"></a>Windows Yönetim Merkezi 'nden karma makineleri Azure 'a bağlama

@@ -5,15 +5,15 @@ services: storage
 author: normesta
 ms.service: storage
 ms.topic: how-to
-ms.date: 07/27/2020
+ms.date: 04/02/2021
 ms.author: normesta
 ms.subservice: common
-ms.openlocfilehash: 34f54bb30e959ecc2fa27fba5ab7392b9eddc68e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ac73d0e57377a8922691ea06c8de3df5ef577680
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103494521"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107502445"
 ---
 # <a name="copy-data-from-amazon-s3-to-azure-storage-by-using-azcopy"></a>AzCopy kullanarak Amazon S3 'ten Azure depolama 'ya veri kopyalama
 
@@ -59,11 +59,15 @@ AzCopy, [URL API 'Den put bloğunu](/rest/api/storageservices/put-block-from-url
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://s3.amazonaws.com/<bucket-name>/<object-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<blob-name>'` |
-| **Örnek** | `azcopy copy 'https://s3.amazonaws.com/mybucket/myobject' 'https://mystorageaccount.blob.core.windows.net/mycontainer/myblob'` |
-| **Örnek** (hiyerarşik ad alanı) | `azcopy copy 'https://s3.amazonaws.com/mybucket/myobject' 'https://mystorageaccount.blob.core.windows.net/mycontainer/myblob'` |
+**Syntax**
+
+`azcopy copy 'https://s3.amazonaws.com/<bucket-name>/<object-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<blob-name>'`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://s3.amazonaws.com/mybucket/myobject' 'https://mystorageaccount.blob.core.windows.net/mycontainer/myblob'
+```
 
 > [!NOTE]
 > Bu makaledeki örnekler AWS S3 demetleri için yol stili URL 'Leri kullanır (örneğin: `http://s3.amazonaws.com/<bucket-name>` ). 
@@ -76,11 +80,15 @@ AzCopy, [URL API 'Den put bloğunu](/rest/api/storageservices/put-block-from-url
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://s3.amazonaws.com/<bucket-name>/<directory-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<directory-name>' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://s3.amazonaws.com/mybucket/mydirectory' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://s3.amazonaws.com/mybucket/mydirectory' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://s3.amazonaws.com/<bucket-name>/<directory-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<directory-name>' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://s3.amazonaws.com/mybucket/mydirectory' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true
+```
 
 > [!NOTE]
 > Bu örnek, `--recursive` dosyaları tüm alt dizinlerde kopyalamak için bayrağını ekler.
@@ -89,41 +97,57 @@ AzCopy, [URL API 'Den put bloğunu](/rest/api/storageservices/put-block-from-url
 
 Joker karakter sembolünü (*) kullanarak, bir dizinin içeriğini içeren dizini kopyalayarak kopyalayabilirsiniz.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://s3.amazonaws.com/<bucket-name>/<directory-name>/*' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<directory-name>' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://s3.amazonaws.com/mybucket/mydirectory/*' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://s3.amazonaws.com/mybucket/mydirectory/*' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://s3.amazonaws.com/<bucket-name>/<directory-name>/*' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<directory-name>' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://s3.amazonaws.com/mybucket/mydirectory/*' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true
+```
 
 ### <a name="copy-a-bucket"></a>Demeti kopyalama
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://s3.amazonaws.com/<bucket-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://s3.amazonaws.com/mybucket' 'https://mystorageaccount.blob.core.windows.net/mycontainer' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://s3.amazonaws.com/mybucket/mydirectory' 'https://mystorageaccount.blob.core.windows.net/mycontainer' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://s3.amazonaws.com/<bucket-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://s3.amazonaws.com/mybucket' 'https://mystorageaccount.blob.core.windows.net/mycontainer' --recursive=true
+```
 
 ### <a name="copy-all-buckets-in-all-regions"></a>Tüm bölgelerdeki tüm demetleri Kopyala
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://s3.amazonaws.com/' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://s3.amazonaws.com' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://s3.amazonaws.com' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://s3.amazonaws.com/' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://s3.amazonaws.com' 'https://mystorageaccount.blob.core.windows.net' --recursive=true
+```
 
 ### <a name="copy-all-buckets-in-a-specific-s3-region"></a>Belirli bir S3 bölgesindeki tüm demetleri Kopyala
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://s3-<region-name>.amazonaws.com/' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://s3-rds.eu-north-1.amazonaws.com' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://s3.amazonaws.com/mybucket' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://s3-<region-name>.amazonaws.com/' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://s3-rds.eu-north-1.amazonaws.com' 'https://mystorageaccount.blob.core.windows.net' --recursive=true
+```
 
 ## <a name="handle-differences-in-object-naming-rules"></a>Nesne adlandırma kurallarındaki farkları işleme
 
@@ -139,7 +163,7 @@ AWS S3 ve Azure, nesne anahtarlarının adlarındaki farklı karakter kümelerin
 
 AzCopy komutunun bir parçası olarak `copy` , `s2s-handle-invalid-metadata` dosyanın meta verilerinin uyumsuz anahtar adlarını içerdiği dosyaları nasıl işlemek istediğinizi belirten isteğe bağlı bayrak için bir değer sağlayabilirsiniz. Aşağıdaki tabloda her bayrak değeri açıklanmaktadır.
 
-| Bayrak değeri | Description  |
+| Bayrak değeri | Açıklama  |
 |--------|-----------|
 | **Excludeifgeçersiz** | (Varsayılan seçenek) Meta veriler aktarılan nesneye dahil değildir. AzCopy bir uyarı kaydeder. |
 | **Failifgeçersiz** | Nesneler kopyalanmaz. AzCopy bir hatayı günlüğe kaydeder ve aktarım özetinde görüntülenen başarısız olan sayıma bu hatayı ekler.  |
@@ -163,10 +187,18 @@ AzCopy şu adımları gerçekleştirir:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalelerden herhangi birinde daha fazla örnek bulabilirsiniz:
+Bu makalelerde daha fazla örnek bulun:
 
-- [AzCopy’yi kullanmaya başlama](storage-use-azcopy-v10.md)
+- [Örnekler: Karşıya Yükle](storage-use-azcopy-blobs-upload.md)
+- [Örnekler: Karşıdan Yükle](storage-use-azcopy-blobs-download.md)
+- [Örnekler: Hesaplar arasında kopyala](storage-use-azcopy-blobs-copy.md)
+- [Örnekler: Eşitle](storage-use-azcopy-blobs-synchronize.md)
+- [Örnekler: Google Cloud Storage](storage-use-azcopy-google-cloud.md)
+- [Örnekler: Azure dosyaları](storage-use-azcopy-files.md)
+- [Öğretici: AzCopy kullanarak şirket içi verileri bulut depolamasına taşıma](storage-use-azcopy-migrate-on-premises-data.md)
 
-- [Veri aktarma](storage-use-azcopy-v10.md#transfer-data)
+Ayarları yapılandırmak, performansı iyileştirmek ve sorunları gidermek için şu makalelere bakın:
 
-- [AzCopy 'i yapılandırma, iyileştirme ve sorun giderme](storage-use-azcopy-configure.md)
+- [AzCopy yapılandırma ayarları](storage-ref-azcopy-configuration-settings.md)
+- [AzCopy performansını iyileştirin](storage-use-azcopy-optimize.md)
+- [Günlük dosyalarını kullanarak Azure Storage 'da AzCopy Ile v10 arasındaki sorunlarını giderme](storage-use-azcopy-configure.md)

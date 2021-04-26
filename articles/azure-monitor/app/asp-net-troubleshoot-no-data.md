@@ -4,12 +4,12 @@ description: Azure Application Insights verileri görmüyor musunuz? Buradan den
 ms.topic: conceptual
 ms.custom: devx-track-csharp
 ms.date: 05/21/2020
-ms.openlocfilehash: 40fbe4d08676d7cc56478d3740424fccaa7addc0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 3b550e434db5b616ffedef7ebe9891b36fa431a2
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103562204"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311235"
 ---
 # <a name="troubleshooting-no-data---application-insights-for-netnet-core"></a>.NET/.NET Core için veri Application Insights sorunlarını giderme
 
@@ -28,6 +28,10 @@ ms.locfileid: "103562204"
 *Uygulama durmak üzere olduğunda konsol uygulamasında veya Web uygulamasında veri kaybı yaşıyorum.*
 
 * SDK kanalı, Telemetriyi arabelleğe tutar ve bunları toplu işler halinde gönderir. Uygulama kapatıyorsunuz, açıkça [flush ()](api-custom-events-metrics.md#flushing-data)çağrısı yapmanız gerekebilir. Davranış `Flush()` , kullanılan gerçek [kanala](telemetry-channels.md#built-in-telemetry-channels) bağlıdır.
+
+## <a name="request-count-collected-by-application-insights-sdk-does-not-match-the-iis-log-count-for-my-application"></a>Application Insights SDK 'Sı tarafından toplanan istek sayısı uygulamamın IIS günlük sayısıyla eşleşmiyor
+
+Internet Information Services (IIS), IIS 'ye ulaşan tüm istek sayısını günlüğe kaydeder ve kendiliğinden bir uygulamaya ulaşan toplam istekten farklı olabilir. Bu nedenle, SDK 'lar tarafından toplanan istek sayısı, toplam IIS günlük sayısıyla eşleşmeyecektir. 
 
 ## <a name="no-data-from-my-server"></a>Sunucuma veri yok
 *Uygulamamı Web sunucuma yükledim ve bundan sonra herhangi bir telemetri görmüyorum. Geliştirici makinmda Tamam 'a çalıştı.*
@@ -282,7 +286,9 @@ Daha fazla bilgi için,
 
 ## <a name="collect-logs-with-dotnet-trace"></a>DotNet-Trace ile günlükleri toplama
 
-Özellikle Linux tabanlı ortamlarda yararlı olabilecek sorun gidermeye yönelik Günlükler toplamanın alternatif bir yöntemi [`dotnet-trace`](/dotnet/core/diagnostics/dotnet-trace)
+Alternatif olarak, müşteriler, [`dotnet-trace`](/dotnet/core/diagnostics/dotnet-trace) sorun gidermeye daha fazla yardımcı olabilecek Günlükler toplamak için platformlar arası bir .NET Core aracı da kullanabilirler. Bu, özellikle Linux tabanlı ortamlar için yararlı olabilir.
+
+Yüklemesinden sonra [`dotnet-trace`](/dotnet/core/diagnostics/dotnet-trace) , Bash içinde aşağıdaki komutu yürütün.
 
 ```bash
 dotnet-trace collect --process-id <PID> --providers Microsoft-ApplicationInsights-Core,Microsoft-ApplicationInsights-Data,Microsoft-ApplicationInsights-WindowsServer-TelemetryChannel,Microsoft-ApplicationInsights-Extensibility-AppMapCorrelation-Dependency,Microsoft-ApplicationInsights-Extensibility-AppMapCorrelation-Web,Microsoft-ApplicationInsights-Extensibility-DependencyCollector,Microsoft-ApplicationInsights-Extensibility-HostingStartup,Microsoft-ApplicationInsights-Extensibility-PerformanceCollector,Microsoft-ApplicationInsights-Extensibility-EventCounterCollector,Microsoft-ApplicationInsights-Extensibility-PerformanceCollector-QuickPulse,Microsoft-ApplicationInsights-Extensibility-Web,Microsoft-ApplicationInsights-Extensibility-WindowsServer,Microsoft-ApplicationInsights-WindowsServer-Core,Microsoft-ApplicationInsights-LoggerProvider,Microsoft-ApplicationInsights-Extensibility-EventSourceListener,Microsoft-ApplicationInsights-AspNetCore
@@ -294,4 +300,3 @@ Kaldırma [makalesinde](./remove-application-insights.md)sağladığı adımlar�
 
 ## <a name="still-not-working"></a>Hala çalışmıyor...
 * [Microsoft Q&Application Insights için soru sayfası](/answers/topics/azure-monitor.html)
-

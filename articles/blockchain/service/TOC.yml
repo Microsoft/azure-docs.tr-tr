@@ -67,7 +67,7 @@
 - name: Başvuru
   items:
     - name: Azure CLI
-      href: /cli/azure/ext/blockchain/blockchain
+      href: /cli/azure/blockchain
 - name: Kaynaklar
   items:
     - name: Azure Blok Zinciri geliştirme seti

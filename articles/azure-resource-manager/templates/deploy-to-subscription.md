@@ -3,12 +3,12 @@ title: Kaynakları aboneliğe dağıtma
 description: Azure Resource Manager şablonunda bir kaynak grubu oluşturmayı açıklar. Ayrıca Azure abonelik kapsamındaki kaynakların nasıl dağıtılacağını gösterir.
 ms.topic: conceptual
 ms.date: 01/13/2021
-ms.openlocfilehash: f557a3a15da33b7394d22784bcd2c1c914ad6201
-ms.sourcegitcommit: a67b972d655a5a2d5e909faa2ea0911912f6a828
+ms.openlocfilehash: 3598fe290fd993cbbc662ba9d3a3c5ba8c207bc0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104889442"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781928"
 ---
 # <a name="subscription-deployments-with-arm-templates"></a>ARM şablonlarıyla abonelik dağıtımları
 
@@ -92,7 +92,7 @@ Bir aboneliğe dağıtmak için abonelik düzeyinde dağıtım komutlarını kul
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı için [az Deployment Sub Create](/cli/azure/deployment/sub#az-deployment-sub-create)kullanın. Aşağıdaki örnek, bir kaynak grubu oluşturmak için bir şablon dağıtır:
+Azure CLı için [az Deployment Sub Create](/cli/azure/deployment/sub#az_deployment_sub_create)kullanın. Aşağıdaki örnek, bir kaynak grubu oluşturmak için bir şablon dağıtır:
 
 ```azurecli-interactive
 az deployment sub create \

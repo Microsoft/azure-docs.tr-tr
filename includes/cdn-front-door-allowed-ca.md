@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 10/30/2020
 ms.author: duau
 ms.custom: include file
-ms.openlocfilehash: 20d9810ef5ff7380eb0df5df8a6720dcef71a6ad
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: f0621788f50a07466861fbd87ede191f5ab688cd
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105105698"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106554485"
 ---
 Kendi sertifikanızı oluştururken aşağıdaki CA 'Lara izin verilir:
 
@@ -62,7 +62,9 @@ Kendi sertifikanızı oluştururken aşağıdaki CA 'Lara izin verilir:
 - Güvenlik Iletişimi RootCA1
 - Güvenlik Iletişimi RootCA2
 - Güvenlik Iletişimi RootCA3
+- SSL.com kök sertifika yetkilisi ECC
 - SSL.com kök sertifika yetkilisi RSA
+- SSL.com EV kök sertifika yetkilisi ECC
 - SSL.com EV kök sertifika yetkilisi RSA R2
 - Staat der Nederlanden EV kök CA
 - Symantec Class 3 EV SSL CA-G3

@@ -3,17 +3,17 @@ title: App Service URL 'sine yeniden yönlendirme sorunlarını giderme
 titleSuffix: Azure Application Gateway
 description: Bu makalede, Azure Application Gateway ile kullanıldığında yeniden yönlendirme sorununun nasıl giderileceği hakkında bilgi verilmektedir Azure App Service
 services: application-gateway
-author: abshamsft
+author: jaesoni
 ms.service: application-gateway
 ms.topic: troubleshooting
-ms.date: 11/14/2019
-ms.author: absha
-ms.openlocfilehash: 1cc7df755198461643703cac988c8c31f2ac25db
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/15/2021
+ms.author: jaysoni
+ms.openlocfilehash: 6aad1cf1269a7c3dc082482c39fdc4a079fc3240
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96182895"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107514895"
 ---
 # <a name="troubleshoot-app-service-issues-in-application-gateway"></a>Application Gateway App Service sorunlarını giderme
 
@@ -83,34 +83,32 @@ X-Powered-By: ASP.NET
 Konum üstbilgisindeki ana bilgisayar adını Application Gateway 'in etki alanı adına ayarlayın. Bunu yapmak için, yanıttaki konum üstbilgisinin azurewebsites.net içerdiğini değerlendiren bir koşula sahip bir [yeniden yazma kuralı](./rewrite-http-headers.md) oluşturun. Ayrıca, uygulama ağ geçidinin ana bilgisayar adına sahip olacak şekilde konum başlığını yeniden yazmak için bir eylem gerçekleştirmelidir. Daha fazla bilgi için bkz. [konum üst bilgisini yeniden yazma](./rewrite-http-headers.md#modify-a-redirection-url)yönergeleri.
 
 > [!NOTE]
-> HTTP üst bilgisi yeniden yazma desteği yalnızca Application Gateway [Standard_v2 ve WAF_v2 SKU 'su](./application-gateway-autoscaling-zone-redundant.md) için kullanılabilir. V1 SKU 'SU kullanıyorsanız [v1 'den v2 'ye geçiş](./migrate-v1-v2.md)yapmanızı öneririz. V2 SKU 'SU ile kullanılabilen yeniden yazma ve diğer [Gelişmiş özellikleri](./application-gateway-autoscaling-zone-redundant.md#feature-comparison-between-v1-sku-and-v2-sku) kullanmak istiyorsunuz.
+> HTTP üst bilgisi yeniden yazma desteği yalnızca Application Gateway [Standard_v2 ve WAF_v2 SKU 'su](./application-gateway-autoscaling-zone-redundant.md) için kullanılabilir. V2 SKU 'SU ile kullanılabilir olan üst bilgi yeniden yazma ve diğer [Gelişmiş yetenekler](./application-gateway-autoscaling-zone-redundant.md#feature-comparison-between-v1-sku-and-v2-sku) için [v2 'ye geçiş](./migrate-v1-v2.md) yapmanızı öneririz.
 
 ## <a name="alternate-solution-use-a-custom-domain-name"></a>Alternatif çözüm: özel bir etki alanı adı kullanın
 
-V1 SKU 'SU kullanıyorsanız, konum üst bilgisini yeniden yazabilirsiniz. Bu özellik yalnızca v2 SKU 'SU için kullanılabilir. Yeniden yönlendirme sorununu çözmek için, uygulama ağ geçidinin aynı ana bilgisayar adını da App Service 'e geçirin, bunun yerine bir konak geçersiz kılma işlemi yapın.
+App Service özel etki alanı özelliği kullanmak, trafiği her zaman Application Gateway etki alanı adına (örneğimizde) yeniden yönlendirmeye yönelik başka bir çözümdür `www.contoso.com` . Bu yapılandırma, ARR benzeşim tanımlama bilgisi sorununa yönelik bir çözüm olarak da kullanılır. Varsayılan olarak, ARRAffinity tanımlama alanı, Application Gateway etki alanı adı yerine App Service varsayılan ana bilgisayar adına (example.azurewebsites.net) ayarlanır. Bu nedenle, bu gibi durumlarda tarayıcı, isteğin etki alanı adlarındaki ve tanımlama bilgisinin farkı nedeniyle tanımlama bilgisini reddeder.
 
-App Service artık uygulama ağ geçidine işaret eden aynı orijinal ana bilgisayar üst bilgisinde yeniden yönlendirmeyi (varsa) yapar ve kendi kendine değil.
+Hem yeniden yönlendirme hem de ARRAffinity öğesinin tanımlama bilgisi etki alanı uyuşmazlığı sorunları için verilen yöntemi izleyebilirsiniz. Bu yöntem, özel etki alanının DNS bölgesinin erişimine sahip olmanız gerekir.
 
-Özel bir etki alanına sahip olmanız ve bu işlemi izlemeniz gerekir:
+**Adım**: App Service içinde özel bir etki alanı ayarlayın ve [CNAME & txt DNS kayıtlarını](../app-service/app-service-web-tutorial-custom-domain.md#get-a-domain-verification-id)ekleyerek etki alanı sahipliğini doğrulayın.
+Kayıtlar şuna benzer görünmelidir
+-  `www.contoso.com` CNAME 'DE `contoso.azurewebsite.net`
+-  `asuid.www.contoso.com` TXT " `<verification id string>` " içinde
 
-- Etki alanını App Service 'in özel etki alanı listesine kaydedin. Özel etki alanında App Service 'in FQDN 'sine işaret eden bir CNAME 'i olması gerekir. Daha fazla bilgi için bkz. [mevcut bir özel DNS adını Azure App Service eşleme](../app-service/app-service-web-tutorial-custom-domain.md).
 
-    ![App Service özel etki alanı listesi](./media/troubleshoot-app-service-redirection-app-service-url/appservice-2.png)
+**Step2**: ÖNCEKI adımda CNAME kaydı yalnızca etki alanı doğrulaması için gereklidir. Son olarak, Application Gateway aracılığıyla yönlendirmeye yönelik trafiğe ihtiyacımız var. Bu nedenle, `www.contoso.com` Application Gateway FQDN 'sini işaret etmek IÇIN CNAME 'i Şimdi değiştirebilirsiniz. Application Gateway için bir FQDN ayarlamak için, genel IP adresi kaynağına gidin ve bir "DNS ad etiketi" atayın. Güncelleştirilmiş CNAME kaydı şöyle görünmelidir 
+-  `www.contoso.com` CNAME 'DE `contoso.eastus.cloudapp.azure.com`
 
-- App Service, ana bilgisayar adını kabul etmeye hazırlanıyor `www.contoso.com` . DNS 'de CNAME girdinizi, uygulama ağ geçidinin FQDN 'sine (örneğin,) geri işaret etmek üzere değiştirin `appgw.eastus.cloudapp.azure.com` .
 
-- DNS sorgusu yaptığınızda etki alanının `www.contoso.com` uygulama ağ GEÇIDININ FQDN 'sine çözümlendiğinden emin olun.
+**Step3**: Ilişkili http ayarı Için "arka uç adresinden ana bilgisayar adını seçin" ayarını devre dışı bırakın.
 
-- Özel araştırmasını **arka uç http ayarlarından seçim ana bilgisayar adını** devre dışı bırakacak şekilde ayarlayın. Azure portal, araştırma ayarlarındaki onay kutusunun işaretini kaldırın. PowerShell 'de, **set-AzApplicationGatewayProbeConfig** komutunda **-pickhostnamefrombackendhttpsettings** anahtarını kullanmayın. Araştırmanın konak adı alanında App Service 'in FQDN 'SI olan example.azurewebsites.net girin. Application Gateway 'den gönderilen araştırma istekleri bu FQDN 'yi konak üstbilgisine taşır.
+PowerShell 'de, `-PickHostNameFromBackendAddress` komutunda anahtarını kullanmayın `Set-AzApplicationGatewayBackendHttpSettings` .
 
-  > [!NOTE]
-  > Sonraki adımda, özel araştırmanın arka uç HTTP ayarlarınızla ilişkili olmadığından emin olun. HTTP ayarlarınızda, bu noktada **arka uç adres konak adresini seçin** anahtarı etkin kalır.
 
-- Application Gateway 'in HTTP ayarlarını, **arka uç adresinden seçim ana bilgisayar adını** devre dışı bırakmak için ayarlayın. Azure portal onay kutusunu temizleyin. PowerShell 'de, **set-AzApplicationGatewayBackendHttpSettings** komutunda **-pickhostnamefrombackendadddress** anahtarını kullanmayın.
+**Step4**: arka ucu sağlıklı ve işlemsel trafik olarak belirleme araştırmaları Için, ana bilgisayar alanı ile bir özel durum araştırması App Service özel veya varsayılan etki alanı olarak ayarlayın.
 
-- Özel araştırmayı arka uç HTTP ayarlarına geri ilişkilendirin ve arka ucun sağlıklı olduğunu doğrulayın.
-
-- Uygulama ağ geçidi artık aynı ana bilgisayar adını `www.contoso.com` App Service 'e iletmelidir. Yeniden yönlendirme aynı ana bilgisayar adı üzerinde gerçekleşir. Aşağıdaki örnek istek ve yanıt üst bilgilerini denetleyin.
+PowerShell 'de, `-PickHostNameFromBackendHttpSettings` komutta anahtarını kullanmayın `Set-AzApplicationGatewayProbeConfig` ve araştırmanın-HostName anahtarındaki App Service özel veya varsayılan etki alanını kullanın.
 
 Mevcut bir kurulum için PowerShell 'i kullanarak önceki adımları uygulamak için aşağıdaki örnek PowerShell betiğini kullanın. Araştırma ve HTTP ayarları yapılandırmasındaki **-pickhostname** anahtarlarını nasıl kullandığımızda aklınızda olduğunu öğrenin.
 

@@ -6,17 +6,19 @@ ms.author: mikben
 ms.date: 03/10/2021
 ms.topic: quickstart
 ms.service: azure-communication-services
-ms.openlocfilehash: 536b9a9a0d1a7b48841938eef44d181d22b87bf4
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: e1eed3f9449843e6c2dd8c77719402e709fdeb23
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105609503"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107327621"
 ---
 Bu hızlı başlangıçta, iOS için SDK 'Yı çağıran Azure Iletişim Hizmetleri 'ni kullanarak bir çağrı başlatmayı öğreneceksiniz.
 
+[!INCLUDE [Public Preview Notice](../../../includes/public-preview-include-android-ios.md)]
+
 > [!NOTE]
-> Bu belge, çağıran SDK 'nın 1.0.0-Beta. 8 sürümünü kullanır.
+> Bu belge, çağıran SDK 'nın 1.0.0-Beta. 9 sürümünü kullanır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -45,9 +47,9 @@ Xcode 'da yeni bir iOS projesi oluşturun ve **tek görünüm uygulama** şablon
    use_frameworks!
 
    target 'AzureCommunicationCallingSample' do
-     pod 'AzureCommunicationCalling', '~> 1.0.0-beta.8'
-     pod 'AzureCommunication', '~> 1.0.0-beta.8'
-     pod 'AzureCore', '~> 1.0.0-beta.8'
+     pod 'AzureCommunicationCalling', '~> 1.0.0-beta.9'
+     pod 'AzureCommunication', '~> 1.0.0-beta.9'
+     pod 'AzureCore', '~> 1.0.0-beta.9'
    end
    ```
 
@@ -171,7 +173,7 @@ func startCall()
         if granted {
             // start call logic
             let callees:[CommunicationIdentifier] = [CommunicationUserIdentifier(identifier: self.callee)]
-            self.call = self.callAgent?.call(participants: callees, options: StartCallOptions())
+            self.call = self.callAgent?.startCall(participants: callees, options: StartCallOptions())
         }
     }
 }
@@ -186,7 +188,7 @@ Ayrıca, `StartCallOptions` çağrının başlangıç seçeneklerini ayarlamak i
 ```swift
 func endCall()
 {    
-    self.call!.hangup(HangupOptions()) { (error) in
+    self.call!.hangUp(HangUpOptions()) { (error) in
         if (error != nil) {
             print("ERROR: It was not possible to hangup the call.")
         }

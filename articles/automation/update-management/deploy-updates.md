@@ -3,14 +3,14 @@ title: Azure Otomasyonu Güncelleştirme Yönetimi için güncelleştirme dağı
 description: Bu makalede, güncelleştirme dağıtımlarının nasıl planlanmakta ve bunların durumlarını incelemesinin nasıl yapılacağı açıklanır.
 services: automation
 ms.subservice: update-management
-ms.date: 03/19/2021
+ms.date: 04/19/2021
 ms.topic: conceptual
-ms.openlocfilehash: 6d35d6b49ab72d8aa7b25506011147ab624273fd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e410e5de529bde122fe42d21b593a6fc483dcbc0
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104669687"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107726688"
 ---
 # <a name="how-to-deploy-updates-and-review-results"></a>Güncelleştirmeler nasıl dağıtılır ve sonuçlar incelenmek
 
@@ -69,15 +69,30 @@ Yeni bir güncelleştirme dağıtımı zamanlamak için aşağıdaki adımları 
 
 7. Ürünlerin [güncelleştirme sınıflandırmalarını](view-update-assessments.md#work-with-update-classifications) belirtmek için **güncelleştirme sınıflandırmaları** bölgesini kullanın. Her ürün için desteklenen tüm güncelleştirme sınıflandırmalarının seçimini kaldırın, ancak güncelleştirme dağıtımınıza dahil olanlar.
 
+   :::image type="content" source="./media/deploy-updates/update-classifications-example.png" alt-text="Belirli güncelleştirme sınıflandırmalarının seçimini gösteren örnek.":::
+
     Dağıtımınız yalnızca bir seçim kümesi uygulamasa, bir sonraki adımda açıklandığı gibi, **güncelleştirmeleri dahil et/hariç tut** seçeneğini yapılandırırken, önceden seçilmiş tüm güncelleştirme sınıflandırmalarının seçimini kaldırmak gerekir. Bu, hedef makinelere yalnızca bu dağıtıma *dahil* etmek için belirttiğiniz güncelleştirmelerin yüklü olmasını sağlar.
 
+   >[!NOTE]
+   > Güncelleştirme sınıflandırmasına göre güncelleştirmelerin dağıtımı, CentOS 'in RTM sürümlerinde çalışmaz. CentOS güncelleştirmelerini doğru bir şekilde dağıtmak için, güncelleştirmelerin uygulandığından emin olmak için tüm sınıflandırmalar ' ı seçin. Şu anda yerel sınıflandırmanın etkinleştirilmesi için desteklenen bir yöntem yok-CentOS üzerinde veri kullanılabilirliği. [Güncelleştirme sınıflandırmaları](overview.md#update-classifications)hakkında daha fazla bilgi için aşağıdakilere bakın.
+
 8. Seçili güncelleştirmeleri dağıtıma eklemek veya dağıtımdan dışlamak için **güncelleştirmeleri dahil et/hariç tut** bölgesini kullanın. **Dahil et/hariç tut** sayfasında, Windows güncelleştirmelerini dahil etmek veya hariç tutmak için KB makalesinin kimlik numaralarını girersiniz. Desteklenen Linux destekleri için paket adını belirtirsiniz.
+
+   :::image type="content" source="./media/deploy-updates/include-specific-updates-example.png" alt-text="Belirli güncelleştirmelerin nasıl ekleneceğini gösteren örnek.":::
 
    > [!IMPORTANT]
    > Dışlamalar geçersiz kılmanın dahil olduğunu unutmayın. Örneğin, bir hariç tutma kuralı tanımlarsanız `*` , güncelleştirme yönetimi tüm düzeltme eklerini veya paketleri yüklemeden dışlar. Dışlanan düzeltme ekleri hala makinelerde eksik olarak gösterilir. Linux makineler için, dışlanan bağımlı paketi olan bir paketi eklerseniz Güncelleştirme Yönetimi ana paketi yüklemez.
 
    > [!NOTE]
    > Güncelleştirme dağıtımına dahil etmek için yenisiyle değiştirilen güncelleştirmeleri belirtemezsiniz.
+
+   Burada, güncelleştirme dağıtımlarında dahil etme/hariç tutma ve güncelleştirme sınıflandırmasının nasıl kullanılacağını anlamanıza yardımcı olacak bazı örnek senaryolar verilmiştir:
+
+   * Yalnızca belirli bir güncelleştirme listesini yüklemek istiyorsanız, herhangi bir **güncelleştirme sınıflandırması** seçmeyin ve **Include** seçeneği kullanılarak uygulanacak güncelleştirmelerin bir listesini sağlamanız gerekir.
+
+   * Bir veya daha fazla isteğe bağlı sürücü güncelleştirmesi ile birlikte yalnızca güvenlik ve kritik güncelleştirmeleri yüklemek istiyorsanız, **güncelleştirme sınıflandırmaları** altında **güvenlik** ve **kritik** ' i seçmeniz gerekir. Sonra **dahil et** seçeneğinde sürücü güncelleştirmelerini belirtin.
+
+   * Yalnızca güvenlik ve kritik güncelleştirmeleri yüklemek istiyorsanız, ancak eski uygulamanızı bozmamak için Python için bir veya daha fazla güncelleştirme atlayıp, **güncelleştirme sınıflandırmaları** altında **güvenlik** ve **kritik** ' i seçmeniz gerekir. Sonra **Dışla** seçeneği için, atlanacak Python paketlerini ekleyin.
 
 9. **Zamanlama ayarları**' nı seçin. Varsayılan başlangıç zamanı, geçerli zamandan 30 dakika sonradır. Başlangıç zamanını en düşük 10 dakika olmak üzere istediğiniz değere ayarlayabilirsiniz.
 

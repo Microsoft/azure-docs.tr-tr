@@ -8,12 +8,12 @@ ms.service: synapse-analytics
 ms.subservice: spark
 ms.topic: conceptual
 ms.date: 01/04/2021
-ms.openlocfilehash: 57e9d0c584600a8fac90499d72cfac1620052603
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 006abf62c605c2ca34fd1adeadee8e29ae0fb8fb
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101694929"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588318"
 ---
 # <a name="troubleshoot-library-installation-errors"></a>Kitaplık yükleme hatalarını giderme 
 Üçüncü tarafa veya yerel olarak oluşturulmuş bir kodu uygulamalarınız için kullanılabilir hale getirmek için, bir kitaplığı sunucusuz Apache Spark havuzlarınızdan birine yükleyebilirsiniz. requirements.txt dosyasında listelenen paketler, havuz başlatma sırasında PyPi 'den indirilir. Bu gereksinimler dosyası, bu Spark havuzundan bir Spark örneği oluşturulduğu her seferinde kullanılır. Spark havuzu için bir kitaplık yüklendikten sonra, aynı havuzu kullanan tüm oturumlarda kullanılabilir. 
@@ -92,7 +92,7 @@ SYNAPSE sunucusuz Apache Spark havuzları, Linux dağıtımını temel alınır.
 Ortamı yeniden oluşturmak ve güncelleştirmelerinizi doğrulamak için:
  1. SYNAPSE çalışma zamanını yerel olarak yeniden oluşturmak için şablonu [indirin](https://github.com/Azure-Samples/Synapse/blob/main/Spark/Python/base_environment.yml) . Şablon ve gerçek SYNAPSE ortamı arasında hafif farklar olabilir.
    
- 2. [Aşağıdaki yönergeleri](https://docs.conda.io/projects/conda/latest/user-guide/tasks/manage-environments.html)kullanarak bir sanal ortam oluşturun. Bu ortam, belirtilen kitaplıklar listesiyle yalıtılmış bir Python yüklemesi oluşturmanıza olanak sağlar. 
+ 2. [Aşağıdaki yönergeleri](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment)kullanarak bir sanal ortam oluşturun. Bu ortam, belirtilen kitaplıklar listesiyle yalıtılmış bir Python yüklemesi oluşturmanıza olanak sağlar. 
     
     ```
     conda myenv create -f environment.yml
@@ -102,7 +102,7 @@ Ortamı yeniden oluşturmak ve güncelleştirmelerinizi doğrulamak için:
  3. ``pip install -r <provide your req.txt file>``Sanal ortamı belirtilen paketleriniz ile güncelleştirmek için kullanın. Yükleme bir hatayla sonuçlandıysa, SYNAPSE temel çalışma zamanına önceden yüklenmiş olan ve belirtilen gereksinimler dosyasında belirtilen özellikler arasında bir çakışma olabilir. Bu bağımlılık çakışmalarının, sunucusuz Apache Spark havuzunuzdaki güncelleştirilmiş kitaplıkları almak için çözümlenmelidir.
 
 >[!IMPORTANT]
->PIP ve Conda birlikte kullanırken sorunlar Arrise olabilir. PIP ve Conda birleştirilirken, [Önerilen en iyi yöntemleri](https://docs.conda.io/projects/conda/latest/user-guide/tasks/manage-environments.html#using-pip-in-an-environment)izlemek en iyisidir.
+>PIP ve Conda birlikte kullanırken sorunlar Arrise olabilir. PIP ve Conda birleştirilirken, [Önerilen en iyi yöntemleri](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment)izlemek en iyisidir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - Varsayılan kitaplıkları görüntüleme: [Apache Spark sürüm desteği](apache-spark-version-support.md)

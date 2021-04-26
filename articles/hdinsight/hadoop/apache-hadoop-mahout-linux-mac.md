@@ -5,12 +5,12 @@ ms.service: hdinsight
 ms.topic: how-to
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 05/14/2020
-ms.openlocfilehash: c31ffaf094801bdd49e5800bd338a15d8b8315f6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4c3484c1e65eb70be484a4a2eebda21a41dbf1ea
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98946503"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105936878"
 ---
 # <a name="generate-recommendations-using-apache-mahout-in-azure-hdinsight"></a>Azure HDInsight 'ta Apache Mahout kullanarak öneriler oluşturma
 
@@ -18,7 +18,7 @@ Azure HDInsight ile [Apache Mahout](https://mahout.apache.org) Machine Learning 
 
 Mahout, Apache Hadoop için bir [makine öğrenme](https://en.wikipedia.org/wiki/Machine_learning) kitaplığıdır. Mahout, filtreleme, sınıflandırma ve kümeleme gibi verileri işlemeye yönelik algoritmalar içerir. Bu makalede, arkadaşlarınızın gördük filmlerini temel alan film önerileri oluşturmak için bir öneri altyapısı kullanırsınız.
 
-HDInsight 'ta Mahout sürümü hakkında daha fazla bilgi için bkz. [HDInsight sürümleri ve Apache Hadoop bileşenleri](../hdinsight-component-versioning.md).
+Mahout, HDInsight 3,6 ' de kullanılabilir ve HDInsight 4,0 ' de kullanılamaz. HDInsight 'ta Mahout sürümü hakkında daha fazla bilgi için bkz. [hdınsight 3,6 bileşen sürümleri](../hdinsight-36-component-versioning.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 

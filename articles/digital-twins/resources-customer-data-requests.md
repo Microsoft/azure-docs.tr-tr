@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.service: digital-twins
 services: digital-twins
 ms.openlocfilehash: 9942056e59a46c61b4e9da32aab191d4b72db968
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "92461768"
 ---
 # <a name="azure-digital-twins-customer-data-request-features"></a>Azure dijital TWINS müşteri verileri istek özellikleri

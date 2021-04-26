@@ -3,12 +3,12 @@ title: Azure Backup Sunucusu verileri kurtarma
 description: Bu kasaya kayıtlı tüm Azure Backup Sunucusu kurtarma hizmetleri kasasına koruduğunuz verileri kurtarın.
 ms.topic: conceptual
 ms.date: 07/09/2019
-ms.openlocfilehash: ed8c937f97ec7a74662a8b46a354b0a6db39a2b0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 780c88175397fb06e704e57062ae5c6d3b93d8b8
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98806013"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519597"
 ---
 # <a name="recover-data-from-azure-backup-server"></a>Azure Backup Sunucusu’ndan veri kurtarma
 
@@ -90,4 +90,4 @@ Azure Backup Sunucusu verileri kurtarmak için:
 Diğer SSS belgelerini okuyun:
 
 * Azure VM yedeklemeleri hakkında [sık sorulan sorular](backup-azure-vm-backup-faq.yml)
-* Azure Backup aracısıyla ilgili [yaygın sorular](backup-azure-file-folder-backup-faq.md)
+* Azure Backup aracısıyla ilgili [yaygın sorular](backup-azure-file-folder-backup-faq.yml)

@@ -4,10 +4,10 @@ description: CSP iş ortakları için, Azure tarafından atanan kaynak yönetimi
 ms.date: 03/12/2021
 ms.topic: conceptual
 ms.openlocfilehash: 8736cf913739f2bd16fb519aed98fd336f6876a5
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103419398"
 ---
 # <a name="azure-lighthouse-and-the-cloud-solution-provider-program"></a>Azure açık Thouse ve bulut çözümü sağlayıcısı programı

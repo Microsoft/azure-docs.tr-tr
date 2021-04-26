@@ -3,14 +3,15 @@ title: Azure Otomasyonu 'nda değişkenleri yönetme
 description: Bu makalede runbook 'larda ve DSC yapılandırmalarında değişkenlerle nasıl çalışılacağı açıklanmaktadır.
 services: automation
 ms.subservice: shared-capabilities
-ms.date: 12/01/2020
+ms.date: 03/28/2021
 ms.topic: conceptual
-ms.openlocfilehash: 6db0c82c034aab97deee1be4aa8bdc54368521bc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 9f1ace00356583dbb6102317e3d157fb58682710
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98131534"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832588"
 ---
 # <a name="manage-variables-in-azure-automation"></a>Azure Otomasyonu 'nda değişkenleri yönetme
 
@@ -41,7 +42,7 @@ Azure portal bir değişken oluşturduğunuzda, portalın değişken değerini g
 * Boole
 * Null
 
-Değişken, belirtilen veri türüyle sınırlı değil. Farklı türde bir değer belirtmek istiyorsanız, değişkeni Windows PowerShell kullanarak ayarlamanız gerekir. Belirtirseniz `Not defined` , değişkenin değeri null olarak ayarlanır. Değeri [set-AzAutomationVariable](/powershell/module/az.automation/set-azautomationvariable) cmdlet 'i veya iç cmdlet ile ayarlamanız gerekir `Set-AutomationVariable` .
+Değişken, belirtilen veri türüyle sınırlı değil. Farklı türde bir değer belirtmek istiyorsanız, değişkeni Windows PowerShell kullanarak ayarlamanız gerekir. Belirtirseniz `Not defined` , değişkenin değeri null olarak ayarlanır. Değeri [set-AzAutomationVariable](/powershell/module/az.automation/set-azautomationvariable) cmdlet 'i veya iç cmdlet ile ayarlamanız gerekir `Set-AutomationVariable` . `Set-AutomationVariable`Azure korumalı alan ortamında veya bir Windows hibrit Runbook Worker üzerinde çalışması amaçlanan runbook 'larınızda kullanın.
 
 Karmaşık bir değişken türü için değer oluşturmak veya değiştirmek için Azure portal kullanamazsınız. Ancak, Windows PowerShell kullanarak herhangi bir türde bir değer sağlayabilirsiniz. Karmaşık türler üzerindeNewtonsoft.Jsolarak alınır [ . ](https://www.newtonsoft.com/json/help/html/N_Newtonsoft_Json_Linq.htm) PSObject türü [PSCustomObject](/dotnet/api/system.management.automation.pscustomobject)yerine karmaşık nesne türü Için LINQ. jproperty.
 
@@ -56,10 +57,17 @@ Aşağıdaki tablodaki cmdlet 'ler, PowerShell ile otomasyon değişkenleri olu�
 
 | Cmdlet | Açıklama |
 |:---|:---|
-|[Get-AzAutomationVariable](/powershell/module/az.automation/get-azautomationvariable) | Mevcut bir değişkenin değerini alır. Değer basit bir tür ise, aynı tür alınır. Karmaşık bir tür ise, bir `PSCustomObject` tür alınır. <br>**Note:** Bu cmdlet 'i, şifrelenmiş bir değişkenin değerini almak için kullanamazsınız. Bunu yapmanın tek yolu, `Get-AutomationVariable` bir runbook veya DSC yapılandırmasında iç cmdlet 'ini kullanmaktır. [Değişkenlere erişmek için bkz. Dahili cmdlet 'ler](#internal-cmdlets-to-access-variables). |
+|[Get-AzAutomationVariable](/powershell/module/az.automation/get-azautomationvariable) | Mevcut bir değişkenin değerini alır. Değer basit bir tür ise, aynı tür alınır. Karmaşık bir tür ise, bir `PSCustomObject` tür alınır. <sup>1</sup>|
 |[New-AzAutomationVariable](/powershell/module/az.automation/new-azautomationvariable) | Yeni bir değişken oluşturur ve değerini ayarlar.|
 |[Remove-AzAutomationVariable](/powershell/module/az.automation/remove-azautomationvariable)| Varolan bir değişkeni kaldırır.|
 |[Set-AzAutomationVariable](/powershell/module/az.automation/set-azautomationvariable)| Mevcut bir değişken için değeri ayarlar. |
+
+<sup>1</sup> şifrelenen bir değişkenin değerini almak için bu cmdlet 'i kullanamazsınız. Bunu yapmanın tek yolu, `Get-AutomationVariable` bir runbook veya DSC yapılandırmasında iç cmdlet 'ini kullanmaktır. Örneğin, şifrelenmiş bir değişkenin değerini görmek için, değişkeni almak üzere bir runbook oluşturup çıkış akışına yazabilirsiniz:
+
+```powershell
+$encryptvar = Get-AutomationVariable -Name TestVariable
+Write-output "The encrypted value of the variable is: $encryptvar"
+```
 
 ## <a name="internal-cmdlets-to-access-variables"></a>Değişkenlere erişmek için iç cmdlet 'ler
 
@@ -71,14 +79,7 @@ Aşağıdaki tablodaki iç cmdlet 'ler, runbook 'larınızda ve DSC yapılandır
 |`Set-AutomationVariable`|Mevcut bir değişken için değeri ayarlar.|
 
 > [!NOTE]
-> `Name` `Get-AutomationVariable` RUNBOOK veya DSC yapılandırmasında ' in parametresindeki değişkenleri kullanmaktan kaçının. Değişkenlerin kullanımı, runbook 'lar ile otomasyon değişkenleri arasındaki bağımlılıkları tasarım zamanında bulmayı karmaşıklaştırır.
-
-`Get-AutomationVariable` PowerShell 'de çalışmaz, ancak yalnızca runbook veya DSC yapılandırmasında çalışmaz. Örneğin, şifrelenmiş bir değişkenin değerini görmek için, değişkeni almak üzere bir runbook oluşturup çıkış akışına yazabilirsiniz:
-
-```powershell
-$mytestencryptvar = Get-AutomationVariable -Name TestVariable
-Write-output "The encrypted value of the variable is: $mytestencryptvar"
-```
+> `Name` `Get-AutomationVariable` Bir RUNBOOK veya DSC yapılandırmasındaki cmdlet parametresindeki değişkenleri kullanmaktan kaçının. Bir değişkenin kullanımı, runbook 'lar ile otomasyon değişkenleri arasındaki bağımlılıkları tasarım zamanında bulmayı karmaşıklaştırır.
 
 ## <a name="python-functions-to-access-variables"></a>Değişkenlere erişmek için Python işlevleri
 
@@ -116,43 +117,53 @@ Runbook veya DSC yapılandırmanız `New-AzAutomationVariable` Yeni bir değişk
 Aşağıdaki örnek, bir dize değişkeninin nasıl oluşturulacağını gösterir ve ardından değerini döndürür.
 
 ```powershell
+$rgName = "ResourceGroup01"
+$accountName = "MyAutomationAccount"
+$variableValue = "My String"
+
 New-AzAutomationVariable -ResourceGroupName "ResourceGroup01" 
-–AutomationAccountName "MyAutomationAccount" –Name 'MyStringVariable' `
-–Encrypted $false –Value 'My String'
+-AutomationAccountName "MyAutomationAccount" -Name 'MyStringVariable' `
+-Encrypted $false -Value 'My String'
 $string = (Get-AzAutomationVariable -ResourceGroupName "ResourceGroup01" `
-–AutomationAccountName "MyAutomationAccount" –Name 'MyStringVariable').Value
+-AutomationAccountName "MyAutomationAccount" -Name 'MyStringVariable').Value
 ```
 
 Aşağıdaki örnek, karmaşık bir türe sahip bir değişken oluşturma ve ardından özelliklerini alma işlemlerinin nasıl yapılacağını gösterir. Bu durumda, [Get-AzVM](/powershell/module/Az.Compute/Get-AzVM) öğesinden bir sanal makine nesnesi, özelliklerinin bir alt kümesini belirtmek için kullanılır.
 
 ```powershell
-$vm = Get-AzVM -ResourceGroupName "ResourceGroup01" –Name "VM01" | Select Name, Location, Extensions
-New-AzAutomationVariable -ResourceGroupName "ResourceGroup01" –AutomationAccountName "MyAutomationAccount" –Name "MyComplexVariable" –Encrypted $false –Value $vm
+$rgName = "ResourceGroup01"
+$accountName = "MyAutomationAccount"
+
+$vm = Get-AzVM -ResourceGroupName "ResourceGroup01" -Name "VM01" | Select Name, Location, Extensions
+New-AzAutomationVariable -ResourceGroupName "ResourceGroup01" -AutomationAccountName "MyAutomationAccount" -Name "MyComplexVariable" -Encrypted $false -Value $vm
 
 $vmValue = Get-AzAutomationVariable -ResourceGroupName "ResourceGroup01" `
-–AutomationAccountName "MyAutomationAccount" –Name "MyComplexVariable"
+-AutomationAccountName "MyAutomationAccount" -Name "MyComplexVariable"
 
-$vmName = $vmValue.Name
-$vmExtensions = $vmValue.Extensions
+$vmName = $vmValue.Value.Name
+$vmTags = $vmValue.Value.Tags
 ```
 
 ## <a name="textual-runbook-examples"></a>Metinsel runbook örnekleri
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
-Aşağıdaki örnek, metinsel bir runbook 'ta nasıl değişken ayarlanacağını ve alınacağını gösterir. Bu örnekte, `NumberOfIterations` ve adlı `NumberOfRunnings` bir dize değişkeni olarak adlandırılan tamsayı değişkenlerinin oluşturulması varsayılır `SampleMessage` .
+Aşağıdaki örnek, metinsel bir runbook 'ta nasıl değişken ayarlanacağını ve alınacağını gösterir. Bu örnekte, **NumberOfIterations** ve **numberOfRunnings** adlı tamsayı değişkenlerinin oluşturulması ve **samplemessage** adlı bir dize değişkeni olduğunu varsaymaktadır.
 
 ```powershell
-$NumberOfIterations = Get-AzAutomationVariable -ResourceGroupName "ResourceGroup01" –AutomationAccountName "MyAutomationAccount" -Name 'NumberOfIterations'
-$NumberOfRunnings = Get-AzAutomationVariable -ResourceGroupName "ResourceGroup01" –AutomationAccountName "MyAutomationAccount" -Name 'NumberOfRunnings'
-$SampleMessage = Get-AutomationVariable -Name 'SampleMessage'
+$rgName = "ResourceGroup01"
+$accountName = "MyAutomationAccount"
 
-Write-Output "Runbook has been run $NumberOfRunnings times."
+$numberOfIterations = Get-AutomationVariable -Name "numberOfIterations"
+$numberOfRunnings = Get-AutomationVariable -Name "numberOfRunnings"
+$sampleMessage = Get-AutomationVariable -Name "sampleMessage"
 
-for ($i = 1; $i -le $NumberOfIterations; $i++) {
-    Write-Output "$i`: $SampleMessage"
+Write-Output "Runbook has been run $numberOfRunnings times."
+
+for ($i = 1; $i -le $numberOfIterations; $i++) {
+    Write-Output "$i`: $sampleMessage"
 }
-Set-AzAutomationVariable -ResourceGroupName "ResourceGroup01" –AutomationAccountName "MyAutomationAccount" –Name NumberOfRunnings –Value ($NumberOfRunnings += 1)
+Set-AutomationVariable -Name numberOfRunnings -Value ($numberOfRunnings += 1)
 ```
 
 # <a name="python-2"></a>[Python 2](#tab/python2)
@@ -207,16 +218,18 @@ except AutomationAssetNotFound:
 
 ## <a name="graphical-runbook-examples"></a>Grafik runbook örnekleri
 
-Grafik bir runbook 'ta, iç cmdlet 'ler veya için etkinlikler ekleyebilirsiniz `Get-AutomationVariable` `Set-AutomationVariable` . Grafik düzenleyicinin Kitaplık bölmesinde her bir değişkene sağ tıklayıp istediğiniz etkinliği seçmeniz yeterlidir.
+Grafik runbook 'unda, **Get-AutomationVariable** veya **set-AutomationVariable** iç cmdlet 'leri için etkinlik ekleyebilirsiniz. Grafik düzenleyicinin Kitaplık bölmesinde her bir değişkene sağ tıklayıp istediğiniz etkinliği seçmeniz yeterlidir.
 
 ![Tuvale değişken Ekle](../media/variables/runbook-variable-add-canvas.png)
 
-Aşağıdaki görüntüde, bir değişken grafik runbook 'unda basit bir değerle güncelleştirilecek örnek etkinlikler gösterilmektedir. Bu örnekte, için etkinlik `Get-AzVM`  tek bir Azure sanal makinesini alır ve bilgisayar adını var olan bir Otomasyon dizesi değişkenine kaydeder. Kodun yalnızca çıktıda tek bir nesne beklediği için [bağlantının bir ardışık düzen veya sıra](../automation-graphical-authoring-intro.md#use-links-for-workflow) olmasından bağımsız değildir.
+Aşağıdaki görüntüde, bir değişken grafik runbook 'unda basit bir değerle güncelleştirilecek örnek etkinlikler gösterilmektedir. Bu örnekte, için etkinlik `Get-AzVM` tek bir Azure sanal makinesini alır ve bilgisayar adını var olan bir Otomasyon dizesi değişkenine kaydeder. Kodun yalnızca çıktıda tek bir nesne beklediği için [bağlantının bir ardışık düzen veya sıra](../automation-graphical-authoring-intro.md#use-links-for-workflow) olmasından bağımsız değildir.
 
 ![Basit değişken ayarla](../media/variables/runbook-set-simple-variable.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Değişkenlere erişmek için kullanılan cmdlet 'ler hakkında daha fazla bilgi edinmek için bkz. [Azure Automation 'da modülleri yönetme](modules.md).
-* Runbook 'lar hakkında genel bilgi için bkz. [Azure Otomasyonu 'Nda runbook yürütme](../automation-runbook-execution.md).
-* DSC yapılandırmalarının ayrıntıları için bkz. [Azure Otomasyonu durum yapılandırmasına genel bakış](../automation-dsc-overview.md).
+- Değişkenlere erişmek için kullanılan cmdlet 'ler hakkında daha fazla bilgi edinmek için bkz. [Azure Automation 'da modülleri yönetme](modules.md).
+
+- Runbook 'lar hakkında genel bilgi için bkz. [Azure Otomasyonu 'Nda runbook yürütme](../automation-runbook-execution.md).
+
+- DSC yapılandırmalarının ayrıntıları için bkz. [Azure Otomasyonu durum yapılandırmasına genel bakış](../automation-dsc-overview.md).

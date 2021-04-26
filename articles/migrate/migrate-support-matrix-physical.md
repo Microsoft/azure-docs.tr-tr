@@ -6,12 +6,12 @@ ms.author: vivikram
 ms.manager: abhemraj
 ms.topic: conceptual
 ms.date: 03/18/2021
-ms.openlocfilehash: b62160861f686c6ea5a8ebfd03d904da2ad5d80a
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: 09110bb15f853f20b0be9d8c4c6f5088e7a55d8b
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104869455"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106382989"
 ---
 # <a name="support-matrix-for-physical-server-discovery-and-assessment"></a>Fiziksel sunucu bulma ve değerlendirmesi için destek matrisi 
 
@@ -39,6 +39,8 @@ Değerlendirmeler hakkında [daha fazla bilgi edinin](concepts-assessment-calcul
 **İzinleri**
 
 - Windows sunucularında, etki alanına katılmış sunucular için bir etki alanı hesabı ve etki alanına katılmamış sunucular için yerel bir hesap kullanın. Kullanıcı hesabı şu gruplara eklenmelidir: Uzaktan Yönetim Kullanıcıları, Performans İzleyicisi Kullanıcıları ve Performans Günlüğü Kullanıcıları.
+    > [!Note]
+    > Windows Server 2008 ve 2008 R2 için, WMF 3,0 ' nin sunucularda yüklü olduğundan ve sunuculara erişmek için kullanılan etki alanı/yerel hesap şu gruplara eklendiğinden emin olun: performans Izleyicisi kullanıcıları, performans günlüğü kullanıcıları ve WinRMRemoteWMIUsers.
 - Linux sunucuları için, bulmak istediğiniz Linux sunucularında bir kök hesabın olması gerekir. Alternatif olarak, aşağıdaki komutları kullanarak kök olmayan bir hesabı gerekli yetenekler olarak ayarlayabilirsiniz:
 
 **Komut** | **Amaç**

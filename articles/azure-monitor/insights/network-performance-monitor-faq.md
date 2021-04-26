@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: vinynigam
 ms.author: vinigam
 ms.date: 10/12/2018
-ms.openlocfilehash: 909cbd6174fe7eceaa8b53b5ba44fe72990b56d9
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a17dcf36cd8b23bf3bc014e2d101d057221de2b8
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101708059"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504902"
 ---
 # <a name="network-performance-monitor-solution-faq"></a>Ağ Performansı İzleyicisi çözümü SSS
 
@@ -95,9 +95,6 @@ Bir atlama kırmızıysa, en az bir sağlıksız yolun parçası olduğunu belir
 
 ### <a name="how-does-fault-localization-in-performance-monitor-work"></a>Performans Izleyicisinde hata yerelleştirmesi nasıl çalışır?
 NPM her ağ yoluna, ağ kesimine ve bileşen ağ atlıklarına, bir parçası oldukları sağlıksız yolların sayısına göre hata olasılıkların atanmasını sağlamak için bir dayalı mekanizması kullanır. Ağ kesimleri ve atlamaları daha fazla sağlıksız yolun parçası haline geldiği için, bunlarla ilişkili hata olasılığı artar. Bu algoritma en iyi şekilde çalışarak, hata olasılıkların hesaplanması için veri noktalarını arttığı için NPM Aracısı birbirlerine bağlı olan çok sayıda düğümünüz olduğunda bu algoritma en iyi şekilde çalışacaktır.
-
-### <a name="how-can-i-create-alerts-in-npm"></a>NPM 'de nasıl uyarı oluşturabilirim?
-Şu anda, NPM kullanıcı arabiriminden uyarı oluşturma, bilinen bir sorundan dolayı başarısız oluyor. Lütfen [uyarıları el ile oluşturun](../alerts/alerts-log.md).
 
 ### <a name="what-are-the-default-log-analytics-queries-for-alerts"></a>Uyarılar için varsayılan Log Analytics sorguları nelerdir?
 Performans İzleyicisi sorgusu

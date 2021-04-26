@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 09/14/2020
+ms.date: 03/22/2021
 ms.author: jeedes
-ms.openlocfilehash: 3b7c8e024ac8361c08cc41195531a114bb12fcb4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3af149f0c1db7f354be6bd968bbd0cf858493d4c
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92522300"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219306"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-oracle-peoplesoft---protected-by-f5-big-ip-apm"></a>Öğretici: F5 BIG-IP APM ile Oracle PeopleSoft ile korunan çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -40,19 +40,19 @@ Başlamak için aşağıdaki öğeler gereklidir:
     2. F5 BIG-IP Access Policy Manager™ (APM) tek başına lisansı 
     3. F5 BIG-IP Access Policy Manager™ (APM) bir büyük IP F5 BIG-IP® yerel Traffic Manager™ (LTM) eklenti lisansı.
     4. Yukarıdaki lisansın yanı sıra, F5 sistemine de lisans verebilir: 
-        * URL kategorisi veritabanını kullanmak için bir URL filtreleme aboneliği 
-        * Bilinen saldırganlar ve kötü amaçlı trafiği algılamak ve engellemek için F5 IP Intelligence aboneliği 
-        * Güçlü kimlik doğrulaması için dijital anahtarları korumak ve yönetmek için bir ağ donanımı güvenlik modülü (HSM)
-1. F5 BIG-IP sistemi APM modülleriyle sağlanır (LTM isteğe bağlıdır) 
+        * URL kategorisi veritabanını kullanmak için bir URL filtreleme aboneliği. 
+        * Bilinen saldırganlar ve kötü amaçlı trafiği algılamak ve engellemek için bir F5 IP Intelligence aboneliği. 
+        * Güçlü kimlik doğrulaması için dijital anahtarları korumak ve yönetmek için bir ağ donanımı güvenlik modülü (HSM).
+1. F5 BIG-IP sistemi APM modülleriyle sağlanır (LTM isteğe bağlıdır).
 1. İsteğe bağlı olsa da, F5 sistemlerini, yüksek kullanılabilirlik (HA) için kayan bir IP adresi ile birlikte etkin bekleme çifti içeren bir [eşitleme/yük devretme cihaz grubunda](https://techdocs.f5.com/kb/en-us/products/big-ip_ltm/manuals/product/big-ip-device-service-clustering-administration-14-1-0.html) (S/F DG) dağıtmanız önemle önerilir. Bağlantı toplama Denetim Protokolü (LACP) kullanılarak daha fazla arabirim artıklığı elde edilebilir. LACP, bağlı fiziksel arabirimleri tek bir sanal arabirim (toplama grubu) olarak yönetir ve grup içindeki tüm arabirim başarısızlıklarını algılar.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
 Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* F5 büyük-IP APM tarafından PeopleSoft tarafından korunan Oracle **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler
+* F5 büyük-IP APM tarafından PeopleSoft tarafından korunan Oracle **, SP ve ıDP** tarafından başlatılan SSO 'yu destekler.
 
-## <a name="adding-oracle-peoplesoft---protected-by-f5-big-ip-apm-from-the-gallery"></a>Galeriden F5 BIG-IP APM tarafından Oracle PeopleSoft-Protected 'e ekleme
+## <a name="add-oracle-peoplesoft---protected-by-f5-big-ip-apm-from-the-gallery"></a>Galeriden F5 BIG-IP APM 'ye Oracle PeopleSoft-Protected ile ekleme
 
 F5 BIG-IP APM tarafından Azure AD 'ye Oracle PeopleSoft-Protected 'ın tümleştirilmesini yapılandırmak için, Gallery 'den yönetilen SaaS uygulamaları listenize F5 büyük-IP APM 'ye göre Oracle PeopleSoft korumalı olarak eklemeniz gerekir.
 
@@ -83,7 +83,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
 1. Azure portal, **Oracle PeopleSoft-Protected by F5 BIG-IP APM** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
 1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
-1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
@@ -231,7 +231,7 @@ Meta veri sertifikasını, daha sonra kurulum sürecinde kullanılacak F5 'e akt
 >[!Note]
 > Başvurunun https://docs.oracle.com/cd/E12530_01/oam.1014/e10356/people.htm
 
-1. `https://<FQDN>.peoplesoft.f5.com/:8000/psp/ps/?cmd=start`Yönetici kimlik bilgilerini kullanarak PeopleSoft konsolunda oturum açma (örnek: PS/PS)
+1. `https://<FQDN>.peoplesoft.f5.com/:8000/psp/ps/?cmd=start`Yönetici kimlik bilgilerini kullanarak PeopleSoft konsolunda oturum açın (örnek: PS/PS).
 
     ![Yönetici Self Servis](./media/oracle-peoplesoft-protected-by-f5-big-ip-apm-tutorial/people-soft-console.png)
 
@@ -302,7 +302,7 @@ Tüm PeopleSoft kullanıcıları için çoklu oturum kapatma desteği eklemek i�
 
     * Sanal **sunucular > sanal sunucu listesi > PeopleSoftApp > kaynakları > yerel trafiğe** gidin. **Yönet...** öğesine tıklayın Bu   
 
-    * `<Name>`Etkin ırule olarak belirtip **tamamlandı** ' ya tıklayın
+    * `<Name>`Etkin ırule olarak belirtip **tamamlandı**' ya tıklayın.
 
         ![_iRule_PeopleSoftApp ](./media/oracle-peoplesoft-protected-by-f5-big-ip-apm-tutorial/irule-people-soft.png)
 
@@ -327,11 +327,10 @@ Bu bölümde, Azure AD çoklu oturum açma yapılandırmanızı aşağıdaki se�
 
 #### <a name="idp-initiated"></a>IDP başlatıldı:
 
-* Azure portal ' de **Bu uygulamayı test et** ' e tıklayın. SSO 'Yu AYARLADıĞıNıZ F5 BIG-IP APM tarafından Oracle PeopleSoft-Protected otomatik olarak oturum açmış olmanız gerekir 
+* Azure portal ' de **Bu uygulamayı test et** ' e tıklayın ve F5 ' i AYARLADıĞıNıZ F5 BIG-IP APM tarafından Oracle PeopleSoft-Protected otomatik olarak oturum açmış olmanız gerekir. 
 
-Uygulamayı dilediğiniz modda test etmek için Microsoft Access panel ' i de kullanabilirsiniz. Access panel 'de F5 BIG-IP APM kutucuğuna göre Oracle PeopleSoft-Protected tıkladığınızda, SP modunda yapılandırıldıysa, oturum açma akışını başlatmak için uygulama oturum açma sayfasına yönlendirilirsiniz ve ıDP modunda yapılandırıldıysa, SSO 'yu ayarladığınız F5 BIG-IP APM 'ye göre Oracle PeopleSoft-Protected otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](../user-help/my-apps-portal-end-user-access.md).
-
+Uygulamayı dilediğiniz modda test etmek için Microsoft My Apps ' i de kullanabilirsiniz. Uygulamamda F5 BIG-IP APM kutucuğuna göre Oracle PeopleSoft-Protected tıkladığınızda, SP modunda yapılandırıldıysa, oturum açma akışını başlatmak için uygulama oturum açma sayfasına yönlendirilirsiniz ve ıDP modunda yapılandırıldıysa, SSO 'yu ayarladığınız F5 BIG-IP APM tarafından Oracle PeopleSoft-Protected otomatik olarak oturum açmış olmanız gerekir. Uygulamalarım hakkında daha fazla bilgi için bkz. [uygulamalarıma giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-F5 BIG-IP APM tarafından Oracle PeopleSoft tarafından korunan bir kez yapılandırıldıktan sonra, kuruluşunuzun hassas verilerinin gerçek zamanlı olarak ayıklanmasını ve zaman korumasını koruyan oturum denetimini zorunlu kılabilirsiniz. Oturum denetimi koşullu erişimden genişletiliyor. [Microsoft Cloud App Security ile oturum denetimini nasıl zorlayacağınızı öğrenin](/cloud-app-security/proxy-deployment-any-app).
+F5 BIG-IP APM ile Oracle PeopleSoft-Protected yapılandırıldıktan sonra, kuruluşunuzun hassas verilerinin gerçek zamanlı olarak ayıklanmasını ve infilğini koruyan oturum denetimini zorunlu kılabilirsiniz. Oturum denetimi koşullu erişimden genişletiliyor. [Microsoft Cloud App Security ile oturum denetimini nasıl zorlayacağınızı öğrenin](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).

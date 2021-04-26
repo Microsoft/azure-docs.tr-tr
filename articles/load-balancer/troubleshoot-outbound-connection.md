@@ -7,16 +7,16 @@ ms.service: load-balancer
 ms.topic: troubleshooting
 ms.date: 05/7/2020
 ms.author: errobin
-ms.openlocfilehash: 516576f4e005cc9fe2303945ecb1a13489908a5d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1f52900086afef09d69b80bf44474d5514e25235
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94696362"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107748889"
 ---
 # <a name="troubleshooting-outbound-connections-failures"></a><a name="obconnecttsg"></a> Giden bağlantı hatalarıyla ilgili sorunları giderme
 
-Bu makale, bir Azure Load Balancer giden bağlantılarla ilgili sık karşılaşılan sorunlara yönelik çözümler sağlanması amacını taşımaktadır. Müşterilerin deneyimlerine giden bağlantı ile ilgili çoğu sorun, SNAT bağlantı noktası tükenmesi ve bırakılan paketlere yönelik bağlantı zaman aşımları nedeniyle yapılır. Bu makalede, bu sorunların her birini azaltmaya yönelik adımlar sağlanmaktadır.
+Bu makale, bir Azure Load Balancer giden bağlantılarla oluşabilecek yaygın sorunlara yönelik çözümler sağlamaya yöneliktir. Müşterilerin deneyimlerine giden bağlantı ile ilgili çoğu sorun, SNAT bağlantı noktası tükenmesi ve bırakılan paketlere yönelik bağlantı zaman aşımları nedeniyle yapılır. Bu makalede, bu sorunların her birini azaltmaya yönelik adımlar sağlanmaktadır.
 
 ## <a name="managing-snat-pat-port-exhaustion"></a><a name="snatexhaust"></a> SNAT (PAT) bağlantı noktası tükenmesi yönetimi
 [Pat](load-balancer-outbound-connections.md) Için kullanılan [kısa ömürlü bağlantı noktaları](load-balancer-outbound-connections.md) , genel IP [adresi olmayan tek BAŞıNA VM](load-balancer-outbound-connections.md) 'de ve [genel IP adresi olmayan yük dengeli VM](load-balancer-outbound-connections.md)'de açıklandığı gibi, tüketilmeyen bir kaynaktır. [Bu](./load-balancer-standard-diagnostics.md#how-do-i-check-my-snat-port-usage-and-allocation) Kılavuzu kullanarak, daha kısa ömürlü bağlantı noktaları kullanımınızı izleyebilir ve geçerli ayırınızla karşılaştırabilir.

@@ -2,18 +2,20 @@
 title: Azure Işlevleri ve SignalR hizmeti ile sohbet odası oluşturmak için Java 'Yı kullanma
 description: Java kullanarak bir sohbet odası oluşturmak için Azure SignalR hizmetini ve Azure Işlevlerini kullanmaya yönelik hızlı başlangıç.
 author: sffamily
+ms.author: zhshang
+ms.date: 03/04/2019
+ms.topic: quickstart
 ms.service: signalr
 ms.devlang: java
-ms.topic: quickstart
-ms.date: 03/04/2019
-ms.author: zhshang
-ms.custom: devx-track-java
-ms.openlocfilehash: 62f31d8426e86cc20e957f3a47b30109dee0a634
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom:
+- devx-track-java
+- mode-api
+ms.openlocfilehash: 0d93b9b645aaf4190a36dbc523d40dec2757a18b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96185683"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107869806"
 ---
 # <a name="quickstart-use-java-to-create-a-chat-room-with-azure-functions-and-signalr-service"></a>Hızlı başlangıç: Java kullanarak Azure Işlevleri ve SignalR hizmeti ile sohbet odası oluşturma
 
@@ -29,7 +31,7 @@ Azure SignalR hizmeti, uygulamanıza kolayca gerçek zamanlı işlevselliği ekl
    > Java 'daki gerekli SignalR hizmeti bağlamaları yalnızca Azure Function Core araçları sürüm 2.4.419 (ana bilgisayar sürümü 2.0.12332) veya üzeri sürümlerde desteklenir.
 
    > [!NOTE]
-   > Uzantıları yüklemek için Azure Functions Core Tools [.NET Core SDK](https://www.microsoft.com/net/download) yüklü olmasını gerektirir. Ancak JavaScript Azure İşlev uygulamaları oluşturmak için .NET bilgisi gerekmemektedir.
+   > Uzantıları yüklemek için Azure Functions Core Tools [.NET Core SDK](https://dotnet.microsoft.com/download) yüklü olmasını gerektirir. Ancak JavaScript Azure İşlev uygulamaları oluşturmak için .NET bilgisi gerekmemektedir.
 
 - [Java Developer Kit](https://www.azul.com/downloads/zulu/), sürüm 8
 - [Apache Maven](https://maven.apache.org), sürüm 3.0 veya üzeri

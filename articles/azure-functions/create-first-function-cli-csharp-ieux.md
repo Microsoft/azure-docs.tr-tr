@@ -6,13 +6,14 @@ ms.topic: quickstart
 ms.custom:
 - devx-track-csharp
 - devx-track-azurecli
+- devx-track-azurepowershell
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: a78abea5bcc5925cb2e137d918c7217ae92b118e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 45173a74c0e3189c1f356aea2f8024ff15409f32
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102044332"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107866206"
 ---
 # <a name="quickstart-create-a-c-function-in-azure-from-the-command-line"></a>Hızlı başlangıç: Azure 'da komut satırından C# işlevi oluşturma
 
@@ -34,11 +35,11 @@ Bu makalenin [Visual Studio Code tabanlı bir sürümü](create-first-function-v
 
 + Azure alın <abbr title="Azure kullanımı için fatura bilgilerini tutan profil.">account</abbr> etkin bir <abbr title="Azure 'da, genellikle bir kuruluş içindeki bir birey veya departmanla ilişkili kaynakları yönettiğiniz temel kuruluş yapısıdır.">aboneliği</abbr>. [Ücretsiz hesap oluşturun](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 
-+ [.NET Core SDK 3,1](https://www.microsoft.com/net/download) 'yi yükler
++ [.NET Core 3,1 SDK 'sını](https://dotnet.microsoft.com/download) yükler
 
 + [Azure Functions Core Tools](functions-run-local.md#v2) sürüm 3. x sürümünü yükler.
 
-+ Her iki <abbr title="Azure portal kullanımına alternatif olarak, yerel geliştirme bilgisayarınızdan Azure kaynaklarıyla çalışmaya yönelik platformlar arası komut satırı araçları kümesi.">Azure CLI’si</abbr> veya <abbr title="Azure portal kullanımına alternatif olarak, yerel geliştirme bilgisayarınızdan Azure kaynaklarıyla çalışmaya yönelik komutlar sağlayan bir PowerShell modülü.">Azure PowerShell</abbr> Azure kaynakları oluşturmak için:
++ Her iki <abbr title="Azure portal kullanımına alternatif olarak, yerel geliştirme bilgisayarınızdan Azure kaynaklarıyla çalışmaya yönelik platformlar arası komut satırı araçları kümesi.">Azure CLI</abbr> veya <abbr title="Azure portal kullanımına alternatif olarak, yerel geliştirme bilgisayarınızdan Azure kaynaklarıyla çalışmaya yönelik komutlar sağlayan bir PowerShell modülü.">Azure PowerShell</abbr> Azure kaynakları oluşturmak için:
 
     + [Azure CLI](/cli/azure/install-azure-cli) sürüm 2,4 veya üzeri.
 
@@ -183,7 +184,7 @@ Bu bölümde, yerel bir <abbr title="Birlikte dağıtılabilecek ve yönetilebil
     az group create --name AzureFunctionsQuickstart-rg --location westeurope
     ```
 
-    [Az Group Create](/cli/azure/group#az-group-create) komutu bir kaynak grubu oluşturur. Genellikle kaynak grubunuzu ve kaynaklarınızı bir <abbr title="Kaynakların ayrıldığı belirli bir Azure veri merkezine coğrafi başvuru.">region</abbr> yakın bir şekilde, komuttan döndürülen kullanılabilir bir bölgeyi kullanarak `az account list-locations` .
+    [Az Group Create](/cli/azure/group#az_group_create) komutu bir kaynak grubu oluşturur. Genellikle kaynak grubunuzu ve kaynaklarınızı bir <abbr title="Kaynakların ayrıldığı belirli bir Azure veri merkezine coğrafi başvuru.">region</abbr> yakın bir şekilde, komuttan döndürülen kullanılabilir bir bölgeyi kullanarak `az account list-locations` .
 
     # <a name="azure-powershell"></a>[Azure PowerShell](#tab/azure-powershell)
 

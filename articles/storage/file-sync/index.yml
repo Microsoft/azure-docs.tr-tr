@@ -1,0 +1,53 @@
+### YamlMime:Landing
+title: Azure Dosya Eşitleme belgeleri
+summary: Azure Dosya Eşitleme, Azure dosyalarında kuruluşunuzun dosya paylaşımlarını merkezileştirerek bir Windows dosya sunucusunun esnekliğini, performansını ve uyumluluğunu koruyarak sağlar.
+metadata:
+  title: Azure Dosya Eşitleme belgeleri
+  description: Dosya paylaşımlarını Windows, Linux ve macOS üzerinde çalışacak şekilde bulutta veya şirket içinde bağlayın. Yerel erişim için Azure dosya paylaşımlarını Windows sunucularında Azure Dosya Eşitleme ile önbelleğe alın.
+  services: storage
+  ms.service: storage
+  ms.subservice: files
+  ms.topic: landing-page
+  ms.collection: collection
+  author: roygara
+  ms.author: rogarana
+  ms.date: 04/19/2021
+  ms.openlocfilehash: 1a384985bbd58285ec1a556f2840f27994c4c40b
+  ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
+  ms.translationtype: MT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 04/20/2021
+  ms.locfileid: "107798973"
+landingContent:
+- title: Azure dosyaları eşitleme hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Dosya Eşitleme planlama kılavuzu
+      url: file-sync-planning.md
+    - text: Azure Dosya Eşitleme nedir?
+      url: file-sync-introduction.md
+    - text: Bulut katmanlaması genel bakış
+      url: file-sync-cloud-tiering-overview.md
+- title: başlarken
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Dosya paylaşımları oluşturma/kullanma - Windows
+      url: ../files/storage-files-quick-create-use-windows.md?toc=%2fazure%2fstorage%2ffilesync%2ftoc.json
+    - text: Azure Dosya Eşitleme ile sunucunuzu yönetme
+      url: file-sync-server-registration.md
+  - linkListType: tutorial
+    links:
+    - text: Windows dosya sunucularını Azure Dosya Eşitleme ile genişletme
+      url: file-sync-extend-servers.md
+- title: Sorun giderme
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure Dosyalar Windows sorunlarını giderme
+      url: ../files/storage-troubleshoot-windows-file-connection-problems.md?toc=%2fazure%2fstorage%2ffilesync%2ftoc.json
+    - text: Azure Dosyalar performans sorunlarını giderme
+      url: ../files/storage-troubleshooting-files-performance.md?toc=%2fazure%2fstorage%2ffilesync%2ftoc.json
+    - text: Azure Dosyalar Eşitleme sorunlarını giderme
+      url: file-sync-troubleshoot.md

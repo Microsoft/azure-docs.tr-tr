@@ -12,10 +12,10 @@ manager: celestedg
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
 ms.openlocfilehash: 4a5563ff1f57f6b3684834a2488fc0665ac5eddd
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102610051"
 ---
 # <a name="use-api-connectors-to-customize-and-extend-self-service-sign-up"></a>Self Servis kaydolma 'yı özelleştirmek ve genişletmek için API bağlayıcılarını kullanma 

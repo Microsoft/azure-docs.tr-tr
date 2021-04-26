@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 12/07/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: f690f4a416e86b02de0d35fc673849c1293df577
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 1f3fb07eaf7f63d15232f4c94eeee45f43c81616
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102095774"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106075145"
 ---
 # <a name="single-sign-on-session-management-in-azure-active-directory-b2c"></a>Azure Active Directory B2C 'da çoklu oturum açma oturumu yönetimi
 
@@ -30,7 +30,7 @@ Azure AD B2C, kullanılabilecek birkaç SSO oturum sağlayıcısı tanımladı:
 |---------|---------|
 |[NoopSSOSessionProvider](#noopssosessionprovider)     |  Yok       |       
 |[DefaultSSOSessionProvider](#defaultssosessionprovider)    | Azure AD B2C iç oturum Yöneticisi.      |       
-|[ExternalLoginSSOSessionProvider](#externalloginssosessionprovider)     | Azure AD B2C ile OAuth1, OAuth2 veya OpenID Connect kimlik sağlayıcısı arasında.        |         |
+|[ExternalLoginSSOSessionProvider](#externalloginssosessionprovider)     | Azure AD B2C ile OAuth1, OAuth2 veya OpenID Connect kimlik sağlayıcısı arasında.        | 
 |[OAuthSSOSessionProvider](#oauthssosessionprovider)     | Bir OAuth2 veya OpenID Connect bağlı olan taraf uygulaması ve Azure AD B2C.        |        
 |[SamlSSOSessionProvider](#samlssosessionprovider)     | Azure AD B2C ve SAML kimlik sağlayıcısı arasında. Ve bir SAML hizmet sağlayıcısı (bağlı olan taraf uygulaması) ve Azure AD B2C.  |        
 

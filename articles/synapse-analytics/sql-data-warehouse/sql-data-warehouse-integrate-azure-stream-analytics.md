@@ -2,21 +2,21 @@
 title: Adanmış SQL havuzunda Azure Stream Analytics kullanma
 description: Gerçek zamanlı çözümler geliştirmek için Azure SYNAPSE 'te adanmış SQL havuzu ile Azure Stream Analytics kullanmaya yönelik ipuçları.
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql-dw
 ms.date: 9/25/2020
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: igorstan
 ms.custom: azure-synapse
-ms.openlocfilehash: 023cf55a01f34277dd5c5707d0d123f54c1674df
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0c7f139b50cd43e3e8862fda3f5401a853ced8d0
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104600097"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566588"
 ---
 # <a name="use-azure-stream-analytics-with-dedicated-sql-pool-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te adanmış SQL havuzu ile Azure Stream Analytics kullanma
 

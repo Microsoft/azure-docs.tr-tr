@@ -4,12 +4,12 @@ description: Hızlı başlangıç, özel bir konu yayımlamak ve bu konu için o
 ms.date: 07/07/2020
 ms.topic: quickstart
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 0a3d8f5a1614704cea4242ce64ecc6c4504da754
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d97c956e0b3da556ea9fc58ef61e0d1da984c055
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97702030"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786792"
 ---
 # <a name="quickstart-route-custom-events-to-web-endpoint-with-azure-cli-and-event-grid"></a>Hızlı başlangıç: Azure CLı ve Event Grid özel olayları Web uç noktasına yönlendirme
 
@@ -31,7 +31,7 @@ Normalde olayları, olay verilerini işleyen ve eylemler gerçekleştiren bir u�
 
 Event Grid konuları Azure kaynaklarıdır ve bir Azure kaynak grubuna yerleştirilmelidir. Kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal koleksiyondur.
 
-[az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun. 
+[az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun. 
 
 Aşağıdaki örnek *westus2* konumunda *gridResourceGroup* adlı bir kaynak grubu oluşturur.
 

@@ -2,7 +2,7 @@
   href: index.yml
 - name: Genel Bakış
   items:
-    - name: Modern okuyucuya genel bakış
+    - name: Tam Ekran Okuyucu nedir?
       href: Overview.md
     - name: Dil desteği
       href: language-support.md
@@ -10,7 +10,7 @@
       href: 'https://azure.microsoft.com/pricing/details/cognitive-services/immersive-reader/'
     - name: Sürüm notları
       href: release-notes.md
-- name: Modern okuyucu hızlı başlangıcı
+- name: Hızlı Başlangıç
   href: ./quickstarts/client-libraries.md
 - name: Nasıl Yapılır
   items:
@@ -36,14 +36,24 @@
       href: how-to-store-user-preferences.md
     - name: Birden çok Tam Ekran Okuyucu kaynağı kullanma
       href: how-to-multiple-resources.md
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/immersive-reader/context/context
+        - name: Azure AD kimlik doğrulamasını kullanma
+          href: ../authentication.md?context=/azure/cognitive-services/immersive-reader/context/context
 - name: Başvuru
   items:
     - name: JavaScript SDK'sı
       href: reference.md
 - name: Kaynaklar
   items:
-    - name: Bölgesel destek
-      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/immersive-reader/context/context
     - name: Azure güncelleştirmeleri

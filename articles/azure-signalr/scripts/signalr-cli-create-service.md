@@ -8,12 +8,12 @@ ms.topic: sample
 ms.date: 11/13/2018
 ms.author: zhshang
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 17b8df919c5059da3f3abd7a4f06aca1eadd0817
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d4f0746b98411aeecaf5bd6ec798cf3df7a9db8d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94563979"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787422"
 ---
 # <a name="create-a-signalr-service"></a>SignalR Hizmeti oluşturma 
 
@@ -69,9 +69,9 @@ Tablodaki her komut, komuta özgü belgelere yönlendirir. Bu betik şu komutlar
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az signalr create](/cli/azure/signalr#az-signalr-create) | Bir Azure SignalR Hizmeti kaynağı oluşturur. |
-| [az signalr key list](/cli/azure/signalr/key#az-signalr-key-list) | SignalR ile gerçek zamanlı içerik güncelleştirmeleri gönderilirken uygulamanız tarafından kullanılacak anahtarları listeler. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az signalr create](/cli/azure/signalr#az_signalr_create) | Bir Azure SignalR Hizmeti kaynağı oluşturur. |
+| [az signalr key list](/cli/azure/signalr/key#az_signalr_key_list) | SignalR ile gerçek zamanlı içerik güncelleştirmeleri gönderilirken uygulamanız tarafından kullanılacak anahtarları listeler. |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

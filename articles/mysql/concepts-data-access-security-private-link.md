@@ -6,12 +6,12 @@ ms.author: sumuth
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 03/10/2020
-ms.openlocfilehash: 438ef806f6c59c6f23877a3d3110f22f08ca8713
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: e239b6b00c5a5e993834a10fca30de02b9f715ff
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104863573"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106065523"
 ---
 # <a name="private-link-for-azure-database-for-mysql"></a>MySQL için Azure Veritabanı’na Yönelik Özel Bağlantı
 
@@ -118,7 +118,7 @@ MySQL için Azure veritabanı 'na erişmek üzere yalnızca özel uç noktalara 
 Bu ayar *Evet* olarak ayarlandığında, MySQL Için Azure veritabanı 'na yalnızca özel uç noktalar aracılığıyla bağlantılara izin verilir. Bu ayar *Hayır* olarak ayarlandığında, istemciler, güvenlik duvarınız veya VNET hizmeti uç noktası ayarlarınıza göre MySQL Için Azure veritabanınıza bağlanabilir. Ayrıca, özel ağ erişiminin değeri ayarlandıktan sonra müşteriler var olan ' güvenlik duvarı kurallarını ' ve ' VNet hizmeti uç noktası kuralları ' ekleyemez ve/veya güncelleştiremez.
 
 > [!Note]
-> Bu özellik, PostgreSQL için Azure veritabanı-tek sunucu Genel Amaçlı ve bellek için Iyileştirilmiş fiyatlandırma katmanlarını desteklediği tüm Azure bölgelerinde kullanılabilir.
+> Bu özellik, MySQL için Azure veritabanı-tek sunucu Genel Amaçlı ve bellek için Iyileştirilmiş fiyatlandırma katmanlarını desteklediği tüm Azure bölgelerinde kullanılabilir.
 >
 > Bu ayarın, MySQL için Azure veritabanı için SSL ve TLS yapılandırması üzerinde hiçbir etkisi yoktur.
 

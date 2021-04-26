@@ -1,99 +1,45 @@
 ---
-title: Performansı ölçeklendirme
+title: Kullanılabilirlik ve süreklilik
 titleSuffix: Azure Cognitive Search
-description: Azure Bilişsel Arama performansını ayarlamaya ve optimum ölçeği yapılandırmaya yönelik teknikleri ve en iyi yöntemleri öğrenin.
-manager: nitinme
+description: bir arama hizmetini yüksek oranda kullanılabilir hale getirme, dönem kesintilerini veya hatta çok zararlı hatalara karşı dayanıklı bir şekilde öğrenin.
 author: LiamCavanagh
 ms.author: liamca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 02/01/2021
+ms.date: 04/06/2021
 ms.custom: references_regions
-ms.openlocfilehash: 60371888dbc4f0cbc33f1ad1b2a685dbb071c01a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 493f6759f63f023572f38647076e04425acf9d6a
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101670708"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581532"
 ---
-# <a name="scale-for-performance-on-azure-cognitive-search"></a>Azure Bilişsel Arama performans için ölçeklendirin
+# <a name="availability-and-business-continuity-in-azure-cognitive-search"></a>Azure Bilişsel Arama kullanılabilirlik ve iş sürekliliği
 
-Bu makalede ölçeklenebilirlik ve kullanılabilirlik için gelişmiş gereksinimlere sahip gelişmiş senaryolar için en iyi yöntemler açıklanmaktadır.
+Bilişsel Arama, kullanılabilirlik birden fazla çoğaltma aracılığıyla elde edilir, ancak iş sürekliliği (ve olağanüstü durum kurtarma) birden çok arama hizmeti aracılığıyla gerçekleştirilir. Bu makale, hem kullanılabilirlik hem de sürekli işlemler için iş gereksinimlerinizi karşılayan bir strateji geliştirmek üzere bir başlangıç noktası olarak kullanabileceğiniz rehberlik sağlar.
 
-## <a name="start-with-baseline-numbers"></a>Taban çizgisi numaralarıyla başla
+<a name="scale-for-availability"></a>
 
-Daha büyük bir dağıtım çabadan önce, tipik bir sorgu yükünün nasıl göründüğünü öğrendiğinizden emin olun. Aşağıdaki kılavuzlar, taban çizgisi sorgu numaralarına ulaşgetirmenize yardımcı olabilir.
+## <a name="high-availability"></a>Yüksek kullanılabilirlik
 
-1. Tipik bir arama isteğinin tamamlanması için gereken bir hedef gecikme süresi (veya en fazla süre) seçin.
+Bilişsel Arama, çoğaltmalar dizininizdeki kopyalardır. Birden çok çoğaltmanın olması, Azure Bilişsel Arama 'nin makinenin yeniden başlatmalar ve bakım yapmasına olanak sağlarken, sorgu yürütme diğer çoğaltmalarda devam eder. Çoğaltmaları ekleme hakkında daha fazla bilgi için bkz. [çoğaltmaları ve bölümleri ekleme veya azaltma](search-capacity-planning.md#adjust-capacity).
 
-1. Bu gecikme sürelerini ölçmek için gerçekçi bir veri kümesiyle, arama hizmetinize karşı gerçek bir iş yükü oluşturun ve test edin.
-
-1. Saniye başına az sayıda sorgu (QPS) ile başlayın ve ardından sorgu gecikmesi önceden tanımlanmış hedefin altına düşene kadar testte yürütülen sayıyı kademeli olarak artırın. Bu, uygulamanızın kullanımda büyüdüğü sürece ölçek planlaması yapmanıza yardımcı olan önemli bir kıyaslamaya yöneliktir.
-
-1. Mümkün olan yerlerde HTTP bağlantılarını yeniden kullanın. Azure Bilişsel Arama .NET SDK kullanıyorsanız bu, bir örneği veya [Searchclient](/dotnet/api/azure.search.documents.searchclient) örneğini yeniden kullanmanız gerektiği anlamına gelir ve REST API kullanıyorsanız, tek bir HttpClient kullanmanız gerekir.
-
-1. Sorgunun farklı bölümlerinin üzerinde gerçekleşmesini sağlamak için sorgu isteklerinin bu şekilde çeşitini farklılık gösterir. Aynı arama isteklerini sürekli olarak yürütüyorsa, değişim önemlidir çünkü sürekli olarak aynı arama isteklerini yürütüyorsa, verilerin önbelleğe alınması, daha farklı bir sorgu kümesiyle olabileceği gibi performansı daha iyi hale getirmek için başlar.
-
-1. Farklı sorgu türlerini alabilmeniz için sorgu isteklerinin yapısını farklılık gösterir. Her arama sorgusu aynı düzeyde uygulanmaz. Örneğin, bir belge arama veya arama önerisi genellikle önemli sayıda model ve filtre içeren bir sorgudan daha hızlıdır. Test kompozisyonu, kabaca, üretimde bekleeceğiniz oranlar halinde çeşitli sorgular içermelidir.  
-
-Bu test iş yüklerini oluştururken aklınızda bulundurmanız gereken bazı Azure Bilişsel Arama özellikleri vardır:
-
-+ Tek seferde çok fazla arama sorgusu göndererek hizmetinizi aşırı yükleme olasılığı vardır. Bu durumda, HTTP 503 yanıt kodları görürsünüz. Test sırasında 503 önlemek için, daha fazla arama isteği eklerken gecikme hızlarındaki farkları görmek üzere çeşitli arama istekleri aralıklarıyla başlayın.
-
-+ Azure Bilişsel Arama, dizin oluşturma görevlerini arka planda çalıştırmaz. Hizmetiniz sorgu ve dizin oluşturma iş yüklerini eşzamanlı olarak işlerinizde, sorgu testleriniz için dizin oluşturma işleri sunarak ya da yoğun saatlerde dizin oluşturma işlerini çalıştırmaya yönelik seçenekleri inceleyerek bunu hesaba sunun.
-
-> [!Tip]
-> Yük testi araçlarını kullanarak gerçekçi bir sorgu yükünün benzetimini yapabilirsiniz. [Azure DevOps ile yük testi](/azure/devops/test/load-test/get-started-simple-cloud-load-test) yapmayı deneyin veya bu [alternatifden](/azure/devops/test/load-test/overview#alternatives)birini kullanın.
-
-## <a name="scale-for-high-query-volume"></a>Yüksek sorgu hacmi için ölçeklendirin
-
-Sorgular çok uzun sürmeye başladığında veya hizmet istekleri bırakmaya başladığında bir hizmet aşırı kullanılıyor. Böyle bir durumla karşılaşırsanız, sorunu iki şekilde ele alabilirsiniz:
-
-+ **Çoğaltmalar ekleme**  
-
-  Her çoğaltma, verilerinizin birden çok kopyaya karşı yük dengelemesi yapmasına izin veren verilerinizin bir kopyasıdır.  Tüm yük dengeleme ve veri çoğaltma işlemi Azure Bilişsel Arama tarafından yönetilir ve hizmetiniz için ayrılan çoğaltmaların sayısını dilediğiniz zaman değiştirebilirsiniz. Standart bir arama hizmetinde 12 ' ye kadar çoğaltma ve temel bir arama hizmetinde 3 çoğaltma ayırabilirsiniz. Çoğaltmalar [Azure Portal](search-create-service-portal.md) ya da [PowerShell](search-manage-powershell.md)'den ayarlanabilir.
-
-+ **Daha yüksek bir katmanda yeni bir hizmet oluşturun**  
-
-  Azure Bilişsel Arama [birkaç katmanda](https://azure.microsoft.com/pricing/details/search/) gelir ve her biri farklı performans düzeyleri sunar. Bazı durumlarda, üzerinde yaptığınız katmanda çoğaltmalar ne zaman olsa bile yeterli sayıda sorgu sağlayamadığımdan çok sayıda sorguya sahip olabilirsiniz. Bu durumda, çok sayıda belge ve çok yüksek sorgu iş yükleri gibi senaryolar için tasarlanan Standart S3 katmanı gibi daha yüksek performanslı bir katmana geçmeyi göz önünde bulundurun.
-
-## <a name="scale-for-slow-individual-queries"></a>Yavaş tek sorgular için ölçeklendirin
-
-Yüksek gecikme oranları için bir diğer neden, tek bir sorgunun tamamlanmasını çok uzun sürüyor. Bu durumda, çoğaltmaları eklemek yardımcı olmayacaktır. Aşağıdakileri içeren olası iki seçenek vardır:
-
-+ **Bölümleri artırma**
-
-  Bir bölüm, verileri ek bilgi işlem kaynakları arasında böler. İki bölüm, verileri yarı bir şekilde ayırır, üçüncü bir bölüm onu üç ve diğerleri olarak böler. Bir pozitif yan etki, daha yavaş sorguların bazen paralel bilgi işlem nedeniyle daha hızlı bir şekilde gerçekleştirilemesidir. Çok sayıda belgeyle eşleşen sorgular veya çok sayıda belge üzerinde sayı sağlayan modeller gibi düşük seçiciliği sorgularında paralelleştirme belirtiyoruz. Belgelerin yeniden dengeliğine veya belge numaralarını saymaya yönelik önemli bir hesaplama gerektiğinden, ek bölümler eklemek sorguların daha hızlı tamamlanmasını sağlar.  
-   
-  Temel arama hizmetinde standart arama hizmetinde ve 1 bölümde en fazla 12 bölüm olabilir. Bölümler [Azure Portal](search-create-service-portal.md) ya da [PowerShell](search-manage-powershell.md)'den ayarlanabilir.
-
-+ **Yüksek kardinalite alanlarını sınırla**
-
-  Yüksek bir kardinalite alanı, önemli sayıda benzersiz değere sahip çok yönlü veya filtrelenebilir bir alandan oluşur ve sonuç olarak sonuçları hesaplarken önemli kaynakları tüketir. Örneğin, bir ürün KIMLIĞI veya açıklama alanını çok yönlü tablo/filtre olarak ayarlamak, belgedeki değerlerin çoğu benzersiz olduğundan yüksek önem düzeyi olarak sayılır. Mümkün olan yerlerde, yüksek kardinalite alanlarının sayısını sınırlandırın.
-
-+ **Arama katmanını artır**  
-
-  Daha yüksek bir Azure Bilişsel Arama katmanına taşımak, yavaş sorguların performansını artırmanın başka bir yolu olabilir. Her iki katman da daha hızlı CPU ve daha fazla bellek sağlar ve bunların her ikisi de sorgu performansı üzerinde olumlu bir etkiye sahiptir.
-
-## <a name="scale-for-availability"></a>Kullanılabilirlik için ölçeklendirin
-
-Çoğaltmalar yalnızca sorgu gecikmesini azaltmaya yardımcı olur, ancak yüksek kullanılabilirliğe de izin verebilir. Tek bir çoğaltmayla, yazılım güncelleştirmelerinden sonra veya gerçekleşen diğer bakım olayları için sunucu yeniden başlatılması nedeniyle dönemsel kapalı kalma süresi beklemelisiniz. Sonuç olarak, uygulamanızın çok yüksek düzeyde aramalar (sorgular) ve yazmaları (Dizin oluşturma olayları) gerektirip gerektirmediğini göz önünde bulundurmanız önemlidir. Azure Bilişsel Arama, tüm ücretli arama tekliflerindeki SLA seçeneklerini aşağıdaki özniteliklerle sunar:
+Microsoft, her bir arama hizmeti için, şu ölçütlere uyan yapılandırmalarda en az% 99,9 kullanılabilirlik garantisi verir: 
 
 + Salt okuma iş yüklerinin yüksek kullanılabilirliği için iki çoğaltma (sorgular)
 
-+ Okuma/yazma iş yüklerinin yüksek kullanılabilirliği için üç veya daha fazla çoğaltma (sorgular ve dizin oluşturma)
++ Okuma/yazma iş yüklerinin yüksek kullanılabilirliği için üç veya daha fazla çoğaltma (sorgular ve dizin oluşturma) 
 
-Bunun hakkında daha fazla bilgi için lütfen [Azure Bilişsel Arama hizmet düzeyi sözleşmesi](https://azure.microsoft.com/support/legal/sla/search/v1_0/)ziyaret edin.
-
-Çoğaltmalar verilerinizin kopyaları olduğundan, birden fazla kopyaya sahip olmak Azure Bilişsel Arama 'nin makine yeniden başlatmaları ve bakım yapmasına izin verdiğinden, sorgu yürütme diğer çoğaltmalarda devam eder. Buna karşılık, çoğaltmaları dışarıda bırakırsanız, bu çoğaltmaların bir veya daha fazla kaynak olduğu varsayıldığında sorgu performansı düşüşüne tabi olursunuz.
+Ücretsiz katman için SLA sağlanmaz. Daha fazla bilgi için bkz. [Azure bilişsel arama Için SLA](https://azure.microsoft.com/support/legal/sla/search/v1_0/).
 
 <a name="availability-zones"></a>
 
-### <a name="availability-zones"></a>Kullanılabilirlik Alanları
+## <a name="availability-zones"></a>Kullanılabilirlik Alanları
 
-[Kullanılabilirlik alanları](../availability-zones/az-overview.md) , aynı bölgede yüksek kullanılabilirlik sağlamak için bir bölgenin veri merkezlerini ayrı fiziksel konum gruplarına bölün. Bilişsel Arama için, bireysel çoğaltmalar bölge atamasının birimleridir. Bir arama hizmeti tek bir bölgede çalışır; çoğaltmaları farklı bölgelerde çalışır.
+[Kullanılabilirlik alanları](../availability-zones/az-overview.md) , bir bölgenin veri merkezlerini, aynı bölgede yüksek kullanılabilirlik sağlamak üzere ayrı fiziksel konum gruplarına ayıran bir Azure platformu özelliğidir. Bilişsel Arama için Kullanılabilirlik Alanları kullanırsanız, bireysel çoğaltmalar bölge atamasının birimleridir. Bir arama hizmeti tek bir bölgede çalışır; çoğaltmaları farklı bölgelerde çalışır.
 
-Arama hizmetinize iki veya daha fazla çoğaltma ekleyerek Azure Bilişsel Arama ile Kullanılabilirlik Alanları kullanabilirsiniz. Her çoğaltma, bölge içinde farklı bir kullanılabilirlik bölgesine yerleştirilir. Kullanılabilirlik Alanları daha fazla çoğaltmadıysanız çoğaltmalar, olabildiğince eşit Kullanılabilirlik Alanları dağıtılır.
+Arama hizmetinize iki veya daha fazla çoğaltma ekleyerek Azure Bilişsel Arama ile Kullanılabilirlik Alanları kullanabilirsiniz. Her çoğaltma, bölge içinde farklı bir kullanılabilirlik bölgesine yerleştirilir. Kullanılabilirlik Alanları daha fazla çoğaltmadıysanız çoğaltmalar, olabildiğince eşit Kullanılabilirlik Alanları dağıtılır. Bölüminizdeki belirli bir eylem yoktur, Kullanılabilirlik Alanları ve ardından hizmeti [birden çok çoğaltma kullanmak](search-capacity-planning.md#adjust-capacity)üzere yapılandırmak için [bir arama hizmeti oluşturun](search-create-service-portal.md) .
 
 Azure Bilişsel Arama şu anda şu bölgelerden birinde oluşturulan Standart katman veya daha yüksek arama hizmetleri için Kullanılabilirlik Alanları desteklemektedir:
 
@@ -112,21 +58,31 @@ Azure Bilişsel Arama şu anda şu bölgelerden birinde oluşturulan Standart ka
 
 Kullanılabilirlik Alanları [Azure Bilişsel Arama hizmet düzeyi sözleşmesi](https://azure.microsoft.com/support/legal/sla/search/v1_0/)etkilemez. Sorgu yüksek kullanılabilirlik için hala 3 veya daha fazla çoğaltma gerekir.
 
-## <a name="scale-for-geo-distributed-workloads-and-geo-redundancy"></a>Coğrafi olarak dağıtılan iş yükleri ve coğrafi yedeklilik için ölçeklendirin
+## <a name="multiple-services-in-separate-geographic-regions"></a>Ayrı coğrafi bölgelerde birden çok hizmet
 
-Coğrafi olarak dağıtılan iş yükleri için, ana bilgisayar veri merkezinden uzakta bulunan kullanıcılar daha yüksek gecikme süresine sahip olur. Bir hafifletme, bölgelere bu kullanıcılara daha yakından yaklaşarak birden çok arama hizmeti sağlamak.
+Müşterilerin çoğu yalnızca bir hizmet kullansa da, işletim gereksinimleri arasında aşağıdakiler yer alıyorsa hizmet yedekliliği gerekebilir:
 
-Azure Bilişsel Arama, bölge genelinde Azure Bilişsel Arama dizinlerinin coğrafi olarak çoğaltılmasının otomatik bir yöntemini sağlamıyor, ancak bu işlemi uygulamak ve yönetmek için basit hale getirmek üzere kullanılabilecek bazı teknikler vardır. Bunlar, sonraki birkaç bölümde özetlenmiştir.
++ [İş sürekliliği ve olağanüstü durum kurtarma (BCDR)](../best-practices-availability-paired-regions.md) (bilişsel arama kesinti durumunda anlık yük devretme sağlamaz).
++ Küresel olarak dağıtılan uygulamalar. Sorgu ve dizin oluşturma istekleri dünyanın her yerinden geliyorsa, ana bilgisayar veri merkezine en yakın olan kullanıcılar daha hızlı performansa sahip olur. Bu kullanıcılara yakın yakınlığa sahip bölgelerde ek hizmetler oluşturmak, tüm kullanıcılar için performansı eşitleyebilirsiniz.
++ [Çok kiracılı mimariler](search-modeling-multitenant-saas-applications.md) bazen iki veya daha fazla hizmet için çağrı yapılır.
 
-Coğrafi olarak dağıtılmış bir arama hizmetleri kümesinin amacı, iki veya daha fazla bölgede iki veya daha fazla dizine sahip olmaktır. Bu durumda, bir kullanıcının Azure Bilişsel Arama hizmetine yönlendirildiği, bu örnekte görüldüğü gibi en düşük gecikme süresi sağlar:
+İki farklı arama hizmetine ihtiyacınız varsa, bunları farklı bölgelerde oluşturmak süreklilik ve kurtarmaya yönelik uygulama gereksinimlerini ve genel kullanıcı tabanı için daha hızlı yanıt sürelerini karşılayabilir.
+
+Azure Bilişsel Arama, bölge genelinde coğrafi çoğaltma için arama dizinlerinin otomatik bir yöntemini sağlamıyor, ancak bu işlemi uygulamak ve yönetmek için basit hale getirmek üzere kullanılabilecek bazı teknikler vardır. Bunlar, sonraki birkaç bölümde özetlenmiştir.
+
+Coğrafi olarak dağıtılan bir arama hizmeti kümesinin hedefi, iki veya daha fazla bölgede iki veya daha fazla dizine sahip olmak için bir kullanıcının Azure Bilişsel Arama hizmetine yönlendirildiği, en düşük gecikme süresini sağlayan iki veya daha fazla dizin olması gerekir:
 
    ![Bölgeye göre hizmetlerin çapraz sekmesi][1]
 
+Bu mimariyi, birden çok hizmet oluşturarak ve veri eşitleme için bir strateji tasarlayarak uygulayabilirsiniz. İsteğe bağlı olarak, yönlendirme istekleri için Azure Traffic Manager gibi bir kaynak ekleyebilirsiniz. Daha fazla bilgi için bkz. [Arama hizmeti oluşturma](search-create-service-portal.md).
+
+<a name="data-sync"></a>
+
 ### <a name="keep-data-synchronized-across-multiple-services"></a>Verileri birden çok hizmet arasında eşitlenmiş durumda tut
 
-[Azure bilişsel arama Dizin oluşturucuyu](search-indexer-overview.md) veya anında iletme API 'Sini ( [Azure bilişsel arama REST API](/rest/api/searchservice/)olarak da bilinir) kullanarak, dağıtılmış arama hizmetlerinizi eşitlenmiş halde tutmanın iki seçeneği vardır.  
+[Azure bilişsel arama Dizin oluşturucuyu](search-indexer-overview.md) veya anında iletme API 'Sini ( [Azure bilişsel arama REST API](/rest/api/searchservice/)olarak da bilinir) kullanarak, iki veya daha fazla dağıtılmış arama hizmetini eşitlenmiş halde tutmak için kullanabileceğiniz iki seçenek vardır. 
 
-### <a name="use-indexers-for-updating-content-on-multiple-services"></a>Birden çok hizmet üzerinde içerik güncelleştirmek için Dizin oluşturucular kullanma
+#### <a name="option-1-use-indexers-for-updating-content-on-multiple-services"></a>Seçenek 1: birden çok hizmet üzerinde içerik güncelleştirmek için Dizin oluşturucular kullanma
 
 Bir hizmette zaten Dizin Oluşturucu kullanıyorsanız, ikinci bir hizmette ikinci bir Dizin Oluşturucu yapılandırarak aynı veri kaynağı nesnesini kullanarak aynı konumdan veri çekmesini sağlayabilirsiniz. Her bölgedeki her bir hizmetin kendi Dizin Oluşturucusu ve bir hedef dizini vardır (arama dizininiz paylaşılmaz, bu da veriler yinelenir), ancak her Dizin Oluşturucu aynı veri kaynağına başvurur.
 
@@ -134,15 +90,31 @@ Mimarinin nasıl görüneceğine ilişkin üst düzey bir görsel aşağıda ver
 
    ![Dağıtılmış Dizin Oluşturucu ve hizmet bileşimleri içeren tek veri kaynağı][2]
 
-### <a name="use-rest-apis-for-pushing-content-updates-on-multiple-services"></a>Birden çok hizmete içerik güncelleştirmelerini göndermek için REST API 'Lerini kullanma
+#### <a name="option-2-use-rest-apis-for-pushing-content-updates-on-multiple-services"></a>2. seçenek: içerik güncelleştirmelerini birden çok hizmete göndermek için REST API 'Lerini kullanma
 
-Azure [bilişsel arama dizininizdeki içeriği göndermek](/rest/api/searchservice/update-index)için azure bilişsel arama REST API kullanıyorsanız, her bir güncelleştirme gerektiğinde tüm arama hizmetlerine değişiklikleri göndererek çeşitli arama hizmetlerinizi eşitlenmiş halde tutabilirsiniz. Kodunuzda, bir arama hizmetine yapılan bir güncelleştirmenin başarısız olduğu ancak diğer arama hizmetleri için başarılı olduğu durumları işlediğinizden emin olun.
+[Arama dizininize içerik göndermek](tutorial-optimize-indexing-push-api.md)için Azure bilişsel arama REST API kullanıyorsanız, her bir güncelleştirme gerektiğinde tüm arama hizmetlerine değişiklikleri göndererek çeşitli arama hizmetlerinizi eşitlenmiş halde tutabilirsiniz. Kodunuzda, bir arama hizmetine yapılan bir güncelleştirmenin başarısız olduğu ancak diğer arama hizmetleri için başarılı olduğu durumları işlediğinizden emin olun.
 
-## <a name="leverage-azure-traffic-manager"></a>Azure Traffic Manager 'ten yararlanın
+### <a name="use-azure-traffic-manager-to-coordinate-requests"></a>İstekleri koordine etmek için Azure Traffic Manager kullanma
 
 [Azure Traffic Manager](../traffic-manager/traffic-manager-overview.md) , istekleri birden çok arama hizmeti tarafından desteklenen, coğrafi olarak bulunan birden çok Web sitesine yönlendirmenize olanak tanır. Traffic Manager avantajlarından biri, kullanılabilir olmasını sağlamak için Azure Bilişsel Arama araştırma yapabilir ve kapalı kalma durumunda kullanıcıları alternatif arama hizmetleri 'ne yönlendirebilir. Ayrıca, Azure Web siteleri aracılığıyla arama isteklerini yönlendirçalışıyorsanız Azure Traffic Manager, Web sitesinin en fazla Azure Bilişsel Arama olmadığı, Yük Dengeleme durumlarını yüklemenize izin verir. Traffic Manager yararlanan mimarinin bir örneği aşağıda verilmiştir.
 
    ![Merkezi Traffic Manager ile bölgelere göre hizmetlerin çapraz sekmesi][3]
+
+## <a name="disaster-recovery-and-service-outages"></a>Olağanüstü durum kurtarma ve hizmet kesintileri
+
+Verilerinizi, veri merkezi düzeyinde bir kesinti varsa Azure Bilişsel Arama, hizmetin anında yük devretmesini sağlamaz. Veri merkezinde bir küme başarısız olursa, işlemler ekibi, hizmeti algılar ve geri yükleme işlemini çalışır. Hizmet geri yükleme sırasında kapalı kalma süresi yaşarsınız, ancak [hizmet düzeyi sözleşmesi (SLA)](https://azure.microsoft.com/support/legal/sla/search/v1_0/)başına hizmet kullanım dışı kalması için hizmet kredileri isteyebilirsiniz. 
+
+Microsoft 'un denetimi dışındaki çok sayıda hata oluşması durumunda sürekli hizmet gerekliyse, farklı bir bölgede [ek bir hizmet](search-create-service-portal.md) sağlayabilir ve dizinlerin tüm hizmetlerde tamamen yedekli olmasını sağlamak için coğrafi çoğaltma stratejisi uygulayabilirsiniz.
+
+Dizinleri doldurmak ve yenilemek için [Dizin oluşturucular](search-indexer-overview.md) kullanan müşteriler, aynı veri kaynağından yararlanan coğrafi olarak özel Dizin oluşturucular aracılığıyla olağanüstü durum kurtarmayı işleyebilir. Her biri Dizin Oluşturucu çalıştıran farklı bölgelerdeki iki hizmet, coğrafi yedeklilik sağlamak için aynı veri kaynağını dizinlede olabilir. Aynı zamanda coğrafi olarak yedekli veri kaynaklarından dizin oluşturuyorsanız, Azure Bilişsel Arama Dizin oluşturucuların birincil çoğaltmalardan yalnızca artımlı dizin oluşturma (yeni, değiştirilen veya silinen belgelerden güncelleştirmeleri birleştirme) gerçekleştirebildiğinizden haberdar olun. Bir yük devretme olayında, Dizin oluşturucuyu yeni birincil çoğaltmaya yeniden işaret ettiğinizden emin olun. 
+
+Dizin oluşturucular kullanmıyorsanız, nesneleri ve verileri farklı arama hizmetlerine paralel olarak göndermek için uygulama kodunuzu kullanabilirsiniz. Daha fazla bilgi için bkz. [verileri birden çok hizmet arasında eşitlenmiş halde tutma](#data-sync).
+
+## <a name="back-up-and-restore-alternatives"></a>Yedekleme ve geri yükleme alternatifleri
+
+Azure Bilişsel Arama bir birincil veri depolama çözümü olmadığından, Microsoft Self Servis yedekleme ve geri yükleme için resmi bir mekanizma sağlamaz. Ancak, Dizin tanımınızı ve anlık görüntüsünü bir dizi JSON dosyasına yedeklemek için bu [Azure bilişsel arama .NET örnek](https://github.com/Azure-Samples/azure-search-dotnet-samples) deposundaki **Dizin-yedekleme-geri yükleme** örnek kodunu kullanabilir ve gerekirse dizini geri yüklemek için bu dosyaları kullanabilirsiniz. Bu araç Ayrıca, dizinleri hizmet katmanları arasında taşıyabilir.
+
+Aksi halde, dizin oluşturmak ve doldurmak için kullanılan uygulama kodunuz, yanlışlıkla bir dizini silerseniz geri yükleme ve geri yükleme seçeneğidir. Bir dizini yeniden oluşturmak için (varsa) onu siler, hizmette dizini yeniden oluşturun ve birincil veri deponuzdan verileri alarak yeniden yükleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

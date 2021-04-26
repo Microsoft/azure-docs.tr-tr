@@ -8,12 +8,12 @@ ms.topic: quickstart
 ms.service: iot-central
 services: iot-central
 manager: corywink
-ms.openlocfilehash: a1492593c24c2bc350205536006b648608cc5e46
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 7b33beaad580e64a4760b0557f04f266ecfc1b4d
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101712649"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718818"
 ---
 # <a name="quickstart---create-an-azure-iot-central-application"></a>Hızlı başlangıç-Azure IoT Central uygulaması oluşturma
 
@@ -21,13 +21,14 @@ Bu hızlı başlangıçta, Azure IoT Central uygulamasının nasıl oluşturulac
 
 ## <a name="prerequisite"></a>Önkoşul 
 
-*Katkıda bulunan* erişimi olan bir Azure aboneliğine ihtiyacınız olacaktır.
+ - Etkin aboneliği olan bir Azure hesabı. [Ücretsiz](https://aka.ms/createazuresubscription)hesap oluşturun.
+ - Azure aboneliğinizin katkıda bulunan erişimi olmalıdır
 
 ## <a name="create-an-application"></a>Uygulama oluşturma
 
 [Azure IoT Central Build](https://aka.ms/iotcentral) sitesine gidin. Sonra bir Microsoft kişisel, iş veya okul hesabıyla oturum açın.
 
-Sektörün hızlı bir şekilde başlamanıza veya **özel bir uygulamalar** şablonunu kullanarak sıfırdan başlamanıza yardımcı olması için sektör ile ilgili IoT Central şablonlar listesinden yeni bir uygulama oluşturursunuz. Bu hızlı başlangıçta, **özel uygulama** şablonunu kullanırsınız.
+Sektörün hızlı bir şekilde başlamanıza veya **özel bir uygulama** şablonu kullanarak sıfırdan başlamanıza yardımcı olması için sektör ile ilgili IoT Central şablonlar listesinden yeni bir uygulama oluşturabilirsiniz. Bu hızlı başlangıçta, **özel uygulama** şablonunu kullanırsınız.
 
 **Özel uygulama** şablonundan yeni bir Azure IoT Central uygulaması oluşturmak için:
 
@@ -35,11 +36,13 @@ Sektörün hızlı bir şekilde başlamanıza veya **özel bir uygulamalar** şa
 
     :::image type="content" source="media/quick-deploy-iot-central/iotcentralcreate-new-application.png" alt-text="IoT uygulama sayfanızı oluşturma":::
 
-1. **Özel uygulamalar** ' ı seçin ve **özel uygulama** şablonunun seçili olduğundan emin olun.
+1. **Özel uygulama** seçin
+
+1. **Yeni uygulama** sayfasında, **uygulama şablonu** altında **özel uygulamanın** seçildiğinden emin olun.
 
 1. Azure IoT Central, seçtiğiniz uygulama şablonuna göre otomatik olarak bir **uygulama adı** önerir. Bu adı kullanabilir veya kendi kolay uygulamanızın adını girebilirsiniz.
 
-1. Azure IoT Central, uygulama adına bağlı olarak sizin için benzersiz bir **Uygulama URL 'si** ön eki de oluşturur. Uygulamanıza erişmek için bu URL 'YI kullanırsınız. İsterseniz bu URL önekini daha kolay bir şekilde değiştirin.
+1. Azure IoT Central, uygulama adına bağlı olarak sizin için benzersiz bir **URL** ön eki de oluşturur. Uygulamanıza erişmek için bu URL 'YI kullanırsınız. İsterseniz bu URL önekini daha kolay bir şekilde değiştirin.
 
     :::image type="content" source="media/quick-deploy-iot-central/iotcentralcreate-custom.png" alt-text="Azure IoT Central uygulama sayfası oluşturma":::
 
@@ -58,7 +61,7 @@ Sektörün hızlı bir şekilde başlamanıza veya **özel bir uygulamalar** şa
         - *Azure Aboneliği*, Azure hizmetlerinin örneklerini oluşturmanıza olanak tanır. IoT Central aboneliğinizdeki kaynakları sağlar. Azure aboneliğiniz yoksa, [Azure kaydolma sayfasında](https://aka.ms/createazuresubscription)ücretsiz olarak bir tane oluşturabilirsiniz. Azure aboneliğini oluşturduktan sonra **Yeni uygulama** sayfasına geri gidin. Yeni aboneliğiniz artık **Azure abonelik** açılır penceresinde görünür.
         - *Konum* , uygulamanızı oluşturmak istediğiniz [Coğrafya](https://azure.microsoft.com/global-infrastructure/geographies/) ' dır. Genellikle en iyi performansı elde etmek için cihazlarınıza fiziksel olarak en yakın konumu seçmeniz gerekir. Bir konum seçtikten sonra uygulamanızı daha sonra farklı bir konuma taşıyamazsınız.
 
-1. Hüküm ve koşulları gözden geçirin ve sayfanın alt kısmında **Oluştur** ' u seçin. Birkaç dakika sonra, uygulama IoT Central kullanmaya hazırız:
+1. Hüküm ve koşulları gözden geçirin ve sayfanın alt kısmında **Oluştur** ' u seçin. Birkaç dakika sonra, IoT Central uygulamanız kullanıma sunulacaktır:
 
     :::image type="content" source="media/quick-deploy-iot-central/iotcentral-application.png" alt-text="Azure IoT Central uygulaması":::
 

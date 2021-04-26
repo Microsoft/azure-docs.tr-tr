@@ -4,10 +4,10 @@ description: IoT olay toplama için Defender hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 3/23/2021
 ms.openlocfilehash: e6c0f0e6e1f4027716ff8e3ca99f1c8803f33260
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104779146"
 ---
 # <a name="defender-iot-micro-agent-classic-event-aggregation"></a>Defender-IoT-Micro-Agent klasik olay toplama

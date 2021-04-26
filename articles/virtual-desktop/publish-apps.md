@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 04/30/2020
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 32441a7da0e079a2de2fbd6906184c518d60e4a5
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+manager: femila
+ms.openlocfilehash: 68db8e9d50dff0bb4580476bae990374830a2a1f
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102562869"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106445831"
 ---
 # <a name="publish-built-in-apps-in-windows-virtual-desktop"></a>Windows sanal masaüstünde yerleşik uygulamaları yayımlama
 

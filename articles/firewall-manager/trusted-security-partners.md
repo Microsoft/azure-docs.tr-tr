@@ -5,14 +5,14 @@ author: vhorne
 ms.service: firewall-manager
 services: firewall-manager
 ms.topic: conceptual
-ms.date: 12/01/2020
+ms.date: 03/30/2021
 ms.author: victorh
-ms.openlocfilehash: 923c6b685d20ff68788e7d9cfcb45ebaecb535e3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 622fde49a31105b2f66a678d3e55d48fabea9487
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96490117"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105966920"
 ---
 # <a name="what-are-security-partner-providers"></a>Güvenlik iş ortağı sağlayıcıları nedir?
 
@@ -30,17 +30,23 @@ Desteklenen güvenlik iş ortakları **Zscaler**, **[Check Point](check-point-ov
 
 Aşağıdaki senaryolarda Internet trafiğini filtrelemek için güvenlik iş ortaklarını kullanabilirsiniz:
 
-- Sanal ağ (VNet) ile Internet arasında
+- Sanal ağ (VNet)-Internet
 
-   Azure üzerinde çalışan bulut iş yükleriniz için Gelişmiş Kullanıcı tarafından uyumlu Internet korumasından yararlanın.
+   Azure üzerinde çalışan bulut iş yükleriniz için Gelişmiş Kullanıcı tarafından uyumlu Internet koruması kullanın.
 
-- Internet 'e dallan
+- Daldan Internet
 
-   Şube için üçüncü taraf NSaaS filtrelemesini kolayca Internet senaryolarına eklemek için Azure bağlantınız ve küresel dağıtım özelliğinden yararlanın. Azure sanal WAN kullanarak küresel transit ağınızı ve güvenlik ucunu oluşturabilirsiniz.
+   Şube için üçüncü taraf NSaaS filtrelemesini Internet senaryolarına kolayca eklemek için Azure bağlantınızı ve küresel dağıtımınızı kullanın. Azure sanal WAN kullanarak küresel transit ağınızı ve güvenlik ucunu oluşturabilirsiniz.
 
 Aşağıdaki senaryolar desteklenir:
-- Azure Güvenlik Duvarı aracılığıyla bir güvenlik iş ortağı sağlayıcısı ve diğer trafik (bağlı ağa bağlı, dala bağlı, şube ve şube) aracılığıyla Internet 'e VNet/dalı.
-- Güvenlik iş ortağı sağlayıcısı aracılığıyla VNet/Internet 'e dallan
+- Hub 'da iki güvenlik sağlayıcısı
+
+   Azure Güvenlik Duvarı aracılığıyla bir güvenlik iş ortağı sağlayıcısı ve diğer trafik (bağlı ağa bağlı, bağlı bileşen, Dalla Şube) aracılığıyla VNet/dalı-Internet.
+- Hub 'da tek sağlayıcı
+
+   - Azure Güvenlik Duvarı tarafından güvenli hale getirilen tüm trafik (bağlı bileşen, bağlı bileşen, şube ve sanal ağ, sanal ağ, VNet-Internet)<br>
+      veya
+   - Güvenlik iş ortağı sağlayıcısı aracılığıyla VNet/şube-Internet
 
 ## <a name="best-practices-for-internet-traffic-filtering-in-secured-virtual-hubs"></a>Güvenli sanal hub 'larda Internet trafiği Filtreleme için en iyi uygulamalar
 

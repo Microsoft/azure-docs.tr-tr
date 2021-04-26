@@ -3,12 +3,12 @@ title: Azure Izleyici günlükleri veri modeli
 description: Bu makalede, Azure Backup verileri için Azure Izleyici Log Analytics veri modeli ayrıntıları hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 02/26/2019
-ms.openlocfilehash: 004c5a6c0c2c4dcfcf13134bd5a5143ba647048f
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 2682bf0483b38c50e64bf4ec5255c89f931ab0f0
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102500997"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078919"
 ---
 # <a name="log-analytics-data-model-for-azure-backup-data"></a>Azure Backup verileri için Log Analytics veri modeli
 
@@ -199,9 +199,9 @@ Bu tablo ilkeyle ilgili alanlarla ilgili ayrıntıları sağlar.
 | MonthlyRetentionDaysOfTheWeek_s |Metin ||Aylık saklama için seçilen haftanın günleri |
 | MonthlyRetentionWeeksOfTheMonth_s |Metin ||Aylık bekletme yapılandırıldığında ayın haftası, örneğin, Ilk, son |
 | YearlyRetentionDuration_s |Ondalık Sayı ||Yapılandırılan yedeklemeler için yıl cinsinden toplam saklama süresi |
-| YearlyRetentionTimes_s |Metin ||Yıllık bekletmenin yapılandırıldığı tarih ve saat |
-| YearlyRetentionMonthsOfTheYear_s |Metin ||Yıllık bekletme için seçilen yılın ayı |
-| YearlyRetentionFormat_s |Metin ||Yıllık saklama için yapılandırma türü, örneğin, günlük tabanlı için günlük, haftalık tabanlı için haftalık | |
+| YearlyRetentionTimes_s |Metin | | Yıllık bekletmenin yapılandırıldığı tarih ve saat |
+| YearlyRetentionMonthsOfTheYear_s |Metin | | Yıllık bekletme için seçilen yılın ayı |
+| YearlyRetentionFormat_s |Metin ||Yıllık saklama için yapılandırma türü, örneğin, günlük tabanlı için günlük, haftalık tabanlı için haftalık |
 | YearlyRetentionDaysOfTheMonth_s |Metin ||Yıllık bekletme için seçilen ayın tarihleri |
 | SynchronisationFrequencyPerDay_s |Tam Sayı |v2|SC DPM ve MABS için bir dosya yedeklemesinin eşitlendiği gün sayısı |
 | DiffBackupFormat_s |Metin |v2|Azure VM yedeklemesi 'nde SQL için değişiklik yedeklemelerinin biçimi |

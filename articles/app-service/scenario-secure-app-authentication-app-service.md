@@ -7,16 +7,16 @@ manager: CelesteDG
 ms.service: app-service-web
 ms.topic: tutorial
 ms.workload: identity
-ms.date: 11/09/2020
+ms.date: 04/02/2021
 ms.author: ryanwi
 ms.reviewer: stsoneff
 ms.custom: azureday1
-ms.openlocfilehash: a8bd2ef1348692bf57f7e5cb7b6606cfcfd324fe
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b17cb6906a37d2cab4383fac18400b35dc8adb2f
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96905579"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106223223"
 ---
 # <a name="tutorial-add-authentication-to-your-web-app-running-on-azure-app-service"></a>Öğretici: Azure App Service üzerinde çalışan Web uygulamanıza kimlik doğrulaması ekleme
 
@@ -41,7 +41,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 Bu öğreticide, App Service dağıtılan bir Web uygulamasının olması gerekir. Mevcut bir Web uygulamasını kullanabilir veya App Service yeni bir Web uygulaması oluşturmak ve yayımlamak için [ASP.NET Core hızlı](quickstart-dotnetcore.md) başlangıcı ' nı takip edebilirsiniz.
 
-Var olan bir Web uygulaması mı yoksa yeni bir tane oluşturun, Web uygulamasının adı ve Web uygulamasının dağıtıldığı kaynak grubunun adını unutmayın. Bu öğreticide bu adlara ihtiyacınız vardır. Bu öğreticide, yordamlarda ve ekran görüntülerinde örnek adlar *Securewebapp* içerir.
+Var olan bir Web uygulaması mı yoksa yeni bir tane oluşturun, Web uygulamasının adı ve Web uygulamasının dağıtıldığı kaynak grubunun adını unutmayın. Bu öğreticide bu adlara ihtiyacınız vardır. 
 
 ## <a name="configure-authentication-and-authorization"></a>Kimlik doğrulama ve yetkilendirmeyi yapılandırma
 
@@ -53,17 +53,19 @@ Artık App Service üzerinde çalışan bir Web uygulamanız var. Daha sonra, We
 
 :::image type="content" alt-text="Uygulamanızın yönetim sayfasını seçmeyi gösteren ekran görüntüsü." source="./media/scenario-secure-app-authentication-app-service/select-app-service.png":::
 
-Uygulamanızın sol menüsünde **kimlik doğrulama/yetkilendirme**' yi seçin ve ardından **Açık**' ı seçerek App Service kimlik doğrulamasını etkinleştirin.
+Uygulamanızın sol menüsünde **kimlik doğrulaması**' nı seçin ve ardından **kimlik sağlayıcısı ekle**' ye tıklayın.
 
-**İsteğin kimliği doğrulanmamış olduğunda gerçekleştirilecek eylem** menüsünde **Azure Active Directory ile oturum aç**’ı seçin.
+**Kimlik sağlayıcısı ekle** sayfasında Microsoft ve Azure AD kimliklerinizde oturum açmak için **kimlik sağlayıcısı** olarak **Microsoft** ' u seçin.
 
-**Kimlik doğrulama sağlayıcıları** altında **Azure Active Directory**' yi seçin. **Hızlı**' i seçin ve ardından yeni bir Active Directory uygulaması oluşturmak için varsayılan ayarları kabul edin. **Tamam**’ı seçin.
+**Uygulama kaydı**  >  **uygulama kayıt türü** için **Yeni uygulama kaydı oluştur**' u seçin.
 
-:::image type="content" alt-text="Express kimlik doğrulamasını gösteren ekran görüntüsü." source="./media/scenario-secure-app-authentication-app-service/configure-authentication.png":::
+**Uygulama kaydı**  >  **Desteklenen hesap türleri** için, **geçerli kiracı-tek kiracı**' yı seçin.
 
-**Kimlik doğrulama/yetkilendirme** sayfasında **Kaydet**' i seçin.
+Kimlik doğrulama **ayarları App Service** **, kimlik doğrulaması** **ıste** ve **kimliği doğrulanmamış istekler** **http 302 bulundu yeniden yönlendirme: Web siteleri için önerilir**.
 
-İletiyle ilgili bildirimi gördüğünüzde `Successfully saved the Auth Settings for <app-name> App` Portal sayfasını yenileyin.
+Kimlik **sağlayıcısı ekle** sayfasının alt kısmında, Web uygulamanız için kimlik doğrulamasını etkinleştirmek üzere **Ekle** ' ye tıklayın.
+
+:::image type="content" alt-text="Kimlik doğrulamasını yapılandırmayı gösteren ekran görüntüsü." source="./media/scenario-secure-app-authentication-app-service/configure-authentication.png":::
 
 Artık App Service kimlik doğrulaması ve yetkilendirmeyle güvenliği sağlanmış bir uygulamanız var.
 

@@ -4,13 +4,13 @@ description: Bu makalede, kullanıcının bir tarayıcıda konuşma metinleriyle
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: quickstart
-ms.date: 11/30/2020
-ms.openlocfilehash: a3bad4ab69f6950f83db9cf1f49cfa4cb7c7b5f0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 03/26/2021
+ms.openlocfilehash: 4542f85ab562e65777fb8570873305523c76aee6
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102040133"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106276833"
 ---
 # <a name="how-to-query-the-prediction-runtime-with-user-text"></a>Tahmin çalışma zamanını Kullanıcı metniyle sorgulama
 
@@ -176,4 +176,4 @@ Aşağıdakiler hakkında daha fazla bilgi edinin:
 * [Özel alt etki alanları](../cognitive-services-custom-subdomains.md)
 
 > [!div class="nextstepaction"]
-> [LUSıS portalında uygulama oluşturma](get-started-portal-build-app.md)
+> [İstemci kitaplıklarını veya REST API kullanın](client-libraries-rest-api.md)

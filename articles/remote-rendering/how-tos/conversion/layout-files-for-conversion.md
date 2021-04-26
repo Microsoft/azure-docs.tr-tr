@@ -5,20 +5,23 @@ author: MalcolmTyrrell
 ms.author: matyrr
 ms.date: 09/03/2020
 ms.topic: how-to
-ms.openlocfilehash: 13c4b841fe2d0b62472628d9382b5f6ee3d1fa6c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9a094755dfb9381b1e4d6abdf1c0e6342d7427c1
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "91318084"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107308448"
 ---
 # <a name="laying-out-files-for-conversion"></a>Dönüştürme için dosyaları yerleştirme
 
 Bir varlığı doğru bir şekilde işlemek için, dönüştürme hizmetinin tüm giriş dosyalarını bulması gerekir.
 Bunlar, dönüştürülen ana varlık dosyasından ve genellikle varlık dosyasındaki yolların başvurduğu bazı diğer dosyalara oluşur.
-Bir varlığı dönüştürme isteği, dönüştürme hizmetinin bu dosyaları nasıl bulduğunu belirleyen iki parametre verilmesini sağlar: `input.folderPath` (isteğe bağlı) ve `input.inputAssetPath` .
+Bir varlığı dönüştürme isteği, dönüştürme hizmetinin bu dosyaları nasıl bulduğunu belirleyen iki parametre verilmesini sağlar: `settings.inputLocation.blobPrefix` (isteğe bağlı) ve `settings.inputLocation.relativeInputAssetPath` .
 Bunlar, [dönüştürme REST API](conversion-rest-api.md) sayfasında tamamen belgelenmiştir.
-Dosyaları yerleştirme amacıyla, dikkat edilmesi gereken önemli şey, `folderPath` varlığı işlerken dönüştürme hizmeti için kullanılabilen tüm dosya kümesini belirler.
+Dosyaları yerleştirme amacıyla, dikkat edilmesi gereken önemli şey, `BlobPrefix` varlığı işlerken dönüştürme hizmeti için kullanılabilen tüm dosya kümesini belirler.
+
+> [!Note]
+> Hizmet, girişin altındaki tüm dosyaları indirir. BlobPrefix. Hizmet sorunlarını önlemek için dosya adlarının ve yolların [Windows yol uzunluğu sınırlarını](https://docs.microsoft.com/windows/win32/fileio/maximum-file-path-limitation) aşmadığından emin olun. 
 
 ## <a name="placing-files-so-they-can-be-found"></a>Dosyalar bulunabilmeleri için yerleştiriliyor
 

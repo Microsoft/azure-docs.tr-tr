@@ -14,12 +14,12 @@ ms.workload: iaas-sql-server
 ms.date: 03/25/2021
 ms.author: dpless
 ms.reviewer: jroth
-ms.openlocfilehash: 9427ae1b9bd68f63df40d24122cc13b5460fbc27
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 88adef7ea50744f913780d99594ce3baadade84b
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105572576"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600905"
 ---
 # <a name="vm-size-performance-best-practices-for-sql-server-on-azure-vms"></a>VM boyutu: Azure VM 'lerinde SQL Server için en iyi performans uygulamaları
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
@@ -33,9 +33,9 @@ Genellikle maliyetleri iyileştirmek ve performansı iyileştirmek arasında bir
 
 Makalenin geri kalanının daha ayrıntılı bir şekilde ele aldığı VM boyutu en iyi uygulamalarına kısa bir genel bakış için aşağıdaki denetim listesini gözden geçirin: 
 
-- [Standard_M8-4ms](/../../virtual-machines/m-series), [E4ds_v4](../../../virtual-machines/edv4-edsv4-series.md#edv4-series)veya [DS12_v2](../../../virtual-machines/dv2-dsv2-series-memory.md#dsv2-series-11-15) ya da üzeri gibi 4 veya daha fazla vCPU ile VM boyutlarını kullanın. 
+- [Standard_M8-4ms](/azure/virtual-machines/m-series), [E4ds_v4](../../../virtual-machines/edv4-edsv4-series.md#edv4-series)veya [DS12_v2](../../../virtual-machines/dv2-dsv2-series-memory.md#dsv2-series-11-15) ya da üzeri gibi 4 veya daha fazla vCPU ile VM boyutlarını kullanın. 
 - SQL Server iş yüklerinin en iyi performansı için [bellek için iyileştirilmiş](../../../virtual-machines/sizes-memory.md) sanal makine boyutlarını kullanın. 
-- [DSv2 11-15](../../../virtual-machines/dv2-dsv2-series-memory.md), [Edsv4](../../../virtual-machines/edv4-edsv4-series.md) serisi, [d-](../../../virtual-machines/m-series.md)ve [Mv2](../../../virtual-machines/mv2-series.md) serisi, OLTP Iş yükleri için gereken en iyi bellekten Vcore oranını sunmaktadır. Her iki e serisi sanal makine, görev açısından kritik iş yükleri için gereken en yüksek bellek-vCore oranını sağlar ve ayrıca veri ambarı iş yükleri için de idealdir. 
+- [DSv2 11-15](../../../virtual-machines/dv2-dsv2-series-memory.md), [Edsv4](../../../virtual-machines/edv4-edsv4-series.md) serisi, [d-](/azure/virtual-machines/m-series)ve [Mv2](../../../virtual-machines/mv2-series.md) serisi, OLTP Iş yükleri için gereken en iyi bellekten Vcore oranını sunmaktadır. Her iki e serisi sanal makine, görev açısından kritik iş yükleri için gereken en yüksek bellek-vCore oranını sağlar ve ayrıca veri ambarı iş yükleri için de idealdir. 
 - Görev açısından kritik ve veri ambarı iş yükleri için daha yüksek bir bellek-sanal çekirdek oranı düşünün. 
 - SQL Server ayarları ve depolama seçenekleri en iyi SQL Server performans için yapılandırıldığı için Azure sanal makine marketi görüntülerinden yararlanın. 
 - Hedef iş yükünün performans özelliklerini toplayın ve işletmeniz için uygun VM boyutunu tespit etmek üzere bunları kullanın.
@@ -65,11 +65,11 @@ Geçerli bir şirket içi SQL Server veritabanını Azure VM 'lerinde SQL Server
 
 ### <a name="m-mv2-and-mdsv2-series"></a>D, Mv2 ve Mdsv2 serisi
 
-[B serisi](../../../virtual-machines/m-series.md) , en büyük SQL Server iş yükleri Için sanal çekirdek sayısı ve belleği sunar.  
+[B serisi](/azure/virtual-machines/m-series) , en büyük SQL Server iş yükleri Için sanal çekirdek sayısı ve belleği sunar.  
 
 [Mv2 serisi](../../../virtual-machines/mv2-series.md) , en yüksek sanal çekirdek sayısına ve belleğe sahiptir ve görev açısından kritik ve veri ambarı iş yükleri için önerilir. Mv2 serisi örnekler, büyük bellek içi veritabanlarını ve iş yüklerini, ilişkisel veritabanı sunucuları, büyük önbellekler ve bellek içi analizler için ideal olan yüksek bellekle CPU oranıyla desteklemek üzere benzersiz işlem performansı sağlayan bellek için iyileştirilmiş VM boyutlarıdır.
 
-[Standard_M64ms](../../../virtual-machines/m-series.md) , örneğin 28 bellekten sanal çekirdek oranına sahiptir.
+[Standard_M64ms](/azure/virtual-machines/m-series) , örneğin 28 bellekten sanal çekirdek oranına sahiptir.
 
 [Mdsv2 orta bellek serisi](../../..//virtual-machines/msv2-mdsv2-series.md) , şu anda [Önizleme](https://aka.ms/Mv2MedMemoryPreview) aşamasında olan ve orta düzey bir bellek teklifiyle bir dizi d serisi Azure sanal makinesi sunan yeni bir d serisi. Bu makineler en az 30 ' a kadar bellekten sanal çekirdek desteğine sahip SQL Server iş yükleri için en uygun seçenektir.
 
@@ -177,7 +177,7 @@ VCPU sayısı, özgün VM boyutunun dörtte birini bir buçuk ile kısıtlanıyo
 
 Bu yeni VM boyutları, daha kolay tanımlanabilmesi için etkin vCPU sayısını belirten bir soneke sahiptir. 
 
-Örneğin, [M64-32ms](../../../virtual-machines/constrained-vcpu.md) 32 yalnızca bellek, g/ç ve [M64ms](../../../virtual-machines/m-series.md) aktarım hızı ile [M64-16Ms](../../../virtual-machines/constrained-vcpu.md) yalnızca 16 sanal çekirdekleri için lisanslama gerektirir SQL Server yalnızca lisanslama gerektirir.  [M64-16ms](../../../virtual-machines/constrained-vcpu.md) 'nin M64ms lisans maliyetine ait bir SQL Server çeyreği olsa da, sanal makinenin işlem maliyeti aynı olacaktır.
+Örneğin, [M64-32ms](../../../virtual-machines/constrained-vcpu.md) 32 yalnızca bellek, g/ç ve [M64ms](/azure/virtual-machines/m-series) aktarım hızı ile [M64-16Ms](../../../virtual-machines/constrained-vcpu.md) yalnızca 16 sanal çekirdekleri için lisanslama gerektirir SQL Server yalnızca lisanslama gerektirir.  [M64-16ms](../../../virtual-machines/constrained-vcpu.md) 'nin M64ms lisans maliyetine ait bir SQL Server çeyreği olsa da, sanal makinenin işlem maliyeti aynı olacaktır.
 
 > [!NOTE] 
 > - Orta ila büyük veri ambarı iş yükleri, [kısıtlı vCore sanal](../../../virtual-machines/constrained-vcpu.md)makinelerinden yine de faydalanabilir, ancak veri ambarı iş yükleri genellikle daha az Kullanıcı ve paralel olarak çalışan sorgu planları aracılığıyla daha büyük miktarlarda veri adresleyen süreçler tarafından belirlenir. 
@@ -194,4 +194,4 @@ Daha fazla bilgi edinmek için bu serideki diğer makalelere göz atın:
 
 En iyi güvenlik uygulamaları için bkz. [Azure sanal makinelerinde SQL Server Için güvenlik konuları](security-considerations-best-practices.md).
 
-[Azure sanal makinelerine genel bakış ' a SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md)diğer SQL Server sanal makine makalelerini inceleyin. SQL Server sanal makineleri hakkında sorularınız olursa [Sık Sorulan Sorular](frequently-asked-questions-faq.md) bölümüne bakın.
+[Azure sanal makinelerine genel bakış ' a SQL Server](sql-server-on-azure-vm-iaas-what-is-overview.md)diğer SQL Server sanal makine makalelerini inceleyin. SQL Server sanal makineleri hakkında sorularınız olursa [Sık Sorulan Sorular](frequently-asked-questions-faq.md) bölümüne bakın. 

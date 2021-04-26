@@ -9,12 +9,12 @@ ms.subservice: managed-hsm
 ms.topic: conceptual
 ms.date: 02/17/2021
 ms.author: ambapat
-ms.openlocfilehash: 0c0a0c5f62f92aaf195e207dfd505ffb017d924e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: bea1ccf0777c6325bc86c15e0f88304c465d89c9
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100653909"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107750293"
 ---
 # <a name="managed-hsm-access-control"></a>Yönetilen HSM erişim denetimi
 
@@ -65,6 +65,7 @@ Aşağıdaki tabloda yönetim ve veri düzlemleri için uç noktalar gösterilme
 | Yönetim düzlemi | **Genel**<br> management.azure.com:443<br> | Yönetilen HSM 'ler oluşturun, okuyun, güncelleştirin, silin ve taşıyın<br>Yönetilen HSM etiketlerini ayarla | Azure RBAC |
 | Veri düzlemi | **Genel**<br> &lt;HSM-Name &gt; . managedhsm.Azure.net:443<br> | **Anahtarlar**: şifre çözme, şifreleme,<br> sarmalama geri alma, sarmalama, doğrulama, imzalama, alma, listeleme, güncelleştirme, oluşturma, içeri aktarma, silme, yedekleme, geri yükleme, Temizleme<br/><br/> **Veri düzlemi rol yönetimi (yönetilen HSM yerel RBAC)**_: rol tanımlarını listeleme, rol atama, rol atamalarını silme, özel rolleri <br/> <br/> tanımlama_* yedekleme/geri yükleme **: yedekleme, geri yükleme, durum yedekleme/geri yükleme <br/> <br/> işlemleri** güvenlik etki alanı * *: güvenlik etki alanını indirme ve karşıya yükleme | Yönetilen HSM yerel RBAC |
 |||||
+
 ## <a name="management-plane-and-azure-rbac"></a>Yönetim düzlemi ve Azure RBAC
 
 Yönetim düzleminde, bir çağıranın yürütebileceği işlemleri yetkilendirmek için Azure RBAC 'yi kullanırsınız. Azure RBAC modelinde, her Azure aboneliğinin bir Azure Active Directory örneği vardır. Bu dizinden kullanıcılara, gruplara ve uygulamalara erişim izni verirsiniz. Azure aboneliğindeki Azure Resource Manager dağıtım modelini kullanan kaynakları yönetmek için erişim izni verilir. Erişim vermek için [Azure Portal](https://portal.azure.com/), [Azure CLI](/cli/azure/install-classic-cli), [Azure PowerShell](/powershell/azureps-cmdlets-docs)veya [Azure Resource Manager REST API 'lerini](/rest/api/authorization/roleassignments)kullanın.
@@ -87,6 +88,6 @@ Bir rol atayarak belirli önemli işlemleri yürütmek için bir güvenlik sorum
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bir yöneticiye yönelik bir başlangıç öğreticisi için bkz. [YÖNETILEN HSM nedir?](overview.md).
+- Bir yöneticiye yönelik bir başlangıç öğreticisi için bkz. [YÖNETILEN HSM nedir?](overview.md)
 - Rol yönetimi öğreticisi için bkz. [YÖNETILEN HSM yerel RBAC](role-management.md)
-- Yönetilen HSM günlüğü için kullanım günlüğü hakkında daha fazla bilgi için bkz. [YÖNETILEN HSM günlüğü](logging.md).
+- Yönetilen HSM günlüğü için kullanım günlüğü hakkında daha fazla bilgi için bkz. [YÖNETILEN HSM günlüğü](logging.md)

@@ -2,17 +2,19 @@
 title: Azure Resource Manager şablonu kullanarak Service Fabric kümesi oluşturma
 description: Bu hızlı başlangıçta, Azure Resource Manager şablonu kullanarak bir Azure Service Fabric test kümesi oluşturacaksınız.
 author: erikadoyle
-ms.service: service-fabric
-ms.topic: quickstart
-ms.custom: subject-armqs
 ms.author: edoyle
 ms.date: 07/29/2020
-ms.openlocfilehash: 359b527733ee8eebf7e1e7d12c40a0c74ec1c9bd
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.topic: quickstart
+ms.service: service-fabric
+ms.custom:
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: cb3758ae837dc03789371d00f768b257a9ef295d
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87460312"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535319"
 ---
 # <a name="quickstart-create-a-service-fabric-cluster-using-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak Service Fabric kümesi oluşturma
 

@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 02/12/2021
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 0ecfbb9053fde4ff332cbbcb6e14a84a5bbeb99a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: bdcee6b8ced45dba34309724e5a634cbb60a6d37
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104593161"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818827"
 ---
 # <a name="azure-files-scalability-and-performance-targets"></a>Azure Dosyaları ölçeklenebilirlik ve performans hedefleri
 [Azure dosyaları](storage-files-introduction.md) , BULUTTA, SMB ve NFS dosya sistemi protokolleri aracılığıyla erişilebilen tam olarak yönetilen dosya paylaşımları sunar. Bu makalede, Azure dosyaları ve Azure Dosya Eşitleme için ölçeklenebilirlik ve performans hedefleri ele alınmaktadır.
@@ -35,8 +35,8 @@ Azure, müşterilerin sahip olabileceği farklı depolama senaryoları için bir
 | Maksimum depolama hesabı kapasitesi | 5 PiB<sup>1</sup> | 100 TiB (sağlandı) |
 | En fazla dosya paylaşımı sayısı | Sınırsız | Sınırsız, tüm paylaşımların toplam sağlanan boyutu en fazla depolama hesabı kapasitesinden daha az olmalıdır |
 | Maksimum eşzamanlı istek hızı | 20.000 ıOPS<sup>1</sup> | 100.000 ıOPS |
-| Maksimum giriş | <ul><li>ABD/Avrupa: 10 GB<sup>/sn</sup></li><li>Diğer bölgeler (LRS/ZRS): 10 GBP/sn<sup>1</sup></li><li>Diğer bölgeler (GRS): 5 GBP/sn<sup>1</sup></li></ul> | 4.136 MIB/sn |
-| Maksimum çıkış | 50 GBP/sn<sup>1</sup> | 6.204 MIB/sn |
+| Maksimum giriş | <ul><li>ABD/Avrupa: 9.536 MIB/sn<sup>1</sup></li><li>Diğer bölgeler (LRS/ZRS): 9.536 MiB/sec<sup>1</sup></li><li>Diğer bölgeler (GRS): 4.768 GiB/sec<sup>1</sup></li></ul> | 4.136 MIB/sn |
+| Maksimum çıkış | 47.683 MIB/sn<sup>1</sup> | 6.204 MIB/sn |
 | En fazla sanal ağ kuralı sayısı | 200 | 200 |
 | En fazla IP adresi kuralı sayısı | 200 | 200 |
 | Yönetim okuma işlemleri | 5 dakikada 800 | 5 dakikada 800 |
@@ -103,7 +103,7 @@ Azure Dosya Eşitleme Aracısı Azure dosya paylaşımlarına bağlanan bir Wind
 
 Azure Dosya Eşitleme için performans iki aşamada kritik öneme sahiptir:
 
-1. **İlk bir kerelik sağlama**: ilk sağlama performansını iyileştirmek için en iyi dağıtım ayrıntıları için [Azure dosya eşitleme ile ekleme](storage-sync-files-deployment-guide.md#onboarding-with-azure-file-sync) bölümüne bakın.
+1. **İlk bir kerelik sağlama**: ilk sağlama performansını iyileştirmek için en iyi dağıtım ayrıntıları için [Azure dosya eşitleme ile ekleme](../file-sync/file-sync-deployment-guide.md#onboarding-with-azure-file-sync) bölümüne bakın.
 2. **Devam eden eşitleme**: veriler başlangıçta Azure dosya paylaşımlarında oluşturulduktan sonra Azure dosya eşitleme birden çok uç noktayı eşitlenmiş halde tutar.
 
 Bir aşamanın her biri için dağıtımınızı planlamaya yardımcı olmak üzere, bir sistem üzerinde yapılandırmaya sahip iç test sırasında gözlemlenen sonuçlar aşağıda verilmiştir
@@ -134,7 +134,7 @@ Performans hızı saniyede 20 nesne olur. Müşteriler, bulut paylaşımındaki 
 
 **Windows Server 'Dan Azure dosya paylaşımında ilk veri eşitlemesi**: pek çok Azure dosya eşitleme dağıtımı, tüm veriler Windows Server üzerinde olduğundan boş bir Azure dosya paylaşımıyla başlar. Bu durumlarda, ilk bulut değişikliği numaralandırması hızlıdır ve çoğu zaman, değişiklikleri Windows Server 'dan Azure dosya paylaşımıyla eşitlemeye harcanacaktır. 
 
-Eşitleme, verileri Azure dosya paylaşımında karşıya yüklerken yerel dosya sunucusunda kapalı kalma süresi yoktur ve Yöneticiler, arka planda karşıya yükleme için kullanılan bant genişliği miktarını kısıtlamak için [ağ sınırları](./storage-sync-files-server-registration.md#set-azure-file-sync-network-limits) ayarlayabilir.
+Eşitleme, verileri Azure dosya paylaşımında karşıya yüklerken yerel dosya sunucusunda kapalı kalma süresi yoktur ve Yöneticiler, arka planda karşıya yükleme için kullanılan bant genişliği miktarını kısıtlamak için [ağ sınırları](../file-sync/file-sync-server-registration.md#set-azure-file-sync-network-limits) ayarlayabilir.
 
 İlk eşitleme genellikle eşitleme grubu başına saniyede 20 dosyanın ilk karşıya yükleme oranıyla sınırlandırılır. Müşteriler, gün içinde zaman almak için aşağıdaki formül ile tüm verilerini Azure 'a yükleme süresini tahmin edebilir:  
 
@@ -164,4 +164,4 @@ Dağıtımınız için genel bir kılavuz olarak birkaç şeyi göz önünde bul
 
 ## <a name="see-also"></a>Ayrıca bkz.
 - [Azure Dosyalar dağıtımını planlama](storage-files-planning.md)
-- [Azure Dosya Eşitleme dağıtımı planlama](storage-sync-files-planning.md)
+- [Azure Dosya Eşitleme dağıtımı planlama](../file-sync/file-sync-planning.md)

@@ -215,7 +215,7 @@
         - name: iOS Platformu
           href: 'https://azure.microsoft.com/resources/samples/azure-iot-samples-ios/'
     - name: IoT için Azure Sertifikalı cihaz kataloğu
-      href: 'https://catalog.azureiotsolutions.com/'
+      href: 'https://devicecatalog.azure.com/'
     - name: Azure IoT Geliştirici Merkezi
       href: 'https://azure.microsoft.com/develop/iot/'
     - name: Müşteri verisi istekleri

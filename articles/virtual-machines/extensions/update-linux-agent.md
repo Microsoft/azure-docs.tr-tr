@@ -9,10 +9,10 @@ ms.author: amjads
 ms.collection: linux
 ms.date: 08/02/2017
 ms.openlocfilehash: a274435d6e0fc32bdf5b2ab04702ed971d7c5175
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102558993"
 ---
 # <a name="how-to-update-the-azure-linux-agent-on-a-vm"></a>Bir VM 'de Azure Linux aracısını güncelleştirme

@@ -4,15 +4,15 @@ description: Azure Premium dosya paylaşımlarında çok kanallı SMB 'yi nasıl
 author: roygara
 ms.service: storage
 ms.topic: how-to
-ms.date: 11/16/2020
+ms.date: 04/15/2021
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 2f867fa6d4b7e1d864a85106b5d957a53d38eb76
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: da4e1a58aef28e5c47100a0311ff81a5af04a918
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101732551"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718990"
 ---
 # <a name="enable-smb-multichannel-on-a-filestorage-account-preview"></a>Dosya depolama hesabında çok kanallı SMB 'yi etkinleştirme (Önizleme) 
 
@@ -66,7 +66,7 @@ Bir dosya depolama hesabı oluşturduktan sonra, depolama hesabınız için çok
 1. Dosya **hizmeti** altında dosya **paylaşımları** ' nı seçin ve **dosya paylaşım ayarları**' nı seçin.
 1. **SMB çok kanallı** (veya devre dışı bırakmak için **kapalı** ) **seçeneğini açıp** **Kaydet**' i seçin.
 
-:::image type="content" source="media/storage-files-enable-smb-multichannel/enable-smb-multichannel-on-storage-account.png" alt-text="Depolama hesabının ekran görüntüsü, çok kanallı SMB açık olarak açıldı.":::
+:::image type="content" source="media/storage-files-enable-smb-multichannel/enable-smb-multichannel-on-storage-account.png" alt-text="Depolama hesabının ekran görüntüsü, çok kanallı SMB açık olarak açıldı."  lightbox="media/storage-files-enable-smb-multichannel/enable-smb-multichannel-on-storage-account.png":::
 
 SMB çok kanallı seçeneği **dosya paylaşma ayarları** altında görülemiyorsa veya yapılandırma güncelleştirilirken ayar hatası güncelleştirilemediğiniz takdirde, aboneliğinizin kaydedildiğinden ve hesabınızın desteklenen hesap türü ve çoğaltma ile [desteklenen bölgelerden](#regional-availability) birinde bulunduğundan emin olun.
 

@@ -11,12 +11,12 @@ author: nibaccam
 ms.reviewer: nibaccam
 ms.date: 09/22/2020
 ms.custom: how-to, data4ml
-ms.openlocfilehash: 0e2230bdcf2b2f4358db4a0d600506b711f39c45
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a0265984c4ae83b8869071017e2fb571a7ff548c
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102508240"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107027661"
 ---
 # <a name="connect-to-data-with-the-azure-machine-learning-studio"></a>Azure Machine Learning Studio ile verilere bağlanma
 
@@ -69,7 +69,7 @@ Aşağıdaki örnek, bir **Azure blob veri deposu** oluştururken formun nasıl 
 Bir veri deposu oluşturduktan sonra verilerinizle etkileşimde bulunmak için bir veri kümesi oluşturun. Veri kümeleri, eğitim gibi makine öğrenimi görevleri için verilerinizi geç tarafından değerlendirilen bir tüketilebilir nesneye paketleyin. [Veri kümeleri hakkında daha fazla bilgi edinin](how-to-create-register-datasets.md).
 
 Dosya kümesi ve TabularDataset olmak üzere iki tür veri kümesi vardır. 
-[Filedataset](how-to-create-register-datasets.md#filedataset) 'ler, tek veya birden çok dosya veya genel URL başvuruları oluşturur. Öte yandan, [Tabulardataset](how-to-create-register-datasets.md#tabulardataset) verileri tablosal biçimde temsil eder. 
+[Filedataset](how-to-create-register-datasets.md#filedataset) 'ler, tek veya birden çok dosya veya genel URL başvuruları oluşturur. Öte yandan, [Tabulardataset](how-to-create-register-datasets.md#tabulardataset) verileri tablosal biçimde temsil eder. . Csv,. tsv,. Parquet,. jsonl dosyalarından ve SQL sorgu sonuçlarından Tabulardataset 'ler oluşturabilirsiniz.
 
 Aşağıdaki adımlar ve animasyon, [Azure Machine Learning Studio](https://ml.azure.com)'da veri kümesi oluşturmayı gösterir.
 

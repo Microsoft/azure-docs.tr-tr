@@ -3,12 +3,12 @@ title: Şablonlar için en iyi uygulamalar
 description: Azure Resource Manager şablonları (ARM şablonları) yazmak için önerilen yaklaşımları açıklar. Şablonları kullanırken yaygın sorunlardan kaçınmak için öneriler sunar.
 ms.topic: conceptual
 ms.date: 12/01/2020
-ms.openlocfilehash: 583a113df9cdb1951daf1002dd69531f050cfb54
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ff2b9ecf0e4004aa6689294867f5ff93006211ec
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99258006"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219952"
 ---
 # <a name="arm-template-best-practices"></a>ARM şablonu en iyi uygulamaları
 
@@ -160,7 +160,7 @@ Aşağıdaki bilgiler, [değişkenlerle](template-variables.md)çalışırken ya
 
 API sürümü için bir parametre kullanmayın. Kaynak özellikleri ve değerler, API sürümüne göre farklılık gösterebilir. API sürümü bir parametreye ayarlandığında, bir kod düzenleyicisinde IntelliSense doğru şemayı belirleyemiyor. Şablonunuzda özelliklerle eşleşmeyen bir API sürümünü geçirirseniz dağıtım başarısız olur.
 
-API sürümü için değişkenler kullanmayın. Özellikle, dağıtım sırasında API sürümlerini dinamik olarak almak için [sağlayıcılar işlevini](template-functions-resource.md#providers) kullanmayın. Dinamik olarak alınan API sürümü şablonunuzda özelliklerle eşleşmeyebilir.
+API sürümü için değişkenler kullanmayın. 
 
 ## <a name="resource-dependencies"></a>Kaynak bağımlılıkları
 

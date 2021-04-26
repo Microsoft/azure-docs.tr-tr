@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: spunukol
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 614b3f927dc22bc534168f8fe95cc2f97031b621
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 2ced48308673c6688def7b949fc225eeb5b2ced4
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98725532"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106551739"
 ---
 # <a name="troubleshooting-devices-using-the-dsregcmd-command"></a>Dsregcmd komutunu kullanarak cihazların sorunlarını giderme
 
@@ -345,4 +345,4 @@ Bu bölümde, Iş için Windows Hello (WHFB) sağlama için önkoşul denetimler
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sorular için bkz. [cihaz YÖNETIMI SSS](faq.md)
+Sorular için bkz. [cihaz YÖNETIMI SSS](faq.yml)

@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.topic: how-to
 ms.date: 09/28/2020
 ms.author: victorh
-ms.openlocfilehash: 86eaa645cd6a81b9180d1241695240a71aa8202d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: c9118d0e5b314f05e89334991c68ec1b3b5751e2
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93397272"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107866314"
 ---
 # <a name="create-an-application-gateway-with-http-to-https-redirection-using-azure-powershell"></a>Azure PowerShell kullanarak HTTP ile HTTPS yönlendirmesi arasında bir uygulama ağ geçidi oluşturma
 
@@ -34,7 +34,7 @@ Bu öğretici, Azure PowerShell modülü sürümü 1.0.0 veya üstünü gerektir
 
 ## <a name="create-a-self-signed-certificate"></a>Otomatik olarak imzalanan sertifika oluşturma
 
-Üretim kullanımı için, güvenilir bir sağlayıcı tarafından imzalanmış geçerli bir sertifikayı içeri aktarmanız gerekir. Bu öğretici için [New-SelfSignedCertificate](/powershell/module/pkiclient/new-selfsignedcertificate) komutunu kullanarak otomatik olarak imzalanan bir sertifika oluşturursunuz. Sertifikadan pfx dosyası dışarı aktarmak için döndürülen Parmak izi ile [Export-PfxCertificate](/powershell/module/pkiclient/export-pfxcertificate) komutunu kullanabilirsiniz.
+Üretim kullanımı için, güvenilir bir sağlayıcı tarafından imzalanmış geçerli bir sertifikayı içeri aktarmanız gerekir. Bu öğretici için [New-SelfSignedCertificate](/powershell/module/pki/new-selfsignedcertificate) komutunu kullanarak otomatik olarak imzalanan bir sertifika oluşturursunuz. Sertifikadan pfx dosyası dışarı aktarmak için döndürülen Parmak izi ile [Export-PfxCertificate](/powershell/module/pki/export-pfxcertificate) komutunu kullanabilirsiniz.
 
 ```powershell
 New-SelfSignedCertificate `

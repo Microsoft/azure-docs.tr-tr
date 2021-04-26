@@ -12,23 +12,18 @@ ms.custom:
 - amqp
 - mqtt
 monikerRange: '>=iotedge-2020-11'
-ms.openlocfilehash: 382cdf87016044748685e5e64ff04ebac53f018d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 500833d1bb4fc492942c08239bd488c2d2c16d30
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103199132"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107484328"
 ---
-# <a name="connect-a-downstream-iot-edge-device-to-an-azure-iot-edge-gateway-preview"></a>Bir aşağı akış IoT Edge cihazını bir Azure IoT Edge ağ geçidine bağlama (Önizleme)
+# <a name="connect-a-downstream-iot-edge-device-to-an-azure-iot-edge-gateway"></a>Bir aşağı akış IoT Edge cihazını bir Azure IoT Edge ağ geçidine bağlama
 
 [!INCLUDE [iot-edge-version-202011](../../includes/iot-edge-version-202011.md)]
 
 Bu makalede, bir IoT Edge Ağ Geçidi ile bir aşağı akış IoT Edge cihazı arasında güvenilir bir bağlantı kurmaya yönelik yönergeler sağlanmaktadır.
-
->[!NOTE]
->Bu özellik, Linux kapsayıcıları çalıştıran, genel önizlemede olan IoT Edge sürüm 1,2 gerektirir.
->
->Bu makalede IoT Edge sürüm 1,2 ' in en son önizleme sürümü yansıtılmıştır. Cihazınızın sürüm [1.2.0-RC4](https://github.com/Azure/azure-iotedge/releases/tag/1.2.0-rc4) veya daha yeni bir sürümünü çalıştırdığından emin olun. Cihazınızda en son önizleme sürümünü edinme adımları için bkz. [Linux için Azure IoT Edge (sürüm 1,2)](how-to-install-iot-edge.md) veya [güncelleştirme IoT Edge 1,2 sürümüne](how-to-update-iot-edge.md#special-case-update-from-10-or-11-to-12).
 
 Bir ağ geçidi senaryosunda, IoT Edge bir cihaz hem ağ geçidi hem de bir aşağı akış cihaz olabilir. Bir cihaz hiyerarşisi oluşturmak için birden çok IoT Edge ağ geçidi katmanlanmış olabilir. Aşağı akış (veya alt) cihazlar, ağ geçidi (veya üst) cihazından ileti doğrulayabilir ve iletileri gönderebilir veya alabilir.
 
@@ -83,9 +78,9 @@ Ayrıca, var olan cihazlar için üst/alt ilişkileri oluşturabilir veya yönet
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı için [Azure IoT](/cli/azure/ext/azure-iot) uzantısı, IoT kaynaklarınızı yönetmek için komutlar sağlar. Yeni cihaz kimlikleri oluştururken veya mevcut cihazları düzenleyerek IoT ve IoT Edge cihazlarının üst/alt ilişkilerini yönetebilirsiniz.
+Azure CLı için [Azure IoT](/cli/azure/iot) uzantısı, IoT kaynaklarınızı yönetmek için komutlar sağlar. Yeni cihaz kimlikleri oluştururken veya mevcut cihazları düzenleyerek IoT ve IoT Edge cihazlarının üst/alt ilişkilerini yönetebilirsiniz.
 
-[Az IoT Hub cihazı-kimlik](/cli/azure/ext/azure-iot/iot/hub/device-identity) komut kümesi, belirli bir cihaz için üst/alt ilişkileri yönetmenizi sağlar.
+[Az IoT Hub cihazı-kimlik](/cli/azure/iot/hub/device-identity) komut kümesi, belirli bir cihaz için üst/alt ilişkileri yönetmenizi sağlar.
 
 Bu `create` komut, alt cihaz ekleme ve cihaz oluşturma sırasında bir üst cihazı ayarlama parametrelerini içerir.
 
@@ -130,7 +125,7 @@ Kullanıcının **ıotedge** 'ın sertifikaları ve anahtarları tutan dizin iç
 1. **Kök CA sertifikasını** bu IoT Edge cihaza yükler.
 
    ```bash
-   sudo cp <path>/<root ca certificate>.pem /usr/local/share/ca-certificates/<root ca certificate>.pem
+   sudo cp <path>/<root ca certificate>.pem /usr/local/share/ca-certificates/<root ca certificate>.pem.crt
    ```
 
 1. Sertifika deposunu güncelleştirin.
@@ -162,13 +157,13 @@ Kullanıcının **ıotedge** 'ın sertifikaları ve anahtarları tutan dizin iç
 
 1. **Güven paketi sertifikası** bölümünü bulun. `trust_bundle_cert`Dosya URI 'si olan parametreyi, cihazınızdaki kök CA sertifikasına göre açıklama ve güncelleştirme.
 
-1. Bu özellik genel önizlemede olduğundan, IoT Edge cihazınızı, başlatıldığında IoT Edge aracısının genel önizleme sürümünü kullanacak şekilde yapılandırmanız gerekir.
+1. IoT Edge cihazınızın, başlatıldığında IoT Edge aracısının doğru sürümünü kullanacağınızı doğrulayın.
 
-   **Varsayılan Edge Aracısı** bölümünü bulun ve görüntü değerini genel önizleme görüntüsüne güncelleştirin:
+   **Varsayılan Edge Aracısı** bölümünü bulun ve görüntü değerinin sürüm 1,2 IoT Edge olduğunu doğrulayın. Aksi takdirde, güncelleştirin:
 
    ```toml
    [agent.config]
-   image: "mcr.microsoft.com/azureiotedge-agent:1.2.0-rc4"
+   image: "mcr.microsoft.com/azureiotedge-agent:1.2"
    ```
 
 1. Yapılandırma dosyasında **Edge CA sertifikası** bölümünü bulun. Bu bölümdeki satırların açıklamasını kaldırın ve IoT Edge cihazında sertifika ve anahtar dosyaları için dosya URI 'SI yollarını sağlayın.
@@ -200,21 +195,6 @@ Kullanıcının **ıotedge** 'ın sertifikaları ve anahtarları tutan dizin iç
 
    >[!TIP]
    >IoT Edge Denetim Aracı, tanılama denetiminden bazılarını gerçekleştirmek için bir kapsayıcı kullanır. Bu aracı aşağı akış IoT Edge cihazlarda kullanmak istiyorsanız, `mcr.microsoft.com/azureiotedge-diagnostics:latest` özel kapsayıcı kayıt defterinizde kapsayıcı resmine erişebildiklerinden veya sahip olduklarından emin olun.
-
-## <a name="configure-runtime-modules-for-public-preview"></a>Çalışma zamanı modüllerini genel önizleme için yapılandırma
-
-Bu özellik genel önizlemede olduğundan, IoT Edge cihazınızı, IoT Edge çalışma zamanı modüllerinin genel önizleme sürümlerini kullanacak şekilde yapılandırmanız gerekir. Önceki bölümde, edgeAgent 'ı başlangıçta yapılandırma adımları sağlanmaktadır. Ayrıca, cihazınız için dağıtımlarda çalışma zamanı modüllerini yapılandırmanız gerekir.
-
-1. EdgeHub modülünü genel önizleme görüntüsünü kullanacak şekilde yapılandırın: `mcr.microsoft.com/azureiotedge-hub:1.2.0-rc4` .
-
-1. EdgeHub modülü için aşağıdaki ortam değişkenlerini yapılandırın:
-
-   | Name | Değer |
-   | - | - |
-   | `experimentalFeatures__enabled` | `true` |
-   | `experimentalFeatures__nestedEdgeEnabled` | `true` |
-
-1. EdgeAgent modülünü genel önizleme görüntüsünü kullanacak şekilde yapılandırın: `mcr.microsoft.com/azureiotedge-hub:1.2.0-rc4` .
 
 ## <a name="network-isolate-downstream-devices"></a>Ağ yukarı akış cihazlarını yalıtma
 
@@ -250,6 +230,8 @@ Daha düşük bir katmandaki her ağ geçidi aygıtı için, ağ işleçlerinin 
 Bir ağ geçidi hiyerarşisinin üst katmanındaki IoT Edge cihaz, cihazda çalıştırdığınız tüm iş yükü modüllerine ek olarak, kendisine dağıtılması gereken gerekli modüller kümesine sahiptir.
 
 API proxy modülü, en yaygın ağ geçidi senaryolarını işleyecek şekilde özelleştirilmek üzere tasarlanmıştır. Bu makale, bir temel yapılandırmada modülleri ayarlamak için ve örneği sağlar. Daha ayrıntılı bilgi ve örnekler için [ağ geçidi hiyerarşiniz IÇIN API proxy modülünü yapılandırma](how-to-configure-api-proxy-module.md) bölümüne bakın.
+
+# <a name="portal"></a>[Portal](#tab/azure-portal)
 
 1. [Azure Portal](https://portal.azure.com)IoT Hub 'ınıza gidin.
 1. Gezinti menüsünden **IoT Edge** ' yi seçin.
@@ -337,6 +319,109 @@ API proxy modülü, en yaygın ağ geçidi senaryolarını işleyecek şekilde �
 1. Son adıma geçmek için **gözden geçir + oluştur** ' u seçin.
 1. Cihazınıza dağıtmak için **Oluştur** ' u seçin.
 
+# <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+1. [Azure Cloud Shell](https://shell.azure.com/), BIR dağıtım JSON dosyası oluşturun. Örnek:
+
+   ```json
+   {
+       "modulesContent": {
+           "$edgeAgent": {
+               "properties.desired": {
+                   "modules": {
+                       "dockerContainerRegistry": {
+                           "settings": {
+                               "image": "registry:latest",
+                               "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"5000/tcp\":[{\"HostPort\":\"5000\"}]}}}"
+                           },
+                           "type": "docker",
+                           "version": "1.0",
+                           "env": {
+                               "REGISTRY_PROXY_REMOTEURL": {
+                                   "value": "The URL for the container registry you want this registry module to map to. For example, https://myregistry.azurecr"
+                               },
+                               "REGISTRY_PROXY_USERNAME": {
+                                   "value": "Username to authenticate to the container registry."
+                               },
+                               "REGISTRY_PROXY_PASSWORD": {
+                                   "value": "Password to authenticate to the container registry."
+                               }
+                           },
+                           "status": "running",
+                           "restartPolicy": "always"
+                       },
+                       "IoTEdgeAPIProxy": {
+                           "settings": {
+                               "image": "mcr.microsoft.com/azureiotedge-api-proxy:1.0",
+                               "createOptions": "{\"HostConfig\": {\"PortBindings\": {\"443/tcp\": [{\"HostPort\":\"443\"}]}}}"
+                           },
+                           "type": "docker",
+                           "env": {
+                               "NGINX_DEFAULT_PORT": {
+                                   "value": "443"
+                               },
+                               "DOCKER_REQUEST_ROUTE_ADDRESS": {
+                                   "value": "registry:5000"
+                               }
+                           },
+                           "status": "running",
+                           "restartPolicy": "always",
+                           "version": "1.0"
+                       }
+                   },
+                   "runtime": {
+                       "settings": {
+                           "minDockerVersion": "v1.25"
+                       },
+                       "type": "docker"
+                   },
+                   "schemaVersion": "1.1",
+                   "systemModules": {
+                       "edgeAgent": {
+                           "settings": {
+                               "image": "mcr.microsoft.com/azureiotedge-agent:1.2",
+                               "createOptions": ""
+                           },
+                           "type": "docker"
+                       },
+                       "edgeHub": {
+                           "settings": {
+                               "image": "mcr.microsoft.com/azureiotedge-hub:1.2",
+                               "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}]}}}"
+                           },
+                           "type": "docker",
+                           "env": {},
+                           "status": "running",
+                           "restartPolicy": "always"
+                       }
+                   }
+               }
+           },
+           "$edgeHub": {
+               "properties.desired": {
+                   "routes": {
+                       "route": "FROM /messages/* INTO $upstream"
+                   },
+                   "schemaVersion": "1.1",
+                   "storeAndForwardConfiguration": {
+                       "timeToLiveSecs": 7200
+                   }
+               }
+           }
+       }
+   }
+   ```
+
+   Bu dağıtım dosyası, 443 bağlantı noktasını dinlemek için API proxy modülünü yapılandırır. Bağlantı noktası bağlama çakışmalarını engellemek için, dosya edgeHub modülünü 443 numaralı bağlantı noktasında dinleme yapmayacak şekilde yapılandırır. Bunun yerine, API proxy modülü 443 numaralı bağlantı noktasında herhangi bir edgeHub trafiğini yönlendirir.
+
+1. IoT Edge cihazına bir dağıtım oluşturmak için aşağıdaki komutu girin:
+
+   ```bash
+   az iot edge set-modules --device-id <device_id> --hub-name <iot_hub_name> --content ./<deployment_file_name>.json
+   ```
+
+---
+
 ### <a name="deploy-modules-to-lower-layer-devices"></a>Modülleri alt katman cihazlarına dağıtın
 
 Bir ağ geçidi hiyerarşisinin alt katmanlarındaki IoT Edge cihazların, cihazda çalıştırdığınız tüm iş yükü modüllerine ek olarak, bunlara dağıtılması gereken bir gerekli modülü vardır.
@@ -347,7 +432,7 @@ Ağ Geçidi hiyerarşilerindeki IoT Edge cihazlar için gerekli proxy modülün�
 
 Alt katman cihazlarınız buluta bağlanamıyorsa, ancak her zamanki gibi modül görüntülerini çekmesini istiyorsanız, ağ geçidi hiyerarşisinin en üst katman cihazının bu istekleri işleyecek şekilde yapılandırılması gerekir. Üst katman cihazının, kapsayıcı Kayıt defterinize eşlenmiş bir Docker **kayıt defteri** modülünü çalıştırması gerekir. Ardından, kapsayıcı isteklerini bu sunucuya yönlendirmek için API proxy modülünü yapılandırın. Bu ayrıntılar, bu makalenin önceki bölümlerinde ele alınmıştır. Bu yapılandırmada, alt katman cihazların bulut kapsayıcısı kayıt defterlerine, ancak üst katmanda çalışan kayıt defterine işaret etmesi gerekir.
 
-Örneğin, öğesini çağırmak yerine `mcr.microsoft.com/azureiotedge-api-proxy:latest` alt katman cihazları çağırmalıdır `$upstream:443/azureiotedge-api-proxy:latest` .
+Örneğin, öğesini çağırmak yerine `mcr.microsoft.com/azureiotedge-api-proxy:1.0` alt katman cihazları çağırmalıdır `$upstream:443/azureiotedge-api-proxy:1.0` .
 
 **$Upstream** parametresi, daha düşük bir katman cihazının üst öğesine işaret eder, bu nedenle istek kayıt modülüne bir ara ortam yönlendirme isteği istekleri olan üst katmana ulaşana kadar tüm katmanlarda dolaşacaktır. `:443`Bu örnekteki bağlantı noktası, üst CIHAZDAKI API proxy modülünün dinlediği bağlantı noktası ile değiştirilmelidir.
 
@@ -369,7 +454,7 @@ name = "edgeAgent"
 type = "docker"
 
 [agent.config]
-image: "{Parent FQDN or IP}:443/azureiotedge-agent:1.2.0-rc4"
+image: "{Parent FQDN or IP}:443/azureiotedge-agent:1.2"
 ```
 
 Yerel bir kapsayıcı kayıt defteri kullanıyorsanız veya cihazda kapsayıcı görüntülerini el ile sağlıyorsanız, yapılandırma dosyasını uygun şekilde güncelleştirin.

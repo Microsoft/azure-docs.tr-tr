@@ -24,23 +24,21 @@
     - name: Özel kod modülleri geliştirme
       items:
         - name: C
-          items:
-            - name: Linux cihazları için C modülleri
-              href: tutorial-c-module.md
-            - name: Windows cihazları için C modülleri
-              href: tutorial-c-module-windows.md
+          href: tutorial-c-module.md
         - name: C#
-          items:
-            - name: Linux cihazları için C# modülleri
-              href: tutorial-csharp-module.md
-            - name: Windows cihazları için C# modülleri
-              href: tutorial-csharp-module-windows.md
+          href: tutorial-csharp-module.md
         - name: Java
           href: tutorial-java-module.md
         - name: Node.js
           href: tutorial-node-module.md
         - name: Python
           href: tutorial-python-module.md
+        - name: Windows kapsayıcıları kullanma
+          items:
+            - name: C
+              href: tutorial-c-module-windows.md
+            - name: C#
+              href: tutorial-csharp-module-windows.md
     - name: Azure hizmetlerini modül olarak dağıtma
       items:
         - name: Azure İşlevleri ile verileri filtreleme
@@ -298,7 +296,7 @@
         - name: iOS Platformu
           href: 'https://azure.microsoft.com/resources/samples/azure-iot-samples-ios/'
     - name: IoT için Azure Sertifikalı cihaz kataloğu
-      href: 'https://catalog.azureiotsolutions.com/'
+      href: 'https://devicecatalog.azure.com/'
     - name: Azure IoT Geliştirici Merkezi
       href: 'https://azure.microsoft.com/develop/iot/'
     - name: Azure Yol Haritası

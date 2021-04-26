@@ -7,12 +7,12 @@ ms.topic: article
 ms.date: 10/30/2018
 ms.author: msangapu
 ms.custom: seodec18
-ms.openlocfilehash: 6faec27bf368b3eb45e05a91307df6027bda93b1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 82fc5707800e06e3221754bfa29d8e981ccdbd2d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100094007"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782594"
 ---
 # <a name="azure-app-service-on-linux-faq"></a>Linux’ta Azure App Service hakkında SSS
 
@@ -122,7 +122,7 @@ Veya dahil olmak üzere tam kayıt defteri URL 'sini sağlayın `http://` `https
 
 **Özel kayıt defteri seçeneğinde görüntü adının biçimi nedir?**
 
-Özel kayıt defteri URL 'SI de dahil olmak üzere tam görüntü adını ekleyin (örneğin, myacr.azurecr.io/dotnet:latest). Özel bir bağlantı noktası kullanan görüntü adları [Portal üzerinden girilemez](https://feedback.azure.com/forums/169385-web-apps/suggestions/31304650). Ayarlamak için `docker-custom-image-name` [ `az` komut satırı aracını](/cli/azure/webapp/config/container#az-webapp-config-container-set)kullanın.
+Özel kayıt defteri URL 'SI de dahil olmak üzere tam görüntü adını ekleyin (örneğin, myacr.azurecr.io/dotnet:latest). Özel bir bağlantı noktası kullanan görüntü adları [Portal üzerinden girilemez](https://feedback.azure.com/forums/169385-web-apps/suggestions/31304650). Ayarlamak için `docker-custom-image-name` [ `az` komut satırı aracını](/cli/azure/webapp/config/container#az_webapp_config_container_set)kullanın.
 
 **Özel kapsayıcı Görüntümdeki birden fazla bağlantı noktasını kullanıma alabilir miyim?**
 
@@ -143,6 +143,20 @@ Otomatik bağlantı noktası algılıyoruz. Ayrıca, *WEBSITES_PORT* adlı bir u
 **Özel kapsayıcımda HTTPS uygulamam gerekiyor mu?**
 
 Hayır, platform paylaşılan ön uçlarında HTTPS sonlandırmasını işler.
+
+**Yerleşik kapsayıcılar için kodda bağlantı noktası değişkeni kullanmam gerekir mi?**
+
+Hayır, otomatik bağlantı noktası algılaması nedeniyle bağlantı noktası değişkeni gerekli değildir. Hiçbir bağlantı noktası algılanmazsa, varsayılan olarak 80 olur.
+Özel bir bağlantı noktasını el ile yapılandırmak için Dockerfile içindeki gösterme yönergesini ve WEBSITES_PORT uygulama ayarını kullanın. Bu, kapsayıcıya bağlamak için bir bağlantı noktası değeri ile.
+
+**Özel kapsayıcılar için WEBSITES_PORT kullanmam gerekir mi?**
+
+Evet, özel kapsayıcılar için bu gereklidir. Özel bir bağlantı noktasını el ile yapılandırmak için Dockerfile içindeki gösterme yönergesini ve WEBSITES_PORT uygulama ayarını kullanın. Bu, kapsayıcıya bağlamak için bir bağlantı noktası değeri ile.
+
+**Docker görüntüsünde ASPNETCORE_URLS kullanabilir miyim?**
+
+Evet, .NET Core uygulaması başlamadan önce ortam değişkeninin üzerine yazın.
+Örneğin İnit.sh betiği: Export ASPNETCORE_URLS = {Value}
 
 ## <a name="multi-container-with-docker-compose"></a>Docker Compose ile çok Kapsayıcılı
 
@@ -206,3 +220,4 @@ Uygulama ayarları için yalnızca harfler (A-Z, a-z), rakamlar (0-9) ve alt çi
 - [Linux üzerinde Azure App Service nedir?](overview.md#app-service-on-linux)
 - [Azure App Service’ta hazırlık ortamları ayarlama](deploy-staging-slots.md)
 - [Kapsayıcılar için Web App ile sürekli dağıtım](./deploy-ci-cd-custom-container.md)
+- [Bilmeniz gerekenler: Web Apps ve Linux](https://techcommunity.microsoft.com/t5/apps-on-azure/things-you-should-know-web-apps-and-linux/ba-p/392472)

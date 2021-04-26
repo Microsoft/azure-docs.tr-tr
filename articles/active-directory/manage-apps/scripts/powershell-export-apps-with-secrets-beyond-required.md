@@ -2,21 +2,21 @@
 title: PowerShell örneği-Azure Active Directory kiracısındaki gerekli tarihin ötesinde gizli dizileri ve sertifikaları dışarı aktarma.
 description: Azure Active Directory kiracınızdaki belirtilen uygulamalar için gerekli tarihin ötesinde gizli dizi ve sertifikalara sahip tüm uygulamaları dışa aktaran PowerShell örneği.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: sample
 ms.date: 03/09/2021
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: mifarca
-ms.openlocfilehash: 9c0e5508830343561833785fbce31f547a8a7428
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 692ab2cfd480fd15760c13c63922fe76d23058ea
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103149690"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107375398"
 ---
 # <a name="export-apps-with-secrets-and-certificates-expiring-beyond-the-required-date"></a>Uygulamaları gizli ve sertifikalara göre, gerekli tarihin ötesinde süresi dolacak şekilde dışa aktarma
 
@@ -37,7 +37,7 @@ Bu betik, "RefreshToken" işlevi, yönetici tarafından değiştirilen parametre
 
 | Komut | Notlar |
 |---|---|
-| [Invoke-WebRequest](/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.1) | Bir Web sayfasına veya Web hizmetine HTTP ve HTTPS istekleri gönderir. Yanıtı ayrıştırır ve bağlantılar, görüntüler ve diğer önemli HTML öğeleri için koleksiyonları döndürür. |
+| [Invoke-WebRequest](/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.1&preserve-view=true) | Bir Web sayfasına veya Web hizmetine HTTP ve HTTPS istekleri gönderir. Yanıtı ayrıştırır ve bağlantılar, görüntüler ve diğer önemli HTML öğeleri için koleksiyonları döndürür. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

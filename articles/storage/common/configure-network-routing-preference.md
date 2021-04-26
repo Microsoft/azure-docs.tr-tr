@@ -10,12 +10,12 @@ ms.date: 03/17/2021
 ms.author: normesta
 ms.reviewer: santoshc
 ms.subservice: common
-ms.openlocfilehash: 0738f7e427c2ff094c9b6df7539ba67dff80d095
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ed248480803370a75b40c18ee7d0e2641254d84a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104589863"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107790464"
 ---
 # <a name="configure-network-routing-preference-for-azure-storage"></a>Azure depolama için ağ yönlendirme tercihini yapılandırma
 
@@ -82,7 +82,7 @@ Yönlendirme tercihinizi Internet yönlendirme olarak değiştirmek için:
 
    - Azure Cloud Shell başlatmak için [Azure Portal](https://portal.azure.com)oturum açın.
 
-   - CLı 'nın yerel yüklemesinde oturum açmak için [az Login](/cli/azure/reference-index#az-login) komutunu çalıştırın:
+   - CLı 'nın yerel yüklemesinde oturum açmak için [az Login](/cli/azure/reference-index#az_login) komutunu çalıştırın:
 
      ```azurecli
      az login
@@ -146,7 +146,7 @@ Bu tercih yalnızca rotaya özgü uç noktayı etkiler. Bu tercih, varsayılan y
 
 ### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-1. Rotaya özgü bir uç nokta yapılandırmak için [az Storage Account Update](/azure/storage/account#az-storage-account-update) komutunu kullanın. 
+1. Rotaya özgü bir uç nokta yapılandırmak için [az Storage Account Update](/azure/storage/account#az_storage_account_update) komutunu kullanın. 
 
    - Microsoft ağ yönlendirme tercihini kullanan bir rotaya özgü uç nokta oluşturmak için, `--publish-microsoft-endpoints` parametresini olarak ayarlayın `true` . 
 

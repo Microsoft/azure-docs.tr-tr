@@ -7,10 +7,10 @@ ms.service: postgresql
 ms.topic: conceptual
 ms.date: 09/22/2020
 ms.openlocfilehash: c0d9b6042ae695caa73d926653f237b756bf4971
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "94366732"
 ---
 # <a name="high-availability-concepts-in-azure-database-for-postgresql---flexible-server"></a>PostgreSQL için Azure veritabanı 'nda yüksek kullanılabilirlik kavramları-esnek sunucu
@@ -97,8 +97,8 @@ Yüksek kullanılabilirlik ile yapılandırılan esnek sunucular, güncel tutmak
 
 ## <a name="zone-redundant-high-availability---limitations"></a>Bölge yedekli yüksek kullanılabilirlik-sınırlamalar
 
--   Yüksek kullanılabilirlik, Burstable işlem katmanında desteklenmez.
--   Yüksek kullanılabilirlik yalnızca birden fazla bölgenin kullanılabildiği bölgelerde desteklenir.
+-   Hızla artırılabilir işlem katmanında yüksek kullanılabilirlik desteklenmez.
+-   Yüksek kullanılabilirlik yalnızca birden çok alanın kullanılabildiği bölgelerde desteklenir.
 -   Farklı bir kullanılabilirlik bölgesine zaman uyumlu çoğaltma nedeniyle, uygulamalar yükseltilmiş yazma ve tamamlama gecikmesi ile karşılaşabilir.
 
 -   Bekleme çoğaltması, okuma sorguları için kullanılamaz.

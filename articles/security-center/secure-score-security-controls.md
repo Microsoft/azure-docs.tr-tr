@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/03/2021
 ms.author: memildin
-ms.openlocfilehash: b19a7c156abf32e2a0f6d70717145a6ed5ab42ce
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2f5d98dd9bf893065f2bf9c37cbec4384d0f7c94
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102099684"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105727149"
 ---
 # <a name="secure-score-in-azure-security-center"></a>Azure Güvenlik Merkezi'nde güvenlik puanı
 
@@ -69,7 +69,7 @@ Bu denetim için en yüksek puan, sistem güncelleştirmelerini Uygula, her zama
 |**Güvenlik denetiminin geçerli puanı**|<br>![Güvenlik denetiminin Puanını hesaplama denklemi](media/secure-score-security-controls/secure-score-equation-single-control.png)<br><br>Her bireysel güvenlik denetimi güvenlik puanına katkıda bulunur. Denetim içindeki bir öneriden etkilenen her kaynak, denetimin geçerli puanına doğru katkıda bulunur. Her denetim için geçerli *puan, denetimdeki kaynakların durumunun* ölçüsüdür.<br>![Güvenlik denetiminin geçerli puanı hesaplanırken kullanılan değerleri gösteren araç ipuçları](media/secure-score-security-controls/security-control-scoring-tooltips.png)<br>Bu örnekte, sağlıklı ve sağlıksız kaynakların toplamı olduğundan, 6 ' nın en fazla puanı 78 olarak bölünür.<br>6/78 = 0,0769<br>Sağlıklı kaynak sayısına (4) göre çarpılması geçerli puanın sonucunu elde ediyor:<br>0,0769 * 4 = **0,31**<br><br>|
 |**Güvenlik puanı**<br>Tek abonelik|<br>![Aboneliğin güvenli Puanını hesaplama denklemi](media/secure-score-security-controls/secure-score-equation-single-sub.png)<br><br>![Tüm denetimler etkin olan tek abonelik güvenli puanı](media/secure-score-security-controls/secure-score-example-single-sub.png)<br>Bu örnekte, kullanılabilen tüm güvenlik denetimlerine sahip tek bir abonelik vardır (en fazla 60 punto puanı). Puan, olası bir 60 28 noktayı gösterir ve kalan 32 noktaları, güvenlik denetimlerinin "potansiyel puan artışı" biçiminde yansıtılır.<br>![Denetimlerin listesi ve olası puan artışı](media/secure-score-security-controls/secure-score-example-single-sub-recs.png)|
 |**Güvenlik puanı**<br>Birden çok abonelik|<br>![Birden çok abonelik için güvenli puanı hesaplama denklemi](media/secure-score-security-controls/secure-score-equation-multiple-subs.png)<br><br>Birden çok abonelik için Birleşik puanı hesaplarken, güvenlik merkezi her abonelik için bir *Ağırlık* içerir. Abonelikleriniz için göreli ağırlıklar, Güvenlik Merkezi tarafından, kaynak sayısı gibi faktörlere göre belirlenir.<br>Her aboneliğin geçerli puanı, tek bir abonelikle aynı şekilde hesaplanır, ancak daha sonra ağırlığa, denklemde gösterildiği gibi uygulanır.<br>Birden çok abonelik görüntülenirken, güvenli puan tüm etkin ilkelerin içindeki tüm kaynakları değerlendirir ve her bir güvenlik denetiminin en fazla puanı üzerinde Birleşik etkileri gruplandırır.<br>![Tüm denetimler etkin olan birden çok abonelik için güvenli puan](media/secure-score-security-controls/secure-score-example-multiple-subs.png)<br>Birleşik puan bir ortalama **değil** ; Bunun yerine, tüm aboneliklerdeki tüm kaynakların durumunun değerlendirilmiş bir şekilde olduğunu gösterir.<br>Burada, öneriler sayfasına giderseniz ve kullanılabilir olası noktaları eklerseniz, geçerli puan (24) ile kullanılabilir maksimum puan (60) arasındaki fark olduğunu göreceksiniz.|
-||||
+
 
 ### <a name="which-recommendations-are-included-in-the-secure-score-calculations"></a>Hangi öneriler, güvenli puan hesaplamalarına dahildir?
 

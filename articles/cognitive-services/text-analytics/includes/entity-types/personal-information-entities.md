@@ -9,12 +9,12 @@ ms.subservice: text-analytics
 ms.topic: include
 ms.date: 03/15/2021
 ms.author: aahi
-ms.openlocfilehash: 19586c09cca9a0dc74ba9ee4ef9da459964f9b7e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7484b49ed3c868a1ad3e0f97dffa346f350e127f
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104599347"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106097709"
 ---
 > [!NOTE]
 > Korumalı sistem durumu bilgilerini (FI) algılamak için, `domain=phi` parametresini ve model sürümünü `2020-04-01` veya üstünü kullanın.
@@ -53,7 +53,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        Kişilerin adları. 
+        Kişilerin adları. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `Person` `pii-categories` . `Person` algılanırsa API yanıtında döndürülür.
       
@@ -140,7 +140,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        Şirketler, siyatik gruplar, müzik bantları, spor sinek, kamu gövdeleri ve kamu kuruluşları. Bu varlık türünde ülke almallikleri ve dini dahil değildir.
+        Şirketler, siyatik gruplar, müzik bantları, spor sinek, kamu gövdeleri ve kamu kuruluşları. Bu varlık türünde ülke almallikleri ve dini dahil değildir. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `Organization` `pii-categories` . `Organization` algılanırsa API yanıtında döndürülür.
       
@@ -241,7 +241,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        Tam posta adresi.
+        Tam posta adresi. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `Address` `pii-categories` . `Address` algılanırsa API yanıtında döndürülür.
       
@@ -270,7 +270,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        E-posta adresleri.
+        E-posta adresleri. İle de döndürülür `domain=phi` .
       
         Bu varlık kategorisini almak için parametresine ekleyin `Email` `pii-categories` . `Email` algılanırsa API yanıtında döndürülür.
 
@@ -298,7 +298,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        Web sitelerinin URL 'Leri. 
+        Web sitelerinin URL 'Leri. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `URL` `pii-categories` . `URL` algılanırsa API yanıtında döndürülür.
       
@@ -327,7 +327,7 @@ Bu kategori aşağıdaki varlığı içerir:
     :::column span="2":::
         **Ayrıntılar**
 
-        ağ IP adresleri. 
+        Ağ IP adresleri. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `IP` `pii-categories` . `IP` algılanırsa API yanıtında döndürülür.
       
@@ -382,7 +382,7 @@ Bu kategorideki varlık aşağıdaki alt kategorilere sahip olabilir.
     :::column span="2":::
         **Ayrıntılar**
 
-        Takvim tarihleri.
+        Takvim tarihleri. İle de döndürülür `domain=phi` .
 
         Bu varlık kategorisini almak için parametresine ekleyin `Date` `pii-categories` . `Date` algılanırsa API yanıtında döndürülür.
       
@@ -436,7 +436,7 @@ Bu kategorideki varlık aşağıdaki alt kategorilere sahip olabilir.
     :::column span="2":::
         **Ayrıntılar**
 
-        Geçirir.
+        Geçirir. 
 
         Bu varlık kategorisini almak için parametresine ekleyin `Age` `pii-categories` . `Age` algılanırsa API yanıtında döndürülür.
       

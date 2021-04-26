@@ -8,16 +8,17 @@ ms.date: 04/26/2019
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: d5fc7b6b480056b56a2776cebd0fa87a5b96f9f0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+monikerRange: iotedge-2018-06
+ms.openlocfilehash: a5407c46be6726974a920b5dddd87639dc426d0d
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103201664"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107587281"
 ---
 # <a name="how-to-install-iot-edge-on-kubernetes-preview"></a>Kubernetes 'e IoT Edge nasıl yüklenir (Önizleme)
 
-[!INCLUDE [iot-edge-version-all-supported](../../includes/iot-edge-version-all-supported.md)]
+[!INCLUDE [iot-edge-version-201806](../../includes/iot-edge-version-201806.md)]
 
 IoT Edge, Kubernetes ile, dayanıklı ve yüksek oranda kullanılabilir bir altyapı katmanı olarak yararlanarak tümleştirilebilir. Aşağıda, bu desteğin yüksek düzeyde bir IoT Edge çözümüne uygun olduğu yer verilmiştir:
 

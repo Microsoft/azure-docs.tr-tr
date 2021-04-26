@@ -16,12 +16,12 @@ ms.author: kenwith
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a7d089d8f57bf8ef1278d262129cc8ddfc81d581
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 52cb4480e8b7820d656b8ab66f12486c2062dca5
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99257752"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106443500"
 ---
 # <a name="compare-remote-access-solutions"></a>Uzaktan erişim çözümlerini karşılaştırın
 
@@ -64,4 +64,4 @@ Azure AD Uygulama Ara Sunucusu, benzer ürünlerle karşılaştırıldığında 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Şirket içi uygulamalara güvenli uzaktan erişim sağlamak için Azure AD uygulaması 'nı kullanın](application-proxy.md)
+- [Şirket içi uygulamalara güvenli uzaktan erişim sağlamak için Azure AD Uygulama Ara Sunucusu kullanma](application-proxy.md)

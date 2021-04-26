@@ -5,20 +5,16 @@ description: Eski geliştirici portalından API Management yeni geliştirici por
 services: api-management
 documentationcenter: API Management
 author: mikebudzynski
-manager: cfowler
-editor: ''
 ms.service: api-management
-ms.workload: mobile
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 10/15/2020
+ms.date: 04/15/2021
 ms.author: apimpm
-ms.openlocfilehash: f5105c685de4b3ccdffe69eec8ee8eeb32976c1f
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: e4f9f3822b58886f7d453d52402b078d8401133f
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92326087"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107738891"
 ---
 # <a name="migrate-to-the-new-developer-portal"></a>Yeni geliştirici portalına geçirme
 
@@ -33,19 +29,19 @@ Bu makalede, kullanımdan kaldırılan eski portaldan API Management yeni geliş
 
 ## <a name="improvements-in-new-developer-portal"></a>Yeni geliştirici portalındaki geliştirmeler
 
-Yeni geliştirici portalı, kullanımdan kaldırılan portalın birçok sınırlamalarını ele alınmaktadır. [İçerik düzenleme için görsel bir sürükle ve bırak Düzenleyicisi](api-management-howto-developer-portal-customize.md) ve tasarımcıların Web sitesini stilindeki özel bir panel sunar. Sayfalar, özelleştirmeler ve yapılandırma API Management hizmetinize Azure Resource Manager kaynaklar olarak kaydedilir ve bu da [Portal dağıtımlarını otomatik hale getirmenizi](api-management-howto-developer-portal.md#automate)sağlar. Son olarak, portalın kod temeli açık kaynaktır, [Bu sayede özel işlevlerle genişletebilirsiniz](api-management-howto-developer-portal.md#managed-vs-self-hosted).
+Yeni geliştirici portalı, kullanımdan kaldırılan portalın birçok sınırlamalarını ele alınmaktadır. [İçerik düzenleme için görsel bir sürükle ve bırak Düzenleyicisi](api-management-howto-developer-portal-customize.md) ve tasarımcıların Web sitesini stilindeki özel bir panel sunar. Sayfalar, özelleştirmeler ve yapılandırma API Management hizmetinize Azure Resource Manager kaynaklar olarak kaydedilir ve bu da [Portal dağıtımlarını otomatik hale getirmenizi](automate-portal-deployments.md)sağlar. Son olarak, portalın kod temeli açık kaynaktır, [Bu sayede özel işlevlerle genişletebilirsiniz](api-management-howto-developer-portal.md#managed-vs-self-hosted).
 
 ## <a name="how-to-migrate-to-new-developer-portal"></a>Yeni geliştirici portalına geçirme
 
 Yeni geliştirici portalı kullanımdan kaldırılan portalla uyumlu değildir ve otomatik geçiş mümkün değildir. İçeriği (sayfalar, metin, medya dosyaları) el ile yeniden oluşturmanız ve yeni portalın görünümünü özelleştirmeniz gerekir. Tam adımlar, portalınızın özelleştirmeleri ve karmaşıklığına bağlı olarak değişir. Rehberlik için [Geliştirici Portalı öğreticisine](api-management-howto-developer-portal-customize.md) bakın. API 'Ler, ürünler, kullanıcılar ve kimlik sağlayıcıları gibi kalan yapılandırma her iki Portal arasında otomatik olarak paylaşılır.
 
 > [!IMPORTANT]
-> Yeni geliştirici portalını daha önce başlattınız, ancak herhangi bir değişiklik yapmadıysanız, en son sürüme güncelleştirmek için [varsayılan içeriği sıfırlayın](api-management-howto-developer-portal.md#preview-to-ga) .
+> Yeni geliştirici portalını daha önce başlattınız, ancak herhangi bir değişiklik yapmadıysanız, en son sürüme güncelleştirmek için varsayılan içeriği sıfırlayın.
 
 Kullanımdan kaldırılan portaldan geçiş yaptığınızda aşağıdaki değişiklikleri aklınızda bulundurun:
 
 - Geliştirici portalınızı özel bir etki alanı aracılığıyla kullanıma sunadıysanız, yeni geliştirici portalına [bir etki alanı atayın](configure-custom-domain.md) . Azure portal açılır listesinden **Geliştirici Portalı** seçeneğini kullanın.
-- Etkileşimli test konsolunu etkinleştirmek için API 'lerinize [BIR CORS Ilkesi uygulayın](api-management-howto-developer-portal.md#cors) .
+- Etkileşimli test konsolunu etkinleştirmek için API 'lerinize [BIR CORS Ilkesi uygulayın](developer-portal-faq.md#cors) .
 - Portala stil eklemek için özel CSS eklerseniz, stili [yerleşik tasarım panelini kullanarak çoğaltmanız](api-management-howto-developer-portal-customize.md)gerekir. Yeni portalda CSS eklenmesine izin verilmiyor.
 - Özel JavaScript 'ı yalnızca [Yeni portalın şirket içinde barındırılan sürümüne](api-management-howto-developer-portal.md#managed-vs-self-hosted)ekleyebilirsiniz.
 - API Management bir sanal ağda yer alıyorsa ve Application Gateway aracılığıyla Internet 'e açık ise, kesin yapılandırma adımları için [Bu belge makalesine başvurun](api-management-howto-integrate-internal-vnet-appgateway.md) . Şunları yapmanız gerekir:

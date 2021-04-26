@@ -5,13 +5,13 @@ author: Heidilohr
 ms.topic: conceptual
 ms.date: 03/09/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: ffea2d84f1a5149670976beef3b9af847ae31a35
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+manager: femila
+ms.openlocfilehash: 1f5e4cb0d2db30c6b07370be137506f3fe26837f
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104582145"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106505306"
 ---
 # <a name="windows-virtual-desktop-faq"></a>Windows Sanal Masaüstü hakkında SSS
 
@@ -139,7 +139,7 @@ Son olarak, CSP sahip hesabından kaynak sağlayıcısını etkinleştirdiyseniz
 
 ## <a name="how-often-should-i-turn-my-vms-on-to-prevent-registration-issues"></a>Kayıt sorunlarını engellemek için VM 'lerimi ne sıklıkta kapatmalıyım?
 
-Bir VM 'yi Windows sanal masaüstü hizmeti içindeki bir konak havuzuna kaydettikten sonra, sanal makine etkin olduğunda aracı sanal makinenin belirtecini düzenli olarak yeniler. Kayıt belirtecinin sertifikası 90 gün için geçerlidir. Bu 90 günlük sınır nedeniyle sanal makinelerinizi her 90 günde bir başlatmanız önerilir. SANAL makinenizin bu süre içinde açık olması, kayıt belirtecinin süresinin dolmasını veya geçersiz hale gelmesini engelleyecek. VM 'nizi 90 gün sonra başlattıysanız ve kayıt sorunları yaşıyorsanız, VM 'yi konak havuzundan kaldırmak için [Windows sanal masaüstü Aracısı sorun giderme kılavuzu](troubleshoot-agent.md#your-issue-isnt-listed-here-or-wasnt-resolved) 'ndaki yönergeleri izleyin, aracıyı yeniden yükleyin ve havuza kaydedin.
+Bir VM 'yi Windows sanal masaüstü hizmeti içindeki bir konak havuzuna kaydettikten sonra, sanal makine etkin olduğunda aracı sanal makinenin belirtecini düzenli olarak yeniler. Kayıt belirtecinin sertifikası 90 gün için geçerlidir. Bu 90 günlük sınır nedeniyle, makinenin belirteçlerini yenileyebilmesi ve aracıyı ve yan yana yığın bileşenlerini güncelleştirebilmesi için, VM 'Lerin her 90 günde bir kaç dakika boyunca çevrimiçi olmasını öneririz. SANAL makinenizin bu süre içinde açık olması, kayıt belirtecinin süresinin dolmasını veya geçersiz hale gelmesini engelleyecek. VM 'nizi 90 gün sonra başlattıysanız ve kayıt sorunları yaşıyorsanız, VM 'yi konak havuzundan kaldırmak için [Windows sanal masaüstü Aracısı sorun giderme kılavuzu](troubleshoot-agent.md#your-issue-isnt-listed-here-or-wasnt-resolved) 'ndaki yönergeleri izleyin, aracıyı yeniden yükleyin ve havuza kaydedin.
 
 ## <a name="can-i-set-availability-options-when-creating-host-pools"></a>Konak havuzları oluştururken kullanılabilirlik seçeneklerini ayarlayabilir miyim?
 

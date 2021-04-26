@@ -4,10 +4,10 @@ description: IoT cihazının Özellikler ve hizmeti için Defender 'ı kullanara
 ms.topic: conceptual
 ms.date: 2/16/2021
 ms.openlocfilehash: b586eb4bebfc584e6cec4c27df859dbebb817e2d
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104784943"
 ---
 # <a name="defender-for-iot-devices-security-alerts"></a>IoT cihazları için Defender güvenlik uyarıları
@@ -22,7 +22,7 @@ Daha fazla bilgi için bkz. [özelleştirilebilir uyarılar](concept-customizabl
 
 ## <a name="agent-based-security-alerts"></a>Aracı tabanlı güvenlik uyarıları
 
-| Name | Önem derecesi | Veri Kaynağı | Açıklama | Önerilen düzeltme adımları |
+| Name | Önem derecesi | Veri Kaynağı | Description | Önerilen düzeltme adımları |
 |--|--|--|--|--|
 | **Yüksek** önem derecesi |  |  |  |
 | İkili komut satırı | Yüksek | Klasik Defender-IoT-Micro-Agent | Komut satırından çağrılan/yürütülen LA Linux ikilisi algılandı. Bu işlem meşru bir etkinlik veya cihazınızın güvenliğinin aşıldığını belirten bir gösterge olabilir. | Komutunu çalıştıran kullanıcıyla birlikte gözden geçirin ve cihazın cihazda çalıştırılması beklenen bir işlem olup olmadığını denetleyin. Aksi takdirde, uyarıyı bilgi güvenliği ekibinize iletin. |

@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: nabhishek
 ms.author: abnarain
 ms.date: 05/08/2019
-ms.openlocfilehash: 2aa7afebede3759221674c48dd66256e740575a3
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: b9f7cce39e4f51aea7fc4db5ca37ee054f42c5cb
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105565954"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078681"
 ---
 # <a name="compute-environments-supported-by-azure-data-factory"></a>Azure Data Factory tarafından desteklenen işlem ortamları
 
@@ -443,8 +443,8 @@ Bir Azure Machine Learning çalışma alanını veri fabrikasına bağlamak içi
 | subscriptionId         | Azure abonelik KIMLIĞI              | Yes                                      |
 | resourceGroupName      | name | Yes                                      |
 | Mlçalışmaalanıadı        | Azure Machine Learning çalışma alanı adı | Yes  |
-| Serviceprincipalıd     | Uygulamanın istemci KIMLIĞINI belirtin.     | No |
-| Servicesprincipalkey    | Uygulamanın anahtarını belirtin.           | No |
+| Serviceprincipalıd     | Uygulamanın istemci KIMLIĞINI belirtin.     | Yes |
+| Servicesprincipalkey    | Uygulamanın anahtarını belirtin.           | Yes |
 | Kiracı                 | Uygulamanızın altında bulunduğu kiracı bilgilerini (etki alanı adı veya kiracı KIMLIĞI) belirtin. Fareyi, Azure portal sağ üst köşesine getirerek alabilirsiniz. | UpdateResourceEndpoint belirtilmişse gereklidir |
 | connectVia             | Bu bağlı hizmete etkinlikleri göndermek için kullanılacak Integration Runtime. Azure Integration Runtime veya şirket içinde barındırılan Integration Runtime kullanabilirsiniz. Belirtilmemişse, varsayılan Azure Integration Runtime kullanır. | No |
 

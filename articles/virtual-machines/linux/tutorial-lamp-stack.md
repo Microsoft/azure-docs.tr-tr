@@ -1,38 +1,32 @@
 ---
-title: Öğretici-Azure 'da Linux sanal makinesinde lamba dağıtma
-description: Bu öğreticide, Azure’daki bir Linux sanal makinesinde LAMP yığını yüklemeyi öğrenirsiniz
-services: virtual-machines
-documentationcenter: virtual-machines
+title: Öğretici-bir VM 'de lamba ve WordPress dağıtma
+description: Bu öğreticide, Azure 'daki bir Linux sanal makinesine lamba yığınını ve WordPress 'yi nasıl yükleyeceğinizi öğreneceksiniz.
 author: cynthn
-manager: gwallace
-editor: ''
-tags: azure-resource-manager
 ms.collection: linux
-ms.assetid: 6c12603a-e391-4d3e-acce-442dd7ebb2fe
 ms.service: virtual-machines
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
 ms.topic: tutorial
-ms.date: 01/30/2019
+ms.date: 04/20/2021
 ms.author: cynthn
-ms.openlocfilehash: 3813931f47c110abcfb595065c1415ca9ed84c9d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5365bad5fdea2a8213defc103f0cdd966ebe50a5
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102564722"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816359"
 ---
-# <a name="tutorial-install-a-lamp-web-server-on-a-linux-virtual-machine-in-azure"></a>Öğretici: Azure’da bir Linux sanal makinesine bir LAMP web sunucusu yükleme
+# <a name="tutorial-install-a-lamp-stack-on-an-azure-linux-vm"></a>Öğretici: Azure Linux sanal makinesine lamba yığını yüklemesi
 
 Bu makalede, Azure’daki bir Ubuntu sanal makinesine Apache web sunucusunun, MySQL ve PHP’nin (LAMP yığını) nasıl dağıtılacağı gösterilmektedir. LAMP sunucusunu çalışır halde görmek için, isteğe bağlı olarak bir WordPress sitesi yükleyip yapılandırabilirsiniz. Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Ubuntu sanal makinesi oluşturma (LAMP yığınındaki 'L')
+> * Ubuntu sanal makinesi oluşturma 
 > * Web trafiği için 80 numaralı bağlantı noktasını açın
 > * Apache, MySQL ve PHP yükleme
 > * Yükleme ve yapılandırmayı doğrulama
-> * LAMP sunucusuna WordPress yükleme
+> * WordPress yükleme 
 
 Bu kurulum, hızlı testler veya kavram kanıtı içindir. Üretim ortamına yönelik öneriler de dahil olmak üzere, LAMP yığını hakkında daha fazla bilgi için [Ubuntu belgelerine](https://help.ubuntu.com/community/ApacheMySQLPHP) bakın.
 
@@ -40,7 +34,72 @@ Bu öğretici, en son sürüme sürekli olarak güncellenen [Azure Cloud Shell](
 
 CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu öğretici için Azure CLI 2.0.30 veya sonraki bir sürümünü çalıştırmanız gerekir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme]( /cli/azure/install-azure-cli).
 
-[!INCLUDE [virtual-machines-linux-tutorial-stack-intro.md](../../../includes/virtual-machines-linux-tutorial-stack-intro.md)]
+## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
+
+[az group create](/cli/azure/group) komutuyla bir kaynak grubu oluşturun. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
+
+Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
+
+```azurecli-interactive
+az group create --name myResourceGroup --location eastus
+```
+
+## <a name="create-a-virtual-machine"></a>Sanal makine oluşturma
+
+[az vm create](/cli/azure/vm) komutuyla bir sanal makine oluşturun. 
+
+Aşağıdaki örnekte *myVM* adlı bir VM oluşturulur ve varsayılan anahtar konumunda henüz yoksa SSH anahtarları oluşturulur. Belirli bir anahtar kümesini kullanmak için `--ssh-key-value` seçeneğini kullanın. Komut ayrıca *azureuser* yönetici kullanıcı adını belirler. Bu adı daha sonra VM'ye bağlanmak için kullanacaksınız. 
+
+```azurecli-interactive
+az vm create \
+    --resource-group myResourceGroup \
+    --name myVM \
+    --image UbuntuLTS \
+    --admin-username azureuser \
+    --generate-ssh-keys
+```
+
+VM oluşturulduğunda Azure CLI, aşağıdaki örneğe benzer bilgiler gösterir. `publicIpAddress` değerini not edin. Sonraki adımlarda bu adres, VM’ye erişmek için kullanılır.
+
+```output
+{
+  "fqdns": "",
+  "id": "/subscriptions/<subscription ID>/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+  "location": "eastus",
+  "macAddress": "00-0D-3A-23-9A-49",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "40.68.254.142",
+  "resourceGroup": "myResourceGroup"
+}
+```
+
+
+
+## <a name="open-port-80-for-web-traffic"></a>Web trafiği için 80 numaralı bağlantı noktasını açın 
+
+Varsayılan olarak, Azure’a dağıtılmış Linux VM'lerde yalnızca SSH bağlantılarına izin verilir. Bu VM bir web sunucusu olacağı için, İnternet’ten 80 numaralı bağlantı noktasını açmanız gerekir. İstediğiniz bağlantı noktasını açmak için [az vm open-port](/cli/azure/vm) komutunu kullanın.  
+ 
+```azurecli-interactive
+az vm open-port --port 80 --resource-group myResourceGroup --name myVM
+```
+
+Sanal makinenize bağlantı noktalarını açma hakkında daha fazla bilgi için bkz. [açık bağlantı noktaları](nsg-quickstart.md).
+
+## <a name="ssh-into-your-vm"></a>VM’ye SSH uygulama
+
+VM 'nizin genel IP adresini henüz bilmiyorsanız [az Network public-IP List](/cli/azure/network/public-ip) komutunu çalıştırın. Bu IP adresine sonraki adımlarda ihtiyacınız olacak.
+
+```azurecli-interactive
+az network public-ip list --resource-group myResourceGroup --query [].ipAddress
+```
+
+Sanal makine ile bir SSH oturumu oluşturmak için aşağıdaki komutu kullanın. Sanal makinenizin doğru genel IP adresi ile değiştirdiğinizden emin olun. Bu örnekte IP adresi *40.68.254.142*’dir. *azureuser*, VM'yi oluşturduğunuzda belirlenen yönetici kullanıcı adıdır.
+
+```bash
+ssh azureuser@40.68.254.142
+```
+
 
 ## <a name="install-apache-mysql-and-php"></a>Apache, MySQL ve PHP yükleme
 
@@ -53,10 +112,7 @@ sudo apt update && sudo apt install lamp-server^
 
 Paketleri ve diğer bağımlılıkları yüklemeniz istenir. Bu işlem, MySQL ile PHP kullanmak için gereken en düşük PHP uzantılarını yükler.  
 
-## <a name="verify-installation-and-configuration"></a>Yükleme ve yapılandırmayı doğrulama
-
-
-### <a name="verify-apache"></a>Apache 'yi doğrula
+## <a name="verify-apache"></a>Apache 'yi doğrula
 
 Aşağıdaki komutla Apache sürümünü denetleyin:
 ```bash
@@ -68,7 +124,7 @@ Apache yüklüyken ve sanal makinenizde 80 numaralı bağlantı noktası açıkk
 ![Apache varsayılan sayfası][3]
 
 
-### <a name="verify-and-secure-mysql"></a>MySQL 'i doğrulama ve güvenli hale getirme
+## <a name="verify-and-secure-mysql"></a>MySQL 'i doğrulama ve güvenli hale getirme
 
 Aşağıdaki komutla MySQL sürümünü denetleyin (ana `V` parametresini not edin):
 
@@ -92,7 +148,7 @@ sudo mysql -u root -p
 
 İşiniz bittiğinde, `\q` yazarak mysql isteminden çıkın.
 
-### <a name="verify-php"></a>PHP 'yi doğrula
+## <a name="verify-php"></a>PHP 'yi doğrula
 
 Aşağıdaki komutla PHP sürümünü denetleyin:
 

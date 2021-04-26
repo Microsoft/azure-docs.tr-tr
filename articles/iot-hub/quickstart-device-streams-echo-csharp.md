@@ -9,12 +9,12 @@ ms.topic: quickstart
 ms.custom: mvc, devx-track-azurecli
 ms.date: 03/14/2019
 ms.author: robinsh
-ms.openlocfilehash: 3eb65db27e5b96f4b12973154bc860a2ab3df020
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c4f6e06524412c76661623cb5ef2985a41f2d7fc
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98624617"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864125"
 ---
 # <a name="quickstart-communicate-to-a-device-application-in-c-via-iot-hub-device-streams-preview"></a>Hızlı başlangıç: IoT Hub cihaz akışları aracılığıyla C# içindeki bir cihaz uygulamasıyla Iletişim kurma (Önizleme)
 
@@ -36,7 +36,7 @@ Azure IoT Hub Şu anda cihaz akışlarını [Önizleme özelliği](https://azure
 
 * Bu hızlı başlangıçta çalıştırdığınız iki örnek uygulama C# dilinde yazılmıştır. Geliştirme makinenizde .NET Core SDK 2.1.0 veya üzeri bir sürüm gerekir.
 
-    [.Net 'ten birden çok platform için .NET Core SDK](https://www.microsoft.com/net/download/all)indirin.
+    [.Net 'ten birden çok platform için .NET Core SDK](https://dotnet.microsoft.com/download)indirin.
 
     Aşağıdaki komutu kullanarak geliştirme makinenizde geçerli C# sürümünü doğrulayın:
 

@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 06/25/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 68617d86fda940c5d3752f2389088a8c729aebec
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: afaac48d263082a17c7ba58996f4000366de0211
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97108357"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256557"
 ---
 # <a name="tutorial-for-configuring-typingdna-with-azure-active-directory-b2c"></a>Azure Active Directory B2C TypingDNA yapılandırma öğreticisi
 
@@ -196,4 +196,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [AAD B2C özel ilkeler](./custom-policy-overview.md)
 
-- [AAD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [AAD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

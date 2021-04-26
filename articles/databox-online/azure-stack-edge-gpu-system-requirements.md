@@ -6,15 +6,15 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: conceptual
-ms.date: 03/17/2021
+ms.date: 04/07/2021
 ms.author: alkohli
 ms.custom: contperf-fy21q3
-ms.openlocfilehash: 67de5cce3bd5a4ca2b383e2809eb237a6e753bf5
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b6984f27ae0ae81c3bf8d98efcce5fb23909c36d
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104577112"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107226099"
 ---
 # <a name="system-requirements-for-azure-stack-edge-pro-with-gpu"></a>GPU ile Azure Stack Edge Pro için sistem gereksinimleri 
 
@@ -108,6 +108,18 @@ Ağ yöneticileri, genellikle gelen ve giden trafiği filtrelemek için URL dese
 | https:// \* . azurecr.io                     | Kişisel ve üçüncü taraf kapsayıcı kayıt defterleri (isteğe bağlı) | 
 | https:// \* . Azure-Devices.net              | IoT Hub erişimi (gerekli)                             | 
 
+### <a name="url-patterns-for-monitoring"></a>İzleme için URL desenleri
+
+Linux için Log Analytics aracısının Kapsayıcılı sürümünü kullanıyorsanız Azure Izleyici için aşağıdaki URL düzenlerini ekleyin.
+
+| URL kalıbı | Bağlantı noktası | Bileşen veya işlevsellik |
+|-------------|-------------|----------------------------|
+| http:// \* ods.opinsights.Azure.com | 443 | Veri alımı |
+| http:// \* . OMS.opinsights.Azure.com | 443 | Operations Management Suite (OMS) ekleme |
+| http:// \* . DC.Services.VisualStudio.com | 443 | Azure genel bulut Application Insights kullanan aracı telemetrisi |
+
+Daha fazla bilgi için bkz. [kapsayıcı öngörülerini izlemek Için ağ güvenlik duvarı gereksinimleri](../azure-monitor/containers/container-insights-onboard.md#network-firewall-requirements).
+
 ### <a name="url-patterns-for-gateway-for-azure-government"></a>Azure Kamu için ağ geçidi için URL desenleri
 
 [!INCLUDE [Azure Government URL patterns for firewall](../../includes/azure-stack-edge-gateway-gov-url-patterns-firewall.md)]
@@ -119,6 +131,17 @@ Ağ yöneticileri, genellikle gelen ve giden trafiği filtrelemek için URL dese
 | https: \/ /MCR.Microsoft.com<br></br>https:// \* . CDN.mscr.com | Microsoft Container Registry (gerekli)               |
 | https:// \* . Azure-Devices.us              | IoT Hub erişimi (gerekli)           |
 | https:// \* . azurecr.us                    | Kişisel ve üçüncü taraf kapsayıcı kayıt defterleri (isteğe bağlı) | 
+
+### <a name="url-patterns-for-monitoring-for-azure-government"></a>Azure Kamu için izleme için URL desenleri
+
+Linux için Log Analytics aracısının Kapsayıcılı sürümünü kullanıyorsanız Azure Izleyici için aşağıdaki URL düzenlerini ekleyin.
+
+| URL kalıbı | Bağlantı noktası | Bileşen veya işlevsellik |
+|-------------|-------------|----------------------------|
+| http:// \* ods.opinsights.Azure.us | 443 | Veri alımı |
+| http:// \* . OMS.opinsights.Azure.us | 443 | Operations Management Suite (OMS) ekleme |
+| http:// \* . DC.Services.VisualStudio.com | 443 | Azure genel bulut Application Insights kullanan aracı telemetrisi |
+
 
 ## <a name="internet-bandwidth"></a>Internet bant genişliği
 

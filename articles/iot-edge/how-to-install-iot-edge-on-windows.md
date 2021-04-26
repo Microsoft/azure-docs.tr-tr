@@ -10,12 +10,12 @@ ms.topic: conceptual
 ms.date: 01/20/2021
 ms.author: v-tcassi
 monikerRange: =iotedge-2018-06
-ms.openlocfilehash: 8b549d868aed443e19d639ba6f6df7db20e014b1
-ms.sourcegitcommit: c94e282a08fcaa36c4e498771b6004f0bfe8fb70
+ms.openlocfilehash: 2799e25dbd84ff07b375c6fa1b103789aae82b49
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105612131"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538430"
 ---
 # <a name="install-and-provision-azure-iot-edge-for-linux-on-a-windows-device-preview"></a>Windows cihazı üzerinde Linux için Azure IoT Edge'i yükleme ve sağlama (Önizleme)
 
@@ -42,10 +42,10 @@ Bu makalede, bir Windows cihazında IoT Edge ayarlama adımları listelenir. Bu 
 
   * Windows 10 sürüm 1809 veya üzeri; derleme 17763 veya üzeri
   * Professional, Enterprise veya Server sürümleri
-  * Minimum boş bellek: 2 GB
+  * Minimum boş bellek: 1 GB
   * Minimum boş disk alanı: 10 GB
-  * Windows 10 ' u kullanarak yeni bir dağıtım oluşturuyorsanız, Hyper-V ' y i etkinleştirdiğinizden emin olun. Daha fazla bilgi için bkz. [Windows 10 ' da Hyper-V ' d](/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v.md)e nasıl yüklenir.
-  * Windows Server 'ı kullanarak yeni bir dağıtım oluşturuyorsanız, Hyper-V rolünü yüklediğinizden emin olun. Daha fazla bilgi için bkz. [Windows Server 'Da Hyper-V rolü nasıl yüklenir](/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server.md).
+  * Windows 10 ' u kullanarak yeni bir dağıtım oluşturuyorsanız, Hyper-V ' y i etkinleştirdiğinizden emin olun. Daha fazla bilgi için bkz. [Windows 10 ' da Hyper-V ' d](/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v)e nasıl yüklenir.
+  * Windows Server 'ı kullanarak yeni bir dağıtım oluşturuyorsanız, Hyper-V rolünü yüklediğinizden emin olun. Daha fazla bilgi için bkz. [Windows Server 'Da Hyper-V rolü nasıl yüklenir](/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server).
   * VM kullanarak yeni bir dağıtım oluşturuyorsanız, iç içe sanallaştırmayı doğru şekilde yapılandırdığınızdan emin olun. Daha fazla bilgi için bkz. [iç içe sanallaştırma](nested-virtualization.md) Kılavuzu.
 
 * Windows Yönetim Merkezi için Azure IoT Edge uzantısı yüklü Windows Yönetim merkezine erişim:

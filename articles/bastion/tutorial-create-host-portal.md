@@ -7,12 +7,12 @@ ms.service: bastion
 ms.topic: tutorial
 ms.date: 02/12/2021
 ms.author: cherylmc
-ms.openlocfilehash: 60b49e5b6e103a85d79cf8495f2743b22e434c96
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 3b365e347802824e855797afb8c68e5249bf0adb
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100586816"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579632"
 ---
 # <a name="tutorial-configure-bastion-and-connect-to-a-windows-vm-through-a-browser"></a>Öğretici: bir tarayıcı aracılığıyla savunma yapılandırma ve Windows VM 'ye bağlanma
 
@@ -37,6 +37,10 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 * Bağlantı noktaları: Windows VM 'ye bağlanmak Için aşağıdaki bağlantı noktalarının Windows VM 'niz üzerinde açık olması gerekir:
   * Gelen bağlantı noktaları: RDP (3389)
+
+ >[!NOTE]
+ >Azure Özel DNS bölgeleriyle Azure savunma kullanımı Şu anda desteklenmiyor. Başlamadan önce lütfen savunma kaynağınızı dağıtmayı planladığınız sanal ağın özel bir DNS bölgesine bağlı olmadığından emin olun.
+ >
 
 ## <a name="sign-in-to-the-azure-portal"></a>Azure portalında oturum açın
 

@@ -5,10 +5,10 @@ ms.assetid: 8908a6ce-ae0c-4f60-a0c9-b3acfe823365
 ms.topic: how-to
 ms.date: 03/19/2021
 ms.openlocfilehash: 336bfe9792c5ba4246458368e008a8c50833ed03
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104771558"
 ---
 # <a name="share-azure-dashboards-by-using-azure-role-based-access-control"></a>Azure rol tabanlı erişim denetimi kullanarak Azure panoları paylaşma

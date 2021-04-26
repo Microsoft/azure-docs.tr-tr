@@ -7,12 +7,12 @@ ms.topic: how-to
 ms.date: 01/27/2021
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 6bb608492327baae958c32be05d8f2a1bb4dbfbf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 11d22fd83106bb1802514d0c7d5f67724664464d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99226650"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788394"
 ---
 # <a name="understand-azure-files-billing"></a>Azure dosyalarının faturalandırmasını anlama
 Azure dosyaları iki ayrı faturalandırma modeli sağlar: sağlanan ve kullandıkça öde. Sağlanan model yalnızca, **FileStorage** depolama hesabı türü içinde dağıtılan dosya paylaşımları olan Premium dosya paylaşımları için kullanılabilir. Kullandıkça Öde modeli, yalnızca **genel amaçlı sürüm 2 (GPv2)** depolama hesabı türünde dağıtılan dosya paylaşımları olan standart dosya paylaşımları için kullanılabilir. Bu makalede, her iki modelin de aylık Azure dosyaları faturanızı anlamanıza yardımcı olmak için nasıl çalıştığı açıklanır.
@@ -116,5 +116,5 @@ Beş temel işlem kategorisi vardır: yazma, listeleme, okuma, diğer ve silme. 
 
 ## <a name="see-also"></a>Ayrıca bkz.
 - [Azure dosyaları fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/storage/files/).
-- [Bir Azure dosyaları dağıtımını planlama](./storage-files-planning.md) ve [bir Azure dosya eşitleme dağıtımı planlama](./storage-sync-files-planning.md).
-- [Bir dosya paylaşma oluşturun](./storage-how-to-create-file-share.md) ve [Azure dosya eşitleme dağıtın](./storage-sync-files-deployment-guide.md).
+- [Bir Azure dosyaları dağıtımını planlama](storage-files-planning.md) ve [bir Azure dosya eşitleme dağıtımı planlama](../file-sync/file-sync-planning.md).
+- [Bir dosya paylaşma oluşturun](storage-how-to-create-file-share.md) ve [Azure dosya eşitleme dağıtın](../file-sync/file-sync-deployment-guide.md).

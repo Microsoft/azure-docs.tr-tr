@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 11/06/2019
 ms.author: jeedes
 ms.openlocfilehash: bb49f542fbd744a16ab1674ceab4b0bffc9a41f8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92453426"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-firstbird"></a>Öğretici: Firstbird ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory

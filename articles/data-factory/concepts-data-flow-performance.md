@@ -6,13 +6,13 @@ ms.topic: conceptual
 ms.author: makromer
 ms.service: data-factory
 ms.custom: seo-lt-2019
-ms.date: 03/15/2021
-ms.openlocfilehash: dd5b857c274e757f70920f244786df61c2770085
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/10/2021
+ms.openlocfilehash: cee7993116e746c7b827faaf94724033501f1318
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103561694"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107309059"
 ---
 # <a name="mapping-data-flows-performance-and-tuning-guide"></a>Veri akışlarını eşleme performansı ve ayarlama Kılavuzu
 
@@ -132,14 +132,17 @@ Veri akışları, sanal çekirdek-saat ' de fiyatlandırılır ve bu, küme boyu
 
 ### <a name="time-to-live"></a>Yaşam süresi
 
-Varsayılan olarak, her veri akışı etkinliği IR yapılandırmasını temel alan yeni bir küme alır. Küme başlangıç saati birkaç dakika sürer ve veri işleme tamamlanana kadar başlayamaz. İşlem hatlarınız birden çok **sıralı** veri akışı içeriyorsa, yaşam SÜRESI (TTL) değerini etkinleştirebilirsiniz. Canlı değer için bir süre belirtmek, yürütme tamamlandıktan sonra belirli bir süre için kümeyi canlı tutar. TTL süresi boyunca yeni bir iş IR kullanmaya başlarsa, mevcut kümeyi yeniden kullanacaktır ve başlangıç zamanı büyük ölçüde azalır. İkinci iş tamamlandıktan sonra, küme TTL saati için de canlı kalır.
+Varsayılan olarak, her veri akışı etkinliği Azure IR yapılandırmasını temel alan yeni bir Spark kümesi alır. En soğuk küme başlangıç zamanı birkaç dakika sürer ve veri işleme tamamlanana kadar başlayamaz. İşlem hatlarınız birden çok **sıralı** veri akışı içeriyorsa, yaşam SÜRESI (TTL) değerini etkinleştirebilirsiniz. Canlı değer için bir süre belirtmek, yürütme tamamlandıktan sonra belirli bir süre için kümeyi canlı tutar. TTL süresi boyunca yeni bir iş IR kullanmaya başlarsa, mevcut kümeyi yeniden kullanacaktır ve başlangıç zamanı büyük ölçüde azalır. İkinci iş tamamlandıktan sonra, küme TTL saati için de canlı kalır.
 
-Tek seferde tek bir küme üzerinde yalnızca bir iş çalışabilir. Kullanılabilir bir küme varsa, ancak iki veri akışı başladıysanız, yalnızca bir tane canlı kümeyi kullanacaktır. İkinci iş kendi yalıtılmış kümesini kullanacaktır.
+Ayrıca, veri akışı özellikleri altında Azure tümleştirme çalışma zamanı ' nda "hızlı yeniden kullanım" seçeneğini ayarlayarak, sıcak kümelerin başlama süresini de en aza indirmiş olursunuz. Bunu true olarak ayarlamak, ADF 'yi her bir işten sonra var olan kümeyi aşağı doğru bir şekilde kapatmamak ve bunun yerine var olan kümeyi yeniden kullanmak, temelde Azure IR canlı olarak ayarlamış olduğunuz işlem ortamını, TTL 'niz içinde belirtilen süreye kadar bir süre içinde tutmaya çalışır. Bu seçenek, bir işlem hattından yürütürken veri akışı etkinliklerinizin en kısa başlangıç süresini sağlar.
 
-Veri akışlarınızın çoğunun paralel olarak yürütülmesi, TTL 'yi etkinleştirmeniz önerilmez. 
+Ancak, veri akışlarınızın çoğu paralel olarak yürütülense, bu etkinlikler için kullandığınız IR için TTL 'yi etkinleştirmeniz önerilmez. Tek seferde tek bir küme üzerinde yalnızca bir iş çalışabilir. Kullanılabilir bir küme varsa, ancak iki veri akışı başladıysanız, yalnızca bir tane canlı kümeyi kullanacaktır. İkinci iş kendi yalıtılmış kümesini kullanacaktır.
 
 > [!NOTE]
 > Tümleştirme çalışma zamanı otomatik çözümle kullanılırken yaşam süresi kullanılamaz
+ 
+> [!NOTE]
+> Mevcut kümelerin hızlı bir şekilde yeniden kullanımı, şu anda genel önizlemede olan Azure Integration Runtime bir özelliktir
 
 ## <a name="optimizing-sources"></a>Kaynakları iyileştirme
 
@@ -304,9 +307,10 @@ Veri akışlarınız paralel olarak yürütülülüsün sonra, birden fazla kull
 
 ### <a name="execute-data-flows-sequentially"></a>Veri akışlarını ardışık olarak Yürüt
 
-Veri akışı etkinliklerinizi sırayla çalıştırırsanız, Azure IR yapılandırmasında bir TTL ayarlamanız önerilir. ADF, daha hızlı bir küme başlangıç zamanına neden olan işlem kaynaklarını yeniden kullanacaktır. Her etkinlik, her yürütme için yeni bir Spark bağlamı almaya devam eder.
+Veri akışı etkinliklerinizi sırayla çalıştırırsanız, Azure IR yapılandırmasında bir TTL ayarlamanız önerilir. ADF, daha hızlı bir küme başlangıç zamanına neden olan işlem kaynaklarını yeniden kullanacaktır. Her etkinlik, her yürütme için yeni bir Spark bağlamı almaya devam eder. Sıralı etkinlikler arasındaki süreyi daha da azaltmak için, ADF 'nin var olan kümeyi yeniden kullanmasını bildirmek için, Azure IR "hızlı yeniden kullanım" onay kutusunu ayarlayın.
 
-İşlerin ardışık olarak çalıştırılması, uçtan uca yürütmek için büyük olasılıkla en uzun zaman alır, ancak mantıksal işlemler için temiz bir ayrım sağlar.
+> [!NOTE]
+> Mevcut kümelerin hızlı bir şekilde yeniden kullanımı, şu anda genel önizlemede olan Azure Integration Runtime bir özelliktir
 
 ### <a name="overloading-a-single-data-flow"></a>Tek bir veri akışını aşırı yükleme
 

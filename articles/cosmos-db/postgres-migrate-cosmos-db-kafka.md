@@ -9,10 +9,10 @@ ms.date: 01/05/2021
 ms.author: abhishgu
 ms.reviewer: abhishgu
 ms.openlocfilehash: 0038219ee8c1721ff5ab2be76231d33d2bd9064d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98203074"
 ---
 # <a name="migrate-data-from-postgresql-to-azure-cosmos-db-cassandra-api-account-using-apache-kafka"></a>Apache Kafka kullanarak verileri PostgreSQL 'ten Azure Cosmos DB Cassandra API hesabına geçirme

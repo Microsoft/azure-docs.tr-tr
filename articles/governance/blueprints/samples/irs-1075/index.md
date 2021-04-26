@@ -1,14 +1,14 @@
 ---
 title: IRS 1075 şema örneğine genel bakış
 description: IRS 1075 şema örneğine genel bakış. Bu şema örneği, müşterilerin belirli IRS 1075 denetimlerini değerlendirmesine yardımcı olur.
-ms.date: 01/08/2021
+ms.date: 04/02/2021
 ms.topic: sample
-ms.openlocfilehash: 5ca934fde9f993429cedbe53149d8d8cbac031d5
-ms.sourcegitcommit: 8dd8d2caeb38236f79fe5bfc6909cb1a8b609f4a
-ms.translationtype: HT
+ms.openlocfilehash: b3a6601823457eec0978cc393c84212892276dc7
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/08/2021
-ms.locfileid: "98045198"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106386508"
 ---
 # <a name="overview-of-the-irs-1075-blueprint-sample"></a>IRS 1075 şema örneğine genel bakış
 

@@ -4,22 +4,20 @@ description: Bilişsel hizmetler güvenlik temeli, Azure Güvenlik kıyaslaması
 author: msmbaldwin
 ms.service: cognitive-services
 ms.topic: conceptual
-ms.date: 02/17/2021
+ms.date: 03/30/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: 218810183f547d4e90043364a318615a204df9d8
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: a7f9570a68102eb20c84942ddf9ac73de033f01c
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105044864"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076607"
 ---
 # <a name="azure-security-baseline-for-cognitive-services"></a>Bilişsel hizmetler için Azure Güvenlik temeli
 
-Bu güvenlik temeli, [Azure Güvenlik kıyaslama sürümü 1,0](../security/benchmarks/overview-v1.md) ' den bilişsel hizmetler 'e kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar.
-İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve bilişsel hizmetler için geçerli olan ilgili kılavuza göre gruplandırılır. Bilişsel hizmetler için geçerli olmayan **denetimler** dışlandı.
+Bu güvenlik temeli, [Azure Güvenlik kıyaslama sürümü 1.0](../security/benchmarks/overview-v1.md) 'dan bilişsel hizmetler 'e kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve bilişsel hizmetler için geçerli olan ilgili kılavuza göre gruplandırılır. **Denetim** , bilişsel hizmetler için geçerli değildir veya sorumluluğun Microsoft 'un ne olduğu, hariç tutulur.
 
- 
 Bilişsel hizmetlerin Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için, tam bilişsel [Hizmetler güvenlik temeli eşleme dosyasına](https://github.com/MicrosoftDocs/SecurityBenchmarks/tree/master/Azure%20Offer%20Security%20Baselines)bakın.
 
 ## <a name="network-security"></a>Ağ Güvenliği
@@ -32,7 +30,7 @@ Bilişsel hizmetlerin Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendi�
 
 Bilişsel hizmetler için sanal ağ ve hizmet uç noktası desteği belirli bir bölge kümesiyle sınırlıdır.
 
-- [Azure bilişsel hizmetler sanal ağlarını yapılandırma](./cognitive-services-virtual-networks.md?tabs=portal)
+- [Azure bilişsel hizmetler sanal ağlarını yapılandırma](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal)
 
 - [Azure sanal ağlarına genel bakış](../virtual-network/virtual-networks-overview.md)
 
@@ -63,7 +61,7 @@ Bilişsel hizmetler kapsayıcılarının faturalandırma amaçlarıyla ölçüm 
 
 Ayrıca, bilişsel hizmetler kapsayıcılarının Microsoft sunucuları için kullandığı güvenli kanallarda güvenlik duvarı çözümünüz için derin paket incelemesini devre dışı bırakmanız gerektiğini unutmayın. Bunun başarısız olması, kapsayıcının düzgün çalışmasını engeller.
 
-- [Azure bilişsel hizmetler kapsayıcı güvenliğini anlama](./cognitive-services-container-support.md#azure-cognitive-services-container-security)
+- [Azure bilişsel hizmetler kapsayıcı güvenliğini anlama](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-container-support#azure-cognitive-services-container-security)
 
 **Sorumluluk**: Müşteri
 
@@ -83,7 +81,7 @@ Bir kapsayıcı içinde bilişsel hizmetler kullanıyorsanız, kapsayıcı dağ�
 
 - [Azure Blueprint oluşturma](../governance/blueprints/create-blueprint-portal.md)
 
-- [Azure bilişsel hizmetler kapsayıcı güvenliğini anlama](./cognitive-services-container-support.md#azure-cognitive-services-container-security)
+- [Azure bilişsel hizmetler kapsayıcı güvenliğini anlama](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-container-support#azure-cognitive-services-container-security)
 
 **Sorumluluk**: Müşteri
 
@@ -112,7 +110,7 @@ Bilişsel hizmetler kapsayıcılarının faturalandırma amaçlarıyla ölçüm 
 
 Ayrıca, bilişsel hizmetler kapsayıcılarının Microsoft sunucuları için kullandığı güvenli kanallarda güvenlik duvarı çözümünüz için derin paket incelemesini devre dışı bırakmanız gerektiğini unutmayın. Bunun başarısız olması, kapsayıcının düzgün çalışmasını engeller.
 
-- [Azure bilişsel hizmetler kapsayıcı güvenliğini anlama](./cognitive-services-container-support.md#azure-cognitive-services-container-security)
+- [Azure bilişsel hizmetler kapsayıcı güvenliğini anlama](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-container-support#azure-cognitive-services-container-security)
 
 - [Azure Market](https://azuremarketplace.microsoft.com/marketplace/?term=Firewall)
 
@@ -131,7 +129,7 @@ Bilişsel hizmetler kapsayıcılarının faturalandırma amaçlarıyla ölçüm 
 
 Ayrıca, bilişsel hizmetler kapsayıcılarının Microsoft sunucuları için kullandığı güvenli kanallarda güvenlik duvarı çözümünüz için derin paket incelemesini devre dışı bırakmanız gerektiğini unutmayın. Bunun başarısız olması, kapsayıcının düzgün çalışmasını engeller.
 
-- [Azure bilişsel hizmetler kapsayıcı güvenliğini anlama](./cognitive-services-container-support.md#azure-cognitive-services-container-security)
+- [Azure bilişsel hizmetler kapsayıcı güvenliğini anlama](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-container-support#azure-cognitive-services-container-security)
 
 **Sorumluluk**: Müşteri
 
@@ -145,7 +143,7 @@ Ayrıca, karmaşık güvenlik yapılandırmasını basitleştirmeye yardımcı o
 
 - [Sanal ağ hizmeti etiketleri](../virtual-network/service-tags-overview.md)
 
-- [Uygulama güvenlik grupları](../virtual-network/network-security-groups-overview.md#application-security-groups)
+- [Uygulama güvenlik grupları](https://docs.microsoft.com/azure/virtual-network/network-security-groups-overview#application-security-groups)
 
 **Sorumluluk**: Müşteri
 
@@ -179,9 +177,9 @@ Ayrıca, tek bir şema tanımında Azure Resource Manager şablonları, rol taba
 
 **Rehberlik**: ağ kaynak yapılandırmasını izlemek ve bilişsel hizmetler kapsayıcınıza ilişkin ağ kaynaklarına yönelik değişiklikleri algılamak Için Azure etkinlik günlüğünü kullanın. Kritik ağ kaynaklarında yapılan değişiklikler yürürlüğe girdiğinde tetiklenecek Azure Izleyici içinde uyarılar oluşturun.
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](../azure-monitor/essentials/activity-log.md#view-the-activity-log)
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](/azure/azure-monitor/platform/activity-log#view-the-activity-log)
 
-- [Azure Izleyici 'de uyarı oluşturma](../azure-monitor/alerts/alerts-activity-log.md)
+- [Azure Izleyici 'de uyarı oluşturma](/azure/azure-monitor/platform/alerts-activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -195,7 +193,7 @@ Ayrıca, tek bir şema tanımında Azure Resource Manager şablonları, rol taba
 
 **Kılavuz**: Azure etkinlik günlüğü tanılama ayarlarını etkinleştirin ve günlükleri bir Log Analytics çalışma alanına, Azure Olay Hub 'ına veya Arşiv için Azure depolama hesabına gönderin. Etkinlik günlükleri, denetim düzlemi düzeyinde bilişsel Hizmetler kapsayıcısında gerçekleştirilen işlemlere ilişkin öngörüler sağlar. Azure etkinlik günlüğü verilerini kullanarak, Redsıs örnekleri için Azure önbelleğiniz için denetim düzlemi düzeyinde gerçekleştirilen herhangi bir yazma işlemi (PUT, POST, DELETE) için "ne, kim ve ne zaman" ı belirleyebilirsiniz.
 
-- [Azure etkinlik günlüğü için tanılama ayarlarını etkinleştirme](../azure-monitor/essentials/activity-log.md)
+- [Azure etkinlik günlüğü için tanılama ayarlarını etkinleştirme](/azure/azure-monitor/platform/activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -207,7 +205,7 @@ Ayrıca, tek bir şema tanımında Azure Resource Manager şablonları, rol taba
 
 Ayrıca bilişsel hizmetler, analiz, uyarı ve raporlama amacıyla toplanabilecek ve kullanılabilecek tanılama olayları gönderir. Bilişsel hizmetler kapsayıcısı için tanılama ayarlarını Azure portal aracılığıyla yapılandırabilirsiniz. Bir depolama hesabına, Olay Hub 'ına veya bir Log Analytics çalışma alanına bir veya daha fazla tanılama olayı gönderebilirsiniz.
 
-- [Azure etkinlik günlüğü için tanılama ayarlarını etkinleştirme](../azure-monitor/essentials/activity-log.md)
+- [Azure etkinlik günlüğü için tanılama ayarlarını etkinleştirme](/azure/azure-monitor/platform/diagnostic-settings-legacy)
 
 - [Azure bilişsel hizmetler için tanılama ayarlarını kullanma](diagnostic-logging.md)
 
@@ -219,7 +217,7 @@ Ayrıca bilişsel hizmetler, analiz, uyarı ve raporlama amacıyla toplanabilece
 
 **Kılavuz**: Azure izleyici 'de, Log Analytics çalışma alanı saklama dönemini kuruluşunuzun uyumluluk düzenlemelerine göre ayarlayın. Uzun süreli/arşiv depolama için Azure depolama hesaplarını kullanın.
 
-- [Log Analytics çalışma alanları için günlük saklama parametrelerini ayarlama](../azure-monitor/logs/manage-cost-storage.md#change-the-data-retention-period)
+- [Log Analytics çalışma alanları için günlük saklama parametrelerini ayarlama](/azure/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period)
 
 **Sorumluluk**: Müşteri
 
@@ -229,9 +227,9 @@ Ayrıca bilişsel hizmetler, analiz, uyarı ve raporlama amacıyla toplanabilece
 
 **Kılavuz**: Azure etkinlik günlüğü tanılama ayarlarını etkinleştirin ve günlükleri bir Log Analytics çalışma alanına gönderin. Bu Günlükler, sorun tanımlama ve hata ayıklama için kullanılan bir kaynağın çalışması hakkında zengin, sık veriler sağlar. Terimleri aramak, eğilimleri belirlemek, desenleri analiz etmek ve Azure bilişsel hizmetler için toplanabilecek etkinlik günlüğü verilerine göre birçok diğer öngörü sağlamak için Log Analytics sorguları gerçekleştirin.
 
-- [Azure etkinlik günlüğü için tanılama ayarlarını etkinleştirme](../azure-monitor/essentials/activity-log.md)
+- [Azure etkinlik günlüğü için tanılama ayarlarını etkinleştirme](/azure/azure-monitor/platform/activity-log)
 
-- [Azure Izleyici 'de Log Analytics çalışma alanında Azure etkinlik günlüklerini toplama ve çözümleme](../azure-monitor/essentials/activity-log.md)
+- [Azure Izleyici 'de Log Analytics çalışma alanında Azure etkinlik günlüklerini toplama ve çözümleme](/azure/azure-monitor/platform/activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -245,7 +243,7 @@ Bilişsel hizmetler Kapsayıcınız için tanılama ayarlarını yapılandırın
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-- [Azure Izleyici 'yi kullanarak günlük uyarıları oluşturma, görüntüleme ve yönetme](../azure-monitor/alerts/alerts-log.md)
+- [Azure Izleyici 'yi kullanarak günlük uyarıları oluşturma, görüntüleme ve yönetme](/azure/azure-monitor/platform/alerts-log)
 
 **Sorumluluk**: Müşteri
 
@@ -259,9 +257,9 @@ Bilişsel hizmetler Kapsayıcınız için tanılama ayarlarını yapılandırın
 
 **Rehberlik**: Azure Active Directory (Azure AD), açıkça atanması ve sorgulanabilir olması gereken yerleşik roller içerir. Yönetim gruplarının üyesi olan hesapları bulmaya yönelik geçici sorgular gerçekleştirmek için Azure AD PowerShell modülünü kullanın.
 
-- [Azure AD 'de PowerShell ile dizin rolü alma](/powershell/module/azuread/get-azureaddirectoryrole?amp;preserve-view=true&view=azureadps-2.0)
+- [Azure AD 'de PowerShell ile dizin rolü alma](/powershell/module/azuread/get-azureaddirectoryrole)
 
-- [Azure AD 'de PowerShell ile bir dizin rolünün üyelerini alma](/powershell/module/azuread/get-azureaddirectoryrolemember?amp;preserve-view=true&view=azureadps-2.0)
+- [Azure AD 'de PowerShell ile bir dizin rolünün üyelerini alma](/powershell/module/azuread/get-azureaddirectoryrolemember)
 
 **Sorumluluk**: Müşteri
 
@@ -275,7 +273,7 @@ Bilişsel hizmetler 'e veri düzlemi erişimi erişim anahtarları aracılığı
 
 Uygulamanızda varsayılan parolalar oluşturmanız önerilmez. Bunun yerine, parolalarınızı Azure Key Vault kaydedebilir ve ardından bunları almak için Azure AD 'yi kullanabilirsiniz.
 
-- [Redsıs erişim tuşları için Azure önbelleğini yeniden üretme](../azure-cache-for-redis/cache-configure.md#settings)
+- [Redsıs erişim tuşları için Azure önbelleğini yeniden üretme](https://docs.microsoft.com/azure/azure-cache-for-redis/cache-configure#settings)
 
 **Sorumluluk**: Müşteri
 
@@ -365,7 +363,7 @@ Ayrıca, riskli Kullanıcı davranışında uyarıları ve raporları görüntü
 
 Şu anda yalnızca Görüntü İşleme API'si, Yüz Tanıma API'si, Metin Analizi API'si, derinlikli okuyucu, form tanıyıcı, anomali algılayıcısı ve Azure AD 'yi kullanarak Bing Özel Arama kimlik doğrulaması desteği hariç tüm Bing hizmetleri.
 
-- [Bilişsel hizmetler için isteklerin kimliğini doğrulama](./authentication.md#authenticate-with-azure-active-directory)
+- [Bilişsel hizmetler için isteklerin kimliğini doğrulama](https://docs.microsoft.com/azure/cognitive-services/authentication#authenticate-with-azure-active-directory)
 
 **Sorumluluk**: Müşteri
 
@@ -379,7 +377,7 @@ API Management Kullanıcı hesaplarının envanterini sürdürmek için müşter
 
 - [Azure API Management'ta kullanıcı hesaplarını yönetme](../api-management/api-management-howto-create-or-invite-developers.md)
 
-- [API Management kullanıcıların listesini alma](/powershell/module/az.apimanagement/get-azapimanagementuser?amp;preserve-view=true&view=azps-4.8.0)
+- [API Management kullanıcıların listesini alma](/powershell/module/az.apimanagement/get-azapimanagementuser)
 
 - [Azure kimlik erişimi Incelemelerini kullanma](../active-directory/governance/access-reviews-overview.md)
 
@@ -419,7 +417,7 @@ Bu işlemi, Azure AD Kullanıcı hesapları için Tanılama ayarları oluşturar
 
 **Rehberlik**: bilişsel hizmetler için kullanılamaz. Bilişsel hizmetler için Müşteri Kasası henüz desteklenmiyor.
 
-- [Müşteri Kasası tarafından desteklenen hizmetler listesi](../security/fundamentals/customer-lockbox-overview.md#supported-services-and-scenarios-in-general-availability)
+- [Müşteri Kasası tarafından desteklenen hizmetler listesi](https://docs.microsoft.com/azure/security/fundamentals/customer-lockbox-overview#supported-services-and-scenarios-in-general-availability)
 
 **Sorumluluk**: Müşteri
 
@@ -514,7 +512,7 @@ Microsoft temel platformu yönetir ve tüm müşteri içeriklerini gizli olarak 
 
 Ayrıca, müşteri tarafından yönetilen anahtarlarınızın depolanması için Azure Key Vault de kullanabilirsiniz. Kendi anahtarlarınızı oluşturabilir ve bunları bir anahtar kasasında saklayabilir veya Azure Key Vault API 'Lerini kullanarak anahtarlar oluşturabilirsiniz.
 
-- [Bekleyen bilgileri şifreleyen hizmetlerin listesi](./encryption/cognitive-services-encryption-keys-portal.md)
+- [Bekleyen bilgileri şifreleyen hizmetlerin listesi](/azure/cognitive-services/encryption/cognitive-services-encryption-keys-portal)
 
 **Sorumluluk**: Müşteri
 
@@ -524,7 +522,7 @@ Ayrıca, müşteri tarafından yönetilen anahtarlarınızın depolanması için
 
 **Rehberlik**: bilişsel hizmetler 'in üretim örneklerine ve diğer kritik veya ilgili kaynaklara yönelik değişikliklerin ne zaman gerçekleştiği hakkında uyarı oluşturmak Için Azure etkinlik günlüğü Ile Azure izleyici 'yi kullanın.
 
-- [Azure etkinlik günlüğü olayları için uyarı oluşturma](../azure-monitor/alerts/alerts-activity-log.md)
+- [Azure etkinlik günlüğü olayları için uyarı oluşturma](/azure/azure-monitor/platform/alerts-activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -542,7 +540,7 @@ Klasik Azure kaynakları kaynak Graph aracılığıyla bulunabilse de, ileri do�
 
 - [Azure Kaynak Graf ile sorgu oluşturma](../governance/resource-graph/first-query-portal.md)
 
-- [Azure aboneliklerinizi görüntüleme](/powershell/module/az.accounts/get-azsubscription?amp;preserve-view=true&view=azps-4.8.0)
+- [Azure aboneliklerinizi görüntüleme](/powershell/module/az.accounts/get-azsubscription)
 
 - [Azure RBAC 'yi anlama](../role-based-access-control/overview.md)
 
@@ -604,7 +602,7 @@ Ayrıca, aboneliklerdeki kaynakları sorgulamak veya bulmayı sağlamak için Az
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](../governance/policy/samples/built-in-policies.md#general)
+- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#general)
 
 **Sorumluluk**: Müşteri
 
@@ -628,7 +626,7 @@ Ayrıca, aboneliklerdeki kaynakları sorgulamak veya bulmayı sağlamak için Az
 
 **Rehberlik**: Azure ilkesiyle bilişsel hizmetler Kapsayıcınız için standart güvenlik yapılandırması tanımlayın ve uygulayın. Redsıs örnekleri için Azure önbelleğinizin yapılandırmasını denetlemek veya zorlamak üzere özel ilkeler oluşturmak için "Microsoft. Biliveservices" ad alanındaki Azure Ilke diğer adlarını kullanın.
 
-- [Kullanılabilir Azure Ilkesi diğer adlarını görüntüleme](/powershell/module/az.resources/get-azpolicyalias?amp;preserve-view=true&view=azps-4.8.0)
+- [Kullanılabilir Azure Ilkesi diğer adlarını görüntüleme](/powershell/module/az.resources/get-azpolicyalias)
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
@@ -652,9 +650,9 @@ Ayrıca, aboneliklerdeki kaynakları sorgulamak veya bulmayı sağlamak için Az
 
 **Rehberlik**: bilişsel hizmetler kapsayıcıları ve ilgili kaynaklarınız Için özel Azure ilke tanımları veya Azure Resource Manager şablonları kullanıyorsanız, kodunuzu güvenli bir şekilde depolamak ve yönetmek için Azure Repos kullanın.
 
-- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?amp;preserve-view=true&view=azure-devops)
+- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow)
 
-- [Azure Repos belgeleri](/azure/devops/repos/?amp;preserve-view=true&view=azure-devops)
+- [Azure Repos belgeleri](/azure/devops/repos/)
 
 **Sorumluluk**: Müşteri
 
@@ -686,7 +684,7 @@ Ayrıca, aboneliklerdeki kaynakları sorgulamak veya bulmayı sağlamak için Az
 
 - [Azure yönetilen kimliklerle tümleştirme](../azure-app-configuration/howto-integrate-azure-managed-service-identity.md)
 
-- [Key Vault oluşturma](../key-vault/secrets/quick-create-portal.md)
+- [Key Vault oluşturma](/azure/key-vault/quick-create-portal)
 
 - [Key Vault kimlik doğrulaması yapma](../key-vault/general/authentication.md)
 
@@ -760,7 +758,7 @@ Ayrıca, verileri arşiv katmanına yedeklemek için yaşam döngüsü yönetimi
 
 - [Azure Resource Manager'a genel bakış](../azure-resource-manager/management/overview.md)
 
-- [Azure Resource Manager şablonu kullanarak bilişsel hizmetler kaynağı oluşturma](./create-account-resource-manager-template.md?tabs=portal)
+- [Azure Resource Manager şablonu kullanarak bilişsel hizmetler kaynağı oluşturma](https://docs.microsoft.com/azure/cognitive-services/resource-manager-template?tabs=portal)
 
 - [Azure portal bir şablona tek ve çoklu kaynak verme](../azure-resource-manager/templates/export-template-portal.md)
 
@@ -768,7 +766,7 @@ Ayrıca, verileri arşiv katmanına yedeklemek için yaşam döngüsü yönetimi
 
 - [Azure Otomasyonu 'na giriş](../automation/automation-intro.md)
 
-- [Azure 'da Anahtar Kasası anahtarlarını yedekleme](/powershell/module/az.keyvault/backup-azkeyvaultkey?amp;preserve-view=true&view=azps-4.8.0)
+- [Azure 'da Anahtar Kasası anahtarlarını yedekleme](/powershell/module/az.keyvault/backup-azkeyvaultkey)
 
 **Sorumluluk**: Müşteri
 
@@ -780,7 +778,7 @@ Ayrıca, verileri arşiv katmanına yedeklemek için yaşam döngüsü yönetimi
 
 - [ARM şablonları ve Azure portal kaynak dağıtma](../azure-resource-manager/templates/deploy-portal.md)
 
-- [Azure 'da Anahtar Kasası anahtarlarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultkey?amp;preserve-view=true&view=azps-4.8.0)
+- [Azure 'da Anahtar Kasası anahtarlarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultkey)
 
 **Sorumluluk**: Müşteri
 
@@ -792,7 +790,7 @@ Ayrıca, verileri arşiv katmanına yedeklemek için yaşam döngüsü yönetimi
 
 Müşteri tarafından yönetilen anahtarları korumak için Azure rol tabanlı erişim denetimi kullanın. Anahtarları yanlışlıkla veya kötü amaçlı silmeye karşı korumak için Key Vault Soft-Delete ve Temizleme korumasını etkinleştirin. 
 
-- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?amp;preserve-view=true&view=azure-devops)
+- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow)
 
 - [Azure DevOps 'da izinler ve gruplar hakkında](/azure/devops/organizations/security/about-permissions)
 
@@ -890,5 +888,5 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) ve
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](../security/benchmarks/overview.md)
-- [Azure güvenlik temelleri](../security/benchmarks/security-baselines-overview.md) hakkında daha fazla bilgi edinin
+- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](/azure/security/benchmarks/overview)
+- [Azure güvenlik temelleri](/azure/security/benchmarks/security-baselines-overview) hakkında daha fazla bilgi edinin

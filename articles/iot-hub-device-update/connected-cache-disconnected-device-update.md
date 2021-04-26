@@ -7,12 +7,12 @@ ms.author: andyriv
 ms.date: 2/16/2021
 ms.topic: conceptual
 ms.service: iot-hub-device-update
-ms.openlocfilehash: e2b27934f58402ecfb7dabf5560dc43e45f3f7dd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e216d42ff1f279d87e657126514fcfb50960f806
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101680057"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107811913"
 ---
 # <a name="understand-support-for-disconnected-device-updates"></a>Bağlantısı kesilen cihaz güncelleştirmeleri desteğini anlama
 
@@ -20,7 +20,7 @@ Saydam bir ağ geçidi senaryosunda, bir veya daha fazla cihaz, iletilerini Azur
 
 ## <a name="how-does-microsoft-connected-cache-preview-for-device-update-for-azure-iot-hub-work"></a>Azure IoT Hub yönelik cihaz güncelleştirmesi için Microsoft bağlı önbellek önizlemesi nasıl çalışır?
 
-Microsoft bağlı önbelleği, Azure IoT Hub içeriğine yönelik cihaz güncelleştirmesi için yayımlanan içerik için akıllı ve saydam bir önbellektir ve paket depoları gibi diğer kaynaklardaki içerikleri önbelleğe almak için özelleştirilebilir. Microsoft bağlı önbelleği, teslim Iyileştirme istemcisi tarafından istenen tam dosya aralıklarına yönelik istemci istekleri tarafından çarpımış ve önceden çekirdek hale getirilmemiş bir soğuk önbellektir. Aşağıdaki diyagramda ve adım adım açıklamasında Microsoft bağlı önbelleğin Azure IoT Hub altyapısı için cihaz güncelleştirmesi içinde nasıl çalıştığı açıklanmaktadır.
+Microsoft bağlı önbellek önizlemesi, Azure IoT Hub içeriğine yönelik cihaz güncelleştirmesi için yayımlanan içeriğe yönelik akıllı ve saydam bir önbellektir ve paket depoları gibi diğer kaynaklardan gelen içerikleri de önbelleğe almak için özelleştirilebilir. Microsoft bağlı önbelleği, teslim Iyileştirme istemcisi tarafından istenen tam dosya aralıklarına yönelik istemci istekleri tarafından çarpımış ve önceden çekirdek hale getirilmemiş bir soğuk önbellektir. Aşağıdaki diyagramda ve adım adım açıklamasında Microsoft bağlı önbelleğin Azure IoT Hub altyapısı için cihaz güncelleştirmesi içinde nasıl çalıştığı açıklanmaktadır.
 
 >[!Note]
 >Bu akışı tanımlarken, IoT Edge ağ geçidinin internet bağlantısı olduğu varsayılır. Aşağı akış IoT Edge ağ geçidi (Iç Içe geçmiş kenar) senaryosunda, "Content Delivery Network" (CDN) üst IoT Edge ağ geçidinde barındırılan MCC olarak düşünülebilir.

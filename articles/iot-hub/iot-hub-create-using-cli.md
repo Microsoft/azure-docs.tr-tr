@@ -7,12 +7,12 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/23/2018
 ms.author: robinsh
-ms.openlocfilehash: e9757b94330f889869080a0e961ab2728cee86f6
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: eff0085a4a739e0831b25b1bd28cd234fdbcde3d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94659939"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107766470"
 ---
 # <a name="create-an-iot-hub-using-the-azure-cli"></a>Azure CLı kullanarak IoT Hub 'ı oluşturma
 
@@ -42,7 +42,7 @@ Azure CLI'yi kullanarak bir kaynak grubu oluşturun ve ardından bir IoT hub'ı 
    > ```
    >
 
-2. Aşağıdaki komutu çalıştırarak kaynak grubunuzda [bir IoT hub'ı oluşturun](/cli/azure/iot/hub#az-iot-hub-create) ve IoT hub'ınız için genel olarak benzersiz bir ad kullanın:
+2. Aşağıdaki komutu çalıştırarak kaynak grubunuzda [bir IoT hub'ı oluşturun](/cli/azure/iot/hub#az_iot_hub_create) ve IoT hub'ınız için genel olarak benzersiz bir ad kullanın:
     
    ```azurecli-interactive
    az iot hub create --name {your iot hub name} \
@@ -58,14 +58,14 @@ Azure CLI'yi kullanarak bir kaynak grubu oluşturun ve ardından bir IoT hub'ı 
 
 Azure CLı kullanarak IoT Hub gibi [tek bir kaynağı silebilir](/cli/azure/resource)veya bir kaynak grubunu ve tüm IoT Hub 'ları dahil tüm kaynaklarını silebilirsiniz.
 
-[Bir IoT Hub 'ını silmek](/cli/azure/iot/hub#az-iot-hub-delete)için şu komutu çalıştırın:
+[Bir IoT Hub 'ını silmek](/cli/azure/iot/hub#az_iot_hub_delete)için şu komutu çalıştırın:
 
 ```azurecli-interactive
 az iot hub delete --name {your iot hub name} -\
   -resource-group {your resource group name}
 ```
 
-[Bir kaynak grubunu](/cli/azure/group#az-group-delete) ve tüm kaynaklarını silmek için aşağıdaki komutu çalıştırın:
+[Bir kaynak grubunu](/cli/azure/group#az_group_delete) ve tüm kaynaklarını silmek için aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
 az group delete --name {your resource group name}

@@ -5,16 +5,16 @@ author: avirishuv
 ms.author: avverma
 ms.topic: conceptual
 ms.service: virtual-machine-scale-sets
-ms.subservice: availability
+ms.subservice: instance-protection
 ms.date: 02/26/2020
 ms.reviewer: jushiman
 ms.custom: avverma
-ms.openlocfilehash: 8c4944da8ffcaa75e6448483918a29809c32830b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 292abce3361c000eeeef2c399d5ffa2d2c4852e1
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92746804"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762866"
 ---
 # <a name="instance-protection-for-azure-virtual-machine-scale-set-instances"></a>Azure sanal makine ölçek kümesi örnekleri için örnek koruması
 
@@ -94,7 +94,7 @@ Update-AzVmssVM `
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
 
-Ölçek kümesi örneğinize ölçek genişletme koruması uygulamak için [az VMSS Update](/cli/azure/vmss#az-vmss-update) kullanın.
+Ölçek kümesi örneğinize ölçek genişletme koruması uygulamak için [az VMSS Update](/cli/azure/vmss#az_vmss_update) kullanın.
 
 Aşağıdaki örnek, örnek KIMLIĞI 0 olan ölçek kümesindeki bir örneğe ölçeklendirme koruması uygular.
 
@@ -165,7 +165,7 @@ Update-AzVmssVM `
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
 
-Ölçek kümesi eylemlerden ölçek kümesi örneğinize koruma uygulamak için [az VMSS Update](/cli/azure/vmss#az-vmss-update) kullanın.
+Ölçek kümesi eylemlerden ölçek kümesi örneğinize koruma uygulamak için [az VMSS Update](/cli/azure/vmss#az_vmss_update) kullanın.
 
 Aşağıdaki örnek, ölçek kümesi eylemlerinin korumasını örnek KIMLIĞI 0 olan ölçek kümesindeki bir örneğe uygular.
 

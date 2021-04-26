@@ -8,14 +8,17 @@ ms.service: private-link
 ms.topic: how-to
 ms.date: 09/02/2020
 ms.author: allensu
-ms.openlocfilehash: c3218d8781377e76f05d10a8da2c954ac0b685a7
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 3059d88c9894ba50a608afaf1cb23367dfaf089c
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105641984"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107259464"
 ---
 # <a name="use-azure-firewall-to-inspect-traffic-destined-to-a-private-endpoint"></a>Azure Güvenlik Duvarı'nı kullanarak özel uç noktaya giden trafiği inceleme
+
+> [!NOTE]
+> Güvenli sanal hub 'ı kullanarak Azure sanal WAN 'daki özel uç noktalara trafiği güvenli hale getirmek istiyorsanız, bkz. [Azure sanal WAN 'da özel uç noktalara giden güvenli trafik](../firewall-manager/private-link-inspection-secure-virtual-hub.md).
 
 Azure özel uç noktası, Azure özel bağlantısı için temel yapı taşıdır. Özel uç noktalar, bir sanal ağda dağıtılan Azure kaynaklarının özel bağlantı kaynaklarıyla özel olarak iletişim kurmasına olanak tanır.
 
@@ -166,7 +169,7 @@ Adımlarda aşağıdaki parametreleri aşağıdaki bilgilerle değiştirin:
     | Kaynak grubu | **myResourceGroup** öğesini seçin. Bu kaynak grubunu önceki bölümde oluşturdunuz.  |
     | **Örnek ayrıntıları** |  |
     | Sanal makine adı | **Myvm**' i girin. |
-    | Region | **Orta Güney ABD (ABD)** seçin. |
+    | Bölge | **Orta Güney ABD (ABD)** seçin. |
     | Kullanılabilirlik seçenekleri | Varsayılan **altyapı yedekliliği gerekli değildir**. |
     | Görüntü | **Ubuntu Server 18,04 LTS-Gen1** öğesini seçin. |
     | Boyut | **Standard_B2s** seçin. |
@@ -215,7 +218,7 @@ Adımlarda aşağıdaki parametreleri aşağıdaki bilgilerle değiştirin:
     | Kaynak grubu | **myResourceGroup** öğesini seçin.  |
     | **Örnek ayrıntıları** |  |
     | Name | **Myazurefirewall** yazın. |
-    | Region | **Orta Güney ABD** seçin. |
+    | Bölge | **Orta Güney ABD** seçin. |
     | Kullanılabilirlik alanı | Varsayılanı **yok** olarak bırakın. |
     | Bir sanal ağ seçin    |    **Mevcut olanı kullan**' ı seçin.    |
     | Sanal ağ    |    **Myazfwvnet**' i seçin.    |
@@ -301,7 +304,7 @@ Bu bölümde, önceki bölümde Azure SQL veritabanı için özel bir uç nokta 
     | Kaynak grubu | **myResourceGroup** öğesini seçin. |
     | **Örnek ayrıntıları** | |
     | Name | **Sqlprivateendpoint** girin. |
-    | Region | **Orta Güney ABD (ABD) seçin.** |
+    | Bölge | **Orta Güney ABD (ABD) seçin.** |
 
 6. **Kaynak** sekmesini seçin veya sayfanın altındaki **kaynak** ' ı seçin.
 
@@ -489,7 +492,7 @@ Yol, Azure Güvenlik Duvarı aracılığıyla **Myvm** alt ağından gelen trafi
     | Abonelik | Aboneliğinizi seçin. |
     | Kaynak grubu | **myResourceGroup** öğesini seçin.  |
     | **Örnek ayrıntıları** |  |
-    | Region | **Orta Güney ABD** seçin. |
+    | Bölge | **Orta Güney ABD** seçin. |
     | Name | **VMsubnet-to-AzureFirewall** girin. |
     | Ağ Geçidi yollarını yayma | **Hayır**'ı seçin. |
 

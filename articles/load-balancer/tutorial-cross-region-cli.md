@@ -7,12 +7,12 @@ ms.author: allensu
 ms.service: load-balancer
 ms.topic: tutorial
 ms.date: 03/04/2021
-ms.openlocfilehash: 83efb428a94d49b77ecd923d4868afe034374b5f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ca4134ff25dc9915f256b5a7bdd9404021b60a8e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103225192"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791922"
 ---
 # <a name="tutorial-create-a-cross-region-azure-load-balancer-using-azure-cli"></a>Öğretici: Azure CLı kullanarak çapraz bölge Azure Load Balancer oluşturma
 
@@ -54,7 +54,7 @@ Bu bölümde, bir çapraz bölge yük dengeleyici, genel IP adresi ve yük denge
 
 Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır.
 
-[Az Group Create](/cli/azure/group#az-group-create)ile bir kaynak grubu oluşturun:
+[Az Group Create](/cli/azure/group#az_group_create)ile bir kaynak grubu oluşturun:
 
 * **Myresourcegrouplb-CR** adında.
 * **Westus** konumunda.
@@ -157,7 +157,7 @@ Bölgeler arası yük dengeleyicinin arka uç havuzundaki değişkenlere yerleş
 
 Bu bölümde, bölgeler arası yük dengeleyiciyi test edersiniz. Genel IP adresine bir Web tarayıcısında bağlanırsınız.  Bölgesel yük dengeleyici arka uç havuzlarından birindeki sanal makineleri durdurarak yük devretmeyi gözlemleyeceksiniz.
 
-1. Yük dengeleyicinin genel IP adresini almak için [az Network public-IP Show](/cli/azure/network/public-ip#az-network-public-ip-show)kullanın:
+1. Yük dengeleyicinin genel IP adresini almak için [az Network public-IP Show](/cli/azure/network/public-ip#az_network_public_ip_show)kullanın:
 
     ```azurecli-interactive
       az network public-ip show \
@@ -174,7 +174,7 @@ Bu bölümde, bölgeler arası yük dengeleyiciyi test edersiniz. Genel IP adres
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse, [az Group Delete](/cli/azure/group#az-group-delete) komutunu kullanarak kaynak grubunu, yük dengeleyiciyi ve tüm ilgili kaynakları kaldırın.
+Artık gerekli değilse, [az Group Delete](/cli/azure/group#az_group_delete) komutunu kullanarak kaynak grubunu, yük dengeleyiciyi ve tüm ilgili kaynakları kaldırın.
 
 ```azurecli-interactive
   az group delete \

@@ -3,12 +3,12 @@ title: Azure Işlevleri için ZIP Push dağıtımı
 description: Azure Işlevlerinizi yayımlamak için kudu dağıtım hizmetinin. zip dosya dağıtım olanaklarını kullanın.
 ms.topic: conceptual
 ms.date: 08/12/2018
-ms.openlocfilehash: e104661dcdf1f6c6fd6dd5eb1024748980e7931f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: fb6867d7719f9650acb00f80ac3a933713ce0e23
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96018467"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777660"
 ---
 # <a name="zip-deployment-for-azure-functions"></a>Azure İşlevleri için zip dosyasıyla dağıtım
 
@@ -66,7 +66,7 @@ Ayrıca, bir GitHub deposundan bir. zip dosyası indirebilirsiniz. Bir GitHub de
 
 ## <a name="deploy-by-using-azure-cli"></a><a name="cli"></a>Azure CLI'yi kullanarak dağıtma
 
-Azure CLı 'yi bir anında iletme dağıtımı tetikleyebilmeniz için kullanabilirsiniz. [Az functionapp Deployment Source config-ZIP](/cli/azure/functionapp/deployment/source#az-functionapp-deployment-source-config-zip) komutunu kullanarak bir. zip dosyasını işlev uygulamanıza dağıtın. Bu komutu kullanmak için Azure CLı sürüm 2.0.21 veya sonraki bir sürümünü kullanmanız gerekir. Kullanmakta olduğunuz Azure CLı sürümünü görmek için `az --version` komutunu kullanın.
+Azure CLı 'yi bir anında iletme dağıtımı tetikleyebilmeniz için kullanabilirsiniz. [Az functionapp Deployment Source config-ZIP](/cli/azure/functionapp/deployment/source#az_functionapp_deployment_source_config_zip) komutunu kullanarak bir. zip dosyasını işlev uygulamanıza dağıtın. Bu komutu kullanmak için Azure CLı sürüm 2.0.21 veya sonraki bir sürümünü kullanmanız gerekir. Kullanmakta olduğunuz Azure CLı sürümünü görmek için `az --version` komutunu kullanın.
 
 Aşağıdaki komutta `<zip_file_path>` yer tutucusunu,. zip dosyanızın konumunun yolu ile değiştirin. Ayrıca, `<app_name>` işlev uygulamanızın benzersiz adıyla değiştirin ve öğesini `<resource_group>` kaynak grubunuzun adıyla değiştirin.
 
@@ -92,6 +92,6 @@ ZIP dağıtımı, işlev uygulaması ayarını bir değerine ayarlayarak etkinle
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Azure Işlevleri için sürekli dağıtım](functions-continuous-deployment.md)
+> [Azure İşlevleri için sürekli dağıtım](functions-continuous-deployment.md)
 
 [.zip push deployment reference topic]: https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file

@@ -4,16 +4,16 @@ description: Azure CLı kullanarak bir uygulama ağ geçidinde Web uygulaması g
 services: web-application-firewall
 author: vhorne
 ms.service: web-application-firewall
-ms.date: 08/31/2020
+ms.date: 03/29/2021
 ms.author: victorh
 ms.topic: how-to
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 967d4d4a49809c2b5fa7a344286469bb67eec6cf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 390fdd4d9e9d0bc62589484ab0c4ba7468bcaf4b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102217610"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773108"
 ---
 # <a name="enable-web-application-firewall-using-the-azure-cli"></a>Azure CLı kullanarak Web uygulaması güvenlik duvarını etkinleştirme
 
@@ -38,7 +38,7 @@ Bu makalede şunları öğreneceksiniz:
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-Kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. *az group create* komutuyla [myResourceGroupAG](/cli/azure/group#az-group-create) adlı bir Azure kaynak grubu oluşturun.
+Kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. *az group create* komutuyla [myResourceGroupAG](/cli/azure/group#az_group_create) adlı bir Azure kaynak grubu oluşturun.
 
 ```azurecli-interactive
 az group create --name myResourceGroupAG --location eastus
@@ -107,15 +107,17 @@ Uygulama ağ geçidinin oluşturulması birkaç dakika sürebilir. Uygulama ağ 
 
 ## <a name="create-a-virtual-machine-scale-set"></a>Sanal makine ölçek kümesi oluşturma
 
-Bu örnekte uygulama ağ geçidinde arka uç havuzu için iki sunucu sağlayan bir sanal makine ölçek kümesi oluşturursunuz. Ölçek kümesindeki sanal makineler *myBackendSubnet* ile ilişkilidir. Ölçek kümesini oluşturmak için [az vmss create](/cli/azure/vmss#az-vmss-create) komutunu kullanabilirsiniz.
+Bu örnekte uygulama ağ geçidinde arka uç havuzu için iki sunucu sağlayan bir sanal makine ölçek kümesi oluşturursunuz. Ölçek kümesindeki sanal makineler *myBackendSubnet* ile ilişkilidir. Ölçek kümesini oluşturmak için [az vmss create](/cli/azure/vmss#az_vmss_create) komutunu kullanabilirsiniz.
+
+\<username>Bunu çalıştırmadan \<password> önce ve değerlerinizle değiştirin.
 
 ```azurecli-interactive
 az vmss create \
   --name myvmss \
   --resource-group myResourceGroupAG \
   --image UbuntuLTS \
-  --admin-username azureuser \
-  --admin-password Azure123456! \
+  --admin-username <username> \
+  --admin-password <password> \
   --instance-count 2 \
   --vnet-name myVNet \
   --subnet myBackendSubnet \
@@ -143,7 +145,7 @@ Bu makalede, uygulama ağ geçidi, algılama ve önleme amaçlarıyla verileri d
 
 ### <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
 
-[New-AzureRmStorageAccount](/cli/azure/storage/account#az-storage-account-create) komutuyla *myagstore1* adlı bir depolama hesabı oluşturun.
+[New-AzureRmStorageAccount](/cli/azure/storage/account#az_storage_account_create) komutuyla *myagstore1* adlı bir depolama hesabı oluşturun.
 
 ```azurecli-interactive
 az storage account create \
@@ -156,7 +158,7 @@ az storage account create \
 
 ### <a name="configure-diagnostics"></a>Tanılama yapılandırma
 
-Tanılamayı ApplicationGatewayAccessLog, ApplicationGatewayPerformanceLog ve ApplicationGatewayFirewallLog günlüklerine verileri kaydedecek şekilde yapılandırın. `<subscriptionId>`Abonelik tanımlayıcın ile değiştirin ve ardından [az Monitor Diagnostic-Settings Create](/cli/azure/monitor/diagnostic-settings#az-monitor-diagnostic-settings-create)komutuyla tanılamayı yapılandırın.
+Tanılamayı ApplicationGatewayAccessLog, ApplicationGatewayPerformanceLog ve ApplicationGatewayFirewallLog günlüklerine verileri kaydedecek şekilde yapılandırın. `<subscriptionId>`Abonelik tanımlayıcın ile değiştirin ve ardından [az Monitor Diagnostic-Settings Create](/cli/azure/monitor/diagnostic-settings#az_monitor_diagnostic_settings_create)komutuyla tanılamayı yapılandırın.
 
 ```azurecli-interactive
 appgwid=$(az network application-gateway show --name myAppGateway --resource-group myResourceGroupAG --query id -o tsv)
@@ -170,7 +172,7 @@ az monitor diagnostic-settings create --name appgwdiag --resource $appgwid \
 
 ## <a name="test-the-application-gateway"></a>Uygulama ağ geçidini test etme
 
-Uygulama ağ geçidinin genel IP adresini almak için [az Network public-IP Show](/cli/azure/network/public-ip#az-network-public-ip-show)kullanın. Genel IP adresini kopyalayıp tarayıcınızın adres çubuğuna yapıştırın.
+Uygulama ağ geçidinin genel IP adresini almak için [az Network public-IP Show](/cli/azure/network/public-ip#az_network_public_ip_show)kullanın. Genel IP adresini kopyalayıp tarayıcınızın adres çubuğuna yapıştırın.
 
 ```azurecli-interactive
 az network public-ip show \

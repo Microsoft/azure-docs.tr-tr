@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.service: virtual-machines
 ms.subservice: disks
 ms.custom: references_regions
-ms.openlocfilehash: f0f3baf1bf56f958408f789961812c0555f289f1
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0882efeccfc8dc83686d75ab39b8364219c3b5f1
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102043652"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588097"
 ---
 # <a name="redundancy-options-for-managed-disks"></a>Yönetilen diskler için artıklık seçenekleri
 
@@ -52,7 +52,7 @@ Ayrıntılar için bkz. [Azure fiyatlandırma sayfası](https://azure.microsoft.
 
 ### <a name="comparison-with-other-disk-types"></a>Diğer disk türleriyle karşılaştırma
 
-Daha fazla yazma gecikmesi haricinde ZRS kullanan diskler LRS kullanan disklerle aynıdır. Aynı performans hedeflerine sahip olurlar.
+Daha fazla yazma gecikmesi haricinde ZRS kullanan diskler LRS kullanan disklerle aynıdır. Aynı performans hedeflerine sahip olurlar. LRS ve ZRS diskleri arasındaki gecikmeyi karşılaştırmak için uygulamanızın iş yükünün benzetimini yapmak üzere [disk açısından bir sınama](disks-benchmarks.md) yapmanızı öneririz. 
 
 ### <a name="create-zrs-managed-disks"></a>ZRS yönetilen diskler oluşturma
 

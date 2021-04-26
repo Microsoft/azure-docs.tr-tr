@@ -8,10 +8,10 @@ ms.subservice: purview-data-catalog
 ms.topic: conceptual
 ms.date: 11/30/2020
 ms.openlocfilehash: 476355f41de5e0e6aaffdedea8947cab5221767a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "103200741"
 ---
 # <a name="data-lineage-in-azure-purview-data-catalog-client"></a>Azure purview Veri Kataloğu istemcisinde veri kökenini

@@ -4,12 +4,12 @@ description: Azure Backup kullanarak bir Exchange sunucusunu nasıl yedekleyece�
 ms.reviewer: kasinh
 ms.topic: conceptual
 ms.date: 03/24/2017
-ms.openlocfilehash: 86389ef89ced74905db0fc8bfeaabcea6140762a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: f3a7fae5a1f5ec933c015546ddf2bdb2898e3904
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91263003"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107515507"
 ---
 # <a name="back-up-an-exchange-server-to-azure-with-azure-backup-server"></a>Azure Backup Sunucusu bir Exchange Server 'ı Azure 'a yedekleme
 
@@ -107,4 +107,4 @@ MABS koruma aracısını Exchange sunucusuna yüklemek için şu adımları izle
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure Backup SSS](backup-azure-backup-faq.md)
+* [Azure Backup SSS](backup-azure-backup-faq.yml)

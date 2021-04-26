@@ -9,12 +9,12 @@ ms.subservice: management
 ms.date: 05/29/2018
 ms.reviewer: mimckitt
 ms.custom: mimckitt, devx-track-azurecli
-ms.openlocfilehash: d954f7cdda4cae65f822489828226e0364d0fc29
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9c2b2217fc6b32e5191bb67ffdaa10b796adf84b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91570534"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762776"
 ---
 # <a name="manage-a-virtual-machine-scale-set-with-the-azure-cli"></a>Azure CLı ile sanal makine ölçek kümesini yönetme
 Sanal makine ölçek kümesinin yaşam döngüsü boyunca bir veya daha fazla yönetim görevi çalıştırmanız gerekebilir. Ayrıca, çeşitli yaşam döngüsü görevlerini otomatikleştiren betikler oluşturmak isteyebilirsiniz. Bu makalede, bu görevleri gerçekleştirmenize olanak tanıyan yaygın Azure CLı komutlarının bazıları ayrıntılı olarak açıklanır.
@@ -100,7 +100,7 @@ az vmss scale \
 
 
 ## <a name="stop-and-start-vms-in-a-scale-set"></a>Ölçek kümesindeki VM’leri durdurma ve başlatma
-Ölçek kümesindeki bir veya daha fazla sanal makineyi durdurmak için [az VMSS stop](/cli/azure/vmss#az-vmss-stop)komutunu kullanın. `--instance-ids` parametresi, durdurulacak bir veya daha fazla sanal makine belirtmenize olanak sağlar. Örnek kimliği belirtmezseniz, ölçek kümesindeki tüm sanal makineler durdurulur. Birden çok VM 'yi durdurmak için, her örnek KIMLIĞINI bir boşluk ile ayırın.
+Ölçek kümesindeki bir veya daha fazla sanal makineyi durdurmak için [az VMSS stop](/cli/azure/vmss#az_vmss_stop)komutunu kullanın. `--instance-ids` parametresi, durdurulacak bir veya daha fazla sanal makine belirtmenize olanak sağlar. Örnek kimliği belirtmezseniz, ölçek kümesindeki tüm sanal makineler durdurulur. Birden çok VM 'yi durdurmak için, her örnek KIMLIĞINI bir boşluk ile ayırın.
 
 Aşağıdaki örnek, *myScaleSet* ve *myresourcegroup* kaynak grubu adlı ölçek kümesinde *0* örneğini durduruyor. Kendi değerlerinizi aşağıdaki gibi sağlayın:
 

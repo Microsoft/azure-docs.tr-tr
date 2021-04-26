@@ -6,17 +6,17 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: how-to
-ms.date: 02/19/2021
+ms.date: 03/30/2021
 ms.author: tamram
 ms.reviewer: artek
 ms.subservice: common
 ms.custom: devx-track-azurepowershell
-ms.openlocfilehash: 412e5ac661761d5fda1d375c59511c053a6354a6
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: eb8bbf852803df53c43cef90bd2229bfcddd60d4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101714791"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107766196"
 ---
 # <a name="change-how-a-storage-account-is-replicated"></a>Depolama hesabının çoğaltma yöntemini değiştirme
 
@@ -31,7 +31,7 @@ Azure Storage aşağıdaki çoğaltma türlerini sunar:
 
 Bu seçeneklerin her birine genel bir bakış için bkz. [Azure Storage yedekliği](storage-redundancy.md).
 
-## <a name="switch-between-types-of-replication"></a>Çoğaltma türleri arasında geçiş yap
+## <a name="switch-between-types-of-replication"></a>Çoğaltma türleri arasında geçiş yapma
 
 Bir depolama hesabını bir çoğaltma türünden başka bir türe geçirebilirsiniz, ancak bazı senaryolar diğerlerinden daha basittir. Coğrafi çoğaltma eklemek veya kaldırmak istiyorsanız, çoğaltma ayarını güncelleştirmek için Azure portal, PowerShell veya Azure CLı ' yi kullanabilirsiniz. Ancak, birincil bölgede verilerin nasıl çoğaltıldığını değiştirmek istiyorsanız, LRS 'den ZRS 'ye geçerek veya bunun tersini yaparak el ile geçiş gerçekleştirmeniz gerekir.
 
@@ -79,7 +79,7 @@ Set-AzStorageAccount -ResourceGroupName <resource_group> `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı ile depolama hesabınızın artıklık seçeneğini değiştirmek için [az Storage Account Update](/cli/azure/storage/account#az-storage-account-update) komutunu çağırın ve `--sku` parametresini belirtin:
+Azure CLı ile depolama hesabınızın artıklık seçeneğini değiştirmek için [az Storage Account Update](/cli/azure/storage/account#az_storage_account_update) komutunu çağırın ve `--sku` parametresini belirtin:
 
 ```azurecli-interactive
 az storage account update \
@@ -122,25 +122,30 @@ Microsoft canlı geçiş isteğinizi anında işler ama canlı bir geçişin ne 
 - ZRS 'den LRS, GRS veya RA-GRS 'ye veri geçirmek istiyorsunuz.
 - Depolama Hesabınız arşiv katmanındaki verileri içerir.
 
-[Azure Destek Portalı](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)aracılığıyla dinamik geçiş isteğinde bulunabilir. Portaldan ZRS 'ye dönüştürmek istediğiniz depolama hesabını seçin.
+[Azure Destek Portalı](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)aracılığıyla dinamik geçiş isteğinde bulunabilir. 
 
-1. **Yeni destek isteği ' ni** seçin.
-2. Hesap bilgilerinizi temel alan **temel bilgileri** doldurun: 
+> [!IMPORTANT]
+> Birden fazla depolama hesabı geçirmeniz gerekiyorsa, tek bir destek bileti oluşturun ve **Ayrıntılar** sekmesinde dönüştürülecek hesapların adlarını belirtin.
+
+Dinamik geçiş istemek için aşağıdaki adımları izleyin:
+
+1. Azure portal, geçirmek istediğiniz bir depolama hesabına gidin.
+1. **Destek + sorun giderme** altında **Yeni destek isteği**' ni seçin.
+1. Hesap bilgilerinizi temel alarak **temel bilgiler** sekmesini doldurun:
     - **Sorun türü**: **Teknik**' i seçin.
-    - **Hizmet**: **hizmetlerimi** ve **depolama hesabı yönetimi** seçin.
-    - **Kaynak**: ZRS 'ye dönüştürmek istediğiniz kaynağı seçin.
-3. **İleri**’yi seçin.
-4. **Sorun** bölümünün aşağıdaki değerlerini belirtin:
-    - **Önem derecesi**: varsayılan değeri olduğu gibi bırakın.
+    - **Hizmet**: **Hizmetlerim**' i ve ardından **depolama hesabı yönetimi**' ni seçin.
+    - **Kaynak**: geçirilecek bir depolama hesabı seçin. Birden çok depolama hesabı belirtmeniz gerekiyorsa, **Ayrıntılar** bölümünde bunu yapabilirsiniz.
     - **Sorun türü**: **veri geçişini** seçin.
-    - **Kategori**: **ZRS 'ye geçir**' i seçin.
-    - **Başlık**: Örneğin, **ZRS hesabı geçişi** gibi açıklayıcı bir başlık yazın.
-    - **Ayrıntılar**: **Ayrıntılar** kutusuna ek ayrıntılar yazın, örneğin, bölgedeki [LRS, GRS] öğesinden ZRS 'ye geçiş yapmak istiyorum \_ \_ .
-5. **İleri**’yi seçin.
-6. İletişim bilgilerinin **iletişim bilgileri** dikey penceresinde doğru olduğunu doğrulayın.
-7. **Oluştur**’u seçin.
+    - **Sorun alt türü**: **ZRS, GZRS veya ra-GZRS ' ye geçir ' i** seçin.
 
-Bir destek kişisi sizinle iletişim kuracaktır ve ihtiyacınız olan herhangi bir yardımı sağlar.
+    :::image type="content" source="media/redundancy-migration/request-live-migration-basics-portal.png" alt-text="Dinamik geçişin nasıl isteneceğini gösteren ekran görüntüsü-temel kavramlar sekmesi":::
+
+1. **İleri**’yi seçin. **Çözümler** sekmesinde, geçiş için depolama hesaplarınızın uygunluğunu kontrol edebilirsiniz.
+1. **İleri**’yi seçin. Geçirilecek birden fazla depolama hesabınız varsa, **Ayrıntılar** sekmesinde, her hesap için noktalı virgülle ayrılmış olarak bir ad belirtin.
+
+    :::image type="content" source="media/redundancy-migration/request-live-migration-details-portal.png" alt-text="Dinamik geçiş isteme-Ayrıntılar sekmesinin ekran görüntüsü":::
+
+1. **Ayrıntılar** sekmesinde gereken ek bilgileri doldurun, ardından destek biletinizi gözden geçirmek ve göndermek Için **gözden geçir + oluştur** ' u seçin. Destek sorumlusu, ihtiyacınız olabilecek herhangi bir yardım sağlamak için sizinle iletişim kuracaktır.
 
 > [!NOTE]
 > Premium dosya paylaşımları (FileStorage hesapları) yalnızca LRS ve ZRS için kullanılabilir.

@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/07/2021
 ms.author: damendo
-ms.openlocfilehash: ea24716dba5e4e824a4fa986602007035be8e365
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: b45d066d0996aaba2a25500f8134085f5e9b6ffb
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98018386"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107535193"
 ---
 # <a name="configuring-network-security-group-flow-logs-using-rest-api"></a>REST API kullanarak ağ güvenlik grubu akış günlüklerini yapılandırma
 
@@ -31,7 +31,7 @@ Ağ güvenlik grubu akış günlükleri, bir ağ güvenlik grubu üzerinden giri
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-ARMclient, PowerShell kullanarak REST API çağırmak için kullanılır. ARMClient, [Chocolatey üzerinde](https://chocolatey.org/packages/ARMClient) Chocolatey konumunda bulunur
+ARMclient, PowerShell kullanarak REST API çağırmak için kullanılır. ARMClient, [Chocolatey üzerinde](https://chocolatey.org/packages/ARMClient)Chocolatey adresinde bulunur. NSG akış günlüklerinin ayrıntılı belirtimleri [burada](https://docs.microsoft.com/rest/api/network-watcher/flowlogs) bulunabilir REST API 
 
 Bu senaryo, ağ Izleyicisi oluşturmak için [ağ Izleyicisi oluşturma](network-watcher-create.md) bölümündeki adımları zaten izlediğinizi varsayar.
 

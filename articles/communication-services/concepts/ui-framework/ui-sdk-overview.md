@@ -7,12 +7,12 @@ ms.author: dademath
 ms.date: 03/10/2021
 ms.topic: quickstart
 ms.service: azure-communication-services
-ms.openlocfilehash: 47a32815ded5809edfde856a38c69ec7c6fd6fdf
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4ab1a157cdf3ef5017b227cd090379dcab91997e
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103493365"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105931565"
 ---
 # <a name="azure-communication-services-ui-framework"></a>Azure Iletişim Hizmetleri Kullanıcı arabirimi çerçevesi
 
@@ -25,11 +25,11 @@ Azure Iletişim Hizmetleri Kullanıcı ARABIRIMI çerçevesi, modern iletişim k
 - **Bileşik bileşenler** -bu bileşenler, yaygın iletişim senaryolarını uygulayan bir çift anahtar çözümdür. Uygulamalarına hızlı bir şekilde video çağırma veya sohbet deneyimleri ekleyebilirsiniz. Bileşik siteler, temel bileşenler kullanılarak oluşturulan açık kaynaklı bileşenlerdir.
 - **Temel bileşenler** -bu bileşenler, özel iletişim deneyimi oluşturmanıza olanak sağlayan açık kaynaklı yapı taşlarıdır. Bileşenler, derleme deneyimleri için birleştirilebilecek hem çağırma hem de sohbet özelliği için sunulur. 
 
-Bu Kullanıcı arabirimi istemci kitaplıkları, [Microsoft 'un akıcı tasarım dilini](https://developer.microsoft.com/fluentui/) ve varlıklarını kullanır. Akıcı Kullanıcı arabirimi, Microsoft ürünlerinde test edilen kullanıcı arabirimi çerçevesi için temel bir katman sağlar.
+Bu Kullanıcı arabirimi SDK 'Ları, [Microsoft 'un akıcı tasarım dilini](https://developer.microsoft.com/fluentui/) ve varlıklarını kullanır. Akıcı Kullanıcı arabirimi, Microsoft ürünlerinde test edilen kullanıcı arabirimi çerçevesi için temel bir katman sağlar.
 
 ## <a name="differentiating-components-and-composites"></a>**Bileşenleri ve Birleşik siteleri farklılaştırın**
 
-**Temel bileşenler** temel Azure iletişim Hizmetleri istemci kitaplıklarının üzerine kurulmuştur ve çekirdek istemci kitaplıklarını başlatma, video işleme ve kullanıcı denetimlerini, video oluşturma/kapatma gibi temel eylemleri uygular. Önceden oluşturulmuş, üretime hazır iletişim bileşenleri kullanarak kendi özel düzen deneyimlerinizi oluşturmak için bu **temel bileşenleri** kullanabilirsiniz.
+**Temel bileşenler** temel Azure Iletişim Hizmetleri SDK 'larının üzerine kurulmuştur ve temel SDK 'ları başlatma, video işleme ve kullanıcı denetimlerini, video oluşturma/kapatma gibi temel eylemleri uygular. Önceden oluşturulmuş, üretime hazır iletişim bileşenleri kullanarak kendi özel düzen deneyimlerinizi oluşturmak için bu **temel bileşenleri** kullanabilirsiniz.
 
 :::image type="content" source="../media/ui-framework/component-overview.png" alt-text="UI çerçevesi için bileşene genel bakış":::
 
@@ -39,19 +39,19 @@ Bu Kullanıcı arabirimi istemci kitaplıkları, [Microsoft 'un akıcı tasarım
 
 ## <a name="what-ui-framework-is-best-for-my-project"></a>Projem için en iyi kullanıcı arabirimi çerçevesi nedir?
 
-Bu gereksinimleri anlamak, doğru istemci kitaplığını seçmenize yardımcı olur:
+Bu gereksinimleri anlamak, doğru SDK 'yı seçmenize yardımcı olur:
 
-- **Ne kadar özelleştirmeye ihtiyacınız var?** Azure Iletişim çekirdek istemci kitaplıklarında UX yoktur ve istediğiniz UX 'i oluşturabilmeniz için tasarlanmıştır. UI çerçevesi bileşenleri, Kullanıcı arabirimi varlıklarını azaltılmış özelleştirme maliyetine sağlar.
-- **Toplantı özelliklerine ihtiyacınız var mı?** Toplantı sisteminde, bulanık arka plan ve kabarık el gibi çekirdek Azure Iletişim Hizmetleri istemci kitaplıklarında Şu anda mevcut olmayan birkaç benzersiz özellik vardır.
+- **Ne kadar özelleştirmeye ihtiyacınız var?** Azure Communication Core SDK 'Ları bir UX içermez ve istediğiniz UX 'i oluşturabilmeniz için tasarlanmıştır. UI çerçevesi bileşenleri, Kullanıcı arabirimi varlıklarını azaltılmış özelleştirme maliyetine sağlar.
+- **Toplantı özelliklerine ihtiyacınız var mı?** Toplantı sisteminde, bulanık arka plan ve kabarık el gibi çekirdek Azure Iletişim Hizmetleri SDK 'lerinde Şu anda bulunmayan bazı benzersiz yetenekler bulunur.
 - **Hangi platformları hedefliyorsanız?** Farklı platformlar farklı yeteneklere sahiptir.
 
 Değiştirilen [Kullanıcı arabirimi SDK](ui-sdk-features.md)'lerinde özellik kullanılabilirliği hakkındaki ayrıntılar burada mevcuttur, ancak temel denge aşağıda özetlenmiştir.
 
-|İstemci kitaplığı/SDK|Uygulama karmaşıklığı|    Özelleştirme yeteneği|  Events| Sohbet| [Takımlar birlikte çalışma](./../teams-interop.md)
+|SDK/SDK|Uygulama karmaşıklığı|   Özelleştirme yeteneği|  Events| Sohbet| [Takımlar birlikte çalışma](./../teams-interop.md)
 |---|---|---|---|---|---|---|
 |Bileşik bileşenler|Düşük|Düşük|✔|✔|✕
 |Temel bileşenler|Orta|Orta|✔|✔|✕
-|Çekirdek istemci kitaplıkları|Yüksek|Yüksek|✔|✔ |✔
+|Çekirdek SDK 'Ları|Yüksek|Yüksek|✔|✔ |✔
 
 ## <a name="cost"></a>Maliyet
 
@@ -78,7 +78,7 @@ UI çerçevesini başlatmak ve hizmette kimlik doğrulamak için bir Azure Ileti
 
 Bileşik ve temel bileşenler, Azure Communication Services erişim belirteci kullanılarak başlatılır. Erişim belirteçleri, yönettiğiniz güvenilen bir hizmet aracılığıyla Azure Iletişim hizmetlerinden temin olmalıdır. Daha fazla bilgi için bkz. [hızlı başlangıç: erişim belirteçleri oluşturma](../../quickstarts/access-tokens.md) ve [Güvenilen hizmet öğreticisi](../../tutorials/trusted-service-tutorial.md) .
 
-Bu istemci kitaplıkları Ayrıca katılabilecekleri çağrı veya sohbet için bağlam gerektirir. Kullanıcı erişim belirteçlerine benzer şekilde, bu bağlam kendi güvenilen hizmetiniz aracılığıyla istemcilere dağıtılabilir. Aşağıdaki listede, işlem gerçekleştirmeniz gereken başlatma ve kaynak yönetimi işlevleri özetlenmektedir.
+Bu SDK 'lar, katılabilecekleri çağrı veya sohbet için de bağlam gerektirir. Kullanıcı erişim belirteçlerine benzer şekilde, bu bağlam kendi güvenilen hizmetiniz aracılığıyla istemcilere dağıtılabilir. Aşağıdaki listede, işlem gerçekleştirmeniz gereken başlatma ve kaynak yönetimi işlevleri özetlenmektedir.
 
 | Contoso sorumlulukları                                 | UI çerçevesi sorumlulukları                         |
 |----------------------------------------------------------|-----------------------------------------------------------------|

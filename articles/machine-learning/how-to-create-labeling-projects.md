@@ -9,12 +9,12 @@ ms.subservice: core
 ms.topic: tutorial
 ms.date: 07/27/2020
 ms.custom: data4ml
-ms.openlocfilehash: 62801d40295762b0066f0d2887d7d528ee7b7c2a
-ms.sourcegitcommit: b4647f06c0953435af3cb24baaf6d15a5a761a9c
+ms.openlocfilehash: ff1783dd31b8139940e56d24ae82866b428838b1
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/02/2021
-ms.locfileid: "101656831"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861166"
 ---
 # <a name="create-a-data-labeling-project-and-export-labels"></a>Veri etiketleme projesi ve dışarı aktarma etiketleri oluşturma 
 
@@ -53,11 +53,7 @@ Proje oluşturmak için **Proje Ekle**' yi seçin. Projeye uygun bir ad verin ve
 * Bir etiket kümesinden bir resme yalnızca *tek bir etiket* uygulamak istediğinizde, projeler Için **görüntü sınıflandırması çoklu sınıfı** ' nı seçin.
 * Bir etiket kümesinden bir resme bir *veya daha fazla* etiket uygulamak istediğinizde, projeler Için **görüntü sınıflandırması çoklu etiketi** ' ni seçin. Örneğin, bir köpek fotoğrafı hem *köpek* hem de *Daytime* ile etiketlenebilir.
 * Bir resim içindeki her nesneye bir etiket ve bir sınırlayıcı kutu atamak istediğinizde, projeler için **nesne tanımlama (sınırlama kutusu)** seçeneğini belirleyin.
-* Bir etiket atamak ve bir görüntünün içindeki her nesnenin etrafında bir çokgen çizmek istediğinizde projeler için **örnek segmentleme (çokgen) (Önizleme)** seçeneğini belirleyin.
-
-> [!IMPORTANT]
-> Örnek kesimlemesi (çokgen) genel önizlemede.
-> Önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+* Bir etiket atamak ve bir görüntünün içindeki her nesnenin çevresine bir çokgen çizmek istediğinizde, projeler için **örnek segmentleme (çokgen)** seçeneğini belirleyin.
 
 Devam etmeye hazırsanız **İleri ' yi** seçin.
 

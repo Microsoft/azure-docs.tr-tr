@@ -3,16 +3,16 @@ title: Service Fabric kümesinde yalnızca durum bilgisi olan düğüm türlerin
 description: Azure Service Fabric kümesinde durum bilgisiz düğüm türleri oluşturmayı ve dağıtmayı öğrenin.
 author: peterpogorski
 ms.topic: conceptual
-ms.date: 09/25/2020
+ms.date: 04/16/2021
 ms.author: pepogors
-ms.openlocfilehash: eb19005019a6e4e878f6b0bd6a145048d4a2804c
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 68c617b6e9345910bfd913e61e227a8e6c401bbc
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103563785"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107576049"
 ---
-# <a name="deploy-an-azure-service-fabric-cluster-with-stateless-only-node-types-preview"></a>Yalnızca durum bilgisi olan düğüm türleriyle bir Azure Service Fabric kümesi dağıtma (Önizleme)
+# <a name="deploy-an-azure-service-fabric-cluster-with-stateless-only-node-types"></a>Yalnızca durum bilgisi olan düğüm türleriyle bir Azure Service Fabric kümesi dağıtma
 Service Fabric düğüm türleri, bazı zaman bir noktada, durum bilgisi olmayan hizmetlerin düğümlere yerleştirilebileceği bir süre ile gelir. Durum bilgisiz düğüm türleri bir düğüm türü için bu varsayımını daha hızlı hale getirme, böylece düğüm türünün daha hızlı genişleme işlemleri gibi diğer özellikleri kullanmasına izin vermek, bu sayede düğüm türünün daha hızlı genişleme işlemleri, en az sayıda düğüm için destek ve tek bir sanal makine ölçek kümesinde 100 ' den fazla düğüme
 
 * Birincil düğüm türleri durum bilgisiz olacak şekilde yapılandırılamaz
@@ -23,7 +23,7 @@ Service Fabric düğüm türleri, bazı zaman bir noktada, durum bilgisi olmayan
 Örnek şablonlar mevcuttur: [Service Fabric durum bilgisiz düğüm türleri şablonu](https://github.com/Azure-Samples/service-fabric-cluster-templates)
 
 ## <a name="enabling-stateless-node-types-in-service-fabric-cluster"></a>Service Fabric kümesinde durum bilgisiz düğüm türlerini etkinleştirme
-Bir küme kaynağında durum bilgisiz olarak bir veya daha fazla düğüm türü ayarlamak için, **ısdurumsuz** özelliğini "true" olarak ayarlayın. Durum bilgisiz düğüm türleriyle bir Service Fabric kümesi dağıtımında, küme kaynağında en az bir tane birincil düğüm türü olduğunu unutmayın.
+Bir küme kaynağında durum bilgisiz olarak bir veya daha fazla düğüm türü ayarlamak için, **ısdurumsuz** özelliğini **true** olarak ayarlayın. Durum bilgisiz düğüm türleriyle bir Service Fabric kümesi dağıtımında, küme kaynağında en az bir tane birincil düğüm türü olduğunu unutmayın.
 
 * Service Fabric küme kaynağı apiVersion, "2020-12-01-Preview" veya üzeri olmalıdır.
 
@@ -44,7 +44,7 @@ Bir küme kaynağında durum bilgisiz olarak bir veya daha fazla düğüm türü
         },
         "httpGatewayEndpointPort": "[parameters('nt0fabricHttpGatewayPort')]",
         "isPrimary": true,
-        "isStateless": false,
+        "isStateless": false, // Primary Node Types cannot be stateless
         "vmInstanceCount": "[parameters('nt0InstanceCount')]"
     },
     {
@@ -72,16 +72,15 @@ Bir küme kaynağında durum bilgisiz olarak bir veya daha fazla düğüm türü
 Durum bilgisiz düğüm türlerini etkinleştirmek için, temel alınan sanal makine ölçek kümesi kaynağını aşağıdaki şekilde yapılandırmalısınız:
 
 * 100 ' den fazla VM 'ye ölçeklendirmeniz gerekiyorsa, **false** olarak ayarlanması gereken **Singleplacementgroup** özelliği.
-* Ölçek kümesinin **Upgradepolicy** **modu** sıralı olarak **ayarlanmalıdır.**
+* Ölçek kümesinin **upgrademode** değeri **kayan** olarak ayarlanmalıdır.
 * Yükseltme modu, uygulama durumu uzantısının veya sistem durumu araştırmalarını gerektirir. Aşağıda önerilen durum bilgisiz düğüm türleri için varsayılan yapılandırmayla sistem durumu araştırmasını yapılandırın. Uygulamalar düğüm türüne dağıtıldıktan sonra, sistem durumu araştırması/sistem durumu uzantısı bağlantı noktaları, uygulama durumunu izlemek için değiştirilebilir.
 
 >[!NOTE]
-> Durum bilgisiz düğüm türü birden çok bölgeye yayılan bir sanal makine ölçek kümesi tarafından desteklendiğinde, platform hatası etki alanı sayısının 5 olarak güncelleştirildiğinden, bu gereklidir. Daha fazla ayrıntı için lütfen bu [şablona](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/15-VM-2-NodeTypes-Windows-Stateless-CrossAZ-Secure) bakın.
-> 
-> **platformFaultDomainCount: 5**
+> Durum bilgisi olmayan nodetypes ile otomatik ölçeklendirmeyi kullanırken, ölçeği azaltma işlemi sonrasında düğüm durumu otomatik olarak temizlenmez. Otomatik ölçeklendirme sırasında aşağı düğümlerin NodeState 'i temizlemek için [Service Fabric otomatik ölçeklendirme Yardımcısı](https://github.com/Azure/service-fabric-autoscale-helper) kullanılması önerilir.
+
 ```json
 {
-    "apiVersion": "2018-10-01",
+    "apiVersion": "2019-03-01",
     "type": "Microsoft.Compute/virtualMachineScaleSets",
     "name": "[parameters('vmNodeType1Name')]",
     "location": "[parameters('computeLocation')]",
@@ -92,8 +91,9 @@ Durum bilgisiz düğüm türlerini etkinleştirmek için, temel alınan sanal ma
           "automaticOSUpgradePolicy": {
             "enableAutomaticOSUpgrade": true
           }
-        }
-    }
+        },
+        "platformFaultDomainCount": 5
+    },
     "virtualMachineProfile": {
     "extensionProfile": {
     "extensions": [
@@ -136,6 +136,18 @@ Durum bilgisiz düğüm türlerini etkinleştirmek için, temel alınan sanal ma
     ]
 }
 ```
+
+## <a name="configuring-stateless-node-types-with-multiple-availability-zones"></a>Birden çok Kullanılabilirlik Alanları durum bilgisiz düğüm türlerini yapılandırma
+Birden çok kullanılabilirlik alanı genelinde durum bilgisiz NodeType yayılmayı yapılandırmak için [buradaki](https://docs.microsoft.com/azure/service-fabric/service-fabric-cross-availability-zones#preview-enable-multiple-availability-zones-in-single-virtual-machine-scale-set)belgeleri aşağıdaki gibi birkaç değişiklikle birlikte izleyin:
+
+* Birden çok yerleştirme grubunun etkinleştirilmesi gerekiyorsa, **Singleplacementgroup** :  **false**  olarak ayarlayın.
+* **Upgrademode** **ayarla: yukarıda** belirtilen şekilde uygulama durumu uzantısı/sistem durumu araştırmalarını ayarlama ve ekleme.
+* Sanal makine ölçek kümesi için **Platformfaultdomaincount** : **5** ayarını yapın.
+
+>[!NOTE]
+> Kümede yapılandırılmış VMSSZonalUpgradeMode 'dan bağımsız olarak, sanal makine ölçek kümesi güncelleştirmeleri, birden çok bölgeye yayılan durum bilgisiz NodeType için her zaman sıralı olarak bir kullanılabilirlik bölgesi meydana gelir ve bu da, çalışırken yükseltme modunu kullanır.
+
+Başvuru için, birden çok Kullanılabilirlik Alanları durum bilgisiz düğüm türlerini yapılandırmaya yönelik [şablona](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/15-VM-2-NodeTypes-Windows-Stateless-CrossAZ-Secure) bakın
 
 ## <a name="networking-requirements"></a>Ağ gereksinimleri
 ### <a name="public-ip-and-load-balancer-resource"></a>Genel IP ve Load Balancer kaynağı
@@ -184,7 +196,7 @@ Bir sanal makine ölçek kümesi kaynağında 100 ' den fazla VM 'ye ölçeklend
 ```
 
 >[!NOTE]
-> Ortak IP ve yük dengeleyici kaynaklarında bir yerinde SKU değişikliği yapmak mümkün değildir. Temel SKU 'SU olan mevcut kaynaklardan geçiş yapıyorsanız, bu makalenin geçiş bölümüne bakın.
+> Ortak IP ve yük dengeleyici kaynaklarında bir yerinde SKU değişikliği yapmak mümkün değildir. 
 
 ### <a name="virtual-machine-scale-set-nat-rules"></a>Sanal makine ölçek kümesi NAT kuralları
 Yük dengeleyici gelen NAT kuralları, sanal makine ölçek kümesindeki NAT havuzlarıyla eşleşmelidir. Her sanal makine ölçek kümesinin benzersiz bir gelen NAT havuzu olmalıdır.
@@ -243,7 +255,7 @@ Standart Load Balancer ve standart genel IP, temel SKU 'Ları kullanmaya kıyasl
 
 
 
-### <a name="migrate-to-using-stateless-node-types-from-a-cluster-using-a-basic-sku-load-balancer-and-a-basic-sku-ip"></a>Temel SKU Load Balancer ve temel SKU IP 'si kullanarak bir kümeden durum bilgisiz düğüm türlerini kullanmak için geçirme
+## <a name="migrate-to-using-stateless-node-types-in-a-cluster"></a>Bir kümede durum bilgisiz düğüm türlerini kullanmak için geçirme
 Tüm geçiş senaryolarında, yalnızca durum bilgisi olmayan yeni bir düğüm türünün eklenmesi gerekir. Mevcut düğüm türü yalnızca durum bilgisi olmayan bir şekilde geçirilemez.
 
 Temel SKU ile Load Balancer ve IP kullanan bir kümeyi geçirmek için, önce standart SKU 'yu kullanarak tamamen yeni bir Load Balancer ve IP kaynağı oluşturmanız gerekir. Bu kaynakları yerinde güncelleştirmek mümkün değildir.
@@ -256,9 +268,6 @@ Başlamak için, mevcut Kaynak Yöneticisi şablonunuza yeni kaynakları eklemen
 * Sanal makine ölçek kümelerinizi dağıttığınız alt ağ tarafından başvurulan bir NSG.
 
 Kaynakların dağıtımı tamamlandıktan sonra, özgün kümeden kaldırmak istediğiniz düğüm türündeki düğümleri devre dışı bırakmayı deneyebilirsiniz.
-
->[!NOTE]
-> Bronz dayanıklılık ile, yok etme dayanıklılığına sahip durum bilgisiz olmayan nodetypes ile otomatik ölçeklendirmeyi kullanırken, düğüm durumu otomatik olarak temizlenmez. Otomatik ölçeklendirme sırasında aşağı düğümlerin NodeState 'i temizlemek için [Service Fabric otomatik ölçeklendirme Yardımcısı](https://github.com/Azure/service-fabric-autoscale-helper) kullanılması önerilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar 
 * [Reliable Services](service-fabric-reliable-services-introduction.md)

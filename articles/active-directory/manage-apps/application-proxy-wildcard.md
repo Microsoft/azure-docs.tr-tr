@@ -16,12 +16,12 @@ ms.author: kenwith
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c2f3d1d47bd26167253296f06af5470818760850
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a532ae9485efa9571137130d32ba0827728e8094
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99257989"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166879"
 ---
 # <a name="wildcard-applications-in-the-azure-active-directory-application-proxy"></a>Azure Active Directory uygulama proxy 'sinde joker uygulamalar
 
@@ -68,11 +68,23 @@ Güvenlik nedenleriyle bu bir sabit gereksinimdir ve dış URL için özel bir e
 
 ### <a name="dns-updates"></a>DNS güncelleştirmeleri
 
-Özel etki alanları kullanırken, dış URL için CNAME kaydıyla bir DNS girişi oluşturmanız gerekir (örneğin,  `*.adventure-works.com` ) uygulama proxy uç noktasının dış URL 'sini işaret eder. Joker uygulamalar için CNAME kaydının ilgili dış URL 'Leri göstermesi gerekir:
+Özel etki alanları kullanırken, dış URL için CNAME kaydıyla bir DNS girişi oluşturmanız gerekir (örneğin,  `*.adventure-works.com` ) uygulama proxy uç noktasının dış URL 'sini işaret eder. Joker uygulamalar için CNAME kaydının ilgili dış URL 'yi göstermesi gerekir:
 
 > `<yourAADTenantId>.tenant.runtime.msappproxy.net`
 
 CNAME 'nizi doğru şekilde yapılandırdığınızdan emin olmak için, hedef uç noktalardan birinde [nslookup](/windows-server/administration/windows-commands/nslookup) ' ı kullanabilirsiniz (örneğin,) `expenses.adventure-works.com` .  Yanıtınız zaten belirtilen diğer adı ( `<yourAADTenantId>.tenant.runtime.msappproxy.net` ) içermelidir.
+
+### <a name="using-connector-groups-assigned-to-an-app-proxy-cloud-service-region-other-than-the-default-region"></a>Varsayılan bölge dışında bir uygulama proxy 'Si bulut hizmeti bölgesine atanan bağlayıcı gruplarını kullanma
+Varsayılan kiracı bölgenizin farklı bölgelerinde yüklü bağlayıcılar varsa, bu uygulamalara erişim performansını artırmak için bağlayıcı grubunuzun en iyi duruma getirildiği bölgeyi değiştirmek faydalı olabilir. Daha fazla bilgi edinmek için bkz. [en yakın uygulama proxy 'si bulut hizmetini kullanmak için bağlayıcı gruplarını iyileştirin](application-proxy-network-topology.md#optimize-connector-groups-to-use-closest-application-proxy-cloud-service-preview).
+ 
+Joker uygulamaya atanan bağlayıcı grubu **varsayılan bölgenizde farklı bir bölge** KULLANıYORSA, CNAME kaydını, bölgesel olarak belirtilen BIR dış URL 'ye işaret edecek şekilde güncelleştirmeniz gerekir. İlgili URL 'YI öğrenmek için aşağıdaki tabloyu kullanın:
+
+| Bağlayıcı tarafından atanan bölge | Dış URL |
+| ---   | ---         |
+| Asya | `<yourAADTenantId>.asia.tenant.runtime.msappproxy.net`|
+| Avustralya  | `<yourAADTenantId>.aus.tenant.runtime.msappproxy.net` |
+| Avrupa  | `<yourAADTenantId>.eur.tenant.runtime.msappproxy.net`|
+| Kuzey Amerika  | `<yourAADTenantId>.nam.tenant.runtime.msappproxy.net` |
 
 ## <a name="considerations"></a>Dikkat edilmesi gerekenler
 

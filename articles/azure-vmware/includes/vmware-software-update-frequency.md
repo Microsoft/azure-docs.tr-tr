@@ -4,10 +4,10 @@ description: Azure VMware çözümü için desteklenen VMware yazılım güncell
 ms.topic: include
 ms.date: 03/22/2021
 ms.openlocfilehash: a3290ed704b493fae3e86223857ff9f1c5617f1a
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104869872"
 ---
 <!-- Used in faq.md and concepts-private-clouds-clusters.md -->

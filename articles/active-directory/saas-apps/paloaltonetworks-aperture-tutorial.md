@@ -9,38 +9,37 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 09/10/2020
+ms.date: 03/22/2021
 ms.author: jeedes
-ms.openlocfilehash: 7b4c8ab55a9b2afc9c1a215236fa1276a630a5cf
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 42a6bc9bfb06f1c80b719bdda686ae111a8884ab
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97963630"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106222033"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-palo-alto-networks---aperture"></a>Öğretici: Palo Alto Networks-diyafram ile tümleştirme Azure Active Directory
 
-Bu öğreticide, Palo Alto 'nın Azure Active Directory (Azure AD) ile ağlarla nasıl tümleştirileceğini öğreneceksiniz.
-Azure AD ile Palo Alto ağlarını tümleştirme, aşağıdaki avantajları sağlar:
+Bu öğreticide, Palo Alto 'nın Azure Active Directory (Azure AD) ile ağlarla nasıl tümleştirileceğini öğreneceksiniz. Palo Alto ağlarını Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Azure AD 'de, Palo Alto ağları açıklık erişimine sahip olan bir denetim yapabilirsiniz.
-* Kullanıcılarınızın Azure AD hesaplarıyla ağları açıklık (çoklu oturum açma) için otomatik olarak oturum açmasını sağlayabilirsiniz.
-* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
+* Azure AD 'de, Palo Alto Networks-diyafram erişimine sahip olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla ağları açıklık altına almak için otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesini Palo Alto Networks-diyafram ile yapılandırmak için aşağıdaki öğelere ihtiyacınız vardır:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
-* Palo Alto ağları-açıklık çoklu oturum açma etkin aboneliği
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Palo Alto ağları-açıklık çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
 Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Palo Alto Networks-açıklık **SP** ve **IDP** tarafından başlatılan SSO 'yu destekler
+* Palo Alto Networks-açıklık, **SP** ve **IDP** tarafından başlatılan SSO 'yu destekler.
 
-## <a name="adding-palo-alto-networks---aperture-from-the-gallery"></a>Galerideki Palo Alto ağları-açıklık ekleme
+## <a name="add-palo-alto-networks---aperture-from-the-gallery"></a>Galeriden Palo Alto Networks-açıklık ekleme
 
 Palo Alto 'nın ağlar açıklığı ile Azure AD arasındaki tümleştirmeyi yapılandırmak için, galerideki Palo Alto Networks-diyafram ' i yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
@@ -59,10 +58,10 @@ Bu bölümde, **B. Simon** adlı bir test kullanıcısına göre Palo Alto Ile A
 Azure AD çoklu oturum açmayı, Palo Alto Networks-diyafram ile yapılandırmak ve test etmek için aşağıdaki adımları gerçekleştirin:
 
 1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
-    * Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
-    * Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+    1. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    1. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
 2. Uygulama tarafında tek Sign-On ayarlarını yapılandırmak için, **[Palo Alto Networks-DIYAFRAM SSO](#configure-palo-alto-networks---aperture-sso)** -öğesini yapılandırın.
-    * **[Palo Alto Networks-bir test kullanıcısına](#create-palo-alto-networks---aperture-test-user)** , Palo Alto 'Da kullanıcının Azure AD gösterimine bağlı olan ağların açıklık Ile Ilgili Britta Simon 'un bir karşılığı olacak şekilde.
+    1. **[Palo Alto Networks-bir test kullanıcısına](#create-palo-alto-networks---aperture-test-user)** , Palo Alto 'Da kullanıcının Azure AD gösterimine bağlı olan ağların açıklık Ile Ilgili Britta Simon 'un bir karşılığı olacak şekilde.
 3. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
 ## <a name="configure-azure-ad-sso"></a>Azure AD SSO’yu yapılandırma
@@ -77,15 +76,11 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
 4. **Temel SAML yapılandırması** bölümünde, uygulamayı **IDP** tarafından başlatılan modda yapılandırmak istiyorsanız aşağıdaki adımları uygulayın:
 
-    !["Tanımlayıcı" ve "Yanıt U R L" metin kutuları vurgulanmış ve "Kaydet" eylemi seçili olan "temel S A M L yapılandırmasını" gösteren ekran görüntüsü.](common/idp-intiated.png)
-
     a. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<subdomain>.aperture.paloaltonetworks.com/d/users/saml/metadata`
 
     b. **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:`https://<subdomain>.aperture.paloaltonetworks.com/d/users/saml/auth`
 
 5. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
-
-    ![Palo Alto ağları-açıklık etki alanı ve URL 'Ler çoklu oturum açma bilgileri SP](common/metadata-upload-additional-signon.png)
 
     **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:`https://<subdomain>.aperture.paloaltonetworks.com/d/users/saml/sign_in`
 
@@ -130,15 +125,15 @@ Bu bölümde, Palo Alto Networks-diyafram erişimine izin vererek Azure çoklu o
 
 2. Üstteki menü çubuğunda, **Ayarlar**' a tıklayın.
 
-    ![Ayarlar sekmesi](./media/paloaltonetworks-aperture-tutorial/tutorial_paloaltonetwork_settings.png)
+    ![Ayarlar sekmesi](./media/paloaltonetworks-aperture-tutorial/settings.png)
 
 3. **Uygulama** Bölümü ' ne gidin, menünün sol tarafındaki **kimlik doğrulama** formu ' na tıklayın.
 
-    ![Auth sekmesi](./media/paloaltonetworks-aperture-tutorial/tutorial_paloaltonetwork_auth.png)
+    ![Auth sekmesi](./media/paloaltonetworks-aperture-tutorial/authentication.png)
     
 4. **Kimlik doğrulama** sayfasında, aşağıdaki adımları uygulayın:
     
-    ![Kimlik doğrulama sekmesi](./media/paloaltonetworks-aperture-tutorial/tutorial_paloaltonetwork_singlesignon.png)
+    ![Kimlik doğrulama sekmesi](./media/paloaltonetworks-aperture-tutorial/tab.png)
 
     a. Çoklu oturum **açmayı etkinleştir (desteklenen SSP sağlayıcıları okta, bir oturum açma)** Ile **Çoklu oturum** açma alanını denetleyin.
 

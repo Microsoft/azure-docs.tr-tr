@@ -4,21 +4,21 @@ description: Bu makalede, Azure AKS kümenizi kapsayıcı öngörüleri ile izle
 ms.topic: conceptual
 ms.date: 08/19/2019
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: eab34f27d1e33b166971203082cce99fb2b0e106
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 619b6fc4cce860e5869fd0b31e303b4a474f8428
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101723546"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774038"
 ---
 # <a name="how-to-stop-monitoring-your-azure-kubernetes-service-aks-with-container-insights"></a>Azure Kubernetes Service (AKS) ' i kapsayıcı öngörüleri ile izlemeyi durdurma
 
 AKS kümenizi izlemeyi etkinleştirdikten sonra, artık bunu izlemek istediğinize karar verirseniz kümeyi izlemeyi durdurabilirsiniz. Bu makalede, Azure CLı kullanılarak veya belirtilen Azure Resource Manager şablonlarıyla nasıl yapılacağı gösterilmektedir.  
 
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
-Container Insights 'ı devre dışı bırakmak için [az aks Disable-addons](/cli/azure/aks#az-aks-disable-addons) komutunu kullanın. Komut, aracıyı küme düğümlerinden kaldırır, çözümü veya daha önce toplanan ve Azure Izleyici kaynağınız içinde depolanan verileri kaldırmaz.  
+Container Insights 'ı devre dışı bırakmak için [az aks Disable-addons](/cli/azure/aks#az_aks_disable_addons) komutunu kullanın. Komut, aracıyı küme düğümlerinden kaldırır, çözümü veya daha önce toplanan ve Azure Izleyici kaynağınız içinde depolanan verileri kaldırmaz.  
 
 ```azurecli
 az aks disable-addons -a monitoring -n MyExistingManagedCluster -g MyExistingManagedClusterRG

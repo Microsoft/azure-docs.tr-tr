@@ -4,10 +4,10 @@ description: IoT gereçlerinde Azure Defender ile çalışacak şekilde ağını
 ms.date: 02/18/2021
 ms.topic: how-to
 ms.openlocfilehash: ed75995b7cbc3b051d77942698a5d0d948e6eef0
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104781815"
 ---
 # <a name="about-azure-defender-for-iot-network-setup"></a>IoT Ağ kurulumu için Azure Defender hakkında

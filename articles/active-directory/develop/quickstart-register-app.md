@@ -12,12 +12,12 @@ ms.date: 09/03/2020
 ms.author: marsma
 ms.custom: aaddev, identityplatformtop40, contperf-fy21q1, contperf-fy21q2
 ms.reviewer: aragra, lenalepa, sureshja
-ms.openlocfilehash: fa5ecd19863e8a37efdf533e68aeaed053c552f8
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: 7b7adde8a6e60042bec7695e4553d6470e548316
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105625688"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106055697"
 ---
 # <a name="quickstart-register-an-application-with-the-microsoft-identity-platform"></a>Hızlı başlangıç: Microsoft Identity platformu ile uygulama kaydetme
 
@@ -59,7 +59,7 @@ Uygulama kaydını oluşturmak için aşağıdaki adımları izleyin:
 Kayıt tamamlandığında, Azure portal uygulama kaydının **genel bakış** bölmesini görüntüler. **Uygulama (istemci) kimliğini** görürsünüz. *ISTEMCI kimliği* olarak da adlandırılan bu değer, uygulamanızı Microsoft Identity platformunda benzersiz şekilde tanımlar. 
 
 > [!IMPORTANT]
-> Yeni uygulama kayıtları varsayılan olarak kullanıcılara gizlidir. Kullanıcıların uygulamayı [uygulamalarım sayfasında](../user-help/my-apps-portal-end-user-access.md) görmesini hazırsanız bu ayarı etkinleştirebilirsiniz. Uygulamayı etkinleştirmek için Azure Portal **Azure Active Director**  >  **kurumsal uygulamalarına** gidin ve uygulamayı seçin. Sonra **Özellikler** sayfasında, **kullanıcılar için görünür mı?** Evet.
+> Yeni uygulama kayıtları varsayılan olarak kullanıcılara gizlidir. Kullanıcıların uygulamayı [uygulamalarım sayfasında](../user-help/my-apps-portal-end-user-access.md) görmesini hazırsanız bu ayarı etkinleştirebilirsiniz. Uygulamayı etkinleştirmek için Azure Portal   >  **Kurumsal uygulamalar** Azure Active Directory gidin ve uygulamayı seçin. Sonra **Özellikler** sayfasında, **kullanıcılar için görünür mı?** Evet.
 
 Uygulamanızın kodu veya daha yaygın olarak uygulamanızda kullanılan bir kimlik doğrulama kitaplığı, istemci KIMLIĞINI de kullanır. Kimlik, kimlik platformundan aldığı güvenlik belirteçlerini doğrulamaya bir parçası olarak kullanılır.
 

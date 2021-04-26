@@ -4,15 +4,15 @@ description: Azure portal bir Azure dosya paylaşma oluşturun ve kullanın. Bir
 author: roygara
 ms.service: storage
 ms.topic: quickstart
-ms.date: 02/01/2019
+ms.date: 04/15/2021
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 4c5629f80c37c9f79dc9a39c4d8304acbee9679d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5a3c664f6c6c0532ef915357cfbcbc8228202502
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92489583"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107718304"
 ---
 # <a name="quickstart-create-and-manage-azure-files-share-with-windows-virtual-machines"></a>Hızlı başlangıç: Windows sanal makineler ile Azure dosyaları paylaşma oluşturma ve yönetme
 
@@ -42,19 +42,19 @@ Bir Azure dosya paylaşımıyla çalışabilmeniz için önce bir Azure depolama
 Sonra, bir dosya paylaşımı oluşturacaksınız.
 
 1. Azure depolama hesabı dağıtımı tamamlandığında **Kaynağa Git**' i seçin.
-1. Depolama hesabı bölmesinden **dosyalar** ' ı seçin.
+1. Depolama hesabı bölmesinden **dosya paylaşımları** ' nı seçin.
 
-    ![Dosya Seç](./media/storage-files-quick-create-use-windows/click-files.png)
+    ![Dosya paylaşımları’nı seçin.](./media/storage-files-quick-create-use-windows/click-files.png)
 
-1. **Dosya paylaşma**' yı seçin.
+1. **+ Dosya paylaşma**' yı seçin.
 
-    ![Dosya paylaşma Ekle düğmesini seçin](./media/storage-files-quick-create-use-windows/create-file-share.png)
+    ![Yeni bir dosya paylaşma oluşturmak için + dosya paylaşma ' yı seçin.](./media/storage-files-quick-create-use-windows/create-file-share.png)
 
-1. Yeni dosya paylaşımı *qsfileshare* ' ı adlandırın > **Kota** için "1" girin > **Oluştur**' u seçin. Kota en fazla 5 TiB olabilir, ancak bu hızlı başlangıç için yalnızca 1 GiB gerekir.
+1. Yeni dosya paylaşımı *qsfileshare* olarak adlandırın, **Kota** için "1" girin, işlem için **iyileştirilmiş** seçili bırakın ve **Oluştur**' u seçin. Kota, en fazla 5 TiB (büyük dosya paylaşımları etkinleştirilmiş 100 TiB) olabilir, ancak bu hızlı başlangıç için yalnızca 1 GiB gerekir.
 1. Yerel makinenizde *Qstestfile* adlı yeni bir txt dosyası oluşturun.
 1. Yeni dosya payını seçin, sonra dosya paylaşma konumunda **karşıya yükle**' yi seçin.
 
-    ![Dosyayı karşıya yükleme](./media/storage-files-quick-create-use-windows/create-file-share-portal5.png)
+    ![Karşıya bir dosya yükleyin.](./media/storage-files-quick-create-use-windows/create-file-share-portal5.png)
 
 1. . Txt dosyanızı oluşturduğunuz konuma gidin > *qsTestFile.txt* seçin > **karşıya yükle**' yi seçin.
 
@@ -63,14 +63,14 @@ Sonra, bir dosya paylaşımı oluşturacaksınız.
 ### <a name="deploy-a-vm"></a>VM'yi dağıtma
 
 1. Ardından, portalın sol tarafındaki menüyü genişletin ve Azure portalın sol üst köşesindeki **Kaynak oluştur**’u seçin.
-1. **Azure Market** kaynaklarının listesi üzerindeki arama kutusunda, **Windows Server 2016 Datacenter**’ı arayıp seçin, ardından **Oluştur**’u seçin.
+1. **Azure Marketi** kaynakları listesinin üzerindeki arama kutusunda **Windows Server 2016 Datacenter**' ı arayıp seçin.
 1. **Temel bilgiler** sekmesinde, **proje ayrıntıları**' nın altında, bu hızlı başlangıç için oluşturduğunuz kaynak grubunu seçin.
 
-   ![Portal dikey penceresinde VM’niz ile ilgili temel bilgileri girin](./media/storage-files-quick-create-use-windows/vm-resource-group-and-subscription.png)
+   ![Portal dikey penceresinde VM 'niz hakkındaki temel bilgileri girin.](./media/storage-files-quick-create-use-windows/vm-resource-group-and-subscription.png)
 
 1. **Örnek ayrıntıları**' nın altında, VM *qsvm*'yi adlandırın.
 1. **Bölge**, **Kullanılabilirlik seçenekleri**, **Görüntü** ve **Boyut** için varsayılan ayarları değiştirmeden bırakın.
-1. **Yönetici hesabı** altında *Vmadmin* **Kullanıcı adı** olarak ekleyin ve VM için bir **parola** girin.
+1. **Yönetici hesabı** altında, bir **Kullanıcı adı** ekleyin ve VM için bir **parola** girin.
 1. **Gelen bağlantı noktası kuralları** altında **Seçilen bağlantı noktalarına izin ver**'i, sonra aşağı açılan listeden **RDP (3389)** ve **HTTP** değerlerini seçin.
 1. **Gözden geçir ve oluştur**’u seçin.
 1. **Oluştur**’u seçin. Yeni bir sanal makinenin oluşturulması birkaç dakika sürebilir.
@@ -96,60 +96,50 @@ Bu noktada yeni bir sanal makine oluşturdunuz ve bir veri diskini kullanıma a�
 ## <a name="map-the-azure-file-share-to-a-windows-drive"></a>Azure dosya paylaşımından bir Windows sürücüsüyle eşleme
 
 1. Azure portal *qsfileshare* FileShare öğesine gidin ve **Bağlan**' ı seçin.
-1. İkinci kutunun içeriğini kopyalayıp **Not defteri**'ne yapıştırın.
+1. Bir sürücü harfi seçin, ikinci kutunun içeriğini kopyalayın ve **Not defteri**'ne yapıştırın.
 
-   ![Not defteri 'nde kopyalamanız ve yapıştırmanız gereken saniye kutusunun içeriğini gösteren ekran görüntüsü.](./media/storage-files-quick-create-use-windows/portal_netuse_connect2.png)
+   :::image type="content" source="media/storage-how-to-use-files-windows/files-portal-mounting-cmdlet-resize.png" alt-text="Not defteri 'nde kopyalamanız ve yapıştırmanız gereken kutunun içeriğini gösteren ekran görüntüsü." lightbox="media/storage-how-to-use-files-windows/files-portal-mounting-cmdlet-resize.png":::
 
-1. VM 'de **Dosya Gezgini** 'ni açın ve pencerede **Bu bilgisayarı** seçin. Bu seçim Şeritteki kullanılabilir menüleri değiştirecek. **Bilgisayar** menüsünde, **Ağ Sürücüsüne Bağlan**' ı seçin.
-1. Sürücü harfini seçin ve UNC adını girin. Bu hızlı başlangıçta adlandırma önerilerini izlediyseniz, **Not defteri**'nden *\\ qsstorageacct. File. Core. Windows. net\qsfileshare* ' yi kopyalayın.
-
-   Her iki onay kutusu işaretli olduğundan emin olun.
-
-   ![“Ağ Sürücüsüne Bağlan” iletişim kutusunun ekran görüntüsü](./media/storage-files-quick-create-use-windows/mountonwindows10.png)
-
-1. **Son**'u seçin.
-1. **Windows güvenliği** iletişim kutusunda:
-
-   - Not defteri ' nden, depolama hesabı adı ' nı AZURE \ ' a kopyalayın ve Kullanıcı adı olarak **Windows güvenliği** iletişim kutusuna yapıştırın. Bu hızlı başlangıçta adlandırma önerilerini izlediyseniz, *AZURE\qsstorageacct* kopyalayın.
-   - Not defteri 'nde, depolama hesabı anahtarını kopyalayın ve parola olarak **Windows güvenliği** iletişim kutusuna yapıştırın.
-
-      ![Azure Dosyaları Bağlan bölmesinden UNC adı](./media/storage-files-quick-create-use-windows/portal_netuse_connect3.png)
+1. VM 'de, **PowerShell** 'i açın ve **Not defteri** içeriğini yapıştırın, sonra komutu çalıştırmak için ENTER tuşuna basın. Sürücüyü eşlenmelidir.
 
 ## <a name="create-a-share-snapshot"></a>Paylaşım anlık görüntüsü oluşturma
 
 Sürücüyü eşleştirdikten sonra bir anlık görüntü oluşturabilirsiniz.
 
-1. Portalda dosya paylaşımınıza gidin ve **anlık görüntü oluştur**' u seçin.
+1. Portalda dosya paylaşımınıza gidin, **anlık görüntüler**' i seçin ve **+ anlık görüntü ekle**' yi seçin.
 
-   ![Anlık görüntü oluşturma](./media/storage-files-quick-create-use-windows/create-snapshot.png)
+   ![İşlemler bölümünde anlık görüntüler ' i seçin ve ardından anlık görüntü Ekle ' yi seçin.](./media/storage-files-quick-create-use-windows/create-snapshot.png)
 
 1. VM 'de *qstestfile.txt* açın ve "Bu dosya değiştirilmiştir" yazın > dosyayı kaydedin ve kapatın.
 1. Başka bir anlık görüntü oluşturun.
 
 ## <a name="browse-a-share-snapshot"></a>Bir paylaşma anlık görüntüsüne gözatın
 
-1. Dosya paylaşımınızda **anlık görüntüleri görüntüle**' yi seçin.
-1. **Dosya paylaşma anlık görüntüleri** bölmesinde listedeki ilk anlık görüntüyü seçin.
+1. Dosya paylaşımınızda **anlık görüntüler**' i seçin.
+1. **Anlık görüntüler** dikey penceresinde listedeki ilk anlık görüntüyü seçin.
 
    ![Zaman damgaları listesinde seçilen anlık görüntü](./media/storage-files-quick-create-use-windows/snapshot-list.png)
 
-1. Bu anlık görüntünün bölmesinde *qsTestFile.txt*' yi seçin.
+1. Bu anlık görüntüyü açın ve *qsTestFile.txt*' yi seçin.
 
 ## <a name="restore-from-a-snapshot"></a>Anlık görüntüden geri yükleme
 
 1. Dosya paylaşma anlık görüntüsü dikey penceresinde *Qstestfile* öğesine sağ tıklayın ve **geri yükle** düğmesini seçin.
+
+    :::image type="content" source="media/storage-files-quick-create-use-windows/restore-share-snapshot.png" alt-text="Snapshot dikey penceresinin ekran görüntüsü, qstestfile seçilidir, geri yükleme vurgulanır.":::
+
 1. **Özgün dosyanın üzerine yaz** seçeneğini belirleyin.
 
-   ![Düğmeleri indir ve geri yükle](./media/storage-files-quick-create-use-windows/snapshot-download-restore-portal.png)
+   ![Geri yükleme açılan ekranının ekran görüntüsü, özgün dosyanın üzerine yaz seçilidir.](./media/storage-files-quick-create-use-windows/snapshot-download-restore-portal.png)
 
 1. VM 'de dosyasını açın. Değiştirilmemiş sürüm geri yüklendi.
 
 ## <a name="delete-a-share-snapshot"></a>Paylaşım anlık görüntüsünü silme
 
-1. Dosya paylaşımınızda **anlık görüntüleri görüntüle**' yi seçin.
-1. **Dosya paylaşma anlık görüntüleri** bölmesinde, listedeki son anlık görüntüyü seçin ve **Sil**' e tıklayın.
+1. Dosya paylaşımınızda **anlık görüntüler**' i seçin.
+1. **Anlık görüntüler** dikey penceresinde, listedeki son anlık görüntüyü seçin ve **Sil**' i seçin.
 
-   ![Sil düğmesi](./media/storage-files-quick-create-use-windows/portal-snapshots-delete.png)
+   ![Anlık görüntüler dikey penceresinin ekran görüntüsü, seçili son anlık görüntü, Sil düğmesi vurgulanmış.](./media/storage-files-quick-create-use-windows/portal-snapshots-delete.png)
 
 ## <a name="use-a-share-snapshot-in-windows"></a>Windows 'da bir paylaşma anlık görüntüsü kullanma
 
@@ -173,7 +163,10 @@ Sürücüyü eşleştirdikten sonra bir anlık görüntü oluşturabilirsiniz.
 
 1. **Geri yükle**' yi seçin. Bu eylem, paylaşımın anlık görüntüsünün oluşturulduğu sırada tüm dizinin içeriğini özyinelemeli olarak özgün konuma kopyalar.
 
-   ![Geri yükleme düğmesi uyarı iletisi ](./media/storage-files-quick-create-use-windows/snapshot-windows-restore.png) Not: dosyanız değişmediyseniz, bu dosya, anlık görüntüyle aynı sürümde olduğundan bu dosyanın önceki bir sürümünü görmezsiniz. Bu, Windows dosya sunucusu üzerinde nasıl çalıştığı ile tutarlıdır.
+   ![Uyarı iletisindeki geri yükleme düğmesi](./media/storage-files-quick-create-use-windows/snapshot-windows-restore.png)
+    
+    > [!NOTE]
+    > Dosyanız değişmediyseniz, bu dosya, anlık görüntüyle aynı sürümde olduğundan bu dosyanın önceki bir sürümünü görmezsiniz. Bu, Windows dosya sunucusu üzerinde nasıl çalıştığı ile tutarlıdır.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 

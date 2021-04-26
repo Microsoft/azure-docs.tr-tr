@@ -2,7 +2,7 @@
 title: İzleme Time Series Insights | Microsoft Docs
 description: Kullanılabilirlik, performans ve işlem için Time Series Insights izleyin.
 author: deepakpalled
-ms.author: lyhughes
+ms.author: dpalled
 manager: diviso
 ms.workload: big-data
 ms.service: time-series-insights
@@ -10,12 +10,12 @@ services: time-series-insights
 ms.topic: conceptual
 ms.date: 12/10/2020
 ms.custom: lyrana
-ms.openlocfilehash: a46ddeddfcefcd4d6e7f87747fe36cfc6ec82e35
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 15054cd508ce7a6de51fea86ca02302fba258757
+ms.sourcegitcommit: c2a41648315a95aa6340e67e600a52801af69ec7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101737571"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106504932"
 ---
 # <a name="monitoring-time-series-insights"></a>İzleme Time Series Insights
 
@@ -44,7 +44,7 @@ Aşağıdaki bölümler, Azure Time Series Insights için toplanan belirli veril
 
 ## <a name="monitoring-data-from-azure-time-series-insights"></a>Azure Time Series Insights verileri izleme
 
-Azure Time Series Insights, [Azure kaynaklarından gelen verileri izleme](../azure-monitor/essentials/monitor-azure-resource.md#monitoring-data)bölümünde açıklanan diğer Azure kaynaklarıyla aynı türde izleme verilerini toplar. 
+Azure Time Series Insights, [Azure kaynaklarından gelen verileri izleme](../azure-monitor/essentials/monitor-azure-resource.md#monitoring-data)bölümünde açıklanan diğer Azure kaynaklarıyla aynı türde izleme verilerini toplar.
 
 Toplayacağınız günlüklere ve ölçümlere ilişkin ayrıntılı bir başvuru için bkz. [Azure Time Series Insights izleme verileri başvurusu](how-to-monitor-tsi-reference.md) .
 

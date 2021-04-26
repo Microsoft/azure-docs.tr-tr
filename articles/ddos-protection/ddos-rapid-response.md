@@ -3,7 +3,7 @@ title: Azure DDoS hızlı yanıt
 description: Özelleştirilmiş destek için etkin bir saldırı sırasında DDoS uzmanlarının nasıl ekleneceğini öğrenin.
 services: ddos-protection
 documentationcenter: na
-author: yitoh
+author: aletheatoh
 ms.service: ddos-protection
 ms.devlang: na
 ms.topic: article
@@ -11,12 +11,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/28/2020
 ms.author: yitoh
-ms.openlocfilehash: 8e860bf47420f2b58c44df695da7761bcc2aa0ce
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f551f40a9bd70c4a3b54c1d2756cfb94caf79590
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100521790"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107103071"
 ---
 # <a name="azure-ddos-rapid-response"></a>Azure DDoS hızlı yanıt
 

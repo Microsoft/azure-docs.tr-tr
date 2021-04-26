@@ -10,12 +10,12 @@ ms.workload: infrastructure-services
 ms.topic: troubleshooting
 ms.date: 09/02/2020
 ms.author: genli
-ms.openlocfilehash: a177fc7e17dc91a0d57fa6dee87b80921d7fd8f5
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 573f97c7f592186173b13ea592d151ee291b8249
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105043589"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105967974"
 ---
 # <a name="prepare-a-windows-vhd-or-vhdx-to-upload-to-azure"></a>Azure’a yüklemek için Windows VHD veya VHDX’i hazırlama
 
@@ -113,6 +113,10 @@ SFC taraması tamamlandıktan sonra, Windows güncelleştirmelerini yükledikten
    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Name TEMP -Value "%SystemRoot%\TEMP" -Type ExpandString -Force
    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Name TMP -Value "%SystemRoot%\TEMP" -Type ExpandString -Force
    ```
+1. Eski işletim sistemlerine sahip VM 'Ler için (Windows Server 2012 R2 veya Windows 8.1 ve aşağıdaki), en son Hyper-V tümleştirme bileşen hizmetlerinin yüklü olduğundan emin olun. Daha fazla bilgi için bkz. [Windows sanal makinesi Için Hyper-V tümleştirme bileşenleri güncelleştirmesi](https://support.microsoft.com/topic/hyper-v-integration-components-update-for-windows-virtual-machines-8a74ffad-576e-d5a0-5a2f-d6fb2594f990).
+
+> [!NOTE]
+> VM 'Lerin şirket içi VMware sunucusu ile Azure arasında bir olağanüstü durum kurtarma çözümü ile ayarlandığı bir senaryoda, Hyper-V tümleştirme Bileşen Hizmetleri kullanılamaz. Bu durumda, lütfen VM 'yi Azure 'a geçirmek ve VMware sunucusunda birlikte bulundurgetirmek için VMware desteğiyle iletişim kurun.
 
 ## <a name="check-the-windows-services"></a>Windows hizmetlerini denetleme
 
@@ -266,6 +270,8 @@ VM 'nin sağlıklı, güvenli ve RDP erişilebilir olduğundan emin olun:
 1. Önyükleme Yapılandırma Verileri (BCD) ayarlarını ayarlayın.
 
    ```powershell
+   cmd
+
    bcdedit.exe /set "{bootmgr}" integrityservices enable
    bcdedit.exe /set "{default}" device partition=C:
    bcdedit.exe /set "{default}" integrityservices enable
@@ -279,6 +285,8 @@ VM 'nin sağlıklı, güvenli ve RDP erişilebilir olduğundan emin olun:
    bcdedit.exe /set "{bootmgr}" bootems yes
    bcdedit.exe /ems "{current}" ON
    bcdedit.exe /emssettings EMSPORT:1 EMSBAUDRATE:115200
+
+   exit
    ```
 
 1. Döküm günlüğü, Windows kilitlenme sorunlarını giderme konusunda yardımcı olabilir. Döküm günlüğü koleksiyonunu etkinleştir:
@@ -351,6 +359,10 @@ VM 'nin sağlıklı, güvenli ve RDP erişilebilir olduğundan emin olun:
 1. Fiziksel bileşenlerle veya diğer sanallaştırma teknolojilerinde ilgili diğer üçüncü taraf yazılımı veya sürücüleri kaldırın.
 
 ### <a name="install-windows-updates"></a>Windows güncelleştirmelerini yükler
+
+> [!NOTE]
+> VM sağlama sırasında yanlışlıkla yeniden başlatmanın önüne geçmek için, tüm Windows Update yüklemelerinin tamamlanmasını ve bekleyen bir yeniden başlatma olmadığından emin olmanızı öneririz. Bunu yapmanın bir yolu, tüm Windows güncelleştirmelerini yüklemek ve Azure 'a geçişi gerçekleştirmeden önce VM 'yi yeniden başlatmak için kullanılır. </br><br>
+>Ayrıca, işletim sisteminin (Sysprep) bir genelleştirmeyi yapmanız gerekiyorsa, Sysprep komutunu çalıştırmadan önce Windows 'u güncelleştirmeniz ve VM 'yi yeniden başlatmanız gerekir.
 
 İdeal olarak, makinenin *düzeltme eki düzeyine* güncelleştirilmesini sağlamanız gerekir, bu mümkün değilse, aşağıdaki güncelleştirmelerin yüklendiğinden emin olun. En son güncelleştirmeleri almak için Windows Update geçmiş sayfalarına bakın: [Windows 10 ve Windows server 2019](https://support.microsoft.com/help/4000825), [Windows 8.1, ve Windows Server 2012 R2](https://support.microsoft.com/help/4009470) ve Windows 7 SP1 ve WINDOWS Server [2008 R2 SP1](https://support.microsoft.com/help/4009469).
 

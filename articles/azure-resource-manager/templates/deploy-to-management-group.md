@@ -3,12 +3,12 @@ title: Kaynakları yönetim grubuna dağıtma
 description: Azure Resource Manager şablonundaki yönetim grubu kapsamındaki kaynakların nasıl dağıtılacağını açıklar.
 ms.topic: conceptual
 ms.date: 03/18/2021
-ms.openlocfilehash: dc7418d9e93fb50590c5e2502b3a3ffb3847273f
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 74e00921a1170a7750f4a2d239bb778150ac2cae
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105043317"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781946"
 ---
 # <a name="management-group-deployments-with-arm-templates"></a>ARM şablonlarıyla yönetim grubu dağıtımları
 
@@ -75,7 +75,7 @@ Bir yönetim grubuna dağıtmak için yönetim grubu dağıtım komutlarını ku
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı için [az Deployment mg Create](/cli/azure/deployment/mg#az-deployment-mg-create)kullanın:
+Azure CLı için [az Deployment mg Create](/cli/azure/deployment/mg#az_deployment_mg_create)kullanın:
 
 ```azurecli-interactive
 az deployment mg create \

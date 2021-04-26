@@ -8,10 +8,10 @@ ms.service: data-factory
 ms.topic: tutorial
 ms.date: 01/22/2018
 ms.openlocfilehash: f4f5156870ec5119c71a0acc77786c71ab8b7e62
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104783056"
 ---
 # <a name="tutorial-build-your-first-azure-data-factory-using-azure-resource-manager-template"></a>Öğretici: Azure Resource Manager şablonu kullanarak ilk Azure veri fabrikanızı derleme
@@ -45,7 +45,7 @@ Bu öğreticideki işlem hattı bir etkinlik içerir: **HDInsight Hive etkinliğ
 
 ## <a name="in-this-tutorial"></a>Bu öğreticide
 
-| Varlık | Açıklama |
+| Varlık | Description |
 | --- | --- |
 | Azure Storage bağlı hizmeti |Azure Storage hesabınızı veri fabrikasına bağlar. Azure Depolama hesabı, bu örnekteki işlem hattı için girdi ve çıktı verilerini tutar. |
 | İsteğe bağlı HDInsight bağlantılı hizmeti |İsteğe bağlı bir HDInsight kümesini veri fabrikasına bağlar. Küme sizin için otomatik olarak oluşturulur ve işlem bittikten sonra silinir. |
@@ -616,7 +616,7 @@ Bu şablon GatewayUsingArmDF adlı bir veri fabrikasını GatewayUsingARM adlı 
 
 ## <a name="see-also"></a>Ayrıca Bkz.
 
-| Konu | Açıklama |
+| Konu | Description |
 |:--- |:--- |
 | [Pipelines](data-factory-create-pipelines.md) |Bu makale, Azure Data Factory’de işlem hatlarının ve etkinliklerini anlamanıza ve senaryonuz ya da işletmeniz için uçtan uca veri odaklı iş akışları oluşturmak amacıyla bunları nasıl kullanacağınızı anlamanıza yardımcı olur. |
 | [Veri kümeleri](data-factory-create-datasets.md) |Bu makale, Azure Data Factory’deki veri kümelerini anlamanıza yardımcı olur. |

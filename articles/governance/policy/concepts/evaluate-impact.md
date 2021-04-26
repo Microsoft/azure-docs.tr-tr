@@ -1,18 +1,18 @@
 ---
 title: Yeni bir Azure Ilke tanımının etkisini değerlendirin
 description: Azure ortamınıza yeni bir ilke tanımı oluştururken izlenecek işlemi anlayın.
-ms.date: 10/05/2020
+ms.date: 03/31/2021
 ms.topic: conceptual
-ms.openlocfilehash: cf52d25aa846388bc387430913a733d5206df82e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 187a64ce3581c4aaa893e2a805ce787a0bfd6c79
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100590799"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106091727"
 ---
 # <a name="evaluate-the-impact-of-a-new-azure-policy-definition"></a>Yeni bir Azure Ilke tanımının etkisini değerlendirin
 
-Azure Ilkesi, Azure kaynaklarınızı iş standartlarına göre yönetmek ve uyumluluk gereksinimlerini karşılamak için güçlü bir araçtır. Kişiler, süreçler veya işlem hatları kaynakları oluştururken veya güncelleştirdiklerinde, Azure Ilkesi isteği inceler. İlke tanımı efekti [değiştirme](./effects.md#modify), [append](./effects.md#deny) veya [deployifnotexists](./effects.md#deployifnotexists)olduğunda, ilke isteği değiştirir veya buna ekler. İlke tanımı efekti [Denetim](./effects.md#audit) veya [Auditınotexists](./effects.md#auditifnotexists)olduğunda, ilke yeni ve güncelleştirilmiş kaynaklar için bir etkinlik günlüğü girişinin oluşturulmasına neden olur. İlke tanımı etkin [olduğunda, ilke, isteğin](./effects.md#deny)oluşturulmasını veya değişiklik işlemini engeller.
+Azure Ilkesi, Azure kaynaklarınızı iş standartlarına göre yönetmek ve uyumluluk gereksinimlerini karşılamak için güçlü bir araçtır. Kişiler, süreçler veya işlem hatları kaynakları oluştururken veya güncelleştirdiklerinde, Azure Ilkesi isteği inceler. İlke tanımı efekti [Değiştir](./effects.md#modify), [Ekle](./effects.md#deny)veya [deployifnotexists](./effects.md#deployifnotexists)olduğunda, ilke isteği değiştirir veya buna ekler. İlke tanımı efekti [Denetim](./effects.md#audit) veya [Auditınotexists](./effects.md#auditifnotexists)olduğunda, ilke yeni ve güncelleştirilmiş kaynaklar için bir etkinlik günlüğü girişinin oluşturulmasına neden olur. İlke tanımı etkin [olduğunda, ilke, isteğin](./effects.md#deny)oluşturulmasını veya değişiklik işlemini engeller.
 
 Bu sonuçlar, ilkenin doğru şekilde tanımlandığını bildiğiniz durumlarda tam olarak istenen şekilde yapılır. Bununla birlikte, yeni bir ilkenin, çalışmayı değiştirmesine veya engellemeye izin vermeden önce beklendiği gibi çalıştığını doğrulamak önemlidir. Doğrulama yalnızca amaçlanan kaynakların uyumsuz olarak belirlendiğinden ve sonuçlarda yanlış bir şekilde ( _yanlış pozitif_ olarak bilinirdi) emin olunması gerekir.
 

@@ -1,14 +1,14 @@
 ---
 title: 'Model: bir ilke tanımındaki mantıksal işleçler'
 description: Bu Azure Ilke modelinde, mantıksal işleçlerin bir ilke tanımında nasıl kullanılacağına ilişkin örnekler verilmektedir.
-ms.date: 08/17/2020
+ms.date: 03/31/2021
 ms.topic: sample
-ms.openlocfilehash: 3f644cdbfc45b06d1ad5db8e7727c0fa69742f00
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: feb9e50b0c73c19027b747cf0f95fa1cb6fbd47c
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88545599"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106093359"
 ---
 # <a name="azure-policy-pattern-logical-operators"></a>Azure Ilke stili: mantıksal işleçler
 
@@ -16,7 +16,7 @@ Bir ilke tanımı, birkaç koşullu deyim içerebilir. Her deyimin doğru olmas�
 
 ## <a name="sample-1-one-logical-operator"></a>Örnek 1: bir mantıksal işleç
 
-Bu ilke tanımı, otomatik yük devretme ve birden fazla yazma konumu yapılandırılıp yapılandırılmadığını görmek için CosmosDB hesaplarını değerlendirir. Olmadığında [Denetim](../concepts/effects.md#audit) tetiklenir ve uyumlu olmayan kaynak oluşturulduğunda veya güncelleştirilirken bir günlük girişi oluşturur.
+Bu ilke tanımı, otomatik yük devretme ve birden fazla yazma konumu yapılandırılıp yapılandırılmadığını görmek için [Azure Cosmos DB](../../../cosmos-db/introduction.md) hesapları değerlendirir. Olmadığında [Denetim](../concepts/effects.md#audit) tetiklenir ve uyumlu olmayan kaynak oluşturulduğunda veya güncelleştirilirken bir günlük girişi oluşturur.
 
 :::code language="json" source="~/policy-templates/patterns/pattern-logical-operators-1.json":::
 
@@ -41,7 +41,7 @@ Bu **Policyrule. If** bloğu tek bir **allof** de içeriyorsa, ancak her koşul 
 
 ## <a name="sample-3-combining-logical-operators"></a>Örnek 3: mantıksal işleçleri birleştirme
 
-Bu ilke tanımı, bir izlemenin etkin olup olmadığını veya izlemenin başarılı bir durumda olup olmadığını görmek için Java Spring hesaplarını değerlendirir.
+Bu ilke tanımı, izlemenin etkin olup olmadığını ya da izlemenin başarılı bir durumda olup olmadığını görmek için [Azure hesaplarında yayı](/azure/developer/java/spring-framework) değerlendirir.
 
 :::code language="json" source="~/policy-templates/patterns/pattern-logical-operators-3.json":::
 

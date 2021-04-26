@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 08/04/2020
 ms.author: alkohli
 ms.openlocfilehash: 6e42fef2aa4415373ed0bac39284f36ba330a4d9
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "101730668"
 ---
 VM oluşturma sırasında geçirilen IP aracılığıyla Uzak Masaüstü Protokolü (RDP) kullanarak Windows sanal makinenize bağlanın.

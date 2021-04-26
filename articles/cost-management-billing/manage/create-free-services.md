@@ -5,18 +5,18 @@ author: amberbhargava
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: conceptual
-ms.date: 12/04/2020
+ms.date: 03/30/2021
 ms.author: banders
-ms.openlocfilehash: 3bd571195a3f0df290387812e68f2b0377fe3c3c
-ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
-ms.translationtype: HT
+ms.openlocfilehash: 15c97640ab1f4e862aab0aff4b3965822daafb2b
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/16/2020
-ms.locfileid: "97584060"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106219833"
 ---
 # <a name="create-services-included-with-azure-free-account"></a>Ücretsiz Azure hesabına dahil hizmetler oluşturma
 
-Ücretsiz bir Azure hesabı oluşturduktan sonraki ilk 30 gün boyunca, üçüncü taraf Market satın alımları dışında herhangi bir hizmette kullanabileceğiniz 200 Dolar değerinde kredi elde edersiniz. Azure’ı keşfetmek için ücretsiz krediyi kullanarak farklı katman ve türlerde Azure hizmetleriyle denemeler yapabilirsiniz. Bu süre içinde ücretsiz olmayan hizmetleri veya Azure kaynaklarını kullanırsanız yansıtılan ücretler kredinizden düşülür.
+Ücretsiz bir Azure hesabı oluşturduktan sonra ilk 30 gün boyunca, üçüncü taraf Market satın alma işlemleri dışında herhangi bir hizmette kullanmak üzere faturalandırma para biriminiz 200 ABD Doları krediniz vardır. Azure’ı keşfetmek için ücretsiz krediyi kullanarak farklı katman ve türlerde Azure hizmetleriyle denemeler yapabilirsiniz. Bu süre içinde ücretsiz olmayan hizmetleri veya Azure kaynaklarını kullanırsanız yansıtılan ücretler kredinizden düşülür.
 
 İlk 30 günün sonuna kadar kullanmadığınız kredilerinizi kaybedersiniz. İlk 30 günden sonra ve kaydolduktan sonraki 12 aya kadar yalnızca *bazı hizmetleri* sınırlı miktarda kullanabilirsiniz. Tüm Azure hizmetleri ücretsiz değildir. 30 günden önce yükseltme yaparsanız ve kullanmadığınız kredi kalırsa bu miktarı 30 gün dolana kadar kullandıkça öde aboneliğiyle kullanabilirsiniz. Örneğin, ücretsiz hesaba 1 Kasım’da kaydolup 5 Kasım’da yükseltme yaptığınızı düşünelim. Elde ettiğiniz kredi miktarından yeni kullandıkça öde aboneliğinde 30 Kasım’a kadar faydalanabilirsiniz. 
 

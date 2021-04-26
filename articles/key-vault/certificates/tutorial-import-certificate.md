@@ -3,7 +3,6 @@ title: Öğretici-Azure portal kullanarak Key Vault sertifikayı Içeri aktarma 
 description: Azure Key Vault bir sertifikanın nasıl içeri aktarılacağını gösteren öğretici
 services: key-vault
 author: msmbaldwin
-manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: certificates
@@ -11,12 +10,12 @@ ms.topic: tutorial
 ms.custom: mvc, devx-track-azurecli
 ms.date: 04/16/2020
 ms.author: sebansal
-ms.openlocfilehash: b7b15c1c4952f6e0a606b1ed46f1588c536b4ae2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: aebb0fa5da4cef655acc424c5ac90b628a4ba3af
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102204091"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107814451"
 ---
 # <a name="tutorial-import-a-certificate-in-azure-key-vault"></a>Öğretici: Azure Key Vault sertifikayı Içeri aktarma
 
@@ -104,9 +103,9 @@ az keyvault certificate import --file
                                [--tags]
 ```
 
-[Parametreler](/cli/azure/keyvault/certificate#az-keyvault-certificate-import)hakkında daha fazla bilgi edinin.
+[Parametreler](/cli/azure/keyvault/certificate#az_keyvault_certificate_import)hakkında daha fazla bilgi edinin.
 
-Sertifikayı içeri aktardıktan sonra sertifika [göster](/cli/azure/keyvault/certificate#az-keyvault-certificate-show) 'i kullanarak sertifikayı görüntüleyebilirsiniz
+Sertifikayı içeri aktardıktan sonra sertifika [göster](/cli/azure/keyvault/certificate#az_keyvault_certificate_show) 'i kullanarak sertifikayı görüntüleyebilirsiniz
 
 
 ```azurecli
@@ -135,7 +134,7 @@ Import-AzureKeyVaultCertificate
       [<CommonParameters>]
 ```
 
-[Parametreler](/powershell/module/azurerm.keyvault/import-azurekeyvaultcertificate?view=azurermps-6.13.0)hakkında daha fazla bilgi edinin.
+[Parametreler](/powershell/module/azurerm.keyvault/import-azurekeyvaultcertificate?)hakkında daha fazla bilgi edinin.
 
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
@@ -154,4 +153,4 @@ Bu öğreticide bir Key Vault oluşturdunuz ve bir sertifikayı içeri aktardın
 
 - [Azure Key Vault 'da sertifika oluşturmayı yönetme](./create-certificate-scenarios.md) hakkında daha fazla bilgi edinin
 - [REST API 'Leri kullanarak sertifika alma](/rest/api/keyvault/importcertificate/importcertificate) örneklerine bakın
-- [Key Vault güvenliğine genel bakış](../general/security-overview.md) konusunu gözden geçirin
+- [Key Vault güvenliğine genel bakış](../general/security-features.md) konusunu gözden geçirin

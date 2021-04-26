@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.service: firewall-manager
 ms.date: 10/22/2020
 ms.author: victorh
-ms.openlocfilehash: 093b962bb9f42b660fb8cc5c0584ec67ebc87e48
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5ef39118d16d47aeb46294658adf616515547ea6
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98789170"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105729533"
 ---
 # <a name="tutorial-secure-your-virtual-hub-using-azure-powershell"></a>Öğretici: Azure PowerShell kullanarak sanal hub 'ınızı güvenli hale getirme
 
@@ -31,7 +31,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 - PowerShell 7
 
-   Bu öğretici, Azure PowerShell PowerShell 7 ' de yerel olarak çalıştırmanızı gerektirir. PowerShell 7 ' yi yüklemek için bkz. [Windows powershell 5,1 ' den PowerShell 7 ' ye geçme](/powershell/scripting/install/migrating-from-windows-powershell-51-to-powershell-7?view=powershell-7).
+   Bu öğretici, Azure PowerShell PowerShell 7 ' de yerel olarak çalıştırmanızı gerektirir. PowerShell 7 ' yi yüklemek için bkz. [Windows powershell 5,1 ' den PowerShell 7 ' ye geçme](/powershell/scripting/install/migrating-from-windows-powershell-51-to-powershell-7?view=powershell-7&preserve-view=true).
 - Az. Network Version 3.2.0
 
     Az. Network Version 3.4.0 veya daha yeni bir sürüme sahipseniz, bu öğreticideki bazı komutları kullanmak için düşürme yapmanız gerekir. Komutunu kullanarak az. Network modülünüzün sürümünü kontrol edebilirsiniz `Get-InstalledModule -Name Az.Network` . Az. Network modülünü kaldırmak için öğesini çalıştırın `Uninstall-Module -name az.network` . Az. Network 3.2.0 modülünü yüklemek için öğesini çalıştırın `Install-Module az.network -RequiredVersion 3.2.0 -force` .

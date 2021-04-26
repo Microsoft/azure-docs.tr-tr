@@ -3,17 +3,18 @@ title: Azure Cloud Services (klasik) Tanım Şeması (. cscfg dosyası) | Micros
 description: Bir hizmet yapılandırma (. cscfg) dosyası, bir rol için her rol, yapılandırma değeri ve sertifika parmak izlerinin kaç rol örneğinin dağıtılacağını belirtir.
 ms.topic: article
 ms.service: cloud-services
+ms.subservice: deployment-files
 ms.date: 10/14/2020
 ms.author: tagore
 author: tanmaygore
 ms.reviewer: mimckitt
 ms.custom: ''
-ms.openlocfilehash: ba933d4981fb7ed209a7fb5d5c41113750f312de
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 17fea7c1eb75f8041c4c6a79870bfc653ea767ae
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98743483"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105935150"
 ---
 # <a name="azure-cloud-services-classic-config-schema-cscfg-file"></a>Azure Cloud Services (klasik) yapılandırma şeması (. cscfg dosyası)
 

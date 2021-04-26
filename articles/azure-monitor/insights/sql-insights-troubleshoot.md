@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/04/2021
-ms.openlocfilehash: 85a3505dd347b96036c28c85c089afa04e3e3bd5
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 4d4a801d0cf0a2355334272053ff86dd846b6bbf
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104610111"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107030313"
 ---
 # <a name="troubleshooting-sql-insights-preview"></a>SQL Insights sorunlarını giderme (Önizleme)
 SQL Insights 'ta veri toplama sorunlarını gidermek için, **profili Yönet** sekmesinde izleme makinesinin durumunu kontrol edin. Bu, aşağıdaki durumlardan birine sahip olacaktır:
@@ -171,10 +171,13 @@ InsightsMetrics
 ```
 
 ```
-Operation 
- | where OperationCategory == "WorkloadInsights" 
- | summarize Errors = countif(OperationStatus == 'Error') 
+WorkloadDiagnosticLogs
+| summarize Errors = countif(Status == 'Error')
 ```
+
+> [!NOTE]
+> ' Workloadagnoçıkartlogs ' veri türünde herhangi bir veri görmüyorsanız, bu verileri depolamak için izleme profilinizi güncelleştirmeniz gerekebilir.  SQL Insights UX içinden ' profili Yönet ' seçeneğini belirleyin, ardından ' Profili Düzenle ' seçeneğini belirleyin ve ardından ' izleme profilini Güncelleştir ' seçeneğini belirleyin.
+
 
 Yaygın durumlarda, günlüklerimizde sorun giderme bilgisi sağlıyoruz: 
 

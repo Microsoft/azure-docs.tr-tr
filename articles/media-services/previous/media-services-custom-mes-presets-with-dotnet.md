@@ -15,12 +15,12 @@ ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: c2ec7c8fe312787d153c76b0b0194354e1717db7
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 758a2fc607217f38306f8d50273c580daf523982
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103016721"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106492703"
 ---
 # <a name="customizing-media-encoder-standard-presets"></a>Media Encoder Standard önayarlarını özelleştirme
 
@@ -271,8 +271,8 @@ namespace CustomizeMESPresests
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-- [CLı kullanarak özel dönüşümle kodlama](../latest/custom-preset-cli-howto.md)
-- [Media Services v3 ile kodlama](../latest/encoding-concept.md)
+- [CLı kullanarak özel dönüşümle kodlama](../latest/transform-custom-preset-cli-how-to.md)
+- [Media Services v3 ile kodlama](../latest/encode-concept.md)
 
 ## <a name="media-services-learning-paths"></a>Media Services’i öğrenme yolları
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]

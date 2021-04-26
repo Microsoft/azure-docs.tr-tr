@@ -7,12 +7,12 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
 ms.topic: sample
 ms.date: 07/29/2020
-ms.openlocfilehash: 94ff29d2c3272b61ff09fa0e564fcf2fcd281130
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: b2c1e663c659935e7e820f30a281099058a4cf34
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "94566053"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107771038"
 ---
 # <a name="create-a-resource-lock-for-azure-cosmos-cassandra-api-keyspace-and-table-using-azure-cli"></a>Azure CLI kullanarak Azure Cosmos Cassandra API anahtar alanı ve tablo için bir kaynak kilidi oluşturma
 [!INCLUDE[appliesto-cassandra-api](../../../includes/appliesto-cassandra-api.md)]
@@ -34,10 +34,10 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [az kilitle oluştur](/cli/azure/lock#az-lock-create) | Bir kilit oluşturur. |
-| [az Lock List](/cli/azure/lock#az-lock-list) | Kilit bilgilerini listeleyin. |
-| [az Lock Show](/cli/azure/lock#az-lock-show) | Kilidin özelliklerini göster. |
-| [az Lock Delete](/cli/azure/lock#az-lock-delete) | Bir kilidi siler. |
+| [az kilitle oluştur](/cli/azure/lock#az_lock_create) | Bir kilit oluşturur. |
+| [az Lock List](/cli/azure/lock#az_lock_list) | Kilit bilgilerini listeleyin. |
+| [az Lock Show](/cli/azure/lock#az_lock_show) | Kilidin özelliklerini göster. |
+| [az Lock Delete](/cli/azure/lock#az_lock_delete) | Bir kilidi siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

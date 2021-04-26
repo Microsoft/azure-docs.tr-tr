@@ -5,15 +5,15 @@ author: vermagit
 ms.service: virtual-machines
 ms.subservice: hpc
 ms.topic: article
-ms.date: 03/25/2021
+ms.date: 04/16/2021
 ms.author: amverma
 ms.reviewer: cynthn
-ms.openlocfilehash: 4ab2c599bea4b2e3e682755a80a2ee348e4de7ef
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: f81d40abdf402b1e19090c5375dfa8c335418248
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105606785"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600973"
 ---
 # <a name="scaling-hpc-applications"></a>HPC uygulamalarını ölçeklendirme
 
@@ -112,4 +112,7 @@ gcc $(OPTIMIZATIONS) $(OMP) $(STACK) $(STREAM_PARAMETERS) stream.c -o stream.gcc
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure 'da [HPC](/azure/architecture/topics/high-performance-computing/) hakkında daha fazla bilgi edinin.
+- [Azure 'DA HPC uygulamalarını en iyi duruma getirmeye yönelik bir öğrenme modülüyle](https://docs.microsoft.com/learn/modules/optimize-tightly-coupled-hpc-apps/)bilginizi test edin.
+- [HBv3-Series genel bakış](hbv3-series-overview.md) ve [HC Serisi genel bakış](hc-series-overview.md)konusunu gözden geçirin.
+- [Azure Işlem Tech Community bloglarında](https://techcommunity.microsoft.com/t5/azure-compute/bg-p/AzureCompute)en son Duyurular, HPC iş yükü örnekleri ve performans sonuçları hakkında bilgi edinin.
+- Azure 'da [HPC](/azure/architecture/topics/high-performance-computing/) hakkında daha fazla bilgi edinin.

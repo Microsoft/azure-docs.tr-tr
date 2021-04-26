@@ -4,14 +4,14 @@ description: Farklı önbellek kullanım modellerini ve bunların arasından sal
 author: ekpgh
 ms.service: hpc-cache
 ms.topic: how-to
-ms.date: 03/15/2021
+ms.date: 04/08/2021
 ms.author: v-erkel
-ms.openlocfilehash: 3ad252520ca0cf7acdb3c84ef1da87c8076f3172
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.openlocfilehash: 7e1b11fd15cca9b11fc627222318f08d31743336
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104775723"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107719196"
 ---
 # <a name="understand-cache-usage-models"></a>Önbellek kullanım modellerini anlama
 
@@ -39,7 +39,7 @@ Azure HPC önbelleğinde yerleşik kullanım modellerinin bu ayarlar için farkl
 
 ## <a name="choose-the-right-usage-model-for-your-workflow"></a>İş akışınız için doğru kullanım modelini seçin
 
-Kullandığınız her NFS bağlı depolama hedefi için bir kullanım modeli seçmeniz gerekir. Azure Blob depolama hedefleri, özelleştirilebilecek yerleşik bir kullanım modeline sahiptir.
+Kullandığınız her NFS-protokol depolama hedefi için bir kullanım modeli seçmeniz gerekir. Azure Blob depolama hedefleri, özelleştirilebilecek yerleşik bir kullanım modeline sahiptir.
 
 HPC önbelleği kullanım modelleri, eski verileri alma riskiyle hızlı yanıt dengelemeye olanak tanır. Dosya okuma hızını iyileştirmek isterseniz, önbellekteki dosyaların arka uç dosyalarına karşı kontrol edilip edilmeyeceğini önemsemeyebilirsiniz. Diğer taraftan, her zaman uzak depolama ile dosyalarınızın güncel olduğundan emin olmak istiyorsanız, sık denetleyen bir model seçin.
 
@@ -77,6 +77,29 @@ Bu tablo, kullanım modeli farklarını özetler:
 [!INCLUDE [usage-models-table.md](includes/usage-models-table.md)]
 
 Azure HPC Cache iş akışınız için en iyi kullanım modeliyle ilgili sorularınız varsa, Azure temsilcinizle konuşun veya yardım için bir destek isteği açın.
+
+## <a name="know-when-to-remount-clients-for-nlm"></a>İstemci tarafından NLM için ne zaman yeniden bağlama yapmanız gerektiğini öğrenin
+
+Bazı durumlarda, bir depolama hedefinin kullanım modelini değiştirirseniz istemcileri yeniden bağlama yapmanız gerekebilir. Bu, farklı kullanım modellerinin ağ kilitleme Yöneticisi (NLM) isteklerini işleme biçimi nedeniyle gereklidir.
+
+HPC önbelleği istemciler ve arka uç depolama sistemi arasında bulunur. Genellikle önbellek, NLM isteklerini arka uç depolama sistemine geçirir, ancak bazı durumlarda, önbellek, NLM isteğini onaylar ve istemciye bir değer döndürür. Azure HPC önbelleğinde bu, yalnızca kullanım modelini **okuma ağır, seyrek kullanılan yazma** (veya standart bir BLOB depolama hedefi olan veya yapılandırılabilir kullanım modelleri olmayan) kullandığınızda oluşur.
+
+**Yoğun okuma, seyrek kullanılan yazma** kullanım modeli ve farklı kullanım modeli arasında değişiklik yaparsanız dosya çakışmasıyla oluşan küçük bir risk vardır. Geçerli NLM durumunu önbellekten depolama sistemine aktarmanın bir yolu yoktur ya da tam tersi de geçerlidir. Bu nedenle, istemcinin kilit durumu yanlış.
+
+Yeni kilit yöneticisiyle doğru bir NLM durumuna sahip olduklarından emin olmak için istemcileri yeniden bağlayın.
+
+İstemcileriniz kullanım modeli veya arka uç depolama alanını desteklemediği zaman bir NLM isteği gönderiyorlarsa bir hata alırlar.
+
+### <a name="disable-nlm-at-client-mount-time"></a>İstemci bağlama zamanında NLM 'yi devre dışı bırak
+
+İstemci sistemlerinizin NLM isteklerini göndermesini isteyip istemeyeceğini bilmeniz her zaman kolay değildir.
+
+İstemciler, komutta seçeneğini kullanarak kümeyi bağladığınızda, NLM 'yi devre dışı bırakabilirsiniz ``-o nolock`` ``mount`` .
+
+Seçeneğinin tam davranışı, ``nolock`` istemci işletim sistemine bağlıdır, bu nedenle istemci işletim sistemine yönelik bağlama belgelerini (Man 5 NFS) denetleyin. Çoğu durumda, kilidi yerel olarak istemciye taşımıştı. Uygulamanız dosyaları birden çok istemcide kilitlerseniz dikkatli olun.
+
+> [!NOTE]
+> ADLS-NFS, NLM 'yi desteklemez. Bir ADLS-NFS depolama hedefi kullanırken, yukarıdaki bağlama seçeneği ile NLM 'yi devre dışı bırakmanız gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

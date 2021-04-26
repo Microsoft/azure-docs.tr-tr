@@ -5,21 +5,21 @@ ms.service: sql-database
 ms.subservice: migration-guide
 ms.custom: ''
 ms.devlang: ''
-ms.topic: conceptual
+ms.topic: how-to
 author: MashaMSFT
 ms.author: mathoma
 ms.date: 03/19/2021
-ms.openlocfilehash: 8952e6e1bda8763d403c02dcd5815f1e1c0941e8
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: d4510aa5cda61dac88102c89b3e03da231380bd6
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105641871"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107389460"
 ---
 # <a name="migration-guide-mysql-to-azure-sql-database"></a>Geçiş Kılavuzu: MySQL to Azure SQL veritabanı
 [!INCLUDE[appliesto-sqldb-sqlmi](../../includes/appliesto-sqldb.md)]
 
-Bu kılavuzda, MySQL için SQL Server Geçiş Yardımcısı (MySQL için SSMA) kullanarak MySQL veritabanınızı bir Azure SQL veritabanına nasıl geçirebileceğinizi öğreneceksiniz. 
+Bu kılavuzda, MySQL için [SQL Server geçiş](https://azure.microsoft.com/en-us/migration/sql-server/) Yardımcısı (MySQL için SSMA) kullanarak MySQL veritabanınızı BIR Azure SQL veritabanına [nasıl geçirebileceğinizi](https://azure.microsoft.com/migration/migration-journey) öğreneceksiniz. 
 
 Diğer geçiş kılavuzlarında [Azure veritabanı geçiş kılavuzu](https://docs.microsoft.com/data-migration)' na bakın. 
 
@@ -33,7 +33,7 @@ MySQL veritabanınızı bir SQL veritabanına geçirmeye başlamadan önce aşa�
 
 ## <a name="pre-migration"></a>Geçiş öncesi 
 
-Önkoşulları karşıladıktan sonra ortamınızın topolojisini bulmaya ve geçişinizin uygunluğunu değerlendirmeye hazırsınız demektir.
+Önkoşulları karşıladıktan sonra ortamınızın topolojisini bulmaya ve [Azure bulut geçişinizin](https://azure.microsoft.com/migration)uygunluğunu değerlendirmeye hazırsınız demektir.
 
 ### <a name="assess"></a>Değerlendirme 
 
@@ -178,3 +178,6 @@ Veri SQL Mühendisliği ekibi bu kaynakları geliştirdik. Bu takımın temel ku
 - Diğer geçiş kılavuzlarında [Azure veritabanı geçiş kılavuzu](https://datamigration.microsoft.com/)' na bakın. 
 
 - Geçiş videoları için bkz. [geçiş yolculuğuna genel bakış ve önerilen geçiş ve değerlendirme araçları ve Hizmetleri](https://azure.microsoft.com/resources/videos/overview-of-migration-and-recommended-tools-services/).
+
+- Daha fazla [bulut geçiş kaynağı](https://azure.microsoft.com/migration/resources/)için bkz. [bulut geçiş çözümleri](https://azure.microsoft.com/migration).
+

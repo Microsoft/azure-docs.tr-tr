@@ -10,12 +10,12 @@ ms.date: 03/11/2021
 ms.topic: include
 ms.custom: include file
 ms.author: peiliu
-ms.openlocfilehash: ff9d63459d0b645f14c62006a8f76f7dd4f986be
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 5fd209c612f90e3912e244daf60d20edf30a08c6
+ms.sourcegitcommit: 5fd1f72a96f4f343543072eadd7cdec52e86511e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105644353"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106113336"
 ---
 SMS mesajları göndermek için Iletişim Hizmetleri C# SMS SDK 'sını kullanarak Azure Iletişim Hizmetleri ile çalışmaya başlayın.
 
@@ -59,7 +59,7 @@ dotnet build
 Hala uygulama dizininde, komutunu kullanarak .NET için Azure Communication Services SMS SDK 'sını yükleyebilirsiniz `dotnet add package` .
 
 ```console
-dotnet add package Azure.Communication.Sms --version 1.0.0-beta.4
+dotnet add package Azure.Communication.Sms --version 1.0.0
 ```
 
 `using`Ad alanını dahil etmek Için **program. cs** ' nin üstüne bir yönerge ekleyin `Azure.Communication` .
@@ -120,7 +120,7 @@ Console.WriteLine($"Sms id: {sendResult.MessageId}");
 Bir alıcı listesine SMS iletisi göndermek için `Send` `SendAsync` alıcının telefon numaralarının bir listesiyle birlikte SmsClient 'deki veya işlevini çağırın. Ayrıca, teslim raporunun etkinleştirilip etkinleştirilmeyeceğini ve özel Etiketler ayarlayamayacağını belirtmek için isteğe bağlı parametreleri de geçirebilirsiniz.
 
 ```csharp
-Response<IEnumerable<SmsSendResult>> response = smsClient.Send(
+Response<IReadOnlyList<SmsSendResult>> response = smsClient.Send(
     from: "<from-phone-number>",
     to: new string[] { "<to-phone-number-1>", "<to-phone-number-2>" },
     message: "Weekly Promotion!",

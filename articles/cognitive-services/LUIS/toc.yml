@@ -1,62 +1,156 @@
-- name: LUIS Belgeleri
+- name: Language Understanding (LUIS) belgeleri
   href: index.yml
 - name: Genel Bakış
   expanded: true
   items:
-    - name: Language Understanding nedir?
+    - name: Language Understanding (LUIS) nedir?
       href: what-is-luis.md
+    - name: Dil desteği
+      href: luis-language-support.md
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/language-understanding-intelligent-services/'
     - name: Yenilikler
       href: whats-new.md
-- name: Hızlı Başlangıçlar
+    - name: LUIS SSS
+      href: troubleshooting.md
+      displayName: 'Troubleshooting, import'
+- name: LUSıS hızlı başlangıçlarını Başlat
   items:
     - name: Önceden oluşturulmuş etki alanı uygulaması oluşturma
       href: luis-get-started-create-app.md
     - name: LUIS portalını kullanma
       items:
-        - name: 1. Uygulama oluşturma
+        - name: Uygulama oluşturma
           href: get-started-portal-build-app.md
           displayName: 'intent, entity, create app, test, example utterance'
-        - name: 2. Uygulamayı dağıtma
+        - name: Uygulamayı dağıtma
           href: get-started-portal-deploy-app.md
           displayName: 'assign key, assign resource, add key, add resource, test, deploy, endpoint, query, publish'
     - name: Tarayıcıyı kullanma
       href: luis-get-started-get-intent-from-browser.md
     - name: İstemci kitaplıklarını ve REST API’sini kullanma
       href: client-libraries-rest-api.md
-- name: Öğreticiler
+- name: Örnekler
+  href: 'https://github.com/Azure-Samples/cognitive-services-language-understanding'
+- name: Nasıl yapılır kılavuzları
   items:
-    - name: Parçalanabilir uygulama oluşturma
+    - name: LUIS portalında oturum açma
+      href: sign-in-luis-portal.md
+    - name: Yeni bir uygulama başlatma
+      href: luis-how-to-start-new-app.md
+      displayName: 'import, export, container'
+    - name: Yapı modeli
       items:
-        - name: 1. Kullanıcı amaçlarını belirleme
-          href: tutorial-intents-only.md
-        - name: 2. Kullanıcı verilerini ayıklama
-          href: tutorial-machine-learned-entity.md
-          displayName: 'n-depth, constraint, descriptor, phrase list, entity, feature'
-    - name: Uygulama geliştirme
+        - name: Amaç ekleme
+          href: luis-how-to-add-intents.md
+        - name: Verileri ayıklamak için varlık ekleme
+          href: luis-how-to-add-entities.md
+          displayName: 'roles, import'
+        - name: Önceden oluşturulmuş modelleri kullanma
+          href: howto-add-prebuilt-models.md
+        - name: İfadedeki varlığı etiketleme
+          href: label-entity-example-utterance.md
+        - name: Özellik ekleme
+          displayName: 'synonym, interchange, phrase list, descriptor, feature'
+          href: luis-how-to-add-features.md
+        - name: REST API kullanarak amaç alın
+          href: luis-get-started-get-intent-from-rest.md
+        - name: REST API kullanarak modeli değiştirme
+          href: get-started-get-model-rest-apis.md
+    - name: Uygulamanızı tümleştirme
       items:
-        - name: Emin olunmayan tahminleri düzeltme
-          href: luis-tutorial-review-endpoint-utterances.md
-        - name: Tahminleri geliştirmek için desenler ekleme
-          href: luis-tutorial-pattern.md
-    - name: Bot ile kullanma
+        - name: Bing Yazım Denetimi v7 ile
+          href: luis-tutorial-bing-spellcheck.md
+        - name: Konuşma hizmeti ile
+          href: ../speech-service/how-to-recognize-intents-from-speech-csharp.md?toc=/azure/cognitive-services/luis/toc.json&bc=/azure/cognitive-services/luis/breadcrumb/toc.json
+    - name: Tahmin doğruluğunu iyileştirme
       items:
-        - name: C# ile
-          href: luis-csharp-tutorial-bf-v4.md
-          displayName: 'bot framework, framework, sdk, abs'
-        - name: Node.js ile
-          displayName: 'bot framework, framework, sdk, abs'
-          href: luis-nodejs-tutorial-bf-v4.md
+        - name: Panoyu kullanma
+          displayName: 'dashboard, analytics, charts, data, unclear predictions, incorrect predictions, imbalance, endpoint hits, status, evaluation, accuracy, active version, problematic intents, nearest rival, usage'
+          href: luis-how-to-use-dashboard.md
+        - name: Uç nokta ifadelerini gözden geçirme
+          displayName: active learning
+          href: luis-how-to-review-endpoint-utterances.md
+        - name: Desen ekleme
+          displayName: 'syntax, template, roles'
+          href: luis-how-to-model-intent-pattern.md
+    - name: Uygulamanızı eğitme ve test etme
+      items:
+        - name: Uygulamanızı eğitme
+          href: luis-how-to-train.md
+          displayName: 'negative sampling, nondeterministic, non-deterministic, UseAllTrainingData'
+        - name: Etkileşimli test
+          href: luis-interactive-test.md
+        - name: Toplu işe testi
+          href: luis-how-to-batch-test.md
+          displayName: 'import, export'
+    - name: Yayımlama
+      href: luis-how-to-publish-app.md
+    - name: Sorgu tahmini çalışma zamanı
+      href: luis-get-started-get-intent-from-browser.md
+    - name: Geçiş
+      items:
+        - name: Genel Bakış
+          href: migration.md
+        - name: Bileşik varlıktan geçirme
+          href: migrate-from-composite-entity.md
+        - name: Yazma kaynağına geçirme
+          href: luis-migration-authoring.md
+        - name: V3 API'ye geçiş
+          href: luis-migration-api-v3.md
+        - name: V3 Yazma API’lerine geçme
+          href: luis-migration-authoring-entities.md
+        - name: V3 Tahmin API’lerine geçme
+          href: luis-migration-api-v3.md
+        - name: V2 API’ye geçiş
+          href: luis-migration-api-v1-to-v2.md
+    - name: Uygulama yönetme
+      items:
+        - name: Azure kaynakları
+          displayName: 'azure portal, resource, assign key, add key, out of quota, 403, 429, luis portal, key assignment, subscription, authoring, endpoint, prediction'
+          href: luis-how-to-azure-subscription.md
+        - name: Uygulama ve sürüm ayarları
+          href: how-to-application-settings-portal.md
+        - name: Yazarlar ve katkıda bulunanlar
+          displayName: 'access, transfer, AAD, tenant, Azure AD, consent, RBAC, admin, role-based access control, ownership, import'
+          href: luis-how-to-collaborate.md
+        - name: Sürümler ile
+          href: luis-how-to-manage-versions.md
+          diplayName: 'import, export, container'
+        - name: Traffic Manager ile
+          href: luis-traffic-manager.md
+    - name: Kapsayıcıları kullanma
+      items:
+        - name: Kapsayıcıları yükleme ve çalıştırma
+          displayName: 'docker, container, package, packaged app, swagger, open api, openapi, train, publish, az, acr, cli, tps, core, curl, try it now, import, pull, export to container'
+          href: luis-container-howto.md
+        - name: Kapsayıcıları yapılandırma
+          href: luis-container-configuration.md
+        - name: Kapsayıcı örnekleri kullanma
+          href: ../containers/azure-container-instance-recipe.md
+        - name: Kapsayıcı sınırlamaları
+          href: luis-container-limitations.md
+          displayName: 'phrase list recommendations, multi-language, translator, locale, language, English, Chinese, French, German, Italian, Korean, Portuguese, Spanish, Turkish, Keigo, subculture, dictation, speech, Bing Spell Check, foreign words, Hybrid languages, Tokenization, space, special character, compound words, tokens'
+        - name: Bilişsel Hizmetler kapsayıcıları belgeleri
+          href: ../containers/index.yml
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Sanal ağları ayarlama
+          href: ../cognitive-services-virtual-networks.md?context=/azure/cognitive-services/luis/context/context
+        - name: Müşteri tarafından yönetilen anahtarları kullan
+          href: encrypt-data-at-rest.md
 - name: Kavramlar
   items:
     - name: Yapay zeka
       href: artificial-intelligence.md
     - name: Geliştirme yaşam döngüsü
       href: luis-concept-app-iteration.md
+    - name: En iyi uygulamalar
+      href: luis-concept-best-practices.md
+      displayName: 'phrase list, pattern, intent, utterance, version, do, don''t, example utterances, iteration, cycle, correct, right'
     - name: Uygulamanızı planlama
       displayName: 'simple, composite, prebuilt, list, regex, regular expression'
       href: luis-how-plan-your-app.md
-    - name: Veri toplama
-      href: data-collection.md
     - name: Uygulama modelleri
       items:
         - name: Türler
@@ -80,9 +174,6 @@
           href: schema-change-prediction-runtime.md
     - name: Tahmin puanı
       href: luis-concept-prediction-score.md
-    - name: En iyi uygulamalar
-      href: luis-concept-best-practices.md
-      displayName: 'phrase list, pattern, intent, utterance, version, do, don''t, example utterances, iteration, cycle, correct, right'
     - name: Uygulama performansını geliştirme
       items:
         - name: Uç nokta ifadelerini gözden geçirme
@@ -93,6 +184,8 @@
           href: luis-concept-test.md
     - name: Veri yönetimi
       items:
+        - name: Veri toplama
+          href: data-collection.md
         - name: Verileri değiştirme
           href: luis-concept-data-alteration.md
         - name: Verileri dönüştürme
@@ -105,152 +198,44 @@
     - name: LUIS ve Soru-Cevap Oluşturma'yı kullanma
       href: choose-natural-language-processing-service.md
       displayName: 'nlp, qna maker'
-    - name: Enterprise
-      items:
-        - name: Tasarım stratejileri
-          href: luis-concept-enterprise.md
-          displayName: import
+    - name: Kurumsal tasarım stratejileri
+      href: luis-concept-enterprise.md
+      displayName: import
     - name: LUIS ile DevOps yöntemlerini uygulama
       items:
+        - name: DevOps kullanma
+          href: luis-how-to-devops-with-github.md
         - name: LUIS için kaynak denetimi ve dal stratejileri
           href: luis-concept-devops-sourcecontrol.md
         - name: DevOps için test etme
           href: luis-concept-devops-testing.md
         - name: CI/CD iş akışları
           href: luis-concept-devops-automation.md
-- name: Nasıl yapılır kılavuzları
+- name: Öğreticiler
   items:
-    - name: LUIS portalında oturum açma
-      href: sign-in-luis-portal.md
-    - name: Yeni bir uygulama başlatma
-      href: luis-how-to-start-new-app.md
-      displayName: 'import, export, container'
-    - name: Model Oluşturma
+    - name: Parçalanabilir uygulama oluşturma
       items:
-        - name: Amaç ekleme
-          href: luis-how-to-add-intents.md
-        - name: Verileri ayıklamak için varlık ekleme
-          href: luis-how-to-add-entities.md
-          displayName: 'roles, import'
-        - name: Önceden oluşturulmuş modelleri kullanma
-          href: howto-add-prebuilt-models.md
-        - name: İfadedeki varlığı etiketleme
-          href: label-entity-example-utterance.md
-        - name: Özellik ekleme
-          displayName: 'synonym, interchange, phrase list, descriptor, feature'
-          href: luis-how-to-add-features.md
-        - name: REST API’ler ile
-          items:
-            - name: Node.js kullanarak program aracılığıyla uygulama derleme
-              href: luis-tutorial-node-import-utterances-csv.md
-    - name: Tümleştirme
+        - name: 1. Kullanıcı amaçlarını belirleme
+          href: tutorial-intents-only.md
+        - name: 2. Kullanıcı verilerini ayıklama
+          href: tutorial-machine-learned-entity.md
+          displayName: 'n-depth, constraint, descriptor, phrase list, entity, feature'
+    - name: Uygulama geliştirme
       items:
-        - name: Bing Yazım Denetimi v7 ile
-          href: luis-tutorial-bing-spellcheck.md
-        - name: Konuşma hizmeti ile
-          href: ../speech-service/how-to-recognize-intents-from-speech-csharp.md?toc=/azure/cognitive-services/luis/toc.json&bc=/azure/cognitive-services/luis/breadcrumb/toc.json
-    - name: Tahmin doğruluğunu iyileştirme
+        - name: Emin olunmayan tahminleri düzeltme
+          href: luis-tutorial-review-endpoint-utterances.md
+        - name: Tahminleri geliştirmek için desenler ekleme
+          href: luis-tutorial-pattern.md
+    - name: Bot ile kullanma
       items:
-        - name: Panoyu kullanma
-          displayName: 'dashboard, analytics, charts, data, unclear predictions, incorrect predictions, imbalance, endpoint hits, status, evaluation, accuracy, active version, problematic intents, nearest rival, usage'
-          href: luis-how-to-use-dashboard.md
-        - name: Uç nokta ifadelerini gözden geçirme
-          displayName: active learning
-          href: luis-how-to-review-endpoint-utterances.md
-        - name: Desen ekleme
-          displayName: 'syntax, template, roles'
-          href: luis-how-to-model-intent-pattern.md
-    - name: Eğitim
-      href: luis-how-to-train.md
-      displayName: 'negative sampling, nondeterministic, non-deterministic, UseAllTrainingData'
-    - name: Test etme
-      items:
-        - name: Etkileşimli test
-          href: luis-interactive-test.md
-        - name: Toplu işe testi
-          href: luis-how-to-batch-test.md
-          displayName: 'import, export'
-    - name: Yayımlama
-      href: luis-how-to-publish-app.md
-    - name: Sorgu tahmini çalışma zamanı
-      href: luis-get-started-get-intent-from-browser.md
-    - name: Geçiş
-      items:
-        - name: Genel Bakış
-          href: migration.md
-        - name: Bileşik varlıktan geçirme
-          href: migrate-from-composite-entity.md
-        - name: Yazma kaynağına geçirme
-          href: luis-migration-authoring.md
-        - name: V3 API'ye geçiş
-          href: luis-migration-api-v3.md
-    - name: Uygulama yönetme
-      items:
-        - name: Azure kaynakları
-          displayName: 'azure portal, resource, assign key, add key, out of quota, 403, 429, luis portal, key assignment, subscription, authoring, endpoint, prediction'
-          href: luis-how-to-azure-subscription.md
-        - name: Uygulama ve sürüm ayarları
-          href: how-to-application-settings-portal.md
-        - name: Yazarlar ve katkıda bulunanlar
-          displayName: 'access, transfer, AAD, tenant, Azure AD, consent, RBAC, admin, role-based access control, ownership, import'
-          href: luis-how-to-collaborate.md
-        - name: Sürümler ile
-          href: luis-how-to-manage-versions.md
-          diplayName: 'import, export, container'
-        - name: Traffic Manager ile
-          href: luis-traffic-manager.md
-    - name: API kullanma
-      items:
-        - name: Geliştiriciler için
-          href: developer-reference-resource.md
-        - name: Uygulama şeması
-          href: app-schema-definition.md
-        - name: V3 Yazma API’lerine geçme
-          href: luis-migration-authoring-entities.md
-        - name: V3 Tahmin API’lerine geçme
-          href: luis-migration-api-v3.md
-        - name: V2 API’ye geçiş
-          href: luis-migration-api-v1-to-v2.md
-    - name: REST API'lerini kullanma
-      items:
-        - name: Amaç alma
-          href: luis-get-started-get-intent-from-rest.md
-        - name: Model değiştirme
-          href: get-started-get-model-rest-apis.md
-    - name: Kapsayıcıları kullanma
-      items:
-        - name: Kapsayıcıları yükleme ve çalıştırma
-          displayName: 'docker, container, package, packaged app, swagger, open api, openapi, train, publish, az, acr, cli, tps, core, curl, try it now, import, pull, export to container'
-          href: luis-container-howto.md
-        - name: Kapsayıcıları yapılandırma
-          href: luis-container-configuration.md
-        - name: Kapsayıcı örnekleri kullanma
-          href: ../containers/azure-container-instance-recipe.md
-        - name: Kapsayıcı sınırlamaları
-          href: luis-container-limitations.md
-          displayName: 'phrase list recommendations, multi-language, translator, locale, language, English, Chinese, French, German, Italian, Korean, Portuguese, Spanish, Turkish, Keigo, subculture, dictation, speech, Bing Spell Check, foreign words, Hybrid languages, Tokenization, space, special character, compound words, tokens'
-        - name: Bilişsel Hizmetler kapsayıcıları belgeleri
-          href: ../containers/index.yml
-    - name: DevOps kullanma
-      href: luis-how-to-devops-with-github.md
-    - name: İlgili hizmetler
-      items:
-        - name: Azure Bot Hizmeti
-          href: 'https://dev.botframework.com/'
-        - name: Bot Builder 4.x SDK C#
-          href: 'https://github.com/Microsoft/botbuilder-dotnet'
-        - name: Soru-Cevap oluşturucu
-          href: 'https://qnamaker.ai/'
-        - name: Bing Konuşma API'si
-          href: 'https://azure.microsoft.com/services/cognitive-services/speech/'
-        - name: Bing Yazım Denetimi API’si
-          href: 'https://azure.microsoft.com/services/cognitive-services/spell-check/'
-        - name: Metin Analizi
-          href: 'https://azure.microsoft.com/services/cognitive-services/text-analytics/'
-        - name: Tanıyıcı Metni
-          href: 'https://github.com/Microsoft/Recognizers-Text'
-        - name: Akıllı Bilgi Noktası
-          href: 'https://github.com/Microsoft/Cognitive-Samples-IntelligentKiosk'
+        - name: C# ile
+          href: luis-csharp-tutorial-bf-v4.md
+          displayName: 'bot framework, framework, sdk, abs'
+        - name: Node.js ile
+          displayName: 'bot framework, framework, sdk, abs'
+          href: luis-nodejs-tutorial-bf-v4.md
+    - name: Node.js kullanarak program aracılığıyla uygulama derleme
+      href: luis-tutorial-node-import-utterances-csv.md
 - name: Başvuru
   items:
     - name: Geliştirici başvurusu
@@ -325,101 +310,109 @@
                   href: 'https://github.com/Azure-Samples/cognitive-services-python-sdk-samples/tree/master/samples/language/luis'
     - name: Kullanıcı gizliliği
       href: luis-user-privacy.md
-    - name: Bölgeler
+    - name: Bölgeleri oluşturma ve yayımlama
       href: luis-reference-regions.md
       displayName: 'failover, fail-over, fail over, Europe, EU, Australia, business continuity, bcdr'
     - name: Sınırlar
       href: luis-limits.md
     - name: Uygulama ve sürüm ayarları
       href: luis-reference-application-settings.md
-    - name: Önceden derlenmiş varlık başvurusu
+    - name: Varlık başvurusu
       items:
-        - name: Kültür başına varlıklar
-          href: luis-reference-prebuilt-entities.md
-        - name: Yaş varlığı
-          href: luis-reference-prebuilt-age.md
-        - name: Para birimi varlığı
-          href: luis-reference-prebuilt-currency.md
-        - name: DatetimeV2 varlığı
-          href: luis-reference-prebuilt-datetimev2.md
-          displayName: timex
-        - name: Boyut varlığı
-          href: luis-reference-prebuilt-dimension.md
-        - name: Kullanım dışı varlıklar
-          href: luis-reference-prebuilt-deprecated.md
-        - name: E-posta varlığı
-          href: luis-reference-prebuilt-email.md
-        - name: GeographyV2 varlığı
-          href: luis-reference-prebuilt-geographyV2.md
-        - name: KeyPhrase varlığı
-          href: luis-reference-prebuilt-keyphrase.md
-        - name: Sayı varlığı
-          href: luis-reference-prebuilt-number.md
-        - name: Sıralı varlık
-          href: luis-reference-prebuilt-ordinal.md
-        - name: Sıralı V2 varlığı
-          href: luis-reference-prebuilt-ordinal-v2.md
-        - name: Yüzde varlığı
-          href: luis-reference-prebuilt-percentage.md
-        - name: PersonName varlığı
-          href: luis-reference-prebuilt-person.md
-        - name: Telefon numarası varlığı
-          href: luis-reference-prebuilt-phonenumber.md
-        - name: Sıcaklık varlığı
-          href: luis-reference-prebuilt-temperature.md
-        - name: URL varlığı
-          href: luis-reference-prebuilt-url.md
-    - name: Önceden derlenmiş etki alanı başvurusu
-      href: luis-reference-prebuilt-domains.md
-      displayName: 'Calendar, Communication,Email,HomeAutomation,Note,Places, RestaurantReservation,ToDo,Utilities,Weather,Web'
-    - name: Özel varlık başvurusu
-      items:
-        - name: Makine öğrenimi varlığı
-          href: reference-entity-machine-learned-entity.md
-        - name: Bileşik varlık
-          href: reference-entity-composite.md
-        - name: Liste varlığı
-          href: reference-entity-list.md
-        - name: Pattern.any varlığı
-          href: reference-entity-pattern-any.md
-        - name: Normal ifade varlığı
-          href: reference-entity-regular-expression.md
-        - name: Basit varlık
-          href: reference-entity-simple.md
+        - name: Önceden oluşturulmuş
+          items:
+            - name: Önceden derlenmiş etki alanı başvurusu
+              href: luis-reference-prebuilt-domains.md
+            - name: Kültür başına varlıklar
+              href: luis-reference-prebuilt-entities.md
+            - name: Yaş varlığı
+              href: luis-reference-prebuilt-age.md
+            - name: Para birimi varlığı
+              href: luis-reference-prebuilt-currency.md
+            - name: DatetimeV2 varlığı
+              href: luis-reference-prebuilt-datetimev2.md
+              displayName: timex
+            - name: Boyut varlığı
+              href: luis-reference-prebuilt-dimension.md
+            - name: Kullanım dışı varlıklar
+              href: luis-reference-prebuilt-deprecated.md
+            - name: E-posta varlığı
+              href: luis-reference-prebuilt-email.md
+            - name: GeographyV2 varlığı
+              href: luis-reference-prebuilt-geographyV2.md
+            - name: KeyPhrase varlığı
+              href: luis-reference-prebuilt-keyphrase.md
+            - name: Sayı varlığı
+              href: luis-reference-prebuilt-number.md
+            - name: Sıralı varlık
+              href: luis-reference-prebuilt-ordinal.md
+            - name: Sıralı V2 varlığı
+              href: luis-reference-prebuilt-ordinal-v2.md
+            - name: Yüzde varlığı
+              href: luis-reference-prebuilt-percentage.md
+            - name: PersonName varlığı
+              href: luis-reference-prebuilt-person.md
+            - name: Telefon numarası varlığı
+              href: luis-reference-prebuilt-phonenumber.md
+            - name: Sıcaklık varlığı
+              href: luis-reference-prebuilt-temperature.md
+            - name: URL varlığı
+              href: luis-reference-prebuilt-url.md
+          displayName: 'Calendar, Communication,Email,HomeAutomation,Note,Places, RestaurantReservation,ToDo,Utilities,Weather,Web'
+        - name: Özel
+          items:
+            - name: Makine öğrenimi varlığı
+              href: reference-entity-machine-learned-entity.md
+            - name: Bileşik varlık
+              href: reference-entity-composite.md
+            - name: Liste varlığı
+              href: reference-entity-list.md
+            - name: Pattern.any varlığı
+              href: reference-entity-pattern-any.md
+            - name: Normal ifade varlığı
+              href: reference-entity-regular-expression.md
+            - name: Basit varlık
+              href: reference-entity-simple.md
     - name: Desen söz dizimi
       href: reference-pattern-syntax.md
     - name: Yaklaşım başvurusu
       href: luis-reference-prebuilt-sentiment.md
 - name: Kaynaklar
   items:
+    - name: Kurumsal kullanıma hazır olma
+      items:
+        - name: Bölge desteği
+          href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
+          displayName: 'phrase list recommendations, multi-language, translator, locale, language, English, Chinese, Dutch, French, German, Italian, Japanese, Korean, Portuguese, Spanish, Turkish, Keigo, informal Japanese, subculture, dictation, speech, Bing Spell Check, foreign words, Hybrid languages, Tokenization, space, special character, compound words, tokens'
+        - name: Uyumluluk ve sertifika
+          href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
     - name: Destek ve yardım seçenekleri
       href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/luis/context/context
-    - name: Kod örnekleri
-      href: 'https://github.com/Azure-Samples/cognitive-services-language-understanding'
-    - name: Bölgesel kullanılabilirlik
-      href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
-    - name: Dil desteği
-      href: luis-language-support.md
-      displayName: 'phrase list recommendations, multi-language, translator, locale, language, English, Chinese, Dutch, French, German, Italian, Japanese, Korean, Portuguese, Spanish, Turkish, Keigo, informal Japanese, subculture, dictation, speech, Bing Spell Check, foreign words, Hybrid languages, Tokenization, space, special character, compound words, tokens'
+    - name: LUIS portalı
+      href: 'https://www.luis.ai'
     - name: Azure Yol Haritası
       href: 'https://go.microsoft.com/fwlink/?linkid=2092089'
     - name: Sözlük
       href: luis-glossary.md
-    - name: Sorun giderme
-      href: troubleshooting.md
-      displayName: 'FAQ, import'
-    - name: Fiyatlandırma ve limitler
-      href: 'https://azure.microsoft.com/pricing/details/cognitive-services/language-understanding-intelligent-services/'
-    - name: Uyumluluk
-      href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
-    - name: Şifreleme
-      href: encrypt-data-at-rest.md
-    - name: Sanal ağları yapılandırma
-      maintainContext: true
-      href: ../cognitive-services-virtual-networks.md
     - name: Arama
       href: /search/index?search=LUIS
     - name: Blog
       href: 'https://blog.botframework.com/category/luis/'
-- name: LUIS portalı
-  href: 'https://www.luis.ai'
+    - name: İlgili hizmetler
+      items:
+        - name: Azure Bot Hizmeti
+          href: 'https://dev.botframework.com/'
+        - name: Bot Builder 4.x SDK C#
+          href: 'https://github.com/Microsoft/botbuilder-dotnet'
+        - name: Soru-Cevap oluşturucu
+          href: 'https://qnamaker.ai/'
+        - name: Bing Konuşma API'si
+          href: 'https://azure.microsoft.com/services/cognitive-services/speech/'
+        - name: Bing Yazım Denetimi API’si
+          href: 'https://azure.microsoft.com/services/cognitive-services/spell-check/'
+        - name: Metin Analizi
+          href: 'https://azure.microsoft.com/services/cognitive-services/text-analytics/'
+        - name: Tanıyıcı Metni
+          href: 'https://github.com/Microsoft/Recognizers-Text'
+        - name: Akıllı Bilgi Noktası
+          href: 'https://github.com/Microsoft/Cognitive-Samples-IntelligentKiosk'

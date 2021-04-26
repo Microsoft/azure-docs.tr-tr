@@ -6,15 +6,15 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
 ms.topic: quickstart
-ms.date: 10/09/2020
+ms.date: 03/07/2021
 ms.author: anfeldma
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 91e89eaf215468f171974e5f3fd383691fdd6ebe
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 2a940f4bb519332e147577e4a9172406c401d152
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93096993"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107365748"
 ---
 # <a name="quickstart-build-a-todo-app-with-xamarin-using-azure-cosmos-db-sql-api-account"></a>Hızlı başlangıç: Azure Cosmos DB SQL API hesabı kullanarak Xamarin ile ToDo uygulaması oluşturma
 [!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
@@ -24,6 +24,7 @@ ms.locfileid: "93096993"
 > * [.NET V4](create-sql-api-dotnet-V4.md)
 > * [Java SDK’sı v4](create-sql-api-java.md)
 > * [Spring Verileri v3](create-sql-api-spring-data.md)
+> * [Spark v3 Bağlayıcısı](create-sql-api-spark.md)
 > * [Node.js](create-sql-api-nodejs.md)
 > * [Python](create-sql-api-python.md)
 > * [Xamarin](create-sql-api-xamarin-dotnet.md)
@@ -96,18 +97,18 @@ Azure portalına geri dönerek API anahtarı bilgilerini alın ve uygulamaya kop
 
 2. Visual Studio 'da **todoıtems. Core/yardımcılar/APIKeys. cs** öğesini açın.
 
-3. Azure portalında, Kopyala düğmesini kullanarak **URI** değerini kopyalayın ve `CosmosEndpointUrl` apikeys. cs içindeki değişkenin değerini yapın.
+3. Azure portal, Kopyala düğmesini kullanarak, **URI** değerini kopyalayın ve `CosmosEndpointUrl` apikeys. cs içindeki değişkenin değerini yapın.
 
     ```csharp
     //#error Enter the URL of your Azure Cosmos DB endpoint here
-            public static readonly string CosmosEndpointUrl = "[URI Copied from Azure Portal]";
+    public static readonly string CosmosEndpointUrl = "[URI Copied from Azure portal]";
     ```
 
-4. Azure portalında, Kopyala düğmesini kullanarak, **BIRINCIL anahtar** değerini kopyalayın ve `Cosmos Auth Key` ' ın apikeys. cs içindeki değerini yapın.
+4. Azure portal, Kopyala düğmesini kullanarak, **BIRINCIL anahtar** değerini kopyalayın ve `Cosmos Auth Key` ' ın apikeys. cs içindeki değerini yapın.
 
     ```csharp
     //#error Enter the read/write authentication key of your Azure Cosmos DB endpoint here
-            public static readonly string CosmosAuthKey = "[PRIMARY KEY copied from Azure Portal";
+    public static readonly string CosmosAuthKey = "[PRIMARY KEY copied from Azure portal";
     ```
 
 [!INCLUDE [cosmos-db-auth-key-info](../../includes/cosmos-db-auth-key-info.md)]
@@ -144,9 +145,9 @@ ToDoItems çözümündeki kod şunları içerir:
 
     , `CreateDocumentQuery<T>` Önceki bölümde oluşturulan kapsayıcıyı işaret eden BIR URI alır. Ayrıca, bir `Where` yan tümcesi gibi LINQ işleçleri belirtebilirsiniz. Bu durumda yalnızca tamamlanmamış todo öğeleri döndürülür.
 
-    `CreateDocumentQuery<T>` işlevi zaman uyumlu olarak yürütülür ve bir `IQueryable<T>` döndürür. Ancak, `AsDocumentQuery` yöntemi `IQueryable<T>` değerini zaman uyumsuz olarak yürütülebilen bir `IDocumentQuery<T>` nesnesine dönüştürür. Böylece, mobil uygulamalar için kullanıcı arabirimi iş parçacığı engellenmez.
+    `CreateDocumentQuery<T>` işlevi zaman uyumlu olarak yürütülür ve bir `IQueryable<T>` döndürür. Ancak, `AsDocumentQuery` yöntemi `IQueryable<T>` `IDocumentQuery<T>` zaman uyumsuz olarak yürütülebilecek bir nesnesine dönüştürür. Böylece, mobil uygulamalar için kullanıcı arabirimi iş parçacığı engellenmez.
 
-    `IDocumentQuery<T>.ExecuteNextAsync<T>` işlevi Azure Cosmos DB’den sonuç sayfasını alır ve bu sayfa, döndürülecek başka sonuçların kalıp kalmadığını görmek üzere `HasMoreResults` tarafından denetlenir.
+    İşlevi, daha `IDocumentQuery<T>.ExecuteNextAsync<T>` `HasMoreResults` fazla sonuç döndürülmek üzere olup olmadığını görmek için Azure Cosmos DB sonuçları sayfasını alır.
 
 > [!TIP]
 > Azure Cosmos kapsayıcılarında ve belgelerinde çalışan çeşitli işlevler, bir URI 'yi kapsayıcı veya belgenin adresini belirten bir parametre olarak alır. Bu URI `URIFactory` sınıfı kullanılarak oluşturulur. Veritabanları, kapsayıcılar ve belgelerin URI 'Leri bu sınıfla oluşturulabilir.
@@ -188,7 +189,7 @@ Aşağıdaki adımlarda, Mac için Visual Studio hata ayıklayıcısı kullanıl
 
     :::image type="content" source="./media/create-sql-api-xamarin-dotnet/ide-start-debug.png" alt-text="Mac için Visual Studio'da hata ayıklamayı başlatma":::
 
-3. iOS simülatörü veya Android öykünücüsü başlatma işlemini tamamladığında, uygulama iOS için alt ekranda ve Android için üst ekranda 2 sekme gösterir. Birinci sekme tamamlanmamış todo öğelerini, ikinci sekme ise tamamlanmış todo öğelerini gösterir.
+3. İOS simülatörü veya Android öykünücüsü başlatmayı bitirdiğinde, uygulama iOS ekranının en altında ve Android ekranının üst kısmında iki sekme görüntüler. İlki, tamamlanmamış Todo öğelerini, ikincisi ise tamamlanmış Todo öğelerini gösterir.
 
     :::image type="content" source="./media/create-sql-api-xamarin-dotnet/ios-droid-started.png" alt-text="ToDo uygulamasının başlatma ekranı":::
 
@@ -214,7 +215,7 @@ Aşağıdaki adımlarda, Mac için Visual Studio hata ayıklayıcısı kullanıl
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, bir Azure Cosmos hesabı oluşturmayı, Veri Gezgini kullanarak bir kapsayıcı oluşturmayı ve Xamarin uygulaması derleyip dağıtmayı öğrendiniz. Artık Azure Cosmos hesabınıza ek veri aktarabilirsiniz.
+Bu hızlı başlangıçta, bir Azure Cosmos hesabı oluşturmayı, Veri Gezgini kullanarak bir kapsayıcı oluşturmayı ve Xamarin uygulaması derleyip dağıtmayı öğrendiniz. Artık Azure Cosmos hesabınıza daha fazla veri aktarabilirsiniz.
 
 > [!div class="nextstepaction"]
 > [Azure Cosmos DB hesabınıza veri aktarma](import-data.md)

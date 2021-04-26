@@ -8,12 +8,12 @@ author: mlearned
 ms.author: mlearned
 description: Azure Arc etkin küme yapılandırması için Held ile Gilar kullanma
 keywords: Gilar, Kubernetes, K8s, Azure, Held, Arc, AKS, Azure Kubernetes hizmeti, kapsayıcılar
-ms.openlocfilehash: 75e2fcb25680817fc3e2bddabbbdd9c52b7dd059
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: df9b40764ec463553659803749f282bbc4587bde
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102121414"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449552"
 ---
 # <a name="deploy-helm-charts-using-gitops-on-an-arc-enabled-kubernetes-cluster"></a>Bir yay etkin bir Kubernetes kümesinde Gilar kullanarak Held grafikleri dağıtma
 
@@ -21,9 +21,17 @@ Helm, Kubernetes uygulamalarını yüklemenize ve yaşam döngüsünü yönetmen
 
 Bu makalede, Azure Arc etkinleştirilmiş Kubernetes ile Held 'yi yapılandırma ve kullanma işlemlerinin nasıl yapılacağı gösterilir.
 
-## <a name="before-you-begin"></a>Başlamadan önce
+## <a name="prerequisites"></a>Önkoşullar
 
-Mevcut bir Azure Arc etkin Kubernetes bağlı kümesine sahip olduğunuzu doğrulayın. Bağlı bir kümeye ihtiyacınız varsa bkz. [Azure yay etkin Kubernetes kümesi hızlı başlangıç](./quickstart-connect-cluster.md).
+- Etkin aboneliği olan bir Azure hesabı. [Ücretsiz hesap oluşturun](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- Mevcut bir Azure Arc, Kubernetes bağlı kümesini etkinleştirdi.
+    - Henüz bir küme bağlanamadıysanız, [Azure Arc özellikli bir Kubernetes kümesi hızlı başlangıç](quickstart-connect-cluster.md)' i inceleyin.
+- Bu özelliğin avantajları ve mimarisi hakkında bilgiler. Yapılandırmalarda daha fazla bilgi edinin [ve Azure Arc etkin Kubernetes makalesini](conceptual-configurations.md)okuyun.
+- `k8s-configuration`Sürüm >= 1.0.0 Azure CLI uzantısını yükler:
+  
+  ```azurecli
+  az extension add --name k8s-configuration
+  ```
 
 ## <a name="overview-of-using-gitops-and-helm-with-azure-arc-enabled-kubernetes"></a>Azure Arc etkin Kubernetes ile Gira ve Held kullanımına genel bakış
 

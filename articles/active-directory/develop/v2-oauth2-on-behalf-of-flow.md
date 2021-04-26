@@ -13,12 +13,12 @@ ms.date: 08/7/2020
 ms.author: hirsin
 ms.reviewer: hirsin
 ms.custom: aaddev
-ms.openlocfilehash: ff8e03b813e2cb890192667e3466d920eaabc72c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1c8ea1580047910cb2d6634aad885d61e99113f3
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98756081"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107529968"
 ---
 # <a name="microsoft-identity-platform-and-oauth-20-on-behalf-of-flow"></a>Microsoft Identity platform ve OAuth 2,0-adına akış
 
@@ -191,6 +191,49 @@ Bu, OAuth2 tabanlı bir uygulamanın SAML belirteçlerini kullanan Web hizmeti A
 
 > [!TIP]
 > Bir ön uç Web uygulamasından SAML korumalı bir Web hizmeti çağırdığınızda, API 'yi çağırabilir ve kullanıcının mevcut oturumunda normal bir etkileşimli kimlik doğrulama akışı başlatabilirsiniz. Yalnızca bir hizmetten hizmete çağrı, Kullanıcı bağlamı sağlamak için bir SAML belirteci gerektirdiğinde bir OBO akışı kullanmanız gerekir.
+ 
+ ### <a name="obtain-a-saml-token-by-using-an-obo-request-with-a-shared-secret"></a>Paylaşılan gizli dizi ile OBO isteği kullanarak SAML belirteci alma
+
+SAML onaylama işlemi için hizmetten hizmete yönelik bir istek aşağıdaki parametreleri içerir:
+
+| Parametre | Tür | Açıklama |
+| --- | --- | --- |
+| grant_type |gerekli | Belirteç isteğinin türü. JWT kullanan bir istek için değer **urn: IETF: params: OAuth: Grant-Type: JWT-taşıyıcı** olmalıdır. |
+| onay |gerekli | İstekte kullanılan erişim belirtecinin değeri.|
+| client_id |gerekli | Azure AD 'ye kayıt sırasında çağıran hizmete atanan uygulama KIMLIĞI. Azure portal uygulama KIMLIĞINI bulmak için **Active Directory**' i seçin, dizini seçin ve ardından uygulama adını seçin. |
+| client_secret |gerekli | Azure AD 'de çağıran hizmet için kaydedilen anahtar. Bu değer kayıt sırasında belirtilmiştir. |
+| kaynak |gerekli | Alıcı hizmetin uygulama KIMLIĞI URI 'SI (güvenli kaynak). Bu, SAML belirtecinin hedef kitlesi olacak kaynaktır. Azure portal uygulama KIMLIĞI URI 'sini bulmak için **Active Directory** ' i seçin ve dizini seçin. Uygulama adı ' nı seçin, **Tüm ayarlar**' ı seçin ve ardından **Özellikler**' i seçin. |
+| requested_token_use |gerekli | İsteğin nasıl işleneceğini belirtir. Şirket adına, değerin **on_behalf_of** olması gerekir. |
+| requested_token_type | gerekli | İstenen belirtecin türünü belirtir. Değer **urn: IETF: params: OAuth: Token-Type: SAML2** veya **urn: IETF: params: OAuth: Token-Type: saml1 ile** erişilen kaynağın gereksinimlerine bağlı olarak değişebilir. |
+
+Yanıt, UTF8 ve Base64url içinde kodlanmış bir SAML belirteci içeriyor.
+
+- Bir **OBO çağrısından kaynaklanan BIR SAML onaylama işlemi Için SubjectConfirmationData**: hedef uygulamanın **SubjectConfirmationData**'de bir alıcı değeri olması gerekiyorsa, kaynak uygulama yapılandırmasındaki joker karakter olmayan bir yanıt URL 'si olmalıdır.
+- **SubjectConfirmationData düğümü**: bir SAML yanıtının parçası olmadığından, düğüm bir **InResponseTo** özniteliği içeremez. SAML belirtecini alan uygulamanın, bir **InResponseTo** ÖZNITELIĞI olmadan SAML onaylama işlemi kabul edebilmesi gerekir.
+
+- **Onay**: bir OAuth akışında Kullanıcı verilerini IÇEREN bir SAML belirteci almak için onay verilmelidir. İzinler ve yönetici onayı alma hakkında daha fazla bilgi için, [Azure Active Directory v 1.0 uç noktasındaki izinler ve onay](https://docs.microsoft.com/azure/active-directory/azuread-dev/v1-permissions-consent)konusuna bakın.
+
+### <a name="response-with-saml-assertion"></a>SAML onaylama ile yanıt
+
+| Parametre | Açıklama |
+| --- | --- |
+| token_type |Belirteç türü değerini gösterir. Azure AD 'nin desteklediği tek tür **taşıyıcı**. Taşıyıcı belirteçleri hakkında daha fazla bilgi için bkz. [OAuth 2,0 yetkilendirme çerçevesi: taşıyıcı belirteç kullanımı (RFC 6750)](https://www.rfc-editor.org/rfc/rfc6750.txt). |
+| scope |Belirteçte izin verilen erişim kapsamı. |
+| expires_in |Erişim belirtecinin geçerli olduğu sürenin uzunluğu (saniye cinsinden). |
+| expires_on |Erişim belirtecinin süre sonu. Tarih, 1970-01-01T0:0: 0Z UTC 'den sona erme zamanına kadar saniye sayısı olarak gösterilir. Bu değer, önbelleğe alınmış belirteçlerin ömrünü belirlemede kullanılır. |
+| kaynak |Alıcı hizmetin uygulama KIMLIĞI URI 'SI (güvenli kaynak). |
+| access_token |SAML onaylama işlemi döndüren parametre. |
+| refresh_token |Yenileme belirteci. Çağıran hizmet, geçerli SAML onaylama süresi dolduktan sonra başka bir erişim belirteci istemek için bu belirteci kullanabilir. |
+
+- token_type: taşıyıcı
+- expires_in: 3296
+- ext_expires_in: 0
+- expires_on: 1529627844
+- Kaynak `https://api.contoso.com`
+- access_token: \<SAML assertion\>
+- issued_token_type: urn: IETF: params: OAuth: Token-Type: SAML2
+- refresh_token: \<Refresh token\>
+
 
 ## <a name="gaining-consent-for-the-middle-tier-application"></a>Orta katmanlı uygulama için onay hakkı alma
 

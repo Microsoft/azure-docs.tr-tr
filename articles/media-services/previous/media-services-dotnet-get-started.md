@@ -15,12 +15,12 @@ ms.topic: conceptual
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: f0e7f9fa33af43fb846255815d862d4cd3a07e99
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 7edee25c5b52ea1ba1092daa354a4523861bcbb5
+ms.sourcegitcommit: b28e9f4d34abcb6f5ccbf112206926d5434bd0da
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103013984"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107227118"
 ---
 # <a name="get-started-with-delivering-content-on-demand-using-net-sdk"></a>.NET SDK kullanarak isteğe bağlı içerik göndermeye başlama
 
@@ -62,7 +62,7 @@ Resmi tam boyutlu görüntülemek için tıklayın.
 
 [![Isteğe bağlı uygulamalar üzerinde video geliştirmek için Azure Media Services nesne veri modelinde en yaygın olarak kullanılan nesnelerden bazılarını gösteren diyagram.](./media/media-services-dotnet-get-started/media-services-overview-object-model-small.png)](./media/media-services-dotnet-get-started/media-services-overview-object-model.png#lightbox)
 
-Modelin tamamını [buradan](https://media.windows.net/API/$metadata?api-version=2.15) görüntüleyebilirsiniz.  
+Modelin tamamını [buradan](https://m.eet.com/media/1170326/ms-part1.pdf) görüntüleyebilirsiniz.  
 
 ## <a name="start-streaming-endpoints-using-the-azure-portal"></a>Azure portal ile akış uç noktalarını başlatma
 

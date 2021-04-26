@@ -1,18 +1,18 @@
 ---
 title: Azure-Linux sanal makinelerinde RHEL sanal makinelerinde SQL Server için bir kullanılabilirlik grubu dinleyicisi yapılandırma | Microsoft Docs
 description: Azure 'daki RHEL sanal makinelerinde SQL Server bir kullanılabilirlik grubu dinleyicisi ayarlama hakkında bilgi edinin
-ms.service: virtual-machines-linux
+ms.service: virtual-machines-sql
 ms.topic: tutorial
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: jroth
 ms.date: 03/11/2020
-ms.openlocfilehash: 83fde9e957cb2011ce585603e51d331be171bc08
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 5f0b300be2f1cec4ee456065455832a2dc3598be
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97586236"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106449515"
 ---
 # <a name="tutorial-configure-an-availability-group-listener-for-sql-server-on-rhel-virtual-machines-in-azure"></a>Öğretici: Azure 'da RHEL sanal makinelerinde SQL Server için bir kullanılabilirlik grubu dinleyicisi yapılandırma
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]

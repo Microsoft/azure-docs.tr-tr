@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.date: 07/23/2020
 ms.author: cynthn
 ms.subservice: disks
-ms.openlocfilehash: 814824fb6708abaf549bb3de19b4aced4774a244
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 24b1be2ca55b057c887c8782ce7eea1150f143da
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102485767"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762632"
 ---
 # <a name="ephemeral-os-disks-for-azure-vms"></a>Azure VM 'Leri için kısa ömürlü işletim sistemi diskleri
 
@@ -71,7 +71,7 @@ Set-AzVmssStorageProfile -DiffDiskSetting Local -OsDiskCaching ReadOnly
 
 ## <a name="cli"></a>CLI
 
-CLı VM dağıtımı için kısa ömürlü bir disk kullanmak istiyorsanız, `--ephemeral-os-disk` [az VM Create](/cli/azure/vm#az-vm-create) olarak parametresini `true` ve `--os-disk-caching` parametresini olarak ayarlayın `ReadOnly` .
+CLı VM dağıtımı için kısa ömürlü bir disk kullanmak istiyorsanız, `--ephemeral-os-disk` [az VM Create](/cli/azure/vm#az_vm_create) olarak parametresini `true` ve `--os-disk-caching` parametresini olarak ayarlayın `ReadOnly` .
 
 ```azurecli-interactive
 az vm create \
@@ -84,7 +84,7 @@ az vm create \
   --generate-ssh-keys
 ```
 
-Ölçek Kümeleri için, `--ephemeral-os-disk true` [az-VMSS-Create](/cli/azure/vmss#az-vmss-create) parametresini kullanın ve `--os-disk-caching` parametresini olarak ayarlayın `ReadOnly` .
+Ölçek Kümeleri için, `--ephemeral-os-disk true` [az-VMSS-Create](/cli/azure/vmss#az_vmss_create) parametresini kullanın ve `--os-disk-caching` parametresini olarak ayarlayın `ReadOnly` .
 
 ## <a name="portal"></a>Portal
 
@@ -251,4 +251,4 @@ Y: kısa ömürlü diskler şunları desteklemez:
 > 
  
 ## <a name="next-steps"></a>Sonraki adımlar
-[Azure CLI](/cli/azure/vm#az-vm-create)kullanarak kısa ömürlü işletim sistemi diski Ile bir VM oluşturabilirsiniz.
+[Azure CLI](/cli/azure/vm#az_vm_create)kullanarak kısa ömürlü işletim sistemi diski Ile bir VM oluşturabilirsiniz.

@@ -11,10 +11,10 @@ ms.date: 03/18/2021
 ms.custom: devx-track-js
 ms.devlang: javascript
 ms.openlocfilehash: 03192b8a84b78682b53bf3d47e7de7b65eb8bceb
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104726947"
 ---
 # <a name="1---overview-of-adding-search-to-a-website"></a>1-Web sitesine arama eklemeye genel bakış

@@ -4,10 +4,10 @@ description: Azure Event Grid ile kaynak grubu olayları için sunulan özellikl
 ms.topic: conceptual
 ms.date: 02/12/2021
 ms.openlocfilehash: 4c1990909dc555e9e2a6d09538b807ba7e07ce83
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100363228"
 ---
 # <a name="azure-resource-group-as-an-event-grid-source"></a>Azure Kaynak grubu Event Grid kaynak olarak

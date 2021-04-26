@@ -10,12 +10,12 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 09/01/2019
 ms.author: juliako
-ms.openlocfilehash: 657ccafa0e7b7f640122fd6b397b3fa2a7c5f0fc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 319bd408943c560622dc3208a6701417b8ca010c
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98015564"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532911"
 ---
 # <a name="automatically-identify-and-transcribe-multi-language-content"></a>Çok dilli içeriği otomatik olarak tanımlama ve transkripsiyonunu alma
 
@@ -39,7 +39,7 @@ Videonuzu karşıya yüklerken ve dizin oluştururken **Çoklu dil algılama** s
 
 ## <a name="choosing-multilingual-identification-on-indexing-with-api"></a>API ile dizin oluşturma sırasında çok dilli kimlik seçme
 
-API 'yi kullanarak bir videoyu dizinleme veya [yeniden dizinleme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Re-Index-Video?) yaparken, `multi-language detection` parametresindeki seçeneği belirleyin `sourceLanguage` .
+API 'yi kullanarak bir videoyu dizinleme veya [yeniden dizinleme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Re-Index-Video) yaparken, `multi-language detection` parametresindeki seçeneği belirleyin `sourceLanguage` .
 
 ### <a name="model-output"></a>Model çıkışı
 

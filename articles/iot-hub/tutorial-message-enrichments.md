@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 12/20/2019
 ms.author: robinsh
 ms.custom: mqtt, devx-track-azurecli, devx-track-csharp
-ms.openlocfilehash: 7ae85fa2559b8313bd35a761945bff946563e935
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0d6c90120d050b6896161f50332faf447c3ed67b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102199790"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788880"
 ---
 # <a name="tutorial-use-azure-iot-hub-message-enrichments"></a>Öğretici: Azure IoT Hub ileti zenginleştirme kullanın
 
@@ -386,7 +386,7 @@ Bu öğreticide oluşturduğunuz tüm kaynakları kaldırmak için kaynak grubun
 
 ### <a name="use-the-azure-cli-to-clean-up-resources"></a>Azure CLı kullanarak kaynakları Temizleme
 
-Kaynak grubunu kaldırmak için [az group delete](/cli/azure/group#az-group-delete) komutunu kullanın. `$resourceGroup`Bu öğreticinin başlangıcında **Contosoresourcesmsgen** olarak ayarlandığını geri çekin.
+Kaynak grubunu kaldırmak için [az group delete](/cli/azure/group#az_group_delete) komutunu kullanın. `$resourceGroup`Bu öğreticinin başlangıcında **Contosoresourcesmsgen** olarak ayarlandığını geri çekin.
 
 ```azurecli-interactive
 az group delete --name $resourceGroup

@@ -4,17 +4,17 @@ description: Azure SYNAPSE Analytics 'te verileri Azure Data Lake Storage 2. alm
 services: synapse-analytics
 author: djpmsft
 ms.service: synapse-analytics
+ms.subservice: pipeline
 ms.topic: conceptual
-ms.subservice: ''
 ms.date: 04/15/2020
 ms.author: daperlov
 ms.reviewer: jrasnick
-ms.openlocfilehash: fbc4f11b450a645002daedc800d4fed74ed37a3d
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: e3024fe1a8fe524a1deddef23a67d86a600b9394
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98219581"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567613"
 ---
 # <a name="ingest-data-into-azure-data-lake-storage-gen2"></a>Azure Data Lake Storage 2. verileri alma 
 

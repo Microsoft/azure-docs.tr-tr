@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 03/27/2019
 ms.author: jeedes
-ms.openlocfilehash: 9f368a4aebc4d5de38ebbab800241366650633e6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 92553e9d598823ee1b812a4f07480dec380b2490
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97936592"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739431"
 ---
 # <a name="tutorial-configure-zscaler-for-automatic-user-provisioning"></a>Öğretici: otomatik Kullanıcı sağlaması için Zscaler 'ı yapılandırma
 
@@ -76,6 +76,10 @@ Otomatik Kullanıcı sağlamayı yapılandırmadan ve etkinleştirmeden önce, A
 ## <a name="configuring-automatic-user-provisioning-to-zscaler"></a>Zscaler 'ya otomatik Kullanıcı sağlamayı yapılandırma
 
 Bu bölümde Azure AD sağlama hizmeti 'ni, Azure AD 'de Kullanıcı ve/veya grup atamalarını temel alan Zscaler içindeki kullanıcıları ve/veya grupları oluşturmak, güncelleştirmek ve devre dışı bırakmak üzere yapılandırma adımlarında size kılavuzluk eder.
+
+
+> [!NOTE]
+> Zscaler üzerinde bir etki alanı oluşturmak için bir [destek bileti](https://help.zscaler.com/) açın.
 
 > [!TIP]
 > Zscaler [Çoklu oturum açma öğreticisinde](zscaler-tutorial.md)belirtilen yönergeleri Izleyerek Zscaler için SAML tabanlı çoklu oturum açmayı etkinleştirmeyi de tercih edebilirsiniz. Çoklu oturum açma, otomatik Kullanıcı sağlamasından bağımsız olarak yapılandırılabilir, ancak bu iki özellik birbirini karmaşıdirebilirler.

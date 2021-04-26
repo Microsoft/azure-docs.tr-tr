@@ -211,6 +211,8 @@
               href: database/monitoring-with-dmvs.md
             - name: Blokları anlama ve çözümleme
               href: database/understand-resolve-blocking.md
+            - name: Maksimum paralellik derecesini yapılandırın (MAXDOP)
+              href: database/configure-max-degree-of-parallelism.md
             - name: Tanılama telemetrisini günlüğe kaydetme
               href: database/metrics-diagnostic-telemetry-logging-streaming-export-configure.md
             - name: Bellek içi OLTP
@@ -486,8 +488,6 @@
                   href: /azure/developer/java/spring-framework/configure-spring-data-jpa-with-azure-sql-server?toc=/azure/azure-sql/toc.json&bc=/azure/bread/toc.json
                 - name: Spring Data R2DBC ile Java
                   href: /azure/developer/java/spring-framework/configure-spring-data-r2dbc-with-azure-sql-server?toc=/azure/azure-sql/toc.json&bc=/azure/bread/toc.json
-                - name: R
-                  href: database/connect-query-r.md
         - name: Yönetme
           items:
             - name: Yönetim API'si başvurusu
@@ -510,6 +510,8 @@
               href: database/elastic-pool-resource-management.md
             - name: Hiper ölçek performans tanılama
               href: database/hyperscale-performance-diagnostics.md
+            - name: Blok T-SQL CRUD
+              href: database/block-crud-tsql.md
         - name: Güvenlik
           items:
             - name: Sanal ağ veya güvenlik duvarının arkasındaki depolama hesabına yönelik denetim
@@ -686,7 +688,7 @@
                       href: database/saas-multitenantdb-tenant-analytics.md
     - name: Örnekler
       items:
-        - name: Azure CLI’si
+        - name: Azure CLI
           href: database/az-cli-script-samples-content-guide.md?tabs=single-database
         - name: Azure PowerShell
           href: database/powershell-script-content-guide.md?tabs=single-database
@@ -1021,7 +1023,7 @@
           href: managed-instance/log-replay-service-migrate.md
     - name: Örnekler
       items:
-        - name: Azure CLI’si
+        - name: Azure CLI
           href: database/az-cli-script-samples-content-guide.md?tabs=managed-instance
         - name: Azure PowerShell
           href: database/powershell-script-content-guide.md?tabs=managed-instance

@@ -10,13 +10,13 @@ ms.workload: identity
 ms.date: 11/30/2020
 ms.author: ryanwi
 ms.reviewer: stsoneff
-ms.custom: azureday1
-ms.openlocfilehash: 72b1d4fe864c23c0ac065e47d96ab0c78866defa
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: azureday1, devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: a37b189ae98332b2d6c557b6bdfad98266002e9e
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96435850"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833913"
 ---
 # <a name="tutorial-access-azure-storage-from-a-web-app"></a>Öğretici: bir Web uygulamasından Azure depolama erişimi
 

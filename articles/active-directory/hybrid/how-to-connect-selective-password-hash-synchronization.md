@@ -12,12 +12,12 @@ ms.subservice: hybrid
 ms.author: billmath
 ms.reviewer: ''
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 248d5e163eb046edd130d69307a1c553d434b92d
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 5a73f4eba9581965470b95111e6dda1d8014e4cb
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105604677"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167507"
 ---
 # <a name="selective-password-hash-synchronization-configuration-for-azure-ad-connect"></a>Azure AD Connect için seçmeli Parola karması eşitleme yapılandırması
 
@@ -41,7 +41,7 @@ Yapılandırma yönetim çabalarını azaltmak için, önce parola karması eşi
 > Seçmeli parola karma eşitlemesini yapılandırmak, parola geri yazmayı doğrudan etkiler. Azure Active Directory içinde başlatılan parola değişiklikleri veya parola sıfırlamaları, yalnızca kullanıcı parola karması eşitleme kapsamınlarsa şirket içi Active Directory geri yazılır. 
 
 ### <a name="the-admindescription-attribute"></a>AdminDescription özniteliği
-Her iki senaryo da kullanıcıların adminDescription özniteliğini belirli bir değere ayarlamayı kullanır.  Bu kuralların uygulanmasını sağlar ve seçmeli PHS 'yi işler.
+Her iki senaryo da kullanıcıların adminDescription özniteliğini belirli bir değere ayarlamayı kullanır.  Bu kuralların uygulanmasını sağlar ve seçmeli PHS 'yi işler hale getirir.
 
 |Senaryo|adminDescription değeri|
 |-----|-----|
@@ -95,7 +95,7 @@ Bu öznitelik doldurulmamışsa veya değer **Phsfılm** dışında bir öğe is
      ![Kural seçin](media/how-to-connect-selective-password-hash-synchronization/exclude-2.png)
  3. İlk kural, Parola karması eşitlemesini devre dışı bırakacak. Yeni özel kurala şu adı verin: **IÇINDEN ad-Kullanıcı AccountEnabled-kullanıcıları PHS 'Den filtreleyin**.
  Öncelik değerini 100 ' dan daha düşük bir sayı olarak değiştirin (örneğin, **90** veya ortamınızda kullanılabilir en düşük değer olan).
- Onay kutularının **parola eşitlemesini etkinleştirmesine** ve **devre dışı bırakıldığından** emin olun.
+ Onay kutularının **parola eşitlemesini** ve **devre dışı bırakıldığından** emin olun.
  **İleri**’ye tıklayın.
   ![Geleni Düzenle](media/how-to-connect-selective-password-hash-synchronization/exclude-3.png)
  4. **Kapsam filtresi**' nde, **yan tümce Ekle**' ye tıklayın.
@@ -155,7 +155,7 @@ Aşağıdaki adımlarda gerçekleştirilecek eylemlerin özeti aşağıda verilm
 - Active Directory 'de, Parola karması eşitlemede izin vermek istediğiniz kullanıcılarda kapsam özniteliği olarak tanımlanan öznitelik değerini ayarlayın. 
 
 >[!Important]
->Seçmeli Parola karması eşitlemesini yapılandırmak için sağlanan adımlar yalnızca, Active Directory ' de, yalnızca **Phsiçerilen** değeri ile birlikte doldurulan bir **adminDescription** özniteliği olan kullanıcı nesnelerini etkiler.
+>Seçmeli Parola karması eşitlemesini yapılandırmak için sağlanan adımlar yalnızca, Active Directory ile birlikte girilen ve yalnızca **Phsin** değeri olan **adminDescription** özniteliği olan kullanıcı nesnelerini etkiler.
 Bu öznitelik doldurulmamışsa veya değer **Phsdahil** dışında bir öğe ise, bu kurallar Kullanıcı nesnelerine uygulanmaz.
 
 

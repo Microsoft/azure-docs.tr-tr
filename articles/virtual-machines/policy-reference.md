@@ -1,19 +1,19 @@
 ---
 title: Azure sanal makineleri için yerleşik ilke tanımları
 description: Azure sanal makineleri için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 author: cynthn
 ms.author: cynthn
 ms.service: virtual-machines
 ms.subservice: security
 ms.custom: subject-policy-reference
-ms.openlocfilehash: 0824b15266cbc68b47723e0c5f4e2559fe54a24e
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: b3baeba692b5f810add9243dafa25dc945246556
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105034030"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861106"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-virtual-machines"></a>Azure sanal makineler için Azure Ilkesi yerleşik tanımları
 

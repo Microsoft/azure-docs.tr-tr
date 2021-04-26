@@ -7,12 +7,12 @@ ms.author: aymarqui
 ms.date: 02/12/2021
 ms.topic: how-to
 ms.service: digital-twins
-ms.openlocfilehash: 89bd77c30ec52a72087598b86f22e85659fa1b0e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e8bdb843ab6304f2f38228f37d8709e4084ee52e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102203904"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775340"
 ---
 # <a name="integrate-azure-digital-twins-with-azure-signalr-service"></a>Azure Digital TWINS 'i Azure SignalR hizmeti ile tümleştirme
 
@@ -189,7 +189,7 @@ Bu işlem, bir görsel sıcaklık ölçer görüntüleyen örnek uygulamayı ça
 
 Bu makalede oluşturulan kaynaklara artık ihtiyacınız yoksa, bunları silmek için aşağıdaki adımları izleyin. 
 
-Azure Cloud Shell veya yerel Azure CLı kullanarak, [az Group Delete](/cli/azure/group#az-group-delete) komutuyla bir kaynak grubundaki tüm Azure kaynaklarını silebilirsiniz. Kaynak grubunun kaldırılması da kaldırılır...
+Azure Cloud Shell veya yerel Azure CLı kullanarak, [az Group Delete](/cli/azure/group#az_group_delete) komutuyla bir kaynak grubundaki tüm Azure kaynaklarını silebilirsiniz. Kaynak grubunun kaldırılması da kaldırılır...
 * Azure dijital TWINS örneği (uçtan uca öğreticiden)
 * IoT Hub ve Hub cihaz kaydı (uçtan uca öğreticiden)
 * olay Kılavuzu konusu ve ilişkili abonelikler

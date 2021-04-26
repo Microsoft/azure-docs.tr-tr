@@ -1,0 +1,50 @@
+- name: Azure AD doğrulanabilir kimlik bilgileri belgeleri
+  href: index.yml
+- name: Genel Bakış
+  expanded: true
+  items:
+    - name: Doğrulanabilir kimlik bilgilerine Azure Active Directory giriş
+      href: decentralized-identifier-overview.md
+- name: Öğreticiler
+  expanded: true
+  items:
+    - name: Doğrulanabilir kimlik bilgileriyle çalışmaya başlama
+      href: get-started-verifiable-credentials.md
+    - name: Kiracınızda doğrulanabilen kimlik bilgilerini yapılandırma
+      items:
+        - name: 1-kendi Azure AD 'niz üzerinde doğrulanabilir kimlik bilgileri veren ayarlama
+          href: enable-your-tenant-verifiable-credentials.md
+        - name: 2-doğrulanabilir kimlik bilgileri vereninizi kendi Azure AD 'nize bağlama
+          href: issue-verify-verifiable-credentials-your-tenant.md
+- name: Kavramlar
+  expanded: true
+  items:
+    - name: OpenID Connect protokol ayrıntıları
+      href: issuer-openid.md
+- name: Nasıl yapılır kılavuzları
+  expanded: true
+  items:
+    - name: Kimlik bilgilerinizi özelleştirme
+      href: credential-design.md
+    - name: Kimlik bilgisi iptalini Yönet
+      href: how-to-issuer-revoke.md
+    - name: Etki alanınızı kendi uygulamanıza bağlayın
+      href: how-to-dnsbind.md
+    - name: Doğrulanabilir kimlik bilgilerini devre dışı
+      href: how-to-opt-out.md
+- name: Örnekler
+  expanded: true
+  items:
+    - name: Örnek düğüm uygulaması
+      href: 'https://github.com/Azure-Samples/active-directory-verifiable-credentials'
+    - name: Örnek veren
+      href: 'https://didvc-issuer-sample.azurewebsites.net/'
+    - name: Örnek Doğrulayıcı
+      href: 'https://didvc-verifier-sample.azurewebsites.net/'
+- name: Kaynaklar
+  expanded: true
+  items:
+    - name: SSS
+      href: verifiable-credentials-faq.md
+    - name: Geliştirici hesabı oluşturma
+      href: how-to-create-a-free-developer-account.md

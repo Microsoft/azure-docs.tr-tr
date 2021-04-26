@@ -7,13 +7,13 @@ ms.service: app-service
 ms.topic: include
 ms.date: 04/22/2020
 ms.author: cephalin
-ms.custom: include file
-ms.openlocfilehash: efe46c9a4e229c84f38a7643b880e5c498961104
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: include file, devx-track-azurecli
+ms.openlocfilehash: 727e49e9086e5800fbbcb4e42a37a8b1a0c1c4b7
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102244638"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107512845"
 ---
 App Service planında bir [Web uygulaması](../articles/app-service/overview.md#app-service-on-linux) oluşturun `myAppServicePlan` . 
 
@@ -44,7 +44,7 @@ Local git is configured with url of 'https://<username>@<app-name>.scm.azurewebs
 }
 </pre>
 
-Bir Linux kapsayıcısında, Git dağıtımı etkin boş bir web uygulaması oluşturdunuz.
+Bir Linux kapsayıcısında boş bir Web uygulaması oluşturdunuz ve git dağıtımı etkin.™
 
 > [!NOTE]
 > Git uzak URL’si `deploymentLocalGitUrl` özelliği içinde `https://<username>@<app-name>.scm.azurewebsites.net/<app-name>.git` biçiminde gösterilir. Bu URL’ye daha sonra ihtiyacınız olacağı için URL’yi kaydedin.

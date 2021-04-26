@@ -1,5 +1,5 @@
 ---
-title: Msv2-Series (Önizleme)-Azure sanal makineleri
+title: Msv2/Mdsv2 orta bellek serisi-Azure sanal makineleri
 description: Msv2 serisi VM 'Ler için Özellikler.
 author: ayshakeen
 ms.service: virtual-machines
@@ -7,18 +7,14 @@ ms.subservice: vm-sizes-memory
 ms.topic: conceptual
 ms.date: 04/07/2020
 ms.author: jushiman
-ms.openlocfilehash: a7f4757467523837423d52998eb6b8204090e627
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d85623184ad52fb0d4acd4c49d08badfaf886b30
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102562580"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728239"
 ---
-# <a name="msv2-and-mdsv2-series-medium-memory-preview"></a>Msv2 ve Mdsv2 serisi orta bellek (Önizleme)
-
-
-> [!IMPORTANT]
-> Formu doldurun için önizlemeye katın **https://aka.ms/Mv2MedMemoryPreview** .  
+# <a name="msv2-and-mdsv2-series-medium-memory"></a>Msv2 ve Mdsv2 serisi orta bellek
 
 Msv2 ve Mdsv2 orta bellek sanal makinesi serisi, 2,7 GHz ve 4,0 GHz tek çekirdekli Turbo sıklığının tüm çekirdek temel sıklığı ile Intel® Xeon® Platinum 8280 (Cascade Lake) işlemcisini Özellikler. Bu VM 'lerle, müşteriler yerel disk ve disksiz seçeneklerle daha fazla esneklik elde etmenizi sağlar. Müşteriler ayrıca 4 TiB bellek ile 192 vCPU 'ya kadar daha fazla CPU ve bellek içeren bir dizi yeni yalıtılmış VM boyutuna erişebilir. 
 

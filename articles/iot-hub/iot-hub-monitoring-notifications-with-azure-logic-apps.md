@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 07/18/2019
 ms.author: robinsh
-ms.openlocfilehash: cd14ff0688f4230aeedac748ca4b32609bdd2938
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 74724357dea9cd6c8c89a11a9eeb3d1b2933b790
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92490331"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107564950"
 ---
 # <a name="iot-remote-monitoring-and-notifications-with-azure-logic-apps-connecting-your-iot-hub-and-mailbox"></a>IoT Hub 'ınızı ve posta kutunuzu bağlama Azure Logic Apps IoT uzaktan izleme ve bildirimler
 
@@ -24,11 +24,7 @@ ms.locfileid: "92490331"
 
 [Azure Logic Apps](../logic-apps/index.yml) , şirket içi ve bulut hizmetlerinde, bir veya daha fazla kuruluşta ve çeşitli protokollerde iş akışlarını düzenlemenize yardımcı olabilir. Mantıksal uygulama tetikleyici ile başlar ve ardından koşullar ve yineleyiciler gibi yerleşik denetimler kullanılarak sıralanbilen bir veya daha fazla eylem gelir. Bu esneklik, IoT izleme senaryoları için ideal bir IoT çözümü Logic Apps sağlar. Örneğin, bir IoT Hub uç noktasındaki bir cihazdan telemetri verilerinin varışı, bir Azure Storage blob 'undaki verileri ambara yönelik mantıksal uygulama iş akışlarını başlatabilir, veri anormallarını uyarmak için e-posta uyarıları gönderebilir, bir cihaz hata bildirirse bir teknisyen ziyaret edebilir ve bu şekilde devam eder.
 
-## <a name="what-you-learn"></a>Öğrenecekleriniz
-
-IoT Hub 'ınızı ve posta kutunuzu, sıcaklık izleme ve bildirimler için bağlayan bir mantıksal uygulama oluşturmayı öğreneceksiniz.
-
-Cihazınızda çalışan istemci kodu, `temperatureAlert` IoT Hub 'ınıza gönderdiği her telemetri iletisindeki bir uygulama özelliği ayarlar. İstemci kodu 30 C üzerinde bir sıcaklık algıladığında, bu özelliği olarak ayarlar `true` ; Aksi takdirde, özelliğini olarak ayarlar `false` .
+Bu makalede, IoT Hub 'ınızı ve posta kutunuzun sıcaklık izleme ve bildirimler için bağlanacağı bir mantıksal uygulama oluşturmayı öğreneceksiniz. Cihazınızda çalışan istemci kodu, `temperatureAlert` IoT Hub 'ınıza gönderdiği her telemetri iletisindeki bir uygulama özelliği ayarlar. İstemci kodu 30 C üzerinde bir sıcaklık algıladığında, bu özelliği olarak ayarlar `true` ; Aksi takdirde, özelliğini olarak ayarlar `false` .
 
 IoT Hub 'ınıza ulaşan iletiler, gövdede bulunan telemetri verileri ve uygulama özelliklerinde bulunan özelliği ile şuna benzer şekilde görünür `temperatureAlert` (sistem özellikleri gösterilmez):
 
@@ -50,15 +46,9 @@ IoT Hub ileti biçimi hakkında daha fazla bilgi edinmek için bkz. [IoT Hub Ile
 
 Bu konu başlığında, `temperatureAlert` özelliğin Service Bus uç noktasına olduğu iletileri göndermek Için IoT Hub 'ınızda yönlendirme ayarlarsınız `true` . Ardından Service Bus uç noktasına ulaşan iletilerde tetiklenen bir mantıksal uygulama ayarlarsınız ve size bir e-posta bildirimi gönderir.
 
-## <a name="what-you-do"></a>Yapabilecekleriniz
+## <a name="prerequisites"></a>Önkoşullar
 
-* Service Bus bir ad alanı oluşturun ve buna bir Service Bus sırası ekleyin.
-* Service Bus kuyruğuna sıcaklık uyarısı içeren iletileri yönlendirmek için IoT Hub 'ınıza özel bir uç nokta ve yönlendirme kuralı ekleyin.
-* Service Bus kuyruğunuzdan iletileri tüketmek ve istenen alıcıya bildirim e-postaları göndermek için bir mantıksal uygulama oluşturun, yapılandırın ve test edin.
-
-## <a name="what-you-need"></a>Gerekenler
-
-* [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun; Örneğin, [node.jsRaspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md). Bu, aşağıdaki gereksinimleri kapsar:
+* [Raspberry PI Çevrimiçi simülatör](iot-hub-raspberry-pi-web-simulator-get-started.md) öğreticisini veya cihaz öğreticilerinin birini doldurun. Örneğin, [node.jsIle Raspberry Pi ](iot-hub-raspberry-pi-kit-node-get-started.md) 'ye gidebilir veya [Telemetriyi gönder](quickstart-send-telemetry-dotnet.md) hızlı başlangıçlarından birine gidebilirsiniz. Bu makaleler aşağıdaki gereksinimleri kapsar:
 
   * Etkin bir Azure aboneliği.
   * Aboneliğiniz kapsamındaki bir Azure IoT Hub 'ı.

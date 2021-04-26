@@ -4,22 +4,20 @@ description: Azure Izleyici güvenlik temeli, Azure Güvenlik kıyaslaması 'nda
 author: msmbaldwin
 ms.service: azure-monitor
 ms.topic: conceptual
-ms.date: 02/17/2021
+ms.date: 03/30/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: c697180ed9a4b020da392a33d7ce34f6727ec7b3
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: f002c7196b864d4a04beda1124d0519af612b716
+ms.sourcegitcommit: 950e98d5b3e9984b884673e59e0d2c9aaeabb5bb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105568214"
+ms.lasthandoff: 04/18/2021
+ms.locfileid: "107600242"
 ---
 # <a name="azure-security-baseline-for-azure-monitor"></a>Azure Izleyici için Azure Güvenlik temeli
 
-Bu güvenlik temeli, [Azure Güvenlik kıyaslama sürümü 1,0](../security/benchmarks/overview-v1.md) ' dan Azure izleyici 'ye kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar.
-İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve Azure izleyici için geçerli olan ilgili kılavuza göre gruplandırılır. Azure Izleyici için geçerli olmayan **denetimler** dışlandı. 
+Bu güvenlik temeli, [Azure Güvenlik kıyaslama sürümü 1.0](../security/benchmarks/overview-v1.md) 'Dan Azure izleyici 'ye kılavuzluk uygular. Azure Güvenlik Karşılaştırması, Azure üzerindeki bulut çözümlerinizin güvenliğini sağlamaya yönelik öneriler sunar. İçerik, Azure Güvenlik kıyaslaması tarafından tanımlanan **güvenlik denetimlerine** ve Azure izleyici için geçerli olan ilgili kılavuza göre gruplandırılır. **Denetimler** Azure izleyici için geçerli değildir veya Microsoft 'un sorumluluğunu Microsoft 'un dışında tutulur.
 
- 
 Azure Izleyici 'nin Azure Güvenlik kıyaslaması ile tamamen nasıl eşlendiğini görmek için, [tam Azure izleyici güvenlik temeli eşleme dosyasına](https://github.com/MicrosoftDocs/SecurityBenchmarks/tree/master/Azure%20Offer%20Security%20Baselines)bakın.
 
 ## <a name="network-security"></a>Ağ Güvenliği
@@ -36,9 +34,9 @@ Sanal ağ kuralları, Azure Izleyicisini yalnızca bir sanal ağ içindeki seçi
 
 Bilgisayarların internet 'e bağlanmasına gerek kalmadan internet 'e doğrudan bağlanamamış bilgisayarlar adına, Azure Izleyici 'deki bir Log Analytics çalışma alanına veri göndermek için Log Analytics ağ geçidini kullanın. 
 
-- [Azure Izleyici için özel bağlantı ayarlama](./logs/private-link-security.md)
+- [Azure Izleyici için özel bağlantı ayarlama](/azure/azure-monitor/platform/private-link-security)
 
-- [Azure Izleyici 'de Log Analytics ağ geçidini kullanarak internet erişimi olmadan bilgisayarları bağlama](./agents/gateway.md)
+- [Azure Izleyici 'de Log Analytics ağ geçidini kullanarak internet erişimi olmadan bilgisayarları bağlama](/azure/azure-monitor/platform/gateway)
 
 **Sorumluluk**: Müşteri
 
@@ -50,9 +48,9 @@ Bilgisayarların internet 'e bağlanmasına gerek kalmadan internet 'e doğrudan
 
 Azure Izleyici 'yi özel bağlantıyla birlikte kullanırken, ' özel uç nokta tarafından işlenen veriler (ın/OUT) ' gibi ağ günlüğüne erişim sahibi olursunuz.
 
-- [Azure Izleyici aracıları için ağ gereksinimleri](./agents/log-analytics-agent.md#network-requirements)
+- [Azure Izleyici aracıları için ağ gereksinimleri](/azure/azure-monitor/platform/log-analytics-agent#network-requirements)
 
-- [Azure Izleyici 'de Log Analytics ağ geçidini kullanarak internet erişimi olmadan bilgisayarları bağlama](./agents/gateway.md)
+- [Azure Izleyici 'de Log Analytics ağ geçidini kullanarak internet erişimi olmadan bilgisayarları bağlama](/azure/azure-monitor/platform/gateway)
 
 - [Ağ güvenlik grubu akış günlüklerini etkinleştirme](../network-watcher/network-watcher-nsg-flow-logging-portal.md)
 
@@ -78,11 +76,11 @@ Azure Izleyici 'yi özel bağlantıyla birlikte kullanırken, ' özel uç nokta 
 
 **Kılavuz**: Azure Izleyici, Azure çekirdek hizmetleri 'nin bir parçasıdır ve ayrı ayrı hizmet olarak dağıtılamaz. Azure izleyici Aracısı ve Application Insights SDK dahil olmak üzere Azure Izleyici bileşenleri kaynaklarla birlikte dağıtılabilir ve bu, bu kaynakların güvenlik duruşunu etkileyebilir.
 
-- [Azure Izleyici aracıları için ağ gereksinimleri](./agents/log-analytics-agent.md#network-requirements)
+- [Azure Izleyici aracıları için ağ gereksinimleri](/azure/azure-monitor/platform/log-analytics-agent#network-requirements)
 
-- [Azure Izleyici 'de Log Analytics ağ geçidini kullanarak internet erişimi olmadan bilgisayarları bağlama](./agents/gateway.md) 
+- [Azure Izleyici 'de Log Analytics ağ geçidini kullanarak internet erişimi olmadan bilgisayarları bağlama](/azure/azure-monitor/platform/gateway) 
 
-- [Bkz. Application Insights kullanmaya başlama](./app/app-insights-overview.md#get-started)
+- [Bkz. Application Insights kullanmaya başlama](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview#get-started)
 
 - [Kullanılabilirlik Web testlerini ayarlama](app/monitor-web-app-availability.md)
 
@@ -94,9 +92,9 @@ Azure Izleyici 'yi özel bağlantıyla birlikte kullanırken, ' özel uç nokta 
 
 **Rehberlik**: kaynak yapılandırmasını Izlemek ve Azure izleyici ile ilgili ağ kaynaklarınızda yapılan değişiklikleri algılamak Için Azure etkinlik günlüğünü kullanın. Bu kritik ağ kaynaklarında yapılan değişiklikler gerçekleşirken tetiklenecek Azure Izleyici içinde uyarılar oluşturun.
 
-- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](./essentials/activity-log.md#view-the-activity-log)
+- [Azure etkinlik günlüğü olaylarını görüntüleme ve alma](/azure/azure-monitor/platform/activity-log#view-the-activity-log)
 
-- [Azure Izleyici 'de uyarı oluşturma](./alerts/alerts-activity-log.md)
+- [Azure Izleyici 'de uyarı oluşturma](/azure/azure-monitor/platform/alerts-activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -112,9 +110,9 @@ Azure Izleyici 'yi özel bağlantıyla birlikte kullanırken, ' özel uç nokta 
 
 Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri etkinleştirebilir ve bu verileri ayarlayabilirsiniz.
 
-- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](./essentials/diagnostic-settings.md)
+- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](/azure/azure-monitor/platform/diagnostic-settings)
 
-- [Azure Izleyici ile Azure sanal makine iç konak günlüklerini toplama](./vm/quick-collect-azurevm.md)
+- [Azure Izleyici ile Azure sanal makine iç konak günlüklerini toplama](/azure/azure-monitor/learn/quick-collect-azurevm)
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
@@ -132,9 +130,9 @@ Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri et
 
 **Kılavuz**: Azure Izleyici, etkinlik günlüklerini kullanır, etkinlik günlüğü otomatik olarak etkinleştirilir ve Azure izleyici kaynakları üzerinde gerçekleştirilen işlem (örneğin, işlem ne zaman, işlem oluştuğunda, işlem durumu ve diğer yararlı denetim bilgileri) kaydedilir. 
 
-- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](./essentials/diagnostic-settings.md)
+- [Azure Izleyici ile platform günlükleri ve ölçümleri toplama](/azure/azure-monitor/platform/diagnostic-settings)
 
-- [Azure 'da günlüğe kaydetme ve farklı günlük türlerini anlama](./essentials/platform-logs-overview.md)
+- [Azure 'da günlüğe kaydetme ve farklı günlük türlerini anlama](/azure/azure-monitor/platform/platform-logs-overview)
 
 **Sorumluluk**: Müşteri
 
@@ -148,9 +146,9 @@ Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri et
 
 **Kılavuz**: Azure izleyici 'de kuruluşunuzun uyumluluk düzenlemelerine göre Log Analytics çalışma alanı saklama süresini ayarlayın. Günlüklerinizin uzun süreli/arşiv depolaması için Azure depolama hesaplarını kullanın.
 
-- [Log Analytics veri saklama süresini değiştirme](./logs/manage-cost-storage.md#change-the-data-retention-period)
+- [Log Analytics veri saklama süresini değiştirme](/azure/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period)
 
-- [Azure depolama hesabı günlükleri için bekletme ilkesini yapılandırma](../storage/common/manage-storage-analytics-logs.md#configure-logging)
+- [Azure depolama hesabı günlükleri için bekletme ilkesini yapılandırma](/azure/storage/common/storage-monitor-storage-account#configure-logging)
 
 **Sorumluluk**: Müşteri
 
@@ -164,9 +162,9 @@ Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri et
 
 - [Azure Sentinel 'i ekleme](../sentinel/quickstart-onboard.md)
 
-- [Log Analytics sorguları ile çalışmaya başlama](./logs/log-analytics-tutorial.md)
+- [Log Analytics sorguları ile çalışmaya başlama](/azure/azure-monitor/log-query/log-analytics-tutorial)
 
-- [Azure Izleyici 'de özel sorgular gerçekleştirme](./logs/get-started-queries.md)
+- [Azure Izleyici 'de özel sorgular gerçekleştirme](/azure/azure-monitor/log-query/get-started-queries)
 
 **Sorumluluk**: Müşteri
 
@@ -180,7 +178,7 @@ Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri et
 
 - [Azure Güvenlik Merkezi 'nde uyarıları yönetme](../security-center/security-center-managing-and-responding-alerts.md)
 
-- [Log Analytics günlük verilerinde uyarı alma](./alerts/tutorial-response.md)
+- [Log Analytics günlük verilerinde uyarı alma](/azure/azure-monitor/learn/tutorial-response)
 
 **Sorumluluk**: Müşteri
 
@@ -194,9 +192,9 @@ Alternatif olarak, Azure Sentinel 'e veya bir üçüncü taraf SıEM 'ye veri et
 
 **Kılavuz**: Azure rol tabanlı erişim denetimi (Azure RBAC), Azure kaynaklarına erişimi rol atamaları aracılığıyla yönetmenizi sağlar. Bu rolleri kullanıcılara atayabilir, hizmet sorumlularını ve yönetilen kimlikleri gruplara atayabilirsiniz. Belirli kaynaklar için önceden tanımlanmış yerleşik roller vardır ve Azure CLI, Azure PowerShell veya Azure portal gibi araçlardan yararlanarak bu rollerin envanteri çıkarılabilir ve bunlar sorgulanabilir.
 
-- [PowerShell ile Azure Active Directory (Azure AD) içinde dizin rolü alma](/powershell/module/azuread/get-azureaddirectoryrole?amp;preserve-view=true&view=azureadps-2.0)
+- [PowerShell ile Azure Active Directory (Azure AD) içinde dizin rolü alma](/powershell/module/azuread/get-azureaddirectoryrole)
 
-- [Azure AD 'de PowerShell ile bir dizin rolünün üyelerini alma](/powershell/module/azuread/get-azureaddirectoryrolemember?amp;preserve-view=true&view=azureadps-2.0)
+- [Azure AD 'de PowerShell ile bir dizin rolünün üyelerini alma](/powershell/module/azuread/get-azureaddirectoryrolemember)
 
 **Sorumluluk**: Müşteri
 
@@ -284,7 +282,7 @@ Ayrıca, Microsoft Hizmetleri için ayrıcalıklı rolleri Privileged Identity M
 
 **Rehberlik**: Azure Active Directory (Azure AD) eski hesapların keşfedilmesine yardımcı olmak için Günlükler sağlar. Ayrıca, grup üyeliklerini etkin bir şekilde yönetmek, kurumsal uygulamalara erişmek ve rol atamaları için Azure kimlik erişimi Incelemelerini kullanın. Yalnızca doğru kullanıcıların erişmeye devam ettiğinden emin olmak için, Kullanıcı erişimi düzenli olarak incelenebilir.
 
-- [Azure AD raporlamayı anlama](../active-directory/reports-monitoring/index.yml)
+- [Azure AD raporlamayı anlama](/azure/active-directory/reports-monitoring/)
 
 - [Azure kimlik erişimi Incelemelerini kullanma](../active-directory/governance/access-reviews-overview.md)
 
@@ -296,7 +294,7 @@ Ayrıca, Microsoft Hizmetleri için ayrıcalıklı rolleri Privileged Identity M
 
 **Rehberlik**: herhangi bir SIEM/izleme aracıyla tümleştirmenize imkan tanıyan Azure Active Directory (Azure AD) oturum açma etkinliğine, denetim ve risk olay günlüğü kaynaklarına erişiminiz vardır. Bu işlemi, Azure AD Kullanıcı hesapları için Tanılama ayarları oluşturarak ve Log Analytics çalışma alanına denetim günlüklerini ve oturum açma günlüklerini göndererek kolaylaştırabilirsiniz. İstenen uyarıları Log Analytics çalışma alanı içinde yapılandırabilirsiniz.
 
-- [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](../active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics.md)
+- [Azure Etkinlik Günlüklerini Azure İzleyici ile tümleştirme](/azure/active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics)
 
 **Sorumluluk**: Müşteri
 
@@ -326,7 +324,7 @@ Ayrıca, Microsoft Hizmetleri için ayrıcalıklı rolleri Privileged Identity M
 
 - [Etiketler oluşturma ve kullanma](../azure-resource-manager/management/tag-resources.md)
 
-- [Azure İzleyici'deki günlük verilerine ve çalışma alanlarına erişimi yönetme](./logs/manage-access.md)
+- [Azure İzleyici'deki günlük verilerine ve çalışma alanlarına erişimi yönetme](/azure/azure-monitor/platform/manage-access)
 
 **Sorumluluk**: Müşteri
 
@@ -352,7 +350,7 @@ Ayrıca, Microsoft Hizmetleri için ayrıcalıklı rolleri Privileged Identity M
 
 Application Insights ve Log Analytics her ikisi de TLS 1,1 ve TLS 1,0 verilerinin belirtilmesine izin verecek şekilde devam eder. İstemci tarafında yapılandırılarak, veriler TLS 1,2 ile kısıtlanabilir.
 
-- [TLS 1,2 kullanarak verileri güvenli bir şekilde gönderme](./logs/data-security.md#sending-data-securely-using-tls-12)
+- [TLS 1,2 kullanarak verileri güvenli bir şekilde gönderme](/azure/azure-monitor/platform/data-security#sending-data-securely-using-tls-12)
 
 **Sorumluluk**: Paylaşılan
 
@@ -373,7 +371,7 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure izleyici erişimini yönetmek için Azure rol tabanlı erişim denetimi 'NI (RBAC) kullanın.
 
-- [Azure Izleyici 'de roller, izinler ve güvenlik](./roles-permissions-security.md)
+- [Azure Izleyici 'de roller, izinler ve güvenlik](/azure/azure-monitor/platform/roles-permissions-security)
 
 - [Azure RBAC 'yi yapılandırma](../role-based-access-control/role-assignments-portal.md)
 
@@ -385,9 +383,9 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure izleyici, tüm veri ve kaydedilmiş sorguların, Microsoft tarafından yönetilen anahtarlar (MMK) kullanılarak geri kalanında şifrelenmesini sağlar. Azure Izleyici Ayrıca, Azure Key Vault depolanan ve sistem tarafından atanan yönetilen kimlik doğrulaması kullanan depolama tarafından erişilen kendi anahtarınızı kullanarak şifreleme için bir seçenek sağlar. Bu müşteri tarafından yönetilen anahtar (CMK) yazılım ya da donanım HSM korumalı olabilir.
 
-- [Azure Izleyici müşteri tarafından yönetilen anahtarlar](./logs/customer-managed-keys.md)
+- [Azure Izleyici müşteri tarafından yönetilen anahtarlar](/azure/azure-monitor/platform/customer-managed-keys)
 
-- [Log Analytics veri güvenliği](./logs/data-security.md)
+- [Log Analytics veri güvenliği](/azure/azure-monitor/platform/data-security)
 
 - [Application Insights'da veri toplama, saklama ve depolama](app/data-retention-privacy.md)
 
@@ -401,7 +399,7 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure izleyici ve ilgili kaynaklarda değişiklik gerçekleşirken uyarı oluşturmak Için Azure etkinlik günlüğü Ile Azure izleyici 'yi kullanın.
 
-- [Azure etkinlik günlüğü olayları için uyarı oluşturma](./alerts/alerts-activity-log.md)
+- [Azure etkinlik günlüğü olayları için uyarı oluşturma](/azure/azure-monitor/platform/alerts-activity-log)
 
 **Sorumluluk**: Müşteri
 
@@ -431,13 +429,13 @@ Microsoft tarafından yönetilen temel alınan platform için, Microsoft tüm m�
 
 **Kılavuz**: Azure CLI kullanarak aboneliklerinizde Azure izleyici kaynaklarını sorgulama ve bulma. Kiracınızda uygun (okuma) izinlere sahip olun ve aboneliklerinizdeki kaynakların yanı sıra tüm Azure aboneliklerini numaralandırın.
 
-- [Azure Izleyici CLı](/cli/azure/monitor)
+- [Azure Izleyici CLı](https://docs.microsoft.com/cli/azure/monitor?view=azure-cli-latest&amp;preserve-view=true)
 
-- [Azure aboneliklerinizi görüntüleme](/powershell/module/az.accounts/get-azsubscription?preserve-view=true&view=azps-4.8.0)
+- [Azure aboneliklerinizi görüntüleme](https://docs.microsoft.com/powershell/module/az.accounts/get-azsubscription?view=azps-4.8.0&amp;preserve-view=true)
 
 - [Azure RBAC 'yi anlama](../role-based-access-control/overview.md)
 
-- [Azure Izleyici 'de roller, izinler ve güvenlik](./roles-permissions-security.md)
+- [Azure Izleyici 'de roller, izinler ve güvenlik](/azure/azure-monitor/platform/roles-permissions-security)
 
 **Sorumluluk**: Müşteri
 
@@ -493,7 +491,7 @@ Abonelikler içindeki kaynakları sorgulamak ve bulmak için Azure Kaynak Grafı
 
 **Rehberlik**: envanterin düzenli olarak mutabakatını yapın ve Azure izleyici ile ilgili kaynakların, aboneliğin zamanında silindiğinden emin olun.  
 
-- [Azure Log Analytics çalışma alanını sil](./logs/delete-workspace.md)
+- [Azure Log Analytics çalışma alanını sil](/azure/azure-monitor/platform/delete-workspace)
 
 **Sorumluluk**: Müşteri
 
@@ -505,7 +503,7 @@ Abonelikler içindeki kaynakları sorgulamak ve bulmak için Azure Kaynak Grafı
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](../governance/policy/samples/built-in-policies.md#general)
+- [Azure Ilkesiyle belirli bir kaynak türünü reddetme](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#general)
 
 **Sorumluluk**: Müşteri
 
@@ -535,9 +533,9 @@ Azure Güvenlik Merkezi 'nin önerilerini Azure kaynaklarınız için güvenli b
 
 Canlı akış APM özellikleri kullanıyorsanız, izleme anahtarına ek olarak kanalı gizli bir API anahtarı ile güvenli hale getirin.
 
-- [Güvenli APM Canlı Ölçüm Akışı](./app/live-stream.md#secure-the-control-channel)
+- [Güvenli APM Canlı Ölçüm Akışı](https://docs.microsoft.com/azure/azure-monitor/app/live-stream#secure-the-control-channel)
 
-- [Kullanılabilir Azure Ilkesi diğer adlarını görüntüleme](/powershell/module/az.resources/get-azpolicyalias?amp;preserve-view=true&view=azps-4.8.0)
+- [Kullanılabilir Azure Ilkesi diğer adlarını görüntüleme](https://docs.microsoft.com/powershell/module/az.resources/get-azpolicyalias?view=azps-4.8.0&amp;preserve-view=true)
 
 - [Öğretici: uyumluluğu zorlamak için ilke oluşturma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
@@ -567,7 +565,7 @@ Canlı akış APM özellikleri kullanıyorsanız, izleme anahtarına ek olarak k
 
 **Kılavuz**: özel Azure ilkeleri ve Azure Resource Manager şablonları gibi kodunuzu güvenli bir şekilde depolamak ve yönetmek Için Azure DevOps kullanın. Azure DevOps 'da yönettiğiniz kaynaklara erişmek için, Azure DevOps ile tümleşikse veya TFS ile tümleşikse Active Directory belirli kullanıcılara, yerleşik güvenlik gruplarına veya Azure Active Directory (Azure AD) tanımlanmış gruplara izin verebilir veya vermeyebilirsiniz.
 
-- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?amp;preserve-view=true&view=azure-devops)
+- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow)
 
 - [Azure DevOps 'da izinler ve gruplar hakkında](/azure/devops/organizations/security/about-permissions)
 
@@ -581,7 +579,7 @@ Canlı akış APM özellikleri kullanıyorsanız, izleme anahtarına ek olarak k
 
 - [Azure İlkesi'ni yapılandırma ve yönetme](../governance/policy/tutorials/create-and-manage.md)
 
-- [Azure Ilkesi diğer adları](../governance/policy/concepts/definition-structure.md#aliases)
+- [Azure Ilkesi diğer adları](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#aliases)
 
 **Sorumluluk**: Müşteri
 
@@ -607,7 +605,7 @@ Canlı akış APM özellikleri kullanıyorsanız, izleme anahtarına ek olarak k
 
 - [Key Vault oluşturma](../key-vault/secrets/quick-create-portal.md)
 
-- [Yönetilen kimlik ile Key Vault kimlik doğrulaması sağlama](/azure/key-vault/general/assign-access-policy-portal)
+- [Yönetilen kimlik ile Key Vault kimlik doğrulaması sağlama](/azure/active-directory/managed-identities-azure-resources/tutorial-windows-vm-access-nonaad)
 
 **Sorumluluk**: Müşteri
 
@@ -661,7 +659,7 @@ Depolama hesaplarına yüklenen kötü amaçlı yazılımları algılamak için 
 
 **Kılavuz**: Azure izleyici ve ilgili kaynakları Azure izleyici ve ilgili yapılandırma için yedekleme olarak kullanılabilecek bir JAVASCRIPT nesne GÖSTERIMI (JSON) şablonunda dışarı aktarmak için Azure Resource Manager kullanın.  Yedekleme betiklerini otomatik olarak çalıştırmak için Azure Otomasyonu 'nu kullanın. 
 
-- [Azure Resource Manager şablonları kullanarak Log Analytics çalışma alanını yönetme](./logs/resource-manager-workspace.md)
+- [Azure Resource Manager şablonları kullanarak Log Analytics çalışma alanını yönetme](/azure/azure-monitor/samples/resource-manager-workspace)
 
 - [Azure portal bir şablona tek ve çoklu kaynak verme](../azure-resource-manager/templates/export-template-portal.md)
 
@@ -675,11 +673,11 @@ Depolama hesaplarına yüklenen kötü amaçlı yazılımları algılamak için 
 
 **Kılavuz**: Azure izleyici ve ilgili kaynakları Azure izleyici ve ilgili yapılandırma için yedekleme olarak kullanılabilecek bir JAVASCRIPT nesne GÖSTERIMI (JSON) şablonunda dışarı aktarmak için Azure Resource Manager kullanın. Azure Izleyici ile ilgili kaynaklar müşteri tarafından yönetilen anahtarlar kullanıyorsa, müşteri tarafından yönetilen anahtarları Azure Key Vault içinde yedekleyin.
 
-- [Azure Resource Manager şablonları kullanarak Log Analytics çalışma alanını yönetme](./logs/resource-manager-workspace.md)
+- [Azure Resource Manager şablonları kullanarak Log Analytics çalışma alanını yönetme](/azure/azure-monitor/platform/template-workspace-configuration)
 
 - [Azure portal bir şablona tek ve çoklu kaynak verme](../azure-resource-manager/templates/export-template-portal.md)
 
-- [Azure 'da Anahtar Kasası anahtarlarını yedekleme](/powershell/module/az.keyvault/backup-azkeyvaultkey?amp;preserve-view=true&view=azps-4.8.0)
+- [Azure 'da Anahtar Kasası anahtarlarını yedekleme](/powershell/module/az.keyvault/backup-azkeyvaultkey)
 
 **Sorumluluk**: Müşteri
 
@@ -689,9 +687,9 @@ Depolama hesaplarına yüklenen kötü amaçlı yazılımları algılamak için 
 
 **Rehberlik**: Azure Resource Manager desteklenen şablon dosyalarını kullanarak düzenli aralıklarla geri yükleme gerçekleştirme olanağı sağlayın. Yedeklenen müşteri tarafından yönetilen anahtarların test geri yüklemesi.
 
-- [Azure Resource Manager şablonları kullanarak Log Analytics çalışma alanını yönetme](./logs/resource-manager-workspace.md)
+- [Azure Resource Manager şablonları kullanarak Log Analytics çalışma alanını yönetme](/azure/azure-monitor/samples/resource-manager-workspace)
 
-- [Azure 'da Anahtar Kasası anahtarlarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultkey?amp;preserve-view=true&view=azps-4.8.0)
+- [Azure 'da Anahtar Kasası anahtarlarını geri yükleme](/powershell/module/az.keyvault/restore-azkeyvaultkey)
 
 **Sorumluluk**: Müşteri
 
@@ -703,7 +701,7 @@ Depolama hesaplarına yüklenen kötü amaçlı yazılımları algılamak için 
 
 Ayrıca, anahtarları yanlışlıkla veya kötü amaçlı silmeye karşı korumak için Key Vault Soft-Delete ve Temizleme korumasını etkinleştirin. Azure Resource Manager şablon yedeklemelerini depolamak için Azure depolama kullanılıyorsa, Bloblar veya blob anlık görüntüleri silindiğinde verilerinizi kaydetmek ve kurtarmak için geçici silme özelliğini etkinleştirin.
 
-- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow?amp;preserve-view=true&view=azure-devops)
+- [Azure DevOps 'da kod depolama](/azure/devops/repos/git/gitworkflow)
 
 - [Azure DevOps 'da izinler ve gruplar hakkında](/azure/devops/organizations/security/about-permissions)
 
@@ -807,5 +805,5 @@ Ayrıca, abonelikleri açıkça işaretleyin (örn. üretim, üretim dışı) et
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](../security/benchmarks/overview.md)
-- [Azure güvenlik temelleri](../security/benchmarks/security-baselines-overview.md) hakkında daha fazla bilgi edinin
+- Bkz. [Azure Güvenlik Karşılaştırması 2.0 sürümüne genel bakış](/azure/security/benchmarks/overview)
+- [Azure güvenlik temelleri](/azure/security/benchmarks/security-baselines-overview) hakkında daha fazla bilgi edinin

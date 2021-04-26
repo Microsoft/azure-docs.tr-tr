@@ -4,12 +4,12 @@ description: Bir olay hub'ı ile bir Azure Event Hubs ad alanı oluşturma ve Az
 ms.topic: quickstart
 ms.date: 06/23/2020
 ms.custom: devx-track-azurecli, devx-track-azurepowershell
-ms.openlocfilehash: 17157e05e4ad123ba2bbdffa199c111df9f8912e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1b7ce00c1db0866b1965ed6d1bba31aa28f8bc24
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100653032"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304945"
 ---
 # <a name="create-a-namespace-with-event-hub-and-enable-capture-using-a-template"></a>Olay hub’ı ile bir ad alanı oluşturma ve şablon kullanarak Yakalamayı etkinleştirm
 
@@ -399,7 +399,7 @@ Azure Data Lake Store’da Event Hubs Yakalama özelliğini etkinleştirmek içi
 New-AzResourceGroupDeployment -ResourceGroupName \<resource-group-name\> -TemplateFile https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-eventhubs-create-namespace-and-enable-capture-for-adls/azuredeploy.json
 ```
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 Hedef olarak Azure Blob Depolama:
 
@@ -421,7 +421,7 @@ Aşağıdaki bağlantıları inceleyerek Event Hubs hakkında daha fazla bilgi e
 
 * [Event Hubs genel bakış](./event-hubs-about.md)
 * [Olay Hub 'ı oluşturma](event-hubs-create.md)
-* [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+* [Event Hubs ile ilgili SSS](event-hubs-faq.yml)
 
 [Authoring Azure Resource Manager templates]: ../azure-resource-manager/templates/template-syntax.md
 [Azure Quickstart Templates]:  https://azure.microsoft.com/documentation/templates/?term=event+hubs

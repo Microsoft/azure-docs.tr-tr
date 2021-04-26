@@ -2,21 +2,19 @@
 title: İzleme ve uyarma Azure Key Vault | Microsoft Docs
 description: Anahtar kasanızın durumunu izlemek ve uyarıları yapılandırmak için bir pano oluşturun.
 services: key-vault
-author: ShaneBala-keyvault
-manager: ravijan
+author: msmbaldwin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.subservice: general
 ms.topic: how-to
-ms.date: 04/06/2020
-ms.author: sudbalas
-Customer intent: As a key vault administrator, I want to learn the options available to monitor the health of my vaults
-ms.openlocfilehash: 523f24a7d8131dda67244e4d48510d9e1cb7cdb4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 03/31/2021
+ms.author: mbaldwin
+ms.openlocfilehash: f8f9dd6d51b974ebd31804daf0402ca5535ffc92
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104582638"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107751589"
 ---
 # <a name="monitoring-and-alerting-for-azure-key-vault"></a>Azure Key Vault için izleme ve uyarma
 
@@ -28,7 +26,7 @@ ms.locfileid: "104582638"
 + Ölçümleri yapılandırma ve pano oluşturma
 + Belirtilen eşikte uyarı oluşturma
 
-Key Vault için Azure Izleyici, genel bir izleme çözümü sağlamak için hem günlükleri hem de ölçümleri birleştirir. [Anahtar Vualt için Azure Izleyici hakkında daha fazla bilgi edinin](https://docs.microsoft.com/azure/azure-monitor/insights/key-vault-insights-overview#introduction-to-azure-monitor-for-key-vault)
+Key Vault için Azure Izleyici, genel bir izleme çözümü sağlamak için hem günlükleri hem de ölçümleri birleştirir. [Key Vault için Azure Izleyici hakkında daha fazla bilgi edinin](https://docs.microsoft.com/azure/azure-monitor/insights/key-vault-insights-overview#introduction-to-azure-monitor-for-key-vault)
 
 ## <a name="basic-key-vault-metrics-to-monitor"></a>İzlenecek temel Key Vault ölçümleri
 
@@ -40,7 +38,7 @@ Key Vault için Azure Izleyici, genel bir izleme çözümü sağlamak için hem 
 
 **Kasa kullanılabilirliği** -Bu ölçüm her zaman %100 olmalıdır. Bu, anahtar kasanızın kesintiye neden olduğunu hızlıca gösterebildiklerinden, izlemeniz gereken önemli bir ölçümdür. 
 
-**Kasa doygunluğu** : bir anahtar kasasının, saniye başına kullanılabileceği istek sayısı, gerçekleştirilen işlem türüne bağlıdır. Bazı kasa işlemlerinde, saniye başına daha düşük bir istek vardır. Bu ölçüm, geçerli Anahtar Kasası kullanımınızı gösteren bir yüzde değeri ile birlikte olmak üzere tüm işlem türlerinde anahtar kasaınızın toplam kullanımını toplar. Anahtar Kasası hizmeti limitlerinin tam listesi için aşağıdaki belgeye bakın. [Azure Key Vault Hizmet Sınırları](service-limits.md)
+**Kasa doygunluğu** : bir anahtar kasasının, saniye başına kullanılabileceği istek sayısı, gerçekleştirilen işlem türüne bağlıdır. Bazı kasa işlemlerinde, saniye başına daha düşük bir istek vardır. Bu ölçüm, geçerli Anahtar Kasası kullanımınızı gösteren bir yüzde değeri ile birlikte olmak üzere tüm işlem türlerinde anahtar kasaınızın toplam kullanımını toplar. Anahtar Kasası hizmeti limitlerinin tam listesi için aşağıdaki belgeye bakın. [Hizmet sınırlarını Azure Key Vault](service-limits.md)
 
 **Hizmet API 'Si gecikmesi** -Bu ölçüm, hizmette ölçülen Anahtar Kasası çağrılarının ortalama gecikme süresini gösterir. İstemci veya istemci ile hizmet arasında ağ tarafından tüketilen zamanı içermez.
 

@@ -14,12 +14,12 @@ ms.topic: article
 ms.date: 03/10/2021
 ms.author: inhenkel
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 1636e49099851337d82494ebe168b8ec5194fa20
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: ef4eb3eb55ec1f062efb0f8215a3619f526b1ad2
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103011944"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106063993"
 ---
 # <a name="implement-failover-streaming-with-media-services-v2"></a>Media Services V2 ile yük devretme akışını uygulama
 
@@ -753,7 +753,7 @@ Bu bölümde, artıklığı işleme özelliğini oluşturursunuz.
 
 Bu konudaki örnekte akış açık akışı gösterilmektedir. Korumalı akış yapmak istiyorsanız, kurulum yapmanız gereken birkaç şey vardır. aynı **Assetdeliverypolicy**, aynı **Contentkeyauthorizationpolicy** veya External Key Server URL 'sini kullanmanız gerekir ve içerik anahtarlarını aynı tanımlayıcıyla yinelemebilmeniz gerekir.
 
-İçerik koruması hakkında daha fazla bilgi için bkz. [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-protect-with-aes128.md).
+İçerik koruması hakkında daha fazla bilgi için bkz. [AES-128 dinamik şifrelemesini ve anahtar teslim hizmetini kullanma](media-services-playready-license-template-overview.md).
 
 ## <a name="see-also"></a>Ayrıca bkz.
 

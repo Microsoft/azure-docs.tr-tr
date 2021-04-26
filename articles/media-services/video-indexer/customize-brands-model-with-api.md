@@ -10,12 +10,12 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 01/14/2020
 ms.author: kumud
-ms.openlocfilehash: c3056415d3432dbe64dd1f2bcf974a676bbf6c6b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 03c74e9108b27856259eb4f17d7ba521007c4fa3
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97586066"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312969"
 ---
 # <a name="customize-a-brands-model-with-the-video-indexer-api"></a>Video Indexer API ile bir markalar modeli özelleştirme
 
@@ -28,7 +28,7 @@ Bu konuda açıklandığı gibi, videoda algılanan özel markalar modellerini o
 
 ## <a name="create-a-brand"></a>Marka oluşturma
 
-Marka API 'si [oluşturma](https://api-portal.videoindexer.ai/docs/services/operations/operations/Create-Brand) yeni bir özel marka oluşturur ve belirtilen hesap Için özel markalar modeline ekler.
+Marka API 'si [oluşturma](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Create-Brand) yeni bir özel marka oluşturur ve belirtilen hesap Için özel markalar modeline ekler.
 
 > [!NOTE]
 > `enabled`(Gövdesinde) ayarı true olarak belirlemek için marka listesini video Indexer Için *ekleme* listesine koyar. `enabled`False olarak ayarlamak, markayı *dışlama* listesine koyar, bu nedenle video Indexer algılamıyor.
@@ -62,7 +62,7 @@ Yanıt, yeni oluşturduğunuz markada aşağıdaki örnekte yer alan bilgileri s
 
 ## <a name="delete-a-brand"></a>Marka silme
 
-Marka API 'si [silme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Delete-Brand?) , belirtilen hesap Için özel markalar modelinden bir marka kaldırır. Hesap, `accountId` parametresinde belirtilir. Başarılı bir şekilde çağrıldıktan sonra, marka artık markalar *ekleme* veya *hariç tutma* listelerinde yer alır.
+Marka API 'si [silme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Delete-Brand) , belirtilen hesap Için özel markalar modelinden bir marka kaldırır. Hesap, `accountId` parametresinde belirtilir. Başarılı bir şekilde çağrıldıktan sonra, marka artık markalar *ekleme* veya *hariç tutma* listelerinde yer alır.
 
 ### <a name="response"></a>Yanıt
 
@@ -70,7 +70,7 @@ Marka başarıyla silindiğinde döndürülen içerik yok.
 
 ## <a name="get-a-specific-brand"></a>Belirli bir marka al
 
-[Marka al](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brand?) API 'si, marka kimliğini kullanarak belirtilen hesap Için özel markalar modelinde bir markaların ayrıntılarını aramanıza olanak tanır.
+[Marka al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Brand) API 'si, marka kimliğini kullanarak belirtilen hesap Için özel markalar modelinde bir markaların ayrıntılarını aramanıza olanak tanır.
 
 ### <a name="response"></a>Yanıt
 
@@ -99,7 +99,7 @@ Yanıt, aşağıdaki örnekte belirtilen biçimde, aradığınız markada (marka
 
 ## <a name="update-a-specific-brand"></a>Belirli bir marka güncelleştirme
 
-Marka API 'si [güncelleştirme](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Brand?) , marka kimliğini kullanarak belirtilen hesap Için özel markalar modelinde bir markaların ayrıntılarını aramanıza olanak tanır.
+Marka API 'si [güncelleştirme](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Brand) , marka kimliğini kullanarak belirtilen hesap Için özel markalar modelinde bir markaların ayrıntılarını aramanıza olanak tanır.
 
 ### <a name="response"></a>Yanıt
 
@@ -125,7 +125,7 @@ Yanıt, aşağıdaki örnek biçimini izleyerek güncelleştirdiğiniz marka hak
 
 ## <a name="get-all-of-the-brands"></a>Tüm markalar alın
 
-[Tüm markalar al](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brands?) API 'si, markaların *dahil etme* veya *hariç tutma* listesinde olup olmamasından bağımsız olarak, belirtilen hesap için özel markalar modelindeki tüm markalarını döndürür.
+[Tüm markalar al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Brands) API 'si, markaların *dahil etme* veya *hariç tutma* listesinde olup olmamasından bağımsız olarak, belirtilen hesap için özel markalar modelindeki tüm markalarını döndürür.
 
 ### <a name="response"></a>Yanıt
 
@@ -165,7 +165,7 @@ Yanıt, hesabınızdaki tüm markaların bir listesini ve aşağıdaki örnekte 
 
 ## <a name="get-brands-model-settings"></a>Markalar model ayarlarını al
 
-[Marka ayarları al](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Brands) API 'si, belirtilen hesaptaki markalar model ayarlarını döndürür. Markalar model ayarları, Bing markalar veritabanı 'nın etkin olup olmadığını temsil eder. Bing markalar etkinleştirilmemişse, Video Indexer yalnızca belirtilen hesabın özel markalar modelinden markalar algılar.
+[Marka ayarları al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Brands) API 'si, belirtilen hesaptaki markalar model ayarlarını döndürür. Markalar model ayarları, Bing markalar veritabanı 'nın etkin olup olmadığını temsil eder. Bing markalar etkinleştirilmemişse, Video Indexer yalnızca belirtilen hesabın özel markalar modelinden markalar algılar.
 
 ### <a name="response"></a>Yanıt
 
@@ -183,7 +183,7 @@ Yanıt, Bing markaların aşağıdaki örnekte belirtilen biçimde etkinleştiri
 
 ## <a name="update-brands-model-settings"></a>Markalar model ayarlarını Güncelleştir
 
-[Güncelleştirme markalar](https://api-portal.videoindexer.ai/docs/services/operations/operations/Update-Brands-Model-Settings?) API 'si, belirtilen hesaptaki markalar modeli ayarlarını güncelleştirir. Markalar model ayarları, Bing markalar veritabanı 'nın etkin olup olmadığını temsil eder. Bing markalar etkinleştirilmemişse, Video Indexer yalnızca belirtilen hesabın özel markalar modelinden markalar algılar.
+[Güncelleştirme markalar](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Update-Brands-Model-Settings) API 'si, belirtilen hesaptaki markalar modeli ayarlarını güncelleştirir. Markalar model ayarları, Bing markalar veritabanı 'nın etkin olup olmadığını temsil eder. Bing markalar etkinleştirilmemişse, Video Indexer yalnızca belirtilen hesabın özel markalar modelinden markalar algılar.
 
 `useBuiltIn`True olarak ayarlanan bayrak, Bing markalarının etkinleştirildiği anlamına gelir. `useBuiltin`Yanlışsa, Bing markalar devre dışıdır.
 

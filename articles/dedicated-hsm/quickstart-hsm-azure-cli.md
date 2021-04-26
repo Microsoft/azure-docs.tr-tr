@@ -9,16 +9,16 @@ ms.service: key-vault
 ms.devlang: azurecli
 ms.date: 01/06/2021
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: e07bc758b1ef86b3d8c605cbce72f6db564a355f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 80d5bbb54715c5a1a5102f8991f366e273145edc
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98020967"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868960"
 ---
 # <a name="quickstart-create-an-azure-dedicated-hsm-by-using-the-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak Azure ayrılmış HSM oluşturma
 
-Bu makalede, [az adanmış HSM](/cli/azure/ext/hardware-security-modules/dedicated-hsm) Azure CLI uzantısı kullanılarak Azure ADANMıŞ bir HSM 'nin nasıl oluşturulacağı ve yönetileceği açıklanmaktadır.
+Bu makalede, [az adanmış HSM](/cli/azure/dedicated-hsm) Azure CLI uzantısı kullanılarak Azure ADANMıŞ bir HSM 'nin nasıl oluşturulacağı ve yönetileceği açıklanmaktadır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -44,7 +44,7 @@ az group create --name myRG --location westus
 
 ## <a name="create-a-dedicated-hsm"></a>Adanmış bir HSM oluşturma
 
-Adanmış bir HSM oluşturmak için [az adanmış-HSM Create](/cli/azure/ext/hardware-security-modules/dedicated-hsm#ext_hardware_security_modules_az_dedicated_hsm_create) komutunu kullanın. Aşağıdaki örnek, `hsm1` `westus` bölge, `myRG` kaynak grubu ve belirtilen abonelik, sanal ağ ve alt ağ içinde ADLı özel bir HSM sağlar. Gerekli parametreler `name` , ve ' dir `location` `resource group` .
+Adanmış bir HSM oluşturmak için [az adanmış-HSM Create](/cli/azure/dedicated-hsm#az_dedicated_hsm_create) komutunu kullanın. Aşağıdaki örnek, `hsm1` `westus` bölge, `myRG` kaynak grubu ve belirtilen abonelik, sanal ağ ve alt ağ içinde ADLı özel bir HSM sağlar. Gerekli parametreler `name` , ve ' dir `location` `resource group` .
 
 ```azurecli-interactive
 az dedicated-hsm create \
@@ -63,7 +63,7 @@ Dağıtımın tamamlanabilmesi yaklaşık 25 ila 30 dakika sürer.
 
 ## <a name="get-a-dedicated-hsm"></a>Adanmış bir HSM al
 
-Geçerli bir ayrılmış HSM 'yi almak için [az adanmış-HSM Show](/cli/azure/ext/hardware-security-modules/dedicated-hsm#ext_hardware_security_modules_az_dedicated_hsm_show) komutunu çalıştırın. Aşağıdaki örnek, `hsm1` kaynak grubundaki özel HSM 'yi alır `myRG` .
+Geçerli bir ayrılmış HSM 'yi almak için [az adanmış-HSM Show](/cli/azure/dedicated-hsm#az_dedicated_hsm_show) komutunu çalıştırın. Aşağıdaki örnek, `hsm1` kaynak grubundaki özel HSM 'yi alır `myRG` .
 
 ```azurecli-interactive
 az dedicated-hsm show --resource-group myRG --name hsm1
@@ -71,7 +71,7 @@ az dedicated-hsm show --resource-group myRG --name hsm1
 
 ## <a name="update-a-dedicated-hsm"></a>Adanmış bir HSM 'yi güncelleştirme
 
-Ayrılmış bir HSM 'yi güncelleştirmek için [az adanmış-HSM Update](/cli/azure/ext/hardware-security-modules/dedicated-hsm#ext_hardware_security_modules_az_dedicated_hsm_update) komutunu kullanın. Aşağıdaki örnek, `hsm1` `myRG` kaynak grubunda ayrılmış HSM 'yi ve onun etiketlerini güncelleştirir:
+Ayrılmış bir HSM 'yi güncelleştirmek için [az adanmış-HSM Update](/cli/azure/dedicated-hsm#az_dedicated_hsm_update) komutunu kullanın. Aşağıdaki örnek, `hsm1` `myRG` kaynak grubunda ayrılmış HSM 'yi ve onun etiketlerini güncelleştirir:
 
 ```azurecli-interactive
 az dedicated-hsm update --resource-group myRG –-name hsm1 --tags resourceType="hsm" Environment="prod" Slice="A"
@@ -79,7 +79,7 @@ az dedicated-hsm update --resource-group myRG –-name hsm1 --tags resourceType=
 
 ## <a name="list-dedicated-hsms"></a>Ayrılmış HSM 'leri listeleme
 
-Geçerli adanmış HSM 'ler hakkında bilgi almak için [az adanmış-HSM List](/cli/azure/ext/hardware-security-modules/dedicated-hsm#ext_hardware_security_modules_az_dedicated_hsm_list) komutunu çalıştırın. Aşağıdaki örnek, kaynak grubunda adanmış HSM 'leri listeler `myRG` :
+Geçerli adanmış HSM 'ler hakkında bilgi almak için [az adanmış-HSM List](/cli/azure/dedicated-hsm#az_dedicated_hsm_list) komutunu çalıştırın. Aşağıdaki örnek, kaynak grubunda adanmış HSM 'leri listeler `myRG` :
 
 ```azurecli-interactive
 az dedicated-hsm list --resource-group myRG
@@ -87,7 +87,7 @@ az dedicated-hsm list --resource-group myRG
 
 ## <a name="remove-a-dedicated-hsm"></a>Adanmış bir HSM 'yi kaldırma
 
-Adanmış bir HSM 'yi kaldırmak için [az adanmış-HSM Delete](/cli/azure/ext/hardware-security-modules/dedicated-hsm#ext_hardware_security_modules_az_dedicated_hsm_delete) komutunu kullanın. Aşağıdaki örnek, `hsm1` kaynak grubundan ADANMıŞ HSM 'yi siler `myRG` :
+Adanmış bir HSM 'yi kaldırmak için [az adanmış-HSM Delete](/cli/azure/dedicated-hsm#az_dedicated_hsm_delete) komutunu kullanın. Aşağıdaki örnek, `hsm1` kaynak grubundan ADANMıŞ HSM 'yi siler `myRG` :
 
 ```azurecli-interactive
 az dedicated-hsm delete --resource-group myRG –-name hsm1

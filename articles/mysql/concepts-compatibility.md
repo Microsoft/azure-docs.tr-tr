@@ -6,16 +6,19 @@ ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 3/18/2020
-ms.openlocfilehash: cba9615a8c76387b593109bc2174ab4718f1750a
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: 59f70659f25f925f8f802b0fcaa1f61d4e7f7dc0
+ms.sourcegitcommit: 5f482220a6d994c33c7920f4e4d67d2a450f7f08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105609318"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107106947"
 ---
 # <a name="mysql-drivers-and-management-tools-compatible-with-azure-database-for-mysql"></a>MySQL için Azure veritabanı ile uyumlu MySQL sürücüleri ve yönetim araçları
-[!INCLUDE[applies-to-single-flexible-server](includes/applies-to-single-flexible-server.md)]
-Bu makalede, MySQL için Azure veritabanı ile uyumlu olan sürücüler ve yönetim araçları açıklanmaktadır.
+
+Bu makalede, MySQL tek sunucusu için Azure veritabanı ile uyumlu olan sürücüler ve yönetim araçları açıklanmaktadır.
+
+>[!NOTE]
+>Bu makale, sürücülerin tek sunucu hizmeti 'nin [bağlantı mimarisiyle](concepts-connectivity-architecture.md) uyumlu olmasını sağlamak Için yalnızca MySQL tek sunucusu Için Azure veritabanı 'na uygulanabilir. [MySQL Için Azure veritabanı esnek sunucusu](/../flexible-server/overview.md) , MySQL Community Edition ile desteklenen ve uyumlu tüm sürücü ve araçlarla uyumludur. 
 
 ## <a name="mysql-drivers"></a>MySQL sürücüleri
 MySQL için Azure veritabanı, dünyanın en popüler MySQL veritabanı Community sürümünü kullanır. Bu nedenle, çok çeşitli programlama dilleri ve sürücüleriyle uyumludur. Amaç, en son üç sürüm MySQL sürücüsünü destekliyoruz ve MySQL sürücülerinin işlevselliğini ve kullanılabilirliğini sürekli olarak geliştirmek üzere açık kaynaklı topluluktaki yazarlarla ilgili çalışmalar devam eder. Test edilmiş ve MySQL için Azure veritabanı 5,6 ve 5,7 ile uyumlu olacak şekilde bulunan sürücülerin listesi aşağıdaki tabloda verilmiştir:
@@ -51,7 +54,7 @@ Uyumluluk avantajı veritabanı yönetim araçlarına da genişletilir. Veritaba
 | **SQL sorgu otomatik tamamlama** | X | X |  | X |
 | **Verileri içeri ve dışarı aktarma** | X | X | X | X |
 | **Birden çok biçime aktar** | X | X | X | X |
-| **Yedekleme ve Geri Yükleme** |  | X |  | X |
+| **Yedekleme ve geri yükleme** |  | X |  | X |
 | **Sunucu parametrelerini görüntüle** | X | X | X | X |
 | **Istemci bağlantılarını görüntüle** | X | X | X | X |
 

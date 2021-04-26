@@ -4,15 +4,15 @@ description: Azure Data Factory 'deki bağlayıcı sorunlarını giderme hakkın
 author: linda33wj
 ms.service: data-factory
 ms.topic: troubleshooting
-ms.date: 02/08/2021
+ms.date: 04/13/2021
 ms.author: jingwang
 ms.custom: has-adal-ref
-ms.openlocfilehash: 9d8f940e3900c00b1c6f6623dfeff2d92ca85aa3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 21b5522f07519e9a0c3353cb2463e0ec49063f34
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102042445"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107713435"
 ---
 # <a name="troubleshoot-azure-data-factory-connectors"></a>Azure Data Factory bağlayıcılarıyla ilgili sorunları giderme
 
@@ -555,7 +555,109 @@ Bu makalede Azure Data Factory bağlayıcılarıyla ilgili sorunları gidermeye 
 - **Neden**: Dynamics sunucusu kararlı değil veya erişilemez durumda veya ağda sorun yaşanıyor.
 
 - **Öneri**: daha fazla ayrıntı için ağ bağlantısını denetleyin veya Dynamics Server günlüğünü kontrol edin. Daha fazla yardım için Dynamics desteği ile iletişime geçin.
+
+
+### <a name="error-code--dynamicsfailedtoconnect"></a>Hata kodu: DynamicsFailedToConnect 
+ 
+ - **İleti**: `Failed to connect to Dynamics: %message;` 
+ 
+
+ - **Neden**: `Office 365 auth with OAuth failed` hata iletisinde görürseniz, sunucunuzun OAuth ile uyumlu olmayan bazı yapılandırmalara sahip olabileceği anlamına gelir. 
+ 
+ - **Öneri:** 
+    1. Yardım için ayrıntılı hata iletisiyle birlikte Dynamics destek ekibine başvurun.  
+    1. Hizmet sorumlusu kimlik doğrulamasını kullanın ve bu makaleye başvurabilirsiniz: [örnek: Azure AD hizmet sorumlusu ve sertifika kimlik doğrulaması kullanarak Dynamics Online](https://docs.microsoft.com/azure/data-factory/connector-dynamics-crm-office-365#example-dynamics-online-using-azure-ad-service-principal-and-certificate-authentication). 
+ 
+
+ - **Neden**: `Unable to retrieve authentication parameters from the serviceUri` hata iletisinde görürseniz, trafiği ele almak için yanlış Dynamics Service URL 'sini veya proxy/güvenlik duvarını girdiğiniz anlamına gelir. 
+ 
+ - **Öneri:**
+    1. Bağlı hizmete doğru hizmet URI 'sini yerleştirdiğinizden emin olun. 
+    1. Şirket içinde barındırılan IR kullanırsanız, güvenlik duvarının/proxy 'sinin Dynamics sunucusuna yapılan istekleri kesmesini içermediğinden emin olun. 
+   
+ 
+ - **Neden**: `An unsecured or incorrectly secured fault was received from the other party` hata iletisinde görürseniz, sunucu tarafında beklenmedik yanıtların kullanıldığı anlamına gelir. 
+ 
+ - **Öneri:** 
+    1. Office 365 kimlik doğrulamasını kullanıyorsanız Kullanıcı adınızın ve parolanızın doğru olduğundan emin olun. 
+    1. Doğru hizmet URI 'sini girdiğinizden emin olun. 
+    1. Bölgesel CRM URL 'sini (URL 'nin ' CRM 'den sonra bir numarası varsa) kullanırsanız, doğru bölgesel tanımlayıcıyı kullandığınızdan emin olun.
+    1. Yardım için Dynamics destek ekibine başvurun. 
+ 
+
+ - **Neden**: `No Organizations Found` hata iletisinde görürseniz, kuruluşunuzun adı yanlış ya da hizmet URL 'SINDE yanlış bir CRM bölge tanımlayıcısı kullandınız demektir. 
+ 
+ - **Öneri:** 
+    1. Doğru hizmet URI 'sini girdiğinizden emin olun.
+    1. Bölgesel CRM URL 'sini (URL 'nin ' CRM 'den sonra bir numarası varsa) kullanırsanız, doğru bölgesel tanımlayıcıyı kullandığınızdan emin olun. 
+    1. Yardım için Dynamics destek ekibine başvurun. 
+
+ 
+ - **Neden**: `401 Unauthorized` ve AAD ile ilgili hata iletisi görürseniz, hizmet sorumlusu ile ilgili bir sorun olduğu anlamına gelir. 
+
+ - **Öneri**: hizmet sorumlusu sorununu onarmak için hata iletisindeki yönergeleri uygulayın.  
+ 
+ 
+ - **Neden**: diğer hatalar için genellikle sorun sunucu tarafında yer alır. 
+
+ - **Öneri**: bağlantı kurmak Için [xrmtoolbox](https://www.xrmtoolbox.com/) kullanın. Hata devam ederse yardım için Dynamics destek ekibine başvurun. 
+ 
+ 
+### <a name="error-code--dynamicsoperationfailed"></a>Hata kodu: DynamicsOperationFailed 
+ 
+- **İleti**: `Dynamics operation failed with error code: %code;, error message: %message;.` 
+
+- **Neden**: işlem sunucu tarafında başarısız oldu. 
+
+- **Öneri**: hata iletisinden Dynamics işleminin hata kodunu ayıklayın `Dynamics operation failed with error code: {code}` ve daha ayrıntılı bilgi için [Web hizmeti hata kodları](https://docs.microsoft.com/powerapps/developer/data-platform/org-service/web-service-error-codes) makalesine başvurun. Gerekirse Dynamics destek ekibine başvurabilirsiniz. 
+ 
+ 
+### <a name="error-code--dynamicsinvalidfetchxml"></a>Hata kodu: DynamicsInvalidFetchXml 
   
+- **İleti**: `The Fetch Xml query specified is invalid.` 
+
+- **Neden**: Fetch XML dosyasında bir hata var.  
+
+- **Öneri**: Fetch XML içindeki hatayı düzeltir. 
+ 
+ 
+### <a name="error-code--dynamicsmissingkeycolumns"></a>Hata kodu: DynamicsMissingKeyColumns 
+ 
+- **İleti**: `Input DataSet must contain keycolumn(s) in Upsert/Update scenario. Missing key column(s): %column;`
+ 
+- **Neden**: kaynak verileri, havuz varlığının anahtar sütununu içermiyor. 
+
+- **Öneri**: anahtar sütunlarının kaynak verilerde olduğunu onaylayın veya kaynak sütununu havuz varlığındaki anahtar sütununa eşleyin. 
+ 
+ 
+### <a name="error-code--dynamicsprimarykeymustbeguid"></a>Hata kodu: DynamicsPrimaryKeyMustBeGuid 
+ 
+- **İleti**: `The primary key attribute '%attribute;' must be of type guid.` 
+ 
+- **Neden**: birincil anahtar sütununun türü ' Guid ' değil. 
+ 
+- **Öneri**: kaynak verilerdeki birincil anahtar sütununun ' GUID ' türünde olduğundan emin olun. 
+ 
+
+### <a name="error-code--dynamicsalternatekeynotfound"></a>Hata kodu: DynamicsAlternateKeyNotFound 
+ 
+- **İleti**: `Cannot retrieve key information of alternate key '%key;' for entity '%entity;'.` 
+ 
+- **Neden**: belirtilen alternatif anahtar yok, bunun nedeni yanlış anahtar adları veya yetersiz izinler olabilir. 
+ 
+- **Öneri:** <br/> 
+    1. Anahtar adındaki yazım hatalarını düzeltir.<br/> 
+    1. Varlıkta yeterli izinlere sahip olduğunuzdan emin olun. 
+ 
+ 
+### <a name="error-code--dynamicsinvalidschemadefinition"></a>Hata kodu: DynamicsInvalidSchemaDefinition 
+ 
+- **İleti**: `The valid structure information (column name and type) are required for Dynamics source.` 
+ 
+- **Neden**: sütun eşlemesindeki havuz sütunları ' Type ' özelliğini kaçırır. 
+ 
+- **Öneri**: portalda JSON düzenleyicisini kullanarak, sütun eşlemesinde ' Type ' özelliğini bu sütunlara ekleyebilirsiniz. 
+
 
 ## <a name="ftp"></a>FTP
 

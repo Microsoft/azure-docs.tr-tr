@@ -13,12 +13,12 @@ ms.topic: tutorial
 ms.date: 09/17/2020
 ms.author: alkemper
 ms.custom: devx-track-csharp, mvc
-ms.openlocfilehash: 327bc687c466a30d4f92810e48dc08f822f752ec
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4d54e1ff07b250b5595d2f8aee5f022bd2359721
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101726436"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105729516"
 ---
 # <a name="tutorial-use-feature-flags-in-an-aspnet-core-app"></a>Öğretici: ASP.NET Core uygulamasında Özellik bayraklarını kullanma
 
@@ -218,7 +218,7 @@ Kurala göre, `FeatureManagement` Bu JSON belgesinin bölümü Özellik bayrağ�
 
 ## <a name="use-dependency-injection-to-access-ifeaturemanager"></a>Ieaturemanager 'a erişmek için bağımlılık ekleme 'yi kullanma 
 
-Özellik bayrağı değerlerini el ile denetleme gibi bazı işlemlerde, [Ifeaturemanager](/dotnet/api/microsoft.featuremanagement.ifeaturemanager?view=azure-dotnet-preview)'ın bir örneğini almanız gerekir. ASP.NET Core MVC 'de, bağımlılık ekleme aracılığıyla Özellik yöneticisine erişebilirsiniz `IFeatureManager` . Aşağıdaki örnekte, `IFeatureManager` bir denetleyicinin oluşturucusunun imzasına bir tür bağımsız değişkeni eklenir. Çalışma zamanı başvuruyu otomatik olarak çözer ve oluşturucuyu çağırırken bir arabirim sağlar. Denetleyicinin zaten oluşturucuda bir veya daha fazla bağımlılık ekleme bağımsız değişkenine sahip olduğu bir uygulama şablonu kullanıyorsanız (gibi) `ILogger` , yalnızca `IFeatureManager` ek bir bağımsız değişken olarak ekleyebilirsiniz:
+Özellik bayrağı değerlerini el ile denetleme gibi bazı işlemlerde, [Ifeaturemanager](/dotnet/api/microsoft.featuremanagement.ifeaturemanager?preserve-view=true&view=azure-dotnet-preview)'ın bir örneğini almanız gerekir. ASP.NET Core MVC 'de, bağımlılık ekleme aracılığıyla Özellik yöneticisine erişebilirsiniz `IFeatureManager` . Aşağıdaki örnekte, `IFeatureManager` bir denetleyicinin oluşturucusunun imzasına bir tür bağımsız değişkeni eklenir. Çalışma zamanı başvuruyu otomatik olarak çözer ve oluşturucuyu çağırırken bir arabirim sağlar. Denetleyicinin zaten oluşturucuda bir veya daha fazla bağımlılık ekleme bağımsız değişkenine sahip olduğu bir uygulama şablonu kullanıyorsanız (gibi) `ILogger` , yalnızca `IFeatureManager` ek bir bağımsız değişken olarak ekleyebilirsiniz:
 
 ### <a name="net-5x"></a>[.NET 5. x](#tab/core5x)
     
@@ -322,7 +322,7 @@ public IActionResult Index()
 }
 ```
 
-Denetim özelliği bayrağı *kapalı* olduğu IÇIN bir MVC denetleyicisi veya eylemi engellendiğinde, kayıtlı bir [ıdisabledfeatureshandler](/dotnet/api/microsoft.featuremanagement.mvc.idisabledfeatureshandler?view=azure-dotnet-preview) arabirimi çağırılır. Varsayılan `IDisabledFeaturesHandler` arabirim, yanıt gövdesi olmayan istemciye 404 durum kodu döndürür.
+Denetim özelliği bayrağı *kapalı* olduğu IÇIN bir MVC denetleyicisi veya eylemi engellendiğinde, kayıtlı bir [ıdisabledfeatureshandler](/dotnet/api/microsoft.featuremanagement.mvc.idisabledfeatureshandler?preserve-view=true&view=azure-dotnet-preview) arabirimi çağırılır. Varsayılan `IDisabledFeaturesHandler` arabirim, yanıt gövdesi olmayan istemciye 404 durum kodu döndürür.
 
 ## <a name="mvc-views"></a>MVC görünümleri
 

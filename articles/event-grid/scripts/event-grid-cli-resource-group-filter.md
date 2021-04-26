@@ -5,12 +5,12 @@ ms.devlang: azurecli
 ms.topic: sample
 ms.date: 07/08/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 1d3887a98f0a53e0f04932c257aa7bb822cadc76
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 2662795e5ebc43e37eab7cab3dfc03582f072f8b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87494120"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107871444"
 ---
 # <a name="subscribe-to-events-for-a-resource-group-and-filter-for-a-resource-with-azure-cli"></a>Azure CLI ile bir kaynak grubu için olaylara abone olma ve kaynağa göre filtreleme
 
@@ -36,8 +36,8 @@ Bu betik, olay aboneliğini oluşturmak için aşağıdaki komutu kullanır. Tab
 
 | Komut | Notlar |
 |---|---|
-| [az eventgrid event-subscription create](/cli/azure/eventgrid/event-subscription#az-eventgrid-event-subscription-create) | Event Grid aboneliği oluşturun. |
-| [az eventgrid event-subscription create](/cli/azure/ext/eventgrid/eventgrid/event-subscription#ext-eventgrid-az-eventgrid-event-subscription-create) - uzantı sürümü | Event Grid aboneliği oluşturun. |
+| [az eventgrid event-subscription create](/cli/azure/eventgrid/event-subscription#az_eventgrid_event_subscription_create) | Event Grid aboneliği oluşturun. |
+| [az eventgrid event-subscription create](/cli/azure/eventgrid/event-subscription#az_eventgrid_event_subscription_create) - uzantı sürümü | Event Grid aboneliği oluşturun. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,0 +1,85 @@
+### YamlMime:Landing
+title: Bulut güvenliği yolculuğu belgeleri
+summary: Buluta geçiş yapmayı düşünürken veya buluta zaten geçiş yaparken, bulut güvenlik yolculuğunun her aşamasına ilişkin rehberlik bulacaksınız.
+metadata:
+  title: Azure Güvenlik yolculuğu belgeleri
+  description: Azure 'daki güvenlik yolculuğunun her aşamasına ilişkin rehberlik bulun.
+  services: security
+  ms.service: security
+  ms.subservice: journey
+  ms.topic: landing-page
+  author: TerryLanfear
+  ms.author: terrylan
+  manager: rkarlin
+  ms.date: 04/11/2021
+  ms.openlocfilehash: 624721931c459a164d4eae9957467c90d5845252
+  ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
+  ms.translationtype: MT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 04/13/2021
+  ms.locfileid: "107379921"
+landingContent:
+- title: Azure güvenliği hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Bulutta paylaşılan sorumluluk
+      url: ../fundamentals/shared-responsibility.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Uçtan uca güvenlik hizmetleri
+      url: ../fundamentals/end-to-end.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+  - linkListType: concept
+    links:
+    - text: Microsoft, Azure altyapısının güvenliğini nasıl sağlar?
+      url: ../fundamentals/infrastructure.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Azure platformu güvenliği ve bütünlüğü
+      url: ../fundamentals/platform.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+- title: başlarken
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: İşletmeniz genelinde güvenliği uygulama
+      url: /azure/cloud-adoption-framework/get-started/security?toc=/azure/security/fundamentals/toc.json&bc=/azure/security/breadcrumb/toc.json
+  - linkListType: concept
+    links:
+    - text: Güvenli mimari tasarlama
+      url: /azure/architecture/framework/security/security-principles?toc=/azure/security/fundamentals/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Güvenli iş yüklerini geçirme
+      url: /azure/cloud-adoption-framework/migrate/azure-migration-guide/?tabs=MigrationTools?toc=/azure/security/fundamentals/toc.json&bc=/azure/security/breadcrumb/toc.json
+- title: Bulut iş yüklerinizin güvenliğini sağlama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: En iyi güvenlik uygulamaları
+      url: ../fundamentals/best-practices-and-patterns.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Güvenlik denetimleri ve temelleri
+      url: ../benchmarks/introduction.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+  - linkListType: concept
+    links:
+    - text: Kimlik yönetimi
+      url: ../fundamentals/identity-management-overview.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Ağ güvenliği
+      url: ../fundamentals/network-overview.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Veri güvenliği ve şifreleme
+      url: ../fundamentals/encryption-overview.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Microsoft Kötü Amaçlı Yazılımdan Korunma
+      url: ../fundamentals/antimalware.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Sanal makine güvenliği
+      url: ../fundamentals/virtual-machines-overview.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+- title: Tehditleri azaltma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Tehdit koruması
+      url: ../fundamentals/threat-detection.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Tehdit analizi
+      url: /azure/architecture/framework/security/design-threat-model?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+- title: Ortamınızda neler olduğunu anlama
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Azure günlük kaydı
+      url: ../fundamentals/log-audit.md?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Gözden geçirme ve denetleme
+      url: /azure/architecture/framework/security/monitor-audit?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json
+    - text: Kimlik ve ağ riskleri
+      url: /azure/architecture/framework/security/monitor-identity-network?toc=/azure/security/journey/toc.json&bc=/azure/security/breadcrumb/toc.json

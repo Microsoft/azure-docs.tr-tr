@@ -1,21 +1,20 @@
 ---
 title: SYNAPSE SQL 'e bağlanma
 description: SYNAPSE SQL 'e bağlanın.
-services: synapse-analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: overview
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: stefanazaric
 ms.reviewer: jrasnick
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 3165b72ae5612aaeaa66a95299db97182fef2232
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f5682302ea0fa83c04a8560ba3f0f98ea075e072
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101677582"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565551"
 ---
 # <a name="connect-to-synapse-sql"></a>SYNAPSE SQL 'e bağlanma
 Azure SYNAPSE Analytics 'te SYNAPSE SQL özelliğine bağlanın.

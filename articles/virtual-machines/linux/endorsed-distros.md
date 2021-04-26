@@ -2,24 +2,19 @@
 title: Azure 'da desteklenen Linux dağıtımları
 description: Ubuntu, CentOS, Oracle ve SUSE için yönergeler de dahil olmak üzere, Azure tarafından onaylanan dağıtımlara yönelik Linux hakkında bilgi edinin.
 services: virtual-machines
-documentationcenter: ''
 author: danielsollondon
-manager: gwallace
-tags: azure-service-management,azure-resource-manager
-ms.assetid: 2777a526-c260-4cb9-a31a-bdfe1a55fffc
 ms.service: virtual-machines
 ms.collection: linux
 ms.workload: infrastructure-services
-ms.tgt_pltfrm: vm-linux
 ms.topic: conceptual
-ms.date: 01/03/2021
+ms.date: 04/06/2021
 ms.author: guybo
-ms.openlocfilehash: 091a06fd608763ac7265670733890e93bf71dde1
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: e602909467ca155beb010c5bdd61e6f6408dd12a
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102547416"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553796"
 ---
 # <a name="endorsed-linux-distributions-on-azure"></a>Azure 'da desteklenen Linux dağıtımları
 
@@ -35,7 +30,7 @@ Azure Linux Aracısı zaten Azure Marketi görüntülerinde önceden yüklenmiş
 
 | Dağıtım | Sürüm | Sürücüler | Aracı |
 | --- | --- | --- | --- |
-| Standart dışı bir Wave Software CentOS |CentOS 6. x, 7. x, 8. x |CentOS 6,3: [LIS Download](https://www.microsoft.com/download/details.aspx?id=55106)<p>CentOS 6.4 +: çekirdekte |Paket: "Walınuxagent" altında [Depo](http://olcentgbl.trafficmanager.net/openlogic/6/openlogic/x86_64/RPMS/) içinde <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| Standart dışı bir dalga yazılımıyla CentOS (eski adıyla OpenLogic) |CentOS 6. x, 7. x, 8. x |CentOS 6,3: [LIS Download](https://www.microsoft.com/download/details.aspx?id=55106)<p>CentOS 6.4 +: çekirdekte |Paket: "Walınuxagent" altında [Depo](http://olcentgbl.trafficmanager.net/openlogic/6/openlogic/x86_64/RPMS/) içinde <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
 | [CoreOS](https://coreos.com/docs/running-coreos/cloud-providers/azure/)<p> CoreOS, 26 Mayıs 2020 itibariyle artık [yaşam süresi sona](https://coreos.com/os/eol/) erecek. |Artık kullanılamıyor | | |
 | Credavtiv tarafından ortaya çıkarıldı |8. x, 9. x, 10. x |Çekirdekte |Paket: "waagent" altında depo Içinde <br/>Kaynak kodu: [GitHub](https://github.com/Azure/WALinuxAgent) |
 |Kinvolk tarafından yataylı kapsayıcı Linux| Pro, Stable, Beta| Çekirdekte | WA-Linux-Agent zaten/usr/share/OEM/bin/waagent içinde yüklendi |

@@ -3,20 +3,23 @@ title: 'Hızlı başlangıç: SYNAPSE SQL havuzu için ölçek işlem (Azure por
 description: Azure portal kullanarak SYNAPSE SQL havuzunun (veri ambarı) işlem ölçeğini ölçeklendirebilirsiniz.
 services: synapse-analytics
 author: Antvgski
-manager: craigg
-ms.service: synapse-analytics
-ms.topic: quickstart
-ms.subservice: sql-dw
-ms.date: 04/28/2020
 ms.author: anvang
+manager: craigg
 ms.reviewer: jrasnick
-ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 26a8a865a787a9c9b17031f94456272c93380704
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/28/2020
+ms.topic: quickstart
+ms.service: synapse-analytics
+ms.subservice: sql-dw
+ms.custom:
+- seo-lt-2019
+- azure-synapse
+- mode-portal
+ms.openlocfilehash: aa339274a1ff68764fa5573d9c031e84f290e57c
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98117053"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107534221"
 ---
 # <a name="quickstart-scale-compute-for-synapse-sql-pool-with-the-azure-portal"></a>Hızlı başlangıç: Azure portal ile SYNAPSE SQL havuzu için işlem ölçekleme
 

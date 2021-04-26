@@ -9,10 +9,10 @@ ms.date: 03/03/2021
 ms.author: cherylmc
 ms.custom: include file
 ms.openlocfilehash: f1d3223114e9f691bfb3802a65abea003a7aec6e
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105582574"
 ---
 İş ortakları tarafından sunulan hizmetler hakkında daha fazla bilgi için bu bölümdeki bağlantıları kontrol edebilirsiniz. Dal cihazı ortağınız aşağıdaki bölümde listelenmiyorsa, dal cihaz sağlayıcınızın bizimle iletişim kurun. E-posta göndererek bizimle iletişim kurabilirler azurevirtualwan@microsoft.com .

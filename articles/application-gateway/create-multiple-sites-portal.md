@@ -8,12 +8,12 @@ ms.service: application-gateway
 ms.topic: tutorial
 ms.date: 03/19/2021
 ms.author: victorh
-ms.openlocfilehash: cfbd5301bc2b24c4d5614e5f88c6ae18d4affc66
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 8de0dd16c3b3b73b5d5e52017cf63b357654144f
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104721639"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107030966"
 ---
 # <a name="tutorial-create-and-configure-an-application-gateway-to-host-multiple-web-sites-using-the-azure-portal"></a>Öğretici: Azure portal kullanarak birden çok Web sitesini barındırmak için bir uygulama ağ geçidi oluşturma ve yapılandırma
 
@@ -25,7 +25,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > * Uygulama ağ geçidi oluşturma
 > * Arka uç sunucuları için sanal makineler oluşturma
 > * Arka uç sunucularıyla arka uç havuzları oluşturma
-> * Arka uç dinleyicileri oluşturma
+> * Dinleyici oluşturma
 > * Yönlendirme kuralları oluşturma
 > * Ad çözümlemesi için ana bilgisayar dosyasını Düzenle
 

@@ -5,14 +5,14 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 02/16/2021
+ms.date: 04/02/2021
 ms.author: victorh
-ms.openlocfilehash: 8922e6e0d5137a3a900e0f57f685d449c08b3f47
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4514717274cfb66fbfc0eee25b09aa9e1234ffad
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100596963"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280335"
 ---
 # <a name="azure-firewall-logs-and-metrics"></a>Azure Güvenlik Duvarı günlükleri ve ölçümleri
 
@@ -181,6 +181,8 @@ Aşağıdaki ölçümler Azure Güvenlik Duvarı için kullanılabilir:
     Birim: yüzde
 
    Güvenlik duvarınıza daha fazla genel IP adresi eklediğinizde kullanıma sunulan SNAT bağlantı noktası sayısı artar ve SNAT bağlantı noktası kullanımı azalır. Ayrıca farklı nedenlerden dolayı (CPU veya aktarım hızı gibi) güvenlik duvarının ölçeği genişletildiğinde de ek SNAT bağlantı noktaları kullanıma sunulur. Bu nedenle, belirli bir SNAT bağlantı noktası kullanımı yüzdesi, yalnızca hizmetin ölçeği değiştiğinden, genel IP adresi eklemeden kapatılabilir. Güvenlik duvarınızdaki bağlantı noktalarını artırmak için kullanılabilen genel IP adresi sayısını doğrudan kontrol edebilirsiniz. Ancak, güvenlik duvarı ölçeklendirmeyi doğrudan kontrol edebilirsiniz.
+
+   Güvenlik duvarınız SNAT bağlantı noktası tükenmesi olarak çalışıyorsa, en az beş genel IP adresi eklemeniz gerekir. Bu, kullanılabilir SNAT bağlantı noktası sayısını artırır. Daha fazla bilgi için bkz. [Azure Güvenlik Duvarı Özellikleri](features.md#multiple-public-ip-addresses).
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

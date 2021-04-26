@@ -13,12 +13,12 @@ ms.custom:
 - mqtt
 - 'Role: Cloud Development'
 - 'Role: Operations'
-ms.openlocfilehash: 7940ac3a67a0562aa0b7a21690deec30220a48a3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: cdb792198e6912fb0e68b2abec052c2b05166f17
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102434721"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107310130"
 ---
 # <a name="choose-the-right-iot-hub-tier-for-your-solution"></a>Çözümünüz için doğru IoT Hub katmanını seçin
 
@@ -60,7 +60,7 @@ IoT Hub Ayrıca, test ve değerlendirme için tasarlanmış bir ücretsiz katman
 
 Azure IoT Hub 'Ları, [azure Event Hubs](../event-hubs/event-hubs-features.md) [bölümler](../event-hubs/event-hubs-features.md#partitions)dahil pek çok çekirdek bileşeni içerir. IoT Hub 'Ları için olay akışları, genellikle çeşitli IoT cihazları tarafından raporlanan gelen telemetri verileriyle doldurulur. Olay akışının bölümlenmesi, olay akışlarına eşzamanlı okuma ve yazma sırasında oluşan çekişmeleri azaltmak için kullanılır.
 
-IoT Hub oluşturulduğunda bölüm sınırı seçilir ve değiştirilemez. Temel katman IoT Hub ve Standart katman IoT Hub için maksimum bölüm sınırı 32 ' dir. Birçok IoT Hub 'ı yalnızca 4 bölümden yeterlidir. Bölümleri belirleme hakkında daha fazla bilgi için, [kaç bölüme Ihtiyacım olduğunu](../event-hubs/event-hubs-faq.md#how-many-partitions-do-i-need) Event Hubs hakkında SSS bölümüne bakın.
+IoT Hub oluşturulduğunda bölüm sınırı seçilir ve değiştirilemez. Temel katman IoT Hub ve Standart katman IoT Hub için maksimum bölüm sınırı 32 ' dir. Birçok IoT Hub 'ı yalnızca 4 bölümden yeterlidir. Bölümleri belirleme hakkında daha fazla bilgi için, [kaç bölüme Ihtiyacım olduğunu](../event-hubs/event-hubs-faq.yml#how-many-partitions-do-i-need-) Event Hubs hakkında SSS bölümüne bakın.
 
 ## <a name="tier-upgrade"></a>Katman yükseltme
 

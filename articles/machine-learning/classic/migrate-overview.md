@@ -3,17 +3,17 @@ title: 'ML Studio (klasik): Azure Machine Learning geçir'
 description: Modernlanmış bir veri bilimi platformu için Studio 'dan (klasik) Azure Machine Learning 'e geçiş yapın.
 services: machine-learning
 ms.service: machine-learning
-ms.subservice: studio
+ms.subservice: studio-classic
 ms.topic: how-to
 author: xiaoharper
 ms.author: zhanxia
 ms.date: 03/08/2021
-ms.openlocfilehash: 7cdf016d7de66c33973ec7818fa92df28c4639dd
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: fafb9f7e84263c33cf1b15a52742ec9cd0380a40
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105566974"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311864"
 ---
 # <a name="migrate-to-azure-machine-learning"></a>Azure Machine Learning’e geçiş
 

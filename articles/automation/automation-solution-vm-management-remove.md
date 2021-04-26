@@ -3,14 +3,14 @@ title: Azure Otomasyonu VM'leri çalışma saatleri dışında başlat/durdur ge
 description: Bu makalede, VM'leri çalışma saatleri dışında başlat/durdur özelliğinin nasıl kaldırılacağı ve bir Otomasyon hesabının Log Analytics çalışma alanından nasıl kaldırılacağı açıklanır.
 services: automation
 ms.subservice: process-automation
-ms.date: 03/04/2021
+ms.date: 04/15/2021
 ms.topic: conceptual
-ms.openlocfilehash: 0bab5d8e82ce432e9b3834fe4c003316545eb338
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9ec76197bfde6bb679f70c44ab01712f9f52bfd2
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102122094"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533946"
 ---
 # <a name="remove-startstop-vms-during-off-hours-from-automation-account"></a>Otomasyon hesabından VM'leri çalışma saatleri dışında başlat/durdur kaldır
 
@@ -21,6 +21,9 @@ Azure VM 'lerinizin çalışma durumunu yönetmek için VM'leri çalışma saatl
 * Özelliği bir Otomasyon hesabından ve diğer yönetim ve izleme hedeflerini destekleyen bağlantılı çalışma alanından silin.
 
 Bu özelliğin silinmesi yalnızca ilişkili runbook 'ları kaldırır, dağıtım sırasında oluşturulan zamanlamaları veya değişkenleri veya sonrasında oluşturulan özel tanımlı herhangi bir özelliği silmez.
+
+> [!NOTE]
+> Devam etmeden önce, abonelik, kaynak grubu veya kaynak üzerinde, önemli kaynakların yanlışlıkla silinmesini veya değiştirilmesini önleyen [Kaynak Yöneticisi kilit](../azure-resource-manager/management/lock-resources.md) olmadığından emin olun. VM'leri çalışma saatleri dışında başlat/durdur çözümünü dağıttığınızda, Otomasyon hesabındaki birkaç bağımlı kaynağa (özellikle runbook 'lar ve değişkenler) karşı kilit düzeyini **Cannotdelete** olarak ayarlar. Otomasyon hesabını silebilmeniz için önce tüm kilitlerin kaldırılması gerekir.
 
 ## <a name="delete-the-dedicated-resource-group"></a>Adanmış kaynak grubunu silme
 

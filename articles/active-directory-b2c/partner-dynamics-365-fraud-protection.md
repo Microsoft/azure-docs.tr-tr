@@ -11,12 +11,12 @@ ms.topic: how-to
 ms.date: 02/10/2021
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 9483b0a8829c042a7cf8d516c6007cbbf14a97ac
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: 8c9d760ed888eb194ad8f282f180a634e3c09538
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105639740"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107587825"
 ---
 # <a name="tutorial-configure-microsoft-dynamics-365-fraud-protection-with-azure-active-directory-b2c"></a>Öğretici: Azure Active Directory B2C ile Microsoft Dynamics 365 sahtekarlık korumasını yapılandırma
 
@@ -68,7 +68,7 @@ Aşağıdaki mimari diyagram uygulamayı gösterir.
 ## <a name="set-up-the-solution"></a>Çözümü ayarlama
 
 1. Federasyonun Azure AD B2C izin verecek şekilde yapılandırılmış [bir Facebook uygulaması oluşturun](./identity-provider-facebook.md#create-a-facebook-application) .
-2. Oluşturduğunuz [Facebook gizli](./custom-policy-get-started.md#create-the-facebook-key) anahtarını bir kimlik deneyimi çerçevesi ilke anahtarı olarak ekleyin.
+2. Oluşturduğunuz [Facebook gizli](./tutorial-create-user-flows.md?pivots=b2c-custom-policy#create-the-facebook-key) anahtarını bir kimlik deneyimi çerçevesi ilke anahtarı olarak ekleyin.
 
 ## <a name="configure-your-application-under-microsoft-dfp"></a>Uygulamanızı Microsoft DFP altında yapılandırma
 
@@ -126,8 +126,8 @@ Belirtilen [özel ilkelerde](https://github.com/azure-ad-b2c/partner-integration
 |  {your_tenant_extensions_appid}   |  Kiracının depolama uygulamasının uygulama KIMLIĞI   |  01234567-89ab-cdef-0123-456789ABCDEF  |
 |   {your_tenant_extensions_app_objectid}  | Kiracınızın depolama uygulamasının nesne KIMLIĞI    | 01234567-89ab-cdef-0123-456789ABCDEF   |
 |   {your_app_insights_instrumentation_key}  |   App Insights örneğiniz için izleme anahtarı *  |   01234567-89ab-cdef-0123-456789ABCDEF |
-|  {your_ui_base_url}   | Uygulama hizmetinizde, Kullanıcı arabirimi dosyalarınıza hizmet verilen uç nokta    | https://yourapp.azurewebsites.net/B2CUI/GetUIPage   |
-|   {your_app_service_url}  | Uygulama hizmetinizin URL 'SI    |  https://yourapp.azurewebsites.net  |
+|  {your_ui_base_url}   | Uygulama hizmetinizde, Kullanıcı arabirimi dosyalarınıza hizmet verilen uç nokta    | `https://yourapp.azurewebsites.net/B2CUI/GetUIPage`   |
+|   {your_app_service_url}  | Uygulama hizmetinizin URL 'SI    |  `https://yourapp.azurewebsites.net`  |
 |   {Facebook-uygulama kimliği}  |  Azure AD B2C ile Federasyon için yapılandırdığınız Facebook uygulamasının uygulama KIMLIĞI   | 000000000000000   |
 |  {Facebook-uygulama-gizli}   |  Facebook 'un uygulama gizli anahtarını kaydettiğiniz ilke anahtarının adı   | B2C_1A_FacebookAppSecret   |
 
@@ -148,7 +148,7 @@ Kullanıcı Kimliği değerinin, karşılık gelen Azure AD B2C yapılandırma d
 
 1. Ilkeler klasöründeki [Azure AD B2C ilkesine](https://github.com/azure-ad-b2c/partner-integrations/tree/master/samples/Dynamics-Fraud-Protection/Policies) gidin.
 
-2. [LocalAccounts başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts) indirmek için bu [belgeyi](./custom-policy-get-started.md?tabs=applications#custom-policy-starter-pack) izleyin
+2. [LocalAccounts başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts) indirmek için bu [belgeyi](./tutorial-create-user-flows.md?pivots=b2c-custom-policy?tabs=applications#custom-policy-starter-pack) izleyin
 
 3. Azure AD B2C kiracı için ilkeyi yapılandırın.
 
@@ -184,4 +184,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](./tutorial-create-user-flows.md?pivots=b2c-custom-policy)

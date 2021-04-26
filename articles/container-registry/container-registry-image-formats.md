@@ -2,13 +2,13 @@
 title: Desteklenen içerik biçimleri
 description: Docker ile uyumlu kapsayıcı görüntüleri, Held grafikleri, OCı görüntüleri ve OCı yapıtları dahil Azure Container Registry tarafından desteklenen içerik biçimleri hakkında bilgi edinin.
 ms.topic: article
-ms.date: 08/30/2019
-ms.openlocfilehash: b2a54c65d149a27ed9eae85c3308d657ed3471a3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 03/02/2021
+ms.openlocfilehash: 218d98f3f16e8d0ca76a24692afbb2b69606564b
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100008341"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106223073"
 ---
 # <a name="content-formats-supported-in-azure-container-registry"></a>Azure Container Registry desteklenen içerik biçimleri
 
@@ -34,7 +34,7 @@ OCı yapıtları hakkında daha fazla bilgi edinmek için bkz. [depolama (ORAS) 
 
 ## <a name="helm-charts"></a>Helm grafikleri
 
-Azure Container Registry, Kubernetes için uygulamaları hızlı bir şekilde yönetmek ve dağıtmak üzere kullanılan bir paketleme biçimi olan [helk grafikleri](https://helm.sh/)için depolar barındırabilir. [Held Client](https://docs.helm.sh/using_helm/#installing-helm) sürüm 2 (2.11.0 veya üzeri) desteklenir.
+Azure Container Registry, Kubernetes için uygulamaları hızlı bir şekilde yönetmek ve dağıtmak üzere kullanılan bir paketleme biçimi olan [helk grafikleri](https://helm.sh/)için depolar barındırabilir. [Held istemcisi](https://docs.helm.sh/using_helm/#installing-helm) sürüm 3 önerilir. Bkz. [Azure Container Registry 'de itme ve çekme ve çekme grafikleri](container-registry-helm-repos.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

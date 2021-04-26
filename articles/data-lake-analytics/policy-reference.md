@@ -1,18 +1,18 @@
 ---
 title: Azure Data Lake Analytics için yerleşik ilke tanımları
 description: Azure Data Lake Analytics için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-lake-analytics
 ms.custom: subject-policy-reference
-ms.openlocfilehash: bc3a1dc76d24937868d76a352ab62165bbfa74ef
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: a0a564d53db7903ad136fc22700564015dce73ed
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105035328"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107878430"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-data-lake-analytics"></a>Azure Data Lake Analytics için Azure Ilkesi yerleşik tanımları
 

@@ -8,43 +8,47 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: forms-recognizer
 ms.topic: conceptual
-ms.date: 03/15/2021
+ms.date: 04/14/2021
 ms.author: lajanuar
-ms.openlocfilehash: 01a73e7940f88a3eb6e040f26d255448294cab18
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 00e51d2c9515191b6d127355f49eeed3000a46ed
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103467905"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107514722"
 ---
-# <a name="form-recognizer-prebuilt-identification-card-id-model"></a>Form tanıyıcı önceden oluşturulan kimlik kartı (KIMLIK) modeli
+# <a name="form-recognizer-prebuilt-identification-id-document-model"></a>Form tanıyıcı önceden oluşturulan kimlik (ID) belge modeli
 
-Azure form tanıyıcı, önceden oluşturulmuş kimlikler modelini kullanarak kamu kimlik kartlarından (kimlikler) bilgi çözümleyebilir ve ayıklayabilir. Dünya çapındaki Passport ve ABD sürücüsünün lisanslarından önemli bilgileri ayıklamak için KIMLIK tanıma özelliklerine sahip güçlü [optik karakter tanıma (OCR)](../computer-vision/concept-recognizing-text.md) olanaklarımızı birleştirir (tüm 50 durumlar ve D.C.). Kimlikler API 'SI bu kimlik belgelerinden, ad, soyadı, Doğum tarihi, belge numarası ve daha fazlası gibi önemli bilgileri ayıklar. Bu API, tanıyıcı v 2.1 önizlemesinde bulut hizmeti olarak ve şirket içi kapsayıcı olarak kullanılabilir.
+Azure form tanıyıcı, önceden oluşturulmuş kimlikler modelini kullanarak devlet tarafından verilen tanımlama belgelerinden (kimlikler) bilgileri çözümleyebilir ve ayıklayabilir. Dünya çapındaki Passport ve ABD sürücüsünün lisanslarından önemli bilgileri ayıklamak için KIMLIK tanıma özelliklerine sahip güçlü [optik karakter tanıma (OCR)](../computer-vision/overview-ocr.md) olanaklarımızı birleştirir (tüm 50 durumlar ve D.C.). Kimlikler API 'SI bu kimlik belgelerinden, ad, soyadı, Doğum tarihi, belge numarası ve daha fazlası gibi önemli bilgileri ayıklar. Bu API, tanıyıcı v 2.1 önizlemesinde bulut hizmeti olarak ve şirket içi kapsayıcı olarak kullanılabilir.
 
-## <a name="what-does-the-id-service-do"></a>KIMLIK hizmeti ne yapar? 
+## <a name="what-does-the-id-service-do"></a>KIMLIK hizmeti ne yapar?
 
-Önceden oluşturulmuş kimlikler hizmeti, dünya çapındaki Passport ve ABD sürücüsünün lisanslarından gelen anahtar değerlerini ayıklar ve bunları düzenlenmiş yapılandırılmış bir JSON yanıtında döndürür. 
+Önceden oluşturulmuş kimlikler hizmeti, dünya çapındaki Passport ve ABD sürücüsünün lisanslarından gelen anahtar değerlerini ayıklar ve bunları düzenlenmiş yapılandırılmış bir JSON yanıtında döndürür.
+
+### <a name="drivers-license-example"></a>**Sürücünün lisans örneği**
 
 ![Örnek sürücü lisansı](./media/id-example-drivers-license.JPG)
+
+### <a name="passport-example"></a>**Passport örneği**
 
 ![Örnek Passport](./media/id-example-passport-result.JPG)
 
 ### <a name="fields-extracted"></a>Ayıklanan alanlar
 
-|Ad| Tür | Description | Değer | 
+|Ad| Tür | Açıklama | Değer |
 |:-----|:----|:----|:----|
-|  Ülke | ülke | ISO 3166 standardı ile ülke kodu uyumlu | ABD | 
-|  Tarih Ofdoğum | date | DOB, YYYY-AA-GG biçiminde | "1980-01-01" | 
-|  DateOfExpiration | date | YYYY-AA-GG biçiminde sona erme tarihi | "2019-05-05" |  
-|  DocumentNumber | string | İlgili Passport numarası, sürücünün lisans numarası, vb. | "340020013" |  
-|  FirstName | string | Varsa verilen ad ve orta ilk başlangıç | JENNIFER | 
-|  LastName | string | Ayıklanan soyadı | "BROOKS" |   
+|  Ülke | ülke | ISO 3166 standardı ile ülke kodu uyumlu | ABD |
+|  Tarih Ofdoğum | date | DOB, YYYY-AA-GG biçiminde | "1980-01-01" |
+|  DateOfExpiration | date | YYYY-AA-GG biçiminde sona erme tarihi | "2019-05-05" |
+|  DocumentNumber | string | İlgili Passport numarası, sürücünün lisans numarası, vb. | "340020013" |
+|  FirstName | string | Varsa verilen ad ve orta ilk başlangıç | JENNIFER |
+|  LastName | string | Ayıklanan soyadı | "BROOKS" |
 |  Uylık | ülke | ISO 3166 standardı ile ülke kodu uyumlu | ABD |
-|  Komutu | cinsiyet | Olası ayıklanan değerler şunlardır "d", "F" ve "X" | "F" | 
+|  Komutu | cinsiyet | Olası ayıklanan değerler şunlardır "d", "F" ve "X" | "F" |
 |  Machinereadadblezone | object | Ayıklanan Passport MRZ, her iki satır 44 karakter dahil | "P<USABROOKS<<JENNIFER<<<<<<<<<<<<<<<<<<<<<<< 3400200135USA8001014F1905054710000307<<<<<<<<<<<<<<<<<<<<<<< 6 715816" |
-|  DocumentType | string | Belge türü, örneğin, Passport, sürücü lisansı | 'unuzun |  
+|  DocumentType | string | Belge türü, örneğin, Passport, sürücü lisansı | 'unuzun |
 |  Adres | string | Ayıklanan adres (yalnızca sürücü lisansı) | "123 SOKAK ADRESINI ŞEHIR WA 99999-1234"|
-|  Region | string | Ayıklanan bölge, eyalet, eyalet, vb. (yalnızca sürücü lisansı) | Eyaleti | 
+|  Region | string | Ayıklanan bölge, eyalet, eyalet, vb. (yalnızca sürücü lisansı) | Eyaleti |
 
 ### <a name="additional-features"></a>Ek özellikler
 
@@ -58,7 +62,7 @@ Kimlikler API 'SI de aşağıdaki bilgileri döndürür:
   > [!NOTE]
   > Önceden oluşturulmuş kimlikler KIMLIK özgünlük 'i algılamıyor
   >
-  > Form tanıyıcı önceden oluşturulmuş kimlikler, KIMLIK verilerinden önemli verileri ayıklar. Ancak, özgün kimlik belgesinin geçerliliğini veya gerçekliğini algılamaz. 
+  > Form tanıyıcı önceden oluşturulmuş kimlikler, KIMLIK verilerinden önemli verileri ayıklar. Ancak, özgün kimlik belgesinin geçerliliğini veya gerçekliğini algılamaz.
 
 ## <a name="try-it-out"></a>Deneyin
 
@@ -71,12 +75,12 @@ Form tanıyıcı kimlikleri hizmetini denemek için çevrimiçi örnek UI aracı
 
 [!INCLUDE [input requirements](./includes/input-requirements-receipts.md)]
 
-## <a name="supported-id-types"></a>Desteklenen KIMLIK türleri  
+## <a name="supported-id-types"></a>Desteklenen KIMLIK türleri
 
-* **Önceden oluşturulmuş kimlikler v 2.1-Önizleme. 3** Dünya çapındaki Passport ve ABD sürücüsünün lisanslarından önemli değerleri ayıklar. 
+* **Önceden oluşturulmuş kimlikler v 2.1-Önizleme. 3** Dünya çapındaki Passport ve ABD sürücüsünün lisanslarından önemli değerleri ayıklar.
 
   > [!NOTE]
-  > KIMLIK türü desteği 
+  > KIMLIK türü desteği
   >
   > Şu anda desteklenen KIMLIK türleri, dünya çapındaki Passport ve ABD sürücüsünün lisanslarını içerir. KIMLIK desteğimizi dünyanın dört bir yanındaki diğer kimlik belgeleriyle genişletmeyi etkin bir şekilde aradık.
 
@@ -112,7 +116,7 @@ Need to update this with updated APIM links when available
 Başarılı bir JSON yanıtı örneğine bakın: `readResults` düğüm, tanınan tüm metni içerir. Metin sayfaya, sonra satıra, sonra da tek sözcüklere göre düzenlenir. `documentResults`Düğüm, modelin bulduğu kimlik değerlerini içerir. Bu düğüm, ad, soyadı, belge numarası ve daha fazlası gibi faydalı anahtar/değer çiftlerini de bulacağınız yerdir.
 
 ```json
-{ 
+{
    "status": "succeeded",
   "createdDateTime": "2021-03-04T22:29:33Z",
   "lastUpdatedDateTime": "2021-03-04T22:29:36Z",
@@ -157,7 +161,7 @@ Başarılı bir JSON yanıtı örneğine bakın: `readResults` düğüm, tanına
           ...
       }
     ],
-    
+
      "documentResults": [
       {
         "docType": "prebuilt:idDocument:passport",
@@ -243,11 +247,10 @@ Başarılı bir JSON yanıtı örneğine bakın: `readResults` düğüm, tanına
 }
 ```
 
-
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kendi kimlik ve örneklerinizi [form tanıyıcı örnek Kullanıcı arabiriminde](https://fott-preview.azurewebsites.net/)deneyin.
-- Form tanıyıcı ile seçtiğiniz geliştirme dilinde bir KIMLIK işleme uygulaması yazmaya başlamak için [form tanıyıcı hızlı](quickstarts/client-library.md) başlangıcını doldurun.
+* Kendi kimlik ve örneklerinizi [form tanıyıcı örnek Kullanıcı arabiriminde](https://fott-preview.azurewebsites.net/)deneyin.
+* Form tanıyıcı ile seçtiğiniz geliştirme dilinde bir KIMLIK işleme uygulaması yazmaya başlamak için [form tanıyıcı hızlı](quickstarts/client-library.md) başlangıcını doldurun.
 
 ## <a name="see-also"></a>Ayrıca bkz.
 

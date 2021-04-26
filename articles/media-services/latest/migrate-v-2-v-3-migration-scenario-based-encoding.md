@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.workload: media
 ms.date: 03/25/2021
 ms.author: inhenkel
-ms.openlocfilehash: bf66723f878f8b277d71577c068afdad56708ad6
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: a01571f4a1f852deb84b7f20d61b8048e8000790
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105563280"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106490106"
 ---
 # <a name="encoding-scenario-based-migration-guidance"></a>Senaryo tabanlı geçiş kılavuzunu kodlama
 
@@ -91,7 +91,7 @@ V2 'de XML giriş ve çıkış meta verileri dosyaları, bir kodlama işinin son
 
 ## <a name="premium-encoder-to-v3-standard-encoder-or-partner-based-solutions"></a>Premium Encoder ile V3 Standart Kodlayıcısı veya iş ortağı tabanlı çözümler
 
-V2 API 'SI artık Premium Encoder 'ı desteklemiyor. Daha önce HEVC kodlaması için iş akışı tabanlı Premium Kodlayıcısı kullandıysanız, HEVC kodlama desteğiyle yeni v3 [Standart kodlayıcıya](media-encoder-standard-formats.md) geçiş yapılmalıdır.
+V2 API 'SI artık Premium Encoder 'ı desteklemiyor. Daha önce HEVC kodlaması için iş akışı tabanlı Premium Kodlayıcısı kullandıysanız, HEVC kodlama desteğiyle yeni v3 [Standart kodlayıcıya](encode-media-encoder-standard-formats-reference.md) geçiş yapılmalıdır.
 
 Premium Encoder 'ın gelişmiş iş akışı özelliklerine ihtiyacınız varsa, [Imagine Communications](https://imaginecommunications.com), [Telestream](https://www.telestream.net)veya [Bitmovin](https://bitmovin.com)'dan bir Azure gelişmiş kodlama iş ortağı çözümü kullanmaya başlamanız önerilir.
 
@@ -103,20 +103,20 @@ Artık, Azure depolama 'da depolanan dosyalardan, yerel olarak depolanan veya [h
 
 ## <a name="indexer-v1-audio-transcription-to-the-new-audioanalyzer-basic-mode"></a>Dizin Oluşturucu V1 ses dökümü yeni AudioAnalyzer "temel modu"
 
-V2 API 'sinde Dizin Oluşturucu v1 işlemcisini kullanan müşteriler için, `AudioAnalyzer` bir işi göndermeden önce [Temel modda](how-to-create-basic-audio-transform.md) yeni ' yi çağıran bir dönüşüm oluşturmanız gerekir.
+V2 API 'sinde Dizin Oluşturucu v1 işlemcisini kullanan müşteriler için, `AudioAnalyzer` bir işi göndermeden önce [Temel modda](transform-create-basic-audio-how-to.md) yeni ' yi çağıran bir dönüşüm oluşturmanız gerekir.
 
 ## <a name="encoding-transforms-and-jobs-concepts-tutorials-and-how-to-guides"></a>Kodlama, dönüşümler ve işler kavramları, öğreticiler ve nasıl yapılır kılavuzlarından
 
 ### <a name="concepts"></a>Kavramlar
 
-- [Video ve ses Media Services kodlama](encoding-concept.md)
-- [Standart kodlayıcı biçimleri ve codec bileşenleri](media-encoder-standard-formats.md)
-- [Otomatik olarak oluşturulmuş bir bit hızı ile kodlama](autogen-bitrate-ladder.md)
-- [Belirli bir çözüm için en iyi bit hızı değerini bulmak için içerik algılayan kodlama ön ayarını kullanın](content-aware-encoding.md)
+- [Video ve ses Media Services kodlama](encode-concept.md)
+- [Standart kodlayıcı biçimleri ve codec bileşenleri](encode-media-encoder-standard-formats-reference.md)
+- [Otomatik olarak oluşturulmuş bir bit hızı ile kodlama](encode-autogen-bitrate-ladder.md)
+- [Belirli bir çözüm için en iyi bit hızı değerini bulmak için içerik algılayan kodlama ön ayarını kullanın](encode-content-aware-concept.md)
 - [Medya ayrılmış birimleri](concept-media-reserved-units.md)
 - [Giriş meta verileri](input-metadata-schema.md)
 - [Çıkış meta verileri](output-metadata-schema.md)
-- [Media Services v3 'de dinamik paketleme: ses codec bileşenleri](dynamic-packaging-overview.md#audio-codecs-supported-by-dynamic-packaging)
+- [Media Services v3 'de dinamik paketleme: ses codec bileşenleri](encode-dynamic-packaging-concept.md#audio-codecs-supported-by-dynamic-packaging)
 
 ### <a name="tutorials"></a>Öğreticiler
 
@@ -127,18 +127,18 @@ V2 API 'sinde Dizin Oluşturucu v1 işlemcisini kullanan müşteriler için, `Au
 
 - [HTTPS URL 'sinden iş girişi oluşturma](job-input-from-http-how-to.md)
 - [Yerel dosyadan iş girişi oluşturma](job-input-from-local-file-how-to.md)
-- [Temel ses dönüşümü oluşturma](how-to-create-basic-audio-transform.md)
+- [Temel ses dönüşümü oluşturma](transform-create-basic-audio-how-to.md)
 - .NET ile
-  - [Özel bir dönüşümle kodlama-.NET](customize-encoder-presets-how-to.md)
-  - [Media Encoder Standard birlikte bir kaplama oluşturma](how-to-create-overlay.md)
-  - [.NET ile kodlayıcı standardını kullanarak küçük resimleri oluşturma](media-services-generate-thumbnails-dotnet.md)
+  - [Özel bir dönüşümle kodlama-.NET](transform-custom-presets-how-to.md)
+  - [Media Encoder Standard birlikte bir kaplama oluşturma](transform-create-overlay-how-to.md)
+  - [.NET ile kodlayıcı standardını kullanarak küçük resimleri oluşturma](transform-generate-thumbnails-dotnet-how-to.md)
 - Azure CLI ile
-  - [Özel bir dönüşümle kodlama-Azure CLı](custom-preset-cli-howto.md)
+  - [Özel bir dönüşümle kodlama-Azure CLı](transform-custom-preset-cli-how-to.md)
 - REST ile
-  - [Özel bir dönüşümle kodlama-REST](custom-preset-rest-howto.md)
-  - [REST ile kodlayıcı standardını kullanarak küçük resimleri oluşturma](media-services-generate-thumbnails-rest.md)
-- [Media Services .NET ile kodlarken bir videoyu alt kırpın](subclip-video-dotnet-howto.md)
-- [Media Services REST ile kodlarken bir videoyu alt kırpın](subclip-video-rest-howto.md)
+  - [Özel bir dönüşümle kodlama-REST](transform-custom-preset-rest-how-to.md)
+  - [REST ile kodlayıcı standardını kullanarak küçük resimleri oluşturma](transform-generate-thumbnails-rest-how-to.md)
+- [Media Services .NET ile kodlarken bir videoyu alt kırpın](transform-subclip-video-dotnet-how-to.md)
+- [Media Services REST ile kodlarken bir videoyu alt kırpın](transform-subclip-video-rest-how-to.md)
 
 ## <a name="samples"></a>Örnekler
 

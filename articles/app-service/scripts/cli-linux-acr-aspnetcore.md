@@ -9,12 +9,12 @@ ms.topic: sample
 ms.date: 12/13/2018
 ms.author: msangapu
 ms.custom: devx-track-dotnet, mvc, seodec18
-ms.openlocfilehash: b4c96b14a24cdc4b953d072dd51f4cb0ca5d67c8
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 037d66b4cc94fba5a0dee2a44b6a9e316dd36f96
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97006064"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107787751"
 ---
 # <a name="create-an-aspnet-core-app-in-a-docker-container-in-app-service-from-azure-container-registry"></a>Azure Container Registry App Service bir Docker kapsayıcısında ASP.NET Core uygulaması oluşturma
 
@@ -37,10 +37,10 @@ Bu betik bir kaynak grubu, App Service uygulaması ve tüm ilgili kaynakları ol
 
 | Komut | Notlar |
 |---|---|
-| [`az group create`](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | App Service planı oluşturur. |
-| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | App Service uygulaması oluşturur. |
-| [`az webapp config container set`](/cli/azure/webapp/config/container#az-webapp-config-container-set) | App Service uygulaması için Docker kapsayıcısını ayarlar. |
+| [`az group create`](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az_appservice_plan_create) | App Service planı oluşturur. |
+| [`az webapp create`](/cli/azure/webapp#az_webapp_create) | App Service uygulaması oluşturur. |
+| [`az webapp config container set`](/cli/azure/webapp/config/container#az_webapp_config_container_set) | App Service uygulaması için Docker kapsayıcısını ayarlar. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

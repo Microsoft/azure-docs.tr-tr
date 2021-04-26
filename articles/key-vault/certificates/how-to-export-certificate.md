@@ -10,12 +10,12 @@ ms.topic: how-to
 ms.custom: mvc
 ms.date: 08/11/2020
 ms.author: sebansal
-ms.openlocfilehash: ad3e5bcda0fb03af0637a309b4dbfd248b54f1a0
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 0efe0164d8e1a4e5bc3b9d6d7313855740afd316
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104587211"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107767916"
 ---
 # <a name="export-certificates-from-azure-key-vault"></a>Sertifikaları Azure Key Vault dışarı aktarma
 
@@ -61,7 +61,7 @@ az keyvault certificate download --file
                                  [--version]
 ```
 
-Daha fazla bilgi için [örnekleri ve parametre tanımlarını](/cli/azure/keyvault/certificate#az-keyvault-certificate-download) görüntüleyin.
+Daha fazla bilgi için [örnekleri ve parametre tanımlarını](/cli/azure/keyvault/certificate#az_keyvault_certificate_download) görüntüleyin.
 
 Sertifika olarak indirme, genel bölümü elde etmek anlamına gelir. Hem özel anahtar hem de genel meta verileri isterseniz, parolayı gizli olarak indirebilirsiniz.
 
@@ -75,7 +75,7 @@ az keyvault secret download -–file {nameofcert.pfx}
                             [--version]
 ```
 
-Daha fazla bilgi için bkz. [parametre tanımları](/cli/azure/keyvault/secret#az-keyvault-secret-download).
+Daha fazla bilgi için bkz. [parametre tanımları](/cli/azure/keyvault/secret#az_keyvault_secret_download).
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -102,7 +102,7 @@ $pfxFileByte = $x509Cert.Export($type, $password)
 ```
 
 Bu komut, tüm sertifika zincirini özel anahtarla (örn. içeri aktarıldıkları gibi) dışa aktarır. Sertifika, parola korumalı.
-**Get-azkeyvaultcertificate** komutu ve parametreleri hakkında daha fazla bilgi için bkz. [Get-azkeyvaultcertificate-örnek 2](/powershell/module/az.keyvault/Get-AzKeyVaultCertificate?view=azps-4.4.0).
+**Get-azkeyvaultcertificate** komutu ve parametreleri hakkında daha fazla bilgi için bkz. [Get-azkeyvaultcertificate-örnek 2](/powershell/module/az.keyvault/Get-AzKeyVaultCertificate).
 
 # <a name="portal"></a>[Portal](#tab/azure-portal)
 

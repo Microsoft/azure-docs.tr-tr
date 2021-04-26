@@ -5,19 +5,19 @@ description: Azure portal, Azure CLı ve PowerShell kullanarak bir Azure SQL ver
 services: sql-database
 ms.service: sql-db-mi
 ms.subservice: high-availability
-ms.custom: sqldbrb=2
+ms.custom: sqldbrb=2, devx-track-azurecli
 ms.devlang: ''
 ms.topic: how-to
 author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 08/14/2019
-ms.openlocfilehash: 09bb7cb2344e3e708a64842916e6e483136da3bb
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a2f0cb683669aa092493c8080d5e4646cf9706c3
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94594292"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107477946"
 ---
 # <a name="configure-a-failover-group-for-azure-sql-database"></a>Azure SQL veritabanı için bir yük devretme grubu yapılandırma
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -84,11 +84,11 @@ Yük devretme grubunuzu oluşturun ve PowerShell 'i kullanarak veritabanınızı
    # Create a failover group between the servers
    $failovergroup = Write-host "Creating a failover group between the primary and secondary server..."
    New-AzSqlDatabaseFailoverGroup `
-      –ResourceGroupName $resourceGroupName `
+      â€“ResourceGroupName $resourceGroupName `
       -ServerName $serverName `
       -PartnerServerName $drServerName  `
-      –FailoverGroupName $failoverGroupName `
-      –FailoverPolicy Automatic `
+      â€“FailoverGroupName $failoverGroupName `
+      â€“FailoverPolicy Automatic `
       -GracePeriodWithDataLossHours 2
    $failovergroup
 
@@ -248,11 +248,11 @@ Yük devretme grubunuzu oluşturun ve PowerShell kullanarak elastik havuzunuzu e
    # Create a failover group between the servers
    Write-host "Creating failover group..."
    New-AzSqlDatabaseFailoverGroup `
-       –ResourceGroupName $resourceGroupName `
+       â€“ResourceGroupName $resourceGroupName `
        -ServerName $serverName `
        -PartnerServerName $drServerName  `
-       –FailoverGroupName $failoverGroupName `
-       –FailoverPolicy Automatic `
+       â€“FailoverGroupName $failoverGroupName `
+       â€“FailoverPolicy Automatic `
        -GracePeriodWithDataLossHours 2
    Write-host "Failover group created successfully."
 

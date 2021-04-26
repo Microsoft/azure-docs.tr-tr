@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 10/2/2020
+ms.date: 4/1/2021
 ms.author: hirsin
 ms.reviewer: hirsin
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 96f7d7c94ce908d953a6941bfa237fe8da1dc482
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 8b3e27f266551eb7425d4801d14261a5e428e4c2
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98752662"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168119"
 ---
 # <a name="microsoft-identity-platform-and-the-oauth-20-client-credentials-flow"></a>Microsoft Identity platformu ve OAuth 2,0 istemci kimlik bilgileri akışı
 
@@ -25,7 +25,7 @@ Bir uygulamanın kimliğini kullanarak Web 'de barındırılan kaynaklara erişm
 
 Bu makalede, uygulamanızdaki protokolde doğrudan programlanın nasıl yapılacağı açıklanır. Mümkün olduğunda, [belirteçleri edinmek ve güvenli Web API 'lerini çağırmak](authentication-flows-app-scenarios.md#scenarios-and-supported-authentication-flows)Için desteklenen Microsoft kimlik doğrulama KITAPLıKLARıNı (msal) kullanmanızı öneririz.  Ayrıca [, msal kullanan örnek uygulamalara](sample-v2-code.md)göz atın.
 
-OAuth 2,0 istemci kimlik bilgileri verme akışı, bir Web hizmetinin (gizli istemci) başka bir Web hizmetini çağırırken kimlik doğrulaması yapmak yerine kendi kimlik bilgilerini kullanmasına izin verir. Bu senaryoda, istemci genellikle bir orta katman Web hizmeti, bir Daemon hizmeti veya bir Web sitesidir. Daha yüksek bir güvence düzeyi için, Microsoft Identity platformu, çağıran hizmetin kimlik bilgileri olarak bir sertifika (paylaşılan gizlilik yerine) kullanmasına de olanak tanır.
+OAuth 2,0 istemci kimlik bilgileri verme akışı, bir Web hizmetinin (gizli istemci) başka bir Web hizmetini çağırırken kimlik doğrulaması yapmak yerine kendi kimlik bilgilerini kullanmasına izin verir. Daha yüksek bir güvence düzeyi için, Microsoft Identity platformu, çağıran hizmetin kimlik bilgileri olarak bir sertifika (paylaşılan gizlilik yerine) kullanmasına de olanak tanır.  Uygulamaların kimlik bilgileri kullanıldığı için, bu kimlik bilgilerinin güvenli tutulması gerekir. bu kimlik bilgisini kaynak kodunuzda _hiçbir_ şekilde yayımlayamaz, Web sayfalarına katıştırın veya yaygın olarak dağıtılmış bir yerel uygulamada kullanın. 
 
 İstemci kimlik bilgileri akışında, izinler doğrudan uygulamanın kendisine bir yönetici tarafından verilir. Uygulama bir kaynağa belirteç sunduğunda, kaynak, kimlik doğrulamasında yer alan hiçbir Kullanıcı olmadığından uygulamanın kendisini bir eylem gerçekleştirmek üzere yetkilendirmesiyle zorlar.  Bu makalede, [bir uygulamayı BIR API çağrısını yetkilendirmek](#application-permissions)için gereken adımlar ve bu [API 'yi çağırmak için gereken belirteçleri alma](#get-a-token)adımları ele alınmaktadır.
 

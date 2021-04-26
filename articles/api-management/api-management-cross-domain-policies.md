@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 03/01/2021
 ms.author: apimpm
-ms.openlocfilehash: 85abf30d792b24b92685e191f5b460a42dc29142
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6f074ff389971fa56da7838a9a46ec5c4d42dc5a
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101688425"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107739107"
 ---
 # <a name="api-management-cross-domain-policies"></a>API Management etki alanları arası ilkeler
 Bu konu, aşağıdaki API Management ilkelerine yönelik bir başvuru sağlar. İlke ekleme ve yapılandırma hakkında daha fazla bilgi için bkz. [API Management ilkeleri](./api-management-policies.md).
@@ -69,7 +69,7 @@ Bu ilke, aşağıdaki ilke [bölümlerinde](./api-management-howto-policies.md#s
 
 CORS, bir tarayıcı ve sunucunun etkileşime geçmesini ve belirli çapraz kaynak isteklerine izin verip vermeyeceğinizi (yani, bir Web sayfasındaki JavaScript 'ten diğer etki alanlarına yapılan XMLHttpRequests çağrılarını) belirlemenizi sağlar. Bu, yalnızca aynı kaynaklı isteklere izin verilenden daha fazla esneklik sağlar, ancak tüm çapraz kaynak isteklerine izin verilmesinin daha güvenlidir.
 
-Geliştirici Portalında etkileşimli konsolu etkinleştirmek için CORS ilkesini uygulamanız gerekir. Ayrıntılar için [Geliştirici Portalı belgelerine](./api-management-howto-developer-portal.md#cors) bakın.
+Geliştirici Portalında etkileşimli konsolu etkinleştirmek için CORS ilkesini uygulamanız gerekir. Ayrıntılar için [Geliştirici Portalı belgelerine](./developer-portal-faq.md#cors) bakın.
 
 ### <a name="policy-statement"></a>İlke ekstresi
 

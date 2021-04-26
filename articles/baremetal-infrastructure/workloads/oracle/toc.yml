@@ -1,0 +1,24 @@
+- name: Oracle için BareMetal Altyapısı nedir?
+  href: oracle-baremetal-overview.md
+- name: BareMetal SKU 'Ları
+  href: oracle-baremetal-skus.md
+- name: Depolama
+  href: oracle-baremetal-storage.md
+- name: Düzeltme eki uygulama konuları
+  href: oracle-baremetal-patching.md
+- name: Ethernet yapılandırması
+  href: oracle-baremetal-ethernet.md
+- name: Mimari
+  href: oracle-baremetal-architecture.md
+- name: Sağlama
+  href: oracle-baremetal-provision.md
+- name: Yüksek kullanılabilirlik ve olağanüstü durum kurtarma
+  items:
+    - name: Genel Bakış
+      href: concepts-oracle-high-availability.md
+    - name: Yüksek kullanılabilirlik özellikleri
+      href: high-availability-features.md
+    - name: Seçenekler ve önemli noktalar
+      href: options-considerations-high-availability.md
+    - name: Nasıl kurtarılacağı seçin
+      href: oracle-high-availability-recovery.md

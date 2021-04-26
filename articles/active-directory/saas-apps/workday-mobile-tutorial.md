@@ -11,12 +11,12 @@ ms.workload: identity
 ms.topic: tutorial
 ms.date: 08/31/2020
 ms.author: jeedes
-ms.openlocfilehash: ef1ca41f54a15554a04fa3edf608bb13f5fb3398
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 94ab61a5c6335d43842ada48f17572c186af773c
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96182028"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077202"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-workday-mobile-application"></a>Öğretici: Workday mobil uygulamasıyla çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
@@ -132,13 +132,11 @@ Erişim **verme** için aşağıdaki adımları gerçekleştirin:
 
 | Senaryo | Anahtar değer çiftleri |
 |----------------------------------------------------------------------------------------   |-----------|
-| Kiracı ve Web adresi alanlarını otomatik olarak doldur:<br>Android for Work profillerini etkinleştirdiğinizde Android üzerinde ● Workday.<br>İPad ve iPhone üzerinde ● Workday.     | Kiracınızı yapılandırmak için şu değerleri kullanın: <br>● Yapılandırma anahtarı = `UserGroupCode`<br>● Değer türü = dize <br>● Yapılandırma değeri = kiracı adınız. Örnek: `gms`<br>Web adresinizi yapılandırmak için şu değerleri kullanın:<br>● Yapılandırma anahtarı = `AppServiceHost`<br>● Değer türü = dize<br>● Yapılandırma değeri = kiracınızın temel URL 'SI. Örnek: `https://www.myworkday.com`                                |   |
+| Kiracı ve Web adresi alanlarını otomatik olarak doldur:<br>Android for Work profillerini etkinleştirdiğinizde Android üzerinde ● Workday.<br>İPad ve iPhone üzerinde ● Workday.     | Kiracınızı yapılandırmak için şu değerleri kullanın: <br>● Yapılandırma anahtarı = `UserGroupCode`<br>● Değer türü = dize <br>● Yapılandırma değeri = kiracı adınız. Örnek: `gms`<br>Web adresinizi yapılandırmak için şu değerleri kullanın:<br>● Yapılandırma anahtarı = `AppServiceHost`<br>● Değer türü = dize<br>● Yapılandırma değeri = kiracınızın temel URL 'SI. Örnek: `https://www.myworkday.com`                                | 
 | İPad ve iPhone üzerinde Workday için bu eylemleri devre dışı bırakın:<br>● Kes, Kopyala ve Yapıştır<br>● Yazdır                       | `False`İşlevselliği devre dışı bırakmak için bu anahtarlar üzerinde değeri (Boole) olarak ayarlayın:<br>●   `AllowCutCopyPaste`<br>●    `AllowPrint`    |
 | Android 'de Workday için ekran görüntülerini devre dışı bırakın. |`False` `AllowScreenshots` İşlevselliği devre dışı bırakmak için anahtar üzerinde değeri (Boole) olarak ayarlayın.|
 | Kullanıcılarınız için önerilen güncelleştirmeleri devre dışı bırakın.|`False` `AllowSuggestedUpdates` İşlevselliği devre dışı bırakmak için anahtar üzerinde değeri (Boole) olarak ayarlayın.|
 |Mobil kullanıcıları tercih ettiğiniz uygulama deposuna yönlendirmek için uygulama mağazası URL 'sini özelleştirin.|Uygulama Mağazası URL 'sini değiştirmek için şu değerleri kullanın:<br>● Yapılandırma anahtarı = `AppUpdateURL`<br>● Değer türü = dize<br> ● Yapılandırma değeri = App Store URL 'SI|
-|       |
-
 
 ## <a name="ios-configuration-policies"></a>iOS yapılandırma ilkeleri
 

@@ -3,12 +3,12 @@ title: IoT Edge SSS-Azure 'da canlı video analizi
 description: Bu makalede, IoT Edge üzerinde canlı video analizi hakkında sıkça sorulan sorular yanıtlanmaktadır.
 ms.topic: conceptual
 ms.date: 12/01/2020
-ms.openlocfilehash: 661b6155ce2d95e2111a1fa338fd5df438e61e7d
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 2e5ec6e3a303bb8d655e666a820cfe67943b4eb6
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105032812"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106275966"
 ---
 # <a name="live-video-analytics-on-iot-edge-faq"></a>IoT Edge SSS üzerinde canlı video analizi
 
@@ -57,7 +57,7 @@ Hayır, uçta cihazların açık ağ video arabirimi Forumu (ONVıF) bulma işle
 
 **Azure Media Services, HLS veya DASH gibi akış teknolojilerini kullanarak kenarından kaydedilmiş varlıkları kayıttan yürütebilir miyim?**
 
-Evet. Kayıtlı varlıkları Azure Media Services başka bir varlık gibi akışla aktarabilirsiniz. İçeriği akışa almak için, oluşturulmuş bir akış uç noktası ve çalışır durumda olmalıdır. Standart akış Konumlandırıcı oluşturma işleminin kullanılması, herhangi bir özellikli oynatıcı çerçevesine akış için bir Apple HTTP Canlı Akışı (HLS) veya HTTP üzerinden dinamik Uyarlamalı akışa (MPEG-DASH olarak da bilinir) yönelik erişim sağlayacak. HLS veya DASH bildirimleri oluşturma ve yayımlama hakkında daha fazla bilgi için bkz. [dinamik paketleme](../latest/dynamic-packaging-overview.md).
+Evet. Kayıtlı varlıkları Azure Media Services başka bir varlık gibi akışla aktarabilirsiniz. İçeriği akışa almak için, oluşturulmuş bir akış uç noktası ve çalışır durumda olmalıdır. Standart akış Konumlandırıcı oluşturma işleminin kullanılması, herhangi bir özellikli oynatıcı çerçevesine akış için bir Apple HTTP Canlı Akışı (HLS) veya HTTP üzerinden dinamik Uyarlamalı akışa (MPEG-DASH olarak da bilinir) yönelik erişim sağlayacak. HLS veya DASH bildirimleri oluşturma ve yayımlama hakkında daha fazla bilgi için bkz. [dinamik paketleme](../latest/encode-dynamic-packaging-concept.md).
 
 **Arşivlenmiş bir varlık üzerinde Media Services standart içerik koruması ve DRM özelliklerini kullanabilir miyim?**
 
@@ -69,7 +69,7 @@ Uyumlu HLS sürüm 3 veya sürüm 4 ' ü destekleyen tüm standart oyuncular des
 
 Test için önerilen oyuncular şunlardır:
 
-* [Azure Media Player](../latest/use-azure-media-player.md)
+* [Azure Media Player](../latest/player-use-azure-media-player-how-to.md)
 * [HLS.js](https://hls-js.netlify.app/demo/)
 * [Video.js](https://videojs.com/)
 * [Dash.js](https://github.com/Dash-Industry-Forum/dash.js/wiki)

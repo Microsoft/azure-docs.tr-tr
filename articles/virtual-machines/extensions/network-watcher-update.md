@@ -15,10 +15,10 @@ ms.workload: infrastructure-services
 ms.date: 09/23/2020
 ms.author: damendo
 ms.openlocfilehash: 42efe2927b4d711f7fa66a96ebd25f1a62bf654a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "102563617"
 ---
 # <a name="update-the-network-watcher-extension-to-the-latest-version"></a>Ağ Izleyicisi uzantısını en son sürüme güncelleştirin

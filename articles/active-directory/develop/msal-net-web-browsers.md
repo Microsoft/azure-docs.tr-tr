@@ -13,12 +13,12 @@ ms.date: 05/18/2020
 ms.author: marsma
 ms.reviewer: saeeda
 ms.custom: devx-track-csharp, aaddev
-ms.openlocfilehash: 23ba50a6eca1e398b9d459153b84719909f2ecac
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 4121d4b9ac73ed18da7dce0e397fe919589ac6f0
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99583748"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107478769"
 ---
 # <a name="using-web-browsers-msalnet"></a>Web tarayıcıları kullanma (MSAL.NET)
 
@@ -48,8 +48,8 @@ Genellikle, platform varsayılanını kullanmanız önerilir ve bu genellikle si
 | Framework        | Ekleme | Sistem | Varsayılan |
 | ------------- |-------------| -----| ----- |
 | .NET klasik     | Yes | Evet ^ | Ekleme |
-| .NET Core     | No | Evet ^ | Sistem |
-| .NET Standard | No | Evet ^ | Sistem |
+| .NET Core     | Hayır | Evet ^ | Sistem |
+| .NET Standard | Hayır | Evet ^ | Sistem |
 | UWP | Yes | Hayır | Ekleme |
 | Xamarin.Android | Yes | Yes  | Sistem |
 | Xamarin.iOS | Yes | Yes  | Sistem |
@@ -63,11 +63,11 @@ Varsayılan olarak, MSAL.NET, Xamarin. iOS, Xamarin. Android ve .NET Core üzeri
 
 Sistem tarayıcısının kullanılması, bir aracı (Şirket portalı/Authenticator) gerekmeden, SSO durumunu diğer uygulamalarla ve Web uygulamalarıyla paylaşmanın önemli avantajlarından yararlanır. Varsayılan olarak, Xamarin iOS ve Xamarin Android platformları için MSAL.NET içinde Sistem tarayıcısı kullanılmıştır çünkü bu platformlarda, sistem Web tarayıcısı ekranın tamamını kaplar ve Kullanıcı deneyimi daha iyidir. Sistem Web görünümü bir iletişim kutusundan ayırt edilemez. Ancak iOS 'ta, kullanıcının uygulamayı geri çağırması için izin vermesi gerekebilir, bu durum sinir bozucu olabilir.
 
-## <a name="system-browser-experience-on-net-core"></a>.NET Core 'da sistem tarayıcı deneyimi
+## <a name="system-browser-experience-on-net"></a>.NET üzerinde sistem tarayıcı deneyimi 
 
 .NET Core 'da MSAL.NET, sistem tarayıcısını ayrı bir işlem olarak başlatır. MSAL.NET bu tarayıcı üzerinde denetime sahip değildir ancak kullanıcı kimlik doğrulamasını tamamladıktan sonra, Web sayfası, MSAL.NET 'in URI 'yi ele geçirebilir şekilde yeniden yönlendirilir.
 
-Ayrıca, .NET klasik için yazılmış uygulamaları bu tarayıcıyı kullanacak şekilde yapılandırmak için
+Ayrıca, bu tarayıcıyı kullanarak .NET klasik veya .NET 5 için yazılmış uygulamaları da yapılandırabilirsiniz:
 
 ```csharp
 await pca.AcquireTokenInteractive(s_scopes)

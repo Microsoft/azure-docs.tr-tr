@@ -5,12 +5,12 @@ ms.devlang: php
 ms.topic: article
 ms.date: 06/02/2020
 zone_pivot_groups: app-service-platform-windows-linux
-ms.openlocfilehash: afac8273b5729bcf5470be471145214426dc7dab
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 94cbe0fa6669546cee8e989a6db2fcbb428cb9d0
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "90055308"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829449"
 ---
 # <a name="configure-a-php-app-for-azure-app-service"></a>Azure App Service için bir PHP uygulaması yapılandırma
 
@@ -28,6 +28,9 @@ Geçerli PHP sürümünü göstermek için [Cloud Shell](https://shell.azure.com
 az webapp config show --resource-group <resource-group-name> --name <app-name> --query phpVersion
 ```
 
+> [!NOTE]
+> Bir geliştirme yuvasına yönelik olarak, `--slot` ardından yuvanın adı gelen parametresini ekleyin.
+
 Tüm desteklenen PHP sürümlerini göstermek için [Cloud Shell](https://shell.azure.com)aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
@@ -44,6 +47,9 @@ Geçerli PHP sürümünü göstermek için [Cloud Shell](https://shell.azure.com
 az webapp config show --resource-group <resource-group-name> --name <app-name> --query linuxFxVersion
 ```
 
+> [!NOTE]
+> Bir geliştirme yuvasına yönelik olarak, `--slot` ardından yuvanın adı gelen parametresini ekleyin.
+
 Tüm desteklenen PHP sürümlerini göstermek için [Cloud Shell](https://shell.azure.com)aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
@@ -59,7 +65,7 @@ az webapp list-runtimes --linux | grep PHP
 PHP sürümünü 7,4 olarak ayarlamak için [Cloud Shell](https://shell.azure.com) aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
-az webapp config set --name <app-name> --resource-group <resource-group-name> --php-version 7.4
+az webapp config set --resource-group <resource-group-name> --name <app-name> --php-version 7.4
 ```
 
 ::: zone-end
@@ -69,7 +75,7 @@ az webapp config set --name <app-name> --resource-group <resource-group-name> --
 PHP sürümünü 7,2 olarak ayarlamak için [Cloud Shell](https://shell.azure.com) aşağıdaki komutu çalıştırın:
 
 ```azurecli-interactive
-az webapp config set --name <app-name> --resource-group <resource-group-name> --linux-fx-version "PHP|7.2"
+az webapp config set --resource-group <resource-group-name> --name <app-name> --linux-fx-version "PHP|7.2"
 ```
 
 ::: zone-end
@@ -243,7 +249,7 @@ getenv("DB_HOST")
 
 Seçtiğiniz Web çerçevesi, site kökü olarak bir alt dizin kullanabilir. Örneğin, [Laralevel](https://laravel.com/), site kökü olarak *ortak/* alt dizini kullanır.
 
-Site kökünü özelleştirmek için, komutunu kullanarak uygulamanın sanal uygulama yolunu ayarlayın [`az resource update`](/cli/azure/resource#az-resource-update) . Aşağıdaki örnek, site kökünü deponuzdaki *ortak/* alt dizine ayarlar. 
+Site kökünü özelleştirmek için, komutunu kullanarak uygulamanın sanal uygulama yolunu ayarlayın [`az resource update`](/cli/azure/resource#az_resource_update) . Aşağıdaki örnek, site kökünü deponuzdaki *ortak/* alt dizine ayarlar. 
 
 ```azurecli-interactive
 az resource update --name web --resource-group <group-name> --namespace Microsoft.Web --resource-type config --parent sites/<app-name> --set properties.virtualApplications[0].physicalPath="site\wwwroot\public" --api-version 2015-06-01
@@ -492,4 +498,3 @@ Tanılama günlüklerinizin Azure App Service görünmesini sağlamak için stan
 > [App Service Linux Hakkında SSS](faq-app-service-linux.md)
 
 ::: zone-end
-

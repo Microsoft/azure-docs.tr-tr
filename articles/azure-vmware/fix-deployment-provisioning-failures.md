@@ -4,10 +4,10 @@ description: Azure VMware Çözüm dağıtımı veya sağlama hatası için bir 
 ms.topic: how-to
 ms.date: 10/28/2020
 ms.openlocfilehash: 27b645f4ca225fdd74bca6499b6581b3803e41a4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "94542414"
 ---
 # <a name="open-a-support-request-for-an-azure-vmware-solution-deployment-or-provisioning-failure"></a>Azure VMware Çözüm dağıtımı veya sağlama hatası için bir destek isteği açın

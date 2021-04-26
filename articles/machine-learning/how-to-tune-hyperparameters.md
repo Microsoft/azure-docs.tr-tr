@@ -11,12 +11,12 @@ ms.subservice: core
 ms.date: 02/26/2021
 ms.topic: conceptual
 ms.custom: how-to, devx-track-python, contperf-fy21q1
-ms.openlocfilehash: 34adcf2218e29572ec9a86583addc7c021313085
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: ec01561c5c44c850b32187629552b1bdb99537e7
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102519648"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107819187"
 ---
 # <a name="hyperparameter-tuning-a-model-with-azure-machine-learning"></a>Azure Machine Learning olan bir modeli hiper parametre olarak ayarlama
 
@@ -183,7 +183,7 @@ run_logger.log("accuracy", float(val_accuracy))
 
 Eğitim betiği öğesini hesaplar `val_accuracy` ve birincil ölçüm "doğruluk" olarak kaydeder. Ölçüm her günlüğe kaydedildiğinde, hiper parametre ayarlama hizmeti tarafından alınır. Raporlama sıklığını öğrenmek sizin için önemlidir.
 
-Model eğitimi çalışmalarından günlük değerleri hakkında daha fazla bilgi için bkz. [Azure ML eğitim çalıştırmaları 'nda günlüğü etkinleştirme](how-to-track-experiments.md).
+Model eğitimi çalışmalarından günlük değerleri hakkında daha fazla bilgi için bkz. [Azure ML eğitim çalıştırmaları 'nda günlüğü etkinleştirme](how-to-log-view-metrics.md).
 
 ## <a name="specify-early-termination-policy"></a><a name="early-termination"></a> Erken sonlandırma ilkesini belirtin
 
@@ -424,7 +424,7 @@ Azure Machine Learning Studio 'da hyperparameter ayarlama çalıştırmalarını
 
 ### <a name="studio"></a>Studio
 
-[Azure Machine Learning Studio](https://ml.azure.com)'da tüm hyperparameter ayarlama çalışmalarınızı görselleştirebilirsiniz. Portalda bir denemeyi görüntüleme hakkında daha fazla bilgi için bkz. [Studio 'da çalıştırma kayıtlarını görüntüleme](how-to-monitor-view-training-logs.md#view-the-experiment-in-the-web-portal).
+[Azure Machine Learning Studio](https://ml.azure.com)'da tüm hyperparameter ayarlama çalışmalarınızı görselleştirebilirsiniz. Portalda bir denemeyi görüntüleme hakkında daha fazla bilgi için bkz. [Studio 'da çalıştırma kayıtlarını görüntüleme](how-to-log-view-metrics.md#view-the-experiment-in-the-web-portal).
 
 - **Ölçüm grafiği**: Bu görselleştirme, hiper parametre ayarlama süresince her bir Hyperdrive alt öğesi için günlüğe kaydedilen ölçümleri izler. Her satır bir alt çalışmayı temsil eder ve her bir nokta, çalışma zamanının o yinelemesinde birincil ölçüm değerini ölçer.  
 
@@ -481,5 +481,5 @@ Bu klasördeki tren-hyperparameter-* Not defterleri bölümüne bakın:
 [!INCLUDE [aml-clone-in-azure-notebook](../../includes/aml-clone-for-examples.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Deneme izleme](how-to-track-experiments.md)
+* [Deneme izleme](how-to-log-view-metrics.md)
 * [Eğitilen model dağıtma](how-to-deploy-and-where.md)

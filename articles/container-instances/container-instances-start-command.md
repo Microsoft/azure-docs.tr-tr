@@ -3,12 +3,12 @@ title: Kapsayıcı örneğinde giriş noktasını geçersiz kıl
 description: Bir Azure Container Instance dağıtırken bir kapsayıcı görüntüsündeki giriş noktasını geçersiz kılmak için bir komut satırı ayarlayın
 ms.topic: article
 ms.date: 04/15/2019
-ms.openlocfilehash: 23221de3dc91c37c2e6fb96489539d3954efcd87
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 5898decbf4108d48bb9e84019d659075b18fd043
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "86169638"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107771092"
 ---
 # <a name="set-the-command-line-in-a-container-instance-to-override-the-default-command-line-operation"></a>Varsayılan komut satırı işlemini geçersiz kılmak için bir kapsayıcı örneğindeki komut satırını ayarlayın
 
@@ -118,8 +118,8 @@ Birden çok Kapsayıcılı büyük bir veri kümesini toplu işleme gibi görev 
 [aci-wordcount]: https://hub.docker.com/_/microsoft-azuredocs-aci-wordcount
 
 <!-- LINKS Internal -->
-[az-container-create]: /cli/azure/container#az-container-create
-[az-container-logs]: /cli/azure/container#az-container-logs
-[az-container-show]: /cli/azure/container#az-container-show
+[az-container-create]: /cli/azure/container#az_container_create
+[az-container-logs]: /cli/azure/container#az_container_logs
+[az-container-show]: /cli/azure/container#az_container_show
 [new-azurermcontainergroup]: /powershell/module/azurerm.containerinstance/new-azurermcontainergroup
 [portal]: https://portal.azure.com

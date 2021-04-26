@@ -4,13 +4,13 @@ description: Azure Kubernetes Service 'te (AKS) Azure CNı (Gelişmiş) ağını
 services: container-service
 ms.topic: article
 ms.date: 06/03/2019
-ms.custom: references_regions
-ms.openlocfilehash: ef9e3689f5846ddfc66c47a15967a18fc6550d35
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.custom: references_regions, devx-track-azurecli
+ms.openlocfilehash: 839aa012cedaaa6f5bd3d1edad60e3ea7278133b
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102504261"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775898"
 ---
 # <a name="configure-azure-cni-networking-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service 'te (AKS) Azure CNı ağını yapılandırma
 
@@ -61,7 +61,7 @@ AKS kümesindeki düğüm başına en fazla düğüm sayısı 250 ' dir. Düğü
 
 | Dağıtım yöntemi | Kubenet varsayılanı | Azure CNı varsayılan | Dağıtımda yapılandırılabilir |
 | -- | :--: | :--: | -- |
-| Azure CLI’si | 110 | 30 | Evet (250 'e kadar) |
+| Azure CLI | 110 | 30 | Evet (250 'e kadar) |
 | Resource Manager şablonu | 110 | 30 | Evet (250 'e kadar) |
 | Portal | 110 | 110 (düğüm havuzları sekmesinde yapılandırılır) | No |
 
@@ -221,8 +221,8 @@ IP 'lerin dinamik olarak ayrılması ile Azure CNı kullanılırken düğüm ba�
 
 |SEÇENEĞIYLE CNı kullanan|Dağıtım yöntemi|Varsayılan|Dağıtımda yapılandırılabilir|
 |--|--| :--: |--|
-|Geleneksel Azure CNı|Azure CLI’si|30|Evet (250 'e kadar)|
-|IP 'lerin dinamik ayırması ile Azure CNı|Azure CLI’si|250|Evet (250 'e kadar)|
+|Geleneksel Azure CNı|Azure CLI|30|Evet (250 'e kadar)|
+|IP 'lerin dinamik ayırması ile Azure CNı|Azure CLI|250|Evet (250 'e kadar)|
 
 Pod başına en fazla düğüm yapılandırması ile ilgili diğer tüm rehberlik aynı kalır.
 
@@ -345,7 +345,7 @@ Aşağıdaki makalelerde AKS 'de ağ oluşturma hakkında daha fazla bilgi edini
 [kubenet]: https://kubernetes.io/docs/concepts/cluster-administration/network-plugins/#kubenet
 
 <!-- LINKS - Internal -->
-[az-aks-create]: /cli/azure/aks#az-aks-create
+[az-aks-create]: /cli/azure/aks#az_aks_create
 [aks-ssh]: ssh.md
 [ManagedClusterAgentPoolProfile]: /azure/templates/microsoft.containerservice/managedclusters#managedclusteragentpoolprofile-object
 [aks-network-concepts]: concepts-network.md

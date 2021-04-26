@@ -13,12 +13,12 @@ ms.devlang: ne
 ms.topic: how-to
 ms.date: 08/31/2020
 ms.author: inhenkel
-ms.openlocfilehash: c1d7bf933b487c40d571f1912341b5ef771e4e67
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c2d081ded07b1d32ee7525855c1756e13dfd57aa
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "90527335"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277513"
 ---
 # <a name="creating-filters-with-media-services-rest-api"></a>Media Services REST API ile Filtreler oluşturma
 
@@ -26,7 +26,7 @@ ms.locfileid: "90527335"
 
 İçeriğinizi müşterilere sunarken (canlı etkinlikler veya Isteğe bağlı video akışı), istemciniz varsayılan varlığın bildirim dosyasında açıklananlardan daha fazla esneklik gerektirebilir. Azure Media Services, içeriğiniz için hesap filtrelerini ve varlık filtrelerini tanımlamanızı sağlar. 
 
-Bu özelliğin ve kullanılan senaryoların ayrıntılı açıklaması için bkz. [dinamik bildirimler](filters-dynamic-manifest-overview.md) ve [Filtreler](filters-concept.md).
+Bu özelliğin ve kullanılan senaryoların ayrıntılı açıklaması için bkz. [dinamik bildirimler](filters-dynamic-manifest-concept.md) ve [Filtreler](filters-concept.md).
 
 Bu konu, Isteğe bağlı bir video için bir filtre tanımlanacağını ve [hesap filtreleri](/rest/api/media/accountfilters) ve [varlık FILTRELERI](/rest/api/media/assetfilters)oluşturmak için REST API 'lerini nasıl kullanacağınızı gösterir. 
 
@@ -37,10 +37,10 @@ Bu konu, Isteğe bağlı bir video için bir filtre tanımlanacağını ve [hesa
 
 Bu konuda açıklanan adımları tamamlayabilmeniz için şunları yapmanız gerekir:
 
-- [Filtreleri ve dinamik bildirimleri](filters-dynamic-manifest-overview.md)gözden geçirin.
-- [Azure Media Services REST API'si çağrıları Için Postman 'ı yapılandırın](media-rest-apis-with-postman.md).
+- [Filtreleri ve dinamik bildirimleri](filters-dynamic-manifest-concept.md)gözden geçirin.
+- [Azure Media Services REST API'si çağrıları Için Postman 'ı yapılandırın](setup-postman-rest-how-to.md).
 
-    [Azure AD belirtecini al](media-rest-apis-with-postman.md#get-azure-ad-token)konusunun son adımını izlediğinizden emin olun. 
+    [Azure AD belirtecini al](setup-postman-rest-how-to.md#get-azure-ad-token)konusunun son adımını izlediğinizden emin olun. 
 
 ## <a name="define-a-filter"></a>Filtre tanımlama  
 
@@ -121,7 +121,7 @@ Varlık filtrelerini oluşturma veya güncelleştirme hakkında daha fazla bilgi
 
 ## <a name="associate-filters-with-streaming-locator"></a>Filtreleri akış bulucu ile ilişkilendir
 
-Akış Konumlayıcı için uygulanabilecek varlık veya hesap filtrelerinin bir listesini belirtebilirsiniz. [Dinamik Paketleyici (akış uç noktası)](dynamic-packaging-overview.md) , bu filtre listesini ISTEMCINIZDEKI URL 'de belirttiği değişikliklerle birlikte uygular. Bu bileşim, akış Bulucu üzerinde belirlediğiniz URL + filtrelerdeki filtreleri temel alan [dinamik bir bildirim](filters-dynamic-manifest-overview.md)oluşturur. Filtre uygulamak, ancak URL 'de filtre adlarını göstermek istemiyorsanız bu özelliği kullanmanızı öneririz.
+Akış Konumlayıcı için uygulanabilecek varlık veya hesap filtrelerinin bir listesini belirtebilirsiniz. [Dinamik Paketleyici (akış uç noktası)](encode-dynamic-packaging-concept.md) , bu filtre listesini ISTEMCINIZDEKI URL 'de belirttiği değişikliklerle birlikte uygular. Bu bileşim, akış Bulucu üzerinde belirlediğiniz URL + filtrelerdeki filtreleri temel alan [dinamik bir bildirim](filters-dynamic-manifest-concept.md)oluşturur. Filtre uygulamak, ancak URL 'de filtre adlarını göstermek istemiyorsanız bu özelliği kullanmanızı öneririz.
 
 REST kullanarak bir akış bulucu ile filtreler oluşturup ilişkilendirmek için, [akış Konumlandırıcı-API oluştur](/rest/api/media/streaminglocators/create) ' u kullanın ve `properties.filters` [istek gövdesinde](/rest/api/media/streaminglocators/create#request-body)öğesini belirtin.
                                 

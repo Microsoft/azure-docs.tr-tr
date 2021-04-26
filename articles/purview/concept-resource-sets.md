@@ -7,12 +7,12 @@ ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: conceptual
 ms.date: 02/03/2021
-ms.openlocfilehash: cbf070dce056795ad8e4a5f3e4d609e7d36d631e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 330a6e54ee88781f71c4a861051aab94f8eef81f
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200826"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107587910"
 ---
 # <a name="understanding-resource-sets"></a>Kaynak kümelerini anlama
 
@@ -102,14 +102,15 @@ Tam ad: `https://myblob.blob.core.windows.net/sample-data/data{N}.csv`
 
 Görünen ad: "veri"
 
-## <a name="known-issues-with-resource-sets"></a>Kaynak kümeleriyle ilgili bilinen sorunlar
+## <a name="customizing-resource-set-grouping-using-pattern-rules"></a>Model kurallarını kullanarak kaynak kümesi gruplamayı özelleştirme
 
-Kaynak kümeleri çoğu durumda iyi çalışır, ancak Azure purview ' de aşağıdaki sorunlarla karşılaşabilirsiniz:
+bir depolama hesabını tararken, Azure purview bir varlık grubunun bir kaynak kümesi olup olmadığını anlamak için tanımlı bir desenler kümesi kullanır. Azure purview 'ın kaynak kümesi gruplandırması, bazı durumlarda verilerinizi doğru şekilde yansıtmayabilir. Bu sorunlar şunları içerebilir:
 
-- Bir varlığı kaynak kümesi olarak yanlış işaretler
-- Bir varlığı yanlış kaynak kümesine koyar
-- Bir varlığı, kaynak kümesi olmayan şekilde yanlış işaretler
+- Bir varlığı kaynak kümesi olarak yanlış işaretleme
+- Bir varlığı yanlış kaynak kümesine koyma
+- Bir varlık, kaynak kümesi olmayan şekilde işaretleniyor
 
+Azure purview 'ın hangi varlıkların kaynak kümesi olarak gruplandığını ve Katalog içinde nasıl görüntüleneceğini belirlemek veya geçersiz kılmak için, Yönetim Merkezi 'nde model kuralları tanımlayabilirsiniz. Adım adım yönergeler ve sözdizimi için lütfen bkz. [kaynak kümesi model kuralları](how-to-resource-set-pattern-rules.md).
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Azure purview kullanmaya başlamak için bkz. [hızlı başlangıç: Azure purview hesabı oluşturma](create-catalog-portal.md).

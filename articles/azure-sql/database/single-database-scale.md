@@ -10,19 +10,26 @@ ms.topic: conceptual
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: sstein
-ms.date: 02/22/2021
-ms.openlocfilehash: 5852899175f9cc9f2725b875c6e1ce9fd682768d
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.date: 04/09/2021
+ms.openlocfilehash: ae1b3cc41d709c28ba517d672eb98cb60a837a8d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105625287"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107779084"
 ---
 # <a name="scale-single-database-resources-in-azure-sql-database"></a>Azure SQL Veritabanında tek veritabanı kaynaklarını ölçeklendirme
 
 Bu makalede, sağlanan işlem katmanında bir Azure SQL veritabanı için kullanılabilir işlem ve depolama kaynaklarının nasıl ölçeklendiriyapılacağı açıklanır. Alternatif olarak, [sunucusuz bilgi işlem katmanı](serverless-tier-overview.md) , kullanılan işlem için saniye başına işlem otomatik ölçeklendirme ve fatura sağlar.
 
-Sanal çekirdekler veya DTU sayısını ilk kez seçtikten sonra, [Azure Portal](single-database-manage.md#the-azure-portal), [Transact-SQL](/sql/t-sql/statements/alter-database-transact-sql#examples-1), [PowerShell](/powershell/module/az.sql/set-azsqldatabase), [Azure CLI](/cli/azure/sql/db#az-sql-db-update)veya [REST API](/rest/api/sql/databases/update)kullanarak gerçek deneyime göre tek bir veritabanını dinamik olarak yukarı veya aşağı ölçeklendirdirebilirsiniz.
+Sanal çekirdekler veya DTU sayısını ilk kez seçtikten sonra, kullanarak gerçek deneyim temelinde tek bir veritabanını dinamik olarak yukarı veya aşağı ölçekleyebilirsiniz:
+
+* [Transact-SQL](/sql/t-sql/statements/alter-database-transact-sql#overview-sql-database)
+* [Azure portalı](single-database-manage.md#the-azure-portal)
+* [PowerShell](/powershell/module/az.sql/set-azsqldatabase)
+* [Azure CLI](/cli/azure/sql/db#az_sql_db_update)
+* [REST API](/rest/api/sql/databases/update)
+
 
 Aşağıdaki videoda, tek bir veritabanı için kullanılabilir DTU 'ları artırmak üzere hizmet katmanını ve işlem boyutunu dinamik olarak değiştirme gösterilmektedir.
 
@@ -62,9 +69,6 @@ Hizmet katmanını değiştirmek, tek bir veritabanının veya elastik havuzun i
 >
 > Bir veritabanının PFS depolama kullanıp kullanmadığını anlamak için, veritabanı bağlamında aşağıdaki sorguyu yürütün. AccountType sütunundaki değer `PremiumFileStorage` veya ise `PremiumFileStorage-ZRS` , veritabanı PFS depolama alanını kullanıyor demektir.
 
-[!NOTE]
- Bölge yedekli özelliği, İş Açısından Kritik Genel Amaçlı katmanına ölçeklendirilirken varsayılan olarak aynı kalacaktır. Bölge yedekliliği etkinleştirildiğinde bu düşürme için gecikme süresi ve Genel Amaçlı katmanının bölge yedekliliğe geçiş gecikmesi veritabanı boyutuyla orantılıdır.
-
 ```sql
 SELECT s.file_id,
        s.type_desc,
@@ -73,6 +77,9 @@ SELECT s.file_id,
 FROM sys.database_files AS s
 WHERE s.type_desc IN ('ROWS', 'LOG');
 ```
+
+> [!NOTE]
+> Bölge yedekli özelliği, İş Açısından Kritik Genel Amaçlı katmanına ölçeklendirilirken varsayılan olarak aynı kalacaktır. Bölge yedekliliği etkinleştirildiğinde bu düşürme için gecikme süresi ve Genel Amaçlı katmanının bölge yedekliliğe geçiş gecikmesi veritabanı boyutuyla orantılıdır.
 
 > [!TIP]
 > Sürmekte olan işlemleri izlemek için bkz.: [SQL REST API kullanarak Işlemleri yönetme](/rest/api/sql/operations/list), [CLI kullanarak Işlemleri yönetme](/cli/azure/sql/db/op), [T-SQL kullanarak Işlemleri izleme](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database) ve bu Iki PowerShell komutu: [Get-AzSqlDatabaseActivity](/powershell/module/az.sql/get-azsqldatabaseactivity) ve [stop-azsqldatabaseactivity](/powershell/module/az.sql/stop-azsqldatabaseactivity).
@@ -125,8 +132,8 @@ Kullanımdan veya veritabanının bir saatten az etkin kalıp kalmadığından b
 
 ### <a name="vcore-based-purchasing-model"></a>Sanal çekirdek tabanlı satın alma modeli
 
-- Depolama, 1 GB 'lik artışlarla veri depolama maksimum boyut sınırına sağlanabilir. Yapılandırılabilir veri depolaması en az 1 GB 'dir. Her hizmet hedefi için [tek veritabanları](resource-limits-vcore-single-databases.md) ve [Esnek havuzlar](resource-limits-vcore-elastic-pools.md) için kaynak sınırı belge sayfalarına bakın.
-- Tek bir veritabanı için veri depolama, [Azure Portal](https://portal.azure.com), [Transact-SQL](/sql/t-sql/statements/alter-database-transact-sql#examples-1), [PowerShell](/powershell/module/az.sql/set-azsqldatabase), [Azure CLI](/cli/azure/sql/db#az-sql-db-update)veya [REST API](/rest/api/sql/databases/update)kullanılarak en büyük boyutu arttırılarak veya azaltılarak sağlanabilir. En büyük boyut değeri bayt cinsinden belirtilirse, 1 GB (1073741824 bayt) katlarından biri olmalıdır.
+- Depolama, 1 GB 'lik artışlarla veri depolama maksimum boyut sınırına sağlanabilir. Yapılandırılabilir veri depolaması en az 1 GB 'dir. Her hizmet hedefi için veri depolama maksimum boyut sınırları için, bkz. tek veritabanlarına ait kaynak sınırları için kaynak sınırı belge sayfaları, [DTU satın alma modelini kullanarak tek veritabanlarının](resource-limits-dtu-single-databases.md) [sanal çekirdek satın alma modelini](resource-limits-vcore-single-databases.md) ve kaynak sınırlarını kullanarak.
+- Tek bir veritabanı için veri depolama, [Azure Portal](https://portal.azure.com), [Transact-SQL](/sql/t-sql/statements/alter-database-transact-sql#examples-1), [PowerShell](/powershell/module/az.sql/set-azsqldatabase), [Azure CLI](/cli/azure/sql/db#az_sql_db_update)veya [REST API](/rest/api/sql/databases/update)kullanılarak en büyük boyutu arttırılarak veya azaltılarak sağlanabilir. En büyük boyut değeri bayt cinsinden belirtilirse, 1 GB (1073741824 bayt) katlarından biri olmalıdır.
 - Bir veritabanının veri dosyalarında depolanabilecek veri miktarı, yapılandırılan veri depolama maksimum boyutuyla sınırlıdır. Bu depolamaya ek olarak, Azure SQL veritabanı işlem günlüğü için kullanılmak üzere %30 daha fazla depolama alanı ayırır.
 - Azure SQL veritabanı, veritabanı için otomatik olarak 32 GB ayırır `tempdb` . `tempdb` , tüm hizmet katmanlarında yerel SSD depolamada bulunur.
 - Tek bir veritabanı veya elastik havuz için depolama fiyatı, veri depolama ve işlem günlüğü depolama tutarlarının toplamıdır ve hizmet katmanının depolama birimi fiyatıyla çarpılır. Maliyeti `tempdb` fiyata dahildir. Depolama fiyatı hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı fiyatlandırması](https://azure.microsoft.com/pricing/details/sql-database/).
@@ -137,7 +144,7 @@ Kullanımdan veya veritabanının bir saatten az etkin kalıp kalmadığından b
 ### <a name="dtu-based-purchasing-model"></a>DTU tabanlı satın alma modeli
 
 - Tek bir veritabanı için DTU fiyatı, ek ücret ödemeden belirli miktarda depolama alanı içerir. Dahil edilen miktarın ötesinde daha fazla depolama alanı, 250 GB ile 1 TB arasında artan maksimum boyut sınırına kadar ek bir maliyet ve sonra da 1 TB 'ın üzerinde 256 GB 'lık artışlarla sağlanabilir. Dahil edilen depolama miktarları ve maksimum boyut sınırları için bkz. [tek veritabanı: depolama boyutları ve işlem boyutları](resource-limits-dtu-single-databases.md#single-database-storage-sizes-and-compute-sizes).
-- Tek bir veritabanı için ek depolama, Azure portal, [Transact-SQL](/sql/t-sql/statements/alter-database-transact-sql#examples-1), [POWERSHELL](/powershell/module/az.sql/set-azsqldatabase), [Azure CLI](/cli/azure/sql/db#az-sql-db-update)veya [REST API](/rest/api/sql/databases/update)kullanılarak en büyük boyutu arttırılarak sağlanabilir.
+- Tek bir veritabanı için ek depolama, Azure portal, [Transact-SQL](/sql/t-sql/statements/alter-database-transact-sql#examples-1), [POWERSHELL](/powershell/module/az.sql/set-azsqldatabase), [Azure CLI](/cli/azure/sql/db#az_sql_db_update)veya [REST API](/rest/api/sql/databases/update)kullanılarak en büyük boyutu arttırılarak sağlanabilir.
 - Tek bir veritabanı için ek depolama alanı fiyatı, hizmet katmanının ek depolama birimi fiyatı ile çarpılmış olan ek depolama miktarıdır. Ek depolama alanı fiyatına ilişkin ayrıntılar için bkz. [Azure SQL veritabanı fiyatlandırması](https://azure.microsoft.com/pricing/details/sql-database/).
 
 > [!IMPORTANT]

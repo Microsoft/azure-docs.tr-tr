@@ -10,12 +10,12 @@ ms.subservice: text-analytics
 ms.topic: article
 ms.date: 03/15/2021
 ms.author: aahi
-ms.openlocfilehash: 0876dd00933203c943417d87978567cf555a3e4f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 903147b6c9f102b83f65d67cf41d4df0c62c7b54
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104599009"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280573"
 ---
 # <a name="how-to-use-named-entity-recognition-in-text-analytics"></a>Metin Analizi içinde adlandırılmış varlık tanımayı kullanma
 
@@ -206,7 +206,7 @@ Sürüm 3,0 yalnızca zaman uyumlu işlemi içerir. Aşağıdaki JSON, API 'ye g
 
 ## <a name="post-the-request"></a>İsteği gönder
 
-İstek alındığında analiz gerçekleştirilir. Dakika ve saniye başına gönderebilmeniz için isteklerin boyutu ve sayısı hakkında genel bakış konusundaki [veri sınırları](../overview.md#data-limits) bölümüne bakın.
+İstek alındığında analiz gerçekleştirilir. Dakika ve saniye başına gönderebilmeniz için isteklerin boyutu ve sayısı hakkında bilgi için [veri sınırları](../overview.md#data-limits) makalesine bakın.
 
 Metin Analizi API'si durum bilgisiz. Hesabınızda hiç veri depolanmaz ve sonuçlar yanıt içinde hemen döndürülür.
 

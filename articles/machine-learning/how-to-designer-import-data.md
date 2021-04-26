@@ -11,10 +11,10 @@ ms.date: 11/13/2020
 ms.topic: conceptual
 ms.custom: how-to, designer
 ms.openlocfilehash: a2cc0840b7ba4b26cf9f5b1219fc189230870774
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "97739867"
 ---
 # <a name="import-data-into-azure-machine-learning-designer"></a>Azure Machine Learning tasarımcısına veri aktarma

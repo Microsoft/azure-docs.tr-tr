@@ -5,16 +5,16 @@ author: bandersmsft
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 03/12/2021
+ms.date: 03/29/2021
 ms.reviewer: andalmia
 ms.author: banders
 ms.custom: devx-track-azurepowershell, devx-track-azurecli
-ms.openlocfilehash: 779a1410641f945dc8dbf38aecf65b97d64971b1
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 324ca849e0f9c1282dc4b47ceba4654c76c07b35
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104593989"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870832"
 ---
 # <a name="programmatically-create-azure-subscriptions-for-a-microsoft-customer-agreement-with-the-latest-apis"></a>En son API’lerle Microsoft Müşteri Sözleşmesi için program aracılığıyla Azure abonelikleri oluşturma
 
@@ -28,7 +28,9 @@ Program aracılığıyla Azure aboneliği oluşturduğunuzda, bu abonelik Micros
 
 ## <a name="prerequisites"></a>Ön koşullar
 
-Abonelikleri oluşturmak için bir fatura bölümünde sahip, katkıda bulunan veya Azure abonelik oluşturucu rolünüz ya da faturalama profili veya faturalama hesabında sahip veya katkıda bulunan rolünüz olmalıdır. Daha fazla bilgi için bkz. [Abonelik faturalama rolleri ve görevleri](understand-mca-roles.md#subscription-billing-roles-and-tasks).
+Abonelikleri oluşturmak için bir fatura bölümünde sahip, katkıda bulunan veya Azure abonelik oluşturucu rolünüz ya da faturalama profili veya faturalama hesabında sahip veya katkıda bulunan rolünüz olmalıdır. Aynı rolü bir hizmet asıl adına (SPN) de verebilirsiniz. Roller ve bunlara izin atama hakkında daha fazla bilgi için bkz. [Abonelik Faturalandırma rolleri ve görevleri](understand-mca-roles.md#subscription-billing-roles-and-tasks).
+
+Abonelik oluşturmak için bir SPN kullanıyorsanız, [Azure Active Directory PowerShell](/powershell/module/azuread/get-azureadserviceprincipal?view=azureadps-2.0) veya [Azure CLı](/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_list)kullanarak Azure AD uygulama kaydının ObjectID 'sini hizmet sorumlusu ObjectID olarak kullanın. 
 
 Bir Microsoft Müşteri Sözleşmesi hesabına erişiminizin olup olmadığını bilmiyorsanız bkz. [Microsoft Müşteri Sözleşmesi’ne erişimi denetleme](../understand/mca-overview.md#check-access-to-a-microsoft-customer-agreement).
 
@@ -414,7 +416,7 @@ Komutun yanıtının bir parçası olarak subscriptionId bilgisini alırsınız.
 
 İlk olarak, `az extension add --name account` ve `az extension add --name alias` komutlarını çalıştırarak uzantıyı yükleyin.
 
-Aşağıdaki [az account alias create](/cli/azure/ext/account/account/alias#ext_account_az_account_alias_create) komutunu çalıştırın.
+Aşağıdaki [az account alias create](/cli/azure/account/alias#az_account_alias_create) komutunu çalıştırın.
 
 ```azurecli
 az account alias create --name "sampleAlias" --billing-scope "/providers/Microsoft.Billing/billingAccounts/5e98e158-xxxx-xxxx-xxxx-xxxxxxxxxxxx:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_xxxx-xx-xx/billingProfiles/AW4F-xxxx-xxx-xxx/invoiceSections/SH3V-xxxx-xxx-xxx" --display-name "Dev Team Subscription" --workload "Production"

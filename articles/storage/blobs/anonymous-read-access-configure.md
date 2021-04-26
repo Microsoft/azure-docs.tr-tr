@@ -10,12 +10,12 @@ ms.date: 11/03/2020
 ms.author: tamram
 ms.reviewer: fryu
 ms.subservice: blobs
-ms.openlocfilehash: feac7b890c973b1541c5362f860432687082953f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 31812a7b2dddad474ab5cd422a15f6e5368dba5c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96533885"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107774638"
 ---
 # <a name="configure-anonymous-public-read-access-for-containers-and-blobs"></a>Kapsayıcılar ve BLOB 'lar için anonim genel okuma erişimini yapılandırma
 
@@ -239,7 +239,7 @@ Depolama hesabı için genel erişime izin verilmedikçe, kapsayıcının ortak 
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Azure CLı ile bir veya daha fazla kapsayıcının genel erişim düzeyini güncelleştirmek için [az Storage Container set Permission](/cli/azure/storage/container#az-storage-container-set-permission) komutunu çağırın. Hesap anahtarınızı, bir bağlantı dizesini veya paylaşılan erişim imzasını (SAS) geçirerek bu işlemi yetkilendirin. Kapsayıcının ortak erişim düzeyini ayarlayan kapsayıcı [ACL 'si](/rest/api/storageservices/set-container-acl) IŞLEMI Azure AD ile yetkilendirmeyi desteklemez. Daha fazla bilgi için bkz. [BLOB ve kuyruk verisi işlemlerini çağırma izinleri](/rest/api/storageservices/authorize-with-azure-active-directory#permissions-for-calling-blob-and-queue-data-operations).
+Azure CLı ile bir veya daha fazla kapsayıcının genel erişim düzeyini güncelleştirmek için [az Storage Container set Permission](/cli/azure/storage/container#az_storage_container_set_permission) komutunu çağırın. Hesap anahtarınızı, bir bağlantı dizesini veya paylaşılan erişim imzasını (SAS) geçirerek bu işlemi yetkilendirin. Kapsayıcının ortak erişim düzeyini ayarlayan kapsayıcı [ACL 'si](/rest/api/storageservices/set-container-acl) IŞLEMI Azure AD ile yetkilendirmeyi desteklemez. Daha fazla bilgi için bkz. [BLOB ve kuyruk verisi işlemlerini çağırma izinleri](/rest/api/storageservices/authorize-with-azure-active-directory#permissions-for-calling-blob-and-queue-data-operations).
 
 Aşağıdaki örnek, ortak erişime devre dışı bırakılmış bir kapsayıcı oluşturur ve sonra kapsayıcının ve bloblarına anonim erişime izin vermek için kapsayıcının ortak erişim ayarını güncelleştirir. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın:
 

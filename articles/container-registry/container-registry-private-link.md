@@ -1,14 +1,14 @@
 ---
-title: Özel bağlantıyı ayarla
+title: Özel bağlantı ile özel uç nokta ayarla
 description: Bir kapsayıcı kayıt defterinde özel bir uç nokta ayarlayın ve yerel bir sanal ağdaki özel bir bağlantı üzerinden erişimi etkinleştirin. Özel bağlantı erişimi, Premium hizmet katmanının bir özelliğidir.
 ms.topic: article
-ms.date: 10/01/2020
-ms.openlocfilehash: 3193c65a2021d29f03bd9ae6cbc00fd6c349d9bf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 03/31/2021
+ms.openlocfilehash: d3c7c573b0ffc08a85f5cbe5cc62d3f7c052f0af
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93342309"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781442"
 ---
 # <a name="connect-privately-to-an-azure-container-registry-using-azure-private-link"></a>Azure özel bağlantısını kullanarak bir Azure Container Registry 'ye özel olarak bağlanma
 
@@ -79,7 +79,7 @@ az network vnet subnet update \
 
 ### <a name="configure-the-private-dns-zone"></a>Özel DNS bölgesini yapılandırma
 
-Özel Azure Container Registry etki alanı için [Özel BIR DNS bölgesi](../dns/private-dns-privatednszone.md) oluşturun. Sonraki adımlarda, bu DNS bölgesindeki kayıt defteri etki alanınız için DNS kayıtları oluşturursunuz.
+Özel Azure Container Registry etki alanı için [özel bir Azure DNS bölgesi](../dns/private-dns-privatednszone.md) oluşturun. Sonraki adımlarda, bu DNS bölgesindeki kayıt defteri etki alanınız için DNS kayıtları oluşturursunuz. Daha fazla bilgi için bu makalenin devamındaki [DNS yapılandırma seçenekleri](#dns-configuration-options)bölümüne bakın.
 
 Azure Container Registry 'niz için varsayılan DNS çözümlemesini geçersiz kılmak üzere özel bir bölge kullanmak için, bölgenin **Privatelink.azurecr.io** olarak adlandırılması gerekir. Özel bölgeyi oluşturmak için aşağıdaki [az Network Private-DNS Zone Create][az-network-private-dns-zone-create] komutunu çalıştırın:
 
@@ -126,9 +126,11 @@ az network private-endpoint create \
     --connection-name myConnection
 ```
 
-### <a name="get-private-ip-addresses"></a>Özel IP adresleri Al
+### <a name="get-endpoint-ip-configuration"></a>Uç nokta IP yapılandırmasını al
 
-Ağ arabirimi KIMLIĞI için uç noktayı sorgulamak için [az Network Private-Endpoint Show][az-network-private-endpoint-show] ' i çalıştırın:
+DNS kayıtlarını yapılandırmak için özel uç noktanın IP yapılandırmasını alın. Özel uç noktanın ağ arabirimiyle ilişkili olan bu örnekteki kapsayıcı kayıt defteri için iki özel IP adresi vardır: biri kayıt defterinin kendisi için ve diğeri kayıt defterinin veri uç noktası için. 
+
+İlk olarak, ağ arabirimi KIMLIĞI için özel uç noktayı sorgulamak için [az Network Private-Endpoint Show][az-network-private-endpoint-show] ' ı çalıştırın:
 
 ```azurecli
 NETWORK_INTERFACE_ID=$(az network private-endpoint show \
@@ -138,19 +140,29 @@ NETWORK_INTERFACE_ID=$(az network private-endpoint show \
   --output tsv)
 ```
 
-Bu örnekteki ağ arabirimiyle ilişkili, kapsayıcı kayıt defteri için iki özel IP adresi ve kayıt defterinin kendisi için bir diğeri ise kayıt defterinin veri uç noktası için. Aşağıdaki [az Resource Show][az-resource-show] komutları, kapsayıcı kayıt defteri ve kayıt defterinin veri uç noktası IÇIN özel IP adreslerini alır:
+Aşağıdaki [az Network NIC][az-network-nic-show] , kapsayıcı kayıt defteri ve kayıt defteri 'nin veri uç noktası IÇIN özel IP adreslerini Al komutlarını göstermektedir:
 
 ```azurecli
-PRIVATE_IP=$(az resource show \
+REGISTRY_PRIVATE_IP=$(az network nic show \
   --ids $NETWORK_INTERFACE_ID \
-  --api-version 2019-04-01 \
-  --query 'properties.ipConfigurations[1].properties.privateIPAddress' \
+  --query "ipConfigurations[?privateLinkConnectionProperties.requiredMemberName=='registry'].privateIpAddress" \
   --output tsv)
 
-DATA_ENDPOINT_PRIVATE_IP=$(az resource show \
+DATA_ENDPOINT_PRIVATE_IP=$(az network nic show \
   --ids $NETWORK_INTERFACE_ID \
-  --api-version 2019-04-01 \
-  --query 'properties.ipConfigurations[0].properties.privateIPAddress' \
+  --query "ipConfigurations[?privateLinkConnectionProperties.requiredMemberName=='registry_data_$REGISTRY_LOCATION'].privateIpAddress" \
+  --output tsv)
+
+# An FQDN is associated with each IP address in the IP configurations
+
+REGISTRY_FQDN=$(az network nic show \
+  --ids $NETWORK_INTERFACE_ID \
+  --query "ipConfigurations[?privateLinkConnectionProperties.requiredMemberName=='registry'].privateLinkConnectionProperties.fqdns" \
+  --output tsv)
+
+DATA_ENDPOINT_FQDN=$(az network nic show \
+  --ids $NETWORK_INTERFACE_ID \
+  --query "ipConfigurations[?privateLinkConnectionProperties.requiredMemberName=='registry_data_$REGISTRY_LOCATION'].privateLinkConnectionProperties.fqdns" \
   --output tsv)
 ```
 
@@ -186,7 +198,7 @@ az network private-dns record-set a add-record \
   --record-set-name $REGISTRY_NAME \
   --zone-name privatelink.azurecr.io \
   --resource-group $RESOURCE_GROUP \
-  --ipv4-address $PRIVATE_IP
+  --ipv4-address $REGISTRY_PRIVATE_IP
 
 # Specify registry region in data endpoint name
 az network private-dns record-set a add-record \
@@ -377,15 +389,12 @@ az acr private-endpoint-connection list \
 
 Bu makaledeki adımları kullanarak özel bir uç nokta bağlantısı ayarladığınızda, kayıt defteri, kayıt defterinde Azure RBAC izinleri olan istemcilerden ve hizmetlerden gelen bağlantıları otomatik olarak kabul eder. Uç noktayı bağlantıların el ile onayını gerektirecek şekilde ayarlayabilirsiniz. Özel uç nokta bağlantılarını onaylama ve reddetme hakkında daha fazla bilgi için bkz. [Özel uç nokta bağlantısını yönetme](../private-link/manage-private-endpoint.md).
 
-## <a name="add-zone-records-for-replicas"></a>Çoğaltmalar için bölge kayıtları ekleme
-
-Bu makalede gösterildiği gibi, bir kayıt defterine özel bir uç nokta bağlantısı eklediğinizde kayıt defteri `privatelink.azurecr.io` için bölgede DNS kayıtları ve kayıt defterinin [çoğaltılacağı](container-registry-geo-replication.md)bölgelerdeki veri uç noktaları oluşturulur. 
-
-Daha sonra yeni bir çoğaltma eklerseniz, bu bölgedeki veri uç noktası için el ile yeni bir bölge kaydı eklemeniz gerekir. Örneğin, *northeurope* konumunda *myregistry* 'nin bir çoğaltmasını oluşturursanız, için bir bölge kaydı ekleyin `myregistry.northeurope.data.azurecr.io` . Adımlar için, bu makaledeki [özel bölgede DNS kayıtları oluşturma](#create-dns-records-in-the-private-zone) bölümüne bakın.
+> [!IMPORTANT]
+> Şu anda bir özel uç noktayı bir kayıt defterinden silerseniz, sanal ağın özel bölge bağlantısını da silmeniz gerekebilir. Bağlantı silinmemişse şuna benzer bir hata görebilirsiniz: `unresolvable host` .
 
 ## <a name="dns-configuration-options"></a>DNS yapılandırma seçenekleri
 
-Bu örnekteki özel uç nokta, temel bir sanal ağla ilişkili özel bir DNS bölgesi ile tümleşir. Bu kurulum, kayıt defterinin genel FQDN 'sini sanal ağdaki özel IP adresine çözümlemek için doğrudan Azure tarafından sağlanmış DNS hizmetini kullanır. 
+Bu örnekteki özel uç nokta, temel bir sanal ağla ilişkili özel bir DNS bölgesi ile tümleşir. Bu kurulum, kayıt defterinin genel FQDN 'sini sanal ağdaki özel IP adreslerine çözümlemek için doğrudan Azure tarafından sağlanmış DNS hizmetini kullanır. 
 
 Özel bağlantı özel DNS çözümleriyle birlikte özel bölgeyi kullanan ek DNS yapılandırma senaryolarını destekler. Örneğin, sanal ağda veya şirket içinde dağıtılan özel bir DNS çözümünüz bir VPN ağ geçidi veya Azure ExpressRoute kullanarak sanal ağa bağlanırsınız. 
 
@@ -393,6 +402,21 @@ Kayıt defterinin genel FQDN 'sini bu senaryolardaki özel IP adresine çözüml
 
 > [!IMPORTANT]
 > Çok sayıda bölgede özel uç noktalar oluşturduğunuz için yüksek kullanılabilirlik varsa, her bölgede ayrı bir kaynak grubu kullanmanızı ve sanal ağı ve ilişkili özel DNS bölgesini buna yerleştirmeniz önerilir. Bu yapılandırma aynı zamanda aynı özel DNS bölgesinin paylaşılarak öngörülemeyen DNS çözümlemesini de engeller.
+
+### <a name="manually-configure-dns-records"></a>DNS kayıtlarını el ile yapılandır
+
+Bazı senaryolarda, Azure tarafından sağlanmış özel bölgeyi kullanmak yerine, özel bir bölgedeki DNS kayıtlarını el ile yapılandırmanız gerekebilir. Aşağıdaki uç noktaların her biri için kayıt oluşturmayı unutmayın: kayıt defteri uç noktası, kayıt defteri 'nin veri uç noktası ve ek bölgesel çoğaltma için veri uç noktası. Tüm kayıtlar yapılandırılmamışsa, kayıt defterine ulaşılamıyor olabilir.
+
+> [!IMPORTANT]
+> Daha sonra yeni bir çoğaltma eklerseniz, bu bölgedeki veri uç noktası için el ile yeni bir DNS kaydı eklemeniz gerekir. Örneğin, northeurope konumunda *myregistry* 'nin bir çoğaltmasını oluşturursanız, için bir kayıt ekleyin `myregistry.northeurope.data.azurecr.io` .
+
+DNS kayıtları oluşturmak için gereken FQDN 'Ler ve özel IP adresleri, Özel uç noktanın ağ arabirimiyle ilişkilendirilir. Bu bilgileri Azure CLı kullanarak veya portaldan edinebilirsiniz:
+
+* Azure CLı 'yı kullanarak [az Network Nic Show][az-network-nic-show] komutunu çalıştırın. Örneğin, bu makalenin önceki bölümlerinde bulunan [ENDPOINT IP yapılandırmasını al](#get-endpoint-ip-configuration)bölümüne bakın.
+
+* Portalda özel uç noktanıza gidin ve **DNS yapılandırması**' nı seçin.
+
+DNS kayıtları oluşturduktan sonra, kayıt defteri FQDN 'Lerinin ilgili özel IP adreslerine doğru şekilde çözümlendiğinizden emin olun.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
@@ -407,7 +431,10 @@ Portalda kaynaklarınızı temizlemek için kaynak grubunuza gidin. Kaynak grubu
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * Özel bağlantı hakkında daha fazla bilgi edinmek için bkz. [Azure özel bağlantı](../private-link/private-link-overview.md) belgeleri.
+
 * Bir istemci güvenlik duvarının ardında kayıt defteri erişim kuralları ayarlamanız gerekiyorsa, bkz. [güvenlik duvarı arkasındaki bir Azure Container Registry 'ye erişmek için kuralları yapılandırma](container-registry-firewall-access-rules.md).
+
+* [Azure Özel Uç Nokta bağlantı sorunlarını giderme](../private-link/troubleshoot-private-endpoint-connectivity.md)
 
 <!-- LINKS - external -->
 [docker-linux]: https://docs.docker.com/engine/installation/#supported-platforms
@@ -419,28 +446,28 @@ Portalda kaynaklarınızı temizlemek için kaynak grubunuza gidin. Kaynak grubu
 
 <!-- LINKS - Internal -->
 [azure-cli]: /cli/azure/install-azure-cli
-[az-acr-create]: /cli/azure/acr#az-acr-create
-[az-acr-show]: /cli/azure/acr#az-acr-show
-[az-acr-repository-show]: /cli/azure/acr/repository#az-acr-repository-show
-[az-acr-repository-list]: /cli/azure/acr/repository#az-acr-repository-list
-[az-acr-login]: /cli/azure/acr#az-acr-login
+[az-acr-create]: /cli/azure/acr#az_acr_create
+[az-acr-show]: /cli/azure/acr#az_acr_show
+[az-acr-repository-show]: /cli/azure/acr/repository#az_acr_repository_show
+[az-acr-repository-list]: /cli/azure/acr/repository#az_acr_repository_list
+[az-acr-login]: /cli/azure/acr#az_acr_login
 [az-acr-private-endpoint-connection]: /cli/azure/acr/private-endpoint-connection
-[az-acr-private-endpoint-connection-list]: /cli/azure/acr/private-endpoint-connection#az-acr-private-endpoint-connection-list
-[az-acr-private-endpoint-connection-approve]: /cli/azure/acr/private-endpoint-connection#az-acr-private-endpoint-connection-approve
-[az-acr-update]: /cli/azure/acr#az-acr-update
+[az-acr-private-endpoint-connection-list]: /cli/azure/acr/private-endpoint-connection#az_acr_private-endpoint-connection-list
+[az-acr-private-endpoint-connection-approve]: /cli/azure/acr/private-endpoint-connection#az_acr_private_endpoint_connection_approve
+[az-acr-update]: /cli/azure/acr#az_acr_update
 [az-group-create]: /cli/azure/group
-[az-role-assignment-create]: /cli/azure/role/assignment#az-role-assignment-create
-[az-vm-create]: /cli/azure/vm#az-vm-create
-[az-network-vnet-subnet-show]: /cli/azure/network/vnet/subnet/#az-network-vnet-subnet-show
-[az-network-vnet-subnet-update]: /cli/azure/network/vnet/subnet/#az-network-vnet-subnet-update
-[az-network-vnet-list]: /cli/azure/network/vnet/#az-network-vnet-list
-[az-network-private-endpoint-create]: /cli/azure/network/private-endpoint#az-network-private-endpoint-create
-[az-network-private-endpoint-show]: /cli/azure/network/private-endpoint#az-network-private-endpoint-show
-[az-network-private-dns-zone-create]: /cli/azure/network/private-dns/zone#az-network-private-dns-zone-create
-[az-network-private-dns-link-vnet-create]: /cli/azure/network/private-dns/link/vnet#az-network-private-dns-link-vnet-create
-[az-network-private-dns-record-set-a-create]: /cli/azure/network/private-dns/record-set/a#az-network-private-dns-record-set-a-create
-[az-network-private-dns-record-set-a-add-record]: /cli/azure/network/private-dns/record-set/a#az-network-private-dns-record-set-a-add-record
-[az-resource-show]: /cli/azure/resource#az-resource-show
+[az-role-assignment-create]: /cli/azure/role/assignment#az_role_assignment_create
+[az-vm-create]: /cli/azure/vm#az_vm_create
+[az-network-vnet-subnet-show]: /cli/azure/network/vnet/subnet/#az_network_vnet_subnet_show
+[az-network-vnet-subnet-update]: /cli/azure/network/vnet/subnet/#az_network_vnet_subnet_update
+[az-network-vnet-list]: /cli/azure/network/vnet/#az_network_vnet_list
+[az-network-private-endpoint-create]: /cli/azure/network/private-endpoint#az_network_private_endpoint_create
+[az-network-private-endpoint-show]: /cli/azure/network/private-endpoint#az_network_private_endpoint_show
+[az-network-private-dns-zone-create]: /cli/azure/network/private-dns/zone#az_network_private_dns_zone_create
+[az-network-private-dns-link-vnet-create]: /cli/azure/network/private-dns/link/vnet#az_network_private_dns_link_vnet_create
+[az-network-private-dns-record-set-a-create]: /cli/azure/network/private-dns/record-set/a#az_network_private_dns_record_set_a_create
+[az-network-private-dns-record-set-a-add-record]: /cli/azure/network/private-dns/record-set/a#az_network_private_dns_record_set_a_add_record
+[az-network-nic-show]: /cli/azure/network/nic#az_network_nic_show
 [quickstart-portal]: container-registry-get-started-portal.md
 [quickstart-cli]: container-registry-get-started-azure-cli.md
 [azure-portal]: https://portal.azure.com

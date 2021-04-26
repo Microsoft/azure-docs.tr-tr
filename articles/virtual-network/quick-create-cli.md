@@ -3,18 +3,17 @@ title: Sanal ağ oluşturma-hızlı başlangıç-Azure CLı
 titlesuffix: Azure Virtual Network
 description: Bu hızlı başlangıçta, Azure CLı kullanarak bir sanal ağ oluşturmayı öğrenin. Bir sanal ağ, Azure kaynaklarının birbirleriyle ve internet ile iletişim kurmasına olanak tanır.
 author: KumudD
-Customer intent: I want to create a virtual network so that virtual machines can communicate with privately with each other and with the internet.
 ms.service: virtual-network
 ms.topic: quickstart
 ms.date: 03/06/2021
 ms.author: kumud
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 3f4cd0a09c64c8c89116bf3a7dec40bae9f05f71
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 407207c0dcb6270f08fb511a01e6e4e835b9fab9
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102199076"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776762"
 ---
 # <a name="quickstart-create-a-virtual-network-using-the-azure-cli"></a>Hızlı başlangıç: Azure CLI kullanarak sanal ağ oluşturma
 
@@ -84,6 +83,8 @@ az vm create \
   --generate-ssh-keys
 ```
 
+[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
+
 ### <a name="azure-cli-output-message"></a>Azure CLı çıkış iletisi
 
 Sanal makinelerin oluşturulması birkaç dakika sürebilir. Azure VM 'Leri oluşturduktan sonra, Azure CLı şunun gibi bir çıktı döndürür:
@@ -104,7 +105,7 @@ Sanal makinelerin oluşturulması birkaç dakika sürebilir. Azure VM 'Leri olu�
 
 ## <a name="vm-public-ip"></a>VM genel IP 'si
 
-**MyVM2** genel IP adresini almak için [az Network public-IP Show](/cli/azure/network/public-ip#az-network-public-ip-show)kullanın:
+**MyVM2** genel IP adresini almak için [az Network public-IP Show](/cli/azure/network/public-ip#az_network_public_ip_show)kullanın:
 
 ```azurecli-interactive
 az network public-ip show \

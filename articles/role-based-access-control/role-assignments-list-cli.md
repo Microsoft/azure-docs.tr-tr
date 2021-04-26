@@ -14,12 +14,12 @@ ms.workload: identity
 ms.date: 10/30/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: cc64e314a8acb035736df0521987cb78a7297326
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2d30571b68ba7e38e9960d1e434cf7844f6be852
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100556918"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780110"
 ---
 # <a name="list-azure-role-assignments-using-azure-cli"></a>Azure CLı kullanarak Azure rol atamalarını listeleme
 
@@ -34,7 +34,7 @@ ms.locfileid: "100556918"
 
 ## <a name="list-role-assignments-for-a-user"></a>Bir kullanıcının rol atamalarını listeleme
 
-Belirli bir kullanıcı için rol atamalarını listelemek için [az role atama listesi](/cli/azure/role/assignment#az-role-assignment-list)kullanın:
+Belirli bir kullanıcı için rol atamalarını listelemek için [az role atama listesi](/cli/azure/role/assignment#az_role_assignment_list)kullanın:
 
 ```azurecli
 az role assignment list --assignee {assignee}
@@ -65,7 +65,7 @@ az role assignment list --all --assignee patlong@contoso.com --output json --que
 
 ## <a name="list-role-assignments-for-a-resource-group"></a>Kaynak grubunun rol atamalarını listeleme
 
-Bir kaynak grubu kapsamında var olan rol atamalarını listelemek için [az role atama listesi](/cli/azure/role/assignment#az-role-assignment-list)kullanın:
+Bir kaynak grubu kapsamında var olan rol atamalarını listelemek için [az role atama listesi](/cli/azure/role/assignment#az_role_assignment_list)kullanın:
 
 ```azurecli
 az role assignment list --resource-group {resourceGroup}
@@ -97,7 +97,7 @@ az role assignment list --resource-group pharma-sales --output json --query '[].
 
 ## <a name="list-role-assignments-for-a-subscription"></a>Bir aboneliğin rol atamalarını listeleme
 
-Tüm rol atamalarını bir abonelik kapsamında listelemek için [az role atama listesi](/cli/azure/role/assignment#az-role-assignment-list)' ni kullanın. Abonelik KIMLIĞINI almak için Azure portal **abonelikler** dikey penceresinde bulabilir veya [az Account List](/cli/azure/account#az-account-list)' i kullanabilirsiniz.
+Tüm rol atamalarını bir abonelik kapsamında listelemek için [az role atama listesi](/cli/azure/role/assignment#az_role_assignment_list)' ni kullanın. Abonelik KIMLIĞINI almak için Azure portal **abonelikler** dikey penceresinde bulabilir veya [az Account List](/cli/azure/account#az_account_list)' i kullanabilirsiniz.
 
 ```azurecli
 az role assignment list --subscription {subscriptionNameOrId}
@@ -134,7 +134,7 @@ az role assignment list --subscription 00000000-0000-0000-0000-000000000000 --ou
 
 ## <a name="list-role-assignments-for-a-management-group"></a>Bir yönetim grubu için rol atamalarını listeleyin
 
-Bir yönetim grubu kapsamındaki tüm rol atamalarını listelemek için [az role atama listesi](/cli/azure/role/assignment#az-role-assignment-list)' ni kullanın. Yönetim grubu KIMLIĞINI almak için Azure portal **Yönetim grupları** dikey penceresinde bulabilir veya [az Account Management-Group List](/cli/azure/account/management-group#az-account-management-group-list)kullanabilirsiniz.
+Bir yönetim grubu kapsamındaki tüm rol atamalarını listelemek için [az role atama listesi](/cli/azure/role/assignment#az_role_assignment_list)' ni kullanın. Yönetim grubu KIMLIĞINI almak için Azure portal **Yönetim grupları** dikey penceresinde bulabilir veya [az Account Management-Group List](/cli/azure/account/management-group#az_account_management_group_list)kullanabilirsiniz.
 
 ```azurecli
 az role assignment list --scope /providers/Microsoft.Management/managementGroups/{groupId}
@@ -165,19 +165,19 @@ az role assignment list --scope /providers/Microsoft.Management/managementGroups
 
 1. Sistem tarafından atanan veya Kullanıcı tarafından atanan yönetilen kimliğin asıl KIMLIĞINI alır.
 
-    Kullanıcı tarafından atanan yönetilen kimliğin asıl KIMLIĞINI almak için [az ad SP listesi](/cli/azure/ad/sp#az-ad-sp-list) ' ni veya [az Identity List](/cli/azure/identity#az-identity-list)' i kullanabilirsiniz.
+    Kullanıcı tarafından atanan yönetilen kimliğin asıl KIMLIĞINI almak için [az ad SP listesi](/cli/azure/ad/sp#az_ad_sp_list) ' ni veya [az Identity List](/cli/azure/identity#az_identity_list)' i kullanabilirsiniz.
 
     ```azurecli
     az ad sp list --display-name "{name}" --query [].objectId --output tsv
     ```
 
-    Sistem tarafından atanan yönetilen kimliğin asıl KIMLIĞINI almak için [az ad SP List](/cli/azure/ad/sp#az-ad-sp-list)' i kullanabilirsiniz.
+    Sistem tarafından atanan yönetilen kimliğin asıl KIMLIĞINI almak için [az ad SP List](/cli/azure/ad/sp#az_ad_sp_list)' i kullanabilirsiniz.
 
     ```azurecli
     az ad sp list --display-name "{vmname}" --query [].objectId --output tsv
     ```
 
-1. Rol atamalarını listelemek için [az role atama listesi](/cli/azure/role/assignment#az-role-assignment-list)' ni kullanın.
+1. Rol atamalarını listelemek için [az role atama listesi](/cli/azure/role/assignment#az_role_assignment_list)' ni kullanın.
 
     Varsayılan olarak, yalnızca geçerli abonelik için rol atamaları görüntülenir. Geçerli aboneliğin ve aşağıdaki rol atamalarını görüntülemek için `--all` parametresini ekleyin. Devralınan rol atamalarını görüntülemek için `--include-inherited` parametresini ekleyin.
 

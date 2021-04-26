@@ -6,12 +6,12 @@ ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
 ms.date: 10/14/2020
-ms.openlocfilehash: b5b5a506b2f932d20a617634ace7ebf02093fbfa
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 99f7f6561df16cfad6b0cc001395fa3ad7b2f6dc
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "98664257"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107259481"
 ---
 # <a name="azure-database-for-mariadb-pricing-tiers"></a>MariaDB için Azure veritabanı fiyatlandırma katmanları
 
@@ -22,7 +22,7 @@ MariaDB sunucusu için Azure veritabanı oluşturmak için üç farklı fiyatlan
 | İşlem oluşturma | 5. Nesil |5. Nesil | 5. Nesil |
 | Sanal çekirdek | 1, 2 | 2, 4, 8, 16, 32, 64 |2, 4, 8, 16, 32 |
 | Sanal çekirdek başına bellek | 2 GB | 5 GB | 10 GB |
-| Depolama boyutu | 5 GB ila 1 TB | 5 GB ila 4 TB | 5 GB ila 4 TB |
+| Depolama boyutu | 5 GB ila 1 TB | 5 GB ila 16 TB | 5 GB ila 16 TB |
 | Veritabanı yedekleme saklama süresi | 7-35 gün | 7-35 gün | 7-35 gün |
 
 Fiyatlandırma katmanını seçmek için, başlangıç noktası olarak aşağıdaki tabloyu kullanın.
@@ -46,9 +46,13 @@ Sağladığınız depolama alanı, MariaDB sunucusu için Azure veritabanınız 
 | Depolama öznitelikleri   | Temel | Genel Amaçlı | Bellek İçin İyileştirilmiş |
 |:---|:----------|:--------------------|:---------------------|
 | Depolama türü | Temel depolama | Genel Amaçlı depolama | Genel Amaçlı depolama |
-| Depolama boyutu | 5 GB ila 1 TB | 5 GB ila 4 TB | 5 GB ila 4 TB |
+| Depolama boyutu | 5 GB ila 1 TB | 5 GB ila 16 TB | 5 GB ila 16 TB |
 | Depolama artış boyutu | 1 GB | 1 GB | 1 GB |
 | IOPS | Değişken |3 ıOPS/GB<br/>Minimum 100 ıOPS<br/>Maksimum 6000 ıOPS | 3 ıOPS/GB<br/>Minimum 100 ıOPS<br/>Maksimum 6000 ıOPS |
+
+>[!IMPORTANT]
+> 16 TB 'a kadar depolama alanı ve 20.000 ıOPS, şu bölgelerde desteklenir: Doğu ABD, Doğu ABD 2, Orta ABD, Brezilya Güney, Batı ABD, Orta Kuzey ABD, Orta Güney ABD, Kuzey Avrupa, Batı Avrupa, UK Güney, UK Batı, Güneydoğu Asya, Doğu Asya, Japonya Doğu, Japonya Batı, Kore Orta, Kore Güney, Avustralya Doğu, Avustralya Güney Doğu, Batı ABD 2, Orta Batı ABD , Kanada Doğu ve Kanada Orta.
+> Tüm diğer bölgeler 4TB 'a kadar depolamayı ve 6000 ıOPS 'yi destekler.
 
 Sunucu oluşturma sırasında ve sonrasında ek depolama kapasitesi ekleyebilir ve sistemin iş yükünüzün depolama tüketimine göre depolamayı otomatik olarak büyümesine izin verebilirsiniz.
 
@@ -58,23 +62,6 @@ Sunucu oluşturma sırasında ve sonrasında ek depolama kapasitesi ekleyebilir 
 Temel katman, ıOPS garantisi sağlamıyor. Genel Amaçlı ve bellek için Iyileştirilmiş fiyatlandırma katmanlarında ıOPS, sağlanan depolama boyutuyla 3:1 oranında ölçeklendirilir.
 
 G/ç tüketiminizi Azure portal veya Azure CLı komutlarını kullanarak izleyebilirsiniz. İzlenecek ilgili ölçümler [depolama sınırı, depolama yüzdesi, kullanılan depolama alanı ve yüzde GÇ](concepts-monitoring.md)' dır.
-
-### <a name="large-storage-preview"></a>Büyük depolama (Önizleme)
-
-Genel Amaçlı ve bellek için Iyileştirilmiş katmanlarımızda depolama sınırlarını artırıyoruz. Önizlemeye eklenen yeni oluşturulan sunucular 16 TB 'a kadar depolama alanı sağlayabilir. IOPS ölçeği, 3:1 ıOPS 20.000 'ye varan bir oranına sahiptir. Geçerli genel olarak kullanılabilir depolama alanında olduğu gibi, sunucu oluşturulduktan sonra ek depolama kapasitesi ekleyebilir ve sistemin iş yükünüzün depolama tüketimine göre depolamayı otomatik olarak büyümesine izin verebilirsiniz.
-
-| Depolama öznitelikleri | Genel Amaçlı | Bellek İçin İyileştirilmiş |
-|:-------------|:--------------------|:---------------------|
-| Depolama türü | Azure Premium Depolama | Azure Premium Depolama |
-| Depolama boyutu | 32 GB ila 16 TB| 32-16 TB |
-| Depolama artış boyutu | 1 GB | 1 GB |
-| IOPS | 3 ıOPS/GB<br/>Minimum 100 ıOPS<br/>Maksimum 20.000 ıOPS| 3 ıOPS/GB<br/>Minimum 100 ıOPS<br/>Maksimum 20.000 ıOPS |
-
-> [!IMPORTANT]
-> Büyük depolama Şu anda şu bölgelerde genel önizlemede: Doğu ABD, Doğu ABD 2, Brezilya Güney, Orta ABD, Batı ABD, Orta Kuzey ABD, Orta Güney ABD, Kuzey Avrupa, Batı Avrupa, UK Güney, UK Batı, Güneydoğu Asya, Doğu Asya, Japonya Doğu, Japonya Batı, Kore Orta, Kore Güney, Avustralya Doğu, Avustralya Güney Doğu, Batı ABD 2, Orta Batı ABD, Kanada Doğu ve Kanada Orta.
->
-> Tüm diğer bölgeler 4TB 'a kadar depolamayı ve 6000 ıOPS 'yi destekler.
->
 
 ### <a name="reaching-the-storage-limit"></a>Depolama sınırına ulaşma
 

@@ -9,12 +9,13 @@ ms.date: 05/28/2019
 ms.topic: tutorial
 ms.service: iot-edge
 ms.custom: mvc
-ms.openlocfilehash: 8f019c8f3c560fdfdc0c8e5992389c253c9b0d74
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+monikerRange: =iotedge-2018-06
+ms.openlocfilehash: a67bf92dbee9bf3d444add3be32544e4c3eba4f3
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103463383"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106221611"
 ---
 # <a name="tutorial-develop-c-iot-edge-modules-using-windows-containers"></a>Öğretici: Windows kapsayıcıları kullanarak C IoT Edge modülleri geliştirme
 
@@ -23,7 +24,7 @@ ms.locfileid: "103463383"
 Bu makalede C kodu geliştirmek ve Azure IoT Edge çalıştıran bir Windows cihazına dağıtmak için Visual Studio 'Nun nasıl kullanılacağı gösterilmektedir.
 
 >[!NOTE]
->IoT Edge 1,1 LTS, Windows kapsayıcılarını destekleyecek son sürüm kanaldır. Sürüm 1,2 ' den başlayarak Windows kapsayıcıları desteklenmez. Windows cihazlarda IoT Edge çalıştırmak için [Windows 'Ta Linux için IoT Edge](iot-edge-for-linux-on-windows.md) kullanmayı veya taşımayı düşünün.
+>IoT Edge 1,1 LTS, Windows kapsayıcılarını destekleyen son sürüm kanaldır. Sürüm 1,2 ' den başlayarak Windows kapsayıcıları desteklenmez. Windows cihazlarda IoT Edge çalıştırmak için [Windows 'Ta Linux için IoT Edge](iot-edge-for-linux-on-windows.md) kullanmayı veya taşımayı düşünün.
 
 Azure IoT Edge modüllerini, iş mantığınızı doğrudan IoT Edge cihazlarınızda uygulayan kodu dağıtmak için kullanabilirsiniz. Bu öğreticide, algılayıcı verilerini filtreleyen bir IoT Edge modülü oluşturma ve dağıtma işlemlerinin adımları açıklanmaktadır.
 

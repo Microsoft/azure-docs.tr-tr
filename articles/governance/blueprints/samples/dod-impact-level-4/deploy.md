@@ -1,14 +1,14 @@
 ---
 title: DOD etkisi düzey 4 şema örneği
 description: Blueımpprint yapıt parametresi ayrıntıları dahil olmak üzere DOD etkisi düzeyi 4 şema örneği için adımları dağıtın.
-ms.date: 01/08/2021
+ms.date: 04/13/2021
 ms.topic: sample
-ms.openlocfilehash: 389090b79c0aad343c1999ea17ed8c9332958544
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ce0d2d162bf77c147e0e4bc26e68964cd50f4372
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100594797"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378457"
 ---
 # <a name="deploy-the-dod-impact-level-4-blueprint-sample"></a>DOD etkisi düzeyi 4 şema örneğini dağıtma
 
@@ -19,7 +19,7 @@ Savunma etki düzeyi 4 (DOD IL4) şema örnek Azure şemaları departmanı dağ�
 > - Örneğinizin kopyasını **Yayımlandı** olarak işaretleyin
 > - Şemanızın kopyasını mevcut bir aboneliğe atayın
 
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free) oluşturun.
+Azure Kamu aboneliğiniz yoksa başlamadan önce bir [deneme aboneliği](https://azure.microsoft.com/global-infrastructure/government/request/) isteyin.
 
 ## <a name="create-blueprint-from-sample"></a>Örnekten şema oluştur
 

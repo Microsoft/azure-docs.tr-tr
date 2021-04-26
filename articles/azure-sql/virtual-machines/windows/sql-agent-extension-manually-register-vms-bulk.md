@@ -14,12 +14,12 @@ ms.workload: iaas-sql-server
 ms.date: 11/07/2020
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: 558daede55f6563155d3f54e97d77c0a3ca4de59
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ebf835cad79f8c011be2fec91f6f4644ecd0941f
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97357238"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106284133"
 ---
 # <a name="register-multiple-sql-vms-in-azure-with-the-sql-iaas-agent-extension"></a>SQL IaaS Aracısı Uzantısı ile birden çok SQL VM 'yi Azure 'da kaydetme
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
@@ -39,7 +39,7 @@ Kayıt işlemi risk içermez, kapalı kalma süresi yoktur ve SQL Server hizmeti
 
 SQL Server VM uzantıya kaydetmek için şunlar gerekir: 
 
-- [ **Microsoft. sqlvirtualmachine** sağlayıcısına kayıtlı](sql-agent-extension-manually-register-single-vm.md#register-subscription-with-rp) ve kaydedilmemiş SQL Server sanal makineler içeren bir [Azure aboneliği](https://azure.microsoft.com/free/) . 
+- [ **Microsoft. sqlvirtualmachine** sağlayıcısına kayıtlı](sql-agent-extension-manually-register-single-vm.md#register-subscription-with-resource-provider) ve kaydedilmemiş SQL Server sanal makineler içeren bir [Azure aboneliği](https://azure.microsoft.com/free/) . 
 - Sanal makineleri kaydetmek için kullanılan istemci kimlik bilgileri şu Azure rollerinin hiçbirinde bulunuyor: **sanal makine katılımcısı**, **katkıda bulunan** veya **sahip**. 
 - En son [az PowerShell sürümü (en az 5,0)](/powershell/azure/new-azureps-module-az). 
 

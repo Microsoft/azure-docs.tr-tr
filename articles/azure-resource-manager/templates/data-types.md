@@ -5,12 +5,12 @@ ms.topic: conceptual
 ms.author: tomfitz
 author: tfitzmac
 ms.date: 03/04/2021
-ms.openlocfilehash: 7d3f15c8852e6e25c621baad9bc6f20c303ffdb9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 4d6c8306b3dbdfe895055dc008d81cc0d85d8d6c
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102125164"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107538072"
 ---
 # <a name="data-types-in-arm-templates"></a>ARM şablonlarındaki veri türleri
 
@@ -143,11 +143,9 @@ Satır içi parametre olarak geçirilen tamsayılar için, değer aralığı, da
 
 Nesneler sol küme ayracı () ile başlar `{` ve sağ küme ayracı () ile biter `}` . Bir nesnedeki her özellik anahtar ve değerden oluşur. Anahtar ve değer iki nokta () ile ayrılır `:` .
 
-JSON 'da, anahtar çift tırnak içine alınır. Her özellik virgülle ayrılır.
-
-Bıcep 'de, anahtar tırnak içine alınmaz. Özellikler arasında virgül kullanmayın.
-
 # <a name="json"></a>[JSON](#tab/json)
+
+JSON 'da, anahtar çift tırnak içine alınır. Her özellik virgülle ayrılır.
 
 ```json
 "parameters": {
@@ -165,6 +163,8 @@ Bıcep 'de, anahtar tırnak içine alınmaz. Özellikler arasında virgül kulla
 
 # <a name="bicep"></a>[Bicep](#tab/bicep)
 
+Bıcep 'de, anahtar tırnak içine alınmaz. Özellikler arasında virgül kullanmayın.
+
 ```bicep
 param exampleObject object = {
   name: 'test name'
@@ -173,6 +173,22 @@ param exampleObject object = {
   tier: 1
 }
 ```
+
+Özellik erişimcileri bir nesnenin özelliklerine erişmek için kullanılır. İşleci kullanılarak oluşturulur `.` . Örnek:
+
+```bicep
+var x = {
+  y: {
+    z: 'Hello`
+    a: true
+  }
+  q: 42
+}
+```
+
+Önceki bildirim verildiğinde, x. y. z ifadesi ' Hello ' değişmez dize olarak değerlendirilir. Benzer şekilde, x. q ifadesi 42 tamsayı sabit değeri olarak değerlendirilir.
+
+Özellik erişimcileri herhangi bir nesneyle birlikte kullanılabilir. Bu, nesne türlerinin ve nesne sabit değerlerinin parametrelerini ve değişkenlerini içerir. Nesne olmayan tür ifadesinde bir özellik erişimcisi kullanılması bir hatadır.
 
 ---
 

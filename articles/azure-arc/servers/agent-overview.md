@@ -3,12 +3,13 @@ title: Bağlı makine aracısına genel bakış
 description: Bu makalede, karma ortamlarda barındırılan sanal makinelerin izlenmesini destekleyen Azure Arc etkin sunucu aracısına sunulan ayrıntılı bir genel bakış sunulmaktadır.
 ms.date: 03/25/2021
 ms.topic: conceptual
-ms.openlocfilehash: 2db1758240dca448409af9f4ec00c01d684c920a
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: dd58997a8af86a3789895bfb29bfd5803826fa6f
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105609245"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107832968"
 ---
 # <a name="overview-of-azure-arc-enabled-servers-agent"></a>Azure Arc etkin sunucular aracısına genel bakış
 

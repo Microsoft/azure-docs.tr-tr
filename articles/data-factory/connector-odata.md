@@ -4,14 +4,14 @@ description: Azure Data Factory işlem hattındaki kopyalama etkinliğini kullan
 author: linda33wj
 ms.service: data-factory
 ms.topic: conceptual
-ms.date: 10/14/2020
+ms.date: 03/30/2021
 ms.author: jingwang
-ms.openlocfilehash: 90cc4e3f9915db424cec89cfc764771b5be785e9
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9dd86b4982edf5d206e64431a5e1458c4b848e9e
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100389731"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105968544"
 ---
 # <a name="copy-data-from-an-odata-source-by-using-azure-data-factory"></a>Azure Data Factory kullanarak OData kaynağından veri kopyalama
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -326,6 +326,48 @@ OData 'ten veri kopyaladığınızda, OData veri türleri ve Azure Data Factory 
 
 > [!NOTE]
 > OData karmaşık veri türleri (örneğin, **nesne**) desteklenmez.
+
+## <a name="copy-data-from-project-online"></a>Project Online 'dan veri kopyalama
+
+Project Online 'dan veri kopyalamak için OData bağlayıcısını ve Postman gibi araçlardan alınan bir erişim belirtecini kullanabilirsiniz.
+
+> [!CAUTION]
+> Erişim belirtecinin süresi, varsayılan olarak 1 saat içinde dolar. süresi dolmuşsa yeni bir erişim belirteci almanız gerekir.
+
+1. Erişim belirtecini almak için **Postman** kullanın:
+
+   1. Postman Web sitesinde **Yetkilendirme** sekmesine gidin.
+   1. **Tür** kutusunda, **OAuth 2,0**' ı seçin ve **yetkilendirme verileri ekle** kutusunda **istek üst bilgileri**' ni seçin.
+   1. Yeni bir erişim belirteci almak için **yeni belirteci Yapılandır** sayfasında aşağıdaki bilgileri girin: 
+      - **Verme türü**: **yetkilendirme kodu** seçin.
+      - **Geri arama URL 'si**: girin `https://www.localhost.com/` . 
+      - **Kimlik doğrulama URL 'si**: girin `https://login.microsoftonline.com/common/oauth2/authorize?resource=https://<your tenant name>.sharepoint.com` . `<your tenant name>`Kendi kiracı adınızla değiştirin. 
+      - **Erişim belirteci URL 'si**: girin `https://login.microsoftonline.com/common/oauth2/token` .
+      - **ISTEMCI kimliği**: AAD HIZMET sorumlusu kimliğinizi girin.
+      - **Istemci parolası**: hizmet sorumlusu gizli anahtarını girin.
+      - **Istemci kimlik doğrulaması**: **Basit kimlik doğrulama üst bilgisi gönder**' i seçin.
+     
+   1. Kullanıcı adınız ve parolanızla oturum açmanız istenir.
+   1. Erişim belirtecinizi aldıktan sonra lütfen bir sonraki adım için kopyalayın ve kaydedin.
+   
+    [![Erişim belirtecini almak için Postman kullanın](./media/connector-odata/odata-project-online-postman-access-token-inline.png)](./media/connector-odata/odata-project-online-postman-access-token-expanded.png#lightbox)
+
+1. OData bağlı hizmetini oluşturun:
+    - **Hizmet URL 'si**: girin `https://<your tenant name>.sharepoint.com/sites/pwa/_api/Projectdata` . `<your tenant name>`Kendi kiracı adınızla değiştirin. 
+    - **Kimlik doğrulama türü**: **anonim**' i seçin.
+    - **Kimlik doğrulama üstbilgileri**:
+        - **Özellik adı**: **Yetkilendirmeyi** seçin.
+        - **Değer**: 1. adımdan kopyalanmış **erişim belirtecini** girin.
+    - Bağlı hizmeti test edin.
+
+    ![OData bağlı hizmeti oluştur](./media/connector-odata/odata-project-online-linked-service.png)
+
+1. OData veri kümesini oluşturun:
+    1. 2. adımda oluşturulan OData bağlı hizmeti ile veri kümesini oluşturun.
+    1. Verileri önizleyin.
+ 
+    ![Veri önizleme](./media/connector-odata/odata-project-online-preview-data.png)
+ 
 
 
 ## <a name="lookup-activity-properties"></a>Arama etkinliği özellikleri

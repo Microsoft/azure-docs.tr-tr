@@ -8,16 +8,14 @@ ms.author: nmurav
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: 7eb44987dca033ecdac9ef2ca63fb1da97dc9678
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: a5a23d6a06c8cdff4deabac5251597b7ffe0c833
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105109191"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728054"
 ---
 # <a name="tutorial-prepare-a-web-app-for-azure-communication-services-nodejs"></a>Öğretici: Azure Iletişim Hizmetleri için bir Web uygulaması hazırlama (Node.js)
-
-[!INCLUDE [Public Preview Notice](../includes/public-preview-include.md)]
 
 Uygulamalarınıza gerçek zamanlı iletişimler eklemek için Azure Iletişim Hizmetleri 'ni kullanabilirsiniz. Bu öğreticide, Azure Iletişim hizmetlerini destekleyen bir Web uygulamasını ayarlamayı öğreneceksiniz. Bu, gerçek zamanlı iletişimlerle çalışmaya başlamak isteyen yeni geliştiriciler için tanıtım amaçlı bir öğreticidir.
 

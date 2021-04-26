@@ -3,12 +3,12 @@ title: SAP HANA veritabanlarının yedekleme hatalarını giderme
 description: SAP HANA veritabanlarını yedeklemek için Azure Backup kullandığınızda oluşabilecek yaygın hataların nasıl giderileceği açıklanmaktadır.
 ms.topic: troubleshooting
 ms.date: 11/7/2019
-ms.openlocfilehash: 22800adc323bda8a60278160f24bc559103fb57e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: cdf4c26aa32d65ec63ec84d85e454adaaf2ece8d
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101713346"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107517241"
 ---
 # <a name="troubleshoot-backup-of-sap-hana-databases-on-azure"></a>Azure 'da SAP HANA veritabanlarının yedeklenmesi sorunlarını giderme
 
@@ -27,7 +27,7 @@ Yedeklemeleri yapılandırmadan önce [önkoşullara](tutorial-backup-sap-hana-d
 | **Olası nedenler**    | Rolün üzerine yazılmış olabilir.                          |
 | **Önerilen eylem** | Sorunu çözmek için betiği **bul** bölmesinden çalıştırın veya [buradan](https://aka.ms/scriptforpermsonhana)indirin. Alternatif olarak, ' SAP_INTERNAL_HANA_SUPPORT ' rolünü Iş yükü yedekleme kullanıcısına (AZUREWLBACKUPHANAUSER) ekleyin. |
 
-### <a name="usererrorinopeninghanaodbcconnection"></a>Usererrorınopeninghanaodbcconnection
+### <a name="usererrorinopeninghanaodbcconnection"></a>UserErrorInOpeningHanaOdbcConnection
 
 | Hata İletisi      | <span style="font-weight:normal">HANA sistemine bağlanılamadı</span>                        |
 | ------------------ | ------------------------------------------------------------ |
@@ -197,4 +197,4 @@ Yukarıdaki senaryolarda, VM 'de bir yeniden kaydetme işlemi tetiklemeniz öner
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Azure VM 'lerinde SAP HANA veritabanlarının yedeklenmesi hakkında [sık sorulan soruları](./sap-hana-faq-backup-azure-vm.md) gözden geçirin.
+- Azure VM 'lerinde SAP HANA veritabanlarının yedeklenmesi hakkında [sık sorulan soruları](./sap-hana-faq-backup-azure-vm.yml) gözden geçirin.

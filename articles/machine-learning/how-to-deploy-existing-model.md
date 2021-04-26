@@ -11,12 +11,12 @@ ms.reviewer: larryfr
 ms.date: 07/17/2020
 ms.topic: conceptual
 ms.custom: how-to, devx-track-python, deploy
-ms.openlocfilehash: 8076e3f6b2198abe46ae49cd8e0fd2b02f000231
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 46dc9e48ba68189253885ae823457a62c3c4426e
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102519359"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877813"
 ---
 # <a name="deploy-your-existing-model-with-azure-machine-learning"></a>Mevcut modelinize Azure Machine Learning dağıtın
 
@@ -61,7 +61,7 @@ az ml model register -p ./models -n sentiment -w myworkspace -g myresourcegroup
 > [!TIP]
 > Ayrıca, `tags` kayıtlı modele ekleme ve `properties` sözlük nesneleri de ayarlayabilirsiniz. Bu değerler, daha sonra belirli bir modeli belirlemesine yardımcı olmak için kullanılabilir. Örneğin, kullanılan çerçeve, eğitim parametreleri vb.
 
-Daha fazla bilgi için, [az ml model kayıt](/cli/azure/ext/azure-cli-ml/ml/model#ext-azure-cli-ml-az-ml-model-register) başvurusuna bakın.
+Daha fazla bilgi için, [az ml model kayıt](/cli/azure/ml/model#az_ml_model_register) başvurusuna bakın.
 
 
 Model kaydı hakkında genel bilgi için bkz. [Machine Learning modellerini yönetme, dağıtma ve izleme](concept-model-management-and-deployment.md).
@@ -268,7 +268,7 @@ Modeli CLı 'dan dağıtmak için aşağıdaki komutu kullanın. Bu komut `senti
 az ml model deploy -n myservice -m sentiment:1 --ic inferenceConfig.json --dc deploymentConfig.json
 ```
 
-Daha fazla bilgi için, [az ml model dağıtım](/cli/azure/ext/azure-cli-ml/ml/model#ext-azure-cli-ml-az-ml-model-deploy) başvurusuna bakın.
+Daha fazla bilgi için, [az ml model dağıtım](/cli/azure/ml/model#az_ml_model_deploy) başvurusuna bakın.
 
 Dağıtım hakkında daha fazla bilgi için bkz. [modellerin nasıl ve ne şekilde dağıtılacağı](how-to-deploy-and-where.md).
 

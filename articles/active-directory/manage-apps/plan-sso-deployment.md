@@ -2,23 +2,23 @@
 title: Azure Active Directory çoklu oturum açma dağıtımı planlayın
 description: Kuruluşunuzda SSO 'yu planlayıp, dağıtmanıza ve yönetmenize yardımcı olacak kılavuz.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: conceptual
 ms.workload: identity
 ms.date: 06/10/2020
-ms.author: baselden
+ms.author: iangithinji
 ms.reviewer: jeedes
 ms.collection: M365-identity-device-management
 ms.custom: has-adal-ref
-ms.openlocfilehash: a7949324cd4ad0459aa5ba111037b2f580da9cf8
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 3f395eaf21dce0077c1239ef2251973aeb5faa70
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103601721"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107375619"
 ---
 # <a name="plan-a-single-sign-on-deployment"></a>Çoklu oturum açma dağıtımını planlama
 

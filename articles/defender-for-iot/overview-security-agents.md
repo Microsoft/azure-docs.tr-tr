@@ -4,10 +4,10 @@ description: IoT cihazlarınızdaki IoT güvenlik hizmeti aracıları için Azur
 ms.topic: conceptual
 ms.date: 1/24/2021
 ms.openlocfilehash: a1d74de9824b9e825f87754da21070d4e7f1ee33
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104783498"
 ---
 # <a name="get-started-with-azure-defender-for-iot-device-micro-agents"></a>IoT cihaz mikro aracıları için Azure Defender ile çalışmaya başlama

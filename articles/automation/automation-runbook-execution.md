@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 03/23/2021
 ms.topic: conceptual
-ms.openlocfilehash: 165c9ea721bec7fc7a1657f5dde5c19d9e254e20
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 0807b11adfc46b9c32a8f7bd36a2f7d4db519975
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104954352"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830529"
 ---
 # <a name="runbook-execution-in-azure-automation"></a>Azure Otomasyonu’nda runbook yürütme
 

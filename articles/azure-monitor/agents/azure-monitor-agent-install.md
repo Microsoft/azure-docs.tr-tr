@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 11/17/2020
-ms.openlocfilehash: b2f91f0036a86151588c8c138dac5421ad54e18e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: db9ad08f9a939a22e1e0e1cfba0537e6356394ed
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104586429"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105731544"
 ---
 # <a name="install-the-azure-monitor-agent-preview"></a>Azure Izleyici aracısını (Önizleme) yükler
 Bu makalede, Azure [izleyici aracısını](azure-monitor-agent-overview.md) hem Azure sanal makinelerine hem de Azure Arc özellikli sunuculara yüklemek için şu anda kullanılabilen farklı seçenekler ve ayrıca aracının hangi verileri toplayacağını tanımlayan [veri toplama kurallarıyla ilişkiler](data-collection-rule-azure-monitor-agent.md) oluşturma seçenekleri sunulmaktadır.
@@ -20,6 +20,9 @@ Azure Izleyici aracısını yüklemeden önce aşağıdaki Önkoşullar gereklid
 
 - [Yönetilen sistem kimliğinin](../../active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm.md) Azure sanal makinelerinde etkinleştirilmesi gerekir. Bu, Azure Arc etkin sunucuları için gerekli değildir. Aracı, [Azure Portal kullanarak bir veri toplama kuralı oluşturma ve atama sürecinin bir](#install-with-azure-portal)parçası olarak yüklenirse, sistem kimliği otomatik olarak etkinleştirilir.
 - [AzureResourceManager hizmet etiketi](../../virtual-network/service-tags-overview.md) , sanal makine için sanal ağda etkinleştirilmelidir.
+
+> [!IMPORTANT]
+> Azure Izleyici Aracısı Şu anda ağ proxy 'lerini desteklemiyor.
 
 ## <a name="virtual-machine-extension-details"></a>Sanal makine uzantısı ayrıntıları
 Azure Izleyici Aracısı, aşağıdaki tablodaki ayrıntılarla bir [Azure VM Uzantısı](../../virtual-machines/extensions/overview.md) olarak uygulanır. Bu makalede açıklananlar dahil sanal makine uzantılarını yükleme yöntemlerinden herhangi biri kullanılarak yüklenebilir.

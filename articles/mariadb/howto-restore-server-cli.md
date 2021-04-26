@@ -8,12 +8,12 @@ ms.devlang: azurecli
 ms.topic: how-to
 ms.date: 3/27/2020
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: a6e46efd7f998437c3998df9a989ef9e1500e888
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: af197f2dd144e7541f669fdd67b58c38d91b4400
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98664843"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107777140"
 ---
 # <a name="how-to-back-up-and-restore-a-server-in-azure-database-for-mariadb-using-the-azure-cli"></a>Azure CLı kullanarak MariaDB için Azure veritabanı 'nda bir sunucuyu yedekleme ve geri yükleme
 
@@ -57,7 +57,7 @@ Yedekleme bekletme süresi, kullanılabilir yedeklemeler temel aldığı için z
 
 Sunucuyu zaman içinde önceki bir noktaya geri yükleyebilirsiniz. Geri yüklenen veriler yeni bir sunucuya kopyalanır ve var olan sunucu olduğu gibi bırakılır. Örneğin, bir tablo yanlışlıkla öğleden sonra bırakılırsa, gece ' e kadar olan saate geri yükleyebilirsiniz. Daha sonra, eksik tablo ve verileri, sunucunun geri yüklenen kopyasından elde edebilirsiniz.
 
-Sunucuyu geri yüklemek için Azure CLı [az MariaDB Server restore](/cli/azure/mariadb/server#az-mariadb-server-restore) komutunu kullanın.
+Sunucuyu geri yüklemek için Azure CLı [az MariaDB Server restore](/cli/azure/mariadb/server#az_mariadb_server_restore) komutunu kullanın.
 
 ### <a name="run-the-restore-command"></a>Restore komutunu çalıştırın
 

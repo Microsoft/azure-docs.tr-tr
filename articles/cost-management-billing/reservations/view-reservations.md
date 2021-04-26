@@ -1,23 +1,23 @@
 ---
-title: Azure kaynakları için rezervasyonları görüntüleyin
-description: Azure portalında Azure rezervasyonlarının nasıl görüntüleneceğini öğrenin. API'ler, PowerShell, CLI ve Power BI kullanarak rezervasyonları ve kullanımı görüntüleyin.
+title: Azure ayırmalarını görüntüleme ve yönetme izinleri
+description: Azure portal Azure ayırmalarını görüntülemeyi ve yönetmeyi öğrenin.
 author: yashesvi
 ms.reviewer: yashar
 ms.service: cost-management-billing
 ms.subservice: reservations
 ms.topic: how-to
-ms.date: 03/17/2021
+ms.date: 04/15/2021
 ms.author: banders
-ms.openlocfilehash: 1c666602f764e8274cb2a30df204e97479c85ba3
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fe2f36b08f98ceb2a5f6085510b589a712ff194d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104583063"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780470"
 ---
-# <a name="view-azure-reservations"></a>Azure rezervasyonlarını görüntüleme
+# <a name="permissions-to-view-and-manage-azure-reservations"></a>Azure ayırmalarını görüntüleme ve yönetme izinleri
 
-Bu makale, Azure rezervasyonlarının Azure portalda nasıl görüntüleneceği açıklamaktadır. Satın alınan bir rezervasyonu Azure portalda görüntüleyip yönetebilirsiniz.
+Bu makalede, rezervasyon izinlerinin nasıl çalıştığı ve kullanıcıların Azure portal Azure ayırmalarını nasıl görüntüleyebileceği ve yönetebileceği açıklanmaktadır.
 
 ## <a name="who-can-manage-a-reservation-by-default"></a>Bir rezervasyonu varsayılan olarak kim yönetebilir?
 
@@ -25,72 +25,60 @@ Varsayılan olarak, aşağıdaki kullanıcılar rezervasyonları görüntüleyeb
 
 - Rezervasyonu satın alan kişi ve rezervasyonu satın almak için kullanılan faturalama aboneliğinin hesap yöneticisi rezervasyon siparişine eklenir.
 - Kurumsal Anlaşma ve Microsoft Müşteri Anlaşması faturalandırma yöneticileri.
+- Tüm Azure aboneliklerini ve Yönetim gruplarını yönetmek için yükseltilmiş erişimi olan kullanıcılar
 
-Diğer kişilerin rezervasyonları yönetmesine izin vermek için iki seçeneğiniz vardır:
+Ayırma yaşam döngüsü bir Azure aboneliğinden bağımsızdır, bu nedenle ayırma Azure aboneliği kapsamında bir kaynak değildir. Bunun yerine, kendi Azure RBAC izni aboneliklerden ayrı olan kiracı düzeyinde bir kaynaktır. Rezervasyonlar, satın alma işleminden sonraki aboneliklerden izinleri almıyor.
 
-- Bireysel bir rezervasyon siparişi için erişim yönetimi temsilcisi atama:
-    1. [Azure Portal](https://portal.azure.com) oturum açın.
-    1. **Tüm Hizmetler** > **Rezervasyon**'u seçerek erişim sahibi olduğunuz rezervasyonları listeleyin.
-    1. Diğer kullanıcılara erişim vermek istediğiniz rezervasyonu seçin.
-    1. Rezervasyon ayrıntılarından rezervasyon siparişini seçin.
-    1. **Erişim denetimi (IAM)** öğesini seçin.
-    1. **Rol ataması ekle** > **Rol** > **Sahip**'i seçin. Sınırlı erişim vermek istiyorsanız farklı bir rol seçin.
-    1. Sahip olarak eklemek istediğiniz kullanıcının e-posta adresini yazın.
-    1. Kullanıcıyı ve ardından **Kaydet**'i seçin.
+## <a name="how-billing-administrators-can-view-or-manage-reservations"></a>Faturalandırma yöneticileri, ayırmaları nasıl görüntüleyebilir veya yönetebilir
 
-- Bir Kullanıcıyı bir Kurumsal Anlaşma veya bir Microsoft Müşteri Anlaşmasına faturalandırma yöneticisi olarak ekleme:
-    - Kurumsal Anlaşma için, Kurumsal Anlaşma uygulanan tüm rezervasyon siparişlerini görüntülemek ve yönetmek üzere _Kuruluş Yöneticisi_  rolüne sahip kullanıcıları ekleyin. Kurumsal Yöneticiler, rezervasyonları **maliyet yönetimi + faturalandırmaya** göre görüntüleyip **yönetir.** _Kuruluş Yöneticisi (salt okuma) rolü olan kullanıcılar_  yalnızca rezervasyonu görüntüleyebilir. Bölüm yöneticileri ve hesap sahipleri, erişim denetimi (IAM) kullanılarak bunlara açıkça eklenmedikleri _takdirde ayırmaları_ görüntüleyemez. Daha fazla bilgi için bkz. [Azure Enterprise rollerini yönetme](../manage/understand-ea-roles.md).
-
-        _Kurumsal Yöneticiler, bir rezervasyon siparişinin sahipliğini alabilir ve erişim denetimi (IAM) kullanarak bir rezervasyona başka kullanıcılar ekleyebilirler._
-    - Bir Microsoft Müşteri Anlaşması için, faturalandırma profili sahibi veya faturalandırma profili katılımcısı rolüne sahip kullanıcılar, faturalandırma profilini kullanarak yapılan tüm rezervasyon satın almalarını yönetebilir. Faturalandırma profili okuyucuları ve fatura yöneticileri, faturalandırma profiliyle ilgili ödenen tüm rezervasyonları görüntüleyebilir. Ancak, rezervasyonlar üzerinde değişiklik yapamaz.
-    Daha fazla bilgi için bkz. [Faturalandırma profili rolleri ve görevleri](../manage/understand-mca-roles.md#billing-profile-roles-and-tasks).
-
-### <a name="how-billing-administrators-view-or-manage-reservations"></a>Faturalandırma yöneticileri rezervasyonları nasıl görüntüler veya yönetir
-
-Azure RBAC erişimi ile rezervasyonlar veya rezervasyon siparişlerine erişiminiz varsa, rezervasyon işlemlerine gittiğinizde yalnızca bir ayırma işlemleri veya hiçbiri için bir alt küme görebilirsiniz. Tüm ayırmaları ve rezervasyon işlemlerini görüntülemek ve yönetmek için aşağıdaki adımları kullanın.
+Faturalandırma yöneticisiyseniz, tüm ayırmaları ve rezervasyon işlemlerini görüntülemek ve yönetmek için aşağıdaki adımları kullanın.
 
 1. [Azure Portal](https://portal.azure.com) oturum açın ve **maliyet yönetimi + faturalandırma**' a gidin.
     - EA yöneticisiyseniz, sol taraftaki menüden **faturalandırma kapsamları** ' nı seçin ve ardından Faturalandırma kapsamları listesinden bir tane seçin.
     - Microsoft Müşteri Sözleşmesi faturalama profili sahibiyseniz, sol taraftaki menüden **faturalandırma profilleri**' ni seçin. Faturalandırma profilleri listesinde bir tane seçin.
-1. Sol menüde, **ayırma işlemleri**' ni seçin. Rezervasyon işlemlerinin listesi gösterilir.
-1. Sayfanın üst kısmındaki bir başlık *artık faturalama yöneticileri rezervasyonları yönetebilir. Rezervasyonları yönetmek için buraya tıklayın.* Başlığı seçin.
+1. Sol menüde, **Ürünler + hizmet**  >  **ayırmaları**' ni seçin.
 1. EA kaydınız veya faturalandırma profiliniz için rezervasyonların tüm listesi gösterilir.
-1. Bir ayırmanın sahipliğini almak istiyorsanız bunu seçin. Ardından izinleri ayarla sayfasında, **erişim ver**' i seçin. Rezervasyon ve rezervasyon siparişi için sahip erişimi verildi.
+1. Faturalandırma yöneticileri, bir ayırmayı seçip açılan pencerede **erişim ver** ' i seçerek bir ayırmanın sahipliğini alabilir.
 
-## <a name="view-reservation-and-utilization-in-the-azure-portal"></a>Azure portalında rezervasyonu ve kullanımı görüntüleme
+### <a name="how-to-add-billing-administrators"></a>Faturalandırma yöneticileri ekleme
 
-Bir rezervasyonu Sahip veya Okuyucu olarak görüntülemek için
+Bir Kullanıcıyı bir Kurumsal Anlaşma veya bir Microsoft Müşteri Anlaşmasına faturalandırma yöneticisi olarak ekleme:
+
+- Kurumsal Anlaşma için, Kurumsal Anlaşma uygulanan tüm rezervasyon siparişlerini görüntülemek ve yönetmek üzere _Kuruluş Yöneticisi_  rolüne sahip kullanıcıları ekleyin. Kurumsal Yöneticiler, **maliyet yönetimi + faturalandırma** bölümünde rezervasyonları görüntüleyebilir ve yönetebilir.
+    - _Kuruluş Yöneticisi (salt okuma)_ rolüne sahip kullanıcılar yalnızca **maliyet yönetimi + faturalandırma** üzerinden rezervasyon görüntüleyebilir. 
+    - Bölüm yöneticileri ve hesap sahipleri, erişim denetimi (IAM) kullanılarak bunlara açıkça eklenmedikleri _takdirde ayırmaları_ görüntüleyemez. Daha fazla bilgi için bkz. [Azure Enterprise rollerini yönetme](../manage/understand-ea-roles.md).
+- Bir Microsoft Müşteri Anlaşması için, faturalandırma profili sahibi veya faturalandırma profili katılımcısı rolüne sahip kullanıcılar, faturalandırma profilini kullanarak yapılan tüm rezervasyon satın almalarını yönetebilir. Faturalandırma profili okuyucuları ve fatura yöneticileri, faturalandırma profiliyle ilgili ödenen tüm rezervasyonları görüntüleyebilir. Ancak, rezervasyonlar üzerinde değişiklik yapamaz.
+    Daha fazla bilgi için bkz. [Faturalandırma profili rolleri ve görevleri](../manage/understand-mca-roles.md#billing-profile-roles-and-tasks).
+
+## <a name="view-reservations-with-azure-rbac-access"></a>Azure RBAC erişimi ile rezervasyonları görüntüleme
+
+Ayırmayı satın aldıysanız veya bir ayırmaya eklediyseniz, ayırmaları görüntülemek ve yönetmek için aşağıdaki adımları kullanın.
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. [Rezervasyonlar](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade)’a gidin.
-3. Listede, Sahip veya Okuyucu rolüne sahip olduğunuz tüm rezervasyonlar gösterilir. Her rezervasyon, bilinen son kullanım yüzdesini gösterir.
-4. Kullanım geçmişini ve ayrıntılarını görmek için kullanım yüzdesini seçin. Aşağıdaki videoda bulunan ayrıntılara bakın.
-   > [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE4sYwk] 
+1. **Tüm Hizmetler** > **Rezervasyon**'u seçerek erişim sahibi olduğunuz rezervasyonları listeleyin.
 
-## <a name="get-reservations-and-utilization-using-apis-powershell-and-cli"></a>API’ler, PowerShell ve CLI’yı kullanarak rezervasyonlar ve kullanım alın
+## <a name="users-with-elevated-access-can-manage-all-azure-subscriptions-and-management-groups"></a>Yükseltilmiş erişimi olan kullanıcılar, tüm Azure aboneliklerini ve Yönetim gruplarını yönetebilir
 
-Aşağıdaki kaynakları kullanarak tüm rezervasyonların listesini alın:
+[Tüm Azure aboneliklerini ve Yönetim gruplarını yönetmek için](../../role-based-access-control/elevate-access-global-admin.md?toc=/azure/cost-management-billing/reservations/toc.json)bir kullanıcının erişimini yükseltebilir.
 
-- [API: Rezervasyon Siparişi - Liste](/rest/api/reserved-vm-instances/reservationorder/list)
-- [PowerShell: Rezervasyon Siparişi - Liste](/powershell/module/azurerm.reservations/get-azurermreservationorder)
-- [CLI: Rezervasyon Siparişi - Liste](/cli/azure/reservations/reservation-order#az-reservations-reservation-order-list)
+Erişimi yükseltdikten sonra:
 
-Ayrılmış Örnek kullanımı API’sini kullanarak da [rezervasyon kullanımını](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage) elde edebilirsiniz. 
+1.   >  Kiracıdaki tüm rezervasyonları görmek için tüm hizmet **rezervasyonuna** gidin.
+1. Ayırmaya değişiklikler yapmak için, erişim denetimi (ıAM) kullanarak kendi rezervasyon sırasının sahibi olarak kendinizi ekleyin.
 
-## <a name="see-reservations-and-utilization-in-power-bi"></a>Power BI’da rezervasyonları ve kullanımı görme
+## <a name="give-users-azure-rbac-access-to-individual-reservations"></a>Kullanıcılara Azure RBAC 'e tek tek ayırmalar erişimi verme
 
-Power BI kullanıcılarına yönelik iki seçenek vardır
-- İçerik Paketi: Rezervasyon satın alma tarihi ve kullanım verileri [Tüketim İçgörüleri Power BI içerik paketinde](/power-bi/desktop-connect-azure-cost-management) mevcuttur. İçerik paketini kullanarak istediğiniz raporları oluşturun. 
-- Maliyet yönetimi uygulaması: Daha fazla özelleştirebileceğiniz önceden oluşturulmuş raporlar için [Maliyet Yönetimi Uygulaması](https://appsource.microsoft.com/product/power-bi/costmanagement.azurecostmanagementapp)’nı kullanın.
+Rezervasyonlar ve faturalandırma yöneticileri üzerinde sahip erişimi olan kullanıcılar, ayrı bir rezervasyon siparişi için erişim yönetimini temsil edebilir.
 
-## <a name="need-help-contact-us"></a>Yardıma mı ihtiyacınız var? Bizimle iletişim kurun
-
-Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://go.microsoft.com/fwlink/?linkid=2083458).
+1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. **Tüm Hizmetler** > **Rezervasyon**'u seçerek erişim sahibi olduğunuz rezervasyonları listeleyin.
+1. Diğer kullanıcılara erişim vermek istediğiniz rezervasyonu seçin.
+1. Rezervasyon ayrıntılarından rezervasyon siparişini seçin.
+1. **Erişim denetimi (IAM)** öğesini seçin.
+1. **Rol ataması ekle** > **Rol** > **Sahip**'i seçin. Sınırlı erişim vermek istiyorsanız farklı bir rol seçin.
+1. Sahip olarak eklemek istediğiniz kullanıcının e-posta adresini yazın.
+1. Kullanıcıyı ve ardından **Kaydet**'i seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Azure Rezervasyonları’nı yönetin](manage-reserved-vm-instance.md).
-- [Kullandıkça Öde aboneliğiniz için rezervasyon kullanımını anlama](understand-reserved-instance-usage.md).
-- [Kurumsal kaydınız için rezervasyon kullanımını anlama](understand-reserved-instance-usage-ea.md).
-- [CSP abonelikleri için rezervasyon kullanımını anlama](/partner-center/azure-reservations).
-

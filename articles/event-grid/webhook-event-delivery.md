@@ -3,12 +3,12 @@ title: Web kancası olay teslimi
 description: Bu makalede Web kancaları kullanılırken Web kancası olay teslimi ve uç nokta doğrulaması açıklanmaktadır.
 ms.topic: conceptual
 ms.date: 07/07/2020
-ms.openlocfilehash: e9a52d0cb3e4e880d91e1b748d97ef3041298930
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 42ba36a21d307ca85d9cdae850c0c9a991e4f30e
+ms.sourcegitcommit: f5448fe5b24c67e24aea769e1ab438a465dfe037
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87461247"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105968008"
 ---
 # <a name="webhook-event-delivery"></a>Web kancası olay teslimi
 Web kancaları Azure Event Grid olayların alınacağı birçok yol vardır. Yeni bir etkinlik hazırsanız Event Grid hizmet, istek gövdesinde olay ile yapılandırılmış uç noktaya bir HTTP isteği gönderir.
@@ -74,7 +74,7 @@ Uç nokta sahipliğini kanıtlamak için, aşağıdaki örnekte gösterildiği g
 }
 ```
 
-Bir HTTP 200 Tamam yanıt durum kodu döndürmelidir. Kabul edilen HTTP 202, geçerli bir Event Grid Abonelik doğrulama yanıtı olarak tanınmıyor. Http isteğinin 30 saniye içinde tamamlaması gerekir. İşlem 30 saniye içinde sonlanmazsa, işlem iptal edilir ve 5 saniye sonra yeniden denenecek. Tüm denemeler başarısız olursa, doğrulama el sıkışma hatası olarak kabul edilir.
+Bir HTTP 200 Tamam yanıt durum kodu döndürmelidir. Kabul edilen HTTP 202, geçerli bir Event Grid Abonelik doğrulama yanıtı olarak tanınmıyor. HTTP isteğinin 30 saniye içinde tamamlaması gerekir. İşlem 30 saniye içinde sonlanmazsa, işlem iptal edilir ve 5 saniye sonra yeniden denenecek. Tüm denemeler başarısız olursa, doğrulama el sıkışma hatası olarak kabul edilir.
 
 Ya da, doğrulama URL 'sine bir GET isteği göndererek aboneliği el ile doğrulayabilirsiniz. Olay aboneliği, onaylanana kadar bekleyen bir durumda kalır. Doğrulama URL 'Si 553 numaralı bağlantı noktasını kullanır. Güvenlik Duvarı kurallarınız bağlantı noktası 553 ' i engellerseniz, başarılı el ile el sıkışma için kuralların güncellenmesi gerekebilir.
 

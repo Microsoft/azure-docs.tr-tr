@@ -2,20 +2,20 @@
 title: 'Hızlı başlangıç: bir kimlik sağlayıcısı olarak Azure Active Directory kullanan bir uygulamaya Kullanıcı atama'
 description: Bu hızlı başlangıçta, kullanıcıların Azure AD 'yi kimlik sağlayıcısı olarak kullanmak üzere ayarlamış olduğunuz bir uygulamayı kullanmasına izin verme işlemi gösterilmektedir.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: quickstart
 ms.workload: identity
 ms.date: 09/01/2020
-ms.author: kenwith
-ms.openlocfilehash: 53dd2d15565149c3a9888ba063a6194ae033d8e0
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.author: iangithinji
+ms.openlocfilehash: eb6797fdfb57a503b6dece9f2dfdc3cb0c67feef
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99258380"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107375347"
 ---
 # <a name="quickstart-assign-users-to-an-app-that-is-using-azure-ad-as-an-identity-provider"></a>Hızlı başlangıç: Azure AD 'yi kimlik sağlayıcısı olarak kullanan bir uygulamaya Kullanıcı atama
 

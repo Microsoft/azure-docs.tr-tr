@@ -8,17 +8,17 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: how-to
-ms.date: 03/16/2021
+ms.date: 04/19/2021
 ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: e694a5f6144cee65be074d05ce0015d31bfdf65e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8f9f6dc1abd08c5e53f3d44a8f6ec1b3e20786ed
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104675834"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107717450"
 ---
 # <a name="customize-the-user-interface-with-html-templates-in-azure-active-directory-b2c"></a>Kullanıcı arabirimini Azure Active Directory B2C HTML şablonlarıyla özelleştirme
 
@@ -261,7 +261,7 @@ Aşağıdaki örneğe benzer bir sayfa, oluşturduğunuz CSS dosyasına göre or
 
 UI özelleştirmesini yapılandırmak için, **Içerik tanımını** ve alt öğelerini temel dosyadan uzantılar dosyasına kopyalayın.
 
-1. İlkenizin temel dosyasını açın. Örneğin, <em>`SocialAndLocalAccounts/`**`TrustFrameworkBase.xml`**</em> . Bu temel dosya, önkoşul içinde elde etmeniz gereken özel ilke başlangıç paketine dahil olan ilke dosyalarından biridir, [özel ilkeleri](./custom-policy-get-started.md)kullanmaya başlayın.
+1. İlkenizin temel dosyasını açın. Örneğin, <em>`SocialAndLocalAccounts/`**`TrustFrameworkBase.xml`**</em> . Bu temel dosya, önkoşul içinde elde etmeniz gereken özel ilke başlangıç paketine dahil olan ilke dosyalarından biridir, [özel ilkeleri](./tutorial-create-user-flows.md?pivots=b2c-custom-policy)kullanmaya başlayın.
 1. **ContentDefinitions** öğesinin tüm içeriğini arayın ve kopyalayın.
 1. Uzantı dosyasını açın. Örneğin, *TrustFrameworkExtensions.xml*. **Buildingblocks** öğesi için arama yapın. Öğe yoksa, ekleyin.
 1. **Buildingblocks** öğesinin bir alt öğesi olarak kopyaladığınız **ContentDefinitions** öğesinin tüm içeriğini yapıştırın.
@@ -390,7 +390,7 @@ Bu proje aşağıdaki şablonları içerir:
     
 1. Dosyaları kaydedin `\*.html` ve BLOB depolamaya yükleyin.
 1. Şimdi, daha önce belirtildiği gibi, HTML dosyanıza işaret eden ilkeyi değiştirin.
-1. Eksik yazı tiplerini, görüntüleri veya CSS 'yi görürseniz, uzantılar ilkesinde ve. html dosyalarında başvurularınızı kontrol edin \* .
+1. Eksik yazı tiplerini, görüntüleri veya CSS 'yi görürseniz, uzantılar ilkesi ve dosyalar 'daki başvurularınızı kontrol edin `\*.html` .
 
 ## <a name="use-company-branding-assets-in-custom-html"></a>Özel HTML 'de Şirket marka varlıklarını kullanma
 

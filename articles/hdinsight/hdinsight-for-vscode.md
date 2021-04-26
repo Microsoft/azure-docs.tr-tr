@@ -5,12 +5,12 @@ ms.service: hdinsight
 ms.topic: how-to
 ms.date: 10/20/2020
 ms.custom: devx-track-python
-ms.openlocfilehash: d098af394906dc120a252bdcda65fb3af31e28c8
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: d7e2bd2987e7eaf7798093f3918f72b7e09a3cb0
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104865800"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313481"
 ---
 # <a name="use-spark--hive-tools-for-visual-studio-code"></a>Visual Studio Code için Spark & Hive araçlarını kullanma
 
@@ -265,7 +265,7 @@ Araç **Spark SQL** sorgusunu da destekler:
 
 > [!NOTE]
 >
-> ["MS-python >= 2020.5.78807 sürümü bu uzantı üzerinde desteklenmiyor"](#issues-changed) çözümlendi. Lütfen şu anda **MS-Python** **sürümünü en son sürüme** güncelleştirin.
+> [MS-toolsai. jupyıter >2021.3.684299474 sürümü, bu uzantıda](#known-issues) bilinen bir sorundur. Lütfen Microsoft Jupyıter 2021.3.684299474 'e tıklayarak SYNAPSE çekirdeğini kullanın.
 
 ## <a name="submit-pyspark-batch-job"></a>PySpark Batch işini gönder
 
@@ -485,9 +485,19 @@ Data Lake Storage 2. kullanarak bir HDInsight kümesine iş gönderme. Azure hes
 
 Menü çubuğundan **Görünüm**  >  **komut paleti**' ne gidin ve **Azure: oturumu Kapat**' ı girin.
 
-## <a name="issues-changed"></a>Değiştirilen sorunlar
+## <a name="known-issues"></a>Bilinen Sorunlar 
 
-Bu sorun için "MS-Python >= 2020.5.78807 sürümü bu uzantıda desteklenmiyor" çözümlendi, lütfen şu anda **MS-Python** 'u **en son sürüme** güncelleştirin.
+ MS-toolsai. jupyıter >2021.3.684299474 sürümü bu uzantıda desteklenmiyor, lütfen Microsoft jupi 2021.3.684299474 'ye tıklayarak SYNAPSE çekirdeğini kullanın.
+
+ 1. Otomatik güncelleştirme uzantısını devre dışı bırakın.
+
+      ![Otomatik güncelleştirme uzantısını devre dışı bırak](./media/hdinsight-for-vscode/disable-auto-updating-extension.png)
+
+2. Microsoft Jupyter 'ın seçili bir sürümünü yükler.
+
+      ![Microsoft Jupyter 'ın seçili sürümü](./media/hdinsight-for-vscode/selected-version-of-microsoft-jupyter.png)
+
+3. Microsoft Jupyıter sürüm 2021.3.684299474 'i yükler
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

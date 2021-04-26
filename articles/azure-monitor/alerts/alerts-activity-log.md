@@ -3,12 +3,12 @@ title: Azure Izleyici 'de etkinlik günlüğü uyarıları oluşturma, görünt�
 description: Azure portal, bir Azure Resource Manager şablonu ve Azure PowerShell kullanarak etkinlik günlüğü uyarıları oluşturun.
 ms.topic: conceptual
 ms.date: 06/25/2019
-ms.openlocfilehash: 26ca755f6675fa19c3b122c3528e05d1e8d76845
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 647378d7e93ab383441b363315a84cea8a5ab773
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102045539"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772550"
 ---
 # <a name="create-view-and-manage-activity-log-alerts-by-using-azure-monitor"></a>Azure Izleyici 'yi kullanarak etkinlik günlüğü uyarıları oluşturma, görüntüleme ve yönetme  
 
@@ -270,19 +270,19 @@ Etkinlik günlüğü uyarıları için kullanılabilir adanmış PowerShell cmdl
 - [Disable-AzActivityLogAlert](/powershell/module/az.monitor/disable-azactivitylogalert): var olan bir etkinlik günlüğü uyarısını devre dışı bırakır ve etiketlerini ayarlar.
 - [Remove-AzActivityLogAlert](/powershell/module/az.monitor/remove-azactivitylogalert): bir etkinlik günlüğü uyarısını kaldırır.
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 Ayarla [az Monitor Activity-Log Alert](/cli/azure/monitor/activity-log/alert) altında ADANMıŞ Azure CLI komutları, etkinlik günlüğü uyarı kurallarını yönetmek için kullanılabilir.
 
 Yeni bir etkinlik günlüğü uyarı kuralı oluşturmak için bu sırayla aşağıdaki komutları kullanın:
 
-1. [az Monitor etkinlik-günlük uyarısı oluştur](/cli/azure/monitor/activity-log/alert#az-monitor-activity-log-alert-create): yeni bir etkinlik günlüğü uyarı kuralı kaynağı oluşturun.
+1. [az Monitor etkinlik-günlük uyarısı oluştur](/cli/azure/monitor/activity-log/alert#az_monitor_activity_log_alert_create): yeni bir etkinlik günlüğü uyarı kuralı kaynağı oluşturun.
 1. [az Monitor Activity-Log uyarı Scope](/cli/azure/monitor/activity-log/alert/scope): oluşturulan etkinlik günlüğü uyarı kuralı için kapsam ekleyin.
 1. [az Monitor etkinlik-günlük Uyarı eylemi-grup](/cli/azure/monitor/activity-log/alert/action-group): etkinlik günlüğü uyarı kuralına bir eylem grubu ekleyin.
 
-Bir etkinlik günlüğü uyarı kuralı kaynağını almak için [az Monitor Activity-Log uyarı Show](/cli/azure/monitor/activity-log/alert#az-monitor-activity-log-alert-show
-)Azure CLI komutunu kullanın. Bir kaynak grubundaki tüm etkinlik günlüğü uyarı kuralı kaynaklarını görüntülemek için [az Monitor Activity-Log uyarı List](/cli/azure/monitor/activity-log/alert#az-monitor-activity-log-alert-list)' i kullanın.
-Etkinlik günlüğü uyarı kuralı kaynakları Azure CLı komutu kullanılarak kaldırılabilir, [az Monitor Activity-Log Alert Delete](/cli/azure/monitor/activity-log/alert#az-monitor-activity-log-alert-delete).
+Bir etkinlik günlüğü uyarı kuralı kaynağını almak için [az Monitor Activity-Log uyarı Show](/cli/azure/monitor/activity-log/alert#az_monitor_activity_log_alert_show
+)Azure CLI komutunu kullanın. Bir kaynak grubundaki tüm etkinlik günlüğü uyarı kuralı kaynaklarını görüntülemek için [az Monitor Activity-Log uyarı List](/cli/azure/monitor/activity-log/alert#az_monitor_activity_log_alert_list)' i kullanın.
+Etkinlik günlüğü uyarı kuralı kaynakları Azure CLı komutu kullanılarak kaldırılabilir, [az Monitor Activity-Log Alert Delete](/cli/azure/monitor/activity-log/alert#az_monitor_activity_log_alert_delete).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

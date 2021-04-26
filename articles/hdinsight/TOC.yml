@@ -246,6 +246,8 @@
               href: ./hadoop/apache-hadoop-visual-studio-tools-get-started.md
             - name: VSCode için Spark ve Hive Araçları
               href: ./hdinsight-for-vscode.md
+            - name: HDInsight yapılandırma ayarları başvurusu
+              href: ./hdinsight-config-for-vscode.md
         - name: İzleme
           items:
             - name: Azure İzleyici günlüklerini kullanma
@@ -258,6 +260,8 @@
               href: ./hdinsight-cluster-availability.md
             - name: Küme kullanılabilirliği - Azure İzleyici günlükleri
               href: ./cluster-availability-monitor-logs.md
+            - name: Azure Izleyici tablosu güncelleştirmeleri
+              href: ./log-analytics-migration.md
         - name: Sorun giderme
           items:
             - name: CPU çekirdeği kotası için artış isteme
@@ -268,10 +272,14 @@
               href: ./troubleshoot-resource-creation-fails.md
             - name: Apache Oozie sorunlarını giderme
               href: ./troubleshoot-oozie.md
+            - name: Apache Sqoop sorunlarını giderme
+              href: ./troubleshoot-sqoop.md
             - name: WebHCat hatalarını anlama ve çözme
               href: ./hdinsight-hadoop-templeton-webhcat-debug-errors.md
     - name: Başvuru
       items:
+        - name: Azure CLI
+          href: /cli/azure/hdinsight
         - name: Azure PowerShell
           href: /powershell/module/az.hdinsight
         - name: .NET için SDK

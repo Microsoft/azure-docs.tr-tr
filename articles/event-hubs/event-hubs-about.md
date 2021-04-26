@@ -3,12 +3,12 @@ title: Azure Event Hubs nedir? -Büyük veri alma hizmeti | Microsoft Docs
 description: Saniyede milyonlarca olayın eklenmesini sağlayan bir Büyük Veri akış hizmeti olan Azure Event Hubs hakkında daha fazla bilgi edinin.
 ms.topic: overview
 ms.date: 01/13/2021
-ms.openlocfilehash: 36eeb38d9ed1696c9524ae9b346065756ce49c46
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 35e89f60e93ec759d852641653ad138d7672cc37
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98195780"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107303058"
 ---
 # <a name="azure-event-hubs--a-big-data-streaming-platform-and-event-ingestion-service"></a>Azure Event Hubs — büyük bir veri akışı platformu ve olay alma hizmeti
 Azure Event Hubs, büyük bir veri akışı platformu ve olay alma hizmetidir. Saniyede milyonlarca olayı alabilir ve işleyebilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir.
@@ -92,4 +92,4 @@ Event Hubs kullanmaya başlamak için bkz. **olayları gönderme ve alma** öğr
 Event Hubs hakkında daha fazla bilgi edinmek için şu makalelere göz atın:
 
 - [Event Hubs özelliklerine genel bakış](event-hubs-features.md)
-- [Sık sorulan sorular](event-hubs-faq.md).
+- [Sık sorulan sorular](event-hubs-faq.yml).

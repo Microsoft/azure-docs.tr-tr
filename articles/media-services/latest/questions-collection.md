@@ -11,12 +11,12 @@ ms.workload: ''
 ms.topic: article
 ms.date: 03/25/2021
 ms.author: inhenkel
-ms.openlocfilehash: 9c4ffee437e3049f8e480375f0b1373fce09fe77
-ms.sourcegitcommit: c8b50a8aa8d9596ee3d4f3905bde94c984fc8aa2
+ms.openlocfilehash: dc8f8f7ced1c5915c2ea54390685806cfcdd257f
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/28/2021
-ms.locfileid: "105646205"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106280318"
 ---
 <!-- NOTE this file is temporary and a placeholder until the FAQ file update is completed. -->
 
@@ -34,7 +34,7 @@ Bu makalede, Azure Media Services v3 hakkında sık sorulan sorulara yanıtlar v
 - Media Services hesapla ilişkili ek veriler (Içerik şifreleme anahtarları, belirteç doğrulama anahtarları, Jobınputhttp URL 'leri ve diğer varlık meta verileri dahil), Media Services hesabı için seçilen bölge içinde Microsoft 'un sahip olduğu depolama alanında depolanır.
     - Brezilya Güney ve Güneydoğu Asya 'daki [veri fazlalığı](https://azure.microsoft.com/global-infrastructure/data-residency/#more-information) nedeniyle ek hesap verileri, bölgesel olarak yedekli bir biçimde depolanır ve tek bir bölgede yer alır. Güneydoğu Asya için, tüm ek hesap verileri Singapur 'da ve Brezilya Güney için veriler Brezilya 'da depolanır.
     - Brezilya Güney ve Güneydoğu Asya dışındaki bölgelerde ek hesap verileri de Microsoft 'un sahip olduğu depolamada [eşleştirilmiş bölgede](../../best-practices-availability-paired-regions.md)depolanabilir.
-- Azure Media Services bölgesel bir hizmettir ve [yüksek kullanılabilirlik](media-services-high-availability-encoding.md) veya veri çoğaltması sağlamaz. Bu özelliklere ihtiyaç duyan müşterilerin birden çok bölgede Media Services hesapları kullanarak bir çözüm oluşturması son derece önerilir.  Isteğe bağlı Media Services video ile bir kılavuz olarak kullanılabilir, yüksek kullanılabilirlik için nasıl çözüm oluşturulacağını gösteren bir örnek.
+- Azure Media Services bölgesel bir hizmettir ve [yüksek kullanılabilirlik](architecture-high-availability-encoding-concept.md) veya veri çoğaltması sağlamaz. Bu özelliklere ihtiyaç duyan müşterilerin birden çok bölgede Media Services hesapları kullanarak bir çözüm oluşturması son derece önerilir.  Isteğe bağlı Media Services video ile bir kılavuz olarak kullanılabilir, yüksek kullanılabilirlik için nasıl çözüm oluşturulacağını gösteren bir örnek.
 
 ### <a name="what-are-the-azure-portal-limitations-for-media-services-v3"></a>Media Services v3 için Azure portal sınırlamaları nelerdir?
 
@@ -44,15 +44,15 @@ Videonuz daha önce Media Services v3 API kullanılarak Media Services hesabına
 
 ### <a name="what-azure-roles-can-perform-actions-on-azure-media-services-resources"></a>Azure Media Services kaynaklarda hangi Azure rolleri eylemler gerçekleştirebilir? 
 
-[Media Services hesapları için bkz. Azure rol tabanlı erişim denetimi (Azure RBAC)](rbac-overview.md).
+[Media Services hesapları için bkz. Azure rol tabanlı erişim denetimi (Azure RBAC)](security-rbac-concept.md).
 
 ### <a name="how-do-i-stream-to-apple-ios-devices"></a>Apple iOS cihazlarına akış Nasıl yaparım? mı?
 
-Akış kaynak sunucusuna Apple iOS Native cihazlarda tüketim için HTTP Canlı Akışı (HLS) içeriği döndürmesini bildirmek üzere yolun sonunda (  **Biçim = M3U8-AAPL)** bulunduğundan emin olun. Ayrıntılar için bkz. [Içerik sunma](dynamic-packaging-overview.md).
+Akış kaynak sunucusuna Apple iOS Native cihazlarda tüketim için HTTP Canlı Akışı (HLS) içeriği döndürmesini bildirmek üzere yolun sonunda (  **Biçim = M3U8-AAPL)** bulunduğundan emin olun. Ayrıntılar için bkz. [Içerik sunma](encode-dynamic-packaging-concept.md).
 
 ### <a name="what-is-the-recommended-method-to-process-videos"></a>Videoları işlemek için önerilen yöntem nedir?
 
-Videoları kodlamaya veya çözümlemeye yönelik ortak görevleri yapılandırmak için [dönüşümler](/rest/api/media/transforms) kullanın. Her dönüşüm, video veya ses dosyalarınızı işlemeye yönelik bir tarif veya bir görev iş akışını açıklar. Bir [iş](/rest/api/media/jobs) , bir giriş video veya ses içeriğine dönüştürmeyi uygulamak için Media Services yapılan gerçek istedir. Dönüşüm oluşturulduktan sonra, Media Services API 'Lerini veya yayımlanmış SDK 'Ları kullanarak Işleri gönderebilirsiniz. Daha fazla bilgi için [Dönüşümler ve İşler](transforms-jobs-concept.md) konusuna bakın.
+Videoları kodlamaya veya çözümlemeye yönelik ortak görevleri yapılandırmak için [dönüşümler](/rest/api/media/transforms) kullanın. Her dönüşüm, video veya ses dosyalarınızı işlemeye yönelik bir tarif veya bir görev iş akışını açıklar. Bir [iş](/rest/api/media/jobs) , bir giriş video veya ses içeriğine dönüştürmeyi uygulamak için Media Services yapılan gerçek istedir. Dönüşüm oluşturulduktan sonra, Media Services API 'Lerini veya yayımlanmış SDK 'Ları kullanarak Işleri gönderebilirsiniz. Daha fazla bilgi için [Dönüşümler ve İşler](transform-jobs-concept.md) konusuna bakın.
 
 ### <a name="i-uploaded-encoded-and-published-a-video-why-wont-the-video-play-when-i-try-to-stream-it"></a>Karşıya yükleme, kodlama ve bir video yayımladım. Akışa neden olan video oynatılsın?
 
@@ -60,7 +60,7 @@ En yaygın nedenlerinden biri, çalışan durumunda kayıttan yürütmeye çalı
 
 ### <a name="how-does-pagination-work"></a>Sayfalandırma nasıl çalışır?
 
-Sayfalandırma kullanırken, belirli bir sayfa boyutuna bağlı olmaması için her zaman bir sonraki bağlantıyı kullanarak koleksiyonu numaralandırın. Ayrıntılar ve örnekler için bkz. [filtreleme, sıralama, sayfalama](entities-overview.md).
+Sayfalandırma kullanırken, belirli bir sayfa boyutuna bağlı olmaması için her zaman bir sonraki bağlantıyı kullanarak koleksiyonu numaralandırın. Ayrıntılar ve örnekler için bkz. [filtreleme, sıralama, sayfalama](filter-order-page-entitites-how-to.md).
 
 ### <a name="what-features-are-not-yet-available-in-azure-media-services-v3"></a>Azure Media Services v3 'de henüz kullanılamayan özellikler nelerdir?
 
@@ -68,7 +68,7 @@ Ayrıntılar için bkz. [Geçiş Kılavuzu](migrate-v-2-v-3-migration-introducti
 
 ### <a name="what-is-the-process-of-moving-a-media-services-account-between-subscriptions"></a>Media Services bir hesabı abonelikler arasında taşıma işlemi nedir?  
 
-Ayrıntılar için bkz. [abonelikler arasında Media Services hesabını taşıma](media-services-account-concept.md).
+Ayrıntılar için bkz. [abonelikler arasında Media Services hesabını taşıma](account-move-account-how-to.md).
 
 ## <a name="live-streaming"></a>Canlı akış 
 
@@ -93,7 +93,7 @@ Canlı olayları, Azure Event Grid olaylarına abone olarak izleyebilirsiniz. Da
 
 Media Services v3 Live Encoding, canlı akış sırasında video veya resim SLA 'larını henüz desteklemiyor. 
 
-Kaynak videoyu değiştirmek için [canlı bir şirket içi kodlayıcı](recommended-on-premises-live-encoders.md) kullanabilirsiniz. Birçok uygulama, Telestream kablolu dönüştürme, değiştirici Studio (iOS 'ta) ve OBS Studio (ücretsiz uygulama) dahil olmak üzere kaynakları değiştirme yeteneği sağlar.
+Kaynak videoyu değiştirmek için [canlı bir şirket içi kodlayıcı](encode-recommended-on-premises-live-encoders.md) kullanabilirsiniz. Birçok uygulama, Telestream kablolu dönüştürme, değiştirici Studio (iOS 'ta) ve OBS Studio (ücretsiz uygulama) dahil olmak üzere kaynakları değiştirme yeteneği sağlar.
 
 ## <a name="content-protection"></a>İçerik koruma
 
@@ -109,7 +109,7 @@ Azure Active Directory (Azure AD) gibi belirli bir belirteç sağlayıcısını 
 
 Verenin, hedef kitlesi ve taleplerin tümünün JWT içindeki ve `ContentKeyPolicyRestriction` ' de kullanılan değer arasında tam olarak eşleştiğinden emin olun `ContentKeyPolicy` .
 
-Daha fazla bilgi için bkz. [Media Services dinamik şifrelemeyi kullanarak Içeriğinizi koruma](content-protection-overview.md).
+Daha fazla bilgi için bkz. [Media Services dinamik şifrelemeyi kullanarak Içeriğinizi koruma](drm-content-protection-concept.md).
 
 ### <a name="how-and-where-did-i-get-a-jwt-token-before-using-it-to-request-a-license-or-key"></a>Bir lisans veya anahtar istemek için kullanmadan önce bir JWT belirteci aldım?
 
@@ -127,8 +127,8 @@ Lisans/anahtar teslimini yapılandırmak ve varlıklarınızı şifrelemek için
 
 Daha fazla bilgi için bkz.
 
-- [İçerik korumasına genel bakış](content-protection-overview.md)
-- [Erişim denetimi ile çoklu DRM'ye sahip içerik koruma sistemi tasarlama](design-multi-drm-system-with-access-control.md)
+- [İçerik korumasına genel bakış](drm-content-protection-concept.md)
+- [Erişim denetimi ile çoklu DRM'ye sahip içerik koruma sistemi tasarlama](architecture-design-multi-drm-system.md)
 
 ### <a name="should-i-use-http-or-https"></a>HTTP veya HTTPS kullanmalıdır mi?
 ASP.NET MVC oynatıcı uygulamasının şunları desteklemesi gerekir:
@@ -163,11 +163,11 @@ Genellikle, müşteriler bir lisans sunucu grubuna kendi veri merkezinde veya DR
 
 Şu anda [Azure Portal](https://portal.azure.com/) şunları yapmak için kullanabilirsiniz:
 
-* Media Services v3 içindeki [canlı olayları](live-events-outputs-concept.md) yönetin. 
+* Media Services v3 içindeki [canlı olayları](live-event-outputs-concept.md) yönetin. 
 * V3 [varlıklarını](assets-concept.md)görüntüleyin (yönetmez). 
 * [API 'lere erişme hakkında bilgi alın](./access-api-howto.md). 
 
-Diğer tüm yönetim görevleri (örneğin, [dönüşümler ve işler](transforms-jobs-concept.md) ve [içerik koruması](content-protection-overview.md)) IÇIN [REST API](/rest/api/media/), [Azure CLI](/cli/azure/ams)veya desteklenen [SDK 'lardan](media-services-apis-overview.md#sdks)birini kullanın.
+Diğer tüm yönetim görevleri (örneğin, [dönüşümler ve işler](transform-jobs-concept.md) ve [içerik koruması](drm-content-protection-concept.md)) IÇIN [REST API](/rest/api/media/), [Azure CLI](/cli/azure/ams)veya desteklenen [SDK 'lardan](media-services-apis-overview.md#sdks)birini kullanın.
 
 ### <a name="is-there-an-assetfile-concept-in-v3"></a>V3 'de bir AssetFile kavramı var mı?
 
@@ -207,7 +207,7 @@ Bir iOS cihazında indirilen dosya yapısı aşağıdaki ekran görüntüsüne b
 
 Bir kısa çizgi ile biten bir ada sahip ilk klasörün ardından bir sayı, video içeriği içerir. Sayısal değer, video yorumlamaları için en yoğun bant genişliğidir. Bir kısa çizgi ile biten bir ada sahip ikinci klasör, izleyen 0 ile ses içeriği içerir. Adlı üçüncü klasör, `Data` fps içeriğinin ana çalma listesini içerir. Son olarak, boot.xml klasör içeriğinin tamamını açıklama sağlar `.movpkg` . 
 
-![FairPlay iOS örnek uygulaması için çevrimdışı dosya yapısı](media/offline-fairplay-for-ios/offline-fairplay-file-structure.png)
+![FairPlay iOS örnek uygulaması için çevrimdışı dosya yapısı](media/drm-offline-fairplay-for-ios-concept/offline-fairplay-file-structure.png)
 
 Örnek bir boot.xml dosyası aşağıda verilmiştir:
 
@@ -253,7 +253,7 @@ Media Services v3 bir varlığın birden çok örneğe sahip olmasına izin verd
 
 #### <a name="what-is-the-mapping-between-the-widevine-and-media-services-drm-security-levels"></a>Wdevine ve Media Services DRM güvenlik düzeyleri arasındaki eşleme nedir?
 
-Google 'ın "Widevine DRM mimarisine genel bakış" üç güvenlik düzeyi tanımlar. Ancak, [Widevine lisans şablonunda Azure Media Services belge](widevine-license-template-overview.md) , beş güvenlik düzeyi (kayıttan yürütme için istemci sağlamlık gereksinimleri) özetlenmektedir. Bu bölümde güvenlik düzeylerinin nasıl eşlendiği açıklanmaktadır.
+Google 'ın "Widevine DRM mimarisine genel bakış" üç güvenlik düzeyi tanımlar. Ancak, [Widevine lisans şablonunda Azure Media Services belge](drm-widevine-license-template-concept.md) , beş güvenlik düzeyi (kayıttan yürütme için istemci sağlamlık gereksinimleri) özetlenmektedir. Bu bölümde güvenlik düzeylerinin nasıl eşlendiği açıklanmaktadır.
 
 Her iki güvenlik düzeyi kümesi de Google Widevine tarafından tanımlanır. Fark kullanım düzeyidir: mimari veya API. Wdevine API 'sinde beş güvenlik düzeyi kullanılır. `content_key_specs`Öğesini içeren nesne, `security_level` serisi kaldırıldı ve Azure Media Services Widevine lisans hizmeti tarafından Widevine küresel teslim hizmetine geçirilir. Aşağıdaki tabloda, iki güvenlik düzeyi kümesi arasındaki eşleme gösterilmektedir.
 

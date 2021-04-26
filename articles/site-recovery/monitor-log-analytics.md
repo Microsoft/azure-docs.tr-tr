@@ -1,18 +1,15 @@
 ---
 title: Azure Izleyici günlükleriyle Azure Site Recovery izleme
 description: Azure Izleyici günlükleriyle Azure Site Recovery izlemeyi öğrenin (Log Analytics)
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/15/2019
-ms.author: raynew
-ms.openlocfilehash: 308e1bcf042feb15179d32844d8c569af6166619
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: eb38f7c2df6a8ad00009a0b7fc9c03638c33034c
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100571675"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106581758"
 ---
 # <a name="monitor-site-recovery-with-azure-monitor-logs"></a>Azure İzleyici Günlükleriyle Site Recovery’yi izleme
 

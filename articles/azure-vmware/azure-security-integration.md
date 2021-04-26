@@ -3,12 +3,12 @@ title: Azure Güvenlik Merkezi tümleştirmesiyle Azure VMware Çözüm sanal ma
 description: Azure VMware Çözüm VM 'lerinizi Azure Güvenlik Merkezi panosundan Azure 'un yerel güvenlik araçlarıyla koruyun.
 ms.topic: how-to
 ms.date: 02/12/2021
-ms.openlocfilehash: 7292ea4486a61f5b0cfd8f656d2763a3ce655e79
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d04f0ac3e3934442ce5b6d5fbf4b53e18b3dff18
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100578254"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877525"
 ---
 # <a name="protect-your-azure-vmware-solution-vms-with-azure-security-center-integration"></a>Azure Güvenlik Merkezi tümleştirmesiyle Azure VMware Çözüm sanal makinelerinizi koruyun
 
@@ -242,6 +242,6 @@ Ortamınızdaki tehditleri belirlemek için sorgular oluşturabilir veya Azure S
 
 Azure VMware Çözüm sanal makinelerinizi nasıl koruyabileceğinizi artık kapsadığınıza göre şunları öğrenmek isteyebilirsiniz:
 
-- [Azure Defender panosunu](../security-center/azure-defender-dashboard.md)kullanma.
-- [Azure Sentinel 'de gelişmiş çok aşamalı saldırı algılama](../azure-monitor/logs/quick-create-workspace.md).
-- [Azure VMware Çözüm VM 'Lerinin yaşam döngüsü yönetimi](lifecycle-management-of-azure-vmware-solution-vms.md).
+- [Azure Defender panosunu](../security-center/azure-defender-dashboard.md) kullanma
+- [Azure Sentinel 'de gelişmiş çok aşamalı saldırı algılama](../azure-monitor/logs/quick-create-workspace.md)
+- [Azure VMware Çözüm VM 'lerinin yaşam döngüsü yönetimi](lifecycle-management-of-azure-vmware-solution-vms.md)

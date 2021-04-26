@@ -5,19 +5,19 @@ services: multi-factor-authentication
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
-ms.date: 03/15/2021
+ms.date: 04/13/2021
 ms.author: justinha
 author: justinha
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
 ms.custom: contperf-fy20q4
-ms.openlocfilehash: 4625b0a750c2b3ff63879bb9ea306bc69b1bb64e
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c067dba3a8af87e354019154fad8304fe9edfbbc
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103471650"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107829665"
 ---
 # <a name="configure-azure-ad-multi-factor-authentication-settings"></a>Azure AD Multi-Factor Authentication ayarlarını yapılandırma
 
@@ -231,12 +231,12 @@ Hizmet ayarlarına **Azure Active Directory** güvenlik MFA 'ya giderek Azure Po
 
 ## <a name="trusted-ips"></a>Güvenilen IP'ler
 
-Azure AD Multi-Factor Authentication 'nin _güvenilir IP 'leri_ özelliği, TANıMLı bir IP adresi aralığından oturum açan kullanıcılar için Multi-Factor Authentication istemlerini atlar. Şirket içi ortamlarınız için güvenilen IP aralıklarını, kullanıcılar bu konumlardan birinde olduğunda, Azure AD Multi-Factor Authentication istemi yok olarak ayarlayabilirsiniz.
+Azure AD Multi-Factor Authentication 'nin _güvenilir IP 'leri_ özelliği, TANıMLı bir IP adresi aralığından oturum açan kullanıcılar için Multi-Factor Authentication istemlerini atlar. Şirket içi ortamlarınız için güvenilen IP aralıklarını ayarlayabilirsiniz, böylece kullanıcılar bu konumlardan birinde olduğunda Azure AD Multi-Factor Authentication istemi yoktur. Azure AD Multi-Factor Authentication 'nin _güvenilir IP 'leri_ özelliği Azure AD Premium P1 sürümü gerektirir. 
 
 > [!NOTE]
 > Güvenilen IP 'Ler yalnızca MFA sunucusu kullandığınızda özel IP aralıkları içerebilir. Bulut tabanlı Azure AD Multi-Factor Authentication için yalnızca genel IP adresi aralıklarını kullanabilirsiniz.
 >
-> IPv6 aralıkları yalnızca [adlandırılmış konum (Önizleme)](../conditional-access/location-condition.md#preview-features) arabiriminde desteklenir.
+> IPv6 aralıkları yalnızca [adlandırılmış konum (Önizleme)](../conditional-access/location-condition.md) arabiriminde desteklenir.
 
 Kuruluşunuz, şirket içi uygulamalara MFA sağlamak üzere NPS uzantısını dağıttığında, kaynak IP adresi her zaman kimlik doğrulama girişiminin akışa aldığı NPS sunucusu olacak şekilde görünür.
 
@@ -347,7 +347,7 @@ Multi-Factor Authentication hatırlayın özelliği, Kullanıcı oturum açma s�
 
 Uygulamanın modern kimlik doğrulamasını destekleyip desteklemediğini fark etmeksizin, **X gün boyunca yeniden sorma** seçeneği, tarayıcı olmayan uygulamalarda gösterilmez. Bu uygulamalar, her saat yeni erişim belirteçleri sağlayan _yenileme belirteçlerini_ kullanır. Yenileme belirteci doğrulandıktan sonra Azure AD, son Multi-Factor Authentication 'ın belirtilen gün sayısı içinde gerçekleştiğini denetler.
 
-Özelliği, Web Apps 'teki kimlik doğrulama sayısını azaltır ve bu, normalde her seferinde uyarır. Bu özellik, daha düşük bir süre yapılandırılırsa, normalde her 90 günde bir istemde bulunan modern kimlik doğrulama istemcilerinin kimlik doğrulama sayısını artırabilir. , Koşullu erişim ilkeleriyle birleştirildiğinde kimlik doğrulama sayısını da artırabilir.
+Özelliği, Web Apps 'teki kimlik doğrulama sayısını azaltır ve bu, normalde her seferinde uyarır. Bu özellik, daha düşük bir süre yapılandırılırsa, normalde her 180 günde bir istemde bulunan modern kimlik doğrulama istemcilerinin kimlik doğrulama sayısını artırabilir. , Koşullu erişim ilkeleriyle birleştirildiğinde kimlik doğrulama sayısını da artırabilir.
 
 > [!IMPORTANT]
 > **Multi-Factor Authentication anımsa** özelliği, kullanıcılar Azure Multi-Factor Authentication sunucusu veya üçüncü taraf bir multi-factor authentication çözümü AD FS için multi-factor authentication gerçekleştirirken AD FS Oturumumu **açık tut** özelliği ile uyumlu değildir.

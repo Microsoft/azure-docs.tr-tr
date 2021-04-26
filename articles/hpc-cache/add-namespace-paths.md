@@ -6,12 +6,12 @@ ms.service: hpc-cache
 ms.topic: how-to
 ms.date: 03/11/2021
 ms.author: v-erkel
-ms.openlocfilehash: 5427389f007b7598274d35425a9b3e8e10a63e49
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 2cb8db4e73a8f4fa299031070bffc15a2b754d7e
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104798536"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107870382"
 ---
 # <a name="set-up-the-aggregated-namespace"></a>Toplanan ad alanını ayarlama
 
@@ -65,7 +65,7 @@ Azure portal, **ad alanı** ayarları sayfasını yükleyin. Bu sayfadan ad alan
 
 Azure CLı kullanırken, depolama hedefini oluştururken bir ad alanı yolu eklemeniz gerekir. Ayrıntılar için [Yeni bir Azure Blob depolama hedefi ekleyin](hpc-cache-add-storage.md?tabs=azure-cli#add-a-new-azure-blob-storage-target) makalesini okuyun.
 
-Hedefin ad alanı yolunu güncelleştirmek için [az HPC-Cache blob-Storage-Target Update](/cli/azure/ext/hpc-cache/hpc-cache/blob-storage-target#ext-hpc-cache-az-hpc-cache-blob-storage-target-update) komutunu kullanın. Update komutu için bağımsız değişkenler, kapsayıcı adını veya depolama hesabını geçirmezseniz, Create komutunda bağımsız değişkenlere benzerdir.
+Hedefin ad alanı yolunu güncelleştirmek için [az HPC-Cache blob-Storage-Target Update](/cli/azure/hpc-cache/blob-storage-target#az_hpc_cache_blob_storage_target_update) komutunu kullanın. Update komutu için bağımsız değişkenler, kapsayıcı adını veya depolama hesabını geçirmezseniz, Create komutunda bağımsız değişkenlere benzerdir.
 
 Azure CLı ile bir BLOB depolama hedefinden bir ad alanı yolunu silemezsiniz, ancak yolun üzerine farklı bir değer yazabilirsiniz.
 
@@ -129,7 +129,7 @@ Her ad alanı yolu için bu değerleri girin:
 
 Azure CLı kullanırken, depolama hedefini oluştururken en az bir ad alanı yolu eklemeniz gerekir. Ayrıntılar için [yenı NFS depolama hedefi ekleme](hpc-cache-add-storage.md?tabs=azure-cli#add-a-new-nfs-storage-target) bölümünü okuyun.
 
-Hedefin ad alanı yolunu güncelleştirmek veya ek yollar eklemek için [az HPC-Cache NFS-Storage-Target Update](/cli/azure/ext/hpc-cache/hpc-cache/nfs-storage-target#ext-hpc-cache-az-hpc-cache-nfs-storage-target-update) komutunu kullanın. İstediğiniz ``--junction`` ad alanı yollarını belirtmek için seçeneğini kullanın.
+Hedefin ad alanı yolunu güncelleştirmek veya ek yollar eklemek için [az HPC-Cache NFS-Storage-Target Update](/cli/azure/hpc-cache/nfs-storage-target#az_hpc_cache_nfs_storage_target_update) komutunu kullanın. İstediğiniz ``--junction`` ad alanı yollarını belirtmek için seçeneğini kullanın.
 
 Güncelleştirme komutu için kullanılan seçenekler, depolama sistemi bilgilerini (IP adresi veya ana bilgisayar adı) geçirmezseniz ve kullanım modelinin isteğe bağlı olması dışında "Oluştur" komutuna benzer. Seçeneğin sözdizimi hakkında daha fazla bilgi için [yenı NFS depolama hedefi ekleme](hpc-cache-add-storage.md?tabs=azure-cli#add-a-new-nfs-storage-target) makalesini okuyun ``--junction`` .
 

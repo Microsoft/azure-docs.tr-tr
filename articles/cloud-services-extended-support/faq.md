@@ -8,12 +8,12 @@ ms.author: gachandw
 ms.reviewer: mimckitt
 ms.date: 10/13/2020
 ms.custom: ''
-ms.openlocfilehash: 9cac6cdd8e68af77b611c89e8b62e6f8d8845fd0
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 33bafac9247f007978fef568469d643f1a1098df
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105107525"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106383595"
 ---
 # <a name="frequently-asked-questions-for-azure-cloud-services-extended-support"></a>Azure Cloud Services (genişletilmiş destek) hakkında sık sorulan sorular
 Bu makalede, Azure Cloud Services ile ilgili sık sorulan sorular (genişletilmiş destek) yer almaktadır.
@@ -57,6 +57,9 @@ Cloud Services (genişletilmiş destek) dağıtımı yalnızca Azure portal "dur
 
 ### <a name="do-cloud-services-extended-support-deployments-support-scaling-across-clusters-availability-zones-and-regions"></a>Do Cloud Services (genişletilmiş destek) dağıtımları kümeler, kullanılabilirlik alanları ve bölgeler genelinde ölçeklendirmeyi destekler mi?
 Cloud Services (genişletilmiş destek) dağıtımları birden çok kümede, kullanılabilirlik alanında ve bölgede ölçeklendiremez. 
+
+### <a name="how-can-i-get-the-deployment-id-for-my-cloud-service-extended-support"></a>Bulut hizmetimin dağıtım KIMLIĞINI nasıl alabilirim (genişletilmiş destek)
+Dağıtım KIMLIĞI asıka özel KIMLIĞINE [Cloudserviceınstanceview](https://docs.microsoft.com/rest/api/compute/cloudservices/getinstanceview#cloudserviceinstanceview) API kullanılarak erişilebilir. Bulut hizmetinin rol ve örnekler dikey penceresindeki Azure portal de mevcuttur (genişletilmiş destek)
 
 ### <a name="are-there-any-pricing-differences-between-cloud-services-classic-and-cloud-services-extended-support"></a>Cloud Services (klasik) ve Cloud Services (genişletilmiş destek) arasında herhangi bir fiyatlandırma farkı var mı?
 Cloud Services (genişletilmiş destek) Azure Key Vault ve temel (ARM) genel IP adreslerini kullanır.Sertifikaların sertifika yönetimi için Azure Key Vault kullanmasına ihtiyaç duyan müşterilerin Azure Key Vault fiyatlandırması hakkında[daha fazla bilgi edinin](https://azure.microsoft.com/pricing/details/key-vault/) .   Cloud Services (genişletilmiş destek) için genel IP adresleri ayrı olarak ücretlendirilir (genel IP adresi fiyatlandırması hakkında[daha fazla bilgi edinin](https://azure.microsoft.com/pricing/details/ip-addresses/) .) 

@@ -8,10 +8,10 @@ ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 03/17/2021
 ms.openlocfilehash: f0864eb65fb1f7dcf803ea48f762ab41b8468aac
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104588775"
 ---
 # <a name="copy-data-from-and-to-microsoft-access-using-azure-data-factory"></a>Azure Data Factory kullanarak ve Microsoft Access 'ten veri kopyalama
@@ -38,7 +38,7 @@ Bu Microsoft Access bağlayıcısını kullanmak için şunları yapmanız gerek
 >[!NOTE]
 >ODBC sürücüsünün Microsoft Access 2016 sürümü bu bağlayıcı ile çalışmıyor. Bunun yerine sürücü sürüm 2013 veya 2010 kullanın.
 
-## <a name="getting-started"></a>Başlarken
+## <a name="getting-started"></a>Kullanmaya başlama
 
 [!INCLUDE [data-factory-v2-connector-get-started](../../includes/data-factory-v2-connector-get-started.md)]
 

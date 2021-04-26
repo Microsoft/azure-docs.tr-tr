@@ -6,12 +6,12 @@ ms.service: virtual-machines
 ms.topic: how-to
 ms.date: 03/04/2020
 ms.author: shants
-ms.openlocfilehash: 88082c441dafdc7571f2b9775bfc07ebe3ca5aa4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4427071edf237d82e8a99d44678d77d23e180fff
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98730515"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865252"
 ---
 # <a name="move-resources-in-a-maintenance-control-configuration-to-another-region"></a>Bakım denetim yapılandırmasındaki kaynakları başka bir bölgeye taşıma
 
@@ -61,7 +61,7 @@ Bir bakım denetimi yapılandırmasıyla ilişkili kaynakları taşımaya başla
         ```
         Get-AzConfigurationAssignment -ResourceGroupName $rgName -ResourceName $vmName -ProviderName Microsoft.Compute -ResourceType virtualMachines | Format-Table Name
         ```
-3. CLı [az Maintenance atama](/cli/azure/ext/maintenance/maintenance/assignment) komutunu kullanarak bakım yapılandırmasını almak için:
+3. CLı [az Maintenance atama](/cli/azure/maintenance/assignment) komutunu kullanarak bakım yapılandırmasını almak için:
 
     - Azure adanmış konaklar için:
 

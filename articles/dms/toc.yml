@@ -37,7 +37,7 @@
   items:
     - name: SQL Server’ı geçirme
       items:
-        - name: Azure SQL veritabanı 'na
+        - name: Azure SQL Veritabanı’na
           href: tutorial-sql-server-to-azure-sql.md
         - name: Azure SQL Yönetilen Örnek’e (çevrimdışı)
           href: tutorial-sql-server-to-managed-instance.md
@@ -45,7 +45,9 @@
           href: tutorial-sql-server-managed-instance-online.md
     - name: MySQL’i geçirme
       items:
-        - name: MySQL için Azure Veritabanı’na
+        - name: MySQL için Azure veritabanı 'na (çevrimdışı)
+          href: tutorial-mysql-azure-mysql-offline-portal.md
+        - name: MySQL için Azure veritabanı 'na (çevrimiçi)
           href: tutorial-mysql-azure-mysql-online.md
     - name: RDS MySQL’i geçirme
       items:
@@ -87,12 +89,18 @@
           href: howto-sql-server-to-azure-sql-managed-instance-powershell-online.md
         - name: SQL MI SQL Server (çevrimdışı)
           href: howto-sql-server-to-azure-sql-managed-instance-powershell-offline.md
+        - name: MySQL için MySQL için Azure veritabanı (çevrimdışı)
+          href: migrate-mysql-to-azure-mysql-powershell.md
     - name: SSIS paketini yeniden dağıtma
       items:
         - name: Azure SQL Veritabanı
           href: how-to-migrate-ssis-packages.md
         - name: Azure SQL Yönetilen Örnek
           href: how-to-migrate-ssis-packages-managed-instance.md
+- name: Başvuru
+  items:
+    - name: Azure CLI
+      href: /cli/azure/dms
 - name: Kaynaklar
   items:
     - name: Sık sorulan sorular

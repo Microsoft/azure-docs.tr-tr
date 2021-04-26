@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.workload: identity
 ms.topic: reference
-ms.date: 2/22/2021
+ms.date: 3/30/2021
 ms.author: ryanwi
 ms.reviewer: hirsin
 ms.custom: aaddev
-ms.openlocfilehash: c5e7f556f37a1d6d53e0a938490f1099a7be776a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: eb75450527fc31d6ea4a9f9d60d676718ad79bda
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101647430"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106167592"
 ---
 # <a name="whats-new-for-authentication"></a>Kimlik doğrulaması yenilikleri nelerdir?
 
@@ -35,9 +35,21 @@ Kimlik doğrulama sistemi değiştirir ve güvenlik ve standartlar uyumluluğunu
 
 ## <a name="upcoming-changes"></a>Yaklaşan değişiklikler
 
+### <a name="bug-fix-azure-ad-will-no-longer-url-encode-the-state-parameter-twice"></a>Hata onarımı: Azure AD artık durum parametresini iki kez kodlayamayacak.
+
+**Geçerlilik tarihi**: Mayıs 2021
+
+**Etkilenen uç noktalar**: v 1.0 ve v 2.0 
+
+**Etkilenen protokol**: uç noktayı ziyaret eden tüm akışlar `/authorize` (örtük akış ve yetkilendirme kodu akışı)
+
+Azure AD yetkilendirme yanıtında bir hata bulundu ve düzeltildi. `/authorize`Kimlik doğrulamanın BAI sırasında, `state` uygulama durumunu korumak ve CSRF saldırılarını önlemeye yardımcı olmak için istekten alınan parametre yanıta dahil edilir. Azure AD yanlış URL, `state` bir kez daha sonra kodlandığından yanıta eklemeden önce parametreyi kodladı.  Bu, uygulamaların Azure AD 'den yanlışlıkla yanıt reddetmesine neden olur. 
+
+Azure AD bu parametreyi artık çift kodlamaz ve uygulamaların sonucu doğru bir şekilde ayrıştırmasına izin verir. Bu değişiklik tüm uygulamalar için yapılır. 
+
 ### <a name="conditional-access-will-only-trigger-for-explicitly-requested-scopes"></a>Koşullu erişim yalnızca açıkça istenen kapsamlar için tetiklenecek
 
-**Geçerlilik tarihi**: Mart 2021
+**Geçerlilik tarihi**: Mayıs 2021, Nisan 'dan itibaren aşamalı dağıtım ile. 
 
 **Etkilenen uç noktalar**: v 2.0
 
@@ -48,6 +60,8 @@ Bugün dinamik izin kullanan uygulamalara,, parametre adına göre istenmese de,
 Gereksiz koşullu erişim istemlerinin sayısını azaltmak için, Azure AD, istenmeyen kapsamların uygulamalara nasıl sağlandığını, böylece yalnızca açıkça istenen kapsamların koşullu erişimi tetiklemesine olanak sağlar. Bu değişiklik, talep ettikleri belirteçlerin eksik olması nedeniyle, Azure AD 'nin önceki davranışına bağlı olan uygulamaların (istenmeseler bile, tüm izinlerin kesilmesine izin veriyor) kesintiye neden olabilir.
 
 Uygulamalar artık bu istek içinde bir izin karışımına sahip olan erişim belirteçlerini ve bu istekler için koşullu erişim istemleri gerektirmeyen onay sahibi olduklarını alacak.  Erişim belirtecinin kapsamları belirteç yanıtının `scope` parametresine yansıtılır. 
+
+Bu değişiklik, bu davranış üzerinde gözlemlenmeyen bir bağımlılığı hariç tüm uygulamalar için yapılır.  Geliştiriciler, ek koşullu erişim istemlerine bir bağımlılığı olabileceği için, bu değişiklikten muaf tutulduklarında, erişim elde edilir. 
 
 **Örnekler**
 

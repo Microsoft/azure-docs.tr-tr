@@ -3,12 +3,12 @@ title: Azure Service Bus için sorun giderme kılavuzu | Microsoft Docs
 description: Azure Service Bus kullanırken görebileceğiniz birkaç sorun için sorun giderme ipuçları ve öneriler hakkında bilgi edinin.
 ms.topic: article
 ms.date: 03/03/2021
-ms.openlocfilehash: b44587747a59acb3c0124c0a76b63de68d6d8ae7
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 27249d7e016ea8aee0552bbbf1687647760d4b6f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105031299"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786576"
 ---
 # <a name="troubleshooting-guide-for-azure-service-bus"></a>Azure Service Bus için sorun giderme kılavuzu
 Bu makale, Azure Service Bus kullanırken görebileceğiniz birkaç sorun için sorun giderme ipuçları ve öneriler sağlar. 
@@ -52,7 +52,7 @@ Aşağıdaki adımlar *. servicebus.windows.net altındaki tüm hizmetlerde bağ
     ```
     , Vb. gibi diğer araçları kullanıyorsanız eşdeğer komutları kullanabilirsiniz `tnc` `ping` . 
 - Önceki adımlar [Wireshark](https://www.wireshark.org/)gibi araçları kullanarak yardımcı değilse ve analiz yoksa bir ağ izlemesi elde edin. Gerekirse [Microsoft desteği](https://support.microsoft.com/) başvurun. 
-- Bağlantılarınız için izin 'e eklenecek doğru IP adreslerini bulmak için, bkz. [izin 'e ne tür IP adreslerini eklemem gerekir?](service-bus-faq.md#what-ip-addresses-do-i-need-to-add-to-allow-list) 
+- Bağlantılarınız için izin 'e eklenecek doğru IP adreslerini bulmak için, bkz. [izin 'e ne tür IP adreslerini eklemem gerekir?](service-bus-faq.yml#what-ip-addresses-do-i-need-to-add-to-allow-list-) 
 
 
 ## <a name="issues-that-may-occur-with-service-upgradesrestarts"></a>Hizmet yükseltmeleri/yeniden başlatmalar ile ortaya çıkabilecek sorunlar

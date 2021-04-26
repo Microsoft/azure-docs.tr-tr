@@ -9,12 +9,12 @@ ms.author: vinsonyu
 ms.reviewer: mikeray
 ms.date: 09/22/2020
 ms.topic: how-to
-ms.openlocfilehash: 9c42acb69e13cc1eb0fbba3fcafaec1451bc4d77
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 9c3f973da688a20fa60f2fb649b2c8d689bc2a98
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97589228"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106076658"
 ---
 # <a name="features-and-capabilities-of-azure-arc-enabled-sql-managed-instance"></a>Azure Arc etkin SQL yönetilen örneğinin özellikleri ve özellikleri
 
@@ -117,19 +117,19 @@ Azure Arc etkin SQL yönetilen örneği, SQL Server en son kararlı sürümüyle
 | Özellik | Azure Arc özellikli SQL Yönetilen Örneği |
 |--|--|
 | JSON | Evet |
-| Sorgu Deposu | Yes |  |
-| Zamana bağlı | Yes |  |
-| Yerel XML desteği | Yes |  |
-| XML dizini oluşturma | Yes |  |
-| & UPSERT özellikleri BIRLEŞTIRME | Yes |  |
-| Tarih ve saat veri türleri | Yes |  |
-| Uluslararası duruma getirme desteği | Yes |  |
+| Sorgu Deposu | Yes | 
+| Zamana bağlı | Yes | 
+| Yerel XML desteği | Yes | 
+| XML dizini oluşturma | Yes | 
+| & UPSERT özellikleri BIRLEŞTIRME | Yes | 
+| Tarih ve saat veri türleri | Yes | 
+| Uluslararası duruma getirme desteği | Yes | 
 | Tam metin ve anlamsal arama | No |
-| Sorgudaki dilin belirtimi | Yes |  |
-| Hizmet Aracısı (mesajlaşma) | Yes |  |
-| Transact-SQL uç noktaları | Yes |  |
-| Graf | Yes |  |
-| Machine Learning Services | No |  |
+| Sorgudaki dilin belirtimi | Yes | 
+| Hizmet Aracısı (mesajlaşma) | Yes | 
+| Transact-SQL uç noktaları | Yes | 
+| Graf | Yes | 
+| Machine Learning Services | No |
 | PolyBase | No |
 
 

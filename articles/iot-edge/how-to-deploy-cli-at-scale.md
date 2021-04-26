@@ -10,12 +10,12 @@ ms.topic: conceptual
 ms.service: iot-edge
 ms.custom: devx-track-azurecli
 services: iot-edge
-ms.openlocfilehash: 7b12b6c1cdc85eaba531f34b23aa74bee6b38f7b
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: c502a9c02160c5a92d78ccdbb0532e6f173122da
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103201118"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107479517"
 ---
 # <a name="deploy-and-monitor-iot-edge-modules-at-scale-using-the-azure-cli"></a>Azure CLı kullanarak IoT Edge modüllerini ölçeklendirerek dağıtma ve izleme
 
@@ -191,7 +191,7 @@ Cihaz ikgörüti ve etiketleri hakkında daha fazla bilgi için bkz. [IoT Hub 'd
 
 Dağıtım bildiriminin yanı sıra diğer parametrelerden oluşan bir dağıtım oluşturarak modülleri hedef cihazlarınıza dağıtırsınız.
 
-Dağıtım oluşturmak için [az IoT Edge Deployment Create](/cli/azure/ext/azure-iot/iot/edge/deployment#ext-azure-iot-az-iot-edge-deployment-create) komutunu kullanın:
+Dağıtım oluşturmak için [az IoT Edge Deployment Create](/cli/azure/iot/edge/deployment) komutunu kullanın:
 
 ```azurecli
 az iot edge deployment create --deployment-id [deployment id] --hub-name [hub name] --content [file path] --labels "[labels]" --target-condition "[target query]" --priority [int]
@@ -224,7 +224,7 @@ Hedef koşulu güncelleştirirseniz, aşağıdaki güncelleştirmeler gerçekle�
 
 Dağıtım bildiriminde tanımlanan modülleri ve yolları içeren bir dağıtımın içeriğini güncelleştiremezsiniz. Bir dağıtımın içeriğini güncelleştirmek istiyorsanız, daha yüksek bir önceliğe sahip aynı cihazları hedefleyen yeni bir dağıtım oluşturarak bunu yapabilirsiniz. Hedef koşul, Etiketler, ölçümler ve öncelik dahil olmak üzere var olan bir modülün belirli özelliklerini değiştirebilirsiniz.
 
-Bir dağıtımı güncelleştirmek için [az IoT Edge Deployment Update](/cli/azure/ext/azure-iot/iot/edge/deployment#ext-azure-iot-az-iot-edge-deployment-update) komutunu kullanın:
+Bir dağıtımı güncelleştirmek için [az IoT Edge Deployment Update](/cli/azure/iot/edge/deployment) komutunu kullanın:
 
 ```azurecli
 az iot edge deployment update --deployment-id [deployment id] --hub-name [hub name] --set [property1.property2='value']
@@ -245,7 +245,7 @@ Dağıtım güncelleştirme komutu aşağıdaki parametreleri alır:
 
 Bir dağıtımı sildiğinizde, tüm cihazlar bir sonraki en yüksek öncelikli dağıtımı alırlar. Cihazlarınız başka bir dağıtımın hedef koşulunu karşılamıyorsa, dağıtım silindiğinde modüller kaldırılmaz.
 
-Bir dağıtımı silmek için [az IoT Edge Deployment Delete](/cli/azure/ext/azure-iot/iot/edge/deployment#ext-azure-iot-az-iot-edge-deployment-delete) komutunu kullanın:
+Bir dağıtımı silmek için [az IoT Edge Deployment Delete](/cli/azure/iot/edge/deployment) komutunu kullanın:
 
 ```azurecli
 az iot edge deployment delete --deployment-id [deployment id] --hub-name [hub name]

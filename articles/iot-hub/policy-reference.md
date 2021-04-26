@@ -1,18 +1,18 @@
 ---
 title: Azure IoT Hub için yerleşik ilke tanımları
 description: Azure IoT Hub için Azure Ilkesi yerleşik ilke tanımlarını listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızı yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: reference
 author: robinsh
 ms.author: robinsh
 ms.service: iot-hub
 ms.custom: subject-policy-reference
-ms.openlocfilehash: 8e89d715e29daef3817eb742023510367efe4b2e
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: 7ebc38776f81491e87a6ef96f4b6d28aac5a9dfc
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105031757"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868510"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-iot-hub"></a>Azure için Azure Ilkesi yerleşik tanımları IoT Hub
 

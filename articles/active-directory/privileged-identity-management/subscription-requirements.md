@@ -13,16 +13,16 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: how-to
 ms.subservice: pim
-ms.date: 08/06/2020
+ms.date: 04/05/2021
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 74c9cd1c55f1b0dde173a7ffbeac92e5518db81e
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 0d0428f73c4df3d97002def03823ff8cced1d647
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88005814"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106552640"
 ---
 # <a name="license-requirements-to-use-privileged-identity-management"></a>Privileged Identity Management kullanılacak lisans gereksinimleri
 
@@ -30,7 +30,7 @@ Azure Active Directory (Azure AD) Privileged Identity Management (PıM) kullanma
 
 ## <a name="valid-licenses"></a>Geçerli lisanslar
 
-[!INCLUDE [Azure AD Premium P2 license](../../../includes/active-directory-p2-license.md)]
+[!INCLUDE [Azure AD Premium P2 license](../../../includes/active-directory-p2-license.md)]PIM ve tüm ayarlarını kullanmanız gerekir. Şu anda, kiracınızda etkin bir Azure Active Directory Premium P2 sürümü ile Azure AD ve Azure Kaynak rolleri 'ne (Önizleme) erişimi olan hizmet sorumlularına yönelik bir erişim incelemesi tanımlayabilirsiniz. Hizmet sorumluları için lisanslama modeli, bu özelliğin genel kullanıma sunulmasıyla sonlandırılır ve ek lisanslar gerekebilir.
 
 ## <a name="licenses-you-must-have"></a>Sahip olmanız gereken lisanslar
 
@@ -73,3 +73,5 @@ Bir Azure AD Premium P2, EMS E5 veya deneme lisansının süresi dolarsa Privile
 - [Privileged Identity Management'ı dağıtma](pim-deployment-plan.md)
 - [Privileged Identity Management'ı kullanmaya başlama](pim-getting-started.md)
 - [Privileged Identity Management içinde yönetileyemiyorum roller](pim-roles.md)
+- [PıM 'de Azure Kaynak rolleri için erişim gözden geçirmesi oluşturma](pim-resource-roles-start-access-review.md)
+- [PıM 'de Azure AD rolleri için erişim gözden geçirmesi oluşturma](pim-how-to-start-security-review.md)

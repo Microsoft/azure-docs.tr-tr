@@ -3,17 +3,17 @@ title: 'ML Studio (klasik): Azure Machine Learning geçirme-işlem hattı uç no
 description: İşlem hattı uç noktalarını Azure Machine Learning istemci uygulamalarla tümleştirin.
 services: machine-learning
 ms.service: machine-learning
-ms.subservice: studio
+ms.subservice: studio-classic
 ms.topic: how-to
 author: xiaoharper
 ms.author: zhanxia
 ms.date: 03/08/2021
-ms.openlocfilehash: bf0624e0667c9fc6998fb28898a3376ca409180d
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fc7e222d400c2ded602e3d26d504896302fff014
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103565502"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311796"
 ---
 # <a name="consume-pipeline-endpoints-from-client-applications"></a>İstemci uygulamalarından işlem hattı uç noktalarını tüketme
 

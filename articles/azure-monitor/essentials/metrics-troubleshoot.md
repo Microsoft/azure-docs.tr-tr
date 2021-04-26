@@ -6,12 +6,12 @@ services: azure-monitor
 ms.topic: conceptual
 ms.date: 04/23/2019
 ms.author: vitalyg
-ms.openlocfilehash: bc1978f6ed0aa3e38f25fa03fc54ddc7d4efb9c3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6acab9618566766b12b4b236c75aa58386100513
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102033342"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105961073"
 ---
 # <a name="troubleshooting-metrics-charts"></a>Ölçüm grafikleriyle ilgili sorunları giderme
 
@@ -43,7 +43,7 @@ Bazı kaynaklar ölçümlerini sürekli göstermez. Örneğin Azure durdurulan s
 
 [Azure 'daki ölçümlerin çoğu 93 gün boyunca depolanır](../essentials/data-platform-metrics.md#retention-of-metrics). Bununla birlikte tek grafikte en çok 30 günlük verileri sorgulayabilirsiniz. Bu sınırlama [günlük tabanlı ölçümler](../app/pre-aggregated-metrics-log-metrics.md#log-based-metrics) için geçerli değildir.
 
-**Çözüm:** Boş bir grafik görürseniz veya grafiğiniz yalnızca ölçüm verilerinin bir kısmını görüntülüyorsa, saat seçicideki başlangıç ve bitiş tarihleri arasındaki farkın 30 günlük aralığı aşmadığını doğrulayın.
+**Çözüm:** Boş bir grafik görürseniz veya grafiğiniz yalnızca ölçüm verilerinin bir kısmını görüntülüyorsa, saat seçicideki başlangıç ve bitiş tarihleri arasındaki farkın 30 günlük aralığı aşmadığını doğrulayın. 30 günlük bir Aralık seçtikten sonra, tam saklama penceresini görüntülemek için grafiği [kaydırabilirsiniz](metrics-charts.md#pan) .
 
 ### <a name="all-metric-values-were-outside-of-the-locked-y-axis-range"></a>Tüm ölçüm değerleri kilitli y ekseni aralığının dışındaydı
 

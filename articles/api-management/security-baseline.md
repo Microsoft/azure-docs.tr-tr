@@ -6,13 +6,13 @@ ms.service: api-management
 ms.topic: conceptual
 ms.date: 02/17/2021
 ms.author: mbaldwin
-ms.custom: subject-security-benchmark
-ms.openlocfilehash: 6f54bd88e58ccfef068900fc3c7b249cde1c233d
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.custom: subject-security-benchmark, devx-track-azurepowershell
+ms.openlocfilehash: 488fa4738918849759fbefa86ef1e9730b3b0ed0
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105558559"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107813497"
 ---
 # <a name="azure-security-baseline-for-api-management"></a>API Management için Azure Güvenlik temeli
 

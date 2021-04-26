@@ -2,14 +2,14 @@
 title: Hizmet kotaları ve limitleri
 description: Varsayılan Azure Batch kotaları, sınırları ve kısıtlamaları hakkında bilgi edinin ve kota artışlarının nasıl isteneceğini öğrenin
 ms.topic: conceptual
-ms.date: 01/28/2021
+ms.date: 04/06/2021
 ms.custom: seodec18
-ms.openlocfilehash: 433272c76b9ff27d9cad542cf65a8ec0d8fc0378
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 6e17a90cc573205bcb964a0428e0b7320323b8a6
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "99052389"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106553558"
 ---
 # <a name="batch-service-quotas-and-limits"></a>Batch hizmet kotaları ve limitleri
 
@@ -19,7 +19,7 @@ Batch iş yüklerinizi tasarlarken ve ölçeklendirebilmeniz için bu kotaları 
 
 Tek bir Batch hesabında birden fazla Batch iş yükü çalıştırabilir ya da iş yüklerinizi aynı abonelikte ancak farklı Azure bölgelerindeki Batch hesapları arasında dağıtabilirsiniz.
 
-Batch 'de üretim iş yüklerini çalıştırmayı planlıyorsanız, varsayılan olarak bir veya daha fazla kotayı artırmanız gerekebilir. Bir kota yükseltmek istiyorsanız, çevrimiçi bir [Müşteri Destek isteğini](#increase-a-quota) ücretsiz olarak açabilirsiniz.
+Batch 'de üretim iş yüklerini çalıştırmayı planlıyorsanız, varsayılan olarak bir veya daha fazla kotayı artırmanız gerekebilir. Kotayı artırmak için ücret ödemeden [bir kota artışı](#increase-a-quota) isteyebilirsiniz.
 
 ## <a name="resource-quotas"></a>Kaynak kotaları
 
@@ -33,7 +33,7 @@ Ayrıca kotaların garantili değerler olmadığına de unutmayın. Kotalar, Bat
 
 ### <a name="cores-quotas-in-batch-service-mode"></a>Batch hizmeti modundaki çekirdek kotaları
 
-Toplu Işlem tarafından desteklenen her bir VM Serisi için çekirdek kotalar bulunur ve portalda **Kotalar** sayfasında görüntülenir. VM Serisi kota sınırları, aşağıda açıklandığı gibi bir destek isteğiyle de yapılandırılabilir. Adanmış düğümler için Batch, her bir VM Serisi için bir çekirdek kota sınırı ve tüm Batch hesabı için toplam çekirdek kota sınırı uygular. Düşük öncelikli düğümler için Batch, farklı VM serileri arasında ayrım yapmadan Batch hesabı için yalnızca toplam çekirdek kotasını zorlar.
+Toplu Işlem tarafından desteklenen her bir VM Serisi için çekirdek kotalar vardır. Bu çekirdek kotalar Azure portal **Kotalar** sayfasında görüntülenir. VM Serisi kota sınırları, aşağıda açıklandığı gibi bir destek isteğiyle de yapılandırılabilir. Adanmış düğümler için Batch her bir VM Serisi için bir çekirdek kota sınırı ve tüm Batch hesabı için toplam çekirdek kota sınırı uygular. Düşük öncelikli düğümler için Batch, farklı VM serileri arasında ayrım yapmadan Batch hesabı için yalnızca toplam çekirdek kotasını zorlar.
 
 ### <a name="cores-quotas-in-user-subscription-mode"></a>Kullanıcı abonelik modundaki çekirdek kotaları
 
@@ -84,65 +84,66 @@ Batch hesabı kotalarınızı [Azure Portal](https://portal.azure.com)görüntü
 
 ## <a name="increase-a-quota"></a>Kotayı artırma
 
-[Azure Portal](https://portal.azure.com)kullanarak, Batch hesabınız veya aboneliğiniz için bir kota artışı isteyebilirsiniz. Kota artışı türü, Batch hesabınızın havuz ayırma moduna bağlıdır. Kota artışı istemek için, kotayı artırmak istediğiniz VM serisini dahil etmeniz gerekir. Kota artışı uygulandığında, tüm VM dizisine uygulanır.
+[Azure Portal](https://portal.azure.com) veya [Azure kota REST API](#azure-quota-rest-api)kullanarak Batch hesabınız veya aboneliğiniz için bir kota artışı isteyebilirsiniz.
 
-1. Portal panonuzda **Yardım + Destek** kutucuğunu veya portalın sağ üst köşesindeki soru işaretini (**?**) seçin.
-1. **Yeni destek isteği**  >  **temelleri**' ni seçin.
+Kota artışı türü, Batch hesabınızın havuz ayırma moduna bağlıdır. Kota artışı istemek için, kotayı artırmak istediğiniz VM serisini dahil etmeniz gerekir. Kota artışı uygulandığında, tüm VM dizisine uygulanır.
+
+Destek isteğinizi gönderdikten sonra, Azure desteği sizinle iletişim kuracaktır. Kota istekleri, birkaç dakika veya en fazla iki iş günü içinde tamamlanabilir.
+
+### <a name="azure-portal"></a>Azure portalı
+
+1. **Kotalar** sayfasında, **istek kotası artışı**' nı seçin. Alternatif olarak, Portal panonuzda **Yardım + Destek** kutucuğunu (veya portalın sağ üst köşesindeki soru işareti (**?**) seçerek **Yeni destek isteği** ' ni seçebilirsiniz.
+
 1. **Temel bilgiler**:
 
-    1. **Sorun türü**  >  **Hizmet ve abonelik limitleri (kotalar)**
-
+    1. **Sorun türü** için **hizmet ve abonelik sınırları (kotalar)** öğesini seçin.
     1. Aboneliğinizi seçin.
-
-    1. **Kota türü**  >  **Batch**
-
-       **İleri**’yi seçin.
+    1. **Kota türü** için **Batch**' i seçin.
+    1. Devam etmek için **İleri** seçeneğini belirleyin.
 
 1. **Ayrıntılar** bölümünde:
 
-    1. **Ayrıntıları sağla** bölümünde konumu, kota türünü ve Batch hesabını belirtin.
+    1. **Ayrıntıları sağla** bölümünde, konumu, kota türünü ve Batch hesabını (varsa) belirtin ve ardından, arttırabileceğiniz kotayı seçin.
 
        :::image type="content" source="media/batch-quota-limit/quota-increase.png" alt-text="Kota artışı isteği istenirken kota ayrıntıları ekranının ekran görüntüsü.":::
 
        Kota türleri şunlardır:
 
-       * **Batch hesabı başına**  
-         Adanmış ve düşük öncelikli çekirdekler ve iş ve havuz sayısı dahil olmak üzere tek bir Batch hesabına özgü değerler.
+       - **Batch hesabı başına**  
+         Adanmış ve düşük öncelikli çekirdekler ve işlerin ve havuzların sayısı dahil olmak üzere tek bir Batch hesabına özgü kota artışları istemek için bu seçeneği kullanın.
 
-       * **Bölge başına**  
-         Bir bölgedeki tüm Batch hesaplarına uygulanan ve abonelik başına bölge başına toplu Işlem hesaplarının sayısını içeren değerler.
+         Bu seçeneği belirlerseniz, bu isteğin uygulanacağı Batch hesabını belirtin ve ardından güncelleştirmek istediğiniz kotayı seçin. Her kaynak için istediğiniz yeni limiti sağlayın.
 
-       Düşük öncelikli kota, tüm VM serileri genelinde tek bir değerdir. Kısıtlanmış SKU 'Lara ihtiyacınız varsa **düşük öncelikli çekirdekler** ' ı seçmeniz ve isteğe sanal makine aileleri eklemeniz gerekir.
+         Düşük öncelikli kota, tüm VM serileri genelinde tek bir değerdir. Kısıtlanmış SKU 'Lara ihtiyacınız varsa **düşük öncelikli çekirdekler** ' ı seçmeniz ve isteğe sanal makine aileleri eklemeniz gerekir.
 
-    1. [İşletmenizin etkilerine](https://aka.ms/supportseverity)göre **önem derecesi** seçin.
+       - **Bu bölgedeki tüm hesaplar**  
+         Bu seçeneği, bir bölgedeki tüm Batch hesaplarına uygulanan kota artışına (örneğin, her abonelik için bölge başına toplu Işlem hesaplarının sayısı) izin vermek için kullanın.
 
-       **İleri**’yi seçin.
+    1. **Destek yöntemi**' nde, [iş etki](https://aka.ms/supportseverity) ve tercih ettiğiniz iletişim yönteminiz ve destek diliniz doğrultusunda bir **önem derecesi** seçin.
 
-1. **İletişim bilgileri**:
+    1. **İletişim bilgileri**' nde, gerekli iletişim ayrıntılarını doğrulayın ve girin.
 
-    1. **Tercih edilen bir iletişim yöntemi** seçin.
+1. Destek isteğini göndermek için **gözden geçir + oluştur**' u seçin ve **Oluştur** ' u seçin.
 
-    1. Gerekli iletişim ayrıntılarını doğrulayın ve girin.
+### <a name="azure-quota-rest-api"></a>Azure kota REST API
 
-       Destek isteğini göndermek için **Oluştur** ' u seçin.
+Abonelik düzeyinde veya Batch hesabı düzeyinde bir kota artışı istemek için Azure kota REST API kullanabilirsiniz.
 
-Destek isteğinizi gönderdikten sonra, Azure desteği sizinle iletişim kuracaktır. Kota istekleri, birkaç dakika veya en fazla iki iş günü içinde tamamlanabilir.
+Ayrıntılar ve örnekler için bkz. [Azure desteği REST API ile kota artışı isteği](/rest/api/support/quota-payload#azure-batch).
 
 ## <a name="related-quotas-for-vm-pools"></a>VM havuzları için ilgili kotalar
 
-Bir Azure sanal ağında dağıtılan sanal makine yapılandırmasındaki toplu iş havuzları, otomatik olarak ek Azure ağ kaynakları ayırır. Bir sanal ağdaki her 50 havuz düğümü için aşağıdaki kaynaklar gereklidir:
+[Bir Azure sanal ağında dağıtılan sanal makine yapılandırmasındaki toplu iş havuzları,](batch-virtual-network.md) otomatik olarak ek Azure ağ kaynakları ayırır. Bu kaynaklar, Batch havuzu oluşturulurken sağlanan sanal ağı içeren abonelikte oluşturulur.
+
+Bir sanal ağdaki her 100 havuz düğümü için aşağıdaki kaynaklar oluşturulur:
 
 - Bir [ağ güvenlik grubu](../virtual-network/network-security-groups-overview.md#network-security-groups)
 - Bir [genel IP adresi](../virtual-network/public-ip-addresses.md)
 - Bir [yük dengeleyici](../load-balancer/load-balancer-overview.md)
 
-Bu kaynaklar, Batch havuzu oluşturulurken sağlanan sanal ağı içeren abonelikte ayrılır. Bu kaynaklar, aboneliğin [kaynak kotalarıyla](../azure-resource-manager/management/azure-subscription-service-limits.md) sınırlıdır. Büyük havuz dağıtımlarını bir sanal ağda planlarsanız, bu kaynaklar için aboneliğin kotalarını kontrol edin. Gerekirse, **Yardım + Destek**' i seçerek Azure Portal bir artış isteyin.
+Bu kaynaklar, aboneliğin [kaynak kotalarıyla](../azure-resource-manager/management/azure-subscription-service-limits.md) sınırlıdır. Büyük havuz dağıtımlarını bir sanal ağda planlıyorsanız, bir veya daha fazla kaynağın bir veya daha fazlası için bir kota artışı istemeniz gerekebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure Portal kullanarak bir Azure Batch hesabı oluşturun](batch-account-create-portal.md).
-* [Batch hizmeti iş akışı ve](batch-service-workflow-features.md) havuzlar, düğümler, işler ve görevler gibi birincil kaynaklar hakkında bilgi edinin.
-* [Azure aboneliği ve hizmet limitleri, Kotalar ve kısıtlamalar](../azure-resource-manager/management/azure-subscription-service-limits.md)hakkında bilgi edinin.
-
-[account_quotas]: ./media/batch-quota-limit/accountquota_portal.png
-[quota_increase]: ./media/batch-quota-limit/quota-increase.png
+- [Batch hizmeti iş akışı ve](batch-service-workflow-features.md) havuzlar, düğümler, işler ve görevler gibi birincil kaynaklar hakkında bilgi edinin.
+- [Azure aboneliği ve hizmet limitleri, Kotalar ve kısıtlamalar](../azure-resource-manager/management/azure-subscription-service-limits.md)hakkında bilgi edinin.

@@ -7,10 +7,10 @@ ms.service: azure-percept
 ms.topic: reference
 ms.date: 02/16/2021
 ms.openlocfilehash: 0c9f848827db452710b4bca355aae0db99a2c95c
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105027372"
 ---
 # <a name="azure-percept-dk-datasheet"></a>Azure Percept DK veri sayfası
@@ -36,5 +36,5 @@ ms.locfileid: "105027372"
 |İşletim sıcaklığı           |0-35 derece C     |
 |Işletim dışı sıcaklık       |-40-85 derece C     |
 |Bağıl nem               |%10 ila %95    |
-|Sertifika                   |A <br> FILTRESIYLE <br> RoHS <br> ULAŞTıĞıNDA <br> UL   |
+|Sertifikasyon                   |A <br> FILTRESIYLE <br> RoHS <br> ULAŞTıĞıNDA <br> UL   |
 |Güç kaynağı                    |3.42 A 'da 19VDC (65W) |

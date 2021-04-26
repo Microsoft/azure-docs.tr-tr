@@ -6,10 +6,10 @@ ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 03/09/2020
 ms.openlocfilehash: 5e6bec71c44d7fbcf2841e087af9887d99c94e6f
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104867585"
 ---
 # <a name="monitor-cluster-performance-in-azure-hdinsight"></a>Azure HDInsight 'ta küme performansını izleme
@@ -24,7 +24,7 @@ Küme üzerinde yük, tüm düğümlerde eşit şekilde dağıtıldığında Had
 
 Kümenizin düğümlerine ve bunların yüklenmesine ilişkin üst düzey bir görünüm almak için, [ambarı Web Kullanıcı arabiriminde](hdinsight-hadoop-manage-ambari.md)oturum açın ve ardından **konaklar** sekmesini seçin. Konaklar tam etki alanı adlarına göre listelenir. Her konağın işletim durumu renkli bir sistem durumu göstergesi ile gösterilir:
 
-| Renk | Açıklama |
+| Renk | Description |
 | --- | --- |
 | Kırmızı | Konaktaki en az bir ana bileşen çalışmıyor. Etkilenen bileşenleri listeleyen araç ipucunu görmek için üzerine gelin. |
 | Orange | Konaktaki en az bir ikincil bileşen çalışmıyor. Etkilenen bileşenleri listeleyen araç ipucunu görmek için üzerine gelin. |

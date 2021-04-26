@@ -6,17 +6,17 @@ ms.assetid: dc446e0e-0958-48ea-8d99-441d2b947a7c
 ms.devlang: nodejs
 ms.topic: tutorial
 ms.date: 08/25/2020
-ms.custom: mvc, seodec18
+ms.custom: mvc, seodec18, devx-track-azurepowershell
 adobe-target: true
 adobe-target-activity: DocsExp–386541–A/B–Enhanced-Readability-Quickstarts–2.19.2021
 adobe-target-experience: Experience B
 adobe-target-content: ./app-service-web-tutorial-custom-domain-uiex
-ms.openlocfilehash: 79599ce04b93409c67342be73cf88d5e20621c1d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8e310cb0507146eb53c7b55c2aaed492baa79521
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102182596"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833263"
 ---
 # <a name="tutorial-map-an-existing-custom-dns-name-to-azure-app-service"></a>Öğretici: mevcut bir özel DNS adını Azure App Service eşleme
 
@@ -51,6 +51,8 @@ Bu öğreticiyi tamamlamak için:
 
 [!INCLUDE [app-service-dev-test-note](../../includes/app-service-dev-test-note.md)]
 
+  > [!NOTE]
+  > Web uygulamanıza özel bir etki alanı kaldırmak veya eklemek sitenizin yeniden başlatılmasına neden olur.
 ### <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
 [Azure Portal](https://portal.azure.com)açın ve Azure hesabınızla oturum açın.
@@ -335,7 +337,7 @@ Sayfanın en altında, kök sanal dizin `/` varsayılan olarak `site\wwwroot` di
 
 [Azure CLI](/cli/azure/install-azure-cli) veya [Azure PowerShell](/powershell/azure/)kullanarak betiklerle özel etki alanlarının yönetimini otomatik hale getirebilirsiniz.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 Aşağıdaki komut, App Service uygulamasına özel bir DNS adı yapılandırır.
 

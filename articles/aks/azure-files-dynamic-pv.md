@@ -5,14 +5,14 @@ description: Azure Kubernetes hizmetinde (aks) birden çok eş zamanlı Pod ile 
 services: container-service
 ms.topic: article
 ms.date: 07/01/2020
-ms.openlocfilehash: 2ad2affee34348e8c2fc7b734c8b49d0aec8db40
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: f301a01e479d03647bebf7cb042564a258e9250e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96744918"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776132"
 ---
-# <a name="dynamically-create-and-use-a-persistent-volume-with-azure-files-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) ile Azure dosyaları ile kalıcı bir birimi dinamik olarak oluşturma ve kullanma
+# <a name="dynamically-create-and-use-a-persistent-volume-with-azure-files-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service'te (AKS) Azure Dosyalar ile dinamik olarak kalıcı birim oluşturma ve kullanma
 
 Kalıcı bir birim, Kubernetes pods ile kullanılmak üzere sağlanmış bir depolama parçasını temsil eder. Kalıcı bir birim bir veya daha fazla sayıda pods tarafından kullanılabilir ve dinamik veya statik olarak sağlanabilir. Aynı depolama birimine eşzamanlı olarak birden çok Pod erişimi gerekiyorsa, [sunucu ileti bloğu (SMB) protokolünü][smb-overview]kullanarak bağlanmak için Azure dosyalarını kullanabilirsiniz. Bu makalede, bir Azure Kubernetes Service (AKS) kümesinde birden çok düğüm tarafından kullanılmak üzere Azure dosya paylaşımının nasıl dinamik olarak oluşturulacağı gösterilmektedir.
 
@@ -211,18 +211,18 @@ Azure dosyalarını kullanarak Kubernetes kalıcı birimleri hakkında daha fazl
 [smb-overview]: /windows/desktop/FileIO/microsoft-smb-protocol-and-cifs-protocol-overview
 
 <!-- LINKS - internal -->
-[az-group-create]: /cli/azure/group#az-group-create
-[az-group-list]: /cli/azure/group#az-group-list
-[az-resource-show]: /cli/azure/aks#az-aks-show
-[az-storage-account-create]: /cli/azure/storage/account#az-storage-account-create
-[az-storage-create]: /cli/azure/storage/account#az-storage-account-create
-[az-storage-key-list]: /cli/azure/storage/account/keys#az-storage-account-keys-list
-[az-storage-share-create]: /cli/azure/storage/share#az-storage-share-create
+[az-group-create]: /cli/azure/group#az_group_create
+[az-group-list]: /cli/azure/group#az_group_list
+[az-resource-show]: /cli/azure/aks#az_aks_show
+[az-storage-account-create]: /cli/azure/storage/account#az_storage_account_create
+[az-storage-create]: /cli/azure/storage/account#az_storage_account_create
+[az-storage-key-list]: /cli/azure/storage/account/keys#az_storage_account_keys_list
+[az-storage-share-create]: /cli/azure/storage/share#az_storage_share_create
 [mount-options]: #mount-options
 [aks-quickstart-cli]: kubernetes-walkthrough.md
 [aks-quickstart-portal]: kubernetes-walkthrough-portal.md
 [install-azure-cli]: /cli/azure/install-azure-cli
-[az-aks-show]: /cli/azure/aks#az-aks-show
+[az-aks-show]: /cli/azure/aks#az_aks_show
 [storage-skus]: ../storage/common/storage-redundancy.md
 [kubernetes-rbac]: concepts-identity.md#role-based-access-controls-rbac
 [operator-best-practices-storage]: operator-best-practices-storage.md

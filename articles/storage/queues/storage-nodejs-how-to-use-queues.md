@@ -1,20 +1,20 @@
 ---
 title: Azure kuyruk depolama Node.js-Azure depolama 'dan nasıl kullanılır
 description: Kuyrukları oluşturmak ve silmek için Azure kuyruk depolama alanını kullanmayı öğrenin. Node.js kullanarak ileti eklemeyi, almayı ve silmeyi öğrenin.
-author: mhopkins-msft
-ms.author: mhopkins
+author: twooley
+ms.author: twooley
 ms.reviewer: dineshm
 ms.date: 12/21/2020
 ms.topic: how-to
 ms.service: storage
 ms.subservice: queues
 ms.custom: seo-javascript-september2019, devx-track-js
-ms.openlocfilehash: 12ae05e10cdf0fa9a5f0725acaa1784eedc3612c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 161000f2860a1153424a628a2b303f3717f828da
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97803705"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106275949"
 ---
 # <a name="how-to-use-azure-queue-storage-from-nodejs"></a>Node.js Azure kuyruk depolamayı kullanma
 

@@ -3,12 +3,12 @@ title: Görev çalıştırma günlüklerini görüntüleme-görevler
 description: ACR görevleri tarafından oluşturulan çalıştırma günlüklerini görüntüleme ve yönetme.
 ms.topic: article
 ms.date: 03/09/2020
-ms.openlocfilehash: b2a10d4a3a2746acf38445673af994c6317c77de
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ce5f33853be2aa48bcfd1916c7f8b94b9702f38c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93027185"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781064"
 ---
 # <a name="view-and-manage-task-run-logs"></a>Görev çalıştırma günlüklerini görüntüleme ve yönetme
 
@@ -18,9 +18,9 @@ Bu makalede, görev çalıştırma günlüklerinin nasıl görüntüleneceği ve
 
 ## <a name="view-streamed-logs"></a>Akışlı günlükleri görüntüle
 
-Bir görevi el ile tetiklemeniz durumunda, günlük çıktısı doğrudan konsola akışla kaydedilir. Örneğin, [az ACR Build](/cli/azure/acr#az-acr-build), [az ACR Run](/cli/azure/acr#az-acr-run)veya [az ACR Task Run](/cli/azure/acr/task#az-acr-task-run) komutunu kullanarak bir görevi el ile tetiklersiniz, konsola akan günlük çıkışını görürsünüz. 
+Bir görevi el ile tetiklemeniz durumunda, günlük çıktısı doğrudan konsola akışla kaydedilir. Örneğin, [az ACR Build](/cli/azure/acr#az_acr_build), [az ACR Run](/cli/azure/acr#az_acr_run)veya [az ACR Task Run](/cli/azure/acr/task#az_acr_task_run) komutunu kullanarak bir görevi el ile tetiklersiniz, konsola akan günlük çıkışını görürsünüz. 
 
-Aşağıdaki örnek [az ACR Run](/cli/azure/acr#az-acr-run) komutu aynı kayıt defterinden çekilen bir kapsayıcıyı çalıştıran bir görevi el ile tetikler:
+Aşağıdaki örnek [az ACR Run](/cli/azure/acr#az_acr_run) komutu aynı kayıt defterinden çekilen bir kapsayıcıyı çalıştıran bir görevi el ile tetikler:
 
 ```azurecli
 az acr run --registry mycontainerregistry1220 \
@@ -58,7 +58,7 @@ Run ID: cf4 was successful after 5s
 
 ## <a name="view-stored-logs"></a>Depolanan günlükleri görüntüle 
 
-Azure Container Registry tüm görevler için çalıştırma günlüklerini depolar. Depolanan çalışma günlüklerini Azure portal görüntüleyebilirsiniz. Ya da, seçilen günlüğü görüntülemek için [az ACR görev günlükleri](/cli/azure/acr/task#az-acr-task-logs) komutunu kullanın. Varsayılan olarak, Günlükler 30 gün boyunca tutulur.
+Azure Container Registry tüm görevler için çalıştırma günlüklerini depolar. Depolanan çalışma günlüklerini Azure portal görüntüleyebilirsiniz. Ya da, seçilen günlüğü görüntülemek için [az ACR görev günlükleri](/cli/azure/acr/task#az_acr_task_logs) komutunu kullanın. Varsayılan olarak, Günlükler 30 gün boyunca tutulur.
 
 Bir görev otomatik olarak tetikleniyorsa (örneğin, kaynak kodu güncelleştirmesi için), kayıtlı günlüklere erişmek, çalıştırma günlüklerini görüntülemenin *tek* yoludur. Otomatik görev Tetikleyicileri, kaynak kodu yürütmelerini veya çekme isteklerini, temel görüntü güncelleştirmelerini ve Zamanlayıcı tetikleyicilerini içerir.
 
@@ -70,7 +70,7 @@ Portalda çalıştırma günlüklerini görüntülemek için:
 
 ![Görevi çalıştır oturum açma portalını görüntüle](./media/container-registry-tasks-logs/portal-task-run-logs.png)
 
-Azure CLı kullanarak bir günlüğü görüntülemek için [az ACR görev günlüklerini](/cli/azure/acr/task#az-acr-task-logs) çalıştırın ve bır çalıştırma kimliği, bir görev adı ya da bir yapı göreviyle oluşturduğunuz belirli bir görüntüyü belirtin. Bir görev adı belirtilmişse, komut, son oluşturulan çalıştırmanın günlüğünü gösterir.
+Azure CLı kullanarak bir günlüğü görüntülemek için [az ACR görev günlüklerini](/cli/azure/acr/task#az_acr_task_logs) çalıştırın ve bır çalıştırma kimliği, bir görev adı ya da bir yapı göreviyle oluşturduğunuz belirli bir görüntüyü belirtin. Bir görev adı belirtilmişse, komut, son oluşturulan çalıştırmanın günlüğünü gösterir.
 
 Aşağıdaki örnek, KIMLIĞI *CF4* olan çalıştırma için günlüğü çıktı olarak verir:
 
@@ -83,7 +83,7 @@ az acr task logs --registry mycontainerregistry1220 \
 
 Görev çalıştırma günlüklerini yerel bir dosya sisteminde depolamak veya Azure depolama gibi alternatif bir arşivleme çözümü kullanmak isteyebilirsiniz.
 
-Örneğin, yerel bir *tasklogs* dizini oluşturun ve [az ACR görev günlüklerinin](/cli/azure/acr/task#az-acr-task-logs) çıkışını yerel bir dosyaya yeniden yönlendirin:
+Örneğin, yerel bir *tasklogs* dizini oluşturun ve [az ACR görev günlüklerinin](/cli/azure/acr/task#az_acr_task_logs) çıkışını yerel bir dosyaya yeniden yönlendirin:
 
 ```azurecli
 mkdir ~/tasklogs
@@ -101,13 +101,13 @@ Ayrıca, yerel günlük dosyalarını Azure depolama 'ya kaydedebilirsiniz. Örn
 
 <!-- LINKS - Internal -->
 [azure-cli]: /cli/azure/install-azure-cli
-[az-acr-build]: /cli/azure/acr#az-acr-build
-[az-acr-pack-build]: /cli/azure/acr/pack#az-acr-pack-build
+[az-acr-build]: /cli/azure/acr#az_acr_build
+[az-acr-pack-build]: /cli/azure/acr/pack#az_acr_pack_build
 [az-acr-task]: /cli/azure/acr/task
-[az-acr-task-create]: /cli/azure/acr/task#az-acr-task-create
-[az-acr-task-run]: /cli/azure/acr/task#az-acr-task-run
-[az-acr-task-update]: /cli/azure/acr/task#az-acr-task-update
-[az-login]: /cli/azure/reference-index#az-login
+[az-acr-task-create]: /cli/azure/acr/task#az_acr_task_create
+[az-acr-task-run]: /cli/azure/acr/task#az_acr_task_run
+[az-acr-task-update]: /cli/azure/acr/task#az_acr_task_update
+[az-login]: /cli/azure/reference-index#az_login
 [az-login-service-principal]: /cli/azure/authenticate-azure-cli
 
 <!-- IMAGES -->

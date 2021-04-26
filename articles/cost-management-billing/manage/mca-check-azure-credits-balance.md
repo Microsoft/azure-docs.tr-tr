@@ -9,12 +9,12 @@ ms.subservice: billing
 ms.topic: how-to
 ms.date: 08/20/2019
 ms.author: banders
-ms.openlocfilehash: cf5772e9cf08eaa7f34acd59a9c96da6f20cd03d
-ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
-ms.translationtype: HT
+ms.openlocfilehash: 96c37ded2750ad3e4882b203d71c75c9f4608e9d
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92131420"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106285918"
 ---
 # <a name="track-microsoft-customer-agreement-azure-credit-balance"></a>Microsoft Müşteri Sözleşmesi Azure kredi bakiyesini izleme
 
@@ -368,7 +368,7 @@ API yanıtı, faturalama profilinizin kredi bakiyesini etkileyen tüm işlemleri
 
 Bir Microsoft müşteri sözleşmesi için ödeme hesabında, faturalarınızı ve ödeme yöntemlerinizi yönetmek için faturalama profillerini kullanırsınız. Her faturalama profili için aylık fatura oluşturulur ve faturayı ödemek için ödeme yöntemlerini kullanırsınız.
 
-Edindiğiniz kredileri bir faturalama profiline atarsınız. Faturalama profili için bir fatura oluşturulduğunda krediler, ödemeniz gereken tutarı hesaplamak için toplam ücretlere otomatik olarak eklenir. Kalan tutarı, çek/havale veya kredi kartı gibi ödeme yöntemlerinizle ödersiniz.
+Satın aldığınız kredileri bir faturalandırma profiline atarsınız. Faturalama profili için bir fatura oluşturulduğunda krediler, ödemeniz gereken tutarı hesaplamak için toplam ücretlere otomatik olarak eklenir. Kalan tutarı, çek/havale veya kredi kartı gibi ödeme yöntemlerinizle ödersiniz.
 
 ## <a name="products-that-arent-covered-by-azure-credits"></a>Azure kredileri kapsamında olmayan ürünler
 

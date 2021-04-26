@@ -2,21 +2,21 @@
 title: Adanmış SQL havuzu için columnstore dizin performansını iyileştirme
 description: Adanmış SQL havuzundaki her bir satır grubu içindeki satır sayısını en üst düzeye çıkarmak için bellek gereksinimlerini azaltın veya kullanılabilir belleği artırın.
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql-dw
 ms.date: 03/22/2019
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: igorstan
 ms.custom: azure-synapse
-ms.openlocfilehash: b15f71698af8c340b58f3399390857790313b8ac
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 1336359bdd0768ba1d1554554d266cacfb483a43
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104585494"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107566520"
 ---
 # <a name="maximizing-rowgroup-quality-for-columnstore-indexes-in-dedicated-sql-pool"></a>Adanmış SQL havuzundaki columnstore dizinleri için satır grubu kalitesini en üst düzeye çıkarma 
 

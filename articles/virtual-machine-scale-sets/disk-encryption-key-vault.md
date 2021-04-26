@@ -8,17 +8,17 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: disks
 ms.date: 10/10/2019
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 3d30d506ae3b49b2e247ee77ef17d101f94854c7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: c9706176e537ec926a5335b54d667081773d76b1
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102501026"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107817368"
 ---
 # <a name="create-and-configure-a-key-vault-for-azure-disk-encryption"></a>Azure disk şifrelemesi için Anahtar Kasası oluşturma ve yapılandırma
 
-Azure disk şifrelemesi, disk şifreleme anahtarlarını ve gizli dizileri denetlemek ve yönetmek için Azure Key Vault kullanır.  Anahtar kasaları hakkında daha fazla bilgi için bkz. [Azure Key Vault kullanmaya başlama](../key-vault/general/overview.md) ve [anahtar kasanızın güvenliğini sağlama](../key-vault/general/secure-your-key-vault.md).
+Azure disk şifrelemesi, disk şifreleme anahtarlarını ve gizli dizileri denetlemek ve yönetmek için Azure Key Vault kullanır.  Anahtar kasaları hakkında daha fazla bilgi için bkz. [Azure Key Vault kullanmaya başlama](../key-vault/general/overview.md) ve [güvenlik özellikleri Azure Key Vault](../key-vault/general/security-features.md).
 
 Azure disk şifrelemesi ile kullanım için bir Anahtar Kasası oluşturmak ve yapılandırmak üç adımdan oluşur:
 

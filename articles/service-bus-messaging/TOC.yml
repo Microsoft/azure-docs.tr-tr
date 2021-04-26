@@ -92,14 +92,36 @@
   items:
     - name: 'Kuyruklar, konu başlıkları ve abonelikler'
       href: service-bus-queues-topics-subscriptions.md
-    - name: Konu başlığı filtreleri ve eylemleri
-      href: topic-filters.md
     - name: Premium mesajlaşma
       href: service-bus-premium-messaging.md
     - name: Azure Kuyrukları ve Service Bus kuyruklarını karşılaştırın
       href: service-bus-azure-and-service-bus-queues-compared-contrasted.md
-    - name: Performansı iyileştirme
-      href: service-bus-performance-improvements.md
+    - name: Gelişmiş özellikler
+      items:
+        - name: İleti oturumları
+          href: message-sessions.md
+        - name: Yinelenen iletileri algılama
+          href: duplicate-detection.md
+        - name: Konu başlığı filtreleri ve eylemleri
+          href: topic-filters.md
+        - name: İletilere göz atma
+          href: message-browsing.md
+        - name: 'İleti aktarımları, kilitler ve kapatma'
+          href: message-transfers-locks-settlement.md
+        - name: Teslim edilemeyen iletiler sırası
+          href: service-bus-dead-letter-queues.md
+        - name: İleti erteleme
+          href: message-deferral.md
+        - name: Performansı iyileştirme
+          href: service-bus-performance-improvements.md
+        - name: Coğrafi olağanüstü durum kurtarma ve coğrafi çoğaltma
+          href: service-bus-geo-dr.md
+        - name: Zaman uyumsuz mesajlaşma ve yüksek kullanılabilirlik
+          href: service-bus-async-messaging.md
+        - name: Kesintileri ve olağanüstü durumları yönetme
+          href: service-bus-outages-disasters.md
+        - name: Azaltma
+          href: service-bus-throttling.md
     - name: Federasyon
       items:
         - name: İleti çoğaltma ve bölgeler arası federasyon
@@ -116,14 +138,6 @@
           href: 'https://github.com/Azure-Samples/azure-messaging-replication-dotnet/tree/main/functions/config/ServiceBusCopyToEventHub'
         - name: Event Hubs'dan iletileri alma
           href: 'https://github.com/Azure-Samples/azure-messaging-replication-dotnet/tree/main/functions/config/EventHubCopyToServiceBus'
-    - name: Coğrafi olağanüstü durum kurtarma ve coğrafi çoğaltma
-      href: service-bus-geo-dr.md
-    - name: Zaman uyumsuz mesajlaşma ve yüksek kullanılabilirlik
-      href: service-bus-async-messaging.md
-    - name: Kesintileri ve olağanüstü durumları yönetme
-      href: service-bus-outages-disasters.md
-    - name: Azaltma
-      href: service-bus-throttling.md
     - name: Güvenlik
       items:
         - name: Güvenlik temeli
@@ -162,16 +176,12 @@
           href: service-bus-filter-examples.md
         - name: İleti işleme
           items:
-            - name: 'Kuyruklar, konu başlıkları ve abonelikler'
-              href: service-bus-queues-topics-subscriptions.md
             - name: 'Java ileti hizmeti (JMS) 2,0 varlıkları'
               href: java-message-service-20-entities.md
             - name: Java Ileti hizmeti (JMS) geliştirici guide.md
               href: jms-developer-guide.md
             - name: 'İletiler, yükler ve serileştirme'
               href: service-bus-messages-payloads.md
-            - name: 'İleti aktarımları, kilitler ve kapatma'
-              href: message-transfers-locks-settlement.md
             - name: İleti sıralama ve zaman damgaları
               href: message-sequencing.md
             - name: İleti süre sonu (Yaşam Süresi)
@@ -180,8 +190,6 @@
           href: service-bus-migrate-standard-premium.md
         - name: Bölümlenmiş kuyruklar ve konular
           href: service-bus-partitioning.md
-        - name: İleti oturumları
-          href: message-sessions.md
         - name: AMQP
           items:
             - name: AMQP’ye genel bakış
@@ -198,18 +206,8 @@
               href: service-bus-amqp-troubleshoot.md
         - name: Gelişmiş özellikler
           items:
-            - name: Teslim edilemeyen iletiler sırası
-              href: service-bus-dead-letter-queues.md
             - name: İletileri önceden getirme
               href: service-bus-prefetch.md
-            - name: Yinelenen iletileri algılama
-              href: duplicate-detection.md
-            - name: İleti sayaçları
-              href: message-counters.md
-            - name: İleti erteleme
-              href: message-deferral.md
-            - name: İletilere göz atma
-              href: message-browsing.md
             - name: Otomatik yönlendirme ile varlıklar arasında zincir oluşturma
               href: service-bus-auto-forwarding.md
             - name: İşlem gerçekleştirme
@@ -236,6 +234,18 @@
           href: service-bus-integrate-with-rabbitmq.md
     - name: Yönetme
       items:
+        - name: Bir kuyruk veya abonelik için oturumları etkinleştirme
+          href: enable-message-sessions.md
+        - name: Bir kuyruk veya konu için yinelenen saptamayı etkinleştirme
+          href: enable-duplicate-detection.md
+        - name: Bir kuyruk veya konu için bölümleri etkinleştirme
+          href: enable-partitions.md
+        - name: Bir kuyruk veya abonelik için Otomatik iletmeyi etkinleştirme
+          href: enable-auto-forward.md
+        - name: Bir kuyruk veya abonelik için atılacak alma özelliğini etkinleştirme
+          href: enable-dead-letter.md
+        - name: İleti sayaçlarını al
+          href: message-counters.md
         - name: Bölgeler arasında taşıma
           href: move-across-regions.md
         - name: Mesajlaşma birimlerini otomatik olarak güncelleştirme
@@ -317,6 +327,8 @@
       href: 'https://github.com/Azure/azure-sdk-for-ruby'
     - name: Başlayın
       href: 'https://github.com/Azure/azure-service-bus-go'
+    - name: Azure CLI
+      href: /cli/azure/servicebus
     - name: Azure PowerShell
       href: /powershell/module/az.servicebus
     - name: REST
@@ -335,7 +347,7 @@
 - name: Kaynaklar
   items:
     - name: SSS
-      href: service-bus-faq.md
+      href: service-bus-faq.yml
     - name: Microsoft Learn ile becerilerinizi geliştirin
       href: /learn/browse/?products=azure-service-bus
     - name: Azure Yol Haritası

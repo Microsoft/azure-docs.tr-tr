@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/16/2021
-ms.openlocfilehash: 8943986bf8e8c082889d3a0b18618ac54c75e6d6
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 884f048ac099cfc6b799fe266172a0eecef3db6f
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105022985"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107478378"
 ---
 # <a name="configure-data-collection-for-the-azure-monitor-agent-preview"></a>Azure Izleyici Aracısı için veri toplamayı yapılandırma (Önizleme)
 
@@ -110,7 +110,7 @@ REST API kullanarak bir veri toplama kuralı ve ilişkilendirmeleri oluşturmak 
 
 ## <a name="create-association-using-resource-manager-template"></a>Kaynak Yöneticisi şablonu kullanarak ilişkilendirme oluşturma
 
-Bir Kaynak Yöneticisi şablonu kullanarak bir veri toplama kuralı oluşturamazsınız, ancak bir Azure sanal makinesi veya Azure Arc etkin sunucusu arasında Kaynak Yöneticisi şablonu kullanarak bir ilişki oluşturabilirsiniz. Örnek şablonlar için bkz. [Azure izleyici 'de veri toplama kuralları için Kaynak Yöneticisi şablon örnekleri](./resource-manager-data-collection-rules.md) .
+Bir Azure sanal makinesi veya Azure Arc etkin sunucusu arasında Kaynak Yöneticisi şablonu kullanarak bir ilişki oluşturabilirsiniz. Örnek şablonlar için bkz. [Azure izleyici 'de veri toplama kuralları için Kaynak Yöneticisi şablon örnekleri](./resource-manager-data-collection-rules.md) .
 
 
 

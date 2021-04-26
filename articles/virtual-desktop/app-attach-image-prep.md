@@ -1,25 +1,21 @@
 ---
-title: Windows sanal masaüstü hazırlama MALTı uygulama iliştirme görüntü önizlemesi-Azure
+title: Windows sanal masaüstü, MALTı uygulama iliştirme görüntüsünü hazırlama-Azure
 description: Bir Windows sanal masaüstü konak havuzu için MSIX uygulama iliştirme görüntüsü oluşturma.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 12/14/2020
+ms.date: 04/13/2021
 ms.author: helohr
-manager: lizross
-ms.openlocfilehash: 204cc9a05d62caf62179100fa3496be422a3ec0c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+manager: femila
+ms.openlocfilehash: 443f117907381862639564dfbf9752562f4a3564
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97426014"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107363674"
 ---
 # <a name="prepare-an-msix-image-for-windows-virtual-desktop"></a>Windows sanal masaüstü için MSIX görüntüsü hazırlama
 
-> [!IMPORTANT]
-> MSIX uygulama iliştirme Şu anda genel önizlemededir.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-MSIX uygulama iliştirme (Önizleme), bir MSIX paketinden Kullanıcı oturumuna dinamik olarak uygulama eklemenize olanak tanıyan bir uygulama katmanlama çözümüdür. MSIX paket sistemi, uygulamaları işletim sisteminden ayırır ve bu da sanal makineler için görüntü oluşturmayı kolaylaştırır. MSIX paketi ayrıca kullanıcılarınızın sanal makinelerinde erişebileceği uygulamalar üzerinde daha fazla denetim sağlar. Aynı hatta uygulamaları ana görüntüden ayırarak kullanıcılara daha sonra verebilirsiniz.
+MSIX uygulama iliştirme, bir MSIX paketinden Kullanıcı oturumuna dinamik olarak uygulama iliştirmeye olanak tanıyan bir uygulama katmanlama çözümüdür. MSIX paket sistemi, uygulamaları işletim sisteminden ayırır ve bu da sanal makineler için görüntü oluşturmayı kolaylaştırır. MSIX paketi ayrıca kullanıcılarınızın sanal makinelerinde erişebileceği uygulamalar üzerinde daha fazla denetim sağlar. Aynı hatta uygulamaları ana görüntüden ayırarak kullanıcılara daha sonra verebilirsiniz.
 
 ## <a name="create-a-vhd-or-vhdx-package-for-msix"></a>MSIX için bir VHD veya VHDX paketi oluşturma
 

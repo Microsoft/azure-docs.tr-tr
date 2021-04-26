@@ -9,21 +9,21 @@ ms.workload: infrastructure
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 2bcaf85f61a4d8cf4d23c9c5be7f46d765d77dbb
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: a5e0e5544c5e66f43b56de49beaa3ef3932d33f9
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102551051"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107776888"
 ---
-# <a name="create-a-vm-from-a-generalized-image-version-using-the-cli"></a>CLı kullanarak Genelleştirilmiş görüntü sürümünden VM oluşturma
+# <a name="create-a-vm-from-a-generalized-image-version-using-the-azure-cli"></a>Azure CLı kullanarak Genelleştirilmiş görüntü sürümünden VM oluşturma
 
 Paylaşılan görüntü galerisinde depolanan [Genelleştirilmiş görüntü sürümünden](./shared-image-galleries.md#generalized-and-specialized-images) bir VM oluşturun. Özel bir görüntü kullanarak bir VM oluşturmak istiyorsanız, bkz. [özel bir GÖRÜNTÜDEN VM oluşturma](vm-specialized-image-version-powershell.md). 
 
 
 ## <a name="get-the-image-id"></a>Görüntü KIMLIĞINI al
 
-Tanımların adını ve KIMLIĞINI görmek için [az Sig Image-Definition List](/cli/azure/sig/image-definition#az-sig-image-definition-list) öğesini kullanarak bir galerideki görüntü tanımlarını listeleyin.
+Tanımların adını ve KIMLIĞINI görmek için [az Sig Image-Definition List](/cli/azure/sig/image-definition#az_sig_image_definition_list) öğesini kullanarak bir galerideki görüntü tanımlarını listeleyin.
 
 ```azurecli-interactive 
 resourceGroup=myGalleryRG
@@ -33,7 +33,7 @@ az sig image-definition list --resource-group $resourceGroup --gallery-name $gal
 
 ## <a name="create-the-vm"></a>Sanal makineyi oluşturma
 
-[az vm create](/cli/azure/vm#az-vm-create) kullanarak VM oluşturun. Görüntünün en son sürümünü kullanmak için, `--image` görüntü TANıMıNıN kimliğine ayarlayın. 
+[az vm create](/cli/azure/vm#az_vm_create) kullanarak VM oluşturun. Görüntünün en son sürümünü kullanmak için, `--image` görüntü TANıMıNıN kimliğine ayarlayın. 
 
 Kaynak adlarını bu örnekte gereken şekilde değiştirin. 
 

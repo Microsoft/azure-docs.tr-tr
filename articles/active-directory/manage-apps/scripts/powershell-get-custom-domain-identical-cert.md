@@ -3,7 +3,7 @@ title: PowerShell örneği-aynı CERT ile uygulama proxy 'Si uygulamaları
 description: Aynı sertifikayla yayınlanan tüm Azure Active Directory (Azure AD) uygulama proxy uygulamalarını listeleyen PowerShell örneği.
 services: active-directory
 author: kenwith
-manager: daveba
+manager: mtillman
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
@@ -11,12 +11,12 @@ ms.topic: sample
 ms.date: 12/05/2019
 ms.author: kenwith
 ms.reviewer: japere
-ms.openlocfilehash: a45333b9df2e75e443ed40568943c03c703799f3
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 18200b5571c84c8bd442d5dcb2714c6d52d4bcf5
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105044116"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107377081"
 ---
 # <a name="get-all-application-proxy-apps-that-are-published-with-the-identical-certificate"></a>Aynı sertifikayla yayınlanan tüm uygulama proxy uygulamalarını al
 

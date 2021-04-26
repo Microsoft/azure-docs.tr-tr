@@ -10,12 +10,12 @@ ms.date: 05/01/2020
 ms.author: cynthn
 ms.reviewer: akjosh
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 7c35be8821b6763531b43ec85b10325e91f8bc5f
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 7bfe8b1255c88878c2dc4661e9daa3e16397e9f4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102556869"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792282"
 ---
 # <a name="create-an-image-version-from-a-vm-in-azure-using-the-azure-cli"></a>Azure CLı kullanarak Azure 'daki bir VM 'den görüntü sürümü oluşturma
 
@@ -36,13 +36,13 @@ Bu makalede çalışırken, kaynak adlarını gereken yerde değiştirin.
 
 ## <a name="get-information-about-the-vm"></a>VM hakkında bilgi edinme
 
-[Az VM List](/cli/azure/vm#az-vm-list)kullanılarak kullanılabilir olan VM 'lerin bir listesini görebilirsiniz. 
+[Az VM List](/cli/azure/vm#az_vm_list)kullanılarak kullanılabilir olan VM 'lerin bir listesini görebilirsiniz. 
 
 ```azurecli-interactive
 az vm list --output table
 ```
 
-VM adını ve içindeki kaynak grubunu öğrendikten sonra [az VM Get-instance-View](/cli/azure/vm#az-vm-get-instance-view)kullanarak VM 'nin kimliğini alın. 
+VM adını ve içindeki kaynak grubunu öğrendikten sonra [az VM Get-instance-View](/cli/azure/vm#az_vm_get_instance_view)kullanarak VM 'nin kimliğini alın. 
 
 ```azurecli-interactive
 az vm get-instance-view -g MyResourceGroup -n MyVm --query id
@@ -59,7 +59,7 @@ Görüntü tanımınızın doğru türde olduğundan emin olun. VM 'yi genelleş
 
 Bir görüntü tanımı için belirtebileceğiniz değerler hakkında daha fazla bilgi için bkz. [görüntü tanımları](./shared-image-galleries.md#image-definitions).
 
-Galeride [az Sig Image-Definition Create](/cli/azure/sig/image-definition#az-sig-image-definition-create)kullanarak bir görüntü tanımı oluşturun.
+Galeride [az Sig Image-Definition Create](/cli/azure/sig/image-definition#az_sig_image_definition_create)kullanarak bir görüntü tanımı oluşturun.
 
 Bu örnekte, görüntü tanımı *Myımagedefinition* olarak adlandırılır ve [özelleştirilmiş](./shared-image-galleries.md#generalized-and-specialized-images) bir Linux işletim sistemi görüntüsü içindir. Windows işletim sistemi kullanan görüntülerin tanımını oluşturmak için kullanın `--os-type Windows` . 
 
@@ -78,7 +78,7 @@ az sig image-definition create \
 
 ## <a name="create-the-image-version"></a>Görüntü sürümü oluşturma
 
-[Az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az-sig-image-version-create)kullanarak VM 'den bir görüntü sürümü oluşturun.  
+[Az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az_sig_image_version_create)kullanarak VM 'den bir görüntü sürümü oluşturun.  
 
 Görüntü sürümü için izin verilen karakterler rakamlardan ve dönemlerdir. Sayılar 32 bitlik bir tamsayı aralığında olmalıdır. Biçim: *MajorVersion*. *MinorVersion*. *Düzeltme Eki*.
 

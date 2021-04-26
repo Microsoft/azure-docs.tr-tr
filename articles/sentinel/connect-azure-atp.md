@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/30/2019
 ms.author: yelevin
-ms.openlocfilehash: 1fe36dc7b3c04f033c1b693b657e07bcf42e3223
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 7a26091d4985b6fdb17120c6fd70476a750c94a9
+ms.sourcegitcommit: 3ed0f0b1b66a741399dc59df2285546c66d1df38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101715012"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107714120"
 ---
 # <a name="connect-data-from-microsoft-defender-for-identity-formerly-azure-advanced-threat-protection"></a>Kimlik için Microsoft Defender 'daki verileri bağlama (eski adıyla Azure Gelişmiş tehdit koruması)
 
@@ -34,7 +34,7 @@ Güvenlik uyarılarına ek olarak sistem durumu uyarılarını iletmek için, Mi
 ## <a name="prerequisites"></a>Önkoşullar
 
 - Genel yönetici veya Güvenlik Yöneticisi izinlerine sahip Kullanıcı
-- Kimlik için Microsoft Defender 'ın önizleme müşterisi olmanız ve kimlik ve Microsoft Cloud App Security için Microsoft Defender arasında tümleştirmeyi etkinleştirmeniz gerekir. Daha fazla bilgi için bkz. [kimlik tümleştirmesi Için Microsoft Defender](https://www.microsoft.com/microsoft-365/identity/advance-threat-protection).
+- Kimlik için Microsoft Defender 'ın önizleme müşterisi olmanız ve kimlik ve Microsoft Cloud App Security için Microsoft Defender arasında tümleştirmeyi etkinleştirmeniz gerekir. Daha fazla bilgi için bkz. [kimlik tümleştirmesi Için Microsoft Defender](/cloud-app-security/mdi-integration).
 
 ## <a name="connect-to-microsoft-defender-for-identity"></a>Kimlik için Microsoft Defender 'a bağlanma
 
@@ -42,7 +42,7 @@ Ağınızda kimlik önizleme sürümünün Microsoft Defender 'ın [etkinleştir
 Kimlik için Microsoft Defender dağıtılırsa ve verileriniz geri alıyorsa şüpheli uyarılar Azure Sentinel 'e kolayca akışını sağlayabilir. Uyarıların Azure Sentinel 'e akışını başlatması 24 saate kadar sürebilir.
 
 
-1. Kimlik için Microsoft Defender 'ı Azure Sentinel 'e bağlamak için öncelikle kimlik ve Microsoft Cloud App Security Microsoft Defender arasındaki tümleştirmeyi etkinleştirmeniz gerekir. Bunun nasıl yapılacağı hakkında bilgi için bkz. [kimlik tümleştirmesi Için Microsoft Defender](https://www.microsoft.com/microsoft-365/identity/advance-threat-protection).
+1. Kimlik için Microsoft Defender 'ı Azure Sentinel 'e bağlamak için öncelikle kimlik ve Microsoft Cloud App Security Microsoft Defender arasındaki tümleştirmeyi etkinleştirmeniz gerekir. Bunun nasıl yapılacağı hakkında bilgi için bkz. [kimlik tümleştirmesi Için Microsoft Defender](/cloud-app-security/mdi-integration).
 
 1. Azure Sentinel 'de **veri bağlayıcıları** ' nı seçin ve ardından **Microsoft Defender for Identity (Önizleme)** kutucuğuna tıklayın.
 
@@ -57,5 +57,5 @@ Kimlik için Microsoft Defender dağıtılırsa ve verileriniz geri alıyorsa ş
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Bu belgede, kimlik için Microsoft Defender 'ı Azure Sentinel 'e bağlamayı öğrendiniz. Azure Sentinel hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
-- [Verilerinize nasıl görünürlük alabileceğinizi ve olası tehditleri](quickstart-get-visibility.md)öğrenin.
+- [Verilerinize ve olası tehditlere nasıl görünürlük alabileceğinizi](quickstart-get-visibility.md)öğrenin.
 - [Azure Sentinel ile tehditleri algılamaya](tutorial-detect-threats-built-in.md)başlayın.

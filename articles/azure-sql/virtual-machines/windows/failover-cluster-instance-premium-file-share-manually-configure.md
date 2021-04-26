@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 06/18/2020
 ms.author: mathoma
-ms.openlocfilehash: 80fe9f03f2c57eab8527e553153f3e65315a54bf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ddd25c605ef159bddfb8a9c7cb4d02ac7094c511
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102034855"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107482220"
 ---
 # <a name="create-an-fci-with-a-premium-file-share-sql-server-on-azure-vms"></a>Premium dosya paylaşımıyla bir FCı oluşturma (Azure VM 'lerinde SQL Server)
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
@@ -214,6 +214,7 @@ Küme bağlantı seçenekleri hakkında daha fazla bilgi için bkz. [Azure VM 'l
 - Microsoft Dağıtılmış İşlem Düzenleyicisi (MSDTC), Windows Server 2016 ve önceki sürümlerde desteklenmez. 
 - Premium dosya paylaşımıyla yük devretme kümesi için FILESTREAM desteklenmez. FILESTREAM kullanmak için, [depolama alanları doğrudan](failover-cluster-instance-storage-spaces-direct-manually-configure.md) veya [Azure Paylaşılan disklerini](failover-cluster-instance-azure-shared-disks-manually-configure.md) kullanarak kümenizi dağıtın.
 - Yalnızca [hafif yönetim modunda](sql-server-iaas-agent-extension-automate-management.md#management-modes) SQL IaaS Aracısı Uzantısı ile kaydolma desteklenir. 
+- Veritabanı anlık görüntüleri, [seyrek dosya sınırlamaları nedeniyle Azure dosyaları](/rest/api/storageservices/features-not-supported-by-the-azure-file-service)ile Şu anda desteklenmiyor.  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,10 +1,10 @@
 ### YamlMime:Hub
 title: Azure güvenlik belgeleri
-summary: Güvenlik, Azure’un her yönüne tümleştirilmiştir. Azure, genel güvenlik zekasından türetilmiş benzersiz güvenlik avantajları, müşteriye dönük gelişmiş denetimler ve güvenli bir sağlamlaştırılmış altyapı sağlar. Bu güçlü birleşim, uygulama ve verilerinizi korumaya, uyum çabalarınızı desteklemeye ve her boyuttan kuruluşlar için uygun maliyetli güvenlik sağlamanıza yardımcı olur.
+summary: 'Güvenlik, Azure’un her yönüne tümleştirilmiştir. Azure, genel güvenlik zekasından türetilmiş benzersiz güvenlik avantajları, müşteriye dönük gelişmiş denetimler ve güvenli bir sağlamlaştırılmış altyapı sağlar. Bu güçlü birleşim, uygulama ve verilerinizi korumaya, uyum çabalarınızı desteklemeye ve her boyuttan kuruluşlar için uygun maliyetli güvenlik sağlamanıza yardımcı olur.'
 brand: azure
 metadata:
   title: Azure güvenlik belgeleri
-  description: Azure’da güvenlik hakkında bilgi edinin. Güvenlik temelleri, en iyi deneyimler ve desenler ve Azure Güvenlik Merkezi hakkındaki bilgilere bakın.
+  description: 'Azure’da güvenlik hakkında bilgi edinin. Güvenlik temelleri, en iyi deneyimler ve desenler ve Azure Güvenlik Merkezi hakkındaki bilgilere bakın.'
   services: security
   ms.service: security
   ms.subservice: na
@@ -14,228 +14,225 @@ metadata:
   ms.author: terrylan
   manager: rkarlin
   ms.date: 02/05/2021
-  ms.openlocfilehash: 368cd62109d1d5d74d26b22d9384cb4bf56a7944
-  ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
-  ms.translationtype: MT
-  ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/24/2021
-  ms.locfileid: "105044694"
 highlightedContent:
   items:
-  - title: Azure güvenliğe giriş
-    itemType: overview
-    url: ./fundamentals/overview.md
-  - title: Güvenlikle ilgili en iyi uygulamalar ve modeller
-    itemType: concept
-    url: ./fundamentals/best-practices-and-patterns.md
-  - title: Azure Güvenlik Merkezi nedir?
-    itemType: overview
-    url: ../security-center/security-center-introduction.md
+    - title: Güvenlik yolculuğuna başlayın
+      itemType: get-started
+      url: ./journey/index.yml
+    - title: İş gereksinimleriniz için güvenlik hizmetlerini bulun
+      itemType: overview
+      url: ./fundamentals/end-to-end.md
+    - title: Bulut dağıtımlarınızın güvenliğini sağlamak için en iyi uygulamaları ve önerileri kullanın
+      itemType: concept
+      url: ./benchmarks/introduction.md
 conceptualContent:
   items:
-  - title: Temel Konular
-    links:
-    - url: ./fundamentals/technical-capabilities.md
-      itemType: overview
-      text: Azure güvenliğe yönelik teknik özellikler
-    - url: https://gallery.technet.microsoft.com/Shared-Responsibilities-81d0ff91
-      itemType: concept
-      text: Bulut bilişim için paylaşılan sorumluluklar
-    - url: ./benchmarks/index.yml
-      itemType: concept
-      text: Azure hizmetleri için güvenlik denetimleri
-    footerLink:
-      url: ./fundamentals/index.yml
-      text: Daha fazla göster
-  - title: Geliştiriciler
-    links:
-    - url: ./develop/secure-dev-overview.md
-      itemType: overview
-      text: En iyi güvenli geliştirme deneyimleri
-    - url: ./develop/secure-develop.md
-      itemType: tutorial
-      text: Güvenli uygulamalar geliştirme
-    - url: ./develop/threat-modeling-tool.md
-      itemType: concept
-      text: Microsoft Tehdit Modelleme aracı
-    footerLink:
-      url: ./develop/index.yml
-      text: Daha fazla göster
-  - title: Kıyaslamalar ve öneriler
-    links:
-    - url: ./benchmarks/introduction.md
-      itemType: download
-      text: Azure bulut güvenliği kıyaslaması
-    - url: ../security-center/security-center-remediate-recommendations.md
-      itemType: overview
-      text: Azure Güvenlik Merkezi önerileri
-    footerLink:
-      url: ./benchmarks/index.yml
-      text: Daha fazla göster
-  - title: Gizlilikler ve anahtarlar
-    links:
-    - url: ../key-vault/general/overview.md
-      itemType: overview
-      text: Azure Anahtar Kasası nedir?
-    - url: ../key-vault/secrets/quick-create-cli.md
-      itemType: quickstart
-      text: Gizli dizi ayarlama ve alma
-    - url: ../dedicated-hsm/overview.md
-      itemType: overview
-      text: Azure Ayrılmış HSM nedir?
-    footerLink:
-      url: ../key-vault/index.yml
-      text: Daha fazla göster
-  - title: Veri koruma
-    links:
-    - url: ./fundamentals/encryption-atrest.md
-      itemType: concept
-      text: Bekleyen Veri Şifreleme
-    - url: ./fundamentals/data-encryption-best-practices.md
-      itemType: concept
-      text: Veri güvenliği ve şifreleme için en iyi uygulamalar
-    - url: ../storage/blobs/security-recommendations.md
-      itemType: concept
-      text: Depolama alanı güvenliği
-    footerLink:
-      url: ./fundamentals/encryption-overview.md
-      text: Daha fazla göster
-  - title: Kimlik yönetimi
-    links:
-    - url: ../active-directory/hybrid/choose-ad-authn.md
-      itemType: concept
-      text: Doğru kimlik doğrulaması yöntemini seçme
-    - url: ./fundamentals/steps-secure-identity.md
-      itemType: concept
-      text: Kimlik altyapınızın güvenliğini sağlama
-    - url: ./fundamentals/identity-management-best-practices.md
-      itemType: concept
-      text: En iyi güvenlik uygulamaları
-    footerLink:
-      url: ./fundamentals/identity-management-overview.md
-      text: Daha fazla göster
-  - title: Güvenliği izleme
-    links:
-    - url: ../security-center/security-center-get-started.md
-      itemType: quickstart
-      text: Aboneliğinizi Güvenlik Merkezi’ne ekleme
-    - url: ../security-center/security-center-just-in-time.md
-      itemType: how-to-guide
-      text: Tam zamanında sanal makine erişimi
-    - url: ../security-center/tutorial-security-policy.md
-      itemType: how-to-guide
-      text: Güvenlik ilkeleriyle çalışma
-    footerLink:
-      url: ../security-center/index.yml
-      text: Daha fazla göster
-  - title: IoT güvenliğini izleme
-    links:
-    - url: ../defender-for-iot/overview.md
-      itemType: overview
-      text: IoT için Azure Güvenlik Merkezi’ne giriş
-    - url: ../defender-for-iot/architecture.md
-      itemType: how-to-guide
-      text: IoT için Azure Güvenlik Merkezi mimarisi
-    - url: ../defender-for-iot/getting-started.md
-      itemType: how-to-guide
-      text: IoT için Azure Güvenlik Merkezi’ni kullanmaya başlama
-    footerLink:
-      url: /azure/asc-for-iot/
-      text: Daha fazla göster
-  - title: Güvenlik analizi
-    links:
-    - url: ../sentinel/overview.md
-      itemType: overview
-      text: Azure Sentinel önizlemesi nedir?
-    - url: ../sentinel/quickstart-onboard.md
-      itemType: quickstart
-      text: Azure Sentinel önizlemesini ekleme
-    - url: ../sentinel/quickstart-get-visibility.md
-      itemType: quickstart
-      text: Azure Sentinel önizlemesini kullanmaya başlama
-    footerLink:
-      url: ../sentinel/index.yml
-      text: Daha fazla göster
-  - title: Tehdit koruması
-    links:
-    - url: ../security-center/security-center-alerts-overview.md
-      itemType: concept
-      text: Azure Güvenlik Merkezi'nde güvenlik uyarıları
-    - url: ../storage/common/azure-defender-storage-configure.md
-      itemType: concept
-      text: Depolama için Azure Defender
-    - url: ../azure-sql/database/threat-detection-overview.md
-      itemType: concept
-      text: SQL için Azure Defender
-    footerLink:
-      url: ./fundamentals/threat-detection.md
-      text: Daha fazla göster
-  - title: Günlük kaydı ve denetim
-    links:
-    - url: ./fundamentals/log-audit.md
-      itemType: concept
-      text: Azure günlük kaydı ve denetim
-    - url: ./fundamentals/management-monitoring-overview.md
-      itemType: overview
-      text: Yönetim ve izlemeye genel bakış
-    footerLink:
-      url: /search/?category=Documentation&scope=azure&search=security%2baudit%2blog
-      text: Daha fazlası için arama yapın
-  - title: Ağ güvenliği
-    links:
-    - url: ./fundamentals/network-overview.md
-      itemType: overview
-      text: Güvenliğe genel bakış
-    - url: ./fundamentals/network-best-practices.md
-      itemType: concept
-      text: En iyi güvenlik uygulamaları
-    - url: ../ddos-protection/fundamental-best-practices.md
-      itemType: concept
-      text: DDOS Koruması
-  - title: Altyapı güvenliği
-    links:
-    - url: ./fundamentals/physical-security.md
-      itemType: concept
-      text: Azure tesis, şirket içi ve fiziksel güvenliği
-    - url: ./fundamentals/infrastructure-network.md
-      itemType: concept
-      text: Ağ mimarisi
-    - url: ./fundamentals/protection-customer-data.md
-      itemType: concept
-      text: Müşteri veri koruması
-    footerLink:
-      url: ./fundamentals/infrastructure.md
-      text: Daha fazla göster
-  - title: Sanal makine güvenliği
-    links:
-    - url: ./fundamentals/virtual-machines-overview.md
-      itemType: overview
-      text: Güvenliğe genel bakış
-    - url: ./fundamentals/iaas.md
-      itemType: concept
-      text: IaaS iş yükleri için en iyi deneyimler
-    - url: ./fundamentals/azure-marketplace-images.md
-      itemType: concept
-      text: Güvenlik yapılandırması önerileri
-  - title: Veritabanı güvenliği
-    links:
-    - url: ./fundamentals/encryption-overview.md#encryption-of-data-at-rest-with-azure-sql-database
-      itemType: overview
-      text: Veri güvenliği
-    - url: ./fundamentals/paas-applications-using-sql.md
-      itemType: concept
-      text: PaaS veritabanları için en iyi yöntemler
-    - url: ./fundamentals/database-security-checklist.md
-      itemType: concept
-      text: Güvenlik denetim listesi
-  - title: İdare ve uyum
-    links:
-    - url: ../governance/policy/overview.md
-      itemType: overview
-      text: Azure İlkesi hizmeti
-    - url: ../governance/blueprints/overview.md
-      itemType: overview
-      text: Azure Blueprints hizmeti
-    footerLink:
-      url: ../governance/index.yml
-      text: Daha fazla göster
+    - title: Temel Bilgiler
+      links:
+        - url: ./fundamentals/overview.md
+          itemType: overview
+          text: Azure güvenliğe giriş
+        - url: 'https://gallery.technet.microsoft.com/Shared-Responsibilities-81d0ff91'
+          itemType: concept
+          text: Bulut bilişim için paylaşılan sorumluluklar
+        - url: ./benchmarks/index.yml
+          itemType: concept
+          text: Azure hizmetleri için güvenlik denetimleri
+      footerLink:
+        url: ./fundamentals/index.yml
+        text: Daha fazla göster
+    - title: Geliştiriciler
+      links:
+        - url: ./develop/secure-dev-overview.md
+          itemType: overview
+          text: En iyi güvenli geliştirme deneyimleri
+        - url: ./develop/secure-develop.md
+          itemType: tutorial
+          text: Güvenli uygulamalar geliştirme
+        - url: ./develop/threat-modeling-tool.md
+          itemType: concept
+          text: Microsoft Tehdit Modelleme aracı
+      footerLink:
+        url: ./develop/index.yml
+        text: Daha fazla göster
+    - title: Güvenlikle ilgili en iyi uygulamalar ve modeller
+      links:
+        - url: ./fundamentals/identity-management-best-practices.md
+          itemType: concept
+          text: Kimlik yönetimi
+        - url: ./fundamentals/network-best-practices.md
+          itemType: concept
+          text: Ağ güvenliği
+        - url: ./fundamentals/paas-deployments.md
+          itemType: concept
+          text: PaaS dağıtımlarının güvenliğini sağlama
+      footerLink:
+        url: ./fundamentals/best-practices-and-patterns.md
+        text: Daha fazla göster
+    - title: Gizlilikler ve anahtarlar
+      links:
+        - url: ../key-vault/general/overview.md
+          itemType: overview
+          text: Azure Anahtar Kasası nedir?
+        - url: ../key-vault/secrets/quick-create-cli.md
+          itemType: quickstart
+          text: Gizli dizi ayarlama ve alma
+        - url: ../dedicated-hsm/overview.md
+          itemType: overview
+          text: Azure Ayrılmış HSM nedir?
+      footerLink:
+        url: ../key-vault/index.yml
+        text: Daha fazla göster
+    - title: Veri koruma
+      links:
+        - url: ./fundamentals/encryption-atrest.md
+          itemType: concept
+          text: Bekleyen Veri Şifreleme
+        - url: ./fundamentals/data-encryption-best-practices.md
+          itemType: concept
+          text: Veri güvenliği ve şifreleme için en iyi uygulamalar
+        - url: ../storage/blobs/security-recommendations.md
+          itemType: concept
+          text: Depolama alanı güvenliği
+      footerLink:
+        url: ./fundamentals/encryption-overview.md
+        text: Daha fazla göster
+    - title: Kimlik yönetimi
+      links:
+        - url: ../active-directory/hybrid/choose-ad-authn.md
+          itemType: concept
+          text: Doğru kimlik doğrulaması yöntemini seçme
+        - url: ./fundamentals/steps-secure-identity.md
+          itemType: concept
+          text: Kimlik altyapınızın güvenliğini sağlama
+        - url: ./fundamentals/identity-management-best-practices.md
+          itemType: concept
+          text: En iyi güvenlik uygulamaları
+      footerLink:
+        url: ./fundamentals/identity-management-overview.md
+        text: Daha fazla göster
+    - title: Güvenliği izleme
+      links:
+        - url: ../security-center/security-center-get-started.md
+          itemType: quickstart
+          text: Aboneliğinizi Güvenlik Merkezi’ne ekleme
+        - url: ../security-center/security-center-just-in-time.md
+          itemType: how-to-guide
+          text: Tam zamanında sanal makine erişimi
+        - url: ../security-center/tutorial-security-policy.md
+          itemType: how-to-guide
+          text: Güvenlik ilkeleriyle çalışma
+      footerLink:
+        url: ../security-center/index.yml
+        text: Daha fazla göster
+    - title: IoT güvenliğini izleme
+      links:
+        - url: ../defender-for-iot/overview.md
+          itemType: overview
+          text: IoT için Azure Güvenlik Merkezi’ne giriş
+        - url: ../defender-for-iot/architecture.md
+          itemType: how-to-guide
+          text: IoT için Azure Güvenlik Merkezi mimarisi
+        - url: ../defender-for-iot/getting-started.md
+          itemType: how-to-guide
+          text: IoT için Azure Güvenlik Merkezi’ni kullanmaya başlama
+      footerLink:
+        url: /azure/asc-for-iot/
+        text: Daha fazla göster
+    - title: Güvenlik analizi
+      links:
+        - url: ../sentinel/overview.md
+          itemType: overview
+          text: Azure Sentinel önizlemesi nedir?
+        - url: ../sentinel/quickstart-onboard.md
+          itemType: quickstart
+          text: Azure Sentinel önizlemesini ekleme
+        - url: ../sentinel/quickstart-get-visibility.md
+          itemType: quickstart
+          text: Azure Sentinel önizlemesini kullanmaya başlama
+      footerLink:
+        url: ../sentinel/index.yml
+        text: Daha fazla göster
+    - title: Tehdit koruması
+      links:
+        - url: ../security-center/security-center-alerts-overview.md
+          itemType: concept
+          text: Azure Güvenlik Merkezi'nde güvenlik uyarıları
+        - url: ../storage/common/azure-defender-storage-configure.md
+          itemType: concept
+          text: Depolama için Azure Defender
+        - url: ../azure-sql/database/threat-detection-overview.md
+          itemType: concept
+          text: SQL için Azure Defender
+      footerLink:
+        url: ./fundamentals/threat-detection.md
+        text: Daha fazla göster
+    - title: Günlük kaydı ve denetim
+      links:
+        - url: ./fundamentals/log-audit.md
+          itemType: concept
+          text: Azure günlük kaydı ve denetim
+        - url: ./fundamentals/management-monitoring-overview.md
+          itemType: overview
+          text: Yönetim ve izlemeye genel bakış
+      footerLink:
+        url: /search/?category=Documentation&scope=azure&search=security%2baudit%2blog
+        text: Daha fazlası için arama yapın
+    - title: Ağ güvenliği
+      links:
+        - url: ./fundamentals/network-overview.md
+          itemType: overview
+          text: Güvenliğe genel bakış
+        - url: ./fundamentals/network-best-practices.md
+          itemType: concept
+          text: En iyi güvenlik uygulamaları
+        - url: ../ddos-protection/fundamental-best-practices.md
+          itemType: concept
+          text: DDOS Koruması
+    - title: Altyapı güvenliği
+      links:
+        - url: ./fundamentals/physical-security.md
+          itemType: concept
+          text: 'Azure tesis, şirket içi ve fiziksel güvenliği'
+        - url: ./fundamentals/infrastructure-network.md
+          itemType: concept
+          text: Ağ mimarisi
+        - url: ./fundamentals/protection-customer-data.md
+          itemType: concept
+          text: Müşteri veri koruması
+      footerLink:
+        url: ./fundamentals/infrastructure.md
+        text: Daha fazla göster
+    - title: Sanal makine güvenliği
+      links:
+        - url: ./fundamentals/virtual-machines-overview.md
+          itemType: overview
+          text: Güvenliğe genel bakış
+        - url: ./fundamentals/iaas.md
+          itemType: concept
+          text: IaaS iş yükleri için en iyi deneyimler
+        - url: ./fundamentals/azure-marketplace-images.md
+          itemType: concept
+          text: Güvenlik yapılandırması önerileri
+    - title: Veritabanı güvenliği
+      links:
+        - url: ./fundamentals/encryption-overview.md#encryption-of-data-at-rest-with-azure-sql-database
+          itemType: overview
+          text: Veri güvenliği
+        - url: ./fundamentals/paas-applications-using-sql.md
+          itemType: concept
+          text: PaaS veritabanları için en iyi yöntemler
+        - url: ./fundamentals/database-security-checklist.md
+          itemType: concept
+          text: Güvenlik denetim listesi
+    - title: İdare ve uyum
+      links:
+        - url: ../governance/policy/overview.md
+          itemType: overview
+          text: Azure İlkesi hizmeti
+        - url: ../governance/blueprints/overview.md
+          itemType: overview
+          text: Azure Blueprints hizmeti
+      footerLink:
+        url: ../governance/index.yml
+        text: Daha fazla göster

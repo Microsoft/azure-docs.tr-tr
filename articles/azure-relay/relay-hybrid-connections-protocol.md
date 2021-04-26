@@ -3,12 +3,12 @@ title: Azure Relay Karma Bağlantılar protokol Kılavuzu | Microsoft Docs
 description: Bu makalede, dinleyici ve gönderici rollerinde istemcileri bağlamak için Karma Bağlantılar geçişine sahip istemci tarafı etkileşimleri açıklanmaktadır.
 ms.topic: article
 ms.date: 06/23/2020
-ms.openlocfilehash: 36321f88de173a37c9aa6615c4c0f2b29aec9f20
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 95eb6a66ac7580f115c85ddb258768b9eef62321
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97976971"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107314227"
 ---
 # <a name="azure-relay-hybrid-connections-protocol"></a>Azure Relay Karma Bağlantılar Protokolü
 
@@ -138,7 +138,7 @@ Sorgu dizesi parametre seçenekleri aşağıdaki gibidir.
 | `sb-hc-action`   | Evet      | Dinleyici rolü için parametre **SB-HC-Action = dinleme** olmalıdır
 | `{path}`         | Yes      | Bu dinleyiciyi kaydettirmek için önceden yapılandırılmış karma bağlantının URL kodlu ad alanı yolu. Bu ifade, sabit `$hc/` yol kısmına eklenir.
 | `sb-hc-token`    | Yes\*    | Dinleyici, **dinleme** hakkını karşılayan ad alanı veya karma bağlantı için GEÇERLI, URL kodlamalı Service Bus paylaşılan erişim belirteci sağlamalıdır.
-| `sb-hc-id`       | No       | Bu istemci tarafından sağlanan isteğe bağlı KIMLIK, uçtan uca tanılama izlemesini sağlar.
+| `sb-hc-id`       | Hayır       | Bu istemci tarafından sağlanan isteğe bağlı KIMLIK, uçtan uca tanılama izlemesini sağlar.
 
 WebSocket bağlantısı, karma bağlantı yolunun kaydedilmediği veya geçersiz ya da eksik bir belirteç ya da başka bir hata nedeniyle başarısız olursa, normal HTTP 1,1 durum geri bildirim modeli kullanılarak hata geri bildirimi sağlanır. Durum açıklaması, Azure destek personeline iletilebiliyor bir hata izleme kimliği içeriyor:
 
@@ -151,7 +151,7 @@ WebSocket bağlantısı, karma bağlantı yolunun kaydedilmediği veya geçersiz
 
 WebSocket bağlantısı, başlangıçta kurulduktan sonra hizmet tarafından kasıtlı olarak kapalıysa, bunu yapmanın nedeni, uygun bir WebSocket protokol hata kodu ile birlikte bir izleme KIMLIĞI de içeren açıklayıcı bir hata iletisiyle iletilir. Hizmet, bir hata durumuyla karşılaşmadan denetim kanalını kapatmayacak. Tüm temiz kapatmalar istemci tarafından denetlenir.
 
-| WS durumu | Description
+| WS durumu | Açıklama
 | --------- | -------------------------------------------------------------------------------
 | 1001      | Karma bağlantı yolu silinmiş veya devre dışı bırakılmış.
 | 1008      | Güvenlik belirtecinin süresi doldu, bu nedenle yetkilendirme ilkesi ihlal edildi.
@@ -197,7 +197,7 @@ Kabul etme yuvasını oluşturmak için URL 'nin olduğu gibi kullanılması ger
 | -------------- | -------- | -------------------------------------------------------------------
 | `sb-hc-action` | Evet      | Bir yuvayı kabul etmek için parametresi olmalıdır `sb-hc-action=accept`
 | `{path}`       | Yes      | (aşağıdaki paragrafa bakın)
-| `sb-hc-id`     | No       | Önceki **kimlik** açıklamasına bakın.
+| `sb-hc-id`     | Hayır       | Önceki **kimlik** açıklamasına bakın.
 
 `{path}` , bu dinleyicinin kaydedileceği önceden yapılandırılmış karma bağlantının URL kodlu ad alanı yoludur. Bu ifade, sabit `$hc/` yol kısmına eklenir.
 
@@ -215,7 +215,7 @@ Bir hata varsa hizmet aşağıdaki gibi yanıt verebilir:
 
  Bağlantı kurulduktan sonra, gönderen WebSocket kapandığında veya aşağıdaki durum ile sunucu WebSocket 'i kapatır:
 
-| WS durumu | Description                                                                     |
+| WS durumu | Açıklama                                                                     |
 | --------- | ------------------------------------------------------------------------------- |
 | 1001      | Gönderen istemcisi bağlantıyı kapatır.                                    |
 | 1001      | Karma bağlantı yolu silinmiş veya devre dışı bırakılmış.                        |
@@ -379,7 +379,7 @@ Bir hata varsa hizmet aşağıdaki gibi yanıt verebilir:
 
  Bağlantı kurulduktan sonra, istemci HTTP yuvası kapandığında veya aşağıdaki durum ile sunucu WebSocket 'i kapatır:
 
-| WS durumu | Description                                                                     |
+| WS durumu | Açıklama                                                                     |
 | --------- | ------------------------------------------------------------------------------- |
 | 1001      | Gönderen istemcisi bağlantıyı kapatır.                                    |
 | 1001      | Karma bağlantı yolu silinmiş veya devre dışı bırakılmış.                        |
@@ -404,7 +404,7 @@ Dinleyici belirtecinin kullanım süresini sona ermek üzereyken, bir metin çer
 
 Belirteç doğrulaması başarısız olursa, erişim reddedilir ve bulut hizmeti denetim kanalı WebSocket 'sini bir hata ile kapatır. Aksi takdirde yanıt yoktur.
 
-| WS durumu | Description                                                                     |
+| WS durumu | Açıklama                                                                     |
 | --------- | ------------------------------------------------------------------------------- |
 | 1008      | Güvenlik belirtecinin süresi doldu, bu nedenle yetkilendirme ilkesi ihlal edildi. |
 
@@ -428,7 +428,7 @@ Sorgu dizesi parametre seçenekleri aşağıdaki gibidir:
 | `sb-hc-action` | Evet       | Gönderen rolü için parametresi olmalıdır `sb-hc-action=connect` .
 | `{path}`       | Yes       | (aşağıdaki paragrafa bakın)
 | `sb-hc-token`  | Yes\*     | Dinleyici, **Gönder** hakkını karşılayan ad alanı veya karma bağlantı için GEÇERLI, URL kodlamalı Service Bus paylaşılan erişim belirteci sağlamalıdır.
-| `sb-hc-id`     | No        | Uçtan uca tanılama izlemeyi sağlayan ve kabul etme el sıkışması sırasında dinleyici için kullanılabilir hale getirilen isteğe bağlı bir KIMLIK.
+| `sb-hc-id`     | Hayır        | Uçtan uca tanılama izlemeyi sağlayan ve kabul etme el sıkışması sırasında dinleyici için kullanılabilir hale getirilen isteğe bağlı bir KIMLIK.
 
  , `{path}` Bu dinleyicinin kaydedileceği önceden yapılandırılmış karma BAĞLANTıNıN URL kodlamalı ad alanı yoludur. `path`İfade, daha fazla iletişim kurmak için bir sonek ve sorgu dizesi ifadesiyle genişletilebilir. Karma bağlantı yolun altına kayıtlıysa `hyco` , `path` ifadeye `hyco/suffix?param=value&...` sonra burada tanımlanan sorgu dizesi parametreleri gelebilir. Ardından, bir bütün ifade aşağıdaki gibi olabilir:
 
@@ -449,7 +449,7 @@ WebSocket bağlantısı, karma bağlantı yolu kaydedilmediğinde, geçersiz vey
 
 WebSocket bağlantısı, başlangıçta kurulduktan sonra hizmet tarafından kasıtlı olarak kapalıysa, bunu yapmanın nedeni, uygun bir WebSocket protokol hata kodu ile birlikte bir izleme KIMLIĞI de içeren açıklayıcı bir hata iletisiyle iletilir.
 
-| WS durumu | Description
+| WS durumu | Açıklama
 | --------- | ------------------------------------------------------------------------------- 
 | 1000      | Dinleyici, yuvayı kapatır.
 | 1001      | Karma bağlantı yolu silinmiş veya devre dışı bırakılmış.
@@ -471,7 +471,7 @@ _Ad alanı-adresi_ , genellikle formun karma bağlantısını barındıran Azure
 
 Sorgu dizesi parametre seçenekleri aşağıdaki gibidir:
 
-| Param          | Gerekli mi? | Description
+| Param          | Gerekli mi? | Açıklama
 | -------------- | --------- | ---------------- |
 | `sb-hc-token`  | Evet\*     | Dinleyici, **Gönder** hakkını karşılayan ad alanı veya karma bağlantı için GEÇERLI, URL kodlamalı Service Bus paylaşılan erişim belirteci sağlamalıdır.
 
@@ -498,7 +498,7 @@ Bir hata oluşursa, hizmet aşağıdaki gibi yanıt verebilir. Yanıtın hizmett
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Geçiş hakkında SSS](relay-faq.md)
+* [Geçiş hakkında SSS](relay-faq.yml)
 * [Ad alanı oluşturma](relay-create-namespace-portal.md)
 * [.NET kullanmaya başlama](relay-hybrid-connections-dotnet-get-started.md)
 * [Node kullanmaya başlama](relay-hybrid-connections-node-get-started.md)

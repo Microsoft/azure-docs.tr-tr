@@ -4,10 +4,10 @@ description: IoT sensörlerine ve şirket içi yönetim konsoluna yönelik serti
 ms.date: 01/13/2021
 ms.topic: how-to
 ms.openlocfilehash: 242e88e92d6197fd018c56fa55a4dd8166f5d027
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104782767"
 ---
 # <a name="identify-required-appliances"></a>Gerekli gereçlerini tanımlama
@@ -105,7 +105,7 @@ Bu bölümde, aşağıdaki gereçlere yönelik donanım belirtimleri açıklanma
 
 ### <a name="appliance-bom"></a>Gereç ürün ağacı
 
-| DÖNÜŞTÜRME | Açıklama | Miktar |
+| DÖNÜŞTÜRME | Description | Miktar |
 |--|--|--|
 | P19766-B21 | HPE DL360 Gen10 8SFF NC CTO sunucusu | 1 |
 | P19766-B21 | Avrupa-çok dilli yerelleştirme | 1 |
@@ -176,7 +176,7 @@ Bu bölümde, aşağıdaki gereçlere yönelik donanım belirtimleri açıklanma
 
 ### <a name="appliance-bom"></a>Gereç ürün ağacı
 
-| DÖNÜŞTÜRME | Açıklama | Miktar |
+| DÖNÜŞTÜRME | Description | Miktar |
 |--|--|--|
 | P06961-B21 | HPE DL20 Gen10 NHP 2LFF CTO sunucusu | 1 |
 | P06961-B21 | HPE DL20 Gen10 NHP 2LFF CTO sunucusu | 1 |
@@ -212,7 +212,7 @@ Bu bölümde, aşağıdaki gereçlere yönelik donanım belirtimleri açıklanma
 | Şok | 10G 10ms, yarım sinüs, her eksen için üç. (Pozitif & negatif Pulse) – DIN |
 
 ### <a name="appliance-bom"></a>Gereç ürün ağacı
-| Ürün | Açıklama |
+| Ürün | Description |
 |--|--|
 | P25828-B21 | HPE Edgeline EL300 v2 yakınsanmış uç sistemi |
 | P25828-B21 B19 | HPE EL300 v2 Yakınsanan uç sistemi |
@@ -244,7 +244,7 @@ Bu bölümde, aşağıdaki gereçlere yönelik donanım belirtimleri açıklanma
 
 | Tür | Kurumsal |
 |--|--|
-| Açıklama | Kurumsal Dağıtım türleri için Sanal Gereç |
+| Description | Kurumsal Dağıtım türleri için Sanal Gereç |
 | Sanal işlemci | 8 |
 | Bellek | 32 GB |
 | Depolama | 1,8 TB |

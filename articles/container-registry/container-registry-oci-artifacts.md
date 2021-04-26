@@ -6,12 +6,12 @@ manager: gwallace
 ms.topic: article
 ms.date: 02/03/2021
 ms.author: stevelas
-ms.openlocfilehash: 8a73f295999888dab20531ffdd0fb042790a5357
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 399bb001432759556cd0ba8bf15f7738dd4edb7c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99988222"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781496"
 ---
 # <a name="push-and-pull-an-oci-artifact-using-an-azure-container-registry"></a>Azure Container Registry kullanarak bir OCı yapıtı gönderme ve çekme
 
@@ -46,7 +46,7 @@ STDIN 'den parolayı okumak için kullanın `--password-stdin` .
 
 Kapsayıcı kayıt defterinden yapıtları göndermek ve çekmek için kimliğinizi kullanarak Azure CLı ['Da oturum açın](/cli/azure/authenticate-azure-cli) .
 
-Ardından, kayıt defterine erişmek için [az ACR oturum açma](/cli/azure/acr#az-acr-login) Azure CLI komutunu kullanın. Örneğin, *myregistry* adlı bir kayıt defterine kimlik doğrulaması yapmak için:
+Ardından, kayıt defterine erişmek için [az ACR oturum açma](/cli/azure/acr#az_acr_login) Azure CLI komutunu kullanın. Örneğin, *myregistry* adlı bir kayıt defterine kimlik doğrulaması yapmak için:
 
 ```azurecli
 az login
@@ -173,7 +173,7 @@ Komutunu kullanarak hedef kayıt defterine yeni bir OCı yapıtı oluşturun ve 
 oras push myregistry.azurecr.io/dockerfile:1.0 hello-world.dockerfile
 ```
 
-Yeni yapıyı derleme bağlamı olarak kullanarak Hello-World görüntüsünü oluşturmak için [az ACR Build](/cli/azure/acr#az-acr-build) komutunu çalıştırın:
+Yeni yapıyı derleme bağlamı olarak kullanarak Hello-World görüntüsünü oluşturmak için [az ACR Build](/cli/azure/acr#az_acr_build) komutunu çalıştırın:
 
 ```azurecli
 az acr build --registry myregistry --image builds/hello-world:v1 \
@@ -194,5 +194,5 @@ az acr build --registry myregistry --image builds/hello-world:v1 \
 [docker-windows]: https://docs.docker.com/docker-for-windows/
 
 <!-- LINKS - internal -->
-[az-acr-repository-show]: /cli/azure/acr/repository?#az-acr-repository-show
-[az-acr-repository-delete]: /cli/azure/acr/repository#az-acr-repository-delete
+[az-acr-repository-show]: /cli/azure/acr/repository?#az_acr_repository_show
+[az-acr-repository-delete]: /cli/azure/acr/repository#az_acr_repository_delete

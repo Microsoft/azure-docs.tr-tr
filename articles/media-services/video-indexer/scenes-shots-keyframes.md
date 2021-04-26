@@ -10,12 +10,12 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 07/05/2019
 ms.author: juliako
-ms.openlocfilehash: 248799d70e0741efcaea1714c12f4d92a42cef25
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5a738152296aacbb5914e859a65976bd0f6dbf0a
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93041897"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532421"
 ---
 # <a name="scenes-shots-and-keyframes"></a>Sahneler, çekimler, ana kareler
 
@@ -54,7 +54,7 @@ Açın ve klasörü açın. *_KeyframeThumbnail* klasöründe, videodan ayıklan
 
 #### <a name="with-the-video-indexer-api"></a>Video Indexer API 'SI ile
 
-Video Indexer API 'sini kullanarak ana kareleri almak için [karşıya yükleme video](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Upload-Video?) çağrısını kullanarak videonuzu karşıya yükleyin ve dizine alın. Dizin oluşturma işi tamamlandıktan sonra, [video dizinini al](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Index?)' ı çağırın. Bu, Video Indexer JSON dosyasındaki İçeriğinizden ayıkladığı tüm öngörüleri sağlar.  
+Video Indexer API 'sini kullanarak ana kareleri almak için [karşıya yükleme video](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Upload-Video) çağrısını kullanarak videonuzu karşıya yükleyin ve dizine alın. Dizin oluşturma işi tamamlandıktan sonra, [video dizinini al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Index)' ı çağırın. Bu, Video Indexer JSON dosyasındaki İçeriğinizden ayıkladığı tüm öngörüleri sağlar.  
 
 Her bir shot meta verisinin parçası olarak ana kare kimliklerinin bir listesini alırsınız. 
 
@@ -98,7 +98,7 @@ Her bir shot meta verisinin parçası olarak ana kare kimliklerinin bir listesin
 ]
 ```
 
-Şimdi bu ana kare kimliklerinin her birini [küçük resim al](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Thumbnail?) çağrısında çalıştırmanız gerekir. Bu işlem, ana kare görüntülerinin her birini bilgisayarınıza indirir. 
+Şimdi bu ana kare kimliklerinin her birini [küçük resim al](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Thumbnail) çağrısında çalıştırmanız gerekir. Bu işlem, ana kare görüntülerinin her birini bilgisayarınıza indirir. 
 
 ## <a name="editorial-shot-type-detection"></a>Düzenleme görüntüsü türü algılama
 

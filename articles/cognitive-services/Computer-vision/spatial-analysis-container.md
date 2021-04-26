@@ -10,12 +10,12 @@ ms.subservice: computer-vision
 ms.topic: conceptual
 ms.date: 01/12/2021
 ms.author: aahi
-ms.openlocfilehash: 1a107f812ceb46649126bdbefcf3b828e1938ff3
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: d257a77940b460bf8be64e3f8376353a859365f7
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102612907"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106284728"
 ---
 # <a name="install-and-run-the-spatial-analysis-container-preview"></a>Uzamsal analiz kapsayıcısını (Önizleme) yükleyip çalıştırın
 
@@ -311,7 +311,7 @@ Sonra, bir [bağlantı dizesi](../../iot-edge/how-to-register-device.md)kullanar
 IoT Edge cihazını Azure IoT Hub bağlamanız gerekir. Bağlantı dizesini daha önce oluşturduğunuz IoT Edge cihazdan kopyalamanız gerekir. Alternatif olarak, Azure CLı 'de aşağıdaki komutu çalıştırabilirsiniz.
 
 ```bash
-sudo az iot hub device-identity show-connection-string --device-id my-edge-device --hub-name test-iot-hub-123
+sudo az iot hub device-identity connection-string show --device-id my-edge-device --hub-name test-iot-hub-123
 ```
 
 Ana bilgisayarda  `/etc/iotedge/config.yaml` düzenlenmek üzere açın. `ADD DEVICE CONNECTION STRING HERE`Bağlantı dizesiyle değiştirin. Dosyayı kaydedin ve kapatın. Ana bilgisayarda IoT Edge hizmetini yeniden başlatmak için bu komutu çalıştırın.
@@ -334,7 +334,7 @@ Azure portal [sanal makine oluşturma](https://ms.portal.azure.com/#create/Micro
 
 VM 'nize bir ad verin ve (US) Batı ABD 2 bölgeyi seçin. `Availability Options`"Altyapı yedekliliği gerekli değil" olarak ayarladığınızdan emin olun. Doğru VM boyutunu bulmaya yardımcı olması için, tüm yapılandırma ve sonraki adım için aşağıdaki şekle bakın. 
 
-:::image type="content" source="media/spatial-analysis/virtual-machine-instance-details.png" alt-text="Sanal makine yapılandırma ayrıntıları." lightbox="media/spatial-analysis/virtual-machine-instance-details.png":::
+:::image type="content" source="media/spatial-analysis/virtual-machine-instance-details.jpg" alt-text="Sanal makine yapılandırma ayrıntıları." lightbox="media/spatial-analysis/virtual-machine-instance-details.jpg":::
 
 VM boyutunu bulmak için "tüm boyutları gör" seçeneğini belirleyin ve ardından aşağıda gösterildiği gibi "Premium olmayan depolama VM boyutları" listesini görüntüleyin.
 
@@ -473,7 +473,7 @@ Sonra, bir [bağlantı dizesi](../../iot-edge/how-to-register-device.md)kullanar
 IoT Edge cihazını Azure IoT Hub bağlamanız gerekir. Bağlantı dizesini daha önce oluşturduğunuz IoT Edge cihazdan kopyalamanız gerekir. Alternatif olarak, Azure CLı 'de aşağıdaki komutu çalıştırabilirsiniz.
 
 ```bash
-sudo az iot hub device-identity show-connection-string --device-id my-edge-device --hub-name test-iot-hub-123
+sudo az iot hub device-identity connection-string show --device-id my-edge-device --hub-name test-iot-hub-123
 ```
 
 SANAL makinede  `/etc/iotedge/config.yaml` düzenlenmek üzere açın. `ADD DEVICE CONNECTION STRING HERE`Bağlantı dizesiyle değiştirin. Dosyayı kaydedin ve kapatın. VM 'de IoT Edge hizmetini yeniden başlatmak için bu komutu çalıştırın.
@@ -543,16 +543,12 @@ Dağıtım tamamlandıktan ve kapsayıcı çalışmaya başladıktan sonra **ana
 
 Kapsayıcıyı bağlı kameraları kullanacak şekilde yapılandırmak, işlemleri yapılandırmak ve daha fazlasını yapmak için [uzamsal analiz işlemleri](spatial-analysis-operations.md) kullanmanız gerekir. Yapılandırdığınız her kamera cihazında, uzamsal analize yönelik işlemler, Azure IoT Hub örneğinizle gönderilen JSON iletilerinin çıktı akışını oluşturacaktır.
 
-## <a name="redeploy-or-delete-the-deployment"></a>Dağıtımı yeniden dağıtma veya silme
-
-Dağıtımı güncelleştirmeniz gerekiyorsa, önceki dağıtımlarınızın başarılı bir şekilde dağıtıldığından emin olun veya tamamlanmamış IoT Edge cihaz dağıtımlarını silmeniz gerekir. Aksi takdirde, bu dağıtımlar devam eder ve sistem hatalı durumda bırakılır. Azure portal veya [Azure CLI](../cognitive-services-apis-create-account-cli.md?tabs=windows)'yi kullanabilirsiniz.
-
 ## <a name="use-the-output-generated-by-the-container"></a>Kapsayıcı tarafından oluşturulan çıktıyı kullanın
 
 Kapsayıcı tarafından oluşturulan çıktıyı tüketmeye başlamak istiyorsanız aşağıdaki makalelere bakın:
 
-*   Azure IoT Hub uç noktasına bağlanmak ve olayları almak için seçtiğiniz programlama diline yönelik Azure Event hub SDK 'sını kullanın. Daha fazla bilgi için bkz. [yerleşik uç noktadan cihazdan buluta Iletileri okuma](../../iot-hub/iot-hub-devguide-messages-read-builtin.md) . 
-*   Azure IoT Hub, olayları diğer uç noktalara göndermek veya olayları Azure Blob depolama alanına kaydetmek için Ileti yönlendirme ayarlayın, vb. Daha fazla bilgi için bkz. [IoT Hub Ileti yönlendirme](../../iot-hub/iot-hub-devguide-messages-d2c.md) . 
+*    Azure IoT Hub uç noktasına bağlanmak ve olayları almak için seçtiğiniz programlama diline yönelik Azure Event hub SDK 'sını kullanın. Daha fazla bilgi için bkz. [yerleşik uç noktadan cihazdan buluta Iletileri okuma](../../iot-hub/iot-hub-devguide-messages-read-builtin.md) . 
+*    Azure IoT Hub, olayları diğer uç noktalara göndermek veya olayları Azure Blob depolama alanına kaydetmek için Ileti yönlendirme ayarlayın, vb. Daha fazla bilgi için bkz. [IoT Hub Ileti yönlendirme](../../iot-hub/iot-hub-devguide-messages-d2c.md) . 
 
 ## <a name="running-spatial-analysis-with-a-recorded-video-file"></a>Kayıtlı bir video dosyası ile uzamsal analizler çalıştırma
 

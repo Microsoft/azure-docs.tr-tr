@@ -9,10 +9,10 @@ ms.date: 12/09/2020
 ms.author: barclayn
 ms.custom: include file
 ms.openlocfilehash: e2ad18e0853df169911f42fb6649099ccd0264b0
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101102844"
 ---
 - Azure kaynakları için yönetilen kimlikler özelliği hakkında bilgi sahibi değilseniz bu [genel bakışı](../articles/active-directory/managed-identities-azure-resources/overview.md) inceleyin. 

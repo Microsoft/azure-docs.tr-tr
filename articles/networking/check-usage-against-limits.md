@@ -12,12 +12,12 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/05/2018
-ms.openlocfilehash: 31eeb31fb78a4e9552e64121e0e85b5fd8d9b773
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d629e65106145a4af364cd9dd489250c8910c25d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102210657"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107778580"
 ---
 # <a name="check-resource-usage-against-limits"></a>Sınırlara göre kaynak kullanımını denetleme
 
@@ -69,11 +69,11 @@ Network Interfaces                 1 24000
 Network Watchers                   1     1
 ```
 
-## <a name="azure-cli"></a>Azure CLI’si
+## <a name="azure-cli"></a>Azure CLI
 
 Bu makaledeki görevleri gerçekleştirmek için Azure komut satırı arabirimi (CLı) komutlarını kullanıyorsanız, [Azure Cloud Shell](https://shell.azure.com/bash)komutları çalıştırın ya da bilgisayarınızdan CLI 'yı çalıştırarak. Bu makale, Azure CLı sürüm 2.0.32 veya üstünü gerektirir. Yüklü sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekirse bkz. [Azure CLI’yı yükleme](/cli/azure/install-azure-cli). Azure CLı 'yi yerel olarak çalıştırıyorsanız Azure 'da oturum açmak için de çalıştırmanız gerekir `az login` .
 
-[Az Network List-Usage](/cli/azure/network#az-network-list-usages)komutuyla kullanımınızı sınırlara göre görüntüleyin. Aşağıdaki örnek Doğu ABD konumdaki kaynakların kullanımını alır:
+[Az Network List-Usage](/cli/azure/network#az_network_list_usages)komutuyla kullanımınızı sınırlara göre görüntüleyin. Aşağıdaki örnek Doğu ABD konumdaki kaynakların kullanımını alır:
 
 ```azurecli-interactive
 az network list-usages \

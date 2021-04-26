@@ -125,7 +125,7 @@ JSON biçimli istek günlüğünde örnek bir giriş aşağıda verilmiştir. He
 
 #### <a name="request-log-schema"></a>İstek günlüğü şeması
 
-| Ad | Tür | Açıklama |
+| Ad | Tür | Description |
 | --- | --- | --- |
 | time |Dize |Günlüğün zaman damgası (UTC) |
 | resourceId |Dize |İşlemin gerçekleştiği kaynağın tanımlayıcısı |
@@ -139,7 +139,7 @@ JSON biçimli istek günlüğünde örnek bir giriş aşağıda verilmiştir. He
 
 #### <a name="request-log-properties-schema"></a>İstek günlüğü özellikleri şeması
 
-| Ad | Tür | Açıklama |
+| Ad | Tür | Description |
 | --- | --- | --- |
 | HttpMethod |Dize |İşlem için kullanılan HTTP yöntemi. Örneğin, GET. |
 | Yol |Dize |İşlemin gerçekleştirildiği yol |
@@ -175,7 +175,7 @@ JSON biçimli denetim günlüğünde örnek bir giriş aşağıda verilmiştir. 
 
 #### <a name="audit-log-schema"></a>Denetim günlüğü şeması
 
-| Ad | Tür | Açıklama |
+| Ad | Tür | Description |
 | --- | --- | --- |
 | time |Dize |Günlüğün zaman damgası (UTC) |
 | resourceId |Dize |İşlemin gerçekleştiği kaynağın tanımlayıcısı |
@@ -193,7 +193,7 @@ JSON biçimli denetim günlüğünde örnek bir giriş aşağıda verilmiştir. 
 
 #### <a name="audit-log-properties-schema"></a>Denetim günlüğü özellikleri şeması
 
-| Ad | Tür | Açıklama |
+| Ad | Tür | Description |
 | --- | --- | --- |
 | JobId |Dize |İşe atanan KIMLIK |
 | JobName |Dize |İş için belirtilen ad |

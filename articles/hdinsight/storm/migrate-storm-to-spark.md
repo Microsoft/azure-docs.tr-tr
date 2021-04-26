@@ -5,10 +5,10 @@ ms.service: hdinsight
 ms.topic: how-to
 ms.date: 01/16/2019
 ms.openlocfilehash: b8b054d06c9c0987508abfdf03bbcf9470572bd1
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104868775"
 ---
 # <a name="migrate-azure-hdinsight-36-apache-storm-to-hdinsight-40-apache-spark"></a>Azure HDInsight 3,6 Apache Storm HDInsight 4,0 Apache Spark geçirin
@@ -35,7 +35,7 @@ Apache Storm farklı düzeylerde garantili ileti işleme sağlayabilir. Örneği
 |---|---|---|---|
 |**Olay işleme garantisi**|En az bir kez <br> Tek bir kez (Trident) |[Tam olarak bir kez](https://spark.apache.org/docs/latest/streaming-programming-guide.html)|[Tam olarak bir kez](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)|
 |**İşlem modeli**|Gerçek zamanlı <br> Mikro Batch (Trident) |Mikro Batch |Mikro Batch |
-|**Olay saati desteği**|[Evet](https://storm.apache.org/releases/2.0.0/Windowing.html)|Hayır|[Evet](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)|
+|**Olay saati desteği**|[Evet](https://storm.apache.org/releases/2.0.0/Windowing.html)|No|[Evet](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)|
 |**Diller**|Java, vb.|Scala, Java, Python|Python, R, Scala, Java, SQL|
 
 ### <a name="spark-streaming-vs-spark-structured-streaming"></a>Spark akışı ile Spark yapılandırılmış akışı
@@ -61,7 +61,7 @@ Storm topolojileri döngüsel olmayan yönlü grafikte (DAG) düzenlenmiş birde
 
 Fırtınası, fırtınası kümesinin çalışmasını tutan aşağıdaki üç Daemon 'ları oluşur.
 
-|İnin |Açıklama |
+|İnin |Description |
 |---|---|
 |Nimbus|Hadoop JobTracker 'e benzer şekilde, kodu kümeye dağıtmaktan ve makinelere görevler atamaya ve hatalara yönelik izlemeye karşı sorumludur.|
 |Zookeeper|Küme düzenlemesi için kullanılır.|

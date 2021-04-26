@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.custom: contperf-fy21q1
 ms.date: 10/13/2020
 ms.author: allensu
-ms.openlocfilehash: 99f15afdab917fe28e22df8cb0e372b6c30c8526
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 3b92ef3ce195a2eee9bce53e08d977593a9f1fc2
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105027338"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107477715"
 ---
 # <a name="using-source-network-address-translation-snat-for-outbound-connections"></a>Giden bağlantılar için kaynak ağ adresi çevirisini (SNAT) kullanma
 
@@ -64,14 +64,16 @@ Benzersiz akışları korumak için, ana bilgisayar her bir giden paketin kaynak
   * Ortak IP olmadan sanal makine.
   * Ortak IP olmadan ve standart yük dengeleyici olmadan sanal makine.
         
- ### <a name="scenario-1-virtual-machine-with-public-ip"></a><a name="scenario1"></a> Senaryo 1: ortak IP 'si olan sanal makine
+ ### <a name="scenario-1-virtual-machine-with-public-ip-either-with-or-without-a-load-balancer"></a><a name="scenario1"></a> Senaryo 1: yük dengeleyici olan veya olmayan ortak IP 'si olan sanal makine.
 
  | İçermektedir | Yöntem | IP protokolleri |
  | ---------- | ------ | ------------ |
- | Ortak yük dengeleyici veya tek başına | [SNAT (kaynak ağ adresi çevirisi)](#snat) </br> kullanılmıyor. | TCP (Iletim Denetim Protokolü) </br> UDP (Kullanıcı Datagram Protokolü) </br> ICMP (Internet Denetim Iletisi Protokolü) </br> ESP (Kapsüllenen Güvenlik Yükü) |
+ | Ortak yük dengeleyici veya tek başına | [SNAT (kaynak ağ adresi çevirisi)](#snat) </br> kullanılmaz. | TCP (Iletim Denetim Protokolü) </br> UDP (Kullanıcı Datagram Protokolü) </br> ICMP (Internet Denetim Iletisi Protokolü) </br> ESP (Kapsüllenen Güvenlik Yükü) |
 
  #### <a name="description"></a>Açıklama
 
+ Tüm trafik, sanal makinenin genel IP adresinden (örnek düzeyi IP) istek yapan istemciye döndürülür.
+ 
  Azure, tüm giden akışlar için örneğin NIC 'in IP yapılandırmasına atanan genel IP 'yi kullanır. Örnekte, tüm kısa ömürlü bağlantı noktaları kullanılabilir. VM 'nin yük dengeli olup olmadığı önemi yoktur. Bu senaryo diğerlerine göre önceliklidir. 
 
  Bir VM 'ye atanan genel IP, 1:1 ilişkidir (1: çok) ve durum bilgisiz 1:1 NAT olarak uygulanır.

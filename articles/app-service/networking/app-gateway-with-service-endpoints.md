@@ -13,13 +13,13 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 12/09/2019
 ms.author: madsd
-ms.custom: seodec18, devx-track-azurecli
-ms.openlocfilehash: 58886a8f7dc505a7e68d69eb00b4a2ebd776dd5a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: seodec18
+ms.openlocfilehash: f1d517ba37bbef95d1863485c8c3b6313f196c11
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98209870"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374922"
 ---
 # <a name="application-gateway-integration-with-service-endpoints"></a>Hizmet uç noktaları ile Application Gateway tümleştirme
 Azure Application Gateway tümleştirmesi için biraz farklı yapılandırma gerektiren App Service üç çeşidi vardır. Çeşitlemeler, çok kiracılı, Iç Load Balancer (ıLB) App Service Ortamı (Ao) ve dış Ao olarak da bilinen normal App Service içerir. Bu makalede, bunu App Service (çok kiracılı) ile yapılandırma ve ıLB ve dış Ao hakkındaki konuları tartışacak.

@@ -3,12 +3,12 @@ title: En iyi kayıt defteri uygulamalar
 description: Bu en iyi yöntemleri izleyerek Azure kapsayıcı kayıt defterinizi nasıl verimli bir şekilde kullanabileceğinizi öğrenin.
 ms.topic: article
 ms.date: 01/07/2021
-ms.openlocfilehash: 01c8c7f547be9dd225022fb3315a4bdecc48c2bf
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0811cc4a5bffc21ffba19e64a3887eab6bc36fbb
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100578131"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784146"
 ---
 # <a name="best-practices-for-azure-container-registry"></a>Azure Container Registry için en iyi yöntemler
 
@@ -63,7 +63,7 @@ Bir Azure kapsayıcı kayıt defteri ile kimlik doğrulama için iki ana senaryo
 
 | Tür | Örnek senaryo | Önerilen metot |
 |---|---|---|
-| Bireysel kimlik | Geliştirme makinesinden görüntü çeken veya gönderen bir geliştirici. | [az acr login](/cli/azure/acr#az-acr-login) |
+| Bireysel kimlik | Geliştirme makinesinden görüntü çeken veya gönderen bir geliştirici. | [az acr login](/cli/azure/acr#az_acr_login) |
 | Gözetimsiz kimlik/hizmet kimliği | Kullanıcıyla doğrudan ilgili olmayan derleme ve dağıtım işlem hatları. | [Hizmet sorumlusu](container-registry-authentication.md#service-principal) |
 
 Bu ve diğer Azure Container Registry kimlik doğrulama senaryoları hakkında ayrıntılı bilgi için bkz. [Azure Container Registry Ile kimlik](container-registry-authentication.md)doğrulama.
@@ -108,8 +108,8 @@ Kapsayıcı kayıt defterlerinin güvenlik duruşunu artırmaya yönelik öneril
 [registry-overview-quotas]: ./media/container-registry-best-practices/registry-overview-quotas.png
 
 <!-- LINKS - Internal -->
-[az-acr-repository-delete]: /cli/azure/acr/repository#az-acr-repository-delete
-[az-acr-show-usage]: /cli/azure/acr#az-acr-show-usage
+[az-acr-repository-delete]: /cli/azure/acr/repository#az_acr_repository_delete
+[az-acr-show-usage]: /cli/azure/acr#az_acr_show_usage
 [azure-cli]: /cli/azure
 [azure-portal]: https://portal.azure.com
 [container-registry-geo-replication]: container-registry-geo-replication.md

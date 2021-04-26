@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/07/2021
 ms.author: vinigam
-ms.openlocfilehash: 18d0a24de6f0775fdb35799512f9796a323d353a
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: be12a9054fd67b243530ff671c10fa53acafc308
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105045493"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107366360"
 ---
 # <a name="migrate-to-connection-monitor-from-network-performance-monitor"></a>Ağ Performansı İzleyicisi bağlantı Izleyicisi 'ne geçir
 
@@ -43,7 +43,7 @@ Geçiş, aşağıdaki sonuçları üretmenize yardımcı olur:
     
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Aboneliğinizde ve Log Analytics çalışma alanının bölgesinde ağ izleyicisinin etkinleştirildiğinden emin olun. 
+* Aboneliğinizde ve Log Analytics çalışma alanının bölgesinde ağ izleyicisinin etkinleştirildiğinden emin olun. Bu yapılmazsa, "geçiş yapmayı denemeden önce" bir hata görürsünüz, lütfen seçim aboneliğinde ağ izleyicisi uzantısını etkinleştirin ve LA çalışma alanının konumunu seçili yapın. "
 * Azure VM 'nin, Log Analytics çalışma alanı bir uç nokta olarak kullanıldığı farklı bir bölgeye/aboneliğe ait olması durumunda bu abonelik ve bölge için ağ Izleyicisi 'nin etkinleştirildiğinden emin olun.   
 * Log Analytics aracıları yüklü Azure sanal makineleri, ağ Izleyicisi uzantısıyla etkinleştirilmelidir.
 
@@ -57,6 +57,10 @@ Testleri Ağ Performansı İzleyicisi bağlantı Izleyicisine geçirmek için a�
     
 1. Aşağı açılan listelerde, aboneliğinizi ve çalışma alanınızı seçin ve ardından geçirmek istediğiniz NPM özelliğini seçin. 
 1. Testleri geçirmek için **Içeri aktar** ' ı seçin.
+* Eğer NPM çalışma alanında etkinleştirilmemişse, "geçerli NPM yapılandırması bulunamadı" hatasını bildiren bir hata görürsünüz. 
+* Step2 ' de seçtiğiniz özellikte bir test yoksa, "seçili çalışma alanı yapılandırma yok" hatasını bildiren bir hata görürsünüz <feature> .
+* Geçerli bir test yoksa, "seçili çalışma alanı geçerli sınamalar yok" hatasını belirten bir hata görürsünüz.
+* Testleriniz artık etkin olmayan, ancak geçmişte etkin olan aracılar içeriyor olabilir. "Az sayıda test artık etkin olmayan aracılar içerdiğini belirten bir hata görürsünüz. Etkin olmayan aracıların listesi- {0} . Bu aracılar geçmişte çalışıyor olabilir, ancak kapanmakta veya daha fazla çalışmıyor. Aracıları etkinleştirin ve bağlantı Izleyicisi 'ne geçiş yapın. Etkin olmayan aracılar içermeyen testleri geçirmek için devam ' a tıklayın. "
 
 Geçiş başladıktan sonra aşağıdaki değişiklikler gerçekleşir: 
 * Yeni bir bağlantı İzleyicisi kaynağı oluşturulur.

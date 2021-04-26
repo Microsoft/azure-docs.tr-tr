@@ -3,12 +3,12 @@ title: Azure Event Hubs Azure özel bağlantı hizmeti ile tümleştirme
 description: Azure Event Hubs Azure özel bağlantı hizmeti ile tümleştirmeyi öğrenin
 ms.date: 08/22/2020
 ms.topic: article
-ms.openlocfilehash: 996779e103dae2d2d950f447d2ac72667fc9e754
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f5c01788044f3c3a5d875a24172e7222ff195f81
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94427760"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105960852"
 ---
 # <a name="allow-access-to-azure-event-hubs-namespaces-via-private-endpoints"></a>Özel uç noktalar aracılığıyla Azure Event Hubs ad alanlarına erişime izin ver 
 Azure özel bağlantı hizmeti, Azure hizmetlerine (örneğin, Azure Event Hubs, Azure depolama ve Azure Cosmos DB) ve Azure 'da barındırılan müşteri/iş ortağı hizmetlerine sanal ağınızdaki **özel bir uç nokta** üzerinden erişmenizi sağlar.
@@ -17,11 +17,10 @@ Azure özel bağlantı hizmeti, Azure hizmetlerine (örneğin, Azure Event Hubs,
 
 Daha fazla bilgi için bkz. [Azure özel bağlantısı nedir?](../private-link/private-link-overview.md)
 
-> [!WARNING]
-> Özel uç noktaların etkinleştirilmesi, diğer Azure hizmetlerinin Event Hubs etkileşimde olmasını engelleyebilir.  Engellenen istekler diğer Azure hizmetlerinden, Azure portal, günlük ve ölçüm hizmetlerinden ve bu şekilde devam eder. Özel uç noktalar etkinken bile belirli güvenilen hizmetlerden Event Hubs kaynaklara erişime izin verebilirsiniz. Güvenilen hizmetler listesi için bkz. [Güvenilen hizmetler](#trusted-microsoft-services).
-
->[!NOTE]
-> Bu özellik hem **Standart** hem de **adanmış** katmanlar için desteklenir. **Temel** katmanda desteklenmez.
+## <a name="important-points"></a>Önemli nokta
+- Bu özellik hem **Standart** hem de **adanmış** katmanlar için desteklenir. **Temel** katmanda desteklenmez.
+- Özel uç noktaların etkinleştirilmesi, diğer Azure hizmetlerinin Event Hubs etkileşimde olmasını engelleyebilir.  Engellenen istekler diğer Azure hizmetlerinden, Azure portal, günlük ve ölçüm hizmetlerinden ve bu şekilde devam eder. Özel uç noktalar etkinken bile belirli **Güvenilen hizmetlerden** Event Hubs kaynaklara erişime izin verebilirsiniz. Güvenilen hizmetler listesi için bkz. [Güvenilen hizmetler](#trusted-microsoft-services).
+- Yalnızca belirtilen IP adreslerinden veya bir sanal ağın alt ağından gelen trafiğe izin vermek için ad alanı için **en az BIR IP kuralı veya sanal ağ kuralı** belirtin. IP ve sanal ağ kuralları yoksa, ad alanına genel İnternet üzerinden erişilebilir (erişim anahtarı kullanılarak). 
 
 ## <a name="add-a-private-endpoint-using-azure-portal"></a>Azure portal kullanarak özel uç nokta ekleme
 
@@ -51,8 +50,8 @@ Zaten bir Event Hubs ad alanınız varsa, aşağıdaki adımları izleyerek bir 
 
     :::image type="content" source="./media/private-link-service/selected-networks-page.png" alt-text="Ağlar sekmesi-seçili ağlar seçeneği" lightbox="./media/private-link-service/selected-networks-page.png":::    
 
-    > [!NOTE]
-    > Varsayılan olarak, **Seçili ağlar** seçeneği seçilidir. Bir IP güvenlik duvarı kuralı belirtmezseniz veya bir sanal ağ eklerseniz, ad alanına genel İnternet üzerinden erişilebilir. 
+    > [!WARNING]
+    > Varsayılan olarak, **Seçili ağlar** seçeneği seçilidir. Bir IP güvenlik duvarı kuralı belirtmezseniz veya bir sanal ağ eklerseniz, ad alanına genel İnternet üzerinden erişilebilir (erişim anahtarı kullanılarak). 
 1. Sayfanın üst kısmındaki **Özel uç nokta bağlantıları** sekmesini seçin. 
 1. Sayfanın üst kısmındaki **+ Özel uç nokta** düğmesini seçin.
 

@@ -4,27 +4,28 @@ description: Bu hızlı başlangıç, Azure CLı kullanarak yüksek kullanılabi
 services: front-door
 author: duongau
 manager: KumudD
-Customer intent: As an IT admin, I want to direct user traffic to ensure high availability of web applications.
 ms.assetid: ''
 ms.service: frontdoor
 ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 09/21/2020
+ms.date: 4/19/2021
 ms.author: duau
-ms.openlocfilehash: 0b82c11dcd615dfbdcfd70f5f90edd7ba41b4562
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 3567d5af31b0c7bc2443e3d02426a5bb7aba06f7
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102201626"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862012"
 ---
 # <a name="quickstart-create-a-front-door-for-a-highly-available-global-web-application-using-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak yüksek oranda kullanılabilir küresel bir Web uygulaması için ön kapı oluşturma
 
 Yüksek oranda kullanılabilir ve yüksek performanslı bir genel Web uygulaması oluşturmak için Azure CLı kullanarak Azure ön kapısını kullanmaya başlayın.
 
 Ön kapı, Web trafiğini bir arka uç havuzundaki belirli kaynaklara yönlendirir. Ön uç etki alanını tanımladınız, bir arka uç havuzuna kaynak ekleyecek ve bir yönlendirme kuralı oluşturacaksınız. Bu makalede, iki Web uygulaması kaynağına sahip bir arka uç havuzunun basit bir yapılandırması ve varsayılan yol eşleştirme "/*" kullanılarak tek bir yönlendirme kuralı kullanılmaktadır.
+
+:::image type="content" source="media/quickstart-create-front-door/environment-diagram.png" alt-text="Azure CLı kullanan ön kapı dağıtım ortamının diyagramı." border="false":::
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -46,7 +47,7 @@ Azure 'da, ilgili kaynakları bir kaynak grubuna ayırabilirsiniz. Var olan bir 
 
 Bu hızlı başlangıçta iki kaynak grubu gerekir. Biri *Orta ABD* ve ikincisi *Orta Güney ABD*.
 
-[Az Group Create](/cli/azure/group#az-group-create)ile bir kaynak grubu oluşturun:
+[Az Group Create](/cli/azure/group#az_group_create)ile bir kaynak grubu oluşturun:
 
 ```azurecli-interactive
 az group create \
@@ -54,8 +55,8 @@ az group create \
     --location centralus
 
 az group create \
-    --name myRGFDSouthCentral \
-    --location southcentralus
+    --name myRGFDEast \
+    --location eastus
 ```
 
 ## <a name="create-two-instances-of-a-web-app"></a>Bir Web uygulamasının iki örneğini oluşturma
@@ -66,7 +67,7 @@ Henüz bir Web uygulamanız yoksa, iki örnek Web uygulaması kurmak için aşa�
 
 ### <a name="create-app-service-plans"></a>App Service planları oluşturma
 
-Web uygulamalarını oluşturabilmeniz için, biri *Orta ABD* ve ikincisi *Orta Güney ABD* olmak üzere iki App Service planına ihtiyacınız olacaktır.
+Web uygulamalarını oluşturabilmeniz için, biri *Orta ABD* ve ikincisi *Doğu ABD* olmak üzere iki App Service planına ihtiyacınız olacaktır.
 
 [Az appservice plan Create](/cli/azure/appservice/plan#az_appservice_plan_create&preserve-view=true)ile App Service planları oluşturun:
 
@@ -76,8 +77,8 @@ az appservice plan create \
 --resource-group myRGFDCentral
 
 az appservice plan create \
---name myAppServicePlanSouthCentralUS \
---resource-group myRGFDSouthCentral
+--name myAppServicePlanEastUS \
+--resource-group myRGFDEast
 ```
 
 ### <a name="create-web-apps"></a>Web uygulamaları oluşturma
@@ -88,14 +89,14 @@ Aşağıdaki komutlar çalıştırıldığında, önceki adımda bulunan App Ser
 
 ```azurecli-interactive
 az webapp create \
---name WebAppContoso1 \
+--name WebAppContoso-1 \
 --resource-group myRGFDCentral \
 --plan myAppServicePlanCentralUS 
 
 az webapp create \
---name WebAppContoso2 \
---resource-group myRGFDSouthCentral \
---plan myAppServicePlanSouthCentralUS
+--name WebAppContoso-2 \
+--resource-group myRGFDEast \
+--plan myAppServicePlanEastUS
 ```
 
 Bir sonraki adımda ön kapıyı dağıtırken arka uç adreslerini tanımlayabilmeniz için her bir Web uygulamasının varsayılan ana bilgisayar adını unutmayın.
@@ -104,14 +105,14 @@ Bir sonraki adımda ön kapıyı dağıtırken arka uç adreslerini tanımlayabi
 
 Aşağıdaki adımları izleyerek varsayılan Yük Dengeleme ayarları, sistem durumu araştırması ve yönlendirme kuralları ile temel bir ön kapı oluşturun:
 
-[Az Network ön kapı Create](/cli/azure/ext/front-door/network/front-door#ext_front_door_az_network_front_door_create&preserve-view=true)Ile ön kapı oluşturun:
+[Az Network ön kapı Create](/cli/azure/network/front-door#az_network_front_door_create&preserve-view=true)Ile ön kapı oluşturun:
 
 ```azurecli-interactive
 az network front-door create \
 --resource-group myRGFDCentral \
 --name contoso-frontend \
 --accepted-protocols http https \
---backend-address webappcontoso1.azurewebsites.net webappcontoso2.azurewebsites.net 
+--backend-address webappcontoso-1.azurewebsites.net webappcontoso-2.azurewebsites.net 
 ```
 
 **--Resource-Group:** Ön kapıyı dağıtmak istediğiniz kaynak grubunu belirtin.
@@ -141,7 +142,7 @@ az group delete \
 --name myRGFDCentral 
 
 az group delete \
---name myRGFDSouthCentral
+--name myRGFDEast
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar

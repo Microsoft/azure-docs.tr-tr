@@ -6,14 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: conceptual
-ms.date: 03/24/2021
+ms.date: 04/12/2021
 ms.author: alkohli
-ms.openlocfilehash: aa1b861555cff65c9e432ea711af3f7c6e410625
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 3b323bf920bd884e821d03bf2def37471775e720
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105109174"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107312714"
 ---
 # <a name="azure-stack-edge-pro-r-technical-specifications"></a>Azure Stack Edge Pro R teknik özellikleri
 
@@ -24,41 +24,44 @@ Azure Stack Edge Pro R cihazınızın donanım bileşenleri, bu makalede açıkl
 
 Azure Stack Edge Pro R cihazının işlem ve bellek için aşağıdaki belirtimleri vardır:
 
-| Belirtim       | Değer                  |
-|---------------------|------------------------|
-| CPU    | 2 X Intel Xeon gümüş 4114 CPU<br>20 phsyik çekirdek (CPU başına 10)<br>40 mantıksal çekirdek (vCPU) (CPU başına 20)  |
-| Bellek              | 256 GB RAM (2666 MT/sn)     |
-
+| Belirtim  | Değer                                             |
+|----------------|---------------------------------------------------|
+| CPU türü       | Çift Intel Xeon gümüş 4114 CPU                   |
+| CPU: ham       | 20 toplam çekirdek, 40 toplam vCPU                    |
+| CPU: kullanılabilir    | 32 vCPU                                          |
+| Bellek türü    | Dell uyumlu 16 GB RDıMM, 2666 MT/s, Çift derece |
+| Bellek: ham    | 256 GB RAM (16 x 16 GB)                           |
+| Bellek: kullanılabilir | 230 GB RAM                                        |
 
 ## <a name="compute-acceleration-specifications"></a>İşlem hızlandırma belirtimleri
 
 Kubernetes, derin öğrenme ve makine öğrenimi senaryolarına izin veren her cihaza bir grafik Işleme birimi (GPU) dahildir.
 
-| Belirtim           | Değer                  |
+| Belirtim           | Değer                      |
 |-------------------------|----------------------------|
-| GPU   | Bir NVIDIA T4 GPU 'SU <br> Daha fazla bilgi için bkz. [NVIDIA T4](https://www.nvidia.com/en-us/data-center/tesla-t4/).| 
+| GPU   | Bir NVIDIA T4 GPU 'SU <br> Daha fazla bilgi için bkz. [NVIDIA T4](https://www.nvidia.com/en-us/data-center/tesla-t4/). | 
 
 ## <a name="power-supply-unit-specifications"></a>Güç kaynağı birimi belirtimleri
 
 Azure Stack Edge Pro R cihazının yüksek performanslı fanlarla iki 100-240 V güç kaynağı birimi (PSUs) vardır. İki PSUs, yedekli bir güç yapılandırması sağlar. Bir PSU başarısız olursa, başarısız modül değiştirilinceye kadar cihaz normal olarak diğer PSU üzerinde çalışmaya devam eder. Aşağıdaki tabloda, PSUs teknik özellikleri listelenmektedir.
 
-| Belirtim           | 550 W PSU                  |
-|-------------------------|----------------------------|
-| Maksimum çıkış gücü    | 550 W                      |
-| Isı dağılımı (maksimum)                   | 2891 BTU/saat                |
-| Sıklık               | 50/60 Hz                   |
-| Voltaj aralığı seçimi | Otomatik olarak değişen: 115-230 V AC |
-| Etkin takılabilir           | Yes                        |
+| Belirtim              | 550 W PSU                  |
+|----------------------------|----------------------------|
+| Maksimum çıkış gücü       | 550 W                      |
+| Isı dağılımı (maksimum) | 2891 BTU/saat                |
+| Sıklık                  | 50/60 Hz                   |
+| Voltaj aralığı seçimi    | Otomatik olarak değişen: 115-230 V AC |
+| Etkin takılabilir              | Yes                        |
 
 ## <a name="network-specifications"></a>Ağ belirtimleri
 
-Azure Stack Edge Pro R cihazının dört ağ arabirimi vardır, PORT1-PORT4. 
+Azure Stack Edge Pro R cihazının dört ağ arabirimi vardır, PORT1-PORT4.
 
 
-|Belirtim  |Description                              |
+|Belirtim         |Açıklama                       |
 |----------------------|----------------------------------|
-|Ağ arabirimleri    |**2 x 1 GbE RJ45** <br> Bağlantı noktası 1, ilk kurulum için yönetim arabirimi olarak kullanılır ve varsayılan olarak statiktir. İlk kurulum tamamlandıktan sonra, herhangi bir IP adresine sahip veriler için arabirimi kullanabilirsiniz. Ancak, sıfırlama sırasında Arabirim statik IP 'ye geri döner. <br>Diğer arabirim bağlantı noktası 2 Kullanıcı tarafından yapılandırılabilir, veri aktarımı için kullanılabilir ve varsayılan olarak DHCP 'dir.     |
-|Ağ arabirimleri    |**2 x 25 GbE SFP28** <br> Bu veri arabirimleri bağlantı noktası 3 ve bağlantı noktası 4, DHCP (varsayılan) veya statik olarak yapılandırılabilir.            |
+|Ağ arabirimleri    |**2 x 1 GbE RJ45** <br> Bağlantı noktası 1, ilk kurulum için yönetim arabirimi olarak kullanılır ve varsayılan olarak statiktir. İlk kurulum tamamlandıktan sonra, herhangi bir IP adresine sahip veriler için arabirimi kullanabilirsiniz. Ancak, sıfırlama sırasında Arabirim statik IP 'ye geri döner. <br>Diğer arabirim, Kullanıcı tarafından yapılandırılabilen bağlantı noktası 2, veri aktarımı için kullanılabilir ve varsayılan olarak DHCP 'dir. |
+|Ağ arabirimleri    |**2 x 25 GbE SFP28** <br> Bağlantı noktası 3 ve bağlantı noktası 4 ' te bu veri arabirimleri, DHCP (varsayılan) veya statik olarak yapılandırılabilir. |
 
 Azure Stack Edge Pro R cihazınız aşağıdaki ağ donanımlarına sahiptir:
 
@@ -69,27 +72,27 @@ Azure Stack Edge Pro R cihazınız aşağıdaki ağ donanımlarına sahiptir:
 | Parameter           | Description                 |
 |-------------------------|----------------------------|
 | Model    | ConnectX®-4 Lx EN network interface card                      |
-| Model Description               | 25GbE dual-port SFP28; PCIe3.0 x8; ROHS R6                    |
+| Model Description               | 25 GbE dual-port SFP28; PCIe3.0 x8; ROHS R6                    |
 | Device Part Number (XR2) | MCX4421A-ACAN  |
 | PSID (R640)           | MT_2420110034                         |-->
 <!-- confirm w/ Ravi what is this-->
 
-Bu ağ kartlarında desteklenen kabloların, anahtarların ve alıcı sayısının tam listesi için şuraya gidin: [Mellanox Dual Port 25G ConnectX-4 kanal ağ bağdaştırıcısı uyumlu ürünler](https://docs.mellanox.com/display/ConnectX4LxFirmwarev14271016/Firmware+Compatible+Products).
+Bu ağ kartlarında desteklenen kabloların, anahtarların ve alıcı sayısının tam listesi için, [Mellanox Dual Port 25G ConnectX-4 kanal ağ bağdaştırıcısı uyumlu ürünler](https://docs.mellanox.com/display/ConnectX4LxFirmwarev14271016/Firmware+Compatible+Products)' e gidin.
 
 ## <a name="storage-specifications"></a>Depolama belirtimleri
 
-Azure Stack Edge Pro R cihazlarında 8 veri diski ve 2 M. işletim sistemi diskleri olarak görev sunan 2 SATA diski vardır. Daha fazla bilgi için, [d. 2 SATA disklere](https://en.wikipedia.org/wiki/M.2)gidin.
+Azure Stack Edge Pro R cihazlarında sekiz veri diski ve işletim sistemi diskleri olarak görev sunan iki adet M. 2 SATA diski vardır. Daha fazla bilgi için, [d. 2 SATA disklere](https://en.wikipedia.org/wiki/M.2)gidin.
 
 #### <a name="storage-for-1-node-device"></a>1 düğümlü cihaz için depolama
 
-Aşağıdaki tabloda, 1 düğümlü cihazın depolama kapasitesine ilişkin ayrıntılar bulunur.
+Aşağıdaki tabloda, 1 düğümlü cihazın depolama kapasitesi için ayrıntılar bulunur.
 
 |     Belirtim                          |     Değer             |
 |--------------------------------------------|-----------------------|
 |    Katı hal sürücüleri (SSD 'Ler) sayısı     |    8                  |
 |    Tek SSD kapasitesi                     |    8 TB               |
 |    Toplam kapasite                          |    64 TB              |
-|    Toplam kullanılabilir kapasite *                  |    ~ 42 TB          |
+|    Toplam kullanılabilir kapasite *                  |    ~ 42 TB            |
 
 **Bazı boşluklar iç kullanım için ayrılmıştır.*
 
@@ -148,7 +151,7 @@ Cihazın ağırlığı, kutunun yapılandırmasına bağlıdır.
 
 |     Kutu                                 |     Ağırlık          |
 |-----------------------------------------------|---------------------|
-|    Son büyük 1-node cihaz + Rugged Case ağırlığı     |    ~ 114 lbs.          |
+|    Son büyük 1-node cihaz + Rugged Case ağırlığı     |    ~ 114 lbs          |
 
 <!--#### For the 4-node system
 

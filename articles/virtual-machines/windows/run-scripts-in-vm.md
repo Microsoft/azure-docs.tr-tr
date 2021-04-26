@@ -9,12 +9,12 @@ ms.author: robreed
 ms.date: 05/02/2018
 ms.topic: how-to
 manager: carmonm
-ms.openlocfilehash: 24ff0d8089055f83c76156cf5fb163313faf9492
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 7bf62eb2ab8d2ce82ce73e3e8ae26cf303b8ba67
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105043487"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765890"
 ---
 # <a name="run-scripts-in-your-windows-vm"></a>Windows sanal makinenizde betikleri çalıştırma
 
@@ -30,12 +30,12 @@ Görevleri otomatikleştirmek veya sorunları gidermek için, bir VM 'de komutla
 * Linux makinelerde Windows makinelerinde ve Bash betikte PowerShell betiğini çalıştırın.
 * Dağıtım sonrası yapılandırma, yazılım yükleme ve diğer yapılandırma ya da yönetim görevleri için faydalıdır.
 
-## <a name="run-command"></a>Komutu Çalıştır
+## <a name="run-command"></a> komutunu çalıştırın
 
 [Çalıştır komutu](run-command.md) özelliği, sanal makine ve uygulama yönetimini ve betikleri kullanarak sorun gidermeyi ve makinenin ulaşılamaz olduğu durumlarda bile kullanılabilir. Örneğin, Konuk GÜVENLIK duvarında RDP veya SSH bağlantı noktası açık olmaz.
 
 * Azure sanal makinelerinde betikleri çalıştırın.
-* [Azure Portal](run-command.md), [REST API](/rest/api/compute/virtual%20machines%20run%20commands/runcommand), [Azure CLI](/cli/azure/vm/run-command#az-vm-run-command-invoke)veya [PowerShell](/powershell/module/az.compute/invoke-azvmruncommand) kullanarak çalıştırılabilir
+* [Azure Portal](run-command.md), [REST API](/rest/api/compute/virtual%20machines%20run%20commands/runcommand), [Azure CLI](/cli/azure/vm/run-command#az_vm_run_command_invoke)veya [PowerShell](/powershell/module/az.compute/invoke-azvmruncommand) kullanarak çalıştırılabilir
 * Azure portal hızlıca bir betiği çalıştırın ve çıktıyı görüntüleyin ve gerektiğinde tekrarlayın.
 * Betik doğrudan yazılabilir veya yerleşik betiklerin birini çalıştırabilirsiniz.
 * Linux makinelerde Windows makinelerinde ve Bash betikte PowerShell betiğini çalıştırın.
@@ -70,6 +70,6 @@ Görevleri otomatikleştirmek veya sorunları gidermek için, bir VM 'de komutla
 Sanal makinelerinizdeki betikleri ve komutları çalıştırmak için kullanılabilen farklı özellikler hakkında daha fazla bilgi edinin.
 
 * [Özel Betik Uzantısı](../extensions/custom-script-windows.md)
-* [Çalıştır Komutu](run-command.md)
+* [Komutu Çalıştır](run-command.md)
 * [Karma Runbook Çalışanı](../../automation/automation-hybrid-runbook-worker.md)
 * [Seri konsol](/troubleshoot/azure/virtual-machines/serial-console-windows)

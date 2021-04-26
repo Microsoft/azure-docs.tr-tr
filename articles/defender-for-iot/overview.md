@@ -4,10 +4,10 @@ description: IoT özellikleri ve hizmetleri için Defender hakkında daha fazla 
 ms.topic: overview
 ms.date: 12/09/2020
 ms.openlocfilehash: 15772ee21587ed2bc010e31174af6daac71dfc12
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104786847"
 ---
 # <a name="welcome-to-azure-defender-for-iot"></a>IoT için Azure Defender 'a hoş geldiniz

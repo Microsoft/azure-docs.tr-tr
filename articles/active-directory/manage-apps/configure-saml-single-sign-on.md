@@ -2,21 +2,21 @@
 title: Azure Active Directory 'de uygulamalar için SAML tabanlı çoklu oturum açmayı (SSO) anlayın
 description: Azure Active Directory 'de uygulamalar için SAML tabanlı çoklu oturum açmayı (SSO) anlayın
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: conceptual
 ms.workload: identity
 ms.date: 07/28/2020
-ms.author: kenwith
+ms.author: iangithinji
 ms.reviewer: arvinh,luleon
-ms.openlocfilehash: f6422c3f751a7aaa430b93ee68ca1a3520ac915f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: b7468f33c75dd58e70c344f3ef19c51e220a7abb
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99257701"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374497"
 ---
 # <a name="understand-saml-based-single-sign-on"></a>SAML tabanlı çoklu oturum açmayı anlama
 
@@ -44,7 +44,7 @@ Uygulama satıcısından değerleri almalısınız. Değerleri el ile girebilir 
 > [!TIP]
 > Birçok uygulama zaten Azure AD ile çalışacak şekilde önceden yapılandırılmıştır. Bu uygulamalar, Azure AD kiracınıza bir uygulama eklerken gözatabilmeniz gereken uygulamalar galerisinde listelenmiştir. [Hızlı başlangıç serisi](add-application-portal-setup-sso.md) , süreç boyunca size yol gösterir. Galerideki uygulamalar için ayrıntılı, adım adım yönergeler bulacaksınız. Adımlara erişmek için, hızlı başlangıç serisinde açıklandığı şekilde uygulamanın SAML yapılandırması sayfasındaki bağlantıya tıklayabilir veya [SaaS uygulama yapılandırma öğreticilerinde](../saas-apps/tutorial-list.md)tüm uygulama yapılandırma öğreticilerinin listesine gidebilirsiniz.
 
-| Temel SAML yapılandırma ayarı | SP ile başlatılan | idP ile başlatılan | Description |
+| Temel SAML yapılandırma ayarı | SP ile başlatılan | idP ile başlatılan | Açıklama |
 |:--|:--|:--|:--|
 | **Tanımlayıcı (Varlık Kimliği)** | Bazı uygulamalar için gereklidir | Bazı uygulamalar için gereklidir | Uygulamayı benzersiz olarak tanımlar. Azure AD, kimliği, SAML belirtecinin hedef kitle parametresi olarak uygulamaya gönderir. Uygulamanın doğrulaması bekleniyordu. Bu değer ayrıca uygulama tarafından sağlanan SAML meta verilerinde Varlık Kimliği olarak da görünür. Şu kalıbı kullanan bir URL girin: ' https:// <subdomain> . contoso.com ' *Bu değeri, uygulama tarafından gönderilen **Authisteyner** (SAML isteği) içinde **veren** öğesi olarak bulabilirsiniz.* |
 | **Yanıt URL'si** | Gerekli | Gerekli | Uygulamanın SAML belirtecini almayı beklediği konumu belirtir. Yanıt URL'si, Onay Belgesi Tüketici Hizmeti (ACS) URL'si olarak da bilinir. Birden çok yanıt URL 'si belirtmek için ek yanıt URL 'si alanlarını kullanabilirsiniz. Örneğin, birden çok alt etki alanları için ek yanıt URL 'Leri gerekebilir. Ya da, sınama amaçları için aynı anda birden çok yanıt URL 'Si (yerel ana bilgisayar ve genel URL 'Ler) belirtebilirsiniz. |

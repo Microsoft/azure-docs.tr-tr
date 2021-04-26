@@ -6,14 +6,14 @@ ms.reviewer: amberbhargava
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: conceptual
-ms.date: 01/11/2021
+ms.date: 03/31/2021
 ms.author: banders
-ms.openlocfilehash: 887b7013eb3060020a39d2df0082768b8185bdde
-ms.sourcegitcommit: 1f1d29378424057338b246af1975643c2875e64d
+ms.openlocfilehash: 4f7179a5ad35b4d3ca9a92119fb7b492e2aff779
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99575475"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106122535"
 ---
 # <a name="get-started-with-your-updated-azure-billing-account"></a>Güncelleştirilmiş Azure faturalama hesabınızı kullanmaya başlama
 
@@ -26,11 +26,11 @@ Maliyetleri ve faturaları yönetmek, bulut deneyiminizin temel bileşenlerinden
 
 Aşağıdaki diyagramda eski ve yeni faturalama hesabınız karşılaştırılır:
 
-![Eski ve yeni hesap arasındaki faturalama hiyerarşisinin karşılaştırmasını gösteren diyagram](./media/mosp-new-customer-experience/comparison-old-new-account.png)
+:::image type="content" source="./media/mosp-new-customer-experience/comparison-old-new-account.png" alt-text="Eski ve yeni hesaptaki faturalandırma hiyerarşisi arasındaki karşılaştırmayı gösteren diyagram." border="false" lightbox="./media/mosp-new-customer-experience/comparison-old-new-account.png":::
 
 Yeni faturalama hesabınız, faturalarınızı ve ödeme yöntemlerinizi yönetmenize olanak sağlayan bir veya daha fazla faturalama profili içerir. Her faturalama profili, faturalama profilinin faturasındaki maliyetleri düzenlemenize olanak sağlayan bir veya daha fazla fatura bölümü içerir.
 
-![Yeni faturalama hiyerarşisini gösteren diyagram](./media/mosp-new-customer-experience/new-billing-account-hierarchy.png)
+:::image type="content" source="./media/mosp-new-customer-experience/new-billing-account-hierarchy.png" alt-text="Yeni faturalandırma hiyerarşisini gösteren diyagram." border="false" lightbox="./media/mosp-new-customer-experience/new-billing-account-hierarchy.png":::
 
 Ödeme hesabındaki roller en yüksek izin düzeyine sahiptir. Bu roller, kuruluşta faturaları görüntülemesi ve hesabınızın tamamına ilişkin maliyetleri izlemesi gereken finans ve BT yöneticileri gibi kullanıcılara veya hesaba kaydolan bireylere atanmalıdır. Daha fazla bilgi için bkz. [ödeme hesabı rolleri ve görevleri](../manage/understand-mca-roles.md#billing-account-roles-and-tasks). Hesabınız güncelleştirildiğinde, eski faturalama hesabı üzerinde hesap yöneticisi rolüne sahip olan kullanıcıya yeni hesapta sahip rolü verilir.
 
@@ -60,7 +60,21 @@ Yeni deneyiminiz, maliyetlerinizi ve faturalarınızı yönetmenizi kolaylaştı
 
 **Daha tahmin edilebilir aylık faturalama dönemi**: Yeni hesabınızda faturalama dönemi, Azure'ı kullanmak için ne zaman kaydolduğunuza bakılmaksızın ayın ilk günü başlar ve son günü biter. Her ayın başında bir fatura oluşturulur ve bu fatura önceki aydan gelen tüm ücretleri içerir.
 
-**Birden çok abonelik için tek bir aylık fatura alın**: Aboneliklerinizden her biri için ayrı bir aylık fatura veya birden çok abonelik için tek bir fatura arasında seçim yapma esnekliğiniz vardır.
+**Birden çok abonelik için tek bir aylık fatura alın** -mevcut hesabınızda, her bir Azure aboneliği için bir fatura alırsınız. Hesabınız güncelleştirilirken, mevcut davranış korunur, ancak aboneliklerinizin ücretini tek bir faturada birleştirme esnekliği vardır. Hesap güncelleştirildikten sonra, ücretlerinizi tek bir faturada birleştirmek için aşağıdaki adımları izleyin:
+
+1. [Azure Portal](https://portal.azure.com) oturum açın.
+2. **Maliyet Yönetimi + Faturalama** araması yapın.  
+   ![Azure portalda Maliyet Yönetimi + Faturalama aramasını gösteren ekran görüntüsü.](./media/mosp-new-customer-experience/billing-search-cost-management-billing.png)
+3. Ekranın sol tarafındaki **Azure abonelikleri** ' ni seçin. 
+4. Tabloda, için ödeme yaptığınız Azure abonelikleri listelenmektedir. Faturalandırma profili sütununda, abonelik için faturalandırılan faturalandırma profilini bulabilirsiniz. Abonelik ücretleri Faturalandırma profili için faturada görüntülenir. Tüm abonelikleriniz için ücretleri tek bir faturada birleştirmek üzere tüm aboneliklerinizi tek bir faturalandırma profiline bağlamanız gerekir.  
+    :::image type="content" source="./media/mosp-new-customer-experience/list-azure-subscriptions.png" alt-text="Azure aboneliklerinin listesini gösteren ekran görüntüsü." lightbox="./media/mosp-new-customer-experience/list-azure-subscriptions.png" :::
+5. Kullanmak istediğiniz bir faturalandırma profili seçin. 
+6. 5. adımda seçtiğiniz faturalandırma profiliyle bağlantılı olmayan bir abonelik seçin. Abonelik için üç nokta (üç nokta) simgesine tıklayın. **Fatura bölümünü değiştir**'i seçin.  
+    :::image type="content" source="./media/mosp-new-customer-experience/select-change-invoice-section.png" alt-text="Fatura bölümünü değiştirme seçeneğinin nerede bulunacağını gösteren ekran görüntüsü." lightbox="./media/mosp-new-customer-experience/select-change-invoice-section-zoomed-in.png" :::
+7. #5 adımında seçtiğiniz faturalandırma profilini seçin.  
+    :::image type="content" source="./media/mosp-new-customer-experience/change-invoice-section.png" alt-text="Fatura bölümünün nasıl değiştirileceğini gösteren ekran görüntüsü." lightbox="./media/mosp-new-customer-experience/change-invoice-section-zoomed-in.png" :::
+8. **Değiştir**'i seçin.
+9. Diğer tüm abonelikler için 6-8 adımlarını yineleyin. 
 
 **Azure abonelikleri, destek planları ve Azure Market ürünleri için tek bir aylık fatura alın**: Azure aboneliklerinin kullanım ücretleri, destek planları ve Azure Market alışverişleri dahil tüm ücretler için tek bir aylık fatura alacaksınız.
 
@@ -98,6 +112,12 @@ Yeni deneyiminize hazır olmanız için şunları öneririz:
 
 Yeni deneyimde faturanız her ayın yaklaşık dokuzuncu günü oluşturulur ve önceki ayın tüm ücretlerini içerir. Bu tarih, eski hesabınızda faturanızın oluşturulduğu tarihten farklı olabilir. Faturalarınızı başkalarıyla paylaşıyorsanız tarih değişikliğini bu kişilere bildirin.
 
+
+**Geçişten sonra ilk aydaki faturalar**
+
+Hesabınızın güncelleştirildiği gün, mevcut faturalandırılmamış ücretlerinizin son hali olur ve faturanız genellikle faturanızda bu ücretler için olan faturaları alırsınız. Örneğin John, ayın beşinci gününde bir sonraki ayın dördüncü günü ile Azure Sub 01, bir ayın onuncu günü bir sonraki aya kadar olan fatura döngüsüne kadar olan iki Azure aboneliğine sahiptir. John, genellikle ayın beşinci gününde Azure abonelikleriyle ilgili faturaları alır. Şimdi John 'un hesabı 4 Nisan tarihinde güncelleştirilirse, Azure Sub 01 için 5 Mart, 4 Nisan ve Azure Sub 02 tarihine kadar 10 Mart 'a kadar olan ücretler de sonlandırılır. John, 5 Nisan 'daki her bir alt için bir tane olmak üzere iki fatura alacaktır. Hesap güncelleştirildikten sonra, John 'un fatura dönemi takvim ayı temel alır ve bir takvim ayının başından bu takvim ayının sonuna kadar olan tüm ücretleri kapsar.  Önceki takvim ayının ücretlerine ait fatura, her ay 9 ' da kullanılabilir. Bu nedenle yukarıdaki örnekte John, 5 Nisan 'da 30 Nisan 'a kadar faturalandırılır. 
+
+
 **Yeni faturalama ve maliyet yönetimi API'leri**
 
 Faturalama ve maliyet verilerinizi sorgulayıp güncelleştirmek için Maliyet Yönetimi ve Faturalama API'lerini kullanıyorsanız artık yeni API'leri kullanmalısınız. Aşağıdaki tabloda yeni faturalama hesabında kullanılamayacak API'ler ve yeni faturalama hesabınızda yapmanız gereken değişiklikler listelenir.
@@ -106,6 +126,7 @@ Faturalama ve maliyet verilerinizi sorgulayıp güncelleştirmek için Maliyet Y
 |---------|---------|
 |[Faturalama Hesapları - Listeleme](/rest/api/billing/2019-10-01-preview/billingaccounts/list) | Faturalama Hesapları - Listeleme API'sinde eski faturalama hesabınızın agreementType ayarı **MicrosoftOnlineServiceProgram**'dır, yeni faturalama hesabınızın agreementType ayarı **MicrosoftCustomerAgreement** olur. agreementType üzerinde bir bağımlılığınız varsa bunu güncelleştirin. |
 |[Faturalar - Faturalama Aboneliğine Göre Listeleme](/rest/api/billing/2019-10-01-preview/invoices/listbybillingsubscription)     | Bu API yalnızca hesabınız güncelleştirilmeden önce oluşturulmuş olan faturaları döndürür. Yeni faturalama hesabınızda oluşturulan faturaları almak için [Faturalar - Faturalama Hesabına Göre Listeleme](/rest/api/billing/2019-10-01-preview/invoices/listbybillingaccount) API'sini kullanmanız gerekebilir. |
+
 
 ## <a name="cost-management-updates-after-account-update"></a>Hesap güncelleştirmesi sonrasında Maliyet Yönetimi güncelleştirmeleri
 
@@ -141,7 +162,7 @@ Güncelleştirilmiş hesabınızla tüm Azure ücretleri için tek bir fatura al
 
 Örneğin eski hesabınızda faturalama döneminiz 24 Kasım ile 23 Aralık arasındaysa, yükseltme sonrasında bu tarihler 1 Kasım ile 30 Kasım, 1 Aralık ile 31 Aralık vb. arasında olacaktır.
 
-:::image type="content" source="./media/mosp-new-customer-experience/billing-periods.png" alt-text="Eski ve yeni faturalama dönemleri arasındaki karşılaştırmayı gösteren resim" lightbox="./media/mosp-new-customer-experience/billing-periods.png" :::
+:::image type="content" source="./media/mosp-new-customer-experience/billing-periods.png" alt-text="Eski ve yeni fatura dönemleri arasındaki karşılaştırmayı gösteren ekran görüntüsü." lightbox="./media/mosp-new-customer-experience/billing-periods.png" :::
 
 #### <a name="budgets"></a>Bütçeler
 
@@ -156,7 +177,7 @@ Yeni faturalama döneminiz geliştirilmiş dışarı aktarma işlevi sağlar. Ö
 
 Örneğin 23 Aralık ile 22 Ocak arasındaki faturalama dönemi için dışarı aktarılan CSV dosyasında söz konusu dönemin maliyet ve kullanım verileri yer alır. Güncelleştirme sonrasında, dışarı aktarma işlemi takvim ayının verilerini içerecektir. Örneğin, 1 Ocak ile 31 Aralık arası vb.
 
-:::image type="content" source="./media/mosp-new-customer-experience/export-amortized-costs.png" alt-text="Eski ve yeni dışarı aktarma ayrıntıları arasındaki karşılaştırmayı gösteren resim" lightbox="./media/mosp-new-customer-experience/export-amortized-costs.png" :::
+:::image type="content" source="./media/mosp-new-customer-experience/export-amortized-costs.png" alt-text="Eski ve yeni dışa aktarma ayrıntıları arasındaki karşılaştırmayı gösteren ekran görüntüleri." lightbox="./media/mosp-new-customer-experience/export-amortized-costs.png" :::
 
 ## <a name="additional-information"></a>Ek bilgiler
 

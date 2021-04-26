@@ -10,13 +10,13 @@ ms.topic: conceptual
 author: oslake
 ms.author: moslake
 ms.reviewer: sstein
-ms.date: 2/22/2021
-ms.openlocfilehash: 4dd7bbe613b30df2611bfe6631950e121235204a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 4/16/2021
+ms.openlocfilehash: d5b0c8e60632be5e058900680dc376b7f0761150
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101658597"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781586"
 ---
 # <a name="azure-sql-database-serverless"></a>Azure SQL veritabanı sunucusuz
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -255,7 +255,7 @@ Maksimum veya en düşük sanal çekirdekleri ve oto duraklatma gecikmesini değ
 
 ### <a name="use-the-azure-cli"></a>Azure CLI kullanma
 
-Maksimum veya en düşük sanal çekirdekleri ve oto duraklatma gecikmesini değiştirmek,, ve bağımsız değişkenlerini kullanarak Azure CLı 'deki [az SQL DB Update](/cli/azure/sql/db#az-sql-db-update) komutu kullanılarak gerçekleştirilir `capacity` `min-capacity` `auto-pause-delay` .
+Maksimum veya en düşük sanal çekirdekleri ve oto duraklatma gecikmesini değiştirmek,, ve bağımsız değişkenlerini kullanarak Azure CLı 'deki [az SQL DB Update](/cli/azure/sql/db#az_sql_db_update) komutu kullanılarak gerçekleştirilir `capacity` `min-capacity` `auto-pause-delay` .
 
 
 ## <a name="monitoring"></a>İzleme
@@ -266,7 +266,7 @@ Sunucusuz bir veritabanının kaynakları uygulama paketi, SQL örneği ve Kulla
 
 #### <a name="app-package"></a>Uygulama paketi
 
-Uygulama paketi, veritabanının sunucusuz veya sağlanmış bir işlem katmanında olup olmamasına bakılmaksızın bir veritabanı için en dıştaki kaynak yönetimi sınırıdır. Uygulama paketi, SQL veritabanı 'nda bir veritabanı tarafından kullanılan tüm Kullanıcı ve sistem kaynakları kapsamındaki SQL örneğini ve dış hizmetleri içerir. Dış hizmet örnekleri R ve tam metin araması içerir. SQL örneği genellikle uygulama paketi genelinde genel kaynak kullanımını ayırır.
+Uygulama paketi, veritabanının sunucusuz veya sağlanmış bir işlem katmanında olup olmamasına bakılmaksızın bir veritabanı için en dıştaki kaynak yönetimi sınırıdır. Uygulama paketi, hepsi bir arada SQL veritabanındaki bir veritabanı tarafından kullanılan tüm Kullanıcı ve sistem kaynaklarının kapsamını kapsayan tam metin araması gibi SQL örneğini ve dış hizmetleri içerir. SQL örneği genellikle uygulama paketi genelinde genel kaynak kullanımını ayırır.
 
 #### <a name="user-resource-pool"></a>Kullanıcı kaynak havuzu
 

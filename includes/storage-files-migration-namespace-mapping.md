@@ -1,18 +1,19 @@
 ---
-title: Bir klasör yapısını Azure Dosya Eşitleme topolojisine eşleme
-description: Azure Dosya Eşitleme ile kullanmak için mevcut bir dosya ve klasör yapısını Azure dosya paylaşımlarına eşleyin. Geçiş belgeleri arasında paylaşılan ortak bir metin bloğu.
+title: include dosyası
+description: include dosyası
+services: storage
 author: fauhse
 ms.service: storage
-ms.topic: conceptual
+ms.topic: include
 ms.date: 2/20/2020
 ms.author: fauhse
-ms.subservice: files
-ms.openlocfilehash: 265d14d7cca05ff510e747c8d3a3b071e44a0a68
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: include file
+ms.openlocfilehash: a8dd83a9584d218d56c7350d6d634bfe4610b790
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102202408"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106075616"
 ---
 Bu adımda, kaç tane Azure dosya paylaşımının gerekli olduğunu değerlendirirsiniz. Tek bir Windows Server örneği (veya kümesi), 30 adede kadar Azure dosya paylaşımını eşitleyebilir.
 

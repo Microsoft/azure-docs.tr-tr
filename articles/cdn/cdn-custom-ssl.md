@@ -5,15 +5,15 @@ services: cdn
 author: asudbring
 ms.service: azure-cdn
 ms.topic: tutorial
-ms.date: 01/27/2021
+ms.date: 03/26/2021
 ms.author: allensu
 ms.custom: mvc
-ms.openlocfilehash: 275afc504a5e7b92ae3274c02372eee6b488c782
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6f77bac93b7bb5e3319409c01e328c73cd08a9a0
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102616409"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106058961"
 ---
 # <a name="tutorial-configure-https-on-an-azure-cdn-custom-domain"></a>Öğretici: Azure CDN özel etki alanı üzerinde HTTPS yapılandırma
 
@@ -172,15 +172,18 @@ Azure CDN’ye, Azure Key Vault hesabınızdaki sertifikalara (gizli dizi) eriş
 
 3. Sertifika yönetimi türü bölümünde **Kendi sertifikamı kullan**’ı seçin. 
 
-    ![Sertifikanızı yapılandırma](./media/cdn-custom-ssl/cdn-configure-your-certificate.png)
+    :::image type="content" source="./media/cdn-custom-ssl/cdn-configure-your-certificate.png" alt-text="CDN uç noktası için sertifika yapılandırma ekran görüntüsü.":::
 
-4. Bir anahtar kasası, sertifika (gizli gizi) ve sertifika sürümü seçin.
+4. Bir Anahtar Kasası, sertifika/gizli dizi ve sertifika/gizli sürümü seçin.
 
     Azure CDN, aşağıdaki bilgileri listeler: 
     - Abonelik kimliğiniz için anahtar kasası hesapları. 
-    - Seçilen anahtar kasası altındaki sertifikalar (gizli diziler). 
-    - Kullanılabilir sertifika sürümleri. 
+    - Seçili anahtar kasasının altındaki sertifikalar/gizlilikler. 
+    - Kullanılabilir sertifika/gizli sürümler.
  
+    > [!NOTE]
+    > Sertifikanın Key Vault daha yeni bir sürümü kullanıma hazır olduğunda sertifikanın en son sürüme otomatik olarak döndürülmesi için lütfen sertifika/parola sürümünü ' en son ' olarak ayarlayın. Belirli bir sürüm seçilirse, sertifika döndürme için yeni sürümü el ile yeniden seçmeniz gerekir. Sertifika/gizli dizi yeni sürümünün dağıtılması 24 saate kadar sürer. 
+   
 5. HTTPS’yi etkinleştirmek için **Açık** seçeneğini belirleyin.
   
 6. Sertifikanızı kullandığınızda etki alanı doğrulaması gerekli değildir. [Yayılmayı beklemeye](#wait-for-propagation)devam edin.
@@ -234,7 +237,7 @@ DigiCert aşağıdaki e-posta adreslerine bir doğrulama e-postası gönderir. A
 * **hostmaster@your-domain-name.com**  
 * **postmaster@your-domain-name.com**  
 
-İsteği onaylamanız için birkaç dakika içinde bir e-posta almalısınız. Bir istenmeyen posta filtresi kullanıyorsanız, verification@digicert.com izin verilenler listesine ekleyin. E-postayı 24 saat içinde almazsanız Microsoft destek ekibine başvurun.
+İsteği onaylamanız için birkaç dakika içinde bir e-posta almalısınız. Bir istenmeyen posta filtresi kullanıyorsanız, verification@digicert.com allowlist öğesine ekleyin. E-postayı 24 saat içinde almazsanız Microsoft destek ekibine başvurun.
     
 ![Etki alanı doğrulama e-postası](./media/cdn-custom-ssl/domain-validation-email.png)
 

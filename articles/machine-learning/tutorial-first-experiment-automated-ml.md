@@ -1,7 +1,7 @@
 ---
 title: Otomatik ML sınıflandırma modelleri oluşturma
 titleSuffix: Azure Machine Learning
-description: Sınıflandırma modellerini Azure Machine Learning otomatik makine öğrenimi (otomatik ML) arabirimiyle nasıl eğeceğinizi &.
+description: Azure Machine Learning otomatik makine öğrenimi (otomatik ML) arabirimini kullanarak kod yazmadan sınıflandırma modellerini eğitme & dağıtın.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -11,29 +11,31 @@ ms.author: sacartac
 ms.reviewer: nibaccam
 ms.date: 12/21/2020
 ms.custom: automl
-ms.openlocfilehash: ad8a9f7af9ddabe969d090f80378ba5ff891d7f1
-ms.sourcegitcommit: c27a20b278f2ac758447418ea4c8c61e27927d6a
+ms.openlocfilehash: d0e236891e48a20adf1901d2f95a90ae25969c49
+ms.sourcegitcommit: c3739cb161a6f39a9c3d1666ba5ee946e62a7ac3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/03/2021
-ms.locfileid: "101691952"
+ms.lasthandoff: 04/08/2021
+ms.locfileid: "107210855"
 ---
 # <a name="tutorial-create-a-classification-model-with-automated-ml-in-azure-machine-learning"></a>Öğretici: Azure Machine Learning otomatik ML ile sınıflandırma modeli oluşturma
 
-
-Bu öğreticide, Azure Machine Learning Studio 'da otomatik makine öğrenimi kullanarak tek bir kod satırı yazmadan basit bir sınıflandırma modeli oluşturmayı öğreneceksiniz. Bu sınıflandırma modeli, bir istemci bir mali kurum ile sabit bir havale 'e abone olurken tahmin edilir.
+Azure Machine Learning Studio 'da otomatik makine öğrenimi kullanarak tek bir kod satırı yazmadan [basit bir sınıflandırma modeli](concept-automated-ml.md#classification) oluşturmayı öğrenin. Bu sınıflandırma modeli, bir istemci bir mali kurum ile sabit bir havale 'e abone olurken tahmin edilir.
 
 Otomatik makine öğrenimi sayesinde yoğun zamanda yoğun görevleri otomatik hale getirebilirsiniz. Otomatikleştirilmiş makine öğrenimi, seçtiğiniz başarı ölçümünü temel alarak en iyi modeli bulmanıza yardımcı olmak üzere birçok algoritma ve hiper parametre kombinasyonu üzerinde hızlı bir şekilde yinelenir.
 
-Bir zaman serisi tahmin örneği için bkz. [öğretici: talep tahmini &](tutorial-automated-ml-forecast.md).
-
-Bu öğreticide, aşağıdaki görevleri nasıl gerçekleştireceğinizi öğreneceksiniz:
+Bu öğreticide herhangi bir kod yazmayacaksınız, eğitim gerçekleştirmek için Studio arabirimini kullanacaksınız.  Aşağıdaki görevleri nasıl gerçekleştireceğinizi öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Azure Machine Learning çalışma alanı oluşturun.
 > * Otomatik makine öğrenmesi denemesi çalıştırma.
 > * Deneme ayrıntılarını görüntüleyin.
 > * Modeli dağıtma.
+
+Ayrıca, bu diğer model türleri için otomatik makine öğrenimini deneyin:
+
+* Kod içermeyen tahmin örneği için bkz. [öğretici: talep tahmini &](tutorial-automated-ml-forecast.md).
+* Regresyon modelinin kod örneği için bkz. [öğreticiye bakın: taksi Fares 'yi tahmin etmek için otomatik makine öğrenimi kullanma](tutorial-auto-train-models.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -52,7 +54,7 @@ Azure Machine Learning çalışma alanı, bulutta makine öğrenimi modellerini 
 >[!IMPORTANT] 
 > **Çalışma alanınızı** ve **aboneliğinizi** bir yere göz atın. Denemenizin doğru yerde oluşturulmasını sağlamak için bunlara ihtiyacınız olacaktır. 
 
-## <a name="get-started-in-azure-machine-learning-studio"></a>Azure Machine Learning Studio 'da çalışmaya başlama
+## <a name="sign-in-to-the-studio"></a>Studio 'da oturum açın
 
 Aşağıdaki deneme kurulumunu tamamlayıp, https://ml.azure.com tüm beceri seviyelerinin veri bilimi senaryolarına yönelik veri bilimi senaryoları gerçekleştirmek için Machine Learning araçları 'nı içeren birleştirilmiş bir Web arabirimi olan Azure Machine Learning Studio aracılığıyla adımları gerçekleştirin. Studio, Internet Explorer tarayıcılarında desteklenmez.
 
@@ -159,7 +161,7 @@ Verilerinizi yükleyip yapılandırdıktan sonra, denemenizin kurulumunu yapabil
 
     1. **Ek yapılandırma ayarlarını görüntüle** ' yi seçin ve alanları aşağıdaki gibi doldurun. Bu ayarlar, eğitim işini daha iyi denetliyor. Aksi takdirde, denemeler seçimine ve verilerine göre varsayılan ayarlar uygulanır.
 
-        Ek &nbsp; yapılandırma|Açıklama|&nbsp;Öğretici için &nbsp; değer
+        Ek &nbsp; yapılandırma|Description|&nbsp;Öğretici için &nbsp; değer
         ------|---------|---
         Birincil ölçüm| Makine öğrenimi algoritmasının ölçülecek değerlendirme ölçümü.|AUC_weighted
         En iyi modeli açıkla| Otomatik ML tarafından oluşturulan en iyi modelde explainability 'yi otomatik olarak gösterir.| Etkinleştir

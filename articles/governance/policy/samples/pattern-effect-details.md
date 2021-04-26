@@ -1,18 +1,18 @@
 ---
 title: 'Model: bir ilke tanımının etkileri'
 description: Bu Azure Ilke deseninin farklı etkileri bir ilke tanımının nasıl kullanılacağına ilişkin bir örnek sağlar.
-ms.date: 10/14/2020
+ms.date: 03/31/2021
 ms.topic: sample
-ms.openlocfilehash: f1da9bd153707db35c07ed3c176542797a694d7a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 9fa95fdc793e7762c39525a83f38ae952f532a60
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "92073045"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106092849"
 ---
 # <a name="azure-policy-pattern-effects"></a>Azure Ilke stili: efektler
 
-Azure Ilkesinde, hizmetin uyumlu olmayan kaynaklar için nasıl yeniden davranması gerektiğini belirten bir dizi [efekt](../concepts/effects.md) vardır. Bazı etkiler basittir ve diğer bazı özellikler gerektirdiğinden ilke tanımında ek özellik gerektirmez.
+Azure Ilkesi, hizmetin uyumlu olmayan kaynaklara nasıl tepki verdiğini tespit eden birçok [etkiye](../concepts/effects.md) sahiptir. Bazı etkiler basittir ve diğer bazı özellikler gerektirdiğinden ilke tanımında ek özellik gerektirmez.
 
 ## <a name="sample-1-simple-effect"></a>Örnek 1: basit efekt
 

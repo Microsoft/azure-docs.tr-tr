@@ -17,12 +17,12 @@ ms.date: 01/12/2021
 ms.author: matthewp
 ms.reviewer: jowargo
 ms.lastreviewed: 08/01/2019
-ms.openlocfilehash: e7d4206de1e097c30e9f5e96bbd935e94892ce0e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c97da77619a395a8e2839ea672fe7a78f0501c47
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98221043"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107575862"
 ---
 # <a name="tutorial-send-push-notifications-to-xamarinandroid-apps-using-notification-hubs"></a>Öğretici: Notification Hubs kullanarak Xamarin. Android uygulamalarına anında iletme bildirimleri gönderme
 
@@ -156,7 +156,7 @@ Bildirim hub'ınız FCM ile birlikte çalışmak üzere yapılandırıldı. Ayr�
 6. Aşağıdaki using deyimlerini öğesine ekleyin `MainActivity.cs` :
 
     ```csharp
-    using Azure.Messaging.NotificationHubs;
+    using WindowsAzure.Messaging.NotificationHubs;
     ```
 
 7. Aşağıdaki özellikleri MainActivity sınıfına ekleyin:

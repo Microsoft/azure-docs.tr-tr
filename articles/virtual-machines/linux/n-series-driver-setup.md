@@ -10,12 +10,12 @@ ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 11/11/2019
 ms.author: vikancha
-ms.openlocfilehash: c4c6bee6d3f9e423d83458ad48d213fe65223514
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: dd9461e30138ee1a59a93db45aa5f739bfe88f94
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102551769"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565313"
 ---
 # <a name="install-nvidia-gpu-drivers-on-n-series-vms-running-linux"></a>Linux çalıştıran N serisi VM 'Lere NVıDıA GPU sürücülerini yükler
 
@@ -128,6 +128,25 @@ sudo reboot
    ```
 
    Yükleme birkaç dakika sürebilir. 
+   
+    > [!NOTE]
+   >  Kullanmak istediğiniz CentOS veya RHEL sürümünün doğru paketini seçmek için [Fedora](https://dl.fedoraproject.org/pub/epel/) ve [NVIDIA CUDA depo](https://developer.download.nvidia.com/compute/cuda/repos/) adresini ziyaret edin.
+   >  
+
+Örneğin, CentOS 8 ve RHEL 8 ' in aşağıdaki adımları yapması gerekir.
+
+   ```bash
+   sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+   sudo yum install dkms
+   
+   CUDA_REPO_PKG=cuda-repo-rhel8-10.2.89-1.x86_64.rpm
+   wget https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/${CUDA_REPO_PKG} -O /tmp/${CUDA_REPO_PKG}
+
+   sudo rpm -ivh /tmp/${CUDA_REPO_PKG}
+   rm -f /tmp/${CUDA_REPO_PKG}
+
+   sudo yum install cuda-drivers
+   ```
 
 4. Tam CUDA araç setini isteğe bağlı olarak yüklemek için şunu yazın:
 

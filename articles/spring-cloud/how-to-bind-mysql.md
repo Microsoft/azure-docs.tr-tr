@@ -8,10 +8,10 @@ ms.date: 11/04/2019
 ms.author: brendm
 ms.custom: devx-track-java
 ms.openlocfilehash: cc1c186f9acb6d49314f5d581a4b51ffe49d6627
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104878759"
 ---
 # <a name="bind-an-azure-database-for-mysql-instance-to-your-azure-spring-cloud-application"></a>MySQL için Azure veritabanı örneğini Azure Spring Cloud uygulamanıza bağlama 
@@ -24,7 +24,7 @@ Azure Spring Cloud ile, Spring Boot uygulamanızı el ile yapılandırmak yerine
 
 * Dağıtılan bir Azure yay bulutu örneği
 * MySQL için Azure veritabanı hesabı
-* Azure CLI
+* Azure CLI’si
 
 Dağıtılmış bir Azure yay bulut örneğiniz yoksa, ilk Spring Cloud uygulamanızı dağıtmak için [Azure Portal kullanarak Azure yay bulutu uygulamasını başlatma](spring-cloud-quickstart.md) bölümündeki yönergeleri izleyin.
 

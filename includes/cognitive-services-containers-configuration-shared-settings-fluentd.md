@@ -5,10 +5,10 @@ ms.date: 06/25/2019
 ms.service: cognitive-services
 ms.topic: include
 ms.openlocfilehash: b08516b35a864eae6d15c4c5c928f0550c64c239
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "96001224"
 ---
 Floentd, Birleşik günlük kaydına yönelik açık kaynaklı bir veri toplayıcıdır. `Fluentd`Ayarlar, kapsayıcının bir [Floentd](https://www.fluentd.org) sunucusuyla bağlantısını yönetir. Kapsayıcı, kapsayıcının günlükleri ve isteğe bağlı olarak ölçüm verilerini Floentd sunucusuna yazmasını sağlayan bir Floentd günlüğe kaydetme sağlayıcısı içerir.

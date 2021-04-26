@@ -4,12 +4,12 @@ ms.service: key-vault
 ms.topic: include
 ms.date: 03/09/2021
 ms.author: ambapat
-ms.openlocfilehash: c2548b1669366564809ed2fde725cb3399922a29
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 9ecfcff00e6f44f5c739513c063baaa3fa02a3db
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104803325"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107753316"
 ---
 Azure Key Vault hizmet iki kaynak türünü destekler: kasa ve yönetilen HSM 'ler. Aşağıdaki iki bölüm, her birinin hizmet sınırlarını sırasıyla anlatmaktadır.
 
@@ -65,7 +65,7 @@ Gizli dizi, anahtar veya sertifika gibi bir Anahtar Kasası nesnesini yedeklerke
 #### <a name="azure-private-link-integration"></a>Azure özel bağlantı tümleştirmesi
 
 > [!NOTE]
-> Abonelik başına etkin olan özel uç noktaları olan anahtar kasalarının sayısı, ayarlanabilir bir kısıtlamadır. Aşağıda gösterilen sınır varsayılan sınırdır. Hizmetiniz için sınır artışı istemek istiyorsanız lütfen adresine bir e-posta gönderin akv-privatelink@microsoft.com . Bu istekleri durum temelinde onaylayacağız.
+> Abonelik başına etkin olan özel uç noktaları olan anahtar kasalarının sayısı, ayarlanabilir bir kısıtlamadır. Aşağıda gösterilen sınır varsayılan sınırdır. Hizmetiniz için bir sınır artışı istemek istiyorsanız lütfen bir destek isteği oluşturun ve bu durum, büyük/küçük harf temelinde değerlendirilir.
 
 | Kaynak | Sınır |
 | -------- | -----:|

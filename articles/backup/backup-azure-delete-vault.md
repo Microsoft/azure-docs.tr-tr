@@ -3,12 +3,12 @@ title: Microsoft Azure Kurtarma Hizmetleri kasasını silme
 description: Bu makalede, bağımlılıkları kaldırmayı ve sonra bir Azure Backup Recovery Services kasasını silmeyi öğrenin.
 ms.topic: conceptual
 ms.date: 06/04/2020
-ms.openlocfilehash: 1526e9aeef1574f261dcb1a58ee12a12fbf08866
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: bb6be070ac0fb408ac37c8ae7b003b54da5d6dea
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104864967"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773666"
 ---
 # <a name="delete-an-azure-backup-recovery-services-vault"></a>Azure Backup Recovery Services kasasını silme
 
@@ -320,7 +320,7 @@ Mevcut kurtarma hizmetleri kasasını silmek için aşağıdaki adımları gerç
                              [--yes]
     ```
 
-    Daha fazla bilgi için bu [makaleye](/cli/azure/backup/protection#az-backup-protection-disable)bakın.
+    Daha fazla bilgi için bu [makaleye](/cli/azure/backup/protection#az_backup_protection_disable)bakın.
 
 - Var olan bir kurtarma hizmetleri kasasını silme:
 

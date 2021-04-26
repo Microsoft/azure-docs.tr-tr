@@ -10,12 +10,12 @@ author: sdgilley
 ms.author: sgilley
 ms.date: 03/18/2020
 ms.custom: seodec18
-ms.openlocfilehash: ee6529f36c302cba1dc7b5a4b53aaf96ce58e4a5
-ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
+ms.openlocfilehash: 0981d325b3c5982793ada480a87afc48bf58acf7
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94532792"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106066587"
 ---
 # <a name="tutorial-deploy-an-image-classification-model-in-azure-container-instances"></a>Öğretici: Azure Container Instances bir görüntü sınıflandırma modeli dağıtma
 
@@ -35,7 +35,7 @@ Container Instances, iş akışını test etmek ve anlamak için harika bir çö
 >[!NOTE]
 > Bu makaledeki kod, Azure Machine Learning SDK sürümü 1.0.83 ile test edilmiştir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Not defterini çalıştırmak için, ilk olarak öğreticide model eğitimi ' ni [(1. bölüm) doldurun: görüntü sınıflandırma modelini eğitme](tutorial-train-models-with-aml.md).   Ardından klonlanan *öğreticiler/Image-Classification-mnist-Data* klasöründe *img-Classification-part2-Deploy. ipynb* Not defterini açın.
 

@@ -9,12 +9,12 @@ ms.workload: infrastructure
 ms.topic: how-to
 ms.date: 02/17/2021
 ms.author: manayar
-ms.openlocfilehash: 276762bc2b8624f687cbb77e1af771478791a57b
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1a6a67fe43d4e0a6086154d71e61fe51680dbcd0
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101680319"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107762596"
 ---
 # <a name="preview-automatic-vm-guest-patching-for-azure-vms"></a>Önizleme: Azure VM 'Leri için otomatik VM Konuk düzeltme eki uygulama
 
@@ -182,7 +182,7 @@ Register-AzResourceProvider -ProviderNamespace Microsoft.Compute
 ```
 
 ### <a name="azure-cli-20"></a>Azure CLI 2.0
-Aboneliğiniz için Önizlemeyi etkinleştirmek üzere [az Feature Register](/cli/azure/feature#az-feature-register) kullanın.
+Aboneliğiniz için Önizlemeyi etkinleştirmek üzere [az Feature Register](/cli/azure/feature#az_feature_register) kullanın.
 
 ```azurecli-interactive
 az feature register --namespace Microsoft.Compute --name InGuestAutoPatchVMPreview `
@@ -258,13 +258,13 @@ Set-AzVMOperatingSystem -VM $VirtualMachine -Windows -ComputerName $ComputerName
 ```
 
 ### <a name="azure-cli-for-windows-vms"></a>Windows VM 'Leri için Azure CLı
-Yeni bir VM oluştururken otomatik VM Konuk düzeltme eki uygulamayı etkinleştirmek için [az VM Create](/cli/azure/vm#az-vm-create) kullanın. Aşağıdaki örnek, *Myresourcegroup* adlı kaynak grubunda *myvm* adlı BIR VM için otomatik VM Konuk düzeltme eki uygulamayı yapılandırır:
+Yeni bir VM oluştururken otomatik VM Konuk düzeltme eki uygulamayı etkinleştirmek için [az VM Create](/cli/azure/vm#az_vm_create) kullanın. Aşağıdaki örnek, *Myresourcegroup* adlı kaynak grubunda *myvm* adlı BIR VM için otomatik VM Konuk düzeltme eki uygulamayı yapılandırır:
 
 ```azurecli-interactive
 az vm create --resource-group myResourceGroup --name myVM --image Win2019Datacenter --enable-agent --enable-auto-update --patch-mode AutomaticByPlatform
 ```
 
-Var olan bir VM 'yi değiştirmek için [az VM Update](/cli/azure/vm#az-vm-update) kullanın
+Var olan bir VM 'yi değiştirmek için [az VM Update](/cli/azure/vm#az_vm_update) kullanın
 
 ```azurecli-interactive
 az vm update --resource-group myResourceGroup --name myVM --set osProfile.windowsConfiguration.enableAutomaticUpdates=true osProfile.windowsConfiguration.patchSettings.patchMode=AutomaticByPlatform
@@ -308,8 +308,8 @@ Get-AzVM -ResourceGroupName "myResourceGroup" -Name "myVM" -Status
 
 PowerShell Şu anda yalnızca yama uzantısı hakkında bilgi sağlamaktadır. Hakkındaki bilgiler `patchStatus` yakında PowerShell aracılığıyla da kullanılabilir.
 
-### <a name="azure-cli"></a>Azure CLI’si
-VM 'niz için örnek görünümüne erişmek için [az VM Get-instance-View](/cli/azure/vm#az-vm-get-instance-view) kullanın.
+### <a name="azure-cli"></a>Azure CLI
+VM 'niz için örnek görünümüne erişmek için [az VM Get-instance-View](/cli/azure/vm#az_vm_get_instance_view) kullanın.
 
 ```azurecli-interactive
 az vm get-instance-view --resource-group myResourceGroup --name myVM
@@ -343,8 +343,8 @@ Sanal makineniz için kullanılabilir düzeltme eklerini değerlendirmek üzere 
 Invoke-AzVmPatchAssessment -ResourceGroupName "myResourceGroup" -VMName "myVM"
 ```
 
-### <a name="azure-cli"></a>Azure CLI’si
-Sanal makineniz için kullanılabilir düzeltme eklerini değerlendirmek için [az VM değerlendir-Patches](/cli/azure/vm#az-vm-assess-patches) kullanın.
+### <a name="azure-cli"></a>Azure CLI
+Sanal makineniz için kullanılabilir düzeltme eklerini değerlendirmek için [az VM değerlendir-Patches](/cli/azure/vm#az_vm_assess_patches) kullanın.
 
 ```azurecli-interactive
 az vm assess-patches --resource-group myResourceGroup --name myVM

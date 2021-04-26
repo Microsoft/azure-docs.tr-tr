@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 01/18/2021
 ms.author: jeedes
 ms.openlocfilehash: 9a3117b64c516120f8556b7b63b24e5ef906f973
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101648572"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-pagerduty"></a>Öğretici: Pagerharcı ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
@@ -95,7 +95,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
     ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user&quot;></a>Azure AD test kullanıcısı oluşturma
 
 Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
@@ -107,7 +107,7 @@ Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaks�
    1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
    1. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
+### <a name=&quot;assign-the-azure-ad-test-user&quot;></a>Azure AD test kullanıcısını atama
 
 Bu bölümde, Pagerharcı 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
@@ -119,13 +119,13 @@ Bu bölümde, Pagerharcı 'e erişim vererek Azure çoklu oturum açma özelliğ
 1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-## <a name="configure-pagerduty-sso"></a>Pagerharcı SSO 'yu yapılandırma
+## <a name=&quot;configure-pagerduty-sso&quot;></a>Pagerharcı SSO 'yu yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, Pagerharcı şirket sitenizde yönetici olarak oturum açın.
 
 2. Üstteki menüde **Hesap ayarları**' na tıklayın.
 
-    ![Hesap ayarları](./media/pagerduty-tutorial/ic778535.png "Hesap ayarları")
+    ![Hesap ayarları](./media/pagerduty-tutorial/ic778535.png &quot;Hesap ayarları")
 
 3. **Çoklu oturum açma**' ya tıklayın.
 

@@ -126,8 +126,14 @@
       href: disaster-recovery.md
     - name: KDC ara sunucusunu ayarlama
       href: key-distribution-center-proxy.md
-    - name: RD Ağ Geçidi rolünü ayarlama
-      href: rd-gateway-role.md
+    - name: Connect 'te VM 'yi Başlat
+      items:
+        - name: Connect 'te başlangıç VM 'si ayarlama
+          href: start-virtual-machine-connect.md
+        - name: Connect 'te VM 'yi başlatma SSS
+          href: start-virtual-machine-connect-faq.md
+    - name: Boşaltma modunu ayarla
+      href: drain-mode.md
 - name: Kavramlar
   items:
     - name: Yerleşik roller
@@ -160,12 +166,10 @@
       href: fslogix-containers-azure-files.md
     - name: FSLogix profil kapsayıcıları için depolama seçenekleri
       href: store-fslogix-profile.md
-    - name: İş ortağı tümleştirmeleri
-      href: partners.md
     - name: Windows Sanal Masaüstü hakkında SSS
       href: faq.md
     - name: Windows 10 Enterprise çoklu oturum hakkında SSS
-      href: windows-10-multisession-faq.md
+      href: windows-10-multisession-faq.yml
     - name: MSIX uygulama iliştirme
       items:
         - name: MSIX uygulama iliştirme nedir?
@@ -210,6 +214,8 @@
       href: security-guide.md
     - name: Linux desteği
       href: linux-overview.md
+    - name: Azure CLI
+      href: /cli/azure/desktopvirtualization
     - name: Azure Izleyici maliyetlerini tahmin etme
       href: azure-monitor-costs.md
     - name: Desteklenen RDP dosyası ayarları
@@ -217,7 +223,7 @@
     - name: Sanal makine boyutlandırma kılavuzu
       href: /windows-server/remote/remote-desktop-services/virtual-machine-recs?context=/azure/virtual-desktop/context/context
     - name: Azure komut satırı arabirimi (CLI)
-      href: /cli/azure/ext/desktopvirtualization/
+      href: /cli/azure/
     - name: Örnek Azure senaryoları
       href: /azure/architecture/example-scenario/wvd/windows-virtual-desktop
     - name: E-posta bulma
@@ -238,8 +244,6 @@
       href: 'https://support.microsoft.com/help/4563049/how-to-videos-about-windows-virtual-desktop'
     - name: Teknik Topluluk destek grubu
       href: 'https://techcommunity.microsoft.com/t5/Windows-Virtual-Desktop/bd-p/WindowsVirtualDesktop'
-    - name: UserVoice forumu
-      href: 'https://windowsvirtualdesktop.uservoice.com/forums/921118-general'
     - name: Microsoft 365 yol haritası
       href: 'https://aka.ms/wvdroadmap'
     - name: Azure Resource Manager şablonları

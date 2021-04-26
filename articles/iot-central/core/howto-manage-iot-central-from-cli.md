@@ -9,12 +9,12 @@ ms.date: 03/27/2020
 ms.topic: how-to
 ms.custom: devx-track-azurecli
 manager: philmea
-ms.openlocfilehash: d414b86ff81a33f9e818a0a28031e73d88cabec2
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: c30781cb83436e15a217a1d43c0e39facae9f52d
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102202272"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107770444"
 ---
 # <a name="manage-iot-central-from-azure-cli"></a>Azure CLı 'dan IoT Central yönetme
 
@@ -32,7 +32,7 @@ ms.locfileid: "102202272"
 
 [!INCLUDE [Warning About Access Required](../../../includes/iot-central-warning-contribitorrequireaccess.md)]
 
-Azure aboneliğinizde bir IoT Central uygulaması oluşturmak için [az IoT Central App Create](/cli/azure/iot/central/app#az-iot-central-app-create) komutunu kullanın. Örnek:
+Azure aboneliğinizde bir IoT Central uygulaması oluşturmak için [az IoT Central App Create](/cli/azure/iot/central/app#az_iot_central_app_create) komutunu kullanın. Örnek:
 
 ```azurecli-interactive
 # Create a resource group for the IoT Central application
@@ -65,11 +65,11 @@ Bu komutlar öncelikle uygulamanın Doğu ABD bölgesinde bir kaynak grubu oluş
 
 ## <a name="view-your-applications"></a>Uygulamalarınızı görüntüleyin
 
-IoT Central uygulamalarınızı listelemek ve meta verileri görüntülemek için [az IoT Central App List](/cli/azure/iot/central/app#az-iot-central-app-list) komutunu kullanın.
+IoT Central uygulamalarınızı listelemek ve meta verileri görüntülemek için [az IoT Central App List](/cli/azure/iot/central/app#az_iot_central_app_list) komutunu kullanın.
 
 ## <a name="modify-an-application"></a>Bir uygulamayı değiştirme
 
-Bir IoT Central uygulamasının meta verilerini güncelleştirmek için [az IoT Central App Update](/cli/azure/iot/central/app#az-iot-central-app-update) komutunu kullanın. Örneğin, uygulamanızın görünen adını değiştirmek için:
+Bir IoT Central uygulamasının meta verilerini güncelleştirmek için [az IoT Central App Update](/cli/azure/iot/central/app#az_iot_central_app_update) komutunu kullanın. Örneğin, uygulamanızın görünen adını değiştirmek için:
 
 ```azurecli-interactive
 az iot central app update --name myiotcentralapp \
@@ -79,7 +79,7 @@ az iot central app update --name myiotcentralapp \
 
 ## <a name="remove-an-application"></a>Uygulamayı kaldırma
 
-Bir IoT Central uygulamasını silmek için [az IoT Central App Delete](/cli/azure/iot/central/app#az-iot-central-app-delete) komutunu kullanın. Örnek:
+Bir IoT Central uygulamasını silmek için [az IoT Central App Delete](/cli/azure/iot/central/app#az_iot_central_app_delete) komutunu kullanın. Örnek:
 
 ```azurecli-interactive
 az iot central app delete --name myiotcentralapp \

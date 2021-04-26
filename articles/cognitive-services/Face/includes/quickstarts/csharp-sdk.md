@@ -9,12 +9,12 @@ ms.subservice: face-api
 ms.topic: include
 ms.date: 10/26/2020
 ms.author: pafarley
-ms.openlocfilehash: b06a35274082e09ec0973c5123b39935a93e354d
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ab99d574588989c84783e532fcf801dcaffdd54d
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102444767"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105958091"
 ---
 .NET için yüz istemci kitaplığını kullanarak yüz tanıma ile çalışmaya başlayın. Paketi yüklemek için bu adımları izleyin ve temel görevler için örnek kodu deneyin. Yüz tanıma hizmeti, görüntülerdeki insan yüzlerini algılayıp tanımayı sağlayan gelişmiş algoritmalara erişmenizi sağlar.
 
@@ -22,7 +22,7 @@ ms.locfileid: "102444767"
 
 * [Bir görüntüdeki yüzleri algılama](#detect-faces-in-an-image)
 * [Benzer yüzeyleri bulun](#find-similar-faces)
-* [Kişi grubu oluştur](#create-a-person-group)
+* [Bir PersonGroup oluşturma](#create-a-persongroup)
 * [Yüz tanıma](#identify-a-face)
 
 [Başvuru belgeleri](/dotnet/api/overview/azure/cognitiveservices/client/faceapi)  |  [Kitaplık kaynak kodu](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/cognitiveservices/Vision.Face)  |  [Paket (NuGet)](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Vision.Face/2.6.0-preview.1)  |  [Örnekler](/samples/browse/?products=azure&term=face)
@@ -124,7 +124,7 @@ Aşağıdaki kod parçacıkları, .NET için yüz istemci kitaplığı ile aşa�
 * [İstemcinin kimliğini doğrulama](#authenticate-the-client)
 * [Bir görüntüdeki yüzleri algılama](#detect-faces-in-an-image)
 * [Benzer yüzeyleri bulun](#find-similar-faces)
-* [Kişi grubu oluştur](#create-a-person-group)
+* [Bir PersonGroup oluşturma](#create-a-persongroup)
 * [Yüz tanıma](#identify-a-face)
 
 ## <a name="authenticate-the-client"></a>İstemcinin kimliğini doğrulama
@@ -186,7 +186,7 @@ Aşağıdaki kod, eşleşme ayrıntılarını konsola yazdırır:
 
 Tanımlama işlemi, bir kişinin (veya birden çok kişinin) bir görüntüsünü alır ve görüntüdeki her bir yüzün kimliğini bulmak için (yüz tanıma arama) arar. Algılanan her yüzü, yüz özellikleri bilinen farklı **kişi** nesnelerinin bir veritabanı olan bir **persongroup** ile karşılaştırır. Bu işlemi tanımlamak için önce bir **Persongroup** oluşturmanız ve eğitmeniz gerekir
 
-### <a name="create-a-person-group"></a>Kişi grubu oluştur
+### <a name="create-a-persongroup"></a>Bir PersonGroup oluşturma
 
 Aşağıdaki kod, altı farklı **kişi** nesnesi Ile bir **persongroup** oluşturur. Her **kişiyi** bir örnek görüntü kümesiyle ilişkilendirir ve sonra her kişiyi yüz özellikleriyle tanıyacak şekilde algılar. **Person** ve **Persongroup** nesneleri, Verify, tanımla ve Gruplandır işlemlerinde kullanılır.
 

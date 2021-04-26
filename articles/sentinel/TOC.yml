@@ -35,6 +35,8 @@
           href: roles.md
         - name: Kaynaklara göre erişimi yönetme
           href: resource-context-rbac.md
+        - name: MSSP fikri özelliğini koru
+          href: mssp-protect-intellectual-property.md
     - name: Gelişmiş çok aşamalı saldırı algılama
       href: fusion.md
     - name: Otomasyon (SOAR)
@@ -59,6 +61,8 @@
       href: extend-sentinel-across-workspaces-tenants.md
     - name: Tablolardaki verilerinizi normalleştirme
       href: normalization.md
+    - name: Uzun süreli günlük tutma için Azure Veri Gezgini kullanma
+      href: store-logs-in-azure-data-explorer.md
     - name: Güvenlik
       items:
         - name: Güvenlik temeli
@@ -92,6 +96,8 @@
               href: connect-azure-kubernetes-service.md
             - name: Azure SQL veritabanı günlükleri
               href: connect-azure-sql-logs.md
+            - name: Azure Depolama hesapları
+              href: connect-azure-storage-account.md
             - name: Azure Web Uygulaması Güvenlik Duvarı (WAF)
               href: connect-azure-waf.md
             - name: IoT için Defender (daha önce IoT için ASC)
@@ -118,6 +124,8 @@
               href: connect-windows-firewall.md
             - name: Windows güvenlik olayları
               href: connect-windows-security-events.md
+            - name: Windows Sanal Masaüstü
+              href: connect-windows-virtual-desktop.md
         - name: Dış çözümleri bağlama
           items:
             - name: Agari savunma ve marka koruması
@@ -291,6 +299,8 @@
   items:
     - name: Popüler Azure Sentinel çalışma kitapları
       href: top-workbooks.md
+    - name: Azure CLI
+      href: /cli/azure/sentinel
     - name: Azure RBAC rolleri
       items:
         - name: Tüm Azure rolleri

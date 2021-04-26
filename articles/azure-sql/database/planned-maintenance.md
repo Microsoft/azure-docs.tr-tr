@@ -11,12 +11,12 @@ author: aamalvea
 ms.author: aamalvea
 ms.reviewer: sstein
 ms.date: 3/23/2021
-ms.openlocfilehash: eedbc46ee5feb0aa6f6a26c3f5b3c67ac8ca0a5e
-ms.sourcegitcommit: ed7376d919a66edcba3566efdee4bc3351c57eda
+ms.openlocfilehash: 259a8581d16f4fd6958a0d9ec2631f667d362b19
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105044269"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579473"
 ---
 # <a name="plan-for-azure-maintenance-events-in-azure-sql-database-and-azure-sql-managed-instance"></a>Azure SQL veritabanı ve Azure SQL yönetilen örneği 'nde Azure bakım olaylarını planlayın
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
@@ -35,7 +35,7 @@ Bakım olayı, bakım olayının başlangıcında birincil ve ikincil çoğaltma
 
 ## <a name="how-to-simulate-a-planned-maintenance-event"></a>Planlı bakım olayının benzetimini yapma
 
-İstemci uygulamanızın üretime dağıtmadan önce bakım olaylarına dayanıklı olmasını sağlamak, uygulama hatalarının riskini azaltmaya yardımcı olur ve son kullanıcılarınız için uygulama kullanılabilirliğine katkıda bulunur. PowerShell, CLı veya REST API aracılığıyla [el ile yük devretmeyi başlatarak](https://aka.ms/mifailover-techblog) , planlı bakım olayları sırasında istemci uygulamanızın davranışını test edebilirsiniz. Birincil çoğaltmayı çevrimdışına getiren bakım olayı olarak aynı davranışı üretir.
+İstemci uygulamanızın üretime dağıtmadan önce bakım olaylarına dayanıklı olmasını sağlamak, uygulama hatalarının riskini azaltmaya yardımcı olur ve son kullanıcılarınız için uygulama kullanılabilirliğine katkıda bulunur. [Uygulama hatası dayanıklılığı](https://docs.microsoft.com/azure/azure-sql/database/high-availability-sla#testing-application-fault-resiliency) POWERSHELL, clı veya REST API ile test ederek, planlı bakım olayları sırasında istemci uygulamanızın davranışını test edebilirsiniz. Ayrıca bkz. yönetilen örnek için [el ile yük devretme başlatma](https://aka.ms/mifailover-techblog) . Birincil çoğaltmayı çevrimdışına getiren bakım olayı olarak aynı davranışı üretir.
 
 ## <a name="retry-logic"></a>Yeniden deneme mantığı
 

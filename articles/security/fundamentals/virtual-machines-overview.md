@@ -16,12 +16,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/2/2019
 ms.author: terrylan
-ms.openlocfilehash: 036a1d3f8cad4ba9cda03a9001cfec1bb7de86b0
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 60f67ea618746c9f2b0cd65a9fbc7fb2b5fbfe86
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "101715046"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107520012"
 ---
 # <a name="azure-virtual-machines-security-overview"></a>Azure sanal makineler güvenliğine genel bakış
 Bu makale, sanal makinelerle kullanılabilecek çekirdek Azure Güvenlik özelliklerine genel bir bakış sağlar.
@@ -100,7 +100,7 @@ Azure Backup, uygulama verilerinizi sıfır sermaye yatırımı ve en az işleti
 Daha fazla bilgi edinin:
 
 * [Azure Backup nedir?](../../backup/backup-overview.md)
-* [Azure Backup hizmeti SSS](../../backup/backup-azure-backup-faq.md)
+* [Azure Backup hizmeti SSS](../../backup/backup-azure-backup-faq.yml)
 
 ## <a name="azure-site-recovery"></a>Azure Site Recovery
 

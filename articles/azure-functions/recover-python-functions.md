@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 07/29/2020
 ms.author: hazeng
 ms.custom: devx-track-python
-ms.openlocfilehash: 9b9f5d389eda5d74e7e78cfcfa9a46fba7276cbd
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 56da006dc5a0eef46d5b13984983ca680359b968
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87846046"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168102"
 ---
 # <a name="troubleshoot-python-errors-in-azure-functions"></a>Azure İşlevleri'nde Python hatalarını giderme
 
@@ -19,6 +19,8 @@ Aşağıda, Python işlevlerinde yaygın sorunlara yönelik sorun giderme kılav
 
 * [Modulenotfoun, ımporterror](#troubleshoot-modulenotfounderror)
 * [' Cygrpc ' içeri aktarılamıyor](#troubleshoot-cannot-import-cygrpc)
+* [Python 137 koduyla çıktı](#troubleshoot-python-exited-with-code-137)
+* [Python 139 koduyla çıktı](#troubleshoot-python-exited-with-code-139)
 
 ## <a name="troubleshoot-modulenotfounderror"></a>Modulenotfoun, sorunlarını giderme
 
@@ -26,22 +28,22 @@ Bu bölüm, Python işlev uygulamanızda modülle ilgili hataları gidermenize y
 
 > `Exception: ModuleNotFoundError: No module named 'module_name'.`
 
-Bu hata sorunu, bir Python işlevi uygulamasının bir Python modülünü yükleyemediğinde meydana gelir. Bu hatanın kök nedeni aşağıdaki sorunlardan biridir:
+Bu hata, bir Python işlevi uygulamasının bir Python modülünü yükleyemediğinde meydana gelir. Bu hatanın kök nedeni aşağıdaki sorunlardan biridir:
 
-- [Paket bulunamıyor](#the-package-cant-be-found)
-- [Paket, uygun Linux tekerleği ile çözümlenmiyor](#the-package-isnt-resolved-with-proper-linux-wheel)
-- [Paket, Python yorumlayıcı sürümüyle uyumsuz](#the-package-is-incompatible-with-the-python-interpreter-version)
-- [Paket diğer paketlerle çakışıyor](#the-package-conflicts-with-other-packages)
-- [Paket yalnızca Windows veya macOS platformlarını destekler](#the-package-only-supports-windows-or-macos-platforms)
+* [Paket bulunamıyor](#the-package-cant-be-found)
+* [Paket, uygun Linux tekerleği ile çözümlenmiyor](#the-package-isnt-resolved-with-proper-linux-wheel)
+* [Paket, Python yorumlayıcı sürümüyle uyumsuz](#the-package-is-incompatible-with-the-python-interpreter-version)
+* [Paket diğer paketlerle çakışıyor](#the-package-conflicts-with-other-packages)
+* [Paket yalnızca Windows veya macOS platformlarını destekler](#the-package-only-supports-windows-or-macos-platforms)
 
 ### <a name="view-project-files"></a>Proje dosyalarını görüntüle
 
 Sorununuzla ilgili gerçek nedeni belirlemek için, işlev uygulamanızda çalışan Python proje dosyalarını almanız gerekir. Yerel bilgisayarınızda proje dosyalarınız yoksa, bunları aşağıdaki yollarla alabilirsiniz:
 
-- İşlev uygulamasının `WEBSITE_RUN_FROM_PACKAGE` uygulama ayarı varsa ve değeri BIR URL ise, URL 'yi kopyalayıp tarayıcınıza yapıştırarak dosyayı indirin.
-- İşlev uygulaması `WEBSITE_RUN_FROM_PACKAGE` ve olarak ayarlanmışsa `1` , ' a gidin `https://<app-name>.scm.azurewebsites.net/api/vfs/data/SitePackages` ve dosyayı en son URL 'den indirin `href` .
-- İşlev uygulamasının yukarıda belirtilen uygulama ayarı yoksa, ' a gidin `https://<app-name>.scm.azurewebsites.net/api/settings` ve URL 'yi bulun `SCM_RUN_FROM_PACKAGE` . URL 'YI kopyalayıp tarayıcınıza yapıştırarak dosyayı indirin.
-- Bunlardan hiçbiri sizin için uygun değilse, ' a gidin `https://<app-name>.scm.azurewebsites.net/DebugConsole` ve içeriğini ortaya çıkar `/home/site/wwwroot` .
+* İşlev uygulamasının `WEBSITE_RUN_FROM_PACKAGE` uygulama ayarı varsa ve değeri BIR URL ise, URL 'yi kopyalayıp tarayıcınıza yapıştırarak dosyayı indirin.
+* İşlev uygulaması `WEBSITE_RUN_FROM_PACKAGE` ve olarak ayarlanmışsa `1` , ' a gidin `https://<app-name>.scm.azurewebsites.net/api/vfs/data/SitePackages` ve dosyayı en son URL 'den indirin `href` .
+* İşlev uygulamasının yukarıda belirtilen uygulama ayarı yoksa, ' a gidin `https://<app-name>.scm.azurewebsites.net/api/settings` ve URL 'yi bulun `SCM_RUN_FROM_PACKAGE` . URL 'YI kopyalayıp tarayıcınıza yapıştırarak dosyayı indirin.
+* Bunlardan hiçbiri sizin için uygun değilse, ' a gidin `https://<app-name>.scm.azurewebsites.net/DebugConsole` ve içeriğini ortaya çıkar `/home/site/wwwroot` .
 
 Bu makalenin geri kalanında, işlev uygulamanızın içeriğini inceleyerek, kök nedeni tanımlayarak ve belirli sorunu çözmenize yardımcı olan bu hatanın olası nedenlerine ilişkin sorunları gidermenize yardımcı olur.
 
@@ -150,7 +152,7 @@ Bu bölüm, Python işlev uygulamanızda ' cygrpc ' ile ilgili hataları giderme
 
 > `Cannot import name 'cygrpc' from 'grpc._cython'`
 
-Bu hata sorunu, bir Python işlev uygulaması uygun bir Python yorumlayıcısıyla başlayamazsa oluşur. Bu hatanın kök nedeni aşağıdaki sorunlardan biridir:
+Bu hata, bir Python işlev uygulaması uygun bir Python yorumlayıcı ile başlayamazsa oluşur. Bu hatanın kök nedeni aşağıdaki sorunlardan biridir:
 
 - [Python yorumlayıcı işletim sistemi mimarisiyle uyuşmuyor](#the-python-interpreter-mismatches-os-architecture)
 - [Python yorumlayıcı, Azure Işlevleri Python Worker tarafından desteklenmiyor](#the-python-interpreter-is-not-supported-by-azure-functions-python-worker)
@@ -177,6 +179,42 @@ Azure Işlevleri Python Worker yalnızca Python 3,6, 3,7 ve 3,8 ' yi destekler.
 Lütfen Python yorumlayıcının `py --version` Windows veya UNIX benzeri sistemlerde beklenen sürümümüzle eşleşip eşleşmediğini denetleyin `python3 --version` . Döndürülen sonucun Python 3.6. x, Python 3.7. x veya Python 3.8. x olduğundan emin olun.
 
 Python yorumlayıcı sürümünüz beklentimizi karşılamıyorsa, lütfen [Python Software Foundation](https://python.org/downloads/release)'da Python 3,6, 3,7 veya 3,8 yorumlayıcısını indirin.
+
+---
+
+## <a name="troubleshoot-python-exited-with-code-137"></a>Kod 137 Ile Python Ile çıkıldı
+
+Kod 137 hataları genellikle Python işlev uygulamanızda bellek yetersiz sorunlarından kaynaklanır. Sonuç olarak, aşağıdaki Azure Işlevleri hata iletisini alırsınız:
+
+> `Microsoft.Azure.WebJobs.Script.Workers.WorkerProcessExitException : python exited with code 137`
+
+Bu hata, bir Python işlev uygulaması, bir SIGKıLL sinyali olan işletim sistemi tarafından sonlanmaya zorlandığında oluşur. Bu sinyal genellikle Python sürecinizdeki bellek dışı bir hata olduğunu gösterir. Azure Işlevleri platformu, bu sınırı aşan tüm işlev uygulamalarını sonlandıracak bir [hizmet sınırlaması](functions-scale.md#service-limits) içerir.
+
+İşlev uygulamanızda bellek performans sorunlarını analiz etmek için lütfen [Python işlevlerinde bellek profili oluşturma](python-memory-profiler-reference.md#memory-profiling-process) bölümündeki öğretici bölümünü ziyaret edin.
+
+---
+
+## <a name="troubleshoot-python-exited-with-code-139"></a>Kod 139 Ile Python Ile çıkıldı
+
+Bu bölüm, Python işlev uygulamanızda segmentleme hatası hatalarını gidermenize yardımcı olur. Bu hatalar genellikle aşağıdaki Azure Işlevleri hata iletisine neden olacaktır:
+
+> `Microsoft.Azure.WebJobs.Script.Workers.WorkerProcessExitException : python exited with code 139`
+
+Bu hata, bir Python işlev uygulaması, bir SIGSEGV sinyaliyle işletim sistemi tarafından sonlanmaya zorlandığında oluşur. Bu sinyal, kısıtlı bellek bölgesine beklenmedik bir şekilde okuma veya yazma nedeniyle oluşan bir bellek kesimlemesi ihlali olduğunu gösterir. Aşağıdaki bölümlerde, yaygın ana nedenlerin bir listesini sunuyoruz.
+
+### <a name="a-regression-from-third-party-packages"></a>Üçüncü taraf paketlerinden bir gerileme
+
+İşlev uygulamanızın requirements.txt, ayrılmış bir paket, her Azure Işlevleri dağıtımında en son sürüme yükseltilecektir. Bu paketlerin satıcıları, en son sürümünde gerilemeler getirebilir. Bu sorundan kurtulmak için içeri aktarma deyimlerini açıklama ekleyerek, paket başvurularını devre dışı bırakarak veya paketi requirements.txt önceki bir sürüme sabitlemeyi deneyin.
+
+### <a name="unpickling-from-a-malformed-pkl-file"></a>Hatalı biçimlendirilmiş bir. pkl dosyasından seçim kaldırılıyor
+
+İşlev uygulamanız. pkl dosyasından Python nesnesini yüklemek için Python Pickel kitaplığını kullanıyorsa,. pkl hatalı biçimlendirilmiş bayt dizesi içeriyor veya bunun içinde geçersiz adres başvurusu olabilir. Bu sorundan kurtulmak için Pickle. Load () işlevini açıklama olarak kullanmayı deneyin.
+
+### <a name="pyodbc-connection-collision"></a>Pyodbc bağlantı çarpışması
+
+İşlev uygulamanız popüler ODBC veritabanı sürücüsü [pyodbc](https://github.com/mkleehammer/pyodbc)kullanıyorsa, tek bir işlev uygulamasında birden çok bağlantının açılması mümkündür. Bu sorundan kaçınmak için, lütfen Singleton modelini kullanın ve işlev uygulaması genelinde yalnızca bir pyodbc bağlantısının kullanıldığından emin olun.
+
+---
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

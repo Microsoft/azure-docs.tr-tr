@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.workload: infrastructure-services
 ms.date: 09/22/2020
 ms.author: mathapli
-ms.openlocfilehash: 73747222b9131fa85ae6ac01c9dedd5b0bbe1d63
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.openlocfilehash: 774f4be6a5aa0e0e772086c52938881c6637b261
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105543423"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588199"
 ---
 # <a name="how-azure-hybrid-benefit-applies-for-linux-virtual-machines"></a>Azure Hibrit Avantajı Linux sanal makineleri için nasıl uygulanır
 
@@ -142,7 +142,7 @@ Mevcut Kullandıkça Öde VM 'lerine Azure Hibrit Avantajı uygulamanın yanı s
 ## <a name="check-the-azure-hybrid-benefit-status-of-a-vm"></a>Bir sanal makinenin Azure Hibrit Avantajı durumunu denetleme
 Azure CLı kullanarak veya Azure Instance Metadata Service kullanarak bir sanal makinenin Azure Hibrit Avantajı durumunu görüntüleyebilirsiniz.
 
-### <a name="azure-cli"></a>Azure CLI’si
+### <a name="azure-cli"></a>Azure CLI
 
 `az vm get-instance-view`Bu amaçla komutunu kullanabilirsiniz. `licenseType`Yanıttaki bir alanı bulun. `licenseType`Alan varsa ve değer `RHEL_BYOS` veya Ise `SLES_BYOS` , sanal makinenizin avantajı etkinleştirilmiştir.
 
@@ -212,7 +212,7 @@ Y: Evet, bunu yapabilirsiniz. `RHEL_BYOS`RHEL VM 'leri için lisans türünü ve
 
 *S: RHEL ve SLES için sanal makine ölçek kümelerinde Azure Hibrit Avantajı kullanabilir miyim?*
 
-Y: Evet, RHEL için sanal makine ölçek kümelerinde Azure Hibrit Avantajı ve SLES önizleme aşamasındadır. [Bu avantaj ve nasıl kullanılacağı hakkında daha fazla bilgi](https://docs.microsoft.com/azure/virtual-machine-scale-sets/azure-hybrid-benefit-linux-vmss)edinebilirsiniz. 
+Y: Evet, RHEL için sanal makine ölçek kümelerinde Azure Hibrit Avantajı ve SLES önizleme aşamasındadır. [Bu avantaj ve nasıl kullanılacağı hakkında daha fazla bilgi](/azure/virtual-machine-scale-sets/azure-hybrid-benefit-linux)edinebilirsiniz. 
 
 *S: RHEL ve SLES için ayrılmış örneklerde Azure Hibrit Avantajı kullanabilir miyim?*
 

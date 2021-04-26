@@ -1,15 +1,17 @@
 ---
 title: Azure Resource Manager şablonu kullanarak bir Azure kurtarma hizmetleri Kasası oluşturmak için hızlı başlangıç.
 description: Bu hızlı başlangıçta, bir Azure Resource Manager şablonu kullanarak Azure kurtarma hizmetleri Kasası oluşturmayı öğreneceksiniz (ARM şablonu).
-ms.topic: quickstart
-ms.custom: subject-armqs
 ms.date: 04/29/2020
-ms.openlocfilehash: 62bfe71c397367282c696eecdf55ab9c900c69a1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.topic: quickstart
+ms.custom:
+- subject-armqs
+- mode-arm
+ms.openlocfilehash: 11a88b5485ad970802a65af31daccdb30a1c86df
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92745881"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533261"
 ---
 # <a name="quickstart-create-a-recovery-services-vault-using-an-arm-template"></a>Hızlı başlangıç: ARM şablonunu kullanarak bir kurtarma hizmetleri Kasası oluşturma
 

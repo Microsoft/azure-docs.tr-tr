@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.topic: how-to
 ms.date: 09/04/2020
 ms.author: jushiman
-ms.openlocfilehash: 8f679626b69bd855e86b94cdde51955edd068e8f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8846efa3619cec383809cdbd6efe70e3622fa007
+ms.sourcegitcommit: dddd1596fa368f68861856849fbbbb9ea55cb4c7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "91714899"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107365204"
 ---
 # <a name="enable-automanage-for-virtual-machines-through-azure-policy"></a>Azure Ilkesi aracılığıyla sanal makineler için oto yönetimini etkinleştir
 
@@ -30,6 +30,8 @@ Azure aboneliğiniz yoksa başlamadan önce [bir hesap oluşturun](https://azure
 > [!IMPORTANT]
 > Aşağıdaki Azure RBAC izni, **Kullanıcı erişimi yönetici** rolleriyle birlikte, oto yönetimi: **Owner** rolü veya **katkıda bulunan** ' i etkinleştirmek için gereklidir.
 
+## <a name="direct-link-to-policy"></a>Ilkeye doğrudan bağlantı
+Azure portal, tekrar Yönet ilke tanımı, [sanal makinelerin yapılandırma adı Ile Azure tarafından eklendi Için yapılandırılacak şekilde](https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyDetailBlade/definitionId/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2F270610db-8c04-438a-a739-e8e6745b22d3)bulunabilir. Bu bağlantıya tıklarsanız, aşağıdaki [Ilkeyi bulup atamak](#locate-and-assign-the-policy) için doğrudan 8. adıma atlayın.
 
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
@@ -53,9 +55,9 @@ Azure aboneliğiniz yoksa başlamadan önce [bir hesap oluşturun](https://azure
 1. **Temel bilgiler** sekmesinde, *aboneliği* ve *kaynak grubunu* ayarlayarak **kapsamı** doldurun
 
     > [!NOTE]
-    > Kapsam, bu ilkenin hangi VM 'Ler için geçerli olduğunu tanımlamanızı sağlar. Uygulamayı, abonelik düzeyinde veya kaynak grubu düzeyinde ayarlayabilirsiniz. Bir kaynak grubu ayarlarsanız, o anda o kaynak grubundaki veya buna eklediğimiz tüm VM 'lerde otomatik yönetilecek otomatik olarak etkin olur. 
+    > Kapsam, bu ilkenin hangi VM 'Ler için geçerli olduğunu tanımlamanızı sağlar. Uygulamayı, abonelik düzeyinde veya kaynak grubu düzeyinde ayarlayabilirsiniz. Bir kaynak grubu ayarlarsanız, o anda o kaynak grubundaki veya buna eklediğimiz tüm VM 'lerde otomatik yönetilecek otomatik olarak etkin olur.
 
-1. **Parametreler** sekmesine tıklayın ve **oto Yönet hesabını** ve istenen **Yapılandırma profilini** ayarlayın 
+1. **Parametreler** sekmesine tıklayın ve **oto Yönet hesabını** ve istenen **Yapılandırma profilini** ayarlayın
 1. **Gözden geçir + oluştur** sekmelerinde ayarları gözden geçirin
 1. **Oluştur** 'A tıklayarak atamayı uygulayın
 1. **Atamalar sekmesinde,** **tanım** ' ın yanındaki atamalarınızı görüntüleyin
@@ -64,9 +66,9 @@ Azure aboneliğiniz yoksa başlamadan önce [bir hesap oluşturun](https://azure
 > Bu ilkenin kaynak grubunda veya abonelikte bulunan VM 'Ler üzerinde etkili bir şekilde başlaması biraz zaman alır.
 
 
-## <a name="next-steps"></a>Sonraki adımlar 
+## <a name="next-steps"></a>Sonraki adımlar
 
-Azure portal aracılığıyla sanal makineler için Azure oto yönetimi 'ni etkinleştirmenin başka bir yolunu öğrenin. 
+Azure portal aracılığıyla sanal makineler için Azure oto yönetimi 'ni etkinleştirmenin başka bir yolunu öğrenin.
 
 > [!div class="nextstepaction"]
 > [Azure portal sanal makineler için oto yönetimini etkinleştir](quick-create-virtual-machines-portal.md)

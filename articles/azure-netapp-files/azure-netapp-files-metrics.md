@@ -12,18 +12,22 @@ ms.workload: storage
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 12/04/2020
+ms.date: 04/12/2021
 ms.author: b-juche
-ms.openlocfilehash: a17e6cc0479cf8ff2306736994a369d9e44dfdda
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b581470a886ff73739edfee7f45c64295eeeb1f0
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96745953"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107388623"
 ---
 # <a name="metrics-for-azure-netapp-files"></a>Azure NetApp Files için ölçümler
 
 Azure NetApp Files, ayrılan depolama, gerçek depolama alanı kullanımı, hacim ıOPS ve gecikme hakkında ölçümler sağlar. Bu ölçümleri çözümleyerek, NetApp hesaplarınızın kullanım deseninin ve birim performansının daha iyi şekilde öğrenilmesine sahip olabilirsiniz.  
+
+Kapasite **havuzunu** veya **birimi** seçerek kapasite havuzu veya birimi için ölçümleri bulabilirsiniz.  Ardından, kullanılabilir ölçümleri görüntülemek için **ölçüm** ' e tıklayın: 
+
+[![Ölçüm çekmesine nasıl gidebileceğiniz gösteren anlık görüntü. ](../media/azure-netapp-files/metrics-navigate-volume.png)](../media/azure-netapp-files/metrics-navigate-volume.png#lightbox)
 
 ## <a name="usage-metrics-for-capacity-pools"></a><a name="capacity_pools"></a>Kapasite havuzları için kullanım ölçümleri
 

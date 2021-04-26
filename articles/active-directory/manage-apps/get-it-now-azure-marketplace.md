@@ -2,21 +2,21 @@
 title: Azure Marketi 'nden uygulama ekleme
 description: Bu makale, Azure Marketi 'ndeki şimdi al düğmesinden bir giriş sayfası görevi görür.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: conceptual
 ms.workload: identity
 ms.date: 07/16/2020
-ms.author: kenwith
+ms.author: iangithinji
 ROBOTS: NOINDEX
-ms.openlocfilehash: 7bff0ca3dfa561f836f94e362ee84d025de020ab
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: b2c15ba1f059466240264565d5ff5276b70ddd63
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99258346"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107374157"
 ---
 # <a name="get-it-now---add-an-app-from-the-azure-marketplace"></a>Şimdi alın-Azure Marketi 'nden bir uygulama ekleyin
 

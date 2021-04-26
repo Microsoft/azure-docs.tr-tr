@@ -4,16 +4,16 @@ description: EdgeAgent ve edgeHub modülü TWINS için belirli özellikleri ve d
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 08/31/2020
+ms.date: 04/16/2021
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: 951111b217b7ace3f12676edf6febfa7266094df
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 29ec958764f4a464d51f29f4b9c8223d5d7a1760
+ms.sourcegitcommit: d3bcd46f71f578ca2fd8ed94c3cdabe1c1e0302d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "103489957"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107576015"
 ---
 # <a name="properties-of-the-iot-edge-agent-and-iot-edge-hub-module-twins"></a>IoT Edge Aracısı ve IoT Edge hub modülünün özellikleri TWINS
 
@@ -84,7 +84,6 @@ Aşağıdaki tablo, istenen özelliklerden kopyalanmış olan bilgileri içermez
 | lastDesiredVersion | Bu tamsayı, IoT Edge Aracısı tarafından işlenen istenen özelliklerin son sürümünü ifade eder. |
 | lastDesiredStatus. Code | Bu durum kodu, IoT Edge Aracısı tarafından görülen son istenen özellikleri ifade eder. İzin verilen değerler: `200` başarılı, `400` geçersiz yapılandırma, `412` Geçersiz şema sürümü, `417` istenen özellikler boş, `500` başarısız |
 | lastDesiredStatus. Description | Durumun metin açıklaması |
-| deviceHealth | `healthy` tüm modüllerin çalışma zamanı durumu ya da ise `running` `stopped` , `unhealthy` Aksi takdirde |
 | configurationHealth. {DeploymentId}. sistem durumu | `healthy` {DeploymentId} dağıtımı tarafından ayarlanan tüm modüllerin çalışma zamanı durumu ya da ise `running` `stopped` , `unhealthy` Aksi takdirde |
 | Runtime. platform. OS | Cihazda çalışan işletim sistemini raporlama |
 | Runtime. platform. Architecture | Cihazdaki CPU mimarisini raporlama |

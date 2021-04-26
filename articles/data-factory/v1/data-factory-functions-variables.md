@@ -8,10 +8,10 @@ ms.service: data-factory
 ms.topic: conceptual
 ms.date: 01/10/2018
 ms.openlocfilehash: 498f40a1783903b5dca0a2fe3204cc6aa25a2fec
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104786439"
 ---
 # <a name="azure-data-factory---functions-and-system-variables"></a>Azure Data Factory Işlevleri ve sistem değişkenleri
@@ -22,7 +22,7 @@ Bu makalede, Azure Data Factory tarafından desteklenen işlevler ve değişkenl
 
 ## <a name="data-factory-system-variables"></a>Data Factory sistem değişkenleri
 
-| Değişken Adı | Açıklama | Nesne kapsamı | JSON kapsamı ve kullanım örnekleri |
+| Değişken Adı | Description | Nesne kapsamı | JSON kapsamı ve kullanım örnekleri |
 | --- | --- | --- | --- |
 | WindowStart |Geçerli etkinlik çalıştırma penceresi için zaman aralığı başlangıcı |etkinlik |<ol><li>Veri seçimi sorgularını belirtin. [Veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesinde başvurulan bağlayıcı makalelerine bakın.</li> |
 | WindowEnd |Geçerli etkinlik çalıştırma penceresi için zaman aralığı sonu |etkinlik |WindowStart ile aynı. |
@@ -72,7 +72,7 @@ Kullanabileceğiniz farklı biçimlendirme seçeneklerini açıklayan [özel tar
 ### <a name="functions"></a>İşlevler
 Aşağıdaki tablolar Azure Data Factory içindeki tüm işlevleri listeler:
 
-| Kategori | İşlev | Parametreler | Açıklama |
+| Kategori | İşlev | Parametreler | Description |
 | --- | --- | --- | --- |
 | Saat |AddHours (X, Y) |X: DateTime <br/><br/>Y: int |Verilen saat X 'e Y saat ekler. <br/><br/>Örnek: `9/5/2013 12:00:00 PM + 2 hours = 9/5/2013 2:00:00 PM` |
 | Saat |AddMinutes (X, Y) |X: DateTime <br/><br/>Y: int |X 'e Y dakika ekler.<br/><br/>Örnek: `9/15/2013 12: 00:00 PM + 15 minutes = 9/15/2013 12: 15:00 PM` |

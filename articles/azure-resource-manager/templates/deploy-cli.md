@@ -3,12 +3,12 @@ title: Azure CLı ve şablonuyla kaynak dağıtma
 description: Azure 'a kaynak dağıtmak için Azure Resource Manager ve Azure CLı kullanın. Kaynaklar bir Kaynak Yöneticisi şablonunda veya bir Bıcep dosyasında tanımlanır.
 ms.topic: conceptual
 ms.date: 03/25/2021
-ms.openlocfilehash: b19dc6cc292306cc796f8c1d8f93b358a079d83b
-ms.sourcegitcommit: 44edde1ae2ff6c157432eee85829e28740c6950d
+ms.openlocfilehash: f616a40f2683268f0cc26314fcc88ecca23bdbcf
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105544443"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107782072"
 ---
 # <a name="deploy-resources-with-arm-templates-and-azure-cli"></a>ARM şablonları ve Azure CLı ile kaynak dağıtma
 
@@ -24,13 +24,13 @@ Azure CLı yüklü değilse, Azure Cloud Shell kullanabilirsiniz. Daha fazla bil
 
 Dağıtımınızı bir kaynak grubuna, aboneliğe, yönetim grubuna veya kiracıya hedefleyebilirsiniz. Dağıtımın kapsamına bağlı olarak, farklı komutlar kullanırsınız.
 
-* Bir **kaynak grubuna** dağıtmak için [az Deployment Group Create](/cli/azure/deployment/group#az-deployment-group-create)kullanın:
+* Bir **kaynak grubuna** dağıtmak için [az Deployment Group Create](/cli/azure/deployment/group#az_deployment_group_create)kullanın:
 
   ```azurecli-interactive
   az deployment group create --resource-group <resource-group-name> --template-file <path-to-template-or-bicep>
   ```
 
-* Bir **aboneliğe** dağıtmak için [az Deployment Sub Create](/cli/azure/deployment/sub#az-deployment-sub-create)kullanın:
+* Bir **aboneliğe** dağıtmak için [az Deployment Sub Create](/cli/azure/deployment/sub#az_deployment_sub_create)kullanın:
 
   ```azurecli-interactive
   az deployment sub create --location <location> --template-file <path-to-template-or-bicep>
@@ -38,7 +38,7 @@ Dağıtımınızı bir kaynak grubuna, aboneliğe, yönetim grubuna veya kiracı
 
   Abonelik düzeyi dağıtımları hakkında daha fazla bilgi için bkz. [abonelik düzeyinde kaynak grupları ve kaynaklar oluşturma](deploy-to-subscription.md).
 
-* Bir **yönetim grubuna** dağıtmak için [az Deployment mg Create](/cli/azure/deployment/mg#az-deployment-mg-create)şunu kullanın:
+* Bir **yönetim grubuna** dağıtmak için [az Deployment mg Create](/cli/azure/deployment/mg#az_deployment_mg_create)şunu kullanın:
 
   ```azurecli-interactive
   az deployment mg create --location <location> --template-file <path-to-template-or-bicep>
@@ -46,7 +46,7 @@ Dağıtımınızı bir kaynak grubuna, aboneliğe, yönetim grubuna veya kiracı
 
   Yönetim grubu düzeyi dağıtımları hakkında daha fazla bilgi için bkz. [Yönetim grubu düzeyinde kaynak oluşturma](deploy-to-management-group.md).
 
-* Bir **kiracıya** dağıtmak için [az Deployment Tenant Create](/cli/azure/deployment/tenant#az-deployment-tenant-create)kullanın:
+* Bir **kiracıya** dağıtmak için [az Deployment Tenant Create](/cli/azure/deployment/tenant#az_deployment_tenant_create)kullanın:
 
   ```azurecli-interactive
   az deployment tenant create --location <location> --template-file <path-to-template-or-bicep>

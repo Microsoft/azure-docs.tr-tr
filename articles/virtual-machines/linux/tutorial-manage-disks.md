@@ -9,12 +9,12 @@ ms.date: 08/20/2020
 ms.author: cynthn
 ms.custom: mvc, devx-track-azurecli
 ms.subservice: disks
-ms.openlocfilehash: bbecaa32f85c42954cea6c8e533f0f658eb2dfee
-ms.sourcegitcommit: ba3a4d58a17021a922f763095ddc3cf768b11336
+ms.openlocfilehash: 56e804bc0d479f09ef2900c42361fbd24eed1d98
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104802293"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765962"
 ---
 # <a name="tutorial---manage-azure-disks-with-the-azure-cli"></a>Öğretici - Azure CLI ile Azure disklerini yönetme
 
@@ -70,13 +70,13 @@ Veri diskleri oluşturulabilir ve VM oluşturulduğunda veya varolan bir VM’ye
 
 ### <a name="attach-disk-at-vm-creation"></a>VM oluşturulurken disk ekleme
 
-[az group create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun.
+[az group create](/cli/azure/group#az_group_create) komutuyla bir kaynak grubu oluşturun.
 
 ```azurecli-interactive
 az group create --name myResourceGroupDisk --location eastus
 ```
 
-[az vm create](/cli/azure/vm#az-vm-create) komutuyla bir VM oluşturun. Aşağıdaki örnek, *myVM* adlı bir VM oluşturur, *azureuser* adlı bir kullanıcı hesabı ekler ve yoksa SSH anahtarlarını oluşturur. `--datadisk-sizes-gb` bağımsız değişkeni, ek bir disk oluşturulması ve sanal makineye eklenmesi gerektiğini belirtmek için kullanılır. Birden fazla disk oluşturmak ve eklemek için disk boyutu değerlerinin boşlukla ayrılmış bir listesini kullanın. Aşağıdaki örnekte her iki veri diskinin boyutu 128 GB olan bir VM oluşturulur. Disk boyutları 128 GB olduğundan her disk de P10 (disk başına en fazla 500 IOPS sağlar) olarak yapılandırılabilir.
+[az vm create](/cli/azure/vm#az_vm_create) komutuyla bir VM oluşturun. Aşağıdaki örnek, *myVM* adlı bir VM oluşturur, *azureuser* adlı bir kullanıcı hesabı ekler ve yoksa SSH anahtarlarını oluşturur. `--datadisk-sizes-gb` bağımsız değişkeni, ek bir disk oluşturulması ve sanal makineye eklenmesi gerektiğini belirtmek için kullanılır. Birden fazla disk oluşturmak ve eklemek için disk boyutu değerlerinin boşlukla ayrılmış bir listesini kullanın. Aşağıdaki örnekte her iki veri diskinin boyutu 128 GB olan bir VM oluşturulur. Disk boyutları 128 GB olduğundan her disk de P10 (disk başına en fazla 500 IOPS sağlar) olarak yapılandırılabilir.
 
 ```azurecli-interactive
 az vm create \
@@ -91,7 +91,7 @@ az vm create \
 
 ### <a name="attach-disk-to-existing-vm"></a>Varolan VM’ye disk ekleme
 
-Yeni bir veri diski oluşturmak ve bunu varolan bir sanal makineye eklemek için [az vm disk attach](/cli/azure/vm/disk#az-vm-disk-attach) komutunu kullanın. Aşağıdaki örnek 128 gigabayt boyutunda bir premium disk oluşturur ve bunu son adımda oluşturulan VM’ye ekler.
+Yeni bir veri diski oluşturmak ve bunu varolan bir sanal makineye eklemek için [az vm disk attach](/cli/azure/vm/disk#az_vm_disk_attach) komutunu kullanın. Aşağıdaki örnek 128 gigabayt boyutunda bir premium disk oluşturur ve bunu son adımda oluşturulan VM’ye ekler.
 
 ```azurecli-interactive
 az vm disk attach \
@@ -190,7 +190,7 @@ Bir disk anlık görüntüsü aldığınızda, Azure diskin belirli bir noktadak
 
 ### <a name="create-snapshot"></a>Anlık görüntü oluşturma
 
-Anlık görüntü oluşturmadan önce diskin KIMLIĞI veya adı gerekir. Disk KIMLIĞINI [göstermek için az VM Show](/cli/azure/vm#az-vm-show) ' i kullanın. Bu örnekte sonraki adımda kullanılabilmesi için disk kimliği bir değişken içinde saklanır.
+Anlık görüntü oluşturmadan önce diskin KIMLIĞI veya adı gerekir. Disk KIMLIĞINI [göstermek için az VM Show](/cli/azure/vm#az_vm_show) ' i kullanın. Bu örnekte sonraki adımda kullanılabilmesi için disk kimliği bir değişken içinde saklanır.
 
 ```azurecli-interactive
 osdiskid=$(az vm show \
@@ -200,7 +200,7 @@ osdiskid=$(az vm show \
    -o tsv)
 ```
 
-Artık KIMLIĞINIZ olduğuna göre, diskin anlık görüntüsünü oluşturmak için [az Snapshot Create](/cli/azure/snapshot#az-snapshot-create) kullanın.
+Artık KIMLIĞINIZ olduğuna göre, diskin anlık görüntüsünü oluşturmak için [az Snapshot Create](/cli/azure/snapshot#az_snapshot_create) kullanın.
 
 ```azurecli-interactive
 az snapshot create \
@@ -211,7 +211,7 @@ az snapshot create \
 
 ### <a name="create-disk-from-snapshot"></a>Anlık görüntüden disk oluşturma
 
-Bu anlık görüntü daha sonra, sanal makineyi yeniden oluşturmak için kullanılabilecek [az disk Create](/cli/azure/disk#az-disk-create)kullanılarak bir diske dönüştürülebilir.
+Bu anlık görüntü daha sonra, sanal makineyi yeniden oluşturmak için kullanılabilecek [az disk Create](/cli/azure/disk#az_disk_create)kullanılarak bir diske dönüştürülebilir.
 
 ```azurecli-interactive
 az disk create \
@@ -222,7 +222,7 @@ az disk create \
 
 ### <a name="restore-virtual-machine-from-snapshot"></a>Sanal makineyi anlık görüntüden geri yükleme
 
-Sanal makine kurtarmayı göstermek için [az VM Delete](/cli/azure/vm#az-vm-delete)kullanarak var olan sanal makineyi silin.
+Sanal makine kurtarmayı göstermek için [az VM Delete](/cli/azure/vm#az_vm_delete)kullanarak var olan sanal makineyi silin.
 
 ```azurecli-interactive
 az vm delete \
@@ -244,7 +244,7 @@ az vm create \
 
 Tüm veri disklerinin sanal makineye yeniden eklenmesi gerekir.
 
-[Az disk List](/cli/azure/disk#az-disk-list) komutunu kullanarak veri diski adını bulun. Bu örnek `datadisk` , bir sonraki adımda kullanılan adlı bir değişkende diskin adını koyar.
+[Az disk List](/cli/azure/disk#az_disk_list) komutunu kullanarak veri diski adını bulun. Bu örnek `datadisk` , bir sonraki adımda kullanılan adlı bir değişkende diskin adını koyar.
 
 ```azurecli-interactive
 datadisk=$(az disk list \
@@ -253,7 +253,7 @@ datadisk=$(az disk list \
    -o tsv)
 ```
 
-Diski eklemek için [az vm disk attach](/cli/azure/vm/disk#az-vm-disk-attach) komutunu kullanın.
+Diski eklemek için [az vm disk attach](/cli/azure/vm/disk#az_vm_disk_attach) komutunu kullanın.
 
 ```azurecli-interactive
 az vm disk attach \

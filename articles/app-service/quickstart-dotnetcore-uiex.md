@@ -7,12 +7,12 @@ ms.date: 11/23/2020
 ms.custom: devx-track-csharp, mvc, devcenter, vs-azure, seodec18, contperf-fy21q1
 zone_pivot_groups: app-service-platform-windows-linux
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 2a789b4ca1261c79e8e6eb93a4ed44e7e8e9272e
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ff86bedf47395b50dc25e552b8b3ed4176e23b65
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102214244"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769112"
 ---
 # <a name="quickstart-create-an-aspnet-core-web-app-in-azure"></a>Hızlı başlangıç: Azure 'da ASP.NET Core Web uygulaması oluşturma
 
@@ -256,7 +256,7 @@ az login
     <li><code>az</code>Komut tanınmazsa, <a href="#1-prepare-your-environment">ortamınızı hazırlama</a>bölümünde AÇıKLANDıĞı gibi Azure CLI 'nın yüklü olduğundan emin olun.</li>
     <li><code>&lt;app-name&gt;</code>Tüm Azure genelinde benzersiz olan bir adla değiştirin ( <em> geçerli karakterler <code>a-z</code> , <code>0-9</code> ve <code>-</code> </em> ). İyi bir model, şirketinizin adının ve uygulama tanımlayıcısının bir birleşimini kullanmaktır.</li>
     <li><code>--sku F1</code>Bağımsız değişkeni, ücretsiz fiyatlandırma katmanında Web uygulaması oluşturur. Saatlik maliyet içeren daha hızlı bir Premium katmanı kullanmak için bu bağımsız değişkeni atlayın.</li>
-    <li>İsteğe bağlı olarak <code>--location &lt;location-name&gt;</code> <code>&lt;location-name&gt;</code> , kullanılabilir bir Azure bölgesi olan bağımsız değişkeni ekleyebilirsiniz. Komutunu çalıştırarak, Azure hesabınız için izin verilen bölgelerin bir listesini alabilirsiniz <a href="/cli/azure/appservice#az-appservice-list-locations"> <code>az account list-locations</code> </a> .</li>
+    <li>İsteğe bağlı olarak <code>--location &lt;location-name&gt;</code> <code>&lt;location-name&gt;</code> , kullanılabilir bir Azure bölgesi olan bağımsız değişkeni ekleyebilirsiniz. Komutunu çalıştırarak, Azure hesabınız için izin verilen bölgelerin bir listesini alabilirsiniz <a href="/cli/azure/appservice#az_appservice_list_locations"> <code>az account list-locations</code> </a> .</li>
     </ul>
     </details>
     
@@ -268,7 +268,7 @@ az login
     <ul>
     <li>Varsayılan kaynak grubunu oluşturur.</li>
     <li>Varsayılan bir App Service planı oluşturun.</li>
-    <li>Belirtilen ada sahip <a href="/cli/azure/webapp#az-webapp-create">bir App Service uygulaması oluşturun</a> .</li>
+    <li>Belirtilen ada sahip <a href="/cli/azure/webapp#az_webapp_create">bir App Service uygulaması oluşturun</a> .</li>
     <li><a href="/azure/app-service/deploy-zip">ZIP</a> dosyalarını geçerli çalışma dizininden uygulamaya dağıtın.</li>
     <li>Çalıştırılırken, kaynak oluşturma, günlüğe kaydetme ve ZIP dağıtımı hakkında iletiler sağlar.</li>
     </ul>
@@ -302,14 +302,14 @@ http://<app_name>.azurewebsites.net
 
 <hr/> 
 
-## <a name="7-update-and-redeploy-the-code"></a>7. kodu güncelleştirin ve yeniden dağıtın
+## <a name="7-update-and-redeploy-the-code&quot;></a>7. kodu güncelleştirin ve yeniden dağıtın
 
 1. Yerel dizinde **_Startup. cs_ dosyasını açın** . 
 
 1. Yöntem çağrısındaki metinde **küçük bir değişiklik yapın** `context.Response.WriteAsync` .
 
     ```csharp
-    await context.Response.WriteAsync("Hello Azure!");
+    await context.Response.WriteAsync(&quot;Hello Azure!");
     ```
     
 1. **Değişikliklerinizi kaydedin**.

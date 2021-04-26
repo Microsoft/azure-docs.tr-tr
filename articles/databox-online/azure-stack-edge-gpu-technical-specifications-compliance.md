@@ -6,14 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: conceptual
-ms.date: 03/01/2021
+ms.date: 04/12/2021
 ms.author: alkohli
-ms.openlocfilehash: 937f0d1feb0c45c1c158b5e88daf268aeb383509
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: e0eb976f655308082671afe2dc1923f082a3373b
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102034753"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107303177"
 ---
 # <a name="technical-specifications-and-compliance-for-azure-stack-edge-pro-with-gpu"></a>GPU ile Azure Stack Edge Pro için teknik belirtimler ve uyumluluk 
 
@@ -23,10 +23,14 @@ Azure Stack Edge Pro 'nun, birlikte bulunan bir grafik Işleme birimi (GPU) ile 
 
 Azure Stack Edge Pro cihazı, işlem ve bellek için aşağıdaki belirtimlere sahiptir:
 
-| Belirtim           | Değer                  |
-|-------------------------|----------------------------|
-| CPU                     | 2 X Intel Xeon gümüş 4214 (Cascade Lake) CPU<br> 24 fiziksel çekirdek (CPU başına 12)<br>48 mantıksal çekirdek (vCPU) (CPU başına 24)       |
-| Bellek                  | 128 (8x16 GB) GB RAM <br> Dell uyumlu 16 GB PC4-23400 DDR4-2933Mhz 2Rx8 1.2 v ECC Kayıtlı RDıMM       |
+| Belirtim  | Değer                                                                       |
+|----------------|-----------------------------------------------------------------------------|
+| CPU türü       | Çift Intel Xeon gümüş 4214 (Cascade Lake) CPU                              |
+| CPU: ham       | 24 toplam çekirdek, 48 toplam vCPU                                              |
+| CPU: kullanılabilir    | 40 vCPU                                                                    |
+| Bellek türü    | Dell uyumlu 16 GB PC4-23400 DDR4-2933Mhz 2Rx8 1.2 v ECC Kayıtlı RDıMM |
+| Bellek: ham    | 128 GB RAM (8 x 16 GB)                                                      |
+| Bellek: kullanılabilir | 102 GB RAM                                                                  |
 
 
 ## <a name="compute-acceleration-specifications"></a>İşlem hızlandırma belirtimleri
@@ -44,7 +48,7 @@ Azure Stack Edge Pro cihazının yüksek performanslı fanlarla iki 100-240 V g�
 
 | Belirtim           | 750 W PSU                  |
 |-------------------------|----------------------------|
-| Maksimum çıkış gücü    | 750 W                     |
+| Maksimum çıkış gücü    | 750 W                      |
 | Sıklık               | 50/60 Hz                   |
 | Voltaj aralığı seçimi | Otomatik olarak değişen: 100-240 V AC |
 | Etkin takılabilir           | Yes                        |
@@ -54,13 +58,13 @@ Azure Stack Edge Pro cihazının yüksek performanslı fanlarla iki 100-240 V g�
 
 Azure Stack Edge Pro cihazınız altı ağ arabirimine sahiptir, PORT1-PORT6.
 
-| Belirtim           | Description                 |
+| Belirtim           | Açıklama                 |
 |-------------------------|----------------------------|
-|  Ağ arabirimleri    | **2 X 1 GbE arabirimler** – 1 yönetim arabirimi bağlantı noktası 1, ilk kurulum için kullanılır ve varsayılan olarak statiktir. İlk kurulum tamamlandıktan sonra, herhangi bir IP adresine sahip veriler için arabirimi kullanabilirsiniz. Ancak, sıfırlama sırasında Arabirim statik IP 'ye geri döner. <br>Diğer arabirim bağlantı noktası 2 Kullanıcı tarafından yapılandırılabilir, veri aktarımı için kullanılabilir ve varsayılan olarak DHCP 'dir. <br>**4 X 25 GbE arabirim** – bu veri arabirimleri, bağlantı noktası 6 ile bağlantı noktası 3, Kullanıcı tarafından DHCP (varsayılan) veya statik olarak yapılandırılabilir. Ayrıca 10 GbE arabirimi olarak da çalışabilir.  | 
+|  Ağ arabirimleri    | **2 X 1 GbE arabirimler** – 1 yönetim arabirimi bağlantı noktası 1, ilk kurulum için kullanılır ve varsayılan olarak statiktir. İlk kurulum tamamlandıktan sonra, herhangi bir IP adresine sahip veriler için arabirimi kullanabilirsiniz. Ancak, sıfırlama sırasında Arabirim statik IP 'ye geri döner. <br>Diğer arabirim bağlantı noktası 2 Kullanıcı tarafından yapılandırılabilir, veri aktarımı için kullanılabilir ve varsayılan olarak DHCP 'dir. <br>**4 X 25-GbE arabirimler** : Bu veri arabirimleri, bağlantı noktası 6 üzerinden bağlantı noktası 3, Kullanıcı tarafından DHCP (varsayılan) veya statik olarak yapılandırılabilir. Ayrıca, 10-GbE arabirimler olarak da çalışabilir.  | 
 
 Azure Stack Edge Pro cihazınız aşağıdaki ağ donanımlarına sahiptir:
 
-* **Özel Microsoft Qlogic Cavium 25G NDC bağdaştırıcısı** -bağlantı noktası 4 ile bağlantı noktası 1.
+* **Özel Microsoft `Qlogic` Cavium 25G NDC bağdaştırıcısı** -bağlantı noktası 1 ile bağlantı noktası 4.
 * **Mellanox Dual Port 25G ConnectX-4 kanal ağ bağdaştırıcısı** -bağlantı noktası 5 ve bağlantı noktası 6.
 
 Aşağıda, Mellanox kartının ayrıntıları verilmiştir:
@@ -74,7 +78,7 @@ Aşağıda, Mellanox kartının ayrıntıları verilmiştir:
 
 Bu ağ kartlarında desteklenen kabloların, anahtarların ve alıcı sayısının tam listesi için şuraya gidin:
 
-- [Qlogic Cavium 25G NDC bağdaştırıcısı birlikte çalışabilirlik matrisi](https://www.marvell.com/documents/xalflardzafh32cfvi0z/).
+- [ `Qlogic` Cavium 25G NDC bağdaştırıcısı birlikte çalışabilirlik matrisi](https://www.marvell.com/documents/xalflardzafh32cfvi0z/).
 - [Mellanox Dual Port 25G ConnectX-4 kanal ağ bağdaştırıcısına uyumlu ürünler](https://docs.mellanox.com/display/ConnectX4LxFirmwarev14271016/Firmware+Compatible+Products).  
 
 ## <a name="storage-specifications"></a>Depolama belirtimleri

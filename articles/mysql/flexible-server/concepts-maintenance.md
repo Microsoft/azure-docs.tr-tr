@@ -6,12 +6,12 @@ ms.author: nlarin
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 09/21/2020
-ms.openlocfilehash: a2e99440a7c8f33eee9d3c9fe2276ac3868ff4b6
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 424402db1933c0a20ddd25a6e5af11d84d0775a8
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91331769"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107481166"
 ---
 # <a name="scheduled-maintenance-in-azure-database-for-mysql--flexible-server"></a>MySQL için Azure Veritabanı Esnek Sunucusunda zamanlanmış bakım
 
@@ -39,9 +39,15 @@ Bakım zamanlamasıyla ilgili tercihleri belirtirken haftanın gününü ve zama
 >
 > Ancak ciddi bir güvenlik açığı gibi kritik öneme sahip acil bir güncelleştirme söz konusu olduğunda beş günden daha kısa bir süre öncesinde bildirim yapılabilir. Son 30 gün içinde başarılı bir zamanlanmış bakım gerçekleştirilmiş olsa dahi sunucunuza kritik güncelleştirme uygulanabilir.
 
-Zamanlama ayarlarını dilediğiniz zaman güncelleştirebilirsiniz. Esnek sunucunuz için zamanlanan bir bakım varsa ve zamanlama tercihlerini güncelleştirirseniz, geçerli olay zamanlandığı şekilde devam eder ve zamanlama ayarları değişikliği başarıyla tamamlandığında etkili olur.
+Zamanlama ayarlarını dilediğiniz zaman güncelleştirebilirsiniz. Esnek sunucunuz için zamanlanan bir bakım varsa ve zamanlama tercihlerini güncelleştirirseniz, geçerli dağıtım zamanlandığı şekilde devam eder ve zamanlama ayarları değişikliği, zamanlanan bir sonraki bakımın başarıyla tamamlanmasıyla etkili olur.
 
-Nadir durumlarda, bakım olayı sistem tarafından iptal edilebilir veya başarıyla tamamlanmayabilir. Bu durumda, sistem sırasıyla iptal edilen veya başarısız bakım olayı hakkında bir bildirim oluşturur. Bakım gerçekleştirme girişimi, geçerli zamanlama ayarlarına göre zamanlanır ve bu işlem için beş gün önceden bildirim alırsınız.
+Azure aboneliğinizdeki her esnek sunucu için sistem tarafından yönetilen zamanlama veya özel zamanlama tanımlayabilirsiniz.  
+* Özel zamanlamaya göre, haftanın gününü ve bir saatlik zaman penceresini seçerek sunucu için bakım pencerenizi belirtebilirsiniz.  
+* Sistem tarafından yönetilen zamanlamaya göre sistem, sunucunuzun bölge saatinde 23.00 aralığındaki değerler ile 7 arasında bir saatlik pencere seçer.  
+
+Değişiklikleri kullanıma almanın bir parçası olarak, önce sistem tarafından yönetilen zamanlamalarla yapılandırılan sunuculara, ardından belirli bir bölgede en az 7 günlük bir süre sonra özel zamanlamaya sahip sunuculara uygulanan güncelleştirmeleri uyguladık. Geliştirme ve test ortamı sunucularında daha erken güncelleştirmeler almayı düşünüyorsanız, geliştirme ve test ortamında kullanılan sunucular için sistem tarafından yönetilen zamanlamayı yapılandırmanızı öneririz. Bu, doğrulama için test ve değerlendirme için geliştirme ve test ortamınızda en son güncelleştirmeyi almanızı sağlar. Herhangi bir davranışla veya son değişiklikle karşılaşırsanız, aynı güncelleştirme, özel olarak yönetilen zamanlamalarla üretim sunucularına gönderilmeden önce bunları ele almanız gerekir. Güncelleştirme, 7 gün sonra özel zamanlamaya göre esnek sunucuları kullanıma açmaya başlar ve tanımlı bakım penceresinde sunucunuza uygulanır. Şu anda, bildirim gönderildikten sonra güncelleştirmeyi erteleme seçeneği yoktur. Özel-zamanlama yalnızca üretim ortamları için önerilir. 
+
+Nadir durumlarda, bakım olayı sistem tarafından iptal edilebilir veya başarıyla tamamlanmayabilir. Güncelleştirme başarısız olursa, güncelleştirme geri döndürülür ve ikili dosyaların önceki sürümü geri yüklenir. Bu tür başarısız güncelleştirme senaryolarında bakım penceresi sırasında sunucunun yeniden başlatılmasına devam edebilirsiniz. Güncelleştirme iptal edilirse veya başarısız olduysa, sistem sizi bilgilendirirken, iptal edilen veya başarısız bakım olayı hakkında bir bildirim oluşturacaktır. Bakım gerçekleştirme girişimi, geçerli zamanlama ayarlarınıza göre zamanlanır ve bu işlem için beş gün daha önceden bildirim alırsınız. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

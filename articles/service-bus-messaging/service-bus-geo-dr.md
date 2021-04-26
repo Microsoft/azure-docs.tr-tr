@@ -3,12 +3,12 @@ title: Azure Service Bus coğrafi olağanüstü durum kurtarma | Microsoft Docs
 description: Azure Service Bus içinde yük devretme ve olağanüstü durum kurtarma için coğrafi bölgeleri kullanma
 ms.topic: article
 ms.date: 02/10/2021
-ms.openlocfilehash: 3e8050cdaaae7e16a0f5125292df4b89b3690ed3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2aa7ed118d0ba179ffff4f72a4d4df787edc9d88
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102035403"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105933764"
 ---
 # <a name="azure-service-bus-geo-disaster-recovery"></a>Azure Service Bus coğrafi olağanüstü durum kurtarma
 
@@ -156,7 +156,7 @@ Bu sürümü göz önünde bulundurmanız için aşağıdaki noktalara dikkat ed
 
 4. Varlıkların eşitlenmesi birkaç dakika sürebilir ve dakikada yaklaşık 50-100 varlık olabilir. Abonelikler ve kurallar da varlık olarak sayılır.
 
-### <a name="availability-zones"></a>Kullanılabilirlik Alanları
+## <a name="availability-zones"></a>Kullanılabilirlik Alanları
 
 Service Bus Premium SKU, aynı Azure bölgesi içinde hata yalıtılmış konumlar sağlayarak [kullanılabilirlik alanları](../availability-zones/az-overview.md)destekler. Service Bus ileti deposunun üç kopyasını yönetir (1 birincil ve 2 ikincil). Service Bus veri ve yönetim işlemleri için eşitlerdeki tüm üç kopyayı tutar. Birincil kopya başarısız olursa, ikincil kopyalardan biri, algılanan kapalı kalma süresi olmadan birinciye yükseltilir. Uygulamalar Service Bus geçici kesilen bağlantıları görüyorsanız, SDK 'daki yeniden deneme mantığı Service Bus otomatik olarak yeniden bağlanır. 
 

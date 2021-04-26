@@ -1,14 +1,14 @@
 ---
 title: 'Hızlı başlangıç: bir aracı tabanlı çözüme IoT için Defender ekleme'
-description: Bu hızlı başlangıçta, Azure IoT Hub IoT güvenlik hizmeti için Defender 'ı eklemeyi ve etkinleştirmeyi öğreneceksiniz.
+description: Bu hızlı başlangıçta, Azure IoT Hub IoT güvenlik hizmeti için Defender 'ın nasıl ekleneceğini ve etkinleştirileceğini öğreneceksiniz.
 ms.topic: quickstart
 ms.date: 1/20/2021
-ms.openlocfilehash: b795773ae0eb667cf7f53f4209b6476ba937b17f
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 2704f8989ab39825cef052ca5556a2e6461efe75
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104780965"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384502"
 ---
 # <a name="quickstart-onboard-defender-for-iot-to-an-agent-based-solution"></a>Hızlı başlangıç: bir aracı tabanlı çözüme IoT için Defender ekleme
 

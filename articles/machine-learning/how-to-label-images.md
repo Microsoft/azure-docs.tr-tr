@@ -9,12 +9,12 @@ ms.subservice: core
 ms.topic: tutorial
 ms.date: 07/27/2020
 ms.custom: data4ml
-ms.openlocfilehash: 5ba399418d8f93204b168c1058be20ffc775ef70
-ms.sourcegitcommit: b4e6b2627842a1183fce78bce6c6c7e088d6157b
+ms.openlocfilehash: 8f1d648c38760865752c87624dfcb112933650c7
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 01/30/2021
-ms.locfileid: "99096974"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107872632"
 ---
 # <a name="tag-images-in-a-labeling-project"></a>Etiketleme projesindeki resimleri etiketleme 
 
@@ -74,11 +74,6 @@ Makine öğrenimi algoritmaları tetiklenebilir. Bu algoritmalar projenizde etki
 * Nesne tanımlama modelleri için, sınırlayıcı kutular ve Etiketler zaten mevcut olabilir.  Sayfayı göndermeden önce yanlış olan hataları düzeltin.
 
 * Segmentasyon modelleri için, çokgenler ve Etiketler zaten mevcut olabilir.  Sayfayı göndermeden önce yanlış olan hataları düzeltin. 
-
-    > [!IMPORTANT]
-    > (Önizleme) ile listelenen özellikler genel önizlemededir.   
-    > Önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
 
 Özellikle etiketleme projesinde daha önce, makine öğrenimi modeli yalnızca küçük bir resim alt kümesini etiketlemek için yeterince doğru olabilir. Bu görüntülerin etiketlenmesi halinde etiketleme projesi, model eğitiminin bir sonraki turunda daha fazla veri toplamak için el ile etiketlemeye geri döner. Zamanla, model daha yüksek bir görüntü oranında daha emin olur ve daha sonra projede daha sonra daha fazla etiket görevi elde eder.
 

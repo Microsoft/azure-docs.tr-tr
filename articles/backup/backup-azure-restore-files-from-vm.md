@@ -4,12 +4,12 @@ description: Bu makalede, Azure sanal makine kurtarma noktasından dosya ve klas
 ms.topic: conceptual
 ms.date: 03/12/2020
 ms.custom: references_regions
-ms.openlocfilehash: ed231a4870af7489d48ff54548be380c2cf0799c
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: c2af279ec7e846316a94e58977e7079305ab9b03
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104864899"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106579364"
 ---
 # <a name="recover-files-from-azure-virtual-machine-backup"></a>Azure sanal makine yedeklemesinden dosyaları kurtarma
 
@@ -133,12 +133,12 @@ Ayrıca, [ILR betiğini yürütmek için doğru makineye](#step-2-ensure-the-mac
 
 Betiği kısıtlı erişimi olan bir bilgisayarda çalıştırırsanız, erişimi olduğundan emin olun:
 
-- `download.microsoft.com`
+- `download.microsoft.com` veya `AzureFrontDoor.FirstParty` NSG 'de hizmet etiketi
 - Kurtarma Hizmeti URL 'Leri (COĞRAFI ad, kurtarma hizmetleri kasasının bulunduğu bölgeyi ifade eder)
-  - `https://pod01-rec2.GEO-NAME.backup.windowsazure.com` (Azure ortak bölgeleri için)
-  - `https://pod01-rec2.GEO-NAME.backup.windowsazure.cn` (Azure Çin 21Vianet için)
-  - `https://pod01-rec2.GEO-NAME.backup.windowsazure.us` (Azure ABD kamu için)
-  - `https://pod01-rec2.GEO-NAME.backup.windowsazure.de` (Azure Almanya için)
+  - `https://pod01-rec2.GEO-NAME.backup.windowsazure.com` NSG 'de (Azure ortak bölgeleri için) veya `AzureBackup` hizmet etiketi
+  - `https://pod01-rec2.GEO-NAME.backup.windowsazure.cn` (Azure Çin 21Vianet için) veya `AzureBackup` NSG 'de hizmet etiketi
+  - `https://pod01-rec2.GEO-NAME.backup.windowsazure.us` (Azure ABD kamu için) veya `AzureBackup` NSG 'de hizmet etiketi
+  - `https://pod01-rec2.GEO-NAME.backup.windowsazure.de` (Azure Almanya için) veya `AzureBackup` NSG 'de hizmet etiketi
 - Giden bağlantı noktaları 53 (DNS), 443, 3260
 
 > [!NOTE]

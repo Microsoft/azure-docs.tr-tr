@@ -11,12 +11,12 @@ ms.workload: ''
 ms.topic: reference
 ms.date: 03/17/2021
 ms.author: inhenkel
-ms.openlocfilehash: 6b502690a62410f1e8d2950074e8b479f7dc7f88
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 6b9d3f6973c210e7bd91c088ee7a276bfbcc48ce
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104610070"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106121991"
 ---
 # <a name="azure-event-grid-schemas-for-media-services-events"></a>Media Services olaylar için Azure Event Grid şemaları
 
@@ -330,7 +330,7 @@ Veri nesnesi aşağıdaki özelliklere sahiptir:
 | encoderPort | string | Bu akışın geldiği kodlayıcının bağlantı noktası. |
 | resultCode | string | Bağlantının reddedilme nedeni. Sonuç kodları aşağıdaki tabloda listelenmiştir. |
 
-Hata sonuç kodlarını [canlı olay hata kodlarında](../live-event-error-codes.md)bulabilirsiniz.
+Hata sonuç kodlarını [canlı olay hata kodlarında](../live-event-error-codes-reference.md)bulabilirsiniz.
 
 ### <a name="liveeventencoderconnected"></a>LiveEventEncoderConnected
 
@@ -400,7 +400,7 @@ Veri nesnesi aşağıdaki özelliklere sahiptir:
 | encoderPort | string | Bu akışın geldiği kodlayıcının bağlantı noktası. |
 | resultCode | string | Kodlayıcı bağlantısının kesilmesi nedeni. Bu, düzgün bir şekilde kesilmesi veya bir hatadan olabilir. Sonuç kodları aşağıdaki tabloda listelenmiştir. |
 
-Hata sonuç kodlarını [canlı olay hata kodlarında](../live-event-error-codes.md)bulabilirsiniz.
+Hata sonuç kodlarını [canlı olay hata kodlarında](../live-event-error-codes-reference.md)bulabilirsiniz.
 
 Düzgün olmayan bağlantıyı kesme sonuç kodları şunlardır:
 
@@ -676,4 +676,4 @@ Bir olay aşağıdaki en üst düzey verilere sahiptir:
 
 - [Media Service olaylarını içeren EventGrid .NET SDK 'Sı](https://www.nuget.org/packages/Microsoft.Azure.EventGrid/)
 - [Media Services olaylarının tanımları](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/eventgrid/data-plane/Microsoft.Media/stable/2018-01-01/MediaServices.json)
-- [Canlı olay hata kodları](../live-event-error-codes.md)
+- [Canlı olay hata kodları](../live-event-error-codes-reference.md)

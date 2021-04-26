@@ -3,12 +3,12 @@ title: Azure Stack üzerinde Azure Backup Sunucusu'nu yükleme
 description: Bu makalede, Azure Stack iş yüklerini korumak veya yedeklemek için Azure Backup Sunucusu nasıl kullanacağınızı öğrenin.
 ms.topic: conceptual
 ms.date: 01/31/2019
-ms.openlocfilehash: 12dfd15c2bd43816dd361fdf45995bcbcd6fba56
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d7c685a16db50e51a54387dde49ffb137fcfd626
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98987014"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107519485"
 ---
 # <a name="install-azure-backup-server-on-azure-stack"></a>Azure Stack üzerinde Azure Backup Sunucusu'nu yükleme
 
@@ -361,7 +361,7 @@ Bir Azure aboneliğini, *zaman aşımına uğradı* veya *sağlaması kaldırıl
 ## <a name="troubleshooting"></a>Sorun giderme
 
 Microsoft Azure Backup sunucu kurulum aşaması (veya yedekleme ya da geri yükleme) sırasında hata vererek başarısız olursa, [hata kodları belgesine](https://support.microsoft.com/kb/3041338)bakın.
-Ayrıca, [Ilgili sss Azure Backup](backup-azure-backup-faq.md) de başvurabilirsiniz
+Ayrıca, [Ilgili sss Azure Backup](backup-azure-backup-faq.yml) de başvurabilirsiniz
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

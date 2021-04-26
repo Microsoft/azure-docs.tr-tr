@@ -10,10 +10,10 @@ ms.topic: tutorial
 ms.date: 09/15/2020
 ms.author: ambapat
 ms.openlocfilehash: e926dcd4b05d137c7927bdfe5221923d25d4670c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100093497"
 ---
 # <a name="full-backup-and-restore"></a>Tam yedekleme ve geri yükleme
@@ -23,16 +23,16 @@ ms.locfileid: "100093497"
 
 Yönetilen HSM, tüm anahtarlar, sürümler, öznitelikler, Etiketler ve rol atamaları dahil olmak üzere HSM 'nin tüm içeriğinin tam yedeklemesini oluşturmayı destekler. Yedekleme, HSM 'nin güvenlik etki alanıyla ilişkili şifreleme anahtarlarıyla şifrelenir.
 
-Yedekleme, bir veri düzlemi işlemidir. Yedekleme işleminin başlatılmasına yönelik çağıran, **Microsoft. Keykasası/managedHsm/Backup/start/Action** veri eylemini gerçekleştirme iznine sahip olmalıdır.
+Yedekleme bir veri düzlemi işlemidir. Yedekleme işleminin başlatılmasına yönelik çağıran, **Microsoft. Keykasası/managedHsm/Backup/start/Action** veri eylemini gerçekleştirme iznine sahip olmalıdır.
 
 Yalnızca aşağıdaki yerleşik rollerin tam yedekleme gerçekleştirme izni vardır:
 - Yönetilen HSM Yöneticisi
-- Yönetilen HSM yedeklemesi
+- Yönetilen HSM Yedeklemesi
 
-Tam yedeklemeyi yürütmek için aşağıdaki bilgileri sağlamanız gerekir:
-- HSM adı veya URL 'SI
+Tam yedeklemeyi yürütmek için aşağıdaki bilgileri sağlamalısınız:
+- HSM adı veya URL'si
 - Depolama hesabı adı
-- Depolama hesabı blobu depolama kapsayıcısı
+- Depolama hesabı blob depolama kapsayıcısı
 - İzinlerle depolama kapsayıcısı SAS belirteci `crdw`
 
 [!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
@@ -75,7 +75,7 @@ Tam geri yükleme, tüm anahtarlar, sürümler, öznitelikler, Etiketler ve rol 
 Restore bir veri düzlemi işlemidir. Geri yükleme işlemini başlatan çağıranın, **Microsoft. Keykasası/managedHsm/restore/start/Action** veri eylemini gerçekleştirme izni olmalıdır. Yedeklemenin oluşturulduğu kaynak HSM ve geri yüklemenin gerçekleştirileceği hedef HSM 'nin aynı güvenlik etki alanına sahip **olması gerekir** . [YÖNETILEN HSM güvenlik etki alanı hakkında](security-domain.md)daha fazla bilgi.
 
 Tam geri yükleme yürütmek için aşağıdaki bilgileri sağlamanız gerekir:
-- HSM adı veya URL 'SI
+- HSM adı veya URL'si
 - Depolama hesabı adı
 - Depolama hesabı blobu kapsayıcısı
 - İzinlerle depolama kapsayıcısı SAS belirteci `rl`

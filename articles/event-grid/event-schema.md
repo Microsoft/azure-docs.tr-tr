@@ -3,12 +3,12 @@ title: Azure Event Grid olay şeması
 description: Tüm olaylar için mevcut olan özellikleri ve şemayı açıklar. Olaylar, beş gerekli dize özelliği ve gerekli bir veri nesnesi kümesinden oluşur.
 ms.topic: reference
 ms.date: 07/07/2020
-ms.openlocfilehash: 7ddc7c78c5a9e5ba2a57b21c45fb9fab65056ee9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 5ff7b41a45cf467074e18a50be398b2a3c9866a4
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "86105889"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105732168"
 ---
 # <a name="azure-event-grid-event-schema"></a>Azure Event Grid olay şeması
 
@@ -88,6 +88,7 @@ Tüm olaylar en üst düzey verilere sahiptir:
 
 Veri nesnesindeki özellikler hakkında bilgi edinmek için bkz. olay kaynağı:
 
+* [Azure İlkesi](./event-schema-policy.md)
 * [Azure abonelikleri (yönetim işlemleri)](event-schema-subscriptions.md)
 * [Container Registry](event-schema-container-registry.md)
 * [Blob depolama](event-schema-blob-storage.md)

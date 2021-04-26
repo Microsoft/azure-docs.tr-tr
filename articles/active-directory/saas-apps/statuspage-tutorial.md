@@ -9,38 +9,37 @@ ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 12/18/2020
+ms.date: 03/31/2021
 ms.author: jeedes
-ms.openlocfilehash: cc3ce56ecd17d627001f4925355c055afdc09d22
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6bc2508220a8c0193efb55eb6cd11f7e151c80be
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98729674"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106284600"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-statuspage"></a>Öğretici: StatusPage ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
-Bu öğreticide, StatusPage 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
-StatusPage 'i Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
+Bu öğreticide, StatusPage 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. StatusPage 'i Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* StatusPage 'e erişimi olan Azure AD 'de denetim yapabilirsiniz.
-* Kullanıcılarınızın Azure AD hesaplarıyla StatusPage (çoklu oturum açma) ile otomatik olarak oturum açmasını sağlayabilirsiniz.
-* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
+* Azure AD 'de StatusPage 'e erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla StatusPage 'e otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Azure AD tümleştirmesini StatusPage ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/) alabilirsiniz
-* StatusPage çoklu oturum açma etkin aboneliği
+* Bir Azure AD aboneliği. Azure AD ortamınız yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* StatusPage çoklu oturum açma etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
 Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* StatusPage **IDP** tarafından başlatılan SSO 'yu destekliyor
+* StatusPage **IDP** tarafından başlatılan SSO 'yu destekler.
 
-## <a name="adding-statuspage-from-the-gallery"></a>Galeriden StatusPage ekleme
+## <a name="add-statuspage-from-the-gallery"></a>Galeriden StatusPage ekleme
 
 StatusPage 'in Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden StatusPage 'i yönetilen SaaS uygulamaları listenize eklemeniz gerekir.
 
@@ -65,13 +64,13 @@ Azure AD SSO 'yu StatusPage ile yapılandırmak ve test etmek için aşağıdaki
     1. StatusPage **[test kullanıcısı oluşturun](#create-statuspage-test-user)** ve kullanıcının Azure AD gösterimine bağlı olarak, StatusPage 'de Britta Simon 'un bir karşılığı vardır.
 6. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-### <a name="configure-azure-ad-sso"></a>Azure AD SSO’yu yapılandırma
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO’yu yapılandırma
 
 Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
 1. Azure portal, **Askyourteam** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
 1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
-1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
@@ -85,7 +84,7 @@ Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
     | `https://<subdomain>.statuspage.io/` |
     |
 
-    b. **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:
+    b. **Yanıt URL 'si** metin kutusuna aşağıdaki desenlerden birini kullanarak bir URL yazın:
 
      | Yanıt URL'si |
     |--------------|
@@ -152,17 +151,17 @@ Bu bölümde, StatusPage 'e erişim vererek Azure çoklu oturum açma özelliği
 
 1. Ana araç çubuğunda **Hesabı Yönet**' e tıklayın.
 
-    ![Ekran görüntüsü, StatusPage şirket sitesinden seçilen hesabı Yönet ' i gösterir.](./media/statuspage-tutorial/tutorial_statuspage_06.png)
+    ![Ekran görüntüsü, StatusPage şirket sitesinden seçilen hesabı Yönet ' i gösterir.](./media/statuspage-tutorial/account.png)
 
 1. **Çoklu oturum açma** sekmesine tıklayın.
 
-    ![Ekran görüntüsü çoklu oturum açma sekmesini gösterir.](./media/statuspage-tutorial/tutorial_statuspage_07.png)
+    ![Ekran görüntüsü çoklu oturum açma sekmesini gösterir.](./media/statuspage-tutorial/tab.png)
 
 1. SSO kurulum sayfasında, aşağıdaki adımları uygulayın:
 
-    ![Ekran görüntüsü, tanımlanan değerleri girebileceğiniz S S O kurulum sayfasını gösterir.](./media/statuspage-tutorial/tutorial_statuspage_08.png)
+    ![Ekran görüntüsü, tanımlanan değerleri girebileceğiniz S S O kurulum sayfasını gösterir.](./media/statuspage-tutorial/setup.png)
 
-    ![Ekran görüntüsünde yapılandırmayı Kaydet düğmesi gösterilir.](./media/statuspage-tutorial/tutorial_statuspage_09.png)
+    ![Ekran görüntüsünde yapılandırmayı Kaydet düğmesi gösterilir.](./media/statuspage-tutorial/configuration.png)
 
     a. **SSO hedef URL** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si** değerini yapıştırın.
 
@@ -182,25 +181,25 @@ StatusPage tam zamanında sağlamayı destekler. Bu özelliği [Azure AD çoklu 
 
 1. Üstteki menüde **Hesabı Yönet**' e tıklayın.
 
-    ![Ekran görüntüsü, StatusPage şirket sitesinden seçilen hesabı Yönet ' i gösterir.](./media/statuspage-tutorial/tutorial_statuspage_06.png)
+    ![Ekran görüntüsü, StatusPage şirket sitesinden seçilen hesabı Yönet ' i gösterir.](./media/statuspage-tutorial/account.png)
 
 1. **Ekip üyeleri** sekmesine tıklayın.
   
-    ![Ekran görüntüsü takım üyeleri sekmesini gösterir.](./media/statuspage-tutorial/tutorial_statuspage_10.png) 
+    ![Ekran görüntüsü takım üyeleri sekmesini gösterir.](./media/statuspage-tutorial/sandbox.png) 
 
 1. **Takım üyesi ekle**' ye tıklayın.
   
-    ![Ekran görüntüsü takım üyesi ekle düğmesini gösterir.](./media/statuspage-tutorial/tutorial_statuspage_11.png) 
+    ![Ekran görüntüsü takım üyesi ekle düğmesini gösterir.](./media/statuspage-tutorial/team.png) 
 
 1. İlgili metin kutularına sağlamak istediğiniz geçerli bir kullanıcının **e-posta adresini**, **adını** ve **soyadını** yazın. 
 
-    ![Ekran görüntüsü, açıklanan değerleri girebileceğiniz Kullanıcı Ekle iletişim kutusunu gösterir.](./media/statuspage-tutorial/tutorial_statuspage_12.png) 
+    ![Ekran görüntüsü, açıklanan değerleri girebileceğiniz Kullanıcı Ekle iletişim kutusunu gösterir.](./media/statuspage-tutorial/user.png) 
 
 1. **Rol** olarak **İstemci Yöneticisi**' ni seçin.
 
 1. **Hesap oluştur**' a tıklayın.
 
-### <a name="test-sso"></a>Test SSO 'SU
+## <a name="test-sso"></a>Test SSO 'SU
 
 Bu bölümde, Azure AD çoklu oturum açma yapılandırmanızı aşağıdaki seçeneklerle test edersiniz.
 

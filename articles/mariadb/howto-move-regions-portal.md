@@ -7,12 +7,12 @@ ms.service: mariadb
 ms.topic: how-to
 ms.custom: subject-moving-resources
 ms.date: 06/29/2020
-ms.openlocfilehash: f4ce34bc1a1af7b2c0ee57a3297415bd9d033517
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 831a1927d60c7b583afbe885c385fd85dc78e525
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98664945"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106062225"
 ---
 # <a name="move-an-azure-database-for-mariadb-server-to-another-region-by-using-the-azure-portal"></a>MariaDB sunucusu için Azure veritabanı 'nı Azure portal kullanarak başka bir bölgeye taşıma
 

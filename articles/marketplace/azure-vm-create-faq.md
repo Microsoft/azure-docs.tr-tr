@@ -1,5 +1,5 @@
 ---
-title: Azure Market 'te VM hakkında sık sorulan sorular
+title: Azure Market'teki sanal makine ile ilgili sık sorulan sorular
 description: Azure Marketi 'nde bir sanal makine oluşturulurken karşılaşılan ortak sorularla karşılaşıldı.
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
@@ -8,13 +8,13 @@ author: kriti-ms
 ms.author: krsh
 ms.date: 03/10/2021
 ms.openlocfilehash: 2975d1f1558bc7f9e4a12c18882e43a163b97982
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104593433"
 ---
-# <a name="common-questions-about-vm-in-azure-marketplace"></a>Azure Market 'te VM hakkında sık sorulan sorular
+# <a name="common-questions-about-vm-in-azure-marketplace"></a>Azure Market'teki sanal makine ile ilgili sık sorulan sorular
 
 Bu sık sorulan sorular (SSS), Azure Marketi 'nde bir sanal makine (VM) teklifi oluştururken karşılaşabileceğiniz yaygın sorunları ele alır.
 

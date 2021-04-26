@@ -11,10 +11,10 @@ ms.topic: how-to
 ms.date: 03/08/2021
 ms.author: justinha
 ms.openlocfilehash: f877a631fd3c89d74b9e3b47cf205bbcf173ebc0
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "102453419"
 ---
 # <a name="configure-scoped-synchronization-from-azure-ad-to-azure-active-directory-domain-services-using-azure-ad-powershell"></a>Azure AD PowerShell 'i kullanarak Azure AD 'den kapsamlı eşitlemeyi Azure Active Directory Domain Services yapılandırma

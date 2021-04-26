@@ -12,12 +12,12 @@ ms.date: 03/17/2021
 ms.author: ryanwi
 ms.reviewer: hirsin
 ms.custom: aaddev
-ms.openlocfilehash: 56ffa8c33c409e274318407a70f33edaabb5073d
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 75d838e8ce785a4f59b056bf0dec736b982ea716
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104578507"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107283822"
 ---
 # <a name="azure-ad-authentication-and-authorization-error-codes"></a>Azure AD Kimlik Doğrulaması ve yetkilendirme hata kodları
 
@@ -123,7 +123,7 @@ Hata kodları ve mesajlar değiştirilebilir.  En güncel bilgiler için, [https
 | AADSTS50055 | Invalidpasswordexpiredpassword-parolanın geçerliliği dolmuştur. |
 | AADSTS50056 | Geçersiz veya null parola-bu kullanıcı için depoda parola yok. |
 | AADSTS50057 | Kullanıcıdevre dışı-Kullanıcı hesabı devre dışı bırakıldı. Hesap, yönetici tarafından devre dışı bırakıldı. |
-| AADSTS50058 | Userınformationnotsaðlanan-bu, bir kullanıcının oturum açmadığı anlamına gelir. Bu, bir kullanıcı kimliği doğrulanmamış olduğunda ve henüz oturum açmamış olması beklenen yaygın bir hatadır.</br>Bu hata, kullanıcının daha önce oturum açmış olduğu bir SSO bağlamında teşvik edilir, bu, SSO oturumunun bulunamaması veya geçersiz olması anlamına gelir.</br>Prompt = none belirtilmişse bu hata uygulamaya döndürülür. |
+| AADSTS50058 | Userınformationnotsaðlanan-bu, bir kullanıcının oturum açmadığı anlamına gelir. Bu, bir kullanıcı kimliği doğrulanmamış olduğunda ve henüz oturum açmamış olması beklenen yaygın bir hatadır.</br>Bu hatayla, kullanıcının daha önce oturum açmış olduğu bir SSO bağlamında karşılaşılırsa, bu, SSO oturumunun bulunamaması veya geçersiz olması anlamına gelir.</br>Prompt = none belirtilmişse bu hata uygulamaya döndürülür. |
 | AADSTS50059 | MissingTenantRealmAndNoUserInformationProvided-kiracı tanımlama bilgileri istekte bulunamadı veya belirtilen kimlik bilgileri tarafından kapsanıyor. Kullanıcı, sorunu çözmeye yardımcı olmak için kiracı yöneticisine bağlanabilir. |
 | AADSTS50061 | Signoutınvalidrequest-oturum kapatma isteği geçersiz. |
 | AADSTS50064 | CredentialAuthenticationError-Kullanıcı adı veya parola üzerinde kimlik bilgisi doğrulaması başarısız oldu. |

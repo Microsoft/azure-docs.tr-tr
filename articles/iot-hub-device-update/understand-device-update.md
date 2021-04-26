@@ -6,12 +6,12 @@ ms.author: vimeht
 ms.date: 2/11/2021
 ms.topic: overview
 ms.service: iot-hub-device-update
-ms.openlocfilehash: 092078a79124682f7ee5c7824d4f7906c6e35475
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 95cecd66f4d0164594eb4e8da9efe765b5833e5e
+ms.sourcegitcommit: 9f4510cb67e566d8dad9a7908fd8b58ade9da3b7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105558508"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106120784"
 ---
 # <a name="device-update-for-iot-hub-preview-overview"></a>IoT Hub için cihaz Güncelleştirmesi (Önizleme) genel bakış
 
@@ -80,7 +80,7 @@ Cihaz Güncelleştirme Aracısı hakkında [daha fazla bilgi edinin](device-upda
 
 ### <a name="importing"></a>İçeri aktarma
 
-İçeri aktarma, güncelleştirmelerin cihaza dağıtılabilmesi için cihaz güncelleştirmesine nasıl alınacağını aşağıda bulabilirsiniz. Cihaz güncelleştirme, cihaz başına tek bir güncelleştirme kullanıma alınmasını destekler. Bu, bir işletim sistemi bölümünün tamamını veya cihazınızda güncelleştirmek istediğiniz tüm paketleri açıklayan bir apt bildirimini güncelleştiren tam görüntü güncelleştirmelerini ideal hale getirir. Güncelleştirmeleri cihaz güncelleştirmesine aktarmak için öncelikle güncelleştirmeyi açıklayan bir içeri aktarma bildirimi oluşturun ve ardından güncelleştirme dosyalarını ve içeri aktarma bildirimini Internet erişimli bir konuma yükleyin. Bundan sonra, güncelleştirme içeri aktarma işleminin zaman uyumsuz işlemini başlatmak için Azure portal veya [cihaz güncelleştirme Içeri aktarma REST API](https://github.com/Azure/iot-hub-device-update/tree/main/docs/publish-api-reference) kullanabilirsiniz. Cihaz güncelleştirme, dosyaları karşıya yükler, işler ve IoT cihazlarına dağıtım için kullanılabilir hale getirir.
+İçeri aktarma, güncelleştirmelerin cihaza dağıtılabilmesi için cihaz güncelleştirmesine nasıl alınacağını aşağıda bulabilirsiniz. Cihaz güncelleştirme, cihaz başına tek bir güncelleştirme kullanıma alınmasını destekler. Bu, bir işletim sistemi bölümünün tamamını veya cihazınızda güncelleştirmek istediğiniz tüm paketleri açıklayan bir apt bildirimini güncelleştiren tam görüntü güncelleştirmelerini ideal hale getirir. Güncelleştirmeleri cihaz güncelleştirmesine aktarmak için öncelikle güncelleştirmeyi açıklayan bir içeri aktarma bildirimi oluşturun ve ardından güncelleştirme dosyalarını ve içeri aktarma bildirimini Internet erişimli bir konuma yükleyin. Bundan sonra, güncelleştirme içeri aktarma işleminin zaman uyumsuz işlemini başlatmak için Azure portal veya [cihaz güncelleştirme REST API](https://docs.microsoft.com/rest/api/deviceupdate/) kullanabilirsiniz. Cihaz güncelleştirme, dosyaları karşıya yükler, işler ve IoT cihazlarına dağıtım için kullanılabilir hale getirir.
 
 Hassas içerik için, Azure Blob depolama için geçici SAS gibi paylaşılan erişim imzasını (SAS) kullanarak indirmeyi koruyun. [SAS hakkında daha fazla bilgi](../storage/common/storage-sas-overview.md)
 

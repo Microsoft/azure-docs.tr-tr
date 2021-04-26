@@ -3,12 +3,12 @@ title: Azure Site Recovery kullanarak Azure Stack VM 'Leri Azure 'a çoğaltma |
 description: Azure Site Recovery hizmetiyle Azure Stack VM 'Ler için Azure 'da olağanüstü durum kurtarmayı ayarlamayı öğrenin.
 ms.topic: conceptual
 ms.date: 08/05/2019
-ms.openlocfilehash: 36e11bfe5354644f9ef6603ffe20cb2e86074323
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 300b239de74c7d21e03eb0c3b059663b5074964c
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "96016922"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105728394"
 ---
 # <a name="replicate-azure-stack-vms-to-azure"></a>Azure Stack VM'lerini Azure'a çoğaltma
 
@@ -314,7 +314,7 @@ Ardından yük devretmeyi aşağıdaki gibi çalıştırın:
 
 ### <a name="fail-back-to-azure-stack"></a>Azure Stack yeniden başarısız oldu
 
-Birincil siteniz tekrar çalışır duruma geldiğinde Azure 'dan Azure Stack 'e geri dönebilirsiniz. Bunu yapmak için [burada](/azure-stack/operator/site-recovery-failback?view=azs-2005)listelenen adımları izleyin.
+Birincil siteniz tekrar çalışır duruma geldiğinde Azure 'dan Azure Stack 'e geri dönebilirsiniz. Bunu yapmak için [burada](/azure-stack/operator/site-recovery-failback)listelenen adımları izleyin.
 
 ## <a name="conclusion"></a>Sonuç
 

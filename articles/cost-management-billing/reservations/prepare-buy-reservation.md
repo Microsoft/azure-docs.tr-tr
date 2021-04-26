@@ -6,14 +6,14 @@ ms.reviewer: yashar
 ms.service: cost-management-billing
 ms.subservice: reservations
 ms.topic: how-to
-ms.date: 07/24/2020
+ms.date: 04/12/2021
 ms.author: banders
-ms.openlocfilehash: a70d434b06fd19071f3576f9333579e0bd2b85e7
-ms.sourcegitcommit: 1f1d29378424057338b246af1975643c2875e64d
+ms.openlocfilehash: b2cdb106ab1c77c23626258f7e0708a20ffd3c4e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99574983"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107772262"
 ---
 # <a name="buy-a-reservation"></a>Ayırma satın alma
 
@@ -44,9 +44,9 @@ Gereksinimlerinize bağlı olarak bir rezervasyonu kapsama almak için üç seç
 
 Kullanımınıza rezervasyon indirimleri uygulanırken, Azure rezervasyonu aşağıdaki sırayla işler:
 
-1. Kaynak grubu kapsamındaki rezervasyonlar
-2. Tek kapsam rezervasyonları
-3. Paylaşılan kapsam rezervasyonları
+1. Tek bir kaynak grubu kapsamına sahip rezervasyonlar
+2. Tek bir abonelik kapsamına sahip rezervasyonlar
+3. Daha önce açıklanan paylaşılan kapsama sahip rezervasyonlar (birden çok abonelik)
 
 Rezervasyon satın aldıktan sonra her zaman kapsamı güncelleştirebilirsiniz. Bunu yapmak için rezervasyona gidin, **Yapılandırma**'ya tıklayın ve rezervasyon kapsamını yeniden belirleyin. Rezervasyon kapsamını yeniden belirlemek ticari bir işlem değildir. Rezervasyon süreniz değişmez. Kapsamı güncelleştirme hakkında daha fazla bilgi için bkz. [Rezervasyon satın aldıktan sonra kapsamı güncelleştirme](manage-reserved-vm-instance.md#change-the-reservation-scope).
 
@@ -133,4 +133,8 @@ Bireysel abonelikleri olan müşteriler için:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
+- [Ayırmalar izinleri hakkında daha fazla bilgi edinin](view-reservations.md)
 - [Azure kaynakları için Ayırmaları Yönetme](manage-reserved-vm-instance.md)
+- [REST API 'Lerini kullanarak otomatikleştirme](/rest/api/reserved-vm-instances/reservationorder)
+- [Azure PowerShell kullanarak otomatikleştirin](/powershell/module/az.reservations)
+- [CLı kullanarak otomatikleştirme](/cli/azure/reservations)

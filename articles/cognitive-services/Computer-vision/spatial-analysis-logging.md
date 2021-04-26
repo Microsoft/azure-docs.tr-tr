@@ -10,16 +10,16 @@ ms.subservice: computer-vision
 ms.topic: conceptual
 ms.date: 01/12/2021
 ms.author: aahi
-ms.openlocfilehash: a825b9e0abc4e33eb0f9033f46bb77c38559f740
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 901e857a346b0955726c5755e23595efefbc2ca1
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104722710"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107589508"
 ---
 # <a name="telemetry-and-troubleshooting"></a>Telemetri ve sorun giderme
 
-Uzamsal analiz sistemin durumunu izlemeye ve sorunları tanılarken yardımcı olmaya yönelik bir dizi özellik içerir.
+Uzamsal analizler sistemin sistem durumunu izlemeye yönelik bir dizi özellik içerir ve sorunları tanılamanıza yardımcı olur.
 
 ## <a name="enable-visualizations"></a>Görselleştirmeleri etkinleştir
 
@@ -103,21 +103,21 @@ Telegraf modülü dağıtıldıktan sonra, bildirilen ölçümlere Azure Izleyic
 
 ### <a name="system-health-events"></a>Sistem durumu olayları
 
-| Olay Adı | Description|
-|------|---------|
-|archon_exit     |Kullanıcı, uzamsal analiz modülü durumunun *çalışmayı* *durduruldu* olarak değiştirdiğinde gönderilir.  |
-|archon_error     |Kapsayıcının içindeki işlemlerden herhangi biri kilitleniyorsa gönderilir. Bu kritik bir hatadır.  |
-|Inputrate     |Grafiğin video girişini işleme hızıdır. Her 5 dakikada bir raporlanır. | 
-|OutputRate     |Grafiğin AI öngörülerini çıkış hızı. Her 5 dakikada bir raporlanır. |
-|archon_allGraphsStarted | Tüm grafiklerin başlaması bittiğinde gönderilir. |
-|archon_configchange     | Grafik yapılandırması değiştirildiğinde gönderilir. |
-|archon_graphCreationFailed     |Raporlandığı grafik başlatıldığında gönderilir `graphId` . |
-|archon_graphCreationSuccess     |Raporlanan grafik `graphId` başarıyla başladığında gönderilir. |
-|archon_graphCleanup     | Bildirilen grafik `graphId` Temizleme ve çıkış olduğunda gönderilir. |
-|archon_graphHeartbeat     |Bir yeteneğin her bir grafiği için her dakikada bir sinyal gönderilir. |
-|archon_apiKeyAuthFail |Görüntü İşleme kaynak anahtarı, aşağıdaki nedenlerden dolayı, kapsayıcıyı 24 saatten uzun bir süre için doğrulayamazsa gönderilir: kota dışı, geçersiz, çevrimdışı. |
-|Videoıngestersinyal     |Videonun video kaynağından akışını ve bu saatin hata sayısını gösteren her saat için gönderilir. Her bir grafik için bildirildi. |
-|Videoıngesterstate | Video akışı için raporlar *durduruldu* veya *başlatıldı* . Her bir grafik için bildirildi. |
+| Olay Adı                  | Description    |
+|-----------------------------|-------------------------------------------------------------------------------------------|
+| archon_exit                 | Kullanıcı, uzamsal analiz modülü durumunun *çalışmayı* *durduruldu* olarak değiştirdiğinde gönderilir.  |
+| archon_error                | Kapsayıcının içindeki işlemlerden herhangi biri kilitleniyorsa gönderilir. Bu kritik bir hatadır.      |
+| Inputrate                   | Grafiğin video girişini işleme hızıdır. Her 5 dakikada bir raporlanır.              |
+| OutputRate                  | Grafiğin AI öngörülerini çıkış hızı. Her 5 dakikada bir raporlanır.                |
+| archon_allGraphsStarted     | Tüm grafiklerin başlaması bittiğinde gönderilir.                                           |
+| archon_configchange         | Grafik yapılandırması değiştirildiğinde gönderilir.                                              |
+| archon_graphCreationFailed  | Raporlandığı grafik başlatıldığında gönderilir `graphId` .                           |
+| archon_graphCreationSuccess | Raporlanan grafik `graphId` başarıyla başladığında gönderilir.                      |
+| archon_graphCleanup         | Bildirilen grafik `graphId` Temizleme ve çıkış olduğunda gönderilir.                      |
+| archon_graphHeartbeat       | Bir yeteneğin her bir grafiği için her dakikada bir sinyal gönderilir.                                   |
+| archon_apiKeyAuthFail       | Görüntü İşleme kaynak anahtarı, aşağıdaki nedenlerden dolayı, kapsayıcıyı 24 saatten uzun bir süre için doğrulayamazsa gönderilir: kota dışı, geçersiz, çevrimdışı. |
+| Videoıngestersinyal      | Videonun video kaynağından akışını ve bu saatin hata sayısını gösteren her saat için gönderilir. Her bir grafik için bildirildi. |
+| Videoıngesterstate          | Video akışı için raporlar *durduruldu* veya *başlatıldı* . Her bir grafik için bildirildi.              |
 
 ##  <a name="troubleshooting-an-iot-edge-device"></a>IoT Edge cihaz sorunlarını giderme
 
@@ -161,7 +161,7 @@ Azure Blob depolama gibi uzak bir uç noktaya yüklenen günlükleri iyileştirm
 Günlük düzeyi yapılandırması, oluşturulan günlüklerin ayrıntı düzeyini denetlemenize olanak tanır. Desteklenen günlük düzeyleri şunlardır: `none` , `verbose` , `info` , `warning` ve `error` . Her iki düğüm ve platform için varsayılan günlük ayrıntı düzeyi `info` . 
 
 `ARCHON_LOG_LEVEL`Ortam değişkeni, izin verilen değerlerden birine ayarlanarak, günlük düzeyleri genel olarak değiştirilebilir.
-Ayrıca, tüm dağıtılan yetenekler için IoT Edge modülü Ikizi belgesi aracılığıyla ya da değerleri `platformLogLevel` aşağıda gösterildiği gibi ayarlayarak her belirli yetenek için de ayarlanabilir `nodeLogLevel` .
+Ayrıca, tüm dağıtılan yetenekler için IoT Edge modülü Ikizi belgesi aracılığıyla ya da değerleri `platformLogLevel` aşağıda gösterildiği gibi ayarlayarak her belirli yetenek için de ayarlanabilir `nodesLogLevel` .
 
 ```json
 {
@@ -173,7 +173,7 @@ Ayrıca, tüm dağıtılan yetenekler için IoT Edge modülü Ikizi belgesi arac
             },
             "graphs": {
                 "samplegraph": {
-                    "nodeLogLevel": "verbose",
+                    "nodesLogLevel": "verbose",
                     "platformLogLevel": "verbose"
                 }
             }

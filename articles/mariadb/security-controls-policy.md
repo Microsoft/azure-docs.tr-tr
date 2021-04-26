@@ -1,18 +1,18 @@
 ---
 title: MariaDB için Azure veritabanı için Azure Ilke mevzuat uyumluluk denetimleri
 description: MariaDB için Azure veritabanı 'nda kullanılabilen Azure Ilke mevzuat uyumluluk denetimlerini listeler. Bu yerleşik ilke tanımları, Azure kaynaklarınızın uyumluluğunu yönetmek için yaygın yaklaşımlar sağlar.
-ms.date: 03/24/2021
+ms.date: 04/21/2021
 ms.topic: sample
 author: savjani
 ms.author: pariks
 ms.service: mariadb
 ms.custom: subject-policy-compliancecontrols
-ms.openlocfilehash: af0707b17db1138bfee8b5d66f7bb1553d917371
-ms.sourcegitcommit: bb330af42e70e8419996d3cba4acff49d398b399
+ms.openlocfilehash: f9b7bfd75389c7ce3f1c58c8e872dde6d6e0ed67
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105031176"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107862480"
 ---
 # <a name="azure-policy-regulatory-compliance-controls-for-azure-database-for-mariadb"></a>MariaDB için Azure veritabanı için Azure Ilke mevzuat uyumluluk denetimleri
 

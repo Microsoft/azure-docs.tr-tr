@@ -13,12 +13,12 @@ ms.author: ajburnle
 ms.reviewer: vincesm
 ms.custom: it-pro, seodec18, contperf-fy21q1
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: eb01a3e0fc5bc11a4d3de62b16aafb7dd308e34a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 348f1b4e6182739b3afbc96597853a5b887877c1
+ms.sourcegitcommit: 6686a3d8d8b7c8a582d6c40b60232a33798067be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98724280"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107748781"
 ---
 # <a name="what-are-the-default-user-permissions-in-azure-active-directory"></a>Azure Active Directory varsayılan kullanıcı izinleri nelerdir?
 Azure Active Directory'de (Azure AD) tüm kullanıcılara varsayılan olarak belirli izinler verilir. Kullanıcının erişimi, Kullanıcı türünden, [rol atamalarından](active-directory-users-assign-role-azure-portal.md)ve ayrı nesnelerin sahiplerinden oluşur. Bu makalede bu varsayılan izinler ve açıklanmakta ve üye ile konuk varsayılan değerleri karşılaştırılmaktadır. Varsayılan Kullanıcı izinleri yalnızca Azure AD 'deki Kullanıcı ayarları ' nda değiştirilebilir.
@@ -32,7 +32,7 @@ Alınan varsayılan izinler kümesi, kullanıcının kiracının (Üye Kullanıc
 
 **Alan** | **Üye kullanıcı izinleri** | **Varsayılan Konuk Kullanıcı izinleri** | **Kısıtlı Konuk Kullanıcı izinleri (Önizleme)**
 ------------ | --------- | ---------- | ----------
-Kullanıcılar ve ilgili kişiler | <ul><li>Tüm kullanıcıların ve kişilerin listesini listeleme<li>Kullanıcıların ve kişilerin tüm genel özelliklerini okuma</li><li>Konuk davet etme<li>Kendi parolasını değiştirme<li>Kendi cep telefonu numarasını yönetme<li>Kendi fotoğrafını yönetme<li>Kendi yenileme belirteçlerini geçersiz kılma</li></ul> | <ul><li>Kendi özelliklerini okuma<li>Diğer kullanıcıların ve kişilerin görünen ad, e-posta, oturum açma adı, fotoğraf, Kullanıcı asıl adı ve Kullanıcı türü özelliklerini okuyun<li>Kendi parolasını değiştirme<li>ObjectID tarafından başka bir kullanıcı ara (izin veriliyorsa)<li>Diğer kullanıcıların yönetim ve doğrudan rapor bilgilerini okuyun</li></ul> | <ul><li>Kendi özelliklerini okuma<li>Kendi parolasını değiştirme</li></ul>
+Kullanıcılar ve ilgili kişiler | <ul><li>Tüm kullanıcıların ve kişilerin listesini listeleme<li>Kullanıcıların ve kişilerin tüm genel özelliklerini okuma</li><li>Konuk davet etme<li>Kendi parolasını değiştirme<li>Kendi cep telefonu numarasını yönetme<li>Kendi fotoğrafını yönetme<li>Kendi yenileme belirteçlerini geçersiz kılma</li></ul> | <ul><li>Kendi özelliklerini okuma<li>Diğer kullanıcıların ve kişilerin görünen ad, e-posta, oturum açma adı, fotoğraf, Kullanıcı asıl adı ve Kullanıcı türü özelliklerini okuyun<li>Kendi parolasını değiştirme<li>ObjectID tarafından başka bir kullanıcı ara (izin veriliyorsa)<li>Diğer kullanıcıların yönetim ve doğrudan rapor bilgilerini okuyun</li></ul> | <ul><li>Kendi özelliklerini okuma<li>Kendi parolasını değiştirme</li><li>Kendi cep telefonu numarasını yönetme</li></ul>
 Gruplar | <ul><li>Güvenlik grubu oluşturma<li>Microsoft 365 grupları oluşturma<li>Tüm grupların listesini listeleme<li>Grupların tüm özelliklerini okuma<li>Gizli olmayan grup üyeliklerini okuma<li>Birleştirilmiş grup için gizli Microsoft 365 grup üyeliklerini oku<li>Kullanıcının sahip olduğu grupların özelliklerini, sahipliğini ve üyeliğini yönetme<li>Sahip olunan gruplara konuk ekleme<li>Dinamik üyelik ayarlarını yönetme<li>Sahip olunan grupları silme<li>Sahip olunan Microsoft 365 gruplarını geri yükleme</li></ul> | <ul><li>Üyelik ve sahiplik (hatta katılmamış gruplar) dahil olmak üzere, gizli olmayan grupların özelliklerini okuyun<li>Birleştirilmiş gruplar için gizli Microsoft 365 grup üyeliklerini oku<li>Grupları görünen ada veya ObjectID 'ye göre ara (izin veriliyorsa)</li></ul> | <ul><li>Birleştirilmiş gruplar için nesne kimliğini oku<li>Bazı Microsoft 365 uygulamalarında birleştirilmiş grupların üyeliğini ve sahipliğini okuma (izin veriliyorsa)</li></ul>
 Uygulamalar | <ul><li>Yeni uygulama kaydetme (oluşturma)<li>Tüm uygulamaların listesini listeleme<li>Kayıtlı ve kurumsal uygulamaların özelliklerini okuma<li>Sahip olunan uygulamaların uygulama özelliklerini, atamalarını ve kimlik bilgilerini yönetme<li>Kullanıcı için uygulama parolasını oluşturma veya silme<li>Sahip olunan uygulamaları silme<li>Sahip olunan uygulamaları geri yükleme</li></ul> | <ul><li>Kayıtlı ve kurumsal uygulamaların özelliklerini okuma</li></ul> | <ul><li>Kayıtlı ve kurumsal uygulamaların özelliklerini okuma
 Cihazlar</li></ul> | <ul><li>Tüm cihazların listesini listeleme<li>Cihazların tüm özelliklerini okuma<li>Sahip olunan cihazların tüm özelliklerini yönetme</li></ul> | İzin yok | İzin yok
@@ -134,7 +134,6 @@ Kullanıcılar, sahip olduğu gruplar üzerinde aşağıdaki eylemleri gerçekle
 | Microsoft. Directory/Groups/Approtaatamalar/güncelleştirme | Azure Active Directory groups. Approtaatamalar özelliğini güncelleştirin. |
 | Microsoft. Directory/Groups/Basic/Update | Azure Active Directory gruplardaki temel özellikleri güncelleştirin. |
 | Microsoft. Directory/gruplar/Sil | Azure Active Directory grupları silin. |
-| Microsoft. Directory/Groups/dynamicMembershipRule/Update | Azure Active Directory groups. dynamicMembershipRule özelliğini güncelleştirin. |
 | Microsoft. Directory/gruplar/Üyeler/güncelleştirme | Azure Active Directory groups. Members özelliğini güncelleştirin. |
 | Microsoft. Directory/gruplar/Owners/Update | Azure Active Directory groups. Owners özelliğini güncelleştirin. |
 | Microsoft. Directory/Groups/restore | Azure Active Directory grupları geri yükleyin. |

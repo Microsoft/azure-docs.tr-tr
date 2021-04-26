@@ -2,14 +2,14 @@
 title: PostgreSQL için Azure Veritabanı’nı Yedekleme
 description: Uzun süreli saklama (Önizleme) ile PostgreSQL için Azure veritabanı yedeklemesi hakkında bilgi edinin
 ms.topic: conceptual
-ms.date: 09/08/2020
-ms.custom: references_regions
-ms.openlocfilehash: 1e2d83d4a5e21ed747ec9d4dcf2fa03d1e3935cc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 04/12/2021
+ms.custom: references_regions , devx-track-azurecli
+ms.openlocfilehash: 8fd69e016c7f0b175ef49b98add5692743858f62
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98737582"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107480078"
 ---
 # <a name="azure-database-for-postgresql-backup-with-long-term-retention-preview"></a>Uzun süreli saklama ile PostgreSQL için Azure veritabanı yedekleme (Önizleme)
 
@@ -135,10 +135,9 @@ Aşağıdaki yönergeler, Azure PostgreSQL veritabanlarında Azure Backup kullan
 
 1. **Bekletme** ayarlarını tanımlayın. Bir veya daha fazla bekletme kuralı ekleyebilirsiniz. Her bekletme kuralı belirli yedeklemeler için girişleri ve bu yedeklemeler için veri depolama ve bekletme süresini varsayar.
 
-1. Yedeklemelerinizi iki veri deposundan (veya katmanda) birinde depolamayı seçebilirsiniz: **yedekleme veri deposu** (Standart katman) veya **Arşiv veri deposu** (önizlemede). Yedeklemelerin iki veri deposu arasında katmanlandığınızda tanımlamak üzere **iki katmanlama seçeneği** arasından seçim yapabilirsiniz:
+1. Yedeklemelerinizi iki veri deposundan (veya katmanda) birinde depolamayı seçebilirsiniz: **yedekleme veri deposu** (Standart katman) veya **Arşiv veri deposu** (önizlemede).
 
-    - Hem yedekleme hem de arşiv veri depolarında bir yedek kopya olmasını tercih ediyorsanız **hemen** kopyalamayı seçin.
-    - Yedekleme veri deposundaki süresi dolduktan sonra yedeklemeyi Arşiv veri deposuna taşımayı tercih ediyorsanız, **süre sonu '** nu taşımayı seçin.
+   Yedekleme veri deposundaki süresi dolduktan sonra yedeklemeyi Arşiv veri deposuna taşımak için **süre sonu** seçeneğini belirleyebilirsiniz.
 
 1. **Varsayılan bekletme kuralı** , başka bir bekletme kuralı yokluğunda uygulanır ve varsayılan değer üç aydan oluşur.
 
@@ -197,11 +196,25 @@ Geri yükleme tetiklemeye yönelik bu adım adım kılavuzu izleyin:
 
     ![Dosya olarak geri yükleme](./media/backup-azure-database-postgresql/restore-as-files.png)
 
+1. Kurtarma noktası arşiv katmanındaysa, geri yüklemeden önce kurtarma noktasını yeniden yazmanız gerekir.
+   
+   ![Yeniden doldurma ayarları](./media/backup-azure-database-postgresql/rehydration-settings.png)
+   
+   Yeniden doldurma için gereken aşağıdaki ek parametreleri sağlayın:
+   - **Yeniden doldurma önceliği:** Varsayılan değer **standarttır**.
+   - **Yeniden doldurma süresi:** Maksimum yeniden doldurma süresi 30 gündür ve en az yeniden doldurma süresi 10 gündür. Varsayılan değer **15**' tir.
+   
+   Kurtarma noktası, belirtilen yeniden doldurma süresi için **yedekleme veri deposunda** depolanır.
+
+
 1. Bilgileri gözden geçirin ve **geri yükle**' yi seçin. Bu, **yedekleme işleri** altında Izlenebilecek Ilgili geri yükleme işini tetikler.
+
+>[!NOTE]
+>PostgreSQL için Azure veritabanı için Arşiv desteği sınırlı genel önizlemede.
 
 ## <a name="prerequisite-permissions-for-configure-backup-and-restore"></a>Yedekleme ve geri yükleme yapılandırma için önkoşul izinleri
 
-Azure Backup katı güvenlik yönergelerini izler. Yerel bir Azure hizmeti olmasına rağmen, kaynak üzerindeki izinler kabul edilmez ve Kullanıcı tarafından açıkça verilmesi gerekir.  Benzer şekilde, veritabanına bağlanmak için kimlik bilgileri depolanmaz. Verilerinizi korumak için bu önemlidir. Bunun yerine Azure Active Directory kimlik doğrulaması kullanırız.
+Azure Backup katı güvenlik yönergelerini izler. Yerel bir Azure hizmeti™ olsa da, kaynak üzerindeki izinler kabul edilmez ve Kullanıcı tarafından açıkça verilmesi gerekir.  Benzer şekilde, veritabanına bağlanmak için kimlik bilgileri depolanmaz. Verilerinizi korumak için bu önemlidir. Bunun yerine Azure Active Directory kimlik doğrulaması kullanırız.
 
 Otomatikleştirilmiş bir betik ve ilgili yönergeleri almak için [Bu belgeyi indirin](https://download.microsoft.com/download/7/4/d/74d689aa-909d-4d3e-9b18-f8e465a7ebf5/OSSbkpprep_automated.docx) . Yedekleme ve geri yükleme için Azure PostgreSQL sunucusuna uygun bir izin kümesi sağlar.
 
@@ -220,7 +233,7 @@ Otomatikleştirilmiş bir betik ve ilgili yönergeleri almak için [Bu belgeyi i
 
 ### <a name="stop-protection"></a>Korumayı durdurma
 
-Bir yedekleme öğesinde korumayı durdurabilirsiniz. Bu, bu yedekleme öğesi için ilişkili kurtarma noktalarını da siler. Mevcut kurtarma noktalarını korurken korumayı Durdur seçeneğini henüz sağlamayız.
+Bir yedekleme öğesinde korumayı durdurabilirsiniz. Bu, bu yedekleme öğesi için ilişkili kurtarma noktalarını da siler. Kurtarma noktaları en az altı aya ait arşiv katmanında değilse, bu kurtarma noktalarının silinmesi erken silme maliyetine neden olur. Mevcut kurtarma noktalarını korurken korumayı Durdur seçeneğini henüz sağlamayız.
 
 ![Korumayı durdurma](./media/backup-azure-database-postgresql/stop-protection.png)
 
@@ -242,7 +255,7 @@ Bu bölüm, Azure Backup ile Azure PostgreSQL veritabanlarını yedeklemeye yön
 
 ### <a name="usererrormsimissingpermissions"></a>UserErrorMSIMissingPermissions
 
-Yedeklemek veya geri yüklemek istediğiniz PG sunucusuna Yedekleme Kasası MSI **okuma** erişimi verin:
+Yedeklemek veya geri yüklemek istediğiniz PG sunucusuna Yedekleme Kasası MSI **okuma** erişimi verin.
 
 PostgreSQL veritabanına güvenli bağlantı kurmak için Azure Backup [yönetilen hizmet kimliği (MSI)](../active-directory/managed-identities-azure-resources/overview.md) kimlik doğrulama modelini kullanır. Bu, yedekleme kasasının yalnızca Kullanıcı tarafından açıkça izin verilen kaynaklara erişim sahibi olacağı anlamına gelir.
 
@@ -254,21 +267,17 @@ Adımlar:
 
     ![Access Control bölmesi](./media/backup-azure-database-postgresql/access-control-pane.png)
 
-1. **Rol ataması Ekle**' yi seçin.
+1. **Rol atamaları Ekle**' yi seçin.
 
     ![Rol ataması ekle](./media/backup-azure-database-postgresql/add-role-assignment.png)
 
 1. Açılan sağ bağlam bölmesinde, aşağıdakileri girin:<br>
 
-    **Rol:** Okuyucu<br>
-    **Erişim ata:** **Yedekleme Kasası** seçin<br>
-    Açılan listede **Yedekleme Kasası** seçeneğini BULAMAZSANıZ **Azure AD kullanıcısı, grubu veya hizmet sorumlusu seçeneğini** belirleyin.<br>
+   - **Rol:** Açılan listeden **okuyucu** rolünü seçin.<br>
+   - **Erişim ata:** Açılan listede **Kullanıcı, Grup veya hizmet sorumlusu** seçeneğini belirleyin.<br>
+   - Şunu **seçin:** Bu sunucuyu ve veritabanlarını yedeklemek istediğiniz yedekleme Kasası adını girin.<br>
 
-    ![Rol seçin](./media/backup-azure-database-postgresql/select-role.png)
-
-    Şunu **seçin:** Bu sunucuyu ve veritabanlarını yedeklemek istediğiniz yedekleme Kasası adını girin.<br>
-
-    ![Yedekleme Kasası adını girin](./media/backup-azure-database-postgresql/enter-backup-vault-name.png)
+    ![Rol seçin](./media/backup-azure-database-postgresql/select-role-and-enter-backup-vault-name.png)
 
 ### <a name="usererrorbackupuserauthfailed"></a>UserErrorBackupUserAuthFailed
 

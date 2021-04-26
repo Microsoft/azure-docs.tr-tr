@@ -1,14 +1,14 @@
 ---
 title: 'Model: bir ilke tanımındaki Count işleci'
 description: Bu Azure Ilke deseninin Count işlecinin bir ilke tanımında nasıl kullanılacağına ilişkin bir örnek sağlar.
-ms.date: 10/14/2020
+ms.date: 03/31/2021
 ms.topic: sample
-ms.openlocfilehash: 1339dff7f8bc92a8e38ec5635690cc2069dd8df4
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: dc2914028887ae5a91e3379e2a94ddbc57a7cef3
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "96005427"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106093461"
 ---
 # <a name="azure-policy-pattern-the-count-operator"></a>Azure Ilke stili: Count işleci
 

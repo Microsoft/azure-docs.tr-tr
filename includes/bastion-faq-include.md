@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/05/2021
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 9ba0e7173c41e26a698596fa18bf1fc1453f3fb3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: c0ca74b6cf63e3c81d830eca76eea6815548faa1
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99628932"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107732256"
 ---
 ### <a name="do-i-need-a-public-ip-on-my-virtual-machine-to-connect-via-azure-bastion"></a><a name="publicip"></a>Azure ile bağlantı kurmak için sanal makinemde genel bir IP almam gerekir mi?
 
@@ -22,6 +22,10 @@ Hayır. Azure savunma kullanarak bir VM 'ye bağlandığınızda, bağlandığı
 ### <a name="is-ipv6-supported"></a>IPv6 destekleniyor mu?
 
 Şu anda IPv6 desteklenmez. Azure savunma yalnızca IPv4 'Ü destekler.
+
+### <a name="can-i-use-azure-bastion-with-azure-private-dns-zones"></a>Azure Özel DNS bölgeleriyle Azure savunma kullanabilir miyim?
+
+Azure Özel DNS bölgeleriyle Azure savunma kullanımı Şu anda desteklenmiyor. Azure savunma kaynağınızı dağıtmadan önce lütfen konak sanal ağının özel bir DNS bölgesine bağlı olmadığından emin olun.
 
 ### <a name="do-i-need-an-rdp-or-ssh-client"></a><a name="rdpssh"></a>RDP veya SSH istemcisine ihtiyacım var mı?
 
@@ -47,7 +51,7 @@ Bu özellik, Azure AD kullanıcıları kullanan, ASıFATı VM uzantısına katı
 
 ### <a name="which-browsers-are-supported"></a><a name="browsers"></a>Hangi tarayıcılar destekleniyor?
 
-Windows üzerinde Microsoft Edge tarayıcısını veya Google Chrome 'u kullanın. Apple Mac için Google Chrome tarayıcısı ' nı kullanın. Microsoft Edge Kmıum, sırasıyla hem Windows hem de Mac 'te desteklenir.
+Tarayıcı HTML 5 ' i desteklemelidir. Windows üzerinde Microsoft Edge tarayıcısını veya Google Chrome 'u kullanın. Apple Mac için Google Chrome tarayıcısı ' nı kullanın. Microsoft Edge Kmıum, sırasıyla hem Windows hem de Mac 'te desteklenir.
 
 ### <a name="where-does-azure-bastion-store-customer-data"></a><a name="data"></a>Azure, müşteri verilerini nerede depolar?
 

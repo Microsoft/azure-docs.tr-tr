@@ -3,12 +3,12 @@ title: Azure Service Fabric küme ayarlarını değiştirme
 description: Bu makalede, özelleştirebileceğiniz doku ayarları ve doku yükseltme ilkeleri açıklanmaktadır.
 ms.topic: reference
 ms.date: 08/30/2019
-ms.openlocfilehash: 78d83faea802862d3cd6d1b1a9cf9f1016245065
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 65ae2337ac7dbe4370411a154463a6ddc37f83b2
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103232061"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107255980"
 ---
 # <a name="customize-service-fabric-cluster-settings"></a>Service Fabric kümesi ayarlarını özelleştirme
 Bu makalede, Service Fabric kümeniz için özelleştirebileceğiniz çeşitli yapı ayarları açıklanmaktadır. Azure 'da barındırılan kümeler için [Azure Portal](https://portal.azure.com) veya Azure Resource Manager şablonu kullanarak ayarları özelleştirebilirsiniz. Daha fazla bilgi için bkz. [Azure kümesinin yapılandırmasını yükseltme](service-fabric-cluster-config-upgrade-azure.md). Tek başına kümeler için, dosyadaki *ClusterConfig.js* güncelleyerek ve kümenizde bir yapılandırma yükseltmesi gerçekleştirerek ayarları özelleştirirsiniz. Daha fazla bilgi için bkz. [tek başına kümenin yapılandırmasını yükseltme](service-fabric-cluster-config-upgrade-windows-server.md).
@@ -60,6 +60,12 @@ Aşağıda, bölümüne göre organize ettiğiniz doku ayarlarının bir listesi
 |SecretEncryptionCertX509StoreName|dize, önerilen değer "My" (varsayılan değer yok) |    Dinamik|    Bu, yedekleme geri yükleme hizmeti tarafından kullanılan depolama kimlik bilgilerinin şifresini çözmek için kullanılan X. 509.440 sertifika deposunun kimlik bilgileri şifreleme ve şifre çözme için kullanılacak sertifikayı belirtir |
 |TargetReplicaSetSize|int, varsayılan değer 0 ' dır|Statik| BackupRestoreService için TargetReplicaSetSize |
 
+## <a name="centralsecretservice"></a>Tek merkezde Secretservice
+
+| **Parametre** | **İzin Verilen Değerler** | **Yükseltme Ilkesi** | **Kılavuz veya kısa açıklama** |
+| --- | --- | --- | --- |
+|DeployedState |wstring, varsayılan L "devre dışı" |Statik |2-CSS kaldırma aşaması. |
+
 ## <a name="clustermanager"></a>ClusterManager
 
 | **Parametre** | **İzin Verilen Değerler** | **Yükseltme Ilkesi** | **Kılavuz veya kısa açıklama** |
@@ -95,6 +101,7 @@ Aşağıda, bölümüne göre organize ettiğiniz doku ayarlarının bir listesi
 
 | **Parametre** | **İzin Verilen Değerler** | **Yükseltme Ilkesi** | **Kılavuz veya kısa açıklama** |
 | --- | --- | --- | --- |
+|Allowcreateupdatemultiınstancepernodeservices |Bool, varsayılan değer false |Dinamik|Düğüm başına bir hizmetin birden çok durum bilgisi olmayan örneğinin oluşturulmasına izin verir. Bu özellik şu anda önizleme sürümündedir. |
 |Perfmonitorınterval |Saniye cinsinden süre, varsayılan değer 1 ' dir |Dinamik|Zaman aralığı değerini saniye cinsinden belirtin. Performans izleme aralığı. 0 veya negatif değer ayarı izlemeyi devre dışı bırakır. |
 
 ## <a name="defragmentationemptynodedistributionpolicy"></a>DefragmentationEmptyNodeDistributionPolicy
@@ -304,6 +311,7 @@ Aşağıda, bölümüne göre organize ettiğiniz doku ayarlarının bir listesi
 | **Parametre** | **İzin Verilen Değerler** | **Yükseltme Ilkesi** | **Kılavuz veya kısa açıklama** |
 | --- | --- | --- | --- |
 |EnableApplicationTypeHealthEvaluation |Bool, varsayılan değer false |Statik|Küme durumu değerlendirme ilkesi: uygulama başına tür sistem durumu değerlendirmesi ' ni etkinleştirin. |
+|EnableNodeTypeHealthEvaluation |Bool, varsayılan değer false |Statik|Küme durumu değerlendirme ilkesi: düğüm başına tür durumu değerlendirmesi ' ni etkinleştirin. |
 |Maxmülatednumberofentityhealthreports|Int, varsayılan değer 100 ' dir |Dinamik|Bir varlığın, izleyicinin sistem durumu raporlama mantığı hakkında kaygıları yapmadan önce sahip olduğu en yüksek sistem durumu raporu sayısı. Her sistem durumu varlığının görece az sayıda sistem durumu raporu olması gerekir. Rapor sayısı bu sayının üzerinde olursa; izleme uygulamasıyla ilgili sorunlar olabilir. Varlık değerlendirildiğinde, çok fazla rapora sahip bir varlık bir uyarı sistem durumu raporundan işaretlenir. |
 
 ## <a name="healthmanagerclusterhealthpolicy"></a>HealthManager/ClusterHealthPolicy
@@ -349,7 +357,7 @@ Aşağıda, bölümüne göre organize ettiğiniz doku ayarlarının bir listesi
 |DisableContainers|bool, varsayılan değer FALSE|Statik|Kullanım dışı yapılandırma olan DisableContainerServiceStartOnContainerActivatorOpen yerine kapsayıcıları devre dışı bırakma yapılandırması |
 |DisableDockerRequestRetry|bool, varsayılan değer FALSE |Dinamik| Varsayılan olarak, e-postayla gönderilen her http isteği için ' DockerRequestTimeout ' zaman aşımı ile gg (Docker davmeon) ile iletişim kurar. DD bu süre içinde yanıt vermezse; En üst düzey işlem hala devam ediyorsa, SF, isteği sonlandırır.  Hyperv kapsayıcısı ile; DD, kapsayıcıyı getirmek veya devre dışı bırakmak için bazen çok daha fazla zaman alabilir. Bu gibi durumlarda, istek zaman içinde SF perspektifinden zaman aşımına uğrar ve SF işlemi yeniden dener. Bazen bu, DD 'ye daha fazla basınç ekliyor gibi görünüyor. Bu yapılandırma, bu yeniden denemeyi devre dışı bırakıp DD 'nin yanıt vermesini beklemek için izin verir. |
 |Dnsserverlisttwoıp 'Leri | Bool, varsayılan değer FALSE | Statik | Bu bayraklar, sorunları aralıklı olarak çözmeye yardımcı olmak için yerel DNS sunucusunu iki kez ekler. |
-| DockerTerminateOnLastHandleClosed | bool, varsayılan değer FALSE | Statik | FabricHost, ' dockerd ' öğesini yönetilirken (: SkipDockerProcessManagement = = false), bu ayar FabricHost veya dockerd kilitlenmesiyle ne olacağını yapılandırır. `true`Her iki işlem kilitlenirse, olarak ayarlandığında, tüm çalışan kapsayıcılar HCS tarafından zorla sonlandırılır. Kapsayıcılar olarak ayarlandıysa çalışmaya `false` devam eder. Note: 8,0 ' den önceki durum, bu davranışın farkında olarak eşdeğerdir `false` . Burada varsayılan ayar, `true` Temizleme mantığımızın bu işlemlerin yeniden başlatılması sırasında etkili olması için varsayılan olarak ilerleyebilmemiz gereken şeydir. |
+| DockerTerminateOnLastHandleClosed | bool, varsayılan değer doğru | Statik | FabricHost, ' dockerd ' öğesini yönetilirken (: SkipDockerProcessManagement = = false), bu ayar FabricHost veya dockerd kilitlenmesiyle ne olacağını yapılandırır. `true`Her iki işlem kilitlenirse, olarak ayarlandığında, tüm çalışan kapsayıcılar HCS tarafından zorla sonlandırılır. Kapsayıcılar olarak ayarlandıysa çalışmaya `false` devam eder. Note: 8,0 ' den önceki durum, bu davranışın farkında olarak eşdeğerdir `false` . Burada varsayılan ayar, `true` Temizleme mantığımızın bu işlemlerin yeniden başlatılması sırasında etkili olması için varsayılan olarak ilerleyebilmemiz gereken şeydir. |
 | DoNotInjectLocalDnsServer | bool, varsayılan değer FALSE | Statik | Çalışma zamanının, kapsayıcılar için DNS sunucusu olarak yerel IP 'yi ekleme engeller. |
 |EnableActivateNoWindow| bool, varsayılan değer FALSE|Dinamik| Etkinleştirilen işlem, herhangi bir konsol olmadan arka planda oluşturulur. |
 |EnableContainerServiceDebugMode|bool, varsayılan değer doğru|Statik|Docker kapsayıcıları için günlüğü etkinleştirin/devre dışı bırakın.  Yalnızca Windows.|
@@ -552,6 +560,8 @@ Aşağıda, bölümüne göre organize ettiğiniz doku ayarlarının bir listesi
 |Movementperpartitionthrottlecountingınterval | Saniye cinsinden süre, varsayılan değer 600 ' dir |Statik| Zaman aralığı değerini saniye cinsinden belirtin. Her bölüm için çoğaltma taşımalarını izlemek üzere geçen aralığın uzunluğunu belirtin (MovementPerPartitionThrottleThreshold ile birlikte kullanılır). |
 |MovementPerPartitionThrottleThreshold | Uint, varsayılan değer 50 |Dinamik| Bu bölümün çoğaltmaları için Dengeleme ile ilgili hareketlerin sayısı, Movementperpartitionthrottlecountingınterval tarafından belirtilen son aralıkta MovementPerFailoverUnitThrottleThreshold değerine ulaşılmışsa veya bu bölüm için Dengeleme ile ilgili bir hareket gerçekleşmeyecektir. |
 |Moveparenttofixaffinityihlal | Bool, varsayılan değer false |Dinamik| Bu ayar, üst çoğaltmaların, benzeşim kısıtlamalarını onarmak üzere taşınıp taşınamayacağını belirler.|
+|NodeTaggingEnabled | Bool, varsayılan değer false |Dinamik| True ise; NodeTagging özelliği etkinleştirilecek. |
+|NodeTaggingConstraintPriority | Int, varsayılan değer 0 ' dır |Dinamik| Düğüm etiketlemesinin yapılandırılabilir önceliği. |
 |PartiallyPlaceServices | Bool, varsayılan değer doğru |Dinamik| Kümedeki tüm hizmet çoğaltmalarının, kendileri için sınırlı uygun düğümlere "All veya Nothing" olarak yerleştirilip yerleştirilmeyeceğini belirler.|
 |PlaceChildWithoutParent | Bool, varsayılan değer doğru | Dinamik|Üst çoğaltma yoksa alt hizmet çoğaltmasının yerleştirilebileceğini belirleyen ayar. |
 |PlacementConstraintPriority | Int, varsayılan değer 0 ' dır | Dinamik|Yerleşim kısıtlamasının önceliğini belirler: 0: Hard; 1: geçici; negatif: yoksay. |
@@ -572,7 +582,7 @@ Aşağıda, bölümüne göre organize ettiğiniz doku ayarlarının bir listesi
 |UpgradeDomainConstraintPriority | Int, varsayılan değer 1 ' dir| Dinamik|Yükseltme etki alanı kısıtlamasının önceliğini belirler: 0: Hard; 1: geçici; negatif: yoksay. |
 |UseMoveCostReports | Bool, varsayılan değer false | Dinamik|LB öğesine Puanlama işlevinin Cost öğesini yok saymasını söyler; daha iyi dengeli yerleştirme için büyük olasılıkla çok fazla sayıda hareketi ortaya çıkarır. |
 |UseSeparateSecondaryLoad | Bool, varsayılan değer doğru | Dinamik|Bu ayar, ikincil çoğaltmalar için ayrı yükün kullanılması gerekip gerekmediğini belirler. |
-|UseSeparateSecondaryMoveCost | Bool, varsayılan değer false | Dinamik|İkincil çoğaltmalar için ayrı taşıma maliyetinin kullanılması gerekip gerekmediğini belirleyen ayar. |
+|UseSeparateSecondaryMoveCost | Bool, varsayılan değer doğru | Dinamik|Bu ayar, PLB 'nin her düğümde ikincil için farklı taşıma maliyeti kullanıp kullanmayacağını belirler. UseSeparateSecondaryMoveCost kapalıysa:-bir düğümde ikincil için taşıma maliyeti, UseSeparateSecondaryMoveCost açıksa her bir ikincil için (diğer tüm düğümlerde) taşıma maliyetinin oluşmasına neden olur:-bir düğümde ikincil için taşıma maliyeti, yalnızca o ikincil üzerinde etkili olur (diğer düğümlerdeki ikincil öğeler üzerinde hiçbir etkisi yoktur)-çoğaltma kilitlenmesi gerçekleşirse, hizmet düzeyinde belirtilen varsayılan taşıma maliyetiyle yeni çoğaltma oluşturulur-PLB, mevcut çoğaltma taşıma maliyeti ile birlikte gelir. |
 |ValidatePlacementConstraint | Bool, varsayılan değer doğru |Dinamik| Bir hizmetin ServiceDescription 'ı güncelleştirilirken bir hizmetin PlacementConstraint ifadesinin doğrulanıp onaylanmayacağını belirtir. |
 |ValidatePrimaryPlacementConstraintOnPromote| Bool, varsayılan değer doğru |Dinamik|Bir hizmetin PlacementConstraint ifadesinin yük devretmede birincil tercih için değerlendirilip değerlendirilmeyeceğini belirtir. |
 |VerboseHealthReportLimit | Int, varsayılan değer 20 ' dir | Dinamik|Bir çoğaltmanın bir sistem durumu uyarısı bildirilmesinden önce yerleştirilme sayısı (ayrıntılı sistem durumu raporlaması etkinse) tanımlar. |
@@ -767,6 +777,7 @@ Aşağıda, bölümüne göre organize ettiğiniz doku ayarlarının bir listesi
 |RecoverServicePartitions |dize, varsayılan değer "admin" |Dinamik| Hizmet bölümlerini kurtarmak için güvenlik yapılandırması. |
 |RecoverSystemPartitions |dize, varsayılan değer "admin" |Dinamik| Sistem hizmeti bölümlerini kurtarmak için güvenlik yapılandırması. |
 |UpdateApplication |dize, varsayılan değer "admin" |Dinamik| Birden çok düğümdeki devre dışı bırakma işlemini geri almak için güvenlik yapılandırması. |
+|ReportCompletion |wstring, varsayılan L "admin" |Dinamik| Raporlamayı tamamlamak için güvenlik yapılandırması. |
 |ReportFabricUpgradeHealth |dize, varsayılan değer "admin" |Dinamik| Geçerli yükseltme ilerlemesiyle küme yükseltmelerini sürdürmek için güvenlik yapılandırması. |
 |ReportFault |dize, varsayılan değer "admin" |Dinamik| Raporlama hatası için güvenlik yapılandırması. |
 |Raporla |dize, varsayılan değer "admin" |Dinamik| Raporlama durumu için güvenlik yapılandırması. |

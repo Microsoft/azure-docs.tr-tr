@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/04/2021
 ms.author: damendo
-ms.openlocfilehash: bc085163b4f738d022ab9771794ec85293de5ed8
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: f737be68a28f95ab5402ba5ea08e85fcf1b04d37
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100521688"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107565908"
 ---
 # <a name="introduction-to-flow-logging-for-network-security-groups"></a>Ağ güvenlik grupları için akış günlük kaydına giriş
 
@@ -93,10 +93,10 @@ Akış günlükleri aşağıdaki özellikleri içerir:
                     * **Trafik akışı** -trafik akışının yönü. Giden **ve çıkış için geçerli** değerler **ı** .
                     * **Trafik kararı** -trafiğe izin verilip verilmediğini belirtir. Geçerli **değerler, izin** verilen ve **D** için için geçerlidir.
                     * **Flow durumu-yalnızca sürüm 2** -akışın durumunu yakalar. Olası durumlar **B**: bir akış oluşturulduğunda başlar. İstatistikler sağlanmamış. **C**: devam eden bir akış için devam ediliyor. İstatistikler 5 dakikalık aralıklarla sağlanır. **E**: bir akış sonlandırıldığında sonlandırın. İstatistikler sağlanır.
-                    * **Paketler-kaynak-yalnızca hedef sürüm 2** Son güncelleştirmeden bu yana kaynaktan hedefe gönderilen TCP veya UDP paketlerinin toplam sayısı.
-                    * **Gönderilen bayt-kaynak-yalnızca hedef sürüm 2 ' ye** Son güncelleştirmeden bu yana kaynaktan hedefe gönderilen TCP veya UDP paket baytlarının toplam sayısıdır. Paket baytları paket üst bilgisini ve yükünü içerir.
-                    * **Paketler-hedefe yalnızca kaynak-sürüm 2** Son güncelleştirmeden bu yana hedefin kaynağına Gönderilen TCP veya UDP paketlerinin toplam sayısı.
-                    * **Gönderilen bayt-hedef-yalnızca kaynak-sürüm 2** Son güncelleştirmeden bu yana, hedefin kaynağına Gönderilen TCP ve UDP paket baytlarının toplam sayısıdır. Paket baytları paket üst bilgisini ve yükünü içerir.
+                    * **Paketler-kaynak-yalnızca hedef sürüm 2** Son güncelleştirmeden bu yana kaynaktan hedefe gönderilen TCP paketlerinin toplam sayısı.
+                    * **Gönderilen bayt-kaynak-yalnızca hedef sürüm 2 ' ye** Son güncelleştirmeden bu yana kaynaktan hedefe gönderilen TCP paket baytlarının toplam sayısıdır. Paket baytları paket üst bilgisini ve yükünü içerir.
+                    * **Paketler-hedefe yalnızca kaynak-sürüm 2** Son güncelleştirmeden bu yana Hedefin kaynaktan gönderilen toplam TCP paketi sayısı.
+                    * **Gönderilen bayt-hedef-yalnızca kaynak-sürüm 2** Son güncelleştirmeden bu yana, hedefin kaynağa gönderdiği TCP paket baytlarının toplam sayısı. Paket baytları paket üst bilgisini ve yükünü içerir.
 
 
 **NSG akış günlükleri sürüm 2 (vs sürüm 1)** 
@@ -347,6 +347,18 @@ https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecurity
 - [Öğreticide Grafana kullanarak NSG akış günlüklerini yönetme ve çözümleme](./network-watcher-nsg-grafana.md)
 - [Öğreticide GG akış günlüklerini gri günlük kullanarak yönetme ve çözümleme](./network-watcher-analyze-nsg-flow-logs-graylog.md)
 
+*Akış günlüklerini devre dışı bırak*
+
+Akış günlüğü devre dışı bırakıldığında, ilişkili NSG için akış günlüğü durdurulur. Ancak, bir kaynak olarak akış günlüğü, tüm ayarları ve ilişkilendirmeleriyle birlikte var olmaya devam eder. Yapılandırılan NSG 'de akış günlüğü oluşturmaya başlamak için dilediğiniz zaman etkinleştirilebilir. Akış günlüklerini devre dışı bırakma/etkinleştirme adımları, [Bu nasıl yapılır kılavuzunda](./network-watcher-nsg-flow-logging-powershell.md)bulunabilir.  
+
+*Akış günlüklerini silme*
+
+Akış günlüğü silindiğinde, yalnızca ilişkili NSG için akış günlüğü durdurulur, ancak akış günlüğü kaynağı da ayarları ve ilişkilendirmeleriyle silinir. Akış günlüğüne kaydetmeyi yeniden başlatmak için, bu NSG için yeni bir akış günlüğü kaynağı oluşturulması gerekir. Akış günlüğü, [PowerShell](https://docs.microsoft.com/powershell/module/az.network/remove-aznetworkwatcherflowlog), [CLI](https://docs.microsoft.com/cli/azure/network/watcher/flow-log#az_network_watcher_flow_log_delete) veya [REST API](https://docs.microsoft.com/rest/api/network-watcher/flowlogs/delete)kullanılarak silinebilir. Azure portal akış günlüklerini silme desteği ardışık düzen.    
+
+Ayrıca, bir NSG silindiğinde, varsayılan olarak ilişkili akış günlüğü kaynağı silinir.
+
+> [!NOTE]
+> Bir NSG 'yi farklı bir kaynak grubuna veya aboneliğe taşımak için, ilişkili akış günlüklerinin silinmesi gerekir, yalnızca akış günlüklerinin devre dışı bırakılması çalışmaz. NSG geçişinden sonra, akış günlüğü kaydının etkinleştirilmesi için akış günlüklerinin yeniden oluşturulması gerekir.  
 
 ## <a name="nsg-flow-logging-considerations"></a>NSG akış günlüğü konuları
 
@@ -372,7 +384,7 @@ https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecurity
 
 **Kritik VNET 'lerde/alt ağlarda etkinleştir**: akış günlüklerinin, aboneliğinizdeki tüm kritik VNET 'lerde/alt ağlarda bir denetlenebilirlik ve Security en iyi uygulaması olarak etkinleştirilmesi gerekir. 
 
-**Bir kaynağa bağlı olan tüm NSG 'ler için NSG akış günlüğünü etkinleştirme**: NSG kaynağında Azure 'da akış günlüğü yapılandırılır. Akış yalnızca bir NSG kuralıyla ilişkilendirilecektir. Birden çok NSG 'nin kullanıldığı senaryolarda, tüm trafiğin kaydedildiğinden emin olmak için kaynağın alt ağında veya ağ arabiriminde uygulanan NSG akış günlüklerinin etkinleştirilmesini öneririz. Daha fazla bilgi için bkz. trafiğin ağ güvenlik gruplarında [nasıl değerlendirildiği](../virtual-network/network-security-group-how-it-works.md) . 
+**Bir kaynağa bağlı olan tüm NSG 'ler için NSG akış günlüğünü etkinleştirme**: NSG kaynağında Azure 'da akış günlüğü yapılandırılır. Akış yalnızca bir NSG kuralıyla ilişkilendirilecektir. Birden çok NSG'nin kullanıldığı senaryolarda, tüm trafiğin kaydedildiğinden emin olmak için kaynağın alt ağında veya ağ arabiriminde uygulanmış tüm NSG'lerde NSG akış günlüklerini etkinleştirmenizi öneririz. Daha fazla bilgi için bkz. trafiğin ağ güvenlik gruplarında [nasıl değerlendirildiği](../virtual-network/network-security-group-how-it-works.md) . 
 
 Birkaç yaygın senaryo:
 1. **BIR VM 'de birden çok NIC**: bir sanal makineye birden çok NIC bağlı olması durumunda, akış günlüğü 'nün tümünde etkinleştirilmesi gerekir

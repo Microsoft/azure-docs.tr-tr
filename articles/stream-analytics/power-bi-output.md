@@ -5,13 +5,13 @@ author: enkrumah
 ms.author: ebnkruma
 ms.service: stream-analytics
 ms.topic: conceptual
-ms.date: 08/25/2020
-ms.openlocfilehash: a94389a075fd62d80345a21e32f1bc977dfdee87
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 4/7/2021
+ms.openlocfilehash: 07b7715935756293467f2a3004109df9bf679661
+ms.sourcegitcommit: d40ffda6ef9463bb75835754cabe84e3da24aab5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98020069"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107030024"
 ---
 # <a name="power-bi-output-from-azure-stream-analytics"></a>Azure Stream Analytics çıkışı Power BI
 
@@ -73,9 +73,10 @@ Int64 | Int64 | Dize | Dize | Çift
 Dize | Dize | Dize | Dize | Dize 
 Tarih saat | Dize | Dize |  Tarih saat | Dize
 
-## <a name="output-batch-size"></a>Çıkış toplu iş boyutu
+## <a name="limitations-and-best-practices"></a>Sınırlamalar ve en iyi uygulamalar
+Şu anda, Power BI saniyede kabaca bir kez çağrılabilir. Akış görselleri 15 KB 'lik paketleri destekler. Bunun ötesinde, akış görselleri başarısız olur (ancak gönderim çalışmaya devam eder). Bu sınırlamalar nedeniyle, Azure Stream Analytics önemli bir veri yükleme azalmasıyla ilgili olarak en doğal olarak Power BI. Veri gönderimi 'nin saniyede en çok bir gönderim olduğundan ve sorgunuzun işleme gereksinimleri içinde yer aldığından emin olmak için, atlayan bir pencere veya Hoppıng penceresi kullanmanızı öneririz.
 
-Çıkış toplu iş boyutu için [Power BI REST API sınırları](/power-bi/developer/automation/api-rest-api-limitations)' na bakın.
+Çıkış toplu iş boyutu hakkında daha fazla bilgi için bkz. [Power BI REST API sınırları](/power-bi/developer/automation/api-rest-api-limitations).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

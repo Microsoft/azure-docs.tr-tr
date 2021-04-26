@@ -10,15 +10,15 @@ ms.service: virtual-machines-sap
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 11/20/2020
+ms.date: 4/16/2021
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 92ef2e59dab1921eae8e7d88249e75116601c597
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: a243b348c01e6d1297a6a1fe016e3b6bc8d98d47
+ms.sourcegitcommit: 79c9c95e8a267abc677c8f3272cb9d7f9673a3d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101670867"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107719088"
 ---
 # <a name="know-the-terms"></a>Terimleri öğrenme
 
@@ -41,12 +41,11 @@ ms.locfileid: "101670867"
     - **Tür ı sınıfı**: s72, S72m, S96, S144, S144m, S192, S192m, S192xm, S224 ve S224m
     - **Tür II Class**: S384, S384m, S384xm, S384xxm, S576m, S576xm, S768m, S768xm ve S960m
 - **Damga**: Hana büyük örneklerin Microsoft iç dağıtım boyutunu tanımlar. HANA büyük örnek birimlerinin dağıtılmasından önce, bilgi işlem, ağ ve depolama raflarından oluşan bir HANA büyük örnek damgasında bir veri merkezi konumuna dağıtılması gerekir. Bu tür bir dağıtıma HANA büyük örnek damgası veya düzeltme 4 ' ten (aşağıya bakın) **büyük örnek satırı** teriminin bir kısmını kullanıyoruz.
-- **Düzeltme**: Hana büyük örnek damgaları için iki farklı damga düzeltmesi vardır. Bunlar mimaride ve Azure sanal makine konaklarına yakınlığa göre farklılık gösterir
-    - "Düzeltme 3" (Rev 3): 2016 yılının ortalarından dağıtılan orijinal tasarımdır
-    - "Düzeltme 4" (Rev 4): Azure sanal makine konaklarına daha yakından yakınlık sağlayabilen ve Azure VM 'Leri ile HANA büyük örnek birimleri arasında daha düşük ağ gecikmesi sunan yeni bir tasarımdır 
-    - "Düzeltme 4,2" (Rev 4,2): mevcut düzeltme 4 DC 'lerde, kaynaklar BareMetal altyapısına yeniden eklenir.  Müşteriler, kaynaklarına Azure portal BareMetal örnekleri olarak erişebilir. 
+- **Düzeltme**: Hana büyük örnek damgaları için iki farklı damga düzeltmesi vardır. Bunlar, mimaride ve Azure sanal makine konaklarına yakınlığa göre farklılık gösterir.
+    - "Düzeltme 3" (Rev 3), 2016 ortasından dağıtılan orijinal tasarımdır.
+    - "Düzeltme 4,2" (Rev 4,2), Azure sanal makine konaklarına daha yakından yakınlık sağlayan yeni bir tasarımdır. Rev 4,2, Azure VM 'Leri ve HANA büyük örnek birimleri arasında Ultra düşük ağ gecikme süresi sunar. Azure portal kaynaklar BareMetal altyapısı olarak adlandırılır. Müşteriler, kaynaklarına Azure portal BareMetal örnekleri olarak erişebilir. 
 
 Bulutta SAP iş yükünün nasıl dağıtılacağı konusunda çeşitli ek kaynaklar mevcuttur. SAP HANA dağıtımını Azure 'da yürütmeyi planlıyorsanız Azure IaaS ilkelerine ve Azure IaaS 'de SAP iş yüklerinin dağıtımına sahip olmanız ve bunların farkında olmanız gerekir. Devam etmeden önce daha fazla bilgi için bkz. [Azure sanal makineler 'de SAP çözümlerini kullanma](get-started.md) . 
 
-**Sonraki adımlar**
-- [HLi sertifikasyon](hana-certification.md) 'ye başvurun
+## <a name="next-steps"></a>Sonraki adımlar
+- [HLi sertifikası](hana-certification.md)bölümüne bakın.

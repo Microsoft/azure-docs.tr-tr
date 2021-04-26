@@ -3,12 +3,12 @@ title: MARS Aracısı 'nı kullanarak dosyaları Windows Server 'a geri yükleme
 description: Bu makalede, Azure 'da depolanan verileri Microsoft Azure Kurtarma Hizmetleri (MARS) aracısına sahip bir Windows Server veya Windows bilgisayara geri yüklemeyi öğrenin.
 ms.topic: conceptual
 ms.date: 09/07/2018
-ms.openlocfilehash: 79a4d32d6dbca5ca5be5d46c6b44a07ef42de061
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 7ca0787ec38e1bc22b62e756c7ee56c5c9e93493
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91813262"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107517343"
 ---
 # <a name="restore-files-to-windows-server-using-the-mars-agent"></a>MARS Aracısı 'nı kullanarak dosyaları Windows Server 'a geri yükleme
 
@@ -107,7 +107,7 @@ Bu adımlar aşağıdaki terminolojiyi içerir:
 
 5. Örnek kasaya karşılık gelen kasa kimlik bilgileri dosyasını sağlayın ve **İleri**' yi seçin.
 
-    Kasa kimlik bilgileri dosyası geçersiz (veya dolmuşsa), Azure portal [örnek kasasından yeni bir kasa kimlik bilgileri dosyası indirin](backup-azure-file-folder-backup-faq.md#where-can-i-download-the-vault-credentials-file) . Geçerli bir kasa kimlik bilgisi belirledikten sonra, karşılık gelen yedekleme kasasının adı görüntülenir.
+    Kasa kimlik bilgileri dosyası geçersiz (veya dolmuşsa), Azure portal [örnek kasasından yeni bir kasa kimlik bilgileri dosyası indirin](backup-azure-file-folder-backup-faq.yml#where-can-i-download-the-vault-credentials-file-) . Geçerli bir kasa kimlik bilgisi belirledikten sonra, karşılık gelen yedekleme kasasının adı görüntülenir.
 
 6. **Yedekleme sunucusunu seçin** sayfasında, görünen makineler listesinden kaynak makineyi seçin ve parolayı girin. Sonra **İleri**’yi seçin.
 
@@ -145,4 +145,4 @@ Bu adımlar aşağıdaki terminolojiyi içerir:
 
 * Artık dosyalarınızı ve klasörlerinizi kurtardığınıza göre, [yedeklemelerinizi yönetebilirsiniz](backup-azure-manage-windows-server.md).
 
-* [Dosya ve klasörleri yedekleme hakkında sık sorulan soruları](backup-azure-file-folder-backup-faq.md)bulun.
+* [Dosya ve klasörleri yedekleme hakkında sık sorulan soruları](backup-azure-file-folder-backup-faq.yml)bulun.

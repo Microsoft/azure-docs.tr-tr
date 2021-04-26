@@ -17,15 +17,15 @@ ms.date: 01/10/2019
 ms.author: gsilva
 ms.custom: ''
 ms.openlocfilehash: 643a52c9be04fb325b8e1d088faeb68e473aa673
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98919961"
 ---
 # <a name="create-a-linux-virtual-machine-with-accelerated-networking-using-azure-cli"></a>Azure CLI kullanarak Hızlandırılmış Ağ ile Linux sanal makinesi oluşturma
 
-Bu öğreticide, hızlandırılmış ağ ile bir Linux sanal makinesi (VM) oluşturmayı öğreneceksiniz. Hızlandırılmış ağ ile Windows VM oluşturmak için bkz. [hızlandırılmış ağ Ile WINDOWS VM oluşturma](create-vm-accelerated-networking-powershell.md). Hızlandırılmış ağ, bir VM 'ye tek köklü g/ç Sanallaştırması (SR-ıOV) sağlar ve ağ performansını büyük ölçüde geliştirir. Bu yüksek performanslı yol, desteklenen VM türlerinde en zorlu ağ iş yükleri ile kullanım için, gecikme süresi, değişim ve CPU kullanımını azaltan ana bilgisayarı veri yolundan atlar. Aşağıdaki resimde, hızlandırılmış ağ ile ve olmadan iki VM arasındaki iletişim gösterilmektedir:
+Bu öğreticide, hızlandırılmış ağ ile bir Linux sanal makinesi (VM) oluşturmayı öğreneceksiniz. Hızlandırılmış ağ ile Windows VM oluşturmak için bkz. [hızlandırılmış ağ Ile WINDOWS VM oluşturma](create-vm-accelerated-networking-powershell.md). Hızlandırılmış ağ, bir VM'ye tek köklü G/Ç sanallaştırmasını (SR-IOV) etkinleştirerek VM'nin ağ performansını büyük ölçüde geliştirir. Bu yüksek performanslı yol, desteklenen VM türlerinde en zorlu ağ iş yükleri ile kullanım için, gecikme süresi, değişim ve CPU kullanımını azaltan ana bilgisayarı veri yolundan atlar. Aşağıdaki resimde, hızlandırılmış ağ ile ve olmadan iki VM arasındaki iletişim gösterilmektedir:
 
 ![Karşılaştırma](./media/create-vm-accelerated-networking/accelerated-networking.png)
 

@@ -5,10 +5,10 @@ ms.topic: conceptual
 ms.date: 2/28/2018
 ms.custom: devx-track-csharp
 ms.openlocfilehash: c87c063ac9d3b4810657f72c46c17725b8899c77
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105626178"
 ---
 # <a name="add-custom-service-fabric-health-reports"></a>Özel Service Fabric sistem durumu raporları ekleme

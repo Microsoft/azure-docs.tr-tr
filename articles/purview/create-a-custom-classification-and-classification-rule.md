@@ -6,13 +6,13 @@ ms.author: anmuk
 ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: how-to
-ms.date: 2/5/2021
-ms.openlocfilehash: 2966618619aa40ed60c2f3d0fb2c8e080d34a016
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.date: 3/24/2021
+ms.openlocfilehash: 7d6baee49250509e50cdeeea8cf8ca6cec5b362d
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102617055"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106222183"
 ---
 # <a name="custom-classifications-in-azure-purview"></a>Azure purview 'da özel sınıflandırmalar
 
@@ -28,7 +28,7 @@ Ayrıca, varsayılan sınıflandırmaların herhangi biri gereksinimlerinizi kar
 
 ## <a name="steps-to-create-a-custom-classification"></a>Özel sınıflandırma oluşturma adımları
 
-Özel bir sınıflandırma oluşturmak için aşağıdakileri yapın:
+Özel bir sınıflandırma oluşturmak için aşağıdaki adımları izleyin:
 
 1. Kataloğunuzda, sol taraftaki menüden **Yönetim Merkezi** ' ni seçin.
 
@@ -68,7 +68,7 @@ Bu ayrıntılar, kaç örnek olduğunu, biçimsel adı, ilişkili sınıflandır
 
 ## <a name="custom-classification-rules"></a>Özel sınıflandırma kuralları
 
-Katalog hizmeti, belirli veri türlerini otomatik olarak algılamak için tarayıcı tarafından kullanılan bir varsayılan sınıflandırma kuralları kümesi sağlar. Ayrıca, verileriniz genelinde bulma konusunda ilgilendiğiniz diğer veri türlerini algılamak için kendi özel sınıflandırma kurallarınızı ekleyebilirsiniz. Bu özellik, \' veri Emlak dahilinde verileri bulmaya çalışırken çok güçlü olabilir.
+Katalog hizmeti, belirli veri türlerini otomatik olarak algılamak için tarayıcı tarafından kullanılan bir varsayılan sınıflandırma kuralları kümesi sağlar. Ayrıca, verileriniz genelinde bulma konusunda ilgilendiğiniz diğer veri türlerini algılamak için kendi özel sınıflandırma kurallarınızı ekleyebilirsiniz. Bu özellik, veri Emlak dahilinde veri bulmaya çalışırken güçlü olabilir.
 
 Örnek olarak, \' contoso adlı bir şirketin şirketin tamamında standartlaştırılmış çalışan kimlikleri olduğunu ve bu çalışanın, çalışan \" \" {GUID} çalıştıran bir GUID 'den olduğunu varsayalım. Örneğin, bir çalışan KIMLIĞININ bir örneği gibi görünür `EMPLOYEE9c55c474-9996-420c-a285-0d0fc23f1f55` .
 
@@ -109,7 +109,7 @@ Tarama sistemi daha sonra bu kuralı, çalışan KIMLIĞI deseninin bulunduğu h
 
    :::image type="content" source="media/create-a-custom-classification-and-classification-rule/create-new-regex-rule.png" alt-text="Yeni Regex kuralı oluştur" border="true":::
 
-1. Önerilen bir Regex desenini oluşturmaya karar verirseniz, bir dosyayı karşıya yükledikten sonra önerilen desenlerden birini seçin ve önerilen veri ve sütun düzenlerini kullanmak için **desenlere Ekle** ' ye tıklayın. Önerilen desenleri ince ayar veya bir dosyayı karşıya yüklemeden kendi desenlerinizi de yazabilirsiniz.
+1. Önerilen bir Regex desenini oluşturmaya karar verirseniz, bir dosyayı karşıya yükledikten sonra önerilen desenlerden birini seçin ve önerilen veri ve sütun düzenlerini kullanmak için **desenlere Ekle** ' yi seçin. Önerilen desenleri ince ayar veya bir dosyayı karşıya yüklemeden kendi desenlerinizi de yazabilirsiniz.
 
    :::image type="content" source="media/create-a-custom-classification-and-classification-rule/suggested-regex.png" alt-text="Önerilen Regex oluştur" border="true":::
 
@@ -128,6 +128,14 @@ Tarama sistemi daha sonra bu kuralı, çalışan KIMLIĞI deseninin bulunduğu h
 
    :::image type="content" source="media/create-a-custom-classification-and-classification-rule/verify-rule.png" alt-text="Oluşturmadan önce kuralı doğrula" border="true":::
 
+1. Varlıklarınıza Etiketler uygulayacağını doğrulamak için oluşturma işlemini tamamlamadan önce sınıflandırma kuralını test edin. Kuraldaki sınıflandırmalar, bir taramada olduğu gibi karşıya yüklenen örnek verilere uygulanır. Bu, tüm sistem sınıflandırmalarının ve özel sınıflandırmanın dosyanızdaki verilerle eşleştirileceği anlamına gelir.
+
+   Giriş dosyaları sınırlandırılmış dosyalar (CSV, PSV, SSV, TSV), JSON veya XML içeriği içerebilir. İçerik, giriş dosyasının dosya uzantısına göre ayrıştırılacaktır. Sınırlandırılmış veriler, belirtilen türlerden biriyle eşleşen bir dosya uzantısına sahip olabilir. Örneğin, TSV verileri MySampleData.csv adlı bir dosyada bulunabilir. Sınırlandırılmış içerik de en az 3 sütun içermelidir.
+
+   :::image type="content" source="media/create-a-custom-classification-and-classification-rule/test-rule-screen.png" alt-text="Oluşturmadan önce test kuralı" border="true":::
+
+   :::image type="content" source="media/create-a-custom-classification-and-classification-rule/test-rule-uploaded-file-result-screen.png" alt-text="Test dosyasını karşıya yükledikten sonra uygulanan sınıflandırmaları görüntüle" border="true":::
+
 ### <a name="creating-a-dictionary-rule"></a>Sözlük kuralı oluşturma
 
 1. Sözlük kuralı oluşturuyorsanız, aşağıdaki ekranı görürsünüz. Oluşturmakta olduğunuz sınıflandırmanın tüm olası değerlerini içeren bir dosyayı tek bir sütunda karşıya yükleyin.
@@ -136,9 +144,9 @@ Tarama sistemi daha sonra bu kuralı, çalışan KIMLIĞI deseninin bulunduğu h
 
 1. Sözlük oluşturulduktan sonra, farklı eşleştirme ve en düşük eşleşme eşiklerini ayarlayabilir ve kuralı gönderebilirsiniz.
 
-   :::image type="content" source="media/create-a-custom-classification-and-classification-rule/dictionary-generated.png" alt-text="Purview sözlük kuralı-farklı eşleşme eşiğini ve en düşük eşleşme eşiğini ayarla" border="true":::
+- **Ayrı eşleşme eşiği**: tarayıcıdan veri modelini çalıştırmadan önce bir sütunda bulunması gereken ayrı veri değerlerinin toplam sayısı. DISTINCT eşleşme eşiğinin, model eşleştirme ile hiçbir şey yok, ancak bu, bir model eşleştirme için önkoşul. Önerilen değer 8 ' dir. Bu değer, 2 ile 32 arasında el ile ayarlanabilir. Bu değer, sütunun tarayıcıya doğru bir şekilde sınıflandırmasına yetecek kadar veri içerdiğinden emin olmak için bu değeri gerektirir. Örneğin, 1 değerini içeren birden çok satır içeren bir sütun sınıflandırılmayacaktır. Değer içeren bir satır içeren sütunlar ve satırların geri kalanı null değerleri de sınıflandırılmayacaktır. Birden çok desen belirtirseniz bu değer bunların her biri için geçerlidir.
 
-   :::image type="content" source="media/create-a-custom-classification-and-classification-rule/dictionary-generated.png" alt-text="Sözlük oluşturulmuş onay işaretiyle birlikte sözlük kuralı oluşturma." border="true":::
+   :::image type="content" source="media/create-a-custom-classification-and-classification-rule/dictionary-generated.png" alt-text="Dictionary-Generated onay işaretiyle sözlük kuralı oluşturma." border="true":::
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

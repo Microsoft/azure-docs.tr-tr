@@ -12,15 +12,15 @@ ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 12/10/2020
+ms.date: 12/16/2020
 ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: eb31d6e25ce1c1ff5c3e4dbabb4fa53da0bd2ef3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 61673210dafbdbdbc56477ed58fb0cbe9335efcf
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101093928"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107012699"
 ---
 # <a name="tutorial-use-a-linux-vm-system-assigned-managed-identity-to-access-azure-key-vault"></a>Öğretici: Azure Key Vault'a erişmek için Linux VM sistem tarafından atanan yönetilen kimliği kullanma 
 
@@ -94,7 +94,15 @@ Sanal makine tarafından kullanılan yönetilen kimliğe, Key Vault depolayabilm
 ## <a name="access-data"></a>Verilere erişme
 
 Bu adımları tamamlamak bir SSH istemciniz olmalıdır.  Windows kullanıyorsanız, [Linux için Windows Alt Sistemi](/windows/wsl/about)'ndeki SSH istemcisini kullanabilirsiniz. SSSH istemcinizin anahtarlarını yapılandırmak için yardıma ihtiyacınız olursa, bkz. [Azure'da Windows ile SSH anahtarlarını kullanma](../../virtual-machines/linux/ssh-from-windows.md) veya [Azure’da Linux VM’ler için SSH ortak ve özel anahtar çifti oluşturma](../../virtual-machines/linux/mac-create-ssh-keys.md).
- 
+
+>[!IMPORTANT]
+> Tüm Azure SDK 'Ları, Azure AD belirteçlerini hedef hizmetlere erişmek için kolayca almanızı sağlayan Azure. Identity kitaplığını destekler. [Azure SDK 'ları](https://azure.microsoft.com/downloads/) hakkında daha fazla bilgi edinin ve Azure. Identity kitaplığından yararlanın.
+> - [.NET](https://docs.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet)
+> - [JAVA](https://docs.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable)
+> - [Javascript](https://docs.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest)
+> - [Python](https://docs.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python)
+
+
 1. Portalda Linux VM’nize gidin ve **Genel Bakış**’ta **Bağlan**’a tıklayın. 
 2. Tercih ettiğiniz SSH istemciyle VM'ye **bağlanın**. 
 3. Terminal penceresinde, Azure Key Vault erişim belirtecini almak için CURL'yi kullanarak Azure kaynaklarının yerel yönetilen kimliklerine bir istek gönderin.  

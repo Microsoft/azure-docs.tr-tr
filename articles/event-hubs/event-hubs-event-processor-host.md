@@ -4,12 +4,12 @@ description: Bu makalede, Azure Event Hubs 'daki olay Işleyicisi ana bilgisayar
 ms.topic: conceptual
 ms.date: 06/23/2020
 ms.custom: devx-track-csharp
-ms.openlocfilehash: de5d8f0f8bf9f64a473b18a50434cac83e8e38c3
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: d97b446993d3f0a280c1f4fadb237726ac09228a
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98622071"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313428"
 ---
 # <a name="event-processor-host"></a>Olay işlemcisi konağı
 > [!NOTE]
@@ -199,5 +199,5 @@ Artık olay Işlemcisi konağını öğrenolduğunuza göre Event Hubs hakkında
     - [JavaScript](event-hubs-node-get-started-send.md)
 * [Event Hubs programlama kılavuzu](event-hubs-programming-guide.md)
 * [Event Hubs’da kullanılabilirlik ve tutarlılık](event-hubs-availability-and-consistency.md)
-* [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+* [Event Hubs ile ilgili SSS](event-hubs-faq.yml)
 * [GitHub 'daki Event Hubs örnekleri](https://github.com/Azure/azure-event-hubs/tree/master/samples)

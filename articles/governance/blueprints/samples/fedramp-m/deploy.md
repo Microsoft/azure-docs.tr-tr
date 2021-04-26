@@ -1,14 +1,14 @@
 ---
 title: Fedrampa orta şema örneğini dağıtma
 description: Şema yapıt parametresi ayrıntıları dahil olmak üzere fedrampa orta şema örneği için adımları dağıtın.
-ms.date: 01/08/2021
+ms.date: 04/02/2021
 ms.topic: sample
-ms.openlocfilehash: 9fa92bebf6ef5829796c45e0e83070a85395caf8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 29191e777c09bf8533bbaa652b8526dcf594ad73
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100594676"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106386796"
 ---
 # <a name="deploy-the-fedramp-moderate-blueprint-sample"></a>Fedrampa orta şema örneğini dağıtma
 

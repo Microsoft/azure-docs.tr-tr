@@ -5,9 +5,8 @@ author: cynthn
 ms.service: virtual-machines
 ms.collection: linux
 ms.topic: quickstart
-ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 10/09/2018
+ms.date: 03/30/2021
 ms.author: cynthn
 ms.custom:
 - mvc
@@ -15,18 +14,18 @@ ms.custom:
 - seo-javascript-october2019
 - seo-python-october2019
 - devx-track-azurecli
-ms.openlocfilehash: fd411255247e6a37b857ac11c1b0abbd4558d02a
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 3e8c1a06244c46f5789506e8a77d410f5493bbf3
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102549779"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106058587"
 ---
 # <a name="quickstart-create-a-linux-virtual-machine-with-the-azure-cli"></a>Hızlı Başlangıç: Azure CLI ile Linux sanal makinesi oluşturma
 
 Bu hızlı başlangıç, Azure 'da bir Linux sanal makinesini (VM) dağıtmak için Azure komut satırı arabirimi 'ni (CLı) nasıl kullanacağınızı gösterir. Azure CLI, komut satırından veya betik içindeki Azure kaynaklarını oluşturmak ve yönetmek için kullanılır.
 
-Bu öğreticide Ubuntu 16.04 LTS sürümü yüklenmektedir. VM'nin çalıştığını görmek için SSH kullanarak bağlanacak ve NGINX web sunucusunu yükleyeceksiniz.
+Bu öğreticide, en son Ubuntu LTS görüntüsünü yükleyeceğiz. VM'nin çalıştığını görmek için SSH kullanarak bağlanacak ve NGINX web sunucusunu yükleyeceksiniz.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
@@ -88,10 +87,10 @@ az vm open-port --port 80 --resource-group myResourceGroup --name myVM
 
 ## <a name="connect-to-virtual-machine"></a>Sanal makineye bağlanma
 
-Normal şekilde VM’nize SSH’leyin. **publicIpAddress** değerini, VM’nizdeki bir önceki çıktıda belirtildiği şekilde sanal makinenizin genel IP adresiyle değiştirin:
+Normal şekilde VM’nize SSH’leyin. Örnekteki IP adresini, önceki çıktıda belirtildiği gibi, sanal makinenizin genel IP adresiyle değiştirin:
 
 ```bash
-ssh azureuser@publicIpAddress
+ssh azureuser@40.68.254.142
 ```
 
 ## <a name="install-web-server"></a>Web sunucusunu yükleme

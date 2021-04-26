@@ -11,12 +11,12 @@ author: stevestein
 ms.author: sstein
 ms.reviewer: ''
 ms.date: 06/25/2019
-ms.openlocfilehash: dc17ab55cb473036d8c40bd1e533bcc20c4c6259
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 00346accbccd67f542a8496ac097b0236c56a08c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "92742260"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107773828"
 ---
 # <a name="use-the-azure-cli-to-create-a-single-database-and-configure-a-firewall-rule"></a>Azure CLı kullanarak tek bir veritabanı oluşturun ve bir güvenlik duvarı kuralı yapılandırın
 
@@ -50,9 +50,9 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Açıklama |
 |---|---|
-| [az sql server](/cli/azure/sql/server#az-sql-server-create) | Sunucu komutları |
-| [az SQL Server güvenlik duvarı](/cli/azure/sql/server/firewall-rule#az-sql-server-firewall-rule-create) | Sunucu güvenlik duvarı komutları. |
-| [az SQL DB](/cli/azure/sql/db#az-sql-db-create) | Veritabanı komutları. |
+| [az sql server](/cli/azure/sql/server#az_sql_server_create) | Sunucu komutları |
+| [az SQL Server güvenlik duvarı](/cli/azure/sql/server/firewall-rule#az_sql_server_firewall_rule_create) | Sunucu güvenlik duvarı komutları. |
+| [az SQL DB](/cli/azure/sql/db#az_sql_db_create) | Veritabanı komutları. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

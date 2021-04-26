@@ -11,18 +11,21 @@ ms.subservice: core
 ms.topic: conceptual
 ms.custom: how-to
 ms.date: 01/19/2021
-ms.openlocfilehash: 257fc6544061c2ef9c3fdbfb8c33bc06ed2db6e3
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 953b987e908736df703c354067ee27fc27d56073
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105566344"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106220717"
 ---
 # <a name="run-jupyter-notebooks-in-your-workspace"></a>Çalışma alanınızda Jupyıter not defterlerini çalıştırma
 
 Jupyıter not defterlerinizi Azure Machine Learning Studio 'daki çalışma alanınızda doğrudan çalıştırmayı öğrenin. [Jupi](https://jupyter.org/) veya [Jupyıterlab](https://jupyterlab.readthedocs.io)'ı başlatabilmeniz sırasında, çalışma alanından çıkmadan not defterlerinizi düzenleyebilir ve çalıştırabilirsiniz.
 
 Not defterleri dahil olmak üzere dosyaları oluşturma ve yönetme hakkında bilgi için bkz. [çalışma alanınızdaki dosyaları oluşturma ve yönetme](how-to-manage-files.md).
+
+> [!IMPORTANT]
+> (Önizleme) olarak işaretlenen Özellikler bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -43,22 +46,35 @@ Ayrıca, Not defteri araç çubuğundan Jupyter veya JupyterLab ' i de başlatab
 
 Etkin sekmelerinize odaklanabilmeniz için, geçerli görünümünüzü genişletmek üzere odak modunu kullanın. Odak modu, Not defterleri dosya gezginini gizler.
 
-1. Odak modunu açmak için Terminal penceresi araç çubuğunda **odak modu** ' nu seçin. Pencere genişenize bağlı olarak, bu, araç çubuğunuza **...** menü öğesinin altında bulunabilir.
+1. Odak modunu açmak için Terminal penceresi araç çubuğunda **odak modu** ' nu seçin. Pencere genişenize bağlı olarak araç, araç çubuğinizdeki **...** menü öğesi altında bulunabilir.
 1. Odak modundayken **Standart Görünüm '** ü seçerek standart görünüme geri dönün.
 
     :::image type="content" source="media/how-to-run-jupyter-notebooks/focusmode.gif" alt-text="Odak modunu/standart görünümü değiştirme":::
 
-## <a name="use-intellisense"></a>IntelliSense kullanma
+## <a name="code-completion-intellisense"></a>Kod tamamlama (IntelliSense)
 
-[IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) , bir dizi özelliği içeren bir kod tamamlama yardımıdır: liste üyeleri, parametre bilgileri, hızlı bilgi ve tam sözcük. Bu özellikler, kullanmakta olduğunuz kod hakkında daha fazla bilgi edinmenize, yazmakta olduğunuz parametreleri izlemenize ve yalnızca birkaç tuş vuruşu ile özelliklere ve yöntemlere çağrılar eklemenize yardımcı olur.  
+[IntelliSense](https://code.visualstudio.com/docs/editor/intellisense) birçok özellik içeren bir kod tamamlama yardımıdır: liste üyeleri, parametre bilgileri, hızlı bilgi ve tam sözcük. Yalnızca birkaç tuş vuruşu ile şunları yapabilirsiniz:
+* Kullanmakta olduğunuz kod hakkında daha fazla bilgi edinin
+* Yazmakta olduğunuz parametreleri takip edin
+* Özelliklere ve yöntemlere çağrılar ekleyin 
 
-Kod yazarken, IntelliSense 'i tetiklemek için Ctrl + Space tuşlarını kullanın.
+### <a name="insert-code-snippets-preview"></a>Kod parçacıkları Ekle (Önizleme)
+
+IntelliSense kod parçacıklarını tetiklemek için **Ctrl + Space** tuşlarını kullanın.  Eklemek istediğiniz kodu bulmak için önerilere ilerleyin veya yazmaya başlayın.  Kodu ekledikten sonra, kodu kendi kullanıma yönelik olarak özelleştirmek için bağımsız değişkenler aracılığıyla sekmesine geçin.
+
+:::image type="content" source="media/how-to-run-jupyter-notebooks/insert-snippet.gif" alt-text="Kod parçacığı Ekle":::
+
+Bu kod parçacıkları, VS Code not defterinizi açtığınızda kullanılabilir. Kullanılabilir kod parçacıklarının tüm listesi için bkz. [Azure Machine Learning vs Code parçacıkları](https://github.com/Azure/azureml-snippets/blob/main/snippets/snippets.md).
+
+Kod parçacığı panelini açmak için Not defteri araç çubuğunu kullanarak kod parçacıkları listesine gözatabilir ve arama yapabilirsiniz.
+
+:::image type="content" source="media/how-to-run-jupyter-notebooks/open-snippet-panel.png" alt-text="Not defteri araç çubuğunda Kod parçacığı paneli aracını aç":::
+
+Kod parçacıkları panelinden yeni kod parçacıkları eklemek için de bir istek gönderebilirsiniz.
+
+:::image type="content" source="media/how-to-run-jupyter-notebooks/propose-new-snippet.png" alt-text="Kod parçacığı paneli yeni bir kod parçacığı önerme olanağı sağlar":::
 
 ## <a name="clean-your-notebook-preview"></a>Not defterinizi Temizleme (Önizleme)
-
-> [!IMPORTANT]
-> Toplama özelliği şu anda genel önizlemededir.
-> Önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 Bir not defteri oluşturma sırasında, genellikle veri araştırma veya hata ayıklama için kullandığınız hücrelerle birlikte sona erdir demektir. *Toplama* özelliği, bu yabancı hücreler olmadan temiz bir not defteri oluşturmanıza yardımcı olur.
 
@@ -271,9 +287,9 @@ Aşağıdaki tuş vuruşu kısayollarını kullanarak, düzenleme modundayken Az
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-* Bir not defterine bağlanamıyorsanız, Web yuva iletişiminin devre dışı **bırakılmadığından** emin olun. İşlem örneği jupi işlevinin çalışması için Web yuva iletişiminin etkinleştirilmesi gerekir. Lütfen ağınızın *. instances.azureml.net ve *. instances.azureml.ms öğesine WebSocket bağlantılarına izin verdiğinden emin olun. 
-
+* Bir not defterine bağlanamıyorsanız, Web yuva iletişiminin devre dışı **bırakılmadığından** emin olun. İşlem örneği jupi işlevinin çalışması için Web yuva iletişiminin etkinleştirilmesi gerekir. Ağınızın, *. instances.azureml.net ve *. instances.azureml.ms ile WebSocket bağlantılarına izin verdiğinden emin olun. 
 * İşlem örneği bir özel bağlantı çalışma alanında dağıtıldığında, yalnızca [sanal ağ içinden erişilebilir](./how-to-secure-training-vnet.md#compute-instance). Özel DNS veya hosts dosyası kullanıyorsanız lütfen < örnek adı >. < > bölgesi için özel IP adresi çalışma alanı özel uç noktası ile bir giriş ekleyin. Daha fazla bilgi için bkz. [özel DNS](./how-to-custom-dns.md?tabs=azure-cli) makalesi.
+
     
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -10,12 +10,12 @@ ms.date: 09/09/2020
 ms.author: normesta
 ms.subservice: data-lake-storage-gen2
 ms.reviewer: ereilebr
-ms.openlocfilehash: 2eda67e377a3b61e696e732b916d788c00a18eae
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ca4fe1410c18357a1fab10cc9c971cf3a81542fd
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95908787"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105963266"
 ---
 # <a name="query-acceleration-sql-language-reference"></a>Sorgu hızlandırma SQL dil başvurusu
 
@@ -122,8 +122,8 @@ Sorgu hızlandırma SQL dili, aşağıdaki standart SQL dize işlevlerini destek
 |[UPPER](/sql/t-sql/functions/upper-transact-sql)    |Küçük harfli karakter verisi büyük harfe dönüştürülmüş bir karakter ifadesi döndürür.|
 |[DIZEDEN](/sql/t-sql/functions/substring-transact-sql)    |SQL Server bir karakter, ikili, metin veya resim ifadesinin bir parçasını döndürür.|
 |[TRIM](/sql/t-sql/functions/trim-transact-sql)    |Bir dizenin başından ve sonundan sonra char karakter (32) veya diğer belirtilen karakterleri kaldırır.|
-|LIDERI    |Description|
-|ARKASıNDA    |Description|
+|LIDERI    |Bir dizenin başından karakter (32) veya belirtilen diğer karakterleri kaldırır.|
+|ARKASıNDA    |Bir dizenin sonundaki karakter karakteri (32) veya belirtilen diğer karakterleri kaldırır.|
 
 İşte birkaç örnek:
 

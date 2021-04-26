@@ -9,12 +9,12 @@ ms.subservice: linux
 ms.date: 06/01/2018
 ms.reviewer: mimckitt
 ms.custom: mimckitt, devx-track-js, devx-track-azurecli
-ms.openlocfilehash: c38fb976ca597647493f3dc3d32be79040ded6eb
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 4d31bde05158e89168f2a67b820c8743d4cd2729
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "91320192"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769904"
 ---
 # <a name="tutorial-create-a-virtual-machine-scale-set-and-deploy-a-highly-available-app-on-linux-with-the-azure-cli"></a>Öğretici: Azure CLI ile sanal makine ölçek kümesi oluşturma ve Linux üzerinde yüksek oranda kullanılabilir bir uygulama dağıtma
 
@@ -91,13 +91,13 @@ runcmd:
 
 
 ## <a name="create-a-scale-set"></a>Ölçek kümesi oluşturma
-Ölçek kümesi oluşturabilmek için [az group create](/cli/azure/group#az-group-create) ile bir kaynak grubu oluşturun. Aşağıdaki örnek, *eastus* konumunda *myResourceGroupScaleSet* adlı bir kaynak grubu oluşturur:
+Ölçek kümesi oluşturabilmek için [az group create](/cli/azure/group#az_group_create) ile bir kaynak grubu oluşturun. Aşağıdaki örnek, *eastus* konumunda *myResourceGroupScaleSet* adlı bir kaynak grubu oluşturur:
 
 ```azurecli-interactive
 az group create --name myResourceGroupScaleSet --location eastus
 ```
 
-Bu adımda [az vmss create](/cli/azure/vmss#az-vmss-create) ile bir sanal makine ölçek kümesi oluşturun. Aşağıdaki örnek, *myScaleSet* adlı bir ölçek kümesi oluşturur, cloud-init dosyasını kullanarak VM’yi özelleştirir ve yoksa SSH anahtarlarını oluşturur:
+Bu adımda [az vmss create](/cli/azure/vmss#az_vmss_create) ile bir sanal makine ölçek kümesi oluşturun. Aşağıdaki örnek, *myScaleSet* adlı bir ölçek kümesi oluşturur, cloud-init dosyasını kullanarak VM’yi özelleştirir ve yoksa SSH anahtarlarını oluşturur:
 
 ```azurecli-interactive
 az vmss create \
@@ -116,7 +116,7 @@ Tüm ölçek kümesi kaynaklarının ve VM'lerin oluşturulup yapılandırılmas
 ## <a name="allow-web-traffic"></a>Web trafiğine izin verme
 Sanal makine ölçek kümesinin bir parçası olarak otomatik olarak bir yük dengeleyici oluşturuldu. Yük dengeleyici, yük dengeleyici kurallarını kullanarak trafiği tanımlı bir VM'ler kümesi arasında dağıtır. Yük dengeleyiciye ilişkin kavramlar ve yapılandırma hakkında [Azure’da sanal makinelerin yükünü dengeleme](tutorial-load-balancer.md) adlı sıradaki öğreticide daha fazla bilgi edinebilirsiniz.
 
-Trafiğin web uygulamanıza ulaşmasına izin vermek için [az network lb rule create](/cli/azure/network/lb/rule#az-network-lb-rule-create) ile bir kural oluşturun. Aşağıdaki örnek *myLoadBalancerRuleWeb* adlı bir kural oluşturur:
+Trafiğin web uygulamanıza ulaşmasına izin vermek için [az network lb rule create](/cli/azure/network/lb/rule#az_network_lb_rule_create) ile bir kural oluşturun. Aşağıdaki örnek *myLoadBalancerRuleWeb* adlı bir kural oluşturur:
 
 ```azurecli-interactive
 az network lb rule create \
@@ -131,7 +131,7 @@ az network lb rule create \
 ```
 
 ## <a name="test-your-app"></a>Uygulamanızı test etme
-Node.js uygulamanızı Web’de görmek için [az network public-ip show](/cli/azure/network/public-ip#az-network-public-ip-show) ile yük dengeleyicinizin genel IP adresini alın. Aşağıdaki örnek ölçek kümesinin bir parçası olarak oluşturulan *myScaleSetLBPublicIP* için IP adresini alır:
+Node.js uygulamanızı Web’de görmek için [az network public-ip show](/cli/azure/network/public-ip#az_network_public_ip_show) ile yük dengeleyicinizin genel IP adresini alın. Aşağıdaki örnek ölçek kümesinin bir parçası olarak oluşturulan *myScaleSetLBPublicIP* için IP adresini alır:
 
 ```azurecli-interactive
 az network public-ip show \
@@ -152,7 +152,7 @@ Genel IP adresini bir web tarayıcısına girin. Uygulama, yük dengeleyicinin t
 Ölçek kümesinin yaşam döngüsü boyunca bir veya daha fazla yönetim görevi çalıştırmanız gerekebilir. Ayrıca, çeşitli yaşam döngüsü görevlerini otomatikleştiren betikler oluşturmak isteyebilirsiniz. Azure CLI tüm bunları hızlıca yapabilmenizi sağlar. Aşağıda birkaç yaygın görev açıklanmaktadır.
 
 ### <a name="view-vms-in-a-scale-set"></a>Ölçek kümesindeki VM’leri görüntüleme
-Ölçek kümenizde çalışan VM’lerin listesini görüntülemek için [az vmss list-instances](/cli/azure/vmss#az-vmss-list-instances) komutunu şu şekilde kullanın:
+Ölçek kümenizde çalışan VM’lerin listesini görüntülemek için [az vmss list-instances](/cli/azure/vmss#az_vmss_list_instances) komutunu şu şekilde kullanın:
 
 ```azurecli-interactive
 az vmss list-instances \
@@ -172,7 +172,7 @@ az vmss list-instances \
 
 
 ### <a name="manually-increase-or-decrease-vm-instances"></a>VM örneklerinin sayısını el ile artırma veya azaltma
-Ölçek kümesinde şu anda yer alan örneklerin sayısını görmek için [az vmss show](/cli/azure/vmss#az-vmss-show) komutunu kullanarak *sku.capacity* üzerinde bir sorgu çalıştırın:
+Ölçek kümesinde şu anda yer alan örneklerin sayısını görmek için [az vmss show](/cli/azure/vmss#az_vmss_show) komutunu kullanarak *sku.capacity* üzerinde bir sorgu çalıştırın:
 
 ```azurecli-interactive
 az vmss show \
@@ -182,7 +182,7 @@ az vmss show \
     --output table
 ```
 
-Ardından [az vmss scale](/cli/azure/vmss#az-vmss-scale) ile ölçek kümesindeki sanal makinelerin sayısını elle artırabilir veya azaltabilirsiniz. Aşağıdaki örnek, ölçek kümenizdeki VM'lerin sayısını *3* olarak ayarlar:
+Ardından [az vmss scale](/cli/azure/vmss#az_vmss_scale) ile ölçek kümesindeki sanal makinelerin sayısını elle artırabilir veya azaltabilirsiniz. Aşağıdaki örnek, ölçek kümenizdeki VM'lerin sayısını *3* olarak ayarlar:
 
 ```azurecli-interactive
 az vmss scale \
@@ -192,7 +192,7 @@ az vmss scale \
 ```
 
 ### <a name="get-connection-info"></a>Bağlantı bilgilerini alma
-Ölçek kümelerinizdeki VM'lere ilişkin bağlantı bilgilerini almak için [az vmss list-instance-connection-info](/cli/azure/vmss#az-vmss-list-instance-connection-info) komutunu kullanın. Bu komut, çıktı olarak her bir VM’nin genel IP adresini ve bağlantı noktasını verir. Bu bilgiler, SSH ile bağlanmanıza olanak sağlar:
+Ölçek kümelerinizdeki VM'lere ilişkin bağlantı bilgilerini almak için [az vmss list-instance-connection-info](/cli/azure/vmss#az_vmss_list_instance_connection_info) komutunu kullanın. Bu komut, çıktı olarak her bir VM’nin genel IP adresini ve bağlantı noktasını verir. Bu bilgiler, SSH ile bağlanmanıza olanak sağlar:
 
 ```azurecli-interactive
 az vmss list-instance-connection-info \
@@ -205,7 +205,7 @@ az vmss list-instance-connection-info \
 Veri diskleri oluşturup ölçek kümeleri ile kullanabilirsiniz. Daha önceki bir öğreticide [Azure disklerini yönetmeyi](tutorial-manage-disks.md) öğrenirken işletim sistemi diski yerine veri diskleri üzerinde uygulama oluşturmaya yönelik en iyi yöntemleri ve performans geliştirmelerini genel hatlarıyla gördünüz.
 
 ### <a name="create-scale-set-with-data-disks"></a>Veri diskleri ile ölçek kümesi oluşturma
-Ölçek kümesi oluşturup veri diskleri eklemek için [az vmss create](/cli/azure/vmss#az-vmss-create) komutuna `--data-disk-sizes-gb` parametresini ekleyin. Aşağıdaki örnek, her bir örneğe *50* GB’lık bir veri diski eklenmiş şekilde bir ölçek kümesi oluşturur:
+Ölçek kümesi oluşturup veri diskleri eklemek için [az vmss create](/cli/azure/vmss#az_vmss_create) komutuna `--data-disk-sizes-gb` parametresini ekleyin. Aşağıdaki örnek, her bir örneğe *50* GB’lık bir veri diski eklenmiş şekilde bir ölçek kümesi oluşturur:
 
 ```azurecli-interactive
 az vmss create \
@@ -222,7 +222,7 @@ az vmss create \
 Örnekler ölçek kümesinden kaldırıldığında ekli tüm veri diskleri de kaldırılır.
 
 ### <a name="add-data-disks"></a>Veri diski ekleme
-Ölçek kümenizdeki örneklere bir veri diski eklemek için [az vmss disk attach](/cli/azure/vmss/disk#az-vmss-disk-attach) komutunu kullanın. Aşağıdaki örnek, her bir örneğe *50* GB’lık bir veri diski ekler:
+Ölçek kümenizdeki örneklere bir veri diski eklemek için [az vmss disk attach](/cli/azure/vmss/disk#az_vmss_disk_attach) komutunu kullanın. Aşağıdaki örnek, her bir örneğe *50* GB’lık bir veri diski ekler:
 
 ```azurecli-interactive
 az vmss disk attach \
@@ -233,7 +233,7 @@ az vmss disk attach \
 ```
 
 ### <a name="detach-data-disks"></a>Veri diskini çıkarma
-Ölçek kümenizdeki örneklerden veri diskini kaldırmak için [az vmss disk detach](/cli/azure/vmss/disk#az-vmss-disk-detach) komutunu kullanın. Aşağıdaki örnek, her bir örnekten LUN *2*’deki veri diskini kaldırır:
+Ölçek kümenizdeki örneklerden veri diskini kaldırmak için [az vmss disk detach](/cli/azure/vmss/disk#az_vmss_disk_detach) komutunu kullanın. Aşağıdaki örnek, her bir örnekten LUN *2*’deki veri diskini kaldırır:
 
 ```azurecli-interactive
 az vmss disk detach \

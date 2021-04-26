@@ -5,10 +5,10 @@ keywords: ayarlar, zaman aşımı, dil, bölgesel
 ms.date: 03/15/2021
 ms.topic: how-to
 ms.openlocfilehash: 067b9808a91b8e5e22fb940095779b099bad0d58
-ms.sourcegitcommit: 2c1b93301174fccea00798df08e08872f53f669c
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104775110"
 ---
 # <a name="manage-azure-portal-settings-and-preferences"></a>Azure portal ayarlarını ve tercihlerini yönetme

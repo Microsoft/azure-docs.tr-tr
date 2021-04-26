@@ -3,12 +3,12 @@ title: Kayıt defterinde oturum açma sorunlarını giderme
 description: Azure Container Registry 'de oturum açarken karşılaşılan sorunların belirtileri, nedenleri ve çözümleri
 ms.topic: article
 ms.date: 08/11/2020
-ms.openlocfilehash: 5deb1717cf3886d8ea9c021d92afa358946b16dc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 47186cc8256836e5367ecee520787b67662eb42f
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99052087"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107780740"
 ---
 # <a name="troubleshoot-registry-login"></a>Kayıt defteri oturum açma sorunlarını giderme
 
@@ -36,7 +36,7 @@ Aşağıdakilerden birini veya daha fazlasını içerebilir:
 
 ## <a name="further-diagnosis"></a>Daha fazla tanılama 
 
-Kayıt defteri ortamının sistem durumu ve isteğe bağlı olarak bir hedef kayıt defterine erişim hakkında daha fazla bilgi almak için [az ACR Check-Health](/cli/azure/acr#az-acr-check-health) komutunu çalıştırın. Örneğin, Docker yapılandırma hatalarını veya Azure Active Directory oturum açma sorunlarını tanılayın. 
+Kayıt defteri ortamının sistem durumu ve isteğe bağlı olarak bir hedef kayıt defterine erişim hakkında daha fazla bilgi almak için [az ACR Check-Health](/cli/azure/acr#az_acr_check_health) komutunu çalıştırın. Örneğin, Docker yapılandırma hatalarını veya Azure Active Directory oturum açma sorunlarını tanılayın. 
 
 Bkz. komut örnekleri için [Azure Container Registry 'nin sistem durumunu denetleme](container-registry-check-health.md) . Hatalar raporlandıysanız, önerilen çözümler için [hata başvurusunu](container-registry-health-error-reference.md) ve aşağıdaki bölümleri gözden geçirin.
 
@@ -64,7 +64,7 @@ Kullanırken `docker login` , kayıt defterinin *myregistry.azurecr.io* gibi tam
 docker login myregistry.azurecr.io
 ```
 
-Azure Active Directory kimlikle [az ACR oturum açma](/cli/azure/acr#az-acr-login) kullanırken önce [Azure CLI 'de oturum açın](/cli/azure/authenticate-azure-cli)ve kayıt defterinin Azure Kaynak adını belirtin. Kaynak adı, *kayıt defteri oluşturulduğunda (bir* etki alanı soneki olmadan) girilen addır. Örnek:
+Azure Active Directory kimlikle [az ACR oturum açma](/cli/azure/acr#az_acr_login) kullanırken önce [Azure CLI 'de oturum açın](/cli/azure/authenticate-azure-cli)ve kayıt defterinin Azure Kaynak adını belirtin. Kaynak adı, *kayıt defteri oluşturulduğunda (bir* etki alanı soneki olmadan) girilen addır. Örnek:
 
 ```azurecli
 az acr login --name myregistry
@@ -72,7 +72,7 @@ az acr login --name myregistry
 
 İlgili bağlantılar:
 
-* [az ACR oturum açma işlemi başarılı ancak Docker şu hatayla başarısız oldu: kimlik doğrulaması gerekli](container-registry-faq.md#az-acr-login-succeeds-but-docker-fails-with-error-unauthorized-authentication-required )
+* [az ACR oturum açma işlemi başarılı ancak Docker şu hatayla başarısız oldu: kimlik doğrulaması gerekli](container-registry-faq.md#az-acr-login-succeeds-but-docker-fails-with-error-unauthorized-authentication-required)
 
 ### <a name="confirm-credentials-to-access-registry"></a>Kayıt defterine erişmek için kimlik bilgilerini onaylayın
 
@@ -94,7 +94,7 @@ Senaryonuz için kullandığınız kimlik bilgilerinin geçerliliğini denetleyi
 * [Depo kapsamlı belirteç ile oturum açma](container-registry-repository-scoped-permissions.md)
 * [Yönetici hesabıyla oturum açın](container-registry-authentication.md#admin-account)
 * [Azure AD kimlik doğrulaması ve yetkilendirme hatası kodları](../active-directory/develop/reference-aadsts-error-codes.md)
-* [az ACR oturum açma](/cli/azure/acr#az-acr-login) başvurusu
+* [az ACR oturum açma](/cli/azure/acr#az_acr_login) başvurusu
 
 ### <a name="confirm-credentials-are-authorized-to-access-registry"></a>Kimlik bilgilerinin kayıt defterine erişim yetkisi olduğunu onaylayın
 
@@ -125,7 +125,7 @@ Belirteçler ve Active Directory kimlik bilgileri, tanımlı dönemlerden sonra 
 
 İlgili bağlantılar:
 
-* [Hizmet sorumlusu kimlik bilgilerini Sıfırla](/cli/azure/ad/sp/credential#az-ad-sp-credential-reset)
+* [Hizmet sorumlusu kimlik bilgilerini Sıfırla](/cli/azure/ad/sp/credential#az_ad_sp_credential_reset)
 * [Belirteç parolalarını yeniden oluştur](container-registry-repository-scoped-permissions.md#regenerate-token-passwords)
 * [Azure AD ile bireysel oturum açma](container-registry-authentication.md#individual-login-with-azure-ad)
 

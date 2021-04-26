@@ -9,12 +9,12 @@ ms.workload: infrastructure
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: 0bea4fbac062b498dabe04e6e58d530d09b16d6d
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: e2cd885d886a0f13783e61a04c7243efdf12967e
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102553111"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107784992"
 ---
 # <a name="copy-an-image-from-another-gallery-using-the-azure-cli"></a>Azure CLı kullanarak başka bir galerinin görüntüsünü kopyalama
 
@@ -36,13 +36,13 @@ Bu makalede çalışırken, kaynak adlarını gereken yerde değiştirin.
 
 Yeni Galerinizdeki bir kopyasını oluşturabilmeniz için kaynak görüntü tanımından bilgilere ihtiyacınız olacak.
 
-Kaynak galerisiyle ilgili bilgileri bulmak için [az SIG List](/cli/azure/sig#az-sig-list) kullanarak kullanılabilir görüntü galerileriyle ilgili bilgileri listeleyin.
+Kaynak galerisiyle ilgili bilgileri bulmak için [az SIG List](/cli/azure/sig#az_sig_list) kullanarak kullanılabilir görüntü galerileriyle ilgili bilgileri listeleyin.
 
 ```azurecli-interactive 
 az sig list -o table
 ```
 
-Görüntü tanımlarını [az Sig Image-Definition List](/cli/azure/sig/image-definition#az-sig-image-definition-list)kullanarak bir galeride listeleyin. Bu örnekte, *Mygallerrg* kaynak grubunda *MyGallery* adlı galerideki görüntü tanımlarını arıyoruz.
+Görüntü tanımlarını [az Sig Image-Definition List](/cli/azure/sig/image-definition#az_sig_image_definition_list)kullanarak bir galeride listeleyin. Bu örnekte, *Mygallerrg* kaynak grubunda *MyGallery* adlı galerideki görüntü tanımlarını arıyoruz.
 
 ```azurecli-interactive 
 az sig image-definition list \
@@ -51,7 +51,7 @@ az sig image-definition list \
    -o table
 ```
 
-Yeni galerinize kopyalamak istediğiniz görüntü sürümünü bulmak için [az Sig Image-Version List](/cli/azure/sig/image-version#az-sig-image-version-list) kullanarak galerideki bir görüntünün sürümlerini listeleyin. Bu örnekte, *Myımagedefinition* görüntü tanımının parçası olan tüm görüntü sürümlerini arıyoruz.
+Yeni galerinize kopyalamak istediğiniz görüntü sürümünü bulmak için [az Sig Image-Version List](/cli/azure/sig/image-version#az_sig_image_version_list) kullanarak galerideki bir görüntünün sürümlerini listeleyin. Bu örnekte, *Myımagedefinition* görüntü tanımının parçası olan tüm görüntü sürümlerini arıyoruz.
 
 ```azurecli-interactive
 az sig image-version list \
@@ -61,7 +61,7 @@ az sig image-version list \
    -o table
 ```
 
-İhtiyacınız olan tüm bilgilere sahip olduktan sonra, kaynak görüntü sürümünün KIMLIĞINI [az Sig Image-Version Show](/cli/azure/sig/image-version#az-sig-image-version-show)kullanarak alabilirsiniz.
+İhtiyacınız olan tüm bilgilere sahip olduktan sonra, kaynak görüntü sürümünün KIMLIĞINI [az Sig Image-Version Show](/cli/azure/sig/image-version#az_sig_image_version_show)kullanarak alabilirsiniz.
 
 ```azurecli-interactive
 az sig image-version show \
@@ -75,7 +75,7 @@ az sig image-version show \
 
 ## <a name="create-the-image-definition"></a>Görüntü tanımını oluşturma 
 
-Kaynak görüntü sürümünüzün görüntü tanımıyla eşleşen bir görüntü tanımı oluşturmanız gerekir. Daha [az Sig Image-Definition Show](/cli/azure/sig/image-definition#az-sig-image-definition-show)kullanarak görüntü tanımını yeni galerinize yeniden oluşturmak için gereken tüm bilgileri görebilirsiniz.
+Kaynak görüntü sürümünüzün görüntü tanımıyla eşleşen bir görüntü tanımı oluşturmanız gerekir. Daha [az Sig Image-Definition Show](/cli/azure/sig/image-definition#az_sig_image_definition_show)kullanarak görüntü tanımını yeni galerinize yeniden oluşturmak için gereken tüm bilgileri görebilirsiniz.
 
 ```azurecli-interactive
 az sig image-definition show \
@@ -133,7 +133,7 @@ az sig image-definition create \
 
 ## <a name="create-the-image-version"></a>Görüntü sürümü oluşturma
 
-[Az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az-sig-image-version-create)kullanarak sürümler oluşturun. Görüntü sürümü oluşturmak için taban çizgisi olarak kullanılacak yönetilen görüntünün KIMLIĞINI geçirmeniz gerekir. Kaynak grubundaki görüntüler hakkında bilgi almak için [az Image List](/cli/azure/image?view#az-image-list) kullanabilirsiniz. 
+[Az Image Gallery Create-Image-Version](/cli/azure/sig/image-version#az_sig_image_version_create)kullanarak sürümler oluşturun. Görüntü sürümü oluşturmak için taban çizgisi olarak kullanılacak yönetilen görüntünün KIMLIĞINI geçirmeniz gerekir. Kaynak grubundaki görüntüler hakkında bilgi almak için [az Image List](/cli/azure/image?view#az_image_list) kullanabilirsiniz. 
 
 Görüntü sürümü için izin verilen karakterler rakamlardan ve dönemlerdir. Sayılar 32 bitlik bir tamsayı aralığında olmalıdır. Biçim: *MajorVersion*. *MinorVersion*. *Düzeltme Eki*.
 

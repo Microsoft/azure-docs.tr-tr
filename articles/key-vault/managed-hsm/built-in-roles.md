@@ -9,10 +9,10 @@ ms.topic: tutorial
 ms.date: 09/15/2020
 ms.author: ambapat
 ms.openlocfilehash: 01e96922d9c0c47eaf4d430e92eafcd9d0964e13
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105557233"
 ---
 # <a name="managed-hsm-local-rbac-built-in-roles"></a>Yönetilen HSM yerel RBAC yerleşik rolleri
@@ -29,7 +29,7 @@ Yönetilen HSM yerel RBAC çeşitli yerleşik rollere sahiptir. Bu rolleri kulla
 |Yönetilen HSM Ilkesi Yöneticisi| Rol atamaları oluşturma ve silme izni verir|4bd23610-cdcf-4971-bdee-bdc562cc28e4|
 |Yönetilen HSM şifre denetleyicisi|Anahtar özniteliklerini okumak (ancak kullanmak değil) için okuma izni verir.|2c18b078-7c48-4d3a-af88-5a3a1b3f82b3|
 |Yönetilen HSM şifre hizmeti şifrelemesi| Hizmet şifrelemesi için bir anahtar kullanma izni verir. |33413926-3206-4CDD-b39a-83574fe37a17|
-|Yönetilen HSM yedeklemesi| Tek bir anahtar veya tam HSM yedeklemesi gerçekleştirme izni verir.|7b127d3c-77bd-4e3e-bbe0-dbb8971fa7f8|
+|Yönetilen HSM Yedeklemesi| Tek bir anahtar veya tam HSM yedeklemesi gerçekleştirme izni verir.|7b127d3c-77bd-4e3e-bbe0-dbb8971fa7f8|
 
 ## <a name="permitted-operations"></a>İzin verilen işlemler
 > [!NOTE]  

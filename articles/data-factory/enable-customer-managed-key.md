@@ -7,12 +7,12 @@ ms.topic: quickstart
 ms.date: 05/08/2020
 ms.author: chez
 ms.reviewer: mariozi
-ms.openlocfilehash: c6c376e44c6135a800e6f7e281f8ea85b828329a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: a18d06e3a0324889a4cb9936fb339fd9d8f9b816
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102443903"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106222716"
 ---
 # <a name="encrypt-azure-data-factory-with-customer-managed-keys"></a>Müşteri tarafından yönetilen anahtarlarla Azure Data Factory şifreleyin
 
@@ -137,6 +137,23 @@ Data Factory şifreleme için kullanılan anahtarı değiştirmek için, Data Fa
 ## <a name="disable-customer-managed-keys"></a>Müşteri tarafından yönetilen anahtarları devre dışı bırak
 
 Tasarıma göre, müşteri tarafından yönetilen anahtar özelliği etkinleştirildikten sonra, ek güvenlik adımını kaldıramazsınız. Fabrika ve verileri şifrelemek için her zaman bir müşteri tarafından sağlanmış anahtar beklenir.
+
+## <a name="customer-managed-key-and-continuous-integration-and-continuous-deployment"></a>Müşteri tarafından yönetilen anahtar ve sürekli tümleştirme ve sürekli dağıtım
+
+Varsayılan olarak, CMK yapılandırması, Factory Azure Resource Manager (ARM) şablonuna dahil değildir. Müşteri tarafından yönetilen anahtar şifreleme ayarlarını, sürekli tümleştirme (CI/CD) için ARM şablonuna dahil etmek için:
+
+1. Fabrikasının git modunda olduğundan emin olun
+1. Yönetim Portalı ' na gidin-müşteri tarafından yönetilen anahtar bölümü
+1. _ARM şablonuna dahil_ etme seçeneği
+
+  :::image type="content" source="media/enable-customer-managed-key/07-include-in-template.png" alt-text="ARM şablonunda müşteri tarafından yönetilen anahtar ayarını dahil etme ekran görüntüsü.":::
+
+ARM şablonuna aşağıdaki ayarlar eklenecektir. Bu özellikler, [Azure Resource Manager parametreleri yapılandırması](continuous-integration-deployment.md#use-custom-parameters-with-the-resource-manager-template) düzenlenerek sürekli tümleştirme ve teslim işlem hatlarında parametrelenebilir.
+
+  :::image type="content" source="media/enable-customer-managed-key/08-template-with-customer-managed-key.png" alt-text="Azure Resource Manager şablonunda müşteri tarafından yönetilen anahtar ayarını dahil etme ekran görüntüsü.":::
+
+> [!NOTE]
+> ARM şablonlarına şifreleme ayarını eklemek, diğer ortamlarda git yapılandırması gibi diğer fabrika düzeyi ayarlarını geçersiz kılacak bir fabrika düzeyi ayarı ekler. Bu ayarları, UıAT veya PROD gibi yükseltilmiş bir ortamda etkinleştirdiyseniz, lütfen [CI/CD 'Deki genel parametrelere](author-global-parameters.md#cicd)bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

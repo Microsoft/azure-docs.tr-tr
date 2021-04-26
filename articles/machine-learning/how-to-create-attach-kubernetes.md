@@ -10,13 +10,13 @@ ms.custom: how-to, devx-track-azurecli
 ms.author: jordane
 author: jpe316
 ms.reviewer: larryfr
-ms.date: 03/11/2021
-ms.openlocfilehash: bc8f7aa6827ce251799acd0673d43344c0833c3a
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/08/2021
+ms.openlocfilehash: 375a8f6613ff90edd3df635c8236196aab62b6ac
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103149333"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107861148"
 ---
 # <a name="create-and-attach-an-azure-kubernetes-service-cluster"></a>Azure Kubernetes hizmet kümesi oluşturma ve iliştirme
 
@@ -48,12 +48,8 @@ Azure Machine Learning, eğitilen makine öğrenimi modellerini Azure Kubernetes
 
 - Özel bir AKS kümesi (Azure özel bağlantısı kullanarak) kullanmak istiyorsanız, önce kümeyi oluşturmanız ve ardından çalışma alanına **bağlamanız** gerekir. Daha fazla bilgi için bkz. [özel Azure Kubernetes hizmet kümesi oluşturma](../aks/private-clusters.md).
 
-- AKS kümesinin işlem adı, Azure ML çalışma alanınız içinde benzersiz OLMALıDıR.
-    - Ad gereklidir ve 3 ila 24 karakter uzunluğunda olmalıdır.
-    - Geçerli karakterler büyük ve küçük harf, rakam ve-karakter.
-    - Ad bir harfle başlamalıdır.
-    - Adın, bir Azure bölgesindeki tüm mevcut hesaplar arasında benzersiz olması gerekir. Seçtiğiniz ad benzersiz değilse bir uyarı görürsünüz.
-   
+- AKS kümesinin işlem adı, Azure ML çalışma alanınız içinde benzersiz OLMALıDıR. Harf, rakam ve tire içerebilir. Bir harfle başlamalı, bir harf veya rakam ile bitmelidir ve 3 ila 24 karakter uzunluğunda olmalıdır.
+ 
  - Modelleri **GPU** düğümlerine veya **FPGA** düğümlerine (ya da belirli bir SKU) DAĞıTMAK istiyorsanız, belirli SKU 'ya sahip bir küme oluşturmanız gerekir. Mevcut bir kümede ikincil düğüm havuzu oluşturma ve ikincil düğüm havuzunda modelleri dağıtma desteği yoktur.
  
 - Bir küme oluştururken veya iliştirirken, __geliştirme ve test__ ya da __Üretim__ için kümenin oluşturulup oluşturulmayacağını seçebilirsiniz. Üretim yerine __geliştirme__, __doğrulama__ ve __Test__ için bir aks kümesi oluşturmak istiyorsanız, __küme amacını__ __geliştirme-test__ olarak ayarlayın. Küme amacını belirtmezseniz, bir __Üretim__ kümesi oluşturulur. 
@@ -71,6 +67,10 @@ Azure Machine Learning, eğitilen makine öğrenimi modellerini Azure Kubernetes
     - [AKS 'de küme otomatik Scaler 'ı ayarlama](../aks/cluster-autoscaler.md)
 
 - __YAML yapılandırmasını kullanarak kümeyi doğrudan güncelleştirmeyin__. Azure Kubernetes Hizmetleri, YAML yapılandırması aracılığıyla güncelleştirmeleri desteklese de Azure Machine Learning dağıtımlar yaptığınız değişiklikleri geçersiz kılar. Geçersiz kılınmayacak iki YAML alanı, __istek limitleri__ ve __CPU ve bellek__.
+
+- Azure Machine Learning Studio UI, SDK veya CLı uzantısını kullanarak AKS kümesi oluşturma ıdempotent __değildir__ . Kaynağı yeniden oluşturma girişimi, aynı ada sahip bir kümenin zaten var olduğunu belirten bir hata oluşmasına neden olur.
+    
+    - Bir Azure Resource Manager şablonu ve bir AKS kümesi oluşturmak için [Microsoft. MachineLearningServices/Workspaces/hesaplar](/azure/templates/microsoft.machinelearningservices/2019-11-01/workspaces/computes) kaynağını kullanmak ıdempotent de __değildir__ . Zaten var olan bir kaynağı güncelleştirmek için şablonu kullanmaya çalışırsanız aynı hatayı alırsınız.
 
 ## <a name="azure-kubernetes-service-version"></a>Azure Kubernetes Service sürümü
 
@@ -198,7 +198,7 @@ Bu örnekte kullanılan sınıflar, Yöntemler ve parametreler hakkında daha fa
 az ml computetarget create aks -n myaks
 ```
 
-Daha fazla bilgi için, [az ml computetarget Create aks](/cli/azure/ext/azure-cli-ml/ml/computetarget/create#ext-azure-cli-ml-az-ml-computetarget-create-aks) Reference bölümüne bakın.
+Daha fazla bilgi için, [az ml computetarget Create aks](/cli/azure/ml/computetarget/create#az_ml_computetarget_create_aks) Reference bölümüne bakın.
 
 # <a name="portal"></a>[Portal](#tab/azure-portal)
 
@@ -223,7 +223,7 @@ Azure aboneliğinizde zaten AKS kümeniz varsa, çalışma alanınız ile kullan
 
 Azure CLı veya portalını kullanarak bir AKS kümesi oluşturma hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
 
-* [AKS kümesi oluşturma (CLI)](/cli/azure/aks?bc=%2fazure%2fbread%2ftoc.json&toc=%2fazure%2faks%2fTOC.json#az-aks-create)
+* [AKS kümesi oluşturma (CLI)](/cli/azure/aks?bc=%2fazure%2fbread%2ftoc.json&toc=%2fazure%2faks%2fTOC.json#az_aks_create)
 * [AKS kümesi oluşturma (portal)](../aks/kubernetes-walkthrough-portal.md)
 * [AKS kümesi oluşturma (Azure hızlı başlangıç şablonlarında ARM şablonu)](https://github.com/Azure/azure-quickstart-templates/tree/master/101-aks-azml-targetcompute)
 
@@ -275,7 +275,7 @@ Mevcut kümeyi çalışma alanınıza eklemek için aşağıdaki komutu kullanı
 az ml computetarget attach aks -n myaks -i aksresourceid -g myresourcegroup -w myworkspace
 ```
 
-Daha fazla bilgi için, [az ml computetarget Attach aks](/cli/azure/ext/azure-cli-ml/ml/computetarget/attach#ext-azure-cli-ml-az-ml-computetarget-attach-aks) başvurusuna bakın.
+Daha fazla bilgi için, [az ml computetarget Attach aks](/cli/azure/ml/computetarget/attach#az_ml_computetarget_attach_aks) başvurusuna bakın.
 
 # <a name="portal"></a>[Portal](#tab/azure-portal)
 

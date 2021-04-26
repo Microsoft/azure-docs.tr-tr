@@ -4,303 +4,297 @@ summary: Azure Active Directory (Azure AD) çok kiracılı ve bulut tabanlı bir
 brand: azure
 metadata:
   title: Azure Active Directory Belgeleri
-  description: Azure Active Directory (Azure AD), Microsoft'un çekirdek dizin hizmetleri, uygulama erişim yönetimi ve kimlik korumasını tek bir çözüm altında birleştiren çok kiracılı, bulut tabanlı dizin ve kimlik yönetimi hizmetidir.
+  description: 'Azure Active Directory (Azure AD), Microsoft''un çekirdek dizin hizmetleri, uygulama erişim yönetimi ve kimlik korumasını tek bir çözüm altında birleştiren çok kiracılı, bulut tabanlı dizin ve kimlik yönetimi hizmetidir.'
   ms.service: active-directory
   ms.topic: hub-page
   ms.collection: M365-identity-device-management
   author: mtillman
   ms.author: mtillman
   manager: daveba
-  ms.date: 12/01/2020
-  ms.openlocfilehash: de96c1ed6828a6933102755d6c020cf01c4c9c7b
-  ms.sourcegitcommit: 8a74ab1beba4522367aef8cb39c92c1147d5ec13
-  ms.translationtype: MT
-  ms.contentlocale: tr-TR
-  ms.lasthandoff: 01/20/2021
-  ms.locfileid: "98611160"
+  ms.date: 04/14/2021
 highlightedContent:
   items:
-  - title: Azure AD nedir?
-    itemType: overview
-    url: ./fundamentals/active-directory-whatis.md
-  - title: Azure AD'deki yenilikler
-    itemType: whats-new
-    url: ./fundamentals/whats-new.md
-  - title: Uzak iş gücünüzün güvenliğini sağlama
-    itemType: get-started
-    url: /enterprise-mobility-security/remote-work/
-  - title: Kullanıcılara rol atama
-    itemType: how-to-guide
-    url: ./fundamentals/active-directory-users-assign-role-azure-portal.md
-  - title: Azure AD dağıtımı denetim listesi
-    itemType: concept
-    url: ./fundamentals/active-directory-deployment-checklist-p2.md
-  - title: Azure AD ile kimlik ve erişim yönetimine dayanıklılık ekleme
-    itemType: overview
-    url: ./fundamentals/resilience-overview.md
+    - title: Azure AD nedir?
+      itemType: overview
+      url: ./fundamentals/active-directory-whatis.md
+    - title: Azure AD'deki yenilikler
+      itemType: whats-new
+      url: ./fundamentals/whats-new.md
+    - title: Uzak iş gücünüzün güvenliğini sağlama
+      itemType: get-started
+      url: /enterprise-mobility-security/remote-work/
+    - title: Doğrulanabilir kimlik bilgileri (Önizleme) nedir?
+      itemType: overview
+      url: ./verifiable-credentials/decentralized-identifier-overview.md
+    - title: Azure AD dağıtımı denetim listesi
+      itemType: concept
+      url: ./fundamentals/active-directory-deployment-checklist-p2.md
+    - title: Azure AD ile kimlik ve erişim yönetimine dayanıklılık ekleme
+      itemType: overview
+      url: ./fundamentals/resilience-overview.md
 conceptualContent:
   items:
-  - title: Uygulama yönetimi
-    links:
-    - url: ./manage-apps/what-is-application-management.md
-      itemType: overview
-      text: Uygulama yönetimi nedir?
-    - url: ./manage-apps/view-applications-portal.md
-      itemType: quickstart
-      text: Kimlik yönetimi için kiracınızı kullanan uygulamaları görüntüleme
-    - url: ./manage-apps/add-application-portal-setup-sso.md
-      itemType: quickstart
-      text: SAML tabanlı SSO ayarlama
-    footerLink:
-      url: ./manage-apps/index.yml
-      text: Daha fazla göster
-  - title: Uygulama ve İK sağlama
-    links:
-    - url: ./app-provisioning/user-provisioning.md
-      itemType: overview
-      text: Uygulama sağlama nedir?
-    - url: ./app-provisioning/how-provisioning-works.md
-      itemType: concept
-      text: Uygulama sağlama nasıl çalışır?
-    - url: ./app-provisioning/plan-cloud-hr-provision.md
-      itemType: how-to-guide
-      text: Bulut İK sağlama dağıtımı planlama
-    footerLink:
-      url: ./app-provisioning/index.yml
-      text: Daha fazla göster
-  - title: Kimlik Doğrulaması
-    links:
-    - url: ./authentication/overview-authentication.md
-      itemType: concept
-      text: Azure AD Kimlik Doğrulaması nedir?
-    - url: ./authentication/tutorial-enable-sspr.md
-      itemType: tutorial
-      text: Kendi kendine parola sıfırlamayı etkinleştirme
-    - url: ./authentication/tutorial-enable-azure-mfa.md
-      itemType: tutorial
-      text: Azure AD Multi-Factor Authentication’ı etkinleştirme
-    footerLink:
-      url: ./authentication/index.yml
-      text: Daha fazla göster
-  - title: Bulut eşitleme
-    links:
-    - url: ./cloud-sync/what-is-cloud-sync.md
-      itemType: overview
-      text: Bulut eşitlemesi nedir?
-    - url: ./cloud-sync/tutorial-single-forest.md
-      itemType: tutorial
-      text: Tek bir ormanı tek bir Azure AD kiracısı ile tümleştirme
-    - url: ./cloud-sync/how-to-install.md
-      itemType: how-to-guide
-      text: Azure AD Connect sağlama aracısını yükler
-    footerLink:
-      url: ./cloud-sync/index.yml
-      text: Daha fazla göster
-  - title: Koşullu Erişim
-    links:
-    - url: ./conditional-access/overview.md
-      itemType: overview
-      text: Koşullu Erişim nedir?
-    - url: ./authentication/tutorial-enable-azure-mfa.md
-      itemType: quickstart
-      text: Belirli uygulamalar için MFA gerektirme
-    - url: ./conditional-access/location-condition.md
-      itemType: concept
-      text: Konuma göre koşullar
-    footerLink:
-      url: ./conditional-access/index.yml
-      text: Daha fazla göster
-  - title: Cihaz yönetimi
-    links:
-    - url: ./devices/overview.md
-      itemType: overview
-      text: Cihaz yönetimi nedir?
-    - url: ./devices/hybrid-azuread-join-plan.md
-      itemType: how-to-guide
-      text: Karma Azure AD katılımını planlama
-    - url: ./devices/azureadjoin-plan.md
-      itemType: how-to-guide
-      text: Azure AD katılımını planlama
-    footerLink:
-      url: ./devices/index.yml
-      text: Daha fazla göster
-  - title: Etki alanı hizmetleri
-    links:
-    - url: ../active-directory-domain-services/overview.md
-      itemType: overview
-      text: Azure AD Etki Alanı Hizmetleri nedir?
-    - url: ../active-directory-domain-services/tutorial-create-instance.md
-      itemType: quickstart
-      text: Azure AD Etki Alanı Hizmetleri'ni etkinleştirme
-    - url: ../active-directory-domain-services/manage-group-policy.md
-      itemType: how-to-guide
-      text: Grup ilkesini yönetme
-    footerLink:
-      url: ../active-directory-domain-services/index.yml
-      text: Daha fazla göster
-  - title: Kurumsal kullanıcılar
-    links:
-    - url: ./enterprise-users/groups-create-rule.md
-      itemType: how-to-guide
-      text: Dinamik grup oluşturma
-    - url: ./enterprise-users/groups-settings-v2-cmdlets.md
-      itemType: how-to-guide
-      text: Azure AD grupları için PowerShell
-    - url: ./enterprise-users/directory-service-limits-restrictions.md
-      itemType: reference
-      text: Azure AD hizmet sınırlamaları ve kısıtlamaları
-    footerLink:
-      url: ./enterprise-users/index.yml
-      text: Daha fazla göster
-  - title: Dış Kimlikler
-    links:
-    - url: ./external-identities/compare-with-b2c.md
-      itemType: overview
-      text: Dış kullanıcılara yönelik çözümleri karşılaştırma
-    - url: ../active-directory-b2c/overview.md
-      itemType: overview
-      text: Uygulamalarınızı tüketicilere ölçeklendirme (B2C)
-    - url: ./external-identities/what-is-b2b.md
-      itemType: overview
-      text: Kuruluşunuz dışındaki kullanıcılarla işbirliği yapma (B2B)
-    footerLink:
-      url: ./external-identities/index.yml
-      text: Daha fazla göster
-  - title: Karma kimlik
-    links:
-    - url: ./hybrid/whatis-hybrid-identity.md
-      itemType: overview
-      text: Hibrit kimlik nedir?
-    - url: ./hybrid/how-to-connect-sso.md
-      itemType: how-to-guide
-      text: Azure AD Connect ile çoklu oturum açma
-    - url: ./hybrid/how-to-connect-install-custom.md
-      itemType: how-to-guide
-      text: Azure AD Connect özel yüklemesi
-    footerLink:
-      url: ./hybrid/index.yml
-      text: Daha fazla göster
-  - title: Kimlik idaresi
-    links:
-    - url: ./governance/entitlement-management-access-package-first.md
-      itemType: how-to-guide
-      text: Erişim paketi oluşturma
-    - url: ./governance/create-access-review.md
-      itemType: how-to-guide
-      text: Grup veya uygulamaların erişim gözden geçirmesini oluşturma
-    - url: ./conditional-access/terms-of-use.md
-      itemType: how-to-guide
-      text: Kullanıcıların kullanım koşullarını kabul etmesini zorunlu tut
-    footerLink:
-      url: ./governance/index.yml
-      text: Daha fazla göster
-  - title: Kimlik koruması
-    links:
-    - url: ./identity-protection/overview-identity-protection.md
-      itemType: overview
-      text: Kimlik koruması nedir?
-    - url: ./identity-protection/howto-identity-protection-configure-risk-policies.md
-      itemType: how-to-guide
-      text: Risk ilkelerini yapılandırma
-    - url: ./identity-protection/howto-identity-protection-remediate-unblock.md
-      itemType: how-to-guide
-      text: Kullanıcıların engelini kaldırma
-    footerLink:
-      url: ./identity-protection/index.yml
-      text: Daha fazla göster
-  - title: Azure kaynakları için yönetilen kimlikler
-    links:
-    - url: ./managed-identities-azure-resources/tutorial-windows-vm-access-sql.md
-      itemType: tutorial
-      text: Azure SQL'e erişmek için Windows VM kullanma
-    - url: ./managed-identities-azure-resources/how-to-use-vm-token.md
-      itemType: how-to-guide
-      text: Belirteç alımı için Azure VM'yi kullanma
-    - url: ./managed-identities-azure-resources/services-support-managed-identities.md
-      itemType: concept
-      text: Yönetilen kimliği destekleyen hizmetler
-    footerLink:
-      url: ./managed-identities-azure-resources/index.yml
-      text: Daha fazla göster
-  - title: Microsoft kimlik platformu
-    links:
-    - url: ./develop/v2-overview.md
-      itemType: overview
-      text: Microsoft kimlik platformu hakkında
-    - url: ./develop/v2-oauth2-auth-code-flow.md
-      itemType: concept
-      text: OAuth 2.0 kod akışı verme
-    - url: ./develop/quickstart-register-app.md
-      itemType: quickstart
-      text: Microsoft kimlik platformu ile uygulama kaydetme
-    footerLink:
-      url: ./develop/index.yml
-      text: Daha fazla göster
-  - title: Privileged identity management (PIM)
-    links:
-    - url: ./privileged-identity-management/pim-getting-started.md
-      itemType: how-to-guide
-      text: PIM kullanmaya başlama
-    - url: ./privileged-identity-management/pim-how-to-activate-role.md
-      itemType: how-to-guide
-      text: Dizin rollerimi etkinleştirme
-    - url: ./privileged-identity-management/pim-how-to-add-role-to-user.md
-      itemType: how-to-guide
-      text: Dizin rolleri atama
-    footerLink:
-      url: ./privileged-identity-management/index.yml
-      text: Daha fazla göster
-  - title: Raporlar ve izleme
-    links:
-    - url: ./reports-monitoring/concept-audit-logs.md
-      itemType: concept
-      text: Denetim günlükleri
-    - url: ./reports-monitoring/concept-sign-ins.md
-      itemType: concept
-      text: Oturum açma günlükleri
-    - url: ./reports-monitoring/reference-sign-ins-error-codes.md
-      itemType: reference
-      text: Oturum açma hata kodları başvurusu
-    footerLink:
-      url: ./reports-monitoring/index.yml
-      text: Daha fazla göster
-  - title: Roller
-    links:
-    - url: ./roles/groups-assign-role.md
-      itemType: concept
-      text: Azure AD rollerini anlama
-    - url: ./roles/concept-understand-roles.md
-      itemType: how-to-guide
-      text: Özel rol oluşturma
-    - url: ./roles/groups-view-assignments.md
-      itemType: reference
-      text: Gruba atanmış rolleri görüntüleme
-    footerLink:
-      url: ./roles/index.yml
-      text: Daha fazla göster
-  - title: Üçüncü taraf uygulamalar
-    links:
-    - url: ./saas-apps/amazon-web-service-tutorial.md
-      itemType: tutorial
-      text: Amazon Web Services ile Azure AD çoklu oturum açma tümleştirmesi
-    - url: ./saas-apps/workday-inbound-tutorial.md
-      itemType: tutorial
-      text: Workday’i otomatik kullanıcı hazırlaması için yapılandırma
-    - url: ./develop/v2-howto-app-gallery-listing.md
-      itemType: get-started
-      text: Uygulamanızın Galeri’ye eklenmesini isteme
-    footerLink:
-      url: ./saas-apps/tutorial-list.md
-      text: Diğer uygulamalara bakın
+    - title: Uygulama yönetimi
+      links:
+        - url: ./manage-apps/what-is-application-management.md
+          itemType: overview
+          text: Uygulama yönetimi nedir?
+        - url: ./manage-apps/view-applications-portal.md
+          itemType: quickstart
+          text: Kimlik yönetimi için kiracınızı kullanan uygulamaları görüntüleme
+        - url: ./manage-apps/add-application-portal-setup-sso.md
+          itemType: quickstart
+          text: SAML tabanlı SSO ayarlama
+      footerLink:
+        url: ./manage-apps/index.yml
+        text: Daha fazla göster
+    - title: Uygulama ve İK sağlama
+      links:
+        - url: ./app-provisioning/user-provisioning.md
+          itemType: overview
+          text: Uygulama sağlama nedir?
+        - url: ./app-provisioning/how-provisioning-works.md
+          itemType: concept
+          text: Uygulama sağlama nasıl çalışır?
+        - url: ./app-provisioning/plan-cloud-hr-provision.md
+          itemType: how-to-guide
+          text: Bulut İK sağlama dağıtımı planlama
+      footerLink:
+        url: ./app-provisioning/index.yml
+        text: Daha fazla göster
+    - title: Kimlik Doğrulaması
+      links:
+        - url: ./authentication/overview-authentication.md
+          itemType: concept
+          text: Azure AD Kimlik Doğrulaması nedir?
+        - url: ./authentication/tutorial-enable-sspr.md
+          itemType: tutorial
+          text: Kendi kendine parola sıfırlamayı etkinleştirme
+        - url: ./authentication/tutorial-enable-azure-mfa.md
+          itemType: tutorial
+          text: Azure AD Multi-Factor Authentication’ı etkinleştirme
+      footerLink:
+        url: ./authentication/index.yml
+        text: Daha fazla göster
+    - title: Bulut eşitleme
+      links:
+        - url: ./cloud-sync/what-is-cloud-sync.md
+          itemType: overview
+          text: Bulut eşitlemesi nedir?
+        - url: ./cloud-sync/tutorial-single-forest.md
+          itemType: tutorial
+          text: Tek bir ormanı tek bir Azure AD kiracısı ile tümleştirme
+        - url: ./cloud-sync/how-to-install.md
+          itemType: how-to-guide
+          text: Azure AD Connect sağlama aracısını yükler
+      footerLink:
+        url: ./cloud-sync/index.yml
+        text: Daha fazla göster
+    - title: Koşullu Erişim
+      links:
+        - url: ./conditional-access/overview.md
+          itemType: overview
+          text: Koşullu Erişim nedir?
+        - url: ./authentication/tutorial-enable-azure-mfa.md
+          itemType: quickstart
+          text: Belirli uygulamalar için MFA gerektirme
+        - url: ./conditional-access/location-condition.md
+          itemType: concept
+          text: Konuma göre koşullar
+      footerLink:
+        url: ./conditional-access/index.yml
+        text: Daha fazla göster
+    - title: Cihaz yönetimi
+      links:
+        - url: ./devices/overview.md
+          itemType: overview
+          text: Cihaz yönetimi nedir?
+        - url: ./devices/hybrid-azuread-join-plan.md
+          itemType: how-to-guide
+          text: Karma Azure AD katılımını planlama
+        - url: ./devices/azureadjoin-plan.md
+          itemType: how-to-guide
+          text: Azure AD katılımını planlama
+      footerLink:
+        url: ./devices/index.yml
+        text: Daha fazla göster
+    - title: Etki alanı hizmetleri
+      links:
+        - url: ../active-directory-domain-services/overview.md
+          itemType: overview
+          text: Azure AD Etki Alanı Hizmetleri nedir?
+        - url: ../active-directory-domain-services/tutorial-create-instance.md
+          itemType: quickstart
+          text: Azure AD Etki Alanı Hizmetleri'ni etkinleştirme
+        - url: ../active-directory-domain-services/manage-group-policy.md
+          itemType: how-to-guide
+          text: Grup ilkesini yönetme
+      footerLink:
+        url: ../active-directory-domain-services/index.yml
+        text: Daha fazla göster
+    - title: Kurumsal kullanıcılar
+      links:
+        - url: ./enterprise-users/groups-create-rule.md
+          itemType: how-to-guide
+          text: Dinamik grup oluşturma
+        - url: ./enterprise-users/groups-settings-v2-cmdlets.md
+          itemType: how-to-guide
+          text: Azure AD grupları için PowerShell
+        - url: ./enterprise-users/directory-service-limits-restrictions.md
+          itemType: reference
+          text: Azure AD hizmet sınırlamaları ve kısıtlamaları
+      footerLink:
+        url: ./enterprise-users/index.yml
+        text: Daha fazla göster
+    - title: Dış Kimlikler
+      links:
+        - url: ./external-identities/compare-with-b2c.md
+          itemType: overview
+          text: Dış kullanıcılara yönelik çözümleri karşılaştırma
+        - url: ../active-directory-b2c/overview.md
+          itemType: overview
+          text: Uygulamalarınızı tüketicilere ölçeklendirme (B2C)
+        - url: ./external-identities/what-is-b2b.md
+          itemType: overview
+          text: Kuruluşunuz dışındaki kullanıcılarla işbirliği yapma (B2B)
+      footerLink:
+        url: ./external-identities/index.yml
+        text: Daha fazla göster
+    - title: Karma kimlik
+      links:
+        - url: ./hybrid/whatis-hybrid-identity.md
+          itemType: overview
+          text: Hibrit kimlik nedir?
+        - url: ./hybrid/how-to-connect-sso.md
+          itemType: how-to-guide
+          text: Azure AD Connect ile çoklu oturum açma
+        - url: ./hybrid/how-to-connect-install-custom.md
+          itemType: how-to-guide
+          text: Azure AD Connect özel yüklemesi
+      footerLink:
+        url: ./hybrid/index.yml
+        text: Daha fazla göster
+    - title: Kimlik idaresi
+      links:
+        - url: ./governance/entitlement-management-access-package-first.md
+          itemType: how-to-guide
+          text: Erişim paketi oluşturma
+        - url: ./governance/create-access-review.md
+          itemType: how-to-guide
+          text: Grup veya uygulamaların erişim gözden geçirmesini oluşturma
+        - url: ./conditional-access/terms-of-use.md
+          itemType: how-to-guide
+          text: Kullanıcıların kullanım koşullarını kabul etmesini zorunlu tut
+      footerLink:
+        url: ./governance/index.yml
+        text: Daha fazla göster
+    - title: Kimlik koruması
+      links:
+        - url: ./identity-protection/overview-identity-protection.md
+          itemType: overview
+          text: Kimlik koruması nedir?
+        - url: ./identity-protection/howto-identity-protection-configure-risk-policies.md
+          itemType: how-to-guide
+          text: Risk ilkelerini yapılandırma
+        - url: ./identity-protection/howto-identity-protection-remediate-unblock.md
+          itemType: how-to-guide
+          text: Kullanıcıların engelini kaldırma
+      footerLink:
+        url: ./identity-protection/index.yml
+        text: Daha fazla göster
+    - title: Azure kaynakları için yönetilen kimlikler
+      links:
+        - url: ./managed-identities-azure-resources/tutorial-windows-vm-access-sql.md
+          itemType: tutorial
+          text: Azure SQL'e erişmek için Windows VM kullanma
+        - url: ./managed-identities-azure-resources/how-to-use-vm-token.md
+          itemType: how-to-guide
+          text: Belirteç alımı için Azure VM'yi kullanma
+        - url: ./managed-identities-azure-resources/services-support-managed-identities.md
+          itemType: concept
+          text: Yönetilen kimliği destekleyen hizmetler
+      footerLink:
+        url: ./managed-identities-azure-resources/index.yml
+        text: Daha fazla göster
+    - title: Microsoft kimlik platformu
+      links:
+        - url: ./develop/v2-overview.md
+          itemType: overview
+          text: Microsoft kimlik platformu hakkında
+        - url: ./develop/v2-oauth2-auth-code-flow.md
+          itemType: concept
+          text: OAuth 2.0 kod akışı verme
+        - url: ./develop/quickstart-register-app.md
+          itemType: quickstart
+          text: Microsoft kimlik platformu ile uygulama kaydetme
+      footerLink:
+        url: ./develop/index.yml
+        text: Daha fazla göster
+    - title: Privileged identity management (PIM)
+      links:
+        - url: ./privileged-identity-management/pim-getting-started.md
+          itemType: how-to-guide
+          text: PIM kullanmaya başlama
+        - url: ./privileged-identity-management/pim-how-to-activate-role.md
+          itemType: how-to-guide
+          text: Dizin rollerimi etkinleştirme
+        - url: ./privileged-identity-management/pim-how-to-add-role-to-user.md
+          itemType: how-to-guide
+          text: Dizin rolleri atama
+      footerLink:
+        url: ./privileged-identity-management/index.yml
+        text: Daha fazla göster
+    - title: Raporlar ve izleme
+      links:
+        - url: ./reports-monitoring/concept-audit-logs.md
+          itemType: concept
+          text: Denetim günlükleri
+        - url: ./reports-monitoring/concept-sign-ins.md
+          itemType: concept
+          text: Oturum açma günlükleri
+        - url: ./reports-monitoring/reference-sign-ins-error-codes.md
+          itemType: reference
+          text: Oturum açma hata kodları başvurusu
+      footerLink:
+        url: ./reports-monitoring/index.yml
+        text: Daha fazla göster
+    - title: Roller
+      links:
+        - url: ./roles/groups-assign-role.md
+          itemType: concept
+          text: Azure AD rollerini anlama
+        - url: ./roles/concept-understand-roles.md
+          itemType: how-to-guide
+          text: Özel rol oluşturma
+        - url: ./roles/groups-view-assignments.md
+          itemType: reference
+          text: Gruba atanmış rolleri görüntüleme
+      footerLink:
+        url: ./roles/index.yml
+        text: Daha fazla göster
+    - title: Üçüncü taraf uygulamalar
+      links:
+        - url: ./saas-apps/amazon-web-service-tutorial.md
+          itemType: tutorial
+          text: Amazon Web Services ile Azure AD çoklu oturum açma tümleştirmesi
+        - url: ./saas-apps/workday-inbound-tutorial.md
+          itemType: tutorial
+          text: Workday’i otomatik kullanıcı hazırlaması için yapılandırma
+        - url: ./develop/v2-howto-app-gallery-listing.md
+          itemType: get-started
+          text: Uygulamanızın Galeri’ye eklenmesini isteme
+      footerLink:
+        url: ./saas-apps/tutorial-list.md
+        text: Diğer uygulamalara bakın
 additionalContent:
   sections:
-  - items:
-    - title: Microsoft 365
-      summary: Azure AD'yi de içeren eksiksiz bir çözüm olan Microsoft 365'i keşfedin.
-      url: /microsoft-365/
-    - title: Azure AD PowerShell
-      summary: Azure AD PowerShell modülünü yüklemeyi ve kullanmayı öğrenin.
-      url: /powershell/module/azuread/
-    - title: Azure AD için Azure CLI komutları
-      summary: CLI başvurusunda Azure AD komutlarını bulun.
-      url: /cli/azure/ad
+    - items:
+        - title: Microsoft 365
+          summary: Azure AD'yi de içeren eksiksiz bir çözüm olan Microsoft 365'i keşfedin.
+          url: /microsoft-365/
+        - title: Azure AD PowerShell
+          summary: Azure AD PowerShell modülünü yüklemeyi ve kullanmayı öğrenin.
+          url: /powershell/module/azuread/
+        - title: Azure AD için Azure CLI komutları
+          summary: CLI başvurusunda Azure AD komutlarını bulun.
+          url: /cli/azure/ad

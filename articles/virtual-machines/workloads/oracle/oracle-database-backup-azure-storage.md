@@ -10,10 +10,10 @@ ms.date: 01/28/2021
 ms.author: cholse
 ms.reviewer: dbakevlar
 ms.openlocfilehash: a6ce5446bd6470ef7a829925646d486801b28ebc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101670023"
 ---
 # <a name="back-up-and-recover-an-oracle-database-19c-database-on-an-azure-linux-vm-using-azure-storage"></a>Azure Storage kullanarak bir Azure Linux sanal makinesinde Oracle Database 19c veritabanını yedekleme ve kurtarma

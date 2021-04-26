@@ -8,12 +8,12 @@ ms.subservice: enterprise
 ms.topic: conceptual
 ms.date: 09/03/2020
 ms.author: banders
-ms.openlocfilehash: 0f2d3c830f27eec9f521e6f79ac8dce3bce818e9
-ms.sourcegitcommit: bf1340bb706cf31bb002128e272b8322f37d53dd
-ms.translationtype: HT
+ms.openlocfilehash: ce9dff017a796e420586ad191a59c149bed07190
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
+ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/03/2020
-ms.locfileid: "89442573"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107726835"
 ---
 # <a name="azure-marketplace"></a>Azure Market
 
@@ -74,45 +74,7 @@ Aşağıdaki hizmetler, MOSP ile aylık ücret yerine Kurumsal Anlaşma kapsamı
 
 Kurumsal Anlaşmanız varsa Azure RemoteApp için Kurumsal Anlaşma fiyat düzeyinize göre ödeme yaparsınız. Ek ücret alınmaz. Standart fiyata ilk 40 saat dahildir. Sınırsız fiyata ilk 80 saat dahildir. RemoteApp, 80 saati aşan kullanımları iletmez.
 
-## <a name="azure-marketplace-faq"></a>Azure Market Hakkında SSS
-
-Bu bölümde, Azure Ön Ödemesinin Azure Market’teki bazı üçüncü taraf satıcı hizmetlerine nasıl uygulanabileceği anlatılmaktadır.
-
-### <a name="what-changed-with-azure-marketplace-services-and-azure-ea-prepayment"></a>Azure Market hizmetleri ve Azure EA Ön Ödemesi ile neler değişti?
-
-1 Mart 2018 itibarıyla bazı üçüncü taraf hizmetler Azure EA Ön Ödemesi kullanmaya başladı. Azure ayrılmış sanal makine örnekleri (RI) dışındaki hizmetler Azure EA Ön Ödemesinden ayrı bir şekilde faturalandırılıyordu.
-
-Azure Ön Ödeme kullanım kapsamını Azure Market’te yayımlanmış olan ve sıklıkla satın alınan bazı üçüncü taraf hizmetleri kapsayacak şekilde genişlettik. Azure Market’teki bu hizmetler için Azure EA Ön Ödemesi, satın alma ve ödeme yönetiminin kolaylaştırılmasına yardımcı olur.
-
-### <a name="why-did-we-make-this-change"></a>Bu değişikliği neden yaptık?
-
-Müşteriler, peşin Azure Ön Ödemesi kullanabilecekleri farklı yollar arıyordu. Bu, müşteriler tarafından sıklıkla istenen bir değişiklikti ve Azure Market müşterilerinin büyük bir bölümünü etkiledi.
-
-### <a name="how-do-you-benefit"></a>Nasıl faydalanabilirsiniz?
-
-Daha basit bir faturalandırma deneyimine sahip olabilir ve Azure EA Ön Ödemesini daha iyi harcayabilirsiniz. Bu hizmetler Azure Ön Ödemenize dahil olduğundan Azure EA Ön Ödemeniz daha değerli hale gelir.
-
-### <a name="what-azure-marketplace-services-use-azure-ea-prepayment-and-how-do-i-know"></a>Azure EA Ön Ödemesini kullanan Azure Market hizmetlerini nasıl tespit edebilirim?
-
-Azure Ön Ödemesini kullanan bir hizmet satın aldığınızda Azure Market'te bir sorumluluk reddi görüntülenir. Red Hat, SUSE, Autodesk ve Oracle tarafından yayımlanmış bazı hizmetler desteklenmektedir. Şu anda başkaları tarafından yayımlanan benzer ada sahip hizmetler Azure Ön Ödemesini kullanmamaktadır. Hizmetlerin tam listesini bu SSS sayfasının sonunda bulabilirsiniz.
-
-### <a name="what-if-my-azure-ea-prepayment-runs-out"></a>Azure EA Ön Ödemem biterse ne olur?
-
-Azure Ön Ödemenizi bitirip fazla kullanıma geçerseniz bu hizmetlerle ilgili ücretler, diğer tüketilen hizmetlerle birlikte bir sonraki fazla kullanım faturanıza yansıtılacaktır. 1 Mart 2018 tarihinden önce bu ücretler diğer Azure Market hizmetleriyle birlikte faturalandırılıyordu.
-
-### <a name="why-dont-all-azure-marketplaces-consume-azure-ea-prepayment"></a>Neden tüm Azure Market hizmetleri Azure Ön Ödemesini kullanmıyor?
-
-Azure Ön Ödemesi ile ilgili en iyi müşteri deneyimi sunmak için düzenli güncelleştirmeler yapıyoruz. Bu değişiklik, çok sayıda müşteriyi ve Azure Market harcamalarının önemli bir miktarını etkileyecek. İleride farklı hizmetler de eklenebilir.
-
-### <a name="how-does-this-impact-indirect-enrollment-and-partners"></a>Bu durum dolaylı kayıtları ve iş ortaklarını nasıl etkiliyor?
-
-Dolaylı kayıt müşterileri veya iş ortakları bu durumdan etkilenmeyecektir. Bu hizmetler, diğer tüketim hizmetleriyle aynı iş ortağı kar payı özelliklerine sahiptir. Buradaki tek değişiklik, ücretlerin farklı bir faturada görünmesi ve ücretlerin ödemesinin müşterinin Azure EA Ön Ödemesi ile yapılmasıdır.
-
-### <a name="is-there-a-list-of-azure-marketplace-services-that-consume-azure-ea-prepayment"></a>Azure EA Ön Ödemesini kullanan Azure Market hizmetlerinin olduğu bir liste var mı?
-
-Belirli Azure Market teklifleri, Azure Ön Ödeme fonlarını kullanabilir. Bu programa katılan ürünlerin tam listesi için [Azure Ön Ödemesini kullanan üçüncü taraf hizmetler](https://azure.microsoft.com/updates/azure-marketplace-third-party-reseller-services-now-use-azure-monetary-commitment) sayfasına bakın.
-
-
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Fiyatlandırma](ea-pricing-overview.md) hakkında daha fazla bilgi edinin.
+- Azure Marketi Hizmetleri ve Azure EA ön ödemesi hakkında soruların ve yanıtların listesini görmek için [maliyet yönetimi + FATURALANDıRMA SSS](../cost-management-billing-faq.yml) makalesini okuyun.

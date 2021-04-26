@@ -2,17 +2,17 @@
 title: Azure IoT Central uygulama sürümü hakkında bilgi alın | Microsoft Docs
 description: Kullanmakta olduğunuz IoT Central uygulaması hakkında bilgi edinme
 services: iot-central
-author: TheJasonAndrew
-ms.author: v-anjaso
+author: philmea
+ms.author: philmea
 ms.date: 02/26/2021
 ms.topic: how-to
 ms.service: iot-central
-ms.openlocfilehash: 80a35ab41b05609642667da9e8561921ecc20852
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 1fed73e460c2fde83fbcb239d31837e113477fe8
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102051726"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107865594"
 ---
 # <a name="about-your-application"></a>Uygulamanız hakkında
 

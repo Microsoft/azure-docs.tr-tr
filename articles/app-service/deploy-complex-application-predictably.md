@@ -6,10 +6,10 @@ ms.topic: article
 ms.date: 01/06/2016
 ms.custom: seodec18
 ms.openlocfilehash: aec23c28e075dd38fa65f1315f9abd9e21cdc9cb
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104951479"
 ---
 # <a name="provision-and-deploy-microservices-predictably-in-azure"></a>Azure 'da mikro hizmetleri öngörülebilir bir şekilde sağlayın ve dağıtın
@@ -145,10 +145,10 @@ Bağlantı dizeleri de iç içe geçmiş bir kaynak olarak tanımlanır.
 
 ![Bağlantı dizelerinin JSON kodunda iç içe geçmiş kaynak olarak nasıl tanımlandığını gösterir.](./media/app-service-deploy-complex-application-predictably/examinejson-7-webappconnstr.png)
 
-`properties`İçin öğesinde `config/connectionstrings` , her bağlantı dizesi, belirli biçimiyle bir ad: değer çifti olarak da tanımlanır `"<name>" : {"value": "…", "type": "…"}` . Öğesi için `type` olası değerler,, ve ' dir `MySql` `SQLServer` `SQLAzure` `Custom` .
+`properties`İçin öğesinde `config/connectionstrings` , her bağlantı dizesi, belirli biçimiyle bir ad: değer çifti olarak da tanımlanır `"<name>&quot; : {&quot;value&quot;: &quot;…&quot;, &quot;type&quot;: &quot;…&quot;}` . Öğesi için `type` olası değerler,, ve ' dir `MySql` `SQLServer` `SQLAzure` `Custom` .
 
 > [!TIP]
-> Bağlantı dizesi türlerinin kesin bir listesi için şu komutu Azure PowerShell: \[ enum]:: GetNames ("Microsoft. WindowsAzure. Commands. Utilities. Web siteleri. Services. WebEntities. DatabaseType") içinde çalıştırın
+> Bağlantı dizesi türlerinin kesin bir listesi için şu komutu Azure PowerShell: \[ enum]:: GetNames (&quot;Microsoft. WindowsAzure. Commands. Utilities. Web siteleri. Services. WebEntities. DatabaseType") içinde çalıştırın
 > 
 > 
 

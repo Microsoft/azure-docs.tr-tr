@@ -5,15 +5,19 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/12/2021
-ms.openlocfilehash: 5fe853ee0f7a113bfb8b0511744d9087f67927c4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: bb42f74f6ac8487a93479bdf980c66ef87e8e742
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104610160"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107726871"
 ---
 # <a name="create-alerts-with-sql-insights-preview"></a>SQL Insights ile uyarı oluşturma (Önizleme)
 SQL Insights, genel SQL sorunları için [Azure izleyici 'de uyarı kuralları](../alert/../alerts/alerts-overview.md) oluşturmak için kullanabileceğiniz bir dizi uyarı kuralı şablonu içerir. SQL Insights 'daki uyarı kuralları, Azure Izleyici günlüklerindeki *ınsightsölçümlerini* tablosunda depolanan performans verilerine dayalı günlük uyarı kurallarıdır.  
+
+> [!NOTE]
+> Resource Manager şablonu kullanarak SQL Insights için uyarı oluşturmak için, bkz. [SQL Insights için Kaynak Yöneticisi şablonu örnekleri](resource-manager-sql-insights.md#create-an-alert-rule-for-sql-insights).
+
 
 > [!NOTE]
 > Daha fazla SQL Insights uyarı kuralı şablonu için istekleriniz varsa, lütfen bu sayfanın en altındaki bağlantıyı veya Azure portal SQL Insights geri bildirim bağlantısını kullanarak geri bildirim gönderin.

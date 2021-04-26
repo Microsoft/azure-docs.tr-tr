@@ -3,14 +3,14 @@ title: Azure Event Grid-teslim edilen olaylarda özel üst bilgileri ayarla
 description: Teslim edilen olaylar üzerinde nasıl özel üstbilgiler (veya teslim özellikleri) ayarlayabileceğinizi açıklar.
 ms.topic: conceptual
 ms.date: 03/24/2021
-ms.openlocfilehash: e2eff6b0d1dc78f0d558bb8e4e1ad79c62c52657
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: fb6f0de7919ed7cf9072c0fa35e8f9be5cb5e7db
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105630605"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106278295"
 ---
-# <a name="delivery-with-custom-headers"></a>Özel üstbilgileriyle teslim
+# <a name="custom-delivery-properties"></a>Özel teslim özellikleri
 Olay abonelikleri, teslim edilen olaylara dahil edilen HTTP üstbilgilerini ayarlamanıza olanak sağlar. Bu özellik, bir hedef için gereken özel üstbilgileri ayarlamanıza olanak sağlar. Bir olay aboneliği oluştururken en fazla 10 üst bilgi ayarlayabilirsiniz. Her üst bilgi değeri 4.096 (4K) bayttan büyük olmamalıdır.
 
 Aşağıdaki hedeflere teslim edilen olaylar üzerinde özel üstbilgiler belirleyebilirsiniz:
@@ -20,7 +20,7 @@ Aşağıdaki hedeflere teslim edilen olaylar üzerinde özel üstbilgiler belirl
 - Azure Event Hubs
 - Geçiş Karma Bağlantılar
 
-Azure portal bir olay aboneliği oluştururken, özel http üst bilgilerini ayarlamak için **teslim özellikleri** sekmesini kullanabilirsiniz. Bu sayfa, sabit ve dinamik üstbilgi değerlerini ayarlamanıza olanak sağlar.
+Azure portal bir olay aboneliği oluştururken, özel HTTP üst bilgilerini ayarlamak için **teslim özellikleri** sekmesini kullanabilirsiniz. Bu sayfa, sabit ve dinamik üstbilgi değerlerini ayarlamanıza olanak sağlar.
 
 ## <a name="setting-static-header-values"></a>Statik üst bilgi değerlerini ayarlama
 Üst bilgileri sabit bir değere ayarlamak için üstbilginin adını ve değerini karşılık gelen alanlara girin:

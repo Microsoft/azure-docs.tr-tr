@@ -12,12 +12,12 @@ ms.topic: how-to
 ms.workload: identity
 ms.date: 02/27/2017
 ROBOTS: NOINDEX
-ms.openlocfilehash: ad5595f7eebc8feca2f00a6f95e10c547ded9529
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: da47893839322f06cebfbee40902414040bb87d8
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "85383743"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106075211"
 ---
 # <a name="error-handling-best-practices-for-azure-active-directory-authentication-library-adal-clients"></a>Azure Active Directory kimlik doğrulaması kitaplığı (ADAL) istemcileri için en iyi yöntemler işlenirken hata oluştu
 
@@ -197,7 +197,7 @@ Bir uygulama, hata durumunda son kullanıcının yeniden denenme isteyen bir etk
 
 Yerel uygulamalarda hata işleme, iki durum tarafından tanımlanabilir:
 
-|  |  |
+| Case (Olay) | Description  |
 |------|-------------|
 | **Durum 1**:<br>Yeniden denenmeyen hata (çoğu zaman) | 1. anında yeniden denemeyi denemeyin. Yeniden denemeyi çağıran belirli bir hataya göre Son Kullanıcı Kullanıcı arabirimini sunun (örneğin, "yeniden oturum açmayı deneyin" veya "Azure AD Broker uygulamasını Indirme"). |
 | **Durum 2**:<br>Yeniden denenebilir hata | 1. Son Kullanıcı başarı ile sonuçlanan bir durum girmiş olabileceğinden tek bir yeniden deneme gerçekleştirin.<br><br>2. yeniden deneme başarısız olursa, Son Kullanıcı Kullanıcı arabirimini yeniden denemeyi çağıran özel hataya göre sunun ("yeniden oturum açmayı deneyin", "Azure AD Broker uygulamasını Indir" vb.). |
@@ -371,7 +371,7 @@ AcquireToken ile adal.js kullanarak tek sayfalı bir uygulama oluşturuyorsanız
 
 Başarısız bir AcquireToken aşağıdaki durumları içerir:
 
-|  |  |
+| Case (Olay) | Description  |
 |------|-------------|
 | **Durum 1**:<br>Etkileşimli bir istek ile çözülebilir | 1. oturum açma () başarısız olursa, anında yeniden deneme gerçekleştirmeyin. Yalnızca Kullanıcı eylemi bir yeniden denemeye girdikten sonra yeniden deneyin.|
 | **Durum 2**:<br>Etkileşimli bir istek ile çözümlenemez. Hata yeniden denenebilir. | 1. Son Kullanıcı büyük bir başarı ile sonuçlanan bir durum girdiğinden tek bir yeniden deneme gerçekleştirin.<br><br>2. yeniden deneme başarısız olursa, son kullanıcıyı yeniden denemeyi çağırabilen belirli bir hataya göre bir eylem ile sunun ("yeniden oturum açmayı deneyin"). |

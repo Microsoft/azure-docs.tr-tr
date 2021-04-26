@@ -1,18 +1,15 @@
 ---
 title: Azure Site Recovery ile olağanüstü durum kurtarma sırasında yeniden çalışma | Microsoft Docs
 description: Bu makalede, Azure Site Recovery hizmeti ile olağanüstü durum kurtarma sırasında şirket içi duruma geri dönirken dikkate alınacak farklı çalışma ve uyarılarla ilgili bir genel bakış sunulmaktadır.
-author: rayne-wiselman
-manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 08/07/2019
-ms.author: raynew
-ms.openlocfilehash: c0eaf28f9aeb4050fd35a6036a53e3e91d00f3eb
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 6f386b34222825b60748b4ca27dcc5c0c2487316
+ms.sourcegitcommit: d63f15674f74d908f4017176f8eddf0283f3fac8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "84691093"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106580842"
 ---
 # <a name="failback-of-vmware-vms-after-disaster-recovery-to-azure"></a>Azure’a olağanüstü durum kurtarma yapıldıktan sonra VMware VM’lerin yeniden çalıştırılması
 

@@ -1,16 +1,21 @@
 ---
 title: Java ile Azure Service Bus konuları ve abonelikleri kullanma
 description: Bu hızlı başlangıçta, Azure Service Bus bir konuya ileti göndermek ve ardından aboneliklerden ilgili konuya ileti almak için Java kodu yazın.
-ms.devlang: Java
-ms.topic: quickstart
 ms.date: 06/23/2020
-ms.custom: seo-java-july2019, seo-java-august2019, seo-java-september2019, devx-track-java
-ms.openlocfilehash: c44f3329626c42bdbb9e206c9dbf258c97b1aa57
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.topic: quickstart
+ms.devlang: Java
+ms.custom:
+- seo-java-july2019
+- seo-java-august2019
+- seo-java-september2019
+- devx-track-java
+- mode-api
+ms.openlocfilehash: c20a9372ddc951b7d4184a7abeda9537006c4865
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97655654"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107533376"
 ---
 # <a name="quickstart-use-service-bus-topics-and-subscriptions-with-java"></a>Hızlı başlangıç: Java ile Service Bus konuları ve abonelikleri kullanma
 Bu hızlı başlangıçta, Azure Service Bus bir konuya ileti göndermek ve ardından aboneliklerden ilgili konuya ileti almak için Java kodu yazın. 

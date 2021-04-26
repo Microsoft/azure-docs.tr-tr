@@ -6,15 +6,15 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: conceptual
-ms.date: 07/14/2020
+ms.date: 04/01/2021
 ms.author: tamram
 ms.subservice: common
-ms.openlocfilehash: 753469ca2792be23bbe0ef21083d7ff01b362613
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: e78d6f844bc77e2feb0bdcdd55c89754e9e41ca0
+ms.sourcegitcommit: 3f684a803cd0ccd6f0fb1b87744644a45ace750d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "86528735"
+ms.lasthandoff: 04/02/2021
+ms.locfileid: "106218626"
 ---
 # <a name="scalability-and-performance-targets-for-blob-storage"></a>BLOB depolama için ölçeklenebilirlik ve performans hedefleri
 

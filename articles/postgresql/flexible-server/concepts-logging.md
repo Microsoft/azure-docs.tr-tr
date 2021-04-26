@@ -7,10 +7,10 @@ ms.service: postgresql
 ms.topic: how-to
 ms.date: 09/22/2020
 ms.openlocfilehash: e09c01fcfb9c4725ac169151e85c8b030d8bb18c
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105606394"
 ---
 # <a name="logs-in-azure-database-for-postgresql---flexible-server"></a>PostgreSQL için Azure veritabanı 'ndaki Günlükler-esnek sunucu

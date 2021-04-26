@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.topic: how-to
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: df8722e8160538daa1535711092790dbb2405097
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 638b8f24f8cf72f5c6a594a3c5a6eaacf469df8f
+ms.sourcegitcommit: 73fb48074c4c91c3511d5bcdffd6e40854fb46e5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "84807027"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106056683"
 ---
 # <a name="use-certificates-with-letsencryptorg-on-application-gateway-for-aks-clusters"></a>AKS kümeleri için Application Gateway on LetsEncrypt.org ile Sertifikalar kullanma
 
@@ -47,11 +47,23 @@ Mevcut AKS kümenize [CERT-Manager](https://docs.cert-manager.io) yüklemek içi
     helm repo update
 
     # Install the cert-manager Helm chart
+    # Helm v3+
+    helm install \
+      cert-manager jetstack/cert-manager \
+      --namespace cert-manager \
+      --version v1.0.4 \
+      # --set installCRDs=true
+
+    # Helm v2
     helm install \
       --name cert-manager \
       --namespace cert-manager \
-      --version v0.8.0 \
-      jetstack/cert-manager
+      --version v1.0.4 \
+      jetstack/cert-manager \
+      # --set installCRDs=true
+      
+    #To automatically install and manage the CRDs as part of your Helm release, 
+    #   you must add the --set installCRDs=true flag to your Helm installation command.
     ```
 
 2. Clusterıssuer kaynağı

@@ -4,10 +4,10 @@ description: Azure Service Fabric kümeleriniz için kapsayıcıları ve perform
 ms.topic: conceptual
 ms.date: 04/16/2018
 ms.openlocfilehash: 9bb89dc2eebe584a0a9f81a6707c0a2e4fa2fc30
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105626682"
 ---
 # <a name="performance-monitoring-with-azure-monitor-logs"></a>Azure Izleyici günlükleri ile performans Izleme

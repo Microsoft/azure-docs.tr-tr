@@ -6,13 +6,11 @@
       href: concepts-baremetal-infrastructure-overview.md
     - name: Terimleri öğrenme
       href: know-baremetal-terms.md
-    - name: Azure 'da BareMetal örnek birimlerini bağlama
+    - name: Azure 'da BareMetal örnekleri bağlama
       displayName: 'Azure CLI, az baremetalinstance, az baremetalinstance restart'
       href: connect-baremetal-infrastructure.md
 - name: İş yükleri
   items:
-    - name: BareMetal iş yükü türleri
-      href: /azure/virtual-machines/workloads/sap/get-started?context=/azure/baremetal-infrastructure/workloads/sap/context/context
     - name: Azure’da SAP HANA (Büyük Örnekler)
       items:
         - name: Sertifika
@@ -87,3 +85,5 @@
               href: /azure/virtual-machines/workloads/sap/hana-large-instance-virtual-machine-migration?context=/azure/baremetal-infrastructure/workloads/sap/context/context
             - name: SAP HANA Büyük Örnekleri rezervasyonu satın alma
               href: /azure/cost-management-billing/reservations/prepay-hana-large-instances-reserved-capacity
+    - name: Oracle
+      href: ./workloads/oracle/toc.yml

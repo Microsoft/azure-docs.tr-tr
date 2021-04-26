@@ -3,12 +3,12 @@ title: 'Hızlı başlangıç: güvenlik modülü ikizi oluşturma'
 description: Bu hızlı başlangıçta IoT için Azure Defender ile kullanmak üzere IoT modülü ikizi için bir Defender oluşturma hakkında bilgi edinin.
 ms.topic: quickstart
 ms.date: 1/21/2021
-ms.openlocfilehash: 2ee88bd23b7d125ef9244f8ff630ee5eb8cdd015
-ms.sourcegitcommit: f611b3f57027a21f7b229edf8a5b4f4c75f76331
+ms.openlocfilehash: 27447f00546ab0d01a33b286f4bb1fbc810c260b
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104782682"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106384570"
 ---
 # <a name="quickstart-create-an-azureiotsecurity-module-twin"></a>Hızlı başlangıç: azureiotsecurity modülü oluşturma ikizi
 
@@ -16,7 +16,7 @@ Bu hızlı başlangıçta, yeni cihazlar için tek tek _azureiotsecurity_ Module
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Yok
+- Yok
 
 ## <a name="understanding-azureiotsecurity-module-twins"></a>Azureiotsecurity Module TWINS 'i anlama
 

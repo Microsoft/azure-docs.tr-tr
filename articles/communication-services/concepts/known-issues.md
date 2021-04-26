@@ -8,15 +8,15 @@ ms.author: mikben
 ms.date: 03/10/2021
 ms.topic: troubleshooting
 ms.service: azure-communication-services
-ms.openlocfilehash: 7be40ac5f6cda7a81d68ca0b17f377891dd58480
-ms.sourcegitcommit: 73d80a95e28618f5dfd719647ff37a8ab157a668
+ms.openlocfilehash: b9ed71a8fc9346ecd454eba98dcbb3b13186eba2
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105606054"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106276051"
 ---
-# <a name="known-issues-azure-communication-services-sdks"></a>Bilinen sorunlar: Azure Iletişim Hizmetleri SDK 'Ları
-Bu makalede, Azure Iletişim Hizmetleri SDK 'Ları ile ilgili sınırlamalar ve bilinen sorunlar hakkında bilgi sağlanır.
+# <a name="known-issues-azure-communication-services-calling-sdks"></a>Bilinen sorunlar: SDK 'Ları çağıran Azure Iletişim Hizmetleri
+Bu makale, SDK 'Ları çağıran Azure Iletişim hizmetleriyle ilgili sınırlamalar ve bilinen sorunlar hakkında bilgi sağlar.
 
 > [!IMPORTANT]
 > Çağırma deneyiminizin kalitesini etkileyebilecek birden çok etken vardır. Iletişim Hizmetleri ağ yapılandırması ve test en iyi uygulamaları hakkında daha fazla bilgi edinmek için **[ağ gereksinimleri](https://docs.microsoft.com/azure/communication-services/concepts/voice-video-calling/network-requirements)** belgelerine bakın.
@@ -47,7 +47,10 @@ Uygulamalar Safari iOS/iPad üzerinde mik/hoparlör cihazlarını (Bluetooth gib
 MacOS 'ta Safari kullanıyorsanız, uygulamanız Iletişim Hizmetleri Device Manager aracılığıyla hoparlörleri numaralandıramaz/seçemeyecektir. Bu senaryoda, cihazların işletim sistemi aracılığıyla seçilmesi gerekir. MacOS üzerinde Chrome kullanıyorsanız, uygulama Iletişim Hizmetleri Device Manager aracılığıyla cihazları numaralandırabilir/seçebilir.
 
 ### <a name="audio-connectivity-is-lost-when-receiving-sms-messages-or-calls-during-an-ongoing-voip-call"></a>Devam eden bir VoIP çağrısı sırasında SMS iletileri veya çağrıları alınırken ses bağlantısı kayboldu
-Mobil tarayıcılar, arka plan durumundayken bağlantı tutmayın. Bu, VoIP çağrısı, uygulamanızı arka plana gönderen bir olay tarafından kesintiye uğrarsa, düzeyi düşürülmüş bir çağrı deneyimine yol açabilir.
+Bu sorun, birden çok nedenden dolayı oluşabilir:
+
+- Bazı mobil tarayıcılar, arka plan durumundayken bağlantı tutmayın. Bu, VoIP çağrısı, uygulamanızı arka plana gönderen bir olay tarafından kesintiye uğrarsa, düzeyi düşürülmüş bir çağrı deneyimine yol açabilir. 
+- Bazen, SMS veya PSTN çağrısı ses sesini yakalar ve VoIP çağrısına ses serbest bırakmaz. Apple bu sorunu iOS 14.4.1 + sürümlerinde düzeltti. 
 
 <br/>İstemci kitaplığı: çağırma (JavaScript)
 <br/>Tarayıcılar: Safari, Chrome
@@ -95,9 +98,16 @@ Kullanıcılar, arama durumundayken videoyu hızlı bir şekilde açmaya/kapatma
  - Kullanıcı sesle başlıyorsa ve ardından, arama durumundayken videoyu başlatabilir ve durdurabilirsiniz `Connecting` .
  - Kullanıcı sesle başlıyorsa ve ardından, arama durumundayken videoyu başlatabilir ve durdurabilirsiniz `Lobby` .
 
-
 #### <a name="possible-causes"></a>Olası nedenler
 İnceleme altında.
+
+### <a name="enumeratingaccessing-devices-for-safari-on-macos-and-ios"></a>MacOS ve iOS 'ta Safari için cihazları numaralandırma/bunlara erişme 
+Cihazlara erişim izni verildiyse, bir süre sonra cihaz izinleri sıfırlanır. MacOS ve iOS üzerinde Safari, alınmış bir akış olmadıkça çok uzun süre boyunca izin vermez. Bu sorunu geçici olarak çözmek için en basit yol, Cihaz Yöneticisi 'nin cihaz numaralandırma API 'Lerini (DeviceManager. Getkameralar (), DeviceManager. Gethoparlörler () ve DeviceManager. Getmikrofonlar ()) çağırmadan önce DeviceManager. askDevicePermission () API 'sini çağırmadır. İzinler varsa, Kullanıcı hiçbir şey görmez, aksi takdirde, yeniden istenir.
+
+<br/>Etkilenen cihazlar: iPhone
+<br/>İstemci kitaplığı: çağırma (JavaScript)
+<br/>Tarayıcılar: Safari
+<br/>İşletim sistemi: iOS
 
 ###  <a name="sometimes-it-takes-a-long-time-to-render-remote-participant-videos"></a>Bazen uzak katılımcı videolarını işlemek uzun zaman alır
 Devam eden bir grup çağrısı sırasında, _A kullanıcısı bir_ video gönderir ve ardından _B kullanıcısı_ çağrıyı birleştirir. Bazen, B kullanıcısı A kullanıcısının videosunu göremez veya Kullanıcı A 'nın videosu uzun bir gecikmeden sonra işlemeye başlar. Bu sorun, daha fazla yapılandırma gerektiren bir ağ ortamından kaynaklanıyor olabilir. Ağ Yapılandırma Kılavuzu için [ağ gereksinimleri](https://docs.microsoft.com/azure/communication-services/concepts/voice-video-calling/network-requirements) belgelerine bakın.

@@ -4,10 +4,10 @@ description: Azure Service Fabric kümelerini izleme ve tanılamaya yönelik App
 ms.topic: conceptual
 ms.date: 11/21/2018
 ms.openlocfilehash: 0e84c3c1ab542dc4541ebdcfbc49f45e02458d9c
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105626223"
 ---
 # <a name="event-analysis-and-visualization-with-application-insights"></a>Application Insights ile olay Analizi ve görselleştirme

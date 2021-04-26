@@ -7,14 +7,14 @@ ms.reviewer: sngun
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.topic: how-to
-ms.date: 03/22/2021
+ms.date: 04/09/2021
 ms.custom: devx-track-csharp
-ms.openlocfilehash: 0711d764514e45d3c28e26cf99b45dc711ef201c
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.openlocfilehash: cf92d9e1a1f92c2dc3294b71e3e620166fd90680
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
-ms.locfileid: "104868265"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107818715"
 ---
 # <a name="monitor-and-debug-with-metrics-in-azure-cosmos-db"></a>Azure Cosmos DB ölçümlerle izleme ve hata ayıklama
 [!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
@@ -31,7 +31,7 @@ Bu makale yaygın kullanım örneklerinde yol gösterir ve Azure Cosmos DB ölç
 
    :::image type="content" source="./media/use-metrics/performance-metrics.png" alt-text="Azure portal Cosmos DB performans ölçümleri":::
 
-**Ölçümler** bölmesinde aşağıdaki ölçümler mevcuttur: 
+**Ölçümler** bölmesinde aşağıdaki ölçümler mevcuttur:
 
 * **İşleme ölçümleri** -Bu ölçüm, kapsayıcı için sağlanan aktarım hızı veya depolama kapasitesi aşıldığı için tüketilen veya başarısız olan isteklerin (429 yanıt kodu) sayısını gösterir.
 

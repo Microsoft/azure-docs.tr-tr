@@ -5,12 +5,12 @@ ms.date: 10/21/2020
 ms.topic: conceptual
 description: Azure Dev Spaces, Kubernetes 'e köprülemek için geçiş işlemini açıklar
 keywords: Azure Dev Spaces, dev Spaces, Docker, Kubernetes, Azure, AKS, Azure Kubernetes hizmeti, kapsayıcılar, Kubernetes ile Köprü oluşturma
-ms.openlocfilehash: d48814df30c17f9b51d8642efa0960a26bbd24f4
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8ffb7693ff223a9cb952964ded1e6967ceeb326e
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94888530"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107499300"
 ---
 # <a name="migrating-to-bridge-to-kubernetes"></a>Kubernetes Köprüsü’ne geçiş
 
@@ -83,7 +83,7 @@ Kubernetes Köprüsü, dağıtım yöntemlerinden bağımsız olarak Kubernetes 
 ### <a name="transition-to-bridge-to-kubernetes-from-azure-dev-spaces"></a>Azure Dev Spaces 'ten Kubernetes 'e geçiş geçişi
 
 1. Visual Studio kullanıyorsanız, Visual Studio IDE 'nizi 16,7 veya üzeri bir sürüme güncelleştirin ve köprüyü [Visual Studio Market][vs-marketplace]Kubernetes uzantısına yükleyebilirsiniz. Visual Studio Code kullanıyorsanız, [Kubernetes uzantısına köprü][vsc-marketplace]yükleyebilirsiniz.
-1. Azure portal veya [Azure dev Spaces CLI][azds-delete]kullanarak Azure dev Spaces denetleyiciyi devre dışı bırakın.
+1. Azure portal veya [Azure Dev Spaces CLı] [AZD-Delete] kullanarak Azure Dev Spaces denetleyiciyi devre dışı bırakın.
 1. [Azure Cloud Shell](https://shell.azure.com)kullanın. Ya da Bash yüklü olan Mac, Linux veya Windows üzerinde, bir bash kabuğu istemi açın. Aşağıdaki araçların komut satırı ortamınızda kullanılabildiğinden emin olun: Azure CLı, Docker, kubectl, kıvrık, tar ve gunzip.
 1. Bir kapsayıcı kayıt defteri oluşturun veya var olan bir kayıt defteri kullanın. Azure 'da [Azure Container Registry](https://azure.microsoft.com/services/container-registry/) kullanarak veya [Docker Hub](https://hub.docker.com/)kullanarak bir kapsayıcı kayıt defteri oluşturabilirsiniz. Azure Cloud Shell kullanırken Docker görüntülerini barındırmak için yalnızca Azure Container Registry kullanılabilir.
 1. Azure Dev Spaces varlıkları Kubernetes varlıklarına köprü haline dönüştürmek için geçiş betiğini çalıştırın. Betik, Kubernetes ile Köprüle uyumlu yeni bir görüntü oluşturur, onu belirlenen kayıt defterine yükler ve ardından kümeyi görüntüyle güncelleştirmek için [Held](https://helm.sh) kullanır. Kaynak grubu, AKS kümesinin adı ve bir kapsayıcı kayıt defteri sağlamanız gerekir. Burada gösterildiği gibi diğer komut satırı seçenekleri vardır:
@@ -145,7 +145,6 @@ Kubernetes köprüsünün nasıl çalıştığı hakkında daha fazla bilgi edin
 > [Bridge to Kubernetes’in işleyiş biçimi][how-it-works-bridge-to-kubernetes]
 
 
-[azds-delete]: how-to/install-dev-spaces.md#remove-azure-dev-spaces-using-the-cli
 [kubernetes-extension]: https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools
 [btk-sample-app]: /visualstudio/containers/bridge-to-kubernetes#install-the-sample-application
 [how-it-works-bridge-to-kubernetes]: /visualstudio/containers/overview-bridge-to-kubernetes

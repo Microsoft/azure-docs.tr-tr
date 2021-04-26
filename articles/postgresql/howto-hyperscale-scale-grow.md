@@ -6,13 +6,13 @@ ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
 ms.topic: how-to
-ms.date: 11/17/2020
-ms.openlocfilehash: 59e6e73c99569b0a35c56d65c1a7ccdfcb394c0f
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.date: 04/07/2021
+ms.openlocfilehash: 905224119b9df4e4003b1736443406e9548a49e3
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95026430"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107012538"
 ---
 # <a name="scale-a-hyperscale-citus-server-group"></a>Hiper ölçek (Citus) sunucu grubunu ölçeklendirme
 
@@ -21,6 +21,11 @@ PostgreSQL için Azure veritabanı-Hyperscale (Citus), daha fazla yük ile başa
 ## <a name="add-worker-nodes"></a>Çalışan düğümleri Ekle
 
 Düğüm eklemek için, Hyperscale (Citus) sunucu grubundaki **işlem + depolama** sekmesine gidin.  **Çalışan düğümü sayısı** için kaydırıcıyı sürüklemek değeri değiştirir.
+
+> [!NOTE]
+>
+> [Temel katmanla (Önizleme)](concepts-hyperscale-tiers.md) oluşturulan bir hiper ölçek (Citus) sunucu grubunun çalışanı yok. Çalışan sayısını artırmak sunucu grubunu Standart katmana otomatik olarak ayırır.
+> Bir sunucu grubunu Standart katmana mezun olduktan sonra, temel katmana geri indirgeyemezsiniz.
 
 :::image type="content" source="./media/howto-hyperscale-scaling/01-sliders-workers.png" alt-text="Kaynak sürgüleri":::
 

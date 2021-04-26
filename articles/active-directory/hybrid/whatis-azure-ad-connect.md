@@ -11,12 +11,12 @@ ms.date: 01/08/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d8e1af1848405441088796d2e3b42e7b52eedba8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: afc3d1d84d7b50cdaa7031230d7085e9f611c6c6
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98065125"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107304979"
 ---
 # <a name="what-is-azure-ad-connect"></a>Azure AD Connect nedir?
 
@@ -49,7 +49,7 @@ Bilgiler, [Azure AD Connect Health Portalı](https://aka.ms/aadconnecthealth)'nd
 * Senaryolarınız için en yeni işlevleri sağlar. Azure AD Connect DirSync ve Azure AD Eşitleme gibi kimlik tümleştirme araçlarının eski sürümlerini değiştirir. Daha fazla bilgi için bkz. [karma kimlik dizini tümleştirme araçları karşılaştırması](plan-hybrid-identity-design-considerations-tools-comparison.md).
 
 ## <a name="why-use-azure-ad-connect-health"></a>Azure AD Connect Health neden kullanılır?
-Azure AD 'de, hem bulutta hem de şirket içi kaynaklara erişmek için ortak bir kimlik olduğundan kullanıcılarınız daha üretken olacaktır. Ortamın güvenilir olmasını sağlamak, kullanıcıların bu kaynaklara erişebilmesi için bir zorluk haline gelir.  Azure AD Connect Health, bu ortamın güvenilirliğini sağlamak için şirket içi kimlik altyapınızı izlemenize ve bu bilgileri elde etmenize yardımcı olur. Her bir şirket içi kimlik sunucunuza bir aracı yüklemek kadar basittir.
+Azure AD ile kimlik doğrulaması yaparken, hem bulutta hem de şirket içi kaynaklara erişmek için ortak bir kimlik olduğundan kullanıcılarınız daha üretken olacaktır. Ortamın güvenilir olmasını sağlamak, kullanıcıların bu kaynaklara erişebilmesi için bir zorluk haline gelir.  Azure AD Connect Health, bu ortamın güvenilirliğini sağlamak için şirket içi kimlik altyapınızı izlemenize ve bu bilgileri elde etmenize yardımcı olur. Her bir şirket içi kimlik sunucunuza bir aracı yüklemek kadar basittir.
 
 AD FS'ye ilişkin Azure AD Connect Health Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 ve Windows Server 2016 üzerinde AD FS 2.0'ı destekler. Ayrıca, extranet erişimi için kimlik doğrulaması desteği sağlayan AD FS ve web uygulaması ara sunucularının izlenmesini de destekler. AD FS için Azure AD Connect Health, çabucak ve kolayca kurulan Sistem Durumu Aracısı ile bir dizi başlıca özellik sunar.
 

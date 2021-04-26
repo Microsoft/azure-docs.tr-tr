@@ -3,12 +3,13 @@ title: Karma makineleri Azure 'a ölçeklendirmeye bağlama
 description: Bu makalede, hizmet sorumlusu kullanarak Azure Arc etkin sunucularını kullanarak makineleri Azure 'a bağlamayı öğreneceksiniz.
 ms.date: 03/04/2021
 ms.topic: conceptual
-ms.openlocfilehash: c1ad3d4619896ff46db266789a17bfca80712e70
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 4aad01fd6991c059b2cf891fd4f06ae83a78a0e4
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102175949"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831619"
 ---
 # <a name="connect-hybrid-machines-to-azure-at-scale"></a>Karma makineleri Azure 'a ölçeklendirmeye bağlama
 

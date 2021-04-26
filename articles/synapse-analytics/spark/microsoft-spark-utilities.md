@@ -10,12 +10,12 @@ ms.date: 09/10/2020
 ms.author: ruxu
 ms.reviewer: ''
 zone_pivot_groups: programming-languages-spark-all-minus-sql
-ms.openlocfilehash: 58672bd68d9a2ea85f58b3761f3b89098b9f5afc
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 8b3bc99d4391e2079d1b0ecc39011f1b2afc4440
+ms.sourcegitcommit: 99fc6ced979d780f773d73ec01bf651d18e89b93
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100368668"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106096045"
 ---
 # <a name="introduction-to-microsoft-spark-utilities"></a>Microsoft Spark yardımcı programlarına giriş
 
@@ -25,9 +25,9 @@ Microsoft Spark Utilities (Msparlak utils), ortak görevleri kolayca gerçekleş
 
 ### <a name="configure-access-to-azure-data-lake-storage-gen2"></a>Azure Data Lake Storage 2. erişimi yapılandırma 
 
-SYNAPSE Not defterleri, ADLS 2. hesaplarına erişmek için Azure Active Directory (Azure AD) geçişini kullanır. ADLS 2. hesabına (veya klasöre) erişmek için bir **BLOB depolama veri katılımcısı** olmanız gerekir. 
+SYNAPSE Not defterleri, ADLS 2. hesaplarına erişmek için Azure Active Directory (Azure AD) geçişini kullanır. ADLS 2. hesabına (veya klasöre) erişmek için bir **Depolama Blobu veri katılımcısı** olmanız gerekir. 
 
-SYNAPSE işlem hatları, depolama hesaplarına erişmek için çalışma alanı kimliğini (MSI) kullanır. İşlem hattı etkinliklerinizde Msmini yardımcı programları kullanmak için, ADLS 2. hesabına (veya klasöre) erişmek için çalışma alanı kimliğinizin **BLOB depolama veri katılımcısı** olması gerekir.
+SYNAPSE işlem hatları, depolama hesaplarına erişmek için çalışma alanı kimliğini (MSI) kullanır. İşlem hattı etkinliklerinizde Msmini yardımcı programları kullanmak için, ADLS 2. hesabına (veya klasöre) erişmek için çalışma alanı kimliğinizin **Depolama Blobu veri katılımcısı** olması gerekir.
 
 Azure AD ve çalışma alanı MSI ADLS 2. hesabına erişimi olduğundan emin olmak için şu adımları izleyin:
 1. [Azure Portal](https://portal.azure.com/) ve erişmek istediğiniz depolama hesabını açın. Erişmek istediğiniz belirli bir kapsayıcıya gidebilirsiniz.

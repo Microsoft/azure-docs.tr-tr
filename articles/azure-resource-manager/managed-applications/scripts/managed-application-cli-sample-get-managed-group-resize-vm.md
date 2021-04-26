@@ -7,12 +7,12 @@ ms.topic: sample
 ms.date: 10/25/2017
 ms.author: tomfitz
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 711b516d1ba1154e574b0d8bbd8d86a02d7df018
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 179b1b64656d3f97778e183d57797e4b3660fece
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "87497826"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107775448"
 ---
 # <a name="get-resources-in-a-managed-resource-group-and-resize-vms-with-azure-cli"></a>Azure CLI ile bir yönetilen kaynak grubundaki kaynakları alma ve VM’leri yeniden boyutlandırma
 
@@ -34,9 +34,9 @@ Bu betik, yönetilen uygulamayı dağıtmak için aşağıdaki komutları kullan
 
 | Komut | Notlar |
 |---|---|
-| [az managedapp list](/cli/azure/managedapp#az-managedapp-list) | Yönetilen uygulamaları listeler. Sonuçlara odaklanmak için sorgu değerleri sağlar. |
-| [az resource list](/cli/azure/resource#az-resource-list) | Kaynakları listeler. Sonuca odaklanmak için bir kaynak grubu ve sorgu değerleri sağlar. |
-| [az vm resize](/cli/azure/vm#az-vm-resize) | Sanal makinenin boyutunu güncelleştirir. |
+| [az managedapp list](/cli/azure/managedapp#az_managedapp_list) | Yönetilen uygulamaları listeler. Sonuçlara odaklanmak için sorgu değerleri sağlar. |
+| [az resource list](/cli/azure/resource#az_resource_list) | Kaynakları listeler. Sonuca odaklanmak için bir kaynak grubu ve sorgu değerleri sağlar. |
+| [az vm resize](/cli/azure/vm#az_vm_resize) | Sanal makinenin boyutunu güncelleştirir. |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar

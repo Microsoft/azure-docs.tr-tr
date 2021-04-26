@@ -4,10 +4,10 @@ description: Azure Batch içindeki bir Linux veya Windows havuzundaki işlem dü
 ms.topic: how-to
 ms.date: 05/24/2018
 ms.openlocfilehash: e5682e7ba853973592c3a650a06ce72615cec7b6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98735503"
 ---
 # <a name="use-an-azure-file-share-with-a-batch-pool"></a>Bir Batch havuzu ile Azure dosya paylaşma kullanma

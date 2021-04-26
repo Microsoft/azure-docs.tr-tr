@@ -10,13 +10,13 @@ metadata:
   ms.collection: collection
   author: bandersmsft
   ms.author: banders
-  ms.date: 03/01/2021
-  ms.openlocfilehash: b25d522d5db9f513628e43724cb1abde9f55e99c
-  ms.sourcegitcommit: f3ec73fb5f8de72fe483995bd4bbad9b74a9cc9f
+  ms.date: 04/15/2021
+  ms.openlocfilehash: c7c9a72e3954598e0cb3265e0533ccbd14b68e4b
+  ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/04/2021
-  ms.locfileid: "102040830"
+  ms.lasthandoff: 04/16/2021
+  ms.locfileid: "107532657"
 landingContent:
 - title: Rezervasyon satın alın
   linkLists:
@@ -24,6 +24,12 @@ landingContent:
     links:
     - text: Azure ayırmaları nedir?
       url: save-compute-costs-reservations.md
+    - text: Rezervasyon satın alma önerileri
+      url: reserved-instance-purchase-recommendations.md
+    - text: Örnek boyutu esnekliği
+      url: ../../virtual-machines/reserved-vm-instance-size-flexibility.md?toc=/azure/cost-management-billing/reservations/toc.json
+    - text: Windows ve SQL yazılım ücreti ayrı ücretlendirilir
+      url: reserved-instance-windows-software-costs.md
   - linkListType: how-to-guide
     links:
     - text: Ayırma satın alma
@@ -36,16 +42,24 @@ landingContent:
     links:
     - text: Rezervasyon indiriminin uygulanması
       url: reservation-discount-application.md
-- title: Rezervasyonları yönetme
+- title: Satın alma sonrasında rezervasyonları yönetme
   linkLists:
   - linkListType: how-to-guide
     links:
-    - text: Rezervasyonları yönetme
-      url: manage-reserved-vm-instance.md
-    - text: Rezervasyonları görüntüleme ve izinleri yönetme
+    - text: Rezervasyonları görüntüleme ve yönetme izinleri
       url: view-reservations.md
+    - text: Ayırma kapsamını değiştirme, bölme, birleştirme
+      url: manage-reserved-vm-instance.md
     - text: Değişim ve para iadesi rezervasyonları
       url: exchange-and-refund-azure-reservations.md
+- title: Satın aldıktan sonra maliyetleri raporla
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Rezervasyon maliyetlerini geri ödeme
+      url: charge-back-usage.md
+    - text: Rezervasyon satın alma ve iade işlemlerini görüntüleme
+      url: view-purchase-refunds.md
   - linkListType: reference
     links:
     - text: Rezervasyon API'leri

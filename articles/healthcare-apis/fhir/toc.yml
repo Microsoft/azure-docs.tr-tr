@@ -144,7 +144,7 @@
 - name: Başvuru
   items:
     - name: Azure CLI
-      href: /cli/azure/ext/healthcareapis/healthcareapis
+      href: /cli/azure/healthcareapis
     - name: Azure İlkesi yerleşik ilkeler
       displayName: 'samples, policies, definitions'
       href: ./policy-reference.md

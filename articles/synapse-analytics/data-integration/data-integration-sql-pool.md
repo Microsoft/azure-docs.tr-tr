@@ -5,16 +5,16 @@ services: synapse-analytics
 author: djpmsft
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: sql
+ms.subservice: pipeline
 ms.date: 11/03/2020
 ms.author: daperlov
 ms.reviewer: jrasnick
-ms.openlocfilehash: a02abff712fc26f653307108fcc3bb284444d0c7
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 79f0b1a6942f141f0a2d2d38adc5875d82e86d50
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101676649"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107567630"
 ---
 # <a name="ingest-data-into-a-dedicated-sql-pool"></a>Adanmış bir SQL havuzuna veri alma
 

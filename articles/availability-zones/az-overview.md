@@ -4,16 +4,16 @@ description: Azure 'da teknik ve yasal gereksinimlerinizi karşılayacak bölgel
 author: prsandhu
 ms.service: azure
 ms.topic: conceptual
-ms.date: 02/23/2021
+ms.date: 04/09/2021
 ms.author: prsandhu
 ms.reviewer: cynthn
 ms.custom: fasttrack-edit, mvc
-ms.openlocfilehash: dad8661de55fc90c9f3d3782c402deb519d16536
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: a15a94694f3c0623830650a8b5bbb00dc4c4cb6b
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104596017"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107285522"
 ---
 # <a name="regions-and-availability-zones-in-azure"></a>Azure 'da bölgeler ve Kullanılabilirlik Alanları
 
@@ -87,8 +87,8 @@ Belirli bir bölgede bir hizmet teklifi yoksa, Microsoft satış temsilcinizle i
 Daha önce belirtildiği gibi, Azure hizmetleri üç kategoride sınıflandırır: temel, genel ve özel. Hizmet kategorileri genel kullanıma sunulduğuna göre atanır. Genellikle, hizmetler yaşam döngüsünü özelleştirilmiş bir hizmet olarak başlatır ve talep ve kullanım artışları, temel veya temel olarak yükseltilebilir. Aşağıdaki tabloda temel olarak hizmetler kategorisi listelenmektedir. Tabloyla ilgili olarak aşağıdakileri göz önünde belirtmelisiniz:
 
 - Bazı hizmetler bölgesel değildir. Bölgesel olmayan hizmetlerin bilgileri ve bir listesi için bkz. [bölgelere göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/).
-- Daha eski nesil hizmetler veya sanal makineler listelenmez. Daha fazla bilgi için bkz. [önceki nesil sanal makine boyutlarında](../virtual-machines/sizes-previous-gen.md) belgeler
-- . Hizmetlere genel kullanıma (GA) kadar bir kategori atanmaz. Bilgi ve önizleme hizmetlerinin bir listesi için bkz. [bölgelere göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/). 
+- Daha eski nesil hizmetler veya sanal makineler listelenmez. Daha fazla bilgi için bkz. [önceki nesil sanal makine boyutlarında](../virtual-machines/sizes-previous-gen.md)belgeler.
+- Hizmetlere genel kullanıma (GA) kadar bir kategori atanmaz. Bilgi ve önizleme hizmetlerinin bir listesi için bkz. [bölgelere göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/). 
 
 > [!div class="mx-tableFixed"]
 > | Temel                           | Temel                                        | 
@@ -99,46 +99,36 @@ Daha önce belirtildiği gibi, Azure hizmetleri üç kategoride sınıflandırı
 > | Azure Cosmos DB                        | Otomasyon                                        | 
 > | Azure Data Lake Storage Gen2           | Azure Active Directory Domain Services            | 
 > | Azure ExpressRoute                     | Azure Bastion                                     | 
-> | Azure Genel IP                        | Redis için Azure Önbelleği                             | 
-> | Azure SQL Veritabanı                     | Azure Bilişsel Arama                            | 
-> | Azure SQL Yönetilen Örnek             | Azure Bilişsel Hizmetler                          | 
-> | Disk Depolama                           | Azure Bilişsel Hizmetler: Görüntü İşleme         | 
-> | Event Hubs                             | Azure bilişsel hizmetler: Content Moderator       | 
-> | Key Vault                              | Azure bilişsel hizmetler: yüz                    | 
-> | Yük dengeleyici                          | Azure bilişsel hizmetler: modern okuyucu        | 
-> | Service Bus                            | Azure bilişsel hizmetler: Language Understanding  | 
-> | Service Fabric                         | Azure bilişsel hizmetler: konuşma Hizmetleri         | 
-> | Depolama: sık/seyrek erişimli BLOB depolama katmanları   | Azure Bilişsel Hizmetler: Metin Analizi          | 
-> | Depolama: yönetilen diskler                 | Azure bilişsel hizmetler: çevirmen              | 
-> | Sanal Makine Ölçek Kümeleri             | Azure Veri Gezgini                               | 
-> | Sanal Makineler                       | Azure Veri Paylaşımı                                  | 
-> | Sanal makineler: Azure adanmış ana bilgisayar | MySQL için Azure Veritabanı                          | 
-> | Sanal makineler: Av2-Series           | PostgreSQL için Azure Veritabanı                     | 
-> | Sanal makineler: Bs-Series            | Azure DDoS Koruması                             | 
-> | Sanal makineler: DSv2-Series          | Azure Güvenlik Duvarı                                    | 
-> | Sanal makineler: DSv3-Series          | Azure Güvenlik Duvarı Yöneticisi                            | 
-> | Sanal makineler: Dv2-Series           | Azure İşlevleri                                   | 
-> | Sanal makineler: Dv3-Series           | Azure IoT Hub                                     |     
-> | Sanal makineler: ESv3-Series          | Azure Kubernetes Service (AKS)                    | 
-> | Sanal makineler: Ev3-Series           | Azure Machine Learning                            | 
-> | Sanal Ağ                        | Azure Izleyici: Application Insights               | 
-> | VPN Gateway                            | Azure Izleyici: Log Analytics                      | 
-> |                                        | Azure Özel Bağlantı                                | 
-> |                                        | Azure Red Hat OpenShift                           | 
-> |                                        | Azure Site Recovery                               | 
-> |                                        | Azure Stream Analytics                            | 
-> |                                        | Azure Synapse Analytics                           | 
-> |                                        | Batch                                             | 
-> |                                        | Cloud Services: a serisi                          | 
-> |                                        | Container Instances                               | 
-> |                                        | Container Registry                                | 
+> | Azure Genel IP                        | Redis için Azure Cache                             | 
+> | Azure SQL Veritabanı                     | Azure Bilişsel Hizmetler                          | 
+> | Azure SQL Yönetilen Örnek             | Azure Bilişsel Hizmetler: Görüntü İşleme         | 
+> | Disk Depolama                           | Azure bilişsel hizmetler: Content Moderator       | 
+> | Event Hubs                             | Azure bilişsel hizmetler: yüz                    | 
+> | Key Vault                              | Azure Bilişsel Hizmetler: Metin Analizi          | 
+> | Yük dengeleyici                          | Azure Veri Gezgini                               | 
+> | Service Bus                            | MySQL için Azure Veritabanı                          | 
+> | Service Fabric                         | PostgreSQL için Azure Veritabanı                     | 
+> | Depolama: sık/seyrek erişimli BLOB depolama katmanları   | Azure DDoS Koruması                             | 
+> | Depolama: yönetilen diskler                 | Azure Güvenlik Duvarı                                    | 
+> | Sanal Makine Ölçek Kümeleri             | Azure Güvenlik Duvarı Yöneticisi                            | 
+> | Sanal Makineler                       | Azure İşlevleri                                   | 
+> | Sanal makineler: Azure adanmış ana bilgisayar | Azure IoT Hub                                     | 
+> | Sanal makineler: Av2-Series           | Azure Kubernetes Service (AKS)                    | 
+> | Sanal makineler: Bs-Series            | Azure Izleyici: Application Insights               | 
+> | Sanal makineler: DSv2-Series          | Azure Izleyici: Log Analytics                      | 
+> | Sanal makineler: DSv3-Series          | Azure Özel Bağlantı                                | 
+> | Sanal makineler: Dv2-Series           | Azure Site Recovery                               | 
+> | Sanal makineler: Dv3-Series           | Azure Synapse Analytics                           |     
+> | Sanal makineler: ESv3-Series          | Batch                                             | 
+> | Sanal makineler: Ev3-Series           | Cloud Services: a serisi                          | 
+> | Sanal Ağ                        | Container Instances                               | 
+> | VPN Gateway                            | Container Registry                                | 
 > |                                        | Data Factory                                      | 
 > |                                        | Event Grid                                        | 
 > |                                        | HDInsight                                         |  
 > |                                        | Logic Apps                                        | 
 > |                                        | Media Services                                    | 
 > |                                        | Ağ İzleyicisi                                   | 
-> |                                        | Notification Hubs                                 | 
 > |                                        | Premium blob depolaması                              | 
 > |                                        | Premium dosya depolaması                             | 
 > |                                        | Sanal makineler: Ddsv4-Series                    | 
@@ -163,11 +153,17 @@ Daha önce belirtildiği gibi, Azure hizmetleri üç kategoride sınıflandırı
 > |------------------------------------------------------|
 > | FHIR için Azure API'si                                   |
 > | Azure Analysis Services                              |
+> | Azure Blok Zinciri Hizmeti                             |
 > | Azure bilişsel hizmetler: anomali algılayıcısı           |
 > | Azure bilişsel hizmetler: Özel Görüntü İşleme              |
 > | Azure bilişsel hizmetler: form tanıyıcı            |
+> | Azure bilişsel hizmetler: modern okuyucu           |
+> | Azure bilişsel hizmetler: Language Understanding     |
 > | Azure bilişsel hizmetler: kişiselleştirici               |
 > | Azure bilişsel hizmetler: Soru-Cevap Oluşturma                  |
+> | Azure bilişsel hizmetler: konuşma Hizmetleri            |
+> | Azure Veri Paylaşımı                                     |
+> | Azure Databricks                                     |
 > | MariaDB için Azure Veritabanı                           |
 > | Azure Veritabanı Geçiş Hizmeti                     |
 > | Azure Ayrılmış HSM                                  |
@@ -176,13 +172,13 @@ Daha önce belirtildiği gibi, Azure hizmetleri üç kategoride sınıflandırı
 > | Azure HPC Önbelleği                                      |
 > | Azure Lab Services                                   |
 > | Azure NetApp Files                                   |
+> | Azure Red Hat OpenShift                              |
 > | Azure SignalR Hizmeti                                |
-> | Azure yay bulut hizmeti                           |
-> | Azure Zaman Serisi Görüşleri                           |
+> | Azure Spring Cloud                                   |
+> | Azure Stream Analytics                               |
+> | Azure Time Series Insights                           |
 > | Azure VMware Çözümü                                |
 > | CloudSimple tarafından sunulan Azure VMware Çözümü                 |
-> | Data Lake Analytics                                  |
-> | Azure Machine Learning Studio (klasik)              |
 > | Spatial Anchors                                      |
 > | Depolama alanı: Arşiv Depolama                             |
 > | Ultra Disk Depolama                                   |

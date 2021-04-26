@@ -1,19 +1,19 @@
 ---
-title: AzCopy | kullanarak Google bulut depolamadan verileri Azure depolama 'ya kopyalama | Microsoft Docs
+title: AzCopy ile Google bulut depolamadan Azure depolama 'ya kopyalama | Microsoft Docs
 description: Azure depolama 'ya Google Cloud Storage 'dan veri kopyalamak için AzCopy kullanın. AzCopy, bir depolama hesabına iki yönlü blob veya dosya kopyalama işlemi gerçekleştirmenizi sağlayan bir komut satırı yardımcı programıdır.
 services: storage
 author: normesta
 ms.service: storage
 ms.topic: how-to
-ms.date: 03/09/2021
+ms.date: 04/02/2021
 ms.author: normesta
 ms.subservice: common
-ms.openlocfilehash: c0f030683954ede013f769bf8584e6cf82bab69f
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 3b2ad11abb7d1a3e64deef1ca49d9f84f03e5879
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103555770"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107498348"
 ---
 # <a name="copy-data-from-google-cloud-storage-to-azure-storage-by-using-azcopy-preview"></a>AzCopy (Önizleme) kullanarak Google bulut depolamadaki verileri Azure depolama 'ya kopyalama
 
@@ -63,22 +63,30 @@ AzCopy, [URL API 'Den put bloğunu](/rest/api/storageservices/put-block-from-url
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://storage.cloud.google.com/<bucket-name>/<object-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<blob-name>'` |
-| **Örnek** | `azcopy copy 'https://storage.cloud.google.com/mybucket/myobject' 'https://mystorageaccount.blob.core.windows.net/mycontainer/myblob'` |
-| **Örnek** (hiyerarşik ad alanı) | `azcopy copy 'https://storage.cloud.google.com/mybucket/myobject' 'https://mystorageaccount.blob.core.windows.net/mycontainer/myblob'` |
+**Syntax**
+
+`azcopy copy 'https://storage.cloud.google.com/<bucket-name>/<object-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<blob-name>'`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://storage.cloud.google.com/mybucket/myobject' 'https://mystorageaccount.blob.core.windows.net/mycontainer/myblob'
+```
 
 
 ### <a name="copy-a-directory"></a>Bir dizini kopyalama
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://storage.cloud.google.com/<bucket-name>/<directory-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<directory-name>' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://storage.cloud.google.com/mybucket/mydirectory' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://storage.cloud.google.com/mybucket/mydirectory' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://storage.cloud.google.com/<bucket-name>/<directory-name>' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<directory-name>' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://storage.cloud.google.com/mybucket/mydirectory' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true
+```
 
 > [!NOTE]
 > Bu örnek, `--recursive` dosyaları tüm alt dizinlerde kopyalamak için bayrağını ekler.
@@ -87,21 +95,29 @@ AzCopy, [URL API 'Den put bloğunu](/rest/api/storageservices/put-block-from-url
 
 Joker karakter sembolünü (*) kullanarak, bir dizinin içeriğini içeren dizini kopyalayarak kopyalayabilirsiniz.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://storage.cloud.google.com/<bucket-name>/<directory-name>/*' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<directory-name>' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://storage.cloud.google.com/mybucket/mydirectory/*' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://storage.cloud.google.com/mybucket/mydirectory/*' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://storage.cloud.google.com/<bucket-name>/<directory-name>/*' 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<directory-name>' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://storage.cloud.google.com/mybucket/mydirectory/*' 'https://mystorageaccount.blob.core.windows.net/mycontainer/mydirectory' --recursive=true
+```
 
 ### <a name="copy-a-cloud-storage-bucket"></a>Bulut depolama demetini kopyalama
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://storage.cloud.google.com/<bucket-name>' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://storage.cloud.google.com/mybucket' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://storage.cloud.google.com/mybucket' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://storage.cloud.google.com/<bucket-name>' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://storage.cloud.google.com/mybucket' 'https://mystorageaccount.blob.core.windows.net' --recursive=true
+```
 
 ### <a name="copy-all-buckets-in-a-google-cloud-project"></a>Google Cloud projesindeki tüm demetleri Kopyala 
 
@@ -109,11 +125,15 @@ Joker karakter sembolünü (*) kullanarak, bir dizinin içeriğini içeren dizin
 
 `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://storage.cloud.google.com/' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://storage.cloud.google.com/' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://storage.cloud.google.com' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://storage.cloud.google.com/' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://storage.cloud.google.com/' 'https://mystorageaccount.blob.core.windows.net' --recursive=true
+```
 
 ### <a name="copy-a-subset-of-buckets-in-a-google-cloud-project"></a>Google Cloud projesindeki demetlerin bir alt kümesini kopyalama 
 
@@ -121,11 +141,15 @@ Joker karakter sembolünü (*) kullanarak, bir dizinin içeriğini içeren dizin
 
 Demet adında bir joker karakter simgesi (*) kullanarak demetlerin bir alt kümesini kopyalayın. `blob.core.windows.net`Hiyerarşik bir ad alanı olan hesaplar için aynı URL söz dizimini () kullanın.
 
-|    |     |
-|--------|-----------|
-| **Syntax** | `azcopy copy 'https://storage.cloud.google.com/<bucket*name>' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true` |
-| **Örnek** | `azcopy copy 'https://storage.cloud.google.com/my*bucket' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
-| **Örnek** (hiyerarşik ad alanı)| `azcopy copy 'https://storage.cloud.google.com/my*bucket' 'https://mystorageaccount.blob.core.windows.net' --recursive=true` |
+**Syntax**
+
+`azcopy copy 'https://storage.cloud.google.com/<bucket*name>' 'https://<storage-account-name>.blob.core.windows.net' --recursive=true`
+
+**Örnek**
+
+```azcopy
+azcopy copy 'https://storage.cloud.google.com/my*bucket' 'https://mystorageaccount.blob.core.windows.net' --recursive=true
+```
 
 ## <a name="handle-differences-in-bucket-naming-rules"></a>Demet adlandırma kurallarında farkları işleme
 
@@ -145,7 +169,7 @@ Google Cloud Storage ve Azure, nesne anahtarlarının adlarındaki farklı karak
 
 AzCopy komutunun bir parçası olarak `copy` , `s2s-handle-invalid-metadata` dosyanın meta verilerinin uyumsuz anahtar adlarını içerdiği dosyaları nasıl işlemek istediğinizi belirten isteğe bağlı bayrak için bir değer sağlayabilirsiniz. Aşağıdaki tabloda her bayrak değeri açıklanmaktadır.
 
-| Bayrak değeri | Description  |
+| Bayrak değeri | Açıklama  |
 |--------|-----------|
 | **Excludeifgeçersiz** | (Varsayılan seçenek) Meta veriler aktarılan nesneye dahil değildir. AzCopy bir uyarı kaydeder. |
 | **Failifgeçersiz** | Nesneler kopyalanmaz. AzCopy bir hatayı günlüğe kaydeder ve aktarım özetinde görüntülenen başarısız olan sayıma bu hatayı ekler.  |
@@ -169,10 +193,18 @@ AzCopy şu adımları gerçekleştirir:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalelerden herhangi birinde daha fazla örnek bulabilirsiniz:
+Bu makalelerde daha fazla örnek bulun:
 
-- [AzCopy’yi kullanmaya başlama](storage-use-azcopy-v10.md)
+- [Örnekler: Karşıya Yükle](storage-use-azcopy-blobs-upload.md)
+- [Örnekler: Karşıdan Yükle](storage-use-azcopy-blobs-download.md)
+- [Örnekler: Hesaplar arasında kopyala](storage-use-azcopy-blobs-copy.md)
+- [Örnekler: Eşitle](storage-use-azcopy-blobs-synchronize.md)
+- [Örnekler: Amazon S3 demetleri](storage-use-azcopy-s3.md)
+- [Örnekler: Azure dosyaları](storage-use-azcopy-files.md)
+- [Öğretici: AzCopy kullanarak şirket içi verileri bulut depolamasına taşıma](storage-use-azcopy-migrate-on-premises-data.md)
 
-- [Veri aktarma](storage-use-azcopy-v10.md#transfer-data)
+Ayarları yapılandırmak, performansı iyileştirmek ve sorunları gidermek için şu makalelere bakın:
 
-- [AzCopy 'i yapılandırma, iyileştirme ve sorun giderme](storage-use-azcopy-configure.md)
+- [AzCopy yapılandırma ayarları](storage-ref-azcopy-configuration-settings.md)
+- [AzCopy performansını iyileştirin](storage-use-azcopy-optimize.md)
+- [Günlük dosyalarını kullanarak Azure Storage 'da AzCopy Ile v10 arasındaki sorunlarını giderme](storage-use-azcopy-configure.md)

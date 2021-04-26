@@ -2,18 +2,18 @@
 title: Azure yönetilen disklerinin sunucu tarafı şifrelemesi
 description: Azure depolama, verilerinizi depolama kümelerine kalıcı yapmadan önce Rest durumunda şifreleyerek korur. Kendi anahtarlarınız ile şifrelemeyi yönetmek için müşteri tarafından yönetilen anahtarları kullanabilir veya yönetilen disklerinizin şifrelenmesi için Microsoft tarafından yönetilen anahtarlara güvenebilirsiniz.
 author: roygara
-ms.date: 03/11/2021
+ms.date: 04/15/2021
 ms.topic: conceptual
 ms.author: rogarana
 ms.service: virtual-machines
 ms.subservice: disks
 ms.custom: references_regions
-ms.openlocfilehash: 786ecef5d62c7dd18e3992fa0b233b27a80d762b
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: 4607778c78b8b062b265a5754337c09c41ba83f1
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "104721860"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107531527"
 ---
 # <a name="server-side-encryption-of-azure-disk-storage"></a>Azure Disk Depolama sunucu tarafı şifrelemesi
 
@@ -60,7 +60,7 @@ Otomatik anahtar döndürme önizlemededir ve yalnızca aşağıdaki bölgelerde
 - Batı ABD
 - Batı ABD 2
 - Kuzey Avrupa
-- Batı Avrupa
+- West Europe
 - Orta Fransa
 
 > [!IMPORTANT]
@@ -81,6 +81,8 @@ Uçtan uca şifrelemeyi etkinleştirdiğinizde, geçici diskler ve kısa ömürl
 #### <a name="supported-vm-sizes"></a>Desteklenen VM boyutları
 
 [!INCLUDE [virtual-machines-disks-encryption-at-host-suported-sizes](../../includes/virtual-machines-disks-encryption-at-host-suported-sizes.md)]
+
+Ayrıca, VM boyutlarını programlı bir şekilde bulabilirsiniz. Program aracılığıyla nasıl alınacağını öğrenmek için [Azure PowerShell modülünün](windows/disks-enable-host-based-encryption-powershell.md#finding-supported-vm-sizes) veya [Azure CLı](linux/disks-enable-host-based-encryption-cli.md#finding-supported-vm-sizes) makalelerinin desteklenen VM boyutlarını bulma bölümüne bakın.
 
 Konakta şifrelemeyi kullanarak uçtan uca şifrelemeyi etkinleştirmek için, [Azure PowerShell modülü](windows/disks-enable-host-based-encryption-powershell.md), [Azure CLI](linux/disks-enable-host-based-encryption-cli.md)veya [Azure Portal](disks-enable-host-based-encryption-portal.md)nasıl etkinleştireceğinizi kapsayan makalelerimize göz atın.
 

@@ -14,12 +14,12 @@ ms.date: 08/20/2020
 ms.author: mathoma
 ms.reviewer: jroth
 ms.custom: seo-lt-2019, devx-track-azurecli
-ms.openlocfilehash: 865ee3a5aeb8a2dd06d8759ba04d02259d2b4bee
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: ffd4ec6eff94589abbc8af70ecf9c0f7dc168962
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97359974"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107766942"
 ---
 # <a name="use-powershell-or-az-cli-to-configure-an-availability-group-for-sql-server-on-azure-vm"></a>Azure VM 'de SQL Server için bir kullanılabilirlik grubu yapılandırmak için PowerShell veya az CLı kullanın 
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
@@ -85,7 +85,7 @@ New-AzStorageAccount -ResourceGroupName <resource group name> -Name <name> `
 
 ## <a name="define-cluster-metadata"></a>Küme meta verilerini tanımlama
 
-Azure CLı [az SQL VM Group](/cli/azure/sql/vm/group) komut grubu, kullanılabilirlik grubunu barındıran Windows Server yük devretme KÜMESI (wsfc) hizmetinin meta verilerini yönetir. Küme meta verileri Active Directory etki alanını, küme hesaplarını, bulut tanığı olarak kullanılacak depolama hesaplarını ve SQL Server sürümünü içerir. İlk SQL Server VM eklendiğinde kümenin tanımlandığı şekilde oluşturulması için WSFC meta verilerini tanımlamak için [az SQL VM Group Create](/cli/azure/sql/vm/group#az-sql-vm-group-create) kullanın. 
+Azure CLı [az SQL VM Group](/cli/azure/sql/vm/group) komut grubu, kullanılabilirlik grubunu barındıran Windows Server yük devretme KÜMESI (wsfc) hizmetinin meta verilerini yönetir. Küme meta verileri Active Directory etki alanını, küme hesaplarını, bulut tanığı olarak kullanılacak depolama hesaplarını ve SQL Server sürümünü içerir. İlk SQL Server VM eklendiğinde kümenin tanımlandığı şekilde oluşturulması için WSFC meta verilerini tanımlamak için [az SQL VM Group Create](/cli/azure/sql/vm/group#az_sql_vm_group_create) kullanın. 
 
 Aşağıdaki kod parçacığı, küme için meta verileri tanımlar:
 
@@ -130,7 +130,7 @@ $group = New-AzSqlVMGroup -Name <name> -Location <regio>
 
 ## <a name="add-vms-to-the-cluster"></a>Kümeye VM ekleme
 
-Kümeye ilk SQL Server VM eklendiğinde küme oluşturulur. [Az SQL VM Add-Group](/cli/azure/sql/vm#az-sql-vm-add-to-group) komutu, kümeyi daha önce verilen adla oluşturur, küme rolünü SQL Server VM 'lerine ekler ve kümeye ekler. Komutun sonraki kullanımları `az sql vm add-to-group` Yeni oluşturulan kümeye daha fazla SQL Server VM ekler. 
+Kümeye ilk SQL Server VM eklendiğinde küme oluşturulur. [Az SQL VM Add-Group](/cli/azure/sql/vm#az_sql-vm_add_to_group) komutu, kümeyi daha önce verilen adla oluşturur, küme rolünü SQL Server VM 'lerine ekler ve kümeye ekler. Komutun sonraki kullanımları `az sql vm add-to-group` Yeni oluşturulan kümeye daha fazla SQL Server VM ekler. 
 
 Aşağıdaki kod parçacığı kümeyi oluşturur ve ilk SQL Server VM buna ekler: 
 
@@ -245,7 +245,7 @@ New-AzLoadBalancer -name sqlILB -ResourceGroupName <resource group name> `
 
 ## <a name="create-listener"></a>Dinleyici oluştur
 
-Kullanılabilirlik grubunu el ile oluşturduktan sonra [az SQL VM AG-Listener](/cli/azure/sql/vm/group/ag-listener#az-sql-vm-group-ag-listener-create)kullanarak dinleyiciyi oluşturabilirsiniz. 
+Kullanılabilirlik grubunu el ile oluşturduktan sonra [az SQL VM AG-Listener](/cli/azure/sql/vm/group/ag-listener#az_sql_vm_group_ag_listener_create)kullanarak dinleyiciyi oluşturabilirsiniz. 
 
 *Alt ağ kaynak kimliği* , `/subnets/<subnetname>` sanal ağ kaynağının kaynak kimliğine eklenen değerdir. Alt ağ kaynak KIMLIĞINI belirlemek için:
    1. [Azure Portal](https://portal.azure.com)kaynak grubunuza gidin. 
@@ -299,7 +299,7 @@ New-AzAvailabilityGroupListener -Name <listener name> -ResourceGroupName <resour
 ---
 
 ## <a name="modify-number-of-replicas"></a>Kopyaların sayısını değiştirme 
-Azure 'da barındırılan SQL Server VM 'lere bir kullanılabilirlik grubu dağıttığınızda bir karmaşıklık katmanı daha vardır. Kaynak sağlayıcısı ve sanal makine grubu artık kaynakları yönetir. Bu nedenle, kullanılabilirlik grubunda çoğaltmalar eklerken veya kaldırırken, SQL Server VM 'Ler hakkında bilgi içeren dinleyici meta verilerini güncelleştirme hakkında ek bir adım vardır. Kullanılabilirlik grubundaki çoğaltmaların sayısını değiştirirken, dinleyiciyi SQL Server VM 'lerin meta verileriyle güncelleştirmek için [az SQL VM Group AG-Listener Update](/cli/azure/sql/vm/group/ag-listener#az-sql-vm-group-ag-listener-update) komutunu da kullanmanız gerekir. 
+Azure 'da barındırılan SQL Server VM 'lere bir kullanılabilirlik grubu dağıttığınızda bir karmaşıklık katmanı daha vardır. Kaynak sağlayıcısı ve sanal makine grubu artık kaynakları yönetir. Bu nedenle, kullanılabilirlik grubunda çoğaltmalar eklerken veya kaldırırken, SQL Server VM 'Ler hakkında bilgi içeren dinleyici meta verilerini güncelleştirme hakkında ek bir adım vardır. Kullanılabilirlik grubundaki çoğaltmaların sayısını değiştirirken, dinleyiciyi SQL Server VM 'lerin meta verileriyle güncelleştirmek için [az SQL VM Group AG-Listener Update](/cli/azure/sql/vm/group/ag-listener#az_sql_vm_group_ag_listener_update) komutunu da kullanmanız gerekir. 
 
 
 ### <a name="add-a-replica"></a>Çoğaltma ekleme

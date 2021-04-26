@@ -3,12 +3,12 @@ title: ACR Görevlerine genel bakış
 description: Bulutta güvenli, otomatik kapsayıcı görüntüsü oluşturma, yönetim ve düzeltme eki uygulama sağlayan bir Azure Container Registry özellik paketi olan ACR görevlerine giriş.
 ms.topic: article
 ms.date: 08/12/2020
-ms.openlocfilehash: 1cf9faf934cebfb5abe0d2e1b26ffd7da2d6c549
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: a42a2bfcdc1621689421940c4db2fcf4f5e64b89
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104606795"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107781010"
 ---
 # <a name="automate-container-image-builds-and-maintenance-with-acr-tasks"></a>ACR görevleriyle kapsayıcı görüntüsü derlemelerini ve bakımını otomatikleştirin
 
@@ -127,7 +127,7 @@ Varsayılan olarak ACR görevleri, Linux işletim sistemi ve AMD64 mimarisi içi
 
 ## <a name="view-task-output"></a>Görev çıktısını görüntüleme
 
-Her görev çalıştırması, görev adımlarının başarıyla çalışıp çalışmadığını belirleyebilmek için inceleyebileceğiniz günlük çıktısı üretir. Bir görevi el ile tetiklemeniz durumunda, görev çalıştırmasının günlük çıktısı konsola akışla kaydedilir ve ayrıca daha sonra almak üzere saklanır. Bir görev otomatik olarak tetiklendiğinde (örneğin, kaynak kodu kaydı veya temel görüntü güncelleştirmesi), görev günlükleri yalnızca depolanır. Azure portal çalıştırma günlüklerini görüntüleyin veya [az ACR görev günlükleri](/cli/azure/acr/task#az-acr-task-logs) komutunu kullanın.
+Her görev çalıştırması, görev adımlarının başarıyla çalışıp çalışmadığını belirleyebilmek için inceleyebileceğiniz günlük çıktısı üretir. Bir görevi el ile tetiklemeniz durumunda, görev çalıştırmasının günlük çıktısı konsola akışla kaydedilir ve ayrıca daha sonra almak üzere saklanır. Bir görev otomatik olarak tetiklendiğinde (örneğin, kaynak kodu kaydı veya temel görüntü güncelleştirmesi), görev günlükleri yalnızca depolanır. Azure portal çalıştırma günlüklerini görüntüleyin veya [az ACR görev günlükleri](/cli/azure/acr/task#az_acr_task_logs) komutunu kullanın.
 
 [Görev günlüklerini görüntüleme ve yönetme](container-registry-tasks-logs.md)hakkında daha fazla bilgi için bkz..
 
@@ -143,11 +143,11 @@ Bulutta kapsayıcı görüntüsü derlemelerini ve bakımını otomatik hale get
 
 <!-- LINKS - Internal -->
 [azure-cli]: /cli/azure/install-azure-cli
-[az-acr-build]: /cli/azure/acr#az-acr-build
-[az-acr-pack-build]: /cli/azure/acr/pack#az-acr-pack-build
+[az-acr-build]: /cli/azure/acr#az_acr_build
+[az-acr-pack-build]: /cli/azure/acr/pack#az_acr_pack_build
 [az-acr-task]: /cli/azure/acr/task
-[az-acr-task-create]: /cli/azure/acr/task#az-acr-task-create
-[az-login]: /cli/azure/reference-index#az-login
+[az-acr-task-create]: /cli/azure/acr/task#az_acr_task_create
+[az-login]: /cli/azure/reference-index#az_login
 [az-login-service-principal]: /cli/azure/authenticate-azure-cli
 
 <!-- IMAGES -->

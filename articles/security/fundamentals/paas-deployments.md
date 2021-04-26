@@ -4,7 +4,7 @@ description: Azure 'da güvenli bulut uygulamaları tasarlama, derleme ve yönet
 services: security
 documentationcenter: na
 author: TerryLanfear
-manager: barbkess
+manager: rkarlin
 editor: techlake
 ms.assetid: ''
 ms.service: security
@@ -13,14 +13,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 10/28/2019
+ms.date: 03/29/2021
 ms.author: terrylan
-ms.openlocfilehash: 77a2a32b9a6358c39a14cfe37eeb44f7cb90af0a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: d28d55c8dff16df987f6535b0f1452b840b35c43
+ms.sourcegitcommit: edc7dc50c4f5550d9776a4c42167a872032a4151
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "94841997"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105960512"
 ---
 # <a name="securing-paas-deployments"></a>PaaS dağıtımlarının güvenliğini sağlama
 
@@ -127,10 +127,8 @@ App Service kullanmak için en iyi yöntemler aşağıda verilmiştir.
 **En iyi yöntem**: App Service ortamlarınızın güvenlik durumunu izleyin.   
 **Ayrıntı**: App Service ortamlarınızı Izlemek Için Azure Güvenlik Merkezi 'ni kullanın. Güvenlik Merkezi olası güvenlik açıklarını belirlediğinde, gerekli denetimleri yapılandırma sürecinde size kılavuzluk eden [öneriler](../../security-center/asset-inventory.md) oluşturur.
 
-> [!NOTE]
-> İzleme App Service önizleme aşamasındadır ve yalnızca güvenlik merkezi 'nin [Standart katmanında](../../security-center/security-center-pricing.md) kullanılabilir.
->
->
+## <a name="azure-cloud-services"></a>Azure Cloud Services
+[Azure Cloud Services](../../cloud-services/cloud-services-choose-me.md) , PaaS 'nin bir örneğidir. Azure App Service gibi, bu teknoloji ölçeklenebilir, güvenilir ve çalışır maliyetli uygulamaları destekleyecek şekilde tasarlanmıştır. App Service sanal makinelerde (VM) barındırıldığından aynı şekilde Azure Cloud Services de aynı şekilde barındırılır. Ancak VM 'Lerde daha fazla denetiminiz vardır. Azure Cloud Services kullanan VM 'Lere kendi yazılımınızı yükleyebilir ve bunlara uzaktan erişebilirsiniz.
 
 ## <a name="install-a-web-application-firewall"></a>Web uygulaması güvenlik duvarını yükler
 Web uygulamaları, bilinen yaygın güvenlik açıklarından yararlanan kötü amaçlı saldırıların giderek daha fazla hedefi olmaktadır. Bu açıklardan yararlanma örnekleri arasında SQL ekleme saldırıları, siteler arası komut dosyası saldırıları yaygındır. Uygulama kodunda bu tür saldırıların önlenmesi zor olabilir ve uygulama topolojisinin birçok katmanında ayrıntılı bakım, düzeltme eki uygulama ve izleme işlemleri gerektirebilir. Merkezi bir web uygulaması güvenlik duvarı, güvenlik yönetimini çok daha kolay hale getirir ve yetkisiz erişim ya da izinsiz giriş tehditlerine karşı uygulama yöneticilerine daha iyi güvence verir. Bir WAF çözümü, bilinen bir güvenlik açığına merkezi bir konumda düzeltme eki uygulayarak güvenlik tehdidine karşı, web uygulamalarının her birinin güvenliğini sağlamaya göre daha hızlı tepki verebilir. Var olan uygulama ağ geçitleri, web uygulaması güvenlik duvarı bulunan bir uygulama ağ geçidine kolaylıkla dönüştürülebilir.
@@ -149,13 +147,13 @@ Güvenlik savunmasının doğrulanması, diğer tüm işlevleri test etmeyi öne
 
 Belirsizlik testi, bu verileri ayrıştırmak ve tüketmek üzere program arabirimlerine (giriş noktaları) hatalı biçimlendirilmiş giriş verileri sağlayarak program hatalarının (kod hataları) bulunması için bir yöntemdir. [Microsoft güvenlik riski algılama](https://www.microsoft.com/en-us/security-risk-detection/) , Azure 'a dağıtmadan önce yazılımlarınızın hatalarını ve diğer güvenlik açıklarını bulmak için kullanabileceğiniz bulut tabanlı bir araçtır. Araç, yazılım dağıtmadan önce güvenlik açıklarını yakalamak üzere tasarlanmıştır, böylece bir hataya yama yapmanız, kilitlenmelerle uğraşmak veya yazılım yayımlandıktan sonra bir saldırıya yanıt vermek zorunda kalmazsınız.
 
-
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, Azure PaaS dağıtımının güvenlik avantajlarına ve bulut uygulamalarına yönelik en iyi güvenlik uygulamalarına odaklandık. Ardından, belirli Azure hizmetlerini kullanarak PaaS Web ve mobil çözümlerinizi güvenli hale getirmek için önerilen uygulamaları öğrenin. Azure App Service, Azure SQL veritabanı ve Azure SYNAPSE Analytics ve Azure Storage ile başlayacağız. Diğer Azure hizmetleri için Önerilen uygulamalarla ilgili makaleler kullanılabilir hale geldiğinde, bağlantılar aşağıdaki listede verilmiştir:
+Bu makalede, Azure PaaS dağıtımının güvenlik avantajlarına ve bulut uygulamalarına yönelik en iyi güvenlik uygulamalarına odaklandık. Ardından, belirli Azure hizmetlerini kullanarak PaaS Web ve mobil çözümlerinizi güvenli hale getirmek için önerilen uygulamaları öğrenin. Azure App Service, Azure SQL veritabanı ve Azure SYNAPSE Analytics, Azure depolama ve Azure Cloud Services ile başlayacağız. Diğer Azure hizmetleri için Önerilen uygulamalarla ilgili makaleler kullanılabilir hale geldiğinde, bağlantılar aşağıdaki listede verilmiştir:
 
 - [Azure App Service](paas-applications-using-app-services.md)
 - [Azure SQL veritabanı ve Azure SYNAPSE Analytics](paas-applications-using-sql.md)
 - [Azure Depolama](paas-applications-using-storage.md)
+- [Azure Cloud Services](../../cloud-services/security-baseline.md)
 - Redis için Azure Cache
 - Azure Service Bus
 - Web uygulaması güvenlik duvarları
@@ -165,5 +163,6 @@ Bulut için uygulama geliştirirken yazılım geliştirme yaşam döngüsünün 
 Azure 'u kullanarak bulut çözümlerinizi tasarlarken, dağıttığınızda ve yönetirken en iyi güvenlik uygulamaları için bkz. [Azure Güvenlik en iyi uygulamaları ve desenleri](best-practices-and-patterns.md) .
 
 Aşağıdaki kaynaklar, Azure güvenliği ve ilgili Microsoft hizmetleri hakkında daha genel bilgiler sağlamak için kullanılabilir:
-* Azure [güvenlik ekibi blogu](/archive/blogs/azuresecurity/) -Azure güvenliği ile ilgili en son bilgiler için
-* [Microsoft Güvenlik](https://technet.microsoft.com/library/dn440717.aspx) açıkları, Azure ile ilgili sorunlar da dahil olmak üzere Microsoft güvenlik açıklarına göre bildirilebilir veya e-posta ile secure@microsoft.com
+
+- Azure [güvenlik ekibi blogu](/archive/blogs/azuresecurity/) -Azure güvenliği ile ilgili en son bilgiler için
+- [Microsoft Güvenlik](https://technet.microsoft.com/library/dn440717.aspx) açıkları, Azure ile ilgili sorunlar da dahil olmak üzere Microsoft güvenlik açıklarına göre bildirilebilir veya e-posta ile secure@microsoft.com

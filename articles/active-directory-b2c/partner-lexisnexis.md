@@ -10,12 +10,12 @@ ms.topic: how-to
 ms.date: 07/22/2020
 ms.author: gasinh
 ms.subservice: B2C
-ms.openlocfilehash: 5f408699cae9580188a3780fc8f8654eaa97c26b
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 362704368958d2600d16cd907421917b824a59cb
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97108442"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107256608"
 ---
 # <a name="tutorial-for-configuring-lexisnexis-with-azure-active-directory-b2c"></a>Lexisnexto yapılandırma öğreticisi Azure Active Directory B2C
 
@@ -122,7 +122,7 @@ Belirtilen [TrustFrameworkExtensions ilkesinde](https://github.com/azure-ad-b2c/
 
 ### <a name="part-7---configure-the-azure-ad-b2c-policy"></a>Bölüm 7-Azure AD B2C ilkesini yapılandırma
 
-[Yerel hesapların başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts) indirmek ve Azure AD B2C kiracısı için [ilkeyi](https://github.com/azure-ad-b2c/partner-integrations/tree/master/samples/ThreatMetrix/policy) yapılandırmak üzere bu [belgeye](./custom-policy-get-started.md?tabs=applications#custom-policy-starter-pack) başvurun.
+[Yerel hesapların başlangıç paketini](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/LocalAccounts) indirmek ve Azure AD B2C kiracısı için [ilkeyi](https://github.com/azure-ad-b2c/partner-integrations/tree/master/samples/ThreatMetrix/policy) yapılandırmak üzere bu [belgeye](tutorial-create-user-flows.md?pivots=b2c-custom-policy#custom-policy-starter-pack) başvurun.
 
 >[!NOTE]
 >Belirli kiracınızla ilgili olarak belirtilen ilkeleri güncelleştirin.
@@ -155,4 +155,4 @@ Daha fazla bilgi için aşağıdaki makaleleri gözden geçirin:
 
 - [Azure AD B2C'deki özel ilkeler](./custom-policy-overview.md)
 
-- [Azure AD B2C özel ilkeleri kullanmaya başlama](./custom-policy-get-started.md?tabs=applications)
+- [Azure AD B2C özel ilkeleri kullanmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy)

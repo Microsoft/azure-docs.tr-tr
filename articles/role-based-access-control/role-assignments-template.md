@@ -10,12 +10,12 @@ ms.topic: how-to
 ms.workload: identity
 ms.date: 01/21/2021
 ms.author: rolyon
-ms.openlocfilehash: 65b4ec369085e44cdffb0550e9eeaef0196cd35a
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: ba1df23b40de82a8ef901541884ef29ea0b504a1
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100556025"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107771884"
 ---
 # <a name="assign-azure-roles-using-azure-resource-manager-templates"></a>Azure Resource Manager şablonları kullanarak Azure rolleri atama
 
@@ -31,7 +31,7 @@ Rol atamak için, rolü atamak istediğiniz kullanıcı, Grup veya uygulamanın 
 
 ### <a name="user"></a>Kullanıcı
 
-Bir kullanıcının KIMLIĞINI almak için [Get-AzADUser](/powershell/module/az.resources/get-azaduser) veya [az ad User Show](/cli/azure/ad/user#az-ad-user-show) komutlarını kullanabilirsiniz.
+Bir kullanıcının KIMLIĞINI almak için [Get-AzADUser](/powershell/module/az.resources/get-azaduser) veya [az ad User Show](/cli/azure/ad/user#az_ad_user_show) komutlarını kullanabilirsiniz.
 
 ```azurepowershell
 $objectid = (Get-AzADUser -DisplayName "{name}").id
@@ -43,7 +43,7 @@ objectid=$(az ad user show --id "{email}" --query objectId --output tsv)
 
 ### <a name="group"></a>Grup
 
-Bir grubun KIMLIĞINI almak için [Get-AzADGroup](/powershell/module/az.resources/get-azadgroup) veya [az Ad Group Show](/cli/azure/ad/group#az-ad-group-show) komutlarını kullanabilirsiniz.
+Bir grubun KIMLIĞINI almak için [Get-AzADGroup](/powershell/module/az.resources/get-azadgroup) veya [az Ad Group Show](/cli/azure/ad/group#az_ad_group_show) komutlarını kullanabilirsiniz.
 
 ```azurepowershell
 $objectid = (Get-AzADGroup -DisplayName "{name}").id
@@ -67,7 +67,7 @@ objectid=$(az ad sp list --display-name <Azure resource name> --query [].objectI
 
 ### <a name="application"></a>Uygulama
 
-Bir hizmet sorumlusunun KIMLIĞINI (bir uygulama tarafından kullanılan kimlik) almak için [Get-AzADServicePrincipal](/powershell/module/az.resources/get-azadserviceprincipal) veya [az ad SP List](/cli/azure/ad/sp#az-ad-sp-list) komutlarını kullanabilirsiniz. Hizmet sorumlusu için uygulama KIMLIĞINI **değil** , nesne kimliğini kullanın.
+Bir hizmet sorumlusunun KIMLIĞINI (bir uygulama tarafından kullanılan kimlik) almak için [Get-AzADServicePrincipal](/powershell/module/az.resources/get-azadserviceprincipal) veya [az ad SP List](/cli/azure/ad/sp#az_ad_sp_list) komutlarını kullanabilirsiniz. Hizmet sorumlusu için uygulama KIMLIĞINI **değil** , nesne kimliğini kullanın.
 
 ```azurepowershell
 $objectid = (Get-AzADServicePrincipal -DisplayName "{name}").id

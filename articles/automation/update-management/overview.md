@@ -3,18 +3,20 @@ title: Azure Otomasyonu Güncelleştirme Yönetimi Genel Bakış
 description: Bu makalede, Windows ve Linux makineleriniz için güncelleştirmeleri uygulayan Güncelleştirme Yönetimi özelliğine bir genel bakış sunulmaktadır.
 services: automation
 ms.subservice: update-management
-ms.date: 03/19/2021
+ms.date: 04/01/2021
 ms.topic: conceptual
-ms.openlocfilehash: e5deefabd6a37dbfece9f32abdce5d5144681238
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: 62ae2eab33063416fdd6265b14dd8c30da55e174
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104950068"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166709"
 ---
 # <a name="update-management-overview"></a>Güncelleştirme Yönetimi’ne genel bakış
 
 Azure Otomasyonu 'ndaki Güncelleştirme Yönetimi kullanarak Azure 'daki Windows ve Linux sanal makineleriniz için işletim sistemi güncelleştirmelerini, şirket içi ortamları ve diğer bulut ortamlarında yönetebilirsiniz. Tüm aracı makinelerde kullanılabilir güncelleştirmelerin durumunu hızlı bir şekilde değerlendirebilir ve sunucular için gerekli güncelleştirmeleri yükleme işlemini yönetebilirsiniz.
+
+Hizmet sağlayıcı olarak, [Azure açık Thouse](../../lighthouse/overview.md)için birden fazla müşteri kiracısından eklendi olabilirsiniz. Azure Mathouse, her seferinde çok sayıda Azure Active Directory (Azure AD) kiracılarının ölçeklendirilmesine yönelik işlemler gerçekleştirmenize olanak tanır ve Güncelleştirme Yönetimi gibi yönetim görevlerini, sorumlu olduğunuz kiracılar arasında daha verimli hale getirir.
 
 > [!NOTE]
 > Azure Otomasyonu 'ndan özel betikleri çalıştırmak için Güncelleştirme Yönetimi ile yapılandırılmış bir makine kullanamazsınız. Bu makine, yalnızca Microsoft tarafından imzalanmış güncelleştirme betiğini çalıştırabilir.
@@ -24,7 +26,7 @@ Azure Otomasyonu 'ndaki Güncelleştirme Yönetimi kullanarak Azure 'daki Window
 
 Kullanılabilir *kritik* ve *güvenlik* düzeltme eklerini Azure sanal makinenize otomatik olarak Indirip yüklemek için Windows VM 'leri için [Otomatik VM Konuk düzeltme eki uygulamayı](../../virtual-machines/automatic-vm-guest-patching.md) gözden geçirin.
 
-Güncelleştirme Yönetimi dağıtılmadan ve makinelerinizi yönetim için etkinleştirmeden önce, aşağıdaki bölümlerde yer alan bilgileri anladığınızdan emin olun.  
+Güncelleştirme Yönetimi dağıtılmadan ve makinelerinizi yönetim için etkinleştirmeden önce, aşağıdaki bölümlerde yer alan bilgileri anladığınızdan emin olun.
 
 ## <a name="about-update-management"></a>Güncelleştirme Yönetimi hakkında
 
@@ -40,7 +42,7 @@ Aşağıdaki diyagramda, bir çalışma alanındaki tüm bağlı Windows Server 
 
 ![Güncelleştirme Yönetimi iş akışı](./media/overview/update-mgmt-updateworkflow.png)
 
-Güncelleştirme Yönetimi, aynı kiracıda birden fazla abonelikteki makinelere yerel olarak dağıtmak için kullanılabilir.
+Güncelleştirme Yönetimi, aynı Kiracıdaki birden çok abonelikteki makinelere veya [Azure tarafından atanan kaynak yönetimini](../../lighthouse/concepts/azure-delegated-resource-management.md)kullanarak kiracılar arasında yerel olarak dağıtım yapmak için kullanılabilir.
 
 Bir paket yayımlandıktan sonra, düzeltme ekinin değerlendirme için Linux makinelere gösterilmesi 2 ile 3 saat sürer. Windows makinelerinde, düzeltme ekinin yayımlandıktan sonra değerlendirmesi göstermesi için 12-15 saat sürer. Bir makine, güncelleştirme uyumluluğu için bir tarama tamamladığında, aracı bilgileri toplu olarak Azure Izleyici günlüklerine iletir. Bir Windows makinesinde, uyumluluk taraması varsayılan olarak her 12 saatte bir çalıştırılır. Bir Linux makinesi için, uyumluluk taraması her saat varsayılan olarak gerçekleştirilir. Log Analytics Aracısı yeniden başlatılırsa, 15 dakika içinde bir uyumluluk taraması başlatılır.
 
@@ -131,7 +133,7 @@ Azure Marketi 'nde bulunan isteğe bağlı Red Hat Enterprise Linux (RHEL) gör�
 
 ## <a name="permissions"></a>İzinler
 
-Güncelleştirme dağıtımları oluşturmak ve yönetmek için belirli izinlere sahip olmanız gerekir. Bu izinler hakkında bilgi edinmek için bkz. [rol tabanlı erişim – güncelleştirme yönetimi](../automation-role-based-access-control.md#update-management-permissions).
+Güncelleştirme dağıtımları oluşturmak ve yönetmek için belirli izinlere sahip olmanız gerekir. Bu izinler hakkında bilgi edinmek için bkz. [rol tabanlı erişim-güncelleştirme yönetimi](../automation-role-based-access-control.md#update-management-permissions).
 
 ## <a name="update-management-components"></a>Güncelleştirme Yönetimi bileşenleri
 
@@ -167,7 +169,7 @@ Yönetim paketlerine yönelik güncelleştirmeler hakkında daha fazla bilgi iç
 
 Aşağıdaki tabloda Güncelleştirme Yönetimi tarafından desteklenen bağlı kaynaklar açıklanmaktadır:
 
-| Bağlı kaynak | Desteklenir | Açıklama |
+| Bağlı kaynak | Desteklenir | Description |
 | --- | --- | --- |
 | Windows aracıları |Yes |Güncelleştirme Yönetimi, Windows aracılarından sistem güncelleştirmeleri hakkında bilgi toplar ve gerekli güncelleştirmelerin yüklemesini başlatır. |
 | Linux aracıları |Yes |Güncelleştirme Yönetimi, Linux aracılarından sistem güncelleştirmeleriyle ilgili bilgileri toplar ve ardından desteklenen dağıtımlarda gerekli güncelleştirmelerin yüklemesini başlatır. |

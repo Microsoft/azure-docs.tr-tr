@@ -5,14 +5,14 @@ ms.topic: conceptual
 ms.custom: devx-track-dotnet
 author: DaleKoetke
 ms.author: dalek
-ms.date: 2/7/2021
-ms.reviewer: mbullwin
-ms.openlocfilehash: 1f19366ac8fd7aedadcca0287540262516ad060c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.date: 3/30/2021
+ms.reviewer: lagayhar
+ms.openlocfilehash: e048e788e674e90a62b15784c590c07e5d36b816
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101726193"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106078409"
 ---
 # <a name="manage-usage-and-costs-for-application-insights"></a>Application Insights için kullanımı ve maliyetleri yönetme
 
@@ -25,7 +25,7 @@ Fiyatlandırmanın Application Insights nasıl çalıştığı hakkında sorular
 
 ## <a name="pricing-model"></a>Fiyatlandırma modeli
 
-[Azure Application Insights][start] fiyatlandırması, veri hacmine dayalı ve isteğe bağlı olarak daha uzun veri saklama Için bir **Kullandıkça Öde** modelidir. Her Application Insights kaynak ayrı bir hizmet olarak ücretlendirilir ve Azure aboneliğiniz için faturaya katkıda bulunur. Veri hacmi, uygulamanızdan Application Insights tarafından alınan sıkıştırılmamış JSON veri paketinin boyutu olarak ölçülür. [Canlı ölçüm akışı](./live-stream.md)kullanımı için veri hacmi ücretsizdir.
+[Azure Application Insights][start] fiyatlandırması, veri hacmine dayalı ve isteğe bağlı olarak daha uzun veri saklama Için bir **Kullandıkça Öde** modelidir. Her Application Insights kaynak ayrı bir hizmet olarak ücretlendirilir ve Azure aboneliğiniz için faturaya katkıda bulunur. Veri hacmi, uygulamanızdan Application Insights tarafından alınan sıkıştırılmamış JSON veri paketinin boyutu olarak ölçülür. Veri hacmi GB (10 ^ 9 bayt) cinsinden ölçülür. [Canlı ölçüm akışı](./live-stream.md)kullanımı için veri hacmi ücretsizdir.
 
 [Çok adımlı Web testleri](./availability-multistep.md) ek bir ücret doğurur. Çok adımlı Web testleri, bir dizi eylemi gerçekleştiren Web sınamalardır. Tek bir sayfanın *ping testlerine* yönelik ayrı ücret alınmaz. Ping sınamalarından ve çok adımlı testlerin telemetrisi, uygulamanızdan diğer telemetri ile aynı şekilde ücretlendirilir.
 
@@ -43,7 +43,10 @@ Bunu ele almak için iki yaklaşım vardır: ASP.NET SDK 'sında kullanılabilen
 
 ### <a name="data-collection-when-using-sampling"></a>Örnekleme kullanılırken veri toplama
 
-ASP.NET SDK 'nın [Uyarlamalı örneklenmesi](sampling.md#adaptive-sampling)sayesinde, veri hacmi varsayılan Application Insights izleme için belirtilen en yüksek trafik hızında tutulacak şekilde otomatik olarak ayarlanır. Uygulama, hata ayıklama sırasında veya düşük kullanım nedeniyle düşük miktarda telemetri üretirse, birim saniye başına yapılandırılan olayların altında olduğu sürece, öğeler örnekleme işlemcisi tarafından atılamaz. Saniyede beş olay olan, yüksek hacimli bir uygulama için, uyarlamalı örnekleme, günlük olayların sayısını 432.000 olarak sınırlandırır. Genellikle 1 KB 'lik ortalama bir olay boyutunu kullanarak bu, uygulamanızı barındıran düğüm başına yaklaşık 13,4 GB telemetri (örnekleme her düğüm için yerel olarak yapıldığından) karşılık gelir. 
+ASP.NET SDK 'nın [Uyarlamalı örneklenmesi](sampling.md#adaptive-sampling)sayesinde, veri hacmi varsayılan Application Insights izleme için belirtilen en yüksek trafik hızında tutulacak şekilde otomatik olarak ayarlanır. Uygulama, hata ayıklama sırasında veya düşük kullanım nedeniyle düşük miktarda telemetri üretirse, birim saniye başına yapılandırılan olayların altında olduğu sürece, öğeler örnekleme işlemcisi tarafından atılamaz. Saniyede beş olay olan, yüksek hacimli bir uygulama için, uyarlamalı örnekleme, günlük olayların sayısını 432.000 olarak sınırlandırır. Genellikle 1 KB 'lik ortalama bir olay boyutunu kullanarak, örnekleme her düğüm için yerel olarak yapıldığından, uygulamanızı barındıran düğüm başına yaklaşık 13,4 GB telemetri karşılık gelir.
+
+> [!NOTE]
+> Azure Izleyici günlük veri boyutu GB (1 GB = 10 ^ 9 bayt) cinsinden hesaplanır.
 
 Uyarlamalı örneklemeyi desteklemeyen SDK 'lar için, Web sunucunuz ve Web tarayıcılardan gönderilen trafiği azaltmak üzere [ASP.net, ASP.NET Core ve Java Web siteleri için](sampling.md#fixed-rate-sampling) , tutulacak verilerin yüzdesine göre Application Insights tarafından alındığı zaman örnekleri veren alma [örnekleme](./sampling.md#ingestion-sampling)kullanabilirsiniz
 

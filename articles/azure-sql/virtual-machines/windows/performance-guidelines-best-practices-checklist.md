@@ -15,12 +15,12 @@ ms.date: 03/25/2021
 ms.author: mathoma
 ms.custom: contperf-fy21q3
 ms.reviewer: jroth
-ms.openlocfilehash: 0b88884576a47db871c78b874104d4973ee9ba9a
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 84f2f4f679de80cd9b5fc986d40e084bae8a4cad
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105572567"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313768"
 ---
 # <a name="checklist-performance-best-practices-for-sql-server-on-azure-vms"></a>Denetim listesi: Azure VM 'lerinde SQL Server için en iyi performans uygulamaları
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
@@ -40,7 +40,7 @@ Genellikle maliyetleri iyileştirmek ve performansı iyileştirmek arasında bir
 
 Aşağıda, Azure VM 'de SQL Server çalıştırmak için en iyi VM boyutu uygulamalarının hızlı bir denetim listesi verilmiştir: 
 
-- [Standard_M8-4ms](/../../virtual-machines/m-series), [E4ds_v4](../../../virtual-machines/edv4-edsv4-series.md#edv4-series)veya [DS12_v2](../../../virtual-machines/dv2-dsv2-series-memory.md#dsv2-series-11-15) ya da üzeri gibi 4 veya daha fazla vCPU ile VM boyutlarını kullanın. 
+- [Standard_M8-4ms](../../../virtual-machines/m-series.md), [E4ds_v4](../../../virtual-machines/edv4-edsv4-series.md#edv4-series)veya [DS12_v2](../../../virtual-machines/dv2-dsv2-series-memory.md#dsv2-series-11-15) ya da üzeri gibi 4 veya daha fazla vCPU ile VM boyutlarını kullanın. 
 - SQL Server iş yüklerinin en iyi performansı için [bellek için iyileştirilmiş](../../../virtual-machines/sizes-memory.md) sanal makine boyutlarını kullanın. 
 - [DSv2 11-15](../../../virtual-machines/dv2-dsv2-series-memory.md), [Edsv4](../../../virtual-machines/edv4-edsv4-series.md) serisi, [d-](../../../virtual-machines/m-series.md)ve [Mv2](../../../virtual-machines/mv2-series.md) serisi, OLTP Iş yükleri için gereken en iyi bellekten Vcore oranını sunmaktadır. Her iki e serisi sanal makine, görev açısından kritik iş yükleri için gereken en yüksek bellek-vCore oranını sağlar ve ayrıca veri ambarı iş yükleri için de idealdir. 
 - Görev açısından kritik ve veri ambarı iş yükleri için daha yüksek bir bellek-sanal çekirdek oranı düşünün. 

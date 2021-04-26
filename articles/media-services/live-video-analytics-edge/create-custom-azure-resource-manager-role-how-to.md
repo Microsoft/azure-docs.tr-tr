@@ -3,12 +3,12 @@ title: Özel Azure Resource Manager rolü oluşturma ve hizmet sorumlusu 'na ata
 description: Bu makalede, Azure CLı kullanarak IoT Edge üzerinde canlı video analizine yönelik özel Azure Resource Manager rol oluşturma ve hizmet sorumlusuna atama hakkında yönergeler sunulmaktadır.
 ms.topic: how-to
 ms.date: 05/27/2020
-ms.openlocfilehash: 80974c111dd451314635d06334766322bc68e437
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 6c33f6703522fc0b28237e22c16c96587467df40
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102210453"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107788520"
 ---
 # <a name="create-custom-azure-resource-manager-role-and-assign-to-service-principal"></a>Özel Azure Resource Manager rolü oluşturma ve hizmet sorumlusuna atama
 
@@ -49,7 +49,7 @@ Medya hizmeti hesabınız yoksa, bir tane oluşturmak için aşağıdaki adımla
     ```
     az account set --subscription " <yourSubscriptionName or yourSubscriptionId>"
     ```
-1. Bir [kaynak grubu](/cli/azure/group#az-group-create) ve [depolama hesabı](/cli/azure/storage/account#az-storage-account-create)oluşturun.
+1. Bir [kaynak grubu](/cli/azure/group#az_group_create) ve [depolama hesabı](/cli/azure/storage/account#az_storage_account_create)oluşturun.
 1. Şimdi Cloud Shell ' de aşağıdaki komut şablonunu kullanarak bir Azure Media Service hesabı oluşturun:
 
     ```
@@ -86,7 +86,7 @@ Bu komut şöyle bir yanıt üretir:
 1. Parola kimlik doğrulamasıyla bir hizmet sorumlusu çıkışı, bu örnekte "AadSecret" parametresi olan parola anahtarını içerir. 
 
     Bu değeri kopyalamadığınızdan emin olun; bu değer alınamaz. Parolayı unutursanız [hizmet sorumlusu kimlik bilgilerini sıfırlayın](/cli/azure/create-an-azure-service-principal-azure-cli#reset-credentials).
-1. AppID ve kiracı anahtarı çıktıda sırasıyla "Aadclitıd" ve "Aadtenantıd" olarak görünür. Hizmet sorumlusu kimlik doğrulamasında kullanılır. Değerlerini kaydedin, ancak [az ad SP listesi](/cli/azure/ad/sp#az-ad-sp-list)ile herhangi bir noktada elde edilebilir.
+1. AppID ve kiracı anahtarı çıktıda sırasıyla "Aadclitıd" ve "Aadtenantıd" olarak görünür. Hizmet sorumlusu kimlik doğrulamasında kullanılır. Değerlerini kaydedin, ancak [az ad SP listesi](/cli/azure/ad/sp#az_ad_sp_list)ile herhangi bir noktada elde edilebilir.
 
 ### <a name="create-a-custom-role-definition"></a>Özel bir rol tanımı oluştur  
 
@@ -171,7 +171,7 @@ Yukarıdaki komut, hizmet sorumlusu ObjectID 'yi yazdıracak.
 “objectId” : “<yourObjectId>”,
 ```
 
-Özel rolü hizmet sorumlusu ile bağlamak için [az role atama Create komut şablonu komutunu](/cli/azure/role/assignment#az-role-assignment-create) kullanın:
+Özel rolü hizmet sorumlusu ile bağlamak için [az role atama Create komut şablonu komutunu](/cli/azure/role/assignment#az_role_assignment_create) kullanın:
 
 ```
 az role assignment create --role “LVAEdge User” --assignee-object-id < objectId>    

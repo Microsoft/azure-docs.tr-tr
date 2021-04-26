@@ -4,12 +4,12 @@ ms.service: azure-communication-services
 ms.topic: include
 ms.date: 03/10/2021
 ms.author: mikben
-ms.openlocfilehash: ab30b19160294b334c8c5abdfbcc1dc0da370f48
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: b602cbfde22cc87b42a32b007c19b626814d1660
+ms.sourcegitcommit: b0557848d0ad9b74bf293217862525d08fe0fc1d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103495919"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106554751"
 ---
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -25,9 +25,9 @@ Azure Communication Services kaynağı oluşturmak için öncelikle [Azure Porta
 
 :::image type="content" source="../media/create-a-communication-resource/searchbar-communication-portal.png" alt-text="Arama çubuğunda iletişim hizmetleri araması gösteren ekran görüntüsü.":::
 
-Sonuçlarda **Iletişim Hizmetleri** ' ni seçin ve ardından **Ekle**' yi seçin.
+Sonuçlarda **Iletişim Hizmetleri** ' ni seçin ve ardından **Oluştur**' u seçin.
 
-:::image type="content" source="../media/create-a-communication-resource/add-communication-portal.png" alt-text="Ekle düğmesini vurgulayan Azure panelini gösteren ekran görüntüsü.":::
+:::image type="content" source="../media/create-a-communication-resource/create-communication-portal.png" alt-text="Iletişim Hizmetleri panelini gösteren ve Oluştur düğmesini vurgulayan ekran görüntüsü.":::
 
 Artık Iletişim Hizmetleri kaynağınızı yapılandırabilirsiniz. Oluşturma işlemindeki ilk sayfada şunları belirtmeniz istenir:
 

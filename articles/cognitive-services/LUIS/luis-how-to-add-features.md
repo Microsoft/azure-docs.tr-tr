@@ -9,12 +9,12 @@ ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: how-to
 ms.date: 05/17/2020
-ms.openlocfilehash: 33435d2367b92f312d41f0e32fdbb3a93d59a9fd
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c1a0fb15be92e25b576cd29e671eed3c6a5b948f
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "95999935"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313275"
 ---
 # <a name="use-features-to-boost-signal-of-word-list"></a>Sözcük listesinin sinyalini artırmak için özellikleri kullanın
 
@@ -37,7 +37,7 @@ Bir özelliğin ne zaman ve neden kullanılacağını anlamak için [kavramları
 
     LUO için yeterli değer girdikten sonra öneriler görünür. Önerilen değerlerin **Tümünü ekleyebilir** veya tek tek terimleri seçebilirsiniz.
 
-1. Deyimlerin birbirlerinin yerine kullanılabilir olması halinde **Bu değerleri koru değiştirilebilir** .
+1. Deyimlerin birbirlerinin yerine kullanılabilir olması halinde **Bu değerleri koru değiştirilebilir** . Değiştirilebilir ifade listesi özelliği, eğitim için eş anlamlıların bir listesi olarak görev yapar. Çapraz olmayan tümcecik listesi, eğitimlere yönelik ayrı özellikler görevi görür (Özellikler benzer ancak tümcecikleri değiştirdiğinizde hedef değişir).
 
 1. Tümcecik listesi, **genel** ayarı olan tüm uygulamaya veya belirli bir modele (amaç veya varlık) uygulanabilir. Tümcecik listesini bir amaç veya varlıktan bir _özellik_ olarak oluşturursanız, geçiş işlemi genel için ayarlanmadı. Bu durumda, iki durumlu özelliğin anlamı, uygulamanın _genel değil_ , bu modelde yalnızca yerel olduğu bir modeldir.
 

@@ -13,10 +13,10 @@ ms.workload: infrastructure-services
 ms.date: 03/31/2020
 ms.author: kumud
 ms.openlocfilehash: f98ffde9ce9b5c564e9f9c6c0b95e11f76719597
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "95244353"
 ---
 # <a name="deploy-an-ipv6-dual-stack-application-in-azure-virtual-network---template"></a>Azure sanal ağ 'da IPv6 ikili yığın uygulaması dağıtma-şablon

@@ -6,13 +6,13 @@ ms.subservice: partnercenter-marketplace-publisher
 ms.topic: how-to
 author: krsh
 ms.author: krsh
-ms.date: 03/10/2021
-ms.openlocfilehash: 4711ea76af83594ec529cfda13a308fbe6646398
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.date: 04/16/2021
+ms.openlocfilehash: 47fe7b42b68ae42f74a74e5fc69c8d1041d3bf8d
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103200455"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107727133"
 ---
 # <a name="how-to-create-a-virtual-machine-using-your-own-image"></a>Kendi görüntünüzü kullanarak bir sanal makine oluşturma
 
@@ -48,6 +48,9 @@ Bu bölümde bir Azure VM 'nin nasıl boyutlandırılacağını, güncelleştiri
 Azure Marketi 'ndeki tüm görüntülerin genel bir biçimde yeniden kullanılabilir olması gerekir. Bunu başarmak için, işletim sistemi VHD 'SI, bir VM 'den örneğe özgü tüm tanımlayıcıları ve yazılım sürücülerini kaldıran bir işlem olan genelleştirilmelidir.
 
 ## <a name="bring-your-image-into-azure"></a>Görüntünüzü Azure 'a taşıyın
+
+> [!NOTE]
+> Imza içeren Azure aboneliğinin, yayımlamak için yayımcı hesabıyla aynı kiracı altında olması gerekir. Ayrıca, yayımcı hesabının SıG içeren aboneliğe en az katkıda bulunan erişimi olmalıdır.
 
 Görüntünüzü Azure 'a getirmenin üç yolu vardır:
 

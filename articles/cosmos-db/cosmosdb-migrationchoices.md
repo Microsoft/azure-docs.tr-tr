@@ -6,12 +6,12 @@ ms.author: sngun
 ms.service: cosmos-db
 ms.topic: how-to
 ms.date: 09/01/2020
-ms.openlocfilehash: 8721c0eb728f568521e86baecb658dc9c869a7f6
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 3325960793a5a0d7bc48ca8030c675d7ebf0c026
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93097592"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106442601"
 ---
 # <a name="options-to-migrate-your-on-premises-or-cloud-data-to-azure-cosmos-db"></a>Şirket içi veya bulut verilerinizi Azure Cosmos DB 'e geçirmeye yönelik seçenekler
 [!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
@@ -64,8 +64,8 @@ Aşağıdaki faktörler geçiş aracı seçiminde belirleyici rol oynar:
 
 |Geçiş türü|Çözüm|Desteklenen kaynaklar|Desteklenen hedefler|Dikkat edilmesi gerekenler|
 |---------|---------|---------|---------|---------|
-|Çevrimdışı|[csqlsh COPY komutu](cassandra-import-data.md#migrate-data-using-cqlsh-copy-command)|CSV dosyaları | Azure Cosmos DB Cassandra API'si| &bull; Kolayca ayarlanabilir. <br/>&bull; Büyük veri kümeleri için uygun değildir. <br/>&bull; Yalnızca kaynak bir Cassandra tablosu olduğunda geçerlidir.|
-|Çevrimdışı|[Spark ile tablo kopyalama](cassandra-import-data.md#migrate-data-using-spark) | &bull;Apache Cassandra<br/>&bull;Azure Cosmos DB Cassandra API'si| Azure Cosmos DB Cassandra API'si | &bull; , Paralel hale getirmek dönüşüm ve alımı için Spark yeteneklerini kullanabilir. <br/>&bull; Azaltıcı lıkları işlemek için özel bir yeniden deneme ilkesiyle yapılandırma gerekir.|
+|Çevrimdışı|[csqlsh COPY komutu](cassandra-import-data.md#migrate-data-by-using-the-cqlsh-copy-command)|CSV dosyaları | Azure Cosmos DB Cassandra API'si| &bull; Kolayca ayarlanabilir. <br/>&bull; Büyük veri kümeleri için uygun değildir. <br/>&bull; Yalnızca kaynak bir Cassandra tablosu olduğunda geçerlidir.|
+|Çevrimdışı|[Spark ile tablo kopyalama](cassandra-import-data.md#migrate-data-by-using-spark) | &bull;Apache Cassandra<br/>&bull;Azure Cosmos DB Cassandra API'si| Azure Cosmos DB Cassandra API'si | &bull; , Paralel hale getirmek dönüşüm ve alımı için Spark yeteneklerini kullanabilir. <br/>&bull; Azaltıcı lıkları işlemek için özel bir yeniden deneme ilkesiyle yapılandırma gerekir.|
 |Çevrimiçi|[Anlık ileti (Oracle DB/Apache Cassandra 'dan)](cosmosdb-cassandra-api-migrate-data-striim.md)| &bull;Oracle<br/>&bull;Apache Cassandra<br/><br/> Desteklenen diğer kaynaklar için bkz. [anlık ileti Web sitesi](https://www.striim.com/sources-and-targets/) .|&bull;Azure Cosmos DB SQL API<br/>&bull;Azure Cosmos DB Cassandra API'si <br/><br/> Desteklenen diğer hedefler için bkz. [anlık ileti Web sitesi](https://www.striim.com/sources-and-targets/) .| &bull; Oracle, DB2, SQL Server gibi çok çeşitli kaynaklarla birlikte çalışarak. <br/>&bull; ETL işlem hatlarını kolayca oluşturun ve izleme için bir pano sağlar. <br/>&bull; Daha büyük veri kümelerini destekler. <br/>&bull; Bu bir üçüncü taraf araç olduğundan Market 'ten satın alınması ve kullanıcının ortamına yüklenmesi gerekir.|
 |Çevrimiçi|[Blitzz (Oracle DB/Apache Cassandra 'dan)](oracle-migrate-cosmos-db-blitzz.md)|&bull;Oracle<br/>&bull;Apache Cassandra<br/><br/>Desteklenen diğer kaynaklar için [Blitzz Web sitesine](https://www.blitzz.io/) bakın. |Azure Cosmos DB Cassandra API. <br/><br/>Desteklenen diğer hedefler için [Blitzz Web sitesine](https://www.blitzz.io/) bakın. | &bull; Daha büyük veri kümelerini destekler. <br/>&bull; Bu bir üçüncü taraf araç olduğundan Market 'ten satın alınması ve kullanıcının ortamına yüklenmesi gerekir.|
 

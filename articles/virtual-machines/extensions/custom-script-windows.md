@@ -8,12 +8,12 @@ ms.author: amjads
 author: amjads1
 ms.collection: windows
 ms.date: 08/31/2020
-ms.openlocfilehash: 13b4c4ef50ea37cabe30474d339acb19176cef97
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6341e3abbf591d0e6e0395e17ccf15ec73a3ac43
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102553910"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107835461"
 ---
 # <a name="custom-script-extension-for-windows"></a>Windows için Özel Betik Uzantısı
 
@@ -74,7 +74,7 @@ Betiğinizin yerel bir sunucu üzerinde olması, ek güvenlik duvarı ve ağ gü
 
 Özel Betik uzantısı yapılandırması, betik konumu ve çalıştırılacak komut gibi şeyleri belirtir. Bu yapılandırmayı yapılandırma dosyalarında saklayabilir, komut satırında belirtebilir veya bir Azure Resource Manager şablonunda belirtebilirsiniz.
 
-Gizli verileri, şifrelenen ve yalnızca sanal makine içinde şifresi çözülen korunan bir yapılandırmada saklayabilirsiniz. Korunan yapılandırma, yürütme komutu parola gibi gizli dizileri içerdiğinde yararlıdır.
+Gizli verileri, şifrelenen ve yalnızca sanal makine içinde şifresi çözülen korunan bir yapılandırmada saklayabilirsiniz. Korunan yapılandırma, yürütme komutu parola veya paylaşılan erişim imzası (SAS) dosya başvurusu gibi gizli dizileri içerdiğinde yararlıdır ve bu da korunması gerekir.
 
 Bu öğeler gizli veriler olarak değerlendirilmeli ve uzantılar korumalı ayar yapılandırmasında belirtilmelidir. Azure VM Uzantısı korumalı ayar verileri şifrelenir ve yalnızca hedef sanal makinede şifresi çözülür.
 
@@ -97,16 +97,16 @@ Bu öğeler gizli veriler olarak değerlendirilmeli ve uzantılar korumalı ayar
         "typeHandlerVersion": "1.10",
         "autoUpgradeMinorVersion": true,
         "settings": {
-            "fileUris": [
-                "script location"
-            ],
             "timestamp":123456789
         },
         "protectedSettings": {
             "commandToExecute": "myExecutionCommand",
             "storageAccountName": "myStorageAccountName",
             "storageAccountKey": "myStorageAccountKey",
-            "managedIdentity" : {}
+            "managedIdentity" : {},
+            "fileUris": [
+                "script location"
+            ]
         }
     }
 }
@@ -142,7 +142,7 @@ Bu öğeler gizli veriler olarak değerlendirilmeli ve uzantılar korumalı ayar
 #### <a name="property-value-details"></a>Özellik değeri ayrıntıları
 
 * `commandToExecute`: (**gerekli**, dize) yürütülecek giriş noktası betiği. Komutunuz parolalar gibi gizli dizileri içeriyorsa veya dosya URI 'larınız hassas ise bu alanı kullanın.
-* `fileUris`: (isteğe bağlı, dize dizisi) indirilecek dosya (ler) i URL 'Leri.
+* `fileUris`: (isteğe bağlı, dize dizisi) indirilecek dosya (ler) i URL 'Leri. URL 'Ler duyarlıdır (anahtarlar içeren URL 'Ler gibi), bu alan protectedSettings içinde belirtilmelidir
 * `timestamp` (isteğe bağlı, 32-bit tamsayı) bu alanı yalnızca bu alanın değerini değiştirerek betiğin yeniden çalıştırılması tetiklenecek şekilde kullanın.  Herhangi bir tamsayı değeri kabul edilebilir; yalnızca önceki değerden farklı olmalıdır.
 * `storageAccountName`: (isteğe bağlı, dize) depolama hesabının adı. Depolama kimlik bilgilerini belirtirseniz, `fileUris` Azure Blobları için tümünün URL 'si olması gerekir.
 * `storageAccountKey`: (isteğe bağlı, dize) depolama hesabının erişim anahtarı
@@ -153,6 +153,7 @@ Bu öğeler gizli veriler olarak değerlendirilmeli ve uzantılar korumalı ayar
 Aşağıdaki değerler ortak veya korumalı ayarlarda ayarlanabilir, uzantı, aşağıdaki değerlerin hem genel hem de korumalı ayarlarda ayarlandığı tüm yapılandırmaları reddeder.
 
 * `commandToExecute`
+* `fileUris`
 
 Genel ayarların kullanılması hata ayıklama için yararlı olabilir, ancak korumalı ayarları kullanmanız önerilir.
 

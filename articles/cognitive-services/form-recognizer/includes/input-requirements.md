@@ -5,12 +5,12 @@ ms.subservice: forms-recognizer
 ms.topic: include
 ms.date: 06/27/2019
 ms.author: lajanuar
-ms.openlocfilehash: 324fde5198fe3469e3979cf5cd102715118a49aa
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: dfd2b32094aae06675ea8ee9157370f9d2833e91
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103467330"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107518237"
 ---
 Form tanıyıcı, bu gereksinimleri karşılayan giriş belgelerinde çalışmaktadır:
 
@@ -22,6 +22,5 @@ Form tanıyıcı, bu gereksinimleri karşılayan giriş belgelerinde çalışmak
 * Eğitim veri kümesinin toplam boyutu 500 sayfa veya daha az olmalıdır.
 * PDF 'niz parola kilitliyse, göndermeden önce kilidi kaldırmanız gerekir.
 * Kağıt belgelerinden tarandığında, formlar yüksek kaliteli taramalar olmalıdır.
-* Metin Latin alfabesini (Ingilizce karakterler) kullanmalıdır.
 * Denetimsiz öğrenme için (etiketlenmemiş veriler olmadan), verilerin anahtar ve değer içermesi gerekir.
 * Denetimsiz öğrenme (etiketli veriler olmadan) için, anahtarların üzerinde veya solunda bir değer görünmelidir; Bunlar sağ tarafta veya doğru görünemez.

@@ -10,16 +10,16 @@ ms.subservice: forms-recognizer
 ms.topic: conceptual
 ms.date: 03/15/2021
 ms.author: lajanuar
-ms.openlocfilehash: 81e8cd5cf4af8da76ae4eb09bed5a4ee0368da4b
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8248b3ed21561340e963c848dee4430c48829ab1
+ms.sourcegitcommit: b8995b7dafe6ee4b8c3c2b0c759b874dff74d96f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103467366"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106285306"
 ---
 # <a name="form-recognizer-prebuilt-receipt-model"></a>Form tanıyıcı önceden oluşturulmuş makbuz modeli
 
-Azure form tanıyıcı, önceden oluşturulmuş giriş modelini kullanarak satış makbuzlarından bilgi çözümleyebilir ve ayıklayabilir. Ingilizce olarak yazılmış alındılardan önemli bilgileri ayıklamak için derin öğrenme modelleriyle güçlü [optik karakter tanıma (OCR)](../computer-vision/concept-recognizing-text.md) olanaklarımızı birleştirir.
+Azure form tanıyıcı, önceden oluşturulmuş giriş modelini kullanarak satış makbuzlarından bilgi çözümleyebilir ve ayıklayabilir. Ingilizce olarak yazılmış alındılardan önemli bilgileri ayıklamak için derin öğrenme modelleriyle güçlü [optik karakter tanıma (OCR)](../computer-vision/overview-ocr.md) olanaklarımızı birleştirir.
 
 ## <a name="understanding-receipts"></a>Alındıları anlama
 

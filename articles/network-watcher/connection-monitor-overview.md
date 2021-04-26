@@ -15,12 +15,12 @@ ms.workload: infrastructure-services
 ms.date: 01/04/2021
 ms.author: vinigam
 ms.custom: mvc
-ms.openlocfilehash: 7abaae033d2dbdb329a1f99d8f9845e5965d806c
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 24c181c17e49fe5b7c3001c1cb2839bc957ef463
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101712326"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106490497"
 ---
 # <a name="network-connectivity-monitoring-with-connection-monitor"></a>Bağlantı Izleyicisi ile ağ bağlantısı Izleme
 
@@ -287,12 +287,12 @@ Bağlantı Izleyicisi deneyiminden önce oluşturulan bağlantı izleyicilerinde
 
 Ölçümleri kullandığınızda, kaynak türünü Microsoft. Network/networkWatchers/Connectionmonitörleri olarak ayarlayın
 
-| Metric | Görünen ad | Birim | Toplama türü | Description | Boyutlar |
+| Metric | Görünen ad | Birim | Toplama türü | Açıklama | Boyutlar |
 | --- | --- | --- | --- | --- | --- |
 | ProbesFailedPercent (klasik) | % Yoklama başarısız oldu (klasik) | Yüzde | Ortalama | Bağlantı İzleme Araştırmaları yüzdesi başarısız oldu. | Boyut yok |
 | AverageRoundtripMs (klasik) | Ort. gidiş dönüş süresi (MS) (klasik) | Mayacak | Ortalama | Kaynak ve hedef arasında gönderilen bağlantı izleme araştırmaları için Ortalama ağ RTT. |             Boyut yok |
-| ChecksFailedPercent | % Denetim başarısız oldu | Yüzde | Ortalama | Bir test için başarısız denetimlerin yüzdesi. | Connectionmonitorresourceıd <br>SourceAddress <br>Kaynak <br>Sourceresourceıd <br>KaynakTürü <br>Protokol <br>Hedef adres <br>Hedef adı <br>Hedef RESOURCEID <br>Hedef türü <br>DestinationPort <br>TestGroupName <br>TestConfigurationName <br>Region |
-| Roundroundtimems | Gidiş dönüş süresi (MS) | Mayacak | Ortalama | Kaynak ve hedef arasında gönderilen denetimler için RTT. Bu değer, ortalama değildir. | Connectionmonitorresourceıd <br>SourceAddress <br>Kaynak <br>Sourceresourceıd <br>KaynakTürü <br>Protokol <br>Hedef adres <br>Hedef adı <br>Hedef RESOURCEID <br>Hedef türü <br>DestinationPort <br>TestGroupName <br>TestConfigurationName <br>Region |
+| ChecksFailedPercent | % Denetim başarısız oldu | Yüzde | Ortalama | Bir test için başarısız denetimlerin yüzdesi. | Connectionmonitorresourceıd <br>SourceAddress <br>Kaynak <br>Sourceresourceıd <br>KaynakTürü <br>Protokol <br>Hedef adres <br>Hedef adı <br>Hedef RESOURCEID <br>Hedef türü <br>DestinationPort <br>TestGroupName <br>TestConfigurationName <br>Bölge |
+| Roundroundtimems | Gidiş dönüş süresi (MS) | Mayacak | Ortalama | Kaynak ve hedef arasında gönderilen denetimler için RTT. Bu değer, ortalama değildir. | Connectionmonitorresourceıd <br>SourceAddress <br>Kaynak <br>Sourceresourceıd <br>KaynakTürü <br>Protokol <br>Hedef adres <br>Hedef adı <br>Hedef RESOURCEID <br>Hedef türü <br>DestinationPort <br>TestGroupName <br>TestConfigurationName <br>Bölge |
 | TestResult | Test sonucu | Count | Ortalama | Bağlantı İzleyicisi test sonucu | SourceAddress <br>Kaynak <br>Sourceresourceıd <br>KaynakTürü <br>Protokol <br>Hedef adres <br>Hedef adı <br>Hedef RESOURCEID <br>Hedef türü <br>DestinationPort <br>TestGroupName <br>TestConfigurationName <br>SourceIP <br>Hedef IP <br>SourceSubnet <br>Hedef alt ağ |
 
 #### <a name="metric-based-alerts-for-connection-monitor"></a>Bağlantı Izleyicisi için ölçüm tabanlı uyarılar
@@ -358,6 +358,8 @@ Kaynakları Azure VM 'Leri olan ağlarda aşağıdaki sorunlar tespit edilebilir
     * İki ağ geçidi arasındaki tünelin bağlantısı kesildi veya yok.
     * İkinci ağ geçidi, tünel tarafından bulunamadı.
     * Eşleme bilgisi bulunamadı.
+> [!NOTE]
+> 2 bağlantılı ağ geçidi varsa ve bunlardan biri kaynak uç noktası ile aynı bölgede değilse, CM bunu topoloji görünümü için ' hiçbir yol öğrenmiş ' olarak tanımlar. Bağlantı etkilenmez. Bu bilinen bir sorundur ve onarımla devam etmektedir. 
 * Microsoft Edge 'de yol eksikti.
 * Sistem yolları veya UDR nedeniyle trafik durduruldu.
 * Ağ Geçidi bağlantısında BGP etkin değil.

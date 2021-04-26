@@ -7,13 +7,13 @@ ms.author: alkemper
 ms.service: azure-app-configuration
 ms.custom: devx-track-csharp, fasttrack-edit
 ms.topic: conceptual
-ms.date: 2/25/2020
-ms.openlocfilehash: 386a0e27c0f73f5bcd42397ed515f7561d5097fd
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.date: 04/08/2021
+ms.openlocfilehash: 7a9eb992ff0cb98fdae2920da2beeda0bbd8941b
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104955066"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107877543"
 ---
 # <a name="use-managed-identities-to-access-app-configuration"></a>Uygulama Yapılandırması’na erişmek için yönetilen kimlikleri kullanma
 
@@ -41,7 +41,7 @@ Bu makalede şunları öğreneceksiniz:
 
 Bu öğreticiyi tamamlamak için aşağıdakiler gereklidir:
 
-* [.NET Core SDK](https://www.microsoft.com/net/download/windows).
+* [.NET Core SDK](https://dotnet.microsoft.com/download).
 * [Azure Cloud Shell yapılandırıldı](../cloud-shell/quickstart.md).
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
@@ -145,7 +145,7 @@ Portalda yönetilen bir kimlik ayarlamak için, önce bir uygulama oluşturun ve
     >config.AddAzureAppConfiguration(options =>
     >   options.Connect(new Uri(settings["AppConfig:Endpoint"]), new ManagedIdentityCredential(<your_clientId>)));
     >```
-    >[Azure kaynakları Için Yönetilen kimlikler SSS](../active-directory/managed-identities-azure-resources/known-issues.md#what-identity-will-imds-default-to-if-dont-specify-the-identity-in-the-request)bölümünde açıklandığı gibi, hangi yönetilen kimliğin kullanıldığını çözümlemek için varsayılan bir yol vardır. Bu durumda, Azure kimlik kitaplığı, gelecekte çok fazla çalışma zamanı sorunlarından kaçınmak için (örneğin, yeni bir kullanıcı tarafından atanan yönetilen kimlik eklenirse veya sistem tarafından atanan yönetilen kimlik etkinse) istenen kimliği belirtmenizi zorunlu kılar. Bu nedenle, yalnızca bir kullanıcı tarafından atanan yönetilen kimlik tanımlanmış olsa da, sistem tarafından atanan yönetilen kimlik yoksa, ClientID belirtmeniz gerekecektir.
+    >[Azure kaynakları Için Yönetilen kimlikler SSS](../active-directory/managed-identities-azure-resources/managed-identities-faq.md#what-identity-will-imds-default-to-if-dont-specify-the-identity-in-the-request)bölümünde açıklandığı gibi, hangi yönetilen kimliğin kullanıldığını çözümlemek için varsayılan bir yol vardır. Bu durumda, Azure kimlik kitaplığı, gelecekte çok fazla çalışma zamanı sorunlarından kaçınmak için (örneğin, yeni bir kullanıcı tarafından atanan yönetilen kimlik eklenirse veya sistem tarafından atanan yönetilen kimlik etkinse) istenen kimliği belirtmenizi zorunlu kılar. Bu nedenle, yalnızca bir kullanıcı tarafından atanan yönetilen kimlik tanımlanmış olsa da, sistem tarafından atanan yönetilen kimlik yoksa, ClientID belirtmeniz gerekecektir.
 
 
 1. Hem uygulama yapılandırma değerlerini hem de başvurularını Key Vault kullanmak için *program. cs* 'yi aşağıda gösterildiği gibi güncelleştirin. Bu kod `SetCredential` `ConfigureKeyVault` , yapılandırma sağlayıcısına Key Vault kimlik doğrulaması yapılırken hangi kimlik bilgilerinin kullanılacağını bildirmek için bir parçası olarak çağırır.
@@ -224,7 +224,7 @@ git add .
 git commit -m "Initial version"
 ```
 
-Kudu yapı sunucusuyla uygulamanız için yerel git dağıtımını etkinleştirmek üzere [`az webapp deployment source config-local-git`](/cli/azure/webapp/deployment/#az-webapp-deployment-source-config-local-git) Cloud Shell ' de çalıştırın.
+Kudu yapı sunucusuyla uygulamanız için yerel git dağıtımını etkinleştirmek üzere [`az webapp deployment source config-local-git`](/cli/azure/webapp/deployment/#az_webapp_deployment_source_config_local_git) Cloud Shell ' de çalıştırın.
 
 ```azurecli-interactive
 az webapp deployment source config-local-git --name <app_name> --resource-group <group_name>

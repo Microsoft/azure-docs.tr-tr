@@ -9,12 +9,12 @@ ms.date: 10/08/2018
 ms.author: cynthn
 ms.custom: legacy, devx-track-azurecli
 ms.collection: linux
-ms.openlocfilehash: 8e81c204c1f05b7fc6bdf1efc7060e2094c648e5
-ms.sourcegitcommit: e6de1702d3958a3bea275645eb46e4f2e0f011af
+ms.openlocfilehash: dddbad2403734bc749497a7acca16b2a5b6076f4
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102630631"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107792264"
 ---
 # <a name="how-to-create-a-managed-image-of-a-virtual-machine-or-vhd"></a>Bir sanal makinenin veya VHD 'nin yönetilen görüntüsünü oluşturma
 
@@ -32,7 +32,7 @@ Görüntü oluşturmadan önce aşağıdaki öğelere sahip olmanız gerekir:
 
 * Yönetilen diskler kullanan Kaynak Yöneticisi dağıtım modelinde oluşturulan bir Azure VM 'si. Henüz bir Linux sanal makinesi oluşturmadıysanız [Portal](quick-create-portal.md), [Azure CLI](quick-create-cli.md)veya [Kaynak Yöneticisi şablonlarını](create-ssh-secured-vm-from-template.md)kullanabilirsiniz. VM 'yi gerektiği şekilde yapılandırın. Örneğin, [veri diskleri ekleyin](add-disk.md), güncelleştirmeleri uygulayın ve uygulamaları yükler. 
 
-* En son [Azure CLI](/cli/azure/install-az-cli2) yüklü ve [az oturum açma](/cli/azure/reference-index#az-login)ile bir Azure hesabında oturum açmış olmalıdır.
+* En son [Azure CLI](/cli/azure/install-az-cli2) yüklü ve [az oturum açma](/cli/azure/reference-index#az_login)ile bir Azure hesabında oturum açmış olmalıdır.
 
 ## <a name="prefer-a-tutorial-instead"></a>Bunun yerine bir öğretici tercih edilsin mi?
 
@@ -77,7 +77,7 @@ VM 'yi Genelleştirilmiş olarak işaretlemek ve görüntüyü yakalamak için A
 
     Genelleştirilmiş bir VM artık yeniden başlatılamaz.
 
-3. [Az Image Create](/cli/azure/image#az-image-create)komutuyla VM kaynağının bir görüntüsünü oluşturun. Aşağıdaki örnek *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı VM kaynağını kullanarak *MyImage* adlı bir görüntü oluşturur.
+3. [Az Image Create](/cli/azure/image#az_image_create)komutuyla VM kaynağının bir görüntüsünü oluşturun. Aşağıdaki örnek *Myresourcegroup* adlı kaynak grubunda *MYVM* adlı VM kaynağını kullanarak *MyImage* adlı bir görüntü oluşturur.
    
     ```azurecli
     az image create \
@@ -106,7 +106,7 @@ az vm create \
 
 ### <a name="creating-the-vm-in-another-resource-group"></a>Başka bir kaynak grubunda VM oluşturma 
 
-Aboneliğinizdeki herhangi bir kaynak grubunda bulunan bir görüntüden sanal makineler oluşturabilirsiniz. Görüntüden farklı bir kaynak grubunda bir VM oluşturmak için görüntsün tam kaynak KIMLIĞINI belirtin. Görüntülerin listesini görüntülemek için [az Image List](/cli/azure/image#az-image-list) kullanın. Çıktı aşağıdaki örneğe benzerdir.
+Aboneliğinizdeki herhangi bir kaynak grubunda bulunan bir görüntüden sanal makineler oluşturabilirsiniz. Görüntüden farklı bir kaynak grubunda bir VM oluşturmak için görüntsün tam kaynak KIMLIĞINI belirtin. Görüntülerin listesini görüntülemek için [az Image List](/cli/azure/image#az_image_list) kullanın. Çıktı aşağıdaki örneğe benzerdir.
 
 ```json
 "id": "/subscriptions/guid/resourceGroups/MYRESOURCEGROUP/providers/Microsoft.Compute/images/myImage",
@@ -114,7 +114,7 @@ Aboneliğinizdeki herhangi bir kaynak grubunda bulunan bir görüntüden sanal m
    "name": "myImage",
 ```
 
-Aşağıdaki örnek, görüntü kaynak KIMLIĞI belirterek kaynak görüntü dışında bir kaynak grubunda bir VM oluşturmak için [az VM Create](/cli/azure/vm#az-vm-create) kullanır.
+Aşağıdaki örnek, görüntü kaynak KIMLIĞI belirterek kaynak görüntü dışında bir kaynak grubunda bir VM oluşturmak için [az VM Create](/cli/azure/vm#az_vm_create) kullanır.
 
 ```azurecli
 az vm create \
@@ -128,7 +128,7 @@ az vm create \
 
 ## <a name="step-4-verify-the-deployment"></a>4. Adım: dağıtımı doğrulama
 
-Dağıtımı doğrulamak ve yeni VM 'yi kullanmaya başlamak için oluşturduğunuz sanal makineye SSH. SSH aracılığıyla bağlanmak için [az VM Show](/cli/azure/vm#az-vm-show)komutuyla sanal makinenizin IP ADRESINI veya FQDN 'sini bulun.
+Dağıtımı doğrulamak ve yeni VM 'yi kullanmaya başlamak için oluşturduğunuz sanal makineye SSH. SSH aracılığıyla bağlanmak için [az VM Show](/cli/azure/vm#az_vm_show)komutuyla sanal makinenizin IP ADRESINI veya FQDN 'sini bulun.
 
 ```azurecli
 az vm show \

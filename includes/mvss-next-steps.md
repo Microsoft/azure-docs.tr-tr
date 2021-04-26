@@ -5,10 +5,10 @@ ms.topic: include
 ms.date: 04/26/2019
 ms.author: manayar
 ms.openlocfilehash: ff3434a7d1b5b4643d9aca5fae03ac03fe65b514
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96028433"
 ---
 [Azure Resource Manager belgelerini](../articles/azure-resource-manager/templates/deploy-powershell.md) izleyerek yukarıdaki şablonu dağıtabilirsiniz.

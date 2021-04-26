@@ -3,14 +3,15 @@ title: Azure Otomasyonu 'nda Windows karma runbook çalışanı dağıtma
 description: Bu makalede, yerel veri merkezinizdeki veya bulut ortamınızda Windows tabanlı makinelerde runbook 'lar çalıştırmak için kullanabileceğiniz bir karma Runbook Worker dağıtımı açıklanır.
 services: automation
 ms.subservice: process-automation
-ms.date: 11/24/2020
+ms.date: 04/02/2021
 ms.topic: conceptual
-ms.openlocfilehash: f6858c7350e6c72a096b2f2bd5f4a4ff606bf023
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 4bf27ffc888e189f15e1c435309cbeddb1c11fec
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "100651366"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830349"
 ---
 # <a name="deploy-a-windows-hybrid-runbook-worker"></a>Windows karma runbook çalışanı dağıtma
 
@@ -83,7 +84,32 @@ Bir Windows Kullanıcı karma Runbook Worker 'ı yüklemek ve yapılandırmak i�
 
 ## <a name="automated-deployment"></a>Otomatik dağıtım
 
-Otomatik dağıtım yöntemi, Windows karma Runbook Worker rolünü otomatikleştirmek ve yapılandırmak için PowerShell betiği **New-OnPremiseHybridWorker.ps1** kullanır. Şunları gerçekleştirir:
+Karma Runbook Worker 'ı otomatik olarak dağıtmak için iki yöntem vardır. Azure portal runbook galerisinden runbook 'u içeri aktarabilir ve çalıştırabilir ya da PowerShell Galerisi bir betiği el ile indirebilirsiniz.
+
+### <a name="importing-a-runbook-from-the-runbook-gallery"></a>Runbook galerisinden runbook içeri aktarma
+
+İçeri aktarma yordamı, [Azure Portal GitHub 'dan runbook 'Ları Içeri aktarma](automation-runbook-gallery.md#import-runbooks-from-github-with-the-azure-portal)bölümünde ayrıntılı olarak açıklanmıştır. İçeri aktarılacak runbook 'un adı **Otomasyon Windows HybridWorker oluştur**.
+
+Runbook aşağıdaki parametreleri kullanır.
+
+| Parametre | Durum | Açıklama |
+| ------- | ----- | ----------- |
+| `Location` | Zorunlu | Log Analytics çalışma alanının konumu. |
+| `ResourceGroupName` | Zorunlu | Otomasyon hesabınızın kaynak grubu. |
+| `AccountName` | Zorunlu | Karma çalıştırma çalışanının kaydedileceği Otomasyon hesabı adı. |
+| `CreateLA` | Zorunlu | True ise, `WorkspaceName` bir Log Analytics çalışma alanı oluşturmak için değerini kullanır. False ise, değeri `WorkspaceName` var olan bir çalışma alanına başvurmalıdır. |
+| `LAlocation` | İsteğe Bağlı | Log Analytics çalışma alanının oluşturulacağı konum veya zaten var. |
+| `WorkspaceName` | İsteğe Bağlı | Kullanılacak Log Analytics çalışma alanının adı. |
+| `CreateVM` | Zorunlu | True ise, `VMName` Yeni BIR VM 'nin adı olarak değerini kullanın. Yanlışsa, `VMName` mevcut VM 'yi bulmak ve kaydetmek için kullanın. |
+| `VMName` | İsteğe Bağlı | Değerine bağlı olarak, oluşturulan veya kaydedilen sanal makinenin adı `CreateVM` . |
+| `VMImage` | İsteğe Bağlı | Oluşturulacak VM görüntüsünün adı. |
+| `VMlocation` | İsteğe Bağlı | Oluşturulan veya kaydedilen sanal makinenin konumu. Bu konum belirtilmemişse, değeri `LAlocation` kullanılır. |
+| `RegisterHW` | Zorunlu | Doğru ise, VM 'yi karma çalışan olarak kaydedin. |
+| `WorkerGroupName` | Zorunlu | Karma çalışanı grubunun adı. |
+
+### <a name="download-a-script-from-the-powershell-gallery"></a>PowerShell Galerisi bir betiği indirin
+
+Bu otomatik dağıtım yöntemi, Windows karma Runbook Worker rolünü otomatikleştirmek ve yapılandırmak için PowerShell betiği **New-OnPremiseHybridWorker.ps1** kullanır. Şunları gerçekleştirir:
 
 * Gerekli modülleri yükleme
 * Azure hesabınızla oturum açar
@@ -96,7 +122,7 @@ Otomatik dağıtım yöntemi, Windows karma Runbook Worker rolünü otomatikleş
 
 Windows makinenize betiği kullanarak rolü yüklemek için aşağıdaki adımları gerçekleştirin.
 
-1. **New-OnPremiseHybridWorker.ps1** betiğini [PowerShell Galerisi](https://www.powershellgallery.com/packages/New-OnPremiseHybridWorker)indirin. Betiği indirdikten sonra hedef makinede kopyalayın veya çalıştırın. **New-OnPremiseHybridWorker.ps1** betiği yürütme sırasında aşağıdaki parametreleri kullanır.
+1. **New-OnPremiseHybridWorker.ps1** betiğini [PowerShell Galerisi](https://www.powershellgallery.com/packages/New-OnPremiseHybridWorker)indirin. Betiği indirdikten sonra hedef makinede kopyalayın veya çalıştırın. Betik aşağıdaki parametreleri kullanır.
 
     | Parametre | Durum | Açıklama |
     | --------- | ------ | ----------- |
@@ -109,9 +135,9 @@ Windows makinenize betiği kullanarak rolü yüklemek için aşağıdaki adımla
     | `TenantID` | İsteğe Bağlı | Otomasyon hesabınızla ilişkili kiracı kuruluşunun tanıtıcısı. |
     | `WorkspaceName` | İsteğe Bağlı | Log Analytics çalışma alanı adı. Log Analytics çalışma alanınız yoksa, betik bir tane oluşturur ve yapılandırır. |
 
-2. Yükseltilmiş bir 64 bit PowerShell komut istemi açın.
+1. Yükseltilmiş bir 64 bit PowerShell komut istemi açın.
 
-3. PowerShell komut isteminde, indirdiğiniz betiği içeren klasöre gidin. ,,,, Ve parametreleri için değerleri değiştirin `AutomationAccountName` `AAResourceGroupName` `OMSResourceGroupName` `HybridGroupName` `SubscriptionID` `WorkspaceName` . Sonra betiği çalıştırın.
+1. PowerShell komut isteminde, indirdiğiniz betiği içeren klasöre gidin. ,,,, Ve parametreleri için değerleri değiştirin `AutomationAccountName` `AAResourceGroupName` `OMSResourceGroupName` `HybridGroupName` `SubscriptionID` `WorkspaceName` . Sonra betiği çalıştırın.
 
     Betiği çalıştırdıktan sonra Azure ile kimlik doğrulaması yapmanız istenir. Abonelik **yöneticileri** rolünün üyesi ve aboneliğin ortak Yöneticisi olan bir hesapla oturum açmalısınız.
 
@@ -127,9 +153,9 @@ Windows makinenize betiği kullanarak rolü yüklemek için aşağıdaki adımla
     .\New-OnPremiseHybridWorker.ps1 @NewOnPremiseHybridWorkerParameters
     ```
 
-4. NuGet 'i yüklemek ve Azure kimlik bilgilerinizle kimlik doğrulaması yapmak için kabul etmeniz istenir. En son NuGet sürümüne sahip değilseniz, [mevcut NuGet dağıtım sürümlerinden](https://www.nuget.org/downloads)indirebilirsiniz.
+1. NuGet 'i yüklemek ve Azure kimlik bilgilerinizle kimlik doğrulaması yapmak için kabul etmeniz istenir. En son NuGet sürümüne sahip değilseniz, [mevcut NuGet dağıtım sürümlerinden](https://www.nuget.org/downloads)indirebilirsiniz.
 
-5. Betiği tamamladıktan sonra dağıtımı doğrulayın. Otomasyon hesabınızdaki **karma runbook çalışanı grupları** sayfasında, **Kullanıcı karma runbook çalışanları grubu** sekmesinde, yeni grup ve üye sayısını gösterir. Mevcut bir gruptur, üye sayısı artırılır. Sayfadaki listeden grubu seçebilirsiniz, sol taraftaki menüden **hibrit çalışanlar** ' ı seçin. **Karma çalışanlar** sayfasında, grubun her bir üyesini listelendiğini görebilirsiniz.
+1. Betiği tamamladıktan sonra dağıtımı doğrulayın. Otomasyon hesabınızdaki **karma runbook çalışanı grupları** sayfasında, **Kullanıcı karma runbook çalışanları grubu** sekmesinde, yeni grup ve üye sayısını gösterir. Mevcut bir gruptur, üye sayısı artırılır. Sayfadaki listeden grubu seçebilirsiniz, sol taraftaki menüden **hibrit çalışanlar** ' ı seçin. **Karma çalışanlar** sayfasında, grubun her bir üyesini listelendiğini görebilirsiniz.
 
 ## <a name="manual-deployment"></a>El ile dağıtım
 
@@ -141,7 +167,7 @@ Bir Windows karma runbook çalışanı yüklemek ve yapılandırmak için aşağ
     Set-AzOperationalInsightsIntelligencePack -ResourceGroupName <resourceGroupName> -WorkspaceName <workspaceName> -IntelligencePackName "AzureAutomation" -Enabled $true
     ```
 
-2. Log Analytics aracısını hedef makineye dağıtın.
+1. Log Analytics aracısını hedef makineye dağıtın.
 
     * Azure VM 'Leri için [Windows için sanal makine uzantısı](../virtual-machines/extensions/oms-windows.md)' nı kullanarak windows için Log Analytics aracısını yüklersiniz. Uzantı Log Analytics aracısını Azure sanal makinelerine yükleyip sanal makineleri mevcut bir Log Analytics çalışma alanına kaydeder. [ *Linux* veya *Windows* VM 'leri için dağıtım Log Analytics aracısını](../governance/policy/samples/built-in-policies.md#monitoring) atamak üzere bir Azure Resource Manager şablonu, PowerShell veya Azure İlkesi kullanabilirsiniz. Aracı yüklendikten sonra, makine Otomasyon hesabınızdaki bir karma Runbook Worker grubuna eklenebilir.
     
@@ -162,7 +188,7 @@ Bir Windows karma runbook çalışanı yüklemek ve yapılandırmak için aşağ
 
     Azure Ilkesini kullanarak Windows veya Linux için Log Analytics Aracısı yüklemenizi öneririz.
 
-3. Aracının çalışma alanına rapor ettiğini doğrulayın
+1. Aracının çalışma alanına rapor ettiğini doğrulayın
 
     Windows için Log Analytics Aracısı, makineleri bir Azure Izleyici Log Analytics çalışma alanına bağlar. Aracıyı makinenize yükleyip çalışma alanınıza bağladığınızda, karma Runbook Worker için gereken bileşenleri otomatik olarak indirir.
 
@@ -176,9 +202,9 @@ Bir Windows karma runbook çalışanı yüklemek ve yapılandırmak için aşağ
 
     Arama sonuçlarında, makineye bağlı olduğunu ve hizmete raporlanmasını belirten, makinenin sinyal kayıtlarını görmeniz gerekir. Varsayılan olarak, her aracı atanmış çalışma alanına bir sinyal kaydını iletir. Aracı yüklemesini ve kurulumunu gerçekleştirmek için aşağıdaki adımları kullanın.
 
-4. Log Analytics aracısını barındıran makinede hibrit Runbook Worker sürümünü onaylayın, `C:\Program Files\Microsoft Monitoring Agent\Agent\AzureAutomation\` **Sürüm** alt klasörüne göz atarak göz atabilirsiniz. Bu klasör, çalışma alanında çözüm etkinleştirildikten sonra makinede birkaç dakika sonra görüntülenir.
+1. Log Analytics aracısını barındıran makinede hibrit Runbook Worker sürümünü onaylayın, `C:\Program Files\Microsoft Monitoring Agent\Agent\AzureAutomation\` **Sürüm** alt klasörüne göz atarak göz atabilirsiniz. Bu klasör, çalışma alanında çözüm etkinleştirildikten sonra makinede birkaç dakika sonra görüntülenir.
 
-5. Runbook ortamını yükleyip Azure Otomasyonu ' na bağlanın. Bir aracıyı bir Log Analytics çalışma alanına rapor vermek ve **Otomasyon** çözümünü içeri aktarmak üzere yapılandırdığınızda, çözüm `HybridRegistration` PowerShell modülünü aşağı iter. Bu modül `Add-HybridRunbookWorker` cmdlet 'ini içerir. Runbook ortamını makineye yüklemek ve Azure Otomasyonu 'na kaydetmek için bu cmdlet 'i kullanın.
+1. Runbook ortamını yükleyip Azure Otomasyonu ' na bağlanın. Bir aracıyı bir Log Analytics çalışma alanına rapor vermek ve **Otomasyon** çözümünü içeri aktarmak üzere yapılandırdığınızda, çözüm `HybridRegistration` PowerShell modülünü aşağı iter. Bu modül `Add-HybridRunbookWorker` cmdlet 'ini içerir. Runbook ortamını makineye yüklemek ve Azure Otomasyonu 'na kaydetmek için bu cmdlet 'i kullanın.
 
     Yönetici modunda bir PowerShell oturumu açın ve aşağıdaki komutları çalıştırarak modülü içeri aktarın.
 
@@ -187,7 +213,7 @@ Bir Windows karma runbook çalışanı yüklemek ve yapılandırmak için aşağ
     Import-Module .\HybridRegistration.psd1
     ```
 
-6. , `Add-HybridRunbookWorker` Ve parametrelerinin değerlerini belirten cmdlet 'ini çalıştırın `Url` `Key` `GroupName` .
+1. , `Add-HybridRunbookWorker` Ve parametrelerinin değerlerini belirten cmdlet 'ini çalıştırın `Url` `Key` `GroupName` .
 
     ```powershell-interactive
     Add-HybridRunbookWorker –GroupName <String> -Url <Url> -Key <String>
@@ -205,7 +231,7 @@ Bir Windows karma runbook çalışanı yüklemek ve yapılandırmak için aşağ
 
     * Gerekirse, `Verbose` yükleme hakkındaki ayrıntıları almak için parametresini ayarlayın.
 
-7. Komut tamamlandıktan sonra dağıtımı doğrulayın. Otomasyon hesabınızdaki **karma runbook çalışanı grupları** sayfasında, **Kullanıcı karma runbook çalışanları grubu** sekmesinde, yeni veya mevcut grup ve üye sayısını gösterir. Mevcut bir gruptur, üye sayısı artırılır. Sayfadaki listeden grubu seçebilirsiniz, sol taraftaki menüden **hibrit çalışanlar**' ı seçin. **Karma çalışanlar** sayfasında, grubun her bir üyesini listelendiğini görebilirsiniz.
+1. Komut tamamlandıktan sonra dağıtımı doğrulayın. Otomasyon hesabınızdaki **karma runbook çalışanı grupları** sayfasında, **Kullanıcı karma runbook çalışanları grubu** sekmesinde, yeni veya mevcut grup ve üye sayısını gösterir. Mevcut bir gruptur, üye sayısı artırılır. Sayfadaki listeden grubu seçebilirsiniz, sol taraftaki menüden **hibrit çalışanlar**' ı seçin. **Karma çalışanlar** sayfasında, grubun her bir üyesini listelendiğini görebilirsiniz.
 
 ## <a name="install-powershell-modules"></a>PowerShell modüllerini yükler
 
@@ -219,9 +245,9 @@ Yüklenen modüller, `PSModulePath` karma çalışanın otomatik olarak içe akt
 
 1. Azure portal Otomasyon hesabınıza gidin.
 
-2. **Hesap ayarları** altında **anahtarlar** ' ı seçin ve **URL** ve **birincil erişim anahtarı** değerlerini aklınızda yapın.
+1. **Hesap ayarları** altında **anahtarlar** ' ı seçin ve **URL** ve **birincil erişim anahtarı** değerlerini aklınızda yapın.
 
-3. Yönetici modunda bir PowerShell oturumu açın ve URL 'niz ile birincil erişim anahtarı değerlerinizle aşağıdaki komutu çalıştırın. `Verbose`Kaldırma işleminin ayrıntılı günlüğü için parametresini kullanın. Eski makineleri karma çalışanı grubundan kaldırmak için isteğe bağlı `machineName` parametresini kullanın.
+1. Yönetici modunda bir PowerShell oturumu açın ve URL 'niz ile birincil erişim anahtarı değerlerinizle aşağıdaki komutu çalıştırın. `Verbose`Kaldırma işleminin ayrıntılı günlüğü için parametresini kullanın. Eski makineleri karma çalışanı grubundan kaldırmak için isteğe bağlı `machineName` parametresini kullanın.
 
 ```powershell-interactive
 Remove-HybridRunbookWorker -Url <URL> -Key <primaryAccessKey> -MachineName <computerName>
@@ -233,11 +259,11 @@ Karma runbook çalışanı grubunu kaldırmak için, önce karma runbook çalı�
 
 1. Azure portal Otomasyon hesabını açın.
 
-2. **Işlem Otomasyonu** altında **karma çalışan grupları** ' nı seçin. Silmek istediğiniz grubu seçin. Bu grubun Özellikler sayfası görüntülenir.
+1. **Işlem Otomasyonu** altında **karma çalışan grupları** ' nı seçin. Silmek istediğiniz grubu seçin. Bu grubun Özellikler sayfası görüntülenir.
 
    ![Özellikler sayfası](media/automation-hybrid-runbook-worker/automation-hybrid-runbook-worker-group-properties.png)
 
-3. Seçili grubun Özellikler sayfasında **Sil**' i seçin. Bu eylemi onaylamanızı isteyen bir ileti. Devam etmek istediğinizden emin değilseniz **Evet** ' i seçin.
+1. Seçili grubun Özellikler sayfasında **Sil**' i seçin. Bu eylemi onaylamanızı isteyen bir ileti. Devam etmek istediğinizden emin değilseniz **Evet** ' i seçin.
 
    ![Onay iletisi](media/automation-hybrid-runbook-worker/automation-hybrid-runbook-worker-confirm-delete.png)
 

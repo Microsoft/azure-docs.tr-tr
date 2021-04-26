@@ -13,12 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/31/2020
 ms.author: kumud
-ms.openlocfilehash: 9a321687a755f8a3d6e6d9139138d61c58764ef4
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 5835ea4d80f9c4111b76672facc4a0250ae0079a
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98932609"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107769868"
 ---
 # <a name="add-ipv6-to-an-ipv4-application-in-azure-virtual-network---azure-cli"></a>Azure sanal ağındaki bir IPv4 uygulamasına IPv6 ekleme-Azure CLı
 
@@ -48,7 +48,7 @@ az network public-ip create \
 
 ## <a name="configure-ipv6-load-balancer-frontend"></a>IPv6 yük dengeleyici ön uç 'yi yapılandırma
 
-[Az Network lb ön uç-IP Create](/cli/azure/network/lb/frontend-ip#az-network-lb-frontend-ip-create) ' i kullanarak yük dengeleyiciyi yenı IPv6 IP adresiyle yapılandırın:
+[Az Network lb ön uç-IP Create](/cli/azure/network/lb/frontend-ip#az_network_lb_frontend_ip_create) ' i kullanarak yük dengeleyiciyi yenı IPv6 IP adresiyle yapılandırın:
 
 ```azurecli-interactive
 az network lb frontend-ip create \
@@ -60,7 +60,7 @@ az network lb frontend-ip create \
 
 ## <a name="configure-ipv6-load-balancer-backend-pool"></a>IPv6 yük dengeleyici arka uç havuzunu yapılandırma
 
-[Az Network lb Address-Pool Create](/cli/azure/network/lb/address-pool#az-network-lb-address-pool-create) kullanılarak IPv6 adresleriyle NIC 'ler için arka uç havuzunu aşağıdaki gibi oluşturun:
+[Az Network lb Address-Pool Create](/cli/azure/network/lb/address-pool#az_network_lb_address_pool_create) kullanılarak IPv6 adresleriyle NIC 'ler için arka uç havuzunu aşağıdaki gibi oluşturun:
 
 ```azurecli-interactive
 az network lb address-pool create \
@@ -71,7 +71,7 @@ az network lb address-pool create \
 
 ## <a name="configure-ipv6-load-balancer-rules"></a>IPv6 yük dengeleyici kurallarını yapılandırma
 
-[Az Network lb Rule Create](/cli/azure/network/lb/rule#az-network-lb-rule-create)komutuyla IPv6 yük dengeleyici kuralları oluşturun.
+[Az Network lb Rule Create](/cli/azure/network/lb/rule#az_network_lb_rule_create)komutuyla IPv6 yük dengeleyici kuralları oluşturun.
 
 ```azurecli-interactive
 az network lb rule create \
@@ -104,7 +104,7 @@ az network vnet subnet update \
 
 ## <a name="add-ipv6-configuration-to-nics"></a>NIC 'lere IPv6 yapılandırması ekleme
 
-[Az Network Nic IP-Config Create](/cli/azure/network/nic/ip-config#az-network-nic-ip-config-create) komutunu kullanarak VM NIC 'Leri bir IPv6 adresi ile yapılandırın:
+[Az Network Nic IP-Config Create](/cli/azure/network/nic/ip-config#az_network_nic_ip_config_create) komutunu kullanarak VM NIC 'Leri bir IPv6 adresi ile yapılandırın:
 
 ```azurecli-interactive
 az network nic ip-config create \

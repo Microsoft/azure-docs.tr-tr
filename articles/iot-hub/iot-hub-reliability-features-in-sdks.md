@@ -11,12 +11,12 @@ ms.custom:
 - amqp
 - mqtt
 - devx-track-csharp
-ms.openlocfilehash: efd16f0e8dd6ba952b647fbfbd6f35fc05ffd4be
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 4135f1c29ce868c04c23b3ce97529037b123c9fa
+ms.sourcegitcommit: 3ee3045f6106175e59d1bd279130f4933456d5ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "102615848"
+ms.lasthandoff: 03/31/2021
+ms.locfileid: "106077434"
 ---
 # <a name="manage-connectivity-and-reliable-messaging-by-using-azure-iot-hub-device-sdks"></a>Azure IoT Hub cihaz SDK 'larını kullanarak bağlantı ve güvenilir mesajlaşma yönetimi
 
@@ -93,7 +93,7 @@ SDK 'lar üç yeniden deneme ilkesi sağlar:
    |-----|----------------------|--|--|
    |  C/iOS  | [IOTHUB_CLIENT_RESULT IoTHubClient_SetRetryPolicy](https://github.com/Azure/azure-iot-sdk-c/blob/2018-05-04/iothub_client/inc/iothub_client.h#L188)        | **Varsayılan**: [IOTHUB_CLIENT_RETRY_EXPONENTIAL_BACKOFF](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies)<BR>**Özel:** kullanılabilir [retrypolicy](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies) kullanın<BR>**Yeniden deneme yok:** [IOTHUB_CLIENT_RETRY_NONE](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#connection-retry-policies)  | [C/iOS uygulama](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/connection_and_messaging_reliability.md#)  |
    | Java| [SetRetryPolicy](/java/api/com.microsoft.azure.sdk.iot.device.deviceclientconfig.setretrypolicy)        | **Varsayılan**: [üs albackoffwithdeğişim sınıfı](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/NoRetry.java)<BR>**Özel:** [retrypolicy arabirimini](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/RetryPolicy.java) Uygula<BR>**Yeniden deneme yok:** [NoRetry sınıfı](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/NoRetry.java)  | [Java uygulama](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/devdoc/requirement_docs/com/microsoft/azure/iothub/retryPolicy.md) |
-   | .NET| [DeviceClient. SetRetryPolicy](/dotnet/api/microsoft.azure.devices.client.deviceclient.setretrypolicy) | **Varsayılan**: [üs albackoff sınıfı](/dotnet/api/microsoft.azure.devices.client.exponentialbackoff)<BR>**Özel:** [ıretrypolicy arabirimini](/dotnet/api/microsoft.azure.devices.client.iretrypolicy) Uygula<BR>**Yeniden deneme yok:** [NoRetry sınıfı](/dotnet/api/microsoft.azure.devices.client.noretry) | [C# uygulama](https://github.com/Azure/azure-iot-sdk-csharp) | |
+   | .NET| [DeviceClient. SetRetryPolicy](/dotnet/api/microsoft.azure.devices.client.deviceclient.setretrypolicy) | **Varsayılan**: [üs albackoff sınıfı](/dotnet/api/microsoft.azure.devices.client.exponentialbackoff)<BR>**Özel:** [ıretrypolicy arabirimini](/dotnet/api/microsoft.azure.devices.client.iretrypolicy) Uygula<BR>**Yeniden deneme yok:** [NoRetry sınıfı](/dotnet/api/microsoft.azure.devices.client.noretry) | [C# uygulama](https://github.com/Azure/azure-iot-sdk-csharp) |
    | Düğüm| [setRetryPolicy](/javascript/api/azure-iot-device/client) | **Varsayılan**: [üs albackoffwithdeğişim sınıfı](https://github.com/Azure/azure-iot-sdk-java/blob/master/device/iot-device-client/src/main/java/com/microsoft/azure/sdk/iot/device/transport/NoRetry.java) | [Düğüm uygulama](https://github.com/Azure/azure-iot-sdk-node/wiki/Connectivity-and-Retries#types-of-errors-and-how-to-detect-them) |
    | Python| Şu anda desteklenmiyor | Şu anda desteklenmiyor | Şu anda desteklenmiyor |
 

@@ -4,12 +4,12 @@ description: Bu betik, bir Batch işi oluşturur ve bu işe bir dizi görev ekle
 ms.topic: sample
 ms.date: 12/12/2019
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: b67925f48a9d2dbe0b4559d46d783b500e7a0773
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 8e51fa96370b46c9a5a5d5ed6fd7593a06e45430
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "93100924"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107768178"
 ---
 # <a name="cli-example-run-a-job-and-tasks-with-azure-batch"></a>CLI örneği: Azure Batch ile bir işi ve görevleri çalıştırma
 
@@ -37,16 +37,16 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az batch account create](/cli/azure/batch/account#az-batch-account-create) | Batch hesabını oluşturur. |
-| [az batch account login](/cli/azure/batch/account#az-batch-account-login) | Daha fazla CLI etkileşimi için belirtilen Batch hesabına karşı kimlik doğrulaması yapar.  |
-| [az batch pool create](/cli/azure/batch/pool#az-batch-pool-create) | İşlem düğümleri havuzu oluşturur.  |
-| [az batch job create](/cli/azure/batch/job#az-batch-job-create) | Batch işi oluşturur.  |
-| [az batch task create](/cli/azure/batch/task#az-batch-task-create) | Belirtilen Batch işine bir görev ekler.  |
-| [az batch job set](/cli/azure/batch/job#az-batch-job-set) | Bir Batch işinin özelliklerini güncelleştirir.  |
-| [az batch job show](/cli/azure/batch/job#az-batch-job-show) | Belirtilen Batch işinin ayrıntılarını alır.  |
-| [az batch task show](/cli/azure/batch/task#az-batch-task-show) | Belirtilen Batch işinden bir görevin ayrıntılarını alır.  |
-| [az group delete](/cli/azure/group#az-group-delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az batch account create](/cli/azure/batch/account#az_batch_account_create) | Batch hesabını oluşturur. |
+| [az batch account login](/cli/azure/batch/account#az_batch_account_login) | Daha fazla CLI etkileşimi için belirtilen Batch hesabına karşı kimlik doğrulaması yapar.  |
+| [az batch pool create](/cli/azure/batch/pool#az_batch_pool_create) | İşlem düğümleri havuzu oluşturur.  |
+| [az batch job create](/cli/azure/batch/job#az_batch_job_create) | Batch işi oluşturur.  |
+| [az batch task create](/cli/azure/batch/task#az_batch_task_create) | Belirtilen Batch işine bir görev ekler.  |
+| [az batch job set](/cli/azure/batch/job#az_batch_job_set) | Bir Batch işinin özelliklerini güncelleştirir.  |
+| [az batch job show](/cli/azure/batch/job#az_batch_job_show) | Belirtilen Batch işinin ayrıntılarını alır.  |
+| [az batch task show](/cli/azure/batch/task#az_batch_task_show) | Belirtilen Batch işinden bir görevin ayrıntılarını alır.  |
+| [az group delete](/cli/azure/group#az_group_delete) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

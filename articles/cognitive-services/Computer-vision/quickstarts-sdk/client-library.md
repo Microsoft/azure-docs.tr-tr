@@ -1,14 +1,14 @@
 ---
-title: 'Hızlı başlangıç: Görüntü İşleme istemci kitaplığı'
+title: 'Hızlı başlangıç: istemci kitaplığı veya REST API okuma'
 titleSuffix: Azure Cognitive Services
-description: Seçtiğiniz dilde yerel bir istemci kitaplığı aracılığıyla uygulamanızda Azure Görüntü İşleme kullanmayı öğrenin.
+description: Seçtiğiniz dilde yerel bir istemci kitaplığı aracılığıyla uygulamanızda optik karakter tanıma (OCR) özelliğini nasıl kullanacağınızı öğrenin.
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: computer-vision
 ms.topic: quickstart
-ms.date: 12/15/2020
+ms.date: 03/29/2021
 ms.author: pafarley
 ms.custom:
 - devx-track-python
@@ -17,16 +17,16 @@ ms.custom:
 - cog-serv-seo-aug-2020
 zone_pivot_groups: programming-languages-computer-vision
 keywords: görüntü işleme, bilgisayar görme hizmeti
-ms.openlocfilehash: 50976de4a60e5330740bcbf387d74c505316c0cf
-ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
+ms.openlocfilehash: bd6fcec1544e20c119018df2595cc27c8c368824
+ms.sourcegitcommit: 6f1aa680588f5db41ed7fc78c934452d468ddb84
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 12/16/2020
-ms.locfileid: "97560823"
+ms.lasthandoff: 04/19/2021
+ms.locfileid: "107728268"
 ---
-# <a name="quickstart-use-the-computer-vision-client-library"></a>Hızlı başlangıç: Görüntü İşleme istemci kitaplığını kullanma
+# <a name="quickstart-use-the-read-client-library-or-rest-api"></a>Hızlı başlangıç: okuma istemci kitaplığı veya REST API kullanın
 
-Görüntü İşleme REST API veya istemci kitaplıklarını kullanmaya başlayın. Görüntü İşleme Hizmeti, görüntüleri işlemek ve görsel özellikleri hakkında bilgi döndürmek için size AI algoritmaları sağlar. Uygulamanıza bir paket yüklemek ve temel görevler için örnek kodu denemek için bu adımları izleyin.
+Okuma REST API veya istemci kitaplıklarını kullanmaya başlayın. Okuma hizmeti, görüntülerden görünür metinlerin ayıklanması ve yapılandırılmış dizeler olarak döndürülmesi için AI algoritmaları sağlar. Uygulamanıza bir paket yüklemek ve temel görevler için örnek kodu denemek için bu adımları izleyin.
 
 
 

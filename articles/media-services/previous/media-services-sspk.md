@@ -15,10 +15,10 @@ ms.topic: article
 ms.date: 3/10/2021
 ms.author: xpouyat
 ms.openlocfilehash: f2c66b08d399ddf53686074079665e36be9aace7
-ms.sourcegitcommit: 42e4f986ccd4090581a059969b74c461b70bcac0
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/23/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "104870480"
 ---
 # <a name="licensing-microsoftreg-smooth-streaming-client-porting-kit"></a>Microsoft &reg; kesintisiz akış Istemci taşıma kiti lisanslama
@@ -32,7 +32,7 @@ Aşağıda yer alan üst düzey bir mimari ve IIS Kesintisiz Akış taşıma pak
 
 ![SSPK](./media/media-services-sspk/sspk-arch.png)
 
-## <a name="description"></a>Açıklama
+## <a name="description"></a>Description
 SSPK, mükemmel iş değeri sunan koşullara göre lisanslanır. SSPK lisansı sektörde şunları sağlar:
 
 * C++ ' ta Kesintisiz Akış taşıma paketi kaynağı 

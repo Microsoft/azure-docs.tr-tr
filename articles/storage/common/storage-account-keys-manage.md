@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.date: 04/24/2020
 ms.author: tamram
 ms.custom: devx-track-azurecli, devx-track-azurepowershell
-ms.openlocfilehash: e5ea94fea00771b64634d6c28a7879fabb195f09
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 82d272f22295a5b68d1e8de3fb5a70c45d4c14a3
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "89069668"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107791220"
 ---
 # <a name="manage-storage-account-access-keys"></a>Depolama hesabı erişim anahtarlarını yönetme
 
@@ -54,7 +54,7 @@ $storageAccountKey = `
 
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Hesap erişim anahtarlarınızı Azure CLı ile listelemek için, aşağıdaki örnekte gösterildiği gibi [az Storage Account Keys List](/cli/azure/storage/account/keys#az-storage-account-keys-list) komutunu çağırın. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın. 
+Hesap erişim anahtarlarınızı Azure CLı ile listelemek için, aşağıdaki örnekte gösterildiği gibi [az Storage Account Keys List](/cli/azure/storage/account/keys#az_storage_account_keys_list) komutunu çağırın. Köşeli ayraçlar içindeki yer tutucu değerlerini kendi değerlerinizle değiştirmeyi unutmayın. 
 
 ```azurecli-interactive
 az storage account keys list \
@@ -116,7 +116,7 @@ Depolama hesabı erişim anahtarlarınızı PowerShell ile döndürmek için:
 Depolama hesabı erişim anahtarlarınızı Azure CLı ile döndürmek için:
 
 1. Depolama hesabı için ikincil erişim anahtarına başvurmak üzere uygulama kodunuzda bağlantı dizelerini güncelleştirin.
-1. Aşağıdaki örnekte gösterildiği gibi, birincil erişim anahtarını yeniden oluşturmak için [az Storage Account Keys Renew](/cli/azure/storage/account/keys#az-storage-account-keys-renew) komutunu çağırın:
+1. Aşağıdaki örnekte gösterildiği gibi, birincil erişim anahtarını yeniden oluşturmak için [az Storage Account Keys Renew](/cli/azure/storage/account/keys#az_storage_account_keys_renew) komutunu çağırın:
 
     ```azurecli-interactive
     az storage account keys renew \

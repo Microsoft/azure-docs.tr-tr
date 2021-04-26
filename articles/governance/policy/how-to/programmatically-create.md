@@ -3,12 +3,12 @@ title: Programlı olarak ilkeler oluşturma
 description: Bu makalede Azure CLı, Azure PowerShell ve REST API ile Azure Ilkesi için ilkeler oluşturma ve yönetme işlemi adım adım açıklanmaktadır.
 ms.date: 03/16/2021
 ms.topic: how-to
-ms.openlocfilehash: b4f15241799469da2e479cb758f648ec3131a149
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: fb20509fe6d699050e0c98e82873ccdb6a0137b2
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104598499"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313700"
 ---
 # <a name="programmatically-create-policies"></a>Programlı olarak ilkeler oluşturma
 
@@ -141,7 +141,7 @@ Bir ilke tanımı oluşturmak için aşağıdaki yordamı kullanın.
 
    Önceki {SubscriptionID} öğesini aboneliğinizin KIMLIĞIYLE veya {ManagementGroupId} yerine [Yönetim GRUBUNUZUN](../../management-groups/overview.md)kimliğiyle değiştirin.
 
-   Sorgunun yapısı hakkında daha fazla bilgi için bkz. [Azure Ilke tanımları – oluşturma veya güncelleştirme](/rest/api/resources/policydefinitions/createorupdate) ve [Ilke tanımları – Yönetim grubunda Oluştur veya Güncelleştir](/rest/api/resources/policydefinitions/createorupdateatmanagementgroup)
+   Sorgunun yapısı hakkında daha fazla bilgi için bkz. [Azure Ilke tanımları – oluşturma veya güncelleştirme](/rest/api/policy/policydefinitions/createorupdate) ve [Ilke tanımları – Yönetim grubunda Oluştur veya Güncelleştir](/rest/api/policy/policydefinitions/createorupdateatmanagementgroup)
 
 Bir ilke ataması oluşturmak ve ilke tanımını kaynak grubu düzeyinde atamak için aşağıdaki yordamı kullanın.
 

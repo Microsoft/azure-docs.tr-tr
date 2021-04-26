@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 02/18/2021
 ms.author: amsriva
-ms.openlocfilehash: 36cb5720e409c86fcb4bc1a97863e5d3523cd3bc
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 69e216c8893f9361a18354e5d165ecc0499601aa
+ms.sourcegitcommit: aa00fecfa3ad1c26ab6f5502163a3246cfb99ec3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/30/2021
-ms.locfileid: "104588758"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107387930"
 ---
 # <a name="create-a-custom-domain-on-azure-front-door-standardpremium-sku-preview-using-the-azure-portal"></a>Azure ön kapısı Standart/Premium SKU 'da (Önizleme) Azure portal kullanarak özel bir etki alanı oluşturun
 
@@ -23,7 +23,7 @@ ms.locfileid: "104588758"
 
 Uygulama teslimi için Azure ön kapısının Standart/Premium kullandığınızda, kendi etki alanı adınızın Son Kullanıcı istekleriniz içinde görünmesini istiyorsanız özel bir etki alanı gereklidir. Görünür bir etki alanınızın olması, müşterileriniz için kolaylık sağlar ve markalama için faydalıdır.
 
-Azure ön kapısının Standart/Premium profilini oluşturduktan sonra varsayılan ön uç konağın azurefd.net alt etki alanı olacaktır. Bu alt etki alanı, Azure ön kapısı Standart/Premium, varsayılan olarak arka UCUNUZDAN içerik sunarak URL 'ye dahildir. Örneğin, `https://contoso-frontend.azurefd.net/activeusers.htm`. Size kolaylık olması için Azure Front Door, varsayılan ana bilgisayar adı özel etki alanı ile ilişkilendirme seçeneği sunar. Bu seçenekle, içeriğinizi Azure ön kapısı Standart/Premium 'un sahip olduğu etki alanı adı yerine özel bir etki alanı ile birlikte suntırabilirsiniz. Örneğin, https://www.contoso.com/photo.png.
+Azure ön kapısının Standart/Premium profilini oluşturduktan sonra varsayılan ön uç konağın azurefd.net alt etki alanı olacaktır. Bu alt etki alanı, Azure ön kapısı Standart/Premium, varsayılan olarak arka UCUNUZDAN içerik sunarak URL 'ye dahildir. Örneğin, `https://contoso-frontend.azurefd.net/activeusers.htm`. Size kolaylık olması için Azure Front Door, varsayılan ana bilgisayar adı özel etki alanı ile ilişkilendirme seçeneği sunar. Bu seçenekle, içeriğinizi Azure ön kapısı Standart/Premium 'un sahip olduğu etki alanı adı yerine özel bir etki alanı ile birlikte suntırabilirsiniz. Örneğin, ' https://www.contoso.com/photo.png '.
 
 > [!IMPORTANT]
 > Azure ön kapı Standart/Premium (Önizleme) Şu anda genel önizleme aşamasındadır.

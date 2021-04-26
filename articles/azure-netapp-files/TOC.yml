@@ -91,6 +91,8 @@
           href: azure-netapp-files-configure-nfsv41-domain.md
         - name: NFSv4.1 Kerberos şifrelemesini yapılandırma
           href: configure-kerberos-encryption.md
+        - name: 'Yapılandırma, NFS için genişletilmiş gruplarla LDAP ekler'
+          href: configure-ldap-extended-groups.md
         - name: Azure NetApp Files için NFS istemcisini yapılandırma
           href: configure-nfs-clients.md
         - name: NFS birimine yönelik dışarı aktarma ilkesini yapılandırma
@@ -137,6 +139,8 @@
           href: troubleshoot-nfsv41-kerberos-volumes.md
         - name: Anlık görüntü ilkelerinde sorun giderme
           href: troubleshoot-snapshot-policies.md
+        - name: LDAP birimlerinde sorun giderme
+          href: troubleshoot-ldap-volumes.md
         - name: Kaynak Sağlayıcısı sorunlarını giderme
           href: azure-netapp-files-troubleshoot-resource-provider-errors.md
 - name: Başvuru
@@ -145,6 +149,8 @@
       href: /rest/api/netapp/
     - name: Resource Manager şablonu
       href: /azure/templates/microsoft.netapp/allversions
+    - name: Azure CLI
+      href: /cli/azure/netappfiles
     - name: Azure Uygulamayla Tutarlı Anlık Görüntü Aracı (AzAcSnap)
       items:
         - name: AzAcSnap için sürüm notları

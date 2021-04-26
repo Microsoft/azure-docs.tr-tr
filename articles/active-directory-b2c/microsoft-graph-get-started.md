@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: how-to
-ms.date: 01/21/2021
+ms.date: 04/05/2021
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 67870a458138101f3b8a009f7c96c74991396284
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0dcb959184e12ffa22ae25443087684123598e47
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98675195"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106382479"
 ---
 # <a name="register-a-microsoft-graph-application"></a>Microsoft Graph uygulaması kaydetme
 
@@ -56,31 +56,38 @@ Komut dosyalarınız ve uygulamalarınızın Azure AD B2C kaynaklarını yönetm
 1. **Kaydet**’i seçin.
 1. Uygulamaya Genel Bakış sayfasında görüntülenen **uygulama (istemci) kimliğini** kaydedin. Bu değeri sonraki bir adımda kullanırsınız.
 
-### <a name="grant-api-access"></a>API erişimi verme
+## <a name="grant-api-access"></a>API erişimi verme
 
-Ardından, Microsoft Graph API 'sine yapılan çağrılar aracılığıyla kiracı kaynaklarını işlemek için kayıtlı uygulamaya izin verin.
+Uygulamanızın Microsoft Graph verilere erişmesi için, kayıtlı uygulamaya ilgili [uygulama izinlerini](https://docs.microsoft.com/graph/permissions-reference)verin. Uygulamanızın etkili izinleri, izin tarafından ima edilen ayrıcalıkların tam düzeyidir. Örneğin, Azure AD B2C kiracınızdaki her kullanıcıyı *oluşturmak*, *okumak*, *güncelleştirmek* ve *silmek* için **User. ReadWrite. All** iznini ekleyin. 
+
+> [!NOTE]
+> **User. ReadWrite. All** izni, Kullanıcı hesabı parolalarını Güncelleştir özelliğini içermez. Uygulamanızın Kullanıcı hesabı parolalarını güncelleştirmesi gerekiyorsa, [Kullanıcı Yöneticisi rolüne izin verin](#optional-grant-user-administrator-role). [Kullanıcı yönetici](../active-directory/roles/permissions-reference.md#user-administrator) rolü verilirken, **User. ReadWrite. All** gerekli değildir. Kullanıcı Yöneticisi rolü, kullanıcıları yönetmek için gereken her şeyi içerir.
+
+Uygulamanıza birden çok uygulama izinleri verebilirsiniz. Örneğin, uygulamanızın Azure AD B2C kiracınızdaki grupları yönetmesi gerekiyorsa, **Group. ReadWrite. All** iznini de ekleyin. 
 
 [!INCLUDE [active-directory-b2c-permissions-directory](../../includes/active-directory-b2c-permissions-directory.md)]
 
-### <a name="create-client-secret"></a>İstemci parolası oluştur
 
-[!INCLUDE [active-directory-b2c-client-secret](../../includes/active-directory-b2c-client-secret.md)]
+## <a name="optional-grant-user-administrator-role"></a>Seçim Kullanıcı Yöneticisi rolü verme
 
-Artık Azure AD B2C kiracınızda Kullanıcı *oluşturma*, *okuma*, *güncelleştirme* ve *silme* iznine sahip bir uygulamanız var. *Parola güncelleştirme* izinleri eklemek için sonraki bölüme geçin.
+Uygulamanızın veya betiğinizin kullanıcıların parolalarını güncelleştirmesi gerekiyorsa, uygulamanıza *Kullanıcı Yöneticisi* rolünü atamanız gerekir. [Kullanıcı Yöneticisi](../active-directory/roles/permissions-reference.md#user-administrator) rolü, uygulamanıza verdiğiniz sabit bir izin kümesine sahiptir. 
 
-## <a name="enable-user-delete-and-password-update"></a>Kullanıcı silme ve parola güncelleştirmesini etkinleştir
-
-*Dizin verilerini okuma ve yazma* **izni, kullanıcıları** silme veya Kullanıcı hesabı parolalarını güncelleştirme imkanını içermez.
-
-Uygulamanızın veya betiğinizin kullanıcıları silmesi veya parolalarını güncelleştirmesi gerekiyorsa, uygulamanıza *Kullanıcı Yöneticisi* rolünü atayın:
+*Kullanıcı Yöneticisi* rolünü eklemek için şu adımları izleyin:
 
 1. [Azure Portal](https://portal.azure.com) oturum açın ve **Dizin + abonelik** filtresini kullanarak Azure AD B2C kiracınıza geçiş yapın.
 1. Arama yapın ve **Azure AD B2C** seçin.
 1. **Yönet** altında **Roller ve yöneticiler**' i seçin.
-1. **Kullanıcı Yöneticisi** rolünü seçin.
+1. **Kullanıcı Yöneticisi** rolünü seçin. 
 1. **Atama Ekle**' yi seçin.
-1. Metin **Seç** kutusuna daha önce kaydettiğiniz uygulamanın adını girin, örneğin, *managementapp1*. Arama sonuçlarında göründüğünde uygulamanızı seçin.
+1. Metin **Seç** kutusuna daha önce kaydettiğiniz uygulamanın adını veya kimliğini girin, örneğin, *managementapp1*. Arama sonuçlarında göründüğünde uygulamanızı seçin.
 1. **Add (Ekle)** seçeneğini belirleyin. İzinlerin tam olarak yayılması birkaç dakika sürebilir.
+
+## <a name="create-client-secret"></a>İstemci parolası oluştur
+
+Uygulamanız bir belirteç istenirken kimliğini kanıtlamak için bir istemci gizli anahtarı gerektirir. İstemci parolasını eklemek için şu adımları izleyin:
+
+[!INCLUDE [active-directory-b2c-client-secret](../../includes/active-directory-b2c-client-secret.md)]
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

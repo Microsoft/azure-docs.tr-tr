@@ -21,7 +21,7 @@ Media Services kaynaklarına ve Media Services API'sine erişim yetkisi almak i�
 * **Hizmet sorumlusu kimlik doğrulaması**: Hizmetin kimliğini doğrulamak için kullanılır (örneğin: web uygulamaları, işlev uygulamaları, API ve mikro hizmetler). Bu kimlik doğrulama yöntemini yaygın olarak kullanan uygulamalar deamon hizmetleri, orta katman hizmetleri veya zamanlanmış işler çalıştıran uygulamalardır. Örneğin, Web uygulamaları için her zaman bir hizmet sorumlusu ile Media Services bağlanan bir orta katman olmalıdır.
 * **Kullanıcı kimlik doğrulaması**: Uygulamayı Media Services kaynaklarıyla etkileşim kurmak amacıyla kullanan bir kişinin kimliğini doğrulamak için kullanılır. Etkileşimli uygulamanın önce kullanıcıdan kimlik bilgilerini istemesi gerekir. Yetkili kullanıcılar tarafından kodlama işlerini veya canlı akışı izlemek için kullanılan yönetim konsolu uygulaması bunun bir örneğidir.
 
-Media Services API'si, REST API isteklerinde bulunan kullanıcının veya uygulamanın Media Services hesabı kaynağına erişimi olmasını ve **Katkıda Bulunan** veya **Sahip** rolü kullanmasını gerektirir. **Okuyucu** rolüyle API'ye erişilebilir ama yalnızca **Get** veya **List** işlemleri kullanılabilir.Daha fazla bilgi için bkz. [Media Services hesapları Için Azure rol tabanlı erişim denetimi (Azure RBAC)](rbac-overview.md).
+Media Services API'si, REST API isteklerinde bulunan kullanıcının veya uygulamanın Media Services hesabı kaynağına erişimi olmasını ve **Katkıda Bulunan** veya **Sahip** rolü kullanmasını gerektirir. **Okuyucu** rolüyle API'ye erişilebilir ama yalnızca **Get** veya **List** işlemleri kullanılabilir.Daha fazla bilgi için bkz. [Media Services hesapları Için Azure rol tabanlı erişim denetimi (Azure RBAC)](security-rbac-concept.md).
 
 Hizmet sorumlusu oluşturmak yerine, Azure kaynakları için yönetilen kimlikler kullanarak Azure Resource Manager aracılığıyla Media Services API'sine erişmeyi göz önünde bulundurun. Azure kaynakları için yönetilen kimlikler hakkında daha fazla bilgi edinmek için bkz. [Azure kaynakları için yönetilen kimlikler nedir?](../../active-directory/managed-identities-azure-resources/overview.md).
 
@@ -52,7 +52,7 @@ Aşağıdaki şekilde, sayılar isteklerin akışını kronolojik sırada temsil
 
 Azure AD hizmet sorumlusu ile nasıl bağlanabileceklerini gösteren aşağıdaki örneklere bakın:
 
-* [REST ile bağlan](media-rest-apis-with-postman.md)  
+* [REST ile bağlan](setup-postman-rest-how-to.md)  
 * [Java ile bağlanma](configure-connect-java-howto.md)
 * [.NET ile bağlanma](configure-connect-dotnet-howto.md)
 * [Node.js ile bağlanma](configure-connect-nodejs-howto.md)
@@ -128,7 +128,7 @@ AMO bir açık kaynak projem, topluluk tarafından destek sağlanır (sorunlar o
 
 ## <a name="filtering-ordering-paging-of-media-services-entities"></a>Media Services varlıkların filtrelenmesi, sıralanması, sayfalama
 
-Bkz. [Azure Media Services varlıkların filtrelenmesi, sıralanması, sayfalama](entities-overview.md).
+Bkz. [Azure Media Services varlıkların filtrelenmesi, sıralanması, sayfalama](filter-order-page-entitites-how-to.md).
 
 ## <a name="ask-questions-give-feedback-get-updates"></a>Soru sorun, geri bildirimde bulunun, güncelleştirmeleri al
 

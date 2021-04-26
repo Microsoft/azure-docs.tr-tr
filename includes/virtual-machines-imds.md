@@ -8,12 +8,12 @@ ms.date: 01/04/2021
 ms.author: chhenk
 ms.reviewer: azmetadatadev
 ms.custom: references_regions
-ms.openlocfilehash: 357223751112af03bf797ae9a0e6352a10132ab9
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 98866a4f06df0380d52d1aee3eede8aa2f70aaed
+ms.sourcegitcommit: 272351402a140422205ff50b59f80d3c6758f6f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "103464976"
+ms.lasthandoff: 04/17/2021
+ms.locfileid: "107588147"
 ---
 Azure Instance Metadata Service (IMDS), çalışmakta olan sanal makine örnekleri hakkında bilgi sağlar. Bunu, sanal makinelerinizi yönetmek ve yapılandırmak için kullanabilirsiniz.
 Bu bilgiler SKU, depolama, ağ yapılandırması ve yaklaşan bakım olaylarını içerir. Mevcut verilerin tüm listesi için bkz. [uç nokta kategorileri Özeti](#endpoint-categories).
@@ -247,6 +247,7 @@ Bir sürüm belirtmezseniz, en yeni Desteklenen sürümlerin listesini içeren b
 - 2020-09-01
 - 2020-10-01
 - 2020-12-01
+- 2021-01-01
 
 ### <a name="swagger"></a>Swagger
 
@@ -332,7 +333,7 @@ Bu uç nokta, [yol parametreleri](#route-parameters)aracılığıyla yanıt filt
 | Veriler | Description | Sunulan sürüm |
 |------|-------------|--------------------|
 | `azEnvironment` | VM 'nin çalıştığı Azure ortamı | 2018-10-01
-| `customData` | Bu özellik şu anda devre dışı. Bu belge kullanılabilir hale geldiğinde güncelleştirilecek | 2019-02-01
+| `customData` | Bu özellik kullanım dışıdır ve [ıMD 'de](#frequently-asked-questions)devre dışıdır. Yerine geçilen `userData` | 2019-02-01
 | `evictionPolicy` | Bir [spot VM 'nin](../articles/virtual-machines/spot-vms.md) nasıl çıkarılacak olduğunu ayarlar. | 2020-12-01
 | `isHostCompatibilityLayerVm` | VM 'nin konak uyumluluk katmanında çalışıp çalışmadığına göre tanımlar | 2020-06-01
 | `licenseType` | [Azure hibrit avantajı](https://azure.microsoft.com/pricing/hybrid-benefit)için lisans türü. Bu yalnızca AHB özellikli VM 'Lerde mevcuttur | 2020-09-01
@@ -360,6 +361,7 @@ Bu uç nokta, [yol parametreleri](#route-parameters)aracılığıyla yanıt filt
 | `subscriptionId` | Sanal makine için Azure aboneliği | 2017-08-01
 | `tags` | Sanal makineniz için [Etiketler](../articles/azure-resource-manager/management/tag-resources.md)  | 2017-08-01
 | `tagsList` | Daha kolay programlı ayrıştırma için JSON dizisi olarak biçimlendirilen Etiketler  | 2019-06-04
+| `userData` | VM, sağlama sırasında veya sonrasında (Base64 kodlamalı) kullanım için oluşturulduğunda belirtilen veri kümesi  | 2021-01-01
 | `version` | VM görüntüsünün sürümü | 2017-04-02
 | `vmId` | VM için [benzersiz tanımlayıcı](https://azure.microsoft.com/blog/accessing-and-using-azure-vm-unique-id/) | 2017-04-02
 | `vmScaleSetName` | Sanal makine ölçek kümesinin [sanal makine ölçek kümesi adı](../articles/virtual-machine-scale-sets/overview.md) | 2017-12-01
@@ -421,6 +423,31 @@ Veriler | Description |
 | `subnet.prefix` | Alt ağ ön eki, örnek 24 | 2017-04-02
 | `ipv6.ipAddress` | VM 'nin yerel IPv6 adresi | 2017-04-02
 | `macAddress` | VM MAC adresi | 2017-04-02
+
+### <a name="get-user-data"></a>Kullanıcı verilerini al
+
+Yeni bir VM oluştururken, VM sağlama sırasında veya sonrasında kullanılacak bir veri kümesi belirtebilir ve onları ıMDS aracılığıyla alabilirsiniz. Kullanıcı verilerini ayarlamak için [buradaki](https://aka.ms/ImdsUserDataArmTemplate)hızlı başlangıç şablonunu kullanın. Aşağıdaki örnek, bu verilerin ıMD 'ler aracılığıyla nasıl alınacağını gösterir.
+
+> [!NOTE]
+> Bu özellik sürümle birlikte yayımlanır `2021-01-01` ve Azure platformunda bir güncelleştirmeye bağlıdır ve şu anda kullanıma alınmış ve her bölgede henüz kullanılamayabilir.
+
+> [!NOTE]
+> Güvenlik Bildirimi: ıDS, sanal makinenin tüm uygulamalarına açıktır, gizli veriler kullanıcı verilerine yerleştirilmemelidir.
+
+
+#### <a name="windows"></a>[Windows](#tab/windows/)
+
+```powershell
+Invoke-RestMethod -Headers @{"Metadata"="true"} -Method GET -Proxy $Null -Uri "http://169.254.169.254/metadata/instance/compute/userData?api-version=2021-01-01&format=text" | base64 --decode
+```
+
+#### <a name="linux"></a>[Linux](#tab/linux/)
+
+```bash
+curl -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/compute/userData?api-version=2021-01-01&format=text" | base64 --decode
+```
+
+---
 
 
 #### <a name="sample-1-tracking-vm-running-on-azure"></a>Örnek 1: Azure 'da çalışan Izleme sanal makinesi
@@ -1148,6 +1175,9 @@ Veri öğesi bulunamadı veya hatalı oluşturulmuş bir istek varsa, Instance M
 
 - Azure Resource Manager bir süre önce VM 'imi oluşturdum. İşlem meta veri bilgilerini neden göremiyorum?
   - VM 'nizi 2016 Eylül 'den sonra oluşturduysanız, işlem meta verilerini görmeye başlamak için bir [etiket](../articles/azure-resource-manager/management/tag-resources.md) ekleyin. VM 'nizi 2016 Eylül 'den önce oluşturduysanız meta verileri yenilemek için VM örneğine uzantıları veya veri diskleri ekleyin veya kaldırın.
+
+- Kullanıcı verileri özel verilerle aynı mı?
+  - Kullanıcı verileri, özel verilere benzer işlevselliği sunarak, kendi meta verilerinizi VM örneğine geçirmenize olanak sağlar. Aradaki fark, Kullanıcı verilerinin ıMDS aracılığıyla alınması ve sanal makine örneğinin kullanım ömrü boyunca kalıcıdır. Varolan özel veri özelliği, [Bu makalede](https://docs.microsoft.com/azure/virtual-machines/custom-data)açıklandığı gibi çalışmaya devam edecektir. Ancak, yerel sistem klasörü aracılığıyla, ıDS aracılığıyla değil, yalnızca özel veri alabilirsiniz.
 
 - Neden yeni bir sürüm için doldurulmuş tüm verileri görmüyorum?
   - VM 'nizi 2016 Eylül 'den sonra oluşturduysanız, işlem meta verilerini görmeye başlamak için bir [etiket](../articles/azure-resource-manager/management/tag-resources.md) ekleyin. VM 'nizi 2016 Eylül 'den önce oluşturduysanız meta verileri yenilemek için VM örneğine uzantıları veya veri diskleri ekleyin veya kaldırın.

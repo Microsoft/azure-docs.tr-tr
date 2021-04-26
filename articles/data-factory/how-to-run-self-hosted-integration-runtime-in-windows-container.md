@@ -7,12 +7,12 @@ ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 08/05/2020
-ms.openlocfilehash: e34e1f589442be41e2a4eac3ac893f377675e4b5
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 2423d6bd29d893f9a27749dcc2b6d2af8a12e941
+ms.sourcegitcommit: afb79a35e687a91270973990ff111ef90634f142
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100379514"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107478140"
 ---
 # <a name="how-to-run-self-hosted-integration-runtime-in-windows-container"></a>Windows kapsayıcısında Self-Hosted Integration Runtime çalıştırma
 
@@ -24,7 +24,7 @@ Azure Data Factory, Self-Hosted Integration Runtime resmi Windows kapsayıcı de
 ## <a name="prerequisites"></a>Önkoşullar 
 - [Windows kapsayıcı gereksinimleri](/virtualization/windowscontainers/deploy-containers/system-requirements)
 - Docker sürüm 2,3 ve üzeri 
-- Self-Hosted Integration Runtime sürüm 4.11.7512.1 ve üzeri 
+- Self-Hosted Integration Runtime sürüm 5.2.7713.1 ve üzeri 
 ## <a name="get-started"></a>başlarken 
 1.  Docker 'ı yükleyip Windows kapsayıcısını etkinleştir 
 2.  Kaynak kodu https://github.com/Azure/Azure-Data-Factory-Integration-Runtime-in-Windows-Container adresinden indirin
@@ -40,7 +40,7 @@ docker build . -t "yourDockerImageName" 
 ```
 6.  Docker kapsayıcısını Çalıştır: 
 ```console
-docker run -d -e NODE_NAME="irNodeName" -e AUTH_KEY="IR_AUTHENTICATION_KEY" -e ENABLE_HA=true HA_PORT=8060 "yourDockerImageName"    
+docker run -d -e NODE_NAME="irNodeName" -e AUTH_KEY="IR_AUTHENTICATION_KEY" -e ENABLE_HA=true -e HA_PORT=8060 "yourDockerImageName"    
 ```
 > [!NOTE]
 > Bu komut için AUTH_KEY zorunludur. NODE_NAME, ENABLE_HA ve HA_PORT isteğe bağlıdır. Bu değeri ayarlamazsanız, komut varsayılan değerleri kullanır. ENABLE_HA varsayılan değeri false 'dur ve HA_PORT 8060 ' dir.

@@ -8,12 +8,12 @@ author: shashankbarsin
 ms.author: shasb
 description: Bu makalede, Azure Arc etkin Kubernetes aracılarına yönelik mimari bir genel bakış sunulmaktadır
 keywords: Kubernetes, yay, Azure, kapsayıcılar
-ms.openlocfilehash: ec95efdfef871777e7f53617b057529e301739dd
-ms.sourcegitcommit: ac035293291c3d2962cee270b33fca3628432fac
+ms.openlocfilehash: f59a897e4868d7b16d0a50c28ce2142320992f71
+ms.sourcegitcommit: 56b0c7923d67f96da21653b4bb37d943c36a81d6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "104953077"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106442550"
 ---
 # <a name="azure-arc-enabled-kubernetes-agent-architecture"></a>Azure Arc etkin Kubernetes aracı mimarisi
 
@@ -49,7 +49,10 @@ ms.locfileid: "104953077"
         | `deployment.apps/cluster-metadata-operator` | Küme sürümü, düğüm sayısı ve Azure Arc aracı sürümü gibi küme meta verilerini toplar. |
         | `deployment.apps/resource-sync-agent` | Yukarıda belirtilen küme meta verilerini Azure 'a eşitler. |
         | `deployment.apps/flux-logs-agent` | Kaynak denetimi yapılandırmasının bir parçası olarak dağıtılan Flox işleçlerinden günlükleri toplar. |
-    
+        | `deployment.apps/extension-manager` | Uzantı helb grafiklerinin yaşam döngüsünü yükleyip yönetir |  
+        | `deployment.apps/clusterconnect-agent` | Küme bağlama özelliğinin kümeye erişim sağlamasına olanak tanıyan ters proxy aracısı `apiserver` . Bu, yalnızca `cluster-connect` küme üzerinde etkin özelliği etkinse dağıtılan isteğe bağlı bir bileşendir   |
+        | `deployment.apps/guard` | AAD RBAC özelliği için kullanılan kimlik doğrulaması ve yetkilendirme Web kancası sunucusu. Bu, yalnızca `azure-rbac` küme üzerinde etkin özelliği etkinse dağıtılan isteğe bağlı bir bileşendir   |
+
 1. Tüm Azure yayı etkin Kubernetes Aracısı Pod 'nin durumu olduktan sonra `Running` , kümenizin Azure yaya bağlandığını doğrulayın. Şunları görmeniz gerekir:
     * [Azure Resource Manager](../../azure-resource-manager/management/overview.md)' de bir Azure Arc etkin Kubernetes kaynağı. Azure, bu kaynağı gerçek Kubernetes kümesinin kendisini değil, müşteri tarafından yönetilen Kubernetes kümesinin bir projeksiyonu olarak izler.
     * Küme meta verileri (Kubernetes sürümü, aracı sürümü ve düğüm sayısı gibi), Azure Arc etkinleştirilmiş Kubernetes kaynağında meta veri olarak görünür.

@@ -25,6 +25,8 @@
   items:
     - name: Güvenlik
       items:
+        - name: Güvenlik temeli
+          href: security-baseline.md
         - name: Microsoft 365’i şirket içi saldırılardan koruma
           href: protect-m365-from-on-premises-attacks.md
         - name: Dış işbirliğini güvenli hale getirme
@@ -181,6 +183,8 @@
           href: active-directory-data-storage-eu.md
         - name: Avustralya ve Yeni Zelanda müşterileri için kimlik verisi depolama
           href: active-directory-data-storage-australia-newzealand.md
+    - name: Frontline Worker yönetimi
+      href: frontline-worker-management.md
     - name: Azure AD İşlem başvurusu
       items:
         - name: Giriş

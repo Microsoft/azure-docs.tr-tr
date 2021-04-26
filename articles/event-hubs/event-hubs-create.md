@@ -3,12 +3,12 @@ title: Azure hızlı başlangıç-Azure portal kullanarak bir olay hub 'ı oluş
 description: Bu hızlı başlangıçta Azure portal kullanarak bir Azure Olay Hub 'ı oluşturmayı öğreneceksiniz.
 ms.topic: quickstart
 ms.date: 06/23/2020
-ms.openlocfilehash: 6bd9d247db6cd5a956ff4bce9b70f1f8a5a7499a
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: bf83c53792c4934f43e0039d092bb3e36954bf7b
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101742050"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107303126"
 ---
 # <a name="quickstart-create-an-event-hub-using-azure-portal"></a>Hızlı başlangıç: Azure portalı kullanarak olay hub'ı oluşturma
 Azure Event Hubs, saniye başına milyonlarca olayı alabilen ve işleyesağlayan büyük bir veri akışı platformu ve olay alma hizmetidir. Event Hubs dağıtılan yazılımlar ve cihazlar tarafından oluşturulan olayları, verileri ve telemetrileri işleyebilir ve depolayabilir. Bir olay hub’ına gönderilen veriler, herhangi bir gerçek zamanlı analiz sağlayıcısı ve işlem grubu oluşturma/depolama bağdaştırıcıları kullanılarak dönüştürülüp depolanabilir. Olay Hub’larının ayrıntılı genel bakışı için bkz. [Olay Hub’larına genel bakış](event-hubs-about.md) ve [Olay Hub’ları özellikleri](event-hubs-features.md).
@@ -54,7 +54,7 @@ Bir Event Hubs ad alanı, bir veya daha fazla olay hub 'ı oluşturduğunuz benz
    1. Önceki adımda oluşturduğunuz **kaynak grubunu** seçin.   
    1. Ad alanı için bir **ad** girin. Adın kullanılabilirliği sistem tarafından hemen kontrol edilir.  
    1. Ad alanı için bir **konum** seçin.
-   1. **Fiyatlandırma katmanını** (temel veya standart) seçin. Temel ve standart Katmanlar arasındaki farklılıklar hakkında bilgi edinmek için bkz. [Event Hubs fiyatlandırması](https://azure.microsoft.com/pricing/details/event-hubs/), Katmanlar [ve kotalar ile sınırlamalar](event-hubs-quotas.md) [arasındaki farklar](event-hubs-faq.md#what-is-the-difference-between-event-hubs-basic-and-standard-tiers). 
+   1. **Fiyatlandırma katmanını** (temel veya standart) seçin. Temel ve standart Katmanlar arasındaki farklılıklar hakkında bilgi edinmek için bkz. [Event Hubs fiyatlandırması](https://azure.microsoft.com/pricing/details/event-hubs/), Katmanlar [ve kotalar ile sınırlamalar](event-hubs-quotas.md) [arasındaki farklar](event-hubs-faq.yml#what-is-the-difference-between-event-hubs-basic-and-standard-tiers-). 
    1. **Verimlilik birimleri** ayarlarını olduğu gibi bırakın. İşleme birimleri önceden satın alınan kapasite birimleridir. İşleme birimleri hakkında bilgi edinmek için bkz. [Event Hubs ölçeklenebilirlik](event-hubs-scalability.md#throughput-units).  
    1. Sayfanın alt kısmındaki **gözden geçir + oluştur** ' u seçin.
       

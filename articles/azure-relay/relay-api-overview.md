@@ -4,12 +4,12 @@ description: Bu makalede, kullanılabilir Azure Relay API 'Lerine (.NET Standard
 ms.topic: article
 ms.custom: devx-track-dotnet
 ms.date: 06/23/2020
-ms.openlocfilehash: 98bbb1ecc7e870ff9b7687284e7087d44375d275
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 391bd74f2bce8721b6d6359f3990af494277aa45
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "88935730"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107313003"
 ---
 # <a name="available-relay-apis"></a>Kullanılabilir geçiş API 'Leri
 
@@ -49,4 +49,4 @@ Bu modüllerle ilgili ayrıntılar [Azure-Relay-node](https://github.com/Azure/a
 
 Azure Relay hakkında daha fazla bilgi edinmek için şu bağlantıları ziyaret edin:
 * [Azure Relay nedir?](relay-what-is-it.md)
-* [Geçiş hakkında SSS](relay-faq.md)
+* [Geçiş hakkında SSS](relay-faq.yml)

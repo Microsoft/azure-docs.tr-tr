@@ -321,7 +321,7 @@
 - name: Başvuru
   items:
     - name: Uygulama proxy 'Si SSS
-      href: application-proxy-faq.md
+      href: application-proxy-faq.yml
     - name: Uygulama yönetimi sertifikaları SSS
       href: application-management-certs-faq.md
     - name: Uygulama Proxy’si sürüm geçmişi

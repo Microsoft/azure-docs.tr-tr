@@ -5,12 +5,13 @@ services: automation
 ms.subservice: ''
 ms.date: 04/16/2019
 ms.topic: troubleshooting
-ms.openlocfilehash: e6caf3fed708e89b55a88719ca5358f6174c2ac8
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 91c4780981851b62027fecf18da2c3b78625f272
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98896537"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107831213"
 ---
 # <a name="troubleshoot-azure-automation-state-configuration-issues"></a>Azure Otomasyonu durum yapılandırması sorunlarını giderme
 

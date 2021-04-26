@@ -12,10 +12,10 @@ ms.topic: tutorial
 ms.date: 03/06/2020
 ms.author: jeedes
 ms.openlocfilehash: a7868d702ff3f1190d7f51e4ad7316508d453015
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92454533"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-druva"></a>Öğretici: Druva ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
@@ -136,13 +136,13 @@ Bu bölümde, Druva 'e erişim vererek Azure çoklu oturum açma özelliğini ku
 1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-## <a name="configure-druva-sso"></a>Druva SSO 'yu yapılandırma
+## <a name="configure-druva-sso&quot;></a>Druva SSO 'yu yapılandırma
 
 1. Farklı bir Web tarayıcısı penceresinde, Druva şirket sitenizde yönetici olarak oturum açın.
 
 1. Sol üst köşedeki Druva logosu ' na tıklayın ve ardından **Druva bulut ayarları**' na tıklayın.
 
-    ![Ayarlar](./media/druva-tutorial/ic795091.png "Ayarlar")
+    ![Ayarlar](./media/druva-tutorial/ic795091.png &quot;Ayarlar")
 
 1. **Çoklu oturum açma** sekmesinde **Düzenle**' ye tıklayın.
 

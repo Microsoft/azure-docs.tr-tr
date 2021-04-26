@@ -1,14 +1,14 @@
 ---
 title: Fedrampa yüksek şema örneği dağıt
 description: Şema yapıt parametresi ayrıntıları dahil olmak üzere fedrampa yüksek şema örneği için adımları dağıtın.
-ms.date: 01/08/2021
+ms.date: 04/02/2021
 ms.topic: sample
-ms.openlocfilehash: 53d48eff79f7227373c1e7dfb0c34ef17a00e125
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 0ba321bb0048499e12eec55fbc55d67b0a1289f9
+ms.sourcegitcommit: 77d7639e83c6d8eb6c2ce805b6130ff9c73e5d29
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "100594767"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106386727"
 ---
 # <a name="deploy-the-fedramp-high-blueprint-sample"></a>Fedrampa yüksek şema örneğini dağıtma
 

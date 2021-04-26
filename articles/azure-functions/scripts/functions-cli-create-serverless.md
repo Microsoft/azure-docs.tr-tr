@@ -6,12 +6,12 @@ ms.topic: sample
 ms.date: 07/03/2018
 ms.author: glenga
 ms.custom: mvc, devx-track-azurecli
-ms.openlocfilehash: 3a52d7ea8c940a33f4fbd2b9ad69f4f889615e7f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 1d4508572d284347af9df961b324f44ec1518f88
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97934348"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107786126"
 ---
 # <a name="create-a-function-app-for-serverless-code-execution"></a>Sunucusuz kod yürütme için bir işlev uygulaması oluşturma 
 
@@ -37,9 +37,9 @@ Tablodaki her komut, komuta özgü belgelere yönlendirir. Bu betik şu komutlar
 
 | Komut | Notlar |
 |---|---|
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az storage account create](/cli/azure/storage/account#az-storage-account-create) | Azure Depolama hesabı oluşturur. |
-| [az functionapp create](/cli/azure/functionapp#az-functionapp-create) | Bir işlev uygulaması oluşturur. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az storage account create](/cli/azure/storage/account#az_storage_account_create) | Azure Depolama hesabı oluşturur. |
+| [az functionapp create](/cli/azure/functionapp#az_functionapp_create) | Bir işlev uygulaması oluşturur. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

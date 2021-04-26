@@ -3,12 +3,12 @@ title: Azure Event Hubs özel durumlar (eski)
 description: Bu makale, Azure Event Hubs mesajlaşma özel durumlarının ve önerilen eylemlerin bir listesini sağlar.
 ms.topic: article
 ms.date: 02/10/2021
-ms.openlocfilehash: a76c98ec7d6d1f3370ed8787bf10d1d16a7baaa5
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: b7c5016214bfa3e5813417177e5d113299e0284f
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100390904"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107311932"
 ---
 # <a name="event-hubs-messaging-exceptions---net-legacy"></a>Event Hubs mesajlaşma özel durumları-.NET (eski)
 Bu bölümde, .NET Framework API 'Leri tarafından oluşturulan .NET özel durumları listelenmektedir. 
@@ -142,4 +142,4 @@ Aşağıdaki bağlantıları inceleyerek Event Hubs hakkında daha fazla bilgi e
 
 * [Event Hubs genel bakış](./event-hubs-about.md)
 * [Olay Hub'ı oluşturma](event-hubs-create.md)
-* [Event Hubs ile ilgili SSS](event-hubs-faq.md)
+* [Event Hubs ile ilgili SSS](event-hubs-faq.yml)

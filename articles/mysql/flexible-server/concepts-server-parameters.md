@@ -6,12 +6,12 @@ ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 11/10/2020
-ms.openlocfilehash: f83f743b692ae5a625a4c881b12cbad999f1f606
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: d64dc4f3c034279aee7401503bbb60883c9ed4e7
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105106777"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106492248"
 ---
 # <a name="server-parameters-in-azure-database-for-mysql---flexible-server"></a>MySQL için Azure veritabanı 'nda sunucu parametreleri-esnek sunucu
 
@@ -39,9 +39,11 @@ Yaygın olarak güncellenen çeşitli sunucu parametrelerinin sınırları hakk�
 
 ### <a name="log_bin_trust_function_creators"></a>log_bin_trust_function_creators
 
-MySQL için Azure veritabanı esnek sunucusu 'nda ikili Günlükler her zaman etkindir (yani, açık olarak `log_bin` ayarlanır). Tetikleyicileri kullanmak istiyorsanız, *süper ayrıcalığa sahip değilsiniz ve ikili günlüğe kaydetme özelliğinin etkin olduğu bir hata alırsınız (daha az güvenli bir değişken kullanmak isteyebilirsiniz `log_bin_trust_function_creators` )*. 
+MySQL için Azure veritabanı esnek sunucusu 'nda ikili Günlükler her zaman etkindir (yani, açık olarak `log_bin` ayarlanır). log_bin_trust_function_creators, esnek sunuculardaki varsayılan olarak açık olarak ayarlanır. 
 
-İkili günlük biçimi her zaman **satırdır** ve sunucuya yapılan tüm bağlantılar **her zaman** satır tabanlı ikili günlük kullanır. Satır tabanlı ikili günlüğe kaydetme ile güvenlik sorunları yoktur ve ikili günlüğe alma, güvenli şekilde [`log_bin_trust_function_creators`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_log_bin_trust_function_creators) **doğru** olarak ayarlanabilir.
+İkili günlük biçimi her zaman **satırdır** ve sunucuya yapılan tüm bağlantılar **her zaman** satır tabanlı ikili günlük kullanır. Satır tabanlı ikili günlüğe kaydetme ile güvenlik sorunları yoktur ve ikili günlüğe kaydetme kesintiye uğramaz, bu sayede [`log_bin_trust_function_creators`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_log_bin_trust_function_creators) **Açık** kalmasına izin verebilirsiniz.
+
+[ `log_bin_trust_function_creators` ] Off olarak ayarlandıysa, Tetikleyiciler oluşturmaya çalışırsanız, *süper ayrıcalığa sahip değilsiniz ve ikili günlüğe kaydetme etkin olan bir hata alabilirsiniz (daha az güvenli bir değişken kullanmak isteyebilirsiniz `log_bin_trust_function_creators` )*. 
 
 ### <a name="innodb_buffer_pool_size"></a>innodb_buffer_pool_size
 

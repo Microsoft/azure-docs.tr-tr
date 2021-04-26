@@ -4,10 +4,10 @@ description: Bu makale, Azure Event Hubs kimlik doğrulama ve yetkilendirme soru
 ms.topic: article
 ms.date: 06/23/2020
 ms.openlocfilehash: 368fd8efda1b828f99bc41da0743768989c1a601
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "92329619"
 ---
 # <a name="troubleshoot-authentication-and-authorization-issues---azure-event-hubs"></a>Kimlik doğrulama ve yetkilendirme sorunlarını giderme-Azure Event Hubs

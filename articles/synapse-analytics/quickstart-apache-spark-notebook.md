@@ -10,10 +10,10 @@ ms.subservice: spark
 ms.topic: quickstart
 ms.date: 10/16/2020
 ms.openlocfilehash: 060c78621b82f4698d4596383cd155d85d483d8e
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "101669490"
 ---
 # <a name="quickstart-create-a-serverless-apache-spark-pool-in-azure-synapse-analytics-using-web-tools"></a>Hızlı başlangıç: Web araçlarını kullanarak Azure SYNAPSE Analytics 'te sunucusuz Apache Spark havuzu oluşturma
@@ -82,9 +82,9 @@ Not defteri, çeşitli programlama dillerini destekleyen etkileşimli bir ortamd
 
     Depolama Gezgini 'ni kullanıyorsanız, yukarıda kullanılan bir dosyayı yazmanın iki farklı yolu hakkında etkisini görmek mümkündür. Hiçbir dosya sistemi belirtilmediğinde, bu durumda varsayılan olarak kullanılır `default>user>trusted-service-user>demo_df` . Veriler, belirtilen dosya sisteminin konumuna kaydedilir.
 
-    Hem "CSV" hem de "Parquet" biçimlerinde, yazma işlemlerinde bir dizin oluşturan çok sayıda bölümlenmiş dosya ile dikkat edin.
+    Hem "CSV&quot; hem de &quot;Parquet&quot; biçimlerinde, yazma işlemlerinde bir dizin oluşturan çok sayıda bölümlenmiş dosya ile dikkat edin.
 
-    ![Çıktının Depolama Gezgini görünümü](./media/quickstart-apache-spark-notebook/spark-get-started-default-storage.png "Çıktının Depolama Gezgini görünümü")
+    ![Çıktının Depolama Gezgini görünümü](./media/quickstart-apache-spark-notebook/spark-get-started-default-storage.png &quot;Çıktının Depolama Gezgini görünümü")
 
     ![Varsayılan > demodata > demo_df yolunu vurgulayan ekran görüntüsü.](./media/quickstart-apache-spark-notebook/spark-get-started-default-storage2.png "Çıktının Depolama Gezgini görünümü")
 

@@ -2,14 +2,14 @@
 title: Azure Backup destek matrisi
 description: Azure Backup hizmeti için destek ayarlarının ve sınırlamaların özetini sağlar.
 ms.topic: conceptual
-ms.date: 02/17/2019
+ms.date: 04/14/2021
 ms.custom: references_regions
-ms.openlocfilehash: 2877b0085f31f39849e04678d5e0ddd65e3888e2
-ms.sourcegitcommit: f0a3ee8ff77ee89f83b69bc30cb87caa80f1e724
+ms.openlocfilehash: 5c74a34efe8075ab7a34fab4570d9513900b3f81
+ms.sourcegitcommit: db925ea0af071d2c81b7f0ae89464214f8167505
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2021
-ms.locfileid: "105564482"
+ms.lasthandoff: 04/15/2021
+ms.locfileid: "107517428"
 ---
 # <a name="support-matrix-for-azure-backup"></a>Azure Backup için destek matrisi
 
@@ -33,7 +33,7 @@ Aşağıdaki tabloda, kurtarma hizmetleri kasalarının özellikleri açıklanma
 --- | ---
 **Abonelikte kasa** | Tek bir abonelikte en fazla 500 kurtarma hizmeti Kasası.
 **Kasadaki makineler** | Tüm iş yükleri (Azure VM 'Leri, SQL Server VM, MABS sunucuları vb. gibi) üzerinde en fazla 2000 veri kaynağı tek bir kasada korunabilir.<br><br>Tek bir kasada en fazla 1.000 Azure VM.<br/><br/> 50 MABS sunucusuna kadar tek bir kasada kayıt yapılabilir.
-**Veri kaynakları** | Tek bir [veri kaynağının](./backup-azure-backup-faq.md#how-is-the-data-source-size-determined) en büyük boyutu 54.400 GB 'dir. Bu sınır, Azure VM yedeklemeleri için geçerlidir. Kasaya yedekleyebileceğiniz toplam veri miktarı için sınır uygulanmaz.
+**Veri kaynakları** | Tek bir [veri kaynağının](./backup-azure-backup-faq.yml#how-is-the-data-source-size-determined-) en büyük boyutu 54.400 GB 'dir. Bu sınır, Azure VM yedeklemeleri için geçerlidir. Kasaya yedekleyebileceğiniz toplam veri miktarı için sınır uygulanmaz.
 **Kasaya yedeklemeler** | **Azure VM 'leri:** Günde bir kez.<br/><br/>**DPM/MABS tarafından korunan makineler:** Günde iki kez.<br/><br/> **Mars Aracısı kullanılarak doğrudan yedeklenen makineler:** Günde üç kez.
 **Kasaların arasındaki yedeklemeler** | Yedekleme bir bölgede yer alan.<br/><br/> Yedeklemek istediğiniz VM 'Leri içeren her Azure bölgesinde bir kasaya ihtiyacınız vardır. Farklı bir bölgeye yedekleme yapamazsınız.
 **Kasaları taşı** | Kasalarını abonelikler arasında veya aynı abonelikteki kaynak grupları arasında [taşıyabilirsiniz](./backup-azure-move-recovery-services-vault.md) . Ancak, kasaların bölgeler arasında taşınması desteklenmez.
@@ -57,7 +57,7 @@ Aşağıdaki tabloda, kurtarma hizmetleri kasalarının özellikleri açıklanma
 
 ### <a name="azure-vm-limits"></a>Azure VM sınırları
 
-**Sınırlı** | **Ayrıntılar**
+**Sınır** | **Ayrıntılar**
 --- | ---
 **Azure VM veri diskleri** | Bkz. [Azure VM yedeklemesi için destek matrisi](./backup-support-matrix-iaas.md#vm-storage-support).
 **Azure VM veri diski boyutu** | Tek bir disk boyutu 32 TB 'a kadar ve bir VM 'deki tüm diskler için en fazla 256 TB olabilir.
@@ -151,10 +151,10 @@ Azure Backup, veri kullanılabilirliğini ve dayanıklılık özelliğini güçl
 
 | Yedekleme yönetimi türü | Desteklenir                                                    | Desteklenen bölgeler |
 | ---------------------- | ------------------------------------------------------------ | ----------------- |
-| Azure VM               | Hem yönetilen hem de yönetilmeyen diskler içeren Azure VM 'Leri için desteklenir. Klasik VM 'Ler için desteklenmez. | Fransa Orta, Avustralya Orta, Güney Afrika Kuzey, BAE Kuzey, İsviçre Kuzey, Almanya Orta Batı, Norveç Doğu dışında tüm Azure genel bölgelerinde ve bağımsız bölgelerde kullanılabilir. <br>Bu bölgelerde kullanım hakkında daha fazla bilgi için, iletişim kurun [AskAzureBackupTeam@microsoft.com](mailto:AskAzureBackupTeam@microsoft.com) |
-| SQL/SAP HANA | Önizlemede                                                      | Fransa Orta, Avustralya Orta, Güney Afrika Kuzey, BAE Kuzey, İsviçre Kuzey, Almanya Orta Batı, Norveç Doğu dışında tüm Azure genel bölgelerinde ve bağımsız bölgelerde kullanılabilir. <br>Bu bölgelerde kullanım hakkında daha fazla bilgi için, iletişim kurun [AskAzureBackupTeam@microsoft.com](mailto:AskAzureBackupTeam@microsoft.com) |
-| MARS Aracısı/şirket içi  | No                                                           | Yok               |
-| AFS (Azure dosya paylaşımları)                 | No                                                           | Yok               |
+| Azure VM               | Hem yönetilen hem de yönetilmeyen diskler ile Azure VM 'Leri (şifreli Azure VM 'Leri dahil) için desteklenir. Klasik VM 'Ler için desteklenmez. | Fransa Orta, Avustralya Orta, Güney Afrika Kuzey, BAE Kuzey, İsviçre Kuzey, Almanya Orta Batı, Norveç Doğu, UG IOWA ve UG Virginia hariç tüm Azure genel bölgelerinde ve bağımsız bölgelerde kullanılabilir. <br>Bu bölgelerde kullanım hakkında daha fazla bilgi için, iletişim kurun [AskAzureBackupTeam@microsoft.com](mailto:AskAzureBackupTeam@microsoft.com) |
+| SQL/SAP HANA | Önizlemede                                                      | Fransa Orta, Avustralya Orta, Güney Afrika Kuzey, BAE Kuzey, İsviçre Kuzey, Almanya Orta Batı, Norveç Doğu, UG IOWA ve UG Virginia hariç tüm Azure genel bölgelerinde ve bağımsız bölgelerde kullanılabilir. <br>Bu bölgelerde kullanım hakkında daha fazla bilgi için, iletişim kurun [AskAzureBackupTeam@microsoft.com](mailto:AskAzureBackupTeam@microsoft.com) |
+| MARS Aracısı/şirket içi  | Hayır                                                           | Yok               |
+| AFS (Azure dosya paylaşımları)                 | Hayır                                                           | Yok               |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

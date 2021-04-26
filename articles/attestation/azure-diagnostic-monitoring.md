@@ -1,5 +1,5 @@
 ---
-title: Azure Tanılama izleme-Azure kanıtlama
+title: Azure kanıtlama için Azure Tanılama izleme
 description: Azure kanıtlama için Azure Tanılama izleme
 services: attestation
 author: msmbaldwin
@@ -7,22 +7,21 @@ ms.service: attestation
 ms.topic: overview
 ms.date: 08/31/2020
 ms.author: mbaldwin
-ms.openlocfilehash: d01e7817906927295591353b710afe2899aacdf1
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 2b0cd0402348e4aa45b291f30b677fc9e4bbdb98
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "101726487"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107833643"
 ---
-# <a name="setting-up-diagnostics-with-trusted-platform-module-tpm-endpoint-of-azure-attestation"></a>Azure kanıtlama Güvenilir Platform Modülü (TPM) uç noktası ile tanılamayı ayarlama
+# <a name="set-up-diagnostics-with-a-trusted-platform-module-tpm-endpoint-of-azure-attestation"></a>Azure kanıtlama 'nın Güvenilir Platform Modülü (TPM) uç noktası ile tanılamayı ayarlama
 
-Azure etkinlik günlüğü ve kaynak günlükleri dahil olmak üzere Azure 'daki [Platform günlükleri](../azure-monitor/essentials/platform-logs-overview.md) , Azure kaynakları ve bağımlı oldukları Azure platformu için ayrıntılı tanılama ve denetim bilgileri sağlar. [Platform ölçümleri](../azure-monitor/essentials/data-platform-metrics.md) varsayılan olarak toplanır ve genellikle Azure izleyici ölçümleri veritabanında depolanır. Bu makalede, farklı hedeflere platform ölçümleri ve platform günlükleri göndermek için tanılama ayarlarını oluşturma ve yapılandırma hakkında ayrıntılı bilgi verilmektedir. 
+Bu makale, farklı hedeflere platform ölçümleri ve platform günlükleri göndermek için Tanılama ayarları oluşturmanıza ve yapılandırmanıza yardımcı olur. Azure etkinlik günlüğü ve kaynak günlükleri dahil olmak üzere Azure 'daki [Platform günlükleri](/azure/azure-monitor/platform/platform-logs-overview) , Azure kaynakları ve bağımlı oldukları Azure platformu için ayrıntılı tanılama ve denetim bilgileri sağlar. [Platform ölçümleri](/azure/azure-monitor/platform/data-platform-metrics) varsayılan olarak toplanır ve Azure izleyici ölçümleri veritabanında depolanır.
 
-TPM uç nokta hizmeti, tanılama ayarıyla etkinleştirildi ve etkinliği izlemek için kullanılabilir. PowerShell 'i kullanarak TPM hizmeti uç noktası için [Azure izlemeyi](../azure-monitor/overview.md) ayarlamak için aşağıdaki adımları izleyin. 
+Başlamadan önce [Azure PowerShell Ile Azure kanıtlama ayarladığınızdan](quickstart-powershell.md)emin olun.
 
-Azure kanıtlama hizmetini kurun. 
-
-[Azure kanıtlama 'nı Azure PowerShell ile ayarlama](./quickstart-powershell.md)
+Güvenilir Platform Modülü (TPM) uç nokta hizmeti Tanılama ayarlarından etkinleştirilir ve etkinliği izlemek için kullanılabilir. Aşağıdaki kodu kullanarak TPM hizmeti uç noktası için [Azure izleme](/azure/azure-monitor/overview) 'yi ayarlayın.
 
 ```powershell
 
@@ -41,4 +40,5 @@ Azure kanıtlama hizmetini kurun.
  Set-AzDiagnosticSetting -ResourceId $ attestationProvider.Id -StorageAccountId $ storageAccount.Id -Enabled $true 
 
 ```
-Etkinlik günlükleri, depolama hesabının kapsayıcılar bölümünde bulunabilir. Ayrıntılı bilgi, [bir Azure kaynağından kaynak günlüklerini toplama ve Azure izleyici ile analiz etme-Azure izleyici ile](../azure-monitor/essentials/tutorial-resource-logs.md) bulunabilir.
+
+Etkinlik günlükleri, depolama hesabının **kapsayıcılar** bölümünde bulunur. Daha fazla bilgi için bkz. [Azure kaynağından kaynak günlüklerini toplama ve çözümleme](/azure/azure-monitor/learn/tutorial-resource-logs).

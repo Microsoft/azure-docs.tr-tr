@@ -9,25 +9,19 @@ ms.author: dademath
 ms.date: 03/10/2021
 ms.topic: overview
 ms.service: azure-communication-services
-ms.openlocfilehash: b5960238893ae1e4dc307db98f9dc73889a2fa5b
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.openlocfilehash: 5547e49cd7ea7f6c0cc97b5559564b64e0deda7c
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105108902"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106168850"
 ---
 # <a name="get-started-with-the-group-chat-hero-sample"></a>Grup sohbeti Hero örneği ile çalışmaya başlama
 
-[!INCLUDE [Public Preview Notice](../includes/public-preview-include.md)]
-
-
-<!----
-> [!WARNING]
-> links to our Hero Sample repo need to be updated when the sample is publicly available.
----->
+[!INCLUDE [Public Preview Notice](../includes/public-preview-include-chat.md)]
 
 > [!IMPORTANT]
-> [Bu örnek GitHub ' da kullanılabilir.](https://github.com/Azure-Samples/communication-services-web-chat-hero)
+> [Bu örnek **GitHub ' da** kullanılabilir.](https://github.com/Azure-Samples/communication-services-web-chat-hero)
 
 
 Azure Iletişim Hizmetleri **grubu sohbeti Hero örneği** , Iletişim Hizmetleri sohbet web SDK 'sının bir grup çağırma deneyimi oluşturmak için nasıl kullanılabileceğini gösterir.

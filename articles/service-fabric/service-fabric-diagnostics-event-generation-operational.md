@@ -3,12 +3,12 @@ title: Azure Service Fabric olay listesi
 description: Kümeleri izlemeye yardımcı olmak için Azure Service Fabric tarafından sağlanan olayların kapsamlı listesi.
 ms.topic: reference
 ms.date: 2/25/2019
-ms.openlocfilehash: 3f65d7c3ddec8263ff6f115df9616b48814afc93
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.openlocfilehash: a1ba21aaac831abb07544944420f2b77e1753955
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105628892"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106279791"
 ---
 # <a name="list-of-service-fabric-events"></a>Service Fabric olaylarının listesi 
 
@@ -36,6 +36,12 @@ Küme yükseltmeleri hakkında daha fazla ayrıntı için [burada](service-fabri
 | 29629 | Clusteryükselderollbackstarted | Yükseltme | Bir küme yükseltmesi geri alınmaya başladı  | CM | Uyarı | 
 | 29630 | Clusteryükselderollbackcompleted | Yükseltme | Bir küme yükseltmesinin geri alınması tamamlandı | CM | Uyarı | 
 | 29631 | ClusterUpgradeDomainCompleted | Yükseltme | Bir yükseltme etki alanı, bir küme yükseltmesi sırasında yükseltmeyi bitirdi | CM | Bilgilendirici | 
+
+**Yerleştirme olayları**
+| Even | Name | Kategori | Açıklama |Kaynak (görev) | Level |
+| --- | --- | ---| --- | --- | --- |
+| 17616 | Karar |StateTransition | Yerleştirme işlemi, yeni çoğaltmaların yerleştirilmesiyle ilgili karar vermek üzere zamanlandı. | CRM | Bilgilendirici |
+
 
 ## <a name="node-events"></a>Düğüm olayları
 

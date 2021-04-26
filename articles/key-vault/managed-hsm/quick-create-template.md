@@ -3,19 +3,23 @@ title: Azure hızlı başlangıç-Azure Resource Manager şablonu kullanarak yö
 description: Kaynak Yöneticisi şablonu kullanarak Azure Azure Key Vault yönetilen bir HSM oluşturmayı gösteren hızlı başlangıç
 services: key-vault
 author: msmbaldwin
-tags: azure-resource-manager
+ms.author: mbaldwin
+ms.date: 09/15/2020
+ms.topic: quickstart
 ms.service: key-vault
 ms.subservice: managed-hsm
-ms.topic: quickstart
-ms.custom: mvc, devx-track-azurecli
-ms.date: 09/15/2020
-ms.author: mbaldwin
-ms.openlocfilehash: d9fb9e0221ad6a5749899c89bbd9dc5631e7a91c
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+tags:
+- azure-resource-manager
+ms.custom:
+- mvc
+- devx-track-azurecli
+- mode-arm
+ms.openlocfilehash: 33c262c61d50b45663a627e40ea186f1f0dcde41
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102213275"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532962"
 ---
 # <a name="quickstart-create-an-key-vault-managed-hsm-using-an-azure-resource-manager-template"></a>Hızlı başlangıç: Azure Resource Manager şablonu kullanarak Key Vault yönetilen HSM oluşturma
 

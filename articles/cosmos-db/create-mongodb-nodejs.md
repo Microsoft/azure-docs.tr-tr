@@ -9,12 +9,12 @@ ms.devlang: nodejs
 ms.topic: quickstart
 ms.date: 05/21/2019
 ms.custom: seo-javascript-september2019, seo-javascript-october2019, devx-track-js, devx-track-azurecli
-ms.openlocfilehash: 97b26e4b32c7ec1b81eb6227ac29b0574bf088fc
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 588c12addbdbd686038699026bb9dccd8671717c
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "101659979"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107765271"
 ---
 # <a name="quickstart-migrate-an-existing-mongodb-nodejs-web-app-to-azure-cosmos-db"></a>Hızlı başlangıç: mevcut bir MongoDB Node.js Web uygulamasını Azure Cosmos DB geçirme 
 [!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
@@ -80,7 +80,7 @@ Uygulama bir MongoDB kaynağına bağlanmayı deneyip başarısız olur, çıkı
 
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
-Yüklü bir Azure CLı kullanıyorsanız, [az Login](/cli/azure/reference-index#az-login) komutuyla Azure aboneliğinizde oturum açın ve ekrandaki yönergeleri izleyin. Azure Cloud Shell'i kullanıyorsanız bu adımı atlayabilirsiniz.
+Yüklü bir Azure CLı kullanıyorsanız, [az Login](/cli/azure/reference-index#az_login) komutuyla Azure aboneliğinizde oturum açın ve ekrandaki yönergeleri izleyin. Azure Cloud Shell'i kullanıyorsanız bu adımı atlayabilirsiniz.
 
 ```azurecli
 az login 
@@ -94,7 +94,7 @@ Yüklenen bir Azure CLI kullanıyorsanız `az` komutunu çalıştırarak `cosmos
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
-[Az Group Create](/cli/azure/group#az-group-create)ile bir [kaynak grubu](../azure-resource-manager/management/overview.md) oluşturun. Azure kaynak grubu; web uygulamaları, veritabanları ve depolama hesapları gibi Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
+[Az Group Create](/cli/azure/group#az_group_create)ile bir [kaynak grubu](../azure-resource-manager/management/overview.md) oluşturun. Azure kaynak grubu; web uygulamaları, veritabanları ve depolama hesapları gibi Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. 
 
 Aşağıdaki örnekte Batı Avrupa bölgesinde bir kaynak grubu oluşturulmaktadır. Kaynak grubu için benzersiz bir ad seçin.
 
@@ -106,7 +106,7 @@ az group create --name myResourceGroup --location "West Europe"
 
 ## <a name="create-an-azure-cosmos-db-account"></a>Azure Cosmos DB hesabı oluşturma
 
-[Az cosmosdb Create](/cli/azure/cosmosdb#az-cosmosdb-create) komutuyla bir Cosmos hesabı oluşturun.
+[Az cosmosdb Create](/cli/azure/cosmosdb#az_cosmosdb_create) komutuyla bir Cosmos hesabı oluşturun.
 
 Aşağıdaki komutta, lütfen yer tutucuyu gördüğünüz benzersiz Cosmos hesabınızın adını yerine koyun `<cosmosdb-name>` . Bu benzersiz ad Cosmos DB uç noktasının bir parçası olarak kullanılır `https://<cosmosdb-name>.documents.azure.com/` . bu nedenle, adın Azure 'daki tüm Cosmos hesaplarında benzersiz olması gerekir. 
 
@@ -176,7 +176,7 @@ module.exports = {
 
 ## <a name="retrieve-the-key"></a>Anahtarı alma
 
-Cosmos veritabanına bağlanmak için veritabanı anahtarına ihtiyacınız vardır. Birincil anahtarı almak için [az cosmosdb Keys List](/cli/azure/cosmosdb/keys#az-cosmosdb-keys-list) komutunu kullanın.
+Cosmos veritabanına bağlanmak için veritabanı anahtarına ihtiyacınız vardır. Birincil anahtarı almak için [az cosmosdb Keys List](/cli/azure/cosmosdb/keys#az_cosmosdb_keys_list) komutunu kullanın.
 
 ```azurecli-interactive
 az cosmosdb keys list --name <cosmosdb-name> --resource-group myResourceGroup --query "primaryMasterKey"

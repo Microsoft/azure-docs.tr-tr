@@ -4,12 +4,12 @@ description: Çalışma zamanını, SDK'yı ve araçları yükleyip yerel bir ge
 ms.topic: conceptual
 ms.date: 10/16/2020
 ms.custom: devx-track-js
-ms.openlocfilehash: d08046c8f29901dd9650a1edc886efa2ff226e00
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 6fe551f8371322af8d955b5233e6d9d05741f3d9
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "93086786"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107868132"
 ---
 # <a name="set-up-your-development-environment-on-mac-os-x"></a>Mac OS X’te geliştirme ortamınızı ayarlama
 > [!div class="op_single_selector"]
@@ -195,7 +195,7 @@ Service Fabric uygulamanızı oluşturup derledikten sonra [Service Fabric CLI](
 
 ## <a name="set-up-net-core-31-development"></a>.NET Core 3,1 geliştirmeyi ayarlama
 
-[C# Service Fabric uygulamaları oluşturmaya](service-fabric-create-your-first-linux-application-with-csharp.md)başlamak için [Mac için .NET Core 3,1 SDK 'sını](https://www.microsoft.com/net/core#macos) yükler. .NET Core Service Fabric uygulamaları için paketler NuGet.org üzerinde barındırılır.
+[C# Service Fabric uygulamaları oluşturmaya](service-fabric-create-your-first-linux-application-with-csharp.md)başlamak için [Mac için .NET Core 3,1 SDK 'sını](https://dotnet.microsoft.com/download?initial-os=macos) yükler. .NET Core Service Fabric uygulamaları için paketler NuGet.org üzerinde barındırılır.
 
 ## <a name="install-the-service-fabric-plug-in-for-eclipse-on-your-mac"></a>Mac’inizde Eclipse için Service Fabric eklentisini yükleme
 

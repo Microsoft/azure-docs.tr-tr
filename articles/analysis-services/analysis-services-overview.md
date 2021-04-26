@@ -4,16 +4,16 @@ description: Bulutta kurumsal düzeyde veri modelleri sağlayan, tam olarak yön
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: overview
-ms.date: 01/20/2021
+ms.date: 03/29/2021
 ms.author: owend
 ms.reviewer: minewiskan
 ms.custom: references_regions
-ms.openlocfilehash: 9f8de6ed4f0312a342526fb2ba5d100dfd9ec91f
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: c3b95b92f2b76e669b4e207163f76f8cec2d3244
+ms.sourcegitcommit: 32e0fedb80b5a5ed0d2336cea18c3ec3b5015ca1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100582624"
+ms.lasthandoff: 03/30/2021
+ms.locfileid: "105731692"
 ---
 # <a name="what-is-azure-analysis-services"></a>Azure Analysis Services nedir?
 
@@ -85,6 +85,7 @@ Azure Analysis Services, dünyanın dört bir yanındaki bölgelerde desteklenir
 |Orta Kanada    |     B1, B2, S0, S1, S2, S4, D1    |     1    |
 |Orta Kanada     |     S8v2, S9v2   |    1    |
 |Doğu ABD     |     B1, B2, S0, S1, S2, S4, D1    |    1     |
+|Doğu ABD     |     S8v2, S9v2   |    1    |
 |Doğu ABD 2     |     B1, B2, S0, S1, S2, S4, D1   |    7    |
 |Doğu ABD 2     |     S8v2, S9v2   |    1    |
 |Orta Kuzey ABD     |     B1, B2, S0, S1, S2, S4, D1     |    1     |

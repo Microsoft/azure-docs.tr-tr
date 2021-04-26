@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 03/11/2019
 ms.author: apimpm
-ms.openlocfilehash: c0c7a6b25c15be2e521e0985c315baf819650aa5
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 48f8445e30bd186681d1a4384d16f228a3382473
+ms.sourcegitcommit: 6ed3928efe4734513bad388737dd6d27c4c602fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99491765"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "107012446"
 ---
 # <a name="api-management-transformation-policies"></a>API Management dönüştürme ilkeleri
 Bu konu, aşağıdaki API Management ilkelerine yönelik bir başvuru sağlar. İlke ekleme ve yapılandırma hakkında daha fazla bilgi için bkz. [API Management ilkeleri](./api-management-policies.md).
@@ -366,7 +366,7 @@ Bu örnekte ilke, bir Service Fabric arka ucuna, bölüm anahtarı olarak UserID
 > [!IMPORTANT]
 > İlkede kullanılan likit 'in uygulanması `set-body` ' C# Mode ' içinde yapılandırıldı. Filtreleme gibi şeyler yaparken bu özellikle önemlidir. Örnek olarak, bir tarih filtresi kullanmak için, Pascal büyük harfleri ve C# Tarih biçimlendirmesinin kullanılması gerekir, örneğin:
 >
-> {{Body. foo. startDateTime | Tarih: "yyyyMMddTHH: mm: ddZ"}}
+> {{Body. foo. startDateTime | Tarih: "yyyyMMddTHH: mm: ssZ"}}
 
 > [!IMPORTANT]
 > Sıvı şablonunu kullanarak bir XML gövdesine doğru bir şekilde bağlamak için bir `set-header` ilke kullanarak Içerik türünü Application/XML, Text/XML (veya + XML ile biten herhangi bir tür) olarak ayarlayın; BIR JSON gövdesi için uygulama/JSON, metin/JSON (veya + JSON ile biten herhangi bir tür) olmalıdır.

@@ -1,20 +1,20 @@
 ---
 title: Azure Depolama ile buluta görüntü verileri yükleme | Microsoft Docs
 description: Uygulama verilerini bir depolama hesabına depolamak için Azure Blob depolamayı Web Apps ile birlikte kullanın. Bu öğretici, Azure depolama 'daki görüntüleri depolayan ve görüntüleyen bir Web uygulaması oluşturur.
-author: mhopkins-msft
+author: twooley
 ms.service: storage
 ms.subservice: blobs
 ms.topic: tutorial
 ms.date: 06/24/2020
-ms.author: mhopkins
+ms.author: twooley
 ms.reviewer: dineshm
 ms.custom: devx-track-js, devx-track-csharp, devx-track-azurecli
-ms.openlocfilehash: b50aadfa16ed95bacb5247187c15489a1b017d39
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: f751b93a7d298763da5a37a54f400d6fc56a58e3
+ms.sourcegitcommit: 02bc06155692213ef031f049f5dcf4c418e9f509
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98676599"
+ms.lasthandoff: 04/03/2021
+ms.locfileid: "106277989"
 ---
 # <a name="tutorial-upload-image-data-in-the-cloud-with-azure-storage"></a>Öğretici: Azure depolama ile buluta görüntü verileri yükleme
 

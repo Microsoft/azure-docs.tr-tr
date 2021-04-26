@@ -9,10 +9,10 @@ ms.date: 03/05/2020
 ms.author: rogarana
 ms.custom: include file
 ms.openlocfilehash: 39750a86ccf781a10109e299e27a55a03173acb6
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98901244"
 ---
 Artımlı anlık görüntüler, alındığı zaman yönetilen diskler için zaman içinde son anlık görüntüden bu yana yapılan değişikliklerden oluşur. Bir diski artımlı bir anlık görüntüden geri yüklediğinizde, sistem Artımlı anlık görüntü çekilirken diskin zaman içindeki noktasını temsil eden tam diski yeniden yükler. Yönetilen disk anlık görüntülerinin bu yeni özelliği, siz tercih etmediğiniz müddetçe, her bir anlık görüntü ile tüm diski depolamanız gerekmediği için büyük olasılıkla daha fazla maliyetli olabilir. Tam anlık görüntülerle olduğu gibi, artımlı anlık görüntüler tam yönetilen disk veya tam anlık görüntü oluşturmak için kullanılabilir.

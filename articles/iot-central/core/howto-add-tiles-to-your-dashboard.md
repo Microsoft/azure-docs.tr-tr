@@ -1,17 +1,17 @@
 ---
 title: Azure IoT Central panonuza yapılandırma | Microsoft Docs
 description: Oluşturucu olarak, varsayılan Azure IoT Central uygulama panosunu kutucuklar ile yapılandırmayı öğrenin.
-author: TheJasonAndrew
-ms.author: v-anjaso
+author: philmea
+ms.author: philmea
 ms.date: 12/19/2020
 ms.topic: how-to
 ms.service: iot-central
-ms.openlocfilehash: 73c78f514f974b97eb178177f12dc4ceff7ede63
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: 8a8ba765a966409c06dbba636932f7777624f6d4
+ms.sourcegitcommit: 2aeb2c41fd22a02552ff871479124b567fa4463c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "97797018"
+ms.lasthandoff: 04/22/2021
+ms.locfileid: "107864262"
 ---
 # <a name="configure-the-application-dashboard"></a>Uygulama panosunu yapılandırma
 

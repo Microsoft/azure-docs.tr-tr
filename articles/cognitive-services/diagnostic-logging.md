@@ -6,15 +6,15 @@ services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
-ms.topic: article
+ms.topic: conceptual
 ms.date: 06/14/2019
 ms.author: erhopf
-ms.openlocfilehash: a2005ca7b32136ff0032d27e04035c46b2e4e904
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: 4a78e233a41bf3b6682f52bac912528d6bcab76c
+ms.sourcegitcommit: 260a2541e5e0e7327a445e1ee1be3ad20122b37e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "100595363"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107816351"
 ---
 # <a name="enable-diagnostic-logging-for-azure-cognitive-services"></a>Azure bilişsel hizmetler için tanılama günlüğünü etkinleştirme
 

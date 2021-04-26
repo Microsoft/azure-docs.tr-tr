@@ -83,6 +83,8 @@
           href: /dotnet/api/microsoft.azure.relay
         - name: Microsoft.ServiceBus
           href: /dotnet/api/Microsoft.ServiceBus
+    - name: Azure CLI
+      href: /cli/azure/relay
     - name: Özel durumlar
       href: relay-exceptions.md
     - name: Bağlantı noktası ayarları
@@ -92,7 +94,7 @@
     - name: Azure Yol Haritası
       href: 'https://azure.microsoft.com/roadmap/?category=enterprise-integration'
     - name: SSS
-      href: relay-faq.md
+      href: relay-faq.yml
     - name: Blog
       href: /archive/blogs/servicebus/
     - name: Fiyatlandırma

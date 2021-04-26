@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 03/04/2021
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 670fbeeb006d21e29675f88895018d1a453a1c54
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: fea42cb89dce717431c188deeb2ce83f9413f560
+ms.sourcegitcommit: c6a2d9a44a5a2c13abddab932d16c295a7207d6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102120309"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107283890"
 ---
 # <a name="define-an-openid-connect-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Azure Active Directory B2C özel ilkesinde OpenID Connect Teknik profili tanımlama
 
@@ -92,8 +92,8 @@ Teknik profil, kimlik sağlayıcısı tarafından döndürülmeyen talepleri de 
 | MarkAsFailureOnStatusCode5xx | No | Http durum kodu 5xx aralığalıyorsa, bir dış hizmete yönelik isteğin hata olarak işaretlenip işaretlenmeyeceğini gösterir. Varsayılan değer: `false`. |
 | Discovermetadatabyıtokenıssuer | No | OıDC meta verilerinin JWT belirtecindeki veren kullanılarak bulunup bulunmadığını gösterir. |
 | IncludeClaimResolvingInClaimsHandling  | No | Giriş ve çıkış talepleri için, [talep çözümlemenin](claim-resolver-overview.md) teknik profile dahil edilip edilmeyeceğini belirtir. Olası değerler: `true` , veya `false` (varsayılan). Teknik profilde bir talep çözümleyici kullanmak istiyorsanız, bunu olarak ayarlayın `true` . |
-| token_endpoint_auth_method | No | Azure AD B2C, kimlik doğrulama üst bilgisini belirteç uç noktasına nasıl göndereceğini belirtir. Olası değerler: `client_secret_post` (varsayılan) ve `client_secret_basic` (Genel Önizleme). Daha fazla bilgi için bkz. [OpenID Connect istemci kimlik doğrulaması bölümü](https://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication). |
-| token_signing_algorithm | No | **Token_endpoint_auth_method** meta verileri olarak ayarlandığında, istemci onaylamaları için kullanılan imzalama algoritması `private_key_jwt` . Olası değerler: `RS256` (varsayılan). |
+|token_endpoint_auth_method| No | Azure AD B2C, kimlik doğrulama üst bilgisini belirteç uç noktasına nasıl göndereceğini belirtir. Olası değerler: `client_secret_post` (varsayılan) ve `client_secret_basic` (Genel Önizleme), `private_key_jwt` (Genel Önizleme). Daha fazla bilgi için bkz. [OpenID Connect istemci kimlik doğrulaması bölümü](https://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication). |
+|token_signing_algorithm| No | Olarak ayarlandığında kullanılacak imzalama algoritmasını belirtir `token_endpoint_auth_method` `private_key_jwt` . Olası değerler: `RS256` (varsayılan) veya `RS512` .|
 | SingleLogoutEnabled | No | Teknik profilde oturum açma sırasında, federal kimlik sağlayıcılarının oturumunu açmaya çalışıp çalışmadığını belirtir. Daha fazla bilgi için bkz. [oturum oturumunu Azure AD B2C](./session-behavior.md#sign-out).  Olası değerler: `true` (varsayılan) veya `false` . |
 |Readbodyclaimsonıdpredirect| No| `true`Kimlik sağlayıcısı yeniden yönlendirbir yanıt gövdesinden talepleri okumak için olarak ayarlayın. Bu meta veriler, taleplerin yanıt yükünde döndürdüğü [Apple ID](identity-provider-apple-id.md)ile birlikte kullanılır.|
 

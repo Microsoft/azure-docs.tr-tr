@@ -9,10 +9,10 @@ ms.date: 12/27/2019
 ms.author: rogarana
 ms.custom: include file
 ms.openlocfilehash: 814bf085ca910ef07a13df779eef25e0e6510e57
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96011779"
 ---
 Azure dosyalarında depolanan tüm veriler, Azure depolama hizmeti şifrelemesi (SSE) kullanılarak Rest 'te şifrelenir. Depolama hizmeti şifrelemesi Windows 'da BitLocker 'a benzer şekilde çalışır: veriler dosya sistemi düzeyinin altında şifrelenir. Veriler, Azure dosya paylaşımının dosya sisteminin altında, diske kodlandığı gibi şifrelendiğinden, Azure dosya paylaşımından okumak veya yazmak için istemcideki temel anahtara erişiminizin olması gerekmez. Bekleyen şifreleme hem SMB hem de NFS protokolleri için geçerlidir.

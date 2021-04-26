@@ -5,14 +5,14 @@ services: dns
 author: rohinkoul
 ms.service: dns
 ms.topic: tutorial
-ms.date: 9/25/2018
+ms.date: 04/19/2021
 ms.author: rohink
-ms.openlocfilehash: d3017d09e94040d16950598dad360fe32930c16b
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 28e37ad0b404b5275a224c8debab5c11c07948b4
+ms.sourcegitcommit: 425420fe14cf5265d3e7ff31d596be62542837fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "80985448"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107738819"
 ---
 # <a name="tutorial-configure-an-alias-record-to-refer-to-an-azure-public-ip-address"></a>Öğretici: Azure genel IP adresine başvurmak için diğer ad kaydı yapılandırma 
 
@@ -36,8 +36,8 @@ Bu öğreticide örnek olarak contoso.com etki alanı kullanılmaktadır ancak s
 
 ## <a name="create-the-network-infrastructure"></a>Ağ altyapısını oluşturma
 İlk olarak, web sunucularınızı içine yerleştirmek için bir sanal ağ ve alt ağ oluşturun.
-1. [https://portal.azure.com](https://portal.azure.com) adresinden Azure portalında oturum açın.
-2. Portalda sol üst köşeden **Kaynak oluştur**'u seçin. Arama kutusuna *kaynak grubu* yazın ve **RG-DNS-Alias-pip** adlı bir kaynak grubu oluşturun.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Azure portal sol panelinden **kaynak oluştur** ' u seçin. Arama kutusuna *kaynak grubu* yazın ve **RG-DNS-Alias-pip** adlı bir kaynak grubu oluşturun.
 3. **Kaynak oluştur**  >  **ağ**  >  **sanal ağ**' ı seçin.
 4. **VNet-Server** adlı bir sanal ağ oluşturun. Bunu **RG-DNS-Alias-pip** kaynak grubunun içine yerleştirin ve alt ağı **SN-Web** olarak adlandırın.
 
@@ -45,10 +45,10 @@ Bu öğreticide örnek olarak contoso.com etki alanı kullanılmaktadır ancak s
 1. **Kaynak oluştur**  >  **Windows Server 2016 VM**' yi seçin.
 2. Ad için **Web-01** girin ve VM’yi **RG-DNS-Alias-TM** kaynak grubuna yerleştirin. Kullanıcı adı ve parola girip **Tamam**'ı seçin.
 3. **Boyut** için 8 GB RAM'e sahip bir SKU seçin.
-4. **Ayarlar** için **VNet-Servers** sanal ağını ve **SN-Web** alt ağını seçin. Genel gelen bağlantı noktaları için **http**  >  **https**  >  **RDP (3389)** öğesini seçin ve ardından **Tamam**' ı seçin.
+4. **Ayarlar** için **VNet-Servers** sanal ağını ve **SN-Web** alt ağını seçin. Ortak gelen bağlantı noktaları için **http (80)**  >  **https (443)**  >  **RDP (3389)** öğesini seçin ve ardından **Tamam**' ı seçin.
 5. **Özet** sayfasında **Oluştur**'u seçin.
 
-Bu işlemin tamamlanması birkaç dakika sürer. Sanal makine, bağlı bir NIC 'e sahip olacak ve bu, Web-01-IP adlı bir temel dinamik genel IP 'ye sahip olacaktır. Ortak IP, sanal makine her yeniden başlatıldığında değişecektir.
+Bu dağıtımın tamamlanabilmesi birkaç dakika sürer. Sanal makinede, Web-01-IP adlı temel dinamik genel IP 'ye sahip bir NIC eklenir. Ortak IP, sanal makine her yeniden başlatıldığında değişecektir.
 
 ### <a name="install-iis"></a>IIS yükleme
 

@@ -7,12 +7,12 @@ ms.service: purview
 ms.subservice: purview-data-catalog
 ms.topic: how-to
 ms.date: 03/09/2021
-ms.openlocfilehash: 37ac292acc76c681ea38b2ae881ff8cd2ae5ec3c
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 5f6e2474a533f5619d5544b674a87b6412323cc3
+ms.sourcegitcommit: d23602c57d797fb89a470288fcf94c63546b1314
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "102502455"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166743"
 ---
 # <a name="automatically-label-your-data-in-azure-purview"></a>Verilerinizi Azure purview 'da otomatik olarak etiketleme
 
@@ -96,7 +96,7 @@ Azure purview 'daki Azure varlıklarına MıP duyarlılık etiketlerini uygulama
 Kuruluşlar, MıP 'nin duyarlılık etiketlerini Azure purview ile genişleterek, daha geniş bir veri kaynağı yelpazesinden uyumluluk riskini en aza indirmek için daha fazla bilgi bulabilir, sınıflandırabilir ve duyarlık elde edebilir.
 
 > [!NOTE]
-> Microsoft 365 ve Azure purview ayrı hizmetler olduğundan, farklı bölgelerde dağıtılabilecek bir olasılık vardır. Etiket adları ve özel hassas bilgi türü adları müşteri verileri olarak kabul edilir ve verilerinizin duyarlılığını korumak ve GDPR yasaları önlemek için varsayılan olarak aynı COĞRAFI konum içinde tutulur.
+> Microsoft 365 ve Azure purview ayrı hizmetler olduğundan, farklı bölgelerde dağıtılabilecek bir olasılık vardır. Etiket adları ve özel hassas bilgi türü adları müşteri verileri olarak kabul edilir ve verilerinizin duyarlılığını korumak ve gizlilik düzenlemelerine uymak için varsayılan olarak aynı COĞRAFI konum içinde tutulur.
 >
 > Bu nedenle, Etiketler ve özel hassas bilgi türleri varsayılan olarak Azure purview ile paylaşılmaz ve bunları Azure purview ' de kullanmak için onay gerektirir.
 

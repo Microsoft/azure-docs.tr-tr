@@ -9,10 +9,10 @@ ms.author: mlearned
 description: Arc etkin Kubernetes kümeleriyle ilgili yaygın sorunları giderme.
 keywords: Kubernetes, yay, Azure, kapsayıcılar
 ms.openlocfilehash: 992ea75c48b2630032e1314610986fbc610eec7b
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
+ms.lasthandoff: 03/30/2021
 ms.locfileid: "105025790"
 ---
 # <a name="azure-arc-enabled-kubernetes-troubleshooting"></a>Azure Arc etkin Kubernetes sorunlarını giderme
@@ -21,7 +21,7 @@ Bu belge bağlantı, izin ve aracılarla ilgili sorunlar için sorun giderme kı
 
 ## <a name="general-troubleshooting"></a>Genel sorun giderme
 
-### <a name="azure-cli"></a>Azure CLI
+### <a name="azure-cli"></a>Azure CLI’si
 
 `az connectedk8s`Veya `az k8s-configuration` CLI komutlarını kullanmadan önce, Azure CLI 'Nin doğru Azure aboneliğine göre çalışacak şekilde ayarlandığından emin olun.
 

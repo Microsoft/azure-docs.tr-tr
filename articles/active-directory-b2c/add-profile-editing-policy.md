@@ -13,12 +13,12 @@ ms.custom: project-no-code
 ms.author: mimart
 ms.subservice: B2C
 zone_pivot_groups: b2c-policy-type
-ms.openlocfilehash: a0f4f785feed022226ed533d378a8fa52080b9ac
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: d84756a2ae4f8897c42e1846e3a91dbb9f7ad7e1
+ms.sourcegitcommit: 20f8bf22d621a34df5374ddf0cd324d3a762d46d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104581907"
+ms.lasthandoff: 04/09/2021
+ms.locfileid: "107257050"
 ---
 # <a name="set-up-a-profile-editing-flow-in-azure-active-directory-b2c"></a>Azure Active Directory B2C profil düzenlemesi oluşturma akışı ayarlama
 
@@ -65,7 +65,7 @@ Kullanıcıların uygulamanızdaki profilini düzenlemesini etkinleştirmek isti
 
 ## <a name="create-a-profile-editing-policy"></a>Profil düzenleme ilkesi oluşturma
 
-Özel ilkeler, Kullanıcı, neys tanımlamak için Azure AD B2C kiracınıza yüklediğiniz XML dosyaları kümesidir. Kaydolma ve oturum açma, parola sıfırlama ve profil düzenlemesi ilkesi dahil olmak üzere önceden oluşturulmuş birkaç ilke ile başlangıç paketleri sunuyoruz. Daha fazla bilgi için, bkz. [Azure AD B2C özel ilkelerle çalışmaya başlama](custom-policy-get-started.md).
+Özel ilkeler, Kullanıcı, neys tanımlamak için Azure AD B2C kiracınıza yüklediğiniz XML dosyaları kümesidir. Kaydolma ve oturum açma, parola sıfırlama ve profil düzenlemesi ilkesi dahil olmak üzere önceden oluşturulmuş birkaç ilke ile başlangıç paketleri sunuyoruz. Daha fazla bilgi için, bkz. [Azure AD B2C özel ilkelerle çalışmaya başlama](tutorial-create-user-flows.md?pivots=b2c-custom-policy).
 
 ::: zone-end
 

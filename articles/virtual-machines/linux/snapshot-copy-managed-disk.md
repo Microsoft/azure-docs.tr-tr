@@ -9,12 +9,12 @@ ms.topic: how-to
 ms.date: 07/11/2018
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: d041f864c6c8cd3ae9c522d79447d71c86f9ac04
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.openlocfilehash: ab19bb1c6cc43334a3d0d427b6aff6ced2d6cc69
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "98875613"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107789672"
 ---
 # <a name="create-a-snapshot-using-the-portal-or-azure-cli"></a>Portal veya Azure CLı kullanarak anlık görüntü oluşturma
 
@@ -26,7 +26,7 @@ Aşağıdaki örnek, [Cloud Shell](https://shell.azure.com/bash) kullanmanızı 
 
 Aşağıdaki adımlarda, **--Source-Disk** parametresiyle **az Snapshot Create** komutunu kullanarak anlık görüntünün nasıl yapılacağı gösterilmektedir. Aşağıdaki örnek, *Myresourcegroup* kaynak grubunda *myvm* adlı bir VM olduğunu varsayar.
 
-[Az VM Show](/cli/azure/vm#az-vm-show)kullanarak disk kimliğini alın.
+[Az VM Show](/cli/azure/vm#az_vm_show)kullanarak disk kimliğini alın.
 
 ```azurecli-interactive
 osDiskId=$(az vm show \
@@ -36,7 +36,7 @@ osDiskId=$(az vm show \
    -o tsv)
 ```
 
-[Az Snapshot Create](/cli/azure/snapshot#az-snapshot-create)kullanarak *OSDisk-Backup* adlı bir anlık görüntü alın.
+[Az Snapshot Create](/cli/azure/snapshot#az_snapshot_create)kullanarak *OSDisk-Backup* adlı bir anlık görüntü alın.
 
 ```azurecli-interactive
 az snapshot create \
@@ -48,7 +48,7 @@ az snapshot create \
 > [!NOTE]
 > Anlık görüntüsünü bölge dayanıklı depolamada depolamak isterseniz, bunu [kullanılabilirlik bölgelerini](../../availability-zones/az-overview.md) destekleyen bir bölgede oluşturmanız ve **--SKU Standard_ZRS** parametresini eklemeniz gerekir.
 
-[Az Snapshot List](/cli/azure/snapshot#az-snapshot-list)kullanarak anlık görüntülerin bir listesini görebilirsiniz.
+[Az Snapshot List](/cli/azure/snapshot#az_snapshot_list)kullanarak anlık görüntülerin bir listesini görebilirsiniz.
 
 ```azurecli-interactive
 az snapshot list \

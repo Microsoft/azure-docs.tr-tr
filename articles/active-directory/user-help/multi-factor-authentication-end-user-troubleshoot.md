@@ -14,10 +14,10 @@ ms.author: curtand
 ms.reviewer: kexia
 ms.custom: contperf-fy21q1
 ms.openlocfilehash: 0cb5e3463eda5d77bbbdefe223954105fd125c71
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "98033991"
 ---
 # <a name="common-problems-with-two-factor-verification-and-your-work-or-school-account"></a>İki öğeli doğrulama ve iş veya okul hesabınızla ilgili yaygın sorunlar

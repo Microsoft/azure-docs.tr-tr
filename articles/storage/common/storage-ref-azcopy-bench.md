@@ -8,12 +8,12 @@ ms.date: 07/24/2020
 ms.author: normesta
 ms.subservice: common
 ms.reviewer: zezha-msft
-ms.openlocfilehash: c1028d0a4a458746c08fd6fa4f16aa952d9962a2
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 1e49e787854069c2fcea30df7a43c3aacdd21b9e
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "87282016"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107502037"
 ---
 # <a name="azcopy-benchmark"></a>AzCopy kıyaslaması
 
@@ -38,6 +38,12 @@ Kıyaslama komutu dışında ' Copy ' ile aynı işlemi çalıştırır:
 Kıyaslama modu, en yüksek aktarım hızını sağlayan paralel TCP bağlantısı sayısına otomatik olarak ayarlanır. Bu numara sonda görüntülenir. Oto ayarlamayı engellemek için AZCOPY_CONCURRENCY_VALUE ortam değişkenini belirli sayıda bağlantı olarak ayarlayın. 
 
 Tüm olağan kimlik doğrulama türleri desteklenir. Ancak, yük boşaltma için en kullanışlı yaklaşım genellikle SAS belirtecine sahip boş bir kapsayıcı oluşturmak ve SAS kimlik doğrulamasını kullanmaktır. (İndirme modu, hedef kapsayıcıda mevcut olacak bir dizi test verisi gerektirir.)
+
+## <a name="related-conceptual-articles"></a>İlgili kavramsal makaleler
+
+- [AzCopy’yi kullanmaya başlama](storage-use-azcopy-v10.md)
+- [Azure depolama ile AzCopy ile v10 arasındaki performansını iyileştirin](storage-use-azcopy-optimize.md)
+
 
 ## <a name="examples"></a>Örnekler
 

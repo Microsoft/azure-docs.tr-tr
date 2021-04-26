@@ -4,10 +4,10 @@ description: ARM şablonunu kullanarak Windows 'da Azure Service Fabric yönetil
 ms.topic: how-to
 ms.date: 02/15/2021
 ms.openlocfilehash: b7e56ff8db9f94b8c6681a1a7d69a4751b3f43a5
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "100642585"
 ---
 # <a name="enable-disk-encryption-for-service-fabric-managed-cluster-preview-nodes"></a>Service Fabric yönetilen küme (Önizleme) düğümleri için disk şifrelemeyi etkinleştir

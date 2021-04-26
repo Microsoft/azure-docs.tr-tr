@@ -1,10 +1,10 @@
 ### YamlMime:Hub
 title: Azure Bilişsel Hizmetler belgeleri
-summary: Kullanıcılarınızın ihtiyaçlarını görmek, duymak, dile getirmek, anlamak ve yorumlamak için uygulamalarınıza, web sitelerinize ve botlarınıza akıllı ve desteklenen algoritmalar oluşturmayı öğrenin.
+summary: 'Kullanıcılarınızın ihtiyaçlarını görmek, duymak, dile getirmek, anlamak ve yorumlamak için uygulamalarınıza, web sitelerinize ve botlarınıza akıllı ve desteklenen algoritmalar oluşturmayı öğrenin.'
 brand: azure
 metadata:
   title: Azure Bilişsel Hizmetler belgeleri
-  description: Kullanıcılarınızın ihtiyaçlarını görmek, duymak, dile getirmek, anlamak ve yorumlamak için uygulamalarınıza, web sitelerinize ve botlarınıza akıllı ve desteklenen algoritmalar oluşturmayı öğrenin.
+  description: 'Kullanıcılarınızın ihtiyaçlarını görmek, duymak, dile getirmek, anlamak ve yorumlamak için uygulamalarınıza, web sitelerinize ve botlarınıza akıllı ve desteklenen algoritmalar oluşturmayı öğrenin.'
   ms.service: cognitive-services
   ms.topic: hub-page
   author: nitinme
@@ -12,179 +12,173 @@ metadata:
   manager: nitinme
   ms.custom: custom-portals-hub
   ms.date: 08/28/2020
-  ms.openlocfilehash: 70e2e77e008738ff7c2ed0981de5ee915614ab8d
-  ms.sourcegitcommit: 15d27661c1c03bf84d3974a675c7bd11a0e086e6
-  ms.translationtype: MT
-  ms.contentlocale: tr-TR
-  ms.lasthandoff: 03/09/2021
-  ms.locfileid: "102504125"
 highlightedContent:
   items:
-  - title: Bilişsel Hizmetler nedir?
-    itemType: overview
-    url: ./what-are-cognitive-services.md
-  - title: Docs’taki yenilikler?
-    itemType: whats-new
-    url: whats-new-docs.md
-  - title: Dağıtım seçenekleri
-    itemType: concept
-    url: ./cognitive-services-development-options.md
-  - title: Bilişsel Hizmetler ve makine öğrenmesi
-    itemType: concept
-    url: ./cognitive-services-and-machine-learning.md
-  - title: Şirket içi kapsayıcılarda Bilişsel Hizmetler
-    itemType: concept
-    url: ./containers/index.yml
-  - title: Veritabanları ile Bilişsel Hizmetler
-    itemType: concept
-    url: ./big-data/cognitive-services-for-big-data.md
-  - title: Dil desteği
-    itemType: reference
-    url: ./language-support.md
-  - title: Destek ve yardım seçenekleri
-    itemType: reference
-    url: ./cognitive-services-support-options.md
+    - title: Bilişsel Hizmetler nedir?
+      itemType: overview
+      url: ./what-are-cognitive-services.md
+    - title: Docs’taki yenilikler?
+      itemType: whats-new
+      url: whats-new-docs.md
+    - title: Dağıtım seçenekleri
+      itemType: concept
+      url: ./cognitive-services-development-options.md
+    - title: Bilişsel Hizmetler ve makine öğrenmesi
+      itemType: concept
+      url: ./cognitive-services-and-machine-learning.md
+    - title: Şirket içi kapsayıcılarda Bilişsel Hizmetler
+      itemType: concept
+      url: ./containers/index.yml
+    - title: Veritabanları ile Bilişsel Hizmetler
+      itemType: concept
+      url: ./big-data/cognitive-services-for-big-data.md
+    - title: Dil desteği
+      itemType: reference
+      url: ./language-support.md
+    - title: Destek ve yardım seçenekleri
+      itemType: reference
+      url: ./cognitive-services-support-options.md
 conceptualContent:
   items:
-  - title: Görsel
-    summary: Resimlerinizi, videolarınızı ve dijital mürekkep içeriğinizi tanıyın, tanımlayın, altyazı ekleyin, dizine alın ve yönetin.
-    links:
-    - url: ./computer-vision/index.yml
-      itemType: overview
-      text: Görüntü İşleme
-    - url: ./custom-vision-service/index.yml
-      itemType: overview
-      text: Özel Görüntü
-    - url: ./face/index.yml
-      itemType: overview
-      text: Yüz
-    - url: ./form-recognizer/index.yml
-      itemType: overview
-      text: Form Tanıma
-    - url: ../media-services/video-indexer/index.yml
-      itemType: overview
-      text: Video Indexer
-  - title: Dil
-    summary: Önceden oluşturulmuş betiklerle uygulamalarınızın doğal dil işlemesine, duyguları değerlendirmesine ve kullanıcıların ne istediğini tanımayı öğrenmesine imkan sağlayın.
-    links:
-    - url: ./immersive-reader/index.yml
-      itemType: overview
-      text: Tam Ekran Okuyucu
-    - url: ./luis/index.yml
-      itemType: overview
-      text: Language Understanding (LUIS)
-    - url: ./qnamaker/index.yml
-      itemType: overview
-      text: Soru-Cevap Oluşturucu
-    - url: ./text-analytics/index.yml
-      itemType: overview
-      text: Metin Analizi
-    - url: ./translator/index.yml
-      itemType: overview
-      text: Çevirmen
-  - title: Konuşma
-    summary: Konuşmaları metne, metinleri kulağa doğal gelen konuşmalara dönüştürün. Bir dilden başka bir dile çeviri yapın, konuşmacı doğrulama ve tanıma özelliğini etkinleştirin.
-    links:
-    - url: ./speech-service/index.yml
-      itemType: overview
-      text: Konuşma hizmeti
-    - url: https://speech.microsoft.com/
-      itemType: overview
-      text: Speech Studio ile özelleştirme
-  - title: Karar
-    summary: Bilgiye dayalı ve verimli kararlar almak için öneriler sunan uygulamalar derleyin.
-    links:
-    - url: ./anomaly-detector/index.yml
-      itemType: overview
-      text: Anomali Algılayıcısı
-    - url: ./content-moderator/index.yml
-      itemType: overview
-      text: Content Moderator
-    - url: ./metrics-advisor/index.yml
-      itemType: overview
-      text: Ölçüm Danışmanı (önizleme)
-    - url: ./personalizer/index.yml
-      itemType: overview
-      text: Kişiselleştirme
-  - title: Arama
-    summary: Uygulamalarınıza Bing Arama API'leri ekleyin ve tek bir API çağrısıyla milyarlarca web sayfası, resim, video ve haberi tarama imkanından yararlanın.
-    links:
-    - url: ./Bing-web-search/index.yml
-      itemType: overview
-      text: Bing Arama API’leri hub sayfası
-  - title: Bilişsel Hizmet Kapsayıcıları
-    summary: Azure Bilişsel Hizmetler'de kapsayıcı desteği geliştiricilerin Azure'da kullanılabilen zengin API'lerin aynılarını kullanmalarına olanak tanır ve Docker kapsayıcılarıyla gelen hizmetlerin nerede dağıtılacağı ve barındırılacağı konusunda esneklik sağlar.
-    links:
-    - url: ./containers/index.yml
-      itemType: overview
-      text: Bilişsel Hizmetler kapsayıcıları belgeleri
-    - url: ./cognitive-services-container-support.md
-      itemType: overview
-      text: Bilişsel Hizmetler kapsayıcıları nedir?
-    - url: ./containers/container-reuse-recipe.md
-      itemType: learn
-      text: Yeniden kullanım için kapsayıcı oluşturma
-    - url: ./containers/azure-container-instance-recipe.md
-      itemType: how-to-guide
-      text: Azure Container Örneğinde kapsayıcı dağıtma ve çalıştırma
-    - url: ./containers/azure-kubernetes-recipe.md
-      itemType: deploy
-      text: Azure Kubernetes Service’e dağıtma
-    - url: ./containers/docker-compose-recipe.md
-      itemType: get-started
-      text: Docker Compose kullanarak birden çok kapsayıcı dağıtma
-    - url: ./containers/container-faq.yml
-      itemType: reference
-      text: Bilişsel Hizmetler kapsayıcıları hakkında SSS
-  - title: Büyük Veri için Bilişsel Hizmetler
-    summary: Büyük Veri için Bilişsel Hizmetler, geliştiricilerin büyük veri kümelerine akıllı algoritmalar uygulamak için veritabanlarında bilişsel hizmetleri kullanmasına olanak tanır
-    links:
-    - url: ./big-data/cognitive-services-for-big-data.md
-      itemType: overview
-      text: Büyük Veri için Bilişsel Hizmetler
-    - url: ./big-data/getting-started.md
-      itemType: get-started
-      text: Azure Databricks ve Azure Synapse Analytics’te Bilişsel Hizmetler’i kullanma
-    - url: ./big-data/samples-python.md
-      itemType: reference
-      text: Python Örnekleri
+    - title: Görsel
+      summary: 'Resimlerinizi, videolarınızı ve dijital mürekkep içeriğinizi tanıyın, tanımlayın, altyazı ekleyin, dizine alın ve yönetin.'
+      links:
+        - url: ./computer-vision/index.yml
+          itemType: overview
+          text: Görüntü İşleme
+        - url: ./custom-vision-service/index.yml
+          itemType: overview
+          text: Özel Görüntü
+        - url: ./face/index.yml
+          itemType: overview
+          text: Yüz
+        - url: ./form-recognizer/index.yml
+          itemType: overview
+          text: Form Tanıma
+        - url: ../media-services/video-indexer/index.yml
+          itemType: overview
+          text: Video Indexer
+    - title: Dil
+      summary: 'Önceden oluşturulmuş betiklerle uygulamalarınızın doğal dil işlemesine, duyguları değerlendirmesine ve kullanıcıların ne istediğini tanımayı öğrenmesine imkan sağlayın.'
+      links:
+        - url: ./immersive-reader/index.yml
+          itemType: overview
+          text: Tam Ekran Okuyucu
+        - url: ./luis/index.yml
+          itemType: overview
+          text: Language Understanding (LUIS)
+        - url: ./qnamaker/index.yml
+          itemType: overview
+          text: Soru-Cevap Oluşturucu
+        - url: ./text-analytics/index.yml
+          itemType: overview
+          text: Metin Analizi
+        - url: ./translator/index.yml
+          itemType: overview
+          text: Çevirmen
+    - title: Konuşma
+      summary: 'Konuşmaları metne, metinleri kulağa doğal gelen konuşmalara dönüştürün. Bir dilden başka bir dile çeviri yapın, konuşmacı doğrulama ve tanıma özelliğini etkinleştirin.'
+      links:
+        - url: ./speech-service/index.yml
+          itemType: overview
+          text: Konuşma hizmeti
+        - url: 'https://speech.microsoft.com/'
+          itemType: overview
+          text: Speech Studio ile özelleştirme
+    - title: Karar
+      summary: Bilgiye dayalı ve verimli kararlar almak için öneriler sunan uygulamalar derleyin.
+      links:
+        - url: ./anomaly-detector/index.yml
+          itemType: overview
+          text: Anomali Algılayıcısı
+        - url: ./content-moderator/index.yml
+          itemType: overview
+          text: Content Moderator
+        - url: ./metrics-advisor/index.yml
+          itemType: overview
+          text: Ölçüm Danışmanı (önizleme)
+        - url: ./personalizer/index.yml
+          itemType: overview
+          text: Kişiselleştirme
+    - title: Arama
+      summary: 'Uygulamalarınıza Bing Arama API''leri ekleyin ve tek bir API çağrısıyla milyarlarca web sayfası, resim, video ve haberi tarama imkanından yararlanın.'
+      links:
+        - url: ./Bing-web-search/index.yml
+          itemType: overview
+          text: Bing Arama API’leri hub sayfası
+    - title: Bilişsel Hizmet Kapsayıcıları
+      summary: Azure Bilişsel Hizmetler'de kapsayıcı desteği geliştiricilerin Azure'da kullanılabilen zengin API'lerin aynılarını kullanmalarına olanak tanır ve Docker kapsayıcılarıyla gelen hizmetlerin nerede dağıtılacağı ve barındırılacağı konusunda esneklik sağlar.
+      links:
+        - url: ./containers/index.yml
+          itemType: overview
+          text: Bilişsel Hizmetler kapsayıcıları belgeleri
+        - url: ./cognitive-services-container-support.md
+          itemType: overview
+          text: Bilişsel Hizmetler kapsayıcıları nedir?
+        - url: ./containers/container-reuse-recipe.md
+          itemType: learn
+          text: Yeniden kullanım için kapsayıcı oluşturma
+        - url: ./containers/azure-container-instance-recipe.md
+          itemType: how-to-guide
+          text: Azure Container Örneğinde kapsayıcı dağıtma ve çalıştırma
+        - url: ./containers/azure-kubernetes-recipe.md
+          itemType: deploy
+          text: Azure Kubernetes Service’e dağıtma
+        - url: ./containers/docker-compose-recipe.md
+          itemType: get-started
+          text: Docker Compose kullanarak birden çok kapsayıcı dağıtma
+        - url: ./containers/container-faq.yml
+          itemType: reference
+          text: Bilişsel Hizmetler kapsayıcıları hakkında SSS
+    - title: Büyük Veri için Bilişsel Hizmetler
+      summary: 'Büyük Veri için Bilişsel Hizmetler, geliştiricilerin büyük veri kümelerine akıllı algoritmalar uygulamak için veritabanlarında bilişsel hizmetleri kullanmasına olanak tanır'
+      links:
+        - url: ./big-data/cognitive-services-for-big-data.md
+          itemType: overview
+          text: Büyük Veri için Bilişsel Hizmetler
+        - url: ./big-data/getting-started.md
+          itemType: get-started
+          text: Azure Databricks ve Azure Synapse Analytics’te Bilişsel Hizmetler’i kullanma
+        - url: ./big-data/samples-python.md
+          itemType: reference
+          text: Python Örnekleri
 additionalContent:
   sections:
-  - title: Ek kaynaklar
-    items:
-    - title: Özelleştirme için portallar
-      links:
-      - text: Özel Çevirmen
-        url: https://portal.customtranslator.azure.ai/
-      - text: Özel Görüntü İşleme
-        url: https://www.customvision.ai/
-      - text: Language Understanding (LUIS)
-        url: https://luis.ai
-      - text: Soru-Cevap Oluşturucu
-        url: https://www.qnamaker.ai/
-      - text: Speech Studio
-        url: https://speech.microsoft.com/
-    - title: SDK'lar ve REST API'ler
-      links:
-      - text: C#
-        url: /dotnet/api/overview/azure/cognitiveservices/client
-      - text: Başlayın
-        url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices
-      - text: Java
-        url: /java/api/overview/azure/cognitiveservices/client
-      - text: JavaScript
-        url: /javascript/api/overview/azure/cognitive-services
-      - text: Python
-        url: /python/api/overview/azure/cognitive-services
-      - text: R
-        url: https://github.com/Azure/AzureCognitive
-      - text: Apache Spark ve Veritabanları
-        url: ./big-data/cognitive-services-for-big-data.md
-      - text: Bilişsel Hizmetler Yönetimi REST API
-        url: /rest/api/cognitiveservices/
-    - title: Araçlar
-      links:
-      - text: Azure CLI
-        url: /cli/azure/cognitiveservices
-      - text: PowerShell
-        url: /powershell/module/az.cognitiveservices/#cognitive_services
+    - title: Ek kaynaklar
+      items:
+        - title: Özelleştirme için portallar
+          links:
+            - text: Özel Çevirmen
+              url: 'https://portal.customtranslator.azure.ai/'
+            - text: Özel Görüntü İşleme
+              url: 'https://www.customvision.ai/'
+            - text: Language Understanding (LUIS)
+              url: 'https://luis.ai'
+            - text: Soru-Cevap Oluşturucu
+              url: 'https://www.qnamaker.ai/'
+            - text: Speech Studio
+              url: 'https://speech.microsoft.com/'
+        - title: SDK'lar ve REST API'ler
+          links:
+            - text: C#
+              url: /dotnet/api/overview/azure/cognitiveservices/client
+            - text: Başlayın
+              url: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices'
+            - text: Java
+              url: /java/api/overview/azure/cognitiveservices/client
+            - text: JavaScript
+              url: /javascript/api/overview/azure/cognitive-services
+            - text: Python
+              url: /python/api/overview/azure/cognitive-services
+            - text: R
+              url: 'https://github.com/Azure/AzureCognitive'
+            - text: Apache Spark ve Veritabanları
+              url: ./big-data/cognitive-services-for-big-data.md
+            - text: Bilişsel Hizmetler Yönetimi REST API
+              url: /rest/api/cognitiveservices/
+        - title: Araçlar
+          links:
+            - text: Azure CLI
+              url: /cli/azure/cognitiveservices
+            - text: PowerShell
+              url: /powershell/module/az.cognitiveservices/#cognitive_services

@@ -8,15 +8,15 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: conceptual
-ms.date: 03/18/2021
+ms.date: 03/25/2021
 ms.author: aahi
 ms.custom: references_regions
-ms.openlocfilehash: a2b001d34d265c8e7246b03875c32168f2c5c962
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: f1e509156beea0b3da3539306dc055291cbff0c8
+ms.sourcegitcommit: b4fbb7a6a0aa93656e8dd29979786069eca567dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104598907"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107314193"
 ---
 # <a name="whats-new-in-the-text-analytics-api"></a>Metin Analizi API’sindeki yenilikler
 
@@ -39,7 +39,7 @@ Metin Analizi API'si, sürekli olarak güncelleştirilir. Son geliştirmelerin g
     * [C#](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/textanalytics/Azure.AI.TextAnalytics)
     * [Python](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/textanalytics/azure-ai-textanalytics/)
     * [Java](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/textanalytics/azure-ai-textanalytics)
-    * [JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/textanalytics/ai-text-analytics/samples/javascript)
+    * [JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/textanalytics/ai-text-analytics/samples/v5/javascript)
     
 > [!div class="nextstepaction"]
 > [Metin Analizi API'si v 3.1-önizleme hakkında daha fazla bilgi edinin. 4](https://westcentralus.dev.cognitive.microsoft.com/docs/services/TextAnalytics-v3-1-preview-4/operations/Languages)
@@ -51,11 +51,12 @@ Metin Analizi API'si, sürekli olarak güncelleştirilir. Son geliştirmelerin g
     * Yeni bir `Date` varlık türü.
     * Değilleme algılamayı değiştiren onaylama işlemi algılama (yalnızca API v 3.1-Preview. 4).
     * `name`Çeşitli ontolobir ve kodlama sistemlerinden normalleştirilmiş (yalnızca API v 3.1-Preview. 4 ' te mevcuttur) bağlantılı varlıklar için yeni bir tercih edilen özellik. 
-* Kapsayıcı önizleme deposuna etiketli yeni bir kapsayıcı görüntüsü `3.0.015370001-onprem-amd64` ve yeni model sürümü `2021-03-01` yayımlandı. 
-* Sistem durumu kapsayıcısı görüntüsü için Metin Analizi sonraki ay yeni bir depoya taşınır.  Lütfen yeni evin bulunduğu konumda bir e-posta iletişimini izleyin.
+* Kapsayıcı önizleme deposuna etiketli yeni bir kapsayıcı görüntüsü `3.0.015490002-onprem-amd64` ve yeni model sürümü `2021-03-01` yayımlandı. 
+    * Bu kapsayıcı görüntüsü artık `containerpreview.azurecr.io` 26 nisan 2021 tarihinden sonra yüklenmek üzere kullanılamayacak.
+* Aynı model sürümüne sahip bir sistem durumu kapsayıcısı görüntüsü için yeni bir Metin Analizi Şu anda kullanılabilir `mcr.microsoft.com/azure-cognitive-services/textanalytics/healthcare` . 26 Nisan 'dan başlayarak kapsayıcıyı yalnızca bu depodan indirebilirsiniz.
+
 > [!div class="nextstepaction"]
 > [Sistem durumu Metin Analizi hakkında daha fazla bilgi edinin](how-tos/text-analytics-for-health.md)
->
 
 ### <a name="text-analytics-resource-portal-update"></a>Metin Analizi kaynak portalı güncelleştirmesi
 * **Işlenen metin kayıtları** artık Azure Portal metin analizi kaynağınız için **izleme** bölümünde bir ölçüm olarak sunulmaktadır.  

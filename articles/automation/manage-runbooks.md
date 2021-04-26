@@ -5,12 +5,13 @@ services: automation
 ms.subservice: process-automation
 ms.date: 02/24/2021
 ms.topic: conceptual
-ms.openlocfilehash: 1e8df39cc836890526b0dad1885f31dc15eaa837
-ms.sourcegitcommit: a9ce1da049c019c86063acf442bb13f5a0dde213
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: a172189d8b52a80fc50e7d8c882859f7855aeca8
+ms.sourcegitcommit: 3c460886f53a84ae104d8a09d94acb3444a23cdc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/27/2021
-ms.locfileid: "105629215"
+ms.lasthandoff: 04/21/2021
+ms.locfileid: "107830097"
 ---
 # <a name="manage-runbooks-in-azure-automation"></a>Azure Otomasyonu 'nda runbook 'ları yönetme
 
@@ -333,7 +334,7 @@ $getJobParams = @{
     ResourceGroupName     = 'MyResourceGroup'
     Runbookname           = 'Test-Runbook'
 }
-$job = (Get-AzAutomationJob @getJobParams | Sort-Object LastModifiedDate –Desc)[0]
+$job = (Get-AzAutomationJob @getJobParams | Sort-Object LastModifiedDate -Desc)[0]
 $job | Select-Object JobId, Status, JobParameters
 
 $getOutputParams = @{

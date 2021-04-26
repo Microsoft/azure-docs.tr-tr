@@ -6,12 +6,12 @@ ms.topic: include
 ms.date: 03/10/2020
 ms.author: sstein
 ms.reviewer: vanto
-ms.openlocfilehash: c7bd942b427bdbd2d8184f712f97dd2a0a57fa90
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 0568860c387aa1239ec56005e404606272ae8275
+ms.sourcegitcommit: 4b0e424f5aa8a11daf0eec32456854542a2f5df0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/20/2021
-ms.locfileid: "102178087"
+ms.lasthandoff: 04/20/2021
+ms.locfileid: "107800095"
 ---
 Bu adımda, bir [MANTıKSAL SQL Server](../database/logical-servers.md) ve AdventureWorksLT örnek verisi kullanan [tek bir veritabanı](../database/single-database-overview.md) oluşturursunuz. Azure portal menüleri ve ekranları kullanarak veya Azure Cloud Shell bir Azure CLı veya PowerShell betiği kullanarak veritabanı oluşturabilirsiniz.
 
@@ -151,11 +151,11 @@ Yukarıdaki kod şu Azure CLı komutlarını kullanır:
 
 | Komut | Açıklama |
 |---|---|
-| [az Account set](/cli/azure/account#az-account-set) | Aboneliği geçerli etkin abonelik olacak şekilde ayarlar. |
-| [az group create](/cli/azure/group#az-group-create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [az sql server create](/cli/azure/sql/server#az-sql-server-create) | Veritabanları ve elastik havuzlar barındıran bir sunucu oluşturur. |
-| [az SQL Server Firewall-Rule Create](/cli/azure/sql/server/firewall-rule##az-sql-server-firewall-rule-create) | Sunucu düzeyinde bir güvenlik duvarı kuralı oluşturur. |
-| [az sql db create](/cli/azure/sql/db#az-sql-db-create) | Bir veritabanı oluşturur. |
+| [az Account set](/cli/azure/account#az_account_set) | Aboneliği geçerli etkin abonelik olacak şekilde ayarlar. |
+| [az group create](/cli/azure/group#az_group_create) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
+| [az sql server create](/cli/azure/sql/server#az_sql_server_create) | Veritabanları ve elastik havuzlar barındıran bir sunucu oluşturur. |
+| [az SQL Server Firewall-Rule Create](/cli/azure/sql/server/firewall-rule##az_sql_server_firewall_rule_create) | Sunucu düzeyinde bir güvenlik duvarı kuralı oluşturur. |
+| [az sql db create](/cli/azure/sql/db#az_sql_db_create) | Bir veritabanı oluşturur. |
 
 Azure SQL veritabanı Azure CLı örnekleri hakkında daha fazla bilgi için bkz. [Azure CLI örnekleri](../database/az-cli-script-samples-content-guide.md).
 

@@ -2,21 +2,21 @@
 title: Yönetilebilirlik ve izleme-genel bakış
 description: Azure SYNAPSE Analytics 'te adanmış SQL havuzu ile kaynak kullanımı, günlük ve sorgu etkinliği, öneriler ve veri koruması (yedekleme ve geri yükleme) için izleme ve yönetilebilirlik açısından genel bakış.
 services: synapse-analytics
-author: gaursa
+author: julieMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
 ms.subservice: sql-dw
 ms.date: 08/27/2018
-ms.author: gaursa
+ms.author: jrasnick
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019
-ms.openlocfilehash: 56ec38140d53788de7cc94f3cb6046177ad2bed4
-ms.sourcegitcommit: 772eb9c6684dd4864e0ba507945a83e48b8c16f0
+ms.openlocfilehash: dd9dc5b08de1a81b8da13aee875060fbe242baf5
+ms.sourcegitcommit: 590f14d35e831a2dbb803fc12ebbd3ed2046abff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "104585477"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107568225"
 ---
 # <a name="manageability-and-monitoring-with-dedicated-sql-pool-in-azure-synapse-analytics"></a>Azure SYNAPSE Analytics 'te adanmış SQL havuzu ile yönetilebilirlik ve izleme
 

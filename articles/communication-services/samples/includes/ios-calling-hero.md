@@ -2,28 +2,28 @@
 title: include dosyası
 description: include dosyası
 services: azure-communication-services
-author: mikben
-manager: mikben
+author: ddematheu2
+manager: chpalm
 ms.service: azure-communication-services
 ms.subservice: azure-communication-services
 ms.date: 03/10/2021
 ms.topic: include
 ms.custom: include file
-ms.author: mikben
-ms.openlocfilehash: f1d49aa0583f34327afff229b46d7a366202aded
-ms.sourcegitcommit: bed20f85722deec33050e0d8881e465f94c79ac2
+ms.author: dademath
+ms.openlocfilehash: 287520f2964fba7c3c3804853e9356a8c77b2d06
+ms.sourcegitcommit: bfa7d6ac93afe5f039d68c0ac389f06257223b42
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2021
-ms.locfileid: "105152826"
+ms.lasthandoff: 04/06/2021
+ms.locfileid: "106498803"
 ---
-[!INCLUDE [Public Preview Notice](../../includes/public-preview-include.md)]
+[!INCLUDE [Public Preview Notice](../../includes/public-preview-include-android-ios.md)]
 
 **İOS Için Hero örneğini çağıran** Azure Iletişim Hizmetleri grubu, IOS SDK 'Sını çağıran iletişim hizmetlerinin, ses ve video içeren bir grup çağırma deneyimi oluşturmak için nasıl kullanılabileceğini gösterir. Bu örnek hızlı başlangıçta, örneği ayarlamayı ve çalıştırmayı öğreneceksiniz. Bağlam için örneğe genel bir bakış sağlanır.
 
 ## <a name="download-code"></a>Kodu indirin
 
-Bu hızlı başlangıç için [GitHub](https://github.com/Azure-Samples/communication-services-ios-calling-hero)'da son kodu bulun.
+[GitHub](https://github.com/Azure-Samples/communication-services-ios-calling-hero)'da bu örneğe yönelik projeyi bulun. [Ekiplerin birlikte çalışması](../../concepts/teams-interop.md) ile örnek bir sürümü ayrı bir [dalda](https://github.com/Azure-Samples/communication-services-ios-calling-hero/tree/feature/teams_interop)bulunabilir.
 
 ## <a name="overview"></a>Genel Bakış
 
@@ -33,7 +33,7 @@ Bu hızlı başlangıç için [GitHub](https://github.com/Azure-Samples/communic
 
 :::image type="content" source="../media/calling/landing-page-ios.png" alt-text="Örnek uygulamanın giriş sayfasını gösteren ekran görüntüsü.":::
 
-"Yeni çağrıya başla" düğmesine bastığınızda iOS uygulaması yeni bir çağrı oluşturur ve bu dosyayı birleştirir. Uygulama, var olan çağrının KIMLIĞINI belirterek mevcut bir Azure Iletişim Hizmetleri çağrısına katılırsanız izin verir. Ayrıca, toplantının davetine de bulunan JOIN bağlantısını sağlayarak bir takımlar Toplantısı ' na de katılabilir.  (JOIN bağlantısı şu biçimdedir: `https://teams.microsoft.com/l/meetup-join/` ). Takımlar birlikte çalışma hakkında daha fazla bilgi için [takımlar birlikte çalışma kavramsal belgelerini](../../concepts/teams-interop.md)ziyaret edin.
+"Yeni çağrıya başla" düğmesine bastığınızda iOS uygulaması yeni bir çağrı oluşturur ve bu dosyayı birleştirir. Uygulama, var olan çağrının KIMLIĞINI belirterek mevcut bir Azure Iletişim Hizmetleri çağrısına katılırsanız izin verir.
 
 Bir çağrıya katıldıktan sonra, bilgisayarınıza kameranıza ve mikrofona erişim izni vermeniz istenir. Ayrıca, bir görünen ad girmeniz istenir.
 

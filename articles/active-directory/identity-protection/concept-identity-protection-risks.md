@@ -5,18 +5,18 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: identity-protection
 ms.topic: conceptual
-ms.date: 01/05/2021
+ms.date: 04/13/2021
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 18e504579c750caf452ef74844c4a388ec96448a
-ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
+ms.openlocfilehash: 87516ddcce32ab205b13139c057a2ab999146b74
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2021
-ms.locfileid: "97954494"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107376367"
 ---
 # <a name="what-is-risk"></a>Risk nedir?
 
@@ -41,7 +41,7 @@ Bir Kullanıcı riski, belirli bir kimliğin veya hesabın güvenliğinin aşıl
 
 Bu riskler, Microsoft 'un güvenlik araştırmacıları, hukuk uzmanları, Microsoft 'ta güvenlik takımları ve diğer güvenilen kaynaklar dahil olmak üzere Microsoft 'un dahili ve harici tehdit bilgileri kaynakları kullanılarak çevrimdışı olarak hesaplanır.
 
-| Risk algılama | Description |
+| Risk algılama | Açıklama |
 | --- | --- |
 | Sızdırılan kimlik bilgileri | Bu risk algılama türü, kullanıcının geçerli kimlik bilgilerinin sızdırdığını gösterir. Sidolandırıcılar meşru kullanıcıların geçerli parolalarını tehlikeye ayorsa, genellikle bu kimlik bilgilerini paylaşır. Bu paylaşım genellikle koyu Web üzerinden genel olarak, siteler yapıştırarak veya ticari ve kimlik bilgilerini siyah pazarda satarak yapılır. Microsoft sızdırılan kimlik bilgileri hizmeti, koyu Web, siteleri veya diğer kaynaklardan Kullanıcı kimlik bilgilerini edindiğinde, geçerli eşleşmeleri bulmak için Azure AD kullanıcılarının geçerli geçerli kimlik bilgileriyle denetlenir. Sızdırılan kimlik bilgileri hakkında daha fazla bilgi için bkz. [genel sorular](#common-questions). |
 | Azure AD tehdit bilgileri | Bu risk algılama türü, belirli bir kullanıcı için olağandışı olan veya Microsoft 'un dahili ve dış tehdit bilgileri kaynaklarına dayanan bilinen saldırı desenleriyle tutarlı olan kullanıcı etkinliklerini gösterir. |
@@ -52,7 +52,7 @@ Bir oturum açma riski, belirli bir kimlik doğrulama isteğinin kimlik sahibi t
 
 Bu riskler, gerçek zamanlı olarak hesaplanabilir veya güvenlik araştırmacıları, hukuk uzmanları, Microsoft 'taki güvenlik ekipleri ve diğer güvenilen kaynaklar dahil olmak üzere Microsoft 'un dahili ve harici tehdit bilgileri kaynakları kullanılarak, çevrimdışı olarak hesaplanabilir.
 
-| Risk algılama | Algılama türü | Description |
+| Risk algılama | Algılama türü | Açıklama |
 | --- | --- | --- |
 | Anonim IP adresi | Gerçek zamanlı | Bu risk algılama türü, anonim bir IP adresinden (örneğin, Tor tarayıcısı veya anonim VPN) oturum açma işlemlerini gösterir. Bu IP adresleri genellikle kötü amaçlı olabilecek bir amaç için oturum açma telemetrisini (IP adresi, konum, cihaz vb.) gizlemek isteyen aktörler tarafından kullanılır. |
 | Olağandışı yolculuk | Çevrimdışı | Bu risk algılama türü, coğrafi olarak uzak konumlardan kaynaklanan iki oturum açma işlemini tanımlar. Bu konumlar, konumların en az birinin Kullanıcı için de normal bir şekilde (geçmiş davranışa göre) de olabileceğini belirtir. Bu makine öğrenimi algoritması, farklı bir kullanıcının aynı kimlik bilgilerini kullandığını belirten, iki oturum açma işlemi ve kullanıcının ilk konumdan ikincisine geçebileceği zaman arasındaki süreyi dikkate alır. <br><br> Algoritma, kuruluştaki diğer kullanıcılar tarafından düzenli olarak kullanılan VPN 'Ler ve konumlar gibi mümkün olmayan seyahat koşullarına katkıda bulunan açık "yanlış pozitif sonuçlar" i yoksayar. Sistemin ilk öğrenme süresi en fazla 14 gün veya 10 oturum açma, yeni bir kullanıcının oturum açma davranışını öğreniyor. |
@@ -69,7 +69,7 @@ Bu riskler, gerçek zamanlı olarak hesaplanabilir veya güvenlik araştırmacı
 
 ### <a name="other-risk-detections"></a>Diğer risk algılamaları
 
-| Risk algılama | Algılama türü | Description |
+| Risk algılama | Algılama türü | Açıklama |
 | --- | --- | --- |
 | Ek risk algılandı | Gerçek zamanlı veya çevrimdışı | Bu algılama, yukarıdaki Premium algılamalardan birinin algılandığını gösterir. Premium algılamalar yalnızca Azure AD Premium P2 müşterilerine görünür olduğundan, müşteriler için Azure AD Premium P2 lisansları olmayan "ek risk algılandı" olarak adlandırılmış olurlar. |
 
@@ -83,7 +83,7 @@ Microsoft, riskin nasıl hesaplandığına ilişkin belirli ayrıntıları sağl
 
 ### <a name="password-hash-synchronization"></a>Parola karması eşitleme
 
-Sızdırılan kimlik bilgileri ve parola spreyi gibi risk algılamaları, algılamanın gerçekleşmesi için parola karmaları varlığını gerektirir. Parola karması eşitlemesi hakkında daha fazla bilgi için, [Azure AD Connect eşitleme ile parola karması eşitlemeyi uygulama](../hybrid/how-to-connect-password-hash-synchronization.md)başlıklı makaleye bakın.
+Sızdırılan kimlik bilgileri gibi risk algılamaları, algılamanın gerçekleşmesi için parola karmaları varlığını gerektirir. Parola karması eşitlemesi hakkında daha fazla bilgi için, [Azure AD Connect eşitleme ile parola karması eşitlemeyi uygulama](../hybrid/how-to-connect-password-hash-synchronization.md)başlıklı makaleye bakın.
 
 ### <a name="leaked-credentials"></a>Sızdırılan kimlik bilgileri
 

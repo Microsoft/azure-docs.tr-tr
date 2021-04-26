@@ -8,16 +8,16 @@ ms.service: active-directory
 ms.subservice: app-provisioning
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 03/22/2021
+ms.date: 04/12/2021
 ms.author: kenwith
 ms.reviewer: arvinh
 ms.custom: contperf-fy21q2
-ms.openlocfilehash: 8d517aaa6121120399e09bfef8aa6dd36e745563
-ms.sourcegitcommit: a8ff4f9f69332eef9c75093fd56a9aae2fe65122
+ms.openlocfilehash: 3d53c96c4b0306911b0c8a0b8576f35a73419db0
+ms.sourcegitcommit: 3b5cb7fb84a427aee5b15fb96b89ec213a6536c2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2021
-ms.locfileid: "105022951"
+ms.lasthandoff: 04/14/2021
+ms.locfileid: "107498161"
 ---
 # <a name="tutorial-develop-and-plan-provisioning-for-a-scim-endpoint"></a>Öğretici: SCıM uç noktası için geliştirme ve plan sağlama
 
@@ -62,7 +62,7 @@ SCıM standardı, kullanıcıları ve grupları yönetmek için bir şema tanım
 **Çekirdek** Kullanıcı şeması yalnızca üç öznitelik gerektirir (diğer tüm öznitelikler isteğe bağlıdır):
 
 - `id`, hizmet sağlayıcı tanımlı tanımlayıcı
-- `externalId`, istemci tanımlı tanımlayıcı
+- `userName`, Kullanıcı için benzersiz bir tanımlayıcı (genellikle Azure AD Kullanıcı asıl adıyla eşlenir)
 - `meta`, hizmet sağlayıcısı tarafından tutulan *salt okuma* meta verileri
 
 SIM standardı, **çekirdek** Kullanıcı şemasına ek olarak, uygulamanızın ihtiyaçlarını karşılamak için Kullanıcı şemasını genişletmek üzere bir modelle bir **Kurumsal** Kullanıcı uzantısı tanımlar. 
@@ -168,10 +168,10 @@ SCıM RFC 'de tanımlanmış birkaç uç nokta vardır. `/User`Uç nokta ile ba�
 |--|--|
 |/User|Bir kullanıcı nesnesi üzerinde CRUD işlemleri gerçekleştirin.|
 |/Group|Bir grup nesnesi üzerinde CRUD işlemleri gerçekleştirin.|
-|/ServiceProviderConfig|Desteklenen SCıM standardının özelliklerine ilişkin ayrıntıları, örneğin desteklenen kaynakları ve kimlik doğrulama yöntemini sağlar.|
-|/ResourceTypes|Her kaynakla ilgili meta verileri belirtir|
 |/Schemas|Her istemci ve hizmet sağlayıcı tarafından desteklenen öznitelik kümesi farklılık gösterebilir. Bir hizmet sağlayıcı, ve ' ı içerebilir, `name` `title` `emails` ancak başka bir hizmet sağlayıcısı `name` , ve ' ı kullanır `title` `phoneNumbers` . Şemalar uç noktası desteklenen özniteliklerin bulunmasına izin verir.|
 |/Toplu|Toplu işlemler, tek bir işlemde büyük kaynak nesneleri koleksiyonu üzerinde işlemler gerçekleştirmenize olanak tanır (örneğin, büyük bir grup için üyelikleri güncelleştirme).|
+|/ServiceProviderConfig|Desteklenen SCıM standardının özelliklerine ilişkin ayrıntıları, örneğin desteklenen kaynakları ve kimlik doğrulama yöntemini sağlar.|
+|/ResourceTypes|Her kaynakla ilgili meta verileri belirtir.|
 
 **Uç noktaların örnek listesi**
 
@@ -210,7 +210,8 @@ AAD ile uyumluluğu sağlamak için bir SCıM uç noktası uygularken genel yön
 * 3.5.2 bölümünde tanımlandığı gibi, belirli bir **Düzeltme Eki** işlem değerlerinde SCIM içindeki yapısal öğelerde büyük/küçük harfe duyarlı bir eşleşme gerektirmez `op` . [](https://tools.ietf.org/html/rfc7644#section-3.5.2) AAD, değerlerini `op` **ekleme**, **değiştirme** ve **kaldırma** olarak yayar.
 * Microsoft AAD, uç noktanın ve kimlik bilgilerinin geçerli olduğundan emin olmak için rastgele bir Kullanıcı ve grup getirme istekleri yapar. Ayrıca, [Azure Portal](https://portal.azure.com) **Test bağlantı** akışının bir parçası olarak da yapılır. 
 * Kaynakların sorgulanabileceği öznitelik, [Azure Portal](https://portal.azure.com)uygulamada eşleşen bir öznitelik olarak ayarlanmalıdır, bkz. [Kullanıcı sağlama öznitelik eşlemelerini özelleştirme](customize-application-attributes.md).
-* SCıM uç noktanıza HTTPS desteği
+* Yetkilendirmeler özniteliği desteklenmiyor.
+* SCıM uç noktanıza HTTPS desteği.
 * [Şema bulma](#schema-discovery)
   * Şema bulma işlemi şu anda özel uygulamada desteklenmiyor, ancak belirli Galeri uygulamalarında kullanılıyor. İleri, şema bulma bir bağlayıcıya ek öznitelikler eklemek için birincil yöntem olarak kullanılacaktır. 
   * Bir değer yoksa, null değerler göndermez.
@@ -1329,9 +1330,9 @@ Uygulamanızı hızla eklemek için denetim listesini kullanın ve müşterileri
 > * uygulamanız için 3 süresi dolan test kimlik bilgileri (gerekli)
 > * Aşağıda açıklandığı gibi, OAuth yetkilendirme kodu yetkisini veya uzun süreli bir belirteci destekler (gerekli)
 > * Müşteri galerisinin ekleme işlemini desteklemesi için mühendislik ve destek iletişim noktası oluşturma (gerekli)
+> * [Şema bulmayı destekleme (gerekli)](https://tools.ietf.org/html/rfc7643#section-6)
 > * Tek bir düzeltme ekiyle birden çok grup üyeliğini güncelleştirme desteği
 > * SCıM uç noktanızı genel olarak belgeleyin
-> * [Şema bulmayı destekleme](https://tools.ietf.org/html/rfc7643#section-6)
 
 ### <a name="authorization-to-provisioning-connectors-in-the-application-gallery"></a>Uygulama galerisinde bağlayıcıları sağlama yetkilendirmesi
 SCıM özelliği, kimlik doğrulama ve yetkilendirme için bir SCıM 'e özgü düzen tanımlamaz ve mevcut sektör standartlarının kullanımına dayanır.

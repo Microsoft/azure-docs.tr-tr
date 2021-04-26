@@ -2,20 +2,20 @@
 title: 'Hızlı başlangıç: Azure Active Directory (Azure AD) kiracınıza uygulama ekleme'
 description: Bu hızlı başlangıçta Azure portal kullanılarak Azure Active Directory (Azure AD) kiracınıza bir galeri uygulaması eklenmektedir.
 services: active-directory
-author: kenwith
-manager: daveba
+author: iantheninja
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.topic: quickstart
 ms.workload: identity
 ms.date: 10/29/2019
-ms.author: kenwith
-ms.openlocfilehash: 2d3b0be88a23bbbb0573b4d11a2e5a39dc6254da
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.author: iangithinji
+ms.openlocfilehash: d7827d6419e4d820f8aca482df2cfae83eaf319d
+ms.sourcegitcommit: 2654d8d7490720a05e5304bc9a7c2b41eb4ae007
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "99259076"
+ms.lasthandoff: 04/13/2021
+ms.locfileid: "107378899"
 ---
 # <a name="quickstart-add-an-application-to-your-azure-active-directory-azure-ad-tenant"></a>Hızlı başlangıç: Azure Active Directory (Azure AD) kiracınıza uygulama ekleme
 

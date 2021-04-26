@@ -9,10 +9,10 @@ ms.date: 12/27/2019
 ms.author: rogarana
 ms.custom: include file
 ms.openlocfilehash: b7c097306ba46d4f0024aecc55994508e2d8a090
-ms.sourcegitcommit: 910a1a38711966cb171050db245fc3b22abc8c5f
+ms.sourcegitcommit: f28ebb95ae9aaaff3f87d8388a09b41e0b3445b5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
+ms.lasthandoff: 03/29/2021
 ms.locfileid: "96011771"
 ---
 Azure dosya paylaşımlardaki verileri veri kaybına veya bozulmaya karşı korumak için tüm Azure dosya paylaşımları yazıldığı gibi her bir dosyanın birden çok kopyasını depolar. İş yükünüzün gereksinimlerine bağlı olarak, ek derece artıklığı seçebilirsiniz. Azure dosyaları şu anda aşağıdaki veri artıklığı seçeneklerini desteklemektedir:

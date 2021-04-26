@@ -10,12 +10,12 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 11/16/2020
 ms.author: juliako
-ms.openlocfilehash: 2ac7c3c2149ce43c860c7726381733ef377de8d3
-ms.sourcegitcommit: 867cb1b7a1f3a1f0b427282c648d411d0ca4f81f
+ms.openlocfilehash: 84bb4766b3a896823dd0bef023f8042965a85846
+ms.sourcegitcommit: 49b2069d9bcee4ee7dd77b9f1791588fe2a23937
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/19/2021
-ms.locfileid: "100530748"
+ms.lasthandoff: 04/16/2021
+ms.locfileid: "107532855"
 ---
 # <a name="examine-the-video-indexer-output"></a>Video Indexer çıkışını inceleyin
 
@@ -46,8 +46,8 @@ Daha fazla bilgi için bkz. [video öngörülerini görüntüleme ve düzenleme]
 
 ## <a name="insightsoutput-produced-by-api"></a>API tarafından üretilen Öngörüler/çıkış
 
-1. JSON dosyasını almak için, [video dizini Al API 'sini](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Index?) çağırın
-1. Ayrıca belirli yapıtlar ile ilgileniyorsanız, [video yapıtı INDIRME URL API 'sini](https://api-portal.videoindexer.ai/docs/services/Operations/operations/Get-Video-Artifact-Download-Url?) arayın
+1. JSON dosyasını almak için, [video dizini Al API 'sini](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Index) çağırın
+1. Ayrıca belirli yapıtlar ile ilgileniyorsanız, [video yapıtı INDIRME URL API 'sini](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Artifact-Download-Url) arayın
 
     API çağrısında, istenen yapıt türünü belirtin (OCR, yüzler, anahtar çerçeveler vb.)
 
@@ -100,7 +100,7 @@ Bu bölümde öngörülerin özeti gösterilmektedir.
 |privacyMode|Dökümde şu modlardan biri olabilir: **Private**, **Public**. **Genel** -video, hesabınızdaki herkese ve videoya bağlantısı olan herkese görünür. **Özel** -video, hesabınızdaki herkes tarafından görülebilir.|
 |süre|Bir öngörüden oluşan zamanı açıklayan bir süre içerir. Süre saniye cinsinden.|
 |thumbnailVideoId|Küçük resmin alındığı videonun KIMLIĞI.
-|thumbnailId|Videonun küçük resim KIMLIĞI. Gerçek küçük resmi almak için [Get-Thumbnail](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Video-Thumbnail) çağırın ve ThumbnailVideoId ve thumbnailId geçirin.|
+|thumbnailId|Videonun küçük resim KIMLIĞI. Gerçek küçük resmi almak için [Get-Thumbnail](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Thumbnail) çağırın ve ThumbnailVideoId ve thumbnailId geçirin.|
 |yüzler/animatedCharacters|Sıfır veya daha fazla yüz içerebilir. Daha ayrıntılı bilgi için bkz. [yüzler/animatedCharacters](#facesanimatedcharacters).|
 |anahtar sözcükler|Sıfır veya daha fazla anahtar sözcük içerebilir. Daha ayrıntılı bilgi için bkz. [anahtar sözcükler](#keywords).|
 |yaklaşımları|Sıfır veya daha fazla duygu içerebilir. Daha ayrıntılı bilgi için bkz. [yaklaşımları](#sentiments).|
@@ -127,7 +127,7 @@ Bu bölümde öngörülerin özeti gösterilmektedir.
 |meta veriler|Videonun dış meta verileri (Kullanıcı tarafından belirtilmişse).|
 |ıyetişkin|Videonun el ile gözden geçirilip geçirilmediğini ve yetişkinlere yönelik bir video olarak tanımlandığını gösterir.|
 |eklentisini|Öngörüler nesnesi. Daha fazla bilgi için bkz. [Öngörüler](#insights).|
-|thumbnailId|Videonun küçük resim KIMLIĞI. Gerçek [küçük resim çağrısını almak](https://api-portal.videoindexer.ai/docs/services/operations/operations/Get-Video-Thumbnail) ve video kimliği ve thumbnailId iletmek için.|
+|thumbnailId|Videonun küçük resim KIMLIĞI. Gerçek [küçük resim çağrısını almak](https://api-portal.videoindexer.ai/api-details#api=Operations&operation=Get-Video-Thumbnail) ve video kimliği ve thumbnailId iletmek için.|
 |publishedUrl|Videonun akışını sağlamak için bir URL.|
 |publishedUrlProxy|Videonun akışını sağlamak için bir URL (Apple cihazları için).|
 |viewToken|Videoyu akışa alma için kısa süreli bir görünüm belirteci.|
