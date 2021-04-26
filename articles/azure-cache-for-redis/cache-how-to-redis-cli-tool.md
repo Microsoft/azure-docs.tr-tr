@@ -1,6 +1,6 @@
 ---
-title: Redsıs için Azure Cache ile redsıs-CLI kullanma
-description: İstemci olarak Redsıs için Azure önbelleğiyle etkileşim kurmak üzere bir komut satırı aracı olarak *redis-cli.exe* kullanmayı öğrenin
+title: Redis için Azure Cache ile Redis-CLI kullanma
+description: İstemci olarak Redis için Azure önbelleğiyle etkileşim kurmak üzere bir komut satırı aracı olarak *redis-cli.exe* kullanmayı öğrenin
 author: yegu-ms
 ms.author: yegu
 ms.service: cache
@@ -14,13 +14,13 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 04/21/2021
 ms.locfileid: "107833971"
 ---
-# <a name="use-the-redis-command-line-tool-with-azure-cache-for-redis"></a>Redsıs için Azure Cache ile Redsıs komut satırı aracını kullanın
+# <a name="use-the-redis-command-line-tool-with-azure-cache-for-redis"></a>Redis için Azure Cache ile Redis komut satırı aracını kullanın
 
 *redis-cli.exe* , Red, istemci olarak bir Azure önbelleğiyle etkileşim kurmaya yönelik popüler bir komut satırı aracıdır. Bu araç redde için Azure Cache ile birlikte kullanılabilir.
 
-Araç, [Windows Için redsıs komut satırı araçları](https://github.com/MSOpenTech/redis/releases/)'Nı indirerek Windows platformları için kullanılabilir. 
+Araç, [Windows Için redis komut satırı araçları](https://github.com/MSOpenTech/redis/releases/)'Nı indirerek Windows platformları için kullanılabilir. 
 
-Komut satırı aracını başka bir platformda çalıştırmak istiyorsanız, Redsıs için Azure önbelleği ' ni indirin [https://redis.io/download](https://redis.io/download) .
+Komut satırı aracını başka bir platformda çalıştırmak istiyorsanız, Redis için Azure önbelleği ' ni indirin [https://redis.io/download](https://redis.io/download) .
 
 ## <a name="gather-cache-access-information"></a>Önbellek erişim bilgilerini topla
 
@@ -28,7 +28,7 @@ Komut satırı aracını başka bir platformda çalıştırmak istiyorsanız, Re
 
 Önbelleğe erişmek için gereken bilgileri üç yöntem kullanarak toplayabilirsiniz:
 
-1. [Az redsıs List-Keys](/cli/azure/redis#az_redis_list_keys) kullanarak Azure CLI
+1. [Az redis List-Keys](/cli/azure/redis#az-redis-list-keys) kullanarak Azure CLI
 2. [Get-AzRedisCacheKey](/powershell/module/az.rediscache/Get-AzRedisCacheKey) kullanarak Azure PowerShell
 3. Azure portalı kullanarak.
 
@@ -39,7 +39,7 @@ Bu bölümde, Azure portal anahtarları alırsınız.
 
 ## <a name="enable-access-for-redis-cliexe"></a>redis-cli.exe için erişimi etkinleştir
 
-Redsıs için Azure Cache ile yalnızca TLS bağlantı noktası (6380) varsayılan olarak etkindir. `redis-cli.exe`Komut satırı aracı TLS 'yi desteklemez. Bunu kullanmak için iki yapılandırma seçeneğiniz vardır:
+Redis için Azure Cache ile yalnızca TLS bağlantı noktası (6380) varsayılan olarak etkindir. `redis-cli.exe`Komut satırı aracı TLS 'yi desteklemez. Bunu kullanmak için iki yapılandırma seçeneğiniz vardır:
 
 1. [TLS olmayan bağlantı noktasını etkinleştirme (6379)](cache-configure.md#access-ports)  -  Bu yapılandırmada bu **yapılandırma önerilmez** çünkü erişim tuşları, şifresiz metın olarak TCP aracılığıyla gönderilir. Bu değişiklik önbelleğiniz için erişimi tehlikeye atabilir. Yalnızca bir test önbelleğine erişirken bu yapılandırmayı düşünebileceğiniz tek senaryo.
 
@@ -65,7 +65,7 @@ Redsıs için Azure Cache ile yalnızca TLS bağlantı noktası (6380) varsayıl
     Stunnel günlüğü penceresi menüsünde, **yapılandırma**  >  **yeniden yükleme yapılandırması**' na tıklayın.
 
 
-## <a name="connect-using-the-redis-command-line-tool"></a>Redsıs komut satırı aracını kullanarak bağlanın.
+## <a name="connect-using-the-redis-command-line-tool"></a>Redis komut satırı aracını kullanarak bağlanın.
 
 Stunnel kullanırken *redis-cli.exe* çalıştırın ve yalnızca *bağlantı noktasını* geçirin ve önbelleğe bağlanmak için *erişim anahtarı* (birincil veya ikincil) kullanın.
 
@@ -88,4 +88,4 @@ redis-cli.exe -h yourcachename.redis.cache.windows.net -p 6379 -a YourAccessKey
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Komutları vermek için [Redsıs konsolunu](cache-configure.md#redis-console) kullanma hakkında daha fazla bilgi edinin.
+Komutları vermek için [Redis konsolunu](cache-configure.md#redis-console) kullanma hakkında daha fazla bilgi edinin.
